@@ -2795,135 +2795,7 @@ use namespace CoC;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) damageMultiplier *= 3.5;
 			return damage * damageMultiplier;
 		}
-		public function takeDamage(damage:Number, damagetype:Number = 0, display:Boolean = false):Number{
-			// Damage types:
-			// 0: phys, 1: null, 2: null, 3: null
-			// 4: magical, 5: fire, 6: ice
-			// 7: lightning, 8: darkness, 9: poison
-			// 10: wind, 11: water, 12: earth
-			damage = difficultyDamageMultiplier(damage);
-			var physTeaseDmg:Boolean = false;
-			//all dmg reduction effect(s)
-			if (CoC.instance.monster.hasStatusEffect(StatusEffects.EnergyDrain)) damage *= 0.8;
-			if (hasStatusEffect(StatusEffects.GreenCovenant)) damage *= 0.25;
-			if (CoC.instance.monster.hasStatusEffect(StatusEffects.BloodShower)) damage *= 0.2;
-			if (CoC.instance.monster.hasStatusEffect(StatusEffects.CorpseExplosion)) damage *= (1 - (0.2 * CoC.instance.monster.statusEffectv1(StatusEffects.CorpseExplosion)));
-			//Round
-			damage = Math.round(damage);
-			// we return "1 damage received" if it is in (0..1) but deduce no HP
-			var returnDamage:int = (damage>0 && damage<1)?1:damage;
-			if (damage>0){
-				if (henchmanBasedInvulnerabilityFrame() || hasStatusEffect(StatusEffects.TurquoiseBandProtection)) {
-					if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-					else SceneLib.combat.triggeredTurquoiseBandProtectionTexts();
-					damage = 0;
-				}
-				else if (hasStatusEffect(StatusEffects.ManaShield)) {
-					if (hasPerk(PerkLib.ArcaneShielding)) {
-						if (damagetype < 4) damage = manaShieldAbsorb(damage, display);
-						else damage = manaShieldAbsorbMagic(damage, display);
-					}
-					else damage = manaShieldAbsorb(damage, display);
-				}
-				else if (damage > 0 && hasStatusEffect(StatusEffects.BloodShield)) {
-					damage = bloodShieldAbsorb(damage, display);
-				}
-				if (hasStatusEffect(StatusEffects.AdamantineShell)) damage *= 0.25;
-				if (hasStatusEffect(StatusEffects.TrueEvasion)) damage = 0;
-				if (damage > 0) {
-					switch (damagetype) {
-						case 0: // physical
-							if (perkv1(IMutationsLib.SlimeFluidIM) >= 3 && !isFlying() && !CoC.instance.monster.isFlying()) physTeaseDmg = true;
-							if (damagePercentArmor() > 1) damage *= (1 / damagePercentArmor());
-							damage = reducePhysDamage(damage);
-							break;
-						case 1: // physical
-							if (perkv1(IMutationsLib.SlimeFluidIM) >= 3 && !isFlying() && !CoC.instance.monster.isFlying()) physTeaseDmg = true;
-							if (damagePercentArmor() > 1) damage *= (1 / damagePercentArmor());
-							damage = reducePhysDamage(damage);
-							break;
-						case 2: // physical
-							if (perkv1(IMutationsLib.SlimeFluidIM) >= 3 && !isFlying() && !CoC.instance.monster.isFlying()) physTeaseDmg = true;
-							if (damagePercentArmor() > 1) damage *= (1 / damagePercentArmor());
-							damage = reducePhysDamage(damage);
-							break;
-						case 3: // physical
-							if (perkv1(IMutationsLib.SlimeFluidIM) >= 3 && !isFlying() && !CoC.instance.monster.isFlying()) physTeaseDmg = true;
-							if (damagePercentArmor() > 1) damage *= (1 / damagePercentArmor());
-							damage = reducePhysDamage(damage);
-							break;
-						case 4: // magical
-							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
-							damage = reduceMagicDamage(damage);
-							break;
-						case 5: // fire
-							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
-							if (hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage/4*3;
-							damage = reduceFireDamage(damage);
-							break;
-						case 6: // ice
-							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
-							damage = reduceIceDamage(damage);
-							break;
-						case 7: // lightning
-							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
-							damage = reduceLightningDamage(damage);
-							break;
-						case 8: // darkness
-							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
-							damage = reduceDarknessDamage(damage);
-							break;
-						case 9: // poison
-							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
-							damage = reducePoisonDamage(damage);
-							break;
-						case 10: // wind
-							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
-							damage = reduceWindDamage(damage);
-							break;
-						case 11: // water
-							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
-							damage = reduceWaterDamage(damage);
-							break;
-						case 12: // earth
-							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
-							damage = reduceEarthDamage(damage);
-							break;
-						case 13: // acid
-							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
-							damage = reduceAcidDamage(damage);
-							break;
-						default:
-							if (damagePercentArmor() > 1) damage *= (1 / damagePercentArmor());
-							damage = reducePhysDamage(damage);
-					}
-					//Wrath
-					wrathFromBeenPunchingBag(damage);
-					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
-					//game.HPChange(-damage, display);
-					damage = Math.round(damage);
-					HP -= damage;
-					if (display) SceneLib.combat.CommasForDigits(damage);
-					game.mainView.statsView.showStatDown('hp');
-					dynStats("lus", 0); //Force display arrow.
-					if (physTeaseDmg) CoC.instance.monster.teased(SceneLib.combat.teases.teaseBaseLustDamage());
-				}
-				if (flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
-					dynStats("lus", int(damage / 2), "scale", false);
-				}
-				if (damagetype == 0 && flags[kFLAGS.YAMATA_MASOCHIST] > 1 && flags[kFLAGS.AIKO_BOSS_COMPLETE] < 1) {
-					dynStats("lus", int(damage / 8), "scale", false);
-				}
-				//Prevent negatives
-				if (HP < minHP()){
-					if (hasPerk(PerkLib.Immortality)) takeLustDamage(minHP() - HP);
-					HP = minHP();
-					//This call did nothing. There is no event 5010: if (game.inCombat) game.doNext(5010);
-				}
-			}
-			return returnDamage;
-		}
-		public function takeDamageMulti(damage:Number, hit:Number, damagetype:Number = 0, display:Boolean = false):Number{
+		public function takeDamage(damage:Number, damagetype:Number = 0, display:Boolean = false, hit:Number = 1):Number{
 			// Damage types:
 			// 0: phys, 1: null, 2: null, 3: null
 			// 4: magical, 5: fire, 6: ice
@@ -2983,21 +2855,28 @@ use namespace CoC;
 					damage = 0;
 					hit = remainingHit.length;
 
+					// Damage is dealt here finally
 					switch (damagetype) {
 						case 0: // physical
 						case 1: // physical
 						case 2: // physical
 						case 3: // physical
-							if (perkv1(IMutationsLib.SlimeFluidIM) >= 3 && !isFlying() && !CoC.instance.monster.isFlying()) physTeaseDmg = true;
+							if (perkv1(IMutationsLib.SlimeFluidIM) >= 3 && !isFlying() && !CoC.instance.monster.isFlying()){
+								physTeaseDmg = true;
+								CoC.instance.monster.teased(SceneLib.combat.teases.teaseBaseLustDamage());
+							}
 							// Bookmark
 							if (damagePercentArmor() > 1){
 								armorMod = 1 / damagePercentArmor();
 							}
 							// Add damage *= armorMod
-							for(var i:Number = 0; i < hit; i++){
+							for(var i:Number = 0; i < remainingHit.length; i++){
 								remainingHit[i] *= armorMod;
 								remainingHit[i] = reducePhysDamage(remainingHit[i]);
 								damage += remainingHit[i];
+								if(display){
+									SceneLib.combat.CommasForDigits(remainingHit[i]);
+								}
 							}
 							break;
 						case 4: // magical
@@ -3005,10 +2884,13 @@ use namespace CoC;
 								armorMod = 1 / damagePercentMRes();
 							}
 							// Add damage *= armorMod
-							for(var i:Number = 0; i < hit; i++){
+							for(var i:Number = 0; i < remainingHit.length; i++){
 								remainingHit[i] *= armorMod;
 								remainingHit[i] = reduceMagicDamage(remainingHit[i]);
 								damage += remainingHit[i];
+								if(display){
+									SceneLib.combat.CommasForDigits(remainingHit[i]);
+								}
 							}
 							break;
 						case 5: // fire
@@ -3017,10 +2899,13 @@ use namespace CoC;
 								if (hasPerk(PerkLib.WalpurgisIzaliaRobe)) armorMod = armorMod/4*3;
 							}
 							// damage *= armorMod / 4 * 3
-							for(var i:Number = 0; i < hit; i++){
+							for(var i:Number = 0; i < remainingHit.length; i++){
 								remainingHit[i] *= armorMod;
 								remainingHit[i] = reduceFireDamage(remainingHit[i]);
 								damage += remainingHit[i];
+								if(display){
+									SceneLib.combat.CommasForDigits(remainingHit[i]);
+								}
 							}
 							break;
 						case 6: // ice
@@ -3028,10 +2913,13 @@ use namespace CoC;
 								armorMod = 1 / damagePercentMRes();
 							}
 							// damage *= armorMod / 4 * 3
-							for(var i:Number = 0; i < hit; i++){
+							for(var i:Number = 0; i < remainingHit.length; i++){
 								remainingHit[i] *= armorMod;
 								remainingHit[i] = reduceIceDamage(remainingHit[i]);
 								damage += remainingHit[i];
+								if(display){
+									SceneLib.combat.CommasForDigits(remainingHit[i]);
+								}
 							}
 							break;
 						case 7: // lightning
@@ -3039,10 +2927,13 @@ use namespace CoC;
 								armorMod = 1 / damagePercentMRes();
 							}
 							// damage *= armorMod / 4 * 3
-							for(var i:Number = 0; i < hit; i++){
+							for(var i:Number = 0; i < remainingHit.length; i++){
 								remainingHit[i] *= armorMod;
 								remainingHit[i] = reduceLightningDamage(remainingHit[i]);
 								damage += remainingHit[i];
+								if(display){
+									SceneLib.combat.CommasForDigits(remainingHit[i]);
+								}
 							}
 							break;
 						case 8: // darkness
@@ -3050,10 +2941,13 @@ use namespace CoC;
 								armorMod = 1 / damagePercentMRes();
 							}
 							// damage *= armorMod / 4 * 3
-							for(var i:Number = 0; i < hit; i++){
+							for(var i:Number = 0; i < remainingHit.length; i++){
 								remainingHit[i] *= armorMod;
 								remainingHit[i] = reduceDarknessDamage(remainingHit[i]);
 								damage += remainingHit[i];
+								if(display){
+									SceneLib.combat.CommasForDigits(remainingHit[i]);
+								}
 							}
 							break;
 						case 9: // poison
@@ -3061,10 +2955,13 @@ use namespace CoC;
 								armorMod = 1 / damagePercentMRes();
 							}
 							// damage *= armorMod / 4 * 3
-							for(var i:Number = 0; i < hit; i++){
+							for(var i:Number = 0; i < remainingHit.length; i++){
 								remainingHit[i] *= armorMod;
 								remainingHit[i] = reducePoisonDamage(remainingHit[i]);
 								damage += remainingHit[i];
+								if(display){
+									SceneLib.combat.CommasForDigits(remainingHit[i]);
+								}
 							}
 							break;
 						case 10: // wind
@@ -3072,10 +2969,13 @@ use namespace CoC;
 								armorMod = 1 / damagePercentMRes();
 							}
 							// damage *= armorMod / 4 * 3
-							for(var i:Number = 0; i < hit; i++){
+							for(var i:Number = 0; i < remainingHit.length; i++){
 								remainingHit[i] *= armorMod;
 								remainingHit[i] = reduceWindDamage(remainingHit[i]);
 								damage += remainingHit[i];
+								if(display){
+									SceneLib.combat.CommasForDigits(remainingHit[i]);
+								}
 							}
 							break;
 						case 11: // water
@@ -3083,10 +2983,13 @@ use namespace CoC;
 								armorMod = 1 / damagePercentMRes();
 							}
 							// damage *= armorMod / 4 * 3
-							for(var i:Number = 0; i < hit; i++){
+							for(var i:Number = 0; i < remainingHit.length; i++){
 								remainingHit[i] *= armorMod;
 								remainingHit[i] = reduceWaterDamage(remainingHit[i]);
 								damage += remainingHit[i];
+								if(display){
+									SceneLib.combat.CommasForDigits(remainingHit[i]);
+								}
 							}
 							break;
 						case 12: // earth
@@ -3094,10 +2997,13 @@ use namespace CoC;
 								armorMod = 1 / damagePercentMRes();
 							}
 							// damage *= armorMod / 4 * 3
-							for(var i:Number = 0; i < hit; i++){
+							for(var i:Number = 0; i < remainingHit.length; i++){
 								remainingHit[i] *= armorMod;
 								remainingHit[i] = reduceEarthDamage(remainingHit[i]);
 								damage += remainingHit[i];
+								if(display){
+									SceneLib.combat.CommasForDigits(remainingHit[i]);
+								}
 							}
 							break;
 						case 13: // acid
@@ -3105,10 +3011,13 @@ use namespace CoC;
 								armorMod = 1 / damagePercentMRes();
 							}
 							// damage *= armorMod / 4 * 3
-							for(var i:Number = 0; i < hit; i++){
+							for(var i:Number = 0; i < remainingHit.length; i++){
 								remainingHit[i] *= armorMod;
 								remainingHit[i] = reduceAcidDamage(remainingHit[i]);
 								damage += remainingHit[i];
+								if(display){
+									SceneLib.combat.CommasForDigits(remainingHit[i]);
+								}
 							}
 							break;
 						default:
@@ -3116,10 +3025,13 @@ use namespace CoC;
 								armorMod = 1 / damagePercentArmor();
 							}
 							// damage *= armorMod / 4 * 3
-							for(var i:Number = 0; i < hit; i++){
+							for(var i:Number = 0; i < remainingHit.length; i++){
 								remainingHit[i] *= armorMod;
 								remainingHit[i] = reducePhysDamage(remainingHit[i]);
 								damage += remainingHit[i];
+								if(display){
+									SceneLib.combat.CommasForDigits(remainingHit[i]);
+								}
 							}
 					}
 					// var damage now store total damage across all hits
@@ -3128,10 +3040,10 @@ use namespace CoC;
 					//game.HPChange(-damage, display);
 					damage = Math.round(damage);
 					HP -= damage;
-					if (display) SceneLib.combat.CommasForDigits(damage);
+
 					game.mainView.statsView.showStatDown('hp');
 					dynStats("lus", 0); //Force display arrow.
-					if (physTeaseDmg) CoC.instance.monster.teased(SceneLib.combat.teases.teaseBaseLustDamage());
+
 				}
 				if (flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
 					dynStats("lus", int(damage / 2), "scale", false);
