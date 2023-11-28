@@ -46,9 +46,6 @@ use namespace CoC;
 
 			outputText("\n\n");
 		}
-		private function eyeTyrantOmnicastD():void {
-		}
-		
 		override protected function performCombatAction():void
 		{
 			if (!hasStatusEffect(StatusEffects.AbilityCooldown1)) eyeTyrantDominationGaze();
