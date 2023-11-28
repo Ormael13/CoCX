@@ -1639,7 +1639,7 @@ use namespace CoC;
         }
         public function isDualWieldRanged():Boolean
         {
-        	return weaponRangePerk == "Dual Firearms" || weaponRangePerk == "Dual 2H Firearms";
+        	return weaponRangePerk == ItemConstants.WT_DUAL_FIREARMS || weaponRangePerk == ItemConstants.WT_DUAL_2H_FIREARMS;
         }
         public function isDualWield():Boolean
         {
@@ -1663,7 +1663,7 @@ use namespace CoC;
 		//Is Thrown
 		public function isThrownTypeWeapon():Boolean
 		{
-			return weaponRangePerk == "Throwing";
+			return weaponRangePerk == ItemConstants.WT_THROWING;
 		}
 		//Using Firearms
 		public function isFirearmTypeWeapon():Boolean {
@@ -6145,7 +6145,7 @@ use namespace CoC;
 			var oldProgress:Number = experience/xpToLevel;
 			// for tracking bonus attack masteries
 			var grantsBonusAttacks:Boolean = Combat.bonusAttackMasteries.indexOf(index) != -1;
-			var maxAttacksOld:int = SceneLib.combat.maxCurrentAttacks();
+			var maxAttacksOld:int = melee? SceneLib.combat.maxCurrentAttacks(): SceneLib.combat.maxCurrentRangeAttacks();
 			// This loop does weapon types ( dagger, sword, fist, claws, ... )
 			while (xpLoop > 0) {
 				experience += xpLoop;	// incremeent the XP of the weapon mastery
@@ -6180,7 +6180,7 @@ use namespace CoC;
 			}
 			// Can we get any new attacks?
 			if (grantsBonusAttacks && levelUp) {// if it grants bonus attacks
-				var maxAttacksNew:int = SceneLib.combat.maxCurrentAttacks();
+				var maxAttacksNew:int = melee? SceneLib.combat.maxCurrentAttacks(): SceneLib.combat.maxCurrentRangeAttacks();
 				// remember the last value
 				var masteryArrays:Array = melee? masteryBonusAttacksMelee: masteryBonusAttacksRanged;
 				for each (var masteryArr:Array in masteryArrays) {

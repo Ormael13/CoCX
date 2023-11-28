@@ -941,17 +941,17 @@ public class PhysicalSpecials extends BaseCombatContent {
 		PSMulti += combat.PASPAS(2);
 		if (player.weaponRangePerk == "Bow") {
 			damage += combat.rangeDamageNoLagSingle(0);
-			var maxBowAttacks:int = player.calculateMaxAttacksForClass(false, 0);
+			var maxBowAttacks:int = combat.maxBowAttacks();
 			if (maxBowAttacks > 1) damage *= maxBowAttacks;
 		}
 		if (player.weaponRangePerk == "Crossbow") {
 			damage += combat.rangeDamageNoLagSingle(1);
-			var maxCrossBowAttacks:int = player.calculateMaxAttacksForClass(false, 1);
+			var maxCrossBowAttacks:int = combat.maxCrossbowAttacks();
 			if (maxCrossBowAttacks > 1) damage *= maxCrossBowAttacks;
 		}
 		if (player.weaponRangePerk == "Throwing") {
 			damage += combat.rangeDamageNoLagSingle(2);
-			var maxThrowAttacks:int = player.calculateMaxAttacksForClass(false, 2);
+			var maxThrowAttacks:int = combat.maxThrowingAttacks();
 			if (maxThrowAttacks > 1) damage *= maxThrowAttacks;
 		}
 		if (player.hasPerk(PerkLib.PowerShotEx)) {
@@ -1355,7 +1355,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else {
 			if (player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.TM1CERB) {
 				var multiplier:Number = 1;
-				var maxFirearmAttacks:int = player.calculateMaxAttacksForClass(false, 3);
+				var maxFirearmAttacks:int = combat.maxFirearmsAttacks();
 				if (maxFirearmAttacks >= 2) multiplier += 1;
 				if (maxFirearmAttacks >= 3) multiplier += 1;
 				if (maxFirearmAttacks >= 4) multiplier += 1;
@@ -6000,7 +6000,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function archerBarrage():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
-		var maxBowAttacks:int = player.calculateMaxAttacksForClass(false, 0);
+		var maxBowAttacks:int = combat.maxBowAttacks();
 		flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = maxBowAttacks;
 		clearOutput();
 		if (player.fatigue + bowCost(200) > player.maxFatigue()) {

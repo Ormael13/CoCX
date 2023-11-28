@@ -367,12 +367,12 @@ public class Combat extends BaseContent {
     }
 
     public function maxCurrentAttacks():int {
-        if (player.weaponSpecials("Staff") || player.weaponSpecials("Wand")) return 1;
+        if (player.isStaffTypeWeapon() || player.isWandTypeWeapon()) return 1;
         else return player.calculateMultiAttacks();
     }
 
     public function maxBowAttacks():int {
-        var extraHits:Number = 0;
+        /*var extraHits:Number = 0;
         var baseHits:Number;
         if (player.isElf() && player.hasPerk(PerkLib.ELFMasterShot)) extraHits = 1;
         if (player.hasPerk(PerkLib.Multishot)) baseHits = 6;
@@ -381,23 +381,26 @@ public class Combat extends BaseContent {
         else if (player.hasPerk(PerkLib.WeaponRangeTripleStrike)) baseHits = 3;
         else if (player.hasPerk(PerkLib.WeaponRangeDoubleStrike)) baseHits = 2;
         else baseHits = 1;
-        return (baseHits+extraHits) * (flags[kFLAGS.ELVEN_TWINSHOT_ENABLED] ? 2 : 1);
+        return (baseHits+extraHits) * (flags[kFLAGS.ELVEN_TWINSHOT_ENABLED] ? 2 : 1);*/
+        return player.calculateMaxAttacksForClass(false, 0);
     }
 
     public function maxCrossbowAttacks():int {
-        if (player.hasPerk(PerkLib.WeaponRangeTripleStrike)) return 3;
+        /*if (player.hasPerk(PerkLib.WeaponRangeTripleStrike)) return 3;
         else if (player.hasPerk(PerkLib.WeaponRangeDoubleStrike)) return 2;
-        else return 1;
+        else return 1;*/
+        return player.calculateMaxAttacksForClass(false, 1);
     }
 
     public function maxThrowingAttacks():int {
-        if (player.hasPerk(PerkLib.WeaponRangeTripleStrike)) return 3;
+        /*if (player.hasPerk(PerkLib.WeaponRangeTripleStrike)) return 3;
         else if (player.hasPerk(PerkLib.WeaponRangeDoubleStrike)) return 2;
-        else return 1;
+        else return 1;*/
+        return player.calculateMaxAttacksForClass(false, 2);
     }
 
     public function maxFirearmsAttacks():int {
-		var bonusShots:Number = 0;
+		/*var bonusShots:Number = 0;
 		if (player.hasPerk(PerkLib.LockAndLoad)) {
 			if (player.hasPerk(PerkLib.Multishot)) bonusShots = 2;
 			bonusShots = 1;
@@ -405,7 +408,8 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.MasterGunslinger)) return 4+bonusShots;
         else if (player.hasPerk(PerkLib.ExpertGunslinger)) return 3+bonusShots;
         else if (player.hasPerk(PerkLib.AmateurGunslinger)) return 2+bonusShots;
-        else return 1;
+        else return 1;*/
+        return player.calculateMaxAttacksForClass(false, 3);
     }
 
     public function maxCurrentRangeAttacks():int {
@@ -3127,11 +3131,11 @@ public class Combat extends BaseContent {
             enemyAI();
             return;
         }
-        if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow") {
+        if (player.isBowTypeWeapon() || player.isCrossbowTypeWeapon()) {
             if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) outputText("Your bow nudges as you ready the next shot, helping you keep your aimed at [monster name].\n\n");
             multiArrowsStrike(0);
         }
-        else if (player.weaponRangePerk == "Throwing"){
+        else if (player.isThrownTypeWeapon()){
             if (player.hasPerk(PerkLib.Telekinesis)) {
                 outputText("Weapons begins to float around you as you draw several projectiles from your arsenal using your powers.\n\n");
                 TelekinesisThrow();
@@ -11330,7 +11334,7 @@ public class Combat extends BaseContent {
 
     public function fatigueRecovery2():Number {
         var fatiguecombatrecovery:Number = 1;
-        var maxFirearmAttacks:int = player.calculateMaxAttacksForClass(false, 3);
+        var maxFirearmAttacks:int = maxFirearmsAttacks();
         if (player.hasPerk(PerkLib.StarSphereMastery)) fatiguecombatrecovery += player.perkv1(PerkLib.StarSphereMastery);
         if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) fatiguecombatrecovery += 1;
         if (player.hasPerk(PerkLib.EnlightenedNinetails)) fatiguecombatrecovery += 1;
@@ -12350,7 +12354,10 @@ public static const bonusAttackMasteries:Array = [
     MASTERY_LARGE,
     MASTERY_MASSIVE,
     MASTERY_RANGED,
-    MASTERY_NORMAL
+    MASTERY_NORMAL,
+    MASTERY_ARCHERY,
+    MASTERY_THROWING,
+    MASTERY_FIREARMS
 ];
 
 public function feralCombatXP(XP:Number = 0):void       {player.gainCombatXP(MASTERY_FERAL, XP * weaponmasteryXPMulti());}
@@ -16336,7 +16343,7 @@ public function rangePhysicalForce():Number {
 
 public function firearmsForce():Number {
 	var mod:Number = 0;
-    var maxFirearmAttacks:int = player.calculateMaxAttacksForClass(false, 3);
+    var maxFirearmAttacks:int = maxFirearmsAttacks();
 	if (player.hasPerk(PerkLib.JobGunslinger)) mod += .1;
 	if (maxFirearmAttacks >= 2) mod += .05;
 	if (maxFirearmAttacks >= 3) mod += .1;

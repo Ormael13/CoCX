@@ -516,7 +516,7 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>One Bullet Reload Cost (Fatigue): </b> " + combat.oneBulletReloadCost() + "\n";
 		
 		combatStats += "<b>Bow Accuracy (1st range attack):</b> " + (bAcc / 2) + "%\n";
-		var maxBowAttacks:int = player.calculateMaxAttacksForClass(false, 0);
+		var maxBowAttacks:int = combat.maxBowAttacks();
 		if (maxBowAttacks >= 2) combatStats += "<b>Bow Accuracy (2nd range attack):</b> " + ((bAcc / 2) - bAccPen) + "%\n";
 		if (maxBowAttacks >= 3) combatStats += "<b>Bow Accuracy (3rd range attack):</b> " + ((bAcc / 2) - (bAccPen * 2)) + "%\n";
 		if (maxBowAttacks >= 4) combatStats += "<b>Bow Accuracy (4th range attack):</b> " + ((bAcc / 2) - (bAccPen * 3)) + "%\n";
@@ -524,19 +524,19 @@ public class PlayerInfo extends BaseContent {
 		if (maxBowAttacks >= 6) combatStats += "<b>Bow Accuracy (6th range attack):</b> " + ((bAcc / 2) - (bAccPen * 5)) + "%\n";
 
 		combatStats += "<b>Crossbow Accuracy (1st range attack):</b> " + (bAcc / 2) + "%\n";
-		var maxCrossBowAttacks:int = player.calculateMaxAttacksForClass(false, 1);
+		var maxCrossBowAttacks:int = combat.maxCrossbowAttacks();
 		if (maxCrossBowAttacks >= 2) combatStats += "<b>Crossbow Accuracy (2nd range attack):</b> " + ((bAcc / 2) - bAccPen) + "%\n";
 		if (maxCrossBowAttacks >= 3) combatStats += "<b>Crossbow Accuracy (3rd range attack):</b> " + ((bAcc / 2) - (bAccPen * 2)) + "%\n";
 		combatStats += "<i>(All accuracy values above includes bonus to accuracy from Archery Mastery)</i>\n";
 		combatStats += "<b>Throwed Weapon Accuracy (1st range attack):</b> " + (combat.throwingAccuracy() / 2) + "%\n";
 		
-		var maxThrowAttacks:int = player.calculateMaxAttacksForClass(false, 2);
+		var maxThrowAttacks:int = combat.maxThrowingAttacks();
 		if (maxThrowAttacks >= 2) combatStats += "<b>Throwed Weapon Accuracy (2nd range attack):</b> " + ((combat.throwingAccuracy() / 2) - 15) + "%\n";
 		if (maxThrowAttacks >= 3) combatStats += "<b>Throwed Weapon Accuracy (3rd range attack):</b> " + ((combat.throwingAccuracy() / 2) - 30) + "%\n";
 		combatStats += "<i>(All accuracy values above includes bonus to accuracy from Throwing Weapons Mastery)</i>\n";
 		combatStats += "<b>Firearms Accuracy (1st range attack):</b> " + (fAcc / 2) + "%\n";
 		
-		var maxFirearmAttacks:int = player.calculateMaxAttacksForClass(false, 3);
+		var maxFirearmAttacks:int = combat.maxFirearmsAttacks();
 		if (maxFirearmAttacks >= 2) combatStats += "<b>Firearms Accuracy (2nd range attack):</b> " + ((fAcc / 2) - fAccPen) + "%\n";
 		if (maxFirearmAttacks >= 3) combatStats += "<b>Firearms Accuracy (3rd range attack):</b> " + ((fAcc / 2) - (fAccPen * 2)) + "%\n";
 		if (maxFirearmAttacks >= 4) combatStats += "<b>Firearms Accuracy (4th range attack):</b> " + ((fAcc / 2) - (fAccPen * 3)) + "%\n";
