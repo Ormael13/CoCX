@@ -6222,7 +6222,7 @@ use namespace CoC;
 				[Combat.MASTERY_ARCHERY, isBowTypeWeapon(), [10, 20, 30, 40, 50]],
 				[Combat.MASTERY_ARCHERY, isCrossbowTypeWeapon(), [15, 30]],
 				[Combat.MASTERY_THROWING, isThrownTypeWeapon(), [15, 30]],
-				[Combat.MASTERY_FIREARMS, isFirearmTypeWeapon(), [10, 20, 30, 40]],
+				[Combat.MASTERY_FIREARMS, isFirearmTypeWeapon(), [10, 25, 40]],
 				[Combat.MASTERY_RANGED, true, [10, 25, 40]] //the last one for "everything else"
 			];
 		}
