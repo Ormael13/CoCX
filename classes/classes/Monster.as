@@ -27,6 +27,7 @@ import classes.Items.UndergarmentLib;
 import classes.Items.UseableLib;
 import classes.Items.WeaponLib;
 import classes.Items.WeaponRangeLib;
+import classes.Items.Weapons.HuntsmansCane;
 import classes.Races.HumanRace;
 import classes.Scenes.Areas.DeepSea.JuvenileAbyssalShark;
 import classes.Scenes.Areas.Forest.Alraune;
@@ -2408,6 +2409,104 @@ import flash.utils.getQualifiedClassName;
 				outputText(".");
 			}
 			else outputText(""+customText+"");
+		}
+
+		/**
+		 * <p>attack() override series - Part 1</p>
+		 * <p>==================================</p>
+		 * <p>all fucking player melee attack nullifying (stun/fear/seal/whatever) abilities/functions goes fucking here</p>
+		 * <p>override from the fucking each monster subclasses</p>
+		 * <p>==================================</p>
+		 * <p>PS: this series is dedicated for melee attack if you want to similar shit for physical specials or whatever make a new one</p>
+		 * <p>==================================</p>
+		 * <p>PPS: I will make them eventually make another dedicated base/override functions.</p>
+		 * <p>PPPS: We need more comments in code.</p>
+		 * <p>==================================</p>
+		 * <p>Combat.enemyAI() will be called and cancel the rest of the attack checks if return false</p>
+		 * <p>Default: return true (attack passed)</p>
+		 */
+		public function preAttackSeal():Boolean{
+			return true;
+		}
+
+		/**
+		 * <p>attack() override series - Part 2</p>
+		 * <p>==================================</p>
+		 * <p>Executed after preAttackSeal()</p>
+		 * <p>==================================</p>
+		 * <p>Used for output flavor text when start melee/attacking, namely sandtrap, alruine</p>
+		 * <p>Or implement gimmicks during this timing whatever</p>
+		 * <p>==================================</p>
+		 * <p>Default: Nothing (duh)</p>
+		 */
+		public function preAttack():void{
+		}
+
+		/**
+		 * <p>attack() override series - Part 3</p>
+		 * <p>==================================</p>
+		 * <p>Executed after preAttackSeal(), preAttack()</p>
+		 * <p>Used to skip round after blind check (Basilisk)</p>
+		 * <p>Or do whatever shit you want just remember to pass true</p>
+		 * <p>Put round-skipping retaliate/counter attack gimmick here</p>
+		 * <p>==================================</p>
+		 * <p>current round will be skipped without running enemyAI() if return false</p>
+		 * <p>Default: true (player attack passes)</p>
+		 */
+		public function midAttackSkip():Boolean{
+			return true;
+		}
+
+		/**
+		 * <p>attack() override series - Part 4</p>
+		 * <p>==================================</p>
+		 * <p>Executed after preAttackSeal(), preAttack(), midAttackSkip()</p>
+		 * <p>==================================</p>
+		 * <p>used to execute gimmick that has the option to interrupt player attack</p>
+		 * <p>Or do whatever shit you want just remember to pass true</p>
+		 * <p>will perform HP check after this function so put normal retaliate/counter attack gimmick here</p>
+		 * <p>==================================</p>
+		 * <p>skip player attack and call enemyAI() if return false</p>
+		 * <p>Default: true (player attack passes) </p>
+		 */
+		public function midAttackSeal():Boolean{
+			return	true;
+		}
+
+		/**
+		 * <p>attack() override series - Part 5</p>
+		 * <p>==================================</p>
+		 * <p>Executed after preAttackSeal(), preAttack(), midAttackSkip(), midAttackSeal()</p>
+		 * <p>==================================</p>
+		 * <p>used to execute gimmick after player missed</p>
+		 * <p>Or just to output some monster dodging flavor text like why this function is implement for</p>
+		 * <p>==================================</p>
+		 * <p>Default: Default monster flavor text with HuntsmansCane variant </p>
+		 */
+		public function midDodge():void{
+			if (player.weapon is HuntsmansCane && rand(2) == 0) {
+				if (rand(2) == 0) outputText("You slice through the air with your cane, completely missing your enemy.");
+				else outputText("You lunge at your enemy with the cane.  It glows with a golden light but fails to actually hit anything.");
+			}
+			if (!SceneLib.combat.MSGControll) {
+				if (spe - player.spe < 8) outputText("[Themonster] narrowly avoids your attack!");
+				if (spe - player.spe >= 8 && spe - player.spe < 20) outputText("[Themonster] dodges your attack with superior speed!");
+				if (spe - player.spe >= 20) outputText("[Themonster] deftly avoids your attack.");
+			}
+		}
+
+		/**
+		 * <p>attack() override series - Part 6</p>
+		 * <p>==================================</p>
+		 * <p>Executed after preAttackSeal(), preAttack(), midAttackSkip(), midAttackSeal(), midDodge()</p>
+		 * <p>==================================</p>
+		 * <p>used to execute blocking gimmick when player can land a hit on monster</p>
+		 * <p>==================================</p>
+		 * <p>Block player attack and run enemyAI() if return false</p>
+		 * <p>Default: true (player attack passes)</p>
+		 */
+		public function postDodge():Boolean{
+			return true;
 		}
 
 		/**

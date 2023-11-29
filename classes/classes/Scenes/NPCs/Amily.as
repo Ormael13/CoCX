@@ -13,6 +13,19 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 	public class Amily extends Monster 
 	{
 
+		override public function preAttackSeal():Boolean{
+			if(hasStatusEffect(StatusEffects.Concentration)) {
+				clearOutput();
+				outputText("[monster name] easily glides around your attack thanks to [monster his] complete concentration on your movements.\n\n");
+				// replacetext is empty so it used default string anyway and the check is false so it leads to enemyAI() in the end of the attack()
+				// if (!sceneimpl) enemyAI();
+				// if (sceneimpl) SceneLib.combat.enemyAIImpl();
+				// return false to skip attack() its little confusing since original this line is true
+				return false;
+			}
+			// of course swap this around too
+			else return true;
+		}
 		override protected function performCombatAction():void
 		{
 			if(!hasStatusEffect(StatusEffects.Concentration) && rand(4) == 0) amilyConcentration();

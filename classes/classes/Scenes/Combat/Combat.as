@@ -40,6 +40,7 @@ import classes.Scenes.Dungeons.DemonLab.*;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Dungeons.HelDungeon.*;
 import classes.Scenes.Dungeons.RiverDungeon.TwinBosses;
+import classes.Scenes.Monsters.Goblin;
 import classes.Scenes.Monsters.Magnar;
 import classes.Scenes.Monsters.WerewolfFemale;
 import classes.Scenes.Monsters.WerewolfHuntress;
@@ -4761,158 +4762,101 @@ public class Combat extends BaseContent {
     public function attack(followupAttacks:Boolean = true):void {
         var IsFeralCombat:Boolean = false;
         flags[kFLAGS.LAST_ATTACK_TYPE] = LAST_ATTACK_PHYS;
-        if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 0) {
-            outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  ");
-            if (monster is ChaosChimera) outputText("Curse");
-            else outputText("The kitsune's seals");
-            outputText(" have made normal melee attacks impossible!  Maybe you could try something else?\n\n");
-            enemyAI();
-            return;
-        }
-        if (player.hasStatusEffect(StatusEffects.Sealed2) && player.statusEffectv2(StatusEffects.Sealed2) == 0) {
-            outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Recent enemy attack have made normal melee attacks impossible!  Maybe you could try something else?\n\n");
-            enemyAI();
-            return;
-        }
-        if (flags[kFLAGS.PC_FETISH] >= 3 && !SceneLib.urtaQuest.isUrta()) {
-            outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Ceraph's piercings have made normal melee attacks impossible!  Maybe you could try something else?\n\n");
-            enemyAI();
-            return;
-        }
-		if (checkConcentration()) return; //Amily concentration
-        if (monster.hasStatusEffect(StatusEffects.Level) && !player.hasStatusEffect(StatusEffects.FirstAttack)) {
-            if (monster is SandTrap) {
-                outputText("It's all or nothing!  With a bellowing cry you charge down the treacherous slope and smite the sandtrap as hard as you can!  ");
-                (monster as SandTrap).trapLevel(-4);
+
+        // migrate kitsune's(and their retarded cousins that does not use extend Kitsune)/chaos chimera's Seal check
+        // kitsune/yamata/chaos chimera/kitsuneancestor/kitsuneelder/aiko
+        // migrate knife ears that uses StatusEffects.Seal2
+        // woodelveshuntingparty/darkelf/lightelf
+        // migrate amily concentration check
+        if(monster.preAttackSeal()){
+            // Fetish pacifism stays for now until someone gets a better idea
+            if (flags[kFLAGS.PC_FETISH] >= 3 && !SceneLib.urtaQuest.isUrta()) {
+                outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Ceraph's piercings have made normal melee attacks impossible!  Maybe you could try something else?\n\n");
             }
-            if (monster is Alraune) {
-                outputText("It’s all or nothing!  If this leafy woman is so keen on pulling you in, you will let her do just that!  You use her own strength against her, using it to increase your momentum as you leap towards her and smash into her with your weapon!  ");
-                (monster as Alraune).trapLevel(-6);
-            }
-        }
-        //"Brawler perk". Urta only. Thanks to Fenoxo for pointing this out... Even though that should have been obvious :<
-        //Urta has fists and the Brawler perk. Don't check for that because Urta can't drop her fists or lose the perk!
-        else if (SceneLib.urtaQuest.isUrta()) {
-            if (player.hasStatusEffect(StatusEffects.FirstAttack)) {
-                player.removeStatusEffect(StatusEffects.FirstAttack);
-            } else {
-                player.createStatusEffect(StatusEffects.FirstAttack, 0, 0, 0, 0);
-                outputText("Utilizing your skills as a bareknuckle brawler, you make two attacks!\n");
-            }
-        }
-        //Blind
-        if (player.playerIsBlinded()) {
-            outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
-        }
-        if (monster is Basilisk && !player.hasPerk(PerkLib.BasiliskResistance)) {
-            if (monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind))
-                outputText("The Blind basilisk can't use his eyes, so you can actually aim your strikes!  ");
-            //basilisk counter attack (block attack, significant speed loss):
-            else if (player.inte / 5 + rand(20) < 25) {
-                outputText("Holding the basilisk in your peripheral vision, you charge forward to strike it.  Before the moment of impact, the reptile shifts its posture, dodging and flowing backward skillfully with your movements, trying to make eye contact with you. You find yourself staring directly into the basilisk's face!  Quickly you snap your eyes shut and recoil backwards, swinging madly at the lizard to force it back, but the damage has been done; you can see the terrible grey eyes behind your closed lids, and you feel a great weight settle on your bones as it becomes harder to move.");
-                player.addCombatBuff('spe', -20,"Basilisk Gaze","BasiliskGaze");
-                player.removeStatusEffect(StatusEffects.FirstAttack);
-                combatRoundOver();
-                flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 2;
-                return;
-            }
-            //Counter attack fails: (random chance if PC int > 50 spd > 60; PC takes small physical damage but no block or spd penalty)
-            else {
-                outputText("Holding the basilisk in your peripheral vision, you charge forward to strike it.  Before the moment of impact, the reptile shifts its posture, dodging and flowing backward skillfully with your movements, trying to make eye contact with you. You twist unexpectedly, bringing your [weapon] up at an oblique angle; the basilisk doesn't anticipate this attack!  ");
-            }
-        }
-        if (monster is DemonDragonGroup) {
-            (monster as DemonDragonGroup).meleeResponse();
-            if (player.HP <= player.minHP()) {
-                doNext(endHpLoss);
-                return;
-            }
-            //doesn't interrupt the attack
-        }
-        if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-            if (monster is FrostGiant) (monster as FrostGiant).giantBoulderHit(0);
-            else                       (monster as YoungFrostGiant).youngGiantBoulderHit(0);
-            enemyAI();
-            return;
-        }
-        //Worms are special
-        if (monster is WormMass) {
-            //50% chance of hit (int boost)
-            if (rand(100) + player.inte / 3 >= 50) {
-                var dam:int = int(player.str / 5 - rand(5));
-                if (dam == 0) dam = 1;
-                outputText("You strike at the amalgamation, crushing countless worms into goo, dealing <b>[font-damage]" + dam + "[/font]</b> damage.\n\n");
-                monster.HP -= dam;
-                if (monster.HP <= monster.minHP()) {
-                    doNext(endHpVictory);
-                    return;
-                }
-            }
-            //Fail
-            else {
-                outputText("You attempt to crush the worms with your reprisal, only to have the collective move its individual members, creating a void at the point of impact, leaving you to attack only empty air.\n\n");
-            }
-            if (player.hasStatusEffect(StatusEffects.FirstAttack)) {
-                attack();
-                return;
-            }
-            enemyAI();
-            return;
-        }
-        //Incubus Scientist
-        if (monster is IncubusScientist && (monster as IncubusScientist).ShieldHits > 0) {
-            (monster as IncubusScientist).ShieldsHitMelee();
-            enemyAI();
-            return;
-        }
-        //Determine if dodged!
-        if (((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges))) && !monster.monsterIsStunned()) {
-            //Akbal dodges special education
-            if (monster is Akbal) outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
-            else if (monster is Shouldra) outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your [weapon] against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your [weapon] as if betrayed.\n");
-            else if (monster is Kitsune) {
-                //Player Miss:
-                outputText("You swing your [weapon] ferociously, confident that you can strike a crushing blow.  To your surprise, you stumble awkwardly as the attack passes straight through her - a mirage!  You curse as you hear a giggle behind you, turning to face her once again.\n\n");
-            } else {
-                if (player.weapon is HuntsmansCane && rand(2) == 0) {
-                    if (rand(2) == 0) outputText("You slice through the air with your cane, completely missing your enemy.");
-                    else outputText("You lunge at your enemy with the cane.  It glows with a golden light but fails to actually hit anything.");
-                }
-                if (!MSGControll) {
-                    if (monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids your attack!");
-                    if (monster.spe - player.spe >= 8 && monster.spe - player.spe < 20) outputText("[Themonster] dodges your attack with superior speed!");
-                    if (monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your attack.");
-                }
-                outputText("\n");
+            // I hate urta flag checks honestly cant we just make urta's dedicated melee function after this uh
+            //"Brawler perk". Urta only. Thanks to Fenoxo for pointing this out... Even though that should have been obvious :<
+            //Urta has fists and the Brawler perk. Don't check for that because Urta can't drop her fists or lose the perk!
+            else if (SceneLib.urtaQuest.isUrta()) {
                 if (player.hasStatusEffect(StatusEffects.FirstAttack)) {
-                    attack();
-                    return;
-                } else outputText("\n");
+                    player.removeStatusEffect(StatusEffects.FirstAttack);
+                } else {
+                    player.createStatusEffect(StatusEffects.FirstAttack, 0, 0, 0, 0);
+                    outputText("Utilizing your skills as a bareknuckle brawler, you make two attacks!\n");
+                }
             }
-            enemyAI();
-            return;
+            else{
+                // migrate alruine/sandtrap flavor text and trap level changes
+                monster.preAttack();
+
+                //Blind
+                if (player.playerIsBlinded()) {
+                    outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
+                }
+
+                // Migrate basilisk blind check
+                // Gimmick now way easier to implement if any fucker want to use it kekvv
+                if(monster.midAttackSkip()){
+                    // Migrate demondragonGroup meleeresponse()
+                    // Migrate frost giant boulder check. Every single one of them. And not just a giant, but the giants and the children too!
+                    // Migrate worm. Worm is so special they can skip the rest of your shit (first attack guaranteed then call enemyAI() and end)
+                    // Migrate Incubus Scientist ShieldHits checks and ShieldsHitMelee()
+                    if(monster.midAttackSeal()){
+                        // rest of the attack here
+
+                        if (player.HP <= player.minHP()) {
+                            doNext(endHpLoss);
+                            return;
+                        }
+
+                        // Check if player missed
+                        // enemyAI() should still be called in the end
+                        if (((player.playerIsBlinded() && rand(2) == 0)
+                                || (monster.getEvasionRoll(false, player.spe)
+                                        && !monster.hasPerk(PerkLib.NoDodges)))
+                                && !monster.monsterIsStunned()) {
+
+                            // Yes. I am aware that naming it predodge after monster passing dodge check is hilarious
+                            // Migrate akbal/shouldra/kitsune/default dodge text
+                            monster.midDodge();
+                            outputText("\n\n");
+                        }
+                        else{
+                            // Congratulations, you hit it
+                            // Oh wait sandmother can block shit (Earthshield Statuseffects only used by her)
+                            if(monster.postDodge()){
+                                // Almost there, probably
+                                if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) flags[kFLAGS.ATTACKS_ACCURACY] = 0;
+
+                                // Finally feral attacks AAAAAAAAAAAA
+                                //Natural weapon Full attack list
+                                if (followupAttacks && flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon()))) {
+                                    IsFeralCombat = true;
+                                    resolveFeralCombatAdditionnalAttacks();
+                                }
+                                // Do all other attacks
+                                meleeDamageAcc(IsFeralCombat);
+                                if (player.hasPerk(PerkLib.LightningClaw)){
+                                    outputText(" The residual electricity leaves your foe's skin tingling with pleasure.");
+                                }
+                                // ITS OVEEEEEEEEER
+                            }
+                            // YOOOOU SHALL NOOOOOT PAAAAAAAAAASSSSSS!!!!!
+                        }
+                    }
+                }
+                else{
+                    combatRoundOver();
+                    return;
+                }
+
+            }
         }
+
+        // This should be the end ideally probably
+        enemyAI();
+
+        //Determine if dodged!
         //BLOCKED ATTACK:
-        if (monster.hasStatusEffect(StatusEffects.Earthshield) && rand(4) == 0) {
-            outputText("Your strike is deflected by the wall of sand, dirt, and rock!  Damn!\n");
-            if (player.hasStatusEffect(StatusEffects.FirstAttack)) {
-                attack();
-                return;
-            } else outputText("\n");
-            enemyAI();
-            return;
-        }
-        if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) flags[kFLAGS.ATTACKS_ACCURACY] = 0;
-        //Natural weapon Full attack list
-        if (followupAttacks && flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon()))) {
-            IsFeralCombat = true;
-            resolveFeralCombatAdditionnalAttacks();
-        }
-        // Do all other attacks
-        meleeDamageAcc(IsFeralCombat);
-        if (player.hasPerk(PerkLib.LightningClaw)){
-            outputText(" The residual electricity leaves your foe's skin tingling with pleasure.");
-        }
     }
 
     /**

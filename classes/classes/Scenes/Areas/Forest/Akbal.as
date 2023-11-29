@@ -12,6 +12,9 @@ import classes.internals.WeightedDrop;
 public class Akbal extends Monster
 	{
 
+		override public function midDodge():void{
+			outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
+		}
 		override public function eAttack():void
 		{
 			//Chances to miss:

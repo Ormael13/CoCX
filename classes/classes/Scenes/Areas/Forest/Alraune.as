@@ -97,7 +97,14 @@ public class Alraune extends Monster
 				outputText("\n");
 			}
 		}
-		
+
+		override public function preAttack():void{
+			if (hasStatusEffect(StatusEffects.Level)) {
+				outputText("It’s all or nothing!  If this leafy woman is so keen on pulling you in, you will let her do just that!  You use her own strength against her, using it to increase your momentum as you leap towards her and smash into her with your weapon!  ");
+				trapLevel(-6);
+			}
+		}
+
 		override protected function performCombatAction():void
 		{
 			if (hasStatusEffect(StatusEffects.Level)) {
