@@ -127,7 +127,7 @@ public class Sheila extends Monster
 			//Hit:
 			if(!player.getEvasionRoll()) {
 				outputText("It lands on target, and you're forced to close your eyes lest it get in them!");
-				if (!player.hasPerk(PerkLib.BlindImmunity)) player.createStatusEffect(StatusEffects.Blind,1,0,0,0);
+				if (!player.isImmuneToBlind()) player.createStatusEffect(StatusEffects.Blind,1,0,0,0);
 				player.createStatusEffect(StatusEffects.SheilaOil,0,0,0,0);
 			}
 			else {

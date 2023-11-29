@@ -43,7 +43,7 @@ public class GoblinShaman extends Goblin
 			//Blind
 			else if (spellChooser == 1 && mana >= spellCostBlind) {
 				outputText("The goblin glares at you and points at you! A bright flash erupts before you!  ");
-				if ((!player.perkv1(IMutationsLib.GorgonEyesIM) >= 1 && rand(player.inte / 5) <= 4) && !player.hasPerk(PerkLib.BlindImmunity)) {
+				if ((!player.perkv1(IMutationsLib.GorgonEyesIM) >= 1 && rand(player.inte / 5) <= 4) && !player.isImmuneToBlind()) {
 					outputText("<b>You are blinded!</b>");
 					player.createStatusEffect(StatusEffects.Blind, 1 + rand(3), 0, 0, 0);
 				}

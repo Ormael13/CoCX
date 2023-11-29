@@ -368,21 +368,115 @@ public class HeXinDao extends BaseContent
         doYesNo(curry(debitItem2,returnFunc,shopKeep,priceRate,itype,onBuyString),returnFunc);
     }
 
+	private function debitItemMulti(returnFunc:Function,shopKeep:String,priceRate:int,itype:ItemType,onBuy:String, useStones:Boolean=false, currentQuantity:int=1):void {
+		var wallet:int;
+		var costPerItem:int;
+		var debitFunction:Function;
+		var paymentMethod:String = useStones? "spirit stones": "gems";
+
+		if (useStones) {
+			wallet = flags[kFLAGS.SPIRIT_STONES];
+			costPerItem = itype.value / priceRate;
+			debitFunction = function (cost:int):void {
+				flags[kFLAGS.SPIRIT_STONES] -= cost;
+			};
+		} else {
+			wallet = player.gems;
+			costPerItem = itype.value * priceRate;
+			debitFunction = function (cost:int):void {
+				player.gems -= cost;
+			};
+		}
+
+		var value:int = costPerItem * currentQuantity;
+
+		if (wallet < value) {
+			clearOutput();
+			outputText("\n\n"+shopKeep+" shakes his head, indicating you need " + String(value - wallet) + " more " + paymentMethod + " to purchase this item.");
+			doNext(returnFunc);
+		} else {
+			debitFunction(value);
+			outputText(onBuy);
+			var amountDeposited:int = inventory.tryAddMultipleItemsToPlayer(itype, currentQuantity);
+			outputText("You place " + amountDeposited + " of the item in your bag, leabing you with " + player.itemCount(itype) + " of them.");
+
+			if(amountDeposited != currentQuantity) {
+				var amountToRefund:int = (currentQuantity - amountDeposited) * costPerItem;
+				debitFunction(-amountToRefund);
+			}
+			doNext(returnFunc);
+			statScreenRefresh();
+		}
+	}
+
+
+    private function confirmBuyMulti(returnFunc:Function,shopKeep:String,priceRate:int,itype:ItemType,descString:String,onBuyString:String="\n", useStones:Boolean=false, currentQuantity:int=1):void{
+        clearOutput();
+
+		function calcPossibleMaxBuy():int {
+			var wallet:int = useStones? flags[kFLAGS.SPIRIT_STONES]: player.gems;
+
+			return Math.floor(wallet / costPerItem);
+		}
+
+		var costPerItem:int;
+		if (useStones) {
+			costPerItem = itype.value / priceRate;
+		} else {
+			costPerItem = itype.value * priceRate;
+		}
+		var maxQuanity:int = Math.min(player.roomForItem(itype), calcPossibleMaxBuy());
+		
+
+		if (currentQuantity < 1) {
+			currentQuantity = 1;
+		}
+		if (currentQuantity > maxQuanity){
+			currentQuantity = maxQuanity;
+		}
+
+        outputText(descString);
+		outputText("\n\n");
+		outputText("Currently buying: " + itype.longName + "\n");
+		outputText("Maximum amount: " + maxQuanity + "\n");
+		outputText("Quanity: " + currentQuantity + "\n");
+		outputText("Cost: " + String(costPerItem * currentQuantity) + ((useStones)? " spirit stones" : " gems") + "\n");
+
+		menu();
+		addButton(0, "Subtract 1", curry(confirmBuyMulti,returnFunc, shopKeep, priceRate, itype, descString, onBuyString, useStones, currentQuantity - 1))
+			.disableIf(currentQuantity <= 1, "Minimum Quantity reached");
+		addButton(1, "Add 1", curry(confirmBuyMulti,returnFunc, shopKeep, priceRate, itype, descString, onBuyString, useStones, currentQuantity + 1))
+			.disableIf(currentQuantity == maxQuanity, "Maximum Quantity reached");
+		addButton(5, "Subtract 5", curry(confirmBuyMulti,returnFunc, shopKeep, priceRate, itype, descString, onBuyString, useStones, currentQuantity - 5))
+			.disableIf(currentQuantity <= 1, "Minimum Quantity reached");
+		addButton(6, "Add 5", curry(confirmBuyMulti,returnFunc, shopKeep, priceRate, itype, descString, onBuyString, useStones, currentQuantity + 5))
+			.disableIf(currentQuantity == maxQuanity, "Maximum Quantity reached");
+
+		addButton(4, "1", curry(confirmBuyMulti,returnFunc, shopKeep, priceRate, itype, descString, onBuyString, useStones, 1))
+			.disableIf(currentQuantity <= 1, "Minimum Quantity reached");
+		addButton(9, "Max", curry(confirmBuyMulti,returnFunc, shopKeep, priceRate, itype, descString, onBuyString, useStones, maxQuanity))
+			.disableIf(currentQuantity == maxQuanity, "Maximum Quantity reached");
+
+		addButton(13, "Buy", curry(debitItemMulti,returnFunc,shopKeep,priceRate,itype,onBuyString, useStones, currentQuantity))
+			.disableIf(currentQuantity == 0, "You're currently not buying anything");
+		addButton(14, "Return", returnFunc);
+    }
+
     public function mogahenmerchant():void {
         function addItemButton(btn:int, item:ItemType, desc:String, useStones:Boolean = false):void {
             var introText:String = "When you point towards one of the items on display the merchant says, \"<i>This item is used to embrace the ";
-            var endText:String = " in you.  Interested?  It is merely <b>";
+            var endText:String = " in you.  Interested?</i>\""//  It is merely <b>";
             var buyF:Function, line:String, onBuyString:String, cost:String;
             if (useStones) {
                 cost = String(item.value / 5) + " spirit stones";
-                buyF = curry(confirmBuy2, mogahenmerchant, "Moga", 5);
+                buyF = curry(confirmBuyMulti, mogahenmerchant, "Moga", 5, item);
             } else {
                 cost = String(item.value * 3) + " gems";
-                buyF = curry(confirmBuy1, mogahenmerchant, "Moga", 3);
+                buyF = curry(confirmBuyMulti, mogahenmerchant, "Moga", 3, item);
             }
-            line = introText + desc + endText + cost + "</b></i>.\"";
+            line = introText + desc + endText;// + cost + "</b></i>.\"";
             onBuyString = "\n\nAfter you give Hen a few " + (useStones ? "spirit stones" : "gems") + ", he hands you the transformative. ";
-            addButton(btn, item.shortName, buyF, item, line, onBuyString).hint("Buy " + item.longName + ".\nCost: " + cost);
+            addButton(btn, item.shortName, buyF, line, onBuyString, useStones).hint("Buy " + item.longName + ".\nCost: " + cost);
         }
 
         function makeItemList(items:Array, useStones:Boolean = false):void {

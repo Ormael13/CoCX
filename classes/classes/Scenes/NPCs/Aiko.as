@@ -72,6 +72,11 @@ import classes.internals.*;
 		
 		private function aikoIllusion():void
 		{
+			if (player.hasPerk(PerkLib.TrueSeeing)) {
+				outputText("Aiko tries to cast an illusion, but your magical sight easily pierces her attempt!\n\n");
+				return;
+			}
+
 			if (castIllusion < 1) {
 				outputText("Aiko whispers an incantation in a strange language, and reality seems to be twisting and warping around her. This is going to make it much harder to hit her!\n\n");
 				castIllusion += 2;
@@ -230,6 +235,11 @@ import classes.internals.*;
 
 		private function aikoIllusionLust():void
 		{
+			if (player.hasPerk(PerkLib.TrueSeeing)) {
+				outputText("Aiko tries to cast an illusion, but your magical sight easily pierces her attempt!\n\n");
+				return;
+			}
+
 			var x:int = rand(6);
 			var lustDmg:int = 11 + int(player.effectiveSensitivity() / 5);
 			

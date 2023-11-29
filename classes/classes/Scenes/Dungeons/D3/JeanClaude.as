@@ -56,7 +56,7 @@ import classes.Scenes.SceneLib;
 					
 					outputText("\n\n\"<i>The taste of your own medicine, it is not so nice, eh? I will show you much nicer things in there in time intrus, don’t worry. Once you have learnt your place.</i>\"");
 					
-					if (!player.hasPerk(PerkLib.BlindImmunity)) player.createStatusEffect(StatusEffects.Blind, 2 + player.inte / 20, 0, 0, 0);
+					if (!player.isImmuneToBlind()) player.createStatusEffect(StatusEffects.Blind, 2 + player.inte / 20, 0, 0, 0);
 				}
 				return true;
 			}

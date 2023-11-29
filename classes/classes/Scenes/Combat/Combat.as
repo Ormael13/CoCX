@@ -630,7 +630,7 @@ public class Combat extends BaseContent {
     }
 
     public function get isEnemyInvisible():Boolean {
-        return player.hasStatusEffect(StatusEffects.MonsterInvisible);
+        return player.hasStatusEffect(StatusEffects.MonsterInvisible) && (player.hasStatusEffect(StatusEffects.MonsterDig) || !player.hasPerk(PerkLib.TrueSeeing));
     }
     public function get isEnemyInvisibleButNotUnderground():Boolean {
         return player.hasStatusEffect(StatusEffects.MonsterInvisible) && !player.hasStatusEffect(StatusEffects.MonsterDig);
