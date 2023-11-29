@@ -12,7 +12,9 @@ import classes.Races;
 
 public class DisplacerMetabolismMutation extends IMutationPerkType
     {
-        private static const mName:String = "Displacer Metabolism";
+        override public function get mName():String {
+            return "Displacer Metabolism";
+        }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -29,22 +31,6 @@ public class DisplacerMetabolismMutation extends IMutationPerkType
                 descS += ".";
             }
             return descS;
-        }
-
-        //Name. Need it say more?
-        override public function name(params:PerkClass=null):String {
-            var sufval:String;
-            switch (currentTier(this, player)){
-                case 2:
-                    sufval = "(Primitive)";
-                    break;
-                case 3:
-                    sufval = "(Evolved)";
-                    break;
-                default:
-                    sufval = "";
-            }
-            return mName + sufval;
         }
 
         //Mutation Requirements

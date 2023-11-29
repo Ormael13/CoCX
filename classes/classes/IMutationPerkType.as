@@ -246,5 +246,27 @@ public class IMutationPerkType extends PerkType
 			);
 			//trace("Perk Buffs Updated.");
 		}
+		//Name. Need it say more?
+		override public function name(params:PerkClass=null):String {
+			var sufval:String;
+			switch (currentTier(this, player)){
+				case 2:
+					sufval = "(Primitive)";
+					break;
+				case 3:
+					sufval = "(Evolved)";
+					break;
+				case 4:
+					sufval = "(Final Form)";
+					break;
+				default:
+					sufval = "";
+			}
+			return this.mName + sufval;
+		}
+
+		public function get mName():String {
+			return "";
+		}
 	}
 }

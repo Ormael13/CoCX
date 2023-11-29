@@ -214,14 +214,8 @@ public function meetEvangeline():void {
 	addButton(6, "Ingredients", ingredientsMenu).hint("Ask Evangeline to make some alchemy ingredients");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) addButton(9, "Experiments", Experiments).hint("Check on what experiments Evangeline can work on.");//menu do eksperymentow alchemicznych jak tworzenie eksperymentalnych TF lub innych specialnych tworow evangeline typu specjalny bimbo liq lub tonik/coskolwiek nazwane wzmacniajace postacie do sparingu w obozie
 	else addButtonDisabled(9, "???", "Req. Evangeline been lvl 16+.");
-	if (player.hasStatusEffect(StatusEffects.ArigeanInfected)) addButtonIfTrue(10, "Arigean I.", curingArigeanYes, "Req. 750 gems.", player.gems >= 750);
-	else {
-		if (!player.hasStatusEffect(StatusEffects.ArigeanInfected) && (player.tailType == Tail.ARIGEAN_GREEN || player.tailType == Tail.ARIGEAN_RED)) {
-			addButtonIfTrue(10, "Arigean I.", curingArigean2a, "Req. 1000 gems and 3 spring waters.", (player.gems >= 1000 && player.hasItem(consumables.S_WATER, 3) && player.tailType == Tail.ARIGEAN_GREEN));
-			addButtonIfTrue(10, "Arigean I.", curingArigean3a, "Req. 1250 gems, 4 pure honey and 4 spring waters.", (player.gems >= 1250 && player.hasItem(consumables.PURHONY, 4) && player.hasItem(consumables.S_WATER, 4) && player.tailType == Tail.ARIGEAN_RED));
-		}
-		else addButtonDisabled(10, "???", "Req. to be infected by Arigean.");
-	}
+	if (player.hasStatusEffect(StatusEffects.ArigeanInfected) || player.tailType == Tail.ARIGEAN_GREEN || player.tailType == Tail.ARIGEAN_RED) addButton(10, "Arigean I.", curingArigeanMain)
+	else addButtonDisabled(10, "???", "Req. to be infected by Arigean.");
 	if (player.hasPerk(PerkLib.WendigoCurse)) {
 		if (player.perkv1(PerkLib.WendigoCurse) > 0) {
 			if (player.hasItem(consumables.PURPEAC, 5) && player.hasItem(consumables.PPHILTR, 5)) addButton(11, "Wendigo", curingWendigo);
@@ -976,6 +970,16 @@ private function JustDoIt():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 
+private function curingArigeanMain():void {
+	menu();
+	if (player.hasStatusEffect(StatusEffects.ArigeanInfected)) addButtonIfTrue(0, "Arigean I.", curingArigeanYes, "Req. 750 gems.", player.gems >= 750);
+	else {
+		addButtonIfTrue(1, "Arigean I.", curingArigean2a, "Req. 1000 gems and 3 spring waters.", (player.gems >= 1000 && player.hasItem(consumables.S_WATER, 3) && player.tailType == Tail.ARIGEAN_GREEN));
+		addButtonIfTrue(2, "Arigean I.", curingArigean3a, "Req. 1250 gems, 4 pure honey and 4 spring waters.", (player.gems >= 1250 && player.hasItem(consumables.PURHONY, 4) && player.hasItem(consumables.S_WATER, 4) && player.tailType == Tail.ARIGEAN_RED));
+		addButtonDisabled(3, "Arigean I.", "Soon ;) ");
+	}
+	addButton(14, "Back", meetEvangeline);
+}
 private function curingArigean1():void {
 	outputText("\"<i>Hey [name]! Is everything alright? You're looking a little pale, would you mind if I looked you over?</i>\" Her tone showing worry before she continues. \"<i>It should only take a quick moment of your time.</i>\"\n\n");
 	outputText("Clearly she has your best health in mind, and you have been feeling a little under the weather as of late. It’s just a small look over, so what’s the worst that could happen?\n\n");
@@ -1632,4 +1636,4 @@ private function IMutationsSelector(page:int = 0):void {
 	}
 }
 }
-}
+}

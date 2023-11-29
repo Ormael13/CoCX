@@ -2824,15 +2824,12 @@ public function unFuckSave():void
 
 	// Fix duplicate elven bounty perks
 	if (player.hasPerk(PerkLib.ElvenBounty)) {
-		//CLear duplicates
-		while(player.perkDuplicated(PerkLib.ElvenBounty)) player.removePerk(PerkLib.ElvenBounty);
 		//Fix fudged preggers value
 		if (player.perkv1(PerkLib.ElvenBounty) == 15) {
 			player.setPerkValue(PerkLib.ElvenBounty,1,0);
 			player.addPerkValue(PerkLib.ElvenBounty,2,15);
 		}
 	}
-	while (player.perkDuplicated(PerkLib.NinetailsKitsuneOfBalance)) player.removePerk(PerkLib.NinetailsKitsuneOfBalance);
 
 	if (player.hasStatusEffect(StatusEffects.KnockedBack))
 	{

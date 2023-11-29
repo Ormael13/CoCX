@@ -25,6 +25,19 @@ public class BlindSpell extends AbstractWhiteSpell{
 	override public function get isKnown():Boolean {
 		return player.hasStatusEffect(StatusEffects.KnowsBlind);
 	}
+
+	override protected function usabilityCheck():String {
+		var uc:String = super.usabilityCheck();
+
+		//You can still use Blind if Draculina is the monster invisible
+		if (uc == "You cannot use offensive spells against an opponent you cannot see or target.") {
+			if (monster && monster is Draculina) {
+				return "";
+			}
+		}
+
+		return uc;
+	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		var successrate:int = 60;

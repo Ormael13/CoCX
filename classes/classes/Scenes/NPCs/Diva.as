@@ -151,7 +151,7 @@ public class Diva extends Monster {
             + "Diva lands, opening her wings wide as a pair of black orbs form at her fingertips. She shatters them on the ground plunging the room in complete darkness and extinguishing all light."
             + "\n\n"
             + "You will be unable to locate her correctly without a proper visual.");
-        if (!player.hasPerk(PerkLib.BlindImmunity)) player.createStatusEffect(StatusEffects.Blind, 999, 0, 0, 0);
+        if (!player.isImmuneToBlind()) player.createStatusEffect(StatusEffects.Blind, 999, 0, 0, 0);
     }
 
     private function moveSonicScream():void {

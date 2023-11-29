@@ -82,7 +82,10 @@ public class Kitsune extends Monster
 			else resist = 30;
 			if (player.hasPerk(PerkLib.Whispered)) resist += 20;
 			if ((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor < 20) resist += 20 - player.cor;
-			if (rand(100) < resist) {
+			if (player.hasPerk(PerkLib.TrueSeeing)) {
+				outputText("\n\nHowever, your magical sight allows you to quickly resist her illusions!");
+			}
+			else if (rand(100) < resist) {
 				outputText("\n\nThe kitsune seems to melt away before your eyes for a moment, as though the edges of reality are blurring around her.  You tighten your focus, keeping your eyes trained on her, and she suddenly reels in pain, clutching her forehead as she is thrust back into view.  She lets out a frustrated huff of disappointment, realizing that you have resisted her illusions.");
 			}
 			else {
