@@ -184,10 +184,12 @@ class HumanRaceTier extends RaceTier {
 	):String {
 		var s:Array = [];
 		if (!withExtraBonuses) return "";
-		if (!body) return "Bonus EXP gains";
-		var boost:Number = HumanRace.xpBoost(body.player, body.player.racialScore(Races.HUMAN));
-		if (boost <= 0) return "";
-		s.push("+" + boost + " bonus EXP gains");
+		if (body) {
+			var boost:Number = HumanRace.xpBoost(body.player, body.player.racialScore(Races.HUMAN));
+			s.push("+" + boost + " bonus EXP gains");
+		} else {
+			s.push("Additional EXP gains");
+		}
 		var buffs:Object = this.buffs(body);
 		for (var key:String in buffs) {
 			s.push(StatUtils.explainBuff(key,buffs[key]));

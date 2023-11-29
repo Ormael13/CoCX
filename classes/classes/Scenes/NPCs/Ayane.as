@@ -69,12 +69,16 @@ public class Ayane extends Kitsune {
     }
 
     private function illusion():void {
-        outputText("The fox cast a spell and to your utter confusion the entire scenery changes. You are naked in a bedroom and a full harem of fox women are surrounding you, flaunting their assets. Before you can defend yourself they all pounce on you attacking you in all sensual ways possible. You break out of the insidious daydream just in time to see the real fox about to disarm and rape you. You shove her away still aroused by the vision.\n"
-            + "\n"
-            + "“<i>How prude! Many would kill to experience what you just saw.</i>”");
-        createStatusEffect(StatusEffects.Illusion, 0, 0, 0, 0);
-        player.takeLustDamage(20 + player.effectiveSensitivity() / 8, true);
-        statStore.addBuff("spe", 20, "KitsuneIllusion", {rate: Buff.RATE_ROUNDS, ticks: 5});
+        if (!player.hasPerk(PerkLib.TrueSeeing)) {
+            outputText("The fox cast a spell and to your utter confusion the entire scenery changes. You are naked in a bedroom and a full harem of fox women are surrounding you, flaunting their assets. Before you can defend yourself they all pounce on you attacking you in all sensual ways possible. You break out of the insidious daydream just in time to see the real fox about to disarm and rape you. You shove her away still aroused by the vision.\n"
+                + "\n"
+                + "“<i>How prude! Many would kill to experience what you just saw.</i>”");
+            createStatusEffect(StatusEffects.Illusion, 0, 0, 0, 0);
+            player.takeLustDamage(20 + player.effectiveSensitivity() / 8, true);
+            statStore.addBuff("spe", 20, "KitsuneIllusion", {rate: Buff.RATE_ROUNDS, ticks: 5});
+        } else {
+            outputText("The fox casts a spell, but your magical sight easily pierces their forming illusion!");
+        }
     }
 
     override protected function performCombatAction():void {

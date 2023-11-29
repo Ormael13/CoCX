@@ -3040,7 +3040,7 @@ import flash.utils.getQualifiedClassName;
 					player.removeStatusEffect(StatusEffects.Blind);
 				}
 				else {
-					if((statusEffectv1(StatusEffects.Sandstorm) == 0 || statusEffectv1(StatusEffects.Sandstorm) % 4 == 0) && !player.hasPerk(PerkLib.BlindImmunity)) {
+					if((statusEffectv1(StatusEffects.Sandstorm) == 0 || statusEffectv1(StatusEffects.Sandstorm) % 4 == 0) && !player.isImmuneToBlind()) {
 						player.createStatusEffect(StatusEffects.Blind,0,0,0,0);
 						outputText("<b>The sand is in your eyes!  You're blinded this turn!</b>\n\n");
 					}

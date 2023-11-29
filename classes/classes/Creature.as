@@ -3124,6 +3124,12 @@ public class Creature extends Utils
 				return true;
 			return false;
 		}
+
+		//Blind Immunity
+		public function isImmuneToBlind(): Boolean
+		{
+			return hasPerk(PerkLib.BlindImmunity) || hasPerk(PerkLib.TrueSeeing);
+		}
   
 		//check for vagoo
 		public function hasVagina():Boolean
