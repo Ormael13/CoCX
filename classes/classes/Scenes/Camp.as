@@ -3754,7 +3754,7 @@ public class Camp extends NPCAwareContent{
 		if (CoC.instance.timeQ == 0) {
 			CanDream = true;
 			model.time.minutes = 0;
-			if (player.isNightCreature() == true)
+			if (player.isNightCreature())
 			{
 				if (model.time.hours >= 6 && model.time.hours <=21)
 						CoC.instance.timeQ += 15 - model.time.hours + 7;
@@ -4979,8 +4979,14 @@ public function rebirthFromBadEnd():void {
 		var statpoints:int = 5;
 		var perkpoints:int = 1;
 		if (player.hasPerk(PerkLib.AscensionAdvTrainingX)) statpoints += player.perkv1(PerkLib.AscensionAdvTrainingX) * 4;
-		if (player.level < 1) statpoints *= 3, perkpoints *= 3;
-		if (player.level < 9) statpoints *= 2, perkpoints *= 2;
+		if (player.level < 1) {
+			statpoints *= 3;
+			perkpoints *= 3;
+		}
+		if (player.level < 9) {
+			statpoints *= 2;
+			perkpoints *= 2;
+		}
 		var output:String = "";
 		output = "Level up to increase your base stats,\nas well as gain <b>"+num2Text(statpoints,100)+"</b> stat points and <b>"+num2Text(perkpoints,100)+"</b> perk points!";
 		return output;
