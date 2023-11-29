@@ -12,7 +12,9 @@ import classes.Races;
 
 public class MinotaurTesticlesMutation extends IMutationPerkType
     {
-        private static const mName:String = "Minotaur Testicles";
+        override public function get mName():String {
+            return "Minotaur Testicles";
+        }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -35,25 +37,6 @@ public class MinotaurTesticlesMutation extends IMutationPerkType
             }
             if (descS != "")descS += ".";
             return descS;
-        }
-
-        //Name. Need it say more?
-        override public function name(params:PerkClass=null):String {
-            var sufval:String;
-            switch (currentTier(this, player)){
-                case 2:
-                    sufval = "(Primitive)";
-                    break;
-                case 3:
-                    sufval = "(Evolved)";
-                    break;
-                case 4:
-                    sufval = "(Final Form)";
-                    break;
-                default:
-                    sufval = "";
-            }
-            return mName + sufval;
         }
 
         //Mutation Requirements

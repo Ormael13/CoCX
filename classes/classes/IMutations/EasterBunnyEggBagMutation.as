@@ -12,7 +12,9 @@ import classes.Races;
 
 public class EasterBunnyEggBagMutation extends IMutationPerkType
     {
-        private static const mName:String = "Easter Bunny Egg Bag";
+        override public function get mName():String {
+            return "Easter Bunny Egg Bag";
+        }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -32,22 +34,6 @@ public class EasterBunnyEggBagMutation extends IMutationPerkType
             if (pTier >= 1) descS += " cum production";
             if (descS != "")descS += ".";
             return descS;
-        }
-
-        //Name. Need it say more?
-        override public function name(params:PerkClass=null):String {
-            var sufval:String;
-            switch (currentTier(this, player)){
-                case 2:
-                    sufval = "(Primitive)";
-                    break;
-                case 3:
-                    sufval = "(Evolved)";
-                    break;
-                default:
-                    sufval = "";
-            }
-            return mName + sufval;
         }
 
         //Mutation Requirements

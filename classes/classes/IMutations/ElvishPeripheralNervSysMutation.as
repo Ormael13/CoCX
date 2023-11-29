@@ -12,7 +12,9 @@ import classes.Races;
 
 public class ElvishPeripheralNervSysMutation extends IMutationPerkType
     {
-        private static const mName:String = "Elvish Peripheral NervSys";
+        override public function get mName():String {
+            return "Elvish Peripheral NervSys";
+        }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             pTier = (pTier == -1)? currentTier(this, player): pTier;
@@ -31,25 +33,6 @@ public class ElvishPeripheralNervSysMutation extends IMutationPerkType
             }
             if (descS != "")descS += ".";
             return descS;
-        }
-
-        //Name. Need it say more?
-        override public function name(params:PerkClass=null):String {
-            var sufval:String;
-            switch (currentTier(this, player)){
-                case 2:
-                    sufval = "(Primitive)";
-                    break;
-                case 3:
-                    sufval = "(Evolved)";
-                    break;
-                case 4:
-                    sufval = "(Final Form)";
-                    break;
-                default:
-                    sufval = "";
-            }
-            return mName + sufval;
         }
 
         override public function evolveText():String {
