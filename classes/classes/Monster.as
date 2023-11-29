@@ -2414,13 +2414,8 @@ import flash.utils.getQualifiedClassName;
 		/**
 		 * <p>attack() override series - Part 1</p>
 		 * <p>==================================</p>
-		 * <p>all fucking player melee attack nullifying (stun/fear/seal/whatever) abilities/functions goes fucking here</p>
-		 * <p>override from the fucking each monster subclasses</p>
-		 * <p>==================================</p>
-		 * <p>PS: this series is dedicated for melee attack if you want to similar shit for physical specials or whatever make a new one</p>
-		 * <p>==================================</p>
-		 * <p>PPS: I will make them eventually make another dedicated base/override functions.</p>
-		 * <p>PPPS: We need more comments in code.</p>
+		 * <p>player melee attack nullifying (stun/fear/seal/whatever) abilities/functions goes here</p>
+		 * <p>override in each monster subclasses</p>
 		 * <p>==================================</p>
 		 * <p>Combat.enemyAI() will be called and cancel the rest of the attack checks if return false</p>
 		 * <p>Default: return true (attack passed)</p>

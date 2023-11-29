@@ -40,7 +40,6 @@ import classes.Scenes.Dungeons.DemonLab.*;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Dungeons.HelDungeon.*;
 import classes.Scenes.Dungeons.RiverDungeon.TwinBosses;
-import classes.Scenes.Monsters.Goblin;
 import classes.Scenes.Monsters.Magnar;
 import classes.Scenes.Monsters.WerewolfFemale;
 import classes.Scenes.Monsters.WerewolfHuntress;
@@ -4815,7 +4814,6 @@ public class Combat extends BaseContent {
                                         && !monster.hasPerk(PerkLib.NoDodges)))
                                 && !monster.monsterIsStunned()) {
 
-                            // Yes. I am aware that naming it predodge after monster passing dodge check is hilarious
                             // Migrate akbal/shouldra/kitsune/default dodge text
                             monster.midDodge();
                             outputText("\n\n");
@@ -4827,7 +4825,6 @@ public class Combat extends BaseContent {
                                 // Almost there, probably
                                 if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) flags[kFLAGS.ATTACKS_ACCURACY] = 0;
 
-                                // Finally feral attacks AAAAAAAAAAAA
                                 //Natural weapon Full attack list
                                 if (followupAttacks && flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon()))) {
                                     IsFeralCombat = true;
@@ -4838,7 +4835,6 @@ public class Combat extends BaseContent {
                                 if (player.hasPerk(PerkLib.LightningClaw)){
                                     outputText(" The residual electricity leaves your foe's skin tingling with pleasure.");
                                 }
-                                // ITS OVEEEEEEEEER
                             }
                             // YOOOOU SHALL NOOOOOT PAAAAAAAAAASSSSSS!!!!!
                         }
