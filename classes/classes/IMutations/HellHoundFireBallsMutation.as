@@ -13,7 +13,9 @@ import classes.Races;
 
 public class HellHoundFireBallsMutation extends IMutationPerkType
     {
-        private static const mName:String = "Hellhound Fire Balls";
+        override public function get mName():String {
+            return "Hellhound Fire Balls";
+        }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -36,25 +38,6 @@ public class HellHoundFireBallsMutation extends IMutationPerkType
                 descS += "If you have the Alpha howl perk you may now forcibly recruit hellhounds into your pack equal to half the number of werewolves you may control.";
             }
             return descS;
-        }
-
-        //Name. Need it say more?
-        override public function name(params:PerkClass=null):String {
-            var sufval:String;
-            switch (currentTier(this, player)){
-                case 2:
-                    sufval = "(Primitive)";
-                    break;
-                case 3:
-                    sufval = "(Evolved)";
-                    break;
-                case 4:
-                    sufval = "(Final Form)";
-                    break;
-                default:
-                    sufval = "";
-            }
-            return mName + sufval;
         }
 
         override public function evolveText():String {

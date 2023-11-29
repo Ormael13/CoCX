@@ -11,7 +11,9 @@ import classes.Races;
 
 public class SharkOlfactorySystemMutation extends IMutationPerkType
     {
-        private static const mName:String = "Shark Olfactory System";
+        override public function get mName():String {
+            return "Shark Olfactory System";
+        }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -40,25 +42,6 @@ public class SharkOlfactorySystemMutation extends IMutationPerkType
             if (pTier >= 1) descS += " increase melee damage against bleeding enemies by " + perkCent + " %";
             if (descS != "")descS += ".";
             return descS;
-        }
-
-        //Name. Need it say more?
-        override public function name(params:PerkClass=null):String {
-            var sufval:String;
-            switch (currentTier(this, player)){
-                case 2:
-                    sufval = "(Primitive)";
-                    break;
-                case 3:
-                    sufval = "(Evolved)";
-                    break;
-                case 4:
-                    sufval = "(Final Form)";
-                    break;
-                default:
-                    sufval = "";
-            }
-            return mName + sufval;
         }
 
         //Mutation Requirements

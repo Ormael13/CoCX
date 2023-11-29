@@ -12,7 +12,9 @@ import classes.Races;
 
 public class ArigeanAssociationCortexMutation extends IMutationPerkType
     {
-        private static const mName:String = "Arigean Association Cortex";
+        override public function get mName():String {
+            return "Arigean Association Cortex";
+        }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             pTier = (pTier == -1)? currentTier(this, player): pTier;
@@ -35,25 +37,6 @@ public class ArigeanAssociationCortexMutation extends IMutationPerkType
             //if (pTier >= 4)descS += ". Heal for an amount of hit points equal to the mana cost when spending mana. Spells have a 10% increased critical chance";
             if (descS != "")descS += ".";
             return descS;
-        }
-
-        //Name. Need it say more?
-        override public function name(params:PerkClass=null):String {
-            var sufval:String;
-            switch (currentTier(this, player)){
-                case 2:
-                    sufval = "(Primitive)";
-                    break;
-                case 3:
-                    sufval = "(Evolved)";
-                    break;
-                case 4:
-                    sufval = "(Final Form)";
-                    break;
-                default:
-                    sufval = "";
-            }
-            return mName + sufval;
         }
 
         //Mutation Requirements
