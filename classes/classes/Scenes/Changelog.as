@@ -37,6 +37,8 @@ public class Changelog extends BaseContent
 			outputText("-New tier 2 intelligence lvl-up perk: High Tide. Req. Grand Mage & Channeling perks, 75+ int and any water spell or special. Effect: Cumulative 40% damage increase for every subsequent water spell. Each turn without cast water spell lower damage by 40% down to normal (100%) damage. Maximum 5 stacks.\n");
 			outputText("-New tier 3 strength lvl-up perk: Power Attack (Ex). Req. Power Attack perk. Effect: Power Attack p. special damage increased by ~2x. Add ~30% of base stat scaling value to melee damage & power attack multi factor. (+15% melee physical attacks multiplier)\n");
 			outputText("-New tier 5 intelligence lvl-up perk: High Tide (Ex). Req. High Tide & Grand Archmage perks, 150+ int. Effect: Increase to cumulative damage by 20%. Penalty for turn without casted water spell decreased by 10%. Maximum 15 stacks.\n");
+			outputText("-New tier 7 speed lvl-up perk: Power Shot (Su). Req. Power Shot (Ex). Effect: Allow to use wrath above normal maximum to calculate bonus (overwrath) and effectivness of power attack increased fourfold (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).\n");
+			outputText("-New tier 7 strength lvl-up perk: Power Attack (Su). Req. Power Attack (Ex) perk. Effect: Allow to use wrath above normal maximum to calculate bonus (overwrath) and effectivness of power shot increased fourfold (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).\n");
 			outputText("-New tier 9 intelligence lvl-up perk: High Tide (Su). Req. High Tide (Ex) & Grand Archmage (3rd circle) perks, 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling water based attack. Penalty for turn without casted water spell decreased by another 10%. Maximum 75 stacks.\n");
 			outputText("-New mutation perk: Arigean Association Cortex. Req. having free nerv system mutation slot, arigean race. Effects: Overtime your way of thinking has changed to be more alike to that of an Arigean. Charged shot, Mana shot and Mana Barrage all deal 20% more damage.\n");
 			outputText("-New mutation perk: Slime Fluid. Req. having free bloodsteam mutation slot, one of slime races. Effects: Your bodily fluids are self conscious and do not leave you easily. All bleed damage taken is negated.\n");
@@ -70,6 +72,11 @@ public class Changelog extends BaseContent
 			outputText("-Power Attack and Power Shot used when wrath is over 100% would only drain 100% of wrath (that could only happen if PC have any source of overMax Wrath).\n");
 			outputText("-Added to Elemental Bolt req. for one of perks High Tide perk.\n");
 			outputText("-Necromancer minions base damage increased 3x and added Soulskill Effect Multiplier to them.\n");
+			outputText("-Power Shot effects changed to: Enable Power Shot p. special. Add ~20% of base stat scaling value to range (not for firearms) damage. Power Shot (Ex) effects changed to: Power Shot p. special damage increased by ~2x. Add ~30% of base stat scaling value to range (not for firearms) damage & power attack multi factor. Range physical attacks multiplier increased not changed for both perks.\n");
+			outputText("-Bows/Crossbows/Throwing range weapons base dmg scaling been changed and specials using those weapons also use that new scaling. Spe (x2) + Str (x1) for bows, Spe (x2) + range weapon atk (x20) for crossbows, Spe (x1) + Str (x2) for throwing weapons.\n");
+			outputText("-Added snow white & midnight black colors to demon skin choices when using tf item.\n");
+			outputText("-Demon score req. changed from 11/16 to 15/21 with change to stat bonuses (other bonuses like max resource bar changes are the same): +25%/65% to spe multi, +50%/70% to int multi, +150%/200% to lib multi, +0/20 to sens. Req. of Phylactery perk for 2nd tier of race bonuses been replaced with req. of Soulless perk.\n");
+			outputText("-Goo type enemies gained immunity to bleed effects.\n");
 			outputText("-Various minor corections/bugfixes.\n");
 			outputText("-Fix some attack and ability scaling of unarmed Dao instead of feral Dao otherwise changed Feral itherative to properly use unarmed strike new damage calculation formulae. (Liadri)\n");
 			outputText("-Small bugfix from parser being checked even without being valid. (Jtecx)\n");
@@ -90,12 +97,7 @@ public class Changelog extends BaseContent
 			//outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
 			//outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
 			outputText("-Fixed a problem where arigean legs sprite were doing a hostile takeover of people's legs. Also Grayda NPC sprite implementation. Implemented arigean aura(s), and added Sylabt's edits/improvements to my arigean sprites. (Lord Shadeogorath)\n");
-			outputText("-Power Shot effects changed to: Enable Power Shot p. special. Add ~20% of base stat scaling value to range (not for firearms) damage. Power Shot (Ex) effects changed to: Power Shot p. special damage increased by ~2x. Add ~30% of base stat scaling value to range (not for firearms) damage & power attack multi factor. Range physical attacks multiplier increased not changed for both perks.\n");
-			outputText("-Bows/Crossbows/Throwing range weapons base dmg scaling been changed and specials using those weapons also use that new scaling. Spe (x2) + Str (x1) for bows, Spe (x2) + range weapon atk (x20) for crossbows, Spe (x1) + Str (x2) for throwing weapons.\n");
-			outputText("-Added snow white & midnight black colors to demon skin choices when using tf item.\n");
 			outputText("-New bodyparts: Demonic Graceful Feet, Demonic clawed hands, Demon face, Demon Eyes (& demon eye colors) (all of those bodyparts from Demon TF); Arigean Tail (Red), Arigean Aura (Red) (all of those bodyparts from Arigean Quests); Deer Arms (from Deer TF (Golden Rind))\n");
-			outputText("-Demon score req. changed from 11/16 to 15/21 with change to stat bonuses (other bonuses like max resource bar changes are the same): +25%/65% to spe multi, +50%/70% to int multi, +150%/200% to lib multi, +0/20 to sens. Req. of Phylactery perk for 2nd tier of race bonuses been replaced with req. of Soulless perk.\n");
-			outputText("-Goo type enemies gained immunity to bleed effects.\n");
 			outputText("-When having Familiar perk and exploring at night PC can encounter human npc, whcich could be turned into ghoul servant.\n");
 			outputText("-Ghoulish Vampire Servant would move in to camp to server PC as long pc is tier 2 vampire or dracula. It can assist in combat never been lazy to not do anything outside first turn it prepare to fight alongside PC. It can also help in combat help pc by stealing health, soulforce or even filling vampire thirst stack during it attacks.\n");
 			outputText("-Ground for Succubus tatoo and fix a bug or two in viewer code. (Liadri)\n");
@@ -115,8 +117,6 @@ public class Changelog extends BaseContent
 			outputText("-New tier 6 misc lvl-up perk: Greater Metabolization. Req. Improved Metabolization perk; Slime, Manticore, Displacer beast, Vampire, Dracula race or hunger enabled. Effect: Increase the duration of lingering nourishment effects by another 100% of base duration. And slows hunger progression even further if any(note does not raise racial scores).\n");
 			outputText("-Electra and Etna can now no longer be converted to Wood Elves. Fixed Glitch where consuming Phouka Whiskey caused large libido gains upon wearing off. (Demojay)\n");
 			outputText("-Feeding Euphoria and Milking Euphoria speed bonus would be now based on speed value rather then been speed multi bonus.\n");
-			outputText("-New tier 7 speed lvl-up perk: Power Shot (Su). Req. Power Shot (Ex). Effect: Allow to use wrath above normal maximum to calculate bonus (overwrath) and effectivness of power attack increased fourfold (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).\n");
-			outputText("-New tier 7 strength lvl-up perk: Power Attack (Su). Req. Power Attack (Ex) perk. Effect: Allow to use wrath above normal maximum to calculate bonus (overwrath) and effectivness of power shot increased fourfold (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).\n");
 			//8.11
 			outputText("-Changed manaShieldAbsorb function. (NUZ/Shirane)\n");
 			outputText("-Goblin mech code changes. Fixed text formatting errors for shooting from a goblin mech. Mech melee damage now scales from int. Mech melee attacks gain weapon experience and weapon procs when using mech weapons. (Demojay)\n");
@@ -130,9 +130,9 @@ public class Changelog extends BaseContent
 			outputText("-Converted use of perks for determining ranged multi attack to use Dao mastery instead. (Demojay)\n");
 			outputText("-Fixed damage functions error associated with throwing weapons and bow damage. Bonuses and references previously referring to redundant perks redirected to use Dao mastery instead. (Demojay)\n");
 			outputText("-Name of second tier of mouse/hinezumi race was changed to fire mouse.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Some small fixes. Imutations code minor rework. (jfmherokiller)\n");
+			outputText("-Fixed bug where Blind could not be used on Draculina to dispel her darkness. The TrueSeeing Perk now negates enemy invisibility, blindness and illusions. Human racial score bonuses can now be seen even when not a human. (Demojay)\n");
+			outputText("-Extend player.takedamage function (Adding an optional hitnumber parameters) + Feral Attack Optimization(?) + attack() Optimization. (NUZ/Shirane)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -144,6 +144,14 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay) (NUZ/Shirane)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Telekinetic Grasp have unlimited powe... duration, 'Elite/Champion/Boss HP bonus' setting, Monsters HP (and Soulforce/Mana) not decreasing on turn end when any effect lowering it, Rathazul keep trying cure Belisa after Nadia done it, Vouivre Oil replacing dragon ears with snake ears & dragon scales with snake scales, Tyrantia & Flitzi forest scene allowing to skip ");
@@ -204,7 +212,11 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -231,6 +243,8 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

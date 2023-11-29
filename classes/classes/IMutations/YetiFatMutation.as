@@ -34,22 +34,6 @@ public class YetiFatMutation extends IMutationPerkType
             return descS;
         }
 
-        //Name. Need it say more?
-        override public function name(params:PerkClass=null):String {
-            var sufval:String;
-            switch (currentTier(this, player)){
-                case 2:
-                    sufval = "(Primitive)";
-                    break;
-                case 3:
-                    sufval = "(Evolved)";
-                    break;
-                default:
-                    sufval = "";
-            }
-            return mName + sufval;
-        }
-
         //Mutation Requirements
         override public function pReqs(pCheck:int = -1):void{
             try{
