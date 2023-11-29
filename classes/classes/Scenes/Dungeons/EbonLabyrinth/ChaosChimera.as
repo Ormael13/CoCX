@@ -126,7 +126,17 @@ use namespace CoC;
 			damage = Math.round(damage);
 			damage = player.takePhysDamage(damage, true);
 		}
-		
+
+		override public function preAttackSeal():Boolean
+		{
+			if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 0) {
+				outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Curse have made normal melee attacks impossible!  Maybe you could try something else?\n\n");
+				// enemyAI();
+				return false;
+			}
+			else return true;
+		}
+
 		override protected function performCombatAction():void
 		{
 			if (hasStatusEffect(StatusEffects.Flying) && statusEffectv1(StatusEffects.Flying) <= 1) {

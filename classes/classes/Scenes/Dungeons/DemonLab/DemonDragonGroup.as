@@ -116,6 +116,11 @@ public class DemonDragonGroup extends Monster {
         }
     }
 
+    override public function midAttackSeal():Boolean{
+        meleeResponse();
+        return true;
+    }
+
     override protected function performCombatAction():void {
         var choice0:Number = rand(2);
         switch (rand(3)) {

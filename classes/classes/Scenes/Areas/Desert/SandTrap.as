@@ -77,6 +77,14 @@ public class SandTrap extends Monster
 			}
 		}
 
+		override public function preAttack():void{
+			if (hasStatusEffect(StatusEffects.Level)){
+				// remove firstAttack flag since player cant get them anyway and urta is never going to meet this shit
+				outputText("It's all or nothing!  With a bellowing cry you charge down the treacherous slope and smite the sandtrap as hard as you can!  ");
+				trapLevel(-4);
+			}
+		}
+
 		override protected function performCombatAction():void
 		{
 			if (hasStatusEffect(StatusEffects.Level)) {

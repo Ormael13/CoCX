@@ -11,7 +11,15 @@ import classes.internals.WeightedDrop;
 
 public class FrostGiant extends Monster
 	{
-		
+
+		override public function midAttackSeal():Boolean{
+			if (player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+				giantBoulderHit(0);
+				return false;
+			}
+			else return true;
+		}
+
 		override public function interceptPlayerAbility(ability:CombatAbility):Boolean {
 			if (player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 				if (ability is AbstractSpell) {

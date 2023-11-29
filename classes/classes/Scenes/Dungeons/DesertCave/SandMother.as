@@ -10,6 +10,15 @@ public class SandMother extends Monster
 		//Notes:
 		//Starts combat with sandstorm.  GigaFire's every fifth round.
 		//Whispers every fourth.
+
+		override public function postDodge():Boolean{
+			if (hasStatusEffect(StatusEffects.Earthshield) && rand(4) == 0) {
+				outputText("Your strike is deflected by the wall of sand, dirt, and rock!  Damn!\n\n");
+				// Remove first attack shit
+				return false;
+			}
+			else return true;
+		}
 		override protected function performCombatAction():void {
 			if(!hasStatusEffect(StatusEffects.Sandstorm)) {
 				sandStormAttack();

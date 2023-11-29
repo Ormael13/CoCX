@@ -75,6 +75,16 @@ public class Combat extends BaseContent {
     public var MSGControll:Boolean = false; // need to correctly display damage MSG
     public var MSGControllForEvasion:Boolean = false; // need to correctly display damage MSG. This way as i use it game will show just first damage msg.
 
+    // Following is reused variables throughout the multiple feral attack function calls
+    // E.N.W.A, kinda sounds like something out of Tolkein/Lord of the Ring
+    public var enwa_accMelee:Number = 0;
+    public var enwa_damage:Number = 0;
+    public var enwa_critChance:int = 5;
+    public var enwa_lustClawDamage:Number = 6;
+    public var enwa_lustMultiplier:Number = 1;
+    public var enwa_lustCritChance:Number = 5;
+    public var enwa_lustPostMulti:Number = 1;
+
     public static const NONE:int = 0;
     public static const AIR:int = 1;
     public static const EARTH:int = 2;
@@ -4751,158 +4761,98 @@ public class Combat extends BaseContent {
     public function attack(followupAttacks:Boolean = true):void {
         var IsFeralCombat:Boolean = false;
         flags[kFLAGS.LAST_ATTACK_TYPE] = LAST_ATTACK_PHYS;
-        if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 0) {
-            outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  ");
-            if (monster is ChaosChimera) outputText("Curse");
-            else outputText("The kitsune's seals");
-            outputText(" have made normal melee attacks impossible!  Maybe you could try something else?\n\n");
-            enemyAI();
-            return;
-        }
-        if (player.hasStatusEffect(StatusEffects.Sealed2) && player.statusEffectv2(StatusEffects.Sealed2) == 0) {
-            outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Recent enemy attack have made normal melee attacks impossible!  Maybe you could try something else?\n\n");
-            enemyAI();
-            return;
-        }
-        if (flags[kFLAGS.PC_FETISH] >= 3 && !SceneLib.urtaQuest.isUrta()) {
-            outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Ceraph's piercings have made normal melee attacks impossible!  Maybe you could try something else?\n\n");
-            enemyAI();
-            return;
-        }
-		if (checkConcentration()) return; //Amily concentration
-        if (monster.hasStatusEffect(StatusEffects.Level) && !player.hasStatusEffect(StatusEffects.FirstAttack)) {
-            if (monster is SandTrap) {
-                outputText("It's all or nothing!  With a bellowing cry you charge down the treacherous slope and smite the sandtrap as hard as you can!  ");
-                (monster as SandTrap).trapLevel(-4);
+
+        // migrate kitsune's(and their retarded cousins that does not use extend Kitsune)/chaos chimera's Seal check
+        // kitsune/yamata/chaos chimera/kitsuneancestor/kitsuneelder/aiko
+        // migrate knife ears that uses StatusEffects.Seal2
+        // woodelveshuntingparty/darkelf/lightelf
+        // migrate amily concentration check
+        if(monster.preAttackSeal()){
+            // Fetish pacifism stays for now until someone gets a better idea
+            if (flags[kFLAGS.PC_FETISH] >= 3 && !SceneLib.urtaQuest.isUrta()) {
+                outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Ceraph's piercings have made normal melee attacks impossible!  Maybe you could try something else?\n\n");
             }
-            if (monster is Alraune) {
-                outputText("It’s all or nothing!  If this leafy woman is so keen on pulling you in, you will let her do just that!  You use her own strength against her, using it to increase your momentum as you leap towards her and smash into her with your weapon!  ");
-                (monster as Alraune).trapLevel(-6);
-            }
-        }
-        //"Brawler perk". Urta only. Thanks to Fenoxo for pointing this out... Even though that should have been obvious :<
-        //Urta has fists and the Brawler perk. Don't check for that because Urta can't drop her fists or lose the perk!
-        else if (SceneLib.urtaQuest.isUrta()) {
-            if (player.hasStatusEffect(StatusEffects.FirstAttack)) {
-                player.removeStatusEffect(StatusEffects.FirstAttack);
-            } else {
-                player.createStatusEffect(StatusEffects.FirstAttack, 0, 0, 0, 0);
-                outputText("Utilizing your skills as a bareknuckle brawler, you make two attacks!\n");
-            }
-        }
-        //Blind
-        if (player.playerIsBlinded()) {
-            outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
-        }
-        if (monster is Basilisk && !player.hasPerk(PerkLib.BasiliskResistance)) {
-            if (monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind))
-                outputText("The Blind basilisk can't use his eyes, so you can actually aim your strikes!  ");
-            //basilisk counter attack (block attack, significant speed loss):
-            else if (player.inte / 5 + rand(20) < 25) {
-                outputText("Holding the basilisk in your peripheral vision, you charge forward to strike it.  Before the moment of impact, the reptile shifts its posture, dodging and flowing backward skillfully with your movements, trying to make eye contact with you. You find yourself staring directly into the basilisk's face!  Quickly you snap your eyes shut and recoil backwards, swinging madly at the lizard to force it back, but the damage has been done; you can see the terrible grey eyes behind your closed lids, and you feel a great weight settle on your bones as it becomes harder to move.");
-                player.addCombatBuff('spe', -20,"Basilisk Gaze","BasiliskGaze");
-                player.removeStatusEffect(StatusEffects.FirstAttack);
-                combatRoundOver();
-                flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 2;
-                return;
-            }
-            //Counter attack fails: (random chance if PC int > 50 spd > 60; PC takes small physical damage but no block or spd penalty)
-            else {
-                outputText("Holding the basilisk in your peripheral vision, you charge forward to strike it.  Before the moment of impact, the reptile shifts its posture, dodging and flowing backward skillfully with your movements, trying to make eye contact with you. You twist unexpectedly, bringing your [weapon] up at an oblique angle; the basilisk doesn't anticipate this attack!  ");
-            }
-        }
-        if (monster is DemonDragonGroup) {
-            (monster as DemonDragonGroup).meleeResponse();
-            if (player.HP <= player.minHP()) {
-                doNext(endHpLoss);
-                return;
-            }
-            //doesn't interrupt the attack
-        }
-        if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-            if (monster is FrostGiant) (monster as FrostGiant).giantBoulderHit(0);
-            else                       (monster as YoungFrostGiant).youngGiantBoulderHit(0);
-            enemyAI();
-            return;
-        }
-        //Worms are special
-        if (monster is WormMass) {
-            //50% chance of hit (int boost)
-            if (rand(100) + player.inte / 3 >= 50) {
-                var dam:int = int(player.str / 5 - rand(5));
-                if (dam == 0) dam = 1;
-                outputText("You strike at the amalgamation, crushing countless worms into goo, dealing <b>[font-damage]" + dam + "[/font]</b> damage.\n\n");
-                monster.HP -= dam;
-                if (monster.HP <= monster.minHP()) {
-                    doNext(endHpVictory);
-                    return;
-                }
-            }
-            //Fail
-            else {
-                outputText("You attempt to crush the worms with your reprisal, only to have the collective move its individual members, creating a void at the point of impact, leaving you to attack only empty air.\n\n");
-            }
-            if (player.hasStatusEffect(StatusEffects.FirstAttack)) {
-                attack();
-                return;
-            }
-            enemyAI();
-            return;
-        }
-        //Incubus Scientist
-        if (monster is IncubusScientist && (monster as IncubusScientist).ShieldHits > 0) {
-            (monster as IncubusScientist).ShieldsHitMelee();
-            enemyAI();
-            return;
-        }
-        //Determine if dodged!
-        if (((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges))) && !monster.monsterIsStunned()) {
-            //Akbal dodges special education
-            if (monster is Akbal) outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
-            else if (monster is Shouldra) outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your [weapon] against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your [weapon] as if betrayed.\n");
-            else if (monster is Kitsune) {
-                //Player Miss:
-                outputText("You swing your [weapon] ferociously, confident that you can strike a crushing blow.  To your surprise, you stumble awkwardly as the attack passes straight through her - a mirage!  You curse as you hear a giggle behind you, turning to face her once again.\n\n");
-            } else {
-                if (player.weapon is HuntsmansCane && rand(2) == 0) {
-                    if (rand(2) == 0) outputText("You slice through the air with your cane, completely missing your enemy.");
-                    else outputText("You lunge at your enemy with the cane.  It glows with a golden light but fails to actually hit anything.");
-                }
-                if (!MSGControll) {
-                    if (monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids your attack!");
-                    if (monster.spe - player.spe >= 8 && monster.spe - player.spe < 20) outputText("[Themonster] dodges your attack with superior speed!");
-                    if (monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your attack.");
-                }
-                outputText("\n");
+            // I hate urta flag checks honestly cant we just make urta's dedicated melee function after this uh
+            //"Brawler perk". Urta only. Thanks to Fenoxo for pointing this out... Even though that should have been obvious :<
+            //Urta has fists and the Brawler perk. Don't check for that because Urta can't drop her fists or lose the perk!
+            else if (SceneLib.urtaQuest.isUrta()) {
                 if (player.hasStatusEffect(StatusEffects.FirstAttack)) {
-                    attack();
-                    return;
-                } else outputText("\n");
+                    player.removeStatusEffect(StatusEffects.FirstAttack);
+                } else {
+                    player.createStatusEffect(StatusEffects.FirstAttack, 0, 0, 0, 0);
+                    outputText("Utilizing your skills as a bareknuckle brawler, you make two attacks!\n");
+                }
             }
-            enemyAI();
-            return;
+            else{
+                // migrate alruine/sandtrap flavor text and trap level changes
+                monster.preAttack();
+
+                //Blind
+                if (player.playerIsBlinded()) {
+                    outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
+                }
+
+                // Migrate basilisk blind check
+                // Gimmick now way easier to implement if any fucker want to use it kekvv
+                if(monster.midAttackSkip()){
+                    // Migrate demondragonGroup meleeresponse()
+                    // Migrate frost giant boulder check. Every single one of them. And not just a giant, but the giants and the children too!
+                    // Migrate worm. Worm is so special they can skip the rest of your shit (first attack guaranteed then call enemyAI() and end)
+                    // Migrate Incubus Scientist ShieldHits checks and ShieldsHitMelee()
+                    if(monster.midAttackSeal()){
+                        // rest of the attack here
+
+                        if (player.HP <= player.minHP()) {
+                            doNext(endHpLoss);
+                            return;
+                        }
+
+                        // Check if player missed
+                        // enemyAI() should still be called in the end
+                        if (((player.playerIsBlinded() && rand(2) == 0)
+                                || (monster.getEvasionRoll(false, player.spe)
+                                        && !monster.hasPerk(PerkLib.NoDodges)))
+                                && !monster.monsterIsStunned()) {
+
+                            // Migrate akbal/shouldra/kitsune/default dodge text
+                            monster.midDodge();
+                            outputText("\n\n");
+                        }
+                        else{
+                            // Congratulations, you hit it
+                            // Oh wait sandmother can block shit (Earthshield Statuseffects only used by her)
+                            if(monster.postDodge()){
+                                // Almost there, probably
+                                if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) flags[kFLAGS.ATTACKS_ACCURACY] = 0;
+
+                                //Natural weapon Full attack list
+                                if (followupAttacks && flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon()))) {
+                                    IsFeralCombat = true;
+                                    resolveFeralCombatAdditionnalAttacks();
+                                }
+                                // Do all other attacks
+                                meleeDamageAcc(IsFeralCombat);
+                                if (player.hasPerk(PerkLib.LightningClaw)){
+                                    outputText(" The residual electricity leaves your foe's skin tingling with pleasure.");
+                                }
+                            }
+                            // YOOOOU SHALL NOOOOOT PAAAAAAAAAASSSSSS!!!!!
+                        }
+                    }
+                }
+                else{
+                    combatRoundOver();
+                    return;
+                }
+
+            }
         }
+
+        // This should be the end ideally probably
+        enemyAI();
+
+        //Determine if dodged!
         //BLOCKED ATTACK:
-        if (monster.hasStatusEffect(StatusEffects.Earthshield) && rand(4) == 0) {
-            outputText("Your strike is deflected by the wall of sand, dirt, and rock!  Damn!\n");
-            if (player.hasStatusEffect(StatusEffects.FirstAttack)) {
-                attack();
-                return;
-            } else outputText("\n");
-            enemyAI();
-            return;
-        }
-        if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) flags[kFLAGS.ATTACKS_ACCURACY] = 0;
-        //Natural weapon Full attack list
-        if (followupAttacks && flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon()))) {
-            IsFeralCombat = true;
-            resolveFeralCombatAdditionnalAttacks();
-        }
-        // Do all other attacks
-        meleeDamageAcc(IsFeralCombat);
-        if (player.hasPerk(PerkLib.LightningClaw)){
-            outputText(" The residual electricity leaves your foe's skin tingling with pleasure.");
-        }
     }
 
     /**
@@ -4920,6 +4870,7 @@ public class Combat extends BaseContent {
      * 11. TENTACLE TIME!!!
      */
     public function resolveFeralCombatAdditionnalAttacks():void {
+        ExtraNaturalWeaponPrep();
         //DOING BITE ATTACKS
         if (player.hasABiteAttack()) {
             var biteMultiplier:Number = 0.5;
@@ -5004,6 +4955,7 @@ public class Combat extends BaseContent {
                 }
             }
             outputText(".");
+
             if (player.hasPerk(PerkLib.HellfireCoat)) ExtraNaturalWeaponAttack(biteMultiplier, "fire");
             else if (player.statStore.hasBuff("FoxflamePelt")) ExtraNaturalWeaponAttack(biteMultiplier, "foxflame");
 			ExtraNaturalWeaponAttack(biteMultiplier);
@@ -7134,28 +7086,100 @@ public class Combat extends BaseContent {
         if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()) damage *= 2;
         return damage;
     }
+    /**
+     * Call to initialize variables for feral attacks before calling them
+     */
+    public function ExtraNaturalWeaponPrep():void{
+        enwa_accMelee = 0;
+        enwa_accMelee += (meleeAccuracy() / 2);
+        if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) enwa_accMelee -= flags[kFLAGS.ATTACKS_ACCURACY];
 
+        enwa_damage = meleeDamageNoLagSingle(true);
+        //Bonus sand trap damage!
+        // I will genocide you all monster checks later
+        if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) enwa_damage = Math.round(enwa_damage * 1.75);
+
+        if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)){
+            enwa_critChance = 0;
+        }
+        else{
+            enwa_critChance = 5;
+            enwa_critChance += combatPhysicalCritical();
+        }
+
+        enwa_lustClawDamage = 6;
+        if (player.hasPerk(PerkLib.SensualLover)) enwa_lustClawDamage += 2;
+        if (player.hasPerk(PerkLib.Seduction)) enwa_lustClawDamage += 5;
+
+        if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) enwa_lustClawDamage += 5;
+        if (player.hasPerk(PerkLib.FlawlessBody)) enwa_lustClawDamage += 10;
+
+        //partial skins bonuses
+        switch (player.coatType()) {
+            case Skin.FUR:
+                enwa_lustClawDamage += (1 + player.newGamePlusMod());
+                break;
+            case Skin.SCALES:
+                enwa_lustClawDamage += (2 * (1 + player.newGamePlusMod()));
+                break;
+            case Skin.CHITIN:
+                enwa_lustClawDamage += (3 * (1 + player.newGamePlusMod()));
+                break;
+            case Skin.BARK:
+                enwa_lustClawDamage += (4 * (1 + player.newGamePlusMod()));
+                break;
+        }
+
+        enwa_lustMultiplier = 1;
+        if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) enwa_lustMultiplier = combat.historyWhoreBonus();
+
+        if (player.armorName == "desert naga pink and black silk dress") enwa_lustMultiplier += 0.1;
+        if (player.headjewelryName == "pair of Golden Naga Hairpins") enwa_lustMultiplier += 0.1;
+        if (player.perkv1(IMutationsLib.RaijuCathodeIM) >= 1) enwa_lustMultiplier += 0.5;
+        if (player.perkv1(IMutationsLib.RaijuCathodeIM) >= 2) enwa_lustMultiplier += 0.5;
+        if (player.perkv1(IMutationsLib.RaijuCathodeIM) >= 3) enwa_lustMultiplier += 1;
+
+        if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)){
+            enwa_lustCritChance = 0;
+        }
+        else{
+            enwa_lustCritChance = 5;
+
+            if (player.hasPerk(PerkLib.CriticalPerformance)) {
+                if (player.lib <= 100) enwa_lustCritChance += player.lib / 5;
+                if (player.lib > 100) enwa_lustCritChance += 20;
+            }
+        }
+
+        enwa_lustPostMulti = 1;
+        if (player.hasPerk(PerkLib.ChiReflowLust)) enwa_lustPostMulti *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
+        if (player.hasPerk(PerkLib.RacialParagon)) enwa_lustPostMulti *= RacialParagonAbilityBoost();
+        if (player.armor == armors.ELFDRES && player.isElf()) enwa_lustPostMulti *= 2;
+        if (player.armor == armors.FMDRESS && player.isWoodElf()) enwa_lustPostMulti *= 2;
+    }
+
+    /**
+     * Remember to call ExtraNaturalWeaponPrep() at the beginning of all ExtraNaturalWeaponAttack call if you want to add it outside resolveFeralCombatAdditionnalAttacks() e.g. see devastatingBiteAttack() physical special
+     * @param FeraldamageMultiplier
+     * @param SpecialEffect
+     * @param isClawAttack
+     */
     public function ExtraNaturalWeaponAttack(FeraldamageMultiplier:Number = 1, SpecialEffect:String = "", isClawAttack:Boolean = false):void {
-        var accMelee:Number = 0;
-        accMelee += (meleeAccuracy() / 2);
-        if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) accMelee -= flags[kFLAGS.ATTACKS_ACCURACY];
+        var accMelee:Number = enwa_accMelee;
+
         if (rand(100) < accMelee) {
-            var damage:Number = 0;
+            var damage:Number = enwa_damage;
             //------------
             // DAMAGE
             //------------
-            //Determine damage
-            damage = meleeDamageNoLagSingle(true);
-            //Bonus sand trap damage!
-            if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) damage = Math.round(damage * 1.75);
             //Determine if critical hit!
             var crit:Boolean = false;
-            var critChance:int = 5;
+            var critChance:int = enwa_critChance;
             var critDamage:Number = 1.75;
-            critChance += combatPhysicalCritical();
+
 			critDamage += bonusCriticalDamageFromMissingHP();
             if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) critDamage *= impaleMultiplier();
-			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+
 			if (rand(100) < critChance) {
                 crit = true;
                 if (player.perkv1(IMutationsLib.EyeOfTheTigerIM) >= 3) {
@@ -7172,13 +7196,17 @@ public class Combat extends BaseContent {
             }
             //One final round
             damage = Math.round(damage);
-            if (SpecialEffect == "KamaitachiScythe"){
-                if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,(CalcBaseDamageUnarmed()/2)*BleedDamageBoost(),0,0,0);
-                else monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, (CalcBaseDamageUnarmed()/2)*BleedDamageBoost());
-            }
-            if (SpecialEffect == "WendigoClaw"){
-                monster.addCurse("tou.mult",0.05,2);
-                monster.addCurse("str.mult",0.05,2);
+            // switch statement is slightly faster than if
+            switch(SpecialEffect){
+                case "KamaitachiScythe":
+                    if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,(CalcBaseDamageUnarmed()/2)*BleedDamageBoost(),0,0,0);
+                    else monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, (CalcBaseDamageUnarmed()/2)*BleedDamageBoost());
+                    break;
+                case "WendigoClaw":
+                    monster.addCurse("tou.mult",0.05,2);
+                    monster.addCurse("str.mult",0.05,2);
+                    break;
+                default:
             }
             // Have to put it before doDamage, because doDamage applies the change, as well as status effects and shit.
             if (monster is Doppleganger) {
@@ -7216,71 +7244,51 @@ public class Combat extends BaseContent {
                 //Damage is delivered HERE
                 damage *= FeraldamageMultiplier;
 				if (BelisaFollower.HolyBand6 > 0) damage *= 1.25;
-				if (SpecialEffect == "fire") doFireDamage(damage, true, true);
-				else if (SpecialEffect == "foxflame") {
-					doFireDamage((damage * 2), true, true);
-					monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
-				}
-				else if (SpecialEffect == "ice") doIceDamage(damage, true, true);
-				else if (SpecialEffect == "lightning") doLightingDamage(damage, true, true);
-				else if (SpecialEffect == "darkness") doDarknessDamage(damage, true, true);
-				else if (SpecialEffect == "acid") doAcidDamage(damage, true, true);
-                else doPhysicalDamage(damage, true, true);
+                switch(SpecialEffect){
+                    case "fire":
+                        doFireDamage(damage, true, true);
+                        break;
+                    case "foxflame":
+                        doFireDamage((damage * 2), true, true);
+                        monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
+                        break;
+                    case "ice":
+                        doIceDamage(damage, true, true);
+                        break;
+                    case "lightning":
+                        doLightingDamage(damage, true, true);
+                        break;
+                    case "darkness":
+                        doDarknessDamage(damage, true, true);
+                        break;
+                    case "acid":
+                        doAcidDamage(damage, true, true);
+                        break;
+                    default:
+                        doPhysicalDamage(damage, true, true);
+                } // Below down here are just for lust damage dont be confused by The Enemy I mean the damage variable
                 if (player.hasPerk(PerkLib.LightningClaw)) {
-                    damage = 6 + rand(3);
-                    if (player.hasPerk(PerkLib.SensualLover)) damage += 2;
-                    if (player.hasPerk(PerkLib.Seduction)) damage += 5;
+                    damage = enwa_lustClawDamage + rand(3);
                     //+ slutty armor bonus
                     damage += player.teaseDmgStat.value;
-                    if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) damage += 5;
-                    if (player.hasPerk(PerkLib.FlawlessBody)) damage += 10;
                     damage += scalingBonusLibido() * 0.1;
                     if (player.hasPerk(PerkLib.JobSeducer)) damage += player.teaseLevel * 3;
                     else damage += player.teaseLevel * 2;
-                    //partial skins bonuses
-                    switch (player.coatType()) {
-                        case Skin.FUR:
-                            damage += (1 + player.newGamePlusMod());
-                            break;
-                        case Skin.SCALES:
-                            damage += (2 * (1 + player.newGamePlusMod()));
-                            break;
-                        case Skin.CHITIN:
-                            damage += (3 * (1 + player.newGamePlusMod()));
-                            break;
-                        case Skin.BARK:
-                            damage += (4 * (1 + player.newGamePlusMod()));
-                            break;
-                    }
                     //slutty simplicity bonus
                     if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemTags.A_REVEALING)) damage *= (1 + ((10 + rand(11)) / 100));
                     damage *= .7;
-                    var damagemultiplier:Number = 1;
+                    var damagemultiplier:Number = enwa_lustMultiplier;
                     if (player.hasPerk(PerkLib.ElectrifiedDesire)) damagemultiplier += player.lust100 * 0.01;
-                    if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();
                     if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
-                    if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
-                    if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
-                    if (player.perkv1(IMutationsLib.RaijuCathodeIM) >= 1) damagemultiplier += 0.5;
-                    if (player.perkv1(IMutationsLib.RaijuCathodeIM) >= 2) damagemultiplier += 0.5;
-                    if (player.perkv1(IMutationsLib.RaijuCathodeIM) >= 3) damagemultiplier += 1;
                     damage *= damagemultiplier;
                     //Determine if critical tease!
                     var crit1:Boolean = false;
-                    var critChance1:int = 5;
-                    if (player.hasPerk(PerkLib.CriticalPerformance)) {
-                        if (player.lib <= 100) critChance1 += player.lib / 5;
-                        if (player.lib > 100) critChance1 += 20;
-                    }
-                    if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance1 = 0;
+                    var critChance1:int = enwa_lustCritChance;
                     if (rand(100) < critChance1) {
                         crit1 = true;
                         damage *= 1.75;
                     }
-                    if (player.hasPerk(PerkLib.ChiReflowLust)) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
-                    if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
-                    if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
-                    if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
+                    damage *= enwa_lustPostMulti;
                     damage = damage * 0.33 * monster.lustVuln;
                     damage = Math.round(damage);
                     monster.teased(damage,false);

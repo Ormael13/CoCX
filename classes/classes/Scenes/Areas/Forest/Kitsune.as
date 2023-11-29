@@ -164,6 +164,19 @@ public class Kitsune extends Monster
 			player.takeLustDamage(5 + player.effectiveSensitivity() / 7, true);
 		}
 
+	override public function preAttackSeal():Boolean
+	{
+		if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 0) {
+			outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  The kitsune's seals have made normal melee attacks impossible!  Maybe you could try something else?\n\n");
+			// enemyAI();
+			return false;
+		}
+		else return true;
+	}
+
+	override public function midDodge():void{
+		outputText("You swing your [weapon] ferociously, confident that you can strike a crushing blow.  To your surprise, you stumble awkwardly as the attack passes straight through her - a mirage!  You curse as you hear a giggle behind you, turning to face her once again.\n\n");
+	}
 		override protected function performCombatAction():void
 		{
 			var moves:Array = [foxFireAttack, foxFireAttack, kitSuneTeases, kitSuneTeases];

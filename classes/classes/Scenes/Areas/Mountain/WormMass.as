@@ -51,7 +51,15 @@ public class WormMass extends Monster
 				}
 			}
 		}
-		
+
+		override public function midAttackSeal():Boolean{
+			var dam:int = int(player.str / 5 - rand(5));
+			if (dam == 0) dam = 1;
+			outputText("You strike at the amalgamation, crushing countless worms into goo, dealing <b>[font-damage]" + dam + "[/font]</b> damage.\n\n");
+			this.HP -= dam;
+			return false;
+		}
+
 		override protected function performCombatAction():void
 		{
 			//Worms have different AI

@@ -2799,7 +2799,7 @@ use namespace CoC;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) damageMultiplier *= 3.5;
 			return damage * damageMultiplier;
 		}
-		public function takeDamage(damage:Number, damagetype:Number = 0, display:Boolean = false):Number{
+		public function takeDamage(damage:Number, damagetype:Number = 0, display:Boolean = false, hit:Number = 1):Number{
 			// Damage types:
 			// 0: phys, 1: null, 2: null, 3: null
 			// 4: magical, 5: fire, 6: ice
@@ -2807,6 +2807,7 @@ use namespace CoC;
 			// 10: wind, 11: water, 12: earth
 			damage = difficultyDamageMultiplier(damage);
 			var physTeaseDmg:Boolean = false;
+			var remainingHit:Array = [];
 			//all dmg reduction effect(s)
 			if (CoC.instance.monster.hasStatusEffect(StatusEffects.EnergyDrain)) damage *= 0.8;
 			if (hasStatusEffect(StatusEffects.GreenCovenant)) damage *= 0.25;
@@ -2817,100 +2818,236 @@ use namespace CoC;
 			// we return "1 damage received" if it is in (0..1) but deduce no HP
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
-				if (henchmanBasedInvulnerabilityFrame() || hasStatusEffect(StatusEffects.TurquoiseBandProtection)) {
-					if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-					else SceneLib.combat.triggeredTurquoiseBandProtectionTexts();
+				if (henchmanBasedInvulnerabilityFrame()) {
+					for(var i:Number = 0; i < hit; i++){
+						henchmanBasedInvulnerabilityFrameTexts();
+					}
 					damage = 0;
 				}
-				else if (hasStatusEffect(StatusEffects.ManaShield)) {
-					if (hasPerk(PerkLib.ArcaneShielding)) {
-						if (damagetype < 4) damage = manaShieldAbsorb(damage, display);
-						else damage = manaShieldAbsorbMagic(damage, display);
+				else if (hasStatusEffect(StatusEffects.TurquoiseBandProtection)){
+					for(var i:Number = 0; i < hit; i++){
+						SceneLib.combat.triggeredTurquoiseBandProtectionTexts();
 					}
-					else damage = manaShieldAbsorb(damage, display);
+					damage = 0;
 				}
-				else if (damage > 0 && hasStatusEffect(StatusEffects.BloodShield)) {
-					damage = bloodShieldAbsorb(damage, display);
+				// Resource consuming damage reduction abilities and setup array of damage number
+				var afterShieldMult:Number = 1;
+				if (hasStatusEffect(StatusEffects.AdamantineShell)) afterShieldMult = afterShieldMult * 0.25;
+				if (hasStatusEffect(StatusEffects.BoneArmor)) afterShieldMult = afterShieldMult * 0.5;
+
+				for(var i:Number = 0; i < hit; i++){
+					var shieldDamage:Number = damage;
+
+					if (hasStatusEffect(StatusEffects.ManaShield)) {
+						if (hasPerk(PerkLib.ArcaneShielding)) {
+							if (damagetype < 4) shieldDamage = manaShieldAbsorb(shieldDamage, display);
+							else shieldDamage = manaShieldAbsorbMagic(shieldDamage, display);
+						}
+						else shieldDamage = manaShieldAbsorb(shieldDamage, display);
+					}
+					else if (shieldDamage > 0 && hasStatusEffect(StatusEffects.BloodShield)) {
+						shieldDamage = bloodShieldAbsorb(shieldDamage, display);
+					}
+					if (shieldDamage > 0){
+						remainingHit.push(shieldDamage * afterShieldMult);
+					}
 				}
-				if (hasStatusEffect(StatusEffects.AdamantineShell)) damage *= 0.25;
-				if (hasStatusEffect(StatusEffects.TrueEvasion)) damage = 0;
-				if (damage > 0) {
+				// Well everything changed when the true evasion nation attacked
+				// Mana/blood shield already penalized so the rest of hits can be skipped if passed true evasion
+				if (!hasStatusEffect(StatusEffects.TrueEvasion)) {
+					var armorMod:Number = 1;
+					damage = 0;
+					hit = remainingHit.length;
+
+					// Damage is dealt here finally
 					switch (damagetype) {
 						case 0: // physical
-							if (perkv1(IMutationsLib.SlimeFluidIM) >= 3 && !isFlying() && !CoC.instance.monster.isFlying()) physTeaseDmg = true;
-							if (damagePercentArmor() > 1) damage *= (1 / damagePercentArmor());
-							damage = reducePhysDamage(damage);
-							break;
 						case 1: // physical
-							if (perkv1(IMutationsLib.SlimeFluidIM) >= 3 && !isFlying() && !CoC.instance.monster.isFlying()) physTeaseDmg = true;
-							if (damagePercentArmor() > 1) damage *= (1 / damagePercentArmor());
-							damage = reducePhysDamage(damage);
-							break;
 						case 2: // physical
-							if (perkv1(IMutationsLib.SlimeFluidIM) >= 3 && !isFlying() && !CoC.instance.monster.isFlying()) physTeaseDmg = true;
-							if (damagePercentArmor() > 1) damage *= (1 / damagePercentArmor());
-							damage = reducePhysDamage(damage);
-							break;
 						case 3: // physical
-							if (perkv1(IMutationsLib.SlimeFluidIM) >= 3 && !isFlying() && !CoC.instance.monster.isFlying()) physTeaseDmg = true;
-							if (damagePercentArmor() > 1) damage *= (1 / damagePercentArmor());
-							damage = reducePhysDamage(damage);
+							if (perkv1(IMutationsLib.SlimeFluidIM) >= 3 && !isFlying() && !CoC.instance.monster.isFlying()){
+								physTeaseDmg = true;
+								CoC.instance.monster.teased(SceneLib.combat.teases.teaseBaseLustDamage());
+							}
+							// Bookmark
+							if (damagePercentArmor() > 1){
+								armorMod = 1 / damagePercentArmor();
+							}
+							// Add damage *= armorMod
+							for(var i:Number = 0; i < remainingHit.length; i++){
+								remainingHit[i] *= armorMod;
+								remainingHit[i] = reducePhysDamage(remainingHit[i]);
+								damage += remainingHit[i];
+								if(display){
+									SceneLib.combat.CommasForDigits(remainingHit[i]);
+								}
+							}
 							break;
 						case 4: // magical
-							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
-							damage = reduceMagicDamage(damage);
+							if (damagePercentMRes() > 1){
+								armorMod = 1 / damagePercentMRes();
+							}
+							// Add damage *= armorMod
+							for(var i:Number = 0; i < remainingHit.length; i++){
+								remainingHit[i] *= armorMod;
+								remainingHit[i] = reduceMagicDamage(remainingHit[i]);
+								damage += remainingHit[i];
+								if(display){
+									SceneLib.combat.CommasForDigits(remainingHit[i]);
+								}
+							}
 							break;
 						case 5: // fire
-							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
-							if (hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage/4*3;
-							damage = reduceFireDamage(damage);
+							if (damagePercentMRes() > 1){
+								armorMod = 1 / damagePercentMRes();
+								if (hasPerk(PerkLib.WalpurgisIzaliaRobe)) armorMod = armorMod/4*3;
+							}
+							// damage *= armorMod / 4 * 3
+							for(var i:Number = 0; i < remainingHit.length; i++){
+								remainingHit[i] *= armorMod;
+								remainingHit[i] = reduceFireDamage(remainingHit[i]);
+								damage += remainingHit[i];
+								if(display){
+									SceneLib.combat.CommasForDigits(remainingHit[i]);
+								}
+							}
 							break;
 						case 6: // ice
-							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
-							damage = reduceIceDamage(damage);
+							if (damagePercentMRes() > 1){
+								armorMod = 1 / damagePercentMRes();
+							}
+							// damage *= armorMod / 4 * 3
+							for(var i:Number = 0; i < remainingHit.length; i++){
+								remainingHit[i] *= armorMod;
+								remainingHit[i] = reduceIceDamage(remainingHit[i]);
+								damage += remainingHit[i];
+								if(display){
+									SceneLib.combat.CommasForDigits(remainingHit[i]);
+								}
+							}
 							break;
 						case 7: // lightning
-							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
-							damage = reduceLightningDamage(damage);
+							if (damagePercentMRes() > 1){
+								armorMod = 1 / damagePercentMRes();
+							}
+							// damage *= armorMod / 4 * 3
+							for(var i:Number = 0; i < remainingHit.length; i++){
+								remainingHit[i] *= armorMod;
+								remainingHit[i] = reduceLightningDamage(remainingHit[i]);
+								damage += remainingHit[i];
+								if(display){
+									SceneLib.combat.CommasForDigits(remainingHit[i]);
+								}
+							}
 							break;
 						case 8: // darkness
-							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
-							damage = reduceDarknessDamage(damage);
+							if (damagePercentMRes() > 1){
+								armorMod = 1 / damagePercentMRes();
+							}
+							// damage *= armorMod / 4 * 3
+							for(var i:Number = 0; i < remainingHit.length; i++){
+								remainingHit[i] *= armorMod;
+								remainingHit[i] = reduceDarknessDamage(remainingHit[i]);
+								damage += remainingHit[i];
+								if(display){
+									SceneLib.combat.CommasForDigits(remainingHit[i]);
+								}
+							}
 							break;
 						case 9: // poison
-							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
-							damage = reducePoisonDamage(damage);
+							if (damagePercentMRes() > 1){
+								armorMod = 1 / damagePercentMRes();
+							}
+							// damage *= armorMod / 4 * 3
+							for(var i:Number = 0; i < remainingHit.length; i++){
+								remainingHit[i] *= armorMod;
+								remainingHit[i] = reducePoisonDamage(remainingHit[i]);
+								damage += remainingHit[i];
+								if(display){
+									SceneLib.combat.CommasForDigits(remainingHit[i]);
+								}
+							}
 							break;
 						case 10: // wind
-							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
-							damage = reduceWindDamage(damage);
+							if (damagePercentMRes() > 1){
+								armorMod = 1 / damagePercentMRes();
+							}
+							// damage *= armorMod / 4 * 3
+							for(var i:Number = 0; i < remainingHit.length; i++){
+								remainingHit[i] *= armorMod;
+								remainingHit[i] = reduceWindDamage(remainingHit[i]);
+								damage += remainingHit[i];
+								if(display){
+									SceneLib.combat.CommasForDigits(remainingHit[i]);
+								}
+							}
 							break;
 						case 11: // water
-							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
-							damage = reduceWaterDamage(damage);
+							if (damagePercentMRes() > 1){
+								armorMod = 1 / damagePercentMRes();
+							}
+							// damage *= armorMod / 4 * 3
+							for(var i:Number = 0; i < remainingHit.length; i++){
+								remainingHit[i] *= armorMod;
+								remainingHit[i] = reduceWaterDamage(remainingHit[i]);
+								damage += remainingHit[i];
+								if(display){
+									SceneLib.combat.CommasForDigits(remainingHit[i]);
+								}
+							}
 							break;
 						case 12: // earth
-							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
-							damage = reduceEarthDamage(damage);
+							if (damagePercentMRes() > 1){
+								armorMod = 1 / damagePercentMRes();
+							}
+							// damage *= armorMod / 4 * 3
+							for(var i:Number = 0; i < remainingHit.length; i++){
+								remainingHit[i] *= armorMod;
+								remainingHit[i] = reduceEarthDamage(remainingHit[i]);
+								damage += remainingHit[i];
+								if(display){
+									SceneLib.combat.CommasForDigits(remainingHit[i]);
+								}
+							}
 							break;
 						case 13: // acid
-							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
-							damage = reduceAcidDamage(damage);
+							if (damagePercentMRes() > 1){
+								armorMod = 1 / damagePercentMRes();
+							}
+							// damage *= armorMod / 4 * 3
+							for(var i:Number = 0; i < remainingHit.length; i++){
+								remainingHit[i] *= armorMod;
+								remainingHit[i] = reduceAcidDamage(remainingHit[i]);
+								damage += remainingHit[i];
+								if(display){
+									SceneLib.combat.CommasForDigits(remainingHit[i]);
+								}
+							}
 							break;
 						default:
-							if (damagePercentArmor() > 1) damage *= (1 / damagePercentArmor());
-							damage = reducePhysDamage(damage);
+							if (damagePercentArmor() > 1){
+								armorMod = 1 / damagePercentArmor();
+							}
+							// damage *= armorMod / 4 * 3
+							for(var i:Number = 0; i < remainingHit.length; i++){
+								remainingHit[i] *= armorMod;
+								remainingHit[i] = reducePhysDamage(remainingHit[i]);
+								damage += remainingHit[i];
+								if(display){
+									SceneLib.combat.CommasForDigits(remainingHit[i]);
+								}
+							}
 					}
+					// var damage now store total damage across all hits
 					//Wrath
 					wrathFromBeenPunchingBag(damage);
-					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
 					//game.HPChange(-damage, display);
 					damage = Math.round(damage);
 					HP -= damage;
-					if (display) SceneLib.combat.CommasForDigits(damage);
+
 					game.mainView.statsView.showStatDown('hp');
 					dynStats("lus", 0); //Force display arrow.
-					if (physTeaseDmg) CoC.instance.monster.teased(SceneLib.combat.teases.teaseBaseLustDamage());
+
 				}
 				if (flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
 					dynStats("lus", int(damage / 2), "scale", false);

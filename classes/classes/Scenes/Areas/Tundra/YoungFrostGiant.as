@@ -178,7 +178,15 @@ import classes.internals.WeightedDrop;
 			player.takePhysDamage(damage, true);
 			outputText("\n\n");
 		}
-		
+
+		override public function midAttackSeal():Boolean{
+			if (player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+				youngGiantBoulderHit(0);
+				return false;
+			}
+			else return true;
+		}
+
 		override protected function performCombatAction():void
 		{
 			var chooser:Number = 0;
