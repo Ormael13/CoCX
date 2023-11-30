@@ -52,7 +52,7 @@ public class MultiBuy extends BaseContent {
 
 private static function confirmPurchase(returnFunc:Function,shopKeep:String,priceRate:Number,itype:ItemType,descString:String,onBuy:String, useStones:Boolean=false, currentQuantity:int=1):void {
 	clearOutput();
-	outputText("Are you sure you want to buy " + currentQuantity + " of " + itype.longName + "?");
+	outputText("Are you sure you want to buy " + currentQuantity + " of " + itype.longName + "?\n");
 	utils.doYesNo(curry(debitItemMulti, returnFunc, shopKeep, priceRate, itype, onBuy, useStones, currentQuantity),
 		curry(confirmBuyMulti, returnFunc, shopKeep, priceRate, itype, descString, onBuy, useStones, currentQuantity));
 }

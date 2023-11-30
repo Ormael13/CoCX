@@ -14,6 +14,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Dungeons.RiverDungeon;
 import classes.Scenes.SceneLib;
 import classes.internals.SaveableState;
+import classes.Scenes.API.MultiBuy;
 
 public class JourneyToTheEast extends HeXinDaoAbstractContent implements SaveableState
 	{
@@ -100,35 +101,32 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 			else outputText("morning");
 			outputText(" " + player.mf("mister", "miss") + ", what can I get you?</i>\"\n\n");
 			menu();
-			addButton(0, "ManUp B", buyDrink, consumables.MANUP_B, 1).hint("1 spirit stone");
-			addButton(1, "Gob.Ale", buyDrink, consumables.GOB_ALE, 1).hint("1 spirit stone");
-			addButton(2, "OrcMead", buyDrink, consumables.ORCMEAD, 1).hint("1 spirit stone");
-			addButton(3, "OniSake", buyDrink, consumables.ONISAKE, 1).hint("1 spirit stone");
-			addButton(5, "Fiery S", buyDrink, consumables.FIERYS_, 1).hint("1 spirit stone");
-			addButton(6, "SalamFW", buyDrink, consumables.SALAMFW, 1).hint("1 spirit stone");
-			addButton(7, "NoceLiq", buyDrink, consumables.NOCELIQ, 2).hint("2 spirit stones");
-			addButton(8, "Asumaki", buyDrink, consumables.ASKIRIN, 2).hint("2 spirit stones");
-			addButton(12, "BimboL", buyDrink, consumables.BIMBOLQ, 100).hint("100 spirit stones");
-			addButton(13, "BroBrew", buyDrink, consumables.BROBREW, 100).hint("100 spirit stones");
+			addButton(0, "ManUp B", confirmBuyDrink, consumables.MANUP_B, 1).hint("1 spirit stone");
+			addButton(1, "Gob.Ale", confirmBuyDrink, consumables.GOB_ALE, 1).hint("1 spirit stone");
+			addButton(2, "OrcMead", confirmBuyDrink, consumables.ORCMEAD, 1).hint("1 spirit stone");
+			addButton(3, "OniSake", confirmBuyDrink, consumables.ONISAKE, 1).hint("1 spirit stone");
+			addButton(5, "Fiery S", confirmBuyDrink, consumables.FIERYS_, 1).hint("1 spirit stone");
+			addButton(6, "SalamFW", confirmBuyDrink, consumables.SALAMFW, 1).hint("1 spirit stone");
+			addButton(7, "NoceLiq", confirmBuyDrink, consumables.NOCELIQ, 2).hint("2 spirit stones");
+			addButton(8, "Asumaki", confirmBuyDrink, consumables.ASKIRIN, 2).hint("2 spirit stones");
+			addButton(12, "BimboL", confirmBuyDrink, consumables.BIMBOLQ, 100).hint("100 spirit stones");
+			addButton(13, "BroBrew", confirmBuyDrink, consumables.BROBREW, 100).hint("100 spirit stones");
 			addButton(14, "Back", notThirsty);
 		}
+		private function confirmBuyDrink(itype:ItemType, price:int):void {
+			var descString:String = "You ask for " + itype.longName + ".\n\n";
+			var onBuyString:String = "\n\nThe barman hands over the drink you ordered.\n\n";
+
+			var priceRate:Number = itype.value / price;
+
+			MultiBuy.confirmBuyMulti(drinkAlcohol, "The barman", priceRate, itype, descString, onBuyString, true);
+		}
+
 		//drink list (to be expanded) some generic nonTF beers
 		private function notThirsty():void {
 			clearOutput();
 			outputText("In the end you realise you are not thirsty after all and wave a goodbye before leaving.\n\n");
 			doNext(enteringInn,false);
-		}
-		private function buyDrink(drink:ItemType, amount:int):void{
-			var cost:int = amount;
-			if(flags[kFLAGS.SPIRIT_STONES] < cost){
-				outputText("\n\nThe barman shakes his head, indicating you need " + String(cost - flags[kFLAGS.SPIRIT_STONES]) + " more spirit stones to purchase this drink.");
-				doNext(drinkAlcohol);
-				return;
-			}
-			flags[kFLAGS.SPIRIT_STONES] -= cost;
-			statScreenRefresh();
-			outputText("\n\nThe barman hands over the drink you ordered. ");
-			inventory.takeItem(drink, drinkAlcohol);
 		}
 
 		private function shadyPerson(second:Boolean = true):void {

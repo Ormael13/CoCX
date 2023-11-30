@@ -7,6 +7,7 @@ package classes.Scenes.Areas.GlacialRift
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.internals.Utils;
+import classes.Scenes.API.MultiBuy;
 
 public class YuWinterGearShop extends BaseContent
 	{
@@ -65,85 +66,35 @@ public class YuWinterGearShop extends BaseContent
 			outputText("You begin to browse Yu’s shop inventory.");
 			menu();
 			addButton(0, "W.Scarfs", YuShopMainSecond);
-			addButton(1, undergarments.F_B_TOP.shortName, buyItem, 0).hint("Fur bikini top");
-			addButton(2, undergarments.F_PANTY.shortName, buyItem, 1).hint("Fur panty");
-			addButton(3, undergarments.F_LOIN_.shortName, buyItem, 2).hint("Fur loincloth");
-			addButton(4, weapons.NORTHIP.shortName, buyItem, 3).hint("Northerner ice picks");
-			addButton(5, headjewelries.SKIGOGG.shortName, buyItem, 4).hint("Ski goggles");
-			addButton(6, headjewelries.SNOWFH.shortName, buyItem, 5).hint("Snowflake hairpin");
-			addButton(7, armors.BLIZZ_K.shortName, buyItem, 6).hint("Blizzard Kimono");
-			addButton(8, weapons.BCLAWS.shortName, buyItem, 7).hint("Blizzard Claws");
-			addButton(10, miscjewelries.SNOWBOA.shortName, buyItem, 9).hint("Snowboard");
-			addButton(12, consumables.SKELP__.shortName, buyItem, 11).hint("Skelp");
-			addButton(13, consumables.F_TEAR.shortName, buyItem, 12).hint("Fafnir Tear");
+			addButton(1, undergarments.F_B_TOP.shortName, confirmBuy, undergarments.F_B_TOP, YuShopMain).hint(undergarments.F_B_TOP.description, "Fur bikini top");
+			addButton(2, undergarments.F_PANTY.shortName, confirmBuy, undergarments.F_PANTY, YuShopMain).hint(undergarments.F_PANTY.description, "Fur panty");
+			addButton(3, undergarments.F_LOIN_.shortName, confirmBuy, undergarments.F_LOIN_, YuShopMain).hint(undergarments.F_LOIN_.description, "Fur loincloth");
+			addButton(4, weapons.NORTHIP.shortName, confirmBuy, weapons.NORTHIP, YuShopMain).hint(weapons.NORTHIP.description, "Northerner ice picks");
+			addButton(5, headjewelries.SKIGOGG.shortName, confirmBuy, headjewelries.SKIGOGG, YuShopMain).hint(headjewelries.SKIGOGG.description, "Ski goggles");
+			addButton(6, headjewelries.SNOWFH.shortName, confirmBuy, headjewelries.SNOWFH, YuShopMain).hint(headjewelries.SNOWFH.description, "Snowflake hairpin");
+			addButton(7, armors.BLIZZ_K.shortName, confirmBuy, armors.BLIZZ_K, YuShopMain).hint(armors.BLIZZ_K.description, "Blizzard Kimono");
+			addButton(8, weapons.BCLAWS.shortName, confirmBuy, weapons.BCLAWS, YuShopMain).hint(weapons.BCLAWS.description, "Blizzard Claws");
+			addButton(10, miscjewelries.SNOWBOA.shortName, confirmBuy, miscjewelries.SNOWBOA, YuShopMain).hint(miscjewelries.SNOWBOA.description, "Snowboard");
+			addButton(12, consumables.SKELP__.shortName, confirmBuy, consumables.SKELP__, YuShopMain).hint(consumables.SKELP__.description, "Skelp");
+			addButton(13, consumables.F_TEAR.shortName, confirmBuy, consumables.F_TEAR, YuShopMain).hint(consumables.F_TEAR.description, "Fafnir Tear");
 			addButton(14, "Back", YuMenuMain2);
 		}
-		private function buyItem(item:Number = 0):void {
-			if (item == 0) yetiBuy(undergarments.F_B_TOP);
-			if (item == 1) yetiBuy(undergarments.F_PANTY);
-			if (item == 2) yetiBuy(undergarments.F_LOIN_);
-			if (item == 3) yetiBuy(weapons.NORTHIP);
-			if (item == 4) yetiBuy(headjewelries.SKIGOGG);
-			if (item == 5) yetiBuy(headjewelries.SNOWFH);
-			if (item == 6) yetiBuy(armors.BLIZZ_K);
-			if (item == 7) yetiBuy(weapons.BCLAWS);
-			if (item == 9) yetiBuy(miscjewelries.SNOWBOA);
-			if (item == 11) yetiBuy(consumables.SKELP__);
-			if (item == 12) yetiBuy(consumables.F_TEAR);
-		}
-		public function yetiBuy(itype:ItemType):void {
-			clearOutput();
-			outputText("You point out the " + itype.longName + " on the shelf.\n\n");
-			outputText("\"<i>Oh this one? Yu forgot how much it’s worth so Yu offers it to you at discount of " + itype.value + " gems.</i>\"");
-			if (player.gems < itype.value) {
-				outputText("\n<b>You don't have enough gems...</b>");
-				doNext(YuShopMain);
-				return;
-			}
-			doYesNo(Utils.curry(yetiTransact,itype), YuShopMain);
-		}
-		public function yetiTransact(itype:ItemType):void {
-			clearOutput();
-			player.gems -= itype.value;
-			outputText("You bring your purchase to an icy counter and Yu checks up her prices list before exchanging it for your gems.\n\n");
-			outputText("\"<i>Thanks for patronage.</i>\"\n\n");
-			statScreenRefresh();
-			inventory.takeItem(itype, YuShopMain);
-		}
+
 		public function YuShopMainSecond():void {
 			menu();
-			addButton(0, necklaces.BWSCARF.shortName, buyItem2, 0).hint("Blue Winter scarf");
-			addButton(1, necklaces.GWSCARF.shortName, buyItem2, 1).hint("Green Winter scarf");
-			addButton(2, necklaces.PWSCARF.shortName, buyItem2, 2).hint("Purple Winter scarf");
-			addButton(3, necklaces.RWSCARF.shortName, buyItem2, 3).hint("Red Winter scarf");
-			addButton(4, necklaces.YWSCARF.shortName, buyItem2, 4).hint("Yellow Winter scarf");
-			addButton(14, "Back", YuMenuMain);
+			addButton(0, necklaces.BWSCARF.shortName, confirmBuy, necklaces.BWSCARF, YuShopMainSecond).hint(necklaces.BWSCARF.description, "Blue Winter scarf");
+			addButton(1, necklaces.GWSCARF.shortName, confirmBuy, necklaces.GWSCARF, YuShopMainSecond).hint(necklaces.GWSCARF.description, "Green Winter scarf");
+			addButton(2, necklaces.PWSCARF.shortName, confirmBuy, necklaces.PWSCARF, YuShopMainSecond).hint(necklaces.PWSCARF.description, "Purple Winter scarf");
+			addButton(3, necklaces.RWSCARF.shortName, confirmBuy, necklaces.RWSCARF, YuShopMainSecond).hint(necklaces.RWSCARF.description, "Red Winter scarf");
+			addButton(4, necklaces.YWSCARF.shortName, confirmBuy, necklaces.YWSCARF, YuShopMainSecond).hint(necklaces.YWSCARF.description, "Yellow Winter scarf");
+			addButton(14, "Back", YuShopMain);
 		}
-		private function buyItem2(item:Number = 0):void {
-			if (item == 0) yetiBuy2(necklaces.BWSCARF);
-			if (item == 1) yetiBuy2(necklaces.GWSCARF);
-			if (item == 2) yetiBuy2(necklaces.PWSCARF);
-			if (item == 3) yetiBuy2(necklaces.RWSCARF);
-			if (item == 4) yetiBuy2(necklaces.YWSCARF);
-		}
-		public function yetiBuy2(itype:ItemType):void {
-			clearOutput();
-			outputText("You point out the " + itype.longName + " on the shelf.\n\n");
-			outputText("\"<i>Oh this one? Yu forgot how much it’s worth so Yu offers it to you at discount of " + itype.value + " gems.</i>\"");
-			if (player.gems < itype.value) {
-				outputText("\n<b>You don't have enough gems...</b>");
-				doNext(YuShopMainSecond);
-				return;
-			}
-			doYesNo(Utils.curry(yetiTransact2,itype), YuShopMainSecond);
-		}
-		public function yetiTransact2(itype:ItemType):void {
-			clearOutput();
-			player.gems -= itype.value;
-			outputText("You bring your purchase to an icy counter and Yu checks up her prices list before exchanging it for your gems.\n\n");
-			outputText("\"<i>Thanks for patronage.</i>\"\n\n");
-			statScreenRefresh();
-			inventory.takeItem(itype, YuShopMainSecond);
+
+		private function confirmBuy(itype:ItemType, returnFunc:Function):void {
+			var descString:String = "You point out the " + itype.longName + " on the shelf.\n\n\"<i>Oh this one? Yu forgot how much it’s worth so Yu offers it to you at discount.</i>\"\n";
+			var onBuyString:String = "You bring your purchase to an icy counter and Yu checks up her prices list before exchanging it for your gems.\n\n<i>Thanks for patronage.</i>\"\n\n";
+
+			MultiBuy.confirmBuyMulti(returnFunc, "Yu", 1, itype, descString, onBuyString, false);
 		}
 		
 		public function YuShopTalkMain():void {
