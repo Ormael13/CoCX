@@ -4871,6 +4871,9 @@ public class Combat extends BaseContent {
      */
     public function resolveFeralCombatAdditionnalAttacks():void {
         ExtraNaturalWeaponPrep();
+        var pLibHellFireCoat:Boolean = player.hasPerk(PerkLib.HellfireCoat);
+        var pFoxFlamePelt:Boolean = player.statStore.hasBuff("FoxflamePelt");
+
         //DOING BITE ATTACKS
         if (player.hasABiteAttack()) {
             var biteMultiplier:Number = 0.5;
@@ -4880,87 +4883,116 @@ public class Combat extends BaseContent {
                 outputText(" and tearing at your foe's very soul!");
                 HPChange(player.maxHP()*0.25,false);
             }
-            if (player.faceType == Face.SHARK_TEETH || player.faceType == Face.ORCA) biteMultiplier = 2.0;
-            if (player.faceType == Face.ABYSSAL_SHARK) biteMultiplier = 4.0;
-            if ((player.faceType == Face.SHARK_TEETH || player.faceType == Face.ABYSSAL_SHARK || player.faceType == Face.VAMPIRE) && !monster.isImmuneToBleed()) {
-                outputText(" and drawing blood out.");
-                if (!monster.hasStatusEffect(StatusEffects.SharkBiteBleed)) monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
-                else {
-                    monster.removeStatusEffect(StatusEffects.SharkBiteBleed);
-                    monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
-                }
-            }
-            if ((player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS) && player.tailVenom >= player.VenomWebCost()) {
-                outputText(" and inject your venom into the wound!");
-                if (player.faceType == Face.SNAKE_FANGS){
-                    var DBPb:Number = 1;
-                    if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) DBPb *= 2;
-                    monster.statStore.addBuffObject({spe:-DBPb}, "Poison",{text:"Poison"});
-                    var venomType:StatusEffectType = StatusEffects.NagaVenom;
-                    if (player.racialScore(Races.NAGA) >= 23) venomType = StatusEffects.ApophisVenom;
-                    if (monster.hasStatusEffect(venomType)) {
-                        monster.addStatusValue(venomType, 2, 0.4);
-                        monster.addStatusValue(venomType, 1, (DBPb * 0.4));
-                    } else monster.createStatusEffect(venomType, (DBPb * 0.4), 0.4, 0, 0);
-                    if (player.hasPerk(PerkLib.WoundPoison)){
-                        if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
-                        else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
+            // Bite Attacks Check
+            switch(player.faceType){
+                case Face.ORCA:
+                    // from 0.5 to 2.0 effectively +1.5
+                    biteMultiplier += 1.5;
+                    break;
+                case Face.ABYSSAL_SHARK:
+                    // should also trigger shark_teeth and vampire
+                    biteMultiplier += 2.0;
+                case Face.SHARK_TEETH:
+                    biteMultiplier += 1.5;
+                case Face.VAMPIRE:
+                    // Vampire dont have bitemultiplier bonus FeelsBadMan
+                    if (!monster.isImmuneToBleed()){
+                        outputText(" and drawing blood out.");
+                        if (!monster.hasStatusEffect(StatusEffects.SharkBiteBleed)) monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
+                        else {
+                            monster.removeStatusEffect(StatusEffects.SharkBiteBleed);
+                            monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
+                        }
                     }
-                    player.tailVenom -= player.VenomWebCost();
-                    flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
-                }
-                if(player.faceType == Face.SPIDER_FANGS){
-                    if (player.lowerBody == LowerBody.ATLACH_NACHA){
-                        outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness and arousal.");
-                        var damage3B:Number = 35 + rand(player.lib / 10);
-                        var poisonScaling:Number = 1;
-                        var damage3Ba:Number = 1;
-                        poisonScaling += player.lib/100;
-                        poisonScaling += player.tou/100;
-                        if (player.level < 10) damage3B += 20 + (player.level * 3);
-                        else if (player.level < 20) damage3B += 50 + (player.level - 10) * 2;
-                        else if (player.level < 30) damage3B += 70 + (player.level - 20) * 1;
-                        else damage3B += 80;
-                        damage3B *= 0.2;
-                        if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) damage3Ba *= 2;
-                        if (player.armor == armors.ELFDRES && player.isElf()) damage3Ba *= 2;
-                        if (player.armor == armors.FMDRESS && player.isWoodElf()) damage3Ba *= 2;
-                        damage3B *= damage3Ba;
-                        poisonScaling *= damage3Ba;
-                        damage3B *= 1 + (poisonScaling / 10);
-                        monster.teased(Math.round(monster.lustVuln * damage3B));
-                        monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
-                        if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
-                            monster.addStatusValue(StatusEffects.NagaVenom, 3, damage3Ba);
-                        } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damage3Ba, 0);
+                    break;
+                case Face.SNAKE_FANGS:
+                    if (player.tailVenom >= player.VenomWebCost()){
+                        outputText(" and inject your venom into the wound!");
+                        var DBPb:Number = 1;
+                        if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) DBPb *= 2;
+                        monster.statStore.addBuffObject({spe:-DBPb}, "Poison",{text:"Poison"});
+                        var venomType:StatusEffectType = StatusEffects.NagaVenom;
+                        if (player.racialScore(Races.NAGA) >= 23) venomType = StatusEffects.ApophisVenom;
+                        if (monster.hasStatusEffect(venomType)) {
+                            monster.addStatusValue(venomType, 2, 0.4);
+                            monster.addStatusValue(venomType, 1, (DBPb * 0.4));
+                        } else monster.createStatusEffect(venomType, (DBPb * 0.4), 0.4, 0, 0);
                         if (player.hasPerk(PerkLib.WoundPoison)){
                             if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
                             else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
                         }
                         player.tailVenom -= player.VenomWebCost();
                         flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
-                    } else {
-                        var lustDmg:int = 6 * monster.lustVuln;
-                        if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg *= 2;
-                        if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
-                        if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
-                        monster.teased(lustDmg);
-                        if (monster.lustVuln > 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) {
-                            monster.lustVuln += 0.01;
-                            if (monster.lustVuln > 1) monster.lustVuln = 1;
+                    }
+                    break;
+                case Face.SPIDER_FANGS:
+                    if (player.tailVenom >= player.VenomWebCost()){
+                        var sharedVenomMulti:Number = 1;
+                        if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) sharedVenomMulti *= 2;
+                        if (player.armor == armors.ELFDRES && player.isElf()) sharedVenomMulti *= 2;
+                        if (player.armor == armors.FMDRESS && player.isWoodElf()) sharedVenomMulti *= 2;
+
+                        outputText(" and inject your venom into the wound!");
+                        if (player.lowerBody == LowerBody.ATLACH_NACHA){
+                            outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness and arousal.");
+                            var damage3B:Number = 35 + rand(player.lib / 10);
+                            var poisonScaling:Number = 1;
+                            var damage3Ba:Number = 1;
+                            poisonScaling += player.lib/100;
+                            poisonScaling += player.tou/100;
+                            if (player.level < 10) damage3B += 20 + (player.level * 3);
+                            else if (player.level < 20) damage3B += 50 + (player.level - 10) * 2;
+                            else if (player.level < 30) damage3B += 70 + (player.level - 20) * 1;
+                            else damage3B += 80;
+                            damage3B *= 0.2;
+
+                            damage3Ba *= sharedVenomMulti;
+
+                            damage3B *= damage3Ba;
+                            poisonScaling *= damage3Ba;
+                            damage3B *= 1 + (poisonScaling / 10);
+                            monster.teased(Math.round(monster.lustVuln * damage3B));
+                            monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
+                            if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
+                                monster.addStatusValue(StatusEffects.NagaVenom, 3, damage3Ba);
+                            } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damage3Ba, 0);
+                            if (player.hasPerk(PerkLib.WoundPoison)){
+                                if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
+                                else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
+                            }
+                        }
+                        else {
+                            var lustDmg:int = 6 * monster.lustVuln;
+                            lustDmg *= sharedVenomMulti;
+                            monster.teased(lustDmg);
+                            if (monster.lustVuln > 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) {
+                                monster.lustVuln += 0.01;
+                                if (monster.lustVuln > 1) monster.lustVuln = 1;
+                            }
                         }
                         player.tailVenom -= player.VenomWebCost();
                         flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                     }
-                }
+                    break;
+                case Face.CERBERUS:
+                    //Unique attack Cerberus fire breath
+                    if (player.hasPerk(PerkLib.Hellfire)) {
+                        outputText("You unleash a tripple blast of fire from your heads, engulfing [themonster] in Hellfire.");
+                        ExtraNaturalWeaponAttack(1, "fire");
+                        ExtraNaturalWeaponAttack(1, "fire");
+                        ExtraNaturalWeaponAttack(1, "fire");
+                        outputText("\n");
+                    }
+                    break;
+                default:
             }
             outputText(".");
 
-            if (player.hasPerk(PerkLib.HellfireCoat)) ExtraNaturalWeaponAttack(biteMultiplier, "fire");
-            else if (player.statStore.hasBuff("FoxflamePelt")) ExtraNaturalWeaponAttack(biteMultiplier, "foxflame");
-			ExtraNaturalWeaponAttack(biteMultiplier);
+            if (pLibHellFireCoat) ExtraNaturalWeaponAttack(biteMultiplier, "fire");
+            else if (pFoxFlamePelt) ExtraNaturalWeaponAttack(biteMultiplier, "foxflame");
+            else ExtraNaturalWeaponAttack(biteMultiplier);
             if (player.faceType == Face.CERBERUS) {
-                if (player.hasPerk(PerkLib.HellfireCoat)) {
+                if (pLibHellFireCoat) {
                     ExtraNaturalWeaponAttack(biteMultiplier, "fire");
                     ExtraNaturalWeaponAttack(biteMultiplier, "fire");
                 } else {
@@ -4999,58 +5031,71 @@ public class Combat extends BaseContent {
         if (player.haveNaturalClaws()) {
             var ClawDamageMultiplier:Number = 1;
             if (player.hasMutation(IMutationsLib.EyeOfTheTigerIM)) ClawDamageMultiplier *= 1.5;
-            if (player.arms.type == Arms.FROSTWYRM) ClawDamageMultiplier = 2;
-            if (player.arms.type != Arms.MANTIS && player.arms.type != Arms.KAMAITACHI){
-                outputText("You claw viciously at your opponent, tearing away at its body.");
+            switch(player.arms.type){
+                case Arms.MANTIS:
+                case Arms.KAMAITACHI:
+                    ClawDamageMultiplier *= 1.5;
+                    var oText:String = "You slash at your opponent with your scythes";
+                    if (player.arms.type == Arms.KAMAITACHI){
+                        oText+= " that bleeds profusely";
+                    }
+                    oText+=".";
+                    outputText(oText);
+                    break;
+                case Arms.FROSTWYRM:
+                    // Why does frostwyrm has lower clawdamagemultipler value than insect
+                    ClawDamageMultiplier *= 2;
+                default:
+                    outputText("You claw viciously at your opponent, tearing away at its body.");
             }
-            else {
-                ClawDamageMultiplier *= 1.5;
-                outputText("You slash at your opponent with your scythes.");
-                if (player.arms.type == Arms.KAMAITACHI){
-                    outputText(" that bleeds profusely");
-                }
-                outputText(".");
+
+            var feralNotGargoyle:Boolean = true;
+
+            switch(player.arms.type){
+                case Arms.KAMAITACHI:
+                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "KamaitachiScythe", true);
+                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "KamaitachiScythe", true);
+                    break;
+                case Arms.WENDIGO:
+                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "WendigoClaw", true);
+                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "WendigoClaw", true);
+                    break;
+                case Arms.GARGOYLE:
+                    feralNotGargoyle = false;
+                    switch (Forgefather.channelInlay){
+                        case "amethyst":
+                            ExtraNaturalWeaponAttack(ClawDamageMultiplier, "darkness", true);
+                            ExtraNaturalWeaponAttack(ClawDamageMultiplier, "darkness", true);
+                            break;
+                        case "ruby":
+                            ExtraNaturalWeaponAttack(ClawDamageMultiplier, "fire", true);
+                            ExtraNaturalWeaponAttack(ClawDamageMultiplier, "fire", true);
+                            break;
+                        case "sapphire":
+                            ExtraNaturalWeaponAttack(ClawDamageMultiplier, "ice", true);
+                            ExtraNaturalWeaponAttack(ClawDamageMultiplier, "ice", true);
+                            break;
+                        case "topaz":
+                            ExtraNaturalWeaponAttack(ClawDamageMultiplier, "lightning", true);
+                            ExtraNaturalWeaponAttack(ClawDamageMultiplier, "lightning", true);
+                            break;
+                        default:
+                            ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
+                            ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
+                            break;
+                    }
+                    break;
+                default:
             }
-            if (player.arms.type == Arms.KAMAITACHI){
-                ExtraNaturalWeaponAttack(ClawDamageMultiplier, "KamaitachiScythe", true);
-                ExtraNaturalWeaponAttack(ClawDamageMultiplier, "KamaitachiScythe", true);
-            }
-            if (player.arms.type == Arms.WENDIGO){
-                ExtraNaturalWeaponAttack(ClawDamageMultiplier, "WendigoClaw", true);
-                ExtraNaturalWeaponAttack(ClawDamageMultiplier, "WendigoClaw", true);
-            }
-            if (player.arms.type == Arms.GARGOYLE){
-				switch (Forgefather.channelInlay){
-					case "amethyst":
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "darkness", true);
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "darkness", true);
-						break;
-					case "ruby":
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "fire", true);
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "fire", true);
-						break;
-					case "sapphire":
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "ice", true);
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "ice", true);
-						break;
-					case "topaz":
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "lightning", true);
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "lightning", true);
-						break;
-					default:
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
-						break;
-				}
-			}
-			else{
-                if (player.hasPerk(PerkLib.HellfireCoat)) {
+            // If not gargolye
+            if(feralNotGargoyle){
+                if (pLibHellFireCoat) {
                     ExtraNaturalWeaponAttack(ClawDamageMultiplier, "fire", true);
                     ExtraNaturalWeaponAttack(ClawDamageMultiplier, "fire", true);
-                } else if (player.statStore.hasBuff("FoxflamePelt")) {
-					ExtraNaturalWeaponAttack(ClawDamageMultiplier, "foxflame", true);
-					ExtraNaturalWeaponAttack(ClawDamageMultiplier, "foxflame", true);
-				} else {
+                } else if (pFoxFlamePelt) {
+                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "foxflame", true);
+                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "foxflame", true);
+                } else {
                     ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
                     ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
                     if (player.weaponName == "black cat glove" && Arms.hasFelineArms(player)) {
@@ -5060,54 +5105,62 @@ public class Combat extends BaseContent {
                 }
             }
             outputText("\n");
-            if (player.arms.type == Arms.WOLF && player.hasPerk(PerkLib.Lycanthropy)){
-                if (flags[kFLAGS.LUNA_MOON_CYCLE] != 7){
-                    outputText("The moon grants you strength as you rend your opponent one more time with your claws.");
-                    ExtraNaturalWeaponAttack(1, "", true);
+            // Should we put this to one of the switch above uh
+            switch(player.arms.type){
+                case Arms.WOLF:
+                    if (player.hasPerk(PerkLib.Lycanthropy)){
+                        if (flags[kFLAGS.LUNA_MOON_CYCLE] != 7){
+                            outputText("The moon grants you strength as you rend your opponent one more time with your claws.");
+                            ExtraNaturalWeaponAttack(1, "", true);
+                            outputText("\n");
+                        } else  {
+                            outputText("The full moon grants you strength as you rend your opponent two more times with your claws.");
+                            ExtraNaturalWeaponAttack(1, "", true);
+                            ExtraNaturalWeaponAttack(1, "", true);
+                            outputText("\n");
+                        }
+                    }
+                    break;
+                case Arms.DISPLACER:
+                    outputText("You use your extra arms to rend your opponent two more times.");
+                    if (pFoxFlamePelt) {
+                        ExtraNaturalWeaponAttack(1, "foxflame", true);
+                        ExtraNaturalWeaponAttack(1, "foxflame", true);
+                    }
+                    else {
+                        ExtraNaturalWeaponAttack(1, "", true);
+                        ExtraNaturalWeaponAttack(1, "", true);
+                    }
                     outputText("\n");
-                } else  {
-                    outputText("The full moon grants you strength as you rend your opponent two more times with your claws.");
-                    ExtraNaturalWeaponAttack(1, "", true);
-                    ExtraNaturalWeaponAttack(1, "", true);
+                    break;
+                case Arms.WENDIGO:
+                    outputText("Your maddening hunger gives you strength allowing you to attack two more times, your strike delivering cursed wounds.");
+                    ExtraNaturalWeaponAttack(1, "WendigoClaw", true);
+                    ExtraNaturalWeaponAttack(1, "WendigoClaw", true);
                     outputText("\n");
-                }
-            }
-            if (player.arms.type == Arms.DISPLACER)
-            {
-                outputText("You use your extra arms to rend your opponent two more times.");
-				if (player.statStore.hasBuff("FoxflamePelt")) {
-					ExtraNaturalWeaponAttack(1, "foxflame", true);
-					ExtraNaturalWeaponAttack(1, "foxflame", true);
-				}
-				else {
-					ExtraNaturalWeaponAttack(1, "", true);
-					ExtraNaturalWeaponAttack(1, "", true);
-				}
-                outputText("\n");
-            }
-            if (player.arms.type == Arms.WENDIGO)
-            {
-                outputText("Your maddening hunger gives you strength allowing you to attack two more times, your strike delivering cursed wounds.");
-                ExtraNaturalWeaponAttack(1, "WendigoClaw", true);
-                ExtraNaturalWeaponAttack(1, "WendigoClaw", true);
-                outputText("\n");
+                    break;
+                default:
+
             }
         }
         //CENTAUR TIME!
         if (player.isTaur()) {
-            if (player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.CLOVEN_HOOFED){
-                outputText("You rear up and trample your opponent with your hooves.");
+            switch(player.lowerBody){
+                case LowerBody.HOOFED:
+                case LowerBody.CLOVEN_HOOFED:
+                    outputText("You rear up and trample your opponent with your hooves.");
+                    break;
+                default:
+                    outputText("You rear up and claw at your opponent with your forepaws.");
             }
-            else{
-                outputText("You rear up and claw at your opponent with your forepaws.");
-            }
-            if (player.hasPerk(PerkLib.HellfireCoat)) {
+
+            if (pLibHellFireCoat) {
                 ExtraNaturalWeaponAttack(1, "fire");
                 ExtraNaturalWeaponAttack(1, "fire");
-            } else if (player.statStore.hasBuff("FoxflamePelt")) {
-				ExtraNaturalWeaponAttack(1, "foxflame");
-				ExtraNaturalWeaponAttack(1, "foxflame");
-			} else {
+            } else if (pFoxFlamePelt) {
+                ExtraNaturalWeaponAttack(1, "foxflame");
+                ExtraNaturalWeaponAttack(1, "foxflame");
+            } else {
                 ExtraNaturalWeaponAttack();
                 ExtraNaturalWeaponAttack();
             }
@@ -5116,7 +5169,7 @@ public class Combat extends BaseContent {
         //POUNCING FOR THE KILL
         if (player.canPounce()) {
             outputText("You leap up at [themonster] raking [monster him] with your hind claws twice.");
-            if (player.hasPerk(PerkLib.HellfireCoat)) {
+            if (pLibHellFireCoat) {
                 ExtraNaturalWeaponAttack(1, "fire");
                 ExtraNaturalWeaponAttack(1, "fire");
             } else {
@@ -5129,7 +5182,7 @@ public class Combat extends BaseContent {
         if (player.isFlying()){
             if (player.hasTalonsAttack()){
                 outputText("You rend at your opponent with your talons twice.");
-                if (player.hasPerk(PerkLib.HellfireCoat)) {
+                if (pLibHellFireCoat) {
                     ExtraNaturalWeaponAttack(1, "fire");
                     ExtraNaturalWeaponAttack(1, "fire");
                 } else {
@@ -5142,48 +5195,51 @@ public class Combat extends BaseContent {
         //DEALING WING ATTACKS
         if (player.hasAWingAttack())
         {
-            if (player.wings.type == Wings.THUNDEROUS_AURA){
-                outputText("You zap your opponent with your aura, delivering a barrage of arousing discharge");
-                LustyEnergyNaturalWeaponAttack(0.20);
-                LustyEnergyNaturalWeaponAttack(0.20);
-                LustyEnergyNaturalWeaponAttack(0.20);
-                LustyEnergyNaturalWeaponAttack(0.20);
-                LustyEnergyNaturalWeaponAttack(0.20);
-            }
-            else{
-                if (player.wings.type == Wings.WINDY_AURA){
-                    outputText("You unleash your sharp winds on your opponent delivering bruise and cuts");
-                }
-                else{
-                    outputText("You batter your foe with your two powerful wings");
-                }
-                if (player.wings.type == Wings.GARGOYLE_LIKE_LARGE){
-                    //(If gargoyle stun proc)
-                    outputText(" the stony impact sending it reel to the side, dazed");
-                }
-                outputText(".");
-                ExtraNaturalWeaponAttack(0.5);
+            switch(player.wings.type){
+                case Wings.THUNDEROUS_AURA:
+                    outputText("You zap your opponent with your aura, delivering a barrage of arousing discharge");
+                    LustyEnergyNaturalWeaponAttack(0.20);
+                    LustyEnergyNaturalWeaponAttack(0.20);
+                    LustyEnergyNaturalWeaponAttack(0.20);
+                    LustyEnergyNaturalWeaponAttack(0.20);
+                    LustyEnergyNaturalWeaponAttack(0.20);
+                    break;
+                case Wings.WINDY_AURA:
+                    outputText("You unleash your sharp winds on your opponent delivering bruise and cuts.");
+                    ExtraNaturalWeaponAttack(0.5);
+                    break;
+                case Wings.GARGOYLE_LIKE_LARGE:
+                    outputText("You batter your foe with your two powerful wings the stony impact sending it reel to the side, dazed.");
+                    ExtraNaturalWeaponAttack(0.5);
+                    break;
+                default:
+                    outputText("You batter your foe with your two powerful wings.");
+                    ExtraNaturalWeaponAttack(0.5);
             }
             outputText("\n");
         }
         //DOING HORN ATACK
         if (player.hasAGoreAttack()) {
-            if (player.horns.type == Horns.UNICORN || player.horns.type == Horns.KIRIN)
-            {
-                outputText("You impale your foe on your horn, blood coating the tip.");
-            } else {
-                outputText("You impale your foe on your horns, blood coating the tips.");
+            switch(player.horns.type){
+                case Horns.UNICORN:
+                case Horns.KIRIN:
+                    outputText("You impale your foe on your horn, blood coating the tip.");
+                    break;
+                default:
+                    outputText("You impale your foe on your horns, blood coating the tips.");
             }
+
             if (!monster.hasStatusEffect(StatusEffects.GoreBleed)) monster.createStatusEffect(StatusEffects.GoreBleed,16,0,0,0);
             else {
                 monster.removeStatusEffect(StatusEffects.GoreBleed);
                 monster.createStatusEffect(StatusEffects.GoreBleed,16,0,0,0);
             }
-            if (player.hasPerk(PerkLib.HellfireCoat)) {
+
+            if (pLibHellFireCoat) {
                 ExtraNaturalWeaponAttack(1.5, "fire");
-            } else if (player.statStore.hasBuff("FoxflamePelt")) {
-				ExtraNaturalWeaponAttack(1.5, "foxflame");
-			} else {
+            } else if (pFoxFlamePelt) {
+                ExtraNaturalWeaponAttack(1.5, "foxflame");
+            } else {
                 ExtraNaturalWeaponAttack(1.5);
             }
             outputText("\n");
@@ -5191,118 +5247,165 @@ public class Combat extends BaseContent {
         //TAIL SLAPPING FOR THE KILL
         if (player.hasATailSlapAttack()) {
             var TailDamageMultiplier:Number = 1;
-            if (player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.FROSTWYRM) TailDamageMultiplier = 3;
-            else if (player.tail.type == Tail.MANTICORE_PUSSYTAIL){
-                outputText("You hiss and raise your tail. You strike at blinding speed, impaling your opponent twice with your spike");
-                if (player.tailVenom >= player.VenomWebCost()) {
-                    outputText(" and injecting your venom in the process");
-                    //TailVenomArea
-                    var lustdamage:Number = 35 + rand(player.lib / 10);
-                    var lustDmg2:Number = 1;
-                    if (player.level < 10) lustdamage += 20 + (player.level * 3);
-                    else if (player.level < 20) lustdamage += 50 + (player.level - 10) * 2;
-                    else if (player.level < 30) lustdamage += 70 + (player.level - 20) * 1;
-                    else lustdamage += 80;
-                    lustdamage *= 0.14;
-                    if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg2 *= 2;
-                    lustdamage *= lustDmg2;
-                    if (player.armor == armors.ELFDRES && player.isElf()) lustdamage *= 2;
-                    if (player.armor == armors.FMDRESS && player.isWoodElf()) lustdamage *= 2;
-                    monster.teased(Math.round(monster.lustVuln * lustdamage), false);
-                    monster.statStore.addBuffObject({tou:-(lustDmg2*2)}, "Poison",{text:"Poison"});
-                    player.tailVenom -= player.VenomWebCost();
-                    flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
-                    if (player.tailVenom >= player.VenomWebCost()) {
-                        monster.teased(Math.round(monster.lustVuln * lustdamage), false);
-                        monster.statStore.addBuffObject({tou:-(lustDmg2*2)}, "Poison",{text:"Poison"});
-                        player.tailVenom -= player.VenomWebCost();
-                        flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
+
+            switch(player.lowerBody){
+                case LowerBody.NAGA:
+                case LowerBody.FROSTWYRM:
+                    TailDamageMultiplier = 3;
+                    outputText("You hit your opponent with a slam of your mighty tail.")
+                    if (pLibHellFireCoat) {
+                        ExtraNaturalWeaponAttack(TailDamageMultiplier, "fire");
+                    } else {
+                        ExtraNaturalWeaponAttack(TailDamageMultiplier);
                     }
-                    var dBd1c:Number = 1;
-                    if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dBd1c *= 2;
-                    monster.teased(Math.round(monster.lustVuln * lustdamage * dBd1c), false);
-                    combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-                    monster.statStore.addBuffObject({spe:-(dBd1c*10)}, "Poison",{text:"Poison"});
-                    if (monster.hasStatusEffect(StatusEffects.ManticoreVenom)) monster.addStatusValue(StatusEffects.ManticoreVenom,3,(dBd1c*5));
-                    else monster.createStatusEffect(StatusEffects.ManticoreVenom, 0, 0, (dBd1c*5), 0);
-                    player.tailVenom -= player.VenomWebCost();
-                }
-                outputText(".")
-                ExtraNaturalWeaponAttack(0.5);
-                ExtraNaturalWeaponAttack(0.5);
-                outputText("\n")
-            }
-            else if (player.tail.type == Tail.RAIJU || player.tail.type == Tail.THUNDERBIRD){
-                outputText("You overcharge your tail in order to deliver a pleasant but electrifying caress to your opponent.");
-                LustyEnergyNaturalWeaponAttack(1);
-                outputText("\n")
-            }
-            else if (player.tail.type == Tail.SCORPION || player.tail.type == Tail.BEE_ABDOMEN ){
-                outputText("You ready your stinger and plunge it deep into your opponent, delivering your poison in the process");
-                ExtraNaturalWeaponAttack(0.5);
-                var dBd2c:Number = 1;
-                //var venomType:StatusEffectType = StatusEffects.BeeVenom;
-                var lustdamage2:Number = 35 + rand(player.lib / 10);
-                var lustDmg3:Number = 1;
-                if (player.level < 10) lustdamage2 += 20 + (player.level * 3);
-                else if (player.level < 20) lustdamage2 += 50 + (player.level - 10) * 2;
-                else if (player.level < 30) lustdamage2 += 70 + (player.level - 20) * 1;
-                else lustdamage2 += 80;
-                lustdamage2 *= 0.14;
-                if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg3 *= 2;
-                lustdamage2 *= lustDmg3;
-                if (player.armor == armors.ELFDRES && player.isElf()) lustdamage2 *= 2;
-                if (player.armor == armors.FMDRESS && player.isWoodElf()) lustdamage2 *= 2;
-                monster.teased(Math.round(monster.lustVuln * lustdamage2), false);
-                combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-                if (monster.hasStatusEffect(StatusEffects.BeeVenom)) monster.addStatusValue(StatusEffects.BeeVenom,3,(dBd2c*5));
-                else monster.createStatusEffect(StatusEffects.BeeVenom, 0, 0, (lustDmg3 * 5), 0);
-				if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage(), false);
-                outputText("\n")
-            }
-			if (player.tail.type == Tail.GARGOYLE || player.tail.type == Tail.GARGOYLE_2){
-                outputText("You hit your opponent with a slam of your mighty tail");
-                if (player.tail.type == Tail.GARGOYLE) outputText(" leaving it dazed");
-				switch (Forgefather.channelInlay){
-					case "amethyst":
-						ExtraNaturalWeaponAttack(TailDamageMultiplier, "darkness");
-						ExtraNaturalWeaponAttack(TailDamageMultiplier, "darkness");
-						break;
-					case "ruby":
-						ExtraNaturalWeaponAttack(TailDamageMultiplier, "fire");
-						ExtraNaturalWeaponAttack(TailDamageMultiplier, "fire");
-						break;
-					case "sapphire":
-						ExtraNaturalWeaponAttack(TailDamageMultiplier, "ice");
-						ExtraNaturalWeaponAttack(TailDamageMultiplier, "ice");
-						break;
-					case "topaz":
-						ExtraNaturalWeaponAttack(TailDamageMultiplier, "lightning");
-						ExtraNaturalWeaponAttack(TailDamageMultiplier, "lightning");
-						break;
-					default:
-						ExtraNaturalWeaponAttack(TailDamageMultiplier);
-						ExtraNaturalWeaponAttack(TailDamageMultiplier);
-						break;
-				}
-                outputText("\n");
-			}
-            else if (player.tail.type == Tail.SALAMANDER || player.tail.type == Tail.KITSHOO){
-                outputText("You hit your opponent with a slam of your tail, setting your target on fire");
-                for (var tail:int = player.tailCount; tail > 0; tail--) {
-					if (player.statStore.hasBuff("FoxflamePelt")) ExtraNaturalWeaponAttack(TailDamageMultiplier, "foxflame");
-                    else ExtraNaturalWeaponAttack(TailDamageMultiplier, "fire");
-				}
-                outputText("\n");
-            }
-            else{
-                outputText("You hit your opponent with a slam of your mighty tail.")
-                if (player.hasPerk(PerkLib.HellfireCoat)) {
-                    ExtraNaturalWeaponAttack(TailDamageMultiplier, "fire");
-                } else {
-                    ExtraNaturalWeaponAttack(TailDamageMultiplier);
-                }
-                outputText("\n");
+                    outputText("\n");
+                    break;
+                default:
+                    switch(player.tail.type){
+                        case Tail.MANTICORE_PUSSYTAIL:
+                            outputText("You hiss and raise your tail. You strike at blinding speed, impaling your opponent twice with your spike");
+                            var pVenomWebCost:Number = player.VenomWebCost();
+
+                            if (player.tailVenom >= pVenomWebCost) {
+                                outputText(" and injecting your venom in the process");
+                                //TailVenomArea
+                                var lustdamage:Number = 35 + rand(player.lib / 10);
+                                var lustDmg2:Number = 1;
+                                var pLibImprovedVenomGlandSu:Boolean = player.hasPerk(PerkLib.ImprovedVenomGlandSu);
+
+                                if (player.level < 10) lustdamage += 20 + (player.level * 3);
+                                else if (player.level < 20) lustdamage += 50 + (player.level - 10) * 2;
+                                else if (player.level < 30) lustdamage += 70 + (player.level - 20) * 1;
+                                else lustdamage += 80;
+                                lustdamage *= 0.14;
+                                if (pLibImprovedVenomGlandSu) lustDmg2 *= 2;
+                                lustdamage *= lustDmg2;
+                                if (player.armor == armors.ELFDRES && player.isElf()) lustdamage *= 2;
+                                if (player.armor == armors.FMDRESS && player.isWoodElf()) lustdamage *= 2;
+                                monster.teased(Math.round(monster.lustVuln * lustdamage), false);
+                                monster.statStore.addBuffObject({tou:-(lustDmg2*2)}, "Poison",{text:"Poison"});
+                                player.tailVenom -= pVenomWebCost;
+                                flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
+                                if (player.tailVenom >= pVenomWebCost) {
+                                    monster.teased(Math.round(monster.lustVuln * lustdamage), false);
+                                    monster.statStore.addBuffObject({tou:-(lustDmg2*2)}, "Poison",{text:"Poison"});
+                                    player.tailVenom -= pVenomWebCost;
+                                    flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
+                                }
+                                var dBd1c:Number = 1;
+                                if (pLibImprovedVenomGlandSu) dBd1c *= 2;
+                                monster.teased(Math.round(monster.lustVuln * lustdamage * dBd1c), false);
+                                combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+                                monster.statStore.addBuffObject({spe:-(dBd1c*10)}, "Poison",{text:"Poison"});
+                                if (monster.hasStatusEffect(StatusEffects.ManticoreVenom)) monster.addStatusValue(StatusEffects.ManticoreVenom,3,(dBd1c*5));
+                                else monster.createStatusEffect(StatusEffects.ManticoreVenom, 0, 0, (dBd1c*5), 0);
+                                player.tailVenom -= pVenomWebCost;
+                            }
+                            outputText(".")
+                            ExtraNaturalWeaponAttack(0.5);
+                            ExtraNaturalWeaponAttack(0.5);
+                            outputText("\n")
+                            break;
+                        case Tail.RAIJU:
+                        case Tail.THUNDERBIRD:
+                            outputText("You overcharge your tail in order to deliver a pleasant but electrifying caress to your opponent.");
+                            LustyEnergyNaturalWeaponAttack(1);
+                            outputText("\n");
+                            break;
+                        case Tail.SCORPION:
+                        case Tail.BEE_ABDOMEN:
+                            outputText("You ready your stinger and plunge it deep into your opponent, delivering your poison in the process");
+                            ExtraNaturalWeaponAttack(0.5);
+                            var dBd2c:Number = 1;
+                            //var venomType:StatusEffectType = StatusEffects.BeeVenom;
+                            var lustdamage2:Number = 35 + rand(player.lib / 10);
+                            var lustDmg3:Number = 1;
+                            if (player.level < 10) lustdamage2 += 20 + (player.level * 3);
+                            else if (player.level < 20) lustdamage2 += 50 + (player.level - 10) * 2;
+                            else if (player.level < 30) lustdamage2 += 70 + (player.level - 20) * 1;
+                            else lustdamage2 += 80;
+                            lustdamage2 *= 0.14;
+                            if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg3 *= 2;
+                            lustdamage2 *= lustDmg3;
+                            if (player.armor == armors.ELFDRES && player.isElf()) lustdamage2 *= 2;
+                            if (player.armor == armors.FMDRESS && player.isWoodElf()) lustdamage2 *= 2;
+                            monster.teased(Math.round(monster.lustVuln * lustdamage2), false);
+                            combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+                            if (monster.hasStatusEffect(StatusEffects.BeeVenom)) monster.addStatusValue(StatusEffects.BeeVenom,3,(dBd2c*5));
+                            else monster.createStatusEffect(StatusEffects.BeeVenom, 0, 0, (lustDmg3 * 5), 0);
+                            if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage(), false);
+                            outputText("\n")
+                            break;
+                        case Tail.GARGOYLE:
+                            outputText("You hit your opponent with a slam of your mighty tail leaving it dazed");
+                            switch (Forgefather.channelInlay){
+                                case "amethyst":
+                                    ExtraNaturalWeaponAttack(TailDamageMultiplier, "darkness");
+                                    ExtraNaturalWeaponAttack(TailDamageMultiplier, "darkness");
+                                    break;
+                                case "ruby":
+                                    ExtraNaturalWeaponAttack(TailDamageMultiplier, "fire");
+                                    ExtraNaturalWeaponAttack(TailDamageMultiplier, "fire");
+                                    break;
+                                case "sapphire":
+                                    ExtraNaturalWeaponAttack(TailDamageMultiplier, "ice");
+                                    ExtraNaturalWeaponAttack(TailDamageMultiplier, "ice");
+                                    break;
+                                case "topaz":
+                                    ExtraNaturalWeaponAttack(TailDamageMultiplier, "lightning");
+                                    ExtraNaturalWeaponAttack(TailDamageMultiplier, "lightning");
+                                    break;
+                                default:
+                                    ExtraNaturalWeaponAttack(TailDamageMultiplier);
+                                    ExtraNaturalWeaponAttack(TailDamageMultiplier);
+                                    break;
+                            }
+                            outputText("\n");
+                            break;
+                        case Tail.GARGOYLE_2:
+                            outputText("You hit your opponent with a slam of your mighty tail");
+                            switch (Forgefather.channelInlay){
+                                case "amethyst":
+                                    ExtraNaturalWeaponAttack(TailDamageMultiplier, "darkness");
+                                    ExtraNaturalWeaponAttack(TailDamageMultiplier, "darkness");
+                                    break;
+                                case "ruby":
+                                    ExtraNaturalWeaponAttack(TailDamageMultiplier, "fire");
+                                    ExtraNaturalWeaponAttack(TailDamageMultiplier, "fire");
+                                    break;
+                                case "sapphire":
+                                    ExtraNaturalWeaponAttack(TailDamageMultiplier, "ice");
+                                    ExtraNaturalWeaponAttack(TailDamageMultiplier, "ice");
+                                    break;
+                                case "topaz":
+                                    ExtraNaturalWeaponAttack(TailDamageMultiplier, "lightning");
+                                    ExtraNaturalWeaponAttack(TailDamageMultiplier, "lightning");
+                                    break;
+                                default:
+                                    ExtraNaturalWeaponAttack(TailDamageMultiplier);
+                                    ExtraNaturalWeaponAttack(TailDamageMultiplier);
+                                    break;
+                            }
+                            outputText("\n");
+                            break;
+                        case Tail.SALAMANDER:
+                        case Tail.KITSHOO:
+                            outputText("You hit your opponent with a slam of your tail, setting your target on fire");
+                            for (var tail:int = player.tailCount; tail > 0; tail--) {
+                                if (pFoxFlamePelt) ExtraNaturalWeaponAttack(TailDamageMultiplier, "foxflame");
+                                else ExtraNaturalWeaponAttack(TailDamageMultiplier, "fire");
+                            }
+                            outputText("\n");
+                            break;
+                        default:
+                            outputText("You hit your opponent with a slam of your mighty tail.")
+                            if (pLibHellFireCoat) {
+                                ExtraNaturalWeaponAttack(TailDamageMultiplier, "fire");
+                            } else {
+                                ExtraNaturalWeaponAttack(TailDamageMultiplier);
+                            }
+                            outputText("\n");
+                    }
             }
         }
         //Unique attack Mantis Prayer
@@ -5354,14 +5457,7 @@ public class Combat extends BaseContent {
                 }
             }
         }
-        //Unique attack Cerberus fire breath
-        if (player.faceType == Face.CERBERUS && player.hasPerk(PerkLib.Hellfire)) {
-            outputText("You unleash a tripple blast of fire from your heads, engulfing [themonster] in Hellfire.");
-            ExtraNaturalWeaponAttack(1, "fire");
-            ExtraNaturalWeaponAttack(1, "fire");
-            ExtraNaturalWeaponAttack(1, "fire");
-            outputText("\n");
-        }
+        // Migrate cerberus check to face checks together
         //Unique attack Slime
         if (player.hasPerk(PerkLib.MorphicWeaponry)) {
             outputText("You form tentacles out of your slimy body and batter your opponent with them.");
@@ -5392,6 +5488,7 @@ public class Combat extends BaseContent {
             outputText("\n");
         }
         //Unique attack werewolf
+        // I really really really want to congregate these isRaceCached attacks together
         if ((player.isRaceCached(Races.WEREWOLF) || player.isRaceCached(Races.CERBERUS)) && player.hasMutation(IMutationsLib.AlphaHowlIM)) {
             var WerewolfPackDamageMultiplier:Number = 0.5;
             var packMembers:Number = LunaFollower.WerewolfPackMember;
@@ -5402,7 +5499,7 @@ public class Combat extends BaseContent {
                 if (packMembers >= 2)outputText("s");
                 outputText(" joining in to deliver bites and claw swipes from all sides.");
                 if (player.perkv3(IMutationsLib.HellhoundFireBallsIM) > 0)
-                WerewolfPackDamageMultiplier += (packMembers/2);
+                    WerewolfPackDamageMultiplier += (packMembers/2);
             }
             ExtraNaturalWeaponAttack(WerewolfPackDamageMultiplier);
         }

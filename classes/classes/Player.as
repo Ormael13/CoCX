@@ -2818,14 +2818,15 @@ use namespace CoC;
 			// we return "1 damage received" if it is in (0..1) but deduce no HP
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
+				var i:Number = 0;
 				if (henchmanBasedInvulnerabilityFrame()) {
-					for(var i:Number = 0; i < hit; i++){
+					for(i; i < hit; i++){
 						henchmanBasedInvulnerabilityFrameTexts();
 					}
 					damage = 0;
 				}
 				else if (hasStatusEffect(StatusEffects.TurquoiseBandProtection)){
-					for(var i:Number = 0; i < hit; i++){
+					for(i = 0; i < hit; i++){
 						SceneLib.combat.triggeredTurquoiseBandProtectionTexts();
 					}
 					damage = 0;
@@ -2835,7 +2836,7 @@ use namespace CoC;
 				if (hasStatusEffect(StatusEffects.AdamantineShell)) afterShieldMult = afterShieldMult * 0.25;
 				if (hasStatusEffect(StatusEffects.BoneArmor)) afterShieldMult = afterShieldMult * 0.5;
 
-				for(var i:Number = 0; i < hit; i++){
+				for(i = 0; i < hit; i++){
 					var shieldDamage:Number = damage;
 
 					if (hasStatusEffect(StatusEffects.ManaShield)) {
@@ -2874,7 +2875,7 @@ use namespace CoC;
 								armorMod = 1 / damagePercentArmor();
 							}
 							// Add damage *= armorMod
-							for(var i:Number = 0; i < remainingHit.length; i++){
+							for(i = 0; i < remainingHit.length; i++){
 								remainingHit[i] *= armorMod;
 								remainingHit[i] = reducePhysDamage(remainingHit[i]);
 								damage += remainingHit[i];
@@ -2888,7 +2889,7 @@ use namespace CoC;
 								armorMod = 1 / damagePercentMRes();
 							}
 							// Add damage *= armorMod
-							for(var i:Number = 0; i < remainingHit.length; i++){
+							for(i = 0; i < remainingHit.length; i++){
 								remainingHit[i] *= armorMod;
 								remainingHit[i] = reduceMagicDamage(remainingHit[i]);
 								damage += remainingHit[i];
@@ -2903,7 +2904,7 @@ use namespace CoC;
 								if (hasPerk(PerkLib.WalpurgisIzaliaRobe)) armorMod = armorMod/4*3;
 							}
 							// damage *= armorMod / 4 * 3
-							for(var i:Number = 0; i < remainingHit.length; i++){
+							for(i = 0; i < remainingHit.length; i++){
 								remainingHit[i] *= armorMod;
 								remainingHit[i] = reduceFireDamage(remainingHit[i]);
 								damage += remainingHit[i];
@@ -2917,7 +2918,7 @@ use namespace CoC;
 								armorMod = 1 / damagePercentMRes();
 							}
 							// damage *= armorMod / 4 * 3
-							for(var i:Number = 0; i < remainingHit.length; i++){
+							for(i = 0; i < remainingHit.length; i++){
 								remainingHit[i] *= armorMod;
 								remainingHit[i] = reduceIceDamage(remainingHit[i]);
 								damage += remainingHit[i];
@@ -2931,7 +2932,7 @@ use namespace CoC;
 								armorMod = 1 / damagePercentMRes();
 							}
 							// damage *= armorMod / 4 * 3
-							for(var i:Number = 0; i < remainingHit.length; i++){
+							for(i = 0; i < remainingHit.length; i++){
 								remainingHit[i] *= armorMod;
 								remainingHit[i] = reduceLightningDamage(remainingHit[i]);
 								damage += remainingHit[i];
@@ -2945,7 +2946,7 @@ use namespace CoC;
 								armorMod = 1 / damagePercentMRes();
 							}
 							// damage *= armorMod / 4 * 3
-							for(var i:Number = 0; i < remainingHit.length; i++){
+							for(i = 0; i < remainingHit.length; i++){
 								remainingHit[i] *= armorMod;
 								remainingHit[i] = reduceDarknessDamage(remainingHit[i]);
 								damage += remainingHit[i];
@@ -2959,7 +2960,7 @@ use namespace CoC;
 								armorMod = 1 / damagePercentMRes();
 							}
 							// damage *= armorMod / 4 * 3
-							for(var i:Number = 0; i < remainingHit.length; i++){
+							for(i = 0; i < remainingHit.length; i++){
 								remainingHit[i] *= armorMod;
 								remainingHit[i] = reducePoisonDamage(remainingHit[i]);
 								damage += remainingHit[i];
@@ -2973,7 +2974,7 @@ use namespace CoC;
 								armorMod = 1 / damagePercentMRes();
 							}
 							// damage *= armorMod / 4 * 3
-							for(var i:Number = 0; i < remainingHit.length; i++){
+							for(i = 0; i < remainingHit.length; i++){
 								remainingHit[i] *= armorMod;
 								remainingHit[i] = reduceWindDamage(remainingHit[i]);
 								damage += remainingHit[i];
@@ -2987,7 +2988,7 @@ use namespace CoC;
 								armorMod = 1 / damagePercentMRes();
 							}
 							// damage *= armorMod / 4 * 3
-							for(var i:Number = 0; i < remainingHit.length; i++){
+							for(i = 0; i < remainingHit.length; i++){
 								remainingHit[i] *= armorMod;
 								remainingHit[i] = reduceWaterDamage(remainingHit[i]);
 								damage += remainingHit[i];
@@ -3001,7 +3002,7 @@ use namespace CoC;
 								armorMod = 1 / damagePercentMRes();
 							}
 							// damage *= armorMod / 4 * 3
-							for(var i:Number = 0; i < remainingHit.length; i++){
+							for(i = 0; i < remainingHit.length; i++){
 								remainingHit[i] *= armorMod;
 								remainingHit[i] = reduceEarthDamage(remainingHit[i]);
 								damage += remainingHit[i];
@@ -3015,7 +3016,7 @@ use namespace CoC;
 								armorMod = 1 / damagePercentMRes();
 							}
 							// damage *= armorMod / 4 * 3
-							for(var i:Number = 0; i < remainingHit.length; i++){
+							for(i =0; i < remainingHit.length; i++){
 								remainingHit[i] *= armorMod;
 								remainingHit[i] = reduceAcidDamage(remainingHit[i]);
 								damage += remainingHit[i];
@@ -3029,7 +3030,7 @@ use namespace CoC;
 								armorMod = 1 / damagePercentArmor();
 							}
 							// damage *= armorMod / 4 * 3
-							for(var i:Number = 0; i < remainingHit.length; i++){
+							for(i = 0; i < remainingHit.length; i++){
 								remainingHit[i] *= armorMod;
 								remainingHit[i] = reducePhysDamage(remainingHit[i]);
 								damage += remainingHit[i];
