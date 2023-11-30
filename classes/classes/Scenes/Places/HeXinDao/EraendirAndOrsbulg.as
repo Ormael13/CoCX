@@ -5,6 +5,7 @@
 package classes.Scenes.Places.HeXinDao 
 {
 import classes.*;
+import classes.Scenes.API.MultiBuy;
 
 public class EraendirAndOrsbulg extends HeXinDaoAbstractContent
 	{
@@ -24,37 +25,21 @@ public class EraendirAndOrsbulg extends HeXinDaoAbstractContent
 			clearOutput();
 			outputText("The elf gives you a wide display of his many knife and swords. Small blades indeed but sharp and light, ideal to deliver many cuts in the time it normaly takes to deliver 1 strike.");
 			menu();
-			addButton(0, weapons.DAGGER.shortName, itemBuy1, weapons.DAGGER);
-			addButton(1, weapons.TRIDAG.shortName, itemBuy1, weapons.TRIDAG);
-			addButton(2, weapons.TDAGGER.shortName, itemBuy1, weapons.TDAGGER);
-			addButton(3, weapons.DAGWHIP.shortName, itemBuy1, weapons.DAGWHIP);
-			addButton(4, weapons.ANGSTD1.shortName, itemBuy1, weapons.ANGSTD1);
-			addButton(5, weapons.ADAGGER.shortName, itemBuy1, weapons.ADAGGER);
-			addButton(6, weapons.RDAGGER.shortName, itemBuy1, weapons.RDAGGER);
-			addButton(7, weapons.SDAGGER.shortName, itemBuy1, weapons.SDAGGER);
-			addButton(8, weapons.TODAGGER.shortName, itemBuy1, weapons.TODAGGER);
-			addButton(9, weapons.FLYINGC.shortName, itemBuy1, weapons.FLYINGC);
-			addButton(10, weapons.KAMA.shortName, itemBuy1, weapons.KAMA);
-			addButton(11, weapons.KAMAWHIP.shortName, itemBuy1, weapons.KAMAWHIP);
+			addButton(0, weapons.DAGGER.shortName, itemBuy, weapons.DAGGER, EraendirMainMenu, "Eraendir");
+			addButton(1, weapons.TRIDAG.shortName, itemBuy, weapons.TRIDAG, EraendirMainMenu, "Eraendir");
+			addButton(2, weapons.TDAGGER.shortName, itemBuy, weapons.TDAGGER, EraendirMainMenu, "Eraendir");
+			addButton(3, weapons.DAGWHIP.shortName, itemBuy, weapons.DAGWHIP, EraendirMainMenu, "Eraendir");
+			addButton(4, weapons.ANGSTD1.shortName, itemBuy, weapons.ANGSTD1, EraendirMainMenu, "Eraendir");
+			addButton(5, weapons.ADAGGER.shortName, itemBuy, weapons.ADAGGER, EraendirMainMenu, "Eraendir");
+			addButton(6, weapons.RDAGGER.shortName, itemBuy, weapons.RDAGGER, EraendirMainMenu, "Eraendir");
+			addButton(7, weapons.SDAGGER.shortName, itemBuy, weapons.SDAGGER, EraendirMainMenu, "Eraendir");
+			addButton(8, weapons.TODAGGER.shortName, itemBuy, weapons.TODAGGER, EraendirMainMenu, "Eraendir");
+			addButton(9, weapons.FLYINGC.shortName, itemBuy, weapons.FLYINGC, EraendirMainMenu, "Eraendir");
+			addButton(10, weapons.KAMA.shortName, itemBuy, weapons.KAMA, EraendirMainMenu, "Eraendir");
+			addButton(11, weapons.KAMAWHIP.shortName, itemBuy, weapons.KAMAWHIP, EraendirMainMenu, "Eraendir");
 			//12
-			addButton(13, weapons.S_SWORD.shortName, itemBuy1, weapons.S_SWORD);
+			addButton(13, weapons.S_SWORD.shortName, itemBuy, weapons.S_SWORD, EraendirMainMenu, "Eraendir");
 			addButton(14, "Back", EraendirMainMenu);
-		}
-		private function itemBuy1(itype:ItemType):void {
-			clearOutput();
-			outputText("\"<i>Interested? It’s yours for only " + itype.value + " gems.</i>\"");
-			if(player.gems < itype.value) {
-				outputText("\n\nYou count out your gems and realize it's beyond your price range.");
-				doNext(EraendirBuyMenu);
-				return;
-			}
-			else outputText("\n\nDo you buy it?\n\n");
-			doYesNo(curry(debitWeapon1,itype), EraendirBuyMenu);
-		}
-		private function debitWeapon1(itype:ItemType):void {
-			player.gems -= itype.value;
-			statScreenRefresh();
-			inventory.takeItem(itype, EraendirBuyMenu);
 		}
 		
 		public function OrsbulgMainMenu():void {
@@ -68,37 +53,27 @@ public class EraendirAndOrsbulg extends HeXinDaoAbstractContent
 			clearOutput();
 			menu();
 			outputText("\"<i>Only the biggest deadliest weapon right here!</i>\"");
-			addButton(0, weapons.BFSWORD.shortName, itemBuy2, weapons.BFSWORD);
-			addButton(1, weapons.BFTHSWORD.shortName, itemBuy2, weapons.BFTHSWORD);
-			addButton(2, weapons.BFWHIP.shortName, itemBuy2, weapons.BFWHIP);
-			addButton(3, weapons.OTETSU.shortName, itemBuy2, weapons.OTETSU);
-			addButton(4, weapons.DWARWA.shortName, itemBuy2, weapons.DWARWA);
-			addButton(5, weapons.SKYPIER.shortName, itemBuy2, weapons.SKYPIER);
-			addButton(6, weapons.GUANDAO.shortName, itemBuy2, weapons.GUANDAO);
-			addButton(7, weapons.TB_SCYT.shortName, itemBuy2, weapons.TB_SCYT);
-			addButton(8, weapons.BFGAUNT.shortName, itemBuy2, weapons.BFGAUNT);
+			addButton(0, weapons.BFSWORD.shortName, itemBuy, weapons.BFSWORD, OrsbulgMainMenu, "Orsbulg");
+			addButton(1, weapons.BFTHSWORD.shortName, itemBuy, weapons.BFTHSWORD, OrsbulgMainMenu, "Orsbulg");
+			addButton(2, weapons.BFWHIP.shortName, itemBuy, weapons.BFWHIP, OrsbulgMainMenu, "Orsbulg");
+			addButton(3, weapons.OTETSU.shortName, itemBuy, weapons.OTETSU, OrsbulgMainMenu, "Orsbulg");
+			addButton(4, weapons.DWARWA.shortName, itemBuy, weapons.DWARWA, OrsbulgMainMenu, "Orsbulg");
+			addButton(5, weapons.SKYPIER.shortName, itemBuy, weapons.SKYPIER, OrsbulgMainMenu, "Orsbulg");
+			addButton(6, weapons.GUANDAO.shortName, itemBuy, weapons.GUANDAO, OrsbulgMainMenu, "Orsbulg");
+			addButton(7, weapons.TB_SCYT.shortName, itemBuy, weapons.TB_SCYT, OrsbulgMainMenu, "Orsbulg");
+			addButton(8, weapons.BFGAUNT.shortName, itemBuy, weapons.BFGAUNT, OrsbulgMainMenu, "Orsbulg");
 			//9
-			addButton(10, weaponsrange.B_F_BOW.shortName, itemBuy2, weaponsrange.B_F_BOW);
-			addButton(11, weaponsrange.BFXBOW_.shortName, itemBuy2, weaponsrange.BFXBOW_);
+			addButton(10, weaponsrange.B_F_BOW.shortName, itemBuy, weaponsrange.B_F_BOW, OrsbulgMainMenu, "Orsbulg");
+			addButton(11, weaponsrange.BFXBOW_.shortName, itemBuy, weaponsrange.BFXBOW_, OrsbulgMainMenu, "Orsbulg");
 			//12
 			//13
 			addButton(14, "Back", OrsbulgMainMenu);
 		}
-		private function itemBuy2(itype:ItemType):void {
-			clearOutput();
-			outputText("\"<i>Interested? It’s yours for only " + itype.value + " gems.</i>\"");
-			if(player.gems < itype.value) {
-				outputText("\n\nYou count out your gems and realize it's beyond your price range.");
-				doNext(OrsbulgBuyMenu);
-				return;
-			}
-			else outputText("\n\nDo you buy it?\n\n");
-			doYesNo(curry(debitWeapon2,itype), OrsbulgBuyMenu);
-		}
-		private function debitWeapon2(itype:ItemType):void {
-			player.gems -= itype.value;
-			statScreenRefresh();
-			inventory.takeItem(itype, OrsbulgBuyMenu);
+
+		private function itemBuy(itype:ItemType, returnFunc:Function, merchant:String):void {
+			var descString:String = "\"<i>Interested?</i>\"";
+			
+			MultiBuy.confirmBuyMulti(returnFunc, merchant, 1, itype, descString, "\n");
 		}
 	}
 }
