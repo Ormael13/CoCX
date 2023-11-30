@@ -43,11 +43,11 @@ public class VictoriaTailorShop extends Shop {
         addButton(14, "Leave", telAdre.telAdreMenu);
     }
 
-    protected override function confirmBuy(itype:ItemType = null, priceOverride:int = -1, keyItem:String = ""):void {
+    protected override function confirmBuy(itype:ItemType = null, priceOverride:int = -1, keyItem:String = "", priceRate:Number = 1, useStones:Boolean = false, currentQuantity:int = 1):void {
         clearOutput();
-        super.confirmBuy(itype);
+        super.confirmBuy(itype, priceOverride, keyItem, priceRate, useStones, currentQuantity);
         if (player.hasCock() && player.lust >= 33) {
-            addButton(4, "Flirt", flirtWithVictoria, itype);
+            addButton(10, "Flirt", curry(flirtWithVictoria, itype, priceOverride, keyItem, priceRate, useStones, currentQuantity));
         }
     }
 
@@ -74,7 +74,7 @@ public class VictoriaTailorShop extends Shop {
     //*Typical buy text goes here. Options are now Yes/No/Flirt*
 
     //[Flirt]
-    private function flirtWithVictoria(itype:ItemType):void {
+    private function flirtWithVictoria(itype:ItemType, priceOverride:int = -1, keyItem:String = "", priceRate:Number = 1, useStones:Boolean = false, currentQuantity:int = 1):void {
         clearOutput();
         var x:Number = player.cockThatFits(70);
         if (x < 0) {
@@ -83,7 +83,7 @@ public class VictoriaTailorShop extends Shop {
         display("flirtWithVictoria/intro",{x:x});
         if (x < 0) {
             display("flirtWithVictoria/tooSmall",{x:x});
-            doYesNo(curry(debit, itype), inside);
+            doYesNo(curry(debit, itype, itype, priceOverride, keyItem, priceRate, useStones, currentQuantity), inside);
             return;
         }
         display("flirtWithVictoria/scene",{x:x});
