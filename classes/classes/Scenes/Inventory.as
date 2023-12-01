@@ -871,7 +871,7 @@ use namespace CoC;
 				temp = (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < SceneLib.camp.campMake.maxReusableGolemCoresBagSize() ? flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]:-1);
 				if (temp >= 0) {
 					flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]++;
-					outputText("You place " + itype.longName + " in your quest materials pouch, giving you "+ (temp+1) +" of them.");
+					outputText("You place " + itype.longName + " in your Golem Core bag, giving you "+ (temp+1) +" of them.");
 					itemGoNext();
 					return;
 				}
