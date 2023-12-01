@@ -169,6 +169,7 @@ private function sellItem(item:Useable,cost:int = -1,buy:Boolean=false):void{
 	if (cost > 0) {
 		priceRate = item.value / cost;
 	}
+	var priceToShow:int = (cost > 0)? cost: item.value;
 
 	var descString:String;
 	switch(item){
@@ -177,28 +178,28 @@ private function sellItem(item:Useable,cost:int = -1,buy:Boolean=false):void{
 		case armors.BLKIMONO:
 		case armors.BKIMONO:
 		case armors.PKIMONO:
-			descString = "\"<i>To look the part, you will have to dress the part. This magical clothing is made for a kitsune, and to be honest I think <b>" + cost.toString() + " gems</b> is somewhat cheap for an enchanted garment like this.</i>\"";
+			descString = "\"<i>To look the part, you will have to dress the part. This magical clothing is made for a kitsune, and to be honest I think <b>" + priceToShow.toString() + " gems</b> is somewhat cheap for an enchanted garment like this.</i>\"";
 			break;
 		case armors.ARCBANG:
-			descString = "\"<i>To look the part, you will have to dress the part. This is magical clothing made for a kitsune, and to be honest I think <b>" + cost.toString() + " gems</b> gems is somewhat cheap for it.</i>\"";
+			descString = "\"<i>To look the part, you will have to dress the part. This is magical clothing made for a kitsune, and to be honest I think <b>" + priceToShow.toString() + " gems</b> gems is somewhat cheap for it.</i>\"";
 			break;
 		case shields.SPI_FOC:
-			descString = "\"<i>This little icon is a very powerful spellcasting tool. It helps empower a kitsune’s magic. I don't get the use of shields; it’s so pointless. I can sell you one for <b>" + cost.toString() + " gems</b>.</i>\"";
+			descString = "\"<i>This little icon is a very powerful spellcasting tool. It helps empower a kitsune’s magic. I don't get the use of shields; it’s so pointless. I can sell you one for <b>" + priceToShow.toString() + " gems</b>.</i>\"";
 			break;
 		case headjewelries.FOXHAIR:
-			descString = "\"<i>This might appear to be just an accessory, but I personally blessed it in the name of Taoth. Should you wear it, this hairpin is likely to improve your ability to focus soul magic. This item wasn’t easy to make, which is why I can’t sell it to you for less than <b>" + cost.toString() + " gems</b>.</i>\"";
+			descString = "\"<i>This might appear to be just an accessory, but I personally blessed it in the name of Taoth. Should you wear it, this hairpin is likely to improve your ability to focus soul magic. This item wasn’t easy to make, which is why I can’t sell it to you for less than <b>" + priceToShow.toString() + " gems</b>.</i>\"";
 			break;
 		case consumables.FOXJEWL:
-			descString = "\"<i>Don’t worry, these jewels are not actually that precious. One could say it’s concentrated kitsune energy crystallized into a gem. It’s not much, but it will help you grow your powers. I can sell you one for <b>" + cost.toString() + " gems</b>.</i>\"";
+			descString = "\"<i>Don’t worry, these jewels are not actually that precious. One could say it’s concentrated kitsune energy crystallized into a gem. It’s not much, but it will help you grow your powers. I can sell you one for <b>" + priceToShow.toString() + " gems</b>.</i>\"";
 			break;
 		case consumables.AGILI_E:
 			descString = "\"<i>This elixir helps increase your natural speed. While you may think casting magical pranks is enough, it would be wise to actually work on your agility for a fast trick or a swift escape.</i>\"";
 			break;
 		case consumables.SMART_T:
-			descString = "\"<i>Kitsune's wits are their primary weapon. Since you weren't born one of us, you will need to learn true trickery. Drinking this tea can help you sharpen your dull human wits. I think <b>" + cost.toString() + " gems</b> is not too steep a price for the gift of intelligence.</i>\"";
+			descString = "\"<i>Kitsune's wits are their primary weapon. Since you weren't born one of us, you will need to learn true trickery. Drinking this tea can help you sharpen your dull human wits. I think <b>" + priceToShow.toString() + " gems</b> is not too steep a price for the gift of intelligence.</i>\"";
 			break;
 		case consumables.VIXEN_T:
-			descString = "\"<i>Honing your tongue and sexual knowledge is a valiant goal as a kitsune. We kitsune are naturally born with a talent for sex and innuendo, but since you weren't born as one of us, you will need this tea to master it. I think <b>" + cost.toString() + " gems</b> is a good deal to learn how to truly be lascivious.</i>\"";
+			descString = "\"<i>Honing your tongue and sexual knowledge is a valiant goal as a kitsune. We kitsune are naturally born with a talent for sex and innuendo, but since you weren't born as one of us, you will need this tea to master it. I think <b>" + priceToShow.toString() + " gems</b> is a good deal to learn how to truly be lascivious.</i>\"";
 			break;
 		case consumables.INCOINS:
 			descString = "\"<i>These incenses are quite special. They will grant you visions if only for a moment while meditating. This should help you find the wisdom and insight you need.</i>\"";
