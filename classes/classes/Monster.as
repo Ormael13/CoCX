@@ -2505,6 +2505,20 @@ import flash.utils.getQualifiedClassName;
 		}
 
 		/**
+		 * <p>meleeDamageAcc() Override Series - Part 1</p>
+		 * <ul>
+		 *     <li>Called right when melee damage began to calculate</li>
+		 *     <li>It is used to alter individual melee damage after feral attacks</li>
+		 *     <li>PS: Should there be also overrides for feral attack as well?</li>
+		 *     <li>return Number: Current Instance of melee damage changed</li>
+		 * </ul>
+		 * @damage: Current Instance of Melee Damage
+		 */
+		public function preMeleeDmg(damage:Number):Number{
+			return damage;
+		}
+
+		/**
 		 * This method is called after all stun/fear/constricted checks.
 		 * Default: Equal chance to do physical or special (if any) attack
 		 */
