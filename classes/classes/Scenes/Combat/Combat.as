@@ -6046,40 +6046,19 @@ public class Combat extends BaseContent {
                     damage += temp;
                 }
                 //ANEMONE SHIT
+                // NGL this looks fucking retarded for a monster mechanic
+                // and a whole override for a retarded exit function feels even worse so I keep this shit here
+                // until someone think of better idea
                 if(anemoneCheck()) return;
                 crit = rand(100) < critChance;
                 if(crit) damage *= critDamage;
                 hitCounter++;
                 damage = Math.round(damage);
                 // Have to put it before doDamage, because doDamage applies the change, as well as status effects and shit.
-                if (monster is Doppleganger) {
-                    if (!monster.monsterIsStunned()) {
-                        if (damage > 0) {
-                            damage = itemsBonusDamageDamage(damage);
-                            damage = statusEffectBonusDamage(damage);
-                            if (player.hasPerk(PerkLib.GoblinoidBlood)) {
-                                if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
-                                if (player.hasKeyItem("Powboy") >= 0) damage *= 1.15;
-                                if (player.hasKeyItem("M.G.S. bracer") >= 0) damage *= 1.2;
-                            }
-                        }
-                        (monster as Doppleganger).mirrorAttack(damage);
-                    }
-                    // Stunning the doppleganger should now "buy" you another round.
-                    if (monster.hasStatusEffect(StatusEffects.MirroredAttack)) {//Doppelganger parry!
-                        damage = 0;
-                        monster.removeStatusEffect(StatusEffects.MirroredAttack);
-                    }
-                }
-                //Lab Guard tanking
-                if (monster is LabGuard && (monster as LabGuard).shieldWall && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-                    monster.eOneAttack(true);
-                    if (player.HP <= player.minHP()) {
-                        doNext(endHpLoss);
-                        return;
-                    }
-                    damage /= 2;
-                }
+                // Migrate mirror
+                // Migrate LabGuard shieldWall check
+                // This is a long ass spaghet
+                damage = monster.preMeleeDmg(damage);
                 if (player.weapon is HuntsmansCane) {
                     outputText(randomChoice("You swing your cane through the air. The light wood lands with a loud CRACK that is probably more noisy than painful. ",
                             "You brandish your cane like a sword, slicing it through the air. It thumps against your adversary, but doesn’t really seem to harm them much. "));

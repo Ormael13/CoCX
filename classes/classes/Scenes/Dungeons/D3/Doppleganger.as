@@ -5,6 +5,7 @@ import classes.BodyParts.Ears;
 import classes.BreastRowClass;
 import classes.Cock;
 import classes.Monster;
+import classes.PerkLib;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.Combat.SpellsWhite.WhitefireSpell;
 import classes.Scenes.SceneLib;
@@ -122,7 +123,27 @@ import classes.VaginaClass;
 			}
 			if (!monsterIsStunned()) _roundCount++;
 		}
-		
+
+		override public function preMeleeDmg(damage:Number):Number{
+			if (!monsterIsStunned()) {
+				if (damage > 0) {
+					damage = SceneLib.combat.itemsBonusDamageDamage(damage);
+					damage = SceneLib.combat.statusEffectBonusDamage(damage);
+					if (player.hasPerk(PerkLib.GoblinoidBlood)) {
+						if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
+						if (player.hasKeyItem("Powboy") >= 0) damage *= 1.15;
+						if (player.hasKeyItem("M.G.S. bracer") >= 0) damage *= 1.2;
+					}
+				}
+				mirrorAttack(damage);
+			}
+			// Stunning the doppleganger should now "buy" you another round.
+			if (hasStatusEffect(StatusEffects.MirroredAttack)) {//Doppelganger parry!
+				damage = 0;
+				removeStatusEffect(StatusEffects.MirroredAttack);
+			}
+			return damage;
+		}
 		override public function defeated(hpVictory:Boolean):void
 		{
 			SceneLib.d3.doppleganger.punchYourselfInTheBalls();
