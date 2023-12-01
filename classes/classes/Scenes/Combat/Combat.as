@@ -3553,40 +3553,40 @@ public class Combat extends BaseContent {
     }
 
     public function doArcheryDamage(damage:Number, type:Number = 0):void {
+        var ignoreDR:Boolean = ((player.hasPerk(PerkLib.DeadlyAim) && type == 0) || (player.hasPerk(PerkLib.Penetrator) && type == 1));
         if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) {
-			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true, ignoreDR);
 		}
         else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) {
-			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true, ignoreDR);
 		}
         else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) {
-			doLightingDamage(damage, true, true);
+			doLightingDamage(damage, true, true, ignoreDR);
 		}
         else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) {
-			doDarknessDamage(damage, true, true);
+			doDarknessDamage(damage, true, true, ignoreDR);
 		}
         else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 5) {
-			doWaterDamage(damage, true, true);
+			doWaterDamage(damage, true, true, ignoreDR);
 		}
         else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) {
-			doWindDamage(damage, true, true);
+			doWindDamage(damage, true, true, ignoreDR);
 		}
         else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) {
-			doEarthDamage(damage, true, true);
+			doEarthDamage(damage, true, true, ignoreDR);
 		}
         else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 8) {
-			doAcidDamage(damage, true, true);
+			doAcidDamage(damage, true, true, ignoreDR);
 		}
         else {
-			if ((player.hasPerk(PerkLib.DeadlyAim) && type == 0) || (player.hasPerk(PerkLib.Penetrator) && type == 1)) doPhysicalDamage(damage, true, true, true);
-			else doPhysicalDamage(damage, true, true);
+			doPhysicalDamage(damage, true, true, ignoreDR);
 		}
 		if (player.statStore.hasBuff("FoxflamePelt")) {
-			doFireDamage((damage*2), true, true);
+			doFireDamage((damage*2), true, true, ignoreDR);
 			monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
 		}
         if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-			doMagicDamage(Math.round(damage * 0.2), true, true);
+			doMagicDamage(Math.round(damage * 0.2), true, true, ignoreDR);
 		}
     }
 
@@ -4235,7 +4235,8 @@ public class Combat extends BaseContent {
                     }
 				}
             }
-            if (!player.hasPerk(PerkLib.Penetrator)) damage *= (monster.damageRangePercent() / 100);
+            var ignoreDR:Boolean = player.hasPerk(PerkLib.Penetrator);
+            if (!ignoreDR) damage *= (monster.damageRangePercent() / 100);
             if (player.hasPerk(PerkLib.ExplosiveCartridge) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType) || monster.hasPerk(PerkLib.EnemyHugeType) || monster.hasPerk(PerkLib.Enemy300Type) || monster.hasPerk(PerkLib.EnemyGigantType) || monster.hasPerk(PerkLib.EnemyColossalType))) damage *= 2;
             if (player.hasPerk(PerkLib.NamedBullet) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 1.5;
             if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
@@ -4259,15 +4260,15 @@ public class Combat extends BaseContent {
                     outputText(" and [monster he] stagger, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
                 else outputText(" and [monster he] staggers, collapsing from the wounds you've inflicted on [monster him]. ");
                 if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-					doPhysicalDamage(damage, true, true);
-					doMagicDamage(Math.round(damage * 0.2), true, true);
+					doPhysicalDamage(damage, true, true, ignoreDR);
+					doMagicDamage(Math.round(damage * 0.2), true, true, ignoreDR);
 				}
 				else if (player.statStore.hasBuff("FoxflamePelt")) {
-					doFireDamage((damage * 2), true, true);
-					if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
+					doFireDamage((damage * 2), true, true, ignoreDR);
+					if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true, ignoreDR);
 					monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
 				}
-				else doPhysicalDamage(damage, true, true);
+				else doPhysicalDamage(damage, true, true, ignoreDR);
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
 				firearmsXP(rangeMasteryEXPgained(crit));
 				if (player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Dual 2H Firearms") {
@@ -4283,10 +4284,10 @@ public class Combat extends BaseContent {
                 if (player.isInGoblinMech() && (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0)) {
                     outputText(".  It's clearly very painful. ");             
                     if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-						doPhysicalDamage(damage, true, true);
-						doMagicDamage(Math.round(damage * 0.2), true, true);
+						doPhysicalDamage(damage, true, true, ignoreDR);
+						doMagicDamage(Math.round(damage * 0.2), true, true, ignoreDR);
 					}
-					else doPhysicalDamage(damage, true, true);
+					else doPhysicalDamage(damage, true, true, ignoreDR);
 					firearmsXP(rangeMasteryEXPgained(crit));
 					if (player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Dual 2H Firearms") {
 						dualWieldFirearmsXP(rangeMasteryEXPgained(crit));
@@ -4294,10 +4295,10 @@ public class Combat extends BaseContent {
 					if (player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.TM1CERB) {
                         for (var attack:int = 0; attack < maxFirearmAttacks; attack++) {
                             if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-								doPhysicalDamage(damage, true, true);
-								doMagicDamage(Math.round(damage * 0.2), true, true);
+								doPhysicalDamage(damage, true, true, ignoreDR);
+								doMagicDamage(Math.round(damage * 0.2), true, true, ignoreDR);
 							}
-							else doPhysicalDamage(damage, true, true);
+							else doPhysicalDamage(damage, true, true, ignoreDR);
                         }
                         if (crit) outputText(" <b>*Critical Hit!*</b>");
 					}
@@ -4307,59 +4308,59 @@ public class Combat extends BaseContent {
                         if (player.weaponRange == weaponsrange.HARKON1 || player.weaponRange == weaponsrange.HARKON2) {
 							if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
 								doTrueDamage(damage, true, true);
-								doMagicDamage(Math.round(damage * 0.2), true, true);
+								doMagicDamage(Math.round(damage * 0.2), true, true, ignoreDR);
 								if (player.statStore.hasBuff("FoxflamePelt")) {
-									doFireDamage((damage * 2), true, true);
+									doFireDamage((damage * 2), true, true, ignoreDR);
 									monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
 								}
 							}
 							else {
 								doTrueDamage(damage, true, true);
 								if (player.statStore.hasBuff("FoxflamePelt")) {
-									doFireDamage((damage * 2), true, true);
+									doFireDamage((damage * 2), true, true, ignoreDR);
 									monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
 								}
 							}
 						}
 						else if (player.weaponRange == weaponsrange.ALAKABL || player.weaponRange == weaponsrange.DALAKABL) {
 							if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-								doMagicDamage(Math.round(damage * 1.2), true, true);
+								doMagicDamage(Math.round(damage * 1.2), true, true, ignoreDR);
 								if (player.statStore.hasBuff("FoxflamePelt")) {
-									doFireDamage((damage * 2), true, true);
+									doFireDamage((damage * 2), true, true, ignoreDR);
 									monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
 								}
 							}
 							else {
-								doMagicDamage(damage, true, true);
+								doMagicDamage(damage, true, true, ignoreDR);
 								if (player.statStore.hasBuff("FoxflamePelt")) {
-									doFireDamage((damage * 2), true, true);
+									doFireDamage((damage * 2), true, true, ignoreDR);
 									monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
 								}
 							}
 						}
 						else {
                             if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-								doPhysicalDamage(damage, true, true);
-								doMagicDamage(Math.round(damage * 0.2), true, true);
+								doPhysicalDamage(damage, true, true, ignoreDR);
+								doMagicDamage(Math.round(damage * 0.2), true, true, ignoreDR);
 							}
 							else if (player.statStore.hasBuff("FoxflamePelt")) {
-								doFireDamage((damage * 2), true, true);
-								if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
+								doFireDamage((damage * 2), true, true, ignoreDR);
+								if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true, ignoreDR);
 								monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
 							}
-							else doPhysicalDamage(damage, true, true);
+							else doPhysicalDamage(damage, true, true, ignoreDR);
 							if (player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.TM1CERB) {
                                 for (var cerbAttack:int = 0; cerbAttack < maxFirearmAttacks; attack++) {
                                     if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-										doPhysicalDamage(damage, true, true);
-										doMagicDamage(Math.round(damage * 0.2), true, true);
+										doPhysicalDamage(damage, true, true, ignoreDR);
+										doMagicDamage(Math.round(damage * 0.2), true, true, ignoreDR);
 									}
 									else if (player.statStore.hasBuff("FoxflamePelt")) {
-										doFireDamage((damage * 2), true, true);
-										if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
+										doFireDamage((damage * 2), true, true, ignoreDR);
+										if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true, ignoreDR);
 										monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
 									}
-									else doPhysicalDamage(damage, true, true);
+									else doPhysicalDamage(damage, true, true, ignoreDR);
                                 }
 							}
 						}
@@ -4373,15 +4374,15 @@ public class Combat extends BaseContent {
                     //	if (flaga dla efektu poison arrow) outputText(" tekst dla poison arrow effect.");
 					if (player.weaponRange == weaponsrange.TOUHOM3) {
 						outputText(" ");
-                        doPhysicalDamage(damage, true, true);
+                        doPhysicalDamage(damage, true, true, ignoreDR);
 						if (crit) outputText(" <b>*Critical Hit!*</b>");
 
                         for (var touAttack:int = 0; touAttack < maxFirearmAttacks; attack++) {
                             outputText(" ");
-                            doPhysicalDamage(damage, true, true);
+                            doPhysicalDamage(damage, true, true, ignoreDR);
 							if (crit) outputText(" <b>*Critical Hit!*</b>");
 							outputText(" ");
-                            doPhysicalDamage(damage, true, true);
+                            doPhysicalDamage(damage, true, true, ignoreDR);
 							if (crit) outputText(" <b>*Critical Hit!*</b>");
                         }
 					}
@@ -8352,7 +8353,7 @@ public class Combat extends BaseContent {
         return damage;
     }
 
-	public function doPhysicalDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):void {
+	public function doPhysicalDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
         if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1 && MonsterIsBleeding()) {
 			var ddd:Number = 1.1;
 			if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) ddd += 0.15;
@@ -8374,17 +8375,17 @@ public class Combat extends BaseContent {
             if (monster.statusEffectv3(StatusEffects.AcidDoT) > 0) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
             if (monster.statusEffectv4(StatusEffects.AcidDoT) > 0) damage *= (1 + (0.1 * monster.statusEffectv4(StatusEffects.AcidDoT)));
         }
-		doDamage(damage, apply, display, ignoreDR);
+		return doDamage(damage, apply, display, ignoreDR);
     }
 
-    public function doMinionPhysDamage(damage:Number, apply:Boolean = true, display:Boolean = false):void {
-        doDamage(damage, apply, display);
+    public function doMinionPhysDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
+        return doDamage(damage, apply, display, ignoreDR);
     }
 
-    public function doMagicDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+    public function doMagicDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
-		damage *= (monster.damageMagicalPercent() / 100);
+		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
 		if (monster.damageReductionBasedOnDifficulty() > 1) damage *= (1 / monster.damageReductionBasedOnDifficulty());
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
         if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
@@ -8481,11 +8482,11 @@ public class Combat extends BaseContent {
         return damage;
     }
 
-    public function doFireDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+    public function doFireDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
-		damage *= (monster.damageMagicalPercent() / 100);
+		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
         if (player.weapon === weapons.R_STAFF) damage *= 1.4;
 		if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.925;
         damage = FireTypeDamageBonus(damage);
@@ -8539,11 +8540,11 @@ public class Combat extends BaseContent {
         return damage;
     }
 
-    public function doIceDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+    public function doIceDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
-		damage *= (monster.damageMagicalPercent() / 100);
+		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
 		if (player.weapon == weapons.S_STAFF) damage *= 1.4;
         if (monster.hasStatusEffect(StatusEffects.FrostburnDoT) && monster.statusEffectv3(StatusEffects.FrostburnDoT) > 0) damage *= (1 + (0.5 * monster.statusEffectv3(StatusEffects.FrostburnDoT)));
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
@@ -8590,11 +8591,11 @@ public class Combat extends BaseContent {
         return damage;
     }
 
-    public function doLightingDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+    public function doLightingDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
-		damage *= (monster.damageMagicalPercent() / 100);
+		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
         if (player.weapon == weapons.T_STAFF) damage *= 1.4;
 		if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
         if (monster.hasPerk(PerkLib.LightningNature)) damage *= 0.2;
@@ -8643,11 +8644,11 @@ public class Combat extends BaseContent {
         return damage;
     }
 
-    public function doDarknessDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+    public function doDarknessDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
-		damage *= (monster.damageMagicalPercent() / 100);
+		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
         if (player.weapon == weapons.A_STAFF) damage *= 1.4;
 		if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
         if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 0.2;
@@ -8690,11 +8691,11 @@ public class Combat extends BaseContent {
         return damage;
     }
 
-    public function doPoisonDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+    public function doPoisonDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
-		damage *= (monster.damageMagicalPercent() / 100);
+		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
         if (damage == 0) MSGControllForEvasion = true;
@@ -8730,11 +8731,11 @@ public class Combat extends BaseContent {
         return damage;
     }
 
-    public function doWindDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+    public function doWindDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
-		damage *= (monster.damageMagicalPercent() / 100);
+		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
         if (damage == 0) MSGControllForEvasion = true;
@@ -8766,11 +8767,11 @@ public class Combat extends BaseContent {
         return damage;
     }
 
-    public function doWaterDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+    public function doWaterDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
-		damage *= (monster.damageMagicalPercent() / 100);
+		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
         if (damage == 0) MSGControllForEvasion = true;
@@ -8806,11 +8807,11 @@ public class Combat extends BaseContent {
         return damage;
     }
 
-    public function doEarthDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+    public function doEarthDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
-		damage *= (monster.damageMagicalPercent() / 100);
+		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
         if (damage == 0) MSGControllForEvasion = true;
@@ -8842,11 +8843,11 @@ public class Combat extends BaseContent {
         return damage;
     }
 
-    public function doAcidDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+    public function doAcidDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
-		damage *= (monster.damageMagicalPercent() / 100);
+		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
 		if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
         if (damage == 0) MSGControllForEvasion = true;
@@ -8878,12 +8879,12 @@ public class Combat extends BaseContent {
         return damage;
     }
 	
-	public function doPlasmaDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+	public function doPlasmaDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
 		var split:Number = (damage * 0.5);
 		var fdamage:Number = Math.round(split * fireDamageBoostedByDao());
 		var ldamage:Number = Math.round(split * lightningDamageBoostedByDao());
-		doFireDamage(fdamage, apply, display);
-		doLightingDamage(ldamage, apply, display);
+		doFireDamage(fdamage, apply, display, ignoreDR);
+		doLightingDamage(ldamage, apply, display, ignoreDR);
 		return split;
 	}
 

@@ -978,12 +978,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else damage *= (1.75 + buffMultiplier);
 		}
 		damage = Math.round(damage);
-		if (player.hasPerk(PerkLib.DeadlyAim) && (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow")) doDamage(damage, true, true, true);
-		else doDamage(damage, true, true);
+		var ignoreDR:Boolean = (player.hasPerk(PerkLib.DeadlyAim) && (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow"));
+		doDamage(damage, true, true, ignoreDR);
 		//if (player.hasPerk(PerkLib.TwinThunder) && ) doDamage(damage, true, true);
 		if (player.weaponRangeName == "Avelynn") {
-			doDamage(damage, true, true);
-			doDamage(damage, true, true);
+			doDamage(damage, true, true, ignoreDR);
+			doDamage(damage, true, true, ignoreDR);
 		}
 		outputText(" damage. ");
 		if (crit) {
@@ -1387,8 +1387,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage *= critMulti+buffMultiplier;
 		}
 		damage = Math.round(damage);
-		if (player.hasPerk(PerkLib.DeadlyAim) && player.weaponRangePerk == "Bow") doDamage(damage, true, true, true);
-		else doDamage(damage, true, true);
+		var ignoreDR:Boolean = (player.hasPerk(PerkLib.DeadlyAim) && player.weaponRangePerk == "Bow");
+		doDamage(damage, true, true, ignoreDR);
 		outputText(" ");
 		if (crit) outputText("<b>Critical! </b>");
 		outputText("\n\n");
@@ -6028,8 +6028,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		damage = Math.round(damage);
 		outputText("Holding your weapon horizontally, you shoot them all, spraying [themonster] with a projectile. ");
-		if (player.hasPerk(PerkLib.DeadlyAim)) combat.doPhysicalDamage(damage, true, true, true);
-		else combat.doPhysicalDamage(damage, true, true);
+		var ignoreDR:Boolean = (player.hasPerk(PerkLib.DeadlyAim))
+		doPhysicalDamage(damage, true, true, ignoreDR);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		combat.cupidArrowsEffect();
@@ -6232,7 +6232,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasKeyItem("Omni Missile") >= 0) outputText("You deploy the omni Missile and rain death on [themonster], covering the entire area with explosions for ");
 		else outputText("You deploy the missile launcher and aim at [themonster], for a big explosion. ");
 		var damage:Number = combat.firearmsDamageNoLagSingle();
-		if (!player.hasPerk(PerkLib.Penetrator)) damage *= (monster.damageRangePercent() / 100);
+		var ignoreDR:Boolean = player.hasPerk(PerkLib.Penetrator);
+		if (!ignoreDR) damage *= (monster.damageRangePercent() / 100);
 		//Weapon addition!
 		if (player.hasKeyItem("Gun Scope") >= 0) damage *= 1.2;
 		if (player.hasKeyItem("Gun Scope with Aim tech") >= 0) damage *= 1.4;
@@ -6254,7 +6255,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage *= 1.75;
 		}
 		damage = Math.round(damage);
-		doDamage(damage, true, true);
+		doDamage(damage, true, true, ignoreDR);
 		outputText(" damage!");
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
