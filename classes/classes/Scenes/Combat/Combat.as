@@ -4761,6 +4761,7 @@ public class Combat extends BaseContent {
     public function attack(followupAttacks:Boolean = true):void {
         var IsFeralCombat:Boolean = false;
         flags[kFLAGS.LAST_ATTACK_TYPE] = LAST_ATTACK_PHYS;
+        var enemyResponse:Boolean = true;
 
         // migrate kitsune's(and their retarded cousins that does not use extend Kitsune)/chaos chimera's Seal check
         // kitsune/yamata/chaos chimera/kitsuneancestor/kitsuneelder/aiko
@@ -4783,70 +4784,65 @@ public class Combat extends BaseContent {
                     outputText("Utilizing your skills as a bareknuckle brawler, you make two attacks!\n");
                 }
             }
-            else{
-                // migrate alruine/sandtrap flavor text and trap level changes
-                monster.preAttack();
+            
+            // migrate alruine/sandtrap flavor text and trap level changes
+            monster.preAttack();
 
-                //Blind
-                if (player.playerIsBlinded()) {
-                    outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
-                }
+            //Blind
+            if (player.playerIsBlinded()) {
+                outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
+            }
+            // Migrate basilisk blind check
+            // Gimmick now way easier to implement if any fucker want to use it kekvv
+            else if(monster.midAttackSkip()) {
+                // Migrate demondragonGroup meleeresponse()
+                // Migrate frost giant boulder check. Every single one of them. And not just a giant, but the giants and the children too!
+                // Migrate worm. Worm is so special they can skip the rest of your shit (first attack guaranteed then call enemyAI() and end)
+                // Migrate Incubus Scientist ShieldHits checks and ShieldsHitMelee()
+                if(monster.midAttackSeal()){
+                    // rest of the attack here
 
-                // Migrate basilisk blind check
-                // Gimmick now way easier to implement if any fucker want to use it kekvv
-                if(monster.midAttackSkip()){
-                    // Migrate demondragonGroup meleeresponse()
-                    // Migrate frost giant boulder check. Every single one of them. And not just a giant, but the giants and the children too!
-                    // Migrate worm. Worm is so special they can skip the rest of your shit (first attack guaranteed then call enemyAI() and end)
-                    // Migrate Incubus Scientist ShieldHits checks and ShieldsHitMelee()
-                    if(monster.midAttackSeal()){
-                        // rest of the attack here
+                    if (player.HP <= player.minHP()) {
+                        doNext(endHpLoss);
+                        return;
+                    }
 
-                        if (player.HP <= player.minHP()) {
-                            doNext(endHpLoss);
-                            return;
-                        }
+                    // Check if player missed
+                    // enemyAI() should still be called in the end
+                    if (((player.playerIsBlinded() && rand(2) == 0)
+                            || (monster.getEvasionRoll(false, player.spe)
+                                    && !monster.hasPerk(PerkLib.NoDodges)))
+                            && !monster.monsterIsStunned()) {
 
-                        // Check if player missed
-                        // enemyAI() should still be called in the end
-                        if (((player.playerIsBlinded() && rand(2) == 0)
-                                || (monster.getEvasionRoll(false, player.spe)
-                                        && !monster.hasPerk(PerkLib.NoDodges)))
-                                && !monster.monsterIsStunned()) {
+                        // Migrate akbal/shouldra/kitsune/default dodge text
+                        monster.midDodge();
+                        outputText("\n\n");
+                    }
+                    else{
+                        // Congratulations, you hit it
+                        // Oh wait sandmother can block shit (Earthshield Statuseffects only used by her)
+                        if(monster.postDodge()){
+                            // Almost there, probably
+                            if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) flags[kFLAGS.ATTACKS_ACCURACY] = 0;
 
-                            // Migrate akbal/shouldra/kitsune/default dodge text
-                            monster.midDodge();
-                            outputText("\n\n");
-                        }
-                        else{
-                            // Congratulations, you hit it
-                            // Oh wait sandmother can block shit (Earthshield Statuseffects only used by her)
-                            if(monster.postDodge()){
-                                // Almost there, probably
-                                if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) flags[kFLAGS.ATTACKS_ACCURACY] = 0;
-
-                                //Natural weapon Full attack list
-                                if (followupAttacks && flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon()))) {
-                                    IsFeralCombat = true;
-                                    resolveFeralCombatAdditionnalAttacks();
-                                }
-                                // Do all other attacks
-                                meleeDamageAcc(IsFeralCombat);
-                                if (player.hasPerk(PerkLib.LightningClaw)){
-                                    outputText(" The residual electricity leaves your foe's skin tingling with pleasure.");
-                                }
+                            //Natural weapon Full attack list
+                            if (followupAttacks && flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon()))) {
+                                IsFeralCombat = true;
+                                resolveFeralCombatAdditionnalAttacks();
                             }
-                            // YOOOOU SHALL NOOOOOT PAAAAAAAAAASSSSSS!!!!!
+                            // Do all other attacks
+                            enemyResponse = meleeDamageAcc(IsFeralCombat);
+                            if (enemyResponse && player.hasPerk(PerkLib.LightningClaw)){
+                                outputText(" The residual electricity leaves your foe's skin tingling with pleasure.");
+                            }
                         }
+                        // YOOOOU SHALL NOOOOOT PAAAAAAAAAASSSSSS!!!!!
                     }
                 }
-                else{
-                    combatRoundOver();
-                    return;
-                }
-
             }
-        } else {
+            
+        } 
+        if (enemyResponse) {
             // This should be the end ideally probably
             enemyAI();
         }
@@ -5925,18 +5921,6 @@ public class Combat extends BaseContent {
                 outputText("Seeing your [weapon] raised, the anemone looks down at the water, angles her eyes up at you, and puts out a trembling lip.  ");
                 if (player.cor < 75) {
                     outputText("You stare into her hangdog expression and lose most of the killing intensity you had summoned up for your attack, stopping a few feet short of hitting her.\n");
-                    //damage = 0;
-                    //Kick back to main if no damage occured!
-                    if (monster.HP > 0 && monster.lust < monster.maxOverLust()) {
-                        if (player.hasStatusEffect(StatusEffects.FirstAttack)) {
-                            attack(false);
-                            return true;
-                        }
-                        enemyAI();
-                    } else {
-                        if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-                        else doNext(endLustVictory);
-                    }
                     return true;
                 } else outputText("Though you lose a bit of steam to the display, the drive for dominance still motivates you to follow through on your swing.");
             }
@@ -6018,7 +6002,7 @@ public class Combat extends BaseContent {
      * 7. repeat for multi-attack style
      * @param IsFeralCombat
      */
-    public function meleeDamageAcc(IsFeralCombat:Boolean = false):void {
+    public function meleeDamageAcc(IsFeralCombat:Boolean = false):Boolean {
         //var timer:int = getTimer();
         var accMelee:Number = 0;
         var damage:Number = 0;
@@ -6047,7 +6031,16 @@ public class Combat extends BaseContent {
                     damage += temp;
                 }
                 //ANEMONE SHIT
-                if(anemoneCheck()) return;
+                if(anemoneCheck()) {
+                    if (player.hasStatusEffect(StatusEffects.FirstAttack)) {
+                            attack(false);
+                            return false;
+                    }
+                    else {
+                        return true;
+                    }
+                }
+
                 crit = rand(100) < critChance;
                 if(crit) damage *= critDamage;
                 hitCounter++;
@@ -6077,7 +6070,7 @@ public class Combat extends BaseContent {
                     monster.eOneAttack(true);
                     if (player.HP <= player.minHP()) {
                         doNext(endHpLoss);
-                        return;
+                        return false;
                     }
                     damage /= 2;
                 }
@@ -6709,12 +6702,12 @@ public class Combat extends BaseContent {
             if (monster.HP <= monster.minHP()) {
                 doNext(endHpVictory);
                 meleeMasteryGain(hitCounter, critCounter);
-                return;
+                return false;
             }
             else if (monster.lust >= monster.maxOverLust()) {
                 doNext(endLustVictory);
                 meleeMasteryGain(hitCounter, critCounter);
-                return;
+                return false;
             }
 			if (i > 1 && flags[kFLAGS.MULTIATTACK_STYLE] > 0) {
 				if (player.weaponSpecials("Dual Large") || player.weaponSpecials("Large") || player.weaponSpecials("Dual Massive") || player.weaponSpecials("Massive")) {
@@ -6731,7 +6724,7 @@ public class Combat extends BaseContent {
         meleeMasteryGain(hitCounter, critCounter);
         if (player.hasStatusEffect(StatusEffects.FirstAttack)) {
             attack(false);
-            return;
+            return false;
         }
         if (player.statusEffectv1(StatusEffects.CounterAction) > 0) {
             player.removeStatusEffect(StatusEffects.CounterAction);
@@ -6749,7 +6742,7 @@ public class Combat extends BaseContent {
         manaregeneration1();
         soulforceregeneration1();
 		venomCombatRecharge1();
-        enemyAI();
+        return true;
     }
 	
 	public function layerFoxflamePeltOnThis(damage:Number):void {
