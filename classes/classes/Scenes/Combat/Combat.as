@@ -4753,19 +4753,19 @@ public class Combat extends BaseContent {
             // Fetish pacifism stays for now until someone gets a better idea
             if (flags[kFLAGS.PC_FETISH] >= 3 && !SceneLib.urtaQuest.isUrta()) {
                 outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Ceraph's piercings have made normal melee attacks impossible!  Maybe you could try something else?\n\n");
-            }
-            // I hate urta flag checks honestly cant we just make urta's dedicated melee function after this uh
-            //"Brawler perk". Urta only. Thanks to Fenoxo for pointing this out... Even though that should have been obvious :<
-            //Urta has fists and the Brawler perk. Don't check for that because Urta can't drop her fists or lose the perk!
-            else if (SceneLib.urtaQuest.isUrta()) {
-                if (player.hasStatusEffect(StatusEffects.FirstAttack)) {
-                    player.removeStatusEffect(StatusEffects.FirstAttack);
-                } else {
-                    player.createStatusEffect(StatusEffects.FirstAttack, 0, 0, 0, 0);
-                    outputText("Utilizing your skills as a bareknuckle brawler, you make two attacks!\n");
+            } else {
+                // I hate urta flag checks honestly cant we just make urta's dedicated melee function after this uh
+                //"Brawler perk". Urta only. Thanks to Fenoxo for pointing this out... Even though that should have been obvious :<
+                //Urta has fists and the Brawler perk. Don't check for that because Urta can't drop her fists or lose the perk!
+                if (SceneLib.urtaQuest.isUrta()) {
+                    if (player.hasStatusEffect(StatusEffects.FirstAttack)) {
+                        player.removeStatusEffect(StatusEffects.FirstAttack);
+                    } else {
+                        player.createStatusEffect(StatusEffects.FirstAttack, 0, 0, 0, 0);
+                        outputText("Utilizing your skills as a bareknuckle brawler, you make two attacks!\n");
+                    }
                 }
-            }
-            else{
+                
                 // migrate alruine/sandtrap flavor text and trap level changes
                 monster.preAttack();
 
@@ -6027,40 +6027,19 @@ public class Combat extends BaseContent {
                     damage += temp;
                 }
                 //ANEMONE SHIT
+                // NGL this looks fucking retarded for a monster mechanic
+                // and a whole override for a retarded exit function feels even worse so I keep this shit here
+                // until someone think of better idea
                 if(anemoneCheck()) return;
                 crit = rand(100) < critChance;
                 if(crit) damage *= critDamage;
                 hitCounter++;
                 damage = Math.round(damage);
                 // Have to put it before doDamage, because doDamage applies the change, as well as status effects and shit.
-                if (monster is Doppleganger) {
-                    if (!monster.monsterIsStunned()) {
-                        if (damage > 0) {
-                            damage = itemsBonusDamageDamage(damage);
-                            damage = statusEffectBonusDamage(damage);
-                            if (player.hasPerk(PerkLib.GoblinoidBlood)) {
-                                if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
-                                if (player.hasKeyItem("Powboy") >= 0) damage *= 1.15;
-                                if (player.hasKeyItem("M.G.S. bracer") >= 0) damage *= 1.2;
-                            }
-                        }
-                        (monster as Doppleganger).mirrorAttack(damage);
-                    }
-                    // Stunning the doppleganger should now "buy" you another round.
-                    if (monster.hasStatusEffect(StatusEffects.MirroredAttack)) {//Doppelganger parry!
-                        damage = 0;
-                        monster.removeStatusEffect(StatusEffects.MirroredAttack);
-                    }
-                }
-                //Lab Guard tanking
-                if (monster is LabGuard && (monster as LabGuard).shieldWall && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-                    monster.eOneAttack(true);
-                    if (player.HP <= player.minHP()) {
-                        doNext(endHpLoss);
-                        return;
-                    }
-                    damage /= 2;
-                }
+                // Migrate mirror
+                // Migrate LabGuard shieldWall check
+                // This is a long ass spaghet
+                damage = monster.preMeleeDmg(damage);
                 if (player.weapon is HuntsmansCane) {
                     outputText(randomChoice("You swing your cane through the air. The light wood lands with a loud CRACK that is probably more noisy than painful. ",
                             "You brandish your cane like a sword, slicing it through the air. It thumps against your adversary, but doesn’t really seem to harm them much. "));
@@ -6729,7 +6708,6 @@ public class Combat extends BaseContent {
         manaregeneration1();
         soulforceregeneration1();
 		venomCombatRecharge1();
-        enemyAI();
     }
 	
 	public function layerFoxflamePeltOnThis(damage:Number):void {
@@ -9006,6 +8984,12 @@ public class Combat extends BaseContent {
             doNext(endHpVictory);
             return;
         }
+
+        if (monster.lust >= monster.maxOverLust()) {
+            doNext(endLustVictory);
+            return;
+        }
+
         monster.doAI();
         if (player.statStore.hasBuff("ScarletSpiritCharge")) HPChange(-Math.round(player.maxHP()*0.05), false);
         if (player.statStore.hasBuff("TranceTransformation")) player.soulforce -= 50;
