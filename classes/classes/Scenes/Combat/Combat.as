@@ -4846,10 +4846,12 @@ public class Combat extends BaseContent {
                 }
 
             }
+        } else {
+            // This should be the end ideally probably
+            enemyAI();
         }
 
-        // This should be the end ideally probably
-        enemyAI();
+        
 
         //Determine if dodged!
         //BLOCKED ATTACK:
