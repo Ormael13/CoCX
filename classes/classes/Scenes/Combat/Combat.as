@@ -10963,12 +10963,12 @@ public class Combat extends BaseContent {
         //Companion Boosting PC Armor Value
         if (player.hasStatusEffect(StatusEffects.CompBoostingPCArmorValue)) player.removeStatusEffect(StatusEffects.CompBoostingPCArmorValue);
         //Elemental Aspect status effects
-        if (player.hasStatusEffect(StatusEffects.WindWall)) {
+        /*if (player.hasStatusEffect(StatusEffects.WindWall)) {
             if (player.statusEffectv2(StatusEffects.WindWall) <= 0) {
                 player.removeStatusEffect(StatusEffects.WindWall);
                 outputText("<b>Wind Wall effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.WindWall, 2, -1);
-        }
+        }*/
         if (player.hasStatusEffect(StatusEffects.StoneSkin)) {
             if (player.statusEffectv2(StatusEffects.StoneSkin) <= 0) {
                 player.removeStatusEffect(StatusEffects.StoneSkin);
@@ -11019,34 +11019,6 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownSpectralScream, 1, -1);
             }
         }
-        /*//Hurricane Dance
-        if (player.hasStatusEffect(StatusEffects.CooldownHurricaneDance)) {
-            if (player.statusEffectv1(StatusEffects.CooldownHurricaneDance) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownHurricaneDance);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownHurricaneDance, 1, -1);
-            }
-        }
-        if (player.hasStatusEffect(StatusEffects.HurricaneDance)) {
-            if (player.statusEffectv1(StatusEffects.HurricaneDance) <= 0) {
-                player.removeStatusEffect(StatusEffects.HurricaneDance);
-                outputText("<b>Hurricane Dance effect wore off!</b>\n\n");
-            } else player.addStatusValue(StatusEffects.HurricaneDance, 1, -1);
-        }
-        //Earth Stance
-        if (player.hasStatusEffect(StatusEffects.CooldownEarthStance)) {
-            if (player.statusEffectv1(StatusEffects.CooldownEarthStance) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownEarthStance);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownEarthStance, 1, -1);
-            }
-        }
-        if (player.hasStatusEffect(StatusEffects.EarthStance)) {
-            if (player.statusEffectv1(StatusEffects.EarthStance) <= 0) {
-                player.removeStatusEffect(StatusEffects.EarthStance);
-                outputText("<b>Earth Stance effect wore off!</b>\n\n");
-            } else player.addStatusValue(StatusEffects.EarthStance, 1, -1);
-        } */
         //Punishing Kick
         if (player.hasStatusEffect(StatusEffects.CooldownPunishingKick)) {
             if (player.statusEffectv1(StatusEffects.CooldownPunishingKick) <= 0) {

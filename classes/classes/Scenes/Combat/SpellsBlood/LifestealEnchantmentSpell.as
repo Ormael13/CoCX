@@ -33,7 +33,7 @@ public class LifestealEnchantmentSpell extends AbstractBloodSpell {
 		return player.hasStatusEffect(StatusEffects.LifestealEnchantment);
 	}
 	
-	public function calcDuration():int {
+	override public function calcDuration():int {
 		var calcD:int = 2;
 		calcD += (3 - spellGenericCooldown());
 		if (player.hasPerk(PerkLib.BloodDemonIntelligence)) calcD *= 2;

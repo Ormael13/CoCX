@@ -5,6 +5,7 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
+import classes.Scenes.Combat.CombatAbilities;
 
 /**
 	 * ...
@@ -16,9 +17,9 @@ import classes.internals.*;
 		//<Writers note: I recommend that the javelin have a chance to greatly decrease speed for the remaining battle.  I am writing the flavor text for this event if you choose to include it>
 		private function hyenaJavelinAttack():void {
 			//<Hyena Attack 2 – Javelin – Unsuccessful – Dodged>
-			if(player.hasStatusEffect(StatusEffects.WindWall)) {
+			if(CombatAbilities.EAspectAir.isActive()) {
 				outputText("The gnoll pulls a javelin from behind her and throws it at you, but it's stopped by the wind wall.");
-				player.addStatusValue(StatusEffects.WindWall,2,-1);
+				CombatAbilities.EAspectAir.advance(true);
 			}
 			//Blind dodge change
 			if(player.getEvasionRoll()) {

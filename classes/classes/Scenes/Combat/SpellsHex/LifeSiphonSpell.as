@@ -33,7 +33,7 @@ public class LifeSiphonSpell extends AbstractHexSpell {
 		return player.hasStatusEffect(StatusEffects.LifeSiphon);
 	}
 	
-	public function calcDuration():int {
+	override public function calcDuration():int {
 		return 15;
 	}
 	

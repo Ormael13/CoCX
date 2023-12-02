@@ -5,6 +5,7 @@ import classes.StatusEffectType;
 
 import coc.view.ButtonData;
 import classes.GlobalFlags.kFLAGS;
+import classes.Appearance;
 
 /**
  * A combat ability invokable by player (spell, special, skill, etc).
@@ -293,6 +294,7 @@ public class CombatAbility extends BaseCombatContent {
 	 */
 	public function isActive():Boolean {
 		if (timingType == TIMING_INSTANT) return false;
+		if (timingType == TIMING_LASTING) return (player.durations[id] > 0);
 		throw new Error("Method isActive() is not implemented for ability "+name+", or it's timing type is incorrect");
 	}
 	
@@ -309,7 +311,14 @@ public class CombatAbility extends BaseCombatContent {
 	 * @param display Print the effect
 	 */
 	public function advance(display:Boolean):void {
-		/* do nothing */
+		// Decrement Duration if needed
+		if (player.durations[id] > 0) {
+			player.durations[id]--;
+			if (player.durations[id] == 0) {
+				durationEnd(display);
+			}
+		}
+        
 	}
 	
 	/**
@@ -376,6 +385,12 @@ public class CombatAbility extends BaseCombatContent {
 		const bd:ButtonData = new ButtonData(buttonName, buttonCallback);
 		
 		var fullDesc: String = fullDescription(target);
+
+		var currentDuration:int = player.durations[id];
+		if (currentDuration > 0) {
+			var durationText:String = "This ability ends in " + Appearance.numberOfThings(currentDuration, "round") + ".";
+			fullDesc = "<b>"+durationText + "</b>\n\n" + fullDesc;
+		}
 		
 		var ucheck:String;
 		var deactivating:Boolean;
@@ -457,6 +472,14 @@ public class CombatAbility extends BaseCombatContent {
 	public function setCooldown():void {
 		player.cooldowns[id] = calcCooldown();
 	}
+
+	/**
+	 * Sets the defomed duration for this ability
+	 * Must be manually called as part of doEffect()
+	 */
+	public function setDuration():void {
+		player.durations[id] = calcDuration();
+	}
 	
 	/**
 	 * Use mana, increment counters etc. At this point ability still might fail or be intercepted by monster
@@ -500,12 +523,27 @@ public class CombatAbility extends BaseCombatContent {
 	public function get currentCooldown():int {
 		return player.cooldowns[id];
 	}
+
+	/**
+	 * Current duration (number of rounds left before it the ability effect ends)
+	 */
+	public function get currentDuration():int {
+		return player.durations[id];
+	}
 	
 	/**
 	 * Calculate cooldown of this ability. Default is 0 (no cooldown).
 	 * Will be applied automatically.
 	 */
 	public function calcCooldown():int {
+		return 0;
+	}
+
+	/**
+	 * Calculate duration of this ability. Default is 0 (no duration).
+	 * Will be applied automatically.
+	 */
+	public function calcDuration():int {
 		return 0;
 	}
 	
@@ -552,5 +590,14 @@ public class CombatAbility extends BaseCombatContent {
             } else player.addStatusValue(statusEffect, 1, -1);
         }
     }
+
+	/**
+	 * Function that is called when the duration of a lasting ability ends
+	 * Does nothing by default
+	 * @param display (Boolean) - output text
+	 */
+	public function durationEnd(display:Boolean = true):void {
+
+	}
 }
 }

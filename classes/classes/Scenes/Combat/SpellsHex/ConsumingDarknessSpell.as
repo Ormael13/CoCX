@@ -38,7 +38,7 @@ public class ConsumingDarknessSpell extends AbstractHexSpell {
 		return monster.hasStatusEffect(StatusEffects.ConsumingDarkness);
 	}
 	
-	public function calcDuration():int {
+	override public function calcDuration():int {
 		return 7;
 	}
 	

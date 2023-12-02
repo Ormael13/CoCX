@@ -8,7 +8,7 @@ import classes.Scenes.Combat.SpellsNecro.*;
 import classes.Scenes.Combat.SpellsGrey.*;
 import classes.Scenes.Combat.SpellsBlood.*;
 import classes.Scenes.Combat.Soulskills.*;
-import classes.Scenes.Combat.SpecialsMagic.EAspectFireSkill;
+import classes.Scenes.Combat.SpecialsMagic.*;
 
 public class CombatAbilities {
 	
@@ -337,9 +337,11 @@ public class CombatAbilities {
 	]
 
 	public static const EAspectFire:EAspectFireSkill = new EAspectFireSkill();
+	public static const EAspectAir:EAspectAirSkill = new EAspectAirSkill();
 
 	public static const ALL_ELEMENTAL_ASPECTS:/*CombatAbility*/Array = [
-		EAspectFire
+		EAspectFire,
+		EAspectAir
 	]
 
 	public static const ALL_MAGICAL_SPECIALS:/*CombatAbility*/Array = [

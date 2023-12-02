@@ -75,7 +75,7 @@ public class MightSpell extends AbstractBlackSpell {
 		return Math.round(MightBoost);
 	}
 	
-	public function calcDuration():Number {
+	override public function calcDuration():int {
 		var MightDuration:Number = 5;
 		MightDuration += combat.magic.perkRelatedDurationBoosting();
 		return MightDuration;

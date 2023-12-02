@@ -34,7 +34,7 @@ public class MentalShieldSpell extends AbstractWhiteSpell{
 		return player.hasStatusEffect(StatusEffects.MentalShield);
 	}
 	
-	public function calcDuration():int {
+	override public function calcDuration():int {
 		var mentalshieldduration:Number = 10;
 		if (player.hasPerk(PerkLib.DefensiveStaffChanneling)) mentalshieldduration *= 1.1;
 		return Math.round(mentalshieldduration)

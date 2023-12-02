@@ -21,22 +21,11 @@ public class EarthStanceSkill extends AbstractSoulSkill {
 		return "Earth Stance";
 	}
 
-	override public function isActive():Boolean {
-		return player.hasStatusEffect(StatusEffects.EarthStance);
-	}
-
-    override public function advance(display:Boolean):void {
-        function endFunction(ability:CombatAbility, display:Boolean):void {
-            if (display) outputText("<b>Earth Stance effect wore off!</b>\n\n");
-        }
-        advanceDuration(StatusEffects.EarthStance, endFunction, display);
-    }
-
     override public function calcCooldown():int {
         return 10;
     }
 
-    public function calcDuration():int {
+    override public function calcDuration():int {
         return 3;
     }
 
@@ -47,8 +36,11 @@ public class EarthStanceSkill extends AbstractSoulSkill {
     override public function doEffect(display:Boolean = true):void {
 		if (display)
 			outputText("Your body suddenly hardens like rock. You will be way harder to damage for a while.\n\n");
-		
-		player.createStatusEffect(StatusEffects.EarthStance, calcDuration(), 0, 0, 0);
+		setDuration();
+    }
+
+    override public function durationEnd(display:Boolean = true):void {
+        if (display) outputText("<b>Earth Stance effect wore off!</b>\n\n");
     }
 }
 }

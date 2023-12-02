@@ -51,6 +51,7 @@ import classes.internals.Utils;
 import classes.internals.WeightedDrop;
 
 import flash.utils.getQualifiedClassName;
+import classes.Scenes.Combat.CombatAbilities;
 
 /**
 	 * ...
@@ -1028,7 +1029,7 @@ import flash.utils.getQualifiedClassName;
 			if (statusEffectv1(StatusEffects.OniRampage) > 0) {
 				multShared += 20;
 			}
-			if (statusEffectv1(StatusEffects.EarthStance) > 0) {
+			if (CombatAbilities.EarthStance.isActive()) {
 				multShared += 30;
 			}
 			//Misc

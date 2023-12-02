@@ -41,7 +41,7 @@ public class CurseOfDesireSpell extends AbstractHexSpell {
 		return monster.hasStatusEffect(StatusEffects.CurseOfDesire);
 	}
 	
-	public function calcDuration():int {
+	override public function calcDuration():int {
 		return 8;
 	}
 	

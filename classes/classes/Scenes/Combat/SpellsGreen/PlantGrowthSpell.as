@@ -45,7 +45,7 @@ public class PlantGrowthSpell extends AbstractGreenSpell {
 		return adjustLustDamage(baseDamage, monster, CAT_SPELL_GREEN, randomize);
 	}
 	
-	public function calcDuration():int {
+	override public function calcDuration():int {
 		var dura:Number = 4;
 		if (player.hasPerk(PerkLib.GreenMagic)) dura *= 2;
 		return dura;

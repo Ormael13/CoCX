@@ -5,6 +5,7 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects.Combat.AmilyVenomDebuff;
+import classes.Scenes.Combat.CombatAbilities;
 
 /**
 	 * ...
@@ -131,9 +132,9 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 		//-Poison Dart: Deals speed and str damage to the PC. (Not constant)
 		private function amilyDartGo():void
 		{
-			if (player.hasStatusEffect(StatusEffects.WindWall)) {
+			if (CombatAbilities.EAspectAir.isActive()) {
 				outputText(capitalA + short + " attack from her dartgun stops at wind wall weakening it slightly.\n");
-				player.addStatusValue(StatusEffects.WindWall,2,-1);
+				CombatAbilities.EAspectAir.advance(true);
 				return;
 			}
 			//Dodged

@@ -21,22 +21,11 @@ public class HurricaneDanceSkill extends AbstractSoulSkill {
 		return "Hurricane Dance";
 	}
 
-	override public function isActive():Boolean {
-		return player.hasStatusEffect(StatusEffects.HurricaneDance);
-	}
-
-    override public function advance(display:Boolean):void {
-        function endFunction(ability:CombatAbility, display:Boolean):void {
-            if (display) outputText("<b>Hurricane Dance effect wore off!</b>\n\n");
-        }
-        advanceDuration(StatusEffects.HurricaneDance, endFunction, display);
-    }
-
     override public function calcCooldown():int {
         return 10;
     }
 
-    public function calcDuration():int {
+    override public function calcDuration():int {
         return 5;
     }
 
@@ -47,8 +36,11 @@ public class HurricaneDanceSkill extends AbstractSoulSkill {
     override public function doEffect(display:Boolean = true):void {
 		if (display)
 			outputText("Your movement becomes more fluid and precise, increasing your speed and evasion.\n\n");
-		
-		player.createStatusEffect(StatusEffects.HurricaneDance, calcDuration(), 0, 0, 0);
+		setDuration();
+    }
+
+    override public function durationEnd(display:Boolean = true):void {
+        if (display) outputText("<b>Hurricane Dance effect wore off!</b>\n\n");
     }
 }
 }

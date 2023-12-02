@@ -16,6 +16,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.internals.*;
+import classes.Scenes.Combat.CombatAbilities;
 
 use namespace CoC;
 
@@ -41,9 +42,9 @@ use namespace CoC;
 			else outputText("The manticore");
 			outputText("'s tail curls over and shoots a spike at you. The bony spike ");
 			if (rand(100) < (this.spe - player.spe) / 2) {
-				if (player.hasStatusEffect(StatusEffects.WindWall)) {
+				if (CombatAbilities.EAspectAir.isActive()) {
 					outputText("hits wind wall doing no damage to you.");
-					player.addStatusValue(StatusEffects.WindWall,2,-1);
+					CombatAbilities.EAspectAir.advance(true);
 				}
 				else {
 					var tailspikedmg:Number = Math.round(this.str / 16);

@@ -73,6 +73,9 @@ use namespace CoC;
 			for (var i:int = 0; i < CombatAbility.Registry.length; i++) {
 				cooldowns[i] = 0;
 			}
+			for (var duration:int = 0; duration < CombatAbility.Registry.length; duration++) {
+				durations[duration] = 0;
+			}
 			//Item things
 			itemSlot1 = new ItemSlotClass();
 			itemSlot2 = new ItemSlotClass();
@@ -193,6 +196,9 @@ use namespace CoC;
 
 		//Combat ability cooldowns. Index is ability id.
 		public var cooldowns:/*int*/Array = [];
+
+		//Combat ability durations. Index is ability id.
+		public var durations:/*int*/Array = [];
 		
 		//Mining attributes
 		public var miningLevel:Number = 0;
@@ -3159,7 +3165,7 @@ use namespace CoC;
 			if (statusEffectv1(StatusEffects.OniRampage) > 0) {
 				mult -= 20;
 			}
-			if (statusEffectv1(StatusEffects.EarthStance) > 0) {
+			if (CombatAbilities.EarthStance.isActive()) {
 				mult -= 30;
 			}
 			if (statusEffectv1(StatusEffects.AcidDoT) > 0) {
@@ -5580,6 +5586,7 @@ use namespace CoC;
 			var HPPercent:Number;
 			HPPercent = HP/maxHP();
 			resetCooldowns();
+			resetDurations();
 			if (hasStatusEffect(StatusEffects.DriderIncubusVenom))
 			{
 				removeStatusEffect(StatusEffects.DriderIncubusVenom);
@@ -7416,6 +7423,11 @@ use namespace CoC;
 			for (var i:int = 0; i<cooldowns.length; i++) {
 				if (oncePerDay || cooldowns[i] != -2)
 					cooldowns[i] = 0;
+			}
+		}
+		public function resetDurations():void {
+			for (var i:int = 0; i<durations.length; i++) {
+				durations[i] = 0;
 			}
 		}		
 	}

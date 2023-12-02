@@ -12,6 +12,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.WeaponLib;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
+import classes.Scenes.Combat.CombatAbilities;
 
 	public class Lily extends Monster//drider cumdump slave from swamp area
 	{
@@ -93,7 +94,7 @@ import classes.internals.*;
 			while (lFB-->0) LilyFireBow();
 		}
 		public function LilyFireBow():void {
-			if (player.hasStatusEffect(StatusEffects.WindWall)) player.addStatusValue(StatusEffects.WindWall,2,-1);
+			if (CombatAbilities.EAspectAir.isActive()) CombatAbilities.EAspectAir.advance(true);
 			else damageCalc();
 		}
 		
