@@ -50,8 +50,11 @@ public class Anemone extends Monster
 			}
 			return damage;
 		}
-		override public function postMeleeDmgSkip():Boolean{
-			return cuteCheck;
+		override public function postMeleeDmgSkip(attackInstance:int):Boolean{
+			if(attackInstance==1)
+				return cuteCheck;
+			else
+				return true;
 		}
 		override public function defeated(hpVictory:Boolean):void
 		{

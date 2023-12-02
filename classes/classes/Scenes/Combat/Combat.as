@@ -6527,7 +6527,7 @@ public class Combat extends BaseContent {
                 }
                 monster.postMeleeDmg();
                 // Migrate anemonecheck() remaining attacks skip
-                if(!monster.postMeleeDmgSkip()){
+                if(!monster.postMeleeDmgSkip(i)){
                     return;
                 }
                 outputText(" ");

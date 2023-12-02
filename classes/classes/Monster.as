@@ -2537,8 +2537,10 @@ import flash.utils.getQualifiedClassName;
 		 *     <li>PS: By exiting meleeDamageAcc() Thanks!</li>
 		 *     <li>Default: return true (next attack will be attempted based on remaining multi-hit)</li>
 		 * </ul>
+		 *
+		 * @attackInstance 1=first attack, 2=second, etc
 		 */
-		public function postMeleeDmgSkip():Boolean{
+		public function postMeleeDmgSkip(attackInstance:int):Boolean{
 			return true;
 		}
 

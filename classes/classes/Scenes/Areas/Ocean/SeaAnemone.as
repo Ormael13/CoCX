@@ -46,8 +46,11 @@ public class SeaAnemone extends Monster
 			}
 			return damage;
 		}
-		override public function postMeleeDmgSkip():Boolean{
-			return cuteCheck;
+		override public function postMeleeDmgSkip(attackInstance:int):Boolean{
+			if(attackInstance==1)
+				return cuteCheck;
+			else
+				return true;
 		}
 		//Apply the effects of AnemoneVenom()
 		public function applyVenom(amt:Number = 1):void
