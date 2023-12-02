@@ -475,6 +475,25 @@ public class HairTransformations extends MutationsHelper {
 			}
 	);
 
+	public const HairPeafowlFeather: Transformation = new SimpleTransformation("Peafowl Feather Hair",
+			// apply effect
+			function (doOutput: Boolean): void {
+				if (doOutput) {
+					var desc: String = "";
+
+					desc += "A tingling starts in your scalp, getting worse and worse until you're itching like mad. When you pull back your hand, you're treated to the sight of downy fluff trailing from your fingernails. <b>You have feathers for hair, just like a peafowl!</b>";
+
+					outputText(desc);
+				}
+				player.hairType = Hair.PEAFOWL;
+				Metamorph.unlockMetamorph(HairMem.getMemory(HairMem.PEAFOWL));
+			},
+			// is present
+			function (): Boolean {
+				return player.hairType === Hair.PEAFOWL;
+			}
+	);
+
 	public function HairChangeColor(colors: /*String*/ Array): Transformation {
 		return new SimpleTransformation("Hair Color: " + colors.join("|"),
 				// apply effect

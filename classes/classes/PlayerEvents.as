@@ -2202,6 +2202,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				ZenjiScenes.ZenjiMarae = true;
 				needNext = true;
 			}
+			//AntyDexterity
+			//needNext ||= player.gainOrLosePerk(PerkLib.AntyDexterity, player.arms.type == Arms.ANT, "You suddenly feel a desire to eat, or rather, drink.", "You suddenly feel like your mind is clear of the constant haze of lust and hunger for the first time since you had that tail.");
 			//Tail Hunger
 			needNext ||= player.gainOrLosePerk(PerkLib.ManticoreCumAddict, player.tailType == Tail.MANTICORE_PUSSYTAIL, "You suddenly feel a desire to eat, or rather, drink. It's like you have been thirsty for months, yet the thirst does not originate from your throat. Your tail pussy is dying for a mans meat and you feel that as long as you don't sate it, you will only be getting hornier! Cum... You need cum, a lot of it. It’s obvious now why manticores are this crazy for sex as you feel the urge to pounce and feed on every single male in Mareth you can find!", "You suddenly feel like your mind is clear of the constant haze of lust and hunger for the first time since you had that tail. Losing it was perhaps for the best.", true, function():void { flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] = 50; });
 			//Milk Hunger

@@ -45,9 +45,13 @@ public class GryphonRace extends Race{
 				.faceType(Face.AVIAN, +1)
 				.earType(Ears.GRYPHON, +1)
 				.eyeType(Eyes.GRYPHON, +1)
+				.rearType(RearBody.LION_MANE, +1)
 				.tailType(Tail.GRIFFIN, +1)
+				.tailType(NOT(Tail.AVIAN), 0, -5)
 				.armType(Arms.GRYPHON, +1)
+				.armType(NOT(Arms.AVIAN), 0, -5)
 				.legType(LowerBody.GRYPHON, +1)
+				.legType(NOT(LowerBody.AVIAN), 0, -5)
 				.wingType(Wings.FEATHERED_AVIAN, +2)
 				.skinCoatType(Skin.FEATHER, +1)
 				.hasCockOfType(CockTypesEnum.GRYPHON, +1);
@@ -55,6 +59,12 @@ public class GryphonRace extends Race{
 		addMutation(IMutationsLib.HarpyHollowBonesIM);
 		
 		buildTier(9,"gryphon")
+				.buffs({
+					"str.mult": +0.40,
+					"tou.mult": +0.30,
+					"spe.mult": +0.50,
+					"int.mult": +0.15
+				})
 				.end();
 	}
 }

@@ -51,6 +51,7 @@ public class DeerRace extends Race{
 				.hornTypeAndCount(Horns.ANTLERS, AT_LEAST(4), +1)
 				.hornTypeAndCount(Horns.ANTLERS, AT_LEAST(14), +1)
 				.hornTypeAndCount(Horns.ANTLERS, AT_LEAST(24), +1)
+				.hornTypeAndCount(Horns.ANTLERS, AT_LEAST(34), +1)
 				.skinCoatType(Skin.FUR, +1)
 				.cockOrVaginaOfType(CockTypesEnum.HORSE, VaginaClass.EQUINE, +1);
 		

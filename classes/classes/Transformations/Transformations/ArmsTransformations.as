@@ -1165,7 +1165,7 @@ public class ArmsTransformations extends MutationsHelper {
 				else {
 					TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
 
-					desc += "You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a shiny  carapace</b>. A econd pair has even begun sprouting just underneath, forming these same traits. You touch the exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
+					desc += "You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a shiny  carapace</b>. A second pair has even begun sprouting just underneath, forming these same traits. You touch the exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
 				}
 
 				player.arms.type = Arms.ANT;
@@ -1320,7 +1320,7 @@ public class ArmsTransformations extends MutationsHelper {
 
 				player.arms.type = Arms.REINDEER;
 				if (doOutput) outputText(desc);
-				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.CANINE));
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.REINDEER));
 			},
 			// is present
 			function (): Boolean {

@@ -9099,11 +9099,18 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Hair
-        if (transformations.HairFeather.isPossible() && player.hairLength > 0 && changes < changeLimit && rand(3) == 0) {
-            outputText("[pg]While you’re yet processing the taste of that odd seed, you suddenly start feeling an annoying itching coming from your scalp, without a doubt a change brought by the transformative nature of the seed.");
+        if (transformations.HairFeather.isPossible() && player.hairLength > 0 && changes < changeLimit && type != 2 && rand(3) == 0) {
+            outputText("[pg]"+(type == 0 ? "While you’re yet processing the taste of that odd seed, y":"Y")+"ou suddenly start feeling an annoying itching coming from your scalp, without a doubt a change brought by the transformative nature of the "+(type == 0 ? "seed":"statuette")+".");
             outputText("[pg]The base of each one of your hairs thicken noticeably, and from every one of them, small hairy filament start sprouting of each side. Soon you realize that your hairs are becoming feathers, and in a question of minute, <b>you’re left with a mane of [hair]!</b>");
 		    outputText("[pg]");
 		    transformations.HairFeather.applyEffect(false);
+            changes++;
+        }
+		if (transformations.HairPeafowlFeather.isPossible() && player.hairLength > 0 && changes < changeLimit && type == 2 && rand(3) == 0) {
+            outputText("[pg]You suddenly start feeling an annoying itching coming from your scalp, without a doubt a change brought by the transformative nature of the statuette.");
+            outputText("[pg]The base of each one of your hairs thicken noticeably, and from every one of them, small hairy filament start sprouting of each side. Soon you realize that your hairs are becoming feathers, and in a question of minute, <b>you’re left with a mane of [hair] along with creast plumage at the top of your head!</b>");
+		    outputText("[pg]");
+		    transformations.HairPeafowlFeather.applyEffect(false);
             changes++;
         }
         //Face
@@ -9164,6 +9171,12 @@ public final class Mutations extends MutationsHelper {
 			if (type == 0) outputText("[pg]It seems like the fruit had no effect this time. Maybe it was spoiled, or kept in storage for too much time?");
 			else outputText("[pg]It seems like the energy from statuette was weak to change you this time. Maybe, more luck next time?");
 		}
+		//Lion mane
+		if (player.eyes.type == Eyes.GRYPHON && player.rearBody.type != RearBody.LION_MANE && type == 1 && changes < changeLimit && rand(3) == 0) {
+            outputText("[pg]");
+            transformations.RearBodyLionMane.applyEffect();
+            changes++;
+        }
         if (type == 0) player.refillHunger(15);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }

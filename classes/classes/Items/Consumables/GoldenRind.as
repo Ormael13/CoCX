@@ -98,12 +98,12 @@ import classes.VaginaClass;
 				changes++;
 			}
 			//Increase points on deer antlers
-			if (rand(3) == 0 && changes < changeLimit && player.horns.type == Horns.ANTLERS && player.horns.count < 30) {
+			if (rand(3) == 0 && changes < changeLimit && player.horns.type == Horns.ANTLERS && player.horns.count < 34) {
 				outputText("\n\nYou feel a strange twisting sensation from your antlers as they extend and split outwards.  You reach up to feel them and realize that your antlers are now even more branched out.");
 				if (player.horns.count < 20 && rand(2) == 0) player.horns.count += (1 + rand(4));
 				player.horns.count++;
 				outputText("  After counting the number of points you have on your antlers, <b>you have " + player.horns.count + " points.</b>");
-				if (player.horns.count >= 30) outputText("<b>  It seems that your antlers can't get any more pointier.</b>");
+				if (player.horns.count >= 34) outputText("<b>  It seems that your antlers can't get any more pointier.</b>");
 				changes++;
 			}
 			//Gain fur

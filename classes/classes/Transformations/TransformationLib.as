@@ -433,7 +433,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const EyesFrostwyrm: Transformation		= eyes.EyesFrostwyrm.registerTf(AS_EYES, AE_FROST_WYRM);
 	public const EyesGoat: Transformation			= eyes.EyesGoat.registerTf(AS_EYES, AE_GOAT);
 	public const EyesGhost: Transformation			= eyes.EyesGhost.registerTf(AS_EYES, AE_GHOST);
-	public const EyesGryphon: Transformation		= eyes.EyesGryphon.registerTf(AS_EYES, AE_GRYPHON);
+	public const EyesGryphon: Transformation		= eyes.EyesGryphon.registerTfMultiple(AS_EYES, AE_GRYPHON, AE_PEAFOWL, AE_AVIAN);
 	public const EyesHinezumi: Transformation		= eyes.EyesHinezumi.registerTf(AS_EYES, AE_HINEZUMI);
 	public const EyesHuman: Transformation			= eyes.EyesHuman.registerTf(AS_EYES, AE_HUMAN);
     public const EyesInfernal: Transformation		= eyes.EyesInfernal.registerTf(AS_EYES, AE_HELLCAT);
@@ -586,7 +586,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 //======================================================================================================================
     public var hair: HairTransformations = new HairTransformations();
     public const HairHuman: Transformation 		= hair.HairHuman.registerTf(AS_HAIR, AE_HUMAN);
-    public const HairFeather: Transformation 	= hair.HairFeather.registerTf(AS_HAIR, AE_AVIAN);
+    public const HairFeather: Transformation 	= hair.HairFeather.registerTfMultiple(AS_HAIR, AE_AVIAN, AE_GRYPHON);
     public const HairGorgon: Transformation 	= hair.HairGorgon.registerTf(AS_HAIR, AE_GORGON);
     public const HairSilky: Transformation 		= hair.HairSilky.registerTf(AS_HAIR, AE_ELF);
     public const HairStorm: Transformation 		= hair.HairStorm.registerTfMultiple(AS_HAIR, AE_RAIJU, AE_KIRIN, AE_THUNDERBIRD).withAlchemyNames("StormHair","Storm hair");
@@ -607,6 +607,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const HairFairy: Transformation 		= hair.HairFairy.registerTf(AS_HAIR, AE_FAIRY);
     public const HairCow: Transformation 		= hair.HairCow.registerTf(AS_HAIR, AE_COW);
     public const HairDripping: Transformation 	= hair.HairDripping.registerTf(AS_HAIR, AE_SAND_WORM);
+    public const HairPeafowlFeather: Transformation = hair.HairPeafowlFeather.registerTf(AS_HAIR, AE_PEAFOWL);
     public function HairChangeColor(colors: /*String*/ Array): Transformation { return hair.HairChangeColor(colors); }
 
 
