@@ -5915,34 +5915,6 @@ public class Combat extends BaseContent {
         return damageMult;
     }
 
-    private function anemoneCheck():Boolean{
-
-        if (monster is Anemone || monster is SeaAnemone) {
-            //hit successful:
-            //special event, block (no more than 10-20% of turns, also fails if PC has >75 corruption):
-            if (rand(10) <= 1) {
-                outputText("Seeing your [weapon] raised, the anemone looks down at the water, angles her eyes up at you, and puts out a trembling lip.  ");
-                if (player.cor < 75) {
-                    outputText("You stare into her hangdog expression and lose most of the killing intensity you had summoned up for your attack, stopping a few feet short of hitting her.\n");
-                    //damage = 0;
-                    //Kick back to main if no damage occured!
-                    if (monster.HP > 0 && monster.lust < monster.maxOverLust()) {
-                        if (player.hasStatusEffect(StatusEffects.FirstAttack)) {
-                            attack(false);
-                            return true;
-                        }
-                        enemyAI();
-                    } else {
-                        if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-                        else doNext(endLustVictory);
-                    }
-                    return true;
-                } else outputText("Though you lose a bit of steam to the display, the drive for dominance still motivates you to follow through on your swing.");
-            }
-        }
-        return false;
-    }
-
     private function meleeMasteryGain(hit:int, crit:int):void{
         var baseMasteryXP:Number = 1;
         if (player.hasPerk(PerkLib.MeleeWeaponsMastery)) baseMasteryXP += 2;
@@ -6035,6 +6007,12 @@ public class Combat extends BaseContent {
         var lightningDamage:Number = lightningDamageBoostedByDao();
         var darkDamage:Number = darknessDamageBoostedByDao();
         if (player.weapon is Tidarion) meleeDamageNoLag = 0; //recalc damage for current mana.. okay, get it, multi-attackers-fuckers!
+
+
+        var boolSwiftCast:Boolean = player.hasPerk(PerkLib.SwiftCasting) && flags[kFLAGS.ELEMENTAL_MELEE] > 0 && (player.isOneHandedWeapons() || player.weapon == weapons.ATWINSCY || (player.weaponSpecials("Large") && player.hasPerk(PerkLib.GigantGrip)) || (player.weaponSpecials("Massive") && player.hasPerk(PerkLib.TitanGrip))) && player.isHavingFreeOffHand();
+        var boolLifeLeech:Boolean = player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon();
+        var boolFistingIs300Bucks:Boolean = player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise();
+
         for(var i:int = 1; i <= flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]; i++){
             damage = 0;
             if (rand(100) < accMelee) { // Attack hits... do stuff
@@ -6046,10 +6024,9 @@ public class Combat extends BaseContent {
                     damage += temp;
                 }
                 //ANEMONE SHIT
-                // NGL this looks fucking retarded for a monster mechanic
-                // and a whole override for a retarded exit function feels even worse so I keep this shit here
-                // until someone think of better idea
-                if(anemoneCheck()) return;
+                // I think I should just change the mechanic completely and intuite based on the comment
+                // The intention of anemone check seems to be: allows first melee attack and skip the rest of the proc if check passes
+                // Flavor text migrate to preMeleeSkip(), attack skip executed in postMeleeDmgSkip later here
                 crit = rand(100) < critChance;
                 if(crit) damage *= critDamage;
                 hitCounter++;
@@ -6057,6 +6034,7 @@ public class Combat extends BaseContent {
                 // Have to put it before doDamage, because doDamage applies the change, as well as status effects and shit.
                 // Migrate mirror
                 // Migrate LabGuard shieldWall check
+                // Migrate anemone/seaanemone skip check
                 // This is a long ass spaghet
                 damage = monster.preMeleeDmg(damage);
                 if (player.weapon is HuntsmansCane) {
@@ -6547,22 +6525,10 @@ public class Combat extends BaseContent {
                         else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
                     }
                 }
-                if (monster is JeanClaude && !player.hasStatusEffect(StatusEffects.FirstAttack)) {
-                    if (monster.HP <= monster.minHP() || monster.lust >= monster.maxOverLust()) {
-                        // noop
-                    }
-                    if (player.lust <= 30) {
-                        outputText("\n\nJean-Claude doesn’t even budge when you wade into him with your [weapon].");
-                        outputText("\n\n\"<i>Why are you attacking me, slave?</i>\" he says. The basilisk rex sounds genuinely confused. His eyes pulse with hot, yellow light, reaching into you as he opens his arms, staring around as if begging the crowd for an explanation. \"<i>You seem lost, unable to understand, lashing out at those who take care of you. Don’t you know who you are? Where you are?</i>\" That compulsion in his eyes, that never-ending heat, it’s... it’s changing things. You need to finish this as fast as you can.");
-                    } else if (player.lust <= 50) {
-                        outputText("\n\nAgain your [weapon] thumps into Jean-Claude. Again it feels wrong. Again it sends an aching chime through you, that you are doing something that revolts your nature.");
-                        outputText("\n\n\"<i>Why are you fighting your master, slave?</i>\" he says. He is bigger than he was before. Or maybe you are smaller. \"<i>You are confused. Put your weapon down- you are no warrior, you only hurt yourself when you flail around with it. You have forgotten what you were trained to be. Put it down, and let me help you.</i>\" He’s right. It does hurt. Your body murmurs that it would feel so much better to open up and bask in the golden eyes fully, let it move you and penetrate you as it may. You grit your teeth and grip your [weapon] harder, but you can’t stop the warmth the hypnotic compulsion is building within you.");
-                    } else if (player.lust <= 80) {
-                        outputText("\n\n\"<i>Do you think I will be angry at you?</i>\" growls Jean-Claude lowly. Your senses feel intensified, his wild, musky scent rich in your nose. It’s hard to concentrate... or rather it’s hard not to concentrate on the sweat which runs down his hard, defined frame, the thickness of his bulging cocks, the assured movement of his powerful legs and tail, and the glow, that tantalizing, golden glow, which pulls you in and pushes so much delicious thought and sensation into your head…  \"<i>I am not angry. You will have to be punished, yes, but you know that is only right, that in the end you will accept and enjoy being corrected. Come now, slave. You only increase the size of the punishment with this silliness.</i>\"");
-                    } else {
-                        outputText("\n\nYou can’t... there is a reason why you keep raising your weapon against your master, but what was it? It can’t be that you think you can defeat such a powerful, godly alpha male as him. And it would feel so much better to supplicate yourself before the glow, lose yourself in it forever, serve it with your horny slut body, the only thing someone as low and helpless as you could possibly offer him. Master’s mouth is moving but you can no longer tell where his voice ends and the one in your head begins... only there is a reason you cling to like you cling onto your [weapon], whatever it is, however stupid and distant it now seems, a reason to keep fighting...");
-                    }
-                    player.takeLustDamage(25, true);
+                monster.postMeleeDmg();
+                // Migrate anemonecheck() remaining attacks skip
+                if(!monster.postMeleeDmgSkip()){
+                    return;
                 }
                 outputText(" ");
                 outputText("\n\n"); //Move to next attack line
@@ -6572,7 +6538,7 @@ public class Combat extends BaseContent {
                 WrathWeaponsProc();
                 heroBaneProc(damage);
                 EruptingRiposte();
-                if (player.hasPerk(PerkLib.SwiftCasting) && flags[kFLAGS.ELEMENTAL_MELEE] > 0 && (player.isOneHandedWeapons() || player.weapon == weapons.ATWINSCY || (player.weaponSpecials("Large") && player.hasPerk(PerkLib.GigantGrip)) || (player.weaponSpecials("Massive") && player.hasPerk(PerkLib.TitanGrip))) && player.isHavingFreeOffHand() && !player.statStore.hasBuff("Supercharged")) {
+                if (boolSwiftCast && !player.statStore.hasBuff("Supercharged")) {
                     if (flags[kFLAGS.ELEMENTAL_MELEE] == 1 && CombatAbilities.WhitefireSwiftcast.isUsable) {
                         CombatAbilities.WhitefireSwiftcast.perform();
                     }
@@ -6598,7 +6564,7 @@ public class Combat extends BaseContent {
                         CombatAbilities.AcidSpraySwiftcast.perform();
                     }
                 }
-                if (player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon()) {
+                if (boolLifeLeech) {
                     var sippedA:Number = 0.01;
                     if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) sippedA *= 2;
                     player.HP += player.maxHP() * sippedA;
@@ -6622,7 +6588,7 @@ public class Combat extends BaseContent {
                     extraHitDamage = damage;
                     extraHitDamage2 = damage;
                 }
-                if (player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()){
+                if (boolFistingIs300Bucks){
                     if (player.hasPerk(PerkLib.JabbingStyle)){
                         if (player.hasPerk(PerkLib.JabbingGrandmaster)){
                             extraHitChance = 10;
@@ -6681,8 +6647,8 @@ public class Combat extends BaseContent {
                 }
             }
             else { //MISSED THE TARGET THUS DAMAGE = 0;
-                if (monster is DisplacerBeast) outputText("The displacer beast teleports, dodging your attack.\n");
-                else outputText("You swing your [weapon] ferociously, confident that you can strike a crushing blow. In your confidence, you focus too much on force, and not where your swing is headed. You miss, your enemy barely needing to move to evade your blow.\n");
+                // Migrate DisplacerBeast custom evade text and default evade text
+                monster.preMeleeMissed();
             }
             if (monster.HP <= monster.minHP()) {
                 doNext(endHpVictory);

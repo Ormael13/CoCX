@@ -2519,6 +2519,42 @@ import flash.utils.getQualifiedClassName;
 		}
 
 		/**
+		 * <p>meleeDamageAcc() Override Series - Part 2</p>
+		 * <ul>
+		 *     <li>Called after preMeleeDmg() and each individual melee damage was dealt</li>
+		 * </ul>
+		 */
+		public function postMeleeDmg():void{
+
+		}
+
+		/**
+		 * <p>meleeDamageAcc() Override Series - Part 3</p>
+		 * <ul>
+		 *     <li>Called after preMeleeDmg(), postMeleeDmg() and each individual melee damage was dealt</li>
+		 *     <li>Used to implement mechanic related to after individual melee attack</li>
+		 *     <li>return false to skip the remaining normal attacks</li>
+		 *     <li>PS: By exiting meleeDamageAcc() Thanks!</li>
+		 *     <li>Default: return true (next attack will be attempted based on remaining multi-hit)</li>
+		 * </ul>
+		 */
+		public function postMeleeDmgSkip():Boolean{
+			return true;
+		}
+
+		/**
+		 * <p>meleeDamageAcc() Override Series - Part 4</p>
+		 * <ul>
+		 *     <li>Called if failed to pass meleeacc check (Attack Missed)</li>
+		 *     <li>Used to run outputText() for flavor</li>
+		 *     <li>or you can put mechanic involved player missing normal melee attacks</li>
+		 * </ul>
+		 */
+		public function preMeleeMissed():void{
+			outputText("You swing your [weapon] ferociously, confident that you can strike a crushing blow. In your confidence, you focus too much on force, and not where your swing is headed. You miss, your enemy barely needing to move to evade your blow.\n");
+		}
+
+		/**
 		 * This method is called after all stun/fear/constricted checks.
 		 * Default: Equal chance to do physical or special (if any) attack
 		 */
