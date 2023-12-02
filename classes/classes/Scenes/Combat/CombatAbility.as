@@ -4,6 +4,7 @@ import classes.internals.EnumValue;
 import classes.StatusEffectType;
 
 import coc.view.ButtonData;
+import classes.GlobalFlags.kFLAGS;
 
 /**
  * A combat ability invokable by player (spell, special, skill, etc).
