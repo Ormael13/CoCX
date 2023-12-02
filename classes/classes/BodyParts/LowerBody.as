@@ -504,6 +504,7 @@ public class LowerBody extends SaveableBodyPart {
 	EnumValue.add(Types, GRYPHON, "GRYPHON", {
 		name: "gryphon",
 		appearanceDesc: "You have strong thighs perfect for launching you into the air ending in furred, feline legs, covered with a coat of soft, [fur color2] fur. Your have digitigrade feet, lion-like, with soft, pink soles and paw pads, with feline toes ending in sharp, retractile claws.",
+		canPounce: true,
 		canTaur: true,
 		fur: true
 	});

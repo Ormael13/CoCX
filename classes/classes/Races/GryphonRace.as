@@ -1,6 +1,7 @@
 package classes.Races {
 
 import classes.BodyParts.*;
+import classes.IMutations.IMutationsLib;
 import classes.CockTypesEnum;
 import classes.PerkLib;
 import classes.Race;
@@ -50,6 +51,8 @@ public class GryphonRace extends Race{
 				.wingType(Wings.FEATHERED_AVIAN, +2)
 				.skinCoatType(Skin.FEATHER, +1)
 				.hasCockOfType(CockTypesEnum.GRYPHON, +1);
+		
+		addMutation(IMutationsLib.HarpyHollowBonesIM);
 		
 		buildTier(9,"gryphon")
 				.end();

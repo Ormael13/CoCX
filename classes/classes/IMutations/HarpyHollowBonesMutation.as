@@ -39,7 +39,7 @@ public class HarpyHollowBonesMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireBonesAndMarrowMutationSlot()
-                    .requireAnyRace(Races.HARPY, Races.SIREN, Races.THUNDERBIRD, Races.PHOENIX, Races.COUATL);
+                    .requireAnyRace(Races.HARPY, Races.SIREN, Races.THUNDERBIRD, Races.PHOENIX, Races.COUATL, Races.AVIAN, Races.GRYPHON, Races.PEACOCK);
                 }
                 else{
                     var pLvl:int = pTier * 30;

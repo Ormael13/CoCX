@@ -11,12 +11,20 @@ import classes.BodyParts.Horns;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Combat.Combat;
+import classes.Scenes.Combat.CombatUI;
 import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
+import coc.view.CoCButton;
+
 public class CancerAttack extends Monster
 	{
-
+		override public function changeBtnWhenBound(btnStruggle:CoCButton, btnBoundWait:CoCButton):void{
+			if (player.hasStatusEffect(StatusEffects.CancerMonsterGrab)) {
+				btnStruggle.call(cancerGrabStruggle);
+				btnBoundWait.call(cancerGrabWait);
+			}
+		}
 		override protected function performCombatAction():void {
 			if (player.hasStatusEffect(StatusEffects.MonsterDig)) {
 				if (player.statusEffectv1(StatusEffects.MonsterDig) > 0) {

@@ -9002,7 +9002,7 @@ public final class Mutations extends MutationsHelper {
         if (type == 2) outputText("Looking again at the wonderful peacock carved in alabaster and ruby that you found on that strange alcove, your curiosity gets the best of you, and you start examining it. As you do so, the magic stored long ago within the artifact pours out, and starts changing your body!");
         //Stats changes
         //-Speed increase to 100.
-        if (type == 0 && rand(3) == 0 && changes < changeLimit && MutagenBonus("spe", 1)) {
+        if (type != 1 && rand(3) == 0 && changes < changeLimit && MutagenBonus("spe", 1)) {
             changes++;
             if (player.spe >= 75) outputText("[pg]A familiar chill runs down your spine. Your muscles feel like well oiled machinery, ready to snap into action with lightning speed.");
             else outputText("[pg]A chill runs through your spine, leaving you feeling like your reflexes are quicker and your body faster.");
@@ -9015,24 +9015,24 @@ public final class Mutations extends MutationsHelper {
             player.addCurse("tou", 1, 1);
         }
         //-Strength increase to 70
-        if (type == 0 && rand(3) == 0 && changes < changeLimit && MutagenBonus("str", 1)) {
+        if (type != 1 && rand(3) == 0 && changes < changeLimit && MutagenBonus("str", 1)) {
             changes++;
             //(low str)
             if (player.str < 40) outputText("[pg]Shivering, you feel a feverish sensation that reminds you of the last time you got sick. Thankfully, it passes swiftly, leaving slightly enhanced strength in its wake.");
             //(hi str – 50+)
             else outputText("[pg]Heat builds in your muscles, their already-potent mass shifting slightly as they gain even more strength.");
         }
-        if (type == 1 || type == 2) changeLimit = 1;
+        if (type == 1 || type == 2) changeLimit = 1 + rand(2);
         if (player.blockingBodyTransformations()) changeLimit = 0;
         //Sexual changes
-        if (player.avianCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && type == 0 && rand(3) == 0) {
+        if (player.avianCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && type != 1 && rand(3) == 0) {
             for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
                 if (player.cocks[temp2].cockType != CockTypesEnum.AVIAN) break;
             }
             transformations.CockAvian(temp2).applyEffect();
             changes++;
         }
-        if (player.cockTotal() > player.avianCocks() && type == 0 && rand(3) == 0 && changes < changeLimit) {
+        if (player.cockTotal() > player.avianCocks() && type != 1 && rand(3) == 0 && changes < changeLimit) {
             for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
                 if (player.cocks[temp2].cockType != CockTypesEnum.AVIAN) break;
             }
@@ -9055,18 +9055,18 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Legs
-        if (player.lowerBody != LowerBody.AVIAN && changes < changeLimit && type == 0 && rand(3) == 0) {
+        if (player.lowerBody != LowerBody.AVIAN && changes < changeLimit && type != 1 && rand(3) == 0) {
             outputText("[pg]");
             transformations.LowerBodyAvian.applyEffect();
             changes++;
         }
-        if (player.lowerBody != LowerBody.GRYPHON && player.eyes.type == Eyes.GRYPHON && changes < changeLimit && type == 1 && rand(3) == 0) {
+        if (player.lowerBody != LowerBody.GRYPHON && changes < changeLimit && type == 1 && rand(3) == 0) {
             outputText("[pg]You take a seat while you see how the magic within the statue affects you.[pg]");
             transformations.LowerBodyGryphon(2).applyEffect();
             changes++;
         }
         //Tail
-        if (player.tailType != Tail.AVIAN && player.lowerBody == LowerBody.AVIAN && changes < changeLimit && type == 0 && rand(3) == 0) {
+        if (player.tailType != Tail.AVIAN && player.lowerBody == LowerBody.AVIAN && changes < changeLimit && type != 1 && rand(3) == 0) {
             outputText("[pg]");
             transformations.TailAvian.applyEffect();
             changes++;
@@ -9077,7 +9077,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Arms
-        if (player.arms.type != Arms.AVIAN && player.tailType == Tail.AVIAN && changes < changeLimit && type == 0 && rand(3) == 0) {
+        if (player.arms.type != Arms.AVIAN && player.tailType == Tail.AVIAN && changes < changeLimit && type != 1 && rand(3) == 0) {
             outputText("[pg]");
             transformations.ArmsAvian.applyEffect();
             changes++;
@@ -9088,7 +9088,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Wings
-        if (player.wings.type != Wings.FEATHERED_AVIAN && player.arms.type == Arms.AVIAN && changes < changeLimit && type == 0 && rand(3) == 0) {
+        if (player.wings.type != Wings.FEATHERED_AVIAN && (player.arms.type == Arms.AVIAN || player.arms.type == Arms.GRYPHON) && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.WingsFeatheredAvian.applyEffect();
             changes++;
@@ -9099,7 +9099,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Hair
-        if (transformations.HairFeather.isPossible() && player.hairLength > 0 && changes < changeLimit && type == 0 && rand(3) == 0) {
+        if (transformations.HairFeather.isPossible() && player.hairLength > 0 && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]While you’re yet processing the taste of that odd seed, you suddenly start feeling an annoying itching coming from your scalp, without a doubt a change brought by the transformative nature of the seed.");
             outputText("[pg]The base of each one of your hairs thicken noticeably, and from every one of them, small hairy filament start sprouting of each side. Soon you realize that your hairs are becoming feathers, and in a question of minute, <b>you’re left with a mane of [hair]!</b>");
 		    outputText("[pg]");
@@ -9107,13 +9107,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Face
-        if (player.faceType != Face.AVIAN && changes < changeLimit && type == 0 && rand(3) == 0) {
+        if (player.faceType != Face.AVIAN && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.FaceAvian.applyEffect();
             changes++;
         }
         //Ears
-        if (player.ears.type != Ears.AVIAN && changes < changeLimit && type == 0 && rand(3) == 0) {
+        if (player.ears.type != Ears.AVIAN && changes < changeLimit && type != 1 && rand(3) == 0) {
             outputText("[pg]");
             transformations.EarsAvian.applyEffect();
             changes++;
@@ -9124,7 +9124,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Skin
-        if (!player.isFeatherCovered() && changes < changeLimit && type == 0 && rand(4) == 0) {
+        if (!player.isFeatherCovered() && changes < changeLimit && rand(3) == 0) {
             if (player.isFurCovered()) {
                 outputText("[pg]After having gulp down the seed, your coat of [fur color] fur tingles unpleasantly, so you begin to scratch it, hoping to remove the itch as soon as possible. Despite your futile attempts, the itch only gets worse.");
                 outputText("[pg]A particularly strong itch diverts your attention to your left arm. The fur on seems to be falling off, except for a few tufts that start joining together. The same process begins happening all over your body, leaving your thoroughly confused.The hairs that formed into tufts slowly combine and elongate, and you’re left with thousands of quills covering your body.");
@@ -9156,7 +9156,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Eyes
-        if (player.eyes.type != Eyes.GRYPHON && player.arms.type == Arms.GRYPHON && changes < changeLimit && type == 1 && rand(3) == 0) {
+        if (player.eyes.type != Eyes.GRYPHON && (player.arms.type == Arms.GRYPHON || player.arms.type == Arms.AVIAN) && changes < changeLimit && rand(3) == 0) {
             transformations.EyesGryphon.applyEffect();
             changes++;
         }

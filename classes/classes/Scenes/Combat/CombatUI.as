@@ -905,53 +905,18 @@ public class CombatUI extends BaseCombatContent {
 		}
 		addButton(13, "Surrender(H)", combat.surrenderByHP).hint("Stop defending up to the point enemy would beat you down to minimal HP.");
 		addButton(14, "Surrender(L)", combat.surrenderByLust).hint("Fantasize about your opponent in a sexual way so much it would fill up your lust you'll end up getting raped.");
-		if (player.hasStatusEffect(StatusEffects.Bound)) {
-			btnStruggle.call((monster as Ceraph).ceraphBindingStruggle);
-			btnBoundWait.call((monster as Ceraph).ceraphBoundWait);
-		}
-		if (player.hasStatusEffect(StatusEffects.CancerMonsterGrab)) {
-			btnStruggle.call((monster as CancerAttack).cancerGrabStruggle);
-			btnBoundWait.call((monster as CancerAttack).cancerGrabWait);
-		}
-		if (player.hasStatusEffect(StatusEffects.Chokeslam)) {
-			btnStruggle.call((monster as Izumi).chokeSlamStruggle);
-			btnBoundWait.call((monster as Izumi).chokeSlamWait);
-		}
-		if (player.hasStatusEffect(StatusEffects.Devoured)) {
-			btnStruggle.call((monster as SandWorm).sandWormDevourStruggle);
-			btnBoundWait.call((monster as SandWorm).sandWormDevourWait);
-		}
-		if (player.hasStatusEffect(StatusEffects.Titsmother)) {
-			btnStruggle.call((monster as Izumi).titSmotherStruggle);
-			btnBoundWait.call((monster as Izumi).titSmotherWait);
-		}
-		if (player.hasStatusEffect(StatusEffects.Terrorize)) {
-			btnStruggle.call((monster as Grayda).graydaTerrorizeStruggle);
-			btnBoundWait.call((monster as Grayda).graydaTerrorizeWait);
-		}
-		if (player.hasStatusEffect(StatusEffects.Pounced)) {
-			if (monster is Tyrantia) {
-				outputText("\n<b>You’re trapped underneath the giant Drider, and all you can see is her armored undercarriage. Eight legs jab down at you, steel glinting dangerously. You need to get out of here, or you’ll end up crushed!</b>");
-				btnStruggle.call((monster as Tyrantia).tyrantiaPouncedStruggle);
-				btnBoundWait.call((monster as Tyrantia).tyrantiaPouncedWait);
-			} else if (monster is ProjectTyrant) {
-				outputText("You are pinned underneath the Drider-beast’s weight, and it begins to crush you!");
-				btnStruggle.call((monster as ProjectTyrant).TackleGrappleStruggle);
-				btnBoundWait.call((monster as ProjectTyrant).TackleGrappleWait);
-			} else if (monster is Incels) {
-				outputText("You are buried under the incels’ writhing mass, and they’re still trying to tear you apart!");
-				btnStruggle.call((monster as Incels).RipStruggle);
-				btnBoundWait.call((monster as Incels).RipWait);
-			}
-		}
-		if (player.hasStatusEffect(StatusEffects.Tentagrappled)) {
-			btnStruggle.call((monster as SuccubusGardener).grappleStruggle);
-			btnBoundWait.call((monster as SuccubusGardener).grappleWait);
-		}
-		if (player.hasStatusEffect(StatusEffects.YamataEntwine)) {
-			btnStruggle.call((monster as Yamata).entwineStruggle);
-			btnBoundWait.call((monster as Yamata).entwineWait);
-		}
+		// Migrate ceraph bound check (StatusEffects.Bound only used by ceraph)
+		// Migrate cancer grab check (StatusEffects.CancerMonsterGrab)
+		// Migrate Izumi choke and tits (StatusEffects.Chokeslam,StatusEffects.Titsmother) insert dommy mommy smth
+		// Migrate Sandworm Devoured check (same shit again)
+		// Migrate Grayda Terrorize check (StatusEffects.Terrorize only used by Grayda) who is this????
+		// Migrate Tyrantia/ProjectTyrant/Incels Pounced check (StatusEffects.Pounced)
+		// Migrate SuccubusGardener Grapple (StatusEffects.Tentagrappled)
+		// Migrate Yamata Entwine (StatusEffects.YamataEntwine)
+		// I need to figure how to make addButton available can I just change it to public
+		// PS: do we really need status effect to check when it can be just private var in monster subclass to keep track
+		monster.changeBtnWhenBound(btnStruggle,btnBoundWait);
+
 		if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles) && player.statusEffectv3(StatusEffects.LethicesRapeTentacles) == 1) {
 			outputText("\n<b>Lethice's tentacles have a firm grip of your limbs!</b>");
 			addButton(0, "Struggle", (monster as Lethice).grappleStruggle);

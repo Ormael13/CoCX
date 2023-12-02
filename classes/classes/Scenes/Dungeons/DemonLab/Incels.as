@@ -13,6 +13,8 @@ import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.internals.WeightedDrop;
 
+import coc.view.CoCButton;
+
 public class Incels extends Monster {
 
     public function Incels() {
@@ -65,6 +67,14 @@ public class Incels extends Monster {
     }
     private function restoreLustTick():void {
         damageMult = damageMultBase + (Math.round(lust/1000) * 0.01);
+    }
+
+    override public function changeBtnWhenBound(btnStruggle:CoCButton, btnBoundWait:CoCButton):void{
+        if (player.hasStatusEffect(StatusEffects.Pounced)) {
+            outputText("You are buried under the incels’ writhing mass, and they’re still trying to tear you apart!");
+            btnStruggle.call(RipStruggle);
+            btnBoundWait.call(RipWait);
+        }
     }
 
     override public function defeated(hpVictory:Boolean):void {
