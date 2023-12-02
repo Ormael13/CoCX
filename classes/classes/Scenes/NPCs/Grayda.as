@@ -6,6 +6,8 @@ import classes.BodyParts.Hips;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
+import coc.view.CoCButton;
+
 public class Grayda extends Monster
 	{
 		private function graydaSwing():void {
@@ -86,7 +88,12 @@ public class Grayda extends Monster
 			player.removeStatusEffect(StatusEffects.Terrorize);
 			SceneLib.combat.enemyAIImpl();
 		}
-		
+		override public function changeBtnWhenBound(btnStruggle:CoCButton, btnBoundWait:CoCButton):void{
+			if (player.hasStatusEffect(StatusEffects.Terrorize)) {
+				btnStruggle.call(graydaTerrorizeStruggle);
+				btnBoundWait.call(graydaTerrorizeWait);
+			}
+		}
 		override protected function performCombatAction():void
 		{
 			var choice:Number = rand(5);
