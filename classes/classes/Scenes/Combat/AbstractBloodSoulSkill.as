@@ -64,6 +64,8 @@ public class AbstractBloodSoulSkill extends AbstractSoulSkill {
     }
 
     override public function useResources():void {
+        //Set last attack type for Blood Soulskill
+        CombatAbility.prototype.useResources.call(this);
         HPChange(sfCost(), false);
 
         if (sfInfusion) {

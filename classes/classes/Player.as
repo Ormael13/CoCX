@@ -7412,9 +7412,10 @@ use namespace CoC;
 					}
 			)
 		}
-		public function resetCooldowns():void {
+		public function resetCooldowns(oncePerDay:Boolean = false):void {
 			for (var i:int = 0; i<cooldowns.length; i++) {
-				cooldowns[i] = 0;
+				if (oncePerDay || cooldowns[i] != -2)
+					cooldowns[i] = 0;
 			}
 		}		
 	}

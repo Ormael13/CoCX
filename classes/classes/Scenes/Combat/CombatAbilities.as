@@ -8,6 +8,7 @@ import classes.Scenes.Combat.SpellsNecro.*;
 import classes.Scenes.Combat.SpellsGrey.*;
 import classes.Scenes.Combat.SpellsBlood.*;
 import classes.Scenes.Combat.Soulskills.*;
+import classes.Scenes.Combat.SpecialsMagic.EAspectFireSkill;
 
 public class CombatAbilities {
 	
@@ -334,6 +335,17 @@ public class CombatAbilities {
 		BloodRequiemSF,
 		ScarletSpiritCharge
 	]
+
+	public static const EAspectFire:EAspectFireSkill = new EAspectFireSkill();
+
+	public static const ALL_ELEMENTAL_ASPECTS:/*CombatAbility*/Array = [
+		EAspectFire
+	]
+
+	public static const ALL_MAGICAL_SPECIALS:/*CombatAbility*/Array = [
+		
+	]
+	.concat(ALL_ELEMENTAL_ASPECTS);
 	
 	/*
 	 * Difference from CombatAbility.Registry:
@@ -343,6 +355,7 @@ public class CombatAbilities {
 	public static const ALL:/*CombatAbility*/Array = []
 			.concat(ALL_SPELLS)
 			.concat(ALL_SOULSKILLS)
+			.concat(ALL_MAGICAL_SPECIALS);
 	;
 	
 	function CombatAbilities() {

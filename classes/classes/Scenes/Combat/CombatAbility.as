@@ -225,6 +225,7 @@ public class CombatAbility extends BaseCombatContent {
 	public var baseSFCost:Number = 0;
 	public var baseFatigueCost:Number = 0;
 	public var processPostCallback:Boolean = true;
+	protected var lastAttackType:int = 0;
 	
 	public function CombatAbility(
 			name:String,
@@ -460,7 +461,8 @@ public class CombatAbility extends BaseCombatContent {
 	 * Use mana, increment counters etc. At this point ability still might fail or be intercepted by monster
 	 */
 	public function useResources():void {
-		/* do nothing */
+		if (lastAttackType != 0)
+			flags[kFLAGS.LAST_ATTACK_TYPE] = lastAttackType;
 	}
 	
 	/**
@@ -517,6 +519,10 @@ public class CombatAbility extends BaseCombatContent {
 		var ccd:int = currentCooldown;
 		if (ccd > 0) {
 			return "You need to wait "+numberOfThings(ccd, "more round")+" before you can use this ability again."
+		} else if (ccd == -1) {
+			return "This ability can only be used once per battle."
+		} else if (ccd == -2) {
+			return "This ability can only be used once per day."
 		}
 		return "";
 	}
