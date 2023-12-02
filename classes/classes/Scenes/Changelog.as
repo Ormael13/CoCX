@@ -138,9 +138,15 @@ public class Changelog extends BaseContent
 			outputText("-Harpy Hollow Bones IM can be picked by three additional races: avians, gryphons, peacocks. Eyes used by gryphon race is now shared and count toward score for avian and peacock races too.\n");
 			outputText("-Gryphon/Peacock Statuette could now triger either 1 change or 2 changes. It should make changing to new race bit easier. Also both statuettes should allow to gain race bodyparts for race related to it even if pc not stayed avian.\n");
 			outputText("-Gryphon could use Pounce & Skyrend specials. They can also gain lion mane rear body tf effect now.\n");
-			outputText("-Gryphon can gain race bonuses for reaching 9+ pts: +40% to str multi, +30% to str multi, +50% to str multi, +15% to str multi.\n");
+			outputText("-Gryphon can gain race bonuses for reaching 9+ pts: +40% to str multi, +30% to tou multi, +50% to spe multi, +15% to int multi.\n");
 			outputText("-Peacock was renamed into Peafowl-morph for race name. They can also now get a race bonuses for reaching 9+ pts: -10% to str multi, +60% to spe multi, +50% to wis multi, +35% to lib multi.\n");
 			outputText("-Ferret can gain race bonuses for reaching 6+ pts: -10% to str multi, +50% to spe multi, +30% to int multi, +40% to wis multi, +20 sens.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -228,11 +234,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -258,8 +260,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

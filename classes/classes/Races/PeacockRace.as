@@ -31,7 +31,7 @@ public class PeacockRace extends Race{
         /*Perks*/		"Human"];
 
 	public function PeacockRace(id:int) {
-		super("Peacock", id, []);//RaceBody);
+		super("Peafowl", id, []);//RaceBody);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
 	}
@@ -40,7 +40,7 @@ public class PeacockRace extends Race{
 		
 		addScores()
 				.hairType(Hair.PEAFOWL, +1)
-				.hairType(Hair.FEATHER, 0, -5)
+				.hairType(NOT(Hair.FEATHER), 0, -5)
 				.faceType(Face.AVIAN, +1)
 				.earType(Ears.AVIAN, +1)
 				.eyeType(Eyes.GRYPHON, +1)
