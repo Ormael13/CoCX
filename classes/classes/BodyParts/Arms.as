@@ -234,6 +234,7 @@ public class Arms extends BodyPart {
 		name:"gryphon",
 		appearanceDesc: "The feathers on your arms reach a bit past your elbows, with a fringe of [feather color] plumage leading to your [skin color], slightly rough-skinned hands equipped with short, avian claws.",
 		claw: true,
+		canPounce: true,
 		feahers: true,
 		fur: true
 	});

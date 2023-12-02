@@ -33,10 +33,13 @@ public class Changelog extends BaseContent
 			clearOutput();
 			outputText("<b>Version 0.8v:</b>\n\n");
 			outputText("-New tier 0 strength lvl-up perk: Power Attack. Req. Job: Warrior perk. Effect: Enable Power Attack p. special. Add ~20% of base stat scaling value to melee damage. (+5% melee physical attacks multiplier)\n");
+			outputText("-New tier 0 misc lvl-up perk: Metabolization. Req. Slime, Manticore, Displacer beast, Vampire, Dracula race or hunger enabled. Effect: Increase the duration of lingering nourishment effects by 100% of base duration. And slows hunger progression if any(note does not raise racial scores).\n");
 			outputText("-New tier 1 misc lvl-up perk: Twin Thunder. Req. Power Attack or Power Shot perk. Effect: When using more than one weapon at once power attack/strike now delivers as many hits as used weapons.\n");
 			outputText("-New tier 2 intelligence lvl-up perk: High Tide. Req. Grand Mage & Channeling perks, 75+ int and any water spell or special. Effect: Cumulative 40% damage increase for every subsequent water spell. Each turn without cast water spell lower damage by 40% down to normal (100%) damage. Maximum 5 stacks.\n");
 			outputText("-New tier 3 strength lvl-up perk: Power Attack (Ex). Req. Power Attack perk. Effect: Power Attack p. special damage increased by ~2x. Add ~30% of base stat scaling value to melee damage & power attack multi factor. (+15% melee physical attacks multiplier)\n");
+			outputText("-New tier 3 misc lvl-up perk: Improved Metabolization. Req. Metabolization perk; Slime, Manticore, Displacer beast, Vampire, Dracula race or hunger enabled. Effect: Increase the duration of lingering nourishment effects by an extra 100% of base duration. And slows hunger progression if any(note does not raise racial scores).\n");
 			outputText("-New tier 5 intelligence lvl-up perk: High Tide (Ex). Req. High Tide & Grand Archmage perks, 150+ int. Effect: Increase to cumulative damage by 20%. Penalty for turn without casted water spell decreased by 10%. Maximum 15 stacks.\n");
+			outputText("-New tier 6 misc lvl-up perk: Greater Metabolization. Req. Improved Metabolization perk; Slime, Manticore, Displacer beast, Vampire, Dracula race or hunger enabled. Effect: Increase the duration of lingering nourishment effects by another 100% of base duration. And slows hunger progression even further if any(note does not raise racial scores).\n");
 			outputText("-New tier 7 speed lvl-up perk: Power Shot (Su). Req. Power Shot (Ex). Effect: Allow to use wrath above normal maximum to calculate bonus (overwrath) and effectivness of power attack increased fourfold (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).\n");
 			outputText("-New tier 7 strength lvl-up perk: Power Attack (Su). Req. Power Attack (Ex) perk. Effect: Allow to use wrath above normal maximum to calculate bonus (overwrath) and effectivness of power shot increased fourfold (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).\n");
 			outputText("-New tier 9 intelligence lvl-up perk: High Tide (Su). Req. High Tide (Ex) & Grand Archmage (3rd circle) perks, 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling water based attack. Penalty for turn without casted water spell decreased by another 10%. Maximum 75 stacks.\n");
@@ -50,6 +53,7 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Slime Fluid (Evolved). Req. Slime Fluid (Primitive) and lvl 60+. Effects: Your bodily fluids are self conscious and do not leave you easily. All bleed damage taken is negated. You take 75% less damage from Acid. Your blood takes on aphrodisiac property when taking melee physical damage your blood lash out teasing your opponent.\n");
 			outputText("-New mutation perk: Slime Metabolism (Evolved). Req. Slime Metabolism (Primitive) and lvl 60+. Effects: When taking an intake of fluid heal for 4% of your hp, mana and fatigue. Increase all grappling tease damage by 75%. Gain temporary regeneration +1% after a fluid intake for one hour.\n");
 			outputText("-New mutation perk: Black Heart (Final Form). Req. Black Heart (Evolved) and lvl 90+. Effect: Increased Lust strike power, empower Fascinate, adds extra Lust damage to Lust strike scaling with Wisdom (Wis/10). Lowers Fascinate Cooldown by 2, adds extra Lust damage to Lust strike, scaling with Sensitivity (Sensitivity/10). ");
+			//3 of 11 pages
 			outputText("-New mutation perk: Slime Fluid (Final Form). Req. Slime Fluid (Evolved) and lvl 90+. Effects: Your bodily fluids are self conscious and do not leave you easily. All bleed damage taken is negated. You take 100% less damage from Acid. Your blood takes on aphrodisiac property when taking melee physical damage your blood lash out teasing your opponent. ");
 			outputText("Your melee unarmed and feral attack gains tease damage property when you are below 100% health.\n");
 			outputText("-New mutation perk: Slime Metabolism (Final Form). Req. Slime Metabolism (Evolved) and lvl 90+. Effects: When taking an intake of fluid heal for 5% of your hp, mana and fatigue. Increase all grappling tease damage by 100%. Gain temporary regeneration +2% after a fluid intake for one hour. Fluid intake heals all status damage, drains and weakening by 5% per intake.\n");
@@ -59,7 +63,6 @@ public class Changelog extends BaseContent
 			outputText("-New range weapon (by Lady Aeducan): Harkonnen II - gained by giving Dinah 2x Harkonnen weapons and 4,500 gems for workers work fee (no she's outsourcing the work force and need to pay them... they can't run only on strong alcohol do they?). Cost 10,460 gems. Base atk is 260 and ammo clip size 2. Lowering range accuracy by 50%. It's Dual 2H Firearm type range weapon dealing true damage.\n");
 			outputText("-New consumable (by Sylabt & Ohaxer): Stomiidae fillet. Cost 10 gems. Can be bought at food stand in Trench. Eating it would restore 30 hunger.\n");
 			outputText("-New consumable (by Sylabt & Ohaxer): Calamari Steak. Cost 15 gems. Can be bought at food stand in Trench. Eating it would restore 45 hunger.\n");
-			//3 of 11 pages
 			outputText("-Starting traits desc on choice screen corrected to avoid misleading players (they are most of the time +50% stat multi bonuses (or just 50 sens) not +x% to maximum.\n");
 			outputText("-While using Telekinetic Grab can do much more than simple biting like.. teasing, using m. specials or spellcasting. Also cooldown for using it increased from 6 to 12 turns.\n");
 			outputText("-Due to confusion which range weapon can be used when in goblin mech with upgraded range weapon part all compatibile weapons have now added line in description stating they are compatibile with it.\n");
@@ -79,7 +82,9 @@ public class Changelog extends BaseContent
 			outputText("-Goo type enemies gained immunity to bleed effects.\n");
 			outputText("-Various minor corections/bugfixes.\n");
 			outputText("-Fix some attack and ability scaling of unarmed Dao instead of feral Dao otherwise changed Feral itherative to properly use unarmed strike new damage calculation formulae. (Liadri)\n");
+			outputText("-Ground for Succubus tatoo and fix a bug or two in viewer code. (Liadri)\n");
 			outputText("-Small bugfix from parser being checked even without being valid. (Jtecx)\n");
+			outputText("-Some small fixes for combat (jfmherokiller)\n");
 			outputText("-Added Cooldown Code for Blood Requiem and Blood Requiem (SF) Blood Soulskills. (Demojay)\n");
 			outputText("-Changed behaviour of Elementals under Simplified Pre Turn so that the elemental chosen is no longer random, but selected by the player. (Demojay)\n");
 			outputText("-Added tooltips to the 'Elemental Aspects' menu so that the user knows what each option does in combat. (Demojay)\n");
@@ -91,6 +96,7 @@ public class Changelog extends BaseContent
 			outputText("-Fixed bugs: Skeleton pre-turn attack text would not properly display to the user, text positioning so that Skeleton warrior and archer pre-turn texts are generated on separate lines, buttons to choose whether Golems and Skeletons will attack pre-turn were overlapping, causing it to become unclear what selecting the button would do, ");
 			outputText("game showing that the user was still a Soul Scholar on the cultivation screen, when they were actually a Soul Grandmaster (Demojay)\n");
 			outputText("-Using Pigment in crafting now properly removes the pigment. Selecting the last pigment in your inventory for crafting doesn't automatically remove it. (Demojay)\n");
+			outputText("-Warden Weapons now display their correct SoulSkill. Changed the description display function of Ranged Weapons so their format matches Melee Weapons. Consuming a Jabberwocky Scale now properly shows the player gaining the 'Insanity' perk. Added Fix: 'Returning from the inventory in combat no longer causes a new combat round' (Demojay)\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-\n");
@@ -100,9 +106,6 @@ public class Changelog extends BaseContent
 			outputText("-New bodyparts: Demonic Graceful Feet, Demonic clawed hands, Demon face, Demon Eyes (& demon eye colors) (all of those bodyparts from Demon TF); Arigean Tail (Red), Arigean Aura (Red) (all of those bodyparts from Arigean Quests); Deer Arms (from Deer TF (Golden Rind))\n");
 			outputText("-When having Familiar perk and exploring at night PC can encounter human npc, whcich could be turned into ghoul servant.\n");
 			outputText("-Ghoulish Vampire Servant would move in to camp to server PC as long pc is tier 2 vampire or dracula. It can assist in combat never been lazy to not do anything outside first turn it prepare to fight alongside PC. It can also help in combat help pc by stealing health, soulforce or even filling vampire thirst stack during it attacks.\n");
-			outputText("-Ground for Succubus tatoo and fix a bug or two in viewer code. (Liadri)\n");
-			outputText("-Warden Weapons now display their correct SoulSkill. Changed the description display function of Ranged Weapons so their format matches Melee Weapons. Consuming a Jabberwocky Scale now properly shows the player gaining the 'Insanity' perk. Added Fix: 'Returning from the inventory in combat no longer causes a new combat round' (Demojay)\n");
-			outputText("-Some small fixes for combat (jfmherokiller)\n");
 			outputText("-Losing as virgin or vampire to Draculina boss in EL would result in change into dracula/lina race member. They gets bonuses for 22+/34+ pts as fiendish vampire/dracula,draculina: +240%/+360% to str/spe/int multi, +270%/+450% to lib multi\n");
 			outputText("-Added in Trench option to interact with Grayda. She have Appearance, Talk & Missions interactions. Mission section allow to progress in Arigean TF from recruit rank toward higher ranks like Elite or beyond.\n");
 			outputText("-Fixed 'Drain her' Jiangshi U. Sex Scene not ending encounter when selected. (Demojay)\n");
@@ -112,9 +115,6 @@ public class Changelog extends BaseContent
 			outputText("-The 'charview armor' toggle in the display settings should now work as intended. Fixed kirin horn being mis-aligned compared to unicorn horn. (Lord Shadeogorath)\n");
 			outputText("-All the tease related dmg calculation been unified to use one function. It may make some specials weaker or stronger but also made them all easier to compare and adjust.\n");
 			outputText("-Erlking Cane durability increased from 10 to 50 and now it would slowly over time restore itself by 1 durability per hour.\n");
-			outputText("-New tier 0 misc lvl-up perk: Metabolization. Req. Slime, Manticore, Displacer beast, Vampire, Dracula race or hunger enabled. Effect: Increase the duration of lingering nourishment effects by 100% of base duration. And slows hunger progression if any(note does not raise racial scores).\n");
-			outputText("-New tier 3 misc lvl-up perk: Improved Metabolization. Req. Metabolization perk; Slime, Manticore, Displacer beast, Vampire, Dracula race or hunger enabled. Effect: Increase the duration of lingering nourishment effects by an extra 100% of base duration. And slows hunger progression if any(note does not raise racial scores).\n");
-			outputText("-New tier 6 misc lvl-up perk: Greater Metabolization. Req. Improved Metabolization perk; Slime, Manticore, Displacer beast, Vampire, Dracula race or hunger enabled. Effect: Increase the duration of lingering nourishment effects by another 100% of base duration. And slows hunger progression even further if any(note does not raise racial scores).\n");
 			outputText("-Electra and Etna can now no longer be converted to Wood Elves. Fixed Glitch where consuming Phouka Whiskey caused large libido gains upon wearing off. (Demojay)\n");
 			outputText("-Feeding Euphoria and Milking Euphoria speed bonus would be now based on speed value rather then been speed multi bonus.\n");
 			//8.11
@@ -135,9 +135,9 @@ public class Changelog extends BaseContent
 			outputText("-Extend player.takedamage function (Adding an optional hitnumber parameters) + Feral Attack Optimization(?) + attack() Optimization. (NUZ/Shirane)\n");
 			outputText("-Shops in He'Xin'Dao now allow you to buy multiple items at once. TrueSeeing perk now detects monsters who are invisible but not underground. Pinchou and Yu now allows you to buy multiple items at once. Journey To The East now lets you buy multiple drinks at once. Add functionality for shops in TelAdre as well. (Demojay)\n");
 			outputText("-Fixed Kiri sex Intro bug where it tries to use a vagina description even when the player is male. (Demojay)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Harpy Hollow Bones IM can be picked by three additional races: avians, gryphons, peacocks. Eyes used by gryphon race is now shared and count toward socre for avian and peacock races too.\n");
+			outputText("-Gryphon/Peacock Statuette could now triger either 1 change or 2 changes. It should make changing to new race bit easier. Also both statuettes should allow to gain race bodyparts for race related to it even if pc not stayed avian.\n");
+			outputText("-Gryphon could use Pounce & Skyrend specials.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -156,7 +156,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-Fixed bugs: Telekinetic Grasp have unlimited powe... duration, 'Elite/Champion/Boss HP bonus' setting, Monsters HP (and Soulforce/Mana) not decreasing on turn end when any effect lowering it, Rathazul keep trying cure Belisa after Nadia done it, Vouivre Oil replacing dragon ears with snake ears & dragon scales with snake scales, Tyrantia & Flitzi forest scene allowing to skip ");
 			outputText("large portion of her storyline, corrupt Celess sex scenes not reseting lust/not giving tease exp, 2nd promotion in Adventure Guld been not accesable, Diva/Project Nightwalker dropping/giving Bat TF instead of Vampire TF, Sky-tier Aether Twins been excluded from some of BFGaunlets bonuses, silly mode event in hills involving minotaurs got it lvl req. below lvl req. for area ");
-			outputText("(fix was removing the lvl req. on it), races with Undeath perk scaling HP from tou instead of lib, Salamander IM not keeping Lustzerker perk from loosing if no longer race with lustzerker ability\n\n");
+			outputText("(fix was removing the lvl req. on it), races with Undeath perk scaling HP from tou instead of lib, Salamander IM not keeping Lustzerker perk from loosing if no longer race with lustzerker ability, Gryphon Statuette only allowing cock tf scene\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8v:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");

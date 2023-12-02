@@ -1,5 +1,6 @@
 package classes.Races {
 import classes.BodyParts.*;
+import classes.IMutations.IMutationsLib;
 import classes.CockTypesEnum;
 import classes.PerkLib;
 import classes.Race;
@@ -42,12 +43,15 @@ public class AvianRace extends Race{
 				.hairType(Hair.FEATHER, +1)
 				.faceType(Face.AVIAN, +1)
 				.earType(Ears.AVIAN, +1)
+				.eyeType(Eyes.GRYPHON, +1)
 				.tailType(Tail.AVIAN, +1)
 				.armType(Arms.AVIAN, +1)
 				.legType(LowerBody.AVIAN, +1)
 				.wingType(Wings.FEATHERED_AVIAN, +2)
 				.skinCoatType(Skin.FEATHER, +1)
 				.hasCockOfType(CockTypesEnum.AVIAN, +1);
+		
+		addMutation(IMutationsLib.HarpyHollowBonesIM);
 		
 		buildTier(9, "avian-morph")
 				.buffs({
