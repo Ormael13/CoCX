@@ -32,7 +32,11 @@ use namespace CoC;
 			damage = Math.round(damage);
 			player.takePhysDamage(damage, true);
 		}
-		
+
+		override public function preMeleeMissed():void{
+			outputText("The displacer beast teleports, dodging your attack.\n");
+		}
+
 		override public function defeated(hpVictory:Boolean):void
 		{
 			SceneLib.displacerbeastScene.displacerBeastVictory();

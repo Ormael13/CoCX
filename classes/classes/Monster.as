@@ -2525,7 +2525,45 @@ import flash.utils.getQualifiedClassName;
 		}
 
 		/**
-		 * <p>CombatUI.mainMenuWhenBound() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <p>meleeDamageAcc() Override Series - Part 2</p>
+		 * <ul>
+		 *     <li>Called after preMeleeDmg() and each individual melee damage was dealt</li>
+		 * </ul>
+		 */
+		public function postMeleeDmg():void{
+
+		}
+
+		/**
+		 * <p>meleeDamageAcc() Override Series - Part 3</p>
+		 * <ul>
+		 *     <li>Called after preMeleeDmg(), postMeleeDmg() and each individual melee damage was dealt</li>
+		 *     <li>Used to implement mechanic related to after individual melee attack</li>
+		 *     <li>return false to skip the remaining normal attacks</li>
+		 *     <li>PS: By exiting meleeDamageAcc() Thanks!</li>
+		 *     <li>Default: return true (next attack will be attempted based on remaining multi-hit)</li>
+		 * </ul>
+		 *
+		 * @attackInstance 1=first attack, 2=second, etc
+		 */
+		public function postMeleeDmgSkip(attackInstance:int):Boolean{
+			return true;
+		}
+
+		/**
+		 * <p>meleeDamageAcc() Override Series - Part 4</p>
+		 * <ul>
+		 *     <li>Called if failed to pass meleeacc check (Attack Missed)</li>
+		 *     <li>Used to run outputText() for flavor</li>
+		 *     <li>or you can put mechanic involved player missing normal melee attacks</li>
+		 * </ul>
+		 */
+		public function preMeleeMissed():void{
+			outputText("You swing your [weapon] ferociously, confident that you can strike a crushing blow. In your confidence, you focus too much on force, and not where your swing is headed. You miss, your enemy barely needing to move to evade your blow.\n");
+     }
+     
+		/** 
+     * <p>CombatUI.mainMenuWhenBound() Override Series - Part 1 (Ongoing maybe)</p>
 		 * <ul>
 		 *     <li>Called after passing playerWhenBound() check</li>
 		 *     <li>thus you need to add the array for playerWhenBound() check for new bind abilities</li>
@@ -2533,9 +2571,7 @@ import flash.utils.getQualifiedClassName;
 		 *     <li>It is used for monster that possess player binding ability, used it if you want to alter buttons callback through .call(function)</li>
 		 * </ul>
 		 */
-
 		public function changeBtnWhenBound(btnStruggle:CoCButton,btnBoundWait:CoCButton):void{
-
 		}
 
 		/**
