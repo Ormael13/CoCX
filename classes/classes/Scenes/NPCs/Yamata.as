@@ -13,7 +13,9 @@ import classes.Scenes.Combat.Combat;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
-	public class Yamata extends Monster
+import coc.view.CoCButton;
+
+public class Yamata extends Monster
 	{
 		//Corrupted Yamata Attacks
 		private function yamataBasic():void
@@ -325,6 +327,13 @@ import classes.internals.*;
 				return false;
 			}
 			else return true;
+		}
+
+		override public function changeBtnWhenBound(btnStruggle:CoCButton, btnBoundWait:CoCButton):void{
+			if (player.hasStatusEffect(StatusEffects.YamataEntwine)) {
+				btnStruggle.call(entwineStruggle);
+				btnBoundWait.call(entwineWait);
+			}
 		}
 
 		override protected function performCombatAction():void
