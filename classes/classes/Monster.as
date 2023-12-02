@@ -36,6 +36,7 @@ import classes.Scenes.Areas.Ocean.UnderwaterSharkGirlsPack;
 import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
 import classes.Scenes.Camp.TrainingDummy;
 import classes.Scenes.Combat.CombatAbility;
+import classes.Scenes.Combat.CombatUI;
 import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.Dungeons.EbonLabyrinth.Hydra;
@@ -49,6 +50,8 @@ import classes.internals.ChainedDrop;
 import classes.internals.RandomDrop;
 import classes.internals.Utils;
 import classes.internals.WeightedDrop;
+
+import coc.view.CoCButton;
 
 import flash.utils.getQualifiedClassName;
 
@@ -75,6 +78,7 @@ import flash.utils.getQualifiedClassName;
 			if (clear) EngineCore.clearOutputTextOnly();
 			EngineCore.outputText(text);
 		}
+
 		protected final function cleanupAfterCombat():void
 		{
 			SceneLib.combat.cleanupAfterCombatImpl();
@@ -106,7 +110,7 @@ import flash.utils.getQualifiedClassName;
 		protected function get useables():UseableLib{
 			return game.useables;
 		}
-		protected function get weapons():WeaponLib{
+		protected function get weapons():WeaponLib {
 			return game.weapons;
 		}
 		protected function get weaponsrange():WeaponRangeLib{
@@ -115,10 +119,11 @@ import flash.utils.getQualifiedClassName;
 		protected function get shields():ShieldLib{
 			return game.shields;
 		}
+
 		protected function get armors():ArmorLib{
 			return game.armors;
 		}
-		protected function get headjewelries():HeadJewelryLib{
+		protected function get headjewelries():HeadJewelryLib {
 			return game.headjewelries;
 		}
 		protected function get necklaces():NecklaceLib{
@@ -196,7 +201,7 @@ import flash.utils.getQualifiedClassName;
 		 * 	{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE }
 		 * 	{ call: special1, type: ABILITY_PHYSICAL, range: RANGE_MELEE }
 		 * 	{ call: special2, type: ABILITY_PHYSICAL, range: RANGE_MELEE }
-		 * 	{ call: special3, type: ABILITY_PHYSICAL, range: RANGE_MELEE }
+		 *    { call: special3, type: ABILITY_PHYSICAL, range: RANGE_MELEE }
 		 * ]
 		 */
 		public var abilities:/*Object*/Array = [];
@@ -227,6 +232,7 @@ import flash.utils.getQualifiedClassName;
 			_drop = value;
 			initedDrop = true;
 		}
+
 		// No Ceraph fetish drop
 		public var noFetishDrop:Boolean = false;
 		// Chance (0..1) to drop generated random item
@@ -323,7 +329,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.EnemyLargeGroupType)) temp *= 10;
 			if (hasPerk(PerkLib.Enemy300Type)) temp *= 15;
 			if ((hasPerk(PerkLib.EnemyEliteType) || hasPerk(PerkLib.EnemyChampionType) || hasPerk(PerkLib.EnemyBossType)) && flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] > 0) {
-				if (hasPerk(PerkLib.EnemyEliteType)) temp *= (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING]*1.25);
+				if (hasPerk(PerkLib.EnemyEliteType)) temp *= (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING]* 1.25);
 				if (hasPerk(PerkLib.EnemyChampionType)) temp *= (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING]*2.5);
 				if (hasPerk(PerkLib.EnemyBossType)) temp *= (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING]*5);
 			}
@@ -2505,7 +2511,7 @@ import flash.utils.getQualifiedClassName;
 		}
 
 		/**
-		 * <p>meleeDamageAcc() Override Series - Part 1</p>
+		 * <p>meleeDamageAcc() Override Series - Part 1 (Ongoing maybe)</p>
 		 * <ul>
 		 *     <li>Called right when melee damage began to calculate</li>
 		 *     <li>It is used to alter individual melee damage after feral attacks</li>
@@ -2516,6 +2522,20 @@ import flash.utils.getQualifiedClassName;
 		 */
 		public function preMeleeDmg(damage:Number):Number{
 			return damage;
+		}
+
+		/**
+		 * <p>CombatUI.mainMenuWhenBound() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called after passing playerWhenBound() check</li>
+		 *     <li>thus you need to add the array for playerWhenBound() check for new bind abilities</li>
+		 *     <li>PS: can we migrate mainMenuWhenBound() into CombatUI()??? it is only called by it anyway</li>
+		 *     <li>It is used for monster that possess player binding ability, used it if you want to alter buttons callback through .call(function)</li>
+		 * </ul>
+		 */
+
+		public function changeBtnWhenBound(btnStruggle:CoCButton,btnBoundWait:CoCButton):void{
+
 		}
 
 		/**

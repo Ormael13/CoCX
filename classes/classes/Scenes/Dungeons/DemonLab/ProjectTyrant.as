@@ -9,6 +9,8 @@ import classes.BodyParts.Horns;
 import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
+import coc.view.CoCButton;
+
 public class ProjectTyrant extends Monster {
 
     public function ProjectTyrant() {
@@ -131,6 +133,14 @@ public class ProjectTyrant extends Monster {
             if (player.hasStatusEffect(StatusEffects.AcidDoT)) player.addStatusValue(StatusEffects.AcidDoT, 1, 1);
             else player.createStatusEffect(StatusEffects.AcidDoT, 3, 10, 0, 0);
             player.buff("Goop Web").addStats({"spe": -25}).withText("Goop Web").combatPermanent();
+        }
+    }
+
+    override public function changeBtnWhenBound(btnStruggle:CoCButton, btnBoundWait:CoCButton):void{
+        if (player.hasStatusEffect(StatusEffects.Pounced)) {
+            outputText("You are pinned underneath the Drider-beast’s weight, and it begins to crush you!");
+            btnStruggle.call(TackleGrappleStruggle);
+            btnBoundWait.call(TackleGrappleWait);
         }
     }
 

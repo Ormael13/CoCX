@@ -9,6 +9,8 @@ import classes.Scenes.Combat.Combat;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
+import coc.view.CoCButton;
+
 public class Ceraph extends Monster
 	{
 
@@ -217,6 +219,13 @@ public class Ceraph extends Monster
 			}
 			EngineCore.statScreenRefresh();
 			outputText("\n");
+		}
+
+		override public function changeBtnWhenBound(btnStruggle:CoCButton, btnBoundWait:CoCButton):void{
+			if (player.hasStatusEffect(StatusEffects.Bound)) {
+				btnStruggle.call(ceraphBindingStruggle);
+				btnBoundWait.call(ceraphBoundWait);
+			}
 		}
 
 		override protected function performCombatAction():void

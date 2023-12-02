@@ -8,6 +8,8 @@ import classes.IMutations.*;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
+import coc.view.CoCButton;
+
 public class Izumi extends Monster
 	{
 		// Set trace outout for this classes' content.
@@ -136,6 +138,17 @@ public class Izumi extends Monster
 			if (flags[kFLAGS.IZUMI_LVL_UP] >= 8) this.createPerk(PerkLib.MythicalStrength, 0, 0, 0, 0);
 			if (flags[kFLAGS.IZUMI_LVL_UP] >= 9) IMutationsLib.OniMusculatureIM.acquireMutation(this, "none");
 			checkMonster();
+		}
+
+		override public function changeBtnWhenBound(btnStruggle:CoCButton, btnBoundWait:CoCButton):void{
+			if (player.hasStatusEffect(StatusEffects.Titsmother)) {
+				btnStruggle.call(titSmotherStruggle);
+				btnBoundWait.call(titSmotherWait);
+			}
+			else if (player.hasStatusEffect(StatusEffects.Chokeslam)) {
+				btnStruggle.call(chokeSlamStruggle);
+				btnBoundWait.call(chokeSlamWait);
+			}
 		}
 
 		// Override won/lost calls
