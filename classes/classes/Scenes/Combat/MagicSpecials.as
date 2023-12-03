@@ -6090,23 +6090,6 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		damage += scalingBonusIntelligence() * multiInt;
 		damage += scalingBonusWisdom() * multiWis;
-		damage *= combat.elementalAmplificationMod(5 * player.statusEffectv2(StatusEffects.SummonedElementalsFire));
-		damage = calcInfernoMod(damage, true);
-
-		var perkMultiplier:Number = 1;
-		if (player.hasPerk(PerkLib.FirstAttackElementalsEx) && player.hasStatusEffect(StatusEffects.SummonedElementals)) perkMultiplier += 1;
-		if (player.hasPerk(PerkLib.FirstAttackElementalsSu)) perkMultiplier += 2;
-		damage *= perkMultiplier;
-
-		//Determine if critical hit!
-        var crit:Boolean = false;
-        var critChance:int = 5;
-        critChance += combatMagicalCritical();
-        if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-        if (rand(100) < critChance) {
-            crit = true;
-			damage *= 1.5;
-		}
 		
 		//crits for elementals specials inclused too? with some perk maybe or just like that same as crit % chance for PC?
 		damage = Math.round(damage);
@@ -6122,7 +6105,6 @@ public class MagicSpecials extends BaseCombatContent {
 		}*/
 		outputText("Your fire elemental douses your opponent with a torrent of fire ");
 		doFireDamage(damage, true, true);
-		if (crit) outputText(" <b>Critical!</b>");
 		outputText("\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();
@@ -6225,22 +6207,6 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 5;
 		if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 2;
 
-		damage *= combat.elementalAmplificationMod(5 * player.statusEffectv2(StatusEffects.SummonedElementalsEther));
-
-		var perkMultiplier:Number = 1;
-		if (player.hasPerk(PerkLib.FirstAttackElementalsEx) && player.hasStatusEffect(StatusEffects.SummonedElementals)) perkMultiplier += 1;
-		if (player.hasPerk(PerkLib.FirstAttackElementalsSu)) perkMultiplier += 2;
-		damage *= perkMultiplier;
-
-		//Determine if critical hit!
-        var crit:Boolean = false;
-        var critChance:int = 5;
-        critChance += combatMagicalCritical();
-        if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-        if (rand(100) < critChance) {
-            crit = true;
-			damage *= 1.5;
-		}
 		//crits for elementals specials inclused too? with some perk maybe or just like that same as crit % chance for PC?
 		damage = Math.round(damage);
 		/*if(!monster.hasPerk(PerkLib.Resolute)) {
@@ -6255,7 +6221,6 @@ public class MagicSpecials extends BaseCombatContent {
 		}*/
 		outputText("Your elemental unleash a barrage of star shaped bolts of arcane energy, blasting your opponent. ");
 		doMagicDamage(damage, true, true);
-		if (crit) outputText(" <b>Critical!</b>");
 		outputText("\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();
@@ -6431,22 +6396,6 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += scalingBonusIntelligence() * multiInt;
 		damage += scalingBonusWisdom() * multiWis;
 		damage *= combat.elementalAmplificationMod(5 * player.statusEffectv2(StatusEffects.SummonedElementalsIce));
-		damage = calcInfernoMod(damage, true);
-
-		var perkMultiplier:Number = 1;
-		if (player.hasPerk(PerkLib.FirstAttackElementalsEx) && player.hasStatusEffect(StatusEffects.SummonedElementals)) perkMultiplier += 1;
-		if (player.hasPerk(PerkLib.FirstAttackElementalsSu)) perkMultiplier += 2;
-		damage *= perkMultiplier;
-
-		//Determine if critical hit!
-        var crit:Boolean = false;
-        var critChance:int = 5;
-        critChance += combatMagicalCritical();
-        if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-        if (rand(100) < critChance) {
-            crit = true;
-			damage *= 1.5;
-		}
 
 		damage = Math.round(damage);
 		/*if(!monster.hasPerk(PerkLib.Resolute)) {
@@ -6461,7 +6410,6 @@ public class MagicSpecials extends BaseCombatContent {
 		}*/
 		outputText("Your elemental produces a ray of hyper condensed cold and aims it straight at [themonster] dealing ");
 		doIceDamage(damage, true, true);
-		if (crit) outputText(" <b>Critical!</b>");
 		outputText("\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();
@@ -6508,23 +6456,6 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		damage += scalingBonusIntelligence() * multiInt;
 		damage += scalingBonusWisdom() * multiWis;
-		damage *= combat.elementalAmplificationMod(5 * player.statusEffectv2(StatusEffects.SummonedElementalsLightning));
-		damage = calcGlacialMod(damage, true);
-
-		var perkMultiplier:Number = 1;
-		if (player.hasPerk(PerkLib.FirstAttackElementalsEx) && player.hasStatusEffect(StatusEffects.SummonedElementals)) perkMultiplier += 1;
-		if (player.hasPerk(PerkLib.FirstAttackElementalsSu)) perkMultiplier += 2;
-		damage *= perkMultiplier;
-
-		//Determine if critical hit!
-        var crit:Boolean = false;
-        var critChance:int = 5;
-        critChance += combatMagicalCritical();
-        if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-        if (rand(100) < critChance) {
-            crit = true;
-			damage *= 1.5;
-		}
 
 		damage = Math.round(damage);
 		/*if(!monster.hasPerk(PerkLib.Resolute)) {
@@ -6539,7 +6470,6 @@ public class MagicSpecials extends BaseCombatContent {
 		}*/
 		outputText("Your elemental charges electricity, then discharges it with a blinding bolt doing ");
 		doLightingDamage(damage, true, true);
-		if (crit) outputText(" <b>Critical!</b>");
 		outputText("\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();
@@ -6586,23 +6516,6 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		damage += scalingBonusIntelligence() * multiInt;
 		damage += scalingBonusWisdom() * multiWis;
-		damage *= combat.elementalAmplificationMod(5 * player.statusEffectv2(StatusEffects.SummonedElementalsDarkness));
-		damage = calcEclypseMod(damage, true);
-
-		var perkMultiplier:Number = 1;
-		if (player.hasPerk(PerkLib.FirstAttackElementalsEx) && player.hasStatusEffect(StatusEffects.SummonedElementals)) perkMultiplier += 1;
-		if (player.hasPerk(PerkLib.FirstAttackElementalsSu)) perkMultiplier += 2;
-		damage *= perkMultiplier;
-
-		//Determine if critical hit!
-        var crit:Boolean = false;
-        var critChance:int = 5;
-        critChance += combatMagicalCritical();
-        if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-        if (rand(100) < critChance) {
-            crit = true;
-			damage *= 1.5;
-		}
 
 		damage = Math.round(damage);
 		/*if(!monster.hasPerk(PerkLib.Resolute)) {
@@ -6617,7 +6530,6 @@ public class MagicSpecials extends BaseCombatContent {
 		}*/
 		outputText("Your darkness elemental condenses shadows into solid matter, striking your opponent with them ");
 		doDarknessDamage(damage, true, true);
-		if (crit) outputText(" <b>Critical!</b>");
 		outputText("\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();
@@ -6664,22 +6576,6 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		damage += scalingBonusIntelligence() * multiInt;
 		damage += scalingBonusWisdom() * multiWis;
-		damage *= combat.elementalAmplificationMod(5 * player.statusEffectv2(StatusEffects.SummonedElementalsPoison));
-
-		var perkMultiplier:Number = 1;
-		if (player.hasPerk(PerkLib.FirstAttackElementalsEx) && player.hasStatusEffect(StatusEffects.SummonedElementals)) perkMultiplier += 1;
-		if (player.hasPerk(PerkLib.FirstAttackElementalsSu)) perkMultiplier += 2;
-		damage *= perkMultiplier;
-
-		//Determine if critical hit!
-        var crit:Boolean = false;
-        var critChance:int = 5;
-        critChance += combatMagicalCritical();
-        if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-        if (rand(100) < critChance) {
-            crit = true;
-			damage *= 1.5;
-		}
 
 		damage = Math.round(damage);
 		/*if(!monster.hasPerk(PerkLib.Resolute)) {
@@ -6694,7 +6590,6 @@ public class MagicSpecials extends BaseCombatContent {
 		}*/
 		outputText("Your poison elemental condenses aphrodisiac poison into spike, striking your opponent with them ");
 		doPoisonDamage(damage, true, true);
-		if (crit) outputText(" <b>Critical!</b> ");
 
 		var lustdamage:Number = 20 + rand(player.statusEffectv2(StatusEffects.SummonedElementalsPoison) + 1);
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 2) lustdamage += 1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 1);
@@ -6750,22 +6645,6 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += scalingBonusIntelligence() * multiInt;
 		damage += scalingBonusWisdom() * multiWis;
 		damage *= combat.purityScalingDA();
-		damage *= combat.elementalAmplificationMod(5 * player.statusEffectv2(StatusEffects.SummonedElementalsPurity));
-
-		var perkMultiplier:Number = 1;
-		if (player.hasPerk(PerkLib.FirstAttackElementalsEx) && player.hasStatusEffect(StatusEffects.SummonedElementals)) perkMultiplier += 1;
-		if (player.hasPerk(PerkLib.FirstAttackElementalsSu)) perkMultiplier += 2;
-		damage *= perkMultiplier;
-
-		//Determine if critical hit!
-        var crit:Boolean = false;
-        var critChance:int = 5;
-        critChance += combatMagicalCritical();
-        if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-        if (rand(100) < critChance) {
-            crit = true;
-			damage *= 1.5;
-		}
 
 		damage = Math.round(damage);
 		/*if(!monster.hasPerk(PerkLib.Resolute)) {
@@ -6780,7 +6659,6 @@ public class MagicSpecials extends BaseCombatContent {
 		}*/
 		outputText("Your purity elemental produces a ray of hyper condensed and pure light and aims it straight at [themonster] ");
 		doMagicDamage(damage, true, true);
-		if (crit) outputText(" <b>Critical!</b>");
 		outputText("\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();
@@ -6828,22 +6706,6 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += scalingBonusIntelligence() * multiInt;
 		damage += scalingBonusWisdom() * multiWis;
 		damage *= combat.corruptionScalingDA();
-		damage *= combat.elementalAmplificationMod(5 * player.statusEffectv2(StatusEffects.SummonedElementalsCorruption));
-
-		var perkMultiplier:Number = 1;
-		if (player.hasPerk(PerkLib.FirstAttackElementalsEx) && player.hasStatusEffect(StatusEffects.SummonedElementals)) perkMultiplier += 1;
-		if (player.hasPerk(PerkLib.FirstAttackElementalsSu)) perkMultiplier += 2;
-		damage *= perkMultiplier;
-
-		//Determine if critical hit!
-        var crit:Boolean = false;
-        var critChance:int = 5;
-        critChance += combatMagicalCritical();
-        if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-        if (rand(100) < critChance) {
-            crit = true;
-			damage *= 1.5;
-		}
 
 		damage = Math.round(damage);
 		/*if(!monster.hasPerk(PerkLib.Resolute)) {
@@ -6858,7 +6720,6 @@ public class MagicSpecials extends BaseCombatContent {
 		}*/
 		outputText("Your corruption elemental condenses corruption from air into solid matter, striking your opponent with them ");
 		doMagicDamage(damage, true, true);
-		if (crit) outputText(" <b>Critical!</b>");
 		outputText("\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();

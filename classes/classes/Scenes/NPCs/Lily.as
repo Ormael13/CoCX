@@ -85,7 +85,7 @@ import classes.Scenes.Combat.CombatAbilities;
 		
 		private function lilyVolley():void {
 			outputText("Several arrows come flying at you, and you see the Drider-woman’s top half through the treeline. You gasp, disbelieving, as said arrows seem to multiply into a veritable shower of shafts, and you barely have time to crouch down, making yourself less of a target. ");
-			if (player.hasStatusEffect(StatusEffects.WindWall)) outputText("Still surrounding you wind wall stops them without much trouble. ");
+			if (CombatAbilities.EAspectAir.isActive()) outputText("Still surrounding you wind wall stops them without much trouble. ");
 			var lFB:Number = 6;
 			if (flags[kFLAGS.LILY_LVL_UP] >= 3) lFB += 3;
 			if (flags[kFLAGS.LILY_LVL_UP] >= 5) lFB += 3;

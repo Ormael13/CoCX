@@ -3,6 +3,7 @@ package classes.Scenes.Combat.SpecialsMagic {
 import classes.Scenes.Combat.AbstractMagicSpecial;
 import classes.StatusEffects;
 import classes.Monster;
+import classes.PerkLib;
 
 public class EAspectAirSkill extends AbstractMagicSpecial {
     public function EAspectAirSkill() {
@@ -22,20 +23,15 @@ public class EAspectAirSkill extends AbstractMagicSpecial {
     }
 
     override public function calcDuration():int {
-        var duration:int = 1;
-        if (player.inte >= 20) duration += 1;
-		if (player.inte >= 40) duration += 1;
-		if (player.inte >= 60) duration += 1;
-		if (player.inte >= 80) duration += 1;
-		if (player.inte >= 100) duration += Math.round((player.inte - 50) / 50);
-
-		if (player.wis >= 20) duration += 1;
-		if (player.wis >= 40) duration += 1;
-		if (player.wis >= 60) duration += 1;
-		if (player.wis >= 80) duration += 1;
-		if (player.wis >= 100) duration += Math.round((player.wis - 50) / 50);
-        return elementalAspectBaseDuration(StatusEffects.SummonedElementalsAir, duration) * 2;
+        return elementalAspectBaseDuration(StatusEffects.SummonedElementalsAir) + combat.magic.perkRelatedDurationBoosting();
     }
+
+    private function costMultiplier():Number {
+		var spellMightMultiplier:Number = 1;
+		if (player.hasPerk(PerkLib.EverLastingBuffs)) spellMightMultiplier *= 2;
+		if (player.hasPerk(PerkLib.EternalyLastingBuffs)) spellMightMultiplier *= 2;
+		return spellMightMultiplier;
+	}
 
     override public function get buttonName():String {
 		return "Air E.Asp";
@@ -45,12 +41,7 @@ public class EAspectAirSkill extends AbstractMagicSpecial {
 		return "Blocks certain projectile attacks for " + calcDuration() + " rounds";
     }
 
-    /*override public function isActive():Boolean {
-        return player.hasStatusEffect(StatusEffects.WindWall);
-    }*/
-
     override public function doEffect(display:Boolean = true):void {
-        //player.createStatusEffect(StatusEffects.WindWall, 0, duration, 0, 0);
 		if (display) outputText("You call on your elemental projecting a air wall between you and [themonster] to deflect incoming projectiles.\n\n");
         setDuration();
     }

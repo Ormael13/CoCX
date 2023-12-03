@@ -6,6 +6,7 @@ import classes.StatusEffectType;
 import coc.view.ButtonData;
 import classes.GlobalFlags.kFLAGS;
 import classes.Appearance;
+import mx.formatters.NumberFormatter;
 
 /**
  * A combat ability invokable by player (spell, special, skill, etc).
@@ -295,6 +296,7 @@ public class CombatAbility extends BaseCombatContent {
 	public function isActive():Boolean {
 		if (timingType == TIMING_INSTANT) return false;
 		if (timingType == TIMING_LASTING) return (player.durations[id] > 0);
+		if (timingType == TIMING_TOGGLE) return (player.durations[id] == -1);
 		throw new Error("Method isActive() is not implemented for ability "+name+", or it's timing type is incorrect");
 	}
 	
@@ -599,5 +601,17 @@ public class CombatAbility extends BaseCombatContent {
 	public function durationEnd(display:Boolean = true):void {
 
 	}
+
+	/**
+	 * Function used to format damage number properly for tooltips
+	 * @param damage (Number) - Number to be formatted
+	 * @return text (String) - Formatted number
+	 * For printing out damage numbers on the main screen, combat.CommasForDigits() should be used instead
+	 */
+	public function numberFormat(damage:Number):String {
+		var numberformat:NumberFormatter = new NumberFormatter();
+        return numberformat.format(Math.floor(Math.abs(damage)));
+	}
+
 }
 }

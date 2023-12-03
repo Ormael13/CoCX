@@ -6,15 +6,15 @@ import classes.Monster;
 import classes.PerkLib;
 import classes.Scenes.Combat.Combat;
 
-public class EAspectFireSkill extends AbstractMagicSpecial {
-    public function EAspectFireSkill() {
+public class EAspectPuritySkill extends AbstractMagicSpecial {
+    public function EAspectPuritySkill() {
         super (
-            "Elemental Aspect: Fire",
-            "Attack with a stronger version of a fire-attributed basic elemental attack",
+            "Elemental Aspect: Purity",
+            "Attack with a stronger version of a purity-attributed basic elemental attack. Damage is increased the more corrupt the enemy.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING, TAG_FIRE, TAG_MAGICAL, TAG_TIER2],
-            StatusEffects.SummonedElementalsFire
+            [TAG_DAMAGING, TAG_MAGICAL, TAG_TIER2],
+            StatusEffects.SummonedElementalsPurity
         )
         this.lastAttackType = Combat.LAST_ATTACK_SPELL;
     }
@@ -24,17 +24,17 @@ public class EAspectFireSkill extends AbstractMagicSpecial {
     }
 
     override public function get buttonName():String {
-		return "Fire E.Asp";
+		return "Purity E.Asp";
 	}
 
     override public function describeEffectVs(target:Monster):String {
-		return "~" + numberFormat(calcDamage(monster)) + " fire damage ";
+		return "~" + numberFormat(calcDamage(monster)) + " magical damage";
     }
 
     public function calcDamage(monster:Monster):Number {
-        var damage:Number = elementalAspectBaseDamage(StatusEffects.SummonedElementalsFire);
-        damage = elementalAspectDamageMod(StatusEffects.SummonedElementalsFire, damage);
-        damage = calcInfernoMod(damage, true);
+        var damage:Number = elementalAspectBaseDamage(StatusEffects.SummonedElementalsPurity);
+        damage = elementalAspectDamageMod(StatusEffects.SummonedElementalsPurity, damage);
+        if (monster) damage *= combat.purityScalingDA();
 
         return damage;
     }
@@ -54,8 +54,8 @@ public class EAspectFireSkill extends AbstractMagicSpecial {
 
         damage = Math.round(damage);
 
-        if (display) outputText("Your fire elemental douses your opponent with a torrent of fire ");
-		doFireDamage(damage, true, display);
+        if (display) outputText("Your purity elemental produces a ray of hyper condensed and pure light and aims it straight at [themonster] ");
+		doMagicDamage(damage, true, display);
 		if (crit && display) outputText(" <b>Critical!</b>");
 		outputText("\n\n");
     }

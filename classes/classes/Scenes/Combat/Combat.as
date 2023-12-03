@@ -6734,7 +6734,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) unarmed += 24 * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) unarmed += 30 * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) unarmed += 36 * (1 + player.newGamePlusMod());
-        if (player.hasStatusEffect(StatusEffects.MetalSkin)) {
+        if (CombatAbilities.EAspectMetal.isActive()) {
             if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 6) unarmed += 4 * player.statusEffectv2(StatusEffects.SummonedElementalsMetal) * (1 + player.newGamePlusMod());
             else unarmed += 2 * player.statusEffectv2(StatusEffects.SummonedElementalsMetal) * (1 + player.newGamePlusMod());
         }
@@ -10935,18 +10935,18 @@ public class Combat extends BaseContent {
                 outputText("<b>Wind Wall effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.WindWall, 2, -1);
         }*/
-        if (player.hasStatusEffect(StatusEffects.StoneSkin)) {
+        /*if (player.hasStatusEffect(StatusEffects.StoneSkin)) {
             if (player.statusEffectv2(StatusEffects.StoneSkin) <= 0) {
                 player.removeStatusEffect(StatusEffects.StoneSkin);
                 outputText("<b>Stone Skin effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.StoneSkin, 2, -1);
-        }
-        if (player.hasStatusEffect(StatusEffects.BarkSkin)) {
+        }*/
+        /*if (player.hasStatusEffect(StatusEffects.BarkSkin)) {
             if (player.statusEffectv2(StatusEffects.BarkSkin) <= 0) {
                 player.removeStatusEffect(StatusEffects.BarkSkin);
                 outputText("<b>Bark Skin effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.BarkSkin, 2, -1);
-        }
+        } */
         if (player.hasStatusEffect(StatusEffects.MetalSkin)) {
             if (player.statusEffectv2(StatusEffects.MetalSkin) <= 0) {
                 player.removeStatusEffect(StatusEffects.MetalSkin);
