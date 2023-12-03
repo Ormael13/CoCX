@@ -26,6 +26,10 @@ public class EAspectAirSkill extends AbstractMagicSpecial {
         return elementalAspectBaseDuration(StatusEffects.SummonedElementalsAir) + combat.magic.perkRelatedDurationBoosting();
     }
 
+    override public function manaCost():Number {
+        return elementalAspectManaCost(StatusEffects.SummonedElementalsAir) * costMultiplier();
+    }
+
     private function costMultiplier():Number {
 		var spellMightMultiplier:Number = 1;
 		if (player.hasPerk(PerkLib.EverLastingBuffs)) spellMightMultiplier *= 2;

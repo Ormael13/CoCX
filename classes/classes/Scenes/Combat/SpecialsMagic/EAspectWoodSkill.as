@@ -52,6 +52,10 @@ public class EAspectWoodSkill extends AbstractMagicSpecial {
 		return Math.round(barkskinbonus);
     }
 
+    override public function manaCost():Number {
+        return elementalAspectManaCost(StatusEffects.SummonedElementalsWood) * costMultiplier();
+    }
+
     public function calcDamage(monster:Monster):Number {
         var amountToHeal:Number = elementalAspectBaseDamage(StatusEffects.SummonedElementalsWood, 0, true);
 

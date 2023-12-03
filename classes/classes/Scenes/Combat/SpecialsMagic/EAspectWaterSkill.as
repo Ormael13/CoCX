@@ -30,6 +30,10 @@ public class EAspectWaterSkill extends AbstractMagicSpecial {
 		return "Heals the player for ~" + numberFormat(calcDamage(monster)) + " HP";
     }
 
+    override public function manaCost():Number {
+        return elementalAspectManaCost(StatusEffects.SummonedElementalsWater);
+    }
+
     public function calcDamage(monster:Monster):Number {
         var amountToHeal:Number = elementalAspectBaseDamage(StatusEffects.SummonedElementalsWater);
 

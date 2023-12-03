@@ -31,6 +31,10 @@ public class EAspectEtherSkill extends AbstractMagicSpecial {
 		return "~" + numberFormat(calcDamage(monster)) + " magic damage";
     }
 
+    override public function manaCost():Number {
+        return elementalAspectManaCost(StatusEffects.SummonedElementalsEther);
+    }
+
     public function calcDamage(monster:Monster):Number {
         var damage:Number = elementalAspectBaseDamage(StatusEffects.SummonedElementalsEther);
         damage = elementalAspectDamageMod(StatusEffects.SummonedElementalsEther, damage);

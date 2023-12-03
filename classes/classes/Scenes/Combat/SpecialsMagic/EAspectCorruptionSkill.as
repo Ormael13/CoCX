@@ -31,6 +31,10 @@ public class EAspectCorruptionSkill extends AbstractMagicSpecial {
 		return "~" + numberFormat(calcDamage(monster)) + " magical damage";
     }
 
+    override public function manaCost():Number {
+        return elementalAspectManaCost(StatusEffects.SummonedElementalsCorruption);
+    }
+
     public function calcDamage(monster:Monster):Number {
         var damage:Number = elementalAspectBaseDamage(StatusEffects.SummonedElementalsCorruption);
         damage = elementalAspectDamageMod(StatusEffects.SummonedElementalsCorruption, damage);

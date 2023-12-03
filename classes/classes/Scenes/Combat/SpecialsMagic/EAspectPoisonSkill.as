@@ -31,6 +31,10 @@ public class EAspectPoisonSkill extends AbstractMagicSpecial {
 		return "~" + numberFormat(calcDamage(monster)) + " poison damage and ~" + numberFormat(calcLustDamage(monster)) + " lust damage";
     }
 
+    override public function manaCost():Number {
+        return elementalAspectManaCost(StatusEffects.SummonedElementalsPoison);
+    }
+
     public function calcDamage(monster:Monster):Number {
         var damage:Number = elementalAspectBaseDamage(StatusEffects.SummonedElementalsPoison);
         damage = elementalAspectDamageMod(StatusEffects.SummonedElementalsPoison, damage);

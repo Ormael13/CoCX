@@ -92,5 +92,33 @@ public class AbstractMagicSpecial extends AbstractSpecial {
 
         return damage;
     }
+
+	protected function elementalAspectManaCost(aspectStatusEffect: StatusEffectType, manaCost:Number = 1):Number {
+		var manaCostInt:Number = 8;
+		var manaCostWis:Number = 8;
+		var summonedElementals:Number = 5 * player.statusEffectv2(aspectStatusEffect);
+
+		if (player.hasPerk(PerkLib.FirstAttackElementalsSu)) {
+			manaCostInt += 17;
+			manaCostWis += 42;
+		}
+		manaCost += summonedElementals;
+		if (summonedElementals >= 11) manaCost += summonedElementals;
+		if (summonedElementals >= 21) manaCost += summonedElementals;
+		if (summonedElementals >= 29) manaCost += summonedElementals;
+		manaCost += player.inte / manaCostInt;
+		manaCost += player.wis / manaCostWis;
+		if (summonedElementals >= 2 && manaCost > 11 && player.hasPerk(PerkLib.StrongElementalBond)) manaCost -= 10;
+		if (summonedElementals >= 4 && manaCost > 22 && player.hasPerk(PerkLib.StrongElementalBondEx)) manaCost -= 20;
+		if (summonedElementals >= 6 && manaCost > 33 && player.hasPerk(PerkLib.StrongElementalBondSu)) manaCost -= 30;
+		if (summonedElementals >= 9 && manaCost > 44 && player.hasPerk(PerkLib.StrongerElementalBond)) manaCost -= 40;
+		if (summonedElementals >= 12 && manaCost > 55 && player.hasPerk(PerkLib.StrongerElementalBondEx)) manaCost -= 50;
+		if (summonedElementals >= 15 && manaCost > 66 && player.hasPerk(PerkLib.StrongerElementalBondSu)) manaCost -= 60;
+		if (summonedElementals >= 19 && manaCost > 77 && player.hasPerk(PerkLib.StrongestElementalBond)) manaCost -= 70;
+		if (summonedElementals >= 23 && manaCost > 88 && player.hasPerk(PerkLib.StrongestElementalBondEx)) manaCost -= 80;
+		if (summonedElementals >= 27 && manaCost > 99 && player.hasPerk(PerkLib.StrongestElementalBondSu)) manaCost -= 90;
+		if (manaCost > 1 && player.hasPerk(PerkLib.FirstAttackElementalsSu)) manaCost *= 0.5;
+		return Math.round(manaCost);
+	}
 }
 }

@@ -31,6 +31,10 @@ public class EAspectIceSkill extends AbstractMagicSpecial {
 		return "~" + numberFormat(calcDamage(monster)) + " ice damage";
     }
 
+    override public function manaCost():Number {
+        return elementalAspectManaCost(StatusEffects.SummonedElementalsIce);
+    }
+
     public function calcDamage(monster:Monster):Number {
         var damage:Number = elementalAspectBaseDamage(StatusEffects.SummonedElementalsIce);
         damage = elementalAspectDamageMod(StatusEffects.SummonedElementalsIce, damage);

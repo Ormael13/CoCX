@@ -37,6 +37,10 @@ public class EAspectMetalSkill extends AbstractMagicSpecial {
 		return spellMightMultiplier;
 	}
 
+    override public function manaCost():Number {
+        return elementalAspectManaCost(StatusEffects.SummonedElementalsMetal) * costMultiplier();
+    }
+
     override public function describeEffectVs(target:Monster):String {
 		return "Increases unarmed damage by " + numberFormat(getBonus()) + " for " + calcDuration() + " rounds";
     }

@@ -39,6 +39,10 @@ public class EAspectPuritySkill extends AbstractMagicSpecial {
         return damage;
     }
 
+    override public function manaCost():Number {
+        return elementalAspectManaCost(StatusEffects.SummonedElementalsPurity);
+    }
+
     override public function doEffect(display:Boolean = true):void {
         var damage:Number = calcDamage(monster);
 

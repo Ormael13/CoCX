@@ -31,6 +31,10 @@ public class EAspectDarknessSkill extends AbstractMagicSpecial {
 		return "~" + numberFormat(calcDamage(monster)) + " darkness damage";
     }
 
+    override public function manaCost():Number {
+        return elementalAspectManaCost(StatusEffects.SummonedElementalsDarkness);
+    }
+
     public function calcDamage(monster:Monster):Number {
         var damage:Number = elementalAspectBaseDamage(StatusEffects.SummonedElementalsDarkness);
         damage = elementalAspectDamageMod(StatusEffects.SummonedElementalsDarkness, damage);

@@ -37,6 +37,10 @@ public class EAspectEarthSkill extends AbstractMagicSpecial {
 		return spellMightMultiplier;
 	}
 
+    override public function manaCost():Number {
+        return elementalAspectManaCost(StatusEffects.SummonedElementalsCorruption) * costMultiplier();
+    }
+
     override public function describeEffectVs(target:Monster):String {
 		return "Increases physical and magical resistance by " + numberFormat(getBonus()) + " for " + calcDuration() + " rounds";
     }

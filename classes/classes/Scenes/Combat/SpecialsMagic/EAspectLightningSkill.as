@@ -31,6 +31,10 @@ public class EAspectLightningSkill extends AbstractMagicSpecial {
 		return "~" + numberFormat(calcDamage(monster)) + " lightning damage";
     }
 
+    override public function manaCost():Number {
+        return elementalAspectManaCost(StatusEffects.SummonedElementalsLightning);
+    }
+
     public function calcDamage(monster:Monster):Number {
         var damage:Number = elementalAspectBaseDamage(StatusEffects.SummonedElementalsLightning);
         damage = elementalAspectDamageMod(StatusEffects.SummonedElementalsLightning, damage);

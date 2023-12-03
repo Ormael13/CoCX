@@ -31,6 +31,10 @@ public class EAspectFireSkill extends AbstractMagicSpecial {
 		return "~" + numberFormat(calcDamage(monster)) + " fire damage ";
     }
 
+    override public function manaCost():Number {
+        return elementalAspectManaCost(StatusEffects.SummonedElementalsFire);
+    }
+
     public function calcDamage(monster:Monster):Number {
         var damage:Number = elementalAspectBaseDamage(StatusEffects.SummonedElementalsFire);
         damage = elementalAspectDamageMod(StatusEffects.SummonedElementalsFire, damage);
