@@ -141,6 +141,12 @@ public class Changelog extends BaseContent
 			outputText("-Gryphon can gain race bonuses for reaching 9+ pts: +40% to str multi, +30% to tou multi, +50% to spe multi, +15% to int multi.\n");
 			outputText("-Peacock was renamed into Peafowl-morph for race name. They can also now get a race bonuses for reaching 9+ pts: -10% to str multi, +60% to spe multi, +50% to wis multi, +35% to lib multi.\n");
 			outputText("-Ferret can gain race bonuses for reaching 6+ pts: -10% to str multi, +50% to spe multi, +30% to int multi, +40% to wis multi, +20 sens.\n");
+			outputText("-Ferret gain points to race score from weasel eyes and golden eye color.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -165,15 +171,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed bugs: Telekinetic Grasp have unlimited powe... duration, 'Elite/Champion/Boss HP bonus' setting, Monsters HP (and Soulforce/Mana) not decreasing on turn end when any effect lowering it, Rathazul keep trying cure Belisa after Nadia done it, Vouivre Oil replacing dragon ears with snake ears & dragon scales with snake scales, Tyrantia & Flitzi forest scene allowing to skip ");
 			outputText("large portion of her storyline, corrupt Celess sex scenes not reseting lust/not giving tease exp, 2nd promotion in Adventure Guld been not accesable, Diva/Project Nightwalker dropping/giving Bat TF instead of Vampire TF, Sky-tier Aether Twins been excluded from some of BFGaunlets bonuses, silly mode event in hills involving minotaurs got it lvl req. below lvl req. for area ");
-			outputText("(fix was removing the lvl req. on it), races with Undeath perk scaling HP from tou instead of lib, Salamander IM not keeping Lustzerker perk from loosing if no longer race with lustzerker ability, Gryphon Statuette only allowing cock tf scene\n\n");
+			outputText("(fix was removing the lvl req. on it), races with Undeath perk scaling HP from tou instead of lib, Salamander IM not keeping Lustzerker perk from loosing if no longer race with lustzerker ability, Gryphon Statuette only allowing cock tf scene, Weasel Eyes tf not triggering when having Raiju Eyes\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8v:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -234,8 +234,10 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

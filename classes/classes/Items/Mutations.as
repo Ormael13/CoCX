@@ -10916,7 +10916,6 @@ public final class Mutations extends MutationsHelper {
             }
             changes++;
         }
-
         if (transformations.HairWindswept.isPossible() && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
             transformations.HairWindswept.applyEffect();
@@ -13051,7 +13050,6 @@ public final class Mutations extends MutationsHelper {
         //-Upon eating the fruit:
         clearOutput();
         outputText("Feeling parched, you gobble down the fruit without much hesitation. Despite the skin being fuzzy like a peach, the inside is relatively hard, and its taste reminds you of that of an apple.  It even has a core like an apple. Finished, you toss the core aside.");
-
         //BAD END:
         if (player.racialScore(Races.FERRET, false) >= 6 && !player.hasPerk(PerkLib.TransformationResistance)) {
             if (!player.hasStatusEffect(StatusEffects.TFWarning) || player.getStatusValue(StatusEffects.TFWarning, 1) != Races.FERRET.id) {
@@ -13069,7 +13067,6 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]You find yourself staring off into the distance, dreaming idly of chasing rabbits through a warren.  You shake your head, returning to reality.  <b>Perhaps you should cut back on all the Ferret Fruit?</b>");
             player.addCurse("int", (5 + rand(3)), 1);
         } else player.removeStatusEffect(StatusEffects.TFWarning);
-
         var changes:int = 0;
         var changeLimit:int = 1;
         var temp:int = 0;
@@ -13111,7 +13108,6 @@ public final class Mutations extends MutationsHelper {
             if (player.butt.type > 23) player.butt.type--;
             changes++;
         }
-
         //-If male with breasts or female/herm with breasts > B cup:
         if (!flags[kFLAGS.HYPER_HAPPY] && (player.biggestTitSize() > 2 || (player.hasCock() && player.biggestTitSize() >= 1)) && rand(2) == 0 && changes < changeLimit) {
             outputText("[pg]You cup your tits as they begin to tingle strangely.  You can actually feel them getting smaller in your hands!");
@@ -13172,6 +13168,15 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]Your two forehead eyes start throbbing painfully, your sight in them eventually going dark.  You touch your forehead to inspect your eyes, only to find out that they have disappeared.  <b>You only have two eyes now!</b>");
             outputText("[pg]");
             transformations.EyesHuman.applyEffect();
+            changes++;
+        }
+        if (player.ears.type == Ears.FERRET && transformations.EyesHuman.isPresent() && transformations.EyesWeasel.isPossible() && changes < changeLimit && rand(3) == 0) {
+            outputText("[pg]");
+            if (transformations.EyesKamaitachiColors.isPossible()) {
+                outputText("[pg]");
+                transformations.EyesKamaitachiColors.applyEffect();
+            }
+            transformations.EyesWeasel.applyEffect();
             changes++;
         }
         //Go into heat

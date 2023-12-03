@@ -214,7 +214,7 @@ public class EyesTransformations extends MutationsHelper {
 			},
 			// is present
 			function (): Boolean {
-				return player.eyes.type === Eyes.RAIJU;
+				return player.eyes.type === Eyes.WEASEL;
 			}
 	);
 
