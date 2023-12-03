@@ -938,7 +938,7 @@ public class DebugMenu extends BaseContent
 					break;
 				}
 			}
-			cb.addEventListener(Event.SELECT, function(event:Event):void {
+			cb.addEventListener(Event.CHANGE, function(event:Event):void {
 				event.preventDefault();
 				callback(cb.selectedItem);
 			});
