@@ -46,14 +46,14 @@ public class EAspectMetalSkill extends AbstractMagicSpecial {
     }
 
     /**
-     * Returns the bonus of this ability grants to physical and magical resistance
-     * @return stoneskinbonus (Number) - ability defense bonus
+     * Returns the bonus of this ability grants to unarmed attack
+     * @return unarmedBonus (Number) - unarmed attack bonus
      */
     public function getBonus():Number {
-        var metalskinbonus:Number = 0;
-		metalskinbonus += player.inte * 0.5;
-		metalskinbonus += player.wis * 0.5;
-		return Math.round(metalskinbonus);
+    if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 6) 
+        return 6 * player.statusEffectv2(StatusEffects.SummonedElementalsMetal) * (1 + player.newGamePlusMod());
+    else 
+        return 4 * player.statusEffectv2(StatusEffects.SummonedElementalsMetal) * (1 + player.newGamePlusMod());
     }
 
     override public function doEffect(display:Boolean = true):void {
