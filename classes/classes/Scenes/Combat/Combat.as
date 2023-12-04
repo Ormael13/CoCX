@@ -1512,12 +1512,10 @@ public class Combat extends BaseContent {
     public function stopChanneledSpecial():void {
         clearOutput();
         outputText("You decided to stop preparing your super ultra hyper mega fabulous attack!\n\n");
-		if (player.hasPerk(PerkLib.RagingInfernoSu) && player.hasStatusEffect(StatusEffects.CounterRagingInferno)) player.addStatusValue(StatusEffects.CounterRagingInferno, 3, -1);
-		if (player.hasPerk(PerkLib.GlacialStormSu) && player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, -1);
-		if (player.hasPerk(PerkLib.HighVoltageSu) && player.hasStatusEffect(StatusEffects.CounterHighVoltage)) player.addStatusValue(StatusEffects.CounterHighVoltage, 3, -1);
-		if (player.hasPerk(PerkLib.EclipsingShadowSu) && player.hasStatusEffect(StatusEffects.CounterEclipsingShadow)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 3, -1);
-		if (player.hasPerk(PerkLib.HighTideSu) && player.hasStatusEffect(StatusEffects.CounterHighTide)) player.addStatusValue(StatusEffects.CounterHighTide, 3, -1);
-        player.removeStatusEffect(StatusEffects.ChanneledAttack);
+        for each (var perkObj:Object in CombatMagic.magicCounterPerks) {
+            if (player.hasPerk(perkObj.tier3) && player.hasStatusEffect(perkObj.counter)) player.addStatusValue(perkObj.counter, 3, -1);
+        }
+		player.removeStatusEffect(StatusEffects.ChanneledAttack);
         player.removeStatusEffect(StatusEffects.ChanneledAttackType);
         combatRoundOver();
     }
@@ -3730,6 +3728,7 @@ public class Combat extends BaseContent {
      * Elemental range attack from Elemental Body or Moonlight Greatsword
      */
     public function throwElementalAttack():void {
+        clearOutput();
         var damage:Number = 0;
 		damage += player.str;
 		var crit:Boolean = false;
@@ -3792,11 +3791,13 @@ public class Combat extends BaseContent {
         switch (elementalVariant) {
             case ElementalRace.ELEMENT_SYLPH:
                 outputText("You form and unleash a wind blade. ");
+                damage = magic.calcGaleModImpl(damage, true);
                 damage *= windDamageBoostedByDao();
 				doWindDamage(damage, true, true);
                 break;
             case ElementalRace.ELEMENT_GNOME:
                 outputText("You launch a huge rock. ");
+                damage = magic.calcQuakeModImpl(damage, true);
                 damage *= earthDamageBoostedByDao();
 				doEarthDamage(damage, true, true);
                 break;
@@ -9171,46 +9172,18 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.LethicesRapeTentacles);
             }
         }
-        if (player.hasStatusEffect(StatusEffects.CounterHighTide)) {
-            if (player.statusEffectv1(StatusEffects.CounterHighTide) > 0 && player.statusEffectv2(StatusEffects.CounterHighTide) == 0 && player.statusEffectv3(StatusEffects.CounterHighTide) == 0) {
-				if (player.hasPerk(PerkLib.HighTideSu)) player.addStatusValue(StatusEffects.CounterHighTide, 1, -2);
-				else if (player.hasPerk(PerkLib.HighTideEx)) player.addStatusValue(StatusEffects.CounterHighTide, 1, -3);
-				player.addStatusValue(StatusEffects.CounterHighTide, 1, -4);
+        //Manage cumulative magic damage counter degradation
+        for each (var perkObj:Object in CombatMagic.magicCounterPerks) {
+            if (player.hasStatusEffect(perkObj.counter)) {
+            if (player.statusEffectv1(perkObj.counter) > 0 && player.statusEffectv2(perkObj.counter) == 0 && player.statusEffectv3(perkObj.counter) == 0) {
+				if (player.hasPerk(perkObj.tier3)) player.addStatusValue(perkObj.counter, 1, -2);
+				else if (player.hasPerk(perkObj.tier2)) player.addStatusValue(perkObj.counter, 1, -3);
+				player.addStatusValue(perkObj.counter, 1, -4);
 			}
-			if (player.statusEffectv2(StatusEffects.CounterEclipsingShadow) > 0) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 2, -1);
+			if (player.statusEffectv2(perkObj.counter) > 0) player.addStatusValue(perkObj.counter, 2, -1);
         }
-        if (player.hasStatusEffect(StatusEffects.CounterEclipsingShadow)) {
-            if (player.statusEffectv1(StatusEffects.CounterEclipsingShadow) > 0 && player.statusEffectv2(StatusEffects.CounterEclipsingShadow) == 0 && player.statusEffectv3(StatusEffects.CounterEclipsingShadow) == 0) {
-				if (player.hasPerk(PerkLib.EclipsingShadowSu)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 1, -2);
-				else if (player.hasPerk(PerkLib.EclipsingShadowEx)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 1, -3);
-				player.addStatusValue(StatusEffects.CounterEclipsingShadow, 1, -4);
-			}
-			if (player.statusEffectv2(StatusEffects.CounterEclipsingShadow) > 0) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 2, -1);
         }
-        if (player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) {
-            if (player.statusEffectv1(StatusEffects.CounterGlacialStorm) > 0 && player.statusEffectv2(StatusEffects.CounterGlacialStorm) == 0 && player.statusEffectv3(StatusEffects.CounterGlacialStorm) == 0) {
-				if (player.hasPerk(PerkLib.GlacialStormSu)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 1, -2);
-				else if (player.hasPerk(PerkLib.GlacialStormEx)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 1, -3);
-				player.addStatusValue(StatusEffects.CounterGlacialStorm, 1, -4);
-			}
-			if (player.statusEffectv2(StatusEffects.CounterGlacialStorm) > 0) player.addStatusValue(StatusEffects.CounterGlacialStorm, 2, -1);
-        }
-        if (player.hasStatusEffect(StatusEffects.CounterHighVoltage)) {
-            if (player.statusEffectv1(StatusEffects.CounterHighVoltage) > 0 && player.statusEffectv2(StatusEffects.CounterHighVoltage) == 0 && player.statusEffectv3(StatusEffects.CounterHighVoltage) == 0) {
-				if (player.hasPerk(PerkLib.HighVoltageSu)) player.addStatusValue(StatusEffects.CounterHighVoltage, 1, -2);
-				else if (player.hasPerk(PerkLib.HighVoltageEx)) player.addStatusValue(StatusEffects.CounterHighVoltage, 1, -3);
-				player.addStatusValue(StatusEffects.CounterHighVoltage, 1, -4);
-			}
-			if (player.statusEffectv2(StatusEffects.CounterHighVoltage) > 0) player.addStatusValue(StatusEffects.CounterHighVoltage, 2, -1);
-        }
-        if (player.hasStatusEffect(StatusEffects.CounterRagingInferno)) { //if has perk
-            if (player.statusEffectv1(StatusEffects.CounterRagingInferno) > 0 && player.statusEffectv2(StatusEffects.CounterRagingInferno) == 0 && player.statusEffectv3(StatusEffects.CounterRagingInferno) == 0) {
-                if (player.hasPerk(PerkLib.RagingInfernoSu)) player.addStatusValue(StatusEffects.CounterRagingInferno, 1, -2); //decrease by 10%
-				else if (player.hasPerk(PerkLib.RagingInfernoEx)) player.addStatusValue(StatusEffects.CounterRagingInferno, 1, -3); //decrease by 15%
-				player.addStatusValue(StatusEffects.CounterRagingInferno, 1, -4); //decrease by full 20%
-			}//v3 = 1 - jesli chaneluje zaklecie/special to nie traci wzmocnienia
-			if (player.statusEffectv2(StatusEffects.CounterRagingInferno) > 0) player.addStatusValue(StatusEffects.CounterRagingInferno, 2, -1);
-        }
+        
 		if (player.perkv1(IMutationsLib.FerasBirthrightIM) >= 3 && player.HP < 1 && !player.hasStatusEffect(StatusEffects.RegenSurge)) {
 			if (player.perkv1(IMutationsLib.FerasBirthrightIM) == 3) player.createStatusEffect(StatusEffects.RegenSurge,3,0,0,0);
 			if (player.perkv1(IMutationsLib.FerasBirthrightIM) == 4) player.createStatusEffect(StatusEffects.RegenSurge,4,0,0,0);
