@@ -310,10 +310,12 @@ public class AbstractSpell extends CombatAbility {
 				break;
 			}
 			case DamageType.WIND: {
+				damage = calcGaleMod(damage, casting);
 				damage *= combat.windDamageBoostedByDao();
 				break;
 			}
 			case DamageType.EARTH: {
+				damage = calcQuakeMod(damage, casting);
 				damage *= combat.earthDamageBoostedByDao();
 				break;
 			}

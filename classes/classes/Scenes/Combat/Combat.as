@@ -9473,7 +9473,8 @@ public class Combat extends BaseContent {
                     crit = true;
                     damage *= 1.75;
                 }
-                damage = magic.calcInfernoModImpl(damage, true);
+                damage = magic.calcInfernoModImpl(damage, false);
+                magic.maintainInfernoModImpl();
                 damage *= 0.5;
                 var SpellMultiplier:Number = 1;
                 SpellMultiplier += spellMod() - 1;
@@ -9727,7 +9728,8 @@ public class Combat extends BaseContent {
                     crit3 = true;
                     damageBFA *= 1.75;
                 }
-                damageBFA = magic.calcGlacialModImpl(damageBFA, true)/2;
+                damageBFA = magic.calcGlacialModImpl(damageBFA, false)/2;
+                magic.maintainGlacialModImpl();
                 var SpellMultiplier2:Number = 1;
                 SpellMultiplier2 += spellMod() - 1;
                 damageBFA *= SpellMultiplier2;
