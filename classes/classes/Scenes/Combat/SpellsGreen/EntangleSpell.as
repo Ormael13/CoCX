@@ -49,7 +49,7 @@ public class EntangleSpell extends AbstractGreenSpell {
 		return player.statusEffectv1(StatusEffects.Entangled) > 0;
 	}
 	
-	public function calcDuration():int {
+	override public function calcDuration():int {
 		var dura:Number = 6;
 		if (player.hasPerk(PerkLib.GreenMagic)) dura *= 2;
 		return dura;

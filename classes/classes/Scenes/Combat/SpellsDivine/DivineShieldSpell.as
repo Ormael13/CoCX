@@ -27,7 +27,7 @@ public class DivineShieldSpell extends AbstractDivineSpell {
 		return player.hasStatusEffect(StatusEffects.DivineShield);
 	}
 	
-	public function calcDuration():int {
+	override public function calcDuration():int {
 		var duration:Number = 6;
 		duration += combat.magic.perkRelatedDurationBoosting();
 		return duration;

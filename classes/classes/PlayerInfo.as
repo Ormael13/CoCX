@@ -5,6 +5,7 @@ import classes.IMutations.IMutationsLib;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.Combat.AbstractSpell;
 import classes.Scenes.Combat.AbstractSoulSkill;
+import classes.Scenes.Combat.AbstractMagicSpecial;
 import classes.Scenes.Crafting;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.CharybdisFollower;
@@ -59,6 +60,7 @@ public class PlayerInfo extends BaseContent {
 			addButton(10, "All", displayStatsAbilities);
 			addButtonIfTrue(11, "Spells", curry(displayStatsAbilities, AbstractSpell, 11), "You currently have no spells", player.hasknownAbilitiesOfClass(AbstractSpell));
 			addButtonIfTrue(12, "SoulSkills", curry(displayStatsAbilities, AbstractSoulSkill, 12), "You currently have no soulskills", player.hasknownAbilitiesOfClass(AbstractSoulSkill));
+			addButtonIfTrue(13, "M. Specials", curry(displayStatsAbilities, AbstractMagicSpecial, 13), "You currently have no magical specials", player.hasknownAbilitiesOfClass(AbstractMagicSpecial));
 
 			if (currentButton != 4){
 				button(currentButton).disable("You are currently viewing this category.");

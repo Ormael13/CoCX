@@ -43,7 +43,7 @@ public class PunishingKickSkill extends AbstractSoulSkill {
         return 10;
     }
 
-	public function calcDuration():int {
+	override public function calcDuration():int {
         return 5;
     }
 

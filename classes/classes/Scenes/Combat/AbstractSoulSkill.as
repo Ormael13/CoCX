@@ -57,6 +57,7 @@ public class AbstractSoulSkill extends CombatAbility {
     }
 
     override public function useResources():void {
+        super.useResources();
         if (player.hasStatusEffect(StatusEffects.BloodCultivator) && canUseBlood) {
             player.takePhysDamage(sfCost());
         } 

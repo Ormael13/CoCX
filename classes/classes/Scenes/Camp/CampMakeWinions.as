@@ -7,6 +7,7 @@ package classes.Scenes.Camp
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.Scenes.Combat.CombatAbilities;
 
 public class CampMakeWinions extends BaseContent
 	{
@@ -1633,7 +1634,7 @@ public class CampMakeWinions extends BaseContent
 			outputText("-When attacking, it has an increased critical damage multiplied from 150% to 175%.\n");
 			outputText("-When attacking, it will ignore enemy damage reduction.\n");
 			outputText("-When attacking, it will deal Wind type damage.\n");
-			outputText("-M. Special: Creates a Wind Wall that deflects incoming projectiles for few turns. Duration depends on elemental rank.\n");
+			outputText("-M. Special: " + CombatAbilities.EAspectAir.description + "\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeEarth():void {
@@ -1641,14 +1642,14 @@ public class CampMakeWinions extends BaseContent
 			outputText("<b>Earth Elemental</b>\n\n");
 			outputText("-When attacking, it has an increased damage by 100%.\n");
 			outputText("-When attacking, it will deal Earth type damage.\n");
-			outputText("-M. Special: Creates an Earth armor around PC, increasing armor and magic resistance for a few turns. Duration depends on elemental rank.\n");
+			outputText("-M. Special: " + CombatAbilities.EAspectEarth.description + "\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeFire():void {
 			clearOutput();
 			outputText("<b>Fire Elemental</b>\n\n");
 			outputText("-When attacking, it will deal Fire type damage.\n");
-			outputText("-M. Special: Stronger version of fire attributed attack.\n");
+			outputText("-M. Special: " + CombatAbilities.EAspectFire.description + "\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeWater():void {
@@ -1656,7 +1657,7 @@ public class CampMakeWinions extends BaseContent
 			outputText("<b>Water Elemental</b>\n\n");
 			outputText("-When attacking, it has an increased critical damage chance by 10%.\n");
 			outputText("-When attacking, it will deal Water type damage.\n");
-			outputText("-M. Special: Heals PC.\n");
+			outputText("-M. Special: " + CombatAbilities.EAspectWater.description + "\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeEther():void {
@@ -1665,14 +1666,14 @@ public class CampMakeWinions extends BaseContent
 			outputText("-When attacking, it has an increased critical damage chance by 10%.\n");
 			outputText("-When attacking, it has an increased critical damage multiplied from 150% to 200%.\n");
 			outputText("-When attacking, it will ignore enemy damage reduction.\n");
-			outputText("-M. Special: Deals increased damage as a bonus to enemy if enemy is weak to any of the four major elements.\n");
+			outputText("-M. Special: " + CombatAbilities.EAspectEther.description + "\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeWood():void {
 			clearOutput();
 			outputText("<b>Wood Elemental</b>\n\n");
 			outputText("-When attacking, it has an increased damage by 100%.\n");
-			outputText("-M. Special: PC (Minor) Healing and small increase to armor / magic resistance for a few turns. Duration depends on elemental rank.\n");
+			outputText("-M. Special: " + CombatAbilities.EAspectWood.description + "\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeMetal():void {
@@ -1681,49 +1682,49 @@ public class CampMakeWinions extends BaseContent
 			outputText("-When attacking, it has an increased critical damage chance by 10%.\n");
 			outputText("-When attacking, it has an increased critical damage multiplied from 150% to 175%.\n");
 			outputText("-When attacking, it has an increased damage by 30%.\n");
-			outputText("-M. Special: Increases PC unarmed damage for a few turns. Duration depends on elemental rank.\n");
+			outputText("-M. Special: " + CombatAbilities.EAspectMetal.description + "\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeIce():void {
 			clearOutput();
 			outputText("<b>Ice Elemental</b>\n\n");
 			outputText("-When attacking, it will deal Ice type damage.\n");
-			outputText("-M. Special: Stronger version of ice attributed attack.\n");
+			outputText("-M. Special: " + CombatAbilities.EAspectIce.description + "\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeLightning():void {
 			clearOutput();
 			outputText("<b>Lightning Elemental</b>\n\n");
 			outputText("-When attacking, it will deal Lightning type damage.\n");
-			outputText("-M. Special: Stronger version of lightning attributed attack.\n");
+			outputText("-M. Special: " + CombatAbilities.EAspectLightning.description + "\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeDarkness():void {
 			clearOutput();
 			outputText("<b>Darkness Elemental</b>\n\n");
 			outputText("-When attacking, it will deal Darkness type damage.\n");
-			outputText("-M. Special: Stronger version of darkness attributed attack.\n");
+			outputText("-M. Special: " + CombatAbilities.EAspectDarkness.description + "\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomePoison():void {
 			clearOutput();
 			outputText("<b>Poison Elemental</b>\n\n");
 			outputText("-When attacking, it will deal Poison type damage.\n");
-			outputText("-M. Special: Stronger version of poison attributed attack.\n");
+			outputText("-M. Special: " + CombatAbilities.EAspectPoison.description + "\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomePurity():void {
 			clearOutput();
 			outputText("<b>Purity Elemental</b>\n\n");
 			outputText("-When attacking, it will deal increased damage based on enemy corruption. The higher the corruption the higher bonus to damage. (60%-300%)\n");
-			outputText("-M. Special: Stronger version of purity attributed attack.\n");
+			outputText("-M. Special: " + CombatAbilities.EAspectPurity.description + "\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeCorruption():void {
 			clearOutput();
 			outputText("<b>Corruption Elemental</b>\n\n");
 			outputText("-When attacking, it will deal increased damage based on enemy corruption. The lower the corruption the higher bonus to damage. (60%-300%)\n");
-			outputText("-M. Special: Stronger version of corruption attributed attack.\n");
+			outputText("-M. Special: " + CombatAbilities.EAspectCorruption.description + "\n");
 			doNext(evocationTome);
 		}
 		private function evocationTome4():void {

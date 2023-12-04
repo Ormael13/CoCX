@@ -39,7 +39,7 @@ public class CurseOfWeepingSpell extends AbstractHexSpell {
 		return monster.hasStatusEffect(StatusEffects.CurseOfWeeping);
 	}
 	
-	public function calcDuration():int {
+	override public function calcDuration():int {
 		return 6;
 	}
 	

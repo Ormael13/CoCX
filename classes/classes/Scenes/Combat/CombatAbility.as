@@ -4,6 +4,9 @@ import classes.internals.EnumValue;
 import classes.StatusEffectType;
 
 import coc.view.ButtonData;
+import classes.GlobalFlags.kFLAGS;
+import classes.Appearance;
+import mx.formatters.NumberFormatter;
 
 /**
  * A combat ability invokable by player (spell, special, skill, etc).
@@ -225,6 +228,7 @@ public class CombatAbility extends BaseCombatContent {
 	public var baseSFCost:Number = 0;
 	public var baseFatigueCost:Number = 0;
 	public var processPostCallback:Boolean = true;
+	protected var lastAttackType:int = 0;
 	
 	public function CombatAbility(
 			name:String,
@@ -291,6 +295,8 @@ public class CombatAbility extends BaseCombatContent {
 	 */
 	public function isActive():Boolean {
 		if (timingType == TIMING_INSTANT) return false;
+		if (timingType == TIMING_LASTING) return (player.durations[id] > 0);
+		if (timingType == TIMING_TOGGLE) return (player.durations[id] == -1);
 		throw new Error("Method isActive() is not implemented for ability "+name+", or it's timing type is incorrect");
 	}
 	
@@ -307,7 +313,14 @@ public class CombatAbility extends BaseCombatContent {
 	 * @param display Print the effect
 	 */
 	public function advance(display:Boolean):void {
-		/* do nothing */
+		// Decrement Duration if needed
+		if (player.durations[id] > 0) {
+			player.durations[id]--;
+			if (player.durations[id] == 0) {
+				durationEnd(display);
+			}
+		}
+        
 	}
 	
 	/**
@@ -374,6 +387,12 @@ public class CombatAbility extends BaseCombatContent {
 		const bd:ButtonData = new ButtonData(buttonName, buttonCallback);
 		
 		var fullDesc: String = fullDescription(target);
+
+		var currentDuration:int = player.durations[id];
+		if (currentDuration > 0) {
+			var durationText:String = "This ability ends in " + Appearance.numberOfThings(currentDuration, "round") + ".";
+			fullDesc = "<b>"+durationText + "</b>\n\n" + fullDesc;
+		}
 		
 		var ucheck:String;
 		var deactivating:Boolean;
@@ -455,12 +474,21 @@ public class CombatAbility extends BaseCombatContent {
 	public function setCooldown():void {
 		player.cooldowns[id] = calcCooldown();
 	}
+
+	/**
+	 * Sets the defomed duration for this ability
+	 * Must be manually called as part of doEffect()
+	 */
+	public function setDuration():void {
+		player.durations[id] = calcDuration();
+	}
 	
 	/**
 	 * Use mana, increment counters etc. At this point ability still might fail or be intercepted by monster
 	 */
 	public function useResources():void {
-		/* do nothing */
+		if (lastAttackType != 0)
+			flags[kFLAGS.LAST_ATTACK_TYPE] = lastAttackType;
 	}
 	
 	/**
@@ -497,12 +525,27 @@ public class CombatAbility extends BaseCombatContent {
 	public function get currentCooldown():int {
 		return player.cooldowns[id];
 	}
+
+	/**
+	 * Current duration (number of rounds left before it the ability effect ends)
+	 */
+	public function get currentDuration():int {
+		return player.durations[id];
+	}
 	
 	/**
 	 * Calculate cooldown of this ability. Default is 0 (no cooldown).
 	 * Will be applied automatically.
 	 */
 	public function calcCooldown():int {
+		return 0;
+	}
+
+	/**
+	 * Calculate duration of this ability. Default is 0 (no duration).
+	 * Will be applied automatically.
+	 */
+	public function calcDuration():int {
 		return 0;
 	}
 	
@@ -517,6 +560,10 @@ public class CombatAbility extends BaseCombatContent {
 		var ccd:int = currentCooldown;
 		if (ccd > 0) {
 			return "You need to wait "+numberOfThings(ccd, "more round")+" before you can use this ability again."
+		} else if (ccd == -1) {
+			return "This ability can only be used once per battle."
+		} else if (ccd == -2) {
+			return "This ability can only be used once per day."
 		}
 		return "";
 	}
@@ -545,5 +592,26 @@ public class CombatAbility extends BaseCombatContent {
             } else player.addStatusValue(statusEffect, 1, -1);
         }
     }
+
+	/**
+	 * Function that is called when the duration of a lasting ability ends
+	 * Does nothing by default
+	 * @param display (Boolean) - output text
+	 */
+	public function durationEnd(display:Boolean = true):void {
+
+	}
+
+	/**
+	 * Function used to format damage number properly for tooltips
+	 * @param damage (Number) - Number to be formatted
+	 * @return text (String) - Formatted number
+	 * For printing out damage numbers on the main screen, combat.CommasForDigits() should be used instead
+	 */
+	public function numberFormat(damage:Number):String {
+		var numberformat:NumberFormatter = new NumberFormatter();
+        return numberformat.format(Math.floor(Math.abs(damage)));
+	}
+
 }
 }

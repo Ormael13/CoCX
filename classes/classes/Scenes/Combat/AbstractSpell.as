@@ -33,6 +33,7 @@ public class AbstractSpell extends CombatAbility {
 	) {
 		super(name, desc, targetType, timingType, tags);
 		this.useManaType = useManaType;
+		this.lastAttackType = Combat.LAST_ATTACK_SPELL;
 	}
 
 	override public function manaCost():Number {
@@ -40,7 +41,7 @@ public class AbstractSpell extends CombatAbility {
 	}
 	
 	override public function useResources():void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		super.useResources();
 		//var realManaCost:Number = combat.finalSpellCost(manaCost(), useManaType);
 		var realManaCost:Number = manaCost();
 		var realWrathCost:Number = wrathCost();

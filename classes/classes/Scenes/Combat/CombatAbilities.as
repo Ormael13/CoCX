@@ -8,6 +8,7 @@ import classes.Scenes.Combat.SpellsNecro.*;
 import classes.Scenes.Combat.SpellsGrey.*;
 import classes.Scenes.Combat.SpellsBlood.*;
 import classes.Scenes.Combat.Soulskills.*;
+import classes.Scenes.Combat.SpecialsMagic.*;
 
 public class CombatAbilities {
 	
@@ -334,6 +335,40 @@ public class CombatAbilities {
 		BloodRequiemSF,
 		ScarletSpiritCharge
 	]
+
+	public static const EAspectFire:EAspectFireSkill = new EAspectFireSkill();
+	public static const EAspectAir:EAspectAirSkill = new EAspectAirSkill();
+	public static const EAspectEarth:EAspectEarthSkill = new EAspectEarthSkill();
+	public static const EAspectWater:EAspectWaterSkill = new EAspectWaterSkill();
+	public static const EAspectEther:EAspectEtherSkill = new EAspectEtherSkill();
+	public static const EAspectWood:EAspectWoodSkill = new EAspectWoodSkill();
+	public static const EAspectMetal:EAspectMetalSkill = new EAspectMetalSkill();
+	public static const EAspectIce:EAspectIceSkill = new EAspectIceSkill();
+	public static const EAspectLightning:EAspectLightningSkill = new EAspectLightningSkill();
+	public static const EAspectDarkness:EAspectDarknessSkill = new EAspectDarknessSkill();
+	public static const EAspectPoison:EAspectPoisonSkill = new EAspectPoisonSkill();
+	public static const EAspectPurity:EAspectPuritySkill = new EAspectPuritySkill();
+	public static const EAspectCorruption:EAspectCorruptionSkill = new EAspectCorruptionSkill();
+
+	public static const ALL_ELEMENTAL_ASPECTS:/*CombatAbility*/Array = [
+		EAspectFire,
+		EAspectAir,
+		EAspectEarth,
+		EAspectWater,
+		EAspectEther,
+		EAspectWood,
+		EAspectMetal,
+		EAspectIce,
+		EAspectLightning,
+		EAspectDarkness,
+		EAspectPoison,
+		EAspectPurity,
+		EAspectCorruption
+	]
+
+	public static const ALL_MAGICAL_SPECIALS:/*CombatAbility*/Array = [
+		
+	];
 	
 	/*
 	 * Difference from CombatAbility.Registry:
@@ -343,6 +378,8 @@ public class CombatAbilities {
 	public static const ALL:/*CombatAbility*/Array = []
 			.concat(ALL_SPELLS)
 			.concat(ALL_SOULSKILLS)
+			.concat(ALL_MAGICAL_SPECIALS)
+			.concat(ALL_ELEMENTAL_ASPECTS);
 	;
 	
 	function CombatAbilities() {

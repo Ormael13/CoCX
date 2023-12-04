@@ -36,7 +36,7 @@ public class ThunderstormSpell extends AbstractDivineSpell {
 		return super.usabilityCheck();
 	}
 	
-	public function calcDuration():int {
+	override public function calcDuration():int {
 		return 30;
 	}
 	

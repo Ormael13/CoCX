@@ -73,6 +73,9 @@ use namespace CoC;
 			for (var i:int = 0; i < CombatAbility.Registry.length; i++) {
 				cooldowns[i] = 0;
 			}
+			for (var duration:int = 0; duration < CombatAbility.Registry.length; duration++) {
+				durations[duration] = 0;
+			}
 			//Item things
 			itemSlot1 = new ItemSlotClass();
 			itemSlot2 = new ItemSlotClass();
@@ -193,6 +196,9 @@ use namespace CoC;
 
 		//Combat ability cooldowns. Index is ability id.
 		public var cooldowns:/*int*/Array = [];
+
+		//Combat ability durations. Index is ability id.
+		public var durations:/*int*/Array = [];
 		
 		//Mining attributes
 		public var miningLevel:Number = 0;
@@ -851,9 +857,8 @@ use namespace CoC;
 			if (hasStatusEffect(StatusEffects.ChargeArmor) && (!isNaked() || (isNaked() && haveNaturalArmor() && hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor)))) armorDef += Math.round(statusEffectv1(StatusEffects.ChargeArmor));
 			if (hasStatusEffect(StatusEffects.ArmorPotion) && (!isNaked() || (isNaked() && haveNaturalArmor() && hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor)))) armorDef += Math.round(statusEffectv1(StatusEffects.ArmorPotion));
 			if (hasStatusEffect(StatusEffects.CompBoostingPCArmorValue)) armorDef += (level * newGamePlusMod);
-			if (hasStatusEffect(StatusEffects.StoneSkin)) armorDef += Math.round(statusEffectv1(StatusEffects.StoneSkin));
-			if (hasStatusEffect(StatusEffects.BarkSkin)) armorDef += Math.round(statusEffectv1(StatusEffects.BarkSkin));
-			if (hasStatusEffect(StatusEffects.MetalSkin)) armorDef += Math.round(statusEffectv1(StatusEffects.MetalSkin));
+			if (CombatAbilities.EAspectEarth.isActive()) armorDef += CombatAbilities.EAspectEarth.getBonus();
+			if (CombatAbilities.EAspectWood.isActive()) armorDef += CombatAbilities.EAspectWood.getBonus();
 			if (CoC.instance.monster.hasStatusEffect(StatusEffects.TailWhip)) {
 				armorDef -= CoC.instance.monster.statusEffectv1(StatusEffects.TailWhip);
 				if(armorDef < 0) armorDef = 0;
@@ -1057,9 +1062,9 @@ use namespace CoC;
 			if (hasStatusEffect(StatusEffects.Berzerking) && !hasPerk(PerkLib.ColderFury)) armorMDef = 0;
 			if (hasStatusEffect(StatusEffects.Lustzerking) && !hasPerk(PerkLib.ColderLust)) armorMDef = 0;
 			//if (hasStatusEffect(StatusEffects.ChargeArmor) && (!isNaked() || (isNaked() && haveNaturalArmor() && hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor)))) armorDef += Math.round(statusEffectv1(StatusEffects.ChargeArmor));
-			if (hasStatusEffect(StatusEffects.StoneSkin)) armorMDef += Math.round(statusEffectv1(StatusEffects.StoneSkin));
-			if (hasStatusEffect(StatusEffects.BarkSkin)) armorMDef += Math.round(statusEffectv1(StatusEffects.BarkSkin));
-			if (hasStatusEffect(StatusEffects.MetalSkin)) armorMDef += Math.round(statusEffectv1(StatusEffects.MetalSkin));/*
+			if (CombatAbilities.EAspectEarth.isActive()) armorMDef += CombatAbilities.EAspectEarth.getBonus();
+			if (CombatAbilities.EAspectWood.isActive()) armorMDef += CombatAbilities.EAspectWood.getBonus();
+			/*
 			if (CoC.instance.monster.hasStatusEffect(StatusEffects.TailWhip)) {
 				armorDef -= CoC.instance.monster.statusEffectv1(StatusEffects.TailWhip);
 				if(armorDef < 0) armorDef = 0;
@@ -3159,7 +3164,7 @@ use namespace CoC;
 			if (statusEffectv1(StatusEffects.OniRampage) > 0) {
 				mult -= 20;
 			}
-			if (statusEffectv1(StatusEffects.EarthStance) > 0) {
+			if (CombatAbilities.EarthStance.isActive()) {
 				mult -= 30;
 			}
 			if (statusEffectv1(StatusEffects.AcidDoT) > 0) {
@@ -5580,6 +5585,7 @@ use namespace CoC;
 			var HPPercent:Number;
 			HPPercent = HP/maxHP();
 			resetCooldowns();
+			resetDurations();
 			if (hasStatusEffect(StatusEffects.DriderIncubusVenom))
 			{
 				removeStatusEffect(StatusEffects.DriderIncubusVenom);
@@ -7412,9 +7418,15 @@ use namespace CoC;
 					}
 			)
 		}
-		public function resetCooldowns():void {
+		public function resetCooldowns(oncePerDay:Boolean = false):void {
 			for (var i:int = 0; i<cooldowns.length; i++) {
-				cooldowns[i] = 0;
+				if (oncePerDay || cooldowns[i] != -2)
+					cooldowns[i] = 0;
+			}
+		}
+		public function resetDurations():void {
+			for (var i:int = 0; i<durations.length; i++) {
+				durations[i] = 0;
 			}
 		}		
 	}

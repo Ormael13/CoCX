@@ -826,7 +826,7 @@ public class Combat extends BaseContent {
         }
     }
 
-    internal function buildOtherActions(buttons:ButtonDataList):void {
+    internal function buildOtherActions(buttons:ButtonDataList, backFunc:Function, aspectButtons:ButtonDataList = null):void {
         var bd:ButtonData;
 		buttons.add("Surrender(H)", combat.surrenderByHP, "Stop defending youself. You'll take a hell of a beating. Why would you do this?");
         buttons.add("Surrender(L)", combat.surrenderByLust, "Fantasize about your opponent in a sexual way so much it would fill up your lust. You'll end up getting raped...But is it rape if you get what you want?");
@@ -905,7 +905,16 @@ public class Combat extends BaseContent {
 			bd = buttons.add("Heal Zenji", HealZenji);
 		}
 		if (player.hasPerk(PerkLib.JobGolemancer) && (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 0 || flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0 || flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > 0 || flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > 0 || flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] > 0)) bd = buttons.add("Golems", GolemsMenu);
-		if (player.hasPerk(PerkLib.JobElementalConjurer) && player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) bd = buttons.add("Elem.Asp", ElementalAspectsMenu);
+		if (player.hasPerk(PerkLib.JobElementalConjurer) && player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) {
+            var buttonFunc:Function;
+            if (aspectButtons != null) {
+                buttonFunc = curry(submenu, aspectButtons, backFunc);
+            }
+            else {
+                buttonFunc = ElementalAspectsMenu
+            }
+            bd = buttons.add("Elem.Asp", buttonFunc, "Use the once-per-battle elemental aspects of your basic elementals.", "Elemental Aspects");
+        }
 		if (player.hasPerk(PerkLib.PrestigeJobNecromancer) && player.perkv2(PerkLib.PrestigeJobNecromancer) > 0) {
 			bd = buttons.add("S.S. to F.", sendSkeletonToFight).hint("Send Skeleton to fight - Order your Skeletons to beat the crap out of your foe.");
 			if (monster.isFlying() && (!player.hasPerk(PerkLib.GreaterHarvest) || (player.perkv1(PerkLib.GreaterHarvest) == 0 && player.perkv2(PerkLib.GreaterHarvest) == 0))) {
@@ -1883,27 +1892,9 @@ public class Combat extends BaseContent {
         if (summonedElementals >= 9) elementalDamage += baseDamage;
         if (summonedElementals >= 13) elementalDamage += baseDamage;
         if (elementalDamage < 10) elementalDamage = 10;
-        if (player.hasPerk(PerkLib.HistoryTactician) || player.hasPerk(PerkLib.PastLifeTactician)) elementalDamage *= historyTacticianBonus();
-        if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 2 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) {
-            if (summonedElementals >= 9) elementalDamage *= 4;
-            else if (summonedElementals >= 5) elementalDamage *= 3;
-            else elementalDamage *= 2;
-        }
-        var elementalamplification:Number = 1;
-        if (player.hasPerk(PerkLib.ElementalConjurerResolve)) elementalamplification += 0.1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-        if (player.hasPerk(PerkLib.ElementalConjurerDedication)) elementalamplification += 0.2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-        if (player.hasPerk(PerkLib.ElementalConjurerSacrifice)) elementalamplification += 0.3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-        if (player.weapon == weapons.SCECOMM) elementalamplification += 0.5;
-		if (player.weaponRange == weaponsrange.E_TOME_) elementalamplification += 0.5;
-        if (player.shield == shields.Y_U_PAN) elementalamplification += 0.25;
-        if (flags[kFLAGS.WILL_O_THE_WISP] == 2) {
-            elementalamplification += 0.1;
-            if (player.hasPerk(PerkLib.WispLieutenant)) elementalamplification += 0.2;
-            if (player.hasPerk(PerkLib.WispCaptain)) elementalamplification += 0.3;
-            if (player.hasPerk(PerkLib.WispMajor)) elementalamplification += 0.4;
-            if (player.hasPerk(PerkLib.WispColonel)) elementalamplification += 0.5;
-        }
-        elementalDamage *= elementalamplification;
+        
+        elementalDamage *= elementalAmplificationMod(summonedElementals);
+
         //Determine if critical hit!
         var crit:Boolean = false;
         var critChance:int = 5;
@@ -1926,7 +1917,7 @@ public class Combat extends BaseContent {
                     break;
             }
         }
-        if (elementType != AIR && elementType != AIR_E && elementType != ETHER) elementalDamage *= (monster.damagePercent() / 100);
+        
         elementalDamage = Math.round(elementalDamage);
         switch (elementType) {
             case EARTH:
@@ -6743,10 +6734,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) unarmed += 24 * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) unarmed += 30 * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) unarmed += 36 * (1 + player.newGamePlusMod());
-        if (player.hasStatusEffect(StatusEffects.MetalSkin)) {
-            if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 6) unarmed += 4 * player.statusEffectv2(StatusEffects.SummonedElementalsMetal) * (1 + player.newGamePlusMod());
-            else unarmed += 2 * player.statusEffectv2(StatusEffects.SummonedElementalsMetal) * (1 + player.newGamePlusMod());
-        }
+        if (CombatAbilities.EAspectMetal.isActive()) unarmed += CombatAbilities.EAspectMetal.getBonus();
         if (player.hasPerk(PerkLib.ElementalBody)) {
             switch (ElementalRace.getElementAndTier(player)) {
                 case ElementalRace.SYLPH_1:
@@ -7027,6 +7015,32 @@ public class Combat extends BaseContent {
         if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.4;
         if (player.hasPerk(PerkLib.ColdAffinity) || player.hasPerk(PerkLib.AffinityUndine)) damage *= 2;
         return damage;
+    }
+
+    public function elementalAmplificationMod(summonedElementals:int):Number {
+        var elementalamplification:Number = 1;
+        if (player.hasPerk(PerkLib.ElementalConjurerResolve)) elementalamplification += 0.1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+        if (player.hasPerk(PerkLib.ElementalConjurerDedication)) elementalamplification += 0.2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+        if (player.hasPerk(PerkLib.ElementalConjurerSacrifice)) elementalamplification += 0.3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+        if (player.weapon == weapons.SCECOMM) elementalamplification += 0.5;
+		if (player.weaponRange == weaponsrange.E_TOME_) elementalamplification += 0.5;
+        if (player.shield == shields.Y_U_PAN) elementalamplification += 0.25;
+        if (flags[kFLAGS.WILL_O_THE_WISP] == 2) {
+            elementalamplification += 0.1;
+            if (player.hasPerk(PerkLib.WispLieutenant)) elementalamplification += 0.2;
+            if (player.hasPerk(PerkLib.WispCaptain)) elementalamplification += 0.3;
+            if (player.hasPerk(PerkLib.WispMajor)) elementalamplification += 0.4;
+            if (player.hasPerk(PerkLib.WispColonel)) elementalamplification += 0.5;
+        }
+        if (player.hasPerk(PerkLib.HistoryTactician) || player.hasPerk(PerkLib.PastLifeTactician)) elementalamplification += (1 - historyTacticianBonus());
+        
+        if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 2 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) {
+            if (summonedElementals >= 9) elementalamplification += 3;
+            else if (summonedElementals >= 5) elementalamplification += 2;
+            else elementalamplification += 1;
+        }
+
+        return elementalamplification;
     }
 
     public function lustDamageCalc():Number {
@@ -10911,31 +10925,6 @@ public class Combat extends BaseContent {
         }
         //Companion Boosting PC Armor Value
         if (player.hasStatusEffect(StatusEffects.CompBoostingPCArmorValue)) player.removeStatusEffect(StatusEffects.CompBoostingPCArmorValue);
-        //Elemental Aspect status effects
-        if (player.hasStatusEffect(StatusEffects.WindWall)) {
-            if (player.statusEffectv2(StatusEffects.WindWall) <= 0) {
-                player.removeStatusEffect(StatusEffects.WindWall);
-                outputText("<b>Wind Wall effect wore off!</b>\n\n");
-            } else player.addStatusValue(StatusEffects.WindWall, 2, -1);
-        }
-        if (player.hasStatusEffect(StatusEffects.StoneSkin)) {
-            if (player.statusEffectv2(StatusEffects.StoneSkin) <= 0) {
-                player.removeStatusEffect(StatusEffects.StoneSkin);
-                outputText("<b>Stone Skin effect wore off!</b>\n\n");
-            } else player.addStatusValue(StatusEffects.StoneSkin, 2, -1);
-        }
-        if (player.hasStatusEffect(StatusEffects.BarkSkin)) {
-            if (player.statusEffectv2(StatusEffects.BarkSkin) <= 0) {
-                player.removeStatusEffect(StatusEffects.BarkSkin);
-                outputText("<b>Bark Skin effect wore off!</b>\n\n");
-            } else player.addStatusValue(StatusEffects.BarkSkin, 2, -1);
-        }
-        if (player.hasStatusEffect(StatusEffects.MetalSkin)) {
-            if (player.statusEffectv2(StatusEffects.MetalSkin) <= 0) {
-                player.removeStatusEffect(StatusEffects.MetalSkin);
-                outputText("<b>Metal Skin effect wore off!</b>\n\n");
-            } else player.addStatusValue(StatusEffects.MetalSkin, 2, -1);
-        }
         //Possess
         if (player.hasStatusEffect(StatusEffects.CooldownPossess)) {
             if (player.statusEffectv1(StatusEffects.CooldownPossess) <= 0) {
@@ -10968,34 +10957,6 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownSpectralScream, 1, -1);
             }
         }
-        /*//Hurricane Dance
-        if (player.hasStatusEffect(StatusEffects.CooldownHurricaneDance)) {
-            if (player.statusEffectv1(StatusEffects.CooldownHurricaneDance) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownHurricaneDance);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownHurricaneDance, 1, -1);
-            }
-        }
-        if (player.hasStatusEffect(StatusEffects.HurricaneDance)) {
-            if (player.statusEffectv1(StatusEffects.HurricaneDance) <= 0) {
-                player.removeStatusEffect(StatusEffects.HurricaneDance);
-                outputText("<b>Hurricane Dance effect wore off!</b>\n\n");
-            } else player.addStatusValue(StatusEffects.HurricaneDance, 1, -1);
-        }
-        //Earth Stance
-        if (player.hasStatusEffect(StatusEffects.CooldownEarthStance)) {
-            if (player.statusEffectv1(StatusEffects.CooldownEarthStance) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownEarthStance);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownEarthStance, 1, -1);
-            }
-        }
-        if (player.hasStatusEffect(StatusEffects.EarthStance)) {
-            if (player.statusEffectv1(StatusEffects.EarthStance) <= 0) {
-                player.removeStatusEffect(StatusEffects.EarthStance);
-                outputText("<b>Earth Stance effect wore off!</b>\n\n");
-            } else player.addStatusValue(StatusEffects.EarthStance, 1, -1);
-        } */
         //Punishing Kick
         if (player.hasStatusEffect(StatusEffects.CooldownPunishingKick)) {
             if (player.statusEffectv1(StatusEffects.CooldownPunishingKick) <= 0) {

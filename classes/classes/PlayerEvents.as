@@ -1080,6 +1080,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.hasStatusEffect(StatusEffects.DragonWaterBreathCooldown) && !player.perkv1(IMutationsLib.DraconicLungIM) >= 1) player.removeStatusEffect(StatusEffects.DragonWaterBreathCooldown);
 				if (player.hasStatusEffect(StatusEffects.DragonFaerieBreathCooldown) && !player.perkv1(IMutationsLib.DraconicLungIM) >= 1) player.removeStatusEffect(StatusEffects.DragonFaerieBreathCooldown);
 				if (player.hasStatusEffect(StatusEffects.DragonRoyalBreathCooldown) && !player.perkv1(IMutationsLib.DraconicLungIM) >= 1) player.removeStatusEffect(StatusEffects.DragonRoyalBreathCooldown);
+				//Reset once a day cooldowns
+				player.resetCooldowns(true);
 				//Reset Mara Fruit daily counter
 				flags[kFLAGS.DAILY_MARA_FRUIT_COUNTER] = 0;
 				//Alraune flags

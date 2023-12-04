@@ -35,7 +35,7 @@ public class BalanceOfLifeSpell extends AbstractGreySpell {
 		return calcC;
 	}
 	
-	public function calcDuration():int {
+	override public function calcDuration():int {
 		var duration:Number = 4;
 		if (player.hasPerk(PerkLib.DefensiveStaffChanneling)) duration *= 1.1;
 		return Math.round(duration);

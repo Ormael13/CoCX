@@ -29,7 +29,7 @@ public class BloodFieldSpell extends AbstractBloodSpell {
 		return player.hasStatusEffect(StatusEffects.BloodField);
 	}
 	
-	public function calcDuration():int {
+	override public function calcDuration():int {
 		var calcD:int = 3;
 		if (player.hasPerk(PerkLib.BloodDemonIntelligence)) calcD *= 2;
 		return calcD;

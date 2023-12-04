@@ -53,6 +53,7 @@ public class CombatUI extends BaseCombatContent {
 	private var bloodSpellButtons:ButtonDataList = new ButtonDataList();
 	private var greenSpellButtons:ButtonDataList = new ButtonDataList();
 	private var soulforceButtons:ButtonDataList = new ButtonDataList();
+	private var eAspectButtons:ButtonDataList = new ButtonDataList();
 	private var otherButtons:ButtonDataList = new ButtonDataList();
 	public function mainMenu():void {
 		menu();
@@ -68,6 +69,7 @@ public class CombatUI extends BaseCombatContent {
 		bloodSpellButtons.clear();
 		greenSpellButtons.clear();
 		soulforceButtons.clear();
+		eAspectButtons.clear();
 		otherButtons.clear();
 
 		var btnMelee:CoCButton      = button(0).icon("A_Melee");
@@ -240,7 +242,8 @@ public class CombatUI extends BaseCombatContent {
 		buildAbilityMenu(CombatAbilities.ALL_SOULSKILLS, soulforceButtons);
 		if (soulforceButtons.length > 0) btnSoulskills.show("Soulforce", submenuSoulforce, "Soulforce attacks menu.", "Soulforce Specials");
 		// Submenu - Other
-		combat.buildOtherActions(otherButtons);
+		buildAbilityMenu(CombatAbilities.ALL_ELEMENTAL_ASPECTS, eAspectButtons);
+		combat.buildOtherActions(otherButtons, submenuOther, eAspectButtons);
 		if (otherButtons.length > 0) btnOther.show("Other", submenuOther, "Combat options and uncategorized actions");
 
 		btnFantasize.show("Fantasize", combat.fantasize, "Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.");
