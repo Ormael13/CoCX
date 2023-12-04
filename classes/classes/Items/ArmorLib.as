@@ -195,7 +195,6 @@ public final class ArmorLib extends ItemConstants
 					'teasedmg': 10
 				})
 				.withPerk(PerkLib.IceQueenGown,0,0,0,0)
-				.withPerk(PerkLib.IceNature,0,0,0,0)
 				.withPerk(PerkLib.IcyFlesh,0,0,0,0) as Armor;
 		public const KBDRESS:Armor = new KrakenBlackDress();
 		public const LEATHRA:Armor = new Armor("LeathrA","LeathrA","leather armor segments","a set of leather armor",5,0,100,"This is a suit of well-made leather armor.  It looks fairly rugged.","Light");

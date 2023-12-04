@@ -50,10 +50,12 @@ public class EAspectMetalSkill extends AbstractMagicSpecial {
      * @return unarmedBonus (Number) - unarmed attack bonus
      */
     public function getBonus():Number {
-    if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 6) 
-        return 6 * player.statusEffectv2(StatusEffects.SummonedElementalsMetal) * (1 + player.newGamePlusMod());
-    else 
-        return 4 * player.statusEffectv2(StatusEffects.SummonedElementalsMetal) * (1 + player.newGamePlusMod());
+		var metalskinbonus:Number = 4;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 6) metalskinbonus += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 11) metalskinbonus += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 16) metalskinbonus += 2;
+		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 21) metalskinbonus += 2;
+		return metalskinbonus * player.statusEffectv2(StatusEffects.SummonedElementalsMetal) * (1 + player.newGamePlusMod());
     }
 
     override public function doEffect(display:Boolean = true):void {

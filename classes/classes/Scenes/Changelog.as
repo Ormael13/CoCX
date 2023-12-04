@@ -142,6 +142,9 @@ public class Changelog extends BaseContent
 			outputText("-Peacock was renamed into Peafowl-morph for race name. They can also now get a race bonuses for reaching 9+ pts: -10% to str multi, +60% to spe multi, +50% to wis multi, +35% to lib multi.\n");
 			outputText("-Ferret can gain race bonuses for reaching 6+ pts: -10% to str multi, +50% to spe multi, +30% to int multi, +40% to wis multi, +20 sens.\n");
 			outputText("-Ferret gain points to race score from weasel eyes and golden eye color.\n");
+			outputText("-New event perk: Anty Dexterity. Gained by having four ant arms. Effect: Strong ant arms boost your strength and allow wielding dual weapons <i>or</i> large weapons.\n");
+			outputText("-Adjusted Elemental Aspects: All Damaging Aspects given similar damage bonuses to a standard epic elemental attack. All aspects given mana cost similar to an epic elemental attack. Damaging Elemental Aspect attacks can now crit. Air Aspect no longer gets additional duration from intelligence and wisdom. Air and Earth Aspects now get additional duration from Enchanter perks. ");
+			outputText("Water Aspect now gains additional healing from Healer perks. Metal Aspect only raises unarmed damage, not damage resistance as well. Ether Aspects deals lower base damage, but has a higher weakness modifier to other Aspects compared to other attacks. Poison Aspect lust damage is now 75% of its magical damage, instead of minimal damage. (Demojay)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -160,17 +163,15 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay) (NUZ/Shirane)
 			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
-			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed bugs: Telekinetic Grasp have unlimited powe... duration, 'Elite/Champion/Boss HP bonus' setting, Monsters HP (and Soulforce/Mana) not decreasing on turn end when any effect lowering it, Rathazul keep trying cure Belisa after Nadia done it, Vouivre Oil replacing dragon ears with snake ears & dragon scales with snake scales, Tyrantia & Flitzi forest scene allowing to skip ");
 			outputText("large portion of her storyline, corrupt Celess sex scenes not reseting lust/not giving tease exp, 2nd promotion in Adventure Guld been not accesable, Diva/Project Nightwalker dropping/giving Bat TF instead of Vampire TF, Sky-tier Aether Twins been excluded from some of BFGaunlets bonuses, silly mode event in hills involving minotaurs got it lvl req. below lvl req. for area ");
 			outputText("(fix was removing the lvl req. on it), races with Undeath perk scaling HP from tou instead of lib, Salamander IM not keeping Lustzerker perk from loosing if no longer race with lustzerker ability, Gryphon Statuette only allowing cock tf scene, Weasel Eyes tf not triggering when having Raiju Eyes\n\n");
@@ -237,8 +238,11 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -262,7 +266,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
