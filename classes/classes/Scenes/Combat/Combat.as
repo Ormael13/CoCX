@@ -9432,7 +9432,7 @@ public class Combat extends BaseContent {
             }
         }
         //Apophis Unholy Aura
-        if (player.isRaceCached(Races.APOPHIS) && monster.lustVuln > 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)){
+        if (player.isRaceCached(Races.APOPHIS) && monster.lustVuln > 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel) && !flags[kFLAGS.DISABLE_AURAS]){
             outputText("Your unholy aura seeps into [themonster], slowly and insidiously eroding its resiliance to your unholy charms.\n\n");
             monster.lustVuln += 0.10;
         }
@@ -9450,41 +9450,59 @@ public class Combat extends BaseContent {
                 if (!monster.plural) outputText("The effects of your aura are quite pronounced on [themonster] as [monster he] begins to shake and steal glances at your body.\n\n");
                 else outputText("The effects of your aura are quite pronounced on [themonster] as [monster he] begin to shake and steal glances at your body.\n\n");
             }
-            if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
-            else monster.lust += monster.lustVuln * (2 + rand(4));
+
+            var lustAADmg:Number = (scalingBonusLibido() * 0.5);
+            lustAADmg = teases.teaseAuraLustDamageBonus(monster, lustAADmg);
+            lustAADmg *= monster.lustVuln;
+            lustAADmg = teases.boundLustDamage(lustAADmg, monster);
+            monster.teased(Math.round(lustAADmg), false);
+            bonusExpAfterSuccesfullTease();
+        }
+        //Alraune Nectar
+        if (player.hasPerk(PerkLib.AlrauneNectar) && monster.lustVuln > 0 && !flags[kFLAGS.DISABLE_AURAS]) {
+            if (monster.lust < (monster.maxLust() * 0.5)) outputText("The perfumed scent of your nectar messes with [themonster] but does not have any visible effects just yet. ");
+                else if (monster.lust < (monster.maxLust() * 0.6)) {
+                    if (!monster.plural) outputText("[Themonster] starts to squirm a little from your nectar scent. ");
+                    else outputText("[Themonster] start to squirm a little from your nectar perfumed scent. ");
+                } else if (monster.lust < (monster.maxLust() * 0.75)) outputText("The perfumed scent of your nectar seems to be visibly affecting [themonster], making [monster him] squirm uncomfortably. ");
+                else if (monster.lust < (monster.maxLust() * 0.85)) {
+                    if (!monster.plural) outputText("[Themonster]'s skin colors red as [monster he] inadvertently basks in your scent. ");
+                    else outputText("[Themonster]' skin colors red as [monster he] inadvertently bask in your scent. ");
+                } else {
+                    if (!monster.plural) outputText("The effects of your perfumed scent are quite pronounced on [themonster] as [monster he] begins to shake and steal glances at your body. ");
+                    else outputText("The effects of your perfumed scent are quite pronounced on [themonster] as [monster he] begin to shake and steal glances at your body. ");
+            }
+
+            var lustANDmg:Number = CalcAlchemyPower()/2;
+            lustANDmg = teases.teaseAuraLustDamageBonus(monster, lustANDmg);
+            if (player.hasPerk(PerkLib.RacialParagon)) lustANDmg *= RacialParagonAbilityBoost();
+            lustANDmg *= monster.lustVuln;
+            lustANDmg = teases.boundLustDamage(lustANDmg, monster);
+            monster.teased(Math.round(lustANDmg), false);
+            outputText("\n\n");
+            bonusExpAfterSuccesfullTease();
         }
         //Perfume
-        if ((player.hasPerk(PerkLib.AlrauneNectar) || player.hasStatusEffect(StatusEffects.ArousalPotion)) && monster.lustVuln > 0) {
-            if (player.isAlraune()){
-                if (monster.lust < (monster.maxLust() * 0.5)) outputText("The perfumed scent of your nectar messes with [themonster] but does not have any visible effects just yet.\n\n");
+        if (player.hasStatusEffect(StatusEffects.ArousalPotion) && monster.lustVuln > 0) {
+            if (monster.lust < (monster.maxLust() * 0.5)) outputText("The perfume messes with [themonster] but does not have any visible effects just yet. ");
                 else if (monster.lust < (monster.maxLust() * 0.6)) {
-                    if (!monster.plural) outputText("[Themonster] starts to squirm a little from your nectar scent.\n\n");
-                    else outputText("[Themonster] start to squirm a little from your nectar perfumed scent.\n\n");
-                } else if (monster.lust < (monster.maxLust() * 0.75)) outputText("The perfumed scent of your nectar seems to be visibly affecting [themonster], making [monster him] squirm uncomfortably.\n\n");
+                    if (!monster.plural) outputText("[Themonster] starts to squirm a little from your nectar scent. ");
+                    else outputText("[Themonster] start to squirm a little from your nectar perfumed scent. ");
+                } else if (monster.lust < (monster.maxLust() * 0.75)) outputText("The perfume seems to be visibly affecting [themonster], making [monster him] squirm uncomfortably. ");
                 else if (monster.lust < (monster.maxLust() * 0.85)) {
-                    if (!monster.plural) outputText("[Themonster]'s skin colors red as [monster he] inadvertently basks in your scent.\n\n");
-                    else outputText("[Themonster]' skin colors red as [monster he] inadvertently bask in your scent.\n\n");
+                    if (!monster.plural) outputText("[Themonster]'s skin colors red as [monster he] inadvertently basks in your perfume. ");
+                    else outputText("[Themonster]' skin colors red as [monster he] inadvertently bask in your scent. ");
                 } else {
-                    if (!monster.plural) outputText("The effects of your perfumed scent are quite pronounced on [themonster] as [monster he] begins to shake and steal glances at your body.\n\n");
-                    else outputText("The effects of your perfumed scent are quite pronounced on [themonster] as [monster he] begin to shake and steal glances at your body.\n\n");
-                }
-            } else {
-                if (monster.lust < (monster.maxLust() * 0.5)) outputText("The perfume messes with [themonster] but does not have any visible effects just yet.\n\n");
-                else if (monster.lust < (monster.maxLust() * 0.6)) {
-                    if (!monster.plural) outputText("[Themonster] starts to squirm a little from your nectar scent.\n\n");
-                    else outputText("[Themonster] start to squirm a little from your nectar perfumed scent.\n\n");
-                } else if (monster.lust < (monster.maxLust() * 0.75)) outputText("The perfume seems to be visibly affecting [themonster], making [monster him] squirm uncomfortably.\n\n");
-                else if (monster.lust < (monster.maxLust() * 0.85)) {
-                    if (!monster.plural) outputText("[Themonster]'s skin colors red as [monster he] inadvertently basks in your perfume.\n\n");
-                    else outputText("[Themonster]' skin colors red as [monster he] inadvertently bask in your scent.\n\n");
-                } else {
-                    if (!monster.plural) outputText("The effects of your perfume are quite pronounced on [themonster] as [monster he] begins to shake and steal glances at your body.\n\n");
-                    else outputText("The effects of your perfume are quite pronounced on [themonster] as [monster he] begin to shake and steal glances at your body.\n\n");
-                }
+                    if (!monster.plural) outputText("The effects of your perfume are quite pronounced on [themonster] as [monster he] begins to shake and steal glances at your body. ");
+                    else outputText("The effects of your perfume are quite pronounced on [themonster] as [monster he] begin to shake and steal glances at your body. ");
             }
-            var power:Number = CalcAlchemyPower()/5;
-            if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) monster.lust += monster.lustVuln * 1.2 * (2+power + rand(4));
-            else monster.lust += monster.lustVuln * (2+power+ rand(4));
+
+            var power:Number = player.statusEffectv1(StatusEffects.ArousalPotion);
+            power = teases.teaseAuraLustDamageBonus(monster, power);
+            power *= monster.lustVuln;
+            monster.teased(Math.round(power), false);
+            outputText("\n\n");
+            bonusExpAfterSuccesfullTease();
         }
         //Unicorn and Bicorn aura
         //Unicorn
@@ -9529,51 +9547,27 @@ public class Combat extends BaseContent {
         //Bicorn
         if ((player.hasPerk(PerkLib.AuraOfCorruption) && monster.lustVuln > 0 || Forgefather.lethiciteEaten) && !flags[kFLAGS.DISABLE_AURAS]) {
             var lustDmg:Number = ((scalingBonusIntelligence() * 0.30) + (scalingBonusLibido() * 0.30));
-            if (player.hasPerk(PerkLib.SensualLover)) lustDmg += 2;
-            if (player.hasPerk(PerkLib.Seduction)) lustDmg += 5;
-            lustDmg += player.teaseDmgStat.value;
-            if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) lustDmg += 5;
-            if (player.hasPerk(PerkLib.FlawlessBody)) lustDmg += 10;
-            if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
-            if (player.hasPerk(PerkLib.ArcaneLash)) lustDmg *= 1.5;
-            if (player.hasPerk(PerkLib.JobSeducer)) lustDmg += player.teaseLevel * 3;
-            else lustDmg += player.teaseLevel * 2;
-            if (player.hasPerk(PerkLib.JobCourtesan) && monster.hasPerk(PerkLib.EnemyBossType)) lustDmg *= 1.2;
-            if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemTags.A_REVEALING)) lustDmg *= (1 + ((10 + rand(11)) / 100));
-            if (player.hasPerk(PerkLib.ElectrifiedDesire)) lustDmg *= (1 + (player.lust100 * 0.01));
-            if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) lustDmg *= (1 + combat.historyWhoreBonus());
+            lustDmg = teases.teaseAuraLustDamageBonus(monster, lustDmg);
             if (player.perkv1(IMutationsLib.EclipticMindIM) >= 1) lustDmg *= ((player.cor / 50 / 100)+1);
             if (player.perkv1(IMutationsLib.EclipticMindIM) >= 2) lustDmg *= ((player.cor / 50 / 100)+1);
             if (player.perkv1(IMutationsLib.EclipticMindIM) >= 3) lustDmg *= ((player.cor / 50 / 100)+1);
             if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= RacialParagonAbilityBoost();
-            if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
             if (player.perkv1(IMutationsLib.EclipticMindIM) >= 2 && monster.cor < (player.cor / 2)) lustDmg = Math.round(lustDmg * 2);
             else if (player.perkv1(IMutationsLib.EclipticMindIM) >= 3 && monster.cor < (player.cor / 2)) lustDmg = Math.round(lustDmg * 3);
-            if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
-            if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
-            if (lustDmg > (monster.maxLust()/10)) lustDmg = Math.round(monster.maxLust()/10);
-            outputText("[Themonster] slowly succumbs to [monster his] basest desires as your aura of corruption seeps through [monster him].");
-            if (monster.cor < 100) outputText("Your victims purity is slowly becoming increasingly eroded by your seeping corruption.");
-            lustDmg = Math.round(monster.lustVuln * lustDmg);
-            monster.teased(lustDmg, false);
+
+            outputText("[Themonster] slowly succumbs to [monster his] basest desires as your aura of corruption seeps through [monster him]. ");
+            if (monster.cor < 100) outputText("Your victims purity is slowly becoming increasingly eroded by your seeping corruption. ");
+            
+            lustDmg *= monster.lustVuln;
+            lustDmg = teases.boundLustDamage(lustDmg, monster);
+            monster.teased(Math.round(lustDmg), false);
             outputText("\n\n");
             bonusExpAfterSuccesfullTease();
         }
         //Alraune Pollen
         if (player.hasStatusEffect(StatusEffects.AlraunePollen) && monster.lustVuln > 0) {
             var lustDmgA:Number = (scalingBonusLibido() * 0.5);
-            if (player.hasPerk(PerkLib.SensualLover)) lustDmgA += 2;
-            if (player.hasPerk(PerkLib.Seduction)) lustDmgA += 5;
-            lustDmgA += player.teaseDmgStat.value;
-            if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) lustDmgA += 5;
-            if (player.hasPerk(PerkLib.FlawlessBody)) lustDmgA += 10;
-            if (player.hasPerk(PerkLib.EromancyExpert)) lustDmgA *= 1.5;
-            if (player.hasPerk(PerkLib.JobSeducer)) lustDmgA += player.teaseLevel * 3;
-            else lustDmgA += player.teaseLevel * 2;
-            if (player.hasPerk(PerkLib.JobCourtesan) && monster.hasPerk(PerkLib.EnemyBossType)) lustDmgA *= 1.2;
-            if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemTags.A_REVEALING)) lustDmgA *= (1 + ((10 + rand(11)) / 100));
-            if (player.hasPerk(PerkLib.ElectrifiedDesire)) lustDmgA *= (1 + (player.lust100 * 0.01));
-            if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) lustDmgA *= (1 + combat.historyWhoreBonus());
+            lustDmgA = teases.teaseAuraLustDamageBonus(monster, lustDmgA);
             if (player.hasPerk(PerkLib.RacialParagon)) lustDmgA *= RacialParagonAbilityBoost();
             if (player.perkv1(IMutationsLib.FloralOvariesIM) >= 1) lustDmgA *= 1.2;
             if (player.perkv1(IMutationsLib.FloralOvariesIM) >= 2) {
@@ -9584,24 +9578,23 @@ public class Combat extends BaseContent {
                 if (rand(100) > 69) monster.createStatusEffect(StatusEffects.Fascinated,0,0,0,0);
                 lustDmgA *= 1.3;
             }
-            if (player.armor == armors.ELFDRES && player.isElf()) lustDmgA *= 2;
-            if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmgA *= 2;
-            if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
-            if (monster.lust < (monster.maxLust() * 0.5)) outputText("[Themonster] breathes in your pollen but does not have any visible effects yet.");
+
+            if (monster.lust < (monster.maxLust() * 0.5)) outputText("[Themonster] breathes in your pollen but does not have any visible effects yet. ");
             else if (monster.lust < (monster.maxLust() * 0.6)) {
-                if (!monster.plural) outputText("[Themonster] start to squirm a little. Your pollen's starting to get to them.");
-                else outputText("[Themonster] starts to squirm a little from your pollen.");
-            } else if (monster.lust < (monster.maxLust() * 0.75)) outputText("Your pollen seems to be visibly affecting [themonster], making [monster him] squirm uncomfortably.");
+                if (!monster.plural) outputText("[Themonster] start to squirm a little. Your pollen's starting to get to them. ");
+                else outputText("[Themonster] starts to squirm a little from your pollen. ");
+            } else if (monster.lust < (monster.maxLust() * 0.75)) outputText("Your pollen seems to be visibly affecting [themonster], making [monster him] squirm uncomfortably. ");
             else if (monster.lust < (monster.maxLust() * 0.85)) {
-                if (!monster.plural) outputText("[Themonster]'s skin flushes red, blood in their cheeks as [monster he] inadvertently breathes in your pollen.");
-                else outputText("[Themonster]' skin blushes red as [monster he] inadvertently breathes in your pollen.");
+                if (!monster.plural) outputText("[Themonster]'s skin flushes red, blood in their cheeks as [monster he] inadvertently breathes in your pollen. ");
+                else outputText("[Themonster]' skin blushes red as [monster he] inadvertently breathes in your pollen. ");
             } else {
-                if (!monster.plural) outputText("The effects of your pollen are quite pronounced on [themonster] as [monster he] begin to shake, occasionally stealing glances at your body.");
-                else outputText("The effects of your pollen are quite pronounced on [themonster] as [monster he] begin to shake, stealing glances at your body.");
+                if (!monster.plural) outputText("The effects of your pollen are quite pronounced on [themonster] as [monster he] begin to shake, occasionally stealing glances at your body. ");
+                else outputText("The effects of your pollen are quite pronounced on [themonster] as [monster he] begin to shake, stealing glances at your body. ");
             }
-            if (lustDmgA > (monster.maxLust()/10)) lustDmgA = Math.round(monster.maxLust()/10);
-            lustDmgA = Math.round(monster.lustVuln * lustDmgA);
-            monster.teased(lustDmgA, false);
+
+            lustDmgA *= monster.lustVuln;
+            lustDmgA = teases.boundLustDamage(lustDmgA, monster);
+            monster.teased(Math.round(lustDmgA), false);
             outputText("\n\n");
             bonusExpAfterSuccesfullTease();
         }
@@ -9623,25 +9616,10 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.RacialParagon)) damage0 *= RacialParagonAbilityBoost();
             damage0 = Math.round(damage0);
             dynStats("lus", (Math.round(player.maxLust() * 0.02)), "scale", false);
+            
             var lustDmgF:Number = 20 + rand(6);
             var lustBoostToLustDmg:Number = 0;
-            var bimbo:Boolean   = false;
-            var bro:Boolean     = false;
-            var futa:Boolean    = false;
-            if (player.hasPerk(PerkLib.SensualLover)) {
-                lustDmgF += 2;
-            }
-            if (player.hasPerk(PerkLib.Seduction)) lustDmgF += 5;
-            lustDmgF += player.teaseDmgStat.value;
-            if (bimbo || bro || futa) {
-                lustDmgF += 5;
-            }
-            if (player.hasPerk(PerkLib.FlawlessBody)) lustDmgF += 10;
             lustDmgF += scalingBonusLibido() * 0.1;
-            if (player.hasPerk(PerkLib.EromancyExpert)) lustDmgF *= 1.5;
-            if (player.hasPerk(PerkLib.JobSeducer)) lustDmgF += player.teaseLevel * 3;
-            else lustDmgF += player.teaseLevel * 2;
-            if (player.hasPerk(PerkLib.JobCourtesan) && monster.hasPerk(PerkLib.EnemyBossType)) lustDmgF *= 1.2;
             switch (player.coatType()) {
                 case Skin.FUR:
                     lustDmgF += (1 + player.newGamePlusMod());
@@ -9656,18 +9634,16 @@ public class Combat extends BaseContent {
                     lustDmgF += (4 * (1 + player.newGamePlusMod()));
                     break;
             }
-            if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemTags.A_REVEALING)) lustDmgF *= (1 + ((10 + rand(11)) / 100));
-            if (player.hasPerk(PerkLib.ElectrifiedDesire)) {
-                lustDmgF *= (1 + (player.lust100 * 0.01));
-            }
-            if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) {
-                lustDmgF *= (1 + combat.historyWhoreBonus());
-            }
+            
+            lustDmgF = teases.teaseAuraLustDamageBonus(monster, lustDmgF);
+            if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= RacialParagonAbilityBoost();
+            
             lustBoostToLustDmg += lustDmgF * 0.01;
             lustDmgF *= 0.2;
             if (player.lust100 * 0.01 >= 0.9) lustDmgF += (lustBoostToLustDmg * 140);
             else if (player.lust100 * 0.01 < 0.2) lustDmgF += (lustBoostToLustDmg * 140);
             else lustDmgF += (lustBoostToLustDmg * 2 * (20 - (player.lust100 * 0.01)));
+            
             //Determine if critical tease!
             var crit2:Boolean = false;
             var critChance2:int = 5;
@@ -9680,13 +9656,10 @@ public class Combat extends BaseContent {
                 crit2 = true;
                 lustDmgF *= 1.75;
             }
-            if (player.hasPerk(PerkLib.ChiReflowLust)) lustDmgF *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
-            if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) lustDmgF *= 1.5;
+
             lustDmgF = lustDmgF * monster.lustVuln;
-            if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= RacialParagonAbilityBoost();
-            if (player.armor == armors.ELFDRES && player.isElf()) lustDmgF *= 2;
-            if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmgF *= 2;
             lustDmgF = lustDmgF/2;
+
             lustDmgF = Math.round(lustDmgF);
             outputText("Your opponent is struck by lightning as your lust storm rages on.")
             damage0 = doLightingDamage(damage0, true, true);
@@ -9694,6 +9667,7 @@ public class Combat extends BaseContent {
             monster.teased(lustDmgF, false);
             if (crit2) outputText(" <b>Critical!</b>");
             outputText(" as a bolt falls from the sky!\n\n");
+
             combat.bonusExpAfterSuccesfullTease();
             if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
             if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3){
@@ -9742,7 +9716,7 @@ public class Combat extends BaseContent {
             bonusExpAfterSuccesfullTease();
         }
         //Black Frost Aura
-        if (player.hasPerk(PerkLib.IceQueenGown) && player.isRaceCached(Races.YUKIONNA)) {
+        if (player.hasPerk(PerkLib.IceQueenGown) && player.isRaceCached(Races.YUKIONNA) && !flags[kFLAGS.DISABLE_AURAS]) {
             if (!monster.hasPerk(PerkLib.IceNature)) {
                 var damageBFA:Number = scalingBonusIntelligence();
                 //Determine if critical hit!
