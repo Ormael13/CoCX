@@ -1779,6 +1779,15 @@ public class PerkLib
 		public static const HotNCold:PerkType = mk("Hot N Cold", "Hot N Cold",
 				"You're Hot N Cold and can't cross 75% minimum lust threshold.",
 				"You've chosen the 'Hot N Cold' perk, causing your minimum lust never cross 75% threshold.");
+		public static const HowlingGale:PerkType = mk("Howling Gale", "Howling Gale",
+				"Cumulative 40% damage increase for every subsequent wind spell. Each turn without cast wind spell lower damage by 40% down to normal (100%) damage. Maximum 5 stacks.",
+				"You've chosen the 'Howling Gale' perk. Cumulative 40% damage increase for every subsequent wind spell. Each turn without cast wind spell lower damage by 40% down to normal (100%) damage. Maximum 5 stacks.");
+		public static const HowlingGaleEx:PerkType = mk("Howling Gale (Ex)", "Howling Gale (Ex)",
+				"Increase to cumulative damage by 20%. Penalty for turn without casted wind spell decreased by 10%. Maximum 15 stacks.",
+				"You've chosen the 'Howling Gale (Ex)' perk. Increase to cumulative damage by 20%. Penalty for turn without casted wind spell decreased by 10%. Maximum 15 stacks.");
+		public static const HowlingGaleSu:PerkType = mk("Howling Gale (Su)", "Howling Gale (Su)",
+				"Prevent decay of cumulative damage increase bonus when channeling wind based attack. Penalty for turn without casted wind spell decreased by another 10%. Maximum 75 stacks.",
+				"You've chosen the 'Howling Gale (Su)' perk. Prevent decay of cumulative damage increase bonus when channeling wind based attack. Penalty for turn without casted wind spell decreased by another 10%. Maximum 75 stacks.");
 		public static const ImmovableObject:PerkType = mk("Immovable Object", "Immovable Object",
 				"[if(player.tou>=75)" +
 						"Grants 10% physical damage reduction.</b>" +
@@ -2616,6 +2625,15 @@ public class PerkLib
 						"<b>You aren't tough enough to benefit from this anymore.</b>" +
 						"]",
 				"You've chosen the 'Resolute' perk, granting immunity to stuns and some statuses.</b>");
+		public static const RumblingQuake:PerkType = mk("Rumbling Quake", "Rumbling Quake",
+				"Cumulative 40% damage increase for every subsequent earth spell. Each turn without cast earth spell lower damage by 40% down to normal (100%) damage. Maximum 5 stacks.",
+				"You've chosen the 'Rumbling Quake' perk. Cumulative 40% damage increase for every subsequent earth spell. Each turn without cast earth spell lower damage by 40% down to normal (100%) damage. Maximum 5 stacks.");
+		public static const RumblingQuakeEx:PerkType = mk("Rumbling Quake (Ex)", "Rumbling Quake (Ex)",
+				"Increase to cumulative damage by 20%. Penalty for turn without casted earth spell decreased by 10%. Maximum 15 stacks.",
+				"You've chosen the 'Rumbling Quake (Ex)' perk. Increase to cumulative damage by 20%. Penalty for turn without casted earth spell decreased by 10%. Maximum 15 stacks.");
+		public static const RumblingQuakeSu:PerkType = mk("Rumbling Quake (Su)", "Rumbling Quake (Su)",
+				"Prevent decay of cumulative damage increase bonus when channeling earth based attack. Penalty for turn without casted earth spell decreased by another 10%. Maximum 75 stacks.",
+				"You've chosen the 'Rumbling Quake (Su)' perk. Prevent decay of cumulative damage increase bonus when channeling earth based attack. Penalty for turn without casted earth spell decreased by another 10%. Maximum 75 stacks.");
 		public static const Runner:PerkType = mk("Runner", "Runner",
 				"Increases chances of escaping combat.",
 				"You've chosen the 'Runner' perk, increasing your chances to escape from your foes when fleeing!");
@@ -5695,7 +5713,8 @@ public class PerkLib
                                 || player.hasPerk(FireLord)
                                 || player.hasPerk(Hellfire)
                                 || player.hasPerk(EnlightenedKitsune)
-                                || player.hasPerk(CorruptedKitsune);
+                                || player.hasPerk(CorruptedKitsune)
+								|| player.hasStatusEffect(StatusEffects.SummonedElementalsFireE);
                     }, "Any fire spell")
                     .requireLevel(12)
                     .requireInt(75);
@@ -5734,8 +5753,27 @@ public class PerkLib
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsWaterBall)
                                 || player.hasStatusEffect(StatusEffects.KnowsWaterSphere)
-                                || player.hasPerk(DragonWaterBreath);
+                                || player.hasPerk(DragonWaterBreath)
+								|| (StatusEffects.SummonedElementalsWaterE);
                     }, "Any water spell")
+                    .requireLevel(12)
+                    .requireInt(75);
+			HowlingGale.requireAnyPerk(GrandMage, ArchmageEx)
+					.requirePerk(Channeling)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.hasStatusEffect(StatusEffects.KnowsWindBullet)
+                                || player.hasStatusEffect(StatusEffects.KnowsWindBlast)
+								|| player.hasStatusEffect(StatusEffects.SummonedElementalsAirE);
+                    }, "Any wind spell")
+                    .requireLevel(12)
+                    .requireInt(75);
+			RumblingQuake.requireAnyPerk(GrandMage, ArchmageEx)
+					.requirePerk(Channeling)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.hasStatusEffect(StatusEffects.KnowsStalagmite)
+                                || player.hasStatusEffect(StatusEffects.KnowsShatterstone)
+								|| player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE);
+                    }, "Any earth spell")
                     .requireLevel(12)
                     .requireInt(75);
             // Spell-boosting perks
@@ -5875,7 +5913,7 @@ public class PerkLib
 					.requirePerk(ArcaneRegenerationEpic)
                     .requireInt(125)
                     .requireLevel(24);
-			ElementalBolt.requireAnyPerk(RagingInferno, GlacialStorm, HighVoltage, EclipsingShadow, HighTide)
+			ElementalBolt.requireAnyPerk(RagingInferno, GlacialStorm, HighVoltage, EclipsingShadow, HighTide, HowlingGale, RumblingQuake)
                     .requireInt(125)
                     .requireLevel(24);
             WarMageAdept.requirePerk(WarMageApprentice)
@@ -5930,6 +5968,12 @@ public class PerkLib
                     .requireLevel(30)
                     .requireInt(150);
             HighTideEx.requirePerks(GrandArchmage, HighTide)
+                    .requireLevel(30)
+                    .requireInt(150);
+			HowlingGaleEx.requirePerks(GrandArchmage, HowlingGale)
+                    .requireLevel(30)
+                    .requireInt(150);
+			RumblingQuakeEx.requirePerks(GrandArchmage, RumblingQuake)
                     .requireLevel(30)
                     .requireInt(150);/*
             SpellpowerGrey.requirePerk(SpellpowerGrey)
@@ -6022,6 +6066,12 @@ public class PerkLib
                     .requireLevel(54)
                     .requireInt(300);
             HighTideSu.requirePerks(GrandArchmage3rdCircle, HighTideEx)
+                    .requireLevel(54)
+                    .requireInt(300)
+			HowlingGaleSu.requirePerks(GrandArchmage3rdCircle, HowlingGaleEx)
+                    .requireLevel(54)
+                    .requireInt(300)
+			RumblingQuakeSu.requirePerks(GrandArchmage3rdCircle, RumblingQuakeEx)
                     .requireLevel(54)
                     .requireInt(300);
             //Tier 10 Intelligence perks

@@ -306,5 +306,39 @@ public class BaseCombatContent extends BaseContent {
 	protected function calcTideMod(damage:Number, incCnt:Boolean):Number {
 		return combat.magic.calcTideModImpl(damage, incCnt);
 	}
+	protected function calcQuakeMod(damage:Number, incCnt:Boolean):Number {
+		return combat.magic.calcQuakeModImpl(damage, incCnt);
+	}
+	protected function calcGaleMod(damage:Number, incCnt:Boolean):Number {
+		return combat.magic.calcGaleModImpl(damage, incCnt);
+	}
+
+	protected function maintainInfernoMod():void {
+        combat.magic.maintainInfernoModImpl();
+	}
+
+    protected function maintainGlacialMod():void {
+        combat.magic.maintainGlacialModImpl();
+	}
+
+    protected function maintainVoltageMod():void {
+        combat.magic.maintainVoltageModImpl();
+	}
+
+    protected function maintainEclypseMod():void {
+        combat.magic.maintainEclypseModImpl();
+    }
+
+    protected function maintainTideMod():void {
+        combat.magic.maintainTideModImpl();
+    }
+
+	protected function maintainQuakeMod():void {
+        combat.magic.maintainQuakeModImpl();
+    }
+
+	protected function maintainGaleMod():void {
+        combat.magic.maintainGaleModImpl();
+    }
 }
 }
