@@ -2,6 +2,8 @@ package classes.Scenes.Combat {
 
 import classes.StatusEffectType;
 import classes.StatusEffects;
+import classes.PerkLib;
+import classes.GlobalFlags.kFLAGS;
 
 public class AbstractBloodSoulSkill extends AbstractSoulSkill {
     protected var sfInfusion:Boolean;
@@ -12,11 +14,11 @@ public class AbstractBloodSoulSkill extends AbstractSoulSkill {
         targetType:int,
         timingType:int,
         tags:/*int*/Array,
-        statusEffect:StatusEffectType,
+        knownCondition:*,
         canUseBlood:Boolean = true,
         sfInfusion:Boolean= false
     ) {
-        super(name, desc, targetType, timingType, tags, statusEffect, canUseBlood);
+        super(name, desc, targetType, timingType, tags, knownCondition, canUseBlood);
         this.sfInfusion = sfInfusion;
     }
 
@@ -65,7 +67,9 @@ public class AbstractBloodSoulSkill extends AbstractSoulSkill {
 
     override public function useResources():void {
         //Set last attack type for Blood Soulskill
-        CombatAbility.prototype.useResources.call(this);
+        if (lastAttackType != 0)
+			flags[kFLAGS.LAST_ATTACK_TYPE] = lastAttackType;
+            
         HPChange(sfCost(), false);
 
         if (sfInfusion) {
@@ -86,6 +90,15 @@ public class AbstractBloodSoulSkill extends AbstractSoulSkill {
         var cooldown:int = baseCooldown;
         if (sfInfusion) cooldown += 1;
         return cooldown;
+    }
+
+    protected function bloodPuppiesDamageBonusMod():int {
+        var mod:int = 1;
+
+        if (player.hasPerk(PerkLib.YourPainMyPower)) mod += 1;
+        if (player.hasPerk(PerkLib.BloodDemonIntelligence)) mod += 2;
+
+        return mod;
     }
 }
 }

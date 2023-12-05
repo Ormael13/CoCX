@@ -15,6 +15,7 @@ import classes.PerkLib;
 import classes.PerkTree;
 import classes.PerkType;
 import classes.Races;
+import classes.Scenes.Combat.CombatAbilities;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
@@ -108,19 +109,23 @@ public class PerkMenu extends BaseContent {
 			outputText("\n<b>You can adjust your permanent golems (or skeletons) behaviour during combat.</b>");
 			addButton(11, "Golems/Skeletons",golemsskeletonsbehaviourOptions);
 		}
+		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) {
+			outputText("\n<b>You can adjust your blood puppies behaviour during combat.</b>");
+			addButton(12, "B. Puppies", bpbehaviourOptions);
+		}
 		if (player.hasPerk(PerkLib.JobLeader)) {
 			outputText("\n<b>You can adjust your Will-o'-the-wisp behaviour during combat.</b>");
-			addButton(12, "Will-o'-the-wisp",WOTWbehaviourOptions);
+			addButton(13, "Will-o'-the-wisp",WOTWbehaviourOptions);
 		}
 		//addButton(10, "Number of", EngineCore.doNothing);
 		//addButton(11, "perks: " + player.perks.length, EngineCore.doNothing);
 		if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
 			outputText("\n\n<b>Simplified Pre-Turn is enabled. The strongest possible golems and elementals are selected to attack. The wisp always attacks.</b>");
-			addButton(13, "S.PTurn(On)", simplifiedPreTurnOff).hint("Click to disable Simplified Pre-Turn.");
+			addButton(14, "S.PTurn(On)", simplifiedPreTurnOff).hint("Click to disable Simplified Pre-Turn.");
 		}
 		else {
 			outputText("\n\n<b>Simplified Pre-Turn is disabled. You'll need to click through your allies' turns, but you'll be able to choose their actions (if it's possible).\nNote: there is another switch for Will-o-Wisp in battle menu (page 3).</b>");
-			addButton(13, "S.PTurn(Off)", simplifiedPreTurnOn).hint("Click to enable Simplified Pre-Turn.");
+			addButton(14, "S.PTurn(Off)", simplifiedPreTurnOn).hint("Click to enable Simplified Pre-Turn.");
 		}
 	}
 
@@ -194,12 +199,18 @@ public class PerkMenu extends BaseContent {
 		}
 		// tease healing
 		if (player.hasPerk(PerkLib.FueledByDesire) || player.armor == armors.ELFDRES) {
-			outputText("Combat Tease can cause lust reduction: " + (
+			outputText("\n\nCombat Tease can cause lust reduction: " + (
 					flags[kFLAGS.COMBAT_TEASE_HEALING] == 0 ? "Enabled" : "Disabled"
 			));
 			addButton(10, "C. Tease Heal", curry(toggleFlagMisc, kFLAGS.COMBAT_TEASE_HEALING));
 		}
-		//
+		// your pain, my power wrath generation
+		if (player.hasPerk(PerkLib.YourPainMyPower)) {
+			outputText("\n\nYou choose whether wrath is generated while healing from blood: " + (
+				flags[kFLAGS.YPMP_WRATH_GEN] == 0 ? "Enabled" : "Disabled"
+			));
+			addButton(11, "YPMP Wrath", curry(toggleFlagMisc, kFLAGS.YPMP_WRATH_GEN));
+		}
 		addButton(14, "Back", displayPerks);
 	}
 
@@ -644,6 +655,45 @@ public class PerkMenu extends BaseContent {
             flags[kFLAGS.NECROMANCER_SKELETONS] = (attacking)?1:0;
             golemsskeletonsbehaviourOptions();
         }
+	}
+
+	public function bpbehaviourOptions():void {
+		clearOutput();
+		menu();
+		outputText("You can choose how your blood puppies will behave during each fight.\n\n");
+		outputText("Current Behaviour: ");
+		switch(flags[kFLAGS.BLOOD_PUPPY_SUMMONS]) {
+			case 0: outputText("Not attacking\n\n");
+					break;
+			case 1: outputText("Blood Swipe\n\n");
+					outputText("Ability Information (Will attack once per turn):\n\n");
+					outputText(CombatAbilities.BPBloodSwipe.fullDescription(null));
+					break;
+			case 2: outputText("Blood Dewdrops\n\n");
+					outputText("Ability Information (Will attack once per turn):\n\n");
+					outputText(CombatAbilities.BPBloodDewdrops.fullDescription(null));
+					break;
+			case 3: outputText("Heart Seeker\n\n");
+					outputText("Ability Information (Will attack once per turn):\n\n");
+					outputText(CombatAbilities.BPHeartSeeker.fullDescription(null));
+					break;
+		}
+
+		var setflag:Function = curry(setFlag,bpbehaviourOptions, kFLAGS.BLOOD_PUPPY_SUMMONS);
+		if (flags[kFLAGS.BLOOD_PUPPY_SUMMONS] != 0) {
+			addButton(0, "Blood Swipe", setflag, 1)
+				.disableIf(flags[kFLAGS.BLOOD_PUPPY_SUMMONS] == 1);
+			addButton(1, "Blood Dewdrops", setflag, 2)
+				.disableIf(flags[kFLAGS.BLOOD_PUPPY_SUMMONS] == 2);
+			addButton(2, "Heart Seeker", setflag, 3)
+				.disableIf(flags[kFLAGS.BLOOD_PUPPY_SUMMONS] == 3);
+		}
+		addButton(10, "Not helping", setflag, 0)
+			.disableIf(flags[kFLAGS.BLOOD_PUPPY_SUMMONS] == 0);
+		addButton(11, "Helping", setflag, 1)
+			.disableIf(flags[kFLAGS.BLOOD_PUPPY_SUMMONS] != 0);
+		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu, false);
+		else addButton(14, "Back", displayPerks);
 	}
 
 	public function DarkRitualOption():void {

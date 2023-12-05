@@ -928,28 +928,7 @@ public class Combat extends BaseContent {
 			}
 		}
 		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) {
-			var bloodForBloodGod:Number = (player.HP - player.minHP());
-			bd = buttons.add("B.P. BS", bloodSwipeBloodPuppies).hint("Command Blood Puppies to attack enemy/ies with Blood Swipe. Would deal 2x dmg to group enemies. (Can be used once per turn and will not end PC combat turn after use)  Blood Cost: " + spellCostBlood(20) + "");
-			if ((bloodForBloodGod - 1) < spellCostBlood(20)) {
-				bd.disable("Your hp is too low to summon your Blood Puppies.");
-			}
-			else if (flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] == 1) {
-				bd.disable("You've already commanded your Puppies to attack this turn.");
-			}
-			bd = buttons.add("B.P. HS", heartSeekerBloodPuppies).hint("Command Blood Puppies to attack enemy/ies with Heart Seeker. Would deal 10x dmg to group enemies. (Can be used once per turn and will not end PC combat turn after use)  Blood Cost: " + spellCostBlood(40) + "");
-			if ((bloodForBloodGod - 1) < spellCostBlood(40)) {
-				bd.disable("Your hp is too low to allow Blood Puppies use this soulskill.");
-			}
-			else if (flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] == 1) {
-				bd.disable("Your already commanded Puppies to attack this turn.");
-			}
-			bd = buttons.add("B.P. BD", bloodDewdropsBloodPuppies).hint("Command Blood Puppies to attack enemy/ies with Blood Dewdrops. Would deal 10x dmg to group enemies. (Can be used once per turn and will not end PC combat turn after use)  Blood Cost: " + spellCostBlood(80) + "");
-			if ((bloodForBloodGod - 1) < spellCostBlood(80)) {
-				bd.disable("Your hp is too low to allow Blood Puppies use this soulskill.");
-			}
-			else if (flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] == 1) {
-				bd.disable("Your already commanded Puppies to attack this turn.");
-			}
+            bd = buttons.add("B. Puppies",  CoC.instance.perkMenu.bpbehaviourOptions).hint("You can choose how your blood puppies will behave during battle.\n\n");
 		}
 		if (player.hasPerk(PerkLib.HiddenJobAsura)) {
 			if (player.statStore.hasBuff("AsuraForm")) {
@@ -1665,6 +1644,25 @@ public class Combat extends BaseContent {
                     ui.doElementalTurn();
                 } else {
                     baseelementalattacks(attackingElementalTypeFlag);
+                }
+            }
+        }
+        if (ui.isBloodPuppiesTurn()) {
+            var bloodAbility:CombatAbility;
+            switch (flags[kFLAGS.BLOOD_PUPPY_SUMMONS]) {
+                case 1: bloodAbility = CombatAbilities.BPBloodSwipe;
+                        break;
+                case 2: bloodAbility = CombatAbilities.BPBloodDewdrops;
+                        break;
+                case 3: bloodAbility = CombatAbilities.BPHeartSeeker;
+                        break;
+            }
+
+            if (bloodAbility) {
+                if (bloodAbility.isKnownAndUsable) {
+                    bloodAbility.perform();
+                } else {
+                    ui.doBloodPuppiesTurn();
                 }
             }
         }
@@ -8222,7 +8220,7 @@ public class Combat extends BaseContent {
 			if (MonsterIsBleeding() && player.hasPerk(PerkLib.YourPainMyPower)) {
 				player.HP += damage;
 				if (player.HP > (player.maxHP() + player.maxOverHP())) player.HP = player.maxHP() + player.maxOverHP();
-				EngineCore.WrathChange(WrathGains);
+				if (flags[kFLAGS.YPMP_WRATH_GEN] == 0) EngineCore.WrathChange(WrathGains);
 			}
 			else monster.wrath += WrathGains;
             if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
@@ -8299,7 +8297,7 @@ public class Combat extends BaseContent {
 			if (MonsterIsBleeding() && player.hasPerk(PerkLib.YourPainMyPower)) {
 				player.HP += damage;
 				if (player.HP > (player.maxHP() + player.maxOverHP())) player.HP = player.maxHP() + player.maxOverHP();
-				EngineCore.WrathChange(WrathGains);
+				if (flags[kFLAGS.YPMP_WRATH_GEN] == 0) EngineCore.WrathChange(WrathGains);
 			}
 			else monster.wrath += WrathGains;
             if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
@@ -15821,6 +15819,18 @@ public function bloodDewdropsBloodPuppies():void {
         menu();
         addButton(0, "Next", combatMenu, false);
     }
+}
+
+public function notAttackWithBloodPuppies():void {
+    clearOutput();
+    menu();
+    outputText("You decided not to attack with your blood puppies this turn\n\n");
+    
+    //Set flag to show that you've already chosen not to attack this turn
+    flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] = 1;
+
+    if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn))
+		addButton(0, "Next", combatMenu, false);
 }
 
 public function asuraformCost():Number {
