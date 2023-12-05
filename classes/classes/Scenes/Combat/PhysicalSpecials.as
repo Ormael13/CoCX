@@ -2873,12 +2873,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function AlraunePollen():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		var pollen:Number = monster.lustVuln * (2 + rand(4));
+		var pollen:Number = monster.lustVuln * (combat.CalcAlchemyPower() * 0.05) * (2 + rand(4));
 		if (player.headjewelryName == "pair of Golden Naga Hairpins") pollen *= 1.1;
 		if (player.hasPerk(PerkLib.RacialParagon)) pollen *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) pollen *= 1.50;
-		monster.lust += pollen;
-		outputText("You send a cloud of your pollen outward into the air, smiling lustfully at your opponent. Sneezing slightly as they inhale the potent pollen, they begin showing clear signs of arousal. Just how long can they resist coming to pollinate you now? Not for long, you hope. (" + pollen + ")\n\n");
+		outputText("You send a cloud of your pollen outward into the air, smiling lustfully at your opponent. Sneezing slightly as they inhale the potent pollen, they begin showing clear signs of arousal. Just how long can they resist coming to pollinate you now? Not for long, you hope. ");
+		monster.teased(pollen, false);
+		outputText("\n\n");
 		player.createStatusEffect(StatusEffects.AlraunePollen,0,0,0,0);
 		enemyAI();
 	}

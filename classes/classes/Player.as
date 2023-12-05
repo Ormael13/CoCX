@@ -7383,6 +7383,18 @@ use namespace CoC;
 			}
 		}
 
+		/**
+		 * Checks to see if the player has any peroidic auras available to them
+		 */
+		public function hasCombatAura():Boolean {
+			return isRaceCached(Races.APOPHIS)
+				|| hasPerk(PerkLib.ArousingAura)
+				|| hasPerk(PerkLib.AuraOfCorruption)
+				|| hasPerk(PerkLib.AuraOfPurity)
+				|| hasPerk(PerkLib.AlrauneNectar)
+				|| (hasPerk(PerkLib.IceQueenGown) && isRaceCached(Races.YUKIONNA));
+		}
+
 		public override function takeLustDamage(lustDmg:Number, display:Boolean = false, applyRes:Boolean = true):Number{
 			var x:Number = super.takeLustDamage(lustDmg, display, applyRes);
 			raijuSuperchargedCheck();

@@ -98,6 +98,45 @@ public class CombatTeases extends BaseCombatContent {
 		return tBLD;
 	}
 
+	public function teaseAuraLustDamageBonus(monster:Monster, lustDmg:Number = 0):Number {
+		if (player.hasPerk(PerkLib.SensualLover)) lustDmg += 2;
+		if (player.hasPerk(PerkLib.Seduction)) lustDmg += 5;
+        lustDmg += player.teaseDmgStat.value;
+		if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) lustDmg += 5;
+		if (player.hasPerk(PerkLib.FlawlessBody)) lustDmg += 10;
+		if (player.hasPerk(PerkLib.JobSeducer)) lustDmg += player.teaseLevel * 3;
+		else lustDmg += player.teaseLevel * 2;
+		if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
+		if (player.hasPerk(PerkLib.ArcaneLash)) lustDmg *= 1.5;
+		if (player.hasPerk(PerkLib.JobCourtesan) && monster.hasPerk(PerkLib.EnemyBossType)) lustDmg *= 1.2;
+		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemTags.A_REVEALING)) lustDmg *= (1 + ((10 + rand(11)) / 100));
+		if (player.hasPerk(PerkLib.ElectrifiedDesire)) lustDmg *= (1 + (player.lust100 * 0.01));
+		if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) lustDmg *= (1 + combat.historyWhoreBonus());
+		if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) lustDmg *= 1.2;
+        if (player.hasPerk(PerkLib.ChiReflowLust)) lustDmg *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
+		if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
+		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
+
+		return lustDmg;
+	}
+
+	/**
+	 * Function used to ensure that aura damage can onlu deals a certain % of lust,
+	 * even taking difiiculty settings into account.
+	 * @param lustDmg (Number) - inital damage to be checked
+	 * @param bound (iny) - Upper bound (out of 100) % of lust attack can inflict
+	 * @return lustDmg (Number) - final damage, bounded to the % deamage if needed
+	 */
+	public function boundLustDamage(lustDmg:Number, monster:Monster, bound:int = 10):Number {
+		var monsterBoundLust:Number = monster.maxLust() * (bound / 100);
+
+		if ((lustDmg * (1 / monster.damageReductionBasedOnDifficulty())) > monsterBoundLust) {
+			lustDmg = monsterBoundLust * monster.damageReductionBasedOnDifficulty();
+		}
+
+		return lustDmg;
+	}
+
 	// Just text should force the function to purely emit the test text to the output display, and not have any other side effects
 	public function tease(justText:Boolean = false):void {
 		if (!justText) clearOutput();
