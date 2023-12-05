@@ -773,9 +773,12 @@ public class CombatUI extends BaseCombatContent {
 			addButton(0, "Next", combatMenu, false);
 		}
 		addButton(0, "None", combat.notAttackWithBloodPuppies).hint("You forfeit potential attack of your blood puppies. Would skip to next minion attack/your main turn.");
-		addButton(1, "Blood Swipe", confirmFunction, CombatAbilities.BPBloodSwipe.perform);
-		addButton(2, "Blood Dewdrops", confirmFunction, CombatAbilities.BPBloodDewdrops.perform);
-		addButton(3, "Heart Seeker", confirmFunction, CombatAbilities.BPHeartSeeker.perform);
+		addButton(1, "Blood Swipe", confirmFunction, CombatAbilities.BPBloodSwipe.perform)
+			.disableIf(!CombatAbilities.BPBloodSwipe.isKnownAndUsable);
+		addButton(2, "Blood Dewdrops", confirmFunction, CombatAbilities.BPBloodDewdrops.perform)
+			.disableIf(!CombatAbilities.BPBloodDewdrops.isKnownAndUsable);
+		addButton(3, "Heart Seeker", confirmFunction, CombatAbilities.BPHeartSeeker.perform)
+			.disableIf(!CombatAbilities.BPHeartSeeker.isKnownAndUsable);
 		
 	}
 
