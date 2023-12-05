@@ -145,14 +145,15 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Anty Dexterity. Gained by having four ant arms. Effect: Strong ant arms boost your strength and allow wielding dual weapons <i>or</i> large weapons.\n");
 			outputText("-Adjusted Elemental Aspects: All Damaging Aspects given similar damage bonuses to a standard epic elemental attack. All aspects given mana cost similar to an epic elemental attack. Damaging Elemental Aspect attacks can now crit. Air Aspect no longer gets additional duration from intelligence and wisdom. Air and Earth Aspects now get additional duration from Enchanter perks. ");
 			outputText("Water Aspect now gains additional healing from Healer perks. Metal Aspect only raises unarmed damage, not damage resistance as well. Ether Aspects deals lower base damage, but has a higher weakness modifier to other Aspects compared to other attacks. Poison Aspect lust damage is now 75% of its magical damage, instead of minimal damage. (Demojay)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Arousing Aura now scales from libido, rather than single digit damage. Arousal Potion now uses the correct damage scaling, rather than copying Alraune Nectar. Alraune Nectar now gains bonuses from racial paragon. Alraune Nectar, Apophis Unholy Aura and Black Frost Aura can now be suppressed in Misc menu. ");
+			outputText("Lust Damage bounding for auras to 10% now applies after monster lust vulnerability and difficulty scaling. This will mean that auras cannot 1-shot weak enemies, but will deal more damage against stronger enemies. All lust auras now give tease exp, to align them with 'Aura of Corruption'. (Demojay)\n");
+			outputText("-Added Howling Gale/ Rumbling Earth bonuses to Elemental fusion attacks. Wind Mod added to 'Hurricane' and 'Wind Scythe' magical specials. Wind Mod added to Wind Spells. Earth Mod added to Earth Spells. 'Aura of Purity' and 'Black Frost Aura' Auras now only maintain current counter for fire/ice cumulative damage perks. (Demojay)\n");
+			outputText("-New tier 2 intelligence lvl-up perk (by Demojay): Howling Gale. Req. Grand Mage & Channeling perks, 75+ int and any wind spell or special. Effect: Cumulative 40% damage increase for every subsequent wind spell. Each turn without cast wind spell lower damage by 40% down to normal (100%) damage. Maximum 5 stacks.\n"); 
+			outputText("-New tier 5 intelligence lvl-up perk (by Demojay): Howling Gale (Ex). Req. Howling Gale & Grand Archmage perks, 150+ int. Effect: Increase to cumulative damage by 20%. Penalty for turn without casted wind spell decreased by 10%. Maximum 15 stacks.\n");
+			outputText("-New tier 9 intelligence lvl-up perk (by Demojay): Howling Gale (Su). Req. Howling Gale (Ex) & Grand Archmage (3rd circle) perks, 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling wind based attack. Penalty for turn without casted wind spell decreased by another 10%. Maximum 75 stacks.\n");
+			outputText("-New tier 2 intelligence lvl-up perk (by Demojay): Rumbling Earth. Req. Grand Mage & Channeling perks, 75+ int and any earth spell or special. Effect: Cumulative 40% damage increase for every subsequent earth spell. Each turn without cast earth spell lower damage by 40% down to normal (100%) damage. Maximum 5 stacks.\n");
+			outputText("-New tier 5 intelligence lvl-up perk (by Demojay): Rumbling Earth (Ex). Req. Rumbling Earth & Grand Archmage perks, 150+ int. Effect: Increase to cumulative damage by 20%. Penalty for turn without casted earth spell decreased by 10%. Maximum 15 stacks.\n");
+			outputText("-New tier 9 intelligence lvl-up perk (by Demojay): Rumbling Earth (Su). Req. Rumbling Earth (Ex) & Grand Archmage (3rd circle) perks, 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling earth based attack. Penalty for turn without casted earth spell decreased by another 10%. Maximum 75 stacks.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -172,6 +173,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Fixed bugs: Telekinetic Grasp have unlimited powe... duration, 'Elite/Champion/Boss HP bonus' setting, Monsters HP (and Soulforce/Mana) not decreasing on turn end when any effect lowering it, Rathazul keep trying cure Belisa after Nadia done it, Vouivre Oil replacing dragon ears with snake ears & dragon scales with snake scales, Tyrantia & Flitzi forest scene allowing to skip ");
 			outputText("large portion of her storyline, corrupt Celess sex scenes not reseting lust/not giving tease exp, 2nd promotion in Adventure Guld been not accesable, Diva/Project Nightwalker dropping/giving Bat TF instead of Vampire TF, Sky-tier Aether Twins been excluded from some of BFGaunlets bonuses, silly mode event in hills involving minotaurs got it lvl req. below lvl req. for area ");
 			outputText("(fix was removing the lvl req. on it), races with Undeath perk scaling HP from tou instead of lib, Salamander IM not keeping Lustzerker perk from loosing if no longer race with lustzerker ability, Gryphon Statuette only allowing cock tf scene, Weasel Eyes tf not triggering when having Raiju Eyes\n\n");
@@ -220,9 +224,6 @@ public class Changelog extends BaseContent
 			outputText("-New tier ?? misc lvl-up perk: Armor. Req. Weapon perk. Effect: increasing armor proficiency. (+5% phys/mag resistance)\n");
 			outputText("-New tier ?? misc lvl-up perk: Alliance. Req. Fellowship perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier ?? misc lvl-up perk: Sex Deity. Req. Sex Champion perk. Effect: +15% tease dmg.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

@@ -208,7 +208,7 @@ public class Hair extends BodyPart {
 	EnumValue.add(Types, PEAFOWL, "PEAFOWL", {
 		name:"p.feather",
 		shortDesc: "peafowl feather-{hair}",
-		appearanceDesc: "Your {hairInfo} is made completely out of feathers rather than actual strands. You also sport crests on head, small feathers that stick straight up, like a Mohawk.",
+		appearanceDesc: "Your {hairInfo} is made completely out of feathers rather than actual strands. A beautiful crest adorns your head with small feathers that stick straight up, like a Mohawk.",
 		ignoresStyle: true
 	});
 

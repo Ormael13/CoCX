@@ -481,7 +481,7 @@ public class HairTransformations extends MutationsHelper {
 				if (doOutput) {
 					var desc: String = "";
 
-					desc += "A tingling starts in your scalp, getting worse and worse until you're itching like mad. When you pull back your hand, you're treated to the sight of downy fluff trailing from your fingernails. <b>You have feathers for hair, just like a peafowl!</b>";
+					desc += "A tingling starts in your scalp, like an itch growing with fervent intensity until you're scratching it madly. When you pull back your hand, you're treated to the sight of downy fluff trailing from your fingernails. <b>You have feathers for hair, just like a peafowl!</b>";
 
 					outputText(desc);
 				}
