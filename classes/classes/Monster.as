@@ -2751,7 +2751,7 @@ import classes.Scenes.Combat.CombatAbilities;
 		}
 
 		/**
-		 * <p>Combat.doTrueDamage() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <p>Combat.doAI() Override Series - Part 1 (Ongoing maybe)</p>
 		 * <ul>
 		 *     <li>Called right before monster HP getting deducted</li>
 		 *     <li>Used to handle status effect that cancel doAI()</li>
