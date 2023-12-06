@@ -336,6 +336,16 @@ public class CombatAbilities {
 		ScarletSpiritCharge
 	]
 
+	public static const BPBloodSwipe:BloodSwipePuppiesSkill = new BloodSwipePuppiesSkill();
+	public static const BPBloodDewdrops:BloodDewdropsPuppiesSkill = new BloodDewdropsPuppiesSkill();
+	public static const BPHeartSeeker:HeartSeekerPuppiesSkill = new HeartSeekerPuppiesSkill();
+
+	public static const ALL_BLOOD_PUPPY_SOULSKILLS:/*CombatAbility*/Array = [
+		BPBloodSwipe,
+		BPBloodDewdrops,
+		BPHeartSeeker
+	]
+
 	public static const EAspectFire:EAspectFireSkill = new EAspectFireSkill();
 	public static const EAspectAir:EAspectAirSkill = new EAspectAirSkill();
 	public static const EAspectEarth:EAspectEarthSkill = new EAspectEarthSkill();
@@ -379,7 +389,8 @@ public class CombatAbilities {
 			.concat(ALL_SPELLS)
 			.concat(ALL_SOULSKILLS)
 			.concat(ALL_MAGICAL_SPECIALS)
-			.concat(ALL_ELEMENTAL_ASPECTS);
+			.concat(ALL_ELEMENTAL_ASPECTS)
+			.concat(ALL_BLOOD_PUPPY_SOULSKILLS);
 	;
 	
 	function CombatAbilities() {

@@ -104,16 +104,19 @@ public class AbstractSoulSkill extends CombatAbility {
 		combat.EruptingRiposte();
 	}
 
-	protected function endTurnByBloodSkillUse(damage:Number, display:Boolean = true):void {
+	protected function endTurnByBloodSkillUse(damage:Number, display:Boolean = true, endOfTurn:Boolean = true):void {
 		if (rand(20) < 4) {
 			if (monster.hasStatusEffect(StatusEffects.Hemorrhage)) monster.removeStatusEffect(StatusEffects.Hemorrhage);
 			monster.createStatusEffect(StatusEffects.Hemorrhage, 2, 0.05, 0, 0);
 			if (display) outputText(" The attack leaves many bloody gashes.");
 		}
 		if (display) outputText("\n\n");
-		checkAchievementDamage(damage);
-		combat.WrathGenerationPerHit2(15);
-		combat.heroBaneProc(damage);
+
+        if (endOfTurn) {
+            checkAchievementDamage(damage);
+            combat.WrathGenerationPerHit2(15);
+            combat.heroBaneProc(damage);
+        }
 	}    
 }
 }

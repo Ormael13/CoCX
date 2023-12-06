@@ -558,6 +558,8 @@ public class CombatUI extends BaseCombatContent {
 				doEpicElementalTurn();
 			if (isElementalTurn())
 				doElementalTurn();
+			if (isBloodPuppiesTurn())
+				doBloodPuppiesTurn();
 			flushOutputTextToGUI();
 			//UNIQUE OPTIONS - No changes applied, player turn, no status/CC
 			{
@@ -752,6 +754,32 @@ public class CombatUI extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsPoison)) addButton(11, "Poison", combat.baseelementalattacks, Combat.POISON);
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsPurity)) addButton(12, "Purity", combat.baseelementalattacks, Combat.PURITY);
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) addButton(13, "Corruption", combat.baseelementalattacks, Combat.CORRUPTION);
+	}
+
+	public function isBloodPuppiesTurn():Boolean {
+		return player.hasPerk(PerkLib.MyBloodForBloodPuppies) && flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] != 1 && flags[kFLAGS.BLOOD_PUPPY_SUMMONS] != 0;
+	}
+
+	public function doBloodPuppiesTurn():void {
+		clearOutput();
+		outputText("\n\nWould you like your blood puppies to attack?");
+		outputText("\n<b>You can enable \"Simplified Pre-PC Turn\" in Perk menu to change their behavior to automatic and avoid pressing the button every time.</b>");
+		menu();
+
+		var confirmFunction:Function = function(performFunc:Function):void {
+			clearOutput();
+			performFunc();
+			menu();
+			addButton(0, "Next", combatMenu, false);
+		}
+		addButton(0, "None", combat.notAttackWithBloodPuppies).hint("You forfeit potential attack of your blood puppies. Would skip to next minion attack/your main turn.");
+		addButton(1, "Blood Swipe", confirmFunction, CombatAbilities.BPBloodSwipe.perform)
+			.disableIf(!CombatAbilities.BPBloodSwipe.isKnownAndUsable);
+		addButton(2, "Blood Dewdrops", confirmFunction, CombatAbilities.BPBloodDewdrops.perform)
+			.disableIf(!CombatAbilities.BPBloodDewdrops.isKnownAndUsable);
+		addButton(3, "Heart Seeker", confirmFunction, CombatAbilities.BPHeartSeeker.perform)
+			.disableIf(!CombatAbilities.BPHeartSeeker.isKnownAndUsable);
+		
 	}
 
 	public function isCompanionTurn(num:int):Boolean {
