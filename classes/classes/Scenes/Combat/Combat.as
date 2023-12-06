@@ -2128,7 +2128,14 @@ public class Combat extends BaseContent {
     public function baseMechMeleeAttacksDamage():void {
         var damage:Number = 0;
 		var weapon:String = "";
-        if (player.isInGoblinMech()) weapon = "saw blade";
+        if (player.isInGoblinMech()) { 
+            weapon = "saw blade";
+
+            //Only Mech friendly twin weapons count whenusing an goblin mech
+            if (player.weapon == weapons.TRIPPER1 || player.weapon == weapons.TRIPPER2 || player.weapon == weapons.TMACGRSW) {
+                weapon = "saw blades";
+            }
+        }
 		if (player.vehicles == vehicles.HB_MECH) weapon = "twin power blades";
         //------------
         // DAMAGE
@@ -2195,7 +2202,15 @@ public class Combat extends BaseContent {
         } else {
             outputText("You activate the mech’s "+weapon+", intent on slicing your opponent in half. [Themonster] takes ");
             doPhysicalDamage(damage, true, true);
-			if (player.vehicles == vehicles.HB_MECH) doPhysicalDamage(damage, true, true);
+            if (player.hasStatusEffect(StatusEffects.ChargeWeapon) && !player.isUnarmedCombat()) {
+                doMagicDamage(Math.round(damage * 0.2), true, true);
+            }
+			if (weapon == "twin power blades" || weapon == "saw blades") { 
+                doPhysicalDamage(damage, true, true);
+                if (player.hasStatusEffect(StatusEffects.ChargeWeapon) && !player.isUnarmedCombat()) {
+                    doMagicDamage(Math.round(damage * 0.2), true, true);
+                }
+            }
             outputText(" damage.");
             if (crit) {
                 outputText("<b>Critical! </b>");
@@ -2209,7 +2224,7 @@ public class Combat extends BaseContent {
         outputText("\n");
 
         //Chainsword weapon procs
-        if (monster.canMonsterBleed() && (player.weapon == weapons.RIPPER1 ||  player.weapon == weapons.TRIPPER1 || player.weapon == weapons.RIPPER2 || player.weapon == weapons.TRIPPER2)) {
+        if (monster.canMonsterBleed() && (player.isUsingMechMeleeWeapons())) {
             if (monster.hasStatusEffect(StatusEffects.Hemorrhage))  monster.removeStatusEffect(StatusEffects.Hemorrhage);
             if (player.weapon == weapons.MACGRSW || player.weapon == weapons.TMACGRSW) monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.02, 0, 0);
             else monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.05, 0, 0);
