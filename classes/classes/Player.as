@@ -1496,7 +1496,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.HiddenDualMomentum) && hasPerk(PerkLib.GigantGripEx) && weaponSpecials("Dual Massive") && str >= 150 && spe >= 100) {
 				attack += (((str + spe) - 200) * 0.2);
 			}//20-60-100
-			if (hasPerk(PerkLib.LightningStrikes) && spe >= 60 && (!weaponSpecials("Dual Massive") || !weaponSpecials("Massive") || !weaponSpecials("Large") || !weaponSpecials("Dual Large") || !weaponSpecials("Small") || !weaponSpecials("Dual Small") || !isFistOrFistWeapon())) {
+			if (hasPerk(PerkLib.LightningStrikes) && spe >= 60 && (!weaponSpecials("Dual Massive") && !weaponSpecials("Massive") && !weaponSpecials("Large") && !weaponSpecials("Dual Large") && !weaponSpecials("Small") && !weaponSpecials("Dual Small") && !isFistOrFistWeapon())) {
 				attack += ((spe - 50) * 0.3);
 			}//45-105-165
 			if (weaponSpecials("Hybrid") && shieldName == "nothing"){

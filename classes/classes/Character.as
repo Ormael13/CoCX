@@ -733,19 +733,17 @@ import classes.Scenes.NPCs.Forgefather;
 			if (hasPerk(PerkLib.ICastAsuraFist)) max1 += maxOverWrath();
 			else max1 += maxWrath();
 			var max2:Number = 0.75;
-			if (flags[kFLAGS.GAME_DIFFICULTY] < 2) max2 += 0.25;
-			//if (hasPerk(PerkLib.)) max2 += 0.1;
-			if (necklaceName == "Wrathless") max2 += 0.25;
+			if (flags[kFLAGS.GAME_DIFFICULTY] < 2 || necklaceName == "Wrathless") max2 += 0.25;
 			max1 *= max2;
 			max1 = Math.round(max1);
 			return max1;
 		}
 		public function maxSafeWrathSpellcasting():Number {
 			var max1:Number = 0;
-			if (hasPerk(PerkLib.ICastAsuraFist) || hasStatusEffect(StatusEffects.BloodMage)) max1 += maxOverWrath();
+			if (hasPerk(PerkLib.ICastAsuraFist)) max1 += maxOverWrath();
 			else max1 += maxWrath();
 			var max2:Number = 0.5;
-			if (flags[kFLAGS.GAME_DIFFICULTY] < 2 || necklaceName == "Wrathless" || hasStatusEffect(StatusEffects.BloodMage)) max2 += 0.5;
+			if (flags[kFLAGS.GAME_DIFFICULTY] < 2 || necklaceName == "Wrathless") max2 += 0.5;
 			if (hasPerk(PerkLib.MagesWrath)) max2 += 0.05;
 			if (hasPerk(PerkLib.MagesWrathEx)) max2 += 0.05;
 			if (hasPerk(PerkLib.WarMageNovice)) max2 += 0.05;
