@@ -10,8 +10,13 @@ import classes.Scenes.Combat.AbstractSpell;
 import classes.Scenes.Combat.CombatAbilities;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.SceneLib;
+import classes.StatusEffectType;
 import classes.StatusEffects;
 import classes.internals.WeightedDrop;
+
+import flash.utils.Dictionary;
+
+import mx.formatters.NumberFormatter;
 
 public class Lethice extends Monster
 	{
@@ -64,6 +69,29 @@ public class Lethice extends Monster
 			if (_fightPhase == 1)
 			{
 				str += "Lethice is the epitome of all things demonic. From her luxurious purple hair, interwoven with black roses, to her pink skin and goat-like horns, she is the perfect image of sensual, enticing corruption. Tall heels of bone complement her revealing, black clothes. They look almost like a nun’s habit, but pared down to an almost fetishistic extreme. Her slim breasts provide just a hint of shape to the diaphanous fabric, a promise of feminine delights instead of the garish acres of flesh her outfit displays. Outsized wings, like those of a dragon, hold Lethice aloft as she zips about her throne room, gathering her corruptive magics. The strangely slit pupils of her black-rimmed eyes never seem to leave you.";
+				if(dictOrder.length>0){
+					if(roundCheck==1){
+						str += "\n\nA sudden unreasoning <b>fear</b> took hold onto you briefly"
+
+						if(flags[kFLAGS.D3_DOPPLEGANGER_DEFEATED]==1){
+							str += " not unlike the strange mirror you faced earlier in this accursed fortress"
+						}
+
+						str+=". Quickly recompose yourself, you ";
+
+						if(dictOrder.indexOf("physical")>-1){
+							str += "rush towards Lethice in hope to land some quick blow before she fully recover, only to find your attacks be intercepted by her uncanny dexterity and strength! Taken back by stark contrast of her movement and <b>still surging</b> strength,";
+						}
+						else{
+							str += "quickly you use the same ability at her in hope to land some hits while you retaining portion of your momentum, only to find your attempts be intercepted by Lethice with uncanny speed, almost reflexively so. Noticed your attack leaves not even a bruise and a sudden <b>surge</b> of identical mana signature from her,"
+						}
+
+						str += " immediately you reposition back to where you were. It is probably the best to attempt <b>alternate strategy</b> before repeating the same move quickly.";
+					}
+					else{
+						str += "\n\nHaving recalled what happened earlier, It is probably the best to <b>attempt alternate strategy</b> before repeating the same move quickly.";
+					}
+				}
 			}
 			else if (_fightPhase == 2)
 			{
@@ -87,6 +115,8 @@ public class Lethice extends Monster
 					if (_defMode == 1) str += "\nLethice is standing ready for your next attack, ready to defend against any strike. Perhaps you could surprise her with something else?";
 					else if (_defMode == 2) str += "\nLethice is smirking and confident, prepared to resist any sort of libidinous advance, but her posture is ill-suited to deflecting attacks."
 				}
+
+				str += "\n\nHaving recalled what happened earlier, It is probably the best to attempt <b>alternate strategy</b> before repeating the same move quickly.";
 			}
 
 			if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles))
@@ -114,8 +144,225 @@ public class Lethice extends Monster
 
 			return str;
 		}
-		
-		
+
+		// Dictonary doesnt preserve order smh
+		private var dictOrder:Array = [];
+		private var dictValue:Array = [];
+		private var dictAttacked:Array = [];
+		private var roundCheck:int = 0;
+		private var decayCheck:Boolean = false;
+
+		private function furubeYuraYuraYatsukaNoTsurugiIkaishinshoMakora():void{
+			var _statusEffects:Array = statusEffects;
+
+			// outputText("Start of Status Effect Debug\n");
+
+			// Append attacked damage type into immunity from last round
+			// Since I dont want Lethice to become immune immediately (literally unplayable)
+			for(var __i:int=0;__i<dictAttacked.length;__i++){
+				dictOrder.push(dictAttacked[__i]);
+				dictValue.push(115);
+
+				sizeCheck();
+			}
+
+			dictAttacked = [];
+
+			// Append status effect immmunity and make Lethice immune to adapted debuff
+			for(var i:int=0; i < _statusEffects.length;i++){
+				// outputText( statusEffects[i].stype.id + " "+ statusEffects[i].value1 + " \n");
+				// Good job if you didnt use value1 for duration check
+				// Check for Shell becuz fucking
+				if(_statusEffects[i].stype.id!="Shell"){
+					if(dictOrder.indexOf(_statusEffects[i].stype.id)>-1){
+						_statusEffects[i].value1 = 1;
+					}
+					else{
+						if(_statusEffects[i].value1>2){
+							// Add Immunity
+							dictOrder.push(_statusEffects[i].stype.id);
+							dictValue.push(115);
+
+							decayCheck = true;
+
+							sizeCheck();
+						}
+					}
+				}
+			}
+
+			// Two condition to trigger immunity decay
+			// Either add status effect immunity or damage type immunity
+			// Prevent player just get over the gimmick by spamming wait
+			if(decayCheck){
+				// To prevent modifying looping array
+				var tmpOrder:Array = [];
+				var tmpValue:Array = [];
+
+				roundCheck++;
+
+				for(var _i:int=0;_i<dictOrder.length;_i++){
+					// Remove immunity if lifetime less than 15
+					if(dictValue[_i]>14){
+						tmpOrder.push(dictOrder[_i]);
+						tmpValue.push(dictValue[_i]-15);
+					}
+				}
+
+				dictOrder = tmpOrder;
+				dictValue = tmpValue;
+			}
+
+			// outputText( "Dictionary size: " + dictOrder.length + " \nFirst key: " + dictOrder[0] + " \n");
+			// outputText("End of Status Effect Debug\n");
+
+			decayCheck = false;
+		}
+		private function sizeCheck():void{
+			// Limit immunity down to 9, remove the first added immunity
+			if(dictOrder.length>(3+flags[kFLAGS.GAME_DIFFICULTY])){
+				dictOrder.removeAt(0);
+				dictValue.removeAt(0);
+			}
+		}
+		private function statusHandler(string:String=""):Boolean{
+			// Append status effect immmunity and make Lethice immune to adapted debuff
+			if(dictOrder.indexOf(string)<0){
+				// Add Immunity
+				dictOrder.push(string);
+				dictValue.push(115);
+
+				decayCheck = true;
+
+				sizeCheck();
+				return false;
+			}
+			else{
+				return true;
+			}
+		}
+		override protected function handleConstricted():Boolean{
+			return statusHandler("constrict");
+		}
+		override protected function handleStun():Boolean{
+			return statusHandler("stun");
+		}
+		override protected function handleFear():Boolean{
+			return statusHandler("fear");
+		}
+		override protected function handleConfusion():Boolean{
+			return statusHandler("confuse");
+		}
+		override public function handleStatusEffects(statusEffect:StatusEffectType):Boolean{
+			var string:String = "";
+
+			switch(statusEffect){
+				case StatusEffects.OrcaPlay:
+					string = "play with"
+					break;
+				case StatusEffects.Straddle:
+					string = "straddle on"
+					break;
+				case StatusEffects.Provoke:
+					string = "provoke"
+					break;
+				case StatusEffects.OrcaHasWackedFinish:
+					string = "slap your tail onto"
+					break;
+				default:
+					string = "restrain";
+			}
+			if(statusHandler(statusEffect.id)){
+				outputText("\n\nAs you attempt to " + string + " Lethice, much to your surprise she remain unfazed. Looks like she has adapted to your ability.");
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		override public function combatRoundUpdate():void{
+			if(_fightPhase!=2){
+				furubeYuraYuraYatsukaNoTsurugiIkaishinshoMakora();
+			}
+			super.combatRoundUpdate();
+		}
+		private function adaptionDeflect(damage:Number, font:String, dict:String="physical"):Number {
+			if(_fightPhase!=2){
+				var index:int = dictOrder.indexOf(dict);
+				if(index>-1){
+					var numberformat:NumberFormatter = new NumberFormatter();
+					var deflectDamage:Number = Math.round(damage * (dictValue[index]/100));
+					var dmgText:String = numberformat.format(Math.floor(Math.abs(deflectDamage)));
+					if(dict=="lust"){
+						player.lust += Math.round(deflectDamage/10);
+					}
+					else{
+						player.HP -= Math.round(deflectDamage/10);
+					}
+					outputText("<b>([font-" + font + "]" + "Deflected! " + dmgText + "[/font])</b>");
+
+					return damage-deflectDamage;
+				}
+				else if(dictAttacked.indexOf(dict)<0){
+					dictAttacked.push(dict);
+					decayCheck = true;
+				}
+			}
+
+			return damage;
+		}
+		override public function doDamageBefore(damage:Number):Number{
+			return adaptionDeflect(damage,"damage");
+		}
+		override public function doMagicDamageBefore(damage:Number):Number{
+			return adaptionDeflect(damage,"damage","magic");
+		}
+		override public function doFireDamageBefore(damage:Number):Number{
+			return adaptionDeflect(damage,"fire","fire");
+		}
+		override public function doIceDamageBefore(damage:Number):Number{
+			return adaptionDeflect(damage,"cold","cold");
+		}
+
+		override public function doLightningDamageBefore(damage:Number):Number{
+			return adaptionDeflect(damage,"lightning","lightning");
+		}
+
+		override public function doDarknessDamageBefore(damage:Number):Number{
+			return adaptionDeflect(damage,"dark","dark");
+		}
+
+		override public function doPoisonDamageBefore(damage:Number):Number{
+			return adaptionDeflect(damage,"poison","poison");
+		}
+
+		override public function doWindDamageBefore(damage:Number):Number{
+			return adaptionDeflect(damage,"wind","wind");
+		}
+
+		override public function doWaterDamageBefore(damage:Number):Number{
+			return adaptionDeflect(damage,"water","water");
+		}
+
+		override public function doAcidDamageBefore(damage:Number):Number{
+			return adaptionDeflect(damage,"acid","acid");
+		}
+
+		override public function doEarthDamageBefore(damage:Number):Number{
+			return adaptionDeflect(damage,"earth","earth");
+		}
+
+		override public function doTrueDamageBefore(damage:Number):Number{
+			return adaptionDeflect(damage,"damage","true");
+		}
+
+		override protected function applyTease(lustDelta:Number):void{
+			lustDelta = adaptionDeflect(lustDelta,"lust","lust");
+			if(lustDelta>0){
+				super.applyTease(lustDelta);
+			}
+		}
+
 		override public function postPlayerAbility(ability:CombatAbility):void {
 			if (fightPhase == 3 && ability is AbstractSpell && ability.hasTag(CombatAbility.TAG_DAMAGING)) {
 				outputText("\n\n<i>\"Ouch. Such arcane skills for one so uncouth,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your magics?\"</i>\n\n");
@@ -127,11 +374,14 @@ public class Lethice extends Monster
 		{
 			if (_fightPhase == 1)
 			{
+				// Since during phase 2 comboroundupdate immunity update wont trigger
+				furubeYuraYuraYatsukaNoTsurugiIkaishinshoMakora();
 				phase1Ends(hpVictory);
 				return;
 			}
 			else if (_fightPhase == 2)
 			{
+				// Demon horde arrives to buy time for Lethice to adapt to your attack haha
 				phase2Ends(hpVictory);
 				return;
 			}
@@ -566,6 +816,30 @@ public class Lethice extends Monster
 			outputText("<i>\"Useless whelps,\"</i> Lethice growls, rising back to her feet and spreading her");
 			outputText(" draconic wings behind herself, letting them flare out to their full majesty. She grabs a whip from her flank and uncoils it with a snap, cracking it just over your head. Black fire seethes on the length of the whip, burning with corrupt magics that make the air reek of sex and desire around her.");
 			outputText("\n\n<i>\"Very well, Champion,\"</i> she snarls, throwing aside her goblet of Lethicite. The crystals go scattering as the vessel shatters on the flagstone, and in an instant even the defeated demons are scrambling for the gems, making the floor you fight on a rabid hell to walk through. <i>\"I see I’ll have to finish you myself! Let us see what you’re really made of... before I rape your soul out of your body!\"</i>");
+
+			var str:String = "";
+			if(dictOrder.length>0){
+				if(roundCheck==1){
+					str += "\n\n 'Well, This should be easy! After all you destroy her in an instant just earlier.', you grin. But then a sudden unreasoning <b>FEAR</b> took hold onto you briefly"
+
+					if(flags[kFLAGS.D3_DOPPLEGANGER_DEFEATED]==1){
+						str += " not unlike the strange mirror you faced earlier in this accursed fortress"
+					}
+
+					str+=". Quickly recompose yourself, you ";
+
+					if(dictOrder.indexOf("physical")>-1){
+						str += "rush towards Lethice in hope to land some quick blow before she fully recover, only to find your attacks be intercepted by Lethice's uncanny dexterity and strength! Taken back by stark contrast of her movement and <b>still surging</b> strength,";
+					}
+					else{
+						str += "quickly you use the same ability at her in hope to land some hits before she fully recover, only to find your attempts be intercepted by Lethice with uncanny speed, almost reflexively so. Noticed your attack leaves not even a bruise after and a <b>surge</b> of identical mana signature from her,"
+					}
+
+					str += " immediately you reposition back to where you were. It is probably the best to attempt <b>alternate strategy</b> before using the same move quickly.";
+
+					outputText(str);
+				}
+			}
 
 			beginPhase3(false);
 		}

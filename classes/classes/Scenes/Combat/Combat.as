@@ -8291,6 +8291,10 @@ public class Combat extends BaseContent {
         damage = Math.round(damage);
         if (damage < 0) damage = 1;
         if (apply) {
+            damage = monster.doDamageBefore(damage);
+            if(damage<=0){
+                return 0;
+            }
             monster.HP -= damage;
 			var WrathGains:Number = 0;
             var BonusWrathMult:Number = 1;
@@ -8392,6 +8396,10 @@ public class Combat extends BaseContent {
         damage = Math.round(damage);
         if (damage < 0) damage = 1;
         if (apply) {
+            damage = monster.doMagicDamageBefore(damage);
+            if(damage<=0){
+                return 0;
+            }
             monster.HP -= damage;
             var BonusWrathMult:Number = 1;
             if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
@@ -8474,6 +8482,10 @@ public class Combat extends BaseContent {
         damage = Math.round(damage);
         if (damage < 0) damage = 1;
         if (apply) {
+            damage = monster.doFireDamageBefore(damage);
+            if(damage<=0){
+                return 0;
+            }
             monster.HP -= damage;
             var BonusWrathMult:Number = 1;
             if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
@@ -8532,6 +8544,10 @@ public class Combat extends BaseContent {
         damage = Math.round(damage);
         if (damage < 0) damage = 1;
         if (apply) {
+            damage = monster.doIceDamageBefore(damage);
+            if(damage<=0){
+                return 0;
+            }
             monster.HP -= damage;
             var BonusWrathMult:Number = 1;
             if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
@@ -8589,6 +8605,10 @@ public class Combat extends BaseContent {
         damage = Math.round(damage);
         if (damage < 0) damage = 1;
         if (apply) {
+            damage = monster.doLightningDamageBefore(damage);
+            if(damage<=0){
+                return 0;
+            }
             monster.HP -= damage;
             var BonusWrathMult:Number = 1;
             if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
@@ -8636,6 +8656,10 @@ public class Combat extends BaseContent {
         damage = Math.round(damage);
         if (damage < 0) damage = 1;
         if (apply) {
+            damage = monster.doDarknessDamageBefore(damage);
+            if(damage<=0){
+                return 0;
+            }
             monster.HP -= damage;
             var BonusWrathMult:Number = 1;
             if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
@@ -8676,6 +8700,10 @@ public class Combat extends BaseContent {
         damage = Math.round(damage);
         if (damage < 0) damage = 1;
         if (apply) {
+            damage = monster.doPoisonDamageBefore(damage);
+            if(damage<=0){
+                return 0;
+            }
             monster.HP -= damage;
             var BonusWrathMult:Number = 1;
             if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
@@ -8712,6 +8740,10 @@ public class Combat extends BaseContent {
         damage = Math.round(damage);
         if (damage < 0) damage = 1;
         if (apply) {
+            damage = monster.doWindDamageBefore(damage);
+            if(damage<=0){
+                return 0;
+            }
             monster.HP -= damage;
             var BonusWrathMult:Number = 1;
             if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
@@ -8752,6 +8784,10 @@ public class Combat extends BaseContent {
         damage = Math.round(damage);
         if (damage < 0) damage = 1;
         if (apply) {
+            damage = monster.doWaterDamageBefore(damage);
+            if(damage<=0){
+                return 0;
+            }
             monster.HP -= damage;
             var BonusWrathMult:Number = 1;
             if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
@@ -8788,6 +8824,10 @@ public class Combat extends BaseContent {
         damage = Math.round(damage);
         if (damage < 0) damage = 1;
         if (apply) {
+            damage = monster.doEarthDamageBefore(damage);
+            if(damage<=0){
+                return 0;
+            }
             monster.HP -= damage;
             var BonusWrathMult:Number = 1;
             if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
@@ -8824,6 +8864,10 @@ public class Combat extends BaseContent {
         damage = Math.round(damage);
         if (damage < 0) damage = 1;
         if (apply) {
+            damage = monster.doAcidDamageBefore(damage);
+            if(damage<=0){
+                return 0;
+            }
             monster.HP -= damage;
             var BonusWrathMult:Number = 1;
             if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
