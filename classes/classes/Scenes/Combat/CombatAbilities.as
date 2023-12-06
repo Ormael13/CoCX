@@ -376,9 +376,14 @@ public class CombatAbilities {
 		EAspectCorruption
 	]
 
+	public static const FusionSpecial1st:FusionSpecial1stSkill = new FusionSpecial1stSkill();
+	public static const FusionSpecial2nd:FusionSpecial2ndSkill = new FusionSpecial2ndSkill();
+
 	public static const ALL_MAGICAL_SPECIALS:/*CombatAbility*/Array = [
-		
+		FusionSpecial1st
 	];
+	ALL_ELEMENTAL_ASPECTS.push(FusionSpecial1st);
+	ALL_ELEMENTAL_ASPECTS.push(FusionSpecial2nd);
 	
 	/*
 	 * Difference from CombatAbility.Registry:

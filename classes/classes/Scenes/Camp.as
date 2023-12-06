@@ -18,6 +18,7 @@ import classes.lists.Gender;
 
 import coc.view.ButtonDataList;
 import coc.view.MainView;
+import classes.Scenes.Combat.CombatAbilities;
 
 use namespace CoC;
 
@@ -2831,6 +2832,7 @@ public class Camp extends NPCAwareContent{
 		if (type == 2) player.createPerk(PerkLib.AffinityGnome,0,0,0,0);
 		if (type == 3) player.createPerk(PerkLib.AffinityIgnis,0,0,0,0);
 		if (type == 4) player.createPerk(PerkLib.AffinityUndine,0,0,0,0);
+		CombatAbilities.FusionSpecial1st.updateAbility(type);
 		CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		player.HP = oldHPratio*player.maxHP();
 		statScreenRefresh();
@@ -2846,6 +2848,7 @@ public class Camp extends NPCAwareContent{
 		if (player.hasPerk(PerkLib.AffinityGnome)) player.removePerk(PerkLib.AffinityGnome);
 		if (player.hasPerk(PerkLib.AffinityIgnis)) player.removePerk(PerkLib.AffinityIgnis);
 		if (player.hasPerk(PerkLib.AffinityUndine)) player.removePerk(PerkLib.AffinityUndine);
+		CombatAbilities.FusionSpecial1st.updateAbility(0);
 		CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		player.HP = oldHPratio*player.maxHP();
 		statScreenRefresh();

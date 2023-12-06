@@ -2696,7 +2696,7 @@ public class PerkLib
 				"Allows you to increase non-bow range weapons attack up to 200% (Intelligence-based). (+5% range physical attacks multiplier)",
 				"You've chosen the 'Sharpshooter' perk, allowing you to slightly increase non-bow range weapons attack. (+5% range physical attacks multiplier)");
 		public static const ShieldCombat:PerkType = mk("Shield Combat", "Shield Combat",
-				"When you block an attack riposte with a shield bash (need to wear shield allowing you to use this move) damaging your opponent. Also minimaly improve block chance.",
+				"When you block an attack riposte with a shield bash (need to wear shield allowing you to use this move) damaging your opponent. Also minimally improve block chance.",
 				"You've chosen the 'Shield Combat' perk, allowing you to riposte with a shield bash when you block an attack. Also minimaly improve block chance.");
 		public static const ShieldExpertise:PerkType = mk("Shield Expertise", "Shield Expertise",
 				"When you wearing a shield (one that allow use of shield bash) add quarter of block value to your armor (at least 1).",

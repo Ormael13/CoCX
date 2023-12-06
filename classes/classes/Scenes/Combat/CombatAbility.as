@@ -280,6 +280,21 @@ public class CombatAbility extends BaseCombatContent {
 	public function hasTag(tag:int):Boolean {
 		return _tags[tag];
 	}
+
+	public function addTag(tag:int):Boolean {
+		if (tag >= 0 && tag <= _tags.length && !_tags[tag]) {
+			return _tags[tag] = true;
+		}
+		return false;
+		
+	}
+
+	public function removeTag(tag:int):Boolean {
+		if (tag >= 0 && tag <= _tags.length && _tags[tag]) {
+			return !(_tags[tag] = false);
+		}
+		return false;
+	}
 	
 	/**
 	 * Describe effect (for example, approximate damage).

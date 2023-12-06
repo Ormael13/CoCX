@@ -77,5 +77,9 @@ public class AbstractSpecial extends CombatAbility {
 
         return "";
     }
+
+    protected function sfCostMod(sfCost:Number):int {
+        return Math.round(sfCost * soulskillCost() * soulskillcostmulti());
+    }
 }
 }
