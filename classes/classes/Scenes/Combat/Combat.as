@@ -8214,6 +8214,10 @@ public class Combat extends BaseContent {
         damage = Math.round(damage);
         if (damage < 0) damage = 1;
         if (apply) {
+            damage = monster.doTrueDamageBefore(damage);
+            if(damage<=0){
+                return 0;
+            }
             monster.HP -= damage;
 			var WrathGains:Number = 0;
             var BonusWrathMult:Number = 1;

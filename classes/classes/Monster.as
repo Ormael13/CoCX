@@ -2725,19 +2725,6 @@ import classes.Scenes.Combat.CombatAbilities;
 		}
 
 		/**
-		 * <p>Combat.applyTease() Override Series - Part 1 (Ongoing maybe)</p>
-		 * <ul>
-		 *     <li>Called right before monster lust change</li>
-		 *     <li>Used to alter final damage to the monster</li>
-		 *     <li>return 0 to skip the monster lust change and text cuz no lust</li>
-		 *     <li>Default: original tease number</li>
-		 * </ul>
-		 */
-		public function applyTeaseBefore(damage:Number):Number{
-			return damage;
-		}
-
-		/**
 		 * <p>Combat.doTrueDamage() Override Series - Part 1 (Ongoing maybe)</p>
 		 * <ul>
 		 *     <li>Called right before monster HP getting deducted</li>
