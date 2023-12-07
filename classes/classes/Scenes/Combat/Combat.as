@@ -769,11 +769,6 @@ public class Combat extends BaseContent {
 			if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) flags[kFLAGS.IN_COMBAT_PLAYER_USED_SHARK_BITE] = 0;
 			if (player.armor == armors.BMARMOR) dynStats("lus", -(Math.round(player.maxLust() * 0.05)));
 			if (player.hasStatusEffect(StatusEffects.TyrantState)) dynStats("lus", (Math.round(player.maxLust() * 0.05)));
-			if (player.hasStatusEffect(StatusEffects.MomentOfClarity)) dynStats("lus", -(Math.round(player.maxLust() * 0.05)));
-			if (player.hasStatusEffect(StatusEffects.FieryRage)) {
-				if (player.soulforce < (player.maxSoulforce() * 0.05)) player.removeStatusEffect(StatusEffects.FieryRage);
-				else EngineCore.SoulforceChange(Math.round(player.maxSoulforce() * 0.05));
-			}
 			if (player.hasStatusEffect(StatusEffects.VampThirstStacksHPMana)) player.removeStatusEffect(StatusEffects.VampThirstStacksHPMana);
         }
         mainView.hideMenuButton(MainView.MENU_DATA);
@@ -6904,7 +6899,7 @@ public class Combat extends BaseContent {
 
     public function statusEffectBonusDamage(damage:Number):Number {
         if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
-        if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
+        if (player.hasStatusEffect(StatusEffects.Overlimit) || CombatAbilities.FieryRage.isActive()) damage *= 2;
         if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
         return damage;
     }
@@ -10355,27 +10350,6 @@ public class Combat extends BaseContent {
                 outputText("<b>Everywhere and nowhere effect ended!</b>\n\n");
             } else player.addStatusValue(StatusEffects.EverywhereAndNowhere, 1, -1);
         }
-        //True Evasion
-        if (player.hasStatusEffect(StatusEffects.TrueEvasion)) {
-            if (player.statusEffectv1(StatusEffects.TrueEvasion) <= 0) {
-                player.removeStatusEffect(StatusEffects.TrueEvasion);
-                outputText("<b>True Evasion effect ended!</b>\n\n");
-            } else player.addStatusValue(StatusEffects.TrueEvasion, 1, -1);
-        }
-        //Adamantine Shell
-        if (player.hasStatusEffect(StatusEffects.AdamantineShell)) {
-            if (player.statusEffectv1(StatusEffects.AdamantineShell) <= 0) {
-                player.removeStatusEffect(StatusEffects.AdamantineShell);
-                outputText("<b>Adamantine Shell effect ended!</b>\n\n");
-            } else player.addStatusValue(StatusEffects.AdamantineShell, 1, -1);
-        }
-        //Moment of Clarity
-        if (player.hasStatusEffect(StatusEffects.MomentOfClarity)) {
-            if (player.statusEffectv1(StatusEffects.MomentOfClarity) <= 0) {
-                player.removeStatusEffect(StatusEffects.MomentOfClarity);
-                outputText("<b>Moment of Clarity effect ended!</b>\n\n");
-            } else player.addStatusValue(StatusEffects.MomentOfClarity, 1, -1);
-        }
 		//Blackout
         if (player.hasStatusEffect(StatusEffects.Blackout)) {
             if (player.statusEffectv1(StatusEffects.Blackout) <= 0) {
@@ -11185,7 +11159,7 @@ public class Combat extends BaseContent {
                 if (player.perkv1(IMutationsLib.HinezumiBurningBloodIM) >= 3) healingPercent += 0.5;
             }
             if (player.headJewelry == headjewelries.CUNDKIN && player.HP < 1) healingPercent += 1;
-            if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) healingPercent -= 10;
+            if (player.hasStatusEffect(StatusEffects.Overlimit) || CombatAbilities.FieryRage.isActive()) healingPercent -= 10;
 			if (player.hasStatusEffect(StatusEffects.GreenCovenant)) healingPercent += 25;
             if (player.hasPerk(PerkLib.Ferocity) && player.HP < 1) negativeHPRegen -= 1;
             if ((player.hasPerk(PerkLib.Diehard) || player.hasPerk(PerkLib.GreaterDiehardEx)) && !player.hasPerk(PerkLib.EpicDiehard) && player.HP < 1) negativeHPRegen -= 1;

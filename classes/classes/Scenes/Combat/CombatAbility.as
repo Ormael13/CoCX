@@ -218,7 +218,7 @@ public class CombatAbility extends BaseCombatContent {
 	 * Unique id of this ability.
 	 */
 	public var id:int;
-	private var _name:String;
+	protected var _name:String;
 	private var _desc:String;
 	public var targetType:int;
 	public var timingType:int;
@@ -281,7 +281,7 @@ public class CombatAbility extends BaseCombatContent {
 		return _tags[tag];
 	}
 
-	public function addTag(tag:int):Boolean {
+	protected function addTag(tag:int):Boolean {
 		if (tag >= 0 && tag <= _tags.length && !_tags[tag]) {
 			return _tags[tag] = true;
 		}
@@ -289,7 +289,7 @@ public class CombatAbility extends BaseCombatContent {
 		
 	}
 
-	public function removeTag(tag:int):Boolean {
+	protected function removeTag(tag:int):Boolean {
 		if (tag >= 0 && tag <= _tags.length && _tags[tag]) {
 			return !(_tags[tag] = false);
 		}
@@ -474,10 +474,10 @@ public class CombatAbility extends BaseCombatContent {
 	}
 	
 	public function toggleOff(display:Boolean=true):void {
-		if (timingType == TIMING_TOGGLE) {
+		if (timingType != TIMING_TOGGLE) {
 			throw new Error("Cannot deactivate non-toggle ability "+name);
 		}
-		throw new Error("Method deactivate() not implemented for ability "+name);
+		if (player.durations[id] == -1) player.durations[id] = 0;
 	}
 	
 	public function ensureToggledOff(display:Boolean=true):void {
@@ -549,7 +549,7 @@ public class CombatAbility extends BaseCombatContent {
 	}
 	
 	/**
-	 * Calculate cooldown of this ability. Default is 0 (no cooldown).
+	 * Calculate cooldown of this ability. Default is 0 (no cooldown), or -1 for toggle abilities (turning them on).
 	 * Will be applied automatically.
 	 */
 	public function calcCooldown():int {
@@ -561,7 +561,7 @@ public class CombatAbility extends BaseCombatContent {
 	 * Will be applied automatically.
 	 */
 	public function calcDuration():int {
-		return 0;
+		return (timingType == TIMING_TOGGLE)? -1: 0;
 	}
 	
 	/**

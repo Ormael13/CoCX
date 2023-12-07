@@ -18,15 +18,15 @@ public class FusionSpecial1stSkill extends AbstractMagicSpecial {
             PerkLib.ElementalBody
         )
         this.lastAttackType = Combat.LAST_ATTACK_SPELL;
-        baseSFCost = 10;
+        baseSFCost = 100;
     }
 
     private var elementDescriptionArr:Array = [
-        ["Fusion 1st", "magical", null],
-        ["Wind Blade", "wind", StatusEffects.SummonedElementalsAirE],
-        ["Wild Growth", "earth", StatusEffects.SummonedElementalsEarthE],
-        ["Pyroblast", "fire", StatusEffects.SummonedElementalsFireE],
-        ["Hydraulic Torrent", "water", StatusEffects.SummonedElementalsWaterE]
+        ["Fusion 1st", "magical", null, null],
+        ["Wind Blade", "wind", StatusEffects.SummonedElementalsAirE, TAG_WIND],
+        ["Wild Growth", "earth", StatusEffects.SummonedElementalsEarthE, TAG_EARTH],
+        ["Pyroblast", "fire", StatusEffects.SummonedElementalsFireE, TAG_FIRE],
+        ["Hydraulic Torrent", "water", StatusEffects.SummonedElementalsWaterE, TAG_WATER]
     ];
 
     override protected function usabilityCheck():String {
@@ -54,30 +54,25 @@ public class FusionSpecial1stSkill extends AbstractMagicSpecial {
 		return "~" + numberFormat(calcDamage(monster)) + " " + elementDescriptionArr[ElementalRace.getElement(player)][1] +  " damage";
     }
 
+    override public function get name():String {
+        return elementDescriptionArr[ElementalRace.getElement(player)][0];
+    }
+
     override public function sfCost():int {
         return sfCostMod(baseSFCost);
     }
 
-    /**
-     * Change damage tags when fusing or unfusing with an elemental
-     */
-    public function updateAbility(element:int = 0):void
-    {
-    	switch(ElementalRace.getElement(player)) {
-            case ElementalRace.ELEMENT_GNOME:   addTag(TAG_EARTH);
-                                                break;
-            case ElementalRace.ELEMENT_IGNIS:   addTag(TAG_FIRE);
-                                                break;   
-            case ElementalRace.ELEMENT_SYLPH:   addTag(TAG_WIND);
-                                                break;   
-            case ElementalRace.ELEMENT_UNDINE:  addTag(TAG_WATER);
-                                                break;
-            default:                            removeTag(TAG_FIRE);
-                                                removeTag(TAG_EARTH);
-                                                removeTag(TAG_WIND);
-                                                removeTag(TAG_WATER);
-                                                break;
-        }
+    override public function presentTags():Array {
+        var result:Array = super.presentTags();
+
+        var element:int = ElementalRace.getElement(player);
+        if (element) result.push(elementDescriptionArr[element][3]);
+
+        return result;
+    }
+
+    override public function hasTag(tag:int):Boolean {
+        return super.hasTag(tag) || (ElementalRace.getElement(player) && (elementDescriptionArr[ElementalRace.getElement(player)][3] == tag));
     }
 
     public function calcDamage(monster:Monster):Number {
@@ -119,6 +114,8 @@ public class FusionSpecial1stSkill extends AbstractMagicSpecial {
 			                                    damage *= combat.waterDamageBoostedByDao();
                                                 break;
         }
+
+        damage *= soulskillMagicalMod();
 
         return damage;
     }
