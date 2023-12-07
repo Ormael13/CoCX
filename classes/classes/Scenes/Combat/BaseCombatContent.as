@@ -312,6 +312,9 @@ public class BaseCombatContent extends BaseContent {
 	protected function calcGaleMod(damage:Number, incCnt:Boolean):Number {
 		return combat.magic.calcGaleModImpl(damage, incCnt);
 	}
+	protected function calcCorrosionMod(damage:Number, incCnt:Boolean):Number {
+		return combat.magic.calcCorrosionModImpl(damage, incCnt);
+	}
 
 	protected function maintainInfernoMod():void {
         combat.magic.maintainInfernoModImpl();
@@ -339,6 +342,10 @@ public class BaseCombatContent extends BaseContent {
 
 	protected function maintainGaleMod():void {
         combat.magic.maintainGaleModImpl();
+    }
+
+	protected function maintainCorrosionMod():void {
+        combat.magic.maintainCorrosionModImpl();
     }
 }
 }

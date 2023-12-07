@@ -674,6 +674,13 @@ public class CombatMagic extends BaseCombatContent {
 			tier3: PerkLib.EclipsingShadowSu,
 			counter: StatusEffects.CounterEclipsingShadow,
 			type: "darkness"
+		},
+		"acid": {
+			tier1: PerkLib.CorrosiveMeltdown,
+			tier2: PerkLib.CorrosiveMeltdownEx,
+			tier3: PerkLib.CorrosiveMeltdownSu,
+			counter: StatusEffects.CounterCorrosiveMeltdown,
+			type: "acid"
 		}
 	};
 
@@ -752,6 +759,10 @@ public class CombatMagic extends BaseCombatContent {
         return calcMagicCounterModImpl(magicCounterPerks["wind"], damage, casting);
     }
 
+	internal function calcCorrosionModImpl(damage:Number, casting:Boolean = true):Number {
+        return calcMagicCounterModImpl(magicCounterPerks["acid"], damage, casting);
+    }
+
 	internal function maintainInfernoModImpl():void {
         maintainMagicCounter(magicCounterPerks["fire"]);
 	}
@@ -778,6 +789,10 @@ public class CombatMagic extends BaseCombatContent {
 
 	internal function maintainGaleModImpl():void {
         maintainMagicCounter(magicCounterPerks["wind"]);
+    }
+
+	internal function maintainCorrosionModImpl():void {
+        maintainMagicCounter(magicCounterPerks["acid"]);
     }
 	
 	public function MagicPrefixEffect():void {

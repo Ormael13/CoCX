@@ -321,6 +321,7 @@ public class AbstractSpell extends CombatAbility {
 				break;
 			}
 			case DamageType.ACID: {
+				damage = calcCorrosionMod(damage, casting);
 				damage *= combat.acidDamageBoostedByDao();
 				break;
 			}
