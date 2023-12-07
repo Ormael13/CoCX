@@ -209,7 +209,7 @@ import classes.Scenes.Combat.CombatAbilities;
 
 		//he
 		public var pronoun1:String = "";
-		public function get Pronoun1():String{
+		public function get Pronoun1():String {
 			if (pronoun1=="") return "";
 			return pronoun1.substr(0,1).toUpperCase()+pronoun1.substr(1);
 		}
@@ -2063,19 +2063,23 @@ import classes.Scenes.Combat.CombatAbilities;
 			}
 			if (hasStatusEffect(StatusEffects.OrcaPlay)) {
 				interruptAbility();
+				if(!handleStatusEffects(StatusEffects.OrcaPlay))
 				return;
 			}
 			if (hasStatusEffect(StatusEffects.Straddle)) {
 				interruptAbility();
+				if(!handleStatusEffects(StatusEffects.Straddle))
 				return;
 			}
 			if (hasStatusEffect(StatusEffects.Provoke)) {
 				interruptAbility();
-				addStatusValue(StatusEffects.Provoke, 1, -1);
-				if (!hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.EnemyFleshConstructType)) {
-					if (statusEffectv1(StatusEffects.Provoke) <= 0) armorDef += statusEffectv3(StatusEffects.Provoke);
-					eAttack();
-					return;
+				if(!handleStatusEffects(StatusEffects.Provoke)){
+					addStatusValue(StatusEffects.Provoke, 1, -1);
+					if (!hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.EnemyFleshConstructType)) {
+						if (statusEffectv1(StatusEffects.Provoke) <= 0) armorDef += statusEffectv3(StatusEffects.Provoke);
+						eAttack();
+						return;
+					}
 				}
 			}
 			if (hasStatusEffect(StatusEffects.Dig)) {
@@ -2085,9 +2089,11 @@ import classes.Scenes.Combat.CombatAbilities;
 			}
 			if (hasStatusEffect(StatusEffects.OrcaHasWackedFinish)) {
 				interruptAbility();
-				outputText("\n\nYour opponent is still stunned from the powerful blow of your tail.");
-				createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
-				return;
+				if(!handleStatusEffects(StatusEffects.OrcaHasWackedFinish)){
+					outputText("\n\nYour opponent is still stunned from the powerful blow of your tail.");
+					createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+					return;
+				}
 			}
 			performCombatAction();
 		}
@@ -2573,6 +2579,177 @@ import classes.Scenes.Combat.CombatAbilities;
 		 * </ul>
 		 */
 		public function changeBtnWhenBound(btnStruggle:CoCButton,btnBoundWait:CoCButton):void{
+		}
+
+		/**
+		 * <p>Combat.doDamage() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called right before monster HP getting deducted</li>
+		 *     <li>Used to alter final damage to the monster</li>
+		 *     <li>return 0 to skip the rest of the doDamage() cuz no damage</li>
+		 *     <li>Default: original damage number</li>
+		 * </ul>
+		 */
+		public function doDamageBefore(damage:Number):Number{
+			return damage;
+		}
+
+		/**
+		 * <p>Combat.doMagicDamage() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called right before monster HP getting deducted</li>
+		 *     <li>Used to alter final damage to the monster</li>
+		 *     <li>return 0 to skip the rest of the doMagicDamage() cuz no damage</li>
+		 *     <li>Default: original damage number</li>
+		 * </ul>
+		 */
+		public function doMagicDamageBefore(damage:Number):Number{
+			return damage;
+		}
+
+		/**
+		 * <p>Combat.doFireDamage() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called right before monster HP getting deducted</li>
+		 *     <li>Used to alter final damage to the monster</li>
+		 *     <li>return 0 to skip the rest of the doFireDamage() cuz no damage</li>
+		 *     <li>Default: original damage number</li>
+		 * </ul>
+		 */
+		public function doFireDamageBefore(damage:Number):Number{
+			return damage;
+		}
+
+		/**
+		 * <p>Combat.doIceDamage() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called right before monster HP getting deducted</li>
+		 *     <li>Used to alter final damage to the monster</li>
+		 *     <li>return 0 to skip the rest of the doIceDamage() cuz no damage</li>
+		 *     <li>Default: original damage number</li>
+		 * </ul>
+		 */
+		public function doIceDamageBefore(damage:Number):Number{
+			return damage;
+		}
+
+		/**
+		 * <p>Combat.doLightningDamage() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called right before monster HP getting deducted</li>
+		 *     <li>Used to alter final damage to the monster</li>
+		 *     <li>return 0 to skip the rest of the doLightningDamage() cuz no damage</li>
+		 *     <li>Default: original damage number</li>
+		 * </ul>
+		 */
+		public function doLightningDamageBefore(damage:Number):Number{
+			return damage;
+		}
+
+		/**
+		 * <p>Combat.doDarknessDamage() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called right before monster HP getting deducted</li>
+		 *     <li>Used to alter final damage to the monster</li>
+		 *     <li>return 0 to skip the rest of the doDarknessDamage() cuz no damage</li>
+		 *     <li>Default: original damage number</li>
+		 * </ul>
+		 */
+		public function doDarknessDamageBefore(damage:Number):Number{
+			return damage;
+		}
+
+		/**
+		 * <p>Combat.doPoisonDamage() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called right before monster HP getting deducted</li>
+		 *     <li>Used to alter final damage to the monster</li>
+		 *     <li>return 0 to skip the rest of the doPoisonDamage() cuz no damage</li>
+		 *     <li>Default: original damage number</li>
+		 * </ul>
+		 */
+		public function doPoisonDamageBefore(damage:Number):Number{
+			return damage;
+		}
+
+		/**
+		 * <p>Combat.doWindDamage() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called right before monster HP getting deducted</li>
+		 *     <li>Used to alter final damage to the monster</li>
+		 *     <li>return 0 to skip the rest of the doWindDamage() cuz no damage</li>
+		 *     <li>Default: original damage number</li>
+		 * </ul>
+		 */
+		public function doWindDamageBefore(damage:Number):Number{
+			return damage;
+		}
+
+		/**
+		 * <p>Combat.doWaterDamage() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called right before monster HP getting deducted</li>
+		 *     <li>Used to alter final damage to the monster</li>
+		 *     <li>return 0 to skip the rest of the doWaterDamage() cuz no damage</li>
+		 *     <li>Default: original damage number</li>
+		 * </ul>
+		 */
+		public function doWaterDamageBefore(damage:Number):Number{
+			return damage;
+		}
+
+		/**
+		 * <p>Combat.doEarthDamage() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called right before monster HP getting deducted</li>
+		 *     <li>Used to alter final damage to the monster</li>
+		 *     <li>return 0 to skip the rest of the doEarthDamage() cuz no damage</li>
+		 *     <li>Default: original damage number</li>
+		 * </ul>
+		 */
+		public function doEarthDamageBefore(damage:Number):Number{
+			return damage;
+		}
+
+		/**
+		 * <p>Combat.doAcidDamage() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called right before monster HP getting deducted</li>
+		 *     <li>Used to alter final damage to the monster</li>
+		 *     <li>return 0 to skip the rest of the doAcidDamage() cuz no damage</li>
+		 *     <li>Default: original damage number</li>
+		 * </ul>
+		 */
+		public function doAcidDamageBefore(damage:Number):Number{
+			return damage;
+		}
+
+		/**
+		 * <p>Combat.doTrueDamage() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called right before monster HP getting deducted</li>
+		 *     <li>Used to alter final damage to the monster</li>
+		 *     <li>return 0 to skip the rest of the doTrueDamage() cuz no damage</li>
+		 *     <li>Default: original damage number</li>
+		 * </ul>
+		 */
+		public function doTrueDamageBefore(damage:Number):Number{
+			return damage;
+		}
+
+		/**
+		 * <p>Combat.doAI() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called right before monster HP getting deducted</li>
+		 *     <li>Used to handle status effect that cancel doAI()</li>
+		 *     <li>Currently handle OrcaPlay/Straddle/Provoke/OrcaHasWackedFinish</li>
+		 *     <li>PS: Please update line above if you add another custom disable doAI statusEffects for some reason</li>
+		 *     <li>return true to handle Status Effects (doAI() continue)</li>
+		 *     <li>Default: false (doAI() interrupted)</li>
+		 * </ul>
+		 */
+		public function handleStatusEffects(statusEffect:StatusEffectType):Boolean{
+			return false;
 		}
 
 		/**
