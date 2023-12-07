@@ -92,7 +92,7 @@ public class Lethice extends Monster
 						str += "\n\nHaving recalled what happened earlier, It is probably the best to <b>attempt alternate strategy</b> before repeating the same move quickly.";
 					}
 					if(dictOrder.indexOf("hplossimmune")>-1){
-						str += "\n\nPerhaps out of your sheer willpower or rage you still manage to stand up to fight for another day, seeing Lethice's grin in response, you realized that <b>you might not able to survive</b> another blow from her should you still retained your grievous injuries!"
+						str += "\n\nPerhaps out of your sheer willpower or rage you still manage to stand up to fight for another day, seeing Lethice's grin in response, you realized that <b>you might not able to survive</b> another blow from her should you still retain your grievous injuries!"
 					}
 					if(dictOrder.indexOf("lustlossimmune")>-1){
 						str += "\n\nDespite how overwhelmingly aroused you are right now, you still manage to continue fighting thanks to your inability to orgasm in combination with your new founded animal instincts from the mutations you went through. Despite the advantage you have garnered, some part of you can't help but think that <b>you might really GIVE IN</b> if Lethice push your arousal to your limits once again!"
@@ -125,7 +125,7 @@ public class Lethice extends Monster
 				str += "\n\nHaving recalled what happened earlier, It is probably the best to attempt <b>alternate strategy</b> before repeating the same move quickly.";
 
 				if(dictOrder.indexOf("hplossimmune")>-1){
-					str += "\n\nPerhaps out of your sheer willpower or rage you still manage to stand up to fight for another day, seeing Lethice's grin in response, you realized that <b>you might not able to survive</b> another blow from her should you still retained your grievous injuries!"
+					str += "\n\nPerhaps out of your sheer willpower or rage you still manage to stand up to fight for another day, seeing Lethice's grin in response, you realized that <b>you might not able to survive</b> another blow from her should you still retain your grievous injuries!"
 				}
 				if(dictOrder.indexOf("lustlossimmune")>-1){
 					str += "\n\nDespite how overwhelmingly aroused you are right now, you still manage to continue fighting thanks to your inability to orgasm in combination with your new founded animal instincts from the mutations you went through. Despite the advantage you have garnered, some part of you can't help but think that <b>you might really GIVE IN</b> if Lethice push your arousal to your limits once again!"
