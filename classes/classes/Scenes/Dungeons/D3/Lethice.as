@@ -91,6 +91,12 @@ public class Lethice extends Monster
 					else{
 						str += "\n\nHaving recalled what happened earlier, It is probably the best to <b>attempt alternate strategy</b> before repeating the same move quickly.";
 					}
+					if(dictOrder.indexOf("hplossimmune")>-1){
+						str += "\n\nPerhaps out of your sheer willpower or rage you still manage to stand up to fight for another day, seeing Lethice's grin in response, you realized that <b>you might not able to survive</b> another blow from her should you still retained your grievous injuries!"
+					}
+					if(dictOrder.indexOf("lustlossimmune")>-1){
+						str += "\n\nDespite how overwhelmingly aroused you are right now, you still manage to continue fighting thanks to your inability to orgasm in combination with your new founded animal instincts from the mutations you went through. Despite the advantage you have garnered, some part of you can't help but think that <b>you might really GIVE IN</b> if Lethice push your arousal to your limits once again!"
+					}
 				}
 			}
 			else if (_fightPhase == 2)
@@ -117,6 +123,13 @@ public class Lethice extends Monster
 				}
 
 				str += "\n\nHaving recalled what happened earlier, It is probably the best to attempt <b>alternate strategy</b> before repeating the same move quickly.";
+
+				if(dictOrder.indexOf("hplossimmune")>-1){
+					str += "\n\nPerhaps out of your sheer willpower or rage you still manage to stand up to fight for another day, seeing Lethice's grin in response, you realized that <b>you might not able to survive</b> another blow from her should you still retained your grievous injuries!"
+				}
+				if(dictOrder.indexOf("lustlossimmune")>-1){
+					str += "\n\nDespite how overwhelmingly aroused you are right now, you still manage to continue fighting thanks to your inability to orgasm in combination with your new founded animal instincts from the mutations you went through. Despite the advantage you have garnered, some part of you can't help but think that <b>you might really GIVE IN</b> if Lethice push your arousal to your limits once again!"
+				}
 			}
 
 			if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles))
@@ -160,6 +173,12 @@ public class Lethice extends Monster
 			// Append attacked damage type into immunity from last round
 			// Since I dont want Lethice to become immune immediately (literally unplayable)
 			for(var __i:int=0;__i<dictAttacked.length;__i++){
+				var ___index:int = dictOrder.indexOf(dictAttacked[__i]);
+				if(___index>-1){
+					dictOrder.removeAt(___index);
+					dictValue.removeAt(___index);
+				}
+
 				dictOrder.push(dictAttacked[__i]);
 				dictValue.push(115);
 
@@ -174,8 +193,16 @@ public class Lethice extends Monster
 				// Good job if you didnt use value1 for duration check
 				// Check for Shell becuz fucking
 				if(_statusEffects[i].stype.id!="Shell"){
-					if(dictOrder.indexOf(_statusEffects[i].stype.id)>-1){
+					var _index:int = dictOrder.indexOf(_statusEffects[i].stype.id);
+					if(_index>-1){
 						_statusEffects[i].value1 = 1;
+						dictOrder.removeAt(_index);
+						dictValue.removeAt(_index);
+
+						// Re add Immunity if you trigger deflect lul
+						dictOrder.push(_statusEffects[i].stype.id);
+						dictValue.push(115);
+						decayCheck = true;
 					}
 					else{
 						if(_statusEffects[i].value1>2){
@@ -294,12 +321,27 @@ public class Lethice extends Monster
 					var deflectDamage:Number = Math.round(damage * (dictValue[index]/100));
 					var dmgText:String = numberformat.format(Math.floor(Math.abs(deflectDamage)));
 					if(dict=="lust"){
-						player.lust += Math.round(deflectDamage/10);
+						if(deflectDamage>player.maxOverLust()*0.2){
+							var _tmp:Number = Math.round(player.maxOverLust()*0.2);
+							player.lust += _tmp;
+							dmgText = numberformat.format(Math.floor(Math.abs(_tmp)));
+						}
+						else
+							player.lust += deflectDamage;
 					}
 					else{
-						player.HP -= Math.round(deflectDamage/10);
+						if(deflectDamage>player.maxOverHP()*0.4){
+							var __tmp:Number = Math.round(player.maxOverHP()*0.4);
+							player.HP -= __tmp;
+							dmgText = numberformat.format(Math.floor(Math.abs(__tmp)));
+						}
+						else
+							player.HP -= deflectDamage;
 					}
 					outputText("<b>([font-" + font + "]" + "Deflected! " + dmgText + "[/font])</b>");
+
+					dictAttacked.push(dict);
+					decayCheck = true;
 
 					return damage-deflectDamage;
 				}
@@ -409,6 +451,32 @@ public class Lethice extends Monster
 				case 2: phase2(); break;
 				case 3: phase3(); break;
 				default: phase1(); break;
+			}
+
+			// Lettuce now adapt to player loss immunity HA
+			if(_fightPhase!=2){
+				if(player.HP<=player.minHP()){
+					if(dictOrder.indexOf("hplossimmune")>-1){
+						doNext(SceneLib.combat.endHpLoss);
+					}
+					else{
+						dictOrder.push("hplossimmune");
+						dictValue.push(999);
+
+						decayCheck = true;
+					}
+				}
+				if(player.lust>=player.maxOverLust()){
+					if(dictOrder.indexOf("lustlossimmune")>-1){
+						doNext(SceneLib.combat.endLustLoss);
+					}
+					else{
+						dictOrder.push("lustlossimmune");
+						dictValue.push(999);
+
+						decayCheck = true;
+					}
+				}
 			}
 		}
 
