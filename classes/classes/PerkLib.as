@@ -885,6 +885,16 @@ public class PerkLib
 		public static const Convergence:PerkType = mk("Convergence", "Convergence",
 				"Grey magic area of effect spells strike two times against single targets. Against groups would deal 50-100% more dmg depending on size (100% for small groups).",
 				"You've chosen the 'Convergence' perk, gaining chance to attack single targets two times with grey aoe spells. Against groups would deal 50-100% more dmg depending on size (100% for small groups).");
+		public static const CorrosiveMeltdown:PerkType = mk("Corrosive Meltdown", "Corrosive Meltdown",
+				"Cumulative 40% damage increase for every subsequent acid spell. Each turn without cast acid spell lower damage by 40% down to normal (100%) damage. Maximum 5 stacks.",
+				"You've chosen the 'Corrosive Meltdown' perk. Cumulative 40% damage increase for every subsequent acid spell. Each turn without cast acid spell lower damage by 40% down to normal (100%) damage. Maximum 5 stacks.");
+		public static const CorrosiveMeltdownEx:PerkType = mk("Corrosive Meltdown (Ex)", "Corrosive Meltdown (Ex)",
+				"Increase to cumulative damage by 20%. Penalty for turn without casted acid spell decreased by 10%. Maximum 15 stacks.",
+				"You've chosen the 'Corrosive Meltdown (Ex)' perk. Increase to cumulative damage by 20%. Penalty for turn without casted acid spell decreased by 10%. Maximum 15 stacks.");
+		public static const CorrosiveMeltdownSu:PerkType = mk("Corrosive Meltdown (Su)", "Corrosive Meltdown (Su)",
+				"Prevent decay of cumulative damage increase bonus when channeling acid based attack. Penalty for turn without casted acid spell decreased by another 10%. Maximum 75 stacks.",
+				"You've chosen the 'Corrosive Meltdown (Su)' perk. Prevent decay of cumulative damage increase bonus when channeling acid based attack. Penalty for turn without casted acid spell decreased by another 10%. Maximum 75 stacks.");
+		
 		public static const CorruptedLibido:PerkType = mk("Corrupted Libido", "Corrupted Libido",
 				"Reduces lust gain by 10%.",
 				"You've chosen the 'Corrupted Libido' perk.  As a result of your body's corruption, you've become a bit harder to turn on. (Lust gain reduced by 10%!)");
@@ -5777,6 +5787,18 @@ public class PerkLib
                     }, "Any earth spell")
                     .requireLevel(12)
                     .requireInt(75);
+			CorrosiveMeltdown.requireAnyPerk(GrandMage, ArchmageEx)
+					.requirePerk(Channeling)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.hasStatusEffect(StatusEffects.KnowsIceSpike)
+                                || player.hasStatusEffect(StatusEffects.KnowsAcidSpray)
+                                || player.hasStatusEffect(StatusEffects.KnowsAcidRain)
+								|| player.hasStatusEffect(StatusEffects.KnowsCorrosiveWave)
+								|| player.hasStatusEffect(StatusEffects.KnowsHydroAcid)
+                                || player.hasPerk(PerkLib.AcidSpit);
+                    }, "Any acid spell")
+                    .requireLevel(12)
+                    .requireInt(75);
             // Spell-boosting perks
             // Battlemage: auto-use Might
             Battlemage.requireLevel(12)
@@ -5914,7 +5936,7 @@ public class PerkLib
 					.requirePerk(ArcaneRegenerationEpic)
                     .requireInt(125)
                     .requireLevel(24);
-			ElementalBolt.requireAnyPerk(RagingInferno, GlacialStorm, HighVoltage, EclipsingShadow, HighTide, HowlingGale, RumblingQuake)
+			ElementalBolt.requireAnyPerk(RagingInferno, GlacialStorm, HighVoltage, EclipsingShadow, HighTide, HowlingGale, RumblingQuake, CorrosiveMeltdown)
                     .requireInt(125)
                     .requireLevel(24);
             WarMageAdept.requirePerk(WarMageApprentice)
@@ -5975,6 +5997,9 @@ public class PerkLib
                     .requireLevel(30)
                     .requireInt(150);
 			RumblingQuakeEx.requirePerks(GrandArchmage, RumblingQuake)
+                    .requireLevel(30)
+                    .requireInt(150);
+			CorrosiveMeltdownEx.requirePerks(GrandArchmage, CorrosiveMeltdown)
                     .requireLevel(30)
                     .requireInt(150);/*
             SpellpowerGrey.requirePerk(SpellpowerGrey)
@@ -6073,6 +6098,9 @@ public class PerkLib
                     .requireLevel(54)
                     .requireInt(300)
 			RumblingQuakeSu.requirePerks(GrandArchmage3rdCircle, RumblingQuakeEx)
+                    .requireLevel(54)
+                    .requireInt(300);
+			CorrosiveMeltdownSu.requirePerks(GrandArchmage3rdCircle, CorrosiveMeltdownEx)
                     .requireLevel(54)
                     .requireInt(300);
             //Tier 10 Intelligence perks

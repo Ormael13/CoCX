@@ -1133,6 +1133,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CounterHighTide:StatusEffectType           = mkCombat("Counter High Tide");
 		public static const CounterHowlingGale:StatusEffectType           = mkCombat("Counter Howling Gale");
 		public static const CounterRumblingQuake:StatusEffectType           = mkCombat("Counter Rumbling Quake");
+		public static const CounterCorrosiveMeltdown:StatusEffectType           = mkCombat("Counter Corrosive Meltdown");
 
 		//cooldowns
 		public static const CooldownAdamantineShell:StatusEffectType           	= mkCombat("Cooldown Adamantine Shell");

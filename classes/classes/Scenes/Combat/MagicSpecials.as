@@ -2017,6 +2017,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage *= damult;
+		damage = calcCorrosionMod(damage, true);
 		damage = Math.round(damage);
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
@@ -2764,6 +2765,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage = calcTideMod(damage, true);
 			damage = calcQuakeMod(damage, true);
 			damage = calcGaleMod(damage, true);
+			damage = calcCorrosionMod(damage, true);
 
 			if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
 				player.removeStatusEffect(StatusEffects.DragonBreathBoost);
@@ -2831,13 +2833,9 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("You open your jaw, collecting all your draconic power into your chest. The light of your mixed power coalescing in your throat as you focus.\n\n");
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.ChanneledAttackType, 4, 0, 0, 0);
-			if (player.hasPerk(PerkLib.RagingInfernoSu)) player.addStatusValue(StatusEffects.CounterRagingInferno, 3, 1);
-			if (player.hasPerk(PerkLib.GlacialStormSu)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, 1);
-			if (player.hasPerk(PerkLib.HighVoltageSu)) player.addStatusValue(StatusEffects.CounterHighVoltage, 3, 1);
-			if (player.hasPerk(PerkLib.EclipsingShadowSu)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 3, 1);
-			if (player.hasPerk(PerkLib.HighTideSu)) player.addStatusValue(StatusEffects.CounterHighTide, 3, 1);
-			if (player.hasPerk(PerkLib.RumblingQuakeSu)) player.addStatusValue(StatusEffects.CounterRumblingQuake, 3, 1);
-			if (player.hasPerk(PerkLib.HowlingGaleSu)) player.addStatusValue(StatusEffects.CounterHowlingGale, 3, 1);
+			for each (var perkDragonObj:Object in CombatMagic.magicCounterPerks) {
+				if (player.hasPerk(perkDragonObj.tier3)) player.addStatusValue(perkDragonObj.counter, 3, 1);
+			}
 			enemyAI();
 		}
 	}
@@ -4175,13 +4173,15 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownHydraAcidBreath,7,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownHydraAcidBreath, 8, 0, 0, 0);
 		outputText("You move your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " Hydra heads in an attack formation, belching acid at [themonster]. Your acid begins to eat at your opponents natural defences. ");
-		for (var i:int = player.statusEffectv1(StatusEffects.HydraTailsPlayer); i > 0; i--)
-			hydraAcidBreathWeaponD();
+		for (var i:int = player.statusEffectv1(StatusEffects.HydraTailsPlayer); i > 0; i--) {
+			hydraAcidBreathWeaponD(i == player.statusEffectv1(StatusEffects.HydraTailsPlayer));
+		}
 		outputText("\n\n");
 		combat.heroBaneProc2();
 		checkLethiceAndCombatRoundOver();
 	}
-	public function hydraAcidBreathWeaponD():void {
+	//Only increase Acid damage counter the first time per attack
+	public function hydraAcidBreathWeaponD(incAcidCounter:Boolean = true):void {
 		var damage:Number = 0;
 		damage += combat.unarmedAttack();
 		damage += player.tou;
@@ -4189,6 +4189,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+		damage = calcCorrosionMod(damage, incAcidCounter);
 		damage = Math.round(damage);
 		doAcidDamage(damage, true, true);
 		if (monster.hasStatusEffect(StatusEffects.AcidDoT)) monster.addStatusValue(StatusEffects.AcidDoT, 4, 1); //More heads will produce more potent acid
