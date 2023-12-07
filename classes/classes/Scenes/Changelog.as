@@ -59,6 +59,7 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Slime Metabolism (Final Form). Req. Slime Metabolism (Evolved) and lvl 90+. Effects: When taking an intake of fluid heal for 5% of your hp, mana and fatigue. Increase all grappling tease damage by 100%. Gain temporary regeneration +2% after a fluid intake for one hour. Fluid intake heals all status damage, drains and weakening by 5% per intake.\n");
 			outputText("Facinate Stun lasts 2 turns, count your lust for twice as high when using Lust strike and it’s now benefit from all effects that pertain to the tease action.\n");
 			outputText("-New event perk: Familiar. Gained by becoming pureblood vampire (tier 2 vampire) and talking about vampirism with Diva OR by becoming fiendish vampire (tier 1 dracula/lina). Effects: Your blood is highly infectious feeding it to a willing or unwilling creature can either turn them into a lesser vampire or a ghoul.\n");
+			outputText("-New event perk: Anty Dexterity. Gained by having four ant arms. Effect: Strong ant arms boost your strength and allow wielding dual weapons <i>or</i> large weapons.\n");
 			outputText("-New range weapon (by Ormael): Twin Desert Eagles - can be gained by combining 2x Desert Eagle weapon. Cost 1240 gems. Base atk is 25 and ammo clip size 4. It's Dual Firearm type range weapon.\n");
 			outputText("-New range weapon (by Lady Aeducan): Harkonnen II - gained by giving Dinah 2x Harkonnen weapons and 4,500 gems for workers work fee (no she's outsourcing the work force and need to pay them... they can't run only on strong alcohol do they?). Cost 10,460 gems. Base atk is 260 and ammo clip size 2. Lowering range accuracy by 50%. It's Dual 2H Firearm type range weapon dealing true damage.\n");
 			outputText("-New consumable (by Sylabt & Ohaxer): Stomiidae fillet. Cost 10 gems. Can be bought at food stand in Trench. Eating it would restore 30 hunger.\n");
@@ -84,6 +85,8 @@ public class Changelog extends BaseContent
 			outputText("-Fix some attack and ability scaling of unarmed Dao instead of feral Dao otherwise changed Feral itherative to properly use unarmed strike new damage calculation formulae. (Liadri)\n");
 			outputText("-Ground for Succubus tatoo and fix a bug or two in viewer code. (Liadri)\n");
 			outputText("-Small bugfix from parser being checked even without being valid. (Jtecx)\n");
+			outputText("-Fixed a problem where arigean legs sprite were doing a hostile takeover of people's legs. Also Grayda NPC sprite implementation. Implemented arigean aura(s), and added Sylabt's edits/improvements to my arigean sprites. (Lord Shadeogorath)\n");
+			outputText("-The 'charview armor' toggle in the display settings should now work as intended. Fixed kirin horn being mis-aligned compared to unicorn horn. (Lord Shadeogorath)\n");
 			outputText("-Some small fixes for combat (jfmherokiller)\n");
 			outputText("-Added Cooldown Code for Blood Requiem and Blood Requiem (SF) Blood Soulskills. (Demojay)\n");
 			outputText("-Changed behaviour of Elementals under Simplified Pre Turn so that the elemental chosen is no longer random, but selected by the player. (Demojay)\n");
@@ -105,7 +108,6 @@ public class Changelog extends BaseContent
 			//outputText("-\n");
 			//outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
 			//outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
-			outputText("-Fixed a problem where arigean legs sprite were doing a hostile takeover of people's legs. Also Grayda NPC sprite implementation. Implemented arigean aura(s), and added Sylabt's edits/improvements to my arigean sprites. (Lord Shadeogorath)\n");
 			outputText("-New bodyparts: Demonic Graceful Feet, Demonic clawed hands, Demon face, Demon Eyes (& demon eye colors) (all of those bodyparts from Demon TF); Arigean Tail (Red), Arigean Aura (Red) (all of those bodyparts from Arigean Quests); Deer Arms (from Deer TF (Golden Rind)); Peafowl Feather Hair (from using Peacock Statuette)\n");
 			outputText("-When having Familiar perk and exploring at night PC can encounter human npc, whcich could be turned into ghoul servant.\n");
 			outputText("-Ghoulish Vampire Servant would move in to camp to server PC as long pc is tier 2 vampire or dracula. It can assist in combat never been lazy to not do anything outside first turn it prepare to fight alongside PC. It can also help in combat help pc by stealing health, soulforce or even filling vampire thirst stack during it attacks.\n");
@@ -113,7 +115,6 @@ public class Changelog extends BaseContent
 			outputText("-Added in Trench option to interact with Grayda. She have Appearance, Talk & Missions interactions. Mission section allow to progress in Arigean TF from recruit rank toward higher ranks like Elite or beyond.\n");
 			outputText("-Added to Undeath perk additional effect: Furthermore you have unlimited fatigue.\n");
 			outputText("-Deer race bonuses been updated to current races standards. At 8+ points in racial score they getting bonuses (deer): +25% to str & tou multi, +50% to spe multi, -20% to int multi and +40% to wis multi.\n");
-			outputText("-The 'charview armor' toggle in the display settings should now work as intended. Fixed kirin horn being mis-aligned compared to unicorn horn. (Lord Shadeogorath)\n");
 			outputText("-All the tease related dmg calculation been unified to use one function. It may make some specials weaker or stronger but also made them all easier to compare and adjust.\n");
 			outputText("-Erlking Cane durability increased from 10 to 50 and now it would slowly over time restore itself by 1 durability per hour.\n");
 			outputText("-Feeding Euphoria and Milking Euphoria speed bonus would be now based on speed value rather then been speed multi bonus.\n");
@@ -142,7 +143,6 @@ public class Changelog extends BaseContent
 			outputText("-Peacock was renamed into Peafowl-morph for race name. They can also now get a race bonuses for reaching 9+ pts: -10% to str multi, +60% to spe multi, +50% to wis multi, +35% to lib multi.\n");
 			outputText("-Ferret can gain race bonuses for reaching 6+ pts: -10% to str multi, +50% to spe multi, +30% to int multi, +40% to wis multi, +20 sens.\n");
 			outputText("-Ferret gain points to race score from weasel eyes and golden eye color.\n");
-			outputText("-New event perk: Anty Dexterity. Gained by having four ant arms. Effect: Strong ant arms boost your strength and allow wielding dual weapons <i>or</i> large weapons.\n");
 			outputText("-Adjusted Elemental Aspects: All Damaging Aspects given similar damage bonuses to a standard epic elemental attack. All aspects given mana cost similar to an epic elemental attack. Damaging Elemental Aspect attacks can now crit. Air Aspect no longer gets additional duration from intelligence and wisdom. Air and Earth Aspects now get additional duration from Enchanter perks. ");
 			outputText("Water Aspect now gains additional healing from Healer perks. Metal Aspect only raises unarmed damage, not damage resistance as well. Ether Aspects deals lower base damage, but has a higher weakness modifier to other Aspects compared to other attacks. Poison Aspect lust damage is now 75% of its magical damage, instead of minimal damage. (Demojay)\n");
 			outputText("-Arousing Aura now scales from libido, rather than single digit damage. Arousal Potion now uses the correct damage scaling, rather than copying Alraune Nectar. Alraune Nectar now gains bonuses from racial paragon. Alraune Nectar, Apophis Unholy Aura and Black Frost Aura can now be suppressed in Misc menu. ");
@@ -156,10 +156,10 @@ public class Changelog extends BaseContent
 			outputText("-New tier 9 intelligence lvl-up perk (by Demojay): Rumbling Earth (Su). Req. Rumbling Earth (Ex) & Grand Archmage (3rd circle) perks, 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling earth based attack. Penalty for turn without casted earth spell decreased by another 10%. Maximum 75 stacks.\n");
 			outputText("-Fixed bug where Mech Greatsword and Dual Mech Greatsword did not cause bleed damage in a mech. Fixed bug where Lightning Strikes affects all weapons, not just normal-sized ones. Mech melee attacks now gains magical attacks from charge weapon, similar to the other melee and ranged formulas. Twin Mech Melee Weapons in a goblin mech will now deal a second attack as expected. (Demojay)\n");
 			outputText("-Blood Puppies from 'My Blood For Blood Puppies' now attack automatically each turn. The player can now disable the wrath generation from 'Your Pain, My Power' in the 'Misc Opt' menu. (Demojay)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Added 'few' overrides method for each damage type (doDamageBefore()/doXXXDamageBefore()), handleStatusEffects(statusEffectType) for OrcaPlay/Straddle/Provoke/OrcaHasWackedFinish. Add a new gimmick for Lettuce who now has an ability to deflect player attacks/adapt to statuseffects. (NUZ/Shirane)\n");
+			outputText("-New tier 2 intelligence lvl-up perk (by Demojay): Corrosive Meltdown. Req. Grand Mage & Channeling perks, 75+ int and any acid spell or special. Effect: Cumulative 40% damage increase for every subsequent acid spell. Each turn without cast acid spell lower damage by 40% down to normal (100%) damage. Maximum 5 stacks.\n");
+			outputText("-New tier 5 intelligence lvl-up perk (by Demojay): Corrosive Meltdown (Ex). Req. Corrosive Meltdown & Grand Archmage perks, 150+ int. Effect: Increase to cumulative damage by 20%. Penalty for turn without casted acid spell decreased by 10%. Maximum 15 stacks.\n");
+			outputText("-New tier 9 intelligence lvl-up perk (by Demojay): Corrosive Meltdown (Su). Req. Corrosive Meltdown (Ex) & Grand Archmage (3rd circle) perks, 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling acid based attack. Penalty for turn without casted acid spell decreased by another 10%. Maximum 75 stacks.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -176,6 +176,18 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay) (NUZ/Shirane)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Fixed bugs: Telekinetic Grasp have unlimited powe... duration, 'Elite/Champion/Boss HP bonus' setting, Monsters HP (and Soulforce/Mana) not decreasing on turn end when any effect lowering it, Rathazul keep trying cure Belisa after Nadia done it, Vouivre Oil replacing dragon ears with snake ears & dragon scales with snake scales, Tyrantia & Flitzi forest scene allowing to skip ");
 			outputText("large portion of her storyline, corrupt Celess sex scenes not reseting lust/not giving tease exp, 2nd promotion in Adventure Guld been not accesable, Diva/Project Nightwalker dropping/giving Bat TF instead of Vampire TF, Sky-tier Aether Twins been excluded from some of BFGaunlets bonuses, silly mode event in hills involving minotaurs got it lvl req. below lvl req. for area ");
 			outputText("(fix was removing the lvl req. on it), races with Undeath perk scaling HP from tou instead of lib, Salamander IM not keeping Lustzerker perk from loosing if no longer race with lustzerker ability, Gryphon Statuette only allowing cock tf scene, Weasel Eyes tf not triggering when having Raiju Eyes\n\n");
@@ -224,16 +236,6 @@ public class Changelog extends BaseContent
 			outputText("-New tier ?? misc lvl-up perk: Armor. Req. Weapon perk. Effect: increasing armor proficiency. (+5% phys/mag resistance)\n");
 			outputText("-New tier ?? misc lvl-up perk: Alliance. Req. Fellowship perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier ?? misc lvl-up perk: Sex Deity. Req. Sex Champion perk. Effect: +15% tease dmg.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
