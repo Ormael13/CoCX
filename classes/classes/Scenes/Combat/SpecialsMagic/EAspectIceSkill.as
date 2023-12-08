@@ -38,13 +38,13 @@ public class EAspectIceSkill extends AbstractMagicSpecial {
     public function calcDamage(monster:Monster):Number {
         var damage:Number = elementalAspectBaseDamage(StatusEffects.SummonedElementalsIce);
         damage = elementalAspectDamageMod(StatusEffects.SummonedElementalsIce, damage);
-        damage = calcGlacialMod(damage, true);
 
         return damage;
     }
 
     override public function doEffect(display:Boolean = true):void {
         var damage:Number = calcDamage(monster);
+        damage = calcGlacialMod(damage, true);
 
         //Determine if critical hit!
         var crit:Boolean = false;

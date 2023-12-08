@@ -38,13 +38,13 @@ public class EAspectFireSkill extends AbstractMagicSpecial {
     public function calcDamage(monster:Monster):Number {
         var damage:Number = elementalAspectBaseDamage(StatusEffects.SummonedElementalsFire);
         damage = elementalAspectDamageMod(StatusEffects.SummonedElementalsFire, damage);
-        damage = calcInfernoMod(damage, true);
 
         return damage;
     }
 
     override public function doEffect(display:Boolean = true):void {
         var damage:Number = calcDamage(monster);
+        damage = calcInfernoMod(damage, true);
 
         //Determine if critical hit!
         var crit:Boolean = false;

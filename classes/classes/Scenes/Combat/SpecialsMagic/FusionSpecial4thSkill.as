@@ -7,26 +7,30 @@ import classes.PerkLib;
 import classes.Scenes.Combat.Combat;
 import classes.Races.ElementalRace;
 
-public class FusionSpecial1stSkill extends AbstractMagicSpecial {
-    public function FusionSpecial1stSkill() {
+public class FusionSpecial4thSkill extends AbstractMagicSpecial {
+    public function FusionSpecial4thSkill() {
         super (
-            "Fusion Special: First",
-            "Attack with the power of your fused elemental.",
+            "Fusion Special: Fourth",
+            "Attack with the power of your fused elemental over a wide area.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING, TAG_MAGICAL, TAG_TIER2],
+            [TAG_DAMAGING, TAG_MAGICAL, TAG_TIER2, TAG_AOE],
             PerkLib.ElementalBody
         )
         this.lastAttackType = Combat.LAST_ATTACK_SPELL;
-        baseSFCost = 100;
+        baseSFCost = 200;
+    }
+
+    override public function get isKnown():Boolean {
+        return super.isKnown && player.statusEffectv2(elementDescriptionArr[ElementalRace.getElement(player)][2]) >= 6;
     }
 
     private var elementDescriptionArr:Array = [
-        ["Fusion 1st", "magical", null, null],
-        ["Wind Blade", "wind", StatusEffects.SummonedElementalsAirE, TAG_WIND],
-        ["Wild Growth", "earth", StatusEffects.SummonedElementalsEarthE, TAG_EARTH],
-        ["Pyroblast", "fire", StatusEffects.SummonedElementalsFireE, TAG_FIRE],
-        ["Hydraulic Torrent", "water", StatusEffects.SummonedElementalsWaterE, TAG_WATER]
+        ["Fusion 4th", "magical", null, null],
+        ["Tornado", "wind", StatusEffects.SummonedElementalsAirE, TAG_WIND],
+        ["Stalagmite", "earth", StatusEffects.SummonedElementalsEarthE, TAG_EARTH],
+        ["Explosion", "fire", StatusEffects.SummonedElementalsFireE, TAG_FIRE],
+        ["Maelstrom", "water", StatusEffects.SummonedElementalsWaterE, TAG_WATER]
     ];
 
     override protected function usabilityCheck():String {
@@ -43,12 +47,8 @@ public class FusionSpecial1stSkill extends AbstractMagicSpecial {
     }
 
     override public function calcCooldown():int {
-        return 0;
+        return 4;
     }
-
-    override public function get buttonName():String {
-		return elementDescriptionArr[ElementalRace.getElement(player)][0];
-	}
 
     override public function describeEffectVs(target:Monster):String {
 		return "~" + numberFormat(calcDamage(monster)) + " " + elementDescriptionArr[ElementalRace.getElement(player)][1] +  " damage";
@@ -101,30 +101,33 @@ public class FusionSpecial1stSkill extends AbstractMagicSpecial {
 		damage += scalingBonusWisdom() * multiWis;
 
         switch(ElementalRace.getElement(player)) {
-            case ElementalRace.ELEMENT_GNOME:   damage *= combat.earthDamageBoostedByDao();
+            case ElementalRace.ELEMENT_GNOME:   damage *= 2;
+                                                damage *= combat.earthDamageBoostedByDao();
                                                 break;
             case ElementalRace.ELEMENT_IGNIS:   damage *= combat.fireDamageBoostedByDao();
                                                 break;   
-            case ElementalRace.ELEMENT_SYLPH:   damage *= combat.windDamageBoostedByDao();
+            case ElementalRace.ELEMENT_SYLPH:   if (monster && monster.isFlying()) damage *= 4;
+                                                damage *= combat.windDamageBoostedByDao();
                                                 break;   
             case ElementalRace.ELEMENT_UNDINE:  damage *= combat.waterDamageBoostedByDao();
                                                 break;
         }
 
         damage *= soulskillMagicalMod();
+        if (monster && monster.plural) damage *= 5;
 
         return damage;
     }
 
     override public function doEffect(display:Boolean = true):void {
         switch(ElementalRace.getElement(player)) {
-            case ElementalRace.ELEMENT_GNOME:   if (display) outputText("You smash both of your fists into the ground, causing vegetation to grow at an accelerated rate. [Themonster] is punched out of nowhere as a grown tree suddenly sprouts from beneath! ");
+            case ElementalRace.ELEMENT_GNOME:   if (display) outputText("You slam your fist into the ground, causing the soil to explode into a field of stalagmites impaling [Themonster]! ");
                                                 break;
-            case ElementalRace.ELEMENT_IGNIS:   if (display) outputText("You gather energy in your mouth before spitting a pyroclastic mather at your opponent, searing their flesh and setting [themonster] on fire. ");
+            case ElementalRace.ELEMENT_IGNIS:   if (display) outputText("You snap your finger, causing a small star shaped light to appear in front of [Themonster] which combusts into a massive explosion! ");
                                                 break;
-            case ElementalRace.ELEMENT_SYLPH:   if (display) outputText("You rub your palms together before unleashing the energy in the form of razor sharp winds. [Themonster] eyes grow wide in surprise as your attack leaves deep bleeding cuts in its flesh! ");
+            case ElementalRace.ELEMENT_SYLPH:   if (display) outputText("You hold your breath before unleashing a swirling tornado at [Themonster], tossing them high in the air before letting gravity do the rest! ");
                                                 break;
-            case ElementalRace.ELEMENT_UNDINE:  if (display) outputText("You push both of your palms toward your opponent, your arms turning to a pair of powerful water jets that batters [themonster] with rock crushing pressure! ");
+            case ElementalRace.ELEMENT_UNDINE:  if (display) outputText("Your body explodes into a large mass of water, pulling [Themonster] into your currents. You keep [Themonster] swirling into the maelstrom as you add rocks and debris to your attack, smashing and slamming them repeatedly before ejecting them onto the ground. ");
                                                 break;
             default:                            throw new Error("Should not be able to call ability when not fused");
                                                 break;
@@ -175,6 +178,10 @@ public class FusionSpecial1stSkill extends AbstractMagicSpecial {
                                                     monster.statStore.addBuffObject({str:-10,spe:-10}, "Poison",{text:"Poison"});
                                                     if (monster.hasStatusEffect(StatusEffects.Frostbite)) monster.addStatusValue(StatusEffects.Frostbite,1,1);
                                                     else monster.createStatusEffect(StatusEffects.Frostbite,1,0,0,0);
+                                                }
+                                                if (rand(2) == 0 && !monster.hasPerk(PerkLib.Resolute) && !monster.monsterIsStunned()) {
+                                                    outputText("\nThe experience leaves [Themonster] dazed!");
+                                                    monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
                                                 }
                                                 break;
             default:                            throw new Error("Should not be able to call ability when not fused");

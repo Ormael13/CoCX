@@ -7,26 +7,30 @@ import classes.PerkLib;
 import classes.Scenes.Combat.Combat;
 import classes.Races.ElementalRace;
 
-public class FusionSpecial1stSkill extends AbstractMagicSpecial {
-    public function FusionSpecial1stSkill() {
+public class FusionSpecial5thSkill extends AbstractMagicSpecial {
+    public function FusionSpecial5thSkill() {
         super (
-            "Fusion Special: First",
-            "Attack with the power of your fused elemental.",
+            "Fusion Special: Firth",
+            "Attack with the power of your fused elemental over a wide area. Your elemental's power lingers, causing additional damage over time",
             TARGET_ENEMY,
-            TIMING_INSTANT,
-            [TAG_DAMAGING, TAG_MAGICAL, TAG_TIER2],
+            TIMING_LASTING,
+            [TAG_DAMAGING, TAG_MAGICAL, TAG_TIER3, TAG_AOE],
             PerkLib.ElementalBody
         )
         this.lastAttackType = Combat.LAST_ATTACK_SPELL;
-        baseSFCost = 100;
+        baseSFCost = 600;
+    }
+
+    override public function get isKnown():Boolean {
+        return super.isKnown && player.statusEffectv2(elementDescriptionArr[ElementalRace.getElement(player)][2]) >= 8;
     }
 
     private var elementDescriptionArr:Array = [
-        ["Fusion 1st", "magical", null, null],
-        ["Wind Blade", "wind", StatusEffects.SummonedElementalsAirE, TAG_WIND],
-        ["Wild Growth", "earth", StatusEffects.SummonedElementalsEarthE, TAG_EARTH],
-        ["Pyroblast", "fire", StatusEffects.SummonedElementalsFireE, TAG_FIRE],
-        ["Hydraulic Torrent", "water", StatusEffects.SummonedElementalsWaterE, TAG_WATER]
+        ["Fusion 5th", "magical", null, null],
+        ["Vortex", "wind", StatusEffects.SummonedElementalsAirE, TAG_WIND],
+        ["Earthquake", "earth", StatusEffects.SummonedElementalsEarthE, TAG_EARTH],
+        ["Eruption", "fire", StatusEffects.SummonedElementalsFireE, TAG_FIRE],
+        ["Tsunami", "water", StatusEffects.SummonedElementalsWaterE, TAG_WATER]
     ];
 
     override protected function usabilityCheck():String {
@@ -43,12 +47,12 @@ public class FusionSpecial1stSkill extends AbstractMagicSpecial {
     }
 
     override public function calcCooldown():int {
-        return 0;
+        return 8;
     }
 
-    override public function get buttonName():String {
-		return elementDescriptionArr[ElementalRace.getElement(player)][0];
-	}
+    override public function calcDuration():int {
+        return 5;
+    }
 
     override public function describeEffectVs(target:Monster):String {
 		return "~" + numberFormat(calcDamage(monster)) + " " + elementDescriptionArr[ElementalRace.getElement(player)][1] +  " damage";
@@ -77,8 +81,8 @@ public class FusionSpecial1stSkill extends AbstractMagicSpecial {
 
     public function calcDamage(monster:Monster):Number {
         var damage:Number = 0;
-		var multiInt:Number = 2;
-		var multiWis:Number = 2;
+		var multiInt:Number = 3;
+		var multiWis:Number = 3;
         var element:int = player.statusEffectv2(elementDescriptionArr[ElementalRace.getElement(player)][2]);
         
         //Deals no damage when unfused with an elemental
@@ -86,45 +90,80 @@ public class FusionSpecial1stSkill extends AbstractMagicSpecial {
             return 0;
 
 		if (element >= 4) {
-			multiInt += 0.4 * (element - 3);
-			multiWis += 0.4 * (element - 3);
+			multiInt += 0.6 * (element - 3);
+			multiWis += 0.6 * (element - 3);
 		}
 		if (element >= 7) {
-			multiInt += 0.4 * (element - 6);
-			multiWis += 0.4 * (element - 6);
+			multiInt += 0.6 * (element - 6);
+			multiWis += 0.6 * (element - 6);
 		}
 		if (element >= 10) {
-			multiInt += 0.4 * (element - 9);
-			multiWis += 0.4 * (element - 9);
+			multiInt += 0.6 * (element - 9);
+			multiWis += 0.6 * (element - 9);
 		}
 		damage += scalingBonusIntelligence() * multiInt;
 		damage += scalingBonusWisdom() * multiWis;
 
         switch(ElementalRace.getElement(player)) {
-            case ElementalRace.ELEMENT_GNOME:   damage *= combat.earthDamageBoostedByDao();
+            case ElementalRace.ELEMENT_GNOME:   damage *= 2;
+                                                damage *= combat.earthDamageBoostedByDao();
                                                 break;
             case ElementalRace.ELEMENT_IGNIS:   damage *= combat.fireDamageBoostedByDao();
                                                 break;   
-            case ElementalRace.ELEMENT_SYLPH:   damage *= combat.windDamageBoostedByDao();
+            case ElementalRace.ELEMENT_SYLPH:   if (monster && monster.isFlying()) damage *= 4;
+                                                damage *= combat.windDamageBoostedByDao();
                                                 break;   
             case ElementalRace.ELEMENT_UNDINE:  damage *= combat.waterDamageBoostedByDao();
                                                 break;
         }
 
         damage *= soulskillMagicalMod();
+        if (monster && monster.plural) damage *= 5;
 
         return damage;
     }
 
+    override public function advance(display:Boolean):void {
+        switch(ElementalRace.getElement(player)) {
+            case ElementalRace.ELEMENT_GNOME:   if (display) outputText("The aftershocks of your attack continues to stike [Themonster]! ");
+                                                doEarthDamage(calcDamage(monster), true, display);
+                                                if (display) outputText("\n\n");
+                                                break;
+            case ElementalRace.ELEMENT_IGNIS:   if (display) outputText("A volanic vent sprews lava, burning [Themonster]! ");
+                                                doFireDamage(calcDamage(monster), true, display);
+                                                if (display) outputText("\n\n");
+                                                break;
+            case ElementalRace.ELEMENT_SYLPH:   if (display) outputText("[Themonster] continues to be struck by debris in the vortex! ");
+                                                doWindDamage(calcDamage(monster), true, display);
+                                                if (display) outputText("\n\n");
+                                                break;
+            case ElementalRace.ELEMENT_UNDINE:  if (display) outputText("Just as [Themonster] gathers their bearings, another wave crashes into them! ");
+                                                doWaterDamage(calcDamage(monster), true, display);
+                                                if (display) outputText("\n\n");
+                                                break;
+            default:                            throw new Error("Should not be able to call ability when not fused");
+                                                break;
+        }
+        if (rand(5) == 0 && !monster.hasPerk(PerkLib.Resolute) && !monster.monsterIsStunned()) {
+            outputText("\nThe experience leaves [Themonster] dazed!");
+            monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
+        }
+        super.advance(display);
+    }
+
+    override public function durationEnd(display:Boolean = true):void {
+        if (display) outputText("<b>The lingering elemental effects has ended.</b>")
+    }
+
     override public function doEffect(display:Boolean = true):void {
         switch(ElementalRace.getElement(player)) {
-            case ElementalRace.ELEMENT_GNOME:   if (display) outputText("You smash both of your fists into the ground, causing vegetation to grow at an accelerated rate. [Themonster] is punched out of nowhere as a grown tree suddenly sprouts from beneath! ");
+            case ElementalRace.ELEMENT_GNOME:   if (display) outputText("You brutally ram your fists into the ground, awakening Mother Earth's rage. The entire area starts to shake, as the earth cracks and breaks all around [Themonster]! ");
                                                 break;
-            case ElementalRace.ELEMENT_IGNIS:   if (display) outputText("You gather energy in your mouth before spitting a pyroclastic mather at your opponent, searing their flesh and setting [themonster] on fire. ");
+            case ElementalRace.ELEMENT_IGNIS:   if (display) outputText("You slam your palm to the ground, causing the area around you to erupt into a sea of small volcanoes! The vents begins to spew lava, drowning [Themonster] in large molten rocks!. ");
                                                 break;
-            case ElementalRace.ELEMENT_SYLPH:   if (display) outputText("You rub your palms together before unleashing the energy in the form of razor sharp winds. [Themonster] eyes grow wide in surprise as your attack leaves deep bleeding cuts in its flesh! ");
+            case ElementalRace.ELEMENT_SYLPH:   if (display) outputText("You move your palm upward, clouds swirling as you create an all powerful vortex of air, pulling everything around within it. [Themonster] is swiftly sucked inside to be hammered by countless debris and rocks! ");
                                                 break;
-            case ElementalRace.ELEMENT_UNDINE:  if (display) outputText("You push both of your palms toward your opponent, your arms turning to a pair of powerful water jets that batters [themonster] with rock crushing pressure! ");
+            case ElementalRace.ELEMENT_UNDINE:  if (display) outputText("You turn both palms downward, deversing a deluge of water in front of you. What first started as a cresting wave of water becomes a castle-breaching tsunami within seconds, engulfing [Themonster] in its deadly and powerful currents! ");
                                                 break;
             default:                            throw new Error("Should not be able to call ability when not fused");
                                                 break;
@@ -182,6 +221,7 @@ public class FusionSpecial1stSkill extends AbstractMagicSpecial {
         }
 
         outputText("\n\n");
+        setDuration();
     }
 
   

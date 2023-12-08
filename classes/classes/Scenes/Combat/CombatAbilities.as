@@ -382,16 +382,25 @@ public class CombatAbilities {
 	public static const AdamantineShell:FusionSpecialAdamantineShellSkill = new FusionSpecialAdamantineShellSkill();
 	public static const FieryRage:FusionSpecialFieryRageSkill = new FusionSpecialFieryRageSkill();
 	public static const MomentofClarity:FusionSpecialMomentofClaritySkill = new FusionSpecialMomentofClaritySkill();
+	public static const FusionSpecial4th:FusionSpecial4thSkill = new FusionSpecial4thSkill();
+	public static const FusionSpecial5th:FusionSpecial5thSkill = new FusionSpecial5thSkill();
 
 
-	public static const ALL_MAGICAL_SPECIALS:/*CombatAbility*/Array = [
+	public static const ALL_ELEMENTAL_FUSION_ATTACKS:/*CombatAbility*/Array = [
 		FusionSpecial1st,
 		FusionSpecial2nd,
 		TrueEvasion,
 		AdamantineShell,
-		MomentofClarity
+		MomentofClarity,
+		FusionSpecial4th,
+		FusionSpecial5th
 	];
 
+	public static const ALL_MAGICAL_SPECIALS:/*CombatAbility*/Array = [
+		
+	]
+	.concat(ALL_ELEMENTAL_FUSION_ATTACKS);
+	
 	
 	/*
 	 * Difference from CombatAbility.Registry:

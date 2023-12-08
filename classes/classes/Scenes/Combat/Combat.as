@@ -1053,87 +1053,11 @@ public class Combat extends BaseContent {
 			else bd = buttons.add("No Limiter", noLimiterState).hint("Toggle on No Limiter. (STR+++, ?Lib-?)");
 		}
 		if (player.hasPerk(PerkLib.ElementalBody)) {
-            var element:int = ElementalRace.getElement(player);
-			if (element == ElementalRace.ELEMENT_SYLPH) {
-				bd = buttons.add("Wind Blade", curry(mspecials.FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsAirE), 1)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				else if (player.hasStatusEffect(StatusEffects.InsideSmallSpace)) {
-					bd.disable("You can't use this inside too small spaces.");
-				}
-				bd = buttons.add("Healing Breeze", curry(mspecials.FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsAirE), 1)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) == 5) {
-					bd = buttons.add("True Evasion", mspecials.FusionSpecialTrueEvasion).hint("Cooldown: 10 turns.\n\nSoulforce cost: " + Math.round(20 * soulskillCost() * soulskillcostmulti()));
-					if (player.soulforce < 20 * soulskillCost() * soulskillcostmulti()) {
-						bd.disable("Your current soulforce is too low.");
-					}
-					else if (player.hasStatusEffect(StatusEffects.CooldownTrueEvasion)) {
-						bd.disable("You need more time before you can use True Evasion again.");
-					}
-				}
-			}
-			if (element == ElementalRace.ELEMENT_GNOME) {
-				bd = buttons.add("Wild Growth", curry(mspecials.FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsEarthE), 2)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				else if (monster.hasStatusEffect(StatusEffects.Flying)) {
-					bd.disable("You can reach flying targets.");
-				}
-				bd = buttons.add("Synthesis", curry(mspecials.FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsEarthE), 2)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) == 5) {
-					bd = buttons.add("Adamantine Shell", mspecials.FusionSpecialAdamantineShell).hint("Cooldown: 10 turns.\n\nSoulforce cost: " + Math.round(20 * soulskillCost() * soulskillcostmulti()));
-					if (player.soulforce < 20 * soulskillCost() * soulskillcostmulti()) {
-						bd.disable("Your current soulforce is too low.");
-					}
-					else if (player.hasStatusEffect(StatusEffects.CooldownAdamantineShell)) {
-						bd.disable("You need more time before you can use True Evasion again.");
-					}
-				}
-			}
-			if (element == ElementalRace.ELEMENT_IGNIS) {
-				bd = buttons.add("Pyroblast", curry(mspecials.FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsFireE), 3)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				bd = buttons.add("Warmth", curry(mspecials.FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsFireE), 3)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) == 5) {
-					if (player.hasStatusEffect(StatusEffects.FieryRage)) {
-						bd = buttons.add("Fiery Rage(Off)", mspecials.FusionSpecialFieryRageDeactivate).hint("Deactivate Fiery Rage.");
-					} else {
-						bd = buttons.add("Fiery Rage(On)", mspecials.FusionSpecialFieryRageActivate).hint("Double your melee damage for a time, by ignoring your body's limits, pushing past them. This technique drain 5% of max soulforce per round, but also increases lust resistance.");
-					}
-				}
-			}
-			if (element == ElementalRace.ELEMENT_UNDINE) {
-				bd = buttons.add("Hydraulic Torrent", curry(mspecials.FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsWaterE), 4)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				bd = buttons.add("Lifewater", curry(mspecials.FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsWaterE), 4)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) == 5) {
-					bd = buttons.add("Moment of Clarity", mspecials.FusionSpecialMomentOfClarity).hint("Cooldown: 6 turns.\n\nSoulforce cost: " + Math.round(20 * soulskillCost() * soulskillcostmulti()));
-					if (player.soulforce < 20 * soulskillCost() * soulskillcostmulti()) {
-						bd.disable("Your current soulforce is too low.");
-					}
-					else if (player.hasStatusEffect(StatusEffects.CooldownMomentOfClarity)) {
-						bd.disable("You need more time before you can use True Evasion again.");
-					}
-				}
-			}
+            for each (var fusionAbility:CombatAbility in CombatAbilities.ALL_ELEMENTAL_FUSION_ATTACKS) {
+                if (fusionAbility.isKnown) {
+                    buttons.append(fusionAbility.createButton(monster));
+                }
+            }
 		}
     }
 	public function GolemsMenu(page:int = 1):void {
