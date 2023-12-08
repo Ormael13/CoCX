@@ -2613,7 +2613,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.PureAndLoving)) lust *= 0.95;
 			//Berseking reduces lust gains by 10%
 			if (hasStatusEffect(StatusEffects.Berzerking)) lust *= 0.9;
-			if (hasStatusEffect(StatusEffects.Overlimit) || hasStatusEffect(StatusEffects.FieryRage)) lust *= 0.9;
+			if (hasStatusEffect(StatusEffects.Overlimit) || CombatAbilities.FieryRage.isActive()) lust *= 0.9;
 			if (TyrantiaFollower.TyrantiaTrainingSessions >= 25 && lust100 >= 50) {
 				if (lust100 >= 100) lust *= 0.3;
 				else if (lust100 >= 51) lust *= (1 - ((lust100 - 30) * 0.01));
@@ -2648,7 +2648,7 @@ use namespace CoC;
 			if (hasStatusEffect(StatusEffects.Aegis)) lust *= 0.5;
 			lust = Math.round(lust);
 			if (hasStatusEffect(StatusEffects.Lustzerking) && !hasPerk(PerkLib.ColdLust)) lust = 100;
-			if (hasStatusEffect(StatusEffects.BlazingBattleSpirit) || hasStatusEffect(StatusEffects.MomentOfClarity)) lust = 0;
+			if (hasStatusEffect(StatusEffects.BlazingBattleSpirit) || CombatAbilities.MomentofClarity.isActive()) lust = 0;
 			return lust;
 		}
 
@@ -2838,7 +2838,7 @@ use namespace CoC;
 				}
 				// Resource consuming damage reduction abilities and setup array of damage number
 				var afterShieldMult:Number = 1;
-				if (hasStatusEffect(StatusEffects.AdamantineShell)) afterShieldMult = afterShieldMult * 0.25;
+				if (CombatAbilities.AdamantineShell.isActive()) afterShieldMult = afterShieldMult * 0.25;
 				if (hasStatusEffect(StatusEffects.BoneArmor)) afterShieldMult = afterShieldMult * 0.5;
 
 				for(i = 0; i < hit; i++){
@@ -2860,7 +2860,7 @@ use namespace CoC;
 				}
 				// Well everything changed when the true evasion nation attacked
 				// Mana/blood shield already penalized so the rest of hits can be skipped if passed true evasion
-				if (!hasStatusEffect(StatusEffects.TrueEvasion)) {
+				if (!CombatAbilities.TrueEvasion.isActive()) {
 					var armorMod:Number = 1;
 					damage = 0;
 					hit = remainingHit.length;

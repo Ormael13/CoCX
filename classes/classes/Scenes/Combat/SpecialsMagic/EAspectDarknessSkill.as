@@ -38,13 +38,13 @@ public class EAspectDarknessSkill extends AbstractMagicSpecial {
     public function calcDamage(monster:Monster):Number {
         var damage:Number = elementalAspectBaseDamage(StatusEffects.SummonedElementalsDarkness);
         damage = elementalAspectDamageMod(StatusEffects.SummonedElementalsDarkness, damage);
-        damage = calcEclypseMod(damage, true);
 
         return damage;
     }
 
     override public function doEffect(display:Boolean = true):void {
         var damage:Number = calcDamage(monster);
+        damage = calcEclypseMod(damage, true);
 
         //Determine if critical hit!
         var crit:Boolean = false;

@@ -300,7 +300,6 @@ public class CombatMagic extends BaseCombatContent {
 				if (player.perkv2(PerkLib.ElementalBody) == 3) mod += .3;
 				if (player.perkv2(PerkLib.ElementalBody) == 4) mod += .4;
 			}
-			if (player.hasPerk(PerkLib.SharedPower) && player.perkv1(PerkLib.SharedPower) > 0) mod += (0.1*player.perkv1(PerkLib.SharedPower));
 		}
         return mod;
     }

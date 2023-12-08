@@ -376,9 +376,31 @@ public class CombatAbilities {
 		EAspectCorruption
 	]
 
+	public static const FusionSpecial1st:FusionSpecial1stSkill = new FusionSpecial1stSkill();
+	public static const FusionSpecial2nd:FusionSpecial2ndSkill = new FusionSpecial2ndSkill();
+	public static const TrueEvasion:FusionSpecialTrueEvasionSkill = new FusionSpecialTrueEvasionSkill();
+	public static const AdamantineShell:FusionSpecialAdamantineShellSkill = new FusionSpecialAdamantineShellSkill();
+	public static const FieryRage:FusionSpecialFieryRageSkill = new FusionSpecialFieryRageSkill();
+	public static const MomentofClarity:FusionSpecialMomentofClaritySkill = new FusionSpecialMomentofClaritySkill();
+	public static const FusionSpecial4th:FusionSpecial4thSkill = new FusionSpecial4thSkill();
+	public static const FusionSpecial5th:FusionSpecial5thSkill = new FusionSpecial5thSkill();
+
+
+	public static const ALL_ELEMENTAL_FUSION_ATTACKS:/*CombatAbility*/Array = [
+		FusionSpecial1st,
+		FusionSpecial2nd,
+		TrueEvasion,
+		AdamantineShell,
+		MomentofClarity,
+		FusionSpecial4th,
+		FusionSpecial5th
+	];
+
 	public static const ALL_MAGICAL_SPECIALS:/*CombatAbility*/Array = [
 		
-	];
+	]
+	.concat(ALL_ELEMENTAL_FUSION_ATTACKS);
+	
 	
 	/*
 	 * Difference from CombatAbility.Registry:

@@ -762,6 +762,7 @@ public class Combat extends BaseContent {
             flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] = 0;
             flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 0;
             flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 0;
+            flags[kFLAGS.IN_COMBAT_PLAYER_EPIC_ELEMENTAL_ATTACKED] = 0;
 			flags[kFLAGS.IN_COMBAT_PLAYER_MUMMY_ATTACKED] = 0;
 			flags[kFLAGS.IN_COMBAT_PLAYER_ANUBI_HEART_LEECH] = 0;
 			if (player.hasPerk(PerkLib.FirstAttackSkeletons)) flags[kFLAGS.IN_COMBAT_PLAYER_SKELETONS_ATTACKED] = 0;
@@ -769,11 +770,6 @@ public class Combat extends BaseContent {
 			if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) flags[kFLAGS.IN_COMBAT_PLAYER_USED_SHARK_BITE] = 0;
 			if (player.armor == armors.BMARMOR) dynStats("lus", -(Math.round(player.maxLust() * 0.05)));
 			if (player.hasStatusEffect(StatusEffects.TyrantState)) dynStats("lus", (Math.round(player.maxLust() * 0.05)));
-			if (player.hasStatusEffect(StatusEffects.MomentOfClarity)) dynStats("lus", -(Math.round(player.maxLust() * 0.05)));
-			if (player.hasStatusEffect(StatusEffects.FieryRage)) {
-				if (player.soulforce < (player.maxSoulforce() * 0.05)) player.removeStatusEffect(StatusEffects.FieryRage);
-				else EngineCore.SoulforceChange(Math.round(player.maxSoulforce() * 0.05));
-			}
 			if (player.hasStatusEffect(StatusEffects.VampThirstStacksHPMana)) player.removeStatusEffect(StatusEffects.VampThirstStacksHPMana);
         }
         mainView.hideMenuButton(MainView.MENU_DATA);
@@ -1057,87 +1053,11 @@ public class Combat extends BaseContent {
 			else bd = buttons.add("No Limiter", noLimiterState).hint("Toggle on No Limiter. (STR+++, ?Lib-?)");
 		}
 		if (player.hasPerk(PerkLib.ElementalBody)) {
-            var element:int = ElementalRace.getElement(player);
-			if (element == ElementalRace.ELEMENT_SYLPH) {
-				bd = buttons.add("Wind Blade", curry(mspecials.FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsAirE), 1)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				else if (player.hasStatusEffect(StatusEffects.InsideSmallSpace)) {
-					bd.disable("You can't use this inside too small spaces.");
-				}
-				bd = buttons.add("Healing Breeze", curry(mspecials.FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsAirE), 1)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) == 5) {
-					bd = buttons.add("True Evasion", mspecials.FusionSpecialTrueEvasion).hint("Cooldown: 10 turns.\n\nSoulforce cost: " + Math.round(20 * soulskillCost() * soulskillcostmulti()));
-					if (player.soulforce < 20 * soulskillCost() * soulskillcostmulti()) {
-						bd.disable("Your current soulforce is too low.");
-					}
-					else if (player.hasStatusEffect(StatusEffects.CooldownTrueEvasion)) {
-						bd.disable("You need more time before you can use True Evasion again.");
-					}
-				}
-			}
-			if (element == ElementalRace.ELEMENT_GNOME) {
-				bd = buttons.add("Wild Growth", curry(mspecials.FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsEarthE), 2)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				else if (monster.hasStatusEffect(StatusEffects.Flying)) {
-					bd.disable("You can reach flying targets.");
-				}
-				bd = buttons.add("Synthesis", curry(mspecials.FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsEarthE), 2)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) == 5) {
-					bd = buttons.add("Adamantine Shell", mspecials.FusionSpecialAdamantineShell).hint("Cooldown: 10 turns.\n\nSoulforce cost: " + Math.round(20 * soulskillCost() * soulskillcostmulti()));
-					if (player.soulforce < 20 * soulskillCost() * soulskillcostmulti()) {
-						bd.disable("Your current soulforce is too low.");
-					}
-					else if (player.hasStatusEffect(StatusEffects.CooldownAdamantineShell)) {
-						bd.disable("You need more time before you can use True Evasion again.");
-					}
-				}
-			}
-			if (element == ElementalRace.ELEMENT_IGNIS) {
-				bd = buttons.add("Pyroblast", curry(mspecials.FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsFireE), 3)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				bd = buttons.add("Warmth", curry(mspecials.FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsFireE), 3)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) == 5) {
-					if (player.hasStatusEffect(StatusEffects.FieryRage)) {
-						bd = buttons.add("Fiery Rage(Off)", mspecials.FusionSpecialFieryRageDeactivate).hint("Deactivate Fiery Rage.");
-					} else {
-						bd = buttons.add("Fiery Rage(On)", mspecials.FusionSpecialFieryRageActivate).hint("Double your melee damage for a time, by ignoring your body's limits, pushing past them. This technique drain 5% of max soulforce per round, but also increases lust resistance.");
-					}
-				}
-			}
-			if (element == ElementalRace.ELEMENT_UNDINE) {
-				bd = buttons.add("Hydraulic Torrent", curry(mspecials.FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsWaterE), 4)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				bd = buttons.add("Lifewater", curry(mspecials.FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsWaterE), 4)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) == 5) {
-					bd = buttons.add("Moment of Clarity", mspecials.FusionSpecialMomentOfClarity).hint("Cooldown: 6 turns.\n\nSoulforce cost: " + Math.round(20 * soulskillCost() * soulskillcostmulti()));
-					if (player.soulforce < 20 * soulskillCost() * soulskillcostmulti()) {
-						bd.disable("Your current soulforce is too low.");
-					}
-					else if (player.hasStatusEffect(StatusEffects.CooldownMomentOfClarity)) {
-						bd.disable("You need more time before you can use True Evasion again.");
-					}
-				}
-			}
+            for each (var fusionAbility:CombatAbility in CombatAbilities.ALL_ELEMENTAL_FUSION_ATTACKS) {
+                if (fusionAbility.isKnown) {
+                    buttons.append(fusionAbility.createButton(monster));
+                }
+            }
 		}
     }
 	public function GolemsMenu(page:int = 1):void {
@@ -1608,9 +1528,7 @@ public class Combat extends BaseContent {
             if (epicElementalObj.hasOwnProperty(String(attackingEpicElementalTypeFlag))) {
                 var elementalEpicSelection:Array = epicElementalObj[attackingEpicElementalTypeFlag];
                 //Force user to choose if currently fused if Elemental, or does not known currently chosen Epic Elemental
-                if (!player.hasStatusEffect(elementalEpicSelection[0]) || (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == elementalEpicSelection[1])) {
-                    ui.doEpicElementalTurn();
-                } else {
+                if (player.hasStatusEffect(elementalEpicSelection[0]) && (!player.hasPerk(PerkLib.ElementalBody) || player.perkv1(PerkLib.ElementalBody) != elementalEpicSelection[1])) {
                     baseelementalattacks(attackingEpicElementalTypeFlag);
                 }
             }
@@ -1638,11 +1556,9 @@ public class Combat extends BaseContent {
             if (baseElementalObj.hasOwnProperty(String(attackingElementalTypeFlag))) {
                 var elementalSelection:Array = baseElementalObj[attackingElementalTypeFlag];
                 //Force user to choose if currently fused if Elemental, or does not known currently chosen Epic Elemental
-                if (!player.hasStatusEffect(elementalSelection[0]) || (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == elementalSelection[1])) {
-                    ui.doElementalTurn();
-                } else {
+                if (player.hasStatusEffect(elementalSelection[0]) && (!player.hasPerk(PerkLib.ElementalBody) || player.perkv1(PerkLib.ElementalBody) != elementalSelection[1])) {
                     baseelementalattacks(attackingElementalTypeFlag);
-                }
+                } 
             }
         }
         if (ui.isBloodPuppiesTurn()) {
@@ -1739,7 +1655,7 @@ public class Combat extends BaseContent {
         }
 	}
 
-    public function baseelementalattacks(elementType:int = -1):void {
+    public function baseelementalattacks(elementType:int = -1, showNext:Boolean = false):void {
         if (elementType == -1) {
             clearOutput();
             elementType = flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE];
@@ -1806,10 +1722,10 @@ public class Combat extends BaseContent {
 				summonedEpicElemental = true;
                 break;
 			case NONE		:
-				flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 2;
+				flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 1;
 				break;
 			case NONE_E		:
-				flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 1;
+				flags[kFLAGS.IN_COMBAT_PLAYER_EPIC_ELEMENTAL_ATTACKED] = 1;
 				break;
         }
 		if (elementType == NONE || elementType == NONE_E) {
@@ -1875,12 +1791,12 @@ public class Combat extends BaseContent {
 					if (player.hasPerk(PerkLib.FirstAttackElementalsSu)) summonedElementalsMulti += 1;
 				}
 				outputText(" hit"+(summonedElementalsMulti > 1 ? "s":"")+" [themonster]! ");
-				elementalattacks(elementType, summonedElementals, summonedElementalsMulti, summonedEpicElemental);
+				elementalattacks(elementType, summonedElementals, summonedElementalsMulti, summonedEpicElemental, showNext);
 			}
 		}
     }
 
-    public function elementalattacks(elementType:int, summonedElementals:int, summonedElementalsMulti:Number, summonedEpicElemental:Boolean):void {
+    public function elementalattacks(elementType:int, summonedElementals:int, summonedElementalsMulti:Number, summonedEpicElemental:Boolean, showNext:Boolean = false):void {
         var elementalDamage:Number = 0;
         var baseDamage:Number = summonedElementals * intwisscaling() * 0.1;
         if (summonedElementals >= 1) elementalDamage += baseDamage;
@@ -1971,16 +1887,17 @@ public class Combat extends BaseContent {
         if (monster.HP > monster.minHP() && monster.lust < monster.maxOverLust()) {
 			if (summonedElementalsMulti > 1) {
 				summonedElementalsMulti -= 1;
-				elementalattacks(elementType, summonedElementals, summonedElementalsMulti, summonedEpicElemental);
+				elementalattacks(elementType, summonedElementals, summonedElementalsMulti, summonedEpicElemental, showNext);
 			} else {
 				outputText("\n\n");
-				if (flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 2 && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4)) {
+				if (!flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] || !flags[kFLAGS.IN_COMBAT_PLAYER_EPIC_ELEMENTAL_ATTACKED] 
+                    && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4)) {
 					if (summonedEpicElemental) {
-						flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 1;
+						flags[kFLAGS.IN_COMBAT_PLAYER_EPIC_ELEMENTAL_ATTACKED] = 1;
 						//summonedEpicElemental = false;
 					}
-					else flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 2;
-					if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
+					else flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 1;
+					if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn) || showNext) {
 						menu();
 						addButton(0, "Next", combatMenu, false);
 					}
@@ -1995,7 +1912,8 @@ public class Combat extends BaseContent {
 			}
         } else {
             //If monster is dead, prevent further elemental attack calls
-            flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 2;
+            flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 1;
+            flags[kFLAGS.IN_COMBAT_PLAYER_EPIC_ELEMENTAL_ATTACKED] = 1;
             if (monster.HP <= monster.minHP()) doNext(endHpVictory);
             else doNext(endLustVictory);
         }
@@ -6904,7 +6822,7 @@ public class Combat extends BaseContent {
 
     public function statusEffectBonusDamage(damage:Number):Number {
         if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
-        if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
+        if (player.hasStatusEffect(StatusEffects.Overlimit) || CombatAbilities.FieryRage.isActive()) damage *= 2;
         if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
         return damage;
     }
@@ -8380,6 +8298,7 @@ public class Combat extends BaseContent {
                 dynStats("lus", 3);
             }
         }
+        if (player.hasPerk(PerkLib.SharedPower) && player.perkv1(PerkLib.SharedPower) > 0) damage *= (1+(0.1*player.perkv1(PerkLib.SharedPower)));
 		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
 			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
 			else damage *= 1 + (0.01 * (100 - player.cor));
@@ -8446,6 +8365,7 @@ public class Combat extends BaseContent {
                 dynStats("lus", 3);
             }
         }
+        if (player.hasPerk(PerkLib.SharedPower) && player.perkv1(PerkLib.SharedPower) > 0) damage *= (1+(0.1*player.perkv1(PerkLib.SharedPower)));
         if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
             if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
             else damage *= 1 + (0.01 * (100 - player.cor));
@@ -10355,27 +10275,6 @@ public class Combat extends BaseContent {
                 outputText("<b>Everywhere and nowhere effect ended!</b>\n\n");
             } else player.addStatusValue(StatusEffects.EverywhereAndNowhere, 1, -1);
         }
-        //True Evasion
-        if (player.hasStatusEffect(StatusEffects.TrueEvasion)) {
-            if (player.statusEffectv1(StatusEffects.TrueEvasion) <= 0) {
-                player.removeStatusEffect(StatusEffects.TrueEvasion);
-                outputText("<b>True Evasion effect ended!</b>\n\n");
-            } else player.addStatusValue(StatusEffects.TrueEvasion, 1, -1);
-        }
-        //Adamantine Shell
-        if (player.hasStatusEffect(StatusEffects.AdamantineShell)) {
-            if (player.statusEffectv1(StatusEffects.AdamantineShell) <= 0) {
-                player.removeStatusEffect(StatusEffects.AdamantineShell);
-                outputText("<b>Adamantine Shell effect ended!</b>\n\n");
-            } else player.addStatusValue(StatusEffects.AdamantineShell, 1, -1);
-        }
-        //Moment of Clarity
-        if (player.hasStatusEffect(StatusEffects.MomentOfClarity)) {
-            if (player.statusEffectv1(StatusEffects.MomentOfClarity) <= 0) {
-                player.removeStatusEffect(StatusEffects.MomentOfClarity);
-                outputText("<b>Moment of Clarity effect ended!</b>\n\n");
-            } else player.addStatusValue(StatusEffects.MomentOfClarity, 1, -1);
-        }
 		//Blackout
         if (player.hasStatusEffect(StatusEffects.Blackout)) {
             if (player.statusEffectv1(StatusEffects.Blackout) <= 0) {
@@ -11185,7 +11084,7 @@ public class Combat extends BaseContent {
                 if (player.perkv1(IMutationsLib.HinezumiBurningBloodIM) >= 3) healingPercent += 0.5;
             }
             if (player.headJewelry == headjewelries.CUNDKIN && player.HP < 1) healingPercent += 1;
-            if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) healingPercent -= 10;
+            if (player.hasStatusEffect(StatusEffects.Overlimit) || CombatAbilities.FieryRage.isActive()) healingPercent -= 10;
 			if (player.hasStatusEffect(StatusEffects.GreenCovenant)) healingPercent += 25;
             if (player.hasPerk(PerkLib.Ferocity) && player.HP < 1) negativeHPRegen -= 1;
             if ((player.hasPerk(PerkLib.Diehard) || player.hasPerk(PerkLib.GreaterDiehardEx)) && !player.hasPerk(PerkLib.EpicDiehard) && player.HP < 1) negativeHPRegen -= 1;

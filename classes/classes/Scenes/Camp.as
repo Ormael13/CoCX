@@ -18,6 +18,7 @@ import classes.lists.Gender;
 
 import coc.view.ButtonDataList;
 import coc.view.MainView;
+import classes.Scenes.Combat.CombatAbilities;
 
 use namespace CoC;
 
@@ -2705,7 +2706,7 @@ public class Camp extends NPCAwareContent{
 	private function druidMenu():void {
 		clearOutput();
 		outputText("Would you like to fuse with an elemental and if so which?");
-		if (player.hasPerk(PerkLib.SharedPower)) outputText("\n\n+"+player.perkv1(PerkLib.SharedPower)+"0% multi bonus to health, damage and spell power when in an infused state");//temporaly to check if perk working as intended
+		if (player.hasPerk(PerkLib.SharedPower) && player.perkv1(PerkLib.SharedPower) > 0) outputText("\n\n+"+player.perkv1(PerkLib.SharedPower)+"0% multi bonus to health and damage when in an infused state");//temporaly to check if perk working as intended
 		menu();
 		if (player.hasPerk(PerkLib.ElementalBody)) {
 			addButtonDisabled(0, "Air", "You need to unfuse first before trying to use this fusion option.");
