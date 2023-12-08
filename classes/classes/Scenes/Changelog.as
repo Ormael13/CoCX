@@ -160,6 +160,12 @@ public class Changelog extends BaseContent
 			outputText("-New tier 2 intelligence lvl-up perk (by Demojay): Corrosive Meltdown. Req. Grand Mage & Channeling perks, 75+ int and any acid spell or special. Effect: Cumulative 40% damage increase for every subsequent acid spell. Each turn without cast acid spell lower damage by 40% down to normal (100%) damage. Maximum 5 stacks.\n");
 			outputText("-New tier 5 intelligence lvl-up perk (by Demojay): Corrosive Meltdown (Ex). Req. Corrosive Meltdown & Grand Archmage perks, 150+ int. Effect: Increase to cumulative damage by 20%. Penalty for turn without casted acid spell decreased by 10%. Maximum 15 stacks.\n");
 			outputText("-New tier 9 intelligence lvl-up perk (by Demojay): Corrosive Meltdown (Su). Req. Corrosive Meltdown (Ex) & Grand Archmage (3rd circle) perks, 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling acid based attack. Penalty for turn without casted acid spell decreased by another 10%. Maximum 75 stacks.\n");
+			outputText("-Converted Druid Abilities to use the CombatAbility class, and added Fusion Special 4 (AoE attack) and 5 (AoE attack with lingering damage and 20% chance for stun). Fixed bug where trying to attack with an element when fused with the same type broke the UI. The Druid's 'Shared Power' perk now increases all damage, rather than missing Magical Soulskills like before. (Demojay)\n");
+			outputText("-Can now customize the training dummy fight: Can choose lvl between 0, 30, 60, 90 and 150; Can choose whether dummy is immune to lust; Can choose if you face a single or group of dummies. (Demojay)\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -176,12 +182,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay) (NUZ/Shirane)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
