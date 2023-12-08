@@ -2171,7 +2171,7 @@ public class Camp extends NPCAwareContent{
 		addButton(9, "Quest Loot", SceneLib.adventureGuild.questItemsBag).hint("Manage your bag with quest items.").disableIf(!AdventurerGuild.playerInGuild, "Join the Adventure Guild for a quest bag!");
 		addButton(10, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
 		addButton(11, "Recall", sceneHunter.recallScenes).hint("Recall some of the unique events happened during your adventure.");
-		if (SceneLib.exploration.counters.explore >= 1) addButton(12, "Dummy", DummyTraining).hint("Train your mastery level on this dummy.").disableIf(isNightTime,"It's too dark for that!");
+		if (SceneLib.exploration.counters.explore >= 1) addButton(12, "Dummy", dummyTraining).hint("Train your mastery level on this dummy.").disableIf(isNightTime,"It's too dark for that!");
 		addButton(13, "Ascension", promptAscend).hint("Perform an ascension? This will restart your adventures. The game depending on your choice would also get harder. If you have Sky Poison Pearl could carry over some items to new adventure.").disableIf(flags[kFLAGS.LETHICE_DEFEATED] <= 0, "Don't you have a job to finish first? Like... to defeat someone, maybe Lethice?");
 		addButton(14, "Back", playerMenu);
 	}
@@ -3201,10 +3201,69 @@ public class Camp extends NPCAwareContent{
 		cloneContemplateDao(clone);
 	}
 
-	private function DummyTraining():void {
+	private function dummyTraining(lvl:int = 0, lustImmune:Boolean = true, isGroup:Boolean = false):void {
 		clearOutput();
-		outputText("You walk toward the worn out dummy as you drawn your [weapon].");
-		startCombat(new TrainingDummy());
+		outputText("You walk towards the sparring ring, wondering how to approach your training:\n");
+		outputText("Current Configuration:\n\n");
+
+		switch(lvl) {
+			case 0: outputText("Level: 0\n");
+					break;
+			case 1: outputText("Level: 30\n");
+					break;
+			case 2: outputText("Level: 60\n");
+					break;
+			case 3: outputText("Level: 90\n");
+					break;
+			case 4: outputText("Level: 150\n");
+					break;
+		}
+
+		if (lustImmune) {
+			outputText("Lust: Will not respond to lust\n")
+		} else {
+			outputText("Lust: Will simulate the effects of lust\n")
+		}
+
+		if (isGroup) {
+			outputText("Group: Will face multiple dummies at once\n")
+		} else {
+			outputText("Group: Will face a single dummy\n")
+		}
+
+		menu();
+		addButton(0, "Lvl0", dummyTraining, 0, lustImmune, isGroup)
+			.disableIf(lvl == 0, "Already selected");
+		addButton(1, "Lvl30", dummyTraining, 1, lustImmune, isGroup)
+			.disableIf(lvl == 1, "Already selected")
+			.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 3, "You need to improve the sparring ring more first!");
+		addButton(2, "Lvl60", dummyTraining, 2, lustImmune, isGroup)
+			.disableIf(lvl == 2, "Already selected")
+			.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 4, "You need to improve the sparring ring more first!");
+		addButton(3, "Lvl90", dummyTraining, 3, lustImmune, isGroup)
+			.disableIf(lvl == 3, "Already selected")
+			.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 5, "You need to improve the sparring ring more first!");
+		addButton(4, "Lvl150", dummyTraining, 4, lustImmune, isGroup)
+			.disableIf(lvl == 4, "Already selected")
+			.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 5, "You need to improve the sparring ring more first!");
+		addButton(5, "Normal", dummyTraining, lvl, true, isGroup)
+			.disableIf(lustImmune, "Already selected");
+		addButton(6, "Sim. Lust", dummyTraining, lvl, false, isGroup)
+			.disableIf(!lustImmune, "Already selected")
+			.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 3, "You need to improve the sparring ring more first!");
+		addButton(7, "Solo", dummyTraining, lvl, lustImmune, false)
+			.disableIf(!isGroup, "Already selected");
+		addButton(8, "Group", dummyTraining, lvl, lustImmune, true)
+			.disableIf(isGroup, "Already selected")
+			.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 5, "You need to improve the sparring ring more first!");
+		addButton(13, "Fight", dummyTrainingStart, lvl, lustImmune, isGroup);
+		addButton(14, "Back", campActions);
+	}
+
+	private function dummyTrainingStart(lvl:int = 0, lustImmune:Boolean = true, isGroup:Boolean = false):void {
+		clearOutput();
+		outputText("You walk toward the worn out " + (isGroup? "dummies": "dummy") + " as you draw your [weapon].");
+		startCombat(new TrainingDummy(lvl, lustImmune, isGroup));
 	}
 
 	private function SparrableNPCsMenuText():void {
