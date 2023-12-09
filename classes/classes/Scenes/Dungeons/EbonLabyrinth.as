@@ -365,10 +365,6 @@ public class EbonLabyrinth extends DungeonAbstractContent {
             encountersFountainOfPurity();
             return true;
         }
-		else if (room == 9) {
-            draculinaScene.encounter();
-            return true;
-        }
         //Rooms AFTER boss, difficulty > 300 (max level).
         else if (enemyLevelMod >= 6 && room > 50 && room % 50 == 1) {
             incEncChance();

@@ -77,9 +77,12 @@ public class IceFistSkill extends AbstractSoulSkill {
 		if (display) outputText("The air around your fist seems to lose all heat as you dash at [themonster]. You place your palm on [monster him], [monster his] body suddenly is frozen solid, encased in a thick block of ice! ");
 		damage = Math.round(damage * combat.iceDamageBoostedByDao());
 		doIceDamage(damage, true, display);
+		if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
 		if (player.hasPerk(PerkLib.FlurryOfBlows)) {
 			doIceDamage(damage, true, display);
+			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
 			doIceDamage(damage, true, display);
+			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
 			damage *= 3;
 		}
 

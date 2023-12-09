@@ -83,9 +83,12 @@ public class FirePunchSkill extends AbstractSoulSkill {
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 			damage += Math.round(damage * 0.1);
 			doFireDamage(damage, true, display);
+			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
 			if (player.hasPerk(PerkLib.FlurryOfBlows)) {
 				doFireDamage(damage, true, display);
+				if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
 				doFireDamage(damage, true, display);
+				if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
 				damage *= 3;
 			}
 			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
@@ -93,9 +96,12 @@ public class FirePunchSkill extends AbstractSoulSkill {
 		}
 		else {
 			doFireDamage(damage, true, display);
+			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
 			if (player.hasPerk(PerkLib.FlurryOfBlows)) {
 				doFireDamage(damage, true, display);
+				if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
 				doFireDamage(damage, true, display);
+				if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
 				damage *= 3;
 			}
 		}

@@ -6492,8 +6492,6 @@ public class PerkLib
 					.requireCustomFunction(function (player:Player):Boolean {
                         return (player.hasPerk(PerkLib.ElementalContractRank7) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 2)) && !player.hasPerk(PerkLib.PrestigeJobDruid);
                     }, "Having Elemental Contract Rank 7 or Dao of the Elements (layer 2 or higher) perks");
-			ElementalBloodline.requirePerk(PrestigeJobDruid)
-					.requireLevel(54);
             ElementalContractRank10.requirePerk(ElementalContractRank9)
                     .requireWis(250)
                     .requireLevel(54);
@@ -7740,6 +7738,8 @@ public class PerkLib
 					.requireInt(200)
 					.requireLib(200)
 					.requireCor(50);
+			ElementalBloodline.requireLevel(54)
+					.requirePerks(HclassHeavenTribulationSurvivor, PrestigeJobDruid);
             FirstAttackSkeletons.requireLevel(54)
                     .requirePerks(FirstAttackGolems, PrestigeJobNecromancer);
             //Tier 10
@@ -7969,4 +7969,4 @@ public class PerkLib
         }
 	}
 }
-}
+}

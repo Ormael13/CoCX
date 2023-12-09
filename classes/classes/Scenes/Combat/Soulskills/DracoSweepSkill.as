@@ -89,27 +89,43 @@ public class DracoSweepSkill extends AbstractSoulSkill {
 			if (player.flameBladeActive()) damage += scalingBonusLibido() * 0.20;
 			damage = Math.round(damage * combat.fireDamageBoostedByDao());
 			doFireDamage(damage, true, display);
+			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
 		}
 		else if (combat.isIceTypeWeapon()) {
 			damage = Math.round(damage * combat.iceDamageBoostedByDao());
 			doIceDamage(damage, true, display);
+			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
 		}
 		else if (combat.isLightningTypeWeapon()) {
 			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 			doLightingDamage(damage, true, display);
+			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
 		}
 		else if (combat.isDarknessTypeWeapon()) {
 			damage = Math.round(damage * combat.darknessDamageBoostedByDao());
 			doDarknessDamage(damage, true, display);
+			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
 		}
-		else if (player.weapon == weapons.MGSWORD) doMagicDamage(damage, true, display);
-		else if (player.weapon == weapons.MCLAWS) doMagicDamage(damage, true, display);
+		else if (player.weapon == weapons.MGSWORD) {
+			doMagicDamage(damage, true, display);
+			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
+		}
+		else if (player.weapon == weapons.MCLAWS) {
+			doMagicDamage(damage, true, display);
+			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
+		}
 		else {
 			doDamage(damage, true, display);
-			if (player.weapon == weapons.DAISHO) doDamage(Math.round(damage * 0.5), true, display);
+			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
+			if (player.weapon == weapons.DAISHO) {
+				doDamage(Math.round(damage * 0.5), true, display);
+				if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage * 0.5);
+			}
 			if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) {
 				doDamage(damage, true, display);
+				if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
 				doDamage(damage, true, display);
+				if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
 				damage *= 3;
 			}
 		}

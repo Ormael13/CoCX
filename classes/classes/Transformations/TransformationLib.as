@@ -376,7 +376,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const EarsLizard: Transformation 	= ears.EarsLizard.registerTf(AS_EARS, AE_LIZARD);
 	public const EarsInsect: Transformation 	= ears.EarsInsect.registerTf(AS_EARS, AE_BEE);
 	public const EarsFox: Transformation 		= ears.EarsFox.registerTf(AS_EARS, AE_FOX);
-	public const EarsElfin: Transformation 		= ears.EarsElfin.registerTf(AS_EARS, AE_IMP);
+	public const EarsElfin: Transformation 		= ears.EarsElfin.registerTfMultiple(AS_EARS, AE_IMP, AE_GOBLIN);
 	public const EarsWolf: Transformation 		= ears.EarsWolf.registerTf(AS_EARS, AE_WOLF);
 	public const EarsDog: Transformation 		= ears.EarsDog.registerTf(AS_EARS, AE_DOG);
 	public const EarsGremlin: Transformation 	= ears.EarsGremlin.registerTf(AS_EARS, AE_GREMLIN);
@@ -396,7 +396,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const EarsPanda: Transformation 		= ears.EarsPanda.registerTf(AS_EARS, AE_PANDA);
 	public const EarsMelkie: Transformation 	= ears.EarsMelkie.registerTf(AS_EARS, AE_MELKIE);
 	public const EarsDeer: Transformation 		= ears.EarsDeer.registerTfMultiple(AS_EARS, AE_DEER, AE_REINDEER);
-	public const EarsBig: Transformation        = ears.EarsBig.registerTf(AS_EARS, AE_GOBLIN);
+	public const EarsBig: Transformation        = ears.EarsBig.registerTfMultiple(AS_EARS, AE_GOBLIN, AE_IMP);
 	public const EarsFennecFox: Transformation 	= ears.EarsFennecFox.registerTf(AS_EARS, AE_WEREFOX);
 	public const EarsJackal: Transformation 	= ears.EarsJackal.registerTf(AS_EARS, AE_ANUBIS);
 
