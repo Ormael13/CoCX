@@ -5724,9 +5724,10 @@ public class MagicSpecials extends BaseCombatContent {
 			damage *= (1.75 * combat.windDamageBoostedByDao());
 			damage = Math.round(damage);
 			doWindDamage(damage, true, true);
-			if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,combat.CalcBaseDamageUnarmed()*5*combat.BleedDamageBoost(true),1,0,0);
+			if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,3,0,0,1);
 			else{
-				monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, combat.CalcBaseDamageUnarmed()*5*combat.BleedDamageBoost(true));
+				monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, 1);
+				monster.addStatusValue(StatusEffects.KamaitachiBleed, 4, 1);
 				outputText("\n\nYour attack greatly worsened the bleeding your opponents suffers.");
 			}
 			combatRoundOver();
@@ -5757,9 +5758,9 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("too resolute to be stunned by your attack.</b> ");
 			}
 			doWindDamage(damage, true, true);
-			if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,combat.CalcBaseDamageUnarmed()*5*combat.BleedDamageBoost(true),0,0,0);
+			if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,3,0,0,1);
 			else {
-				monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, combat.CalcBaseDamageUnarmed()*5*combat.BleedDamageBoost(true));
+				monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, 1);
 				outputText("\n\nYour attack greatly worsened the bleeding your opponent suffers.");
 			}
 		}

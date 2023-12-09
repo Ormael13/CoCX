@@ -2900,7 +2900,7 @@ import classes.Scenes.Combat.CombatAbilities;
 			if (damageReductionBasedOnDifficulty() > 1) lustDelta *= (1 / damageReductionBasedOnDifficulty());
 			lustDelta = Math.round(lustDelta);
 			lust += lustDelta;
-			outputText(" <b>([font-lust]" + lustDelta + "</font>)</b>");
+			outputText(" <b>([font-lust]" + Utils.formatNumber(lustDelta) + "</font>)</b>");
 			if (player.armor == armors.ELFDRES && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0 && lustDelta >= 1) {
 				outputText(" You cool down a little bit ");
 				player.takeLustDamage(Math.round(-lustDelta)/20);
@@ -3469,10 +3469,9 @@ import classes.Scenes.Combat.CombatAbilities;
 				//Deal damage if still wounded.
 				else {
 					var store3:Number = SceneLib.combat.CalcBaseDamageUnarmed()/2;
-					var store3a:Number = SceneLib.combat.BleedDamageBoost(true);
-					store3 *= store3a;
-					store3 = boundInt(1, store3, maxHP()*.05);
+					store3 *= SceneLib.combat.BleedDamageBoost(true);
 					if (statusEffectv2(StatusEffects.SharkBiteBleed) > 0) store3 *= statusEffectv2(StatusEffects.SharkBiteBleed);
+					store3 = SceneLib.combat.fixPercentDamage(store3);
 					store3 = SceneLib.combat.doDamage(store3);
 					if(plural) outputText("[Themonster] bleed profusely from the jagged wounds your bite left behind. ");
 					else outputText("[Themonster] bleeds profusely from the jagged wounds your bite left behind. ");
@@ -3484,19 +3483,23 @@ import classes.Scenes.Combat.CombatAbilities;
 				//This wounds never heals unless by magic
 				//Deal damage if still wounded.
 				var store13:Number = SceneLib.combat.CalcBaseDamageUnarmed()/2;
-				var store13a:Number = SceneLib.combat.BleedDamageBoost();
-				if (player.hasPerk(PerkLib.RacialParagon)) store13a += .5;
-				if (player.hasPerk(PerkLib.Apex)) store13a += .5;
-				if (player.hasPerk(PerkLib.AlphaAndOmega)) store13a += .5;
-				store13 *= store13a;
+				store13 *= SceneLib.combat.BleedDamageBoost(true);
 				store13 = Math.round(store13);
-				if (statusEffectv2(StatusEffects.KamaitachiBleed) > 0) store13 *= statusEffectv2(StatusEffects.KamaitachiBleed);
-				store13 += statusEffectv1(StatusEffects.KamaitachiBleed); //Kamaitachi bleed stacks on itself growing ever stronger
+				
+				//Gain 20% per stack for regular Kamaitachi and 40% for Greater Kamaitachi
+				var kamMultiplier:Number = 0.2 * player.racialTierCached(Races.KAMAITACHI); 
+
+				store13 *= 1 + (kamMultiplier * statusEffectv1(StatusEffects.KamaitachiBleed)); //Kamaitachi bleed stacks on itself growing ever stronger
 				store13 = SceneLib.combat.doDamage(store13);
+
 				if(plural) outputText("[Themonster] bleed profusely from the deep wounds your scythes left behind. ");
 				else outputText("[Themonster] bleeds profusely from the deep wounds your scythes left behind. ");
 				SceneLib.combat.CommasForDigits(store13);
 				outputText("[pg]");
+
+				//Decay Kamaitachi stacks for each turn the effect is not applied
+				if (statusEffectv4(StatusEffects.KamaitachiBleed) == 0 && statusEffectv1(StatusEffects.KamaitachiBleed) > 1) addStatusValue(StatusEffects.KamaitachiBleed, 1, -1);
+				changeStatusValue(StatusEffects.KamaitachiBleed, 4, 0);
 			}
 			if(hasStatusEffect(StatusEffects.GoreBleed)) {
 				//Countdown to heal
@@ -3513,18 +3516,8 @@ import classes.Scenes.Combat.CombatAbilities;
 				//Deal damage if still wounded.
 				else {
 					var store5:Number = SceneLib.combat.CalcBaseDamageUnarmed()/2;
-					var store5a:Number = 1;
-					if (player.hasPerk(PerkLib.ThirstForBlood)) store5a += .25;
-					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store5a += .2;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) store5a += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) store5a += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) store5a += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) store5a += .25;
-					if (player.hasPerk(PerkLib.RacialParagon)) store5a += .5;
-					if (player.hasPerk(PerkLib.Apex)) store5a += .5;
-					if (player.hasPerk(PerkLib.AlphaAndOmega)) store5a += .5;
-					store5 *= store5a;
-					store5 = boundInt(1, store5, maxHP()*.05);
+					store5 *= SceneLib.combat.BleedDamageBoost();
+					store5 = SceneLib.combat.fixPercentDamage(store5);
 					store5 = SceneLib.combat.doDamage(store5);
 					if (plural) outputText("[Themonster] bleed profusely from the jagged ");
 					else outputText("[Themonster] bleeds profusely from the jagged ")
@@ -3543,43 +3536,13 @@ import classes.Scenes.Combat.CombatAbilities;
 					removeStatusEffect(StatusEffects.Hemorrhage);
 				}
 				else {
-					var hemorrhage1:Number = 0;
-					hemorrhage1 += maxHP() * statusEffectv2(StatusEffects.Hemorrhage);
-					if (player.hasPerk(PerkLib.ThirstForBlood)) hemorrhage1 += .25;
-					if (player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage1 *= 1.2;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) hemorrhage1 += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) hemorrhage1 += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) hemorrhage1 += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) hemorrhage1 += .25;
-					hemorrhage1 = boundInt(1, hemorrhage1, maxHP()*.05);
+					var hemorrhage1:Number = maxHP() * statusEffectv2(StatusEffects.Hemorrhage)
+					hemorrhage1 *= SceneLib.combat.BleedDamageBoost(true);
+					hemorrhage1 = SceneLib.combat.fixPercentDamage(hemorrhage1);
 					hemorrhage1 = SceneLib.combat.doDamage(hemorrhage1);
 					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your attack left behind. ");
 					else outputText("[Themonster] bleeds profusely from the jagged wounds your attack left behind. ");
 					SceneLib.combat.CommasForDigits(hemorrhage1);
-					outputText("[pg]");
-				}
-			}
-			if (hasStatusEffect(StatusEffects.HemorrhageArmor)) {
-				if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.HemorrhageArmor, 1, -2);
-				else addStatusValue(StatusEffects.HemorrhageArmor, 1, -1);
-				if (statusEffectv1(StatusEffects.HemorrhageArmor) <= 0) {
-					outputText("The wounds your armor left on [themonster] stop bleeding so profusely.\n\n");
-					removeStatusEffect(StatusEffects.HemorrhageArmor);
-				}
-				else {
-					var hemorrhage2:Number = 0;
-					hemorrhage2 += maxHP() * statusEffectv2(StatusEffects.HemorrhageArmor);
-					if (player.hasPerk(PerkLib.ThirstForBlood)) hemorrhage2 += .25;
-					if (player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage2 *= 1.2;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) hemorrhage2 += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) hemorrhage2 += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) hemorrhage2 += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) hemorrhage2 += .25;
-					hemorrhage2 = boundInt(1, hemorrhage2, maxHP()*.05);
-					hemorrhage2 = SceneLib.combat.doDamage(hemorrhage2);
-					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds that resulted from contact with your armor. ");
-					else outputText("[Themonster] bleeds profusely from the jagged wounds that resulted from contact with your armor. ");
-					SceneLib.combat.CommasForDigits(hemorrhage2);
 					outputText("[pg]");
 				}
 			}
@@ -3591,15 +3554,9 @@ import classes.Scenes.Combat.CombatAbilities;
 					removeStatusEffect(StatusEffects.HemorrhageShield);
 				}
 				else {
-					var hemorrhage3:Number = 0;
-					hemorrhage3 += maxHP() * statusEffectv2(StatusEffects.HemorrhageShield);
-					if (player.hasPerk(PerkLib.ThirstForBlood)) hemorrhage3 += .25;
-					if (player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage1 *= 1.2;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) hemorrhage3 += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) hemorrhage3 += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) hemorrhage3 += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) hemorrhage3 += .25;
-					hemorrhage3 = boundInt(1, hemorrhage3, maxHP()*.05);
+					var hemorrhage3:Number = maxHP() * statusEffectv2(StatusEffects.HemorrhageShield);
+					hemorrhage3 *= SceneLib.combat.BleedDamageBoost();
+					hemorrhage3 = SceneLib.combat.fixPercentDamage(hemorrhage3);
 					hemorrhage3 = SceneLib.combat.doDamage(hemorrhage3);
 					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your shield left behind. ");
 					else outputText("[Themonster] bleeds profusely from the jagged wounds your shield left behind. ");
@@ -3615,9 +3572,8 @@ import classes.Scenes.Combat.CombatAbilities;
 					removeStatusEffect(StatusEffects.Hemorrhage2);
 				}
 				else {
-					var hemorrhage4:Number = 0;
-					hemorrhage4 += maxHP() * statusEffectv2(StatusEffects.Hemorrhage2);
-					hemorrhage4 = boundInt(1, hemorrhage4, maxHP()*.05);
+					var hemorrhage4:Number = maxHP() * statusEffectv2(StatusEffects.Hemorrhage2);
+					hemorrhage4 = SceneLib.combat.fixPercentDamage(hemorrhage4);
 					hemorrhage4 = SceneLib.combat.doDamage(hemorrhage4);
 					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your companion attack left behind. ");
 					else outputText("[Themonster] bleeds profusely from the jagged wounds your companion attack left behind. ");
@@ -3632,9 +3588,10 @@ import classes.Scenes.Combat.CombatAbilities;
 				game.player.addStatusValue(StatusEffects.BloodField, 1, -1);
 				if (game.player.statusEffectv1(StatusEffects.BloodField) <= 0) game.player.removeStatusEffect(StatusEffects.BloodField);
 				if (!game.player.hasStatusEffect(StatusEffects.MonsterDig) && !isFlying()) {
-					var bloodfield:Number = statusEffectv2(StatusEffects.Hemorrhage);
+					var bloodfield:Number = statusEffectv2(StatusEffects.BloodField);
 					if (plural) bloodfield *= 5;
 					if (hasPerk(PerkLib.EnemyLargeGroupType)) bloodfield *= 5;
+					bloodfield = SceneLib.combat.fixPercentDamage(bloodfield);
 					bloodfield = SceneLib.combat.doDamage(bloodfield);
 					EngineCore.HPChange(bloodfield, false);
 				}
@@ -3668,7 +3625,7 @@ import classes.Scenes.Combat.CombatAbilities;
 				var store16a:Number = SceneLib.combat.BleedDamageBoost();
 				store16 *= store16a;
 				store16 += maxHP()*0.05;
-				store16 = boundInt(1, store16, maxHP()*.05);
+				store16 = SceneLib.combat.fixPercentDamage(store16);
 				store16 = SceneLib.combat.doDamage(store16);
 				if(plural) outputText("[Themonster] bleeds profusely from the deep wounds your vine thorns left behind. ");
 				else outputText("[Themonster] bleeds profusely from the deep wounds your vine thorns left behind. ");
@@ -3685,7 +3642,7 @@ import classes.Scenes.Combat.CombatAbilities;
 							statusEffectv1(StatusEffects.Rosethorn)*0.1;
 					store17 *= store17a;
 					store17 += maxHP()*0.01;
-					store17 = boundInt(1, store17, maxHP()*.05);
+					store17 = SceneLib.combat.fixPercentDamage(store17);
 					store17 = SceneLib.combat.doDamage(store17);
 					if(plural) outputText("[Themonster] bleed profusely from the deep wounds your rose thorns left behind. ");
 					else outputText("[Themonster] bleeds profusely from the deep wounds your rose thorns left behind. ");

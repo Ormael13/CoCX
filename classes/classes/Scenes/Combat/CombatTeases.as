@@ -120,23 +120,6 @@ public class CombatTeases extends BaseCombatContent {
 		return lustDmg;
 	}
 
-	/**
-	 * Function used to ensure that aura damage can onlu deals a certain % of lust,
-	 * even taking difiiculty settings into account.
-	 * @param lustDmg (Number) - inital damage to be checked
-	 * @param bound (iny) - Upper bound (out of 100) % of lust attack can inflict
-	 * @return lustDmg (Number) - final damage, bounded to the % deamage if needed
-	 */
-	public function boundLustDamage(lustDmg:Number, monster:Monster, bound:int = 10):Number {
-		var monsterBoundLust:Number = monster.maxLust() * (bound / 100);
-
-		if ((lustDmg * (1 / monster.damageReductionBasedOnDifficulty())) > monsterBoundLust) {
-			lustDmg = monsterBoundLust * monster.damageReductionBasedOnDifficulty();
-		}
-
-		return lustDmg;
-	}
-
 	// Just text should force the function to purely emit the test text to the output display, and not have any other side effects
 	public function tease(justText:Boolean = false):void {
 		if (!justText) clearOutput();
