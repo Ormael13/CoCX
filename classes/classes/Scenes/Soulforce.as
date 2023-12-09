@@ -406,8 +406,8 @@ public class Soulforce extends BaseContent
 		addButton(14, "Back", accessSoulforceMenu);
 	}
 
-	public function daoContemplationsEffect(statusEffect:StatusEffectType, daoname:String, clone:Boolean = false):void {
-		if (!clone) {
+	public function daoContemplationsEffect(statusEffect:StatusEffectType, daoname:String, clone:Boolean = false, elementalBody:Boolean = false):void {
+		if (!clone && !elementalBody) {
 			clearOutput();
 			outputText("You find a flat, comfortable rock to sit down on and contemplate.  Minute after minute you feel immersed into elements that surrounds you.  How they flow around you, how they change on their own and how they interact with each other.  All this while trying to understand, despite being insignificant while the great dao manifests around you.\n\n");
 		}
@@ -417,7 +417,7 @@ public class Soulforce extends BaseContent
 			dao = rand(6);
 			switch(daoname){
 				case "Fire":
-					if (player.hasPerk(PerkLib.FireAffinity)) dao += 1 + rand(3);
+					if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) dao += 1 + rand(3);
 					break;
 				case "Ice":
 					if (player.hasPerk(PerkLib.ColdAffinity)) dao += 1 + rand(3);
@@ -428,11 +428,20 @@ public class Soulforce extends BaseContent
 				case "Darkness":
 					if (player.hasPerk(PerkLib.DarknessAffinity)) dao += 1 + rand(3);
 					break;
+				case "Wind":
+					if (player.hasPerk(PerkLib.AffinitySylph)) dao += 1 + rand(3);
+					break;
+				case "Earth":
+					if (player.hasPerk(PerkLib.AffinityGnome)) dao += 1 + rand(3);
+					break;
+				case "Water":
+					if (player.hasPerk(PerkLib.AffinityUndine)) dao += 1 + rand(3);
+					break;
 			}
 		}
 		//uzycie w kontemplacji niebianskich skarbow zwiazanych z danym zywiolem daje bonusowe punkty
 		if (dao > 0) {
-			if (!clone) outputText("After the session ends you managed to progress in Dao of "+daoname+".");
+			if (!clone && !elementalBody) outputText("After the session ends you managed to progress in Dao of "+daoname+".");
 			if (player.hasStatusEffect(statusEffect)) {
 				player.addStatusValue(statusEffect, 1, dao);
 				var thres:Array = [20, 40, 60, 100, 140, 180, 220, 260, 300];
@@ -450,7 +459,7 @@ public class Soulforce extends BaseContent
 			} else player.createStatusEffect(statusEffect, dao, 0, 0, 0);
 		}
 		else outputText("After the session ends, you did not manage to progress in your comprehension.\n\n");
-		if (!clone) doNext(camp.returnToCampUseEightHours);
+		if (!clone && !elementalBody) doNext(camp.returnToCampUseEightHours);
 	}
 
 	public function highestLayerOfDaoComprehension():Number {

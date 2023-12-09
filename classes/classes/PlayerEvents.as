@@ -40,6 +40,7 @@ import classes.Scenes.SceneLib;
 import classes.Scenes.Soulforce;
 import classes.StatusEffects.VampireThirstEffect;
 import classes.lists.BreastCup;
+import classes.Races.ElementalRace;
 
 public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//Handles all timeChange events for the player. Needed because player is not unique.
@@ -1395,6 +1396,23 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 							}
 						}
 					}
+				}
+			}
+			if (player.hasPerk(PerkLib.ElementalBloodline) && player.hasPerk(PerkLib.ElementalBody)) {
+				var element:int = ElementalRace.getElement(player);
+				var dao:Array;
+				switch(element) {
+					case ElementalRace.ELEMENT_SYLPH: 	dao = Soulforce.daos[5];
+														break;
+					case ElementalRace.ELEMENT_GNOME: 	dao = Soulforce.daos[8];
+														break;
+					case ElementalRace.ELEMENT_IGNIS: 	dao = Soulforce.daos[0];
+														break;
+					case ElementalRace.ELEMENT_UNDINE: 	dao = Soulforce.daos[7];
+														break;	
+				}
+				if (dao && player.statusEffectv2(dao[1]) < SceneLib.soulforce.highestLayerOfDaoComprehension()) {
+					SceneLib.soulforce.daoContemplationsEffect(dao[1], dao[0], false, true);
 				}
 			}
 			if (InCollection("Kiha", flags[kFLAGS.PLAYER_COMPANION_0], flags[kFLAGS.PLAYER_COMPANION_2], flags[kFLAGS.PLAYER_COMPANION_3])) {

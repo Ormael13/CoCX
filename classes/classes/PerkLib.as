@@ -1058,6 +1058,9 @@ public class PerkLib
 		public static const ElementalArrows:PerkType = mk("Elemental Arrows", "Elemental Arrows",
 				"Shoot elemental arrows adding your intelligence to your damage. (+20% range physical attacks multiplier)",
 				"You've chosen the 'Elemental Arrows' perk, allowing you to shoot elemental arrows. (+20% range physical attacks multiplier)");
+		public static const ElementalBloodline:PerkType =  mk("Elemental Bloodline", "Elemental Bloodline",
+				"When in an infused state, passively gain Dao Comprehension for the associated element. Increases Dao Comprehension speed when in an infused state for the associated element.",
+				"You've chosen the 'Elemental Bloodline' perk. Enables passive Dao Comprehension and increased Comprehension speed when in an infused state");
 		public static const ElementalBolt:PerkType = mk("Elemental Bolt", "Elemental Bolt",
 				"Enable use of Elemental bolt. (would prevent decay of buff from building up elemental damage)",
 				"You've chosen the 'Elemental Bolt' perk. Enable use of Elemental bolt. (would prevent decay of buff from building up elemental damage)");
@@ -6489,6 +6492,8 @@ public class PerkLib
 					.requireCustomFunction(function (player:Player):Boolean {
                         return (player.hasPerk(PerkLib.ElementalContractRank7) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 2)) && !player.hasPerk(PerkLib.PrestigeJobDruid);
                     }, "Having Elemental Contract Rank 7 or Dao of the Elements (layer 2 or higher) perks");
+			ElementalBloodline.requirePerk(PrestigeJobDruid)
+					.requireLevel(54);
             ElementalContractRank10.requirePerk(ElementalContractRank9)
                     .requireWis(250)
                     .requireLevel(54);
