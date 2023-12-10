@@ -21,18 +21,8 @@
         <mkdir dir="${build.dir}"/>
         <mkdir dir="${report.dir}"/>
     </target>
-	<!-- check os, this is needed to handle if running on windows or running in the ci-->
-	<target name="checkos">
-		<condition property="isWindows" value="true">
-			<os family="windows" />
-		</condition>
 
-		<condition property="isLinux" value="true">
-			<os family="unix" />
-		</condition>
-	</target>
-
-	<macrodef name="build-game-binary">
+    <macrodef name="build-game-binary">
         <attribute name="debug-flag"/>
         <attribute name="release-flag"/>
 		<attribute name="air-flag"/>
@@ -59,7 +49,7 @@
             </mxmlc>
         </sequential>
     </macrodef>
-	<!-- Now create the AIR package using the ADT utility -->
+    <!-- Now create the AIR package using the ADT utility -->
     <macrodef name="createAirApk">
         <attribute name="platform" />
         <attribute name="architecture"/>
@@ -97,17 +87,26 @@
         </sequential>
     </macrodef>
 
-    <target name="airApkWinRelease" description="Create the AIR package" depends="CoCMobileRelease,checkos" if="isWindows">
-        <airApkRelease platform=".bat"/>
+    <target name="ApkRelease" description="Create the AIR package" depends="CoCMobileRelease">
+        <condition property="ADTEXT" value=".bat">
+            <os family="windows"/>
+        </condition>
+
+        <condition property="ADTEXT" value="">
+            <os family="unix"/>
+        </condition>
+        <airApkRelease platform="${ADTEXT}"/>
     </target>
-    <target name="airApkWinDebug" description="Create the AIR package" depends="CoCMobileBeta,checkos" if="isWindows">
-        <airApkDebug platform=".bat"/>
-    </target>
-    <target name="airApkLinRelease" description="Create the AIR package" depends="CoCMobileRelease,checkos" if="isLinux">
-        <airApkRelease platform=""/>
-    </target>
-    <target name="airApkLinDebug" description="Create the AIR package" depends="CoCMobileBeta,checkos" if="isLinux">
-        <airApkDebug platform=""/>
+
+    <target name="ApkDebug" description="Create the AIR package" depends="CoCMobileBeta">
+        <condition property="ADTEXT" value=".bat">
+            <os family="windows"/>
+        </condition>
+
+        <condition property="ADTEXT" value="">
+            <os family="unix"/>
+        </condition>
+        <airApkDebug platform="${ADTEXT}"/>
     </target>
 
     <echo>building standalone swfs</echo>
@@ -129,6 +128,6 @@
     </target>
 
     <target name="all" depends="init,release,debug,CoCMobileBeta,CoCMobileRelease" description="Build all swf versions"/>
-    <target name="makeMobileAir" depends="init,airApkLinDebug,airApkLinRelease,airApkWinRelease,airApkWinDebug" description=" build mobile App"/>
+    <target name="makeMobileAir" depends="init,ApkDebug,ApkRelease" description=" build mobile App"/>
     <target name="allCI" depends="init,release,debug,makeMobileAir" description="Build all swf versions"/>
 </project>
