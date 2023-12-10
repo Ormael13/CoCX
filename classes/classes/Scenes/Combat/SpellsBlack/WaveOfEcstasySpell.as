@@ -37,7 +37,7 @@ public class WaveOfEcstasySpell extends AbstractBlackSpell {
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
 		return adjustLustDamage(
-				player.inte,
+				scalingBonusIntelligence(),
 				monster,
 				CAT_SPELL_BLACK,
 				randomize
@@ -94,7 +94,6 @@ public class WaveOfEcstasySpell extends AbstractBlackSpell {
 			crit = true;
 			lustDmg *= 1.75;
 		}
-		lustDmg = Math.round(monster.lustVuln * lustDmg);
 		monster.teased(lustDmg, false);
 		if (display) {
 			outputText(" damage.");

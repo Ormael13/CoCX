@@ -2900,7 +2900,7 @@ import classes.Scenes.Combat.CombatAbilities;
 			if (damageReductionBasedOnDifficulty() > 1) lustDelta *= (1 / damageReductionBasedOnDifficulty());
 			lustDelta = Math.round(lustDelta);
 			lust += lustDelta;
-			outputText(" <b>([font-lust]" + lustDelta + "</font>)</b>");
+			outputText(" <b>([font-lust]" + Utils.formatNumber(lustDelta) + "</font>)</b>");
 			if (player.armor == armors.ELFDRES && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0 && lustDelta >= 1) {
 				outputText(" You cool down a little bit ");
 				player.takeLustDamage(Math.round(-lustDelta)/20);

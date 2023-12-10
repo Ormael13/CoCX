@@ -31,20 +31,16 @@ public class CombatTeases extends BaseCombatContent {
 		}
 	}
 	
-	public function teaseBaseLustDamage():Number {
-		var tBLD:Number = 27 + rand(15);
-		var bimbo:Boolean = false;
-		var bro:Boolean = false;
-		var futa:Boolean = false;
-		if (player.hasPerk(PerkLib.BimboBody)) bimbo = true;
-		if (player.hasPerk(PerkLib.BroBody)) bro = true;
-		if (player.hasPerk(PerkLib.FutaForm)) futa = true;
+	public function teaseBaseLustDamage(tBLD:Number = 0):Number {
+		tBLD += player.lib;
+		tBLD += scalingBonusLibido() * 0.2;
+		tBLD += (2 * player.teaseDmgStat.value);
+
+
+		if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) tBLD += 15;
 		if (player.hasPerk(PerkLib.SensualLover)) tBLD += 6;
 		if (player.hasPerk(PerkLib.Seduction)) tBLD += 15;
-		tBLD += (2 * player.teaseDmgStat.value);
-		if (bimbo || bro || futa) {
-			tBLD += 15;
-		}
+		
 		//partial skins bonuses
 		switch (player.coatType()) {
 			case Skin.FUR:
@@ -61,12 +57,12 @@ public class CombatTeases extends BaseCombatContent {
 				break;
 		}
 		if (player.hasPerk(PerkLib.FlawlessBody)) tBLD += 20;
-		tBLD += scalingBonusLibido() * 0.2;
 		if (player.hasPerk(PerkLib.GracefulBeauty)) tBLD += scalingBonusSpeed() * 0.1;
 		if (player.isElf() && player.hasPerk(PerkLib.ELFElvenSpearDancingTechnique) && player.isSpearTypeWeapon()) tBLD += scalingBonusSpeed() * 0.1;
 		if (player.hasPerk(PerkLib.JobSeducer)) tBLD += player.teaseLevel * 3;
 		else tBLD += player.teaseLevel * 2;
 		if (player.hasPerk(PerkLib.JobCourtesan) && monster.hasPerk(PerkLib.EnemyBossType)) tBLD *= 1.2;
+
 		var damagemultiplier:Number = 1;
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damagemultiplier += player.lust100 * 0.01;
 		if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();
@@ -79,6 +75,7 @@ public class CombatTeases extends BaseCombatContent {
 		if (player.armor == armors.FMDRESS && player.isWoodElf()) damagemultiplier += 2;
 		if (player.hasStatusEffect(StatusEffects.TeasePotion)) damagemultiplier += 0.05;
 		tBLD *= damagemultiplier;
+
 		if (player.hasPerk(PerkLib.ChiReflowLust)) tBLD *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
 		if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) tBLD *= 1.5;
 		if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
@@ -87,14 +84,13 @@ public class CombatTeases extends BaseCombatContent {
 			tBLD *= 1.2;
 		}
 		if (player.perkv1(PerkLib.ImpNobility) > 0) {
-			tBLD *= (100+player.perkv1(PerkLib.ImpNobility))/100;
+			tBLD *= (100 + player.perkv1(PerkLib.ImpNobility))/100;
 		}
 		for each (var f:SimpleRaceEnchantment in player.allEnchantments(EnchantmentLib.RaceSpellPowerDoubled)) {
 			tBLD *= f.power * (player.isRaceCached(f.race)? 3:2);
 		}
 		tBLD = (tBLD * monster.lustVuln);
 		if (SceneLib.urtaQuest.isUrta()) tBLD *= 2;
-		tBLD = Math.round(tBLD);
 		return tBLD;
 	}
 
@@ -221,7 +217,6 @@ public class CombatTeases extends BaseCombatContent {
 		//Determine basic damage.
 		//==============================
 		damage = 0;
-		damage += teaseBaseLustDamage();
 		//==============================
 		//TEASE SELECT CHOICES
 		//==BASICS========
@@ -991,7 +986,7 @@ public class CombatTeases extends BaseCombatContent {
 				//21 MAX ADROGYN
 			case 21:
 				outputText("You reach up and run your hands down your delicate, androgynous features.  With the power of a man but the delicacy of a woman, looking into your eyes invites an air of enticing mystery.  You blow a brief kiss to your enemy while at the same time radiating a sexually exciting confidence.  No one could identify your gender by looking at your features, and the burning curiosity they encourage could excite others with just your face alone.");
-				damage -= 9;
+				damage += 9;
 				break;
 				//22 SPOIDAH SILK
 			case 22:
@@ -1560,21 +1555,9 @@ public class CombatTeases extends BaseCombatContent {
 		}
 		//Land the hit!
 		if (rand(100) <= chance + rand(bonusChance)) {
-			var damagemultiplier:Number = 1;
-			if (player.hasPerk(PerkLib.ElectrifiedDesire)) damagemultiplier += player.lust100 * 0.01;
-			if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();
-			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
-			if (player.hasPerk(PerkLib.SuperSensual) && chance > 100) damagemultiplier += (0.02 * (chance - 100));
-			if (player.hasPerk(PerkLib.BroadSelection) && player.differentTypesOfCocks() > 1) damagemultiplier += (0.25 * player.differentTypesOfCocks());
-			if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
-			if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
-			if (player.armor == armors.ELFDRES && player.isElf()) damagemultiplier += 2;
-			if (player.armor == armors.FMDRESS && player.isWoodElf()) damagemultiplier += 2;
-			damage *= damagemultiplier;
-			bonusDamage *= damagemultiplier;
-			if (player.hasPerk(PerkLib.ChiReflowLust)) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
-			if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) damage *= 1.5;
-			damage = (damage + rand(bonusDamage)) * monster.lustVuln;
+			damage = (damage + rand(bonusDamage));
+			damage = teaseBaseLustDamage(damage);
+			if (player.hasPerk(PerkLib.BroadSelection) && player.differentTypesOfCocks() > 1) damage *= (1 + (0.25 * player.differentTypesOfCocks()));
 			if (SceneLib.urtaQuest.isUrta()) damage *= 2;
 			damage = Math.round(damage);
 			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 20) {
