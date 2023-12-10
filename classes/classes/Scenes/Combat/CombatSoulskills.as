@@ -95,7 +95,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsSoulBlast)) {
-			bd = buttons.add("Soul Blast", SoulBlast).hint("Focus your reserves of soul force to unleash a torrent of devastating energy and obliterate your opponent.  \n\nWould go into cooldown after use for: 15 rounds  \n\n(PHYSICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(100 * soulskillCost() * soulskillcostmulti()));
+			bd = buttons.add("Soul Blast", SoulBlast).hint("Focus your reserves of soul force to unleash a torrent of devastating energy and obliterate your opponent.  \n\nWould go into cooldown after use for: 15 rounds  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(100 * soulskillCost() * soulskillcostmulti()));
 			if (player.hasStatusEffect(StatusEffects.CooldownSoulBlast)) {
 				bd.disable("You need more time before you can use Soul Blast again.");
 			} else if ((player.soulforce < 100 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {

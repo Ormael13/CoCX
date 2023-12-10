@@ -2536,14 +2536,24 @@ public final class Mutations extends MutationsHelper {
 				changes++;
             }
             //Red skin!
-            if (rand(30) == 0 && changes < changeLimit && player.skinColor != "red") {
-                if (player.isFurCovered()) outputText("[pg]Underneath your fur, your skin ");
-                else outputText("[pg]Your [skin.type] ");
-                if (rand(2) == 0) player.skinColor = "red";
-                else player.skinColor = "orange";
-                outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skinColor + ".");
+            if (!InCollection(player.skinColor, ImpRace.ImpSkinColors, ImpRace.ImpRareSkinColors) && changes < changeLimit && rand(3) == 0) {
+				if (player.isFurCovered()) outputText("[pg]Underneath your fur, your skin ");
+				else outputText("[pg]Your [skin.type] ");
+				player.skinColor = weightedRandom(
+						[2, "dark green"],
+						[1, "emerald"],
+						[1, "green"],
+						[1, "pale yellow"],
+						[1, "grayish-blue"],
+						[17, "red"],
+						[7, "orange"],
+						[7, "pale purple"],
+						[7, "royal purple"],
+						[7, "light purple"]
+				);
+				outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a hue rolls down your body in a wave, turning you completely [skin color].");
 				changes++;
-            }
+			}
             return;
         } else {
             outputText("The food tastes... corrupt, for lack of a better word.\n");
@@ -2566,7 +2576,32 @@ public final class Mutations extends MutationsHelper {
             player.tallness -= 1 + rand(3);
 			changes++;
         }
-
+		//skin tone
+        if (!InCollection(player.skinColor, ImpRace.ImpSkinColors, ImpRace.ImpRareSkinColors) && changes < changeLimit && rand(3) == 0) {
+            if (player.isFurCovered()) outputText("[pg]Underneath your fur, your skin ");
+            else outputText("[pg]Your [skin.type] ");
+            player.skinColor = weightedRandom(
+                    [2, "dark green"],
+                    [1, "emerald"],
+                    [1, "green"],
+                    [1, "pale yellow"],
+                    [1, "grayish-blue"],
+                    [17, "red"],
+                    [7, "orange"],
+                    [7, "pale purple"],
+                    [7, "royal purple"],
+                    [7, "light purple"]
+            );
+            outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a hue rolls down your body in a wave, turning you completely [skin color].");
+			changes++;
+        }
+        //Ears!
+        if ((player.ears.type != Ears.BIG || player.ears.type != Ears.ELFIN) && changes < changeLimit && rand(3) == 0) {
+            outputText("[pg]");
+			if (rand(4) == 0) transformations.EarsBig.applyEffect();
+			else transformations.EarsElfin.applyEffect();
+            changes++;
+        }
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
 
@@ -4858,13 +4893,18 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //skin tone
-        if (!InCollection(player.skinColor, GoblinRace.GoblinSkinColors) && changes < changeLimit && rand(2) == 0) {
+        if (!InCollection(player.skinColor, GoblinRace.GoblinSkinColors, GoblinRace.GoblinRareSkinColors) && changes < changeLimit && rand(2) == 0) {
             player.skinColor = weightedRandom(
-                    [13, "dark green"],
-                    [2, "emerald"],
-                    [3, "green"],
-                    [1, "pale yellow"],
-                    [1, "grayish-blue"]
+                    [17, "dark green"],
+                    [6, "emerald"],
+                    [7, "green"],
+                    [4, "pale yellow"],
+                    [4, "grayish-blue"],
+                    [2, "red"],
+                    [1, "orange"],
+                    [1, "pale purple"],
+                    [1, "royal purple"],
+                    [1, "light purple"]
             );
             changes++;
             outputText("[pg]Whoah, that was weird.  You just hallucinated that your ");
@@ -4885,9 +4925,10 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Ears!
-        if (player.ears.type != Ears.BIG && changes < changeLimit && rand(3) == 0) {
+        if ((player.ears.type != Ears.BIG || player.ears.type != Ears.ELFIN) && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
-			transformations.EarsBig.applyEffect();
+			if (rand(4) == 0) transformations.EarsElfin.applyEffect();
+			else transformations.EarsBig.applyEffect();
             changes++;
         }
         //Removes tail

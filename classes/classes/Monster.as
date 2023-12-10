@@ -2900,7 +2900,7 @@ import classes.Scenes.Combat.CombatAbilities;
 			if (damageReductionBasedOnDifficulty() > 1) lustDelta *= (1 / damageReductionBasedOnDifficulty());
 			lustDelta = Math.round(lustDelta);
 			lust += lustDelta;
-			outputText(" <b>([font-lust]" + lustDelta + "</font>)</b>");
+			outputText(" <b>([font-lust]" + Utils.formatNumber(lustDelta) + "</font>)</b>");
 			if (player.armor == armors.ELFDRES && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0 && lustDelta >= 1) {
 				outputText(" You cool down a little bit ");
 				player.takeLustDamage(Math.round(-lustDelta)/20);
@@ -3740,7 +3740,7 @@ import classes.Scenes.Combat.CombatAbilities;
 			if (hasStatusEffect(StatusEffects.Swallowed)) {
 				if (rand(3)) {
 					outputText("The many fleshy tentacles lining your inner walls slither around [themonster], seeking out and caressing [monster his] vulnerable endowments as you insidiously try to draw [monster him] closer to cumming.\n\n");
-					if (!lustVuln <= 0) teased(SceneLib.combat.teases.teaseBaseLustDamage());
+					if (!lustVuln <= 0) teased(SceneLib.combat.teases.teaseBaseLustDamage() * lustVuln);
 				}
 				if (!hasStatusEffect(StatusEffects.SandWormAcid))
 					createStatusEffect(StatusEffects.SandWormAcid, 1, 0, 0, 0);
@@ -3865,7 +3865,7 @@ import classes.Scenes.Combat.CombatAbilities;
 					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store18 *= 1.2;
 					store18 = SceneLib.combat.fixPercentDamage(store18);
 					store18 = SceneLib.combat.doAcidDamage(store18, true, true);
-					if (!lustVuln <= 0) teased(SceneLib.combat.teases.teaseBaseLustDamage());
+					if (!lustVuln <= 0) teased(SceneLib.combat.teases.teaseBaseLustDamage()  * lustVuln);
 					outputText("\n\n");
 				}
 			}

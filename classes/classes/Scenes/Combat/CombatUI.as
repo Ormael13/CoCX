@@ -550,19 +550,19 @@ public class CombatUI extends BaseCombatContent {
 			if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn))
 				combat.simplifiedPrePCTurn_stupid();
 			//again, no else after - ally turns SHOULD be disabled.
+			flushOutputTextToGUI();
 			if (isGolemTurn())
 				doGolemTurn();
-			if (isSkeletonsTurn())
+			else if (isSkeletonsTurn())
 				combat.sendSkeletonToFight();
-			if (isEpicElementalTurn())
+			else if (isEpicElementalTurn())
 				doEpicElementalTurn();
-			if (isElementalTurn())
+			else if (isElementalTurn())
 				doElementalTurn();
-			if (isBloodPuppiesTurn())
+			else if (isBloodPuppiesTurn())
 				doBloodPuppiesTurn();
-			flushOutputTextToGUI();
 			//UNIQUE OPTIONS - No changes applied, player turn, no status/CC
-			{
+			else {
 				if (monster is SandTrap) {
 					btnSpecial1.show("Climb", combat.wait2, "Climb the sand to move away from the sand trap.");
 				}
@@ -606,6 +606,7 @@ public class CombatUI extends BaseCombatContent {
 					btnSpecial3.show("Pick", combat.pickUpThrownWeapons, "Pick up some of the thrown weapons.");
 				}
 			}
+			flushOutputTextToGUI();
 		}
 	}
 
@@ -704,7 +705,7 @@ public class CombatUI extends BaseCombatContent {
 	}
 
 	public function isEpicElementalTurn():Boolean {
-		return player.hasPerk(PerkLib.FirstAttackElementalsSu) && player.statusEffectv2(StatusEffects.SummonedElementals) > 0 && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 1;
+		return player.hasPerk(PerkLib.FirstAttackElementalsSu) && player.statusEffectv2(StatusEffects.SummonedElementals) > 0 && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && !flags[kFLAGS.IN_COMBAT_PLAYER_EPIC_ELEMENTAL_ATTACKED];
 	}
 
 	public function doEpicElementalTurn():void {
@@ -715,24 +716,24 @@ public class CombatUI extends BaseCombatContent {
 		addButton(0, "None", combat.baseelementalattacks, Combat.NONE_E).hint("You forfeit potential attack of epic elemental. Would skip to next minion attack/your main turn.");
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsAirE)) {
 			if (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == 1) addButtonDisabled(1, "Air(E)", "You can't command this elemental to attack (independently of you) when you're currently fused with it.");
-			else addButton(1, "Air(E)", combat.baseelementalattacks, Combat.AIR_E);
+			else addButton(1, "Air(E)", combat.baseelementalattacks, Combat.AIR_E, true);
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE)) {
 			if (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == 2) addButtonDisabled(2, "Earth(E)", "You can't command this elemental to attack (independently of you) when you're currently fused with it.");
-			else addButton(2, "Earth(E)", combat.baseelementalattacks, Combat.EARTH_E);
+			else addButton(2, "Earth(E)", combat.baseelementalattacks, Combat.EARTH_E, true);
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE)) {
 			if (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == 3) addButtonDisabled(3, "Fire(E)", "You can't command this elemental to attack (independently of you) when you're currently fused with it.");
-			else addButton(3, "Fire(E)", combat.baseelementalattacks, Combat.FIRE_E);
+			else addButton(3, "Fire(E)", combat.baseelementalattacks, Combat.FIRE_E, true);
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE)) {
 			if (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == 4) addButtonDisabled(4, "Water(E)", "You can't command this elemental to attack (independently of you) when you're currently fused with it.");
-			else addButton(4, "Water(E)", combat.baseelementalattacks, Combat.WATER_E);
+			else addButton(4, "Water(E)", combat.baseelementalattacks, Combat.WATER_E, true);
 		}
 	}
 
 	public function isElementalTurn():Boolean {
-		return player.hasPerk(PerkLib.FirstAttackElementals) && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 2;
+		return player.hasPerk(PerkLib.FirstAttackElementals) && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && !flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED];
 	}
 
 	public function doElementalTurn():void {

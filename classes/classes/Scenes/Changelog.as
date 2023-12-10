@@ -17,6 +17,12 @@ public class Changelog extends BaseContent
 			Changelog49();
 		}
 		//zrobić do 2022 na świeta event z reniferami i nie odblokowywać go do ok. 20-24 grudnia 2021 xD
+		private function Changelog52():void {
+			clearOutput();
+			menu();
+			addButton(0, "Next", Changelog51);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
+		}
 		private function Changelog51():void {
 			clearOutput();
 			menu();
@@ -36,13 +42,19 @@ public class Changelog extends BaseContent
 			outputText("-New tier 0 misc lvl-up perk: Metabolization. Req. Slime, Manticore, Displacer beast, Vampire, Dracula race or hunger enabled. Effect: Increase the duration of lingering nourishment effects by 100% of base duration. And slows hunger progression if any(note does not raise racial scores).\n");
 			outputText("-New tier 1 misc lvl-up perk: Twin Thunder. Req. Power Attack or Power Shot perk. Effect: When using more than one weapon at once power attack/strike now delivers as many hits as used weapons.\n");
 			outputText("-New tier 2 intelligence lvl-up perk: High Tide. Req. Grand Mage & Channeling perks, 75+ int and any water spell or special. Effect: Cumulative 40% damage increase for every subsequent water spell. Each turn without cast water spell lower damage by 40% down to normal (100%) damage. Maximum 5 stacks.\n");
+			outputText("-New tier 2 intelligence lvl-up perk (by Demojay): Howling Gale. Req. Grand Mage & Channeling perks, 75+ int and any wind spell or special. Effect: Cumulative 40% damage increase for every subsequent wind spell. Each turn without cast wind spell lower damage by 40% down to normal (100%) damage. Maximum 5 stacks.\n"); 
+			outputText("-New tier 2 intelligence lvl-up perk (by Demojay): Rumbling Earth. Req. Grand Mage & Channeling perks, 75+ int and any earth spell or special. Effect: Cumulative 40% damage increase for every subsequent earth spell. Each turn without cast earth spell lower damage by 40% down to normal (100%) damage. Maximum 5 stacks.\n");
 			outputText("-New tier 3 strength lvl-up perk: Power Attack (Ex). Req. Power Attack perk. Effect: Power Attack p. special damage increased by ~2x. Add ~30% of base stat scaling value to melee damage & power attack multi factor. (+15% melee physical attacks multiplier)\n");
 			outputText("-New tier 3 misc lvl-up perk: Improved Metabolization. Req. Metabolization perk; Slime, Manticore, Displacer beast, Vampire, Dracula race or hunger enabled. Effect: Increase the duration of lingering nourishment effects by an extra 100% of base duration. And slows hunger progression if any(note does not raise racial scores).\n");
 			outputText("-New tier 5 intelligence lvl-up perk: High Tide (Ex). Req. High Tide & Grand Archmage perks, 150+ int. Effect: Increase to cumulative damage by 20%. Penalty for turn without casted water spell decreased by 10%. Maximum 15 stacks.\n");
+			outputText("-New tier 5 intelligence lvl-up perk (by Demojay): Howling Gale (Ex). Req. Howling Gale & Grand Archmage perks, 150+ int. Effect: Increase to cumulative damage by 20%. Penalty for turn without casted wind spell decreased by 10%. Maximum 15 stacks.\n");
+			outputText("-New tier 5 intelligence lvl-up perk (by Demojay): Rumbling Earth (Ex). Req. Rumbling Earth & Grand Archmage perks, 150+ int. Effect: Increase to cumulative damage by 20%. Penalty for turn without casted earth spell decreased by 10%. Maximum 15 stacks.\n");
 			outputText("-New tier 6 misc lvl-up perk: Greater Metabolization. Req. Improved Metabolization perk; Slime, Manticore, Displacer beast, Vampire, Dracula race or hunger enabled. Effect: Increase the duration of lingering nourishment effects by another 100% of base duration. And slows hunger progression even further if any(note does not raise racial scores).\n");
 			outputText("-New tier 7 speed lvl-up perk: Power Shot (Su). Req. Power Shot (Ex). Effect: Allow to use wrath above normal maximum to calculate bonus (overwrath) and effectivness of power attack increased fourfold (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).\n");
 			outputText("-New tier 7 strength lvl-up perk: Power Attack (Su). Req. Power Attack (Ex) perk. Effect: Allow to use wrath above normal maximum to calculate bonus (overwrath) and effectivness of power shot increased fourfold (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).\n");
 			outputText("-New tier 9 intelligence lvl-up perk: High Tide (Su). Req. High Tide (Ex) & Grand Archmage (3rd circle) perks, 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling water based attack. Penalty for turn without casted water spell decreased by another 10%. Maximum 75 stacks.\n");
+			outputText("-New tier 9 intelligence lvl-up perk (by Demojay): Howling Gale (Su). Req. Howling Gale (Ex) & Grand Archmage (3rd circle) perks, 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling wind based attack. Penalty for turn without casted wind spell decreased by another 10%. Maximum 75 stacks.\n");
+			outputText("-New tier 9 intelligence lvl-up perk (by Demojay): Rumbling Earth (Su). Req. Rumbling Earth (Ex) & Grand Archmage (3rd circle) perks, 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling earth based attack. Penalty for turn without casted earth spell decreased by another 10%. Maximum 75 stacks.\n");
 			outputText("-New mutation perk: Arigean Association Cortex. Req. having free nerv system mutation slot, arigean race. Effects: Overtime your way of thinking has changed to be more alike to that of an Arigean. Charged shot, Mana shot and Mana Barrage all deal 20% more damage.\n");
 			outputText("-New mutation perk: Slime Fluid. Req. having free bloodsteam mutation slot, one of slime races. Effects: Your bodily fluids are self conscious and do not leave you easily. All bleed damage taken is negated.\n");
 			outputText("-New mutation perk: Slime Metabolism. Req. having free metabolism mutation slot, one of slime races. Effects: When taking an intake of fluid heal for 2% of your hp, mana and fatigue.\n");
@@ -53,8 +65,8 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Slime Fluid (Evolved). Req. Slime Fluid (Primitive) and lvl 60+. Effects: Your bodily fluids are self conscious and do not leave you easily. All bleed damage taken is negated. You take 75% less damage from Acid. Your blood takes on aphrodisiac property when taking melee physical damage your blood lash out teasing your opponent.\n");
 			outputText("-New mutation perk: Slime Metabolism (Evolved). Req. Slime Metabolism (Primitive) and lvl 60+. Effects: When taking an intake of fluid heal for 4% of your hp, mana and fatigue. Increase all grappling tease damage by 75%. Gain temporary regeneration +1% after a fluid intake for one hour.\n");
 			outputText("-New mutation perk: Black Heart (Final Form). Req. Black Heart (Evolved) and lvl 90+. Effect: Increased Lust strike power, empower Fascinate, adds extra Lust damage to Lust strike scaling with Wisdom (Wis/10). Lowers Fascinate Cooldown by 2, adds extra Lust damage to Lust strike, scaling with Sensitivity (Sensitivity/10). ");
-			//3 of 11 pages
 			outputText("-New mutation perk: Slime Fluid (Final Form). Req. Slime Fluid (Evolved) and lvl 90+. Effects: Your bodily fluids are self conscious and do not leave you easily. All bleed damage taken is negated. You take 100% less damage from Acid. Your blood takes on aphrodisiac property when taking melee physical damage your blood lash out teasing your opponent. ");
+			//4 of 11 pages
 			outputText("Your melee unarmed and feral attack gains tease damage property when you are below 100% health.\n");
 			outputText("-New mutation perk: Slime Metabolism (Final Form). Req. Slime Metabolism (Evolved) and lvl 90+. Effects: When taking an intake of fluid heal for 5% of your hp, mana and fatigue. Increase all grappling tease damage by 100%. Gain temporary regeneration +2% after a fluid intake for one hour. Fluid intake heals all status damage, drains and weakening by 5% per intake.\n");
 			outputText("Facinate Stun lasts 2 turns, count your lust for twice as high when using Lust strike and it’s now benefit from all effects that pertain to the tease action.\n");
@@ -118,7 +130,6 @@ public class Changelog extends BaseContent
 			outputText("-All the tease related dmg calculation been unified to use one function. It may make some specials weaker or stronger but also made them all easier to compare and adjust.\n");
 			outputText("-Erlking Cane durability increased from 10 to 50 and now it would slowly over time restore itself by 1 durability per hour.\n");
 			outputText("-Feeding Euphoria and Milking Euphoria speed bonus would be now based on speed value rather then been speed multi bonus.\n");
-			//8.11
 			outputText("-Changed manaShieldAbsorb function. (NUZ/Shirane)\n");
 			outputText("-Goblin mech code changes. Fixed text formatting errors for shooting from a goblin mech. Mech melee damage now scales from int. Mech melee attacks gain weapon experience and weapon procs when using mech weapons. (Demojay)\n");
 			outputText("-New tier 1 wisdom lvl-up perk: Penetrator. Req. Job: Ranger & Precision perks, 60+ wis. Effect: Thrown weapons and firearms (+ mech weapons) ignore damage reductions piercing right through your opponent armor weak points (ignore enemy dmg red). (+5% range physical attacks multiplier)\n");
@@ -148,18 +159,17 @@ public class Changelog extends BaseContent
 			outputText("-Arousing Aura now scales from libido, rather than single digit damage. Arousal Potion now uses the correct damage scaling, rather than copying Alraune Nectar. Alraune Nectar now gains bonuses from racial paragon. Alraune Nectar, Apophis Unholy Aura and Black Frost Aura can now be suppressed in Misc menu. ");
 			outputText("Lust Damage bounding for auras to 10% now applies after monster lust vulnerability and difficulty scaling. This will mean that auras cannot 1-shot weak enemies, but will deal more damage against stronger enemies. All lust auras now give tease exp, to align them with 'Aura of Corruption'. (Demojay)\n");
 			outputText("-Added Howling Gale/ Rumbling Earth bonuses to Elemental fusion attacks. Wind Mod added to 'Hurricane' and 'Wind Scythe' magical specials. Wind Mod added to Wind Spells. Earth Mod added to Earth Spells. 'Aura of Purity' and 'Black Frost Aura' Auras now only maintain current counter for fire/ice cumulative damage perks. (Demojay)\n");
-			outputText("-New tier 2 intelligence lvl-up perk (by Demojay): Howling Gale. Req. Grand Mage & Channeling perks, 75+ int and any wind spell or special. Effect: Cumulative 40% damage increase for every subsequent wind spell. Each turn without cast wind spell lower damage by 40% down to normal (100%) damage. Maximum 5 stacks.\n"); 
-			outputText("-New tier 5 intelligence lvl-up perk (by Demojay): Howling Gale (Ex). Req. Howling Gale & Grand Archmage perks, 150+ int. Effect: Increase to cumulative damage by 20%. Penalty for turn without casted wind spell decreased by 10%. Maximum 15 stacks.\n");
-			outputText("-New tier 9 intelligence lvl-up perk (by Demojay): Howling Gale (Su). Req. Howling Gale (Ex) & Grand Archmage (3rd circle) perks, 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling wind based attack. Penalty for turn without casted wind spell decreased by another 10%. Maximum 75 stacks.\n");
-			outputText("-New tier 2 intelligence lvl-up perk (by Demojay): Rumbling Earth. Req. Grand Mage & Channeling perks, 75+ int and any earth spell or special. Effect: Cumulative 40% damage increase for every subsequent earth spell. Each turn without cast earth spell lower damage by 40% down to normal (100%) damage. Maximum 5 stacks.\n");
-			outputText("-New tier 5 intelligence lvl-up perk (by Demojay): Rumbling Earth (Ex). Req. Rumbling Earth & Grand Archmage perks, 150+ int. Effect: Increase to cumulative damage by 20%. Penalty for turn without casted earth spell decreased by 10%. Maximum 15 stacks.\n");
-			outputText("-New tier 9 intelligence lvl-up perk (by Demojay): Rumbling Earth (Su). Req. Rumbling Earth (Ex) & Grand Archmage (3rd circle) perks, 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling earth based attack. Penalty for turn without casted earth spell decreased by another 10%. Maximum 75 stacks.\n");
 			outputText("-Fixed bug where Mech Greatsword and Dual Mech Greatsword did not cause bleed damage in a mech. Fixed bug where Lightning Strikes affects all weapons, not just normal-sized ones. Mech melee attacks now gains magical attacks from charge weapon, similar to the other melee and ranged formulas. Twin Mech Melee Weapons in a goblin mech will now deal a second attack as expected. (Demojay)\n");
 			outputText("-Blood Puppies from 'My Blood For Blood Puppies' now attack automatically each turn. The player can now disable the wrath generation from 'Your Pain, My Power' in the 'Misc Opt' menu. (Demojay)\n");
+			//12.11
 			outputText("-Added 'few' overrides method for each damage type (doDamageBefore()/doXXXDamageBefore()), handleStatusEffects(statusEffectType) for OrcaPlay/Straddle/Provoke/OrcaHasWackedFinish. Add a new gimmick for Lettuce who now has an ability to deflect player attacks/adapt to statuseffects. (NUZ/Shirane)\n");
 			outputText("-New tier 2 intelligence lvl-up perk (by Demojay): Corrosive Meltdown. Req. Grand Mage & Channeling perks, 75+ int and any acid spell or special. Effect: Cumulative 40% damage increase for every subsequent acid spell. Each turn without cast acid spell lower damage by 40% down to normal (100%) damage. Maximum 5 stacks.\n");
 			outputText("-New tier 5 intelligence lvl-up perk (by Demojay): Corrosive Meltdown (Ex). Req. Corrosive Meltdown & Grand Archmage perks, 150+ int. Effect: Increase to cumulative damage by 20%. Penalty for turn without casted acid spell decreased by 10%. Maximum 15 stacks.\n");
 			outputText("-New tier 9 intelligence lvl-up perk (by Demojay): Corrosive Meltdown (Su). Req. Corrosive Meltdown (Ex) & Grand Archmage (3rd circle) perks, 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling acid based attack. Penalty for turn without casted acid spell decreased by another 10%. Maximum 75 stacks.\n");
+			outputText("-Converted Druid Abilities to use the CombatAbility class, and added Fusion Special 4 (AoE attack) and 5 (AoE attack with lingering damage and 20% chance for stun). Fixed bug where trying to attack with an element when fused with the same type broke the UI. The Druid's 'Shared Power' perk now increases all damage, rather than missing Magical Soulskills like before. (Demojay)\n");
+			outputText("-Can now customize the training dummy fight: Can choose lvl between 0, 30, 60, 90 and 150; Can choose whether dummy is immune to lust; Can choose if you face a single or group of dummies. (Demojay)\n");
+			outputText("-New tier 9 misc lvl-up perk (by Demojay): Elemental Bloodline. Req. Prestige Job: Druid & H class Heaven Tribulation Survivor perks. Effect: Enables passive Dao Comprehension and increased Comprehension speed when in an infused state.\n");
+			outputText("-Goblin and Imp now share the possible skin colors with each race have it as more rarely appearing color choices of the other race. Also goblins can now gain their older variant of ears also at lower chance then big ears variant.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -171,26 +181,22 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay) (NUZ/Shirane)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed bugs: Telekinetic Grasp have unlimited powe... duration, 'Elite/Champion/Boss HP bonus' setting, Monsters HP (and Soulforce/Mana) not decreasing on turn end when any effect lowering it, Rathazul keep trying cure Belisa after Nadia done it, Vouivre Oil replacing dragon ears with snake ears & dragon scales with snake scales, Tyrantia & Flitzi forest scene allowing to skip ");
 			outputText("large portion of her storyline, corrupt Celess sex scenes not reseting lust/not giving tease exp, 2nd promotion in Adventure Guld been not accesable, Diva/Project Nightwalker dropping/giving Bat TF instead of Vampire TF, Sky-tier Aether Twins been excluded from some of BFGaunlets bonuses, silly mode event in hills involving minotaurs got it lvl req. below lvl req. for area ");
-			outputText("(fix was removing the lvl req. on it), races with Undeath perk scaling HP from tou instead of lib, Salamander IM not keeping Lustzerker perk from loosing if no longer race with lustzerker ability, Gryphon Statuette only allowing cock tf scene, Weasel Eyes tf not triggering when having Raiju Eyes\n\n");
+			outputText("(fix was removing the lvl req. on it), races with Undeath perk scaling HP from tou instead of lib, Salamander IM not keeping Lustzerker perk from loosing if no longer race with lustzerker ability, Gryphon Statuette only allowing cock tf scene, Weasel Eyes tf not triggering when having Raiju Eyes, Library not teaching all curretly existing tier 1 white and black spells\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8v:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -248,7 +254,10 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -272,6 +281,7 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

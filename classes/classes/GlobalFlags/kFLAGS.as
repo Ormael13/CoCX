@@ -2567,6 +2567,7 @@ public static const TEMPLE_OF_THE_DIVINE_FERA:int                               
 public static const GOLEMANCER_PERM_GOLEMS:int	                                    = 2559;
 public static const IN_COMBAT_PLAYER_GOLEM_ATTACKED:int	                            = 2560;
 public static const IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED:int                         = 2561;
+public static const IN_COMBAT_PLAYER_EPIC_ELEMENTAL_ATTACKED:int                    = 2772;
 public static const FETISH_FOLLOWER_SUBTYPE:int                         			= 2562;
 public static const FISHES_STORED_AT_FISHERY:int                         			= 2563;
 public static const PATCHOULI_FOLLOWER:int                         					= 2564;
@@ -2777,7 +2778,6 @@ public static const PABLO_USED_YOUR_ASS:int                                   		
 public static const PABLO_FREAKED_OUT_OVER_WORMS:int                                = 2769;
 public static const WEREWOLF_PACK_PITY_SYSTEM:int                                   = 2770;
 public static const IN_COMBAT_PLAYER_USED_SHARK_BITE:int                            = 2771;
-public static const UNKNOWN_FLAG_NUMBER_02772:int                                   = 2772;
 public static const UNKNOWN_FLAG_NUMBER_02773:int                                   = 2773;
 public static const UNKNOWN_FLAG_NUMBER_02774:int                                   = 2774;
 public static const UNKNOWN_FLAG_NUMBER_02775:int                                   = 2775;

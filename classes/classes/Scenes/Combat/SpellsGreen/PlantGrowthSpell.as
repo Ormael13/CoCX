@@ -38,10 +38,7 @@ public class PlantGrowthSpell extends AbstractGreenSpell {
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
-		var baseDamage:Number = (combat.teases.teaseBaseLustDamage() * 1.5 * spellModGreen());
-		if (player.hasPerk(PerkLib.VegetalAffinity)) baseDamage *= 1.5;
-		if (player.hasPerk(PerkLib.GreenMagic)) baseDamage *= 2;
-		if (player.hasStatusEffect(StatusEffects.GreenCovenant)) baseDamage *= 2;
+		var baseDamage:Number = (combat.teases.teaseBaseLustDamage() * 1.5);
 		return adjustLustDamage(baseDamage, monster, CAT_SPELL_GREEN, randomize);
 	}
 	
@@ -88,7 +85,6 @@ public class PlantGrowthSpell extends AbstractGreenSpell {
 			crit = true;
 			lustDmg *= 1.75;
 		}
-		lustDmg = Math.round(monster.lustVuln * lustDmg);
 		monster.teased(lustDmg, false);
 		if (crit) outputText(" <b>Critical!</b>");
 		combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());

@@ -1058,6 +1058,9 @@ public class PerkLib
 		public static const ElementalArrows:PerkType = mk("Elemental Arrows", "Elemental Arrows",
 				"Shoot elemental arrows adding your intelligence to your damage. (+20% range physical attacks multiplier)",
 				"You've chosen the 'Elemental Arrows' perk, allowing you to shoot elemental arrows. (+20% range physical attacks multiplier)");
+		public static const ElementalBloodline:PerkType =  mk("Elemental Bloodline", "Elemental Bloodline",
+				"When in an infused state, passively gain Dao Comprehension for the associated element. Increases Dao Comprehension speed when in an infused state for the associated element.",
+				"You've chosen the 'Elemental Bloodline' perk. Enables passive Dao Comprehension and increased Comprehension speed when in an infused state");
 		public static const ElementalBolt:PerkType = mk("Elemental Bolt", "Elemental Bolt",
 				"Enable use of Elemental bolt. (would prevent decay of buff from building up elemental damage)",
 				"You've chosen the 'Elemental Bolt' perk. Enable use of Elemental bolt. (would prevent decay of buff from building up elemental damage)");
@@ -2690,13 +2693,13 @@ public class PerkLib
 				"Screw Xeria, you're the true sex deity! You're holiness empowers your sex drive, increasing your tease damage by 15%.",
 				"You've chosen the 'Sex Deity' perk, gaining +15% tease dmg.");
 		public static const SharedPower:PerkType = mk("Shared power", "Shared power",
-				"Each elementalist perk learned gives a +10% multi bonus to health, damage and spell power when in an infused state.",
-				"You've chosen the 'Shared power' perk. Each elementalist perk learned gives a +10% multi bonus to health, damage and spell power when in an infused state.");
+				"Each elementalist perk learned gives a +10% multi bonus to health and damage when in an infused state.",
+				"You've chosen the 'Shared power' perk. Each elementalist perk learned gives a +10% multi bonus to health and damage when in an infused state.");
 		public static const Sharpshooter:PerkType = mk("Sharpshooter", "Sharpshooter",
 				"Allows you to increase non-bow range weapons attack up to 200% (Intelligence-based). (+5% range physical attacks multiplier)",
 				"You've chosen the 'Sharpshooter' perk, allowing you to slightly increase non-bow range weapons attack. (+5% range physical attacks multiplier)");
 		public static const ShieldCombat:PerkType = mk("Shield Combat", "Shield Combat",
-				"When you block an attack riposte with a shield bash (need to wear shield allowing you to use this move) damaging your opponent. Also minimaly improve block chance.",
+				"When you block an attack riposte with a shield bash (need to wear shield allowing you to use this move) damaging your opponent. Also minimally improve block chance.",
 				"You've chosen the 'Shield Combat' perk, allowing you to riposte with a shield bash when you block an attack. Also minimaly improve block chance.");
 		public static const ShieldExpertise:PerkType = mk("Shield Expertise", "Shield Expertise",
 				"When you wearing a shield (one that allow use of shield bash) add quarter of block value to your armor (at least 1).",
@@ -7735,6 +7738,8 @@ public class PerkLib
 					.requireInt(200)
 					.requireLib(200)
 					.requireCor(50);
+			ElementalBloodline.requireLevel(54)
+					.requirePerks(HclassHeavenTribulationSurvivor, PrestigeJobDruid);
             FirstAttackSkeletons.requireLevel(54)
                     .requirePerks(FirstAttackGolems, PrestigeJobNecromancer);
             //Tier 10
@@ -7964,4 +7969,4 @@ public class PerkLib
         }
 	}
 }
-}
+}

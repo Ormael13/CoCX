@@ -16,6 +16,7 @@ public class ImpRace extends Race {
 	public static const ImpSkinColors:/*String*/Array = ["red", "orange","pale purple", "royal purple", "light purple"];
 	public static const ImpSkinColorsMale:/*String*/Array = ["red","orange"];
 	public static const ImpSkinColorsFemale:/*String*/Array = ["pale purple", "royal purple", "light purple"];
+	public static const ImpRareSkinColors:/*String*/Array = ["pale yellow", "grayish-blue", "green", "dark green", "emerald"];
 	public static const ImpEyeColors:/*String*/Array = ["red", "green", "purple", "yellow"];
 	public static const ImpHairColors:/*String*/Array = ["red", "purple", "dark purple"];
     public static const RaceBody:/*String*/Array = [
@@ -85,9 +86,9 @@ public class ImpRace extends Race {
 				.skinPlainOnly(+1)
 				.customRequirement("", "Male red or Female purple skin",
 						function (body:BodyData):Boolean {
-							return (body.hasCock && body.hasVagina ? Utils.InCollection(body.skinColor1, ImpSkinColors):
-									body.hasVagina ? Utils.InCollection(body.skinColor1, ImpSkinColorsFemale):
-											Utils.InCollection(body.skinColor1, ImpSkinColorsMale))
+							return (body.hasCock && body.hasVagina ? Utils.InCollection(body.skinColor1, ImpSkinColors, ImpRareSkinColors):
+									body.hasVagina ? Utils.InCollection(body.skinColor1, ImpSkinColorsFemale, ImpRareSkinColors):
+											Utils.InCollection(body.skinColor1, ImpSkinColorsMale, ImpRareSkinColors))
 						}, +1, -1000)
 				.plainSkinOfAdj(NOT("slippery"), +1)
 				.eyeTypeAndColor(Eyes.HUMAN, ANY(ImpEyeColors), +1)

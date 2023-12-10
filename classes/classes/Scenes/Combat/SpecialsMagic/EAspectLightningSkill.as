@@ -38,13 +38,13 @@ public class EAspectLightningSkill extends AbstractMagicSpecial {
     public function calcDamage(monster:Monster):Number {
         var damage:Number = elementalAspectBaseDamage(StatusEffects.SummonedElementalsLightning);
         damage = elementalAspectDamageMod(StatusEffects.SummonedElementalsLightning, damage);
-        damage = calcVoltageMod(damage, true);
 
         return damage;
     }
 
     override public function doEffect(display:Boolean = true):void {
         var damage:Number = calcDamage(monster);
+        damage = calcVoltageMod(damage, true);
 
         //Determine if critical hit!
         var crit:Boolean = false;

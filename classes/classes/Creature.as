@@ -913,7 +913,7 @@ public class Creature extends Utils
 		}
 		public function maxLust():Number {
 			var max:Number = Math.round(maxLust_base()*maxLust_mult());
-			return Math.min(399999,max);
+			return Math.min(699999,max);
 		}
 		public function maxOverLust():Number {
 			var max1:Number = Math.round(maxLust_base()*maxLust_mult());
@@ -929,9 +929,9 @@ public class Creature extends Utils
 			if (perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 4) max2 += 0.1;
 			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 4) max2 += 0.1;
 			if (perkv1(IMutationsLib.HumanOvariesIM) >= 4) max2 += 0.1;
-			max1 *= max2;//~170%
+			max1 *= max2;//~230%
 			max1 = Math.round(max1);
-			return Math.min(579999,max1);
+			return Math.min(1609999,max1);
 		}
 		public function maxFatigue():Number {
 			return 150;

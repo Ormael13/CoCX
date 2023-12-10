@@ -955,86 +955,11 @@ public class MagicSpecials extends BaseCombatContent {
 			} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
 		if (player.hasPerk(PerkLib.ElementalBody)) {
-			if (player.perkv1(PerkLib.ElementalBody) == 1) {//sylph
-				bd = buttons.add("Wind Blade", curry(FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsAirE), 1)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				else if (player.hasStatusEffect(StatusEffects.InsideSmallSpace)) {
-					bd.disable("You can't use this inside too small spaces.");
-				}
-				bd = buttons.add("Healing Breeze", curry(FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsAirE), 1)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) == 5) {
-					bd = buttons.add("True Evasion", FusionSpecialTrueEvasion).hint("Cooldown: 10 turns.\n\nSoulforce cost: " + Math.round(20 * soulskillCost() * soulskillcostmulti()));
-					if (player.soulforce < 20 * soulskillCost() * soulskillcostmulti()) {
-						bd.disable("Your current soulforce is too low.");
-					}
-					else if (player.hasStatusEffect(StatusEffects.CooldownTrueEvasion)) {
-						bd.disable("You need more time before you can use True Evasion again.");
-					}
-				}
-			}
-			if (player.perkv1(PerkLib.ElementalBody) == 2) {//gnome
-				bd = buttons.add("Wild Growth", curry(FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsEarthE), 2)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				else if (monster.hasStatusEffect(StatusEffects.Flying)) {
-					bd.disable("You can reach flying targets.");
-				}
-				bd = buttons.add("Synthesis", curry(FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsEarthE), 2)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) == 5) {
-					bd = buttons.add("Adamantine Shell", FusionSpecialAdamantineShell).hint("Cooldown: 10 turns.\n\nSoulforce cost: " + Math.round(20 * soulskillCost() * soulskillcostmulti()));
-					if (player.soulforce < 20 * soulskillCost() * soulskillcostmulti()) {
-						bd.disable("Your current soulforce is too low.");
-					}
-					else if (player.hasStatusEffect(StatusEffects.CooldownAdamantineShell)) {
-						bd.disable("You need more time before you can use True Evasion again.");
-					}
-				}
-			}
-			if (player.perkv1(PerkLib.ElementalBody) == 3) {//ignis
-				bd = buttons.add("Pyroblast", curry(FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsFireE), 3)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				bd = buttons.add("Warmth", curry(FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsFireE), 3)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) == 5) {
-					if (player.hasStatusEffect(StatusEffects.FieryRage)) {
-						bd = buttons.add("Fiery Rage(Off)", FusionSpecialFieryRageDeactivate).hint("Deactivate Fiery Rage.");
-					} else {
-						bd = buttons.add("Fiery Rage(On)", FusionSpecialFieryRageActivate).hint("Double your melee damage for a time, by ignoring your body's limits, pushing past them. This technique drain 5% of max soulforce per round, but also increases lust resistance.");
-					}
-				}
-			}
-			if (player.perkv1(PerkLib.ElementalBody) == 4) {//undine
-				bd = buttons.add("Hydraulic Torrent", curry(FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsWaterE), 4)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				bd = buttons.add("Lifewater", curry(FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsWaterE), 4)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) == 5) {
-					bd = buttons.add("Moment of Clarity", FusionSpecialMomentOfClarity).hint("Cooldown: 6 turns.\n\nSoulforce cost: " + Math.round(20 * soulskillCost() * soulskillcostmulti()));
-					if (player.soulforce < 20 * soulskillCost() * soulskillcostmulti()) {
-						bd.disable("Your current soulforce is too low.");
-					}
-					else if (player.hasStatusEffect(StatusEffects.CooldownMomentOfClarity)) {
-						bd.disable("You need more time before you can use True Evasion again.");
-					}
-				}
-			}
+			for each (var fusionAbility:CombatAbility in CombatAbilities.ALL_ELEMENTAL_FUSION_ATTACKS) {
+                if (fusionAbility.isKnown) {
+                    buttons.append(fusionAbility.createButton(monster));
+                }
+            }
 		}
 		if (player.hasStatusEffect(StatusEffects.ShieldingSpell)) buttons.add("Shielding", shieldingSpell);
 		if (player.hasStatusEffect(StatusEffects.ImmolationSpell)) buttons.add("Immolation", immolationSpell);
@@ -3012,7 +2937,7 @@ public class MagicSpecials extends BaseCombatContent {
 		var fireDamage:Number;
 		damage *= combat.pcScalingBonusCorruption(player.cor);
 		damage *= spellModBlack();
-		lustDamage = combat.teases.teaseBaseLustDamage() * lustDamagePercent;
+		lustDamage = combat.teases.teaseBaseLustDamage() * lustDamagePercent * monster.lustVuln;
 		fireDamage = calcInfernoMod(damage * (1 - lustDamagePercent), true);
 		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue) {

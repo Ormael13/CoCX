@@ -123,9 +123,12 @@ public class CleansingPalmSkill extends AbstractSoulSkill {
 			}
 
 			doMagicDamage(damage, true, display);
+			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
 			if (player.hasPerk(PerkLib.FlurryOfBlows)) {
 				doMagicDamage(damage, true, display);
+				if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
 				doMagicDamage(damage, true, display);
+				if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
 				damage *= 3;
 			}
 

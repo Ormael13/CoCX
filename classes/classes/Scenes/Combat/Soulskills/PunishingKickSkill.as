@@ -88,9 +88,12 @@ public class PunishingKickSkill extends AbstractSoulSkill {
 		monster.createStatusEffect(StatusEffects.PunishingKick, calcDuration(), 0, 0, 0);
 		if (display) outputText("You lash out with a devastating kick, knocking your opponent back and disorienting it. [Themonster] is knocked off balance by the ferocious blow! ");
 		doDamage(damage, true, display);
+		if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
 		if (player.hasPerk(PerkLib.FlurryOfBlows)) {
 			doDamage(damage, true, display);
+			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
 			doDamage(damage, true, display);
+			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
 			damage *= 3;
 		}
 		if (crit && display) outputText(" <b>*Critical Hit!*</b>");

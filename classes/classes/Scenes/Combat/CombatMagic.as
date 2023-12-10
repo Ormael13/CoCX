@@ -300,7 +300,6 @@ public class CombatMagic extends BaseCombatContent {
 				if (player.perkv2(PerkLib.ElementalBody) == 3) mod += .3;
 				if (player.perkv2(PerkLib.ElementalBody) == 4) mod += .4;
 			}
-			if (player.hasPerk(PerkLib.SharedPower) && player.perkv1(PerkLib.SharedPower) > 0) mod += (0.1*player.perkv1(PerkLib.SharedPower));
 		}
         return mod;
     }
@@ -405,6 +404,9 @@ public class CombatMagic extends BaseCombatContent {
 		var mod:Number = 1;
 		if (spellModWhiteImpl() > 1) mod += (spellModWhiteImpl() - 1);
 		if (player.hasPerk(PerkLib.OneWiththeForest) && player.perkv2(PerkLib.OneWiththeForest) > 0) mod += (0.05 * player.perkv2(PerkLib.OneWiththeForest));
+		if (player.hasPerk(PerkLib.VegetalAffinity)) mod += 0.5;
+		if (player.hasPerk(PerkLib.GreenMagic)) mod += 1;
+		if (player.hasStatusEffect(StatusEffects.GreenCovenant)) mod += 1;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
