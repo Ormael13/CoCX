@@ -19,7 +19,7 @@ public class SidonieFollower extends NPCAwareContent
 
 		}
 		private function anyMalesInCamp():Boolean {
-			return (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) || player.hasStatusEffect(StatusEffects.CampRathazul) || (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] < 1 && flags[kFLAGS.ARIAN_COCK_SIZE] > 0) || flags[kFLAGS.IZMA_BROFIED] == 1 || flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2
+			return (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) || player.hasStatusEffect(StatusEffects.CampRathazul) || (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] < 1 && flags[kFLAGS.ARIAN_COCK_SIZE] > 0) || flags[kFLAGS.IZMA_BROFIED] == 1 || (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2 && !player.hasStatusEffect(StatusEffects.KonstantinOff))
 				|| emberScene.followerEmber() && flags[kFLAGS.EMBER_GENDER] == 1;
 
 		}

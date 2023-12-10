@@ -317,7 +317,7 @@ public function repeatEncounterBattlefieldTalk():void {
 		else addButtonDisabled(4,"???", "Perhaps if you look around the mountains, you might find someone she might also know...");
 	}
 	addButton(5, "Her", repeatEncounterBattlefieldTalkHer);
-	if (isLover() && !TyraniaThePhalluspear && flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) addButton(10, "ThePhalluspear", talkThePhalluspear);
+	if (isLover() && !TyraniaThePhalluspear && flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2 && !player.hasStatusEffect(StatusEffects.KonstantinOff)) addButton(10, "ThePhalluspear", talkThePhalluspear);
 	if (isLover()) {
 		if (flags[kFLAGS.SLEEP_WITH] != "Tyrantia") addButton(12, "Sleep With", TyrantiaSleepToggle);
 		else addButton(12, "Sleep Alone", TyrantiaSleepToggle);

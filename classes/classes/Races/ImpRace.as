@@ -81,7 +81,9 @@ public class ImpRace extends Race {
 				.earType(ANY(Ears.ELFIN, Ears.BIG), +1)
 				.tongueType(Tongue.IMPISH, +1)
 				.armType(Arms.TINY, +1)
+				.armType(NOT(Arms.HUMAN), 0, -10)
 				.legType(LowerBody.TINY, +1)
+				.legType(NOT(LowerBody.HUMAN), 0, -10)
 				.height(AT_MOST(42), +1)
 				.skinPlainOnly(+1)
 				.customRequirement("", "Male red or Female purple skin",

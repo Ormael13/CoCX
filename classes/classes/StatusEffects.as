@@ -732,6 +732,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const ElectraOff:StatusEffectType          = mk("Electra Off");
 		public static const EtnaOff:StatusEffectType             = mk("Etna Off");
 		public static const HeliaOff:StatusEffectType            = mk("Helia Off");
+		public static const KonstantinOff:StatusEffectType       = mk("Konstantin Off");
 		public static const LunaOff:StatusEffectType             = mk("Luna Off");
 		public static const NadiaOff:StatusEffectType            = mk("Nadia Off");
 		public static const TedOff:StatusEffectType              = mk("Ted Off");

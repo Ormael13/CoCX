@@ -135,13 +135,17 @@ public class WerewolfFemaleScene extends BaseContent
 			if(player.isRaceCached(Races.WEREWOLF)) outputText(" while you howl to the moon, savoring your mind blowing orgasm");
 			outputText(".\n\n")
 			outputText("That said, you are far from done. The moment you recover, you resume using [monster him] several times until dawn finally breaks.\n\n")
-			if(player.isAnyRaceCached(Races.WEREWOLF, Races.CERBERUS) && player.hasMutation(IMutationsLib.AlphaHowlIM) && (LunaFollower.WerewolfPackMember < 5*player.perkv1(IMutationsLib.AlphaHowlIM)) && rand(100)>=80){
-				outputText("The exhausted werewolf, now a broken mess, is merely able to pitifully wag [monster his] tail." +
+			if(player.isAnyRaceCached(Races.WEREWOLF, Races.CERBERUS) && player.hasMutation(IMutationsLib.AlphaHowlIM) && (LunaFollower.WerewolfPackMember < 5*player.perkv1(IMutationsLib.AlphaHowlIM))){
+				if (rand(100)>=80 || flags[kFLAGS.WEREWOLF_PACK_PITY_SYSTEM] > 3) {
+					outputText("The exhausted werewolf, now a broken mess, is merely able to pitifully wag [monster his] tail." +
 						" Knowing theres still space for loyal bitches in your pack you order [monster him] to stand up and follow you back to your camp." +
 						" Unable to refuse the compulsion of their new alpha, your newest pack member complies with the order, joining your team permanently." +
 						" Luna will also takes care to establish a proper hierarchy so that the pup stays beneath her in rank." +
 						" How she does this is up to her but you know your toy is going to be used for a little longer.\n\n");
-				LunaFollower.WerewolfPackMember += 1;
+					if (flags[kFLAGS.WEREWOLF_PACK_PITY_SYSTEM] > 3) flags[kFLAGS.WEREWOLF_PACK_PITY_SYSTEM] = 0;
+					LunaFollower.WerewolfPackMember += 1;
+				}
+				else flags[kFLAGS.WEREWOLF_PACK_PITY_SYSTEM]++;
 			}
 			else{
 				outputText("Perhaps as a last display of [monster his] fast breaking pride the defeated werewolf runs away");

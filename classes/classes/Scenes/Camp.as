@@ -1163,7 +1163,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4) counter++;
 		if (flags[kFLAGS.FLOWER_LEVEL] >= 4) counter++;
 		if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) counter++;
-		if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) counter++;
+		if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2 && !player.hasStatusEffect(StatusEffects.KonstantinOff)) counter++;
 		if (flags[kFLAGS.SIDONIE_FOLLOWER] >= 1) counter++;
 		if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
 		if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 0) counter++;
@@ -1299,7 +1299,7 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.CampRathazul)) counter++;
 		if (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] < 1 && flags[kFLAGS.ARIAN_COCK_SIZE] > 0) counter++;
 		if (flags[kFLAGS.IZMA_BROFIED] == 1) counter++;
-		if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) counter++;
+		if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2 && !player.hasStatusEffect(StatusEffects.KonstantinOff)) counter++;
 		if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3) counter++;
 		if (emberScene.followerEmber() && flags[kFLAGS.EMBER_GENDER] == 1) counter++;
 		return counter;
@@ -2063,7 +2063,7 @@ public class Camp extends NPCAwareContent{
 				buttons.add("Mitzi D.", SceneLib.mitziFollower.MitziDaughtersCampMainMenu).hint("Visit Mitzi daughters.");
 			}
 			//Konstantin
-			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) {
+			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2 && !player.hasStatusEffect(StatusEffects.KonstantinOff)) {
 				if (model.time.hours >= 6 && model.time.hours <= 8) outputText("Konstantin has dragged out of his [camp] a mat, and is doing some flexing postures under the early morning light. He’s not particularly good at it, so most of times he ends up in awkward positions.");
 				else if (model.time.hours <= 12) outputText("You ursine smith is currently at work, sharpening and polishing blades.");
 				else if (model.time.hours <= 15) outputText("Konstantin has stopped his work to have a meal, and quite an abundant one. From where you are, you can smell the cooked meat and spice from his plate.");
@@ -3297,6 +3297,7 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.TedOff)) outputText("\nDragon Boi: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.SophieOff)) outputText("\nSophie: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.HeliaOff)) outputText("\nHelia: <font color=\"#800000\"><b>Disabled</b></font>");
+		if (player.hasStatusEffect(StatusEffects.KonstantinOff)) outputText("\nKonstantin: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.SpoodersOff)) outputText("\nSpooders: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.CalluOff)) outputText("\nCallu (Otter girl): <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.VenusOff)) outputText("\nVenus (Gigantic Turtle): <font color=\"#800000\"><b>Disabled</b></font>");
@@ -3312,6 +3313,7 @@ public class Camp extends NPCAwareContent{
 		addButton(4, "Etna", toggleEtna).hint("Enable or Disable Etna. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(5, "Luna", toggleLuna).hint("Enable or Disable Luna. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(6, "DragonBoi", toggleNPCStatus, StatusEffects.TedOff).hint("Enable or Disable Dragon Boi. This will remove him from enc table.");
+		addButton(7, "Konstantin", toggleNPCStatus, StatusEffects.KonstantinOff).hint("Enable or Disable Konstantin. This will remove him from enc table and if already in [camp] disable access to him.");
 		addButton(8, "Sophie", toggleSophie).hint("Enable or Disable Sophie. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(9, "Helia", toggleHelia).hint("Enable or Disable Helia. This will remove her from enc table and if already in [camp] disable access to her.");
 		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {

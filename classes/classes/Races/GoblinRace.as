@@ -70,6 +70,7 @@ public class GoblinRace extends Race {
 		addScores()
 				.faceType(ANY(Face.HUMAN, Face.ANIMAL_TOOTHS), +1)
 				.earType(ANY(Ears.ELFIN, Ears.BIG), +1, -1000)
+				.hornType(NOT(Horns.DEMON), 0, -10)
 				.height(LESS_THAN(48), +1)
 				.hasPerk(PerkLib.GoblinoidBlood, +1)
 				.hasPerk(PerkLib.BouncyBody, +1)
@@ -83,7 +84,9 @@ public class GoblinRace extends Race {
 				.eyeTypeAndColor(Eyes.HUMAN, ANY(GoblinEyeColors), +1)
 				.hairColor1(ANY(GoblinHairColors), +1)
 				.armType(Arms.HUMAN, +1)
+				.armType(NOT(Arms.TINY), 0, -10)
 				.legType(LowerBody.HUMAN, +1)
+				.legType(NOT(LowerBody.TINY), 0, -10)
 				.noAntennae(+1);
 		
 		addMutation(IMutationsLib.NaturalPunchingBagIM);

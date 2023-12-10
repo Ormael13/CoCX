@@ -258,7 +258,7 @@ use namespace CoC;
 						unique: true,
 						call  : SceneLib.konstantin.meetKonstantinAtForest,
 						when  : function():Boolean {
-							return (flags[kFLAGS.KONSTANTIN_FOLLOWER] < 2);
+							return (flags[kFLAGS.KONSTANTIN_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.KonstantinOff));
 						},
 						chance: forestChance4
 					}, {
