@@ -62,18 +62,18 @@
 	<!-- Now create the AIR package using the ADT utility -->
     <macrodef name="createAirApk">
         <attribute name="platform" />
-        <attribute name="specialArch"/>
+        <attribute name="architecture"/>
         <attribute name="swf-name-postfix"/>
-        <attribute name="SpecialPostfix"/>
+        <attribute name="special-postfix"/>
         <sequential>
             <exec executable="${FLEX_HOME}/bin/adt@{platform}" failonerror="true">
                 <arg line="-package" />
                 <arg line="-target apk-captive-runtime" />
-                <arg line="-arch @{specialArch}"/>
+                <arg line="-arch @{architecture}"/>
                 <arg line="-storetype pkcs12" />
                 <arg line="-keystore ${basedir}/coc.keystore" />
                 <arg line="-storepass 123456" />
-                <arg line="${build.dir}/CoC-Mobile-@{SpecialPostfix}.apk" />
+                <arg line="${build.dir}/CoC-Mobile-@{special-postfix}.apk" />
                 <arg line="${basedir}/CoC-Android-@{swf-name-postfix}.xml" />
                 <arg line="-C ${build.dir} CoC-Mobile-@{swf-name-postfix}.swf" />
                 <arg line="-C ${basedir}" />
