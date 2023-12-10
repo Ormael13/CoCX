@@ -404,6 +404,9 @@ public class CombatMagic extends BaseCombatContent {
 		var mod:Number = 1;
 		if (spellModWhiteImpl() > 1) mod += (spellModWhiteImpl() - 1);
 		if (player.hasPerk(PerkLib.OneWiththeForest) && player.perkv2(PerkLib.OneWiththeForest) > 0) mod += (0.05 * player.perkv2(PerkLib.OneWiththeForest));
+		if (player.hasPerk(PerkLib.VegetalAffinity)) mod += 0.5;
+		if (player.hasPerk(PerkLib.GreenMagic)) mod += 1;
+		if (player.hasStatusEffect(StatusEffects.GreenCovenant)) mod += 1;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}

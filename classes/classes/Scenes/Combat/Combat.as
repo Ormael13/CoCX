@@ -5257,7 +5257,7 @@ public class Combat extends BaseContent {
                             combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
                             if (monster.hasStatusEffect(StatusEffects.BeeVenom)) monster.addStatusValue(StatusEffects.BeeVenom,3,(dBd2c*5));
                             else monster.createStatusEffect(StatusEffects.BeeVenom, 0, 0, (lustDmg3 * 5), 0);
-                            if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage(), false);
+                            if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln, false);
                             outputText("\n")
                             break;
                         case Tail.GARGOYLE:
@@ -6089,10 +6089,10 @@ public class Combat extends BaseContent {
                         damage = Math.round(damage * fireDamage);
 						doFireDamage(damage, true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-						if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage());
+						if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln);
 						doFireDamage(damage, true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-						if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage());
+						if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln);
 						if (player.playerHasFourArms()) {
 							doFireDamage(damage, true, true);
 							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
@@ -6104,10 +6104,10 @@ public class Combat extends BaseContent {
 						damage = Math.round(damage * iceDamage);
                         doIceDamage(damage, true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-						if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage());
+						if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln);
                         doIceDamage(damage, true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-						if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage());
+						if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln);
 						if (player.playerHasFourArms()) {
 							doIceDamage(damage, true, true);
 							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
@@ -6145,11 +6145,11 @@ public class Combat extends BaseContent {
 						doPhysicalDamage(damage, true, true);
 						if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-						if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage());
+						if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln);
 						doPhysicalDamage(damage, true, true);
 						if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-						if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage());
+						if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln);
 						if (player.playerHasFourArms()) {
 							doPhysicalDamage(damage, true, true);
 							if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
@@ -7302,7 +7302,7 @@ public class Combat extends BaseContent {
 				else curseLib = Math.round(curseLib);
 				player.addCurse("lib", curseLib, 1);
 			}
-			if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage(), false);
+			if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln, false);
         }/*
         wrathregeneration1();
         fatigueRecovery1();
@@ -7457,7 +7457,7 @@ public class Combat extends BaseContent {
                 if (monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
             }
         }
-		if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage(), false);
+		if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln, false);
     }
 
     public function WeaponMeleeStatusProcs():void {
@@ -12013,7 +12013,7 @@ public class Combat extends BaseContent {
                     outputText("You notice [monster he] is obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat is beginning to roll on [monster his] skin. You wager [monster he] is probably beginning to regret provoking you.  ");
                 }
             }
-            damage1B = combat.teases.teaseBaseLustDamage();
+            damage1B = combat.teases.teaseBaseLustDamage() * monster.lustVuln;
             if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
                 damage1B *= 2;
             }
@@ -12040,7 +12040,7 @@ public class Combat extends BaseContent {
                     outputText("You notice [monster he] is obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat is beginning to roll on [monster his] skin. You wager [monster he] is probably beginning to regret provoking you.  ");
                 }
             }
-            damage1B = combat.teases.teaseBaseLustDamage();
+            damage1B = combat.teases.teaseBaseLustDamage() * monster.lustVuln;
             if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
                 damage1B *= 2;
             }
@@ -12069,7 +12069,7 @@ public class Combat extends BaseContent {
                     outputText("You notice [monster he] is obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat is beginning to roll on [monster his] skin. You wager [monster he] is probably beginning to regret provoking you.  ");
                 }
             }
-            damage1B = combat.teases.teaseBaseLustDamage();
+            damage1B = combat.teases.teaseBaseLustDamage() * monster.lustVuln;
             if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
                 damage1B *= 2;
             }
@@ -12097,7 +12097,7 @@ public class Combat extends BaseContent {
                     outputText("You notice [monster he] is obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat is beginning to roll on [monster his] skin. You wager [monster he] is probably beginning to regret provoking you.  ");
                 }
             }
-            damage1B = combat.teases.teaseBaseLustDamage();
+            damage1B = combat.teases.teaseBaseLustDamage() * monster.lustVuln;
             if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
                 damage1B *= 2;
             }

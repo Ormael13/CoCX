@@ -2873,7 +2873,7 @@ use namespace CoC;
 						case 3: // physical
 							if (perkv1(IMutationsLib.SlimeFluidIM) >= 3 && !isFlying() && !CoC.instance.monster.isFlying()){
 								physTeaseDmg = true;
-								CoC.instance.monster.teased(SceneLib.combat.teases.teaseBaseLustDamage());
+								CoC.instance.monster.teased(SceneLib.combat.teases.teaseBaseLustDamage() * CoC.instance.monster.lustVuln);
 							}
 							// Bookmark
 							if (damagePercentArmor() > 1){

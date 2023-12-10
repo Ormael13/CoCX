@@ -2937,7 +2937,7 @@ public class MagicSpecials extends BaseCombatContent {
 		var fireDamage:Number;
 		damage *= combat.pcScalingBonusCorruption(player.cor);
 		damage *= spellModBlack();
-		lustDamage = combat.teases.teaseBaseLustDamage() * lustDamagePercent;
+		lustDamage = combat.teases.teaseBaseLustDamage() * lustDamagePercent * monster.lustVuln;
 		fireDamage = calcInfernoMod(damage * (1 - lustDamagePercent), true);
 		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue) {

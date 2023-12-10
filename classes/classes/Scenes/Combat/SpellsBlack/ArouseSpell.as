@@ -25,7 +25,7 @@ public class ArouseSpell extends AbstractBlackSpell {
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
-		return adjustLustDamage(player.inte / 5, monster, CAT_SPELL_BLACK, randomize);
+		return adjustLustDamage(scalingBonusIntelligence() / 3, monster, CAT_SPELL_BLACK, randomize);
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
@@ -97,7 +97,6 @@ public class ArouseSpell extends AbstractBlackSpell {
 			crit = true;
 			lustDmg *= 1.75;
 		}
-		lustDmg = Math.round(monster.lustVuln * lustDmg);
 		monster.teased(lustDmg, false);
 		if (crit) outputText(" <b>Critical!</b>");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
