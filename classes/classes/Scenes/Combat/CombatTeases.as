@@ -89,7 +89,6 @@ public class CombatTeases extends BaseCombatContent {
 		for each (var f:SimpleRaceEnchantment in player.allEnchantments(EnchantmentLib.RaceSpellPowerDoubled)) {
 			tBLD *= f.power * (player.isRaceCached(f.race)? 3:2);
 		}
-		tBLD = (tBLD * monster.lustVuln);
 		if (SceneLib.urtaQuest.isUrta()) tBLD *= 2;
 		return tBLD;
 	}
@@ -1559,6 +1558,7 @@ public class CombatTeases extends BaseCombatContent {
 			damage = teaseBaseLustDamage(damage);
 			if (player.hasPerk(PerkLib.BroadSelection) && player.differentTypesOfCocks() > 1) damage *= (1 + (0.25 * player.differentTypesOfCocks()));
 			if (SceneLib.urtaQuest.isUrta()) damage *= 2;
+			damage *= monster.lustVuln;
 			damage = Math.round(damage);
 			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 20) {
 				outputText("\n[themonster] is so mesmerised by your show that it stands there gawking.");
