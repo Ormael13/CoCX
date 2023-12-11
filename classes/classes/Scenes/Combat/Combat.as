@@ -7668,10 +7668,12 @@ public class Combat extends BaseContent {
 		if (monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyPlantType) || monster.hasPerk(PerkLib.EnemyGooType) || monster.hasPerk(PerkLib.EnemyUndeadType)) bleedChance = 0;
         if (rand(100) < bleedChance) bleed = true;
 		if (bleed) {
-			if (monster.hasStatusEffect(StatusEffects.HemorrhageShield)) monster.addStatusValue(StatusEffects.HemorrhageShield, 1, 2);
-			else monster.createStatusEffect(StatusEffects.HemorrhageShield, 2, 0.01, 0, 0);
-            if (player.shield == shields.SPIH_SH) monster.addStatusValue(StatusEffects.HemorrhageShield, 2, 0.01);
-            if (player.shield == shields.SPIM_SH) monster.addStatusValue(StatusEffects.HemorrhageShield, 2, 0.04);
+			if (monster.hasStatusEffect(StatusEffects.Hemorrhage)) monster.addStatusValue(StatusEffects.Hemorrhage, 1, 2);
+			else { 
+                monster.createStatusEffect(StatusEffects.Hemorrhage, 2, 0.01, 0, 0);
+                if (player.shield == shields.SPIH_SH) monster.addStatusValue(StatusEffects.Hemorrhage, 2, 0.01);
+                else if (player.shield == shields.SPIM_SH) monster.addStatusValue(StatusEffects.Hemorrhage, 2, 0.04);
+            }
 			if (monster.plural) outputText("\n[Themonster] bleed profusely from the many bloody gashes your [shield] leave behind.");
             else outputText("\n[Themonster] bleeds profusely from the many bloody gashes your [shield] leave behind.");
 		}

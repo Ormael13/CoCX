@@ -3422,6 +3422,7 @@ import classes.Scenes.Combat.CombatAbilities;
 				if (statusEffectv2(StatusEffects.CouatlHurricane) > 0) store14 *= statusEffectv2(StatusEffects.CouatlHurricane);
 				store14 += statusEffectv1(StatusEffects.CouatlHurricane); //Stacks on itself growing ever stronger
 				store14 += maxHP()*0.02;
+				store14 = SceneLib.combat.fixPercentDamage(store14);
 				store14 = SceneLib.combat.doDamage(store14);
 				if(plural) outputText("[Themonster] is violently struck by the ever intensifying windstorm. ");
 				else outputText("[Themonster] are violently struck by the ever intensifying windstorm. ");
@@ -3444,12 +3445,12 @@ import classes.Scenes.Combat.CombatAbilities;
 				//Deal damage if still wounded.
 				else {
 					var procentvalue:Number = (4 + rand(7));
-					var procentvalue1:Number = SceneLib.combat.BleedDamageBoost();
 					if (statusEffectv2(StatusEffects.IzmaBleed) > 0) procentvalue += statusEffectv2(StatusEffects.IzmaBleed);
-					procentvalue *= procentvalue1;
 					procentvalue = Math.round(procentvalue);
+
 					var store:Number = maxHP() * (procentvalue) / 100;
-					store = boundInt(1, store, maxHP()*.05);
+					store *= SceneLib.combat.BleedDamageBoost();
+					store = SceneLib.combat.fixPercentDamage(store);
 					store = SceneLib.combat.doDamage(store);
 					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your weapon left behind. ");
 					else outputText("[Themonster] bleeds profusely from the jagged wounds your weapon left behind. ");
