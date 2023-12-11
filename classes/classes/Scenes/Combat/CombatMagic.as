@@ -265,7 +265,6 @@ public class CombatMagic extends BaseCombatContent {
 			else mod += Math.round(camp.codex.checkUnlocked() / 100);
 		}
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) mod += .3;
-		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) mod += (player.cor * .01);
 		if (player.hasPerk(PerkLib.InariBlessedKimono)) mod += ((100 - player.cor) * .01);
         return mod;
@@ -317,11 +316,6 @@ public class CombatMagic extends BaseCombatContent {
 	internal function spellModImpl():Number {
 		var mod:Number = 1 + modChange_all() + modChange_spell_1() + modChange_spell_2();
 		if (player.hasPerk(PerkLib.Obsession)) mod += player.perkv1(PerkLib.Obsession);
-		if (player.hasPerk(PerkLib.KnowledgeIsPower)) {
-			if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) mod += (Math.round(camp.codex.checkUnlocked() / 100) * 3);
-			else mod += Math.round(camp.codex.checkUnlocked() / 100);
-		}
-		if (player.hasPerk(PerkLib.ZenjisInfluence3)) mod += .3;
 		if (player.headJewelry == headjewelries.DMONSKUL) mod += player.cor * .006;
 		if (player.isGargoyle() && Forgefather.material == "alabaster") {
 			if (Forgefather.refinement == 0) mod += (.15);

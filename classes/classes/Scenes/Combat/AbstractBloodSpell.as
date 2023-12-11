@@ -1,5 +1,8 @@
 package classes.Scenes.Combat {
+import classes.StatusEffects;
+
 public class AbstractBloodSpell extends AbstractSpell {
+	protected var inflictBleed:Boolean = true;
 	public function AbstractBloodSpell(
 			name:String,
 			desc:String,
@@ -38,5 +41,19 @@ public class AbstractBloodSpell extends AbstractSpell {
 		
 		return "";
 	}
+
+	override protected function postSpellEffect(display:Boolean = true):void {
+		super.postSpellEffect(display);
+		endTurnByBloodSkillUse(display);
+	}
+
+	protected function endTurnByBloodSkillUse(display:Boolean = true):void {
+		if (rand(20) < 4 && inflictBleed && !monster.isImmuneToBleed()) {
+			if (monster.hasStatusEffect(StatusEffects.Hemorrhage)) monster.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
+			else monster.createStatusEffect(StatusEffects.Hemorrhage, 2, 0.05, 0, 0);
+			if (display) outputText(" The attack leaves many bloody gashes.");
+		}
+		if (display) outputText("\n\n");
+	}   
 }
 }

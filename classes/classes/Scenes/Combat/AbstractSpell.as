@@ -22,6 +22,7 @@ public class AbstractSpell extends CombatAbility {
 	protected var useManaType:int;
 	protected var canBackfire:Boolean = false;
 	protected var isAutocasting:Boolean = false;
+	protected var magicAddonProcs:int = 1;
 	
 	function AbstractSpell(
 			name:String,
@@ -108,8 +109,8 @@ public class AbstractSpell extends CombatAbility {
 		MagicPrefixEffect();
 	}
 	
-	protected function postSpellEffect():void {
-		MagicAddonEffect();
+	protected function postSpellEffect(display:Boolean = true):void {
+		MagicAddonEffect(magicAddonProcs);
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (monster is SiegweirdBoss) (monster as SiegweirdBoss).castedSpellThisTurn = true;
 	}
@@ -131,7 +132,7 @@ public class AbstractSpell extends CombatAbility {
 				player.removeStatusEffect(StatusEffects.Blind);
 				player.buff("Black Gas").remove();
 			}
-			if (!isAutocasting) postSpellEffect();
+			if (!isAutocasting) postSpellEffect(display);
 			if (display) {
 				outputText("\n\n");
 			}

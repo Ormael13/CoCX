@@ -15,6 +15,7 @@ public class BloodMissilesSpell extends AbstractBloodSpell {
 			[TAG_DAMAGING]
 		);
 		baseHpCost = 50;
+		magicAddonProcs = 5;
 	}
 	
 	override public function get isKnown():Boolean {
@@ -75,11 +76,6 @@ public class BloodMissilesSpell extends AbstractBloodSpell {
 		damage *= 5;
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
-	}
-	
-	override protected function postSpellEffect():void {
-		MagicAddonEffect(5);
-		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 	}
 }
 }
