@@ -46,8 +46,8 @@ public class AlphaHowlMutation extends IMutationPerkType
                 if (pTier == 0){
                     this.requireLungsMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.isAnyRaceCached(Races.WEREWOLF, Races.CERBERUS, Races.ANUBIS);
-                    }, "Werewolf/Cerberus/Anubis race");
+                        return player.isAnyRaceCached(Races.WEREWOLF, Races.WOLF, Races.CERBERUS, Races.ANUBIS);
+                    }, "Werewolf/Wolf/Cerberus/Anubis race");
                 }
                 else{
                     var pLvl:int = pTier * 30;
