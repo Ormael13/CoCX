@@ -15,6 +15,7 @@ public class BloodChainsSpell extends AbstractBloodSpell {
 			[TAG_DEBUFF]
 		);
 		baseHpCost = 100;
+		inflictBleed = false;
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
@@ -44,9 +45,12 @@ public class BloodChainsSpell extends AbstractBloodSpell {
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
 			outputText("You concentrate, focusing on the power of your blood before drawing it from your body, " + (player.HP < player.maxOverHP() ? "wounds" : "skin pores") + ". Blood starts to gather before your chest, coalescing into a crimson sphere. ");
-			outputText("The blood covering your chest splits into dozens of stems. The mass pushes off from your chest, launching at [themonster]. The threads of blood cover [monster him], tacky-wet strands binding them tight enought to prevent them from moving.");
+			outputText("The blood covering your chest splits into dozens of stems. The mass pushes off from your chest, launching at [themonster]. The threads of blood cover [monster him], tacky-wet strands binding them tight enough to prevent them from moving.");
 		}
-		monster.createStatusEffect(StatusEffects.Stunned, (calcDuration()-1), 0, 0, 0);
+		if (!monster.hasPerk(PerkLib.Resolute)) {
+			monster.createStatusEffect(StatusEffects.Stunned, (calcDuration()-1), 0, 0, 0);
+		} else if (display) outputText(" However, [Themonster] was able to break free below you could take action!");
+		
 	}
 }
 }

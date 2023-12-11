@@ -15,6 +15,7 @@ public class BloodFieldSpell extends AbstractBloodSpell {
 			[TAG_DEBUFF]
 		);
 		baseHpCost = 600;
+		inflictBleed = false;
 	}
 	
 	override public function describeEffectVs(target:Monster):String {

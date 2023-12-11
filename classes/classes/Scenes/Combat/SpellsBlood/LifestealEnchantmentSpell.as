@@ -15,6 +15,7 @@ public class LifestealEnchantmentSpell extends AbstractBloodSpell {
 			[TAG_BUFF]
 		);
 		baseHpCost = 500;
+		inflictBleed = false;
 	}
 	
 	override public function get buttonName():String {
