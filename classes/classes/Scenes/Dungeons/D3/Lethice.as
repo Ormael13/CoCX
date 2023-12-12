@@ -300,7 +300,7 @@ public class Lethice extends Monster
 				default:
 					string = "restrain";
 			}
-			if(statusHandler(statusEffect.id)){
+			if(_fightPhase != 2 && statusHandler(statusEffect.id)){
 				outputText("\n\nAs you attempt to " + string + " Lethice, much to your surprise she remain unfazed. Looks like she has adapted to your ability.");
 				return true;
 			}
