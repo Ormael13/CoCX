@@ -5640,8 +5640,9 @@ public class MagicSpecials extends BaseCombatContent {
 			damage *= (1.75 * combat.windDamageBoostedByDao());
 			damage = Math.round(damage);
 			doWindDamage(damage, true, true);
-			if (!monster.hasStatusEffect(StatusEffects.CouatlHurricane)) monster.createStatusEffect(StatusEffects.CouatlHurricane,(player.spe*5)+(player.inte*5),1,0,0);
-			else{
+			if (!monster.hasStatusEffect(StatusEffects.CouatlHurricane)) monster.createStatusEffect(StatusEffects.CouatlHurricane,3,0,0,0);
+			else {
+				monster.addStatusValue(StatusEffects.CouatlHurricane, 1, 1);
 				monster.changeStatusValue(StatusEffects.CouatlHurricane, 2, 1);
 				outputText("\n\nThe strength of the hurricane winds has increased even further.");
 			}
@@ -5673,8 +5674,9 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("too resolute to be stunned by your attack.</b> ");
 			}
 			doWindDamage(damage, true, true);
-			if (!monster.hasStatusEffect(StatusEffects.CouatlHurricane)) monster.createStatusEffect(StatusEffects.CouatlHurricane,(player.spe*5)+(player.inte*5),0,0,0);
+			if (!monster.hasStatusEffect(StatusEffects.CouatlHurricane)) monster.createStatusEffect(StatusEffects.CouatlHurricane,3,0,0,0);
 			else {
+				monster.addStatusValue(StatusEffects.CouatlHurricane, 1, 1);
 				monster.changeStatusValue(StatusEffects.CouatlHurricane, 2, 1);
 				outputText("\n\nThe strength of the hurricane winds has increased even further.");
 			}

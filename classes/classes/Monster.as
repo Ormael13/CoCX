@@ -3415,27 +3415,38 @@ import classes.Scenes.Combat.CombatAbilities;
 				addStatusValue(StatusEffects.Hypermode,1,-1);
 			}
 			if(hasStatusEffect(StatusEffects.CouatlHurricane)) {
-				//Deal severe true damage each round
-				var store14:Number = (player.inte + player.spe) * 2;
-				var couatlExtraDmg:Number = (player.spe*5)+(player.inte*5);
+				//Countdown to heal
+				if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.CouatlHurricane, 1, -2);
+				else addStatusValue(StatusEffects.CouatlHurricane, 1, -1);
 
-				if (statusEffectv2(StatusEffects.CouatlHurricane) > 0) store14 += couatlExtraDmg; //If reapplied, temporarily increase damage
-				store14 += maxHP()*0.02;
-				store14 = SceneLib.combat.fixPercentDamage(store14, false);
-				store14 = SceneLib.combat.doDamage(store14);
-				if(plural) outputText("[Themonster] is violently struck by the ever intensifying windstorm. ");
-				else outputText("[Themonster] are violently struck by the ever intensifying windstorm. ");
-				SceneLib.combat.CommasForDigits(store14);
-				outputText("[pg]");
-				if(rand(4) == 3 && !monster.hasPerk(PerkLib.Resolute)) {
-					createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0); 
-					outputText("<b>A random flying object caught in the hurricane rams into your opponent, stunning it!</b>");
+				//Heal wounds
+				if (statusEffectv1(StatusEffects.CouatlHurricane) <= 0) {
+					outputText("The wounds you left on [themonster] stop bleeding so profusely.\n\n");
+					removeStatusEffect(StatusEffects.CouatlHurricane);
 				}
-				if (statusEffectv2(StatusEffects.CouatlHurricane) > 0) {
-					changeStatusValue(StatusEffects.CouatlHurricane, 2, 0);
-					outputText("\nThe hurricane winds returned to their regular intensity.");
+				else {
+					//Deal severe true damage each round
+					var store14:Number = (player.inte + player.spe) * 2;
+					var couatlExtraDmg:Number = (player.spe*5)+(player.inte*5);
+
+					if (statusEffectv2(StatusEffects.CouatlHurricane) > 0) store14 += couatlExtraDmg; //If reapplied, temporarily increase damage
+					store14 += maxHP()*0.02;
+					store14 = SceneLib.combat.fixPercentDamage(store14, false);
+					store14 = SceneLib.combat.doDamage(store14);
+					if(plural) outputText("[Themonster] is violently struck by the ever intensifying windstorm. ");
+					else outputText("[Themonster] are violently struck by the ever intensifying windstorm. ");
+					SceneLib.combat.CommasForDigits(store14);
+					outputText("[pg]");
+					if(rand(4) == 3 && !hasPerk(PerkLib.Resolute)) {
+						createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0); 
+						outputText("<b>A random flying object caught in the hurricane rams into your opponent, stunning it!</b>");
+					}
+					if (statusEffectv2(StatusEffects.CouatlHurricane) > 0) {
+						changeStatusValue(StatusEffects.CouatlHurricane, 2, 0);
+						outputText("\nThe hurricane winds returned to their regular intensity.");
+					}
+					outputText("\n\n");
 				}
-				outputText("\n\n");
 			}
 			if(hasStatusEffect(StatusEffects.IzmaBleed)) {
 				//Countdown to heal
