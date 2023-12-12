@@ -8093,7 +8093,6 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.IzmaBleed)) isBleeding = true;
         if (monster.hasStatusEffect(StatusEffects.CouatlHurricane)) isBleeding = true;
         if (monster.hasStatusEffect(StatusEffects.GoreBleed)) isBleeding = true;
-        if (monster.hasStatusEffect(StatusEffects.HemorrhageShield)) isBleeding = true;
         if (monster.hasStatusEffect(StatusEffects.Hemorrhage2)) isBleeding = true;
         if (monster.hasStatusEffect(StatusEffects.Briarthorn)) isBleeding = true;
         return isBleeding;

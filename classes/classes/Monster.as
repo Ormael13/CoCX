@@ -3564,24 +3564,6 @@ import classes.Scenes.Combat.CombatAbilities;
 					outputText("[pg]");
 				}
 			}
-			if (hasStatusEffect(StatusEffects.HemorrhageShield)) {
-				if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.HemorrhageShield, 1, -2);
-				else addStatusValue(StatusEffects.HemorrhageShield, 1, -1);
-				if (statusEffectv1(StatusEffects.HemorrhageShield) <= 0) {
-					outputText("The wounds your shield left on [themonster] stop bleeding so profusely.\n\n");
-					removeStatusEffect(StatusEffects.HemorrhageShield);
-				}
-				else {
-					var hemorrhage3:Number = maxHP() * statusEffectv2(StatusEffects.HemorrhageShield);
-					hemorrhage3 *= SceneLib.combat.BleedDamageBoost();
-					hemorrhage3 = SceneLib.combat.fixPercentDamage(hemorrhage3);
-					hemorrhage3 = SceneLib.combat.doDamage(hemorrhage3);
-					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your shield left behind. ");
-					else outputText("[Themonster] bleeds profusely from the jagged wounds your shield left behind. ");
-					SceneLib.combat.CommasForDigits(hemorrhage3);
-					outputText("[pg]");
-				}
-			}
 			if(hasStatusEffect(StatusEffects.Hemorrhage2)) {
 				if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.Hemorrhage2, 1, -2);
 				else addStatusValue(StatusEffects.Hemorrhage2, 1, -1);
