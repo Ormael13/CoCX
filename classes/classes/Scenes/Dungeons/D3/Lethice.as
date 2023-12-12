@@ -90,6 +90,9 @@ public class Lethice extends Monster
 					}
 					else{
 						str += "\n\nHaving recalled what happened earlier, It is probably the best to <b>attempt alternate strategy</b> before repeating the same move quickly.";
+						if (player.hasPerk(PerkLib.EyesOfTheHunterMaster) && dictOrder.length) {
+							str += " Luckily, your senses are strong to notice that she seems ready to counter the following types of damage: <b>" + printImmuneDamageTypes() + "</b>.";
+						}
 					}
 					if(dictOrder.indexOf("hplossimmune")>-1){
 						str += "\n\nPerhaps out of your sheer willpower or rage you still manage to stand up to fight for another day, seeing Lethice's grin in response, you realized that <b>you might not able to survive</b> another blow from her should you still retain your grievous injuries!"
@@ -123,6 +126,9 @@ public class Lethice extends Monster
 				}
 
 				str += "\n\nHaving recalled what happened earlier, It is probably the best to attempt <b>alternate strategy</b> before repeating the same move quickly.";
+				if (player.hasPerk(PerkLib.EyesOfTheHunterMaster) && dictOrder.length) {
+					str += " Luckily, your senses are strong to notice that she seems ready to counter the following types of damage: <b>" + printImmuneDamageTypes() + "</b>.";
+				}
 
 				if(dictOrder.indexOf("hplossimmune")>-1){
 					str += "\n\nPerhaps out of your sheer willpower or rage you still manage to stand up to fight for another day, seeing Lethice's grin in response, you realized that <b>you might not able to survive</b> another blow from her should you still retain your grievous injuries!"
@@ -307,6 +313,29 @@ public class Lethice extends Monster
 			else{
 				return false;
 			}
+		}
+		private function printImmuneDamageTypes():String {
+			var printTranslation:Object = {
+				"physical": "Physical",
+				"magic": "Magic",
+				"fire": "Fire",
+				"cold": "Ice",
+				"lightning": "Lightning",
+				"dark": "Darkness",
+				"poison": "Poison",
+				"wind": "Wind",
+				"water": "Water",
+				"acid": "Acid",
+				"earth": "Earth",
+				"true": "True",
+				"lust": "Lust"
+			};
+			return dictOrder.filter(function (type:String, index:int, array:Array):Boolean {
+				return printTranslation.hasOwnProperty(type);
+			})
+			.map(function (type:String, index:int, array:Array):String {
+				return printTranslation[type];
+			}).join(", ");
 		}
 		override public function combatRoundUpdate():void{
 			if(_fightPhase!=2){
