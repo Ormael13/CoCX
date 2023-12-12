@@ -5642,7 +5642,7 @@ public class MagicSpecials extends BaseCombatContent {
 			doWindDamage(damage, true, true);
 			if (!monster.hasStatusEffect(StatusEffects.CouatlHurricane)) monster.createStatusEffect(StatusEffects.CouatlHurricane,(player.spe*5)+(player.inte*5),1,0,0);
 			else{
-				monster.createStatusEffect(StatusEffects.CouatlHurricane, (player.spe*5)+(player.inte*5), 1, 0, 0);
+				monster.changeStatusValue(StatusEffects.CouatlHurricane, 2, 1);
 				outputText("\n\nThe strength of the hurricane winds has increased even further.");
 			}
 			combatRoundOver();
@@ -5675,7 +5675,7 @@ public class MagicSpecials extends BaseCombatContent {
 			doWindDamage(damage, true, true);
 			if (!monster.hasStatusEffect(StatusEffects.CouatlHurricane)) monster.createStatusEffect(StatusEffects.CouatlHurricane,(player.spe*5)+(player.inte*5),0,0,0);
 			else {
-				monster.createStatusEffect(StatusEffects.CouatlHurricane, (player.spe*5)+(player.inte*5), 1, 0, 0);
+				monster.changeStatusValue(StatusEffects.CouatlHurricane, 2, 1);
 				outputText("\n\nThe strength of the hurricane winds has increased even further.");
 			}
 		}

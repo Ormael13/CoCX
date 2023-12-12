@@ -3417,19 +3417,25 @@ import classes.Scenes.Combat.CombatAbilities;
 			if(hasStatusEffect(StatusEffects.CouatlHurricane)) {
 				//Deal severe true damage each round
 				var store14:Number = (player.inte + player.spe) * 2;
-				createStatusEffect(StatusEffects.CouatlHurricane, (player.spe*5)+(player.inte*5), 1, 0, 0);
-				store14 = Math.round(store14);
-				if (statusEffectv2(StatusEffects.CouatlHurricane) > 0) store14 *= statusEffectv2(StatusEffects.CouatlHurricane);
-				store14 += statusEffectv1(StatusEffects.CouatlHurricane); //Stacks on itself growing ever stronger
+				var couatlExtraDmg:Number = (player.spe*5)+(player.inte*5);
+
+				if (statusEffectv2(StatusEffects.CouatlHurricane) > 0) store14 += couatlExtraDmg; //If reapplied, temporarily increase damage
 				store14 += maxHP()*0.02;
-				store14 = SceneLib.combat.fixPercentDamage(store14);
+				store14 = SceneLib.combat.fixPercentDamage(store14, false);
 				store14 = SceneLib.combat.doDamage(store14);
 				if(plural) outputText("[Themonster] is violently struck by the ever intensifying windstorm. ");
 				else outputText("[Themonster] are violently struck by the ever intensifying windstorm. ");
 				SceneLib.combat.CommasForDigits(store14);
 				outputText("[pg]");
-				temp = rand(4);
-				if(temp == 3) createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0); outputText("<b>A random flying object caught in the hurricane rams into your opponent, stunning it!</b>\n\n");
+				if(rand(4) == 3 && !monster.hasPerk(PerkLib.Resolute)) {
+					createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0); 
+					outputText("<b>A random flying object caught in the hurricane rams into your opponent, stunning it!</b>");
+				}
+				if (statusEffectv2(StatusEffects.CouatlHurricane) > 0) {
+					changeStatusValue(StatusEffects.CouatlHurricane, 2, 0);
+					outputText("\nThe hurricane winds returned to their regular intensity.");
+				}
+				outputText("\n\n");
 			}
 			if(hasStatusEffect(StatusEffects.IzmaBleed)) {
 				//Countdown to heal
@@ -3472,7 +3478,7 @@ import classes.Scenes.Combat.CombatAbilities;
 					var store3:Number = SceneLib.combat.CalcBaseDamageUnarmed()/2;
 					store3 *= SceneLib.combat.BleedDamageBoost(true);
 					if (statusEffectv2(StatusEffects.SharkBiteBleed) > 0) store3 *= statusEffectv2(StatusEffects.SharkBiteBleed);
-					store3 = SceneLib.combat.fixPercentDamage(store3);
+					store3 = SceneLib.combat.fixPercentDamage(store3, false);
 					store3 = SceneLib.combat.doDamage(store3);
 					if(plural) outputText("[Themonster] bleed profusely from the jagged wounds your bite left behind. ");
 					else outputText("[Themonster] bleeds profusely from the jagged wounds your bite left behind. ");
@@ -3518,7 +3524,7 @@ import classes.Scenes.Combat.CombatAbilities;
 				else {
 					var store5:Number = SceneLib.combat.CalcBaseDamageUnarmed()/2;
 					store5 *= SceneLib.combat.BleedDamageBoost();
-					store5 = SceneLib.combat.fixPercentDamage(store5);
+					store5 = SceneLib.combat.fixPercentDamage(store5, false);
 					store5 = SceneLib.combat.doDamage(store5);
 					if (plural) outputText("[Themonster] bleed profusely from the jagged ");
 					else outputText("[Themonster] bleeds profusely from the jagged ")
@@ -3538,7 +3544,7 @@ import classes.Scenes.Combat.CombatAbilities;
 				}
 				else {
 					var hemorrhage1:Number = maxHP() * statusEffectv2(StatusEffects.Hemorrhage)
-					hemorrhage1 *= SceneLib.combat.BleedDamageBoost(true);
+					hemorrhage1 *= SceneLib.combat.BleedDamageBoost();
 					hemorrhage1 = SceneLib.combat.fixPercentDamage(hemorrhage1);
 					hemorrhage1 = SceneLib.combat.doDamage(hemorrhage1);
 					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your attack left behind. ");
@@ -3576,8 +3582,8 @@ import classes.Scenes.Combat.CombatAbilities;
 					var hemorrhage4:Number = maxHP() * statusEffectv2(StatusEffects.Hemorrhage2);
 					hemorrhage4 = SceneLib.combat.fixPercentDamage(hemorrhage4);
 					hemorrhage4 = SceneLib.combat.doDamage(hemorrhage4);
-					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your companion attack left behind. ");
-					else outputText("[Themonster] bleeds profusely from the jagged wounds your companion attack left behind. ");
+					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your companion's attack left behind. ");
+					else outputText("[Themonster] bleeds profusely from the jagged wounds your companion's attack left behind. ");
 					SceneLib.combat.CommasForDigits(hemorrhage4);
 					outputText("[pg]");
 				}
@@ -3623,12 +3629,11 @@ import classes.Scenes.Combat.CombatAbilities;
 			}
 			if(hasStatusEffect(StatusEffects.Briarthorn)) {
 				var store16:Number = (player.str + player.spe) * 2;
-				var store16a:Number = SceneLib.combat.BleedDamageBoost();
-				store16 *= store16a;
+				store16 *= SceneLib.combat.BleedDamageBoost();
 				store16 += maxHP()*0.05;
 				store16 = SceneLib.combat.fixPercentDamage(store16);
 				store16 = SceneLib.combat.doDamage(store16);
-				if(plural) outputText("[Themonster] bleeds profusely from the deep wounds your vine thorns left behind. ");
+				if(plural) outputText("[Themonster] bleed profusely from the deep wounds your vine thorns left behind. ");
 				else outputText("[Themonster] bleeds profusely from the deep wounds your vine thorns left behind. ");
 				SceneLib.combat.CommasForDigits(store16);
 				outputText("[pg]");
@@ -3639,9 +3644,8 @@ import classes.Scenes.Combat.CombatAbilities;
 					outputText("<b>Bleeding cause by deep wounds your rose thorns left behind stopped!</b>[pg]");
 				} else {
 					var store17:Number = (player.str + player.spe);
-					var store17a:Number = SceneLib.combat.BleedDamageBoost() *
-							statusEffectv1(StatusEffects.Rosethorn)*0.1;
-					store17 *= store17a;
+					store17 *= SceneLib.combat.BleedDamageBoost();
+					store17 *= statusEffectv1(StatusEffects.Rosethorn) * 0.1;
 					store17 += maxHP()*0.01;
 					store17 = SceneLib.combat.fixPercentDamage(store17);
 					store17 = SceneLib.combat.doDamage(store17);
