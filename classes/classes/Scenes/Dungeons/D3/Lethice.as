@@ -164,6 +164,7 @@ public class Lethice extends Monster
 		private var dictAttacked:Array = [];
 		private var roundCheck:int = 0;
 		private var decayCheck:Boolean = false;
+		public var deflectActive:Boolean = true;
 
 		private function furubeYuraYuraYatsukaNoTsurugiIkaishinshoMakora():void{
 			var _statusEffects:Array = statusEffects;
@@ -314,7 +315,7 @@ public class Lethice extends Monster
 			super.combatRoundUpdate();
 		}
 		private function adaptionDeflect(damage:Number, font:String, dict:String="physical"):Number {
-			if(_fightPhase!=2){
+			if(_fightPhase!=2 && deflectActive){
 				var index:int = dictOrder.indexOf(dict);
 				if(index>-1){
 					var numberformat:NumberFormatter = new NumberFormatter();
@@ -323,20 +324,20 @@ public class Lethice extends Monster
 					if(dict=="lust"){
 						if(deflectDamage>player.maxOverLust()*0.2){
 							var _tmp:Number = Math.round(player.maxOverLust()*0.2);
-							player.lust += _tmp;
+							player.takeLustDamage(_tmp);
 							dmgText = numberformat.format(Math.floor(Math.abs(_tmp)));
 						}
 						else
-							player.lust += deflectDamage;
+							player.takeLustDamage(deflectDamage);
 					}
 					else{
 						if(deflectDamage>player.maxOverHP()*0.4){
 							var __tmp:Number = Math.round(player.maxOverHP()*0.4);
-							player.HP -= __tmp;
+							player.takeDamage(__tmp);
 							dmgText = numberformat.format(Math.floor(Math.abs(__tmp)));
 						}
 						else
-							player.HP -= deflectDamage;
+							player.takeDamage(deflectDamage);
 					}
 					outputText("<b>([font-" + font + "]" + "Deflected! " + dmgText + "[/font])</b>");
 
@@ -455,7 +456,7 @@ public class Lethice extends Monster
 
 			// Lettuce now adapt to player loss immunity HA
 			if(_fightPhase!=2){
-				if(player.HP<=player.minHP()){
+				if(player.HP<=player.minHP() + 1 && (player.hasStatusEffect(StatusEffects.TooAngryTooDie) || player.hasPerk(PerkLib.Immortality) || player.hasPerk(PerkLib.WhatIsReality))){
 					if(dictOrder.indexOf("hplossimmune")>-1){
 						doNext(SceneLib.combat.endHpLoss);
 					}
