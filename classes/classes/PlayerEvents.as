@@ -2037,24 +2037,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			//VerdantMight
-			needNext ||= player.gainOrLosePerk(PerkLib.VerdantMight, player.isAnyRaceCached(Races.PLANT, Races.ALRAUNE), "Raw green power flows throught your veins while being a plant hasnt done so much to improve your muscle your general sturdyness more then makes up for it allowing you to use your toughness instead of your strength when delivering blows.", "Being less of a plant you loose the ability to add your own sturdyness to your attacks.");
+			needNext ||= player.gainOrLosePerk(PerkLib.VerdantMight, player.isAnyRaceCached(Races.PLANT, Races.ALRAUNE), "Raw green power flows through your veins. While being a plant hasn't done much to improve your muscle, your general sturdyness more then makes up for it. You can now use your toughness instead of your strength when delivering blows.", "Being less of a plant, you lose the ability to add your own sturdyness to your attacks.");
 			//Enigma
 			needNext ||= player.gainOrLosePerk(PerkLib.Enigma, player.isRaceCached(Races.SPHINX), "Being a sphinx has granted you insight on many things including various secrets to martial combat, guess this is what they mean about using your smarts before your brawn.", "As you no longer possess the insight of a sphinx you no longer have the ability to fully use your smarts to improve your martial prowess.");
-			/*
-			//Rampant Might & Wisdom of the Ages
-			if (player.isRaceCached(Races.YGGDRASIL) && !player.hasPerk(PerkLib.VerdantMight) && !player.hasPerk(PerkLib.VerdantMight)) {
-				outputText("\nRaw green power flows throught your veins while being a partialy plant hasnt done so much to improve your muscle your general sturdyness more then makes up for it allowing you to use your toughness supplementing your strength when delivering blows. Becoming member of yggdrasil race also granted you insight on many things, which you could use in combat. ");
-				outputText("\n\n<b>(gained the Rampant Might & Wisdom of the Ages perk!)</b>\n");
-				if (!player.hasPerk(PerkLib.VerdantMight)) player.createPerk(PerkLib.VerdantMight,0,0,0,0);
-				if (!player.hasPerk(PerkLib.VerdantMight)) player.createPerk(PerkLib.VerdantMight,0,0,0,0);
-				needNext = true;
-			}
-			if (!player.isRaceCached(Races.YGGDRASIL) && (player.hasPerk(PerkLib.VerdantMight) || player.hasPerk(PerkLib.VerdantMight))) {
-				outputText("\nBeing less of a plant dragon you loose the abilities to add your own sturdyness to your attacks and fully use your smarts to improve your martial prowess.\n\n<b>(Lost the Rampant Might & Wisdom of the Ages perks!)</b>\n");
-				if (player.hasPerk(PerkLib.VerdantMight)) player.removePerk(PerkLib.VerdantMight);
-				if (player.hasPerk(PerkLib.VerdantMight)) player.removePerk(PerkLib.VerdantMight);
-				needNext = true;
-			}*/
+			//Rampant Might
+			needNext ||= player.gainOrLosePerk(PerkLib.RampantMight, player.isRaceCached(Races.YGGDRASIL), "Raw green power flows through your veins. While being a plant dragon hasn't done much to improve your muscle, your general sturdyness more then makes up for it. You can now use your toughness and strength when delivering blows.", "Being less of a plant dragon, you lose the ability to add your own sturdyness to your attacks.");
+			//Wisdom of the Ages
+			needNext ||= player.gainOrLosePerk(PerkLib.WisdomoftheAges, player.isRaceCached(Races.YGGDRASIL), "Becoming a member of the Yggdrasil race has granted you insight on many things, which you can use in combat.", "Being less of a plant dragon, you lose the ability to fully use your smarts to improve your martial prowess.");
 			//Vegetal Affinity
 			needNext ||= player.gainOrLosePerk(PerkLib.VegetalAffinity, player.isAnyRaceCached(Races.PLANT, Races.ALRAUNE, Races.YGGDRASIL, Races.WOODELF), "With your connection to the natural flora growing stronger you gained an affinity with plantlife.", "With your connection to the natural world growing weaker you lose your affinity with plantlife.");
 			//Lacta bovine immunities

@@ -3937,8 +3937,8 @@ public class PerkLib
 				"As a plant when using natural weapon your damage scaling is based on Toughness instead of strength.");
 		public static const RampantMight:PerkType = mk("Rampant Might", "Rampant Might",
 				"As a plant dragon when using natural weapon your damage scaling is based on both Toughness and Strength.");
-		//public static const WisdomoftheAges:PerkType = mk("Wisdom of the Ages", "Wisdom of the Ages",
-		//		"Your bottomless insight somehow transmutes itself into raw power, allowing you to add half of your intelligence and wisdom as a modifier to strength and toughness.");
+		public static const WisdomoftheAges:PerkType = mk("Wisdom of the Ages", "Wisdom of the Ages",
+				"Your bottomless insight somehow transmutes itself into raw power, allowing you to add half of your intelligence and wisdom as a modifier to strength and toughness.");
 		public static const ZenjisInfluence1:PerkType = mk("Zenji's influence 1", "Zenji's influence 1",
 				"Increases maximum mana and fatigue by 10%.")
 				.withBuffs({'maxmana_mult':+0.10,'maxfatigue_mult':+0.10});
