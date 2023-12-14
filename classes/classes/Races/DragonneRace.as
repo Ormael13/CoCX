@@ -62,7 +62,7 @@ public class DragonneRace extends Race{
 				.armType(Arms.LION, +1)
 				.armType(NONE(Arms.FEY_DRACONIC, Arms.DRACONIC), 0, -10)
 				.rearType(RearBody.LION_MANE, +1)
-				.hornType(NONE(Horns.FROSTWYRM, Horns.DRACONIC_X2, Horns.DRACONIC_X4_12_INCH_LONG), 0, -3)
+				.hornType(NOT(Horns.FROSTWYRM), 0, -3)
 				.skinCoatType(Skin.DRAGON_SCALES, +1)
 				.scaleColor1(ANY(DragonneScaleColors), +1)
 				.furColor01(ANY(DragonneFurColors), +1)
