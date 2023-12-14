@@ -2540,11 +2540,15 @@ public class SaveUpdater extends NPCAwareContent {
 				refundPerk(PerkLib.ExpertGunslinger);
 				refundPerk(PerkLib.AmateurGunslinger);
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.19;
-			}/*
+			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.20) {
+				outputText("\n\nFixing Kindra's training skills...");
+				if (player.statusEffectv1(StatusEffects.Kindra) >= 140 && player.hasStatusEffect(StatusEffects.KnowsSidewinder)) {
+					flags[kFLAGS.KINDRA_ADV_ARCHERY] = 6;
+				}
 				
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.20;
-			}
+			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.21) {
 				
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.21;
