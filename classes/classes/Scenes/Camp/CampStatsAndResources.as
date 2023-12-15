@@ -11,10 +11,6 @@ public class CampStatsAndResources extends BaseContent implements SaveableState 
     public static var StonesResc:Number;
     public static var WoodResc:Number;
     public static var NailsResc:Number;
-    //progress variables
-    public static var CabinProgress:Number;
-    public static var CabinBuilt:Boolean;
-    public static var MaterialsStorageUpgrade:Number;
 
     public function CampStatsAndResources() {
         Saves.registerSaveableState(this);
@@ -31,9 +27,6 @@ public class CampStatsAndResources extends BaseContent implements SaveableState 
         StonesResc = 0;
         WoodResc = 0;
         NailsResc = 0;
-        CabinProgress = 0;
-        CabinBuilt = false;
-        MaterialsStorageUpgrade = 0;
     }
 
     public function saveToObject():Object {
@@ -43,10 +36,7 @@ public class CampStatsAndResources extends BaseContent implements SaveableState 
             "EnergyCoreResc":EnergyCoreResc,
             "StonesResc": StonesResc,
             "WoodResc":WoodResc,
-            "NailsResc":NailsResc,
-            "CabinProgress":CabinProgress,
-            "CabinBuilt":CabinBuilt,
-            "MaterialsStorageUpgrade":MaterialsStorageUpgrade
+            "NailsResc":NailsResc
         }
     }
 
@@ -58,9 +48,6 @@ public class CampStatsAndResources extends BaseContent implements SaveableState 
             StonesResc = o.StonesResc;
             WoodResc = o.WoodResc;
             NailsResc = o.NailsResc;
-            CabinProgress = o.CabinProgress;
-            CabinBuilt = o.CabinBuilt;
-            MaterialsStorageUpgrade = o.MaterialsStorageUpgrade;
         } else  {
             resetState();
         }
