@@ -6,6 +6,7 @@ package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Camp.CampStatsAndResources;
 import classes.Scenes.Camp.CampUpgrades;
 import classes.Scenes.Crafting;
 import classes.Scenes.SceneLib;
@@ -408,7 +409,7 @@ public class Konstantin extends NPCAwareContent
 		}
 		private function KonstantinSmithingMenu2():void {
 			menu();
-			if (TyrantiaFollower.TyraniaThePhalluspear && player.hasItem(weapons.SPEAR) && player.hasItem(consumables.L_DRAFT, 5) && player.hasItem(useables.T_SSILK) && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 3) addButton(6, "ThePhalluspear", KonstantinCraftingThePhalluspear);
+			if (TyrantiaFollower.TyraniaThePhalluspear && player.hasItem(weapons.SPEAR) && player.hasItem(consumables.L_DRAFT, 5) && player.hasItem(useables.T_SSILK) && CampStatsAndResources.MetalPieces >= 3) addButton(6, "ThePhalluspear", KonstantinCraftingThePhalluspear);
 			if (player.hasItem(useables.DBAPLAT)) addButton(8, "D.Bark Armor", KonstantinCraftingDivineBarkArmor);
 			if (player.hasItem(useables.TBAPLAT)) addButton(9, "T.Bark Armor", KonstantinCraftingTentacledBarkArmor);
 			if (player.hasItem(useables.DBAPLAT) && player.hasItem(weapons.W_STAFF)) addButton(10, "Puritas", KonstantinCraftingPuritas);
@@ -915,7 +916,7 @@ public class Konstantin extends NPCAwareContent
 			player.destroyItems(weapons.SPEAR, 1);
 			player.destroyItems(consumables.L_DRAFT, 5);
 			player.destroyItems(useables.T_SSILK, 1);
-			flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 3;
+			CampStatsAndResources.MetalPieces -= 3;
 			outputText("You bring the materials to Konstantine, and the smith nods, his face serious.\n\n");
 			outputText("\"<i>I’ll need a few hours,</i>\" he says simply. \"<i>Give me the materials, and I’ll craft this for you.</i>\" You hand Konstantine the materials, and he smiles wryly. \"<i>Honestly, I’m not entirely comfortable with this…kind of weapon.</i>\" He admits. \"<i>But I won’t deny the value of it in today’s world.</i>\"\n\n");
 			outputText("The tip glistens with a pink sheen, and you can tell that the blade poking out is razor-sharp. \"<i>Here it is,</i>\" he declares. \"<i>A Phalluspear. Freshly made. I hope you enjoy wielding it more than I did making it.</i>\" An odd thing to say, but you can hardly complain with the results!\n\n");
