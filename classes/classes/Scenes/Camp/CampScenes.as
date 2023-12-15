@@ -646,10 +646,10 @@ public function PCGoblinDaughtersBuilingWorkshopSpareParts():void {
 	if (player.statusEffectv3(StatusEffects.PCDaughtersWorkshopSpareParts) > 0) outputText(", "+player.statusEffectv3(StatusEffects.PCDaughtersWorkshopSpareParts)+" mechanism");
 	if (player.statusEffectv4(StatusEffects.PCDaughtersWorkshopSpareParts) > 0) outputText(", "+player.statusEffectv4(StatusEffects.PCDaughtersWorkshopSpareParts)+" energy core");
 	outputText("</b>");
-	flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += player.statusEffectv1(StatusEffects.PCDaughtersWorkshopSpareParts);
-	flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += player.statusEffectv2(StatusEffects.PCDaughtersWorkshopSpareParts);
-	flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] += player.statusEffectv3(StatusEffects.PCDaughtersWorkshopSpareParts);
-	flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] += player.statusEffectv4(StatusEffects.PCDaughtersWorkshopSpareParts);
+	CampStatsAndResources.NailsResc += player.statusEffectv1(StatusEffects.PCDaughtersWorkshopSpareParts);
+	CampStatsAndResources.MetalPieces += player.statusEffectv2(StatusEffects.PCDaughtersWorkshopSpareParts);
+	CampStatsAndResources.MechanismResc += player.statusEffectv3(StatusEffects.PCDaughtersWorkshopSpareParts);
+	CampStatsAndResources.EnergyCoreResc += player.statusEffectv4(StatusEffects.PCDaughtersWorkshopSpareParts);
 	player.removeStatusEffect(StatusEffects.PCDaughtersWorkshopSpareParts);
 	doNext(playerMenu);
 	advanceMinutes(5);
