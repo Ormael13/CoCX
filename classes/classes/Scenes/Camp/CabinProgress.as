@@ -11,6 +11,7 @@ import classes.Scenes.SceneLib;
 	 * @author Kitteh6660
 	 */
 	public class CabinProgress extends BaseContent {
+	public static var CampResc:CampStatsAndResources = new CampStatsAndResources();
 
 		public function CabinProgress() {
 
