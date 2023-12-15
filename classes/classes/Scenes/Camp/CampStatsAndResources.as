@@ -4,13 +4,17 @@ import classes.Saves;
 import classes.internals.SaveableState;
 
 public class CampStatsAndResources extends BaseContent implements SaveableState {
+    //cabin stored resources
     public static var MetalPieces:Number;
+    public static var MechanismResc:Number;
+    public static var EnergyCoreResc:Number;
     public static var StonesResc:Number;
     public static var WoodResc:Number;
     public static var NailsResc:Number;
+    //progress variables
     public static var CabinProgress:Number;
     public static var CabinBuilt:Boolean;
-    public static var MaterialsStorageUpgradeStat:Number;
+    public static var MaterialsStorageUpgrade:Number;
 
     public function CampStatsAndResources() {
         Saves.registerSaveableState(this);
@@ -22,35 +26,41 @@ public class CampStatsAndResources extends BaseContent implements SaveableState 
 
     public function resetState():void {
         MetalPieces = 0;
+        MechanismResc = 0;
+        EnergyCoreResc = 0;
         StonesResc = 0;
         WoodResc = 0;
         NailsResc = 0;
         CabinProgress = 0;
         CabinBuilt = false;
-        MaterialsStorageUpgradeStat = 0;
+        MaterialsStorageUpgrade = 0;
     }
 
     public function saveToObject():Object {
         return {
             "MetalPieces":MetalPieces,
+            "MechanismResc":MechanismResc,
+            "EnergyCoreResc":EnergyCoreResc,
             "StonesResc": StonesResc,
             "WoodResc":WoodResc,
             "NailsResc":NailsResc,
             "CabinProgress":CabinProgress,
             "CabinBuilt":CabinBuilt,
-            "MaterialsStorageUpgradeStat":MaterialsStorageUpgradeStat,
+            "MaterialsStorageUpgrade":MaterialsStorageUpgrade
         }
     }
 
     public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
         if(o) {
             MetalPieces = o.MetalPieces;
+            MechanismResc = o.MechanismResc;
+            EnergyCoreResc = o.EnergyCoreResc;
             StonesResc = o.StonesResc;
             WoodResc = o.WoodResc;
             NailsResc = o.NailsResc;
             CabinProgress = o.CabinProgress;
             CabinBuilt = o.CabinBuilt;
-            MaterialsStorageUpgradeStat = o.MaterialsStorageUpgradeStat;
+            MaterialsStorageUpgrade = o.MaterialsStorageUpgrade;
         } else  {
             resetState();
         }
