@@ -7,6 +7,7 @@ public class CampStatsAndResources extends BaseContent implements SaveableState 
     public static var MetalPieces:Number;
     public static var StonesResc:Number;
     public static var WoodResc:Number;
+    public static var NailsResc:Number;
     public static var CabinProgress:Number;
     public static var CabinBuilt:Boolean;
     public static var MaterialsStorageUpgradeStat:Number;
@@ -23,6 +24,7 @@ public class CampStatsAndResources extends BaseContent implements SaveableState 
         MetalPieces = 0;
         StonesResc = 0;
         WoodResc = 0;
+        NailsResc = 0;
         CabinProgress = 0;
         CabinBuilt = false;
         MaterialsStorageUpgradeStat = 0;
@@ -33,6 +35,7 @@ public class CampStatsAndResources extends BaseContent implements SaveableState 
             "MetalPieces":MetalPieces,
             "StonesResc": StonesResc,
             "WoodResc":WoodResc,
+            "NailsResc":NailsResc,
             "CabinProgress":CabinProgress,
             "CabinBuilt":CabinBuilt,
             "MaterialsStorageUpgradeStat":MaterialsStorageUpgradeStat,
@@ -44,6 +47,7 @@ public class CampStatsAndResources extends BaseContent implements SaveableState 
             MetalPieces = o.MetalPieces;
             StonesResc = o.StonesResc;
             WoodResc = o.WoodResc;
+            NailsResc = o.NailsResc;
             CabinProgress = o.CabinProgress;
             CabinBuilt = o.CabinBuilt;
             MaterialsStorageUpgradeStat = o.MaterialsStorageUpgradeStat;
