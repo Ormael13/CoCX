@@ -80,7 +80,7 @@ public class Lethice extends Monster
 						str+=". Quickly recompose yourself, you ";
 
 						if(dictOrder.indexOf("physical")>-1){
-							str += "rush towards Lethice in hope to land some quick blow before she fully recover, only to find your attacks be intercepted by her uncanny dexterity and strength! Taken back by stark contrast of her movement and <b>still surging</b> strength,";
+							str += "rush towards Lethice in hope to land some quick blow before she fully recover, only to find your attacks be intercepted by her uncanny dexterity and strength! Taken back by stark contrast of her movement, you realised that the change didn't stopped there as she is slowly <b>overpowering</b> you,";
 						}
 						else{
 							str += "quickly you use the same ability at her in hope to land some hits while you retaining portion of your momentum, only to find your attempts be intercepted by Lethice with uncanny speed, almost reflexively so. Noticed your attack leaves not even a bruise and a sudden <b>surge</b> of identical mana signature from her,"
@@ -209,7 +209,6 @@ public class Lethice extends Monster
 						// Re add Immunity if you trigger deflect lul
 						dictOrder.push(_statusEffects[i].stype.id);
 						dictValue.push(115);
-						decayCheck = true;
 					}
 					else{
 						if(_statusEffects[i].value1>2){
@@ -247,7 +246,7 @@ public class Lethice extends Monster
 				dictValue = tmpValue;
 			}
 
-			// outputText( "Dictionary size: " + dictOrder.length + " \nFirst key: " + dictOrder[0] + " \n");
+			// outputText( "\nDictionary size: " + dictOrder.length + " \nFirst key: " + dictOrder[0] + " \n");
 			// outputText("End of Status Effect Debug\n");
 
 			decayCheck = false;
@@ -927,7 +926,7 @@ public class Lethice extends Monster
 					str+=". Quickly recompose yourself, you ";
 
 					if(dictOrder.indexOf("physical")>-1){
-						str += "rush towards Lethice in hope to land some quick blow before she fully recover, only to find your attacks be intercepted by Lethice's uncanny dexterity and strength! Taken back by stark contrast of her movement and <b>still surging</b> strength,";
+						str += "rush towards Lethice in hope to land some quick blow before she fully recover, only to find your attacks be intercepted by Lethice's uncanny dexterity and strength! Taken back by stark contrast of her movement, you realised that the change didn't stopped there as she is slowly <b>overpowering</b> you,";
 					}
 					else{
 						str += "quickly you use the same ability at her in hope to land some hits before she fully recover, only to find your attempts be intercepted by Lethice with uncanny speed, almost reflexively so. Noticed your attack leaves not even a bruise after and a <b>surge</b> of identical mana signature from her,"
