@@ -1706,17 +1706,18 @@ import classes.Scenes.Combat.CombatAbilities;
 		 */
 		public function eOneAttack(display:Boolean = false):int
 		{
+			var damage:Number = 0;
 			//Determine damage - str modified by enemy toughness!
 			if (hasStatusEffect(StatusEffects.FlameBlade)) {
 				var damageFlameBlade:int = calcFireDamage();
-				if (damageFlameBlade > 0) player.takeFireDamage(damageFlameBlade);
+				if (damageFlameBlade > 0) damage = player.takeFireDamage(damageFlameBlade, display);
 			}
-			if (hasStatusEffect(StatusEffects.ElectrifyWeapon)) {
+			else if (hasStatusEffect(StatusEffects.ElectrifyWeapon)) {
 				var damageElectrifyWeapon:int = calcLightningDamage();
-				if (damageElectrifyWeapon > 0) player.takeLightningDamage(damageElectrifyWeapon);
+				if (damageElectrifyWeapon > 0) damage = player.takeLightningDamage(damageElectrifyWeapon, display);
 			}
 			else {
-				var damage:int = calcDamage();
+				damage = calcDamage();
 				if (damage > 0) damage = player.takePhysDamage(damage, display);
 			}
 			return damage;

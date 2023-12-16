@@ -3050,6 +3050,7 @@ use namespace CoC;
 					//game.HPChange(-damage, display);
 					damage = Math.round(damage);
 					HP -= damage;
+					returnDamage = damage;
 
 					game.mainView.statsView.showStatDown('hp');
 					dynStats("lus", 0); //Force display arrow.

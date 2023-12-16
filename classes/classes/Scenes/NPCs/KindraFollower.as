@@ -105,7 +105,7 @@ public function meet2Kindra():void {
 	menu();
 	addButton(0, "Appearance", kindraAppearance).hint("Examine Kindra's detailed appearance.");
 	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(1, "Fight", fight2Kindra).hint("Fight her");
-	if (player.statusEffectv1(StatusEffects.Kindra) < 150) addButton(2, "Training", trainingArcheryWithKindra).hint("Train your archery skills with her.");
+	if (flags[kFLAGS.KINDRA_ADV_ARCHERY] < 6) addButton(2, "Training", trainingArcheryWithKindra).hint("Train your archery skills with her.");
 	else addButtonDisabled(2, "Training", "You finished advanced archery training.");
 	addButton(14, "Back", camp.campFollowers);
 }
@@ -132,7 +132,7 @@ public function trainingArcheryWithKindra():void {
 	clearOutput();
 	if (!player.hasStatusEffect(StatusEffects.Kelt)) player.createStatusEffect(StatusEffects.Kelt, 5, 0, 0, 0);
 	if (flags[kFLAGS.KINDRA_DAILY_TRAINING] < 1) {
-		if (player.statusEffectv1(StatusEffects.Kindra) >= 140) {
+		if (player.statusEffectv1(StatusEffects.Kindra) >= 140 && flags[kFLAGS.KINDRA_ADV_ARCHERY] >= 5 && player.hasStatusEffect(StatusEffects.KnowsBarrage)) {
 			if (player.isArtifactBow()) {
 				outputText("You ready your magical bow and shoot putting both your dexterity and will at the task and pushing them to the limit. Your arrows all impale one another the last striking the target with such impossible power the target fissure by the center in a cross shape and falls ground in rubble.\n\n");
 				outputText("Kindra applaud you.\n\n");
@@ -140,6 +140,7 @@ public function trainingArcheryWithKindra():void {
 				outputText("\"<b>Learned Sidewinder ability!</b>\"\n\n");
 				if (!player.hasStatusEffect(StatusEffects.KnowsSidewinder)) player.createStatusEffect(StatusEffects.KnowsSidewinder, 0, 0, 0, 0);
 				bowSkill(10);
+				flags[kFLAGS.KINDRA_ADV_ARCHERY] = 6;
 			}
 			else {
 				outputText("You head back to the archery field to resume training.\n\n");
@@ -149,8 +150,8 @@ public function trainingArcheryWithKindra():void {
 			flags[kFLAGS.KINDRA_DAILY_TRAINING] = 1;
 			doNext(camp.returnToCampUseFourHours);
 		}
-		else if (player.statusEffectv1(StatusEffects.Kindra) >= 100) {
-			if (flags[kFLAGS.KINDRA_ADV_ARCHERY] == 4) {
+		else if (player.statusEffectv1(StatusEffects.Kindra) >= 100 && player.hasStatusEffect(StatusEffects.KnowsBarrage)) {
+			if (flags[kFLAGS.KINDRA_ADV_ARCHERY] >= 4) {
 				outputText("You head back to the archery field to resume training.\n\n");
 			}
 			else {
@@ -176,7 +177,7 @@ public function trainingArcheryWithKindra():void {
 			doNext(camp.returnToCampUseFourHours);
 		}
 		else if (player.statusEffectv1(StatusEffects.Kindra) >= 50) {
-			if (flags[kFLAGS.KINDRA_ADV_ARCHERY] == 2) {
+			if (flags[kFLAGS.KINDRA_ADV_ARCHERY] >= 2) {
 				outputText("You head to the training field with Kindra to resume shooting.\n\n");
 			}
 			else {
@@ -197,7 +198,7 @@ public function trainingArcheryWithKindra():void {
 				outputText("\"<i>Good that will be all for today. I have a new training for you tomorrow that will push your skill to the limit. For now go rest pup you earned it.</i>\"\n\n");
 				outputText("\"<b>Learned Barrage ability!</b>\"\n\n");
 				if (!player.hasStatusEffect(StatusEffects.KnowsBarrage)) player.createStatusEffect(StatusEffects.KnowsBarrage, 0, 0, 0, 0);
-				flags[kFLAGS.KINDRA_ADV_ARCHERY] = 3;
+				if (flags[kFLAGS.KINDRA_ADV_ARCHERY] <= 2) flags[kFLAGS.KINDRA_ADV_ARCHERY] = 3;
 			}
 			bowSkill(10);
 			flags[kFLAGS.KINDRA_DAILY_TRAINING] = 1;
