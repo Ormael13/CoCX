@@ -111,6 +111,7 @@ public class Combat extends BaseContent {
     public static const LAST_ATTACK_LUST:int = 3;
     public static const LAST_ATTACK_PHYS:int = 4;
 
+
     public function get inCombat():Boolean {
         return CoC.instance.inCombat;
     }
@@ -7187,8 +7188,11 @@ public class Combat extends BaseContent {
             // switch statement is slightly faster than if
             switch(SpecialEffect){
                 case "KamaitachiScythe":
-                    if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,(CalcBaseDamageUnarmed()/2)*BleedDamageBoost(),0,0,0);
-                    else monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, (CalcBaseDamageUnarmed()/2)*BleedDamageBoost());
+                    if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,1,0,0,1);
+                    else {
+                        monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, 1);
+                        monster.addStatusValue(StatusEffects.KamaitachiBleed, 4, 1);
+                    }
                     break;
                 case "WendigoClaw":
                     monster.addCurse("tou.mult",0.05,2);
@@ -7664,10 +7668,12 @@ public class Combat extends BaseContent {
 		if (monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyPlantType) || monster.hasPerk(PerkLib.EnemyGooType) || monster.hasPerk(PerkLib.EnemyUndeadType)) bleedChance = 0;
         if (rand(100) < bleedChance) bleed = true;
 		if (bleed) {
-			if (monster.hasStatusEffect(StatusEffects.HemorrhageShield)) monster.addStatusValue(StatusEffects.HemorrhageShield, 1, 2);
-			else monster.createStatusEffect(StatusEffects.HemorrhageShield, 2, 0.01, 0, 0);
-            if (player.shield == shields.SPIH_SH) monster.addStatusValue(StatusEffects.HemorrhageShield, 2, 0.01);
-            if (player.shield == shields.SPIM_SH) monster.addStatusValue(StatusEffects.HemorrhageShield, 2, 0.04);
+			if (monster.hasStatusEffect(StatusEffects.Hemorrhage)) monster.addStatusValue(StatusEffects.Hemorrhage, 1, 2);
+			else { 
+                monster.createStatusEffect(StatusEffects.Hemorrhage, 2, 0.01, 0, 0);
+                if (player.shield == shields.SPIH_SH) monster.addStatusValue(StatusEffects.Hemorrhage, 2, 0.01);
+                else if (player.shield == shields.SPIM_SH) monster.addStatusValue(StatusEffects.Hemorrhage, 2, 0.04);
+            }
 			if (monster.plural) outputText("\n[Themonster] bleed profusely from the many bloody gashes your [shield] leave behind.");
             else outputText("\n[Themonster] bleeds profusely from the many bloody gashes your [shield] leave behind.");
 		}
@@ -7996,7 +8002,6 @@ public class Combat extends BaseContent {
             if ((monLvl - plaLvl) < 50) damagereduction -= 0.02 * (monLvl - plaLvl);
             else damagereduction = 0;
         }
-		//if (monster is Draculina && ) damagereduction = 0;
         return damagereduction;
     }
 
@@ -8088,8 +8093,6 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.IzmaBleed)) isBleeding = true;
         if (monster.hasStatusEffect(StatusEffects.CouatlHurricane)) isBleeding = true;
         if (monster.hasStatusEffect(StatusEffects.GoreBleed)) isBleeding = true;
-        if (monster.hasStatusEffect(StatusEffects.HemorrhageArmor)) isBleeding = true;
-        if (monster.hasStatusEffect(StatusEffects.HemorrhageShield)) isBleeding = true;
         if (monster.hasStatusEffect(StatusEffects.Hemorrhage2)) isBleeding = true;
         if (monster.hasStatusEffect(StatusEffects.Briarthorn)) isBleeding = true;
         return isBleeding;
@@ -9422,7 +9425,7 @@ public class Combat extends BaseContent {
             var lustAADmg:Number = (scalingBonusLibido() * 0.5);
             lustAADmg = teases.teaseAuraLustDamageBonus(monster, lustAADmg);
             lustAADmg *= monster.lustVuln;
-            lustAADmg = teases.boundLustDamage(lustAADmg, monster);
+            lustAADmg = combat.fixPercentLust(lustAADmg);
             monster.teased(Math.round(lustAADmg), false);
             bonusExpAfterSuccesfullTease();
         }
@@ -9445,7 +9448,7 @@ public class Combat extends BaseContent {
             lustANDmg = teases.teaseAuraLustDamageBonus(monster, lustANDmg);
             if (player.hasPerk(PerkLib.RacialParagon)) lustANDmg *= RacialParagonAbilityBoost();
             lustANDmg *= monster.lustVuln;
-            lustANDmg = teases.boundLustDamage(lustANDmg, monster);
+            lustANDmg = combat.fixPercentLust(lustANDmg);
             monster.teased(Math.round(lustANDmg), false);
             outputText("\n\n");
             bonusExpAfterSuccesfullTease();
@@ -9503,7 +9506,7 @@ public class Combat extends BaseContent {
                 else if (player.perkv1(IMutationsLib.EclipticMindIM) >= 3 && monster.cor > player.cor / 2) damage = Math.round(damage * 3);
 				damage *= fireDamageBoostedByDao();
                 damage = Math.round(damage);
-                if (damage > (monster.maxHP()/10)) damage = Math.round(monster.maxHP()/10);
+                damage = combat.fixPercentDamage(damage);
                 outputText("Your aura of purity burns [themonster] with holy fire for ");
                 doFireDamage(damage, true, true);
                 outputText(" damage!");
@@ -9528,7 +9531,7 @@ public class Combat extends BaseContent {
             if (monster.cor < 100) outputText("Your victims purity is slowly becoming increasingly eroded by your seeping corruption. ");
             
             lustDmg *= monster.lustVuln;
-            lustDmg = teases.boundLustDamage(lustDmg, monster);
+            lustDmg = combat.fixPercentLust(lustDmg);
             monster.teased(Math.round(lustDmg), false);
             outputText("\n\n");
             bonusExpAfterSuccesfullTease();
@@ -9562,7 +9565,7 @@ public class Combat extends BaseContent {
             }
 
             lustDmgA *= monster.lustVuln;
-            lustDmgA = teases.boundLustDamage(lustDmgA, monster);
+            lustDmgA = combat.fixPercentLust(lustDmgA);
             monster.teased(Math.round(lustDmgA), false);
             outputText("\n\n");
             bonusExpAfterSuccesfullTease();
@@ -16779,11 +16782,49 @@ private function touSpeStrScale(stat:int):Number {
         return inteWisLibScale(player.lib, randomize);
     }
 
-    private static var maxPercentDamage:int = -1; //The implementation is trash, but it's SOMETHING.
-    public function fixPercentDamage(damage:Number):Number {
-        if (maxPercentDamage < 0) maxPercentDamage = new GolemsTrueFire().maxHP() * 0.2;
-        if (damage > maxPercentDamage) damage = maxPercentDamage; //no more than 1 billion!
-        if (player.level < monster.level) damage *= doDamageReduction(); //punish more for high-levels
+    public function fixPercentDamage(damage:Number, ignoreDiff:Boolean = true):Number {
+        var plaLvl:Number = player.level + playerLevelAdjustment();
+        var monLvl:Number = monster.level + monsterLevelAdjustment();
+
+        /**
+         * If player is equal or lower level than monster, DoT is bound to 20%
+         * If player is higher level than monster, damage bound is increased up to 50%
+         * at 10 levels below, then unbounded past that
+         */
+        if (plaLvl <= monLvl) {
+            if (damage > (monster.maxHP() * 0.2)) damage = monster.maxHP() * 0.2; //Bound damage to 20% of health
+        } else {
+            var lvlDifference:int = plaLvl - monLvl;
+            if (lvlDifference < 10) {
+                var boundedDamage:Number = monster.maxHP() * (0.2 + (0.3 * (lvlDifference / 10)));
+                if (damage > boundedDamage) damage = boundedDamage;
+            }
+        }
+
+        if (ignoreDiff) damage *= monster.damageReductionBasedOnDifficulty(); //DoT effects are not punished on higher difficulties
+        return damage;
+    } 
+
+    public function fixPercentLust(damage:Number, ignoreDiff:Boolean = true):Number {
+        var plaLvl:Number = player.level + playerLevelAdjustment();
+        var monLvl:Number = monster.level + monsterLevelAdjustment();
+
+        /**
+         * If player is equal or lower level than monster, DoT is bound to 20%
+         * If player is higher level than monster, damage bound is increased up to 50%
+         * at 10 levels below, then unbounded past that
+         */
+        if (plaLvl <= monLvl) {
+            if (damage > (monster.maxLust() * 0.2)) damage = monster.maxLust() * 0.2; //Bound damage to 20% of health
+        } else {
+            var lvlDifference:int = plaLvl - monLvl;
+            if (lvlDifference < 10) {
+                var boundedDamage:Number = monster.maxLust() * (0.2 + (0.3 * (lvlDifference / 10)));
+                if (damage > boundedDamage) damage = boundedDamage;
+            }
+        }
+        
+        if (ignoreDiff) damage *= monster.damageReductionBasedOnDifficulty(); //DoT effects are not punished on higher difficulties
         return damage;
     }
     
