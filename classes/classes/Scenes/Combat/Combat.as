@@ -5396,6 +5396,7 @@ public class Combat extends BaseContent {
             outputText("You lash at your opponent with your many vines, striking twelve times.");
             var x:int = 12;
             while (x-->0) ExtraNaturalWeaponAttack();
+            outputText("\n");
         }
         //Unique TENTACLES STRIKES
         if ((player.isScylla() || player.isKraken()) && player.effectiveTallness >= 70){
@@ -5485,7 +5486,13 @@ public class Combat extends BaseContent {
      * @return damage calulation
      */
 	public function meleeDamageNoLagSingle(IsFeralCombat:Boolean = false, damage:Number = 0):Number {
-		if (IsFeralCombat && player.hasPerk(PerkLib.VerdantMight)) {
+		if (IsFeralCombat && player.hasPerk(PerkLib.RampantMight)) {
+            damage += player.tou;
+			damage += scalingBonusToughness() * 0.2;
+            damage += player.str;
+			damage += scalingBonusStrength() * 0.2;
+        }
+        else if (IsFeralCombat && player.hasPerk(PerkLib.VerdantMight)) {
 			damage += player.tou;
 			damage += scalingBonusToughness() * 0.2;
 		}
@@ -5597,7 +5604,13 @@ public class Combat extends BaseContent {
 
 	public function meleeUnarmedDamageNoLagSingle(subtype:Number = 0, IsFeralCombat:Boolean = false):Number {
 		var damage:Number = 0;
-		if (player.hasPerk(PerkLib.VerdantMight)){
+		if (player.hasPerk(PerkLib.RampantMight)) {
+            damage += player.tou;
+			damage += scalingBonusToughness() * 0.25;
+            damage += player.str;
+			damage += scalingBonusStrength() * 0.25;
+        }
+        else if (player.hasPerk(PerkLib.VerdantMight)){
             damage += player.tou;
             damage += scalingBonusToughness() * 0.25;
         }
@@ -7018,7 +7031,13 @@ public class Combat extends BaseContent {
 
     public function CalcBaseDamageUnarmed(damage:Number = 0):Number{
         //BASIC DAMAGE STUFF
-        if (player.hasPerk(PerkLib.VerdantMight)){
+        if (player.hasPerk(PerkLib.RampantMight)) {
+            damage += player.tou;
+			damage += scalingBonusToughness() * 0.25;
+            damage += player.str;
+			damage += scalingBonusStrength() * 0.25;
+        }
+        else if (player.hasPerk(PerkLib.VerdantMight)){
             damage += player.tou;
             damage += scalingBonusToughness() * 0.25;
         }
@@ -7049,7 +7068,13 @@ public class Combat extends BaseContent {
 
     public function CalcBaseDamageArmed(damage:Number = 0):Number{
         //BASIC DAMAGE STUFF
-        if (player.hasPerk(PerkLib.VerdantMight)){
+        if (player.hasPerk(PerkLib.RampantMight)) {
+            damage += player.tou;
+			damage += scalingBonusToughness() * 0.25;
+            damage += player.str;
+			damage += scalingBonusStrength() * 0.25;
+        }
+        else if (player.hasPerk(PerkLib.VerdantMight)){
             damage += player.tou;
             damage += scalingBonusToughness() * 0.25;
         }
