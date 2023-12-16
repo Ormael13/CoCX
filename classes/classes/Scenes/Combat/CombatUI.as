@@ -595,6 +595,9 @@ public class CombatUI extends BaseCombatContent {
 							btnSpecial1.show("Dispel", lethice.dispellRapetacles);
 						}
 					}
+
+					//Enable Lethice Adaption for player actions
+        			if (lethice.fightPhase != 2) lethice.deflectActive = true;
 				}
 				else if (monster is WoodElvesHuntingParty) {
 					var woodelves:WoodElvesHuntingParty = monster as WoodElvesHuntingParty;

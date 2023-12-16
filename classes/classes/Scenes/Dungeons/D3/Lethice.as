@@ -90,6 +90,9 @@ public class Lethice extends Monster
 					}
 					else{
 						str += "\n\nHaving recalled what happened earlier, It is probably the best to <b>attempt alternate strategy</b> before repeating the same move quickly.";
+						if (player.hasPerk(PerkLib.EyesOfTheHunterMaster) && dictOrder.length) {
+							str += " Luckily, your senses are strong to notice that she seems ready to counter the following types of damage: <b>" + printImmuneDamageTypes() + "</b>.";
+						}
 					}
 					if(dictOrder.indexOf("hplossimmune")>-1){
 						str += "\n\nPerhaps out of your sheer willpower or rage you still manage to stand up to fight for another day, seeing Lethice's grin in response, you realized that <b>you might not able to survive</b> another blow from her should you still retain your grievous injuries!"
@@ -123,6 +126,9 @@ public class Lethice extends Monster
 				}
 
 				str += "\n\nHaving recalled what happened earlier, It is probably the best to attempt <b>alternate strategy</b> before repeating the same move quickly.";
+				if (player.hasPerk(PerkLib.EyesOfTheHunterMaster) && dictOrder.length) {
+					str += " Luckily, your senses are strong to notice that she seems ready to counter the following types of damage: <b>" + printImmuneDamageTypes() + "</b>.";
+				}
 
 				if(dictOrder.indexOf("hplossimmune")>-1){
 					str += "\n\nPerhaps out of your sheer willpower or rage you still manage to stand up to fight for another day, seeing Lethice's grin in response, you realized that <b>you might not able to survive</b> another blow from her should you still retain your grievous injuries!"
@@ -164,6 +170,7 @@ public class Lethice extends Monster
 		private var dictAttacked:Array = [];
 		private var roundCheck:int = 0;
 		private var decayCheck:Boolean = false;
+		public var deflectActive:Boolean = true;
 
 		private function furubeYuraYuraYatsukaNoTsurugiIkaishinshoMakora():void{
 			var _statusEffects:Array = statusEffects;
@@ -299,13 +306,36 @@ public class Lethice extends Monster
 				default:
 					string = "restrain";
 			}
-			if(statusHandler(statusEffect.id)){
+			if(_fightPhase != 2 && statusHandler(statusEffect.id)){
 				outputText("\n\nAs you attempt to " + string + " Lethice, much to your surprise she remain unfazed. Looks like she has adapted to your ability.");
 				return true;
 			}
 			else{
 				return false;
 			}
+		}
+		private function printImmuneDamageTypes():String {
+			var printTranslation:Object = {
+				"physical": "Physical",
+				"magic": "Magic",
+				"fire": "Fire",
+				"cold": "Ice",
+				"lightning": "Lightning",
+				"dark": "Darkness",
+				"poison": "Poison",
+				"wind": "Wind",
+				"water": "Water",
+				"acid": "Acid",
+				"earth": "Earth",
+				"true": "True",
+				"lust": "Lust"
+			};
+			return dictOrder.filter(function (type:String, index:int, array:Array):Boolean {
+				return printTranslation.hasOwnProperty(type);
+			})
+			.map(function (type:String, index:int, array:Array):String {
+				return printTranslation[type];
+			}).join(", ");
 		}
 		override public function combatRoundUpdate():void{
 			if(_fightPhase!=2){
@@ -314,7 +344,7 @@ public class Lethice extends Monster
 			super.combatRoundUpdate();
 		}
 		private function adaptionDeflect(damage:Number, font:String, dict:String="physical"):Number {
-			if(_fightPhase!=2){
+			if(_fightPhase!=2 && deflectActive){
 				var index:int = dictOrder.indexOf(dict);
 				if(index>-1){
 					var numberformat:NumberFormatter = new NumberFormatter();
@@ -323,20 +353,20 @@ public class Lethice extends Monster
 					if(dict=="lust"){
 						if(deflectDamage>player.maxOverLust()*0.2){
 							var _tmp:Number = Math.round(player.maxOverLust()*0.2);
-							player.lust += _tmp;
+							player.takeLustDamage(_tmp);
 							dmgText = numberformat.format(Math.floor(Math.abs(_tmp)));
 						}
 						else
-							player.lust += deflectDamage;
+							player.takeLustDamage(deflectDamage);
 					}
 					else{
 						if(deflectDamage>player.maxOverHP()*0.4){
 							var __tmp:Number = Math.round(player.maxOverHP()*0.4);
-							player.HP -= __tmp;
+							player.takeDamage(__tmp);
 							dmgText = numberformat.format(Math.floor(Math.abs(__tmp)));
 						}
 						else
-							player.HP -= deflectDamage;
+							player.takeDamage(deflectDamage);
 					}
 					outputText("<b>([font-" + font + "]" + "Deflected! " + dmgText + "[/font])</b>");
 
@@ -455,7 +485,7 @@ public class Lethice extends Monster
 
 			// Lettuce now adapt to player loss immunity HA
 			if(_fightPhase!=2){
-				if(player.HP<=player.minHP()){
+				if(player.HP<=player.minHP() + 1 && (player.hasStatusEffect(StatusEffects.TooAngryTooDie) || player.hasPerk(PerkLib.Immortality) || player.hasPerk(PerkLib.WhatIsReality))){
 					if(dictOrder.indexOf("hplossimmune")>-1){
 						doNext(SceneLib.combat.endHpLoss);
 					}
