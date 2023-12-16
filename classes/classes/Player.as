@@ -1371,6 +1371,16 @@ use namespace CoC;
 		{
 			return perkv1(IMutationsLib.SlimeFluidIM) >= 1;
 		}
+		public function progressBloodDemon():Number
+		{
+			var progressBD:Number = 1;
+			if (hasPerk(PerkLib.WayOfTheBlood)) progressBD += 1;
+			if (hasPerk(PerkLib.BloodDemonToughness)) progressBD += 1;
+			if (hasPerk(PerkLib.MyBloodForBloodPuppies)) progressBD += 1;
+			if (hasPerk(PerkLib.YourPainMyPower)) progressBD += 1;
+			if (hasPerk(PerkLib.BloodDemonIntelligence)) progressBD += 1;
+			return progressBD;
+		}
 
 		public function allEquipment():/*ItemType*/Array {
 			var result:Array = [];
@@ -2779,7 +2789,8 @@ use namespace CoC;
 			*/
 		}
 		public function bloodShieldAbsorb(damage:Number, display:Boolean = false):Number{
-			if (hasPerk(PerkLib.BloodAffinity)) damage = Math.round(damage*0.5);
+			if (hasPerk(PerkLib.BloodAffinity)) damage = Math.round(damage * 0.5);
+			if (hasPerk(PerkLib.WayOfTheBlood)) damage = Math.round(damage * (1 - (0.05 * progressBloodDemon())));
 			if (damage <= statusEffectv1(StatusEffects.BloodShield)) {
 				addStatusValue(StatusEffects.BloodShield,1,-damage);
 				if (display) SceneLib.combat.CommasForDigits(damage, false, "Absorbed ");

@@ -722,16 +722,14 @@ public class PerkMenu extends BaseContent {
 				addButton(1, "Off", BloodMageOptionOff);
 			}
 			outputText("\n\n");
-			if (player.hasPerk(PerkLib.WayOfTheBlood)) {
-				outputText("Set if you will be using blood instead of soulforce to fuel your soulskills.\n\n");
-				if (!player.hasStatusEffect(StatusEffects.BloodCultivator)) {
-					outputText("Blood Cultivator: <b>Inactive</b>.");
-					addButton(2, "On", BloodCultivatorOptionOn);
-				}
-				if (player.hasStatusEffect(StatusEffects.BloodCultivator)) {
-					outputText("Blood Cultivator: <b>Active</b>.");
-					addButton(3, "Off", BloodCultivatorOptionOff);
-				}
+			outputText("Set if you will be using blood instead of soulforce to fuel your soulskills.\n\n");
+			if (!player.hasStatusEffect(StatusEffects.BloodCultivator)) {
+				outputText("Blood Cultivator: <b>Inactive</b>.");
+				addButton(2, "On", BloodCultivatorOptionOn);
+			}
+			if (player.hasStatusEffect(StatusEffects.BloodCultivator)) {
+				outputText("Blood Cultivator: <b>Active</b>.");
+				addButton(3, "Off", BloodCultivatorOptionOff);
 			}
 		}
 		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu, false);

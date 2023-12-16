@@ -508,10 +508,19 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Range Physical Attacks Multiplier:</b> " + Math.round(100 * combat.rangePhysicalForce()) + "%\n";
 		combatStats += "<b>Firearms Attacks Multiplier:</b> " + Math.round(100 * combat.firearmsForce()) + "%\n";
 		if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
-			if (player.statusEffectv1(StatusEffects.Kindra) < 1)
-				combatStats += "<b>Bow Skill:</b> " + Math.round(player.statusEffectv1(StatusEffects.Kelt)) + " / 100\n";
-			if (player.statusEffectv1(StatusEffects.Kindra) > 0)
-				combatStats += "<b>Bow Skill:</b> " + (Math.round(player.statusEffectv1(StatusEffects.Kelt)) + Math.round(player.statusEffectv1(StatusEffects.Kindra))) + " / 250\n";
+			var currentBowSkill:Number = Math.round(player.statusEffectv1(StatusEffects.Kelt));
+			var maxBowSkillCap:Number = 100;
+			var bowSkillGrade:String = "Basic";
+			if (player.statusEffectv1(StatusEffects.Kindra) > 0) {
+				currentBowSkill += Math.round(player.statusEffectv1(StatusEffects.Kindra))
+				maxBowSkillCap += 75;
+				bowSkillGrade = "Low-Advanced";
+				if (player.statusEffectv1(StatusEffects.Kindra) > 75) {
+					maxBowSkillCap += 75;
+					bowSkillGrade = "Advanced";
+				}
+			}
+			combatStats += "<b>Bow Skill:</b> " + currentBowSkill + " / " + maxBowSkillCap + " (" + bowSkillGrade + ")\n";
 		}
 		else combatStats += "<b>Bow Skill:</b> 0 / 100\n";
 		combatStats += "<b>Telekinesis Throw Cost (Fatigue): </b> " + combat.oneThrowTotalCost() + "\n";
@@ -2171,7 +2180,7 @@ public class PlayerInfo extends BaseContent {
 				if (player.level >= 20) {
 					if (player.hasPerk(PerkLib.WayOfTheBlood)) addButtonDisabled(1, "WOTB", "You already have this super perk.");
 					else {
-						if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) addButton(1, "WOTB", perkWayOfTheBlood).hint("Choose the 'Way of the Blood' super perk. Allowing to use health to substitude using soulforce in almost all soulskills. (+10% of OverMax HP, -5% blood spells/soulskills cost, +15% blood spells/soulskills power, can learn Blood Soulskills form Crimson Jades)");
+						if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) addButton(1, "WOTB", perkWayOfTheBlood).hint("Choose the 'Way of the Blood' super perk. Blood speels and soulskills gain additional effects that would get better as you progress in this job. (+10% of OverMax HP, -5% blood spells/soulskills cost, +15% blood spells/soulskills power, can learn Blood Soulskills form Crimson Jades)");
 						else addButtonDisabled(1, "WOTB", "You need to first have the 'Hidden Job: Blood Demon' super perk.");
 					}
 				}

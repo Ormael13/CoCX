@@ -180,8 +180,15 @@ public class Changelog extends BaseContent
 			outputText("per stack of bleed with no ceiling. Normal attacks add 1 stack and the 'Wind Scythe' special adds 3. Each turn in which the bleed is not applied reduces the stacks by 1 (min. of 1 stack) (Demojay)\n");
 			outputText("-General code cleanup for bleed DoT effects. Added number formatting to the tease damage display. (Demojay)\n");
 			outputText("-Lethice now cannot adapt/deflect DoT and companions (since some sources such as auras cannot be turned off in battle) Lethice reflection damage now uses proper damage functions, so that player defenses are properly taken into accountLethice's 'hplossimmune' adaption now takes the correct HP value into account. ");
-			outputText("Prevent the demons in Lethice phase 2 from using Lethice's adaptions to status effects.  Having the Eyes of the Hunter (Master) perk in the Lethice Fight will allow you to see which Damage types Lithice will currently deflect. (Demojay)\n");
-			outputText("-\n");
+			outputText("Prevent the demons in Lethice phase 2 from using Lethice's adaptions to status effects. Having the Eyes of the Hunter (Master) perk in the Lethice Fight will allow you to see which Damage types Lithice will currently deflect. (Demojay)\n");
+			outputText("-Advanced part of bow training get bit confusing with not one but two trainers so the display of bow skill and caps pc can reach been slight changed to fit into showing limits for Basic (100), Low-Advanced (175) and Advanced (250) parts of the skill training progress. BAsic is like before trained by one of three trainers. Low-Advanced is possible to train with either wood elf sister or sheep-morph ");
+			outputText("and Advanced been only trainable with sheep-morph.\n");
+			outputText("-Hidden Job: Blood Demon super perk enable now additionaly ability to use blood to soulskills, learn blood soulskills.\n");
+			outputText("-Way of the Blood super perk effect 'Allowing you use of your health to substitute using soulforce in almost all soulskills' was replaced with 'Blood speels and soulskills gain additional effects that would get better as you progress in this job'.\n");
+			outputText("-New event perk (by Demojay): Rampant Might. Gained by been yggdrasil. Effect: Add toughness and strength to feral combat modifier.\n");
+			outputText("-New event perk (by Demojay): Wisdom of the Ages. Gained by been yggdrasil. Effect: Add half of Intelligence and Wisdom as a modifier to Strength and Toughness.\n");
+			outputText("-Players can now learn Kindra's bow skills even if they maxed their bow skill somewhere else. Standardized damage calculation for Nosferatu spell so it aligns with other black spells. (Demojay)\n");
+			outputText("-Fixed monster damage display sometime not showing the true damage received. Dragonne Race does not both add and subtract racial scores for draconic horns. Dragon race now cannot have a cat tongue, while Dragonne requires one. (Demojay)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -202,16 +209,10 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay) (NUZ/Shirane)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed bugs: Telekinetic Grasp have unlimited powe... duration, 'Elite/Champion/Boss HP bonus' setting, Monsters HP (and Soulforce/Mana) not decreasing on turn end when any effect lowering it, Rathazul keep trying cure Belisa after Nadia done it, Vouivre Oil replacing dragon ears with snake ears & dragon scales with snake scales, Tyrantia & Flitzi forest scene allowing to skip ");
 			outputText("large portion of her storyline, corrupt Celess sex scenes not reseting lust/not giving tease exp, 2nd promotion in Adventure Guld been not accesable, Diva/Project Nightwalker dropping/giving Bat TF instead of Vampire TF, Sky-tier Aether Twins been excluded from some of BFGaunlets bonuses, silly mode event in hills involving minotaurs got it lvl req. below lvl req. for area ");
 			outputText("(fix was removing the lvl req. on it), races with Undeath perk scaling HP from tou instead of lib, Salamander IM not keeping Lustzerker perk from loosing if no longer race with lustzerker ability, Gryphon Statuette only allowing cock tf scene, Weasel Eyes tf not triggering when having Raiju Eyes, Library not teaching all curretly existing tier 1 white and black spells, ");
-			outputText("Werewolf pity system not working with FemDom post fight option\n\n");
+			outputText("Werewolf pity system not working with FemDom post fight option, cow score req. both fur and plain skin\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8v:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
