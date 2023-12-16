@@ -9,6 +9,8 @@ import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
 import classes.StatusEffects;
 
+import coc.view.CoCButton;
+
 public class DriderIncubus extends AbstractSpiderMorph
 	{
 		public function DriderIncubus()
@@ -114,7 +116,11 @@ if (this.lust < .65 * this.maxLust() && this.HP < .33 * this.maxHP()) {
 			}
 			
 		}
-		
+
+		override public function postPlayerBusyBtnSpecial(btnSpecial1:CoCButton, btnSpecial2:CoCButton):void{
+			if (!goblinFree) btnSpecial1.show("Free Goblin", freeGoblin);
+		}
+
 		private function performPhysicalAttack():void
 		{
 			if (_combatRound >= 3 && (_combatRound % 6 == 0 || _combatRound == 3)) stunningSpear();

@@ -14,6 +14,8 @@ import classes.StatusEffectType;
 import classes.StatusEffects;
 import classes.internals.WeightedDrop;
 
+import coc.view.CoCButton;
+
 import flash.utils.Dictionary;
 
 import mx.formatters.NumberFormatter;
@@ -170,7 +172,8 @@ public class Lethice extends Monster
 		private var dictAttacked:Array = [];
 		private var roundCheck:int = 0;
 		private var decayCheck:Boolean = false;
-		public var deflectActive:Boolean = true;
+		private var companionCheck:Boolean = false;
+
 
 		private function furubeYuraYuraYatsukaNoTsurugiIkaishinshoMakora():void{
 			var _statusEffects:Array = statusEffects;
@@ -179,6 +182,10 @@ public class Lethice extends Monster
 
 			// Append attacked damage type into immunity from last round
 			// Since I dont want Lethice to become immune immediately (literally unplayable)
+			if(dictAttacked.length>0){
+				decayCheck = true;
+			}
+
 			for(var __i:int=0;__i<dictAttacked.length;__i++){
 				var ___index:int = dictOrder.indexOf(dictAttacked[__i]);
 				if(___index>-1){
@@ -342,41 +349,54 @@ public class Lethice extends Monster
 			}
 			super.combatRoundUpdate();
 		}
-		private function adaptionDeflect(damage:Number, font:String, dict:String="physical"):Number {
-			if(_fightPhase!=2 && deflectActive){
+		private function adaptionDeflect(damage:Number, font:String, dict:String="physical", damageType:Number=0):Number {
+			if(_fightPhase!=2){
+				if(companionCheck){
+					// Companion attack will never be deflected to player since it will be skipped once adapted
+					dict = "companion";
+				}
 				var index:int = dictOrder.indexOf(dict);
 				if(index>-1){
 					var numberformat:NumberFormatter = new NumberFormatter();
 					var deflectDamage:Number = Math.round(damage * (dictValue[index]/100));
 					var dmgText:String = numberformat.format(Math.floor(Math.abs(deflectDamage)));
-					if(dict=="lust"){
-						if(deflectDamage>player.maxOverLust()*0.2){
-							var _tmp:Number = Math.round(player.maxOverLust()*0.2);
-							player.takeLustDamage(_tmp);
-							dmgText = numberformat.format(Math.floor(Math.abs(_tmp)));
-						}
-						else
-							player.takeLustDamage(deflectDamage);
-					}
-					else{
-						if(deflectDamage>player.maxOverHP()*0.4){
-							var __tmp:Number = Math.round(player.maxOverHP()*0.4);
-							player.takeDamage(__tmp);
-							dmgText = numberformat.format(Math.floor(Math.abs(__tmp)));
-						}
-						else
-							player.takeDamage(deflectDamage);
+					switch(dict){
+						case "lust":
+							var _tmp:Number = Math.round(player.maxOverLust()*30);
+							if(deflectDamage>_tmp){
+								player.takeLustDamage(_tmp);
+								dmgText = numberformat.format(Math.floor(Math.abs(_tmp)));
+							}
+							else
+								player.takeLustDamage(deflectDamage);
+							break;
+						case "true":
+							var ____tmp:Number = Math.round(player.maxOverHP()*0.4);
+							if(deflectDamage>____tmp){
+								player.HP -= ____tmp;
+								dmgText = numberformat.format(Math.floor(Math.abs(____tmp)));
+							}
+							else
+								player.HP -= deflectDamage;
+							break;
+						default:
+							var __tmp:Number = Math.round(player.maxOverHP()*50);
+							if(deflectDamage>__tmp){
+								player.takeDamage(__tmp,damageType);
+								dmgText = numberformat.format(Math.floor(Math.abs(__tmp)));
+							}
+							else
+								player.takeDamage(deflectDamage,damageType);
+
 					}
 					outputText("<b>([font-" + font + "]" + "Deflected! " + dmgText + "[/font])</b>");
 
 					dictAttacked.push(dict);
-					decayCheck = true;
 
 					return damage-deflectDamage;
 				}
-				else if(dictAttacked.indexOf(dict)<0){
+				else {
 					dictAttacked.push(dict);
-					decayCheck = true;
 				}
 			}
 
@@ -386,41 +406,41 @@ public class Lethice extends Monster
 			return adaptionDeflect(damage,"damage");
 		}
 		override public function doMagicDamageBefore(damage:Number):Number{
-			return adaptionDeflect(damage,"damage","magic");
+			return adaptionDeflect(damage,"damage","magic",4);
 		}
 		override public function doFireDamageBefore(damage:Number):Number{
-			return adaptionDeflect(damage,"fire","fire");
+			return adaptionDeflect(damage,"fire","fire",5);
 		}
 		override public function doIceDamageBefore(damage:Number):Number{
-			return adaptionDeflect(damage,"cold","cold");
+			return adaptionDeflect(damage,"cold","cold",6);
 		}
 
 		override public function doLightningDamageBefore(damage:Number):Number{
-			return adaptionDeflect(damage,"lightning","lightning");
+			return adaptionDeflect(damage,"lightning","lightning",7);
 		}
 
 		override public function doDarknessDamageBefore(damage:Number):Number{
-			return adaptionDeflect(damage,"dark","dark");
+			return adaptionDeflect(damage,"dark","dark",8);
 		}
 
 		override public function doPoisonDamageBefore(damage:Number):Number{
-			return adaptionDeflect(damage,"poison","poison");
+			return adaptionDeflect(damage,"poison","poison",9);
 		}
 
 		override public function doWindDamageBefore(damage:Number):Number{
-			return adaptionDeflect(damage,"wind","wind");
+			return adaptionDeflect(damage,"wind","wind",10);
 		}
 
 		override public function doWaterDamageBefore(damage:Number):Number{
-			return adaptionDeflect(damage,"water","water");
+			return adaptionDeflect(damage,"water","water",11);
 		}
 
 		override public function doAcidDamageBefore(damage:Number):Number{
-			return adaptionDeflect(damage,"acid","acid");
+			return adaptionDeflect(damage,"acid","acid",13);
 		}
 
 		override public function doEarthDamageBefore(damage:Number):Number{
-			return adaptionDeflect(damage,"earth","earth");
+			return adaptionDeflect(damage,"earth","earth",12);
 		}
 
 		override public function doTrueDamageBefore(damage:Number):Number{
@@ -431,6 +451,31 @@ public class Lethice extends Monster
 			lustDelta = adaptionDeflect(lustDelta,"lust","lust");
 			if(lustDelta>0){
 				super.applyTease(lustDelta);
+			}
+		}
+
+		override public function preCompanionSeal(companionName:String):Boolean{
+			if(_fightPhase!=2){
+				if(dictOrder.indexOf("companion")>-1){
+					companionCheck = false;
+					outputText("\n\nAs you recuperate from your last move, " + companionName + " attempts to attack Lethice only to be perfectly intercepted, leaving her unharmed.");
+					return false;
+				}
+				companionCheck = true;
+			}
+			return true;
+		}
+
+		override public function postCompanionAction():void{
+			companionCheck = false;
+		}
+
+		override public function postPlayerBusyBtnSpecial(btnSpecial1:CoCButton, btnSpecial2:CoCButton):void{
+			if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles)) {
+				if (player.lust < SceneLib.combat.magic.getWhiteMagicLustCap() && player.hasStatusEffect(StatusEffects.KnowsWhitefire)
+						&& ((!player.hasPerk(PerkLib.BloodMage) && player.mana >= 30) || (player.hasStatusEffect(StatusEffects.BloodMage) && ((player.HP + 30) > (player.minHP() + 30))))) {
+					btnSpecial1.show("Dispel", dispellRapetacles);
+				}
 			}
 		}
 

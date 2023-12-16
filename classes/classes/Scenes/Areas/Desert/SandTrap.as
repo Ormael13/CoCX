@@ -8,6 +8,8 @@ import classes.Scenes.SceneLib;
 import classes.internals.*;
 import classes.display.SpriteDb;
 
+import coc.view.CoCButton;
+
 public class SandTrap extends Monster
 	{
 		//Wait:
@@ -75,6 +77,10 @@ public class SandTrap extends Monster
 				trapLevel(-1);
 				if(!hasStatusEffect(StatusEffects.Climbed)) createStatusEffect(StatusEffects.Climbed,0,0,0,0);
 			}
+		}
+
+		override public function postPlayerBusyBtnSpecial(btnSpecial1:CoCButton, btnSpecial2:CoCButton):void{
+			btnSpecial1.show("Climb", SceneLib.combat.wait2, "Climb the sand to move away from the sand trap.");
 		}
 
 		override public function preAttack():void{
