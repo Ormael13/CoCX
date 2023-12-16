@@ -362,7 +362,7 @@ public class Lethice extends Monster
 					var dmgText:String = numberformat.format(Math.floor(Math.abs(deflectDamage)));
 					switch(dict){
 						case "lust":
-							var _tmp:Number = Math.round(player.maxOverLust()*30);
+							var _tmp:Number = Math.round(player.maxOverLust()*10);
 							if(deflectDamage>_tmp){
 								player.takeLustDamage(_tmp);
 								dmgText = numberformat.format(Math.floor(Math.abs(_tmp)));
@@ -380,7 +380,7 @@ public class Lethice extends Monster
 								player.HP -= deflectDamage;
 							break;
 						default:
-							var __tmp:Number = Math.round(player.maxOverHP()*50);
+							var __tmp:Number = Math.round(player.maxOverHP()*20);
 							if(deflectDamage>__tmp){
 								player.takeDamage(__tmp,damageType);
 								dmgText = numberformat.format(Math.floor(Math.abs(__tmp)));
