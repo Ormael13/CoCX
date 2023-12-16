@@ -5626,6 +5626,9 @@ use namespace CoC;
 					removePerk(PerkLib.Resolute);
 				}
 			}
+			if(hasStatusEffect(StatusEffects.FlyingDisabled)) {
+				removeStatusEffect(StatusEffects.FlyingDisabled);
+			}
 			if(statStore.hasBuff("Might")){
 				statStore.removeBuffs("Might");
 				removeStatusEffect(StatusEffects.Minimise);
