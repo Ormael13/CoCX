@@ -50,7 +50,7 @@ public class DragonneRace extends Race{
 				.eyeColor("red", +1)
 				.tailType(Tail.CAT, +1)
 				.tailType(NONE(Tail.FEY_DRACONIC, Tail.DRACONIC), 0, -10)
-				.tongueType(Tongue.CAT, +1)
+				.tongueType(Tongue.CAT, +1, -1000)
 				.tongueType(NOT(Tongue.DRACONIC), 0, -10)
 				.wingType(Wings.DRACONIC_SMALL, +2)
 				.wingType(Wings.DRACONIC_LARGE, +4)
