@@ -15,10 +15,11 @@ public class FirePunchSkill extends AbstractSoulSkill {
             "Ignite your opponents dealing fire damage and setting them ablaze.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING, TAG_FIRE],
+            [TAG_DAMAGING, TAG_FIRE, TAG_PHYSICAL],
             StatusEffects.KnowsFirePunch
         )
 		baseSFCost = 30;
+		lastAttackType = Combat.LAST_ATTACK_PHYS;
     }
 
     override protected function usabilityCheck():String {
@@ -40,7 +41,7 @@ public class FirePunchSkill extends AbstractSoulSkill {
 	}
 
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target) + " fire damage"
+		return "~" + numberFormat(calcDamage(target)) + " fire damage"
 	}
 
 	public function calcDamage(monster:Monster):Number {
@@ -60,12 +61,12 @@ public class FirePunchSkill extends AbstractSoulSkill {
 		if (player.hasPerk(PerkLib.PerfectStrike) && monster.monsterIsStunned()) damage *= 1.5;
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
+		damage *= combat.fireDamageBoostedByDao();
 		return Math.round(damage);
 
 	}
 
     override public function doEffect(display:Boolean = true):void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_PHYS;
 		var damage:Number = calcDamage(monster);
 
 		var crit:Boolean = false;
@@ -79,7 +80,6 @@ public class FirePunchSkill extends AbstractSoulSkill {
 		}
 		monster.createStatusEffect(StatusEffects.FirePunchBurnDoT,16,0,0,0);
 		if (display) outputText("Setting your fist ablaze, you rush at [themonster] and scorch [monster him] with your searing flames. ");
-		damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 			damage += Math.round(damage * 0.1);
 			doFireDamage(damage, true, display);

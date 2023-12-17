@@ -4,7 +4,6 @@ import classes.Scenes.Combat.AbstractBloodSoulSkill;
 import classes.StatusEffects;
 import classes.IMutations.IMutationsLib;
 import classes.Monster;
-import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Combat.Combat;
 
 public class BloodReqiuemSkill extends AbstractBloodSoulSkill {
@@ -15,12 +14,13 @@ public class BloodReqiuemSkill extends AbstractBloodSoulSkill {
 			: "Blood Requiem will create pillars of blood, dealing damage and reducing the recovery rate of enemies for a short time.  ",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING],
+            [TAG_DAMAGING, TAG_PHYSICAL],
             sfInfusion? StatusEffects.KnowsBloodRequiemSF: StatusEffects.KnowsBloodRequiem,
 			true,
 			sfInfusion
         )
 		baseSFCost = 150;
+		lastAttackType  = Combat.LAST_ATTACK_PHYS;
     }
 
 	override protected function baseName():String {
@@ -28,7 +28,7 @@ public class BloodReqiuemSkill extends AbstractBloodSoulSkill {
 	}
 
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target) + " blood damage, inflicts Bleed for 4 rounds"
+		return "~" + numberFormat(calcDamage(target)) + " blood damage, inflicts Bleed for 4 rounds"
 	}
 
 	override public function calcCooldown():int {
@@ -53,7 +53,6 @@ public class BloodReqiuemSkill extends AbstractBloodSoulSkill {
 	}
 
     override public function doEffect(display:Boolean = true):void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_PHYS;
 		var additionalSFLine: String = sfInfusion? "You pour Soulforce into your hands, and they glow blue with each gesture, power pulsing with your heartbeat. " : "";
 		if (display) outputText("You concentrate, focusing on the power of your blood before starting making gestures with your hands, precise movements sending power blazing through your body. " + 
 			additionalSFLine + 

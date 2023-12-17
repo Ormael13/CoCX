@@ -12,7 +12,7 @@ public class BloodDewdropsPuppiesSkill extends AbstractBloodSoulSkill {
             "Command Blood Puppies to attack the enemy with Blood Dewdrops. Deals increased damage to groups.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING],
+            [TAG_DAMAGING, TAG_PHYSICAL],
             PerkLib.MyBloodForBloodPuppies,
 			true,
 			sfInfusion

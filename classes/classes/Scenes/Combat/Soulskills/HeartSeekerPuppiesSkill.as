@@ -12,7 +12,7 @@ public class HeartSeekerPuppiesSkill extends AbstractBloodSoulSkill {
             "Command Blood Puppies to attack the enemy with Heart Seeker. Ignores physical resistance.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING],
+            [TAG_DAMAGING, TAG_PHYSICAL],
             PerkLib.MyBloodForBloodPuppies,
 			true,
 			sfInfusion

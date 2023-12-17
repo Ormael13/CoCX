@@ -8,7 +8,7 @@ public class AvatarOfTheSongSkill extends AbstractSoulSkill {
     public function AvatarOfTheSongSkill() {
         super(
             "Avatar Of The Song",
-            "Doublecast Charged Weapon and Might. Casts blind if charged weapon is already active. Casts Heal if Might is already active.",
+            "Doublecast Charged Weapon and Might. Casts Blind if Charged Weapon is already active. Casts Heal if Might is already active.",
             TARGET_SELF,
             TIMING_INSTANT,
             [TAG_BUFF, TAG_HEALING],

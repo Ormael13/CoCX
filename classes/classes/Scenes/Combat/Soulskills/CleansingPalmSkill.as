@@ -15,13 +15,14 @@ public class CleansingPalmSkill extends AbstractSoulSkill {
     public function CleansingPalmSkill() {
         super(
             "Cleansing Palm",
-            "Unleash the power of your cleansing aura! More effective against corrupted opponents. Doesn't work on the pure.",
+            "Unleash the power of your cleansing aura! More effective against corrupted opponents. Doesn't work on the pure. Damage based on physical attack.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING],
+            [TAG_DAMAGING, TAG_MAGICAL],
             PerkLib.CleansingPalm
         )
 		baseSFCost = 30;
+		lastAttackType = Combat.LAST_ATTACK_SPELL;
     }
 
     override protected function usabilityCheck():String {
@@ -40,7 +41,7 @@ public class CleansingPalmSkill extends AbstractSoulSkill {
 	}
 
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target) + " magical damage"
+		return "~" + numberFormat(calcDamage(target)) + " magical damage"
 	}
 
 	private function calcCorruptionMulti(monster:Monster):Number {
@@ -76,7 +77,6 @@ public class CleansingPalmSkill extends AbstractSoulSkill {
 	}
 
     override public function doEffect(display:Boolean = true):void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_SPELL;
         if (monster is Jojo) {
 			// Not a completely corrupted monkmouse
 			if (JojoScene.monk < 2) {

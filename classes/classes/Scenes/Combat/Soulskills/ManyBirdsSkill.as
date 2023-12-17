@@ -14,10 +14,11 @@ public class ManyBirdsSkill extends AbstractSoulSkill {
             "Project a figment of your soulforce as a crystal traveling at extreme speeds.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING],
+            [TAG_DAMAGING, TAG_PHYSICAL],
             StatusEffects.KnowsManyBirds
         )
 		baseSFCost = 10;
+		lastAttackType = Combat.LAST_ATTACK_SPELL;
     }
 
     override protected function usabilityCheck():String {
@@ -36,7 +37,7 @@ public class ManyBirdsSkill extends AbstractSoulSkill {
 	}
 
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target) + " magical damage"
+		return "~" + numberFormat(calcDamage(target)) + " magical damage";
 	}
 
 	public function calcDamage(monster:Monster):Number {
@@ -52,8 +53,6 @@ public class ManyBirdsSkill extends AbstractSoulSkill {
 	}
 
     override public function doEffect(display:Boolean = true):void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_SPELL;
-
 		if (silly()) 
 			if (display) outputText("You focus your soulforce, projecting it as an aura around you.  As you concentrate, dozens, hundreds, thousands of tiny, ethereal birds shimmer into existence.  As you raise your hand up, more and more appear, until the area around you and [themonster]  is drowned in spectral flappy shapes.  ");
 		else {

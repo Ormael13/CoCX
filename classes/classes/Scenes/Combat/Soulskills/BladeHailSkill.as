@@ -5,9 +5,7 @@ import classes.StatusEffects;
 import classes.IMutations.IMutationsLib;
 import classes.Monster;
 import classes.GlobalFlags.kFLAGS;
-import classes.Races;
 import classes.Scenes.Combat.Combat;
-import classes.Items.Weapons.Tidarion;
 
 public class BladeHailSkill extends AbstractSoulSkill {
 	//Skill name, number of attacks, status effect to sjow knowledge of skill, base SF cost, cooldown, number of attack rounds, hits per attack round
@@ -25,11 +23,12 @@ public class BladeHailSkill extends AbstractSoulSkill {
             "Form " + hailArray[count - 1][1] + " weapons from your soulforce traveling at extreme speeds.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING],
+            [TAG_DAMAGING, TAG_MAGICAL],
             count < 4 && count > 0? hailArray[count - 1][2]: null
         )
 		hailSelection = count - 1;
 		baseSFCost = hailArray[hailSelection][3];
+		lastAttackType = Combat.LAST_ATTACK_SPELL;
     }
 
 	override protected function usabilityCheck():String {
@@ -55,7 +54,7 @@ public class BladeHailSkill extends AbstractSoulSkill {
 	override public function describeEffectVs(target:Monster):String {
 		var attackRounds:int = hailArray[hailSelection][6];
 		var attacksPerRound:int = hailArray[hailSelection][5]
-		return "~" + Math.round(calcHailDamage() * attacksPerRound * attackRounds) + " magical damage" 
+		return "~" + numberFormat(Math.round(calcHailDamage() * attacksPerRound * attackRounds)) + " magical damage" 
 	}
 
 	override public function calcCooldown():int {
@@ -149,8 +148,6 @@ public class BladeHailSkill extends AbstractSoulSkill {
 	}
 
     override public function doEffect(display:Boolean = true):void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_SPELL;
-
 		if (display) outputText("Letting soulforce leak out around you, you form " + hailArray[hailSelection][1] +
 			" ethereal two meter long weapons in four rows. You thrust your hand outwards and in the blink of an eye, weapons shoot forwards [themonster].  ");
 

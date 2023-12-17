@@ -15,12 +15,13 @@ public class HeartSeekerSkill extends AbstractBloodSoulSkill {
 			: "Heart Seeker will strike the vital points of your enemy, dealing true damage.  ",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING],
+            [TAG_DAMAGING, TAG_PHYSICAL],
             sfInfusion? StatusEffects.KnowsHeartSeekerSF: StatusEffects.KnowsHeartSeeker,
 			true,
 			sfInfusion
         )
 		baseSFCost = 120;
+		lastAttackType = Combat.LAST_ATTACK_PHYS;
     }
 
 	override protected function baseName():String {
@@ -28,7 +29,7 @@ public class HeartSeekerSkill extends AbstractBloodSoulSkill {
 	}
 
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target) + " true damage"
+		return "~" + numberFormat(calcDamage(target)) + " true damage"
 	}
 
 	override public function calcCooldown():int {
@@ -42,6 +43,7 @@ public class HeartSeekerSkill extends AbstractBloodSoulSkill {
 		if (sfInfusion) {
 			damage *= 2;
 			damageFloor *= 3;
+			damage *= soulskillPhysicalMod();
 		}
 
 		if (damage < damageFloor) damage = damageFloor;
@@ -53,7 +55,6 @@ public class HeartSeekerSkill extends AbstractBloodSoulSkill {
 	}
 
     override public function doEffect(display:Boolean = true):void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_PHYS;
 		var additionalSFLine: String = sfInfusion? "You infuse a bit of soulforce into the blood, spreading your fingers wide. " : "";
 		if (display) outputText("You concentrate, focusing on the power of your blood. " + additionalSFLine 
 		+ "Within an instant, a large blood dripping spear forms in your hand. You motion, sending the spear flying toward [themonster]'s vitals.\n\n");

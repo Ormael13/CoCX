@@ -15,10 +15,11 @@ public class DracoSweepSkill extends AbstractSoulSkill {
             "Use a little bit of soulforce to empower your weapon, then sweep ahead hitting as many enemies as possible.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING],
+            [TAG_DAMAGING, TAG_PHYSICAL],
             StatusEffects.KnowsDracoSweep
         )
 		baseSFCost = 50;
+		lastAttackType = Combat.LAST_ATTACK_PHYS;
     }
 
 	override public function get buttonName():String {
@@ -26,7 +27,7 @@ public class DracoSweepSkill extends AbstractSoulSkill {
 	}
 
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target) + " damage"
+		return "~" + numberFormat(calcDamage(target)) + " damage"
 	}
 
 	public function calcDamage(monster:Monster):Number {
@@ -64,7 +65,6 @@ public class DracoSweepSkill extends AbstractSoulSkill {
 	}
 
     override public function doEffect(display:Boolean = true):void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_PHYS;
 		if (display) outputText("You ready your [weapon] and prepare to sweep it towards [themonster].  ");
 		if (monsterDodgeSkill("attack", display)) return;
 

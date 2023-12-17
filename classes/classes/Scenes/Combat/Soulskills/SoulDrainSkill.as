@@ -21,6 +21,7 @@ public class SoulDrainSkill extends AbstractSoulSkill {
 			false
         )
 		baseSFCost = 100;
+		lastAttackType = Combat.LAST_ATTACK_SPELL;
     }
 
     override protected function usabilityCheck():String {
@@ -48,21 +49,21 @@ public class SoulDrainSkill extends AbstractSoulSkill {
 	override public function describeEffectVs(target:Monster):String {
 		var monsterDrain: String;
 		if (target)
-			monsterDrain = "health and drains " + calcSoulforceDrain(target) + " soulforce from the enemy";
+			monsterDrain = " health and drains ~" + numberFormat(calcSoulforceDrain(target)) + " soulforce from the enemy";
 		else
 			monsterDrain = "";
 
-		return "~" + calcDamage(target) + " magical damage, heals " + calcHealAmount() + monsterDrain;
+		return "Deals ~" + numberFormat(calcDamage(target, false)) + " magical damage, heals ~" + numberFormat(calcHealAmount()) + monsterDrain;
 	}
 
-	public function calcDamage(monster:Monster):Number {
+	public function calcDamage(monster:Monster, casting:Boolean = false):Number {
 		var damage:Number = scalingBonusWisdom() + scalingBonusIntelligence();
 		if (damage < 10) damage = 10;
 
 		//soulspell mod effect
 		damage *= spellMod();
 		damage *= soulskillMagicalMod();
-		damage = calcEclypseMod(damage, true);
+		damage = calcEclypseMod(damage, casting);
 
 		//other bonuses
 		if (player.hasPerk(PerkLib.Heroism) && (monster && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType)))) damage *= 2;
@@ -80,12 +81,10 @@ public class SoulDrainSkill extends AbstractSoulSkill {
 	}
 
     override public function doEffect(display:Boolean = true):void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_SPELL;
-
 		if (display) outputText("You reach out with your magic and attempt to tear a part of your opponent soul. [monster his] scream in pain and horror as you attack [monster his] very essence!  ");
 		combat.darkRitualCheckDamage();
 
-		var damage:Number = calcDamage(monster);
+		var damage:Number = calcDamage(monster, true);
 
 		//Determine if critical hit!
 		var crit:Boolean = false;

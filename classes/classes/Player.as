@@ -2623,7 +2623,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.PureAndLoving)) lust *= 0.95;
 			//Berseking reduces lust gains by 10%
 			if (hasStatusEffect(StatusEffects.Berzerking)) lust *= 0.9;
-			if (hasStatusEffect(StatusEffects.Overlimit) || CombatAbilities.FieryRage.isActive()) lust *= 0.9;
+			if (CombatAbilities.Overlimit.isActive() || CombatAbilities.FieryRage.isActive()) lust *= 0.9;
 			if (TyrantiaFollower.TyrantiaTrainingSessions >= 25 && lust100 >= 50) {
 				if (lust100 >= 100) lust *= 0.3;
 				else if (lust100 >= 51) lust *= (1 - ((lust100 - 30) * 0.01));

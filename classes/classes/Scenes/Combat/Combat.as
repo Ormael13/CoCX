@@ -2124,7 +2124,7 @@ public class Combat extends BaseContent {
             if (player.hasStatusEffect(StatusEffects.ChargeWeapon) && !player.isUnarmedCombat()) {
                 doMagicDamage(Math.round(damage * 0.2), true, true);
             }
-			if (weapon == "twin power blades" || weapon == "saw blades") { 
+			if (weapon == "twin power blades" || weapon == "saw blades" || (weapon == "saw blade" && player.hasStatusEffect(StatusEffects.BladeDance))) { 
                 doPhysicalDamage(damage, true, true);
                 if (player.hasStatusEffect(StatusEffects.ChargeWeapon) && !player.isUnarmedCombat()) {
                     doMagicDamage(Math.round(damage * 0.2), true, true);
@@ -6838,7 +6838,7 @@ public class Combat extends BaseContent {
 
     public function statusEffectBonusDamage(damage:Number):Number {
         if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
-        if (player.hasStatusEffect(StatusEffects.Overlimit) || CombatAbilities.FieryRage.isActive()) damage *= 2;
+        if (CombatAbilities.Overlimit.isActive() || CombatAbilities.FieryRage.isActive()) damage *= 2;
         if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
         return damage;
     }
@@ -10189,24 +10189,6 @@ public class Combat extends BaseContent {
             } else player.addStatusValue(StatusEffects.TeasePotion, 2, -1);
         }
         //Spell buffs
-        //Violet Pupil Transformation
-        if (player.hasStatusEffect(StatusEffects.VioletPupilTransformation)) {
-			var cm1:Number = 0.05;
-			if (player.isRaceCached(Races.UNICORN, 2)) cm1 -= 0.01;
-            if (player.isRaceCached(Races.ALICORN, 2)) cm1 -= 0.01;
-			var cost1:Number = Math.round(player.maxSoulforce()*cm1);
-            if (player.soulforce < cost1) {
-                player.removeStatusEffect(StatusEffects.VioletPupilTransformation);
-                outputText("<b>Your soulforce is too low to continue using Violet Pupil Transformation. </b>\n\n");
-            } else {
-                EngineCore.SoulforceChange(-cost1);
-				var hcm1:Number = 0.05;
-                if (player.isRaceCached(Races.ALICORN, 2)) hcm1 += 0.01;
-                var hpChange1:int = Math.round(player.maxHP()*hcm1);
-                outputText("<b>As your soulforce is drained you can feel Violet Pupil Transformation's regenerative power spreading throughout your body. ([font-heal]+" + hpChange1 + "[/font])</b>\n\n");
-                HPChange(hpChange1, false);
-            }
-        }
         //Goblin Mech Stimpack
         if (player.hasStatusEffect(StatusEffects.GoblinMechStimpack)) {
             if (player.statusEffectv1(StatusEffects.GoblinMechStimpack) <= 0) {
@@ -11120,7 +11102,7 @@ public class Combat extends BaseContent {
                 if (player.perkv1(IMutationsLib.HinezumiBurningBloodIM) >= 3) healingPercent += 0.5;
             }
             if (player.headJewelry == headjewelries.CUNDKIN && player.HP < 1) healingPercent += 1;
-            if (player.hasStatusEffect(StatusEffects.Overlimit) || CombatAbilities.FieryRage.isActive()) healingPercent -= 10;
+            if (CombatAbilities.Overlimit.isActive() || CombatAbilities.FieryRage.isActive()) healingPercent -= 10;
 			if (player.hasStatusEffect(StatusEffects.GreenCovenant)) healingPercent += 25;
             if (player.hasPerk(PerkLib.Ferocity) && player.HP < 1) negativeHPRegen -= 1;
             if ((player.hasPerk(PerkLib.Diehard) || player.hasPerk(PerkLib.GreaterDiehardEx)) && !player.hasPerk(PerkLib.EpicDiehard) && player.HP < 1) negativeHPRegen -= 1;

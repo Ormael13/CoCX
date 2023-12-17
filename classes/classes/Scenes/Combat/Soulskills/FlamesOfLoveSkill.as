@@ -1,10 +1,7 @@
 package classes.Scenes.Combat.Soulskills {
-import classes.PerkLib;
 import classes.Scenes.Combat.AbstractSoulSkill;
 import classes.StatusEffects;
-import classes.IMutations.IMutationsLib;
 import classes.Monster;
-import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Combat.Combat;
 
 public class FlamesOfLoveSkill extends AbstractSoulSkill {
@@ -14,9 +11,10 @@ public class FlamesOfLoveSkill extends AbstractSoulSkill {
             "Enfuse your magic with your burning lust, transfering it to your enemy as a barrage of flames.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING, TAG_FIRE, TAG_RECOVERY],
+            [TAG_DAMAGING, TAG_FIRE, TAG_RECOVERY, TAG_MAGICAL],
             StatusEffects.KnowsFlamesOfLove
         )
+		lastAttackType = Combat.LAST_ATTACK_SPELL;
     }
 
 	override public function get buttonName():String {
@@ -36,7 +34,7 @@ public class FlamesOfLoveSkill extends AbstractSoulSkill {
 
 	override public function describeEffectVs(target:Monster):String {
 		var lustRestore: Number = calcLustRestore();
-		return "~" + calcDamage(target, lustRestore) + " fire damage, restores " + lustRestore + " lust";
+		return "~" + numberFormat(calcDamage(target, lustRestore)) + " fire damage, restores ~" + numberFormat(lustRestore) + " lust";
 	}
 
 	override public function calcCooldown():int {
@@ -62,8 +60,6 @@ public class FlamesOfLoveSkill extends AbstractSoulSkill {
 	}
 
     override public function doEffect(display:Boolean = true):void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_SPELL;
-
 		var lustRestore:Number = calcLustRestore();
 		player.lust -= lustRestore;
 

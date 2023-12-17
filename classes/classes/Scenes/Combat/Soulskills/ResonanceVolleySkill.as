@@ -10,7 +10,7 @@ public class ResonanceVolleySkill extends AbstractSoulSkill {
             "Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING],
+            [TAG_DAMAGING, TAG_PHYSICAL],
             PerkLib.WildWarden,
 			false
         )
