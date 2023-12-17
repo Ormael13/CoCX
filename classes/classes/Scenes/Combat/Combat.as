@@ -267,7 +267,7 @@ public class Combat extends BaseContent {
 
     internal function applyAutocast0():void {
         outputText("\n\n");
-        if (flags[kFLAGS.AUTO_FLIGHT] > 0) {
+        if (flags[kFLAGS.AUTO_FLIGHT] > 0 && !player.hasStatusEffect(StatusEffects.FlyingDisabled)) {
             if (flags[kFLAGS.AUTO_FLIGHT] == 1 && player.canFly()) {
                 if (player.wings.type == Wings.WINDY_AURA && player.arms.type == Arms.KAMAITACHI) outputText("You create a small cyclone to ride upon and lift yourself up in the air.");
                 else if (player.wings.type == Wings.THUNDEROUS_AURA) outputText("You take flight, letting the raging storm carry you into the air.");
@@ -871,9 +871,15 @@ public class Combat extends BaseContent {
 			}
 		}
         if (!player.isFlying()) {
-            if (player.canFly()) buttons.add("Take Flight", takeFlightWings).hint("Make use of your wings or other options avilable to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
-			if (player.weaponFlyingSwordsName != "nothing" && player.canFlyOnFlyingSwords()) buttons.add("Take Flight", takeFlightByFlyingSword).hint("Make use of your flying sword to take flight into the air. \n\nSoulforce cost per turn: "+flyingSwordUseCost()+" \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
-			if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) buttons.add("Take Flight", takeFlightNoWings).hint("Use your own soulforce to take flight into the air. \n\nSoulforce cost per turn: "+flyingWithSoulforceCost()+" \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
+            if (player.canFly()) buttons.add("Take Flight", takeFlightWings)
+                .hint("Make use of your wings or other options avilable to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.")
+                .disableIf(player.hasStatusEffect(StatusEffects.FlyingDisabled), "You're being prevented from taking flight!");
+			if (player.weaponFlyingSwordsName != "nothing" && player.canFlyOnFlyingSwords()) buttons.add("Take Flight", takeFlightByFlyingSword)
+                .hint("Make use of your flying sword to take flight into the air. \n\nSoulforce cost per turn: "+flyingSwordUseCost()+" \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.")
+                .disableIf(player.hasStatusEffect(StatusEffects.FlyingDisabled), "You're being prevented from taking flight!");
+			if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) buttons.add("Take Flight", takeFlightNoWings)
+                .hint("Use your own soulforce to take flight into the air. \n\nSoulforce cost per turn: "+flyingWithSoulforceCost()+" \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.")
+                .disableIf(player.hasStatusEffect(StatusEffects.FlyingDisabled), "You're being prevented from taking flight!");
         }
 		if (player.isFlying()) {
 			if (player.statusEffectv2(StatusEffects.Flying) == 1) buttons.add("Land", landAfterUsingFlyingSword);
@@ -7640,8 +7646,8 @@ public class Combat extends BaseContent {
 			}
 			if (player.perkv1(PerkLib.ElementalBody) == 4) {
 				monster.statStore.addBuffObject({str:-10,spe:-10}, "Poison",{text:"Poison"});
-				if (monster.hasStatusEffect(StatusEffects.Frostbite)) monster.addStatusValue(StatusEffects.Frostbite,1,1);
-				else monster.createStatusEffect(StatusEffects.Frostbite,1,0,0,0);
+				if (monster.hasStatusEffect(StatusEffects.FrostburnDoT)) monster.addStatusValue(StatusEffects.FrostburnDoT,1,1);
+				else monster.createStatusEffect(StatusEffects.FrostburnDoT,4,0,0,0);
 			}
 		}
         if (player.hasPerk(PerkLib.PoisonNails) && player.isFistOrFistWeapon()) {
@@ -10368,7 +10374,10 @@ public class Combat extends BaseContent {
 		//Flying disabled
 		if (player.hasStatusEffect(StatusEffects.FlyingDisabled)) {
 			player.addStatusValue(StatusEffects.FlyingDisabled, 1, -1);
-			if (player.statusEffectv1(StatusEffects.Flying) <= 0) player.removeStatusEffect(StatusEffects.FlyingDisabled);
+			if (player.statusEffectv1(StatusEffects.FlyingDisabled) <= 0) { 
+                player.removeStatusEffect(StatusEffects.FlyingDisabled);
+                outputText("<b>You're no longer restricted from flying!</b>\n\n");
+            }
 		}
         // Cooldowns
         for (var i:int = 0; i < player.cooldowns.length; i++) {
@@ -14953,7 +14962,7 @@ public function runAway(callHook:Boolean = true):void {
 			}
 		}
 	}
-    else if (player.canFly()) {
+    else if (player.canFly() && !player.hasStatusEffect(StatusEffects.FlyingDisabled)) {
         var wingsNoFlap:Array = [Wings.ETHEREAL, Wings.LEVITATION, Wings.THUNDEROUS_AURA, Wings.WINDY_AURA];
         if(!(wingsNoFlap.indexOf(player.wings.type) >= 0)){
             outputText("Gritting your teeth with effort, you beat your wings quickly and lift off!  ");
@@ -14988,7 +14997,7 @@ public function runAway(callHook:Boolean = true):void {
         if (player.hasKeyItem("Rocket Boots") >= 0) escapeMod -= 40;
         if (player.hasKeyItem("Spring Boots") >= 0) escapeMod -= 60;
     }
-    if (player.canFly()) escapeMod -= 20;
+    if (player.canFly() && !player.hasStatusEffect(StatusEffects.FlyingDisabled)) escapeMod -= 20;
 
     //Big tits doesn't matter as much if ya can fly!
     else {
@@ -15086,7 +15095,7 @@ public function runAway(callHook:Boolean = true):void {
     //SUCCESSFUL FLEE
     if ((player.spe > rand(monster.spe + escapeMod)) || monster.hasPerk(PerkLib.AlwaysSuccesfullRunaway)) {
         //Fliers flee!
-        if (player.canFly()) outputText("[Themonster] can't catch you.");
+        if (player.canFly() && !player.hasStatusEffect(StatusEffects.FlyingDisabled)) outputText("[Themonster] can't catch you.");
         //sekrit benefit: if you have coon ears, coon tail, and Runner perk, change normal Runner escape to flight-type escape
         else if (player.tailType == Tail.RACCOON && player.ears.type == Ears.RACCOON && player.hasPerk(PerkLib.Runner)) {
             outputText("Using your running skill, you build up a head of steam and jump, then spread your arms and flail your tail wildly; your opponent dogs you as best [monster he] can, but stops and stares dumbly as your spastic tail slowly propels you several meters into the air!  You leave [monster him] behind with your clumsy, jerky, short-range flight.");
@@ -15134,7 +15143,7 @@ public function runAway(callHook:Boolean = true):void {
             return;
         }
         //Flyers get special failure message.
-        if (player.canFly()) {
+        if (player.canFly() && !player.hasStatusEffect(StatusEffects.FlyingDisabled)) {
             if (monster.plural) outputText("[Themonster] manage to grab your [legs] and drag you back to the ground before you can fly away!");
             else outputText("[Themonster] manages to grab your [legs] and drag you back to the ground before you can fly away!");
         }

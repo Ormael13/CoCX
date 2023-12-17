@@ -67,6 +67,11 @@ use namespace CoC;
 			player.takePhysDamage((50 + (player.thickness * 2)), true);
 			outputText(" <b>There is no way you will be able to fly in these conditions!</b>\n\n");
 			player.createStatusEffect(StatusEffects.FlyingDisabled, 5, 0, 0, 0);
+			player.removeStatusEffect(StatusEffects.Flying);
+			if (player.hasStatusEffect(StatusEffects.FlyingNoStun)) {
+				player.removeStatusEffect(StatusEffects.FlyingNoStun);
+				player.removePerk(PerkLib.Resolute);
+			}
 		}
 		
 		override protected function performCombatAction():void

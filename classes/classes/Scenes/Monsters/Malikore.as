@@ -82,7 +82,7 @@ use namespace CoC;
 			var lustdmg:Number = Math.round(this.lib / 3);
 			player.takeLustDamage(lustdmg, true);
 			player.takePhysDamage(boobcrashdmg, true);
-			player.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
+			if (!player.hasPerk(PerkLib.Resolute)) player.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 			removeStatusEffect(StatusEffects.Flying);
 		}
 

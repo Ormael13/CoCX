@@ -176,8 +176,8 @@ public class FusionSpecial4thSkill extends AbstractMagicSpecial {
                                                 doWaterDamage(damage, true, display);
                                                 if (player.isFistOrFistWeapon() && player.hasPerk(PerkLib.ElementalTouch)) {
                                                     monster.statStore.addBuffObject({str:-10,spe:-10}, "Poison",{text:"Poison"});
-                                                    if (monster.hasStatusEffect(StatusEffects.Frostbite)) monster.addStatusValue(StatusEffects.Frostbite,1,1);
-                                                    else monster.createStatusEffect(StatusEffects.Frostbite,1,0,0,0);
+                                                    if (monster.hasStatusEffect(StatusEffects.FrostburnDoT)) monster.addStatusValue(StatusEffects.FrostburnDoT,1,1);
+                                                    else monster.createStatusEffect(StatusEffects.FrostburnDoT,4,0,0,0);
                                                 }
                                                 if (rand(2) == 0 && !monster.hasPerk(PerkLib.Resolute) && !monster.monsterIsStunned()) {
                                                     outputText("\nThe experience leaves [Themonster] dazed!");
