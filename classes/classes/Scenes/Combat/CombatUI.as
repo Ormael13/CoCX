@@ -563,47 +563,9 @@ public class CombatUI extends BaseCombatContent {
 				doBloodPuppiesTurn();
 			//UNIQUE OPTIONS - No changes applied, player turn, no status/CC
 			else {
-				if (monster is SandTrap) {
-					btnSpecial1.show("Climb", combat.wait2, "Climb the sand to move away from the sand trap.");
-				}
-				else if (monster is Alraune) {
-					if (player.fatigueLeft() < 50) btnSpecial1.disable("You're too tired to struggle.");
-					else btnSpecial1.show("Struggle", combat.wait2, "Struggle to forcefully pull yourself a good distance away from plant woman.");
-				}
-				else if (monster is DriderIncubus) {
-					var drider:DriderIncubus = monster as DriderIncubus;
-					if (!drider.goblinFree) btnSpecial1.show("Free Goblin", drider.freeGoblin);
-				}
-				else if (monster is MinotaurKing) {
-					var minoking:MinotaurKing = monster as MinotaurKing;
-					if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.companionsInPCParty()) btnSpecial1.show("Dish Helper", SceneLib.hexindao.dishHelper);
-					else btnSpecial1.showDisabled("Dish Helper", "You don't have anyone to take care of "+(player.hasStatusEffect(StatusEffects.SoulArena)?"cow maid":"Excellia")+"!");
-				}
-				else if (monster is AngelLR && player.hasStatusEffect(StatusEffects.SoulArena)) {
-					if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.companionsInPCParty()) btnSpecial1.show("Dish Helper", SceneLib.hexindao.dishHelperIL);
-					else btnSpecial1.showDisabled("Dish Helper", "You don't have anyone to take care of second angel!");
-				}
-				else if (monster is TwinBosses) {
-					if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.companionsInPCParty()) btnSpecial1.show("Dish Helper", SceneLib.dungeons.riverdungeon.dishHelperTB);
-					else btnSpecial1.showDisabled("Dish Helper", "You don't have anyone to take care of other twin!");
-				}
-				else if (monster is Lethice) {
-					var lethice:Lethice = monster as Lethice;
-					if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles)) {
-						if (player.lust < combat.magic.getWhiteMagicLustCap() && player.hasStatusEffect(StatusEffects.KnowsWhitefire)
-							&& ((!player.hasPerk(PerkLib.BloodMage) && player.mana >= 30) || (player.hasStatusEffect(StatusEffects.BloodMage) && ((player.HP + 30) > (player.minHP() + 30))))) {
-							btnSpecial1.show("Dispel", lethice.dispellRapetacles);
-						}
-					}
+				// Migrate Sand Trap/Alruine/Drider Incubus/Minotaur King/AngelLR/TwinBosses/Lethice/WoodElvesHuntingParty
+				monster.postPlayerBusyBtnSpecial(btnSpecial1,btnSpecial2);
 
-					//Enable Lethice Adaption for player actions
-        			if (lethice.fightPhase != 2) lethice.deflectActive = true;
-				}
-				else if (monster is WoodElvesHuntingParty) {
-					var woodelves:WoodElvesHuntingParty = monster as WoodElvesHuntingParty;
-					if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0) btnSpecial1.show("Pick (M)", woodelves.pickUpMelee, "Pick up your melee weapon.");
-					if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0) btnSpecial2.show("Pick (R)", woodelves.pickUpRange, "Pick up your range weapon.");
-				}
 				if ((player.weaponRange == weaponsrange.GTHRSPE && player.ammo <= 15) || ((player.weaponRange == weaponsrange.ATKNIFE || player.weaponRange == weaponsrange.RTKNIFE || player.weaponRange == weaponsrange.STKNIFE || player.weaponRange == weaponsrange.TTKNIFE) && player.ammo <= 10)
 				|| ((player.weaponRange == weaponsrange.GTHRAXE || player.weaponRange == weaponsrange.O_JAVEL || player.weaponRange == weaponsrange.TRJAVEL) && player.ammo <= 5)) {
 					btnSpecial3.show("Pick", combat.pickUpThrownWeapons, "Pick up some of the thrown weapons.");
@@ -815,6 +777,9 @@ public class CombatUI extends BaseCombatContent {
 			: num == 1 ? flags[kFLAGS.PLAYER_COMPANION_1]
 				: num == 2 ? flags[kFLAGS.PLAYER_COMPANION_2]
 					: flags[kFLAGS.PLAYER_COMPANION_3];
+		if(!monster.preCompanionSeal(companionName)){
+			return;
+		}
 		var actFunction:Function = companionName == "Alvina" ? combat.comfoll.alvinaCombatActions
 			: companionName == "Amily" ? combat.comfoll.amilyCombatActions
 				: companionName == "Aurora" ? combat.comfoll.auroraCombatActions
@@ -840,6 +805,7 @@ public class CombatUI extends BaseCombatContent {
 			menu();
 			addButton(0, "Next", combatMenu, false);
 		}
+		monster.postCompanionAction();
 	}
 
 	private function BuildSpellBookMenu(buttons:ButtonDataList):void {

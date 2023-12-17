@@ -2568,10 +2568,21 @@ import classes.Scenes.Combat.CombatAbilities;
 		 */
 		public function preMeleeMissed():void{
 			outputText("You swing your [weapon] ferociously, confident that you can strike a crushing blow. In your confidence, you focus too much on force, and not where your swing is headed. You miss, your enemy barely needing to move to evade your blow.\n");
-     }
-     
+     	}
+
+		/**
+		 * <p>CombatUI.mainMenu() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called after passing playerBusy check</li>
+		 *     <li>Used to modify button in the bottom left corner</li>
+		 * </ul>
+		 */
+		public function postPlayerBusyBtnSpecial(btnSpecial1:CoCButton,btnSpecial2:CoCButton):void{
+
+		}
+
 		/** 
-     * <p>CombatUI.mainMenuWhenBound() Override Series - Part 1 (Ongoing maybe)</p>
+     	 * <p>CombatUI.mainMenuWhenBound() Override Series - Part 1 (Ongoing maybe)</p>
 		 * <ul>
 		 *     <li>Called after passing playerWhenBound() check</li>
 		 *     <li>thus you need to add the array for playerWhenBound() check for new bind abilities</li>
@@ -2751,6 +2762,29 @@ import classes.Scenes.Combat.CombatAbilities;
 		 */
 		public function handleStatusEffects(statusEffect:StatusEffectType):Boolean{
 			return false;
+		}
+
+		/**
+		 * <p>CombatUI.doCompanionTurn() Override Series - Part 1</p>
+		 * <ul>
+		 *     <li>Called at the beginning of the doCompanionTurn()</li>
+		 *     <li>return false to skip companion action</li>
+		 *     <li>Default: true (Function executed as usual)</li>
+		 * </ul>
+		 */
+		public function preCompanionSeal(companionName:String):Boolean{
+			return true;
+		}
+
+		/**
+		 * <p>CombatUI.doCompanionTurn() Override Series - Part 2</p>
+		 * <ul>
+		 *     <li>Called at the end of the doCompanionTurn()</li>
+		 *     <li>used to perform monster gimmick</li>
+		 * </ul>
+		 */
+		public function postCompanionAction():void{
+
 		}
 
 		/**

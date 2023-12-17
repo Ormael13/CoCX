@@ -9,8 +9,10 @@ package classes.Scenes.Monsters
 	import classes.BodyParts.Wings;
 	import classes.Scenes.SceneLib;
 	import classes.internals.ChainedDrop;
-	
-	public class AngelLR extends AbstractAngel
+
+import coc.view.CoCButton;
+
+public class AngelLR extends AbstractAngel
 	{
 		private function angelReactsToLustiness():void {
 			outputText("Angel with it lil helpers stops their actions clearly overflowing with lust.");
@@ -95,6 +97,12 @@ package classes.Scenes.Monsters
 			var choice:Number = rand(5);
 			if (choice == 0) AngelEnergyRays();
 			if (choice > 0) AngelBaseAttack();
+		}
+		override public function postPlayerBusyBtnSpecial(btnSpecial1:CoCButton, btnSpecial2:CoCButton):void{
+			if (player.hasStatusEffect(StatusEffects.SoulArena)) {
+				if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.companionsInPCParty()) btnSpecial1.show("Dish Helper", SceneLib.hexindao.dishHelperIL);
+				else btnSpecial1.showDisabled("Dish Helper", "You don't have anyone to take care of second angel!");
+			}
 		}
 		private function soulfieldsustaincost():Number {
 			var sfsc:Number = 10;

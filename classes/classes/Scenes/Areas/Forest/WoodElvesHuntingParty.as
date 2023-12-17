@@ -16,6 +16,8 @@ import classes.Items.WeaponRangeLib;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
+import coc.view.CoCButton;
+
 public class WoodElvesHuntingParty extends Monster
 	{
 		override public function defeated(hpVictory:Boolean):void
@@ -127,6 +129,11 @@ public class WoodElvesHuntingParty extends Monster
 			EngineCore.statScreenRefresh();
             SceneLib.combat.enemyAIImpl();
         }
+
+		override public function postPlayerBusyBtnSpecial(btnSpecial1:CoCButton, btnSpecial2:CoCButton):void{
+				if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0) btnSpecial1.show("Pick (M)", pickUpMelee, "Pick up your melee weapon.");
+				if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0) btnSpecial2.show("Pick (R)", pickUpRange, "Pick up your range weapon.");
+		}
 
 		override public function preAttackSeal():Boolean
 		{
