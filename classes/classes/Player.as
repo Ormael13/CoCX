@@ -1373,8 +1373,7 @@ use namespace CoC;
 		}
 		public function progressBloodDemon():Number
 		{
-			var progressBD:Number = 1;
-			if (hasPerk(PerkLib.WayOfTheBlood)) progressBD += 1;
+			var progressBD:Number = 2;
 			if (hasPerk(PerkLib.BloodDemonToughness)) progressBD += 1;
 			if (hasPerk(PerkLib.MyBloodForBloodPuppies)) progressBD += 1;
 			if (hasPerk(PerkLib.YourPainMyPower)) progressBD += 1;

@@ -112,7 +112,6 @@ public class AbstractSpell extends CombatAbility {
 	protected function postSpellEffect(display:Boolean = true):void {
 		MagicAddonEffect(magicAddonProcs);
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-		//if (player.hasPerk(PerkLib.WayOfTheBlood)) 
 		if (monster is SiegweirdBoss) (monster as SiegweirdBoss).castedSpellThisTurn = true;
 	}
 	

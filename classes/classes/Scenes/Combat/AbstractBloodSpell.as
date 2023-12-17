@@ -1,4 +1,5 @@
 package classes.Scenes.Combat {
+import classes.PerkLib;
 import classes.StatusEffects;
 
 public class AbstractBloodSpell extends AbstractSpell {
@@ -48,9 +49,13 @@ public class AbstractBloodSpell extends AbstractSpell {
 	}
 
 	protected function endTurnByBloodSkillUse(display:Boolean = true):void {
-		if (rand(20) < 4 && inflictBleed && !monster.isImmuneToBleed()) {
+		var chance:Number = 20;
+		if (player.hasPerk(PerkLib.WayOfTheBlood)) chance += (5 * player.progressBloodDemon());
+		if (rand(100) < chance && inflictBleed && !monster.isImmuneToBleed()) {
+			var magn:Number = 0.05;
+			if (player.hasPerk(PerkLib.WayOfTheBlood)) chance += (0.02 * player.progressBloodDemon());
 			if (monster.hasStatusEffect(StatusEffects.Hemorrhage)) monster.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
-			else monster.createStatusEffect(StatusEffects.Hemorrhage, 2, 0.05, 0, 0);
+			else monster.createStatusEffect(StatusEffects.Hemorrhage, 2, magn, 0, 0);
 			if (display) outputText(" The attack leaves many bloody gashes.");
 		}
 		if (display) outputText("\n\n");
