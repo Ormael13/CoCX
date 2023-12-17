@@ -15,6 +15,7 @@ import classes.Items.Alchemy.AlchemyLib;
 import classes.Races.GargoyleRace;
 import classes.Races.ImpRace;
 import classes.Scenes.*;
+import classes.Scenes.Camp.CampStatsAndResources;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
@@ -2548,11 +2549,17 @@ public class SaveUpdater extends NPCAwareContent {
 				}
 				
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.20;
-			}/*
+			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.21) {
-				
+				outputText("move camp resources and stats to dedicated class");
+				CampStatsAndResources.EnergyCoreResc = flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES];
+				CampStatsAndResources.MetalPieces = flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES];
+				CampStatsAndResources.MechanismResc = flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES];
+				CampStatsAndResources.StonesResc = flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES];
+				CampStatsAndResources.WoodResc = flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES];
+				CampStatsAndResources.NailsResc = flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES];
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.21;
-			}*/
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 		}
