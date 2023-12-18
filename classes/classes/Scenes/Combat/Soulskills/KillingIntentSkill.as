@@ -51,7 +51,7 @@ public class KillingIntentSkill extends AbstractSoulSkill {
 		if (player.hasPerk(PerkLib.SoulOverlord)) cap += 10;
 		if (player.hasPerk(PerkLib.SoulTyrant)) cap += 10;
 		if (player.hasPerk(PerkLib.SoulKing)) cap += 10;
-		if (player.hasPerk(PerkLib.SoulEmperor)) cap = -1;
+		if (player.hasPerk(PerkLib.SoulEmperor)) cap += 10;
     
 		return cap;
 	}

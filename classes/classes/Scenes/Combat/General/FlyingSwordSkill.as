@@ -6,6 +6,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Combat.Combat;
 import classes.Scenes.Camp.TrainingDummy;
 import classes.Scenes.Combat.AbstractGeneral;
+import classes.CoC;
 
 public class FlyingSwordSkill extends AbstractGeneral {
 	public var preTurnAttack:Boolean = false;
@@ -25,7 +26,8 @@ public class FlyingSwordSkill extends AbstractGeneral {
         var uc:String =  super.usabilityCheck();
         if (uc) return uc;
 
-		if (player.hasStatusEffect(StatusEffects.Flying) && player.statusEffectv2(StatusEffects.Flying) == 1) {
+		//Cannot attack with a single flying sword while flying on it, but having more than 1 is fine
+		if (player.hasStatusEffect(StatusEffects.Flying) && player.statusEffectv2(StatusEffects.Flying) == 1 && player.weaponFlyingSwords.count == 1) {
 			return "You're currently using your sword to fly, you can't attack with it as well.";
 		}
 
@@ -34,7 +36,14 @@ public class FlyingSwordSkill extends AbstractGeneral {
 
 	override public function describeEffectVs(target:Monster):String {
 		var element:String = AllTags[player.weaponFlyingSwords.element].name.toLowerCase();
-		return "Deals ~" + numberFormat(calcDamage(target)) + " " + element +" damage.";
+		
+		var hitCounter:int = player.weaponFlyingSwords.count;
+		//If flying on flying sword, take 1 sword away for calculations
+		if (CoC.instance.inCombat && player.hasStatusEffect(StatusEffects.Flying) && player.statusEffectv2(StatusEffects.Flying) == 1) {
+			hitCounter--;
+		}
+
+		return "Deals ~" + numberFormat(calcDamage(target) * hitCounter) + " " + element +" damage.";
 	}
 
 	override public function get isKnown():Boolean {
@@ -61,21 +70,18 @@ public class FlyingSwordSkill extends AbstractGeneral {
 		}
 
 		damage *= 1 + player.perkv1(PerkLib.FlyingSwordPath);
-		damage = combat.flyingSwordAttackModifier(damage);
 
 		//Weapon addition!
 		damage = combat.flyingSwordAttackModifier(damage);
 		if (player.weaponFlyingSwords.perk == "Large") damage *= 4;
 		if (player.weaponFlyingSwords.perk == "Massive") damage *= 10;
-		//if (player.hasPerk(PerkLib.SoaringBlades)) damage *= 1;
+		
 		var sizeMatters:Number = 1;
 		sizeMatters += (0.01 * combat.masterySwordLevel());
 		if (player.weaponFlyingSwords.perk == "Small") sizeMatters += 0.01 * combat.weaponSizeSmall();
 		else if (player.weaponFlyingSwords.perk == "Large") sizeMatters += 0.01 * combat.weaponSizeLarge();
 		else if (player.weaponFlyingSwords.perk == "Massive") sizeMatters += 0.01 * combat.weaponSizeMassive();
 		else if (player.weaponFlyingSwords.perk == "") sizeMatters += 0.01 * combat.weaponSizeNormal();
-
-		
 
 		return Math.round(damage);
 	}
@@ -94,10 +100,16 @@ public class FlyingSwordSkill extends AbstractGeneral {
 			damage *= 1.75;
 		}
 
+		var hitCounter:int = player.weaponFlyingSwords.count;
+		//If flying on flying sword, take 1 sword away for calculations
+		if (player.hasStatusEffect(StatusEffects.Flying) && player.statusEffectv2(StatusEffects.Flying) == 1) {
+			hitCounter--;
+		}
+
 		damage = Math.round(damage);
 
 		if (display) outputText("You send a bit of soulforce to " + player.weaponFlyingSwordsName+" and direct it towards [themonster]. " + 
-			(player.usingSingleFlyingSword()?"It slashes":"They slash") + " the target, leaving " + (player.usingSingleFlyingSword()?"a minor wound":"minor wounds") + ". ");
+			(hitCounter == 1?"It slashes":"They slash") + " the target, leaving " + (hitCounter == 1?"a minor wound":"minor wounds") + ". ");
 
 		var damageFunc:Function;
 		switch(player.weaponFlyingSwords.element) {
@@ -112,9 +124,6 @@ public class FlyingSwordSkill extends AbstractGeneral {
 			default: 					damageFunc = doPhysicalDamage;
 										break;
 		}
-
-		
-		var hitCounter:int = player.weaponFlyingSwords.count;
 
 		for(var hit:int = 0; hit < hitCounter; hit++)
 		{

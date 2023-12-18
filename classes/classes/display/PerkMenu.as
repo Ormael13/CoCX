@@ -9,6 +9,7 @@ import classes.CoC;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutationPerkType;
 import classes.IMutations.*;
+import classes.internals.Utils;
 import classes.Parser.Parser;
 import classes.PerkClass;
 import classes.PerkLib;
@@ -103,6 +104,10 @@ public class PerkMenu extends BaseContent {
 		addButton(8, "Misc Opt",MiscOption);
 		//addButton(10, "Number of", EngineCore.doNothing);
 		//addButton(11, "perks: " + player.perks.length, EngineCore.doNothing);
+		if (player.hasPerk(PerkLib.FirstAttackFlyingSword)) {
+			outputText("\n<b>You can adjust your Flying Sword behaviour during combat.</b>");
+			addButton(12, "Flying Sword", flyingSwordBehaviourOptions);
+		}
 		outputText("\n<b>You can choose and adjust how you minions behave in battle.</b>");
 		addButton(13, "Minions", minionOptions);
 		if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
@@ -221,10 +226,6 @@ public class PerkMenu extends BaseContent {
 		if (player.hasPerk(PerkLib.JobLeader)) {
 			outputText("\n<b>You can adjust your Will-o'-the-wisp behaviour during combat.</b>");
 			bd.add("Will-o'-the-wisp", wotwBehaviourOptions);
-		}
-		if (player.hasPerk(PerkLib.FirstAttackFlyingSword)) {
-			outputText("\n<b>You can adjust your Flying Sword behaviour during combat.</b>");
-			bd.add("Flying Sword", flyingSwordBehaviourOptions);
 		}
 		if (player.hasPerk(PerkLib.MummyLord) && player.perkv1(PerkLib.MummyLord) > 0) {
 			outputText("\n<b>You can adjust the behaviour of your mummies during combat.</b>");
@@ -829,16 +830,27 @@ public class PerkMenu extends BaseContent {
 	public function flyingSwordBehaviourOptions():void {
 		clearOutput();
 		menu();
-		outputText("You can choose how your will-o'-the-wisp will behave during each fight.\n\n");
+		outputText("You can choose how your flying sword will behave during each fight.\n\n");
 		outputText("\n<b>Flying Sword behaviour:</b>\n");
 		if (flags[kFLAGS.FLYING_SWORD] == 0) outputText("Your flying sword will not attack");
-		if (flags[kFLAGS.FLYING_SWORD] == 1) outputText("Your flying sword will attack at the begining of each turn.");
+		if (flags[kFLAGS.FLYING_SWORD] == 1) {
+			outputText("Your flying sword will attack at the begining of each turn.");
+			if ((player.hasStatusEffect(StatusEffects.Flying) && player.statusEffectv2(StatusEffects.Flying) == 1) || flags[kFLAGS.AUTO_FLIGHT] == 2) {
+				outputText("\n<b>Since you are using your flying sword to fly, ");
+				var flyingSwordCount:int = player.weaponFlyingSwords.count;
+				if (flyingSwordCount > 1) {
+					outputText("you will only deal " + Utils.numberOfThings(flyingSwordCount - 1, "attack") + ".</b>");
+				} else {
+					outputText("you can't attack with your flying sword. Use a different way to fly, or stay on the ground.</b>");
+				}
+			}
+		}
 		addButton(10, "Disable", toggleFlag, flyingSwordBehaviourOptions, kFLAGS.FLYING_SWORD)
 			.disableIf(flags[kFLAGS.FLYING_SWORD] == 0);
 		addButton(11, "Enable", toggleFlag, flyingSwordBehaviourOptions, kFLAGS.FLYING_SWORD)
 			.disableIf(flags[kFLAGS.FLYING_SWORD] == 1);
 
-		addButton(14, "Back", minionOptions);
+		addButton(14, "Back", CoC.instance.inCombat ? curry(combat.combatMenu, false) : displayPerks);
 	}
 
 	public function mummyBehaviourOptions():void {

@@ -7016,11 +7016,6 @@ public class PerkLib
             //Tier 1
             //Tier 2
             //Tier 3
-			AlchemicalTolerance.requirePerk(JobSoulCultivator)
-								.requireLevel(18)
-								.requireCustomFunction(function (player:Player):Boolean {
-									return Crafting.alembicLevel >= 1;
-								}, "Alchemy Level 1 or higher");
 			KillingIntent.requirePerk(JobSoulCultivator)
 								.requireLevel(20);
 			FirstAttackFlyingSword.requirePerks(SoaringBlades, SoulWarrior)
@@ -7481,7 +7476,12 @@ public class PerkLib
 					.requireCustomFunction(function (player:Player):Boolean {
                         return player.isAnyRaceCached(Races.SLIME, Races.DARKSLIME, Races.MAGMASLIME, Races.MANTICORE, Races.DISPLACERBEAST, Races.VAMPIRE, Races.DRACULA) || CoC.instance.flags[kFLAGS.HUNGER_ENABLED] > 0;
                     }, "Slime, Manticore, Displacer beast, Vampire, Dracula race or hunger enabled.");
-            //Tier 4
+            AlchemicalTolerance.requirePerk(JobSoulCultivator)
+								.requireLevel(18)
+								.requireCustomFunction(function (player:Player):Boolean {
+									return Crafting.alembicLevel >= 1;
+								}, "Alchemy Level 1 or higher");
+			//Tier 4
 			ChimericalBodySemiImprovedStage.requirePerk(ChimericalBodyBasicStage)
                     .requireLevel(24)
                     .requireCustomFunction(function (player:Player):Boolean {
