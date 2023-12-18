@@ -1371,6 +1371,14 @@ use namespace CoC;
 		{
 			return perkv1(IMutationsLib.SlimeFluidIM) >= 1;
 		}
+		public function immuneToBurn():Boolean
+		{
+			return hasAnyPerk(PerkLib.FireAffinity, PerkLib.AffinityIgnis);
+		}
+		public function immuneToAcid():Boolean
+		{
+			return hasPerk(PerkLib.AcidAffinity);
+		}
 		public function progressBloodDemon():Number
 		{
 			var progressBD:Number = 2;

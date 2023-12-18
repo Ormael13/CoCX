@@ -1990,6 +1990,56 @@ import classes.Scenes.Combat.CombatAbilities;
 			return false;
 		}
 
+		public function monsterIsBleeding():Boolean {
+			var effects:Array = [
+				StatusEffects.KamaitachiBleed,
+				StatusEffects.Hemorrhage,
+				StatusEffects.SharkBiteBleed,
+				StatusEffects.IzmaBleed,
+				StatusEffects.CouatlHurricane,
+				StatusEffects.GoreBleed,
+				StatusEffects.Hemorrhage2,
+				StatusEffects.Briarthorn,
+			]
+			for each (var effect:StatusEffectType in effects) if (hasStatusEffect(effect)) return true;
+			return false;
+		}
+
+		public function monsterIsPoisoned():Boolean {
+			return hasStatusEffect(StatusEffects.PoisonDoT) || hasStatusEffect(StatusEffects.PoisonDoTH);
+		}
+
+		public function monsterIsLustPoisoned():Boolean {
+			var effects:Array = [
+				StatusEffects.LustDoT,
+				StatusEffects.LustDoTH,
+				StatusEffects.LustStick
+			]
+			for each (var effect:StatusEffectType in effects) if (hasStatusEffect(effect)) return true;
+			return false;
+		}
+
+		public function monsterIsBurned():Boolean {
+			var effects:Array = [
+				StatusEffects.BurnDoT,
+				StatusEffects.BurnDoT2,
+				StatusEffects.FirePunchBurnDoT,
+				StatusEffects.ImmolationDoT
+			]
+			for each (var effect:StatusEffectType in effects) if (hasStatusEffect(effect)) return true;
+			return false;
+		}
+
+		public function monsterIsAcidBurned():Boolean {
+			var effects:Array = [
+				StatusEffects.AcidDoT,
+				StatusEffects.SandWormAcid,
+				StatusEffects.AntAcid
+			]
+			for each (var effect:StatusEffectType in effects) if (hasStatusEffect(effect)) return true;
+			return false;
+		}
+
 		public function doAI():void
 		{
 			if (hasStatusEffect(StatusEffects.AbilityCooldown1) ) {
@@ -2785,6 +2835,15 @@ import classes.Scenes.Combat.CombatAbilities;
 		 */
 		public function postCompanionAction():void{
 
+		}
+
+		/**
+		 * Returns a list of statuses unique to the monster that are currently affected by
+		 * To be overwritten by child monster classes
+		 * @return statues (Array) - List of String repreenting each unique status the monster is currently under
+		 */
+		public function displaySpecialStatues():Array {
+			return [];
 		}
 
 		/**

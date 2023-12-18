@@ -3616,6 +3616,8 @@ public class PerkLib
 		// Mutation perks
 		public static const AcidSpit:PerkType = mk("Acid Spit", "Acid Spit",
 				"Allows access to a cave wyrm acid spit attack.");
+		public static const AcidAffinity:PerkType = mk("Fire Affinity", "Fire Affinity",
+				"You have high resistance to fire effects, immunity to the acid condition, and mastery over acid abilities and magic.");
 		public static const AlrauneNectar:PerkType = mk("Alraune Nectar", "Alraune Nectar",
 				"You yourself produce an endless supply of alraune nectar.");
 		public static const AzureflameBreath:PerkType = mk("Azureflame Breath", "Azureflame Breath",
@@ -3715,6 +3717,8 @@ public class PerkLib
 				"Allows access to a dragonne regal breath attack.");
 		public static const DragonWaterBreath:PerkType = mk("Dragon water breath", "Dragon water breath",
 				"Allows access to a sea dragon water breath attack. Mixing water with electricity may yield surprising results.");
+		public static const EarthAffinity:PerkType = mk("Earth Affinity", "Earth Affinity",
+				"You have high resistance to earth effects, and mastery over earth abilities and magic.");
 		public static const EasterBunnyBalls:PerkType = mk("Easter bunny balls", "Easter bunny balls",
 				"Your balls constantly grows until emptied through your cock, producing eggs.");
 		public static const ElectrifiedDesire:PerkType = mk("Electrified Desire", "Electrified Desire",
@@ -3794,6 +3798,8 @@ public class PerkLib
 				"Allows access to a hydra acid breath attack.");
 		public static const HydraRegeneration:PerkType = mk("Hydra Regeneration", "Hydra Regeneration",
 				"(Amount of hydra heads)% health and (Amount of hydra heads) points of fatigue regeneration but double hunger decaying speed. Stops for 5 rounds when damaged by fire.");
+		public static const IceAffinity:PerkType = mk("Ice Affinity", "Ice Affinity",
+				"You have high resistance to ice effects, immunity the frostburn condition, and mastery over ice abilities and magic.");
 		public static const IcyFlesh:PerkType = mk("Icy flesh", "Icy flesh",
 				"You are about as frigid and dead as a corpse however your mastery of ice magic grants you the ability to harden your flesh to the durability of diamonds. Gain an intelligence modifier as a bonus to health calculation equal to that of toughness as well as 1% regeneration. Gain an extra 40% resistance to cold.");
 		public static const ImpNobility:PerkType = mk("Imp Nobility", "Imp Nobility",
@@ -3890,6 +3896,8 @@ public class PerkLib
 				"Your nature as a plant gives you an instinctual knowledge of herbalism. Add some of your libido to your herbalism skill scaling and gain herbalism experience faster.");
 		public static const PoisonNails:PerkType = mk("Poison nails", "Poison nails",
 				"Your nails inflict a deadly poison on strike, damaging your foe’s toughness, speed and arousing them.");
+		public static const PoisonAffinity:PerkType = mk("Poison Affinity", "Poison Affinity",
+				"You have high resistance to poison effects, and mastery over poison abilities and magic.");
 		public static const PsionicEmpowerment:PerkType = mk("Psionic Empowerment", "Psionic Empowerment",
 			"Your powers expands in accordance with each new convert that joins the sisterhood hivemind.");
 		public static const PurityBlessing:PerkType = mk("Purity Blessing", "Purity Blessing",
@@ -3937,6 +3945,10 @@ public class PerkLib
 				"As a plant when using natural weapon your damage scaling is based on Toughness instead of strength.");
 		public static const RampantMight:PerkType = mk("Rampant Might", "Rampant Might",
 				"As a plant dragon when using natural weapon your damage scaling is based on both Toughness and Strength.");
+		public static const WaterAffinity:PerkType = mk("Water Affinity", "Water Affinity",
+				"You have high resistance to water effects, and mastery over water abilities and magic.");
+		public static const WindAffinity:PerkType = mk("Wind Affinity", "Wind Affinity",
+				"You have high resistance to wind effects, and mastery over wind abilities and magic.");
 		public static const WisdomoftheAges:PerkType = mk("Wisdom of the Ages", "Wisdom of the Ages",
 				"Your bottomless insight somehow transmutes itself into raw power, allowing you to add half of your intelligence and wisdom as a modifier to strength and toughness.");
 		public static const ZenjisInfluence1:PerkType = mk("Zenji's influence 1", "Zenji's influence 1",
@@ -4352,10 +4364,14 @@ public class PerkLib
 		// Monster perks
 		// Please add any perks below to the enemyPerkList below. Required for PerkDB filtering of PC-unobtainable perks.
 		public static const Acid:PerkType = mk("Acid", "Acid", "");
+		public static const AcidNature:PerkType = mk("Acid Nature", "Acid Nature", "");
+		public static const AcidVulnerability:PerkType = mk("Acid Vulnerability", "Acid Vulnerability", "");//NYU
 		public static const AlwaysSuccesfullRunaway:PerkType = mk("Always Succesfull Runaway", "Always Succesfull Runaway", "");
 		public static const DarknessNature:PerkType = mk("Darkness Nature", "Darkness Nature", "");
 		public static const DarknessVulnerability:PerkType = mk("Darkness Vulnerability", "Darkness Vulnerability", "");//NYU
 		public static const DieHardHP:PerkType = mk("DieHard HP", "DieHard HP", "");
+		public static const EarthNature:PerkType = mk("Earth Nature", "Earth Nature", "");
+		public static const EarthVulnerability:PerkType = mk("Earth Vulnerability", "Earth Vulnerability", "");//NYU
 		public static const Enemy300Type:PerkType = mk("300-type enemy", "300-type enemy", "");
 		public static const EnemyBeastOrAnimalMorphType:PerkType = mk("Beast or Animal-morph enemy type", "Beast or Animal-morph enemy type", "");
 		public static const EnemyBossType:PerkType = mk("Boss-type enemy", "Boss-type enemy", "");
@@ -4395,10 +4411,16 @@ public class PerkLib
 		public static const OverMaxMana:PerkType = mk("OverMax Mana", "OverMax Mana", "");//NYU
 		public static const OverMaxSoulforce:PerkType = mk("OverMax Soulforce", "OverMax Soulforce", "");//NYU
 		public static const OverMaxWrath:PerkType = mk("OverMax Wrath", "OverMax Wrath", "");//NYU
+		public static const PoisonNature:PerkType = mk("Poison Nature", "Poison Nature", "");
+		public static const PoisonVulnerability:PerkType = mk("Poison Vulnerability", "Poison Vulnerability", "");
 		public static const Sentience:PerkType = mk("Sentience", "Sentience", "");
 		public static const ShieldWielder:PerkType = mk("Shield wielder", "Shield wielder", "");
 		public static const TeaseResistance:PerkType = mk("Tease Resistance", "Tease Resistance", "");//NYU
 		public static const UniqueNPC:PerkType = mk("Unique npc", "Unique npc", "");
+		public static const WaterNature:PerkType = mk("Water Nature", "Water Nature", "");
+		public static const WaterVulnerability:PerkType = mk("Water Vulnerability", "Water Vulnerability", "");
+		public static const WindNature:PerkType = mk("Wind Nature", "Wind Nature", "");
+		public static const WindVulnerability:PerkType = mk("Wind Vulnerability", "Wind Vulnerability", "");
 		//public static const :PerkType = mk("", "", "");
 		//public static const :PerkType = mk("", "", "");
 		//public static const :PerkType = mk("", "", "");
@@ -4411,10 +4433,14 @@ public class PerkLib
 		public static function enemyPerkList():Array{
 			var ePerkL:Array = [];
 			ePerkL.push(Acid);
+			ePerkL.push(AcidNature);
+			ePerkL.push(AcidVulnerability);
 			ePerkL.push(AlwaysSuccesfullRunaway);
 			ePerkL.push(DarknessNature);
 			ePerkL.push(DarknessVulnerability);
 			ePerkL.push(DieHardHP);
+			ePerkL.push(EarthNature);
+			ePerkL.push(EarthVulnerability);
 			ePerkL.push(Enemy300Type);
 			ePerkL.push(EnemyBeastOrAnimalMorphType);
 			ePerkL.push(EnemyBossType);
@@ -4454,10 +4480,16 @@ public class PerkLib
 			ePerkL.push(OverMaxMana);
 			ePerkL.push(OverMaxSoulforce);
 			ePerkL.push(OverMaxWrath);
+			ePerkL.push(PoisonNature);
+			ePerkL.push(PoisonVulnerability);
 			ePerkL.push(Sentience);
 			ePerkL.push(ShieldWielder);
 			ePerkL.push(TeaseResistance);
 			ePerkL.push(UniqueNPC);
+			ePerkL.push(WaterNature);
+			ePerkL.push(WaterVulnerability);
+			ePerkL.push(WindNature);
+			ePerkL.push(WindVulnerability);
 			return ePerkL;
 		}
 	

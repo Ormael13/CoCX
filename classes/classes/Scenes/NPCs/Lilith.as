@@ -41,8 +41,10 @@ import classes.internals.*;
 			if (hasStatusEffect(StatusEffects.Maleficium)) damage *= 2;
 			outputText("Goth girl moves her hands in air tracing complicated arcane signs, as a purple flame surges under you, searing your flesh. ");
 			player.takeFireDamage(damage, true);
-			if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.addStatusValue(StatusEffects.BurnDoT, 1, 1);
-			else player.createStatusEffect(StatusEffects.BurnDoT,SceneLib.combat.debuffsOrDoTDuration(5),0.05,0,0);
+			if (!player.immuneToBurn()) {
+				if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.addStatusValue(StatusEffects.BurnDoT, 1, 1);
+				else player.createStatusEffect(StatusEffects.BurnDoT,SceneLib.combat.debuffsOrDoTDuration(5),0.05,0,0);
+			}
 			statScreenRefresh();
 			outputText("\n");
 		}
