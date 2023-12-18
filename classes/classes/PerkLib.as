@@ -9,6 +9,7 @@ import classes.BodyParts.Tail;
 import classes.IMutations.IMutationsLib;
 import classes.GlobalFlags.kFLAGS;
 import classes.Perks.*;
+import classes.Scenes.Crafting;
 
 public class PerkLib
 	{
@@ -493,6 +494,9 @@ public class PerkLib
 		public static const AlchemicalCartridge:PerkType = mk("Alchemical cartridge", "Alchemical cartridge",
 				"Add your intelligence to gun damage as a modifier. (+5% firearms attacks multiplier)",
 				"You've chosen the 'Alchemical cartridge' perk, adding intelligence scaling to firearms damage. (+5% firearms attacks multiplier)");
+		public static const AlchemicalTolerance:PerkType = mk("Alchemical Tolerance", "Alchemical Tolerance",
+				"Increase alchemical stat cap by 5%",
+				"You've chosen the 'Alchemical Tolerance' perk, increasing your alchemical stat cap by 5%.");
 		public static const AllSeeing:PerkType = mk("All-Seeing", "All-Seeing",
 				"You see everything... so you should have expected this description, and the 10% soul force gain.",
 				"You've chosen the 'All-Seeing' perk, gaining +10% max Soulforce.")
@@ -1362,6 +1366,9 @@ public class PerkLib
 		public static const FirstAttackElementalsSu:PerkType = mk("First Attack: Elementals (Su)", "First Attack: Elementals (Su)",
 				"Mana cost scaling of elemental attacking based on int/wis stats lowered by 68% and 84%. Additionaly cost halfed before final rounding up. Elemental always attack 4 times. Epic elementals can now also attack (as another turn of elementals attacks)",
 				"You've chosen the 'First Attack: Elementals (Su)' perk, becoming more efficient in reducing mana costs of elementals attacks and increasing their attacks per turn. Epic elementals would now join attack of it lesser kind. (int and wis scaling of costs decreased by ~68% and ~84%, 4 attacks per action)");
+		public static const FirstAttackFlyingSword:PerkType = mk("First Attack: Flying Sword", "First Attack: Flying Sword",
+				"Before your actions your flying sword will attack.",
+				"You've chosen the 'First Attack: Flying Sword' perk, allowing your flying sword to strike before you.");
 		public static const FirstAttackGolems:PerkType = mk("First Attack: Golems", "First Attack: Golems",
 				"Before your actions one or more of your golems will attack.",
 				"You've chosen the 'First Attack: Golems' perk, allowing some of your permanent golems to strike before you.");
@@ -3812,6 +3819,8 @@ public class PerkLib
 				"You have become immune to anything that would damage your mind and gained increased insight however your unhinged personality greatly weakens your wisdom.").withBuffs({'int.mult':0.20,'wis.mult':-0.40});
 		public static const JunglesWanderer:PerkType = mk("Jungle’s Wanderer", "Jungle’s Wanderer",
 				"Your nimble body has adapted to moving through jungles and forests, evading enemy attacks with ease and making yourself harder to catch. (+35 to the Evasion percentage)");
+		public static const KillingIntent:PerkType = mk("Killing Intent", "Killing Intent",
+				"Enables \"Killing Intent\" soul skill: Inflicts True damage, which increases with the number of monsters killed.");
 		public static const KitsuneEnergyThirst:PerkType = mk("Kitsune hunger", "Kitsune hunger",
 				"You can metabolise sex into life force and can feed from your partners orgasms.");
 		public static const KnowledgeIsPower:PerkType = mk("Knowledge is power", "Knowledge is power",
@@ -7007,6 +7016,15 @@ public class PerkLib
             //Tier 1
             //Tier 2
             //Tier 3
+			AlchemicalTolerance.requirePerk(JobSoulCultivator)
+								.requireLevel(18)
+								.requireCustomFunction(function (player:Player):Boolean {
+									return Crafting.alembicLevel >= 1;
+								}, "Alchemy Level 1 or higher");
+			KillingIntent.requirePerk(JobSoulCultivator)
+								.requireLevel(20);
+			FirstAttackFlyingSword.requirePerks(SoaringBlades, SoulWarrior)
+								.requireLevel(24);
             //2nd perk for flying swords slots
             //Tier 4
             //Tier 5

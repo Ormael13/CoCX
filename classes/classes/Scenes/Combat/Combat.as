@@ -761,6 +761,7 @@ public class Combat extends BaseContent {
             flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 0;
             flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 0;
             flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] = 0;
+            flags[kFLAGS.IN_COMBAT_PLAYER_FLYING_SWORD_ATTACKED] = 0;
             flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 0;
             flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 0;
             flags[kFLAGS.IN_COMBAT_PLAYER_EPIC_ELEMENTAL_ATTACKED] = 0;
@@ -829,21 +830,13 @@ public class Combat extends BaseContent {
         var bd:ButtonData;
 		buttons.add("Surrender(H)", combat.surrenderByHP, "Stop defending youself. You'll take a hell of a beating. Why would you do this?");
         buttons.add("Surrender(L)", combat.surrenderByLust, "Fantasize about your opponent in a sexual way so much it would fill up your lust. You'll end up getting raped...But is it rape if you get what you want?");
+        buttons.add("Minions", CoC.instance.perkMenu.minionOptions, "You can adjust the behaviour of your minions during combat.");
         if ((player.calculateMultiAttacks() > 1) || (player.hasPerk(PerkLib.JobBeastWarrior) && (player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon())) ||
             ((player.hasPerk(PerkLib.Berzerker) || (player.hasPerk(PerkLib.Lustzerker)) && player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3)) || player.hasPerk(PerkLib.Poisoning) || player.hasPerk(PerkLib.SwiftCasting) || player.hasStatusEffect(StatusEffects.SoulDrill1) || player.hasStatusEffect(StatusEffects.ThePhalluspear1)) {
             buttons.add("Melee Opt", CoC.instance.perkMenu.meleeOptions, "You can adjust your melee attack settings.");
         }
         if (player.hasPerk(PerkLib.ELFTwinShot) || player.hasPerk(PerkLib.ElementalArrows) || player.hasPerk(PerkLib.Cupid) || player.hasPerk(PerkLib.EnvenomedBolt) || player.hasPerk(PerkLib.ELFThornShot) || player.calculateMultiAttacks(false) > 1) {
             buttons.add("Range Opt", CoC.instance.perkMenu.rangedOptions, "You can adjust your range strike settings.");
-        }
-        if (player.hasPerk(PerkLib.JobLeader)) {
-            buttons.add("Will-o'-the-wisp", CoC.instance.perkMenu.WOTWbehaviourOptions, "You can adjust how your will-o'-the-wisp will behave during combat.");
-        }
-        if (player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) {
-            buttons.add("Elementals", CoC.instance.perkMenu.summonsbehaviourOptions, "You can adjust how your elemental summons act during combat.");
-        }
-        if ((flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0 || flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > 0 || flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > 0 || flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] > 0) || (player.hasPerk(PerkLib.FirstAttackSkeletons) && (player.perkv2(PerkLib.PrestigeJobNecromancer) > 0 || player.perkv1(PerkLib.GreaterHarvest) > 0 || player.perkv2(PerkLib.GreaterHarvest) > 0))) {
-            buttons.add("Golems/Skeletons", CoC.instance.perkMenu.golemsskeletonsbehaviourOptions, "You can adjust your permanent golems (or skeletons) behaviour during combat.");
         }
         if (CoC_Settings.debugBuild && !debug) {
             buttons.add("Inspect", combat.debugInspect).hint("Use your debug powers to inspect your enemy.");
@@ -864,14 +857,17 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.ThePhalluspear1)) {
             buttons.add("ThePhalluspear", the1Phalluspear).hint("Menu to toggle The Phalluspear lust to normal damage ratio.");
         }
-		if (player.weaponFlyingSwordsName != "nothing") {
+		/*if (player.weaponFlyingSwordsName != "nothing") {
 			bd = buttons.add("Flying Sword", attackFlyingSword).hint("Attack the enemy with your " + player.weaponFlyingSwordsName + ".  Damage done is determined by your wisdom and weapon.\n\nSoulforce cost per attack: "+flyingSwordAttackCost()+"");
 			if (player.soulforce < flyingSwordAttackCost()) {
                 bd.disable("Your current soulforce is too low.");
             } else if (player.hasStatusEffect(StatusEffects.Flying) && player.statusEffectv2(StatusEffects.Flying) == 1) {
 				bd.disable("You're currently using your sword to fly, you can't attack with it as well.");
 			}
-		}
+		}*/
+        if (CombatAbilities.FlyingSwordAttack.isKnown) {
+            buttons.append(CombatAbilities.FlyingSwordAttack.createButton(monster));
+        }
         if (!player.isFlying()) {
             if (player.canFly()) buttons.add("Take Flight", takeFlightWings).hint("Make use of your wings or other options avilable to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
 			if (player.weaponFlyingSwordsName != "nothing" && player.canFlyOnFlyingSwords()) buttons.add("Take Flight", takeFlightByFlyingSword).hint("Make use of your flying sword to take flight into the air. \n\nSoulforce cost per turn: "+flyingSwordUseCost()+" \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
@@ -925,9 +921,6 @@ public class Combat extends BaseContent {
 					bd.disable("None of your skeletons can attack airborn enemies.");
 				}
 			}
-		}
-		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) {
-            bd = buttons.add("B. Puppies",  CoC.instance.perkMenu.bpbehaviourOptions).hint("You can choose how your blood puppies will behave during battle.\n\n");
 		}
 		if (player.hasPerk(PerkLib.HiddenJobAsura)) {
 			if (player.statStore.hasBuff("AsuraForm")) {
@@ -1475,10 +1468,14 @@ public class Combat extends BaseContent {
     //Calls actions for wisp and henchmen, no 'Next' buttons or choices.
     //Can be used independently of PC
     public function simplifiedPrePCTurn_smart():void {
-        if (ui.isWispTurn())
-            willothewispattacks();
-        if (ui.isMummyTurn())
-            mummyattacks();
+        if (ui.isWispTurn()) {
+            CombatAbilities.WillOfTheWisp.perform();
+            flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] = 1;
+        }
+        if (ui.isMummyTurn()) 
+            ui.doMummyTurn();
+        if (ui.isFlyingSwordTurn())
+            ui.doFlyingSwordTurn();
         for (var ci:int = 0; ci <= 3; ++ci)
             if (ui.isCompanionTurn(ci))
                 ui.doCompanionTurn(ci, false);
@@ -1595,25 +1592,33 @@ public class Combat extends BaseContent {
     public function willothewispattacks():void {
 		var willothewispDamage:Number = 10;
         willothewispDamage += intwisscaling() * 0.4;
+        willothewispDamage *= spellMod();
         if (player.hasPerk(PerkLib.HistoryTactician) || player.hasPerk(PerkLib.PastLifeTactician)) willothewispDamage *= historyTacticianBonus();
+
         var willothewispamplification:Number = 1;
         if (player.weapon == weapons.SCECOMM) willothewispamplification += 0.5;
+        if (player.hasPerk(PerkLib.WispLieutenant)) willothewispamplification += 1;
+        if (player.hasPerk(PerkLib.WispCaptain)) willothewispamplification += 1;
+        if (player.hasPerk(PerkLib.WispMajor)) willothewispamplification += 1;
+        if (player.hasPerk(PerkLib.WispColonel)) willothewispamplification += 1;
         willothewispDamage *= willothewispamplification;
+
         //Determine if critical hit!
         var crit:Boolean = false;
         var critChance:int = 5;
-        var critChanceMulti:int = 1.75;
         critChance += combatMagicalCritical();
         if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
         if (rand(100) < critChance) {
             crit = true;
-            willothewispDamage *= critChanceMulti;
+            willothewispDamage *= 1.75;
         }
+        
         willothewispDamage = Math.round(willothewispDamage);
-        outputText("\n\nYour will-o'-the-wisp hit [themonster]! ");
+        outputText("\n\nYour will-o'-the-wisp hits [themonster]! ");
         doMagicDamage(willothewispDamage, true, true);
         if (crit) outputText(" <b>Critical! </b>");
         flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] = 1;
+        outputText("\n\n");
         if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
             menu();
             addButton(0, "Next", combatMenu, false);
@@ -6634,8 +6639,8 @@ public class Combat extends BaseContent {
 		venomCombatRecharge1();
     }
 	
-	public function layerFoxflamePeltOnThis(damage:Number):void {
-		doFireDamage(Math.round(damage * 2 * fireDamageBoostedByDao()), true, true);
+	public function layerFoxflamePeltOnThis(damage:Number, display:Boolean = true):void {
+		doFireDamage(Math.round(damage * 2 * fireDamageBoostedByDao()), true, display);
 		var foxpunchlust:Number = (10 + player.cor / 8);
 		monster.teased((monster.lustVuln * foxpunchlust), false);
 	}
@@ -16492,11 +16497,11 @@ public function flyingSwordAttackCost():Number {
         if (player.perkv1(PerkLib.Dantain) > 1) fsac -= 5;
         if (player.perkv1(PerkLib.Dantain) > 2) fsac -= 5;
     }
-	if (player.weaponFlyingSwordsPerk == "Small Two") fsac *= 2;
-	if (player.weaponFlyingSwordsPerk == "Large") fsac *= 3;
-	if (player.weaponFlyingSwordsPerk == "Large Two" || player.weaponFlyingSwordsPerk == "Massive" || player.weaponFlyingSwordsPerk == "Small Six") fsac *= 6;
-	if (player.weaponFlyingSwordsPerk == "Massive Two") fsac *= 12;
-    if (player.weaponFlyingSwords == weaponsflyingswords.ASAUCHI) fsac *= 0.6;
+    if (player.weaponFlyingSwordsPerk == "") fsac *= 2;
+    if (player.weaponFlyingSwordsPerk == "Large") fsac *= 3;
+    if (player.weaponFlyingSwordsPerk == "Massive") fsac *= 6;
+    if (player.weaponFlyingSwordsCount > 1) fsac *= player.weaponFlyingSwordsCount;
+	 if (player.weaponFlyingSwords == weaponsflyingswords.ASAUCHI) fsac *= 0.6;
     return fsac;
 }
 

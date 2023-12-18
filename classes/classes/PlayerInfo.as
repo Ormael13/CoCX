@@ -3,9 +3,10 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.*;
 import classes.IMutations.IMutationsLib;
 import classes.Scenes.Combat.CombatAbility;
+import classes.Scenes.Combat.AbstractGeneral;
 import classes.Scenes.Combat.AbstractSpell;
 import classes.Scenes.Combat.AbstractSoulSkill;
-import classes.Scenes.Combat.AbstractMagicSpecial;
+import classes.Scenes.Combat.AbstractSpecial;
 import classes.Scenes.Crafting;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.CharybdisFollower;
@@ -51,16 +52,17 @@ public class PlayerInfo extends BaseContent {
 		if (currentButton >= 4 && currentButton <= 9) {
 			button(currentButton).disable("You are currently at this stats page.");
 		}
-		if (currentButton == 4 || (currentButton >= 10 && currentButton <= 13)) {
+		if (currentButton == 4 || (currentButton >= 10 && currentButton <= 14)) {
 			button(4).disable("You are currently at this stats page.");
 			if (currentButton == 4) {
 				//Should show all abilities by default
 				currentButton = 10;
 			}
 			addButton(10, "All", displayStatsAbilities);
-			addButtonIfTrue(11, "Spells", curry(displayStatsAbilities, AbstractSpell, 11), "You currently have no spells", player.hasknownAbilitiesOfClass(AbstractSpell));
-			addButtonIfTrue(12, "SoulSkills", curry(displayStatsAbilities, AbstractSoulSkill, 12), "You currently have no soulskills", player.hasknownAbilitiesOfClass(AbstractSoulSkill));
-			addButtonIfTrue(13, "M. Specials", curry(displayStatsAbilities, AbstractMagicSpecial, 13), "You currently have no magical specials", player.hasknownAbilitiesOfClass(AbstractMagicSpecial));
+			addButtonIfTrue(11, "General", curry(displayStatsAbilities, AbstractGeneral, 11), "You currently have no general abilities", player.hasknownAbilitiesOfClass(AbstractGeneral));
+			addButtonIfTrue(12, "Spells", curry(displayStatsAbilities, AbstractSpell, 12), "You currently have no spells", player.hasknownAbilitiesOfClass(AbstractSpell));
+			addButtonIfTrue(13, "SoulSkills", curry(displayStatsAbilities, AbstractSoulSkill, 13), "You currently have no soulskills", player.hasknownAbilitiesOfClass(AbstractSoulSkill));
+			addButtonIfTrue(14, "Specials", curry(displayStatsAbilities, AbstractSpecial, 14), "You currently have no specials", player.hasknownAbilitiesOfClass(AbstractSpecial));
 
 			if (currentButton != 4){
 				button(currentButton).disable("You are currently viewing this category.");

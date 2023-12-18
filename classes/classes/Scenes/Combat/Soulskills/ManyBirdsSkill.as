@@ -14,7 +14,7 @@ public class ManyBirdsSkill extends AbstractSoulSkill {
             "Project a figment of your soulforce as a crystal traveling at extreme speeds.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING, TAG_PHYSICAL],
+            [TAG_DAMAGING, TAG_MAGICAL],
             StatusEffects.KnowsManyBirds
         )
 		baseSFCost = 10;

@@ -65,8 +65,8 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         clearOutput();
         outputText("You open the can and \"bottom up\", hoping it wasn’t just a scam to buy an overpriced beer. \"Whoa, that’s one hell of a manly beverage!\" The alcohol in the beer is so strong you actually feel like you could lift bigger things now. No...wait, you actually do as your muscle seems to surge with new raw power.");
-        if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) AlchemyBonus("str", 2 + rand(3));
-        else AlchemyBonus("str", 1 + rand(2));
+        if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) alchemyBonus("str", 2 + rand(3));
+        else alchemyBonus("str", 1 + rand(2));
         if (rand(3) == 0) {
             if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) outputText(player.modTone(player.maxToneCap(), 6));
             else outputText(player.modTone(player.maxToneCap(), 3));
@@ -80,8 +80,8 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         clearOutput();
         outputText("The elixir tastes foul at first, but you guess it’s how it is with all medicine. As the merchant warned you, you begin to feel your muscles coiling like a spring, ready to allow you to make a swift dash. Your co-ordination definitively improved too, as well as your vision, as you can follow your movement despite the acceleration.");
-        if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) AlchemyBonus("spe", 2 + rand(3));
-        else AlchemyBonus("spe", 1 + rand(2));
+        if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) alchemyBonus("spe", 2 + rand(3));
+        else alchemyBonus("spe", 1 + rand(2));
         if (rand(3) == 0) {
             if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) outputText(player.modTone(player.maxToneCap(), 6));
             else outputText(player.modTone(player.maxToneCap(), 3));
@@ -97,14 +97,14 @@ public final class Mutations extends MutationsHelper {
             else outputText(player.modTone(15, 1));
         }
         if (player.wis < 50) {
-            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) AlchemyBonus("wis", 2 + rand(7));
-            else AlchemyBonus("wis", 1 + rand(4));
+            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) alchemyBonus("wis", 2 + rand(7));
+            else alchemyBonus("wis", 1 + rand(4));
         } else if (player.wis < 100) {
-            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) AlchemyBonus("wis", 2 + rand(5));
-            else AlchemyBonus("wis", 1 + rand(3));
+            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) alchemyBonus("wis", 2 + rand(5));
+            else alchemyBonus("wis", 1 + rand(3));
         } else {
-            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) AlchemyBonus("wis", 2 + rand(3));
-            else AlchemyBonus("wis", 1 + rand(2));
+            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) alchemyBonus("wis", 2 + rand(3));
+            else alchemyBonus("wis", 1 + rand(2));
         }
     }
 
@@ -118,14 +118,14 @@ public final class Mutations extends MutationsHelper {
             else outputText(player.modTone(15, 1));
         }
         if (player.lib < 50) {
-            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) AlchemyBonus("lib", 2 + rand(7));
-            else AlchemyBonus("lib", 1 + rand(4));
+            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) alchemyBonus("lib", 2 + rand(7));
+            else alchemyBonus("lib", 1 + rand(4));
         } else if (player.lib < 100) {
-            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) AlchemyBonus("lib", 2 + rand(5));
-            else AlchemyBonus("lib", 1 + rand(3));
+            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) alchemyBonus("lib", 2 + rand(5));
+            else alchemyBonus("lib", 1 + rand(3));
         } else {
-            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) AlchemyBonus("lib", 2 + rand(3));
-            else AlchemyBonus("lib", 1 + rand(2));
+            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) alchemyBonus("lib", 2 + rand(3));
+            else alchemyBonus("lib", 1 + rand(2));
         }
         player.refillHunger(10);
     }
@@ -169,7 +169,7 @@ public final class Mutations extends MutationsHelper {
     public function madmenKnowledge(player:Player):void {
         clearOutput();
         outputText("You open the bottle and sip its contents, your mind flashing with images and thoughts not meant for the waking world.");
-        AlchemyBonus("int", 4 + rand(2));
+        alchemyBonus("int", 4 + rand(2));
 		KnowledgeBonus("int", 4 + rand(2));
 		player.addCurse("wis", 2 + rand(9), 1);
 		dynStats("cor", 2);
