@@ -7,6 +7,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Items.Consumables.EmberTF;
 import classes.Races.*;
+import classes.Scenes.Camp.CampStatsAndResources;
 import classes.Scenes.Metamorph;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
@@ -874,9 +875,9 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         var nails:Number = 10 + rand(21);
         if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_HAMMER_TIME] >= 300) awardAchievement("Hammer Time", kACHIEVEMENTS.GENERAL_HAMMER_TIME);
-        flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += nails;
-        if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > SceneLib.campUpgrades.checkMaterialsCapNails()) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = SceneLib.campUpgrades.checkMaterialsCapNails();
-        outputText("You open the pack to find " + nails + " nails inside. <b>("+flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES]+"/"+SceneLib.campUpgrades.checkMaterialsCapNails()+" total!)</b>");
+        CampStatsAndResources.NailsResc += nails;
+        if (CampStatsAndResources.NailsResc > SceneLib.campUpgrades.checkMaterialsCapNails()) CampStatsAndResources.NailsResc = SceneLib.campUpgrades.checkMaterialsCapNails();
+        outputText("You open the pack to find " + nails + " nails inside. <b>("+CampStatsAndResources.NailsResc+"/"+SceneLib.campUpgrades.checkMaterialsCapNails()+" total!)</b>");
     }
 
     public function packOfDemonBones(player:Player):void {
