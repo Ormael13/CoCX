@@ -37,30 +37,29 @@ public class CombatTeases extends BaseCombatContent {
 		tBLD += (2 * player.teaseDmgStat.value);
 
 
-		if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) tBLD += 15;
-		if (player.hasPerk(PerkLib.SensualLover)) tBLD += 6;
-		if (player.hasPerk(PerkLib.Seduction)) tBLD += 15;
+		if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) tBLD *= 1.75;
+		if (player.hasPerk(PerkLib.SensualLover)) tBLD *= 1.3;
+		if (player.hasPerk(PerkLib.Seduction)) tBLD *= 1.75;
 		
 		//partial skins bonuses
 		switch (player.coatType()) {
 			case Skin.FUR:
-				tBLD += (1 + player.newGamePlusMod());
+				tBLD *= 1 + (0.01 * (1 + player.newGamePlusMod()));
 				break;
 			case Skin.SCALES:
-				tBLD += (2 * (1 + player.newGamePlusMod()));
+				tBLD *= 1 + (0.02 * (1 + player.newGamePlusMod()));
 				break;
 			case Skin.CHITIN:
-				tBLD += (3 * (1 + player.newGamePlusMod()));
+				tBLD *= 1 + (0.03 * (1 + player.newGamePlusMod()));
 				break;
 			case Skin.BARK:
-				tBLD += (4 * (1 + player.newGamePlusMod()));
+				tBLD *= 1 + (0.04 * (1 + player.newGamePlusMod()));
 				break;
 		}
-		if (player.hasPerk(PerkLib.FlawlessBody)) tBLD += 20;
+		if (player.hasPerk(PerkLib.FlawlessBody)) tBLD *= 2;
 		if (player.hasPerk(PerkLib.GracefulBeauty)) tBLD += scalingBonusSpeed() * 0.1;
 		if (player.isElf() && player.hasPerk(PerkLib.ELFElvenSpearDancingTechnique) && player.isSpearTypeWeapon()) tBLD += scalingBonusSpeed() * 0.1;
-		if (player.hasPerk(PerkLib.JobSeducer)) tBLD += player.teaseLevel * 3;
-		else tBLD += player.teaseLevel * 2;
+		tBLD *= masteryBonusDamageTease();
 		if (player.hasPerk(PerkLib.JobCourtesan) && monster.hasPerk(PerkLib.EnemyBossType)) tBLD *= 1.2;
 
 		var damagemultiplier:Number = 1;
@@ -93,14 +92,69 @@ public class CombatTeases extends BaseCombatContent {
 		return tBLD;
 	}
 
-	public function teaseAuraLustDamageBonus(monster:Monster, lustDmg:Number = 0):Number {
-		if (player.hasPerk(PerkLib.SensualLover)) lustDmg += 2;
-		if (player.hasPerk(PerkLib.Seduction)) lustDmg += 5;
+	public function masteryBonusDamageTease():Number {
+		var lustMult:Number = 1;
+		var multiplier:Number = 0.02;
+		if (player.hasPerk(PerkLib.JobSeducer)) multiplier += 0.01;
+
+		lustMult += (multiplier * player.teaseLevel);
+
+		return lustMult;
+	}
+
+	public function combatTeaseCritical():Number {
+		var critTChance:Number = 0;
+		if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critTChance += 5;
+		if (player.armor == armors.R_CHANG || player.armor == armors.R_QIPAO || player.armor == armors.G_CHANG || player.armor == armors.G_QIPAO
+			 || player.armor == armors.B_CHANG || player.armor == armors.B_QIPAO || player.armor == armors.P_CHANG || player.armor == armors.P_QIPAO) critTChance += 5;
+
+		if (player.headJewelry == headjewelries.SCANGOG) critTChance += 5;
+        if (player.headJewelry == headjewelries.SATGOG) critTChance += 10;
+
+		if (player.hasPerk(PerkLib.CriticalPerformance)) {
+				if (player.lib <= 100) critTChance += player.lib / 4;
+				if (player.lib > 100) critTChance += 25;
+			}
+
+		if (player.eyesOfTheHunterAdeptBoost()) {
+			if (player.hasPerk(PerkLib.EyesOfTheHunterAdept) && player.sens >= 50) critTChance += 5;
+			if (player.hasPerk(PerkLib.EyesOfTheHunterSu) && player.sens >= 30) {
+				if (player.sens >= 500) critTChance += 95;
+				else critTChance += 2 * Math.round((player.sens - 25) / 5);
+			}
+		}
+		if (player.eyesOfTheHunterExpertBoost()) {
+			if (player.hasPerk(PerkLib.EyesOfTheHunterExpert) && player.sens >= 75) critTChance += 5;
+			if (player.hasPerk(PerkLib.EyesOfTheHunterSu) && player.sens >= 30) {
+				if (player.sens >= 500) critTChance += 95;
+				else critTChance += 2 * Math.round((player.sens - 25) / 5);
+			}
+		}
+		if (player.eyesOfTheHunterMasterBoost()) {
+			if (player.hasPerk(PerkLib.EyesOfTheHunterMaster) && player.sens >= 100) critTChance += 5;
+			if (player.hasPerk(PerkLib.EyesOfTheHunterSu) && player.sens >= 30) {
+				if (player.sens >= 500) critTChance += 95;
+				else critTChance += 2 * Math.round((player.sens - 25) / 5);
+			}
+		}
+		if (player.eyesOfTheHunterGrandMasterBoost()) {
+			if (player.hasPerk(PerkLib.EyesOfTheHunterGrandMaster) && player.sens >= 125) critTChance += 5;
+			if (player.hasPerk(PerkLib.EyesOfTheHunterSu) && player.sens >= 30) {
+				if (player.sens >= 500) critTChance += 95;
+				else critTChance += 2 * Math.round((player.sens - 25) / 5);
+			}
+		}
+
+		return critTChance;
+	}
+
+	public function teaseAuraLustDamageBonus(monster:Monster, lustDmg:Number):Number {
+		if (player.hasPerk(PerkLib.SensualLover)) lustDmg *= 1.1;
+		if (player.hasPerk(PerkLib.Seduction)) lustDmg *= 1.25;
         lustDmg += player.teaseDmgStat.value;
-		if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) lustDmg += 5;
-		if (player.hasPerk(PerkLib.FlawlessBody)) lustDmg += 10;
-		if (player.hasPerk(PerkLib.JobSeducer)) lustDmg += player.teaseLevel * 3;
-		else lustDmg += player.teaseLevel * 2;
+		if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) lustDmg *= 1.25;
+		if (player.hasPerk(PerkLib.FlawlessBody)) lustDmg *= 1.5;
+		lustDmg *= masteryBonusDamageTease();
 		if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
 		if (player.hasPerk(PerkLib.ArcaneLash)) lustDmg *= 1.5;
 		if (player.hasPerk(PerkLib.JobCourtesan) && monster.hasPerk(PerkLib.EnemyBossType)) lustDmg *= 1.2;
@@ -1537,23 +1591,22 @@ public class CombatTeases extends BaseCombatContent {
 		}
 		//Land the hit!
 		if (rand(100) <= chance + rand(bonusChance)) {
-			damage = (damage + rand(bonusDamage));
-			damage = teaseBaseLustDamage(damage);
+			bonusDamage = (damage + rand(bonusDamage));
+			damage = teaseBaseLustDamage();
+			//Gain additional % damage based on tease choice chosen
+			damage *= 1 + (bonusDamage/100);
 			if (player.hasPerk(PerkLib.BroadSelection) && player.differentTypesOfCocks() > 1) damage *= (1 + (0.25 * player.differentTypesOfCocks()));
 			if (SceneLib.urtaQuest.isUrta()) damage *= 2;
 			damage *= monster.lustVuln;
 			damage = Math.round(damage);
-			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 20) {
+			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 20 && !monster.hasPerk(PerkLib.Resolute)) {
 				outputText("\n[themonster] is so mesmerised by your show that it stands there gawking.");
 				monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 			}
 			//Determine if critical tease!
 			var crit:Boolean = false;
 			var critChance:int = 5;
-			if (player.hasPerk(PerkLib.CriticalPerformance)) {
-				if (player.lib <= 100) critChance += player.lib / 4;
-				if (player.lib > 100) critChance += 25;
-			}
+			critChance += combatTeaseCritical();
 			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 			if (rand(100) < critChance) {
 				crit = true;

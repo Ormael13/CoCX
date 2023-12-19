@@ -223,6 +223,7 @@ public class CombatAbility extends BaseCombatContent {
 	public var targetType:int;
 	public var timingType:int;
 	private var _tags:/*Boolean*/Array;
+	public var icon:String;
 	public var baseManaCost:Number = 0;
 	public var baseWrathCost:Number = 0;
 	public var baseSFCost:Number = 0;
@@ -422,6 +423,7 @@ public class CombatAbility extends BaseCombatContent {
 		}
 		
 		bd.hint(fullDesc,deactivating ? "Deactivate " + name : name);
+		if (icon) bd.icon(icon);
 		return bd;
 	}
 	

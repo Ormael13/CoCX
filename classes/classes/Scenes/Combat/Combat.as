@@ -12776,37 +12776,37 @@ public function StraddleTease():void {
     straddleDamage = Math.round(straddleDamage);
 
     //Select the scene
-    var TeaseFunctionList:Array = [RandomTeaseKiss];
-    if (monster.hasBreasts()) TeaseFunctionList.push(RandomTeaseViolateOpponentBreast);
+    var teaseFunctionList:Array = [RandomTeaseKiss];
+    if (monster.hasBreasts()) teaseFunctionList.push(RandomTeaseViolateOpponentBreast);
     if (monster.hasVagina()) {
-        TeaseFunctionList.push(RandomTeaseViolateOpponentPussy);
-        if (player.tongue.type == Tongue.DEMONIC || player.tongue.type == Tongue.DRACONIC || player.tongue.type == Tongue.SNAKE) TeaseFunctionList.push(RandomTeaseLongTongue);
+        teaseFunctionList.push(RandomTeaseViolateOpponentPussy);
+        if (player.tongue.type == Tongue.DEMONIC || player.tongue.type == Tongue.DRACONIC || player.tongue.type == Tongue.SNAKE) teaseFunctionList.push(RandomTeaseLongTongue);
     }
     if (monster.hasCock()) {
-        if (player.tail.type == Tail.DEMONIC || player.tail.type == Tail.MOUSE || player.tail.type == Tail.THUNDERBIRD || player.tail.type == Tail.HINEZUMI) TeaseFunctionList.push(RandomTeaseStranglingTail);
-        if (player.tail.type == Tail.MANTICORE_PUSSYTAIL) TeaseFunctionList.push(RandomTeaseManticoreTailfuckInitiate);
-        if (player.hasVagina() && !player.hasVirginVagina()) TeaseFunctionList.push(RandomTeaseIfEnnemyCockIfPCNoVirgin);
-        TeaseFunctionList.push(RandomTeaseIfEnnemyCock);
+        if (player.tail.type == Tail.DEMONIC || player.tail.type == Tail.MOUSE || player.tail.type == Tail.THUNDERBIRD || player.tail.type == Tail.HINEZUMI) teaseFunctionList.push(RandomTeaseStranglingTail);
+        if (player.tail.type == Tail.MANTICORE_PUSSYTAIL) teaseFunctionList.push(RandomTeaseManticoreTailfuckInitiate);
+        if (player.hasVagina() && !player.hasVirginVagina()) teaseFunctionList.push(RandomTeaseIfEnnemyCockIfPCNoVirgin);
+        teaseFunctionList.push(RandomTeaseIfEnnemyCock);
     }
-    if (player.tail.type == Tail.MANTICORE_PUSSYTAIL && player.tailVenom >= player.VenomWebCost()) TeaseFunctionList.push(RandomTeaseManticoreTailSpike);
-    if (player.hairType == Hair.MINDBREAKERMALE) TeaseFunctionList.push(RandomTeaseMindflayerCriticalOverload);
-    if (player.tail.type == Tail.LIZARD || player.tail.type == Tail.CAVE_WYRM || player.tail.type == Tail.SALAMANDER) TeaseFunctionList.push(RandomTeaseButtfuckTail);
+    if (player.tail.type == Tail.MANTICORE_PUSSYTAIL && player.tailVenom >= player.VenomWebCost()) teaseFunctionList.push(RandomTeaseManticoreTailSpike);
+    if (player.hairType == Hair.MINDBREAKERMALE) teaseFunctionList.push(RandomTeaseMindflayerCriticalOverload);
+    if (player.tail.type == Tail.LIZARD || player.tail.type == Tail.CAVE_WYRM || player.tail.type == Tail.SALAMANDER) teaseFunctionList.push(RandomTeaseButtfuckTail);
     if (player.lowerBody == LowerBody.PLANT_FLOWER || player.lowerBody == LowerBody.FLOWER_LILIRAUNE){
-        if (player.isLiliraune()) TeaseFunctionList.push(RandomTeaseLiliraune);
-        else TeaseFunctionList.push(RandomTeaseAlraune);
+        if (player.isLiliraune()) teaseFunctionList.push(RandomTeaseLiliraune);
+        else teaseFunctionList.push(RandomTeaseAlraune);
     }
-    if (player.rearBody.type == RearBody.DISPLACER_TENTACLES && !monster.hasPerk(PerkLib.EnemyConstructType)) TeaseFunctionList.push(RandomTeaseDisplacerMilkingInitiate);
+    if (player.rearBody.type == RearBody.DISPLACER_TENTACLES && !monster.hasPerk(PerkLib.EnemyConstructType)) teaseFunctionList.push(RandomTeaseDisplacerMilkingInitiate);
     if (player.lowerBody == LowerBody.GOO){
-        TeaseFunctionList.push(RandomTeaseSlime);
-        TeaseFunctionList.push(RandomTeaseSlimeInsert);
+        teaseFunctionList.push(RandomTeaseSlime);
+        teaseFunctionList.push(RandomTeaseSlimeInsert);
     }
-    if (player.countCocksOfType(CockTypesEnum.ANEMONE) > 0) TeaseFunctionList.push(RandomTeaseAnemone);
-    if (player.hasPerk(PerkLib.ElectrifiedDesire)) TeaseFunctionList.push(RandomTeaseRaiju);
-    if (player.hasPerk(PerkLib.DragonLustPoisonBreath) && player.tailVenom >= player.VenomWebCost()) TeaseFunctionList.push(RandomTeaseJabberwocky);
-    if (player.isAnyRace(Races.HarpylikeRaces)) TeaseFunctionList.push(RandomTeaseHarpy);
-    if (player.isRaceCached(Races.KITSUNE)) TeaseFunctionList.push(RandomTeaseKitsune);
-    if (player.perkv1(IMutationsLib.BlackHeartIM) > 0) TeaseFunctionList.push(RandomTeaseLustStrike);
-    var chosenTease:Function = randomChoice(TeaseFunctionList);
+    if (player.countCocksOfType(CockTypesEnum.ANEMONE) > 0) teaseFunctionList.push(RandomTeaseAnemone);
+    if (player.hasPerk(PerkLib.ElectrifiedDesire)) teaseFunctionList.push(RandomTeaseRaiju);
+    if (player.hasPerk(PerkLib.DragonLustPoisonBreath) && player.tailVenom >= player.VenomWebCost()) teaseFunctionList.push(RandomTeaseJabberwocky);
+    if (player.isAnyRace(Races.HarpylikeRaces)) teaseFunctionList.push(RandomTeaseHarpy);
+    if (player.isRaceCached(Races.KITSUNE)) teaseFunctionList.push(RandomTeaseKitsune);
+    if (player.perkv1(IMutationsLib.BlackHeartIM) > 0) teaseFunctionList.push(RandomTeaseLustStrike);
+    var chosenTease:Function = randomChoice(teaseFunctionList);
     chosenTease();
     combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
     outputText("\n\n");
