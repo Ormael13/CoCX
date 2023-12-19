@@ -417,10 +417,10 @@ public class Soulforce extends BaseContent
 			dao = rand(6);
 			switch(daoname){
 				case "Fire":
-					if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) dao += 1 + rand(3);
+					if (player.hasAnyPerk(PerkLib.FireAffinity, PerkLib.AffinityIgnis)) dao += 1 + rand(3);
 					break;
 				case "Ice":
-					if (player.hasPerk(PerkLib.ColdAffinity)) dao += 1 + rand(3);
+					if (player.hasAnyPerk(PerkLib.ColdAffinity, PerkLib.ColdMastery)) dao += 1 + rand(3);
 					break;
 				case "Lightning":
 					if (player.hasPerk(PerkLib.LightningAffinity)) dao += 1 + rand(3);
@@ -428,15 +428,25 @@ public class Soulforce extends BaseContent
 				case "Darkness":
 					if (player.hasPerk(PerkLib.DarknessAffinity)) dao += 1 + rand(3);
 					break;
-				case "Wind":
-					if (player.hasPerk(PerkLib.AffinitySylph)) dao += 1 + rand(3);
+				case "Poison":
+					if (player.hasPerk(PerkLib.PoisonAffinity)) dao += 1 + rand(3);
 					break;
-				case "Earth":
-					if (player.hasPerk(PerkLib.AffinityGnome)) dao += 1 + rand(3);
+				case "Wind":
+					if (player.hasAnyPerk(PerkLib.WindAffinity, PerkLib.AffinitySylph)) dao += 1 + rand(3);
+					break;
+				case "Blood":
+					if (player.hasAnyPerk(PerkLib.BloodAffinity, PerkLib.BloodMastery, PerkLib.WayOfTheBlood)) dao += 1 + rand(3);
 					break;
 				case "Water":
-					if (player.hasPerk(PerkLib.AffinityUndine)) dao += 1 + rand(3);
+					if (player.hasAnyPerk(PerkLib.WaterAffinity, PerkLib.AffinityUndine)) dao += 1 + rand(3);
 					break;
+				case "Earth":
+					if (player.hasAnyPerk(PerkLib.EarthAffinity, PerkLib.AffinityGnome)) dao += 1 + rand(3);
+					break;
+				case "Acid":
+					if (player.hasPerk(PerkLib.AcidAffinity)) dao += 1 + rand(3);
+					break;
+				
 			}
 		}
 		//uzycie w kontemplacji niebianskich skarbow zwiazanych z danym zywiolem daje bonusowe punkty

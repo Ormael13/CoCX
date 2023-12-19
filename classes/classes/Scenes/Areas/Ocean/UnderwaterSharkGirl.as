@@ -90,6 +90,7 @@ public class UnderwaterSharkGirl extends Monster
 			this.special1 = sharkTease;
 			this.special2 = sharkBiteAttack;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.WaterNature, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

@@ -208,6 +208,7 @@ public class AirElemental extends Monster
 			this.weaponVerb = "smash";
 			this.armorName = "air currents armor";
 			this.createPerk(PerkLib.EnemyElementalType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.WindNature, 0, 0, 0, 0);
 			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
 				this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
 				this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);

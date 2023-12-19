@@ -48,7 +48,7 @@ public class DracoSweepSkill extends AbstractSoulSkill {
 		}
 		if (player.weapon == weapons.TIDAR) (player.weapon as Tidarion).afterStrike();
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
-			damage = combat.FireTypeDamageBonus(damage);
+			damage = combat.fireTypeDamageBonus(damage);
 			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
 			damage *= 1.1;
 		}
