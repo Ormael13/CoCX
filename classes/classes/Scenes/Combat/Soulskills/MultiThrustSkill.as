@@ -109,7 +109,7 @@ public class MultiThrustSkill extends AbstractSoulSkill {
 		}
 		else if (combat.isLightningTypeWeapon()) {
 			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
-			doLightingDamage(damage, true, display);
+			doLightningDamage(damage, true, display);
 			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
 		}
 		else if (combat.isDarknessTypeWeapon()) {

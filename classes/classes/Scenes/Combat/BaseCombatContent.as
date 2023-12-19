@@ -60,8 +60,8 @@ public class BaseCombatContent extends BaseContent {
 	protected function doIceDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
 		return combat.doIceDamage(damage, apply, display, ignoreDR);
 	}
-	protected function doLightingDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
-		return combat.doLightingDamage(damage, apply, display, ignoreDR);
+	protected function doLightningDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
+		return combat.doLightningDamage(damage, apply, display, ignoreDR);
 	}
 	protected function doDarknessDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
 		return combat.doDarknessDamage(damage, apply, display, ignoreDR);

@@ -158,15 +158,15 @@ import classes.Scenes.Combat.CombatAbilities;
 
 		//(if PC uses tease/seduce after this)
 		//Deals big lust increase, despite her resistance.
-		override public function teased(lustDelta:Number, isNotSilent:Boolean = true):void
+		override public function teased(lustDelta:Number, isNotSilent:Boolean = true, display:Boolean = true):void
 		{
 			if(hasStatusEffect(StatusEffects.Concentration)) {
 				outputText("Amily flushes hotly; her concentration only makes her pay more attention to your parts!");
 				lustDelta += 25+lustDelta;
 				removeStatusEffect(StatusEffects.Concentration);
-				applyTease(lustDelta);
+				applyTease(lustDelta, display);
 			} else {
-				super.teased(lustDelta);
+				super.teased(lustDelta, isNotSilent, display);
 			}
 		}
 

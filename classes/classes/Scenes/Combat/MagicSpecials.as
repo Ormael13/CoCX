@@ -1278,7 +1278,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage = Math.round(damage * combat.lightningDamageBoostedByDao());
-		doLightingDamage(damage, true, true);
+		doLightningDamage(damage, true, true);
 		outputText(" damage. ");
 		if (crit1) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
@@ -1389,7 +1389,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage = Math.round(damage * combat.lightningDamageBoostedByDao());
-		doLightingDamage(damage, true, true);
+		doLightningDamage(damage, true, true);
 		outputText(" damage. ");
 		if (crit1) outputText(" <b>*Critical Hit!*</b>");
 		dynStats("lus", (Math.round(player.maxLust() * 0.02)), "scale", false);
@@ -1483,7 +1483,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
 		lustDmgF = Math.round(lustDmgF);
 		outputText("You let electricity build up in your body before unleashing it into the ambient sky, the clouds roaring with thunder. Here comes the storm! ");
-		doLightingDamage(damage, true, true);
+		doLightningDamage(damage, true, true);
 		if (crit1) outputText(" <b>*Critical!*</b>");
 		monster.teased(lustDmgF, false);
 		if (crit2) outputText(" <b>Critical!</b>");
@@ -2296,7 +2296,7 @@ public class MagicSpecials extends BaseCombatContent {
 				else outputText("are");
 				outputText("too resolute to be stunned by your attack.</b> ");
 			}
-			doLightingDamage(damage, true, true);
+			doLightningDamage(damage, true, true);
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
@@ -5123,7 +5123,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		else outputText("begin spasming while [monster his] body is ran through by electricity");
 		damage = Math.round(damage * combat.lightningDamageBoostedByDao());
-		doLightingDamage(damage);
+		doLightningDamage(damage);
 	}
 	private function FaeStormAcid(damage:Number):void{
 		if(monster.plural) {
@@ -5806,7 +5806,7 @@ public class MagicSpecials extends BaseCombatContent {
 			case 0:
 				outputText("[Themonster] takes heavy electricity damage from the eyebeam! ");
 				damage = Math.round(damage * combat.lightningDamageBoostedByDao());
-				doLightingDamage((damage * 3), true, true);
+				doLightningDamage((damage * 3), true, true);
 				break;
 			case 1:
 				outputText("[Themonster]  starts to burn as [monster his] body catches fire from the eyebeam! ");
@@ -6404,7 +6404,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("too resolute to be stunned by your attack.</b>");
 		}*/
 		outputText("Your elemental charges electricity, then discharges it with a blinding bolt doing ");
-		doLightingDamage(damage, true, true);
+		doLightningDamage(damage, true, true);
 		outputText("\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();

@@ -136,7 +136,7 @@ public class CreateElementSkill extends AbstractSoulSkill {
 				break;
 			case "Lightning":
 				damage = Math.round(damage*combat.lightningDamageBoostedByDao());
-				doLightingDamage(damage, true, display);
+				doLightningDamage(damage, true, display);
 				break;
 			case "Darkness":
 				damage = Math.round(damage*combat.darknessDamageBoostedByDao());

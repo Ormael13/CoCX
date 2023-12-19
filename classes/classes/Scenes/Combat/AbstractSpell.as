@@ -504,7 +504,7 @@ public class AbstractSpell extends CombatAbility {
 				damageFn = doIceDamage;
 				break;
 			case DamageType.LIGHTNING:
-				damageFn = doLightingDamage;
+				damageFn = doLightningDamage;
 				break;
 			case DamageType.WATER:
 				damageFn = doWaterDamage;

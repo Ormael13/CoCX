@@ -2877,8 +2877,10 @@ import classes.Scenes.Combat.CombatAbilities;
 		/**
 		 * Display tease reaction message. Then call applyTease() to increase lust.
 		 * @param lustDelta value to be added to lust (already modified by lustVuln etc)
+		 * @param isNotSilent (Boolean) - Choose whether the default monster tease reaction text should be printed
+		 * @param display (Boolean) - Choose whether the tease damage number should be displayed
 		 */
-		public function teased(lustDelta:Number, isNotSilent:Boolean = true):void
+		public function teased(lustDelta:Number, isNotSilent:Boolean = true, display:Boolean = true):void
 		{
 			if(isNotSilent)
 			{
@@ -2896,7 +2898,7 @@ import classes.Scenes.Combat.CombatAbilities;
 				}
 			}
 			if (hasStatusEffect(StatusEffects.BerzerkingSiegweird)) lustDelta *= 0.5;
-			applyTease(lustDelta);
+			applyTease(lustDelta, display);
 		}
 
 		protected function outputDefaultTeaseReaction(lustDelta:Number):void
@@ -2931,11 +2933,12 @@ import classes.Scenes.Combat.CombatAbilities;
 			}
 		}
 
-		protected function applyTease(lustDelta:Number):void{
+		protected function applyTease(lustDelta:Number, display:Boolean = true):void{
 			if (damageReductionBasedOnDifficulty() > 1) lustDelta *= (1 / damageReductionBasedOnDifficulty());
+			lustDelta *= SceneLib.combat.doDamageReduction();
 			lustDelta = Math.round(lustDelta);
 			lust += lustDelta;
-			outputText(" <b>([font-lust]" + Utils.formatNumber(lustDelta) + "</font>)</b>");
+			if (display) SceneLib.combat.CommasForDigits(lustDelta, true);//outputText(" <b>([font-lust]" + Utils.formatNumber(lustDelta) + "</font>)</b>");
 			if (player.armor == armors.ELFDRES && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0 && lustDelta >= 1) {
 				outputText(" You cool down a little bit ");
 				player.takeLustDamage(Math.round(-lustDelta)/20);
