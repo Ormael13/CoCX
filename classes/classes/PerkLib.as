@@ -495,7 +495,7 @@ public class PerkLib
 				"Add your intelligence to gun damage as a modifier. (+5% firearms attacks multiplier)",
 				"You've chosen the 'Alchemical cartridge' perk, adding intelligence scaling to firearms damage. (+5% firearms attacks multiplier)");
 		public static const AlchemicalTolerance:PerkType = mk("Alchemical Tolerance", "Alchemical Tolerance",
-				"Increase alchemical stat cap by 5%",
+				"Increase alchemical stat cap by 5%.",
 				"You've chosen the 'Alchemical Tolerance' perk, increasing your alchemical stat cap by 5%.");
 		public static const AllSeeing:PerkType = mk("All-Seeing", "All-Seeing",
 				"You see everything... so you should have expected this description, and the 10% soul force gain.",
@@ -7477,10 +7477,10 @@ public class PerkLib
                         return player.isAnyRaceCached(Races.SLIME, Races.DARKSLIME, Races.MAGMASLIME, Races.MANTICORE, Races.DISPLACERBEAST, Races.VAMPIRE, Races.DRACULA) || CoC.instance.flags[kFLAGS.HUNGER_ENABLED] > 0;
                     }, "Slime, Manticore, Displacer beast, Vampire, Dracula race or hunger enabled.");
             AlchemicalTolerance.requirePerk(JobSoulCultivator)
-								.requireLevel(18)
-								.requireCustomFunction(function (player:Player):Boolean {
-									return Crafting.alembicLevel >= 1;
-								}, "Alchemy Level 1 or higher");
+					.requireLevel(18)
+					.requireCustomFunction(function (player:Player):Boolean {
+						return Crafting.alembicLevel >= 1;
+					}, "Alchemy Level 1 or higher");
 			//Tier 4
 			ChimericalBodySemiImprovedStage.requirePerk(ChimericalBodyBasicStage)
                     .requireLevel(24)

@@ -189,6 +189,13 @@ public class Changelog extends BaseContent
 			outputText("-Players can now learn Kindra's bow skills even if they maxed their bow skill somewhere else. Standardized damage calculation for Nosferatu spell so it aligns with other black spells. (Demojay)\n");
 			outputText("-Fixed monster damage display sometime not showing the true damage received. Dragonne Race does not both add and subtract racial scores for draconic horns. Dragon race now cannot have a cat tongue, while Dragonne requires one. (Demojay)\n");
 			outputText("-Replaced instances of Frostbite in code with Frostburn, so that Ice DoT properly triggers. Fixed code related to disabling flying in combat. Atlach Nacha's Pin Down attack now properly removes and disables flight. (Demojay)\n");
+			outputText("-Fixed bugs involving incorrect damage calculating using Anubis Soulskills with Eclypse Mod. General code, description and tag cleanup for SoulSkills. Corrected incorrect attacks being used for Warden Soulskills when in a mech. (Demojay)\n");
+			outputText("-New tier 3 misc lvl-up perk (by Demojay): Alchemical Tolerance. Req. Job: Soul Cultivator and Alchemy Level 1 or higher. Effect: Increase Alchemic cap by 5%.\n");
+			outputText("-Created Soul Cultivator Perk: Killing Intent - True Damage attack that increases damage based on cultivator rank and number of monsters killed. (Demojay)\n");
+			outputText("-Created Soul Cultivator Perk: First Attack: Flying Sword - Allows Flying to attack independently when not using it to fly. (Demojay)\n");
+			outputText("-Cleaned up code for Flying Swords to explicitly set their sword count and elemental attack. Player can now start to see some of their general abilities in the Stats menu. Simplified Minion menu for setting minion behaviour in and out of combat. Mummy Lord attacks now be configured on/off in combat. Adjusted Will Of The Wisp attack damage so it is similar to a Mummy Lord attack. (Demojay)\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -208,13 +215,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay) (NUZ/Shirane)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Telekinetic Grasp have unlimited powe... duration, 'Elite/Champion/Boss HP bonus' setting, Monsters HP (and Soulforce/Mana) not decreasing on turn end when any effect lowering it, Rathazul keep trying cure Belisa after Nadia done it, Vouivre Oil replacing dragon ears with snake ears & dragon scales with snake scales, Tyrantia & Flitzi forest scene allowing to skip ");
@@ -278,7 +278,12 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -304,6 +309,7 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
