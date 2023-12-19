@@ -15,12 +15,13 @@ public class BloodDewdropsSkill extends AbstractBloodSoulSkill {
 			: "Blood Dewdrops will fire many bloody droplets from your hand.  ",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING],
+            [TAG_DAMAGING, TAG_PHYSICAL],
             sfInfusion? StatusEffects.KnowsBloodDewdropsSF: StatusEffects.KnowsBloodDewdrops,
 			true,
 			sfInfusion
         )
 		baseSFCost = 240;
+		lastAttackType = Combat.LAST_ATTACK_PHYS;
     }
 
 	override protected function baseName():String {
@@ -28,7 +29,7 @@ public class BloodDewdropsSkill extends AbstractBloodSoulSkill {
 	}
 
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + Math.round(calcDamage(target) * 4) + " blood damage"
+		return "~" + numberFormat(Math.round(calcDamage(target) * 4)) + " blood damage"
 	}
 
 	override public function calcCooldown():int {
@@ -54,12 +55,13 @@ public class BloodDewdropsSkill extends AbstractBloodSoulSkill {
 			damage *= soulskillPhysicalMod();
 		}
 
+		if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
+		damage *= combat.bloodDamageBoostedByDao();
 		return Math.round(damage);
 
 	}
 
     override public function doEffect(display:Boolean = true):void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_PHYS;
 		var additionalSFLine: String = sfInfusion? "You close your eyes for a moment, sending soulforce into the pellets. " : "";
 		if (display) outputText("You concentrate, focusing on the power of your blood before opening your hand and pointing it toward the enem"+(monster.plural?"ies":"y")
 			+". Blood spurts from your fingertips, beads of crimson darkening as they harden. " + additionalSFLine
@@ -76,8 +78,6 @@ public class BloodDewdropsSkill extends AbstractBloodSoulSkill {
 			crit = true;
 			damage *= 1.75;
 		}
-		if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
-		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
 		if (display && display) outputText("[Themonster] takes ");
 		doDamage(damage, true, display);
 		if (crit && display) outputText(" <b>*Critical Hit!*</b>");

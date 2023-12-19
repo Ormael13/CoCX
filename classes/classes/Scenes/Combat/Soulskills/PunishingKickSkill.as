@@ -4,7 +4,6 @@ import classes.Scenes.Combat.AbstractSoulSkill;
 import classes.Races;
 import classes.StatusEffects;
 import classes.Monster;
-import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Combat.Combat;
 
 public class PunishingKickSkill extends AbstractSoulSkill {
@@ -14,10 +13,11 @@ public class PunishingKickSkill extends AbstractSoulSkill {
             "A vicious kick that can daze an opponent, reducing its damage for a while.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING, TAG_DEBUFF],
+            [TAG_DAMAGING, TAG_DEBUFF, TAG_PHYSICAL],
             StatusEffects.KnowsPunishingKick
         )
 		baseSFCost = 30;
+		lastAttackType = Combat.LAST_ATTACK_PHYS;
     }
 
     override protected function usabilityCheck():String {
@@ -36,7 +36,7 @@ public class PunishingKickSkill extends AbstractSoulSkill {
 	}
 
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target) + " damage, Lowers enemy damage by 50% for " + calcCooldown() + " rounds"
+		return "~" + numberFormat(calcDamage(target)) + " damage, Lowers enemy damage by 50% for " + calcCooldown() + " rounds"
 	}
 
 	override public function calcCooldown():int {
@@ -71,9 +71,7 @@ public class PunishingKickSkill extends AbstractSoulSkill {
 
 	}
 
-    override public function doEffect(display:Boolean = true):void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_PHYS;
-        
+    override public function doEffect(display:Boolean = true):void {        
 
 		var damage:Number = calcDamage(monster);
 		var crit:Boolean = false;

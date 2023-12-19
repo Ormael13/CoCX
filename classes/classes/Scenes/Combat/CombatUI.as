@@ -275,6 +275,8 @@ public class CombatUI extends BaseCombatContent {
 			doWispTurn();
 		else if (isMummyTurn())
 			doMummyTurn();
+		else if (isFlyingSwordTurn())
+			doFlyingSwordTurn();
 		else if (isCompanionTurn(0))
 			doCompanionTurn(0);
 		else if (isCompanionTurn(1) && !player.hasStatusEffect(StatusEffects.MinoKing) && player.statusEffectv1(StatusEffects.MinoKing) != 1)
@@ -576,11 +578,21 @@ public class CombatUI extends BaseCombatContent {
 	}
 
 	public function isWispTurn():Boolean {
-		return player.hasPerk(PerkLib.JobLeader) && flags[kFLAGS.WILL_O_THE_WISP] < 2 && flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 1;
+		return CombatAbilities.WillOfTheWisp.isKnownAndUsable && flags[kFLAGS.WILL_O_THE_WISP] < 2 && flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 1;
 	}
 
 	public function doWispTurn():void {
-		if (flags[kFLAGS.WILL_O_THE_WISP] == 0) combat.willothewispattacks();
+		function doWillOfTheWispAttack():void {
+			if (CombatAbilities.WillOfTheWisp.isKnownAndUsable) {
+				CombatAbilities.WillOfTheWisp.perform();
+				flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] = 1;
+				if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
+					menu();
+					addButton(0, "Next", combatMenu, false);
+				}
+			}
+		}
+		if (flags[kFLAGS.WILL_O_THE_WISP] == 0) doWillOfTheWispAttack();
 		else {
 			clearOutput();
 			outputText("Would you like your wisp to attack?");
@@ -588,16 +600,40 @@ public class CombatUI extends BaseCombatContent {
 			outputText("\n<b>You can also enable \"Simplified Pre-PC Turn\" in Perk menu to set all your allies' behaviour to automatic and avoid pressing the 'Next' button every time.</b>\n\n");
 			menu();
 			addButton(0, "Skip", combat.willothewispskip).hint("You forfeit this attack of the wisp. Would skip to next minion attack/your main turn.");
-			addButton(1, "Attack", combat.willothewispattacks).hint("The wisp attacks your enemy.");
+			addButton(1, "Attack", doWillOfTheWispAttack).hint("The wisp attacks your enemy.");
 		}
 	}
 
+	public function isFlyingSwordTurn():Boolean {
+		return CombatAbilities.FlyingSwordAttack.isKnownAndUsable && flags[kFLAGS.FLYING_SWORD] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_FLYING_SWORD_ATTACKED] != 1;
+	}
+
+	public function doFlyingSwordTurn():void {
+		if (CombatAbilities.FlyingSwordAttack.isKnownAndUsable) {
+			CombatAbilities.FlyingSwordAttack.preTurnAttack = true;
+			CombatAbilities.FlyingSwordAttack.perform();
+			CombatAbilities.FlyingSwordAttack.preTurnAttack = false;
+			flags[kFLAGS.IN_COMBAT_PLAYER_FLYING_SWORD_ATTACKED] = 1;
+			if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
+				menu();
+				addButton(0, "Next", combatMenu, false);
+			}
+		}	
+	}
+
 	public function isMummyTurn():Boolean {
-		return player.hasPerk(PerkLib.MummyLord) && player.perkv1(PerkLib.MummyLord) > 0 && flags[kFLAGS.IN_COMBAT_PLAYER_MUMMY_ATTACKED] != 1;
+		return CombatAbilities.MummyAttack.isKnownAndUsable && flags[kFLAGS.IN_COMBAT_PLAYER_MUMMY_ATTACKED] != 1 && flags[kFLAGS.MUMMY_ATTACK] == 1;
 	}
 	
 	public function doMummyTurn():void {
-		combat.mummyattacks();
+		if (CombatAbilities.MummyAttack.isKnownAndUsable) {
+			CombatAbilities.MummyAttack.perform();
+			flags[kFLAGS.IN_COMBAT_PLAYER_MUMMY_ATTACKED] = 1;
+			if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
+				menu();
+				addButton(0, "Next", combatMenu, false);
+			}
+		}
 	}
 
 	public function isGolemTurn():Boolean {

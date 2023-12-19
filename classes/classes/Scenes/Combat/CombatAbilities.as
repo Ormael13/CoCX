@@ -9,8 +9,18 @@ import classes.Scenes.Combat.SpellsGrey.*;
 import classes.Scenes.Combat.SpellsBlood.*;
 import classes.Scenes.Combat.Soulskills.*;
 import classes.Scenes.Combat.SpecialsMagic.*;
+import classes.Scenes.Combat.General.*;
 
 public class CombatAbilities {
+
+	public static const FlyingSwordAttack:FlyingSwordSkill		= new FlyingSwordSkill();
+	public static const WillOfTheWisp:WillOfTheWispSkill		= new WillOfTheWispSkill();
+	public static const MummyAttack:MummyAttackSkill		= new MummyAttackSkill();
+	public static const ALL_GENERAL_SKILLS:/*CombatAbility*/Array = [
+		FlyingSwordAttack,
+		WillOfTheWisp,
+		MummyAttack
+	];
 	
 	public static const Whitefire:WhitefireSpell                = new WhitefireSpell();
 	public static const WhitefireEx:WhitefireSpell              = new WhitefireSpell(true);
@@ -284,6 +294,7 @@ public class CombatAbilities {
 	public static const BloodRequiem:BloodReqiuemSkill								= new BloodReqiuemSkill();
 	public static const BloodRequiemSF:BloodReqiuemSkill							= new BloodReqiuemSkill(true);
 	public static const ScarletSpiritCharge:ScarletSpiritChargeSkill				= new ScarletSpiritChargeSkill();
+	public static const KillingIntent:KillingIntentSkill							= new KillingIntentSkill();
 
 
 
@@ -333,7 +344,8 @@ public class CombatAbilities {
 		HeartSeekerSF,
 		BloodRequiem,
 		BloodRequiemSF,
-		ScarletSpiritCharge
+		ScarletSpiritCharge,
+		KillingIntent
 	]
 
 	public static const BPBloodSwipe:BloodSwipePuppiesSkill = new BloodSwipePuppiesSkill();
@@ -412,7 +424,8 @@ public class CombatAbilities {
 			.concat(ALL_SOULSKILLS)
 			.concat(ALL_MAGICAL_SPECIALS)
 			.concat(ALL_ELEMENTAL_ASPECTS)
-			.concat(ALL_BLOOD_PUPPY_SOULSKILLS);
+			.concat(ALL_BLOOD_PUPPY_SOULSKILLS)
+			.concat(ALL_GENERAL_SKILLS);
 	;
 	
 	function CombatAbilities() {

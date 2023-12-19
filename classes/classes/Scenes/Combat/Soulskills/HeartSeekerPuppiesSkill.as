@@ -12,7 +12,7 @@ public class HeartSeekerPuppiesSkill extends AbstractBloodSoulSkill {
             "Command Blood Puppies to attack the enemy with Heart Seeker. Ignores physical resistance.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING],
+            [TAG_DAMAGING, TAG_PHYSICAL],
             PerkLib.MyBloodForBloodPuppies,
 			true,
 			sfInfusion
@@ -27,17 +27,6 @@ public class HeartSeekerPuppiesSkill extends AbstractBloodSoulSkill {
 
 	override public function describeEffectVs(target:Monster):String {
 		return "~" + numberFormat(calcDamage(target) * 2) + " true damage"
-	}
-
-	override protected function usabilityCheck():String {
-        var uc:String =  super.usabilityCheck();
-        if (uc) 
-			return uc;
-
-		if (flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] == 1)
-			return "Your Blood Puppies have already attacked this turn";
-		
-		return "";
 	}
 
 	public function calcDamage(monster:Monster):Number {

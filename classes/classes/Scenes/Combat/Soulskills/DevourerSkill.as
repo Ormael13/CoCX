@@ -15,6 +15,7 @@ public class DevourerSkill extends AbstractSoulSkill {
             [TAG_DEBUFF],
             StatusEffects.KnowsHeavensDevourer
         )
+		lastAttackType = Combat.LAST_ATTACK_SPELL;
     }
 
 	override public function get buttonName():String {
@@ -22,7 +23,7 @@ public class DevourerSkill extends AbstractSoulSkill {
 	}
 
 	override public function describeEffectVs(target:Monster):String {
-		return "Drains ~" + calcLustDrain(target, false) + "lust and ~" + calcWrathDrain(target, false) + " wrath";
+		return "Drains ~" + numberFormat(calcLustDrain(target, false)) + "lust and ~" + numberFormat(calcWrathDrain(target, false)) + " wrath";
 	}
 
 	override public function calcCooldown():int {
@@ -62,8 +63,6 @@ public class DevourerSkill extends AbstractSoulSkill {
 	}
 
     override public function doEffect(display:Boolean = true):void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_SPELL;
-
 		if (display) {
 			outputText("You start to concentrate and between your hands forms small black sphere inscribed with many tiny symbols. With a simple flick of hand you send it toward [themonster], which preparing to defend. But sphere stops a round twenty centimiters before [monster his]. ");
     		outputText("And then it starts greedy sucking our any bit of lust or wrath it can find in [themonster] trasmiting part of it back to you.");

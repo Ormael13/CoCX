@@ -15,10 +15,11 @@ public class FingerOfDeathSkill extends AbstractSoulSkill {
             "Inflict massive dark damage. Also damage the opponent's toughness and strength by 10 percent. Ineffective on foes who lack a soul.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING, TAG_DARKNESS, TAG_DEBUFF],
+            [TAG_DAMAGING, TAG_DARKNESS, TAG_DEBUFF, TAG_MAGICAL],
             null
         )
 		baseSFCost = 200;
+		lastAttackType = Combat.LAST_ATTACK_SPELL;
     }
 
     override protected function usabilityCheck():String {
@@ -44,7 +45,7 @@ public class FingerOfDeathSkill extends AbstractSoulSkill {
 	}
 
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target) + " magical damage";
+		return "~" + numberFormat(calcDamage(target, false)) + " magical damage";
 	}
 
 	override public function calcCooldown():int {
@@ -54,14 +55,14 @@ public class FingerOfDeathSkill extends AbstractSoulSkill {
 		return cooldown;
 	}
 
-	public function calcDamage(monster:Monster):Number {
+	public function calcDamage(monster:Monster, casting:Boolean = false):Number {
 		var damage:Number = (scalingBonusWisdom() * 1.5) + (scalingBonusIntelligence() * 1.5);
 		if (damage < 15) damage = 15;
 
 		//soulskill mod effect
 		damage *= spellMod();
 		damage *= soulskillMagicalMod();
-		damage = calcEclypseMod(damage, true);
+		damage = calcEclypseMod(damage, casting);
 
 		//other bonuses
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
@@ -73,13 +74,11 @@ public class FingerOfDeathSkill extends AbstractSoulSkill {
 
 
     override public function doEffect(display:Boolean = true):void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_SPELL;
-
 		if (display) outputText("You point a finger at your opponent condemning [monster his] soul as you call on to the power of death to claim a part of [monster him] early!"
 			+ " A ghastly claw appears and pierce through [themonster] body tearing [monster his] soul appart.  ");
 		combat.darkRitualCheckDamage();
 
-		var damage:Number = calcDamage(monster);
+		var damage:Number = calcDamage(monster, true);
 
 		//Determine if critical hit!
 		var crit:Boolean = false;

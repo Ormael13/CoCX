@@ -12,9 +12,10 @@ public class IciclesOfLoveSkill extends AbstractSoulSkill {
             "Weaponize your lust, crystalizing it into cold, sharp icicles.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING, TAG_ICE, TAG_RECOVERY],
+            [TAG_DAMAGING, TAG_ICE, TAG_RECOVERY, TAG_MAGICAL],
             StatusEffects.KnowsIciclesOfLove
         )
+		lastAttackType = Combat.LAST_ATTACK_SPELL;
     }
 
 	override public function get buttonName():String {
@@ -34,7 +35,7 @@ public class IciclesOfLoveSkill extends AbstractSoulSkill {
 
 	override public function describeEffectVs(target:Monster):String {
 		var lustRestore: Number = calcLustRestore();
-		return "~" + calcDamage(target, lustRestore) + " ice damage, restores " + lustRestore + " lust";
+		return "~" + numberFormat(calcDamage(target, lustRestore)) + " ice damage, restores ~" + numberFormat(lustRestore) + " lust";
 	}
 
 	override public function calcCooldown():int {
@@ -60,8 +61,6 @@ public class IciclesOfLoveSkill extends AbstractSoulSkill {
 	}
 
     override public function doEffect(display:Boolean = true):void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_SPELL;
-
 		var lustRestore:Number = calcLustRestore();
 		player.lust -= lustRestore;
 

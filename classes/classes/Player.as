@@ -1317,11 +1317,11 @@ use namespace CoC;
 		//Flying swords related checks
 		public function canFlyOnFlyingSwords():Boolean
 		{
-			return weaponFlyingSwordsPerk == "Large" || weaponFlyingSwordsPerk == "Large Two" || weaponFlyingSwordsPerk == "Massive" || weaponFlyingSwordsPerk == "Massive Two";
+			return (weaponFlyingSwordsPerk == "Large" || weaponFlyingSwordsPerk == "Massive") && usingSingleFlyingSword();
 		}
 		public function usingSingleFlyingSword():Boolean
 		{
-			return weaponFlyingSwordsPerk == "Small" || weaponFlyingSwordsPerk == "Large" || weaponFlyingSwordsPerk == "Massive";//weaponSpecials("Dual Massive") ||  || 
+			return weaponFlyingSwords.count == 1;//weaponSpecials("Dual Massive") ||  || 
 		}
 		//Hold with Both Hands checks
 		public function gaindHoldWithBothHandBonus():Boolean
@@ -1782,6 +1782,9 @@ use namespace CoC;
 			var flyingswordsattack:Number = weaponFlyingSwords.attack;
 			//flyingswordsattack = Math.round(flyingswordsattack);
 			return flyingswordsattack;
+		}
+		public function get weaponFlyingSwordsCount():Number {
+			return weaponFlyingSwords.count;
 		}
 		public function get weaponFlyingSwordsBaseAttack():Number {
 			return weaponFlyingSwords.attack;
@@ -2622,7 +2625,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.PureAndLoving)) lust *= 0.95;
 			//Berseking reduces lust gains by 10%
 			if (hasStatusEffect(StatusEffects.Berzerking)) lust *= 0.9;
-			if (hasStatusEffect(StatusEffects.Overlimit) || CombatAbilities.FieryRage.isActive()) lust *= 0.9;
+			if (CombatAbilities.Overlimit.isActive() || CombatAbilities.FieryRage.isActive()) lust *= 0.9;
 			if (TyrantiaFollower.TyrantiaTrainingSessions >= 25 && lust100 >= 50) {
 				if (lust100 >= 100) lust *= 0.3;
 				else if (lust100 >= 51) lust *= (1 - ((lust100 - 30) * 0.01));
@@ -7064,20 +7067,21 @@ use namespace CoC;
             return true;
 		}
 
-		public function AlchemyBonus(statName: String, bonus: Number):void
+		public function alchemyBonus(statName: String, bonus: Number):void
 		{
-			var ABCap:Number = 0.2;
-			if (hasPerk(PerkLib.Enhancement)) ABCap += 0.02;
-			if (hasPerk(PerkLib.Fusion)) ABCap += 0.02;
-			if (hasPerk(PerkLib.Enchantment)) ABCap += 0.02;
-			if (hasPerk(PerkLib.Refinement)) ABCap += 0.02;
-			if (hasPerk(PerkLib.Saturation)) ABCap += 0.02;
-			if (hasPerk(PerkLib.Perfection)) ABCap += 0.02;
-			if (hasPerk(PerkLib.Creationism)) ABCap += 0.02;
-			if (hasPerk(PerkLib.TransformationAcclimation)) ABCap += 0.02;
-			if (hasPerk(PerkLib.MunchkinAtGym)) ABCap += 0.05;
+			var aBCap:Number = 0.2;
+			if (hasPerk(PerkLib.Enhancement)) aBCap += 0.02;
+			if (hasPerk(PerkLib.Fusion)) aBCap += 0.02;
+			if (hasPerk(PerkLib.Enchantment)) aBCap += 0.02;
+			if (hasPerk(PerkLib.Refinement)) aBCap += 0.02;
+			if (hasPerk(PerkLib.Saturation)) aBCap += 0.02;
+			if (hasPerk(PerkLib.Perfection)) aBCap += 0.02;
+			if (hasPerk(PerkLib.Creationism)) aBCap += 0.02;
+			if (hasPerk(PerkLib.TransformationAcclimation)) aBCap += 0.02;
+			if (hasPerk(PerkLib.MunchkinAtGym)) aBCap += 0.05;
+			if (hasPerk(PerkLib.AlchemicalTolerance)) aBCap += 0.05;
 			removeCurse(statName, bonus, -2);
-			if (buff("Alchemical").getValueOfStatBuff(""+statName+".mult") < ABCap){
+			if (buff("Alchemical").getValueOfStatBuff(""+statName+".mult") < aBCap){
 				buff("Alchemical").addStat(""+statName+".mult",0.01);
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 				CoC.instance.mainView.statsView.showStatUp(statName);

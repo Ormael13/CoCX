@@ -14,10 +14,11 @@ public class IceFistSkill extends AbstractSoulSkill {
             "A chilling strike that can freeze an opponent solid, leaving it vulnerable to shattering soul art and hindering its movement.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING, TAG_ICE],
+            [TAG_DAMAGING, TAG_ICE, TAG_PHYSICAL],
             StatusEffects.KnowsIceFist
         )
 		baseSFCost = 30;
+		lastAttackType = Combat.LAST_ATTACK_PHYS;
     }
 
     override protected function usabilityCheck():String {
@@ -39,7 +40,7 @@ public class IceFistSkill extends AbstractSoulSkill {
 	}
 
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target) + " ice damage"
+		return "~" + numberFormat(calcDamage(target)) + " ice damage"
 	}
 
 	public function calcDamage(monster:Monster):Number {
@@ -61,7 +62,6 @@ public class IceFistSkill extends AbstractSoulSkill {
 	}
 
     override public function doEffect(display:Boolean = true):void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_PHYS;
 		var damage:Number = calcDamage(monster);
 
 		var crit:Boolean = false;

@@ -2873,7 +2873,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function AlraunePollen():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		var pollen:Number = monster.lustVuln * (combat.CalcAlchemyPower() * 0.05) * (2 + rand(4));
+		var pollen:Number = monster.lustVuln * (combat.calcHerbalismPower() * 0.05) * (2 + rand(4));
 		if (player.headjewelryName == "pair of Golden Naga Hairpins") pollen *= 1.1;
 		if (player.hasPerk(PerkLib.RacialParagon)) pollen *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) pollen *= 1.50;

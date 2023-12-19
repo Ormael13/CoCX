@@ -9,6 +9,7 @@ import classes.CoC;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutationPerkType;
 import classes.IMutations.*;
+import classes.internals.Utils;
 import classes.Parser.Parser;
 import classes.PerkClass;
 import classes.PerkLib;
@@ -97,28 +98,18 @@ public class PerkMenu extends BaseContent {
 		if (player.hasPerk(PerkLib.Venomancy) || player.hasPerk(PerkLib.DarkRitual) || player.hasPerk(PerkLib.HiddenJobBloodDemon)||
 			(player.hasPerk(PerkLib.Spellsword) || player.hasPerk(PerkLib.Spellbow) || player.hasPerk(PerkLib.Spellarmor) || player.hasPerk(PerkLib.Battleflash) || player.hasPerk(PerkLib.Battlemage) || player.hasPerk(PerkLib.Battleshield) || player.hasPerk(PerkLib.FortressOfIntellect))) {
 			outputText("\n<b>You can choose and adjust various effects related to your magic.</b>");
-			addButton(7, "Magic Opt",MagicOption);
+			addButton(7, "Magic Opt",magicOption);
 		}
 		outputText("\n<b>You can choose and adjust miscellaneous effects.</b>");
 		addButton(8, "Misc Opt",MiscOption);
-		if (player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) {
-			outputText("\n<b>You can adjust your elemental summons behaviour during combat.</b>");
-			addButton(10, "Elementals",summonsbehaviourOptions);
-		}
-		if ((flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0 || flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > 0 || flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > 0 || flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] > 0) || (player.hasPerk(PerkLib.FirstAttackSkeletons) && (player.perkv2(PerkLib.PrestigeJobNecromancer) > 0 || player.perkv1(PerkLib.GreaterHarvest) > 0 || player.perkv2(PerkLib.GreaterHarvest) > 0))) {
-			outputText("\n<b>You can adjust your permanent golems (or skeletons) behaviour during combat.</b>");
-			addButton(11, "Golems/Skeletons",golemsskeletonsbehaviourOptions);
-		}
-		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) {
-			outputText("\n<b>You can adjust your blood puppies behaviour during combat.</b>");
-			addButton(12, "B. Puppies", bpbehaviourOptions);
-		}
-		if (player.hasPerk(PerkLib.JobLeader)) {
-			outputText("\n<b>You can adjust your Will-o'-the-wisp behaviour during combat.</b>");
-			addButton(13, "Will-o'-the-wisp",WOTWbehaviourOptions);
-		}
 		//addButton(10, "Number of", EngineCore.doNothing);
 		//addButton(11, "perks: " + player.perks.length, EngineCore.doNothing);
+		if (player.hasPerk(PerkLib.FirstAttackFlyingSword)) {
+			outputText("\n<b>You can adjust your Flying Sword behaviour during combat.</b>");
+			addButton(12, "Flying Sword", flyingSwordBehaviourOptions);
+		}
+		outputText("\n<b>You can choose and adjust how you minions behave in battle.</b>");
+		addButton(13, "Minions", minionOptions);
 		if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
 			outputText("\n\n<b>Simplified Pre-Turn is enabled. The strongest possible golems and elementals are selected to attack. The wisp always attacks.</b>");
 			addButton(14, "S.PTurn(On)", simplifiedPreTurnOff).hint("Click to disable Simplified Pre-Turn.");
@@ -138,12 +129,12 @@ public class PerkMenu extends BaseContent {
 		displayPerks();
 	}
 
-	public function MagicOption(e:MouseEvent = null):void {
+	public function magicOption(e:MouseEvent = null):void {
 		clearOutput();
 		menu();
 		if (player.hasPerk(PerkLib.Venomancy)) {
 			outputText("<b>You can adjust your Venomancy.</b>\n");
-			addButton(1, "Venomancy Opt",VenomancyOption);
+			addButton(1, "Venomancy Opt",venomancyOption);
 		}
 		if (player.hasPerk(PerkLib.Spellsword) || player.hasPerk(PerkLib.Spellbow) || player.hasPerk(PerkLib.Spellarmor) || player.hasPerk(PerkLib.Battleflash) || player.hasPerk(PerkLib.Battlemage) || player.hasPerk(PerkLib.Battleshield) || player.hasPerk(PerkLib.FortressOfIntellect)) {
 			outputText("<b>You can adjust your spell autocast settings.</b>\n");
@@ -152,7 +143,7 @@ public class PerkMenu extends BaseContent {
 		if (player.hasPerk(PerkLib.DarkRitual) || player.hasPerk(PerkLib.HiddenJobBloodDemon)) {
 			if (player.hasPerk(PerkLib.DarkRitual)) outputText("<b>You can choose if you wish to use dark ritual and sacrifice health to empower your magic.</b>\n");
 			if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) outputText("<b>You can adjust your Blood Demon hidden job settings.</b>\n");
-			addButton(3, "Bloody Opt",DarkRitualOption);
+			addButton(3, "Bloody Opt",darkRitualOption);
 		}
 		addButton(14, "Back", displayPerks);
 	}
@@ -212,6 +203,37 @@ public class PerkMenu extends BaseContent {
 			addButton(11, "YPMP Wrath", curry(toggleFlagMisc, kFLAGS.YPMP_WRATH_GEN));
 		}
 		addButton(14, "Back", displayPerks);
+	}
+
+	public function minionOptions():void {
+		var bd:ButtonDataList = new ButtonDataList();
+		clearOutput();
+		outputText("You can choose how your pets and minions attack:");
+
+		menu();
+		if (player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) {
+			outputText("\n<b>You can adjust your elemental summons behaviour during combat.</b>");
+			bd.add("Elementals", summonsbehaviourOptions);
+		}
+		if ((flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0 || flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > 0 || flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > 0 || flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] > 0) || (player.hasPerk(PerkLib.FirstAttackSkeletons) && (player.perkv2(PerkLib.PrestigeJobNecromancer) > 0 || player.perkv1(PerkLib.GreaterHarvest) > 0 || player.perkv2(PerkLib.GreaterHarvest) > 0))) {
+			outputText("\n<b>You can adjust your permanent golems (or skeletons) behaviour during combat.</b>");
+			bd.add("Golems/Skeletons", golemsskeletonsbehaviourOptions);
+		}
+		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) {
+			outputText("\n<b>You can adjust your blood puppies behaviour during combat.</b>");
+			bd.add("B. Puppies", bpbehaviourOptions);
+		}
+		if (player.hasPerk(PerkLib.JobLeader)) {
+			outputText("\n<b>You can adjust your Will-o'-the-wisp behaviour during combat.</b>");
+			bd.add("Will-o'-the-wisp", wotwBehaviourOptions);
+		}
+		if (player.hasPerk(PerkLib.MummyLord) && player.perkv1(PerkLib.MummyLord) > 0) {
+			outputText("\n<b>You can adjust the behaviour of your mummies during combat.</b>");
+			bd.add("Mummies", mummyBehaviourOptions);
+		}
+
+
+		submenu(bd, CoC.instance.inCombat ? curry(combat.combatMenu, false) : displayPerks, 0, false);
 	}
 
 	private function toggleCorruptionTolerance():void {
@@ -438,7 +460,7 @@ public class PerkMenu extends BaseContent {
 			outputText("\n\nFortress of Intellect: <b>" + (player.hasStatusEffect(StatusEffects.FortressOfIntellect) ? "On" : "Off") + "</b>");
 			addButton(btn++, "FoI", toggleFortressOfIntelect);
 		}
-		addButton(14, "Back", MagicOption);
+		addButton(14, "Back", magicOption);
 
 		function toggleFortressOfIntelect():void {
 			if (!player.hasStatusEffect(StatusEffects.FortressOfIntellect)) player.createStatusEffect(StatusEffects.FortressOfIntellect, 0, 0, 0, 0);
@@ -532,8 +554,7 @@ public class PerkMenu extends BaseContent {
 			addButtonDisabled(13, "Melee+Help", "Req. to have summoned at least 1 elemental.");
 		}
 		if (page == 1) {
-					if (CoC.instance.inCombat) addButton(14, "Back", combat.combatMenu, false);
-					else addButton(14, "Back", displayPerks);
+					addButton(14, "Back", minionOptions);
 		}
 		else {
 			addButton(14, "Back", summonsbehaviourOptions, 1);
@@ -637,8 +658,7 @@ public class PerkMenu extends BaseContent {
 			if (flags[kFLAGS.NECROMANCER_SKELETONS] == 1) addButton(12, "S. Waiting", skeletonsAttacking,false).hint("Skeletons will not attack at the beginning of the turn.");
 			if (flags[kFLAGS.NECROMANCER_SKELETONS] != 1) addButton(13, "S. Attacking", skeletonsAttacking, true).hint("Skeletons will attack at the beginning of the turn.");
 		}
-		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu, false);
-		else addButton(14, "Back", displayPerks);
+		addButton(14, "Back", minionOptions);
 		function golemsElementaryWeaponMode(elementalMode:Number):void {
 			player.changeStatusValue(StatusEffects.GolemUpgrades1,3,elementalMode);
 			golemsskeletonsbehaviourOptions();
@@ -692,22 +712,21 @@ public class PerkMenu extends BaseContent {
 			.disableIf(flags[kFLAGS.BLOOD_PUPPY_SUMMONS] == 0);
 		addButton(11, "Helping", setflag, 1)
 			.disableIf(flags[kFLAGS.BLOOD_PUPPY_SUMMONS] != 0);
-		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu, false);
-		else addButton(14, "Back", displayPerks);
+		addButton(14, "Back", minionOptions);
 	}
 
-	public function DarkRitualOption():void {
+	public function darkRitualOption():void {
 		clearOutput();
 		menu();
 		if (player.hasPerk(PerkLib.DarkRitual)) {
 			outputText("Set if you will be sacrificing blood to empower your magic or not.\n\n");
 			if (!player.hasStatusEffect(StatusEffects.DarkRitual)) {
 				outputText("Dark ritual is currently: <b>Inactive</b>.");
-				addButton(10, "On", DarkRitualOptionOn);
+				addButton(10, "On", darkRitualOptionOn);
 			}
 			if (player.hasStatusEffect(StatusEffects.DarkRitual)) {
 				outputText("Dark ritual is currently: <b>Active</b>.");
-				addButton(11, "Off", DarkRitualOptionOff);
+				addButton(11, "Off", darkRitualOptionOff);
 			}
 			outputText("\n\n");
 		}
@@ -715,81 +734,81 @@ public class PerkMenu extends BaseContent {
 			outputText("Set if you will be using blood instead of mana to fuel your magic.\n\n");
 			if (!player.hasStatusEffect(StatusEffects.BloodMage)) {
 				outputText("Blood Mage: <b>Inactive</b>.");
-				addButton(0, "On", BloodMageOptionOn);
+				addButton(0, "On", bloodMageOptionOn);
 			}
 			if (player.hasStatusEffect(StatusEffects.BloodMage)) {
 				outputText("Blood Mage: <b>Active</b>.");
-				addButton(1, "Off", BloodMageOptionOff);
+				addButton(1, "Off", bloodMageOptionOff);
 			}
 			outputText("\n\n");
 			outputText("Set if you will be using blood instead of soulforce to fuel your soulskills.\n\n");
 			if (!player.hasStatusEffect(StatusEffects.BloodCultivator)) {
 				outputText("Blood Cultivator: <b>Inactive</b>.");
-				addButton(2, "On", BloodCultivatorOptionOn);
+				addButton(2, "On", bloodCultivatorOptionOn);
 			}
 			if (player.hasStatusEffect(StatusEffects.BloodCultivator)) {
 				outputText("Blood Cultivator: <b>Active</b>.");
-				addButton(3, "Off", BloodCultivatorOptionOff);
+				addButton(3, "Off", bloodCultivatorOptionOff);
 			}
 		}
 		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu, false);
 		else addButton(14, "Back", displayPerks);
-		function DarkRitualOptionOn():void {
+		function darkRitualOptionOn():void {
 			player.createStatusEffect(StatusEffects.DarkRitual,0,0,0,0);
-			DarkRitualOption();
+			darkRitualOption();
 		}
-		function DarkRitualOptionOff():void {
+		function darkRitualOptionOff():void {
 			player.removeStatusEffect(StatusEffects.DarkRitual);
-			DarkRitualOption();
+			darkRitualOption();
 		}
-		function BloodMageOptionOn():void {
+		function bloodMageOptionOn():void {
 			player.createStatusEffect(StatusEffects.BloodMage,0,0,0,0);
-			DarkRitualOption();
+			darkRitualOption();
 		}
-		function BloodMageOptionOff():void {
+		function bloodMageOptionOff():void {
 			player.removeStatusEffect(StatusEffects.BloodMage);
-			DarkRitualOption();
+			darkRitualOption();
 		}
-		function BloodCultivatorOptionOn():void {
+		function bloodCultivatorOptionOn():void {
 			player.createStatusEffect(StatusEffects.BloodCultivator,0,0,0,0);
-			DarkRitualOption();
+			darkRitualOption();
 		}
-		function BloodCultivatorOptionOff():void {
+		function bloodCultivatorOptionOff():void {
 			player.removeStatusEffect(StatusEffects.BloodCultivator);
-			DarkRitualOption();
+			darkRitualOption();
 		}
-		addButton(14, "Back", MagicOption);
+		addButton(14, "Back", magicOption);
 	}
 
-	public function VenomancyOption():void {
+	public function venomancyOption():void {
 		clearOutput();
 		menu();
 		if (player.hasPerk(PerkLib.Venomancy)) {
 			outputText("Set weither you will be using venom to empower your magic or not.\n\n");
 			if (!player.hasStatusEffect(StatusEffects.Venomancy)) {
 				outputText("Venomancy is currently: <b>Inactive</b>.");
-				addButton(10, "On", VenomancyOptionOn);
+				addButton(10, "On", venomancyOptionOn);
 			}
 			if (player.hasStatusEffect(StatusEffects.Venomancy)) {
 				outputText("Venomancy is currently: <b>Active</b>.");
-				addButton(11, "Off", VenomancyOptionOff);
+				addButton(11, "Off", venomancyOptionOff);
 			}
 			outputText("\n\n");
 		}
 		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu, false);
 		else addButton(14, "Back", displayPerks);
-		function VenomancyOptionOn():void {
+		function venomancyOptionOn():void {
 			player.createStatusEffect(StatusEffects.Venomancy,0,0,0,0);
-			VenomancyOption();
+			venomancyOption();
 		}
-		function VenomancyOptionOff():void {
+		function venomancyOptionOff():void {
 			player.removeStatusEffect(StatusEffects.Venomancy);
-			VenomancyOption();
+			venomancyOption();
 		}
-		addButton(14, "Back", MagicOption);
+		addButton(14, "Back", magicOption);
 	}
 
-	public function WOTWbehaviourOptions():void {
+	public function wotwBehaviourOptions():void {
 		clearOutput();
 		menu();
 		outputText("You can choose how your will-o'-the-wisp will behave during each fight.\n\n");
@@ -801,12 +820,52 @@ public class PerkMenu extends BaseContent {
 		if (flags[kFLAGS.WILL_O_THE_WISP] != 1) addButton(11, "Attacking(M)", WOTWAttacking, 1).hint("Would attack after confirming attack order.");
 		if (flags[kFLAGS.WILL_O_THE_WISP] != 2) addButton(12, "Commanding", WOTWAttacking, 2);
 
-		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu, false);
-		else addButton(14, "Back", displayPerks);
+		addButton(14, "Back", minionOptions);
         function WOTWAttacking(attacking:Number):void {
             flags[kFLAGS.WILL_O_THE_WISP] = attacking;
-            WOTWbehaviourOptions();
+            wotwBehaviourOptions();
         }
+	}
+
+	public function flyingSwordBehaviourOptions():void {
+		clearOutput();
+		menu();
+		outputText("You can choose how your flying sword will behave during each fight.\n\n");
+		outputText("\n<b>Flying Sword behaviour:</b>\n");
+		if (flags[kFLAGS.FLYING_SWORD] == 0) outputText("Your flying sword will not attack");
+		if (flags[kFLAGS.FLYING_SWORD] == 1) {
+			outputText("Your flying sword will attack at the begining of each turn.");
+			if ((player.hasStatusEffect(StatusEffects.Flying) && player.statusEffectv2(StatusEffects.Flying) == 1) || flags[kFLAGS.AUTO_FLIGHT] == 2) {
+				outputText("\n<b>Since you are using your flying sword to fly, ");
+				var flyingSwordCount:int = player.weaponFlyingSwords.count;
+				if (flyingSwordCount > 1) {
+					outputText("you will only deal " + Utils.numberOfThings(flyingSwordCount - 1, "attack") + ".</b>");
+				} else {
+					outputText("you can't attack with your flying sword. Use a different way to fly, or stay on the ground.</b>");
+				}
+			}
+		}
+		addButton(10, "Disable", toggleFlag, flyingSwordBehaviourOptions, kFLAGS.FLYING_SWORD)
+			.disableIf(flags[kFLAGS.FLYING_SWORD] == 0);
+		addButton(11, "Enable", toggleFlag, flyingSwordBehaviourOptions, kFLAGS.FLYING_SWORD)
+			.disableIf(flags[kFLAGS.FLYING_SWORD] == 1);
+
+		addButton(14, "Back", CoC.instance.inCombat ? curry(combat.combatMenu, false) : displayPerks);
+	}
+
+	public function mummyBehaviourOptions():void {
+		clearOutput();
+		menu();
+		outputText("You can choose how your mummies will behave during each fight.\n\n");
+		outputText("\n<b>Mummy behaviour:</b>\n");
+		if (flags[kFLAGS.MUMMY_ATTACK] == 0) outputText("Your mummies will not attack");
+		if (flags[kFLAGS.MUMMY_ATTACK] == 1) outputText("Your mummies will attack at the begining of each turn.");
+		addButton(10, "Disable", toggleFlag, mummyBehaviourOptions, kFLAGS.MUMMY_ATTACK)
+			.disableIf(flags[kFLAGS.MUMMY_ATTACK] != 0);
+		addButton(11, "Enable", toggleFlag, mummyBehaviourOptions, kFLAGS.MUMMY_ATTACK)
+			.disableIf(flags[kFLAGS.MUMMY_ATTACK] != 1);
+
+		addButton(14, "Back", minionOptions)
 	}
 
 	//IMutationsDB!

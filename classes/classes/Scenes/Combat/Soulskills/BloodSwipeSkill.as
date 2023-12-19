@@ -4,7 +4,6 @@ import classes.Scenes.Combat.AbstractBloodSoulSkill;
 import classes.StatusEffects;
 import classes.IMutations.IMutationsLib;
 import classes.Monster;
-import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Combat.Combat;
 
 public class BloodSwipeSkill extends AbstractBloodSoulSkill {
@@ -15,12 +14,13 @@ public class BloodSwipeSkill extends AbstractBloodSoulSkill {
 			: "Blood Swipe will fire three red lines of blood energy from your hand.  ",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING],
+            [TAG_DAMAGING, TAG_PHYSICAL],
             sfInfusion? StatusEffects.KnowsBloodSwipeSF: StatusEffects.KnowsBloodSwipe,
 			true,
 			sfInfusion
         )
 		baseSFCost = 60;
+		lastAttackType = Combat.LAST_ATTACK_PHYS;
     }
 
 	override protected function baseName():String {
@@ -28,7 +28,7 @@ public class BloodSwipeSkill extends AbstractBloodSoulSkill {
 	}
 
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + Math.round(calcDamage(target) * 3) + " blood damage"
+		return "~" + numberFormat(Math.round(calcDamage(target) * 3)) + " blood damage"
 	}
 
 	override public function calcCooldown():int {
@@ -53,12 +53,14 @@ public class BloodSwipeSkill extends AbstractBloodSoulSkill {
 			damage *= soulskillPhysicalMod();
 		}
 
+		if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
+		damage *= combat.bloodDamageBoostedByDao();
+
 		return Math.round(damage);
 
 	}
 
     override public function doEffect(display:Boolean = true):void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_PHYS;
 		var additionalSFLine: String = sfInfusion? "You infuse a bit of soulforce into the blood, before swiping your hand across your chest. " : "You swipe your hand across your chest. ";
 		if (display) outputText("You concentrate, focusing on the power of your blood. " + additionalSFLine
 			+ "Three trails of blood pour from your fingertips, condensing into thin crimson blades. You point your clawlike blades at your foe, and they detach with a small crunch, flying toward [themonster].\n\n");
@@ -74,8 +76,7 @@ public class BloodSwipeSkill extends AbstractBloodSoulSkill {
 			crit = true;
 			damage *= 1.75;
 		}
-		if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
-		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
+		
 		if (display) outputText("[Themonster] takes ");
 		doDamage(damage, true, display);
 		if (crit && display) outputText(" <b>*Critical Hit!*</b>");

@@ -14,10 +14,11 @@ public class CometSkill extends AbstractSoulSkill {
             "Project a shard of soulforce, which will come crashing down upon your opponent as a crystalline comet.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING, TAG_AOE],
+            [TAG_DAMAGING, TAG_AOE, TAG_MAGICAL],
             StatusEffects.KnowsComet
         )
 		baseSFCost = 60;
+		lastAttackType = Combat.LAST_ATTACK_SPELL;
     }
 
     override protected function usabilityCheck():String {
@@ -36,7 +37,7 @@ public class CometSkill extends AbstractSoulSkill {
 	}
 
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target) + " magical damage"
+		return "~" + numberFormat(calcDamage(target)) + " magical damage"
 	}
 
 	public function calcDamage(monster:Monster):Number {
@@ -58,7 +59,6 @@ public class CometSkill extends AbstractSoulSkill {
 	}
 
     override public function doEffect(display:Boolean = true):void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_SPELL;
 
 		if (display) {
 			outputText("You focus for a moment, projecting a fragment of your soulforce above you.  A moment later, a prismatic comet crashes down on your opponents [themonster].  ");

@@ -14,10 +14,11 @@ public class SoulBlastSkill extends AbstractSoulSkill {
             "Focus your reserves of soul force to unleash a torrent of devastating energy and obliterate your opponent.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING],
+            [TAG_DAMAGING, TAG_MAGICAL],
             StatusEffects.KnowsSoulBlast
         )
 		baseSFCost = 100;
+		lastAttackType = Combat.LAST_ATTACK_SPELL;
     }
 
 	override public function get buttonName():String {
@@ -25,7 +26,7 @@ public class SoulBlastSkill extends AbstractSoulSkill {
 	}
 
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target) + " magical damage, Stuns for 3 rounds"
+		return "~" + numberFormat(calcDamage(target)) + " magical damage, Stuns for 3 rounds"
 	}
 
 	override public function calcCooldown():int {
@@ -53,7 +54,6 @@ public class SoulBlastSkill extends AbstractSoulSkill {
 	}
 
     override public function doEffect(display:Boolean = true):void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_SPELL;
 		var damage:Number = calcDamage(monster);
 
 		var crit:Boolean = false;

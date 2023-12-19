@@ -21,7 +21,7 @@ import classes.Items.Consumable;
 			clearOutput();
 			player.slimeFeed();
 			outputText("You down the contents of the bottle. The liquid is thick and tastes remarkably like cherries. Within moments, you feel much more healthy.");
-			player.AlchemyBonus("tou", 1 + rand(2));
+			player.alchemyBonus("tou", 1 + rand(2));
 			if (EngineCore.HPChange(50, false)) outputText("  Any aches, pains and bruises you have suffered no longer hurt and you feel much better.");
 			player.refillHunger(10);
 			

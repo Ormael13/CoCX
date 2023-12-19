@@ -22,10 +22,11 @@ public class CreateElementSkill extends AbstractSoulSkill {
 		baseSFCost = 10;
 		this.rank = rank;
 		this.element = element;
+		lastAttackType = Combat.LAST_ATTACK_SPELL;
     }
 
 	private function buildTagList(element:String):Array {
-		var tagArr:Array = [TAG_DAMAGING];
+		var tagArr:Array = [TAG_DAMAGING, TAG_MAGICAL];
 
 		var tagToAdd:int;
 		switch(element.toLowerCase()) {
@@ -77,7 +78,7 @@ public class CreateElementSkill extends AbstractSoulSkill {
 	}
 
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target) + " " + this.element.toLowerCase() + " damage";
+		return "~" + numberFormat(calcDamage(target)) + " " + this.element.toLowerCase() + " damage";
 	}
 
 	public function calcDamage(monster:Monster):Number {
@@ -96,8 +97,6 @@ public class CreateElementSkill extends AbstractSoulSkill {
 	}
 
     override public function doEffect(display:Boolean = true):void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_SPELL;
-
 		if (display) outputText("You concentrate, focusing on the power of your soul. You infuse a bit of soulforce into a finger, " + 
 			"bright blue energy covering the tip. You draw a simple rune in the air, the energy from your finger dissipating into it. A moment later, the rune swells, energy forming into a small ball of "
 		 	+ element.toLowerCase() +". You motion, sending the ball flying toward [themonster].  ");

@@ -6,23 +6,28 @@ package classes.Items
 	import classes.ItemType;
 	import classes.PerkLib;
 	import classes.Player;
+	import classes.Scenes.Combat.CombatAbility;
 
 	public class FlyingSwords extends Equipable
 	{
 		private var _verb:String;
 		private var _attack:Number;
 		private var _perk:String;
+		private var _element:int;
+		private var _count:int;
 		
 		override public function get category():String {
 			return CATEGORY_FLYING_SWORD;
 		}
 		
-		public function FlyingSwords(id:String, shortName:String, name:String,longName:String, verb:String, attack:Number, value:Number = 0, description:String = null, perk:String = "")
+		public function FlyingSwords(id:String, shortName:String, name:String,longName:String, verb:String, attack:Number, value:Number = 0, description:String = null, perk:String = "", count:int= 1, element:int=-1)
 		{
 			super(id, shortName, name, longName, value, description);
 			this._verb = verb;
 			this._attack = attack;
 			this._perk = perk;
+			this._count = count;
+			this._element = (element == -1)? CombatAbility.TAG_PHYSICAL: element;
 		}
 		
 		private static const SLOTS:Array = [SLOT_FLYING_SWORD];
@@ -35,21 +40,24 @@ package classes.Items
 		public function get attack():Number { return _attack; }
 		
 		public function get perk():String { return _perk; }
+
+		public function get element():int { return _element; }
+
+		public function get count():int { return _count; }
 		
 		override public function effectDescriptionParts():Array {
 			var list:Array = super.effectDescriptionParts();
 			//Size
-			var desc:String = "Size: ";
-			if (perk == "Massive Two") desc += "(Massive (set of 2))";
-			else if (perk == "Massive") desc += "(Massive)";
-			else if (perk == "Large Two") desc += "(Large (set of 2))";
-			else if (perk == "Large") desc += "(Large)";
-			else if (perk == "Small Six") desc += "(Small (set of 6))";
-			else if (perk == "Small Two") desc += "(Small (set of 2))";
-			else if (perk == "Small") desc += "(Small)";
+			var desc:String = "Size: (" + perk;
+			var suffix:String = ")";
+			if (count == 1) desc += suffix;
+			else desc += " (set of " + count +")" + suffix;
+			
 			list.push([15, desc]);
 			//Attack
-			list.push([20,"Attack: "+attack]);
+			list.push([20,"Attack: " + attack]);
+			//Element
+			list.push([25,"Element: " + CombatAbility.AllTags[element].name]);
 			return list;
 		}
 		

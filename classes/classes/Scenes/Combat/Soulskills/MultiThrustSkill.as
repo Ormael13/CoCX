@@ -25,11 +25,12 @@ public class MultiThrustSkill extends AbstractSoulSkill {
             "Use a little bit of soulforce to infuse your weapon with power, striking your foe " + thrustArray[count - 1][1] + " times.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING],
+            [TAG_DAMAGING, TAG_PHYSICAL],
             count < 4 && count > 0? thrustArray[count - 1][2]: null
         )
 		thrustSelection = count - 1;
 		baseSFCost = thrustArray[thrustSelection][3];
+		lastAttackType = Combat.LAST_ATTACK_PHYS;
     }
 
 	override public function get buttonName():String {
@@ -38,7 +39,7 @@ public class MultiThrustSkill extends AbstractSoulSkill {
 
 	override public function describeEffectVs(target:Monster):String {
 		multiTrustDNLag = 0;
-		return "~" + Math.round(MultiThrustDSingle(target) * ((thrustSelection + 1) * 3)) + " damage ";
+		return "~" + numberFormat(Math.round(MultiThrustDSingle(target) * ((thrustSelection + 1) * 3))) + " damage ";
 	}
 
 	override public function calcCooldown():int {
@@ -150,7 +151,6 @@ public class MultiThrustSkill extends AbstractSoulSkill {
 	}
 
     override public function doEffect(display:Boolean = true):void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_PHYS;
 		if (display) outputText("You ready your [weapon] and prepare to thrust it towards [themonster].");
 		if (monsterDodgeSkill("attack", display)) return;
 
