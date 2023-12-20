@@ -820,10 +820,7 @@ public class CombatMagic extends BaseCombatContent {
 			//Determine if critical tease!
 			var crit:Boolean = false;
 			var critChance:int = 5;
-			if (player.hasPerk(PerkLib.CriticalPerformance)) {
-				if (player.lib <= 100) critChance += player.lib / 5;
-				if (player.lib > 100) critChance += 20;
-			}
+			critChance += combat.teases.combatTeaseCritical();
 			if (rand(100) < critChance) {
 				crit = true;
 				damage *= 1.75;

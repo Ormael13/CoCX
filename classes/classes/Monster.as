@@ -2354,7 +2354,7 @@ import classes.Scenes.Combat.CombatAbilities;
 			}
 			else if (hasStatusEffect(StatusEffects.FrozenSolid)) {
 				if (plural) EngineCore.outputText("Your foes are too busy trying to break out of their icy prison to fight back.");
-				else EngineCore.outputText("Your foe is too busy trying to break out of his icy prison to fight back.");
+				else EngineCore.outputText("Your foe is too busy trying to break out of its icy prison to fight back.");
 			}
 			else if (hasStatusEffect(StatusEffects.Sleep)) {
 				if (plural) EngineCore.outputText("Your foes are fast asleep.");
@@ -2365,7 +2365,7 @@ import classes.Scenes.Combat.CombatAbilities;
 				else EngineCore.outputText("Your foe is still looking for you, swearing in annoyance.");
 			}
 			else if (hasStatusEffect(StatusEffects.Polymorphed)) EngineCore.outputText("[Themonster] is fighting against the curse.");
-			else if (hasStatusEffect(StatusEffects.MonsterAttacksDisabled)) EngineCore.outputText("[Themonster] try to hit you but is unable to reach you!");
+			else if (hasStatusEffect(StatusEffects.MonsterAttacksDisabled)) EngineCore.outputText("[Themonster] tries to hit you, but is unable to reach you!");
 			else {
 				if (plural) EngineCore.outputText("Your foes are too dazed from your last hit to strike back!");
 				else {

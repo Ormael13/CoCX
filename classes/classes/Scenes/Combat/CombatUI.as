@@ -380,7 +380,7 @@ public class CombatUI extends BaseCombatContent {
 					button(1).disable("You are too tired to bite " + monster.a + " [monster name].");
 				}
 			}
-			addButton(4, "Release", combat.StraddleLeggoMyEggo).hint("Release your opponent.");
+			addButton(4, "Release", combat.straddleLeggoMyEggo).hint("Release your opponent.");
 		} else if (monster.hasStatusEffect(StatusEffects.ManticorePlug)) {
 			menu();
 			addButton(0, "Feed", combat.ManticoreFeed).hint("Milk your victim's cock with your powerful tail!");
