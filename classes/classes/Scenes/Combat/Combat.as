@@ -13646,50 +13646,15 @@ public function WebTease():void {
         //==============================
         //Determine basic damage.
         //==============================
-        damage = 6 + rand(3);
-        if (player.hasPerk(PerkLib.SensualLover)) {
-            damage += 2;
-        }
-        if (player.hasPerk(PerkLib.Seduction)) damage += 5;
-        //+ slutty armor bonus
-        damage += player.teaseDmgStat.value;
-        //10% for bimbo shits
-        if (bimbo || bro || futa) {
-            damage += 5;
-        }
-        if (player.hasPerk(PerkLib.FlawlessBody)) damage += 10;
-        damage += scalingBonusLibido() * 0.1;
-        damage += player.teaseLevel;
-        damage += rand(7);
-        //partial skins bonuses
-        switch (player.coatType()) {
-            case Skin.FUR:
-                damage += (1 + player.newGamePlusMod());
-                break;
-            case Skin.SCALES:
-                damage += (2 * (1 + player.newGamePlusMod()));
-                break;
-            case Skin.CHITIN:
-                damage += (3 * (1 + player.newGamePlusMod()));
-                break;
-            case Skin.BARK:
-                damage += (4 * (1 + player.newGamePlusMod()));
-                break;
-        }
+        damage = combat.teases.teaseBaseLustDamage();
         chance += 2;
+
         //Land the hit!
         if (rand(100) <= chance) {
             outputText("You giggle and run your hands against your helpless victim's flesh, their naughty bits purposely left exposed out of your web for you to groppe and play with.")
-            //NERF TEASE DAMAGE
-            damage += scalingBonusLibido();
-            damage *= 0.25;
-            damage = Math.round(damage);
+            
             var damagemultiplier:Number = 1;
-            if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += historyWhoreBonus();
-            if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
-            if (player.hasPerk(PerkLib.SuperSensual) && chance > 100) damagemultiplier += (0.01 * (chance - 100));
             if (player.hasPerk(PerkLib.RacialParagon)) damagemultiplier *= RacialParagonAbilityBoost();
-            if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
             if (player.hasPerk(PerkLib.UnbreakableBind)) damagemultiplier += 1;
             if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (2 - player.statusEffectv1(StatusEffects.ControlFreak));
             if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
@@ -13699,8 +13664,6 @@ public function WebTease():void {
             var critChance:int = 5;
             critChance += teases.combatTeaseCritical();
             if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-            if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
-            if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
             if (rand(100) < critChance) {
                 crit = true;
                 damage *= 1.75;
@@ -13782,37 +13745,9 @@ public function GooTease():void {
         //==============================
         //Determine basic damage.
         //==============================
-        damage = 6 + rand(3);
-        if (player.hasPerk(PerkLib.SensualLover)) {
-            damage += 2;
-        }
-        if (player.hasPerk(PerkLib.Seduction)) damage += 5;
-        //+ slutty armor bonus
-        damage += player.teaseDmgStat.value;
-        //10% for bimbo shits
-        if (bimbo || bro || futa) {
-            damage += 5;
-        }
-        if (player.hasPerk(PerkLib.FlawlessBody)) damage += 10;
-        damage += scalingBonusLibido() * 0.1;
-        damage += player.teaseLevel;
-        damage += rand(7);
-        //partial skins bonuses
-        switch (player.coatType()) {
-            case Skin.FUR:
-                damage += (1 + player.newGamePlusMod());
-                break;
-            case Skin.SCALES:
-                damage += (2 * (1 + player.newGamePlusMod()));
-                break;
-            case Skin.CHITIN:
-                damage += (3 * (1 + player.newGamePlusMod()));
-                break;
-            case Skin.BARK:
-                damage += (4 * (1 + player.newGamePlusMod()));
-                break;
-        }
+        damage = combat.teases.teaseBaseLustDamage();
         chance += 2;
+
         //Land the hit!
         if (rand(100) <= chance) {
             outputText("You start to play with [themonster]'s body ");
@@ -13826,23 +13761,16 @@ public function GooTease():void {
                 outputText("forcefully filling her pussy and ass with your fluid form as you molest her breast. Unsatisfied with her female parts you also stroke her cock to feast on her precum.");
             }
             outputText(" This feels very pleasurable to you but not as much as to your opponent who starts to drool, shuddering at your ministration.");
-            //NERF TEASE DAMAGE
-            damage += scalingBonusLibido();
-            damage *= 0.25;
-            damage = Math.round(damage);
+            
             var damagemultiplier:Number = 1;
-            if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += historyWhoreBonus();
-            if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
-            if (player.hasPerk(PerkLib.SuperSensual) && chance > 100) damagemultiplier += (0.01 * (chance - 100));
             if (player.hasPerk(PerkLib.RacialParagon)) damagemultiplier *= RacialParagonAbilityBoost();
-            if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
             if (player.hasPerk(PerkLib.UnbreakableBind)) damagemultiplier += 1;
             if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (2 - player.statusEffectv1(StatusEffects.ControlFreak));
-            if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
-            if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
-            if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
-			if (player.perkv1(IMutationsLib.SlimeMetabolismIM) >= 2) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.SlimeMetabolismIM)));
 			damage *= damagemultiplier;
+
+            if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
+			if (player.perkv1(IMutationsLib.SlimeMetabolismIM) >= 2) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.SlimeMetabolismIM)));
+
             //Determine if critical tease!
             var crit:Boolean = false;
             var critChance:int = 5;
@@ -13953,51 +13881,15 @@ public function ManticoreFeed():void {
         //==============================
         //Determine basic damage.
         //==============================
-        damage = 6 + rand(3);
-        if (player.hasPerk(PerkLib.SensualLover)) {
-            damage += 2;
-        }
-        if (player.hasPerk(PerkLib.Seduction)) damage += 5;
-        //+ slutty armor bonus
-        damage += player.teaseDmgStat.value;
-        //10% for bimbo shits
-        if (bimbo || bro || futa) {
-            damage += 5;
-        }
-        if (player.hasPerk(PerkLib.FlawlessBody)) damage += 10;
-        damage += scalingBonusLibido() * 0.1;
-        damage += player.teaseLevel;
-        damage += rand(7);
-        //partial skins bonuses
-        switch (player.coatType()) {
-            case Skin.FUR:
-                damage += (1 + player.newGamePlusMod());
-                break;
-            case Skin.SCALES:
-                damage += (2 * (1 + player.newGamePlusMod()));
-                break;
-            case Skin.CHITIN:
-                damage += (3 * (1 + player.newGamePlusMod()));
-                break;
-            case Skin.BARK:
-                damage += (4 * (1 + player.newGamePlusMod()));
-                break;
-        }
+        damage = combat.teases.teaseBaseLustDamage();
+        
         outputText("You use your tail-cunt vaginal walls to forcefully milk your victim for his delicious cum, biting your own lips at the pleasure of [monster his] twitching member in your tail.");
-        //NERF TEASE DAMAGE
-        damage += scalingBonusLibido();
-        damage *= 0.25;
-        damage = Math.round(damage);
+       
         var damagemultiplier:Number = 1;
-        if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += historyWhoreBonus();
-        if (player.hasPerk(PerkLib.DazzlingDisplay)) damagemultiplier += 0.2;
-        if (player.hasPerk(PerkLib.SuperSensual)) damagemultiplier += 0.5;
         if (player.hasPerk(PerkLib.RacialParagon)) damagemultiplier *= RacialParagonAbilityBoost();
         if (player.perkv1(IMutationsLib.ManticoreMetabolismIM) >= 3) damagemultiplier *= 2;
-        if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
-        if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
-        if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
         damage *= damagemultiplier;
+
         //Determine if critical tease!
         var crit:Boolean = false;
         var critChance:int = 5;
@@ -14061,50 +13953,14 @@ public function displacerFeedContinue():void {
         //==============================
         //Determine basic damage.
         //==============================
-        damage = 6 + rand(3);
-        if (player.hasPerk(PerkLib.SensualLover)) {
-            damage += 2;
-        }
-        if (player.hasPerk(PerkLib.Seduction)) damage += 5;
-        //+ slutty armor bonus
-        damage += player.teaseDmgStat.value;
-        //10% for bimbo shits
-        if (bimbo || bro || futa) {
-            damage += 5;
-        }
-        if (player.hasPerk(PerkLib.FlawlessBody)) damage += 10;
-        damage += scalingBonusLibido() * 0.1;
-        damage += player.teaseLevel;
-        damage += rand(7);
-        //partial skins bonuses
-        switch (player.coatType()) {
-            case Skin.FUR:
-                damage += (1 + player.newGamePlusMod());
-                break;
-            case Skin.SCALES:
-                damage += (2 * (1 + player.newGamePlusMod()));
-                break;
-            case Skin.CHITIN:
-                damage += (3 * (1 + player.newGamePlusMod()));
-                break;
-            case Skin.BARK:
-                damage += (4 * (1 + player.newGamePlusMod()));
-                break;
-        }
+        damage = combat.teases.teaseBaseLustDamage();
+        
         outputText("You mewl in primal ecstasy at the passage of milk through your appendages, filling yourself with white vitality. Mmmmm delicious. Your opponent on the other end is getting increasingly flushed from the treatment.");
-        //NERF TEASE DAMAGE
-        damage += scalingBonusLibido();
-        damage *= 0.25;
-        damage = Math.round(damage);
+        
         var damagemultiplier:Number = 1;
-        if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += historyWhoreBonus();
-        if (player.hasPerk(PerkLib.DazzlingDisplay)) damagemultiplier += 0.2;
-        if (player.hasPerk(PerkLib.SuperSensual)) damagemultiplier += 0.5;
         if (player.hasPerk(PerkLib.RacialParagon)) damagemultiplier *= RacialParagonAbilityBoost();
-        if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
-        if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
-        if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
         damage *= damagemultiplier;
+
         //Determine if critical tease!
         var crit:Boolean = false;
         var critChance:int = 5;
@@ -14118,6 +13974,7 @@ public function displacerFeedContinue():void {
         monster.teased(Math.round(monster.lustVuln * damage), false);
         if (crit) outputText(" <b>Critical!</b>");
         teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+
         if (monster.lust>100)
         {
             outputText("\n\nYour partner cums, achieving boobgasm from excessive arousal. You sigh in bliss as an extra huge load of fresh milk floods into your tentacles.");
@@ -14168,50 +14025,14 @@ public function SlimeRapeFeed():void {
         //==============================
         //Determine basic damage.
         //==============================
-        damage = 6 + rand(3);
-        if (player.hasPerk(PerkLib.SensualLover)) {
-            damage += 2;
-        }
-        if (player.hasPerk(PerkLib.Seduction)) damage += 5;
-        //+ slutty armor bonus
-        damage += player.teaseDmgStat.value;
-        //10% for bimbo shits
-        if (bimbo || bro || futa) {
-            damage += 5;
-        }
-        if (player.hasPerk(PerkLib.FlawlessBody)) damage += 10;
-        damage += scalingBonusLibido() * 0.1;
-        damage += player.teaseLevel;
-        damage += rand(7);
-        //partial skins bonuses
-        switch (player.coatType()) {
-            case Skin.FUR:
-                damage += (1 + player.newGamePlusMod());
-                break;
-            case Skin.SCALES:
-                damage += (2 * (1 + player.newGamePlusMod()));
-                break;
-            case Skin.CHITIN:
-                damage += (3 * (1 + player.newGamePlusMod()));
-                break;
-            case Skin.BARK:
-                damage += (4 * (1 + player.newGamePlusMod()));
-                break;
-        }
+        damage = combat.teases.teaseBaseLustDamage();
+        
         outputText("You begin to forcefully rape [Themonster] from the inside, wrecking [monster his] body as you attempt to extract fluids from [monster his] abused genitals.");
-        //NERF TEASE DAMAGE
-        damage += scalingBonusLibido();
-        damage *= 0.25;
-        damage = Math.round(damage);
+        
         var damagemultiplier:Number = 1;
-        if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += historyWhoreBonus();
-        if (player.hasPerk(PerkLib.DazzlingDisplay)) damagemultiplier += 0.2;
-        if (player.hasPerk(PerkLib.SuperSensual)) damagemultiplier += 0.5;
         if (player.hasPerk(PerkLib.RacialParagon)) damagemultiplier *= RacialParagonAbilityBoost();
-        if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
-        if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
-        if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
         damage *= damagemultiplier;
+
         //Determine if critical tease!
         var crit:Boolean = false;
         var critChance:int = 5;
@@ -14225,6 +14046,7 @@ public function SlimeRapeFeed():void {
         monster.teased(Math.round(monster.lustVuln * damage), false);
         if (crit) outputText(" <b>Critical!</b>");
         teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+        
         if (monster.lust>100)
         {
             outputText("\n\nYour partner cums, achieving orgasm from excessive arousal. You drool in bliss as an extra huge load of fluids is injected into your body.");

@@ -1315,8 +1315,8 @@ public class CombatTeases extends BaseCombatContent {
 				 	breasts = true;
 					chance += 9;
 				 	damage += 30;
-				}
-				damage += scalingBonusToughness() * 0.3;
+				} else
+					damage += 15;
 				break;
 				//manticore tailpussy teases
 			case 47:
@@ -1593,8 +1593,10 @@ public class CombatTeases extends BaseCombatContent {
 		if (rand(100) <= chance + rand(bonusChance)) {
 			bonusDamage = (damage + rand(bonusDamage));
 			damage = teaseBaseLustDamage();
+			
 			//Gain additional % damage based on tease choice chosen
 			damage *= 1 + (bonusDamage/100);
+			
 			if (player.hasPerk(PerkLib.BroadSelection) && player.differentTypesOfCocks() > 1) damage *= (1 + (0.25 * player.differentTypesOfCocks()));
 			if (SceneLib.urtaQuest.isUrta()) damage *= 2;
 			damage *= monster.lustVuln;

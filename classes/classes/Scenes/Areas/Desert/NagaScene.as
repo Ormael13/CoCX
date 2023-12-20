@@ -976,7 +976,7 @@ public function nagaPlayerConstrict():void {
     SceneLib.combat.enemyAIImpl();
 }
 
-public function naggaSqueeze():void {
+public function nagaSqueeze():void {
 	clearOutput();
 	if (player.fatigue + combat.physicalCost(20) > player.maxFatigue()) {
 		outputText("You are too tired to squeeze " + monster.a + " [monster name].");
@@ -1014,7 +1014,7 @@ public function naggaSqueeze():void {
     SceneLib.combat.enemyAIImpl();
 }
 //Tease
-public function naggaTease():void {
+public function nagaTease():void {
 	clearOutput();
 	//(if poisoned)
 	if (monster.hasStatusEffect(StatusEffects.NagaVenom) || monster.gender == 0 || monster.lustVuln == 0) {
@@ -1063,8 +1063,7 @@ public function naggaTease():void {
     //==============================
     //Determine basic damage.
     //==============================
-    damage = combat.teases.teaseBaseLustDamage() * 0.5;
-    
+    damage = combat.teases.teaseBaseLustDamage();
     chance += 2;
     //Specific cases for slimes and demons, as the normal ones would make no sense
     if (monster.short == "demons") {
