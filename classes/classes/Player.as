@@ -1377,7 +1377,7 @@ use namespace CoC;
 		}
 		public function immuneToAcid():Boolean
 		{
-			return hasAnyPerk(PerkLib.AcidAffinity, PerkLib.AffinityGnome);
+			return hasAnyPerk(PerkLib.AcidAffinity);
 		}
 		public function immuneToFrostBurn():Boolean
 		{

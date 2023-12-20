@@ -3616,8 +3616,8 @@ public class PerkLib
 		// Mutation perks
 		public static const AcidSpit:PerkType = mk("Acid Spit", "Acid Spit",
 				"Allows access to a cave wyrm acid spit attack.");
-		public static const AcidAffinity:PerkType = mk("Fire Affinity", "Fire Affinity",
-				"You have high resistance to fire effects, immunity to the acid condition, and mastery over acid abilities and magic.");
+		public static const AcidAffinity:PerkType = mk("Acid Affinity", "Acid Affinity",
+				"You have high resistance to acid effects, immunity to the acid condition, and mastery over acid abilities and magic.");
 		public static const AlrauneNectar:PerkType = mk("Alraune Nectar", "Alraune Nectar",
 				"You yourself produce an endless supply of alraune nectar.");
 		public static const AzureflameBreath:PerkType = mk("Azureflame Breath", "Azureflame Breath",
