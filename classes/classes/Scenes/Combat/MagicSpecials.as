@@ -5834,7 +5834,7 @@ public class MagicSpecials extends BaseCombatContent {
 					if (monster.hasStatusEffect(StatusEffects.Stunned)) monster.addStatusValue(StatusEffects.Stunned, 1, 1);
 					else monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 				} else {
-					output("However, [themonster] is able to quickly break themselves free! ")
+					outputText("However, [themonster] is able to quickly break themselves free! ");
 				}
 				break;
 			case 4:

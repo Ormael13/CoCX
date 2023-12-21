@@ -74,6 +74,8 @@ public class Changelog extends BaseContent
 			outputText("Facinate Stun lasts 2 turns, count your lust for twice as high when using Lust strike and it’s now benefit from all effects that pertain to the tease action.\n");
 			outputText("-New event perk: Familiar. Gained by becoming pureblood vampire (tier 2 vampire) and talking about vampirism with Diva OR by becoming fiendish vampire (tier 1 dracula/lina). Effects: Your blood is highly infectious feeding it to a willing or unwilling creature can either turn them into a lesser vampire or a ghoul.\n");
 			outputText("-New event perk: Anty Dexterity. Gained by having four ant arms. Effect: Strong ant arms boost your strength and allow wielding dual weapons <i>or</i> large weapons.\n");
+			outputText("-New event perk (by Demojay): Rampant Might. Gained by been yggdrasil. Effect: Add toughness and strength to feral combat modifier.\n");
+			outputText("-New event perk (by Demojay): Wisdom of the Ages. Gained by been yggdrasil. Effect: Add half of Intelligence and Wisdom as a modifier to Strength and Toughness.\n");
 			outputText("-New range weapon (by Ormael): Twin Desert Eagles - can be gained by combining 2x Desert Eagle weapon. Cost 1240 gems. Base atk is 25 and ammo clip size 4. It's Dual Firearm type range weapon.\n");
 			outputText("-New range weapon (by Lady Aeducan): Harkonnen II - gained by giving Dinah 2x Harkonnen weapons and 4,500 gems for workers work fee (no she's outsourcing the work force and need to pay them... they can't run only on strong alcohol do they?). Cost 10,460 gems. Base atk is 260 and ammo clip size 2. Lowering range accuracy by 50%. It's Dual 2H Firearm type range weapon dealing true damage.\n");
 			outputText("-New consumable (by Sylabt & Ohaxer): Stomiidae fillet. Cost 10 gems. Can be bought at food stand in Trench. Eating it would restore 30 hunger.\n");
@@ -184,8 +186,6 @@ public class Changelog extends BaseContent
 			outputText("and Advanced been only trainable with sheep-morph.\n");
 			outputText("-Hidden Job: Blood Demon super perk enable now additionaly ability to use blood to soulskills, learn blood soulskills.\n");
 			outputText("-Way of the Blood super perk effect 'Allowing you use of your health to substitute using soulforce in almost all soulskills' was replaced with 'Blood speels and soulskills gain additional effects that would get better as you progress in this job'.\n");
-			outputText("-New event perk (by Demojay): Rampant Might. Gained by been yggdrasil. Effect: Add toughness and strength to feral combat modifier.\n");
-			outputText("-New event perk (by Demojay): Wisdom of the Ages. Gained by been yggdrasil. Effect: Add half of Intelligence and Wisdom as a modifier to Strength and Toughness.\n");
 			outputText("-Players can now learn Kindra's bow skills even if they maxed their bow skill somewhere else. Standardized damage calculation for Nosferatu spell so it aligns with other black spells. (Demojay)\n");
 			outputText("-Fixed monster damage display sometime not showing the true damage received. Dragonne Race does not both add and subtract racial scores for draconic horns. Dragon race now cannot have a cat tongue, while Dragonne requires one. (Demojay)\n");
 			outputText("-Replaced instances of Frostbite in code with Frostburn, so that Ice DoT properly triggers. Fixed code related to disabling flying in combat. Atlach Nacha's Pin Down attack now properly removes and disables flight. (Demojay)\n");
@@ -194,10 +194,10 @@ public class Changelog extends BaseContent
 			outputText("-Created Soul Cultivator Perk: Killing Intent - True Damage attack that increases damage based on cultivator rank and number of monsters killed. (Demojay)\n");
 			outputText("-Created Soul Cultivator Perk: First Attack: Flying Sword - Allows Flying to attack independently when not using it to fly. (Demojay)\n");
 			outputText("-Cleaned up code for Flying Swords to explicitly set their sword count and elemental attack. Player can now start to see some of their general abilities in the Stats menu. Simplified Minion menu for setting minion behaviour in and out of combat. Mummy Lord attacks now be configured on/off in combat. Adjusted Will Of The Wisp attack damage so it is similar to a Mummy Lord attack. (Demojay)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Add affinity, nature and vulnerability perks for Ice, Wind, Water, Earth, Acid and Poison. Added functions to check when the the player is immune to burn or acid. Enemies now cannot burn the player if they have Fire Affinity. Having the 'Eyes of the Hunter (Expert) perk will allow the player to view the general status of the enemy. (Demojay)\n");
+			outputText("-Players wit the the Cold Affinity/Cold Mastery/Affinity Undine perk cannot be given Frostburn. Players with an affinity perk take half damage from that particular element. Players with an affinity perk will gain increased Dao Contemplation speed for that element. Players with an affinity perk will now deal double damage with that element. (Demojay)\n");
+			outputText("-Monsters in the Ocean area have been given the 'Water Nature' perk. Air Elemental has been given the 'Wind Nature' perk. Earth Elemental has been given the 'Earth Nature' perk. Water Elemental has been given the 'Water Nature' perk instead of the 'Ice Nature' perk. (Demojay)\n");
+			outputText("-Fix: Imp Tome scene should start having the chance to trigger after absorbing energy from sex 26 times. (Demojay)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -215,6 +215,12 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay) (NUZ/Shirane)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Telekinetic Grasp have unlimited powe... duration, 'Elite/Champion/Boss HP bonus' setting, Monsters HP (and Soulforce/Mana) not decreasing on turn end when any effect lowering it, Rathazul keep trying cure Belisa after Nadia done it, Vouivre Oil replacing dragon ears with snake ears & dragon scales with snake scales, Tyrantia & Flitzi forest scene allowing to skip ");
