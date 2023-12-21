@@ -41,6 +41,7 @@ import classes.lists.BreastCup;
 import classes.lists.Gender;
 
 import flash.errors.IllegalOperationError;
+import classes.Scenes.Combat.CombatAbilities;
 
 public class Creature extends Utils
 	{
@@ -4483,7 +4484,7 @@ public class Creature extends Utils
 			if (game.player.isRace(Races.CHESHIRE) && ((!hasStatusEffect(StatusEffects.Minimise) && (rand(100) < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (rand(100) < 80)))) evasionReason = "Minimise";
 			if (game.player.isRace(Races.CHESHIRE) && ((!hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (rand(100) < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (rand(100) < 80)))) evasionReason = "Phasing";
 			if (game.player.isRace(Races.DISPLACERBEAST) && ((!hasStatusEffect(StatusEffects.Displacement) && (rand(100) < 30)) || (hasStatusEffect(StatusEffects.Displacement) && (rand(100) < 80)))) evasionReason = "Displacing";
-			if (game.player.necklace == game.necklaces.CATBELL && game.player.isAnyRaceCached(Races.CatlikeRaces) && evasionReason) SceneLib.combat.teases.tease();
+			if (game.player.necklace == game.necklaces.CATBELL && game.player.isAnyRaceCached(Races.CatlikeRaces) && evasionReason) CombatAbilities.Tease.perform();
 			return evasionReason;
 		}
 

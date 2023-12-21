@@ -1407,7 +1407,7 @@ public class Combat extends BaseContent {
     }
 
     internal function teaseAttack():void {
-        teases.teaseAttack();
+        CombatAbilities.Tease.perform();
     }
 
     public function stopChanneledSpecial():void {
@@ -12035,11 +12035,6 @@ public class Combat extends BaseContent {
                 else if (monster.lust100 >= 50) outputText("[Themonster]'s skin remains flushed with the beginnings of arousal.  ");
             }
         }
-    }
-
-    // Just text should force the function to purely emit the test text to the output display, and not have any other side effects
-    public function tease(justText:Boolean = false):void {
-        teases.tease(justText);
     }
 
     public function teaseXP(XP:Number = 0):void {
