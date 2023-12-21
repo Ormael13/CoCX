@@ -61,12 +61,12 @@
                 <arg line="-target apk-captive-runtime" />
                 <arg line="-arch @{architecture}"/>
                 <arg line="-storetype pkcs12" />
-                <arg line="-keystore ${basedir}/coc.keystore" />
+                <arg line="-keystore '${basedir}'/coc.keystore" />
                 <arg line="-storepass 123456" />
-                <arg line="${build.dir}/CoC-Mobile-@{special-postfix}.apk" />
-                <arg line="${basedir}/CoC-Android-@{swf-name-postfix}.xml" />
-                <arg line="-C ${build.dir} CoC-Mobile-@{swf-name-postfix}.swf" />
-                <arg line="-C ${basedir}" />
+                <arg line="'${build.dir}'/CoC-Mobile-@{special-postfix}.apk" />
+                <arg line="'${basedir}'/CoC-Android-@{swf-name-postfix}.xml" />
+                <arg line="-C '${build.dir}' CoC-Mobile-@{swf-name-postfix}.swf" />
+                <arg line="-C '${basedir}'" />
                 <arg line="devTools/icons" />
             </exec>
         </sequential>
