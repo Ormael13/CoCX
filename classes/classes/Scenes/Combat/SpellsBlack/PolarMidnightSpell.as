@@ -72,10 +72,10 @@ public class PolarMidnightSpell extends AbstractBlackSpell {
 		}
 		var damage:Number = calcDamage(monster, true, true);
 		damage = critAndRepeatDamage(display, damage, DamageType.ICE);
-		if (display) {
-			outputText("\n\n[Monster A] [monster name] is encased in a thick layer of ice.\n\n");
+		if (!monster.hasPerk(PerkLib.Resolute)) {
+			if (display) outputText("\n\n[Monster A] [monster name] is encased in a thick layer of ice.\n\n");
+			monster.createStatusEffect(StatusEffects.FrozenSolid, 5, 0, 0, 0);
 		}
-		monster.createStatusEffect(StatusEffects.FrozenSolid, 5, 0, 0, 0);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 	}
