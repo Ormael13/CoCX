@@ -5145,7 +5145,8 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	private function FaeStormFrozen(damage:Number):void{
 		outputText(" shivers as [monster his] skin covers with ice, the surrounding air freezing solid");
-		monster.createStatusEffect(StatusEffects.FrozenSolid,3,0,0,0);
+		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.FrozenSolid,3,0,0,0);
+		else outputText(". [Themonster] quickly moves before they are frozen");
 	}
 	private function FaeStormLust(damage:Number):void{
 		var lustDmg:Number = combat.lustDamageCalc();
@@ -5156,7 +5157,8 @@ public class MagicSpecials extends BaseCombatContent {
 	private function FaeStormSleep(damage:Number):void{
 		if (monster.plural) outputText("are sent straight to the dream lands by the spell’s powerful hypnotic effects");
 		else outputText("is sent straight to the dream lands by the spell’s powerful hypnotic effects");
-		monster.createStatusEffect(StatusEffects.Sleep,2,0,0,0);
+		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Sleep,2,0,0,0);
+		else outputText(" only to quickly shake off the effects");
 	}
 
 	public function BalefulPolymorph():void {
@@ -5832,8 +5834,12 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("[Themonster]  skin is covered with ice from the eyebeam as the air surrounding [monster him] freezes solid! ");
 				damage = Math.round(damage * combat.iceDamageBoostedByDao());
 				doIceDamage(damage, true, true);
-				if (monster.hasStatusEffect(StatusEffects.Stunned)) monster.addStatusValue(StatusEffects.Stunned, 1, 1);
-				else monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+				if (!monster.hasPerk(PerkLib.Resolute)) {
+					if (monster.hasStatusEffect(StatusEffects.Stunned)) monster.addStatusValue(StatusEffects.Stunned, 1, 1);
+					else monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+				} else {
+					output("However, [themonster] is able to quickly break themselves free! ")
+				}
 				break;
 			case 4:
 				outputText("[Themonster]  takes heavy cold damage! ");
@@ -5849,13 +5855,21 @@ public class MagicSpecials extends BaseCombatContent {
 				break;
 			case 6:
 				outputText("The eyebeam’s powerful hypnotic effects send your target straight to the dream lands! ");
-				if (monster.hasStatusEffect(StatusEffects.Sleep)) monster.addStatusValue(StatusEffects.Sleep, 1, 1);
-				else monster.createStatusEffect(StatusEffects.Sleep,2,0,0,0);
+				if (!monster.hasPerk(PerkLib.Resolute)) {
+					if (monster.hasStatusEffect(StatusEffects.Sleep)) monster.addStatusValue(StatusEffects.Sleep, 1, 1);
+					else monster.createStatusEffect(StatusEffects.Sleep,2,0,0,0);
+				} else {
+					outputText("However, [themonster] was able to quickly shake themselves awake! ");
+				}
 				break;
 			case 7:
 				outputText("[Themonster] is turned to stone by the petrification ray shooting from your eyestalk! It's going to be immobile for a while. ");
-				if (monster.hasStatusEffect(StatusEffects.Stunned)) monster.addStatusValue(StatusEffects.Stunned, 1, 1);
-				else monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
+				if (!monster.hasPerk(PerkLib.Resolute)) {
+					if (monster.hasStatusEffect(StatusEffects.Stunned)) monster.addStatusValue(StatusEffects.Stunned, 1, 1);
+					else monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
+				} else {
+					outputText("However, [themonster] was able to quickly shake off the effect! ");
+				}
 				break;
 			case 8:
 				outputText("[Themonster] takes heavy fire damage being seared by the ray shooting from one of your eyestalks! ");
