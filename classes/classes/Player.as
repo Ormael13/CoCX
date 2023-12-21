@@ -1371,6 +1371,18 @@ use namespace CoC;
 		{
 			return perkv1(IMutationsLib.SlimeFluidIM) >= 1;
 		}
+		public function immuneToBurn():Boolean
+		{
+			return hasAnyPerk(PerkLib.FireAffinity, PerkLib.AffinityIgnis);
+		}
+		public function immuneToAcid():Boolean
+		{
+			return hasAnyPerk(PerkLib.AcidAffinity);
+		}
+		public function immuneToFrostBurn():Boolean
+		{
+			return hasAnyPerk(PerkLib.ColdAffinity, PerkLib.ColdMastery, PerkLib.AffinityUndine);
+		}
 		public function progressBloodDemon():Number
 		{
 			var progressBD:Number = 2;
@@ -3391,8 +3403,8 @@ use namespace CoC;
 			var mult:Number = damageMagicalPercent();
 			if (upperGarmentName == "HB shirt") mult -= 10;
 			if (lowerGarmentName == "HB shorts") mult -= 10;
-			if (hasPerk(PerkLib.FromTheFrozenWaste) || hasPerk(PerkLib.ColdAffinity)) mult += 100;
-			if (hasPerk(PerkLib.FireAffinity)) mult -= 50;
+			if (hasAnyPerk(PerkLib.FromTheFrozenWaste, PerkLib.ColdAffinity, PerkLib.ColdMastery)) mult += 100;
+			if (hasAnyPerk(PerkLib.FireAffinity, PerkLib.AffinityIgnis)) mult -= 50;
 			if (hasPerk(PerkLib.VegetalAffinity)) mult += 50;
 			if (hasStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1) && (statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1) > 0)) mult -= statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1);
 			if (hasStatusEffect(StatusEffects.DaoOfFire) && (statusEffectv2(StatusEffects.DaoOfFire) > 3)) mult -= (10 * (statusEffectv2(StatusEffects.DaoOfFire) - 3));
@@ -3445,9 +3457,9 @@ use namespace CoC;
 			if (upperGarmentName == "HB shirt") mult -= 10;
 			if (lowerGarmentName == "HB shorts") mult -= 10;
 			if (necklaceName == "Blue Winter scarf" || necklaceName == "Green Winter scarf" || necklaceName == "Purple Winter scarf" || necklaceName == "Red Winter scarf" || necklaceName == "Yellow Winter scarf") mult -= 20;
-			if (hasPerk(PerkLib.FromTheFrozenWaste) || hasPerk(PerkLib.ColdAffinity)) mult -= 50;
+			if (hasAnyPerk(PerkLib.FromTheFrozenWaste, PerkLib.ColdAffinity, PerkLib.ColdMastery)) mult -= 50;
 			if (hasPerk(PerkLib.IcyFlesh)) mult -= 40;
-			if (hasPerk(PerkLib.FireAffinity) || hasPerk(PerkLib.AffinityIgnis)) mult += 100;
+			if (hasAnyPerk(PerkLib.FireAffinity, PerkLib.AffinityIgnis)) mult += 100;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_ICE_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_ICE_R) mult -= necklaceEffectMagnitude;
 			if (jewelry1.hasBuff('res_ice') && jewelry2.hasBuff('res_ice') && jewelry3.hasBuff('res_ice') && jewelry4.hasBuff('res_ice') && headjewelryEffectId == HeadJewelryLib.MODIFIER_ICE_R && necklaceEffectId == NecklaceLib.MODIFIER_ICE_R) mult -= 15;
@@ -3598,6 +3610,7 @@ use namespace CoC;
 
 		public override function damagePoisonPercent():Number {
 			var mult:Number = damageMagicalPercent();
+			if (hasPerk(PerkLib.PoisonAffinity)) mult -= 50;
 			if (perkv1(IMutationsLib.VenomGlandsIM) >= 2) mult -= 5;
 			if (perkv1(IMutationsLib.VenomGlandsIM) >= 3) mult -= 10;
 			if (perkv1(IMutationsLib.VenomGlandsIM) >= 4) mult -= 15;
@@ -3643,7 +3656,8 @@ use namespace CoC;
 		}
 
 		public override function damageWindPercent():Number {
-			var mult:Number = damageMagicalPercent();/*
+			var mult:Number = damageMagicalPercent();
+			if (hasAnyPerk(PerkLib.WindAffinity, PerkLib.AffinitySylph)) mult -= 50;/*
 			if (jewelryEffectId == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude2;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude3;
@@ -3689,7 +3703,8 @@ use namespace CoC;
 		}
 
 		public override function damageWaterPercent():Number {
-			var mult:Number = damageMagicalPercent();/*
+			var mult:Number = damageMagicalPercent();
+			if (hasAnyPerk(PerkLib.WaterAffinity, PerkLib.AffinityUndine)) mult -= 50;/*
 			if (jewelryEffectId == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude2;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude3;
@@ -3738,7 +3753,8 @@ use namespace CoC;
 		}
 
 		public override function damageEarthPercent():Number {
-			var mult:Number = damageMagicalPercent();/*
+			var mult:Number = damageMagicalPercent();
+			if (hasAnyPerk(PerkLib.EarthAffinity, PerkLib.AffinityGnome)) mult -= 50;/*
 			if (jewelryEffectId == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude2;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude3;
@@ -3784,7 +3800,8 @@ use namespace CoC;
 		}
 
 		public override function damageAcidPercent():Number {
-			var mult:Number = damageMagicalPercent();/*
+			var mult:Number = damageMagicalPercent();
+			if (hasPerk(PerkLib.AcidAffinity)) mult -= 50;/*
 			if (jewelryEffectId == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude2;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude3;

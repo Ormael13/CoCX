@@ -1889,6 +1889,24 @@ public class Creature extends Utils
 		}
 
 		/**
+		 * Check if this creature has any of the specified perks.
+		 * @param ptypes {Array - PerkType}
+		 * @return {Boolean} True if creature has any of the perks, otherwise false.
+		 */
+		public function hasAnyPerk(...ptypes:Array):Boolean {
+			return ptypes.some(function(ptype:PerkType):Boolean { return hasPerk(ptype); });
+		}
+
+		/**
+		 * Check if this creature has all of the specified perks.
+		 * @param ptypes {Array - PerkType}
+		 * @return {Boolean} True if creature has all of the perks, otherwise false.
+		 */
+		public function hasPerks(...ptypes:Array):Boolean {
+			return ptypes.all(function(ptype:PerkType):Boolean { return hasPerk(ptype); });
+		}
+
+		/**
 		 * Get the instance of a perk.
 		 * @param {PerkType} ptype
 		 */
@@ -2012,6 +2030,22 @@ public class Creature extends Utils
 		}
 		public function hasStatusEffect(stype:StatusEffectType):Boolean {
 			return this._statusEffects.hasStatusEffect(stype);
+		}
+		/**
+		 * Check if this creature has any of the specified status effects.
+		 * @param stypes {Array - StatusEffectType}
+		 * @return {Boolean} True if creature has any of the status effects, otherwise false.
+		 */
+		public function hasAnyStatusEffect(...stypes:Array):Boolean {
+			return stypes.some(function(stype:StatusEffectType):Boolean { return hasStatusEffect(stype); });
+		}
+		/**
+		 * Check if this creature has all of the specified status effects.
+		 * @param stypes {Array - StatusEffectType}
+		 * @return {Boolean} True if creature has all of the status effects, otherwise false.
+		 */
+		public function hasStatusEffects(...stypes:Array):Boolean {
+			return stypes.all(function(stype:StatusEffectType):Boolean { return hasStatusEffect(stype); });
 		}
 		public function changeStatusValue(stype:StatusEffectType, statusValueNum:Number = 1, newNum:Number = 0):void
 		{

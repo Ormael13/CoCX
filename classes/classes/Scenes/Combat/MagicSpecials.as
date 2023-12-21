@@ -749,7 +749,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1 || player.isAnyRaceCached(Races.SHARK, Races.ABYSSAL_SHARK)) {
 			bd = buttons.add("Blood Frenzy", bloodFrenzy);
-			if (combat.MonsterIsBleeding()) {
+			if (monster.monsterIsBleeding()) {
 				bd.hint("Lose yourself to a blood fueled trance increasing your speed, libido and weakening your inteligence. The trance last for as long as the opponent is bleeding and cannot be disangaged willingly.\n");
 			}
 			else bd.disable("You can't go into a blood frenzy if your opponent is not bleeding.");
@@ -2687,10 +2687,6 @@ public class MagicSpecials extends BaseCombatContent {
 			damage = calcGlacialMod(damage, true);
 			damage = calcVoltageMod(damage, true);
 			damage = calcEclypseMod(damage, true);
-			damage = calcTideMod(damage, true);
-			damage = calcQuakeMod(damage, true);
-			damage = calcGaleMod(damage, true);
-			damage = calcCorrosionMod(damage, true);
 
 			if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
 				player.removeStatusEffect(StatusEffects.DragonBreathBoost);
@@ -6833,12 +6829,6 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("You gather energy in your Talisman and unleash the spell contained within.  A wave of cold air gathers around [themonster], slowly freezing [monster him].");
 		var damage:int = int(100+(player.inte/2 + rand(player.inte)) * spellMod());
 		damage = calcGlacialMod(damage, true);
-		if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
-//	if (player.hasPerk(PerkLib.ColdMastery)) damage *= 2;
-//	if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
 		damage = Math.round(damage);
 		doIceDamage(damage);
 		outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");

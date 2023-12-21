@@ -55,7 +55,7 @@ public class MultiThrustSkill extends AbstractSoulSkill {
 		if (player.weapon == weapons.TIDAR) (player.weapon as Tidarion).afterStrike();
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 			var damage1:Number = damage;
-			damage = combat.FireTypeDamageBonus(damage);
+			damage = combat.fireTypeDamageBonus(damage);
 			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
 			damage += damage1;
 			damage *= 1.1;

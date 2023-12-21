@@ -116,6 +116,7 @@ public class SeaAnemone extends Monster
 			this.level = 50;
 			this.gems = rand(50) + 70;
 			this.drop = new WeightedDrop(consumables.DRYTENT, 1);
+			this.createPerk(PerkLib.WaterNature, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

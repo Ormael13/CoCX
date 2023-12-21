@@ -31,10 +31,14 @@ public class WinterWolf extends Monster
 				if(player.str > 7) {
 					player.addCurse("str", 6,2);
 					showStatDown( 'str' );
-					player.createStatusEffect(StatusEffects.FrostburnDoT,6,0,0,0);
+					if (!player.immuneToFrostBurn()) {
+						player.createStatusEffect(StatusEffects.FrostburnDoT,6,0,0,0);
+					}
 				}
 				else {
-					player.createStatusEffect(StatusEffects.FrostburnDoT,0,0,0,0);
+					if (!player.immuneToFrostBurn()) {
+						player.createStatusEffect(StatusEffects.FrostburnDoT,0,0,0,0);
+					}
 					damage += 30 + Math.round(rand((str + weaponAttack) / 2));
 					player.takeIceDamage(damage);
 					dmgtaken += damage;

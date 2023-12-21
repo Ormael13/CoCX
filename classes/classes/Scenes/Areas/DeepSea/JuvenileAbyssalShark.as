@@ -152,6 +152,7 @@ public class JuvenileAbyssalShark extends Monster
 			this.createPerk(PerkLib.SoulPersonage, 0, 0, 0, 0);
 			this.createPerk(PerkLib.SoulWarrior, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DaoistApprenticeStage, 0, 0, 0, 0);
+			this.createPerk(PerkLib.WaterNature, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

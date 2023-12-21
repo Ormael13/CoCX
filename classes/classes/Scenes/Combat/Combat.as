@@ -5467,7 +5467,7 @@ public class Combat extends BaseContent {
         if (damage < 10) damage = 10;
 		//All special weapon effects like...fire/ice
 		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.DL_WHIP || player.weapon == weapons.TIDAR)
-            damage = FireTypeDamageBonus(damage);
+            damage = fireTypeDamageBonus(damage);
 		if (isPureWeapon()  || Forgefather.purePearlEaten) {
 			damage = monsterPureDamageBonus(damage);
 		}
@@ -5478,20 +5478,20 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) damage = Math.round(damage * 1.75);
 		if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()) && player.hasStatusEffect(StatusEffects.WinterClaw)) {
 			damage *= 2.2;
-			damage = IceTypeDamageBonusLarge(damage);
+			damage = iceTypeDamageBonusLarge(damage);
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
             if (player.isRaceCached(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
             else damage *= 2;
-            damage = FireTypeDamageBonusLarge(damage);
+            damage = fireTypeDamageBonusLarge(damage);
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
-            damage = FireTypeDamageBonus(damage);
+            damage = fireTypeDamageBonus(damage);
 			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
 		}
 		if (player.flameBladeActive()) {
             damage += scalingBonusLibido() * 0.20;
-            damage = FireTypeDamageBonus(damage);
+            damage = fireTypeDamageBonus(damage);
         }
 		if (player.weapon == weapons.BFGAUNT || player.hasAetherTwinsTier2()) damage *= 2;
 		if (player.weapon == weapons.FRTAXE && monster.isFlying()) damage *= 1.5;
@@ -6857,39 +6857,147 @@ public class Combat extends BaseContent {
         return damage;
     }
 
-    public function FireTypeDamageBonus(damage:Number):Number {
+    public function fireTypeDamageBonus(damage:Number):Number {
         if (monster.hasPerk(PerkLib.IceNature)) damage *= 1.5;
         if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 1.2;
         if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.8;
         if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.5;
-        if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 2;
+        if (player.hasAnyPerk(PerkLib.FireAffinity, PerkLib.AffinityIgnis)) damage *= 2;
         return damage;
     }
 
-    public function FireTypeDamageBonusLarge(damage:Number):Number {
+    public function fireTypeDamageBonusLarge(damage:Number):Number {
         if (monster.hasPerk(PerkLib.IceNature)) damage *= 10;
         if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 4;
         if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.25;
         if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.1;
-        if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 2;
+        if (player.hasAnyPerk(PerkLib.FireAffinity, PerkLib.AffinityIgnis)) damage *= 2;
         return damage;
     }
 
-    public function IceTypeDamageBonus(damage:Number):Number {
+    public function iceTypeDamageBonus(damage:Number):Number {
         if (monster.hasPerk(PerkLib.FireNature)) damage *= 1.5;
         if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 1.2;
         if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.8;
         if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.5;
-        if (player.hasPerk(PerkLib.ColdAffinity) || player.hasPerk(PerkLib.AffinityUndine)) damage *= 2;
+        if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
+        if (player.hasPerk(PerkLib.ColdMastery)) damage *= 2;
         return damage;
     }
 
-    public function IceTypeDamageBonusLarge(damage:Number):Number {
+    public function iceTypeDamageBonusLarge(damage:Number):Number {
         if (monster.hasPerk(PerkLib.FireNature)) damage *= 10;
         if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 4;
         if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.25;
         if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.4;
-        if (player.hasPerk(PerkLib.ColdAffinity) || player.hasPerk(PerkLib.AffinityUndine)) damage *= 2;
+        if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
+        if (player.hasPerk(PerkLib.ColdMastery)) damage *= 2;
+        return damage;
+    }
+
+     public function windTypeDamageBonus(damage:Number):Number {
+        if (monster.hasPerk(PerkLib.WindVulnerability)) damage *= 1.2;
+        if (monster.hasPerk(PerkLib.WindNature)) damage *= 0.5;
+        if (player.hasAnyPerk(PerkLib.WindAffinity, PerkLib.AffinitySylph)) damage *= 2;
+        return damage;
+    }
+
+    public function windTypeDamageBonusLarge(damage:Number):Number {
+        if (monster.hasPerk(PerkLib.WindVulnerability)) damage *= 4;
+        if (monster.hasPerk(PerkLib.WindNature)) damage *= 0.4;
+        if (player.hasAnyPerk(PerkLib.WindAffinity, PerkLib.AffinitySylph)) damage *= 2;
+        return damage;
+    }
+
+     public function earthTypeDamageBonus(damage:Number):Number {
+        if (monster.hasPerk(PerkLib.EarthVulnerability)) damage *= 1.2;
+        if (monster.hasPerk(PerkLib.EarthNature)) damage *= 0.5;
+        if (player.hasAnyPerk(PerkLib.EarthAffinity, PerkLib.AffinityGnome)) damage *= 2;
+        return damage;
+    }
+
+    public function earthTypeDamageBonusLarge(damage:Number):Number {
+        if (monster.hasPerk(PerkLib.EarthVulnerability)) damage *= 4;
+        if (monster.hasPerk(PerkLib.EarthNature)) damage *= 0.4;
+        if (player.hasAnyPerk(PerkLib.EarthAffinity, PerkLib.AffinityGnome)) damage *= 2;
+        return damage;
+    }
+
+     public function waterTypeDamageBonus(damage:Number):Number {
+        if (monster.hasPerk(PerkLib.WaterVulnerability)) damage *= 1.2;
+        if (monster.hasPerk(PerkLib.WaterNature)) damage *= 0.5;
+        if (player.hasAnyPerk(PerkLib.WaterAffinity, PerkLib.AffinityUndine)) damage *= 2;
+        return damage;
+    }
+
+    public function waterTypeDamageBonusLarge(damage:Number):Number {
+        if (monster.hasPerk(PerkLib.WaterVulnerability)) damage *= 4;
+        if (monster.hasPerk(PerkLib.WaterNature)) damage *= 0.4;
+        if (player.hasAnyPerk(PerkLib.WaterAffinity, PerkLib.AffinityUndine)) damage *= 2;
+        return damage;
+    }
+
+     public function lightningTypeDamageBonus(damage:Number):Number {
+        if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 1.5;
+        if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 1.2;
+        if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 0.8;
+        if (monster.hasPerk(PerkLib.LightningNature)) damage *= 0.5;
+        if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 2;
+        return damage;
+    }
+
+    public function lightningTypeDamageBonusLarge(damage:Number):Number {
+        if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 10;
+        if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 4;
+        if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 0.25;
+        if (monster.hasPerk(PerkLib.LightningNature)) damage *= 0.4;
+        if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 2;
+        return damage;
+    }
+
+     public function darknessTypeDamageBonus(damage:Number):Number {
+        if (monster.hasPerk(PerkLib.LightningNature)) damage *= 1.5;
+        if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 1.2;
+        if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 0.8;
+        if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 0.5;
+        if (player.hasPerk(PerkLib.DarknessAffinity)) damage *= 2;
+        return damage;
+    }
+
+    public function darknessTypeDamageBonusLarge(damage:Number):Number {
+        if (monster.hasPerk(PerkLib.LightningNature)) damage *= 10;
+        if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 4;
+        if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 0.25;
+        if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 0.4;
+        if (player.hasPerk(PerkLib.DarknessAffinity)) damage *= 2;
+        return damage;
+    }
+
+     public function poisonTypeDamageBonus(damage:Number):Number {
+        if (monster.hasPerk(PerkLib.PoisonVulnerability)) damage *= 1.2;
+        if (monster.hasPerk(PerkLib.PoisonNature)) damage *= 0.5;
+        if (player.hasPerk(PerkLib.PoisonAffinity)) damage *= 2;
+        return damage;
+    }
+
+    public function poisonTypeDamageBonusLarge(damage:Number):Number {
+        if (monster.hasPerk(PerkLib.PoisonVulnerability)) damage *= 4;
+        if (monster.hasPerk(PerkLib.PoisonNature)) damage *= 0.4;
+        if (player.hasPerk(PerkLib.PoisonAffinity)) damage *= 2;
+        return damage;
+    }
+
+     public function acidTypeDamageBonus(damage:Number):Number {
+        if (monster.hasPerk(PerkLib.AcidVulnerability)) damage *= 1.2;
+        if (monster.hasPerk(PerkLib.AcidNature)) damage *= 0.5;
+        if (player.hasPerk(PerkLib.AcidAffinity)) damage *= 2;
+        return damage;
+    }
+
+    public function acidTypeDamageBonusLarge(damage:Number):Number {
+        if (monster.hasPerk(PerkLib.AcidVulnerability)) damage *= 4;
+        if (monster.hasPerk(PerkLib.AcidNature)) damage *= 0.4;
+        if (player.hasPerk(PerkLib.AcidAffinity)) damage *= 2;
         return damage;
     }
 
@@ -8046,19 +8154,6 @@ public class Combat extends BaseContent {
 		return EOTHDBonus;
 	}
 
-    public function MonsterIsBleeding():Boolean {
-        var isBleeding:Boolean = false;
-        if (monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) isBleeding = true;
-        if (monster.hasStatusEffect(StatusEffects.Hemorrhage)) isBleeding = true;
-        if (monster.hasStatusEffect(StatusEffects.SharkBiteBleed)) isBleeding = true;
-        if (monster.hasStatusEffect(StatusEffects.IzmaBleed)) isBleeding = true;
-        if (monster.hasStatusEffect(StatusEffects.CouatlHurricane)) isBleeding = true;
-        if (monster.hasStatusEffect(StatusEffects.GoreBleed)) isBleeding = true;
-        if (monster.hasStatusEffect(StatusEffects.Hemorrhage2)) isBleeding = true;
-        if (monster.hasStatusEffect(StatusEffects.Briarthorn)) isBleeding = true;
-        return isBleeding;
-    }
-
     //DEAL DAMAGE
     public function doTrueDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
@@ -8119,7 +8214,7 @@ public class Combat extends BaseContent {
             if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
             if (monster.hasPerk(PerkLib.FuelForTheFire)) WrathGains += Math.round((damage / 5)*BonusWrathMult);
             else WrathGains += Math.round((damage / 10) * BonusWrathMult);
-			if (MonsterIsBleeding() && player.hasPerk(PerkLib.YourPainMyPower)) {
+			if (monster.monsterIsBleeding() && player.hasPerk(PerkLib.YourPainMyPower)) {
 				player.HP += damage;
 				if (player.HP > (player.maxHP() + player.maxOverHP())) player.HP = player.maxHP() + player.maxOverHP();
 				if (flags[kFLAGS.YPMP_WRATH_GEN] == 0) EngineCore.WrathChange(WrathGains);
@@ -8200,7 +8295,7 @@ public class Combat extends BaseContent {
             if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
             if (monster.hasPerk(PerkLib.FuelForTheFire)) WrathGains += Math.round((damage / 5)*BonusWrathMult);
             else WrathGains += Math.round((damage / 10) * BonusWrathMult);
-			if (MonsterIsBleeding() && player.hasPerk(PerkLib.YourPainMyPower)) {
+			if (monster.monsterIsBleeding() && player.hasPerk(PerkLib.YourPainMyPower)) {
 				player.HP += damage;
 				if (player.HP > (player.maxHP() + player.maxOverHP())) player.HP = player.maxHP() + player.maxOverHP();
 				if (flags[kFLAGS.YPMP_WRATH_GEN] == 0) EngineCore.WrathChange(WrathGains);
@@ -8217,7 +8312,7 @@ public class Combat extends BaseContent {
     }
 
 	public function doPhysicalDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
-        if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1 && MonsterIsBleeding()) {
+        if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1 && monster.monsterIsBleeding()) {
 			var ddd:Number = 1.1;
 			if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) ddd += 0.15;
 			if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) ddd += 0.2;
@@ -8358,7 +8453,7 @@ public class Combat extends BaseContent {
 		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
         if (player.weapon === weapons.R_STAFF) damage *= 1.4;
 		if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.925;
-        damage = FireTypeDamageBonus(damage);
+        damage = fireTypeDamageBonus(damage);
         if (player.hasStatusEffect(StatusEffects.YukiOnnaKimono)) damage *= 0.2;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage *= 2;
         if (player.hasPerk(PerkLib.IceQueenGown)) damage = damage / 100;
@@ -8420,13 +8515,9 @@ public class Combat extends BaseContent {
 		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
 		if (player.weapon == weapons.S_STAFF) damage *= 1.4;
         if (monster.hasStatusEffect(StatusEffects.FrostburnDoT) && monster.statusEffectv3(StatusEffects.FrostburnDoT) > 0) damage *= (1 + (0.5 * monster.statusEffectv3(StatusEffects.FrostburnDoT)));
+        damage = iceTypeDamageBonus(damage);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
-        if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
-        if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.5;
-        if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 2;
-        if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
         if (monster.hasPerk(PerkLib.IcyFlesh)) damage *= 0.6;
-        if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
         if (player.hasStatusEffect(StatusEffects.YukiOnnaKimono)) damage *= 1.4;
         if (player.hasPerk(PerkLib.IceQueenGown)) damage *= 2;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage / 100;
@@ -8474,13 +8565,9 @@ public class Combat extends BaseContent {
         damage = doElementalDamageMultiplier(damage);
 		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
         if (player.weapon == weapons.T_STAFF) damage *= 1.4;
+        damage = lightningTypeDamageBonus(damage);
 		if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
-        if (monster.hasPerk(PerkLib.LightningNature)) damage *= 0.2;
-        if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 0.5;
-        if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 2;
         if (monster.hasStatusEffect(StatusEffects.DragonWaterBreath)) damage *= 5;
-        if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 5;
-        if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 2;
         if (player.perkv1(IMutationsLib.RaijuCathodeIM) >= 2) damage *= 1.20;
         if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) damage *= 1.1;
         if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 2) damage *= 1.2;
@@ -8531,17 +8618,12 @@ public class Combat extends BaseContent {
         damage = doElementalDamageMultiplier(damage);
 		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
         if (player.weapon == weapons.A_STAFF) damage *= 1.4;
+        damage = darknessTypeDamageBonus(damage);
 		if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
-        if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 0.2;
-        if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 0.5;
-        if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 2;
-        if (monster.hasPerk(PerkLib.LightningNature)) damage *= 5;
-        if (player.hasPerk(PerkLib.DarknessAffinity)) damage *= 2;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage *= 2;
         if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
         if (player.hasPerk(PerkLib.IceQueenGown)) damage = damage / 100;
         if (player.shieldName == "Nekonomicon") damage *= 2;
-//	if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
 		damage *= EyesOfTheHunterDamageBonus();
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -8581,6 +8663,7 @@ public class Combat extends BaseContent {
         damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
 		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
+        damage = poisonTypeDamageBonus(damage);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
         if (damage == 0) MSGControllForEvasion = true;
@@ -8625,6 +8708,7 @@ public class Combat extends BaseContent {
         damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
 		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
+        damage = windTypeDamageBonus(damage);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
         if (damage == 0) MSGControllForEvasion = true;
@@ -8665,6 +8749,7 @@ public class Combat extends BaseContent {
         damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
 		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
+        damage = waterTypeDamageBonus(damage);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
         if (damage == 0) MSGControllForEvasion = true;
@@ -8709,6 +8794,7 @@ public class Combat extends BaseContent {
         damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
 		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
+        damage = earthTypeDamageBonus(damage);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
         if (damage == 0) MSGControllForEvasion = true;
@@ -8749,6 +8835,7 @@ public class Combat extends BaseContent {
         damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
 		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
+        damage = acidTypeDamageBonus(damage);
 		if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
         if (damage == 0) MSGControllForEvasion = true;
@@ -10054,7 +10141,7 @@ public class Combat extends BaseContent {
         }
         //Blood Frenzy until ennemies stops bleeding
         if (player.hasStatusEffect(StatusEffects.BloodFrenzy)) {
-            if (!MonsterIsBleeding()) {
+            if (!monster.monsterIsBleeding()) {
                 player.removeStatusEffect(StatusEffects.BloodFrenzy);
                 player.statStore.removeBuffs("Blood Frenzy");
                 outputText("<b>With no blood in the air, your mind clears, your frenzy fades. </b>\n\n");
@@ -11761,6 +11848,7 @@ public class Combat extends BaseContent {
             }
             var generalTypes:/*String*/Array = [];
             var elementalTypes:/*String*/Array = [];
+            var statusTypes:/*String*/Array = [];
             if (player.hasPerk(PerkLib.EyesOfTheHunterNovice) && player.sens >= 25) {
                 if (monster.hasPerk(PerkLib.EnemyBeastOrAnimalMorphType)) generalTypes.push("Beast or Animal-morph");
                 if (monster.hasPerk(PerkLib.EnemyColossalType)) generalTypes.push("Colossal");
@@ -11786,15 +11874,45 @@ public class Combat extends BaseContent {
                 if (monster.hasPerk(PerkLib.FireNature)) elementalTypes.push("Fire Nature");
                 if (monster.hasPerk(PerkLib.IceNature)) elementalTypes.push("Ice Nature");
                 if (monster.hasPerk(PerkLib.LightningNature)) elementalTypes.push("Lightning Nature");
+                if (monster.hasPerk(PerkLib.WaterNature)) elementalTypes.push("Water Nature");
+                if (monster.hasPerk(PerkLib.EarthNature)) elementalTypes.push("Earth Nature");
+                if (monster.hasPerk(PerkLib.PoisonNature)) elementalTypes.push("Poison Nature");
+                if (monster.hasPerk(PerkLib.AcidNature)) elementalTypes.push("Acid Nature");
+                if (monster.hasPerk(PerkLib.WindNature)) elementalTypes.push("Wind Nature");
 				if (monster.hasPerk(PerkLib.DarknessVulnerability)) elementalTypes.push("Darkness Vulnerability");
                 if (monster.hasPerk(PerkLib.FireVulnerability)) elementalTypes.push("Fire Vulnerability");
                 if (monster.hasPerk(PerkLib.IceVulnerability)) elementalTypes.push("Ice Vulnerability");
                 if (monster.hasPerk(PerkLib.LightningVulnerability)) elementalTypes.push("Lightning Vulnerability");
+                if (monster.hasPerk(PerkLib.AcidVulnerability)) elementalTypes.push("Acid Vulnerability");
+                if (monster.hasPerk(PerkLib.EarthVulnerability)) elementalTypes.push("Earth Vulnerability");
+                if (monster.hasPerk(PerkLib.PoisonVulnerability)) elementalTypes.push("Poison Vulnerability");
+                if (monster.hasPerk(PerkLib.WaterVulnerability)) elementalTypes.push("Water Vulnerability");
+                if (monster.hasPerk(PerkLib.WindVulnerability)) elementalTypes.push("Wind Vulnerability");
+            }
+            if (player.hasPerk(PerkLib.EyesOfTheHunterExpert) && player.sens >= 75) {
+                if (monster.monsterIsStunned()) statusTypes.push("Stunned");
+                if (monster.monsterIsConstricted()) statusTypes.push("Constricted");
+                if (monster.monsterIsBleeding()) statusTypes.push("Bleeding");
+                if (monster.monsterIsPoisoned()) statusTypes.push("Poisoned");
+                if (monster.monsterIsLustPoisoned()) statusTypes.push("Lust Poisoned");
+                if (monster.monsterIsAcidBurned()) statusTypes.push("Acid Burned");
+                if (monster.hasStatusEffect(StatusEffects.Provoke)) statusTypes.push("Provoked");
+                if (monster.hasStatusEffect(StatusEffects.Fear)) statusTypes.push("Afraid");
+                if (monster.hasStatusEffect(StatusEffects.ConfusionM)) statusTypes.push("Confused");
+                if (monster.hasStatusEffect(StatusEffects.FrostburnDoT)) statusTypes.push("Frostbitten");
+                if (monster.hasStatusEffect(StatusEffects.Flying)) statusTypes.push("Flying");
+                if (player.hasStatusEffect(StatusEffects.MonsterDig)) statusTypes.push("Underground");
+                if (combat.isEnemyInvisibleButNotUnderground) statusTypes.push("Invisible");
+                if (monster.lustVuln == 0) statusTypes.push("Lust Immune");
+                statusTypes.concat(monster.displaySpecialStatues());
             }
             outputText("\n");
             if (player.hasPerk(PerkLib.EyesOfTheHunterNovice)){
                 outputText("Enemy information - General: " + generalTypes.join(", ") + "\n");
                 outputText("Enemy information - Elemental: " + elementalTypes.join(", ") + "\n");
+            }
+            if (player.hasPerk(PerkLib.EyesOfTheHunterExpert)){
+                outputText("Enemy information - Status: " + statusTypes.join(", ") + "\n");
             }
         }
         if (debug) {

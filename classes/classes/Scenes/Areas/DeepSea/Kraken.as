@@ -106,6 +106,7 @@ public class Kraken extends Monster
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.WaterNature, 0, 0, 0, 0);
 			//this.createPerk(PerkLib., 0, 0, 0, 0);
 			//this.createPerk(PerkLib., 0, 0, 0, 0);
 			//this.createPerk(PerkLib., 0, 0, 0, 0);

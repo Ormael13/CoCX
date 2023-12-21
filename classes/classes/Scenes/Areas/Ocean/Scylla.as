@@ -117,6 +117,7 @@ public class Scylla extends Monster
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.WaterNature, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

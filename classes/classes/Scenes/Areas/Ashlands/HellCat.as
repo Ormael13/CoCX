@@ -36,8 +36,10 @@ import classes.internals.*;
 			var firedamage:int = (inte * 0.45) + rand(10);
 			firedamage = Math.round(firedamage);
 			player.takeFireDamage(firedamage, true);
-			if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.addStatusValue(StatusEffects.BurnDoT, 1, 1);
-			else player.createStatusEffect(StatusEffects.BurnDoT,SceneLib.combat.debuffsOrDoTDuration(3),0.05,0,0);
+			if (!player.immuneToBurn()) {
+				if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.addStatusValue(StatusEffects.BurnDoT, 1, 1);
+				else player.createStatusEffect(StatusEffects.BurnDoT,SceneLib.combat.debuffsOrDoTDuration(3),0.05,0,0);
+			}
 			var physdamage:Number = 0;
 			physdamage += eBaseDamage();
 			player.takePhysDamage(physdamage, true);
