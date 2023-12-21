@@ -17,6 +17,7 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.SceneLib;
 import classes.StatusEffectType;
 import classes.StatusEffects;
+import classes.lists.Gender;
 
 public class CombatMagic extends BaseCombatContent {
 	public function CombatMagic() {}
@@ -791,32 +792,32 @@ public class CombatMagic extends BaseCombatContent {
         maintainMagicCounter(magicCounterPerks["acid"]);
     }
 	
-	public function MagicPrefixEffect():void {
+	public function MagicPrefixEffect(display:Boolean = true):void {
 		//if (player.hasPerk(PerkLib.Spellsong) && player.hasStatusEffect(StatusEffects.Sing)) {
 		//	outputText(" You weave your song into magic to unleash a spell.\n\n");
 		//}
-		if (player.armorName == "Drider-Weave Sheer Robe") {
-			outputText("As your mana flows through your body, culminating in your hands, your sheer robe glows, giving [themonster] a good, long look at you.\n\n");
-			if (player.gender == 2 || (player.gender == 3 && rand(2) == 0)) {
-				outputText("You lean forward, moving your [breasts] from side to side. As your mana focuses, you roll your shoulders back and your hips forward, giving the [themonster] a little moan, biting your lip, your arms behind your back. Their gaze drops to your snatch, but as they gaze at your delta, you finish your spell, robes turning back to normal. ");
-			}
-			else {
-				outputText("You spread your hands, letting mana flow through you. Your robe all but vanishes, and you thrust your hips forward, [cock] hardening slightly, your bulge standing up straight and tenting the sheer silk. Giving your enemy a cocky grin, you lick your lips, giving them a few thrusts of your hips. ");
-				outputText("[Themonster], stunned by the sudden change in your bearing and…manhood, gives you more than enough time to finish your spell. ");
-			}
-			if (player.perkv1(PerkLib.ImpNobility) > 0) {
-				outputText("  Your imp cohorts assist you spellcasting adding their diagrams to your own.");
+		if (player.armor == armors.DWSROBE) {
+			if (display) {
+				outputText("As your mana flows through your body, culminating in your hands, your sheer robe glows, giving [themonster] a good, long look at you.\n\n");
+				if (player.gender == Gender.GENDER_FEMALE || (player.gender == Gender.GENDER_HERM && rand(2) == 0)) {
+					outputText("You lean forward, moving your [breasts] from side to side. As your mana focuses, you roll your shoulders back and your hips forward, giving the [themonster] a little moan, biting your lip, your arms behind your back. Their gaze drops to your snatch, but as they gaze at your delta, you finish your spell, robes turning back to normal. ");
+				}
+				else {
+					outputText("You spread your hands, letting mana flow through you. Your robe all but vanishes, and you thrust your hips forward, [cock] hardening slightly, your bulge standing up straight and tenting the sheer silk. Giving your enemy a cocky grin, you lick your lips, giving them a few thrusts of your hips. ");
+					outputText("[Themonster], stunned by the sudden change in your bearing and…manhood, gives you more than enough time to finish your spell. ");
+				}
+				if (player.perkv1(PerkLib.ImpNobility) > 0) {
+					outputText("  Your imp cohorts assist you spellcasting adding their diagrams to your own.");
+				}
 			}
 			var damage:Number = 0;
 			var damagemultiplier:Number = 1;
 			damage += combat.teases.teaseBaseLustDamage();
-			if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();
-			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
-			if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
 			if (player.hasPerk(PerkLib.UnbreakableBind)) damagemultiplier += 1;
 			if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (2 - player.statusEffectv1(StatusEffects.ControlFreak));
-			if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
 			damage *= damagemultiplier;
+			if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
+			
 			//Determine if critical tease!
 			var crit:Boolean = false;
 			var critChance:int = 5;
@@ -827,8 +828,6 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			if (monster.hasStatusEffect(StatusEffects.HypnosisNaga)) damage *= 0.5;
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-			if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
-        	if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
 			if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
 				outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
 				player.takeLustDamage(Math.round(-damage)/40, true);
