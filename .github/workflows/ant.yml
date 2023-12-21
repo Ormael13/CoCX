@@ -56,7 +56,7 @@ jobs:
         uses: joshtynjala/setup-apache-flex-action@v2
         with:
           flex-version: "4.16.1"
-          air-version: "33.1.1.935"
+          air-version: "33.1.1.345"
           accept-air-license: true
 
       # this is where the build happens. A separate build is started for every entry in the matrix element

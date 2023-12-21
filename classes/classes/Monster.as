@@ -2026,10 +2026,14 @@ import classes.Scenes.Combat.CombatAbilities;
 			}
 			if (hasTempResolute()) {
 				var currentDuration:int = getPerkValue(PerkLib.Resolute, 4);
-				if (currentDuration <= 0) {
-					clearTempResolute();
-				} else {
-					setPerkValue(PerkLib.Resolute, 4, currentDuration - 1);
+				var decayResolute:int = getPerkValue(PerkLib.Resolute, 3);
+				//Only start to decay temp resolute duration once the enemy can actually move again
+				if (decayResolute == 1) {
+					if (currentDuration <= 0) {
+						clearTempResolute();
+					} else {
+						setPerkValue(PerkLib.Resolute, 4, currentDuration - 1);
+					}
 				}
 			}
 			if (hasStatusEffect(StatusEffects.Lustzerking)) {
@@ -2096,6 +2100,9 @@ import classes.Scenes.Combat.CombatAbilities;
 					return;
 				}
 			}
+
+			//Only start temp resolute decay once monster is no longer incapacitated
+			if (hasTempResolute() && getPerkValue(PerkLib.Resolute, 3) == 2) setPerkValue(PerkLib.Resolute, 3, 1);
 			performCombatAction();
 		}
 
@@ -2381,7 +2388,7 @@ import classes.Scenes.Combat.CombatAbilities;
 
 		public function handleStunEnd(effect:StatusEffectType):void {
 			if (hasStatusEffect(effect) && canGainTempStunImmunity()) {
-				createPerk(PerkLib.Resolute, 0, 0, 1, resoluteBuffDuration);
+				createPerk(PerkLib.Resolute, 0, 0, 2, resoluteBuffDuration);
 				outputText("<b>[Themonster] is now temporarily resistant to being stunned!</b>\n\n");
 			}
 			removeStatusEffect(effect);
@@ -2392,14 +2399,17 @@ import classes.Scenes.Combat.CombatAbilities;
 		}
 
 		public function clearTempResolute(display:Boolean = true):void {
-			if (hasPerk(PerkLib.Resolute) && getPerkValue(PerkLib.Resolute, 3) == 1) {
+			if (hasTempResolute()) {
 				removePerk(PerkLib.Resolute);
 				if (display) outputText("<b>[Themonster] is no longer resistant to being stunned!</b>\n\n");
 			}
 		}
 
+		/**
+		 * Temp Resolute duration will only start to degrade once it's v3 value is set to 1
+		 */
 		public function hasTempResolute():Boolean {
-			return hasPerk(PerkLib.Resolute) && getPerkValue(PerkLib.Resolute, 3) == 1;
+			return hasPerk(PerkLib.Resolute) && (getPerkValue(PerkLib.Resolute, 3) == 1 || getPerkValue(PerkLib.Resolute, 3) == 2);
 		}
 
 		/**

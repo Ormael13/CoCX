@@ -1546,6 +1546,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				EngineCore.changeFatigue(-(100 + (player.spe*2)));
 				outputText("You feel energised and empowered by the energy drained out of the cum of your recent fuck. What a meal!");
 				player.removeStatusEffect(StatusEffects.DemonEnergyThirstFeed);
+				player.addPerkValue(PerkLib.DemonEnergyThirst, 1, 1);
 			}
 			//DarkCharm
 			needNext ||= player.gainOrLosePerk(PerkLib.DarkCharm, player.isAnyRaceCached(Races.DEMON, Races.IMP, Races.DRACULA) || player.hasMutation(IMutationsLib.BlackHeartIM), "You feel a strange sensation in your body. With you looking like a demon, you have unlocked the potential to use demonic charm attacks!", "With some of your demon-like traits gone, so does your ability to use charm attacks.", player.perkv4(PerkLib.DarkCharm) == 0);
