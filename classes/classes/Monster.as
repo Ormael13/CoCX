@@ -1839,6 +1839,14 @@ import classes.Scenes.Combat.CombatAbilities;
 		}
 
 		/**
+		 * @return Return true if the original tease damage should be applied
+		 */
+		public function handleTease(damage:Number, successful:Boolean, display:Boolean = true):Boolean 
+		{
+			return true;
+		}
+
+		/**
 		 * print something about how we miss the player
 		 */
 		protected function outputPlayerDodged(dodge:int):void

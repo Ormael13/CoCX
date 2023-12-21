@@ -46,7 +46,7 @@ public class DeathBlossomSpell extends AbstractGreenSpell {
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("You concentrate your desire on the nearby plants causing their flowers to spontaneously bloom in a cloud of corrupted pollen.");
+			outputText("You concentrate your desire on the nearby plants causing their flowers to spontaneously bloom in a cloud of corrupted pollen.\n");
 			monster.createStatusEffect(StatusEffects.DeathBlossom, 5, 1, 0, 0);
 			var arve:Number = 1;
 			if (player.hasPerk(PerkLib.ArcaneVenom)) arve += stackingArcaneVenom();

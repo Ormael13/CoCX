@@ -789,7 +789,7 @@ public class Combat extends BaseContent {
             addButton(0, "Attack", basemeleeattacks).hint("Attempt to attack the enemy with your [weapon].  Damage done is determined by your strength and weapon.");
             addButton(1, "P. Specials", SceneLib.urtaQuest.urtaSpecials).hint("Physical special attack menu.", "Physical Specials");
             addButton(2, "M. Specials", SceneLib.urtaQuest.urtaMSpecials).hint("Mental and supernatural special attack menu.", "Magical Specials");
-            addButton(3, "Tease", teaseAttack);
+            CombatAbilities.Tease.createButton(monster).applyTo(button(3));
             addButton(5, "Fantasize", fantasize).hint("Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.");
             addButton(6, "Wait", wait).hint("Take no action for this round.  Why would you do this?  This is a terrible idea.");
         }
@@ -9690,7 +9690,7 @@ public class Combat extends BaseContent {
 		}
 		//Death Blossom
 		if (monster.hasStatusEffect(StatusEffects.DeathBlossom)) {
-			outputText("The airborne poisons and aphrodisiacs spread by the blossoming flowers thickens.");
+			outputText("The airborne poisons and aphrodisiacs spread by the blossoming flowers thickens.\n");
 			var damageDBH:Number = scalingBonusIntelligence() * 0.1 * spellModWhite() * monster.statusEffectv2(StatusEffects.DeathBlossom);
 			damageDBH = Math.round(damageDBH * poisonDamageBoostedByDao());
 			var damageDBL:Number = 0;
@@ -10859,7 +10859,7 @@ public class Combat extends BaseContent {
 		if (poisonele != 0) doPoisonDamage(poisonele, true, true);
 		dmg = Math.round(dmg * monster.lustVuln);
 		monster.teased(dmg, false);
-		if (crit) outputText(" <b>Critical!</b>" );
+		if (crit) outputText(" <b>Critical!</b> " );
 		if (subtype == 1) combat.teaseXP((1 + combat.bonusExpAfterSuccesfullTease()*2));
 		else combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		if (player.hasPerk(PerkLib.VerdantLeech)) {

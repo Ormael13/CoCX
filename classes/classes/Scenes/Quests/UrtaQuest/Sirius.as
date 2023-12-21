@@ -6,6 +6,8 @@ import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.Scenes.Areas.Desert.Naga;
 import classes.Scenes.SceneLib;
+import classes.Scenes.Combat.CombatAbility;
+import classes.Scenes.Combat.General.TeaseSkill;
 
 public class Sirius extends Naga
 	{
@@ -83,6 +85,14 @@ public class Sirius extends Naga
 			outputText("The snake-man moves too quickly for you to evade and he sinks long fangs into your flesh, leaving a wound that burns with horrific pain. ");
 			var damage:Number = 40 + rand(20);
 			damage = player.takePoisonDamage(damage, true);
+		}
+
+		override public function interceptPlayerAbility(ability:CombatAbility):Boolean {
+			if (ability is TeaseSkill) {
+				outputText("He is too focused on your eyes to pay any attention to your teasing, <b>looks like you'll have to beat him up.</b>\n\n");
+				return true;
+			}
+			return false;
 		}
 
 		override public function defeated(hpVictory:Boolean):void
