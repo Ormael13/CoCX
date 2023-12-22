@@ -5095,6 +5095,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if(i == 5) {
 				outputText(". Finally [monster he] ");
 			}
+			choice(damage);
 			EffectList.splice(EffectList.indexOf(choice), 1)
 		}
 		outputText(".\n\n");
