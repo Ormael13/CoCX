@@ -1,6 +1,7 @@
 package classes.Scenes.Dungeons 
 {
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Camp.CampStatsAndResources;
 import classes.Scenes.SceneLib;
 
 public class YourCabin extends DungeonAbstractContent
@@ -218,7 +219,7 @@ public class YourCabin extends DungeonAbstractContent
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (player.fatigue <= player.maxFatigue() - 40) {
-					if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 45 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 25)
+					if (CampStatsAndResources.NailsResc >= 45 && CampStatsAndResources.WoodResc >= 25)
 					{
 						doYesNo(constructFurnitureBed, menuFurniture);
 					}
@@ -247,8 +248,8 @@ public class YourCabin extends DungeonAbstractContent
 			outputText("You pick up the wood and begin to construct a bed frame. You put it together and drive nails into place with your hammer.\n\n");
 			outputText("Next, you add a wooden slab to the bed for mattress. With the bed finished, you go outside to pick up your bedroll and bring it inside. It easily converts to mattress, sheet, and pillow. It took you two hours to completely make a large bed from the beginning!\n\n");
 			outputText("<b>You have finished your bed! (HP and Fatigue recovery increased by 50%!)</b> \n\n");
-			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 45;
-			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 25;
+			CampStatsAndResources.NailsResc -= 45;
+			CampStatsAndResources.WoodResc -= 25;
 			flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] = 1;
 			fatigue(40);
 			doNext(camp.returnToCampUseTwoHours);
@@ -261,7 +262,7 @@ public class YourCabin extends DungeonAbstractContent
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (player.fatigue <= player.maxFatigue() - 20) {
-					if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 20 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 10)
+					if (CampStatsAndResources.NailsResc >= 20 && CampStatsAndResources.WoodResc >= 10)
 					{
 						doYesNo(constructFurnitureNightstand, menuFurniture);
 					}
@@ -290,8 +291,8 @@ public class YourCabin extends DungeonAbstractContent
 			outputText("You pick up the wood and begin to construct a nightstand. You cut the wood into lengths. You put it together by driving nails into place with your hammer. After putting the nightstand together, you paint the nightstand for a polished look.\n\n");
 			outputText("The paint dries relatively quickly and it only took you one hour to finish your nightstand! \n\n");
 			outputText("<b>You have finished your nightstand!</b> \n\n");
-			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 20;
-			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 10;
+			CampStatsAndResources.NailsResc -= 20;
+			CampStatsAndResources.WoodResc -= 10;
 			flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] = 1;
 			fatigue(20);
 			doNext(camp.returnToCampUseOneHour);
@@ -304,7 +305,7 @@ public class YourCabin extends DungeonAbstractContent
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (player.fatigue <= player.maxFatigue() - 60) {
-					if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 50 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 30)
+					if (CampStatsAndResources.NailsResc >= 50 && CampStatsAndResources.WoodResc >= 30)
 					{
 						doYesNo(constructFurnitureDresser, menuFurniture);
 					}
@@ -334,8 +335,8 @@ public class YourCabin extends DungeonAbstractContent
 			outputText("Next, you paint the dresser for a more polished look. \n\n");
 			outputText("The paint dries relatively quickly and it took you two hours to finish your dresser. \n\n");
 			outputText("<b>You have finished your dresser!</b> \n\n");
-			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 50;
-			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 30;
+			CampStatsAndResources.NailsResc -= 50;
+			CampStatsAndResources.WoodResc -= 30;
 			flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER] = 1;
 			fatigue(60);
 			doNext(camp.returnToCampUseOneHour);
@@ -348,7 +349,7 @@ public class YourCabin extends DungeonAbstractContent
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (player.fatigue <= player.maxFatigue() - 50) {
-					if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 20 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 15)
+					if (CampStatsAndResources.NailsResc >= 20 && CampStatsAndResources.WoodResc >= 15)
 					{
 						doYesNo(constructFurnitureTable, menuFurniture);
 					}
@@ -377,8 +378,8 @@ public class YourCabin extends DungeonAbstractContent
 			outputText("You pick up the wood and begin to construct a table. You cut the wood into lengths. You put it together by driving nails into place with your hammer. After putting the table together, you paint the table for a polished look.\n\n");
 			outputText("The paint dries relatively quickly and it only took you one hour to finish your table! \n\n");
 			outputText("<b>You have finished your table!</b> \n\n");
-			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 20;
-			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 15;
+			CampStatsAndResources.NailsResc -= 20;
+			CampStatsAndResources.WoodResc -= 15;
 			flags[kFLAGS.CAMP_CABIN_FURNITURE_TABLE] = 1;
 			fatigue(50);
 			doNext(camp.returnToCampUseOneHour);
@@ -391,7 +392,7 @@ public class YourCabin extends DungeonAbstractContent
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (player.fatigue <= player.maxFatigue() - 20) {
-					if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 40 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 10)
+					if (CampStatsAndResources.NailsResc >= 40 && CampStatsAndResources.WoodResc >= 10)
 					{
 						doYesNo(constructFurnitureChair, menuFurniture);
 					}
@@ -420,8 +421,8 @@ public class YourCabin extends DungeonAbstractContent
 			outputText("You pick up the wood and begin to construct a chair. You cut the wood into lengths. You put it together by driving nails into place with your hammer. After putting the chair together, you paint the chair for a polished look.\n\n");
 			outputText("The paint dries relatively quickly and it only took you one hour to finish your chair! \n\n");
 			outputText("<b>You have finished your chair!</b> \n\n");
-			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 40;
-			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 10;
+			CampStatsAndResources.NailsResc -= 40;
+			CampStatsAndResources.WoodResc -= 10;
 			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_CHAIR1] >= 1)
 			{
 				flags[kFLAGS.CAMP_CABIN_FURNITURE_CHAIR2] = 1;
@@ -442,7 +443,7 @@ public class YourCabin extends DungeonAbstractContent
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (player.fatigue <= player.maxFatigue() - 50) {
-					if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 75 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 25)
+					if (CampStatsAndResources.NailsResc >= 75 && CampStatsAndResources.WoodResc >= 25)
 					{
 						doYesNo(constructFurnitureBookshelf, menuFurniture);
 					}
@@ -474,8 +475,8 @@ public class YourCabin extends DungeonAbstractContent
 			if (player.hasKeyItem("Dangerous Plants") >= 0 || player.hasKeyItem("Traveler's Guide") >= 0 || player.hasKeyItem("Hentai Comic") >= 0 || player.hasKeyItem("Yoga Guide") >= 0) {
 				outputText("You take your time to place your books into the bookshelf. \n\n");
 			}
-			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 75;
-			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 25;
+			CampStatsAndResources.NailsResc -= 75;
+			CampStatsAndResources.WoodResc -= 25;
 			flags[kFLAGS.CAMP_CABIN_FURNITURE_BOOKSHELF] = 1;
 			fatigue(50);
 			doNext(camp.returnToCampUseOneHour);
@@ -488,7 +489,7 @@ public class YourCabin extends DungeonAbstractContent
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (player.fatigue <= player.maxFatigue() - 60) {
-					if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 60 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 20)
+					if (CampStatsAndResources.NailsResc >= 60 && CampStatsAndResources.WoodResc >= 20)
 					{
 						doYesNo(constructFurnitureDesk, menuFurniture);
 					}
@@ -513,8 +514,8 @@ public class YourCabin extends DungeonAbstractContent
 		
 		private function constructFurnitureDesk():void {
 			clearOutput();
-			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 60;
-			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 20;
+			CampStatsAndResources.NailsResc -= 60;
+			CampStatsAndResources.WoodResc -= 20;
 			outputText("You take the book from your toolbox and flip pages until you reach pages about how to construct a desk. You follow the instructions.\n\n");
 			outputText("You pick up the wood and begin to construct a desk. You cut the wood into lengths. You put it together by driving nails into place with your hammer. After putting the desk together, you paint the bookshelf for a polished look.\n\n");
 			outputText("Next, you construct a drawer to store small objects. You nail the drawer together and paint it. Finally, you install the drawer in place.\n\n");
@@ -532,7 +533,7 @@ public class YourCabin extends DungeonAbstractContent
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (player.fatigue <= player.maxFatigue() - 20) {
-					if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 40 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 10)
+					if (CampStatsAndResources.NailsResc >= 40 && CampStatsAndResources.WoodResc >= 10)
 					{
 						doYesNo(constructFurnitureChairForDesk, menuFurniture);
 					}
@@ -561,8 +562,8 @@ public class YourCabin extends DungeonAbstractContent
 			outputText("You pick up the wood and begin to construct a chair. You cut the wood into lengths. You put it together by driving nails into place with your hammer. After putting the chair together, you paint the chair for a polished look.\n\n");
 			outputText("The paint dries relatively quickly and it only took you one hour to finish your chair! \n\n");
 			outputText("<b>You have finished your chair!</b> \n\n");
-			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 40;
-			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 10;
+			CampStatsAndResources.NailsResc -= 40;
+			CampStatsAndResources.WoodResc -= 10;
 			flags[kFLAGS.CAMP_CABIN_FURNITURE_DESKCHAIR] = 1;
 			fatigue(20);
 			doNext(camp.returnToCampUseOneHour);

@@ -6,6 +6,7 @@ package classes.Scenes.NPCs
 import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Camp.CampStatsAndResources;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
@@ -1809,7 +1810,7 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_ANTWORKS] += stones;
 			if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_ANTWORKS] >= 200) awardAchievement("AntWorks", kACHIEVEMENTS.GENERAL_ANTWORKS);
 			if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_ANTWORKS] >= 5000) awardAchievement("Ant-Kids and Phylla", kACHIEVEMENTS.GENERAL_ANT_KIDS_AND_PHYLLA);
-			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stones;
+			CampStatsAndResources.StonesResc += stones;
 			statScreenRefresh();
 			//If Phylla IS NOT Laying Eggs
 			if (flags[kFLAGS.PHYLLA_EGG_LAYING] == 0) {
@@ -1828,8 +1829,8 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 				outputText("\n\n\"<i>Is there anything else you wanted to do while you're down here?</i>\"");
 				outputText("\n\nYou gain " + stones + " stones.");
 			}
-			if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= SceneLib.campUpgrades.checkMaterialsCapStones()) {
-				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = SceneLib.campUpgrades.checkMaterialsCapStones();
+			if (CampStatsAndResources.StonesResc >= SceneLib.campUpgrades.checkMaterialsCapStones()) {
+				CampStatsAndResources.StonesResc = SceneLib.campUpgrades.checkMaterialsCapStones();
 				outputText(" <b>Your stone capacity is full.</b>");
 			}
 			doNext(camp.returnToCampUseOneHour);

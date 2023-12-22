@@ -2263,8 +2263,8 @@ public class Camp extends NPCAwareContent{
 		if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) addButton(10, "Clone", CloneMenu).hint("Check on your clone(s).");
 		else addButtonDisabled(10, "Clone", "Would you kindly go face F class Heaven Tribulation first?");
 		addButtonIfTrue(11, "Pocket Watch", mainPagePocketWatch, "Req. having Pocket Watch key item.", player.hasKeyItem("Pocket Watch") >= 0);
-		if (player.hasItem(useables.ENECORE, 1) && flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 200) addButton(12, "E.Core", convertingEnergyCoreIntoFlagValue).hint("Convert Energy Core item into flag value.");
-		if (player.hasItem(useables.MECHANI, 1) && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] < 200) addButton(12, "C.Mechan", convertingMechanismIntoFlagValue).hint("Convert Mechanism item into flag value.");
+		if (player.hasItem(useables.ENECORE, 1) && CampStatsAndResources.EnergyCoreResc < 200) addButton(12, "E.Core", convertingEnergyCoreIntoFlagValue).hint("Convert Energy Core item into flag value.");
+		if (player.hasItem(useables.MECHANI, 1) && CampStatsAndResources.MechanismResc < 200) addButton(12, "C.Mechan", convertingMechanismIntoFlagValue).hint("Convert Mechanism item into flag value.");
 		addButton(13, "C & S", menuForCombiningAndSeperating).hint("Combining & Seperating");
 		addButton(14, "Back", campActions);
 	}
@@ -2272,14 +2272,14 @@ public class Camp extends NPCAwareContent{
 		clearOutput();
 		outputText("1 Energy Core converted succesfully.");
 		player.destroyItems(useables.ENECORE, 1);
-		flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] += 1;
+		CampStatsAndResources.EnergyCoreResc += 1;
 		doNext(campMiscActions);
 	}
 	private function convertingMechanismIntoFlagValue():void {
 		clearOutput();
 		outputText("1 Mechanism converted succesfully.");
 		player.destroyItems(useables.MECHANI, 1);
-		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] += 1;
+		CampStatsAndResources.MechanismResc += 1;
 		doNext(campMiscActions);
 	}
 
@@ -4662,7 +4662,7 @@ public function rebirthFromBadEnd():void {
 		}
 		SceneLib.camp.campUpgrades.checkMaterials();
 		outputText("\n\nIt will cost 80 nails, 80 wood and 10 stones to work on a segment of the wall.\n\n");
-		if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 80 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 80) {
+		if (CampStatsAndResources.StonesResc >= 10 && CampStatsAndResources.WoodResc >= 80 && CampStatsAndResources.NailsResc >= 80) {
 			doYesNo(buildCampWall, doCamp);
 		} else {
 			outputText("\n<b>Unfortunately, you do not have sufficient resources.</b>");
@@ -4689,9 +4689,9 @@ public function rebirthFromBadEnd():void {
 			helperArray[helperArray.length] = "Kiha";
 			helpers++;
 		}
-		flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 10;
-		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 80;
-		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 80;
+		CampStatsAndResources.StonesResc -= 10;
+		CampStatsAndResources.WoodResc -= 80;
+		CampStatsAndResources.NailsResc -= 80;
 		clearOutput();
 		if (flags[kFLAGS.CAMP_WALL_PROGRESS] == 1) {
 			outputText("You pull out a book titled \"Carpenter's Guide\" and flip pages until you come across instructions on how to build a wall. You spend minutes looking at the instructions and memorize the procedures.");
@@ -4746,7 +4746,7 @@ public function rebirthFromBadEnd():void {
 		outputText("You can build a gate to further secure your [camp] by having it closed at night.\n\n");
 		SceneLib.camp.campUpgrades.checkMaterials();
 		outputText("\n\nIt will cost 100 nails and 100 wood to build a gate.\n\n");
-		if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100) {
+		if (CampStatsAndResources.WoodResc >= 100 && CampStatsAndResources.NailsResc >= 100) {
 			doYesNo(buildCampGate, doCamp);
 		} else {
 			outputText("\n<b>Unfortunately, you do not have sufficient resources.</b>");
@@ -4773,8 +4773,8 @@ public function rebirthFromBadEnd():void {
 			helperArray[helperArray.length] = "Kiha";
 			helpers++;
 		}
-		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 100;
-		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 100;
+		CampStatsAndResources.WoodResc -= 100;
+		CampStatsAndResources.NailsResc -= 100;
 		clearOutput();
 		outputText("You pull out a book titled \"Carpenter's Guide\" and flip pages until you come across instructions on how to build a gate that can be opened and closed. You spend minutes looking at the instructions and memorize the procedures.");
 		flags[kFLAGS.CAMP_WALL_GATE] = 1;

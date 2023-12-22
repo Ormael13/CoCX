@@ -13,6 +13,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Forest.TentacleBeast;
 import classes.Scenes.Areas.Mountain.HellHound;
 import classes.Scenes.Areas.Swamp.CorruptedDrider;
+import classes.Scenes.Camp.CampStatsAndResources;
 import classes.Scenes.Crafting;
 import classes.Scenes.Dungeons.D3.MinotaurKing;
 import classes.Scenes.Dungeons.HiddenCave.BossGolems;
@@ -1637,7 +1638,7 @@ public function soularena():void {
 		outputText("\"<i>That will be " + cost + " spirit stones. Show me da money baby.</i>\"\n\n");
 		menu();
 		if (flags[kFLAGS.SPIRIT_STONES] < cost) addButtonDisabled(1, "Buy", "You do not have enough spirit stones to buy this.");
-		else if (flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] >= 200) addButtonDisabled(1, "Buy", "You can't store any more of this type of items.");
+		else if (CampStatsAndResources.EnergyCoreResc >= 200) addButtonDisabled(1, "Buy", "You can't store any more of this type of items.");
 		else addButton(1, "Buy", curry(buyItemEnergyCoreYes, cost));
 		addButton(3, "Don't Buy", golemancershopRepeat);
 	}
@@ -1646,7 +1647,7 @@ public function soularena():void {
 		statScreenRefresh();
 		outputText("She counts the stones before handing your purchase over.\n\n");
 		outputText("\"<i>Always happy to do business, anything else you want to buy?</i>\"\n\n");
-		flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES]++;
+		CampStatsAndResources.EnergyCoreResc++;
 		doNext(golemancershopRepeat);
 	}
 	private function buyItemMechanism():void {
@@ -1656,7 +1657,7 @@ public function soularena():void {
 		outputText("\"<i>That will be " + cost + " spirit stones. Show me da money baby.</i>\"\n\n");
 		menu();
 		if (flags[kFLAGS.SPIRIT_STONES] < cost) addButtonDisabled(1, "Buy", "You do not have enough spirit stones to buy this.");
-		else if (flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] >= 200) addButtonDisabled(1, "Buy", "You can't store any more of this type of items.");
+		else if (CampStatsAndResources.MechanismResc >= 200) addButtonDisabled(1, "Buy", "You can't store any more of this type of items.");
 		else addButton(1, "Buy", curry(buyItemMechanismYes, cost));
 		addButton(3, "Don't Buy", golemancershopRepeat);
 	}
@@ -1665,7 +1666,7 @@ public function soularena():void {
 		statScreenRefresh();
 		outputText("She counts the stones before handing your purchase over.\n\n");
 		outputText("\"<i>Always happy to do business, anything else you want to buy?</i>\"\n\n");
-		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES]++;
+		CampStatsAndResources.MechanismResc++;
 		doNext(golemancershopRepeat);
 	}
 	private function buyItem(odd:ItemType):void {
