@@ -1,8 +1,9 @@
-﻿package classes.Scenes.Places {
+package classes.Scenes.Places {
 import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.MerchantMenu;
+import classes.Scenes.Camp.CampStatsAndResources;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Places.TelAdre.*;
 import classes.Scenes.SceneLib;
@@ -780,13 +781,13 @@ private function carpentryShopBuyNailsYes():void {
 		player.gems -= (nails * 2);
 		flags[kFLAGS.ACHIEVEMENT_PROGRESS_HAMMER_TIME] += nails;
 		if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_HAMMER_TIME] >= 300) awardAchievement("Hammer Time", kACHIEVEMENTS.GENERAL_HAMMER_TIME);
-		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += nails;
+		CampStatsAndResources.NailsResc += nails;
 		outputText("You hand over " + (nails * 2) + " gems. \"<i>Done,</i>\" he says as he hands over bundle of " + nails +" nails to you.\n\n");
-		if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > SceneLib.campUpgrades.checkMaterialsCapNails()) {
+		if (CampStatsAndResources.NailsResc > SceneLib.campUpgrades.checkMaterialsCapNails()) {
 			outputText("Unfortunately, your toolbox can't hold anymore nails. You notify him and he refunds you the gems.\n\n");
-			player.gems += ((flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] - SceneLib.campUpgrades.checkMaterialsCapNails()) * 2);
-			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = SceneLib.campUpgrades.checkMaterialsCapNails();
-			outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapNails() + "");
+			player.gems += ((CampStatsAndResources.NailsResc - SceneLib.campUpgrades.checkMaterialsCapNails()) * 2);
+			CampStatsAndResources.NailsResc = SceneLib.campUpgrades.checkMaterialsCapNails();
+			outputText("Nails: " + CampStatsAndResources.NailsResc + "/" + SceneLib.campUpgrades.checkMaterialsCapNails() + "");
 		}
 	}
 	else outputText("\"<i>I'm sorry, my friend. You do not have enough gems.</i>\"");
@@ -798,7 +799,7 @@ private function carpentryShopBuyNailsYes():void {
 public function carpentryShopBuyWood():void {
 	clearOutput();
 	outputText("You ask him if he has wood for sale. He replies \"<i>Certainly! I've got extra supply of wood. I'll be selling wood at a price of 5 gems per wood plank.</i>\" \n\n");
-	outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapWood() + "");
+	outputText("Wood: " + CampStatsAndResources.WoodResc + "/" + SceneLib.campUpgrades.checkMaterialsCapWood() + "");
 	menu();
 	addButton(0, "Buy 10", carpentryShopBuyWoodAmount, 10);
 	addButton(1, "Buy 25", carpentryShopBuyWoodAmount, 25);
@@ -825,13 +826,13 @@ private function carpentryShopBuyWoodYes():void {
 		player.gems -= (wood * 5);
 		flags[kFLAGS.ACHIEVEMENT_PROGRESS_IM_NO_LUMBERJACK] += wood;
 		if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_IM_NO_LUMBERJACK] >= 100) awardAchievement("I'm No Lumberjack", kACHIEVEMENTS.GENERAL_IM_NO_LUMBERJACK);
-		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += wood;
+		CampStatsAndResources.WoodResc += wood;
 		outputText("You hand over " + (wood * 5) + " gems. \"<i>I'll have the caravan deliver the wood to your camp as soon as you leave my shop,</i>\" he says.\n\n");
-		if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > SceneLib.campUpgrades.checkMaterialsCapWood()) {
+		if (CampStatsAndResources.WoodResc > SceneLib.campUpgrades.checkMaterialsCapWood()) {
 			outputText("Unfortunately, your wood supply seem to be full. You inform him. He refunds you the gems.\n\n");
-			player.gems += ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - SceneLib.campUpgrades.checkMaterialsCapWood()) * 5);
-			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - SceneLib.campUpgrades.checkMaterialsCapWood());
-			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapWood() + "");
+			player.gems += ((CampStatsAndResources.WoodResc - SceneLib.campUpgrades.checkMaterialsCapWood()) * 5);
+			CampStatsAndResources.WoodResc -= (CampStatsAndResources.WoodResc - SceneLib.campUpgrades.checkMaterialsCapWood());
+			outputText("Wood: " + CampStatsAndResources.WoodResc + "/" + SceneLib.campUpgrades.checkMaterialsCapWood() + "");
 		}
 	}
 	else outputText("\"<i>I'm sorry, my friend. You do not have enough gems.</i>\"");
@@ -843,7 +844,7 @@ private function carpentryShopBuyWoodYes():void {
 public function carpentryShopBuyStone():void {
 	clearOutput();
 	outputText("You ask him if he has stones for sale. He replies \"<i>Certainly! I've got extra supply of stones. I'll be selling stones at a price of 10 gems per stone.</i>\" \n\n");
-	outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapStones() + "");
+	outputText("Stone: " + CampStatsAndResources.StonesResc + "/" + SceneLib.campUpgrades.checkMaterialsCapStones() + "");
 	menu();
 	addButton(0, "Buy 10", carpentryShopBuyStoneAmount, 10);
 	addButton(1, "Buy 25", carpentryShopBuyStoneAmount, 25);
@@ -870,13 +871,13 @@ private function carpentryShopBuyStoneYes():void {
 		player.gems -= (stone * 10);
 		flags[kFLAGS.ACHIEVEMENT_PROGRESS_YABBA_DABBA_DOO] += stone;
 		if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_YABBA_DABBA_DOO] >= 100) awardAchievement("Yabba Dabba Doo", kACHIEVEMENTS.GENERAL_YABBA_DABBA_DOO);
-		flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stone;
+		CampStatsAndResources.StonesResc += stone;
 		outputText("You hand over " + (stone * 10) + " gems. \"<i>I'll have the caravan deliver the stones to your camp as soon as you leave my shop,</i>\" he says.\n\n");
-		if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > SceneLib.campUpgrades.checkMaterialsCapStones()) {
+		if (CampStatsAndResources.StonesResc > SceneLib.campUpgrades.checkMaterialsCapStones()) {
 			outputText("Unfortunately, your stone supply seem to be full. You inform him. He refunds you the gems.\n\n");
-			player.gems += ((flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] - SceneLib.campUpgrades.checkMaterialsCapStones()) * 10);
-			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] - SceneLib.campUpgrades.checkMaterialsCapStones());
-			outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapStones() + "");
+			player.gems += ((CampStatsAndResources.StonesResc - SceneLib.campUpgrades.checkMaterialsCapStones()) * 10);
+			CampStatsAndResources.StonesResc -= (CampStatsAndResources.StonesResc - SceneLib.campUpgrades.checkMaterialsCapStones());
+			outputText("Stone: " + CampStatsAndResources.StonesResc + "/" + SceneLib.campUpgrades.checkMaterialsCapStones() + "");
 		}
 	}
 	else outputText("\"<i>I'm sorry, my friend. You do not have enough gems.</i>\"");
@@ -888,38 +889,38 @@ private function carpentryShopBuyStoneYes():void {
 public function carpentryShopSellNails():void {
 	clearOutput();
 	outputText("You ask him if he's willing to buy nails from you. He says, \"<i>Certainly! I'll be buying nails at a rate of one gem per nail.</i>\" \n\n");
-	outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapNails() + "");
+	outputText("Nails: " + CampStatsAndResources.NailsResc + "/" + SceneLib.campUpgrades.checkMaterialsCapNails() + "");
 	menu();
-	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 1) addButton(0, "Sell 1", carpentryShopSellNailsAmount, 1);
-	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 5) addButton(1, "Sell 5", carpentryShopSellNailsAmount, 5);
-	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 10) addButton(2, "Sell 10", carpentryShopSellNailsAmount, 10);
-	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 25) addButton(3, "Sell 25", carpentryShopSellNailsAmount, 25);
-	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 50) addButton(4, "Sell 50", carpentryShopSellNailsAmount, 50);
-	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100) addButton(5, "Sell 100", carpentryShopSellNailsAmount, 100);
-	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200) addButton(6, "Sell 200", carpentryShopSellNailsAmount, 200);
-	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 300) addButton(7, "Sell 300", carpentryShopSellNailsAmount, 300);
-	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 0) addButton(8, "Sell All", carpentryShopSellNailsAmount, flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES]);
+	if (CampStatsAndResources.NailsResc >= 1) addButton(0, "Sell 1", carpentryShopSellNailsAmount, 1);
+	if (CampStatsAndResources.NailsResc >= 5) addButton(1, "Sell 5", carpentryShopSellNailsAmount, 5);
+	if (CampStatsAndResources.NailsResc >= 10) addButton(2, "Sell 10", carpentryShopSellNailsAmount, 10);
+	if (CampStatsAndResources.NailsResc >= 25) addButton(3, "Sell 25", carpentryShopSellNailsAmount, 25);
+	if (CampStatsAndResources.NailsResc >= 50) addButton(4, "Sell 50", carpentryShopSellNailsAmount, 50);
+	if (CampStatsAndResources.NailsResc >= 100) addButton(5, "Sell 100", carpentryShopSellNailsAmount, 100);
+	if (CampStatsAndResources.NailsResc >= 200) addButton(6, "Sell 200", carpentryShopSellNailsAmount, 200);
+	if (CampStatsAndResources.NailsResc >= 300) addButton(7, "Sell 300", carpentryShopSellNailsAmount, 300);
+	if (CampStatsAndResources.NailsResc > 0) addButton(8, "Sell All", carpentryShopSellNailsAmount, CampStatsAndResources.NailsResc);
 	addButton(14, "Back", carpentryShopInside);
 }
 
 private function carpentryShopSellNailsAmount(amount:int):void {
 	nails = amount;
 	clearOutput();
-	outputText("You're willing to offer " + num2Text(amount) + " " + (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] == 1 ? "piece" : "pieces") + " of nails. He replies \"<i>I'll buy that for " + amount + " gems.</i>\" \n\nDo you sell the nails?");
+	outputText("You're willing to offer " + num2Text(amount) + " " + (CampStatsAndResources.NailsResc == 1 ? "piece" : "pieces") + " of nails. He replies \"<i>I'll buy that for " + amount + " gems.</i>\" \n\nDo you sell the nails?");
 	doYesNo(carpentryShopSellNailsYes, carpentryShopSellNails);
 }
 
 private function carpentryShopSellNailsYes():void {
 	clearOutput();
-	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= nails)
+	if (CampStatsAndResources.NailsResc >= nails)
 	{
 		var nailses:Number = nails;
 		if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) nailses *= 2;
 		player.gems += nailses;
-		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= nails;
-		outputText("You sign the permission form for " + num2Text(nails) + " " + (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] ? "piece" : "pieces") + " of nails to be taken from your camp. \"<i>Deal. Here are " + nails + " gems,</i>\" he says.\n\n");
+		CampStatsAndResources.NailsResc -= nails;
+		outputText("You sign the permission form for " + num2Text(nails) + " " + (CampStatsAndResources.NailsResc ? "piece" : "pieces") + " of nails to be taken from your camp. \"<i>Deal. Here are " + nails + " gems,</i>\" he says.\n\n");
 		if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your nail"+(nails>1?"s":"")+" for more than normal.\n\n");
-		outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapNails() + "");
+		outputText("Nails: " + CampStatsAndResources.NailsResc + "/" + SceneLib.campUpgrades.checkMaterialsCapNails() + "");
 	}
 	else outputText("\"<i>I'm sorry, my friend. You do not have enough nails.</i>\"");
 	statScreenRefresh();
@@ -930,30 +931,30 @@ private function carpentryShopSellNailsYes():void {
 public function carpentryShopSellWood():void {
 	clearOutput();
 	outputText("You ask him if he's willing to buy wood from you. He says, \"<i>Certainly! I'll be buying wood at a rate of two gems per piece.</i>\" \n\n");
-	outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapWood() + "");
+	outputText("Wood: " + CampStatsAndResources.WoodResc + "/" + SceneLib.campUpgrades.checkMaterialsCapWood() + "");
 	menu();
-	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 1) addButton(0, "Sell 1", carpentryShopSellWoodAmount, 1);
-	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 5) addButton(1, "Sell 5", carpentryShopSellWoodAmount, 5);
-	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 10) addButton(2, "Sell 10", carpentryShopSellWoodAmount, 10);
-	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 25) addButton(3, "Sell 25", carpentryShopSellWoodAmount, 25);
-	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 50) addButton(4, "Sell 50", carpentryShopSellWoodAmount, 50);
-	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100) addButton(5, "Sell 100", carpentryShopSellWoodAmount, 100);
-	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 200) addButton(6, "Sell 200", carpentryShopSellWoodAmount, 200);
-	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 300) addButton(7, "Sell 300", carpentryShopSellWoodAmount, 300);
-	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 0) addButton(8, "Sell All", carpentryShopSellWoodAmount, flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES]);
+	if (CampStatsAndResources.WoodResc >= 1) addButton(0, "Sell 1", carpentryShopSellWoodAmount, 1);
+	if (CampStatsAndResources.WoodResc >= 5) addButton(1, "Sell 5", carpentryShopSellWoodAmount, 5);
+	if (CampStatsAndResources.WoodResc >= 10) addButton(2, "Sell 10", carpentryShopSellWoodAmount, 10);
+	if (CampStatsAndResources.WoodResc >= 25) addButton(3, "Sell 25", carpentryShopSellWoodAmount, 25);
+	if (CampStatsAndResources.WoodResc >= 50) addButton(4, "Sell 50", carpentryShopSellWoodAmount, 50);
+	if (CampStatsAndResources.WoodResc >= 100) addButton(5, "Sell 100", carpentryShopSellWoodAmount, 100);
+	if (CampStatsAndResources.WoodResc >= 200) addButton(6, "Sell 200", carpentryShopSellWoodAmount, 200);
+	if (CampStatsAndResources.WoodResc >= 300) addButton(7, "Sell 300", carpentryShopSellWoodAmount, 300);
+	if (CampStatsAndResources.WoodResc > 0) addButton(8, "Sell All", carpentryShopSellWoodAmount, CampStatsAndResources.WoodResc);
 	addButton(14, "Back", carpentryShopInside);
 }
 
 private function carpentryShopSellWoodAmount(amount:int):void {
 	wood = amount;
 	clearOutput();
-	outputText("You're willing to offer " + num2Text(amount) + " " + (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] == 1 ? "piece" : "pieces") + " of wood. He replies \"<i>I'll buy that for " + (amount * 2) + " gems.</i>\" \n\nDo you sell the wood?");
+	outputText("You're willing to offer " + num2Text(amount) + " " + (CampStatsAndResources.WoodResc == 1 ? "piece" : "pieces") + " of wood. He replies \"<i>I'll buy that for " + (amount * 2) + " gems.</i>\" \n\nDo you sell the wood?");
 	doYesNo(carpentryShopSellWoodYes, carpentryShopSellWood);
 }
 
 private function carpentryShopSellWoodYes():void {
 	clearOutput();
-	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= wood)
+	if (CampStatsAndResources.WoodResc >= wood)
 	{
 		var woodes:Number = wood;
 		var woodes2:Number = 2;
@@ -961,10 +962,10 @@ private function carpentryShopSellWoodYes():void {
 		if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) woodes2 *= 2;
 		if (woodes2 > 5) woodes2 = 5;
 		player.gems += (woodes * woodes2);
-		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= wood;
-		outputText("You sign the permission form for " + num2Text(wood) + " " + (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] == 1 ? "piece" : "pieces") + " of wood to be unloaded from your camp. \"<i>Deal. Here are " + (wood * 2) + " gems,</i>\" he says.\n\n");
+		CampStatsAndResources.WoodResc -= wood;
+		outputText("You sign the permission form for " + num2Text(wood) + " " + (CampStatsAndResources.WoodResc == 1 ? "piece" : "pieces") + " of wood to be unloaded from your camp. \"<i>Deal. Here are " + (wood * 2) + " gems,</i>\" he says.\n\n");
 		if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your wood for more than normal.\n\n");
-		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapWood() + "");
+		outputText("Wood: " + CampStatsAndResources.WoodResc + "/" + SceneLib.campUpgrades.checkMaterialsCapWood() + "");
 	}
 	else outputText("\"<i>I'm sorry, my friend. You do not have enough wood.</i>\"");
 	statScreenRefresh();
@@ -975,30 +976,30 @@ private function carpentryShopSellWoodYes():void {
 public function carpentryShopSellStone():void {
 	clearOutput();
 	outputText("You ask him if he's willing to buy stones from you. He says, \"<i>Certainly! I'll be buying stones at a rate of four gems per piece.</i>\" \n\n");
-	outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapStones() + "");
+	outputText("Stone: " + CampStatsAndResources.StonesResc + "/" + SceneLib.campUpgrades.checkMaterialsCapStones() + "");
 	menu();
-	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 1) addButton(0, "Sell 1", carpentryShopSellStoneAmount, 1);
-	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 5) addButton(1, "Sell 5", carpentryShopSellStoneAmount, 5);
-	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 10) addButton(2, "Sell 10", carpentryShopSellStoneAmount, 10);
-	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 25) addButton(3, "Sell 25", carpentryShopSellStoneAmount, 25);
-	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 50) addButton(4, "Sell 50", carpentryShopSellStoneAmount, 50);
-	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 100) addButton(5, "Sell 100", carpentryShopSellStoneAmount, 100);
-	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 200) addButton(6, "Sell 200", carpentryShopSellStoneAmount, 200);
-	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 300) addButton(7, "Sell 300", carpentryShopSellStoneAmount, 300);
-	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 0) addButton(8, "Sell All", carpentryShopSellStoneAmount, flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES]);
+	if (CampStatsAndResources.StonesResc >= 1) addButton(0, "Sell 1", carpentryShopSellStoneAmount, 1);
+	if (CampStatsAndResources.StonesResc >= 5) addButton(1, "Sell 5", carpentryShopSellStoneAmount, 5);
+	if (CampStatsAndResources.StonesResc >= 10) addButton(2, "Sell 10", carpentryShopSellStoneAmount, 10);
+	if (CampStatsAndResources.StonesResc >= 25) addButton(3, "Sell 25", carpentryShopSellStoneAmount, 25);
+	if (CampStatsAndResources.StonesResc >= 50) addButton(4, "Sell 50", carpentryShopSellStoneAmount, 50);
+	if (CampStatsAndResources.StonesResc >= 100) addButton(5, "Sell 100", carpentryShopSellStoneAmount, 100);
+	if (CampStatsAndResources.StonesResc >= 200) addButton(6, "Sell 200", carpentryShopSellStoneAmount, 200);
+	if (CampStatsAndResources.StonesResc >= 300) addButton(7, "Sell 300", carpentryShopSellStoneAmount, 300);
+	if (CampStatsAndResources.StonesResc > 0) addButton(8, "Sell All", carpentryShopSellStoneAmount, CampStatsAndResources.StonesResc);
 	addButton(14, "Back", carpentryShopInside);
 }
 
 private function carpentryShopSellStoneAmount(amount:int):void {
 	stone = amount;
 	clearOutput();
-	outputText("You're willing to offer " + num2Text(amount) + " " + (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] == 1 ? "piece" : "pieces") + " of stone. He replies \"<i>I'll buy that for " + (amount * 4) + " gems.</i>\" \n\nDo you sell the stones?");
+	outputText("You're willing to offer " + num2Text(amount) + " " + (CampStatsAndResources.StonesResc == 1 ? "piece" : "pieces") + " of stone. He replies \"<i>I'll buy that for " + (amount * 4) + " gems.</i>\" \n\nDo you sell the stones?");
 	doYesNo(carpentryShopSellStoneYes, carpentryShopSellStone);
 }
 
 private function carpentryShopSellStoneYes():void {
 	clearOutput();
-	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= stone)
+	if (CampStatsAndResources.StonesResc >= stone)
 	{
 		var stones:Number = stone;
 		var stones2:Number = 4;
@@ -1006,10 +1007,10 @@ private function carpentryShopSellStoneYes():void {
 		if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) stones2 *= 2;
 		if (stones2 > 10) stones2 = 10;
 		player.gems += (stones * stones2);
-		flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= stone;
-		outputText("You sign the permission form for " + num2Text(stone) + " " + (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] == 1 ? "piece" : "pieces") + " of stones to be unloaded from your camp. \"<i>Deal. Here are " + (stone * 4) + " gems,</i>\" he says.\n\n");
+		CampStatsAndResources.StonesResc -= stone;
+		outputText("You sign the permission form for " + num2Text(stone) + " " + (CampStatsAndResources.StonesResc == 1 ? "piece" : "pieces") + " of stones to be unloaded from your camp. \"<i>Deal. Here are " + (stone * 4) + " gems,</i>\" he says.\n\n");
 		if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your stone"+(stone>1?"s":"")+" for more than normal.\n\n");
-		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapStones() + "");
+		outputText("Stone: " + CampStatsAndResources.StonesResc + "/" + SceneLib.campUpgrades.checkMaterialsCapStones() + "");
 	}
 	else outputText("\"<i>I'm sorry, my friend. You do not have enough stones.</i>\"");
 	statScreenRefresh();

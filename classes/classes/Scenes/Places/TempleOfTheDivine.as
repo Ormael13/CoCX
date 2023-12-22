@@ -7,6 +7,7 @@ package classes.Scenes.Places
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.WeaponLib;
+import classes.Scenes.Camp.CampStatsAndResources;
 import classes.Scenes.Places.TempleOfTheDivine.*;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
@@ -254,15 +255,15 @@ public class TempleOfTheDivine extends BaseContent {
 				menu();
 				addButton(0, "Altars", rebuildGodsAltars).hint("Repair the altar.");
 				if ((flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] == 3 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] == 4) && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1) {
-					if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 150) addButton(1, "Statue of Marae", rebuildStatueOfMarae).hint("Repair the statue.");
+					if (CampStatsAndResources.StonesResc >= 150) addButton(1, "Statue of Marae", rebuildStatueOfMarae).hint("Repair the statue.");
 					else addButtonDisabled(1, "Statue of Marae", "You don't have enough stones. Required: 150");
 				}
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 5 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 7) {
-					if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 500) addButton(2, "Gargoyles", repairGargoylesOnTheWalls).hint("Repair some of the decorative gargoyles.");
+					if (CampStatsAndResources.StonesResc >= 500) addButton(2, "Gargoyles", repairGargoylesOnTheWalls).hint("Repair some of the decorative gargoyles.");
 					else addButtonDisabled(2, "Gargoyles", "You don't have enough stones. Required: 500");
 				}
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 7 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 17) {
-					if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 50 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 10) addButton(3, "Prayer Bench", makeNewPrayerBenches).hint("Repair some of the temple banches.");
+					if (CampStatsAndResources.WoodResc >= 50 && CampStatsAndResources.NailsResc >= 10) addButton(3, "Prayer Bench", makeNewPrayerBenches).hint("Repair some of the temple banches.");
 					else addButtonDisabled(3, "Prayer Bench", "You don't have enough wood (50) or/and nails (10).");
 				}
 				addButton(13, "CheckProgress", currentStateOfTemple).hint("See how far the sculpture has progressed.");
@@ -280,7 +281,7 @@ public class TempleOfTheDivine extends BaseContent {
 			if (!notBuilt) return;
 			if (!canBuild)
 				addButtonDisabled(btn, "???", disabledMsg);
-			else if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] < 50)
+			else if (CampStatsAndResources.StonesResc < 50)
 				addButtonDisabled(btn, name, "You don't have enough stones (" + 50 + ").");
 			else addButton(btn, name, fun);
 		}
@@ -305,7 +306,7 @@ public class TempleOfTheDivine extends BaseContent {
 			clearOutput();
 			outputText("You work for 8 hours, sculpting stone and repairing the altar of Marae.");
             if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) outputText(" By the time you're done you can feel divine power amass around it anew.");
-			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 50;
+			CampStatsAndResources.StonesResc -= 50;
 			flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] = 1;
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 3) flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS]++;
 			explorer.stopExploring();
@@ -315,7 +316,7 @@ public class TempleOfTheDivine extends BaseContent {
 		public function rebuildTaothAltar():void {
 			clearOutput();
 			outputText("You work for 8 hours, sculpting stone and repairing the altar of Taoth. By the time you're done you can feel divine power amass around it anew.");
-			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 50;
+			CampStatsAndResources.StonesResc -= 50;
 			flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] = 1;
 			explorer.stopExploring();
 			doNext(camp.returnToCampUseEightHours);
@@ -324,7 +325,7 @@ public class TempleOfTheDivine extends BaseContent {
 		public function rebuildFenrirAltar():void {
 			clearOutput();
 			outputText("You work for 8 hours, sculpting stone and repairing the altar of Fenrir. By the time you're done you can feel a cold chilling aura amass around it. Was that really such a good idea?");
-			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 50;
+			CampStatsAndResources.StonesResc -= 50;
 			flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] = 1;
 			explorer.stopExploring();
 			doNext(camp.returnToCampUseEightHours);
@@ -333,7 +334,7 @@ public class TempleOfTheDivine extends BaseContent {
 		public function rebuildFeraAltar():void {
 			clearOutput();
 			outputText("You work for the entire day sculpting stone and repairing the altar of Fera. By the time you're done you can feel divine power albeit tainted amass around it anew.");
-			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 50;
+			CampStatsAndResources.StonesResc -= 50;
 			flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] = 1;
 			explorer.stopExploring();
 			doNext(camp.returnToCampUseEightHours);
@@ -345,7 +346,7 @@ public class TempleOfTheDivine extends BaseContent {
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 4) outputText("It looks slightly better, but it is far from finished.");
 			else if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) outputText("By the time you're done you can feel divine power radiating from it.");
             else outputText("Even though the altar is dysfunctional, the repaired statue looks like a nice addition to the temple.");
-			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 150;
+			CampStatsAndResources.StonesResc -= 150;
 			flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS]++;
 			explorer.stopExploring();
 			doNext(camp.returnToCampUseEightHours);
@@ -354,7 +355,7 @@ public class TempleOfTheDivine extends BaseContent {
 		public function repairGargoylesOnTheWalls():void {
 			clearOutput();
 			outputText("You work for the entire day sculpting stone. By the time you're done a set of well carved statue decorate the walls again.");
-			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 500;
+			CampStatsAndResources.StonesResc -= 500;
 			flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS]++;
 			explorer.stopExploring();
 			doNext(camp.returnToCampUseEightHours);
@@ -365,8 +366,8 @@ public class TempleOfTheDivine extends BaseContent {
 			outputText("You work for the entire day carving wood and hammering nails. By the time you're done the temple now has a set of brand-new prayer bench.");
 			if (player.hasStatusEffect(StatusEffects.TempleOfTheDivineTracker)) player.addStatusValue(StatusEffects.TempleOfTheDivineTracker, 1, 2);
 			else player.createStatusEffect(StatusEffects.TempleOfTheDivineTracker, 2, 0, 0, 0);
-			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 50;
-			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 10;
+			CampStatsAndResources.WoodResc -= 50;
+			CampStatsAndResources.NailsResc -= 10;
 			flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS]++;
 			explorer.stopExploring();
 			doNext(camp.returnToCampUseEightHours);

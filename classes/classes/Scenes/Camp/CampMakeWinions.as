@@ -164,11 +164,11 @@ public class CampMakeWinions extends BaseContent
 			clearOutput();
 			outputText("What helper would you like to make?\n\n");
 			outputText("<b>Stored golem cores for future reuse when making new golems:</b> " + flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] + " / " + maxReusableGolemCoresBagSize() + "\n");
-			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory) || player.hasPerk(PerkLib.EpicGolemMaker)) outputText("<b>Energy Cores:</b> " + flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] + "\n");
-			outputText("<b>Stones:</b> " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "\n");
+			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory) || player.hasPerk(PerkLib.EpicGolemMaker)) outputText("<b>Energy Cores:</b> " + CampStatsAndResources.EnergyCoreResc + "\n");
+			outputText("<b>Stones:</b> " + CampStatsAndResources.StonesResc + "\n");
 			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) {
-				outputText("<b>Metal Pieces:</b> " + flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] + "\n");
-				outputText("<b>Mechanisms:</b> " + flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] + "\n");
+				outputText("<b>Metal Pieces:</b> " + CampStatsAndResources.MetalPieces + "\n");
+				outputText("<b>Mechanisms:</b> " + CampStatsAndResources.MechanismResc + "\n");
 			}
 			if (player.hasPerk(PerkLib.JobGolemancer)) outputText("\n<b>Temporal Golems Bag:</b> " + flags[kFLAGS.TEMPORAL_GOLEMS_BAG] + " / " + maxTemporalGolemsBagSize() + " golems\n");
 			if (player.hasPerk(PerkLib.MasterGolemMaker)) outputText("<b>Stone Golems Bag:</b> " + flags[kFLAGS.PERMANENT_GOLEMS_BAG] + " / " + maxPermanentStoneGolemsBagSize() + " golems\n");
@@ -301,7 +301,7 @@ public class CampMakeWinions extends BaseContent
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
-			else if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] < 10) {
+			else if (CampStatsAndResources.StonesResc < 10) {
 				outputText("You lack high quality stones to use as the body for your new golem.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
@@ -314,7 +314,7 @@ public class CampMakeWinions extends BaseContent
 			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 0) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]--;
 			else player.destroyItems(useables.GOLCORE, 1);
 			if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0 && player.hasItem(useables.ELSHARD, 1)) player.destroyItems(useables.ELSHARD, 1);
-			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 10;
+			CampStatsAndResources.StonesResc -= 10;
 			useMana(permanentStoneGolemMakingCost());
 			statScreenRefresh();
 			outputText("You draw a seal in the ground around the pile of high quality stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
@@ -335,7 +335,7 @@ public class CampMakeWinions extends BaseContent
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
-			else if (flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 1) {
+			else if (CampStatsAndResources.EnergyCoreResc < 1) {
 				outputText("You don't have an energy core. No power, no golem.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
@@ -345,7 +345,7 @@ public class CampMakeWinions extends BaseContent
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
-			else if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] < 50) {
+			else if (CampStatsAndResources.StonesResc < 50) {
 				outputText("You lack high quality stones to use as body for your new golem.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
@@ -357,9 +357,9 @@ public class CampMakeWinions extends BaseContent
 			}
 			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 3) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] -= 3;
 			else player.destroyItems(useables.GOLCORE, 3);
-			flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] -= 1;
+			CampStatsAndResources.EnergyCoreResc -= 1;
 			if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0 && player.hasItem(useables.ELSHARD, 1)) player.destroyItems(useables.ELSHARD, 1);
-			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 50;
+			CampStatsAndResources.StonesResc -= 50;
 			useMana(permanentImprovedStoneGolemMakingCost());
 			statScreenRefresh();
 			outputText("You draw a seal in the ground around the pile of high quality stones, which were arranged in the form of a gigantic four armed shape. Once done you put the energy core in the upper section of the torso and golem cores in a pile at the golem's future chest in a triangle formation. You stand back and begin to seep your mana toward the laying stones. ");
@@ -381,7 +381,7 @@ public class CampMakeWinions extends BaseContent
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
-			else if (flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 2) {
+			else if (CampStatsAndResources.EnergyCoreResc < 2) {
 				outputText("You lack energy cores.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
@@ -391,12 +391,12 @@ public class CampMakeWinions extends BaseContent
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
-			else if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] < 10) {
+			else if (CampStatsAndResources.MetalPieces < 10) {
 				outputText("You don't have enough metal to make a new golem.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
-			else if (flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] < 4) {
+			else if (CampStatsAndResources.MechanismResc < 4) {
 				outputText("You lack mechanisms for your new golem body.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
@@ -408,10 +408,10 @@ public class CampMakeWinions extends BaseContent
 			}
 			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 0) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]--;
 			else player.destroyItems(useables.GOLCORE, 1);
-			flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] -= 2;
+			CampStatsAndResources.EnergyCoreResc -= 2;
 			if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0 && player.hasItem(useables.ELSHARD, 1)) player.destroyItems(useables.ELSHARD, 1);
-			flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 10;
-			flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] -= 4;
+			CampStatsAndResources.MetalPieces -= 10;
+			CampStatsAndResources.MechanismResc -= 4;
 			useMana(permanentSteelGolemMakingCost());
 			statScreenRefresh();
 			outputText("You draw a seal in the ground, and inside, you delicately place a golem core, wrapping it in metal pieces. Mechanisms branch out, forming a rough torso, and you attach golem cores throughout the frame, ending with humanoid arms and legs, wrapped in solid metal. You stand back, examining your handiwork for a moment, before splaying your fingers out over it. You pull mana through your body, tendrils of power lancing into the now clattering metal frame.");
@@ -433,7 +433,7 @@ public class CampMakeWinions extends BaseContent
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
-			else if (flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 6) {
+			else if (CampStatsAndResources.EnergyCoreResc < 6) {
 				outputText("Your new creation will need power, and you don't have enough cores for it!");
 				doNext(accessMakeWinionsMainMenu);
 				return;
@@ -443,12 +443,12 @@ public class CampMakeWinions extends BaseContent
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
-			else if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] < 50) {
+			else if (CampStatsAndResources.MetalPieces < 50) {
 				outputText("Your metal reserves are low. You'll need to find some more before you can make more golems.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
-			else if (flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] < 12) {
+			else if (CampStatsAndResources.MechanismResc < 12) {
 				outputText("You lack the mechanisms for your new golem.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
@@ -460,10 +460,10 @@ public class CampMakeWinions extends BaseContent
 			}
 			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 3) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] -= 3;
 			else player.destroyItems(useables.GOLCORE, 3);
-			flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] -= 6;
+			CampStatsAndResources.EnergyCoreResc -= 6;
 			if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0 && player.hasItem(useables.ELSHARD, 1)) player.destroyItems(useables.ELSHARD, 1);
-			flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 50;
-			flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] -= 12;
+			CampStatsAndResources.MetalPieces -= 50;
+			CampStatsAndResources.MechanismResc -= 12;
 			useMana(permanentSteelGolemMakingCost());
 			statScreenRefresh();
 			outputText("You draw a seal in the ground around the body of your future servant. All parts are put in precise place be it mechanisms or each energy cores hidden beneath metal plates. Once done you put golem cores at the golem's future chest in a triangle formation and cover them with last two metal plates. You stand back and begin to seep your mana toward the laying parts as it begin to connect ");
@@ -507,8 +507,8 @@ public class CampMakeWinions extends BaseContent
 			}
 			if (player.hasStatusEffect(StatusEffects.GolemUpgrades1)) var impMC:Number = player.statusEffectv2(StatusEffects.GolemUpgrades1);
 			outputText("You takes out the 'Golems, Animations and You' manual from your bag and opening it at index. Which one upgrade should you apply to your golems?\n\n");
-			outputText("<b>Stones:</b> " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "\n");
-			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) outputText("<b>Metal Pieces:</b> " + flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] + "\n");
+			outputText("<b>Stones:</b> " + CampStatsAndResources.StonesResc + "\n");
+			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) outputText("<b>Metal Pieces:</b> " + CampStatsAndResources.MetalPieces + "\n");
 			outputText("\n<u>Index of upgrades:</u>\n");
 			outputText("\n-Multi Attacks (Rank: "+(player.hasStatusEffect(StatusEffects.GolemUpgrades1)?""+player.statusEffectv1(StatusEffects.GolemUpgrades1)+"":"0")+") (Passive)");
 			outputText("\n-Improved Mana Circuit (Rank: "+(player.hasStatusEffect(StatusEffects.GolemUpgrades1)?""+impMC+"":"0")+") (-"+(player.hasStatusEffect(StatusEffects.GolemUpgrades1)?""+impMC*15+"":"0")+"% req. mana for activation, +"+(player.hasStatusEffect(StatusEffects.GolemUpgrades1)?""+impMC*25+"":"0")+"% base dmg) (Passive)");
@@ -733,12 +733,12 @@ public class CampMakeWinions extends BaseContent
 			outputText("You sit down by the golem and begin extracting the core from the big chunk that remains of its chest. ");
 			if (rand(4) == 0 || player.hasPerk(PerkLib.JobGolemancer) || player.isTechSavvyPC()) {
 				outputText("At first the core resist but after a few tries you successfully manage to harvest the golem core. Not one to waste spare material you gather the remaining stone. (+2 stones)");
-				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += 2;
+				CampStatsAndResources.StonesResc += 2;
 				doNext(takeCore);
 			}
 			else {
 				outputText("Sadly despite your best efforts the core is damaged during the extraction and rendered useless. Not one to waste spare material you gather the remaining stone. (+5 stones)");
-				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += 5;
+				CampStatsAndResources.StonesResc += 5;
 				doNext(cleanupAfterCombat);
 			}
 		}
@@ -748,12 +748,12 @@ public class CampMakeWinions extends BaseContent
 			player.addStatusValue(StatusEffects.GolemScavenge, 1, -1);
 			if (rand(4) == 0 || player.statusEffectv1(StatusEffects.GolemScavenge) == 0 || player.hasPerk(PerkLib.JobGolemancer) || player.isTechSavvyPC()) {
 				outputText("At first the core resist but after a few tries you successfully manage to harvest the golem core. Not one to waste spare material you gather the remaining stone. (+2 stones)");
-				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += 2;
+				CampStatsAndResources.StonesResc += 2;
 				doNext(takeCore);
 			}
 			else {
 				outputText("Sadly despite your best efforts the core is damaged during the extraction and rendered useless. Not one to waste spare material you gather the remaining stone. (+5 stones)");
-				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += 5;
+				CampStatsAndResources.StonesResc += 5;
 				if (player.hasStatusEffect(StatusEffects.GolemScavenge)) doNext(golemScavenge4);
 				else doNext(cleanupAfterCombat);
 			}

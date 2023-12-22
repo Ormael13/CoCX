@@ -9,6 +9,7 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Plains.GnollPack;
+import classes.Scenes.Camp.CampStatsAndResources;
 import classes.Scenes.Camp.CampUpgrades;
 import classes.Scenes.SceneLib;
 
@@ -308,8 +309,8 @@ public class SidonieFollower extends NPCAwareContent
 				if (player.hasStatusEffect(StatusEffects.ResourceNode1) && player.statusEffectv1(StatusEffects.ResourceNode1) < 4) player.addStatusValue(StatusEffects.ResourceNode1, 1, 1);
 				else player.createStatusEffect(StatusEffects.ResourceNode1, 0, 0, 0, 0);
 				flags[kFLAGS.SIDONIE_RECOLLECTION] = 46;
-				if ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + 300) < SceneLib.campUpgrades.checkMaterialsCapWood()) flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += 300;
-				else flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = SceneLib.campUpgrades.checkMaterialsCapWood();
+				if ((CampStatsAndResources.WoodResc + 300) < SceneLib.campUpgrades.checkMaterialsCapWood()) CampStatsAndResources.WoodResc += 300;
+				else CampStatsAndResources.WoodResc = SceneLib.campUpgrades.checkMaterialsCapWood();
 				explorer.stopExploring();
 				doNext(camp.returnToCampUseFourHours);
 			}
