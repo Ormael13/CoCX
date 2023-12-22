@@ -6,6 +6,8 @@ import classes.Races;
 
 public class AbstractGeneral extends CombatAbility {
     protected var knownCondition:*;
+    protected var fatigueType:int = USEFATG_NORMAL;
+    protected var manaType:int = USEMANA_NORMAL;
 
     public function AbstractGeneral (
             name:String,
@@ -42,11 +44,11 @@ public class AbstractGeneral extends CombatAbility {
         var finalWrathCost:Number = wrathCost();
 
         if (finalManaCost > 0) {
-            useMana(finalManaCost);
+            useMana(finalManaCost, manaType);
         }
 
         if (finalFatigueCost > 0) {
-            fatigue(finalFatigueCost);
+            fatigue(finalFatigueCost, fatigueType);
         }
 
         if (finalSFCost > 0) {

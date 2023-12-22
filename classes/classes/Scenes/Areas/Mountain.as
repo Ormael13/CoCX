@@ -655,7 +655,7 @@ public class Mountain extends BaseContent
 			}, {
 				name:"hike",
 				label : "Hike",
-				kind  : 'hike',
+				kind  : 'walk',
 				chance:0.2,
 				call:hike
 			}, {

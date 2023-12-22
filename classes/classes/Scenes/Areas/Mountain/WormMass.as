@@ -4,6 +4,8 @@ import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.Scenes.SceneLib;
+import classes.Scenes.Combat.CombatAbility;
+import classes.Scenes.Combat.General.TeaseSkill;
 
 public class WormMass extends Monster
 	{
@@ -57,6 +59,15 @@ public class WormMass extends Monster
 			if (dam == 0) dam = 1;
 			outputText("You strike at the amalgamation, crushing countless worms into goo, dealing <b>[font-damage]" + dam + "[/font]</b> damage.\n\n");
 			this.HP -= dam;
+			return false;
+		}
+
+		override public function interceptPlayerAbility(ability:CombatAbility):Boolean {
+			if (ability is TeaseSkill) {
+				outputText("Thinking to take advantage of its humanoid form, you wave your cock and slap your ass. However, the creature fails to react to your suggestive actions.\n\n");
+				return true;
+			}
+
 			return false;
 		}
 

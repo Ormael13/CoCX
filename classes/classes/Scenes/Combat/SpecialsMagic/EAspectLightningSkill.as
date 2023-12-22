@@ -59,7 +59,7 @@ public class EAspectLightningSkill extends AbstractMagicSpecial {
         damage = Math.round(damage);
 
         if (display) outputText("Your elemental charges electricity, then discharges it with a blinding bolt doing ");
-		doLightingDamage(damage, true, display);
+		doLightningDamage(damage, true, display);
 		if (crit && display) outputText(" <b>Critical!</b>");
 		outputText("\n\n");
     }

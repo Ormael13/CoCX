@@ -105,8 +105,8 @@ public class AbstractSpell extends CombatAbility {
 		throw new Error("Method performSpellEffect() not implemented for ability " + name);
 	}
 	
-	protected function preSpellEffect():void {
-		MagicPrefixEffect();
+	protected function preSpellEffect(display:Boolean = true):void {
+		MagicPrefixEffect(display);
 	}
 	
 	protected function postSpellEffect(display:Boolean = true):void {
@@ -125,7 +125,7 @@ public class AbstractSpell extends CombatAbility {
 				outputText("As soon as your magic touches [themonster], it sizzles and fades to nothing.\n\n");
 			}
 		} else {
-			if (!isAutocasting) preSpellEffect();
+			if (!isAutocasting) preSpellEffect(display);
 			doSpellEffect(display);
 			if(monster.hasStatusEffect(StatusEffects.Blacken) && (hasTag(TAG_FIRE) || hasTag(TAG_AOE))) {
 				monster.removeStatusEffect(StatusEffects.Blacken);
@@ -157,8 +157,8 @@ public class AbstractSpell extends CombatAbility {
 	// Shortcuts and utilities
 	///////////////////////////
 	
-	protected function MagicPrefixEffect():void {
-		combat.magic.MagicPrefixEffect();
+	protected function MagicPrefixEffect(display:Boolean = true):void {
+		combat.magic.MagicPrefixEffect(display);
 	}
 	
 	protected function MagicAddonEffect(numberOfProcs:Number = 1):void {
@@ -504,7 +504,7 @@ public class AbstractSpell extends CombatAbility {
 				damageFn = doIceDamage;
 				break;
 			case DamageType.LIGHTNING:
-				damageFn = doLightingDamage;
+				damageFn = doLightningDamage;
 				break;
 			case DamageType.WATER:
 				damageFn = doWaterDamage;

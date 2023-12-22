@@ -714,7 +714,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		else if (combat.isLightningTypeWeapon()) {
 			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
-			doLightingDamage(damage, true, true);
+			doLightningDamage(damage, true, true);
 		}
 		else if (combat.isDarknessTypeWeapon()) {
 			damage = Math.round(damage * combat.darknessDamageBoostedByDao());
@@ -803,7 +803,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		else if (combat.isLightningTypeWeapon()) {
 			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
-			doLightingDamage(damage, true, true);
+			doLightningDamage(damage, true, true);
 		}
 		else if (combat.isDarknessTypeWeapon()) {
 			damage = Math.round(damage * combat.darknessDamageBoostedByDao());
@@ -1086,7 +1086,7 @@ public class CombatSoulskills extends BaseCombatContent {
 				break;
 			case "lightning":
 				damage = Math.round(damage*combat.lightningDamageBoostedByDao());
-				doLightingDamage(damage, true, true);
+				doLightningDamage(damage, true, true);
 				break;
 			case "darkness":
 				damage = Math.round(damage*combat.darknessDamageBoostedByDao());

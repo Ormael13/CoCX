@@ -447,10 +447,10 @@ public class Lethice extends Monster
 			return adaptionDeflect(damage,"damage","true");
 		}
 
-		override protected function applyTease(lustDelta:Number):void{
+		override protected function applyTease(lustDelta:Number, display:Boolean = true):void{
 			lustDelta = adaptionDeflect(lustDelta,"lust","lust");
 			if(lustDelta>0){
-				super.applyTease(lustDelta);
+				super.applyTease(lustDelta, display);
 			}
 		}
 

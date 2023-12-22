@@ -1548,6 +1548,7 @@ public class PlayerInfo extends BaseContent {
 			masteryStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / " + player.maxTeaseLevel() + " (Exp: " + player.teaseXP + " / " + player.teaseExpToLevelUp() + ")\n";
 		else
 			masteryStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / " + player.maxTeaseLevel() + " (Exp: MAX)\n";
+		masteryStats += "\t<i>(Effects: +" + combat.teases.masteryBonusDamageTease() * 100 + "% damage)</i>\n";
 		masteryStats += "\n";
 		if (player.miningLevel < player.maxMiningLevel())
 			masteryStats += "<b>Mining Skill:</b>  " + player.miningLevel + " / " + player.maxMiningLevel() + " (Exp: " + player.miningXP + " / " + player.MiningExpToLevelUp() + ")\n";

@@ -119,7 +119,7 @@ public class FlyingSwordSkill extends AbstractGeneral {
 										break;
 			case TAG_DARKNESS: 			damageFunc = doDarknessDamage;
 										break;
-			case TAG_LIGHTNING: 		damageFunc = doLightingDamage;
+			case TAG_LIGHTNING: 		damageFunc = doLightningDamage;
 										break;
 			default: 					damageFunc = doPhysicalDamage;
 										break;

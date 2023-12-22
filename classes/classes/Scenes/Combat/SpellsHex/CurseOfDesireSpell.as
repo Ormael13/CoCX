@@ -72,7 +72,7 @@ public class CurseOfDesireSpell extends AbstractHexSpell {
 					outputText("Your imp cohorts assist you spellcasting adding their diagrams to your own. ");
 				}
 			}
-			monster.teased(Math.round(monster.lustVuln * lustDmg3), false);
+			monster.teased(Math.round(monster.lustVuln * lustDmg3), false, display);
 			if (display) {
 				outputText("\n\n");
 			}
@@ -97,8 +97,11 @@ public class CurseOfDesireSpell extends AbstractHexSpell {
 	public function calcLustResReduction(monster:Monster):Number {
 		if (monster != null && monster.lustVuln != 0) {
 			if (monster.lustVuln < 0.1) return monster.lustVuln;
-		}
-		return 0.1;
+			else
+				return 0.1;
+		} else
+			return 0;
+		
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
@@ -119,7 +122,7 @@ public class CurseOfDesireSpell extends AbstractHexSpell {
 			}
 			var lustDmg:Number = calcLustDamage(monster);
 			monster.createStatusEffect(StatusEffects.CurseOfDesire, calcDuration(), lustDmg, llr, 0);
-			monster.teased(lustDmg, false);
+			monster.teased(lustDmg, false, display);
 			dynStats("lus", calcSelfLustDamage());
 		}
 	}

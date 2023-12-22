@@ -839,7 +839,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		else if (combat.isLightningTypeWeapon()) {
 			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
-			doLightingDamage(damage, true, true);
+			doLightningDamage(damage, true, true);
 		}
 		else if (combat.isDarknessTypeWeapon()) {
 			damage = Math.round(damage * combat.darknessDamageBoostedByDao());
@@ -1493,7 +1493,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				outputText("Not satisfied with your weapon alone you also impale your target on your horns, delivering massive damage.");
 			}
 			doDamage(damage/2, true, true);
-			if (player.horns.type == Horns.KIRIN) doLightingDamage(damage/2, true, true)
+			if (player.horns.type == Horns.KIRIN) doLightningDamage(damage/2, true, true)
 			if (crit) {
 				outputText("<b>Critical!</b>");
 			}
@@ -2200,10 +2200,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Determine if critical tease!
 		var crit:Boolean = false;
 		var critChance:int = 5;
-		if (player.hasPerk(PerkLib.CriticalPerformance)) {
-			if (player.lib <= 100) critChance += player.lib / 5;
-			if (player.lib > 100) critChance += 20;
-		}
+		critChance += combat.teases.combatTeaseCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
@@ -2665,7 +2662,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	private function golemsDunks(damage:Number):void {
 		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0) {
 			if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 5) doDarknessDamage(damage, true, true);
-			else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 4) doLightingDamage(damage, true, true);
+			else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 4) doLightningDamage(damage, true, true);
 			else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 3) doIceDamage(damage, true, true);
 			else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 2) doFireDamage(damage, true, true);
 			else doDamage(damage, true, true);
@@ -2674,7 +2671,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv1(StatusEffects.GolemUpgrades1) > 0) {
 			if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0) {
 				if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 5) doDarknessDamage(damage, true, true);
-				else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 4) doLightingDamage(damage, true, true);
+				else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 4) doLightningDamage(damage, true, true);
 				else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 3) doIceDamage(damage, true, true);
 				else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 2) doFireDamage(damage, true, true);
 				else doDamage(damage, true, true);
@@ -2683,7 +2680,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.statusEffectv1(StatusEffects.GolemUpgrades1) > 1) {
 				if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0) {
 					if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 5) doDarknessDamage(damage, true, true);
-					else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 4) doLightingDamage(damage, true, true);
+					else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 4) doLightningDamage(damage, true, true);
 					else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 3) doIceDamage(damage, true, true);
 					else if (player.statusEffectv3(StatusEffects.GolemUpgrades1) == 2) doFireDamage(damage, true, true);
 					else doDamage(damage, true, true);
@@ -2991,11 +2988,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//Determine if critical tease!
 			var crit:Boolean = false;
 			var critChance:int = 5;
-			if (player.hasPerk(PerkLib.CriticalPerformance)) {
-				if (player.lib <= 100) critChance += player.lib / 5;
-				if (player.lib > 100) critChance += 20;
-				if (player.hasPerk(PerkLib.AnatomyExpert)) critChance += 10;
-			}
+			critChance += combat.teases.combatTeaseCritical();
+			if (player.hasPerk(PerkLib.AnatomyExpert)) critChance += 10;
 			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 			if (rand(100) < critChance) {
 			crit = true;
@@ -4855,10 +4849,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 			doDamage(damage, true, true);
-			doLightingDamage(Math.round(damage*0.1), true, true);
+			doLightningDamage(Math.round(damage*0.1), true, true);
 			if (player.hasPerk(PerkLib.PhantomStrike)) {
 				doDamage(damage, true, true);
-				doLightingDamage(Math.round(damage*0.1), true, true);
+				doLightningDamage(Math.round(damage*0.1), true, true);
 				damage *= 2;
 			}
 			outputText(" damage.");
@@ -6141,20 +6135,20 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage *= 1.75;
 		}
 		damage = Math.round(damage);
-		doLightingDamage(damage, true, true);
+		doLightningDamage(damage, true, true);
 		if (player.keyItemvX("HB Scatter Laser", 2) > 1) {
 			if (player.keyItemvX("HB Scatter Laser", 2) == 3) {
 				if (monster.plural) {
-					doLightingDamage(damage, true, true);
-					doLightingDamage(damage, true, true);
+					doLightningDamage(damage, true, true);
+					doLightningDamage(damage, true, true);
 				}
-				doLightingDamage(damage, true, true);
-				doLightingDamage(damage, true, true);
-				doLightingDamage(damage, true, true);
+				doLightningDamage(damage, true, true);
+				doLightningDamage(damage, true, true);
+				doLightningDamage(damage, true, true);
 			}
 			else {
-				if (monster.plural) doLightingDamage(damage, true, true);
-				doLightingDamage(damage, true, true);
+				if (monster.plural) doLightningDamage(damage, true, true);
+				doLightningDamage(damage, true, true);
 			}
 		}
 		outputText(" damage! ");
@@ -6184,7 +6178,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage *= 1.75;
 		}
 		damage = Math.round(damage);
-		doLightingDamage(damage, true, true);
+		doLightningDamage(damage, true, true);
 		outputText(" damage! ");
 		if (crit) outputText("<b>*Critical Hit!*</b>");
 		outputText("\n\n");
@@ -6216,7 +6210,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage *= 0.5;
 			damage = Math.round(damage);
 			outputText("potent discharge ");
-			doLightingDamage(damage, true, true);
+			doLightningDamage(damage, true, true);
 			outputText(" damage!");
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
 			monster.createStatusEffect(StatusEffects.Stunned,4,0,0,0);
@@ -6353,7 +6347,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage *= 1.75;
 		}
 		damage = Math.round(damage);
-		doLightingDamage(damage, true, true);
+		doLightningDamage(damage, true, true);
 		outputText(" damage! ");
 		if (crit) outputText("<b>*Critical Hit!*</b> ");
 		var lustDmg:Number = (player.inte / 5 * spellModBlack() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
@@ -6362,10 +6356,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Determine if critical tease!
 		var crit1:Boolean = false;
 		var critChance1:int = 5;
-		if (player.hasPerk(PerkLib.CriticalPerformance)) {
-			if (player.lib <= 100) critChance1 += player.lib / 5;
-			if (player.lib > 100) critChance1 += 20;
-		}
+		critChance1 += combat.teases.combatTeaseCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance1 = 0;
 		if (rand(100) < critChance1) {
 			crit1 = true;
