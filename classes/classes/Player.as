@@ -304,7 +304,7 @@ use namespace CoC;
 		public var itemSlot50:ItemSlotClass;
 		public var itemSlots:/*ItemSlotClass*/Array;
 
-		public var previouslyWornClothes:Array = []; //For tracking achievement.
+		public var previouslyWornClothes:/*String*/Array = []; //For tracking achievement.
 
 		private var _equipment:/*Equipable*/Array = [];
 		private var _modArmorName:String = "";
