@@ -122,7 +122,7 @@ public class IMutationsLib
 		 * @param spec any of the IMutationPerkType.SLOT_XXX constants, "" for all obtainable mutations, "All" for all mutations including deprecated
 		 * @return IMutationPerkType[]
 		 */
-		public static function mutationsArray(spec:String = ""):Array {
+		public static function mutationsArray(spec:String = ""):/*IMutationPerkType*/Array {
 			var list:Array = [];
 			if (spec && spec in IMutationPerkType.MutationsBySlot) {
 				list = IMutationPerkType.MutationsBySlot[spec].slice();
@@ -132,7 +132,6 @@ public class IMutationsLib
 					list = list.concat(IMutationPerkType.MutationsBySlot[slot]);
 				}
 			}
-			list.sort();
 			return list;
 		}
 

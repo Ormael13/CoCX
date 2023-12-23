@@ -152,6 +152,15 @@ use namespace CoC;
 		public var lustVuln:Number = 1;
 
 		//Mastery attributes
+		/**
+		 * A variable storing the combat mastery array.
+		 * @type {Array<Object>}
+		 * @property {String} combat - The type of combat mastery.
+		 * @property {Number} level - The level of mastery in combat.
+		 * @property {Number} experience - The experience gained in combat.
+		 * @property {Boolean} melee - Whether the combat is melee or not.
+		 * @property {String} desc - A description of the combat mastery.
+		 */
 		public var combatMastery:Array =[
         /*00*/	{combat: "Feral", 		level:0, experience:0, melee: true, desc:"<b>Dao of Feral Beast</b>"},
         /*01*/	{combat: "Gauntlet", 	level:0, experience:0, melee: true, desc:"<b>Dao of Gauntlets</b>"},
@@ -295,7 +304,7 @@ use namespace CoC;
 		public var itemSlot50:ItemSlotClass;
 		public var itemSlots:/*ItemSlotClass*/Array;
 
-		public var previouslyWornClothes:Array = []; //For tracking achievement.
+		public var previouslyWornClothes:/*String*/Array = []; //For tracking achievement.
 
 		private var _equipment:/*Equipable*/Array = [];
 		private var _modArmorName:String = "";
