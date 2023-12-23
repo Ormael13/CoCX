@@ -1899,15 +1899,6 @@ public class Creature extends Utils
 		}
 
 		/**
-		 * Check if this creature has all of the specified perks.
-		 * @param ptypes {Array - PerkType}
-		 * @return {Boolean} True if creature has all of the perks, otherwise false.
-		 */
-		public function hasPerks(...ptypes:Array):Boolean {
-			return ptypes.all(function(ptype:PerkType, index:int, array:Array):Boolean { return hasPerk(ptype); });
-		}
-
-		/**
 		 * Get the instance of a perk.
 		 * @param {PerkType} ptype
 		 */
