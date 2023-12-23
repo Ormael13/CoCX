@@ -5054,6 +5054,23 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		useMana(80, Combat.USEMANA_MAGIC);
 		outputText("You fly above your opponent"+((monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))?"s":"")+" and flap a cloud of magical dust at [monster him]. ");
+		
+		var damage:Number = (scalingBonusIntelligence() * spellMod());
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
+		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) damage *= 1.50;
+		damage = Math.round(damage);
+
 		//Randomising effects
 		var EffectList:Array = [];
 		EffectList.push(FaeStormLightning);
@@ -5095,6 +5112,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if(i == 5) {
 				outputText(". Finally [monster he] ");
 			}
+			choice(damage);
 			EffectList.splice(EffectList.indexOf(choice), 1)
 		}
 		outputText(".\n\n");
