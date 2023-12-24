@@ -39,7 +39,8 @@ public final class WeaponLib extends ItemConstants
 				ARMAGED,
 				OCCULUS,
 				EXCALIB,
-				DEXCALI
+				DEXCALI,
+				ASTERIUS
 			];
 		}
 		public function LegendaryCorrupt():Array {
@@ -56,7 +57,8 @@ public final class WeaponLib extends ItemConstants
 				B_WIDOW,
 				DOCDEST,
 				CHAOSEA,
-				ECLIPSE
+				ECLIPSE,
+				NEXUS
 			];
 		}
 		

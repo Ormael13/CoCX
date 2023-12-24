@@ -2,6 +2,7 @@ package classes.Items.Weapons
 {
 import classes.EventParser;
 import classes.Items.Weapon;
+import classes.Items.ItemTags;
 import classes.PerkLib;
 import classes.TimeAwareInterface;
 
@@ -28,6 +29,7 @@ public class Nexus extends Weapon implements TimeAwareInterface
 					"Wand, Increase spell resistance by 20%, Increases Spellpower based on neutrality", WT_WAND
 			);
 			withBuff('spellpower', +0.6);
+			withTag(ItemTags.I_LEGENDARY);
 			EventParser.timeAwareClassAdd(this);
 		}
 
@@ -64,12 +66,6 @@ public class Nexus extends Weapon implements TimeAwareInterface
             else
                 return _description;
         }
-		
-		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.level >= 54) return super.canEquip(doOutput);
-			if (doOutput) outputText("You try and wield the legendary weapon but to your disapointment the item simply refuse to stay put in your hands. It would seem you yet lack the power and right to wield this item.");
-			return false;
-		}
 
 		override public function get description():String {
 			updateWizardsMult(); //To display *correct* values
