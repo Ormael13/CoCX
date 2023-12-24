@@ -305,10 +305,10 @@ public class Lethice extends Monster
 
 				dictHistory = tmp;
 
-				printString += "\n\nYou noticed as the "+wheelHandleDesc()+"-handled wheel behind Lethice reveals and turned <b>" + wheelTurned +" times</b> shortly before concealing itself once more.";
+				printString += "\n\nYou noticed as the <b>"+wheelHandleDesc()+"</b>-handled wheel behind Lethice reveals and turned <b>" + wheelTurned +" times</b> shortly before concealing itself once more.";
 			}
 			else
-				printString += "Wheel behind Lethice currently has not reveal itself. Perhaps you should try something else?";
+				printString += "\n\nWheel behind Lethice currently has not reveal itself. Perhaps you should try something else?";
 
 			return printString;
 		}
