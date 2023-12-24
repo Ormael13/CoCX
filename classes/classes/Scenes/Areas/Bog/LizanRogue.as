@@ -8,6 +8,7 @@ import classes.IMutations.*;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects.Combat.LizanBlowpipeDebuff;
 import classes.internals.*;
+import classes.Scenes.Combat.CombatAbilities;
 
 public class LizanRogue extends Monster
 	{
@@ -16,9 +17,9 @@ public class LizanRogue extends Monster
 		//3 - spe
 		//4 - sens
 		public function blowGun():void {
-			if (player.hasStatusEffect(StatusEffects.WindWall)) {
+			if (CombatAbilities.EAspectAir.isActive()) {
 				outputText("The lizan flings himself back.  In the air he puts a blowgun to his lips.  Then that tiny dart is stopeed by the wind wall that still surrounds you.");
-				player.addStatusValue(StatusEffects.WindWall,2,-1);
+				CombatAbilities.EAspectAir.advance(true);
 			}
 			else if (player.getEvasionRoll()) {
 				outputText("The lizan flings himself back.  In the air he puts a blowgun to his lips.  You move just in time to avoid the tiny dart.");
@@ -56,7 +57,7 @@ public class LizanRogue extends Monster
 			}
 			else {
 				outputText("All you see is a flash of pink as the lizan’s long tongue hits your eyes. Some kind of chemical reaction causes your eyes to burn, you’ve been blinded!");
-				if (!player.hasStatusEffect(StatusEffects.Blind) && !player.hasPerk(PerkLib.BlindImmunity)) player.createStatusEffect(StatusEffects.Blind, 1 + rand(2), 0, 0, 0)
+				if (!player.hasStatusEffect(StatusEffects.Blind) && !player.isImmuneToBlind()) player.createStatusEffect(StatusEffects.Blind, 1 + rand(2), 0, 0, 0)
 			}
 		}
 		

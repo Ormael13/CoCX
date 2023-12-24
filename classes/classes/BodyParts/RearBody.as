@@ -176,6 +176,26 @@ public class RearBody extends BodyPart {
 		name: "abyss shark fin",
 		appearanceDesc: "A large, shark-like fin has sprouted between your shoulders, and a second, smaller fin beneath it at the height of your navel. With them, you have much a easier ability to swim around."
 	});
+	public static const ARIGEAN_RED_AURA: int = 29;
+	EnumValue.add(Types, ARIGEAN_RED_AURA, "ARIGEAN_RED_AURA", {
+		name: "arigean aura (R)",
+		appearanceDesc: "A black and red haze is exhaled from your symbiotic partners, sticking close to your form giving you an intimidating aura to help frighten your foes."
+	});
+	public static const ARIGEAN_YELLOW_AURA: int = 30;
+	EnumValue.add(Types, ARIGEAN_YELLOW_AURA, "ARIGEAN_YELLOW_AURA", {
+		name: "arigean aura (Y)",
+		appearanceDesc: "A black and yellow haze is exhaled from your symbiotic partners, sticking close to your form giving you an intimidating aura to help frighten your foes."
+	});/*
+	public static const ARIGEAN_YELLOW_AURA: int = 31;
+	EnumValue.add(Types, ARIGEAN_YELLOW_AURA, "ARIGEAN_YELLOW_AURA", {
+		name: "An extra pair of pincer like limbs",
+		appearanceDesc: "A black and yellow haze is exhaled from your symbiotic partners, sticking close to your form giving you an intimidating aura to help frighten your foes."
+	});*/
+	public static const THIRSTY_NECK: int = 32;
+	EnumValue.add(Types, THIRSTY_NECK, "THIRSTY_NECK", {
+		name: "thirsty neck",
+		appearanceDesc: "Your throat is constantly parched, aching for the sweet taste of blood. It’s difficult for you to not go crazy when the liquid is spilled nearby and at time you even fully lose control. The exact spot where your sire has bitten you is still marked by a pair of faint scars, the only wound on your entire body that won’t fully heal no matter how much you try."
+	});
 
 	public function RearBody(creature:Creature) {
 		super(creature, null);

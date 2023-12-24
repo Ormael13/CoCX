@@ -38,8 +38,10 @@ use namespace CoC;
 			damage += eBaseIntelligenceDamage() * 0.2;
 			damage = Math.round(damage);
 			damage = player.takeAcidDamage(damage, true);
-			if (player.hasStatusEffect(StatusEffects.AcidDoT)) player.addStatusValue(StatusEffects.AcidDoT, 2, 10); //More heads will produce more potent acid
-			else player.createStatusEffect(StatusEffects.AcidDoT, 6, 10, 0, 0);
+			if (!player.immuneToAcid()) {
+				if (player.hasStatusEffect(StatusEffects.AcidDoT)) player.addStatusValue(StatusEffects.AcidDoT, 2, 10); //More heads will produce more potent acid
+				else player.createStatusEffect(StatusEffects.AcidDoT, 6, 10, 0, 0);
+			}
 		}
 		
 		private function hydraOmnibites():void

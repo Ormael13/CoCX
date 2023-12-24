@@ -6,6 +6,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
+import classes.BodyParts.Tail;
 
 /**
 	 * Izumi, the fuckhuge Oni. TOUCH THE FLUFFY HORN.
@@ -1330,9 +1331,8 @@ import classes.Stats.Buff;
 			// Tease victory
 			if (monster.lust >= monster.maxOverLust())
 			{
-				// Gonna refactor the tease attack code to seperate out the display elements from the action elements, so I we can grab a player-appropriate text blurb
-				SceneLib.combat.teases.tease(true);
-				outputText("Izumi pays your attempts to distract her no mind, focused entirely on her strange ritual. You slink forwards, hoping that something a little more... hands on might do the trick. But ");
+				combat.teases.generateTeaseText();
+				outputText(" Izumi pays your attempts to distract her no mind, focused entirely on her strange ritual. You slink forwards, hoping that something a little more... hands on might do the trick. But ");
 			}
 			else
 			{

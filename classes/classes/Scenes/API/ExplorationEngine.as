@@ -25,6 +25,8 @@ public class ExplorationEngine extends BaseContent {
 	private static const LINE_DISABLED:String = "#888888";
 	private static const LINE_COLOR:String = "#884444";
 	private static const LINE_NEXT:String  = "#0080ff";
+	private var lastAreaLevel:Number = 0;
+	private var lastTimesExplored:Number = 0;
 
 	private function filterUnique(e:SimpleEncounter):Boolean {
 		if (e.unique) {
@@ -545,7 +547,7 @@ public class ExplorationEngine extends BaseContent {
 		// Buttons
 		// [Forward/Path 1] [Path 2] [Path 3] [Path 4] [Path 5]
 		// [   SoulSense  ] [      ] [      ] [      ] [      ]
-		// [   Inventory  ] [ Mast ] [Repeat] [      ] [Leave ]
+		// [   Inventory  ] [ Mast ] [Repeat] [ReRoll] [Leave ]
 		clearOutput();
 		spriteSelect();
 		if (_errors) outputText(_errors);
@@ -600,6 +602,7 @@ public class ExplorationEngine extends BaseContent {
 				button(12).disable("You're too aroused to explore!");
 			}
 		}
+		button(13).show("Re-roll", normalReroll).hint("Use 30 min to re-roll current area explore nodes.");
 
 		if (debug) {
 			button(14).show("Menu", cheatMenu);
@@ -608,6 +611,13 @@ public class ExplorationEngine extends BaseContent {
 		}
 		if (onMenu != null) onMenu();
 		mainViewManager.updateCharviewIfNeeded();
+	}
+	private function normalReroll():void {
+		for (var i:int = 0; i < N; i++) flatList[i].isPlayerHere = false;
+		generateAll();
+		skillBasedReveal(lastAreaLevel, lastTimesExplored);
+		advanceMinutes(30);
+		showUI();
 	}
 	public function cheatMenu():void {
 		function cheatReveal(level:int):void {
@@ -758,6 +768,9 @@ public class ExplorationEngine extends BaseContent {
 		if (player.hasPerk(PerkLib.EyesOfTheHunterGrandMaster)) n += 1;
 		if (player.hasPerk(PerkLib.EyesOfTheHunterEx)) n += 1;
 		if (player.hasPerk(PerkLib.EyesOfTheHunterSu)) n += 1;
+
+		lastAreaLevel = areaLevel;
+		lastTimesExplored = timesExplored;
 
 		revealMultiple(n);
 	}

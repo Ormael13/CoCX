@@ -12,6 +12,7 @@ import classes.Items.*;
 import classes.Items.Dynamic.DynamicWeapon;
 import classes.Scenes.Areas.DeepSea.Kraken;
 import classes.Scenes.Areas.Mountain.Minotaur;
+import classes.Scenes.Camp.CampStatsAndResources;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.SuccubusGardener;
 import classes.Scenes.Dungeons.DesertCave.SandMother;
@@ -77,6 +78,7 @@ public class TestMenu extends BaseContent
 		bd.add("UncurseAll", uncurseAll, "Uncurse all items");
 		bd.add("Gren Mag perks", FaeDragTest1, "Add gren magic boosting perks.").disableIf(player.hasPerk(PerkLib.ArcaneVenom));
 		bd.add("FaeDragBParts", FaeDragTest2, "Add missing fairy dragon bodyparts.");
+		bd.add("Handmaiden stripes", FaeDragTest3, "Add chitin and stripes to handmaiden.").disableIf(!player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden));
 		bd.add("FixFJiasngshi", fixFormerJiangshi, "Removig leftover effects of cursed tag after curginh Jiangshi state.");
 		//bd.add("DinCheatShop", curry(SceneLib.dinahScene.openShop, true), "Open Dinah shop with everything unlocked. Normally, you have to defeat a boss to unlock its TF; and all 'Roulette' items appear randomly.")
 		bd.add("DebugMenu", SceneLib.debugMenu.accessDebugMenu, "The older debug menu. Who knows what it hides?");
@@ -135,6 +137,13 @@ public class TestMenu extends BaseContent
 		if (!player.hasPerk(PerkLib.VerdantLeech)) player.createPerk(PerkLib.VerdantLeech, 0, 0, 0, 0);
 		if (!player.hasPerk(PerkLib.ArcaneVenom)) player.createPerk(PerkLib.ArcaneVenom, 0, 0, 0, 0);
 		outputText("Green magic boosting perks gained.");
+		doNext(SoulforceCheats);
+	}
+	
+	private function FaeDragTest3():void {
+		clearOutput();
+		transformations.SkinPatternBeeStripes.applyEffect();
+		outputText("Handmaiden chitin and bee stripes operationa...just fixed.");
 		doNext(SoulforceCheats);
 	}
 
@@ -2046,7 +2055,7 @@ public class TestMenu extends BaseContent
 
 	public function AddMetalPieces():void {
 		outputText("\n\n<b>(Gained 50 Metal Pieces!)</b>\n\n");
-		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += 50;
+		CampStatsAndResources.MetalPieces += 50;
 		statScreenRefresh();
 		curry(MaterialMenu, 1);
 	}
@@ -2088,13 +2097,13 @@ public class TestMenu extends BaseContent
 	}
 	public function AddEnergyCore():void {
 		outputText("\n\n<b>(Gained 1 Energy Core!)</b>\n\n");
-		flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] += 1;
+		CampStatsAndResources.EnergyCoreResc += 1;
 		statScreenRefresh();
 		curry(MaterialMenu, 2);
 	}
 	public function AddMechanism():void {
 		outputText("\n\n<b>(Gained 1 Mechanism!)</b>\n\n");
-		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] += 1;
+		CampStatsAndResources.MechanismResc += 1;
 		statScreenRefresh();
 		curry(MaterialMenu, 2);
 	}
@@ -2387,19 +2396,19 @@ public class TestMenu extends BaseContent
 	}
 	public function AddWood():void {
 		outputText("\n\n<b>(Gained 100 Wood!)</b>");
-		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += 100;
+		CampStatsAndResources.WoodResc += 100;
 		statScreenRefresh();
 		curry(MaterialMenu, 1);
 	}
 	public function AddNail():void {
 		outputText("\n\n<b>(Gained 50 Nails!)</b>");
-		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += 50;
+		CampStatsAndResources.NailsResc += 50;
 		statScreenRefresh();
 		curry(MaterialMenu, 1);
 	}
 	public function AddStone():void {
 		outputText("\n\n<b>(Gained 100 Stones!)</b>");
-		flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += 100;
+		CampStatsAndResources.StonesResc += 100;
 		statScreenRefresh();
 		curry(MaterialMenu, 1);
 	}

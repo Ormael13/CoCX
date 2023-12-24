@@ -13,6 +13,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Forest.TentacleBeast;
 import classes.Scenes.Areas.Mountain.HellHound;
 import classes.Scenes.Areas.Swamp.CorruptedDrider;
+import classes.Scenes.Camp.CampStatsAndResources;
 import classes.Scenes.Crafting;
 import classes.Scenes.Dungeons.D3.MinotaurKing;
 import classes.Scenes.Dungeons.HiddenCave.BossGolems;
@@ -21,6 +22,7 @@ import classes.Scenes.Monsters.*;
 import classes.Scenes.NPCs.Jinx;
 import classes.Scenes.Places.HeXinDao.*;
 import classes.Scenes.SceneLib;
+import classes.Scenes.API.MultiBuy;
 
 public class HeXinDao extends BaseContent
 {
@@ -190,14 +192,14 @@ public class HeXinDao extends BaseContent
         var buyItem1:Function = curry(confirmBuy1,golemmerchant,"Golem",1);
         var buyItem2:Function = curry(confirmBuy2,golemmerchant,"Golem",0.2);
         var introText:String = "\"When you reach towards one of the items on the display, the golem says, \"<i>";
-        var costText:String = " Interested?  It is <b>";
+        var costText:String = " Interested?</i>";
         var endText1:String = " gems</b></i>.\"";
         var endText2:String = " spirit stones</b></i>.\"";
         function sayLine1(itype:ItemType,desc:String):String{
-            return introText+desc+costText+itype.value+endText1;
+            return introText+desc+costText;
         }
         function sayLine2(itype:ItemType,desc:String):String{
-            return introText+desc+costText+(itype.value*0.2)+endText2;
+            return introText+desc+costText;
         }
 		addButton(0, "1st Stall", Tier0).hint("Check out the first stall. This shop sells recovery items, for beginning soul cultivators.");
 		addButton(1, "2nd Stall", TierI).hint("Check out the second stall. This shop sells common items, for beginning soul cultivators.");
@@ -211,59 +213,60 @@ public class HeXinDao extends BaseContent
         var hasSoulSprite:Boolean = player.hasPerk(PerkLib.SoulSprite);
         var hasSoulExalt:Boolean = player.hasPerk(PerkLib.SoulExalt);
         var hasSoulKing:Boolean = player.hasPerk(PerkLib.SoulKing);
-         function Tier0():void{
-            buyItem1 = curry(confirmBuy1,Tier0,"Golem",1);
-            buyItem2 = curry(confirmBuy2,Tier0,"Golem",0.2);
+
+        function Tier0():void{
+            buyItem1 = curry(MultiBuy.confirmBuyMulti,Tier0,"Golem",1);
+            buyItem2 = curry(MultiBuy.confirmBuyMulti,Tier0,"Golem",5);
             menu();
-            addButton(0, "LowSFRPill", buyItem2,consumables.LG_SFRP, sayLine2(consumables.LG_SFRP,"It's a useful item for any soul cultivator, this little pill can help you restore some of your soulforce. Unless you don't have a soul.")).hint("Low-grade Soulforce Recovery Pill.");
-            addButton(1, "MidSFRPill", buyItem2,consumables.MG_SFRP, sayLine2(consumables.MG_SFRP,"It's a rather useful item for all cultivators at Soul Sprite stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the low-grade one.")).hint("Mid-grade Soulforce Recovery Pill.").disableIf(!hasSoulPersonage);
-            addButton(2, "HighSFRPil", buyItem2,consumables.HG_SFRP, sayLine2(consumables.HG_SFRP,"It's a rather useful item. I sell this to all cultivators at Soul Exalt stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the mid-grade one.")).hint("High-grade Soulforce Recovery Pill.").disableIf(!hasSoulExalt);
-            addButton(3, "SupSFRPill", buyItem2,consumables.SG_SFRP, sayLine2(consumables.SG_SFRP,"It's a rather useful item. I sell this to all cultivators at Soul King stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the high-grade one.")).hint("Superior-grade Soulforce Recovery Pill.").disableIf(!hasSoulKing);
-            addButton(5, "LowSFRBotl", buyItem2,consumables.LGSFRPB, sayLine2(consumables.LGSFRPB,"It's a useful item for any soul cultivator, the pills in this bottle can help you restore some of your soulforce. Unless you don't have a soul.")).hint("Bottle of Low-grade Soulforce Recovery Pills.")
-            addButton(6, "MidSFRBotl", buyItem2,consumables.MGSFRPB, sayLine2(consumables.MGSFRPB,"It's a rather useful item for all cultivators at Soul Sprite stage or higher, this bottle of pills can help you restore some of your soulforce and would provide much more than the low-grade one.")).hint("Bottle of Mid-grade Soulforce Recovery Pills.").disableIf(!hasSoulPersonage);
-            addButton(7, "HighSFRBot", buyItem2,consumables.HGSFRPB, sayLine2(consumables.HGSFRPB,"It's a rather useful item. I sell this to all cultivators at Soul Exalt stage or higher, this bottle of pills can help you restore some of your soulforce and would provide much more than the mid-grade one.")).hint("Bottle of High-grade Soulforce Recovery Pill.").disableIf(!hasSoulExalt);
-            addButton(8, "SupSFRBotl", buyItem2,consumables.SGSFRPB, sayLine2(consumables.SGSFRPB,"It's a rather useful item. I sell this to all cultivators at Soul King stage or higher, this bottle of pills can help you restore some of your soulforce and would provide much more than the high-grade one.")).hint("Bottle of Superior-grade Soulforce Recovery Pill.").disableIf(!hasSoulKing);
-            addButton(10, "E.P.Bottle", buyItem2,useables.E_P_BOT, sayLine2(useables.E_P_BOT,"These bottles can be used to organize SoulForce pills. Due to the nature of the pills, they must be consumed shortly after opening the bottle, or it won't work. Some cultivators have theorized on the properties of the pills for a long time, but no definitive answer has been reached.")).hint("Empty Pill Bottle.");
+            addButton(0, "LowSFRPill", curry(buyItem2,consumables.LG_SFRP), sayLine2(consumables.LG_SFRP,"It's a useful item for any soul cultivator, this little pill can help you restore some of your soulforce. Unless you don't have a soul."),"\n", true).hint("Low-grade Soulforce Recovery Pill.");
+            addButton(1, "MidSFRPill", curry(buyItem2,consumables.MG_SFRP), sayLine2(consumables.MG_SFRP,"It's a rather useful item for all cultivators at Soul Sprite stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the low-grade one."),"\n", true).hint("Mid-grade Soulforce Recovery Pill.").disableIf(!hasSoulPersonage);
+            addButton(2, "HighSFRPil", curry(buyItem2,consumables.HG_SFRP), sayLine2(consumables.HG_SFRP,"It's a rather useful item. I sell this to all cultivators at Soul Exalt stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the mid-grade one."),"\n", true).hint("High-grade Soulforce Recovery Pill.").disableIf(!hasSoulExalt);
+            addButton(3, "SupSFRPill", curry(buyItem2,consumables.SG_SFRP), sayLine2(consumables.SG_SFRP,"It's a rather useful item. I sell this to all cultivators at Soul King stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the high-grade one."),"\n", true).hint("Superior-grade Soulforce Recovery Pill.").disableIf(!hasSoulKing);
+            addButton(5, "LowSFRBotl", curry(buyItem2,consumables.LGSFRPB), sayLine2(consumables.LGSFRPB,"It's a useful item for any soul cultivator, the pills in this bottle can help you restore some of your soulforce. Unless you don't have a soul."),"\n", true).hint("Bottle of Low-grade Soulforce Recovery Pills.")
+            addButton(6, "MidSFRBotl", curry(buyItem2,consumables.MGSFRPB), sayLine2(consumables.MGSFRPB,"It's a rather useful item for all cultivators at Soul Sprite stage or higher, this bottle of pills can help you restore some of your soulforce and would provide much more than the low-grade one."),"\n", true).hint("Bottle of Mid-grade Soulforce Recovery Pills.").disableIf(!hasSoulPersonage);
+            addButton(7, "HighSFRBot", curry(buyItem2,consumables.HGSFRPB), sayLine2(consumables.HGSFRPB,"It's a rather useful item. I sell this to all cultivators at Soul Exalt stage or higher, this bottle of pills can help you restore some of your soulforce and would provide much more than the mid-grade one."),"\n", true).hint("Bottle of High-grade Soulforce Recovery Pill.").disableIf(!hasSoulExalt);
+            addButton(8, "SupSFRBotl", curry(buyItem2,consumables.SGSFRPB), sayLine2(consumables.SGSFRPB,"It's a rather useful item. I sell this to all cultivators at Soul King stage or higher, this bottle of pills can help you restore some of your soulforce and would provide much more than the high-grade one."),"\n", true).hint("Bottle of Superior-grade Soulforce Recovery Pill.").disableIf(!hasSoulKing);
+            addButton(10, "E.P.Bottle", curry(buyItem2,useables.E_P_BOT), sayLine2(useables.E_P_BOT,"These bottles can be used to organize SoulForce pills. Due to the nature of the pills, they must be consumed shortly after opening the bottle, or it won't work. Some cultivators have theorized on the properties of the pills for a long time, but no definitive answer has been reached."),"\n", true).hint("Empty Pill Bottle.");
             addButton(14, "Back", golemmerchant);
             statScreenRefresh();
         }
         function TierI():void {
-            buyItem1 = curry(confirmBuy1,TierI,"Golem",1);
-            buyItem2 = curry(confirmBuy2,TierI,"Golem",0.2);
+            buyItem1 = curry(MultiBuy.confirmBuyMulti,TierI,"Golem",1);
+            buyItem2 = curry(MultiBuy.confirmBuyMulti,TierI,"Golem",5);
 			menu();
-            addButton(2, "Bag of Cosmos", buyItem2,consumables.BAGOCOS, sayLine2(consumables.BAGOCOS,"A quintessential item for all soul cultivators, this little bag is dimensionally transcendental, that is, it's bigger on the inside. ")).hint("Bag of Cosmos.");
-			addButton(3, "BT.Solution", buyItem2,useables.BTSOLUTION, sayLine2(useables.BTSOLUTION,"This vial contain solution commonly used by body cultivators. In case of anyone else trying to ingest this fluid it raged from sever ingestion to death.")).hint("Vial of Body Tempering Solution.");
-			addButton(4, "Fasting Pill", buyItem2,consumables.FATPILL, sayLine2(consumables.FATPILL,"It's a rather useful item for soul cultivators, this little pill can help you stave off hunger for a few days.")).hint("Fasting Pill.").disableIf(flags[kFLAGS.HUNGER_ENABLED] == 0);
-            addButton(5, "Triple Thrust", buyItem2,consumables.TRITMAN, sayLine2(consumables.TRITMAN,"It's a manual for Triple Thrust. This very simple technique allows you to unleash three thrusts that will become stronger and stronger as you train your body and soul."), "\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  It seems like even the name of the manual could have been influenced by this realm's nature... either that or it's just a coincidence.").hint("Triple Thrust Manual.").disableIf(!hasSoulCultivator);
-            addButton(6, "Draco Sweep", buyItem2,consumables.DRASMAN, sayLine2(consumables.DRASMAN,"It's a manual for Draco Sweep. This simple technique allows you to unleash an attack that would strike in wide arc before you, perfect for when you are fighting a group of enemies. It also becomes more powerful as long you train your body and soul."), "\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to use when fighting a group of enemies.  You don't often meet more than one enemy at a time, but you're sure that deeper in this forsaken realm you will face groups or maybe even hordes of demons at once and would need something to deal with them.  ").hint("Draco Sweep Manual.").disableIf(!hasSoulCultivator);
-            addButton(7, "Many Birds", buyItem2,consumables.MABIMAN, sayLine2(consumables.MABIMAN,"It's a manual for Many Birds. This simple technique allows you to project a figment of your soulforce as a crystal, firing it at extreme speeds. As you train your body and soul, this skill will become stronger."), "\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  The name of the manual is strange, but it makes you remember something...but what and from where you are not certain.  ").hint("Many Birds Manual.").disableIf(!hasSoulCultivator);
-            addButton(8, "Hail of Blades", buyItem2,consumables.HOB1MAN, sayLine2(consumables.HOB1MAN,"It's a manual for Hail of Blades. This simple technique allows you to form several etheral weapons, then launch them at extreme speeds. As you train your body and soul, this skill will become stronger."), "\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  The name of the manual is strange, but it makes you remember something...but what and from where you are not certain.  ").hint("Hail of Blades Manual.").disableIf(!hasSoulCultivator);
-			addButton(9, "Create E (B)", buyItem2,consumables.CEB_MAN, sayLine2(consumables.CEB_MAN,"It's a manual for Create Element (Basic). This very simple technique allows you to unleash ball of basic element (fire, water, air, earth)."), "\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  It seems like the name of the manual wasn't influenced by this realm's nature... either that or it's just a coincidence.").hint("Create Element (Basic).").disableIf(!hasSoulCultivator);
-            addButton(10, "FlamesOfLove", buyItem1,consumables.FOLBMAN, sayLine1(consumables.FOLBMAN,"It's a manual for Flames of Love (Rankless), this simple technique allows you to convert excess lust into flames."), "\n\nIt seems like some sort of art to deal with needless lust by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  ").hint("Flames of Love (Rankless) Manual.");
-			addButton(11, "IciclesOfLove", buyItem1,consumables.IOLBMAN, sayLine1(consumables.IOLBMAN,"It's a manual for Icicles of Love (Rankless), this simple technique allows you to covert excess lust into icicles."), "\n\nIt seems like some sort of art to deal with needless lust by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  ").hint("Icicles of Love (Rankless) Manual.");
-			addButton(12, "SoSisterhood", buyItem1,consumables.SOSBMAN, sayLine1(consumables.SOSBMAN,"It's a manual for Storm of Sisterhood (Rankless), this simple technique allows you to convert excess wrath into lighting."), "\n\nIt seems like some sort of art to deal with needless wrath by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  ").hint("Storm of Sisterhood (Rankless) Manual.");
-			addButton(13, "NoBrotherhood", buyItem1,consumables.NOBBMAN, sayLine1(consumables.NOBBMAN,"It's a manual for Night of Brotherhood (Rankless), this simple technique allows you to covert excess wrath into darkness."), "\n\nIt seems like some sort of art to deal with needless wrath by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  ").hint("Night of Brotherhood (Rankless) Manual.");
+            addButton(2, "Bag of Cosmos", curry(buyItem2,consumables.BAGOCOS), sayLine2(consumables.BAGOCOS,"A quintessential item for all soul cultivators, this little bag is dimensionally transcendental, that is, it's bigger on the inside. "),"\n", true).hint("Bag of Cosmos.");
+			addButton(3, "BT.Solution", curry(buyItem2,useables.BTSOLUTION), sayLine2(useables.BTSOLUTION,"This vial contain solution commonly used by body cultivators. In case of anyone else trying to ingest this fluid it raged from sever ingestion to death."),"\n", true).hint("Vial of Body Tempering Solution.");
+			addButton(4, "Fasting Pill", curry(buyItem2,consumables.FATPILL), sayLine2(consumables.FATPILL,"It's a rather useful item for soul cultivators, this little pill can help you stave off hunger for a few days."),"\n", true).hint("Fasting Pill.").disableIf(flags[kFLAGS.HUNGER_ENABLED] == 0);
+            addButton(5, "Triple Thrust", curry(buyItem2,consumables.TRITMAN), sayLine2(consumables.TRITMAN,"It's a manual for Triple Thrust. This very simple technique allows you to unleash three thrusts that will become stronger and stronger as you train your body and soul."), "\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  It seems like even the name of the manual could have been influenced by this realm's nature... either that or it's just a coincidence.",true).hint("Triple Thrust Manual.").disableIf(!hasSoulCultivator);
+            addButton(6, "Draco Sweep", curry(buyItem2,consumables.DRASMAN), sayLine2(consumables.DRASMAN,"It's a manual for Draco Sweep. This simple technique allows you to unleash an attack that would strike in wide arc before you, perfect for when you are fighting a group of enemies. It also becomes more powerful as long you train your body and soul."), "\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to use when fighting a group of enemies.  You don't often meet more than one enemy at a time, but you're sure that deeper in this forsaken realm you will face groups or maybe even hordes of demons at once and would need something to deal with them.  ", true).hint("Draco Sweep Manual.").disableIf(!hasSoulCultivator);
+            addButton(7, "Many Birds", curry(buyItem2,consumables.MABIMAN), sayLine2(consumables.MABIMAN,"It's a manual for Many Birds. This simple technique allows you to project a figment of your soulforce as a crystal, firing it at extreme speeds. As you train your body and soul, this skill will become stronger."), "\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  The name of the manual is strange, but it makes you remember something...but what and from where you are not certain.  ", true).hint("Many Birds Manual.").disableIf(!hasSoulCultivator);
+            addButton(8, "Hail of Blades", curry(buyItem2,consumables.HOB1MAN), sayLine2(consumables.HOB1MAN,"It's a manual for Hail of Blades. This simple technique allows you to form several etheral weapons, then launch them at extreme speeds. As you train your body and soul, this skill will become stronger."), "\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  The name of the manual is strange, but it makes you remember something...but what and from where you are not certain.  ", true).hint("Hail of Blades Manual.").disableIf(!hasSoulCultivator);
+			addButton(9, "Create E (B)", curry(buyItem2,consumables.CEB_MAN), sayLine2(consumables.CEB_MAN,"It's a manual for Create Element (Basic). This very simple technique allows you to unleash ball of basic element (fire, water, air, earth)."), "\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  It seems like the name of the manual wasn't influenced by this realm's nature... either that or it's just a coincidence.", true).hint("Create Element (Basic).").disableIf(!hasSoulCultivator);
+            addButton(10, "FlamesOfLove", curry(buyItem1,consumables.FOLBMAN), sayLine1(consumables.FOLBMAN,"It's a manual for Flames of Love (Rankless), this simple technique allows you to convert excess lust into flames."), "\n\nIt seems like some sort of art to deal with needless lust by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  ").hint("Flames of Love (Rankless) Manual.");
+			addButton(11, "IciclesOfLove", curry(buyItem1,consumables.IOLBMAN), sayLine1(consumables.IOLBMAN,"It's a manual for Icicles of Love (Rankless), this simple technique allows you to covert excess lust into icicles."), "\n\nIt seems like some sort of art to deal with needless lust by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  ").hint("Icicles of Love (Rankless) Manual.");
+			addButton(12, "SoSisterhood", curry(buyItem1,consumables.SOSBMAN), sayLine1(consumables.SOSBMAN,"It's a manual for Storm of Sisterhood (Rankless), this simple technique allows you to convert excess wrath into lighting."), "\n\nIt seems like some sort of art to deal with needless wrath by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  ").hint("Storm of Sisterhood (Rankless) Manual.");
+			addButton(13, "NoBrotherhood", curry(buyItem1,consumables.NOBBMAN), sayLine1(consumables.NOBBMAN,"It's a manual for Night of Brotherhood (Rankless), this simple technique allows you to covert excess wrath into darkness."), "\n\nIt seems like some sort of art to deal with needless wrath by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  ").hint("Night of Brotherhood (Rankless) Manual.");
 			addButton(14, "Back", golemmerchant);
             statScreenRefresh();
 		}
 		function TierII():void {
-            buyItem1 = curry(confirmBuy1,TierII,"Golem",1);
-            buyItem2 = curry(confirmBuy2,TierII,"Golem",0.2);
+            buyItem1 = curry(MultiBuy.confirmBuyMulti,TierII,"Golem",1);
+            buyItem2 = curry(MultiBuy.confirmBuyMulti,TierII,"Golem",5);
 			menu();
-            addButton(5, "Comet", buyItem2,consumables.COMETMA,sayLine2(consumables.COMETMA,"It's a manual for Comet, this technique allows you to project a shard of soulforce, which will come crashing down upon your opponent as a crystalline comet.  Perfect for when you are fighting groups of enemies, it also becomes more powerful as long as you keep training your body and soul."),"\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to use when fighting groups of enemies.  You don't often meet more than one enemy at at a time, but you're sure that deeper in this forsaken realm you will face groups or maybe even hordes of demons at once. Best to be prepared. ").hint("Comet Manual.");
-			addButton(6, "V P Trans", buyItem2,consumables.VPTRMAN,sayLine2(consumables.VPTRMAN,"It's a manual for Violet Pupil Transformation, this advanced technique allows you to channel soulforce into regenerative power, allowing you to recover even from the brink of death.  Its only flaw is that it constantly drains the cultivator's soulforce. "),"\n\nIt seems like it's similar to a healing spell soul skill, but instead of being used immediately, with enough soulforce it could be kept active for a very long period of time.  It could give you an edge against the demons.  Additionally, the ability to heal from the brink of death could prove to be useful in future fights.  ").hint("Violet Pupil Transformation Manual.");
-            addButton(7, "Sextuple Thrust", buyItem2,consumables.SEXTMAN, sayLine2(consumables.SEXTMAN,"It's a manual for Sextuple Thrust, this simple technique allows you to unleash six thrusts. As you train your body and soul, this skill will become stronger."), "\n\nWhether you are going to go deeper into all that 'soulforce' stuff or not, at least you now have something to train with. The name of the manual seems like it could have been influenced by this realm...or it's just a coincidence.  ").hint("Sextuple Thrust Manual.").disableIf(!hasSoulPersonage);
-            addButton(8, "Grandiose Hail of Blades", buyItem2,consumables.HOB2MAN, sayLine2(consumables.HOB2MAN,"It's a manual for Grandiose Hail of Blades, this technique allows you to form many etheral weapons traveling at extreme speeds. As you train your body and soul, this skill will become stronger."), "\n\nWhether you are going to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  The name of the manual is strange, but it makes you remember something...but what and from where you not certain.  ").hint("Grandiose Hail of Blades Manual.").disableIf(!hasSoulSprite);
-			addButton(9, "Create E (A)", buyItem2,consumables.CEA_MAN,sayLine2(consumables.CEA_MAN,"It's a manual for Create Element (Advanced), this technique allows you to unleash ball of advanced element (ice, lightning, darkness), it also becomes more powerful as long as you keep training your body and soul."),"\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to use when enemies resistant to more basic elements. Best to be prepared. ").hint("Create Element (Advanced).");
+            addButton(5, "Comet", curry(buyItem2,consumables.COMETMA),sayLine2(consumables.COMETMA,"It's a manual for Comet, this technique allows you to project a shard of soulforce, which will come crashing down upon your opponent as a crystalline comet.  Perfect for when you are fighting groups of enemies, it also becomes more powerful as long as you keep training your body and soul."),"\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to use when fighting groups of enemies.  You don't often meet more than one enemy at at a time, but you're sure that deeper in this forsaken realm you will face groups or maybe even hordes of demons at once. Best to be prepared. ", true).hint("Comet Manual.");
+			addButton(6, "V P Trans", curry(buyItem2,consumables.VPTRMAN),sayLine2(consumables.VPTRMAN,"It's a manual for Violet Pupil Transformation, this advanced technique allows you to channel soulforce into regenerative power, allowing you to recover even from the brink of death.  Its only flaw is that it constantly drains the cultivator's soulforce. "),"\n\nIt seems like it's similar to a healing spell soul skill, but instead of being used immediately, with enough soulforce it could be kept active for a very long period of time.  It could give you an edge against the demons.  Additionally, the ability to heal from the brink of death could prove to be useful in future fights.  ", true).hint("Violet Pupil Transformation Manual.");
+            addButton(7, "Sextuple Thrust", curry(buyItem2,consumables.SEXTMAN), sayLine2(consumables.SEXTMAN,"It's a manual for Sextuple Thrust, this simple technique allows you to unleash six thrusts. As you train your body and soul, this skill will become stronger."), "\n\nWhether you are going to go deeper into all that 'soulforce' stuff or not, at least you now have something to train with. The name of the manual seems like it could have been influenced by this realm...or it's just a coincidence.  ", true).hint("Sextuple Thrust Manual.").disableIf(!hasSoulPersonage);
+            addButton(8, "Grandiose Hail of Blades", curry(buyItem2,consumables.HOB2MAN), sayLine2(consumables.HOB2MAN,"It's a manual for Grandiose Hail of Blades, this technique allows you to form many etheral weapons traveling at extreme speeds. As you train your body and soul, this skill will become stronger."), "\n\nWhether you are going to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  The name of the manual is strange, but it makes you remember something...but what and from where you not certain.  ", true).hint("Grandiose Hail of Blades Manual.").disableIf(!hasSoulSprite);
+			addButton(9, "Create E (A)", curry(buyItem2,consumables.CEA_MAN),sayLine2(consumables.CEA_MAN,"It's a manual for Create Element (Advanced), this technique allows you to unleash ball of advanced element (ice, lightning, darkness), it also becomes more powerful as long as you keep training your body and soul."),"\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to use when enemies resistant to more basic elements. Best to be prepared. ", true).hint("Create Element (Advanced).");
 			addButton(14, "Back", golemmerchant);
             statScreenRefresh();
 		}
 		function TierIII():void {
-            buyItem1 = curry(confirmBuy1,TierIII,"Golem",1);
-            buyItem2 = curry(confirmBuy2,TierIII,"Golem",0.2);
+            buyItem1 = curry(MultiBuy.confirmBuyMulti,TierIII,"Golem",1);
+            buyItem2 = curry(MultiBuy.confirmBuyMulti,TierIII,"Golem",5);
 			menu();
-			addButton(0, "Nonuple Thrust", buyItem2,consumables.NONTMAN, sayLine2(consumables.NONTMAN,"It's a manual for Nonuple Thrust, this technique allows you to unleash nine thrusts. As you train your body and soul. "), "\n\nSince you are going deeper into soulforce, you got something more advanced to train with.  The name of the manual seems like it could have been influenced by this realm...or it's just a coincidence.  ").hint("Nonuple Thrust Manual.").disableIf(!hasSoulSprite);
-			addButton(1, "GHoMB", buyItem2,consumables.HOB3MAN, sayLine2(consumables.HOB3MAN,"It's a manual for Grandiose Hail of Moon Blades, this technique allows you to form a huge amount of etheral weapons traveling at extreme speeds. As you train your body and soul, this skill will become stronger."), "\n\nSince you are going deeper into soulforce, you got something more advanced to train with.  The name of the manual is strange, but it makes you remember something...but what and from where you not certain.  ").hint("Grandiose Hail of Moon Blades Manual.").disableIf(!hasSoulSprite);
+			addButton(0, "Nonuple Thrust", curry(buyItem2,consumables.NONTMAN), sayLine2(consumables.NONTMAN,"It's a manual for Nonuple Thrust, this technique allows you to unleash nine thrusts. As you train your body and soul. "), "\n\nSince you are going deeper into soulforce, you got something more advanced to train with.  The name of the manual seems like it could have been influenced by this realm...or it's just a coincidence.  ", true).hint("Nonuple Thrust Manual.").disableIf(!hasSoulSprite);
+			addButton(1, "GHoMB", curry(buyItem2,consumables.HOB3MAN), sayLine2(consumables.HOB3MAN,"It's a manual for Grandiose Hail of Moon Blades, this technique allows you to form a huge amount of etheral weapons traveling at extreme speeds. As you train your body and soul, this skill will become stronger."), "\n\nSince you are going deeper into soulforce, you got something more advanced to train with.  The name of the manual is strange, but it makes you remember something...but what and from where you not certain.  ", true).hint("Grandiose Hail of Moon Blades Manual.").disableIf(!hasSoulSprite);
 			/*addButton(2, "Yin Yang Blast", buyItem2,consumables.YYB_MAN,
 					sayLine2(consumables.YYB_MAN,"It's a manual for Yin Yang Blast, this technique allows you to combine Yin Palm and Yang Fist into a single attack."),
 					"\n\nSince you going deeper into all that 'soulforce' stuff, now you .  Maybe there is some more of those 'combined' soulskills somewhere?  "
@@ -371,18 +374,18 @@ public class HeXinDao extends BaseContent
     public function mogahenmerchant():void {
         function addItemButton(btn:int, item:ItemType, desc:String, useStones:Boolean = false):void {
             var introText:String = "When you point towards one of the items on display the merchant says, \"<i>This item is used to embrace the ";
-            var endText:String = " in you.  Interested?  It is merely <b>";
+            var endText:String = " in you.  Interested?</i>\""//  It is merely <b>";
             var buyF:Function, line:String, onBuyString:String, cost:String;
             if (useStones) {
                 cost = String(item.value / 5) + " spirit stones";
-                buyF = curry(confirmBuy2, mogahenmerchant, "Moga", 5);
+                buyF = curry(MultiBuy.confirmBuyMulti, mogahenmerchant, "Moga", 5, item);
             } else {
                 cost = String(item.value * 3) + " gems";
-                buyF = curry(confirmBuy1, mogahenmerchant, "Moga", 3);
+                buyF = curry(MultiBuy.confirmBuyMulti, mogahenmerchant, "Moga", 3, item);
             }
-            line = introText + desc + endText + cost + "</b></i>.\"";
+            line = introText + desc + endText;// + cost + "</b></i>.\"";
             onBuyString = "\n\nAfter you give Hen a few " + (useStones ? "spirit stones" : "gems") + ", he hands you the transformative. ";
-            addButton(btn, item.shortName, buyF, item, line, onBuyString).hint("Buy " + item.longName + ".\nCost: " + cost);
+            addButton(btn, item.shortName, buyF, line, onBuyString, useStones).hint("Buy " + item.longName + ".\nCost: " + cost);
         }
 
         function makeItemList(items:Array, useStones:Boolean = false):void {
@@ -640,43 +643,43 @@ public class HeXinDao extends BaseContent
     }
     public function soulequipmentshelf1():void {
         menu();
-		addButton(0, weapons.TRASAXE.shortName, weaponBuy1, weapons.TRASAXE);
-        addButton(1, weaponsrange.TRSXBOW.shortName, weaponBuy1, weaponsrange.TRSXBOW);
-        addButton(2, shields.TRASBUC.shortName, weaponBuy1, shields.TRASBUC);
-        addButton(3, armors.TRASARM.shortName, weaponBuy1, armors.TRASARM);
-        addButton(4, weaponsflyingswords.TRASFLS.shortName, weaponBuy1, weaponsflyingswords.TRASFLS);
-        addButton(5, undergarments.STSHIRT.shortName, weaponBuy1, undergarments.STSHIRT);
-        addButton(6, undergarments.STPANTY.shortName, weaponBuy1, undergarments.STPANTY);
-        addButton(7, headjewelries.TSHAIR.shortName, weaponBuy1, headjewelries.TSHAIR);
-        addButton(8, necklaces.TSNECK.shortName, weaponBuy1, necklaces.TSNECK);
-        addButton(9, jewelries.TSRNG.shortName, weaponBuy1, jewelries.TSRNG);
-        addButton(10, necklaces.SMNECK.shortName, weaponBuy1, necklaces.SMNECK);
-        addButton(11, jewelries.SOULRNG.shortName, weaponBuy1, jewelries.SOULRNG);
+		addButton(0, weapons.TRASAXE.shortName, weaponBuy, weapons.TRASAXE, soulequipmentshelf1);
+        addButton(1, weaponsrange.TRSXBOW.shortName, weaponBuy, weaponsrange.TRSXBOW, soulequipmentshelf1);
+        addButton(2, shields.TRASBUC.shortName, weaponBuy, shields.TRASBUC, soulequipmentshelf1);
+        addButton(3, armors.TRASARM.shortName, weaponBuy, armors.TRASARM, soulequipmentshelf1);
+        addButton(4, weaponsflyingswords.TRASFLS.shortName, weaponBuy, weaponsflyingswords.TRASFLS, soulequipmentshelf1);
+        addButton(5, undergarments.STSHIRT.shortName, weaponBuy, undergarments.STSHIRT, soulequipmentshelf1);
+        addButton(6, undergarments.STPANTY.shortName, weaponBuy, undergarments.STPANTY, soulequipmentshelf1);
+        addButton(7, headjewelries.TSHAIR.shortName, weaponBuy, headjewelries.TSHAIR, soulequipmentshelf1);
+        addButton(8, necklaces.TSNECK.shortName, weaponBuy, necklaces.TSNECK, soulequipmentshelf1);
+        addButton(9, jewelries.TSRNG.shortName, weaponBuy, jewelries.TSRNG, soulequipmentshelf1);
+        addButton(10, necklaces.SMNECK.shortName, weaponBuy, necklaces.SMNECK, soulequipmentshelf1);
+        addButton(11, jewelries.SOULRNG.shortName, weaponBuy, jewelries.SOULRNG, soulequipmentshelf1);
         addButton(14, "Back", serenamerchant);
     }
     public function soulequipmentshelf2():void {
         menu();
-        addButton(0, weapons.UGATANA.shortName, weaponBuy2, weapons.UGATANA);
-        addButton(1, weapons.KATANA.shortName, weaponBuy2, weapons.KATANA);
-        addButton(2, weapons.NODACHI.shortName, weaponBuy2, weapons.NODACHI);
-        addButton(3, weapons.S_GAUNT.shortName, weaponBuy2, weapons.S_GAUNT);
-        addButton(4, weapons.CLAWS.shortName, weaponBuy2, weapons.CLAWS);
-        addButton(5, weapons.RCLAYMO.shortName, weaponBuy2, weapons.RCLAYMO);
-        addButton(6, weapons.SCLAYMO.shortName, weaponBuy2, weapons.SCLAYMO);
-        addButton(7, weapons.TCLAYMO.shortName, weaponBuy2, weapons.TCLAYMO);
-        addButton(8, weapons.ACLAYMO.shortName, weaponBuy2, weapons.ACLAYMO);
+        addButton(0, weapons.UGATANA.shortName, weaponBuy, weapons.UGATANA, soulequipmentshelf2);
+        addButton(1, weapons.KATANA.shortName, weaponBuy, weapons.KATANA, soulequipmentshelf2);
+        addButton(2, weapons.NODACHI.shortName, weaponBuy, weapons.NODACHI, soulequipmentshelf2);
+        addButton(3, weapons.S_GAUNT.shortName, weaponBuy, weapons.S_GAUNT, soulequipmentshelf2);
+        addButton(4, weapons.CLAWS.shortName, weaponBuy, weapons.CLAWS, soulequipmentshelf2);
+        addButton(5, weapons.RCLAYMO.shortName, weaponBuy, weapons.RCLAYMO, soulequipmentshelf2);
+        addButton(6, weapons.SCLAYMO.shortName, weaponBuy, weapons.SCLAYMO, soulequipmentshelf2);
+        addButton(7, weapons.TCLAYMO.shortName, weaponBuy, weapons.TCLAYMO, soulequipmentshelf2);
+        addButton(8, weapons.ACLAYMO.shortName, weaponBuy, weapons.ACLAYMO, soulequipmentshelf2);
         //9
-        addButton(10, weapons.WHIP.shortName, weaponBuy2, weapons.WHIP);
-        addButton(11, weapons.DAISHO.shortName, weaponBuy2, weapons.DAISHO);
-        addButton(12, weapons.ZWNDER.shortName, weaponBuy2, weapons.ZWNDER);
+        addButton(10, weapons.WHIP.shortName, weaponBuy, weapons.WHIP, soulequipmentshelf2);
+        addButton(11, weapons.DAISHO.shortName, weaponBuy, weapons.DAISHO, soulequipmentshelf2);
+        addButton(12, weapons.ZWNDER.shortName, weaponBuy, weapons.ZWNDER, soulequipmentshelf2);
         //13
         addButton(14, "Back", serenamerchant);
     }
     public function soulequipmentshelf3():void {
         menu();
-        if (player.hasPerk(PerkLib.SoulApprentice)) addButton(0, armors.LAYOARM.shortName, weaponBuy3, armors.LAYOARM);
+        if (player.hasPerk(PerkLib.SoulApprentice)) addButton(0, armors.LAYOARM.shortName, weaponBuy, armors.LAYOARM, soulequipmentshelf3);
 		else addButtonDisabled(0, "???", "Req. Soul Apprentice");
-        if (player.hasPerk(PerkLib.SoulPersonage)) addButton(1, armors.HAYOARM.shortName, weaponBuy3, armors.HAYOARM);
+        if (player.hasPerk(PerkLib.SoulPersonage)) addButton(1, armors.HAYOARM.shortName, weaponBuy, armors.HAYOARM, soulequipmentshelf3);
 		else addButtonDisabled(1, "???", "Req. Soul Personage");
         //addButton(11, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic armor made of soulmetal that works with unhindered perk xD czyli coś ala bikini lub ogólnie tylko underwear z fragmentami zbroi lewitującymi wokół postaci i tylko w wypadku ataku wroga przesuwające sie aby przyjąć atak
         //addButton(12, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic light armor made of soulmetal
@@ -685,17 +688,17 @@ public class HeXinDao extends BaseContent
     }
     public function soulequipmentshelf4():void {
         menu();
-        if (player.level >= 6) addButton(5, consumables.BANGBM1.shortName, weaponBuy4, consumables.BANGBM1);
+        if (player.level >= 6) addButton(5, consumables.BANGBM1.shortName, weaponBuy, consumables.BANGBM1, soulequipmentshelf4);
 		else addButtonDisabled(5, "???", "Req. lvl 6+");
-        if (player.level >= 24) addButton(6, consumables.BANGBM2.shortName, weaponBuy4, consumables.BANGBM2);
+        if (player.level >= 24) addButton(6, consumables.BANGBM2.shortName, weaponBuy, consumables.BANGBM2, soulequipmentshelf4);
         else addButtonDisabled(6, "???", "Req. lvl 24+");
         if (player.level >= 42) {
-			addButton(0, consumables.BALLOFL.shortName, weaponBuy4, consumables.BALLOFL);
-			addButton(1, consumables.FROZENB.shortName, weaponBuy4, consumables.FROZENB);
-			addButton(2, consumables.THUNDBl.shortName, weaponBuy4, consumables.THUNDBl);
-			addButton(3, consumables.BALLOTD.shortName, weaponBuy4, consumables.BALLOTD);
-			addButton(4, consumables.POISONB.shortName, weaponBuy4, consumables.POISONB);
-			addButton(7, consumables.BANGBM3.shortName, weaponBuy4, consumables.BANGBM3);
+			addButton(0, consumables.BALLOFL.shortName, weaponBuy, consumables.BALLOFL, soulequipmentshelf4);
+			addButton(1, consumables.FROZENB.shortName, weaponBuy, consumables.FROZENB, soulequipmentshelf4);
+			addButton(2, consumables.THUNDBl.shortName, weaponBuy, consumables.THUNDBl, soulequipmentshelf4);
+			addButton(3, consumables.BALLOTD.shortName, weaponBuy, consumables.BALLOTD, soulequipmentshelf4);
+			addButton(4, consumables.POISONB.shortName, weaponBuy, consumables.POISONB, soulequipmentshelf4);
+			addButton(7, consumables.BANGBM3.shortName, weaponBuy, consumables.BANGBM3, soulequipmentshelf4);
 			//addButton(8, consumables.BANGBM3.shortName, weaponBuy4, consumables.BANGBM3);
 		}
         else {
@@ -707,109 +710,34 @@ public class HeXinDao extends BaseContent
 			addButtonDisabled(7, "???", "Req. lvl 42+");
 			//addButtonDisabled(8, "???", "Req. lvl 42+");
 		}
-        addButton(10, consumables.BANGB_M.shortName, weaponBuy4, consumables.BANGB_M);
-        addButton(11, consumables.W_STICK.shortName, weaponBuy4, consumables.W_STICK);
+        addButton(10, consumables.BANGB_M.shortName, weaponBuy, consumables.BANGB_M, soulequipmentshelf4);
+        addButton(11, consumables.W_STICK.shortName, weaponBuy, consumables.W_STICK, soulequipmentshelf4);
         addButton(14, "Back", serenamerchant);
     }
     public function soulequipmentshelf5():void {
         menu();
-        addButton(0, weapons.A_WAND.shortName, weaponBuy5, weapons.A_WAND);
-		addButton(1, weapons.W_STAFF.shortName, weaponBuy5, weapons.W_STAFF);
-		addButton(2, weapons.AWL_.shortName, weaponBuy5, weapons.AWL_);
-		addButton(3, weapons.RULER.shortName, weaponBuy5, weapons.RULER);
-		addButton(4, weapons.NRSABER.shortName, weaponBuy5, weapons.NRSABER);
-		addButton(5, weapons.RIBBON.shortName, weaponBuy5, weapons.RIBBON);
+        addButton(0, weapons.A_WAND.shortName, weaponBuy, weapons.A_WAND, soulequipmentshelf5);
+		addButton(1, weapons.W_STAFF.shortName, weaponBuy, weapons.W_STAFF, soulequipmentshelf5);
+		addButton(2, weapons.AWL_.shortName, weaponBuy, weapons.AWL_, soulequipmentshelf5);
+		addButton(3, weapons.RULER.shortName, weaponBuy, weapons.RULER, soulequipmentshelf5);
+		addButton(4, weapons.NRSABER.shortName, weaponBuy, weapons.NRSABER, soulequipmentshelf5);
+		addButton(5, weapons.RIBBON.shortName, weaponBuy, weapons.RIBBON, soulequipmentshelf5);
 		//6
-        addButton(7, weapons.HSWORDS.shortName, weaponBuy5, weapons.HSWORDS);
-		addButton(8, weapons.SNAKESW.shortName, weaponBuy5, weapons.SNAKESW);
+        addButton(7, weapons.HSWORDS.shortName, weaponBuy, weapons.HSWORDS, soulequipmentshelf5);
+		addButton(8, weapons.SNAKESW.shortName, weaponBuy, weapons.SNAKESW, soulequipmentshelf5);
 		//addButton(9, Changdao
-        addButton(10, weapons.FLYWHIS.shortName, weaponBuy5, weapons.FLYWHIS);
-        addButton(11, weapons.PRURUMI.shortName, weaponBuy5, weapons.PRURUMI);
-        addButton(12, weapons.CHAKRAM.shortName, weaponBuy5, weapons.CHAKRAM);
-        addButton(13, shields.MABRACE.shortName, weaponBuy5, shields.MABRACE);
+        addButton(10, weapons.FLYWHIS.shortName, weaponBuy, weapons.FLYWHIS, soulequipmentshelf5);
+        addButton(11, weapons.PRURUMI.shortName, weaponBuy, weapons.PRURUMI, soulequipmentshelf5);
+        addButton(12, weapons.CHAKRAM.shortName, weaponBuy, weapons.CHAKRAM, soulequipmentshelf5);
+        addButton(13, shields.MABRACE.shortName, weaponBuy, shields.MABRACE, soulequipmentshelf5);
         addButton(14, "Back", serenamerchant);
     }
 
-    private function weaponBuy1(itype:ItemType):void {
-        clearOutput();
-        outputText("\"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
-        if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
-            outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
-            doNext(soulequipmentshelf1);
-            return;
-        }
-        else outputText("\n\nDo you buy it?\n\n");
-        doYesNo(curry(debitWeapon1,itype), soulequipmentshelf1);
-    }
-    private function debitWeapon1(itype:ItemType):void {
-        flags[kFLAGS.SPIRIT_STONES] -= itype.value / 10;
-        statScreenRefresh();
-        inventory.takeItem(itype, soulequipmentshelf1);
-    }
-    private function weaponBuy2(itype:ItemType):void {
-        clearOutput();
-        outputText("\"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
-        if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
-            outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
-            doNext(soulequipmentshelf2);
-            return;
-        }
-        else outputText("\n\nDo you buy it?\n\n");
-        doYesNo(curry(debitWeapon2,itype), soulequipmentshelf2);
-    }
-    private function debitWeapon2(itype:ItemType):void {
-        flags[kFLAGS.SPIRIT_STONES] -= itype.value / 10;
-        statScreenRefresh();
-        inventory.takeItem(itype, soulequipmentshelf2);
-    }
-    private function weaponBuy3(itype:ItemType):void {
-        clearOutput();
-        outputText("\"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
-        if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
-            outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
-            doNext(soulequipmentshelf3);
-            return;
-        }
-        else outputText("\n\nDo you buy it?\n\n");
-        doYesNo(curry(debitWeapon3,itype), soulequipmentshelf3);
-    }
-    private function debitWeapon3(itype:ItemType):void {
-        flags[kFLAGS.SPIRIT_STONES] -= itype.value / 10;
-        statScreenRefresh();
-        inventory.takeItem(itype, soulequipmentshelf3);
-    }
-    private function weaponBuy4(itype:ItemType):void {
-        clearOutput();
-        outputText("\"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
-        if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
-            outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
-            doNext(soulequipmentshelf4);
-            return;
-        }
-        else outputText("\n\nDo you buy it?\n\n");
-        doYesNo(curry(debitWeapon4,itype), soulequipmentshelf4);
-    }
-    private function debitWeapon4(itype:ItemType):void {
-        flags[kFLAGS.SPIRIT_STONES] -= itype.value / 10;
-        statScreenRefresh();
-        inventory.takeItem(itype, soulequipmentshelf4);
-    }
-    private function weaponBuy5(itype:ItemType):void {
-        clearOutput();
-        outputText("\"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
-        if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
-            outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
-            doNext(soulequipmentshelf5);
-            return;
-        }
-        else outputText("\n\nDo you buy it?\n\n");
-        doYesNo(curry(debitWeapon5,itype), soulequipmentshelf5);
-    }
-    private function debitWeapon5(itype:ItemType):void {
-        flags[kFLAGS.SPIRIT_STONES] -= itype.value / 10;
-        statScreenRefresh();
-        inventory.takeItem(itype, soulequipmentshelf5);
-    }
+	private function weaponBuy(itype:ItemType, returnFunc:Function):void {
+		var descString:String = "After entering the shop with a sign saying 'Equipment' over the doors you see a few shelves filled with various weapons, shields, armors and even rarer items like rings and necklaces. Behind the desk in the middle of the shop you see a woman that has features from a variety of different races. A shark face and tail contrasts it's owner's feather covered arms, the fin from her tail bobbing, barely entering your field of view on each side of the desk. She's an odd mix of shark and bird."
+        + "\n\n\"<i>Greetings dear customer. I'm Serena and this is my humble shop. If something catches your eyes let me know,</i>\"\n";
+		MultiBuy.confirmBuyMulti(returnFunc, "Serena", 10, itype, descString, "\n", true);
+	}
 
 	public function entranceToRiverDungeon():void {
 		clearOutput();
@@ -846,63 +774,33 @@ public class HeXinDao extends BaseContent
     }
     public function ermaswiftarrowmerchantshelf1():void {
         menu();
-        addButton(0, weaponsrange.BOWLIGH.shortName, weaponrangeBuy1, weaponsrange.BOWLIGH);
-        addButton(1, weaponsrange.BOWHUNT.shortName, weaponrangeBuy1, weaponsrange.BOWHUNT);
-        addButton(2, weaponsrange.BOWLONG.shortName, weaponrangeBuy1, weaponsrange.BOWLONG);
-        addButton(3, weaponsrange.BOWKELT.shortName, weaponrangeBuy1, weaponsrange.BOWKELT);
-        addButton(5, weaponsrange.LCROSBW.shortName, weaponrangeBuy1, weaponsrange.LCROSBW);
-        addButton(6, weaponsrange.HUXBOW_.shortName, weaponrangeBuy1, weaponsrange.HUXBOW_);
-        addButton(7, weaponsrange.HEXBOW_.shortName, weaponrangeBuy1, weaponsrange.HEXBOW_);
+        addButton(0, weaponsrange.BOWLIGH.shortName, weaponRangeBuy, weaponsrange.BOWLIGH, ermaswiftarrowmerchantshelf1);
+        addButton(1, weaponsrange.BOWHUNT.shortName, weaponRangeBuy, weaponsrange.BOWHUNT, ermaswiftarrowmerchantshelf1);
+        addButton(2, weaponsrange.BOWLONG.shortName, weaponRangeBuy, weaponsrange.BOWLONG, ermaswiftarrowmerchantshelf1);
+        addButton(3, weaponsrange.BOWKELT.shortName, weaponRangeBuy, weaponsrange.BOWKELT, ermaswiftarrowmerchantshelf1);
+        addButton(5, weaponsrange.LCROSBW.shortName, weaponRangeBuy, weaponsrange.LCROSBW, ermaswiftarrowmerchantshelf1);
+        addButton(6, weaponsrange.HUXBOW_.shortName, weaponRangeBuy, weaponsrange.HUXBOW_, ermaswiftarrowmerchantshelf1);
+        addButton(7, weaponsrange.HEXBOW_.shortName, weaponRangeBuy, weaponsrange.HEXBOW_, ermaswiftarrowmerchantshelf1);
         addButton(14, "Back", ermaswiftarrowmerchant);
     }
     public function ermaswiftarrowmerchantshelf2():void {
         menu();
-        addButton(0, weaponsrange.ATKNIFE.shortName, weaponrangeBuy2, weaponsrange.ATKNIFE);
-        addButton(1, weaponsrange.RTKNIFE.shortName, weaponrangeBuy2, weaponsrange.RTKNIFE);
-        addButton(2, weaponsrange.STKNIFE.shortName, weaponrangeBuy2, weaponsrange.STKNIFE);
-        addButton(3, weaponsrange.TTKNIFE.shortName, weaponrangeBuy2, weaponsrange.TTKNIFE);
-        addButton(5, weaponsrange.O_JAVEL.shortName, weaponrangeBuy2, weaponsrange.O_JAVEL);
-        addButton(6, weaponsrange.T_KNIFE.shortName, weaponrangeBuy2, weaponsrange.T_KNIFE);
-        addButton(7, weaponsrange.SHURIKE.shortName, weaponrangeBuy2, weaponsrange.SHURIKE);
+        addButton(0, weaponsrange.ATKNIFE.shortName, weaponRangeBuy, weaponsrange.ATKNIFE, ermaswiftarrowmerchantshelf2);
+        addButton(1, weaponsrange.RTKNIFE.shortName, weaponRangeBuy, weaponsrange.RTKNIFE, ermaswiftarrowmerchantshelf2);
+        addButton(2, weaponsrange.STKNIFE.shortName, weaponRangeBuy, weaponsrange.STKNIFE, ermaswiftarrowmerchantshelf2);
+        addButton(3, weaponsrange.TTKNIFE.shortName, weaponRangeBuy, weaponsrange.TTKNIFE, ermaswiftarrowmerchantshelf2);
+        addButton(5, weaponsrange.O_JAVEL.shortName, weaponRangeBuy, weaponsrange.O_JAVEL, ermaswiftarrowmerchantshelf2);
+        addButton(6, weaponsrange.T_KNIFE.shortName, weaponRangeBuy, weaponsrange.T_KNIFE, ermaswiftarrowmerchantshelf2);
+        addButton(7, weaponsrange.SHURIKE.shortName, weaponRangeBuy, weaponsrange.SHURIKE, ermaswiftarrowmerchantshelf2);
         addButton(14, "Back", ermaswiftarrowmerchant);
     }
 
-    private function weaponrangeBuy1(itype:ItemType):void {
-        clearOutput();
-        outputText("The centauress nods at your purchase and replies: \"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
-        if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
-            outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
-            //Goto shop main menu
-            doNext(ermaswiftarrowmerchantshelf1);
-            return;
-        }
-        else outputText("\n\nDo you buy it?\n\n");
-        //Go to debit/update function or back to shop window
-        doYesNo(curry(debitWeaponRange1,itype), ermaswiftarrowmerchantshelf1);
-    }
-    private function debitWeaponRange1(itype:ItemType):void {
-        flags[kFLAGS.SPIRIT_STONES] -= itype.value / 10;
-        statScreenRefresh();
-        inventory.takeItem(itype, ermaswiftarrowmerchantshelf1);
-    }
-    private function weaponrangeBuy2(itype:ItemType):void {
-        clearOutput();
-        outputText("The centauress nods at your purchase and replies: \"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
-        if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
-            outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
-            //Goto shop main menu
-            doNext(ermaswiftarrowmerchantshelf2);
-            return;
-        }
-        else outputText("\n\nDo you buy it?\n\n");
-        //Go to debit/update function or back to shop window
-        doYesNo(curry(debitWeaponRange2,itype), ermaswiftarrowmerchantshelf2);
-    }
-    private function debitWeaponRange2(itype:ItemType):void {
-        flags[kFLAGS.SPIRIT_STONES] -= itype.value / 10;
-        statScreenRefresh();
-        inventory.takeItem(itype, ermaswiftarrowmerchantshelf2);
-    }
+	private function weaponRangeBuy(itype:ItemType, returnFunc:Function):void {
+		var descString:String = "After entering the shop with a sign saying 'Soul Arrow' over the doors you see a few shelves filled with various ranged weapons of all sorts, from bows, to crossbows, to some more exotic ones that you aren't even sure what they are called. "
+		+ "Behind the desk in the central point of the shop you see a centauress. She has no fancy or provocative clothes, and sports an average body. She moves quite gracefully around the shelves, despite her larger body."
+		+ "\n\n\"<i>Greetings, my name is Erma Swiftarrow and this is my shop. Go ahead and look around, if something catches your eye, simply let me know,</i>\" she say all that almost entirely in one breath after noticing your presence.";
+		MultiBuy.confirmBuyMulti(returnFunc, "Erma", 10, itype, descString, "\n", true);
+	}
 
 	public function ermaswiftarrowmerchantarcherytraining():void {
 		clearOutput();
@@ -947,36 +845,24 @@ public class HeXinDao extends BaseContent
         outputText("Behind the desk in the central point of the shop you see a flesh golem on unidentified gender.");
         outputText("\n\n\"<i>Greetings, customer. Go ahead and look around, if something catches your eye, simply let me know,</i>\" it say all that almost entirely in one breath after noticing your presence.");
         menu();
-		addButton(0, weaponsflyingswords.S_HALFM.shortName, flyingswordBuy, weaponsflyingswords.S_HALFM);
-		addButton(1, weaponsflyingswords.E_HALFM.shortName, flyingswordBuy, weaponsflyingswords.E_HALFM);
-		addButton(2, weaponsflyingswords.B_HALFM.shortName, flyingswordBuy, weaponsflyingswords.B_HALFM);
-		addButton(3, weaponsflyingswords.W_HALFM.shortName, flyingswordBuy, weaponsflyingswords.W_HALFM);
-		addButton(4, weaponsflyingswords.MOONLGT.shortName, flyingswordBuy, weaponsflyingswords.MOONLGT);
-		addButton(5, weaponsflyingswords.S_TWINS.shortName, flyingswordBuy, weaponsflyingswords.S_TWINS);
-		addButton(10, weaponsflyingswords.ASAUCHI.shortName, flyingswordBuy, weaponsflyingswords.ASAUCHI);
+		addButton(0, weaponsflyingswords.S_HALFM.shortName, flyingSwordBuy, weaponsflyingswords.S_HALFM, qimerchant);
+		addButton(1, weaponsflyingswords.E_HALFM.shortName, flyingSwordBuy, weaponsflyingswords.E_HALFM, qimerchant);
+		addButton(2, weaponsflyingswords.B_HALFM.shortName, flyingSwordBuy, weaponsflyingswords.B_HALFM, qimerchant);
+		addButton(3, weaponsflyingswords.W_HALFM.shortName, flyingSwordBuy, weaponsflyingswords.W_HALFM, qimerchant);
+		addButton(4, weaponsflyingswords.MOONLGT.shortName, flyingSwordBuy, weaponsflyingswords.MOONLGT, qimerchant);
+		addButton(5, weaponsflyingswords.S_TWINS.shortName, flyingSwordBuy, weaponsflyingswords.S_TWINS, qimerchant);
+		addButton(10, weaponsflyingswords.ASAUCHI.shortName, flyingSwordBuy, weaponsflyingswords.ASAUCHI, qimerchant);
         addButtonDisabled(13, "Training", "The shop owner, Qi, is in the middle of closed door cultivations. It shouldn't take longer than a few months for him to finish.");//.hint("Flying Sword training.")
         addButton(14, "Back", riverislandVillageStuff);
         statScreenRefresh();
     }
 
-    private function flyingswordBuy(itype:ItemType):void {
-        clearOutput();
-        outputText("The flesh golem nods at your purchase and replies: \"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
-        if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
-            outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
-            //Goto shop main menu
-            doNext(qimerchant);
-            return;
-        }
-        else outputText("\n\nDo you buy it?\n\n");
-        //Go to debit/update function or back to shop window
-        doYesNo(curry(debitFlyingSword,itype), qimerchant);
-    }
-    private function debitFlyingSword(itype:ItemType):void {
-        flags[kFLAGS.SPIRIT_STONES] -= itype.value / 10;
-        statScreenRefresh();
-        inventory.takeItem(itype, qimerchant);
-    }
+	private function flyingSwordBuy(itype:ItemType, returnFunc:Function):void {
+		var descString:String = "After entering the shop with a sign saying 'Flying Swords are always with you!' over the doors you see a few shelves filled with various flying swords. "
+		+ "Behind the desk in the central point of the shop you see a flesh golem on unidentified gender."
+		+ "\n\n\"<i>Greetings, customer. Go ahead and look around, if something catches your eye, simply let me know,</i>\" it say all that almost entirely in one breath after noticing your presence.\n";
+		MultiBuy.confirmBuyMulti(returnFunc, "Erma", 10, itype, descString, "\n", true);
+	}
 
 public function soularena():void {
 	clearOutput();//arena do walk z przeciwnikami na exp tylko - zadnych sex scenes tylko walk do wygranej niewazne czy przez hp czy lust - przeciwnicy: ?weak deviant golem?, niskopoziomowi przeciwnicy uzywajacy soul skills (moze po prostu wesje zwyklych przeciwnikow ale z dodanymi soul attakami?)
@@ -1752,7 +1638,7 @@ public function soularena():void {
 		outputText("\"<i>That will be " + cost + " spirit stones. Show me da money baby.</i>\"\n\n");
 		menu();
 		if (flags[kFLAGS.SPIRIT_STONES] < cost) addButtonDisabled(1, "Buy", "You do not have enough spirit stones to buy this.");
-		else if (flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] >= 200) addButtonDisabled(1, "Buy", "You can't store any more of this type of items.");
+		else if (CampStatsAndResources.EnergyCoreResc >= 200) addButtonDisabled(1, "Buy", "You can't store any more of this type of items.");
 		else addButton(1, "Buy", curry(buyItemEnergyCoreYes, cost));
 		addButton(3, "Don't Buy", golemancershopRepeat);
 	}
@@ -1761,7 +1647,7 @@ public function soularena():void {
 		statScreenRefresh();
 		outputText("She counts the stones before handing your purchase over.\n\n");
 		outputText("\"<i>Always happy to do business, anything else you want to buy?</i>\"\n\n");
-		flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES]++;
+		CampStatsAndResources.EnergyCoreResc++;
 		doNext(golemancershopRepeat);
 	}
 	private function buyItemMechanism():void {
@@ -1771,7 +1657,7 @@ public function soularena():void {
 		outputText("\"<i>That will be " + cost + " spirit stones. Show me da money baby.</i>\"\n\n");
 		menu();
 		if (flags[kFLAGS.SPIRIT_STONES] < cost) addButtonDisabled(1, "Buy", "You do not have enough spirit stones to buy this.");
-		else if (flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] >= 200) addButtonDisabled(1, "Buy", "You can't store any more of this type of items.");
+		else if (CampStatsAndResources.MechanismResc >= 200) addButtonDisabled(1, "Buy", "You can't store any more of this type of items.");
 		else addButton(1, "Buy", curry(buyItemMechanismYes, cost));
 		addButton(3, "Don't Buy", golemancershopRepeat);
 	}
@@ -1780,7 +1666,7 @@ public function soularena():void {
 		statScreenRefresh();
 		outputText("She counts the stones before handing your purchase over.\n\n");
 		outputText("\"<i>Always happy to do business, anything else you want to buy?</i>\"\n\n");
-		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES]++;
+		CampStatsAndResources.MechanismResc++;
 		doNext(golemancershopRepeat);
 	}
 	private function buyItem(odd:ItemType):void {

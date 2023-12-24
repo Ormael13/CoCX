@@ -3,8 +3,9 @@ import classes.BodyParts.Face;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumables.VampireBlood;
-import classes.Races;
 import classes.Scenes.Camp;
+import classes.PerkLib;
+import classes.Races;
 import classes.StatusEffects;
 import classes.display.SpriteDb;
 
@@ -113,7 +114,10 @@ public class DivaScene extends XXCNPC {
             + "\"<i>Not unless you drink some of my blood or blood I drank from. My bite is not viral but can leave my prey weak and sometimes close to death from blood loss. Now if thou would excuse me I need to prepare for tonight.</i>\"\n"
             + "\n"
             + "You nod and let the vampire to her thing going back to yours.");
-		if (!player.hasStatusEffect(StatusEffects.Familiar)) player.createStatusEffect(StatusEffects.Familiar,0,0,0,0);
+		if (player.racialScore(Races.VAMPIRE) >= 20) {
+			if (!player.hasStatusEffect(StatusEffects.Familiar)) player.createStatusEffect(StatusEffects.Familiar, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.Familiar)) player.createPerk(PerkLib.Familiar, 0, 0, 0, 0);
+		}
         doNext(talkMenu);
     }
 
@@ -154,7 +158,7 @@ public class DivaScene extends XXCNPC {
             outputText("\"<i>I wouldn't mind, [name], but be warned that it is highly infectious.</i>\"");
         outputText("She hands to you a vial right away.");
         tookVialToday = true;
-        inventory.takeItem(consumables.REDVIAL, talkMenu);
+        inventory.takeItem(consumables.VAMPBLD, talkMenu);
     }
 
     private function setupTalkMenu():void {

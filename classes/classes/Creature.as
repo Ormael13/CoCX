@@ -41,6 +41,7 @@ import classes.lists.BreastCup;
 import classes.lists.Gender;
 
 import flash.errors.IllegalOperationError;
+import classes.Scenes.Combat.CombatAbilities;
 
 public class Creature extends Utils
 	{
@@ -654,7 +655,7 @@ public class Creature extends Utils
 				if (inte >= 101) max += Math.round(inte) * Math.floor( (inte-100)/50 + 1);
 				if (perkv1(IMutationsLib.FrozenHeartIM) >= 3) max *= 1.5;
 			}
-			else if (hasPerk(PerkLib.HaltedVitals)) {
+			else if (hasPerk(PerkLib.HaltedVitals) || hasPerk(PerkLib.Undeath)) {
 				max += int(lib * 2 + 50);
 				if (lib >= 21) max += Math.round(lib);
 				if (lib >= 41) max += Math.round(lib);
@@ -913,7 +914,7 @@ public class Creature extends Utils
 		}
 		public function maxLust():Number {
 			var max:Number = Math.round(maxLust_base()*maxLust_mult());
-			return Math.min(199999,max);
+			return Math.min(699999,max);
 		}
 		public function maxOverLust():Number {
 			var max1:Number = Math.round(maxLust_base()*maxLust_mult());
@@ -929,9 +930,9 @@ public class Creature extends Utils
 			if (perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 4) max2 += 0.1;
 			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 4) max2 += 0.1;
 			if (perkv1(IMutationsLib.HumanOvariesIM) >= 4) max2 += 0.1;
-			max1 *= max2;//~170%
+			max1 *= max2;//~230%
 			max1 = Math.round(max1);
-			return Math.min(339999,max1);
+			return Math.min(1609999,max1);
 		}
 		public function maxFatigue():Number {
 			return 150;
@@ -1258,6 +1259,9 @@ public class Creature extends Utils
 		public function set skinColor2(value:String):void {
 			bodyMaterials[BodyMaterial.SKIN].color2 = value;
 		}
+
+		public var skinColor3:String = "black";
+
 		public function get furColor():String {
 			return bodyMaterials[BodyMaterial.FUR].color;
 		}
@@ -1886,6 +1890,15 @@ public class Creature extends Utils
 		}
 
 		/**
+		 * Check if this creature has any of the specified perks.
+		 * @param ptypes {Array<PerkType>}
+		 * @return {Boolean} True if creature has any of the perks, otherwise false.
+		 */
+		public function hasAnyPerk(...ptypes:/*PerkType*/Array):Boolean {
+			return ptypes.some(function(ptype:PerkType, index:int, array:Array):Boolean { return hasPerk(ptype); });
+		}
+
+		/**
 		 * Get the instance of a perk.
 		 * @param {PerkType} ptype
 		 */
@@ -2009,6 +2022,22 @@ public class Creature extends Utils
 		}
 		public function hasStatusEffect(stype:StatusEffectType):Boolean {
 			return this._statusEffects.hasStatusEffect(stype);
+		}
+		/**
+		 * Check if this creature has any of the specified status effects.
+		 * @param stypes {Array - StatusEffectType}
+		 * @return {Boolean} True if creature has any of the status effects, otherwise false.
+		 */
+		public function hasAnyStatusEffect(...stypes:Array):Boolean {
+			return stypes.some(function(stype:StatusEffectType, index:int, array:Array):Boolean { return hasStatusEffect(stype); });
+		}
+		/**
+		 * Check if this creature has all of the specified status effects.
+		 * @param stypes {Array - StatusEffectType}
+		 * @return {Boolean} True if creature has all of the status effects, otherwise false.
+		 */
+		public function hasStatusEffects(...stypes:Array):Boolean {
+			return stypes.all(function(stype:StatusEffectType, index:int, array:Array):Boolean { return hasStatusEffect(stype); });
 		}
 		public function changeStatusValue(stype:StatusEffectType, statusValueNum:Number = 1, newNum:Number = 0):void
 		{
@@ -3117,9 +3146,15 @@ public class Creature extends Utils
 		//Bleed immunity
 		public function isImmuneToBleed():Boolean
 		{
-			if (game.monster.hasPerk(PerkLib.EnemyConstructType) || game.monster.hasPerk(PerkLib.EnemyElementalType) || game.monster.hasPerk(PerkLib.EnemyGhostType) || game.monster.hasPerk(PerkLib.EnemyUndeadType))
+			if (game.monster.hasPerk(PerkLib.EnemyConstructType) || game.monster.hasPerk(PerkLib.EnemyElementalType) || game.monster.hasPerk(PerkLib.EnemyGhostType) || game.monster.hasPerk(PerkLib.EnemyUndeadType) || game.monster.hasPerk(PerkLib.EnemyGooType))
 				return true;
 			return false;
+		}
+
+		//Blind Immunity
+		public function isImmuneToBlind(): Boolean
+		{
+			return hasPerk(PerkLib.BlindImmunity) || hasPerk(PerkLib.TrueSeeing);
 		}
   
 		//check for vagoo
@@ -4474,7 +4509,7 @@ public class Creature extends Utils
 			if (game.player.isRace(Races.CHESHIRE) && ((!hasStatusEffect(StatusEffects.Minimise) && (rand(100) < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (rand(100) < 80)))) evasionReason = "Minimise";
 			if (game.player.isRace(Races.CHESHIRE) && ((!hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (rand(100) < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (rand(100) < 80)))) evasionReason = "Phasing";
 			if (game.player.isRace(Races.DISPLACERBEAST) && ((!hasStatusEffect(StatusEffects.Displacement) && (rand(100) < 30)) || (hasStatusEffect(StatusEffects.Displacement) && (rand(100) < 80)))) evasionReason = "Displacing";
-			if (game.player.necklace == game.necklaces.CATBELL && game.player.isAnyRaceCached(Races.CatlikeRaces) && evasionReason) SceneLib.combat.teases.tease();
+			if (game.player.necklace == game.necklaces.CATBELL && game.player.isAnyRaceCached(Races.CatlikeRaces) && evasionReason) CombatAbilities.Tease.perform();
 			return evasionReason;
 		}
 

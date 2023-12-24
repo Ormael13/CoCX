@@ -502,7 +502,7 @@ public class Block extends Sprite {
 		}
 		e.items = items;
 		if (bindObject) {
-			e.addEventListener(Event.CHANGE, function(event:Event):void {
+			e.addEventListener(Event.SELECT, function(event:Event):void {
 				event.preventDefault();
 				bindObject[bindProp] = e.selectedItem.data;
 			})

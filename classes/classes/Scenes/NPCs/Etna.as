@@ -16,6 +16,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.internals.*;
+import classes.Scenes.Combat.CombatAbilities;
 
 use namespace CoC;
 
@@ -41,9 +42,9 @@ use namespace CoC;
 			else outputText("The manticore");
 			outputText("'s tail curls over and shoots a spike at you. The bony spike ");
 			if (rand(100) < (this.spe - player.spe) / 2) {
-				if (player.hasStatusEffect(StatusEffects.WindWall)) {
+				if (CombatAbilities.EAspectAir.isActive()) {
 					outputText("hits wind wall doing no damage to you.");
-					player.addStatusValue(StatusEffects.WindWall,2,-1);
+					CombatAbilities.EAspectAir.advance(true);
 				}
 				else {
 					var tailspikedmg:Number = Math.round(this.str / 16);
@@ -76,7 +77,7 @@ use namespace CoC;
 			var lustdmg:Number = Math.round(this.lib / 3);
 			player.takeLustDamage(lustdmg, true);
 			player.takePhysDamage(boobcrashdmg, true);
-			player.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
+			if (!player.hasPerk(PerkLib.Resolute)) player.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 			removeStatusEffect(StatusEffects.Flying);
 		}
 
@@ -306,6 +307,7 @@ use namespace CoC;
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
 			if (flags[kFLAGS.ETNA_LVL_UP] >= 1) this.createPerk(PerkLib.BasicSelfControl, 0, 0, 0, 0);
 			if (flags[kFLAGS.ETNA_LVL_UP] >= 2) this.createPerk(PerkLib.HalfStepToImprovedSelfControl, 0, 0, 0, 0);
 			if (flags[kFLAGS.ETNA_LVL_UP] >= 3) this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);

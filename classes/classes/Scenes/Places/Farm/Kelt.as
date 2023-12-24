@@ -7,6 +7,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.Scenes.Combat.CombatAbilities;
 
 public class Kelt extends Monster
 	{
@@ -44,9 +45,9 @@ public class Kelt extends Monster
 				outputText("You manage to avoid the missile by the skin of your teeth!");
 				return;
 			}
-			if (player.hasStatusEffect(StatusEffects.WindWall)) {
+			if (CombatAbilities.EAspectAir.isActive()) {
 				outputText("Still his arrow hits wind wall dealing no damage to you.");
-				player.addStatusValue(StatusEffects.WindWall,2,-1);
+				CombatAbilities.EAspectAir.advance(true);
 				return;
 			}
 

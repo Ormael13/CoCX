@@ -1,0 +1,133 @@
+<project name="Corruption of Champions Build Script" default="debug">
+
+    <!-- Create a environment variable FLEX_HOME that points to the flex SDK -->
+    <property environment="env"/>
+    <property name="FLEX_HOME" location="${env.FLEX_HOME}"/>
+
+    <property name="main.src.dir" value="${basedir}/classes"/>
+    <property name="test.src.dir" value="${basedir}/test"/>
+    <property name="lib.dir" value="${basedir}/lib/bin"/>
+    <property name="build.dir" value="${basedir}/target"/>
+    <property name="report.dir" value="${build.dir}/report"/>
+    <property name="test.file" value="${build.dir}/CoC-test.swf"/>
+
+    <!-- Setup Flex and FlexUnit ant tasks -->
+    <!-- You can set this directly so mxmlc will work correctly, or set FLEX_HOME as an environment variable and use as below -->
+    <taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar"/>
+
+    <!-- delete and create the DEPLOY dir again -->
+    <target name="init">
+        <delete dir="${build.dir}"/>
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${report.dir}"/>
+    </target>
+
+    <macrodef name="build-game-binary">
+        <attribute name="debug-flag"/>
+        <attribute name="release-flag"/>
+		<attribute name="air-flag"/>
+        <attribute name="standalone-flag"/>
+        <attribute name="binary-name"/>
+        <attribute name="should-optimize"/>
+        <sequential>
+            <!-- build the game binary -->
+            <mxmlc file="${main.src.dir}/classes/CoC.as" output="${build.dir}/@{binary-name}" static-rsls="true">
+                <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
+                <source-path path-element="${FLEX_HOME}/frameworks"/>
+                <source-path path-element="${main.src.dir}/"/>
+                <compiler.debug>@{debug-flag}</compiler.debug>
+                <compiler.optimize>@{should-optimize}</compiler.optimize>
+                <library-path dir="${FLEX_HOME}/frameworks/libs" includes="*.swc" append="true"/>
+                <library-path dir="${FLEX_HOME}/frameworks/libs/air" includes="*.swc" append="true"/>
+                <library-path dir="${lib.dir}" includes="*.swc" append="true"/>
+                <define name="CONFIG::release" value="@{release-flag}"/>
+                <define name="CONFIG::debug" value="@{debug-flag}"/>
+                <define name="CONFIG::AIR" value="@{air-flag}"/>
+                <define name="CONFIG::STANDALONE" value="@{standalone-flag}"/>
+                <swf-version>41</swf-version>
+                <use-network>false</use-network>
+            </mxmlc>
+        </sequential>
+    </macrodef>
+    <!-- Now create the AIR package using the ADT utility -->
+    <macrodef name="createAirApk">
+        <attribute name="platform" />
+        <attribute name="architecture"/>
+        <attribute name="swf-name-postfix"/>
+        <attribute name="special-postfix"/>
+        <sequential>
+            <exec executable="${FLEX_HOME}/bin/adt@{platform}" failonerror="true">
+                <arg line="-package" />
+                <arg line="-target apk-captive-runtime" />
+                <arg line="-arch @{architecture}"/>
+                <arg line="-storetype pkcs12" />
+                <arg line="-keystore '${basedir}'/coc.keystore" />
+                <arg line="-storepass 123456" />
+                <arg line="'${build.dir}'/CoC-Mobile-@{special-postfix}.apk" />
+                <arg line="'${basedir}'/CoC-Android-@{swf-name-postfix}.xml" />
+                <arg line="-C '${build.dir}' CoC-Mobile-@{swf-name-postfix}.swf" />
+                <arg line="-C '${basedir}'" />
+                <arg line="devTools/icons" />
+            </exec>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="airApkRelease">
+        <attribute name="platform"/>
+        <sequential>
+            <createAirApk platform="@{platform}" architecture="armv7" swf-name-postfix="Release" special-postfix="Release-32bit"/>
+            <createAirApk platform="@{platform}" architecture="armv8" swf-name-postfix="Release" special-postfix="Release-64bit"/>
+        </sequential>
+    </macrodef>
+    <macrodef name="airApkDebug">
+        <attribute name="platform"/>
+        <sequential>
+            <createAirApk platform="@{platform}" architecture="armv7" swf-name-postfix="Beta" special-postfix="Beta-32bit"/>
+            <createAirApk platform="@{platform}" architecture="armv8" swf-name-postfix="Beta" special-postfix="Beta-64bit"/>
+        </sequential>
+    </macrodef>
+
+    <target name="ApkRelease" description="Create the AIR package" depends="CoCMobileRelease">
+        <condition property="ADTEXT" value=".bat">
+            <os family="windows"/>
+        </condition>
+
+        <condition property="ADTEXT" value="">
+            <os family="unix"/>
+        </condition>
+        <airApkRelease platform="${ADTEXT}"/>
+    </target>
+
+    <target name="ApkDebug" description="Create the AIR package" depends="CoCMobileBeta">
+        <condition property="ADTEXT" value=".bat">
+            <os family="windows"/>
+        </condition>
+
+        <condition property="ADTEXT" value="">
+            <os family="unix"/>
+        </condition>
+        <airApkDebug platform="${ADTEXT}"/>
+    </target>
+
+    <echo>building standalone swfs</echo>
+    <target name="release" depends="init" description="Build with release flags">
+        <build-game-binary debug-flag="false" release-flag="true" air-flag="false" standalone-flag="true" should-optimize="true" binary-name="CoC-release.swf"/>
+    </target>
+
+    <target name="debug" depends="init" description="Build with debug flags">
+        <build-game-binary debug-flag="true" release-flag="false" air-flag="false" standalone-flag="true" should-optimize="false" binary-name="CoC-debug.swf"/>
+    </target>
+
+    <echo> building mobile/air swfs</echo>
+    <target name="CoCMobileBeta" depends="init" description="Build air">
+        <build-game-binary air-flag="true" standalone-flag="false" debug-flag="true" release-flag="false" should-optimize="true" binary-name="CoC-Mobile-Beta.swf"/>
+    </target>
+
+    <target name="CoCMobileRelease" depends="init" description="Build air">
+        <build-game-binary air-flag="true" standalone-flag="false" debug-flag="false" release-flag="true" should-optimize="true" binary-name="CoC-Mobile-Release.swf"/>
+    </target>
+
+    <target name="all" depends="init,release,debug,CoCMobileBeta,CoCMobileRelease" description="Build all swf versions"/>
+    <target name="makeMobileAir" depends="init,ApkDebug,ApkRelease" description=" build mobile App"/>
+    <target name="allCI" depends="init,release,debug,makeMobileAir" description="Build all swf versions"/>
+</project>

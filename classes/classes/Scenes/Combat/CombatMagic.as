@@ -17,6 +17,7 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.SceneLib;
 import classes.StatusEffectType;
 import classes.StatusEffects;
+import classes.lists.Gender;
 
 public class CombatMagic extends BaseCombatContent {
 	public function CombatMagic() {}
@@ -48,11 +49,9 @@ public class CombatMagic extends BaseCombatContent {
 	}
 
 	internal function cleanupAfterCombatImpl():void {
-		if (player.hasStatusEffect(StatusEffects.CounterRagingInferno)) player.removeStatusEffect(StatusEffects.CounterRagingInferno);
-		if (player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) player.removeStatusEffect(StatusEffects.CounterGlacialStorm);
-		if (player.hasStatusEffect(StatusEffects.CounterHighVoltage)) player.removeStatusEffect(StatusEffects.CounterHighVoltage);
-		if (player.hasStatusEffect(StatusEffects.CounterEclipsingShadow)) player.removeStatusEffect(StatusEffects.CounterEclipsingShadow);
-		if (player.hasStatusEffect(StatusEffects.CounterHighTide)) player.removeStatusEffect(StatusEffects.CounterHighTide);
+		for each (var perkObj:Object in magicCounterPerks) {
+			if (player.hasStatusEffect(perkObj.counter)) player.removeStatusEffect(perkObj.counter);
+		}
 	}
 
 	internal function costChange_all():Number {
@@ -267,7 +266,6 @@ public class CombatMagic extends BaseCombatContent {
 			else mod += Math.round(camp.codex.checkUnlocked() / 100);
 		}
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) mod += .3;
-		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) mod += (player.cor * .01);
 		if (player.hasPerk(PerkLib.InariBlessedKimono)) mod += ((100 - player.cor) * .01);
         return mod;
@@ -302,7 +300,6 @@ public class CombatMagic extends BaseCombatContent {
 				if (player.perkv2(PerkLib.ElementalBody) == 3) mod += .3;
 				if (player.perkv2(PerkLib.ElementalBody) == 4) mod += .4;
 			}
-			if (player.hasPerk(PerkLib.SharedPower) && player.perkv1(PerkLib.SharedPower) > 0) mod += (0.1*player.perkv1(PerkLib.SharedPower));
 		}
         return mod;
     }
@@ -320,11 +317,6 @@ public class CombatMagic extends BaseCombatContent {
 	internal function spellModImpl():Number {
 		var mod:Number = 1 + modChange_all() + modChange_spell_1() + modChange_spell_2();
 		if (player.hasPerk(PerkLib.Obsession)) mod += player.perkv1(PerkLib.Obsession);
-		if (player.hasPerk(PerkLib.KnowledgeIsPower)) {
-			if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) mod += (Math.round(camp.codex.checkUnlocked() / 100) * 3);
-			else mod += Math.round(camp.codex.checkUnlocked() / 100);
-		}
-		if (player.hasPerk(PerkLib.ZenjisInfluence3)) mod += .3;
 		if (player.headJewelry == headjewelries.DMONSKUL) mod += player.cor * .006;
 		if (player.isGargoyle() && Forgefather.material == "alabaster") {
 			if (Forgefather.refinement == 0) mod += (.15);
@@ -407,6 +399,9 @@ public class CombatMagic extends BaseCombatContent {
 		var mod:Number = 1;
 		if (spellModWhiteImpl() > 1) mod += (spellModWhiteImpl() - 1);
 		if (player.hasPerk(PerkLib.OneWiththeForest) && player.perkv2(PerkLib.OneWiththeForest) > 0) mod += (0.05 * player.perkv2(PerkLib.OneWiththeForest));
+		if (player.hasPerk(PerkLib.VegetalAffinity)) mod += 0.5;
+		if (player.hasPerk(PerkLib.GreenMagic)) mod += 1;
+		if (player.hasStatusEffect(StatusEffects.GreenCovenant)) mod += 1;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
@@ -627,204 +622,212 @@ public class CombatMagic extends BaseCombatContent {
 		return perkRelatedDB;
 	}
 
-	internal function calcInfernoModImpl(damage:Number, casting:Boolean = true):int {
-        var modDmg:Number = damage;
+	public static var magicCounterPerks:Object = {
+		"fire": {
+			tier1: PerkLib.RagingInferno,
+			tier2: PerkLib.RagingInfernoEx,
+			tier3: PerkLib.RagingInfernoSu,
+			counter: StatusEffects.CounterRagingInferno,
+			type: "fire"
+		},
+		"earth": {
+			tier1: PerkLib.RumblingQuake,
+			tier2: PerkLib.RumblingQuakeEx,
+			tier3: PerkLib.RumblingQuakeSu,
+			counter: StatusEffects.CounterRumblingQuake,
+			type: "earth"
+		},
+		"wind": {
+			tier1: PerkLib.HowlingGale,
+			tier2: PerkLib.HowlingGaleEx,
+			tier3: PerkLib.HowlingGaleSu,
+			counter: StatusEffects.CounterHowlingGale,
+			type: "wind"
+		},
+		"water": {
+			tier1: PerkLib.HighTide,
+			tier2: PerkLib.HighTideEx,
+			tier3: PerkLib.HighTideSu,
+			counter: StatusEffects.CounterHighTide,
+			type: "water"
+		},
+		"ice": {
+			tier1: PerkLib.GlacialStorm,
+			tier2: PerkLib.GlacialStormEx,
+			tier3: PerkLib.GlacialStormSu,
+			counter: StatusEffects.CounterGlacialStorm,
+			type: "ice"
+		},
+		"lightning": {
+			tier1: PerkLib.HighVoltage,
+			tier2: PerkLib.HighVoltageEx,
+			tier3: PerkLib.HighVoltageSu,
+			counter: StatusEffects.CounterHighVoltage,
+			type: "lightning"
+		},
+		"darkness": {
+			tier1: PerkLib.EclipsingShadow,
+			tier2: PerkLib.EclipsingShadowEx,
+			tier3: PerkLib.EclipsingShadowSu,
+			counter: StatusEffects.CounterEclipsingShadow,
+			type: "darkness"
+		},
+		"acid": {
+			tier1: PerkLib.CorrosiveMeltdown,
+			tier2: PerkLib.CorrosiveMeltdownEx,
+			tier3: PerkLib.CorrosiveMeltdownSu,
+			counter: StatusEffects.CounterCorrosiveMeltdown,
+			type: "acid"
+		}
+	};
+
+	internal function calcMagicCounterModImpl(perkObj:Object, damage:Number, casting:Boolean = true):Number {
+		var modDmg:Number = damage;
         //v1 is counter value in 5% (for later tiers),
-		if (player.hasPerk(PerkLib.RagingInferno)) { //if has perk
+		if (player.hasPerk(perkObj.tier1)) { //if has perk
             if (casting) {
-                if (player.hasStatusEffect(StatusEffects.CounterRagingInferno)) { //counter created
+                if (player.hasStatusEffect(perkObj.counter)) { //counter created
 					var cap:Number = 40;
-					if (player.hasPerk(PerkLib.RagingInfernoEx)) cap += 80;
-					if (player.hasPerk(PerkLib.RagingInfernoSu)) cap += 480;
+					if (player.hasPerk(perkObj.tier2)) cap += 80;
+					if (player.hasPerk(perkObj.tier3)) cap += 480;
                     //calculating damage
-                    if (player.statusEffectv1(StatusEffects.CounterRagingInferno) > 0)
-                        modDmg = Math.round(damage * (1 + player.statusEffectv1(StatusEffects.CounterRagingInferno) * 0.05));
+                    if (player.statusEffectv1(perkObj.counter) > 0)
+                        modDmg = Math.round(damage * (1 + player.statusEffectv1(perkObj.counter) * 0.05));
                     //fancy messages
-                    if (player.statusEffectv1(StatusEffects.CounterRagingInferno) == 0)
-                        outputText("\nUnfortunately, traces of your previously used fire magic are too weak to be used.\n\n");
+                    if (player.statusEffectv1(perkObj.counter) == 0)
+                        outputText("\nUnfortunately, traces of your previously used " + perkObj.type +" magic are too weak to be used.\n\n");
                     else
-					    outputText("\nTraces of your previously used fire magic are still here, and you use them to empower another spell!\n\n");
+					    outputText("\nTraces of your previously used " + perkObj.type + " magic are still here, and you use them to empower another spell!\n\n");
                     //increasing counters
 					var increase:Number = 8;
-					if (player.hasPerk(PerkLib.RagingInfernoEx)) increase += 4;
-					if (player.statusEffectv1(StatusEffects.CounterRagingInferno) < cap) {
-						player.addStatusValue(StatusEffects.CounterRagingInferno, 1, increase);
-						player.addStatusValue(StatusEffects.CounterRagingInferno, 2, 1);
+					if (player.hasPerk(perkObj.tier2)) increase += 4;
+					if (player.statusEffectv1(perkObj.counter) < cap) {
+						player.addStatusValue(perkObj.counter, 1, increase);
+						player.addStatusValue(perkObj.counter, 2, 1);
 					}
                 }
                 else {
-                    if (player.hasPerk(PerkLib.RagingInfernoEx))
-                        player.createStatusEffect(StatusEffects.CounterRagingInferno,12,1,0,0);
+                    if (player.hasPerk(perkObj.tier2))
+                        player.createStatusEffect(perkObj.counter,12,1,0,0);
                     else
-                        player.createStatusEffect(StatusEffects.CounterRagingInferno,8,1,0,0);
+                        player.createStatusEffect(perkObj.counter,8,1,0,0);
                 }
             }
             else //just calc damage
-                if (player.hasStatusEffect(StatusEffects.CounterRagingInferno) && player.statusEffectv1(StatusEffects.CounterRagingInferno) > 0)
-                    modDmg = Math.round(damage * (1 + player.statusEffectv1(StatusEffects.CounterRagingInferno) * 0.05));
+                if (player.hasStatusEffect(perkObj.counter) && player.statusEffectv1(perkObj.counter) > 0)
+                    modDmg = Math.round(damage * (1 + player.statusEffectv1(perkObj.counter) * 0.05));
         }
 		return modDmg;
 	}
 
-    internal function calcGlacialModImpl(damage:Number, casting:Boolean = true):int {
-        var modDmg:Number = damage;
-        //v1 is counter value in 5% (for later tiers),
-		if (player.hasPerk(PerkLib.GlacialStorm)) { //if has perk
-            if (casting) {
-                if (player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) { //counter created
-                    var cap:Number = 40;
-					if (player.hasPerk(PerkLib.GlacialStormEx)) cap += 80;
-					if (player.hasPerk(PerkLib.GlacialStormSu)) cap += 480;
-                    //calculating damage
-                    if (player.statusEffectv1(StatusEffects.CounterGlacialStorm) > 0)
-                        modDmg = Math.round(damage * (1 + player.statusEffectv1(StatusEffects.CounterGlacialStorm) * 0.05));
-                    //fancy messages
-                    if (player.statusEffectv1(StatusEffects.CounterGlacialStorm) == 0)
-                        outputText("\nUnfortunately, traces of your previously used ice magic are too weak to be used.\n\n");
-                    else
-					    outputText("\nTraces of your previously used ice magic are still here, and you use them to empower another spell!\n\n");
-                    //increasing counters
-					var increase:Number = 8;
-					if (player.hasPerk(PerkLib.GlacialStormEx)) increase += 4;
-					if (player.statusEffectv1(StatusEffects.CounterGlacialStorm) < cap) {
-						player.addStatusValue(StatusEffects.CounterGlacialStorm, 1, increase);
-						player.addStatusValue(StatusEffects.CounterGlacialStorm, 2, 1);
-					}
-                }
-                else {
-                    if (player.hasPerk(PerkLib.GlacialStormEx))
-                        player.createStatusEffect(StatusEffects.CounterGlacialStorm,12,1,0,0);
-                    else
-                        player.createStatusEffect(StatusEffects.CounterGlacialStorm,8,1,0,0);
-                }
-            }
-            else //just calc damage
-                if (player.hasStatusEffect(StatusEffects.CounterGlacialStorm) && player.statusEffectv1(StatusEffects.CounterGlacialStorm) > 0)
-                    modDmg = Math.round(damage * (1 + player.statusEffectv1(StatusEffects.CounterGlacialStorm) * 0.05));
-        }
-		return modDmg;
+	internal function maintainMagicCounter(perkObj:Object):void {
+		if (player.hasStatusEffect(perkObj.counter)) {
+			if (player.hasPerk(perkObj.tier3)) player.addStatusValue(perkObj.counter, 1, 2);
+			else if (player.hasPerk(perkObj.tier3)) player.addStatusValue(perkObj.counter, 1, 3);
+			player.addStatusValue(perkObj.counter, 1, 4);
+		}	
 	}
 
-    internal function calcVoltageModImpl(damage:Number, casting:Boolean = true):int {
-        var modDmg:Number = damage;
-        //v1 is counter value in 5% (for later tiers),
-		if (player.hasPerk(PerkLib.HighVoltage)) { //if has perk
-            if (casting) {
-                if (player.hasStatusEffect(StatusEffects.CounterHighVoltage)) { //counter created
-                    var cap:Number = 40;
-					if (player.hasPerk(PerkLib.HighVoltageEx)) cap += 80;
-					if (player.hasPerk(PerkLib.HighVoltageSu)) cap += 480;
-                    //calculating damage
-                    if (player.statusEffectv1(StatusEffects.CounterHighVoltage) > 0)
-                        modDmg = Math.round(damage * (1 + player.statusEffectv1(StatusEffects.CounterHighVoltage) * 0.05));
-                    if (player.statusEffectv1(StatusEffects.CounterHighVoltage) == 0)
-                    //fancy messages
-                        outputText("\nUnfortunately, traces of your previously used lightning magic are too weak to be used.\n\n");
-                    else
-					    outputText("\nTraces of your previously used lightning magic are still here, and you use them to empower another spell!\n\n");
-                    //increasing counters
-					var increase:Number = 8;
-					if (player.hasPerk(PerkLib.HighVoltageEx)) increase += 4;
-					if (player.statusEffectv1(StatusEffects.CounterHighVoltage) < cap) {
-						if (player.hasPerk(PerkLib.HighVoltageEx))
-						player.addStatusValue(StatusEffects.CounterHighVoltage, 1, increase);
-						player.addStatusValue(StatusEffects.CounterHighVoltage, 2, 1);
-					}
-                }
-                else {
-                    if (player.hasPerk(PerkLib.HighVoltageEx))
-                        player.createStatusEffect(StatusEffects.CounterHighVoltage,12,1,0,0);
-                    else
-                        player.createStatusEffect(StatusEffects.CounterHighVoltage,4,1,0,0);
-                }
-            }
-            else //just calc damage
-                if (player.hasStatusEffect(StatusEffects.CounterHighVoltage) && player.statusEffectv1(StatusEffects.CounterHighVoltage) > 0)
-                    modDmg = Math.round(damage * (1 + player.statusEffectv1(StatusEffects.CounterHighVoltage) * 0.05));
-        }
-		return modDmg;
+	internal function calcInfernoModImpl(damage:Number, casting:Boolean = true):Number {
+        return calcMagicCounterModImpl(magicCounterPerks["fire"], damage, casting);
 	}
 
-    internal function calcEclypseModImpl(damage:Number, casting:Boolean = true):int {
-        var modDmg:Number = damage;
-        //v1 is counter value in 5% (for later tiers),
-		if (player.hasPerk(PerkLib.EclipsingShadow)) { //if has perk
-            if (casting) {
-                if (player.hasStatusEffect(StatusEffects.CounterEclipsingShadow)) { //counter created
-                    var cap:Number = 40;
-					if (player.hasPerk(PerkLib.EclipsingShadowEx)) cap += 80;
-					if (player.hasPerk(PerkLib.EclipsingShadowSu)) cap += 480;
-                    //calculating damage
-                    if (player.statusEffectv1(StatusEffects.CounterEclipsingShadow) > 0)
-                        modDmg = Math.round(damage * (1 + player.statusEffectv1(StatusEffects.CounterEclipsingShadow) * 0.05));
-                    //fancy messages
-                    if (player.statusEffectv1(StatusEffects.CounterEclipsingShadow) == 0)
-                        outputText("\nUnfortunately, traces of your previously used darkness magic are too weak to be used.\n\n");
-                    else
-					    outputText("\nTraces of your previously used darkness magic are still here, and you use them to empower another spell!\n\n");
-                    //increasing counters
-					var increase:Number = 8;
-					if (player.hasPerk(PerkLib.EclipsingShadowEx)) increase += 4;
-					if (player.statusEffectv1(StatusEffects.CounterEclipsingShadow) < cap) {
-						player.addStatusValue(StatusEffects.CounterEclipsingShadow, 1, increase);
-						player.addStatusValue(StatusEffects.CounterEclipsingShadow, 2, 1);
-					}
-                }
-                else {
-                    if (player.hasPerk(PerkLib.EclipsingShadowEx))
-                        player.createStatusEffect(StatusEffects.CounterEclipsingShadow,12,1,0,0);
-                    else
-                        player.createStatusEffect(StatusEffects.CounterEclipsingShadow,8,1,0,0);
-                }
-            }
-            else //just calc damage
-                if (player.hasStatusEffect(StatusEffects.CounterEclipsingShadow) && player.statusEffectv1(StatusEffects.CounterEclipsingShadow) > 0)
-                    modDmg = Math.round(damage * (1 + player.statusEffectv1(StatusEffects.CounterEclipsingShadow) * 0.05));
-        }
-		return modDmg;
+    internal function calcGlacialModImpl(damage:Number, casting:Boolean = true):Number {
+        return calcMagicCounterModImpl(magicCounterPerks["ice"], damage, casting);
+	}
+
+    internal function calcVoltageModImpl(damage:Number, casting:Boolean = true):Number {
+        return calcMagicCounterModImpl(magicCounterPerks["lightning"], damage, casting);
+	}
+
+    internal function calcEclypseModImpl(damage:Number, casting:Boolean = true):Number {
+        return calcMagicCounterModImpl(magicCounterPerks["darkness"], damage, casting);
+    }
+
+    internal function calcTideModImpl(damage:Number, casting:Boolean = true):Number {
+        return calcMagicCounterModImpl(magicCounterPerks["water"], damage, casting);
+    }
+
+	internal function calcQuakeModImpl(damage:Number, casting:Boolean = true):Number {
+        return calcMagicCounterModImpl(magicCounterPerks["earth"], damage, casting);
+    }
+
+	internal function calcGaleModImpl(damage:Number, casting:Boolean = true):Number {
+        return calcMagicCounterModImpl(magicCounterPerks["wind"], damage, casting);
+    }
+
+	internal function calcCorrosionModImpl(damage:Number, casting:Boolean = true):Number {
+        return calcMagicCounterModImpl(magicCounterPerks["acid"], damage, casting);
+    }
+
+	internal function maintainInfernoModImpl():void {
+        maintainMagicCounter(magicCounterPerks["fire"]);
+	}
+
+    internal function maintainGlacialModImpl():void {
+        maintainMagicCounter(magicCounterPerks["ice"]);
+	}
+
+    internal function maintainVoltageModImpl():void {
+        maintainMagicCounter(magicCounterPerks["lightning"]);
+	}
+
+    internal function maintainEclypseModImpl():void {
+        maintainMagicCounter(magicCounterPerks["darkness"]);
+    }
+
+    internal function maintainTideModImpl():void {
+        maintainMagicCounter(magicCounterPerks["water"]);
+    }
+
+	internal function maintainQuakeModImpl():void {
+        maintainMagicCounter(magicCounterPerks["earth"]);
+    }
+
+	internal function maintainGaleModImpl():void {
+        maintainMagicCounter(magicCounterPerks["wind"]);
+    }
+
+	internal function maintainCorrosionModImpl():void {
+        maintainMagicCounter(magicCounterPerks["acid"]);
     }
 	
-	public function MagicPrefixEffect():void {
+	public function MagicPrefixEffect(display:Boolean = true):void {
 		//if (player.hasPerk(PerkLib.Spellsong) && player.hasStatusEffect(StatusEffects.Sing)) {
 		//	outputText(" You weave your song into magic to unleash a spell.\n\n");
 		//}
-		if (player.armorName == "Drider-Weave Sheer Robe") {
-			outputText("As your mana flows through your body, culminating in your hands, your sheer robe glows, giving [themonster] a good, long look at you.\n\n");
-			if (player.gender == 2 || (player.gender == 3 && rand(2) == 0)) {
-				outputText("You lean forward, moving your [breasts] from side to side. As your mana focuses, you roll your shoulders back and your hips forward, giving the [themonster] a little moan, biting your lip, your arms behind your back. Their gaze drops to your snatch, but as they gaze at your delta, you finish your spell, robes turning back to normal. ");
-			}
-			else {
-				outputText("You spread your hands, letting mana flow through you. Your robe all but vanishes, and you thrust your hips forward, [cock] hardening slightly, your bulge standing up straight and tenting the sheer silk. Giving your enemy a cocky grin, you lick your lips, giving them a few thrusts of your hips. ");
-				outputText("[Themonster], stunned by the sudden change in your bearing and…manhood, gives you more than enough time to finish your spell. ");
-			}
-			if (player.perkv1(PerkLib.ImpNobility) > 0) {
-				outputText("  Your imp cohorts assist you spellcasting adding their diagrams to your own.");
+		if (player.armor == armors.DWSROBE) {
+			if (display) {
+				outputText("As your mana flows through your body, culminating in your hands, your sheer robe glows, giving [themonster] a good, long look at you.\n\n");
+				if (player.gender == Gender.GENDER_FEMALE || (player.gender == Gender.GENDER_HERM && rand(2) == 0)) {
+					outputText("You lean forward, moving your [breasts] from side to side. As your mana focuses, you roll your shoulders back and your hips forward, giving the [themonster] a little moan, biting your lip, your arms behind your back. Their gaze drops to your snatch, but as they gaze at your delta, you finish your spell, robes turning back to normal. ");
+				}
+				else {
+					outputText("You spread your hands, letting mana flow through you. Your robe all but vanishes, and you thrust your hips forward, [cock] hardening slightly, your bulge standing up straight and tenting the sheer silk. Giving your enemy a cocky grin, you lick your lips, giving them a few thrusts of your hips. ");
+					outputText("[Themonster], stunned by the sudden change in your bearing and…manhood, gives you more than enough time to finish your spell. ");
+				}
+				if (player.perkv1(PerkLib.ImpNobility) > 0) {
+					outputText("  Your imp cohorts assist you spellcasting adding their diagrams to your own.");
+				}
 			}
 			var damage:Number = 0;
 			var damagemultiplier:Number = 1;
 			damage += combat.teases.teaseBaseLustDamage();
-			if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();
-			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
-			if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
 			if (player.hasPerk(PerkLib.UnbreakableBind)) damagemultiplier += 1;
 			if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (2 - player.statusEffectv1(StatusEffects.ControlFreak));
-			if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
 			damage *= damagemultiplier;
+			if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
+			
 			//Determine if critical tease!
 			var crit:Boolean = false;
 			var critChance:int = 5;
-			if (player.hasPerk(PerkLib.CriticalPerformance)) {
-				if (player.lib <= 100) critChance += player.lib / 5;
-				if (player.lib > 100) critChance += 20;
-			}
+			critChance += combat.teases.combatTeaseCritical();
 			if (rand(100) < critChance) {
 				crit = true;
 				damage *= 1.75;
 			}
 			if (monster.hasStatusEffect(StatusEffects.HypnosisNaga)) damage *= 0.5;
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-			if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
-        	if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
 			if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
 				outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
 				player.takeLustDamage(Math.round(-damage)/40, true);
@@ -940,30 +943,8 @@ public class CombatMagic extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		if (player.hasPerk(PerkLib.ElementalBolt)) {
-			if (player.hasStatusEffect(StatusEffects.CounterEclipsingShadow)) {
-				if (player.hasPerk(PerkLib.EclipsingShadowSu)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 1, 2);
-				else if (player.hasPerk(PerkLib.EclipsingShadowEx)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 1, 3);
-				player.addStatusValue(StatusEffects.CounterEclipsingShadow, 1, 4);
-			}
-			if (player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) {
-				if (player.hasPerk(PerkLib.GlacialStormSu)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 1, 2);
-				else if (player.hasPerk(PerkLib.GlacialStormEx)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 1, 3);
-				player.addStatusValue(StatusEffects.CounterGlacialStorm, 1, 4);
-			}
-			if (player.hasStatusEffect(StatusEffects.CounterHighVoltage)) {
-				if (player.hasPerk(PerkLib.HighVoltageSu)) player.addStatusValue(StatusEffects.CounterHighVoltage, 1, 2);
-				else if (player.hasPerk(PerkLib.HighVoltageEx)) player.addStatusValue(StatusEffects.CounterHighVoltage, 1, 3);
-				player.addStatusValue(StatusEffects.CounterHighVoltage, 1, 4);
-			}
-			if (player.hasStatusEffect(StatusEffects.CounterRagingInferno)) {
-				if (player.hasPerk(PerkLib.RagingInfernoSu)) player.addStatusValue(StatusEffects.CounterRagingInferno, 1, 2);
-				else if (player.hasPerk(PerkLib.RagingInfernoEx)) player.addStatusValue(StatusEffects.CounterRagingInferno, 1, 3);
-				player.addStatusValue(StatusEffects.CounterRagingInferno, 1, 4);
-			}
-			if (player.hasStatusEffect(StatusEffects.CounterHighTide)) {
-				if (player.hasPerk(PerkLib.HighTideSu)) player.addStatusValue(StatusEffects.CounterHighTide, 1, 2);
-				else if (player.hasPerk(PerkLib.HighTideEx)) player.addStatusValue(StatusEffects.CounterHighTide, 1, 3);
-				player.addStatusValue(StatusEffects.CounterHighTide, 1, 4);
+			for each (var perkObj:Object in magicCounterPerks) {
+				maintainMagicCounter(perkObj);
 			}
 		}
 		if(monster.HP <= monster.minHP()) doNext(endHpVictory);

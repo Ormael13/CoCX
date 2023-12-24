@@ -2,6 +2,7 @@ package classes.Races {
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
 import classes.Race;
+import classes.VaginaClass;
 
 public class DeerRace extends Race{
     public static const RaceBody:/*String*/Array = [
@@ -41,19 +42,41 @@ public class DeerRace extends Race{
 				.earType(Ears.DEER, +1)
 				.tailType(Tail.DEER, +1)
 				.faceType(Face.DEER, +1)
-				.legType(ANY(LowerBody.CLOVEN_HOOFED, LowerBody.DEERTAUR), +1)
-				.hornTypeAndCount(Horns.ANTLERS, AT_LEAST(4), +1);
-		addScoresAfter(2)
-				.skinCoatType(Skin.FUR, +1);
-		addScoresAfter(3)
-				.hasCockOfType(CockTypesEnum.HORSE, +1);
+				.armType(Arms.DEER, +1)
+				.armType(Arms.REINDEER, +2)
+				.armType(NOT(Arms.WENDIGO), 0, -5)
+				.legType(LowerBody.CLOVEN_HOOFED, +1)
+				.legType(LowerBody.CLOVEN_HOOFED_2, +2)
+				.legType(NOT(LowerBody.WENDIGO), 0, -5)
+				.hornTypeAndCount(Horns.ANTLERS, AT_LEAST(4), +1)
+				.hornTypeAndCount(Horns.ANTLERS, AT_LEAST(14), +1)
+				.hornTypeAndCount(Horns.ANTLERS, AT_LEAST(24), +1)
+				.hornTypeAndCount(Horns.ANTLERS, AT_LEAST(34), +1)
+				.skinCoatType(Skin.FUR, +1)
+				.cockOrVaginaOfType(CockTypesEnum.HORSE, VaginaClass.EQUINE, +1);
 		
-		buildTier(4, "deer")
+		buildTier(8, "deer")
 				.namesMaleFemaleMorphTaur("deer-morph", "deer-girl", "deer-morph", "deer-taur")
 				.buffs({
-					"spe.mult": +0.20
+					"str.mult": +0.25,
+					"tou.mult": +0.25,
+					"spe.mult": +0.50,
+					"int.mult": -0.20,
+					"wis.mult": +0.40
 				})
-				.end()
+				.end();/*
+		
+		buildTier(12, "reindeer")
+				.namesMaleFemaleMorphTaur("reindeer-morph", "reindeer-girl", "reindeer-morph", "reindeer-taur")
+				.buffs({
+					"str.mult": +0.25,
+					"tou.mult": +0.25,
+					"spe.mult": +0.50,
+					"int.mult": -0.20,
+					"wis.mult": +0.40
+					//"sens": +85
+				})
+				.end();*/
 	}
 }
 }

@@ -2,7 +2,12 @@ package classes {
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.*;
 import classes.IMutations.IMutationsLib;
+import classes.Scenes.Camp.CampStatsAndResources;
 import classes.Scenes.Combat.CombatAbility;
+import classes.Scenes.Combat.AbstractGeneral;
+import classes.Scenes.Combat.AbstractSpell;
+import classes.Scenes.Combat.AbstractSoulSkill;
+import classes.Scenes.Combat.AbstractSpecial;
 import classes.Scenes.Crafting;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.CharybdisFollower;
@@ -37,7 +42,7 @@ public class PlayerInfo extends BaseContent {
 	private function statsMenu(currentButton:int):void {
 		menu();
 		addButton(0, "Next", playerMenu);
-		if (player.knownAbilities().length > 0) {
+		if (player.hasknownAbilities()) {
 			addButton(4, "Abilities", displayStatsAbilities);
 		}
 		addButton(5, "General", displayStats);
@@ -47,6 +52,22 @@ public class PlayerInfo extends BaseContent {
 		addButton(9, "Mastery", displayStatsmastery);
 		if (currentButton >= 4 && currentButton <= 9) {
 			button(currentButton).disable("You are currently at this stats page.");
+		}
+		if (currentButton == 4 || (currentButton >= 10 && currentButton <= 14)) {
+			button(4).disable("You are currently at this stats page.");
+			if (currentButton == 4) {
+				//Should show all abilities by default
+				currentButton = 10;
+			}
+			addButton(10, "All", displayStatsAbilities);
+			addButtonIfTrue(11, "General", curry(displayStatsAbilities, AbstractGeneral, 11), "You currently have no general abilities", player.hasknownAbilitiesOfClass(AbstractGeneral));
+			addButtonIfTrue(12, "Spells", curry(displayStatsAbilities, AbstractSpell, 12), "You currently have no spells", player.hasknownAbilitiesOfClass(AbstractSpell));
+			addButtonIfTrue(13, "SoulSkills", curry(displayStatsAbilities, AbstractSoulSkill, 13), "You currently have no soulskills", player.hasknownAbilitiesOfClass(AbstractSoulSkill));
+			addButtonIfTrue(14, "Specials", curry(displayStatsAbilities, AbstractSpecial, 14), "You currently have no specials", player.hasknownAbilitiesOfClass(AbstractSpecial));
+
+			if (currentButton != 4){
+				button(currentButton).disable("You are currently viewing this category.");
+			}
 		}
 	}
 	//------------
@@ -121,13 +142,17 @@ public class PlayerInfo extends BaseContent {
 		if (player.hasPerk(PerkLib.SpiderOvipositor) || player.hasPerk(PerkLib.BeeOvipositor) || player.hasPerk(PerkLib.AntOvipositor) || player.hasPerk(PerkLib.MantisOvipositor))
 			bodyStats += "<b>Ovipositor Total Egg Count: " + player.eggs() + "\nOvipositor Fertilized Egg Count: " + player.fertilizedEggs() + "</b>\n";
 		if (player.hasStatusEffect(StatusEffects.SlimeCraving)) {
+			var delay:Number = 1;
+			if (player.hasPerk(PerkLib.Metabolization)) delay += 1;
+			if (player.hasPerk(PerkLib.ImprovedMetabolization)) delay += 1;
+			if (player.hasPerk(PerkLib.GreaterMetabolization)) delay += 1;
 			if (player.statusEffectv1(StatusEffects.SlimeCraving) >= 18)
 				bodyStats += "<b>Slime Craving:</b> Active! You are currently losing strength and speed.  You should find fluids.\n";
 			else {
 				if (player.isSlime())
-					bodyStats += "<b>Slime Stored:</b> " + ((17 - player.statusEffectv1(StatusEffects.SlimeCraving)) * 2) + " hours until you start losing strength.\n";
+					bodyStats += "<b>Slime Stored:</b> " + ((17 - player.statusEffectv1(StatusEffects.SlimeCraving)) * delay * 2) + " hours until you start losing strength.\n";
 				else
-					bodyStats += "<b>Slime Stored:</b> " + (17 - player.statusEffectv1(StatusEffects.SlimeCraving)) + " hours until you start losing strength.\n";
+					bodyStats += "<b>Slime Stored:</b> " + ((17 - player.statusEffectv1(StatusEffects.SlimeCraving)) * delay) + " hours until you start losing strength.\n";
 			}
 		}
 		if (bodyStats != "")
@@ -152,18 +177,19 @@ public class PlayerInfo extends BaseContent {
 		}
 
 		if (player.hasKeyItem("Radiant shard") >= 0) miscStats += "<b>Radiant Shards:</b> " + player.keyItemvX("Radiant shard", 1) + "\n";
+		if (player.hasStatusEffect(StatusEffects.BlessedItemAtTheLake)) miscStats += "<b>Collected Beautiful Items:</b> " + player.statusEffectv1(StatusEffects.BlessedItemAtTheLake) + "\n";
 
 		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) {
 			miscStats += "<b>Fishery daily production:</b> " + camp.FisheryDailyProduction() + "\n";
 			miscStats += "<b>Fishery workers (current/max):</b> " + camp.FisheryWorkersCount() + "/" + camp.FisheryMaxWorkersCount() + "\n";
 		}
 
-		miscStats += "<b>Nails:</b> " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapNails() + "\n";
-		miscStats += "<b>Wood:</b> " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapWood() + "\n";
-		miscStats += "<b>Stone:</b> " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapStones() + "\n";
-		miscStats += "<b>Metal Pieces:</b> " + flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] + "/200" + "\n";
-		miscStats += "<b>Mechanisms:</b> " + flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] + "/200" + "\n";
-		miscStats += "<b>Energy Cores:</b> " + flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] + "/200" + "\n";
+		miscStats += "<b>Nails:</b> " + CampStatsAndResources.NailsResc + "/" + SceneLib.campUpgrades.checkMaterialsCapNails() + "\n";
+		miscStats += "<b>Wood:</b> " + CampStatsAndResources.WoodResc + "/" + SceneLib.campUpgrades.checkMaterialsCapWood() + "\n";
+		miscStats += "<b>Stone:</b> " + CampStatsAndResources.StonesResc + "/" + SceneLib.campUpgrades.checkMaterialsCapStones() + "\n";
+		miscStats += "<b>Metal Pieces:</b> " + CampStatsAndResources.MetalPieces + "/200" + "\n";
+		miscStats += "<b>Mechanisms:</b> " + CampStatsAndResources.MechanismResc + "/200" + "\n";
+		miscStats += "<b>Energy Cores:</b> " + CampStatsAndResources.EnergyCoreResc + "/200" + "\n";
 		miscStats += "<b>Granite:</b> " + Forgefather.granite + "/" + Forgefather.matCap + "\n";
 		miscStats += "<b>Ebony:</b> " + Forgefather.ebony + "/" + Forgefather.matCap + "\n";
 		miscStats += "<b>Alabaster:</b> " + Forgefather.alabaster + "/" + Forgefather.matCap + "\n";
@@ -399,15 +425,20 @@ public class PlayerInfo extends BaseContent {
 			addButton(1, "Stat Up", attributeMenu);
 		}
 		}
-	public function displayStatsAbilities():void {
+	public function displayStatsAbilities(kLass:Class = null, currentButton:int = 4):void {
 		clearOutput();
-		for each (var ability:CombatAbility in player.knownAbilities()) {
+		var abilities:/*CombatAbility*/Array = [];
+		if (!kLass)
+			abilities = player.knownAbilities();
+		else
+			abilities = player.knownAbilitiesOfClass(kLass);
+		for each (var ability:CombatAbility in abilities) {
 			outputText("<font size=\"24\" face=\"Georgia\"><u><b>"+ability.name+"</b></u></font>");
 			outputText(" "+ability.catObject.name+"\n");
 			outputText(ability.fullDescription(null));
 			outputText("\n\n");
 		}
-		statsMenu(4);
+		statsMenu(currentButton);
 	}
 	public function displayStatsCombat():void {
 		spriteSelect(null);
@@ -465,44 +496,65 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "\n";
 		combatStats += "<b>Melee Physical Attacks Multiplier:</b> " + Math.round(100 * combat.meleePhysicalForce()) + "%\n";
 		combatStats += "<b>Accuracy (1st melee attack):</b> " + (mAcc / 2) + "%\n";
-		if (player.hasPerk(PerkLib.WeaponSmallDoubleAttack) || player.hasPerk(PerkLib.WeaponNormalDoubleAttack) || player.hasPerk(PerkLib.WeaponLargeDoubleAttack)) combatStats += "<b>Accuracy (2nd melee attack):</b> " + ((mAcc / 2) - mAccPen) + "%\n";
-		if (player.hasPerk(PerkLib.WeaponSmallTripleAttack) || player.hasPerk(PerkLib.WeaponNormalTripleAttack) || player.hasPerk(PerkLib.WeaponLargeTripleAttack)) combatStats += "<b>Accuracy (3rd melee attack):</b> " + ((mAcc / 2) - (mAccPen * 2)) + "%\n";
-		if (player.hasPerk(PerkLib.WeaponSmallQuadrupleAttack) || player.hasPerk(PerkLib.WeaponNormalQuadrupleAttack)) combatStats += "<b>Accuracy (4th melee attack):</b> " + ((mAcc / 2) - (mAccPen * 3)) + "%\n";
-		if (player.hasPerk(PerkLib.WeaponSmallPentaAttack) || player.hasPerk(PerkLib.WeaponNormalPentaAttack)) combatStats += "<b>Accuracy (5th melee attack):</b> " + ((mAcc / 2) - (mAccPen * 4)) + "%\n";
-		if (player.hasPerk(PerkLib.WeaponSmallHexaAttack) || player.hasPerk(PerkLib.WeaponNormalHexaAttack)) combatStats += "<b>Accuracy (6th melee attack):</b> " + ((mAcc / 2) - (mAccPen * 5)) + "%\n";
-		if (player.hasPerk(PerkLib.WeaponSmallHectaAttack)) combatStats += "<b>Accuracy (7th melee attack):</b> " + ((mAcc / 2) - (mAccPen * 6)) + "%\n";
-		if (player.hasPerk(PerkLib.WeaponSmallOctaAttack)) combatStats += "<b>Accuracy (8th melee attack):</b> " + ((mAcc / 2) - (mAccPen * 7)) + "%\n";
-		if (player.hasPerk(PerkLib.WeaponSmallNonaAttack)) combatStats += "<b>Accuracy (9th melee attack):</b> " + ((mAcc / 2) - (mAccPen * 8)) + "%\n";
-		if (player.hasPerk(PerkLib.WeaponSmallDecaAttack)) combatStats += "<b>Accuracy (10th melee attack):</b> " + ((mAcc / 2) - (mAccPen * 9)) + "%\n";
+		var maxMeleeAttacks:int = player.calculateMultiAttacks();
+		if (maxMeleeAttacks >= 2) combatStats += "<b>Accuracy (2nd melee attack):</b> " + ((mAcc / 2) - mAccPen) + "%\n";
+		if (maxMeleeAttacks >= 3) combatStats += "<b>Accuracy (3rd melee attack):</b> " + ((mAcc / 2) - (mAccPen * 2)) + "%\n";
+		if (maxMeleeAttacks >= 4) combatStats += "<b>Accuracy (4th melee attack):</b> " + ((mAcc / 2) - (mAccPen * 3)) + "%\n";
+		if (maxMeleeAttacks >= 5) combatStats += "<b>Accuracy (5th melee attack):</b> " + ((mAcc / 2) - (mAccPen * 4)) + "%\n";
+		if (maxMeleeAttacks >= 6) combatStats += "<b>Accuracy (6th melee attack):</b> " + ((mAcc / 2) - (mAccPen * 5)) + "%\n";
+		if (maxMeleeAttacks >= 7) combatStats += "<b>Accuracy (7th melee attack):</b> " + ((mAcc / 2) - (mAccPen * 6)) + "%\n";
+		if (maxMeleeAttacks >= 8) combatStats += "<b>Accuracy (8th melee attack):</b> " + ((mAcc / 2) - (mAccPen * 7)) + "%\n";
+		if (maxMeleeAttacks >= 9) combatStats += "<b>Accuracy (9th melee attack):</b> " + ((mAcc / 2) - (mAccPen * 8)) + "%\n";
+		if (maxMeleeAttacks >= 10) combatStats += "<b>Accuracy (10th melee attack):</b> " + ((mAcc / 2) - (mAccPen * 9)) + "%\n";
 		combatStats += "<i>(All accuracy values above includes bonus to accuracy from Mastery for currently equipped type of melee weapon)\n(They not include penalty for using dual weapons that is "+combat.meleeDualWieldAccuracyPenalty()+"% (addictive) to each attack)</i>\n";
 		combatStats += "\n";
 		combatStats += "<b>Range Physical Attacks Multiplier:</b> " + Math.round(100 * combat.rangePhysicalForce()) + "%\n";
 		combatStats += "<b>Firearms Attacks Multiplier:</b> " + Math.round(100 * combat.firearmsForce()) + "%\n";
 		if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
-			if (player.statusEffectv1(StatusEffects.Kindra) < 1)
-				combatStats += "<b>Bow Skill:</b> " + Math.round(player.statusEffectv1(StatusEffects.Kelt)) + " / 100\n";
-			if (player.statusEffectv1(StatusEffects.Kindra) > 0)
-				combatStats += "<b>Bow Skill:</b> " + (Math.round(player.statusEffectv1(StatusEffects.Kelt)) + Math.round(player.statusEffectv1(StatusEffects.Kindra))) + " / 250\n";
+			var currentBowSkill:Number = Math.round(player.statusEffectv1(StatusEffects.Kelt));
+			var maxBowSkillCap:Number = 100;
+			var bowSkillGrade:String = "Basic";
+			if (player.statusEffectv1(StatusEffects.Kindra) > 0) {
+				currentBowSkill += Math.round(player.statusEffectv1(StatusEffects.Kindra))
+				maxBowSkillCap += 75;
+				bowSkillGrade = "Low-Advanced";
+				if (player.statusEffectv1(StatusEffects.Kindra) > 75) {
+					maxBowSkillCap += 75;
+					bowSkillGrade = "Advanced";
+				}
+			}
+			combatStats += "<b>Bow Skill:</b> " + currentBowSkill + " / " + maxBowSkillCap + " (" + bowSkillGrade + ")\n";
 		}
 		else combatStats += "<b>Bow Skill:</b> 0 / 100\n";
 		combatStats += "<b>Telekinesis Throw Cost (Fatigue): </b> " + combat.oneThrowTotalCost() + "\n";
 		combatStats += "<b>One Bullet Reload Cost (Fatigue): </b> " + combat.oneBulletReloadCost() + "\n";
-		combatStats += "<b>Bow/Crossbow Accuracy (1st range attack):</b> " + (bAcc / 2) + "%\n";
-		if (player.hasPerk(PerkLib.WeaponRangeDoubleStrike)) combatStats += "<b>Bow/Crossbow Accuracy (2nd range attack):</b> " + ((bAcc / 2) - bAccPen) + "%\n";
-		if (player.hasPerk(PerkLib.WeaponRangeTripleStrike)) combatStats += "<b>Bow/Crossbow Accuracy (3rd range attack):</b> " + ((bAcc / 2) - (bAccPen * 2)) + "%\n";
-		if (player.hasPerk(PerkLib.Manyshot)) combatStats += "<b>Bow/Crossbow Accuracy (4th range attack):</b> " + ((bAcc / 2) - (bAccPen * 3)) + "%\n";
-		if (player.hasPerk(PerkLib.WildQuiver)) combatStats += "<b>Bow/Crossbow Accuracy (5th range attack):</b> " + ((bAcc / 2) - (bAccPen * 4)) + "%\n";
-		if (player.hasPerk(PerkLib.Multishot)) combatStats += "<b>Bow/Crossbow Accuracy (6th range attack):</b> " + ((bAcc / 2) - (bAccPen * 5)) + "%\n";
+		
+		combatStats += "<b>Bow Accuracy (1st range attack):</b> " + (bAcc / 2) + "%\n";
+		var maxBowAttacks:int = combat.maxBowAttacks();
+		if (maxBowAttacks >= 2) combatStats += "<b>Bow Accuracy (2nd range attack):</b> " + ((bAcc / 2) - bAccPen) + "%\n";
+		if (maxBowAttacks >= 3) combatStats += "<b>Bow Accuracy (3rd range attack):</b> " + ((bAcc / 2) - (bAccPen * 2)) + "%\n";
+		if (maxBowAttacks >= 4) combatStats += "<b>Bow Accuracy (4th range attack):</b> " + ((bAcc / 2) - (bAccPen * 3)) + "%\n";
+		if (maxBowAttacks >= 5) combatStats += "<b>Bow Accuracy (5th range attack):</b> " + ((bAcc / 2) - (bAccPen * 4)) + "%\n";
+		if (maxBowAttacks >= 6) combatStats += "<b>Bow Accuracy (6th range attack):</b> " + ((bAcc / 2) - (bAccPen * 5)) + "%\n";
+
+		combatStats += "<b>Crossbow Accuracy (1st range attack):</b> " + (bAcc / 2) + "%\n";
+		var maxCrossBowAttacks:int = combat.maxCrossbowAttacks();
+		if (maxCrossBowAttacks >= 2) combatStats += "<b>Crossbow Accuracy (2nd range attack):</b> " + ((bAcc / 2) - bAccPen) + "%\n";
+		if (maxCrossBowAttacks >= 3) combatStats += "<b>Crossbow Accuracy (3rd range attack):</b> " + ((bAcc / 2) - (bAccPen * 2)) + "%\n";
 		combatStats += "<i>(All accuracy values above includes bonus to accuracy from Archery Mastery)</i>\n";
 		combatStats += "<b>Throwed Weapon Accuracy (1st range attack):</b> " + (combat.throwingAccuracy() / 2) + "%\n";
-		if (player.hasPerk(PerkLib.WeaponRangeDoubleStrike)) combatStats += "<b>Throwed Weapon Accuracy (2nd range attack):</b> " + ((combat.throwingAccuracy() / 2) - 15) + "%\n";
-		if (player.hasPerk(PerkLib.WeaponRangeTripleStrike)) combatStats += "<b>Throwed Weapon Accuracy (3rd range attack):</b> " + ((combat.throwingAccuracy() / 2) - 30) + "%\n";
+		
+		var maxThrowAttacks:int = combat.maxThrowingAttacks();
+		if (maxThrowAttacks >= 2) combatStats += "<b>Throwed Weapon Accuracy (2nd range attack):</b> " + ((combat.throwingAccuracy() / 2) - 15) + "%\n";
+		if (maxThrowAttacks >= 3) combatStats += "<b>Throwed Weapon Accuracy (3rd range attack):</b> " + ((combat.throwingAccuracy() / 2) - 30) + "%\n";
 		combatStats += "<i>(All accuracy values above includes bonus to accuracy from Throwing Weapons Mastery)</i>\n";
 		combatStats += "<b>Firearms Accuracy (1st range attack):</b> " + (fAcc / 2) + "%\n";
-		if (player.hasPerk(PerkLib.AmateurGunslinger)) combatStats += "<b>Firearms Accuracy (2nd range attack):</b> " + ((fAcc / 2) - fAccPen) + "%\n";
-		if (player.hasPerk(PerkLib.ExpertGunslinger)) combatStats += "<b>Firearms Accuracy (3rd range attack):</b> " + ((fAcc / 2) - (fAccPen * 2)) + "%\n";
-		if (player.hasPerk(PerkLib.MasterGunslinger) || (player.hasPerk(PerkLib.ExpertGunslinger) && player.hasPerk(PerkLib.LockAndLoad))) combatStats += "<b>Firearms Accuracy (4th range attack):</b> " + ((fAcc / 2) - (fAccPen * 3)) + "%\n";
-		if (player.hasPerk(PerkLib.MasterGunslinger) && player.hasPerk(PerkLib.LockAndLoad)) {
+		
+		var maxFirearmAttacks:int = combat.maxFirearmsAttacks();
+		if (maxFirearmAttacks >= 2) combatStats += "<b>Firearms Accuracy (2nd range attack):</b> " + ((fAcc / 2) - fAccPen) + "%\n";
+		if (maxFirearmAttacks >= 3) combatStats += "<b>Firearms Accuracy (3rd range attack):</b> " + ((fAcc / 2) - (fAccPen * 2)) + "%\n";
+		if (maxFirearmAttacks >= 4) combatStats += "<b>Firearms Accuracy (4th range attack):</b> " + ((fAcc / 2) - (fAccPen * 3)) + "%\n";
+		if (maxFirearmAttacks >= 5) {
 			combatStats += "<b>Firearms Accuracy (5th range attack):</b> " + ((fAcc / 2) - (fAccPen * 4)) + "%\n";
 			combatStats += "<b>Firearms Accuracy (6th range attack):</b> " + ((fAcc / 2) - (fAccPen * 5)) + "%\n";
 		}
@@ -1497,6 +1549,7 @@ public class PlayerInfo extends BaseContent {
 			masteryStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / " + player.maxTeaseLevel() + " (Exp: " + player.teaseXP + " / " + player.teaseExpToLevelUp() + ")\n";
 		else
 			masteryStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / " + player.maxTeaseLevel() + " (Exp: MAX)\n";
+		masteryStats += "\t<i>(Effects: +" + combat.teases.masteryBonusDamageTease() * 100 + "% damage)</i>\n";
 		masteryStats += "\n";
 		if (player.miningLevel < player.maxMiningLevel())
 			masteryStats += "<b>Mining Skill:</b>  " + player.miningLevel + " / " + player.maxMiningLevel() + " (Exp: " + player.miningXP + " / " + player.MiningExpToLevelUp() + ")\n";
@@ -2131,7 +2184,7 @@ public class PlayerInfo extends BaseContent {
 				if (player.level >= 20) {
 					if (player.hasPerk(PerkLib.WayOfTheBlood)) addButtonDisabled(1, "WOTB", "You already have this super perk.");
 					else {
-						if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) addButton(1, "WOTB", perkWayOfTheBlood).hint("Choose the 'Way of the Blood' super perk. Allowing to use health to substitude using soulforce in almost all soulskills. (+10% of OverMax HP, -5% blood spells/soulskills cost, +15% blood spells/soulskills power, can learn Blood Soulskills form Crimson Jades)");
+						if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) addButton(1, "WOTB", perkWayOfTheBlood).hint("Choose the 'Way of the Blood' super perk. Blood speels and soulskills gain additional effects that would get better as you progress in this job. (+10% of OverMax HP, -5% blood spells/soulskills cost, +15% blood spells/soulskills power, can learn Blood Soulskills form Crimson Jades)");
 						else addButtonDisabled(1, "WOTB", "You need to first have the 'Hidden Job: Blood Demon' super perk.");
 					}
 				}

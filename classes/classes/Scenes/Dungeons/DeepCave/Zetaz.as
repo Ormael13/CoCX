@@ -79,7 +79,7 @@ public class Zetaz extends Monster
 						dmg = player.takePhysDamage(dmg, true);
 					}
 					outputText(" while the dust gets into your eyes, temporarily blinding you!");
-					if (!player.hasPerk(PerkLib.BlindImmunity)) player.createStatusEffect(StatusEffects.Blind,1,0,0,0);
+					if (!player.isImmuneToBlind()) player.createStatusEffect(StatusEffects.Blind,1,0,0,0);
 				}
 				//Gigarouse – A stronger version of normal imp's
 				//'arouse' spell. - copy normal arouse text and
@@ -166,7 +166,7 @@ public class Zetaz extends Monster
 			createBreastRow(0);
 			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
-			this.tallness = 4*12+1;
+			this.tallness = 56;
 			this.hips.type = Hips.RATING_BOYISH;
 			this.butt.type = Butt.RATING_TIGHT;
 			this.lowerBody = LowerBody.HOOFED;

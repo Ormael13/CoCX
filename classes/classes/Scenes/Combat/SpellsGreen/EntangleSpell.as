@@ -23,10 +23,7 @@ public class EntangleSpell extends AbstractGreenSpell {
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
-		var baseDamage:Number = (combat.teases.teaseBaseLustDamage() * 3 * spellModGreen());
-		if (player.hasPerk(PerkLib.VegetalAffinity)) baseDamage *= 1.5;
-		if (player.hasPerk(PerkLib.GreenMagic)) baseDamage *= 2;
-		if (player.hasStatusEffect(StatusEffects.GreenCovenant)) baseDamage *= 2;
+		var baseDamage:Number = (combat.teases.teaseBaseLustDamage() * 3);
 		return adjustLustDamage(baseDamage, monster, CAT_SPELL_GREEN, randomize);
 	}
 	
@@ -49,7 +46,7 @@ public class EntangleSpell extends AbstractGreenSpell {
 		return player.statusEffectv1(StatusEffects.Entangled) > 0;
 	}
 	
-	public function calcDuration():int {
+	override public function calcDuration():int {
 		var dura:Number = 6;
 		if (player.hasPerk(PerkLib.GreenMagic)) dura *= 2;
 		return dura;

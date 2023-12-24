@@ -16,6 +16,7 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.GlacialRift.*;
+import classes.Scenes.Camp.CampStatsAndResources;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.NPCs.Valeria;
 import classes.Scenes.SceneLib;
@@ -285,8 +286,8 @@ use namespace CoC;
 						} else outputText("Kiha");
 						outputText(" assist you into bringing as many as possible back to camp. ");
 					}
-					if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + stonesHarvested < SceneLib.campUpgrades.checkMaterialsCapStones()) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stonesHarvested;
-					else flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = SceneLib.campUpgrades.checkMaterialsCapStones();
+					if (CampStatsAndResources.StonesResc + stonesHarvested < SceneLib.campUpgrades.checkMaterialsCapStones()) CampStatsAndResources.StonesResc += stonesHarvested;
+					else CampStatsAndResources.StonesResc = SceneLib.campUpgrades.checkMaterialsCapStones();
 				} else {
 					var gemsFound2:int = 40 + rand(160);
 					outputText("As you wander the rift your foot hits something burrowed under the snow. It is a treasure chest and it looks packed to the brim.\n\n Inside was " + String(gemsFound) + " gems! ");

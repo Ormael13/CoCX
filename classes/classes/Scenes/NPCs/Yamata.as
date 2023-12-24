@@ -13,7 +13,9 @@ import classes.Scenes.Combat.Combat;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
-	public class Yamata extends Monster
+import coc.view.CoCButton;
+
+public class Yamata extends Monster
 	{
 		//Corrupted Yamata Attacks
 		private function yamataBasic():void
@@ -41,8 +43,10 @@ import classes.internals.*;
 			
 			player.takePhysDamage(damage, true);
 			yamataSodomasochistApply(damage);
-			if (!player.hasStatusEffect(StatusEffects.IzmaBleed)) player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
-			else player.addStatusValue(StatusEffects.IzmaBleed, 1, 1);
+			if (!player.immuneToBleed()) {
+				if (!player.hasStatusEffect(StatusEffects.IzmaBleed)) player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
+				else player.addStatusValue(StatusEffects.IzmaBleed, 1, 1);
+			}
 		}
 		
 		private function yamataDarkFoxfire():void
@@ -314,7 +318,24 @@ import classes.internals.*;
 			outputText("<i>\"Your fancy tricks wont work on me Champion, I see right through them.\"</i> Your blinding attack simply fades away before her magic.")
 			return true;
 		}
-		
+
+		override public function preAttackSeal():Boolean
+		{
+			if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 0) {
+				outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  The kitsune's seals have made normal melee attacks impossible!  Maybe you could try something else?\n\n");
+				// enemyAI();
+				return false;
+			}
+			else return true;
+		}
+
+		override public function changeBtnWhenBound(btnStruggle:CoCButton, btnBoundWait:CoCButton):void{
+			if (player.hasStatusEffect(StatusEffects.YamataEntwine)) {
+				btnStruggle.call(entwineStruggle);
+				btnBoundWait.call(entwineWait);
+			}
+		}
+
 		override protected function performCombatAction():void
 		{
 			

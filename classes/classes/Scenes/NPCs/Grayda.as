@@ -6,6 +6,8 @@ import classes.BodyParts.Hips;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
+import coc.view.CoCButton;
+
 public class Grayda extends Monster
 	{
 		private function graydaSwing():void {
@@ -16,7 +18,7 @@ public class Grayda extends Monster
 			damage += eBaseStrengthDamage();
 			damage *= 2;
 			player.takePhysDamage(damage, true);
-			if (rand(4) == 0) {
+			if (rand(4) == 0 && !player.immuneToBleed()) {
 				if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
 				else player.createStatusEffect(StatusEffects.Hemorrhage, SceneLib.combat.debuffsOrDoTDuration(3), 0.05, 0, 0);
 			}
@@ -86,7 +88,12 @@ public class Grayda extends Monster
 			player.removeStatusEffect(StatusEffects.Terrorize);
 			SceneLib.combat.enemyAIImpl();
 		}
-		
+		override public function changeBtnWhenBound(btnStruggle:CoCButton, btnBoundWait:CoCButton):void{
+			if (player.hasStatusEffect(StatusEffects.Terrorize)) {
+				btnStruggle.call(graydaTerrorizeStruggle);
+				btnBoundWait.call(graydaTerrorizeWait);
+			}
+		}
 		override protected function performCombatAction():void
 		{
 			var choice:Number = rand(5);

@@ -12,7 +12,7 @@ public class ArouseSpell extends AbstractBlackSpell {
 			"The arouse spell draws on your own inner lust in order to enflame the enemy's passions.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
-			[TAG_LUSTDMG]);
+			[TAG_LUSTDMG, TAG_TIER1]);
 		baseManaCost = 20;
 	}
 	
@@ -25,7 +25,7 @@ public class ArouseSpell extends AbstractBlackSpell {
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
-		return adjustLustDamage(player.inte / 5, monster, CAT_SPELL_BLACK, randomize);
+		return adjustLustDamage(scalingBonusIntelligence() / 3, monster, CAT_SPELL_BLACK, randomize);
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
@@ -88,18 +88,14 @@ public class ArouseSpell extends AbstractBlackSpell {
 		//Determine if critical tease!
 		var crit:Boolean   = false;
 		var critChance:int = 5;
-		if (player.hasPerk(PerkLib.CriticalPerformance)) {
-			if (player.lib <= 100) critChance += player.lib / 5;
-			if (player.lib > 100) critChance += 20;
-		}
+		critChance += combat.teases.combatTeaseCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			lustDmg *= 1.75;
 		}
-		lustDmg = Math.round(monster.lustVuln * lustDmg);
-		monster.teased(lustDmg, false);
-		if (crit) outputText(" <b>Critical!</b>");
+		monster.teased(lustDmg, false, display);
+		if (crit && display) outputText(" <b>Critical!</b>");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		if (player.hasPerk(PerkLib.VerdantLeech)) {
 			if (monster.lustVuln != 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.025;

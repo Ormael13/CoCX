@@ -182,7 +182,7 @@ private function rathazulWorkOffer():Boolean {
 		purificationByRathazulBegin();
 		return true;
 	}
-	if (BelisaFollower.BelisaQuestOn && !BelisaFollower.BelisaRalthTalked) {
+	if (BelisaFollower.BelisaQuestOn && !BelisaFollower.BelisaRalthTalked && !BelisaFollower.BelisaQuestComp) {
 		BelisaRalthazulTalk();
 		return true;
 	}
@@ -390,8 +390,8 @@ private function oneTimeOptions():void {
 	clearOutput();
 	outputText("Rathazul asks, \"<i>Which one rare offer you want to pick?</i>\"");
 	menu();
-	if (BelisaFollower.BelisaRalthTalked && BelisaFollower.BelisaFollowerStage == 0) {
-		if (player.hasItem(consumables.SHARK_T) && player.hasItem(consumables.PPHILTR) && player.hasItem(consumables.VITAL_T)) addButton(0, "C.CurePotion", RathazulMakesToothCursePotion).hint("Ask him to make cure curse cure potion. \n\nNeeds shark tooth, purity philter and vitality tincture");
+	if (BelisaFollower.BelisaRalthTalked && BelisaFollower.BelisaFollowerStage == 0 && !BelisaFollower.BelisaQuestComp) {
+		if (player.hasItem(consumables.SHARK_T) && player.hasItem(consumables.PPHILTR) && player.hasItem(consumables.VITAL_T)) addButton(0, "C.CurePotion", RathazulMakesToothCursePotion).hint("Ask him to make cure curse potion. \n\nNeeds shark tooth, purity philter and vitality tincture");
 		else addButtonDisabled(0, "C.CurePotion", "Ask him to make curse cure potion. \n\nNeeds shark tooth, purity philter and vitality tincture");
 	}
 	if (TyrantiaFollower.TyrantiaFollowerStage == 5) addButton(1, "Tyrantia", TyrantiaEggQuestRathazul);

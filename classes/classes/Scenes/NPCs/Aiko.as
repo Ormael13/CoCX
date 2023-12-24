@@ -29,9 +29,10 @@ import classes.internals.*;
 				player.takePhysDamage(damage - rand(10), true);
 				player.takePhysDamage(damage - rand(9), true);
 				player.addCombatBuff("spe", -4, "Combat Debuff", "CombatDebuffSpe");
-				if (!player.hasStatusEffect(StatusEffects.IzmaBleed))
-					player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
-				else (player.addStatusValue(StatusEffects.IzmaBleed, 1, 2));
+				if (!player.immuneToBleed()) {
+					if (!player.hasStatusEffect(StatusEffects.IzmaBleed)) player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
+					else player.addStatusValue(StatusEffects.IzmaBleed, 1, 2);
+				}
 			}
 			//Determine if evaded
 			else if (player.getEvasionRoll()) {
@@ -47,10 +48,10 @@ import classes.internals.*;
 				outputText(" with deadly precision! It protrudes from your body painfully, making it somewhat difficult to move around.  ");
 				player.takePhysDamage(damage, true);
 				player.addCombatBuff("spe", -4, "Combat Debuff", "CombatDebuffSpe");
-				if (!player.hasStatusEffect(StatusEffects.IzmaBleed))
-					player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
-				else
-					player.addStatusValue(StatusEffects.IzmaBleed, 1, 1);
+				if (!player.immuneToBleed()) {
+					if (!player.hasStatusEffect(StatusEffects.IzmaBleed)) player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
+					else player.addStatusValue(StatusEffects.IzmaBleed, 1, 1);
+				}
 			}
 		}
 		
@@ -71,6 +72,11 @@ import classes.internals.*;
 		
 		private function aikoIllusion():void
 		{
+			if (player.hasPerk(PerkLib.TrueSeeing)) {
+				outputText("Aiko tries to cast an illusion, but your magical sight easily pierces her attempt!\n\n");
+				return;
+			}
+
 			if (castIllusion < 1) {
 				outputText("Aiko whispers an incantation in a strange language, and reality seems to be twisting and warping around her. This is going to make it much harder to hit her!\n\n");
 				castIllusion += 2;
@@ -144,9 +150,10 @@ import classes.internals.*;
 				var damage:int = int(str) + rand(15);
 				player.takePhysDamage(damage, true);
 				player.addCombatBuff("spe", -4, "Combat Debuff", "CombatDebuffSpe");
-				if (!player.hasStatusEffect(StatusEffects.IzmaBleed))
-					player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
-				else (player.addStatusValue(StatusEffects.IzmaBleed, 1, 1));
+				if (!player.immuneToBleed()) {
+					if (!player.hasStatusEffect(StatusEffects.IzmaBleed)) player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
+					else player.addStatusValue(StatusEffects.IzmaBleed, 1, 1);
+				}
 			}
 		}
 		
@@ -228,6 +235,11 @@ import classes.internals.*;
 
 		private function aikoIllusionLust():void
 		{
+			if (player.hasPerk(PerkLib.TrueSeeing)) {
+				outputText("Aiko tries to cast an illusion, but your magical sight easily pierces her attempt!\n\n");
+				return;
+			}
+
 			var x:int = rand(6);
 			var lustDmg:int = 11 + int(player.effectiveSensitivity() / 5);
 			
@@ -345,9 +357,10 @@ import classes.internals.*;
 				player.takePhysDamage((str + rand(10)), true);
 				outputText(" ");
 				player.addCombatBuff("spe", -2, "Combat Debuff", "CombatDebuffSpe");
-				if (!player.hasStatusEffect(StatusEffects.IzmaBleed))
-					player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
-				else (player.addStatusValue(StatusEffects.IzmaBleed, 1, 1));
+				if (!player.immuneToBleed()) {
+					if (!player.hasStatusEffect(StatusEffects.IzmaBleed)) player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
+					else player.addStatusValue(StatusEffects.IzmaBleed, 1, 1);
+				}
 			}
 		}
 		
@@ -458,7 +471,17 @@ import classes.internals.*;
 			outputText("<i>\"Your fancy tricks wont work on me Champion, I see right through them.\"</i> Your blinding attack simply fades away before her magic.")
 			return true;
 		}
-		
+
+		override public function preAttackSeal():Boolean
+		{
+			if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 0) {
+				outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  The kitsune's seals have made normal melee attacks impossible!  Maybe you could try something else?\n\n");
+				// enemyAI();
+				return false;
+			}
+			else return true;
+		}
+
 		override protected function performCombatAction():void
 		{
 			castIllusion--;

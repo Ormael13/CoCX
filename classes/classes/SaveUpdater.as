@@ -15,11 +15,13 @@ import classes.Items.Alchemy.AlchemyLib;
 import classes.Races.GargoyleRace;
 import classes.Races.ImpRace;
 import classes.Scenes.*;
+import classes.Scenes.Camp.CampStatsAndResources;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
 import classes.Stats.Buff;
 import classes.Stats.PrimaryStat;
+import classes.Stats.BuffableStat;
 
 use namespace CoC;
 
@@ -2508,31 +2510,72 @@ public class SaveUpdater extends NPCAwareContent {
 					if (player.hairColor != "pink") player.hairColor = "pink";
 				}
 				if (player.hasPerk(PerkLib.BlessingOfTheAncestorTree) && player.hairColor != "golden blonde") player.hairColor = "golden blonde";
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.15;
-			}/*
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.15) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.16;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.14;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.16) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.17;
+				if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) transformations.SkinPatternBeeStripes.applyEffect();
+				var libStat:BuffableStat = player.statStore.findBuffableStat("lib");
+				var currentWeakness:Number = libStat.valueOfBuff("Weakened");
+				if (currentWeakness > 0) libStat.removeBuff("Weakened");
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.16;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.17) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.18;
+				if (player.statStore.hasBuff('Feeding Euphoria')) player.buff("Feeding Euphoria").remove();
+				if (player.statStore.hasBuff('Milking Euphoria')) player.buff("Milking Euphoria").remove();
+				outputText("\n\nMysteriously your Feeding Euphoria and/or Milking Euphoria you may have seem to have disappeared... you'll need to feed again to get them!");
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.17;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.18) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.19;
+				outputText("\n\nBeautiful items meant to be gathered not chosen one per game.");
+				if (player.hasStatusEffect(StatusEffects.BlessedItemAtTheLake)) player.addStatusValue(StatusEffects.BlessedItemAtTheLake, 1 , 1);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.18;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.19) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.20;
+				outputText("\n\nPerks are no longer needed for ranged multi attacks");
+				refundPerk(PerkLib.Multishot);
+				refundPerk(PerkLib.WildQuiver);
+				refundPerk(PerkLib.Manyshot);
+				refundPerk(PerkLib.WeaponRangeTripleStrike);
+				refundPerk(PerkLib.WeaponRangeDoubleStrike);
+				refundPerk(PerkLib.MasterGunslinger);
+				refundPerk(PerkLib.ExpertGunslinger);
+				refundPerk(PerkLib.AmateurGunslinger);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.19;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.20) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.21;
+				outputText("\n\nFixing Kindra's training skills...");
+				if (player.statusEffectv1(StatusEffects.Kindra) >= 140 && player.hasStatusEffect(StatusEffects.KnowsSidewinder)) {
+					flags[kFLAGS.KINDRA_ADV_ARCHERY] = 6;
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.20;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.30) {
+				outputText("move camp resources and stats to dedicated class");
+				CampStatsAndResources.EnergyCoreResc = flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES];
+				CampStatsAndResources.MetalPieces = flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES];
+				CampStatsAndResources.MechanismResc = flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES];
+				CampStatsAndResources.StonesResc = flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES];
+				CampStatsAndResources.WoodResc = flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES];
+				CampStatsAndResources.NailsResc = flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES];
+				flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] = 0;
+				flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] = 0;
+				flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] = 0;
+				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 0;
+				flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 0;
+				flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 0;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.30;
+			}/*
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.40) {
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.40;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.50) {
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.50;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.60) {
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.60;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.63) {
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.63;
 			}*/
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);

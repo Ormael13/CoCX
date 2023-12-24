@@ -131,7 +131,7 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 				menu();
 				addButton(0, "Quest", BoardkeeperYangQuest);
 				addButton(1, "Talk", BoardkeeperYangTalk);
-				if (player.keyItemvX("Adventurer Guild: Copper plate", 1) > 1) addButton(2, "Promotion", BoardkeeperYangPromotion).hint("Ask Yang for a promotion once you have achieved enough jobs.");
+				if (player.keyItemvX("Adventurer Guild: Copper plate", 1) > 1 || player.keyItemvX("Adventurer Guild: Iron plate", 1) > 1) addButton(2, "Promotion", BoardkeeperYangPromotion).hint("Ask Yang for a promotion once you have achieved enough jobs.");
 				else addButtonDisabled(2, "Promotion", "Not meet req.");
 				addButton(3, "Sex", BoardkeeperYangSex);
 				addButton(4, "Back", curry(SceneLib.journeyToTheEast.enteringInn, false));

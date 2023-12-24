@@ -38,8 +38,10 @@ public class UnderwaterSharkGirlsPack extends Monster
 			player.takePhysDamage(damage, true);
 			player.takePhysDamage(damage, true);
 			player.takePhysDamage(damage, true);
-			if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
-			else player.createStatusEffect(StatusEffects.Hemorrhage,SceneLib.combat.debuffsOrDoTDuration(3),0.2,0,0);
+			if (!player.immuneToBleed()) {
+				if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
+				else player.createStatusEffect(StatusEffects.Hemorrhage, SceneLib.combat.debuffsOrDoTDuration(3), 0.2, 0, 0);
+			}
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
@@ -96,6 +98,7 @@ public class UnderwaterSharkGirlsPack extends Monster
 			this.special2 = sharkBiteAttack;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.WaterNature, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

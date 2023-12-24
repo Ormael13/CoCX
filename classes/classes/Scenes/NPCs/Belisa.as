@@ -89,8 +89,10 @@ public class Belisa extends Monster
 				player.takePhysDamage(dmg0, true);
 				bleedP += 0.01;
 			}
-			if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
-			else player.createStatusEffect(StatusEffects.Hemorrhage,SceneLib.combat.debuffsOrDoTDuration(2+rand(2)),bleedP,0,0);
+			if (!player.immuneToBleed()) {
+				if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
+				else player.createStatusEffect(StatusEffects.Hemorrhage, SceneLib.combat.debuffsOrDoTDuration(2 + rand(2)), bleedP, 0, 0);
+			}
 		}
 		
 		private function belisaWebAttack():void {
@@ -132,10 +134,7 @@ public class Belisa extends Monster
 					damage *= 1.5;
 					outputText("It's super effective! ");
 				}
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) damage *= 1.2;
-				else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) damage *= 1.5;
-				else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) damage *= 2;
-				else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) damage *= 3.5;
+				
 				damage = Math.round(damage);
 				player.takeFireDamage(damage, true);
 			}

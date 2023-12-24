@@ -132,6 +132,7 @@
             <color name="ashen grayish-blue">#93b6c8</color>
             <color name="creamy-white">#f2ebde</color>
             <color name="crimson platinum">#d56c6c</color>
+			<color name="fiendish crimson">#d56c6c</color>
             <color name="blood-red">#d56c6c</color>
             <color name="blazing red">#ff6224</color>
             <color name="dark blue">#3d529e</color>
@@ -190,6 +191,7 @@
             <color name="black and yellow">#000000</color>
             <color name="abyssal black">#000000</color>
             <color name="white and black">#eff3f6</color>
+			<color name="fiendish pink">#ffccf3</color>
         </common>
         <property name="hair" src="hairColor1" default="#ffffff">
             <color name="red">#d85741</color>
@@ -231,6 +233,9 @@
             <color name="pale">#f2e8e3</color>
         </property>
         <property name="skin2" src="skinColor2" default="#ffffff">
+            <color name="pale">#f2e8e3</color>
+        </property>
+		<property name="skin3" src="skinColor3" default="#ffffff">
             <color name="pale">#f2e8e3</color>
         </property>
         <property name="iris" src="eyes.colour" default="#0000ff">
@@ -297,6 +302,14 @@
         <key src="#BB7777" base="skin2" transform="darken(25)"/>
         <key src="#884444" base="skin2" transform="darken(50)"/>
         <key src="#221111" base="skin2" transform="darken(75)"/>
+		
+		<key src="#ffccea" base="skin3" transform="lighten(25)"/>
+        <key src="#ff99d5" base="skin3"/>
+		<key src="#eb8dc4" base="skin3" transform="darken(8)"/>
+        <key src="#bb779f" base="skin3" transform="darken(25)"/>
+        <key src="#88446c" base="skin3" transform="darken(50)"/>
+        <key src="#22111b" base="skin3" transform="darken(75)"/>
+		
 		<key src="#FF0000" base="iris"/>
 		<key src="#AA0000" base="iris" transform="darken(25)"/>
         <key src="#FBCAAE" base="skin" transform="darken(25);saturate(25);shiftTo(0,25,25)"/>
@@ -340,6 +353,7 @@
         <cell rect="951,90,49,59" name="breasts_pattern/BgazerTar" dx="79" dy="64"/>
         <cell rect="1001,90,49,59" name="torso_pattern/BwindScars" dx="79" dy="64"/>
         <cell rect="1051,90,49,59" name="torso_pattern/Bbioluminescence" dx="80" dy="61"/>
+		<cell rect="1501,90,49,59" name="torso_pattern/Bdemonic" dx="79" dy="64"/>
         <cell rect="101,1304,99,119" name="full_pattern/gnome" dx="53" dy="20"/>
         <cell rect="201,1304,99,119" name="full_pattern/undine" dx="56" dy="21"/>
         <cell rect="301,1304,99,119" name="full_patternUnder/undine" dx="56" dy="21"/>
@@ -378,6 +392,7 @@
         <cell rect="501,150,49,59" name="arms_bg_pattern/Blightning" dx="56" dy="64"/>
         <cell rect="601,150,49,59" name="arms_bg_pattern/Btatoo" dx="56" dy="64"/>
         <cell rect="951,150,49,59" name="arms_bg_pattern/Bvenom" dx="56" dy="64"/>
+		<cell rect="1301,150,49,59" name="arms_bg_pattern/Bdemonic" dx="56" dy="64"/>
         <cell rect="1,1364,49,59" name="arms_bg/gazer" dx="65" dy="65"/>
 		<cell rect="1201,150,49,55" name="arms_bg/prayer" dx="78" dy="64"/>
         <cell rect="1,210,49,59" name="arms/human" dx="104" dy="64"/>
@@ -434,6 +449,7 @@
         <cell rect="651,210,49,59" name="arms_pattern/Btatoo" dx="104" dy="64"/>
         <cell rect="1001,150,49,59" name="arms_pattern/undine" dx="59" dy="35"/>
         <cell rect="1001,210,49,59" name="arms_pattern/Bvenom" dx="104" dy="64"/>
+		<cell rect="1301,210,49,59" name="arms_pattern/Bdemonic" dx="104" dy="64"/>
         <cell rect="1,270,49,59" name="hands_bg/fur" dx="56" dy="64"/>
         <cell rect="601,270,49,59" name="hands_bg/furracoon" dx="56" dy="64"/>
         <cell rect="51,270,49,59" name="hands_bg/devil" dx="56" dy="64"/>
@@ -461,6 +477,8 @@
         <cell rect="901,270,49,59" name="hands_bg/mindbreaker" dx="61" dy="74"/>
 		<cell rect="1101,270,49,59" name="hands_bg/arigean" dx="56" dy="64"/>
         <cell rect="351,270,49,59" name="overhands_bg/fire" dx="56" dy="64"/>
+		<cell rect="301,853,49,59" name="overhands_bg/arigeanRedAura" dx="56" dy="64"/>
+		<cell rect="351,853,49,59" name="overhands_bg/arigeanYellowAura" dx="56" dy="64"/>
         <cell rect="1,330,49,59" name="hands/fur" dx="104" dy="64"/>
         <cell rect="601,330,49,59" name="hands/furracoon" dx="104" dy="64"/>
         <cell rect="51,330,49,59" name="hands/devil" dx="104" dy="64"/>
@@ -493,6 +511,8 @@
         <cell rect="351,330,49,59" name="overhands/fire" dx="104" dy="64"/>
         <cell rect="851,270,49,59" name="overhands/ratatoskrLeft" dx="56" dy="64"/>
         <cell rect="851,330,49,59" name="overhands/ratatoskrRight" dx="104" dy="64"/>
+		<cell rect="301,913,49,59" name="overhands/arigeanRedAura" dx="104" dy="64"/>
+		<cell rect="351,913,49,59" name="overhands/arigeanYellowAura" dx="104" dy="64"/>
         <cell rect="1,390,49,59" name="legs/human" dx="79" dy="115"/>
         <cell rect="51,390,49,59" name="legs/fur" dx="79" dy="115"/>
         <cell rect="101,390,49,59" name="legs/chitin" dx="79" dy="115"/>
@@ -543,6 +563,7 @@
         <cell rect="501,390,49,59" name="legs_pattern/Blightning" dx="79" dy="115"/>
         <cell rect="601,390,49,59" name="legs_pattern/Btatoo" dx="79" dy="115"/>
         <cell rect="801,390,49,59" name="legs_pattern/BwindScars" dx="79" dy="115"/>
+		<cell rect="951,390,49,59" name="legs_pattern/Bdemonic" dx="79" dy="115"/>
         <cell rect="51,450,49,59" name="feet/fur" dx="78" dy="115"/>
         <cell rect="101,450,49,59" name="feet/scales" dx="79" dy="115"/>
         <cell rect="551,450,49,59" name="feet/furracoon" dx="79" dy="115"/>
@@ -559,6 +580,8 @@
 		<cell rect="901,390,49,59" name="feet/arigean" dx="79" dy="115"/>
         <cell rect="1002,611,90,90" name="legs_bg/gnome" dx="58" dy="93"/>
         <cell rect="151,450,49,59" name="overfeet/fire" dx="79" dy="115"/>
+		<cell rect="301,793,49,59" name="overfeet/arigeanRedAura" dx="79" dy="115"/>
+		<cell rect="351,793,49,59" name="overfeet/arigeanYellowAura" dx="79" dy="115"/>
         <cell rect="701,90,49,59" name="muscle/muscle" dx="79" dy="64"/>
         <cell rect="1201,90,49,59" name="fullbodyMuscle/muscleignis" dx="79" dy="64"/>
         <cell rect="1251,90,49,59" name="fullbodyMuscle/muscleundine" dx="79" dy="64"/>
@@ -636,7 +659,9 @@
         <cell rect="217,91,15,9" name="neck/mindbreaker" dx="97" dy="63"/>
         <cell rect="217,27,54,31" name="rearbody/shark" dx="84" dy="72"/>
         <cell rect="61,689,100,100" name="rearbody/snail" dx="87" dy="82"/>
-		<cell rect="1340,1114,173,156" name="rearbody/arigean" dx="15" dy="45"/>
+		<cell rect="1340,1114,173,156" name="tail/arigean" dx="14" dy="16"/>
+		<cell rect="1340,1272,173,156" name="tail_fg/arigeanRedAura" dx="17" dy="-7"/>
+		<cell rect="1514,1272,173,156" name="tail_fg/arigeanYellowAura" dx="19" dy="-4"/>
         <cell rect="992,641,173,156" name="backtentacles/gazer" dx="22" dy="10"/>
         <cell rect="296,641,173,156" name="aura/windyaura" dx="21" dy="28"/>
         <cell rect="470,641,173,156" name="aura/ghostlyaura" dx="21" dy="28"/>
@@ -1138,7 +1163,7 @@
         <cell rect="361,396,59,65" name="horns/dragon" dx="75" dy="4"/>
         <cell rect="421,330,29,32" name="horns/unicorn" dx="86" dy="24"/>
         <cell rect="421,363,29,32" name="horns/bicorn" dx="83" dy="23"/>
-		<cell rect="451,330,29,32" name="horns/kirin" dx="83" dy="23"/>
+		<cell rect="451,330,29,32" name="horns/kirin" dx="86" dy="24"/>
         <cell rect="451,363,29,32" name="horns/2oni" dx="89" dy="40"/>
         <cell rect="211,396,29,30" name="horns/frostWyrm" dx="105" dy="23"/>
         <cell rect="211,429,29,30" name="horns/frostWyrmLeft" dx="73" dy="23"/>
@@ -2669,6 +2694,30 @@
 			<case values="RearBody.GHOSTLY_AURA">
                 <show part="aura/ghostlyaura"/>
             </case>
+			<case values="RearBody.ARIGEAN_RED_AURA">
+				<if test="arms.type == Arms.ARMORED_FOREARMS">
+					<show part="overhands/arigeanRedAura"/>
+					<show part="overhands_bg/arigeanRedAura"/>
+				</if>	
+				<if test="lowerBody == LowerBody.ARMORED_LEGS">
+					<show part="overfeet/arigeanRedAura"/>
+				</if>
+				<if test="tailType == Tail.ARIGEAN_RED">
+					<show part="tail_fg/arigeanRedAura"/>
+				</if>
+			</case>
+			<case values="RearBody.ARIGEAN_YELLOW_AURA">
+				<if test="arms.type == Arms.ARMORED_FOREARMS">
+					<show part="overhands/arigeanYellowAura"/>
+					<show part="overhands_bg/arigeanYellowAura"/>
+				</if>	
+				<if test="lowerBody == LowerBody.ARMORED_LEGS">
+					<show part="overfeet/arigeanYellowAura"/>
+				</if>
+				<if test="tailType == Tail.ARIGEAN_YELLOW">
+					<show part="tail_fg/arigeanYellowAura"/>
+				</if>
+			</case>
 			<case values="RearBody.YETI_FUR">
                 <show part="overskinpanty/yetipanty"/>
 				<if test="breastRows.length gt 0">
@@ -4251,7 +4300,7 @@
                 <hide part="legs/*"/>
                 <show part="legs/chitin"/>
             </case>
-			<case test="lowerBody==LowerBody.ARMORED_LEGS">
+			<case values="LowerBody.ARMORED_LEGS">
 				<show part="feet/arigean"/>
 			</case>
             <!--<case values="LowerBody.GARGOYLE">TODO </case>-->
@@ -5011,8 +5060,8 @@
 					</else>
 				</if>
             </case>
-			<case values="Tail.ARIGEAN_GREEN">
-				<show part="rearbody/arigean"/>
+			<case values="Tail.ARIGEAN_GREEN,Tail.ARIGEAN_RED,Tail.ARIGEAN_YELLOW">
+				<show part="tail/arigean"/>
 			</case>
             <default>
             </default>
@@ -5377,9 +5426,28 @@
 				<show part="legs_pattern/Btatoo"/>
             </case>
 			<case values="Skin.PATTERN_LIGHTNING_SHAPED_TATTOO">
-				<show part="breasts_pattern/Blightning"/>
-				<show part="breasts_pattern/Bplightning"/>
-				<show part="breasts_pattern/Bllightning"/>
+				<if test="breastRows.length gt 0">
+					<switch>
+						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+							<show part="breasts_pattern/Blightning"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<show part="breasts_pattern/Blightning"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+							<show part="breasts_pattern/Bplightning"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="breasts_pattern/Bplightning"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<show part="breasts_pattern/Bllightning"/>
+						</case>
+						<default>
+							<show part="breasts_pattern/Bllightning"/>
+						</default>
+					</switch>
+				</if>
 				<show part="torso_pattern/Blightning"/>
 				<show part="arms_pattern/Blightning"/>
 				<show part="arms_bg_pattern/Blightning"/>
@@ -5390,13 +5458,56 @@
 				<show part="legs_pattern/BwindScars"/>
             </case>
 			<case values="Skin.PATTERN_TIGER_STRIPES">
-				<show part="breasts_pattern/Bstripe"/>
-				<show part="breasts_pattern/Bpstripe"/>
-				<show part="breasts_pattern/Blstripe"/>
+				<switch>
+						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+							<show part="breasts_pattern/Bstripe"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<show part="breasts_pattern/Bstripe"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+							<show part="breasts_pattern/Bpstripe"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="breasts_pattern/Bpstripe"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<show part="breasts_pattern/Blstripe"/>
+						</case>
+						<default>
+							<show part="breasts_pattern/Blstripe"/>
+						</default>
+					</switch>
 				<show part="torso_pattern/Bstripe"/>
 				<show part="arms_pattern/Bstripe"/>
 				<show part="arms_bg_pattern/Bstripe"/>
 				<show part="legs_pattern/Bstripe"/>
+            </case>
+			<case values="Skin.PATTERN_DEMONIC_STRIPES">
+				<switch>
+						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+							<show part="breasts_pattern/Bdemonic"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<show part="breasts_pattern/Bdemonic"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+							<show part="breasts_pattern/Bpdemonic"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="breasts_pattern/Bpdemonic"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<show part="breasts_pattern/Bldemonic"/>
+						</case>
+						<default>
+							<show part="breasts_pattern/Bldemonic"/>
+						</default>
+					</switch>
+				<show part="torso_pattern/Bdemonic"/>
+				<show part="arms_pattern/Bdemonic"/>
+				<show part="arms_bg_pattern/Bdemonic"/>
+				<show part="legs_pattern/Bdemonic"/>
             </case>
             <case values="Skin.PATTERN_VENOMOUS_MARKINGS">
                 <show part="torso_pattern/Bvenom"/>
@@ -5444,6 +5555,39 @@
 								<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE">
 									<switch value="lowerBody">
 										<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.KITSUNE,LowerBody.DEMONIC_HIGH_HEELS">
+											<hide part="arms_pattern/*"/>
+											<hide part="arms_bg_pattern/*"/>
+											<hide part="legs_pattern/*"/>
+										</case>
+										<default>
+										</default>
+									</switch>
+								</case>
+								<case values="Arms.LION, Arms.DISPLACER">
+									<switch value="lowerBody">
+										<case values="LowerBody.LION">
+											<hide part="arms_pattern/*"/>
+											<hide part="arms_bg_pattern/*"/>
+											<hide part="legs_pattern/*"/>
+										</case>
+										<default>
+										</default>
+									</switch>
+								</case>
+								<case values="Arms.WOLF">
+									<switch value="lowerBody">
+										<case values="LowerBody.WOLF">
+											<hide part="arms_pattern/*"/>
+											<hide part="arms_bg_pattern/*"/>
+											<hide part="legs_pattern/*"/>
+										</case>
+										<default>
+										</default>
+									</switch>
+								</case>
+								<case values="Arms.DRAGON">
+									<switch value="lowerBody">
+										<case values="LowerBody.DRAGON">
 											<hide part="arms_pattern/*"/>
 											<hide part="arms_bg_pattern/*"/>
 											<hide part="legs_pattern/*"/>
@@ -5811,13 +5955,15 @@
 
 		<!-- Yuki Onna Dress -->
 		<if test="yukiDress">
-			<if test="showClothing">
-				<show part="clothe/blizzardTop"/>
-				<if test="(legCount!=4) and (showLegClothing)">
-					<show part="clotheLegs/whiteKimonoBottom"/>
-				</if>
-				<if test="showArmClothing">
-					<show part="clothe/whiteKimonoSleeves"/>
+			<if test="PlayerHasViewableOutfit">
+				<if test="showClothing">
+					<show part="clothe/blizzardTop"/>
+					<if test="(legCount!=4) and (showLegClothing)">
+						<show part="clotheLegs/whiteKimonoBottom"/>
+					</if>
+					<if test="showArmClothing">
+						<show part="clothe/whiteKimonoSleeves"/>
+					</if>
 				</if>
 			</if>
 		</if>
@@ -5839,137 +5985,155 @@
 
 		<!-- Sakura petal Kimono -->
 		<if test="sakuraPetalKimono">
-			<if test="showClothing">
-				<show part="clothe/redKimonoTop"/>
-				<if test="(legCount!=4) and (showLegClothing)">
-					<show part="clotheLegs/redKimonoBottom"/>
-				</if>
-				<if test="showArmClothing">
-					<show part="clothe/blackKimonoBottom"/>
+			<if test="PlayerHasViewableOutfit">
+				<if test="showClothing">
+					<show part="clothe/redKimonoTop"/>
+					<if test="(legCount!=4) and (showLegClothing)">
+						<show part="clotheLegs/redKimonoBottom"/>
+					</if>
+					<if test="showArmClothing">
+						<show part="clothe/blackKimonoBottom"/>
+					</if>
 				</if>
 			</if>
-		</if>
+		</if>	
 		<!-- Kimono White -->
 		<if test="whiteKimono">
-			<if test="showClothing">
-				<show part="clothe/whiteKimonoTop"/>
-				<if test="(legCount!=4) and (showLegClothing)">
-					<show part="clotheLegs/whiteKimonoBottom"/>
-				</if>
-				<if test="showArmClothing">
-					<show part="clothe/whiteKimonoSleeves"/>
+			<if test="PlayerHasViewableOutfit">
+				<if test="showClothing">
+					<show part="clothe/whiteKimonoTop"/>
+					<if test="(legCount!=4) and (showLegClothing)">
+						<show part="clotheLegs/whiteKimonoBottom"/>
+					</if>
+					<if test="showArmClothing">
+						<show part="clothe/whiteKimonoSleeves"/>
+					</if>
 				</if>
 			</if>
 		</if>
 		<!-- Kimono Blue -->
 		<if test="blueKimono">
-			<if test="showClothing">
-				<show part="clothe/whiteKimonoTop"/>
-				<if test="(legCount!=4) and (showLegClothing)">
-					<show part="clotheLegs/whiteKimonoBottom"/>
-				</if>
-				<if test="showArmClothing">
-					<show part="clothe/whiteKimonoSleeves"/>
+			<if test="PlayerHasViewableOutfit">
+				<if test="showClothing">
+					<show part="clothe/whiteKimonoTop"/>
+					<if test="(legCount!=4) and (showLegClothing)">
+						<show part="clotheLegs/whiteKimonoBottom"/>
+					</if>
+					<if test="showArmClothing">
+						<show part="clothe/whiteKimonoSleeves"/>
+					</if>
 				</if>
 			</if>
 		</if>
 		<!-- Kimono Red -->
 		<if test="redKimono">
-			<if test="showClothing">
-				<show part="clothe/redKimonoTop"/>
-				<if test="(legCount!=4) and (showLegClothing)">
-					<show part="clotheLegs/blackKimonoBottom"/>
+			<if test="PlayerHasViewableOutfit">
+				<if test="showClothing">
+					<show part="clothe/redKimonoTop"/>
+					<if test="(legCount!=4) and (showLegClothing)">
+						<show part="clotheLegs/blackKimonoBottom"/>
+					</if>
+					<if test="showArmClothing">
+						<show part="clothe/redKimonoSleeves"/>
+					</if>
 				</if>
-				<if test="showArmClothing">
-					<show part="clothe/redKimonoSleeves"/>
-				</if>
-			</if>
+			</if>	
 		</if>
 		<!-- Kimono Purple -->
 		<if test="purpleKimono">
-			<if test="showClothing">
-				<show part="clothe/purpleKimonoTop"/>
-				<if test="(legCount!=4) and (showLegClothing)">
-					<show part="clotheLegs/blackKimonoBottom"/>
+			<if test="PlayerHasViewableOutfit">
+				<if test="showClothing">
+					<show part="clothe/purpleKimonoTop"/>
+					<if test="(legCount!=4) and (showLegClothing)">
+						<show part="clotheLegs/blackKimonoBottom"/>
+					</if>
+					<if test="showArmClothing">
+						<show part="clothe/purpleKimonoSleeves"/>
+					</if>
 				</if>
-				<if test="showArmClothing">
-					<show part="clothe/purpleKimonoSleeves"/>
-				</if>
-			</if>
+			</if>	
 		</if>
 		<!-- Kimono Black -->
 		<if test="blackKimono">
-			<if test="showClothing">
-				<show part="clothe/blackKimonoTop"/>
-				<if test="(legCount!=4) and (showLegClothing)">
-					<show part="clotheLegs/blackKimonoBottom"/>
+			<if test="PlayerHasViewableOutfit">
+				<if test="showClothing">
+					<show part="clothe/blackKimonoTop"/>
+					<if test="(legCount!=4) and (showLegClothing)">
+						<show part="clotheLegs/blackKimonoBottom"/>
+					</if>
+					<if test="showArmClothing">
+						<show part="clothe/blackKimonoSleeves"/>
+					</if>
 				</if>
-				<if test="showArmClothing">
-					<show part="clothe/blackKimonoSleeves"/>
-				</if>
-			</if>
+			</if>	
 		</if>
 		<!-- Kimono Legendary -->
 		<if test="legendKimono">
-			<if test="showClothing">
-				<show part="clothe/TamamoeNoMaeKimonoTop"/>
-				<if test="(legCount!=4) and (showLegClothing)">
-					<show part="clothe/TamamoeNoMaeKimonoLowerTop"/>
-					<show part="clotheLegs/TamamoeNoMaeKimonoLegs"/>
-					<show part="clothCape/TamamoeNoMaeKimonoUnder"/>
-					<else>
-						<if test="showLegClothing==false">
-							<show part="clothe/TamamoeNoMaeKimonoLowerTop"/>
-							<show part="clothCape/TamamoeNoMaeKimonoUnder"/>
-						</if>
-					</else>
+			<if test="PlayerHasViewableOutfit">
+				<if test="showClothing">
+					<show part="clothe/TamamoeNoMaeKimonoTop"/>
+					<if test="(legCount!=4) and (showLegClothing)">
+						<show part="clothe/TamamoeNoMaeKimonoLowerTop"/>
+						<show part="clotheLegs/TamamoeNoMaeKimonoLegs"/>
+						<show part="clothCape/TamamoeNoMaeKimonoUnder"/>
+						<else>
+							<if test="showLegClothing==false">
+								<show part="clothe/TamamoeNoMaeKimonoLowerTop"/>
+								<show part="clothCape/TamamoeNoMaeKimonoUnder"/>
+							</if>
+						</else>
+					</if>
+					<if test="showArmClothing">
+						<show part="clothe/TamamoeNoMaeKimonoSleeves"/>
+						<show part="clothCape/TamamoeNoMaeKimonoCollar"/>
+					</if>
 				</if>
-				<if test="showArmClothing">
-					<show part="clothe/TamamoeNoMaeKimonoSleeves"/>
-					<show part="clothCape/TamamoeNoMaeKimonoCollar"/>
-				</if>
-			</if>
+			</if>	
 		</if>
 
 		<if test="iceQueenGown">
-			<if test="showClothing">
-				<show part="clothe/IceQueenKimonoTop"/>
-				<if test="(legCount!=4) and (showLegClothing)">
-					<show part="clothe/IceQueenKimonoLowerTop"/>
-					<show part="clotheLegs/whiteKimonoBottom"/>
-					<show part="clothCape/IceQueenKimonoUnder"/>
-					<else>
-						<if test="showLegClothing==false">
-							<show part="clothe/IceQueenKimonoLowerTop"/>
-							<show part="clothCape/IceQueenKimonoUnder"/>
-						</if>
-					</else>
+			<if test="PlayerHasViewableOutfit">
+				<if test="showClothing">
+					<show part="clothe/IceQueenKimonoTop"/>
+					<if test="(legCount!=4) and (showLegClothing)">
+						<show part="clothe/IceQueenKimonoLowerTop"/>
+						<show part="clotheLegs/whiteKimonoBottom"/>
+						<show part="clothCape/IceQueenKimonoUnder"/>
+						<else>
+							<if test="showLegClothing==false">
+								<show part="clothe/IceQueenKimonoLowerTop"/>
+								<show part="clothCape/IceQueenKimonoUnder"/>
+							</if>
+						</else>
+					</if>
+					<if test="showArmClothing">
+						<show part="clothe/IceQueenKimonoSleeves"/>
+						<show part="clothCape/IceQueenKimonoCollar"/>
+					</if>
 				</if>
-				<if test="showArmClothing">
-					<show part="clothe/IceQueenKimonoSleeves"/>
-					<show part="clothCape/IceQueenKimonoCollar"/>
-				</if>
-			</if>
+			</if>	
 		</if>
 
 		<if test="OniLegendaryKimono">
-			<if test="showClothing">
-				<show part="clothe/OniKimonoTop"/>
-				<if test="(legCount!=4) and (showLegClothing)">
-					<show part="clothe/OniKimonoLowerTop"/>
-					<show part="clothCape/OniKimonoUnder"/>
-					<else>
-						<if test="showLegClothing==false">
-							<show part="clothe/TamamoeNoMaeKimonoLowerTop"/>
-							<show part="clothCape/TamamoeNoMaeKimonoUnder"/>
-						</if>
-					</else>
+			<if test="PlayerHasViewableOutfit">
+				<if test="showClothing">
+					<show part="clothe/OniKimonoTop"/>
+					<if test="(legCount!=4) and (showLegClothing)">
+						<show part="clothe/OniKimonoLowerTop"/>
+						<show part="clothCape/OniKimonoUnder"/>
+						<else>
+							<if test="showLegClothing==false">
+								<show part="clothe/TamamoeNoMaeKimonoLowerTop"/>
+								<show part="clothCape/TamamoeNoMaeKimonoUnder"/>
+							</if>
+						</else>
+					</if>
+					<if test="showArmClothing">
+						<show part="clothe/OniKimonoSleeves"/>
+						<show part="clothCape/OniKimonoCollar"/>
+					</if>
 				</if>
-				<if test="showArmClothing">
-					<show part="clothe/OniKimonoSleeves"/>
-					<show part="clothCape/OniKimonoCollar"/>
-				</if>
-			</if>
+			</if>	
 		</if>
 
 		<!-- Samurai set -->
@@ -5979,52 +6143,134 @@
 		</if>
 		
 		<if test="SamuraiArmor">
-			<if test="showClothing">
-				<if test="breastRows.length gt 0">
-					<switch>
-						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-							<show part="clothe/samuraiShirt"/>
-						</case>
-						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-							<show part="bra_fg/samuraiShirtSmall"/>
-						</case>
-						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-							<show part="bra_fg/samuraiShirtMedium"/>
-						</case>
-						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-							<show part="bra_fg/samuraiShirtMedium"/>
-						</case>
-						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-							<show part="bra_fg/samuraiShirtLarge"/>
-						</case>
-						<default>
-							<show part="bra_fg/samuraiShirtLarge"/>
-						</default>
-					</switch>
-				</if>
-				<show part="armorChest/samuraiArmor"/>
-				<if test="showLegClothing">
-					<if test="isTaur()">
-						<else>
-							<show part="clotheLegs/samuraiLegs"/>
-							<hide part="panty/*"/>
-							<hide part="penis/*"/>
-							<hide part="balls/*"/>
-							<hide part="pussy/*"/>
-							<hide part="overpussy/*"/>
-						</else>
+			<if test="PlayerHasViewableOutfit">
+				<if test="showClothing">
+					<if test="breastRows.length gt 0">
+						<switch>
+							<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+								<show part="clothe/samuraiShirt"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+								<show part="bra_fg/samuraiShirtSmall"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+								<show part="bra_fg/samuraiShirtMedium"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+								<show part="bra_fg/samuraiShirtMedium"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+								<show part="bra_fg/samuraiShirtLarge"/>
+							</case>
+							<default>
+								<show part="bra_fg/samuraiShirtLarge"/>
+							</default>
+						</switch>
+					</if>
+					<show part="armorChest/samuraiArmor"/>
+					<if test="showLegClothing">
+						<if test="isTaur()">
+							<else>
+								<show part="clotheLegs/samuraiLegs"/>
+								<hide part="panty/*"/>
+								<hide part="penis/*"/>
+								<hide part="balls/*"/>
+								<hide part="pussy/*"/>
+								<hide part="overpussy/*"/>
+							</else>
+						</if>
+					</if>
+					<if test="showArmClothing">
+						<show part="clothLeftArm/samuraiLeftArm"/>
+						<show part="clothRightArm/samuraiRightArm"/>
 					</if>
 				</if>
-				<if test="showArmClothing">
-					<show part="clothLeftArm/samuraiLeftArm"/>
-					<show part="clothRightArm/samuraiRightArm"/>
-				</if>
 			</if>
-		</if>
+		</if>	
 
 		<!-- Platemail, Marae armor and Ebonweave platemail -->
 		<if test="platemail">
-			<if test="showClothing">
+			<if test="PlayerHasViewableOutfit">
+				<if test="showClothing">
+					<if test="breastRows.length gt 0">
+						<switch>
+							<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+								<show part="armorNeck/fullplatetopMale"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+								<show part="armorNeck/fullplatetopMale"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+								<show part="armorNeck/fullplatetopFemale"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+								<show part="armorNeck/fullplatetopFemale"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+								<show part="armorNeck/fullplatetopFemaleLarge"/>
+							</case>
+							<default>
+								<show part="armorNeck/fullplatetopFemaleLarge"/>
+							</default>
+						</switch>
+					</if>
+					<show part="armorChest/fullplatebottom"/>
+					<if test="(legCount!=4) and (showLegClothing)">
+						<show part="armorLegs/fullplateLegs"/>
+					</if>
+					<if test="showArmClothing">
+						<show part="armorLeftArm/fullplateleftarm"/>
+						<show part="armorRightArm/fullplaterightarm"/>
+					</if>
+				</if>
+			</if>	
+		</if>
+		
+		<!-- Valeria -->
+		<if test="gooArmor">
+			<if test="PlayerHasViewableOutfit">
+				<if test="showClothing">
+					<if test="breastRows.length gt 0">
+						<switch>
+							<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+								<show part="armorNeck/gooplatetopMale"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+								<show part="armorNeck/gooplatetopMale"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+								<show part="armorNeck/gooplatetopFemale"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+								<show part="armorNeck/gooplatetopFemale"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+								<show part="armorNeck/gooplatetopFemaleLarge"/>
+							</case>
+							<default>
+								<show part="armorNeck/gooplatetopFemaleLarge"/>
+							</default>
+						</switch>
+					</if>
+					<show part="armorChest/gooplatebottom"/>
+					<if test="showLegClothing">
+						<show part="armorLegs/gooplateLegs"/>
+						<if test="legCount==4">
+							<hide part="armorLegs/*"/>
+							<show part="armorLegs_fg/gootaurarmorbottom"/>
+						</if>
+					</if>
+					<if test="showArmClothing">
+						<show part="armorLeftArm/gooplateleftarm"/>
+						<show part="armorRightArm/gooplaterightarm"/>
+					</if>
+				</if>
+			</if>	
+		</if>
+
+		<!--Taur armor -->
+		<if test="centaurPaladinArmor">
+			<if test="PlayerHasViewableOutfit">
 				<if test="breastRows.length gt 0">
 					<switch>
 						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
@@ -6048,154 +6294,128 @@
 					</switch>
 				</if>
 				<show part="armorChest/fullplatebottom"/>
-				<if test="(legCount!=4) and (showLegClothing)">
-					<show part="armorLegs/fullplateLegs"/>
-				</if>
 				<if test="showArmClothing">
 					<show part="armorLeftArm/fullplateleftarm"/>
 					<show part="armorRightArm/fullplaterightarm"/>
 				</if>
-			</if>
-		</if>
-		
-		<!-- Valeria -->
-		<if test="gooArmor">
-			<if test="showClothing">
-				<if test="breastRows.length gt 0">
-					<switch>
-						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-							<show part="armorNeck/gooplatetopMale"/>
-						</case>
-						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-							<show part="armorNeck/gooplatetopMale"/>
-						</case>
-						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-							<show part="armorNeck/gooplatetopFemale"/>
-						</case>
-						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-							<show part="armorNeck/gooplatetopFemale"/>
-						</case>
-						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-							<show part="armorNeck/gooplatetopFemaleLarge"/>
-						</case>
-						<default>
-							<show part="armorNeck/gooplatetopFemaleLarge"/>
-						</default>
-					</switch>
+				<if test="legCount==4">
+					<show part="armorLegs_fg/taurarmorbottom"/>
 				</if>
-				<show part="armorChest/gooplatebottom"/>
-				<if test="showLegClothing">
-					<show part="armorLegs/gooplateLegs"/>
-					<if test="legCount==4">
-						<hide part="armorLegs/*"/>
-						<show part="armorLegs_fg/gootaurarmorbottom"/>
-					</if>
-				</if>
-				<if test="showArmClothing">
-					<show part="armorLeftArm/gooplateleftarm"/>
-					<show part="armorRightArm/gooplaterightarm"/>
-				</if>
-			</if>
-		</if>
-
-		<!--Taur armor -->
-		<if test="centaurPaladinArmor">
-			<if test="breastRows.length gt 0">
-				<switch>
-					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-						<show part="armorNeck/fullplatetopMale"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-						<show part="armorNeck/fullplatetopMale"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-						<show part="armorNeck/fullplatetopFemale"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-						<show part="armorNeck/fullplatetopFemale"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-						<show part="armorNeck/fullplatetopFemaleLarge"/>
-					</case>
-					<default>
-						<show part="armorNeck/fullplatetopFemaleLarge"/>
-					</default>
-				</switch>
-			</if>
-			<show part="armorChest/fullplatebottom"/>
-			<if test="showArmClothing">
-				<show part="armorLeftArm/fullplateleftarm"/>
-				<show part="armorRightArm/fullplaterightarm"/>
-			</if>
-			<if test="legCount==4">
-				<show part="armorLegs_fg/taurarmorbottom"/>
-			</if>
+			</if>	
 		</if>
 
 		<if test="centaurBlackGuardArmor">
-			<if test="breastRows.length gt 0">
-				<switch>
-					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-						<show part="armorNeck/blackFullplatetopMale"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-						<show part="armorNeck/blackFullplatetopMale"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-						<show part="armorNeck/blackFullplatetopFemale"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-						<show part="armorNeck/blackFullplatetopFemale"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-						<show part="armorNeck/blackFullplatetopFemaleLarge"/>
-					</case>
-					<default>
-						<show part="armorNeck/blackFullplatetopFemaleLarge"/>
-					</default>
-				</switch>
-			</if>
-			<show part="armorChest/blackFullplatebottom"/>
-			<if test="showArmClothing">
-				<show part="armorLeftArm/blackFullplateleftarm"/>
-				<show part="armorRightArm/blackFullplaterightarm"/>
-			</if>
-			<if test="legCount==4">
-				<show part="armorLegs_fg/blackTaurarmorbottom"/>
-			</if>
-		</if>
-		
-		<!--Scale Mail -->
-		<if test="scalemail">
-			<if test="showClothing">
+			<if test="PlayerHasViewableOutfit">
 				<if test="breastRows.length gt 0">
 					<switch>
 						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+							<show part="armorNeck/blackFullplatetopMale"/>
 						</case>
 						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-							<show part="armorNeck/scalemailTopSmall"/>
+							<show part="armorNeck/blackFullplatetopMale"/>
 						</case>
 						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-							<hide part="breasts/*"/>
-							<show part="armorNeck/scalemailTopSmall"/>
+							<show part="armorNeck/blackFullplatetopFemale"/>
 						</case>
 						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-							<show part="armorNeck/scalemailTopLarge"/>
+							<show part="armorNeck/blackFullplatetopFemale"/>
 						</case>
 						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-							<hide part="breasts/*"/>
-							<show part="armorNeck/scalemailTopLarge"/>
+							<show part="armorNeck/blackFullplatetopFemaleLarge"/>
 						</case>
 						<default>
-							<show part="armorNeck/scalemailTopLarge"/>
+							<show part="armorNeck/blackFullplatetopFemaleLarge"/>
 						</default>
 					</switch>
-				</if>	
-				<show part="armorChest/scalemail"/>
-				<if test="showLegClothing">
+				</if>
+				<show part="armorChest/blackFullplatebottom"/>
+				<if test="showArmClothing">
+					<show part="armorLeftArm/blackFullplateleftarm"/>
+					<show part="armorRightArm/blackFullplaterightarm"/>
+				</if>
+				<if test="legCount==4">
+					<show part="armorLegs_fg/blackTaurarmorbottom"/>
+				</if>
+			</if>
+		</if>	
+		
+		<!--Scale Mail -->
+		<if test="scalemail">
+			<if test="PlayerHasViewableOutfit">
+				<if test="showClothing">
+					<if test="breastRows.length gt 0">
+						<switch>
+							<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+								<show part="armorNeck/scalemailTopSmall"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+								<hide part="breasts/*"/>
+								<show part="armorNeck/scalemailTopSmall"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+								<show part="armorNeck/scalemailTopLarge"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+								<hide part="breasts/*"/>
+								<show part="armorNeck/scalemailTopLarge"/>
+							</case>
+							<default>
+								<show part="armorNeck/scalemailTopLarge"/>
+							</default>
+						</switch>
+					</if>	
+					<show part="armorChest/scalemail"/>
+					<if test="showLegClothing">
+						<if test="isTaur()">
+							<else>
+								<show part="armorLegs/scalemailLegs"/>
+								<hide part="panty/*"/>
+								<hide part="penis/*"/>
+								<hide part="balls/*"/>
+								<hide part="pussy/*"/>
+								<hide part="overpussy/*"/>
+							</else>
+						</if>
+						<if test="showArmClothing">
+							<show part="armorLeftArm/scalemailLeftArm"/>
+							<show part="armorRightArm/scalemailRightArm"/>
+						</if>
+					</if>
+				</if>
+			</if>
+		</if>	
+
+		<!--Full Chainmail set -->
+		<if test="chainMail">
+			<if test="PlayerHasViewableOutfit">
+				<if test="showClothing">
+					<if test="breastRows.length gt 0">
+						<switch>
+							<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+								<show part="armorNeck/chainmailChestSmall"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+								<show part="armorNeck/chainmailChestMedium"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+								<show part="armorNeck/chainmailChestMedium"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+								<show part="armorNeck/chainmailChestLarge"/>
+							</case>
+							<default>
+								<show part="armorNeck/chainmailChestLarge"/>
+							</default>
+						</switch>
+					</if>
+					<show part="clothe/chainmailchest"/>
 					<if test="isTaur()">
 						<else>
-							<show part="armorLegs/scalemailLegs"/>
+							<show part="clotheLegs/chainmailLegs"/>
 							<hide part="panty/*"/>
 							<hide part="penis/*"/>
 							<hide part="balls/*"/>
@@ -6204,74 +6424,34 @@
 						</else>
 					</if>
 					<if test="showArmClothing">
-						<show part="armorLeftArm/scalemailLeftArm"/>
-						<show part="armorRightArm/scalemailRightArm"/>
+						<show part="clothLeftArm/chainmailLeftArm"/>
+						<show part="clothRightArm/chainmailRightArm"/>
 					</if>
 				</if>
 			</if>
 		</if>	
 
-		<!--Full Chainmail set -->
-		<if test="chainMail">
-			<if test="showClothing">
-				<if test="breastRows.length gt 0">
-					<switch>
-						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-						</case>
-						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-							<show part="armorNeck/chainmailChestSmall"/>
-						</case>
-						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-							<show part="armorNeck/chainmailChestMedium"/>
-						</case>
-						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-							<show part="armorNeck/chainmailChestMedium"/>
-						</case>
-						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-							<show part="armorNeck/chainmailChestLarge"/>
-						</case>
-						<default>
-							<show part="armorNeck/chainmailChestLarge"/>
-						</default>
-					</switch>
-				</if>
-				<show part="clothe/chainmailchest"/>
-				<if test="isTaur()">
-					<else>
-						<show part="clotheLegs/chainmailLegs"/>
-						<hide part="panty/*"/>
-						<hide part="penis/*"/>
-						<hide part="balls/*"/>
-						<hide part="pussy/*"/>
-						<hide part="overpussy/*"/>
-					</else>
-				</if>
-				<if test="showArmClothing">
-					<show part="clothLeftArm/chainmailLeftArm"/>
-					<show part="clothRightArm/chainmailRightArm"/>
-				</if>
-			</if>
-		</if>
-
 		<!--Goblinmancer set -->
 		<if test="goblinTechnomancerClothe">
-			<if test="showClothing">
-				<show part="clothe/goblinTechnomancerClothe"/>
-				<if test="showArmClothing">
-					<show part="clothe/goblinTechnomancerClotheArms"/>
-					<else>
-						<hide part="clothe/goblinTechnomancerClothe"/>
-						<show part="clotheBehindBreast/goblinTechnomancerClothe"/>
-					</else>
-				</if>
-				<if test="showLegClothing">
-					<show part="clotheLegs/goblinTechnomancerClotheBoots"/>
-					<else>
-						<if test="lowerbody == LowerBody.BUNNY or lowerbody == LowerBody.JABBERWOCKY">
-							<hide part="clotheLegs/goblinTechnomancerClotheBoots"/>
-							<show part="clotheLegs/goblinTechnomancerClotheBootsBaggy"/>
-						</if>
-					</else>
+			<if test="PlayerHasViewableOutfit">
+				<if test="showClothing">
+					<show part="clothe/goblinTechnomancerClothe"/>
+					<if test="showArmClothing">
+						<show part="clothe/goblinTechnomancerClotheArms"/>
+						<else>
+							<hide part="clothe/goblinTechnomancerClothe"/>
+							<show part="clotheBehindBreast/goblinTechnomancerClothe"/>
+						</else>
+					</if>
+					<if test="showLegClothing">
+						<show part="clotheLegs/goblinTechnomancerClotheBoots"/>
+						<else>
+							<if test="lowerbody == LowerBody.BUNNY or lowerbody == LowerBody.JABBERWOCKY">
+								<hide part="clotheLegs/goblinTechnomancerClotheBoots"/>
+								<show part="clotheLegs/goblinTechnomancerClotheBootsBaggy"/>
+							</if>
+						</else>
+					</if>
 				</if>
 			</if>
 		</if>
@@ -6312,112 +6492,118 @@
 		</if>
 		
 		<if test="CowGirlOutfit">
-			<if test="showClothing">
-				<show part="clotheBehindBreast/cowgirlClothe"/>
-				<show part="armorNeck/CowgirlClothe"/>
-				<show part="clothCape_fg/cowgirlClothe"/>
-				<if test="showArmClothing">
-					<show part="clothRightArm/cowgirlClothe"/>
-				</if>
-				<if test="showLegClothing">
-					<show part="clotheLegs/cowgirlClothe"/>
-					<else>
-						<if test="lowerbody == LowerBody.HOOFED or lowerbody == LowerBody.BUNNY or lowerbody == LowerBody.JABBERWOCKY">
-							<show part="clotheLegs/cowgirlClothe"/>
-						</if>
-					</else>
-				</if>
-			</if>
-		</if>
-
-
-		<!--Mage set -->
-		<if test="MageRobe">
-			<if test="showClothing">
-				<show part="clotheUnderAmulet/mageRobe"/>
-				<show part="clothe/mageRobe"/>
-				<if test="breastRows.length gt 0">
-					<switch>
-						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-							<show part="bra_fg/mageRobeBraSmall"/>
-						</case>
-						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-							<show part="bra_fg/mageRobeBraSmall"/>
-						</case>
-						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-							<show part="bra_fg/mageRobeBraMedium"/>
-						</case>
-						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-							<show part="bra_fg/mageRobeBraMedium"/>
-						</case>
-						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-							<show part="bra_fg/mageRobeBraLarge"/>
-						</case>
-						<default>
-							<show part="bra_fg/mageRobeBraLarge"/>
-						</default>
-					</switch>
-				</if>
-				<if test="showArmClothing">
-					<show part="clothRightArm/mageRobe"/>
-					<show part="clothLeftArm/mageRobe"/>
-				</if>
-				<if test="showLegClothing">
-					<show part="clotheLegs/mageRobe"/>
-					<hide part="panty/*"/>
-					<hide part="penis/*"/>
-					<hide part="balls/*"/>
-					<hide part="pussy/*"/>
-					<hide part="overpussy/*"/>
-				</if>
-			</if>
-		</if>
-
-		<!--Tanuki set -->
-		<if test="travelingMerchantOutfit">
-			<if test="(showClothing) and (showArmClothing)">
-				<show part="clotheHead/merchantClotheHat"/>
-				<show part="armorNeck/merchantClotheCape_fg"/>
-				<show part="clothe/merchantClothe"/>
-				<show part="clothCape_bg/merchantClotheCape_bg"/>
-				<show part="clothRightArm/merchantClotheArms"/>
-				<if test="breastRows.length gt 0">
-					<switch>
-						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-							<hide part="breasts/*"/>
-						</case>
-						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-							<hide part="breasts/*"/>
-						</case>
-						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-							<show part="bra_fg/merchantClotheBraMedium"/>
-						</case>
-						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-							<show part="bra_fg/merchantClotheBraMedium"/>
-						</case>
-						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-							<show part="bra_fg/merchantClotheBraLarge"/>
-						</case>
-						<default>
-							<show part="bra_fg/merchantClotheBraLarge"/>
-						</default>
-					</switch>
-				</if>
-				<if test="showLegClothing">
-					<hide part="panty/*"/>
-					<hide part="penis/*"/>
-					<hide part="balls/*"/>
-					<hide part="pussy/*"/>
-					<hide part="overpussy/*"/>
-					<if test="femininity &gt;=40">
-						<show part="clotheLegs/merchantClotheBoots"/>
+			<if test="PlayerHasViewableOutfit">
+				<if test="showClothing">
+					<show part="clotheBehindBreast/cowgirlClothe"/>
+					<show part="armorNeck/CowgirlClothe"/>
+					<show part="clothCape_fg/cowgirlClothe"/>
+					<if test="showArmClothing">
+						<show part="clothRightArm/cowgirlClothe"/>
+					</if>
+					<if test="showLegClothing">
+						<show part="clotheLegs/cowgirlClothe"/>
 						<else>
-							<show part="clotheLegs/merchantClotheBootsMale"/>
+							<if test="lowerbody == LowerBody.HOOFED or lowerbody == LowerBody.BUNNY or lowerbody == LowerBody.JABBERWOCKY">
+								<show part="clotheLegs/cowgirlClothe"/>
+							</if>
 						</else>
 					</if>
 				</if>
 			</if>
+		</if>	
+
+
+		<!--Mage set -->
+		<if test="MageRobe">
+			<if test="PlayerHasViewableOutfit">
+				<if test="showClothing">
+					<show part="clotheUnderAmulet/mageRobe"/>
+					<show part="clothe/mageRobe"/>
+					<if test="breastRows.length gt 0">
+						<switch>
+							<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+								<show part="bra_fg/mageRobeBraSmall"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+								<show part="bra_fg/mageRobeBraSmall"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+								<show part="bra_fg/mageRobeBraMedium"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+								<show part="bra_fg/mageRobeBraMedium"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+								<show part="bra_fg/mageRobeBraLarge"/>
+							</case>
+							<default>
+								<show part="bra_fg/mageRobeBraLarge"/>
+							</default>
+						</switch>
+					</if>
+					<if test="showArmClothing">
+						<show part="clothRightArm/mageRobe"/>
+						<show part="clothLeftArm/mageRobe"/>
+					</if>
+					<if test="showLegClothing">
+						<show part="clotheLegs/mageRobe"/>
+						<hide part="panty/*"/>
+						<hide part="penis/*"/>
+						<hide part="balls/*"/>
+						<hide part="pussy/*"/>
+						<hide part="overpussy/*"/>
+					</if>
+				</if>
+			</if>	
 		</if>
+
+		<!--Tanuki set -->
+		<if test="travelingMerchantOutfit">
+			<if test="PlayerHasViewableOutfit">
+				<if test="(showClothing) and (showArmClothing)">
+					<show part="clotheHead/merchantClotheHat"/>
+					<show part="armorNeck/merchantClotheCape_fg"/>
+					<show part="clothe/merchantClothe"/>
+					<show part="clothCape_bg/merchantClotheCape_bg"/>
+					<show part="clothRightArm/merchantClotheArms"/>
+					<if test="breastRows.length gt 0">
+						<switch>
+							<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+								<hide part="breasts/*"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+								<hide part="breasts/*"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+								<show part="bra_fg/merchantClotheBraMedium"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+								<show part="bra_fg/merchantClotheBraMedium"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+								<show part="bra_fg/merchantClotheBraLarge"/>
+							</case>
+							<default>
+								<show part="bra_fg/merchantClotheBraLarge"/>
+							</default>
+						</switch>
+					</if>
+					<if test="showLegClothing">
+						<hide part="panty/*"/>
+						<hide part="penis/*"/>
+						<hide part="balls/*"/>
+						<hide part="pussy/*"/>
+						<hide part="overpussy/*"/>
+						<if test="femininity &gt;=40">
+							<show part="clotheLegs/merchantClotheBoots"/>
+							<else>
+								<show part="clotheLegs/merchantClotheBootsMale"/>
+							</else>
+						</if>
+					</if>
+				</if>
+			</if>
+		</if>	
 
 		<!--Dragonscales set -->
 		<if test="dragonscaleBikiniBra">
@@ -6883,50 +7069,52 @@
 			<show part="clotheHead_bg/anubisRoyalDressLeft"/>
 		</if>
 		<if test="deathPrinceOutfit">
-			<if test="breastRows.length gt 0">
-				<switch>
-					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.A"><!--FLAT-->
-						<show part="bra/anubisRoyalDressBraSmall"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-						<show part="bra/anubisRoyalDressBraSmall"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-						<show part="bra/anubisRoyalDressBraMedium"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-						<show part="bra/anubisRoyalDressBraMedium"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-						<show part="bra/anubisRoyalDressBraLarge"/>
-					</case>
-					<default>
-						<show part="bra/anubisRoyalDressBraLarge"/>
-					</default>
-				</switch>
-			</if>
-			<if test="showClothing">
-				<show part="clotheUnderAmulet/anubisRoyalDress"/>
-				<if test="showPanty">
+			<if test="PlayerHasViewableOutfit">
+				<if test="breastRows.length gt 0">
+					<switch>
+						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.A"><!--FLAT-->
+							<show part="bra/anubisRoyalDressBraSmall"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<show part="bra/anubisRoyalDressBraSmall"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+							<show part="bra/anubisRoyalDressBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="bra/anubisRoyalDressBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<show part="bra/anubisRoyalDressBraLarge"/>
+						</case>
+						<default>
+							<show part="bra/anubisRoyalDressBraLarge"/>
+						</default>
+					</switch>
+				</if>
+				<if test="showClothing">
+					<show part="clotheUnderAmulet/anubisRoyalDress"/>
+					<if test="showPanty">
+						<if test="isTaur()">
+							<show part="panty/sexyBlackBikiniPanty"/>
+							<hide part="penis/*"/>
+							<hide part="balls/*"/>
+							<hide part="pussy/*"/>
+							<hide part="overpussy/*"/>
+						</if>
+					</if>
+				</if>
+				<if test="showLegClothing">
 					<if test="isTaur()">
-						<show part="panty/sexyBlackBikiniPanty"/>
-						<hide part="penis/*"/>
-						<hide part="balls/*"/>
-						<hide part="pussy/*"/>
-						<hide part="overpussy/*"/>
+						<else>
+							<show part="clotheLegs/anubisRoyalDress"/>
+						</else>
 					</if>
 				</if>
 			</if>
-			<if test="showLegClothing">
-                <if test="isTaur()">
-                    <else>
-                        <show part="clotheLegs/anubisRoyalDress"/>
-                    </else>
-                </if>
-            </if>
-		</if>
+		</if>	
 
 		<!--Bestial Blademaster set -->
 		<if test="bestialBlademasterAccoutrements">
@@ -6935,740 +7123,776 @@
 			<show part="clothCape/LizBladeAccClothBack"/>
 		</if>
 		<if test="bestialBlademasterArmor">
-			<if test="breastRows.length gt 0">
-				<switch>
-					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-						<show part="armorNeck/LizBladeTopFlat"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.A"><!--FLAT-->
-						<show part="armorNeck/LizBladeTopSmall"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-						<show part="armorNeck/LizBladeTopSmall"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-						<show part="armorNeck/LizBladeTopMed"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-						<show part="armorNeck/LizBladeTopMed"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-						<show part="armorNeck/LizBladeTopLarge"/>
-					</case>
-					<default>
-						<show part="armorNeck/LizBladeTopLarge"/>
-					</default>
-				</switch>
+			<if test="PlayerHasViewableOutfit">
+				<if test="breastRows.length gt 0">
+					<switch>
+						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+							<show part="armorNeck/LizBladeTopFlat"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.A"><!--FLAT-->
+							<show part="armorNeck/LizBladeTopSmall"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<show part="armorNeck/LizBladeTopSmall"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+							<show part="armorNeck/LizBladeTopMed"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="armorNeck/LizBladeTopMed"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<show part="armorNeck/LizBladeTopLarge"/>
+						</case>
+						<default>
+							<show part="armorNeck/LizBladeTopLarge"/>
+						</default>
+					</switch>
+				</if>	
+				<if test="showClothing">
+					<show part="clothe/LizBladeArmor"/>
+					<else>
+						<if test="arms.type == Arms.DISPLACER or arms.type == Arms.KUMIHO">
+							<show part="clothe/LizBladeArmor"/>
+						</if>
+					</else>
+				</if>
 			</if>	
-			<if test="showClothing">
-				<show part="clothe/LizBladeArmor"/>
-				<else>
-                    <if test="arms.type == Arms.DISPLACER or arms.type == Arms.KUMIHO">
-                        <show part="clothe/LizBladeArmor"/>
-                    </if>
-                </else>
-			</if>
 		</if>
 
 		<!--Comfortable clothing set -->
         <if test="ComfyCLothes">
-            <if test="showClothing">
-                <show part="clothe/comfortableClothes"/>
-                <if test="breastRows.length gt 0">
-                    <switch>
-                        <case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-                        </case>
-                        <case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-                            <show part="bra_fg/comfortableClotheBraSmall"/>
-                        </case>
-                        <case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-                            <show part="bra_fg/comfortableClotheBraMedium"/>
-                        </case>
-                        <case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-                            <show part="bra_fg/comfortableClotheBraMedium"/>
-                        </case>
-                        <case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-                            <show part="bra_fg/comfortableClotheBraLarge"/>
-                        </case>
-                        <default>
-                            <show part="bra_fg/comfortableClotheBraLarge"/>
-                        </default>
-                    </switch>
-                </if>
-                <if test="showLegClothing">
-                    <if test="isTaur()">
-                        <else>
-                            <show part="clotheLegs/comfortableClothes"/>
-                            <hide part="panty/*"/>
-							<hide part="penis/*"/>
-                            <hide part="balls/*"/>
-							<hide part="pussy/*"/>
-							<hide part="overpussy/*"/>
-                        </else>
-                    </if>
-                </if>
-            </if>
-        </if>
+            <if test="PlayerHasViewableOutfit">
+				<if test="showClothing">
+					<show part="clothe/comfortableClothes"/>
+					<if test="breastRows.length gt 0">
+						<switch>
+							<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+								<show part="bra_fg/comfortableClotheBraSmall"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+								<show part="bra_fg/comfortableClotheBraMedium"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+								<show part="bra_fg/comfortableClotheBraMedium"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+								<show part="bra_fg/comfortableClotheBraLarge"/>
+							</case>
+							<default>
+								<show part="bra_fg/comfortableClotheBraLarge"/>
+							</default>
+						</switch>
+					</if>
+					<if test="showLegClothing">
+						<if test="isTaur()">
+							<else>
+								<show part="clotheLegs/comfortableClothes"/>
+								<hide part="panty/*"/>
+								<hide part="penis/*"/>
+								<hide part="balls/*"/>
+								<hide part="pussy/*"/>
+								<hide part="overpussy/*"/>
+							</else>
+						</if>
+					</if>
+				</if>
+			</if>
+		</if>	
 		
 		<!-- Green Adventurer set -->
 		<if test="greenAdventurerClothes">
-			<hide part="breasts/*"/>
-			<if test="showClothing">
-				<show part="clothe/TwinkShirt"/>
-				<show part="clotheHead/TwinkHatFront"/>
-				<show part="clotheHead_bg/TwinkHatBack"/>
-				<if test="showArmClothing">
-					<show part="clothLeftArm/TwinkLeftArm"/>
-					<show part="clothRightArm/TwinkRightArm"/>
-				</if>
-				<if test="showLegClothing">
-					<if test="isTaur()">
-						<else>
-							<show part="clotheLegs/TwinkPants"/>
-							<hide part="panty/*"/>
-							<hide part="penis/*"/>
-							<hide part="balls/*"/>
-							<hide part="pussy/*"/>
-							<hide part="overpussy/*"/>
-						</else>
+			<if test="PlayerHasViewableOutfit">
+				<hide part="breasts/*"/>
+				<if test="showClothing">
+					<show part="clothe/TwinkShirt"/>
+					<show part="clotheHead/TwinkHatFront"/>
+					<show part="clotheHead_bg/TwinkHatBack"/>
+					<if test="showArmClothing">
+						<show part="clothLeftArm/TwinkLeftArm"/>
+						<show part="clothRightArm/TwinkRightArm"/>
+					</if>
+					<if test="showLegClothing">
+						<if test="isTaur()">
+							<else>
+								<show part="clotheLegs/TwinkPants"/>
+								<hide part="panty/*"/>
+								<hide part="penis/*"/>
+								<hide part="balls/*"/>
+								<hide part="pussy/*"/>
+								<hide part="overpussy/*"/>
+							</else>
+						</if>
 					</if>
 				</if>
 			</if>
-		</if>
+		</if>	
 				
 		<!--Quipao set -->
 		<if test="redQipao">
-			<show part="clothe/qipaoRedClothe"/>
-			<if test="breastRows.length gt 0">
-				<switch>
-					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-						<show part="bra_fg/qipaoRedBraSmall"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-						<show part="bra_fg/qipaoRedBraSmall"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-						<show part="bra_fg/qipaoRedBraMedium"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-						<show part="bra_fg/qipaoRedBraMedium"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-						<show part="bra_fg/qipaoRedBraLarge"/>
-					</case>
-					<default>
-						<show part="bra_fg/qipaoRedBraLarge"/>
-					</default>
-				</switch>
-			</if>
-		</if>
-		<if test="purpleQipao">
-			<show part="clothe/qipaoPurpleClothe"/>
-			<if test="breastRows.length gt 0">
-				<switch>
-					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-						<show part="bra_fg/qipaoPurpleBraSmall"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-						<show part="bra_fg/qipaoPurpleBraSmall"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-						<show part="bra_fg/qipaoPurpleBraMedium"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-						<show part="bra_fg/qipaoPurpleBraMedium"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-						<show part="bra_fg/qipaoPurpleBraLarge"/>
-					</case>
-					<default>
-						<show part="bra_fg/qipaoPurpleBraLarge"/>
-					</default>
-				</switch>
-			</if>
-		</if>
-		<if test="greenQipao">
-			<show part="clothe/qipaoGreenClothe"/>
-			<if test="breastRows.length gt 0">
-				<switch>
-					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-						<show part="bra_fg/qipaoGreenBraSmall"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-						<show part="bra_fg/qipaoGreenBraSmall"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-						<show part="bra_fg/qipaoGreenBraMedium"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-						<show part="bra_fg/qipaoGreenBraMedium"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-						<show part="bra_fg/qipaoGreenBraLarge"/>
-					</case>
-					<default>
-						<show part="bra_fg/qipaoGreenBraLarge"/>
-					</default>
-				</switch>
-			</if>
-		</if>
-		<if test="blueQipao">
-			<show part="clothe/qipaoBlueClothe"/>
-			<if test="breastRows.length gt 0">
-				<switch>
-					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-						<show part="bra_fg/qipaoBlueBraSmall"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-						<show part="bra_fg/qipaoBlueBraSmall"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-						<show part="bra_fg/qipaoBlueBraMedium"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-						<show part="bra_fg/qipaoBlueBraMedium"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-						<show part="bra_fg/qipaoBlueBraLarge"/>
-					</case>
-					<default>
-						<show part="bra_fg/qipaoBlueBraLarge"/>
-					</default>
-				</switch>
-			</if>
-		</if>
-
-		<!-- Kraken Dress -->
-        <if test="krakenBlackDress">
-			<if test="breastRows.length gt 0">
-				<switch>
-					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-						<show part="clothe/krakenS"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-						<show part="clothe/krakenS"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-						<show part="clothe/krakenM"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-						<show part="clothe/krakenM"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-						<show part="clothe/krakenL"/>
-					</case>
-					<default>
-						<show part="clothe/krakenL"/>
-					</default>
-				</switch>
-			</if>
-        </if>
-
-		<!-- Walpurgis Cloak -->
-		<if test="walpurgisIzaliaCloak">
-			<hide part="horns/*"/>
-			<hide part="ears/*"/>
-			<hide part="ears_bg/*"/>
-			<hide part="antennae/*"/>
-			<hide part="hair_bg/*"/>
-			<if test="hairType == Hair.BURNING">
-				<hide part="hair/*"/>
-				<show part="hair/hairHoodFire"/>
-			</if>
-			<if test="hairType == Hair.RAIJU">
-				<hide part="hair/*"/>
-				<show part="hair/feather"/>
-			</if>
-			<if test="hairType == Hair.FLUFFY">
-				<hide part="hair/*"/>
-				<show part="hair/feather"/>
-			</if>
-			<show part="armorNeck/walpurgisClothes"/>
-			<show part="clothCape/walpurgisClothesBack"/>
-        </if>
-		
-		<!-- Fran Cloak -->
-		<if test="franRegalia">
-			<hide part="breasts/*"/>
-			<show part="armorNeck/francescaClothes"/>
-			<show part="clothCape/francescaClotheBack"/>
-			<if test="showClothing">
-				<show part="clothe/francescaClothes"/>
-				<if test="showArmClothing">
-					<show part="clothLeftArm/francesca"/>
-					<show part="clothRightArm/francesca"/>
-				</if>
-				<if test="showLegClothing">
-					<if test="isTaur()">
-						<else>
-							<show part="clotheLegs/francescaBoots"/>
-							<hide part="panty/*"/>
-							<hide part="penis/*"/>
-							<hide part="balls/*"/>
-							<hide part="pussy/*"/>
-							<hide part="overpussy/*"/>
-						</else>
-					</if>
-				</if>
-			</if>
-        </if>
-		
-		<!--Nurse set -->
-		<if test="nurseClothing">
-			<if test="breastRows.length gt 0">
-				<switch>
-					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-						<hide part="breasts/*"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-						<show part="bra_fg/nurseClothingBraSmall"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-						<show part="bra_fg/nurseClothingBraMedium"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-						<show part="bra_fg/nurseClothingBraMedium"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-						<show part="bra_fg/nurseClothingBraLarge"/>
-					</case>
-					<default>
-						<show part="bra_fg/nurseClothingBraLarge"/>
-					</default>
-				</switch>
-			</if>
-			<if test="showClothing">
-				<show part="clotheBehindBreast/nurseClothingSkirt"/>
-				<show part="clotheHead/nurseClothingHat"/>
-				<if test="showLegClothing">
-					<show part="clotheLegs/nurseClothinglegs"/>
-				</if>
-			</if>
-		</if>
-
-		<!-- Scandalous Succubus set -->
-        <if test="scandalousSuccubusClothing">
-			<if test="breastRows.length gt 0">
-				<switch>
-					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-						<show part="bra/scandalousSuccubusClothingBraSmall"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-						<show part="bra/scandalousSuccubusClothingBraSmall"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-						<show part="bra/scandalousSuccubusClothingBraMedium"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-						<show part="bra/scandalousSuccubusClothingBraMedium"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-						<show part="bra/scandalousSuccubusClothingBraLarge"/>
-					</case>
-					<default>
-						<show part="bra/scandalousSuccubusClothingBraLarge"/>
-					</default>
-				</switch>
-			</if>
-			<if test="showClothing">
-				<if test="showArmClothing">
-					<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
-						<switch value="arms.type">
-							<case values="Arms.HUMAN,Arms.KITSUNE,Arms.ELF,Arms.RAIJU,Arms.CENTIPEDE">
-								<show part="clothRightArm/scandalousSuccubusClothingRightArmLewd"/>
-								<if test="PlayerHasAWeapon">
-									<show part="clothLeftArm/scandalousSuccubusClothingleftArm"/>
-									<else>
-										<show part="clothLeftArm/scandalousSuccubusClothingleftArmLewd"/>
-									</else>
-								</if>
-								<show part="glove_fg/scandalousSuccubusClothingRightArmFront"/>
-							</case>
-							<default>
-								<show part="clothLeftArm/scandalousSuccubusClothingleftArm"/>
-								<show part="clothRightArm/scandalousSuccubusClothingRightArm"/>
-							</default>
-						</switch>
-						<else>
-							<show part="clothLeftArm/scandalousSuccubusClothingleftArm"/>
-							<show part="clothRightArm/scandalousSuccubusClothingRightArm"/>
-						</else>
-					</if>
-				</if>
-				<if test="showLegClothing">
-					<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
-						<switch value="lowerBody">
-							<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.DEMONIC_HIGH_HEELS">
-								<switch value="arms.type">
-									<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.RAIJU,Arms.CENTIPEDE">
-										<show part="clotheLegs/scandalousSuccubusClothinglegsLewd"/>
-									</case>
-									<default>
-										<show part="clotheLegs/scandalousSuccubusClothinglegs"/>
-									</default>
-								</switch>
-							</case>
-						</switch>
-						<else>
-							<show part="clotheLegs/scandalousSuccubusClothinglegs"/>
-						</else>
-					</if>
-				</if>
-				<if test="playerHasWeirdLowerBody">
-                    <show part="panty/scandalousSuccubusClothingPantyTaur"/>
-					<else>
-                        <hide part="penis/*"/>
-                        <hide part="balls/*"/>
-                        <show part="panty/scandalousSuccubusClothingPanty"/>
-						<hide part="pussy/*"/>
-						<hide part="overpussy/*"/>
-					</else>
-				</if>
-			</if>
-		</if>
-
-		<!-- elf sets -->
-		<if test="elfClothing">
-			<if test="breastRows.length gt 0">
-				<switch>
-					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-						<show part="bra_fg/elfClothingBraSmall"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-						<show part="bra_fg/elfClothingBraMedium"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-						<show part="bra_fg/elfClothingBraMedium"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-						<show part="bra_fg/elfClothingBraLarge"/>
-					</case>
-					<default>
-						<show part="bra_fg/elfClothingBraLarge"/>
-					</default>
-				</switch>
-			</if>
-			<if test="showClothing">
-				<show part="clothe/elfClothing"/>
-				<show part="clothe/elfClothingSkirt"/>
-				<show part="armorNeck/elfClotheCape_fg"/>
-				<if test="showArmClothing">
-					<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
-						<switch value="arms.type">
-							<case values="Arms.HUMAN,Arms.KITSUNE,Arms.ELF,Arms.RAIJU,Arms.CENTIPEDE">
-								<show part="clothRightArm/elfClothingRightArmLewd"/>
-								<if test="PlayerHasAWeapon">
-									<show part="clothLeftArm/elfClothingleftArm"/>
-									<else>
-										<show part="clothLeftArm/elfClothingleftArmLewd"/>
-									</else>
-								</if>
-								<show part="glove_fg/elfClothingRightArmFront"/>
-							</case>
-							<default>
-								<show part="clothLeftArm/elfClothingleftArm"/>
-								<show part="clothRightArm/elfClothingRightArm"/>
-							</default>
-						</switch>
-						<else>
-							<show part="clothLeftArm/elfClothingleftArm"/>
-							<show part="clothRightArm/elfClothingRightArm"/>
-						</else>
-					</if>
-				</if>
-				<if test="showLegClothing">
-					<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
-						<switch value="lowerBody">
-							<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.DEMONIC_HIGH_HEELS">
-								<switch value="arms.type">
-									<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.RAIJU,Arms.CENTIPEDE">
-										<show part="clotheLegs/elfClothinglegsLewd"/>
-									</case>
-									<default>
-										<show part="clotheLegs/elfClothinglegs"/>
-									</default>
-								</switch>
-							</case>
-						</switch>
-						<else>
-							<show part="clotheLegs/elfClothinglegs"/>
-						</else>
-					</if>
-				</if>
-			</if>
-		</if>
-		
-		<if test="elfVillagerDress">
-			<if test="showClothing">
-				<show part="clothe/elfVillager"/>
+			<if test="PlayerHasViewableOutfit">
+				<show part="clothe/qipaoRedClothe"/>
 				<if test="breastRows.length gt 0">
 					<switch>
 						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-							<show part="bra_fg/elfDressBraSmall"/>
+							<show part="bra_fg/qipaoRedBraSmall"/>
 						</case>
 						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-							<show part="bra_fg/elfDressBraSmall"/>
+							<show part="bra_fg/qipaoRedBraSmall"/>
 						</case>
 						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-							<show part="bra_fg/elfDressBraMedium"/>
+							<show part="bra_fg/qipaoRedBraMedium"/>
 						</case>
 						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-							<show part="bra_fg/ElfDressBraMedium"/>
+							<show part="bra_fg/qipaoRedBraMedium"/>
 						</case>
 						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-							<show part="bra_fg/elfDressBraLarge"/>
+							<show part="bra_fg/qipaoRedBraLarge"/>
 						</case>
 						<default>
-							<show part="bra_fg/elfDressBraLarge"/>
+							<show part="bra_fg/qipaoRedBraLarge"/>
 						</default>
 					</switch>
 				</if>
 			</if>
-		</if>
-		
-		<if test="elfWizardDress">
-			<if test="breastRows.length gt 0">
-				<switch>
-					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-						<show part="bra_fg/elfClothingBraSmall"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-						<show part="bra_fg/elfClothingBraMedium"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-						<show part="bra_fg/elfClothingBraMedium"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-						<show part="bra_fg/elfClothingBraLarge"/>
-					</case>
-					<default>
-						<show part="bra_fg/elfClothingBraLarge"/>
-					</default>
-				</switch>
+		</if>	
+		<if test="purpleQipao">
+			<if test="PlayerHasViewableOutfit">
+				<show part="clothe/qipaoPurpleClothe"/>
+				<if test="breastRows.length gt 0">
+					<switch>
+						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+							<show part="bra_fg/qipaoPurpleBraSmall"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<show part="bra_fg/qipaoPurpleBraSmall"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+							<show part="bra_fg/qipaoPurpleBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="bra_fg/qipaoPurpleBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<show part="bra_fg/qipaoPurpleBraLarge"/>
+						</case>
+						<default>
+							<show part="bra_fg/qipaoPurpleBraLarge"/>
+						</default>
+					</switch>
+				</if>
 			</if>
-			<if test="showClothing">
-				<show part="clothe/elfWizard"/>
-				<show part="clothCape_bg/elfClotheCape_bg"/>
-				<show part="armorNeck/elfClotheCape_fg"/>
-				<if test="showArmClothing">
-					<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
-						<switch value="arms.type">
-							<case values="Arms.HUMAN,Arms.KITSUNE,Arms.ELF,Arms.RAIJU,Arms.CENTIPEDE">
-								<show part="clothRightArm/elfClothingRightArmLewd"/>
-								<if test="PlayerHasAWeapon">
+		</if>	
+		<if test="greenQipao">
+			<if test="PlayerHasViewableOutfit">
+				<show part="clothe/qipaoGreenClothe"/>
+				<if test="breastRows.length gt 0">
+					<switch>
+						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+							<show part="bra_fg/qipaoGreenBraSmall"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<show part="bra_fg/qipaoGreenBraSmall"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+							<show part="bra_fg/qipaoGreenBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="bra_fg/qipaoGreenBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<show part="bra_fg/qipaoGreenBraLarge"/>
+						</case>
+						<default>
+							<show part="bra_fg/qipaoGreenBraLarge"/>
+						</default>
+					</switch>
+				</if>
+			</if>
+		</if>	
+		<if test="blueQipao">
+			<if test="PlayerHasViewableOutfit">
+				<show part="clothe/qipaoBlueClothe"/>
+				<if test="breastRows.length gt 0">
+					<switch>
+						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+							<show part="bra_fg/qipaoBlueBraSmall"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<show part="bra_fg/qipaoBlueBraSmall"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+							<show part="bra_fg/qipaoBlueBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="bra_fg/qipaoBlueBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<show part="bra_fg/qipaoBlueBraLarge"/>
+						</case>
+						<default>
+							<show part="bra_fg/qipaoBlueBraLarge"/>
+						</default>
+					</switch>
+				</if>
+			</if>
+		</if>	
+
+		<!-- Kraken Dress -->
+        <if test="krakenBlackDress">
+			<if test="PlayerHasViewableOutfit">
+				<if test="breastRows.length gt 0">
+					<switch>
+						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+							<show part="clothe/krakenS"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<show part="clothe/krakenS"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+							<show part="clothe/krakenM"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="clothe/krakenM"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<show part="clothe/krakenL"/>
+						</case>
+						<default>
+							<show part="clothe/krakenL"/>
+						</default>
+					</switch>
+				</if>
+			</if>
+		</if>	
+
+		<!-- Walpurgis Cloak -->
+		<if test="walpurgisIzaliaCloak">
+			<if test="PlayerHasViewableOutfit">
+				<hide part="horns/*"/>
+				<hide part="ears/*"/>
+				<hide part="ears_bg/*"/>
+				<hide part="antennae/*"/>
+				<hide part="hair_bg/*"/>
+				<if test="hairType == Hair.BURNING">
+					<hide part="hair/*"/>
+					<show part="hair/hairHoodFire"/>
+				</if>
+				<if test="hairType == Hair.RAIJU">
+					<hide part="hair/*"/>
+					<show part="hair/feather"/>
+				</if>
+				<if test="hairType == Hair.FLUFFY">
+					<hide part="hair/*"/>
+					<show part="hair/feather"/>
+				</if>
+				<show part="armorNeck/walpurgisClothes"/>
+				<show part="clothCape/walpurgisClothesBack"/>
+			</if>
+		</if>	
+		
+		<!-- Fran Cloak -->
+		<if test="franRegalia">
+			<if test="PlayerHasViewableOutfit">
+				<hide part="breasts/*"/>
+				<show part="armorNeck/francescaClothes"/>
+				<show part="clothCape/francescaClotheBack"/>
+				<if test="showClothing">
+					<show part="clothe/francescaClothes"/>
+					<if test="showArmClothing">
+						<show part="clothLeftArm/francesca"/>
+						<show part="clothRightArm/francesca"/>
+					</if>
+					<if test="showLegClothing">
+						<if test="isTaur()">
+							<else>
+								<show part="clotheLegs/francescaBoots"/>
+								<hide part="panty/*"/>
+								<hide part="penis/*"/>
+								<hide part="balls/*"/>
+								<hide part="pussy/*"/>
+								<hide part="overpussy/*"/>
+							</else>
+						</if>
+					</if>
+				</if>
+			</if>
+		</if>	
+		
+		<!--Nurse set -->
+		<if test="nurseClothing">
+			<if test="PlayerHasViewableOutfit">
+				<if test="breastRows.length gt 0">
+					<switch>
+						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+							<hide part="breasts/*"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<show part="bra_fg/nurseClothingBraSmall"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+							<show part="bra_fg/nurseClothingBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="bra_fg/nurseClothingBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<show part="bra_fg/nurseClothingBraLarge"/>
+						</case>
+						<default>
+							<show part="bra_fg/nurseClothingBraLarge"/>
+						</default>
+					</switch>
+				</if>
+				<if test="showClothing">
+					<show part="clotheBehindBreast/nurseClothingSkirt"/>
+					<show part="clotheHead/nurseClothingHat"/>
+					<if test="showLegClothing">
+						<show part="clotheLegs/nurseClothinglegs"/>
+					</if>
+				</if>
+			</if>
+		</if>	
+
+		<!-- Scandalous Succubus set -->
+        <if test="scandalousSuccubusClothing">
+			<if test="PlayerHasViewableOutfit">
+				<if test="breastRows.length gt 0">
+					<switch>
+						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+							<show part="bra/scandalousSuccubusClothingBraSmall"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<show part="bra/scandalousSuccubusClothingBraSmall"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+							<show part="bra/scandalousSuccubusClothingBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="bra/scandalousSuccubusClothingBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<show part="bra/scandalousSuccubusClothingBraLarge"/>
+						</case>
+						<default>
+							<show part="bra/scandalousSuccubusClothingBraLarge"/>
+						</default>
+					</switch>
+				</if>
+				<if test="showClothing">
+					<if test="showArmClothing">
+						<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
+							<switch value="arms.type">
+								<case values="Arms.HUMAN,Arms.KITSUNE,Arms.ELF,Arms.RAIJU,Arms.CENTIPEDE">
+									<show part="clothRightArm/scandalousSuccubusClothingRightArmLewd"/>
+									<if test="PlayerHasAWeapon">
+										<show part="clothLeftArm/scandalousSuccubusClothingleftArm"/>
+										<else>
+											<show part="clothLeftArm/scandalousSuccubusClothingleftArmLewd"/>
+										</else>
+									</if>
+									<show part="glove_fg/scandalousSuccubusClothingRightArmFront"/>
+								</case>
+								<default>
+									<show part="clothLeftArm/scandalousSuccubusClothingleftArm"/>
+									<show part="clothRightArm/scandalousSuccubusClothingRightArm"/>
+								</default>
+							</switch>
+							<else>
+								<show part="clothLeftArm/scandalousSuccubusClothingleftArm"/>
+								<show part="clothRightArm/scandalousSuccubusClothingRightArm"/>
+							</else>
+						</if>
+					</if>
+					<if test="showLegClothing">
+						<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
+							<switch value="lowerBody">
+								<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.DEMONIC_HIGH_HEELS">
+									<switch value="arms.type">
+										<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.RAIJU,Arms.CENTIPEDE">
+											<show part="clotheLegs/scandalousSuccubusClothinglegsLewd"/>
+										</case>
+										<default>
+											<show part="clotheLegs/scandalousSuccubusClothinglegs"/>
+										</default>
+									</switch>
+								</case>
+							</switch>
+							<else>
+								<show part="clotheLegs/scandalousSuccubusClothinglegs"/>
+							</else>
+						</if>
+					</if>
+					<if test="playerHasWeirdLowerBody">
+						<show part="panty/scandalousSuccubusClothingPantyTaur"/>
+						<else>
+							<hide part="penis/*"/>
+							<hide part="balls/*"/>
+							<show part="panty/scandalousSuccubusClothingPanty"/>
+							<hide part="pussy/*"/>
+							<hide part="overpussy/*"/>
+						</else>
+					</if>
+				</if>
+			</if>
+		</if>	
+
+		<!-- elf sets -->
+		<if test="elfClothing">
+			<if test="PlayerHasViewableOutfit">
+				<if test="breastRows.length gt 0">
+					<switch>
+						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<show part="bra_fg/elfClothingBraSmall"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+							<show part="bra_fg/elfClothingBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="bra_fg/elfClothingBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<show part="bra_fg/elfClothingBraLarge"/>
+						</case>
+						<default>
+							<show part="bra_fg/elfClothingBraLarge"/>
+						</default>
+					</switch>
+				</if>
+				<if test="showClothing">
+					<show part="clothe/elfClothing"/>
+					<show part="clothe/elfClothingSkirt"/>
+					<show part="armorNeck/elfClotheCape_fg"/>
+					<if test="showArmClothing">
+						<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
+							<switch value="arms.type">
+								<case values="Arms.HUMAN,Arms.KITSUNE,Arms.ELF,Arms.RAIJU,Arms.CENTIPEDE">
+									<show part="clothRightArm/elfClothingRightArmLewd"/>
+									<if test="PlayerHasAWeapon">
+										<show part="clothLeftArm/elfClothingleftArm"/>
+										<else>
+											<show part="clothLeftArm/elfClothingleftArmLewd"/>
+										</else>
+									</if>
+									<show part="glove_fg/elfClothingRightArmFront"/>
+								</case>
+								<default>
 									<show part="clothLeftArm/elfClothingleftArm"/>
-									<else>
-										<show part="clothLeftArm/elfClothingleftArmLewd"/>
-									</else>
-								</if>
-								<show part="glove_fg/elfClothingRightArmFront"/>
-							</case>
-							<default>
+									<show part="clothRightArm/elfClothingRightArm"/>
+								</default>
+							</switch>
+							<else>
 								<show part="clothLeftArm/elfClothingleftArm"/>
 								<show part="clothRightArm/elfClothingRightArm"/>
-							</default>
-						</switch>
-						<else>
-							<show part="clothLeftArm/elfClothingleftArm"/>
-							<show part="clothRightArm/elfClothingRightArm"/>
-						</else>
+							</else>
+						</if>
 					</if>
-				</if>
-				<if test="showLegClothing">
-					<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
-						<switch value="lowerBody">
-							<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.DEMONIC_HIGH_HEELS">
-								<switch value="arms.type">
-									<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.RAIJU,Arms.CENTIPEDE">
-										<show part="clotheLegs/elfClothinglegsLewd"/>
-									</case>
-									<default>
-										<show part="clotheLegs/elfClothinglegs"/>
-									</default>
-								</switch>
-							</case>
-						</switch>
-						<else>
-							<show part="clotheLegs/elfClothinglegs"/>
-						</else>
+					<if test="showLegClothing">
+						<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
+							<switch value="lowerBody">
+								<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.DEMONIC_HIGH_HEELS">
+									<switch value="arms.type">
+										<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.RAIJU,Arms.CENTIPEDE">
+											<show part="clotheLegs/elfClothinglegsLewd"/>
+										</case>
+										<default>
+											<show part="clotheLegs/elfClothinglegs"/>
+										</default>
+									</switch>
+								</case>
+							</switch>
+							<else>
+								<show part="clotheLegs/elfClothinglegs"/>
+							</else>
+						</if>
 					</if>
 				</if>
 			</if>
-		</if>
+		</if>	
+		
+		<if test="elfVillagerDress">
+			<if test="PlayerHasViewableOutfit">
+				<if test="showClothing">
+					<show part="clothe/elfVillager"/>
+					<if test="breastRows.length gt 0">
+						<switch>
+							<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+								<show part="bra_fg/elfDressBraSmall"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+								<show part="bra_fg/elfDressBraSmall"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+								<show part="bra_fg/elfDressBraMedium"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+								<show part="bra_fg/ElfDressBraMedium"/>
+							</case>
+							<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+								<show part="bra_fg/elfDressBraLarge"/>
+							</case>
+							<default>
+								<show part="bra_fg/elfDressBraLarge"/>
+							</default>
+						</switch>
+					</if>
+				</if>
+			</if>
+		</if>	
+		
+		<if test="elfWizardDress">
+			<if test="PlayerHasViewableOutfit">
+				<if test="breastRows.length gt 0">
+					<switch>
+						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<show part="bra_fg/elfClothingBraSmall"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+							<show part="bra_fg/elfClothingBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="bra_fg/elfClothingBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<show part="bra_fg/elfClothingBraLarge"/>
+						</case>
+						<default>
+							<show part="bra_fg/elfClothingBraLarge"/>
+						</default>
+					</switch>
+				</if>
+				<if test="showClothing">
+					<show part="clothe/elfWizard"/>
+					<show part="clothCape_bg/elfClotheCape_bg"/>
+					<show part="armorNeck/elfClotheCape_fg"/>
+					<if test="showArmClothing">
+						<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
+							<switch value="arms.type">
+								<case values="Arms.HUMAN,Arms.KITSUNE,Arms.ELF,Arms.RAIJU,Arms.CENTIPEDE">
+									<show part="clothRightArm/elfClothingRightArmLewd"/>
+									<if test="PlayerHasAWeapon">
+										<show part="clothLeftArm/elfClothingleftArm"/>
+										<else>
+											<show part="clothLeftArm/elfClothingleftArmLewd"/>
+										</else>
+									</if>
+									<show part="glove_fg/elfClothingRightArmFront"/>
+								</case>
+								<default>
+									<show part="clothLeftArm/elfClothingleftArm"/>
+									<show part="clothRightArm/elfClothingRightArm"/>
+								</default>
+							</switch>
+							<else>
+								<show part="clothLeftArm/elfClothingleftArm"/>
+								<show part="clothRightArm/elfClothingRightArm"/>
+							</else>
+						</if>
+					</if>
+					<if test="showLegClothing">
+						<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
+							<switch value="lowerBody">
+								<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.DEMONIC_HIGH_HEELS">
+									<switch value="arms.type">
+										<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.RAIJU,Arms.CENTIPEDE">
+											<show part="clotheLegs/elfClothinglegsLewd"/>
+										</case>
+										<default>
+											<show part="clotheLegs/elfClothinglegs"/>
+										</default>
+									</switch>
+								</case>
+							</switch>
+							<else>
+								<show part="clotheLegs/elfClothinglegs"/>
+							</else>
+						</if>
+					</if>
+				</if>
+			</if>
+		</if>	
 
 		<!-- Vampire set -->
 		<if test="vladimirRegalia">
-			<if test="breastRows.length gt 0">
-				<switch>
-					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-						<show part="bra_fg/vampireBraSmall"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-						<show part="bra_fg/vampireBraSmall"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-						<show part="bra_fg/vampireBraMedium"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-						<show part="bra_fg/vampireBraMedium"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-						<show part="bra_fg/vampireBraLarge"/>
-					</case>
-					<default>
-						<show part="bra_fg/vampireBraLarge"/>
-					</default>
-				</switch>
-			</if>
-			<if test="showClothing">
-				<show part="clothe/vampireTop"/>
-				<if test="showArmClothing">
-					<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
-						<switch value="arms.type">
-							<case values="Arms.HUMAN,Arms.KITSUNE,Arms.ELF,Arms.RAIJU,Arms.CENTIPEDE">
-								<show part="clothRightArm/vampireClothingRightArmLewd"/>
-								<if test="PlayerHasAWeapon">
+			<if test="PlayerHasViewableOutfit">
+				<if test="breastRows.length gt 0">
+					<switch>
+						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+							<show part="bra_fg/vampireBraSmall"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<show part="bra_fg/vampireBraSmall"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+							<show part="bra_fg/vampireBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="bra_fg/vampireBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<show part="bra_fg/vampireBraLarge"/>
+						</case>
+						<default>
+							<show part="bra_fg/vampireBraLarge"/>
+						</default>
+					</switch>
+				</if>
+				<if test="showClothing">
+					<show part="clothe/vampireTop"/>
+					<if test="showArmClothing">
+						<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
+							<switch value="arms.type">
+								<case values="Arms.HUMAN,Arms.KITSUNE,Arms.ELF,Arms.RAIJU,Arms.CENTIPEDE">
+									<show part="clothRightArm/vampireClothingRightArmLewd"/>
+									<if test="PlayerHasAWeapon">
+										<show part="clothLeftArm/vampireClothingleftArm"/>
+										<else>
+											<show part="clothLeftArm/vampireClothingleftArmLewd"/>
+										</else>
+									</if>
+									<show part="glove_fg/vampireClothingRightArmFront"/>
+								</case>
+								<default>
 									<show part="clothLeftArm/vampireClothingleftArm"/>
-									<else>
-										<show part="clothLeftArm/vampireClothingleftArmLewd"/>
-									</else>
-								</if>
-								<show part="glove_fg/vampireClothingRightArmFront"/>
-							</case>
-							<default>
+									<show part="clothRightArm/vampireClothingRightArm"/>
+								</default>
+							</switch>
+							<else>
 								<show part="clothLeftArm/vampireClothingleftArm"/>
 								<show part="clothRightArm/vampireClothingRightArm"/>
-							</default>
-						</switch>
+							</else>
+						</if>
+					</if>
+					<if test="showLegClothing">
+						<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
+							<switch value="lowerBody">
+								<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.DEMONIC_HIGH_HEELS">
+									<switch value="arms.type">
+										<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.RAIJU,Arms.CENTIPEDE">
+											<show part="clotheLegs/vampireClothinglegsLewd"/>
+											<hide part="legs/*"/>
+											<hide part="feet/*"/>
+										</case>
+										<default>
+											<show part="clotheLegs/vampireClothinglegs"/>
+										</default>
+									</switch>
+								</case>
+							</switch>
+							<else>
+								<show part="clotheLegs/vampireClothinglegs"/>
+							</else>
+						</if>
+					</if>
+					<if test="isTaur()">
 						<else>
-							<show part="clothLeftArm/vampireClothingleftArm"/>
-							<show part="clothRightArm/vampireClothingRightArm"/>
+							<hide part="penis/*"/>
+							<hide part="balls/*"/>
+							<hide part="pussy/*"/>
+							<hide part="overpussy/*"/>
 						</else>
 					</if>
-				</if>
-				<if test="showLegClothing">
-					<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
-						<switch value="lowerBody">
-							<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.DEMONIC_HIGH_HEELS">
-								<switch value="arms.type">
-									<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.RAIJU,Arms.CENTIPEDE">
-										<show part="clotheLegs/vampireClothinglegsLewd"/>
-										<hide part="legs/*"/>
-										<hide part="feet/*"/>
-									</case>
-									<default>
-										<show part="clotheLegs/vampireClothinglegs"/>
-									</default>
-								</switch>
-							</case>
-						</switch>
-						<else>
-							<show part="clotheLegs/vampireClothinglegs"/>
-						</else>
-					</if>
-				</if>
-				<if test="isTaur()">
-					<else>
-                        <hide part="penis/*"/>
-                        <hide part="balls/*"/>
-						<hide part="pussy/*"/>
-						<hide part="overpussy/*"/>
-					</else>
 				</if>
 			</if>
-		</if>
+		</if>	
 
 		<!-- fairy set -->
 		<if test="fairyQueenRegalia">
-			<show part="clothe/fairyQueenDressFront"/>
-			<show part="clothLeftArm/fairyqueendressleftarmAndLeg"/>
-			<show part="clothLeftArm/fairyQueenDressArmBack"/>
-			<show part="clothCape/fairyQueenDressUnder"/>
-			<show part="glove_fg/fairyQueenDressArmFront"/>
-			<show part="clotheHead/fairyQueenCirclet"/>
-			<hide part="arms/*"/>
-			<show part="arms/demonlewd"/>
-			<show part="arms_fg/demonlewd"/>
-			<hide part="arms_bg/*"/>
-			<show part="arms_bg/human"/>
-			<hide part="legs/*"/>
-			<show part="legs/fairyFlying"/>
-			<if test="PlayerHasAShield or PlayerHasADualWeapon">
+			<if test="PlayerHasViewableOutfit">
+				<show part="clothe/fairyQueenDressFront"/>
+				<show part="clothLeftArm/fairyqueendressleftarmAndLeg"/>
+				<show part="clothLeftArm/fairyQueenDressArmBack"/>
+				<show part="clothCape/fairyQueenDressUnder"/>
+				<show part="glove_fg/fairyQueenDressArmFront"/>
+				<show part="clotheHead/fairyQueenCirclet"/>
 				<hide part="arms/*"/>
-				<hide part="arms_fg/*"/>
-				<hide part="glove_fg/*"/>
-				<hide part="clothLeftArm/fairyQueenDressArmBack"/>
-				<show part="arms/human"/>
-				<show part="clothLeftArm/fairyqueendressrightarmShield"/>
+				<show part="arms/demonlewd"/>
+				<show part="arms_fg/demonlewd"/>
+				<hide part="arms_bg/*"/>
+				<show part="arms_bg/human"/>
+				<hide part="legs/*"/>
+				<show part="legs/fairyFlying"/>
+				<if test="PlayerHasAShield or PlayerHasADualWeapon">
+					<hide part="arms/*"/>
+					<hide part="arms_fg/*"/>
+					<hide part="glove_fg/*"/>
+					<hide part="clothLeftArm/fairyQueenDressArmBack"/>
+					<show part="arms/human"/>
+					<show part="clothLeftArm/fairyqueendressrightarmShield"/>
+				</if>
 			</if>
-		</if>
+		</if>	
 
 		<!-- Berserker set -->
         <if test="berserkerArmor">
-            <if test="breastRows.length gt 0">
-                <switch>
-                    <case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-                    </case>
-                    <case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-                        <show part="bra_fg/berserkerBraSmall"/>
-                    </case>
-                    <case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-                        <show part="bra_fg/berserkerBraMedium"/>
-                    </case>
-                    <case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-                        <show part="bra_fg/berserkerBraMedium"/>
-                    </case>
-                    <case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-                        <show part="bra_fg/berserkerBraLarge"/>
-                    </case>
-                    <default>
-                        <show part="bra_fg/berserkerBraLarge"/>
-                    </default>
-                </switch>
-            </if>
-            <if test="showClothing">
-                <show part="clothe/berserkerArmorTop"/>
-                <if test="showArmClothing">
-                    <show part="clothRightArm/berserkerArmorArms"/>
-					<else>
-						<if test="PlayerIsFeralStancing">
-							<show part="clothLeftArm/berserkerArmorArmsFeralLeft"/>
-							<show part="clothRightArm/berserkerArmorArmsFeralRight"/>
-						</if>
-					</else>
-                </if>
-                <if test="showLegClothing">
-                    <show part="clotheLegs/berserkerArmorLegs"/>
-					<else>
-						<if test="PlayerIsStancing">
-							<hide part="clotheLegs/*"/>
+            <if test="PlayerHasViewableOutfit">
+				<if test="breastRows.length gt 0">
+					<switch>
+						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<show part="bra_fg/berserkerBraSmall"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+							<show part="bra_fg/berserkerBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="bra_fg/berserkerBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<show part="bra_fg/berserkerBraLarge"/>
+						</case>
+						<default>
+							<show part="bra_fg/berserkerBraLarge"/>
+						</default>
+					</switch>
+				</if>
+				<if test="showClothing">
+					<show part="clothe/berserkerArmorTop"/>
+					<if test="showArmClothing">
+						<show part="clothRightArm/berserkerArmorArms"/>
+						<else>
 							<if test="PlayerIsFeralStancing">
-								<show part="clotheLegs/berserkerArmorLegsFeral"/>
-							</if>
-						</if>
-					</else>
-                </if>
-                <else>
-                    <if test="arms.type == Arms.DISPLACER or arms.type == Arms.KUMIHO">
-                        <show part="clothe/berserkerArmorTop"/>
-                        <show part="clothLeftArm/berserkerArmorArmsFeralQuadLeft"/>
-                        <show part="clothRightArm/berserkerArmorArmsFeralQuadRight"/>
-                    </if>
-                    <if test="showLegClothing">
-                        <show part="clotheLegs/berserkerArmorLegs"/>
-                        <else>
-							<if test="PlayerIsFeralStancing">
-								<show part="clotheLegs/berserkerArmorLegsFeral"/>
+								<show part="clothLeftArm/berserkerArmorArmsFeralLeft"/>
+								<show part="clothRightArm/berserkerArmorArmsFeralRight"/>
 							</if>
 						</else>
-                    </if>
-                </else>
-            </if>
-        </if>
+					</if>
+					<if test="showLegClothing">
+						<show part="clotheLegs/berserkerArmorLegs"/>
+						<else>
+							<if test="PlayerIsStancing">
+								<hide part="clotheLegs/*"/>
+								<if test="PlayerIsFeralStancing">
+									<show part="clotheLegs/berserkerArmorLegsFeral"/>
+								</if>
+							</if>
+						</else>
+					</if>
+					<else>
+						<if test="arms.type == Arms.DISPLACER or arms.type == Arms.KUMIHO">
+							<show part="clothe/berserkerArmorTop"/>
+							<show part="clothLeftArm/berserkerArmorArmsFeralQuadLeft"/>
+							<show part="clothRightArm/berserkerArmorArmsFeralQuadRight"/>
+						</if>
+						<if test="showLegClothing">
+							<show part="clotheLegs/berserkerArmorLegs"/>
+							<else>
+								<if test="PlayerIsFeralStancing">
+									<show part="clotheLegs/berserkerArmorLegsFeral"/>
+								</if>
+							</else>
+						</if>
+					</else>
+				</if>
+			</if>
+		</if>
 
 		<!-- chainmail bikini -->
 		<if test="chainMailBikini">

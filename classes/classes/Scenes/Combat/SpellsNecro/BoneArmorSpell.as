@@ -35,7 +35,7 @@ public class BoneArmorSpell extends AbstractNecroSpell {
 		return player.hasStatusEffect(StatusEffects.BoneArmor);
 	}
 	
-	public function calcDuration():int {
+	override public function calcDuration():int {
 		var duration:Number = 5;
 		duration *= boneSoulBonus(demonBonesCost());
 		return Math.floor(duration);

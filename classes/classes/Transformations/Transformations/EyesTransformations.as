@@ -214,7 +214,7 @@ public class EyesTransformations extends MutationsHelper {
 			},
 			// is present
 			function (): Boolean {
-				return player.eyes.type === Eyes.RAIJU;
+				return player.eyes.type === Eyes.WEASEL;
 			}
 	);
 
@@ -770,6 +770,23 @@ public class EyesTransformations extends MutationsHelper {
 			}
 	);
 
+	public const EyesDemon: Transformation = new SimpleTransformation("Demon Eyes",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "You blink and stumble, a wave of vertigo threatening to pull your feet out from under you. As you steady yourself and open your eyes, you realize something seems different. Your vision has changed somehow. Your pupils draw in light and the color and shapes seem more defined even at great distance, they are also more vibrant and alive. This new enhanced vision seems to make everything far more arousing to look at. [if (silly) Is this what they call seeing life in pink?] You go to a puddle to check what happened to them and notice <b>your new pupils are like those of a demon's with a vertical slit that reflects the world in new arousing ways</b>";
+
+				player.eyes.type = Eyes.DEMON;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.DEMON));
+			},
+			// is present
+			function (): Boolean {
+				return player.eyes.type === Eyes.DEMON;
+			}
+	);
+
 // EYE COLORS
 
 	public function EyesChangeColor(colors: /*String*/ Array): Transformation {
@@ -961,6 +978,17 @@ public class EyesTransformations extends MutationsHelper {
 			// is present
 			function (): Boolean {
 				return InCollection(player.eyes.colour,["glacial blue"]);
+			}
+	);
+
+	public const EyesDemonColors: Transformation = new SimpleTransformation("Demon Eye Colors",
+			// apply effect
+			function (doOutput: Boolean): void {
+				transformations.EyesChangeColor(["fiendish pink", "pink", "red", "yellow", "blue", "turquoise", "light green"]).applyEffect(doOutput);
+			},
+			// is present
+			function (): Boolean {
+				return InCollection(player.eyes.colour, ["fiendish pink", "pink", "red", "yellow", "blue", "turquoise", "light green"]);
 			}
 	);
 	/*

@@ -42,41 +42,47 @@ public class BaseCombatContent extends BaseContent {
 	// ==================
 	// APPLY EFFECTS
 	// ==================
-	protected function doDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
-		return combat.doDamage(damage, apply, display);
+	protected function doDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
+		return combat.doDamage(damage, apply, display, ignoreDR);
 	}
-	protected function doMagicDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
-		return combat.doMagicDamage(damage, apply, display);
+	protected function doPhysicalDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
+		return combat.doPhysicalDamage(damage, apply, display, ignoreDR);
 	}
-	protected function doFireDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
-		return combat.doFireDamage(damage, apply, display);
+	protected function doMinionPhysDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
+		return combat.doMinionPhysDamage(damage, apply, display, ignoreDR);
 	}
-	protected function doIceDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
-		return combat.doIceDamage(damage, apply, display);
+	protected function doMagicDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
+		return combat.doMagicDamage(damage, apply, display, ignoreDR);
 	}
-	protected function doLightingDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
-		return combat.doLightingDamage(damage, apply, display);
+	protected function doFireDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
+		return combat.doFireDamage(damage, apply, display, ignoreDR);
 	}
-	protected function doDarknessDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
-		return combat.doDarknessDamage(damage, apply, display);
+	protected function doIceDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
+		return combat.doIceDamage(damage, apply, display, ignoreDR);
 	}
-	protected function doPoisonDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
-		return combat.doPoisonDamage(damage, apply, display);
+	protected function doLightningDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
+		return combat.doLightningDamage(damage, apply, display, ignoreDR);
 	}
-	protected function doWindDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
-		return combat.doWindDamage(damage, apply, display);
+	protected function doDarknessDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
+		return combat.doDarknessDamage(damage, apply, display, ignoreDR);
 	}
-	protected function doWaterDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
-		return combat.doWaterDamage(damage, apply, display);
+	protected function doPoisonDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
+		return combat.doPoisonDamage(damage, apply, display, ignoreDR);
 	}
-	protected function doEarthDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
-		return combat.doEarthDamage(damage, apply, display);
+	protected function doWindDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
+		return combat.doWindDamage(damage, apply, display, ignoreDR);
 	}
-	protected function doAcidDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
-		return combat.doAcidDamage(damage, apply, display);
+	protected function doWaterDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
+		return combat.doWaterDamage(damage, apply, display, ignoreDR);
 	}
-	protected function doPlasmaDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
-		return combat.doPlasmaDamage(damage, apply, display);
+	protected function doEarthDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
+		return combat.doEarthDamage(damage, apply, display, ignoreDR);
+	}
+	protected function doAcidDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
+		return combat.doAcidDamage(damage, apply, display, ignoreDR);
+	}
+	protected function doPlasmaDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
+		return combat.doPlasmaDamage(damage, apply, display, ignoreDR);
 	}
 	protected function doTrueDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
 		return combat.doTrueDamage(damage, apply, display);
@@ -297,5 +303,49 @@ public class BaseCombatContent extends BaseContent {
 	protected function calcEclypseMod(damage:Number, incCnt:Boolean):Number {
 		return combat.magic.calcEclypseModImpl(damage, incCnt);
 	}
+	protected function calcTideMod(damage:Number, incCnt:Boolean):Number {
+		return combat.magic.calcTideModImpl(damage, incCnt);
+	}
+	protected function calcQuakeMod(damage:Number, incCnt:Boolean):Number {
+		return combat.magic.calcQuakeModImpl(damage, incCnt);
+	}
+	protected function calcGaleMod(damage:Number, incCnt:Boolean):Number {
+		return combat.magic.calcGaleModImpl(damage, incCnt);
+	}
+	protected function calcCorrosionMod(damage:Number, incCnt:Boolean):Number {
+		return combat.magic.calcCorrosionModImpl(damage, incCnt);
+	}
+
+	protected function maintainInfernoMod():void {
+        combat.magic.maintainInfernoModImpl();
+	}
+
+    protected function maintainGlacialMod():void {
+        combat.magic.maintainGlacialModImpl();
+	}
+
+    protected function maintainVoltageMod():void {
+        combat.magic.maintainVoltageModImpl();
+	}
+
+    protected function maintainEclypseMod():void {
+        combat.magic.maintainEclypseModImpl();
+    }
+
+    protected function maintainTideMod():void {
+        combat.magic.maintainTideModImpl();
+    }
+
+	protected function maintainQuakeMod():void {
+        combat.magic.maintainQuakeModImpl();
+    }
+
+	protected function maintainGaleMod():void {
+        combat.magic.maintainGaleModImpl();
+    }
+
+	protected function maintainCorrosionMod():void {
+        combat.magic.maintainCorrosionModImpl();
+    }
 }
 }

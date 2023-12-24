@@ -2,6 +2,7 @@ package classes.Scenes.Combat.SpellsWhite {
 import classes.Scenes.Combat.AbstractWhiteSpell;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.LivingStatue;
+import classes.Scenes.Dungeons.EbonLabyrinth.Draculina;
 import classes.Scenes.NPCs.Diva;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
@@ -23,6 +24,19 @@ public class BlindSpell extends AbstractWhiteSpell{
 	
 	override public function get isKnown():Boolean {
 		return player.hasStatusEffect(StatusEffects.KnowsBlind);
+	}
+
+	override protected function usabilityCheck():String {
+		var uc:String = super.usabilityCheck();
+
+		//You can still use Blind if Draculina is the monster invisible
+		if (uc == "You cannot use offensive spells against an opponent you cannot see or target.") {
+			if (monster && monster is Draculina) {
+				return "";
+			}
+		}
+
+		return uc;
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
@@ -52,6 +66,8 @@ public class BlindSpell extends AbstractWhiteSpell{
 				monster.createStatusEffect(StatusEffects.Blind, 2 + player.inte / 20,0,0,0);
 				if(monster is Diva){
 					(monster as Diva).handlePlayerSpell("blind");
+				} else if(monster is Draculina){
+					(monster as Draculina).handlePlayerSpell("blind");
 				} else if(monster.short == "Isabella") {
 					if (display) {
 						if (SceneLib.isabellaFollowerScene.isabellaAccent()) outputText("\n\n\"<i>Nein! I cannot see!</i>\" cries Isabella.");

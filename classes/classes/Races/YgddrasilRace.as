@@ -33,7 +33,7 @@ public class YgddrasilRace extends Race {
         /*Perks*/		"Human"];
 	
 	public function YgddrasilRace(id:int) {
-		super("Yggdrassil", id, []);//RaceBody);
+		super("Yggdrasil", id, []);//RaceBody);
 		mutationThreshold = 6;
 	}
 	
@@ -41,12 +41,14 @@ public class YgddrasilRace extends Race {
 		
 		addScores()
 				.faceType(Face.PLANT_DRAGON, +2)
+				.faceType(NONE(Face.DRAGON, Face.DRAGON_FANGS, Face.CAT, Face.CAT_CANINES), 0, -10)
 				.hairType(ANY(Hair.ANEMONE,Hair.LEAF,Hair.GRASS), +1)
 				.hairColor1("green", +1)
 				.earType(Ears.LIZARD, +1)
 				.earType(NOT(Ears.ELFIN), 0, -2)
 				.hornType(Horns.OAK, +1)
 				.armType(ANY(Arms.PLANT,Arms.PLANT2), +2)
+				.armType(NONE(Arms.DRACONIC, Arms.FEY_DRACONIC, Arms.LION), 0, -10)
 				.wingType(Wings.YGGDRASIL_LARGE, +4)
 				.wingType(Wings.YGGDRASIL_HUGE, +6)
 				.wingType(Wings.YGGDRASIL_HUGE_2, +8)
@@ -58,6 +60,7 @@ public class YgddrasilRace extends Race {
 							return body.player.tentacleCocks() > 0 || body.player.stamenCocks() > 0;
 						}, +1)
 				.legType(LowerBody.YGG_ROOT_CLAWS, +1)
+				.legType(NONE(LowerBody.FROSTWYRM, LowerBody.FEY_DRAGON, LowerBody.LION), 0, -10)
 				.tailType(Tail.YGGDRASIL, +1)
 				.hasPerk(PerkLib.DragonPoisonBreath, +1);
 		

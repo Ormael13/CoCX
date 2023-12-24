@@ -22,7 +22,23 @@ import classes.Scenes.SceneLib;
 			createStatusEffect(StatusEffects.Attacks, 2, 0, 0, 0);
 			eAttack();
 		}
-		
+
+		override public function postMeleeDmg():void{
+			// remove firstattack check and HP <= minHP() || lust >= maxOverLust() and execute nothing for some reason
+			if (player.lust <= 30) {
+				outputText("\n\nJean-Claude doesn’t even budge when you wade into him with your [weapon].");
+				outputText("\n\n\"<i>Why are you attacking me, slave?</i>\" he says. The basilisk rex sounds genuinely confused. His eyes pulse with hot, yellow light, reaching into you as he opens his arms, staring around as if begging the crowd for an explanation. \"<i>You seem lost, unable to understand, lashing out at those who take care of you. Don’t you know who you are? Where you are?</i>\" That compulsion in his eyes, that never-ending heat, it’s... it’s changing things. You need to finish this as fast as you can.");
+			} else if (player.lust <= 50) {
+				outputText("\n\nAgain your [weapon] thumps into Jean-Claude. Again it feels wrong. Again it sends an aching chime through you, that you are doing something that revolts your nature.");
+				outputText("\n\n\"<i>Why are you fighting your master, slave?</i>\" he says. He is bigger than he was before. Or maybe you are smaller. \"<i>You are confused. Put your weapon down- you are no warrior, you only hurt yourself when you flail around with it. You have forgotten what you were trained to be. Put it down, and let me help you.</i>\" He’s right. It does hurt. Your body murmurs that it would feel so much better to open up and bask in the golden eyes fully, let it move you and penetrate you as it may. You grit your teeth and grip your [weapon] harder, but you can’t stop the warmth the hypnotic compulsion is building within you.");
+			} else if (player.lust <= 80) {
+				outputText("\n\n\"<i>Do you think I will be angry at you?</i>\" growls Jean-Claude lowly. Your senses feel intensified, his wild, musky scent rich in your nose. It’s hard to concentrate... or rather it’s hard not to concentrate on the sweat which runs down his hard, defined frame, the thickness of his bulging cocks, the assured movement of his powerful legs and tail, and the glow, that tantalizing, golden glow, which pulls you in and pushes so much delicious thought and sensation into your head…  \"<i>I am not angry. You will have to be punished, yes, but you know that is only right, that in the end you will accept and enjoy being corrected. Come now, slave. You only increase the size of the punishment with this silliness.</i>\"");
+			} else {
+				outputText("\n\nYou can’t... there is a reason why you keep raising your weapon against your master, but what was it? It can’t be that you think you can defeat such a powerful, godly alpha male as him. And it would feel so much better to supplicate yourself before the glow, lose yourself in it forever, serve it with your horny slut body, the only thing someone as low and helpless as you could possibly offer him. Master’s mouth is moving but you can no longer tell where his voice ends and the one in your head begins... only there is a reason you cling to like you cling onto your [weapon], whatever it is, however stupid and distant it now seems, a reason to keep fighting...");
+			}
+			player.takeLustDamage(25, true);
+		}
+
 		override protected function performCombatAction():void
 		{
 			doubleAttack();
@@ -56,30 +72,33 @@ import classes.Scenes.SceneLib;
 					
 					outputText("\n\n\"<i>The taste of your own medicine, it is not so nice, eh? I will show you much nicer things in there in time intrus, don’t worry. Once you have learnt your place.</i>\"");
 					
-					if (!player.hasPerk(PerkLib.BlindImmunity)) player.createStatusEffect(StatusEffects.Blind, 2 + player.inte / 20, 0, 0, 0);
+					if (!player.isImmuneToBlind()) player.createStatusEffect(StatusEffects.Blind, 2 + player.inte / 20, 0, 0, 0);
 				}
 				return true;
 			}
 			return false;
 		}
 		
-		public function handleTease(lustDelta:Number, successful:Boolean):void
+		override public function handleTease(lustDelta:Number, successful:Boolean, display:Boolean = true):Boolean
 		{
 			if (!player.hasStatusEffect(StatusEffects.RemovedArmor) && !player.armor.isNothing)
 			{
-				outputText("\n\nJean-Claude stops circling you, looking mildly surprised as you attempt to entice him with your body.");
+				if (display) {
+					outputText("\n\nJean-Claude stops circling you, looking mildly surprised as you attempt to entice him with your body.");
+					outputText("\n\n\"<i>This is the legendary Champion of Ignam?</i>\" he husks. \"<i>Flaunting themselves like the most amateur of Lethice’s strippers?</i>\" His eyes glow orange. \"<i>If that was your intent all along, interloper, you should not do it so half-assedly. You should take off all your clothes, embrace what you truly are, show me what you are really made of.</i>\" The hypnotic compulsion presses upon you, commanding you to raise your hands to your [armor]’s clasps...");
+				}
 
-				outputText("\n\n\"<i>This is the legendary Champion of Ignam?</i>\" he husks. \"<i>Flaunting themselves like the most amateur of Lethice’s strippers?</i>\" His eyes glow orange. \"<i>If that was your intent all along, interloper, you should not do it so half-assedly. You should take off all your clothes, embrace what you truly are, show me what you are really made of.</i>\" The hypnotic compulsion presses upon you, commanding you to raise your hands to your [armor]’s clasps...");
-				
 				if (!successful)
 				{
-					outputText("\n\nYou grit your teeth, resist, and tear your hands away from your clothes. Jean-Claude snorts dismissively, gripping his cutlass anew.");
+					if (display) outputText("\n\nYou grit your teeth, resist, and tear your hands away from your clothes. Jean-Claude snorts dismissively, gripping his cutlass anew.");
+					return false;
 				}
 				else
 				{
-					outputText("\n\nYour intent is to arouse this creature. Surely the most arousing thing you can do right now is to take off all of your clothes. You smile at him, your eyes half-lidded as you slowly, sexily slide out of your [armor], pushing your [butt] out and sucking on a finger as you loosen first the top half, then the bottom half, letting it all slide off, piece by piece. The basilisk stands back and watches, grinning, his eyes a bonfire of lust, gripping one of his girthy dicks and slowly masturbating as you kick your underclothes outwards, smouldering at him and arching your back to display your [chest].");
-
-					outputText("\n\n\"<i>Very nice, interloper,</i>\" Jean-Claude breathes. His wide smile turns ugly. \"<i>Look forward to seeing that every night. I hope it is not too chilly in here for you.</i>\" The basilisks which surround you snigger and you blink, the scales falling from your eyes as you realize what you have just done. There is no time to claw your clothes back on: Jean-Claude is upon you, forcing you to fall back, and you will have to fight the rest of this battle in the buff!");
+					if (display) {
+						outputText("\n\nYour intent is to arouse this creature. Surely the most arousing thing you can do right now is to take off all of your clothes. You smile at him, your eyes half-lidded as you slowly, sexily slide out of your [armor], pushing your [butt] out and sucking on a finger as you loosen first the top half, then the bottom half, letting it all slide off, piece by piece. The basilisk stands back and watches, grinning, his eyes a bonfire of lust, gripping one of his girthy dicks and slowly masturbating as you kick your underclothes outwards, smouldering at him and arching your back to display your [chest].");
+						outputText("\n\n\"<i>Very nice, interloper,</i>\" Jean-Claude breathes. His wide smile turns ugly. \"<i>Look forward to seeing that every night. I hope it is not too chilly in here for you.</i>\" The basilisks which surround you snigger and you blink, the scales falling from your eyes as you realize what you have just done. There is no time to claw your clothes back on: Jean-Claude is upon you, forcing you to fall back, and you will have to fight the rest of this battle in the buff!");
+					}
 
 					// (JC arousal up one level, PC’s armor removed for rest of battle)
 					player.createStatusEffect(StatusEffects.RemovedArmor, 0, 0, 0, 0);
@@ -94,16 +113,15 @@ import classes.Scenes.SceneLib;
 						this.addStatusValue(StatusEffects.JCLustLevel, 1, 1);
 					}
 					
-					applyTease(lustDelta);
 					player.dynStats("lus+", 20);
+					return true;
 				}
 			}
 			else
 			{
 				outputText("\n\n\"<i>Even when made the fool, still you try it, still you think you can entice me with things I have seen a thousand times before,</i>\" Jean-Claude sighs. \"<i>Why not give up, interloper? You do these things because they arouse YOU, not because you hope they arouse me. Give up, and embrace the life you were born to lead.</i>\" Despite these words his hungry eyes remain on your body. Perhaps he can’t help it. You can only hope...");
-				
-				if (successful) applyTease(lustDelta);
 				player.dynStats("lus+", 20);
+				return successful;
 			}
 		}
 		

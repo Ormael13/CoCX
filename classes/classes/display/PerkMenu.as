@@ -9,12 +9,14 @@ import classes.CoC;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutationPerkType;
 import classes.IMutations.*;
+import classes.internals.Utils;
 import classes.Parser.Parser;
 import classes.PerkClass;
 import classes.PerkLib;
 import classes.PerkTree;
 import classes.PerkType;
 import classes.Races;
+import classes.Scenes.Combat.CombatAbilities;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
@@ -89,39 +91,32 @@ public class PerkMenu extends BaseContent {
 			outputText("\n<b>You can adjust your melee attack settings.</b>");
 			addButton(5, "Melee Opt",meleeOptions);
 		}
-		if (player.hasPerk(PerkLib.WeaponRangeDoubleStrike) || player.hasPerk(PerkLib.ELFTwinShot) || player.hasPerk(PerkLib.ElementalArrows) || player.hasPerk(PerkLib.Cupid) || player.hasPerk(PerkLib.EnvenomedBolt) || player.hasPerk(PerkLib.ELFThornShot) || player.hasPerk(PerkLib.AmateurGunslinger)) {
+		if (player.calculateMultiAttacks(false) > 1 || player.hasPerk(PerkLib.ELFTwinShot) || player.hasPerk(PerkLib.ElementalArrows) || player.hasPerk(PerkLib.Cupid) || player.hasPerk(PerkLib.EnvenomedBolt) || player.hasPerk(PerkLib.ELFThornShot)) {
 			outputText("\n<b>You can adjust your range strike settings.</b>");
 			addButton(6, "Range Opt",rangedOptions);
 		}
 		if (player.hasPerk(PerkLib.Venomancy) || player.hasPerk(PerkLib.DarkRitual) || player.hasPerk(PerkLib.HiddenJobBloodDemon)||
 			(player.hasPerk(PerkLib.Spellsword) || player.hasPerk(PerkLib.Spellbow) || player.hasPerk(PerkLib.Spellarmor) || player.hasPerk(PerkLib.Battleflash) || player.hasPerk(PerkLib.Battlemage) || player.hasPerk(PerkLib.Battleshield) || player.hasPerk(PerkLib.FortressOfIntellect))) {
 			outputText("\n<b>You can choose and adjust various effects related to your magic.</b>");
-			addButton(7, "Magic Opt",MagicOption);
+			addButton(7, "Magic Opt",magicOption);
 		}
 		outputText("\n<b>You can choose and adjust miscellaneous effects.</b>");
 		addButton(8, "Misc Opt",MiscOption);
-		//addButton (9, "PerkDB2", perkDatabase2); //WIP. //Apparently conflicts with Racial Score display
-		if (player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) {
-			outputText("\n<b>You can adjust your elemental summons behaviour during combat.</b>");
-			addButton(10, "Elementals",summonsbehaviourOptions);
-		}
-		if ((flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0 || flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > 0 || flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > 0 || flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] > 0) || (player.hasPerk(PerkLib.FirstAttackSkeletons) && (player.perkv2(PerkLib.PrestigeJobNecromancer) > 0 || player.perkv1(PerkLib.GreaterHarvest) > 0 || player.perkv2(PerkLib.GreaterHarvest) > 0))) {
-			outputText("\n<b>You can adjust your permanent golems (or skeletons) behaviour during combat.</b>");
-			addButton(11, "Golems/Skeletons",golemsskeletonsbehaviourOptions);
-		}
-		if (player.hasPerk(PerkLib.JobLeader)) {
-			outputText("\n<b>You can adjust your Will-o'-the-wisp behaviour during combat.</b>");
-			addButton(12, "Will-o'-the-wisp",WOTWbehaviourOptions);
-		}
 		//addButton(10, "Number of", EngineCore.doNothing);
 		//addButton(11, "perks: " + player.perks.length, EngineCore.doNothing);
+		if (player.hasPerk(PerkLib.FirstAttackFlyingSword)) {
+			outputText("\n<b>You can adjust your Flying Sword behaviour during combat.</b>");
+			addButton(12, "Flying Sword", flyingSwordBehaviourOptions);
+		}
+		outputText("\n<b>You can choose and adjust how you minions behave in battle.</b>");
+		addButton(13, "Minions", minionOptions);
 		if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
 			outputText("\n\n<b>Simplified Pre-Turn is enabled. The strongest possible golems and elementals are selected to attack. The wisp always attacks.</b>");
-			addButton(13, "S.PTurn(On)", simplifiedPreTurnOff).hint("Click to disable Simplified Pre-Turn.");
+			addButton(14, "S.PTurn(On)", simplifiedPreTurnOff).hint("Click to disable Simplified Pre-Turn.");
 		}
 		else {
 			outputText("\n\n<b>Simplified Pre-Turn is disabled. You'll need to click through your allies' turns, but you'll be able to choose their actions (if it's possible).\nNote: there is another switch for Will-o-Wisp in battle menu (page 3).</b>");
-			addButton(13, "S.PTurn(Off)", simplifiedPreTurnOn).hint("Click to enable Simplified Pre-Turn.");
+			addButton(14, "S.PTurn(Off)", simplifiedPreTurnOn).hint("Click to enable Simplified Pre-Turn.");
 		}
 	}
 
@@ -134,12 +129,12 @@ public class PerkMenu extends BaseContent {
 		displayPerks();
 	}
 
-	public function MagicOption(e:MouseEvent = null):void {
+	public function magicOption(e:MouseEvent = null):void {
 		clearOutput();
 		menu();
 		if (player.hasPerk(PerkLib.Venomancy)) {
 			outputText("<b>You can adjust your Venomancy.</b>\n");
-			addButton(1, "Venomancy Opt",VenomancyOption);
+			addButton(1, "Venomancy Opt",venomancyOption);
 		}
 		if (player.hasPerk(PerkLib.Spellsword) || player.hasPerk(PerkLib.Spellbow) || player.hasPerk(PerkLib.Spellarmor) || player.hasPerk(PerkLib.Battleflash) || player.hasPerk(PerkLib.Battlemage) || player.hasPerk(PerkLib.Battleshield) || player.hasPerk(PerkLib.FortressOfIntellect)) {
 			outputText("<b>You can adjust your spell autocast settings.</b>\n");
@@ -148,7 +143,7 @@ public class PerkMenu extends BaseContent {
 		if (player.hasPerk(PerkLib.DarkRitual) || player.hasPerk(PerkLib.HiddenJobBloodDemon)) {
 			if (player.hasPerk(PerkLib.DarkRitual)) outputText("<b>You can choose if you wish to use dark ritual and sacrifice health to empower your magic.</b>\n");
 			if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) outputText("<b>You can adjust your Blood Demon hidden job settings.</b>\n");
-			addButton(3, "Bloody Opt",DarkRitualOption);
+			addButton(3, "Bloody Opt",darkRitualOption);
 		}
 		addButton(14, "Back", displayPerks);
 	}
@@ -175,7 +170,7 @@ public class PerkMenu extends BaseContent {
 			if (player.hasPerk(PerkLib.FlyingSwordPath) && autoFlyingFlag != 2) addButton(2, "By FlyingSw", autoFlyingType,2);
 			if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor) && autoFlyingFlag != 3) addButton(3, "By SF", autoFlyingType,3);
 		}
-		if (player.hasPerk(PerkLib.AuraOfCorruption) || player.hasPerk(PerkLib.AuraOfPurity) || player.hasPerk(PerkLib.ArousingAura)) {
+		if (player.hasCombatAura()) {
 			outputText("\n\nYou can suppress your auras. This way, they won't damage/arouse enemies.");
 			outputText("\nAuras: <b>" + (flags[kFLAGS.DISABLE_AURAS] ? "Suppressed" : "Active") + "</b>");
 			addButton(5, "Auras", curry(toggleFlagMisc, kFLAGS.DISABLE_AURAS));
@@ -195,13 +190,50 @@ public class PerkMenu extends BaseContent {
 		}
 		// tease healing
 		if (player.hasPerk(PerkLib.FueledByDesire) || player.armor == armors.ELFDRES) {
-			outputText("Combat Tease can cause lust reduction: " + (
+			outputText("\n\nCombat Tease can cause lust reduction: " + (
 					flags[kFLAGS.COMBAT_TEASE_HEALING] == 0 ? "Enabled" : "Disabled"
 			));
 			addButton(10, "C. Tease Heal", curry(toggleFlagMisc, kFLAGS.COMBAT_TEASE_HEALING));
 		}
-		//
+		// your pain, my power wrath generation
+		if (player.hasPerk(PerkLib.YourPainMyPower)) {
+			outputText("\n\nYou choose whether wrath is generated while healing from blood: " + (
+				flags[kFLAGS.YPMP_WRATH_GEN] == 0 ? "Enabled" : "Disabled"
+			));
+			addButton(11, "YPMP Wrath", curry(toggleFlagMisc, kFLAGS.YPMP_WRATH_GEN));
+		}
 		addButton(14, "Back", displayPerks);
+	}
+
+	public function minionOptions():void {
+		var bd:ButtonDataList = new ButtonDataList();
+		clearOutput();
+		outputText("You can choose how your pets and minions attack:");
+
+		menu();
+		if (player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) {
+			outputText("\n<b>You can adjust your elemental summons behaviour during combat.</b>");
+			bd.add("Elementals", summonsbehaviourOptions);
+		}
+		if ((flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0 || flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > 0 || flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > 0 || flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] > 0) || (player.hasPerk(PerkLib.FirstAttackSkeletons) && (player.perkv2(PerkLib.PrestigeJobNecromancer) > 0 || player.perkv1(PerkLib.GreaterHarvest) > 0 || player.perkv2(PerkLib.GreaterHarvest) > 0))) {
+			outputText("\n<b>You can adjust your permanent golems (or skeletons) behaviour during combat.</b>");
+			bd.add("Golems/Skeletons", golemsskeletonsbehaviourOptions);
+		}
+		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) {
+			outputText("\n<b>You can adjust your blood puppies behaviour during combat.</b>");
+			bd.add("B. Puppies", bpbehaviourOptions);
+		}
+		if (player.hasPerk(PerkLib.JobLeader)) {
+			outputText("\n<b>You can adjust your Will-o'-the-wisp behaviour during combat.</b>");
+			bd.add("Will-o'-the-wisp", wotwBehaviourOptions);
+		}
+		if (player.hasPerk(PerkLib.MummyLord) && player.perkv1(PerkLib.MummyLord) > 0) {
+			outputText("\n<b>You can adjust the behaviour of your mummies during combat.</b>");
+			bd.add("Mummies", mummyBehaviourOptions);
+		}
+
+
+		submenu(bd, CoC.instance.inCombat ? curry(combat.combatMenu, false) : displayPerks, 0, false);
 	}
 
 	private function toggleCorruptionTolerance():void {
@@ -350,6 +382,10 @@ public class PerkMenu extends BaseContent {
 		clearOutput();
 		outputText("Current number of projectiles per shot: " + (currentProj + 1) + "\n");
 		outputText("Maximum number of projectiles per shot with your current weapon: " + maxProj + "\n");
+		var nba:int = player.nextBonusAttack(false);
+		if (nba < 0) outputText("You've reached the maximum number of bonus attacks from mastery!");
+		else outputText("Next bonus attack at mastery level " + nba);
+		outputText("\n\nHow many attacks would you like to deal?");
 		menu();
 		var atk:int = 0;
 		while (atk < maxProj) {
@@ -386,9 +422,7 @@ public class PerkMenu extends BaseContent {
 		}
 		if (player.hasPerk(PerkLib.Cupid)) {
 			outputText("\n\nIf you know 'Arouse' spell, you can add its effect to the projectiles. (Works only with bows and crosbows)"
-				+ "\nArouse effect added: <b>" + (flags[kFLAGS.CUPID_ARROWS] ? "Yes" : "No") + "</b>");
-			if (flags[kFLAGS.CUPID_ARROWS] == 0) outputText("\n\nArouse effect added: <b>None</b>");
-			if (flags[kFLAGS.CUPID_ARROWS] == 1) outputText("\n\nBlack Magic effect added: <b>Arouse</b>");
+				+ "\nArouse effect added: <b>" + (flags[kFLAGS.CUPID_ARROWS] > 0 ? "Yes" : "No") + "</b>");
 			bd.add("Arouse", curry(toggleFlagRanged, kFLAGS.CUPID_ARROWS))
 				.disableIf(!player.hasStatusEffect(StatusEffects.KnowsArouse), "You don't know the required spell.");
 		}
@@ -426,7 +460,7 @@ public class PerkMenu extends BaseContent {
 			outputText("\n\nFortress of Intellect: <b>" + (player.hasStatusEffect(StatusEffects.FortressOfIntellect) ? "On" : "Off") + "</b>");
 			addButton(btn++, "FoI", toggleFortressOfIntelect);
 		}
-		addButton(14, "Back", MagicOption);
+		addButton(14, "Back", magicOption);
 
 		function toggleFortressOfIntelect():void {
 			if (!player.hasStatusEffect(StatusEffects.FortressOfIntellect)) player.createStatusEffect(StatusEffects.FortressOfIntellect, 0, 0, 0, 0);
@@ -437,9 +471,11 @@ public class PerkMenu extends BaseContent {
 
 	public function summonsbehaviourOptions(page:int = 1):void {
         var attackingElementalTypeFlag:int = flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE];
+		var attackingEpicElementalTypeFlag:int = flags[kFLAGS.ATTACKING_EPIC_ELEMENTAL_TYPE];
         var elementalConjuerSummons:int = flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS];
         var setflag:Function = curry(setFlag,summonsbehaviourOptions);
         var attackingElementalType:Function = curry(setflag,kFLAGS.ATTACKING_ELEMENTAL_TYPE);
+		var attackingEpicElementalType:Function = curry(setflag,kFLAGS.ATTACKING_EPIC_ELEMENTAL_TYPE);
 		clearOutput();
 		menu();
 		outputText("You can choose how your summoned elementals will behave during each fight.\n\n");
@@ -464,7 +500,18 @@ public class PerkMenu extends BaseContent {
             case 12: outputText("Purity"); break;
             case 13: outputText("Corruption"); break;
 		}
+		outputText("\n\n<b>Epic Elemental, which would attack in case option to them helping in attacks is enabled:</b>\n");
+        switch(attackingEpicElementalTypeFlag){
+			case 31: outputText("Air"); break;
+            case 32: outputText("Earth"); break;
+            case 33: outputText("Fire"); break;
+            case 34: outputText("Water"); break;
+		}
 		if (page == 1) {
+			if (player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) addButton(0, "Basic", summonsbehaviourOptions, 2);
+			if (player.hasPerk(PerkLib.FirstAttackElementalsSu) && player.statusEffectv2(StatusEffects.SummonedElementals) > 0) addButton(1, "Epic", summonsbehaviourOptions, 4);
+		}
+		if (page == 2) {
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir) && attackingElementalTypeFlag != 1) addButton(0, "Air", attackingElementalType,1);
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth) && attackingElementalTypeFlag != 2) addButton(1, "Earth", attackingElementalType,2);
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire) && attackingElementalTypeFlag != 3) addButton(2, "Fire", attackingElementalType,3);
@@ -474,7 +521,7 @@ public class PerkMenu extends BaseContent {
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsMetal) && attackingElementalTypeFlag != 9) addButton(6, "Metal", attackingElementalType, 9);
 			addButton(9, "2nd", summonsbehaviourOptions, page + 1);
 		}
-		if (page == 2)  {
+		if (page == 3)  {
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce) && attackingElementalTypeFlag != 5) addButton(0, "Ice", attackingElementalType,5);
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning) && attackingElementalTypeFlag != 6) addButton(1, "Lightning", attackingElementalType,6);
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness) && attackingElementalTypeFlag != 7) addButton(2, "Darkness", attackingElementalType,7);
@@ -482,6 +529,12 @@ public class PerkMenu extends BaseContent {
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsPurity) && attackingElementalTypeFlag != 12) addButton(4, "Purity", attackingElementalType,12);
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption) && attackingElementalTypeFlag != 13) addButton(5, "Corruption", attackingElementalType, 13);
 			addButton(9, "1st", summonsbehaviourOptions, page - 1);
+		}
+		if (page == 4) {
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAirE) && attackingEpicElementalTypeFlag != 31) addButton(0, "Air", attackingEpicElementalType,31);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE) && attackingEpicElementalTypeFlag != 32) addButton(1, "Earth", attackingEpicElementalType,32);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE) && attackingEpicElementalTypeFlag != 33) addButton(2, "Fire", attackingEpicElementalType,33);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE) && attackingEpicElementalTypeFlag != 34) addButton(3, "Water", attackingEpicElementalType,34);
 		}
 		if (elementalConjuerSummons > 1) addButton(10, "NotHelping", setflag, kFLAGS.ELEMENTAL_CONJUER_SUMMONS, 1);
 		if (player.hasStatusEffect(StatusEffects.SummonedElementals)) {
@@ -500,8 +553,13 @@ public class PerkMenu extends BaseContent {
 			addButtonDisabled(12, "Helping", "Req. to have summoned at least 1 elemental.");
 			addButtonDisabled(13, "Melee+Help", "Req. to have summoned at least 1 elemental.");
 		}
-		if (CoC.instance.inCombat) addButton(14, "Back", combat.combatMenu, false);
-        else addButton(14, "Back", displayPerks);
+		if (page == 1) {
+					addButton(14, "Back", minionOptions);
+		}
+		else {
+			addButton(14, "Back", summonsbehaviourOptions, 1);
+		}
+
         function elementalAttackReplacingPCmeleeAttack():void {
             flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 2;
             if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 0) {
@@ -591,17 +649,16 @@ public class PerkMenu extends BaseContent {
 				else addButton(6, "Activate", golemsPoisonedWeaponMode, 2);
 			}
 		}
-		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) addButton(10, "Waiting", golemsAttacking,false);
-		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] != 1) addButton(11, "Attacking", golemsAttacking, true);
+		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) addButton(10, "G. Waiting", golemsAttacking,false).hint("Golems will not attack at the beginning of the turn.");
+		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] != 1) addButton(11, "G. Attacking", golemsAttacking, true).hint("Golems will attack at the beginning of the turn.");
 		if (player.hasPerk(PerkLib.FirstAttackSkeletons) && (player.perkv2(PerkLib.PrestigeJobNecromancer) > 0 || player.perkv1(PerkLib.GreaterHarvest) > 0 || player.perkv2(PerkLib.GreaterHarvest) > 0)) {
 			outputText("\n\n<b>Skeletons attack pattern behavious:</b>\n");
 			if (flags[kFLAGS.NECROMANCER_SKELETONS] == 1) outputText("Attacking at the begining of each turn.");
 			if (flags[kFLAGS.NECROMANCER_SKELETONS] < 1) outputText("Waiting for the owner to give an attack command each turn.");
-			if (flags[kFLAGS.NECROMANCER_SKELETONS] == 1) addButton(10, "Waiting", skeletonsAttacking,false);
-			if (flags[kFLAGS.NECROMANCER_SKELETONS] != 1) addButton(11, "Attacking", skeletonsAttacking, true);
+			if (flags[kFLAGS.NECROMANCER_SKELETONS] == 1) addButton(12, "S. Waiting", skeletonsAttacking,false).hint("Skeletons will not attack at the beginning of the turn.");
+			if (flags[kFLAGS.NECROMANCER_SKELETONS] != 1) addButton(13, "S. Attacking", skeletonsAttacking, true).hint("Skeletons will attack at the beginning of the turn.");
 		}
-		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu, false);
-		else addButton(14, "Back", displayPerks);
+		addButton(14, "Back", minionOptions);
 		function golemsElementaryWeaponMode(elementalMode:Number):void {
 			player.changeStatusValue(StatusEffects.GolemUpgrades1,3,elementalMode);
 			golemsskeletonsbehaviourOptions();
@@ -620,18 +677,56 @@ public class PerkMenu extends BaseContent {
         }
 	}
 
-	public function DarkRitualOption():void {
+	public function bpbehaviourOptions():void {
+		clearOutput();
+		menu();
+		outputText("You can choose how your blood puppies will behave during each fight.\n\n");
+		outputText("Current Behaviour: ");
+		switch(flags[kFLAGS.BLOOD_PUPPY_SUMMONS]) {
+			case 0: outputText("Not attacking\n\n");
+					break;
+			case 1: outputText("Blood Swipe\n\n");
+					outputText("Ability Information (Will attack once per turn):\n\n");
+					outputText(CombatAbilities.BPBloodSwipe.fullDescription(null));
+					break;
+			case 2: outputText("Blood Dewdrops\n\n");
+					outputText("Ability Information (Will attack once per turn):\n\n");
+					outputText(CombatAbilities.BPBloodDewdrops.fullDescription(null));
+					break;
+			case 3: outputText("Heart Seeker\n\n");
+					outputText("Ability Information (Will attack once per turn):\n\n");
+					outputText(CombatAbilities.BPHeartSeeker.fullDescription(null));
+					break;
+		}
+
+		var setflag:Function = curry(setFlag,bpbehaviourOptions, kFLAGS.BLOOD_PUPPY_SUMMONS);
+		if (flags[kFLAGS.BLOOD_PUPPY_SUMMONS] != 0) {
+			addButton(0, "Blood Swipe", setflag, 1)
+				.disableIf(flags[kFLAGS.BLOOD_PUPPY_SUMMONS] == 1);
+			addButton(1, "Blood Dewdrops", setflag, 2)
+				.disableIf(flags[kFLAGS.BLOOD_PUPPY_SUMMONS] == 2);
+			addButton(2, "Heart Seeker", setflag, 3)
+				.disableIf(flags[kFLAGS.BLOOD_PUPPY_SUMMONS] == 3);
+		}
+		addButton(10, "Not helping", setflag, 0)
+			.disableIf(flags[kFLAGS.BLOOD_PUPPY_SUMMONS] == 0);
+		addButton(11, "Helping", setflag, 1)
+			.disableIf(flags[kFLAGS.BLOOD_PUPPY_SUMMONS] != 0);
+		addButton(14, "Back", minionOptions);
+	}
+
+	public function darkRitualOption():void {
 		clearOutput();
 		menu();
 		if (player.hasPerk(PerkLib.DarkRitual)) {
 			outputText("Set if you will be sacrificing blood to empower your magic or not.\n\n");
 			if (!player.hasStatusEffect(StatusEffects.DarkRitual)) {
 				outputText("Dark ritual is currently: <b>Inactive</b>.");
-				addButton(10, "On", DarkRitualOptionOn);
+				addButton(10, "On", darkRitualOptionOn);
 			}
 			if (player.hasStatusEffect(StatusEffects.DarkRitual)) {
 				outputText("Dark ritual is currently: <b>Active</b>.");
-				addButton(11, "Off", DarkRitualOptionOff);
+				addButton(11, "Off", darkRitualOptionOff);
 			}
 			outputText("\n\n");
 		}
@@ -639,83 +734,81 @@ public class PerkMenu extends BaseContent {
 			outputText("Set if you will be using blood instead of mana to fuel your magic.\n\n");
 			if (!player.hasStatusEffect(StatusEffects.BloodMage)) {
 				outputText("Blood Mage: <b>Inactive</b>.");
-				addButton(0, "On", BloodMageOptionOn);
+				addButton(0, "On", bloodMageOptionOn);
 			}
 			if (player.hasStatusEffect(StatusEffects.BloodMage)) {
 				outputText("Blood Mage: <b>Active</b>.");
-				addButton(1, "Off", BloodMageOptionOff);
+				addButton(1, "Off", bloodMageOptionOff);
 			}
 			outputText("\n\n");
-			if (player.hasPerk(PerkLib.WayOfTheBlood)) {
-				outputText("Set if you will be using blood instead of soulforce to fuel your soulskills.\n\n");
-				if (!player.hasStatusEffect(StatusEffects.BloodCultivator)) {
-					outputText("Blood Cultivator: <b>Inactive</b>.");
-					addButton(2, "On", BloodCultivatorOptionOn);
-				}
-				if (player.hasStatusEffect(StatusEffects.BloodCultivator)) {
-					outputText("Blood Cultivator: <b>Active</b>.");
-					addButton(3, "Off", BloodCultivatorOptionOff);
-				}
+			outputText("Set if you will be using blood instead of soulforce to fuel your soulskills.\n\n");
+			if (!player.hasStatusEffect(StatusEffects.BloodCultivator)) {
+				outputText("Blood Cultivator: <b>Inactive</b>.");
+				addButton(2, "On", bloodCultivatorOptionOn);
+			}
+			if (player.hasStatusEffect(StatusEffects.BloodCultivator)) {
+				outputText("Blood Cultivator: <b>Active</b>.");
+				addButton(3, "Off", bloodCultivatorOptionOff);
 			}
 		}
 		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu, false);
 		else addButton(14, "Back", displayPerks);
-		function DarkRitualOptionOn():void {
+		function darkRitualOptionOn():void {
 			player.createStatusEffect(StatusEffects.DarkRitual,0,0,0,0);
-			DarkRitualOption();
+			darkRitualOption();
 		}
-		function DarkRitualOptionOff():void {
+		function darkRitualOptionOff():void {
 			player.removeStatusEffect(StatusEffects.DarkRitual);
-			DarkRitualOption();
+			darkRitualOption();
 		}
-		function BloodMageOptionOn():void {
+		function bloodMageOptionOn():void {
 			player.createStatusEffect(StatusEffects.BloodMage,0,0,0,0);
-			DarkRitualOption();
+			darkRitualOption();
 		}
-		function BloodMageOptionOff():void {
+		function bloodMageOptionOff():void {
 			player.removeStatusEffect(StatusEffects.BloodMage);
-			DarkRitualOption();
+			darkRitualOption();
 		}
-		function BloodCultivatorOptionOn():void {
+		function bloodCultivatorOptionOn():void {
 			player.createStatusEffect(StatusEffects.BloodCultivator,0,0,0,0);
-			DarkRitualOption();
+			darkRitualOption();
 		}
-		function BloodCultivatorOptionOff():void {
+		function bloodCultivatorOptionOff():void {
 			player.removeStatusEffect(StatusEffects.BloodCultivator);
-			DarkRitualOption();
+			darkRitualOption();
 		}
-		addButton(14, "Back", MagicOption);
+		addButton(14, "Back", magicOption);
 	}
 
-	public function VenomancyOption():void {
+	public function venomancyOption():void {
 		clearOutput();
 		menu();
 		if (player.hasPerk(PerkLib.Venomancy)) {
 			outputText("Set weither you will be using venom to empower your magic or not.\n\n");
 			if (!player.hasStatusEffect(StatusEffects.Venomancy)) {
 				outputText("Venomancy is currently: <b>Inactive</b>.");
-				addButton(10, "On", VenomancyOptionOn);
+				addButton(10, "On", venomancyOptionOn);
 			}
 			if (player.hasStatusEffect(StatusEffects.Venomancy)) {
 				outputText("Venomancy is currently: <b>Active</b>.");
-				addButton(11, "Off", VenomancyOptionOff);
+				addButton(11, "Off", venomancyOptionOff);
 			}
 			outputText("\n\n");
 		}
 		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu, false);
 		else addButton(14, "Back", displayPerks);
-		function VenomancyOptionOn():void {
+		function venomancyOptionOn():void {
 			player.createStatusEffect(StatusEffects.Venomancy,0,0,0,0);
-			VenomancyOption();
+			venomancyOption();
 		}
-		function VenomancyOptionOff():void {
+		function venomancyOptionOff():void {
 			player.removeStatusEffect(StatusEffects.Venomancy);
-			VenomancyOption();
+			venomancyOption();
 		}
-		addButton(14, "Back", MagicOption);
+		addButton(14, "Back", magicOption);
 	}
 
-	public function WOTWbehaviourOptions():void {
+	public function wotwBehaviourOptions():void {
 		clearOutput();
 		menu();
 		outputText("You can choose how your will-o'-the-wisp will behave during each fight.\n\n");
@@ -727,12 +820,52 @@ public class PerkMenu extends BaseContent {
 		if (flags[kFLAGS.WILL_O_THE_WISP] != 1) addButton(11, "Attacking(M)", WOTWAttacking, 1).hint("Would attack after confirming attack order.");
 		if (flags[kFLAGS.WILL_O_THE_WISP] != 2) addButton(12, "Commanding", WOTWAttacking, 2);
 
-		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu, false);
-		else addButton(14, "Back", displayPerks);
+		addButton(14, "Back", minionOptions);
         function WOTWAttacking(attacking:Number):void {
             flags[kFLAGS.WILL_O_THE_WISP] = attacking;
-            WOTWbehaviourOptions();
+            wotwBehaviourOptions();
         }
+	}
+
+	public function flyingSwordBehaviourOptions():void {
+		clearOutput();
+		menu();
+		outputText("You can choose how your flying sword will behave during each fight.\n\n");
+		outputText("\n<b>Flying Sword behaviour:</b>\n");
+		if (flags[kFLAGS.FLYING_SWORD] == 0) outputText("Your flying sword will not attack");
+		if (flags[kFLAGS.FLYING_SWORD] == 1) {
+			outputText("Your flying sword will attack at the begining of each turn.");
+			if ((player.hasStatusEffect(StatusEffects.Flying) && player.statusEffectv2(StatusEffects.Flying) == 1) || flags[kFLAGS.AUTO_FLIGHT] == 2) {
+				outputText("\n<b>Since you are using your flying sword to fly, ");
+				var flyingSwordCount:int = player.weaponFlyingSwords.count;
+				if (flyingSwordCount > 1) {
+					outputText("you will only deal " + Utils.numberOfThings(flyingSwordCount - 1, "attack") + ".</b>");
+				} else {
+					outputText("you can't attack with your flying sword. Use a different way to fly, or stay on the ground.</b>");
+				}
+			}
+		}
+		addButton(10, "Disable", toggleFlag, flyingSwordBehaviourOptions, kFLAGS.FLYING_SWORD)
+			.disableIf(flags[kFLAGS.FLYING_SWORD] == 0);
+		addButton(11, "Enable", toggleFlag, flyingSwordBehaviourOptions, kFLAGS.FLYING_SWORD)
+			.disableIf(flags[kFLAGS.FLYING_SWORD] == 1);
+
+		addButton(14, "Back", CoC.instance.inCombat ? curry(combat.combatMenu, false) : displayPerks);
+	}
+
+	public function mummyBehaviourOptions():void {
+		clearOutput();
+		menu();
+		outputText("You can choose how your mummies will behave during each fight.\n\n");
+		outputText("\n<b>Mummy behaviour:</b>\n");
+		if (flags[kFLAGS.MUMMY_ATTACK] == 0) outputText("Your mummies will not attack");
+		if (flags[kFLAGS.MUMMY_ATTACK] == 1) outputText("Your mummies will attack at the begining of each turn.");
+		addButton(10, "Disable", toggleFlag, mummyBehaviourOptions, kFLAGS.MUMMY_ATTACK)
+			.disableIf(flags[kFLAGS.MUMMY_ATTACK] != 0);
+		addButton(11, "Enable", toggleFlag, mummyBehaviourOptions, kFLAGS.MUMMY_ATTACK)
+			.disableIf(flags[kFLAGS.MUMMY_ATTACK] != 1);
+
+		addButton(14, "Back", minionOptions)
 	}
 
 	//IMutationsDB!
@@ -1334,299 +1467,6 @@ public class PerkMenu extends BaseContent {
 		}
 		sortedPerks = null;
 		perkDatabase(page);
-	}
-
-	public function perkDatabase2():void { //Messy code... Again, probably optimizable by someone else with more experience.
-		clearOutput();
-		menu();
-		var perkDict:Dictionary = PerkType.getPerkLibrary();
-		var tPerkList:Array = [];	//Master Source Perk Array.
-		var fPerkList:Array = [];	//Final Perk Array, of Arrays.
-		var mPerkList:Array = [];	//Master Removal Perk Array.
-		var fPerkCList:Array = [];	//PerkDisplayInfo.
-		var pSpecials:Array = [];
-		var pRelations:Dictionary = new Dictionary();	//Perk relations Dictionary.
-		//key = Perk on screen, value = [anyperk][allperk][requires] (needs,needs,opens)
-
-		//var pCount:int = 0;
-
-		function pDictPrep():void{	//Perk Dictionary preperations/Filter
-			var pList2:Array = PerkLib.enemyPerkList(); //No Enemy Perks.
-			var pList3:Array = PerkLib.gearPerks();	//No Gear Perks.
-			var pList4:Array = PerkLib.weaPerks();	//No Weapons Perks.
-			//function pSpecialRem = No Ascension/History/Bloodline/PastLife Perks
-			var pList5:Array = IMutationsLib.mutationsArray("All");
-			var mArray:Array = arrMerge(pList2, pList3, pList4, pList5);
-			for each (var perkTrue:PerkType in perkDict){
-				if (!(mArray.indexOf(perkTrue) >= 0) && pSpecialRem(perkTrue)){
-					tPerkList.push(perkTrue);
-				}
-			}
-			//trace(pList1.length + " < 1 - 2 > " + pList2.length + "\n");
-		}
-
-		function pSpecialRem(perkTrue:PerkType):Boolean{	//SpecialCases
-			var pName:String = perkTrue.name();
-			var rez:Boolean = true;
-			for each (var temp1:String in ["Ascension", "Bloodline", "History", "Past Life", "Pierced", "Prestige", "Slime Metabolism", "Draconic", "Cave Wyrm Lungs", "Hidden Job", "Super Perk", "!!!"]){
-				if (pName.indexOf(temp1) >= 0){
-					trace(pName);
-					rez = false;
-					pSpecials.push(perkTrue);
-					break;
-				}
-			}
-			return rez;
-		}
-
-		function initTier():void{	//Initial tier 0,1.
-			var bPList:Array = [];
-			var b2PList:Array = [];
-			for each (var pPerkDBLP:PerkType in tPerkList){
-				if (pPerkDBLP.requirements.length == 0){
-					bPList.push(pPerkDBLP);
-					mPerkList.push(pPerkDBLP)
-				}
-				else {
-					var pReqFail:Boolean = false
-					for each (var temp1:Object in pPerkDBLP.requirements){
-						if (temp1.hasOwnProperty("perk") || temp1.hasOwnProperty("perks") || temp1.hasOwnProperty("allperks")){
-							pReqFail = true;
-							break;
-						}
-					}
-					if (!pReqFail){
-						b2PList.push(pPerkDBLP);
-						mPerkList.push(pPerkDBLP);
-					}
-				}
-			}
-			perkArrMgmt(bPList);
-			fPerkList.push(bPList);		//No Perk Requirements. Tier 0. Big list, needs refining.
-			perkArrMgmt(b2PList);
-			fPerkList.push(b2PList);	//Perk Requirements, but not requiring other perks beforehand. Tier 1.
-			for each (var pPerk:PerkType in pSpecials){
-				mPerkList.push(pPerk);
-			}
-			repPerkClr();
-		}
-
-		function repPerkClr(pLvl:int = 1):void{	//tier 2+
-			var nList:Array = [];
-			for each(var pPerk:PerkType in tPerkList){
-				try{
-					var change:Boolean = false;
-					var requirelen:int = 0;
-					for each (var cond:Object in pPerk.requirements) {
-						/*if (cond.type == "level"){
-							if (cond.level < pLvl){
-								change = false;
-								break;
-							}
-						}*/
-						if (cond.type == "allperks"){		//Checks if player has all required perks
-							var iterval:int = 0;
-							for each (var pPerk1:PerkType in cond.allperks) {
-								if (!mPerkList.indexOf(pPerk1) >= 0){
-									change = false;
-									break;
-								}
-								iterval++
-							}
-							if (iterval == cond.allperks.length){
-								change = true;
-							}
-							else{
-								break;
-							}
-						}
-						else if (cond.type == "anyperk"){	//Checks if player has any of the perks
-							var anyChk:Boolean = false;
-							for each (var pPerk2:PerkType in cond.perks) {
-								if (mPerkList.indexOf(pPerk2) >= 0){
-									change = true;
-									anyChk = true;
-									break;
-								}
-							}
-							if (!anyChk){ //in case both any and all are in req.
-								change = false;
-								break;
-							}
-						}
-						else if (cond.type == "perk"){		//Checks if player has the perk
-							var pPerk3:PerkType = cond.perk;
-							if (mPerkList.indexOf(pPerk3) >= 0){
-								change = true;
-							}
-							else {
-								if (change) change = false;
-								break;
-							}
-						}
-						else {	//The effect from this cause should never occur, as all these in masterlist should have a perk requirement of some sort.
-							requirelen++
-						}
-					}
-					if (requirelen == pPerk.requirements.length){
-						outputText(pPerk.name() + "shouldn't be here. This is a bug. Please report it.");
-						trace(pPerk.name() + "Error. Sth is wrong, and I'm too tired to figure it out.")
-					}
-					else if(change){
-						nList.push(pPerk);
-						//mPerkList.push(pPerk);
-						change = false;
-					}
-				}
-				catch(e:Error){
-					trace(e)
-				}
-			}
-			if (nList.length > 0){
-				perkArrMgmt(nList);
-				fPerkList.push(nList);
-				repPerkClr();
-			}
-		}
-
-		function perkArrMgmt(remArr:Array):void{	//Source List clearing.
-			var srcArr:Array = tPerkList;
-			for each (var pPerk:PerkType in remArr){
-				srcArr.splice(srcArr.indexOf(pPerk),1);
-				mPerkList.push(pPerk);
-			}
-		}
-
-		function perkRelationsDict():void{	//Perk Relations.
-			var req1:Array = [];
-			var req2:Array = [];
-			//var req3:Array = [];
-			for each (var pPerk:PerkType in tPerkList){
-				for each (var cond:Object in pPerk.requirements) {
-					if (cond.type == "allperks"){
-						for each (var pPerk1:PerkType in cond.allperks) {
-							req1.push(pPerk1);
-						}
-					}
-					else if (cond.type == "anyperk"){
-						for each (var pPerk2:PerkType in cond.perks) {
-							req2.push(pPerk2);
-						}
-					}
-					else if (cond.type == "perk"){
-						req1.push(cond.perk);
-					}
-				}
-				//req3 = CoC.instance.perkTree.listUnlocks(pPerk); //For some reason, does not want to work. Seems to really only want it from PerkClass.ptype.
-				//trace(req3);
-				pRelations[pPerk] = [req1, req2];
-				req1 = [];
-				req2 = [];
-				//req3 = [];
-			}
-		}
-
-		function pInfoDP(tPVal:int, e:TextEvent):void{	//Perk Display Information
-			clearOutput();
-			var selected:PerkClass = fPerkCList[e.text].perk;	///For some reason, this is triggering and faulting here when opening racial scores from Aimozg.....what???
-			var tempStr:String = "";
-			var pPerkGDesc:Array = ["\nRequires (All of these perks): ", "\nRequires (Any of these perks): ", "\nUnlocks: "]
-			var pPerkGroup:Array = pRelations[selected.ptype];
-			var reqs:Array = [];
-			pPerkGroup.push(CoC.instance.perkTree.listUnlocks(selected.ptype));
-			outputText("<b>" + selected.perkName + ":</b>");
-			for each (var cond:Object in selected.ptype.requirements) {
-				if (!(cond.type == "allperks" || cond.type == "anyperk" || cond.type == "perk")){
-					if (cond.text is String){
-						reqs.push(cond.text);
-					}
-					else {
-						reqs.push(cond.text(player));
-					}
-				}
-			}
-			if (reqs.length > 0){
-				outputText("\nRequires (Non-perk requirements): " + reqs.join(", "));
-			}
-			for (var i:int = 0; i <= 2; i++){
-				if (pPerkGroup[i].length > 0){
-					outputText(pPerkGDesc[i]);
-					for each (var pPerk1:PerkType in pPerkGroup[i]){
-						tempStr = tempStr + pPerk1.name() + ", ";
-					}
-					tempStr = tempStr.slice(0, -2);
-					outputText(tempStr);
-					tempStr = "";
-				}
-			}
-			outputText("\n\n");
-			outputText(selected?selected.ptype.desc(selected):selected.ptype.longDesc);
-			menu();
-			addButton(14, "Back", displayMenu, tPVal);
-		}
-
-		var lhVal:int = 0;
-		function dMenuLinker(tPVal:int, srcArr:Array):void{	//Interaction linking
-			var fPerkCList:Array = [];
-			lhVal = tPVal;
-			mainView.mainText.addEventListener(TextEvent.LINK, curry(pInfoDP, tPVal));
-			for each(var perk:PerkType in srcArr.sort()) {
-				var p:PerkClass = new PerkClass(perk,
-						perk.defaultValue1, perk.defaultValue2, perk.defaultValue3, perk.defaultValue4);
-				var lab:* = {label: p.perkName, perk: p};
-				fPerkCList.push(lab);
-				outputText("<u><a href=\"event:"+fPerkCList.indexOf(lab)+"\">"+p.perkName+"</a></u>\n");
-			}
-		}
-
-		function cleanupBeforeReturns():void{
-			mainView.mainText.removeEventListener(TextEvent.LINK, curry(pInfoDP, lhVal));
-			displayPerks();
-		}
-
-		function displayMenu(tPVal:int = 0):void{	//Main Perk Database Display
-			if (fPerkList.length == 0){
-				pDictPrep();
-				perkRelationsDict();
-				initTier();
-				fPerkList.push(tPerkList);
-			}
-			clearOutput();
-			menu();
-			displayHeader("Perk Tier: " + tPVal);
-			//outputText(tPerkList.length + "\n");
-			if (tPVal == 0){
-				outputText("Tier 0 contains all perks that do not have any requirements!\n");
-				outputText("It also contains perks that may not be handled in the standard manner.\n");
-				outputText("Note: This is still in beta, but works for the 90%. Odd side cases are attributed to weirdness in perk code.\n");
-			}
-			else if (tPVal == 1){
-				outputText("Tier 1 contains all perks that have a requirement, but do not require perks.\n");
-			}
-			else if (tPVal == 18){
-				outputText("Tier 18 contains perks that don't associate properly.\n");
-			}
-			else {
-				outputText("This tier contains perks that require one or more of any perks found in previous tiers!\n");
-			}
-			outputText("Note: Perks are sorted into tiers via relations to other perks only. Other requirements are stated, but are not taken into consideration here.\n")
-			//outputText("Note: Work in progress. Send feedback to JTecx.\n");
-			var tfArr:Array = fPerkList[tPVal];
-			dMenuLinker(tPVal, tfArr);
-			if (tPVal > 0){
-				addButton(0, "Prev Page", displayMenu,tPVal - 1);
-			} else{
-				addButtonDisabled(0,"Prev Page", "Lowest Tier.")
-			}
-			if (tPVal < fPerkList.length - 1){
-				addButton(4, "Next Page", displayMenu,tPVal + 1);
-			} else{
-				addButtonDisabled(4,"Next Page", "Highest Tier.")
-			}
-			addButton(14, "Back", cleanupBeforeReturns);
-		}
-
-		displayMenu();
 	}
 
 	private function toggleFlag(returnTo:Function, flag:int):void {

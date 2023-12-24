@@ -41,7 +41,6 @@ public class MinotaurRace extends Race {
 				.tailType(Tail.COW, +1)
 				.legType(LowerBody.HOOFED, +1)
 				.hornType(Horns.COW_MINOTAUR, +1)
-				.skinCoatType(Skin.FUR, +1)
 				.customRequirement("","cum volume > 500",
 						function (body:BodyData):Boolean {
 							return body.player.cumQ() > 500
@@ -51,6 +50,7 @@ public class MinotaurRace extends Race {
 						function (body:BodyData):Boolean {
 							return body.player.cumQ() > 1000
 						}, +1)
+				.skinCoatType(Skin.FUR, +1)
 				.faceType(ANY(Face.HUMAN, Face.COW_MINOTAUR), +1)
 				.armType(Arms.HUMAN, +1)
 				.customRequirement("","horns size > 5",

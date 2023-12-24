@@ -14,6 +14,8 @@ import classes.BodyParts.Tail;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
+import coc.view.CoCButton;
+
 use namespace CoC;
 
 	public class TwinBosses extends Monster
@@ -160,7 +162,12 @@ use namespace CoC;
 				}
 			}
 		}
-		
+
+		override public function postPlayerBusyBtnSpecial(btnSpecial1:CoCButton, btnSpecial2:CoCButton):void{
+			if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.companionsInPCParty()) btnSpecial1.show("Dish Helper", SceneLib.dungeons.riverdungeon.dishHelperTB);
+			else btnSpecial1.showDisabled("Dish Helper", "You don't have anyone to take care of other twin!");
+		}
+
 		private function twinSwitchWithOtherOne():void {
 			clearOutput();
 			outputText(this.short + " stops his actions defeated.");

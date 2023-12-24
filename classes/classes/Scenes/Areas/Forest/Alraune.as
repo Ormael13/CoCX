@@ -13,6 +13,8 @@ import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 import classes.internals.WeightedDrop;
 
+import coc.view.CoCButton;
+
 public class Alraune extends Monster
 	{
 		public function trapLevel(adjustment:Number = 0):Number {
@@ -97,7 +99,19 @@ public class Alraune extends Monster
 				outputText("\n");
 			}
 		}
-		
+
+		override public function preAttack():void{
+			if (hasStatusEffect(StatusEffects.Level)) {
+				outputText("It’s all or nothing!  If this leafy woman is so keen on pulling you in, you will let her do just that!  You use her own strength against her, using it to increase your momentum as you leap towards her and smash into her with your weapon!  ");
+				trapLevel(-6);
+			}
+		}
+
+		override public function postPlayerBusyBtnSpecial(btnSpecial1:CoCButton, btnSpecial2:CoCButton):void{
+			if (player.fatigueLeft() < 50) btnSpecial1.disable("You're too tired to struggle.");
+			else btnSpecial1.show("Struggle", SceneLib.combat.wait2, "Struggle to forcefully pull yourself a good distance away from plant woman.");
+		}
+
 		override protected function performCombatAction():void
 		{
 			if (hasStatusEffect(StatusEffects.Level)) {

@@ -56,6 +56,7 @@ public class Alvina extends Monster
 				outputText("Alvina starts incanting a spell. While nothing visible happens, you feel a chill in the air.");
 				PolarMidnightSequance++;
 				createStatusEffect(StatusEffects.Uber, 0, 0,0,0);
+				clearTempResolute(false);
 			}
 			else {
 				if (PolarMidnightSequance == 1) {
@@ -65,7 +66,7 @@ public class Alvina extends Monster
 					outputText("The room gets darker as lights are snuffed out, and it gets colder by the second. ");
 					if (flags[kFLAGS.GAME_DIFFICULTY] >= 2){
 						outputText("Alvina snaps her fingers and large spear-like shards of ice form all around you before raining from all directions. You are impaled from all sides by spears, your blood dripping on the floor. This is, however, only the first phase of this terrifying spell. ");
-						player.createStatusEffect(StatusEffects.IzmaBleed, 3, 0, 0, 0);
+						if (!player.immuneToBleed()) player.createStatusEffect(StatusEffects.IzmaBleed, 3, 0, 0, 0);
 					}
 					outputText("You barely have time to scream as the air around you freezes solid. You are encased in a thick layer of black ice! ");
 					player.takeIceDamage(damage, true);//, true
@@ -94,8 +95,10 @@ public class Alvina extends Monster
 			outputText("Alvina weaves her scythe above her head tracing complicated arcane signs, as a purple flame surges under you, searing your flesh. ");
 			//outputText(". (" + damage + ")");
 			player.takeFireDamage(damage, true);//, true
-			if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.addStatusValue(StatusEffects.BurnDoT, 1, 1);
-			else player.createStatusEffect(StatusEffects.BurnDoT,SceneLib.combat.debuffsOrDoTDuration(5),0.05,0,0);
+			if (!player.immuneToBurn()) {
+				if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.addStatusValue(StatusEffects.BurnDoT, 1, 1);
+				else player.createStatusEffect(StatusEffects.BurnDoT,SceneLib.combat.debuffsOrDoTDuration(5),0.05,0,0);
+			}
 			statScreenRefresh();
 			outputText("\n");
 		}
@@ -105,6 +108,7 @@ public class Alvina extends Monster
 				outputText("Alvina weaves her scythe above her head tracing complicated arcane signs.");
 				MeteorStormSequence++;
 				createStatusEffect(StatusEffects.Uber, 0, 0,0,0);
+				clearTempResolute(false);
 			} else {
 				var damage:Number = 0;
 				damage += eBaseIntelligenceDamage() * 10;
@@ -147,6 +151,7 @@ public class Alvina extends Monster
 				outputText("\"<i>Most demons steal souls through sex. I have a more academic approach to it. Do not worry, you will still writhe in pleasure and reach orgasm as I tear it out of your chest!</i>\"\n\n");
 				outputText("You see a set of dark tendrils of black magic surging around her body, like grasping claws, ready to bury themselves in you. You need to stop that incantation before she strikes you with it!\n\n");
 				SoulTearInitiated = true;
+				clearTempResolute(false);
 			}
 		}
 
@@ -172,8 +177,10 @@ public class Alvina extends Monster
 			if (hasStatusEffect(StatusEffects.Maleficium)) damage *= 2;
 			outputText("Large crystalline shards of ice form in a fan around Alvina. She waves her scythe in an arc launching them in a barrage at you. You are impaled several times over, your wounds bleeding grievously. ");
 			player.takeIceDamage(damage, true);
-			if (player.hasStatusEffect(StatusEffects.IzmaBleed)) player.addStatusValue(StatusEffects.IzmaBleed,1,1);
-			else player.createStatusEffect(StatusEffects.IzmaBleed,SceneLib.combat.debuffsOrDoTDuration(5),0,0,0);
+			if (!player.immuneToBleed()) {
+				if (player.hasStatusEffect(StatusEffects.IzmaBleed)) player.addStatusValue(StatusEffects.IzmaBleed,1,1);
+				else player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(5), 0, 0, 0);
+			}
 			statScreenRefresh();
 			outputText("\n");
 		}

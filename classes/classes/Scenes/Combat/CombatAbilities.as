@@ -7,8 +7,24 @@ import classes.Scenes.Combat.SpellsDivine.*;
 import classes.Scenes.Combat.SpellsNecro.*;
 import classes.Scenes.Combat.SpellsGrey.*;
 import classes.Scenes.Combat.SpellsBlood.*;
+import classes.Scenes.Combat.Soulskills.*;
+import classes.Scenes.Combat.SpecialsMagic.*;
+import classes.Scenes.Combat.General.*;
 
 public class CombatAbilities {
+
+	public static const FlyingSwordAttack:FlyingSwordSkill		= new FlyingSwordSkill();
+	public static const WillOfTheWisp:WillOfTheWispSkill		= new WillOfTheWispSkill();
+	public static const MummyAttack:MummyAttackSkill			= new MummyAttackSkill();
+	public static const Tease:TeaseSkill						= new TeaseSkill();
+	public static const GoblinLustBomb:GoblinLustBombSkill		= new GoblinLustBombSkill();
+	public static const ALL_GENERAL_SKILLS:/*CombatAbility*/Array = [
+		FlyingSwordAttack,
+		WillOfTheWisp,
+		MummyAttack,
+		Tease,
+		GoblinLustBomb
+	];
 	
 	public static const Whitefire:WhitefireSpell                = new WhitefireSpell();
 	public static const WhitefireEx:WhitefireSpell              = new WhitefireSpell(true);
@@ -235,6 +251,172 @@ public class CombatAbilities {
 			.concat(ALL_BLOOD_SPELLS)
 			.concat(ALL_GREEN_SPELLS)
 	;
+
+	public static const CleansingPalm:CleansingPalmSkill 							= new CleansingPalmSkill();
+	public static const IceFist:IceFistSkill										= new IceFistSkill()
+	public static const FirePunch:FirePunchSkill									= new FirePunchSkill();
+	public static const HurricaneDance:HurricaneDanceSkill							= new HurricaneDanceSkill();
+	public static const EarthStance:EarthStanceSkill								= new EarthStanceSkill();
+	public static const PunishingKick:PunishingKickSkill							= new PunishingKickSkill();
+	public static const SoulBlast:SoulBlastSkill									= new SoulBlastSkill();
+	public static const Overlimit:OverlimitSkill									= new OverlimitSkill();
+	public static const TripleThrust:MultiThrustSkill								= new MultiThrustSkill(1);
+	public static const SextupleThrust:MultiThrustSkill								= new MultiThrustSkill(2);
+	public static const NonupleThrust:MultiThrustSkill								= new MultiThrustSkill(3);
+	public static const DracoSweep:DracoSweepSkill									= new DracoSweepSkill();
+	public static const FlamesOfLove:FlamesOfLoveSkill								= new FlamesOfLoveSkill();
+	public static const IciclesOfLove:IciclesOfLoveSkill							= new IciclesOfLoveSkill();
+	public static const StormOfSisterhood:StormOfSisterhoodSkill					= new StormOfSisterhoodSkill();
+	public static const NightOfBrotherhood:NightOfBrotherhoodSkill					= new NightOfBrotherhoodSkill();
+	public static const Devourer:DevourerSkill										= new DevourerSkill();
+	public static const ManyBirds:ManyBirdsSkill									= new ManyBirdsSkill();
+	public static const ResonanceVolley:ResonanceVolleySkill						= new ResonanceVolleySkill();
+	public static const AvatarOfTheSong:AvatarOfTheSongSkill						= new AvatarOfTheSongSkill();
+	public static const BeatOfWar:BeatOfWarSkill									= new BeatOfWarSkill();
+	public static const Comet:CometSkill											= new CometSkill();
+	public static const BladeDance:BladeDanceSkill									= new BladeDanceSkill();
+	public static const HailOfBlades:BladeHailSkill									= new BladeHailSkill(1);
+	public static const GrandioseHailOfBlades:BladeHailSkill						= new BladeHailSkill(2);
+	public static const GrandioseHailOfMoonBlades:BladeHailSkill					= new BladeHailSkill(3);
+	public static const ElementAir:CreateElementSkill								= new CreateElementSkill("Air", 1);
+	public static const ElementEarth:CreateElementSkill								= new CreateElementSkill("Earth", 1);
+	public static const ElementFire:CreateElementSkill								= new CreateElementSkill("Fire", 1);
+	public static const ElementWater:CreateElementSkill								= new CreateElementSkill("Water", 1);
+	public static const ElementIce:CreateElementSkill								= new CreateElementSkill("Ice", 2);
+	public static const ElementLightning:CreateElementSkill							= new CreateElementSkill("Lightning", 2);
+	public static const ElementDarkness:CreateElementSkill							= new CreateElementSkill("Darkness", 2);
+	public static const SoulDrain:SoulDrainSkill									= new SoulDrainSkill();
+	public static const Trance:TranceSkill											= new TranceSkill();
+	public static const VioletPupilTransformation:VioletPupilTransformationSkill	= new VioletPupilTransformationSkill();
+	public static const FingerOfDeath:FingerOfDeathSkill							= new FingerOfDeathSkill();
+	public static const BloodSwipe:BloodSwipeSkill									= new BloodSwipeSkill();
+	public static const BloodSwipeSF:BloodSwipeSkill								= new BloodSwipeSkill(true);
+	public static const BloodDewdrops:BloodDewdropsSkill							= new BloodDewdropsSkill();
+	public static const BloodDewdropsSF:BloodDewdropsSkill							= new BloodDewdropsSkill(true);
+	public static const HeartSeeker:HeartSeekerSkill								= new HeartSeekerSkill();
+	public static const HeartSeekerSF:HeartSeekerSkill								= new HeartSeekerSkill(true);
+	public static const BloodRequiem:BloodReqiuemSkill								= new BloodReqiuemSkill();
+	public static const BloodRequiemSF:BloodReqiuemSkill							= new BloodReqiuemSkill(true);
+	public static const ScarletSpiritCharge:ScarletSpiritChargeSkill				= new ScarletSpiritChargeSkill();
+	public static const KillingIntent:KillingIntentSkill							= new KillingIntentSkill();
+
+
+
+	public static const ALL_SOULSKILLS:/*CombatAbility*/Array = [
+		CleansingPalm,
+		IceFist,
+		FirePunch,
+		HurricaneDance,
+		EarthStance,
+		PunishingKick,
+		SoulBlast,
+		Overlimit,
+		TripleThrust,
+		SextupleThrust,
+		NonupleThrust,
+		DracoSweep,
+		FlamesOfLove,
+		IciclesOfLove,
+		StormOfSisterhood,
+		NightOfBrotherhood,
+		Devourer,
+		ManyBirds,
+		ResonanceVolley,
+		AvatarOfTheSong,
+		BeatOfWar,
+		Comet,
+		BladeDance,
+		HailOfBlades,
+		GrandioseHailOfBlades,
+		GrandioseHailOfMoonBlades,
+		ElementAir,
+		ElementDarkness,
+		ElementEarth,
+		ElementFire,
+		ElementIce,
+		ElementLightning,
+		ElementWater,
+		SoulDrain,
+		Trance,
+		VioletPupilTransformation,
+		FingerOfDeath,
+		BloodSwipe,
+		BloodSwipeSF,
+		BloodDewdrops,
+		BloodDewdropsSF,
+		HeartSeeker,
+		HeartSeekerSF,
+		BloodRequiem,
+		BloodRequiemSF,
+		ScarletSpiritCharge,
+		KillingIntent
+	]
+
+	public static const BPBloodSwipe:BloodSwipePuppiesSkill = new BloodSwipePuppiesSkill();
+	public static const BPBloodDewdrops:BloodDewdropsPuppiesSkill = new BloodDewdropsPuppiesSkill();
+	public static const BPHeartSeeker:HeartSeekerPuppiesSkill = new HeartSeekerPuppiesSkill();
+
+	public static const ALL_BLOOD_PUPPY_SOULSKILLS:/*CombatAbility*/Array = [
+		BPBloodSwipe,
+		BPBloodDewdrops,
+		BPHeartSeeker
+	]
+
+	public static const EAspectFire:EAspectFireSkill = new EAspectFireSkill();
+	public static const EAspectAir:EAspectAirSkill = new EAspectAirSkill();
+	public static const EAspectEarth:EAspectEarthSkill = new EAspectEarthSkill();
+	public static const EAspectWater:EAspectWaterSkill = new EAspectWaterSkill();
+	public static const EAspectEther:EAspectEtherSkill = new EAspectEtherSkill();
+	public static const EAspectWood:EAspectWoodSkill = new EAspectWoodSkill();
+	public static const EAspectMetal:EAspectMetalSkill = new EAspectMetalSkill();
+	public static const EAspectIce:EAspectIceSkill = new EAspectIceSkill();
+	public static const EAspectLightning:EAspectLightningSkill = new EAspectLightningSkill();
+	public static const EAspectDarkness:EAspectDarknessSkill = new EAspectDarknessSkill();
+	public static const EAspectPoison:EAspectPoisonSkill = new EAspectPoisonSkill();
+	public static const EAspectPurity:EAspectPuritySkill = new EAspectPuritySkill();
+	public static const EAspectCorruption:EAspectCorruptionSkill = new EAspectCorruptionSkill();
+
+	public static const ALL_ELEMENTAL_ASPECTS:/*CombatAbility*/Array = [
+		EAspectFire,
+		EAspectAir,
+		EAspectEarth,
+		EAspectWater,
+		EAspectEther,
+		EAspectWood,
+		EAspectMetal,
+		EAspectIce,
+		EAspectLightning,
+		EAspectDarkness,
+		EAspectPoison,
+		EAspectPurity,
+		EAspectCorruption
+	]
+
+	public static const FusionSpecial1st:FusionSpecial1stSkill = new FusionSpecial1stSkill();
+	public static const FusionSpecial2nd:FusionSpecial2ndSkill = new FusionSpecial2ndSkill();
+	public static const TrueEvasion:FusionSpecialTrueEvasionSkill = new FusionSpecialTrueEvasionSkill();
+	public static const AdamantineShell:FusionSpecialAdamantineShellSkill = new FusionSpecialAdamantineShellSkill();
+	public static const FieryRage:FusionSpecialFieryRageSkill = new FusionSpecialFieryRageSkill();
+	public static const MomentofClarity:FusionSpecialMomentofClaritySkill = new FusionSpecialMomentofClaritySkill();
+	public static const FusionSpecial4th:FusionSpecial4thSkill = new FusionSpecial4thSkill();
+	public static const FusionSpecial5th:FusionSpecial5thSkill = new FusionSpecial5thSkill();
+
+
+	public static const ALL_ELEMENTAL_FUSION_ATTACKS:/*CombatAbility*/Array = [
+		FusionSpecial1st,
+		FusionSpecial2nd,
+		TrueEvasion,
+		AdamantineShell,
+		MomentofClarity,
+		FusionSpecial4th,
+		FusionSpecial5th
+	];
+
+	public static const ALL_MAGICAL_SPECIALS:/*CombatAbility*/Array = [
+		
+	]
+	.concat(ALL_ELEMENTAL_FUSION_ATTACKS);
+	
 	
 	/*
 	 * Difference from CombatAbility.Registry:
@@ -243,6 +425,11 @@ public class CombatAbilities {
 	 */
 	public static const ALL:/*CombatAbility*/Array = []
 			.concat(ALL_SPELLS)
+			.concat(ALL_SOULSKILLS)
+			.concat(ALL_MAGICAL_SPECIALS)
+			.concat(ALL_ELEMENTAL_ASPECTS)
+			.concat(ALL_BLOOD_PUPPY_SOULSKILLS)
+			.concat(ALL_GENERAL_SKILLS);
 	;
 	
 	function CombatAbilities() {

@@ -12,7 +12,9 @@ import classes.Races;
 
 public class HumanVersatilityMutation extends IMutationPerkType
     {
-        private static const mName:String = "Human Versatility";
+        override public function get mName():String {
+            return "Human Versatility";
+        }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -27,22 +29,6 @@ public class HumanVersatilityMutation extends IMutationPerkType
                 descS = "Your fat tissue increased again your natural toughness and thickness limit. Increased damage reduction against physical damage & increase natural resistance to damage, increase max Hunger cap by 50 (if PC have Hunger bar active) (+45% of max core Tou as phantom Tou)";
             }
             return descS;
-        }
-
-        //Name. Need it say more?
-        override public function name(params:PerkClass=null):String {
-            var sufval:String;
-            switch (currentTier(this, player)){
-                case 2:
-                    sufval = "(Primitive)";
-                    break;
-                case 3:
-                    sufval = "(Evolved)";
-                    break;
-                default:
-                    sufval = "";
-            }
-            return mName + sufval;
         }
 
         //Mutation Requirements

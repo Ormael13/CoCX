@@ -70,7 +70,7 @@ public class BlinkSpell extends AbstractBlackSpell {
 		return Math.round(BlinkBoost);
 	}
 	
-	public function calcDuration():Number {
+	override public function calcDuration():int {
 		var BlinkDuration:Number = 5;
 		BlinkDuration += combat.magic.perkRelatedDurationBoosting();
 		return BlinkDuration;

@@ -365,14 +365,12 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			if (player.racialScore(Races.ARIGEAN) >= 16) {
 				bd = buttons.add("Mana Shot", manaShot).hint("Fire a single blast from "+(player.tailCount>1?"one of your extra maws":"your large extra mouth")+". \n");
-				if (player.armor == armors.FMDRESS) bd.requireMana(spellCost(32), true);
-				else bd.requireMana(spellCost(40), true);
+				bd.requireMana(spellCost(40*arigeanMagicSpecialsCost()), true);
 				if (player.hasStatusEffect(StatusEffects.CooldownManaShot)) {
 					bd.disable("You need more time before you can use Mana Shot again.\n\n");
 				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				bd = buttons.add("Mana Barrage", manaBarrage).hint("Fire a barrage of blasts from your extra maw"+(player.tailCount>1?"s":"")+". \n");
-				if (player.armor == armors.FMDRESS) bd.requireMana(spellCost(160), true);
-				else bd.requireMana(spellCost(200), true);
+				bd.requireMana(spellCost(200*arigeanMagicSpecialsCost()), true);
 				if (player.hasStatusEffect(StatusEffects.CooldownManaBarrage)) {
 					bd.disable("You need more time before you can use Mana Barrage again.\n\n");
 				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
@@ -751,7 +749,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1 || player.isAnyRaceCached(Races.SHARK, Races.ABYSSAL_SHARK)) {
 			bd = buttons.add("Blood Frenzy", bloodFrenzy);
-			if (combat.MonsterIsBleeding()) {
+			if (monster.monsterIsBleeding()) {
 				bd.hint("Lose yourself to a blood fueled trance increasing your speed, libido and weakening your inteligence. The trance last for as long as the opponent is bleeding and cannot be disangaged willingly.\n");
 			}
 			else bd.disable("You can't go into a blood frenzy if your opponent is not bleeding.");
@@ -949,7 +947,7 @@ public class MagicSpecials extends BaseCombatContent {
 			bd = buttons.add("Sing", SingInitiate).hint("Begin singing. While singing, you may add various powerful effects to your tune.\n.");
 		}
 		//Telekinetic Grab
-		if (player.racialScore(Races.VAMPIRE) >= 20 && !monster.hasStatusEffect(StatusEffects.TelekineticGrab)) {
+		if ((player.racialScore(Races.VAMPIRE) >= 20 || player.racialScore(Races.DRACULA) >= 22) && !monster.hasStatusEffect(StatusEffects.TelekineticGrab)) {
 			bd = buttons.add("Telekinetic Grab", TelekineticGrab, "Use telekinesis to hold your opponent. \n\nWould go into cooldown after use for: 6 rounds");
 			bd.requireMana(spellCost(50));
 			if (player.hasStatusEffect(StatusEffects.CooldownTelekineticGrab)) {
@@ -957,86 +955,11 @@ public class MagicSpecials extends BaseCombatContent {
 			} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
 		if (player.hasPerk(PerkLib.ElementalBody)) {
-			if (player.perkv1(PerkLib.ElementalBody) == 1) {//sylph
-				bd = buttons.add("Wind Blade", curry(FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsAirE), 1)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				else if (player.hasStatusEffect(StatusEffects.InsideSmallSpace)) {
-					bd.disable("You can't use this inside too small spaces.");
-				}
-				bd = buttons.add("Healing Breeze", curry(FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsAirE), 1)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) == 5) {
-					bd = buttons.add("True Evasion", FusionSpecialTrueEvasion).hint("Cooldown: 10 turns.\n\nSoulforce cost: " + Math.round(20 * soulskillCost() * soulskillcostmulti()));
-					if (player.soulforce < 20 * soulskillCost() * soulskillcostmulti()) {
-						bd.disable("Your current soulforce is too low.");
-					}
-					else if (player.hasStatusEffect(StatusEffects.CooldownTrueEvasion)) {
-						bd.disable("You need more time before you can use True Evasion again.");
-					}
-				}
-			}
-			if (player.perkv1(PerkLib.ElementalBody) == 2) {//gnome
-				bd = buttons.add("Wild Growth", curry(FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsEarthE), 2)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				else if (monster.hasStatusEffect(StatusEffects.Flying)) {
-					bd.disable("You can reach flying targets.");
-				}
-				bd = buttons.add("Synthesis", curry(FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsEarthE), 2)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) == 5) {
-					bd = buttons.add("Adamantine Shell", FusionSpecialAdamantineShell).hint("Cooldown: 10 turns.\n\nSoulforce cost: " + Math.round(20 * soulskillCost() * soulskillcostmulti()));
-					if (player.soulforce < 20 * soulskillCost() * soulskillcostmulti()) {
-						bd.disable("Your current soulforce is too low.");
-					}
-					else if (player.hasStatusEffect(StatusEffects.CooldownAdamantineShell)) {
-						bd.disable("You need more time before you can use True Evasion again.");
-					}
-				}
-			}
-			if (player.perkv1(PerkLib.ElementalBody) == 3) {//ignis
-				bd = buttons.add("Pyroblast", curry(FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsFireE), 3)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				bd = buttons.add("Warmth", curry(FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsFireE), 3)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) == 5) {
-					if (player.hasStatusEffect(StatusEffects.FieryRage)) {
-						bd = buttons.add("Fiery Rage(Off)", FusionSpecialFieryRageDeactivate).hint("Deactivate Fiery Rage.");
-					} else {
-						bd = buttons.add("Fiery Rage(On)", FusionSpecialFieryRageActivate).hint("Double your melee damage for a time, by ignoring your body's limits, pushing past them. This technique drain 5% of max soulforce per round, but also increases lust resistance.");
-					}
-				}
-			}
-			if (player.perkv1(PerkLib.ElementalBody) == 4) {//undine
-				bd = buttons.add("Hydraulic Torrent", curry(FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsWaterE), 4)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				bd = buttons.add("Lifewater", curry(FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsWaterE), 4)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
-					bd.disable("Your current soulforce is too low.");
-				}
-				if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) == 5) {
-					bd = buttons.add("Moment of Clarity", FusionSpecialMomentOfClarity).hint("Cooldown: 6 turns.\n\nSoulforce cost: " + Math.round(20 * soulskillCost() * soulskillcostmulti()));
-					if (player.soulforce < 20 * soulskillCost() * soulskillcostmulti()) {
-						bd.disable("Your current soulforce is too low.");
-					}
-					else if (player.hasStatusEffect(StatusEffects.CooldownMomentOfClarity)) {
-						bd.disable("You need more time before you can use True Evasion again.");
-					}
-				}
-			}
+			for each (var fusionAbility:CombatAbility in CombatAbilities.ALL_ELEMENTAL_FUSION_ATTACKS) {
+                if (fusionAbility.isKnown) {
+                    buttons.append(fusionAbility.createButton(monster));
+                }
+            }
 		}
 		if (player.hasStatusEffect(StatusEffects.ShieldingSpell)) buttons.add("Shielding", shieldingSpell);
 		if (player.hasStatusEffect(StatusEffects.ImmolationSpell)) buttons.add("Immolation", immolationSpell);
@@ -1355,7 +1278,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage = Math.round(damage * combat.lightningDamageBoostedByDao());
-		doLightingDamage(damage, true, true);
+		doLightningDamage(damage, true, true);
 		outputText(" damage. ");
 		if (crit1) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
@@ -1375,7 +1298,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("You achieve a thundering orgasm, lightning surging out of your body as you direct it toward [themonster], gleefully zapping [monster him] body with your accumulated lust! Your desire, however, only continues to ramp up.\n\n");
 			temp2 = 5 + rand(player.lib / 5 + player.cor / 10);
 			dynStats("lus", temp2, "scale", false);
-			var lustDmgF:Number = combat.calculateBasicTeaseDamage(120);
+			var lustDmgF:Number = combat.teases.teaseBaseLustDamage();
 			var lustBoostToLustDmg:Number = 0;
 			if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemTags.A_REVEALING)) lustDmgF *= (1 + ((10 + rand(11)) / 100));
 			if (player.hasPerk(PerkLib.ElectrifiedDesire)) {
@@ -1398,10 +1321,7 @@ public class MagicSpecials extends BaseCombatContent {
 			//Determine if critical tease!
 			var crit:Boolean = false;
 			var critChance:int = 5;
-			if (player.hasPerk(PerkLib.CriticalPerformance)) {
-				if (player.lib <= 100) critChance += player.lib / 5;
-				if (player.lib > 100) critChance += 20;
-			}
+			critChance += combat.teases.combatTeaseCritical();
 			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 			if (rand(100) < critChance) {
 				crit = true;
@@ -1466,11 +1386,11 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage = Math.round(damage * combat.lightningDamageBoostedByDao());
-		doLightingDamage(damage, true, true);
+		doLightningDamage(damage, true, true);
 		outputText(" damage. ");
 		if (crit1) outputText(" <b>*Critical Hit!*</b>");
 		dynStats("lus", (Math.round(player.maxLust() * 0.02)), "scale", false);
-		var lustDmgF:Number = combat.calculateBasicTeaseDamage();
+		var lustDmgF:Number = combat.teases.teaseBaseLustDamage();
 		var lustBoostToLustDmg:Number = 0;
 		lustBoostToLustDmg += lustDmgF * 0.01;
 		if (player.lust100 * 0.01 >= 0.9) lustDmgF += (lustBoostToLustDmg * 140);
@@ -1479,10 +1399,7 @@ public class MagicSpecials extends BaseCombatContent {
 		//Determine if critical tease!
 		var crit2:Boolean = false;
 		var critChance2:int = 5;
-		if (player.hasPerk(PerkLib.CriticalPerformance)) {
-			if (player.lib <= 100) critChance2 += player.lib / 5;
-			if (player.lib > 100) critChance2 += 20;
-		}
+		critChance2 += combat.teases.combatTeaseCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance2 = 0;
 		if (rand(100) < critChance2) {
 			crit2 = true;
@@ -1533,7 +1450,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage = Math.round(damage);
 		dynStats("lus", (Math.round(player.maxLust() * 0.02)), "scale", false);
-		var lustDmgF:Number = combat.calculateBasicTeaseDamage();
+		var lustDmgF:Number = combat.teases.teaseBaseLustDamage();
 		var lustBoostToLustDmg:Number = 0;
 		lustBoostToLustDmg += lustDmgF * 0.01;
 		lustDmgF *= 0.2;
@@ -1543,10 +1460,7 @@ public class MagicSpecials extends BaseCombatContent {
 		//Determine if critical tease!
 		var crit2:Boolean = false;
 		var critChance2:int = 5;
-		if (player.hasPerk(PerkLib.CriticalPerformance)) {
-			if (player.lib <= 100) critChance2 += player.lib / 5;
-			if (player.lib > 100) critChance2 += 20;
-		}
+		critChance2 += combat.teases.combatTeaseCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance2 = 0;
 		if (rand(100) < critChance2) {
 			crit2 = true;
@@ -1560,7 +1474,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
 		lustDmgF = Math.round(lustDmgF);
 		outputText("You let electricity build up in your body before unleashing it into the ambient sky, the clouds roaring with thunder. Here comes the storm! ");
-		doLightingDamage(damage, true, true);
+		doLightningDamage(damage, true, true);
 		if (crit1) outputText(" <b>*Critical!*</b>");
 		monster.teased(lustDmgF, false);
 		if (crit2) outputText(" <b>Critical!</b>");
@@ -1602,7 +1516,7 @@ public class MagicSpecials extends BaseCombatContent {
 			doPlasmaDamage(damage, true, true);
 			if (monster.lustVuln > 0) {
 				outputText(" ");
-				var CumLustDmg:Number = combat.calculateBasicTeaseDamage();
+				var CumLustDmg:Number = combat.teases.teaseBaseLustDamage();
 				CumLustDmg += player.cumQ()/100;
 				CumLustDmg *= (player.lust100 * 0.01);
 				if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) CumLustDmg *= 1.20;
@@ -1624,7 +1538,7 @@ public class MagicSpecials extends BaseCombatContent {
 			doPlasmaDamage(damage, true, true);
 			if (monster.lustVuln > 0) {
 				outputText(" ");
-				var MilkLustDmg:Number = combat.calculateBasicTeaseDamage();
+				var MilkLustDmg:Number = combat.teases.teaseBaseLustDamage();
 				MilkLustDmg += player.lactationQ()/100;
 				MilkLustDmg *= (player.lust100 * 0.01);
 				if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) MilkLustDmg *= 1.20;
@@ -1648,7 +1562,7 @@ public class MagicSpecials extends BaseCombatContent {
 			doPlasmaDamage(damage, true, true);
 			if (monster.lustVuln > 0) {
 				outputText(" ");
-				var MilkCumLustDmg:Number = combat.calculateBasicTeaseDamage();
+				var MilkCumLustDmg:Number = combat.teases.teaseBaseLustDamage();
 				MilkCumLustDmg += player.lactationQ()/100;
 				MilkCumLustDmg += player.cumQ()/100;
 				if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) MilkCumLustDmg *= 1.20;
@@ -2019,6 +1933,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage *= damult;
+		damage = calcCorrosionMod(damage, true);
 		damage = Math.round(damage);
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
@@ -2372,7 +2287,7 @@ public class MagicSpecials extends BaseCombatContent {
 				else outputText("are");
 				outputText("too resolute to be stunned by your attack.</b> ");
 			}
-			doLightingDamage(damage, true, true);
+			doLightningDamage(damage, true, true);
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
@@ -2528,6 +2443,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += scalingBonusIntelligence();
 		damage += scalingBonusWisdom();
 		damage *= 1 + (rand(51) / 100);
+		damage = calcTideMod(damage, true);
 		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
@@ -2749,11 +2665,10 @@ public class MagicSpecials extends BaseCombatContent {
 			player.createStatusEffect(StatusEffects.DragonBreathCooldown,0,0,0,0);
 			player.removeStatusEffect(StatusEffects.ChanneledAttack);
 			player.removeStatusEffect(StatusEffects.ChanneledAttackType);
-			if (player.hasPerk(PerkLib.RagingInfernoSu) && player.hasStatusEffect(StatusEffects.CounterRagingInferno)) player.addStatusValue(StatusEffects.CounterRagingInferno, 3, -1);
-			if (player.hasPerk(PerkLib.GlacialStormSu) && player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, -1);
-			if (player.hasPerk(PerkLib.HighVoltageSu) && player.hasStatusEffect(StatusEffects.CounterHighVoltage)) player.addStatusValue(StatusEffects.CounterHighVoltage, 3, -1);
-			if (player.hasPerk(PerkLib.EclipsingShadowSu) && player.hasStatusEffect(StatusEffects.CounterEclipsingShadow)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 3, -1);
-			if (player.hasPerk(PerkLib.HighTideSu) && player.hasStatusEffect(StatusEffects.CounterHighTide)) player.addStatusValue(StatusEffects.CounterHighTide, 3, -1);
+			for each (var perkObj:Object in CombatMagic.magicCounterPerks) {
+				if (player.hasPerk(perkObj.tier3) && player.hasStatusEffect(perkObj.counter)) player.addStatusValue(perkObj.counter, 3, -1);
+			}
+
 			var damage:Number = 0;
 			var damult:Number = 1;
 			damage += scalingBonusIntelligence() * 5;
@@ -2763,6 +2678,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage = calcGlacialMod(damage, true);
 			damage = calcVoltageMod(damage, true);
 			damage = calcEclypseMod(damage, true);
+
 			if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
 				player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 				damage *= 3;
@@ -2829,11 +2745,9 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("You open your jaw, collecting all your draconic power into your chest. The light of your mixed power coalescing in your throat as you focus.\n\n");
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.ChanneledAttackType, 4, 0, 0, 0);
-			if (player.hasPerk(PerkLib.RagingInfernoSu)) player.addStatusValue(StatusEffects.CounterRagingInferno, 3, 1);
-			if (player.hasPerk(PerkLib.GlacialStormSu)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, 1);
-			if (player.hasPerk(PerkLib.HighVoltageSu)) player.addStatusValue(StatusEffects.CounterHighVoltage, 3, 1);
-			if (player.hasPerk(PerkLib.EclipsingShadowSu)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 3, 1);
-			if (player.hasPerk(PerkLib.HighTideSu)) player.addStatusValue(StatusEffects.CounterHighTide, 3, 1);
+			for each (var perkDragonObj:Object in CombatMagic.magicCounterPerks) {
+				if (player.hasPerk(perkDragonObj.tier3)) player.addStatusValue(perkDragonObj.counter, 3, 1);
+			}
 			enemyAI();
 		}
 	}
@@ -2853,7 +2767,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("You inhale deeply before releasing a cloud of aphrodisiacs poison on your foe!");
 			var venomType:StatusEffectType = StatusEffects.JabberwockyVenom;
 			var d2Bdcc:Number = 2;
-			var lustDmg2:Number = combat.calculateBasicTeaseDamage(20+rand(10));
+			var lustDmg2:Number = combat.teases.teaseBaseLustDamage();
 			var poisonScaling:Number = 1;
 			if (monster.plural){
 				d2Bdcc *=5;
@@ -3010,7 +2924,7 @@ public class MagicSpecials extends BaseCombatContent {
 		var fireDamage:Number;
 		damage *= combat.pcScalingBonusCorruption(player.cor);
 		damage *= spellModBlack();
-		lustDamage = combat.calculateBasicTeaseDamage(damage * lustDamagePercent);
+		lustDamage = combat.teases.teaseBaseLustDamage() * lustDamagePercent * monster.lustVuln;
 		fireDamage = calcInfernoMod(damage * (1 - lustDamagePercent), true);
 		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue) {
@@ -4003,8 +3917,7 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		doNext(combatMenu);
-		if (player.armor == armors.FMDRESS) useMana(32, Combat.USEMANA_MAGIC);
-		else useMana(40, Combat.USEMANA_MAGIC);
+		useMana((40*arigeanMagicSpecialsCost()), Combat.USEMANA_MAGIC);
 		combat.darkRitualCheckDamage();
 		if (monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your attack touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your attack!\n\n");
@@ -4040,7 +3953,8 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
-			if (player.armor == armors.FMDRESS) damage *= 1.2;
+			if (player.armor == armors.ANE_UNI) damage *= 1.2;
+			if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 1) damage *= arigeanAssociationCortexBoost();
 			damage = Math.round(damage);
 			outputText("It hits its mark dealing ");
 			doMagicDamage(damage, true, true);
@@ -4065,14 +3979,12 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 		}
 	}
-
 	public function manaBarrage():void {
 		clearOutput();
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		doNext(combatMenu);
-		if (player.armor == armors.FMDRESS) useMana(160, Combat.USEMANA_MAGIC);
-		else useMana(200, Combat.USEMANA_MAGIC);
+		useMana((200*arigeanMagicSpecialsCost()), Combat.USEMANA_MAGIC);
 		combat.darkRitualCheckDamage();
 		if (monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your attack touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your attack!\n\n");
@@ -4108,7 +4020,8 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
-			if (player.armor == armors.FMDRESS) damage *= 1.2;
+			if (player.armor == armors.ANE_UNI) damage *= 1.2;
+			if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 1) damage *= arigeanAssociationCortexBoost();
 			damage = Math.round(damage);
 			outputText("Your target is unable to avoid the barrage of blasts and takes ");
 			doMagicDamage(damage, true, true);
@@ -4138,6 +4051,19 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 		}
 	}
+	private function arigeanAssociationCortexBoost():Number {
+		var aACB:Number = 1.2;
+		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 2) aACB += 0.3;
+		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 3) aACB += 0.4;
+		return aACB;
+	}
+	private function arigeanMagicSpecialsCost():Number {
+		var aMSC:Number = 1;
+		if (player.armor == armors.ANE_UNI) aMSC -= 0.2;
+		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 2) aMSC -= 0.2;
+		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 3) aMSC -= 0.1;
+		return aMSC;
+	}
 
 	public function hydraAcidBreath():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
@@ -4159,13 +4085,15 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownHydraAcidBreath,7,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownHydraAcidBreath, 8, 0, 0, 0);
 		outputText("You move your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " Hydra heads in an attack formation, belching acid at [themonster]. Your acid begins to eat at your opponents natural defences. ");
-		for (var i:int = player.statusEffectv1(StatusEffects.HydraTailsPlayer); i > 0; i--)
-			hydraAcidBreathWeaponD();
+		for (var i:int = player.statusEffectv1(StatusEffects.HydraTailsPlayer); i > 0; i--) {
+			hydraAcidBreathWeaponD(i == player.statusEffectv1(StatusEffects.HydraTailsPlayer));
+		}
 		outputText("\n\n");
 		combat.heroBaneProc2();
 		checkLethiceAndCombatRoundOver();
 	}
-	public function hydraAcidBreathWeaponD():void {
+	//Only increase Acid damage counter the first time per attack
+	public function hydraAcidBreathWeaponD(incAcidCounter:Boolean = true):void {
 		var damage:Number = 0;
 		damage += combat.unarmedAttack();
 		damage += player.tou;
@@ -4173,6 +4101,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+		damage = calcCorrosionMod(damage, incAcidCounter);
 		damage = Math.round(damage);
 		doAcidDamage(damage, true, true);
 		if (monster.hasStatusEffect(StatusEffects.AcidDoT)) monster.addStatusValue(StatusEffects.AcidDoT, 4, 1); //More heads will produce more potent acid
@@ -4879,7 +4808,7 @@ public class MagicSpecials extends BaseCombatContent {
 		useMana(50);
 		outputText("You weave your hand causing [themonster] body to levitate and fly to you as you use telekinesis to hold your opponent.\n\n");
 		monster.createStatusEffect(StatusEffects.TelekineticGrab, 4 + rand(2), 0, 0, 0);
-		player.createStatusEffect(StatusEffects.CooldownTelekineticGrab, 6, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.CooldownTelekineticGrab, 12, 0, 0, 0);
 		enemyAI();
 	}
 
@@ -4932,10 +4861,7 @@ public class MagicSpecials extends BaseCombatContent {
 		//Determine if critical tease!
 		var critL:Boolean = false;
 		var critChanceL:int = 5;
-		if (player.hasPerk(PerkLib.CriticalPerformance)) {
-			if (player.lib <= 100) critChanceL += player.lib / 5;
-			if (player.lib > 100) critChanceL += 20;
-		}
+		critChanceL += combat.teases.combatTeaseCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChanceL = 0;
 		if (rand(100) < critChanceL) {
 			critL = true;
@@ -5128,6 +5054,23 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		useMana(80, Combat.USEMANA_MAGIC);
 		outputText("You fly above your opponent"+((monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))?"s":"")+" and flap a cloud of magical dust at [monster him]. ");
+		
+		var damage:Number = (scalingBonusIntelligence() * spellMod());
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
+		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) damage *= 1.50;
+		damage = Math.round(damage);
+
 		//Randomising effects
 		var EffectList:Array = [];
 		EffectList.push(FaeStormLightning);
@@ -5169,6 +5112,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if(i == 5) {
 				outputText(". Finally [monster he] ");
 			}
+			choice(damage);
 			EffectList.splice(EffectList.indexOf(choice), 1)
 		}
 		outputText(".\n\n");
@@ -5181,7 +5125,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		else outputText("begin spasming while [monster his] body is ran through by electricity");
 		damage = Math.round(damage * combat.lightningDamageBoostedByDao());
-		doLightingDamage(damage);
+		doLightningDamage(damage);
 	}
 	private function FaeStormAcid(damage:Number):void{
 		if(monster.plural) {
@@ -5203,7 +5147,8 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	private function FaeStormFrozen(damage:Number):void{
 		outputText(" shivers as [monster his] skin covers with ice, the surrounding air freezing solid");
-		monster.createStatusEffect(StatusEffects.FrozenSolid,3,0,0,0);
+		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.FrozenSolid,3,0,0,0);
+		else outputText(". [Themonster] quickly moves before they are frozen");
 	}
 	private function FaeStormLust(damage:Number):void{
 		var lustDmg:Number = combat.lustDamageCalc();
@@ -5214,7 +5159,8 @@ public class MagicSpecials extends BaseCombatContent {
 	private function FaeStormSleep(damage:Number):void{
 		if (monster.plural) outputText("are sent straight to the dream lands by the spell’s powerful hypnotic effects");
 		else outputText("is sent straight to the dream lands by the spell’s powerful hypnotic effects");
-		monster.createStatusEffect(StatusEffects.Sleep,2,0,0,0);
+		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Sleep,2,0,0,0);
+		else outputText(" only to quickly shake off the effects");
 	}
 
 	public function BalefulPolymorph():void {
@@ -5278,6 +5224,7 @@ public class MagicSpecials extends BaseCombatContent {
 		fatigue(30, USEFATG_PHYSICAL);
 		var FascCD:Number = 4;
 		if (player.perkv1(IMutationsLib.BlackHeartIM) >= 2) FascCD -= 1;
+		if (player.perkv1(IMutationsLib.BlackHeartIM) >= 4) FascCD -= 1;
 		if (player.hasPerk(PerkLib.NaturalInstincts)) FascCD -= 1;
 		player.createStatusEffect(StatusEffects.CooldownFascinate,FascCD,0,0,0);
 		outputText("You start with first pose to attract [themonster] attention.  Then you follow with second and then third pose of your enchanting dance.");
@@ -5332,7 +5279,9 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		fatigue(50, USEFATG_MAGIC_NOBM);
 		outputText("You start drawing symbols in the air toward [themonster].");
-		var lustDmg:Number = player.lust / 10 + player.lib / 10;
+		var lustRatio:Number = 10;
+		if (player.perkv1(IMutationsLib.BlackHeartIM) >= 4) lustRatio -= 5;
+		var lustDmg:Number = player.lust / lustRatio + player.lib / 10;
 		if (player.perkv1(IMutationsLib.BlackHeartIM) >= 1) lustDmg += player.inte / 10;
 		if (player.perkv1(IMutationsLib.BlackHeartIM) >= 2) lustDmg += player.wis / 10;
 		if (player.perkv1(IMutationsLib.BlackHeartIM) >= 3) lustDmg += player.sens / 10;
@@ -5363,6 +5312,7 @@ public class MagicSpecials extends BaseCombatContent {
 			player.takeLustDamage(Math.round(-lustDmg)/40, true);
 			lustDmg *= 1.2;
 		}
+		if (player.perkv1(IMutationsLib.BlackHeartIM) >= 4) lustDmg += combat.teases.teaseBaseLustDamage();
 		monster.teased(Math.round(monster.lustVuln * lustDmg));
 		outputText("\n\n");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
@@ -5671,6 +5621,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+		damage = calcGaleMod(damage, true);
 		damage = Math.round(damage * combat.windDamageBoostedByDao());
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
@@ -5693,9 +5644,10 @@ public class MagicSpecials extends BaseCombatContent {
 			damage *= (1.75 * combat.windDamageBoostedByDao());
 			damage = Math.round(damage);
 			doWindDamage(damage, true, true);
-			if (!monster.hasStatusEffect(StatusEffects.CouatlHurricane)) monster.createStatusEffect(StatusEffects.CouatlHurricane,(player.spe*5)+(player.inte*5),1,0,0);
-			else{
-				monster.createStatusEffect(StatusEffects.CouatlHurricane, (player.spe*5)+(player.inte*5), 1, 0, 0);
+			if (!monster.hasStatusEffect(StatusEffects.CouatlHurricane)) monster.createStatusEffect(StatusEffects.CouatlHurricane,3,0,0,0);
+			else {
+				monster.addStatusValue(StatusEffects.CouatlHurricane, 1, 1);
+				monster.changeStatusValue(StatusEffects.CouatlHurricane, 2, 1);
 				outputText("\n\nThe strength of the hurricane winds has increased even further.");
 			}
 			combatRoundOver();
@@ -5726,9 +5678,10 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("too resolute to be stunned by your attack.</b> ");
 			}
 			doWindDamage(damage, true, true);
-			if (!monster.hasStatusEffect(StatusEffects.CouatlHurricane)) monster.createStatusEffect(StatusEffects.CouatlHurricane,(player.spe*5)+(player.inte*5),0,0,0);
+			if (!monster.hasStatusEffect(StatusEffects.CouatlHurricane)) monster.createStatusEffect(StatusEffects.CouatlHurricane,3,0,0,0);
 			else {
-				monster.createStatusEffect(StatusEffects.CouatlHurricane, (player.spe*5)+(player.inte*5), 1, 0, 0);
+				monster.addStatusValue(StatusEffects.CouatlHurricane, 1, 1);
+				monster.changeStatusValue(StatusEffects.CouatlHurricane, 2, 1);
 				outputText("\n\nThe strength of the hurricane winds has increased even further.");
 			}
 		}
@@ -5754,6 +5707,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+		damage = calcGaleMod(damage, true);
 		damage = Math.round(damage * combat.windDamageBoostedByDao());
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
@@ -5776,9 +5730,10 @@ public class MagicSpecials extends BaseCombatContent {
 			damage *= (1.75 * combat.windDamageBoostedByDao());
 			damage = Math.round(damage);
 			doWindDamage(damage, true, true);
-			if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,combat.CalcBaseDamageUnarmed()*5*combat.BleedDamageBoost(true),1,0,0);
+			if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,3,0,0,1);
 			else{
-				monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, combat.CalcBaseDamageUnarmed()*5*combat.BleedDamageBoost(true));
+				monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, 1);
+				monster.addStatusValue(StatusEffects.KamaitachiBleed, 4, 1);
 				outputText("\n\nYour attack greatly worsened the bleeding your opponents suffers.");
 			}
 			combatRoundOver();
@@ -5809,9 +5764,9 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("too resolute to be stunned by your attack.</b> ");
 			}
 			doWindDamage(damage, true, true);
-			if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,combat.CalcBaseDamageUnarmed()*5*combat.BleedDamageBoost(true),0,0,0);
+			if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,3,0,0,1);
 			else {
-				monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, combat.CalcBaseDamageUnarmed()*5*combat.BleedDamageBoost(true));
+				monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, 1);
 				outputText("\n\nYour attack greatly worsened the bleeding your opponent suffers.");
 			}
 		}
@@ -5855,7 +5810,7 @@ public class MagicSpecials extends BaseCombatContent {
 			case 0:
 				outputText("[Themonster] takes heavy electricity damage from the eyebeam! ");
 				damage = Math.round(damage * combat.lightningDamageBoostedByDao());
-				doLightingDamage((damage * 3), true, true);
+				doLightningDamage((damage * 3), true, true);
 				break;
 			case 1:
 				outputText("[Themonster]  starts to burn as [monster his] body catches fire from the eyebeam! ");
@@ -5881,8 +5836,12 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("[Themonster]  skin is covered with ice from the eyebeam as the air surrounding [monster him] freezes solid! ");
 				damage = Math.round(damage * combat.iceDamageBoostedByDao());
 				doIceDamage(damage, true, true);
-				if (monster.hasStatusEffect(StatusEffects.Stunned)) monster.addStatusValue(StatusEffects.Stunned, 1, 1);
-				else monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+				if (!monster.hasPerk(PerkLib.Resolute)) {
+					if (monster.hasStatusEffect(StatusEffects.Stunned)) monster.addStatusValue(StatusEffects.Stunned, 1, 1);
+					else monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+				} else {
+					outputText("However, [themonster] is able to quickly break themselves free! ");
+				}
 				break;
 			case 4:
 				outputText("[Themonster]  takes heavy cold damage! ");
@@ -5898,13 +5857,21 @@ public class MagicSpecials extends BaseCombatContent {
 				break;
 			case 6:
 				outputText("The eyebeam’s powerful hypnotic effects send your target straight to the dream lands! ");
-				if (monster.hasStatusEffect(StatusEffects.Sleep)) monster.addStatusValue(StatusEffects.Sleep, 1, 1);
-				else monster.createStatusEffect(StatusEffects.Sleep,2,0,0,0);
+				if (!monster.hasPerk(PerkLib.Resolute)) {
+					if (monster.hasStatusEffect(StatusEffects.Sleep)) monster.addStatusValue(StatusEffects.Sleep, 1, 1);
+					else monster.createStatusEffect(StatusEffects.Sleep,2,0,0,0);
+				} else {
+					outputText("However, [themonster] was able to quickly shake themselves awake! ");
+				}
 				break;
 			case 7:
 				outputText("[Themonster] is turned to stone by the petrification ray shooting from your eyestalk! It's going to be immobile for a while. ");
-				if (monster.hasStatusEffect(StatusEffects.Stunned)) monster.addStatusValue(StatusEffects.Stunned, 1, 1);
-				else monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
+				if (!monster.hasPerk(PerkLib.Resolute)) {
+					if (monster.hasStatusEffect(StatusEffects.Stunned)) monster.addStatusValue(StatusEffects.Stunned, 1, 1);
+					else monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
+				} else {
+					outputText("However, [themonster] was able to quickly shake off the effect! ");
+				}
 				break;
 			case 8:
 				outputText("[Themonster] takes heavy fire damage being seared by the ray shooting from one of your eyestalks! ");
@@ -6035,7 +6002,7 @@ public class MagicSpecials extends BaseCombatContent {
 
 	public function ElementalAspectFire():void {
 		clearOutput();
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_SPELL;
 		player.createStatusEffect(StatusEffects.CooldownEAspectFire, 0, 0, 0, 0);
 		var damage:Number = 0;
 		var multiInt:Number = 0.5;
@@ -6074,10 +6041,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		damage += scalingBonusIntelligence() * multiInt;
 		damage += scalingBonusWisdom() * multiWis;
-		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
+		
 		//crits for elementals specials inclused too? with some perk maybe or just like that same as crit % chance for PC?
 		damage = Math.round(damage);
 		/*if(!monster.hasPerk(PerkLib.Resolute)) {
@@ -6092,7 +6056,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}*/
 		outputText("Your fire elemental douses your opponent with a torrent of fire ");
 		doFireDamage(damage, true, true);
-		outputText(" damage.\n\n");
+		outputText("\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();
 	}
@@ -6146,7 +6110,7 @@ public class MagicSpecials extends BaseCombatContent {
 
 	public function ElementalAspectEther():void {
 		clearOutput();
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_SPELL;
 		player.createStatusEffect(StatusEffects.CooldownEAspectEther, 0, 0, 0, 0);
 		var damage:Number = 0;
 		var multiInt:Number = 0.5;
@@ -6193,6 +6157,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 2;
 		if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 5;
 		if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 2;
+
 		//crits for elementals specials inclused too? with some perk maybe or just like that same as crit % chance for PC?
 		damage = Math.round(damage);
 		/*if(!monster.hasPerk(PerkLib.Resolute)) {
@@ -6342,7 +6307,7 @@ public class MagicSpecials extends BaseCombatContent {
 
 	public function ElementalAspectIce():void {
 		clearOutput();
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_SPELL;
 		player.createStatusEffect(StatusEffects.CooldownEAspectIce, 0, 0, 0, 0);
 		var damage:Number = 0;
 		var multiInt:Number = 0.5;
@@ -6381,11 +6346,8 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		damage += scalingBonusIntelligence() * multiInt;
 		damage += scalingBonusWisdom() * multiWis;
-		if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
-		if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
+		damage *= combat.elementalAmplificationMod(5 * player.statusEffectv2(StatusEffects.SummonedElementalsIce));
+
 		damage = Math.round(damage);
 		/*if(!monster.hasPerk(PerkLib.Resolute)) {
 			outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back.");
@@ -6399,14 +6361,14 @@ public class MagicSpecials extends BaseCombatContent {
 		}*/
 		outputText("Your elemental produces a ray of hyper condensed cold and aims it straight at [themonster] dealing ");
 		doIceDamage(damage, true, true);
-		outputText(" damage.\n\n");
+		outputText("\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();
 	}
 
 	public function ElementalAspectLightning():void {
 		clearOutput();
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_SPELL;
 		player.createStatusEffect(StatusEffects.CooldownEAspectLightning, 0, 0, 0, 0);
 		var damage:Number = 0;
 		var multiInt:Number = 0.5;
@@ -6445,10 +6407,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		damage += scalingBonusIntelligence() * multiInt;
 		damage += scalingBonusWisdom() * multiWis;
-		if (monster.hasPerk(PerkLib.LightningNature)) damage *= 0.2;
-		if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 5;
+
 		damage = Math.round(damage);
 		/*if(!monster.hasPerk(PerkLib.Resolute)) {
 			outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back.");
@@ -6461,15 +6420,15 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("too resolute to be stunned by your attack.</b>");
 		}*/
 		outputText("Your elemental charges electricity, then discharges it with a blinding bolt doing ");
-		doLightingDamage(damage, true, true);
-		outputText(" damage.\n\n");
+		doLightningDamage(damage, true, true);
+		outputText("\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();
 	}
 
 	public function ElementalAspectDarkness():void {
 		clearOutput();
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_SPELL;
 		player.createStatusEffect(StatusEffects.CooldownEAspectDarkness, 0, 0, 0, 0);
 		var damage:Number = 0;
 		var multiInt:Number = 0.5;
@@ -6508,10 +6467,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		damage += scalingBonusIntelligence() * multiInt;
 		damage += scalingBonusWisdom() * multiWis;
-		if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 0.2;
-		if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.LightningNature)) damage *= 5;
+
 		damage = Math.round(damage);
 		/*if(!monster.hasPerk(PerkLib.Resolute)) {
 			outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back.");
@@ -6523,16 +6479,16 @@ public class MagicSpecials extends BaseCombatContent {
 			else outputText("are");
 			outputText("too resolute to be stunned by your attack.</b>");
 		}*/
-		outputText("Your darkness elemental condenses shadows into solid matter, striking your opponent with them doing ");
+		outputText("Your darkness elemental condenses shadows into solid matter, striking your opponent with them ");
 		doDarknessDamage(damage, true, true);
-		outputText(" damage.\n\n");
+		outputText("\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();
 	}
 
 	public function ElementalAspectPoison():void {
 		clearOutput();
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_SPELL;
 		player.createStatusEffect(StatusEffects.CooldownEAspectPoison, 0, 0, 0, 0);
 		var damage:Number = 0;
 		var multiInt:Number = 0.5;
@@ -6571,6 +6527,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		damage += scalingBonusIntelligence() * multiInt;
 		damage += scalingBonusWisdom() * multiWis;
+
 		damage = Math.round(damage);
 		/*if(!monster.hasPerk(PerkLib.Resolute)) {
 			outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back.");
@@ -6582,9 +6539,9 @@ public class MagicSpecials extends BaseCombatContent {
 			else outputText("are");
 			outputText("too resolute to be stunned by your attack.</b>");
 		}*/
-		outputText("Your poison elemental condenses aphrodisiac poison into spike, striking your opponent with them doing ");
+		outputText("Your poison elemental condenses aphrodisiac poison into spike, striking your opponent with them ");
 		doPoisonDamage(damage, true, true);
-		outputText(" damage.");
+
 		var lustdamage:Number = 20 + rand(player.statusEffectv2(StatusEffects.SummonedElementalsPoison) + 1);
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 2) lustdamage += 1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 1);
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 9) lustdamage += 1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 8);
@@ -6599,7 +6556,7 @@ public class MagicSpecials extends BaseCombatContent {
 
 	public function ElementalAspectPurity():void {
 		clearOutput();
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_SPELL;
 		player.createStatusEffect(StatusEffects.CooldownEAspectPurity, 0, 0, 0, 0);
 		var damage:Number = 0;
 		var multiInt:Number = 0.5;
@@ -6639,6 +6596,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += scalingBonusIntelligence() * multiInt;
 		damage += scalingBonusWisdom() * multiWis;
 		damage *= combat.purityScalingDA();
+
 		damage = Math.round(damage);
 		/*if(!monster.hasPerk(PerkLib.Resolute)) {
 			outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back.");
@@ -6650,8 +6608,9 @@ public class MagicSpecials extends BaseCombatContent {
 			else outputText("are");
 			outputText("too resolute to be stunned by your attack.</b>");
 		}*/
-		outputText("Your purity elemental produces a ray of hyper condensed and pure light and aims it straight at [themonster] doing ");
-		doMagicDamage(damage, true, true);outputText(" damage.\n\n");
+		outputText("Your purity elemental produces a ray of hyper condensed and pure light and aims it straight at [themonster] ");
+		doMagicDamage(damage, true, true);
+		outputText("\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();
 	}
@@ -6698,6 +6657,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += scalingBonusIntelligence() * multiInt;
 		damage += scalingBonusWisdom() * multiWis;
 		damage *= combat.corruptionScalingDA();
+
 		damage = Math.round(damage);
 		/*if(!monster.hasPerk(PerkLib.Resolute)) {
 			outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back.");
@@ -6709,9 +6669,9 @@ public class MagicSpecials extends BaseCombatContent {
 			else outputText("are");
 			outputText("too resolute to be stunned by your attack.</b>");
 		}*/
-		outputText("Your corruption elemental condenses corruption from air into solid matter, striking your opponent with them doing ");
+		outputText("Your corruption elemental condenses corruption from air into solid matter, striking your opponent with them ");
 		doMagicDamage(damage, true, true);
-		outputText(" damage.\n\n");
+		outputText("\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();
 	}
@@ -6740,6 +6700,8 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += scalingBonusWisdom() * multiWis;
 		if (type == 1) {
 			outputText("You rub your palms together before unleashing the energy in the form of razor sharp winds. [Themonster] eyes grow wide in surprise as your attack leaves deep bleeding cuts in its flesh! ");
+			damage = calcGaleMod(damage, true);
+			damage = Math.round(damage * combat.windDamageBoostedByDao());
 			doWindDamage(damage, true, true);
 			if (player.isFistOrFistWeapon() && player.hasPerk(PerkLib.ElementalTouch)) {
 				if (monster.hasStatusEffect(StatusEffects.Hemorrhage)) monster.addStatusValue(StatusEffects.Hemorrhage, 1, 1*combat.BleedDamageBoost());
@@ -6748,6 +6710,8 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (type == 2) {
 			outputText("You smash both of your fists into the ground, causing vegetation to grow at an accelerated rate. [Themonster] is punched out of nowhere as a grown tree suddenly sprouts from beneath! ");
+			damage = calcQuakeMod(damage, true);
+			damage = Math.round(damage * combat.earthDamageBoostedByDao());
 			doEarthDamage(damage, true, true);
 			if (player.isFistOrFistWeapon() && player.hasPerk(PerkLib.ElementalTouch)) {
 				if (monster.hasStatusEffect(StatusEffects.AcidDoT)) {
@@ -6769,11 +6733,13 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (type == 4) {
 			outputText("You push both of your palms toward your opponent, your arms turning to a pair of powerful water jets that batters [themonster] with rock crushing pressure! ");
+			damage = calcTideMod(damage, true);
+			damage = Math.round(damage * combat.waterDamageBoostedByDao());
 			doWaterDamage(damage, true, true);
 			if (player.isFistOrFistWeapon() && player.hasPerk(PerkLib.ElementalTouch)) {
 				monster.statStore.addBuffObject({str:-10,spe:-10}, "Poison",{text:"Poison"});
-				if (monster.hasStatusEffect(StatusEffects.Frostbite)) monster.addStatusValue(StatusEffects.Frostbite,1,1);
-				else monster.createStatusEffect(StatusEffects.Frostbite,1,0,0,0);
+				if (monster.hasStatusEffect(StatusEffects.FrostburnDoT)) monster.addStatusValue(StatusEffects.FrostburnDoT,1,1);
+				else monster.createStatusEffect(StatusEffects.FrostburnDoT,4,0,0,0);
 			}
 		}
 		outputText("\n\n");
@@ -6883,12 +6849,6 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("You gather energy in your Talisman and unleash the spell contained within.  A wave of cold air gathers around [themonster], slowly freezing [monster him].");
 		var damage:int = int(100+(player.inte/2 + rand(player.inte)) * spellMod());
 		damage = calcGlacialMod(damage, true);
-		if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
-//	if (player.hasPerk(PerkLib.ColdMastery)) damage *= 2;
-//	if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
 		damage = Math.round(damage);
 		doIceDamage(damage);
 		outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");

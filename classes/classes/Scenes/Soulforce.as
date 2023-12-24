@@ -164,9 +164,9 @@ public class Soulforce extends BaseContent
 			/*12*/[0, "Early Soul Scholar", "E.S.Sc.", 100, PerkLib.SoulScholar],
 			[1, "Middle Soul Scholar", "M.S.Sc."],
 			[1, "Late Soul Scholar", "L.S.Sc."],
-			/*15*/[0, "Early Soul Scholar", "E.S.Gm.", 120, PerkLib.SoulGrandmaster],
-			[1, "Middle Soul Scholar", "M.S.Gm."],
-			[1, "Late Soul Scholar", "L.S.Gm."],
+			/*15*/[0, "Early Soul Grandmaster", "E.S.Gm.", 120, PerkLib.SoulGrandmaster],
+			[1, "Middle Soul Grandmaster", "M.S.Gm."],
+			[1, "Late Soul Grandmaster", "L.S.Gm."],
 			/*18*/[2, "Tribulation (G)", "Trib. (G)", 140],
 			[1, "Middle Soul Elder", "M.S.El."],
 			[1, "Late Soul Elder", "L.S.El."],
@@ -406,8 +406,8 @@ public class Soulforce extends BaseContent
 		addButton(14, "Back", accessSoulforceMenu);
 	}
 
-	public function daoContemplationsEffect(statusEffect:StatusEffectType, daoname:String, clone:Boolean = false):void {
-		if (!clone) {
+	public function daoContemplationsEffect(statusEffect:StatusEffectType, daoname:String, clone:Boolean = false, elementalBody:Boolean = false):void {
+		if (!clone && !elementalBody) {
 			clearOutput();
 			outputText("You find a flat, comfortable rock to sit down on and contemplate.  Minute after minute you feel immersed into elements that surrounds you.  How they flow around you, how they change on their own and how they interact with each other.  All this while trying to understand, despite being insignificant while the great dao manifests around you.\n\n");
 		}
@@ -417,10 +417,10 @@ public class Soulforce extends BaseContent
 			dao = rand(6);
 			switch(daoname){
 				case "Fire":
-					if (player.hasPerk(PerkLib.FireAffinity)) dao += 1 + rand(3);
+					if (player.hasAnyPerk(PerkLib.FireAffinity, PerkLib.AffinityIgnis)) dao += 1 + rand(3);
 					break;
 				case "Ice":
-					if (player.hasPerk(PerkLib.ColdAffinity)) dao += 1 + rand(3);
+					if (player.hasAnyPerk(PerkLib.ColdAffinity, PerkLib.ColdMastery)) dao += 1 + rand(3);
 					break;
 				case "Lightning":
 					if (player.hasPerk(PerkLib.LightningAffinity)) dao += 1 + rand(3);
@@ -428,11 +428,30 @@ public class Soulforce extends BaseContent
 				case "Darkness":
 					if (player.hasPerk(PerkLib.DarknessAffinity)) dao += 1 + rand(3);
 					break;
+				case "Poison":
+					if (player.hasPerk(PerkLib.PoisonAffinity)) dao += 1 + rand(3);
+					break;
+				case "Wind":
+					if (player.hasAnyPerk(PerkLib.WindAffinity, PerkLib.AffinitySylph)) dao += 1 + rand(3);
+					break;
+				case "Blood":
+					if (player.hasAnyPerk(PerkLib.BloodAffinity, PerkLib.BloodMastery, PerkLib.WayOfTheBlood)) dao += 1 + rand(3);
+					break;
+				case "Water":
+					if (player.hasAnyPerk(PerkLib.WaterAffinity, PerkLib.AffinityUndine)) dao += 1 + rand(3);
+					break;
+				case "Earth":
+					if (player.hasAnyPerk(PerkLib.EarthAffinity, PerkLib.AffinityGnome)) dao += 1 + rand(3);
+					break;
+				case "Acid":
+					if (player.hasPerk(PerkLib.AcidAffinity)) dao += 1 + rand(3);
+					break;
+				
 			}
 		}
 		//uzycie w kontemplacji niebianskich skarbow zwiazanych z danym zywiolem daje bonusowe punkty
 		if (dao > 0) {
-			if (!clone) outputText("After the session ends you managed to progress in Dao of "+daoname+".");
+			if (!clone && !elementalBody) outputText("After the session ends you managed to progress in Dao of "+daoname+".");
 			if (player.hasStatusEffect(statusEffect)) {
 				player.addStatusValue(statusEffect, 1, dao);
 				var thres:Array = [20, 40, 60, 100, 140, 180, 220, 260, 300];
@@ -450,7 +469,7 @@ public class Soulforce extends BaseContent
 			} else player.createStatusEffect(statusEffect, dao, 0, 0, 0);
 		}
 		else outputText("After the session ends, you did not manage to progress in your comprehension.\n\n");
-		if (!clone) doNext(camp.returnToCampUseEightHours);
+		if (!clone && !elementalBody) doNext(camp.returnToCampUseEightHours);
 	}
 
 	public function highestLayerOfDaoComprehension():Number {

@@ -10,6 +10,7 @@ import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
 import classes.internals.*;
+import classes.Scenes.Combat.CombatAbilities;
 
 public class DarkElfs extends Monster
 	{
@@ -34,9 +35,9 @@ public class DarkElfs extends Monster
 		
 		public function PoisonedBowShoot():void
 		{
-			if (player.hasStatusEffect(StatusEffects.WindWall)) {
+			if (CombatAbilities.EAspectAir.isActive()) {
 				outputText("An arrow hits the wind wall dealing no damage to you.\n\n");
-				player.addStatusValue(StatusEffects.WindWall,2,-1);
+				CombatAbilities.EAspectAir.advance(true);
 			}
 			else {
 				var damage:Number = 0;
@@ -63,9 +64,9 @@ public class DarkElfs extends Monster
 		
 		public function WingClip():void
 		{
-			if (player.hasStatusEffect(StatusEffects.WindWall)) {
+			if (CombatAbilities.EAspectAir.isActive()) {
 				outputText("An arrow hits wind wall dealing no damage to you.\n\n");
-				player.addStatusValue(StatusEffects.WindWall,2,-1);
+				CombatAbilities.EAspectAir.advance(true);
 			}
 			else {
 				outputText("The dark elf smirks wickedly before shooting an arrow straight into your wing. You fall, unable to fly, and crash into the ground. ");
@@ -149,7 +150,16 @@ public class DarkElfs extends Monster
 			this.createPerk(PerkLib.EpicSpeed, 0, 0, 0, 0);
 			checkMonster();
 		}
-		
+
+		override public function preAttackSeal():Boolean
+		{
+			if (player.hasStatusEffect(StatusEffects.Sealed2) && player.statusEffectv2(StatusEffects.Sealed2) == 0) {
+				outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Recent enemy attack have made normal melee attacks impossible!  Maybe you could try something else?\n\n");
+				// enemyAI();
+				return false;
+			}
+			else return true;
+		}
 	}
 
 }

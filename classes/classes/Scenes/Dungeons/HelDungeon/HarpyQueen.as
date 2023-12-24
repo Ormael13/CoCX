@@ -65,10 +65,7 @@ public class HarpyQueen extends Monster
 				damage *= 1.5;
 				outputText("It's super effective! ");
 			}
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) damage *= 1.2;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) damage *= 1.5;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) damage *= 2;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) damage *= 3.5;
+			
 			damage = Math.round(damage);
 			player.takeFireDamage(damage, true);
 			mana -= spellCostWhitefire;

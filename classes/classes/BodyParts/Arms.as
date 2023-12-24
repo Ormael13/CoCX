@@ -234,6 +234,7 @@ public class Arms extends BodyPart {
 		name:"gryphon",
 		appearanceDesc: "The feathers on your arms reach a bit past your elbows, with a fringe of [feather color] plumage leading to your [skin color], slightly rough-skinned hands equipped with short, avian claws.",
 		claw: true,
+		canPounce: true,
 		feahers: true,
 		fur: true
 	});
@@ -505,6 +506,27 @@ public class Arms extends BodyPart {
 	EnumValue.add(Types, ARMORED_FOREARMS, "ARMORED_FOREARMS", {
 		name:"arigean",
 		appearanceDesc: "Your arms are identical to those of a human, However your forearms seem to be covered in fragments of a black, glossy metal acting as natural bracers."
+	});
+
+	public static const DEMON:int = 65;
+	EnumValue.add(Types, DEMON, "DEMON", {
+		name:"demon",
+		appearanceDesc: "Your arms and hands are human in appearance save for your pointy claw like demonic nails.",
+		claw: true
+	});
+
+	public static const DEER:int = 66;
+	EnumValue.add(Types, DEER, "DEER", {
+		name:"deer",
+		appearanceDesc: "Your arms are covered by thick [fur color] fur, ending in hands with paw pads and three fingers ending with hoof-like fingernails.",
+		fur: true
+	});
+
+	public static const REINDEER:int = 67;
+	EnumValue.add(Types, REINDEER, "REINDEER", {
+		name:"reindeer",
+		appearanceDesc: "Your arms are covered by thick [fur color] fur, ending in hands with paw pads and four fingers ending with hoof-like fingernails.",
+		fur: true
 	});
 
 	public static function canFly(id: int): Boolean {

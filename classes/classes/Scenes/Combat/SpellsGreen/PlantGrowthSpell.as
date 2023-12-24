@@ -19,7 +19,7 @@ public class PlantGrowthSpell extends AbstractGreenSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target, false, false) + " lust posion damage"
+		return "~" + calcDamage(target, false, false) + " lust poison damage"
 	}
 	
 	override public function calcCooldown():int {
@@ -38,14 +38,11 @@ public class PlantGrowthSpell extends AbstractGreenSpell {
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
-		var baseDamage:Number = (combat.teases.teaseBaseLustDamage() * 1.5 * spellModGreen());
-		if (player.hasPerk(PerkLib.VegetalAffinity)) baseDamage *= 1.5;
-		if (player.hasPerk(PerkLib.GreenMagic)) baseDamage *= 2;
-		if (player.hasStatusEffect(StatusEffects.GreenCovenant)) baseDamage *= 2;
+		var baseDamage:Number = (combat.teases.teaseBaseLustDamage() * 1.5);
 		return adjustLustDamage(baseDamage, monster, CAT_SPELL_GREEN, randomize);
 	}
 	
-	public function calcDuration():int {
+	override public function calcDuration():int {
 		var dura:Number = 4;
 		if (player.hasPerk(PerkLib.GreenMagic)) dura *= 2;
 		return dura;
@@ -64,7 +61,7 @@ public class PlantGrowthSpell extends AbstractGreenSpell {
 				player.createStatusEffect(StatusEffects.PlantGrowth, calcDuration(), 0, 0, 0);
 				var arve:Number = 1;
 				if (player.hasPerk(PerkLib.ArcaneVenom)) arve += stackingArcaneVenom();
-				while (arve-->0) doSpellEffect2();
+				while (arve-->0) doSpellEffect2(display);
 			outputText("\n");
 			}
 			else {
@@ -74,23 +71,19 @@ public class PlantGrowthSpell extends AbstractGreenSpell {
 		}
 	}
 	
-	private function doSpellEffect2():void {
+	private function doSpellEffect2(display:Boolean = true):void {
 		var lustDmg:Number = calcDamage(monster, true, true);
 		//Determine if critical tease!
 		var crit:Boolean   = false;
 		var critChance:int = 5;
-		if (player.hasPerk(PerkLib.CriticalPerformance)) {
-			if (player.lib <= 100) critChance += player.lib / 5;
-			if (player.lib > 100) critChance += 20;
-		}
+		critChance += combat.teases.combatTeaseCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			lustDmg *= 1.75;
 		}
-		lustDmg = Math.round(monster.lustVuln * lustDmg);
-		monster.teased(lustDmg, false);
-		if (crit) outputText(" <b>Critical!</b>");
+		monster.teased(lustDmg, false, display);
+		if (crit && display) outputText(" <b>Critical!</b>");
 		combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		if (player.hasPerk(PerkLib.VerdantLeech)) {
 			if (monster.lustVuln != 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.025;

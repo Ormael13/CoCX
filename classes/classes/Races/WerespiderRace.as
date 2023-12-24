@@ -51,6 +51,8 @@ public class WerespiderRace extends Race {
 				.hasPerk(PerkLib.Araneathropy, +2, -11);
 		
 		//addMutation(IMutationsLib.AnanasaBirthrightIM);
+		addMutation(IMutationsLib.HollowFangsIM);
+		addMutation(IMutationsLib.VampiricBloodstreamIM);
 		
 		buildTier(12, "werespider")
 				.buffs({

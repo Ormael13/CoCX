@@ -44,7 +44,7 @@ use namespace CoC;
 			damage += 1.2;
 			damage = Math.round(damage);
 			damage = player.takePhysDamage(damage, true);
-			if (rand(10) == 0) {
+			if (rand(10) == 0 && !player.immuneToBleed()) {
 				if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
 				else {
 					player.createStatusEffect(StatusEffects.Hemorrhage, SceneLib.combat.debuffsOrDoTDuration(3), 0.05, 0, 0);
@@ -60,10 +60,12 @@ use namespace CoC;
 			firedamage += eBaseIntelligenceDamage() * 1.2;
 			firedamage = Math.round(firedamage);
 			player.takeFireDamage(firedamage, true);
-			if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.addStatusValue(StatusEffects.BurnDoT, 1, 1);
-			else {
-				player.createStatusEffect(StatusEffects.BurnDoT,SceneLib.combat.debuffsOrDoTDuration(3),0.05,0,0);
-				outputText(" Reeling in pain you begin to burn.");
+			if (!player.immuneToBurn()) {
+				if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.addStatusValue(StatusEffects.BurnDoT, 1, 1);
+				else {
+					player.createStatusEffect(StatusEffects.BurnDoT,SceneLib.combat.debuffsOrDoTDuration(3),0.05,0,0);
+					outputText(" Reeling in pain you begin to burn.");
+				}
 			}
 		}
 		

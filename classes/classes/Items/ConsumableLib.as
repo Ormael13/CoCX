@@ -179,6 +179,8 @@ public final class ConsumableLib extends AlchemyLib
 		public const URTACUM: Consumable = mk("UrtaCum", "UrtaCum", "a sealed bottle of Urta's cum", 15, "This bottle of Urta's cum looks thick and viscous.  It's quite delicious.", m.urtaCum);
 		public const W_PDDNG: Consumable = mk("W.Pddng", "W.Pudding", "a slice of winter pudding", 35, "A slice of delicious Winter Pudding.  It smells delicious. \n\nNote: Eating this might cause antlers to grow from your head.", m.winterPudding);
 		public const ZENJI_H: Consumable = mk("Zenji H", "ZenjiHunt", "a Zenji's Hunt", 30, "Presumably the seared meat of a smaller creature, a gift from your loving troll.", m.zenjiHunt);
+		public const SFILLET: Consumable = mk("SFillet", "S.Fillet", "a Stomiidae fillet", 10, "A fish fillet made of some deep sea fish, while not very big it is packed with nutrition.", m.stomiidaeFillet);
+		public const C_STEAK: Consumable = mk("C.Steak", "C.Steak", "a Calamari Steak", 15, "A squid that’s been roasted over a fire, it seems like it would be a decent meal.", m.calamariSteak);
 		public const C_JERKY: Consumable = mk("C.Jerky", "C.Jerky", "a Coelacanth Jerky", 5, "A piece of jerky with a bit of extra salt, supposedly it’s from a deep sea fish. It keeps quite well.", m.coelacanthJerky);
 		public const SIINGOT: Consumable = mk("SIIngot", "SoftIronIngot", "a Soft Iron Ingot", 70, "An ingot of soft iron, while still hard it should be softer than most metals. (Requires Miracle Metal to use)", m.softIronIngot);
 
@@ -693,7 +695,8 @@ public final class ConsumableLib extends AlchemyLib
 						], concatUnique(
 								GoblinRace.GoblinHairColors,
 								GoblinRace.GoblinEyeColors,
-								GoblinRace.GoblinSkinColors
+								GoblinRace.GoblinSkinColors,
+								GoblinRace.GoblinRareSkinColors
 						)
 				);
 		public const GRE_BER: Consumable = mk("Gre.Beer", "Gre.Beer", "a flagon of potent gremlin beer", 6, "This disgusting brew is made from the combination of goblin ale and Imp food. It smells of old engine oil and rust, let’s hope it does not taste like that as well.", m.gremlinBeer, ItemTags.U_TF)
@@ -743,7 +746,8 @@ public final class ConsumableLib extends AlchemyLib
 						concatUnique(
 								ImpRace.ImpEyeColors,
 								ImpRace.ImpHairColors,
-								ImpRace.ImpSkinColors
+								ImpRace.ImpSkinColors,
+								ImpRace.ImpRareSkinColors
 						)
 				);
 		public const INFWINE: Consumable = mk("InfWine", "InfWine", "a bottle of infernal wine", 500, "This drink is made from a bottle of satyr wine, an incubus draft, and some succubus milk. It reeks of corruption. Are you sure it would be a smart idea to drink this?", m.infernalWine, ItemTags.U_TF)

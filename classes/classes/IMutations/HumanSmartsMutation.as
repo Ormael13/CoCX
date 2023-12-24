@@ -12,7 +12,9 @@ import classes.Races;
 
 public class HumanSmartsMutation extends IMutationPerkType
     {
-        private static const mName:String = "Human Smarts";
+        override public function get mName():String {
+            return "Human Smarts";
+        }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -28,22 +30,6 @@ public class HumanSmartsMutation extends IMutationPerkType
                 descS += "10, maximum trainable Int/Wis by 20%. Gain soulforce recovery equal to 1% of your total soulforce and mana recovery increased by 0,5% of max mana. Allow to use options requiring to have technical knowledge.";
             }
             return descS;
-        }
-
-        //Name. Need it say more?
-        override public function name(params:PerkClass=null):String {
-            var sufval:String;
-            switch (currentTier(this, player)){
-                case 2:
-                    sufval = "(Primitive)";
-                    break;
-                case 3:
-                    sufval = "(Evolved)";
-                    break;
-                default:
-                    sufval = "";
-            }
-            return mName + sufval;
         }
 
         //Mutation Requirements

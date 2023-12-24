@@ -9,6 +9,7 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.GlobalFlags.kFLAGS;
 import classes.internals.*;
+import classes.Scenes.Combat.CombatAbilities;
 
 use namespace CoC;
 	
@@ -80,9 +81,9 @@ use namespace CoC;
 			if (flags[kFLAGS.KINDRA_AFFECTION] < 7) outputText("Sheep-morph archer");
 			if (flags[kFLAGS.KINDRA_AFFECTION] >= 7) outputText("Kindra");
 			outputText(" casually fire an arrow at you with supreme skill.");
-			if (player.hasStatusEffect(StatusEffects.WindWall)) {
+			if (CombatAbilities.EAspectAir.isActive()) {
 				outputText(" Still surrounding you wind wall stops it without much trouble.");
-				player.addStatusValue(StatusEffects.WindWall,2,-1);
+				CombatAbilities.EAspectAir.advance(true);
 			}
 			else {
 				var damage:Number = 0;

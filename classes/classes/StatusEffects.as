@@ -316,6 +316,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CombatFollowerExcellia:StatusEffectType			= mk("Combat Follower: Excellia");
 		public static const CombatFollowerDiana:StatusEffectType			= mk("Combat Follower: Diana");
 		public static const CombatFollowerDiva:StatusEffectType				= mk("Combat Follower: Diva");
+		public static const CombatFollowerGVampServ:StatusEffectType		= mk("Combat Follower: Ghoulish Vampire Servant");
 		public static const CombatFollowerKiha:StatusEffectType				= mk("Combat Follower: Kiha");
 		public static const CombatFollowerMidoka:StatusEffectType			= mk("Combat Follower: Midoka");
 		public static const CombatFollowerMitzi:StatusEffectType			= mk("Combat Follower: Mitzi");
@@ -584,6 +585,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const PocketWatch:StatusEffectType                   	= mk("PocketWatch");
 		public static const PostAkbalSubmission:StatusEffectType            = mk("Post Akbal Submission");
 		public static const PostAnemoneBeatdown:StatusEffectType            = mk("Post Anemone Beatdown");
+		public static const PostfluidIntakeRegeneration:StatusEffectType    = mk("Postfluid Intake Regeneration");
 		public static const PureCampJojo:StatusEffectType                   = mk("PureCampJojo");
 		public static const RaijuLightningStatus:StatusEffectType           = mk("Raiju lightning status");
 		public static const RathazulAprilFool:StatusEffectType              = mk("RathazulAprilFool"); // 1 - last encounter year, 2 - elixir count (received), 3 - quest stage
@@ -730,6 +732,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const ElectraOff:StatusEffectType          = mk("Electra Off");
 		public static const EtnaOff:StatusEffectType             = mk("Etna Off");
 		public static const HeliaOff:StatusEffectType            = mk("Helia Off");
+		public static const KonstantinOff:StatusEffectType       = mk("Konstantin Off");
 		public static const LunaOff:StatusEffectType             = mk("Luna Off");
 		public static const NadiaOff:StatusEffectType            = mk("Nadia Off");
 		public static const TedOff:StatusEffectType              = mk("Ted Off");
@@ -1129,6 +1132,9 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CounterHighVoltage:StatusEffectType        = mkCombat("Counter High Voltage");
 		public static const CounterRagingInferno:StatusEffectType      = mkCombat("Counter Raging Inferno");
 		public static const CounterHighTide:StatusEffectType           = mkCombat("Counter High Tide");
+		public static const CounterHowlingGale:StatusEffectType           = mkCombat("Counter Howling Gale");
+		public static const CounterRumblingQuake:StatusEffectType           = mkCombat("Counter Rumbling Quake");
+		public static const CounterCorrosiveMeltdown:StatusEffectType           = mkCombat("Counter Corrosive Meltdown");
 
 		//cooldowns
 		public static const CooldownAdamantineShell:StatusEffectType           	= mkCombat("Cooldown Adamantine Shell");

@@ -43,7 +43,7 @@ public class GoblinShaman extends Goblin
 			//Blind
 			else if (spellChooser == 1 && mana >= spellCostBlind) {
 				outputText("The goblin glares at you and points at you! A bright flash erupts before you!  ");
-				if ((!player.perkv1(IMutationsLib.GorgonEyesIM) >= 1 && rand(player.inte / 5) <= 4) && !player.hasPerk(PerkLib.BlindImmunity)) {
+				if ((!player.perkv1(IMutationsLib.GorgonEyesIM) >= 1 && rand(player.inte / 5) <= 4) && !player.isImmuneToBlind()) {
 					outputText("<b>You are blinded!</b>");
 					player.createStatusEffect(StatusEffects.Blind, 1 + rand(3), 0, 0, 0);
 				}
@@ -68,10 +68,7 @@ public class GoblinShaman extends Goblin
 					damage *= 1.5;
 					outputText("It's super effective! ");
 				}
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) damage *= 1.2;
-				else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) damage *= 1.5;
-				else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) damage *= 2;
-				else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) damage *= 3.5;
+				
 				damage = Math.round(damage);
 				player.takeFireDamage(damage, true);
 				mana -= spellCostWhitefire;

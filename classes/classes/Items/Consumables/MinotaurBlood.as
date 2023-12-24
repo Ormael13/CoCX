@@ -224,7 +224,15 @@ public class MinotaurBlood extends Consumable {
 		}
 		//Morph dick to horsediiiiick
 		if (player.cocks.length > 0 && rand(2) == 0 && changes < changeLimit) {
-			if (horseDickTF()) changes++;
+			var selectedCockValue:int = player.findFirstCockNotInType([CockTypesEnum.HORSE]);
+			if (selectedCockValue != -1) {
+				CoC.instance.transformations.CockHorse(selectedCockValue).applyEffect();
+				player.growCock(selectedCockValue, 4);
+				dynStats("lus", 35, "scale", false);
+				player.addCurse("spe", 4,1);
+				player.MutagenBonus("lib", 5);
+				changes++;
+			}
 		}
 
 		//Males go into rut
@@ -377,21 +385,6 @@ public class MinotaurBlood extends Consumable {
 		}
 		player.refillHunger(25);
 		return false;
-	}
-
-	//returns true when something has changed, false otherwise
-	public function horseDickTF():Boolean {
-		var selectedCockValue:int = player.findFirstCockNotInType([CockTypesEnum.HORSE]);
-
-		if (selectedCockValue != -1) {
-			CoC.instance.transformations.CockHorse(selectedCockValue).applyEffect();
-			player.growCock(selectedCockValue, 4);
-			dynStats("lus", 35, "scale", false);
-			player.addCurse("spe", 4,1);
-			player.MutagenBonus("lib", 5);
-			return true;
-		}
-		else return false;
 	}
 }
 }

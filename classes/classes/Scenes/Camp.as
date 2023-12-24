@@ -18,6 +18,7 @@ import classes.lists.Gender;
 
 import coc.view.ButtonDataList;
 import coc.view.MainView;
+import classes.Scenes.Combat.CombatAbilities;
 
 use namespace CoC;
 
@@ -768,7 +769,7 @@ public class Camp extends NPCAwareContent{
 		var exploreEvent:Function = SceneLib.exploration.doExplore;
 		var placesEvent:Function = (placesKnown() ? places : null);
 		var canExploreAtNight:Boolean = (player.isNightCreature());
-		var isAWerewolf:Boolean = (player.isWerewolf());
+		var isAWerebeast:Boolean = (player.isWerebeast());
 		clearOutput();
 		saveUpdater.updateAchievements();
 
@@ -1077,7 +1078,7 @@ public class Camp extends NPCAwareContent{
 		if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(12, "Rest", restMenu).hint("Rest for one to twelve hours. Or until fully healed / night comes.");
 		if(((model.time.hours <= 5 || model.time.hours >= 21) && !canExploreAtNight) || (!isNightTime && canExploreAtNight)) {
 			addButton(12, "Sleep", doSleep).hint("Turn yourself in for the night.");
-			if(isAWerewolf && flags[kFLAGS.LUNA_MOON_CYCLE] == 8) {
+			if(isAWerebeast && flags[kFLAGS.LUNA_MOON_CYCLE] == 8) {
 				addButtonDisabled(12, "Sleep", "Try as you may you cannot find sleep tonight. The damn moon won't let you rest as your urges to hunt and fuck are on the rise.");
 			}
 		}
@@ -1162,7 +1163,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4) counter++;
 		if (flags[kFLAGS.FLOWER_LEVEL] >= 4) counter++;
 		if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) counter++;
-		if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) counter++;
+		if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2 && !player.hasStatusEffect(StatusEffects.KonstantinOff)) counter++;
 		if (flags[kFLAGS.SIDONIE_FOLLOWER] >= 1) counter++;
 		if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
 		if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 0) counter++;
@@ -1188,7 +1189,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= 5) counter++;
 		if (ceraphIsFollower()) counter++;
 		if (milkSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) counter++;
-		if (player.hasStatusEffect(StatusEffects.Familiar) && player.statusEffectv3(StatusEffects.Familiar) > 0 && player.statusEffectv3(StatusEffects.Familiar) < 4) counter++;
+		if (player.hasStatusEffect(StatusEffects.Familiar) && player.statusEffectv3(StatusEffects.Familiar) > 0 && player.statusEffectv3(StatusEffects.Familiar) < 4 && player.hasPerk(PerkLib.Familiar)) counter++;
 		for each (var npc:XXCNPC in _campFollowers) {
 			if (npc.isCompanion(XXCNPC.SLAVE)) {
 				counter++;
@@ -1254,7 +1255,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.MITZI_RECRUITED] >= 4) counter++;
 		if (flags[kFLAGS.ANEMONE_KID] > 0) counter++;
 		if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
-		if (player.hasStatusEffect(StatusEffects.Familiar) && player.statusEffectv3(StatusEffects.Familiar) > 0 && player.statusEffectv3(StatusEffects.Familiar) < 4) counter++;
+		if (player.hasStatusEffect(StatusEffects.Familiar) && player.statusEffectv3(StatusEffects.Familiar) > 0 && player.statusEffectv3(StatusEffects.Familiar) < 4 && player.hasPerk(PerkLib.Familiar)) counter++;
 		return counter;
 	}
 
@@ -1298,7 +1299,7 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.CampRathazul)) counter++;
 		if (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] < 1 && flags[kFLAGS.ARIAN_COCK_SIZE] > 0) counter++;
 		if (flags[kFLAGS.IZMA_BROFIED] == 1) counter++;
-		if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) counter++;
+		if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2 && !player.hasStatusEffect(StatusEffects.KonstantinOff)) counter++;
 		if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3) counter++;
 		if (emberScene.followerEmber() && flags[kFLAGS.EMBER_GENDER] == 1) counter++;
 		return counter;
@@ -1841,7 +1842,7 @@ public class Camp extends NPCAwareContent{
 				buttons.add("Sophie", sophieBimbo.approachBimboSophieInCamp);
 			}
 			//Ghoulish Vampire servant
-			if (player.hasStatusEffect(StatusEffects.Familiar) && player.statusEffectv3(StatusEffects.Familiar) > 0 && player.statusEffectv3(StatusEffects.Familiar) < 4) {
+			if (player.hasStatusEffect(StatusEffects.Familiar) && player.statusEffectv3(StatusEffects.Familiar) > 0 && player.statusEffectv3(StatusEffects.Familiar) < 4 && player.hasPerk(PerkLib.Familiar)) {
 				//outputText(".\n\n");
 				buttons.add(""+flags[kFLAGS.GHOULISH_VAMPIRE_SERVANT_NAME]+"", SceneLib.ghoulishVampireServant.ghoulishVampireServantMain).hint("Visit your ghoulish vampire servant.");
 			}
@@ -2062,7 +2063,7 @@ public class Camp extends NPCAwareContent{
 				buttons.add("Mitzi D.", SceneLib.mitziFollower.MitziDaughtersCampMainMenu).hint("Visit Mitzi daughters.");
 			}
 			//Konstantin
-			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) {
+			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2 && !player.hasStatusEffect(StatusEffects.KonstantinOff)) {
 				if (model.time.hours >= 6 && model.time.hours <= 8) outputText("Konstantin has dragged out of his [camp] a mat, and is doing some flexing postures under the early morning light. He’s not particularly good at it, so most of times he ends up in awkward positions.");
 				else if (model.time.hours <= 12) outputText("You ursine smith is currently at work, sharpening and polishing blades.");
 				else if (model.time.hours <= 15) outputText("Konstantin has stopped his work to have a meal, and quite an abundant one. From where you are, you can smell the cooked meat and spice from his plate.");
@@ -2171,7 +2172,7 @@ public class Camp extends NPCAwareContent{
 		addButton(9, "Quest Loot", SceneLib.adventureGuild.questItemsBag).hint("Manage your bag with quest items.").disableIf(!AdventurerGuild.playerInGuild, "Join the Adventure Guild for a quest bag!");
 		addButton(10, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
 		addButton(11, "Recall", sceneHunter.recallScenes).hint("Recall some of the unique events happened during your adventure.");
-		if (SceneLib.exploration.counters.explore >= 1) addButton(12, "Dummy", DummyTraining).hint("Train your mastery level on this dummy.").disableIf(isNightTime,"It's too dark for that!");
+		if (SceneLib.exploration.counters.explore >= 1) addButton(12, "Dummy", dummyTraining).hint("Train your mastery level on this dummy.").disableIf(isNightTime,"It's too dark for that!");
 		addButton(13, "Ascension", promptAscend).hint("Perform an ascension? This will restart your adventures. The game depending on your choice would also get harder. If you have Sky Poison Pearl could carry over some items to new adventure.").disableIf(flags[kFLAGS.LETHICE_DEFEATED] <= 0, "Don't you have a job to finish first? Like... to defeat someone, maybe Lethice?");
 		addButton(14, "Back", playerMenu);
 	}
@@ -2262,8 +2263,8 @@ public class Camp extends NPCAwareContent{
 		if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) addButton(10, "Clone", CloneMenu).hint("Check on your clone(s).");
 		else addButtonDisabled(10, "Clone", "Would you kindly go face F class Heaven Tribulation first?");
 		addButtonIfTrue(11, "Pocket Watch", mainPagePocketWatch, "Req. having Pocket Watch key item.", player.hasKeyItem("Pocket Watch") >= 0);
-		if (player.hasItem(useables.ENECORE, 1) && flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 200) addButton(12, "E.Core", convertingEnergyCoreIntoFlagValue).hint("Convert Energy Core item into flag value.");
-		if (player.hasItem(useables.MECHANI, 1) && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] < 200) addButton(12, "C.Mechan", convertingMechanismIntoFlagValue).hint("Convert Mechanism item into flag value.");
+		if (player.hasItem(useables.ENECORE, 1) && CampStatsAndResources.EnergyCoreResc < 200) addButton(12, "E.Core", convertingEnergyCoreIntoFlagValue).hint("Convert Energy Core item into flag value.");
+		if (player.hasItem(useables.MECHANI, 1) && CampStatsAndResources.MechanismResc < 200) addButton(12, "C.Mechan", convertingMechanismIntoFlagValue).hint("Convert Mechanism item into flag value.");
 		addButton(13, "C & S", menuForCombiningAndSeperating).hint("Combining & Seperating");
 		addButton(14, "Back", campActions);
 	}
@@ -2271,14 +2272,14 @@ public class Camp extends NPCAwareContent{
 		clearOutput();
 		outputText("1 Energy Core converted succesfully.");
 		player.destroyItems(useables.ENECORE, 1);
-		flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] += 1;
+		CampStatsAndResources.EnergyCoreResc += 1;
 		doNext(campMiscActions);
 	}
 	private function convertingMechanismIntoFlagValue():void {
 		clearOutput();
 		outputText("1 Mechanism converted succesfully.");
 		player.destroyItems(useables.MECHANI, 1);
-		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] += 1;
+		CampStatsAndResources.MechanismResc += 1;
 		doNext(campMiscActions);
 	}
 
@@ -2314,7 +2315,9 @@ public class Camp extends NPCAwareContent{
 			[weapons.EXCALIB, weapons.DEXCALI],
 			[weaponsrange.SIXSHOT, weaponsrange.TWINSIXS],
 			[weaponsrange.M1CERBE, weaponsrange.TM1CERB],
-			[weaponsrange.ALAKABL, weaponsrange.DALAKABL]
+			[weaponsrange.ALAKABL, weaponsrange.DALAKABL],
+			[weaponsrange.DESEAGL, weaponsrange.TDEEAGL]
+			//[weaponsrange.HARKON1, weaponsrange.HARKON2],
 		];
 		addButton(0, "Combine Weapons", menuCombineStaging, weaponList);
 		addButton(4, "Seperate Weapons", menuSeperateStaging, weaponList)
@@ -2361,33 +2364,123 @@ public class Camp extends NPCAwareContent{
 		outputText("Which perks would you like to combine using the watch?");
 		menu();
 		if (page == 1) {
+			addButton(0, "DoTE", mainPagePocketWatch, 2).hint("View Merged Perks related to Elemental Contract perk line", "Dao Of The Elements");
+			addButton(1, "EC: M&B", mainPagePocketWatch, 3).hint("View Merged Perks related to Elemental Conjurer: Mind and Body perk line", "Elemental Conjurer: Mind and Body");
+			addButton(2, "Chimera", mainPagePocketWatch, 4).hint("View Merged Perks related to Chimerical Body perk line", "Chimerical Body");
+			addButton(3, "Mage", mainPagePocketWatch, 5).hint("View Merged Perks related to the Mage perk line", "Mage");
+			addButton(4, "Diehard", mainPagePocketWatch, 6).hint("View Merged Perks related to the Diehard perk line", "Diehard");
+		}
+
+		if (page == 2) {
 			if (player.hasPerk(PerkLib.DaoOfTheElements)) addButtonDisabled(0, "DotE (layer 1)", "You already have this merged perk.");
 			else addButtonIfTrue(0, "DotE (layer 1)", mainPagePocketWatchDaoOfTheElementsPerkLayer1, "Req. Elemental Contract Rank 5 & Elements of the orthodox Path perks", player.hasPerk(PerkLib.ElementalContractRank5) && player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath));
+			
 			if (player.hasPerk(PerkLib.DaoOfTheElements)) {
 				if (player.hasPerk(PerkLib.ElementalContractRank9) && player.hasPerk(PerkLib.ElementsOfMarethBasics) && player.perkv1(PerkLib.DaoOfTheElements) < 2) addButton(1, "DotE (layer 2)", mainPagePocketWatchDaoOfTheElementsPerkLayer2);
 				else if (player.perkv1(PerkLib.DaoOfTheElements) >= 2) addButtonDisabled(1, "DotE (layer 2)", "You already have this merged perk.");
 				else addButtonDisabled(1, "DotE (layer 2)", "Req. Elemental Contract Rank 9 & Elements of Mareth: Basics & Dao of the Elements perks.");
 			}
 			else addButtonDisabled(1, "DotE (layer 2)", "Req. Elemental Contract Rank 9 & Elements of Mareth: Basics & Dao of the Elements perks.");
+			
 			if (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) > 1) {
 				if (player.hasPerk(PerkLib.ElementalContractRank13) && player.hasPerk(PerkLib.ElementsOfMarethAdvanced) && player.perkv1(PerkLib.DaoOfTheElements) < 3) addButton(2, "DotE (layer 3)", mainPagePocketWatchDaoOfTheElementsPerkLayer3);
 				else if (player.perkv1(PerkLib.DaoOfTheElements) >= 3) addButtonDisabled(2, "DotE (layer 3)", "You already have this merged perk.");
 				else addButtonDisabled(2, "DotE (layer 3)", "Req. Elemental Contract Rank 13 & Elements of Mareth: Advanced & Dao of the Elements (layer 2) perks.");
 			}
 			else addButtonDisabled(2, "DotE (layer 3)", "Req. Elemental Contract Rank 13 & Elements of Mareth: Advanced & Dao of the Elements (layer 2) perks.");
-			addButton(4, "Next", mainPagePocketWatch, page + 1);
-			addButtonIfTrue(5, "E C M & B R (Ex)", mainPagePocketWatchElementalConjurerMindAndBodyResolveEx, "Req. Elemental Conjurer Mind and Body Resolve perks / Or you already got this merged perk", player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolve));
-			addButtonIfTrue(6, "E C M & B D (Ex)", mainPagePocketWatchElementalConjurerMindAndBodyDedicationEx, "Req. Elemental Conjurer Mind and Body Resolve (Ex) & Elemental Conjurer Mind and Body Dedication perks / Or you already got this merged perk", player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolveEx) && player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedication));
-			addButtonIfTrue(7, "E C M & B S (Ex)", mainPagePocketWatchElementalConjurerMindAndBodySacrificeEx, "Req. Elemental Conjurer Mind and Body Dedication (Ex) & Elemental Conjurer Mind and Body Sacrifice perks / Or you already got this merged perk", player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedicationEx) && player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrifice));
-			addButtonIfTrue(10, "ChBS-I (Ex)", mainPagePocketWatchChimericalBodySemiImprovedStageEx, "Req. Chimerical Body: Semi-Improved Stage perk / Or you already got this merged perk", player.hasPerk(PerkLib.ChimericalBodySemiImprovedStage));
-			addButtonIfTrue(11, "ChBS-S (Ex)", mainPagePocketWatchChimericalBodySemiSuperiorStageEx, "Req. Chimerical Body: Semi-Superior Stage & Chimerical Body: Semi-Improved (Ex) Stage perks / Or you already got this merged perk", player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStage) && player.hasPerk(PerkLib.ChimericalBodySemiImprovedStageEx));
+
+			//Additional layers removed until additional elemental perks have been made
+			/*addButton(3, "DotE (layer 4)", mainPagePocketWatchDaoOfTheElementsPerkLayer4)
+			.disableIf(!player.hasPerk(PerkLib.DaoOfTheElements) || player.perkv1(PerkLib.DaoOfTheElements) < 3 || !player.hasPerk(PerkLib.ElementalContractRank18),
+						"Req. Elemental Contract Rank 18 & Dao of the Elements (layer 3) perks.")
+			.disableIf(player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 4, "You already have this merged perk.");
+
+			addButton(4, "DotE (layer 5)", mainPagePocketWatchDaoOfTheElementsPerkLayer5)
+			.disableIf(!player.hasPerk(PerkLib.DaoOfTheElements) || player.perkv1(PerkLib.DaoOfTheElements) < 4 || !player.hasPerk(PerkLib.ElementalContractRank23),
+						"Req. Elemental Contract Rank 23 & Dao of the Elements (layer 4) perks.")
+			.disableIf(player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 5, "You already have this merged perk.");
+
+			addButton(5, "DotE (layer 6)", mainPagePocketWatchDaoOfTheElementsPerkLayer6)
+			.disableIf(!player.hasPerk(PerkLib.DaoOfTheElements) || player.perkv1(PerkLib.DaoOfTheElements) < 5 || !player.hasPerk(PerkLib.ElementalContractRank28),
+						"Req. Elemental Contract Rank 28 & Dao of the Elements (layer 5) perks.")
+			.disableIf(player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 6, "You already have this merged perk.");
+
+			addButton(6, "DotE (layer 7)", mainPagePocketWatchDaoOfTheElementsPerkLayer7)
+			.disableIf(!player.hasPerk(PerkLib.DaoOfTheElements) || player.perkv1(PerkLib.DaoOfTheElements) < 6 || !player.hasPerk(PerkLib.ElementalContractRank31),
+						"Req. Elemental Contract Rank 31 & Dao of the Elements (layer 6) perks.")
+			.disableIf(player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 7, "You already have this merged perk."); */
+
+			addButton(13, "Next", mainPagePocketWatch, page + 1);
 		}
-		if (page == 2) {
-			addButtonIfTrue(5, "Archmage (Ex)", mainPagePocketWatchArchmageEx, "Req. Archmage perk / Or you already got this merged perk", player.hasPerk(PerkLib.Archmage));
-			addButtonIfTrue(10, "G.Diehard (Ex)", mainPagePocketWatchGreaterDiehardEx, "Req. Greater Diehard perk / Or you already got this merged perk", player.hasPerk(PerkLib.GreaterDiehard));
-			addButton(9, "Previous", mainPagePocketWatch, page - 1);
+
+		if (page == 3) {			
+			addButton(0, "E C M & B R (Ex)", mainPagePocketWatchElementalConjurerMindAndBodyResolveEx)
+			.disableIf(!player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolve), 
+				"Req. Elemental Conjurer Mind and Body Resolve perks")
+			.disableIf(player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolveEx) 
+				|| player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedicationEx)
+				|| player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrificeEx), "You already got this merged perk");
+
+			addButton(1, "E C M & B D (Ex)", mainPagePocketWatchElementalConjurerMindAndBodyDedicationEx)
+			.disableIf(!player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedication) || !player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolveEx), 
+				"Req. Elemental Conjurer Mind and Body Resolve (Ex) & Elemental Conjurer Mind and Body Dedication perks")
+			.disableIf(player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedicationEx)
+				|| player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrificeEx), "You already got this merged perk");
+			
+			addButton(2, "E C M & B S (Ex)", mainPagePocketWatchElementalConjurerMindAndBodySacrificeEx)
+			.disableIf(!player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrifice) || !player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedicationEx), 
+				"Req. Elemental Conjurer Mind and Body Dedication (Ex) & Elemental Conjurer Mind and Body Sacrifice perks")
+			.disableIf(player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrificeEx), "You already got this merged perk");
+			
+			addButton(12, "Previous", mainPagePocketWatch, page - 1);
+			addButton(13, "Next", mainPagePocketWatch, page + 1);
 		}
-		addButton(14, "Back", campMiscActions);
+		
+		if (page == 4) {			
+			addButton(0, "ChBS-I (Ex)", mainPagePocketWatchChimericalBodySemiImprovedStageEx)
+			.disableIf(!player.hasPerk(PerkLib.ChimericalBodySemiImprovedStage), 
+				"Req. Chimerical Body: Semi-Improved Stage perk")
+			.disableIf(player.hasPerk(PerkLib.ChimericalBodySemiImprovedStageEx) 
+				|| player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStageEx)
+				|| player.hasPerk(PerkLib.ChimericalBodySemiEpicStageEx), "You already got this merged perk");
+
+			addButton(1, "ChBS-S (Ex)", mainPagePocketWatchChimericalBodySemiSuperiorStageEx)
+			.disableIf(!player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStage) || !player.hasPerk(PerkLib.ChimericalBodySemiImprovedStageEx), 
+				"Req. Chimerical Body: Semi-Superior Stage & Chimerical Body: Semi-Improved (Ex) Stage perks")
+			.disableIf(player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStageEx)
+				|| player.hasPerk(PerkLib.ChimericalBodySemiEpicStageEx), "You already got this merged perk");
+			
+			addButton(2, "ChBS-E (Ex)", mainPagePocketWatchChimericalBodySemiEpicStageEx)
+			.disableIf(!player.hasPerk(PerkLib.ChimericalBodySemiEpicStage) || !player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStageEx), 
+				"Req. Chimerical Body: Semi-Epic Stage & Chimerical Body: Semi-Superior (Ex) Stage perks")
+			.disableIf(player.hasPerk(PerkLib.ChimericalBodySemiEpicStageEx), "You already got this merged perk");
+			
+			addButton(12, "Previous", mainPagePocketWatch, page - 1);
+			addButton(13, "Next", mainPagePocketWatch, page + 1);;
+		}
+
+		if (page == 5) {
+			addButton(0, "Archmage (Ex)", mainPagePocketWatchArchmageEx)
+			.disableIf(!player.hasPerk(PerkLib.Archmage), "Req. Archmage perk")
+			.disableIf(player.hasPerk(PerkLib.ArchmageEx), "You already got this merged perk");
+
+			addButton(12, "Previous", mainPagePocketWatch, page - 1);
+			addButton(13, "Next", mainPagePocketWatch, page + 1);		
+		}
+
+		if (page == 6) {
+			addButton(0, "G.Diehard (Ex)", mainPagePocketWatchGreaterDiehardEx)
+			.disableIf(!player.hasPerk(PerkLib.GreaterDiehard), "Req. Greater Diehard perk")
+			.disableIf(player.hasPerk(PerkLib.GreaterDiehardEx), "You already got this merged perk");
+
+			addButton(12, "Previous", mainPagePocketWatch, page - 1);
+		}
+
+		if (page == 1) {
+			addButton(14, "Back", campMiscActions);
+		} else {
+			addButton(14, "Back", mainPagePocketWatch, 1);
+		}
 	}
 	private function mainPagePocketWatchDaoOfTheElementsPerkLayer1():void {
 		clearOutput();
@@ -2400,7 +2493,7 @@ public class Camp extends NPCAwareContent{
 		player.createPerk(PerkLib.DaoOfTheElements, 1, 9, 0, 0);
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 4);
 		player.perkPoints += 3;
-		doNext(mainPagePocketWatch, 1);
+		doNext(mainPagePocketWatch, 2);
 	}
 	private function mainPagePocketWatchDaoOfTheElementsPerkLayer2():void {
 		clearOutput();
@@ -2414,7 +2507,7 @@ public class Camp extends NPCAwareContent{
 		player.addPerkValue(PerkLib.DaoOfTheElements, 2, 9);
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 5);
 		player.perkPoints += 3;
-		doNext(mainPagePocketWatch, 1);
+		doNext(mainPagePocketWatch, 2);
 	}
 	private function mainPagePocketWatchDaoOfTheElementsPerkLayer3():void {
 		clearOutput();
@@ -2428,7 +2521,62 @@ public class Camp extends NPCAwareContent{
 		player.addPerkValue(PerkLib.DaoOfTheElements, 2, 9);
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 5);
 		player.perkPoints += 3;
-		doNext(mainPagePocketWatch, 1);
+		doNext(mainPagePocketWatch, 2);
+	}
+	private function mainPagePocketWatchDaoOfTheElementsPerkLayer4():void {
+		clearOutput();
+		outputText("Perks combined: Dao of the Elements (layer 4) attained.");
+		player.removePerk(PerkLib.ElementalContractRank13);
+		player.removePerk(PerkLib.ElementalContractRank14);
+		player.removePerk(PerkLib.ElementalContractRank15);
+		player.removePerk(PerkLib.ElementalContractRank16);
+		player.removePerk(PerkLib.ElementalContractRank17);
+		player.addPerkValue(PerkLib.DaoOfTheElements, 1, 1);
+		player.addPerkValue(PerkLib.DaoOfTheElements, 2, 8);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 5);
+		player.perkPoints += 3;
+		doNext(mainPagePocketWatch, 2);
+	}
+	private function mainPagePocketWatchDaoOfTheElementsPerkLayer5():void {
+		clearOutput();
+		outputText("Perks combined: Dao of the Elements (layer 5) attained.");
+		player.removePerk(PerkLib.ElementalContractRank18);
+		player.removePerk(PerkLib.ElementalContractRank19);
+		player.removePerk(PerkLib.ElementalContractRank20);
+		player.removePerk(PerkLib.ElementalContractRank21);
+		player.removePerk(PerkLib.ElementalContractRank22);
+		player.addPerkValue(PerkLib.DaoOfTheElements, 1, 1);
+		player.addPerkValue(PerkLib.DaoOfTheElements, 2, 8);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 5);
+		player.perkPoints += 3;
+		doNext(mainPagePocketWatch, 2);
+	}
+	private function mainPagePocketWatchDaoOfTheElementsPerkLayer6():void {
+		clearOutput();
+		outputText("Perks combined: Dao of the Elements (layer 6) attained.");
+		player.removePerk(PerkLib.ElementalContractRank23);
+		player.removePerk(PerkLib.ElementalContractRank24);
+		player.removePerk(PerkLib.ElementalContractRank25);
+		player.removePerk(PerkLib.ElementalContractRank26);
+		player.removePerk(PerkLib.ElementalContractRank27);
+		player.addPerkValue(PerkLib.DaoOfTheElements, 1, 1);
+		player.addPerkValue(PerkLib.DaoOfTheElements, 2, 8);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 5);
+		player.perkPoints += 3;
+		doNext(mainPagePocketWatch, 2);
+	}
+	private function mainPagePocketWatchDaoOfTheElementsPerkLayer7():void {
+		clearOutput();
+		outputText("Perks combined: Dao of the Elements (layer 7) attained.");
+		player.removePerk(PerkLib.ElementalContractRank28);
+		player.removePerk(PerkLib.ElementalContractRank29);
+		player.removePerk(PerkLib.ElementalContractRank30);
+		player.removePerk(PerkLib.ElementalContractRank31);
+		player.addPerkValue(PerkLib.DaoOfTheElements, 1, 1);
+		player.addPerkValue(PerkLib.DaoOfTheElements, 2, 7);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 4);
+		player.perkPoints += 2;
+		doNext(mainPagePocketWatch, 2);
 	}
 	private function mainPagePocketWatchElementalConjurerMindAndBodyResolveEx():void {
 		clearOutput();
@@ -2438,7 +2586,7 @@ public class Camp extends NPCAwareContent{
 		player.createPerk(PerkLib.ElementalConjurerMindAndBodyResolveEx, 0, 0, 0, 0);
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 1);
 		player.perkPoints++;
-		doNext(mainPagePocketWatch, 1);
+		doNext(mainPagePocketWatch, 3);
 	}
 	private function mainPagePocketWatchElementalConjurerMindAndBodyDedicationEx():void {
 		clearOutput();
@@ -2449,7 +2597,7 @@ public class Camp extends NPCAwareContent{
 		player.createPerk(PerkLib.ElementalConjurerMindAndBodyDedicationEx, 0, 0, 0, 0);
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
 		player.perkPoints++;
-		doNext(mainPagePocketWatch, 1);
+		doNext(mainPagePocketWatch, 3);
 	}
 	private function mainPagePocketWatchElementalConjurerMindAndBodySacrificeEx():void {
 		clearOutput();
@@ -2460,7 +2608,7 @@ public class Camp extends NPCAwareContent{
 		player.createPerk(PerkLib.ElementalConjurerMindAndBodySacrificeEx, 0, 0, 0, 0);
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
 		player.perkPoints++;
-		doNext(mainPagePocketWatch, 1);
+		doNext(mainPagePocketWatch, 3);
 	}
 	private function mainPagePocketWatchChimericalBodySemiImprovedStageEx():void {
 		clearOutput();
@@ -2472,7 +2620,7 @@ public class Camp extends NPCAwareContent{
 		player.createPerk(PerkLib.ChimericalBodySemiImprovedStageEx, 0, 0, 0, 0);
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 3);
 		player.perkPoints += 2;
-		doNext(mainPagePocketWatch, 1);
+		doNext(mainPagePocketWatch, 4);
 	}
 	private function mainPagePocketWatchChimericalBodySemiSuperiorStageEx():void {
 		clearOutput();
@@ -2485,7 +2633,20 @@ public class Camp extends NPCAwareContent{
 		player.createPerk(PerkLib.ChimericalBodySemiSuperiorStageEx, 0, 0, 0, 0);
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 4);
 		player.perkPoints += 2;
-		doNext(mainPagePocketWatch, 1);
+		doNext(mainPagePocketWatch, 4);
+	}
+	private function mainPagePocketWatchChimericalBodySemiEpicStageEx():void {
+		clearOutput();
+		outputText("Perks combined: 'Chimerical Body: Semi-Epic (Ex) Stage' perk attained.");
+		player.removePerk(PerkLib.ChimericalBodySuperiorStage);
+		player.removePerk(PerkLib.ChimericalBodySemiPeerlessStage);
+		player.removePerk(PerkLib.ChimericalBodyPeerlessStage);
+		player.removePerk(PerkLib.ChimericalBodySemiEpicStage);
+		player.removePerk(PerkLib.ChimericalBodySemiSuperiorStageEx);
+		player.createPerk(PerkLib.ChimericalBodySemiEpicStageEx, 0, 0, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 4);
+		player.perkPoints += 2;
+		doNext(mainPagePocketWatch, 4);
 	}
 	private function mainPagePocketWatchGreaterDiehardEx():void {
 		clearOutput();
@@ -2496,7 +2657,7 @@ public class Camp extends NPCAwareContent{
 		player.createPerk(PerkLib.GreaterDiehardEx, 0, 0, 0, 0);
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
 		player.perkPoints += 2;
-		doNext(mainPagePocketWatch, 2);
+		doNext(mainPagePocketWatch, 6);
 	}
 	private function mainPagePocketWatchArchmageEx():void {
 		clearOutput();
@@ -2507,7 +2668,7 @@ public class Camp extends NPCAwareContent{
 		player.createPerk(PerkLib.ArchmageEx, 0, 0, 0, 0);
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
 		player.perkPoints += 2;
-		doNext(mainPagePocketWatch, 1);
+		doNext(mainPagePocketWatch, 5);
 	}/*
 	private function mainPagePocketWatch():void {
 		clearOutput();
@@ -2545,7 +2706,7 @@ public class Camp extends NPCAwareContent{
 	private function druidMenu():void {
 		clearOutput();
 		outputText("Would you like to fuse with an elemental and if so which?");
-		if (player.hasPerk(PerkLib.SharedPower)) outputText("\n\n+"+player.perkv1(PerkLib.SharedPower)+"0% multi bonus to health, damage and spell power when in an infused state");//temporaly to check if perk working as intended
+		if (player.hasPerk(PerkLib.SharedPower) && player.perkv1(PerkLib.SharedPower) > 0) outputText("\n\n+"+player.perkv1(PerkLib.SharedPower)+"0% multi bonus to health and damage when in an infused state");//temporaly to check if perk working as intended
 		menu();
 		if (player.hasPerk(PerkLib.ElementalBody)) {
 			addButtonDisabled(0, "Air", "You need to unfuse first before trying to use this fusion option.");
@@ -2742,6 +2903,7 @@ public class Camp extends NPCAwareContent{
 		if (player.hasPerk(PerkLib.DaoOfTheElements)) {
 			dmSPPC += 5;
 			if (player.perkv1(PerkLib.DaoOfTheElements) > 1) dmSPPC += (5 * (player.perkv1(PerkLib.DaoOfTheElements) - 1));
+			if (player.perkv1(PerkLib.DaoOfTheElements) == 7) dmSPPC -= 1;
 		}
 		if (player.hasPerk(PerkLib.GreaterSharedPower)) dmSPPC *= 2;
 		return dmSPPC;
@@ -3040,10 +3202,69 @@ public class Camp extends NPCAwareContent{
 		cloneContemplateDao(clone);
 	}
 
-	private function DummyTraining():void {
+	private function dummyTraining(lvl:int = 0, lustImmune:Boolean = true, isGroup:Boolean = false):void {
 		clearOutput();
-		outputText("You walk toward the worn out dummy as you drawn your [weapon].");
-		startCombat(new TrainingDummy());
+		outputText("You walk towards the sparring ring, wondering how to approach your training:\n");
+		outputText("Current Configuration:\n\n");
+
+		switch(lvl) {
+			case 0: outputText("Level: 0\n");
+					break;
+			case 1: outputText("Level: 30\n");
+					break;
+			case 2: outputText("Level: 60\n");
+					break;
+			case 3: outputText("Level: 90\n");
+					break;
+			case 4: outputText("Level: 150\n");
+					break;
+		}
+
+		if (lustImmune) {
+			outputText("Lust: Will not respond to lust\n")
+		} else {
+			outputText("Lust: Will simulate the effects of lust\n")
+		}
+
+		if (isGroup) {
+			outputText("Group: Will face multiple dummies at once\n")
+		} else {
+			outputText("Group: Will face a single dummy\n")
+		}
+
+		menu();
+		addButton(0, "Lvl0", dummyTraining, 0, lustImmune, isGroup)
+			.disableIf(lvl == 0, "Already selected");
+		addButton(1, "Lvl30", dummyTraining, 1, lustImmune, isGroup)
+			.disableIf(lvl == 1, "Already selected")
+			.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 3, "You need to improve the sparring ring more first!");
+		addButton(2, "Lvl60", dummyTraining, 2, lustImmune, isGroup)
+			.disableIf(lvl == 2, "Already selected")
+			.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 4, "You need to improve the sparring ring more first!");
+		addButton(3, "Lvl90", dummyTraining, 3, lustImmune, isGroup)
+			.disableIf(lvl == 3, "Already selected")
+			.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 5, "You need to improve the sparring ring more first!");
+		addButton(4, "Lvl150", dummyTraining, 4, lustImmune, isGroup)
+			.disableIf(lvl == 4, "Already selected")
+			.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 5, "You need to improve the sparring ring more first!");
+		addButton(5, "Normal", dummyTraining, lvl, true, isGroup)
+			.disableIf(lustImmune, "Already selected");
+		addButton(6, "Sim. Lust", dummyTraining, lvl, false, isGroup)
+			.disableIf(!lustImmune, "Already selected")
+			.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 3, "You need to improve the sparring ring more first!");
+		addButton(7, "Solo", dummyTraining, lvl, lustImmune, false)
+			.disableIf(!isGroup, "Already selected");
+		addButton(8, "Group", dummyTraining, lvl, lustImmune, true)
+			.disableIf(isGroup, "Already selected")
+			.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 5, "You need to improve the sparring ring more first!");
+		addButton(13, "Fight", dummyTrainingStart, lvl, lustImmune, isGroup);
+		addButton(14, "Back", campActions);
+	}
+
+	private function dummyTrainingStart(lvl:int = 0, lustImmune:Boolean = true, isGroup:Boolean = false):void {
+		clearOutput();
+		outputText("You walk toward the worn out " + (isGroup? "dummies": "dummy") + " as you draw your [weapon].");
+		startCombat(new TrainingDummy(lvl, lustImmune, isGroup));
 	}
 
 	private function SparrableNPCsMenuText():void {
@@ -3076,6 +3297,7 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.TedOff)) outputText("\nDragon Boi: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.SophieOff)) outputText("\nSophie: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.HeliaOff)) outputText("\nHelia: <font color=\"#800000\"><b>Disabled</b></font>");
+		if (player.hasStatusEffect(StatusEffects.KonstantinOff)) outputText("\nKonstantin: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.SpoodersOff)) outputText("\nSpooders: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.CalluOff)) outputText("\nCallu (Otter girl): <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.VenusOff)) outputText("\nVenus (Gigantic Turtle): <font color=\"#800000\"><b>Disabled</b></font>");
@@ -3091,6 +3313,7 @@ public class Camp extends NPCAwareContent{
 		addButton(4, "Etna", toggleEtna).hint("Enable or Disable Etna. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(5, "Luna", toggleLuna).hint("Enable or Disable Luna. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(6, "DragonBoi", toggleNPCStatus, StatusEffects.TedOff).hint("Enable or Disable Dragon Boi. This will remove him from enc table.");
+		addButton(7, "Konstantin", toggleNPCStatus, StatusEffects.KonstantinOff).hint("Enable or Disable Konstantin. This will remove him from enc table and if already in [camp] disable access to him.");
 		addButton(8, "Sophie", toggleSophie).hint("Enable or Disable Sophie. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(9, "Helia", toggleHelia).hint("Enable or Disable Helia. This will remove her from enc table and if already in [camp] disable access to her.");
 		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
@@ -3593,7 +3816,7 @@ public class Camp extends NPCAwareContent{
 		if (CoC.instance.timeQ == 0) {
 			CanDream = true;
 			model.time.minutes = 0;
-			if (player.isNightCreature() == true)
+			if (player.isNightCreature())
 			{
 				if (model.time.hours >= 6 && model.time.hours <=21)
 						CoC.instance.timeQ += 15 - model.time.hours + 7;
@@ -4439,7 +4662,7 @@ public function rebirthFromBadEnd():void {
 		}
 		SceneLib.camp.campUpgrades.checkMaterials();
 		outputText("\n\nIt will cost 80 nails, 80 wood and 10 stones to work on a segment of the wall.\n\n");
-		if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 10 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 80 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 80) {
+		if (CampStatsAndResources.StonesResc >= 10 && CampStatsAndResources.WoodResc >= 80 && CampStatsAndResources.NailsResc >= 80) {
 			doYesNo(buildCampWall, doCamp);
 		} else {
 			outputText("\n<b>Unfortunately, you do not have sufficient resources.</b>");
@@ -4466,9 +4689,9 @@ public function rebirthFromBadEnd():void {
 			helperArray[helperArray.length] = "Kiha";
 			helpers++;
 		}
-		flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 10;
-		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 80;
-		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 80;
+		CampStatsAndResources.StonesResc -= 10;
+		CampStatsAndResources.WoodResc -= 80;
+		CampStatsAndResources.NailsResc -= 80;
 		clearOutput();
 		if (flags[kFLAGS.CAMP_WALL_PROGRESS] == 1) {
 			outputText("You pull out a book titled \"Carpenter's Guide\" and flip pages until you come across instructions on how to build a wall. You spend minutes looking at the instructions and memorize the procedures.");
@@ -4523,7 +4746,7 @@ public function rebirthFromBadEnd():void {
 		outputText("You can build a gate to further secure your [camp] by having it closed at night.\n\n");
 		SceneLib.camp.campUpgrades.checkMaterials();
 		outputText("\n\nIt will cost 100 nails and 100 wood to build a gate.\n\n");
-		if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100) {
+		if (CampStatsAndResources.WoodResc >= 100 && CampStatsAndResources.NailsResc >= 100) {
 			doYesNo(buildCampGate, doCamp);
 		} else {
 			outputText("\n<b>Unfortunately, you do not have sufficient resources.</b>");
@@ -4550,8 +4773,8 @@ public function rebirthFromBadEnd():void {
 			helperArray[helperArray.length] = "Kiha";
 			helpers++;
 		}
-		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 100;
-		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 100;
+		CampStatsAndResources.WoodResc -= 100;
+		CampStatsAndResources.NailsResc -= 100;
 		clearOutput();
 		outputText("You pull out a book titled \"Carpenter's Guide\" and flip pages until you come across instructions on how to build a gate that can be opened and closed. You spend minutes looking at the instructions and memorize the procedures.");
 		flags[kFLAGS.CAMP_WALL_GATE] = 1;
@@ -4818,8 +5041,14 @@ public function rebirthFromBadEnd():void {
 		var statpoints:int = 5;
 		var perkpoints:int = 1;
 		if (player.hasPerk(PerkLib.AscensionAdvTrainingX)) statpoints += player.perkv1(PerkLib.AscensionAdvTrainingX) * 4;
-		if (player.level < 1) statpoints *= 3, perkpoints *= 3;
-		if (player.level < 9) statpoints *= 2, perkpoints *= 2;
+		if (player.level < 1) {
+			statpoints *= 3;
+			perkpoints *= 3;
+		}
+		if (player.level < 9) {
+			statpoints *= 2;
+			perkpoints *= 2;
+		}
 		var output:String = "";
 		output = "Level up to increase your base stats,\nas well as gain <b>"+num2Text(statpoints,100)+"</b> stat points and <b>"+num2Text(perkpoints,100)+"</b> perk points!";
 		return output;
@@ -4915,4 +5144,4 @@ public function rebirthFromBadEnd():void {
 	}
 
 }
-}
+}

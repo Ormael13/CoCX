@@ -11,6 +11,8 @@ import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 
+import coc.view.CoCButton;
+
 /**
 	 * ...
 	 * @author Gedan
@@ -78,7 +80,14 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 			if (player.isGargoyle()) SceneLib.d3.gargoyleBadEndD3();
 			else SceneLib.d3.succubusGardener.surrenderToTheGardener(hpVictory);
 		}
-		
+
+		override public function changeBtnWhenBound(btnStruggle:CoCButton, btnBoundWait:CoCButton):void{
+			if (player.hasStatusEffect(StatusEffects.Tentagrappled)) {
+				btnStruggle.call(grappleStruggle);
+				btnBoundWait.call(grappleWait);
+			}
+		}
+
 		override protected function performCombatAction():void
 		{
 			// The succubus gardener is a multistage fight. She starts off all but immune to lust damage. She has enough HP not to be one-shot and a heal move that takes priority over any stun. Once she is reduced to 60% HP, she either drinks from her tentacles or is force-fed by them (if stunned). This fully heals her but makes her 15% more vulnerable to lust.

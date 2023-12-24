@@ -564,9 +564,9 @@ import coc.xxc.StoryContext;
 			return player.MutagenBonus(statName,bonus, applyEffect);
 		}
 
-		protected function AlchemyBonus(statName: String, bonus: Number):void
+		protected function alchemyBonus(statName: String, bonus: Number):void
 		{
-			return player.AlchemyBonus(statName,bonus);
+			return player.alchemyBonus(statName,bonus);
 		}
 
 		protected function KnowledgeBonus(statName: String, bonus: Number):void

@@ -10,8 +10,15 @@ import classes.Scenes.Combat.AbstractSpell;
 import classes.Scenes.Combat.CombatAbilities;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.SceneLib;
+import classes.StatusEffectType;
 import classes.StatusEffects;
 import classes.internals.WeightedDrop;
+
+import coc.view.CoCButton;
+
+import flash.utils.Dictionary;
+
+import mx.formatters.NumberFormatter;
 
 public class Lethice extends Monster
 	{
@@ -57,13 +64,45 @@ public class Lethice extends Monster
 			this.drop = new WeightedDrop(weapons.L_WHIP, 1);
 			this.checkMonster();
 		}
-		
 		override public function get long():String
 		{
 			var str:String = "";
 			if (_fightPhase == 1)
 			{
 				str += "Lethice is the epitome of all things demonic. From her luxurious purple hair, interwoven with black roses, to her pink skin and goat-like horns, she is the perfect image of sensual, enticing corruption. Tall heels of bone complement her revealing, black clothes. They look almost like a nun’s habit, but pared down to an almost fetishistic extreme. Her slim breasts provide just a hint of shape to the diaphanous fabric, a promise of feminine delights instead of the garish acres of flesh her outfit displays. Outsized wings, like those of a dragon, hold Lethice aloft as she zips about her throne room, gathering her corruptive magics. The strangely slit pupils of her black-rimmed eyes never seem to leave you.";
+				if(dictOrder.length>0){
+					if(roundCheck==1){
+						str += "\n\nA sudden unreasoning <b>fear</b> took hold onto you briefly"
+
+						if(flags[kFLAGS.D3_DOPPLEGANGER_DEFEATED]==1){
+							str += " not unlike the strange mirror you faced earlier in this accursed fortress"
+						}
+
+						str+=". Then you notice a strange contortion behind Lethice, as if there is something translucent resides there, thought of Lethice likely has some tricks under her sleeve instill intense anxiety into you. ";
+
+						if(dictOrder.indexOf("physical")>-1){
+							str += "Quickly rushing towards her in hope to finish the fight, your suspicion became clear as you closing in, reveals a large <b>"+wheelHandleDesc()+"</b>-handled wheel as it turned briefly, a loud clank follows before it stopped and fade back into nothingness. And the next thing you knew you realised that Lethice intercept your attack, completely still as if the force you put into your strike was never there in the first place, then you felt the sensation being pushed back,";
+						}
+						else{
+							str += "Quickly you use the recast the same ability at her with the aid of mana trace still remained in hope to land some hits before she fully recover, your suspicion became clear as a large <b>"+wheelHandleDesc()+"</b>-handled wheel reveals itself as it turned briefly, a loud clank follows before it stopped and fade back into nothingness. And the next thing you knew your spell dissipated as it made contact with her seemingly. Noticed your attack leaves not even a bruise after and an congregate of <b>identical</b> mana signature from her,"
+						}
+
+						str += " Immediately disengage and distance yourself with her as you concluded: something must've happened after the wheel turned, otherwise Lethice could've blocking your attack earlier in the same fashion, perhaps you should attempt <b>alternate strategy</b> and taking note <b>how many times</b> the wheel has turned.\n";
+					}
+					str += wheelHandleString();
+					// Bookmark for wheels turning count
+					if(dictOrder.indexOf("hplossimmune")>-1){
+						str += "\n\nPerhaps out of your sheer willpower or rage you still manage to stand up to fight for another day, seeing Lethice's grin in response, you realized that <b>you might not able to survive</b> another blow from her should you still retain your grievous injuries!"
+					}
+					if(dictOrder.indexOf("lustlossimmune")>-1){
+						str += "\n\nDespite how overwhelmingly aroused you are right now, you still manage to continue fighting thanks to your inability to orgasm in combination with your new founded animal instincts from the mutations you went through. Despite the advantage you have garnered, some part of you can't help but think that <b>you might really GIVE IN</b> if Lethice push your arousal to your limits once again!"
+					}
+				}
+
+				// Minimum HP = player current HP - damage (60% of max HP)
+				hpLimit = Math.round(player.HP - (player.maxOverHP() * 0.6));
+				// Maximum Lust = player current lust + lust damage (60% of max lust)
+				lustLimit = Math.round(player.lust + (player.maxOverLust() * 0.6));
 			}
 			else if (_fightPhase == 2)
 			{
@@ -87,6 +126,18 @@ public class Lethice extends Monster
 					if (_defMode == 1) str += "\nLethice is standing ready for your next attack, ready to defend against any strike. Perhaps you could surprise her with something else?";
 					else if (_defMode == 2) str += "\nLethice is smirking and confident, prepared to resist any sort of libidinous advance, but her posture is ill-suited to deflecting attacks."
 				}
+				str += wheelHandleString();
+				if(dictOrder.indexOf("hplossimmune")>-1){
+					str += "\n\nPerhaps out of your sheer willpower or rage you still manage to stand up to fight for another day, seeing Lethice's grin in response, you realized that <b>you might not able to survive</b> another blow from her should you still retain your grievous injuries!"
+				}
+				if(dictOrder.indexOf("lustlossimmune")>-1){
+					str += "\n\nDespite how overwhelmingly aroused you are right now, you still manage to continue fighting thanks to your inability to orgasm in combination with your new founded animal instincts from the mutations you went through. Despite the advantage you have garnered, some part of you can't help but think that <b>you might really GIVE IN</b> if Lethice push your arousal to your limits once again!"
+				}
+
+				// Minimum HP = player current HP - damage (60% of max HP)
+				hpLimit = Math.round(player.HP - (player.maxOverHP() * 0.6));
+				// Maximum Lust = player current lust + lust damage (60% of max lust)
+				lustLimit = Math.round(player.lust + (player.maxOverLust() * 0.6));
 			}
 
 			if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles))
@@ -114,8 +165,335 @@ public class Lethice extends Monster
 
 			return str;
 		}
-		
-		
+
+		// Dictonary doesnt preserve order smh
+		private var dictOrder:Array = [];
+		private var dictValue:Array = [];
+		private var dictHistory:Array = [];
+		private var dictAttacked:Array = [];
+		private var roundCheck:int = 0;
+		private var decayCheck:Boolean = false;
+		private var companionCheck:Boolean = false;
+		private var hpLimit:Number = 0;
+		private var lustLimit:Number = 0;
+
+		private function furubeYuraYuraYatsukaNoTsurugiIkaishinshoMakora():void{
+			var _statusEffects:Array = statusEffects;
+
+			// outputText("Start of Status Effect Debug\n");
+
+			// Append attacked damage type into immunity from last round
+			// Since I dont want Lethice to become immune immediately (literally unplayable)
+
+			for(var __i:int=0;__i<dictAttacked.length;__i++){
+				var ___index:int = dictOrder.indexOf(dictAttacked[__i]);
+				if(___index>-1){
+					dictOrder.removeAt(___index);
+					dictValue.removeAt(___index);
+				}
+
+				dictOrder.push(dictAttacked[__i]);
+				dictValue.push(115);
+
+				sizeCheck();
+			}
+
+			dictAttacked = [];
+
+			// Append status effect immmunity and make Lethice immune to adapted debuff
+			for(var i:int=0; i < _statusEffects.length;i++){
+				// outputText( statusEffects[i].stype.id + " "+ statusEffects[i].value1 + " \n");
+				// Good job if you didnt use value1 for duration check
+				// Check for Shell becuz fucking
+				if(_statusEffects[i].stype.id!="Shell"){
+					var _index:int = dictOrder.indexOf(_statusEffects[i].stype.id);
+					if(_index>-1){
+						_statusEffects[i].value1 = 1;
+						dictOrder.removeAt(_index);
+						dictValue.removeAt(_index);
+
+						// Re add Immunity if you trigger deflect lul
+						dictOrder.push(_statusEffects[i].stype.id);
+						dictValue.push(115);
+					}
+					else{
+						if(_statusEffects[i].value1>2){
+							// Add Immunity
+							dictOrder.push(_statusEffects[i].stype.id);
+							dictValue.push(115);
+
+							decayCheck = true;
+
+							sizeCheck();
+						}
+					}
+				}
+			}
+
+			// Two condition to trigger immunity decay
+			// Either add status effect immunity or damage type immunity
+			// Prevent player just get over the gimmick by spamming wait
+			if(decayCheck){
+				// To prevent modifying looping array
+				var tmpOrder:Array = [];
+				var tmpValue:Array = [];
+
+				roundCheck++;
+
+				for(var _i:int=0;_i<dictOrder.length;_i++){
+					// Remove immunity if lifetime less than 15
+					if(dictValue[_i]>14){
+						tmpOrder.push(dictOrder[_i]);
+						tmpValue.push(dictValue[_i]-15);
+					}
+				}
+
+				dictOrder = tmpOrder;
+				dictValue = tmpValue;
+			}
+
+			// outputText( "\nDictionary size: " + dictOrder.length + " \nFirst key: " + dictOrder[0] + " \n");
+			// outputText("End of Status Effect Debug\n");
+
+			decayCheck = false;
+		}
+		private function sizeCheck():void{
+			// Limit immunity down to 9, remove the first added immunity
+			if(dictOrder.length>(3+flags[kFLAGS.GAME_DIFFICULTY])){
+				dictOrder.removeAt(0);
+				dictValue.removeAt(0);
+			}
+		}
+		private function wheelHandleDesc():String{
+			var numberWheel:String = "";
+
+			switch(3+flags[kFLAGS.GAME_DIFFICULTY]){
+				case 3:
+					numberWheel = "three";
+					break;
+				case 4:
+					numberWheel = "four";
+					break;
+				case 5:
+					numberWheel = "five";
+					break;
+				case 6:
+					numberWheel = "six";
+					break;
+				case 7:
+					numberWheel = "seven";
+					break;
+				case 8:
+					numberWheel = "eight";
+					break;
+			}
+
+			return numberWheel;
+		}
+		private function wheelHandleString():String{
+			var printString:String = "";
+			var wheelTurned:Number = 0;
+			var tmp:Array = [];
+
+			for(var ___i:int = 0;___i<dictOrder.length;___i++){
+				if(dictHistory.indexOf(dictOrder[___i])<0){
+					wheelTurned +=1;
+				}
+				tmp.push(dictOrder[___i]);
+			}
+
+			dictHistory = tmp;
+
+			printString += "\n\nYou noticed as the <b>"+wheelHandleDesc()+"</b>-handled wheel behind Lethice reveals and turned <b>" + wheelTurned +" times</b> shortly before concealing itself once more.";
+
+			if(wheelTurned==0){
+				printString = "\n\nWheel behind Lethice currently has not reveal itself. Perhaps you should try something else?";
+			}
+
+			return printString;
+		}
+		private function statusHandler(string:String=""):Boolean{
+			// Append status effect immmunity and make Lethice immune to adapted debuff
+			if(dictOrder.indexOf(string)<0){
+				// Add Immunity
+				dictOrder.push(string);
+				dictValue.push(115);
+
+				decayCheck = true;
+
+				sizeCheck();
+				return false;
+			}
+			else{
+				return true;
+			}
+		}
+		override protected function handleConstricted():Boolean{
+			return statusHandler("constrict");
+		}
+		override protected function handleStun():Boolean{
+			return statusHandler("stun");
+		}
+		override protected function handleFear():Boolean{
+			return statusHandler("fear");
+		}
+		override protected function handleConfusion():Boolean{
+			return statusHandler("confuse");
+		}
+		override public function handleStatusEffects(statusEffect:StatusEffectType):Boolean{
+			var string:String = "";
+
+			switch(statusEffect){
+				case StatusEffects.OrcaPlay:
+					string = "play with"
+					break;
+				case StatusEffects.Straddle:
+					string = "straddle on"
+					break;
+				case StatusEffects.Provoke:
+					string = "provoke"
+					break;
+				case StatusEffects.OrcaHasWackedFinish:
+					string = "slap your tail onto"
+					break;
+				default:
+					string = "restrain";
+			}
+			if(_fightPhase != 2 && statusHandler(statusEffect.id)){
+				outputText("\n\nAs you attempt to " + string + " Lethice, much to your surprise she remain unfazed. Looks like she has adapted to your ability.");
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		override public function combatRoundUpdate():void{
+			if(_fightPhase!=2){
+				furubeYuraYuraYatsukaNoTsurugiIkaishinshoMakora();
+			}
+			super.combatRoundUpdate();
+		}
+		private function adaptionDeflect(damage:Number, font:String, dict:String="physical", damageType:Number=0):Number {
+			if(_fightPhase!=2){
+				if(companionCheck){
+					// Companion attack will never be deflected to player since it will be skipped once adapted
+					dict = "companion";
+				}
+				var index:int = dictOrder.indexOf(dict);
+				if(index>-1){
+					var numberformat:NumberFormatter = new NumberFormatter();
+					var deflectDamage:Number = Math.round(damage * (dictValue[index]/100));
+					var dmgText:String = numberformat.format(Math.floor(Math.abs(deflectDamage)));
+					switch(dict){
+						case "lust":
+							player.takeLustDamage(deflectDamage);
+							break;
+						case "true":
+							player.HP -= deflectDamage;
+							break;
+						default:
+							player.takeDamage(deflectDamage,damageType);
+
+					}
+					outputText("<b>([font-" + font + "]" + "Deflected! " + dmgText + "[/font])</b>");
+
+					if(player.HP < hpLimit){
+						player.HP = hpLimit;
+					}
+
+					if(player.lust > lustLimit){
+						player.lust = lustLimit;
+					}
+
+					dictAttacked.push(dict);
+
+					return damage-deflectDamage;
+				}
+				else {
+					dictAttacked.push(dict);
+					decayCheck = true;
+				}
+			}
+
+			return damage;
+		}
+		override public function doDamageBefore(damage:Number):Number{
+			return adaptionDeflect(damage,"damage");
+		}
+		override public function doMagicDamageBefore(damage:Number):Number{
+			return adaptionDeflect(damage,"damage","magic",4);
+		}
+		override public function doFireDamageBefore(damage:Number):Number{
+			return adaptionDeflect(damage,"fire","fire",5);
+		}
+		override public function doIceDamageBefore(damage:Number):Number{
+			return adaptionDeflect(damage,"cold","cold",6);
+		}
+
+		override public function doLightningDamageBefore(damage:Number):Number{
+			return adaptionDeflect(damage,"lightning","lightning",7);
+		}
+
+		override public function doDarknessDamageBefore(damage:Number):Number{
+			return adaptionDeflect(damage,"dark","dark",8);
+		}
+
+		override public function doPoisonDamageBefore(damage:Number):Number{
+			return adaptionDeflect(damage,"poison","poison",9);
+		}
+
+		override public function doWindDamageBefore(damage:Number):Number{
+			return adaptionDeflect(damage,"wind","wind",10);
+		}
+
+		override public function doWaterDamageBefore(damage:Number):Number{
+			return adaptionDeflect(damage,"water","water",11);
+		}
+
+		override public function doAcidDamageBefore(damage:Number):Number{
+			return adaptionDeflect(damage,"acid","acid",13);
+		}
+
+		override public function doEarthDamageBefore(damage:Number):Number{
+			return adaptionDeflect(damage,"earth","earth",12);
+		}
+
+		override public function doTrueDamageBefore(damage:Number):Number{
+			return adaptionDeflect(damage,"damage","true");
+		}
+
+		override protected function applyTease(lustDelta:Number, display:Boolean = true):void{
+			lustDelta = adaptionDeflect(lustDelta,"lust","lust");
+			if(lustDelta>0){
+				super.applyTease(lustDelta, display);
+			}
+		}
+
+		override public function preCompanionSeal(companionName:String):Boolean{
+			if(_fightPhase!=2){
+				if(dictOrder.indexOf("companion")>-1){
+					companionCheck = false;
+					outputText("\n\nAs you recuperate from your last move, " + companionName + " attempts to attack Lethice only to be perfectly intercepted, leaving her unharmed.");
+					return false;
+				}
+				companionCheck = true;
+			}
+			return true;
+		}
+
+		override public function postCompanionAction():void{
+			companionCheck = false;
+		}
+
+		override public function postPlayerBusyBtnSpecial(btnSpecial1:CoCButton, btnSpecial2:CoCButton):void{
+			if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles)) {
+				if (player.lust < SceneLib.combat.magic.getWhiteMagicLustCap() && player.hasStatusEffect(StatusEffects.KnowsWhitefire)
+						&& ((!player.hasPerk(PerkLib.BloodMage) && player.mana >= 30) || (player.hasStatusEffect(StatusEffects.BloodMage) && ((player.HP + 30) > (player.minHP() + 30))))) {
+					btnSpecial1.show("Dispel", dispellRapetacles);
+				}
+			}
+		}
+
 		override public function postPlayerAbility(ability:CombatAbility):void {
 			if (fightPhase == 3 && ability is AbstractSpell && ability.hasTag(CombatAbility.TAG_DAMAGING)) {
 				outputText("\n\n<i>\"Ouch. Such arcane skills for one so uncouth,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your magics?\"</i>\n\n");
@@ -127,11 +505,13 @@ public class Lethice extends Monster
 		{
 			if (_fightPhase == 1)
 			{
+				// furubeYuraYuraYatsukaNoTsurugiIkaishinshoMakora();
 				phase1Ends(hpVictory);
 				return;
 			}
 			else if (_fightPhase == 2)
 			{
+				// Demon horde arrives to buy time for Lethice to adapt to your attack haha
 				phase2Ends(hpVictory);
 				return;
 			}
@@ -159,6 +539,32 @@ public class Lethice extends Monster
 				case 2: phase2(); break;
 				case 3: phase3(); break;
 				default: phase1(); break;
+			}
+
+			// Lettuce now adapt to player loss immunity HA
+			if(_fightPhase!=2){
+				if(player.HP<=player.minHP() + 1 && (player.hasStatusEffect(StatusEffects.TooAngryTooDie) || player.hasPerk(PerkLib.Immortality) || player.hasPerk(PerkLib.WhatIsReality))){
+					if(dictOrder.indexOf("hplossimmune")>-1){
+						doNext(SceneLib.combat.endHpLoss);
+					}
+					else{
+						dictOrder.push("hplossimmune");
+						dictValue.push(999);
+
+						decayCheck = true;
+					}
+				}
+				if(player.lust>=player.maxOverLust()){
+					if(dictOrder.indexOf("lustlossimmune")>-1){
+						doNext(SceneLib.combat.endLustLoss);
+					}
+					else{
+						dictOrder.push("lustlossimmune");
+						dictValue.push(999);
+
+						decayCheck = true;
+					}
+				}
 			}
 		}
 
@@ -251,7 +657,7 @@ public class Lethice extends Monster
 			else
 			{
 				outputText(" The cloying smoke gets in your eyes and your mouth, making you cough and sputter. Worst of all, you can’t see anything!");
-				if (!player.hasPerk(PerkLib.BlindImmunity)) player.createStatusEffect(StatusEffects.Blind, 2, 0, 0, 0);
+				if (!player.isImmuneToBlind()) player.createStatusEffect(StatusEffects.Blind, 2, 0, 0, 0);
 				player.takePhysDamage(1);
 				outputText(" (1)");
 			}
@@ -436,7 +842,7 @@ public class Lethice extends Monster
 			{
 				outputText(" You take a huge, fat, musky glob of spunk right to the eyes! You yelp in alarm, trying to wipe the salty, burning demonic cock-cream out, but it's simply too thick! Yuck!");
 				player.takeLustDamage(Math.round(player.maxLust() * 0.05), true);
-				if (!player.hasPerk(PerkLib.BlindImmunity)) player.createStatusEffect(StatusEffects.Blind, 2 + rand(2), 0, 0, 0);
+				if (!player.isImmuneToBlind()) player.createStatusEffect(StatusEffects.Blind, 2 + rand(2), 0, 0, 0);
 			}
 		}
 
@@ -566,6 +972,31 @@ public class Lethice extends Monster
 			outputText("<i>\"Useless whelps,\"</i> Lethice growls, rising back to her feet and spreading her");
 			outputText(" draconic wings behind herself, letting them flare out to their full majesty. She grabs a whip from her flank and uncoils it with a snap, cracking it just over your head. Black fire seethes on the length of the whip, burning with corrupt magics that make the air reek of sex and desire around her.");
 			outputText("\n\n<i>\"Very well, Champion,\"</i> she snarls, throwing aside her goblet of Lethicite. The crystals go scattering as the vessel shatters on the flagstone, and in an instant even the defeated demons are scrambling for the gems, making the floor you fight on a rabid hell to walk through. <i>\"I see I’ll have to finish you myself! Let us see what you’re really made of... before I rape your soul out of your body!\"</i>");
+
+			var str:String = "";
+			if(dictOrder.length>0){
+				if(roundCheck==1){
+					str += "\n\n 'Well, This should be easy! After all you destroy her in an instant just earlier.', you grin. But then a sudden unreasoning <b>fear</b> took hold onto you briefly"
+
+					if(flags[kFLAGS.D3_DOPPLEGANGER_DEFEATED]==1){
+						str += " not unlike the strange mirror you faced earlier in this accursed fortress"
+					}
+
+					str+=". Then you notice a strange contortion behind Lethice, as if there is something translucent resides there, thought of Lethice likely has some tricks under her sleeve instill intense anxiety into you. ";
+
+
+					if(dictOrder.indexOf("physical")>-1){
+						str += "Quickly rushing towards her in hope to finish the fight, your suspicion became clear as you closing in, reveals a large <b>"+wheelHandleDesc()+"</b>-handled wheel as it turned briefly, a loud clank follows before it stopped and fade back into nothingness. And the next thing you knew you realised that Lethice intercept your attack, completely still as if the force you put into your strike was never there in the first place, then you felt the sensation being pushed back,";
+					}
+					else{
+						str += "Quickly you use the recast the same ability at her with the aid of mana trace still remained in hope to land some hits before she fully recover, your suspicion became clear as a large <b>"+wheelHandleDesc()+"</b>-handled wheel reveals itself as it turned briefly, a loud clank follows before it stopped and fade back into nothingness. And the next thing you knew your spell dissipated as it made contact with her seemingly. Noticed your attack leaves not even a bruise after and an congregate of <b>identical</b> mana signature from her,"
+					}
+
+					str += " Immediately disengage and distance yourself with her as you concluded: something must've happened after the wheel turned, otherwise Lethice could've blocking your attack earlier in the same fashion, perhaps you should attempt <b>alternate strategy</b> and taking note <b>how many times</b> the wheel has turned.\n";
+
+					outputText(str);
+				}
+			}
 
 			beginPhase3(false);
 		}

@@ -288,6 +288,10 @@ public class RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_SKIN_COLOR1, color, score, failScore, customName);
 		return this;
 	}
+	public function skinColor2(color:*, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_SKIN_COLOR2, color, score, failScore, customName);
+		return this;
+	}
 	public function skinCoatTypeAndColors(type:*, color:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addRequirement(
 				RacialRequirement.joinAnd(

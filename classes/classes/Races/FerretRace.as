@@ -41,13 +41,21 @@ public class FerretRace extends Race {
 				.faceType(Face.FERRET_MASK, +1)
 				.faceType(Face.FERRET, +2)
 				.earType(Ears.FERRET, +1)
+				.eyeType(Eyes.WEASEL, +2)
+				.eyeColor("golden", +1)
 				.tailType(Tail.FERRET, +1)
-				.legType(LowerBody.FERRET, +1);
-		addScoresAfter(1)
-				.skinCoatType(Skin.FUR, +1);
+				.legType(LowerBody.FERRET, +1)
+				.skinCoatType(Skin.FUR, +2);
 		
-		buildTier(4, "ferret-morph")
+		buildTier(6, "ferret-morph")
 				.namesMaleFemaleMorph("ferret-boy", "ferret-girl", "ferret-morph")
+				.buffs({
+					"str.mult": -0.10,
+					"spe.mult": +0.50,
+					"int.mult": +0.30,
+					"wis.mult": +0.50,
+					"sens": +20
+				})
 				.end();
 	}
 }

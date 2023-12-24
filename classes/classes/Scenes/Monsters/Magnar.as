@@ -23,7 +23,7 @@ import classes.internals.*;
 		public function heatWave():void {
 			outputText("The blue flame from the massive demon’s maw vanishes… but you can feel the heat rising.  ");
 			createStatusEffect(StatusEffects.Uber, 5, 0, 0, 0);
-			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) {
+			if (player.immuneToBurn()) {
 				outputText("You don’t care overmuch, but your guests retreat from the creature, cringing away from the heat. ");
 			} else if (player.hasStatusEffect(StatusEffects.FieryBand)) {
 				outputText("The cool metal of Kiha’s wedding band seems to spread through your body, chasing the heat away. Your guests, however, don’t have a dragon-bride giving them such protection. ");
@@ -218,8 +218,10 @@ import classes.internals.*;
 			addCurse("str.mult", 0.30,1);
 			addCurse("spe.mult", 0.30,1);
 
-			if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.addStatusValue(StatusEffects.BurnDoT, 1, 1);
-			else player.createStatusEffect(StatusEffects.BurnDoT,SceneLib.combat.debuffsOrDoTDuration(3),0.02,0,0);
+			if (!player.immuneToBurn()) {
+				if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.addStatusValue(StatusEffects.BurnDoT, 1, 1);
+				else player.createStatusEffect(StatusEffects.BurnDoT,SceneLib.combat.debuffsOrDoTDuration(3),0.02,0,0);
+			}
 		}
 		
 		override protected function performCombatAction():void

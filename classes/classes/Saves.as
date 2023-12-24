@@ -923,6 +923,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.beardLength = player.beardLength;
 		saveFile.data.eyeType = player.eyes.type;
 		saveFile.data.eyeColor = player.eyes.colour;
+		saveFile.data.skinColor3 = player.skinColor3;
 		saveFile.data.beardStyle = player.beardStyle;
 		saveFile.data.tongueType = player.tongue.type;
 		saveFile.data.earType = player.ears.type;
@@ -1922,6 +1923,10 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			CoC.instance.transformations.EyesChangeColor(["brown"]).applyEffect(false);
 		else
 			CoC.instance.transformations.EyesChangeColor([saveFile.data.eyeColor]).applyEffect(false);
+		if (saveFile.data.skinColor3 == undefined)
+			player.skinColor3 = "black";
+		else
+			player.skinColor3 = saveFile.data.skinColor3;
 		//BEARS
 		if (saveFile.data.beardLength == undefined)
 			player.beardLength = 0;
@@ -2819,15 +2824,12 @@ public function unFuckSave():void
 
 	// Fix duplicate elven bounty perks
 	if (player.hasPerk(PerkLib.ElvenBounty)) {
-		//CLear duplicates
-		while(player.perkDuplicated(PerkLib.ElvenBounty)) player.removePerk(PerkLib.ElvenBounty);
 		//Fix fudged preggers value
 		if (player.perkv1(PerkLib.ElvenBounty) == 15) {
 			player.setPerkValue(PerkLib.ElvenBounty,1,0);
 			player.addPerkValue(PerkLib.ElvenBounty,2,15);
 		}
 	}
-	while (player.perkDuplicated(PerkLib.NinetailsKitsuneOfBalance)) player.removePerk(PerkLib.NinetailsKitsuneOfBalance);
 
 	if (player.hasStatusEffect(StatusEffects.KnockedBack))
 	{

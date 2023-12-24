@@ -88,8 +88,10 @@ public class MutantIncubus extends Monster {
     private function BladeFlurry():void {
         if (hasStatusEffect(StatusEffects.Blacken)) {
 			outputText("From the darkness, you feel the air moving…too late to dodge. The Incubus seems to be everywhere, slashing at you from multiple angles at once! ");
-			if (player.hasStatusEffect(StatusEffects.IzmaBleed)) player.addStatusValue(StatusEffects.IzmaBleed, 1, 1);
-			else player.createStatusEffect(StatusEffects.IzmaBleed, 3, 0, 0, 0);
+			if (!player.immuneToBleed()) {
+				if (player.hasStatusEffect(StatusEffects.IzmaBleed)) player.addStatusValue(StatusEffects.IzmaBleed, 1, 1);
+				else player.createStatusEffect(StatusEffects.IzmaBleed, 3, 0, 0, 0);
+			}
 			for (var i1:int = 0; i1 < 8; ++i1) {
 				player.buff("Blackened Blade Furry").addStats({"str":-5}).withText("Blackened Blade Furry!").combatPermanent();
 				eOneAttack(true);
@@ -97,8 +99,10 @@ public class MutantIncubus extends Monster {
 		}
 		else {
 			outputText("The mutant incubus grits his teeth, slashing at you with his thin swords. They flick in behind your guard, leaving thin, bleeding wounds. Your muscles feel weaker where the swords hit. ");
-			if (player.hasStatusEffect(StatusEffects.IzmaBleed)) player.addStatusValue(StatusEffects.IzmaBleed, 1, 1);
-			else player.createStatusEffect(StatusEffects.IzmaBleed, 3, 0, 0, 0);
+			if (!player.immuneToBleed()) {
+				if (player.hasStatusEffect(StatusEffects.IzmaBleed)) player.addStatusValue(StatusEffects.IzmaBleed, 1, 1);
+				else player.createStatusEffect(StatusEffects.IzmaBleed, 3, 0, 0, 0);
+			}
 			for (var i2:int = 0; i2 < 4; ++i2) {
 				player.buff("Blade Furry").addStats({"str":-2}).withText("Blade Furry!").combatPermanent();
 				eOneAttack(true);

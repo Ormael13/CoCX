@@ -29,6 +29,8 @@ import classes.lists.BreastCup;
 import classes.lists.Gender;
 
 import coc.view.MainView;
+import classes.Scenes.Combat.CombatAbility;
+
 
 //import flash.events.MouseEvent;
 
@@ -1157,7 +1159,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentStrength():void {
 			clearOutput();
-			outputText("Are you stronger than normal? (+"+(50 * (player.newGamePlusMod() + 1))+" max Strength)\n\nStrength increases your combat damage, and your ability to hold on to an enemy or pull yourself away.");
+			outputText("Are you stronger than normal? (+50% to strength multi)\n\nStrength increases your combat damage, and your ability to hold on to an enemy or pull yourself away.");
 			menu();
 			addButton(0, "Yes", setEndowmentStrength);
 			addButton(1, "No", chooseEndowment, true);
@@ -1165,7 +1167,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentThoughness():void {
 			clearOutput();
-			outputText("Are you unusually tough? (+"+(50 * (player.newGamePlusMod() + 1))+" max Toughness)\n\nToughness gives you more HP and increases the chances an attack against you will fail to wound you.");
+			outputText("Are you unusually tough? (+50% to toughness multi)\n\nToughness gives you more HP and increases the chances an attack against you will fail to wound you.");
 			menu();
 			addButton(0, "Yes", setEndowmentToughness);
 			addButton(1, "No", chooseEndowment, true);
@@ -1173,7 +1175,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentSpeed():void {
 			clearOutput();
-			outputText("Are you very quick?  (+"+(50 * (player.newGamePlusMod() + 1))+" max Speed)\n\nSpeed makes it easier to escape combat and grapples.  It also boosts your chances of evading an enemy attack and successfully catching up to enemies who try to run.");
+			outputText("Are you very quick?  (+50% to speed multi)\n\nSpeed makes it easier to escape combat and grapples.  It also boosts your chances of evading an enemy attack and successfully catching up to enemies who try to run.");
 			menu();
 			addButton(0, "Yes", setEndowmentSpeed);
 			addButton(1, "No", chooseEndowment, true);
@@ -1181,7 +1183,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentSmarts():void {
 			clearOutput();
-			outputText("Are you a quick learner?  (+"+(50 * (player.newGamePlusMod() + 1))+" max Intellect)\n\nIntellect can help you avoid dangerous monsters or work with machinery.  It will also boost the power of any spells you may learn in your travels.");
+			outputText("Are you a quick learner?  (+50% to intellect multi)\n\nIntellect can help you avoid dangerous monsters or work with machinery.  It will also boost the power of any spells you may learn in your travels.");
 			menu();
 			addButton(0, "Yes", setEndowmentSmarts);
 			addButton(1, "No", chooseEndowment, true);
@@ -1189,7 +1191,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentWise():void {
 			clearOutput();
-			outputText("Are you a wise person?  (+"+(50 * (player.newGamePlusMod() + 1))+" max Wisdom)\n\nWisdom can help you understand mysterious objects or work with soulforce.  It will also boost the power of any soulskills you may learn in your travels.");
+			outputText("Are you a wise person?  (+50% to wisdom multi)\n\nWisdom can help you understand mysterious objects or work with soulforce.  It will also boost the power of any soulskills you may learn in your travels.");
 			menu();
 			addButton(0, "Yes", setEndowmentWise);
 			addButton(1, "No", chooseEndowment, true);
@@ -1197,7 +1199,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentLibido():void {
 			clearOutput();
-			outputText("Do you have an unusually high sex-drive?  (+"+(50 * (player.newGamePlusMod() + 1))+" max Libido)\n\nLibido affects how quickly your lust builds over time.  You may find a high libido to be more trouble than it's worth...");
+			outputText("Do you have an unusually high sex-drive?  (+50% to libido multi)\n\nLibido affects how quickly your lust builds over time.  You may find a high libido to be more trouble than it's worth...");
 			menu();
 			addButton(0, "Yes", setEndowmentLibido);
 			addButton(1, "No", chooseEndowment, true);
@@ -1205,7 +1207,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentTouch():void {
 			clearOutput();
-			outputText("Is your skin unusually sensitive?  (+"+(50 * (player.newGamePlusMod() + 1))+" max Sensitivity)\n\nSensitivity affects how easily touches and certain magics will raise your lust.  Very low sensitivity will make it difficult to orgasm.");
+			outputText("Is your skin unusually sensitive?  (+50 current sensitivity)\n\nSensitivity affects how easily touches and certain magics will raise your lust.  Very low sensitivity will make it difficult to orgasm.");
 			menu();
 			addButton(0, "Yes", setEndowmentTouch);
 			addButton(1, "No", chooseEndowment, true);
@@ -1961,6 +1963,7 @@ import coc.view.MainView;
 			addButton(1, "Perk Select(2)", ascensionPerkMenu2).hint("Spend Ascension Perk Points on special perks!", "Perk Selection");
 			addButton(2, "Rare Perks(1)", rarePerks1).hint("Spend Ascension Points on rare special perks!", "Perk Selection");
 			addButton(3, "Rare Perks(2)", rarePerks2).hint("Spend Ascension Points on rare special perks!", "Perk Selection");
+			addButton(4, "Perm Spells", acensionPermSpellMenu).hint("Spend Ascension Perk Points to make certain spells permanent (10 points)", "Spell Selection");
 			addButton(5, "Perm Perks", ascensionPermeryMenu).hint("Spend Ascension Perk Points to make certain perks permanent (5/10 points).", "Perk Selection");
 			genMemPatch();
 			if (player.hasStatusEffect(StatusEffects.TranscendentalGeneticMemory)) {
@@ -2634,6 +2637,23 @@ import coc.view.MainView;
 			outputText("Your have gained new Bloodline.");
 		}
 
+		private function acensionPermSpellMenu(page:int = 1):void {
+			clearOutput();
+			outputText("For the price of ten points, you can make certain spells permanent and they will carry over in future ascensions. In addition, they can be used even if you don't have access to the specifc category spells yet.");
+			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
+			menu();
+			if (page == 1) {
+				if (player.hasStatusEffect(StatusEffects.KnowsPolarMidnight) && player.statusEffectv4(StatusEffects.KnowsPolarMidnight) != 9000) addButton(0, "Polar Midnight", permanentizeSpell, StatusEffects.KnowsPolarMidnight, 1);
+				else if (player.hasStatusEffect(StatusEffects.KnowsPolarMidnight) && player.statusEffectv4(StatusEffects.KnowsPolarMidnight) == 9000) addButtonDisabled(0, "Polar Midnight", "Polar Midnight spell is already permanent.");
+				else addButtonDisabled(0, "???", "You haven't learnt this spell yet!");
+
+				if (player.hasStatusEffect(StatusEffects.KnowsMeteorShower) && player.statusEffectv4(StatusEffects.KnowsMeteorShower) != 9000) addButton(1, "Meteor Shower", permanentizeSpell, StatusEffects.KnowsMeteorShower, 1);
+				else if (player.hasStatusEffect(StatusEffects.KnowsMeteorShower) && player.statusEffectv4(StatusEffects.KnowsMeteorShower) == 9000) addButtonDisabled(1, "Meteor Shower", "Meteor Shower spell is already permanent.");
+				else addButtonDisabled(1, "???", "You haven't learnt this spell yet!");
+			}
+			addButton(14, "Back", ascensionMenu);
+		}
+
 		private function ascensionPermeryMenu(page:int = 1):void {
 			clearOutput();
 			outputText("For the price of five points, you can make certain perks permanent and they will carry over in future ascensions. In addition, if the perks come from transformations, they will stay even if you no longer meet the requirements.");
@@ -2761,6 +2781,16 @@ import coc.view.MainView;
 			addButton(14, "Back", ascensionMenu);
 		}
 
+		private function permanentizeSpell(statusEffect:StatusEffectType, returnPage:int = 1):void {
+			//Not enough points or perk already permed? Cancel.
+			if (player.ascensionPerkPoints < 10) return;
+			if (player.statusEffectv4(statusEffect) == 9000) return;
+			//Deduct points
+			player.ascensionPerkPoints -= 10;
+			//Permanentize a perk
+			player.changeStatusValue(statusEffect, 4, 9000);
+			acensionPermSpellMenu(returnPage);
+		}
 		private function permanentizePerk1(perk:PerkType):void {
 			//Not enough points or perk already permed? Cancel.
 			if (player.ascensionPerkPoints < 5) return;
@@ -3282,5 +3312,21 @@ import coc.view.MainView;
 		private function isSpecialStatus(statusEffects:StatusEffectClass, statusEffect:* = null):Boolean {
 			return (statusEffect == StatusEffects.KnowsWereBeast || statusEffects.value4 == 9000);	//na razie jest tu tylko werebeast
 		}	//ale potem zamienić to na specialne soulskills z każdego z klanów
+
+		public static function hasAscensionSpell(spellCat:int):Boolean {
+			var spellsToCheck:/*StatusEffect*/Array;
+			switch(spellCat) {
+				case CombatAbility.CAT_SPELL_WHITE: spellsToCheck = [StatusEffects.KnowsMeteorShower];
+													break;
+				case CombatAbility.CAT_SPELL_BLACK: spellsToCheck = [StatusEffects.KnowsPolarMidnight];
+													break;
+			}
+			if (spellsToCheck) {
+				return spellsToCheck.some(function (statusEffect:StatusEffectType):Boolean {
+					return player.hasStatusEffect(statusEffect) && player.statusEffectv4(statusEffect) == 9000;
+				});
+			} else
+				return false;
+		}
 	} // what the fuck are those weird comments here? ^
 }

@@ -22,6 +22,7 @@ public class AbstractSpell extends CombatAbility {
 	protected var useManaType:int;
 	protected var canBackfire:Boolean = false;
 	protected var isAutocasting:Boolean = false;
+	protected var magicAddonProcs:int = 1;
 	
 	function AbstractSpell(
 			name:String,
@@ -33,6 +34,7 @@ public class AbstractSpell extends CombatAbility {
 	) {
 		super(name, desc, targetType, timingType, tags);
 		this.useManaType = useManaType;
+		this.lastAttackType = Combat.LAST_ATTACK_SPELL;
 	}
 
 	override public function manaCost():Number {
@@ -40,7 +42,7 @@ public class AbstractSpell extends CombatAbility {
 	}
 	
 	override public function useResources():void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		super.useResources();
 		//var realManaCost:Number = combat.finalSpellCost(manaCost(), useManaType);
 		var realManaCost:Number = manaCost();
 		var realWrathCost:Number = wrathCost();
@@ -103,12 +105,12 @@ public class AbstractSpell extends CombatAbility {
 		throw new Error("Method performSpellEffect() not implemented for ability " + name);
 	}
 	
-	protected function preSpellEffect():void {
-		MagicPrefixEffect();
+	protected function preSpellEffect(display:Boolean = true):void {
+		MagicPrefixEffect(display);
 	}
 	
-	protected function postSpellEffect():void {
-		MagicAddonEffect();
+	protected function postSpellEffect(display:Boolean = true):void {
+		MagicAddonEffect(magicAddonProcs);
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (monster is SiegweirdBoss) (monster as SiegweirdBoss).castedSpellThisTurn = true;
 	}
@@ -123,14 +125,14 @@ public class AbstractSpell extends CombatAbility {
 				outputText("As soon as your magic touches [themonster], it sizzles and fades to nothing.\n\n");
 			}
 		} else {
-			if (!isAutocasting) preSpellEffect();
+			if (!isAutocasting) preSpellEffect(display);
 			doSpellEffect(display);
 			if(monster.hasStatusEffect(StatusEffects.Blacken) && (hasTag(TAG_FIRE) || hasTag(TAG_AOE))) {
 				monster.removeStatusEffect(StatusEffects.Blacken);
 				player.removeStatusEffect(StatusEffects.Blind);
 				player.buff("Black Gas").remove();
 			}
-			if (!isAutocasting) postSpellEffect();
+			if (!isAutocasting) postSpellEffect(display);
 			if (display) {
 				outputText("\n\n");
 			}
@@ -155,8 +157,8 @@ public class AbstractSpell extends CombatAbility {
 	// Shortcuts and utilities
 	///////////////////////////
 	
-	protected function MagicPrefixEffect():void {
-		combat.magic.MagicPrefixEffect();
+	protected function MagicPrefixEffect(display:Boolean = true):void {
+		combat.magic.MagicPrefixEffect(display);
 	}
 	
 	protected function MagicAddonEffect(numberOfProcs:Number = 1):void {
@@ -305,18 +307,22 @@ public class AbstractSpell extends CombatAbility {
 				break;
 			}
 			case DamageType.WATER: {
+				damage = calcTideMod(damage, casting);
 				damage *= combat.waterDamageBoostedByDao();
 				break;
 			}
 			case DamageType.WIND: {
+				damage = calcGaleMod(damage, casting);
 				damage *= combat.windDamageBoostedByDao();
 				break;
 			}
 			case DamageType.EARTH: {
+				damage = calcQuakeMod(damage, casting);
 				damage *= combat.earthDamageBoostedByDao();
 				break;
 			}
 			case DamageType.ACID: {
+				damage = calcCorrosionMod(damage, casting);
 				damage *= combat.acidDamageBoostedByDao();
 				break;
 			}
@@ -498,7 +504,7 @@ public class AbstractSpell extends CombatAbility {
 				damageFn = doIceDamage;
 				break;
 			case DamageType.LIGHTNING:
-				damageFn = doLightingDamage;
+				damageFn = doLightningDamage;
 				break;
 			case DamageType.WATER:
 				damageFn = doWaterDamage;

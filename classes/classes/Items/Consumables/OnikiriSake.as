@@ -139,7 +139,6 @@ public class OnikiriSake extends Consumable {
 			if (CoC.instance.transformations.EyesOniColors.isPossible()) {
 				CoC.instance.transformations.EyesOniColors.applyEffect();
 			}
-
 			if (CoC.instance.transformations.EyesOni.isPossible()) {
 				CoC.instance.transformations.EyesOni.applyEffect();
 			}

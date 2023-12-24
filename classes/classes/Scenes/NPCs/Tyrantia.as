@@ -15,6 +15,8 @@ import classes.Scenes.SceneLib;
 import classes.internals.*;
 import classes.Monster;
 
+import coc.view.CoCButton;
+
 public class Tyrantia extends Monster
 	{
 		private function lustFromHits():Number {
@@ -53,8 +55,10 @@ public class Tyrantia extends Monster
 				dmg1 += eBaseIntelligenceDamage() * 0.2;
 				dmg1 = Math.round(dmg1);
 				dmg1 = player.takeAcidDamage(dmg1, true);
-				if (player.hasStatusEffect(StatusEffects.AcidDoT)) player.addStatusValue(StatusEffects.AcidDoT, 1, 1);
-				else player.createStatusEffect(StatusEffects.AcidDoT, 5, 10, 0, 0);
+				if (!player.immuneToAcid()) {
+					if (player.hasStatusEffect(StatusEffects.AcidDoT)) player.addStatusValue(StatusEffects.AcidDoT, 1, 1);
+					else player.createStatusEffect(StatusEffects.AcidDoT, 5, 10, 0, 0);
+				}
 				player.buff("Goop Web").addStats( {"spe":-25} ).withText("Goop Web").combatPermanent();
 			}
 		}
@@ -146,7 +150,13 @@ public class Tyrantia extends Monster
 			player.takeLustDamage((lustFromHits() * 4), true);
 			player.buff("Goop Web").addStats( {"spe":-20} ).withText("Goop Web").combatPermanent();
 		}
-		
+		override public function changeBtnWhenBound(btnStruggle:CoCButton, btnBoundWait:CoCButton):void{
+			if (player.hasStatusEffect(StatusEffects.Pounced)) {
+				outputText("\n<b>You’re trapped underneath the giant Drider, and all you can see is her armored undercarriage. Eight legs jab down at you, steel glinting dangerously. You need to get out of here, or you’ll end up crushed!</b>");
+				btnStruggle.call(tyrantiaPouncedStruggle);
+				btnBoundWait.call(tyrantiaPouncedWait);
+			}
+		}
 		protected override function outputDefaultTeaseReaction(lustDelta:Number):void {
 			if (lustDelta == 0) outputText("\n" + capitalA + short + " seems unimpressed.");
 			if (lustDelta > 0 && lustDelta < 4) outputText("\n" + capitalA + short + " looks intrigued by what " + pronoun1 + " sees.");

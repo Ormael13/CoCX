@@ -1,6 +1,7 @@
 package classes.Races {
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
+import classes.IMutations.IMutationsLib;
 import classes.GeneticMemories.RaceMem;
 import classes.PerkLib;
 import classes.Race;
@@ -60,6 +61,8 @@ public class WolfRace extends Race {
 				.rearType(RearBody.FENRIR_ICE_SPIKES, +6)
 				.hasPerk(PerkLib.FreezingBreath, +3)
 				.hasCockOfType(CockTypesEnum.WOLF, +1);
+		
+		addMutation(IMutationsLib.AlphaHowlIM);
 		
 		buildTier(8, "wolf")
 				.namesMaleFemaleTaur("wolf-boy", "wolf-girl", "wolf-taur")

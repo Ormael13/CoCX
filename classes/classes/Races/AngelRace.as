@@ -45,30 +45,30 @@ public class AngelRace extends Race {
 				//start ctrl-spacing here
 		;
 		
-		buildTier(11, "angel-kin")
+		buildTier(15, "angel-kin")
 				.buffs({
-					"str.mult": +0.30,
-					"tou.mult": +0.35,
-					"wis.mult": +1.00,
+					"str.mult": +0.25,
+					"tou.mult": +0.50,
+					"wis.mult": +1.50,
 					"maxlust_mult": -0.15,
 					"maxsf_mult": +1,
 					"maxwrath_mult": +0.6,
 					"maxmana_mult": -0.8
 				})
 				.end();
-		/*
-		buildTier(16, "tierName")
+		
+		buildTier(21, "angel")
+				//requirePerk(PerkLib.)-perk causing no mana for them like soulless make no sf for demons
 				.buffs({
-					"str.mult": +0.40,
-					"tou.mult": +0.60,
-					"wis.mult": +1.40,
+					"str.mult": +0.65,
+					"tou.mult": +0.70,
+					"wis.mult": +2.00,
+					"sens": +20,
 					"maxlust_mult": -0.3,
-					"maxsf_mult": +1,
-					"maxwrath_mult": +0.8,
-					"maxmana_mult": -0.8
+					"maxsf_mult": +1.5,
+					"maxwrath_mult": +0.8
 				})
 				.end();
-		 */
 	}
 }
 }

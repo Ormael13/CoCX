@@ -68,10 +68,10 @@ public class CoC extends MovieClip
         return _instance;
     }
     //Game Version
-    public var debugGameVer:String = "v0.8u2";
+    public var debugGameVer:String = "v0.8v.59.final";
 
     //Mod save version.
-    public var modSaveVersion:Number = 36.14;
+    public var modSaveVersion:Number = 36.30;
     public const levelCap:Number = 185;
 
     //Lock cheats menus from public
@@ -285,7 +285,7 @@ public class CoC extends MovieClip
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_" + debugGameVer;
-			ver += " (<b>Wereshark & Arigean TF's, many new dual variants of weapons, Dragonne race rework, Small expansion involving Evangeline and Galia, many QoL changes and bugfixes</b>)";
+			ver += " (<b>Perk-o-calipse 8 (around 40+ perks), large portion of combat code revamps, new bodyparts, new internal mutations, adding/adjusting/reworking racial bonuses of some races, Druid additions and many QoL/Bugfixing</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

@@ -40,7 +40,6 @@ public class IMutationsLib
 		//This one does nothing, and is simply to showcase and used as a dummy mutation to use for buffs..
 		public static const MutationsTemplateIM:IMutationPerkType = new MutationTemplate();
 		//Disabled mutations here. The contents are not filled. Please fill them in first.
-		public static const SlimeMetabolismIM:IMutationPerkType = new SlimeMetabolismMutation();
 		public static const NekomataThyroidGlandIM:IMutationPerkType = new NekomataThyroidGlandMutation();
 		public static const HellcatParathyroidGlandsIM:IMutationPerkType = new HellcatParathyroidGlandMutation();
 		public static const HengeyokaiBirthrightIM:IMutationPerkType = new HengeyokaiBirthrightMutation();
@@ -49,6 +48,7 @@ public class IMutationsLib
 		public static const AlphaHowlIM:IMutationPerkType = new AlphaHowlMutation();
 		public static const AnubiHeartIM:IMutationPerkType = new AnubiHeartMutation();
 		public static const ArachnidBookLungIM:IMutationPerkType = new ArachnidBookLungMutation();
+		public static const ArigeanAssociationCortexIM:IMutationPerkType = new ArigeanAssociationCortexMutation();
 		public static const BlackHeartIM:IMutationPerkType = new BlackHeartMutation();
 		public static const CatLikeNimblenessIM:IMutationPerkType = new CatLikeNimblenessMutation();
 		public static const CaveWyrmLungsIM:IMutationPerkType = new CaveWyrmLungsMutation();
@@ -104,6 +104,8 @@ public class IMutationsLib
 		public static const SalamanderAdrenalGlandsIM:IMutationPerkType = new SalamanderAdrenalGlandsMutation();
 		public static const ScyllaInkGlandsIM:IMutationPerkType = new ScyllaInkGlandsMutation();
 		public static const SharkOlfactorySystemIM:IMutationPerkType = new SharkOlfactorySystemMutation();
+		public static const SlimeFluidIM:IMutationPerkType = new SlimeFluidMutation();
+		public static const SlimeMetabolismIM:IMutationPerkType = new SlimeMetabolismMutation();
 		public static const TrachealSystemIM:IMutationPerkType = new TrachealSystemMutation();
 		public static const TwinHeartIM:IMutationPerkType = new TwinHeartMutation();
 		public static const VampiricBloodstreamIM:IMutationPerkType = new VampiricBloodstreamMutation();
@@ -120,7 +122,7 @@ public class IMutationsLib
 		 * @param spec any of the IMutationPerkType.SLOT_XXX constants, "" for all obtainable mutations, "All" for all mutations including deprecated
 		 * @return IMutationPerkType[]
 		 */
-		public static function mutationsArray(spec:String = ""):Array {
+		public static function mutationsArray(spec:String = ""):/*IMutationPerkType*/Array {
 			var list:Array = [];
 			if (spec && spec in IMutationPerkType.MutationsBySlot) {
 				list = IMutationPerkType.MutationsBySlot[spec].slice();
@@ -130,7 +132,6 @@ public class IMutationsLib
 					list = list.concat(IMutationPerkType.MutationsBySlot[slot]);
 				}
 			}
-			list.sort();
 			return list;
 		}
 

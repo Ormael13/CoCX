@@ -13,7 +13,7 @@ public class WaveOfEcstasySpell extends AbstractBlackSpell {
 			"The arouse spell draws on your own inner lust in order to enflame the enemies passions.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
-			[TAG_LUSTDMG, TAG_AOE]);
+			[TAG_LUSTDMG, TAG_AOE, TAG_TIER1]);
 		baseManaCost = 100;
 	}
 	
@@ -37,7 +37,7 @@ public class WaveOfEcstasySpell extends AbstractBlackSpell {
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
 		return adjustLustDamage(
-				player.inte,
+				scalingBonusIntelligence(),
 				monster,
 				CAT_SPELL_BLACK,
 				randomize
@@ -85,21 +85,17 @@ public class WaveOfEcstasySpell extends AbstractBlackSpell {
 		//Determine if critical tease!
 		var crit:Boolean   = false;
 		var critChance:int = 5;
-		if (player.hasPerk(PerkLib.CriticalPerformance)) {
-			if (player.lib <= 100) critChance += player.lib / 5;
-			if (player.lib > 100) critChance += 20;
-		}
+		critChance += combat.teases.combatTeaseCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
 			lustDmg *= 1.75;
 		}
-		lustDmg = Math.round(monster.lustVuln * lustDmg);
-		monster.teased(lustDmg, false);
+		monster.teased(lustDmg, false, display);
 		if (display) {
 			outputText(" damage.");
 		}
-		if (crit) outputText(" <b>Critical!</b>");
+		if (crit && display) outputText(" <b>Critical!</b>");
 		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		if (player.hasPerk(PerkLib.VerdantLeech)) {

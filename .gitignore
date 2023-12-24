@@ -28,3 +28,4 @@ CoC-AIR.airi
 /.idea/.gitignore
 Corruption-of-Champions.iml
 /.idea/runConfigurations.xml
+.vscode/settings.json

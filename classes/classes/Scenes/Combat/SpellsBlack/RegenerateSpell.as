@@ -47,7 +47,7 @@ public class RegenerateSpell extends AbstractBlackSpell {
 		return Math.round(hpChange2);
 	}
 	
-	public function calcDuration():int {
+	override public function calcDuration():int {
 		return 7;
 	}
 	

@@ -140,6 +140,7 @@ public class Races {
 	public static const WERESHARK:WeresharkRace            = new WeresharkRace(115);
 	public static const ABYSSAL_SHARK:AbyssalSharkRace     = new AbyssalSharkRace(116);
 	public static const ARIGEAN:ArigeanRace                = new ArigeanRace(117);
+	public static const DRACULA:DraculaRace                = new DraculaRace(118);
 
 	// Racial groups
 	public static const CatlikeRaces:/*Race*/Array   = [
@@ -161,7 +162,7 @@ public class Races {
 			// populated in load() as AllVisibleRaces - RacesExcludedFromRandomEnchantments
 	];
 	// Don't use these races when generating random enchantment
-	private static const RacesExcludedFromRandomEnchantments:/*RAce*/Array = [
+	private static const RacesExcludedFromRandomEnchantments:/*Race*/Array = [
 			ELEMENTALFUSION
 	];
 	

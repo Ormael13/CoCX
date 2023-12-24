@@ -53,6 +53,7 @@ public class CombatUI extends BaseCombatContent {
 	private var bloodSpellButtons:ButtonDataList = new ButtonDataList();
 	private var greenSpellButtons:ButtonDataList = new ButtonDataList();
 	private var soulforceButtons:ButtonDataList = new ButtonDataList();
+	private var eAspectButtons:ButtonDataList = new ButtonDataList();
 	private var otherButtons:ButtonDataList = new ButtonDataList();
 	public function mainMenu():void {
 		menu();
@@ -68,6 +69,7 @@ public class CombatUI extends BaseCombatContent {
 		bloodSpellButtons.clear();
 		greenSpellButtons.clear();
 		soulforceButtons.clear();
+		eAspectButtons.clear();
 		otherButtons.clear();
 
 		var btnMelee:CoCButton      = button(0).icon("A_Melee");
@@ -188,7 +190,7 @@ public class CombatUI extends BaseCombatContent {
 		if (player.isFlying() && (!Wings.Types[player.wings.type].canFly && Arms.Types[player.arms.type].canFly)){btnRanged.disable("It would be rather difficult to aim while flapping your arms."); }
 		if (player.isInGoblinMech()) {
 			if (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) {
-				if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Dual 2H Firearms") {
+				if (player.isFirearmTypeWeapon()) {
 					if (player.isUsingGoblinMechFriendlyFirearms()) btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon. <b>AMMO LEFT: "+player.ammo+"</b>").icon("A_Ranged");
 					else btnRanged.disable("Your firearms are not compatibile with the current piloted mech.");
 				}
@@ -236,25 +238,21 @@ public class CombatUI extends BaseCombatContent {
 			btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n").icon("A_Magic")
 		} else if (!combat.canUseMagic()) btnMagic.disable().icon("A_Magic")
 		// Submenu - Soulskills
-		combat.soulskills.buildMenu(soulforceButtons);
+		//combat.soulskills.buildMenu(soulforceButtons);
+		buildAbilityMenu(CombatAbilities.ALL_SOULSKILLS, soulforceButtons);
 		if (soulforceButtons.length > 0) btnSoulskills.show("Soulforce", submenuSoulforce, "Soulforce attacks menu.", "Soulforce Specials");
 		// Submenu - Other
-		combat.buildOtherActions(otherButtons);
+		buildAbilityMenu(CombatAbilities.ALL_ELEMENTAL_ASPECTS, eAspectButtons);
+		combat.buildOtherActions(otherButtons, submenuOther, eAspectButtons);
 		if (otherButtons.length > 0) btnOther.show("Other", submenuOther, "Combat options and uncategorized actions");
 
 		btnFantasize.show("Fantasize", combat.fantasize, "Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.");
-		if (player.isInGoblinMech()) {
-			if (player.hasKeyItem("Lustnade Launcher") >= 0) {
-				btnTease.show("Lustnade Launcher", combat.goboLustnadeLauncher, "Launch Lustnade at enemy, dealing really heavy lust damage.").icon("A_Tease");
-				if (player.hasStatusEffect(StatusEffects.CooldownLustnadeLauncher)) btnTease.disable("<b>You need more time before you can use Lustnade Launcher again.</b>").icon("A_Tease");
-			}
-			else if (player.hasKeyItem("Aphrodigas Gun") >= 0) btnTease.show("Aphrodigas Gun", combat.goboLustnadeLauncher, "Gassing the opponent with aphrodisiacs.").icon("A_Tease");
-			else btnTease.disable("No way you could make an enemy more aroused by striking a seductive pose and exposing parts of your body while piloting goblin mech.");
+		if (CombatAbilities.GoblinLustBomb.isKnown) {
+			CombatAbilities.GoblinLustBomb.createButton(monster).applyTo(btnTease);
 		}
 		else if (player.vehicles == vehicles.HB_MECH) btnTease.disable("No way you could make an enemy more aroused by striking a seductive pose and exposing parts of your body while piloting elf mech.");
-		else if (monster.lustVuln != 0 && monster.hasStatusEffect(StatusEffects.Stunned) && player.hasPerk(PerkLib.Straddle)) btnTease.show("Straddle", combat.Straddle, "Go to town on your opponent with devastating teases.").icon("A_Tease");
-		else btnTease.show("Tease", combat.teaseAttack, "Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.").icon("A_Tease");
-		if (combat.isEnemyInvisible) btnTease.disable("You cannot tease an opponent you cannot see or target, heck is it even looking at you right now?");
+		else if (monster.lustVuln != 0 && monster.hasStatusEffect(StatusEffects.Stunned) && player.hasPerk(PerkLib.Straddle) && !combat.isEnemyInvisible) btnTease.show("Straddle", combat.Straddle, "Go to town on your opponent with devastating teases.").icon("A_Tease");
+		else CombatAbilities.Tease.createButton(monster).applyTo(btnTease);
 		btnWait.show("Wait", combat.wait, "Take no action for this round.  Why would you do this?  This is a terrible idea.");
 		if (monster.hasStatusEffect(StatusEffects.CreepingDoom)) btnRun.show("Struggle", combat.struggleCreepingDoom, "Shake away the pests.");
 		else btnRun.show("Run", combat.runAway, "Choosing to run will let you try to escape from your enemy. However, it will be hard to escape enemies that are faster than you and if you fail, your enemy will get a free attack.");
@@ -272,6 +270,8 @@ public class CombatUI extends BaseCombatContent {
 			doWispTurn();
 		else if (isMummyTurn())
 			doMummyTurn();
+		else if (isFlyingSwordTurn())
+			doFlyingSwordTurn();
 		else if (isCompanionTurn(0))
 			doCompanionTurn(0);
 		else if (isCompanionTurn(1) && !player.hasStatusEffect(StatusEffects.MinoKing) && player.statusEffectv1(StatusEffects.MinoKing) != 1)
@@ -314,8 +314,8 @@ public class CombatUI extends BaseCombatContent {
 			}
 		} else if (monster.hasStatusEffect(StatusEffects.HypnosisNaga) && monster.hasStatusEffect(StatusEffects.Constricted)) {
 			menu();
-			addButton(0, "Squeeze", SceneLib.desert.nagaScene.naggaSqueeze).hint("Squeeze some HP out of your opponent! Break hypnosis! \n\nFatigue Cost: " + physicalCost(20) + "");
-			addButton(1, "Tease", SceneLib.desert.nagaScene.naggaTease).hint("Deals lesser lust damage. Does not break hypnosis.");
+			addButton(0, "Squeeze", SceneLib.desert.nagaScene.nagaSqueeze).hint("Squeeze some HP out of your opponent! Break hypnosis! \n\nFatigue Cost: " + physicalCost(20) + "");
+			addButton(1, "Tease", SceneLib.desert.nagaScene.nagaTease).hint("Deals lesser lust damage. Does not break hypnosis.");
 			if (player.perkv1(IMutationsLib.HollowFangsIM) >= 2) {
 				addButton(3, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. Break hypnosis! \n\nFatigue Cost: " + physicalCost(20) + "");
 				if (player.fatigueLeft() <= combat.physicalCost(20)) {
@@ -327,8 +327,8 @@ public class CombatUI extends BaseCombatContent {
 		//Naga grapple
 		else if (monster.hasStatusEffect(StatusEffects.Constricted) && !monster.hasStatusEffect(StatusEffects.HypnosisNaga)) {
 			menu();
-			addButton(0, "Squeeze", SceneLib.desert.nagaScene.naggaSqueeze).hint("Squeeze some HP out of your opponent! \n\nFatigue Cost: " + physicalCost(20) + "");
-			addButton(1, "Tease", SceneLib.desert.nagaScene.naggaTease);
+			addButton(0, "Squeeze", SceneLib.desert.nagaScene.nagaSqueeze).hint("Squeeze some HP out of your opponent! \n\nFatigue Cost: " + physicalCost(20) + "");
+			addButton(1, "Tease", SceneLib.desert.nagaScene.nagaTease);
 			vampireBiteDuringGrapple(3);
 			addButton(4, "Release", SceneLib.desert.nagaScene.nagaLeggoMyEggo);
 		} else if (monster.hasStatusEffect(StatusEffects.CancerGrab)) {
@@ -375,7 +375,7 @@ public class CombatUI extends BaseCombatContent {
 					button(1).disable("You are too tired to bite " + monster.a + " [monster name].");
 				}
 			}
-			addButton(4, "Release", combat.StraddleLeggoMyEggo).hint("Release your opponent.");
+			addButton(4, "Release", combat.straddleLeggoMyEggo).hint("Release your opponent.");
 		} else if (monster.hasStatusEffect(StatusEffects.ManticorePlug)) {
 			menu();
 			addButton(0, "Feed", combat.ManticoreFeed).hint("Milk your victim's cock with your powerful tail!");
@@ -454,7 +454,20 @@ public class CombatUI extends BaseCombatContent {
 				}
 			}
 			else addButtonDisabled(0, "Bite", "If only you had fangs.");
+			CombatAbilities.Tease.createButton(monster).applyTo(btnTease);
+			btnTease.hint("Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.");
 			//addButton(4, "Release", combat.VampireLeggoMyEggo);
+			//combat.mspecials.buildMenu(magspButtons);
+			if (magspButtons.length > 0) btnMSpecials.show("M. Specials", submenuMagSpecials, "Mental and supernatural special attack menu.", "Magical Specials");
+			if (combat.isPlayerSilenced()) {
+				btnMSpecials.disable();
+			}
+			// Submenu - Spells
+			//BuildSpellBookMenu(spellBookButtons);
+			if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells").icon("A_Magic")
+			if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathSpellcasting()) {
+				btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n").icon("A_Magic")
+			} else if (!combat.canUseMagic()) btnMagic.disable().icon("A_Magic")
 		} else if (monster.hasStatusEffect(StatusEffects.MysticWeb)) {
 			menu();
 			addButton(0, "Tease", combat.WebTease).hint("Toy with your opponent");
@@ -534,68 +547,47 @@ public class CombatUI extends BaseCombatContent {
 			if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn))
 				combat.simplifiedPrePCTurn_stupid();
 			//again, no else after - ally turns SHOULD be disabled.
+			flushOutputTextToGUI();
 			if (isGolemTurn())
 				doGolemTurn();
-			if (isSkeletonsTurn())
+			else if (isSkeletonsTurn())
 				combat.sendSkeletonToFight();
 			else if (isEpicElementalTurn())
 				doEpicElementalTurn();
 			else if (isElementalTurn())
 				doElementalTurn();
+			else if (isBloodPuppiesTurn())
+				doBloodPuppiesTurn();
 			//UNIQUE OPTIONS - No changes applied, player turn, no status/CC
 			else {
-				if (monster is SandTrap) {
-					btnSpecial1.show("Climb", combat.wait2, "Climb the sand to move away from the sand trap.");
-				}
-				else if (monster is Alraune) {
-					if (player.fatigueLeft() < 50) btnSpecial1.disable("You're too tired to struggle.");
-					else btnSpecial1.show("Struggle", combat.wait2, "Struggle to forcefully pull yourself a good distance away from plant woman.");
-				}
-				else if (monster is DriderIncubus) {
-					var drider:DriderIncubus = monster as DriderIncubus;
-					if (!drider.goblinFree) btnSpecial1.show("Free Goblin", drider.freeGoblin);
-				}
-				else if (monster is MinotaurKing) {
-					var minoking:MinotaurKing = monster as MinotaurKing;
-					if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.companionsInPCParty()) btnSpecial1.show("Dish Helper", SceneLib.hexindao.dishHelper);
-					else btnSpecial1.showDisabled("Dish Helper", "You don't have anyone to take care of "+(player.hasStatusEffect(StatusEffects.SoulArena)?"cow maid":"Excellia")+"!");
-				}
-				else if (monster is AngelLR && player.hasStatusEffect(StatusEffects.SoulArena)) {
-					if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.companionsInPCParty()) btnSpecial1.show("Dish Helper", SceneLib.hexindao.dishHelperIL);
-					else btnSpecial1.showDisabled("Dish Helper", "You don't have anyone to take care of second angel!");
-				}
-				else if (monster is TwinBosses) {
-					if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.companionsInPCParty()) btnSpecial1.show("Dish Helper", SceneLib.dungeons.riverdungeon.dishHelperTB);
-					else btnSpecial1.showDisabled("Dish Helper", "You don't have anyone to take care of other twin!");
-				}
-				else if (monster is Lethice) {
-					var lethice:Lethice = monster as Lethice;
-					if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles)) {
-						if (player.lust < combat.magic.getWhiteMagicLustCap() && player.hasStatusEffect(StatusEffects.KnowsWhitefire)
-							&& ((!player.hasPerk(PerkLib.BloodMage) && player.mana >= 30) || (player.hasStatusEffect(StatusEffects.BloodMage) && ((player.HP + 30) > (player.minHP() + 30))))) {
-							btnSpecial1.show("Dispel", lethice.dispellRapetacles);
-						}
-					}
-				}
-				else if (monster is WoodElvesHuntingParty) {
-					var woodelves:WoodElvesHuntingParty = monster as WoodElvesHuntingParty;
-					if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0) btnSpecial1.show("Pick (M)", woodelves.pickUpMelee, "Pick up your melee weapon.");
-					if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0) btnSpecial2.show("Pick (R)", woodelves.pickUpRange, "Pick up your range weapon.");
-				}
+				// Migrate Sand Trap/Alruine/Drider Incubus/Minotaur King/AngelLR/TwinBosses/Lethice/WoodElvesHuntingParty
+				monster.postPlayerBusyBtnSpecial(btnSpecial1,btnSpecial2);
+
 				if ((player.weaponRange == weaponsrange.GTHRSPE && player.ammo <= 15) || ((player.weaponRange == weaponsrange.ATKNIFE || player.weaponRange == weaponsrange.RTKNIFE || player.weaponRange == weaponsrange.STKNIFE || player.weaponRange == weaponsrange.TTKNIFE) && player.ammo <= 10)
 				|| ((player.weaponRange == weaponsrange.GTHRAXE || player.weaponRange == weaponsrange.O_JAVEL || player.weaponRange == weaponsrange.TRJAVEL) && player.ammo <= 5)) {
 					btnSpecial3.show("Pick", combat.pickUpThrownWeapons, "Pick up some of the thrown weapons.");
 				}
 			}
+			flushOutputTextToGUI();
 		}
 	}
 
 	public function isWispTurn():Boolean {
-		return player.hasPerk(PerkLib.JobLeader) && flags[kFLAGS.WILL_O_THE_WISP] < 2 && flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 1;
+		return CombatAbilities.WillOfTheWisp.isKnownAndUsable && flags[kFLAGS.WILL_O_THE_WISP] < 2 && flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 1;
 	}
 
 	public function doWispTurn():void {
-		if (flags[kFLAGS.WILL_O_THE_WISP] == 0) combat.willothewispattacks();
+		function doWillOfTheWispAttack():void {
+			if (CombatAbilities.WillOfTheWisp.isKnownAndUsable) {
+				CombatAbilities.WillOfTheWisp.perform();
+				flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] = 1;
+				if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
+					menu();
+					addButton(0, "Next", combatMenu, false);
+				}
+			}
+		}
+		if (flags[kFLAGS.WILL_O_THE_WISP] == 0) doWillOfTheWispAttack();
 		else {
 			clearOutput();
 			outputText("Would you like your wisp to attack?");
@@ -603,16 +595,40 @@ public class CombatUI extends BaseCombatContent {
 			outputText("\n<b>You can also enable \"Simplified Pre-PC Turn\" in Perk menu to set all your allies' behaviour to automatic and avoid pressing the 'Next' button every time.</b>\n\n");
 			menu();
 			addButton(0, "Skip", combat.willothewispskip).hint("You forfeit this attack of the wisp. Would skip to next minion attack/your main turn.");
-			addButton(1, "Attack", combat.willothewispattacks).hint("The wisp attacks your enemy.");
+			addButton(1, "Attack", doWillOfTheWispAttack).hint("The wisp attacks your enemy.");
 		}
 	}
 
+	public function isFlyingSwordTurn():Boolean {
+		return CombatAbilities.FlyingSwordAttack.isKnownAndUsable && flags[kFLAGS.FLYING_SWORD] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_FLYING_SWORD_ATTACKED] != 1;
+	}
+
+	public function doFlyingSwordTurn():void {
+		if (CombatAbilities.FlyingSwordAttack.isKnownAndUsable) {
+			CombatAbilities.FlyingSwordAttack.preTurnAttack = true;
+			CombatAbilities.FlyingSwordAttack.perform();
+			CombatAbilities.FlyingSwordAttack.preTurnAttack = false;
+			flags[kFLAGS.IN_COMBAT_PLAYER_FLYING_SWORD_ATTACKED] = 1;
+			if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
+				menu();
+				addButton(0, "Next", combatMenu, false);
+			}
+		}	
+	}
+
 	public function isMummyTurn():Boolean {
-		return player.hasPerk(PerkLib.MummyLord) && player.perkv1(PerkLib.MummyLord) > 0 && flags[kFLAGS.IN_COMBAT_PLAYER_MUMMY_ATTACKED] != 1;
+		return CombatAbilities.MummyAttack.isKnownAndUsable && flags[kFLAGS.IN_COMBAT_PLAYER_MUMMY_ATTACKED] != 1 && flags[kFLAGS.MUMMY_ATTACK] == 1;
 	}
 	
 	public function doMummyTurn():void {
-		combat.mummyattacks();
+		if (CombatAbilities.MummyAttack.isKnownAndUsable) {
+			CombatAbilities.MummyAttack.perform();
+			flags[kFLAGS.IN_COMBAT_PLAYER_MUMMY_ATTACKED] = 1;
+			if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
+				menu();
+				addButton(0, "Next", combatMenu, false);
+			}
+		}
 	}
 
 	public function isGolemTurn():Boolean {
@@ -685,7 +701,7 @@ public class CombatUI extends BaseCombatContent {
 	}
 
 	public function isEpicElementalTurn():Boolean {
-		return player.hasPerk(PerkLib.FirstAttackElementalsSu) && player.statusEffectv2(StatusEffects.SummonedElementals) > 0 && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 1;
+		return player.hasPerk(PerkLib.FirstAttackElementalsSu) && player.statusEffectv2(StatusEffects.SummonedElementals) > 0 && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && !flags[kFLAGS.IN_COMBAT_PLAYER_EPIC_ELEMENTAL_ATTACKED];
 	}
 
 	public function doEpicElementalTurn():void {
@@ -696,24 +712,24 @@ public class CombatUI extends BaseCombatContent {
 		addButton(0, "None", combat.baseelementalattacks, Combat.NONE_E).hint("You forfeit potential attack of epic elemental. Would skip to next minion attack/your main turn.");
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsAirE)) {
 			if (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == 1) addButtonDisabled(1, "Air(E)", "You can't command this elemental to attack (independently of you) when you're currently fused with it.");
-			else addButton(1, "Air(E)", combat.baseelementalattacks, Combat.AIR_E);
+			else addButton(1, "Air(E)", combat.baseelementalattacks, Combat.AIR_E, true);
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE)) {
 			if (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == 2) addButtonDisabled(2, "Earth(E)", "You can't command this elemental to attack (independently of you) when you're currently fused with it.");
-			else addButton(2, "Earth(E)", combat.baseelementalattacks, Combat.EARTH_E);
+			else addButton(2, "Earth(E)", combat.baseelementalattacks, Combat.EARTH_E, true);
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE)) {
 			if (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == 3) addButtonDisabled(3, "Fire(E)", "You can't command this elemental to attack (independently of you) when you're currently fused with it.");
-			else addButton(3, "Fire(E)", combat.baseelementalattacks, Combat.FIRE_E);
+			else addButton(3, "Fire(E)", combat.baseelementalattacks, Combat.FIRE_E, true);
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE)) {
 			if (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == 4) addButtonDisabled(4, "Water(E)", "You can't command this elemental to attack (independently of you) when you're currently fused with it.");
-			else addButton(4, "Water(E)", combat.baseelementalattacks, Combat.WATER_E);
+			else addButton(4, "Water(E)", combat.baseelementalattacks, Combat.WATER_E, true);
 		}
 	}
 
 	public function isElementalTurn():Boolean {
-		return player.hasPerk(PerkLib.FirstAttackElementals) && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 2;
+		return player.hasPerk(PerkLib.FirstAttackElementals) && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && !flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED];
 	}
 
 	public function doElementalTurn():void {
@@ -735,6 +751,32 @@ public class CombatUI extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsPoison)) addButton(11, "Poison", combat.baseelementalattacks, Combat.POISON);
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsPurity)) addButton(12, "Purity", combat.baseelementalattacks, Combat.PURITY);
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) addButton(13, "Corruption", combat.baseelementalattacks, Combat.CORRUPTION);
+	}
+
+	public function isBloodPuppiesTurn():Boolean {
+		return player.hasPerk(PerkLib.MyBloodForBloodPuppies) && flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] != 1 && flags[kFLAGS.BLOOD_PUPPY_SUMMONS] != 0;
+	}
+
+	public function doBloodPuppiesTurn():void {
+		clearOutput();
+		outputText("\n\nWould you like your blood puppies to attack?");
+		outputText("\n<b>You can enable \"Simplified Pre-PC Turn\" in Perk menu to change their behavior to automatic and avoid pressing the button every time.</b>");
+		menu();
+
+		var confirmFunction:Function = function(performFunc:Function):void {
+			clearOutput();
+			performFunc();
+			menu();
+			addButton(0, "Next", combatMenu, false);
+		}
+		addButton(0, "None", combat.notAttackWithBloodPuppies).hint("You forfeit potential attack of your blood puppies. Would skip to next minion attack/your main turn.");
+		addButton(1, "Blood Swipe", confirmFunction, CombatAbilities.BPBloodSwipe.perform)
+			.disableIf(!CombatAbilities.BPBloodSwipe.isKnownAndUsable);
+		addButton(2, "Blood Dewdrops", confirmFunction, CombatAbilities.BPBloodDewdrops.perform)
+			.disableIf(!CombatAbilities.BPBloodDewdrops.isKnownAndUsable);
+		addButton(3, "Heart Seeker", confirmFunction, CombatAbilities.BPHeartSeeker.perform)
+			.disableIf(!CombatAbilities.BPHeartSeeker.isKnownAndUsable);
+		
 	}
 
 	public function isCompanionTurn(num:int):Boolean {
@@ -766,17 +808,21 @@ public class CombatUI extends BaseCombatContent {
 			: num == 1 ? flags[kFLAGS.PLAYER_COMPANION_1]
 				: num == 2 ? flags[kFLAGS.PLAYER_COMPANION_2]
 					: flags[kFLAGS.PLAYER_COMPANION_3];
+		if(!monster.preCompanionSeal(companionName)){
+			return;
+		}
 		var actFunction:Function = companionName == "Alvina" ? combat.comfoll.alvinaCombatActions
 			: companionName == "Amily" ? combat.comfoll.amilyCombatActions
 				: companionName == "Aurora" ? combat.comfoll.auroraCombatActions
 					: companionName == "Etna" ? combat.comfoll.etnaCombatActions
 						: companionName == "Excellia" ? combat.comfoll.excelliaCombatActions
-							: companionName == "Kiha" ? combat.comfoll.kihaCombatActions
-								: companionName == "Midoka" ? combat.comfoll.midokaCombatActions
-									: companionName == "Mitzi" ? combat.comfoll.mitziCombatActions
-										: companionName == "Neisa" ? combat.comfoll.neisaCombatActions
-											: companionName == "Tyrantia" ? combat.comfoll.tyrantiaCombatActions
-												: companionName == "Zenji" ? combat.comfoll.zenjiCombatActions : null;
+							: companionName == ""+flags[kFLAGS.GHOULISH_VAMPIRE_SERVANT_NAME]+"" ? combat.comfoll.ghoulishVampServCombatActions
+								: companionName == "Kiha" ? combat.comfoll.kihaCombatActions
+									: companionName == "Midoka" ? combat.comfoll.midokaCombatActions
+										: companionName == "Mitzi" ? combat.comfoll.mitziCombatActions
+											: companionName == "Neisa" ? combat.comfoll.neisaCombatActions
+												: companionName == "Tyrantia" ? combat.comfoll.tyrantiaCombatActions
+													: companionName == "Zenji" ? combat.comfoll.zenjiCombatActions : null;
 		//do action
 		if (clearAndNext) {
 			clearOutput();
@@ -790,6 +836,7 @@ public class CombatUI extends BaseCombatContent {
 			menu();
 			addButton(0, "Next", combatMenu, false);
 		}
+		monster.postCompanionAction();
 	}
 
 	private function BuildSpellBookMenu(buttons:ButtonDataList):void {
@@ -887,53 +934,18 @@ public class CombatUI extends BaseCombatContent {
 		}
 		addButton(13, "Surrender(H)", combat.surrenderByHP).hint("Stop defending up to the point enemy would beat you down to minimal HP.");
 		addButton(14, "Surrender(L)", combat.surrenderByLust).hint("Fantasize about your opponent in a sexual way so much it would fill up your lust you'll end up getting raped.");
-		if (player.hasStatusEffect(StatusEffects.Bound)) {
-			btnStruggle.call((monster as Ceraph).ceraphBindingStruggle);
-			btnBoundWait.call((monster as Ceraph).ceraphBoundWait);
-		}
-		if (player.hasStatusEffect(StatusEffects.CancerMonsterGrab)) {
-			btnStruggle.call((monster as CancerAttack).cancerGrabStruggle);
-			btnBoundWait.call((monster as CancerAttack).cancerGrabWait);
-		}
-		if (player.hasStatusEffect(StatusEffects.Chokeslam)) {
-			btnStruggle.call((monster as Izumi).chokeSlamStruggle);
-			btnBoundWait.call((monster as Izumi).chokeSlamWait);
-		}
-		if (player.hasStatusEffect(StatusEffects.Devoured)) {
-			btnStruggle.call((monster as SandWorm).sandWormDevourStruggle);
-			btnBoundWait.call((monster as SandWorm).sandWormDevourWait);
-		}
-		if (player.hasStatusEffect(StatusEffects.Titsmother)) {
-			btnStruggle.call((monster as Izumi).titSmotherStruggle);
-			btnBoundWait.call((monster as Izumi).titSmotherWait);
-		}
-		if (player.hasStatusEffect(StatusEffects.Terrorize)) {
-			btnStruggle.call((monster as Grayda).graydaTerrorizeStruggle);
-			btnBoundWait.call((monster as Grayda).graydaTerrorizeWait);
-		}
-		if (player.hasStatusEffect(StatusEffects.Pounced)) {
-			if (monster is Tyrantia) {
-				outputText("\n<b>You’re trapped underneath the giant Drider, and all you can see is her armored undercarriage. Eight legs jab down at you, steel glinting dangerously. You need to get out of here, or you’ll end up crushed!</b>");
-				btnStruggle.call((monster as Tyrantia).tyrantiaPouncedStruggle);
-				btnBoundWait.call((monster as Tyrantia).tyrantiaPouncedWait);
-			} else if (monster is ProjectTyrant) {
-				outputText("You are pinned underneath the Drider-beast’s weight, and it begins to crush you!");
-				btnStruggle.call((monster as ProjectTyrant).TackleGrappleStruggle);
-				btnBoundWait.call((monster as ProjectTyrant).TackleGrappleWait);
-			} else if (monster is Incels) {
-				outputText("You are buried under the incels’ writhing mass, and they’re still trying to tear you apart!");
-				btnStruggle.call((monster as Incels).RipStruggle);
-				btnBoundWait.call((monster as Incels).RipWait);
-			}
-		}
-		if (player.hasStatusEffect(StatusEffects.Tentagrappled)) {
-			btnStruggle.call((monster as SuccubusGardener).grappleStruggle);
-			btnBoundWait.call((monster as SuccubusGardener).grappleWait);
-		}
-		if (player.hasStatusEffect(StatusEffects.YamataEntwine)) {
-			btnStruggle.call((monster as Yamata).entwineStruggle);
-			btnBoundWait.call((monster as Yamata).entwineWait);
-		}
+		// Migrate ceraph bound check (StatusEffects.Bound only used by ceraph)
+		// Migrate cancer grab check (StatusEffects.CancerMonsterGrab)
+		// Migrate Izumi choke and tits (StatusEffects.Chokeslam,StatusEffects.Titsmother) insert dommy mommy smth
+		// Migrate Sandworm Devoured check (same shit again)
+		// Migrate Grayda Terrorize check (StatusEffects.Terrorize only used by Grayda) who is this????
+		// Migrate Tyrantia/ProjectTyrant/Incels Pounced check (StatusEffects.Pounced)
+		// Migrate SuccubusGardener Grapple (StatusEffects.Tentagrappled)
+		// Migrate Yamata Entwine (StatusEffects.YamataEntwine)
+		// I need to figure how to make addButton available can I just change it to public
+		// PS: do we really need status effect to check when it can be just private var in monster subclass to keep track
+		monster.changeBtnWhenBound(btnStruggle,btnBoundWait);
+
 		if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles) && player.statusEffectv3(StatusEffects.LethicesRapeTentacles) == 1) {
 			outputText("\n<b>Lethice's tentacles have a firm grip of your limbs!</b>");
 			addButton(0, "Struggle", (monster as Lethice).grappleStruggle);

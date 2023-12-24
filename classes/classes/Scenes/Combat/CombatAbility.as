@@ -1,8 +1,12 @@
 package classes.Scenes.Combat {
 import classes.Monster;
 import classes.internals.EnumValue;
+import classes.StatusEffectType;
 
 import coc.view.ButtonData;
+import classes.GlobalFlags.kFLAGS;
+import classes.Appearance;
+import mx.formatters.NumberFormatter;
 
 /**
  * A combat ability invokable by player (spell, special, skill, etc).
@@ -89,7 +93,7 @@ public class CombatAbility extends BaseCombatContent {
 	});
 	public static const CAT_SOULSKILL:int   = EnumValue.add(AllCategories, 3, "SOULSKILL", {
 		name:"Soulskill",
-		group:"spell"
+		group:"soulskill"
 	});
 	public static const CAT_SPELL_WHITE:int = EnumValue.add(AllCategories, 4, "SPELL_WHITE", {
 		name:"White Spell",
@@ -123,6 +127,10 @@ public class CombatAbility extends BaseCombatContent {
 		name:"Green Spell",
 		group:"spell"
 	});
+	public static const CAT_BLOOD_SOULSKILL:int   = EnumValue.add(AllCategories, 12, "BLOOD_SOULSKILL", {
+		name:"Blood Soulskill",
+		group:"soulskill"
+	});
 	
 	public static var AllTags:/*EnumValue*/Array = [];
 	public static const TAG_DAMAGING:int = EnumValue.add(AllTags, 0, 'DAMAGING', {
@@ -143,19 +151,19 @@ public class CombatAbility extends BaseCombatContent {
 	});
 	public static const TAG_FIRE:int = EnumValue.add(AllTags, 4, 'FIRE', {
 		name: 'Fire',
-		desc: "This ability primary element is Fire"
+		desc: "This ability's primary element is Fire"
 	});
 	public static const TAG_LIGHTNING:int = EnumValue.add(AllTags, 5, 'LIGHTNING', {
 		name: 'Lightning',
-		desc: "This ability primary element is Lightning"
+		desc: "This ability's primary element is Lightning"
 	});
 	public static const TAG_ICE:int = EnumValue.add(AllTags, 6, 'ICE', {
 		name: 'Ice',
-		desc: "This ability primary element is Ice"
+		desc: "This ability's primary element is Ice"
 	});
 	public static const TAG_DARKNESS:int = EnumValue.add(AllTags, 7, 'DARKNESS', {
 		name: 'Darkness',
-		desc: "This ability primary element is Darkness"
+		desc: "This ability's primary element is Darkness"
 	});
 	public static const TAG_HEALING:int = EnumValue.add(AllTags, 8, 'HEALING', {
 		name: 'Healing',
@@ -171,36 +179,57 @@ public class CombatAbility extends BaseCombatContent {
 	});
 	public static const TAG_WATER:int = EnumValue.add(AllTags, 11, 'WATER', {
 		name: 'Water',
-		desc: "This ability primary element is Water"
+		desc: "This ability's primary element is Water"
 	});
 	public static const TAG_WIND:int = EnumValue.add(AllTags, 12, 'WIND', {
 		name: 'Wind',
-		desc: "This ability primary element is Wind"
+		desc: "This ability's primary element is Wind"
 	});
 	public static const TAG_EARTH:int = EnumValue.add(AllTags, 13, 'EARTH', {
 		name: 'Earth',
-		desc: "This ability primary element is Earth"
+		desc: "This ability's primary element is Earth"
 	});
 	public static const TAG_ACID:int = EnumValue.add(AllTags, 14, 'ACID', {
 		name: 'Acid',
-		desc: "This ability primary element is Acid"
+		desc: "This ability's primary element is Acid"
 	});
 	public static const TAG_TIER1:int = EnumValue.add(AllTags, 15, 'TIER1', {
 		name: 'Tier1',
 		desc: "This ability is tier 1"
+	});
+	public static const TAG_TIER2:int = EnumValue.add(AllTags, 16, 'TIER2', {
+		name: 'Tier2',
+		desc: "This ability is tier 2"
+	});
+	public static const TAG_TIER3:int = EnumValue.add(AllTags, 17, 'TIER3', {
+		name: 'Tier3',
+		desc: "This ability is tier 3"
+	});
+	public static const TAG_PHYSICAL:int = EnumValue.add(AllTags, 18, 'PHYSICAL', {
+		name: 'Physical',
+		desc: "This ability deals physical damage"
+	});
+	public static const TAG_MAGICAL:int = EnumValue.add(AllTags, 19, 'MAGICAL', {
+		name: 'Magical',
+		desc: "This ability deals magical damage"
 	});
 	
 	/**
 	 * Unique id of this ability.
 	 */
 	public var id:int;
-	private var _name:String;
+	protected var _name:String;
 	private var _desc:String;
 	public var targetType:int;
 	public var timingType:int;
 	private var _tags:/*Boolean*/Array;
+	public var icon:String;
 	public var baseManaCost:Number = 0;
 	public var baseWrathCost:Number = 0;
+	public var baseSFCost:Number = 0;
+	public var baseFatigueCost:Number = 0;
+	public var processPostCallback:Boolean = true;
+	protected var lastAttackType:int = 0;
 	
 	public function CombatAbility(
 			name:String,
@@ -252,6 +281,21 @@ public class CombatAbility extends BaseCombatContent {
 	public function hasTag(tag:int):Boolean {
 		return _tags[tag];
 	}
+
+	protected function addTag(tag:int):Boolean {
+		if (tag >= 0 && tag <= _tags.length && !_tags[tag]) {
+			return _tags[tag] = true;
+		}
+		return false;
+		
+	}
+
+	protected function removeTag(tag:int):Boolean {
+		if (tag >= 0 && tag <= _tags.length && _tags[tag]) {
+			return !(_tags[tag] = false);
+		}
+		return false;
+	}
 	
 	/**
 	 * Describe effect (for example, approximate damage).
@@ -267,6 +311,8 @@ public class CombatAbility extends BaseCombatContent {
 	 */
 	public function isActive():Boolean {
 		if (timingType == TIMING_INSTANT) return false;
+		if (timingType == TIMING_LASTING) return (player.durations[id] > 0);
+		if (timingType == TIMING_TOGGLE) return (player.durations[id] == -1);
 		throw new Error("Method isActive() is not implemented for ability "+name+", or it's timing type is incorrect");
 	}
 	
@@ -283,7 +329,14 @@ public class CombatAbility extends BaseCombatContent {
 	 * @param display Print the effect
 	 */
 	public function advance(display:Boolean):void {
-		/* do nothing */
+		// Decrement Duration if needed
+		if (player.durations[id] > 0) {
+			player.durations[id]--;
+			if (player.durations[id] == 0) {
+				durationEnd(display);
+			}
+		}
+        
 	}
 	
 	/**
@@ -300,6 +353,12 @@ public class CombatAbility extends BaseCombatContent {
 		if (hpCost() > 0) {
 			costs.push("HP Cost: " + hpCost());
 		}
+		if (fatigueCost() > 0) {
+			costs.push("Fatigue Cost: " + fatigueCost());
+		}
+		if (sfCost() > 0) {
+            costs.push("Soulforce Cost: "+sfCost());
+        }
 		var cd:int = calcCooldown();
 		if (cd > 0) {
 			costs.push("Cooldown: "+cd);
@@ -344,6 +403,12 @@ public class CombatAbility extends BaseCombatContent {
 		const bd:ButtonData = new ButtonData(buttonName, buttonCallback);
 		
 		var fullDesc: String = fullDescription(target);
+
+		var currentDuration:int = player.durations[id];
+		if (currentDuration > 0) {
+			var durationText:String = "This ability ends in " + Appearance.numberOfThings(currentDuration, "round") + ".";
+			fullDesc = "<b>"+durationText + "</b>\n\n" + fullDesc;
+		}
 		
 		var ucheck:String;
 		var deactivating:Boolean;
@@ -358,6 +423,7 @@ public class CombatAbility extends BaseCombatContent {
 		}
 		
 		bd.hint(fullDesc,deactivating ? "Deactivate " + name : name);
+		if (icon) bd.icon(icon);
 		return bd;
 	}
 	
@@ -386,7 +452,8 @@ public class CombatAbility extends BaseCombatContent {
 		} else {
 			perform();
 		}
-		combat.callbackAfterAbility(this);
+		//Allows for some abilities to handle post-ability handling in their own "doeffect()" function - e.g. if the ability calls the standard physical attack function
+		if (processPostCallback) combat.callbackAfterAbility(this);
 	}
 	
 	/**
@@ -409,10 +476,10 @@ public class CombatAbility extends BaseCombatContent {
 	}
 	
 	public function toggleOff(display:Boolean=true):void {
-		if (timingType == TIMING_TOGGLE) {
+		if (timingType != TIMING_TOGGLE) {
 			throw new Error("Cannot deactivate non-toggle ability "+name);
 		}
-		throw new Error("Method deactivate() not implemented for ability "+name);
+		if (player.durations[id] == -1) player.durations[id] = 0;
 	}
 	
 	public function ensureToggledOff(display:Boolean=true):void {
@@ -424,12 +491,21 @@ public class CombatAbility extends BaseCombatContent {
 	public function setCooldown():void {
 		player.cooldowns[id] = calcCooldown();
 	}
+
+	/**
+	 * Sets the defomed duration for this ability
+	 * Must be manually called as part of doEffect()
+	 */
+	public function setDuration():void {
+		player.durations[id] = calcDuration();
+	}
 	
 	/**
 	 * Use mana, increment counters etc. At this point ability still might fail or be intercepted by monster
 	 */
 	public function useResources():void {
-		/* do nothing */
+		if (lastAttackType != 0)
+			flags[kFLAGS.LAST_ATTACK_TYPE] = lastAttackType;
 	}
 	
 	/**
@@ -451,6 +527,14 @@ public class CombatAbility extends BaseCombatContent {
 	public function hpCost():Number {
 		return 0;
 	}
+
+	public function sfCost():int {
+        return baseSFCost;
+    }
+
+	public function fatigueCost():int {
+		return baseFatigueCost;
+	}
 	
 	/**
 	 * Current cooldown (number of rounds left before it could be used again)
@@ -458,13 +542,28 @@ public class CombatAbility extends BaseCombatContent {
 	public function get currentCooldown():int {
 		return player.cooldowns[id];
 	}
+
+	/**
+	 * Current duration (number of rounds left before it the ability effect ends)
+	 */
+	public function get currentDuration():int {
+		return player.durations[id];
+	}
 	
 	/**
-	 * Calculate cooldown of this ability. Default is 0 (no cooldown).
+	 * Calculate cooldown of this ability. Default is 0 (no cooldown), or -1 for toggle abilities (turning them on).
 	 * Will be applied automatically.
 	 */
 	public function calcCooldown():int {
 		return 0;
+	}
+
+	/**
+	 * Calculate duration of this ability. Default is 0 (no duration).
+	 * Will be applied automatically.
+	 */
+	public function calcDuration():int {
+		return (timingType == TIMING_TOGGLE)? -1: 0;
 	}
 	
 	/**
@@ -478,6 +577,10 @@ public class CombatAbility extends BaseCombatContent {
 		var ccd:int = currentCooldown;
 		if (ccd > 0) {
 			return "You need to wait "+numberOfThings(ccd, "more round")+" before you can use this ability again."
+		} else if (ccd == -1) {
+			return "This ability can only be used once per battle."
+		} else if (ccd == -2) {
+			return "This ability can only be used once per day."
 		}
 		return "";
 	}
@@ -489,5 +592,43 @@ public class CombatAbility extends BaseCombatContent {
 	protected function toggleOffUsabilityCheck():String {
 		return "";
 	}
+
+	/**
+	 * Function to be used within the advance() function to handle the statuseffect associated with an ability's duration
+	 * @param statusEffect - StatusEffectType responsible for ability effect duration
+	 * @param endFunction - Function that will be called when the ability's duration ends. Function signature must be of the format
+	 * "function endFunction(ability:CombatAbility, display:Boolean):void"
+	 * @param display - To be passed to the endFunction parameter to determine if text should be displayed to the user
+	 */
+	protected function advanceDuration(statusEffect:StatusEffectType, endFunction:Function = null, display:Boolean = true):void {
+        if (player.hasStatusEffect(statusEffect)) {
+            if (player.statusEffectv1(statusEffect) <= 0) {
+                player.removeStatusEffect(statusEffect);
+                if (endFunction != null)
+                    endFunction(this, display);
+            } else player.addStatusValue(statusEffect, 1, -1);
+        }
+    }
+
+	/**
+	 * Function that is called when the duration of a lasting ability ends
+	 * Does nothing by default
+	 * @param display (Boolean) - output text
+	 */
+	public function durationEnd(display:Boolean = true):void {
+
+	}
+
+	/**
+	 * Function used to format damage number properly for tooltips
+	 * @param damage (Number) - Number to be formatted
+	 * @return text (String) - Formatted number
+	 * For printing out damage numbers on the main screen, combat.CommasForDigits() should be used instead
+	 */
+	public function numberFormat(damage:Number):String {
+		var numberformat:NumberFormatter = new NumberFormatter();
+        return numberformat.format(Math.floor(Math.abs(damage)));
+	}
+
 }
 }

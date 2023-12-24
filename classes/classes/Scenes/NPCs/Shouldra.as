@@ -74,6 +74,9 @@ import classes.internals.*;
 			outputText("\n");
 		}
 
+		override public function midDodge():void{
+			outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your [weapon] against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your [weapon] as if betrayed.\n");
+		}
 		override protected function performCombatAction():void
 		{
 			var attack:Number = rand(3);

@@ -18,8 +18,18 @@ import flash.utils.setTimeout;
 
 public class EngineCore {
     private static var funcLookups:Dictionary = null;
-
+    private static var allStats:Array = ["str", "tou", "spe", "inte", "wis", "lib", "sens", "cor", "HP", "lust", "wrath", "fatigue", "mana", "soulforce", "hunger"];
+    private static var allStatsOld:Array = [];
     public function EngineCore() {
+        GenerateCodeBits();
+    }
+    private static function _oldStatNameFor(statName:String):String {
+        return 'old' + statName.charAt(0).toUpperCase() + statName.substr(1);
+    }
+    private static function GenerateCodeBits():void {
+        for each(var statstr:String in allStats) {
+            allStatsOld.push(_oldStatNameFor(statstr))
+        }
     }
 
     public static function maxHP():Number {
@@ -424,7 +434,9 @@ public class EngineCore {
         if (func == null) {
             CoC_Settings.error("createCallBackFunction(null," + arg + ")");
         }
-        if (arg == -9000 || arg == null) {
+        var somagicnumber:Number = -9000;
+        
+        if (arg == somagicnumber || arg == null) {
             return function ():* {
                 if (CoC_Settings.haltOnErrors)
                     logFunctionInfo(func, arg);
@@ -432,7 +444,7 @@ public class EngineCore {
             };
         }
         else {
-            if (arg2 == -9000 || arg2 == null) {
+            if (arg2 == somagicnumber || arg2 == null) {
                 return function ():* {
                     if (CoC_Settings.haltOnErrors)
                         logFunctionInfo(func, arg);
@@ -440,7 +452,7 @@ public class EngineCore {
                 };
             }
             else {
-                if (arg3 == -9000 || arg3 == null) {
+                if (arg3 == somagicnumber || arg3 == null) {
                     return function ():* {
                         if (CoC_Settings.haltOnErrors)
                             logFunctionInfo(func, arg, arg2);
@@ -694,21 +706,10 @@ public class EngineCore {
     public static function hideUpDown():void {
         CoC.instance.mainView.statsView.hideUpDown();
         //Clear storage values so up/down arrows can be properly displayed
-        CoC.instance.oldStats.oldStr = 0;
-        CoC.instance.oldStats.oldTou = 0;
-        CoC.instance.oldStats.oldSpe = 0;
-        CoC.instance.oldStats.oldInte = 0;
-        CoC.instance.oldStats.oldWis = 0;
-        CoC.instance.oldStats.oldLib = 0;
-        CoC.instance.oldStats.oldSens = 0;
-        CoC.instance.oldStats.oldCor = 0;
-        CoC.instance.oldStats.oldHP = 0;
-        CoC.instance.oldStats.oldLust = 0;
-        CoC.instance.oldStats.oldWrath = 0;
-        CoC.instance.oldStats.oldFatigue = 0;
-        CoC.instance.oldStats.oldMana = 0;
-        CoC.instance.oldStats.oldSoulforce = 0;
-        CoC.instance.oldStats.oldHunger = 0;
+
+        for each (var stat:String in allStatsOld) {
+            CoC.instance.oldStats[stat] = 0;
+        }
     }
 
     public static function fatigue(mod:Number, type:Number = 0):void {
@@ -773,26 +774,12 @@ public class EngineCore {
     public static function showUpDown():void { //Moved from StatsView.
         Utils.Begin("engineCore", "showUpDown");
 
-        function _oldStatNameFor(statName:String):String {
-            return 'old' + statName.charAt(0).toUpperCase() + statName.substr(1);
-        }
-
-        var statName:String,
-                oldStatName:String,
-                allStats:Array;
-
-//	CoC.instance.mainView.statsView.upDownsContainer.visible = true;
-
-        allStats = ["str", "tou", "spe", "inte", "wis", "lib", "sens", "cor", "HP", "lust", "wrath", "fatigue", "mana", "soulforce", "hunger"];
-
-        for each(statName in allStats) {
-            oldStatName = _oldStatNameFor(statName);
-
-            if (CoC.instance.player[statName] > CoC.instance.oldStats[oldStatName]) {
-                CoC.instance.mainView.statsView.showStatUp(statName);
+        for(var i:Number = 0; i< allStats.length; i++) {
+            if (CoC.instance.player[allStats[i]] > CoC.instance.oldStats[allStatsOld[i]]) {
+                CoC.instance.mainView.statsView.showStatUp(allStats[i]);
             }
-            if (CoC.instance.player[statName] < CoC.instance.oldStats[oldStatName]) {
-                CoC.instance.mainView.statsView.showStatDown(statName);
+            if (CoC.instance.player[allStats[i]] < CoC.instance.oldStats[allStatsOld[i]]) {
+                CoC.instance.mainView.statsView.showStatDown(allStats[i]);
             }
         }
         Utils.End("engineCore", "showUpDown");
