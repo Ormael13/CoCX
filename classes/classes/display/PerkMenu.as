@@ -96,7 +96,7 @@ public class PerkMenu extends BaseContent {
 			addButton(6, "Range Opt",rangedOptions);
 		}
 		if (player.hasPerk(PerkLib.Venomancy) || player.hasPerk(PerkLib.DarkRitual) || player.hasPerk(PerkLib.HiddenJobBloodDemon)||
-			(player.hasPerk(PerkLib.Spellsword) || player.hasPerk(PerkLib.Spellbow) || player.hasPerk(PerkLib.Spellarmor) || player.hasPerk(PerkLib.Battleflash) || player.hasPerk(PerkLib.Battlemage) || player.hasPerk(PerkLib.Battleshield) || player.hasPerk(PerkLib.FortressOfIntellect))) {
+			(player.hasPerk(PerkLib.Autocast) ||  player.hasPerk(PerkLib.FortressOfIntellect))) {
 			outputText("\n<b>You can choose and adjust various effects related to your magic.</b>");
 			addButton(7, "Magic Opt",magicOption);
 		}
@@ -136,7 +136,7 @@ public class PerkMenu extends BaseContent {
 			outputText("<b>You can adjust your Venomancy.</b>\n");
 			addButton(1, "Venomancy Opt",venomancyOption);
 		}
-		if (player.hasPerk(PerkLib.Spellsword) || player.hasPerk(PerkLib.Spellbow) || player.hasPerk(PerkLib.Spellarmor) || player.hasPerk(PerkLib.Battleflash) || player.hasPerk(PerkLib.Battlemage) || player.hasPerk(PerkLib.Battleshield) || player.hasPerk(PerkLib.FortressOfIntellect)) {
+		if (player.hasPerk(PerkLib.Autocast) || player.hasPerk(PerkLib.FortressOfIntellect)) {
 			outputText("<b>You can adjust your spell autocast settings.</b>\n");
 			addButton(2, "Spells Opt",spellOptions);
 		}
@@ -438,12 +438,12 @@ public class PerkMenu extends BaseContent {
 	public function spellOptions():void {
 		var autocasts:Array = [
 			// Name, flag, requirement
-			["Charge Weapon", kFLAGS.AUTO_CAST_CHARGE_WEAPON_DISABLED, PerkLib.Spellsword],
-			["Charge R Weapon", kFLAGS.AUTO_CAST_CHARGE_R_WEAPON_DISABLED, PerkLib.Spellbow],
-			["Charge Armor", kFLAGS.AUTO_CAST_CHARGE_ARMOR_DISABLED, PerkLib.Spellarmor],
-			["Might", kFLAGS.AUTO_CAST_MIGHT_DISABLED, PerkLib.Battlemage],
-			["Blink", kFLAGS.AUTO_CAST_BLINK_DISABLED, PerkLib.Battleflash],
-			["Mana Shield", kFLAGS.AUTO_CAST_MANA_SHIELD_DISABLED, PerkLib.Battleshield],
+			["Charge Weapon", kFLAGS.AUTO_CAST_CHARGE_WEAPON_DISABLED, StatusEffects.KnowsCharge],
+			["Charge R Weapon", kFLAGS.AUTO_CAST_CHARGE_R_WEAPON_DISABLED, StatusEffects.KnowsChargeR],
+			["Charge Armor", kFLAGS.AUTO_CAST_CHARGE_ARMOR_DISABLED, StatusEffects.KnowsChargeA],
+			["Might", kFLAGS.AUTO_CAST_MIGHT_DISABLED, StatusEffects.KnowsMight],
+			["Blink", kFLAGS.AUTO_CAST_BLINK_DISABLED, StatusEffects.KnowsBlink],
+			["Mana Shield", kFLAGS.AUTO_CAST_MANA_SHIELD_DISABLED, StatusEffects.KnowsManaShield],
 		];
 		var toggleFlagMagic:Function = curry(toggleFlag, spellOptions);
 		var btn:int = 0;
@@ -451,7 +451,7 @@ public class PerkMenu extends BaseContent {
 		menu();
 		outputText("You can choose to autocast or not specific buff spells at the start of the combat.");
 		for each (var autoItem:Array in autocasts) {
-			if (player.hasPerk(autoItem[2])) {
+			if (player.hasStatusEffect(autoItem[2])) {
 				outputText("\n\n" + autoItem[0] + ": <b>" + (flags[autoItem[1]] ? "Manual" : "Autocast") + "</b>");
 				addButton(btn++, autoItem[0], curry(toggleFlagMagic, autoItem[1]));
 			}
