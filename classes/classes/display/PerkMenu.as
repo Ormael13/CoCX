@@ -449,15 +449,18 @@ public class PerkMenu extends BaseContent {
 		var btn:int = 0;
 		clearOutput();
 		menu();
-		outputText("You can choose to autocast or not specific buff spells at the start of the combat.");
-		for each (var autoItem:Array in autocasts) {
-			if (player.hasStatusEffect(autoItem[2])) {
-				outputText("\n\n" + autoItem[0] + ": <b>" + (flags[autoItem[1]] ? "Manual" : "Autocast") + "</b>");
-				addButton(btn++, autoItem[0], curry(toggleFlagMagic, autoItem[1]));
+		if (player.hasPerk(PerkLib.Autocast)) {
+			outputText("You can choose to autocast or not specific buff spells at the start of the combat.");
+			for each (var autoItem:Array in autocasts) {
+				if (player.hasStatusEffect(autoItem[2])) {
+					outputText("\n\n" + autoItem[0] + ": <b>" + (flags[autoItem[1]] ? "Manual" : "Autocast") + "</b>");
+					addButton(btn++, autoItem[0], curry(toggleFlagMagic, autoItem[1]));
+				}
 			}
+			outputText("\n\n");
 		}
 		if (player.hasPerk(PerkLib.FortressOfIntellect)) {
-			outputText("\n\nFortress of Intellect: <b>" + (player.hasStatusEffect(StatusEffects.FortressOfIntellect) ? "On" : "Off") + "</b>");
+			outputText("Fortress of Intellect: <b>" + (player.hasStatusEffect(StatusEffects.FortressOfIntellect) ? "On" : "Off") + "</b>");
 			addButton(btn++, "FoI", toggleFortressOfIntelect);
 		}
 		addButton(14, "Back", magicOption);
