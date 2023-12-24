@@ -292,23 +292,23 @@ public class Lethice extends Monster
 		}
 		private function wheelHandleString():String{
 			var printString:String = "";
-			if(dictHistory!=dictOrder){
-				var wheelTurned:Number = 0;
-				var tmp:Array = [];
+			var wheelTurned:Number = 0;
+			var tmp:Array = [];
 
-				for(var ___i:int = 0;___i<dictOrder.length;___i++){
-					if(dictHistory.indexOf(dictOrder[___i])<0){
-						wheelTurned +=1;
-					}
-					tmp.push(dictOrder[___i]);
+			for(var ___i:int = 0;___i<dictOrder.length;___i++){
+				if(dictHistory.indexOf(dictOrder[___i])<0){
+					wheelTurned +=1;
 				}
-
-				dictHistory = tmp;
-
-				printString += "\n\nYou noticed as the <b>"+wheelHandleDesc()+"</b>-handled wheel behind Lethice reveals and turned <b>" + wheelTurned +" times</b> shortly before concealing itself once more.";
+				tmp.push(dictOrder[___i]);
 			}
-			else
-				printString += "\n\nWheel behind Lethice currently has not reveal itself. Perhaps you should try something else?";
+
+			dictHistory = tmp;
+
+			printString += "\n\nYou noticed as the <b>"+wheelHandleDesc()+"</b>-handled wheel behind Lethice reveals and turned <b>" + wheelTurned +" times</b> shortly before concealing itself once more.";
+
+			if(wheelTurned==0){
+				printString = "\n\nWheel behind Lethice currently has not reveal itself. Perhaps you should try something else?";
+			}
 
 			return printString;
 		}
