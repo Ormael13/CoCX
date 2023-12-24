@@ -4309,7 +4309,7 @@ public final class Mutations extends MutationsHelper {
         }
 		if (player.hasPerk(PerkLib.HiddenJobBloodDemon) || player.hasPerk(PerkLib.PrestigeJobGreySage)) {
 			//Smart enough for Blood Missiles and doesnt have it
-			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsBloodMissiles)) {//not yet have additional effect from Way of the Blood
+			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsBloodMissiles)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Missiles.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodMissiles, 0, 0, 0, 0);
 				return;
@@ -4321,7 +4321,7 @@ public final class Mutations extends MutationsHelper {
 				return;
 			}
 			//Smart enough for Blood Explosion and doesnt have it
-			if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsBloodExplosion)) {//not yet have additional effect from Way of the Blood
+			if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsBloodExplosion)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Explosion.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodExplosion, 0, 0, 0, 0);
 				return;
@@ -4333,7 +4333,7 @@ public final class Mutations extends MutationsHelper {
 				return;
 			}
 			//Smart enough for Blood Wave and doesnt have it
-			if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsBloodWave)) {//not yet have additional effect from Way of the Blood
+			if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsBloodWave)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Wave.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodWave, 0, 0, 0, 0);
 				return;
@@ -4371,25 +4371,25 @@ public final class Mutations extends MutationsHelper {
         }
 		if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) {
 			//Smart enough for Blood Swipe and doesnt have it
-			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.KnowsBloodSwipe)) {//not yet have additional effect from Way of the Blood
+			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.KnowsBloodSwipe)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Blood Swipe.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodSwipe, 0, 0, 0, 0);
 				return;
 			}
 			//Smart enough for Heart Seeker and doesnt have it
-			if (player.wis >= 30 && !player.hasStatusEffect(StatusEffects.KnowsHeartSeeker)) {//not yet have additional effect from Way of the Blood
+			if (player.wis >= 30 && !player.hasStatusEffect(StatusEffects.KnowsHeartSeeker)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Heart Seeker.</b>");
 				player.createStatusEffect(StatusEffects.KnowsHeartSeeker, 0, 0, 0, 0);
 				return;
 			}
 			//Smart enough for Blood Dewdrops and doesnt have it
-			if (player.wis >= 40 && !player.hasStatusEffect(StatusEffects.KnowsBloodDewdrops)) {//not yet have additional effect from Way of the Blood
+			if (player.wis >= 40 && !player.hasStatusEffect(StatusEffects.KnowsBloodDewdrops)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Blood Dewdrops.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodDewdrops, 0, 0, 0, 0);
 				return;
 			}
 			//Smart enough for Blood Requiem and doesnt have it
-			if (player.wis >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBloodRequiem)) {//not yet have additional effect from Way of the Blood
+			if (player.wis >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBloodRequiem)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Blood Requiem.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodRequiem, 0, 0, 0, 0);
 				return;
@@ -4405,25 +4405,25 @@ public final class Mutations extends MutationsHelper {
 		}
 		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) {
 			//Smart enough for SF Infused Blood Swipe and doesnt have it
-			if (player.wis >= 30 && !player.hasStatusEffect(StatusEffects.KnowsBloodSwipeSF)) {//not yet have additional effect from Way of the Blood
+			if (player.wis >= 30 && !player.hasStatusEffect(StatusEffects.KnowsBloodSwipeSF)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Blood Swipe.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodSwipeSF, 0, 0, 0, 0);
 				return;
 			}
 			//Smart enough for SF Infused Heart Seeker and doesnt have it
-			if (player.wis >= 40 && !player.hasStatusEffect(StatusEffects.KnowsHeartSeekerSF)) {//not yet have additional effect from Way of the Blood
+			if (player.wis >= 40 && !player.hasStatusEffect(StatusEffects.KnowsHeartSeekerSF)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Heart Seeker.</b>");
 				player.createStatusEffect(StatusEffects.KnowsHeartSeekerSF, 0, 0, 0, 0);
 				return;
 			}
 			//Smart enough for SF Infused Blood Dewdrops and doesnt have it
-			if (player.wis >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBloodDewdropsSF)) {//not yet have additional effect from Way of the Blood
+			if (player.wis >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBloodDewdropsSF)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Blood Dewdrops.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodDewdropsSF, 0, 0, 0, 0);
 				return;
 			}
 			//Smart enough for SF Infused Blood Requiem and doesnt have it
-			if (player.wis >= 60 && !player.hasStatusEffect(StatusEffects.KnowsBloodRequiemSF)) {//not yet have additional effect from Way of the Blood
+			if (player.wis >= 60 && !player.hasStatusEffect(StatusEffects.KnowsBloodRequiemSF)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Blood Requiem.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodRequiemSF, 0, 0, 0, 0);
 				//return;

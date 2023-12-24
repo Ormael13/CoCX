@@ -47,6 +47,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 2 intelligence lvl-up perk (by Demojay): Rumbling Earth. Req. Grand Mage & Channeling perks, 75+ int and any earth spell or special. Effect: Cumulative 40% damage increase for every subsequent earth spell. Each turn without cast earth spell lower damage by 40% down to normal (100%) damage. Maximum 5 stacks.\n");
 			outputText("-New tier 3 strength lvl-up perk: Power Attack (Ex). Req. Power Attack perk. Effect: Power Attack p. special damage increased by ~2x. Add ~30% of base stat scaling value to melee damage & power attack multi factor. (+15% melee physical attacks multiplier)\n");
 			outputText("-New tier 3 misc lvl-up perk: Improved Metabolization. Req. Metabolization perk; Slime, Manticore, Displacer beast, Vampire, Dracula race or hunger enabled. Effect: Increase the duration of lingering nourishment effects by an extra 100% of base duration. And slows hunger progression if any(note does not raise racial scores).\n");
+			outputText("-New tier 3 misc lvl-up perk (by Demojay): Alchemical Tolerance. Req. Job: Soul Cultivator and Alchemy Level 1 or higher. Effect: Increase Alchemic cap by 5%.\n");
 			outputText("-New tier 5 intelligence lvl-up perk (by Demojay): Corrosive Meltdown (Ex). Req. Corrosive Meltdown & Grand Archmage perks, 150+ int. Effect: Increase to cumulative damage by 20%. Penalty for turn without casted acid spell decreased by 10%. Maximum 15 stacks.\n");
 			outputText("-New tier 5 intelligence lvl-up perk: High Tide (Ex). Req. High Tide & Grand Archmage perks, 150+ int. Effect: Increase to cumulative damage by 20%. Penalty for turn without casted water spell decreased by 10%. Maximum 15 stacks.\n");
 			outputText("-New tier 5 intelligence lvl-up perk (by Demojay): Howling Gale (Ex). Req. Howling Gale & Grand Archmage perks, 150+ int. Effect: Increase to cumulative damage by 20%. Penalty for turn without casted wind spell decreased by 10%. Maximum 15 stacks.\n");
@@ -190,7 +191,6 @@ public class Changelog extends BaseContent
 			outputText("-Fixed monster damage display sometime not showing the true damage received. Dragonne Race does not both add and subtract racial scores for draconic horns. Dragon race now cannot have a cat tongue, while Dragonne requires one. (Demojay)\n");
 			outputText("-Replaced instances of Frostbite in code with Frostburn, so that Ice DoT properly triggers. Fixed code related to disabling flying in combat. Atlach Nacha's Pin Down attack now properly removes and disables flight. (Demojay)\n");
 			outputText("-Fixed bugs involving incorrect damage calculating using Anubis Soulskills with Eclypse Mod. General code, description and tag cleanup for SoulSkills. Corrected incorrect attacks being used for Warden Soulskills when in a mech. (Demojay)\n");
-			outputText("-New tier 3 misc lvl-up perk (by Demojay): Alchemical Tolerance. Req. Job: Soul Cultivator and Alchemy Level 1 or higher. Effect: Increase Alchemic cap by 5%.\n");
 			outputText("-Created Soul Cultivator Perk: Killing Intent - True Damage attack that increases damage based on cultivator rank and number of monsters killed. (Demojay)\n");
 			outputText("-Created Soul Cultivator Perk: First Attack: Flying Sword - Allows Flying to attack independently when not using it to fly. (Demojay)\n");
 			outputText("-Cleaned up code for Flying Swords to explicitly set their sword count and elemental attack. Player can now start to see some of their general abilities in the Stats menu. Simplified Minion menu for setting minion behaviour in and out of combat. Mummy Lord attacks now be configured on/off in combat. Adjusted Will Of The Wisp attack damage so it is similar to a Mummy Lord attack. (Demojay)\n");
@@ -198,6 +198,13 @@ public class Changelog extends BaseContent
 			outputText("-Players wit the the Cold Affinity/Cold Mastery/Affinity Undine perk cannot be given Frostburn. Players with an affinity perk take half damage from that particular element. Players with an affinity perk will gain increased Dao Contemplation speed for that element. Players with an affinity perk will now deal double damage with that element. (Demojay)\n");
 			outputText("-Monsters in the Ocean area have been given the 'Water Nature' perk. Air Elemental has been given the 'Wind Nature' perk. Earth Elemental has been given the 'Earth Nature' perk. Water Elemental has been given the 'Water Nature' perk instead of the 'Ice Nature' perk. (Demojay)\n");
 			outputText("-Fix: Imp Tome scene should start having the chance to trigger after absorbing energy from sex 26 times. (Demojay)\n");
+			outputText("-Fairy race req. having 9+ pts from bodyparts before their IM would add pts to score.\n");
+			outputText("-Lust damage is now affected by damage reduction. Added option to tease function to allow for the tease number to not be displayed, similar to the other damage functions. Thunderstorm DoT now takes enemy defences, and magic modifiers into account. (Demojay)\n");
+			outputText("-Updated base tease damage and crit chance to be in line with the melee and ranged equivalent formulas. Standardized Naga Tease damage. Standardized tease crit chance for all tease spells/specials. Removed some dual applications of difficulty modifier on some attacks. (Demojay)\n");
+			outputText("-Curse of Desire now cannot increase the lust vulnerability of lust immune enemies. Standardized tease damage for feed specials. Can now see bonus damage tease level gives tease damage in stat menu. (Demojay)\n");
+			outputText("-Removed duplicate damage bonus application from Drider-Weave Sheer Robe effect. Fixed encounter bug in mountains. Fixed bug where Pixie Dust magic special does not produce any effects.  Meteor Shower Spell now no longer procs Inferno Mod multiple times with one cast. (Demojay)\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -215,13 +222,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay) (NUZ/Shirane)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Telekinetic Grasp have unlimited powe... duration, 'Elite/Champion/Boss HP bonus' setting, Monsters HP (and Soulforce/Mana) not decreasing on turn end when any effect lowering it, Rathazul keep trying cure Belisa after Nadia done it, Vouivre Oil replacing dragon ears with snake ears & dragon scales with snake scales, Tyrantia & Flitzi forest scene allowing to skip ");
 			outputText("large portion of her storyline, corrupt Celess sex scenes not reseting lust/not giving tease exp, 2nd promotion in Adventure Guld been not accesable, Diva/Project Nightwalker dropping/giving Bat TF instead of Vampire TF, Sky-tier Aether Twins been excluded from some of BFGaunlets bonuses, silly mode event in hills involving minotaurs got it lvl req. below lvl req. for area ");
@@ -288,7 +288,12 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -315,6 +320,7 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

@@ -2547,10 +2547,9 @@ public class SaveUpdater extends NPCAwareContent {
 				if (player.statusEffectv1(StatusEffects.Kindra) >= 140 && player.hasStatusEffect(StatusEffects.KnowsSidewinder)) {
 					flags[kFLAGS.KINDRA_ADV_ARCHERY] = 6;
 				}
-				
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.20;
 			}
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.21) {
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.30) {
 				outputText("move camp resources and stats to dedicated class");
 				CampStatsAndResources.EnergyCoreResc = flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES];
 				CampStatsAndResources.MetalPieces = flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES];
@@ -2558,8 +2557,26 @@ public class SaveUpdater extends NPCAwareContent {
 				CampStatsAndResources.StonesResc = flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES];
 				CampStatsAndResources.WoodResc = flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES];
 				CampStatsAndResources.NailsResc = flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES];
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.21;
+				flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] = 0;
+				flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] = 0;
+				flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] = 0;
+				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 0;
+				flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 0;
+				flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 0;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.30;
+			}/*
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.40) {
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.40;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.50) {
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.50;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.60) {
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.60;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.63) {
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.63;
+			}*/
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 		}
