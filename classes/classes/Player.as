@@ -6491,6 +6491,9 @@ use namespace CoC;
 		public function MiningMulti():Number {
 			var mineMlt:Number = 1;
 			if (hasMutation(IMutationsLib.HumanVersatilityIM) && racialScore(Races.HUMAN) > 17) mineMlt += perkv1(IMutationsLib.HumanVersatilityIM);
+			if (hasPerk(PerkLib.UtilitySkillsBeginner)) mineMlt += 1;
+			if (hasPerk(PerkLib.UtilitySkillsApprentice)) mineMlt += 2;
+			if (hasPerk(PerkLib.UtilitySkillsSkilled)) mineMlt += 3;
 			if (hasKeyItem("Tel'Adre Magazine Issue 10") >= 0) mineMlt *= 2;
 			return mineMlt;
 		}
@@ -6506,14 +6509,14 @@ use namespace CoC;
 			var expToLevelUp00:Number = miningLevel + 1;
 			var expToLevelUp01:Number = 5;
 			var expToLevelUp02:Number = miningLevel + 1;
-			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			if (hasPerk(PerkLib.UtilitySkillsApprentice)) expToLevelUp00 -= 1;
 			//-2;//4th
 			//-3;//6th
 			if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) >= 2 && racialScore(Races.HUMAN) > 17) expToLevelUp01 -= 1;
 			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
 			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
-			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
-			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			if (hasPerk(PerkLib.UtilitySkillsBeginner)) expToLevelUp02 -= 1;
+			if (hasPerk(PerkLib.UtilitySkillsSkilled)) expToLevelUp02 -= 2;
 			//-3;//5th
 			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
 			return expToLevelUp;
@@ -6553,14 +6556,14 @@ use namespace CoC;
 			var expToLevelUp00:Number = farmingLevel + 1;
 			var expToLevelUp01:Number = 5;
 			var expToLevelUp02:Number = farmingLevel + 1;
-			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			if (hasPerk(PerkLib.UtilitySkillsApprentice)) expToLevelUp00 -= 1;
 			//-2;//4th
 			//-3;//6th
 			if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) >= 2 && racialScore(Races.HUMAN) > 17) expToLevelUp01 -= 1;
 			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
 			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
-			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
-			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			if (hasPerk(PerkLib.UtilitySkillsBeginner)) expToLevelUp02 -= 1;
+			if (hasPerk(PerkLib.UtilitySkillsSkilled)) expToLevelUp02 -= 2;
 			//-3;//5th
 			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
 			return expToLevelUp;
@@ -6592,6 +6595,9 @@ use namespace CoC;
 		public function FarmingMulti():Number {
 			var farmMlt:Number = 1;
 			if (hasMutation(IMutationsLib.HumanVersatilityIM) && racialScore(Races.HUMAN) > 17) farmMlt += perkv1(IMutationsLib.HumanVersatilityIM);
+			if (hasPerk(PerkLib.UtilitySkillsBeginner)) farmMlt += 1;
+			if (hasPerk(PerkLib.UtilitySkillsApprentice)) farmMlt += 2;
+			if (hasPerk(PerkLib.UtilitySkillsSkilled)) farmMlt += 3;
 			//if (hasPerk(PerkLib.PlantKnowledge)) herbMlt *= 2;
 			//if (hasPerk(PerkLib.NaturalHerbalism)) herbMlt *= 2;
 			if (hasKeyItem("Tel'Adre Magazine Issue 8") >= 0) farmMlt *= 2;
@@ -6615,14 +6621,14 @@ use namespace CoC;
 			var expToLevelUp00:Number = herbalismLevel + 1;
 			var expToLevelUp01:Number = 5;
 			var expToLevelUp02:Number = herbalismLevel + 1;
-			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			if (hasPerk(PerkLib.UtilitySkillsApprentice)) expToLevelUp00 -= 1;
 			//-2;//4th
 			//-3;//6th
 			if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) >= 2 && racialScore(Races.HUMAN) > 17) expToLevelUp01 -= 1;
 			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
 			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
-			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
-			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			if (hasPerk(PerkLib.UtilitySkillsBeginner)) expToLevelUp02 -= 1;
+			if (hasPerk(PerkLib.UtilitySkillsSkilled)) expToLevelUp02 -= 2;
 			//-3;//5th
 			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
 			return expToLevelUp;
@@ -6654,6 +6660,9 @@ use namespace CoC;
 		public function HerbalismMulti():Number {
 			var herbMlt:Number = 1;
 			if (hasMutation(IMutationsLib.HumanVersatilityIM) && racialScore(Races.HUMAN) > 17) herbMlt += perkv1(IMutationsLib.HumanVersatilityIM);
+			if (hasPerk(PerkLib.UtilitySkillsBeginner)) herbMlt += 1;
+			if (hasPerk(PerkLib.UtilitySkillsApprentice)) herbMlt += 2;
+			if (hasPerk(PerkLib.UtilitySkillsSkilled)) herbMlt += 3;
 			if (hasPerk(PerkLib.PlantKnowledge)) herbMlt *= 2;
 			if (hasPerk(PerkLib.NaturalHerbalism)) herbMlt *= 2;
 			if (hasKeyItem("Tel'Adre Magazine Issue 5") >= 0) herbMlt *= 2;
@@ -6663,6 +6672,9 @@ use namespace CoC;
 		public function giveAlchemyXP(XP:Number):void {
 			var alchMlt:Number = 1;
 			if (hasMutation(IMutationsLib.HumanVersatilityIM) && racialScore(Races.HUMAN) > 17) alchMlt += perkv1(IMutationsLib.HumanVersatilityIM);
+			if (hasPerk(PerkLib.UtilitySkillsBeginner)) alchMlt += 1;
+			if (hasPerk(PerkLib.UtilitySkillsApprentice)) alchMlt += 2;
+			if (hasPerk(PerkLib.UtilitySkillsSkilled)) alchMlt += 3;
 			if (hasKeyItem("Tel'Adre Magazine Issue 2") >= 0) alchMlt *= 2;
 			if (alchMlt > 1) XP *= alchMlt;
 			alchemySkillStat.giveXp(XP);

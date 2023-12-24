@@ -68,7 +68,7 @@ public class CoC extends MovieClip
         return _instance;
     }
     //Game Version
-    public var debugGameVer:String = "v0.8v.58";
+    public var debugGameVer:String = "v0.8v.59.final";
 
     //Mod save version.
     public var modSaveVersion:Number = 36.30;
@@ -285,7 +285,7 @@ public class CoC extends MovieClip
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_" + debugGameVer;
-			ver += " (<b></b>)";
+			ver += " (<b>Perk-o-calipse 8 (around 40+ perks), , large portion of combat code revamps and many QoL/Bugfixing</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

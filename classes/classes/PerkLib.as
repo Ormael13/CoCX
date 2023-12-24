@@ -413,6 +413,15 @@ public class PerkLib
 		public static const Penetrator:PerkType = mk("Penetrator", "Penetrator",
 				"Thrown weapons and firearms (+ mech weapons) ignore damage reductions piercing right through your opponent armor weak points (ignore enemy dmg red). (+5% range physical attacks multiplier)",
 				"You've chosen the 'Penetrator' perk. Thrown weapons and firearms (+ mech weapons) ignore damage reductions piercing right through your opponent armor weak points (ignore enemy dmg red). (+5% range physical attacks multiplier)");
+		public static const UtilitySkillsBeginner:PerkType = mk("Utility Skills: Beginner", "Utility Skills: Beginner",
+				"Increasing mastery gains in non-combat skills by 100% of base and decreasing a bit req. exp to level up.",
+				"You've chosen the 'Utility Skills: Beginner' perk. Increasing mastery gains in non-combat skills by 100% of base and decreasing a bit req. exp to level up.");
+		public static const UtilitySkillsApprentice:PerkType = mk("Utility Skills: Apprentice", "Utility Skills: Apprentice",
+				"Increasing mastery gains in non-combat skills by 200% of base and decreasing a bit req. exp to level up.",
+				"You've chosen the 'Utility Skills: Apprentice' perk. Increasing mastery gains in non-combat skills by 200% of base and decreasing a bit req. exp to level up");
+		public static const UtilitySkillsSkilled:PerkType = mk("Utility Skills: Skilled", "Utility Skills: Skilled",
+				"Increasing mastery gains in non-combat skills by 300% of base and decreasing a bit req. exp to level up.",
+				"You've chosen the 'Utility Skills: Skilled' perk. Increasing mastery gains in non-combat skills by 300% of base and decreasing a bit req. exp to level up");//, , , Professional, Artisan, Master, and Guru
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -420,15 +429,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -7166,6 +7166,9 @@ public class PerkLib
 					.requireStr(30)
 					.requireTou(30)
 					.requireSpe(30);
+            UtilitySkillsBeginner.requireCustomFunction(function (player:Player):Boolean {
+						return (Crafting.alembicLevel >= 1 || player.herbalismLevel >= 1 || player.farmingLevel >= 1 || player.miningLevel >= 1);
+					}, "Any non combat skill at lvl 1");
 			Metabolization.requireCustomFunction(function (player:Player):Boolean {
                         return player.isAnyRaceCached(Races.SLIME, Races.DARKSLIME, Races.MAGMASLIME, Races.MANTICORE, Races.DISPLACERBEAST, Races.VAMPIRE, Races.DRACULA) || CoC.instance.flags[kFLAGS.HUNGER_ENABLED] > 0;
                     }, "Slime, Manticore, Displacer beast, Vampire, Dracula race or hunger enabled.");
@@ -7609,6 +7612,11 @@ public class PerkLib
 					.requireCustomFunction(function (player:Player):Boolean {
 					return player.playerMinionsCount() >= 6;
 					}, "6+ pets/minions");
+            UtilitySkillsApprentice.requireLevel(24)
+                    .requirePerk(UtilitySkillsBeginner)
+					.requireCustomFunction(function (player:Player):Boolean {
+						return (Crafting.alembicLevel >= 5 || player.herbalismLevel >= 5 || player.farmingLevel >= 5 || player.miningLevel >= 5);
+					}, "Any non combat skill at lvl 5");
             //Tier 5
             ChimericalBodyImprovedStage.requireAnyPerk(ChimericalBodySemiImprovedStage, ChimericalBodySemiImprovedStageEx)
                     .requireLevel(30)
@@ -7753,6 +7761,11 @@ public class PerkLib
 					.requirePerk(LimitBreakerBody1stStage);
             MasterAllRounderEducation.requireLevel(48)
                     .requirePerk(ExpertAllRounderEducation);
+            UtilitySkillsSkilled.requireLevel(48)
+                    .requirePerk(UtilitySkillsApprentice)
+					.requireCustomFunction(function (player:Player):Boolean {
+						return (Crafting.alembicLevel >= 10 || player.herbalismLevel >= 10 || player.farmingLevel >= 10 || player.miningLevel >= 10);
+					}, "Any non combat skill at lvl 10");
             //Tier 9
             ChimericalBodySuperiorStage.requireAnyPerk(ChimericalBodySemiSuperiorStage, ChimericalBodySemiSuperiorStageEx)
                     .requireLevel(54)
