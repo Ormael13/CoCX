@@ -10,9 +10,9 @@ import classes.PerkLib;
 public final class ArmorLib extends ItemConstants
 	{
 		public function Legendary():Array {
-			return LegendaryPure().concat(LegendaryCorrupt());
+			return legendaryPure().concat(LegendaryCorrupt());
 		}
-		public function LegendaryPure():Array {
+		public function legendaryPure():Array {
 			return [
 				BMARMOR,
 				IBKIMO,

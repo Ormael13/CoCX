@@ -26,7 +26,7 @@ package classes.Items.Weapons
 		
 		override public function canEquip(doOutput:Boolean):Boolean {
 			if (game.player.hasPerk(PerkLib.GigantGrip)) return super.canEquip(doOutput);
-			if (doOutput) outputText("You aren't skilled in handling massive weapons, even when using both hands to use this sword. Just face that truth you not able to fix your tiny e-pen complex yet...  ");
+			if (doOutput) outputText("You aren't skilled enough in handling massive weapons, even when using both hands to use this sword. Just face that truth you not able to fix your tiny e-pen complex yet...  ");
 			return false;
 		}
 	}

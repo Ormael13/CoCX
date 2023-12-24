@@ -1,6 +1,7 @@
 package classes.Items.Weapons
 {
 	import classes.Items.Weapon;
+	import classes.Items.ItemTags;
 	/**
 	 * ...
 	 * @author Liadri
@@ -14,6 +15,7 @@ package classes.Items.Weapons
 					"A greataxe made in untarnished steel and imbued with holy power. Its shaft is wrapped in feathery wings made of brass and gold. This holy artifact was created to execute demonic fiends, always finding their weakest spot.",
 					"Large", "Axe"
 			);
+			withTag(ItemTags.I_LEGENDARY);
 		}
 		override public function get attack():Number{
 			var boost:int = 0;
@@ -28,11 +30,6 @@ package classes.Items.Weapons
 			}
 			boost += Math.round((100 - game.player.cor) / scal);
 			return (20 + boost);
-		}
-		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.level >= 54) return super.canEquip(doOutput);
-			if (doOutput) outputText("You try and wield the legendary weapon but to your disapointment the item simply refuse to stay in your hands. It would seem you yet lack the power and right to wield this item.");
-			return false;
 		}
 	}
 }

@@ -21,9 +21,9 @@ public final class WeaponLib extends ItemConstants
 		}
 
 		public function Legendary():Array {
-			return LegendaryPure().concat(LegendaryCorrupt());
+			return legendaryPure().concat(LegendaryCorrupt());
 		}
-		public function LegendaryPure():Array {
+		public function legendaryPure():Array {
 			return [
 				NPHBLDE,
 				T_HEART,
@@ -38,7 +38,8 @@ public final class WeaponLib extends ItemConstants
 				POCDEST,
 				ARMAGED,
 				OCCULUS,
-				EXCALIB
+				EXCALIB,
+				DEXCALI
 			];
 		}
 		public function LegendaryCorrupt():Array {

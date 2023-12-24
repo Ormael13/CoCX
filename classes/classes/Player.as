@@ -5889,19 +5889,19 @@ use namespace CoC;
 		}
 
 		public function hasPureLegendaryItem():Boolean {
-			for each (var item:ItemType in CoC.instance.weapons.LegendaryPure())
+			for each (var item:ItemType in CoC.instance.weapons.legendaryPure())
 				for each (var itemSlot:ItemSlotClass in itemSlots){
 					if (itemSlot.itype == item) return true
 				}
-			for each (item in CoC.instance.weaponsrange.LegendaryPure())
+			for each (item in CoC.instance.weaponsrange.legendaryPure())
 				for each (itemSlot in itemSlots){
 					if (itemSlot.itype == item) return true
 				}
-			for each (item in CoC.instance.shields.LegendaryPure())
+			for each (item in CoC.instance.shields.legendaryPure())
 				for each (itemSlot in itemSlots){
 					if (itemSlot.itype == item) return true
 				}
-			for each (item in CoC.instance.armors.LegendaryPure())
+			for each (item in CoC.instance.armors.legendaryPure())
 				for each (itemSlot in itemSlots){
 					if (itemSlot.itype == item) return true
 				}
@@ -5909,19 +5909,19 @@ use namespace CoC;
 		}
 		public function allPureLegendaryItems():Array {
 			var list: Array = [];
-			for each (var item:ItemType in CoC.instance.weapons.LegendaryPure())
+			for each (var item:ItemType in CoC.instance.weapons.legendaryPure())
 				for each (var itemSlot:ItemSlotClass in itemSlots){
 					if (itemSlot.itype == item) list.push(item);
 				}
-			for each (item in CoC.instance.weaponsrange.LegendaryPure())
+			for each (item in CoC.instance.weaponsrange.legendaryPure())
 				for each (itemSlot in itemSlots){
 					if (itemSlot.itype == item) list.push(item);
 				}
-			for each (item in CoC.instance.shields.LegendaryPure())
+			for each (item in CoC.instance.shields.legendaryPure())
 				for each (itemSlot in itemSlots){
 					if (itemSlot.itype == item) list.push(item);
 				}
-			for each (item in CoC.instance.armors.LegendaryPure())
+			for each (item in CoC.instance.armors.legendaryPure())
 				for each (itemSlot in itemSlots){
 					if (itemSlot.itype == item) list.push(item);
 				}

@@ -1,6 +1,7 @@
 package classes.Items.WeaponsRange 
 {
 	import classes.Items.WeaponRange;
+	import classes.Items.ItemTags;
 	import classes.Player;
 	
 	/**
@@ -16,6 +17,7 @@ package classes.Items.WeaponsRange
 					"The ebony wood of this corrupt bow seems to ignore light. Arrows fired with this weapon seem to have a malignant mind of their own, striking down the weak with brutal efficiency.",
 					"Bow"
 			);
+			withTag(ItemTags.I_LEGENDARY);
 		}
 		override public function get attack():Number{
 			var boost:int = 0;
@@ -31,13 +33,6 @@ package classes.Items.WeaponsRange
 			boost += Math.round(game.player.cor / scal);
 			return (27 + boost);
 		}
-		
-		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.level >= 54) return super.canEquip(doOutput);
-			if(doOutput) outputText("You try and wield the legendary bow but to your disapointment the item simply refuse to stay in your hands. It would seem you yet lack the power and right to wield this item.");
-			return false;
-		}
-		
 	}
 
 }

@@ -5,6 +5,7 @@
 package classes.Items.Weapons
 {
 	import classes.Items.Weapon;
+	import classes.Items.ItemTags;
 	import classes.PerkLib;
 	import classes.Player;
 	import classes.GlobalFlags.*;
@@ -15,6 +16,7 @@ package classes.Items.Weapons
 		public function Excalibur()
 		{
 			super("Excalib", "Excalibur", "Excalibur", "an Excalibur", "slash", 40, 800, "A legendary sword said to have been made by Marae for her champion. This weapon radiates divine power, purifying its wielder and protecting them from impurity.", "", "Sword");
+			withTag(ItemTags.I_LEGENDARY);
 		}
 		
 		override public function get attack():Number {

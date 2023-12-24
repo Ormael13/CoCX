@@ -7,6 +7,7 @@ package classes.Items
 
 import classes.PerkLib;
 import classes.Scenes.SceneLib;
+import classes.Items.ItemConstants;
 
 import coc.view.IconLib;
 
@@ -71,6 +72,15 @@ public class WeaponRange extends Equipable
 				SceneLib.inventory.unequipShield();
 			}
 			return super.beforeEquip(doOutput);
+		}
+
+		override public function getLegItemEquipFailureMessage():String {
+			var itemType:String = "bow";
+			if ([ItemConstants.WT_PISTOL, ItemConstants.WT_RIFLE, ItemConstants.WT_2H_FIREARM, ItemConstants.WT_DUAL_FIREARMS, ItemConstants.WT_DUAL_2H_FIREARMS].indexOf(_perk) > -1) {
+				itemType = "firearm";
+			}
+
+			return "You try to equip the legendary " + itemType + ", but to your disapointment the item simply refuses to stay in your hands. It seems you still lack the right to wield this item.";
 		}
 	}
 }
