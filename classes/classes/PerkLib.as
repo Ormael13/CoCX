@@ -638,6 +638,9 @@ public class PerkLib
 		public static const ArousingAura:PerkType = mk("Arousing Aura", "Arousing Aura",
 				"Exude a lust-inducing aura (Req's corruption of 70 or more)",
 				"You've chosen the 'Arousing Aura' perk, causing you to radiate an aura of lust when your corruption is over 70.");
+		public static const Autocast:PerkType = mk("Autocast", "Autocast",
+				"Allows buff spells to be automatically cast at the start of battle, if you meet the lust requirements to cast them.",
+				"You've chosen the 'Autocast' perk. You start every battle with buff spells cast, as long as your lust is sufficient to cast them.");
 		public static const AxillaryVenomGlands:PerkType = mk("Axillary Venom Glands", "Axillary Venom Glands",
 				"Increase venom/web recharge speed based by 100% at cost of 1% of max HP lost per tick. If reached max venom/web cap it will no longer cause HP decay. (if hunger mode is active will instead drain hunger 2x faster)",
 				"You've chosen the 'Axillary Venom Glands' perk. Increase venom/web recharge speed based by 100% at cost of 1% of max HP lost per tick. If reached max venom/web cap it will no longer cause HP decay. (if hunger mode is active will instead drain hunger 2x faster)");
@@ -5842,7 +5845,7 @@ public class PerkLib
                     .requireLevel(12)
                     .requireInt(75);
             // Spell-boosting perks
-            // Battlemage: auto-use Might
+            /*// Battlemage: auto-use Might
             Battlemage.requireLevel(12)
                     .requirePerks(JobEnchanter, Channeling)
                     .requireInt(80)
@@ -5856,7 +5859,7 @@ public class PerkLib
             Spellbow.requireLevel(12)
                     .requirePerks(JobEnchanter, Channeling)
                     .requireInt(80)
-                    .requireStatusEffect(StatusEffects.KnowsChargeR, "Charge Range spell");
+                    .requireStatusEffect(StatusEffects.KnowsChargeR, "Charge Range spell");*/
             ManaAffinityIV.requirePerk(ManaAffinityIII)
                     .requireInt(110)
                     .requireNGPlus(3)
@@ -5888,7 +5891,7 @@ public class PerkLib
             Archmage.requirePerk(GrandMage)
                     .requireInt(100)
 					.requireLevel(18);
-            // Battleflash: auto-use Blink
+            /*// Battleflash: auto-use Blink
             Battleflash.requireLevel(18)
                     .requirePerk(Battlemage)
                     .requireInt(90)
@@ -5897,7 +5900,7 @@ public class PerkLib
             Spellarmor.requireLevel(18)
                     .requireAnyPerk(Spellsword, Spellbow)
                     .requireInt(90)
-                    .requireStatusEffect(StatusEffects.KnowsChargeA, "Charge Armor spell");
+                    .requireStatusEffect(StatusEffects.KnowsChargeA, "Charge Armor spell");*/
             TraditionalMageI.requireLevel(18)
                     .requireAnyPerk(GrandMage, ArchmageEx)
                     .requireInt(80);
@@ -5924,10 +5927,17 @@ public class PerkLib
             GreyMage.requirePerk(GreyMageApprentice)
                     .requireInt(125)
                     .requireLevel(18);
-            Battleshield.requireStatusEffect(StatusEffects.KnowsManaShield, "Mana Shield spell")
+            /*Battleshield.requireStatusEffect(StatusEffects.KnowsManaShield, "Mana Shield spell")
                     .requirePerk(JobEnchanter)
                     .requireInt(100)
-                    .requireLevel(18);
+                    .requireLevel(18);*/
+			Autocast.requirePerk(PerkLib.JobEnchanter)
+					.requireCustomFunction(function (player:Player):Boolean {
+					return player.hasAnyStatusEffect(StatusEffects.KnowsManaShield, StatusEffects.KnowsChargeA,
+					StatusEffects.KnowsBlink, StatusEffects.KnowsChargeR, StatusEffects.KnowsCharge, StatusEffects.KnowsMight);
+			}, "Any buff spell")
+					.requireInt(100)
+					.requireLevel(18);
             DefensiveStaffChanneling.requirePerks(StaffChanneling, JobEnchanter)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsManaShield)

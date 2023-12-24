@@ -25,25 +25,25 @@ public class CombatMagic extends BaseCombatContent {
 	internal function applyAutocast():void {
 		outputText("\n\n");
 		if (!player.hasPerk(PerkLib.HexKnowledge) || (player.hasPerk(PerkLib.HexKnowledge) && player.hasPerk(PerkLib.HyperCasting))) {
-			if (player.hasPerk(PerkLib.Spellsword) && CombatAbilities.ChargeWeapon.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON_DISABLED] == 0) {
+			if (player.hasPerk(PerkLib.Autocast) && CombatAbilities.ChargeWeapon.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON_DISABLED] == 0) {
 				CombatAbilities.ChargeWeapon.autocast();
 			}
-			if (player.hasPerk(PerkLib.Spellbow) && CombatAbilities.ChargeRWeapon.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_CHARGE_R_WEAPON_DISABLED] == 0) {
+			if (player.hasPerk(PerkLib.Autocast) && CombatAbilities.ChargeRWeapon.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_CHARGE_R_WEAPON_DISABLED] == 0) {
 				CombatAbilities.ChargeRWeapon.autocast();
 			}
-			if (player.hasPerk(PerkLib.Spellarmor) && CombatAbilities.ChargeArmor.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR_DISABLED] == 0) {
+			if (player.hasPerk(PerkLib.Autocast) && CombatAbilities.ChargeArmor.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR_DISABLED] == 0) {
 				CombatAbilities.ChargeArmor.autocast();
 			}
 		}
 		if (!player.hasPerk(PerkLib.DivineKnowledge) || (player.hasPerk(PerkLib.DivineKnowledge) && player.hasPerk(PerkLib.HyperCasting))) {
-			if (player.hasPerk(PerkLib.Battlemage) && CombatAbilities.Might.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_MIGHT_DISABLED] == 0) {
+			if (player.hasPerk(PerkLib.Autocast) && CombatAbilities.Might.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_MIGHT_DISABLED] == 0) {
 				CombatAbilities.Might.autocast();
 			}
-			if (player.hasPerk(PerkLib.Battleflash) && CombatAbilities.Blink.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_BLINK_DISABLED] == 0) {
+			if (player.hasPerk(PerkLib.Autocast) && CombatAbilities.Blink.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_BLINK_DISABLED] == 0) {
 				CombatAbilities.Blink.autocast();
 			}
 		}
-		if (player.hasPerk(PerkLib.Battleshield) && CombatAbilities.ManaShield.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_MANA_SHIELD_DISABLED] == 0) {
+		if (player.hasPerk(PerkLib.Autocast) && CombatAbilities.ManaShield.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_MANA_SHIELD_DISABLED] == 0) {
 			CombatAbilities.ManaShield.autocast();
 		}
 	}
