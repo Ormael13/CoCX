@@ -8,6 +8,7 @@ import classes.PerkClass;
 import classes.PerkType;
 import classes.Stats.StatUtils;
 import classes.internals.Utils;
+import classes.PerkLib;
 
 /**
  * Superclass for items that could be equipped by player (armor, weapon, jewelry, ...).
@@ -136,7 +137,10 @@ public class Equipable extends Useable {
 	}
 
 	public function getLegendaryEquipLevel():int {
-		return 54;
+		var equipLevel:int = 54;
+		equipLevel -= game.player.perkv1(PerkLib.AscensionHerosBirthrightRankX) * 20;
+		if (equipLevel < 0) equipLevel = 0;
+		return equipLevel;
 	}
 
 	public function getLegItemEquipFailureMessage():String {
