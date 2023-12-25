@@ -28,7 +28,7 @@ public class FeyArcaneBloodstreamMutation extends IMutationPerkType
                 descS += ", and increase said damage by 50%";
             }
             if (pTier >= 4){
-                descS += ". When using an ability with random effects the spell now attempts to activate each effect twice";
+                descS += ". When using an ability with random effects, the impact of the effects are doubled";
             }
             if (descS != "")descS += ".";
             return descS;
