@@ -211,7 +211,7 @@ public class AbstractSpell extends CombatAbility {
 				lustDmg *= 5;
 			}
 		}
-		if(player.hasPerk(PerkLib.ArcaneLash)) lustDmg *= 1.5;
+		if(player.hasPerk(PerkLib.ArcaneLash) && player.isWhipTypeWeapon()) lustDmg *= 1.5;
 		if(player.hasStatusEffect(StatusEffects.AlvinaTraining2)) lustDmg *= 1.2;
 		if (monster != null) {
 			if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) lustDmg *= 1.2;

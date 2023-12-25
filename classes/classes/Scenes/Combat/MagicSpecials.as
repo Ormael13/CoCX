@@ -2598,7 +2598,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if(i == 6) {
 				outputText(". Just as you thought you couldn’t get luckier [monster he] ");
 			}
-			choice(damage);
+			choice();
 			EffectList.splice(EffectList.indexOf(choice), 1)
 		}
 		outputText("\n\n");
@@ -5013,7 +5013,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 2) ProcChance -= 10;
 		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) ProcChance -= 10;
 		var procCount:int = 0;
-		var procChecks:int = (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 4 ? 12:6)
+		var procChecks:int = 6;
 		for (var i:int = 0; i < procChecks; i++) {
 			if (rand(100) >= ProcChance) {
 				procCount++;
@@ -5041,7 +5041,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if(i == 6) {
 				outputText(". Just as you thought you couldn’t get luckier [monster he] ");
 			}
-			choice(damage);
+			choice();
 			EffectList.splice(EffectList.indexOf(choice), 1)
 		}
 		outputText(".\n\n");
@@ -5087,7 +5087,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) ProcChance -= 10;
 		//if (ProcChance < 0) ProcChance = 0;
 		var procCount:int = 0;
-		var procChecks:int = (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 4 ? 10:5)
+		var procChecks:int = 5;
 		for (var i:int = 0; i < procChecks; i++) {
 			if (rand(100) >= ProcChance) {
 				procCount++;
@@ -5112,55 +5112,100 @@ public class MagicSpecials extends BaseCombatContent {
 			if(i == 5) {
 				outputText(". Finally [monster he] ");
 			}
-			choice(damage);
+			choice();
 			EffectList.splice(EffectList.indexOf(choice), 1)
 		}
 		outputText(".\n\n");
 		enemyAI();
 	}
 
-	private function FaeStormLightning(damage:Number):void{
+	private function FaeStormLightning():void{
 		if(monster.plural) {
-			outputText("begin spasming while [monster his] bodies are ran through by electricity");
+			outputText("begin spasming while [monster his] bodies are ran through by electricity ");
 		}
-		else outputText("begin spasming while [monster his] body is ran through by electricity");
-		damage = Math.round(damage * combat.lightningDamageBoostedByDao());
-		doLightningDamage(damage);
+		else outputText("begin spasming while [monster his] body is ran through by electricity ");
+
+		var damage:Number = (scalingBonusIntelligence() * spellMod());
+		
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
+		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.5;
+		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) damage *= 1.5;
+		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 4) damage *= 2;
+		damage *= combat.lightningDamageBoostedByDao();
+		damage = calcVoltageMod(damage, true);
+
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+
+
+		doLightningDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
 	}
-	private function FaeStormAcid(damage:Number):void{
+	private function FaeStormAcid():void{
 		if(monster.plural) {
 			outputText("begins screaming as [monster his] bodies is suddenly coated with acid and [monster his] armor melting");
 		}
 		else outputText("begins screaming as [monster his] body is suddenly coated with acid and [monster his] armor melting");
-		monster.armorDef *= 0.5;
+		var debuffPercent:Number = 0.1;
+		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 4) debuffPercent *= 2;
+
+		monster.armorDef -= monster.armorDef * debuffPercent;
 	}
-	private function FaeStormBurn(damage:Number):void{
+	private function FaeStormBurn():void{
 		if(monster.plural) {
 			outputText("starts to burn as [monster his] bodies catch fire");
 		}
 		else outputText("starts to burn as [monster his] body catch fire");
-		monster.createStatusEffect(StatusEffects.BurnDoT, 10, 0.02, 0, 0);
+		var burnPercent:Number = 0.02;
+		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 4) burnPercent *= 2;
+
+		if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT, 1, 1);
+		else monster.createStatusEffect(StatusEffects.BurnDoT, 10, burnPercent, 0, 0);
 	}
-	private function FaeStormPoison(damage:Number):void {
+	private function FaeStormPoison():void {
 		outputText("turns green as a potent poison saps [monster his] strength");
-		monster.createStatusEffect(StatusEffects.NagaVenom, 1, 1, 0, 0);
+		var statDecrease:int = 1;
+		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 4) statDecrease *= 2;
+
+		monster.createOrAddStatusEffect(StatusEffects.NagaVenom, statDecrease);
 	}
-	private function FaeStormFrozen(damage:Number):void{
-		outputText(" shivers as [monster his] skin covers with ice, the surrounding air freezing solid");
-		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.FrozenSolid,3,0,0,0);
-		else outputText(". [Themonster] quickly moves before they are frozen");
+	private function FaeStormFrozen():void{
+		outputText("shivers as [monster his] skin covers with ice, the surrounding air freezing solid");
+		var freezeDuration:int = 2;
+		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 4) freezeDuration *= 2;
+
+		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.FrozenSolid,freezeDuration,0,0,0);	
+		else outputText(". Sadly, [themonster] quickly dodges before they are completely frozen");
+		
 	}
-	private function FaeStormLust(damage:Number):void{
-		var lustDmg:Number = combat.lustDamageCalc();
-		if(monster.plural) outputText("are magically aroused by the spell");
-		else outputText("is magically aroused by the spell");
+	private function FaeStormLust():void{
+		var lustDmg:Number = scalingBonusIntelligence() / 3;
+		lustDmg *= spellMod();
+		lustDmg = combat.teases.teaseAuraLustDamageBonus(monster, lustDmg);
+		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 4) lustDmg *= 2;
+		if (monster) lustDmg *= monster.lustVuln;
+
+		if(monster.plural) outputText("are magically aroused by the spell ");
+		else outputText("is magically aroused by the spell ");
 		monster.teased(Math.round(lustDmg), false);
 	}
-	private function FaeStormSleep(damage:Number):void{
+	private function FaeStormSleep():void{
 		if (monster.plural) outputText("are sent straight to the dream lands by the spell’s powerful hypnotic effects");
 		else outputText("is sent straight to the dream lands by the spell’s powerful hypnotic effects");
-		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Sleep,2,0,0,0);
-		else outputText(" only to quickly shake off the effects");
+
+		var sleepDuration:Number = 2;
+		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 4) sleepDuration *= 2;
+
+		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Sleep,sleepDuration,0,0,0);
+		else outputText(", only to quickly shake themselves awake");
 	}
 
 	public function BalefulPolymorph():void {

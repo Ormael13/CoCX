@@ -138,7 +138,7 @@ public class CombatTeases extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.FlawlessBody)) lustDmg *= 1.5;
 		lustDmg *= masteryBonusDamageTease();
 		if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
-		if (player.hasPerk(PerkLib.ArcaneLash)) lustDmg *= 1.5;
+		if (player.hasPerk(PerkLib.ArcaneLash) && player.isWhipTypeWeapon()) lustDmg *= 1.5;
 		if (player.hasPerk(PerkLib.JobCourtesan) && monster && monster.hasPerk(PerkLib.EnemyBossType)) lustDmg *= 1.2;
 		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemTags.A_REVEALING)) lustDmg *= (1 + ((10 + rand(11)) / 100));
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) lustDmg *= (1 + (player.lust100 * 0.01));

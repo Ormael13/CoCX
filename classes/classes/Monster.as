@@ -4148,6 +4148,66 @@ import classes.Scenes.Combat.CombatAbilities;
 					}
 				}
 			}
+			//Venom damage calculation
+			var venomLustDmg:Number = 0;
+			var damage1B:Number = 0;
+			//Snake Venom
+        	if (hasStatusEffect(StatusEffects.NagaVenom)) {
+				statStore.addBuffObject({str:-statusEffectv1(StatusEffects.NagaVenom), spe:-statusEffectv1(StatusEffects.NagaVenom)}, "Poison",{text:"Poison"});
+				if (statusEffectv3(StatusEffects.NagaVenom) >= 1) venomLustDmg += statusEffectv3(StatusEffects.NagaVenom);
+			}
+			//Apophis Venom
+        	if (hasStatusEffect(StatusEffects.ApophisVenom)) {
+				damage1B = SceneLib.combat.teases.teaseBaseLustDamage();
+				if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
+					damage1B *= 2;
+				}
+				venomLustDmg += damage1B;
+				SceneLib.combat.teaseXP(1 + SceneLib.combat.bonusExpAfterSuccesfullTease());
+				statStore.addBuffObject({str:-statusEffectv1(StatusEffects.ApophisVenom)*2, spe:-statusEffectv1(StatusEffects.ApophisVenom)*2, tou:-statusEffectv1(StatusEffects.ApophisVenom)*2}, "Poison",{text:"Poison"});
+				if (statusEffectv3(StatusEffects.ApophisVenom) >= 1) venomLustDmg += statusEffectv3(StatusEffects.ApophisVenom);
+			}
+			//Bee Venom
+        	if (hasStatusEffect(StatusEffects.BeeVenom)) {
+				damage1B = SceneLib.combat.teases.teaseBaseLustDamage();
+				if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
+					damage1B *= 2;
+				}
+				venomLustDmg += damage1B;
+				SceneLib.combat.teaseXP(1 + SceneLib.combat.bonusExpAfterSuccesfullTease());
+				if (lustVuln != 0) lustVuln += 0.05;
+				statStore.addBuffObject({tou:-statusEffectv1(StatusEffects.ManticoreVenom)*2}, "Poison",{text:"Poison"});
+
+				if (statusEffectv3(StatusEffects.BeeVenom) >= 1) venomLustDmg += statusEffectv3(StatusEffects.BeeVenom);
+			}
+			//Jabberwocky Poison Breath
+        	if (hasStatusEffect(StatusEffects.JabberwockyVenom)) {
+				 damage1B = SceneLib.combat.teases.teaseBaseLustDamage();
+				if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
+					damage1B *= 2;
+				}
+				venomLustDmg += damage1B;
+				SceneLib.combat.teaseXP(1 + SceneLib.combat.bonusExpAfterSuccesfullTease());
+				if (lustVuln != 0) lustVuln += 0.05;
+				statStore.addBuffObject({tou:-statusEffectv1(StatusEffects.JabberwockyVenom)*2}, "Poison",{text:"Poison"});
+				if (statusEffectv3(StatusEffects.JabberwockyVenom) >= 1) venomLustDmg += statusEffectv3(StatusEffects.JabberwockyVenom);
+			}
+			//Manticore Venom
+       		if (hasStatusEffect(StatusEffects.ManticoreVenom)) {
+				damage1B = SceneLib.combat.teases.teaseBaseLustDamage();
+				if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
+					damage1B *= 2;
+				}
+				venomLustDmg += damage1B;
+				SceneLib.combat.teaseXP(1 + SceneLib.combat.bonusExpAfterSuccesfullTease());
+				statStore.addBuffObject({tou:-statusEffectv1(StatusEffects.ManticoreVenom)*2}, "Poison",{text:"Poison"});
+				if (statusEffectv3(StatusEffects.ManticoreVenom) >= 1) venomLustDmg += statusEffectv3(StatusEffects.ManticoreVenom);
+			}
+			if (venomLustDmg > 0 && lustVuln != 0) {
+				outputText("[Themonster] is aroused from the poison coursing through them ");
+				teased(venomLustDmg * lustVuln, false, true);
+				outputText("\n\n");
+			}
 			if (hasStatusEffect(StatusEffects.Maleficium)) {
 				if (statusEffectv1(StatusEffects.Maleficium) <= 0) {
 					removeStatusEffect(StatusEffects.Maleficium);

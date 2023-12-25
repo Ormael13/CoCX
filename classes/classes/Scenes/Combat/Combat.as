@@ -11924,9 +11924,6 @@ public class Combat extends BaseContent {
                     outputText("You notice [monster he] is obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat is beginning to roll on [monster his] skin. You wager [monster he] is probably beginning to regret provoking you.  ");
                 }
             }
-            monster.statStore.addBuffObject({str:-monster.statusEffectv1(StatusEffects.NagaVenom), spe:-monster.statusEffectv1(StatusEffects.NagaVenom)}, "Poison",{text:"Poison"});
-            if (monster.statusEffectv3(StatusEffects.NagaVenom) >= 1 && monster.lustVuln > 0) monster.lust += monster.statusEffectv3(StatusEffects.NagaVenom);
-            if (combatIsOver()) return;
         }
         //Apophis Venom
         if (monster.hasStatusEffect(StatusEffects.ApophisVenom)) {
@@ -11945,15 +11942,6 @@ public class Combat extends BaseContent {
                     outputText("You notice [monster he] is obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat is beginning to roll on [monster his] skin. You wager [monster he] is probably beginning to regret provoking you.  ");
                 }
             }
-            damage1B = combat.teases.teaseBaseLustDamage() * monster.lustVuln;
-            if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
-                damage1B *= 2;
-            }
-            monster.teased(damage1B);
-            combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-            monster.statStore.addBuffObject({str:-monster.statusEffectv1(StatusEffects.ApophisVenom)*2, spe:-monster.statusEffectv1(StatusEffects.ApophisVenom)*2, tou:-monster.statusEffectv1(StatusEffects.ApophisVenom)*2}, "Poison",{text:"Poison"});
-            if (monster.statusEffectv3(StatusEffects.ApophisVenom) >= 1 && monster.lustVuln > 0) monster.lust += monster.statusEffectv3(StatusEffects.ApophisVenom);
-            if (combatIsOver()) return;
         }
         //Bee Venom
         if (monster.hasStatusEffect(StatusEffects.BeeVenom)) {
@@ -11972,17 +11960,6 @@ public class Combat extends BaseContent {
                     outputText("You notice [monster he] is obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat is beginning to roll on [monster his] skin. You wager [monster he] is probably beginning to regret provoking you.  ");
                 }
             }
-            damage1B = combat.teases.teaseBaseLustDamage() * monster.lustVuln;
-            if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
-                damage1B *= 2;
-            }
-            monster.teased(damage1B);
-            combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-            monster.lustVuln += 0.05;
-            monster.statStore.addBuffObject({tou:-monster.statusEffectv1(StatusEffects.ManticoreVenom)*2}, "Poison",{text:"Poison"});
-
-            if (monster.statusEffectv3(StatusEffects.BeeVenom) >= 1 && monster.lustVuln > 0) monster.lust += monster.statusEffectv3(StatusEffects.BeeVenom);
-            if (combatIsOver()) return;
         }
         //Jabberwocky Poison Breath
         if (monster.hasStatusEffect(StatusEffects.JabberwockyVenom)) {
@@ -12001,16 +11978,6 @@ public class Combat extends BaseContent {
                     outputText("You notice [monster he] is obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat is beginning to roll on [monster his] skin. You wager [monster he] is probably beginning to regret provoking you.  ");
                 }
             }
-            damage1B = combat.teases.teaseBaseLustDamage() * monster.lustVuln;
-            if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
-                damage1B *= 2;
-            }
-            monster.teased(damage1B);
-            combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-            monster.lustVuln += 0.05;
-            monster.statStore.addBuffObject({tou:-monster.statusEffectv1(StatusEffects.JabberwockyVenom)*2}, "Poison",{text:"Poison"});
-            if (monster.statusEffectv3(StatusEffects.JabberwockyVenom) >= 1 && monster.lustVuln > 0) monster.lust += monster.statusEffectv3(StatusEffects.JabberwockyVenom);
-            if (combatIsOver()) return;
         }
         //Manticore Venom
         if (monster.hasStatusEffect(StatusEffects.ManticoreVenom)) {
@@ -12029,15 +11996,6 @@ public class Combat extends BaseContent {
                     outputText("You notice [monster he] is obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat is beginning to roll on [monster his] skin. You wager [monster he] is probably beginning to regret provoking you.  ");
                 }
             }
-            damage1B = combat.teases.teaseBaseLustDamage() * monster.lustVuln;
-            if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
-                damage1B *= 2;
-            }
-            monster.teased(damage1B);
-            combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-            monster.statStore.addBuffObject({tou:-monster.statusEffectv1(StatusEffects.ManticoreVenom)*2}, "Poison",{text:"Poison"});
-            if (monster.statusEffectv3(StatusEffects.ManticoreVenom) >= 1 && monster.lustVuln > 0) monster.lust += monster.statusEffectv3(StatusEffects.ManticoreVenom);
-            if (combatIsOver()) return;
         }
         if (monster is Harpy) {
             //(Enemy slightly aroused)
