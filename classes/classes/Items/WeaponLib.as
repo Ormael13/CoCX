@@ -21,7 +21,7 @@ public final class WeaponLib extends ItemConstants
 		}
 
 		public function Legendary():Array {
-			return legendaryPure().concat(LegendaryCorrupt());
+			return legendaryPure().concat(LegendaryCorrupt()).concat(NEXUS);
 		}
 		public function legendaryPure():Array {
 			return [
@@ -57,8 +57,7 @@ public final class WeaponLib extends ItemConstants
 				B_WIDOW,
 				DOCDEST,
 				CHAOSEA,
-				ECLIPSE,
-				NEXUS
+				ECLIPSE
 			];
 		}
 		

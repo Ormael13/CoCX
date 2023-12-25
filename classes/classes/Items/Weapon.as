@@ -149,7 +149,7 @@ public class Weapon extends Equipable
 		override public function getLegItemEquipFailureMessage():String {
 			var weaponType:String = _type.split(", ")[0];
 			if (weaponType == ItemConstants.WT_MACE_HAMMER) weaponType = "Mace";
-			if (weaponType == ItemConstants.WT_DUELING || weaponType == ItemConstants.WT_EXOTIC) weaponType = "Weapon";
+			if (weaponType == ItemConstants.WT_DUELING || weaponType == ItemConstants.WT_EXOTIC || !weaponType) weaponType = "Weapon";
 			return "You try to equip the legendary " + weaponType.toLowerCase() + ", but to your disappointment the item simply refuses to stay in your hands." + 
 				" It seems you still lack the right to wear this item.";
 		}
