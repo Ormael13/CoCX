@@ -2565,7 +2565,7 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 0;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.30;
 			}
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.40) {
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.32) {
 				outputText("\n\nMerged Autocast perks into new Enchanter perk");
 				refundPerk(PerkLib.Battlemage);
 				refundPerk(PerkLib.Spellsword);
@@ -2573,7 +2573,7 @@ public class SaveUpdater extends NPCAwareContent {
 				refundPerk(PerkLib.Battleflash);
 				refundPerk(PerkLib.Spellarmor);
 				refundPerk(PerkLib.Battleshield);
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.40;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.32;
 			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.50) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.50;
@@ -2603,4 +2603,4 @@ public class SaveUpdater extends NPCAwareContent {
 		}
 	}
 }
-}
+}

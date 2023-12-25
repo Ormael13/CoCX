@@ -5933,9 +5933,9 @@ public class PerkLib
                     .requireLevel(18);*/
 			Autocast.requirePerk(PerkLib.JobEnchanter)
 					.requireCustomFunction(function (player:Player):Boolean {
-					return player.hasAnyStatusEffect(StatusEffects.KnowsManaShield, StatusEffects.KnowsChargeA,
-					StatusEffects.KnowsBlink, StatusEffects.KnowsChargeR, StatusEffects.KnowsCharge, StatusEffects.KnowsMight);
-			}, "Any buff spell")
+						return player.hasAnyStatusEffect(StatusEffects.KnowsManaShield, StatusEffects.KnowsChargeA,
+						StatusEffects.KnowsBlink, StatusEffects.KnowsChargeR, StatusEffects.KnowsCharge, StatusEffects.KnowsMight);
+					}, "Any buff spell")
 					.requireInt(100)
 					.requireLevel(18);
             DefensiveStaffChanneling.requirePerks(StaffChanneling, JobEnchanter)

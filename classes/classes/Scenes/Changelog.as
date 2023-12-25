@@ -25,39 +25,13 @@ public class Changelog extends BaseContent
 		}
 		private function Changelog51():void {
 			clearOutput();
-			//0 of 11 pages
-			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
-			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
-			//outputText("-\n");
-			//outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
-			//outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//New consumable (by Sylabt & Ohaxer): Soft Iron Ingot. Cost 70 gems. Can be bought at food stand in Trench. Eating it would restore 80 hunger, heal 20% of max HP and apply (refresh) buff for 24 hours that increase physical defense by 15%.
-			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
-			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
-			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay) (NUZ/Shirane)
-			outputText("-\n");
 			menu();
 			addButton(0, "Next", Changelog50);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 		private function Changelog50():void {
 			clearOutput();
-			outputText("(Part 2/2) <b>Version 0.8v:</b>\n\n");
+			outputText("(Part 2/2) <b>Version 0.8v (Perk-o-calipse 8 (around 40+ perks), large portion of combat code revamps, new bodyparts, new internal mutations, adding/adjusting/reworking racial bonuses of some races, Druid additions and many QoL/Bugfixing):</b>\n\n");
 			outputText("<b>Demojay contributions:</b>\n");
 			outputText("-Added Cooldown Code for Blood Requiem and Blood Requiem (SF) Blood Soulskills.\n");
 			outputText("-Changed behaviour of Elementals under Simplified Pre Turn so that the elemental chosen is no longer random, but selected by the player.\n");
@@ -98,6 +72,7 @@ public class Changelog extends BaseContent
 			outputText("-Damage bounding for periodic damage/lust effects is currently calculated using the following: If the monster is equal or higher level, the DoT damage is limited to a max of 20%. If the monster is up to 9 levels below the player, tha max damage increases up to 50%, and any greater gap is unbounded Kamaitachi Bleed now has an inital damage value +20%/+40% (depending on racial tier) ");
 			outputText("per stack of bleed with no ceiling. Normal attacks add 1 stack and the 'Wind Scythe' special adds 3. Each turn in which the bleed is not applied reduces the stacks by 1 (min. of 1 stack)\n");
 			outputText("-General code cleanup for bleed DoT effects. Added number formatting to the tease damage display.\n");
+			//4 of 11 pages
 			outputText("-Lethice now cannot adapt/deflect DoT and companions (since some sources such as auras cannot be turned off in battle) Lethice reflection damage now uses proper damage functions, so that player defenses are properly taken into accountLethice's 'hplossimmune' adaption now takes the correct HP value into account. ");
 			outputText("Prevent the demons in Lethice phase 2 from using Lethice's adaptions to status effects. Having the Eyes of the Hunter (Master) perk in the Lethice Fight will allow you to see which Damage types Lithice will currently deflect.\n");
 			outputText("-Way of the Blood super perk effect 'Allowing you use of your health to substitute using soulforce in almost all soulskills' was replaced with 'Blood speels and soulskills gain additional effects that would get better as you progress in this job'.\n");
@@ -118,8 +93,34 @@ public class Changelog extends BaseContent
 			outputText("large portion of her storyline, corrupt Celess sex scenes not reseting lust/not giving tease exp, 2nd promotion in Adventure Guld been not accesable, Diva/Project Nightwalker dropping/giving Bat TF instead of Vampire TF, Sky-tier Aether Twins been excluded from some of BFGaunlets bonuses, silly mode event in hills involving minotaurs got it lvl req. below lvl req. for area ");
 			outputText("(fix was removing the lvl req. on it), races with Undeath perk scaling HP from tou instead of lib, Salamander IM not keeping Lustzerker perk from loosing if no longer race with lustzerker ability, Gryphon Statuette only allowing cock tf scene, Weasel Eyes tf not triggering when having Raiju Eyes, Library not teaching all curretly existing tier 1 white and black spells, ");
 			outputText("Werewolf pity system not working with FemDom post fight option, cow score req. both fur and plain skin\n\n");
-			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8v2:</b>\n\n");
+			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
+			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
+			//outputText("-\n");
+			//outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
+			//outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
+			outputText("-New tier 3 intelligence lvl-up perk: Autocast. Req. Any buff spell and 100+ int. Effect: Allows buff spells to be automatically cast at the start of battle, if you meet the lust requirements to cast them.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//New consumable (by Sylabt & Ohaxer): Soft Iron Ingot. Cost 70 gems. Can be bought at food stand in Trench. Eating it would restore 80 hunger, heal 20% of max HP and apply (refresh) buff for 24 hours that increase physical defense by 15%.
+			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
+			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay) (NUZ/Shirane)
+			outputText("-\n");
+			/*ostatni punkt changelogu
+			outputText("<b>Version 0.8w:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-Fixed bugs: \n\n");
 			//remove this line when other two lines below get added ingame
@@ -236,7 +237,7 @@ public class Changelog extends BaseContent
 		}
 		private function Changelog49():void {
 			clearOutput();
-			outputText("(Part 1/2) <b>Version 0.8v:</b>\n\n");
+			outputText("(Part 1/2) <b>Version 0.8v (Perk-o-calipse 8 (around 40+ perks), large portion of combat code revamps, new bodyparts, new internal mutations, adding/adjusting/reworking racial bonuses of some races, Druid additions and many QoL/Bugfixing):</b>\n\n");
 			outputText("-New tier 0 strength lvl-up perk: Power Attack. Req. Job: Warrior perk. Effect: Enable Power Attack p. special. Add ~20% of base stat scaling value to melee damage. (+5% melee physical attacks multiplier)\n");
 			outputText("-New tier 0 misc lvl-up perk: Utility Skills: Beginner. Req. Any non combat skill at lvl 1. Effect: Increasing mastery gains in non-combat skills by 100% of base and decreasing a bit req. exp to level up.\n");
 			outputText("-New tier 0 misc lvl-up perk: Metabolization. Req. Slime, Manticore, Displacer beast, Vampire, Dracula race or hunger enabled. Effect: Increase the duration of lingering nourishment effects by 100% of base duration. And slows hunger progression if any(note does not raise racial scores).\n");
