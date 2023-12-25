@@ -99,8 +99,8 @@ public class Changelog extends BaseContent
 			//outputText("-\n");
 			//outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
 			//outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
-			outputText("-New tier 3 intelligence lvl-up perk: Autocast. Req. Any buff spell and 100+ int. Effect: Allows buff spells to be automatically cast at the start of battle, if you meet the lust requirements to cast them.\n");
-			outputText("-\n");
+			outputText("-New tier 3 intelligence lvl-up perk (by Demojay): Autocast. Req. Any buff spell and 100+ int. Effect: Allows buff spells to be automatically cast at the start of battle, if you meet the lust requirements to cast them.\n");
+			outputText("-Moved venom applications from correct 'combatstatusupdate' function, to prevent it being called outside of a new round. Venom ticks cannot increase the lust vulnerability of lust immune enemies. Changed highest tier of Fae Bloodstream to double effects of fae magic effects, rather than doubling the number of procs (Same effect but cleaner code) (Demojay)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -119,6 +119,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay) (NUZ/Shirane)
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-Fixed bugs: \n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8w:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -184,7 +187,10 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -212,8 +218,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
