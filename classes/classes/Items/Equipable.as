@@ -138,7 +138,7 @@ public class Equipable extends Useable {
 
 	public function getLegendaryEquipLevel():int {
 		var equipLevel:int = 54;
-		equipLevel -= game.player.perkv1(PerkLib.AscensionHerosBirthrightRankX) * 20;
+		equipLevel -= game.player.perkv1(PerkLib.AscensionHerosBirthrightRankX) * 9;
 		if (equipLevel < 0) equipLevel = 0;
 		return equipLevel;
 	}

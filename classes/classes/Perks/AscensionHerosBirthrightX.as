@@ -13,8 +13,8 @@ public class AscensionHerosBirthrightX extends PerkType
     override public function desc(params:PerkClass = null):String {
         if (!player) return _desc;
         var pVal:Number = player.perkv1(PerkLib.AscensionHerosBirthrightRankX);
-        if (pVal < 3)
-            return "The level needed to use legendary items has been reduced by " + (20 * pVal).toString() + ", making the minimum level " + (54 - (20 * pVal)).toString() + ".";
+        if (pVal < 6)
+            return "The level needed to use legendary items has been reduced by " + (9 * pVal).toString() + ", making the minimum level " + (54 - (9 * pVal)).toString() + ".";
         else   
             return "There is no longer a minimum level needed to use legendary items.";
     }
@@ -26,7 +26,7 @@ public class AscensionHerosBirthrightX extends PerkType
     }
 
     public function AscensionHerosBirthrightX() {
-        super("Ascension Hero's Birthright", "Ascension Hero's Birthright",
+        super("Ascension Hero's Birthright", "Ascension: Hero's Birthright",
                 ".");
     }
 

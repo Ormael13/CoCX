@@ -2304,13 +2304,14 @@ import classes.Scenes.Combat.CombatAbility;
 			}
 			else {
 				addButton(btn, "ORTRTA Rank" + tier.toString(), perkRPConfirm, tier, PerkLib.AscensionOneRaceToRuleThemAllX, pCost, 
-					"Acquire One Race To Rule Them All Rank " + tier.toString() + ".\n\nIncreases the number of stat points earned per level, and racial skill power.");
+					"Acquire One Race To Rule Them All Rank " + tier.toString() + ".\n\nIncreases the number of stat points earned per level, and racial skill power.\n"
+					+ "Cost: " + tier * pCost);
 			}
 		}
 		
 		private function perkHerosBirthrightCheck(tier:int, btn:int):void {
 			var pCost:int = 10;
-			if (tier > 3) {
+			if (tier > 6) {
 				addButtonDisabled(btn, "B. right Rank "+ (tier-1).toString(),"You have the highest tier already.");
 			}
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < tier) {
@@ -2321,7 +2322,8 @@ import classes.Scenes.Combat.CombatAbility;
 			}
 			else {
 				addButton(btn, "B. right Rank " + tier.toString(), perkRPConfirm, tier, PerkLib.AscensionHerosBirthrightRankX, pCost, 
-					"Acquire Hero's Birthright Rank " + tier.toString() + ".\n\nReduces the level needed to equip legendary items.");
+					"Acquire Hero's Birthright Rank " + tier.toString() + ".\n\nReduces the level needed to equip legendary items by 9.\n"
+					+ "Cost: " + tier * pCost);
 			}
 		}
 
@@ -2330,7 +2332,7 @@ import classes.Scenes.Combat.CombatAbility;
 			if (tier == 1) player.createPerk(perk,1,0,0,1);
 			else player.setPerkValue(perk,1,player.perkv1(perk) + 1);
 			clearOutput();
-			outputText("You have acquired " + perk.name() + "!");
+			outputText("You have acquired " + perk.name() + "!\n\n" + perk.desc());
 			if (RPP == 1) doNext(rarePerks1);
 			else doNext(rarePerks2);
 		}

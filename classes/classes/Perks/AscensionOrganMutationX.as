@@ -23,7 +23,7 @@ public class AscensionOrganMutationX extends PerkType
     }
 
     public function AscensionOrganMutationX() {
-        super("Ascension Additional Organ Mutation", "Ascension Additional Organ Mutation",
+        super("Ascension Additional Organ Mutation", "Ascension: Additional Organ Mutation",
                 ".");
     }
 
