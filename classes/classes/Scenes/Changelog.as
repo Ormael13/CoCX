@@ -104,28 +104,28 @@ public class Changelog extends BaseContent
 			outputText("Pixie Dust Special now has to pay the dark ritual HP cost for its increased damage. Proc Check loop for Fae Storm/Pixie Dust no longer stops after first failed check. (Demojay)\n");
 			outputText("-Made level check function for handling legendary items tied to a 'Legendary' Tag, for easy identification of legendary items. Added 'Death Prince Golden Armor', 'Asterius Rage' and 'Nexus' to legendary lists. (Demojay)\n");
 			outputText("-New rare ascension perk (by Demojay) -> Ascension: Hero's Birthright. Can gain one rank per NG tier. Required level to equip legendary gear is lowered by (9 x rank) lvl's. Max Rank: 6.\n");
+			outputText("-Max level cap was increased to 205 from 185.\n");
+			outputText("-New event perk: Raging Inferno (Mastered). Gained by use of the Pocket Watch when req. are meet. Effects: Cumulative 120% damage increase for every subsequent acid spell. Each turn without cast acid spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling fire based attack. Maximum 50 stacks.\n");
+			outputText("-New event perk: Glacial Storm (Mastered). Gained by use of the Pocket Watch when req. are meet. Effects: Cumulative 120% damage increase for every subsequent ice spell. Each turn without cast ice spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling ice based attack. Maximum 50 stacks.\n");
+			outputText("-New event perk: High Voltage (Mastered). Gained by use of the Pocket Watch when req. are meet. Effects: Cumulative 120% damage increase for every subsequent lightning spell. Each turn without cast lightning spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling lightning based attack. Maximum 50 stacks.\n");
+			outputText("-New event perk: Eclipsing Shadow (Mastered). Gained by use of the Pocket Watch when req. are meet. Effects: Cumulative 120% damage increase for every subsequent darkness spell. Each turn without cast darkness spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling darkness based attack. Maximum 50 stacks.\n");
+			outputText("-New event perk: High Tide (Mastered). Gained by use of the Pocket Watch when req. are meet. Effects: Cumulative 120% damage increase for every subsequent water spell. Each turn without cast water spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling water based attack. Maximum 50 stacks.\n");
+			outputText("-New event perk: Howling Gale (Mastered). Gained by use of the Pocket Watch when req. are meet. Effects: Cumulative 120% damage increase for every subsequent wind spell. Each turn without cast wind spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling wind based attack. Maximum 50 stacks.\n");
+			outputText("-New event perk: Rumbling Quake (Mastered). Gained by use of the Pocket Watch when req. are meet. Effects: Cumulative 120% damage increase for every subsequent earth spell. Each turn without cast earth spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling earth based attack. Maximum 50 stacks.\n");
+			outputText("-New event perk: Corrosive Meltdown (Mastered). Gained by use of the Pocket Watch when req. are meet. Effects: Cumulative 120% damage increase for every subsequent acid spell. Each turn without cast acid spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling acid based attack. Maximum 50 stacks.\n");
+			outputText("-New consumable (by Sylabt & Ohaxer): Light Bronze Bar. Cost 120 gems. Can be bought at food stand in Trench. Eating it would restore 100 hunger, heal 40% of max HP and apply (refresh) buff for 24 hours that increase poison resistance by 40% and magic defense by 15%.\n");
+			outputText("-New consumable (by Sylabt & Ohaxer): Ebonbloom Alloy Ingot. Cost 200 gems. Can be bought at food stand in Trench. Eating it would restore 120 hunger, heal 60% of max HP and apply (refresh) buff for 24 hours that increase physical & magic defense by 25% and removes 60% of max lust.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//New consumable (by Sylabt & Ohaxer): Soft Iron Ingot. Cost 70 gems. Can be bought at food stand in Trench. Eating it would restore 80 hunger, heal 20% of max HP and apply (refresh) buff for 24 hours that increase physical defense by 15%.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay) (NUZ/Shirane)
 			outputText("-\n");
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-Fixed bugs: When picking Yes instead of Maybe? on ascension game not allowing to pick some of asc perks\n\n");
+			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay) (NUZ/Shirane)
+			outputText("-Fixed bugs: When picking Yes instead of Maybe? on ascension game not allowing to pick some of asc perks, elemental damage cumulation stacks decaying 2x slower\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8w:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -194,7 +194,11 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -224,6 +228,7 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

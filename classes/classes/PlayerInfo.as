@@ -398,6 +398,12 @@ public class PlayerInfo extends BaseContent {
 		
 		if (player.buff("SoftIronIgnotPhysicalDefenseBuff").isPresent())
 			statEffects += "Physical Defense Buff (+15%) - " + player.buff('Soft Iron Ignot Physical Defense Buff').getRemainingTicks() + " hours remaining.\n";
+		
+		if (player.buff("LightBronzeBarMagicDefenseAndPoisonResistanceBuff").isPresent())
+			statEffects += "Magic Defense Buff (+15%), Poison Resistance Buff (+40%) - " + player.buff('Light Bronze Bar Magic Defense And Poison Resistance Buff').getRemainingTicks() + " hours remaining.\n";
+		
+		if (player.buff("EbonbloomAlloyIngotPhysicalAndMagicDefenseBuff").isPresent())
+			statEffects += "Physical & Magic Defense Buff (+25%) - " + player.buff('Ebonbloom Alloy Ingot Physical And Magic Defense Buff').getRemainingTicks() + " hours remaining.\n";
 
 		if (player.statusEffectv1(StatusEffects.Bammed1) > 0) {
 			if (player.statusEffectv1(StatusEffects.Bammed1) == 3) statEffects += "Bammed <b>(Disables melee attacks permanently)</b>\n";
@@ -2628,4 +2634,4 @@ public class PlayerInfo extends BaseContent {
 		doNext(superPerkBuyMenu, 5);
 	}
 }
-}
+}

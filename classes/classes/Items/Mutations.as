@@ -11935,7 +11935,7 @@ public final class Mutations extends MutationsHelper {
         outputText("The water is cool and sweet to the taste, and every swallow makes you feel calmer, cleaner, and refreshed.  You drink until your thirst is quenched, feeling purer in both mind and body. ");
         //-30 fatigue, -2 libido, -10 lust]
         fatigue(-(Math.round(player.maxFatigue() * 0.02) + 40));
-        dynStats("lus", -(Math.round(player.maxLust() * 0.06) + 100), "cor", (-4 - rand(3)), "scale", false);
+        dynStats("lus", -(Math.round(player.maxLust() * 0.06) + 100), "cor", (-4 - rand(3)));
         player.addCurse("lib", 2, 1);
         HPChange(100 + (10 * player.level) + rand(10 * player.level), true);
         player.refillHunger(30);
@@ -17486,12 +17486,14 @@ public final class Mutations extends MutationsHelper {
         if (!player.hasPerk(PerkLib.MiracleMetal)) {
             outputText("As you greedily try to take a bite out of the delicious metal bar full force, you painfully find that your teeth don’t go through the metal and start to ache greatly…OW! The hell!? You quickly try to take more bites but your teeth just…CAN’T pass though the metal. And this is the softest of the metal bars you got!");
             outputText("\n\n<b>Requires perk: Miracle Metal</b>");
-            SceneLib.inventory.returnItemToInventory(consumables.SIINGOT);
+            SceneLib.inventory.returnItemToInventory(consumables.L_B_BAR);
         }
 		else {
-			outputText("You eat the flavorless biscuits. It satisfies your hunger a bit, but not much else.");
+			outputText("You take several bites out of the bar before it’s completely gone, a soothing cold feeling lingers in your mouth, and throat before it slowly spreads to the rest of your body. It could just be a trick of the light, but your natural armor looks shinier than ever.");
 			player.refillHunger(100);
 			HPChange(Math.round(player.maxHP() * 0.4), true);
+			if (player.buff("LightBronzeBarMagicDefenseAndPoisonResistanceBuff").isPresent()) player.buff("LightBronzeBarMagicDefenseAndPoisonResistanceBuff").remove();
+			player.buff("LightBronzeBarMagicDefenseAndPoisonResistanceBuff").forHours(24);
 		}
     }
 
@@ -17500,12 +17502,15 @@ public final class Mutations extends MutationsHelper {
         if (!player.hasPerk(PerkLib.MiracleMetal)) {
             outputText("As you greedily try to take a bite out of the delicious metal bar full force, you painfully find that your teeth don’t go through the metal and start to ache greatly…OW! The hell!? You quickly try to take more bites but your teeth just…CAN’T pass though the metal. And this is the softest of the metal bars you got!");
             outputText("\n\n<b>Requires perk: Miracle Metal</b>");
-            SceneLib.inventory.returnItemToInventory(consumables.SIINGOT);
+            SceneLib.inventory.returnItemToInventory(consumables.EAINGOT);
         }
 		else {
-			outputText("You eat the flavorless biscuits. It satisfies your hunger a bit, but not much else.");
+			outputText("You take a small bite and discover it’s quite bitter at first, but it’s following aftertaste is a blast of flavor that fills your body and mind with heavenly bliss. It could just be a trick of the light, but your natural armor looks darker with a blinding gloss.");
 			player.refillHunger(120);
-			HPChange(Math.round(player.maxHP() * 0.9), true);
+			HPChange(Math.round(player.maxHP() * 0.6), true);
+			dynStats("lus", -Math.round(player.maxLust() * 0.6));
+			if (player.buff("EbonbloomAlloyIngotPhysicalAndMagicDefenseBuff").isPresent()) player.buff("EbonbloomAlloyIngotPhysicalAndMagicDefenseBuff").remove();
+			player.buff("EbonbloomAlloyIngotPhysicalAndMagicDefenseBuff").forHours(24);
 		}
     }
 

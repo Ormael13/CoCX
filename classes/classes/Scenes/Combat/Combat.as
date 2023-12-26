@@ -1414,7 +1414,7 @@ public class Combat extends BaseContent {
         clearOutput();
         outputText("You decided to stop preparing your super ultra hyper mega fabulous attack!\n\n");
         for each (var perkObj:Object in CombatMagic.magicCounterPerks) {
-            if (player.hasPerk(perkObj.tier3) && player.hasStatusEffect(perkObj.counter)) player.addStatusValue(perkObj.counter, 3, -1);
+            if ((player.hasPerk(perkObj.tier3) || player.hasPerk(perkObj.tier4)) && player.hasStatusEffect(perkObj.counter)) player.addStatusValue(perkObj.counter, 3, -1);
         }
 		player.removeStatusEffect(StatusEffects.ChanneledAttack);
         player.removeStatusEffect(StatusEffects.ChanneledAttackType);
@@ -9212,9 +9212,9 @@ public class Combat extends BaseContent {
         for each (var perkObj:Object in CombatMagic.magicCounterPerks) {
             if (player.hasStatusEffect(perkObj.counter)) {
             if (player.statusEffectv1(perkObj.counter) > 0 && player.statusEffectv2(perkObj.counter) == 0 && player.statusEffectv3(perkObj.counter) == 0) {
-				if (player.hasPerk(perkObj.tier3)) player.addStatusValue(perkObj.counter, 1, -2);
-				else if (player.hasPerk(perkObj.tier2)) player.addStatusValue(perkObj.counter, 1, -3);
-				player.addStatusValue(perkObj.counter, 1, -4);
+				if (player.hasPerk(perkObj.tier3) || player.hasPerk(perkObj.tier4)) player.addStatusValue(perkObj.counter, 1, -4);
+				else if (player.hasPerk(perkObj.tier2)) player.addStatusValue(perkObj.counter, 1, -6);
+				player.addStatusValue(perkObj.counter, 1, -8);
 			}
 			if (player.statusEffectv2(perkObj.counter) > 0) player.addStatusValue(perkObj.counter, 2, -1);
         }

@@ -2460,9 +2460,41 @@ public class Camp extends NPCAwareContent{
 		}
 
 		if (page == 5) {
-			addButton(0, "Archmage (Ex)", mainPagePocketWatchArchmageEx)
+			addButton(0, "Raging Inferno (Mst)", mainPagePocketWatchRagingInfernoMastered)
+			.disableIf(!player.hasPerk(PerkLib.RagingInfernoSu), "Req. Raging Inferno (Su) perk")
+			.disableIf(player.hasPerk(PerkLib.RagingInfernoMastered), "You already got this merged perk");
+
+			addButton(1, "Glacial Storm (Mst)", mainPagePocketWatchGlacialStormMastered)
+			.disableIf(!player.hasPerk(PerkLib.GlacialStormSu), "Req. Glacial Storm (Su) perk")
+			.disableIf(player.hasPerk(PerkLib.GlacialStormMastered), "You already got this merged perk");
+
+			addButton(2, "High Voltage (Mst)", mainPagePocketWatchHighVoltageMastered)
+			.disableIf(!player.hasPerk(PerkLib.HighVoltageSu), "Req. High Voltage (Su) perk")
+			.disableIf(player.hasPerk(PerkLib.HighVoltageMastered), "You already got this merged perk");
+
+			addButton(3, "Eclipsing Shadow (Mst)", mainPagePocketWatchEclipsingShadowMastered)
+			.disableIf(!player.hasPerk(PerkLib.EclipsingShadowSu), "Req. Eclipsing Shadow (Su) perk")
+			.disableIf(player.hasPerk(PerkLib.EclipsingShadowMastered), "You already got this merged perk");
+
+			addButton(4, "Archmage (Ex)", mainPagePocketWatchArchmageEx)
 			.disableIf(!player.hasPerk(PerkLib.Archmage), "Req. Archmage perk")
 			.disableIf(player.hasPerk(PerkLib.ArchmageEx), "You already got this merged perk");
+
+			addButton(5, "High Tide (Mst)", mainPagePocketWatchHighTideMastered)
+			.disableIf(!player.hasPerk(PerkLib.HighTideSu), "Req. High Tide (Su) perk")
+			.disableIf(player.hasPerk(PerkLib.HighTideMastered), "You already got this merged perk");
+
+			addButton(6, "Howling Gale (Mst)", mainPagePocketWatchHowlingGaleMastered)
+			.disableIf(!player.hasPerk(PerkLib.HowlingGaleSu), "Req. Howling Gale (Su) perk")
+			.disableIf(player.hasPerk(PerkLib.HowlingGaleMastered), "You already got this merged perk");
+
+			addButton(7, "Rumbling Quake (Mst)", mainPagePocketWatchRumblingQuakeMastered)
+			.disableIf(!player.hasPerk(PerkLib.RumblingQuakeSu), "Req. Rumbling Quake (Su) perk")
+			.disableIf(player.hasPerk(PerkLib.RumblingQuakeMastered), "You already got this merged perk");
+
+			addButton(8, "Corrosive Meltdown (Mst)", mainPagePocketWatchCorrosiveMeltdownMastered)
+			.disableIf(!player.hasPerk(PerkLib.CorrosiveMeltdownSu), "Req. Corrosive Meltdown (Su) perk")
+			.disableIf(player.hasPerk(PerkLib.CorrosiveMeltdownMastered), "You already got this merged perk");
 
 			addButton(12, "Previous", mainPagePocketWatch, page - 1);
 			addButton(13, "Next", mainPagePocketWatch, page + 1);		
@@ -2648,16 +2680,49 @@ public class Camp extends NPCAwareContent{
 		player.perkPoints += 2;
 		doNext(mainPagePocketWatch, 4);
 	}
-	private function mainPagePocketWatchGreaterDiehardEx():void {
+	private function mainPagePocketWatchRagingInfernoMastered():void {
 		clearOutput();
-		outputText("Perks combined: 'Greater Diehard (Ex)' perk attained.");
-		player.removePerk(PerkLib.Diehard);
-		player.removePerk(PerkLib.ImprovedDiehard);
-		player.removePerk(PerkLib.GreaterDiehard);
-		player.createPerk(PerkLib.GreaterDiehardEx, 0, 0, 0, 0);
+		outputText("Perks combined: 'Raging Inferno (Mastered)' perk attained.");
+		player.removePerk(PerkLib.RagingInferno);
+		player.removePerk(PerkLib.RagingInfernoEx);
+		player.removePerk(PerkLib.RagingInfernoSu);
+		player.createPerk(PerkLib.RagingInfernoMastered, 0, 0, 0, 0);
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
 		player.perkPoints += 2;
-		doNext(mainPagePocketWatch, 6);
+		doNext(mainPagePocketWatch, 5);
+	}
+	private function mainPagePocketWatchGlacialStormMastered():void {
+		clearOutput();
+		outputText("Perks combined: 'Glacial Storm (Mastered)' perk attained.");
+		player.removePerk(PerkLib.GlacialStorm);
+		player.removePerk(PerkLib.GlacialStormEx);
+		player.removePerk(PerkLib.GlacialStormSu);
+		player.createPerk(PerkLib.GlacialStormMastered, 0, 0, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
+		player.perkPoints += 2;
+		doNext(mainPagePocketWatch, 5);
+	}
+	private function mainPagePocketWatchHighVoltageMastered():void {
+		clearOutput();
+		outputText("Perks combined: 'High Voltage (Mastered)' perk attained.");
+		player.removePerk(PerkLib.HighVoltage);
+		player.removePerk(PerkLib.HighVoltageEx);
+		player.removePerk(PerkLib.HighVoltageSu);
+		player.createPerk(PerkLib.HighVoltageMastered, 0, 0, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
+		player.perkPoints += 2;
+		doNext(mainPagePocketWatch, 5);
+	}
+	private function mainPagePocketWatchEclipsingShadowMastered():void {
+		clearOutput();
+		outputText("Perks combined: 'Eclipsing Shadow (Mastered)' perk attained.");
+		player.removePerk(PerkLib.EclipsingShadow);
+		player.removePerk(PerkLib.EclipsingShadowEx);
+		player.removePerk(PerkLib.EclipsingShadowSu);
+		player.createPerk(PerkLib.EclipsingShadowMastered, 0, 0, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
+		player.perkPoints += 2;
+		doNext(mainPagePocketWatch, 5);
 	}
 	private function mainPagePocketWatchArchmageEx():void {
 		clearOutput();
@@ -2669,6 +2734,61 @@ public class Camp extends NPCAwareContent{
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
 		player.perkPoints += 2;
 		doNext(mainPagePocketWatch, 5);
+	}
+	private function mainPagePocketWatchHighTideMastered():void {
+		clearOutput();
+		outputText("Perks combined: 'High Tide (Mastered)' perk attained.");
+		player.removePerk(PerkLib.HighTide);
+		player.removePerk(PerkLib.HighTideEx);
+		player.removePerk(PerkLib.HighTideSu);
+		player.createPerk(PerkLib.HighTideMastered, 0, 0, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
+		player.perkPoints += 2;
+		doNext(mainPagePocketWatch, 5);
+	}
+	private function mainPagePocketWatchHowlingGaleMastered():void {
+		clearOutput();
+		outputText("Perks combined: 'Howling Gale (Mastered)' perk attained.");
+		player.removePerk(PerkLib.HowlingGale);
+		player.removePerk(PerkLib.HowlingGaleEx);
+		player.removePerk(PerkLib.HowlingGaleSu);
+		player.createPerk(PerkLib.HowlingGaleMastered, 0, 0, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
+		player.perkPoints += 2;
+		doNext(mainPagePocketWatch, 5);
+	}
+	private function mainPagePocketWatchRumblingQuakeMastered():void {
+		clearOutput();
+		outputText("Perks combined: 'Rumbling Quake (Mastered)' perk attained.");
+		player.removePerk(PerkLib.RumblingQuake);
+		player.removePerk(PerkLib.RumblingQuakeEx);
+		player.removePerk(PerkLib.RumblingQuakeSu);
+		player.createPerk(PerkLib.RumblingQuakeMastered, 0, 0, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
+		player.perkPoints += 2;
+		doNext(mainPagePocketWatch, 5);
+	}
+	private function mainPagePocketWatchCorrosiveMeltdownMastered():void {
+		clearOutput();
+		outputText("Perks combined: 'Corrosive Meltdown (Mastered)' perk attained.");
+		player.removePerk(PerkLib.CorrosiveMeltdown);
+		player.removePerk(PerkLib.CorrosiveMeltdownEx);
+		player.removePerk(PerkLib.CorrosiveMeltdownSu);
+		player.createPerk(PerkLib.CorrosiveMeltdownMastered, 0, 0, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
+		player.perkPoints += 2;
+		doNext(mainPagePocketWatch, 5);
+	}
+	private function mainPagePocketWatchGreaterDiehardEx():void {
+		clearOutput();
+		outputText("Perks combined: 'Greater Diehard (Ex)' perk attained.");
+		player.removePerk(PerkLib.Diehard);
+		player.removePerk(PerkLib.ImprovedDiehard);
+		player.removePerk(PerkLib.GreaterDiehard);
+		player.createPerk(PerkLib.GreaterDiehardEx, 0, 0, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
+		player.perkPoints += 2;
+		doNext(mainPagePocketWatch, 6);
 	}/*
 	private function mainPagePocketWatch():void {
 		clearOutput();

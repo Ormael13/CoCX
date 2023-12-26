@@ -250,7 +250,9 @@ private function theTrenchFoodStand():void {
 	addButton(0, "SF", theTrenchFoodStandCoelacanthJerky).hint("Stomiidae fillet");
 	addButton(1, "CS", theTrenchFoodStandCalamariSteak).hint("Calamari Steak");
 	addButton(2, "CJ", theTrenchFoodStandCoelacanthJerky).hint("Coelacanth Jerky");
-	addButton(3, "SII", theTrenchFoodStandSoftIronIngot).hint("Soft Iron Ingot");
+	addButton(5, "SII", theTrenchFoodStandSoftIronIngot).hint("Soft Iron Ingot");
+	addButton(6, "LBB", theTrenchFoodStandLightBronzeBar).hint("Light Bronze Bar")
+	addButton(7, "EAI", theTrenchFoodStandEbonbloomAlloyIngot).hint("Ebonbloom Alloy Ingot")
 	addButton(14, "Back", theTrenchMain);
 }
 private function theTrenchFoodStandStomiidaeFillet():void {
@@ -268,6 +270,14 @@ private function theTrenchFoodStandCoelacanthJerky():void {
 private function theTrenchFoodStandSoftIronIngot():void {
 	outputText("\"<i>Ah, soft iron~ My personal favorite! You’ll find it’s soft and easy to chew on the go, and your body will go straight to work on healing itself with the extra nutrients, it’s also pretty decent stomach filler too! 70 gems each.</i>\"\n\n");
 	doYesNo(Utils.curry(theTrenchFoodStandBuy,consumables.SIINGOT), theTrenchFoodStand);
+}
+private function theTrenchFoodStandLightBronzeBar():void {
+	outputText("\"<i>Light Bronze? It’s a bit chewy, but with the extra nutrients your body should have an easy time resisting illness, and poisons! Apparently it can also help you shrug off magical attacks, but they still hurt. 120 gems each.</i>\"\n\n");
+	doYesNo(Utils.curry(theTrenchFoodStandBuy,consumables.L_B_BAR), theTrenchFoodStand);
+}
+private function theTrenchFoodStandEbonbloomAlloyIngot():void {
+	outputText("\"<i>mmm~ Ebonbloom~ it’s pretty hard to come by, so it’s mixed in with other metals to make a decent amount for processing to be consumed. It’s tough, and bitter at first, but has a pretty amazing aftertaste, and does wonders for you and your symbiote friend! 200 gems each.</i>\"\n\n");
+	doYesNo(Utils.curry(theTrenchFoodStandBuy,consumables.EAINGOT), theTrenchFoodStand);
 }
 public function theTrenchFoodStandBuy(itype:ItemType):void {
 	clearOutput();

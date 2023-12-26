@@ -2666,7 +2666,7 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.ChanneledAttack);
 			player.removeStatusEffect(StatusEffects.ChanneledAttackType);
 			for each (var perkObj:Object in CombatMagic.magicCounterPerks) {
-				if (player.hasPerk(perkObj.tier3) && player.hasStatusEffect(perkObj.counter)) player.addStatusValue(perkObj.counter, 3, -1);
+				if ((player.hasPerk(perkObj.tier3) || player.hasPerk(perkObj.tier4)) && player.hasStatusEffect(perkObj.counter)) player.addStatusValue(perkObj.counter, 3, -1);
 			}
 
 			var damage:Number = 0;
@@ -2746,7 +2746,7 @@ public class MagicSpecials extends BaseCombatContent {
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.ChanneledAttackType, 4, 0, 0, 0);
 			for each (var perkDragonObj:Object in CombatMagic.magicCounterPerks) {
-				if (player.hasPerk(perkDragonObj.tier3)) player.addStatusValue(perkDragonObj.counter, 3, 1);
+				if (player.hasPerk(perkDragonObj.tier3) || player.hasPerk(perkObj.tier4)) player.addStatusValue(perkDragonObj.counter, 3, 1);
 			}
 			enemyAI();
 		}
