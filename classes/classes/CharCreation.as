@@ -2239,13 +2239,19 @@ import classes.Scenes.Combat.CombatAbility;
 			addButton(14, "Back", ascensionMenu);
 		}
 
+		private function whichNewGameAreYouOn():Number {
+			var wNGAYO:Number = flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			if (!player.hasPerk(PerkLib.AscensionMenuChoiceMaybe)) wNGAYO += 1;
+			return wNGAYO;
+		}
+
 		private function perkAOMXCheck(tier:int, btn:int):void {
 			var NGPL:Array = [1, 3, 5, 7];
 			var pCost:int = 20;
 			if (tier > 5) {
 				addButtonDisabled(btn, "A.O.M. Rank "+ (tier-1).toString(),"You have the highest tier already.");
 			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < NGPL[tier - 1]) {
+			else if (whichNewGameAreYouOn() < NGPL[tier - 1]) {
 				addButtonDisabled(btn, "A.O.M. Rank "+ tier.toString(),"You need to ascend a few more times.");
 			}
 			else if (player.internalChimeraScore() < 10 * tier) {
@@ -2264,7 +2270,7 @@ import classes.Scenes.Combat.CombatAbility;
 			if (tier > 6) {
 				addButtonDisabled(btn, "B.Prestige. Rank "+ (tier-1).toString(),"You have the highest tier already.");
 			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < tier) {
+			else if (whichNewGameAreYouOn() < tier) {
 				addButtonDisabled(btn, "B.Prestige. Rank "+ tier.toString(),"You need to ascend once more.");
 			}
 			else if (player.ascensionPerkPoints < pCost * tier) {
@@ -2280,7 +2286,7 @@ import classes.Scenes.Combat.CombatAbility;
 			if (tier > 5) {
 				addButtonDisabled(btn, "Adv. Training Rank "+ (tier-1).toString(),"You have the highest tier already.");
 			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < tier) {
+			else if (whichNewGameAreYouOn() < tier) {
 				addButtonDisabled(btn, "Adv. Training  Rank "+ tier.toString(),"You need to ascend once more.");
 			}
 			else if (player.ascensionPerkPoints < pCost * tier) {
@@ -2296,7 +2302,7 @@ import classes.Scenes.Combat.CombatAbility;
 			if (tier > 5) {
 				addButtonDisabled(btn, "ORTRTA Rank "+ (tier-1).toString(),"You have the highest tier already.");
 			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < tier) {
+			else if (whichNewGameAreYouOn() < tier) {
 				addButtonDisabled(btn, "ORTRTA Rank "+ tier.toString(),"You need to ascend once more.");
 			}
 			else if (player.ascensionPerkPoints < pCost * tier) {
@@ -2312,16 +2318,16 @@ import classes.Scenes.Combat.CombatAbility;
 		private function perkHerosBirthrightCheck(tier:int, btn:int):void {
 			var pCost:int = 10;
 			if (tier > 6) {
-				addButtonDisabled(btn, "B. right Rank "+ (tier-1).toString(),"You have the highest tier already.");
+				addButtonDisabled(btn, "HBirthright R "+ (tier-1).toString(),"You have the highest tier already.");
 			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < tier) {
-				addButtonDisabled(btn, "B. right Rank "+ tier.toString(),"You need to ascend once more.");
+			else if (whichNewGameAreYouOn() < tier) {
+				addButtonDisabled(btn, "HBirthright R "+ tier.toString(),"You need to ascend once more.");
 			}
 			else if (player.ascensionPerkPoints < pCost * tier) {
-				addButtonDisabled(btn, "B. right Rank "+ tier.toString(),"You do not have enough points.");
+				addButtonDisabled(btn, "HBirthright R "+ tier.toString(),"You do not have enough points.");
 			}
 			else {
-				addButton(btn, "B. right Rank " + tier.toString(), perkRPConfirm, tier, PerkLib.AscensionHerosBirthrightRankX, pCost, 
+				addButton(btn, "HBirthright R " + tier.toString(), perkRPConfirm, tier, PerkLib.AscensionHerosBirthrightRankX, pCost, 
 					"Acquire Hero's Birthright Rank " + tier.toString() + ".\n\nReduces the level needed to equip legendary items by 9.\n"
 					+ "Cost: " + tier * pCost);
 			}
