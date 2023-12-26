@@ -11,9 +11,9 @@ public class AscensionOneRaceToRuleThemX extends PerkType
 {
 
     override public function desc(params:PerkClass = null):String {
-        if (!player || !params) return _desc;
+        if (!player) return _desc;
         var pVal:Number = player.perkv1(PerkLib.AscensionOneRaceToRuleThemAllX);
-        return "Your racial paragon boost is increased. +" + (2*pVal).toString() + " to each stat per level and increase racial skill power by " + (25*pVal).toString() + "%.";
+        return "Your racial paragon boost is increased. +" + (2*pVal).toString() + " to each stat per level and increases racial skill power by " + (25*pVal).toString() + "%.";
     }
     
     override public function name(params:PerkClass=null):String {
@@ -23,7 +23,7 @@ public class AscensionOneRaceToRuleThemX extends PerkType
     }
 
     public function AscensionOneRaceToRuleThemX() {
-        super("Ascension One Race To Rule Them All", "Ascension One Race To Rule Them All",
+        super("Ascension One Race To Rule Them All", "Ascension: One Race To Rule Them All",
                 ".");
     }
 

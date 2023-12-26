@@ -109,5 +109,9 @@ public class Armor extends Equipable
 			game.player.removePerk(PerkLib.BulgeArmor); //Exgartuan check
 			if (game.player.modArmorName.length > 0) game.player.modArmorName = "";
 		}
+
+		override public function getLegItemEquipFailureMessage():String {
+			return "You try to equip the legendary armor, but to your disappointment the item simply refuses to stay on your body. It seems you still lack the right to wear this item.";
+		}
 	}
 }

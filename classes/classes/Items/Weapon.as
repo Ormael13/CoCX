@@ -112,7 +112,7 @@ public class Weapon extends Equipable
 				if (doOutput) outputText("You would very like to equip this item but your body stiffness prevents you from doing so.");
 				return false;
 			}
-			return true;
+			return super.canEquip(doOutput);
 		}
 		
 		override public function beforeEquip(doOutput:Boolean):Equipable {
@@ -144,6 +144,14 @@ public class Weapon extends Equipable
 			if (game.flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && !game.player.isFeralCombat()) game.flags[kFLAGS.FERAL_COMBAT_MODE] = 0;
 			
 			return super.beforeEquip(doOutput);
+		}
+
+		override public function getLegItemEquipFailureMessage():String {
+			var weaponType:String = _type.split(", ")[0];
+			if (weaponType == ItemConstants.WT_MACE_HAMMER) weaponType = "Mace";
+			if (weaponType == ItemConstants.WT_DUELING || weaponType == ItemConstants.WT_EXOTIC || !weaponType) weaponType = "Weapon";
+			return "You try to equip the legendary " + weaponType.toLowerCase() + ", but to your disappointment the item simply refuses to stay in your hands." + 
+				" It seems you still lack the right to wear this item.";
 		}
 	}
 }

@@ -1,6 +1,7 @@
 package classes.Items.Weapons
 {
 import classes.Items.Weapon;
+import classes.Items.ItemTags;
 
 public class MoonlitSnow extends Weapon
 	{
@@ -11,6 +12,7 @@ public class MoonlitSnow extends Weapon
 				"Moonlit Snow","Moonlit Snow","Moonlit Snow","a Moonlit Snow","slash",115,9200,
 				"This blessed katana is made in shining steel and heavily decorated with silver and blue sapphires. When used by a pure-hearted knight, the divine will within guides each strike, making it much deadlier.", "Hybrid", "Dueling"
 			);
+			withTag(ItemTags.I_LEGENDARY);
 		}
 		override public function get attack():Number {
 			var boost:int = 0;
@@ -25,11 +27,6 @@ public class MoonlitSnow extends Weapon
 			}
 			boost += Math.round((100 - game.player.cor) / scal);
 			return (15 + (2 * boost));
-		}
-		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.level >= 54) return super.canEquip(doOutput);
-			if (doOutput) outputText("You try and wield the legendary weapon but to your disapointment the item simply refuse to stay in your hands. It would seem you yet lack the power and right to wield this item.");
-			return false;
 		}
 	}
 

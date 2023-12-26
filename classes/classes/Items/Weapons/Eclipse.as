@@ -2,6 +2,7 @@ package classes.Items.Weapons
 {
 import classes.EventParser;
 import classes.Items.Weapon;
+import classes.Items.ItemTags;
 import classes.PerkLib;
 import classes.TimeAwareInterface;
 
@@ -27,6 +28,7 @@ public class Eclipse extends Weapon implements TimeAwareInterface
 					"Created using the blood and bones of a titan for material Eclipse as it is now called constantly craves for oblivion. As a corrupted sentient weapon it constantly craves death and suffering but more then anything the life of its owner for Eclipse obeys no master and seeks to destroy everything indescriminately. Due to its nature as an item infused with the essense of annihilation Eclipse weakens the power of healing spells.",
 					"Wand, Weakens healing spell, Spellpower bonus for corruption", WT_WAND);
 			withBuff('spellpower', +1.0);
+			withTag(ItemTags.I_LEGENDARY);
 			EventParser.timeAwareClassAdd(this);
 		}
 		
@@ -70,12 +72,6 @@ public class Eclipse extends Weapon implements TimeAwareInterface
 			}
 			boost += Math.round((100 - game.player.cor) / scal);
 			return (1 + boost); 
-		}
-		
-		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.level >= 54) return super.canEquip(doOutput);
-			if(doOutput) outputText("You try and wield the legendary weapon but to your disapointment the item simply refuse to stay put in your hands. It would seem you yet lack the power and right to wield this item.");
-			return false;
 		}
 
 		override public function get description():String {

@@ -8,6 +8,7 @@ import classes.PerkClass;
 import classes.PerkType;
 import classes.Stats.StatUtils;
 import classes.internals.Utils;
+import classes.PerkLib;
 
 /**
  * Superclass for items that could be equipped by player (armor, weapon, jewelry, ...).
@@ -134,15 +135,30 @@ public class Equipable extends Useable {
 		CoC_Settings.errorAMC("Equipable("+id+")", "slots");
 		return [];
 	}
+
+	public function getLegendaryEquipLevel():int {
+		var equipLevel:int = 54;
+		equipLevel -= game.player.perkv1(PerkLib.AscensionHerosBirthrightRankX) * 9;
+		if (equipLevel < 0) equipLevel = 0;
+		return equipLevel;
+	}
+
+	public function getLegItemEquipFailureMessage():String {
+		return "You try to equip the legendary item, but to your disapointment the item simply refuses to stay on your body. It seems you still lack the right to use this item.";
+	}
 	
 	/**
 	 * Test if player can equip the item.
 	 * Should NOT check empty target slot (but can check other slots).
 	 * (ex. equipping large weapon can check for no shield but shouldn't check for no weapon)
 	 * @param doOutput Player tries equipping the item, if fails, print why. And do any side effects related to failed equip attempt.
-	 * @return
+	 * @return true if the player can wear the item
 	 */
 	public function canEquip(doOutput:Boolean):Boolean {
+		if(hasTag(ItemTags.I_LEGENDARY) && game.player.level < getLegendaryEquipLevel()) {
+			if (doOutput) outputText(getLegItemEquipFailureMessage());
+			return false;
+		}
 		return true;
 	}
 	

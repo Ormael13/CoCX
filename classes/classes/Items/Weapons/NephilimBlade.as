@@ -1,6 +1,7 @@
 package classes.Items.Weapons
 {
 import classes.Items.Weapon;
+import classes.Items.ItemTags;
 
 public class NephilimBlade extends Weapon
 	{
@@ -12,6 +13,7 @@ public class NephilimBlade extends Weapon
 				"A long lost sword, made in a shining metal, that once belonged to the demigod Nephilim. This masterfully crafted blade seeks and destroys corruption wherever it might find it, and will periodically cleanse their user body and soul.",
 				"Large, LGWrath", "Sword"
 			);
+			withTag(ItemTags.I_LEGENDARY);
 		}
 		override public function get attack():Number {
 			var boost:int = 0;
@@ -38,11 +40,6 @@ public class NephilimBlade extends Weapon
 			}
 			boost += Math.round((100 - game.player.cor) / scal);
 			return (10 + boost);
-		}
-		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.level >= 54) return super.canEquip(doOutput);
-			if (doOutput) outputText("You try and wield the legendary weapon but to your disapointment the item simply refuse to stay in your hands. It would seem you yet lack the power and right to wield this item.");
-			return false;
 		}
 	}
 

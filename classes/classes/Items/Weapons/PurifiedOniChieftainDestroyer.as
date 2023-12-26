@@ -5,6 +5,7 @@
 package classes.Items.Weapons
 {
 	import classes.Items.Weapon;
+	import classes.Items.ItemTags;
 	import classes.Player;
 
 	public class PurifiedOniChieftainDestroyer extends Weapon
@@ -13,6 +14,7 @@ package classes.Items.Weapons
 		public function PurifiedOniChieftainDestroyer()
 		{
 			super("POCDest", "POCDestroyer", "Purified Oni Chieftain Destroyer", "a Purified Oni Chieftain Destroyer", "smash", 210, 16800, "This unrealistically large two handed mace was clearly made for some legendary oni chieftain to wield. Even bigger than the standard oni tetsubo this thing could topple buildings. You likely will need some absurd strength just to lift it.", "Large, Whirlwind, LGWrath, Stun15", "Mace/Hammer, Tetsubo");
+			withTag(ItemTags.I_LEGENDARY);
 		}
 		
 		override public function get attack():Number {
@@ -32,13 +34,6 @@ package classes.Items.Weapons
 			}
 			boost += Math.round((100 - game.player.cor) / scal);
 			return (10 + boost);
-		}
-		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.level >= 54) return super.canEquip(doOutput);
-			if (doOutput) {
-				outputText("You try and wield the legendary weapon but to your disapointment the item simply refuse to stay in your hands. It would seem you yet lack the power and right to wield this item.");
-			}
-			return false;
 		}
 	}
 }

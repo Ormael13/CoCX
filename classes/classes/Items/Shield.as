@@ -90,5 +90,9 @@ public class Shield extends Equipable
 			}
 			super.afterEquip(doOutput);
 		}
+
+		override public function getLegItemEquipFailureMessage():String {
+			return "You try to equip the legendary shield, but to your disappointment the item simply refuses to stay in your hands. It seems you still lack the right to wield this item.";
+		}
 	}
 }

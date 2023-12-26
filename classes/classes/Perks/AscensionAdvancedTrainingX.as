@@ -23,7 +23,7 @@ public class AscensionAdvancedTrainingX extends PerkType
     }
 
     public function AscensionAdvancedTrainingX() {
-		super("Ascension Advanced Training", "Ascension Advanced Training",
+		super("Ascension Advanced Training", "Ascension: Advanced Training",
                 ".");
 	}
 

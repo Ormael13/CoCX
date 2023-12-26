@@ -2222,6 +2222,12 @@ import classes.Scenes.Combat.CombatAbility;
 				perkOneRaceToRuleThemAllCheck(1, btn);
 			}
 			btn++
+			if (player.hasPerk(PerkLib.AscensionHerosBirthrightRankX)){
+				perkHerosBirthrightCheck(player.perkv1(PerkLib.AscensionHerosBirthrightRankX) + 1, btn);
+			} else {
+				perkHerosBirthrightCheck(1, btn);
+			}
+			btn++
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && player.hasPerk(PerkLib.AscensionHerosLineage)) {
 				if (player.ascensionPerkPoints >= 25 && !player.hasPerk(PerkLib.AscensionHerosLegacy)) addButton(btn, "HeroLegacy", perkHerosLegacy).hint("Perk giving you an additional 1 perk point, 1 super perk point and 5 stat points at the start of the game (scaling with current NG tier, for super perk points amount is reduced by 2).\n\nCost: 25 points");
 				else if (player.ascensionPerkPoints < 25) button(btn).disable("You do not have enough ascension perk points!");
@@ -2297,7 +2303,27 @@ import classes.Scenes.Combat.CombatAbility;
 				addButtonDisabled(btn, "ORTRTA Rank "+ tier.toString(),"You do not have enough points.");
 			}
 			else {
-				addButton(btn, "ORTRTA Rank" + tier.toString(), perkRPConfirm, tier, PerkLib.AscensionOneRaceToRuleThemAllX, pCost, "Acquire One Race To Rule Them All Rank " + tier.toString());
+				addButton(btn, "ORTRTA Rank" + tier.toString(), perkRPConfirm, tier, PerkLib.AscensionOneRaceToRuleThemAllX, pCost, 
+					"Acquire One Race To Rule Them All Rank " + tier.toString() + ".\n\nIncreases the number of stat points earned per level, and racial skill power.\n"
+					+ "Cost: " + tier * pCost);
+			}
+		}
+		
+		private function perkHerosBirthrightCheck(tier:int, btn:int):void {
+			var pCost:int = 10;
+			if (tier > 6) {
+				addButtonDisabled(btn, "B. right Rank "+ (tier-1).toString(),"You have the highest tier already.");
+			}
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < tier) {
+				addButtonDisabled(btn, "B. right Rank "+ tier.toString(),"You need to ascend once more.");
+			}
+			else if (player.ascensionPerkPoints < pCost * tier) {
+				addButtonDisabled(btn, "B. right Rank "+ tier.toString(),"You do not have enough points.");
+			}
+			else {
+				addButton(btn, "B. right Rank " + tier.toString(), perkRPConfirm, tier, PerkLib.AscensionHerosBirthrightRankX, pCost, 
+					"Acquire Hero's Birthright Rank " + tier.toString() + ".\n\nReduces the level needed to equip legendary items by 9.\n"
+					+ "Cost: " + tier * pCost);
 			}
 		}
 
@@ -2306,7 +2332,7 @@ import classes.Scenes.Combat.CombatAbility;
 			if (tier == 1) player.createPerk(perk,1,0,0,1);
 			else player.setPerkValue(perk,1,player.perkv1(perk) + 1);
 			clearOutput();
-			outputText("You have acquired "+ perk.name() + "!");
+			outputText("You have acquired " + perk.name() + "!\n\n" + perk.desc());
 			if (RPP == 1) doNext(rarePerks1);
 			else doNext(rarePerks2);
 		}
