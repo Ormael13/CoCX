@@ -18,10 +18,12 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.NPCs.Grayda;
 import classes.internals.Utils;
 import classes.Races.ArigeanRace;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class TheTrench extends BaseContent implements TimeAwareInterface {
 	
@@ -309,7 +311,12 @@ private function theTrenchGraydaQuestNPCTalk():void {
 	outputText("You ask Grayda if she wouldn’t mind answering some of your questions.\n\n");
 	outputText("\"<i>I don’t have any tasks that I need to complete currently, so I don’t mind. What would you like to discuss?</i>\"\n\n");
 	menu();
-	addButton(0, "Arigeans", theTrenchGraydaQuestNPCTalkArigeans);
+	addButton(1, "Arigeans", theTrenchGraydaQuestNPCTalkArigeans);
+	addButton(2, "Coloring", theTrenchGraydaQuestNPCTalkColoring);
+	addButton(3, "Magic", theTrenchGraydaQuestNPCTalkMagic);
+	addButton(6, "Her", theTrenchGraydaQuestNPCTalkHer);
+	addButton(7, "Outsiders", theTrenchGraydaQuestNPCTalkOutsiders);
+	addButton(8, "North", theTrenchGraydaQuestNPCTalkNorth);
 	addButton(14, "Back", theTrenchGraydaQuestNPC);
 }
 private function theTrenchGraydaQuestNPCTalkArigeans():void {
@@ -323,21 +330,70 @@ private function theTrenchGraydaQuestNPCTalkArigeans():void {
 	doNext(theTrenchGraydaQuestNPCTalk);
 	advanceMinutes(5);
 }
-private function theTrenchGraydaQuestNPCTalk2():void {
+private function theTrenchGraydaQuestNPCTalkColoring():void {
 	clearOutput();
-	outputText("\"<i></i>\"\n\n");
+	outputText("You’ve noticed how many individuals here seem to share a red coloring while she herself has a yellow coloring, is there a reason for this?\n\n");
+	outputText("\"<i>Colors signify rank, the higher rank an Arigean is, the stronger, and more durable they are. Higher ranks tend to be able to order around lower ranks, if I ");
+	if (player.tailType == Tail.ARIGEAN_GREEN) outputText("were to ask you to give me a massage, you would probably feel compelled to fulfill that order.");
+	if (player.tailType == Tail.ARIGEAN_RED) outputText("were to order you to strip and patrol the trench nude, you would most likely fulfill that order without hesitation.");
+	if (player.tailType == Tail.ARIGEAN_YELLOW) outputText("could order you to do something, but since we’re the same rank, it would be entirely up to your choice.");
+	outputText("</i>\"\n\n");
+	outputText("\"<i>How many ranks are there?</i>\"\n\n");
+	outputText("\"<i>There’s Recruits which possess green markings, Elites who possess red markings, Countesses who are marked yellow, and princesses who are marked blue, and often take on exotic forms.</i>\"\n\n");
+	outputText("\"<i>Princesses?</i>\"\n\n");
+	outputText("\"<i>Princesses are like leaders for our race, and while they are the strongest, and most durable of our kind, not everyone is naturally capable of becoming one, and fewer are strong enough to reach the point where they would become one. However with such strengths come many drawbacks, mainly one’s humanity as they permanently fuse with their symbiote. Becoming a princess is something one must do willingly, as it can’t be forced.</i>\"\n\n");
 	doNext(theTrenchGraydaQuestNPCTalk);
 	advanceMinutes(5);
 }
-private function theTrenchGraydaQuestNPCTalk3():void {
+private function theTrenchGraydaQuestNPCTalkMagic():void {
 	clearOutput();
-	outputText("\"<i></i>\"\n\n");
+	outputText("You ask how Arigeans are able to naturally use magic despite them not casting or chanting any spells.\n\n");
+	outputText("She summons one of her bird-like constructs, which fizzles as it perches itself on her finger, before being unable to hold it’s shape any longer and fizzling out of existence. \"<i>It varies depending on your type, however universally it’s not as refined as the magic the Land Walkers use. you see, my magic works first by a mental reconstruction within my brain, which then gets made real with mana by my Symbiote, it will then process…</i>\"\n\n");
+	outputText("\"<i>I don’t know what you're saying!</i>\"\n\n");
+	outputText("\"<i>It’s unstable as it’s made of raw mana, and like an illusion that can cause harm. Normally they don’t last for very long, so there’s only so far you can strike from with it. However, it seems yours works completely different, as it’s just an unstable bolt of raw uncontrolled mana.</i>\" Without much of a warning, she reaches for one of your "+(player.tailType == Tail.ARIGEAN_GREEN ? "parasite":"symbiote")+"’s heads, (and holds it steady with a firm grasp.\n\n");
+	outputText("Her hands quickly get to work scratching the underside of the head, which earns squirming from your other, and a moan from you, however, this goes seemingly unnoticed as she quickly gets the result she wanted from one of your ‘tails’, which was a weak huff of raw mana.\n\n");
+	outputText("\"<i>Seems like you might be capable of more, but I'm not sure if I can help you with that at all.</i>\" She releases her grasp as your ‘partner’ quickly retreats behind you.\n\n");
 	doNext(theTrenchGraydaQuestNPCTalk);
 	advanceMinutes(5);
 }
-private function theTrenchGraydaQuestNPCTalk4():void {
+private function theTrenchGraydaQuestNPCTalkHer():void {
 	clearOutput();
-	outputText("\"<i></i>\"\n\n");
+	outputText("You ask what she was like before she became an Arigean.\n\n");
+	if (player.tailType == Tail.ARIGEAN_GREEN) outputText("\"<i>...Recruit, I am not like the beings of the surface, down here it is considered highly rude to indulge oneself in other people’s lives only after the first meeting, I forgive you as you most likely have not known, but do not do this again until we know each other better, recruit.</i>\"\n\n");
+	if (player.tailType == Tail.ARIGEAN_RED) outputText("\"<i>mmm…</i>\" she shuffles a bit as she puts a hand under her chin. This is clearly a subject she doesn’t enjoy remembering, or talking about. \"<i>I… Was simply someone who was at the wrong place, at the wrong time. Nothing more.</i>\"\n\n");
+	if (player.tailType == Tail.ARIGEAN_YELLOW) {
+		outputText("\"<i>I… guess you’ve been around long enough for me to put some trust in you, just give me a moment. I don’t find this easy.</i>\" Taking a seat, she pulls out a flask and takes a small sip from it before re-hiding it somewhere in her cloak. \"<i>Déanann alcól rudaí i gcónaí níos fearr… much better.</i>\"\n\n");
+		outputText("You take a seat by her, and patiently wait for her to start her story of what she was like before.\n\n");
+		outputText("\"<i>Let’s see…</i>\" she seems to almost space out, lost in thought. \"<i>Me and my sister used to be a part of a line of sailors, and we used to live a calm life almost entirely free from the corruption that plagued the land. However… our peace could not last forever, and the threat of being found by demons was becoming too great to ignore, so we stockpiled supplies, and tried to sail away from the mainland with a few close friends, family, and anyone who was willing to contribute.</i>\"\n\n");
+		outputText("Her glowing yellow eyes seem to dim to a low amber as she grabs, and takes another sip from her concealed flask. \"<i>It was all going well, we had enough supplies to last us a while… until a violent storm started hounding at our ship, and left us in a very poor condition, but that wasn’t the worst of it. One of those fanatic ‘Sea Witches’ attempted to attack our boat while turning us against each other.</i>\"\n\n");
+		outputText("Her eyes lose all of their glow, leaving them as nothing but milky white with a faint brown coloring where her irises should be, and a frown appears on her face as watery drops start to fall from her eyes. \"<i>I… was knocked overboard during the attack, and in my weakened state was unable to stay above the water.. Before I was about to pass out from a lack of air, this...</i>\" she pats the hat-like organism on her head in an affectionate manner. \"<i>It saved me from drowning by allowing me to breathe again… however there were no remains among the wreckage of the ship when I checked it. Meaning almost everyone I knew was most likely dead or turned into more fanatics.</i>\"\n\n");
+		outputText("She takes a long gulp of whatever the continents of the flask were, before returning the empty container to her cloak for a final time, a flush of blue on her cheeks makes it quite obvious as to what the contents were. \"<i>I'm not sure how long I stayed there, unable to move… to live with the reality that was forced upon me… eventually I couldn't remain conscious and collapsed from exhaustion. However when I woke up, I was somewhere different, as well as something I wasn't before, but the thing that mattered most to me was the desire to grow stronger. I wanted revenge, I would become a one-woman army if it meant finally being able to catch the one who caused so much ruin in a day.</i>\"\n\n");
+		outputText("She leans back into her chair and takes a deep breath before continuing. \"<i>But that was all so long ago, and I was much too young to have a proper understanding of how the world works. So for now, my duty is leading those here and keeping them safe.</i>\" Her eyes regain their glow as she seems to return to her normal attitude.\n\n");
+	}
+	doNext(theTrenchGraydaQuestNPCTalk);
+	advanceMinutes(5);
+}
+private function theTrenchGraydaQuestNPCTalkOutsiders():void {
+	clearOutput();
+	outputText("You ask Grayda about why they seem so secretive and aggressive when it comes to outsiders.\n\n");
+	outputText("\"<i>There are… various reasons as to why we don’t mix too well with the beings on the surface, but it mainly comes from mutual distrust. Surface dwellers seem quick to sell each other out or betray each other if it benefits them, however, this lack of mistrust stems both ways as the surface dwellers seem quick to associate us with the demons due to our… unique appearance. That and our appetites can be seen as a hindrance to the safety of the land walkers.</i>\"\n\n");
+	outputText("\"<i>Would peace ever be possible?</i>\"\n\n");
+	outputText("She closes her eyes as she takes a moment to think. \"<i>Maybe, but there will certainly always be friction. After all, the only reason why so many races seem to be working together currently is because of the demons. If they were dealt with or simply succeeded in corrupting everything, I could guarantee there would still be conflict regardless.</i>\"\n\n");
+	outputText("\"<i>Are there any other races down in the depths of Mareth?</i>\"\n\n");
+	outputText("\"<i>Certainly, however, our encounters rarely ever end with both sides pleased. Especially Mindbreakers. A princess might have no problem dealing with them, but most of our kind are quite vulnerable to mental trickery, and they seem hellbent on removing us from the picture. That doesn’t mean we’re intent on shutting ourselves off from other races; however, some of our more friendly hunters even trade with a few daring individuals who don’t seem afraid of us.</i>\"\n\n");
+	doNext(theTrenchGraydaQuestNPCTalk);
+	advanceMinutes(5);
+}
+private function theTrenchGraydaQuestNPCTalkNorth():void {
+	clearOutput();
+	outputText("You keep hearing mention of something up north, is there something there?\n\n");
+	outputText("\"<i>That would be our other and primary settlement, most of the individuals here moved from our primary settlement by order of the princesses to help keep us spaced out in case one of our settlements were discovered and attacked.</i>\" She holds up her staff with both hands to give you a clear look at it. \"<i>Most of our tools or clothing are actually made over there, and transported here as we don’t currently have any craftsmen.</i>\"\n\n");
+	outputText("Now that you think about it, how did the Arigeans come to create a settlement in the first place?\n\n");
+	outputText("\"<i>Most arigeans became outcasts from their original places due to others fearing they were becoming demons, eventually enough of the ‘first generation’ of arigeans gathered up and formed a settlement that started to slowly grow, however, we are a target to other races which lurk in the abysses of Mareth.</i>\"\n\n");
+	outputText("\"<i>First-generation?</i>\"\n\n");
+	outputText("\"<i>I don’t have any tasks that I need to complete currently, so I don’t mind. What would you like to discuss?</i>\"\n\n");
+	outputText("She presents a small smile with a slight chuckle. \"<i>Unfortunately this is something I don’t know much about, and it could even just be a bit of arigean folklore. Apparently, the first few arigeans all shared one thing in common, they were all infected by the same woman nicknamed ‘The First’.</i>\"\n\n");
+	outputText("The glow of her eyes seems to intensify with a childlike glee before she continues. \"<i>Rumor has it that she was the reincarnated form of a warrior who died at sea, she was also apparently the first-ever Arigean, some even claim the first princess, but no one has ever had a proper meeting with her. Some have claimed to have seen her stalking the depths at night, but she manages to escape every time someone gets too close to get a proper look at her. The only thing most see are her empty blue eyes, glowing in the distance and the faint outline of a woman.</i>\" Her eyes seem to dim to their normal brightness before she attempts to regain her professional stance. \"<i>However, those are just rumors, and nothing else. If there was a first arigean, she’s probably content hiding in silence or is long gone.</i>\"\n\n");
 	doNext(theTrenchGraydaQuestNPCTalk);
 	advanceMinutes(5);
 }
@@ -375,6 +431,17 @@ private function theTrenchGraydaQuestNPCMissions():void {
 		else addButton(2, "Continued Improvement", theTrenchGraydaQuestNPCMissionsContinuedImprovement).hint("Training Quest 2");
 	}
 	else addButtonDisabled(2, "???", "Req. to finish previous mission and have lvl 12+.");
+	if (player.level >= 18 && flags[kFLAGS.THE_TRENCH_ENTERED] >= 7) {
+		if (flags[kFLAGS.THE_TRENCH_ENTERED] >= 8) addButtonDisabled(3, "Final Appraisal", "You already finished Training Quest 3.");
+		else addButton(3, "Final Appraisal", theTrenchGraydaQuestNPCMissionsFinalAppraisal).hint("Training Quest 3");
+	}
+	else addButtonDisabled(3, "???", "Req. to finish previous mission and have lvl 18+.");
+	if (player.level >= 24 && flags[kFLAGS.THE_TRENCH_ENTERED] >= 8) {
+		if (flags[kFLAGS.THE_TRENCH_ENTERED] >= 11) addButtonDisabled(4, "Tracking the Monstrosity", "You already finished Promotion Quest 2.");
+		else if (flags[kFLAGS.THE_TRENCH_ENTERED] == 9) addButtonDisabled(4, "Tracking the Monstrosity", "You still tracking enemy.");
+		else addButton(4, "Tracking the Monstrosity", theTrenchGraydaQuestNPCMissionsTrackingTheMonstrosity).hint("Promotion Quest 2");
+	}
+	else addButtonDisabled(4, "???", "Req. to finish previous mission and have lvl 24+.");
 	addButton(14, "Back", theTrenchGraydaQuestNPC);
 }
 private function theTrenchGraydaQuestNPCMissionsGettingStronger():void {
@@ -435,16 +502,43 @@ private function theTrenchGraydaQuestNPCMissionsContinuedImprovement():void {
 	}
 	doNext(theTrenchGraydaQuestNPCMissions);
 }
-private function theTrenchGraydaQuestNPCMissions1():void {
+private function theTrenchGraydaQuestNPCMissionsFinalAppraisal():void {
 	clearOutput();
-	if (flags[kFLAGS.THE_TRENCH_ENTERED] == 6 && player.hasItem(useables.SEVTENT, 2, true)) {
-		outputText("\"<i></i>\"\n\n");
-		player.destroyItems(useables.SEVTENT, 2, true);
-		flags[kFLAGS.THE_TRENCH_ENTERED] = 7;
+	outputText("\"<i>Elite, I can see you’ve drastically improved from the first day we’ve met, and I want to see firsthand how strong you’ve gotten. Win or lose it doesn’t matter, I just want to taste your mettle. Let me know when you're ready to spar.</i>\"\n\n");
+	menu();
+	addButton(1, "Later", theTrenchGraydaQuestNPCMissions);
+	addButton(3, "Spar", theTrenchGraydaQuestNPCMissionsFinalAppraisal2);
+}
+private function theTrenchGraydaQuestNPCMissionsFinalAppraisal2():void {
+	spriteSelect(SpriteDb.s_grayda);
+	outputText("\"<i>Very well, we’ll move to the surface for our spar. I don’t want you holding back in the slightest, So show me your full force!</i>\"\n\n");
+	startCombat(new Grayda());
+}
+private function theTrenchGraydaQuestNPCMissionsTrackingTheMonstrosity():void {
+	clearOutput();
+	if (flags[kFLAGS.THE_TRENCH_ENTERED] == 10) {
+		outputText("\"<i>Welcome back Elite, I assume you’ve finished your assignment?</i>\"\n\n");
+		outputText("You tell Grayda of the encounter and how she should no longer be a threat to others or herself.\n\n");
+		outputText("\"<i>Well done, I understand killing another Arigean might be hard. But you did a good deed putting her out of her misery.</i>\" She seems to take a moment to look at the slightly blue sunburn you’ve gotten from the ordeal. \"<i>Oh yes! Your reward.</i>\" She fishes a Clear glass bottle with amber yellow contents from somewhere inside her cloak, offering it to you.\n\n");
+		outputText("Grabbing the bottle, popping off the lid, you almost take a sip before remembering what happened last time Grayda offered you a mystery drink. \n\n");
+		outputText("\"<i>Don’t worry, i’ll catch you if you fall. That drink should also make you considerably Stronger.</i>\"\n\n");
+		outputText("Well seeing as it didn’t exactly harm you in any way last time. What’s the worst that could happen besides making you stronger? Besides, the scent is quite tempting. Oh wait, it’s already all gone… and here comes your friend, the cold floor.\n\n");
+		outputText("As you come back to your consciousness, you don’t even try to open your eyes. You can already feel the intense migraine after all, but after a few minutes of waiting you experimentally open an eye. Seeing as your eye doesn’t sting from the brightness, you decide to quickly open both only to be greeted by the sight of your naked body, and Grayda reading a book while sitting to your side. Gah does your head hurt.\n\n");
+		outputText("\"<i>Awake? You were out quite a bit longer this time.</i>\" She hasn’t even seemed to look up from her book. \"<i>I’ll leave you to get dressed.</i>\" Swiftly closing the book and getting up to leave, she immediately stops before closing the door behind her. \"<i>Congratulations on your promotion Countess, you’ve certainly earned the title.</i>\"\n\n");
+		outputText("Countess? Does this mean you're now on equal footing as Grayda? From the looks of it you now are. Your highlights seemed to have taken on an amber yellow hue matching those that Grayda possesses, if you were to look in a mirror you would guess that your eyes would have followed the same trend. But maybe that’s enough procrastinating for now, from the sounds of it you’ve been out for a while, and others might be worried for how long you’ve been gone.\n\n");
+		outputText("Closing Grayda’s door you find that you’ve accidentally torn off the handle… whoops~ it seems you're now much stronger than you look. Hopefully she’s not too upset by it~\n\n");
+		flags[kFLAGS.THE_TRENCH_ENTERED] = 11;
+		transformations.TailArigeanYellow.applyEffect(false);
+		transformations.RearBodyArigeanAuraYellow.applyEffect(false);
+		advanceMinutes(90);
 	}
 	else {
-		outputText("\"<i></i>\"\n\n");
-		flags[kFLAGS.THE_TRENCH_ENTERED] = 6;
+		outputText("\"<i>Elite I have a more challenging task for you, if you feel up for it. I promise a very generous reward in return if you're successful.</i>\" Her breath seems heavier than normal and a few scrapes can be seen on her bare arms.\n\n");
+		outputText("Curious, you ask what she needs you to get done. It looks like she just got out of a fight with something.\n\n");
+		outputText("\"<i>A few months ago, one of our surface hunters disappeared. At first I just assumed she got caught up in another adventure and would be back soon, but she never came back. Well I was partially right with that guess. Earlier what… I could only assume that at some point, attempted to enter the trench. She was raving like a lunatic and masturbating furiously, she had clearly succumbed to the wretched demons... I was almost able to finish her off, and put her out of her misery, but she fled. I need you to find her, and end her suffering before she is able to harm anyone else.</i>\"\n\n");
+		outputText("You ask if there could be any way of easily tracking her. She could’ve gone anywhere.\n\n");
+		outputText("\"<i>She couldn’t have gone far. You should start with checking the nearby beaches.</i>\"\n\n");
+		flags[kFLAGS.THE_TRENCH_ENTERED] = 9;
 	}
 	doNext(theTrenchGraydaQuestNPCMissions);
 }

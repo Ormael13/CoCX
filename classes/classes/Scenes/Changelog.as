@@ -94,18 +94,18 @@ public class Changelog extends BaseContent
 			outputText("(fix was removing the lvl req. on it), races with Undeath perk scaling HP from tou instead of lib, Salamander IM not keeping Lustzerker perk from loosing if no longer race with lustzerker ability, Gryphon Statuette only allowing cock tf scene, Weasel Eyes tf not triggering when having Raiju Eyes, Library not teaching all curretly existing tier 1 white and black spells, ");
 			outputText("Werewolf pity system not working with FemDom post fight option, cow score req. both fur and plain skin\n\n");
 			outputText("<b>Version 0.8v2:</b>\n\n");
+			outputText("-New tier 3 intelligence lvl-up perk (by Demojay): Autocast. Req. Any buff spell and 100+ int. Effect: Allows buff spells to be automatically cast at the start of battle, if you meet the lust requirements to cast them.\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-\n");
 			//outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
 			//outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
-			outputText("-New tier 3 intelligence lvl-up perk (by Demojay): Autocast. Req. Any buff spell and 100+ int. Effect: Allows buff spells to be automatically cast at the start of battle, if you meet the lust requirements to cast them.\n");
 			outputText("-Moved venom applications from correct 'combatstatusupdate' function, to prevent it being called outside of a new round. Venom ticks cannot increase the lust vulnerability of lust immune enemies. Tier 4 fae bloodstream will now stop once the maximum number of effect procs have been reached. ");
 			outputText("Pixie Dust Special now has to pay the dark ritual HP cost for its increased damage. Proc Check loop for Fae Storm/Pixie Dust no longer stops after first failed check. (Demojay)\n");
 			outputText("-Made level check function for handling legendary items tied to a 'Legendary' Tag, for easy identification of legendary items. Added 'Death Prince Golden Armor', 'Asterius Rage' and 'Nexus' to legendary lists. (Demojay)\n");
 			outputText("-New rare ascension perk (by Demojay) -> Ascension: Hero's Birthright. Can gain one rank per NG tier. Required level to equip legendary gear is lowered by (9 x rank) lvl's. Max Rank: 6.\n");
 			outputText("-Max level cap was increased to 205 from 185.\n");
-			outputText("-New event perk: Raging Inferno (Mastered). Gained by use of the Pocket Watch when req. are meet. Effects: Cumulative 120% damage increase for every subsequent acid spell. Each turn without cast acid spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling fire based attack. Maximum 50 stacks.\n");
+			outputText("-New event perk: Raging Inferno (Mastered). Gained by use of the Pocket Watch when req. are meet. Effects: Cumulative 120% damage increase for every subsequent fire spell. Each turn without cast fire spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling fire based attack. Maximum 50 stacks.\n");
 			outputText("-New event perk: Glacial Storm (Mastered). Gained by use of the Pocket Watch when req. are meet. Effects: Cumulative 120% damage increase for every subsequent ice spell. Each turn without cast ice spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling ice based attack. Maximum 50 stacks.\n");
 			outputText("-New event perk: High Voltage (Mastered). Gained by use of the Pocket Watch when req. are meet. Effects: Cumulative 120% damage increase for every subsequent lightning spell. Each turn without cast lightning spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling lightning based attack. Maximum 50 stacks.\n");
 			outputText("-New event perk: Eclipsing Shadow (Mastered). Gained by use of the Pocket Watch when req. are meet. Effects: Cumulative 120% damage increase for every subsequent darkness spell. Each turn without cast darkness spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling darkness based attack. Maximum 50 stacks.\n");
@@ -115,7 +115,7 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Corrosive Meltdown (Mastered). Gained by use of the Pocket Watch when req. are meet. Effects: Cumulative 120% damage increase for every subsequent acid spell. Each turn without cast acid spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling acid based attack. Maximum 50 stacks.\n");
 			outputText("-New consumable (by Sylabt & Ohaxer): Light Bronze Bar. Cost 120 gems. Can be bought at food stand in Trench. Eating it would restore 100 hunger, heal 40% of max HP and apply (refresh) buff for 24 hours that increase poison resistance by 40% and magic defense by 15%.\n");
 			outputText("-New consumable (by Sylabt & Ohaxer): Ebonbloom Alloy Ingot. Cost 200 gems. Can be bought at food stand in Trench. Eating it would restore 120 hunger, heal 60% of max HP and apply (refresh) buff for 24 hours that increase physical & magic defense by 25% and removes 60% of max lust.\n");
-			outputText("-\n");
+			outputText("-Grayda have more talk options and can give to loyal Arigeans two new missions that allow to reach the same rank as her.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -125,6 +125,18 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay) (NUZ/Shirane)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Fixed bugs: When picking Yes instead of Maybe? on ascension game not allowing to pick some of asc perks, elemental damage cumulation stacks decaying 2x slower\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8w:</b>\n\n");
@@ -195,11 +207,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -228,8 +236,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
