@@ -217,22 +217,81 @@ public function theTrenchEntrance():void {
 	outputText("Following the path Grayda showed you, you navigate yourself through the dark underwater chasm, and soon find yourself within the small community lovingly named ‘The Trench’. It’s a series of rooms carved out of the stone walls of the underwater cave, notably divided into three different sections which serve different purposes. A few plants seem to line some of the walls which produce a soft, white light, and a general feeling of safety and passiveness seems to fill you at the thought of other Arigeans being around.\n\n");
 	theTrenchMain1();
 	menu();
+	addButtonIfTrue(0, "Quarters", theTrenchQuarters, "It's still too early to go to sleep.", isNightTime, "Turn yourself in for the night.");
+	addButton(1, "Equipment shop", theTrenchEquipmentShop);
 	addButton(2, "Food Stand", theTrenchFoodStand);
 	addButton(3, "Grayda", theTrenchGraydaQuestNPC);
+	addButton(4, "Loiter", theTrenchLoiter);
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 private function theTrenchMain():void {
 	clearOutput();
 	theTrenchMain1();
 	menu();
+	addButtonIfTrue(0, "Quarters", theTrenchQuarters, "It's still too early to go to sleep.", isNightTime, "Turn yourself in for the night.");
+	addButton(1, "Equipment shop", theTrenchEquipmentShop);
 	addButton(2, "Food Stand", theTrenchFoodStand);
 	addButton(3, "Grayda", theTrenchGraydaQuestNPC);
+	addButton(4, "Loiter", theTrenchLoiter);
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 private function theTrenchMain1():void {
 	outputText("The left path seems to lead into multiple different rooms which serve as shared quarters between several individuals per room. While most of the rooms seem to be unoccupied or hosting sleeping Arigeans, you can hear the chatting of a couple individuals behind some of the closed doors.\n\n");
 	outputText("The right path seems to lead to a market area which contains multiple different shops or services. It seems like you could find replacement equipment here should you ever happen to lose the clothing Grayda gifted you. A heavenly smell of roasted meat seems to waft from some sort of food shop from down there.\n\n");
 	outputText("The central path leads down towards a common area in which you can see several Arigeans lounging, reading or simply just conversing with each other. You can see Grayda holding a few papers while talking with two Arigeans who possess a red and black coloring, which seems to be a uncommon coloring many of the individuals here possess.\n\n");
+}
+private function theTrenchQuarters():void {
+	clearOutput();
+	outputText("Grayda did give you permission to rest here as long as you needed, surely she wouldn’t mind if you slept in one of the empty rooms for a bit? Walking down the path on your left eventually leads you to a series of doors, some open, some closed, checking each of the rooms as you pass you notice that there seems to be an unoccupied room near the end of the hallway.\n\n");
+	if (rand(10) == 0) {
+		outputText("Standing in the doorway you count roughly 5 individuals all lying on the floor in minimal clothing, almost piled on top of each other, much to your surprise they aren’t having an orgy, but instead are all sleeping curled up together, is this a common occurrence here? However you soon realize you’ve been spacing off staring at the scene, and a feeling of drowsiness is dragging at your eyelids as they begin to feel heavy, surely they wouldn’t mind one more joining in, right?\n\n");
+		outputText(""+(player.isNaked() ? "Y":"Stripping off your [armor] into a neat pile y")+"ou kneel down while carefully, quietly and deftly move to place your head upon a soft pair of thighs as you slowly rest your body on the floor. Luckily for you this doesn’t visibly wake anyone up, and you allow yourself to fall into a deep comfortable sleep as you feel a pair of arms wrap around you from behind.\n\n");
+		outputText("Waking up a couple of hours later, you realize you somehow got yourself in the center of the pile, with one individual seeming intertwined with you, and face first in your cleavage. You remorsefully, but gently pry yourself free from the pile and redress before heading back off to camp.\n\n");
+	}
+	else {
+		outputText("Standing at the doorway you see that the room is somewhat furnished, only possessing a set of beds and a table with chairs near the center, however other that it’s empty with no signs of anyone having claimed it for their own. Closing the door behind you, you walk towards one of the beds, and begin dressing out of your [armor] leaving it folded on the table.\n\n");
+		outputText("Giving your body a few stretches, you collapse onto the bed, and retreat into the covers your ");
+		if (flags[kFLAGS.THE_TRENCH_ENTERED] >= 12) outputText("large extra mouth hanging off the bed due to its massive size");
+		else if (player.tailType == Tail.ARIGEAN_RED || player.tailType == Tail.ARIGEAN_YELLOW) outputText("symbiotic friend wrapping itself around your waist to stay close to the warmth your body offers");
+		else outputText("parasitic partner partner wrapping itself around your waist to stay close to the warmth your body offers");
+		outputText(", and before long you’ve drifted off to the sweet bliss of sleep.\n\n");
+	}
+	camp.cheatSleepUntilMorning();
+	doNext(theTrenchMain);
+}
+private function theTrenchEquipmentShop():void {
+	clearOutput();
+	if (player.statusEffectv3(StatusEffects.Trench) == 0) {
+		outputText("You follow the right path down to where most of the shops are, what catches your attention however is a small building with a large amount of crates resting outside the exterior. If you were to take a guess, this is where you can buy new equipment.\n\n");
+		outputText("Entering the shop you're greeted with the sight of a woman carrying a large crate with a pair of oversized gauntlets, placing the crate down, and simply ripping off the lid before grabbing a few spears and carrying them with her somewhere towards the back. Returning up to the front, her glowing red eyes make direct contact with yours before she marches up to you.\n\n");
+		outputText("\"<i>I don’t believe... i’ve seen you before… Are you new here?</i>\" her voice is calm and spaced in sections, but just like her face, doesn’t seem to hold very much emotion. \"<i>Let me… make one thing clear… we don’t give out… free replacements… resources are too strict…</i>\"\n\n");
+		player.addStatusValue(StatusEffects.Trench, 3, 1);
+	}
+	outputText("You ask the shopkeeper what her selection is.\n\n");
+	outputText("\"<i>Here is what’s… in stock…</i>\"\n\n");
+	menu();
+	addButton(0, "AN-CU", theTrenchEquipmentShopArigeanNeClassUniform).hint("Arigean Ne-Class Uniform");
+	addButton(1, "A.Club", theTrenchEquipmentShopArigeanClub).hint("Arigean Club");
+	addButton(2, "A.Spear", theTrenchEquipmentShopArigeanSpear).hint("Arigean Spear");
+	addButton(14, "Back", theTrenchMain);
+}
+private function theTrenchEquipmentShopArigeanNeClassUniform():void {
+	outputText("\"<i>This uniform is waterproof… and should fit your… body type well too. You might find… that it will help… with some of your… more natural abilities. i’ll provide… one for 720 gems… we don’t make them… here and rely on… supplies from the north.</i>\"\n\n");
+	doYesNo(Utils.curry(theTrenchEquipmentShopBuy,armors.ANE_UNI), theTrenchEquipmentShop);
+}
+private function theTrenchEquipmentShopArigeanClub():void {
+	outputText("\"<i>Don't look at me… funny… we all need something... when our mana drops...below... I'll part with it… for 880 gems.</i>\"\n\n");
+	doYesNo(Utils.curry(theTrenchEquipmentShopBuy,weapons.ARICLUB), theTrenchEquipmentShop);
+}
+private function theTrenchEquipmentShopArigeanSpear():void {
+	outputText("\"<i>A weapon is… a weapon… you’ll find it hits… much harder the lower… your magical energy is… I can provide one for...  1040 gems… as it’s a spear… it should pierce armor… and flesh quite easily.</i>\"\n\n");
+	doYesNo(Utils.curry(theTrenchEquipmentShopBuy,weapons.ARI_SPR), theTrenchEquipmentShop);
+}
+public function theTrenchEquipmentShopBuy(itype:ItemType):void {
+	clearOutput();
+	player.gems -= itype.value;
+	statScreenRefresh();
+	inventory.takeItem(itype, theTrenchEquipmentShop);
 }
 private function theTrenchFoodStand():void {
 	clearOutput();
@@ -541,6 +600,63 @@ private function theTrenchGraydaQuestNPCMissionsTrackingTheMonstrosity():void {
 		flags[kFLAGS.THE_TRENCH_ENTERED] = 9;
 	}
 	doNext(theTrenchGraydaQuestNPCMissions);
+}
+private function theTrenchLoiter():void {
+	clearOutput();
+	outputText("Looking around the commons, you decide there shouldn’t be much harm in just relaxing for a while. Finding a nearby table and chair, you sit down, fold your arms and rest your head in them as you shut your eyes for a bit. However the chattering of individuals seems to draw your attention, surely they wouldn’t mind if you listened in, right? "+(flags[kFLAGS.THE_TRENCH_ENTERED] >= 12 ? "Afterall it wouldn’t hurt to know what’s on your subject’s minds. ":"")+"Your ears twitch as you strain your hearing, determined to hear your surroundings.\n\n");
+	var option:Number = rand(4);
+	switch (option) {
+        case 0:
+            outputText("\"<i>Claire... what are you doing?..</i>\"\n\n");
+            outputText("\"<i>C'mon! Please!</i>\"\n\n");
+            outputText("\"<i>Stop... humping my leg...</i>\"\n\n");
+            outputText("\"<i>C'mon! I need you!</i>\"\n\n");
+            outputText("\"<i>Wait... or... I'm going to... penalize you further...</i>\"\n\n");
+            outputText("\"<i>W-Wait! Let go of my horn!</i>\"\n\n");
+            outputText("\"<i>Why should I?.. It seems I always… need to be forceful… to get my point… across.</i>\"\n\n");
+            outputText("\"<i>P-Please stop s-stroking it! N-Not out he- GAHH!</i>\"\n\n");
+            break;
+        case 1:
+            outputText("\"<i>Claire… you were an oni… before… right?</i>\"\n\n");
+            outputText("\"<i>Yep, that’s right! Is something the matter? Or are you just curious?</i>\"\n\n");
+            outputText("\"<i>You don’t strike me… as very oni-like.</i>\"\n\n");
+            outputText("\"<i>What are you talking about, I'm very oni-like! I’ve still got a horn, i'm big, and very t-”</i>\"\n\n");
+            outputText("\"<i>I mean you don’t… act like one… your very gentle and… soft</i>\"\n\n");
+            outputText("\"<i>Well… i guess you're not wrong with that, but everyone is built differently~</i>\"\n\n");
+            outputText("\"<i>Everyday you continue to… confuse me</i>\"\n\n");
+            outputText("\"<i>Hehe, now give me a hug!</i>\"\n\n");
+            outputText("\"<i>Wait… not again!.. I can’t breathe when… you do this!</i>\"\n\n");
+            break;
+        case 2:
+            outputText("\"<i>Hey Camellia? You were a bee-girl before, right? What was that like?</i>\"\n\n");
+            outputText("\"<i>It was… fine i suppose… it was a fairly… simple life… of course it didn’t… last forever.</i>\"\n\n");
+            outputText("\"<i>Did something happen?</i>\"\n\n");
+            outputText("\"<i>I got infected… and then exiled… the queen feared that… what i was ill… with, was contagious.</i>\"\n\n");
+            outputText("\"<i>Birds of a feather, stick together ey!</i>\"\n\n");
+            outputText("\"<i>You were... an exile?</i>\"\n\n");
+            outputText("\"<i>Hehe… I think that’s a story for another time.</i>\"\n\n");
+            break;
+        case 3:
+            outputText("\"<i>So are you going… to tell me how… you became an Arigean?</i>\"\n\n");
+            outputText("\"<i>Mmm, I suppose I could, but I wanna be top tonight!</i>\"\n\n");
+            outputText("\"<i>Very… well.</i>\"\n\n");
+            outputText("\"<i>Hehe~ this is gonna be so fun!</i>\"\n\n");
+            outputText("\"<i>Now your end of… the deal.</i>\"\n\n");
+            outputText("\"<i>Alright, I used to live in a tribe, but I was always on thin ice with them due to being born with albinism. Eventually, they got sick of me and threw me out. A little bit after, I lost a fight and got infected, now I'm here.</i>\"\n\n");
+            outputText("\"<i>You don’t sound bothered… by this.</i>\"\n\n");
+            outputText("\"<i>I find life like this a lot better than before, besides I never liked them anyway.</i>\"\n\n");
+            outputText("\"<i>I suppose being an… Arigean is a lot… better than how life… was previously.</i>\"\n\n");
+            outputText("\"<i>C’mon! Let’s go have some fun now!</i>\"\n\n");
+            outputText("\"<i>Wait… I'm not done eating.</i>\"\n\n");
+            outputText("\"<i>Too bad!</i>\"\n\n");
+            break;
+        default:
+            outputText("\"<i>Too bad!</i>\"\n\n");
+            break;
+    }
+	outputText("Maybe that’s enough listening in on others for now.\n\n");
+	doNext(theTrenchMain);
+	advanceMinutes(5);
 }
 public function theTrench111():void {
 	clearOutput();

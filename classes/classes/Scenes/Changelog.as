@@ -116,6 +116,18 @@ public class Changelog extends BaseContent
 			outputText("-New consumable (by Sylabt & Ohaxer): Light Bronze Bar. Cost 120 gems. Can be bought at food stand in Trench. Eating it would restore 100 hunger, heal 40% of max HP and apply (refresh) buff for 24 hours that increase poison resistance by 40% and magic defense by 15%.\n");
 			outputText("-New consumable (by Sylabt & Ohaxer): Ebonbloom Alloy Ingot. Cost 200 gems. Can be bought at food stand in Trench. Eating it would restore 120 hunger, heal 60% of max HP and apply (refresh) buff for 24 hours that increase physical & magic defense by 25% and removes 60% of max lust.\n");
 			outputText("-Grayda have more talk options and can give to loyal Arigeans two new missions that allow to reach the same rank as her.\n");
+			outputText("-New melee weapon (by Sylabt & Ohaxer): Arigean Club - buyable at equipment shop in Trench. Cost 880 gems. Base atk is 11. It's mace/hammer type weapon. Gains bonus damaged based on rank (Arigean rank x4).\n");
+			outputText("-New melee weapon (by Sylabt & Ohaxer): Arigean Spear - buyable at equipment shop in Trench. Cost 1040 gems. Base atk is 13. It's spear type weapon, have 30% armor penetration. Increases damage based on how low your mana is (up to +160% at 10% or less max mana).\n");
+			outputText("-New option at Trench: Quarters (sleeping), Equipment shop and Loiter.\n");
+			outputText("-Arigean Ne-Class Uniform can be now also bought at equipment shop in Trench.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -125,18 +137,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay) (NUZ/Shirane)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed bugs: When picking Yes instead of Maybe? on ascension game not allowing to pick some of asc perks, elemental damage cumulation stacks decaying 2x slower\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8w:</b>\n\n");

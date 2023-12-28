@@ -72,6 +72,8 @@ public final class WeaponLib extends ItemConstants
 		public const ATWINSCY:AlvinaTwinScythe = new AlvinaTwinScythe();
 		public const ANGSTD :AngstDaggers = new AngstDaggers();
 		public const ANGSTD1:AngstDagger = new AngstDagger();
+		public const ARI_SPR:Weapon = new Weapon("Ari_Spr", "ArigeanSpear", "Arigean Spear", "an Arigean Spear", "thrust", 13, 1040, "A black spear with white wrappings around the length of it, the metal shines a beautiful silver when even a small glimmer of light touches it. It supposedly becomes more dangerous the lower your mana is, and also should have no problem piercing armor.", WP_AP30,"Spear");
+		public const ARICLUB:ArigeanClub = new ArigeanClub();
 		public const ARMAGED:ArmageddonBlade = new ArmageddonBlade();
 		public const ASCENSU:Weapon = new Weapon("Ascensus", "Ascensus", "Ascensus", "Ascensus, Element of Ascension", "smack", 30, 4800, "This staff is made from sacred wood and holy bark. Vines and tentacles run along the staff, grown out of the wood itself. The top has an odd zigzag shape, with pulsing crystals adorning the recesses. This staff radiates power, neither pure nor corrupt. (-25% spell cost, x6.5 spellpower / healpower)", "Large, Staff", WT_STAFF).withBuff('spellpower',+1.5) as Weapon;
 		public const ASTERIUS:AsteriusRage = new AsteriusRage();
@@ -212,7 +214,7 @@ public final class WeaponLib extends ItemConstants
 		public const SCLAYMO:SapphireClaymore = new SapphireClaymore();
 		public const SDAGGER:Weapon = new Weapon("SDagger","S.Dagger","sapphire dagger","a sapphire dagger","stab",3,240,"This dagger is made of azure metal and richly decorated with sapphires and silver engravings. The magic within this azure blade will radiate magical frost when charged with magic.", "Small", "Dagger");
 		public const SESPEAR:SeraphicSpear = new SeraphicSpear();
-		public const SIM_SPR:Weapon = new Weapon("Sim_Spr", "Sim.Spear", "simple spear", "a simple spear", "thrust", 10, 250, "A fairly crude-looking spear", WP_AP30,"Spear")
+		public const SIM_SPR:Weapon = new Weapon("Sim_Spr", "Sim.Spear", "simple spear", "a simple spear", "thrust", 10, 250, "A fairly crude-looking spear.", WP_AP30,"Spear");
 		public const SIM_STF:Weapon = new Weapon ("Sim_Stf", "Sim.Staff", "simple staff", "a simple staff", "smack", 11, 75, "A simple staff, faint pure energy emanates from it.\n", "Large, Staff",WT_STAFF).withBuff('spellpower', +0.1) as Weapon;
 		public const SKYPIER:Skypiercer = new Skypiercer();
 		public const SNAKESW:Weapon = new Weapon("SnakeSw", "SnakeSword", "Snake Sword", "a Snake Sword", "whip-slash", 20, 800, "This unassuming double-edged sword is comprised of segmented pieces which, when swung, will lash out akin to a whip.", "Whipping", "Sword");

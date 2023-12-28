@@ -54,6 +54,7 @@ import classes.StatusEffectClass;
 import classes.StatusEffectType;
 import classes.StatusEffects;
 import classes.StatusEffects.VampireThirstEffect;
+import com.bit101.components.NumericStepper;
 
 import coc.view.ButtonData;
 import coc.view.ButtonDataList;
@@ -6101,6 +6102,13 @@ public class Combat extends BaseContent {
 						}
 					}
                     else {
+						if (player.weapon == weapons.ARI_SPR) {
+							var bonus:Number = 1;
+							if (player.mana100 < 100) bonus += 0.4;
+							else if (player.mana100 < 70) bonus += 0.8;
+							else if (player.mana100 < 40) bonus += 1.2;
+							else bonus += 1.6;
+						}
                         doPhysicalDamage(damage, true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
                         if (player.weapon == weapons.DAISHO) {
@@ -16156,4 +16164,4 @@ private function touSpeStrScale(stat:int):Number {
         return player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater) || explorer.areaTags.water;
     }
 }
-}
+}
