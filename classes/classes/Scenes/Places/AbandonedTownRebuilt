@@ -1,5 +1,5 @@
 //Ruined Town Rebuilding with Amily and her Mouse-Morphs 
-package classes.Scenes.Places
+package classes.scenes.places
 {
 import classes.*;
 import classes.GlobalFlags.*;
@@ -58,9 +58,45 @@ public function resetState():void {
 	SeenAArmors = false;
 	Intown = false;
 }
+public function MousetownPopulationCalculation{
+MousetownPopulation = (MousetownPopulation*1.1);
+if (ChiChiLitters => 1) {
+	MousetownPopulation = (MousetownPopulation*1.1);
+	}
+if 	(JojoyLitters => 1) {
+	MousetownPopulation = (MousetownPopulation*1.1);
+	}
+}
+public function prosperityvarcalculation():void {
+prosperityvar = (MousetownPopulation/10) + (HouseNumber/2) + (WallNumber/5) + (ShopBuilt);
+if WellBuilt == true {
+prosperityvar (5);
+}
+if logbuilt == true {
+	prosperityvar (5);
+	}
+if TrainingGroundsBuilt == true {
+		prosperityvar (5)
+	};
+
+if OwcaSeen == true {
+			prosperityvar (5);
+		}
+if Farmseen == true {
+			prosperityvar (5);
+		}
+		if YourHouse == true {
+			prosperityvar (5);
+		}
+}
 public function MouseTownWeeklyUpdate():void {
 	clearOutput();
-	if MousetownPopulation == MouseTownPopCap {
+	WeeklyGemTax = (prosperityvar);
+	if logbuilt == true {
+	WeeklyWoodGain = (prosperityvar/2);
+	}
+
+	if MousetownPopulation = MouseTownPopCap {
 		outputText("As you wake up and head outside, getting ready for the day, you see one of your mouse-morph children standing awkwardly next to Amily. As you meet their gaze, they walk over, looking you in the eyes. \n\n"); 
 		outputText("<i>\"Hey, "+ player.mf("father", "mother") +", I'm sorry to ask for your help again so soon, but the town's still growing, and we're going to need more houses soon. No pressure or anything, but we'd really appreciate your help.</i>\n\n");
 		}
@@ -263,7 +299,7 @@ public function MouseWell():void {
 	player.refillHunger(15);
 	if(player.cor > 50) dynStats("cor", -1);
 	if(player.cor > 75) dynStats("cor", -1);
-	//15 minutes pass
+	advanceMinutes(15);
 	inventory.takeItem(consumables.S_WATER);
 doNext(EnterVillage);
 }
@@ -366,7 +402,7 @@ public function MouseTownBakery():void {
 		outputText(" \n\n");
 		outputText(" \n\n");
 menu();
-addButton (1, "Back", );
+addButton (1, "Back", EnterVillage);
 }
 
 public function MouseTownRareGoods():void {
@@ -864,8 +900,8 @@ public function ShouldraDragOut():void {
 		clearOutput();
 		outputText("You shake your head at Shouldra, deciding that enough is enough. You tell the ghost-girl that she’s been skulking around the town for long enough. As Shouldra begins to glow, ready for combat, you motion for her to calm down, that you’re not picking a fight.  \n\n"); 
 		outputText("You tell Shouldra that she shouldn’t have to hide to remain here. Whatever history Amily has with her, you’re sure this can be resolved. Shouldra seems shocked, but you stand, taking Shouldra’s hand and pulling her out of the building. For whatever reason, the ghost-girl doesn’t resist as you bring her to the middle of the village, where Amily’s currently resting. As you draw near, Shouldra’s spectral form dangling behind you, your mousey lover sees you, smiling…The moment she sees your ghostly companion, however, her smile freezes.  \n\n");
-		outputText("“YOU!” Amily stands, a scowl on her face. “What are you doing with [name]?”  \n\n");
-		outputText("look at this place.”  \n\n");
+		outputText("“YOU!” Amily stands, a scowl on her face. “What are you doing with [name]?” \n\n");
+		outputText("“Less than you, clearly.” Shouldra fires back, easily freeing herself from your grasp. “I mean, look at this place.” \n\n");
 		outputText("Amily seethes, whistling. A few dozen of your kids come running, and seeing the fight brewing, you raise your voice, stopping everyone in their tracks. Telling everyone to calm down, you stand between Amily and Shouldra, staring your mousey lover down. You ask her what problems she has with Shouldra.  \n\n");
 		outputText("“...Are you kidding me? This…Dead woman was a menace!” Amily launches into a tirade, starting with an incident involving Shouldra possessing a minotaur, bringing it to the town, and chasing her, the minotaur’s cock enlarged to grotesque proportions.  \n\n");
 		outputText("“I wasn’t gonna let it fuck you”, Shouldra fires back. “Besides, it was too big to fit inside you anyways.”  \n\n");
@@ -1069,7 +1105,7 @@ public function AmilyAfterSex():void {
 		outputText("<i>“Marae above, that was…</i>” Amily can’t even finish the sentence. <i>“I love you.</i>” You return her affection, moving over to a dry(er) section of the bed before completely collapsing, pulling a sheet over you both and cuddling together in the afterglow.  \n\n");
 		outputText("You wake up, and Amily’s there beside you, head under one arm. Her fur’s still damp from the night before, but you don’t really care. She feels you move, opening one eye. <i>“[name],</i>” she whispers, resting her head on your shoulder. Obviously she’s still half-asleep. You hold her close, rubbing her ears. About an hour later she opens her eyes, smiling at the look on your face.  \n\n"); 
 		outputText("<i>“Been awake long?</i>” You assure her that you weren’t, and she yawns, stretching her arms. <i>“Well...You probably need to go now, don’t you, my champion?</i>” You nod, giving your mouse lover one last hug before getting out of bed.  \n\n"); 
-		outputText("<i>“Well, I’ll just…</i>” Amily yawns. <i>“Give me a little bit of time, okay?</i>” She flops back down onto the bed, recoiling as she hits a particularly damp spot. <i>“Never mind, I’m awake.</i>” She stands up, wiping her arm on the sleeve of your (clothing/armor) You laugh, pulling her into your embrace. Her fur is soft and warm, and she sighs. <i>“Just stay safe out there.</i>” Amily nags, looking into your eyes. <i>“And make sure to stay...You.</i>” She lets go, and sees you to the door. Several of your children follow you to the gate, waving you off as you return to camp. The sun’s barely up, and you roll your shoulders, ready for another day.\n\n"); 
+		outputText("<i>“Well, I’ll just…</i>” Amily yawns. <i>“Give me a little bit of time, okay?</i>” She flops back down onto the bed, recoiling as she hits a particularly damp spot. <i>“Never mind, I’m awake.</i>” She stands up, wiping her arm on your chest. You laugh, pulling her into your embrace. Her fur is soft and warm, and she sighs. <i>“Just stay safe out there.</i>” Amily nags, looking into your eyes. <i>“And make sure to stay...You.</i>” She lets go, and sees you to the door. Several of your children follow you to the gate, waving you off as you return to camp. The sun’s barely up, and you roll your shoulders, ready for another day.\n\n"); 
 //Set Time to the Next Day, when the PC would normally wake. 
 Intown = false;
 DoNext (returnToCampUseFourHours);
@@ -1195,9 +1231,6 @@ public function BuildShop():void {
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 70;
 		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 150;
 		outputText("You call out, and Amily echoes you, calling your children to gather round. As a dozen or so join you, you explain to them the job at hand.  \n\n");
-		outputText(" \n\n"); 
-		outputText(" \n\n");
-		outputText(" \n\n");
 		ShopBuilt += 1;
 		Intown = false;
 		doNext(camp.returnToCampUseFourHours);
