@@ -54,6 +54,7 @@ import classes.StatusEffectClass;
 import classes.StatusEffectType;
 import classes.StatusEffects;
 import classes.StatusEffects.VampireThirstEffect;
+import com.bit101.components.NumericStepper;
 
 import coc.view.ButtonData;
 import coc.view.ButtonDataList;
@@ -1414,7 +1415,7 @@ public class Combat extends BaseContent {
         clearOutput();
         outputText("You decided to stop preparing your super ultra hyper mega fabulous attack!\n\n");
         for each (var perkObj:Object in CombatMagic.magicCounterPerks) {
-            if (player.hasPerk(perkObj.tier3) && player.hasStatusEffect(perkObj.counter)) player.addStatusValue(perkObj.counter, 3, -1);
+            if ((player.hasPerk(perkObj.tier3) || player.hasPerk(perkObj.tier4)) && player.hasStatusEffect(perkObj.counter)) player.addStatusValue(perkObj.counter, 3, -1);
         }
 		player.removeStatusEffect(StatusEffects.ChanneledAttack);
         player.removeStatusEffect(StatusEffects.ChanneledAttackType);
@@ -6101,6 +6102,13 @@ public class Combat extends BaseContent {
 						}
 					}
                     else {
+						if (player.weapon == weapons.ARI_SPR) {
+							var bonus:Number = 1;
+							if (player.mana100 < 100) bonus += 0.4;
+							else if (player.mana100 < 70) bonus += 0.8;
+							else if (player.mana100 < 40) bonus += 1.2;
+							else bonus += 1.6;
+						}
                         doPhysicalDamage(damage, true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
                         if (player.weapon == weapons.DAISHO) {
@@ -9212,9 +9220,9 @@ public class Combat extends BaseContent {
         for each (var perkObj:Object in CombatMagic.magicCounterPerks) {
             if (player.hasStatusEffect(perkObj.counter)) {
             if (player.statusEffectv1(perkObj.counter) > 0 && player.statusEffectv2(perkObj.counter) == 0 && player.statusEffectv3(perkObj.counter) == 0) {
-				if (player.hasPerk(perkObj.tier3)) player.addStatusValue(perkObj.counter, 1, -2);
-				else if (player.hasPerk(perkObj.tier2)) player.addStatusValue(perkObj.counter, 1, -3);
-				player.addStatusValue(perkObj.counter, 1, -4);
+				if (player.hasPerk(perkObj.tier3) || player.hasPerk(perkObj.tier4)) player.addStatusValue(perkObj.counter, 1, -4);
+				else if (player.hasPerk(perkObj.tier2)) player.addStatusValue(perkObj.counter, 1, -6);
+				player.addStatusValue(perkObj.counter, 1, -8);
 			}
 			if (player.statusEffectv2(perkObj.counter) > 0) player.addStatusValue(perkObj.counter, 2, -1);
         }
@@ -11924,9 +11932,6 @@ public class Combat extends BaseContent {
                     outputText("You notice [monster he] is obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat is beginning to roll on [monster his] skin. You wager [monster he] is probably beginning to regret provoking you.  ");
                 }
             }
-            monster.statStore.addBuffObject({str:-monster.statusEffectv1(StatusEffects.NagaVenom), spe:-monster.statusEffectv1(StatusEffects.NagaVenom)}, "Poison",{text:"Poison"});
-            if (monster.statusEffectv3(StatusEffects.NagaVenom) >= 1 && monster.lustVuln > 0) monster.lust += monster.statusEffectv3(StatusEffects.NagaVenom);
-            if (combatIsOver()) return;
         }
         //Apophis Venom
         if (monster.hasStatusEffect(StatusEffects.ApophisVenom)) {
@@ -11945,15 +11950,6 @@ public class Combat extends BaseContent {
                     outputText("You notice [monster he] is obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat is beginning to roll on [monster his] skin. You wager [monster he] is probably beginning to regret provoking you.  ");
                 }
             }
-            damage1B = combat.teases.teaseBaseLustDamage() * monster.lustVuln;
-            if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
-                damage1B *= 2;
-            }
-            monster.teased(damage1B);
-            combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-            monster.statStore.addBuffObject({str:-monster.statusEffectv1(StatusEffects.ApophisVenom)*2, spe:-monster.statusEffectv1(StatusEffects.ApophisVenom)*2, tou:-monster.statusEffectv1(StatusEffects.ApophisVenom)*2}, "Poison",{text:"Poison"});
-            if (monster.statusEffectv3(StatusEffects.ApophisVenom) >= 1 && monster.lustVuln > 0) monster.lust += monster.statusEffectv3(StatusEffects.ApophisVenom);
-            if (combatIsOver()) return;
         }
         //Bee Venom
         if (monster.hasStatusEffect(StatusEffects.BeeVenom)) {
@@ -11972,17 +11968,6 @@ public class Combat extends BaseContent {
                     outputText("You notice [monster he] is obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat is beginning to roll on [monster his] skin. You wager [monster he] is probably beginning to regret provoking you.  ");
                 }
             }
-            damage1B = combat.teases.teaseBaseLustDamage() * monster.lustVuln;
-            if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
-                damage1B *= 2;
-            }
-            monster.teased(damage1B);
-            combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-            monster.lustVuln += 0.05;
-            monster.statStore.addBuffObject({tou:-monster.statusEffectv1(StatusEffects.ManticoreVenom)*2}, "Poison",{text:"Poison"});
-
-            if (monster.statusEffectv3(StatusEffects.BeeVenom) >= 1 && monster.lustVuln > 0) monster.lust += monster.statusEffectv3(StatusEffects.BeeVenom);
-            if (combatIsOver()) return;
         }
         //Jabberwocky Poison Breath
         if (monster.hasStatusEffect(StatusEffects.JabberwockyVenom)) {
@@ -12001,16 +11986,6 @@ public class Combat extends BaseContent {
                     outputText("You notice [monster he] is obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat is beginning to roll on [monster his] skin. You wager [monster he] is probably beginning to regret provoking you.  ");
                 }
             }
-            damage1B = combat.teases.teaseBaseLustDamage() * monster.lustVuln;
-            if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
-                damage1B *= 2;
-            }
-            monster.teased(damage1B);
-            combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-            monster.lustVuln += 0.05;
-            monster.statStore.addBuffObject({tou:-monster.statusEffectv1(StatusEffects.JabberwockyVenom)*2}, "Poison",{text:"Poison"});
-            if (monster.statusEffectv3(StatusEffects.JabberwockyVenom) >= 1 && monster.lustVuln > 0) monster.lust += monster.statusEffectv3(StatusEffects.JabberwockyVenom);
-            if (combatIsOver()) return;
         }
         //Manticore Venom
         if (monster.hasStatusEffect(StatusEffects.ManticoreVenom)) {
@@ -12029,15 +12004,6 @@ public class Combat extends BaseContent {
                     outputText("You notice [monster he] is obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat is beginning to roll on [monster his] skin. You wager [monster he] is probably beginning to regret provoking you.  ");
                 }
             }
-            damage1B = combat.teases.teaseBaseLustDamage() * monster.lustVuln;
-            if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
-                damage1B *= 2;
-            }
-            monster.teased(damage1B);
-            combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-            monster.statStore.addBuffObject({tou:-monster.statusEffectv1(StatusEffects.ManticoreVenom)*2}, "Poison",{text:"Poison"});
-            if (monster.statusEffectv3(StatusEffects.ManticoreVenom) >= 1 && monster.lustVuln > 0) monster.lust += monster.statusEffectv3(StatusEffects.ManticoreVenom);
-            if (combatIsOver()) return;
         }
         if (monster is Harpy) {
             //(Enemy slightly aroused)

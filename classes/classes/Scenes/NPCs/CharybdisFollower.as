@@ -373,8 +373,7 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 		outputText("You spend a few minutes warming your voice up. Chary seems to insist on doing these before every session. You get into a few simple tunes after, and despite yourself, you find the session rather calming. An hour passes, and you can feel your lungs burning slightly, not unlike after a light run.\n\n"); 
 		outputText("You tell Charybdis that you need to leave for now, and he nods simply. <i>\"Then I'll see you again soon, hopefully. Keep a tune in your heart, [name]!\"</i>\n\n");
 		endEncounter(60);
-	}
-/*
+	}/*
 public function CharySail():void {
 		clearOutput();
 		outputText("Charybdis smiles as you bring up his boat. <i>\"I’m kinda glad you brought it up. I’ve wanted to take you on my craft for a while now\".</i> The boat itself is large enough to comfortably house five people on the deck, with a clearly marked ladder to a lower deck inside. There are a variety of heavy fishing rods stored underneath the railings, and he hoists a canvas sail, clearly experienced in its use. He casts off, the salty air running through your [hair] as the boat picks up speed. After a few minutes, he pulls down the sail, turning to you and nodding respectfully. <i>\"So, what do you feel like doing, [name]?\"</i>\n\n");
@@ -487,11 +486,8 @@ addButton(2, "Pussy",CharyTentPussy);
 
 public function CharyTentDick():void {
 		clearOutput();
-		outputText("\n\n");
-		outputText("\n\n");
-		outputText("\n\n");
-		outputText("\n\n");
-		outputText("\n\n");
+		outputText("You get your hands down onto his throbbing black tendril, and as you do, he begins to (If you have pussy) tease your clit, batting at it with the tips of his octopus-like legs. (split end) He gets to the main event quickly, though, wrapping one limb around your [cock], the slippery skin and your own slathered pre making for a comfortable, warm channel for your [cock]. He begins jerking you off with the tendril, and you buck involuntarily, his muscular limb clearly practiced at such ministrations.\n\n");
+		outputText("You cum, and he supports you as your knees fold. You splatter the floor below the boat with your jizz. You stand back up, and he gives you a knowing smile, his own tentacle-shaft wriggling. \n\n");
 doNext (CharySexAfterward);
 }
 public function CharyTentPussy():void {
@@ -605,7 +601,8 @@ addButton(2, "Nah",CharyAnalNah );
 		outputText("You clean up, and join Charybdis at the helm of his ship. He grins, giving you a nod, and you stand beside him, putting a hand on his shoulder as he steers you back. You step off the boat, and you can feel his eyes following you. You turn back around, and he waves goodbye. \"Come back soon, [name]!\" You head back to camp, a smile on your face.\n\n");
 		
 
-}*/
+}
 	}
-
+*/
+}
 }

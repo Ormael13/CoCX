@@ -5,6 +5,7 @@
 package classes.Items.Weapons
 {
 	import classes.Items.Weapon;
+	import classes.Items.ItemTags;
 	import classes.Player;
 	import classes.PerkLib;
 	import classes.StatusEffects;
@@ -14,6 +15,7 @@ package classes.Items.Weapons
 		public function ArmageddonBlade()
 		{
 			super("Armaged", "ArmageddonBlade", "Armageddon Blade", "an Armageddon Blade", "slash", 410, 65600, "Re-forged with Divine Power, the Armageddon Blade is the only weapon powerful enough to slay Lethice. Requires 500 strength to fully unleash it power.", "Massive, MGWrath", "Sword");
+			withTag(ItemTags.I_LEGENDARY);
 		}
 		
 		override public function get attack():Number {
@@ -56,11 +58,8 @@ package classes.Items.Weapons
 		}
 		
 		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.hasPerk(PerkLib.GigantGrip) && game.player.level >= 54) return super.canEquip(doOutput);
-			if (doOutput) {
-				if (game.player.level < 54) outputText("You try and wield the legendary weapon but to your disapointment the item simply refuse to stay in your hands. It would seem you yet lack the power and right to wield this item.");
-				else outputText("You aren't skilled in handling massive weapons, even when using both hands to use this sword.  ");
-			}
+			if (game.player.hasPerk(PerkLib.GigantGrip)) return super.canEquip(doOutput);
+			if (doOutput) outputText("You aren't skilled enough in handling massive weapons, even when using both hands to use this sword.  ");
 			return false;
 		}
 	}

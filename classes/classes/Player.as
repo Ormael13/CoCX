@@ -860,6 +860,7 @@ use namespace CoC;
 				}
 			}
 			if (buff("SoftIronIgnotPhysicalDefenseBuff").isPresent()) armorDef *= 1.15;
+			if (buff("EbonbloomAlloyIngotPhysicalAndMagicDefenseBuff").isPresent()) armorDef *= 1.25;
 			armorDef = Math.round(armorDef);
 			//Berzerking removes armor
 			if (hasStatusEffect(StatusEffects.Berzerking) && !hasPerk(PerkLib.ColdFury)) armorDef = 0;
@@ -1065,6 +1066,8 @@ use namespace CoC;
 					if (keyItemvX("HB Leather Insulation", 2) == 4) armorMDef += 45;
 				}
 			}
+			if (buff("LightBronzeBarMagicDefenseAndPoisonResistanceBuff").isPresent()) armorMDef *= 1.15;
+			if (buff("EbonbloomAlloyIngotPhysicalAndMagicDefenseBuff").isPresent()) armorMDef *= 1.25;
 			armorMDef = Math.round(armorMDef);
 			if (hasPerk(PerkLib.MiracleMetal)) armorMDef += Math.round((armorDef - armor.def - upperGarment.armorDef - lowerGarment.armorDef) * 0.35);
 			//Berzerking/Lustzerking removes magic resistance
@@ -3623,6 +3626,7 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.VenomGlandsIM) >= 2) mult -= 5;
 			if (perkv1(IMutationsLib.VenomGlandsIM) >= 3) mult -= 10;
 			if (perkv1(IMutationsLib.VenomGlandsIM) >= 4) mult -= 15;
+			if (buff("LightBronzeBarMagicDefenseAndPoisonResistanceBuff").isPresent()) mult -= 40;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= necklaceEffectMagnitude;
 			if (jewelry1.hasBuff('res_poison') && jewelry2.hasBuff('res_poison') && jewelry3.hasBuff('res_poison') && jewelry4.hasBuff('res_poison') && headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R && necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= 15;
@@ -5611,7 +5615,7 @@ use namespace CoC;
 			if (level >= 180) xpm += 100;
 			//if (level >= 274)
 			var temp:int = (level + 1) * xpm;
-			if (temp > 74000) temp = 74000;//(max lvl)185 * 400(exp multi)
+			if (temp > 82000) temp = 82000;//(max lvl)205 * 400(exp multi)
 			return temp;
 		}
 
@@ -5889,19 +5893,19 @@ use namespace CoC;
 		}
 
 		public function hasPureLegendaryItem():Boolean {
-			for each (var item:ItemType in CoC.instance.weapons.LegendaryPure())
+			for each (var item:ItemType in CoC.instance.weapons.legendaryPure())
 				for each (var itemSlot:ItemSlotClass in itemSlots){
 					if (itemSlot.itype == item) return true
 				}
-			for each (item in CoC.instance.weaponsrange.LegendaryPure())
+			for each (item in CoC.instance.weaponsrange.legendaryPure())
 				for each (itemSlot in itemSlots){
 					if (itemSlot.itype == item) return true
 				}
-			for each (item in CoC.instance.shields.LegendaryPure())
+			for each (item in CoC.instance.shields.legendaryPure())
 				for each (itemSlot in itemSlots){
 					if (itemSlot.itype == item) return true
 				}
-			for each (item in CoC.instance.armors.LegendaryPure())
+			for each (item in CoC.instance.armors.legendaryPure())
 				for each (itemSlot in itemSlots){
 					if (itemSlot.itype == item) return true
 				}
@@ -5909,19 +5913,19 @@ use namespace CoC;
 		}
 		public function allPureLegendaryItems():Array {
 			var list: Array = [];
-			for each (var item:ItemType in CoC.instance.weapons.LegendaryPure())
+			for each (var item:ItemType in CoC.instance.weapons.legendaryPure())
 				for each (var itemSlot:ItemSlotClass in itemSlots){
 					if (itemSlot.itype == item) list.push(item);
 				}
-			for each (item in CoC.instance.weaponsrange.LegendaryPure())
+			for each (item in CoC.instance.weaponsrange.legendaryPure())
 				for each (itemSlot in itemSlots){
 					if (itemSlot.itype == item) list.push(item);
 				}
-			for each (item in CoC.instance.shields.LegendaryPure())
+			for each (item in CoC.instance.shields.legendaryPure())
 				for each (itemSlot in itemSlots){
 					if (itemSlot.itype == item) list.push(item);
 				}
-			for each (item in CoC.instance.armors.LegendaryPure())
+			for each (item in CoC.instance.armors.legendaryPure())
 				for each (itemSlot in itemSlots){
 					if (itemSlot.itype == item) list.push(item);
 				}

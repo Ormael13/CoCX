@@ -2550,7 +2550,7 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.20;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.30) {
-				outputText("move camp resources and stats to dedicated class");
+				outputText("\n\nMoved camp resources and stats to dedicated class");
 				CampStatsAndResources.EnergyCoreResc = flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES];
 				CampStatsAndResources.MetalPieces = flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES];
 				CampStatsAndResources.MechanismResc = flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES];
@@ -2564,6 +2564,28 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 0;
 				flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 0;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.30;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.32) {
+				outputText("\n\nMerged Autocast perks into new Enchanter perk");
+				refundPerk(PerkLib.Battlemage);
+				refundPerk(PerkLib.Spellsword);
+				refundPerk(PerkLib.Spellbow);
+				refundPerk(PerkLib.Battleflash);
+				refundPerk(PerkLib.Spellarmor);
+				refundPerk(PerkLib.Battleshield);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.32;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.36) {
+				outputText("\n\nMadam/Tempress minor reorganizations");
+				if (JourneyToTheEast.AhriStatsToPerksConvertCounter > 0) {
+					if (JourneyToTheEast.AhriStatsToPerksConvertCounter == 1 || JourneyToTheEast.AhriStatsToPerksConvertCounter == 3 || JourneyToTheEast.AhriStatsToPerksConvertCounter == 5) JourneyToTheEast.AhriStatsToSuperPerksConvertCounter += 1;
+					if (JourneyToTheEast.AhriStatsToPerksConvertCounter > 1) {
+						if (JourneyToTheEast.AhriStatsToPerksConvertCounter > 3) player.superPerkPoints += 2;
+						else player.superPerkPoints += 1;
+					}
+				}
+				if (JourneyToTheEast.EvelynnPerksToStatsConvertCounter > 0) JourneyToTheEast.EvelynnCoreLimitBreakerCounter += JourneyToTheEast.EvelynnPerksToStatsConvertCounter;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.36;
 			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.40) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.40;

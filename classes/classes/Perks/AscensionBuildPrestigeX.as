@@ -23,7 +23,7 @@ public class AscensionBuildPrestigeX extends PerkType
     }
 
     public function AscensionBuildPrestigeX() {
-        super("Ascension Building Prestige Stage", "Ascension Building Prestige Stage",
+        super("Ascension Building Prestige Stage", "Ascension: Building Prestige Stage",
                 ".");
     }
 

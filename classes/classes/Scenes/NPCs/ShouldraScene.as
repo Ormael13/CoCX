@@ -572,12 +572,9 @@ private function penisSexMerged():void {
 	}
 
 	function crushHer():void {
-		x = player.cockThatFits(80);
-		if (x < 0) x = player.smallestCockIndex(); //come on, she's a GHOST.
+		var x:Number = player.smallestCockIndex();
 		outputText("The ghost girl puts up a good fight, but you're more than prepared for her mental assault. You feel her panic well as her intrusions are overwhelmed, and though she attempts to disengage the mental link, you easily stop her. She screams mental protests at you, but your ringing ears only strengthen your psychological dominance over the poor spirit. Before long, she's reduced to a whimpering wreck. \"<i>Out,</i>\" you command, tired of the troublesome specter's meddlings. Of course, she won't even try to rebel now, resignedly accumulating her essence and beginning her exit. Within moments the ghost girl flows out of your body and resolidifies before you.\n\n");
-
 		outputText("She moves to leave in a huff, but you stop her with a single telepathic demand. She's yours, you remind her, and since she's gone through the trouble of trying to get you off, she might as well finish the job. Even as her lips purse in a stubborn pout, a dominating wave of influence sweeps over her, and regardless of herself, she begins unsteadily moving towards you. Resolving to meet halfway, you stride over to her and push her to her knees. As she watches, you shed your [armor] and hoist your " + cockDescript(x) + " up to her lips, leaving a fairly clear implication of your expectations. The ghost girl's eyes widen at the sight of your manhood, and she cringes as a new wave of arousal sweeps through her. She gives a little whimper at her inability to quell her overwhelming libido, but you simply laugh mockingly and gesture at your maleness.  \"<i>Ghost blowjob,</i>\" you mutter snidely.\n\n");
-
 		outputText("You don't even give her the chance to act of her own volition, simply reaching out, taking ahold of her head, and slamming her onto your " + cockDescript(x) + ".  She takes it surprisingly well, unsurprisingly easily, taking most of the shaft in the first thrust alone.  With not as much as even a sputter, she impatiently double-handedly grabs your [butt] and thrusts her head forward.  Before you know it, your entire " + cockDescript(x) + " is wrapped in a fleshy tunnel of love.");
 		if(player.cockTotal() > 1) {
 			outputText("  Mindful of ");
@@ -630,7 +627,7 @@ private function kickShouldraOut():void {
 //back to this thing okay
 private function ghostBJFinisher(inside:Boolean):void {
 	spriteSelect(SpriteDb.s_ghostGirl2);
-	var x:Number = player.cockThatFits(80);
+	var x:Number = player.smallestCockIndex();
 	outputText("Like a backed up geyser, your gigantic testicles push hot, thick strands of seed out of your belaboured " + cockDescript(x) + " straight up in the air.  The cum splatters on both you and the ");
 	if(inside) outputText("excitedly convulsing");
 	else outputText("practically lust-paralyzed");

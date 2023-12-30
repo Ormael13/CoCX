@@ -66,7 +66,7 @@ public class PolarMidnightSpell extends AbstractBlackSpell {
 	public function polarMidnightHit(display:Boolean = true):void {
 		player.removeStatusEffect(StatusEffects.ChanneledAttack);
 		player.removeStatusEffect(StatusEffects.ChanneledAttackType);
-		if (player.hasPerk(PerkLib.GlacialStormSu) && player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, -1);
+		if ((player.hasPerk(PerkLib.GlacialStormSu) || player.hasPerk(PerkLib.GlacialStormMastered)) && player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, -1);
 		if (display) {
 			outputText("You drain the heat out of the air around your foe, causing its temperature to plummet far below its freezing point in an instant, effectively flash freezing your enemy for \n");
 		}
@@ -86,7 +86,7 @@ public class PolarMidnightSpell extends AbstractBlackSpell {
 		}
 		player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
 		player.createStatusEffect(StatusEffects.ChanneledAttackType, 5, 0, 0, 0);
-		if (player.hasPerk(PerkLib.GlacialStormSu)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, 1);
+		if (player.hasPerk(PerkLib.GlacialStormSu) || player.hasPerk(PerkLib.GlacialStormMastered)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, 1);
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {

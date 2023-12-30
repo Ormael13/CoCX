@@ -75,7 +75,7 @@ public class MeteorShowerSpell extends AbstractWhiteSpell{
 	public function meteorShowerHit(display: Boolean = true):void {
 		player.removeStatusEffect(StatusEffects.ChanneledAttack);
 		player.removeStatusEffect(StatusEffects.ChanneledAttackType);
-		if (player.hasPerk(PerkLib.RagingInfernoSu) && player.hasStatusEffect(StatusEffects.CounterRagingInferno)) player.addStatusValue(StatusEffects.CounterRagingInferno, 3, -1);
+		if ((player.hasPerk(PerkLib.RagingInfernoSu) || player.hasPerk(PerkLib.RagingInfernoMastered)) && player.hasStatusEffect(StatusEffects.CounterRagingInferno)) player.addStatusValue(StatusEffects.CounterRagingInferno, 3, -1);
 		calcDamage(monster, true, true);
 		if (display) {
 			outputText("You call out to the celestial vault, knocking some rocks out of orbit and into a crash course towards your opponents.\n\n");
@@ -102,7 +102,7 @@ public class MeteorShowerSpell extends AbstractWhiteSpell{
 		}
 		player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
 		player.createStatusEffect(StatusEffects.ChanneledAttackType, 6, 0, 0, 0);
-		if (player.hasPerk(PerkLib.RagingInfernoSu)) player.addStatusValue(StatusEffects.CounterRagingInferno, 3, 1);
+		if (player.hasPerk(PerkLib.RagingInfernoSu) || player.hasPerk(PerkLib.RagingInfernoMastered)) player.addStatusValue(StatusEffects.CounterRagingInferno, 3, 1);
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {

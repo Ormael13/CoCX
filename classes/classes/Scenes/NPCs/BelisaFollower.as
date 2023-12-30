@@ -144,7 +144,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 	}
 
 	private function BelisaHolyBands():Boolean {
-		if (HolyBand1 > 0 || HolyBand2 > 0 || HolyBand3Cap > 0 || HolyBand4 > 0 || HolyBand5 > 0 || HolyBand6 > 0 || HolyBand7 > 0) return true;
+		if (HolyBand1Cap > 0 || HolyBand2Cap > 0 || HolyBand3Cap > 0 || HolyBand4Cap > 0 || HolyBand5Cap > 0 || HolyBand6Cap > 0 || HolyBand7Cap > 0) return true;
 		return false;
 	}
 
@@ -851,14 +851,24 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		return BHBMCap;
 	}
 	private function BelisaHolyBandsManagment():void {
+		clearOutput();
+		outputText("<b>Holy Bands Managment Menu</b>\n\n");
+		outputText("Current equipped Holy Bands / Max limit: "+BelisaHolyBandsManagmentCurrent()+"/"+BelisaHolyBandsManagmentCap()+"\n\n");
+		outputText("Crimson Holy Band (Equipped/Bought/Limit): "+HolyBand1+"/"+HolyBand1Cap+"/3\n");
+		outputText("Pink Holy Band (Equipped/Bought/Limit): "+HolyBand2+"/"+HolyBand2Cap+"/3\n");
+		outputText("Yellow Holy Band (Equipped/Bought/Limit): "+HolyBand3+"/"+HolyBand3Cap+"/3\n");
+		outputText("Turqouise Holy Band (Equipped/Bought/Limit): "+HolyBand4+"/"+HolyBand4Cap+"/1\n");
+		outputText("Crossed Holy Band (Equipped/Bought/Limit): "+HolyBand5+"/"+HolyBand5Cap+"/1\n");
+		outputText("Brown and Beige Holy Band (Equipped/Bought/Limit): "+HolyBand6+"/"+HolyBand6Cap+"/1\n");
+		outputText("Royal Blue Holy Band (Equipped/Bought/Limit): "+HolyBand7+"/"+HolyBand7Cap+"/2\n");
 		menu();
 		if (BelisaHolyBandsManagmentCurrent() < BelisaHolyBandsManagmentCap()) {
 			if (HolyBand1 < 3 && HolyBand1Cap > 0 && HolyBand1 < HolyBand1Cap) addButton(0, "Crimson", BelisaHolyBandsManagmentCrimsonAdd).hint("Put on one Crimson Holy Band.");
 			if (HolyBand2 < 3 && HolyBand2Cap > 0 && HolyBand2 < HolyBand2Cap) addButton(2, "Pink", BelisaHolyBandsManagmentPinkAdd).hint("Put on one Pink Holy Band.");
 			if (HolyBand3 < 3 && HolyBand3Cap > 0 && HolyBand3 < HolyBand3Cap) addButton(5, "Yellow", BelisaHolyBandsManagmentYellowAdd).hint("Put on one Yellow Holy Band.");
-			if (HolyBand4 == 0 && HolyBand4Cap == 0) addButton(7, "Turqouise", BelisaHolyBandsManagmentTurqouiseAdd).hint("Put on Turqouise Holy Band.");
-			if (HolyBand5 == 0 && HolyBand5Cap == 0) addButton(10, "Crossed", BelisaHolyBandsManagmentCrossedAdd).hint("Put on Crossed Holy Band.");
-			if (HolyBand6 == 0 && HolyBand6Cap == 0) addButton(12, "Royal Blue", BelisaHolyBandsManagmentBrownAndBeigeAdd).hint("Put on Brown and Beige Holy Band.");
+			if (HolyBand4 == 0 && HolyBand4Cap > 0) addButton(7, "Turqouise", BelisaHolyBandsManagmentTurqouiseAdd).hint("Put on Turqouise Holy Band.");
+			if (HolyBand5 == 0 && HolyBand5Cap > 0) addButton(10, "Crossed", BelisaHolyBandsManagmentCrossedAdd).hint("Put on Crossed Holy Band.");
+			if (HolyBand6 == 0 && HolyBand6Cap > 0) addButton(12, "Brown and Beige", BelisaHolyBandsManagmentBrownAndBeigeAdd).hint("Put on Brown and Beige Holy Band.");
 			if (HolyBand7 < 2 && HolyBand7Cap > 0 && HolyBand7 < HolyBand7Cap) addButton(4, "Royal Blue", BelisaHolyBandsManagmentRoyalBlueAdd).hint("Put on one Royal Blue Holy Band.");
 		}
 		else {
@@ -867,7 +877,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 			addButtonDisabled(5, "Yellow", "You can't put any more Holy Bands on your arms.");
 			addButtonDisabled(7, "Turqouise", "You can't put any more Holy Bands on your arms.");
 			addButtonDisabled(10, "Crossed", "You can't put any more Holy Bands on your arms.");
-			addButtonDisabled(12, "Royal Blue", "You can't put any more Holy Bands on your arms.");
+			addButtonDisabled(12, "Brown and Beige", "You can't put any more Holy Bands on your arms.");
 			addButtonDisabled(4, "Royal Blue", "You can't put any more Holy Bands on your arms.");
 		}
 		if (HolyBand1 > 0) addButton(1, "Crimson", BelisaHolyBandsManagmentCrimsonRemove).hint("Take off one Crimson Holy Band.");

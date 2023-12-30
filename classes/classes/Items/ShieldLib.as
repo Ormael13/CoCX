@@ -13,9 +13,9 @@ import classes.Races;
 public final class ShieldLib extends ItemConstants
 	{
 		public function Legendary():Array {
-			return LegendaryPure().concat(LegendaryCorrupt());
+			return legendaryPure().concat(LegendaryCorrupt());
 		}
-		public function LegendaryPure():Array {
+		public function legendaryPure():Array {
 			return [
 				SANCTYL
 			];

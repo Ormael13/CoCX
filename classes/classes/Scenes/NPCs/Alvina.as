@@ -368,21 +368,21 @@ public class Alvina extends Monster
 			if (flags[kFLAGS.GAME_DIFFICULTY] >= 2 || SceneLib.alvinaFollower.FightForAlvina) {
 				this.long = "Alvina is a goat-like succubus. She is obviously an accomplished spellcaster.  She holds a pair of burning scythes in both hands, her spellbook levitating around her. The aura of black magic emanating from her is almost smothering you. She has taken on a way more intimidating form, reaching 11 feet tall with ease. Her black wings stretch from one side of the room to the other while the very ground she walks catches on fire as if unable to support her energy pressure.";
 				this.tallness = 11*12;
-				initStrTouSpeInte(750, 910, 780, 960);
-				initWisLibSensCor(960, 750, 230, 100);
-				this.weaponAttack = 750;
-				this.armorDef = 100;
-				this.armorMDef = 100;
+				initStrTouSpeInte(800, 930, 840, 1160);
+				initWisLibSensCor(900, 800, 240, 100);
+				this.weaponAttack = 800;
+				this.armorDef = 120;
+				this.armorMDef = 120;
 				if (SceneLib.alvinaFollower.DefeatedAlvinaFirstStage){
-					this.bonusHP = 4000000;
+					this.bonusHP = 4250000;
 					alvinaMaleficium();
 				}
 				else {
-					this.bonusHP = 400000;
+					this.bonusHP = 425000;
 				}
-				this.bonusMana = 30000;
-				this.bonusLust = 1180;
-				this.level = 185;
+				this.bonusMana = 32000;
+				this.bonusLust = 1310;
+				this.level = 205;
 			} else {
 				this.long = "Alvina is a goat-like succubus. While she is barely taller than 4 and a half feet, she is obviously an accomplished spellcaster.  From the way she holds her scythe in one hand and her spellbook in the other you also expect her to be very strong,  despite the fact that she wears glasses. A powerful aura of black magic emanates from her.";
 				this.tallness = 4*12+6;

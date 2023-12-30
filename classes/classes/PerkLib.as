@@ -85,6 +85,7 @@ public class PerkLib
 		public static const AscensionBuildingPrestigeX:PerkType = new AscensionBuildPrestigeX();
 		public static const AscensionTrancendentalGeneticMemoryStageX:PerkType = new AscensionTrancendentGenMemX();
 		public static const AscensionOneRaceToRuleThemAllX:PerkType = new AscensionOneRaceToRuleThemX();
+		public static const AscensionHerosBirthrightRankX:PerkType = new AscensionHerosBirthrightX();
 		public static const AscensionAdvTrainingX:PerkType = new AscensionAdvancedTrainingX();
 
 		public static const AscensionBloodlineHeritage:PerkType = mk("Ascension: Bloodline Heritage", "Ascension: Bloodline Heritage",
@@ -638,6 +639,9 @@ public class PerkLib
 		public static const ArousingAura:PerkType = mk("Arousing Aura", "Arousing Aura",
 				"Exude a lust-inducing aura (Req's corruption of 70 or more)",
 				"You've chosen the 'Arousing Aura' perk, causing you to radiate an aura of lust when your corruption is over 70.");
+		public static const Autocast:PerkType = mk("Autocast", "Autocast",
+				"Allows buff spells to be automatically cast at the start of battle, if you meet the lust requirements to cast them.",
+				"You've chosen the 'Autocast' perk. You start every battle with buff spells cast, as long as your lust is sufficient to cast them.");
 		public static const AxillaryVenomGlands:PerkType = mk("Axillary Venom Glands", "Axillary Venom Glands",
 				"Increase venom/web recharge speed based by 100% at cost of 1% of max HP lost per tick. If reached max venom/web cap it will no longer cause HP decay. (if hunger mode is active will instead drain hunger 2x faster)",
 				"You've chosen the 'Axillary Venom Glands' perk. Increase venom/web recharge speed based by 100% at cost of 1% of max HP lost per tick. If reached max venom/web cap it will no longer cause HP decay. (if hunger mode is active will instead drain hunger 2x faster)");
@@ -4002,6 +4006,8 @@ public class PerkLib
 				"Corruption meter now increase lust resistance based on purity.");
 		public static const Cornucopia:PerkType = mk("Cornucopia", "Cornucopia",
 				"Vaginal and Anal capacities increased by 30.");
+		public static const CorrosiveMeltdownMastered:PerkType = mk("Raging Inferno (Mastered)", "Raging Inferno (Mastered)",
+				"Cumulative 120% damage increase for every subsequent acid spell. Each turn without cast acid spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling acid based attack. Maximum 50 stacks.");
 		public static const CraftedArrows:PerkType = mk("Crafted Arrows", "Crafted Arrows",
 				"You have personaly crafted arrows in your quiver. Depending on their type it will increase bow attack from 10% to 40%");
 		public static const DaoOfTheElements:DaoOfTheElementsPerk = new DaoOfTheElementsPerk();
@@ -4011,6 +4017,8 @@ public class PerkLib
 		public static const DominantAlpha:PerkType = new DominantAlphaPerk();
 		public static const DualMind:PerkType = mk("Dual Mind", "Dual Mind",
 				"Greatly empower the tease ability.");
+		public static const EclipsingShadowMastered:PerkType = mk("Raging Inferno (Mastered)", "Raging Inferno (Mastered)",
+				"Cumulative 120% damage increase for every subsequent darkness spell. Each turn without cast darkness spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling darkness based attack. Maximum 50 stacks.");
 		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
 				"You are currently in elemental form.");
 		public static const ELFArcherCovenant:PerkType = mk("Archer Covenant", "Archer Covenant",
@@ -4050,12 +4058,20 @@ public class PerkLib
 				"You need constant intakes of sexual fluids to stay alive.");
 		public static const GargoylePure:PerkType = mk("Gargoyle", "Pure Gargoyle",
 				"Need to gain sustenance from soulforce to stay alive.");
+		public static const GlacialStormMastered:PerkType = mk("Glacial Storm (Mastered)", "Glacial Storm (Mastered)",
+				"Cumulative 120% damage increase for every subsequent ice spell. Each turn without cast ice spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling ice based attack. Maximum 50 stacks.");
 		public static const GracefulBeauty:PerkType = mk("Graceful Beauty", "Graceful Beauty",
 				"Add a small measure of your speed to your tease damage.");
 		public static const Hellfire:PerkType = mk("Hellfire", "Hellfire",
 				"Grants a corrupted fire breath attack, like the hellhounds in the mountains.");
 		public static const HellfireCoat:PerkType = mk("Hellfire Coat", "Hellfire Coat",
 				"Grants a corrupted fire coating to your body, dealing fire damage with all feral attacks.");
+		public static const HighTideMastered:PerkType = mk("High Tide (Mastered)", "High Tide (Mastered)",
+				"Cumulative 120% damage increase for every subsequent water spell. Each turn without cast water spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling water based attack. Maximum 50 stacks.");
+		public static const HighVoltageMastered:PerkType = mk("Raging Inferno (Mastered)", "Raging Inferno (Mastered)",
+				"Cumulative 120% damage increase for every subsequent lightning spell. Each turn without cast lightning spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling lightning based attack. Maximum 50 stacks.");
+		public static const HowlingGaleMastered:PerkType = mk("Howling Gale (Mastered)", "Howling Gale (Mastered)",
+				"Cumulative 120% damage increase for every subsequent wind spell. Each turn without cast wind spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling wind based attack. Maximum 50 stacks.");
 		public static const Immortality:PerkType = mk("Immortality", "Immortality",
 				"Cannot lose combat by damage. Damage taken below 0 instead cause player to take serious lust damage.");
 		public static const InnerPhylactery:PerkType = mk("InnerPhylactery", "InnerPhylactery",
@@ -4102,6 +4118,10 @@ public class PerkLib
 		public static const PurityElixir:PurityElixirPerk = new PurityElixirPerk();
 		public static const Purifier:PerkType = mk("Purifier", "Purifier",
 				"When slaying or purifying demons their corrupted power is purified and sent back to you.");
+		public static const RagingInfernoMastered:PerkType = mk("Raging Inferno (Mastered)", "Raging Inferno (Mastered)",
+				"Cumulative 120% damage increase for every subsequent fire spell. Each turn without cast fire spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling fire based attack. Maximum 50 stacks.");
+		public static const RumblingQuakeMastered:PerkType = mk("Raging Inferno (Mastered)", "Raging Inferno (Mastered)",
+				"Cumulative 120% damage increase for every subsequent earth spell. Each turn without cast earth spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling earth based attack. Maximum 50 stacks.");
 		public static const SageMedicine:PerkType = mk("Sage Medicine", "Sage Medicine",
 				"Sage Medicine used for the Azazel ascension, reduces minimum corruption caused by havinng a soul Phylactery");
 		public static const SealSin:PerkType = mk("Seal Sin", "Seal Sin",
@@ -5758,7 +5778,8 @@ public class PerkLib
                     .requireLevel(12);
             RagingInferno.requireAnyPerk(GrandMage, ArchmageEx)
 					.requirePerk(Channeling)
-                    .requireCustomFunction(function (player:Player):Boolean {
+                    .requireNotThosePerks(RagingInfernoMastered)
+					.requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsWhitefire)
                                 || player.hasStatusEffect(StatusEffects.KnowsPyreBurst)
                                 || player.hasStatusEffect(StatusEffects.KnowsFireStorm)
@@ -5773,6 +5794,7 @@ public class PerkLib
                     .requireInt(75);
             GlacialStorm.requireAnyPerk(GrandMage, ArchmageEx)
 					.requirePerk(Channeling)
+                    .requireNotThosePerks(GlacialStormMastered)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsIceSpike)
                                 || player.hasStatusEffect(StatusEffects.KnowsArcticGale)
@@ -5785,6 +5807,7 @@ public class PerkLib
                     .requireInt(75);
             HighVoltage.requireAnyPerk(GrandMage, ArchmageEx)
 					.requirePerk(Channeling)
+                    .requireNotThosePerks(HighVoltageMastered)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsLightningBolt)
                                 || player.hasStatusEffect(StatusEffects.KnowsChainLighting)
@@ -5794,6 +5817,7 @@ public class PerkLib
                     .requireInt(75);
             EclipsingShadow.requireAnyPerk(GrandMage, ArchmageEx)
 					.requirePerk(Channeling)
+                    .requireNotThosePerks(EclipsingShadowMastered)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsDarknessShard)
                                 || player.hasStatusEffect(StatusEffects.KnowsDuskWave)
@@ -5803,6 +5827,7 @@ public class PerkLib
                     .requireInt(75);
             HighTide.requireAnyPerk(GrandMage, ArchmageEx)
 					.requirePerk(Channeling)
+                    .requireNotThosePerks(HighTideMastered)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsWaterBall)
                                 || player.hasStatusEffect(StatusEffects.KnowsWaterSphere)
@@ -5813,6 +5838,7 @@ public class PerkLib
                     .requireInt(75);
 			HowlingGale.requireAnyPerk(GrandMage, ArchmageEx)
 					.requirePerk(Channeling)
+                    .requireNotThosePerks(HowlingGaleMastered)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsWindBullet)
                                 || player.hasStatusEffect(StatusEffects.KnowsWindBlast)
@@ -5822,6 +5848,7 @@ public class PerkLib
                     .requireInt(75);
 			RumblingQuake.requireAnyPerk(GrandMage, ArchmageEx)
 					.requirePerk(Channeling)
+                    .requireNotThosePerks(RumblingQuakeMastered)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsStalagmite)
                                 || player.hasStatusEffect(StatusEffects.KnowsShatterstone)
@@ -5831,6 +5858,7 @@ public class PerkLib
                     .requireInt(75);
 			CorrosiveMeltdown.requireAnyPerk(GrandMage, ArchmageEx)
 					.requirePerk(Channeling)
+                    .requireNotThosePerks(CorrosiveMeltdownMastered)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsIceSpike)
                                 || player.hasStatusEffect(StatusEffects.KnowsAcidSpray)
@@ -5842,7 +5870,7 @@ public class PerkLib
                     .requireLevel(12)
                     .requireInt(75);
             // Spell-boosting perks
-            // Battlemage: auto-use Might
+            /*// Battlemage: auto-use Might
             Battlemage.requireLevel(12)
                     .requirePerks(JobEnchanter, Channeling)
                     .requireInt(80)
@@ -5856,7 +5884,7 @@ public class PerkLib
             Spellbow.requireLevel(12)
                     .requirePerks(JobEnchanter, Channeling)
                     .requireInt(80)
-                    .requireStatusEffect(StatusEffects.KnowsChargeR, "Charge Range spell");
+                    .requireStatusEffect(StatusEffects.KnowsChargeR, "Charge Range spell");*/
             ManaAffinityIV.requirePerk(ManaAffinityIII)
                     .requireInt(110)
                     .requireNGPlus(3)
@@ -5888,7 +5916,7 @@ public class PerkLib
             Archmage.requirePerk(GrandMage)
                     .requireInt(100)
 					.requireLevel(18);
-            // Battleflash: auto-use Blink
+            /*// Battleflash: auto-use Blink
             Battleflash.requireLevel(18)
                     .requirePerk(Battlemage)
                     .requireInt(90)
@@ -5897,7 +5925,7 @@ public class PerkLib
             Spellarmor.requireLevel(18)
                     .requireAnyPerk(Spellsword, Spellbow)
                     .requireInt(90)
-                    .requireStatusEffect(StatusEffects.KnowsChargeA, "Charge Armor spell");
+                    .requireStatusEffect(StatusEffects.KnowsChargeA, "Charge Armor spell");*/
             TraditionalMageI.requireLevel(18)
                     .requireAnyPerk(GrandMage, ArchmageEx)
                     .requireInt(80);
@@ -5924,10 +5952,17 @@ public class PerkLib
             GreyMage.requirePerk(GreyMageApprentice)
                     .requireInt(125)
                     .requireLevel(18);
-            Battleshield.requireStatusEffect(StatusEffects.KnowsManaShield, "Mana Shield spell")
+            /*Battleshield.requireStatusEffect(StatusEffects.KnowsManaShield, "Mana Shield spell")
                     .requirePerk(JobEnchanter)
                     .requireInt(100)
-                    .requireLevel(18);
+                    .requireLevel(18);*/
+			Autocast.requirePerk(PerkLib.JobEnchanter)
+					.requireCustomFunction(function (player:Player):Boolean {
+						return player.hasAnyStatusEffect(StatusEffects.KnowsManaShield, StatusEffects.KnowsChargeA,
+						StatusEffects.KnowsBlink, StatusEffects.KnowsChargeR, StatusEffects.KnowsCharge, StatusEffects.KnowsMight);
+					}, "Any buff spell")
+					.requireInt(100)
+					.requireLevel(18);
             DefensiveStaffChanneling.requirePerks(StaffChanneling, JobEnchanter)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsManaShield)
@@ -5978,7 +6013,7 @@ public class PerkLib
 					.requirePerk(ArcaneRegenerationEpic)
                     .requireInt(125)
                     .requireLevel(24);
-			ElementalBolt.requireAnyPerk(RagingInferno, GlacialStorm, HighVoltage, EclipsingShadow, HighTide, HowlingGale, RumblingQuake, CorrosiveMeltdown)
+			ElementalBolt.requireAnyPerk(RagingInferno, GlacialStorm, HighVoltage, EclipsingShadow, HighTide, HowlingGale, RumblingQuake, CorrosiveMeltdown, RagingInfernoMastered, GlacialStormMastered, HighVoltageMastered, EclipsingShadowMastered, HighTideMastered, HowlingGaleMastered, RumblingQuakeMastered, CorrosiveMeltdownMastered)
                     .requireInt(125)
                     .requireLevel(24);
             WarMageAdept.requirePerk(WarMageApprentice)
@@ -8030,4 +8065,4 @@ public class PerkLib
         }
 	}
 }
-}
+}

@@ -183,6 +183,8 @@ public final class ConsumableLib extends AlchemyLib
 		public const C_STEAK: Consumable = mk("C.Steak", "C.Steak", "a Calamari Steak", 15, "A squid that’s been roasted over a fire, it seems like it would be a decent meal.", m.calamariSteak);
 		public const C_JERKY: Consumable = mk("C.Jerky", "C.Jerky", "a Coelacanth Jerky", 5, "A piece of jerky with a bit of extra salt, supposedly it’s from a deep sea fish. It keeps quite well.", m.coelacanthJerky);
 		public const SIINGOT: Consumable = mk("SIIngot", "SoftIronIngot", "a Soft Iron Ingot", 70, "An ingot of soft iron, while still hard it should be softer than most metals. (Requires Miracle Metal to use)", m.softIronIngot);
+		public const L_B_BAR: Consumable = mk("L.B.Bar", "LightBronzeBar", "a Light Bronze Bar", 120, "An ingot of light bronze, the metallic smell it gives off is quite strong. (Requires Miracle Metal to use)", m.lightBronzeBar);
+		public const EAINGOT: Consumable = mk("EAIngot", "EbonbloomAlloyIngot", "a Ebonbloom Alloy Ingot", 200, "A dark gray, metal alloy ingot which supposedly is made with Ebonbloom, you can’t help but drool at the thought of consuming this. (Requires Miracle Metal to use)", m.ebonbloomAlloyIngot);
 
 		//GROWERS/SHRINKERS
 		public const REDUCTO:Consumable = new Reducto();

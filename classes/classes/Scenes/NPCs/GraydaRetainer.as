@@ -64,7 +64,24 @@ private function graydaEncounterWinSharedEnd():void {
 	cleanupAfterCombat();
 }
 public function graydaEncounterLoss():void {
+	spriteSelect(SpriteDb.s_grayda);
+	clearOutput();
 	outputText("The Arigean grimaces as she tries to support her shaking body on her staff, however she’s unable to hold her weight and collapses into the water, quickly sinking back into the depths. The dense fog clears and you find a small satchel of gems floating in the water. You opt to return to camp for now and sail back to solid land.\n\n");
+	cleanupAfterCombat();
+}
+public function graydaEncounterWin2():void {
+	spriteSelect(SpriteDb.s_grayda);
+	clearOutput();
+	outputText("You stagger back from Grayda’s assault, and just as you're about to collapse into the water, Grayda comes to offer you support.\"<i>Well done! You may not have won, but you’ve definitely gotten stronger from our initial fight. Will you be okay getting back on your own with these injuries? Or do I need to walk you back?</i>\"\n\n");
+	outputText("You tell her you’ll be fine and just need some rest, you’ll be sure to come by and see her once you’ve recovered.\n\n");
+	cleanupAfterCombat();
+}
+public function graydaEncounterLoss2():void {
+	spriteSelect(SpriteDb.s_grayda);
+	clearOutput();
+	outputText("Grayda is no longer able to withstand your attacks, and has to result to leaning on her staff, she raises a hand as if to signal her surrender.\n\n");
+	outputText("\"<i>Very… Well done Elite. You’ve definitely gotten significantly stronger from when we’ve first met. You’ve proved you're not so weak after all. Cherish this moment.</i>\"\n\n");
+	flags[kFLAGS.THE_TRENCH_ENTERED] = 8;
 	cleanupAfterCombat();
 }
 /*

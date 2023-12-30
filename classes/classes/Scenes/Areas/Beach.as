@@ -29,6 +29,7 @@ import classes.Scenes.SceneLib;
 		public var demonsPack:DemonPackBeachScene = new DemonPackBeachScene();
 		public var pinchoushop:PinchousWaterwearAndTools = new PinchousWaterwearAndTools();
 		public var gooGirlScene:GooGirlScene = new GooGirlScene();
+		public var arigeanOmnibusAbominationScene:ArigeanOmnibusAbominationScene = new ArigeanOmnibusAbominationScene();
 
 		public const areaLevel:int = 25;
 		public function isDiscovered():Boolean {
@@ -224,6 +225,19 @@ import classes.Scenes.SceneLib;
 				},
 				when: function ():Boolean {
 					return (player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained);
+				},
+				chance: 1
+			}, {
+				name: "arigeanOmnibusAbomination",
+				label : "Arigean Omnibus",
+				kind  : 'monster',
+				unique: true,
+				when: function ():Boolean {
+					return flags[kFLAGS.THE_TRENCH_ENTERED] == 9;
+				},
+				call: function ():void {
+					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
+					arigeanOmnibusAbominationScene.arigeanOmnibusAbominationEncounter();
 				},
 				chance: 1
 			}, {

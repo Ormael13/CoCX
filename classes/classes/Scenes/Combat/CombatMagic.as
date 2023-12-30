@@ -25,25 +25,25 @@ public class CombatMagic extends BaseCombatContent {
 	internal function applyAutocast():void {
 		outputText("\n\n");
 		if (!player.hasPerk(PerkLib.HexKnowledge) || (player.hasPerk(PerkLib.HexKnowledge) && player.hasPerk(PerkLib.HyperCasting))) {
-			if (player.hasPerk(PerkLib.Spellsword) && CombatAbilities.ChargeWeapon.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON_DISABLED] == 0) {
+			if (player.hasPerk(PerkLib.Autocast) && CombatAbilities.ChargeWeapon.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON_DISABLED] == 0) {
 				CombatAbilities.ChargeWeapon.autocast();
 			}
-			if (player.hasPerk(PerkLib.Spellbow) && CombatAbilities.ChargeRWeapon.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_CHARGE_R_WEAPON_DISABLED] == 0) {
+			if (player.hasPerk(PerkLib.Autocast) && CombatAbilities.ChargeRWeapon.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_CHARGE_R_WEAPON_DISABLED] == 0) {
 				CombatAbilities.ChargeRWeapon.autocast();
 			}
-			if (player.hasPerk(PerkLib.Spellarmor) && CombatAbilities.ChargeArmor.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR_DISABLED] == 0) {
+			if (player.hasPerk(PerkLib.Autocast) && CombatAbilities.ChargeArmor.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR_DISABLED] == 0) {
 				CombatAbilities.ChargeArmor.autocast();
 			}
 		}
 		if (!player.hasPerk(PerkLib.DivineKnowledge) || (player.hasPerk(PerkLib.DivineKnowledge) && player.hasPerk(PerkLib.HyperCasting))) {
-			if (player.hasPerk(PerkLib.Battlemage) && CombatAbilities.Might.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_MIGHT_DISABLED] == 0) {
+			if (player.hasPerk(PerkLib.Autocast) && CombatAbilities.Might.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_MIGHT_DISABLED] == 0) {
 				CombatAbilities.Might.autocast();
 			}
-			if (player.hasPerk(PerkLib.Battleflash) && CombatAbilities.Blink.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_BLINK_DISABLED] == 0) {
+			if (player.hasPerk(PerkLib.Autocast) && CombatAbilities.Blink.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_BLINK_DISABLED] == 0) {
 				CombatAbilities.Blink.autocast();
 			}
 		}
-		if (player.hasPerk(PerkLib.Battleshield) && CombatAbilities.ManaShield.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_MANA_SHIELD_DISABLED] == 0) {
+		if (player.hasPerk(PerkLib.Autocast) && CombatAbilities.ManaShield.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_MANA_SHIELD_DISABLED] == 0) {
 			CombatAbilities.ManaShield.autocast();
 		}
 	}
@@ -627,6 +627,7 @@ public class CombatMagic extends BaseCombatContent {
 			tier1: PerkLib.RagingInferno,
 			tier2: PerkLib.RagingInfernoEx,
 			tier3: PerkLib.RagingInfernoSu,
+			tier4: PerkLib.RagingInfernoMastered,
 			counter: StatusEffects.CounterRagingInferno,
 			type: "fire"
 		},
@@ -634,6 +635,7 @@ public class CombatMagic extends BaseCombatContent {
 			tier1: PerkLib.RumblingQuake,
 			tier2: PerkLib.RumblingQuakeEx,
 			tier3: PerkLib.RumblingQuakeSu,
+			tier4: PerkLib.RumblingQuakeMastered,
 			counter: StatusEffects.CounterRumblingQuake,
 			type: "earth"
 		},
@@ -641,6 +643,7 @@ public class CombatMagic extends BaseCombatContent {
 			tier1: PerkLib.HowlingGale,
 			tier2: PerkLib.HowlingGaleEx,
 			tier3: PerkLib.HowlingGaleSu,
+			tier4: PerkLib.HowlingGaleMastered,
 			counter: StatusEffects.CounterHowlingGale,
 			type: "wind"
 		},
@@ -648,6 +651,7 @@ public class CombatMagic extends BaseCombatContent {
 			tier1: PerkLib.HighTide,
 			tier2: PerkLib.HighTideEx,
 			tier3: PerkLib.HighTideSu,
+			tier4: PerkLib.HighTideMastered,
 			counter: StatusEffects.CounterHighTide,
 			type: "water"
 		},
@@ -655,6 +659,7 @@ public class CombatMagic extends BaseCombatContent {
 			tier1: PerkLib.GlacialStorm,
 			tier2: PerkLib.GlacialStormEx,
 			tier3: PerkLib.GlacialStormSu,
+			tier4: PerkLib.GlacialStormMastered,
 			counter: StatusEffects.CounterGlacialStorm,
 			type: "ice"
 		},
@@ -662,6 +667,7 @@ public class CombatMagic extends BaseCombatContent {
 			tier1: PerkLib.HighVoltage,
 			tier2: PerkLib.HighVoltageEx,
 			tier3: PerkLib.HighVoltageSu,
+			tier4: PerkLib.HighVoltageMastered,
 			counter: StatusEffects.CounterHighVoltage,
 			type: "lightning"
 		},
@@ -669,6 +675,7 @@ public class CombatMagic extends BaseCombatContent {
 			tier1: PerkLib.EclipsingShadow,
 			tier2: PerkLib.EclipsingShadowEx,
 			tier3: PerkLib.EclipsingShadowSu,
+			tier4: PerkLib.EclipsingShadowMastered,
 			counter: StatusEffects.CounterEclipsingShadow,
 			type: "darkness"
 		},
@@ -676,6 +683,7 @@ public class CombatMagic extends BaseCombatContent {
 			tier1: PerkLib.CorrosiveMeltdown,
 			tier2: PerkLib.CorrosiveMeltdownEx,
 			tier3: PerkLib.CorrosiveMeltdownSu,
+			tier4: PerkLib.CorrosiveMeltdownMastered,
 			counter: StatusEffects.CounterCorrosiveMeltdown,
 			type: "acid"
 		}
@@ -684,12 +692,13 @@ public class CombatMagic extends BaseCombatContent {
 	internal function calcMagicCounterModImpl(perkObj:Object, damage:Number, casting:Boolean = true):Number {
 		var modDmg:Number = damage;
         //v1 is counter value in 5% (for later tiers),
-		if (player.hasPerk(perkObj.tier1)) { //if has perk
+		if (player.hasPerk(perkObj.tier1) || player.hasPerk(perkObj.tier4)) { //if has perk
             if (casting) {
                 if (player.hasStatusEffect(perkObj.counter)) { //counter created
 					var cap:Number = 40;
 					if (player.hasPerk(perkObj.tier2)) cap += 80;
 					if (player.hasPerk(perkObj.tier3)) cap += 480;
+					if (player.hasPerk(perkObj.tier4)) cap += 320;
                     //calculating damage
                     if (player.statusEffectv1(perkObj.counter) > 0)
                         modDmg = Math.round(damage * (1 + player.statusEffectv1(perkObj.counter) * 0.05));
@@ -701,13 +710,16 @@ public class CombatMagic extends BaseCombatContent {
                     //increasing counters
 					var increase:Number = 8;
 					if (player.hasPerk(perkObj.tier2)) increase += 4;
+					if (player.hasPerk(perkObj.tier4)) increase += 16;
 					if (player.statusEffectv1(perkObj.counter) < cap) {
 						player.addStatusValue(perkObj.counter, 1, increase);
 						player.addStatusValue(perkObj.counter, 2, 1);
 					}
                 }
                 else {
-                    if (player.hasPerk(perkObj.tier2))
+					if (player.hasPerk(perkObj.tier4)) 
+						player.createStatusEffect(perkObj.counter,24,1,0,0);
+                    else if (player.hasPerk(perkObj.tier2))
                         player.createStatusEffect(perkObj.counter,12,1,0,0);
                     else
                         player.createStatusEffect(perkObj.counter,8,1,0,0);
@@ -722,9 +734,9 @@ public class CombatMagic extends BaseCombatContent {
 
 	internal function maintainMagicCounter(perkObj:Object):void {
 		if (player.hasStatusEffect(perkObj.counter)) {
-			if (player.hasPerk(perkObj.tier3)) player.addStatusValue(perkObj.counter, 1, 2);
-			else if (player.hasPerk(perkObj.tier3)) player.addStatusValue(perkObj.counter, 1, 3);
-			player.addStatusValue(perkObj.counter, 1, 4);
+			if (player.hasPerk(perkObj.tier3) || player.hasPerk(perkObj.tier4)) player.addStatusValue(perkObj.counter, 1, 4);
+			else if (player.hasPerk(perkObj.tier2)) player.addStatusValue(perkObj.counter, 1, 6);
+			player.addStatusValue(perkObj.counter, 1, 8);
 		}	
 	}
 

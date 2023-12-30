@@ -5,6 +5,7 @@
 package classes.Items.Weapons
 {
 	import classes.Items.Weapon;
+	import classes.Items.ItemTags;
 	import classes.PerkLib;
 	import classes.Player;
 	import classes.GlobalFlags.*;
@@ -15,6 +16,7 @@ package classes.Items.Weapons
 		public function DualExcalibur() 
 		{
 			super("DExcalib", "DualExcalibur", "Dual Excalibur", "a Dual Excalibur", "slash", 40, 1600, "A legendary dual swords said to have been made by Marae for her champion. Those weapon radiates divine power, purifying its wielder and protecting them from impurity.", "Dual", "Sword");
+			withTag(ItemTags.I_LEGENDARY);
 		}
 		
 		override public function get attack():Number {

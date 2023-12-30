@@ -18,10 +18,12 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.NPCs.Grayda;
 import classes.internals.Utils;
 import classes.Races.ArigeanRace;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class TheTrench extends BaseContent implements TimeAwareInterface {
 	
@@ -215,22 +217,81 @@ public function theTrenchEntrance():void {
 	outputText("Following the path Grayda showed you, you navigate yourself through the dark underwater chasm, and soon find yourself within the small community lovingly named ‘The Trench’. It’s a series of rooms carved out of the stone walls of the underwater cave, notably divided into three different sections which serve different purposes. A few plants seem to line some of the walls which produce a soft, white light, and a general feeling of safety and passiveness seems to fill you at the thought of other Arigeans being around.\n\n");
 	theTrenchMain1();
 	menu();
+	addButtonIfTrue(0, "Quarters", theTrenchQuarters, "It's still too early to go to sleep.", isNightTime, "Turn yourself in for the night.");
+	addButton(1, "Equipment shop", theTrenchEquipmentShop);
 	addButton(2, "Food Stand", theTrenchFoodStand);
 	addButton(3, "Grayda", theTrenchGraydaQuestNPC);
+	addButton(4, "Loiter", theTrenchLoiter);
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 private function theTrenchMain():void {
 	clearOutput();
 	theTrenchMain1();
 	menu();
+	addButtonIfTrue(0, "Quarters", theTrenchQuarters, "It's still too early to go to sleep.", isNightTime, "Turn yourself in for the night.");
+	addButton(1, "Equipment shop", theTrenchEquipmentShop);
 	addButton(2, "Food Stand", theTrenchFoodStand);
 	addButton(3, "Grayda", theTrenchGraydaQuestNPC);
+	addButton(4, "Loiter", theTrenchLoiter);
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 private function theTrenchMain1():void {
 	outputText("The left path seems to lead into multiple different rooms which serve as shared quarters between several individuals per room. While most of the rooms seem to be unoccupied or hosting sleeping Arigeans, you can hear the chatting of a couple individuals behind some of the closed doors.\n\n");
 	outputText("The right path seems to lead to a market area which contains multiple different shops or services. It seems like you could find replacement equipment here should you ever happen to lose the clothing Grayda gifted you. A heavenly smell of roasted meat seems to waft from some sort of food shop from down there.\n\n");
 	outputText("The central path leads down towards a common area in which you can see several Arigeans lounging, reading or simply just conversing with each other. You can see Grayda holding a few papers while talking with two Arigeans who possess a red and black coloring, which seems to be a uncommon coloring many of the individuals here possess.\n\n");
+}
+private function theTrenchQuarters():void {
+	clearOutput();
+	outputText("Grayda did give you permission to rest here as long as you needed, surely she wouldn’t mind if you slept in one of the empty rooms for a bit? Walking down the path on your left eventually leads you to a series of doors, some open, some closed, checking each of the rooms as you pass you notice that there seems to be an unoccupied room near the end of the hallway.\n\n");
+	if (rand(10) == 0) {
+		outputText("Standing in the doorway you count roughly 5 individuals all lying on the floor in minimal clothing, almost piled on top of each other, much to your surprise they aren’t having an orgy, but instead are all sleeping curled up together, is this a common occurrence here? However you soon realize you’ve been spacing off staring at the scene, and a feeling of drowsiness is dragging at your eyelids as they begin to feel heavy, surely they wouldn’t mind one more joining in, right?\n\n");
+		outputText(""+(player.isNaked() ? "Y":"Stripping off your [armor] into a neat pile y")+"ou kneel down while carefully, quietly and deftly move to place your head upon a soft pair of thighs as you slowly rest your body on the floor. Luckily for you this doesn’t visibly wake anyone up, and you allow yourself to fall into a deep comfortable sleep as you feel a pair of arms wrap around you from behind.\n\n");
+		outputText("Waking up a couple of hours later, you realize you somehow got yourself in the center of the pile, with one individual seeming intertwined with you, and face first in your cleavage. You remorsefully, but gently pry yourself free from the pile and redress before heading back off to camp.\n\n");
+	}
+	else {
+		outputText("Standing at the doorway you see that the room is somewhat furnished, only possessing a set of beds and a table with chairs near the center, however other that it’s empty with no signs of anyone having claimed it for their own. Closing the door behind you, you walk towards one of the beds, and begin dressing out of your [armor] leaving it folded on the table.\n\n");
+		outputText("Giving your body a few stretches, you collapse onto the bed, and retreat into the covers your ");
+		if (flags[kFLAGS.THE_TRENCH_ENTERED] >= 12) outputText("large extra mouth hanging off the bed due to its massive size");
+		else if (player.tailType == Tail.ARIGEAN_RED || player.tailType == Tail.ARIGEAN_YELLOW) outputText("symbiotic friend wrapping itself around your waist to stay close to the warmth your body offers");
+		else outputText("parasitic partner partner wrapping itself around your waist to stay close to the warmth your body offers");
+		outputText(", and before long you’ve drifted off to the sweet bliss of sleep.\n\n");
+	}
+	camp.cheatSleepUntilMorning();
+	doNext(theTrenchMain);
+}
+private function theTrenchEquipmentShop():void {
+	clearOutput();
+	if (player.statusEffectv3(StatusEffects.Trench) == 0) {
+		outputText("You follow the right path down to where most of the shops are, what catches your attention however is a small building with a large amount of crates resting outside the exterior. If you were to take a guess, this is where you can buy new equipment.\n\n");
+		outputText("Entering the shop you're greeted with the sight of a woman carrying a large crate with a pair of oversized gauntlets, placing the crate down, and simply ripping off the lid before grabbing a few spears and carrying them with her somewhere towards the back. Returning up to the front, her glowing red eyes make direct contact with yours before she marches up to you.\n\n");
+		outputText("\"<i>I don’t believe... i’ve seen you before… Are you new here?</i>\" her voice is calm and spaced in sections, but just like her face, doesn’t seem to hold very much emotion. \"<i>Let me… make one thing clear… we don’t give out… free replacements… resources are too strict…</i>\"\n\n");
+		player.addStatusValue(StatusEffects.Trench, 3, 1);
+	}
+	outputText("You ask the shopkeeper what her selection is.\n\n");
+	outputText("\"<i>Here is what’s… in stock…</i>\"\n\n");
+	menu();
+	addButton(0, "AN-CU", theTrenchEquipmentShopArigeanNeClassUniform).hint("Arigean Ne-Class Uniform");
+	addButton(1, "A.Club", theTrenchEquipmentShopArigeanClub).hint("Arigean Club");
+	addButton(2, "A.Spear", theTrenchEquipmentShopArigeanSpear).hint("Arigean Spear");
+	addButton(14, "Back", theTrenchMain);
+}
+private function theTrenchEquipmentShopArigeanNeClassUniform():void {
+	outputText("\"<i>This uniform is waterproof… and should fit your… body type well too. You might find… that it will help… with some of your… more natural abilities. i’ll provide… one for 720 gems… we don’t make them… here and rely on… supplies from the north.</i>\"\n\n");
+	doYesNo(Utils.curry(theTrenchEquipmentShopBuy,armors.ANE_UNI), theTrenchEquipmentShop);
+}
+private function theTrenchEquipmentShopArigeanClub():void {
+	outputText("\"<i>Don't look at me… funny… we all need something... when our mana drops...below... I'll part with it… for 880 gems.</i>\"\n\n");
+	doYesNo(Utils.curry(theTrenchEquipmentShopBuy,weapons.ARICLUB), theTrenchEquipmentShop);
+}
+private function theTrenchEquipmentShopArigeanSpear():void {
+	outputText("\"<i>A weapon is… a weapon… you’ll find it hits… much harder the lower… your magical energy is… I can provide one for...  1040 gems… as it’s a spear… it should pierce armor… and flesh quite easily.</i>\"\n\n");
+	doYesNo(Utils.curry(theTrenchEquipmentShopBuy,weapons.ARI_SPR), theTrenchEquipmentShop);
+}
+public function theTrenchEquipmentShopBuy(itype:ItemType):void {
+	clearOutput();
+	player.gems -= itype.value;
+	statScreenRefresh();
+	inventory.takeItem(itype, theTrenchEquipmentShop);
 }
 private function theTrenchFoodStand():void {
 	clearOutput();
@@ -250,7 +311,9 @@ private function theTrenchFoodStand():void {
 	addButton(0, "SF", theTrenchFoodStandCoelacanthJerky).hint("Stomiidae fillet");
 	addButton(1, "CS", theTrenchFoodStandCalamariSteak).hint("Calamari Steak");
 	addButton(2, "CJ", theTrenchFoodStandCoelacanthJerky).hint("Coelacanth Jerky");
-	addButton(3, "SII", theTrenchFoodStandSoftIronIngot).hint("Soft Iron Ingot");
+	addButton(5, "SII", theTrenchFoodStandSoftIronIngot).hint("Soft Iron Ingot");
+	addButton(6, "LBB", theTrenchFoodStandLightBronzeBar).hint("Light Bronze Bar")
+	addButton(7, "EAI", theTrenchFoodStandEbonbloomAlloyIngot).hint("Ebonbloom Alloy Ingot")
 	addButton(14, "Back", theTrenchMain);
 }
 private function theTrenchFoodStandStomiidaeFillet():void {
@@ -268,6 +331,14 @@ private function theTrenchFoodStandCoelacanthJerky():void {
 private function theTrenchFoodStandSoftIronIngot():void {
 	outputText("\"<i>Ah, soft iron~ My personal favorite! You’ll find it’s soft and easy to chew on the go, and your body will go straight to work on healing itself with the extra nutrients, it’s also pretty decent stomach filler too! 70 gems each.</i>\"\n\n");
 	doYesNo(Utils.curry(theTrenchFoodStandBuy,consumables.SIINGOT), theTrenchFoodStand);
+}
+private function theTrenchFoodStandLightBronzeBar():void {
+	outputText("\"<i>Light Bronze? It’s a bit chewy, but with the extra nutrients your body should have an easy time resisting illness, and poisons! Apparently it can also help you shrug off magical attacks, but they still hurt. 120 gems each.</i>\"\n\n");
+	doYesNo(Utils.curry(theTrenchFoodStandBuy,consumables.L_B_BAR), theTrenchFoodStand);
+}
+private function theTrenchFoodStandEbonbloomAlloyIngot():void {
+	outputText("\"<i>mmm~ Ebonbloom~ it’s pretty hard to come by, so it’s mixed in with other metals to make a decent amount for processing to be consumed. It’s tough, and bitter at first, but has a pretty amazing aftertaste, and does wonders for you and your symbiote friend! 200 gems each.</i>\"\n\n");
+	doYesNo(Utils.curry(theTrenchFoodStandBuy,consumables.EAINGOT), theTrenchFoodStand);
 }
 public function theTrenchFoodStandBuy(itype:ItemType):void {
 	clearOutput();
@@ -299,7 +370,12 @@ private function theTrenchGraydaQuestNPCTalk():void {
 	outputText("You ask Grayda if she wouldn’t mind answering some of your questions.\n\n");
 	outputText("\"<i>I don’t have any tasks that I need to complete currently, so I don’t mind. What would you like to discuss?</i>\"\n\n");
 	menu();
-	addButton(0, "Arigeans", theTrenchGraydaQuestNPCTalkArigeans);
+	addButton(1, "Arigeans", theTrenchGraydaQuestNPCTalkArigeans);
+	addButton(2, "Coloring", theTrenchGraydaQuestNPCTalkColoring);
+	addButton(3, "Magic", theTrenchGraydaQuestNPCTalkMagic);
+	addButton(6, "Her", theTrenchGraydaQuestNPCTalkHer);
+	addButton(7, "Outsiders", theTrenchGraydaQuestNPCTalkOutsiders);
+	addButton(8, "North", theTrenchGraydaQuestNPCTalkNorth);
 	addButton(14, "Back", theTrenchGraydaQuestNPC);
 }
 private function theTrenchGraydaQuestNPCTalkArigeans():void {
@@ -313,21 +389,70 @@ private function theTrenchGraydaQuestNPCTalkArigeans():void {
 	doNext(theTrenchGraydaQuestNPCTalk);
 	advanceMinutes(5);
 }
-private function theTrenchGraydaQuestNPCTalk2():void {
+private function theTrenchGraydaQuestNPCTalkColoring():void {
 	clearOutput();
-	outputText("\"<i></i>\"\n\n");
+	outputText("You’ve noticed how many individuals here seem to share a red coloring while she herself has a yellow coloring, is there a reason for this?\n\n");
+	outputText("\"<i>Colors signify rank, the higher rank an Arigean is, the stronger, and more durable they are. Higher ranks tend to be able to order around lower ranks, if I ");
+	if (player.tailType == Tail.ARIGEAN_GREEN) outputText("were to ask you to give me a massage, you would probably feel compelled to fulfill that order.");
+	if (player.tailType == Tail.ARIGEAN_RED) outputText("were to order you to strip and patrol the trench nude, you would most likely fulfill that order without hesitation.");
+	if (player.tailType == Tail.ARIGEAN_YELLOW) outputText("could order you to do something, but since we’re the same rank, it would be entirely up to your choice.");
+	outputText("</i>\"\n\n");
+	outputText("\"<i>How many ranks are there?</i>\"\n\n");
+	outputText("\"<i>There’s Recruits which possess green markings, Elites who possess red markings, Countesses who are marked yellow, and princesses who are marked blue, and often take on exotic forms.</i>\"\n\n");
+	outputText("\"<i>Princesses?</i>\"\n\n");
+	outputText("\"<i>Princesses are like leaders for our race, and while they are the strongest, and most durable of our kind, not everyone is naturally capable of becoming one, and fewer are strong enough to reach the point where they would become one. However with such strengths come many drawbacks, mainly one’s humanity as they permanently fuse with their symbiote. Becoming a princess is something one must do willingly, as it can’t be forced.</i>\"\n\n");
 	doNext(theTrenchGraydaQuestNPCTalk);
 	advanceMinutes(5);
 }
-private function theTrenchGraydaQuestNPCTalk3():void {
+private function theTrenchGraydaQuestNPCTalkMagic():void {
 	clearOutput();
-	outputText("\"<i></i>\"\n\n");
+	outputText("You ask how Arigeans are able to naturally use magic despite them not casting or chanting any spells.\n\n");
+	outputText("She summons one of her bird-like constructs, which fizzles as it perches itself on her finger, before being unable to hold it’s shape any longer and fizzling out of existence. \"<i>It varies depending on your type, however universally it’s not as refined as the magic the Land Walkers use. you see, my magic works first by a mental reconstruction within my brain, which then gets made real with mana by my Symbiote, it will then process…</i>\"\n\n");
+	outputText("\"<i>I don’t know what you're saying!</i>\"\n\n");
+	outputText("\"<i>It’s unstable as it’s made of raw mana, and like an illusion that can cause harm. Normally they don’t last for very long, so there’s only so far you can strike from with it. However, it seems yours works completely different, as it’s just an unstable bolt of raw uncontrolled mana.</i>\" Without much of a warning, she reaches for one of your "+(player.tailType == Tail.ARIGEAN_GREEN ? "parasite":"symbiote")+"’s heads, (and holds it steady with a firm grasp.\n\n");
+	outputText("Her hands quickly get to work scratching the underside of the head, which earns squirming from your other, and a moan from you, however, this goes seemingly unnoticed as she quickly gets the result she wanted from one of your ‘tails’, which was a weak huff of raw mana.\n\n");
+	outputText("\"<i>Seems like you might be capable of more, but I'm not sure if I can help you with that at all.</i>\" She releases her grasp as your ‘partner’ quickly retreats behind you.\n\n");
 	doNext(theTrenchGraydaQuestNPCTalk);
 	advanceMinutes(5);
 }
-private function theTrenchGraydaQuestNPCTalk4():void {
+private function theTrenchGraydaQuestNPCTalkHer():void {
 	clearOutput();
-	outputText("\"<i></i>\"\n\n");
+	outputText("You ask what she was like before she became an Arigean.\n\n");
+	if (player.tailType == Tail.ARIGEAN_GREEN) outputText("\"<i>...Recruit, I am not like the beings of the surface, down here it is considered highly rude to indulge oneself in other people’s lives only after the first meeting, I forgive you as you most likely have not known, but do not do this again until we know each other better, recruit.</i>\"\n\n");
+	if (player.tailType == Tail.ARIGEAN_RED) outputText("\"<i>mmm…</i>\" she shuffles a bit as she puts a hand under her chin. This is clearly a subject she doesn’t enjoy remembering, or talking about. \"<i>I… Was simply someone who was at the wrong place, at the wrong time. Nothing more.</i>\"\n\n");
+	if (player.tailType == Tail.ARIGEAN_YELLOW) {
+		outputText("\"<i>I… guess you’ve been around long enough for me to put some trust in you, just give me a moment. I don’t find this easy.</i>\" Taking a seat, she pulls out a flask and takes a small sip from it before re-hiding it somewhere in her cloak. \"<i>Déanann alcól rudaí i gcónaí níos fearr… much better.</i>\"\n\n");
+		outputText("You take a seat by her, and patiently wait for her to start her story of what she was like before.\n\n");
+		outputText("\"<i>Let’s see…</i>\" she seems to almost space out, lost in thought. \"<i>Me and my sister used to be a part of a line of sailors, and we used to live a calm life almost entirely free from the corruption that plagued the land. However… our peace could not last forever, and the threat of being found by demons was becoming too great to ignore, so we stockpiled supplies, and tried to sail away from the mainland with a few close friends, family, and anyone who was willing to contribute.</i>\"\n\n");
+		outputText("Her glowing yellow eyes seem to dim to a low amber as she grabs, and takes another sip from her concealed flask. \"<i>It was all going well, we had enough supplies to last us a while… until a violent storm started hounding at our ship, and left us in a very poor condition, but that wasn’t the worst of it. One of those fanatic ‘Sea Witches’ attempted to attack our boat while turning us against each other.</i>\"\n\n");
+		outputText("Her eyes lose all of their glow, leaving them as nothing but milky white with a faint brown coloring where her irises should be, and a frown appears on her face as watery drops start to fall from her eyes. \"<i>I… was knocked overboard during the attack, and in my weakened state was unable to stay above the water.. Before I was about to pass out from a lack of air, this...</i>\" she pats the hat-like organism on her head in an affectionate manner. \"<i>It saved me from drowning by allowing me to breathe again… however there were no remains among the wreckage of the ship when I checked it. Meaning almost everyone I knew was most likely dead or turned into more fanatics.</i>\"\n\n");
+		outputText("She takes a long gulp of whatever the continents of the flask were, before returning the empty container to her cloak for a final time, a flush of blue on her cheeks makes it quite obvious as to what the contents were. \"<i>I'm not sure how long I stayed there, unable to move… to live with the reality that was forced upon me… eventually I couldn't remain conscious and collapsed from exhaustion. However when I woke up, I was somewhere different, as well as something I wasn't before, but the thing that mattered most to me was the desire to grow stronger. I wanted revenge, I would become a one-woman army if it meant finally being able to catch the one who caused so much ruin in a day.</i>\"\n\n");
+		outputText("She leans back into her chair and takes a deep breath before continuing. \"<i>But that was all so long ago, and I was much too young to have a proper understanding of how the world works. So for now, my duty is leading those here and keeping them safe.</i>\" Her eyes regain their glow as she seems to return to her normal attitude.\n\n");
+	}
+	doNext(theTrenchGraydaQuestNPCTalk);
+	advanceMinutes(5);
+}
+private function theTrenchGraydaQuestNPCTalkOutsiders():void {
+	clearOutput();
+	outputText("You ask Grayda about why they seem so secretive and aggressive when it comes to outsiders.\n\n");
+	outputText("\"<i>There are… various reasons as to why we don’t mix too well with the beings on the surface, but it mainly comes from mutual distrust. Surface dwellers seem quick to sell each other out or betray each other if it benefits them, however, this lack of mistrust stems both ways as the surface dwellers seem quick to associate us with the demons due to our… unique appearance. That and our appetites can be seen as a hindrance to the safety of the land walkers.</i>\"\n\n");
+	outputText("\"<i>Would peace ever be possible?</i>\"\n\n");
+	outputText("She closes her eyes as she takes a moment to think. \"<i>Maybe, but there will certainly always be friction. After all, the only reason why so many races seem to be working together currently is because of the demons. If they were dealt with or simply succeeded in corrupting everything, I could guarantee there would still be conflict regardless.</i>\"\n\n");
+	outputText("\"<i>Are there any other races down in the depths of Mareth?</i>\"\n\n");
+	outputText("\"<i>Certainly, however, our encounters rarely ever end with both sides pleased. Especially Mindbreakers. A princess might have no problem dealing with them, but most of our kind are quite vulnerable to mental trickery, and they seem hellbent on removing us from the picture. That doesn’t mean we’re intent on shutting ourselves off from other races; however, some of our more friendly hunters even trade with a few daring individuals who don’t seem afraid of us.</i>\"\n\n");
+	doNext(theTrenchGraydaQuestNPCTalk);
+	advanceMinutes(5);
+}
+private function theTrenchGraydaQuestNPCTalkNorth():void {
+	clearOutput();
+	outputText("You keep hearing mention of something up north, is there something there?\n\n");
+	outputText("\"<i>That would be our other and primary settlement, most of the individuals here moved from our primary settlement by order of the princesses to help keep us spaced out in case one of our settlements were discovered and attacked.</i>\" She holds up her staff with both hands to give you a clear look at it. \"<i>Most of our tools or clothing are actually made over there, and transported here as we don’t currently have any craftsmen.</i>\"\n\n");
+	outputText("Now that you think about it, how did the Arigeans come to create a settlement in the first place?\n\n");
+	outputText("\"<i>Most arigeans became outcasts from their original places due to others fearing they were becoming demons, eventually enough of the ‘first generation’ of arigeans gathered up and formed a settlement that started to slowly grow, however, we are a target to other races which lurk in the abysses of Mareth.</i>\"\n\n");
+	outputText("\"<i>First-generation?</i>\"\n\n");
+	outputText("\"<i>I don’t have any tasks that I need to complete currently, so I don’t mind. What would you like to discuss?</i>\"\n\n");
+	outputText("She presents a small smile with a slight chuckle. \"<i>Unfortunately this is something I don’t know much about, and it could even just be a bit of arigean folklore. Apparently, the first few arigeans all shared one thing in common, they were all infected by the same woman nicknamed ‘The First’.</i>\"\n\n");
+	outputText("The glow of her eyes seems to intensify with a childlike glee before she continues. \"<i>Rumor has it that she was the reincarnated form of a warrior who died at sea, she was also apparently the first-ever Arigean, some even claim the first princess, but no one has ever had a proper meeting with her. Some have claimed to have seen her stalking the depths at night, but she manages to escape every time someone gets too close to get a proper look at her. The only thing most see are her empty blue eyes, glowing in the distance and the faint outline of a woman.</i>\" Her eyes seem to dim to their normal brightness before she attempts to regain her professional stance. \"<i>However, those are just rumors, and nothing else. If there was a first arigean, she’s probably content hiding in silence or is long gone.</i>\"\n\n");
 	doNext(theTrenchGraydaQuestNPCTalk);
 	advanceMinutes(5);
 }
@@ -365,6 +490,17 @@ private function theTrenchGraydaQuestNPCMissions():void {
 		else addButton(2, "Continued Improvement", theTrenchGraydaQuestNPCMissionsContinuedImprovement).hint("Training Quest 2");
 	}
 	else addButtonDisabled(2, "???", "Req. to finish previous mission and have lvl 12+.");
+	if (player.level >= 18 && flags[kFLAGS.THE_TRENCH_ENTERED] >= 7) {
+		if (flags[kFLAGS.THE_TRENCH_ENTERED] >= 8) addButtonDisabled(3, "Final Appraisal", "You already finished Training Quest 3.");
+		else addButton(3, "Final Appraisal", theTrenchGraydaQuestNPCMissionsFinalAppraisal).hint("Training Quest 3");
+	}
+	else addButtonDisabled(3, "???", "Req. to finish previous mission and have lvl 18+.");
+	if (player.level >= 24 && flags[kFLAGS.THE_TRENCH_ENTERED] >= 8) {
+		if (flags[kFLAGS.THE_TRENCH_ENTERED] >= 11) addButtonDisabled(4, "Tracking the Monstrosity", "You already finished Promotion Quest 2.");
+		else if (flags[kFLAGS.THE_TRENCH_ENTERED] == 9) addButtonDisabled(4, "Tracking the Monstrosity", "You still tracking enemy.");
+		else addButton(4, "Tracking the Monstrosity", theTrenchGraydaQuestNPCMissionsTrackingTheMonstrosity).hint("Promotion Quest 2");
+	}
+	else addButtonDisabled(4, "???", "Req. to finish previous mission and have lvl 24+.");
 	addButton(14, "Back", theTrenchGraydaQuestNPC);
 }
 private function theTrenchGraydaQuestNPCMissionsGettingStronger():void {
@@ -425,18 +561,102 @@ private function theTrenchGraydaQuestNPCMissionsContinuedImprovement():void {
 	}
 	doNext(theTrenchGraydaQuestNPCMissions);
 }
-private function theTrenchGraydaQuestNPCMissions1():void {
+private function theTrenchGraydaQuestNPCMissionsFinalAppraisal():void {
 	clearOutput();
-	if (flags[kFLAGS.THE_TRENCH_ENTERED] == 6 && player.hasItem(useables.SEVTENT, 2, true)) {
-		outputText("\"<i></i>\"\n\n");
-		player.destroyItems(useables.SEVTENT, 2, true);
-		flags[kFLAGS.THE_TRENCH_ENTERED] = 7;
+	outputText("\"<i>Elite, I can see you’ve drastically improved from the first day we’ve met, and I want to see firsthand how strong you’ve gotten. Win or lose it doesn’t matter, I just want to taste your mettle. Let me know when you're ready to spar.</i>\"\n\n");
+	menu();
+	addButton(1, "Later", theTrenchGraydaQuestNPCMissions);
+	addButton(3, "Spar", theTrenchGraydaQuestNPCMissionsFinalAppraisal2);
+}
+private function theTrenchGraydaQuestNPCMissionsFinalAppraisal2():void {
+	spriteSelect(SpriteDb.s_grayda);
+	outputText("\"<i>Very well, we’ll move to the surface for our spar. I don’t want you holding back in the slightest, So show me your full force!</i>\"\n\n");
+	startCombat(new Grayda());
+}
+private function theTrenchGraydaQuestNPCMissionsTrackingTheMonstrosity():void {
+	clearOutput();
+	if (flags[kFLAGS.THE_TRENCH_ENTERED] == 10) {
+		outputText("\"<i>Welcome back Elite, I assume you’ve finished your assignment?</i>\"\n\n");
+		outputText("You tell Grayda of the encounter and how she should no longer be a threat to others or herself.\n\n");
+		outputText("\"<i>Well done, I understand killing another Arigean might be hard. But you did a good deed putting her out of her misery.</i>\" She seems to take a moment to look at the slightly blue sunburn you’ve gotten from the ordeal. \"<i>Oh yes! Your reward.</i>\" She fishes a Clear glass bottle with amber yellow contents from somewhere inside her cloak, offering it to you.\n\n");
+		outputText("Grabbing the bottle, popping off the lid, you almost take a sip before remembering what happened last time Grayda offered you a mystery drink. \n\n");
+		outputText("\"<i>Don’t worry, i’ll catch you if you fall. That drink should also make you considerably Stronger.</i>\"\n\n");
+		outputText("Well seeing as it didn’t exactly harm you in any way last time. What’s the worst that could happen besides making you stronger? Besides, the scent is quite tempting. Oh wait, it’s already all gone… and here comes your friend, the cold floor.\n\n");
+		outputText("As you come back to your consciousness, you don’t even try to open your eyes. You can already feel the intense migraine after all, but after a few minutes of waiting you experimentally open an eye. Seeing as your eye doesn’t sting from the brightness, you decide to quickly open both only to be greeted by the sight of your naked body, and Grayda reading a book while sitting to your side. Gah does your head hurt.\n\n");
+		outputText("\"<i>Awake? You were out quite a bit longer this time.</i>\" She hasn’t even seemed to look up from her book. \"<i>I’ll leave you to get dressed.</i>\" Swiftly closing the book and getting up to leave, she immediately stops before closing the door behind her. \"<i>Congratulations on your promotion Countess, you’ve certainly earned the title.</i>\"\n\n");
+		outputText("Countess? Does this mean you're now on equal footing as Grayda? From the looks of it you now are. Your highlights seemed to have taken on an amber yellow hue matching those that Grayda possesses, if you were to look in a mirror you would guess that your eyes would have followed the same trend. But maybe that’s enough procrastinating for now, from the sounds of it you’ve been out for a while, and others might be worried for how long you’ve been gone.\n\n");
+		outputText("Closing Grayda’s door you find that you’ve accidentally torn off the handle… whoops~ it seems you're now much stronger than you look. Hopefully she’s not too upset by it~\n\n");
+		flags[kFLAGS.THE_TRENCH_ENTERED] = 11;
+		transformations.TailArigeanYellow.applyEffect(false);
+		transformations.RearBodyArigeanAuraYellow.applyEffect(false);
+		advanceMinutes(90);
 	}
 	else {
-		outputText("\"<i></i>\"\n\n");
-		flags[kFLAGS.THE_TRENCH_ENTERED] = 6;
+		outputText("\"<i>Elite I have a more challenging task for you, if you feel up for it. I promise a very generous reward in return if you're successful.</i>\" Her breath seems heavier than normal and a few scrapes can be seen on her bare arms.\n\n");
+		outputText("Curious, you ask what she needs you to get done. It looks like she just got out of a fight with something.\n\n");
+		outputText("\"<i>A few months ago, one of our surface hunters disappeared. At first I just assumed she got caught up in another adventure and would be back soon, but she never came back. Well I was partially right with that guess. Earlier what… I could only assume that at some point, attempted to enter the trench. She was raving like a lunatic and masturbating furiously, she had clearly succumbed to the wretched demons... I was almost able to finish her off, and put her out of her misery, but she fled. I need you to find her, and end her suffering before she is able to harm anyone else.</i>\"\n\n");
+		outputText("You ask if there could be any way of easily tracking her. She could’ve gone anywhere.\n\n");
+		outputText("\"<i>She couldn’t have gone far. You should start with checking the nearby beaches.</i>\"\n\n");
+		flags[kFLAGS.THE_TRENCH_ENTERED] = 9;
 	}
 	doNext(theTrenchGraydaQuestNPCMissions);
+}
+private function theTrenchLoiter():void {
+	clearOutput();
+	outputText("Looking around the commons, you decide there shouldn’t be much harm in just relaxing for a while. Finding a nearby table and chair, you sit down, fold your arms and rest your head in them as you shut your eyes for a bit. However the chattering of individuals seems to draw your attention, surely they wouldn’t mind if you listened in, right? "+(flags[kFLAGS.THE_TRENCH_ENTERED] >= 12 ? "Afterall it wouldn’t hurt to know what’s on your subject’s minds. ":"")+"Your ears twitch as you strain your hearing, determined to hear your surroundings.\n\n");
+	var option:Number = rand(4);
+	switch (option) {
+        case 0:
+            outputText("\"<i>Claire... what are you doing?..</i>\"\n\n");
+            outputText("\"<i>C'mon! Please!</i>\"\n\n");
+            outputText("\"<i>Stop... humping my leg...</i>\"\n\n");
+            outputText("\"<i>C'mon! I need you!</i>\"\n\n");
+            outputText("\"<i>Wait... or... I'm going to... penalize you further...</i>\"\n\n");
+            outputText("\"<i>W-Wait! Let go of my horn!</i>\"\n\n");
+            outputText("\"<i>Why should I?.. It seems I always… need to be forceful… to get my point… across.</i>\"\n\n");
+            outputText("\"<i>P-Please stop s-stroking it! N-Not out he- GAHH!</i>\"\n\n");
+            break;
+        case 1:
+            outputText("\"<i>Claire… you were an oni… before… right?</i>\"\n\n");
+            outputText("\"<i>Yep, that’s right! Is something the matter? Or are you just curious?</i>\"\n\n");
+            outputText("\"<i>You don’t strike me… as very oni-like.</i>\"\n\n");
+            outputText("\"<i>What are you talking about, I'm very oni-like! I’ve still got a horn, i'm big, and very t-”</i>\"\n\n");
+            outputText("\"<i>I mean you don’t… act like one… your very gentle and… soft</i>\"\n\n");
+            outputText("\"<i>Well… i guess you're not wrong with that, but everyone is built differently~</i>\"\n\n");
+            outputText("\"<i>Everyday you continue to… confuse me</i>\"\n\n");
+            outputText("\"<i>Hehe, now give me a hug!</i>\"\n\n");
+            outputText("\"<i>Wait… not again!.. I can’t breathe when… you do this!</i>\"\n\n");
+            break;
+        case 2:
+            outputText("\"<i>Hey Camellia? You were a bee-girl before, right? What was that like?</i>\"\n\n");
+            outputText("\"<i>It was… fine i suppose… it was a fairly… simple life… of course it didn’t… last forever.</i>\"\n\n");
+            outputText("\"<i>Did something happen?</i>\"\n\n");
+            outputText("\"<i>I got infected… and then exiled… the queen feared that… what i was ill… with, was contagious.</i>\"\n\n");
+            outputText("\"<i>Birds of a feather, stick together ey!</i>\"\n\n");
+            outputText("\"<i>You were... an exile?</i>\"\n\n");
+            outputText("\"<i>Hehe… I think that’s a story for another time.</i>\"\n\n");
+            break;
+        case 3:
+            outputText("\"<i>So are you going… to tell me how… you became an Arigean?</i>\"\n\n");
+            outputText("\"<i>Mmm, I suppose I could, but I wanna be top tonight!</i>\"\n\n");
+            outputText("\"<i>Very… well.</i>\"\n\n");
+            outputText("\"<i>Hehe~ this is gonna be so fun!</i>\"\n\n");
+            outputText("\"<i>Now your end of… the deal.</i>\"\n\n");
+            outputText("\"<i>Alright, I used to live in a tribe, but I was always on thin ice with them due to being born with albinism. Eventually, they got sick of me and threw me out. A little bit after, I lost a fight and got infected, now I'm here.</i>\"\n\n");
+            outputText("\"<i>You don’t sound bothered… by this.</i>\"\n\n");
+            outputText("\"<i>I find life like this a lot better than before, besides I never liked them anyway.</i>\"\n\n");
+            outputText("\"<i>I suppose being an… Arigean is a lot… better than how life… was previously.</i>\"\n\n");
+            outputText("\"<i>C’mon! Let’s go have some fun now!</i>\"\n\n");
+            outputText("\"<i>Wait… I'm not done eating.</i>\"\n\n");
+            outputText("\"<i>Too bad!</i>\"\n\n");
+            break;
+        default:
+            outputText("\"<i>Too bad!</i>\"\n\n");
+            break;
+    }
+	outputText("Maybe that’s enough listening in on others for now.\n\n");
+	doNext(theTrenchMain);
+	advanceMinutes(5);
 }
 public function theTrench111():void {
 	clearOutput();

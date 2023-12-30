@@ -1,6 +1,7 @@
 package classes.Items.Weapons
 {
 import classes.Items.Weapon;
+import classes.Items.ItemTags;
 
 public class SeraphicSpear extends Weapon
 	{
@@ -11,6 +12,7 @@ public class SeraphicSpear extends Weapon
 				"A silvery spear imbued with holy power and decorated with blue sapphire gemstones. Engraved in the handle is an ancient runic spell made to ward evil. This blessed equipment seems to slowly heal its wielder’s wounds.",
 				WP_AP100, WT_SPEAR
 			);
+			withTag(ItemTags.I_LEGENDARY);
 		}
 		override public function get attack():Number {
 			var boost:int = 0;
@@ -25,11 +27,6 @@ public class SeraphicSpear extends Weapon
 			}
 			boost += Math.round((100 - game.player.cor) / scal);
 			return (20 + boost);
-		}
-		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.level >= 54) return super.canEquip(doOutput);
-			if (doOutput) outputText("You try and wield the legendary weapon but to your disapointment the item simply refuse to stay in your hands. It would seem you yet lack the power and right to wield this item.");
-			return false;
 		}
 	}
 

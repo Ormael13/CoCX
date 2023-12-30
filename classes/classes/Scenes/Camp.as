@@ -1082,7 +1082,7 @@ public class Camp extends NPCAwareContent{
 				addButtonDisabled(12, "Sleep", "Try as you may you cannot find sleep tonight. The damn moon won't let you rest as your urges to hunt and fuck are on the rise.");
 			}
 		}
-		//addButton(14, "Cheats", testmenu.SoulforceCheats).hint("This should be obvious. ^^");//block this option at each public version
+		if (CoC_Settings.debugBuild) addButton(14, "Cheats", testmenu.SoulforceCheats).hint("This should be obvious. ^^");
 
 		//Remove buttons according to conditions.
 		if (isNightTime) {
@@ -2460,9 +2460,41 @@ public class Camp extends NPCAwareContent{
 		}
 
 		if (page == 5) {
-			addButton(0, "Archmage (Ex)", mainPagePocketWatchArchmageEx)
+			addButton(0, "Raging Inferno (Mst)", mainPagePocketWatchRagingInfernoMastered)
+			.disableIf(!player.hasPerk(PerkLib.RagingInfernoSu), "Req. Raging Inferno (Su) perk")
+			.disableIf(player.hasPerk(PerkLib.RagingInfernoMastered), "You already got this merged perk");
+
+			addButton(1, "Glacial Storm (Mst)", mainPagePocketWatchGlacialStormMastered)
+			.disableIf(!player.hasPerk(PerkLib.GlacialStormSu), "Req. Glacial Storm (Su) perk")
+			.disableIf(player.hasPerk(PerkLib.GlacialStormMastered), "You already got this merged perk");
+
+			addButton(2, "High Voltage (Mst)", mainPagePocketWatchHighVoltageMastered)
+			.disableIf(!player.hasPerk(PerkLib.HighVoltageSu), "Req. High Voltage (Su) perk")
+			.disableIf(player.hasPerk(PerkLib.HighVoltageMastered), "You already got this merged perk");
+
+			addButton(3, "Eclipsing Shadow (Mst)", mainPagePocketWatchEclipsingShadowMastered)
+			.disableIf(!player.hasPerk(PerkLib.EclipsingShadowSu), "Req. Eclipsing Shadow (Su) perk")
+			.disableIf(player.hasPerk(PerkLib.EclipsingShadowMastered), "You already got this merged perk");
+
+			addButton(4, "Archmage (Ex)", mainPagePocketWatchArchmageEx)
 			.disableIf(!player.hasPerk(PerkLib.Archmage), "Req. Archmage perk")
 			.disableIf(player.hasPerk(PerkLib.ArchmageEx), "You already got this merged perk");
+
+			addButton(5, "High Tide (Mst)", mainPagePocketWatchHighTideMastered)
+			.disableIf(!player.hasPerk(PerkLib.HighTideSu), "Req. High Tide (Su) perk")
+			.disableIf(player.hasPerk(PerkLib.HighTideMastered), "You already got this merged perk");
+
+			addButton(6, "Howling Gale (Mst)", mainPagePocketWatchHowlingGaleMastered)
+			.disableIf(!player.hasPerk(PerkLib.HowlingGaleSu), "Req. Howling Gale (Su) perk")
+			.disableIf(player.hasPerk(PerkLib.HowlingGaleMastered), "You already got this merged perk");
+
+			addButton(7, "Rumbling Quake (Mst)", mainPagePocketWatchRumblingQuakeMastered)
+			.disableIf(!player.hasPerk(PerkLib.RumblingQuakeSu), "Req. Rumbling Quake (Su) perk")
+			.disableIf(player.hasPerk(PerkLib.RumblingQuakeMastered), "You already got this merged perk");
+
+			addButton(8, "Corrosive Meltdown (Mst)", mainPagePocketWatchCorrosiveMeltdownMastered)
+			.disableIf(!player.hasPerk(PerkLib.CorrosiveMeltdownSu), "Req. Corrosive Meltdown (Su) perk")
+			.disableIf(player.hasPerk(PerkLib.CorrosiveMeltdownMastered), "You already got this merged perk");
 
 			addButton(12, "Previous", mainPagePocketWatch, page - 1);
 			addButton(13, "Next", mainPagePocketWatch, page + 1);		
@@ -2648,16 +2680,49 @@ public class Camp extends NPCAwareContent{
 		player.perkPoints += 2;
 		doNext(mainPagePocketWatch, 4);
 	}
-	private function mainPagePocketWatchGreaterDiehardEx():void {
+	private function mainPagePocketWatchRagingInfernoMastered():void {
 		clearOutput();
-		outputText("Perks combined: 'Greater Diehard (Ex)' perk attained.");
-		player.removePerk(PerkLib.Diehard);
-		player.removePerk(PerkLib.ImprovedDiehard);
-		player.removePerk(PerkLib.GreaterDiehard);
-		player.createPerk(PerkLib.GreaterDiehardEx, 0, 0, 0, 0);
+		outputText("Perks combined: 'Raging Inferno (Mastered)' perk attained.");
+		player.removePerk(PerkLib.RagingInferno);
+		player.removePerk(PerkLib.RagingInfernoEx);
+		player.removePerk(PerkLib.RagingInfernoSu);
+		player.createPerk(PerkLib.RagingInfernoMastered, 0, 0, 0, 0);
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
 		player.perkPoints += 2;
-		doNext(mainPagePocketWatch, 6);
+		doNext(mainPagePocketWatch, 5);
+	}
+	private function mainPagePocketWatchGlacialStormMastered():void {
+		clearOutput();
+		outputText("Perks combined: 'Glacial Storm (Mastered)' perk attained.");
+		player.removePerk(PerkLib.GlacialStorm);
+		player.removePerk(PerkLib.GlacialStormEx);
+		player.removePerk(PerkLib.GlacialStormSu);
+		player.createPerk(PerkLib.GlacialStormMastered, 0, 0, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
+		player.perkPoints += 2;
+		doNext(mainPagePocketWatch, 5);
+	}
+	private function mainPagePocketWatchHighVoltageMastered():void {
+		clearOutput();
+		outputText("Perks combined: 'High Voltage (Mastered)' perk attained.");
+		player.removePerk(PerkLib.HighVoltage);
+		player.removePerk(PerkLib.HighVoltageEx);
+		player.removePerk(PerkLib.HighVoltageSu);
+		player.createPerk(PerkLib.HighVoltageMastered, 0, 0, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
+		player.perkPoints += 2;
+		doNext(mainPagePocketWatch, 5);
+	}
+	private function mainPagePocketWatchEclipsingShadowMastered():void {
+		clearOutput();
+		outputText("Perks combined: 'Eclipsing Shadow (Mastered)' perk attained.");
+		player.removePerk(PerkLib.EclipsingShadow);
+		player.removePerk(PerkLib.EclipsingShadowEx);
+		player.removePerk(PerkLib.EclipsingShadowSu);
+		player.createPerk(PerkLib.EclipsingShadowMastered, 0, 0, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
+		player.perkPoints += 2;
+		doNext(mainPagePocketWatch, 5);
 	}
 	private function mainPagePocketWatchArchmageEx():void {
 		clearOutput();
@@ -2669,6 +2734,61 @@ public class Camp extends NPCAwareContent{
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
 		player.perkPoints += 2;
 		doNext(mainPagePocketWatch, 5);
+	}
+	private function mainPagePocketWatchHighTideMastered():void {
+		clearOutput();
+		outputText("Perks combined: 'High Tide (Mastered)' perk attained.");
+		player.removePerk(PerkLib.HighTide);
+		player.removePerk(PerkLib.HighTideEx);
+		player.removePerk(PerkLib.HighTideSu);
+		player.createPerk(PerkLib.HighTideMastered, 0, 0, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
+		player.perkPoints += 2;
+		doNext(mainPagePocketWatch, 5);
+	}
+	private function mainPagePocketWatchHowlingGaleMastered():void {
+		clearOutput();
+		outputText("Perks combined: 'Howling Gale (Mastered)' perk attained.");
+		player.removePerk(PerkLib.HowlingGale);
+		player.removePerk(PerkLib.HowlingGaleEx);
+		player.removePerk(PerkLib.HowlingGaleSu);
+		player.createPerk(PerkLib.HowlingGaleMastered, 0, 0, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
+		player.perkPoints += 2;
+		doNext(mainPagePocketWatch, 5);
+	}
+	private function mainPagePocketWatchRumblingQuakeMastered():void {
+		clearOutput();
+		outputText("Perks combined: 'Rumbling Quake (Mastered)' perk attained.");
+		player.removePerk(PerkLib.RumblingQuake);
+		player.removePerk(PerkLib.RumblingQuakeEx);
+		player.removePerk(PerkLib.RumblingQuakeSu);
+		player.createPerk(PerkLib.RumblingQuakeMastered, 0, 0, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
+		player.perkPoints += 2;
+		doNext(mainPagePocketWatch, 5);
+	}
+	private function mainPagePocketWatchCorrosiveMeltdownMastered():void {
+		clearOutput();
+		outputText("Perks combined: 'Corrosive Meltdown (Mastered)' perk attained.");
+		player.removePerk(PerkLib.CorrosiveMeltdown);
+		player.removePerk(PerkLib.CorrosiveMeltdownEx);
+		player.removePerk(PerkLib.CorrosiveMeltdownSu);
+		player.createPerk(PerkLib.CorrosiveMeltdownMastered, 0, 0, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
+		player.perkPoints += 2;
+		doNext(mainPagePocketWatch, 5);
+	}
+	private function mainPagePocketWatchGreaterDiehardEx():void {
+		clearOutput();
+		outputText("Perks combined: 'Greater Diehard (Ex)' perk attained.");
+		player.removePerk(PerkLib.Diehard);
+		player.removePerk(PerkLib.ImprovedDiehard);
+		player.removePerk(PerkLib.GreaterDiehard);
+		player.createPerk(PerkLib.GreaterDiehardEx, 0, 0, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
+		player.perkPoints += 2;
+		doNext(mainPagePocketWatch, 6);
 	}/*
 	private function mainPagePocketWatch():void {
 		clearOutput();
@@ -4920,50 +5040,13 @@ public function rebirthFromBadEnd():void {
 		if (player.hasStatusEffect(StatusEffects.LunaOff)) performancePointsPrediction++;
 		if (player.hasStatusEffect(StatusEffects.NadiaOff)) performancePointsPrediction++;
 		//Dungeons
-		if (SceneLib.dungeons.checkFactoryClear()) performancePointsPrediction++;
-		if (SceneLib.dungeons.checkDeepCaveClear()) performancePointsPrediction += 2;
-		if (SceneLib.dungeons.checkDemonLaboratoryClear()) performancePointsPrediction += 3;
-		if (SceneLib.dungeons.checkLethiceStrongholdClear()) performancePointsPrediction += 4;
-		if (SceneLib.dungeons.checkSandCaveClear()) performancePointsPrediction++;
-		if (SceneLib.dungeons.checkHiddenCaveClear()) performancePointsPrediction++;
-		if (SceneLib.dungeons.checkHiddenCaveHiddenStageClear()) performancePointsPrediction++;
-		if (SceneLib.dungeons.checkRiverDungeon1stFloorClear()) performancePointsPrediction++;
-		if (SceneLib.dungeons.checkDenOfDesireClear()) performancePointsPrediction++;
-		if (SceneLib.dungeons.checkEbonLabyrinthClear()) performancePointsPrediction += 3;
-		if (SceneLib.dungeons.checkPhoenixTowerClear()) performancePointsPrediction += 2;
-		if (SceneLib.dungeons.checkBeeHiveClear()) performancePointsPrediction += 2;
+		performancePointsPrediction += possibleToGainAscensionPointsDungeons();
 		//Quests
-		if (flags[kFLAGS.MARBLE_PURIFIED] > 0) performancePointsPrediction += 2;
-		if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) performancePointsPrediction += 2;
-		if (flags[kFLAGS.URTA_QUEST_STATUS] > 0) performancePointsPrediction += 2;
-		if (player.hasPerk(PerkLib.Enlightened)) performancePointsPrediction += 1;
-		if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0 || flags[kFLAGS.PURE_MARAE_ENDGAME] >= 2) performancePointsPrediction += 3;
-		if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) >= 4) performancePointsPrediction += 2;
-		if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) >= 4) performancePointsPrediction += 2;
-		if (player.statusEffectv3(StatusEffects.AdventureGuildQuests1) >= 4) performancePointsPrediction += 2;
-		if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) >= 4) performancePointsPrediction += 2;
-		if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) >= 4) performancePointsPrediction += 2;
-		if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) >= 2) performancePointsPrediction++;
-		if (player.statusEffectv2(StatusEffects.AdventureGuildQuests4) >= 2) performancePointsPrediction++;
-		if (flags[kFLAGS.GALIA_LVL_UP] >= 0.5) performancePointsPrediction += 5;
+		performancePointsPrediction += possibleToGainAscensionPointsQuests();
 		//Camp structures
-		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) performancePointsPrediction += 10;
-		if (flags[kFLAGS.CAMP_WALL_GATE] > 0) performancePointsPrediction += 11;
-		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] > 2) performancePointsPrediction += 2;
-		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] > 3) performancePointsPrediction += 2;
-		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] > 1) performancePointsPrediction += 2;
-		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] > 3) performancePointsPrediction += 2;
-		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] > 5) performancePointsPrediction += 2;
-		if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] > 3) performancePointsPrediction += 2;
-		if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] > 3) performancePointsPrediction += 2;
-		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) performancePointsPrediction += ((flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] - 1) * 2);
-		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > 0) performancePointsPrediction += flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE];
-		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] > 1) performancePointsPrediction += 2;
-		if (flags[kFLAGS.CAMP_UPGRADES_DAM] > 0) performancePointsPrediction += (flags[kFLAGS.CAMP_UPGRADES_DAM] * 2);
-		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) performancePointsPrediction += (flags[kFLAGS.CAMP_UPGRADES_FISHERY] * 2);
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) performancePointsPrediction += 2;
+		performancePointsPrediction += possibleToGainAscensionPointsCampStructures();
 		//Children
-		possibleToGainAscensionPointsChildren();
+		performancePointsPrediction += possibleToGainAscensionPointsChildren();
 		//Various Level trackers
 		performancePointsPrediction += player.level;
 		if (player.level >= 42) performancePointsPrediction += (player.level - 41);
@@ -4979,6 +5062,58 @@ public function rebirthFromBadEnd():void {
         performancePointsPrediction += getTotalWeaponMasteryLevels();
 		performancePointsPrediction = Math.round(performancePointsPrediction);
 		return performancePointsPrediction;
+	}
+	public function possibleToGainAscensionPointsDungeons():Number {
+		var performancePointsPredictionDungeons:Number = 0;
+		if (SceneLib.dungeons.checkFactoryClear()) performancePointsPredictionDungeons++;
+		if (SceneLib.dungeons.checkDeepCaveClear()) performancePointsPredictionDungeons += 2;
+		if (SceneLib.dungeons.checkDemonLaboratoryClear()) performancePointsPredictionDungeons += 3;
+		if (SceneLib.dungeons.checkLethiceStrongholdClear()) performancePointsPredictionDungeons += 4;
+		if (SceneLib.dungeons.checkSandCaveClear()) performancePointsPredictionDungeons++;
+		if (SceneLib.dungeons.checkHiddenCaveClear()) performancePointsPredictionDungeons++;
+		if (SceneLib.dungeons.checkHiddenCaveHiddenStageClear()) performancePointsPredictionDungeons++;
+		if (SceneLib.dungeons.checkRiverDungeon1stFloorClear()) performancePointsPredictionDungeons++;
+		if (SceneLib.dungeons.checkDenOfDesireClear()) performancePointsPredictionDungeons++;
+		if (SceneLib.dungeons.checkEbonLabyrinthClear()) performancePointsPredictionDungeons += 3;
+		if (SceneLib.dungeons.checkPhoenixTowerClear()) performancePointsPredictionDungeons += 2;
+		if (SceneLib.dungeons.checkBeeHiveClear()) performancePointsPredictionDungeons += 2;
+		return performancePointsPredictionDungeons;
+	}
+	public function possibleToGainAscensionPointsQuests():Number {
+		var performancePointsPredictionQuests:Number = 0;
+		if (flags[kFLAGS.MARBLE_PURIFIED] > 0) performancePointsPredictionQuests += 2;
+		if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) performancePointsPredictionQuests += 2;
+		if (flags[kFLAGS.URTA_QUEST_STATUS] > 0) performancePointsPredictionQuests += 2;
+		if (player.hasPerk(PerkLib.Enlightened)) performancePointsPredictionQuests += 1;
+		if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0 || flags[kFLAGS.PURE_MARAE_ENDGAME] >= 2) performancePointsPredictionQuests += 3;
+		if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) >= 4) performancePointsPredictionQuests += 2;
+		if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) >= 4) performancePointsPredictionQuests += 2;
+		if (player.statusEffectv3(StatusEffects.AdventureGuildQuests1) >= 4) performancePointsPredictionQuests += 2;
+		if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) >= 4) performancePointsPredictionQuests += 2;
+		if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) >= 4) performancePointsPredictionQuests += 2;
+		if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) >= 2) performancePointsPredictionQuests++;
+		if (player.statusEffectv2(StatusEffects.AdventureGuildQuests4) >= 2) performancePointsPredictionQuests++;
+		if (flags[kFLAGS.GALIA_LVL_UP] >= 0.5) performancePointsPredictionQuests += 5;
+		return performancePointsPredictionQuests;
+	}
+	public function possibleToGainAscensionPointsCampStructures():Number {
+		var performancePointsPredictionCampStructures:Number = 0;
+		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) performancePointsPredictionCampStructures += 10;
+		if (flags[kFLAGS.CAMP_WALL_GATE] > 0) performancePointsPredictionCampStructures += 11;
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] > 2) performancePointsPredictionCampStructures += 2;
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] > 3) performancePointsPredictionCampStructures += 2;
+		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] > 1) performancePointsPredictionCampStructures += 2;
+		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] > 3) performancePointsPredictionCampStructures += 2;
+		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] > 5) performancePointsPredictionCampStructures += 2;
+		if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] > 3) performancePointsPredictionCampStructures += 2;
+		if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] > 3) performancePointsPredictionCampStructures += 2;
+		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) performancePointsPredictionCampStructures += ((flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] - 1) * 2);//obecnie +4*2
+		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > 0) performancePointsPredictionCampStructures += flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE];//obecnie +8
+		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] > 1) performancePointsPredictionCampStructures += 2;
+		if (flags[kFLAGS.CAMP_UPGRADES_DAM] > 0) performancePointsPredictionCampStructures += (flags[kFLAGS.CAMP_UPGRADES_DAM] * 2);//obecnie +3*2
+		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) performancePointsPredictionCampStructures += (flags[kFLAGS.CAMP_UPGRADES_FISHERY] * 2);//obecnie +2*2
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) performancePointsPredictionCampStructures += 2;
+		return performancePointsPredictionCampStructures;
 	}
 	public function possibleToGainAscensionPointsChildren():Number {
 		var performancePointsPredictionChildren:Number = 0;

@@ -22,8 +22,10 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 
 		public static var AhriStatsToPerksConvertCounter:Number;
 		public static var AhriTavernTalks:Boolean;
+		public static var AhriStatsToSuperPerksConvertCounter:Number;
 		public static var EvelynnPerksToStatsConvertCounter:Number;
 		public static var EvelynnTavernTalks:Boolean;
+		public static var EvelynnCoreLimitBreakerCounter:Number;
 
 		public function stateObjectName():String {
 			return "JourneyToTheEast";
@@ -32,16 +34,20 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 		public function resetState():void {
 			AhriStatsToPerksConvertCounter = 0;
 			AhriTavernTalks = false;
+			AhriStatsToSuperPerksConvertCounter = 0;
 			EvelynnPerksToStatsConvertCounter = 0;
 			EvelynnTavernTalks = false;
+			EvelynnCoreLimitBreakerCounter = 0;
 		}
 
 		public function saveToObject():Object {
 			return {
 				"AhriStatsToPerksConvertCounter": AhriStatsToPerksConvertCounter,
 				"AhriTavernTalks": AhriTavernTalks,
+				"AhriStatsToSuperPerksConvertCounter": AhriStatsToSuperPerksConvertCounter,
 				"EvelynnPerksToStatsConvertCounter": EvelynnPerksToStatsConvertCounter,
-				"EvelynnTavernTalks": EvelynnTavernTalks
+				"EvelynnTavernTalks": EvelynnTavernTalks,
+				"EvelynnCoreLimitBreakerCounter": EvelynnCoreLimitBreakerCounter
 			};
 		}
 
@@ -49,8 +55,10 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 			if (o) {
 				AhriStatsToPerksConvertCounter = o["AhriStatsToPerksConvertCounter"];
 				AhriTavernTalks = o["AhriTavernTalks"];
+				AhriStatsToSuperPerksConvertCounter = valueOr(o["AhriStatsToSuperPerksConvertCounter"], 0);
 				EvelynnPerksToStatsConvertCounter = valueOr(o["EvelynnPerksToStatsConvertCounter"], 0);
 				EvelynnTavernTalks = valueOr(o["EvelynnTavernTalks"], false);
+				EvelynnCoreLimitBreakerCounter = valueOr(o["EvelynnCoreLimitBreakerCounter"], 0);
 			} else {
 				// loading from old save
 				resetState();
@@ -89,7 +97,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 3) addButton(10, "Neisa", NeisabutPCgotKOd);
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 4 || flags[kFLAGS.NEISA_FOLLOWER] == 5) addButton(10, "Neisa", meetingNeisaPostDungeonExploration).hint("Neisa is sitting at a table enjoying one of the local drinks.");
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 6) addButton(10, "Neisa", meetingNeisaPostDungeonExploration2).hint("Neisa is sitting at a table enjoying one of the local drinks.");
-			addButtonDisabled(11, "???", "You see a horse woman sitting at a table on your left.");//Diana
+			//addButtonDisabled(11, "???", "You see a horse woman sitting at a table on your left.");//Diana
 			addButton(14, "Leave", heXinDao.riverislandVillageStuff);
 		}
 
@@ -194,7 +202,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 			else {
 				outputText("You see a person covered wholy by the loose robe. For a moment it looks like it not noticed your presence next to it.\n\n");
 				outputText("\"<i>Greeting potential customer. You can call me Madam,</i>\" clearly female voice with undeniable subtle charm interrupts the silence. \"<i>You came to our table seeking my services? I am not able to provide much... aside from something i call... 'conversion'.</i>\"\n\n");
-				outputText("Conversion? Seeing your puzzle expression she continues, \"<i>I would take a bit of your grown potential to exchange it for increased ability to develop mystical abilities. But...</i>\" she make a gesture with one of her hands showing briefly her hand with five outstretched fingers \"<i>...I shall only do this five times. No more and no less than five.</i>\"\n\n");
+				outputText("Conversion? Seeing your puzzle expression she continues, \"<i>I would take a bit of your grown potential to exchange it for increased ability to develop mystical abilities. But...</i>\" she make a gesture with one of her hands showing briefly her hand with five outstretched fingers \"<i>...I shall only do this ten times. No more and no less than ten.</i>\"\n\n");
 				outputText("Just like that? Without any string attatched?\n\n");
 				outputText("\"<i>Of course there would be additional price. Ten spirit stones.</i>\" She pause before asking \"<i>So, dear customer, would you like me to perform this conversion on you?</i>\"\n\n");
 				AhriTavernTalks = true;
@@ -213,8 +221,8 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 				outputText("\"<i>Seems your grown potential isn't sufficient.</i>\" Madam shakes her head, \"<i>Come see me again when it would increase.</i>\"\n\n");
 				doNext(visitMadam);
 			}
-			else if (AhriStatsToPerksConvertCounter > 4 && AhriTavernTalks > 0) {
-				outputText("\"<i>It's unfotunate but I can't help you anymore,</i>\" Madam rise her hand to show five fingers, \"<i>My service can be repeated maximum five times and you, dear customer, have reached this limit.</i>\"\n\n");
+			else if (AhriStatsToPerksConvertCounter > 9 && AhriTavernTalks > 0) {
+				outputText("\"<i>It's unfotunate but I can't help you anymore,</i>\" Madam rise her hand to show five fingers, \"<i>My service can be repeated maximum ten times and you, dear customer, have reached this limit.</i>\"\n\n");
 				doNext(visitMadam);
 			}
 			else {
@@ -224,6 +232,11 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 				outputText("When you wake up, you groan, stretching your limbs. You're filled with a vaguely empty feeling in your muscles, but your brain feels...expanded, somehow. You snap awake, realizing that you're still in the inn. Looking around, there is nobody else in the room, with the door left wide open, almost like madam wanted to say 'return on your own'. Slightly unsatisfied, you return to the drinking hall.\n\n");
 				if (AhriStatsToPerksConvertCounter > 0) AhriStatsToPerksConvertCounter += 1;
 				else AhriStatsToPerksConvertCounter = 1;
+				if (AhriStatsToSuperPerksConvertCounter > 0) {
+					AhriStatsToSuperPerksConvertCounter -= 1;
+					player.superPerkPoints += 1;
+				}
+				else AhriStatsToSuperPerksConvertCounter = 1;
 				flags[kFLAGS.SPIRIT_STONES] -= 10;
 				player.statPoints -= 5;
 				player.perkPoints += 1;
@@ -241,9 +254,9 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 			else {
 				outputText("You see a person covered entirely by a loose robe. She looks around until she finally notices you staring at her.\n\n");
 				outputText("A sultry voice, feminine and sizzling, interrupts the silence. \"<i>Hello, customer. I'm Temptress,</i>\" She smiles slightly, beckoning to you with one hand. \"<i>You came to this table seeking my services? I can provide you with 'change'.</i>\"\n\n");
-				outputText("Change? Seeing your puzzle expression she continues, \"<i>I would take a bit of your ability to develop mystical abilities to exchange it for increased grown potential. But...</i>\" she make a gesture with one of her hands showing briefly her hand with five outstretched fingers ending with long, sharp finger claws \"<i>...I would only do this five times.</i>\"\n\n");
+				outputText("Change? Seeing your puzzle expression she continues, \"<i>I would take a bit of your ability to develop mystical abilities to exchange it for increased grown potential. But...</i>\" she make a gesture with one of her hands showing briefly her hand with five outstretched fingers ending with long, sharp finger claws \"<i>...I would only do this ten times.</i>\"\n\n");
 				outputText("Just like that? Without any strings attatched?\n\n");
-				outputText("\"<i>Of course there would be additional price for myu services. Ten spirit stones.</i>\" She pauses before asking \"<i>So are you here to be mesmerized or not?</i>\"\n\n");
+				outputText("\"<i>Of course there would be additional price for my services. Ten spirit stones.</i>\" She pauses before asking \"<i>So are you here to be mesmerized or not?</i>\"\n\n");
 				EvelynnTavernTalks = true;
 			}
 			menu();
@@ -260,8 +273,8 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 				outputText("\"<i>Seems your ability to develop your abilities is lacking.</i>\" Temptress sounds... disappointed, \"<i>Come see me again when it increases.</i>\"\n\n");
 				doNext(visitTemptress);
 			}
-			else if (EvelynnPerksToStatsConvertCounter > 4 && EvelynnTavernTalks > 0) {
-				outputText("\"<i>Ahh I did told you didn't I?</i>\" Temptress says with a sad voice, \"<i>My services can be repeated only five times and you used them all.</i>\"\n\n");
+			else if (EvelynnPerksToStatsConvertCounter > 9 && EvelynnTavernTalks > 0) {
+				outputText("\"<i>Ahh I did told you didn't I?</i>\" Temptress says with a sad voice, \"<i>My services can be repeated only ten times and you used them all.</i>\"\n\n");
 				doNext(visitTemptress);
 			}
 			else {
@@ -271,6 +284,8 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 				outputText("When you wake up, your head feels tighter, and yet at the same time your body feels looser, ready to improve. Looking around there is nobody beside you in the room, the door wide open. Looks like after doing her part, Temptress already left. Slightly unsatisfied you return to the drinking hall.\n\n");
 				if (EvelynnPerksToStatsConvertCounter > 0) EvelynnPerksToStatsConvertCounter += 1;
 				else EvelynnPerksToStatsConvertCounter = 1;
+				if (EvelynnCoreLimitBreakerCounter > 0) EvelynnCoreLimitBreakerCounter += 1;
+				else EvelynnCoreLimitBreakerCounter = 1;
 				flags[kFLAGS.SPIRIT_STONES] -= 10;
 				player.statPoints += 5;
 				player.perkPoints -= 1;
