@@ -5040,50 +5040,13 @@ public function rebirthFromBadEnd():void {
 		if (player.hasStatusEffect(StatusEffects.LunaOff)) performancePointsPrediction++;
 		if (player.hasStatusEffect(StatusEffects.NadiaOff)) performancePointsPrediction++;
 		//Dungeons
-		if (SceneLib.dungeons.checkFactoryClear()) performancePointsPrediction++;
-		if (SceneLib.dungeons.checkDeepCaveClear()) performancePointsPrediction += 2;
-		if (SceneLib.dungeons.checkDemonLaboratoryClear()) performancePointsPrediction += 3;
-		if (SceneLib.dungeons.checkLethiceStrongholdClear()) performancePointsPrediction += 4;
-		if (SceneLib.dungeons.checkSandCaveClear()) performancePointsPrediction++;
-		if (SceneLib.dungeons.checkHiddenCaveClear()) performancePointsPrediction++;
-		if (SceneLib.dungeons.checkHiddenCaveHiddenStageClear()) performancePointsPrediction++;
-		if (SceneLib.dungeons.checkRiverDungeon1stFloorClear()) performancePointsPrediction++;
-		if (SceneLib.dungeons.checkDenOfDesireClear()) performancePointsPrediction++;
-		if (SceneLib.dungeons.checkEbonLabyrinthClear()) performancePointsPrediction += 3;
-		if (SceneLib.dungeons.checkPhoenixTowerClear()) performancePointsPrediction += 2;
-		if (SceneLib.dungeons.checkBeeHiveClear()) performancePointsPrediction += 2;
+		performancePointsPrediction += possibleToGainAscensionPointsDungeons();
 		//Quests
-		if (flags[kFLAGS.MARBLE_PURIFIED] > 0) performancePointsPrediction += 2;
-		if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) performancePointsPrediction += 2;
-		if (flags[kFLAGS.URTA_QUEST_STATUS] > 0) performancePointsPrediction += 2;
-		if (player.hasPerk(PerkLib.Enlightened)) performancePointsPrediction += 1;
-		if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0 || flags[kFLAGS.PURE_MARAE_ENDGAME] >= 2) performancePointsPrediction += 3;
-		if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) >= 4) performancePointsPrediction += 2;
-		if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) >= 4) performancePointsPrediction += 2;
-		if (player.statusEffectv3(StatusEffects.AdventureGuildQuests1) >= 4) performancePointsPrediction += 2;
-		if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) >= 4) performancePointsPrediction += 2;
-		if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) >= 4) performancePointsPrediction += 2;
-		if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) >= 2) performancePointsPrediction++;
-		if (player.statusEffectv2(StatusEffects.AdventureGuildQuests4) >= 2) performancePointsPrediction++;
-		if (flags[kFLAGS.GALIA_LVL_UP] >= 0.5) performancePointsPrediction += 5;
+		performancePointsPrediction += possibleToGainAscensionPointsQuests();
 		//Camp structures
-		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) performancePointsPrediction += 10;
-		if (flags[kFLAGS.CAMP_WALL_GATE] > 0) performancePointsPrediction += 11;
-		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] > 2) performancePointsPrediction += 2;
-		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] > 3) performancePointsPrediction += 2;
-		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] > 1) performancePointsPrediction += 2;
-		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] > 3) performancePointsPrediction += 2;
-		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] > 5) performancePointsPrediction += 2;
-		if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] > 3) performancePointsPrediction += 2;
-		if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] > 3) performancePointsPrediction += 2;
-		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) performancePointsPrediction += ((flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] - 1) * 2);
-		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > 0) performancePointsPrediction += flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE];
-		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] > 1) performancePointsPrediction += 2;
-		if (flags[kFLAGS.CAMP_UPGRADES_DAM] > 0) performancePointsPrediction += (flags[kFLAGS.CAMP_UPGRADES_DAM] * 2);
-		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) performancePointsPrediction += (flags[kFLAGS.CAMP_UPGRADES_FISHERY] * 2);
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) performancePointsPrediction += 2;
+		performancePointsPrediction += possibleToGainAscensionPointsCampStructures();
 		//Children
-		possibleToGainAscensionPointsChildren();
+		performancePointsPrediction += possibleToGainAscensionPointsChildren();
 		//Various Level trackers
 		performancePointsPrediction += player.level;
 		if (player.level >= 42) performancePointsPrediction += (player.level - 41);
@@ -5099,6 +5062,58 @@ public function rebirthFromBadEnd():void {
         performancePointsPrediction += getTotalWeaponMasteryLevels();
 		performancePointsPrediction = Math.round(performancePointsPrediction);
 		return performancePointsPrediction;
+	}
+	public function possibleToGainAscensionPointsDungeons():Number {
+		var performancePointsPredictionDungeons:Number = 0;
+		if (SceneLib.dungeons.checkFactoryClear()) performancePointsPredictionDungeons++;
+		if (SceneLib.dungeons.checkDeepCaveClear()) performancePointsPredictionDungeons += 2;
+		if (SceneLib.dungeons.checkDemonLaboratoryClear()) performancePointsPredictionDungeons += 3;
+		if (SceneLib.dungeons.checkLethiceStrongholdClear()) performancePointsPredictionDungeons += 4;
+		if (SceneLib.dungeons.checkSandCaveClear()) performancePointsPredictionDungeons++;
+		if (SceneLib.dungeons.checkHiddenCaveClear()) performancePointsPredictionDungeons++;
+		if (SceneLib.dungeons.checkHiddenCaveHiddenStageClear()) performancePointsPredictionDungeons++;
+		if (SceneLib.dungeons.checkRiverDungeon1stFloorClear()) performancePointsPredictionDungeons++;
+		if (SceneLib.dungeons.checkDenOfDesireClear()) performancePointsPredictionDungeons++;
+		if (SceneLib.dungeons.checkEbonLabyrinthClear()) performancePointsPredictionDungeons += 3;
+		if (SceneLib.dungeons.checkPhoenixTowerClear()) performancePointsPredictionDungeons += 2;
+		if (SceneLib.dungeons.checkBeeHiveClear()) performancePointsPredictionDungeons += 2;
+		return performancePointsPredictionDungeons;
+	}
+	public function possibleToGainAscensionPointsQuests():Number {
+		var performancePointsPredictionQuests:Number = 0;
+		if (flags[kFLAGS.MARBLE_PURIFIED] > 0) performancePointsPredictionQuests += 2;
+		if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) performancePointsPredictionQuests += 2;
+		if (flags[kFLAGS.URTA_QUEST_STATUS] > 0) performancePointsPredictionQuests += 2;
+		if (player.hasPerk(PerkLib.Enlightened)) performancePointsPredictionQuests += 1;
+		if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0 || flags[kFLAGS.PURE_MARAE_ENDGAME] >= 2) performancePointsPredictionQuests += 3;
+		if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) >= 4) performancePointsPredictionQuests += 2;
+		if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) >= 4) performancePointsPredictionQuests += 2;
+		if (player.statusEffectv3(StatusEffects.AdventureGuildQuests1) >= 4) performancePointsPredictionQuests += 2;
+		if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) >= 4) performancePointsPredictionQuests += 2;
+		if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) >= 4) performancePointsPredictionQuests += 2;
+		if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) >= 2) performancePointsPredictionQuests++;
+		if (player.statusEffectv2(StatusEffects.AdventureGuildQuests4) >= 2) performancePointsPredictionQuests++;
+		if (flags[kFLAGS.GALIA_LVL_UP] >= 0.5) performancePointsPredictionQuests += 5;
+		return performancePointsPredictionQuests;
+	}
+	public function possibleToGainAscensionPointsCampStructures():Number {
+		var performancePointsPredictionCampStructures:Number = 0;
+		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) performancePointsPredictionCampStructures += 10;
+		if (flags[kFLAGS.CAMP_WALL_GATE] > 0) performancePointsPredictionCampStructures += 11;
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] > 2) performancePointsPredictionCampStructures += 2;
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] > 3) performancePointsPredictionCampStructures += 2;
+		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] > 1) performancePointsPredictionCampStructures += 2;
+		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] > 3) performancePointsPredictionCampStructures += 2;
+		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] > 5) performancePointsPredictionCampStructures += 2;
+		if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] > 3) performancePointsPredictionCampStructures += 2;
+		if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] > 3) performancePointsPredictionCampStructures += 2;
+		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) performancePointsPredictionCampStructures += ((flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] - 1) * 2);//obecnie +4*2
+		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > 0) performancePointsPredictionCampStructures += flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE];//obecnie +8
+		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] > 1) performancePointsPredictionCampStructures += 2;
+		if (flags[kFLAGS.CAMP_UPGRADES_DAM] > 0) performancePointsPredictionCampStructures += (flags[kFLAGS.CAMP_UPGRADES_DAM] * 2);//obecnie +3*2
+		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) performancePointsPredictionCampStructures += (flags[kFLAGS.CAMP_UPGRADES_FISHERY] * 2);//obecnie +2*2
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) performancePointsPredictionCampStructures += 2;
+		return performancePointsPredictionCampStructures;
 	}
 	public function possibleToGainAscensionPointsChildren():Number {
 		var performancePointsPredictionChildren:Number = 0;

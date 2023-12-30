@@ -569,7 +569,7 @@ public function TyraniaAndFlitzyScene():void {
 		outputText("You call out, and the Goblin lets out a little ‘eep’. Tyrantia calms her down, and you step out from the foliage. \"<i>Hey [name].</i>\" Tyrantia calls out. \"<i>You have the best timing! Come on down!</i>\"\n\n");
 		outputText("The Goblin lets out a little ‘eep’, but as you reveal yourself, they seem to relax a little. You introduce yourself to the naked goblin, telling her that you’re a friend of Tyrantia.\n\n");
 		outputText("\"<i>Well, if you’re good with her, then… Then "+(player.hasCock()?"you’re alright with me, stud. Come on in":"I guess you can’t be so bad")+".</i>\"\n\n");
-		outputText("You undress "+(player.hasCock()?"getting a lusty grin from the goblin, ":"")+"and join the two ladies in the stream. The stream is quite warm, and you make a comment about it. \n\n");
+		outputText("You undress "+(player.hasCock()?"getting a lusty grin from the goblin, ":"")+"and join the two ladies in the stream. The stream is quite warm, and you make a comment about it.\n\n");
 		outputText("\"<i>Oh yeah, this place is the best!</i>\" Flitzy says, leaning back and stretching her arms. \"<i>The stream’s fed from an underground hot spring about a hundred feet or so thataway.</i>\" She leans back in the water, letting her natural buoyancy keep her afloat as she lounges. \"<i>It’s the kind of place I like to keep to myself…well…except for a few people.</i>\"\n\n");
 		outputText("You, Tyrantia and Flitzy make some small talk, until the goblin ducks her head under the water. She comes up with a tube, like a big straw, and launches a stream of water at your face. Taken by surprise, you cover your mouth, and both ladies start laughing. Oh, it’s ON.\n\n");
 		outputText("You bring your hands in, splashing Flitzy in retaliation, only to get a burst of water from Tyrantia. Your bath quickly devolves into a splash fight. All three of you, soaking wet and laughing, spend quite some time just playing in the river. Unfortunately, Flitzi hops out of the water, wringing her hair.\n\n");
@@ -1258,64 +1258,54 @@ public function TyrantiaAtCamp():void {
 	addButton(4, "Sex", TyrantiaSexMenu);
 	if (player.hasPerk(PerkLib.BasicLeadership) && TyrantiaAffectionMeter >= 60) addButton(5, "JoinMe", TyrantiaHenchmanOption);
 	else addButtonDisabled(5, "JoinMe", "You need to have at least Basic Leadership and 60% affection to form a team.");
-	if ((DriderTown.TyrantiaMaleKids + DriderTown.TyrantiaFemaleKids) > 0 ) {
-		addButton (6, "Kidplay", "Play with your Unirider kids", TyrantiaKidPlayTime);
-	}
+	if ((DriderTown.TyrantiaMaleKids + DriderTown.TyrantiaFemaleKids) > 0) addButton(6, "Kidplay", TyrantiaKidPlayTime).hint("Play with your Unirider kids");
 	if (TyraniaCorrupteedLegendaries >= 1) addButton(10, "Items", itemImproveMenuCorrupt);
 	if (DriderTown.DriderTownComplete) addButton(13, "Back", SceneLib.dridertown.DriderTownEnter).hint("Return to main DriderTown menu.");
 	addButton(14, "Leave", camp.campLoversMenu);
 }
 
 public function TyrantiaKidPlayTime():void {
-		clearOutput();
-		
-		outputText("You tell Tyrantia that you want to spend some time with your kids. Your giantess’s eyes light up, and she grins, taking your hand and running over to the meadow.  \n\n"); 
-		outputText("Several of your children perk up as you draw near, and both you and your giantess are quickly engulfed in a group hug, one of your kids’ horns rubbing against your [leg].  \n\n");
-		outputText("“What’re you up to, munchkins?” Tyrantia asks, and the kids take your hands, pulling you over to the center of the meadow. \n\n");
-		if (rand(3) == 0) {
-		outputText("“We were having a tea party!” One of your little girls declares proudly. Somehow, they’ve procured a small table, and they’ve carved some wooden cups. They only have water, and their ‘cake’ is mud with flowers on top, but you can’t bring yourself to rain on their parade. You spend some time with your daughters ‘eating’ some cake and chuckling to yourself as they try to imitate a high society tea. Eventually, they grow bored of the tea party, running off as some odd bug catches their attention. \n\n");
-		}
-		if (rand(3) == 1) {
-		outputText("“We’re having a race!” This from one of your boys, who begins drawing a line on the ground with a stick. Chuckling, you stand by the starting line, and Tyrantia draws another line by Lily’s tree. You line your children up, playfully slapping one of your boys upside the head as he tries to edge forward, and start the race.  \n\n");
-		outputText("Unsurprisingly, your children are extremely fast. Each of them have eight legs, after all. The race is close, but Tyrantia picks up a slender Unirider, holding them over her head and declaring a winner. Slightly upset, one of your kids demands a rematch. You and Tyrantia roll your eyes at each other, but you repeat the race a few times before your Unirider spawn are distracted by something down by the river. You and Tyrantia take the opportunity to slip away while they're poking at the water with sticks. \n\n");
-		}
-
-		if (rand(3) == 2) {
-		outputText("“We were gonna go for a swim!” As you watch, a few of your kids throw their clothes away, rushing to the river and leaping off into the water. You grin at your giantess, who takes one kid in each arm, to their surprise, and runs at the water herself. A few little heads poke up from the water, just in time to see their mother, roaring as she leaps, clearing nearly half the river before she splashes down, sending waves back to shore. The giantess comes back up, laughing maniacally as she grabs one of the first swimmers, picking them up and blowing raspberries on their stomach.  \n\n");
-		outputText("“Come on, [mom/dad], Join us!” come cries from the water. You pretend to think for a moment, sidling up to the water’s edge before leaping in yourself. The kids are rowdy, but none more so than Tyrantia herself, who frequently picks up your Drider kids, hoisting them over her head before lobbing them back into the water. The squeals of delight, coupled with the flailing limbs, make you smile, cracking into laughter as one of your spawn lands next to you, splashing your face with the river water. You begin splashing the offending kid, and a splash-fight ensues. You laugh and play with your children, without a care in the world…until someone puts a hand on your shoulder.  \n\n");
-		outputText("“[name]…do you see that?” Tyrantia points across the river. You can’t see anything, but her voice is serious. “What do you think we should do?” You strain your eyes to see, but as you feel her other arm around your [leg], you realize you’ve been duped. Your cheeks flush red, and you groan internally. Did Tyrantia really just get you with that?  \n\n");
-		outputText("Your Giantess roars with delight, picking you up and hoisting you over her head like a trophy. “Aaaaaand up we go!” She yells, lobbing you bodily into the air. You try to twist in midair, but you splash down into the middle of the river, back-first. Sputtering, you get back to the surface, only to hear your kids with Tyrantia laughing at the sight of you.  \n\n");
+	clearOutput();
+	outputText("You tell Tyrantia that you want to spend some time with your kids. Your giantess’s eyes light up, and she grins, taking your hand and running over to the meadow.\n\n"); 
+	outputText("Several of your children perk up as you draw near, and both you and your giantess are quickly engulfed in a group hug, one of your kids’ horns rubbing against your [leg].\n\n");
+	outputText("\"<i>“What’re you up to, munchkins?”</i> Tyrantia asks, and the kids take your hands, pulling you over to the center of the meadow.\n\n");
+	var menu:Number = rand(3);
+	if (menu == 0) outputText("\"<i>“We were having a tea party!”</i> One of your little girls declares proudly. Somehow, they’ve procured a small table, and they’ve carved some wooden cups. They only have water, and their ‘cake’ is mud with flowers on top, but you can’t bring yourself to rain on their parade. You spend some time with your daughters ‘eating’ some cake and chuckling to yourself as they try to imitate a high society tea. Eventually, they grow bored of the tea party, running off as some odd bug catches their attention.\n\n");
+	if (menu == 1) {
+		outputText("\"<i>“We’re having a race!”</i> This from one of your boys, who begins drawing a line on the ground with a stick. Chuckling, you stand by the starting line, and Tyrantia draws another line by Lily’s tree. You line your children up, playfully slapping one of your boys upside the head as he tries to edge forward, and start the race.\n\n");
+		outputText("Unsurprisingly, your children are extremely fast. Each of them have eight legs, after all. The race is close, but Tyrantia picks up a slender Unirider, holding them over her head and declaring a winner. Slightly upset, one of your kids demands a rematch. You and Tyrantia roll your eyes at each other, but you repeat the race a few times before your Unirider spawn are distracted by something down by the river. You and Tyrantia take the opportunity to slip away while they're poking at the water with sticks.\n\n");
+	}
+	if (rand(3) == 2) {
+		outputText("\"<i>“We were gonna go for a swim!”</i> As you watch, a few of your kids throw their clothes away, rushing to the river and leaping off into the water. You grin at your giantess, who takes one kid in each arm, to their surprise, and runs at the water herself. A few little heads poke up from the water, just in time to see their mother, roaring as she leaps, clearing nearly half the river before she splashes down, sending waves back to shore. The giantess comes back up, laughing maniacally as she grabs one of the first swimmers, picking them up and blowing raspberries on their stomach.\n\n");
+		outputText("\"<i>“Come on, "+player.mf("dad","mom")+", Join us!”</i> come cries from the water. You pretend to think for a moment, sidling up to the water’s edge before leaping in yourself. The kids are rowdy, but none more so than Tyrantia herself, who frequently picks up your Drider kids, hoisting them over her head before lobbing them back into the water. The squeals of delight, coupled with the flailing limbs, make you smile, cracking into laughter as one of your spawn lands next to you, splashing your face with the river water. You begin splashing the offending kid, and a splash-fight ensues. You laugh and play with your children, without a care in the world…until someone puts a hand on your shoulder.\n\n");
+		outputText("\"<i>“[name]…do you see that?”</i> Tyrantia points across the river. You can’t see anything, but her voice is serious. \"<i>“What do you think we should do?”</i> You strain your eyes to see, but as you feel her other arm around your [leg], you realize you’ve been duped. Your cheeks flush red, and you groan internally. Did Tyrantia really just get you with that?\n\n");
+		outputText("Your Giantess roars with delight, picking you up and hoisting you over her head like a trophy. \"<i>“Aaaaaand up we go!”</i> She yells, lobbing you bodily into the air. You try to twist in midair, but you splash down into the middle of the river, back-first. Sputtering, you get back to the surface, only to hear your kids with Tyrantia laughing at the sight of you.\n\n");
 		if (DriderTown.BelisaKids > 0) {
-		outputText("You notice a familiar figure beneath you, rising to the surface. Belisa pops her head up, and a few of your smaller Drider children join her, staring at the swimming Uniriders. \n\n");
-		outputText("“Mooom, can we go play?” One of them asks. “All the fish swam away.” Belisa sighs, looking at you. \n\n");
-		outputText("“Ask your [mom/dad].” The kids look at you expectantly, and you nod once. With a splash and a roar, Belisa’s kids swim in, launching themselves at their much-larger…siblings? Cousins? You decide not to think about it. \n\n");
-		outputText("Belisa gives you a stern look…or at least she tries to. “Well, that’s one fishing lesson ruined.” She joins you, treading water as she joins the rapidly growing mob of children in the water. “I’ll take it up with their mother.” She eyes Tyrantia, who’s standing near the shore, grabbing the closest Drider kid and lobbing them into the water. \n\n");
-		outputText("You watch as Belisa elbows her way to the front of the line, assuring the mob that she’s not trying to skip. Belisa whacks Tyrantia’s tit, and you can barely hear her over the chaos. \n\n");
-		outputText("“Sister, I told you that I was using the river today! You scared all the-! HEY!”  \n\n");
-		outputText("Grinning, Tyrantia grabs her little sister, just like she had all the kids prior, and spins, lobbing Belisa to the other end of the river. She hits the water, spluttering.  \n\n");
-		outputText("“Oh, sorry sis!” Tyrantia says, a shit-eating grin on her face. “Thought you wanted a ride!” \n\n");
+			outputText("You notice a familiar figure beneath you, rising to the surface. Belisa pops her head up, and a few of your smaller Drider children join her, staring at the swimming Uniriders.\n\n");
+			outputText("\"<i>“Mooom, can we go play?”</i> One of them asks. \"<i>“All the fish swam away.”</i> Belisa sighs, looking at you.\n\n");
+			outputText("\"<i>“Ask your "+player.mf("dad","mom")+".”</i> The kids look at you expectantly, and you nod once. With a splash and a roar, Belisa’s kids swim in, launching themselves at their much-larger…siblings? Cousins? You decide not to think about it.\n\n");
+			outputText("Belisa gives you a stern look…or at least she tries to. \"<i>“Well, that’s one fishing lesson ruined.”</i> She joins you, treading water as she joins the rapidly growing mob of children in the water. \"<i>“I’ll take it up with their mother.”</i> She eyes Tyrantia, who’s standing near the shore, grabbing the closest Drider kid and lobbing them into the water.\n\n");
+			outputText("You watch as Belisa elbows her way to the front of the line, assuring the mob that she’s not trying to skip. Belisa whacks Tyrantia’s tit, and you can barely hear her over the chaos.\n\n");
+			outputText("\"<i>“Sister, I told you that I was using the river today! You scared all the-! HEY!”</i>\n\n");
+			outputText("Grinning, Tyrantia grabs her little sister, just like she had all the kids prior, and spins, lobbing Belisa to the other end of the river. She hits the water, spluttering.\n\n");
+			outputText("\"<i>“Oh, sorry sis!”</i> Tyrantia says, a shit-eating grin on her face. \"<i>“Thought you wanted a ride!”</i>\n\n");
 		}
 		if (DriderTown.LilyKidsPC > 0) {
-		outputText("“Someone’s having a river-party and didn’t invite us?!” One of your kids with Lily declares, mock-insult on her face. “You know what THAT means!” \n\n");
-		outputText("“CHARGE!” Your kids with Lily stampede towards the river, grinning as they wade in, tackling a few of your other kids and tumbling into the water with them. Belisa and Tyrantia look at each-other, exchanging looks as they move to try and contain the fresh chaos that Lily's Drider kids bring to this impromptu swim.  \n\n");
-		outputText("Lily slips into the water behind her spawn, shrugging at her sisters. “What do you want me to do?” Tyrantia scowls, walking over to her sister and putting a hand on her shoulder. \n\n");
-		outputText("“I want you…” Tyrantia grins, and you know exactly where this is going. “To GET IN THERE!” Lily realizes, too late, where this is going as Tyrantia picks her up, bodily lobbing her over her head and into the water, bowling over several of your Drider-kids as she lands. \n\n");
-		outputText(" \n\n");
-			}
-		outputText("Laughter, the sound of children playing, and the odd, party-like atmosphere…It’s soothing. For once, the portal doesn’t even enter your mind, as you move from child to child, playing, laughing and generally having a good time.  \n\n"); 
-		outputText("An hour or so in, you find yourself next to Tyrantia, who’s simply watching, a smile on her face. You take her hand, and she guides you to the base of Lily’s tree. You sit, side by side, watching as your children wind down, one by one filing back towards the longhouse. You lean against her, and she puts a hand on your head.  \n\n");
-		outputText("“Gem for your thoughts?” Your giantess asks. You tell her that when you came through the portal, you’d never have thought this was in your future. Spilling blood, killing demons, saving pretty maidens…Yeah, but wholesome family playtime? \n\n");
-		outputText("“Am I your pretty maiden?” Tyrantia asks teasingly. You think about it, and simply lean in, placing your head on her soft breast.  \n\n");
-		if (DriderTown.BelisaKids > 0) {
-		outputText("“I think, if any of us fits that bill, it’s me, dear sister”, teases Belisa, laying down on the other side of you.  \n\n");
-			}
-		if (DriderTown.LilyKidsPC > 0) {
-		outputText("“No comment”, Lily adds from behind you. Your Drider kids are heading in, and Belisa and Lily laugh, leaving Tyrantia and you alone for a few moments.  \n\n");
-			}
-		outputText("“...You make me feel like one.” Tyrantia whispers. “A pretty maiden.” She stretches, groaning slightly. “And…I never would’ve thought this was my future, either. But I’m happy it is.” You hear Lily’s annoyed voice coming from the longhouse, and Tyrantia’s ears perk up. “Uh, I should probably deal with that.” You excuse yourself, and she smiles. “Fair enough.” You head back to the center of camp. Something about this...You feel cleaner than before. \n\n");
+			outputText("\"<i>“Someone’s having a river-party and didn’t invite us?!”</i> One of your kids with Lily declares, mock-insult on her face. \"<i>“You know what THAT means!”</i>\n\n");
+			outputText("\"<i>“CHARGE!”</i> Your kids with Lily stampede towards the river, grinning as they wade in, tackling a few of your other kids and tumbling into the water with them. Belisa and Tyrantia look at each-other, exchanging looks as they move to try and contain the fresh chaos that Lily's Drider kids bring to this impromptu swim.\n\n");
+			outputText("Lily slips into the water behind her spawn, shrugging at her sisters. \"<i>“What do you want me to do?”</i> Tyrantia scowls, walking over to her sister and putting a hand on her shoulder.\n\n");
+			outputText("\"<i>“I want you…”</i> Tyrantia grins, and you know exactly where this is going. \"<i>“To GET IN THERE!”</i> Lily realizes, too late, where this is going as Tyrantia picks her up, bodily lobbing her over her head and into the water, bowling over several of your Drider-kids as she lands.\n\n");
 		}
-		dynStats("cor", -5);
-		doNext(camp.returnToCampUseOneHour);
+		outputText("Laughter, the sound of children playing, and the odd, party-like atmosphere…It’s soothing. For once, the portal doesn’t even enter your mind, as you move from child to child, playing, laughing and generally having a good time.\n\n"); 
+		outputText("An hour or so in, you find yourself next to Tyrantia, who’s simply watching, a smile on her face. You take her hand, and she guides you to the base of Lily’s tree. You sit, side by side, watching as your children wind down, one by one filing back towards the longhouse. You lean against her, and she puts a hand on your head.\n\n");
+		outputText("\"<i>“Gem for your thoughts?”</i> Your giantess asks. You tell her that when you came through the portal, you’d never have thought this was in your future. Spilling blood, killing demons, saving pretty maidens…Yeah, but wholesome family playtime?\n\n");
+		outputText("\"<i>“Am I your pretty maiden?”</i> Tyrantia asks teasingly. You think about it, and simply lean in, placing your head on her soft breast.\n\n");
+		if (DriderTown.BelisaKids > 0) outputText("\"<i>“I think, if any of us fits that bill, it’s me, dear sister,”</i> teases Belisa, laying down on the other side of you.\n\n");
+		if (DriderTown.LilyKidsPC > 0) outputText("\"<i>“No comment,”</i> Lily adds from behind you. Your Drider kids are heading in, and Belisa and Lily laugh, leaving Tyrantia and you alone for a few moments.\n\n");
+		outputText("\"<i>“...You make me feel like one.”</i> Tyrantia whispers. \"<i>“A pretty maiden.”</i> She stretches, groaning slightly. \"<i>“And…I never would’ve thought this was my future, either. But I’m happy it is.”</i> You hear Lily’s annoyed voice coming from the longhouse, and Tyrantia’s ears perk up. \"<i>“Uh, I should probably deal with that.”</i> You excuse yourself, and she smiles. \"<i>“Fair enough.”</i> You head back to the center of camp. Something about this...You feel cleaner than before.\n\n");
+	}
+	dynStats("cor", -5);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 

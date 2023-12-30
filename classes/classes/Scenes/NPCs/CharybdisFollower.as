@@ -373,7 +373,7 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 		outputText("You spend a few minutes warming your voice up. Chary seems to insist on doing these before every session. You get into a few simple tunes after, and despite yourself, you find the session rather calming. An hour passes, and you can feel your lungs burning slightly, not unlike after a light run.\n\n"); 
 		outputText("You tell Charybdis that you need to leave for now, and he nods simply. <i>\"Then I'll see you again soon, hopefully. Keep a tune in your heart, [name]!\"</i>\n\n");
 		endEncounter(60);
-	}
+	}/*
 public function CharySail():void {
 		clearOutput();
 		outputText("Charybdis smiles as you bring up his boat. <i>\"I’m kinda glad you brought it up. I’ve wanted to take you on my craft for a while now\".</i> The boat itself is large enough to comfortably house five people on the deck, with a clearly marked ladder to a lower deck inside. There are a variety of heavy fishing rods stored underneath the railings, and he hoists a canvas sail, clearly experienced in its use. He casts off, the salty air running through your [hair] as the boat picks up speed. After a few minutes, he pulls down the sail, turning to you and nodding respectfully. <i>\"So, what do you feel like doing, [name]?\"</i>\n\n");
@@ -603,5 +603,6 @@ addButton(2, "Nah",CharyAnalNah );
 
 }
 	}
-
+*/
+}
 }

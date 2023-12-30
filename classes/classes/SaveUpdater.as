@@ -2574,7 +2574,22 @@ public class SaveUpdater extends NPCAwareContent {
 				refundPerk(PerkLib.Spellarmor);
 				refundPerk(PerkLib.Battleshield);
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.32;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.36) {
+				outputText("\n\nMadam/Tempress minor reorganizations");
+				if (JourneyToTheEast.AhriStatsToPerksConvertCounter > 0) {
+					if (JourneyToTheEast.AhriStatsToPerksConvertCounter == 1 || JourneyToTheEast.AhriStatsToPerksConvertCounter == 3 || JourneyToTheEast.AhriStatsToPerksConvertCounter == 5) JourneyToTheEast.AhriStatsToSuperPerksConvertCounter += 1;
+					if (JourneyToTheEast.AhriStatsToPerksConvertCounter > 1) {
+						if (JourneyToTheEast.AhriStatsToPerksConvertCounter > 3) player.superPerkPoints += 2;
+						else player.superPerkPoints += 1;
+					}
+				}
+				if (JourneyToTheEast.EvelynnPerksToStatsConvertCounter > 0) JourneyToTheEast.EvelynnCoreLimitBreakerCounter += JourneyToTheEast.EvelynnPerksToStatsConvertCounter;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.36;
 			}/*
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.40) {
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.40;
+			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.50) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.50;
 			}
