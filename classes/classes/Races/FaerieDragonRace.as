@@ -74,7 +74,7 @@ public class FaerieDragonRace extends Race {
 		
 		buildTier(15, "faerie dragon")
 				.buffs({
-					"maxhp_mult": +0.5,
+					"maxhp_mult": +0.05,
 					"str.mult": +0.35,
 					"tou.mult": +0.50,
 					"spe.mult": +0.60,
