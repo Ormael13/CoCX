@@ -225,10 +225,10 @@ public class PlayerInfo extends BaseContent {
 		}
 
 		if (JourneyToTheEast.AhriTavernTalks > 0)
-			miscStats += "<b>Conversion (5 stat points to 1 perk point) counter:</b> "+JourneyToTheEast.AhriStatsToPerksConvertCounter+"\n";
+			miscStats += "<b>Conversion (5 stat points to 1 perk point) counter:</b> "+JourneyToTheEast.AhriStatsToPerksConvertCounter+" / 10\n";
 
 		if (JourneyToTheEast.EvelynnTavernTalks > 0)
-			miscStats += "<b>Conversion (1 perk point to 5 stat points) counter:</b> "+JourneyToTheEast.EvelynnPerksToStatsConvertCounter+"\n";
+			miscStats += "<b>Conversion (1 perk point to 5 stat points) counter:</b> "+JourneyToTheEast.EvelynnPerksToStatsConvertCounter+" / 10\n";
 
 		if (flags[kFLAGS.EGGS_BOUGHT] > 0)
 			miscStats += "<b>Eggs Traded For:</b> " + flags[kFLAGS.EGGS_BOUGHT] + "\n";
@@ -266,7 +266,10 @@ public class PlayerInfo extends BaseContent {
 		else miscStats += "N/A (You already at max lvl)\n";
 		miscStats += "<b>Ascension points (currently possessed):</b> " + player.ascensionPerkPoints + "\n";
 		miscStats += "<b>Ascension points (possible to gain during next ascension):</b> " + camp.possibleToGainAscensionPoints() + "\n";
-		miscStats += "<i>Ascension points - kids edition (possible to gain during next ascension from kids only):</i> " + camp.possibleToGainAscensionPointsChildren() + "\n";
+		miscStats += "<i>Ascension points - Dungeons Edition:</i> " + camp.possibleToGainAscensionPointsDungeons() + " / 22\n";
+		miscStats += "<i>Ascension points - Quests Edition:</i> " + camp.possibleToGainAscensionPointsQuests() + " / 27\n";
+		miscStats += "<i>Ascension points - Camp Structures Edition:</i> " + camp.possibleToGainAscensionPointsCampStructures() + " / 65\n";
+		miscStats += "<i>Ascension points - Kids Edition:</i> ~" + Math.round(camp.possibleToGainAscensionPointsChildren()) + " (" + camp.possibleToGainAscensionPointsChildren() + ")\n";
 		miscStats += "<b>Ascensions:</b> " + flags[kFLAGS.NEW_GAME_PLUS_LEVEL] + "\n";
 
 		if (miscStats != "")
@@ -2110,6 +2113,7 @@ public class PlayerInfo extends BaseContent {
 		clearOutput();
 		outputText("If you meet requirements and have enough points you can pick one or more super perks.\n");
 		if (player.superPerkPoints > 0) outputText("You have "+numberOfThings(player.superPerkPoints,"super perk point","super perk points")+".\n\n");
+		if (player.perkPoints > 0) outputText("You have "+numberOfThings(player.perkPoints,"perk point","perk points")+".\n\n");
 		hideMenus();
 		mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
 		menu();
@@ -2172,9 +2176,11 @@ public class PlayerInfo extends BaseContent {
 				if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 6) addButtonDisabled(5, "SP:ST(R6)", "You already have this perk.");
 				else addButtonDisabled(5, "SP:ST(R6)", "You do not have enough super perk points to obtain this perk.");
 			}
-			addButton(12, "Next", superPerkBuyMenu, page + 1);
-			if (player.perkPoints > 2) addButton(13, "Convert", superPerkConvertMenu);
-			else addButtonDisabled(13, "Convert", "You need at least 3 perk points to convert them.");
+			if (player.perkPoints > 2) addButton(11, "Convert", superPerkConvertMenu);
+			else addButtonDisabled(11, "Convert", "You need at least 3 perk points to convert them.");
+			if (player.superPerkPoints > 0) addButton(12, "Re: Convert", superPerkReverseConvertMenu);
+			else addButtonDisabled(12, "Re: Convert", "You need at least 1 super perk point to convert it.");
+			addButton(13, "Next", superPerkBuyMenu, page + 1);
 			addButton(14, "Back", playerMenu);
 		}
 		if (page == 2) {
@@ -2242,8 +2248,8 @@ public class PlayerInfo extends BaseContent {
 				if (player.hasPerk(PerkLib.BloodDemonIntelligence)) addButtonDisabled(5, "BDI", "You already have this perk.");
 				else addButtonDisabled(5, "BDI", "You do not have enough super perk points to obtain this perk.");
 			}
-			addButton(12, "Next", superPerkBuyMenu, page + 1);
-			addButton(13, "Previous", superPerkBuyMenu, page - 1);
+			addButton(12, "Previous", superPerkBuyMenu, page - 1);
+			addButton(13, "Next", superPerkBuyMenu, page + 1);
 			addButton(14, "Back", playerMenu);
 		}
 		if (page == 3) {
@@ -2311,8 +2317,8 @@ public class PlayerInfo extends BaseContent {
 				if (player.hasPerk(PerkLib.AsuraToughness)) addButtonDisabled(5, "AT", "You already have this perk.");
 				else addButtonDisabled(5, "AT", "You do not have enough super perk points to obtain this perk.");
 			}
-			addButton(12, "Next", superPerkBuyMenu, page + 1);
-			addButton(13, "Previous", superPerkBuyMenu, page - 1);
+			addButton(12, "Previous", superPerkBuyMenu, page - 1);
+			addButton(13, "Next", superPerkBuyMenu, page + 1);
 			addButton(14, "Back", playerMenu);
 		}
 		if (page == 4) {
@@ -2380,8 +2386,8 @@ public class PlayerInfo extends BaseContent {
 				if (player.hasPerk(PerkLib.GreySageWisdom)) addButtonDisabled(5, "GSW", "You already have this perk.");
 				else addButtonDisabled(5, "GSW", "You do not have enough super perk points to obtain this perk.");
 			}
-			addButton(12, "Next", superPerkBuyMenu, page + 1);
-			addButton(13, "Previous", superPerkBuyMenu, page - 1);
+			addButton(12, "Previous", superPerkBuyMenu, page - 1);
+			addButton(13, "Next", superPerkBuyMenu, page + 1);
 			addButton(14, "Back", playerMenu);
 		}
 		if (page == 5) {
@@ -2421,8 +2427,8 @@ public class PlayerInfo extends BaseContent {
 				if (player.hasPerk(PerkLib.MunchkinAtWork)) addButtonDisabled(2, "M(at)W", "You already have this perk.");
 				else addButtonDisabled(2, "M(at)W", "You do not have enough super perk points to obtain this perk.");
 			}
+			addButton(12, "Previous", superPerkBuyMenu, page - 1);
 			//12 -> page + 1 button
-			addButton(13, "Previous", superPerkBuyMenu, page - 1);
 			addButton(14, "Back", playerMenu);
 		}
 		if (page == 6) {
@@ -2432,8 +2438,8 @@ public class PlayerInfo extends BaseContent {
 			else {
 			
 			}
-			//12 -> page + 1 button
-			//13 -> page - 1 button
+			//12 -> page - 1 button
+			//13 -> page + 1 button
 			addButton(14, "Back", playerMenu);
 		}
 	}
@@ -2442,6 +2448,13 @@ public class PlayerInfo extends BaseContent {
 		outputText("You sacrifice three perk points and recieve one super perk point.");
 		player.perkPoints -= 3;
 		player.superPerkPoints++;
+		doNext(superPerkBuyMenu);
+	}
+	private function superPerkReverseConvertMenu():void {
+		clearOutput();
+		outputText("You sacrifice one super perk point and recieve two perk points.");
+		player.perkPoints += 2;
+		player.superPerkPoints--;
 		doNext(superPerkBuyMenu);
 	}
 	private function perkSurvivalTrainingRank1():void {

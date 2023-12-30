@@ -1247,4 +1247,3 @@ public final class ConsumableLib extends AlchemyLib
 		}
 	}
 }
-

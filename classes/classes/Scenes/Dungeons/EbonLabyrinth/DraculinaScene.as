@@ -23,29 +23,34 @@ public class DraculinaScene extends BaseContent {
     public function encounter():void {
         clearOutput();
         //spriteSelect(SpriteDb.s_Atlach_16bit);
-		outputText("As you turn the next corner, you end up face to face with a large stone door. Lacking any other options, you force the door open with a loud grinding noise and enter what appears to be a large, cavernous section. The door slowly closes behind you with a loud clang. Startled by the sudden noise, bats take off into the black depths. Your [skin] crawls, almost like you’re being watched.\n\n");
-		outputText("Is it your imagination, or are there unfriendly eyes spying on you from the murky shadows? You hear the scraping of metal upon stone in the distance, steadily encroaching upon you. You ready yourself for combat, and a labyrinth minotaur suddenly charges out of the shadows. You brace yourself for his charge, but to your shock, he ignores you, attempting to run past you in a blind panic. ");
-		outputText("Your gaze follows the panicked bull; a blurry shadow grabs him just as he reaches the door. With a sound somewhere between a moo and a scream of terror, he kicks at the shadow, his fingers digging desperately into the stone in a futile attempt to pry the door open.\n\n");
-        outputText("The shadow thickens, wrenching the poor creature off his feet. For the first time, he looks at you, eyes open in a wordless, desperate plea for help. Before you can make much sense of this, his hulking form is dragged across the floor, nails scrabbling on the stone floor as he screams for help into the darkness. The panicked sound of the bull muffled in an instant, utterly extinguished. ");
-        outputText("You take a wary stance and keep progressing forward. Whatever took this brute is still out there. The cave system seems to stretch for a while, and you're about to reach its end when you hear a sudden rush of air to your right.\n\n");
-        if (player.wis >= 150 || (player.wis < 150 && (rand(100) + Math.round(player.wis*0.5) > 100))) {
-			outputText("Your sixth sense suddenly warns you of impending doom, and you roll forward to avoid being grappled by whatever that thing you detected behind you. You turn around and adopt your fighting stance.\n\n");
-			outputText("\"<i>Oh my… so lively, so strong and smart too I can't believe you made it all the way down here. A shame I'm hungry at the time, as one minotaur is hardly enough to satiate me. See, I would do a curtsy and present myself properly, but I'm afraid it won't matter. What good is a name given to someone who's about to die?</i>\"\n\n");
-			outputText("The creature in front of you appears to be a beautiful, ivory white skinned succubus with flowing blonde hair. Her sharp, hungry red eyes fixates on you with the glare of a fox cornering a rabbit. She would look like an ordinary succubus, save perhaps for two alarming details. One being her overgrown wingspan, giving her wings the appearance and coverage of a cloak and two, the large canine she sports in her mouth that she licks sensually.\n\n");
-			outputText("You know demons can be found everywhere in this damned labyrinth, but this 'thing' is no ordinary fiend. From the way she talks to her mannerisms she exudes a form of dark and sinister nobility. "+(DivaScene.instance.isCompanion()?"Diva could pretend and act all she wants in her make believe world of hers, this girl is no pretender. The terrifying aura of unholy power surrounding her is all too real!":"")+" ");
-			outputText("She suddenly folds her wings and takes off with a deafening screech, the cave wall reverberating the sound endlessly as bats begin to swarm around her hovering form in the thousands, answering the call of this monstrosity like loyal soldiers to a general. You're almost grateful the demoness doesn't attack you while you reel back from the blasting soundwave, though you suspect she simply wants to savor the fight, draining you slowly until you can no longer resist.\n\n");
-			outputText("\"<i>Try and entertain me, adventurer. Struggle all you want too, It'll make the blood pump faster before I drain it dry.</i>\"\n\n");
-			outputText("With no choice but to defend yourself, you prepare for combat as the blood sucker chuckles.\n\n");
-			startCombat(new Draculina(), true);
+		/*if (player.racialScore(Races.DRACULA) >= 22) {
+			
 		}
-		else {
-			outputText("You’re about to run away when two wings wrap strongly around you restraining your body. Your captor looks like a demon with white ivory skin, blood red eyes and a surprising amount of strength.\n\n");
-			outputText("\"<i>Oh my… What a cute morsel I just got here. I can't believe you made it all the way down here and alive nonetheless, what with being oblivious and all. A shame I'm hungry at the time, as one minotaur is hardly enough to satiate me.</i>\"\n\n");
-			outputText("You struggle against her but she has a grip stronger then steel.\n\n");
-			outputText("Your batty tormentor gives you a charming, if not fanged, smile as she takes a whiff of your neck.\n\n");
-			if (!player.blockingBodyTransformations() && player.gender > 0 && ((player.hasVagina() && player.vaginas[0].virgin) || player.racialScore(Races.VAMPIRE) >= 10)) becomeDracula();
-			else defeatedBadEnd();
-		}
+		else {*/
+			outputText("As you turn the next corner, you end up face to face with a large stone door. Lacking any other options, you force the door open with a loud grinding noise and enter what appears to be a large, cavernous section. The door slowly closes behind you with a loud clang. Startled by the sudden noise, bats take off into the black depths. Your [skin] crawls, almost like you’re being watched.\n\n");
+			outputText("Is it your imagination, or are there unfriendly eyes spying on you from the murky shadows? You hear the scraping of metal upon stone in the distance, steadily encroaching upon you. You ready yourself for combat, and a labyrinth minotaur suddenly charges out of the shadows. You brace yourself for his charge, but to your shock, he ignores you, attempting to run past you in a blind panic. ");
+			outputText("Your gaze follows the panicked bull; a blurry shadow grabs him just as he reaches the door. With a sound somewhere between a moo and a scream of terror, he kicks at the shadow, his fingers digging desperately into the stone in a futile attempt to pry the door open.\n\n");
+			outputText("The shadow thickens, wrenching the poor creature off his feet. For the first time, he looks at you, eyes open in a wordless, desperate plea for help. Before you can make much sense of this, his hulking form is dragged across the floor, nails scrabbling on the stone floor as he screams for help into the darkness. The panicked sound of the bull muffled in an instant, utterly extinguished. ");
+			outputText("You take a wary stance and keep progressing forward. Whatever took this brute is still out there. The cave system seems to stretch for a while, and you're about to reach its end when you hear a sudden rush of air to your right.\n\n");
+			if (player.wis >= 150 || (player.wis < 150 && (rand(100) + Math.round(player.wis*0.5) > 100))) {
+				outputText("Your sixth sense suddenly warns you of impending doom, and you roll forward to avoid being grappled by whatever that thing you detected behind you. You turn around and adopt your fighting stance.\n\n");
+				outputText("\"<i>Oh my… so lively, so strong and smart too I can't believe you made it all the way down here. A shame I'm hungry at the time, as one minotaur is hardly enough to satiate me. See, I would do a curtsy and present myself properly, but I'm afraid it won't matter. What good is a name given to someone who's about to die?</i>\"\n\n");
+				outputText("The creature in front of you appears to be a beautiful, ivory white skinned succubus with flowing blonde hair. Her sharp, hungry red eyes fixates on you with the glare of a fox cornering a rabbit. She would look like an ordinary succubus, save perhaps for two alarming details. One being her overgrown wingspan, giving her wings the appearance and coverage of a cloak and two, the large canine she sports in her mouth that she licks sensually.\n\n");
+				outputText("You know demons can be found everywhere in this damned labyrinth, but this 'thing' is no ordinary fiend. From the way she talks to her mannerisms she exudes a form of dark and sinister nobility. "+(DivaScene.instance.isCompanion()?"Diva could pretend and act all she wants in her make believe world of hers, this girl is no pretender. The terrifying aura of unholy power surrounding her is all too real!":"")+" ");
+				outputText("She suddenly folds her wings and takes off with a deafening screech, the cave wall reverberating the sound endlessly as bats begin to swarm around her hovering form in the thousands, answering the call of this monstrosity like loyal soldiers to a general. You're almost grateful the demoness doesn't attack you while you reel back from the blasting soundwave, though you suspect she simply wants to savor the fight, draining you slowly until you can no longer resist.\n\n");
+				outputText("\"<i>Try and entertain me, adventurer. Struggle all you want too, It'll make the blood pump faster before I drain it dry.</i>\"\n\n");
+				outputText("With no choice but to defend yourself, you prepare for combat as the blood sucker chuckles.\n\n");
+				startCombat(new Draculina(), true);
+			}
+			else {
+				outputText("You’re about to run away when two wings wrap strongly around you restraining your body. Your captor looks like a demon with white ivory skin, blood red eyes and a surprising amount of strength.\n\n");
+				outputText("\"<i>Oh my… What a cute morsel I just got here. I can't believe you made it all the way down here and alive nonetheless, what with being oblivious and all. A shame I'm hungry at the time, as one minotaur is hardly enough to satiate me.</i>\"\n\n");
+				outputText("You struggle against her but she has a grip stronger then steel.\n\n");
+				outputText("Your batty tormentor gives you a charming, if not fanged, smile as she takes a whiff of your neck.\n\n");
+				if (!player.blockingBodyTransformations() && player.gender > 0 && ((player.hasVagina() && player.vaginas[0].virgin) || player.racialScore(Races.VAMPIRE) >= 10)) becomeDracula();
+				else defeatedBadEnd();
+			}
+		//}
     }
 
     public function defeatedBy():void {

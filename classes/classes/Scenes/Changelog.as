@@ -108,7 +108,7 @@ public class Changelog extends BaseContent
 			outputText("-New melee weapon (by Sylabt & Ohaxer): Arigean Spear - buyable at equipment shop in Trench. Cost 1040 gems. Base atk is 13. It's spear type weapon, have 30% armor penetration. Increases damage based on how low your mana is (up to +160% at 10% or less max mana).\n");
 			outputText("-New consumable (by Sylabt & Ohaxer): Light Bronze Bar. Cost 120 gems. Can be bought at food stand in Trench. Eating it would restore 100 hunger, heal 40% of max HP and apply (refresh) buff for 24 hours that increase poison resistance by 40% and magic defense by 15%.\n");
 			outputText("-New consumable (by Sylabt & Ohaxer): Ebonbloom Alloy Ingot. Cost 200 gems. Can be bought at food stand in Trench. Eating it would restore 120 hunger, heal 60% of max HP and apply (refresh) buff for 24 hours that increase physical & magic defense by 25% and removes 60% of max lust.\n");
-			outputText("-Max level cap was increased to 205 from 185.\n");
+			outputText("-Max level cap was increased to 205 from 185. Enemies like Nightmare Alvina have their stats adjusted to new lvl cap.\n");
 			outputText("-Moved venom applications from correct 'combatstatusupdate' function, to prevent it being called outside of a new round. Venom ticks cannot increase the lust vulnerability of lust immune enemies. Tier 4 fae bloodstream will now stop once the maximum number of effect procs have been reached. ");
 			outputText("Pixie Dust Special now has to pay the dark ritual HP cost for its increased damage. Proc Check loop for Fae Storm/Pixie Dust no longer stops after first failed check. (Demojay)\n");
 			outputText("-Made level check function for handling legendary items tied to a 'Legendary' Tag, for easy identification of legendary items. Added 'Death Prince Golden Armor', 'Asterius Rage' and 'Nexus' to legendary lists. (Demojay)\n");
@@ -122,9 +122,9 @@ public class Changelog extends BaseContent
 			outputText("-Arigean Ne-Class Uniform can be now also bought at equipment shop in Trench.\n");
 			outputText("-Check for avoid bad outcome of meeding bloodhungry boss in EL was decreased by 100 wis and if not meeting min wis % check should be bit higher chance to succesful pass rng check. If you still fail then... RNGod is not on your side and we can't do anything on this bad luck.\n");
 			outputText("-Kid interactions with Tyrantia. (Canadian Snas)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Madam and Tempress exchange limit increased from 5 to 10. Each would also add some small 'bonus' after 1-2 exchanges. Yes i know it would be too little fun to tell what the bonus is so i leave it to your all analytical skills to discover what it's ^^\n");
+			outputText("-There was added over last monhts ways to get 'free' super perks and some may feel they would rather get perk points. Worry not i shall grace you all with conversion of super perks into normal perk points. But.... nothing for free and conversion will be only 1 super perk point to 2 perk points.\n");
+			outputText("-Expanded a bit summary of predicted ascension points gains to show some of other than kids subcathegory. Some of subcathegories would display max pts that can be gained from it and in future those caps would be updated when needed.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
