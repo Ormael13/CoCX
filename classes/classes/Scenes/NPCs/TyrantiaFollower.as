@@ -1258,7 +1258,7 @@ public function TyrantiaAtCamp():void {
 	addButton(4, "Sex", TyrantiaSexMenu);
 	if (player.hasPerk(PerkLib.BasicLeadership) && TyrantiaAffectionMeter >= 60) addButton(5, "JoinMe", TyrantiaHenchmanOption);
 	else addButtonDisabled(5, "JoinMe", "You need to have at least Basic Leadership and 60% affection to form a team.");
-	if ((DriderTown.TyrantiaMaleKids + DriderTown.TyrantiaFemaleKids) > 0) addButton(6, "Kidplay", TyrantiaKidPlayTime, "Play with your Unirider kids");
+	if ((DriderTown.TyrantiaMaleKids + DriderTown.TyrantiaFemaleKids) > 0) addButton(6, "Kidplay", TyrantiaKidPlayTime).hint("Play with your Unirider kids");
 	if (TyraniaCorrupteedLegendaries >= 1) addButton(10, "Items", itemImproveMenuCorrupt);
 	if (DriderTown.DriderTownComplete) addButton(13, "Back", SceneLib.dridertown.DriderTownEnter).hint("Return to main DriderTown menu.");
 	addButton(14, "Leave", camp.campLoversMenu);
