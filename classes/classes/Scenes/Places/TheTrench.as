@@ -251,7 +251,7 @@ private function theTrenchQuarters():void {
 	else {
 		outputText("Standing at the doorway you see that the room is somewhat furnished, only possessing a set of beds and a table with chairs near the center, however other that it’s empty with no signs of anyone having claimed it for their own. Closing the door behind you, you walk towards one of the beds, and begin dressing out of your [armor] leaving it folded on the table.\n\n");
 		outputText("Giving your body a few stretches, you collapse onto the bed, and retreat into the covers your ");
-		if (flags[kFLAGS.THE_TRENCH_ENTERED] >= 12) outputText("large extra mouth hanging off the bed due to its massive size");
+		if (flags[kFLAGS.THE_TRENCH_ENTERED] >= 15) outputText("large extra mouth hanging off the bed due to its massive size");
 		else if (player.tailType == Tail.ARIGEAN_RED || player.tailType == Tail.ARIGEAN_YELLOW) outputText("symbiotic friend wrapping itself around your waist to stay close to the warmth your body offers");
 		else outputText("parasitic partner partner wrapping itself around your waist to stay close to the warmth your body offers");
 		outputText(", and before long you’ve drifted off to the sweet bliss of sleep.\n\n");
@@ -501,6 +501,11 @@ private function theTrenchGraydaQuestNPCMissions():void {
 		else addButton(4, "Tracking the Monstrosity", theTrenchGraydaQuestNPCMissionsTrackingTheMonstrosity).hint("Promotion Quest 2");
 	}
 	else addButtonDisabled(4, "???", "Req. to finish previous mission and have lvl 24+.");
+	if (player.level >= 30 && flags[kFLAGS.THE_TRENCH_ENTERED] >= 12) {
+		if (flags[kFLAGS.THE_TRENCH_ENTERED] == 13) addButtonDisabled(10, "Coronation", "You still need to find: Four Ebonblooms, a Silver ingot and ‘Liquid Diamond’.");
+		else addButton(10, "Coronation", theTrenchGraydaQuestNPCMissionsCoronation);
+	}
+	else addButtonDisabled(10, "???", "Req. to have lvl 30+ and special event triggering at the camp.");
 	addButton(14, "Back", theTrenchGraydaQuestNPC);
 }
 private function theTrenchGraydaQuestNPCMissionsGettingStronger():void {
@@ -601,9 +606,44 @@ private function theTrenchGraydaQuestNPCMissionsTrackingTheMonstrosity():void {
 	}
 	doNext(theTrenchGraydaQuestNPCMissions);
 }
+private function theTrenchGraydaQuestNPCMissionsCoronation():void {
+	clearOutput();
+	outputText("As you walk through the base and up to Grayda, multiple Arigeans steer clear of you as if they were able to pick up on your unhappy attitude from the recent agitation.\n\n");
+	outputText("\"<i>Can I help you [name]?</i>\" Grayda’s eyes seem to be trying to get a read and maybe a guess as to why you seem so agitated.\n\n");
+	outputText("You explain how you’ve been experiencing an intense, painful itching in your eyes and how you noticed the occasional color shift. Grayda’s eyes seem to widen at the last part of your explanation as that sudden itch seems to strike as if to emphasize your situation.\n\n");
+	outputText("She roughly takes you by the hand, and very quickly drags you through the halls with you eventually ending up in her room which still seems to be missing the door handle. She quickly shuts the door once you’re inside and shoving you onto her bed as she quickly gets to work on inspecting one of your eyes, forcing your eyelid open.\n\n");
+	outputText("You're not sick or something, are you?\n\n");
+	outputText("Grayda stays silent for a few agonizing moments before showing you a gentle smile. \"<i>No, you're not ill. It’s just your body’s way of saying that you're ready to become a princess.</i>\" She finishes her sentence with giving you a light pat on the back.\n\n");
+	outputText("What?\n\n");
+	outputText("\"<i>An Arigean Princess, they’re natural born leaders for our kind, but not just anyone can become one and fewer can reach the point where their bodies are ready. And I won’t lie to you, if you choose to go down this path there is no turning back.</i>\" You find it shocking how her tone went from so friendly to serious at the end there.\n\n");
+	outputText("She straightens her back before continuing. \"<i>If you choose to go down this path you’ll bear the burden of leading our kind. This is a choice only you can make however, and I know this might be sudden, but would you be willing to go through with this?</i>\"\n\n");
+	menu();
+	addButton(1, "No", theTrenchGraydaQuestNPCMissionsCoronationNo);
+	addButton(3, "Yes", theTrenchGraydaQuestNPCMissionsCoronationYes).hint("IT LEADS TO PERNAMENT TRANSFORMATION AFTER FINISHING THIS QUEST. ARE YOU SURE YOU WANT CONTIUNUE?");
+}
+private function theTrenchGraydaQuestNPCMissionsCoronationNo():void {
+	clearOutput();
+	outputText("You might need more time to think about this. It’s all too sudden, and a bit overwhelming.\n\n");
+	outputText("\"<i>I understand [name]. Please take your time with this decision as it’s quite a big one.</i>\"\n\n");
+	doNext(theTrenchGraydaQuestNPCMissions);
+}
+private function theTrenchGraydaQuestNPCMissionsCoronationYes():void {
+	clearOutput();
+	outputText("You tell her you feel honored by this opportunity and would love to.\n\n");
+	outputText("\"<i>You're certain? There is no going back after this.</i>\"\n\n");
+	outputText("You tell her yes you're absolutely sure this is what you want to do. Now, what do you need to do?\n\n");
+	outputText("She turns and opens a drawer of the dresser behind her, Grabbing a rope, what looks like a bottle of ink, and a quill. \"<i>I'm going to have to ask that you dress down.</i>\"\n\n");
+	outputText("Sliding out of your equipment, you lay back on her bed. You have to be honest, you certainly weren’t expecting to be doing this.\n\n");
+	outputText("She gives you a deadpan expression before speaking in her usual serious tone. \"<i>We’re not mating. Now stand up with your arms out before I forcibly beat some sense into you.</i>\"\n\n");
+	outputText("Obliging with her request, you follow her instructions as she proceeds to wrap the rope around your hips before marking the rope somewhere where it meets behind you. She repeats this process 3 more times around your waist, chest, and boobs before writing something down on a piece of paper, and putting it into a glass bottle. She grabs another piece of paper, writing a few things down on it, and then handing it to you. It seems to be a list.\n\n");
+	outputText("\"<i>Since this is your coronation we’re preparing for, I'm going to need you to grab a few items required for the ceremony. You’ll be needing Four Ebonblooms, a Silver ingot, and something called ‘Liquid Diamond’. You should try looking in caves for the ebonblooms, and Jeweler for the Silver ingot. Unfortunately, I don’t know how to obtain ‘Liquid Diamond’, you can try your luck with merchants however, I doubt surface dwellers have much of a use for it anyway.</i>\"\n\n");
+	outputText("She’s just about to leave with the bottled message before stopping at the door. \"<i>And two things; The princesses up north will be here for your coronation. And whatever you don’t drink the Liquid Diamond under any circumstance, it’s poisonous when consumed raw.</i>\" And with those final warnings, she leaves you to get dressed. It seems like you’ve got quite the event to plan for.\n\n");
+	flags[kFLAGS.THE_TRENCH_ENTERED] = 13;
+	doNext(theTrenchGraydaQuestNPCMissions);
+}
 private function theTrenchLoiter():void {
 	clearOutput();
-	outputText("Looking around the commons, you decide there shouldn’t be much harm in just relaxing for a while. Finding a nearby table and chair, you sit down, fold your arms and rest your head in them as you shut your eyes for a bit. However the chattering of individuals seems to draw your attention, surely they wouldn’t mind if you listened in, right? "+(flags[kFLAGS.THE_TRENCH_ENTERED] >= 12 ? "Afterall it wouldn’t hurt to know what’s on your subject’s minds. ":"")+"Your ears twitch as you strain your hearing, determined to hear your surroundings.\n\n");
+	outputText("Looking around the commons, you decide there shouldn’t be much harm in just relaxing for a while. Finding a nearby table and chair, you sit down, fold your arms and rest your head in them as you shut your eyes for a bit. However the chattering of individuals seems to draw your attention, surely they wouldn’t mind if you listened in, right? "+(flags[kFLAGS.THE_TRENCH_ENTERED] >= 15 ? "Afterall it wouldn’t hurt to know what’s on your subject’s minds. ":"")+"Your ears twitch as you strain your hearing, determined to hear your surroundings.\n\n");
 	var option:Number = rand(4);
 	switch (option) {
         case 0:

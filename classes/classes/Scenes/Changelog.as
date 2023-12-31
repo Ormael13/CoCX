@@ -14,9 +14,15 @@ public class Changelog extends BaseContent
 		{}
 		
 		public function accessChangelogMenu():void {
-			Changelog50();
+			Changelog51();
 		}
 		//zrobić do 2022 na świeta event z reniferami i nie odblokowywać go do ok. 20-24 grudnia 2021 xD
+		private function Changelog53():void {
+			clearOutput();
+			menu();
+			addButton(0, "Next", Changelog52);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
+		}
 		private function Changelog52():void {
 			clearOutput();
 			menu();
@@ -32,6 +38,7 @@ public class Changelog extends BaseContent
 			//outputText("-\n");
 			//outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
 			//outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
+			outputText("-When reaching lvl 30 and having done all misison from Grayda Arigean PC can have event proc at camp that unlocks new quest 'Coronation'. ATM NOT YET FULLY FINISHED.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -39,6 +46,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-Fixed bugs: \n\n");
+			/*ostatni punkt changelogu
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
@@ -48,8 +57,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-Fixed bugs: \n\n");
-			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8w-z:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-Fixed bugs: \n\n");
@@ -117,7 +124,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("\n");
 			outputText("\n");
@@ -156,6 +162,16 @@ public class Changelog extends BaseContent
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");*/
+			outputText("\n\n\n");
+			outputText("Plans for future builds (I know some of them are HUGE ones but without dreams to chase how can one change?):\n");
+			outputText("-Add more soulforce options.\n");
+			outputText("-Add soulforce stuff to our lovely monk-ish mouse ^^\n");
+			outputText("-Add soulforce stuff to kitsune encounters.\n");
+			outputText("-Add Wuxia themed area and enemies.\n");
+			outputText("-Add few new options during chara creation.\n");
+			outputText("-Add option to upgrade some of the items ingame (ofc using soulforce) and generaly few new shiny things to find/buy/store/use.\n");
+			outputText("-More camp build options (involving using stones and etc.)\n");
+			outputText("-Make use of Metamorph perk (ofc all TF would be powered by soulforce ^^)\n");
 			menu();
 			addButton(0, "Next", Changelog50);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
@@ -223,7 +239,7 @@ public class Changelog extends BaseContent
 			outputText("large portion of her storyline, corrupt Celess sex scenes not reseting lust/not giving tease exp, 2nd promotion in Adventure Guld been not accesable, Diva/Project Nightwalker dropping/giving Bat TF instead of Vampire TF, Sky-tier Aether Twins been excluded from some of BFGaunlets bonuses, silly mode event in hills involving minotaurs got it lvl req. below lvl req. for area ");
 			outputText("(fix was removing the lvl req. on it), races with Undeath perk scaling HP from tou instead of lib, Salamander IM not keeping Lustzerker perk from loosing if no longer race with lustzerker ability, Gryphon Statuette only allowing cock tf scene, Weasel Eyes tf not triggering when having Raiju Eyes, Library not teaching all curretly existing tier 1 white and black spells, ");
 			outputText("Werewolf pity system not working with FemDom post fight option, cow score req. both fur and plain skin\n\n");
-			outputText("<b>Version 0.8v2:</b>\n\n");
+			outputText("<b>Version 0.8v2 (Few new merged perks, more Arigean content, Increasing lvl cap, Madam and Tempress minor changes and bugfixes):</b>\n\n");
 			outputText("-New tier 3 intelligence lvl-up perk (by Demojay): Autocast. Req. Any buff spell and 100+ int. Effect: Allows buff spells to be automatically cast at the start of battle, if you meet the lust requirements to cast them.\n");
 			outputText("-New event perk: Raging Inferno (Mastered). Gained by use of the Pocket Watch when req. are meet. Effects: Cumulative 120% damage increase for every subsequent fire spell. Each turn without cast fire spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling fire based attack. Maximum 50 stacks.\n");
 			outputText("-New event perk: Glacial Storm (Mastered). Gained by use of the Pocket Watch when req. are meet. Effects: Cumulative 120% damage increase for every subsequent ice spell. Each turn without cast ice spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling ice based attack. Maximum 50 stacks.\n");
@@ -251,16 +267,6 @@ public class Changelog extends BaseContent
 			outputText("Pixie Dust Special now has to pay the dark ritual HP cost for its increased damage. Proc Check loop for Fae Storm/Pixie Dust no longer stops after first failed check. (Demojay)\n");
 			outputText("-Made level check function for handling legendary items tied to a 'Legendary' Tag, for easy identification of legendary items. Added 'Death Prince Golden Armor', 'Asterius Rage' and 'Nexus' to legendary lists. (Demojay)\n");
 			outputText("-Fixed bugs: When picking Yes instead of Maybe? on ascension game not allowing to pick some of asc perks, elemental damage cumulation stacks decaying 2x slower, faerie dragon tier 1 incorrect HP bonus, Error w/ Shouldra 'Crush' options, Belisa Holy Band managment bugs\n\n");
-			outputText("\n\n\n");
-			outputText("Plans for future builds (I know some of them are HUGE ones but without dreams to chase how can one change?):\n");
-			outputText("-Add more soulforce options.\n");
-			outputText("-Add soulforce stuff to our lovely monk-ish mouse ^^\n");
-			outputText("-Add soulforce stuff to kitsune encounters.\n");
-			outputText("-Add Wuxia themed area and enemies.\n");
-			outputText("-Add few new options during chara creation.\n");
-			outputText("-Add option to upgrade some of the items ingame (ofc using soulforce) and generaly few new shiny things to find/buy/store/use.\n");
-			outputText("-More camp build options (involving using stones and etc.)\n");
-			outputText("-Make use of Metamorph perk (ofc all TF would be powered by soulforce ^^)\n");
 			menu();
 			addButton(0, "Next", Changelog49);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);

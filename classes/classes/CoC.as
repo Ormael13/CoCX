@@ -68,7 +68,7 @@ public class CoC extends MovieClip
         return _instance;
     }
     //Game Version
-    public var debugGameVer:String = "v0.8v2";
+    public var debugGameVer:String = "v0.8w-z.00";
 
     //Mod save version.
     public var modSaveVersion:Number = 36.36;
@@ -285,7 +285,7 @@ public class CoC extends MovieClip
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_" + debugGameVer;
-			ver += " (<b>Few new merged perks, more Arigean content, Increasing lvl cap, Madam and Tempress minor changes and bugfixes</b>)";
+			ver += " (<b></b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

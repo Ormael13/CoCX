@@ -1026,6 +1026,16 @@ public class Camp extends NPCAwareContent{
 		if (sparableCampMembersCount() >= 2) {
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 1) flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] = 1;
 		}
+		//Unlock Coronation Quest
+		if (flags[kFLAGS.THE_TRENCH_ENTERED] == 11 && player.level >= 30 && rand(4) == 0) {
+			clearOutput();
+			outputText("You can’t help but furiously start rubbing your eyes as you feel a sharp pricking, as if something was in your eyes, maybe the nearby stream could help you wash whatever has gotten in your eyes out.\n\n");
+			outputText("Now over at the stream, you dip your face into the water, and after a few moments of attempting to clear out whatever has gotten stuck in your eyes with no progress, you begrudgingly give up and stare at the water’s surface as you start to go over your options. ");
+			outputText("However you see something quite strange in the reflection, mainly your eyes which seem to be shifting from their usual yellow to a blue before reverting with an irritating itch. Maybe Grayda knows what’s happening to you?\n\n");
+			flags[kFLAGS.THE_TRENCH_ENTERED] = 12;
+			doNext(playerMenu);
+			return;
+		}
 		//Wood Elf weapon fix.
 		if (!player.hasPerk(PerkLib.Rigidity) && ((flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0) || (flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0))) {
 			if (!player.weapon.isNothing){
@@ -5279,4 +5289,4 @@ public function rebirthFromBadEnd():void {
 	}
 
 }
-}
+}
