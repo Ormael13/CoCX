@@ -185,12 +185,12 @@ public class RearBody extends BodyPart {
 	EnumValue.add(Types, ARIGEAN_YELLOW_AURA, "ARIGEAN_YELLOW_AURA", {
 		name: "arigean aura (Y)",
 		appearanceDesc: "A black and yellow haze is exhaled from your symbiotic partners, sticking close to your form giving you an intimidating aura to help frighten your foes."
-	});/*
-	public static const ARIGEAN_YELLOW_AURA: int = 31;
-	EnumValue.add(Types, ARIGEAN_YELLOW_AURA, "ARIGEAN_YELLOW_AURA", {
+	});
+	public static const ARIGEAN_PINCER_LIMBS: int = 31;
+	EnumValue.add(Types, ARIGEAN_PINCER_LIMBS, "ARIGEAN_PINCER_LIMBS", {
 		name: "An extra pair of pincer like limbs",
-		appearanceDesc: "A black and yellow haze is exhaled from your symbiotic partners, sticking close to your form giving you an intimidating aura to help frighten your foes."
-	});*/
+		appearanceDesc: "An extra pair of large black pincer-like limbs sprout from your back, each seems to be adorn in black armor-like skin not unlike that found on your legs. You can’t help but laugh at the thought of crushing the life from your foes with your fearsome claws."
+	});
 	public static const THIRSTY_NECK: int = 32;
 	EnumValue.add(Types, THIRSTY_NECK, "THIRSTY_NECK", {
 		name: "thirsty neck",

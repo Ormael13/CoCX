@@ -84,10 +84,44 @@ public function graydaEncounterLoss2():void {
 	flags[kFLAGS.THE_TRENCH_ENTERED] = 8;
 	cleanupAfterCombat();
 }
-/*
-private	function aaa():void {
-	
-}*/
+
+public function graydaMainWhenCalled():void {
+	clearOutput();
+	spriteSelect(SpriteDb.s_grayda);
+	outputText("You shout out to Grayda as she takes her time approaching."+((silly() && rand(5) == 0)?" You trip and fall face-first into the ground, causing Grayda to hasten her approach.":"")+"\n\n");
+	outputText("\"<i>Do you need something, my Princess?</i>\"\n\n");
+	menu();
+	addButton(0, "Appearance", graydaMainAppearance);
+	addButton(14, "Back", camp.campFollowers);
+}
+public function mishapsLunaGrayda():void {
+	spriteSelect(SpriteDb.s_chichi);
+	clearOutput();
+	outputText("Grayda seems to be curled up underneath the water at the stream, her skin seems to be a shade of light blue and is flaking off as if she was shedding. It might be best to let her rest until she recovers from her sunburn.\n\n");
+	outputText("Looking to where she normally rests you find most of the branches have been trimmed off, But who trimmed the trees?\n\n");
+	if (player.hasStatusEffect(StatusEffects.CampLunaMishaps3)) player.addStatusValue(StatusEffects.CampLunaMishaps3, 2, 1);
+			else player.createStatusEffect(StatusEffects.CampLunaMishaps3, 0, 1, 0, 0);
+	if (!player.hasStatusEffect(StatusEffects.LunaWasCaugh)) player.createStatusEffect(StatusEffects.LunaWasCaugh, 1, 0, 0, 0);
+	else player.addStatusValue(StatusEffects.LunaWasCaugh, 1, 1);
+	if (player.statusEffectv1(StatusEffects.LunaWasCaugh) == 3) outputText("<b>That's it, you're sure of it now, it's all Luna's doing!</b>\n\n");
+	doNext(playerMenu);
+}
+private function graydaMainAppearance():void {
+	clearOutput();
+	spriteSelect(SpriteDb.s_grayda);
+	outputText("Grayda is a 6ft 3in Arigean Countess, and currently the one who is overseeing you and your needs. Her height is increased even further by the large hat-like symbiote which rests on her waist-long white hair. four light gray tentacles hang limply from the Symbiote. Her two glowing yellow eyes are often filled with a steadfast, or determined gleam. Her face, adorned with near albino skin, normally retains a neutral look.\n\n");
+	outputText("Grayda’s body is nearly identical to that of a human’s, save for her legs which are covered up to her hips in natural, black metal armor. Her proportions are fairly normal for what one would expect from a human with a pair of C cup breasts, however, her body does seem to have some muscle definition. She normally wears what appears to be a white one-piece swimsuit, a pair of gloves, boots, and a dark gray cloak which is attached to a jaw-like piece of collar armor.\n\n");
+	outputText("A soft, black, and yellow haze seem to occasionally be exhaled from her symbiotic partner, which clings to her skin. It intensifies when she’s angered or in combat, effectively giving her a protective layer of mist to help mask her movement, and appearance.\n\n");
+	outputText("She confidently wields a dark metal staff with a bladed end, effectively allowing her to have a weapon to defend herself for close quarters and to help cast spells.\n\n");
+	outputText("\"<i>Princess? Are you alright? Do you need me to move you somewhere darker or out of the light?</i>\"\n\n");
+	doNext(graydaMainWhenCalled);
+}
+private	function graydaA():void {
+	outputText("\"<i></i>\"\n\n");
+}
+private	function grayda():void {
+	outputText("\"<i></i>\"\n\n");
+}
 	}
 
 }
