@@ -874,7 +874,9 @@ public class Combat extends BaseContent {
 		if (player.isFlying()) {
 			if (player.statusEffectv2(StatusEffects.Flying) == 1) buttons.add("Land", landAfterUsingFlyingSword);
 			if (player.statusEffectv2(StatusEffects.Flying) == 2) buttons.add("Land", landAfterUsingSoulforce);
-            buttons.add("Great Dive", greatDive).hint("Make a Great Dive to deal TONS of damage!");
+            buttons.add("Great Dive", greatDive)
+            .hint("Make a Great Dive to deal TONS of damage!")
+            .disableIf(isEnemyInvisible, "You cannot use offensive skills against an opponent you cannot see or target.");
         }
         if (CombatAbilities.FlamesOfLove.isKnown) {
             buttons.append(CombatAbilities.FlamesOfLove.createButton(monster));
