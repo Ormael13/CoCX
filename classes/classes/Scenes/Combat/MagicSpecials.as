@@ -3937,8 +3937,7 @@ public class MagicSpecials extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.CooldownManaShot, 3, 0, 0, 0);
 		outputText("You focus your eyes upon your target and fire a single blast from " + (player.tailCount > 1?"one of your extra maws":"your large extra mouth") + ". ");
 		if (40 + rand(player.spe) > monster.spe) {
-			var damage:Number = player.str;
-			damage += scalingBonusStrength();
+			var damage:Number = scalingBonusStrength() * 2;
 			damage *= spellMod();
 			//Determine if critical hit!
 			var crit:Boolean = false;
@@ -3954,12 +3953,14 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 			if (player.armor == armors.ANE_UNI) damage *= 1.2;
+			if (player.armor == armors.P_REGAL) damage *= 1.5;
 			if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 1) damage *= arigeanAssociationCortexBoost();
 			damage = Math.round(damage);
 			outputText("It hits its mark dealing ");
 			doMagicDamage(damage, true, true);
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
 			outputText(" damage!\n\n");
+			if (player.armor == armors.P_REGAL) HPChange(Math.round(damage*0.15), true);
 			checkAchievementDamage(damage);
 			combat.heroBaneProc(damage);
 			statScreenRefresh();
@@ -4004,8 +4005,7 @@ public class MagicSpecials extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.CooldownManaBarrage, 3, 0, 0, 0);
 		outputText("You focus your eyes upon your target and fire a barrage of blasts from your extra maw" + (player.tailCount > 1?"s":"") + ". ");
 		if (40 + rand(player.spe) > monster.spe) {
-			var damage:Number = player.str;
-			damage += scalingBonusStrength();
+			var damage:Number = scalingBonusStrength() * 2;
 			damage *= spellMod();
 			//Determine if critical hit!
 			var crit:Boolean = false;
@@ -4021,6 +4021,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 			if (player.armor == armors.ANE_UNI) damage *= 1.2;
+			if (player.armor == armors.P_REGAL) damage *= 1.5;
 			if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 1) damage *= arigeanAssociationCortexBoost();
 			damage = Math.round(damage);
 			outputText("Your target is unable to avoid the barrage of blasts and takes ");
@@ -4032,6 +4033,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
 			outputText(" damage!\n\n");
 			damage *= 5;
+			if (player.armor == armors.P_REGAL) HPChange(Math.round(damage*0.15), true);
 			checkAchievementDamage(damage);
 			combat.heroBaneProc(damage);
 			statScreenRefresh();
@@ -4060,8 +4062,10 @@ public class MagicSpecials extends BaseCombatContent {
 	private function arigeanMagicSpecialsCost():Number {
 		var aMSC:Number = 1;
 		if (player.armor == armors.ANE_UNI) aMSC -= 0.2;
+		if (player.armor == armors.P_REGAL) aMSC -= 0.5;
 		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 2) aMSC -= 0.2;
 		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 3) aMSC -= 0.1;
+		if (aMSC < 0.1) aMSC = 0.1;
 		return aMSC;
 	}
 

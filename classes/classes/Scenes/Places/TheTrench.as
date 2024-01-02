@@ -274,6 +274,7 @@ private function theTrenchEquipmentShop():void {
 	addButton(0, "AN-CU", theTrenchEquipmentShopArigeanNeClassUniform).hint("Arigean Ne-Class Uniform");
 	addButton(1, "A.Club", theTrenchEquipmentShopArigeanClub).hint("Arigean Club");
 	addButton(2, "A.Spear", theTrenchEquipmentShopArigeanSpear).hint("Arigean Spear");
+	addButtonIfTrue(3, "P.Regalia", theTrenchEquipmentShopPrincessRegalia, "Req. finished Coronbation quest.", player.tailType == Tail.ARIGEAN_PRINCESS);
 	addButton(14, "Back", theTrenchMain);
 }
 private function theTrenchEquipmentShopArigeanNeClassUniform():void {
@@ -287,6 +288,10 @@ private function theTrenchEquipmentShopArigeanClub():void {
 private function theTrenchEquipmentShopArigeanSpear():void {
 	outputText("\"<i>A weapon is… a weapon… you’ll find it hits… much harder the lower… your magical energy is… I can provide one for...  1040 gems… as it’s a spear… it should pierce armor… and flesh quite easily.</i>\"\n\n");
 	doYesNo(Utils.curry(theTrenchEquipmentShopBuy,weapons.ARI_SPR), theTrenchEquipmentShop);
+}
+private function theTrenchEquipmentShopPrincessRegalia():void {
+	outputText("\"<i>Princess… did you lose your… regalia? Don’t worry… we can request… a new one to… be made… but it won’t… be cheap... prepare… yourself for a scolding… from your fellow princesses… up north…</i>\"\n\n");
+	doYesNo(Utils.curry(theTrenchEquipmentShopBuy,armors.P_REGAL), theTrenchEquipmentShop);
 }
 public function theTrenchEquipmentShopBuy(itype:ItemType):void {
 	clearOutput();
@@ -681,6 +686,8 @@ private function theTrenchGraydaQuestNPCMissionsCoronationFinalPart1():void {
 	player.tailType = Tail.ARIGEAN_PRINCESS;
 	player.rearBody.type = RearBody.ARIGEAN_PINCER_LIMBS;
 	player.eyes.type = Eyes.ARIGEANPRINCESS;
+	player.createPerk(PerkLib.AlteredAnima, 0, 0, 0, 0);
+	player.createPerk(PerkLib.ArigeanKnowledge, 0, 0, 0, 0);
 	doNext(theTrenchGraydaQuestNPCMissionsCoronationFinalPart2);
 }
 private function theTrenchGraydaQuestNPCMissionsCoronationFinalPart2():void {

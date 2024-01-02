@@ -3994,6 +3994,10 @@ public class PerkLib
 				"You radiate corruption, tainting everything near you with uncontrollable lust.");
 		public static const AuraOfPurity:PerkType = mk("Aura of Purity", "Aura of Purity",
 				"Those of impure heart who come close to you are seared by holy fire and blinded by your inner light.");
+		public static const AlteredAnima:PerkType = mk("Altered Anima", "Altered Anima",
+				".");
+		public static const ArigeanKnowledge:PerkType = mk("Arigean Knowledge", "Arigean Knowledge",
+				".");
 		public static const BasicLeadership:PerkType = mk("Basic Leadership", "Basic Leadership",
 				"Allows to form 2 people party.");
 		public static const BasiliskResistance:PerkType = mk("Basilisk Resistance", "Basilisk Resistance",

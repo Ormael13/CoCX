@@ -1303,7 +1303,7 @@ public class ArmsTransformations extends MutationsHelper {
 
 				player.arms.type = Arms.DEER;
 				if (doOutput) outputText(desc);
-				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.CANINE));
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.DEER));
 			},
 			// is present
 			function (): Boolean {
