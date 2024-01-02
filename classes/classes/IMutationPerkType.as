@@ -124,7 +124,9 @@ public class IMutationPerkType extends PerkType
 			var tempObj:Object = buffsForTier(pTier, player);
 			var res:String = "";
 			for (var key:String in tempObj)
+				if(res != "") res += ", ";
 				res += StatUtils.explainBuff(key, tempObj[key]);
+			if(res != "") res = "\nBuffs: " + res;
 			return res;
 		}
 
