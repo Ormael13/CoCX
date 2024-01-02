@@ -1941,7 +1941,7 @@ public class Combat extends BaseContent {
             return;
         }
         //Determine if dodged!
-        if (((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges))) && !monster.monsterIsStunned()) {
+        if (((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) && !monster.monsterIsStunned()) {
             //Akbal dodges special education
             if (monster is Akbal) outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
             else if (monster is Shouldra) outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your " + weapon + " against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your " + weapon + " as if betrayed.\n");
@@ -4575,10 +4575,6 @@ public class Combat extends BaseContent {
             || player.hasStatusEffect(StatusEffects.Defend);
     }
 
-    public static function autoHitPlayer():Boolean {
-        return flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1 && flags[kFLAGS.WAIT_STAND_STILL] == 1;
-    }
-
     public function seconwindGo():void {
         clearOutput();
         outputText("You enter your second wind, recovering your energy.\n\n");
@@ -4668,8 +4664,7 @@ public class Combat extends BaseContent {
                         // Check if player missed
                         // enemyAI() should still be called in the end
                         if (((player.playerIsBlinded() && rand(2) == 0)
-                                || (monster.getEvasionRoll(false, player.spe)
-                                        && !monster.hasPerk(PerkLib.NoDodges)))
+                                || (monster.getEvasionRoll(false, player.spe)))
                                 && !monster.monsterIsStunned()) {
 
                             // Migrate akbal/shouldra/kitsune/default dodge text
@@ -7882,7 +7877,7 @@ public class Combat extends BaseContent {
     }
 
     public function combatParry():Boolean {
-        if (autoHitPlayer()) return false;
+        if (player.canAutoHit()) return false;
         var parryChance:int = 0;
         parryChance += combatParry2();
         return rand(100) <= parryChance;
@@ -8013,7 +8008,7 @@ public class Combat extends BaseContent {
     }
 
     public function combatBlock(doFatigue:Boolean = false):Boolean {
-        if (autoHitPlayer()) return false;
+        if (player.canAutoHit()) return false;
         //Set chance
         var blockChance:int = 20 + player.shieldBlock + Math.floor((player.str - monster.str) / 5);
         if (player.hasPerk(PerkLib.ShieldMastery) && player.tou >= 50 && player.isShieldsForShieldBash()) {

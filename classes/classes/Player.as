@@ -3863,6 +3863,62 @@ use namespace CoC;
 			return damage;
 		}
 
+		override public function canAutoHit():Boolean {
+			return flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1 && flags[kFLAGS.WAIT_STAND_STILL] == 1;
+		}
+
+		override public function calcSpeedDodge(attackSpeed:int):int {
+			if (canAutoHit()) return 0;
+			return super.calcSpeedDodge(attackSpeed);
+		}
+
+		override public function getEvasionReason(considerBlindSpeed:Boolean = true, attackSpeed:int = int.MIN_VALUE, hitModifier:int = 0, dodgeArray:Array = null):String {
+			var evasionReason:String;
+
+			if (canAutoHit()) return null;
+			if (!dodgeArray) dodgeArray = [];
+
+
+			if (considerBlindSpeed && game.monster.hasStatusEffect(StatusEffects.Blind) && rand(100) < 66) evasionReason = EVASION_BLIND;
+
+			if (considerBlindSpeed && game.monster && attackSpeed == int.MIN_VALUE) attackSpeed = game.monster.spe;
+
+			if (tallness < 48 && isBiped() && !isFlying()) {
+				var goblinDodgeChance:int = 0;
+				if (hasKeyItem("Spring Boots") >= 0) goblinDodgeChance = 10;
+				else if (hasKeyItem("Rocket Boots") >= 0) goblinDodgeChance = 20;
+				else if (hasKeyItem("Nitro Boots") >= 0) goblinDodgeChance = 30;
+				if (goblinDodgeChance > 0) dodgeArray.push([goblinDodgeChance, EVASION_EVADE]);
+			}
+
+			if (hasPerk(PerkLib.Misdirection) && armor.hasTag(ItemTags.A_AGILE)) dodgeArray.push([10, EVASION_MISDIRECTION]);
+			if (hasPerk(PerkLib.Unhindered) && armor.hasTag(ItemTags.A_AGILE)) dodgeArray.push([10, EVASION_UNHINDERED]);
+			if (CombatAbilities.HurricaneDance.isActive()) dodgeArray.push([25, EVASION_HURRICANE_DANCE]);
+
+			if (isRace(Races.FAIRY)) {
+				var fairyDodgeChance:int = 30;
+				if (hasStatusEffect(StatusEffects.Minimise)) fairyDodgeChance += 50;
+				dodgeArray.push([fairyDodgeChance, EVASION_MINIMISE]);
+			}
+
+			if (isRace(Races.CHESHIRE)) {
+				var chesDodgeChance:int = 30;
+				if (hasStatusEffect(StatusEffects.EverywhereAndNowhere)) chesDodgeChance += 50;
+				dodgeArray.push([chesDodgeChance, EVASION_PHASING]);
+			}
+
+			if (isRace(Races.DISPLACERBEAST)) {
+				var disDodgeChance:int = 30;
+				if (hasStatusEffect(StatusEffects.Displacement)) disDodgeChance += 50;
+				dodgeArray.push([disDodgeChance, EVASION_DISPLACING]);
+			}
+
+			if (!evasionReason) evasionReason = super.getEvasionReason(considerBlindSpeed, attackSpeed, hitModifier, dodgeArray);
+
+			if (evasionReason && necklace == game.necklaces.CATBELL && isAnyRaceCached(Races.CatlikeRaces)) CombatAbilities.Tease.perform();
+			return evasionReason;
+		}
+
 		public function eyesOfTheHunterAdeptBoost():Boolean {
 			return CoC.instance.monster.hasPerk(PerkLib.EnemyHugeType) || CoC.instance.monster.hasPerk(PerkLib.EnemyGroupType) || CoC.instance.monster.hasPerk(PerkLib.EnemyBeastOrAnimalMorphType) || CoC.instance.monster.hasPerk(PerkLib.EnemyConstructType) || CoC.instance.monster.hasPerk(PerkLib.EnemyFeralType) || CoC.instance.monster.hasPerk(PerkLib.EnemyGooType)
 			|| CoC.instance.monster.hasPerk(PerkLib.EnemyTrueDemon) || CoC.instance.monster.hasPerk(PerkLib.EnemyTrueAngel) || CoC.instance.monster.hasPerk(PerkLib.EnemyEliteType);
