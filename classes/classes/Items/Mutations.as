@@ -5593,8 +5593,8 @@ public final class Mutations extends MutationsHelper {
         if (type == 1 && player.skinColor != "light purple" && changes < changeLimit && rand(3) == 0) {
             changes++;
             outputText("[pg]It takes a while for you to notice, but <b>");
-            if (player.hasCoat()) outputText("the skin under your [fur color] [skin coat.desc]");
-            else outputText("your [skin desc]" + player.skinDesc);
+            if (player.hasCoat()) outputText("the skin under your [fur color] " + player.skinDesc);
+            else outputText("your " + player.skinDesc);
             outputText(" has changed to become ");
             player.skinColor = "light purple";
             outputText("[skin color] colored.</b>");
