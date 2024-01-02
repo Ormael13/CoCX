@@ -229,7 +229,10 @@ public class CombatAbility extends BaseCombatContent {
 	public var baseSFCost:Number = 0;
 	public var baseFatigueCost:Number = 0;
 	public var processPostCallback:Boolean = true;
+	//Used to tell the system the type of damage the last used ability inflicted
 	protected var lastAttackType:int = 0;
+	//Custom toggle to allow an ability to hit an invisible enemy 
+	protected var affectsInvisible:Boolean = false;
 	
 	public function CombatAbility(
 			name:String,
@@ -582,6 +585,11 @@ public class CombatAbility extends BaseCombatContent {
 		} else if (ccd == -2) {
 			return "This ability can only be used once per day."
 		}
+
+		if (!affectsInvisible && targetType == TARGET_ENEMY && combat.isEnemyInvisible) {
+            return "You cannot use offensive skills against an opponent you cannot see or target."
+        }
+
 		return "";
 	}
 	

@@ -664,6 +664,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var isEnemyInvisible:Boolean = combat.isEnemyInvisible;
 		if (!player.isInGoblinMech() && !player.isInNonGoblinMech()) {
 			bd = buttons.add("Great Dive", combat.greatDive).hint("Make a Great Dive to deal TONS of damage!");
+			if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			if (player.isRaceCached(Races.FAIRY, 2) || player.isRaceCached(Races.FAERIEDRAGON)) bd.disable("You cannot use Great Dive due to been too small.");
 			//Embrace
 			if ((player.arms.type == Arms.BAT || player.wings.type == Wings.VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType)) {
