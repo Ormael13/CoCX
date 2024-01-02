@@ -1062,6 +1062,27 @@ import classes.Scenes.Combat.CombatAbilities;
 			return mult;
 		}
 
+		override public function canAutoHit():Boolean {
+			return hasPerk(PerkLib.NoDodges);
+		}
+
+		override public function calcSpeedDodge(attackSpeed:int):int {
+			if (canAutoHit()) return 0;
+			return super.calcSpeedDodge(attackSpeed);
+		}
+
+		override public function getEvasionReason(considerBlindSpeed:Boolean = true, attackSpeed:int = int.MIN_VALUE, hitModifier:int = 0, dodgeArray:Array = null):String {
+			var evasionReason:String;
+
+			if (canAutoHit()) return null;
+
+			if (hasStatusEffect(StatusEffects.HurricaneDance)) dodgeArray.push([25, EVASION_HURRICANE_DANCE]);
+
+			if (!evasionReason) evasionReason = super.getEvasionReason(considerBlindSpeed, attackSpeed, hitModifier, dodgeArray);
+
+			return evasionReason;
+		}
+
 		public function canMonsterBleed():Boolean
 		{
 			return !hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.EnemyPlantType) && !hasPerk(PerkLib.EnemyGooType) && !hasPerk(PerkLib.EnemyGhostType) && !hasPerk(PerkLib.EnemyUndeadType);
