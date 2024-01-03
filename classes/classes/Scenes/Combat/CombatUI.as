@@ -600,11 +600,11 @@ public class CombatUI extends BaseCombatContent {
 	}
 
 	public function isFlyingSwordTurn():Boolean {
-		return CombatAbilities.FlyingSwordAttack.isKnownAndUsable && flags[kFLAGS.FLYING_SWORD] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_FLYING_SWORD_ATTACKED] != 1;
+		return player.hasPerk(PerkLib.FirstAttackFlyingSword) && CombatAbilities.FlyingSwordAttack.isKnownAndUsable && flags[kFLAGS.FLYING_SWORD] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_FLYING_SWORD_ATTACKED] != 1;
 	}
 
 	public function doFlyingSwordTurn():void {
-		if (CombatAbilities.FlyingSwordAttack.isKnownAndUsable) {
+		if (player.hasPerk(PerkLib.FirstAttackFlyingSword) && CombatAbilities.FlyingSwordAttack.isKnownAndUsable) {
 			CombatAbilities.FlyingSwordAttack.preTurnAttack = true;
 			CombatAbilities.FlyingSwordAttack.perform();
 			CombatAbilities.FlyingSwordAttack.preTurnAttack = false;

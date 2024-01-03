@@ -874,7 +874,9 @@ public class Combat extends BaseContent {
 		if (player.isFlying()) {
 			if (player.statusEffectv2(StatusEffects.Flying) == 1) buttons.add("Land", landAfterUsingFlyingSword);
 			if (player.statusEffectv2(StatusEffects.Flying) == 2) buttons.add("Land", landAfterUsingSoulforce);
-            buttons.add("Great Dive", greatDive).hint("Make a Great Dive to deal TONS of damage!");
+            buttons.add("Great Dive", greatDive)
+            .hint("Make a Great Dive to deal TONS of damage!")
+            .disableIf(isEnemyInvisible, "You cannot use offensive skills against an opponent you cannot see or target.");
         }
         if (CombatAbilities.FlamesOfLove.isKnown) {
             buttons.append(CombatAbilities.FlamesOfLove.createButton(monster));
@@ -12563,17 +12565,20 @@ public function CancerGrab():void {
         return;
     }
     //Cannot be used on plural enemies
-    if(monster.plural) {
-        if (monster.hasStatusEffect(StatusEffects.Dig))
+    if (monster.plural) {
+		if (player.rearBody.type == RearBody.ARIGEAN_PINCER_LIMBS) {
+			outputText("You launch yourself at [themonster], but with multiple enemies, grabbing one up would leave you completely open to attack.\n\n");
+            SceneLib.combat.enemyAIImpl();
+            return;
+		}
+        else if (monster.hasStatusEffect(StatusEffects.Dig))
         {
-            outputText("You begin to dig up toward [themonster], but with multiple enemies, grabbing one up would leave you completely open to attack.  You halt your progression and dig back down before you expose yourself to danger.");
-            outputText("\n\n");
+            outputText("You begin to dig up toward [themonster], but with multiple enemies, grabbing one up would leave you completely open to attack.  You halt your progression and dig back down before you expose yourself to danger.\n\n");
             SceneLib.combat.enemyAIImpl();
             return;
         }
         else {
-            outputText("You launch yourself at [themonster], but with multiple enemies, grabbing one up would leave you completely open to attack.  You hastily dig backwards before you expose yourself to danger.");
-            outputText("\n\n");
+            outputText("You launch yourself at [themonster], but with multiple enemies, grabbing one up would leave you completely open to attack.  You hastily dig backwards before you expose yourself to danger.\n\n");
             SceneLib.combat.enemyAIImpl();
             return;
         }
@@ -12581,7 +12586,22 @@ public function CancerGrab():void {
     fatigue(10, USEFATG_PHYSICAL);
     if (checkConcentration()) return; //Amily concentration
     //WRAP IT UPPP
-    if (monster.hasStatusEffect(StatusEffects.Dig)) {
+	if (player.rearBody.type == RearBody.ARIGEAN_PINCER_LIMBS) {
+		outputText("You launch yourself at your opponent");
+        if (40 + rand(player.spe) > monster.spe) {
+            outputText(", grabbing it with your powerful pincers as you prepare to crush it to death.");
+        }
+        //Failure
+        else {
+            //Failure (-10 HPs) -
+            outputText(". Sadly, you miss by a mere inch. Your opponent escapes your grapple attempt.");
+            player.takePhysDamage(5, true);
+            if (player.HP <= player.minHP()) {
+                doNext(endHpLoss);
+                return;
+            }
+        }
+	} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
         outputText("You dig right underneath your opponent, ");
         if (80 + rand(player.spe) > monster.spe) {
             outputText(" taking it by surprise and grappling it with your powerful pincers as you prepare to crush it to death.");
@@ -12598,14 +12618,14 @@ public function CancerGrab():void {
             }
         }
     } else {
-        outputText("You launch yourself at your opponent,");
+        outputText("You launch yourself at your opponent");
         if (40 + rand(player.spe) > monster.spe) {
-            outputText("grabbing it with your powerful pincers as you prepare to crush it to death.");
+            outputText(", grabbing it with your powerful pincers as you prepare to crush it to death.");
         }
         //Failure
         else {
             //Failure (-10 HPs) -
-            outputText("Sadly, you miss by a mere inch. Your opponent escapes your grapple attempt.");
+            outputText(". Sadly, you miss by a mere inch. Your opponent escapes your grapple attempt.");
             player.takePhysDamage(5, true);
             if (player.HP <= player.minHP()) {
                 doNext(endHpLoss);

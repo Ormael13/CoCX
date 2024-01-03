@@ -672,11 +672,7 @@ use namespace CoC;
 			armorDef += armor.def;
 			armorDef += upperGarment.armorDef;
 			armorDef += lowerGarment.armorDef;
-			if (hasPerk(PerkLib.MiracleMetal)) {
-				var aD2:Number = armorDef;
-				if (armor.name == "Arigean Ne-Class Uniform") aD2 -= armor.def;
-				armorDef = Math.round(armorDef * 0.6);
-			}
+			if (hasPerk(PerkLib.MiracleMetal) && armor.name != "Arigean Ne-Class Uniform" && armor.name != "Princess Regalia") armorDef = Math.round(armorDef * 0.6);
 			var tier:int;
 			//Blacksmith history!
 			if (armorDef > 0 && (hasPerk(PerkLib.HistorySmith) || hasPerk(PerkLib.PastLifeSmith))) {
@@ -6748,8 +6744,8 @@ use namespace CoC;
 		}
 
 		public function blockingBodyTransformations():Boolean {
-			return hasPerk(PerkLib.TransformationImmunity) || hasPerk(PerkLib.TransformationImmunity2) || hasPerk(PerkLib.TransformationImmunityBeeHandmaiden) || hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse)
-					|| hasPerk(PerkLib.BlessingOfTheAncestorTree) || hasEnchantment(EnchantmentLib.TfImmunity) || hasStatusEffect(StatusEffects.ArigeanInfected) || tailType == Tail.ARIGEAN_GREEN;
+			return hasPerk(PerkLib.TransformationImmunity) || hasPerk(PerkLib.TransformationImmunity2) || hasPerk(PerkLib.TransformationImmunityBeeHandmaiden) || hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse)|| hasPerk(PerkLib.BlessingOfTheAncestorTree) 
+					|| hasEnchantment(EnchantmentLib.TfImmunity) || hasStatusEffect(StatusEffects.ArigeanInfected) || tailType == Tail.ARIGEAN_GREEN || tailType == Tail.ARIGEAN_RED || tailType == Tail.ARIGEAN_YELLOW || tailType == Tail.ARIGEAN_PRINCESS;
 		}
 
 		public function manticoreFeed():void {
@@ -7504,4 +7500,4 @@ use namespace CoC;
 			}
 		}		
 	}
-}
+}

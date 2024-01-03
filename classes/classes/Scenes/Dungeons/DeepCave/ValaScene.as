@@ -848,8 +848,7 @@ public class ValaScene extends BaseContent implements SaveableState
 				if (player.breastRows[0].breastRating < 4 && rand(3) == 0) growth++;
 			}
 			player.createPerk(PerkLib.TransformationImmunity2, 4, 0, 0, 0);
-			if (player.hasPerk(PerkLib.RacialParagon))
-				flags[kFLAGS.APEX_SELECTED_RACE] = Races.FAIRY;
+			if (player.hasPerk(PerkLib.RacialParagon)) flags[kFLAGS.APEX_SELECTED_RACE] = Races.FAIRY;
 			IMutationsLib.FeyArcaneBloodstreamIM.trueMutation = true;
 			player.removeAllRacialMutation();
 			player.createPerk(PerkLib.QueenOfTheFairies, 0, 0, 0, 0);

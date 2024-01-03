@@ -1175,6 +1175,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) counter++;
 		if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2 && !player.hasStatusEffect(StatusEffects.KonstantinOff)) counter++;
 		if (flags[kFLAGS.SIDONIE_FOLLOWER] >= 1) counter++;
+		if (flags[kFLAGS.THE_TRENCH_ENTERED] > 14) counter++;
 		if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
 		if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 0) counter++;
 		if (flags[kFLAGS.TIFA_FOLLOWER] > 5) counter++;
@@ -1294,6 +1295,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9 || ZenjiScenes.isLover()) counter++;
 		if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) counter++;
 		if (flags[kFLAGS.MITZI_RECRUITED] >= 4) counter++;
+		if (flags[kFLAGS.THE_TRENCH_ENTERED] > 14) counter++;
 		if (player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) counter++;
 		if (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) counter++;
 		if (followerKiha()) counter++;
@@ -1952,6 +1954,11 @@ public class Camp extends NPCAwareContent{
 				/*if (flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] >= 1)*/
 				outputText("Evangeline isn't in the [camp] as she went to buy some items. She should be out no longer than a few hours.\n\n");
 				//if () outputText("Evangeline is busy training now. She should be done with it in a few hours.\n\n");
+			}
+			//Grayda
+			if (flags[kFLAGS.THE_TRENCH_ENTERED] > 14) {
+				outputText("You can see Grayda patrolling the edges of the camp, keeping an eye out for any potential threats.");
+				buttons.add("Grayda", SceneLib.graydaScene.graydaMainWhenCalled).hint("Visit Grayda.").disableIf(player.statusEffectv2(StatusEffects.CampLunaMishaps3) > 0, "Grayda is still curled up underneath the water at the stream.");
 			}
 			//Kindra
 			if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) {
@@ -5289,4 +5296,4 @@ public function rebirthFromBadEnd():void {
 	}
 
 }
-}
+}

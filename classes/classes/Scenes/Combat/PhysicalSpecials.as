@@ -148,7 +148,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 						if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 					}
 					//Cancer Grab
-					if (player.lowerBody == LowerBody.CANCER) {
+					if (player.lowerBody == LowerBody.CANCER || player.rearBody.type == RearBody.ARIGEAN_PINCER_LIMBS) {
 						bd = buttons.add("Grab", combat.CancerGrab).hint("Grab your opponents with your pincers, then proceed to crush them.");
 						if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 					}
@@ -664,6 +664,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var isEnemyInvisible:Boolean = combat.isEnemyInvisible;
 		if (!player.isInGoblinMech() && !player.isInNonGoblinMech()) {
 			bd = buttons.add("Great Dive", combat.greatDive).hint("Make a Great Dive to deal TONS of damage!");
+			if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			if (player.isRaceCached(Races.FAIRY, 2) || player.isRaceCached(Races.FAERIEDRAGON)) bd.disable("You cannot use Great Dive due to been too small.");
 			//Embrace
 			if ((player.arms.type == Arms.BAT || player.wings.type == Wings.VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType)) {
@@ -3947,6 +3948,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				monster.armorDef -= debuff;
 				monster.createStatusEffect(StatusEffects.DefPDebuff, 3, debuff, 0, 0);
 			}
+			if (player.armor == armors.P_REGAL) HPChange(Math.round(damage*0.15), true);
 		}
 		else outputText("[Themonster] moves back just in time to avoid being crushed.");
 		outputText("\n\n");

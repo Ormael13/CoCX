@@ -2586,10 +2586,15 @@ public class SaveUpdater extends NPCAwareContent {
 				}
 				if (JourneyToTheEast.EvelynnPerksToStatsConvertCounter > 0) JourneyToTheEast.EvelynnCoreLimitBreakerCounter += JourneyToTheEast.EvelynnPerksToStatsConvertCounter;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.36;
-			}/*
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.40) {
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.40;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.40) {
+				if (flags[kFLAGS.THE_TRENCH_ENTERED] >= 1 && player.tailType != Tail.ARIGEAN_RED && player.tailType != Tail.ARIGEAN_YELLOW) {
+					flags[kFLAGS.THE_TRENCH_ENTERED] = 0;
+					player.removePerk(PerkLib.MiracleMetal);
+					player.tailType = Tail.NONE;
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.40;
+			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.50) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.50;
 			}

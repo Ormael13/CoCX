@@ -18,6 +18,7 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.NPCs.Grayda;
 import classes.internals.Utils;
 import classes.Races.ArigeanRace;
@@ -220,7 +221,7 @@ public function theTrenchEntrance():void {
 	addButtonIfTrue(0, "Quarters", theTrenchQuarters, "It's still too early to go to sleep.", isNightTime, "Turn yourself in for the night.");
 	addButton(1, "Equipment shop", theTrenchEquipmentShop);
 	addButton(2, "Food Stand", theTrenchFoodStand);
-	addButton(3, "Grayda", theTrenchGraydaQuestNPC);
+	addButtonIfTrue(3, "Grayda", theTrenchGraydaQuestNPC, "She's currently in your camp.", flags[kFLAGS.THE_TRENCH_ENTERED] < 15);
 	addButton(4, "Loiter", theTrenchLoiter);
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
@@ -231,7 +232,7 @@ private function theTrenchMain():void {
 	addButtonIfTrue(0, "Quarters", theTrenchQuarters, "It's still too early to go to sleep.", isNightTime, "Turn yourself in for the night.");
 	addButton(1, "Equipment shop", theTrenchEquipmentShop);
 	addButton(2, "Food Stand", theTrenchFoodStand);
-	addButton(3, "Grayda", theTrenchGraydaQuestNPC);
+	addButtonIfTrue(3, "Grayda", theTrenchGraydaQuestNPC, "She's currently in your camp.", flags[kFLAGS.THE_TRENCH_ENTERED] < 15);
 	addButton(4, "Loiter", theTrenchLoiter);
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
@@ -251,7 +252,7 @@ private function theTrenchQuarters():void {
 	else {
 		outputText("Standing at the doorway you see that the room is somewhat furnished, only possessing a set of beds and a table with chairs near the center, however other that it’s empty with no signs of anyone having claimed it for their own. Closing the door behind you, you walk towards one of the beds, and begin dressing out of your [armor] leaving it folded on the table.\n\n");
 		outputText("Giving your body a few stretches, you collapse onto the bed, and retreat into the covers your ");
-		if (flags[kFLAGS.THE_TRENCH_ENTERED] >= 15) outputText("large extra mouth hanging off the bed due to its massive size");
+		if (player.tailType == Tail.ARIGEAN_PRINCESS) outputText("large extra mouth hanging off the bed due to its massive size");
 		else if (player.tailType == Tail.ARIGEAN_RED || player.tailType == Tail.ARIGEAN_YELLOW) outputText("symbiotic friend wrapping itself around your waist to stay close to the warmth your body offers");
 		else outputText("parasitic partner partner wrapping itself around your waist to stay close to the warmth your body offers");
 		outputText(", and before long you’ve drifted off to the sweet bliss of sleep.\n\n");
@@ -273,6 +274,7 @@ private function theTrenchEquipmentShop():void {
 	addButton(0, "AN-CU", theTrenchEquipmentShopArigeanNeClassUniform).hint("Arigean Ne-Class Uniform");
 	addButton(1, "A.Club", theTrenchEquipmentShopArigeanClub).hint("Arigean Club");
 	addButton(2, "A.Spear", theTrenchEquipmentShopArigeanSpear).hint("Arigean Spear");
+	addButtonIfTrue(3, "P.Regalia", theTrenchEquipmentShopPrincessRegalia, "Req. finished Coronbation quest.", player.tailType == Tail.ARIGEAN_PRINCESS);
 	addButton(14, "Back", theTrenchMain);
 }
 private function theTrenchEquipmentShopArigeanNeClassUniform():void {
@@ -286,6 +288,10 @@ private function theTrenchEquipmentShopArigeanClub():void {
 private function theTrenchEquipmentShopArigeanSpear():void {
 	outputText("\"<i>A weapon is… a weapon… you’ll find it hits… much harder the lower… your magical energy is… I can provide one for...  1040 gems… as it’s a spear… it should pierce armor… and flesh quite easily.</i>\"\n\n");
 	doYesNo(Utils.curry(theTrenchEquipmentShopBuy,weapons.ARI_SPR), theTrenchEquipmentShop);
+}
+private function theTrenchEquipmentShopPrincessRegalia():void {
+	outputText("\"<i>Princess… did you lose your… regalia? Don’t worry… we can request… a new one to… be made… but it won’t… be cheap... prepare… yourself for a scolding… from your fellow princesses… up north…</i>\"\n\n");
+	doYesNo(Utils.curry(theTrenchEquipmentShopBuy,armors.P_REGAL), theTrenchEquipmentShop);
 }
 public function theTrenchEquipmentShopBuy(itype:ItemType):void {
 	clearOutput();
@@ -502,7 +508,8 @@ private function theTrenchGraydaQuestNPCMissions():void {
 	}
 	else addButtonDisabled(4, "???", "Req. to finish previous mission and have lvl 24+.");
 	if (player.level >= 30 && flags[kFLAGS.THE_TRENCH_ENTERED] >= 12) {
-		if (flags[kFLAGS.THE_TRENCH_ENTERED] == 13) addButtonDisabled(10, "Coronation", "You still need to find: Four Ebonblooms, a Silver ingot and ‘Liquid Diamond’.");
+		if (player.hasItem(useables.EBONBLO, 4) && player.hasItem(useables.S_INGOT, 1) && player.hasKeyItem("Liquid Diamond")) addButton(10, "Coronation", theTrenchGraydaQuestNPCMissionsCoronationFinalPart1).hint("IF YOU CLICK THIS BUTTON CHARACTER WILL BECOME PERNAMENTLY ARIGEAN PRINCESS!!!");
+		else if (flags[kFLAGS.THE_TRENCH_ENTERED] >= 13 && flags[kFLAGS.THE_TRENCH_ENTERED] < 14) addButtonDisabled(10, "Coronation", "You still need to find: Four Ebonblooms, a Silver ingot and ‘Liquid Diamond’.");
 		else addButton(10, "Coronation", theTrenchGraydaQuestNPCMissionsCoronation);
 	}
 	else addButtonDisabled(10, "???", "Req. to have lvl 30+ and special event triggering at the camp.");
@@ -619,7 +626,7 @@ private function theTrenchGraydaQuestNPCMissionsCoronation():void {
 	outputText("She straightens her back before continuing. \"<i>If you choose to go down this path you’ll bear the burden of leading our kind. This is a choice only you can make however, and I know this might be sudden, but would you be willing to go through with this?</i>\"\n\n");
 	menu();
 	addButton(1, "No", theTrenchGraydaQuestNPCMissionsCoronationNo);
-	addButton(3, "Yes", theTrenchGraydaQuestNPCMissionsCoronationYes).hint("IT LEADS TO PERNAMENT TRANSFORMATION AFTER FINISHING THIS QUEST. ARE YOU SURE YOU WANT CONTIUNUE?");
+	addButton(3, "Yes", theTrenchGraydaQuestNPCMissionsCoronationYes).hint("IT LEADS TO PERNAMENT TRANSFORMATION AFTER FINISHING THIS QUEST. ARE YOU SURE YOU WANT CONTINUE?");
 }
 private function theTrenchGraydaQuestNPCMissionsCoronationNo():void {
 	clearOutput();
@@ -641,9 +648,98 @@ private function theTrenchGraydaQuestNPCMissionsCoronationYes():void {
 	flags[kFLAGS.THE_TRENCH_ENTERED] = 13;
 	doNext(theTrenchGraydaQuestNPCMissions);
 }
+private function theTrenchGraydaQuestNPCMissionsCoronationFinalPart1():void {
+	clearOutput();
+	player.removeKeyItem("Liquid Diamond");
+	player.destroyItems(useables.S_INGOT, 1);
+	player.destroyItems(useables.EBONBLO, 4);
+	outputText("Grayda seems to be waiting for you as you surface into the underwater abode with the required items you were asked to fetch.\n\n");
+	outputText("\"<i>There you are. They’ve just arrived, but before we go to meet them I'm going to have to ask you to follow me.</i>\" Only now have you noticed the strange parcel she seems to be holding, but before you can ask about it, she’s already taken you by the hand and started dragging you.\n\n");
+	outputText("Eventually, you both end up back in Grayda’s room, with Grayda herself placing the box on her bed before carefully cutting it open to reveal a white and black dress with multiple black metal plates attached at various different parts.\n\n");
+	outputText("Taking the still folded dress, she offers it to you. \"<i>This is yours now. Please put it on before we go meet them, I’ll be waiting for you outside, but first, could you hand me the items you gathered?</i>\" Giving her the things she had you go around gathering, she leaves, allowing you to dress in private.\n\n");
+	outputText("Surprisingly it fits extremely well, practically hugging your skin save for the areas which are exposed. It opens up in the front starting at your collar and ending above your navel, framed with a darker black cloth. A few stripes around the white dress are black and move are patterned in intricate ways. The sides of your shoulders are also uncovered, and framed by black stripes. The dress seems to have gloves attached to it's sleeves, one being black and the other being fingerless and white. Your dress ends in a skirt with various black, metal stars which seem to act as decorative protection. ");
+	outputText("Around your arms are a pair of loose-fitting metal armbands with a crown-like shape. A few more pieces seem to be left in the box which aren’t attached to the dress, which seems to be a black, metal, lower face mask as well as a black tiara with stars on the side. Deciding it would be best to equip these as well, you do so, and finally exit the room with Grayda standing outside as promised.\n\n");
+	outputText("Her eyes seem to roam over your body before she speaks. \"<i>It looks good on you, now come on I think we’ve wasted enough time. Please allow me to lead the way.</i>\"\n\n");
+	outputText("Following her closely behind you both eventually end up in the commons, which seems to be extremely busy currently. If you were to take a guess you’d say everyone who lives here is currently present and maybe a couple more. However, the pair in the center back draw your attention due to their blue coloring, and intimidating presence. Coincidentally that’s just where Grayda is leading you to.\n\n");
+	outputText("She hands you a sack containing the items you gathered before whispering something in your ear. \"<i>You see that pedestal between those two in the center back? You're going to mix those items you gathered in the bowl there, and drink it up after talking to them, Clear</i>\"\n\n");
+	outputText("You tell her that yes you understand and proceed to greet the two in the back. The one on the left seems to possess extremely long white hair and a long white dress to match, and a few black metal shards seem to stick out of various parts of her body, completely covering her right eye, the other seemingly judging you for every action you do.\n\n");
+	outputText("The other on the right seems to be wearing a tight-fitting dress which shows off her busty figure. Two symbiotic partners seem to sprout from the rear of her hips, acting extremely similar to your own. Her white hair seems to cover her left eye, and she also is adorned with a strange, lopsided, crest-like crown. Her eye seem to be practically bathing in every inch of skin you show.\n\n");
+	outputText("\"<i>So you're the new blood Grayda was talking about? You must be something special to rise through the ranks this quickly.</i>\" The one on the right bluntly remarks in an aggressive tone.\n\n");
+	outputText("\"<i>Aww, go easy on the girl. She’s about to become a princess, after all, surely she has more experience than you're giving her credit for.</i>\"\n\n");
+	outputText("\"<i>Very well then ‘Princess’. Let’s get this over with.</i>\" She gestures you forth to the bowl on the pedestal.\n\n");
+	outputText("Now you just mix up what you gathered, right? That doesn’t sound all too hard. Noticeably all the chatter in the room goes silent as you proceed to start creating the supposed mixture, starting with the liquid diamond, then sprinkling in the ebonblooms, which seem to quickly erode and caused the liquid to take on a dark gray, and lastly the silver ingot which almost immediately dissolves while turning the fluid into a bioluminescent blue. Strangely enough, the liquid smells scentless if not a bit smokey.\n\n");
+	outputText("You carefully and slowly lift the bowl and proceed to start consuming the contents. At first, it tastes almost indescribably pleasant, however once it’s all down a burning sensation grips at your throat as you start to breathe heavily. You lean on the pedestal for support as that burning feeling seems to spread throughout your entire body as it devolves into an unbearable, bone-breaking pain, and you quickly start losing your senses one by one before blacking out from the pain.\n\n");
+	outputText("W-where? Where are you? Are the only thoughts you are able to muster as you look around the ruined barracks. Oh right, you were resting in your assigned room with your ‘sisters’ A-6 and D-4 before an explosion went off somewhere outside. If you were to take a guess, You got knocked unconscious while your ‘siblings’ went off to fight whatever the threat was. After all, that’s the reason why you, your ‘sisters’ and the other Árthach Homunculi were created.\n\n");
+	outputText("Exiting your designated resting place, you're greeted by the sight of your beloved city rapidly flooding, clearly whatever fight happened was one you already lost. Collapsing to your knees you can’t help, but just stare at the sight of your falling city. It was your duty to protect its walls and it's people, and you’ve already failed without even being given a chance.\n\n");
+	outputText("You slam your armored fist into the ground, cracking the stone. This can’t be it, can it? Surely there are still survivors out there who need help, and what about your dear sisters? Surely they didn’t all perish, but what’s the point of trying to get them to safety if you're all trapped miles below the ocean?\n\n");
+	outputText("You slap yourself in the face with both of your hands. Get a grip on yourself B-8! Something about this situation seems very wrong, the entire city is absolutely silent, and you’ve yet to see a single body anywhere. Maybe they were able to get to safety? But then why would your sisters just leave you behi-\n\n");
+	outputText("Suddenly a powerful blast hits you square in the back, knocking you off the ground, and slamming you into a nearby wall with a sickening crunch as a piece of debris falls off the building onto your ribs, your body doesn’t want to respond to orders as you and your armored extra limbs just lay limply on the ground as pain fills your every nerve. A slick tentacle seems to lift your broken body, and facing you towards your aggressor.\n\n");
+	outputText("Where this humanoid creature’s legs would be, instead are a mass of tentacles, and instead of hair, possesses many tentacles with more eyes than any being should have. Her curvy figure seems to sway as she lightly shakes your broken form around.\n\n");
+	outputText("\"<i>My my my, it seems we almost missed one.</i>\" Her voice seems to taunt you as she seems to move one of her tentacles towards your metal adorned ear. \"<i>I'm going to have fun breaking you~</i>\" and before you can even resist it’s plunged into your mind.\n\n");
+	outputText("She proceeds to fuck both your body and mind for what feels like hours, all the while you're in some delirious haze as your mouth sings words that aren’t yours after each of the countless orgasms your quickly corrupting body experiences. Eventually, your internal injuries and presumably many broken bones become too much for your body to handle, and your heart slowly comes to a halt.\n\n");
+	outputText("\"<i>Eh? Did I play with my toy too hard? Dammit! I didn’t even get to wrap her into the fold.</i>\" She tosses your limp, cold body to the side.\n\n");
+	outputText("It hurts… so much…\n\n");
+	outputText("Your consciousness slowly comes to halt as your body feels like it’s overloading with foul otherworldly magic. However, before you slip into the dark, you're able to see a light blue glow emanating from where your heart used to beat, spreading an icy cold sensation to every part it touches.\n\n");
+	if (player.hasPerk(PerkLib.RacialParagon)) flags[kFLAGS.APEX_SELECTED_RACE] = Races.ARIGEAN;
+	IMutationsLib.ArigeanAssociationCortexIM.trueMutation = true;
+	player.removeAllRacialMutation();
+	player.tailType = Tail.ARIGEAN_PRINCESS;
+	player.rearBody.type = RearBody.ARIGEAN_PINCER_LIMBS;
+	player.eyes.type = Eyes.ARIGEANPRINCESS;
+	player.createPerk(PerkLib.AlteredAnima, 0, 0, 0, 0);
+	player.createPerk(PerkLib.ArigeanKnowledge, 0, 0, 0, 0);
+	doNext(theTrenchGraydaQuestNPCMissionsCoronationFinalPart2);
+}
+private function theTrenchGraydaQuestNPCMissionsCoronationFinalPart2():void {
+	clearOutput();
+	outputText("\"<i>...Princ-... tartin… sti…</i>\"\n\n");
+	outputText("Your senses feel like their beginning to come back to you. You feel like you’ve been wrapped in a blanket, and it sounds like a voice seems to be calling out to you.\n\n");
+	outputText("\"<i>Awww, can’t I cuddle her for just a bit longer?</i>\"\n\n");
+	outputText("\"<i>I would prefer if you allowed her some space, Princess.</i>\"\n\n");
+	outputText("Was that Grayda? Maybe you should try opening your eyes to see what’s going on. But you feel so warm and cozy, you could stay here for an eternity.\n\n");
+	outputText("\"<i>Alice? What in the twelve hells are you doing with her?!</i>\" a rather coarse and aggressive voice seems to have entered the room, something about it seems somewhat familiar, but everything still feels hazy and surreal.\n\n");
+	outputText("\"<i>Am I not allowed to have a little fun with the new-blood? It feels like having a little sister, just look how cute she is!</i>\" you can feel her lightly pinch your cheek.\n\n");
+	outputText("The situation feels like it’s becoming much more real. This isn’t a blanket wrapped around you! It’s someone! Opening your eyes you notice at least 3 other people in the room; The princess with the crown who seems to be wrapped around your smaller body, Grayda who seems to be trying to get you out of the grasps of the said princess, and the princess who’s missing an eye, she seems to have her other princess quite literally by the tail.\n\n");
+	outputText("\"<i>W-Wait! Let go of my tail! I swear I’ll stop!</i>\"\n\n");
+	outputText("\"<i>If you're going to act like a cuddle slut then expect to be treated like a cuddle slut</i>\" She yanks her companion by the tail, causing her to fall off the bed and onto the floor.\n\n");
+	outputText("\"<i>N-No please! I'm sorry! No WA-</i>\" her screams are cut short as she’s dragged out of the room with the door slamming behind her, leaving only you and Grayda.\n\n");
+	outputText("Grayda turns her yellow orbs from the door onto you before speaking. \"<i>How are you feeling, my princess?</i>\"\n\n");
+	outputText("You can’t help but repeat the last word of her sentence. Princess?\n\n");
+	outputText("Her eyes seem to slightly widen. \"<i>Have you forgotten about what has occurred? You were named the new southern Princess of the trench. Surely you’ve noticed by now how you’ve changed.</i>\"\n\n");
+	outputText("To be honest, your memory of the event feels quite hazy, but you suppose that more has to do with you blacking out. But looking over your body a feeling of shock and awe overtakes you at the new glorious changes. Your tails seem to have merged into an intimidating extra lipless maw with bioluminescent blue highlights, it looks as though it can be easily rested upon. A pair of crab-like claws sprout from near the base of your tail which are coated in a black metal armor. It seems your aura has dissipated, but your extra maw seems to occasionally exhale a dark blue haze every so often. On top of your body feeling sore, it also feels significantly stronger, but your head feels like it’s been split in half and taped together.\n\n");
+	outputText("\"<i>If you’d like, my princess, I could share my room with you until we make your own private chambers.</i>\"\n\n");
+	outputText("Here? You pause for a moment as you try to think of how to explain this to her. Your currently duty-bound to guarding a portal to your homeland on the surface, you, by all means, can’t leave it unguarded.\n\n");
+	outputText("Before Grayda can even begin to speak, a pair of disheveled princesses re-enter the room. With the more bubbly of the pair speaking up first.\n\n");
+	outputText("\"<i>You're also from another world?</i>\" she pauses before closing her eyes and humming for a couple of seconds before snapping her fingers. \"<i>This could be a perfect opportunity for us to get a decent piece of territory on the surface! Grayda! You are to act as the new-blood's loyal retainer and join her on the surface to establish a decent settlement!</i>\"\n\n");
+	outputText("\"<i>W-Wait isn’t this a bit sudden? What of the Arigeans here? Who will lead them?</i>\"\n\n");
+	outputText("The other princess seems to catch on to her companion's train of thought. \"<i>Don’t worry. We’ll assign another Countess to overlook those here. Now get going, we’ll handle the ordeals here, and new-blood! This is an opportunity to prove yourself.</i>\" Before you can protest their sudden orders, they are already gone.\n\n");
+	outputText("Grayda turns toward you before letting out a short sigh. \"<i>My apologies Princess, but it seems I’ll be staying with you for a while. Would you mind if I asked if you could help me pack?</i>\"\n\n");
+	outputText("One long walk later and a few stops has you successfully returned to camp with Grayda in tow. Mayhaps it would be a good idea to show her around, and introduce her to everyone?\n\n");
+	if (player.hasStatusEffect(StatusEffects.PureCampJojo)) {
+		outputText("Before you can even continue with that thought, you feel something land and hit you square in the chest, effectively stealing the air from your very lungs.\n\n");
+		outputText("\"<i>[name]? I'm so sorry! Are you alright?</i>\" Jojo seems to have been your aggressor, but honestly, you're still in a bit of shock from the sudden attack.\n\n");
+		outputText("You gently tell him that you're alright and try to give him a smile, but he’s looking at you as if you just told him the grass was purple.\n\n");
+		outputText("He gives you a wary look before speaking. \"<i>Very well [name]... but you reek of corruption. I would suggest joining me in meditating soon.</i>\" And with the small mouse boy leaves.\n\n");
+		outputText("\"<i>Is this a common occurrence?</i>\" Grayda seemed to be quite bewildered by the sudden series of events that just occurred.\n\n");
+		outputText("You give her a light smile and tell her it happens every so often.\n\n");
+	}
+	outputText("After giving her a tour of the camp, and attempting to calm those shocked by your sudden change of appearance, as well as introducing Grayda to the various inhabitants. You both eventually end up in your place of rest.\n\n");
+	outputText("\"<i>My Princess, unfortunately, I am not so gifted when it comes to creating shelter, would you mind if I stayed here? I’ll use my own bedroll.</i>\" She pats the rather large bag she’s been carrying around for emphasis.\n\n");
+	outputText("You suppose you could, after all, she’s been so generous and kind towards you already.\n\n");
+	outputText("\"<i>Thank you, my Princess. Now if you don’t mind, I'm going to start unpacking.</i>\"\n\n");
+	outputText("You take that as your cue to leave and give her a small wave before attending to your other duties for the day.\n\n");
+	outputText("\n\n(<b>Grayda has been added to the Followers menu!</b>)\n\n");
+	outputText("\n\n<b>As if remembering something Grayda pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
+	if (player.hasKeyItem("Radiant shard") >= 0){
+		player.addKeyValue("Radiant shard",1,+1);
+	}
+	else player.createKeyItem("Radiant shard", 1,0,0,0);
+	flags[kFLAGS.THE_TRENCH_ENTERED] = 15;
+	SceneLib.inventory.takeItem(armors.P_REGAL, camp.returnToCampUseEightHours);
+}
 private function theTrenchLoiter():void {
 	clearOutput();
-	outputText("Looking around the commons, you decide there shouldn’t be much harm in just relaxing for a while. Finding a nearby table and chair, you sit down, fold your arms and rest your head in them as you shut your eyes for a bit. However the chattering of individuals seems to draw your attention, surely they wouldn’t mind if you listened in, right? "+(flags[kFLAGS.THE_TRENCH_ENTERED] >= 15 ? "Afterall it wouldn’t hurt to know what’s on your subject’s minds. ":"")+"Your ears twitch as you strain your hearing, determined to hear your surroundings.\n\n");
+	outputText("Looking around the commons, you decide there shouldn’t be much harm in just relaxing for a while. Finding a nearby table and chair, you sit down, fold your arms and rest your head in them as you shut your eyes for a bit. However the chattering of individuals seems to draw your attention, surely they wouldn’t mind if you listened in, right? "+(player.tailType == Tail.ARIGEAN_PRINCESS ? "Afterall it wouldn’t hurt to know what’s on your subject’s minds. ":"")+"Your ears twitch as you strain your hearing, determined to hear your surroundings.\n\n");
 	var option:Number = rand(4);
 	switch (option) {
         case 0:

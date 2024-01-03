@@ -1211,7 +1211,7 @@ public class Exploration extends BaseContent implements SaveableState
 						kind  : "place",
 						unique: true,
 						when  : function ():Boolean {
-							return !player.hasStatusEffect(StatusEffects.TelAdre);
+							return (!player.hasStatusEffect(StatusEffects.TelAdre) || player.statusEffectv1(StatusEffects.TelAdre) < 1);
 						},
 						call  : SceneLib.telAdre.discoverTelAdre
 					}, {

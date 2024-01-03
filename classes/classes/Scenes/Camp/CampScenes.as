@@ -167,6 +167,7 @@ public function PeepingTom3():void {
 	if (flags[kFLAGS.NADIA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.NadiaOff)) outputText("Nadia is resting next to a set of medicinal and aromatic oils she regularly spray in the bath.\n\n");
 	//if (flags[kFLAGS.MICHIKO_FOLLOWER] >= 1) Michiko
 	if (flags[kFLAGS.MITZI_RECRUITED] >= 4) outputText("Your resident goblin Mitzi saunters over, looking excited. She strips what little clothing she wears then climbs into the warm waters. Her large tits help her stay afloat as she lays back and relaxes, letting out a sigh of relief.\n\n");
+	if (flags[kFLAGS.THE_TRENCH_ENTERED] > 14) outputText("You can see Grayda staying close to you. However, she seems to be fighting the urge to fall asleep in the comfort of the warm water.\n\n");
 	if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) outputText("Excellia comes over to enjoy the soothing waters. She climbs in, letting out a content [exc moo] as she lays back letting the warm waters wash over her.\n\n");
 	if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) outputText("Luna is enjoying a break relaxing for once as she is not on duty" + (flags[kFLAGS.LUNA_FOLLOWER] > 6 ? ", though for a few split second you imagined her doing doggy paddle in the water" : "") + ".\n\n");
 	if (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] > 0 && flags[kFLAGS.ARIAN_COCK_SIZE] == 0) outputText("Arian while formerly a male seems to get along with the other girls.\n\n");
