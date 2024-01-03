@@ -550,6 +550,7 @@ private function theTrenchGraydaQuestNPCMissionsProvingYourself():void {
 		transformations.RearBodyArigeanAuraRed.applyEffect(false);
 		player.destroyItems(useables.SEVTENT, 2, true);
 		flags[kFLAGS.THE_TRENCH_ENTERED] = 5;
+		player.eyes.colour = "red";
 		advanceMinutes(90);
 	}
 	else {
@@ -601,6 +602,7 @@ private function theTrenchGraydaQuestNPCMissionsTrackingTheMonstrosity():void {
 		flags[kFLAGS.THE_TRENCH_ENTERED] = 11;
 		transformations.TailArigeanYellow.applyEffect(false);
 		transformations.RearBodyArigeanAuraYellow.applyEffect(false);
+		player.eyes.colour = "yellow";
 		advanceMinutes(90);
 	}
 	else {
@@ -686,6 +688,7 @@ private function theTrenchGraydaQuestNPCMissionsCoronationFinalPart1():void {
 	player.tailType = Tail.ARIGEAN_PRINCESS;
 	player.rearBody.type = RearBody.ARIGEAN_PINCER_LIMBS;
 	player.eyes.type = Eyes.ARIGEANPRINCESS;
+	player.eyes.colour = "blue";
 	player.createPerk(PerkLib.AlteredAnima, 0, 0, 0, 0);
 	player.createPerk(PerkLib.ArigeanKnowledge, 0, 0, 0, 0);
 	doNext(theTrenchGraydaQuestNPCMissionsCoronationFinalPart2);
@@ -735,7 +738,7 @@ private function theTrenchGraydaQuestNPCMissionsCoronationFinalPart2():void {
 	}
 	else player.createKeyItem("Radiant shard", 1,0,0,0);
 	flags[kFLAGS.THE_TRENCH_ENTERED] = 15;
-	SceneLib.inventory.takeItem(armors.P_REGAL, camp.returnToCampUseEightHours);
+	SceneLib.inventory.takeItem(armors.P_REGAL, camp.returnToCampUseTwelveHours);
 }
 private function theTrenchLoiter():void {
 	clearOutput();
@@ -799,4 +802,4 @@ public function theTrench111():void {
 	outputText("\"<i></i>\"\n\n");
 }
 	}
-}
+}

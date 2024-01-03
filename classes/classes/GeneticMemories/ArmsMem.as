@@ -710,7 +710,7 @@ import classes.CoC;
             cost: 100,
             title: "Arigean",
             transformation: function(): Transformation {
-                return CoC.instance.transformations.ArmsAbyssalShark;
+                return CoC.instance.transformations.ArmsArigean;
             }
         });
 
@@ -721,7 +721,7 @@ import classes.CoC;
 			cost: 100,
 			title: "Demon",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.ArmsDevil;
+				return CoC.instance.transformations.ArmsDemon;
 			}
 		});
 

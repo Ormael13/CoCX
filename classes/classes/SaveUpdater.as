@@ -2594,6 +2594,13 @@ public class SaveUpdater extends NPCAwareContent {
 					player.tailType = Tail.NONE;
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.40;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.42) {
+				outputText("\n\nArigeans likes their eyes like their tails...in matching colors ;)");
+				if (player.tailType == Tail.ARIGEAN_RED) player.eyes.colour = "red";
+				if (player.tailType == Tail.ARIGEAN_YELLOW) player.eyes.colour = "yellow";
+				if (player.tailType == Tail.ARIGEAN_PRINCESS) player.eyes.colour = "blue";
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.42;
 			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.50) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.50;
@@ -2623,4 +2630,4 @@ public class SaveUpdater extends NPCAwareContent {
 		}
 	}
 }
-}
+}
