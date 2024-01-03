@@ -4356,98 +4356,44 @@ public class Creature extends Utils
 		public function getEvasionChance():Number
 		{
 			var chance:Number = 0;
-			var flychance:Number = 20;
-			if (hasPerk(PerkLib.AdvancedAerialCombat)) flychance += 5;
-			if (hasPerk(PerkLib.GreaterAerialCombat)) flychance += 15;
-			if (perkv1(IMutationsLib.HarpyHollowBonesIM) >= 2) flychance += 10;
-			if ((game.player.hasKeyItem("Jetpack") >= 0 || game.player.hasKeyItem("MK2 Jetpack") >= 0) && game.player.isInGoblinMech()) flychance += 25;
-			if (hasPerk(PerkLib.Evade)) {
-				chance += 5;
-				if (hasPerk(PerkLib.ImprovedEvade)) chance += 10;
-				if (hasPerk(PerkLib.GreaterEvade)) chance += 15;
-				if (hasPerk(PerkLib.JobRogue)) chance += 5;
-				if (hasPerk(PerkLib.Spectre) && hasPerk(PerkLib.Incorporeality)) chance += 10;
+
+			if (hasPerk(PerkLib.GreaterEvade)) chance += 15;
+			else if (hasPerk(PerkLib.ImprovedEvade)) chance += 10;
+			else if (hasPerk(PerkLib.Evade)) chance += 5;
+
+			if (hasPerk(PerkLib.JobRogue)) chance += 5;
+			if (hasPerk(PerkLib.Spectre) && hasPerk(PerkLib.Incorporeality)) chance += 10;
+			if (hasPerk(PerkLib.ElvenSense)) chance += 5;
+
+			if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) chance += 15;
+			else if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 2) chance += 10;
+
+			if (isFlying()) {
+				if (hasPerk(PerkLib.GreaterAerialCombat)) chance += 20;
+				else if (hasPerk(PerkLib.AdvancedAerialCombat)) chance += 10;
+				else chance += 5;
+			} else {
+				chance += (evadeStat.value * (game.time.hours < 7 || game.time.hours > 19? 2:1));
 			}
-			if (hasPerk(PerkLib.ElvenSense)) {
-				chance += 5;
-				if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 2) chance += 10;
-				if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) chance += 15;
-			}
+
+			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 4) chance += 20;
+			else if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 3) chance += 15;
+			else if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 2) chance += 10;
+			else if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1) chance += 5;
+
 			if (hasPerk(PerkLib.Flexibility)) chance += 6;
+
 			if (hasPerk(PerkLib.SmallFrame)) chance += 6;
-			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1) chance += 5;
-			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 2) chance += 5;
-			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 3) chance += 10;
-			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 4) chance += 10;
-			if (hasPerk(PerkLib.Misdirection) && (armorName == "red, high-society bodysuit" || armorName == "Fairy Queen Regalia")) chance += 10;
-			//if (hasPerk(PerkLib.Unhindered) && meetUnhinderedReq()) chance += 10;
-			if (hasPerk(PerkLib.Unhindered) && game.player.armor.hasTag(ItemTags.A_AGILE)) chance += 10;
-			if (game.player.armor == game.armors.R_CHANG || game.player.armor == game.armors.R_QIPAO || game.player.armor == game.armors.G_CHANG || game.player.armor == game.armors.G_QIPAO || game.player.armor == game.armors.B_CHANG || game.player.armor == game.armors.B_QIPAO || game.player.armor == game.armors.P_CHANG || game.player.armor == game.armors.P_QIPAO) chance += 5;
-			if (game.player.hasKeyItem("Spring Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) chance += 10;
-			if (game.player.hasKeyItem("Rocket Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) chance += 20;
-			if (game.player.hasKeyItem("Nitro Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) chance += 30;
-			if (game.player.necklace == game.necklaces.LEAFAMU) {
-				if (game.player.isElf()) chance += 20;
-				else chance += 10;
-			}
+
 			if (hasPerk(PerkLib.JunglesWanderer)) chance += 35;
+
 			if (hasStatusEffect(StatusEffects.Illusion)) {
-				if (perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3) chance += 30;
-				else chance += 10;
+				var illDodgeChance:int = 10;
+				if (perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3) illDodgeChance += 20;
+				chance += illDodgeChance;
 			}
-			if (hasStatusEffect(StatusEffects.HurricaneDance)) chance += 25;
+
 			if (hasStatusEffect(StatusEffects.BladeDance)) chance += 30;
-			if (game.player.isRace(Races.CHESHIRE)) {
-				if (hasStatusEffect(StatusEffects.EverywhereAndNowhere)) chance += 80;
-				else chance += 30;
-			}
-			if (game.player.isRace(Races.DISPLACERBEAST)) {
-				if (hasStatusEffect(StatusEffects.Displacement)) chance += 80;
-				else chance += 30;
-			}
-			if (hasStatusEffect(StatusEffects.Displacement)) chance += 60;
-			if (game.player.shieldPerk == "Large" && !hasPerk(PerkLib.GigantGrip)) chance -= 20;
-			if (game.player.shieldPerk == "Massive") {
-				if (!hasPerk(PerkLib.GigantGrip)) chance -= 75;
-				else chance -= 30;
-			}
-			if (hasPerk(PerkLib.SereneMind) && (hasStatusEffect(StatusEffects.Berzerking) || hasStatusEffect(StatusEffects.Lustzerking))) chance += 10;
-			chance += evadeStat.value * (game.time.hours < 7 || game.time.hours > 19? 2:1);
-			if (game.player.hasStatusEffect(StatusEffects.Snow) && game.player.tallness < 84) chance -= 50;
-			if (hasPerk(PerkLib.ElementalBody)) {
-				switch (ElementalRace.getElementAndTier(this)) {
-					case ElementalRace.SYLPH_1:
-						chance += 10;
-						break;
-					case ElementalRace.SYLPH_2:
-						chance += 20;
-						break;
-					case ElementalRace.SYLPH_3:
-						chance += 30;
-						break;
-					case ElementalRace.SYLPH_4:
-						chance += 40;
-						break;
-					case ElementalRace.IGNIS_1:
-					case ElementalRace.UNDINE_1:
-						chance += 5;
-						break;
-					case ElementalRace.IGNIS_2:
-					case ElementalRace.UNDINE_2:
-						chance += 10;
-						break;
-					case ElementalRace.IGNIS_3:
-					case ElementalRace.UNDINE_3:
-						chance += 15;
-						break;
-					case ElementalRace.IGNIS_4:
-					case ElementalRace.UNDINE_4:
-						chance += 20;
-						break;
-				}
-			}
-			if (hasStatusEffect(StatusEffects.Flying)) chance += flychance;
-			if (hasStatusEffect(StatusEffects.GreenCovenant)) chance = 0;
 			return chance;
 		}
 
@@ -4482,6 +4428,7 @@ public class Creature extends Utils
 			var evasionReason:String;
 			if (!dodgeArray) dodgeArray = [];
 			if (considerBlindSpeed && attackSpeed != int.MIN_VALUE && spe - attackSpeed > 0 && calcSpeedDodge(attackSpeed) > 0) return EVASION_SPEED;
+			if (hasStatusEffect(StatusEffects.GreenCovenant)) return null;
 
 			var evadeChance:int = 0;
 

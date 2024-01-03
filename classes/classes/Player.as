@@ -3863,6 +3863,47 @@ use namespace CoC;
 			return damage;
 		}
 
+		/**
+		* Look into perks and special effects and @return summery extra chance to avoid attack granted by them.
+		*/
+		override public function getEvasionChance():Number {
+			var chance:Number = 0;
+
+			if (tallness < 48 && isBiped() && !isFlying()) {
+				var goblinDodgeChance:int = 0;
+				if (hasKeyItem("Spring Boots") >= 0) goblinDodgeChance = 10;
+				else if (hasKeyItem("Rocket Boots") >= 0) goblinDodgeChance = 20;
+				else if (hasKeyItem("Nitro Boots") >= 0) goblinDodgeChance = 30;
+				chance += goblinDodgeChance;
+			}
+
+			if (hasPerk(PerkLib.Misdirection) && armor.hasTag(ItemTags.A_AGILE)) chance += 10;
+			if (hasPerk(PerkLib.Unhindered) && armor.hasTag(ItemTags.A_AGILE)) chance += 10;
+			if (CombatAbilities.HurricaneDance.isActive()) chance += 25;
+
+			if (isRace(Races.FAIRY)) {
+				var fairyDodgeChance:int = 30;
+				if (hasStatusEffect(StatusEffects.Minimise)) fairyDodgeChance += 50;
+				chance += fairyDodgeChance;
+			}
+
+			if (isRace(Races.CHESHIRE)) {
+				var chesDodgeChance:int = 30;
+				if (hasStatusEffect(StatusEffects.EverywhereAndNowhere)) chesDodgeChance += 50;
+				chance += chesDodgeChance;
+			}
+
+			if (isRace(Races.DISPLACERBEAST)) {
+				var disDodgeChance:int = 30;
+				if (hasStatusEffect(StatusEffects.Displacement)) disDodgeChance += 50;
+				chance += disDodgeChance;
+			}
+
+			chance += super.getEvasionChance();
+			if (hasStatusEffect(StatusEffects.GreenCovenant) || canAutoHit()) chance = 0;
+			return chance;
+		}
+
 		override public function canAutoHit():Boolean {
 			return flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1 && flags[kFLAGS.WAIT_STAND_STILL] == 1;
 		}

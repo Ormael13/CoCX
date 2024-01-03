@@ -1062,6 +1062,19 @@ import classes.Scenes.Combat.CombatAbilities;
 			return mult;
 		}
 
+		/**
+		* Look into perks and special effects and @return summery extra chance to avoid attack granted by them.
+		*/
+		override public function getEvasionChance():Number {
+			var chance:Number = 0;
+
+			if (hasStatusEffect(StatusEffects.HurricaneDance)) chance += 25;
+
+			chance += super.getEvasionChance();
+			if (hasStatusEffect(StatusEffects.GreenCovenant) || canAutoHit()) chance = 0;
+			return chance;
+		}
+
 		override public function canAutoHit():Boolean {
 			return hasPerk(PerkLib.NoDodges);
 		}
