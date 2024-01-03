@@ -4427,8 +4427,9 @@ public class Creature extends Utils
 		public function getEvasionReason(considerBlindSpeed:Boolean = true, attackSpeed:int = int.MIN_VALUE, hitModifier:int = 0, dodgeArray:Array = null):String {
 			var evasionReason:String;
 			if (!dodgeArray) dodgeArray = [];
-			if (considerBlindSpeed && attackSpeed != int.MIN_VALUE && spe - attackSpeed > 0 && calcSpeedDodge(attackSpeed) > 0) return EVASION_SPEED;
+			
 			if (hasStatusEffect(StatusEffects.GreenCovenant)) return null;
+			if (considerBlindSpeed && attackSpeed != int.MIN_VALUE && spe - attackSpeed > 0 && calcSpeedDodge(attackSpeed) > 0) return EVASION_SPEED;
 
 			var evadeChance:int = 0;
 
