@@ -12237,8 +12237,11 @@ public function combatRoundOver():void {
     combatIsOver();
 }
 
-// Returns true if combat is over. Setups doNext to win/loss/combat menu
-public function combatIsOver():Boolean {
+/**
+ * Returns true if combat is over. Setups doNext to win/loss/combat menu
+ * @param goToPlayerMenu Determines whether the function starts a bew combat round if combat is to continue
+ * */ 
+public function combatIsOver(goToPlayerMenu:Boolean = true):Boolean {
     if (!inCombat) return false;
     if (monster.HP <= monster.minHP()) {
         doNext(endHpVictory);
@@ -12273,7 +12276,7 @@ public function combatIsOver():Boolean {
         doNext(endLustLoss);
         return true;
     }
-    doNext(playerMenu); //This takes us back to the combatMenu and a new combat round
+    if (goToPlayerMenu) doNext(playerMenu); //This takes us back to the combatMenu and a new combat round
     return false;
 }
 
