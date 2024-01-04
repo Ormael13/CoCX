@@ -9761,7 +9761,7 @@ public class Combat extends BaseContent {
         //Plant Growth
         if (player.hasStatusEffect(StatusEffects.PlantGrowth) && monster.lustVuln > 0) {
             outputText("The vine slithers around [monster him] before groping at [monster his] erogenous zones, enticing them as their focus and grip on combat weakens.");
-			var damagePG:Number = scalingBonusIntelligence() * 0.05 * spellModWhite();
+			var damagePG:Number = scalingBonusIntelligence() * 0.1 * spellModWhite();
             repeatArcaneVenom(damagePG, 1, 0);
 			outputText("\n\n");
         }
@@ -9776,17 +9776,17 @@ public class Combat extends BaseContent {
 		//Briarthorn
 		if (monster.hasStatusEffect(StatusEffects.Briarthorn) && monster.lustVuln > 0) {
 			outputText("The poison inflicted by the thorns gnaws at your opponent countenance.");
-			var damageB:Number = scalingBonusIntelligence() * 0.075 * spellModWhite();
+			var damageB:Number = scalingBonusIntelligence() * 0.15 * spellModWhite();
 			repeatArcaneVenom(damageB, 0, 0);
 			outputText("\n\n");
 		}
 		//Death Blossom
 		if (monster.hasStatusEffect(StatusEffects.DeathBlossom)) {
 			outputText("The airborne poisons and aphrodisiacs spread by the blossoming flowers thickens.\n");
-			var damageDBH:Number = scalingBonusIntelligence() * 0.1 * spellModWhite() * monster.statusEffectv2(StatusEffects.DeathBlossom);
+			var damageDBH:Number = scalingBonusIntelligence() * 0.2 * spellModWhite() * monster.statusEffectv2(StatusEffects.DeathBlossom);
 			damageDBH = Math.round(damageDBH * poisonDamageBoostedByDao());
 			var damageDBL:Number = 0;
-			if (monster.lustVuln > 0) damageDBL += scalingBonusIntelligence() * 0.015 * spellModWhite() * monster.statusEffectv2(StatusEffects.DeathBlossom);
+			if (monster.lustVuln > 0) damageDBL += scalingBonusIntelligence() * 0.03 * spellModWhite() * monster.statusEffectv2(StatusEffects.DeathBlossom);
 			repeatArcaneVenom(damageDBL, 0, damageDBH);
 			outputText("\n\n");
 		}

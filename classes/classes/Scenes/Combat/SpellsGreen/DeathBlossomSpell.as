@@ -40,7 +40,7 @@ public class DeathBlossomSpell extends AbstractGreenSpell {
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
-		var baseDamage:Number = (5 * scalingBonusIntelligence(randomize));
+		var baseDamage:Number = (10 * scalingBonusIntelligence(randomize));
 		return adjustLustDamage(baseDamage, monster, CAT_SPELL_GREEN, randomize);
 	}
 	
