@@ -53,8 +53,8 @@ public class IceFistSkill extends AbstractSoulSkill {
 		damage += player.wis;
 		damage += scalingBonusWisdom();
 		//other bonuses
-		if (player.hasPerk(PerkLib.PerfectStrike) && monster.monsterIsStunned()) damage *= 1.5;
-		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
+		if (player.hasPerk(PerkLib.PerfectStrike) && monster && monster.monsterIsStunned()) damage *= 1.5;
+		if (player.hasPerk(PerkLib.Heroism) && monster && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (combat.wearingWinterScarf()) damage *= 1.2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		return Math.round(damage);

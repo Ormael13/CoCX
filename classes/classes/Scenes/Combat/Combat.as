@@ -3496,8 +3496,7 @@ public class Combat extends BaseContent {
                 }
                 lustArrowDmg *= 0.25;
                 lustArrowDmg = Math.round(lustArrowDmg);
-                monster.lust += lustArrowDmg;
-                CommasForDigits(lustArrowDmg, true);
+                monster.teased(lustArrowDmg, false, true);
                 if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
             }
         }

@@ -18,7 +18,7 @@ public class KillingIntentSkill extends AbstractSoulSkill {
             [TAG_DAMAGING, TAG_MAGICAL],
             PerkLib.KillingIntent
         )
-		baseSFCost = 50;
+		baseSFCost = 200;
 		lastAttackType = Combat.LAST_ATTACK_SPELL;
     }
 
@@ -90,7 +90,7 @@ public class KillingIntentSkill extends AbstractSoulSkill {
     override public function doEffect(display:Boolean = true):void {
 		clearOutput();
 		if (monster.hasPerk(PerkLib.Insanity) || monster.inte == 0) {
-			if (display) outputText("You try to strike the enemies' resolve with your bloodlust, but the monater is unaffected. It doesn't seem as though bloodlust registers to them!\n\n");
+			if (display) outputText("You try to strike the enemy's resolve with your bloodlust, but the monster is unaffected. It doesn't seem as though bloodlust registers to them!\n\n");
 			return;
 		} else if (monster is LivingStatue) {
 			if (display) outputText("Bloodlust does not matter to a statue!\n\n");
@@ -100,7 +100,7 @@ public class KillingIntentSkill extends AbstractSoulSkill {
 		if (silly()) 
 			if (display) outputText("You narrow your eyes at this foolish upstart. \"<i>Junior, you dare!</i>\" Your power of your soul flares from your body, seeking to strike them down. ");
 		else {
-			outputText("You set your focus on [themonster], sending your desire to kill them through your soulforce. ");
+			if (display) outputText("You set your focus on [themonster], sending your desire to kill them through your soulforce. ");
 		}
 
 		var damage:Number = calcDamage(monster);

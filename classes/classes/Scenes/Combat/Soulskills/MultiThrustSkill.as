@@ -39,26 +39,28 @@ public class MultiThrustSkill extends AbstractSoulSkill {
 
 	override public function describeEffectVs(target:Monster):String {
 		multiTrustDNLag = 0;
-		return "~" + numberFormat(Math.round(MultiThrustDSingle(target) * ((thrustSelection + 1) * 3))) + " damage ";
+		return "~" + numberFormat(Math.round(multiThrustDSingle(target, false) * ((thrustSelection + 1) * 3))) + " damage ";
 	}
 
 	override public function calcCooldown():int {
 		return thrustSelection;
 	}
 
-	private function MultiThrustDSingle(monster: Monster):Number {
+	private function multiThrustDSingle(monster: Monster, casting:Boolean = true):Number {
 		var damage:Number = 0;
 		damage += combat.meleeDamageNoLagSingle();
 		damage *= 1.75;
 
-		//All special weapon effects like...fire/ice
-		if (player.weapon == weapons.TIDAR) (player.weapon as Tidarion).afterStrike();
-		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
-			var damage1:Number = damage;
-			damage = combat.fireTypeDamageBonus(damage);
-			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
-			damage += damage1;
-			damage *= 1.1;
+		if (casting) {
+			//All special weapon effects like...fire/ice
+			if (player.weapon == weapons.TIDAR) (player.weapon as Tidarion).afterStrike();
+			if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
+				var damage1:Number = damage;
+				damage = combat.fireTypeDamageBonus(damage);
+				if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
+				damage += damage1;
+				damage *= 1.1;
+			}
 		}
 
 		//soulskill mod effect
@@ -66,7 +68,7 @@ public class MultiThrustSkill extends AbstractSoulSkill {
 
 		//other bonuses
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
-		if (monster) if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) damage *= 2;
+		if (monster && monster.hasStatusEffect(StatusEffects.FrozenSolid)) damage *= 2;
 		return damage;
 	}
 
@@ -74,8 +76,8 @@ public class MultiThrustSkill extends AbstractSoulSkill {
 		var damage:Number = 0;
 		if (multiTrustDNLag != 0) damage += multiTrustDNLag;
 		else {
-			multiTrustDNLag += MultiThrustDSingle(monster);
-			damage += MultiThrustDSingle(monster);
+			multiTrustDNLag += multiThrustDSingle(monster);
+			damage += multiThrustDSingle(monster);
 		}
 
 		var d2:Number = 0.9;

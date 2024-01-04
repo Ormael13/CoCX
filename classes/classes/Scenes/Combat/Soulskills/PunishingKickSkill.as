@@ -57,11 +57,7 @@ public class PunishingKickSkill extends AbstractSoulSkill {
 			else damage *= 2;
 			damage = combat.fireTypeDamageBonusLarge(damage);
 		}
-		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
-			damage = combat.fireTypeDamageBonus(damage);
-			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
-			damage *= 1.1;
-		}
+		
 		//other bonuses
 		if (monster) {
 			if (player.hasPerk(PerkLib.PerfectStrike) && monster.monsterIsStunned()) damage *= 1.5;
@@ -74,6 +70,13 @@ public class PunishingKickSkill extends AbstractSoulSkill {
     override public function doEffect(display:Boolean = true):void {        
 
 		var damage:Number = calcDamage(monster);
+
+		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
+			damage = combat.fireTypeDamageBonus(damage);
+			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
+			damage *= 1.1;
+		}
+
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		critChance += combat.combatPhysicalCritical();
