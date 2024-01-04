@@ -4876,11 +4876,6 @@ public class MagicSpecials extends BaseCombatContent {
 		lustDmgF = lustDmgF * monster.lustVuln;
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
-		if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
-			outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
-			player.takeLustDamage(Math.round(-lustDmgF)/40, true);
-			lustDmgF *= 1.2;
-		}
 		lustDmgF = Math.round(monster.lustVuln * lustDmgF);
 		monster.teased(lustDmgF);
 		if (critL) outputText(" <b>Critical!</b>");
@@ -5258,11 +5253,6 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
-			outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
-			player.takeLustDamage(Math.round(-lustDmg)/40, true);
-			lustDmg *= 1.2;
-		}
 		if(monster.lust < (monster.maxLust() * 0.3)) outputText("[Themonster] squirms as the magic affects [monster him].  ");
 		if(monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
 			if(monster.plural) outputText("[Themonster] stagger, suddenly weak and having trouble focusing on staying upright.  ");
@@ -5327,11 +5317,6 @@ public class MagicSpecials extends BaseCombatContent {
 		if(player.armorName == "Scandalous Succubus Clothing") lustDmg *= 1.25;
 		if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
 		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
-		if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
-			outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
-			player.takeLustDamage(Math.round(-lustDmg)/40, true);
-			lustDmg *= 1.2;
-		}
 		if (player.perkv1(IMutationsLib.BlackHeartIM) >= 4) lustDmg += combat.teases.teaseBaseLustDamage();
 		monster.teased(Math.round(monster.lustVuln * lustDmg));
 		outputText("\n\n");
@@ -5460,11 +5445,6 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.isRaceCached(Races.POLTERGEIST,3)) {
 				damage += Math.round(player.lust * 0.1);
 				player.lust -= Math.round(player.lust * 0.1);
-			}
-			if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
-				outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
-				player.takeLustDamage(Math.round(-damage)/40, true);
-				damage *= 1.2;
 			}
 			monster.teased(Math.round(monster.lustVuln * damage));
 			outputText("\n\n");

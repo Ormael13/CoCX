@@ -59,11 +59,6 @@ public class CombatTeases extends BaseCombatContent {
 
 		if (player.hasPerk(PerkLib.ChiReflowLust)) tBLD *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
 		if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) tBLD *= 1.5;
-		if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
-			outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
-			player.takeLustDamage(Math.round(-tBLD)/40, true);
-			tBLD *= 1.2;
-		}
 		if (player.perkv1(PerkLib.ImpNobility) > 0) {
 			tBLD *= (100 + player.perkv1(PerkLib.ImpNobility))/100;
 		}
@@ -72,6 +67,23 @@ public class CombatTeases extends BaseCombatContent {
 		}
 		if (SceneLib.urtaQuest.isUrta()) tBLD *= 2;
 		return tBLD;
+	}
+
+	public function fueledByDesireDamageBonus(damage:Number): Number {
+		if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
+			damage *= 1.2;
+		}
+		return damage;
+	}
+
+	public function fueledByDesireHeal(display:Boolean = true):Boolean {
+		if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
+			if (display) outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
+			player.takeLustDamage(-Math.round(player.maxLust() * 0.1), display, false);
+			if (display) outputText("\n");
+			return true;
+		}
+		return false;
 	}
 
 	public function masteryBonusDamageTease():Number {

@@ -7040,11 +7040,6 @@ public class Combat extends BaseContent {
         if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
         if (player.hasMutation(IMutationsLib.HellhoundFireBallsIM) && player.perkv1(IMutationsLib.HellhoundFireBallsIM) >= 2) damage *= (0.05* player.cumQ());
         if (player.hasMutation(IMutationsLib.HellhoundFireBallsIM) && player.perkv1(IMutationsLib.HellhoundFireBallsIM) >= 3) damage *= (0.05* player.cumQ());
-        if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
-            outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
-            player.takeLustDamage(Math.round(-damage)/40, true);
-            damage *= 1.2;
-        }
         return monster.lustVuln * damage;
     }
 
@@ -10961,7 +10956,7 @@ public class Combat extends BaseContent {
 		else combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		if (player.hasPerk(PerkLib.VerdantLeech)) {
 			if (monster.lustVuln != 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.025;
-			HPChange(Math.round(player.maxHP() * 0.05), false);
+			HPChange(Math.round(player.maxHP() * 0.01), false);
 		}
 	}
 
@@ -12834,6 +12829,7 @@ public function StraddleTease():void {
     clearOutput();
     var straddleDamage:Number = combat.teases.teaseBaseLustDamage();
     if (player.perkv1(IMutationsLib.ManticoreMetabolismIM) >= 3 && player.tail.type == Tail.MANTICORE_PUSSYTAIL) straddleDamage *= 2;
+    straddleDamage = combat.teases.fueledByDesireDamageBonus(straddleDamage);
     //Determine if critical tease!
     var randomcrit:Boolean = false;
     var critChance:int = 5;
@@ -12883,6 +12879,7 @@ public function StraddleTease():void {
     chosenTease(straddleDamage, randomcrit);
     combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
     outputText("\n\n");
+    combat.teases.fueledByDesireHeal();
     if (player.hasPerk(PerkLib.DemonEnergyThirst) || player.hasPerk(PerkLib.KitsuneEnergyThirst)) {
         outputText("You gasp in delight as you drink on your victim's energy to replenish your own, feeding of [monster his] pleasure. ");
         if (player.hunger < player.maxHunger())
@@ -13442,6 +13439,7 @@ public function ScyllaTease():void {
             if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (2 - player.statusEffectv1(StatusEffects.ControlFreak));
             if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
             damage *= damagemultiplier;
+            damage = combat.teases.fueledByDesireDamageBonus(damage);
             //Determine if critical tease!
             var crit:Boolean = false;
             var critChance:int = 5;
@@ -13463,6 +13461,7 @@ public function ScyllaTease():void {
             outputText("\n[Themonster] seems unimpressed.");
         }
         outputText("\n\n");
+        combat.teases.fueledByDesireHeal();
         if (monster.lust >= monster.maxOverLust()) {
             doNext(endLustVictory);
             return;
@@ -13600,6 +13599,7 @@ public function SwallowTease():void {
             if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (2 - player.statusEffectv1(StatusEffects.ControlFreak));
             if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
             damage *= damagemultiplier;
+            damage = combat.teases.fueledByDesireDamageBonus(damage);
             //Determine if critical tease!
             var crit:Boolean = false;
             var critChance:int = 5;
@@ -13624,6 +13624,7 @@ public function SwallowTease():void {
             outputText("\n[Themonster] seems unimpressed.");
         }
         outputText("\n\n");
+        combat.teases.fueledByDesireHeal();
         if (monster.lust >= monster.maxOverLust()) {
             doNext(endLustVictory);
             return;
@@ -13758,6 +13759,7 @@ public function WebTease():void {
             if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (2 - player.statusEffectv1(StatusEffects.ControlFreak));
             if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
             damage *= damagemultiplier;
+            damage = combat.teases.fueledByDesireDamageBonus(damage);
             //Determine if critical tease!
             var crit:Boolean = false;
             var critChance:int = 5;
@@ -13779,6 +13781,7 @@ public function WebTease():void {
             outputText("\n[Themonster] seems unimpressed.");
         }
         outputText("\n\n");
+        combat.teases.fueledByDesireHeal();
         if (monster.lust >= monster.maxOverLust()) {
             doNext(endLustVictory);
             return;
@@ -13866,7 +13869,8 @@ public function GooTease():void {
             if (player.hasPerk(PerkLib.UnbreakableBind)) damagemultiplier += 1;
             if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (2 - player.statusEffectv1(StatusEffects.ControlFreak));
 			damage *= damagemultiplier;
-
+            damage = combat.teases.fueledByDesireDamageBonus(damage);
+            
             if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
 			if (player.perkv1(IMutationsLib.SlimeMetabolismIM) >= 2) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.SlimeMetabolismIM)));
 
@@ -13890,6 +13894,7 @@ public function GooTease():void {
             outputText("\n[Themonster] seems unimpressed.");
         }
         outputText("\n\n");
+        combat.teases.fueledByDesireHeal();
         if (monster.lust >= monster.maxOverLust()) {
             doNext(endLustVictory);
             return;

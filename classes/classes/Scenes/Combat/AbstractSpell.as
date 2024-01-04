@@ -109,6 +109,7 @@ public class AbstractSpell extends CombatAbility {
 	protected function postSpellEffect(display:Boolean = true):void {
 		MagicAddonEffect(magicAddonProcs);
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		if (hasTag(TAG_LUSTDMG)) combat.teases.fueledByDesireHeal(display);
 		if (monster is SiegweirdBoss) (monster as SiegweirdBoss).castedSpellThisTurn = true;
 	}
 	
@@ -210,6 +211,7 @@ public class AbstractSpell extends CombatAbility {
 		}
 		if(player.hasPerk(PerkLib.ArcaneLash) && player.isWhipTypeWeapon()) lustDmg *= 1.5;
 		if(player.hasStatusEffect(StatusEffects.AlvinaTraining2)) lustDmg *= 1.2;
+		lustDmg = combat.teases.fueledByDesireDamageBonus(lustDmg);
 		if (monster != null) {
 			if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) lustDmg *= 1.2;
 			lustDmg *= corruptMagicPerkFactor(monster);
