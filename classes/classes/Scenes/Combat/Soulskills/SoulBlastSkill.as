@@ -41,9 +41,13 @@ public class SoulBlastSkill extends AbstractSoulSkill {
 		damage += player.wis;
 		damage += scalingBonusWisdom() * 1.8;
 		if (damage < 10) damage = 10;
-		damage *= spellMod();
+		
 		//soulskill mod effect
-		damage *= combat.soulskillMagicalMod();
+		var damageMult:Number = 1;
+		damageMult += (spellMod() - 1);
+		damageMult += (soulskillMagicalMod() - 1);
+		damage *= damageMult;
+
 		//other bonuses
 		if (monster) {
 			if (player.hasPerk(PerkLib.PerfectStrike) && monster.monsterIsStunned()) damage *= 1.5;

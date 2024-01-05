@@ -559,7 +559,8 @@ public class CombatUI extends BaseCombatContent {
 			else if (isBloodPuppiesTurn())
 				doBloodPuppiesTurn();
 			//UNIQUE OPTIONS - No changes applied, player turn, no status/CC
-			else {
+			//Do not display if enemy is already dead
+			else if(!combat.combatIsOver(false)) {
 				// Migrate Sand Trap/Alruine/Drider Incubus/Minotaur King/AngelLR/TwinBosses/Lethice/WoodElvesHuntingParty
 				monster.postPlayerBusyBtnSpecial(btnSpecial1,btnSpecial2);
 

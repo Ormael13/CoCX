@@ -52,8 +52,8 @@ public class CombatTeases extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemTags.A_REVEALING)) tBLD *= (1 + ((10 + rand(11)) / 100));
 		if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
 		if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
-		if (player.armor == armors.ELFDRES && player.isElf()) damagemultiplier += 2;
-		if (player.armor == armors.FMDRESS && player.isWoodElf()) damagemultiplier += 2;
+		if (player.armor == armors.ELFDRES && player.isElf()) damagemultiplier += 1;
+		if (player.armor == armors.FMDRESS && player.isWoodElf()) damagemultiplier += 1;
 		if (player.hasStatusEffect(StatusEffects.TeasePotion)) damagemultiplier += 0.05;
 		tBLD *= damagemultiplier;
 

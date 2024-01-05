@@ -47,12 +47,7 @@ public class DracoSweepSkill extends AbstractSoulSkill {
 			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
 			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
 		}
-		if (player.weapon == weapons.TIDAR) (player.weapon as Tidarion).afterStrike();
-		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
-			damage = combat.fireTypeDamageBonus(damage);
-			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
-			damage *= 1.1;
-		}
+		
 		//soulskill mod effect
 		damage *= soulskillPhysicalMod();
 		//group enemies bonus
@@ -69,6 +64,13 @@ public class DracoSweepSkill extends AbstractSoulSkill {
 		if (monsterDodgeSkill("attack", display)) return;
 
 		var damage:Number = calcDamage(monster);
+
+		if (player.weapon == weapons.TIDAR) (player.weapon as Tidarion).afterStrike();
+		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
+			damage = combat.fireTypeDamageBonus(damage);
+			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
+			damage *= 1.1;
+		}
 
 		var crit:Boolean = false;
 		var critChance:int = 5;

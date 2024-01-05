@@ -60,9 +60,12 @@ public class SoulDrainSkill extends AbstractSoulSkill {
 		var damage:Number = scalingBonusWisdom() + scalingBonusIntelligence();
 		if (damage < 10) damage = 10;
 
-		//soulspell mod effect
-		damage *= spellMod();
-		damage *= soulskillMagicalMod();
+		//soulskill mod effect
+		var damageMult:Number = 1;
+		damageMult += (spellMod() - 1);
+		damageMult += (soulskillMagicalMod() - 1);
+		damage *= damageMult;
+		
 		damage = calcEclypseMod(damage, casting);
 
 		//other bonuses
