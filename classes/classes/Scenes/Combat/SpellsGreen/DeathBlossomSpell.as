@@ -27,6 +27,12 @@ public class DeathBlossomSpell extends AbstractGreenSpell {
 	override public function calcCooldown():int {
 		return spellWhiteTier2Cooldown();
 	}
+
+	override public function calcDuration():int {
+		var dura:Number = 5;
+		if (player.hasPerk(PerkLib.GreenMagic)) dura *= 2;
+		return dura;
+	}
 	
 	override protected function usabilityCheck():String {
 		var uc:String = super.usabilityCheck();
@@ -40,37 +46,18 @@ public class DeathBlossomSpell extends AbstractGreenSpell {
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
-		var baseDamage:Number = (10 * scalingBonusIntelligence(randomize));
+		var baseDamage:Number = ((3 * scalingBonusIntelligence() + 3 * scalingBonusLibido()));
 		return adjustLustDamage(baseDamage, monster, CAT_SPELL_GREEN, randomize);
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) outputText("You concentrate your desire on the nearby plants causing their flowers to spontaneously bloom in a cloud of corrupted pollen.\n");
-		monster.createStatusEffect(StatusEffects.DeathBlossom, 5, 1, 0, 0);
-		var arve:Number = 1;
-		if (player.hasPerk(PerkLib.ArcaneVenom)) arve += stackingArcaneVenom();
-		while (arve-->0) doSpellEffect2(display);
-		if (display) outputText("\n");
-	}
-	
-	private function doSpellEffect2(display:Boolean = true):void {
+		monster.createStatusEffect(StatusEffects.DeathBlossom, calcDuration(), 1, 0, 0);
+
 		var lustDmg:Number = calcDamage(monster, true, true);
-		//Determine if critical tease!
-		var crit:Boolean   = false;
-		var critChance:int = 5;
-		critChance += combat.teases.combatTeaseCritical();
-		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-		if (rand(100) < critChance) {
-			crit = true;
-			lustDmg *= 1.75;
-		}
-		monster.teased(lustDmg, false, display);
-		if (crit && display) outputText(" <b>Critical!</b>");
-		combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-		if (player.hasPerk(PerkLib.VerdantLeech)) {
-			if (monster.lustVuln != 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.025;
-			HPChange(Math.round(player.maxHP() * 0.01), false);
-		}
+		var resultArray:Array = critAndRepeatLust(display, lustDmg, CAT_SPELL_GREEN);
+		postLustSpellEffect(resultArray[1]);
+		if (display) outputText("\n");
 	}
 }
 }

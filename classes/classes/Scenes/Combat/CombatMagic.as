@@ -819,7 +819,7 @@ public class CombatMagic extends BaseCombatContent {
 					outputText("[Themonster], stunned by the sudden change in your bearing and…manhood, gives you more than enough time to finish your spell. ");
 				}
 				if (player.perkv1(PerkLib.ImpNobility) > 0) {
-					outputText("  Your imp cohorts assist you spellcasting adding their diagrams to your own.");
+					outputText("  Your imp cohorts assist your spellcasting, adding their diagrams to your own.");
 				}
 			}
 			var damage:Number = 0;

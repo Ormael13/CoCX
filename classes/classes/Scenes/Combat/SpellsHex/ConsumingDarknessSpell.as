@@ -25,7 +25,7 @@ public class ConsumingDarknessSpell extends AbstractHexSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "" + calcDamage(target, false, false) + " darkness damage over "+
+		return "" + numberFormat(calcDamage(target, false, false)) + " darkness damage over "+
 				numberOfThings(calcDuration(),"round") +
 				"; " + calcBackfirePercent() + "% backfire"
 	}
