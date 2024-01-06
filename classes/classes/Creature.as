@@ -1126,7 +1126,7 @@ public class Creature extends Utils
 			if (applyRes) lustDmg *= lustPercent()/100; //the same as dynStats("lus", lustDmg, applyRes);
 			var ldi:int = int(lustDmg);
 			dynStats("lus", ldi);
-			SceneLib.combat.CommasForDigits(ldi, true);
+			if (display) SceneLib.combat.CommasForDigits(ldi, true);
 			return ldi;
 		}
 		/**

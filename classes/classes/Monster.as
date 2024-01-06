@@ -3050,9 +3050,9 @@ import classes.Scenes.Combat.CombatAbilities;
 			lustDelta = Math.round(lustDelta);
 			lust += lustDelta;
 			if (display) SceneLib.combat.CommasForDigits(lustDelta, true);//outputText(" <b>([font-lust]" + Utils.formatNumber(lustDelta) + "</font>)</b>");
-			if (player.armor == armors.ELFDRES && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0 && lustDelta >= 1) {
-				outputText(" You cool down a little bit ");
-				player.takeLustDamage(Math.round(-lustDelta)/20);
+			if (player.armor == armors.ELFDRES && player.isElf() && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0 && lustDelta >= 1) {
+				if (display) outputText(" You cool down a little bit ");
+				player.takeLustDamage(Math.round(-(player.maxLust() * 0.01)), display, true);
 			}
 		}
 

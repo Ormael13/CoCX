@@ -230,12 +230,14 @@ public class CombatAbilities {
 	];
 	
 	public static const PlantGrowth:PlantGrowthSpell     = new PlantGrowthSpell();
+	public static const PlantBloom:PlantBloomSpell     	 = new PlantBloomSpell();
 	public static const Entangle:EntangleSpell           = new EntangleSpell();
 	public static const Briarthorn:BriarthornSpell       = new BriarthornSpell();
 	public static const DeathBlossom:DeathBlossomSpell   = new DeathBlossomSpell();
 
 	public static const ALL_GREEN_SPELLS:/*CombatAbility*/Array = [
 		PlantGrowth,
+		PlantBloom,
 		Entangle,
 		Briarthorn,
 		DeathBlossom

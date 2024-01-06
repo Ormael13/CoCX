@@ -819,7 +819,7 @@ public class CombatMagic extends BaseCombatContent {
 					outputText("[Themonster], stunned by the sudden change in your bearing and…manhood, gives you more than enough time to finish your spell. ");
 				}
 				if (player.perkv1(PerkLib.ImpNobility) > 0) {
-					outputText("  Your imp cohorts assist you spellcasting adding their diagrams to your own.");
+					outputText("  Your imp cohorts assist your spellcasting, adding their diagrams to your own.");
 				}
 			}
 			var damage:Number = 0;
@@ -829,6 +829,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (2 - player.statusEffectv1(StatusEffects.ControlFreak));
 			damage *= damagemultiplier;
 			if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
+			damage = combat.teases.fueledByDesireDamageBonus(damage);
 			
 			//Determine if critical tease!
 			var crit:Boolean = false;
@@ -840,15 +841,11 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			if (monster.hasStatusEffect(StatusEffects.HypnosisNaga)) damage *= 0.5;
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-			if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
-				outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
-				player.takeLustDamage(Math.round(-damage)/40, true);
-				damage *= 1.2;
-			}
 			monster.teased(Math.round(monster.lustVuln * damage));
-			if (crit) outputText(" <b>Critical!</b>");
+			if (crit && display) outputText(" <b>Critical!</b>");
 			SceneLib.combat.teaseXP(1 + SceneLib.combat.bonusExpAfterSuccesfullTease());
 			outputText("\n\n");
+			combat.teases.fueledByDesireHeal(display);
 		}
 	}
 
