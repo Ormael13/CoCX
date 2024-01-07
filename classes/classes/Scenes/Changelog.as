@@ -47,6 +47,13 @@ public class Changelog extends BaseContent
 			outputText("-Monster specific special actions should not appear if the enemy is already dead. Alvina's 'Take Her' option now properly ends the encounter. Alvina's 'Let Her' now has properly closed HTML Tags. Cupid Arrows now use the correct tease function. Corrected elf armor damage bonus in teaseBaseLustDamage. (Demojay)\n");
 			outputText("-Guild quests explicitly say what they give as rewards. Fixed bugs for soulskill not displayed their description properly in the stats screen. Fixed damage calculation bugs with soulskills that use spell and soulskill damage bonuses. Fixed some spelling mistakes for Killing Intent soulskill, and increased base sf cost to reflect it's damage. (Demojay)\n");
 			outputText("-Reworked Dodge formula, to separate out Player/Monster specific actions, prevent certain conditions being applied twice and to add the option of adding a chance modifier in the actual function call. (Demojay)\n");
+			outputText("-Elf Villager dress cooldown effect only works if the player is an elf, and is changed to be a 1% percentage reduction instead of lustDmg/20 (since it is triggered for every single lust tick, making elves near immune to lust) Reduced lust heal from 'Fueled By Desire' from lustDmg/40 to 10% (to prevent Elves from being near-immune to lust loss) ");
+			outputText("Reduced HP heal from Verdent Leech for Green Magic from 5% to 1% (since they have Arcane Venom to trigger the effect multiple times per turn, making Green Magic better at healing that White Heals) (Demojay)\n");
+			outputText("-Briarthorn's DoT Duration is now affected by the 'Green Magic' perk. Green Magic now has the proper Tier Tags applied to them. Green Magic now properly scales from Intelligence rather than Tease damage, to prevent duplicate damage bonuses such as from the elf villager dress. (Demojay)\n");
+			outputText("-Split 'Plant Growth' spell into 'Plant Growth' and 'Plant Bloom' to make it more explicit when the spell will deal lust damage, and when it will set up plants. (Demojay)\n");
+			outputText("-Black and Green Arousal spells now scale from both intelligence and libido. Cooldowns for Wave of Ecstasy and Curse of Desire now use the same cooldown function as other spells of those tiers, meaning they don't have a minimum cooldown value to match Green spells. Altered Lust Storm's lust damage so that it uses scaling modifiers like the other lust auras. (Demojay)\n");
+			outputText("-Lust Auras now properly award tease exp upon hit. Added standard formulas for inflicting tease spell damage and awarding tease spell exp in the Abstract Spell class, so that the black arousal spells now benefit from Staff Channelling/ Gazer Eyes. (Demojay)\n");
+			outputText("-Wave of Ecstasy now deals similar damage to plant bloom spell (since they are both tier 1 spells) Curse of Desire now deals the base damage and damage ticks of a standard arouse cast. Fantasize command now scales from base tease damage. (Demojay)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -143,9 +150,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -178,7 +183,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
