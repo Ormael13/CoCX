@@ -754,6 +754,13 @@ public class PerkLib
 						"<b>You aren't strong enough to benefit from this anymore.</b>" +
 						"]",
 				"You've chosen the 'Brutal Blows' perk, which reduces enemy armor with each hit. (+5% melee physical attacks multiplier)");
+		public static const BrutalSpells:PerkType = mk("Brutal Spells", "Brutal Spells",
+				"[if(player.int8>=75)" +
+						"Reduces enemy magic resistance with each spell. (+5% base spell strength)" +
+						"|" +
+						"<b>You are too dumb to gain benefit from this perk.</b>" +
+						"]",
+				"You've chosen the 'Brutal Spells' perk, which reduces enemy magic resistance with each spell. (+5% base spell strength)");
 		public static const Brute:PerkType = mk("Brute", "Brute",
 				"You have increased your striking strength. (+20% of max core Str as phantom Str & +5% melee physical attacks multiplier)",
 				"You've chosen the 'Brute' perk, increased your striking strength. (+20% of max core Str as phantom Str & +5% melee physical attacks multiplier)");
@@ -5769,6 +5776,9 @@ public class PerkLib
 					.requirePerk(GreyMagic)
                     .requireInt(75)
                     .requireLevel(6);
+            BrutalSpells.requireLevel(6)
+                    .requireInt(75)
+                    .requirePerk(JobSorcerer);
             //Tier 2 Intelligence perks
             GrandMage.requirePerk(Mage)
                     .requireInt(75)

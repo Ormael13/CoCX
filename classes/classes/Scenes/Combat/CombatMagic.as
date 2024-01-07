@@ -238,6 +238,7 @@ public class CombatMagic extends BaseCombatContent {
 
     internal function modChange_spell_1():Number {
 		var mod:Number = 0;
+		if (player.hasPerk(PerkLib.BrutalSpells) && player.inte >= 75) mod += .05;
 		if (player.hasPerk(PerkLib.Archmage) && player.inte >= 100) mod += .3;
 		if (player.hasPerk(PerkLib.ArchmageEx) && player.inte >= 100) mod += 1.05;
 		if (player.hasPerk(PerkLib.Channeling) && player.inte >= 60) mod += .2;
@@ -891,6 +892,13 @@ public class CombatMagic extends BaseCombatContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.BalanceOfLife)) HPChange((player.maxHP() * numberOfProcs * 0.05), false);
+	}
+	
+	public function BrutalSpellsEffect():void {
+		if (monster.armorMDef > 0) outputText("\nYour spells are so brutal that you damage [themonster]'s magical resistance!");
+        var bbc:Number = (Math.round(monster.armorMDef * 0.1) + 5);
+		if (monster.armorMDef - bbc > 0) monster.armorMDef -= bbc;
+        else monster.armorMDef = 0;
 	}
 
 	public function spellMagicBolt():void {

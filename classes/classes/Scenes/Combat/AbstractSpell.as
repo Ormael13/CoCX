@@ -111,6 +111,7 @@ public class AbstractSpell extends CombatAbility {
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (hasTag(TAG_LUSTDMG)) combat.teases.fueledByDesireHeal(display);
 		if (monster is SiegweirdBoss) (monster as SiegweirdBoss).castedSpellThisTurn = true;
+		if (player.hasPerk(PerkLib.BrutalSpells)) combat.magic.BrutalSpellsEffect();
 	}
 	
 	public override function doEffect(display:Boolean = true):void {
