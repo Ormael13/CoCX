@@ -186,7 +186,7 @@ use namespace CoC;
 				removeStatusEffect(StatusEffects.JabberwockyVenom);
 				buff("Poison").remove();
 			}
-			SceneLib.combat.combatRoundOver();
+			doNext(SceneLib.combat.combatMenu, false);
 		}
 		
 		override public function defeated(hpVictory:Boolean):void

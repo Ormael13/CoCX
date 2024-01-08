@@ -52,7 +52,7 @@ public class AngelLR extends AbstractAngel
 				removeStatusEffect(StatusEffects.JabberwockyVenom);
 				buff("Poison").remove();
 			}
-			SceneLib.combat.combatRoundOver();
+			doNext(SceneLib.combat.combatMenu, false);
 		}
 		
 		private function AngelEnergyRays():void {

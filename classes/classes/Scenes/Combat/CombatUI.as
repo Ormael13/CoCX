@@ -274,11 +274,11 @@ public class CombatUI extends BaseCombatContent {
 			doFlyingSwordTurn();
 		else if (isCompanionTurn(0))
 			doCompanionTurn(0);
-		else if (isCompanionTurn(1) && !player.hasStatusEffect(StatusEffects.MinoKing) && player.statusEffectv1(StatusEffects.MinoKing) != 1)
+		else if (isCompanionTurn(1))
 			doCompanionTurn(1);
-		else if (isCompanionTurn(2) && !player.hasStatusEffect(StatusEffects.MinoKing) && player.statusEffectv1(StatusEffects.MinoKing) != 2)
+		else if (isCompanionTurn(2))
 			doCompanionTurn(2);
-		else if (isCompanionTurn(3) && !player.hasStatusEffect(StatusEffects.MinoKing) && player.statusEffectv1(StatusEffects.MinoKing) != 3)
+		else if (isCompanionTurn(3))
 			doCompanionTurn(3);
 		//PC: is busy with something
 		else if (isPlayerBound()) {
@@ -783,6 +783,7 @@ public class CombatUI extends BaseCombatContent {
 	public function isCompanionTurn(num:int):Boolean {
 		var present:Boolean;
 		var acted:Boolean;
+		var occupied:Boolean = player.hasStatusEffect(StatusEffects.MinoKing) && player.statusEffectv1(StatusEffects.MinoKing) == num;
 		switch(num) {
 			case 0:
 				present = flags[kFLAGS.PLAYER_COMPANION_0] != "";
@@ -801,7 +802,7 @@ public class CombatUI extends BaseCombatContent {
 				acted = flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION];
 				break;
 		}
-		return present && !acted;
+		return present && !acted && !occupied;
 	}
 
 	public function doCompanionTurn(num:int, clearAndNext:Boolean = true):void {
