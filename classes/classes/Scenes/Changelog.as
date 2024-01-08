@@ -54,8 +54,14 @@ public class Changelog extends BaseContent
 			outputText("-Black and Green Arousal spells now scale from both intelligence and libido. Cooldowns for Wave of Ecstasy and Curse of Desire now use the same cooldown function as other spells of those tiers, meaning they don't have a minimum cooldown value to match Green spells. Altered Lust Storm's lust damage so that it uses scaling modifiers like the other lust auras. (Demojay)\n");
 			outputText("-Lust Auras now properly award tease exp upon hit. Added standard formulas for inflicting tease spell damage and awarding tease spell exp in the Abstract Spell class, so that the black arousal spells now benefit from Staff Channelling/ Gazer Eyes. (Demojay)\n");
 			outputText("-Wave of Ecstasy now deals similar damage to plant bloom spell (since they are both tier 1 spells) Curse of Desire now deals the base damage and damage ticks of a standard arouse cast. Fantasize command now scales from base tease damage. (Demojay)\n");
-			outputText("-Juvenile abyssal sharks can sometimes be too happy to bit more then PC have (still left) so now they will stop when pc have penalty of 99% on combat wounds.\n");
+			outputText("-Juvenile abyssal sharks can sometimes be too happy to bite more then PC have (still left) so now they will stop when pc have penalty of 99% on combat wounds.\n");
 			outputText("-New tier 1 intelligence lvl-up perk: Brutal Spells. Req. Job: Sorcerer perk and 75+ int. Effect: Reduces enemy magic resistance with each spell. (+5% base spell strength)\n");
+			outputText("-Fixed bug where the check for whether a companion can act due to being occupied distracting an enemy now applies regardless of whether Simplified Pre-Turn is on. The River Dungeon and Arena team fights now no longer have the chance of softlocking the user if they can instantly kill the enemy, like the Minotaur fight. (Demojay)\n");
+			outputText("-Fixed bug where settings custom drops for certain enemies did not reset after dropping once. Backfire lust damage will now scale will lust rather than a flat rate. (Demojay)\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -82,9 +88,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-Fixed bugs: Arigean above Recruit rank not immune to tf-ing effects, deer arms tf unlocking canine arms MM, unable to find tel'adre again after first time seeing it with too high corruption or other factor that not allowed entrance; Arigean above recruit rank marking, eye color and aura with mismatching colors; demon/arigean arms MM option giving instead devil/abyssal shark arms\n\n");
+			outputText("-Fixed bugs: Arigean above Recruit rank not immune to tf-ing effects, deer arms tf unlocking canine arms MM, unable to find tel'adre again after first time seeing it with too high corruption or other factor that not allowed entrance; Arigean above recruit rank marking, eye color and aura with mismatching colors; demon/arigean arms MM option giving instead devil/abyssal shark arms, ");
+			outputText("Zenji training stats not having gains decrease from +4 to +1 for repeated training before daily reset for other than wisdom stats\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8w-z:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -154,9 +159,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -187,7 +190,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

@@ -87,6 +87,7 @@ public class PerkLib
 		public static const AscensionOneRaceToRuleThemAllX:PerkType = new AscensionOneRaceToRuleThemX();
 		public static const AscensionHerosBirthrightRankX:PerkType = new AscensionHerosBirthrightX();
 		public static const AscensionAdvTrainingX:PerkType = new AscensionAdvancedTrainingX();
+		public static const AscensionSkyPoisonPearlMasteryStageX:PerkType = new AscensionSkyPoisonPearlMasteryX();
 
 		public static const AscensionBloodlineHeritage:PerkType = mk("Ascension: Bloodline Heritage", "Ascension: Bloodline Heritage",
 				"Your current body have faint trace of some unidentified bloodline in it. Not super good but how could you be picky at this point, right?");
@@ -755,7 +756,7 @@ public class PerkLib
 						"]",
 				"You've chosen the 'Brutal Blows' perk, which reduces enemy armor with each hit. (+5% melee physical attacks multiplier)");
 		public static const BrutalSpells:PerkType = mk("Brutal Spells", "Brutal Spells",
-				"[if(player.int>=75)" +
+				"[if(player.inte>=75)" +
 						"Reduces enemy magic resistance with each spell. (+5% base spell strength)" +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
