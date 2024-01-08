@@ -109,9 +109,9 @@ public class AbstractSpell extends CombatAbility {
 	protected function postSpellEffect(display:Boolean = true):void {
 		MagicAddonEffect(magicAddonProcs);
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-		if (hasTag(TAG_LUSTDMG)) combat.teases.fueledByDesireHeal(display);
+		if (targetType == TARGET_ENEMY && hasTag(TAG_LUSTDMG)) combat.teases.fueledByDesireHeal(display);
 		if (monster is SiegweirdBoss) (monster as SiegweirdBoss).castedSpellThisTurn = true;
-		if (player.hasPerk(PerkLib.BrutalSpells)) combat.magic.BrutalSpellsEffect();
+		if (targetType == TARGET_ENEMY && hasTag(TAG_DAMAGING) && player.hasPerk(PerkLib.BrutalSpells)) combat.magic.brutalSpellsEffect(display);
 	}
 	
 	public override function doEffect(display:Boolean = true):void {
@@ -629,7 +629,7 @@ public class AbstractSpell extends CombatAbility {
 					break;
 			}
 		}
-		dynStats("lib", .25, "lus", 15);
+		dynStats("lib", .25, "lus", Math.max(player.maxLust() * 0.01, 15));
 	}
 	
 	/**

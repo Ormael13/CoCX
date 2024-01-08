@@ -894,8 +894,8 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.BalanceOfLife)) HPChange((player.maxHP() * numberOfProcs * 0.05), false);
 	}
 	
-	public function BrutalSpellsEffect():void {
-		if (monster.armorMDef > 0) outputText("\nYour spells are so brutal that you damage [themonster]'s magical resistance!");
+	public function brutalSpellsEffect(display:Boolean = true):void {
+		if (monster.armorMDef > 0 && display) outputText("\nYour spells are so brutal that you damage [themonster]'s magical resistance!");
         var bbc:Number = (Math.round(monster.armorMDef * 0.1) + 5);
 		if (monster.armorMDef - bbc > 0) monster.armorMDef -= bbc;
         else monster.armorMDef = 0;
