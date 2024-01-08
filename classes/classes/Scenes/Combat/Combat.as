@@ -547,6 +547,7 @@ public class Combat extends BaseContent {
                 if (flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] != "") {
                     outputText("  Somehow you came away from the encounter with " + ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]).longName + ".\n\n");
                     inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]), createCallBackFunction(camp.returnToCamp, timePasses));
+                    flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "";
                 } else doNext(createCallBackFunction(camp.returnToCamp, timePasses));
 				//SF harvest
 				if (player.hasPerk(PerkLib.PrestigeJobNecromancer) && monster.soulforce > 0) {
@@ -9028,6 +9029,7 @@ public class Combat extends BaseContent {
         //Bonus loot overrides others
         if (flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] != "") {
             itype = ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]);
+            flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "";
         } else {
             itype = monster.dropLoot();
         }
