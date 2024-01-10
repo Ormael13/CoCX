@@ -893,6 +893,7 @@ import classes.Scenes.NPCs.Forgefather;
 			}
 			if (perkv1(IMutationsLib.ArachnidBookLungIM) > 0) multimaxven += perkv1(IMutationsLib.ArachnidBookLungIM);
 			if (game.player.hasKeyItem("Sky Poison Pearl") >= 0) maxven += 300;
+			if (hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX)) multimaxven += perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX);
 			maxven *= multimaxven;
 			maxven = Math.round(maxven);
 			return maxven;

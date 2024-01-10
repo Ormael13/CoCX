@@ -3627,6 +3627,7 @@ use namespace CoC;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= necklaceEffectMagnitude;
 			if (jewelry1.hasBuff('res_poison') && jewelry2.hasBuff('res_poison') && jewelry3.hasBuff('res_poison') && jewelry4.hasBuff('res_poison') && headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R && necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= 15;
 			if (hasStatusEffect(StatusEffects.DaoOfPoison) && (statusEffectv2(StatusEffects.DaoOfPoison) > 3)) mult -= (10 * (statusEffectv2(StatusEffects.DaoOfPoison) - 3));
+			if (hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX)) mult -= (10 * perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX));
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
@@ -7597,4 +7598,4 @@ use namespace CoC;
 			}
 		}		
 	}
-}
+}

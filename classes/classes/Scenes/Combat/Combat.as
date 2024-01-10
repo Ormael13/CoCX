@@ -11571,6 +11571,7 @@ public class Combat extends BaseContent {
 			if (player.lowerBody == LowerBody.ATLACH_NACHA) venomCRecharge *= 2;
 			if (player.hasPerk(PerkLib.AxillaryVenomGlands)) venomCRecharge *= 2;
 			if (player.hasKeyItem("Sky Poison Pearl") >= 0) venomCRecharge += 3;
+			if (player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX)) venomCRecharge += (3 * player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX));
 			venomCRecharge = Math.round(venomCRecharge);
 		}
 		return venomCRecharge;

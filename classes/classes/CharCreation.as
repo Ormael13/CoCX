@@ -481,7 +481,9 @@ import classes.Scenes.Combat.CombatAbility;
 			CoC.instance.saves.loadPermObject();
 			//Carry over data if new game plus.
 			if (player.hasKeyItem("Ascension") >= 0) CoC.instance.flags = newFlags;
-			if (flags[kFLAGS.SPIRIT_STONES] > (100 * (1 + player.newGamePlusMod()))) flags[kFLAGS.SPIRIT_STONES] = (100 * (1 + player.newGamePlusMod()));
+			var aSPPMX:Number = 1;
+			if (player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX)) aSPPMX += player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX);
+			if (flags[kFLAGS.SPIRIT_STONES] > (100 * (1 + player.newGamePlusMod()) * aSPPMX)) flags[kFLAGS.SPIRIT_STONES] = (100 * (1 + player.newGamePlusMod()) * aSPPMX);
 			//Time reset
 			model.time.days = 0;
 			model.time.hours = 0;
@@ -2398,12 +2400,12 @@ import classes.Scenes.Combat.CombatAbility;
 			else if (player.ascensionPerkPoints < 5 && !player.hasPerk(PerkLib.AscensionUnderdog)) addButtonDisabled(btn, "Underdog", "You do not have enough ascension perk points!");
 			else addButtonDisabled(btn, "Underdog", "You already bought Underdog perk.");
 			btn++;
-			if (player.ascensionPerkPoints >= 5 && !player.hasPerk(PerkLib.AscensionUnlockedPotential)) addButton(btn, "UnlockPotent", perkUnlockedPotential).hint("Perk allowing you to have increased passive gains of max hp, lust and fatigue at each lvl-up.\n\nCost: 5 point");
+			if (player.ascensionPerkPoints >= 5 && !player.hasPerk(PerkLib.AscensionUnlockedPotential)) addButton(btn, "UnlockPotent", perkUnlockedPotential).hint("Perk allowing you to have increased passive gains of max hp, lust and fatigue at each lvl-up.\n\nCost: 5 points");
 			else if (player.ascensionPerkPoints < 5 && !player.hasPerk(PerkLib.AscensionUnlockedPotential)) addButtonDisabled(btn, "UnlockPotent", "You do not have enough ascension perk points!");
 			else addButtonDisabled(btn, "UnlockPotent", "You already bought Unlocked Potential perk.");
 			btn++;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.hasPerk(PerkLib.AscensionUnlockedPotential)) {
-				if (player.ascensionPerkPoints >= 5 && !player.hasPerk(PerkLib.AscensionUnlockedPotential2ndStage)) addButton(btn, "U.Potent2nd", perkUnlockedPotential2ndStage).hint("Perk allowing you to have increased passive gains of max wrath, mana and soulforce at each lvl-up.\n\nCost: 5 point");
+				if (player.ascensionPerkPoints >= 5 && !player.hasPerk(PerkLib.AscensionUnlockedPotential2ndStage)) addButton(btn, "U.Potent2nd", perkUnlockedPotential2ndStage).hint("Perk allowing you to have increased passive gains of max wrath, mana and soulforce at each lvl-up.\n\nCost: 5 points");
 				else if (player.ascensionPerkPoints < 5) addButtonDisabled(btn, "U.Potent2nd", "You do not have enough ascension perk points!");
 				else addButtonDisabled(btn, "U.Potent2nd", "You already bought Unlocked Potential (2nd Stage) perk.");
 			}
@@ -2411,7 +2413,7 @@ import classes.Scenes.Combat.CombatAbility;
 			else addButtonDisabled(btn, "U.Potent2nd", "You need ascend more times to buy this perk.");
 			btn++;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && player.hasPerk(PerkLib.AscensionUnlockedPotential2ndStage)) {
-				if (player.ascensionPerkPoints >= 10 && !player.hasPerk(PerkLib.AscensionUnlockedPotential3rdStage)) addButton(btn, "U.Potent3rd", perkUnlockedPotential3rdStage).hint("Perk allowing you to have increased passive gains of max hp, lust and fatigue at each lvl-up.\n\nCost: 10 point");
+				if (player.ascensionPerkPoints >= 10 && !player.hasPerk(PerkLib.AscensionUnlockedPotential3rdStage)) addButton(btn, "U.Potent3rd", perkUnlockedPotential3rdStage).hint("Perk allowing you to have increased passive gains of max hp, lust and fatigue at each lvl-up.\n\nCost: 10 points");
 				else if (player.ascensionPerkPoints < 10) addButtonDisabled(btn, "U.Potent3rd", "You do not have enough ascension perk points!");
 				else addButtonDisabled(btn, "U.Potent3rd", "You already bought Unlocked Potential (3rd Stage) perk.");
 			}
@@ -2419,12 +2421,24 @@ import classes.Scenes.Combat.CombatAbility;
 			else addButtonDisabled(btn, "U.Potent3rd", "You need ascend more times to buy this perk.");
 			btn++;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.hasPerk(PerkLib.AscensionUnlockedPotential3rdStage)) {
-				if (player.ascensionPerkPoints >= 10 && !player.hasPerk(PerkLib.AscensionUnlockedPotential4thStage)) addButton(btn, "U.Potent4th", perkUnlockedPotential4thStage).hint("Perk allowing you to have increased passive gains of max wrath, mana and soulforce at each lvl-up.\n\nCost: 10 point");
+				if (player.ascensionPerkPoints >= 10 && !player.hasPerk(PerkLib.AscensionUnlockedPotential4thStage)) addButton(btn, "U.Potent4th", perkUnlockedPotential4thStage).hint("Perk allowing you to have increased passive gains of max wrath, mana and soulforce at each lvl-up.\n\nCost: 10 points");
 				else if (player.ascensionPerkPoints < 10) addButtonDisabled(btn, "U.Potent4th", "You do not have enough ascension perk points!");
 				else addButtonDisabled(btn, "U.Potent4th", "You already bought Unlocked Potential (4th Stage) perk.");
 			}
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && !player.hasPerk(PerkLib.AscensionUnlockedPotential4thStage)) addButtonDisabled(btn, "U.Potent4th", "You need to buy Unlocked Potential (3rd Stage) perk first.");
 			else addButtonDisabled(btn, "U.Potent4th", "You need ascend more times to buy this perk.");
+			btn++;
+			if (player.ascensionPerkPoints >= 21 && !player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX)) addButton(btn, "SPPearlMst1", perkSkyPoisonPearlMasteryStage1).hint("Perk allowing you to have increased venom recharge, max venom and unlock next sections of sky poison pearl 6 levels earlier.\n\nCost: 21 points");
+			else if (player.ascensionPerkPoints < 21 && !player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX)) addButtonDisabled(btn, "SPPearlMst1", "You do not have enough ascension perk points!");
+			else addButtonDisabled(btn, "SPPearlMst1", "You already bought Sky Poison Pearl Mastery 1 perk.");
+			btn++;
+			if (player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX) && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 0) {
+				if (player.ascensionPerkPoints >= 57 && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) == 1) addButton(btn, "SPPearlMst2", perkSkyPoisonPearlMasteryStage2).hint("Perk allowing you to have increased venom recharge, max venom and unlock next sections of sky poison pearl 12 levels earlier.\n\nCost: 57 points");
+				else if (player.ascensionPerkPoints < 57) addButtonDisabled(btn, "SPPearlMst2", "You do not have enough ascension perk points!");
+				else if (player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 1) addButtonDisabled(btn, "SPPearlMst2", "You already bought Sky Poison Pearl Mastery 2 perk.");
+				//else if (player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) == 2) addButtonDisabled(btn, "SPPearlMst2", "You need to buy Sky Poison Pearl Mastery 1 perk first.");//later for 3rd and up ranks
+			}
+			else addButtonDisabled(btn, "SPPearlMst2", "You need to buy Sky Poison Pearl Mastery 1 perk first.");
 			btn++;
 		//	if (player.ascensionPerkPoints >= 10 && !player.hasPerk(PerkLib.AscensionHybridTheory)) addButton(btn, "HybridTheory", perkHybridTheory).hint("Perk allowing you to receive race bonuses for one point less. (still req. min 3 race points to work).\n\nCost: 10 points");
 		//	else if (player.ascensionPerkPoints < 10) addButtonDisabled(btn, "HybridTheory", "You do not have enough ascension perk points!");
@@ -2514,6 +2528,20 @@ import classes.Scenes.Combat.CombatAbility;
 			player.createPerk(PerkLib.AscensionUnlockedPotential4thStage,0,0,0,1);
 			clearOutput();
 			outputText("You gained Unlocked Potential (4th Stage) perk.");
+			doNext(rarePerks2);
+		}
+		private function perkSkyPoisonPearlMasteryStage1():void {
+			player.ascensionPerkPoints -= 21;
+			player.createPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX,1,0,0,1);
+			clearOutput();
+			outputText("You gained Sky Poison Pearl Mastery 1 perk.");
+			doNext(rarePerks2);
+		}
+		private function perkSkyPoisonPearlMasteryStage2():void {
+			player.ascensionPerkPoints -= 57;
+			player.addPerkValue(PerkLib.AscensionSkyPoisonPearlMasteryStageX,1,1);
+			clearOutput();
+			outputText("You increased Sky Poison Pearl Mastery from 1 to 2.");
 			doNext(rarePerks2);
 		}
 

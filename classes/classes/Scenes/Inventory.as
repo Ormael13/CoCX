@@ -71,12 +71,14 @@ use namespace CoC;
 		public function pearlStorageSize():int {
 			if (player.hasKeyItem("Sky Poison Pearl") < 0) return 0;
 			var x:int = 14;
-			if (player.level >= 6) x += 14;//player.hasPerk(PerkLib.SecondRing) - 6 + 15
-			if (player.level >= 12) x += 14;//player.hasPerk(PerkLib.SecondRing) - 24 + 33
-			if (player.level >= 18) x += 14;//player.hasPerk(PerkLib.SecondRing) - 42 + 51
-			if (player.level >= 24) x += 14;//player.hasPerk(PerkLib.SecondRing) - 60 + 69
-			if (player.level >= 30) x += 14;//player.hasPerk(PerkLib.SecondRing) - 78 + 87
-			if (player.level >= 36) x += 14;//player.hasPerk(PerkLib.SecondRing) - 96 + 105
+			var y:Number = 0;
+			if (player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX)) y += (6 * player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX));
+			if (player.level >= (6 - y)) x += 14;
+			if (player.level >= (12 - y)) x += 14;
+			if (player.level >= (18 - y)) x += 14;//93
+			if (player.level >= (24 - y)) x += 14;//129
+			if (player.level >= (30 - y)) x += 14;//78 + 87
+			if (player.level >= (36 - y)) x += 14;//96 + 105
 			return Math.min(98, x);
 		}
 

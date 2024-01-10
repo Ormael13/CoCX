@@ -9,8 +9,8 @@ public class AscensionSkyPoisonPearlMasteryX extends PerkType
 
     override public function desc(params:PerkClass = null):String {
         if (!player || !params) return _desc;
-        var pVal:Number = (player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) * 4);
-        return "Your gain " + pVal.toString() + " more stat points at each level up.";
+        var pVal:Number = player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX);
+        return "You gain +" + (pVal * 3) + " venom recharge speed, +" + (pVal * 10) + "% to max venom cap, +" + (pVal * 10) + "% to poison resistance, " + (pVal * 100) + "% more spirit stones carried over and lower req. level to open next sections of pearl by " + (pVal * 6) + " levels. (Rank: " + pVal + ")";
     }
 
     override public function name(params:PerkClass=null):String {

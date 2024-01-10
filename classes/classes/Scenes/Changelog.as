@@ -58,6 +58,12 @@ public class Changelog extends BaseContent
 			outputText("-New tier 1 intelligence lvl-up perk: Brutal Spells. Req. Job: Sorcerer perk and 75+ int. Effect: Reduces enemy magic resistance with each spell. (+5% base spell strength)\n");
 			outputText("-Fixed bug where the check for whether a companion can act due to being occupied distracting an enemy now applies regardless of whether Simplified Pre-Turn is on. The River Dungeon and Arena team fights now no longer have the chance of softlocking the user if they can instantly kill the enemy, like the Minotaur fight. (Demojay)\n");
 			outputText("-Fixed bug where settings custom drops for certain enemies did not reset after dropping once. Backfire lust damage will now scale will lust rather than a flat rate. (Demojay)\n");
+			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 1. No Req. It costs 21 asc points and you gain +3 venom recharge speed, +10% to max venom cap, +10% to poison resistance, 100% more spirit stones carried over and lower req. level to open next sections of pearl by 6 levels.\n");
+			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 2. Req. Sky Poison Pearl Mastery 1 perk. It costs 57 asc points and you gain +6 venom recharge speed, +20% to max venom cap, +20% to poison resistance, 200% more spirit stones carried over and lower req. level to open next sections of pearl by 12 levels.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -82,12 +88,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay) (NUZ/Shirane)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed bugs: Arigean above Recruit rank not immune to tf-ing effects, deer arms tf unlocking canine arms MM, unable to find tel'adre again after first time seeing it with too high corruption or other factor that not allowed entrance; Arigean above recruit rank marking, eye color and aura with mismatching colors; demon/arigean arms MM option giving instead devil/abyssal shark arms, ");
 			outputText("Zenji training stats not having gains decrease from +4 to +1 for repeated training before daily reset for other than wisdom stats\n\n");
 			/*ostatni punkt changelogu
@@ -178,7 +178,7 @@ public class Changelog extends BaseContent
 			outputText("\n");
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
 			outputText("\n");
-			outputText("\n");full stats bonuses not added yet to: Echidna, Ferret-morph, Scorpion-morph
+			outputText("\n");full stats bonuses not added yet to: Echidna, Scorpion-morph
 			outputText("\n");
 			outputText("\n");wolf pepper - nieużywany item chyba co można go by w wolf TF zmienić: dodaje special coś na kształt likantropii ^^
 			outputText("\n");aqua seed - item mający być siren tf item
