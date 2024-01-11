@@ -485,6 +485,7 @@ public class CombatMagic extends BaseCombatContent {
 
 	internal function spellGreyCooldownImpl():Number {
 		var mod:Number = 3;
+		if (player.weapon == weapons.B_STAFF) mod -= 1;
 		if (player.hasPerk(PerkLib.NaturalSpellcasting)) {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
 			else mod -= 1;
@@ -507,6 +508,7 @@ public class CombatMagic extends BaseCombatContent {
 
 	internal function spellWhiteCooldownImpl():Number {
 		var mod:Number = 3;
+		if (player.weapon == weapons.B_STAFF) mod -= 1;
 		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod -= 1;
 		if (player.hasPerk(PerkLib.NaturalSpellcasting)) {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
@@ -543,6 +545,7 @@ public class CombatMagic extends BaseCombatContent {
 
 	internal function spellBlackCooldownImpl():Number {
 		var mod:Number = 3;
+		if (player.weapon == weapons.B_STAFF) mod -= 1;
 		if (player.hasPerk(PerkLib.AvatorOfCorruption)) mod -= 1;
 		if (player.hasPerk(PerkLib.NaturalSpellcasting)) {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
@@ -582,6 +585,7 @@ public class CombatMagic extends BaseCombatContent {
 
 	internal function spellGenericCooldownImpl():Number {
 		var mod:Number = 3;
+		if (player.weapon == weapons.B_STAFF) mod -= 1;
 		if (player.hasPerk(PerkLib.NaturalSpellcasting)) {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
 			else mod -= 1;

@@ -5799,6 +5799,7 @@ public class Combat extends BaseContent {
 			baseMasteryXP *= bMXPMulti;
         }
         if (player.weapon == weapons.CHAOSEA) baseMasteryXP *= 4;
+		if (player.weapon == weapons.B_SWORD || player.weapon == weapons.B_WHIP) baseMasteryXP *= 2;
         var masteryXPCrit:Number = baseMasteryXP * crit * 2;
         if (player.hasPerk(PerkLib.MeleeWeaponsMasteryEx)) masteryXPCrit *= 2;
         var masteryXPNatural:Number = baseMasteryXP * (hit - crit);
