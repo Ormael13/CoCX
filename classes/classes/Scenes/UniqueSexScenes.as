@@ -161,6 +161,7 @@ public class UniqueSexScenes extends BaseContent
 		}
 
 		private var activeBtns:int = 0;
+		private var returnscene:Function;
         public function get sceneMenu():ButtonDataList {
 			var menuItems:Array = [];
 			var sceneList:Array = [USSTailpeg(),
@@ -211,19 +212,20 @@ public class UniqueSexScenes extends BaseContent
         }
 
 		public function pcUSSPreChecksV2(backFunc:Function, btnPos:int = 13):void {
+			returnscene = (backFunc == null) ? camp.returnToCampUseOneHour : backFunc;
+			if(returnscene == camp.returnToCampUseOneHour) trace("Missing return scene for USSMenu. Will continue, but will go back to camp after.");
 			if (RaijuOverLust()) {
 				if (player.isGenderless()) raijuVoltTransfer();
 				else RaijuRapeSupercharged();
 				//supercharged check - forcecalls the scene if needed
-			} else addButton(btnPos, "U.Sex Scenes", openUSSmenu, backFunc)
+			} else addButton(btnPos, "U.Sex Scenes", openUSSmenu)
 				.disableIf(player.hasPerk(PerkLib.ElementalBody), "You can't use unique sex scenes while being an elemental.");
 		}
 
 		//Use above for special cases.
-		public function openUSSmenu(backFunc:Function = null):void{
+		public function openUSSmenu():void{
 			var menuItems:ButtonDataList = sceneMenu;
-			if (backFunc == null) backFunc = camp.returnToCampUseOneHour;
-			submenu(menuItems, backFunc, 0, false);
+			submenu(menuItems, returnscene, 0, false);
         }
 
 		public function ScenePostProc(sList:Array):Array{

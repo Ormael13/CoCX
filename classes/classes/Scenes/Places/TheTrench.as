@@ -295,9 +295,16 @@ private function theTrenchEquipmentShopPrincessRegalia():void {
 }
 public function theTrenchEquipmentShopBuy(itype:ItemType):void {
 	clearOutput();
-	player.gems -= itype.value;
-	statScreenRefresh();
-	inventory.takeItem(itype, theTrenchEquipmentShop);
+	if(player.gems >= itype.value){
+		player.gems -= itype.value;
+		statScreenRefresh();
+		inventory.takeItem(itype, theTrenchEquipmentShop);
+	}
+	else{
+		outputText("You can't afford this!")
+		doNext(theTrenchEquipmentShop);
+	}
+
 }
 private function theTrenchFoodStand():void {
 	clearOutput();
@@ -802,4 +809,4 @@ public function theTrench111():void {
 	outputText("\"<i></i>\"\n\n");
 }
 	}
-}
+}
