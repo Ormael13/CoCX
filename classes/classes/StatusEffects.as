@@ -1139,6 +1139,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		//cooldowns
 		public static const CooldownAdamantineShell:StatusEffectType           	= mkCombat("Cooldown Adamantine Shell");
 		public static const CooldownBalefulPolymorph:StatusEffectType      		= mkCombat("Cooldown Baleful Polymorph");
+		public static const CooldownChargedShot:StatusEffectType       	 		= mkCombat("Cooldown Charged Shot");
 		public static const CooldownCompellingAria:StatusEffectType      		= mkCombat("Cooldown Compelling Aria");
 		public static const CooldownCumCannon:StatusEffectType           		= mkCombat("Cooldown Cum Cannon");
 		public static const CooldownCursedRiddle:StatusEffectType        		= mkCombat("Cooldown Cursed Riddle");
@@ -1164,6 +1165,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CooldownEveryAndNowhere:StatusEffectType     		= mkCombat("Cooldown Everywhere And Nowhere");
 		public static const CooldownFascinate:StatusEffectType           		= mkCombat("Cooldown Fascinate");
 		public static const CooldownFelineCurse:StatusEffectType         		= mkCombat("Cooldown Feline Curse");
+		public static const CooldownFinalityBarrage:StatusEffectType       	 	= mkCombat("Cooldown Finality Barrage");
 		public static const CooldownFingerOfDeath:StatusEffectType      		= mkCombat("Cooldown Finger of death");
 		public static const CooldownFlamesOfLove:StatusEffectType        		= mkCombat("Cooldown Flames of Love");
 		public static const CooldownFlicker:StatusEffectType     				= mkCombat("Cooldown Flicker");

@@ -1021,13 +1021,10 @@ public function nagaTease():void {
 		if (monster.hasStatusEffect(StatusEffects.NagaVenom)) outputText("You attempt to stimulate [themonster] by rubbing [monster his] nether regions, but [monster he] seems too affected by your poison to react.\n\n");
 		if (monster.gender == 0) outputText("You look over [themonster], but can't figure out how to tease such an unusual foe.\n\n");
 		if (monster.lustVuln == 0) outputText("You attempt to stimulate [themonster] by rubbing [monster his] nether regions, but it has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
-        enemyAI();
+        combat.enemyAIAndResources();
         return;
 	}
-	SceneLib.combat.wrathregeneration1();
-    SceneLib.combat.fatigueRecovery1();
-	SceneLib.combat.manaregeneration1();
-	SceneLib.combat.soulforceregeneration1();
+	recoveryOfResources();
 	var damage:Number;
     var chance:Number = 70;
     var bimbo:Boolean = false;
@@ -1214,3 +1211,4 @@ private function beePositANagaPlease():void {
 }
 	}
 }
+

@@ -594,7 +594,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (!player.hasStatusEffect(StatusEffects.BloodCultivator) && flags[kFLAGS.IN_COMBAT_PLAYER_ANUBI_HEART_LEECH] == 0) anubiHeartLeeching(flags[kFLAGS.HERO_BANE_DAMAGE_BANK]);
 		combat.heroBaneProc2();
 		combat.EruptingRiposte2();
-		enemyAI();
+		combat.enemyAIAndResources();
 	}
 	public function SextupleThrust():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
@@ -625,7 +625,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (!player.hasStatusEffect(StatusEffects.BloodCultivator) && flags[kFLAGS.IN_COMBAT_PLAYER_ANUBI_HEART_LEECH] == 0) anubiHeartLeeching(flags[kFLAGS.HERO_BANE_DAMAGE_BANK]);
 		combat.heroBaneProc2();
 		combat.EruptingRiposte2();
-		enemyAI();
+		combat.enemyAIAndResources();
 	}
 	public function NonupleThrust():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
@@ -657,7 +657,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		combat.heroBaneProc2();
 		combat.EruptingRiposte2();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-		else enemyAI();
+		else combat.enemyAIAndResources();
 	}
 	private function MultiThrustDSingle():Number {
 		var damage:Number = 0;
@@ -877,7 +877,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (!player.hasStatusEffect(StatusEffects.BloodCultivator) && flags[kFLAGS.IN_COMBAT_PLAYER_ANUBI_HEART_LEECH] == 0) anubiHeartLeeching(damage);
 		combat.heroBaneProc(damage);
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-		else enemyAI();
+		else combat.enemyAIAndResources();
 	}
 
 	public function Comet():void {
@@ -917,7 +917,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (!player.hasStatusEffect(StatusEffects.BloodCultivator) && flags[kFLAGS.IN_COMBAT_PLAYER_ANUBI_HEART_LEECH] == 0) anubiHeartLeeching(damage);
 		combat.heroBaneProc(damage);
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-		else enemyAI();
+		else combat.enemyAIAndResources();
 	}
 	
 	public function HailOfBlades1():void {
@@ -937,7 +937,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		combat.heroBaneProc2();
 		combat.EruptingRiposte2();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-		else enemyAI();
+		else combat.enemyAIAndResources();
 	}
 	public function HailOfBlades2():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
@@ -947,7 +947,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids weapons!");
 			else if (monster.spe-player.spe < 20) outputText("[Themonster] dodges weapons with superior quickness!");
 			else outputText("[Themonster] deftly avoids weapons.");
-			enemyAI();
+			combat.enemyAIAndResources();
 			return;
 		}
 		var soulforcecost:Number = 200 * soulskillCost() * soulskillcostmulti();
@@ -963,7 +963,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		combat.heroBaneProc2();
 		combat.EruptingRiposte2();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-		else enemyAI();
+		else combat.enemyAIAndResources();
 	}
 	public function HailOfBlades3():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
@@ -973,7 +973,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids weapons!");
 			else if (monster.spe-player.spe < 20) outputText("[Themonster] dodges weapons with superior quickness!");
 			else outputText("[Themonster] deftly avoids weapons.");
-			enemyAI();
+			combat.enemyAIAndResources();
 			return;
 		}
 		var soulforcecost:Number = 800 * soulskillCost() * soulskillcostmulti();
@@ -989,7 +989,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		combat.heroBaneProc2();
 		combat.EruptingRiposte2();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-		else enemyAI();
+		else combat.enemyAIAndResources();
 	}
 	private function BladesD(hits:Number = 1):void {
 		var damage:Number = player.wis * 0.5;
@@ -1104,7 +1104,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (!player.hasStatusEffect(StatusEffects.BloodCultivator) && flags[kFLAGS.IN_COMBAT_PLAYER_ANUBI_HEART_LEECH] == 0) anubiHeartLeeching(damage);
 		combat.heroBaneProc(damage);
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-		else enemyAI();
+		else combat.enemyAIAndResources();
 	}
 
 	public function CleansingPalm():void {
@@ -1120,13 +1120,13 @@ public class CombatSoulskills extends BaseCombatContent {
 			// Not a completely corrupted monkmouse
 			if (JojoScene.monk < 2) {
 				outputText("You thrust your palm forward, sending a blast of pure energy towards Jojo. At the last second he sends a blast of his own against yours canceling it out\n\n");
-				enemyAI();
+				combat.enemyAIAndResources();
 				return;
 			}
 		}
 		if (monster is LivingStatue) {
 			outputText("You thrust your palm forward, causing a blast of pure energy to slam against the giant stone statue- to no effect!");
-			enemyAI();
+			combat.enemyAIAndResources();
 			return;
 		}
 		var corruptionMulti:Number = (monster.cor - 20) / 25;
@@ -1182,7 +1182,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		combat.EruptingRiposte();
 		statScreenRefresh();
 		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-		else enemyAI();
+		else combat.enemyAIAndResources();
 	}
 	
 	public function IceFist():void {
@@ -1243,7 +1243,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		combat.EruptingRiposte();
 		outputText("\n\n");
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-		else enemyAI();
+		else combat.enemyAIAndResources();
 	}
 
 	public function FirePunch():void {
@@ -1313,7 +1313,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText("Your movement becomes more fluid and precise, increasing your speed and evasion.\n\n");
 		player.createStatusEffect(StatusEffects.HurricaneDance, 5, 0, 0, 0);
 		player.createStatusEffect(StatusEffects.CooldownHurricaneDance, 10, 0, 0, 0);
-		enemyAI();
+		combat.enemyAIAndResources();
 	}
 
 	public function EarthStance():void {
@@ -1325,7 +1325,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText("Your body suddenly hardens like rock. You will be way harder to damage for a while.\n\n");
 		player.createStatusEffect(StatusEffects.EarthStance, 3, 0, 0, 0);
 		player.createStatusEffect(StatusEffects.CooldownEarthStance, 10, 0, 0, 0);
-		enemyAI();
+		combat.enemyAIAndResources();
 	}
 
 	public function PunishingKick():void {
@@ -1421,33 +1421,33 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (!player.hasStatusEffect(StatusEffects.BloodCultivator) && flags[kFLAGS.IN_COMBAT_PLAYER_ANUBI_HEART_LEECH] == 0) anubiHeartLeeching(damage);
 		combat.heroBaneProc(damage);
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-		else enemyAI();
+		else combat.enemyAIAndResources();
 	}
 
 	public function activaterOverlimit():void {
 		clearOutput();
 		outputText("You let out a primal roar of pain and fury, as you push your body beyond its normal capacity, a blood red aura cloaking your form.\n\n");
 		player.createStatusEffect(StatusEffects.Overlimit, 0, 0, 0, 0);
-		enemyAI();
+		combat.enemyAIAndResources();
 	}
 	public function deactivaterOverlimit():void {
 		clearOutput();
 		outputText("You let your rage fade, your red aura and manic strength vanishing along with it. You wince, feeling the strain you put your body through. You \n\n");
 		player.removeStatusEffect(StatusEffects.Overlimit);
-		enemyAI();
+		combat.enemyAIAndResources();
 	}
 
 	public function VioletPupilTransformation():void {
 		clearOutput();
 		outputText("Deciding you need additional regeneration during current fight you spend moment to concentrate and activate Violet Pupil Transformation.  Your eyes starting to glow with a violet hua and you can feel refreshing feeling spreading all over your body.\n");
 		player.createStatusEffect(StatusEffects.VioletPupilTransformation,0,0,0,0);
-		enemyAI();
+		combat.enemyAIAndResources();
 	}
 	public function DeactivateVioletPupilTransformation():void {
 		clearOutput();
 		outputText("Deciding you not need for now to constantly using Violet Pupil Transformation you concentrate and deactivating it.");
 		player.removeStatusEffect(StatusEffects.VioletPupilTransformation);
-		enemyAI();
+		combat.enemyAIAndResources();
 	}
 	
 	private static const ScarletSpiritChargeABC:Object = FnHelpers.FN.buildLogScaleABC(10,100,1000,10,100);
@@ -1482,13 +1482,13 @@ public class CombatSoulskills extends BaseCombatContent {
 		var tempStrTouSpe:Number = 0;
 		outputText("You focus the power of your blood and soul, allowing the scarlet energy fill your being. Your [skin] begins to glow as the power within you coalesces, whirling within you with the force of a tsunami.\n");
 		doEffect.call();
-		enemyAI();
+		combat.enemyAIAndResources();
 	}
 	public function DeactivateScarletSpiritCharge():void {
 		clearOutput();
 		outputText("You disrupt the flow of blood within you, your body slumps as the glow radiating from your [skin] dissipates back into your natural hue.");
 		player.statStore.removeBuffs("ScarletSpiritCharge");
-		enemyAI();
+		combat.enemyAIAndResources();
 	}
 	
 	private static const TranceABC:Object = FnHelpers.FN.buildLogScaleABC(10,100,1000,10,100);
@@ -1544,13 +1544,13 @@ public class CombatSoulskills extends BaseCombatContent {
 		var tempStrTou:Number = 0;
 		outputText("You focus the power of your mind and soul, letting the mystic energy fill you. Your [skin] begins to crystalize as the power within you takes form. The power whirls within you like a hurricane, the force of it lifting you off your feet. This power...  You will use it to reach victory!\n");
 		doEffect.call();
-		enemyAI();
+		combat.enemyAIAndResources();
 	}
 	public function DeactivateTranceTransformation():void {
 		clearOutput();
 		outputText("You disrupt the flow of power within you, softly falling to the ground as the crystal sheathing your [skin] dissipates into nothingness.");
 		player.statStore.removeBuffs("TranceTransformation");
-		enemyAI();
+		combat.enemyAIAndResources();
 	}
 
 	public function BeatOfWar():void {
@@ -1610,7 +1610,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}
 		outputText(".\n\n");
-		enemyAI();
+		combat.enemyAIAndResources();
 	}
 
 	public function SoulDrain():void {
@@ -1650,7 +1650,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		anubiHeartLeeching(damage);
 		combat.heroBaneProc(damage);
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-		else enemyAI();
+		else combat.enemyAIAndResources();
 	}
 	public function FingerOfDeath():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
@@ -1693,7 +1693,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		combat.heroBaneProc2();
 		combat.EruptingRiposte2();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-		else enemyAI();
+		else combat.enemyAIAndResources();
 	}
 	
 	public function bloodSwipe():void {
@@ -1967,7 +1967,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-		else enemyAI();
+		else combat.enemyAIAndResources();
 	}
 
 	private function endTurnByBloodSkillUse(damage:Number):void {
@@ -1982,7 +1982,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-		else enemyAI();
+		else combat.enemyAIAndResources();
 	}
 
 	/*
@@ -2039,7 +2039,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
-			enemyAI();
+			combat.enemyAIAndResources();
 			return;
 		}
 		outputText("You flush, drawing on your body's desires to empower your muscles and toughen you up.\n\n");
@@ -2071,7 +2071,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		if(player.lust >= player.maxOverLust()) doNext(endLustLoss);
-		else enemyAI();
+		else combat.enemyAIAndResources();
 	}*/
 	/*
 	 //Mantis Omni Slash (AoE attack) - przerobić to na soulskilla zużywającego jak inne soulforce z rosnącym kosztem im wyższy lvl postaci ^^ owinno wciąż jakoś być powiązane z posiadaniem mantis arms czy też ulepszonych mantis arms (czyt. versji 2.0 tych ramion z TF bdącego soul evolution of Mantis) ^^
@@ -2102,7 +2102,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	 if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attacks!\n\n");
 	 if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attacks with superior quickness!\n\n");
 	 if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attacks.\n\n");
-	 enemyAI();
+	 combat.enemyAIAndResources();
 	 return;
 	 if (monster.plural) {
 	 if (player.perkv1(IMutationsLib.MantislikeAgilityIM) >= 1) {
@@ -2162,7 +2162,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	 combat.WrathGenerationPerHit2(5);
 	 if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] == 0) {
 	 outputText("\n");
-	 enemyAI();
+	 combat.enemyAIAndResources();
 	 }
 	 if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] == 1) {
 	 flags[kFLAGS.MULTIPLE_ATTACK_STYLE] -= 1;
@@ -2215,7 +2215,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	 if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
 	 if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
 	 if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
-	 enemyAI();
+	 combat.enemyAIAndResources();
 	 return;
 	 }
 	 var soulforcecost:Number = 10 * soulskillCost() * soulskillcostmulti();
@@ -2245,7 +2245,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	 combat.heroBaneProc(damage);
 	 outputText("\n\n");
 	 if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-	 else enemyAI();
+	 else combat.enemyAIAndResources();
 	 }*/
 }
-}
+}

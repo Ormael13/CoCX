@@ -5254,9 +5254,14 @@ use namespace CoC;
 			var minLib:int = 0;
 			var minSen:int = 10;
 			var minCor:int = 0;
+			//Minimum Intelligence
+			if (this.hasPerk(PerkLib.ArigeanKnowledge)) {
+				minInt += 89;
+			}
 			//Minimum Libido
-			if (this.gender > 0) minLib += 5;
-
+			if (this.gender > 0) {
+				minLib += 5;
+			}
 			if (this.armorName == "lusty maiden's armor") {
 				if (minLib < 50) minLib = 50;
 			}

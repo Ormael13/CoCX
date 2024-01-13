@@ -189,6 +189,7 @@ public class EventParser {
             if (player.hasPerk(PerkLib.JobSorcerer) || player.hasPerk(PerkLib.JobElementalConjurer)) SceneLib.combat.manaregeneration1(false);
             SceneLib.combat.wrathregeneration1(false);
 			SceneLib.combat.fatigueRecovery1(false);
+			SceneLib.combat.venomCombatRecharge1(false);
             //Inform all time aware classes that a new hour has arrived
             for (var tac:int = 0; tac < _timeAwareClassList.length; tac++) {
                 item = _timeAwareClassList[tac];

@@ -995,10 +995,10 @@ public class CombatUI extends BaseCombatContent {
 						break;
 					case 7:
 						btnContinue.show("Continue", combat.pspecials.buzzingTone, "Continue buzzing.");
-						break;/*
-					case 8:
-						btnContinue.show("Continue", combat.magic., "Continue casting  spell.");
 						break;
+					case 8:
+						btnContinue.show("Continue", combat.mspecials.arigeanChargedShot, "Continue gathering energy.");
+						break;/*
 					case 9:
 						btnContinue.show("Continue", combat.magic., "Continue casting  spell.");
 						break;

@@ -991,7 +991,7 @@ public class PerkLib
 				"When using Great Dive you may add your weapon damage as part of the attack damage as if using power attack at its current maximum value consuming no wrath in the process.",
 				"You've chosen the 'Death plunge' perk. When using Great Dive you may add your weapon damage as part of the attack damage as if using power attack at its current maximum value consuming no wrath in the process.");
 		public static const DefenceStance:PerkType = mk("Defence Stance", "Defence Stance",
-				"Defend move now reduce incoming damage a little more and allow recovering fatigue/mana/soulforce.",
+				"Defend move now reduce incoming damage a little more and allow for very small improvement of fatigue/mana/soulforce recovery.",
 				"You've chosen the 'Defence Stance' perk, training to master you defence pose.");
 		public static const DefensiveStaffChanneling:PerkType = mk("Defensive Staff Channeling", "Defensive Staff Channeling",
 				"When you would cast defensive spell holding staff it effects would be increased a bit (higher defensive effect or longer duration).",
@@ -2470,7 +2470,7 @@ public class PerkLib
 				"Thrown weapons have such penetrating power they now have a chance to run through multiple enemies. When attacking groups the projectiles have a 75% (losing 10% after each successful piercing strike) chance to deal their damage more then once. (+20% range physical attacks multiplier)",
 				"You've chosen the 'Penetrating throw' perk. Thrown weapons have such penetrating power they now have a chance to run through multiple enemies. When attacking groups the projectiles have a 75% (losing 10% after each successful piercing strike) chance to deal their damage more then once. (+20% range physical attacks multiplier)");
 		public static const PerfectDefenceStance:PerkType = mk("Perfect Defence Stance", "Perfect Defence Stance",
-				"Defend move now massively reduce incoming damage and allow for improved fatigue/mana/soulforce recovery.",
+				"Defend move now massively reduce incoming damage and allow for minor improvement of fatigue/mana/soulforce recovery.",
 				"You've chosen the 'Perfect Defence Stance' perk, perfecting your defence pose beyond mastery level.");
 		public static const Perfection:PerkType = mk("Perfection", "Perfection",
 				"The ultimate stage of alchemy, you have perfected the art of making transformatives more effective. This is a level very few have reached +2% alchemy/mutagen boost.",
@@ -3989,6 +3989,8 @@ public class PerkLib
 				"When outdoors you are considered to be permanently flying, allowing you to use great dive and flying skills at will. Useless underwater.");
 		public static const AffinityUndine:PerkType = mk("Affinity (Undine)", "Affinity (Undine)",
 				"Can breath underwater and gain +50 to speed and spell power while underwater. Weak to electricity (-100% resistance).");
+		public static const AlteredAnima:PerkType = mk("Altered Anima", "Altered Anima",
+				".");
 		public static const ArchmageEx:PerkType = mk("Archmage (Ex)", "Archmage (Ex)",
 				"[if (player.inte>=100)" +
 						"Increases base spell strength by 105%, mana pool by 600 and lust bar by 135." +
@@ -3996,16 +3998,14 @@ public class PerkLib
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]")
 				.withBuffs({'maxlust_base':+135});
+		public static const ArigeanKnowledge:PerkType = mk("Arigean Knowledge", "Arigean Knowledge",
+				"The knowledge of your Arigean ancestors rests in your mind. Gain immunity to mental debuffs and intelligence min is increased to 90.");
 		public static const AscensionMenuChoiceMaybe:PerkType = mk("AscensionMenuChoiceMaybe", "AscensionMenuChoiceMaybe",
 				"You shouldn't be here to see that description so *puts on black sunglasses and prepare erase devide* please look at the red light.");
 		public static const AuraOfCorruption:PerkType = mk("Aura of Corruption", "Aura of Corruption",
 				"You radiate corruption, tainting everything near you with uncontrollable lust.");
 		public static const AuraOfPurity:PerkType = mk("Aura of Purity", "Aura of Purity",
 				"Those of impure heart who come close to you are seared by holy fire and blinded by your inner light.");
-		public static const AlteredAnima:PerkType = mk("Altered Anima", "Altered Anima",
-				".");
-		public static const ArigeanKnowledge:PerkType = mk("Arigean Knowledge", "Arigean Knowledge",
-				".");
 		public static const BasicLeadership:PerkType = mk("Basic Leadership", "Basic Leadership",
 				"Allows to form 2 people party.");
 		public static const BasiliskResistance:PerkType = mk("Basilisk Resistance", "Basilisk Resistance",

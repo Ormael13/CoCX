@@ -1487,7 +1487,7 @@ private function urtaVaultAttack():void {
 			return;
 		}
 		else outputText("\n");
-		enemyAI();
+		combat.enemyAIAndResources();
 		return;
 	}
 	//Basic damage stuff

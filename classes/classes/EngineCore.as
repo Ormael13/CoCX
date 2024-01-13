@@ -77,6 +77,10 @@ public class EngineCore {
         return CoC.instance.player.maxOverMana();
     }
 
+    public static function maxVenom():Number {
+        return CoC.instance.player.maxVenom();
+    }
+
     public static function silly():Boolean {
         return CoC.instance.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] == 1;
     }
@@ -201,6 +205,21 @@ public class EngineCore {
         CoC.instance.player.dynStats("lust", 0, "scale", false) //Workaround to showing the arrow.
         statScreenRefresh();
         return CoC.instance.player.wrath - before;
+    }
+
+    public static function VenomWebChange(changeNum:Number):Number {
+        var before:Number = CoC.instance.player.tailVenom;
+        if (changeNum == 0) return 0;
+        if (changeNum > 0) {
+            if (CoC.instance.player.tailVenom + int(changeNum) > maxVenom()) CoC.instance.player.tailVenom = maxVenom();
+            else CoC.instance.player.tailVenom += changeNum;
+        } else {
+            if (CoC.instance.player.tailVenom + changeNum <= 0) CoC.instance.player.tailVenom = 0;
+            else CoC.instance.player.tailVenom += changeNum;
+        }
+        CoC.instance.player.dynStats("lust", 0, "scale", false) //Workaround to showing the arrow.
+        statScreenRefresh();
+        return CoC.instance.player.tailVenom - before;
     }
 
     public static function clone(source:Object):* {

@@ -160,11 +160,7 @@ public class TeaseSkill extends AbstractGeneral {
 			}
         }
 		if (display) outputText("\n\n");
-
-        combat.wrathregeneration1();
-		combat.fatigueRecovery1();
-		combat.manaregeneration1();
-		combat.soulforceregeneration1();
+		recoveryOfResources();
     }
 
     
