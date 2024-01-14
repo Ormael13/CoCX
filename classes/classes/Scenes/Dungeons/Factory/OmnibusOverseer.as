@@ -35,6 +35,8 @@ public class OmnibusOverseer extends Monster
 			}
 			else {
 				createStatusEffect(StatusEffects.LustAura, 0, 0, 0, 0);
+				outputText("\nIf you don't do something, you'll quickly succumb!");
+				clearTempResolute(false);
 			}
 		}
 		
