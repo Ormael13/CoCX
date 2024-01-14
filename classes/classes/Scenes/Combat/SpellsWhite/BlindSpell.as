@@ -30,7 +30,7 @@ public class BlindSpell extends AbstractWhiteSpell{
 		var uc:String = super.usabilityCheck();
 
 		//You can still use Blind if Draculina is the monster invisible
-		if (uc == "You cannot use offensive spells against an opponent you cannot see or target.") {
+		if (uc == "You cannot use offensive skills against an opponent you cannot see or target.") {
 			if (monster && monster is Draculina) {
 				return "";
 			}

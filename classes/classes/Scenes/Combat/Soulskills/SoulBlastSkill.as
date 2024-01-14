@@ -14,10 +14,10 @@ public class SoulBlastSkill extends AbstractSoulSkill {
             "Focus your reserves of soul force to unleash a torrent of devastating energy and obliterate your opponent.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING, TAG_MAGICAL],
+            [TAG_DAMAGING, TAG_MAGICAL, TAG_TIER3],
             StatusEffects.KnowsSoulBlast
         )
-		baseSFCost = 100;
+		baseSFCost = 900;
 		lastAttackType = Combat.LAST_ATTACK_SPELL;
     }
 
@@ -30,16 +30,13 @@ public class SoulBlastSkill extends AbstractSoulSkill {
 	}
 
 	override public function calcCooldown():int {
-        return 15;
+        return 10;
     }
 
 	public function calcDamage(monster:Monster):Number {
-		var damage:Number = player.str;
-		damage += scalingBonusStrength() * 1.8;
-		damage += player.inte;
-		damage += scalingBonusIntelligence() * 1.8;
-		damage += player.wis;
-		damage += scalingBonusWisdom() * 1.8;
+		var damage:Number = scalingBonusStrength() * 3;
+		damage += scalingBonusIntelligence() * 3;
+		damage += scalingBonusWisdom() * 3;
 		if (damage < 10) damage = 10;
 		
 		//soulskill mod effect

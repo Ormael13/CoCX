@@ -151,13 +151,13 @@ public class EngineCore {
             if (CoC.instance.player.HP >= maxOverHP())
                 outputText("Your HP maxes out at " + maxOverHP() + ".\n");
             else
-                outputText("You gain <b><font color=\"#008000\">" + int(changeNum) + "</font></b> HP.\n");
+                outputText("You gain <b><font color=\"#008000\">" + Utils.formatNumber(int(changeNum)) + "</font></b> HP.\n");
         }
         else {
             if (CoC.instance.player.HP <= minHP())
-                outputText("You take <b><font color=\"#800000\">" + int(changeNum * -1) + "</font></b> damage, dropping your HP to "+minHP()+".\n");
+                outputText("You take <b><font color=\"#800000\">" + Utils.formatNumber(int(changeNum * -1)) + "</font></b> damage, dropping your HP to "+minHP()+".\n");
             else
-                outputText("You take <b><font color=\"#800000\">" + int(changeNum * -1) + "</font></b> damage.\n");
+                outputText("You take <b><font color=\"#800000\">" + Utils.formatNumber(int(changeNum * -1)) + "</font></b> damage.\n");
         }
     }
 

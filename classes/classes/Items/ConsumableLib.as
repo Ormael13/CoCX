@@ -248,11 +248,11 @@ public final class ConsumableLib extends AlchemyLib
 		public const CEB_MAN: Consumable = mk("CEB_MAN", "CEBManual", "a manual for Create Element (Basic)", 100, "This manual would teach you how to use Create Element (Basic) soulskill. (Mag)", m.createelementmanual1);
 		public const CEA_MAN: Consumable = mk("CEA_MAN", "CEAManual", "a manual for Create Element (Advanced)", 400, "This manual would teach you how to use Create Element (Advanced) soulskill. (Mag)", m.createelementmanual2);
 		//public const YYB_MAN: Consumable = mk("YYB_MAN", "YYBlastManual", "a manual for Yin Yang Blast", x, "This manual would teach you how to use Yin Yang Blast combination soulskill and it components Yin Palm and Yang Fist soulskills.", m.xxx);
-	/*	public const FOLLMAN: Consumable = mk("MAN", "Manual", "a manual for Flames of Love (Low Rank) Soulskill", x, "This manual would teach you how to use Flames of Love (Low Rank) soulskill.", m.xxx);
-		public const IOLLMAN: Consumable = mk("MAN", "Manual", "a manual for Icicles of Love (Low Rank) Soulskill", x, "This manual would teach you how to use Icicles of Love (Low Rank) soulskill.", m.xxx);
-		public const SOSLMAN: Consumable = mk("MAN", "Manual", "a manual for Storm of Sisterhood (Low Rank) Soulskill", x, "This manual would teach you how to use Storm of Sisterhood (Low Rank) soulskill.", m.xxx);
-		public const NOBLMAN: Consumable = mk("MAN", "Manual", "a manual for Night of Brotherhood (Low Rank) Soulskill", x, "This manual would teach you how to use Night of Brotherhood (Low Rank) soulskill.", m.xxx);
-		public const FOLXMAN: Consumable = mk("MAN", "Manual", "a manual for Flames of Love () Soulskill", x, "This manual would teach you how to use Flames of Love (... Rank) soulskill.", m.xxx);
+		public const FOLLMAN: Consumable = mk("FOLLMAN", "FOLLManual", "a manual for Flames of Love (Low Rank) Soulskill", 100, "This manual would teach you how to use Flames of Love (Low Rank) soulskill.", m.flamesoflovemanuallowrank);
+		public const IOLLMAN: Consumable = mk("IOLLMAN", "IOLLManual", "a manual for Icicles of Love (Low Rank) Soulskill", 100, "This manual would teach you how to use Icicles of Love (Low Rank) soulskill.", m.iciclesoflovemanuallowrank);
+		public const SOSLMAN: Consumable = mk("SOSLMAN", "SOSLManual", "a manual for Storm of Sisterhood (Low Rank) Soulskill", 100, "This manual would teach you how to use Storm of Sisterhood (Low Rank) soulskill.", m.stormofsisterhoodmanuallowrank);
+		public const NOBLMAN: Consumable = mk("NOBLMAN", "NOBLManual", "a manual for Night of Brotherhood (Low Rank) Soulskill", 100, "This manual would teach you how to use Night of Brotherhood (Low Rank) soulskill.", m.nightofbrotherhoodmanuallowrank);
+	/*	public const FOLXMAN: Consumable = mk("MAN", "Manual", "a manual for Flames of Love () Soulskill", x, "This manual would teach you how to use Flames of Love (... Rank) soulskill.", m.xxx);
 		public const IOLXMAN: Consumable = mk("MAN", "Manual", "a manual for Icicles of Love () Soulskill", x, ".", m.xxx);
 		public const SOSXMAN: Consumable = mk("MAN", "Manual", "a manual for Storm of Sisterhood () Soulskill", x, ".", m.xxx);
 		public const NOBXMAN: Consumable = mk("MAN", "Manual", "a manual for Night of Brotherhood () Soulskill", x, ".", m.xxx);
