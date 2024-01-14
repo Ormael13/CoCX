@@ -50,12 +50,13 @@ public class Zetaz extends Monster
 		}
 		
 		public function gigaArouse():void {
-			outputText("You see " + a + short + " make familiar arcane gestures at you, but his motions seem a lot more over the top than you'd expect from an imp.\n\n");
+			outputText("You see " + a + short + " make familiar arcane gestures at you, but his motions seem a lot more over the top than you'd expect from an imp. ");
 			var lustDmg:Number = inteligencescalingbonus() / 3;
 			lustDmg *= 1 + (0.5 * (player.cor / 100));
 			lustDmg += 15;
 			
 			player.takeLustDamage(lustDmg, true);
+			outputText("\n");
 			if(player.lust100 < 30) outputText("Your nethers pulse with pleasant warmth that brings to mind pleasant sexual memories.  ");
 			if(player.lust100 >= 30 && player.lust100 < 60) outputText("Blood rushes to your groin in a rush as your body is hit by a tidal-wave of arousal.  ");
 			if(player.lust100 >= 60) outputText("Your mouth begins to drool as you close your eyes and imagine yourself sucking off Zetaz, then riding him, letting him sate his desires in your inviting flesh.  The unnatural visions send pulses of lust through you so strongly that your body shivers.  ");
@@ -72,6 +73,29 @@ public class Zetaz extends Monster
 			}
 			if(player.lust >= player.maxOverLust()) doNext(SceneLib.combat.endLustLoss);
 		}
+
+		public function gigaWhitefire():void {
+			outputText("The imp lord glares daggers at you, before snapping his fingers.");
+			outputText(" In a flash, you and the area around are bathed in white flames!");
+
+			var damage:Number = eBaseIntelligenceDamage() * 5;
+
+			if (player.hasStatusEffect(StatusEffects.Blizzard)) {
+				player.addStatusValue(StatusEffects.Blizzard, 1, -1);
+				damage *= 0.2;
+				outputText(" Luckily, your conjured blizzard lessens the effect. ")
+			}
+			player.takeFireDamage(damage, true);
+
+			var burnChance:Number = 25;
+			if (player.hasStatusEffect(StatusEffects.BurnDoT)) {
+				player.addStatusValue(StatusEffects.BurnDoT, 1, 1);
+			} else if (!player.immuneToBurn()) {
+				player.createStatusEffect(StatusEffects.BurnDoT, 3, 0.1, 0, 0);
+				outputText(" His spell leaves burns all over your body!");
+			}
+		}
+		
 
 		public function zetazTaunt():void {
 			if(!hasStatusEffect(StatusEffects.round)) {
@@ -94,11 +118,12 @@ public class Zetaz extends Monster
 			}
 		}
 
-		//One time heal and empowerment
+		//One time heal and empowerment for difficulties above normal
 		public function zetazMight():void {
-			outputText("Zetaz flushes, drawing on his body's desires to empower his muscles and toughen his up.");
-			outputText("The rush of success and power flows through his body.  He feels like he can do anything!");
-			statStore.addBuffObject({"str.mult":0.3, "tou.mult":0.3},"ImpMight");
+			outputText("Zetaz flushes, drawing on his body's desires to empower his muscles and spells. ");
+			outputText("Laughing from the rush of power, he quickly rises into air!");
+			statStore.addBuffObject({"int.mult":0.3, "tou.mult":0.3}, "ImpMight");
+			this.createStatusEffect(StatusEffects.Flying, 30, 0, 0, 0);
 			addHP(0.25 * maxHP());
 			this.mightCasted = true;
 		}
@@ -126,6 +151,12 @@ public class Zetaz extends Monster
 			return super.handleFear();
 		}
 
+		override public function displaySpecialStatuses():Array {
+			var statusArray:Array = super.displaySpecialStatuses();
+			if (statStore.hasBuff("ImpMight")) statusArray.push("Imp Might");
+			return statusArray;
+		}
+
 		public function blindHeal():void {
 			removeStatusEffect(StatusEffects.Blind);
 			outputText("Zetaz blinks and shakes his head while stroking himself.  After a second his turgid member loses some of its rigidity, but his gaze has become clear.  He's somehow consumed some of his lust to clear away your magic!\n");
@@ -149,27 +180,31 @@ public class Zetaz extends Monster
 
 		private function buildAbilities():Array {
 			var abilities:Array = [
-				{call: lustHeal, type: ABILITY_SPECIAL, range: RANGE_SELF, condition: lustHealCheck, weight: Infinity },
+				{call: lustHeal, type: ABILITY_SPECIAL, range: RANGE_SELF, condition: lustHealCheck, weight: Infinity, tags:[TAG_HEAL] },
 				{call: heatDraft, type: ABILITY_MAGIC, range: RANGE_RANGED},
-				{call: gigaArouse, type: ABILITY_MAGIC, range: RANGE_RANGED},
-				{call: gust, type: ABILITY_PHYSICAL, range: RANGE_RANGED},
-				{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE}
+				{call: gigaArouse, type: ABILITY_MAGIC, range: RANGE_RANGED, weight: 2},
+				{call: gust, type: ABILITY_PHYSICAL, condition: gustCheck, range: RANGE_RANGED},
+				{call: gigaWhitefire, type: ABILITY_MAGIC, range: RANGE_RANGED, weight: 2, tags:[TAG_FIRE]}
 			];
 
 			//Zetaz gains the ability to use Might under 50%HP in difficulties over Normal 
 			if (flags[kFLAGS.GAME_DIFFICULTY] > 0) {
-				abilities.push({call: zetazMight, type: ABILITY_MAGIC, range: RANGE_SELF, condition: mightCheck, weight: Infinity});
+				abilities.push({call: zetazMight, type: ABILITY_SPECIAL, range: RANGE_SELF, condition: mightCheck, weight: Infinity, tags:[TAG_HEAL]});
 			}
 
 			return abilities;
 		}
 
 		public function lustHealCheck():Boolean {
-			return lust100 > 50 && HPRatio() <= .5 && !hasStatusEffect(StatusEffects.AbilityCooldown1);
+			return lust100 >= 10 && HPRatio() <= .5 && !hasStatusEffect(StatusEffects.AbilityCooldown1);
 		}
 
 		public function mightCheck():Boolean {
 			return HPRatio() <= .5 && !mightCasted;
+		}
+
+		public function gustCheck():Boolean {
+			return !player.hasStatusEffect(StatusEffects.Blind);
 		}
 
 		public function Zetaz()
