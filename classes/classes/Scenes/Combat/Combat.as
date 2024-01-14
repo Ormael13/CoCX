@@ -11847,7 +11847,7 @@ public class Combat extends BaseContent {
                 if (player.hasStatusEffect(StatusEffects.MonsterDig)) statusTypes.push("Underground");
                 if (combat.isEnemyInvisibleButNotUnderground) statusTypes.push("Invisible");
                 if (monster.lustVuln == 0) statusTypes.push("Lust Immune");
-                statusTypes.concat(monster.displaySpecialStatues());
+                statusTypes.push(monster.displaySpecialStatuses());
             }
             outputText("\n");
             if (player.hasPerk(PerkLib.EyesOfTheHunterNovice)){

@@ -1173,84 +1173,47 @@ import classes.Scenes.Combat.CombatAbilities;
 		}
 
 		public function eBaseStrengthDamage():Number {
-			var damage:Number = 0;
-			damage += str;
-			if (str >= 21) damage += (str - 20);
-			if (str >= 41) damage += (str - 40);
-			if (str >= 61) damage += (str - 60);
-			if (str >= 81) damage += (str - 80);
-			if (str >= 101) damage += tieredBonus(str, 50, 100);
-			if (str < 10) damage = 10;
-			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
-			if (hasStatusEffect(StatusEffects.Provoke)) damage *= statusEffectv2(StatusEffects.Provoke);
-			//monster exclusive perks bonus
-			damage *= eBaseMultis();
-			damage = Math.round(damage);
-			return damage;
+			return eBasePhysModifier(eBaseStatDamage(str));
 		}
 
 		public function eBaseToughnessDamage():Number {
-			var damage:Number = 0;
-			damage += tou;
-			if (tou >= 21) damage += (tou - 20);
-			if (tou >= 41) damage += (tou - 40);
-			if (tou >= 61) damage += (tou - 60);
-			if (tou >= 81) damage += (tou - 80);
-			if (tou >= 101) damage += tieredBonus(tou, 50, 100);
-			if (tou < 10) damage = 10;
-			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
-			if (hasStatusEffect(StatusEffects.Provoke)) damage *= statusEffectv2(StatusEffects.Provoke);
-			//monster exclusive perks bonus
-			damage *= eBaseMultis();
-			damage = Math.round(damage);
-			return damage;
+			return eBasePhysModifier(eBaseStatDamage(tou));
 		}
 
 		public function eBaseSpeedDamage():Number {
-			var damage:Number = 0;
-			damage += spe;
-			if (spe >= 21) damage += (spe - 20);
-			if (spe >= 41) damage += (spe - 40);
-			if (spe >= 61) damage += (spe - 60);
-			if (spe >= 81) damage += (spe - 80);
-			if (spe >= 101) damage += tieredBonus(spe, 50, 100);
-			if (spe < 10) damage = 10;
-			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
-			if (hasStatusEffect(StatusEffects.Provoke)) damage *= statusEffectv2(StatusEffects.Provoke);
-			//monster exclusive perks bonus
-			damage *= eBaseMultis();
-			damage = Math.round(damage);
-			return damage;
+			return eBasePhysModifier(eBaseStatDamage(spe));
 		}
 
 		public function eBaseIntelligenceDamage():Number {
-			var damage:Number = 0;
-			damage += inte;
-			if (inte >= 21) damage += (inte - 20);
-			if (inte >= 41) damage += (inte - 40);
-			if (inte >= 61) damage += (inte - 60);
-			if (inte >= 81) damage += (inte - 80);
-			if (inte >= 101) damage += tieredBonus(inte, 50, 100);
-			if (inte < 10) damage = 10;
+			return eBaseStatDamage(inte);
+		}
+
+		public function eBaseWisdomDamage():Number {
+			return eBaseStatDamage(wis);
+		}
+
+		public function eBaseLibidoDamage():Number {
+			return eBaseStatDamage(lib);
+		}
+
+		private function eBaseStatDamage(stat:Number):Number {
+			var damage:Number = stat;
+			if (stat >= 21) damage += (stat - 20);
+			if (stat >= 41) damage += (stat - 40);
+			if (stat >= 61) damage += (stat - 60);
+			if (stat >= 81) damage += (stat - 80);
+			if (stat >= 101) damage += tieredBonus(stat, 50, 100);
+			if (stat < 10) damage = 10;
 			//monster exclusive perks bonus
 			damage *= eBaseMultis();
 			damage = Math.round(damage);
 			return damage;
 		}
 
-		public function eBaseWisdomDamage():Number {
-			var damage:Number = 0;
-			damage += wis;
-			if (wis >= 21) damage += (wis - 20);
-			if (wis >= 41) damage += (wis - 40);
-			if (wis >= 61) damage += (wis - 60);
-			if (wis >= 81) damage += (wis - 80);
-			if (wis >= 101) damage += tieredBonus(wis, 50, 100);
-			if (wis < 10) damage = 10;
-			//monster exclusive perks bonus
-			damage *= eBaseMultis();
-			damage = Math.round(damage);
-			return damage;
+		private function eBasePhysModifier(damage:Number):Number {
+			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
+			if (hasStatusEffect(StatusEffects.Provoke)) damage *= statusEffectv2(StatusEffects.Provoke);
+			return Math.round(damage);
 		}
 
 		private function inteligencescalingbonusMonster(stat:int):Number{
@@ -2894,7 +2857,7 @@ import classes.Scenes.Combat.CombatAbilities;
 		 * To be overwritten by child monster classes
 		 * @return statues (Array) - List of String repreenting each unique status the monster is currently under
 		 */
-		public function displaySpecialStatues():Array {
+		public function displaySpecialStatuses():Array {
 			return [];
 		}
 
@@ -3861,32 +3824,34 @@ import classes.Scenes.Combat.CombatAbilities;
 				if(flags[kFLAGS.PC_FETISH] >= 2) player.dynStats("lus", 3);
 			}
 			if(this is SecretarialSuccubus || this is MilkySuccubus) {
-				if(player.lust < (player.maxLust() * 0.45)) outputText("There is something in the air around your opponent that makes you feel warm.\n\n");
-				else if(player.lust < (player.maxLust() * 0.70)) outputText("You aren't sure why but you have difficulty keeping your eyes off your opponent's lewd form.\n\n");
-				else if(player.lust < (player.maxLust() * 0.90)) outputText("You blush when you catch yourself staring at your foe's rack, watching it wobble with every step she takes.\n\n");
-				else outputText("You have trouble keeping your greedy hands away from your groin.  It would be so easy to just lay down and masturbate to the sight of your curvy enemy.  The succubus looks at you with a sexy, knowing expression.\n\n");
-				player.takeLustDamage(1+rand(8), true);
+				if(player.lust < (player.maxLust() * 0.45)) outputText("There is something in the air around your opponent that makes you feel warm. ");
+				else if(player.lust < (player.maxLust() * 0.70)) outputText("You aren't sure why but you have difficulty keeping your eyes off your opponent's lewd form. ");
+				else if(player.lust < (player.maxLust() * 0.90)) outputText("You blush when you catch yourself staring at your foe's rack, watching it wobble with every step she takes. ");
+				else outputText("You have trouble keeping your greedy hands away from your groin.  It would be so easy to just lay down and masturbate to the sight of your curvy enemy.  The succubus looks at you with a sexy, knowing expression. ");
+				player.takeLustDamage((eBaseLibidoDamage() / 40) + rand(8), true);
+				outputText("\n\n");
 			}
 			//[LUST GAINED PER ROUND] - Omnibus
 			if(hasStatusEffect(StatusEffects.LustAura)) {
 				if (this is OmnibusOverseer || this is HeroslayerOmnibus) {
-					if(player.lust < (player.maxLust() * 0.33)) outputText("Your groin tingles warmly.  The demon's aura is starting to get to you.\n\n");
-					if(player.lust >= (player.maxLust() * 0.33) && player.lust < (player.maxLust() * 0.66)) outputText("You blush as the demon's aura seeps into you, arousing you more and more.\n\n");
+					if(player.lust < (player.maxLust() * 0.33)) outputText("Your groin tingles warmly.  The demon's aura is starting to get to you. ");
+					if(player.lust >= (player.maxLust() * 0.33) && player.lust < (player.maxLust() * 0.66)) outputText("You blush as the demon's aura seeps into you, arousing you more and more. ");
 					if(player.lust >= (player.maxLust() * 0.66)) {
 						outputText("You flush bright red with desire as the lust in the air worms its way inside you.  ");
 						temp = rand(4);
-						if(temp == 0) outputText("You have a hard time not dropping to your knees to service her right now.\n\n");
-						if(temp == 2) outputText("The urge to bury your face in her breasts and suckle her pink nipples nearly overwhelms you.\n\n");
-						if(temp == 1) outputText("You swoon and lick your lips, tasting the scent of the demon's pussy in the air.\n\n");
-						if(temp == 3) outputText("She winks at you and licks her lips, and you can't help but imagine her tongue sliding all over your body.  You regain composure moments before throwing yourself at her.  That was close.\n\n");
+						if(temp == 0) outputText("You have a hard time not dropping to your knees to service her right now. ");
+						if(temp == 2) outputText("The urge to bury your face in her breasts and suckle her pink nipples nearly overwhelms you. ");
+						if(temp == 1) outputText("You swoon and lick your lips, tasting the scent of the demon's pussy in the air. ");
+						if(temp == 3) outputText("She winks at you and licks her lips, and you can't help but imagine her tongue sliding all over your body.  You regain composure moments before throwing yourself at her.  That was close. ");
 					}
 				}
 				if (this is Alraune || this is Marae) {
-					if(player.lust < (player.maxLust() * 0.33)) outputText("The pollen in the air gradually increase your arousal.\n\n");
-					if(player.lust >= (player.maxLust() * 0.33) && player.lust < (player.maxLust() * 0.66)) outputText("The pollen in the air is getting to you.\n\n");
-					if(player.lust >= (player.maxLust() * 0.66)) outputText("You flush bright red with desire as the lust in the air worms its way inside you.\n\n");
+					if(player.lust < (player.maxLust() * 0.33)) outputText("The pollen in the air gradually increase your arousal. ");
+					if(player.lust >= (player.maxLust() * 0.33) && player.lust < (player.maxLust() * 0.66)) outputText("The pollen in the air is getting to you. ");
+					if(player.lust >= (player.maxLust() * 0.66)) outputText("You flush bright red with desire as the lust in the air worms its way inside you. ");
 				}
-				player.takeLustDamage((3 + int(player.lib/20 + player.cor/25)), true);
+				player.takeLustDamage(((eBaseLibidoDamage() / 40) + int(player.lib/20 + player.cor/25)), true);
+				outputText("\n\n");
 			}
 			//immolation DoT
 			if (hasStatusEffect(StatusEffects.ImmolationDoT)) {
