@@ -28,7 +28,7 @@ public class RaisuneRace extends Race {
         /*Ovipositor*/	"Human",
         /*Oviposition*/	"Human",
         /*GlowingAss*/	"Human",
-        /*Tail*/		"Human",
+        /*Tail*/		"Raisune",
         /*Tongue*/		"Human",
         /*Wings*/		"Thunder",
         /*Penis*/		"Raiju",
@@ -50,15 +50,17 @@ public class RaisuneRace extends Race {
 				.legType(LowerBody.RAIJU, +1)
 				.wingType(Wings.THUNDEROUS_AURA, +4)
 				.rearType(RearBody.RAIJU_MANE, +1)
+				.hairType(Hair.STORM, +1)
+				.skinCoatType(NOT(Skin.CHITIN), 0, -2)
+				.skinBaseType(NOT(Skin.GOO), 0, -3)
+				.cockOrVaginaOfType(CockTypesEnum.RAIJU, VaginaClass.RAIJU, +1);
+		addScoresAfter(5)
 				.customRequirement("skin", "fur or magical tatoo",
 						function (body:BodyData):Boolean {
 							return body.skinCoatType == Skin.FUR
 									|| body.skinBasePattern == Skin.PATTERN_MAGICAL_TATTOO
 						}, +1)
-				.hairType(Hair.STORM, +1)
-				.skinCoatType(NOT(Skin.CHITIN), 0, -2)
-				.skinBaseType(NOT(Skin.GOO), 0, -3)
-				.cockOrVaginaOfType(CockTypesEnum.RAIJU, VaginaClass.RAIJU, +1);
+				.hasPerk(PerkLib.StarSphereMastery, +1);
 				
 		addBloodline(PerkLib.RaijusDescendant, PerkLib.BloodlineRaiju);
 		
