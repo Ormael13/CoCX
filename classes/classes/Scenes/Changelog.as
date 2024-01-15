@@ -75,10 +75,10 @@ public class Changelog extends BaseContent
 			outputText("-Fixed bug relating to showing special statuses for bosses. (Demojay)\n");
 			outputText("-Added 'GigaWhitefire' spell to Zetaz. 'zetazMight' now causes Zetaz to start flying. Zetaz's 'Gust' attack is not used if the enemy is already blinded. (Demojay)\n");
 			outputText("-Omnibus Overseer's 'lust aura' and 'milk attack' moves now deal scaling damage. 'Lust Aura' DoT now deals scaling libido damage. Stunning/Confusing/Fearing the Overseer will disrupt their Lust Aura. Added message to Omnibus Overseer Lust Aura, to signal that they should try disrupting the boss to cancel the aura. (Demojay)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Qi - owner of 'Flying Swords are always with you!' no more in closed doors cultivation session. And now he can train or sell some more specialistic manuals to PC.\n");
+			outputText("-Flying Sword Path, Soaring Blades, First Attack: Flying Sword Killing Intent perks no longer are in level up menu. All spend before perks are refunded no worried.\n");
+			outputText("-Flying Sword Path perk have now ranks and 1st rank is learned by training with Qi costing 50 spirit stones for training.\n");
+			outputText("-New consumable: Soaring Blades manual. Req. buying manual from Qi for 50 spirit stones after finsining basic training with him. Using will grant perk Soaring Blades.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

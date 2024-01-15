@@ -6,7 +6,7 @@ package classes.Perks
 {
 import classes.IMutations.IMutationsLib;
 import classes.PerkClass;
-	import classes.PerkType;
+import classes.PerkType;
 
 	public class StarSphereMasteryPerk extends PerkType
 	{

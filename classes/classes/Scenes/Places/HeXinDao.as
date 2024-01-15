@@ -852,10 +852,62 @@ public class HeXinDao extends BaseContent
 		addButton(4, weaponsflyingswords.MOONLGT.shortName, flyingSwordBuy, weaponsflyingswords.MOONLGT, qimerchant);
 		addButton(5, weaponsflyingswords.S_TWINS.shortName, flyingSwordBuy, weaponsflyingswords.S_TWINS, qimerchant);
 		addButton(10, weaponsflyingswords.ASAUCHI.shortName, flyingSwordBuy, weaponsflyingswords.ASAUCHI, qimerchant);
-        addButtonDisabled(13, "Training", "The shop owner, Qi, is in the middle of closed door cultivations. It shouldn't take longer than a few months for him to finish.");//.hint("Flying Sword training.")
+        addButton(13, "Qi", qimerchantTraningMain).hint("Flying Sword training and others related matters.");
         addButton(14, "Back", riverislandVillageStuff);
         statScreenRefresh();
     }
+	
+	private function qimerchantTraningMain():void {
+		clearOutput();
+		outputText("\"<i>Welcome customer,</i>\" Qi stretches his arms out toward you before gesturing to his inventory. \"<i>Please, browse my wares. Can I interest you in a sword, or are you looking for something else?</i>\"");
+		menu();
+		if (player.hasPerk(PerkLib.SoulSense) && flags[kFLAGS.SPIRIT_STONES] >= 50) addButtonIfTrue(0, "Basic training", qimerchantTraningMainFlyingSwordPath1, "You already learned basic control of flying swords.", !player.hasPerk(PerkLib.FlyingSwordPath));
+		else addButtonDisabled(0, "Basic training", "Req. Soul Sense perk & 50 spirit stones.");
+		addButtonIfTrue(10, "Soaring Blades", qimerchantTraningMainSoaringBladesManual, "You need to learn how to control flying swords first (Req. Flying Sword Path perk).", player.hasPerk(PerkLib.FlyingSwordPath));
+		addButton(14, "Back", qimerchant);
+	}
+	private function qimerchantTraningMainFlyingSwordPath1():void {
+		clearOutput();
+		outputText("He motions you to follow him to next room. Once inside after him, you notice something a strange sensation. The room feels off, as if it's larger than it has any right to be. Should you go back out and double check?\n\n");
+		outputText("Qi notices your confusion, \"<i>It's just minor space expansion effect set up. It's useful when I need to do some training or teach others such as you. It prevents accidents when you have more room to learn in.</i>\" He then points you to sit on one of cushions set in the middle of the room.\n\n");
+		outputText("He settles down with you before he resumes the lesson, \"<i>Using flying swords require two things: First it's to imprint mark on the sword using your own soulforce. Let me show you.</i>\"\n\n");
+		outputText("He pulls out a small flying sword from a Bag of Holding. While he explains the whole process, he makes new imprint of it. He follows with explaining how to find if a particular sword already has an imprint. Then, he takes out another sword and gives it to you to repeat what he has shown.\n\n");
+		outputText("It takes a tremendous effort to get used to, but Qi remains patient, watching you intently with a steady gaze. After several initial failures, you managed to imprint the sword.\n\n");
+		outputText("Qi applauds briefly, \"<i>Good. Now, the second step: Controlling it to do what you want utilizing your Soul Sense. Imagine using it as you would with your hand and control flying sword.</i>\"\n\n");
+		outputText("Qi takes out four smaller swords before tossing them into air. He watches them float as they bring themselves into a basic formation instead of falling down on the floor. \"<i>At first, you may find it difficult to not gesticulate as you draw on your soul force to guide the swords...</i>\" He moves his right hand, causing all the swords follow his gesture, \"<i>As you find your sense of self, I'd advise against any movements or somatics. Work your way until you don't have to make a single movement...</i>\" He pauses his hand as the swords continue circling the both of you until they all return to his side like faithful hounds.\n\n");
+		outputText("\"<i>Naturally, it'll be much easier to control multiple smaller weapons over larger ones.</i>\" With a wave of his hand, the swords seem to fold over one another before vanishing into his bag. \"<i>Though, that is a lesson for the future. Now, if you succeed, you will be able to, at best, use one massive, two large or four small ones.</i>\"\n\n");
+		outputText("For the next half hour, you work on controlling the swords under Qi's guidance, watching his lessons with intent as he instructs each moment meticulously, ensuring you can reach your full potential.\n\n");
+		outputText("\"<i>Good, it would appear that you understand the basics of using flying swords. Besides using them to move and attack, you could also use ride on a sword that's large enough, though, this inhibits all offensive potential, of course.</i>\"\n\n");
+		outputText("He extends his hand to you, \"<i>Now, please return that sword. You can always buy one from me when you need it, that one is solely for practice.</i>\"\n\n");
+		outputText("You return the sword to him, to which he responds with a respectful bow before running a piece of cloth over it, clearing any imprints upon it as he stashes it away. \"<i>Until your cultivation base not attain major breakthrough i can't teach you anything new beside providing you with manual for minor technique that helps you to lessen burden of using flying swords as your progress through each major realm. It's not super cheap one but I can sell it to you. As long you got enough spirit stones to buy it.</i>\" He laugh heartly then stands up and leading you back to first room where the golem stays.\n\n");
+		outputText("<b>(<b>Gained Perk: Flying Sword Path (Rank 1)!</b>)</b>\n\n");
+		player.createPerk(PerkLib.FlyingSwordPath, 1, 0, 0, 0);
+		flags[kFLAGS.SPIRIT_STONES] -= 50;
+		advanceMinutes(150);
+		doNext(qimerchantTraningMain);
+	}
+	private function qimerchantTraningMainFlyingSwordPath2():void {
+		clearOutput();
+		outputText("\"<i></i>\"\n\n");
+		advanceMinutes(150);
+		doNext(qimerchantTraningMain);
+	}
+	private function qimerchantTraningMainSoaringBladesManual():void {
+		clearOutput();
+		outputText("Qi holds up the manual and says, \"<i>It would teach you Soaring Blades, that helps with reducing soulfroce consumption to operate flying swords.  It is <b>50 spirit stones</b></i>.\" ");
+		doYesNo(buySoaringBladesManual, qimerchantTraningMain);
+	}	
+	private function buySoaringBladesManual():void {
+		if (flags[kFLAGS.SPIRIT_STONES] < 50) {
+			clearOutput();
+			outputText("\n\nQi sighs, indicating you need " + String(50 - flags[kFLAGS.SPIRIT_STONES]) + " more spirit stones to purchase this manual.");
+			doNext(qimerchantTraningMain);
+		}
+		else {
+			flags[kFLAGS.SPIRIT_STONES] -= 50;
+			inventory.takeItem(consumables.S_B_MAN, qimerchantTraningMain);
+		}
+	}
 
 	private function flyingSwordBuy(itype:ItemType, returnFunc:Function):void {
 		var descString:String = "After entering the shop with a sign saying 'Flying Swords are always with you!' over the doors you see a few shelves filled with various flying swords. "

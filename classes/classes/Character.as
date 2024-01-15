@@ -587,6 +587,7 @@ import classes.Scenes.NPCs.Forgefather;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 58) max += 210 * (flags[kFLAGS.SOUL_CULTIVATION] - 57);//Soul Saint
 			//if (flags[kFLAGS.SOUL_CULTIVATION] >= ) max += 210 * (flags[kFLAGS.SOUL_CULTIVATION] - 57);//Soul Paragon
 			//if (flags[kFLAGS.SOUL_CULTIVATION] >= ) max += 0 * (flags[kFLAGS.SOUL_CULTIVATION] - 57);//Soul Immortal
+			if (hasPerk(PerkLib.FlyingSwordPath)) max += (50 * (1 + perkv1(PerkLib.FlyingSwordPath)));
 			if (hasPerk(PerkLib.DemonicLethicite)) max += Math.round(lib);
 			if (hasPerk(PerkLib.Metamorph)) max += (50 * (1 + perkv1(PerkLib.Metamorph)));
 			if (hasPerk(PerkLib.MetamorphEx)) max += (50 + (100 * perkv1(PerkLib.MetamorphEx)));
