@@ -5,6 +5,7 @@ import classes.Monster;
 import classes.Scenes.Combat.Combat;
 import classes.internals.SaveableState;
 import classes.PerkLib;
+import classes.Saves;
 
 public class FlamesOfLoveSkill extends AbstractSoulSkill implements SaveableState {
 	private var uses:int = 0;
@@ -19,7 +20,7 @@ public class FlamesOfLoveSkill extends AbstractSoulSkill implements SaveableStat
             StatusEffects.KnowsFlamesOfLove
         )
 		lastAttackType = Combat.LAST_ATTACK_SPELL;
-		baseSFCost = 100;
+		Saves.registerSaveableState(this);
     }
 
 	public function loadFromObject(o:Object, ignoreErrors:Boolean):void
@@ -73,7 +74,9 @@ public class FlamesOfLoveSkill extends AbstractSoulSkill implements SaveableStat
 					break;
 			case 2: desc += "Effective against groups.\nRank: Low Rank";
 					break;
-			case 3: desc += "Highly effective against groups.\nRank: High Rank";
+			case 3: desc += "Highly effective against groups.\nRank: Mid Rank";
+					break;
+			case 4: desc += "Highly effective against groups.\nRank: High Rank";
 					break;
 		}
 
@@ -94,23 +97,12 @@ public class FlamesOfLoveSkill extends AbstractSoulSkill implements SaveableStat
     }
 
 	override public function calcCooldown():int {
-		return  Math.round(player.statusEffectv1(StatusEffects.KnowsFlamesOfLove));
-	}
-
-	override public function sfCost():int {
-		var currentLevel:int = player.statusEffectv1(knownCondition);
-		var cost:int = baseSFCost;
-
-		cost *= Math.pow(2, currentLevel - 1);
-
-		cost *= soulskillCost() * soulskillcostmulti();
-		return Math.round(cost);
+		return  Math.max(0, player.statusEffectv1(knownCondition) - 1);
 	}
 
 	private function calcLustRestore():Number {
 		var restoreAmount:Number = 0;
-		var restoreMult:Number = Math.pow(2, player.statusEffectv1(StatusEffects.KnowsFlamesOfLove) - 1);
-		restoreAmount += Math.round(player.lust * (restoreMult * 0.1));
+		restoreAmount += Math.round(player.lust * (player.statusEffectv1(knownCondition) * 0.1));
 		return restoreAmount;
 	}
 
@@ -154,8 +146,8 @@ public class FlamesOfLoveSkill extends AbstractSoulSkill implements SaveableStat
 
     private function levelUpCheck(increment:Boolean = true, display:Boolean = true):void {
 		var currentLevel:int = player.statusEffectv1(knownCondition);
-		var nextLevelUp:int = (currentLevel == 2)? 20: 5;
-		var maxLevel:int = 3;
+		var nextLevelUp:int = (currentLevel > 1)? 10: 5;
+		var maxLevel:int = 4;
 		if (currentLevel <= 0 || currentLevel >= maxLevel) return;
 
 		if (increment && uses < nextLevelUp) uses++;
@@ -168,18 +160,27 @@ public class FlamesOfLoveSkill extends AbstractSoulSkill implements SaveableStat
 		if (currentLevel == 1 && uses >= nextLevelUp && player.hasPerk(PerkLib.SoulApprentice)) {
 			if (display) {
 				outputText("Your skill at using the \"" + name + "\" soulskill has progressed!\n");
-				outputText("<b>\"" + name + " rank has increased from (Rankless) to (Low Rank)!</b>\n\n");
+				outputText("<b>\"" + name + "\" rank has increased from (Rankless) to (Low Rank)!</b>\n\n");
 			}
 			player.changeStatusValue(knownCondition, 1, 2);
 			uses = 0;
 		}
 
-		if (currentLevel == 2 && uses >= nextLevelUp && player.hasPerk(PerkLib.SoulScholar)) {
+		if (currentLevel == 2 && uses >= nextLevelUp && player.hasPerk(PerkLib.SoulWarrior)) {
 			if (display) {
 				outputText("Your skill at using the \"" + name + "\" soulskill has progressed!\n");
-				outputText("<b>\"" + name + " rank has increased from (Low Rank) to (High Rank)!</b>\n\n");
+				outputText("<b>\"" + name + "\" rank has increased from (Low Rank) to (Mid Rank)!</b>\n\n");
 			}
 			player.changeStatusValue(knownCondition, 1, 3);
+			uses = 0;
+		}
+
+		if (currentLevel == 3 && uses >= nextLevelUp && player.hasPerk(PerkLib.SoulScholar)) {
+			if (display) {
+				outputText("Your skill at using the \"" + name + "\" soulskill has progressed!\n");
+				outputText("<b>\"" + name + "\" rank has increased from (Mid Rank) to (High Rank)!</b>\n\n");
+			}
+			player.changeStatusValue(knownCondition, 1, 4);
 			uses = 0;
 		}
 	}
