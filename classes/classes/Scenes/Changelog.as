@@ -79,13 +79,13 @@ public class Changelog extends BaseContent
 			outputText("-Flying Sword Path, Soaring Blades, First Attack: Flying Sword Killing Intent perks no longer are in level up menu. All spend before perks are refunded no worried.\n");
 			outputText("-Flying Sword Path perk have now ranks and 1st rank is learned by training with Qi costing 50 spirit stones for training.\n");
 			outputText("-New consumable: Soaring Blades manual. Req. buying manual from Qi for 50 spirit stones after finsining basic training with him. Using will grant perk Soaring Blades.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Add proper number formatting to the HP display function. Player Info now shows correct Soulskill cost reduction. (Demojay)\n");
+			outputText("-Fixed bug with Spiritual Enlightenment Ascension Perk where soulskill cost was being reduced by 20% per rank, rather than 2%. Fixed bug where you could obtain higher ranks in the Daoist and Body Cultivation Subpaths without purchasing the previous tiers. (Demojay)\n");
+			outputText("-The 'monsterDodgeSkill' function for soulskills can now take hitmodifiers into account. Standardized dodge chance of different ranks of the 'Hail of Blades' soulskills. (Demojay)\n");
+			outputText("-Comet changes: baseSFCost 60 -> 400, given cooldown of 4, base damage scalingBonusWisdom * 1 -> 6 (similar to tier 2 magic AOE) (Demojay)\n");
+			outputText("-Many Birds Changes: baseSFCost 10 -> 200, cooldown of 2, given AOE effect, base damage scalingBonusWisdom * 1 -> 2 (similar to tier 1 magic AOE) (Demojay)\n");
+			outputText("-Soul Blast changes: baseSFCost 100 -> 900, cooldown 15 -> 10, base damage scalingBonusStrength/Wisdom/Intelligence * 1.8 -> scalingBonusStrength/Wisdom/Intelligence * 3 (Demojay)\n");
+			outputText("-Fixed bug where Blind could not used against Draculina when invisible. (Demojay)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -99,6 +99,11 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay) (NUZ/Shirane)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Arigean above Recruit rank not immune to tf-ing effects, deer arms tf unlocking canine arms MM, unable to find tel'adre again after first time seeing it with too high corruption or other factor that not allowed entrance; Arigean above recruit rank marking, eye color and aura with mismatching colors; demon/arigean arms MM option giving instead devil/abyssal shark arms, ");
@@ -169,9 +174,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -199,7 +202,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
