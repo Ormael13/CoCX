@@ -17,7 +17,7 @@ public class CometSkill extends AbstractSoulSkill {
             [TAG_DAMAGING, TAG_AOE, TAG_MAGICAL],
             StatusEffects.KnowsComet
         )
-		baseSFCost = 60;
+		baseSFCost = 400;
 		lastAttackType = Combat.LAST_ATTACK_SPELL;
     }
 
@@ -40,8 +40,12 @@ public class CometSkill extends AbstractSoulSkill {
 		return "~" + numberFormat(calcDamage(target)) + " magical damage"
 	}
 
+	override public function calcCooldown():int {
+		return 4;
+	}
+
 	public function calcDamage(monster:Monster):Number {
-		var damage:Number = scalingBonusWisdom();
+		var damage:Number = scalingBonusWisdom() * 6;
 		if (damage < 10) damage = 10;
 
 		//soulskill mod effect

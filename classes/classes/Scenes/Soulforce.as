@@ -275,6 +275,7 @@ public class Soulforce extends BaseContent
 			addButton(i, stages[i][0], daoistSubPathChosen, stages[i][1], stages[i][2])
 				.disableIf(!player.hasItem(stages[i][2]), "Requires " + (stages[i][2] as ItemType).longName)
 				.disableIf(!player.hasPerk(stages[i][3]), "Requires perk: " + (stages[i][3] as PerkType).name())
+				.disableIf(i != 0 && !player.hasPerk(stages[i - 1][1]), "You need to have achieved the previous stage first.")
 				.disableIf(player.hasPerk(stages[i][1]), "You have already reached this stage.");
 		addButton(14, "Back", SubPaths);
 	}
@@ -328,6 +329,7 @@ public class Soulforce extends BaseContent
 					"Requires 1 bottle of " + (stages[i][2] as ItemType).longName
 					+ " and 1 vial of " + useables.BTSOLUTION.longName)
 				.disableIf(!player.hasPerk(stages[i][3]), "Requires perk: " + (stages[i][3] as PerkType).name())
+				.disableIf(i != 0 && !player.hasPerk(stages[i - 1][1]), "You need to have achieved the previous stage first.")
 				.disableIf(player.hasPerk(stages[i][1]), "You have already reached this stage.");
 		addButton(14, "Back", SubPaths);
 	}

@@ -22,7 +22,7 @@ public class HeartSeekerPuppiesSkill extends AbstractBloodSoulSkill {
     }
 
 	override protected function baseName():String {
-		return "BP: Heeart Seeker";
+		return "BP: Heart Seeker";
 	}
 
 	override public function describeEffectVs(target:Monster):String {
@@ -47,7 +47,7 @@ public class HeartSeekerPuppiesSkill extends AbstractBloodSoulSkill {
 	}
 
     override public function doEffect(display:Boolean = true):void {
-		if (display) outputText("Giving command your blood puppies, they start focusing the power of blood. Within an instant, large blood dripping spears coalesce briefly before being shot, flying toward [themonster] vital spot! ");
+		if (display) outputText("Giving command to your blood puppies, they start focusing the power of blood. Within an instant, large blood dripping spears coalesce briefly before being shot, flying toward [themonster] vital spot! ");
 
 
 		var damage:Number = calcDamage(monster);

@@ -12,7 +12,7 @@ public class NightOfBrotherhoodSkill extends AbstractSoulSkill {
             "Condense your wrath into a wreath of shadows, filled with the hate of your brotherhood.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING, , TAG_RECOVERY, TAG_MAGICAL],
+            [TAG_DAMAGING, TAG_DARKNESS, TAG_RECOVERY, TAG_MAGICAL, TAG_AOE],
             StatusEffects.KnowsNightOfBrotherhood
         )
 		lastAttackType = Combat.LAST_ATTACK_SPELL;
@@ -20,7 +20,7 @@ public class NightOfBrotherhoodSkill extends AbstractSoulSkill {
 
 	override public function get buttonName():String {
 		return "Night of Brotherhood";
-	}
+	} 
 
 	override protected function usabilityCheck():String {
         var uc:String =  super.usabilityCheck();
@@ -43,8 +43,7 @@ public class NightOfBrotherhoodSkill extends AbstractSoulSkill {
 	}
 
 	public function nightOfBrotherhoodWC():Number {
-    	var soswc:Number = 10;
-    	return soswc;
+    	return 10 * player.statusEffectv1(StatusEffects.KnowsNightOfBrotherhood);
 	}
 
 	private function calcWrathRestore():Number {
@@ -55,7 +54,10 @@ public class NightOfBrotherhoodSkill extends AbstractSoulSkill {
 
 	public function calcDamage(monster:Monster, baseDamage: Number):Number {
 		var damage:Number = baseDamage * (5 * player.statusEffectv1(StatusEffects.KnowsNightOfBrotherhood));
-		if (monster && monster.plural) damage *= 2;
+
+		//group enemies bonus
+		if (monster && monster.plural) damage *= 5;
+
 		damage *= combat.darknessDamageBoostedByDao();
 		return Math.round(damage);
 	}

@@ -15,7 +15,7 @@ public class KillingIntentSkill extends AbstractSoulSkill {
             "Project your bloodlust through your soul sense, damaging the enemies' mind. Damage increases with the number of monsters killed and cultivation rank.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING, TAG_MAGICAL],
+            [TAG_DAMAGING, TAG_MAGICAL, TAG_TIER1],
             PerkLib.KillingIntent
         )
 		baseSFCost = 200;

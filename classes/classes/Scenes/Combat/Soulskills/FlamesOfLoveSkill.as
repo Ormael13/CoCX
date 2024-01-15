@@ -11,7 +11,7 @@ public class FlamesOfLoveSkill extends AbstractSoulSkill {
             "Enfuse your magic with your burning lust, transfering it to your enemy as a barrage of flames.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING, TAG_FIRE, TAG_RECOVERY, TAG_MAGICAL],
+            [TAG_DAMAGING, TAG_FIRE, TAG_RECOVERY, TAG_MAGICAL, TAG_AOE],
             StatusEffects.KnowsFlamesOfLove
         )
 		lastAttackType = Combat.LAST_ATTACK_SPELL;
@@ -30,7 +30,7 @@ public class FlamesOfLoveSkill extends AbstractSoulSkill {
 		}
 
         return "";
-    }  
+    }
 
 	override public function describeEffectVs(target:Monster):String {
 		var lustRestore: Number = calcLustRestore();
@@ -42,8 +42,7 @@ public class FlamesOfLoveSkill extends AbstractSoulSkill {
 	}
 
 	public function flamesOfLoveLC():Number {
-    	var follc:Number = 10;
-    	return follc;
+    	return 10 * player.statusEffectv1(StatusEffects.KnowsFlamesOfLove);
 	}
 
 	private function calcLustRestore():Number {
@@ -54,7 +53,10 @@ public class FlamesOfLoveSkill extends AbstractSoulSkill {
 
 	public function calcDamage(monster:Monster, baseDamage: Number):Number {
 		var damage:Number = baseDamage * (5 * player.statusEffectv1(StatusEffects.KnowsFlamesOfLove));
-		if (monster && monster.plural) damage *= 2;
+
+		//group enemies bonus
+		if (monster && monster.plural) damage *= 5;
+
 		damage *= combat.fireDamageBoostedByDao();
 		return Math.round(damage);
 	}

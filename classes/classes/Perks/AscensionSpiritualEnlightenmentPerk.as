@@ -14,12 +14,12 @@ package classes.Perks
 		override public function desc(params:PerkClass = null):String
 		{
 			if (!player || !params) return _desc;
-			return "(Rank: " + params.value1 + "/" + CoC.instance.charCreation.MAX_SPIRITUALENLIGHTENMENT_LEVEL + ") Increases soulskill effect multiplier by " + params.value1 * 10 + "% multiplicatively and decrease soulskills costs by " + params.value1 * 2 + "%.";
+			return "(Rank: " + params.value1 + "/" + CoC.instance.charCreation.MAX_SPIRITUALENLIGHTENMENT_LEVEL + ") Increases soulskill effect multiplier by " + params.value1 * 10 + "% multiplicatively and decrease soulskill costs by " + params.value1 * 2 + "%.";
 		}
 
 		public function AscensionSpiritualEnlightenmentPerk()
 		{
-			super("Ascension: Spiritual Enlightenment", "Ascension: Spiritual Enlightenment", "", "Increases soulskill effect multiplier by 10% per level, multiplicatively and decrease soulskills costs by 2%.");
+			super("Ascension: Spiritual Enlightenment", "Ascension: Spiritual Enlightenment", "", "Increases soulskill effect multiplier by 10% per level, multiplicatively and decrease soulskill costs by 2% per level.");
 		}
 		
 		override public function keepOnAscension(respec:Boolean = false):Boolean
