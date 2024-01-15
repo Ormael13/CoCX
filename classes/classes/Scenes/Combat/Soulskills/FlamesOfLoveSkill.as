@@ -102,7 +102,20 @@ public class FlamesOfLoveSkill extends AbstractSoulSkill implements SaveableStat
 
 	private function calcLustRestore():Number {
 		var restoreAmount:Number = 0;
-		restoreAmount += Math.round(player.lust * (player.statusEffectv1(knownCondition) * 0.1));
+
+		var restoreMult:Number = 0;
+		switch (player.statusEffectv1(knownCondition)) {
+			case 1: restoreMult = 0.1;
+					break;
+			case 2: restoreMult = 0.2;
+					break;
+			case 3: restoreMult = 0.25;
+					break;
+			case 4: restoreMult = 0.3;
+					break;
+		}
+		restoreAmount += Math.round(player.lust * restoreMult);
+
 		return restoreAmount;
 	}
 
