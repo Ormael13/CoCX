@@ -4,59 +4,135 @@ import classes.StatusEffects;
 import classes.Monster;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Combat.Combat;
+import classes.internals.SaveableState;
+import classes.PerkLib;
 
-public class StormOfSisterhoodSkill extends AbstractSoulSkill {
+public class StormOfSisterhoodSkill extends AbstractSoulSkill implements SaveableState {
+	private var uses:int = 0;
+	private var skillIcon:String = "I_SOSBMAN";
     public function StormOfSisterhoodSkill() {
         super(
             "Storm of Sisterhood",
             "Transform your wrath into an electric storm, empowered by sisterhood.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING, TAG_LIGHTNING, TAG_RECOVERY, TAG_MAGICAL, TAG_AOE],
+            [TAG_DAMAGING, TAG_LIGHTNING, TAG_RECOVERY, TAG_MAGICAL],
             StatusEffects.KnowsStormOfSisterhood
         )
 		lastAttackType = Combat.LAST_ATTACK_SPELL;
+		baseSFCost = 100;
     }
 
-	override public function get buttonName():String {
-		return "Storm of Sisterhood";
-	}
+	public function loadFromObject(o:Object, ignoreErrors:Boolean):void
+    {
+    	if (o) {
+			uses = o["uses"];
+		} else {
+			resetState();
+		}
+    }
+
+	public function saveToObject():Object
+    {
+    	return {
+			"uses": uses 
+		}
+    }
+
+    public function stateObjectName():String
+    {
+    	return "StormOfSisterhood";
+    }
+
+    public function resetState():void
+    {
+    	uses = 0;
+    }
 
 	override protected function usabilityCheck():String {
         var uc:String =  super.usabilityCheck();
         if (uc) return uc;
 
-        if (player.wrath < 50) {
+        if (player.wrath < 250) {
 			return "Your current wrath is too low.";
 		}
 
         return "";
-    }  
+    }
+
+	override public function get description():String {
+		var desc:String = super.description;
+		var currentLevel:int = player.statusEffectv1(knownCondition);
+
+		switch (currentLevel) {
+			case 1: desc += "\nRank: Rankless";
+					break;
+			case 2: desc += "Effective against groups.\nRank: Low Rank";
+					break;
+			case 3: desc += "Highly effective against groups.\nRank: High Rank";
+					break;
+		}
+
+		return desc;
+	}  
 
 	override public function describeEffectVs(target:Monster):String {
 		var wrathRestore: Number = calcWrathRestore();
 		return "~" + numberFormat(calcDamage(target, wrathRestore)) + " lightning damage, restores " + numberFormat(wrathRestore) + " wrath";
 	}
 
+	override public function presentTags():Array {
+        var result:Array = super.presentTags();
+        var currentLevel:int = player.statusEffectv1(knownCondition);
+        if (currentLevel > 1) result.push(TAG_AOE);
+
+        return result;
+    }
+
+    override public function hasTag(tag:int):Boolean {
+		var currentLevel:int = player.statusEffectv1(knownCondition);
+        return super.hasTag(tag) || (currentLevel > 1 && (tag == TAG_AOE));
+    }
+
 	override public function calcCooldown():int {
 		return  Math.round(player.statusEffectv1(StatusEffects.KnowsStormOfSisterhood));
 	}
 
-	public function stormOfSisterhoodWC():Number {
-    	return 10 * player.statusEffectv1(StatusEffects.KnowsStormOfSisterhood);
+	override public function sfCost():int {
+		var currentLevel:int = player.statusEffectv1(knownCondition);
+		var cost:int = baseSFCost;
+
+		cost *= Math.pow(2, currentLevel - 1);
+
+		cost *= soulskillCost() * soulskillcostmulti();
+		return Math.round(cost);
 	}
 
 	private function calcWrathRestore():Number {
 		var restoreAmount:Number = 0;
-		restoreAmount += Math.round(player.wrath * (stormOfSisterhoodWC() * 0.01));
+		var restoreMult:Number = Math.pow(2, player.statusEffectv1(StatusEffects.KnowsStormOfSisterhood) - 1);
+		restoreAmount += Math.round(player.wrath * (restoreMult * 0.1));
 		return restoreAmount;
 	}
 
 	public function calcDamage(monster:Monster, baseDamage: Number):Number {
-		var damage:Number = baseDamage * (5 * player.statusEffectv1(StatusEffects.KnowsStormOfSisterhood));
+		var currentLevel:int = player.statusEffectv1(knownCondition);
+		var damage:Number = baseDamage * (5 * currentLevel);
+
+		if (currentLevel > 1) {
+			damage += scalingBonusWisdom() * 0.5;
+
+			damage *= soulskillMagicalMod();
+		}
 
 		//group enemies bonus
-		if (monster && monster.plural) damage *= 5;
+		if (monster && monster.plural) {
+			if (currentLevel > 2) {
+				damage *= 5;
+			} else if (currentLevel > 1) {
+				damage *= 2;
+			}
+		}
 
 		damage *= combat.lightningDamageBoostedByDao();
 		return Math.round(damage);
@@ -75,5 +151,37 @@ public class StormOfSisterhoodSkill extends AbstractSoulSkill {
 		doLightningDamage(damage, true, display);
 		if (display) outputText("\n\n");
     }
+
+	private function levelUpCheck(increment:Boolean = true, display:Boolean = true):void {
+		var currentLevel:int = player.statusEffectv1(knownCondition);
+		var nextLevelUp:int = (currentLevel == 2)? 20: 5;
+		var maxLevel:int = 3;
+		if (currentLevel <= 0 || currentLevel >= maxLevel) return;
+
+		if (increment && uses < nextLevelUp) uses++;
+
+		if (isFinite(nextLevelUp)) {
+            notificationView.popupProgressBar2(skillIcon,skillIcon,
+                    name + " Mastery", (uses-1)/nextLevelUp, uses/nextLevelUp);
+        }
+
+		if (currentLevel == 1 && uses >= nextLevelUp && player.hasPerk(PerkLib.SoulApprentice)) {
+			if (display) {
+				outputText("Your skill at using the \"" + name + "\" soulskill has progressed!\n");
+				outputText("<b>\"" + name + " rank has increased from (Rankless) to (Low Rank)!</b>\n\n");
+			}
+			player.changeStatusValue(knownCondition, 1, 2);
+			uses = 0;
+		}
+
+		if (currentLevel == 2 && uses >= nextLevelUp && player.hasPerk(PerkLib.SoulScholar)) {
+			if (display) {
+				outputText("Your skill at using the \"" + name + "\" soulskill has progressed!\n");
+				outputText("<b>\"" + name + "\" rank has increased from (Low Rank) to (High Rank)!</b>\n\n");
+			}
+			player.changeStatusValue(knownCondition, 1, 3);
+			uses = 0;
+		}
+	}
 }
 }
