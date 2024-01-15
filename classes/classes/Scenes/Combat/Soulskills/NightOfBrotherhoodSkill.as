@@ -20,22 +20,6 @@ public class NightOfBrotherhoodSkill extends AbstractSoulSkill {
 
 	override public function get buttonName():String {
 		return "Night of Brotherhood";
-	}
-
-	override public function get description():String {
-		var desc:String = super.description;
-		var currentRank:int = player.statusEffectv1(this.knownCondition);
-		var rankDescriptor:String = "";
-
-		switch (currentRank) {
-			case 1: rankDescriptor = "Rankless";
-					break;
-			case 2: rankDescriptor = "Low Rank";
-					break;
-		} 
-
-		if (rankDescriptor) desc += "\nRank: " + rankDescriptor;
-		return desc;
 	} 
 
 	override protected function usabilityCheck():String {
@@ -70,10 +54,6 @@ public class NightOfBrotherhoodSkill extends AbstractSoulSkill {
 
 	public function calcDamage(monster:Monster, baseDamage: Number):Number {
 		var damage:Number = baseDamage * (5 * player.statusEffectv1(StatusEffects.KnowsNightOfBrotherhood));
-		damage += scalingBonusWisdom() * 0.5;
-		
-		//soulskill mod effect
-		damage *= combat.soulskillMagicalMod();
 
 		//group enemies bonus
 		if (monster && monster.plural) damage *= 5;

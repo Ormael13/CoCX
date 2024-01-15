@@ -32,22 +32,6 @@ public class FlamesOfLoveSkill extends AbstractSoulSkill {
         return "";
     }
 
-	override public function get description():String {
-		var desc:String = super.description;
-		var currentRank:int = player.statusEffectv1(this.knownCondition);
-		var rankDescriptor:String = "";
-
-		switch (currentRank) {
-			case 1: rankDescriptor = "Rankless";
-					break;
-			case 2: rankDescriptor = "Low Rank";
-					break;
-		} 
-
-		if (rankDescriptor) desc += "\nRank: " + rankDescriptor;
-		return desc;
-	} 
-
 	override public function describeEffectVs(target:Monster):String {
 		var lustRestore: Number = calcLustRestore();
 		return "~" + numberFormat(calcDamage(target, lustRestore)) + " fire damage, restores ~" + numberFormat(lustRestore) + " lust";
@@ -69,10 +53,6 @@ public class FlamesOfLoveSkill extends AbstractSoulSkill {
 
 	public function calcDamage(monster:Monster, baseDamage: Number):Number {
 		var damage:Number = baseDamage * (5 * player.statusEffectv1(StatusEffects.KnowsFlamesOfLove));
-		damage += scalingBonusWisdom() * 0.5;
-		
-		//soulskill mod effect
-		damage *= combat.soulskillMagicalMod();
 
 		//group enemies bonus
 		if (monster && monster.plural) damage *= 5;
