@@ -83,7 +83,6 @@ public class CleansingPalmSkill extends AbstractSoulSkill {
 				if (display) {
 					outputText("You thrust your palm forward, sending a blast of pure energy towards Jojo. At the last second he sends a blast of his own against yours canceling it out\n\n");
 				}
-				combat.enemyAIAndResources();
 				return;
 			}
 		}
@@ -91,7 +90,6 @@ public class CleansingPalmSkill extends AbstractSoulSkill {
 			if (display) {
 				outputText("You thrust your palm forward, causing a blast of pure energy to slam against the giant stone statue- to no effect!");		
 			}
-			combat.enemyAIAndResources();
 			return;
 		}
 

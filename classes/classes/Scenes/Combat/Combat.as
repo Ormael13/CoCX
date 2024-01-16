@@ -783,7 +783,6 @@ public class Combat extends BaseContent {
         if (newRound) combatStatusesUpdate(); //Update Combat Statuses
         display();
         statScreenRefresh();
-        if (newRound) combatRoundOver();
         if (combatIsOver()) return;
         ui.mainMenu();
         //Modify menus.
@@ -12173,8 +12172,7 @@ public function unarmedCombatXP(XP:Number = 0):void  	{player.gainCombatXP(MASTE
 //VICTORY OR DEATH?
 // Called after the monster's action. Increments round counter. Setups doNext to win/loss/combat menu
 public function combatRoundOver():void {
-    var HPPercent:Number;
-    HPPercent = player.HP/player.maxHP();
+    player.saveHPRatio();
     combatRound++;
     player.statStore.advanceTime(Buff.RATE_ROUNDS,1);
     monster.statStore.advanceTime(Buff.RATE_ROUNDS,1);
@@ -12193,9 +12191,10 @@ public function combatRoundOver():void {
         if (player.hasPerk(PerkLib.SelfbuffsProficiencyEx) && player.mana >= CombatAbilities.Blink.manaCost()) CombatAbilities.Blink.autocast();
         else EngineCore.outputText("\nYour speeds wanes as your Blink spell ends.\n");
     }
+    player.restoreHPRatio();
+    recoveryOfResourcesImpl();
     statScreenRefresh();
     flags[kFLAGS.ENEMY_CRITICAL] = 0;
-    player.HP = HPPercent*player.maxHP();
     combatIsOver();
 }
 
@@ -13907,7 +13906,7 @@ public function spiderBiteAttack():void {
     WrathGenerationPerHit2(5);
     player.tailVenom -= player.VenomWebCost() * 5;
     flags[kFLAGS.VENOM_TIMES_USED] += 1;
-    if (!combatIsOver()) enemyAIAndResources();
+    enemyAIAndResources();
 }
 
 public function ManticoreFeed():void {
