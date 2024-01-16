@@ -34,21 +34,23 @@ public class Changelog extends BaseContent
 			//0 of 11 pages
 			outputText("<b>Version 0.8w-z:</b>\n\n");
 			outputText("-New armor (by Sylabt & Ohaxer): Princess Regalia - obtained by completing Coronation quest at Trench or later from equipment shop. Cost 9,600 gems, 17 armor, 13 magic resistance, light type armor. Increases the damage of and reduces the cost of Mana shot, barrage and charged shot by 50%, also isn’t affected by Miracle Metal debuff for armor, and provides a 15% lifesteal from Mana shot, barrage, charged shot and crunch.\n");
+			outputText("-New P. Special: Ram. Req. to be Arigean Princess. Deals Physical Damage based on Speed, but cause recoil damage equal to 10% of user max HP.\n");
 			outputText("-When reaching lvl 30 and having done all misison from Grayda Arigean PC can have event proc at camp that unlocks new quest 'Coronation'. Visiting her at Trench would send PC to gather materials and then becoming new princess. It's pernament race option so can't return from been Arigean Princess.\n");
 			outputText("-Arigean Princess (23+) stat bonuses: +430% to str multi, +430% to spe multi, +310% to tou multi, -75% to int multi, -60% to wisdom multi, +65 Min Corruption, +10 armor. She can use additional specials: Grab and Guillotine (both works like the ones from Cancer race)\n");
 			outputText("-Juvenile abyssal sharks can sometimes be too happy to bite more then PC have (still left) so now they will stop when pc have penalty of 99% on combat wounds.\n");
 			outputText("-Fixes: Sval's All IMutations perks displayed, Buff display bug, parser bug when apllying a skin color change using snake oil. (Jtecx)\n");
+			outputText("-The Trench store no longer gives you stuff when you don't have the money for it. (Jtecx)\n");
 			outputText("<b>Demojay contributions:</b>\n");
 			outputText("-Fixed: True Dragon Breath Bug, bug where Flying Swords could independently attack even without the needed perk at the start of the game, Goodra's wrong nail count display for carpenters store, 4th stage of Fey Bloodline not giving int bonuses.\n");
 			outputText("-Damaging Soulskills now cannot hit invisible targets. Great Dive now cannot hit invisible targets.\n");
 			outputText("-Monster specific special actions should not appear if the enemy is already dead. Alvina's 'Take Her' option now properly ends the encounter. Alvina's 'Let Her' now has properly closed HTML Tags. Cupid Arrows now use the correct tease function. Corrected elf armor damage bonus in teaseBaseLustDamage.\n");
 			outputText("-Guild quests explicitly say what they give as rewards. Fixed bugs for soulskill not displayed their description properly in the stats screen. Fixed damage calculation bugs with soulskills that use spell and soulskill damage bonuses. Fixed some spelling mistakes for Killing Intent soulskill, and increased base sf cost to reflect it's damage.\n");
+			outputText("-Reworked Dodge formula, to separate out Player/Monster specific actions, prevent certain conditions being applied twice and to add the option of adding a chance modifier in the actual function call.\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-\n");
 			//outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
 			//outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
-			outputText("-Reworked Dodge formula, to separate out Player/Monster specific actions, prevent certain conditions being applied twice and to add the option of adding a chance modifier in the actual function call. (Demojay)\n");
 			outputText("-Elf Villager dress cooldown effect only works if the player is an elf, and is changed to be a 1% percentage reduction instead of lustDmg/20 (since it is triggered for every single lust tick, making elves near immune to lust) Reduced lust heal from 'Fueled By Desire' from lustDmg/40 to 10% (to prevent Elves from being near-immune to lust loss) ");
 			outputText("Reduced HP heal from Verdent Leech for Green Magic from 5% to 1% (since they have Arcane Venom to trigger the effect multiple times per turn, making Green Magic better at healing that White Heals) (Demojay)\n");
 			outputText("-Briarthorn's DoT Duration is now affected by the 'Green Magic' perk. Green Magic now has the proper Tier Tags applied to them. Green Magic now properly scales from Intelligence rather than Tease damage, to prevent duplicate damage bonuses such as from the elf villager dress. (Demojay)\n");
@@ -63,8 +65,6 @@ public class Changelog extends BaseContent
 			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 2. Req. Sky Poison Pearl Mastery 1 perk. It costs 57 asc points and you gain +6 venom recharge speed, +20% to max venom cap, +20% to poison resistance, 200% more spirit stones carried over and lower req. level to open next sections of pearl by 12 levels.\n");
 			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 3. Req. Sky Poison Pearl Mastery 2 perk. It costs 93 asc points and you gain +9 venom recharge speed, +30% to max venom cap, +30% to poison resistance, 300% more spirit stones carried over and lower req. level to open next sections of pearl by 18 levels.\n");
 			outputText("-Beautiful Sword and Whip would now have additional effect of giving 2x more exp for weapon mastery. Beautiful Staff would have additional effect of -1 turn cooldown duration of tier 1 spells.\n");
-			outputText("-The Trench store no longer gives you stuff when you don't have the money for it. (Jtecx)\n");
-			outputText("-New P. Special: Ram. Req. to be Arigean Princess. Deals Physical Damage based on Speed, but cause recoil damage equal to 10% of user max HP.\n");
 			outputText("-New M. Special: Charged Shot. Req. to be Arigean Princess. A two turn charged str scaling range attack costing mana (~400) and dealing magic damage.\n");
 			outputText("-New event perk: Arigean Knowledge. Gained by becoming Arigean Princess. Effects: The knowledge of your Arigean ancestors rests in your mind. Gain immunity to mental debuffs and intelligence min is increased to 90.\n");
 			outputText("-New flying sword: White Half-Moon Quartet - combined from two White Half-Moon Duo sword sets. Cost 240 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 4). Deal fire damage instead of physical damage.\n");
@@ -86,6 +86,13 @@ public class Changelog extends BaseContent
 			outputText("-Many Birds Changes: baseSFCost 10 -> 200, cooldown of 2, given AOE effect, base damage scalingBonusWisdom * 1 -> 2 (similar to tier 1 magic AOE) (Demojay)\n");
 			outputText("-Soul Blast changes: baseSFCost 100 -> 900, cooldown 15 -> 10, base damage scalingBonusStrength/Wisdom/Intelligence * 1.8 -> scalingBonusStrength/Wisdom/Intelligence * 3 (Demojay)\n");
 			outputText("-Fixed bug where Blind could not used against Draculina when invisible. (Demojay)\n");
+			outputText("-Flames Of Love/ Icicles Of Love/ Night Of Brotherhood/ Storm Of SisterHood Skills now have 4 levels: Rankless, Low Rank (adds AOE (x2), wisdom and magical soulskill scaling, increases restore amount to 20%, and cooldown to 1 turn - Level up requirements: Soul Apprentice perk and 5 uses), Mid Rank (increases AOE scaling (x5), increases restore amount to 25% and cooldown to 2 turns - Level up requirements: Soul Warrior perk and 10 uses), ");
+			outputText("High Rank ( increases restore amount to 30% and cooldown to 3 turns - Level up requirements: Soul Scholar perk and 10 uses). (Demojay)\n");
+			outputText("-Fixed bug where cooldowns based on the CombatAbility class were ending 1 turn too early. Blind now cannot be used if the monster is already blinded. Blind now has a max duration of 10 turns, rather than infinitely scaling with player intelligence. (Demojay)\n");
+			outputText("-Blind Spell no longer has a random chance of not working, even after passing the success check. (Demojay)\n");
+			outputText("-Fixed bug where Draculina Embrace will always hit. (Demojay)\n");
+			outputText("-Ceraph is now classed as a proper True Demon. (Demojay)\n");
+			outputText("-The enemy will now act after using a turn picking up spent weapons instead of getting another turn. (Demojay)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -99,12 +106,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay) (NUZ/Shirane)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Arigean above Recruit rank not immune to tf-ing effects, deer arms tf unlocking canine arms MM, unable to find tel'adre again after first time seeing it with too high corruption or other factor that not allowed entrance; Arigean above recruit rank marking, eye color and aura with mismatching colors; demon/arigean arms MM option giving instead devil/abyssal shark arms, ");
 			outputText("Zenji training stats not having gains decrease from +4 to +1 for repeated training before daily reset for other than wisdom stats, resources not been recovered after using specials/soulskills/spells\n\n");
@@ -188,6 +189,7 @@ public class Changelog extends BaseContent
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
+			outputText("\n");
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
 			outputText("\n");
 			outputText("\n");full stats bonuses not added yet to: Echidna, Scorpion-morph
@@ -202,6 +204,7 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
