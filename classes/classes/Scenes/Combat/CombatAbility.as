@@ -503,7 +503,6 @@ public class CombatAbility extends BaseCombatContent {
 	 */
 	public function setDuration():void {
 		var duration:int = calcDuration();
-		if (duration > 0) duration++;
 		player.durations[id] = duration;
 	}
 	
