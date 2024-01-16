@@ -11,6 +11,8 @@ import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.*;
 import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
+import classes.Scenes.Combat.CombatAbility;
+import classes.Scenes.Combat.SpellsWhite.BlindSpell;
 
 public class Kiha extends Monster
 	{
@@ -89,6 +91,13 @@ public class Kiha extends Monster
 				outputText("\n");
 			}
 		}
+
+		override public function postPlayerAbility(ability:CombatAbility, display:Boolean = true):void {
+			if (ability is BlindSpell && hasStatusEffect(StatusEffects.Blind) && display) {
+				outputText("\n\n\"<i>You think blindness will slow me down?  Attacks like that are only effective on those who don't know how to see with their other senses!</i>\" Kiha cries defiantly.");
+			}
+		}
+
 		/*
 		Special 2: Kiha lifts her axe overhead and then hurls it at you in a surprising feat of speed and strength. Not keen on getting cleaved in two, you sidestep the jagged metal.
 		Hit: But when your attention refocuses on the dragoness, you realize she's right in front of you! She hits you in the face with a vicious straight punch, knocking you on your back.

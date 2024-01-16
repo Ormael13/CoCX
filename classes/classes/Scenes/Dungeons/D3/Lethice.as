@@ -494,9 +494,10 @@ public class Lethice extends Monster
 			}
 		}
 
-		override public function postPlayerAbility(ability:CombatAbility):void {
+		override public function postPlayerAbility(ability:CombatAbility, display:Boolean = true):void {
 			if (fightPhase == 3 && ability is AbstractSpell && ability.hasTag(CombatAbility.TAG_DAMAGING)) {
-				outputText("\n\n<i>\"Ouch. Such arcane skills for one so uncouth,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your magics?\"</i>\n\n");
+				if (display) outputText("\n\n<i>\"Ouch. Such arcane skills for one so uncouth,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her." + 
+					" <i>\"How will you beat me without your magics?\"</i>\n\n");
 				createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 			}
 		}

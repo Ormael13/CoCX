@@ -89,7 +89,7 @@ public class CleansingPalmSkill extends AbstractSoulSkill {
 		}
 		if (monster is LivingStatue) {
 			if (display) {
-				outputText("You thrust your palm forward, causing a blast of pure energy to slam against the giant stone statue- to no effect!");		
+				outputText("You thrust your palm forward, causing a blast of pure energy to slam against the giant stone statue - to no effect!");		
 			}
 			combat.enemyAIAndResources();
 			return;
