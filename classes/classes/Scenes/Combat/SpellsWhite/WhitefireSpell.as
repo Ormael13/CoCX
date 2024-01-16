@@ -65,7 +65,6 @@ public class WhitefireSpell extends AbstractWhiteSpell {
 				outputText("You narrow your eyes, focusing your mana into your thumb and middle finger.  You let the heat build, flowing from your mind and down your arm, until you raise your hand. You snap your fingers, releasing your power and the heat in an instant. [themonster] is enveloped in a flash of white flames.\n");
 			}
 		}
-		if(monster is Diva){(monster as Diva).handlePlayerSpell("whitefire");}
 		var damage:Number = calcDamage(monster, true, true);
 		damage = critAndRepeatDamage(display, damage, DamageType.FIRE);
 		if (ex) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);

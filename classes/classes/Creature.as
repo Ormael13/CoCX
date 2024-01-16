@@ -4807,5 +4807,21 @@ public class Creature extends Utils
 				}
 			}
 		}
+
+		/**
+		 * Function called when a statuseffect is added to a creature, to allow for additional functionality
+		 * @param Status Effect Instance being attached
+		 */
+		public function onStatusAttach(sec:StatusEffectClass):void {
+			//Do nothing
+		}
+
+		/**
+		 * Function called when a statuseffect is removed from a creature, to allow for additional functionality
+		 * @param Status Effect Instance being removed
+		 */
+		public function onStatusRemove(sec:StatusEffectClass):void {
+			//Do nothing
+		}
 	}
 }

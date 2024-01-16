@@ -6,6 +6,8 @@ import classes.BodyParts.Hips;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.Scenes.Combat.CombatAbility;
+import classes.Scenes.Combat.SpellsWhite.BlindSpell;
 
 public class Isabella extends Monster
 	{
@@ -118,6 +120,13 @@ public class Isabella extends Monster
 			else HP += 100;
 			lust += 5;
 			player.takeLustDamage((10+player.lib/20), true);
+		}
+
+		override public function postPlayerAbility(ability:CombatAbility, display:Boolean = true):void {
+			if (ability is BlindSpell && hasStatusEffect(StatusEffects.Blind) && display) {
+				if (SceneLib.isabellaFollowerScene.isabellaAccent()) outputText("\n\n\"<i>Nein! I cannot see!</i>\" cries Isabella.");
+				else outputText("\n\n\"<i>No! I cannot see!</i>\" cries Isabella.");
+			}
 		}
 
 		override protected function performCombatAction():void

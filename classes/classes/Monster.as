@@ -255,7 +255,7 @@ import classes.Scenes.Combat.CombatAbilities;
 		 * Called after monster was affected by player's ability.
 		 * @param ability
 		 */
-		public function postPlayerAbility(ability:CombatAbility):void {
+		public function postPlayerAbility(ability:CombatAbility, display:Boolean = true):void {
 			// default - do nothing
 		}
 

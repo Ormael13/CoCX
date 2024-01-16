@@ -155,17 +155,6 @@ public class ProjectNightwalker extends Monster {
         }
     }
 
-    public function handlePlayerSpell(spell:String = ""):void {
-        if (spell == "whitefire" && player.hasStatusEffect(StatusEffects.Blind)) {
-            player.removeStatusEffect(StatusEffects.Blind);
-            outputText("The room lights back as the flame dispels the shadow.");
-        }
-        if (spell == "blind" && this.hasStatusEffect(StatusEffects.Blind)) {
-            outputText("[Themonster] recoils in pain as the bright light strikes her like a hammer, temporarily pinning her to the ground and stunning her.");
-            this.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
-        }
-    }
-
     public override function isFlying():Boolean {
         return !hasStatusEffect(StatusEffects.Stunned);
     }

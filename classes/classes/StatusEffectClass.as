@@ -77,12 +77,18 @@ public class StatusEffectClass extends Utils
 		_host = null;
 	}
 	public function removedFromHostList(fireEvent:Boolean):void {
-		if (fireEvent) onRemove();
+		if (fireEvent) {
+			onRemove();
+			_host.onStatusRemove(this);
+		}
 		_host = null;
 	}
 	public function addedToHostList(host:Creature,fireEvent:Boolean):void {
 		_host = host;
-		if (fireEvent) onAttach();
+		if (fireEvent) {
+			onAttach();
+			_host.onStatusAttach(this);
+		}
 	}
 	public function attach(host:Creature/*,fireEvent:Boolean = true*/):void {
 		if (_host == host) return;

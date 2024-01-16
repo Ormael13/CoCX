@@ -5,6 +5,8 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
+import classes.Scenes.Combat.CombatAbility;
+import classes.Scenes.Combat.SpellsWhite.BlindSpell;
 
 /**
 	 * ...
@@ -74,9 +76,20 @@ import classes.internals.*;
 			outputText("\n");
 		}
 
+		override public function postPlayerAbility(ability:CombatAbility, display:Boolean = true):void {
+			if (ability is BlindSpell && hasStatusEffect(StatusEffects.Blind)) {
+				if (display) {
+					outputText("\n\nRemarkably however, it seems as if your spell has had no effect on her, and you nearly get clipped by a roundhouse as you stand, confused." + 
+						" The girl flashes a radiant smile at you, and the battle continues.");
+				}
+				removeStatusEffect(StatusEffects.Blind);
+			}
+		}
+
 		override public function midDodge():void{
 			outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your [weapon] against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your [weapon] as if betrayed.\n");
 		}
+
 		override protected function performCombatAction():void
 		{
 			var attack:Number = rand(3);

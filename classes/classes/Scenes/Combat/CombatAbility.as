@@ -474,7 +474,7 @@ public class CombatAbility extends BaseCombatContent {
 		}
 		if (!interceptable || !monster.interceptPlayerAbility(this)) {
 			doEffect(output);
-			monster.postPlayerAbility(this);
+			monster.postPlayerAbility(this, output);
 		}
 	}
 	
