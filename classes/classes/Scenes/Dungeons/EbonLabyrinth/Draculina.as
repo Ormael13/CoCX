@@ -37,7 +37,7 @@ use namespace CoC;
 		}
 		
 		private function draculinaEmbrace():void {
-			if (rand(120) >= (player.spe > 80) ? player.spe : 80) {
+			if (!player.getEvasionRoll()) {
 				player.createStatusEffect(StatusEffects.NagaBind, 0, 0, 0, 0);
 				outputText("The arch vampire closes her wings, blurring with speed as she arrows towards you. Her body collides with you, the impact sending you reeling, and she wraps her limbs around you, locking you in a cold embrace!");
 				if (EngineCore.silly()) outputText("  Bad touch, bad touch!");
@@ -71,7 +71,9 @@ use namespace CoC;
 				player.takeLustDamage(10 + rand(9), true);
 				if (!player.hasStatusEffect(StatusEffects.AlterBindScroll3)) {
 					var drain:Number = Math.round(player.touStat.max * 0.05);
+					player.saveHPRatio();
 					player.buff("Bat bites").addStats({"tou":-drain}).withText("Bat bites!").combatPermanent();
+					player.restoreHPRatio();
 					showStatDown( 'tou' );
 					if (player.tou <= 1) {
 						doNext(SceneLib.combat.endHpLoss);
@@ -176,10 +178,9 @@ use namespace CoC;
             this.gems = mod > 20 ? 0 : Math.floor((1500 + rand(300)) * Math.exp(0.3*mod));
             this.additionalXP = mod > 20 ? 0 : Math.floor(6500 * Math.exp(0.3*mod));
             
-			this.a = " ";
+			this.a = "";
 			this.short = "Draculina";
 			this.long = "";
-			// this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("C"));
