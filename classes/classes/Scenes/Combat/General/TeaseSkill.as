@@ -160,9 +160,6 @@ public class TeaseSkill extends AbstractGeneral {
 			}
         }
 		if (display) outputText("\n\n");
-		recoveryOfResources();
-    }
-
-    
+    }    
 }
 }
