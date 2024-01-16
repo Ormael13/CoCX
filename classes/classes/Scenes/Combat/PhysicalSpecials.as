@@ -938,7 +938,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		EngineCore.WrathChange(-PAC);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function powerShoot():void {
@@ -1013,7 +1013,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		flags[kFLAGS.ARROWS_SHOT]++;
 		bowPerkUnlock();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function pcCleave():void {
@@ -1085,7 +1085,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 			else monster.createStatusEffect(StatusEffects.IzmaBleed,3,0,0,0);
 		}
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function sneakAttack():void {
@@ -1309,7 +1309,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.WrathWeaponsProc();
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function feint():void {
@@ -1323,7 +1323,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			monster.createStatusEffect(StatusEffects.Distracted, feintduration, 0, 0, 0);
 		}
 		outputText("\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function sneakAttackRange():void {
@@ -1408,7 +1408,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (flags[kFLAGS.ARROWS_SHOT] >= 1) awardAchievement("Arrow to the Knee", kACHIEVEMENTS.COMBAT_ARROW_TO_THE_KNEE);
 			bowPerkUnlock();
 		}
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function warriorShout():void {
@@ -1517,7 +1517,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.WrathWeaponsProc();
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	public function chargingcoooooost():Number {
 		var percent:Number = 40;
@@ -1544,7 +1544,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids your attack!");
 			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText("[Themonster] dodges your attack with superior quickness!");
 			if (monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your slow attack.");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		var damage:Number = 0;
@@ -1607,7 +1607,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function whipping():void {
@@ -1625,7 +1625,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids your attack!");
 			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText("[Themonster] dodges your attack with superior quickness!");
 			if (monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your slow attack.");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		var damage:Number = 0;
@@ -1683,7 +1683,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function whirlwindClaws():void {
@@ -1699,7 +1699,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids your attack!");
 			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText("[Themonster] dodges your attack with superior quickness!");
 			if (monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your slow attack.");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		fatigue(50, USEFATG_PHYSICAL);
@@ -1780,7 +1780,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function anemoneSting():void {
@@ -1834,7 +1834,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//New lines and moving on!
 		outputText("\n\n");
 		doNext(combatMenu);
-		if(!combatIsOver()) combat.enemyAIAndResources();
+		if(!combatIsOver()) enemyAI();
 	}
 
 
@@ -1863,7 +1863,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		combat.WrathGenerationPerHit2(5);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function tailSlapAttack():void {
@@ -1945,7 +1945,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.WrathGenerationPerHit2(5*player.tailCount);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	private function tailSlapAttackKitshoo():Number {
 		var lustDmg:Number = monster.lustVuln * ((player.inte / 12 + player.wis / 8) * ((spellMod() + soulskillMagicalMod()) / 2) + rand(monster.lib + monster.cor) / 5);
@@ -1983,7 +1983,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		combat.WrathGenerationPerHit2(5);
 		outputText("\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function inkSpray():void {
@@ -2019,7 +2019,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		statScreenRefresh();
 		if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
-		else combat.enemyAIAndResources();
+		else enemyAI();
 	}
 
 	public function milkBlast():void {
@@ -2057,7 +2057,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function cumCannon():void {
@@ -2094,7 +2094,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		awardAchievement("Cum Cannon", kACHIEVEMENTS.COMBAT_CUM_CANNON);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function takeFlight():void {
@@ -2106,7 +2106,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			player.createPerk(PerkLib.Resolute, 0, 0, 0, 0);
 		}
 		monster.createStatusEffect(StatusEffects.MonsterAttacksDisabled, 0, 0, 0, 0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function takeFlightGoglinMech():void {
@@ -2118,7 +2118,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			player.createPerk(PerkLib.Resolute, 0, 0, 0, 0);
 		}
 		monster.createStatusEffect(StatusEffects.MonsterAttacksDisabled, 0, 0, 0, 0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function bodySlam():void {
@@ -2153,7 +2153,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(slamDmg);
 		combat.EruptingRiposte();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	public function minThicknessReq():Number {
 		var miniThicknessvalue:Number = 95;
@@ -2226,7 +2226,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		monster.statStore.addBuffObject({spe:-15}, "Poison",{text:"Poison"});
 		combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		combat.WrathGenerationPerHit2(5);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function terrifyingHowl():void {
@@ -2235,25 +2235,25 @@ public class PhysicalSpecials extends BaseCombatContent {
 			clearOutput();
 			outputText("You unleash a deafening howl, but [themonster] has no reaction to the sound\n\n");
 			fatigue(10);
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		fatigue(40, USEFATG_PHYSICAL);
 		if(monster.hasPerk(PerkLib.Focused)) {
 			if(!monster.plural) outputText("[Themonster] is too focused for your howl to influence!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		//[Failure]
 		if(rand(10) == 0) {
 			outputText("You unleash a deafening howl, but partway through your voice cracks and you start coughing.\n\n");
 			fatigue(10);
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		outputText("You unleash a deafening howl causing [themonster] to back off in fear momentarily dazed.\n\n");
 		monster.createStatusEffect(StatusEffects.Fear,1,0,0,0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function wingSlapAttack():void {
@@ -2312,7 +2312,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	private function temporalGolemsAplification():Number {
@@ -2382,7 +2382,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (shatter) outputText(" <b>*Golem Core shattered!*</b>");
 		if (overloadedGolemCoresBag) outputText(" <b>*Golem Core wasn't picked due to lack of space to store them!*</b>");
 		outputText("\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	public function sendTemporalGolem3():void {
 		clearOutput();
@@ -2436,7 +2436,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		if (partialyoverloadedGolemCoresBag) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		outputText("\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	public function sendTemporalGolem5():void {
 		clearOutput();
@@ -2490,7 +2490,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		if (partialyoverloadedGolemCoresBag) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		outputText("\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	public function sendTemporalGolem4():void {
 		flags[kFLAGS.TEMPORAL_GOLEMS_BAG] -= 4;
@@ -2520,7 +2520,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		if (partialyoverloadedGolemCoresBag) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		outputText("\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	public function sendTemporalGolem10():void {
 		flags[kFLAGS.TEMPORAL_GOLEMS_BAG] -= 10;
@@ -2550,7 +2550,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		if (partialyoverloadedGolemCoresBag) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		outputText("\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	public function sendTemporalGolem20():void {
 		flags[kFLAGS.TEMPORAL_GOLEMS_BAG] -= 20;
@@ -2580,7 +2580,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		if (partialyoverloadedGolemCoresBag) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		outputText("\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	public function sendTemporalGolemKamikazeProtocol():void {
 		clearOutput();
@@ -2614,7 +2614,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		if (partialyoverloadedGolemCoresBag) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		outputText("\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function permanentgolemsendcost():Number {
@@ -2756,7 +2756,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			menu();
 			addButton(0, "Next", combatMenu, false);
 		}
-		if (doit) combat.enemyAIAndResources();
+		if (doit) enemyAI();
 	}
 
 	public function sendPermanentImprovedGolem(cnt:int = 1, doit:Boolean = false):void {
@@ -2792,7 +2792,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			menu();
 			addButton(0, "Next", combatMenu, false);
 		}
-		if (doit) combat.enemyAIAndResources();
+		if (doit) enemyAI();
 	}
 
 	public function sendPermanentSteelGolem(cnt:int = 1, doit:Boolean = false):void {
@@ -2826,7 +2826,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			menu();
 			addButton(0, "Next", combatMenu, false);
 		}
-		if (doit) combat.enemyAIAndResources();
+		if (doit) enemyAI();
 	}
 
 	public function sendPermanentImprovedSteelGolem(cnt:int = 1, doit:Boolean = false):void {
@@ -2864,7 +2864,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			menu();
 			addButton(0, "Next", combatMenu, false);
 		}
-		if (doit) combat.enemyAIAndResources();
+		if (doit) enemyAI();
 	}
 
 	public function notSendAnyGolem():void {
@@ -2886,7 +2886,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		monster.teased(pollen, false);
 		outputText("\n\n");
 		player.createStatusEffect(StatusEffects.AlraunePollen,0,0,0,0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function AlrauneEntangle():void {
@@ -2905,7 +2905,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalArsenal)) EntangleNerf += 0.1;
 		player.createStatusEffect(StatusEffects.AlrauneEntangle,EntangleNerf,EntangleNerf,0,0);
 		monster.statStore.addBuffObject({"str.mult":-EntangleNerf,"spe.mult":-EntangleNerf}, "EntangleNerf",{text:"EntangleNerf"});
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function AlrauneStrangulate():void {
@@ -2925,7 +2925,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		doDamage(damage);
 		combat.WrathGenerationPerHit2(5);
 		outputText("You tighten your vines around your opponent's neck to strangle it. [Themonster] struggles against your natural noose, getting obvious marks on its neck and " + damage + " damage for their trouble.\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function blazingRocketKick():void {
@@ -2951,7 +2951,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.EruptingRiposte();
 		doNext(playerMenu);
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-		else combat.enemyAIAndResources();
+		else enemyAI();
 	}
 
 	public function EggThrowLustDamageRepeat():void {
@@ -3040,7 +3040,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		combat.WrathGenerationPerHit2(5);
-		if (!combatIsOver()) combat.enemyAIAndResources();
+		if (!combatIsOver()) enemyAI();
 	}
 
 	public function OmniEggthrowAttack():void {
@@ -3068,7 +3068,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		combat.WrathGenerationPerHit2(5);
-		if (!combatIsOver()) combat.enemyAIAndResources();
+		if (!combatIsOver()) enemyAI();
 	}
 
 
@@ -3146,7 +3146,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function StoneFistAttack():void {
@@ -3227,7 +3227,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function TailSlamAttack():void {
@@ -3304,7 +3304,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function TailCleaveAttack():void {
@@ -3381,7 +3381,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function WingBuffetAttack():void {
@@ -3448,7 +3448,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function TornadoStrike():void {
@@ -3501,7 +3501,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function PCWebAttack():void {
@@ -3513,7 +3513,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LizanRogue) {
 			outputText("As your webbing flies at him the lizan flips back, slashing at the adhesive strands with the claws on his hands and feet with practiced ease.  It appears he's used to countering this tactic.");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		//Blind
@@ -3526,7 +3526,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			outputText("You miss [themonster] completely - ");
 			if(monster.plural) outputText("they");
 			else outputText(monster.mf("he","she") + " moved out of the way!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		//Over-webbed
@@ -3555,7 +3555,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		awardAchievement("How Do I Shot Web?", kACHIEVEMENTS.COMBAT_SHOT_WEB);
 		outputText("\n\n");
-		if(!combatIsOver()) combat.enemyAIAndResources();
+		if(!combatIsOver()) enemyAI();
 	}
 	public function scyllaGrapple():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
@@ -3599,7 +3599,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 		}
 		outputText("\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	public function whipGrapple():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
@@ -3639,7 +3639,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 		}
 		outputText("\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function orcaPlay():void {
@@ -3676,7 +3676,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else player.createStatusEffect(StatusEffects.CooldownPlay,15,0,0,0);
 			player.createStatusEffect(StatusEffects.OrcaPlayRoundLeft,3,0,0,0);
 			outputText("\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 		}
 	}
 	
@@ -3707,9 +3707,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 			{
 				outputText("\n\n<i>\"Ouch. Such arcane skills for one so uncouth,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your magics?\"</i>\n\n");
 				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
-				combat.enemyAIAndResources();
+				enemyAI();
 			}
-			else combat.enemyAIAndResources();
+			else enemyAI();
 		}
 		else if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 1) {
 			outputText("You are still singing. Your compelling voice reaches far up to your opponent.");
@@ -3728,7 +3728,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			monster.teased(lustDmg2);
 			player.addStatusValue(StatusEffects.ChanneledAttack, 1, 1);
 			outputText("\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 		}
 		else {
 			fatigue(50, USEFATG_MAGIC_NOBM);
@@ -3748,7 +3748,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.ChanneledAttackType, 7, 0, 0, 0);
 			outputText("\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 		}
 	}
 	
@@ -3759,7 +3759,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("You mentally reach for your ring, and you feel a surge of anger, love and fear. You can all but feel Kiha’s wingbeats, the sensation making your own shoulder blades itch. You can’t relax, not with [enemy] in front of you, but you know that help is on the way!")
 		player.createStatusEffect(StatusEffects.CallOutKiha, 0, 0, 0, 0);
 		outputText("\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function gooEngulf():void {
@@ -3800,7 +3800,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 		}
 		outputText("\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function vampireEmbrace():void {
@@ -3834,7 +3834,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		else outputText("You leap and box in [themonster] with your wings, embracing [monster he] as you prepare to feast.");
 		outputText("\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function catPounce():void {
@@ -3874,7 +3874,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 		}
 		outputText("\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function arigeanCrunch():void {
@@ -3959,7 +3959,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		else outputText("[Themonster] moves back just in time to avoid being crushed.");
 		outputText("\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	
 	public function arigeanRam():void {
@@ -4002,7 +4002,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			combat.EruptingRiposte();
 		}
 		else outputText("[Themonster] swiftly step out of the way, causing you to charge past [monster him].");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function bearGrab():void {
@@ -4043,7 +4043,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Failure
 		else outputText("Your opponent seeing it coming dodge to the side as you smash the ground where [monster he] used to stand.");
 		outputText("\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function bearSlam():void {
@@ -4138,7 +4138,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.EruptingRiposte();
 		monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
 		outputText("\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function skyPounce():void {
@@ -4248,7 +4248,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 		}
 		outputText("\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function hydraBiteAttack():void {
@@ -4258,7 +4258,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (monster is LivingStatue)
 		{
 			outputText("Your fangs can't even penetrate the giant's flesh.");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		fatigue((10 * player.statusEffectv1(StatusEffects.HydraTailsPlayer)), USEFATG_PHYSICAL);
@@ -4293,7 +4293,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		player.tailVenom -= player.VenomWebCost() * 5;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
-		if (!combatIsOver()) combat.enemyAIAndResources();
+		if (!combatIsOver()) enemyAI();
 	}
 	public function hydraBiteAttackpoweeeeer():void {
 		var HBD:Number = 0;
@@ -4314,7 +4314,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (monster is LivingStatue)
 		{
 			outputText("Your fangs can't even penetrate the giant's flesh.");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		//Works similar to bee stinger, must be regenerated over time. Shares the same poison-meter
@@ -4345,7 +4345,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.WrathGenerationPerHit2(5);
 		player.tailVenom -= player.VenomWebCost() * 5;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
-		if (!combatIsOver()) combat.enemyAIAndResources();
+		if (!combatIsOver()) enemyAI();
 	}
 
 	public function spiderBiteAttack():void {
@@ -4355,7 +4355,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (monster is LivingStatue)
 		{
 			outputText("Your fangs can't even penetrate the giant's flesh.");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		//Works similar to bee stinger, must be regenerated over time. Shares the same poison-meter
@@ -4424,7 +4424,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.WrathGenerationPerHit2(5);
 		player.tailVenom -= player.VenomWebCost() * 5;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
-		if (!combatIsOver()) combat.enemyAIAndResources();
+		if (!combatIsOver()) enemyAI();
 	}
 	public function antBiteAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
@@ -4433,7 +4433,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (monster is LivingStatue)
 		{
 			outputText("Your "+(player.faceType == Face.ANT ? "mandibles":"fangs")+" can't even penetrate the giant's flesh.");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		//Works similar to bee stinger, must be regenerated over time. Shares the same poison-meter
@@ -4457,7 +4457,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.WrathGenerationPerHit2(5);
 		player.tailVenom -= player.VenomWebCost() * 5;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
-		if (!combatIsOver()) combat.enemyAIAndResources();
+		if (!combatIsOver()) enemyAI();
 	}
 	public function devastatingBiteAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
@@ -4466,7 +4466,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (monster is LivingStatue)
 		{
 			outputText("Your razor sharp teeth cannot penetrate the stone of a statue");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		//Works similar to bee stinger, must be regenerated over time. Shares the same poison-meter
@@ -4488,7 +4488,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		combat.WrathGenerationPerHit2(5);
-		if (!combatIsOver()) combat.enemyAIAndResources();
+		if (!combatIsOver()) enemyAI();
 	}
 	public function fenrirFrostbite():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
@@ -4508,7 +4508,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (monster is LivingStatue)
 		{
 			outputText("Your fangs can't even penetrate the giant's flesh.");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		//Frostbite for Fenrir
@@ -4550,7 +4550,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.WrathGenerationPerHit2(5);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
-		if (!combatIsOver()) combat.enemyAIAndResources();
+		if (!combatIsOver()) enemyAI();
 	}
 
 	//Mantis Omni Slash (AoE attack)
@@ -4583,7 +4583,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids your attacks!\n\n");
 			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText("[Themonster] dodges your attacks with superior quickness!\n\n");
 			if (monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your slow attacks.\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if (monster.plural) {
@@ -4661,7 +4661,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		outputText("\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 //Gore Attack - uses 25 fatigue!
 	public function goreAttack():void {
@@ -4676,7 +4676,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.KIRIN || player.horns.type == Horns.BICORN || player.horns.type == Horns.FROSTWYRM) outputText("horns ");
 			else outputText("horn, ");
 			outputText("to stab only at air.\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if ((player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(50) > player.maxFatigue())) || (!player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(25) > player.maxFatigue()))) {
@@ -4799,7 +4799,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		//Victory ORRRRR enemy turn.
-		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) combat.enemyAIAndResources();
+		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else {
 			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
@@ -4821,7 +4821,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.KIRIN || player.horns.type == Horns.BICORN || player.horns.type == Horns.FROSTWYRM) outputText("horns ");
 			else outputText("horn, ");
 			outputText("to stab only at air.\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if ((player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(50) > player.maxFatigue())) || (!player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(25) > player.maxFatigue()))) {
@@ -4926,7 +4926,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		//Victory ORRRRR enemy turn.
-		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) combat.enemyAIAndResources();
+		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else {
 			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
@@ -4938,7 +4938,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		if (monster is WormMass) {
 			outputText("Taking advantage of your new natural weapon, you quickly charge at the freak of nature. Sensing impending danger, the creature willingly drops its cohesion, causing the mass of worms to fall to the ground with a sick, wet 'thud', leaving your horns to stab only at air.\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if (player.hasPerk(PerkLib.PhantomStrike)) fatigue(30, USEFATG_PHYSICAL);
@@ -5042,7 +5042,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		//Victory ORRRRR enemy turn.
-		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) combat.enemyAIAndResources();
+		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else {
 			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
@@ -5056,7 +5056,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Worms are immune!
 		if (monster is WormMass) {
 			outputText("Taking advantage of your new natural weapons, you quickly thrust your stinger at the freak of nature. Sensing impending danger, the creature willingly drops its cohesion, causing the mass of worms to fall to the ground with a sick, wet 'thud', leaving you to stab only at air.\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		//Determine if dodged!
@@ -5065,13 +5065,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if(monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids your stinger!\n\n");
 			else if(monster.spe-player.spe < 20) outputText("[Themonster] dodges your stinger with superior quickness!\n\n");
 			else outputText("[Themonster] deftly avoids your slow attempts to sting [monster him].\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		//determine if avoided with armor.
 		if(monster.armorDef - player.level >= 10 && rand(4) > 0) {
 			outputText("Despite your best efforts, your sting attack can't penetrate [themonster]'s defenses.\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		//Sting successful!
@@ -5133,7 +5133,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		player.tailVenom -= player.VenomWebCost() * 5;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
 		//Kick back to main if no damage occured!
-		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) combat.enemyAIAndResources();
+		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else doNext(endLustVictory);
 	}
 //Player tail spike attack
@@ -5196,7 +5196,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Worms are immune!
 		if (monster is WormMass) {
 			outputText("Taking advantage of your new natural weapons, you quickly shoot an envenomed spike at the freak of nature. Sensing impending danger, the creature willingly drops its cohesion, causing the mass of worms to fall to the ground with a sick, wet 'thud', leaving your spike impale the ground behind.\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		//Determine if dodged!
@@ -5205,20 +5205,20 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if(monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids your spike!\n\n");
 			if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText("[Themonster] dodges your spike with superior quickness!\n\n");
 			if(monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your slow attempts to hit with a spike [monster him].\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		//determine if avoided with armor.
 		if(monster.armorDef - player.level >= 10 && rand(4) > 0) {
 			outputText("Despite your best efforts, your spike attack can't penetrate [themonster]'s defenses.\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		//Sting successful!
 		outputText("You drop on all fours, flinging your tail forward and shooting an envenomed spike at [themonster].");
 		tailspikedamage();
 		outputText("\n\n");
-		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) combat.enemyAIAndResources();
+		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else doNext(endLustVictory);
 	}
 
@@ -5228,7 +5228,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		clearOutput();
 		if (monster is WormMass) {
 			outputText("Taking advantage of your new natural weapons, you quickly shoot a flurry of envenomed spike at the freak of nature. Sensing impending danger, the creature willingly drops its cohesion, causing the mass of worms to fall to the ground with a sick, wet 'thud', leaving your spike impale the ground behind.\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		//Determine if dodged!
@@ -5237,13 +5237,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your slow attempts to hit with a spike [monster him].\n\n");
 			else if (monster.spe - player.spe >= 8) outputText("[Themonster] dodges your spike with superior quickness!\n\n");
 			else outputText("[Themonster] narrowly avoids your spike!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		//determine if avoided with armor.
 		if(monster.armorDef - player.level >= 10 && rand(4) > 0) {
 			outputText("Despite your best efforts, your spikes can't penetrate [themonster]'s defenses.\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		//Sting successful!
@@ -5259,7 +5259,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.WeaponClawsSavageRend) && player.tailVenom >= player.VenomWebCost() * 5) tailspikedamage();
 		if ((player.hasPerk(PerkLib.HistoryFeral) || player.hasPerk(PerkLib.PastLifeFeral)) && player.tailVenom >= player.VenomWebCost() * 5) tailspikedamage();
 		outputText("\n\n");
-		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) combat.enemyAIAndResources();
+		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else doNext(endLustVictory);
 	}
 
@@ -5313,14 +5313,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 					else outputText("  Sadly, [themonster] moves aside, denying you the chance to give [monster him] a smooch.\n\n");
 					break;
 			}
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		//Success but no effect:
 		if(monster.lustVuln <= 0 || !monster.hasCock()) {
 			if(monster.plural) outputText("  Mouth presses against mouth, and you allow your tongue to stick out to taste the saliva of one of their number, making sure to give them a big dose.  Pulling back, you look at [themonster] and immediately regret wasting the time on the kiss.  It had no effect!\n\n");
 			else outputText("  Mouth presses against mouth, and you allow your tongue to stick to taste [monster his]'s saliva as you make sure to give them a big dose.  Pulling back, you look at [themonster] and immediately regret wasting the time on the kiss.  It had no effect!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		attack = rand(4);
@@ -5364,7 +5364,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		outputText("\n\n");
 		//Sets up for end of combat, and if not, goes to AI.
-		if(!combatIsOver()) combat.enemyAIAndResources();
+		if(!combatIsOver()) enemyAI();
 	}
 //Mouf Attack
 // (Similar to the bow attack, high damage but it raises your fatigue).
@@ -5405,7 +5405,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText("[Themonster] dodges your attack with superior quickness!");
 			if(monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your slow attack.");
 			outputText("\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		damage += combat.meleeUnarmedDamageNoLagSingle(2) * 3;
@@ -5476,7 +5476,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				flags[kFLAGS.IN_COMBAT_PLAYER_USED_SHARK_BITE] = 1;
 				combat.combatMenu(false);
 			}
-			else combat.enemyAIAndResources();
+			else enemyAI();
 		}
 		else {
 			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
@@ -5494,7 +5494,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("You dig yourself into the ground, moving out of your opponent’s reach.");
 		monster.createStatusEffect(StatusEffects.Dig,5,0,0,0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function Drink():void {
@@ -5504,7 +5504,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			outputText("OOOH YESHHHH! This is just what you needed. You smile doopily as you enter the famous oni drunken daze, your muscle filling with extra alchoholic might. Now that your thirst is quenched you're totaly going to destroy the puny thing who dared to challenge you.\n\n");
 			CoC.instance.mutations.DrunkenPowerEmpower();
 		}
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function kick():void {
@@ -5538,7 +5538,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 		if (flags[kFLAGS.PC_FETISH] >= 3) {
 			outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Ceraph's piercings have made normal attack impossible!  Maybe you could try something else?\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if (combat.checkConcentration()) return; //Amily concentration
@@ -5564,7 +5564,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else {
 				outputText("You attempt to crush the worms with your reprisal, only to have the collective move its individual members, creating a void at the point of impact, leaving you to attack only empty air.\n\n");
 			}
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		//Determine if dodged!
@@ -5577,7 +5577,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				outputText(" to dodge your kick!");
 				outputText("\n\n");
 			}
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		//Determine damage
@@ -5638,7 +5638,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
-		if (!combatIsOver())combat.enemyAIAndResources();
+		if (!combatIsOver())enemyAI();
 	}
 
 	public function shieldBash():void {
@@ -5649,7 +5649,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your slow attack.");
 			else if (monster.spe - player.spe >= 8) outputText("[Themonster] dodges your attack with superior quickness!");
 			else outputText("[Themonster] narrowly avoids your attack!");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		var damage:int = 10 + (player.str / 1.5) + rand(player.str / 2) + (player.shieldBlock * 2);
@@ -5686,21 +5686,21 @@ public class PhysicalSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.CounterAction);
 			doNext(playerMenu);
 		}
-		else combat.enemyAIAndResources();
+		else enemyAI();
 	}
 	public function netEntangle():void {
 		clearOutput();
 		outputText("You skillfully toss your net at [themonster] restraining [monster his] movement.");
 		player.createStatusEffect(StatusEffects.CooldownNet,5,0,0,0);
 		monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function ELFarcheryElvenEye():void {
 		clearOutput()
 		outputText("You focus your vision concentrating on the target and pinpointing weak points to maximise the damage of your arrows!\n\n");
 		player.createStatusEffect(StatusEffects.ElvenEye,8,0,0,0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function ELFarcheryPinDown():void {
@@ -5819,7 +5819,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				outputText("\n\n<i>\"Ouch. Such a cowardly weapon,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your pathetic " + ammoWord + "s?\"</i>\n\n");
 				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 			}
-			combat.enemyAIAndResources();
+			enemyAI();
 		}
 		if (monster.HP <= monster.minHP()) {
 			doNext(endHpVictory);
@@ -5831,7 +5831,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		player.createStatusEffect(StatusEffects.CooldownPinDown,8,0,0,0);
 		monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function archerSidewinder():void {
@@ -5887,7 +5887,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.WrathGenerationPerHit2(5);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function EnvenomedBoltEffects(Omnishot:Number = 1, ammoWord:String = "arrows"):void{
@@ -6089,13 +6089,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.WrathGenerationPerHit2(5);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
-		if (monster.HP <= monster.minHP() || flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 1) combat.enemyAIAndResources();
+		if (monster.HP <= monster.minHP() || flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 1) enemyAI();
 		else archerBarrage2();
 	}
 	private function archerBarrage2():void {
 		if (player.fatigue + bowCost(200) > player.maxFatigue()) {
 			outputText("You are too tired to shoot next volley of arrows.");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		flags[kFLAGS.MULTIPLE_ARROWS_STYLE]--;
@@ -6128,7 +6128,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.WrathGenerationPerHit2(5);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
-		if (monster.HP <= monster.minHP() || flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 1) combat.enemyAIAndResources();
+		if (monster.HP <= monster.minHP() || flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 1) enemyAI();
 		else archerBarrage2();
 	}
 	private function archerBarrage3():Number {
@@ -6147,13 +6147,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var DurationIncrease:Number = 0;
 		if (player.keyItemvX("HB Stealth System", 1) >= 1) DurationIncrease += 1;
 		monster.createStatusEffect(StatusEffects.InvisibleOrStealth, 1, DurationIncrease, 0, 0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	public function StealthModeDeactivate():void {
 		clearOutput();
 		outputText("Depowering system you cause mech form to become visible.\n\n");
 		monster.removeStatusEffect(StatusEffects.InvisibleOrStealth);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function mechScatterLaser():void {
@@ -6208,7 +6208,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 /*
 	public function mechStarcannon():void {
@@ -6236,7 +6236,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 */
 	public function mechTazer():void {
@@ -6272,7 +6272,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 		}
 		statScreenRefresh();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function mechOmniMissile():void {
@@ -6310,7 +6310,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function mechStimpackMedicalDispenser():void {
@@ -6341,7 +6341,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		heal = Math.round(heal);
 		player.createStatusEffect(StatusEffects.GoblinMechStimpack, 10, heal, 0, 0);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function mechGravityShots():void {
@@ -6374,7 +6374,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function mechRaijinBlaster():void {
@@ -6420,7 +6420,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function mechSnowballGenerator():void {
@@ -6450,7 +6450,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function mechWhitefireBeamCannon():void {
@@ -6492,7 +6492,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function mechDynapunchGlove():void {
@@ -6532,7 +6532,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function PhysicalSpecials() {

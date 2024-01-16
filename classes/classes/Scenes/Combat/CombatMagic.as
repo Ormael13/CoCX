@@ -976,7 +976,7 @@ public class CombatMagic extends BaseCombatContent {
 				outputText("\n\n<i>\"Ouch. Such arcane skills for one so uncouth,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your magics?\"</i>\n\n");
 				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 			}
-			combat.enemyAIAndResources();
+			enemyAI();
 		}
 	}
 	
@@ -984,7 +984,7 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		outputText("Information Noona Warning:\n\n<b>Your Green Covenant is deactivated now.</b>");
 		player.removeStatusEffect(StatusEffects.GreenCovenant);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	private function handleShell():Boolean{
@@ -993,7 +993,7 @@ public class CombatMagic extends BaseCombatContent {
             flags[kFLAGS.SPELLS_CAST]++;
             if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
             spellPerkUnlock();
-            combat.enemyAIAndResources();
+            enemyAI();
             return true;
         }
 		return false;

@@ -994,44 +994,44 @@ public class MagicSpecials extends BaseCombatContent {
 			clearOutput();
 			outputText("You reach for the enemy's mind, but cannot find anything.  You frantically search around, but there is no consciousness as you know it in the room.\n\n");
 			fatigue(1);
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if (monster is LivingStatue)
 		{
 			outputText("There is nothing inside the golem to whisper to.");
 			fatigue(1);
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		fatigue(10, USEFATG_MAGIC_NOBM);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if(monster.hasPerk(PerkLib.Focused)) {
 			if(!monster.plural) outputText("[Themonster] is too focused for your whispers to influence!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		//Enemy too strong or multiplesI think you
 		if(player.inte < monster.inte || monster.plural) {
 			outputText("You reach for your enemy's mind, but can't break through.\n");
 			fatigue(10);
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		//[Failure]
 		if(rand(10) == 0) {
 			outputText("As you reach for your enemy's mind, you are distracted and the chorus of voices screams out all at once within your mind. You're forced to hastily silence the voices to protect yourself.");
 			fatigue(10);
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		outputText("You reach for your enemy's mind, watching as its sudden fear petrifies your foe.\n\n");
 		monster.createStatusEffect(StatusEffects.Fear,1,0,0,0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function fenrirFreezingBreath():void {
@@ -1056,14 +1056,14 @@ public class MagicSpecials extends BaseCombatContent {
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The ice courses by the stone skin harmlessly. Thou it does leave the surface of the statue shimerring with a thin layer of the ice.");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		//Special enemy avoidances
@@ -1092,12 +1092,8 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster is Lethice && (monster as Lethice).fightPhase == 3) {
 			outputText("\n\n<i>\"Ouch. Such arcane skills for one so uncouth,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your magics?\"</i>\n\n");
 			monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
-			combat.enemyAIAndResources();
 		}
-		else {
-			recoveryOfResources();
-			combatRoundOver();
-		}
+		enemyAI();
 	}
 
 	public function yetiFreezingBreath():void {
@@ -1143,14 +1139,14 @@ public class MagicSpecials extends BaseCombatContent {
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The ice courses by the stone skin harmlessly. Thou it does leave the surface of the statue shimerring with a thin layer of the ice.");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		//Special enemy avoidances
@@ -1187,7 +1183,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EmpoweredAria)) player.createStatusEffect(StatusEffects.Sing,5,0,0,0);
 		else player.createStatusEffect(StatusEffects.Sing,1,0,0,0);
 		outputText("\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function singCompellingAria():void {
@@ -1225,9 +1221,9 @@ public class MagicSpecials extends BaseCombatContent {
 			{
 				outputText("\n\n<i>\"Ouch. Such arcane skills for one so uncouth,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your magics?\"</i>\n\n");
 				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
-				combat.enemyAIAndResources();
+				enemyAI();
 			}
-			else combat.enemyAIAndResources();
+			else enemyAI();
 		}
 		else if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 1) {
 			outputText("You are still singing. Your compelling aria reaches far up to your opponent");
@@ -1247,7 +1243,7 @@ public class MagicSpecials extends BaseCombatContent {
 			monster.teased(lustDmg2);
 			player.addStatusValue(StatusEffects.ChanneledAttack, 1, 1);
 			outputText("\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 		}
 		else {
 			fatigue(50, USEFATG_MAGIC_NOBM);
@@ -1268,7 +1264,7 @@ public class MagicSpecials extends BaseCombatContent {
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.ChanneledAttackType, 1, 0, 0, 0);
 			outputText("\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 		}
 	}
 
@@ -1307,7 +1303,7 @@ public class MagicSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-		else combat.enemyAIAndResources();
+		else enemyAI();
 	}
 
 	public function OrgasmicLightningStrike():void {
@@ -1360,14 +1356,14 @@ public class MagicSpecials extends BaseCombatContent {
 			if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned,5,0,0,0);
 			player.removeStatusEffect(StatusEffects.ChanneledAttack);
 			player.removeStatusEffect(StatusEffects.ChanneledAttackType);
-			combat.enemyAIAndResources();
+			enemyAI();
 		}
 		else if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 1) {
 			outputText("You continue masturbating, lost in the sensation as lightning runs across your form. You are almost there!\n\n");
 			temp2 = 5 + rand(player.lib / 5 + player.cor / 10);
 			dynStats("lus", temp2, "scale", false);
 			player.addStatusValue(StatusEffects.ChanneledAttack, 1, 1);
-			combat.enemyAIAndResources();
+			enemyAI();
 		}
 		else {
 			clearOutput();
@@ -1380,7 +1376,7 @@ public class MagicSpecials extends BaseCombatContent {
 			dynStats("lus", temp2, "scale", false);
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.ChanneledAttackType, 3, 0, 0, 0);
-			combat.enemyAIAndResources();
+			enemyAI();
 		}
 	}
 
@@ -1446,7 +1442,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3 && rand(100) < 10 && !monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function Luststorm():void {
@@ -1512,7 +1508,7 @@ public class MagicSpecials extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.lustStorm,0,0,0,0);
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
-		else combat.enemyAIAndResources();
+		else enemyAI();
 	}
 
 	public function PlasmaBlast():void {
@@ -1596,7 +1592,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function startOniRampage():void {
@@ -1620,7 +1616,7 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.ChanneledAttack);
 			player.removeStatusEffect(StatusEffects.ChanneledAttackType);
 			outputText("\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 		}
 		else {
 			fatigue(50, USEFATG_MAGIC_NOBM);
@@ -1628,7 +1624,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("That does it! You crouch and lift a leg then another in alternance, stomping the ground as you focus your anger.\n\n");
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.ChanneledAttackType, 2, 0, 0, 0);
-			combat.enemyAIAndResources();
+			enemyAI();
 		}
 	}
 	public function minOniScoreReq():Number {
@@ -1687,14 +1683,14 @@ public class MagicSpecials extends BaseCombatContent {
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The fire courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		else if (monster is Lethice && (monster as Lethice).fightPhase == 2)
@@ -1883,7 +1879,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 		if(monster.lustVuln == 0) {
 			outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		outputText(" [monster he] barely manages to shove you off before you turn [monster him] into a frozen husk, highly shocked yet aroused by the experience.  ");
@@ -1898,7 +1894,7 @@ public class MagicSpecials extends BaseCombatContent {
 		doNext(playerMenu);
 		if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		else if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-		else combat.enemyAIAndResources();
+		else enemyAI();
 	}
 
 	private function mosterTeaseText():void {
@@ -1958,14 +1954,14 @@ public class MagicSpecials extends BaseCombatContent {
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The acid courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		outputText("You spit a blob of neon blue acid at [themonster] your corrosive fluids burning at "+((monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) ? "their" : "[monster his]")+" flesh.");
@@ -2016,14 +2012,14 @@ public class MagicSpecials extends BaseCombatContent {
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The fire courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		else if (monster is Lethice && (monster as Lethice).fightPhase == 2)
@@ -2117,14 +2113,14 @@ public class MagicSpecials extends BaseCombatContent {
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The fire courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		else if (monster is Lethice && (monster as Lethice).fightPhase == 2)
@@ -2213,14 +2209,14 @@ public class MagicSpecials extends BaseCombatContent {
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The ice courses by the stone skin harmlessly. Thou it does leave the surface of the statue shimerring with a thin layer of the ice.");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around [monster him].  [Themonster] does [monster his] best to avoid it, but the wave of force is too fast.");
@@ -2279,14 +2275,14 @@ public class MagicSpecials extends BaseCombatContent {
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The lightning courses by the stone skin harmlessly. Thou it does leave the surface of the statue sparkling with a few residual lighting discharges.");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around [monster him].  [Themonster] does [monster his] best to avoid it, but the wave of force is too fast.");
@@ -2344,14 +2340,14 @@ public class MagicSpecials extends BaseCombatContent {
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The darkness courses by the stone skin harmlessly. Thou it does leave the surface of the statue with a thin layer of dark glow.");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around [monster him].  [Themonster] does [monster his] best to avoid it, but the wave of force is too fast.");
@@ -2409,14 +2405,14 @@ public class MagicSpecials extends BaseCombatContent {
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The poison courses by the stone skin harmlessly. Thou it does leave the surface of the statue with a thin layer of dark glow.");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around [monster him].  [Themonster] does [monster his] best to avoid it, but the wave of force is too fast.");
@@ -2482,14 +2478,14 @@ public class MagicSpecials extends BaseCombatContent {
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The water courses by the stone skin harmlessly. Thou it does leave the surface of the statue with a thin layer of dark glow.");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around [monster him].  [Themonster] does [monster his] best to avoid it, but the wave of force is too fast.<b>Your opponent is now wet with water!</b>");
@@ -2547,14 +2543,14 @@ public class MagicSpecials extends BaseCombatContent {
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The water courses by the stone skin harmlessly. Thou it does leave the surface of the statue with a thin layer of dark glow.");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around [monster him].  [Themonster] does [monster his] best to avoid it, but the wave of force is too fast.");
@@ -2723,14 +2719,14 @@ public class MagicSpecials extends BaseCombatContent {
 			//Shell
 			if(monster.hasStatusEffect(StatusEffects.Shell)) {
 				outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-				combat.enemyAIAndResources();
+				enemyAI();
 				return;
 			}
 			if (combat.checkConcentration()) return; //Amily concentration
 			if (monster is LivingStatue)
 			{
 				outputText("The elemental energies courses by the stone skin harmlessly. Thou it does leave the surface of the statue with a thin layer of multicolor glow.");
-				combat.enemyAIAndResources();
+				enemyAI();
 			return;
 			}
 			outputText("You wreel back your head, sucking in a large breath of air before letting out all the collected energy. You let loose a bellowing roar at [themonster], so forceful that even the landscape begins to warp around the blast. [Themonster] attempts to dodge but the sheer size and speed is to immense to avoid as they are slammed with Fire, Ice, Lightning and Darkness. ");
@@ -2768,7 +2764,7 @@ public class MagicSpecials extends BaseCombatContent {
 			for each (var perkDragonObj:Object in CombatMagic.magicCounterPerks) {
 				if (player.hasPerk(perkDragonObj.tier3) || player.hasPerk(perkDragonObj.tier4)) player.addStatusValue(perkDragonObj.counter, 3, 1);
 			}
-			combat.enemyAIAndResources();
+			enemyAI();
 		}
 	}
 
@@ -2779,7 +2775,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster is LivingStatue)
 		{
 			outputText("This thing is just seldom immune to poison like come on its a statue!");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		//Works similar to bee stinger, must be regenerated over time. Shares the same poison-meter
@@ -2837,7 +2833,7 @@ public class MagicSpecials extends BaseCombatContent {
 			fatigue(10);
 			player.takeFireDamage(10 + rand(20), true);
 			outputText("\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		var damage:Number = 0;
@@ -2849,14 +2845,14 @@ public class MagicSpecials extends BaseCombatContent {
 		damage = Math.round(damage);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The fire courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if (monster is Doppleganger)
@@ -2878,7 +2874,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("Isabella shoulders her shield into the path of the emerald flames.  They burst over the wall of steel, splitting around the impenetrable obstruction and washing out harmlessly to the sides.\n\n");
 			if (SceneLib.isabellaFollowerScene.isabellaAccent()) outputText("\"<i>Is zat all you've got?  It'll take more than a flashy magic trick to beat Izabella!</i>\" taunts the cow-girl.\n\n");
 			else outputText("\"<i>Is that all you've got?  It'll take more than a flashy magic trick to beat Isabella!</i>\" taunts the cow-girl.\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		else if (valaReflect(damage, "fireball", player.takeFireDamage, true)) {}
@@ -2898,7 +2894,7 @@ public class MagicSpecials extends BaseCombatContent {
 			else if(monster.lust >= 99) {
 				doNext(endLustVictory);
 			}
-			else combat.enemyAIAndResources();
+			else enemyAI();
 			return;
 		}
 		else {
@@ -2922,7 +2918,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if(monster.HP <= monster.minHP()) {
 			doNext(endHpVictory);
 		}
-		else combat.enemyAIAndResources();
+		else enemyAI();
 	}
 
 //player gains hellfire perk.
@@ -2949,7 +2945,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue) {
 			outputText("The fire courses over the stone behemoths skin harmlessly. It does leave the surface of the statue glossier in its wake.");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		else if (monster is Lethice && (monster as Lethice).fightPhase == 2) {
@@ -2969,14 +2965,14 @@ public class MagicSpecials extends BaseCombatContent {
 			else if(monster.lust >= monster.maxOverLust()) {
 				doNext(endLustVictory);
 			}
-			else combat.enemyAIAndResources();
+			else enemyAI();
 			return;
 		}
 		else if(monster.short == "Isabella" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
 			outputText("  Isabella shoulders her shield into the path of the crimson flames.  They burst over the wall of steel, splitting around the impenetrable obstruction and washing out harmlessly to the sides.\n\n");
 			if (SceneLib.isabellaFollowerScene.isabellaAccent()) outputText("\"<i>Is zat all you've got?  It'll take more than a flashy magic trick to beat Izabella!</i>\" taunts the cow-girl.\n\n");
 			else outputText("\"<i>Is that all you've got?  It'll take more than a flashy magic trick to beat Isabella!</i>\" taunts the cow-girl.\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		else if (valaReflect(damage, "hellfire", player.takeLustDamage, true)) {}
@@ -3050,7 +3046,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("\n\n<i>\"Ouch. Such arcane skills for one so uncouth,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your magics?\"</i>\n\n");
 				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 			}
-			combat.enemyAIAndResources();
+			enemyAI();
 		}
 	}
 
@@ -3068,7 +3064,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		else outputText("You roar and unleash your savage fury, forgetting about defense from any physical or magical attacks in order to destroy your foe!\n\n");
 		player.createStatusEffect(StatusEffects.Berzerking,berzerkDuration,0,0,0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	public function berzerkG2():void {
 		clearOutput();
@@ -3076,7 +3072,7 @@ public class MagicSpecials extends BaseCombatContent {
 		player.HP -= Math.round(player.maxOverHP() * 0.5);
 		if (!player.hasPerk(PerkLib.EndlessRage)) player.addStatusValue(StatusEffects.Berzerking, 1, -2);
 		player.addStatusValue(StatusEffects.Berzerking, 2, 1);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	public function berzerkG3():void {
 		clearOutput();
@@ -3084,7 +3080,7 @@ public class MagicSpecials extends BaseCombatContent {
 		player.HP -= Math.round(player.maxOverHP() * 0.5);
 		if (!player.hasPerk(PerkLib.EndlessRage)) player.addStatusValue(StatusEffects.Berzerking, 1, -2);
 		player.addStatusValue(StatusEffects.Berzerking, 2, 1);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	public function berzerkG4():void {
 		clearOutput();
@@ -3092,7 +3088,7 @@ public class MagicSpecials extends BaseCombatContent {
 		player.HP -= Math.round(player.maxOverHP() * 0.5);
 		if (!player.hasPerk(PerkLib.EndlessRage)) player.addStatusValue(StatusEffects.Berzerking, 1, -2);
 		player.addStatusValue(StatusEffects.Berzerking, 2, 1);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function bloodFrenzy():void {
@@ -3107,7 +3103,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if(player.hasVagina()) outputText(" vagina");
 		outputText(" drooling as you let go of your ability to reason and lose yourself, sinking into a blood driven frenzy!\n\n");
 		player.buff("Blood Frenzy").setStats({'spe.mult':Math.round(player.speStat.mult.value*MultiplierBonus),'int.mult':-Math.round(player.intStat.mult.value),'lib.mult':Math.round(player.libStat.mult.value*MultiplierBonus)}).combatPermanent();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function lustzerk():void {
@@ -3124,7 +3120,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		else outputText("You roar and unleash your lustful fury, forgetting about defense from any sexual attacks or magical attacks in order to destroy your foe!\n\n");
 		player.createStatusEffect(StatusEffects.Lustzerking,lustzerkDuration,0,0,0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	public function lustzerkG2():void {
 		clearOutput();
@@ -3132,7 +3128,7 @@ public class MagicSpecials extends BaseCombatContent {
 		player.HP -= Math.round(player.maxOverHP() * 0.5);
 		if (!player.hasPerk(PerkLib.EndlessRage)) player.addStatusValue(StatusEffects.Lustzerking, 1, -2);
 		player.addStatusValue(StatusEffects.Lustzerking, 2, 1);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	public function lustzerkG3():void {
 		clearOutput();
@@ -3140,7 +3136,7 @@ public class MagicSpecials extends BaseCombatContent {
 		player.HP -= Math.round(player.maxOverHP() * 0.5);
 		if (!player.hasPerk(PerkLib.EndlessRage)) player.addStatusValue(StatusEffects.Lustzerking, 1, -2);
 		player.addStatusValue(StatusEffects.Lustzerking, 2, 1);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	public function lustzerkG4():void {
 		clearOutput();
@@ -3148,7 +3144,7 @@ public class MagicSpecials extends BaseCombatContent {
 		player.HP -= Math.round(player.maxOverHP() * 0.5);
 		if (!player.hasPerk(PerkLib.EndlessRage)) player.addStatusValue(StatusEffects.Lustzerking, 1, -2);
 		player.addStatusValue(StatusEffects.Lustzerking, 2, 1);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function blazingBattleSpirit():void {
@@ -3160,7 +3156,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("Your bodily flames begin to rage as you enter a passionate battle fury.\n\n");
 		player.createStatusEffect(StatusEffects.BlazingBattleSpirit,blazingBattleSpiritDuration,0,0,0);
 		statScreenRefresh();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function cauterize():void {
@@ -3169,7 +3165,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("You wince in pain but feel relief as your wounds begin to smoke and close.\n\n");
 		player.createStatusEffect(StatusEffects.Cauterize,10,0,0,0);
 		statScreenRefresh();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function WinterClaws():void {
@@ -3181,7 +3177,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("Your claws coat themselves with a thick layer of sharp ice.\n\n");
 		player.createStatusEffect(StatusEffects.WinterClaw,WinterClawsDuration,0,0,0);
 		statScreenRefresh();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function flameBlade():void {
@@ -3193,7 +3189,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("Your run "+((player.racialScore(Races.KITSHOO) >= 12 && player.tail.type == Tail.KITSHOO)?"one of your tails":"your tail")+" across your weapon igniting it with raging flames.\n\n");
 		player.createStatusEffect(StatusEffects.FlameBlade,flameBladeDuration,0,0,0);
 		statScreenRefresh();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function ElectrifyWeapon():void {
@@ -3205,7 +3201,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("Your lift your weapon toward the sky, drawing bolts of lightning towards it.\n\n");
 		player.createStatusEffect(StatusEffects.ElectrifyWeapon,electrifyWeaponDuration,0,0,0);
 		statScreenRefresh();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function warriorsrage():void {
@@ -3214,7 +3210,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("You roar and unleash your warrior's rage in order to destroy your foe!\n\n");
 		warriorsrage007();
 		statScreenRefresh();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	public function warriorsrage007():void {
 		var temp:Number;
@@ -3288,7 +3284,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("You roar and unleash your inner beast assuming Crinos Shape in order to destroy your foe!\n\n");
 		assumeCrinosShape007();
 		statScreenRefresh();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	public function assumeCrinosShape007():void {
 		var temp1:Number = 0;
@@ -3375,20 +3371,20 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		outputText("Gathering all you willpower you forcefully subduing your inner beast and returning to your normal shape.");
 		player.statStore.removeBuffs("CrinosShape");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function activaterTyrantState():void {
 		clearOutput();
 		outputText("You stare at your foe, letting your Lust build and bubble within you. Sweet release is in front of you…But first… You feel the heat building in your loins, and you let out a roar, the heat spreading through your body. You face your opponent with an unsettling grin. Let’s Dance!\n\n");
 		player.createStatusEffect(StatusEffects.TyrantState, 0, 0, 0, 0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	public function deactivaterTyrantState():void {
 		clearOutput();
 		outputText("Breathing heavily, you focus your mind. The heat through your body isn’t going away yet, but at the very least, you aren’t generating more. With a lot of mental effort, you reign in your lusty thoughts.\n\n");
 		player.removeStatusEffect(StatusEffects.TyrantState);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	public function activaterFalseWeapon():void {
 		clearOutput();
@@ -3396,7 +3392,7 @@ public class MagicSpecials extends BaseCombatContent {
 		player.lust -= Math.round(player.maxLust() * 0.1);
 		outputText("You focus on the heat in your body, and with your mind focused, you send your heat down, into the ground. The ground cracks under your [legs], and from the crack emerges a stone, shaped nearly perfectly into the shape of your [weapon].\n\n");
 		player.createStatusEffect(StatusEffects.FalseWeapon, 0, 0, 0, 0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	
 	public function lightupFoxflamePelt():void {
@@ -3420,13 +3416,13 @@ public class MagicSpecials extends BaseCombatContent {
 		player.buff("FoxflamePelt").addStats({spe:tempSpe}).withText("Foxflame Pelt").combatPermanent();
 		player.HP = oldHPratio*player.maxHP();
 		statScreenRefresh();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	public function extinguishFoxflamePelt():void {
 		clearOutput();
 		outputText("Gathering you willpower you forcefully extinguish flames coating your body.");
 		player.statStore.removeBuffs("FoxflamePelt");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function EverywhereAndNowhere():void {
@@ -3436,7 +3432,7 @@ public class MagicSpecials extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.EverywhereAndNowhere,6,0,0,0);
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.EverywhereAndNowhere,9,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownEveryAndNowhere,10,0,0,0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function Displacement():void {
@@ -3446,7 +3442,7 @@ public class MagicSpecials extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.Displacement,6,0,0,0);
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownDisplacement,9,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownDisplacement,10,0,0,0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function Prank():void {
@@ -3455,7 +3451,7 @@ public class MagicSpecials extends BaseCombatContent {
 		monster.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownPrank,3,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownPrank,4,0,0,0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function KnowledgeOverload():void {
@@ -3471,7 +3467,7 @@ public class MagicSpecials extends BaseCombatContent {
 		var overloadduration:Number = 0;
 		overloadduration += Math.round(camp.codex.checkUnlocked() / 10);
 		monster.createStatusEffect(StatusEffects.Stunned, overloadduration, 0, 0, 0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function Provoke():void {
@@ -3489,7 +3485,7 @@ public class MagicSpecials extends BaseCombatContent {
 		monster.armorDef -= armordebuff;
 		provokeornah += Math.round(camp.codex.checkUnlocked() / 100);
 		monster.createStatusEffect(StatusEffects.Provoke, 3, provokeornah, armordebuff, 0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function WeirdWords():void {
@@ -3519,7 +3515,7 @@ public class MagicSpecials extends BaseCombatContent {
 		doMagicDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function MoneyStrike():void {
@@ -3564,7 +3560,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("\n\n<i>\"Ouch. Such arcane skills for one so uncouth,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your magics?\"</i>\n\n");
 			monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 		}
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function Minimise():void {
@@ -3575,7 +3571,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("You shrink to your minimum size, evading your opponent as you mock [monster his] attempt to hit you.\n\n");
 		player.createStatusEffect(StatusEffects.Minimise,50+evasionIncrease,0,0,0);
 		player.buff("Minimise").addStats({"str":-50}).withText("Minimise").combatPermanent();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function Enlarge():void {
@@ -3584,7 +3580,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("You grow back to your normal size.\n\n");
 		player.buff("Minimise").remove();
 		player.removeStatusEffect(StatusEffects.Minimise);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function Flicker():void {
@@ -3596,7 +3592,7 @@ public class MagicSpecials extends BaseCombatContent {
 		monster.createStatusEffect(StatusEffects.InvisibleOrStealth,2+DurationIncrease,0,0,0);
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownFlicker, 3, 0, 0, 0);
 		else player.createStatusEffect(StatusEffects.CooldownFlicker,4,0,0,0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function TacticalDistraction():void {
@@ -3611,7 +3607,7 @@ public class MagicSpecials extends BaseCombatContent {
 		monster.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownTDistraction,4,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownTDistraction,5,0,0,0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function NagaHypnosis():void {
@@ -3621,7 +3617,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.headjewelryName == "pair of Golden Naga Hairpins") hypnosisDuration += 1;
 		outputText("You give [themonster] a sexy belly dance show, moving your hip from a side to another and displaying your assets as you insidiously mesmerise it into laying down [monster his] guard, all the while maintaining eye contact. [Themonster] is completely captivated by your dancing.");
 		monster.createStatusEffect(StatusEffects.HypnosisNaga,hypnosisDuration,0,0,0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function maleficium():void {
@@ -3632,7 +3628,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("You moan in delight as your body fills with profane powers, empowering your spells and making you blush with barely contained desire.\n\n");
 		if (player.cor < 60 && player.perkv1(IMutationsLib.ObsidianHeartIM) >= 1) dynStats("cor", 0.3);
 		player.createStatusEffect(StatusEffects.Maleficium,maleficiumDuration,0,0,0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function infernalflare():void {
@@ -3649,13 +3645,13 @@ public class MagicSpecials extends BaseCombatContent {
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		clearOutput();
@@ -3712,7 +3708,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("\n\n<i>\"Ouch. Such arcane skills for one so uncouth,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your magics?\"</i>\n\n");
 				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 			}
-			combat.enemyAIAndResources();
+			enemyAI();
 		}
 	}
 
@@ -3721,7 +3717,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("finds the hole to your pucker plugging it perfectly as embery sap flows directly from the plants into your core. Now one with the nearby corrupted vegetation you overflow with magical might as the plants literally pump their power directly into you.\n");
 		player.createStatusEffect(StatusEffects.CooldownGreenCovenant, 12, 0, 0, 0);
 		player.createStatusEffect(StatusEffects.GreenCovenant, 0, 0, 0, 0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function perfectclarity():void {
@@ -3732,7 +3728,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("You gasp as your body fills with holy powers, empowering your spells but making you feel more fragile.\n\n");
 		//if (player.cor < 60 && player.perkv1(IMutationsLib.DiamondHeartIM) >= 1) dynStats("cor", 0.3);
 		player.createStatusEffect(StatusEffects.PerfectClarity,clarityDuration,0,0,0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function judgementflare():void {
@@ -3749,13 +3745,13 @@ public class MagicSpecials extends BaseCombatContent {
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		clearOutput();
@@ -3812,7 +3808,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("\n\n<i>\"Ouch. Such arcane skills for one so uncouth,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your magics?\"</i>\n\n");
 				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 			}
-			combat.enemyAIAndResources();
+			enemyAI();
 		}
 	}
 
@@ -3829,13 +3825,13 @@ public class MagicSpecials extends BaseCombatContent {
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		clearOutput();
@@ -3871,7 +3867,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("\n\n<i>\"Ouch. Such arcane skills for one so uncouth,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your magics?\"</i>\n\n");
 				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 			}
-			combat.enemyAIAndResources();
+			enemyAI();
 		}
 	}
 
@@ -3929,7 +3925,7 @@ public class MagicSpecials extends BaseCombatContent {
 				monster.createStatusEffect(StatusEffects.RegenInhibitorPetrify, petrifyduration, 0, 0, 0);
 			}
 		}
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function manaShot():void {
@@ -3943,13 +3939,13 @@ public class MagicSpecials extends BaseCombatContent {
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		clearOutput();
@@ -3997,7 +3993,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("\n\n<i>\"Ouch. Such arcane skills for one so uncouth,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your magics?\"</i>\n\n");
 				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 			}
-			combat.enemyAIAndResources();
+			enemyAI();
 		}
 	}
 	public function manaBarrage():void {
@@ -4011,13 +4007,13 @@ public class MagicSpecials extends BaseCombatContent {
 			flags[kFLAGS.SPELLS_CAST]++;
 			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
 			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		clearOutput();
@@ -4070,7 +4066,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("\n\n<i>\"Ouch. Such arcane skills for one so uncouth,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your magics?\"</i>\n\n");
 				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 			}
-			combat.enemyAIAndResources();
+			enemyAI();
 		}
 	}
 	public function arigeanChargedShot():void {
@@ -4109,9 +4105,9 @@ public class MagicSpecials extends BaseCombatContent {
 			{
 				outputText("\n\n<i>\"Ouch. Such arcane skills for one so uncouth,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your magics?\"</i>\n\n");
 				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
-				combat.enemyAIAndResources();
+				enemyAI();
 			}
-			else combat.enemyAIAndResources();
+			else enemyAI();
 		}
 		else {
 			useMana((400*arigeanMagicSpecialsCost()), Combat.USEMANA_MAGIC);
@@ -4120,7 +4116,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("You begin charging your extra mouth in preparation for a heavy attack.\n\n");
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.ChanneledAttackType, 8, 0, 0, 0);
-			combat.enemyAIAndResources();
+			enemyAI();
 		}
 	}
 	public function arigeanFinalityBarrage():void {
@@ -4137,7 +4133,7 @@ public class MagicSpecials extends BaseCombatContent {
 			HPChange(-Math.round(player.maxHP() * 0.6), true);
 			monster.HP -= Math.round(monster.maxHP() * 0.3);
 		}
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	private function arigeanAssociationCortexBoost():Number {
 		var aACB:Number = 1.2;
@@ -4162,14 +4158,14 @@ public class MagicSpecials extends BaseCombatContent {
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your breath touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The acid courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownHydraAcidBreath,7,0,0,0);
@@ -4283,7 +4279,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		spellPerkUnlock();
 		combat.heroBaneProc(damage);
-		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) combat.enemyAIAndResources();
+		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else {
 			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
@@ -4304,7 +4300,7 @@ public class MagicSpecials extends BaseCombatContent {
 		combat.darkRitualCheckDamage();
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		outputText("Holding out your palm, you conjure fox flame that dances across your fingertips.  You launch it at [themonster] with a ferocious throw, and it bursts on impact, showering dazzling sparks everywhere.  ");
@@ -4383,7 +4379,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		spellPerkUnlock();
 		combat.heroBaneProc(damage);
-		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) combat.enemyAIAndResources();
+		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else {
 			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
@@ -4402,7 +4398,7 @@ public class MagicSpecials extends BaseCombatContent {
 		combat.darkRitualCheckDamage();
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		//Deals direct damage and lust regardless of enemy defenses.  Especially effective against non-corrupted targets.
@@ -4486,7 +4482,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		spellPerkUnlock();
 		combat.heroBaneProc(damage);
-		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) combat.enemyAIAndResources();
+		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else {
 			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
@@ -4505,7 +4501,7 @@ public class MagicSpecials extends BaseCombatContent {
 		combat.darkRitualCheckDamage();
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		outputText("Holding out your palms, you conjure an ethereal blue on one palm and corrupted purple flame on other which dances across your fingertips.  After well practised move of fusing them both into one of mixed colors ball of fire you launch it at [themonster] with a ferocious throw, and it bursts on impact, showering dazzling azure and lavender sparks everywhere.  ");
@@ -4588,7 +4584,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		spellPerkUnlock();
 		combat.heroBaneProc(damage);
-		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) combat.enemyAIAndResources();
+		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else {
 			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
@@ -4607,7 +4603,7 @@ public class MagicSpecials extends BaseCombatContent {
 		combat.darkRitualCheckDamage();
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		outputText("Holding out your palm, you conjure an ethereal blue flame that dances across your fingertips.  You launch it at [themonster] with a ferocious throw, and it bursts on impact, showering dazzling azure sparks everywhere.  ");
@@ -4691,7 +4687,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		spellPerkUnlock();
 		combat.heroBaneProc(damage);
-		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) combat.enemyAIAndResources();
+		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else {
 			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
@@ -4720,13 +4716,13 @@ public class MagicSpecials extends BaseCombatContent {
 		//Fatigue Cost: 25
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if(monster is EncapsulationPod || monster.inte == 0) {
 			outputText("You reach for the enemy's mind, but cannot find anything.  You frantically search around, but there is no consciousness as you know it in the room.\n\n");
 			fatigue(1);
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		var soulforcecost:int = 20 * soulskillCost() * soulskillcostmulti();
@@ -4765,7 +4761,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) speedDebuff *= 2;
 		monster.speStat.core.value -= speedDebuff;
 		monster.createStatusEffect(StatusEffects.Fear, 2+ItemMod, speedDebuff, 0, 0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	//Illusion
@@ -4775,7 +4771,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if(monster is EncapsulationPod || monster.inte == 0) {
 			outputText("In the tight confines of this pod, there's no use making such an attack!\n\n");
 			fatigue(1);
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		var soulforcecost:int = Math.floor(20 * soulskillCost() * soulskillcostmulti());
@@ -4800,7 +4796,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		//Decrease enemy speed and increase their susceptibility to lust attacks if already 110% or more
@@ -4845,7 +4841,7 @@ public class MagicSpecials extends BaseCombatContent {
 		monster.teased(lustDmg);
 		outputText("\n\n");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-		if(monster.lust < monster.maxOverLust()) combat.enemyAIAndResources();
+		if(monster.lust < monster.maxOverLust()) enemyAI();
 		else {
 			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		}
@@ -4881,7 +4877,7 @@ public class MagicSpecials extends BaseCombatContent {
 		//Failure
 		else outputText("Your target proves too fast for your technique to catch up.");
 		outputText("\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function TelekineticGrab():void {
@@ -4899,7 +4895,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("You weave your hand causing [themonster] body to levitate and fly to you as you use telekinesis to hold your opponent.\n\n");
 		monster.createStatusEffect(StatusEffects.TelekineticGrab, 4 + rand(2), 0, 0, 0);
 		player.createStatusEffect(StatusEffects.CooldownTelekineticGrab, 12, 0, 0, 0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	//Slime Bolt
@@ -4988,7 +4984,7 @@ public class MagicSpecials extends BaseCombatContent {
 		statScreenRefresh();
 		outputText("\n\n");
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-		else combat.enemyAIAndResources();
+		else enemyAI();
 	}
 
 	//Cursed Riddle
@@ -5057,7 +5053,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("\n\n");
 		}
 	if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-	else combat.enemyAIAndResources();
+	else enemyAI();
 	}
 
 	//Fae Storm
@@ -5128,7 +5124,7 @@ public class MagicSpecials extends BaseCombatContent {
 			EffectList.splice(EffectList.indexOf(choice), 1)
 		}
 		outputText(".\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	
 	//Pixie Dust
@@ -5182,7 +5178,7 @@ public class MagicSpecials extends BaseCombatContent {
 			EffectList.splice(EffectList.indexOf(choice), 1)
 		}
 		outputText(".\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	private function FaeStormLightning():void{
@@ -5276,7 +5272,7 @@ public class MagicSpecials extends BaseCombatContent {
 		monster.createStatusEffect(StatusEffects.Polymorphed, 3+DurationIncrease, 0, 0, 0);
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownBalefulPolymorph,15,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownBalefulPolymorph, 16, 0, 0, 0)
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	//Transfer
@@ -5297,7 +5293,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if(monster.lustVuln == 0) {
 			outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
 			player.lust += lusttransfered;
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		mosterTeaseText();
@@ -5305,7 +5301,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		doNext(playerMenu);
 		if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
-		else combat.enemyAIAndResources();
+		else enemyAI();
 	}
 
 //Fascinate
@@ -5313,13 +5309,13 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if(monster is EncapsulationPod || monster.inte == 0) {
 			outputText("You reach for the enemy's mind, but cannot find anything.  You frantically search around, but there is no consciousness as you know it in the room.\n\n");
 			fatigue(1);
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		fatigue(30, USEFATG_PHYSICAL);
@@ -5336,7 +5332,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 		if(monster.lustVuln == 0) {
 			outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if(monster.lust < (monster.maxLust() * 0.3)) outputText("[Themonster] squirms as the magic affects [monster him].  ");
@@ -5362,7 +5358,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		doNext(playerMenu);
 		if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
-		else combat.enemyAIAndResources();
+		else enemyAI();
 	}
 
 //Lust strike
@@ -5370,7 +5366,7 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		fatigue(50, USEFATG_MAGIC_NOBM);
@@ -5384,7 +5380,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
 		if(monster.lustVuln == 0) {
 			outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if(monster.lust < (monster.maxLust() * 0.3)) outputText("[Themonster] squirms as the magic affects [monster him].  ");
@@ -5409,7 +5405,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		doNext(playerMenu);
 		if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
-		else combat.enemyAIAndResources();
+		else enemyAI();
 	}
 
 	public function mindThrust():void {
@@ -5436,7 +5432,7 @@ public class MagicSpecials extends BaseCombatContent {
 		doTrueDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText(".\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function mindBlast():void {
@@ -5454,7 +5450,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("You assault your opponent’s mind with lewd thoughts, locking them into a blissful daze.");
 		player.createStatusEffect(StatusEffects.CooldownSpellMindBlast,14-PsionicEmpowermentBonus,0,0,0);
 		monster.createStatusEffect(StatusEffects.Stunned, duration,0,0,0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function mirrorImage():void {
@@ -5478,7 +5474,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("You weave a powerful illusion, creating "+ numberOfImage +" replicas of yourself.\n\n");
 			player.createStatusEffect(StatusEffects.MirrorImage,numberOfImage,0,0,0);
 		}
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function possess():void {
@@ -5542,7 +5538,7 @@ public class MagicSpecials extends BaseCombatContent {
 		else {
 			outputText("With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself into the opponent's frame. Unfortunately, it seems they were more mentally prepared than you hoped, and you're summarily thrown out of their body before you're even able to have fun with them. Darn, you muse. Gotta get smarter.\n\n");
 		}
-		if(!combatIsOver()) combat.enemyAIAndResources();
+		if(!combatIsOver()) enemyAI();
 	}
 	public function possess2():void {
 		if (player.hasStatusEffect(StatusEffects.HarpyBind)) player.removeStatusEffect(StatusEffects.HarpyBind);
@@ -5580,7 +5576,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage = Math.round(damage);
 		doMagicDamage(damage, true, true);
 		monster.createStatusEffect(StatusEffects.Fear,1+rand(3),0,0,0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 //Feline Curse
@@ -5595,7 +5591,7 @@ public class MagicSpecials extends BaseCombatContent {
 		dynStats("lus", selflust);
 		monster.createStatusEffect(StatusEffects.Polymorphed, 3, 0, 0, 0);
 		if (player.lust >= player.maxOverLust()) doNext(endLustLoss);
-		else combat.enemyAIAndResources();
+		else enemyAI();
 	}
 
 //Infernal Claw
@@ -5622,7 +5618,7 @@ public class MagicSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage * 2);
 		doNext(playerMenu);
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-		else combat.enemyAIAndResources();
+		else enemyAI();
 	}
 
 //Eclipsing shadow
@@ -5634,7 +5630,7 @@ public class MagicSpecials extends BaseCombatContent {
 		else player.createStatusEffect(StatusEffects.CooldownEclipsingShadow,20,0,0,0);
 		outputText("You open your wings wide and call upon the power of your tainted blood a pair of black orbs forming at your fingertips. You shatter them on the ground plunging the area in complete darkness and extinguishing all light. While your opponent will be hard pressed to see anything your ability to echolocate allows you to navigate with perfect clarity.");
 		monster.createStatusEffect(StatusEffects.Blind, 15, 0, 0, 0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 //Sonic scream
@@ -5646,7 +5642,7 @@ public class MagicSpecials extends BaseCombatContent {
 		else player.createStatusEffect(StatusEffects.CooldownSonicScream, 15, 0, 0, 0);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		var damage:Number = 0;
@@ -5666,7 +5662,7 @@ public class MagicSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		doNext(playerMenu);
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-		else combat.enemyAIAndResources();
+		else enemyAI();
 	}
 	
 //Vampire Thirst Stacks To Health/Mana
@@ -5712,14 +5708,14 @@ public class MagicSpecials extends BaseCombatContent {
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your winds touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The winds courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		else if (monster is Lethice && (monster as Lethice).fightPhase == 2)
@@ -5798,14 +5794,14 @@ public class MagicSpecials extends BaseCombatContent {
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your winds touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
 			outputText("The winds courses by the stone skin harmlessly. It does leave the surface of the statue glossier in its wake.");
-			combat.enemyAIAndResources();
+			enemyAI();
 			return;
 		}
 		else if (monster is Lethice && (monster as Lethice).fightPhase == 2)
@@ -5888,7 +5884,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-		else combat.enemyAIAndResources();
+		else enemyAI();
 	}
 	public function ChaosBeamsRulette():void {
 		var damage:Number = scalingBonusIntelligence() * spellModWhite();
@@ -5987,7 +5983,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("You gaze deep into [themonster] eyes smashing [monster his] thoughts and resolve to nothingness along the way. [monster his] is nothing, you are everything. [Themonster] is left stunned by the experience.\n\n");
 		//player.createStatusEffect(StatusEffects.CooldownNet,8,0,0,0);
 		monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function ElementalAspectAir():void {
@@ -6039,7 +6035,7 @@ public class MagicSpecials extends BaseCombatContent {
 		windwallduration *= 2;
 		player.createStatusEffect(StatusEffects.WindWall, 0, windwallduration, 0, 0);
 		outputText("You call on your elemental projecting a air wall between you and [themonster] to deflect incoming projectiles.\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function ElementalAspectEarth():void {
@@ -6083,7 +6079,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 31) stoneskinduration += 3;
 		player.createStatusEffect(StatusEffects.StoneSkin, stoneskinbonus, stoneskinduration, 0, 0);
 		outputText("Your elemental lifts stone and dirt from the ground, encasing you in a earthen shell stronger than any armor.\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function ElementalAspectFire():void {
@@ -6144,7 +6140,7 @@ public class MagicSpecials extends BaseCombatContent {
 		doFireDamage(damage, true, true);
 		outputText("\n\n");
 		//checkMinionsAchievementDamage(damage);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function ElementalAspectWater():void {
@@ -6191,7 +6187,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("Your elemental encases your body within a bubble of curative spring water, slowly closing your wounds. The bubbles pop leaving you wet, but on the way to full recovery. <b>([font-heal]+" + temp + "</font>)</b>");
 		HPChange(temp,false);
 		outputText("\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function ElementalAspectEther():void {
@@ -6260,7 +6256,7 @@ public class MagicSpecials extends BaseCombatContent {
 		doMagicDamage(damage, true, true);
 		outputText("\n\n");
 		//checkMinionsAchievementDamage(damage);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function ElementalAspectWood():void {
@@ -6344,7 +6340,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("Your elemental temporarily covers your skin with bark, shielding you against strikes. This is the bark of medicinal plants and as such you recover from your injuries. <b>([font-heal]+" + temp + "</font>)</b>");
 		HPChange(temp,false);
 		outputText("\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function ElementalAspectMetal():void {
@@ -6388,7 +6384,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 31) metalskinduration += 3;
 		player.createStatusEffect(StatusEffects.MetalSkin, metalskinbonus, metalskinduration, 0, 0);
 		outputText("Your elemental encases your body into a layer of flexible yet solid steel. The metal gives strength to your frame, empowering your unarmed strikes.\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function ElementalAspectIce():void {
@@ -6449,7 +6445,7 @@ public class MagicSpecials extends BaseCombatContent {
 		doIceDamage(damage, true, true);
 		outputText("\n\n");
 		//checkMinionsAchievementDamage(damage);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function ElementalAspectLightning():void {
@@ -6509,7 +6505,7 @@ public class MagicSpecials extends BaseCombatContent {
 		doLightningDamage(damage, true, true);
 		outputText("\n\n");
 		//checkMinionsAchievementDamage(damage);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function ElementalAspectDarkness():void {
@@ -6569,7 +6565,7 @@ public class MagicSpecials extends BaseCombatContent {
 		doDarknessDamage(damage, true, true);
 		outputText("\n\n");
 		//checkMinionsAchievementDamage(damage);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function ElementalAspectPoison():void {
@@ -6637,7 +6633,7 @@ public class MagicSpecials extends BaseCombatContent {
 		monster.teased(Math.round(monster.lustVuln * lustdamage));
 		outputText("\n\n");
 		//checkMinionsAchievementDamage(damage);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function ElementalAspectPurity():void {
@@ -6698,7 +6694,7 @@ public class MagicSpecials extends BaseCombatContent {
 		doMagicDamage(damage, true, true);
 		outputText("\n\n");
 		//checkMinionsAchievementDamage(damage);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function ElementalAspectCorruption():void {
@@ -6759,7 +6755,7 @@ public class MagicSpecials extends BaseCombatContent {
 		doMagicDamage(damage, true, true);
 		outputText("\n\n");
 		//checkMinionsAchievementDamage(damage);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	
 	public function FusionSpecialFirst(element:Number, type:Number):void {
@@ -6829,7 +6825,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		outputText("\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	public function FusionSpecialSecond(element:Number, type:Number):void {
 		clearOutput();
@@ -6861,40 +6857,40 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText(" <b>([font-heal]+" + temp + "</font>)</b>");
 		HPChange(temp,false);
 		outputText("\n\n");
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	public function FusionSpecialTrueEvasion():void {
 		clearOutput();
 		outputText("You disperse with the ambient air letting things run through you rather than blocking them. Good fucking luck to whoever would want to strike you right now.\n\n");
 		player.createStatusEffect(StatusEffects.CooldownTrueEvasion, 10, 0, 0, 0);
 		player.createStatusEffect(StatusEffects.TrueEvasion, 3, 0, 0, 0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	public function FusionSpecialAdamantineShell():void {
 		clearOutput();
 		outputText("You draw strength from the earth, your rock body turning to the metallic sheen and hardness of pure adamantium.\n\n");
 		player.createStatusEffect(StatusEffects.CooldownAdamantineShell, 10, 0, 0, 0);
 		player.createStatusEffect(StatusEffects.AdamantineShell, 7, 0, 0, 0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	public function FusionSpecialFieryRageActivate():void {
 		clearOutput();
 		outputText("You let the flame of anger consume you entering a fiery rage.\n\n");
 		player.createStatusEffect(StatusEffects.FieryRage, 0, 0, 0, 0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	public function FusionSpecialFieryRageDeactivate():void {
 		clearOutput();
 		outputText("You extinguish your flames, calming down from your fiery rage.\n\n");
 		player.removeStatusEffect(StatusEffects.FieryRage);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 	public function FusionSpecialMomentOfClarity():void {
 		clearOutput();
 		outputText("You empty your mind from needless thought turning yourself calm like the immobile water of a pond, only letting the ripple of the moment bother you. Thanks to your inner calm you manage to shrug off the desires that plagues you to concentrate on the ongoing battle with perfect clarity.\n\n");
 		player.createStatusEffect(StatusEffects.CooldownMomentOfClarity, 6, 0, 0, 0);
 		player.createStatusEffect(StatusEffects.MomentOfClarity, 3, 0, 0, 0);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	//Arian's stuff
@@ -6917,7 +6913,7 @@ public class MagicSpecials extends BaseCombatContent {
 		SceneLib.arianScene.clearTalisman();
 		monster.createStatusEffect(StatusEffects.ImmolationDoT,3,0,0,0);
 		combat.heroBaneProc(damage);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function shieldingSpell():void {
@@ -6926,7 +6922,7 @@ public class MagicSpecials extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.Shielding,0,0,0,0);
 		player.removeStatusEffect(StatusEffects.ShieldingSpell);
 		SceneLib.arianScene.clearTalisman();
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 
 	public function iceprisonSpell():void {
@@ -6942,7 +6938,7 @@ public class MagicSpecials extends BaseCombatContent {
 		SceneLib.arianScene.clearTalisman();
 		monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
 		combat.heroBaneProc(damage);
-		combat.enemyAIAndResources();
+		enemyAI();
 	}
 }
 }
