@@ -40,15 +40,13 @@ public class HeartSeekerSkill extends AbstractBloodSoulSkill {
 		var damage:Number = scalingBonusWisdom() * spellModBlood();
 		var damageFloor:Number = 10;
 
-		if (sfInfusion) {
-			damage *= 2;
-			damageFloor *= 3;
-			damage *= soulskillPhysicalMod();
-		}
-
 		if (damage < damageFloor) damage = damageFloor;
 		if (player.hasPerk(PerkLib.BloodAffinity)) damage *= 2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
+
+		if (sfInfusion) {
+			damage *= soulskillPhysicalMod();
+		}
 
 		return Math.round(damage);
 

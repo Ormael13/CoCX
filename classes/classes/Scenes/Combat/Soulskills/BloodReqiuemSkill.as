@@ -48,6 +48,14 @@ public class BloodReqiuemSkill extends AbstractBloodSoulSkill {
 		if (player.hasPerk(PerkLib.BloodAffinity)) damage *= 2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 
+		if (sfInfusion) {
+			//soulskill mod effect
+			damage *= soulskillPhysicalMod();
+		}
+
+		if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
+		damage *= combat.bloodDamageBoostedByDao();
+
 		return Math.round(damage);
 
 	}
@@ -68,8 +76,7 @@ public class BloodReqiuemSkill extends AbstractBloodSoulSkill {
 			crit = true;
 			damage *= 1.75;
 		}
-		if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
-		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
+		
 		if (display) outputText("[Themonster] takes ");
 		doDamage(damage, true, display);
 		if (crit && display) outputText(" <b>*Critical Hit!*</b>");

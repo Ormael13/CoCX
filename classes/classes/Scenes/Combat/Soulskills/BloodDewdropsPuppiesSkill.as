@@ -30,7 +30,7 @@ public class BloodDewdropsPuppiesSkill extends AbstractBloodSoulSkill {
 	}
 
 	public function calcDamage(monster:Monster):Number {
-		var damage:Number = scalingBonusWisdom() * spellModBlood() * 0.5;
+		var damage:Number = scalingBonusWisdom() * spellModBlood() * 0.125;
 		var damageFloor:Number = 10;
 
 		damage *= bloodPuppiesDamageBonusMod();

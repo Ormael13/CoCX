@@ -40,11 +40,6 @@ public class BloodDewdropsSkill extends AbstractBloodSoulSkill {
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 0.5;
 		var damageFloor:Number = 10;
 
-		if (sfInfusion) {
-			damage *= 3;
-			damageFloor *= 3;
-		}
-
 		if (damage < damageFloor) damage = damageFloor;
 		if (monster && monster.plural) damage *= 5;
 		if (player.hasPerk(PerkLib.BloodAffinity)) damage *= 2;
