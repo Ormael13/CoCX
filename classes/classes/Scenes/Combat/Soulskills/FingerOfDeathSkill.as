@@ -52,7 +52,7 @@ public class FingerOfDeathSkill extends AbstractSoulSkill {
 		var cooldown:int = 6;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4) cooldown -= 2;
 			
-		return cooldown;
+		return soulskillTier2Cooldown(cooldown, false);
 	}
 
 	public function calcDamage(monster:Monster, casting:Boolean = false):Number {

@@ -58,7 +58,16 @@ public class BladeHailSkill extends AbstractSoulSkill {
 	}
 
 	override public function calcCooldown():int {
-		return hailArray[hailSelection][4];
+		var baseCooldown:int = hailArray[hailSelection][4];
+		switch (hailSelection) {
+			case 2: return soulskillTier3Cooldown(baseCooldown, false);
+					break;
+			case 1: return soulskillTier2Cooldown(baseCooldown, false);
+					break;
+			case 0: 
+			default:return soulskillCooldown(baseCooldown, false);
+					break;
+		}
 	}
 
 	private function calcHailDamage():Number {

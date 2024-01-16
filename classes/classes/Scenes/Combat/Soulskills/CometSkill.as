@@ -14,7 +14,7 @@ public class CometSkill extends AbstractSoulSkill {
             "Project a shard of soulforce, which will come crashing down upon your opponent as a crystalline comet.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING, TAG_AOE, TAG_MAGICAL],
+            [TAG_DAMAGING, TAG_AOE, TAG_MAGICAL, TAG_TIER2],
             StatusEffects.KnowsComet
         )
 		baseSFCost = 400;
@@ -41,7 +41,7 @@ public class CometSkill extends AbstractSoulSkill {
 	}
 
 	override public function calcCooldown():int {
-		return 4;
+		return soulskillTier2Cooldown(4, false);
 	}
 
 	public function calcDamage(monster:Monster):Number {

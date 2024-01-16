@@ -11,9 +11,9 @@ import classes.Items.Weapons.Tidarion;
 
 public class MultiThrustSkill extends AbstractSoulSkill {
 	private var thrustArray:Array = [
-		["Triple Thrust", "three", StatusEffects.KnowsTripleThrust, 30, "thrice"],
-		["Sextuple Thrust", "six", StatusEffects.KnowsSextupleThrust, 70, "sixfold"],
-		["Nonuple Thrust", "nine", StatusEffects.KnowsNonupleThrust, 150, "ninefold"]
+		["Triple Thrust", "three", StatusEffects.KnowsTripleThrust, 30, "thrice", 0],
+		["Sextuple Thrust", "six", StatusEffects.KnowsSextupleThrust, 70, "sixfold", 3],
+		["Nonuple Thrust", "nine", StatusEffects.KnowsNonupleThrust, 150, "ninefold", 9]
 	];
 	private var thrustSelection:int;
 	private var multiTrustDNLag:Number = 0;
@@ -43,7 +43,16 @@ public class MultiThrustSkill extends AbstractSoulSkill {
 	}
 
 	override public function calcCooldown():int {
-		return thrustSelection;
+		var baseCooldown:int = thrustArray[thrustSelection][5];
+		switch (thrustSelection) {
+			case 2: return soulskillTier3Cooldown(baseCooldown);
+					break;
+			case 1: return soulskillTier2Cooldown(baseCooldown);
+					break;
+			case 0: 
+			default:return soulskillCooldown(baseCooldown);
+					break;
+		}
 	}
 
 	private function multiThrustDSingle(monster: Monster, casting:Boolean = true):Number {

@@ -15,7 +15,7 @@ public class BloodDewdropsSkill extends AbstractBloodSoulSkill {
 			: "Blood Dewdrops will fire many bloody droplets from your hand.  ",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING, TAG_PHYSICAL],
+            [TAG_DAMAGING, TAG_PHYSICAL, TAG_TIER2],
             sfInfusion? StatusEffects.KnowsBloodDewdropsSF: StatusEffects.KnowsBloodDewdrops,
 			true,
 			sfInfusion
@@ -33,7 +33,7 @@ public class BloodDewdropsSkill extends AbstractBloodSoulSkill {
 	}
 
 	override public function calcCooldown():int {
-		return bloodSoulSkillCoolDown(2);
+		return soulskillTier2Cooldown(bloodSoulSkillCoolDown(2));
 	}
 
 	public function calcDamage(monster:Monster):Number {

@@ -14,7 +14,7 @@ public class BloodReqiuemSkill extends AbstractBloodSoulSkill {
 			: "Blood Requiem will create pillars of blood, dealing damage and reducing the recovery rate of enemies for a short time.  ",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING, TAG_PHYSICAL],
+            [TAG_DAMAGING, TAG_PHYSICAL, TAG_TIER2],
             sfInfusion? StatusEffects.KnowsBloodRequiemSF: StatusEffects.KnowsBloodRequiem,
 			true,
 			sfInfusion
@@ -32,7 +32,7 @@ public class BloodReqiuemSkill extends AbstractBloodSoulSkill {
 	}
 
 	override public function calcCooldown():int {
-		return bloodSoulSkillCoolDown(4);
+		return soulskillTier2Cooldown(bloodSoulSkillCoolDown(4));
 	}
 
 	public function calcDamage(monster:Monster):Number {

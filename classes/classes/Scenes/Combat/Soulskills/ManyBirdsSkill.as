@@ -41,7 +41,7 @@ public class ManyBirdsSkill extends AbstractSoulSkill {
 	}
 
 	override public function calcCooldown():int {
-		return 2;
+		return soulskillCooldown(2, false);
 	}
 
 	public function calcDamage(monster:Monster):Number {

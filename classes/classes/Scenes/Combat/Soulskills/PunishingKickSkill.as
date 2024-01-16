@@ -13,7 +13,7 @@ public class PunishingKickSkill extends AbstractSoulSkill {
             "A vicious kick that can daze an opponent, reducing its damage for a while.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING, TAG_DEBUFF, TAG_PHYSICAL],
+            [TAG_DAMAGING, TAG_DEBUFF, TAG_PHYSICAL, TAG_TIER2],
             StatusEffects.KnowsPunishingKick
         )
 		baseSFCost = 30;
@@ -40,7 +40,7 @@ public class PunishingKickSkill extends AbstractSoulSkill {
 	}
 
 	override public function calcCooldown():int {
-        return 10;
+        return soulskillTier2Cooldown(10);
     }
 
 	override public function calcDuration():int {
