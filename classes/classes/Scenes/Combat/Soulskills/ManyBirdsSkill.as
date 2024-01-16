@@ -49,7 +49,7 @@ public class ManyBirdsSkill extends AbstractSoulSkill {
 		if (damage < 10) damage = 10;
 
 		//soulskill mod effect
-		damage *= combat.soulskillMagicalMod();
+		damage *= soulskillMagicalMod();
 
 		//group enemies bonus
 		if (monster && monster.plural) damage *= 5;

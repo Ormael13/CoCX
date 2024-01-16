@@ -295,8 +295,8 @@ public class EventParser {
             SceneLib.inventory.takeItem(player.unequipMiscJewelry2(false,true), playerMenu);
             return true;
         }
-        //Drop Excalibur / beautiful sword / beautiful staff if corrupted!
-        if ((player.weapon == CoC.instance.weapons.EXCALIB || player.weapon == CoC.instance.weapons.B_SWORD || player.weapon == CoC.instance.weapons.B_STAFF) && player.cor >= 33 + player.corruptionTolerance) {
+        //Drop Excalibur / beautiful sword / beautiful staff / beautiful fly-whisk if corrupted!
+        if ((player.weapon == CoC.instance.weapons.EXCALIB || player.weapon == CoC.instance.weapons.B_SWORD || player.weapon == CoC.instance.weapons.B_STAFF || player.weapon == CoC.instance.weapons.B_FLYWHISK) && player.cor >= 33 + player.corruptionTolerance) {
             EngineCore.outputText("<b>\nThe <u>[weapon]</u> grows hot in your hand, until you are forced to drop it.  Whatever power inhabits this weapon appears to be unhappy with you.  Touching it gingerly, you realize it is no longer hot, but as soon as you go to grab the hilt, it nearly burns you.\n\nYou realize you won't be able to use it right now, but you could probably keep it in your inventory.</b>\n\n");
             SceneLib.inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
             return true;

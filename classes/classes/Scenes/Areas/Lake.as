@@ -178,6 +178,16 @@ use namespace CoC;
 				},
 				call: swordInStone.findWhipInStone
 			}, {
+				name: "holyflywhisk",
+				label : "Holy Fly-Whisk",
+				kind  : 'item',
+				chance: 0.2,
+				unique: 'holyitem', // only one enc with unique:holyitem can appear
+				when: function():Boolean {
+					return !player.hasStatusEffect(StatusEffects.TookBlessedFlyWhisk) && !player.hasStatusEffect(StatusEffects.BFlyWhiskBroken) && player.hasPerk(PerkLib.JobSoulCultivator);
+				},
+				call: swordInStone.findFlyWhiskInStone
+			}, {
 				name: "ponies",
 				label : "Ponies",
 				kind  : 'event',

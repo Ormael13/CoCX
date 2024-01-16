@@ -67,7 +67,7 @@ public class BladeHailSkill extends AbstractSoulSkill {
 		if (damage < 10) damage = 10;
 
 		//soulskill mod effect
-		damage *= combat.soulskillMagicalMod();
+		damage *= soulskillMagicalMod();
 
 		//other bonuses
 		if (player.hasPerk(PerkLib.Heroism) && (monster && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType)))) damage *= 2;

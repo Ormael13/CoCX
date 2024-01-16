@@ -160,19 +160,28 @@ public class BaseCombatContent extends BaseContent {
 		return combat.bowCost(mod);
 	}
 	protected function soulskillCost():Number {
-		return combat.soulskillCost();
+		return combat.soulskills.soulskillCostImpl();
 	}
 	protected function soulskillcostmulti():Number {
-		return combat.soulskillcostmulti();
+		return combat.soulskills.soulskillcostmultiImpl();
 	}
 	protected function soulskillMod():Number {
-		return combat.soulskillMod();
+		return combat.soulskills.soulskillModImpl();
 	}
 	protected function soulskillPhysicalMod():Number {
-		return combat.soulskillPhysicalMod();
+		return combat.soulskills.soulskillPhysicalModImpl();
 	}
 	protected function soulskillMagicalMod():Number {
-		return combat.soulskillMagicalMod();
+		return combat.soulskills.soulskillMagicalModImpl();
+	}
+	protected function soulskillCooldown(duration:int = 2, physical:Boolean = true):Number {
+		return combat.soulskills.soulskillCooldownImpl(duration, physical);
+	}
+	protected function soulskillTier2Cooldown(duration:int = 4, physical:Boolean = true):Number {
+		return combat.soulskills.soulskillTier2CooldownImpl(duration, physical);
+	}
+	protected function soulskillTier3Cooldown(duration:int = 10, physical:Boolean = true):Number {
+		return combat.soulskills.soulskillTier3CooldownImpl(duration, physical);
 	}
 	protected function scalingBonusStrength(randomize:Boolean = true):Number {
 		return combat.scalingBonusStrength(randomize);
