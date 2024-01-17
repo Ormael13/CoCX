@@ -14,7 +14,7 @@ public class BloodReqiuemSkill extends AbstractBloodSoulSkill {
 			: "Blood Requiem will create pillars of blood, dealing damage and reducing the recovery rate of enemies for a short time.  ",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING, TAG_PHYSICAL],
+            [TAG_DAMAGING, TAG_PHYSICAL, TAG_TIER2],
             sfInfusion? StatusEffects.KnowsBloodRequiemSF: StatusEffects.KnowsBloodRequiem,
 			true,
 			sfInfusion
@@ -32,21 +32,24 @@ public class BloodReqiuemSkill extends AbstractBloodSoulSkill {
 	}
 
 	override public function calcCooldown():int {
-		return bloodSoulSkillCoolDown(4);
+		return soulskillTier2Cooldown(bloodSoulSkillCoolDown(4));
 	}
 
 	public function calcDamage(monster:Monster):Number {
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 2;
 		var damageFloor:Number = 10;
 
-		if (sfInfusion) {
-			damage *= 3;
-			damageFloor *= 3;
-		}
-
 		if (damage < damageFloor) damage = damageFloor;
 		if (player.hasPerk(PerkLib.BloodAffinity)) damage *= 2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
+
+		if (sfInfusion) {
+			//soulskill mod effect
+			damage *= soulskillPhysicalMod();
+		}
+
+		if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
+		damage *= combat.bloodDamageBoostedByDao();
 
 		return Math.round(damage);
 
@@ -68,8 +71,7 @@ public class BloodReqiuemSkill extends AbstractBloodSoulSkill {
 			crit = true;
 			damage *= 1.75;
 		}
-		if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
-		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
+		
 		if (display) outputText("[Themonster] takes ");
 		doDamage(damage, true, display);
 		if (crit && display) outputText(" <b>*Critical Hit!*</b>");

@@ -30,7 +30,7 @@ public class SoulBlastSkill extends AbstractSoulSkill {
 	}
 
 	override public function calcCooldown():int {
-        return 10;
+        return soulskillTier3Cooldown(10, false);
     }
 
 	public function calcDamage(monster:Monster):Number {

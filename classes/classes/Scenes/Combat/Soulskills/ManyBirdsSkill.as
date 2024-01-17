@@ -41,7 +41,7 @@ public class ManyBirdsSkill extends AbstractSoulSkill {
 	}
 
 	override public function calcCooldown():int {
-		return 2;
+		return soulskillCooldown(2, false);
 	}
 
 	public function calcDamage(monster:Monster):Number {
@@ -49,7 +49,7 @@ public class ManyBirdsSkill extends AbstractSoulSkill {
 		if (damage < 10) damage = 10;
 
 		//soulskill mod effect
-		damage *= combat.soulskillMagicalMod();
+		damage *= soulskillMagicalMod();
 
 		//group enemies bonus
 		if (monster && monster.plural) damage *= 5;

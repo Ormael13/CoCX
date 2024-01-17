@@ -81,6 +81,7 @@ public final class WeaponLib extends ItemConstants
 		public const B_STAFF:BeautifulStaff = new BeautifulStaff();
 		public const B_SWORD:BeautifulSword = new BeautifulSword();
 		public const B_WHIP :BeautifulWhip = new BeautifulWhip();
+		public const B_FLYWHISK :BeautifulFlyWhisk = new BeautifulFlyWhisk();
 		public const B_SCARB:Weapon = new Weapon("B.ScarB", "B.ScarBlade", "broken scarred blade", "a broken scarred blade", "slash", 12, 480, "This saber, made from lethicite-imbued metal, seems to no longer seek flesh; whatever demonic properties in this weapon is gone now but it's still an effective weapon.", "", WT_SWORD);
 		public const B_WIDOW:BlackWidow = new BlackWidow();
 		public const BCLAWS:BlizzardClaws = new BlizzardClaws();

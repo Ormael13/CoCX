@@ -70,8 +70,7 @@ public class KillingIntentSkill extends AbstractSoulSkill {
 	}
 
 	override public function calcCooldown():int {
-		var cooldown:int = 3;
-		return cooldown;
+		return soulskillCooldown(3, false);
 	}
 
 	public function calcDamage(monster:Monster):Number {

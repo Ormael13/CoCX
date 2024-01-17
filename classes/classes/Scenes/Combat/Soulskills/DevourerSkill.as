@@ -12,7 +12,7 @@ public class DevourerSkill extends AbstractSoulSkill {
             "Form a small sphere inscribed by symbols to drain from enemy a bit of lust and/or wrath.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DEBUFF],
+            [TAG_DEBUFF, TAG_TIER2],
             StatusEffects.KnowsHeavensDevourer
         )
 		lastAttackType = Combat.LAST_ATTACK_SPELL;
@@ -27,7 +27,7 @@ public class DevourerSkill extends AbstractSoulSkill {
 	}
 
 	override public function calcCooldown():int {
-		return 4;
+		return soulskillTier2Cooldown(4, false);
 	}
 
 	private function calcLustDrain(monster:Monster, apply:Boolean):Number {

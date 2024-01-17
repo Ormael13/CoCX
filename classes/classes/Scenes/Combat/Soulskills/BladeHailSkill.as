@@ -58,7 +58,16 @@ public class BladeHailSkill extends AbstractSoulSkill {
 	}
 
 	override public function calcCooldown():int {
-		return hailArray[hailSelection][4];
+		var baseCooldown:int = hailArray[hailSelection][4];
+		switch (hailSelection) {
+			case 2: return soulskillTier3Cooldown(baseCooldown, false);
+					break;
+			case 1: return soulskillTier2Cooldown(baseCooldown, false);
+					break;
+			case 0: 
+			default:return soulskillCooldown(baseCooldown, false);
+					break;
+		}
 	}
 
 	private function calcHailDamage():Number {
@@ -67,7 +76,7 @@ public class BladeHailSkill extends AbstractSoulSkill {
 		if (damage < 10) damage = 10;
 
 		//soulskill mod effect
-		damage *= combat.soulskillMagicalMod();
+		damage *= soulskillMagicalMod();
 
 		//other bonuses
 		if (player.hasPerk(PerkLib.Heroism) && (monster && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType)))) damage *= 2;
