@@ -180,7 +180,7 @@ public class ValaScene extends BaseContent implements SaveableState
             menu();
 			addButtonIfTrue(0, "Use", useVala, "Not genderless!", player.gender > 0, "Fuck the poor fairy while she's asleep.");
 			addButtonIfTrue(1, "Wake", wakeValaUpBeforeYouGoGo, "Not genderless!", player.gender > 0, "Wake the girl up to have some fun.");
-            if (SceneLib.shouldraFollower.followerShouldra())
+            if (SceneLib.shouldraFollower.followerShouldra() && !player.hasStatusEffect(StatusEffects.ShouldraOff))
                 addButtonIfTrue(2, "Shouldra?", SceneLib.shouldraFollower.shouldraMeetsCorruptVala, "Not horny enough.",
                     player.lust >= 33, "Ask Shouldra if she has any ideas. Are you sure you want to wake <i>her</i> up too?");
             else addButtonDisabled(2, "???", "Req. to have a certain ghostly follower with you.");
@@ -575,7 +575,7 @@ public class ValaScene extends BaseContent implements SaveableState
 			}
 			addButton(1,"You",cleansedValaRepeatBrainFucking);
 			addButtonIfTrue(2, "Cum Bath", valaCumBath, "Req. a cock.", player.hasCock());
-			if (SceneLib.shouldraFollower.followerShouldra()) {
+			if (SceneLib.shouldraFollower.followerShouldra() && !player.hasStatusEffect(StatusEffects.ShouldraOff)) {
 				if (flags[kFLAGS.SHOULDRA_MET_VALA] > 0)
 					addButton(3, "Big You", valaBigYou).hint("Shouldra is always ready for some madness.");
 				else addButtonDisabled(3, "???", "Vala is small. Very small. Maybe talk to Shouldra about her, even though she prefers <i>big</i> things?");

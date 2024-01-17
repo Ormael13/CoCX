@@ -739,6 +739,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const NadiaOff:StatusEffectType            = mk("Nadia Off");
 		public static const TedOff:StatusEffectType              = mk("Ted Off");
 		public static const VenusOff:StatusEffectType            = mk("Venus Off");
+		public static const ShouldraOff:StatusEffectType         = mk("Shouldra Off");
 		public static const SophieOff:StatusEffectType           = mk("Sophie Off");
 		public static const SpoodersOff:StatusEffectType         = mk("Spooders Off");
 		public static const ThereCouldBeOnlyOne:StatusEffectType = mk("There Could Be Only One");

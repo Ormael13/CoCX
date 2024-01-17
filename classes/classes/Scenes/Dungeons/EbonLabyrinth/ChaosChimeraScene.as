@@ -3,6 +3,7 @@ package classes.Scenes.Dungeons.EbonLabyrinth
 {
 import classes.BaseContent;
 import classes.EventParser;
+import classes.StatusEffects;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
@@ -39,7 +40,7 @@ public class ChaosChimeraScene extends BaseContent {
             sceneHunter.print("Check failed: Goo body.");
             outputText("As you fall down defeated you register the chimera approaching your prone body, a sadistic smile on each of its heads as its four cocks rise to full mast. These things... they're way too big, you will likely be split apart! You’re brutally thrown on your back the beast aligning with your holes and...\n\n");
             outputText("What follows is too horrible to describe with words alone as the monster raped you with such bestial brutality, you were almost grateful it sent you to the afterlife before meal time.");
-            if (SceneLib.shouldraFollower.followerShouldra()) {
+            if (SceneLib.shouldraFollower.followerShouldra() && !player.hasStatusEffect(StatusEffects.ShouldraOff)) {
                 outputText(" Well surprisingly, thanks to Shouldra’s swift action before your death, you did somehow partially survive the horrible experience at the cost of yourself becoming a ghost. However without a physical body to prolong your adventure all you are left with ");
                 outputText("is haunting the labyrinth and possessing the body of its many denizens and or occasional adventurers for fun. Not that Shouldra ever disapproved of it.");
             }

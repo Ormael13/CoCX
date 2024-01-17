@@ -623,7 +623,7 @@ public function sexMenu():void {
     addButtonIfTrue(3, "Knot Her", curry(knotSandwitch, knotDick), "Req. big knot and high corruption", hiCor && knotDick >= 0);
     addButtonIfTrue(4, "Multi Rape", rapeMulticock, "Req. multi cocks and high corruption", hiCor && player.cocks.length > 1);
 	addButtonIfTrue(5, "Dildo Rape", sandwitchGetsDildoed, "Req. Deluxe Dildo", player.hasKeyItem("Deluxe Dildo") >= 0);
-    if (SceneLib.shouldraFollower.followerShouldra())
+    if (SceneLib.shouldraFollower.followerShouldra() && !player.hasStatusEffect(StatusEffects.ShouldraOff))
         addButtonIfTrue(6, "Use Shouldra", SceneLib.shouldraFollower.sandWitchGetsGhostly, "Not for genderless...", player.gender != 0);
     else addButtonDisabled(6, "???", "Req. to be posessed by some ghost");
     addButtonIfTrue(7, "Ride", centaurRide, "Req. low corruption and centaur lower body", lowCor && player.isTaur());
