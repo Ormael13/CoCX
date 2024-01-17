@@ -88,24 +88,32 @@ public class Changelog extends BaseContent
 			outputText("-Fixed bug where Blind could not used against Draculina when invisible. (Demojay)\n");
 			outputText("-Flames Of Love/ Icicles Of Love/ Night Of Brotherhood/ Storm Of SisterHood Skills now have 4 levels: Rankless, Low Rank (adds AOE (x2), wisdom and magical soulskill scaling, increases restore amount to 20%, and cooldown to 1 turn - Level up requirements: Soul Apprentice perk and 5 uses), Mid Rank (increases AOE scaling (x5), increases restore amount to 25% and cooldown to 2 turns - Level up requirements: Soul Warrior perk and 10 uses), ");
 			outputText("High Rank ( increases restore amount to 30% and cooldown to 3 turns - Level up requirements: Soul Scholar perk and 10 uses). (Demojay)\n");
-			outputText("-Fixed bug where cooldowns based on the CombatAbility class were ending 1 turn too early. Blind now cannot be used if the monster is already blinded. Blind now has a max duration of 10 turns, rather than infinitely scaling with player intelligence. (Demojay)\n");
-			outputText("-Blind Spell no longer has a random chance of not working, even after passing the success check. (Demojay)\n");
+			outputText("-Fixed bug where cooldowns based on the CombatAbility class were ending 1 turn too early. (Demojay)\n");
+			outputText("-Blind Spell no longer has a random chance of not working, even after passing the success check. Blind now cannot be used if the monster is already blinded. Blind now has a max duration of 10 turns, rather than infinitely scaling with player intelligence. (Demojay)\n");
 			outputText("-Fixed bug where Draculina Embrace will always hit. (Demojay)\n");
 			outputText("-Ceraph is now classed as a proper True Demon. (Demojay)\n");
 			outputText("-The enemy will now act after using a turn picking up spent weapons instead of getting another turn. (Demojay)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Added new weapon (by Demojay) - 'Beautiful Fly Whisk'. Obtained from the Lake like other Holy Items. Beautiful Fly Whisk reduces soulskill cooldown by 1 when equipped.\n");
+			outputText("-Beautiful Bow now gains x2 combat EXP, similar to the Beautiful Sword and Whip. (Demojay)\n");
+			outputText("-Claw Rend now properly prints out properly formatted damage. (Demojay)\n");
+			outputText("-Fixed bug where cooldown might not appear in cost description for Blood Soulskills. (Demojay)\n");
+			outputText("-Added soulskills cooldown modifiers to soulskills (currently only Beautiful FlyWhisk modifier in game) (Demojay)\n");
+			outputText("-Altered SF-infused Blood Soulskill damage values so that maxed-out Blood Puppy attack are equal damage to the standard cast of the player version. (Demojay)\n");
+			outputText("-Adjusted SF-infused Blood Requiem damage to be in line with other Blood Soulskills. (Demojay)\n");
 			outputText("-\n");
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay) (NUZ/Shirane)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Arigean above Recruit rank not immune to tf-ing effects, deer arms tf unlocking canine arms MM, unable to find tel'adre again after first time seeing it with too high corruption or other factor that not allowed entrance; Arigean above recruit rank marking, eye color and aura with mismatching colors; demon/arigean arms MM option giving instead devil/abyssal shark arms, ");
 			outputText("Zenji training stats not having gains decrease from +4 to +1 for repeated training before daily reset for other than wisdom stats, resources not been recovered after using specials/soulskills/spells\n\n");
@@ -173,11 +181,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -204,8 +208,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

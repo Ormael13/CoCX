@@ -197,5 +197,265 @@ public class CombatSoulskills extends BaseCombatContent {
 		modssc = Math.round(modssc * 100) / 100;
 		return modssc;
 	}
+	/*
+	 * Code needed for later so would stay here for a while more
+	 * 
+	public function spellMight(silent:Boolean = false):void {
+		var doEffect:Function = function():* {
+			var MightBoostCap:Number = 1.5;
+			MightBoostCap *= player.intStat.core.max;
+			MightBoostCap = Math.round(MightBoostCap);
+			var MightBoost:Number = player.intStat.core.value;
+			//MightBoost += Math.round(player.intStat.max * 0.1); - może tylko jak bedzie mieć perk z prestige job: magus / warock / inny związany z spells
+			if (MightBoost < 10) MightBoost = 10;
+			if (player.hasPerk(PerkLib.JobEnchanter)) MightBoost *= 1.2;
+			MightBoost *= spellModBlack();
+			//MightBoost = FnHelpers.FN.logScale(MightBoost,MightABC,10);
+			MightBoost = Math.round(MightBoost);
+			if (MightBoost > MightBoostCap) MightBoost = MightBoostCap;
+			var MightDuration:Number = 5;
+			if (player.hasPerk(PerkLib.LongerLastingBuffsI)) MightDuration += 1;
+			if (player.hasPerk(PerkLib.LongerLastingBuffsII)) MightDuration += 1;
+			if (player.hasPerk(PerkLib.LongerLastingBuffsIII)) MightDuration += 1;
+			if (player.hasPerk(PerkLib.LongerLastingBuffsIV)) MightDuration += 1;
+			if (player.hasPerk(PerkLib.LongerLastingBuffsV)) MightDuration += 1;
+			if (player.hasPerk(PerkLib.LongerLastingBuffsVI)) MightDuration += 1;
+			if (player.hasPerk(PerkLib.EverLastingBuffs)) MightDuration += 5;
+			if (player.hasPerk(PerkLib.EternalyLastingBuffs)) MightDuration += 5;
+			tempTou = MightBoost;
+			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) tempInt = Math.round(MightBoost * 1.25);
+			else tempStr = MightBoost;
+			var oldHPratio:Number = player.hp100/100;
+			var buffValues:Object = {"tou.mult":tempTou/100};
+			if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) {
+				buffValues["int.mult"] = Math.min( tempInt/100, player.intStat.mult.value/2);
+			} else {
+				buffValues["str.mult"] = Math.min( tempStr/100, player.strStat.mult.value/2);
+			}
+			player.buff("Might").setStats(buffValues).combatTemporary(MightDuration);
+			player.HP = oldHPratio*player.maxHP();
+			statScreenRefresh();
+		};
+		if (silent)	{ // for Battlemage
+			doEffect.call();
+			return;
+		}
+		clearOutput();
+		doNext(combatMenu);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < (50 * spellMightCostMultiplier())) player.HP -= (50 * spellMightCostMultiplier());
+		else useMana((50 * spellMightCostMultiplier()),6);
+		var tempStr:Number = 0;
+		var tempTou:Number = 0;
+		var tempInt:Number = 0;
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		outputText("You flush, drawing on your body's desires to empower your muscles and toughen you up.\n\n");
+		//30% backfire!
+		var backfire:int = 30;
+		if (player.hasStatusEffect(StatusEffects.AlvinaTraining)) backfire -= 10;
+		if (player.hasPerk(PerkLib.FocusedMind)) backfire -= 10;
+		backfire -= (player.inte * 0.15);
+		if (backfire < 5 && player.hasPerk(PerkLib.FocusedMind)) backfire = 5;
+		else if (backfire < 15) backfire = 15;
+		if(rand(100) < backfire) {
+			outputText("An errant sexual thought crosses your mind, and you lose control of the spell!  Your ");
+			if(player.gender == 0) outputText(assholeDescript() + " tingles with a desire to be filled as your libido spins out of control.");
+			if(player.gender == 1) {
+				if(player.cockTotal() == 1) outputText(player.cockDescript(0) + " twitches obscenely and drips with pre-cum as your libido spins out of control.");
+				else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.");
+			}
+			if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.");
+			if(player.gender == 3) outputText(vaginaDescript(0) + " and [cocks] overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
+			dynStats("lib", .25, "lus", 15);
+		}
+		else {
+			outputText("The rush of success and power flows through your body.  You feel like you can do anything!");
+			doEffect.call();
+		}
+		outputText("\n\n");
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		if(player.lust >= player.maxOverLust()) doNext(endLustLoss);
+		else enemyAI();
+	}*/
+	/*
+	 //Mantis Omni Slash (AoE attack) - przerobić to na soulskilla zużywającego jak inne soulforce z rosnącym kosztem im wyższy lvl postaci ^^ owinno wciąż jakoś być powiązane z posiadaniem mantis arms czy też ulepszonych mantis arms (czyt. versji 2.0 tych ramion z TF bdącego soul evolution of Mantis) ^^
+	 public function mantisOmniSlash():void {
+	 flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+	 clearOutput();
+	 if (monster.plural) {
+	 if (player.fatigue + physicalCost(50) > player.maxFatigue()) {
+	 outputText("You are too tired to slash " + monster.a + " [monster name].");
+	 addButton(0, "Next", combatMenu, false);
+	 return;
+	 }
+	 }
+	 else {
+	 if (player.fatigue + physicalCost(20) > player.maxFatigue()) {
+	 outputText("You are too tired to slash " + monster.a + " [monster name].");
+	 addButton(0, "Next", combatMenu, false);
+	 return;
+	 }
+	 }
+	 if (monster.plural) {
+	 fatigue(60, USEFATG_PHYSICAL);
+	 }
+	 else fatigue(24, USEFATG_PHYSICAL);
+	if (combat.checkConcentration()) return; //Amily concentration
+	 outputText("You ready your wrist-mounted scythes and prepare to sweep them towards [themonster].\n\n");
+	 if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe-player.spe) / 4) + 80)) > 80)) {
+	 if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attacks!\n\n");
+	 if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attacks with superior quickness!\n\n");
+	 if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attacks.\n\n");
+	 enemyAI();
+	 return;
+	 if (monster.plural) {
+	 if (player.perkv1(IMutationsLib.MantislikeAgilityIM) >= 1) {
+	 if (player.perkv1(IMutationsLib.MantislikeAgilityIM) >= 2 && player.hasPerk(PerkLib.TrachealSystemEvolved)) flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 10;
+	 else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 6;
+	 }
+	 else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 3;
+	 }
+	 else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 1;
+	 mantisMultipleAttacks();
+	 }
+	 public function mantisMultipleAttacks():void {
+	 var damage:Number = player.spe;
+	 damage += speedscalingbonus() * 0.5;
+	 if (damage < 10) damage = 10;
+	 //adjusting to be used 60/100% of base speed while attacking depending on insect-related perks possesed
+	 if (!player.perkv1(IMutationsLib.MantislikeAgilityIM) >= 1) damage *= 0.6;
+	 //bonuses if fighting multiple enemies
+	 if (monster.plural) {
+	 if (!player.perkv1(IMutationsLib.MantislikeAgilityIM) >= 1 && !player.hasPerk(PerkLib.TrachealSystemEvolved)) damage *= 1.1;
+	 if (player.perkv1(IMutationsLib.MantislikeAgilityIM) >= 1 && player.hasPerk(PerkLib.TrachealSystemEvolved)) damage *= 1.5;
+	 }
+	 //weapon bonus
+	 if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.04));
+	 else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (3 + ((player.weaponAttack - 50) * 0.035));
+	 else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (4.75 + ((player.weaponAttack - 100) * 0.03));
+	 else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (6.25 + ((player.weaponAttack - 150) * 0.025));
+	 else damage *= (7.5 + ((player.weaponAttack - 200) * 0.02));
+	 //other bonuses
+	 if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
+	 if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
+	 if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
+	 if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
+	 if (player.armor == armors.SPKIMO) damage *= 1.2;
+	 if (player.hasPerk(PerkLib.OniTyrantKimono)) damage *= 2;
+		if (player.hasPerk(PerkLib.OniEnlightenedKimono)) damage *= 1.5;
+		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
+	 //Determine if critical hit!
+	 var crit:Boolean = false;
+	 var critChance:int = 5;
+	 if (player.hasPerk(PerkLib.Tactician) && player.inte >= 50) {
+	 if (player.inte <= 100) critChance += (player.inte - 50) / 50;
+	 if (player.inte > 100) critChance += 1;
+	 }
+	 if (player.hasPerk(PerkLib.ElvenSense) && && player.inte >= 50) critChance += 5;
+	 if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+	 if (rand(100) < critChance) {
+	 crit = true;
+	 damage *= 1.75;
+	 }
+	 doDamage(damage);
+	 outputText("Your scythes swiftly sweeps against [themonster], dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!");
+	 if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+	 outputText("\n");
+	 checkAchievementDamage(damage);
+	 combat.heroBaneProc(damage);
+	 combat.WrathGenerationPerHit2(5);
+	 if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] == 0) {
+	 outputText("\n");
+	 enemyAI();
+	 }
+	 if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] == 1) {
+	 flags[kFLAGS.MULTIPLE_ATTACK_STYLE] -= 1;
+	 mantisMultipleAttacks();
+	 }
+	 if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] == 2) {
+	 flags[kFLAGS.MULTIPLE_ATTACK_STYLE] -= 1;
+	 mantisMultipleAttacks();
+	 }
+	 if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] == 3) {
+	 flags[kFLAGS.MULTIPLE_ATTACK_STYLE] -= 1;
+	 mantisMultipleAttacks();
+	 }
+	 if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] == 4) {
+	 flags[kFLAGS.MULTIPLE_ATTACK_STYLE] -= 1;
+	 mantisMultipleAttacks();
+	 }
+	 if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] == 5) {
+	 flags[kFLAGS.MULTIPLE_ATTACK_STYLE] -= 1;
+	 mantisMultipleAttacks();
+	 }
+	 if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] == 6) {
+	 flags[kFLAGS.MULTIPLE_ATTACK_STYLE] -= 1;
+	 mantisMultipleAttacks();
+	 }
+	 if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] == 7) {
+	 flags[kFLAGS.MULTIPLE_ATTACK_STYLE] -= 1;
+	 mantisMultipleAttacks();
+	 }
+	 if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] == 8) {
+	 flags[kFLAGS.MULTIPLE_ATTACK_STYLE] -= 1;
+	 mantisMultipleAttacks();
+	 }
+	 if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] == 9) {
+	 flags[kFLAGS.MULTIPLE_ATTACK_STYLE] -= 1;
+	 mantisMultipleAttacks();
+	 }
+	 }
+	 public function tripleThrust():void {
+	 flags[kFLAGS.LAST_ATTACK_TYPE] = 4;//fizyczny atak
+	 clearOutput();
+	 if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
+	 outputText("<b>Your current soulforce is too low.</b>");
+	 doNext(combatMenu);
+	 return;
+	 }
+	 outputText("You ready your [weapon] and prepare to thrust it towards [themonster].  ");
+	 if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe-player.spe) / 4) + 80)) > 80)) {
+	 if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
+	 if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
+	 if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
+	 enemyAI();
+	 return;
+	 }
+	 var soulforcecost:Number = 10 * soulskillCost() * soulskillcostmulti();
+	 soulforcecost = Math.round(soulforcecost);
+	 player.soulforce -= soulforcecost;
+	 var damage:Number = 0;
+	 damage += combat.meleeDamageNoLagSingle();
+	 damage *= 1.75;
+	 //other bonuses
+	 if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
+	 if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
+	 if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
+	 if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
+	 if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
+	if (player.armor == armors.SPKIMO) damage *= 1.2;
+	if (player.hasPerk(PerkLib.OniTyrantKimono)) damage *= 2;
+	if (player.hasPerk(PerkLib.OniEnlightenedKimono)) damage *= 1.5;
+	if (player.necklace == necklaces.OBNECK) damage *= 1.2;
+	 //triple strike bonus
+	 damage *= 3;
+	 //soulskill mod effect
+	 damage *= soulskillPhysicalMod();
+	 doDamage(damage);
+	 outputText("Your [weapon] hits thrice against [themonster], dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
+	 checkAchievementDamage(damage);
+	 combat.WrathGenerationPerHit2(5);
+	 combat.heroBaneProc(damage);
+	 outputText("\n\n");
+	 if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+	 else enemyAI();
+	 }*/
 }
 }
