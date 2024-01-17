@@ -2807,6 +2807,143 @@ public class Creature extends Utils
 			return quantity;
 		}
 
+		public function cumQMore():ExponObject
+		{
+			if (!hasCock())
+				return new ExponObject(0,0,"No Cock\n");
+			//Base value is ballsize*ballQ*cumefficiency by a factor of 2.
+			//Other things that affect it:
+			//lust - 50% = normal output.  0 = half output. 100 = +50% output.
+			//trace("CUM ESTIMATE: " + int(1.25*2*cumMultiplier*2*(lust + 50)/10 * (hoursSinceCum+10)/24)/10 + "(no balls), " + int(ballSize*balls*cumMultiplier*2*(lust + 50)/10 * (hoursSinceCum+10)/24)/10 + "(withballs)");
+			var lustCoefficient:Number = (lust + 50) / 10;
+			//If realistic mode is enabled, limits cum to capacity.
+			if (flags[kFLAGS.HUNGER_ENABLED] >= 1)
+			{
+				lustCoefficient = (lust + 50) / 5;
+				if (hasPerk(PerkLib.PilgrimsBounty)) lustCoefficient = 30;
+				var percent:Number = 0;
+				percent = lustCoefficient + (hoursSinceCum + 10);
+				if (percent > 100)
+					percent = 100;
+
+				var cumCapacity:ExponObject = cumCapacityMore();
+				cumCapacity.number *= percent / 100;
+
+				return cumCapacity;
+			}
+			else{
+				//Pilgrim's bounty maxes lust coefficient
+				// General formula -
+				// size * balls * cumMultiplier * 2 * lustCoefficient * (hoursSinceCum + 10) / 240 * multiBonus + flatBonus * midMulti + midFlat * postMulti + postFlat * post2Multi + post2Flat
+				// sizeExp * (10**sizeCoeff) * balls * (cumExp * (10**cumCoeff)) * 2 * lustCoeff * (hours + 10)/240 * multiBonus + flatBonus * midMulti + midFlat * postMulti + postFlat * post2Multi + post2Flat
+				// sizeExp * balls * cumExp * 2 * lustCoeff * (hours + 10)/240 * multiBonus * (10**(sizeCoeff+cumCoeff)) + flatBonus * midMulti + midFlat * postMulti + postFlat * post2Multi + post2Flat
+				// sizeExp * balls * cumExp * 2 * lustCoeff * (hours + 10)/240 * multiBonus + flatBonus/(10**(sizeCoeff+cumCoeff)) * midMulti + midFlat/(10**(sizeCoeff+cumCoeff)) * postMulti + postFlat/(10**(sizeCoeff+cumCoeff)) * post2Multi + post2Flat/(10**(sizeCoeff+cumCoeff)) * (10**(sizeCoeff+cumCoeff))
+
+				// (((((((100 * 2 * 30 * 2 * 4 * (5+10)/240 * 6) + 7) * 8) + 9) * 10) + 11) * 12) + 13 = 17287945
+				// ((((((((1 * 2 * 3 * 2 * 4 * (5 + 10)/240 * 6) + (7/(10**3))) * 8) + (9/(10**3))) * 10) + (11/(10**3))) * 12) + (13/(10**3))) * (10**3) = 17287945
+
+				// Default if no balls (2 balls, 1.25 size, 0 coefficient)
+				var quantity:Number = 0;
+				var bigBalls:Number = 2;
+				var bigSize:Number = 1.25;
+				var sizeCoeff:Number = 0;
+				var bigMulti:Number = 0;
+				var debug:String = "";
+
+				if (hasPerk(PerkLib.PilgrimsBounty))
+					lustCoefficient = 150 / 10;
+
+				if (balls != 0){
+					var bigArray:Array = ballSize.toExponential(20).split("e+");
+					bigSize = parseFloat(bigArray[0]);
+					if(bigArray.length>1)
+					sizeCoeff = parseInt(bigArray[1]);
+
+					bigBalls = balls;
+					// debug += "ballSize.toExponential(20): " + ballSize.toExponential(20) + "\n";
+					// debug += "sizeCoeff = parseInt(bigArray[1]): " + sizeCoeff + "\n";
+				}
+
+				var tempArray:Array = cumMultiplier.toExponential(20).split("e+");
+				bigMulti = parseFloat(tempArray[0]);
+				if(tempArray.length>1)
+				sizeCoeff += parseInt(tempArray[1]);
+
+				quantity = int(bigSize * bigBalls * bigMulti * 2 * lustCoefficient * (hoursSinceCum + 10) / 24) / 10;
+
+				if (hasPerk(PerkLib.BroBody))
+					quantity *= 1.3;
+				if (hasPerk(PerkLib.FertilityPlus))
+					quantity *= 1.5;
+				if (hasPerk(PerkLib.FertilityMinus) && lib < 25)
+					quantity *= 0.7;
+				if (hasPerk(PerkLib.MessyOrgasms))
+					quantity *= 2;
+				if (hasPerk(PerkLib.OneTrackMind))
+					quantity *= 1.1;
+				if (perkv1(IMutationsLib.HumanTesticlesIM) >= 3 && game.player.racialScore(Races.HUMAN) > 17)
+					quantity *= 2;
+				if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 3) {
+					if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 4) quantity *= 3;
+					else quantity *= 2.5;
+				}
+
+				var flatBonus:Number = 0;
+
+				if (hasPerk(PerkLib.MaraesGiftStud))
+					flatBonus += 350;
+				if (hasPerk(PerkLib.FerasBoonAlpha))
+					flatBonus += 200;
+				if (hasPerk(PerkLib.MagicalVirility))
+					flatBonus += 200 + (perkv1(PerkLib.MagicalVirility) * 100);
+				if (hasPerk(PerkLib.FerasBoonSeeder))
+					flatBonus += 1000;
+				if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 2)
+					flatBonus += 200;
+				if (perkv1(IMutationsLib.NukiNutsIM) >= 2)
+					flatBonus += 200;
+
+				var totalCoeff:Number = Math.pow(10,sizeCoeff);
+				quantity += flatBonus/totalCoeff;
+
+				if (perkv1(IMutationsLib.NukiNutsIM) >= 3)
+					quantity *= 2;
+				if (perkv1(IMutationsLib.EasterBunnyEggBagIM) >= 2)
+					quantity *= 1.5;
+				if (perkv1(IMutationsLib.EasterBunnyEggBagIM) >= 3)
+					quantity *= 3;
+				if (hasPerk(PerkLib.ProductivityDrugs))
+					quantity += (perkv3(PerkLib.ProductivityDrugs))/totalCoeff;
+				if (hasMutation(IMutationsLib.HellhoundFireBallsIM))
+					switch (perkv1(IMutationsLib.HellhoundFireBallsIM)) {
+						case 1:
+						case 2:
+						case 3: quantity *= 1.25; break;
+						case 4: quantity *= 2; break;
+					}
+				//if(hasPerk("Elven Bounty") >= 0) quantity += 250;;
+				flatBonus = 0;
+				flatBonus += perkv1(PerkLib.ElvenBounty);
+				if (hasPerk(PerkLib.BroBody))
+					flatBonus += 200;
+				flatBonus += statusEffectv1(StatusEffects.Rut);
+
+				quantity += flatBonus/totalCoeff;
+
+				quantity *= (1 + (2 * perkv1(PerkLib.PiercedFertite)) / 100);
+				if (jewelryEffectId == JewelryLib.MODIFIER_FERTILITY)
+					quantity *= (1 + (jewelryEffectMagnitude / 100));
+				if (hasPerk(PerkLib.AscensionCumHose))
+					quantity += (perkv1(PerkLib.AscensionCumHose) * 200)/totalCoeff;
+				//trace("Final Cum Volume: " + int(quantity) + "mLs.");
+				//if (quantity < 0) trace("SOMETHING HORRIBLY WRONG WITH CUM CALCULATIONS");
+				if (quantity < 2)
+					quantity = 2;
+				if (quantity > int.MAX_VALUE)
+					quantity = int.MAX_VALUE;
+				return new ExponObject(quantity,sizeCoeff,debug);
+			}
+		}
 		//Limits how much cum you can produce. Can be altered with perks, ball size, and multiplier. Only applies to realistic mode.
 		public function cumCapacity():Number
 		{
@@ -2844,7 +2981,92 @@ public class Creature extends Utils
 				cumCap = int.MAX_VALUE;
 			return cumCap;
 		}
+		public function cumCapacityMore():ExponObject
+		{
+			if (!hasCock()) return new ExponObject(0,0,"");
+			var cumCap:Number = 0;
+			//Alter capacity by balls.
+			var balls:Number = this.balls;
+			var ballSize:Number = this.ballSize;
+			var ballCoeff:Number = 0;
 
+			if (balls == 0) {
+				balls = 2;
+				ballSize = 1;
+			}
+			else{
+				var ballString:Array = this.ballSize.toExponential(20).split("e+");
+				ballSize = parseFloat(ballString[0]);
+				if(ballString.length>1)
+				ballCoeff = parseInt(ballString[1]) * 3;
+			}
+			// 200^3 = 8000000
+			// (2 * 10^2)^3 = 8000000
+			// (2)^3 * 10^6 = 8000000
+
+			// 10 * 2 + 3 = 23
+			// 1 * 10^1 * 2 + 3 * 10^0 = 23
+			// 1 * 10^1 * 2 + 0.3 * 10^1 = 23
+			// (1 * 2 + 0.3) * 10^1 = 23
+
+			// (ballsize / 2 * PI * 4/3) ** 3 * Multi + Flat * PostMulti + PostFlat * AnotherMulti * cumMulti
+			// (ballExp * (10 ** ballCoeff) / 2 * PI * 4/3) ** 3 * Multi + Flat * PostMulti + PostFlat * AnotherMulti * cumMulti
+			// (ballExp / 2 * PI * 4/3) ** 3 * (10 ** (ballCoeff * 3)) * Multi + Flat * PostMulti + PostFlat * AnotherMulti * cumMulti
+			// ((ballExp / 2 * PI * 4/3) ** 3 * Multi + Flat/(10 ** (ballCoeff * 3)) * PostMulti + PostFlat/(10 ** (ballCoeff * 3)) * AnotherMulti) * (10 ** (ballCoeff * 3)) * cumMulti
+			// ((ballExp / 2 * PI * 4/3) ** 3 * Multi + Flat/(10 ** (ballCoeff * 3)) * PostMulti + PostFlat/(10 ** (ballCoeff * 3)) * AnotherMulti) * (10 ** (ballCoeff * 3)) * cumMultiExp * (10 ** cumMultiCoeff)
+			// ((ballExp / 2 * PI * 4/3) ** 3 * Multi + Flat/(10 ** (ballCoeff * 3)) * PostMulti + PostFlat/(10 ** (ballCoeff * 3)) * AnotherMulti * cumMultiExp) * (10 ** (ballCoeff * 3) + cumMultiCoeff)
+
+			// (100/2*PI*4/3) ** 3 * 2 + 3 * 4 + 5 * 6 * 70 = 30868478146.2
+			// ((1/2*PI*4/3) ** 3 * 2 + (3/10**(2*3)) * 4 + (5/(10**(2*3))) * 6 * 7)*(10**(2*3) + 1) = 30868478146.2
+
+			// forgot about balls amount but calculation should be the same since its literally just multiply just before Multi which can be collequally lumped together
+
+			cumCap = Math.pow(((4 / 3) * Math.PI * (ballSize / 2)), 3) * balls;// * cumMultiplier
+			// * cumMultiplier
+			//Alter capacity by perks.
+			if (hasPerk(PerkLib.BroBody)) cumCap *= 1.3;
+			if (hasPerk(PerkLib.FertilityPlus)) cumCap *= 1.5;
+			if (hasPerk(PerkLib.FertilityMinus) && lib < 25) cumCap *= 0.7;
+			if (hasPerk(PerkLib.MessyOrgasms)) cumCap *= 2;
+			if (hasPerk(PerkLib.OneTrackMind)) cumCap *= 1.1;
+
+			var flatBonus:Number = 0;
+
+			if (hasPerk(PerkLib.MaraesGiftStud)) flatBonus += 350;
+			if (hasPerk(PerkLib.FerasBoonAlpha)) flatBonus += 200;
+			if (hasPerk(PerkLib.MagicalVirility)) flatBonus += 200;
+			if (hasPerk(PerkLib.FerasBoonSeeder)) flatBonus += 1000;
+			if (hasPerk(PerkLib.ElvenBounty)) flatBonus += perkv1(PerkLib.ElvenBounty);
+			if (hasPerk(PerkLib.BroBody)) flatBonus += 200;
+
+			var coeff:Number = Math.pow(10,ballCoeff);
+
+			cumCap += flatBonus / coeff;
+
+			if (hasPerk(PerkLib.PiercedFertite)) cumCap *= (1 + (2 * perkv1(PerkLib.PiercedFertite)) / 100);
+
+			flatBonus = 0;
+			if (hasStatusEffect(StatusEffects.Rut)) flatBonus = statusEffectv1(StatusEffects.Rut);
+
+			cumCap += flatBonus / coeff;
+			//Alter capacity by accessories.
+			if (jewelryEffectId == JewelryLib.MODIFIER_FERTILITY) cumCap *= (1 + (jewelryEffectMagnitude / 100));
+
+			var tempArray:Array = cumMultiplier.toExponential("20").split("e+");
+
+			cumCap *= parseFloat(tempArray[0]);
+			if(tempArray.length>1)
+			ballCoeff += parseInt(tempArray[1]);
+
+			// cumCap *= cumMultiplier;
+			// Exact value is lower than normal function due to rounding but able to support higher than normal as long as you append the amount of 0 from coefficient
+			cumCap = Math.round(cumCap);
+			// props to you if you somehow hit this cap after all the shit
+			if (cumCap > int.MAX_VALUE)
+				cumCap = int.MAX_VALUE;
+
+			return new ExponObject(cumCap, ballCoeff,"");
+		}
 		public function countCocksOfType(type:CockTypesEnum):int {
             return countCocksWithType(type, -1, -1);
 		}

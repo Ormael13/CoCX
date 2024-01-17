@@ -105,6 +105,42 @@ public class PlayerInfo extends BaseContent {
 			bodyStats += "<b>Virility Rating:</b> " + Math.round(player.virilityQ() * 100) + "\n";
 		if (flags[kFLAGS.HUNGER_ENABLED] >= 1) bodyStats += "<b>Cum Production:</b> " + addComma(Math.round(player.cumQ())) + " / " + addComma(Math.round(player.cumCapacity())) + "mL (" + Math.round((player.cumQ() / player.cumCapacity()) * 100) + "%) \n";
 		else bodyStats += "<b>Cum Production:</b> " + addComma(Math.round(player.cumQ())) + "mL\n";
+		// New cum volume testing
+//		var cumQExp:ExponObject = player.cumQMore();
+//		// var cumString:String = ""; In case someone want to implement unit changes
+//		var cumQRemaining:Number = cumQExp.coeff%3;
+//		cumQExp.coeff -= cumQRemaining;
+//		cumQExp.number *= Math.pow(10,cumQRemaining);
+//		bodyStats += "<b>Cum Production (New):</b> ";
+//		bodyStats += addComma(Math.round(cumQExp.number));
+//
+//		for(cumQExp.coeff;cumQExp.coeff>0;cumQExp.coeff-=3){
+//			bodyStats += ",000";
+//		}
+//
+//		bodyStats += "mL";
+//
+//		if (flags[kFLAGS.HUNGER_ENABLED] >= 1){
+//			var cumCapExp:ExponObject = player.cumCapacityMore();
+//			var cumCapRemaining:Number = cumCapExp.coeff%3;
+//			cumCapExp.coeff -= cumCapRemaining;
+//			cumCapExp.number *= Math.pow(10,cumCapRemaining);
+//
+//			bodyStats += " / ";
+//			bodyStats += addComma(cumCapExp.number);
+//
+//			for(cumCapExp.coeff;cumCapExp.coeff>0;cumCapExp.coeff-=3){
+//				bodyStats += ",000";
+//			}
+//
+//			// Both coefficient should be the same since they derive from the same cumMultiplier and ballsize
+//			bodyStats += "mL (" + Math.round((cumQExp.number / cumCapExp.number) * 100) + "%) ";
+//		}
+//
+//		bodyStats += "\n";
+//		// bodyStats += cumQExp.debug.toString();
+//		// bodyStats += cumCapExp.debug;
+		// End of testing
 		if (player.lactationQ() > 0)
 			bodyStats += "<b>Milk Production:</b> " + addComma(Math.round(player.lactationQ())) + "mL\n";
 		if (player.hasStatusEffect(StatusEffects.Feeder)) {
