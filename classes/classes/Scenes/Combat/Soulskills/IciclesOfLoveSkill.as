@@ -155,6 +155,7 @@ public class IciclesOfLoveSkill extends AbstractSoulSkill implements SaveableSta
 		}
 		doIceDamage(damage, true, display);
 		if (display) outputText("\n\n");
+		levelUpCheck(true, display);
     }
 
 	private function levelUpCheck(increment:Boolean = true, display:Boolean = true):void {

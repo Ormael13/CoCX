@@ -155,6 +155,7 @@ public class NightOfBrotherhoodSkill extends AbstractSoulSkill implements Saveab
 		}
 		doDarknessDamage(damage, true, display);
 		if (display) outputText("\n\n");
+		levelUpCheck(true, display);
     }
 
 	private function levelUpCheck(increment:Boolean = true, display:Boolean = true):void {
