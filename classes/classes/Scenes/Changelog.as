@@ -102,12 +102,18 @@ public class Changelog extends BaseContent
 			outputText("-Adjusted SF-infused Blood Requiem damage to be in line with other Blood Soulskills. (Demojay)\n");
 			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 4. Req. Sky Poison Pearl Mastery 3 perk. It costs 129 asc points and you gain +12 venom recharge speed, +40% to max venom cap, +40% to poison resistance, 400% more spirit stones carried over and lower req. level to open next sections of pearl by 24 levels.\n");
 			outputText("-Added Shouldra to disable/enable menu. Disabling her if she's in camp already would reset tracker how much min lust she rising.\n");
-			outputText("-\n");
+			outputText("-Adding alternate calculation functions for seamen volume (cumQMore(), cumQuantityMore(), ExponObject class) The world will flood (cumming soon probably) (NUZ/Shirane)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
@@ -117,14 +123,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed bugs: Arigean above Recruit rank not immune to tf-ing effects, deer arms tf unlocking canine arms MM, unable to find tel'adre again after first time seeing it with too high corruption or other factor that not allowed entrance; Arigean above recruit rank marking, eye color and aura with mismatching colors; demon/arigean arms MM option giving instead devil/abyssal shark arms, ");
-			outputText("Zenji training stats not having gains decrease from +4 to +1 for repeated training before daily reset for other than wisdom stats, resources not been recovered after using specials/soulskills/spells\n\n");
+			outputText("Zenji training stats not having gains decrease from +4 to +1 for repeated training before daily reset for other than wisdom stats, resources not been recovered after using specials/soulskills/spells, minor text incossitiency on nail buy menu at carpenter\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8w-z:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -187,7 +187,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -212,6 +214,7 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");*/
