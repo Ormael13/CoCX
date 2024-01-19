@@ -1008,7 +1008,7 @@ public class DebugMenu extends BaseContent
 			);
 			addBeComboBox("Base adj", SKIN_ADJ_CONSTANTS, player.skin.base.adj,
 					function (item:*):void {
-						player.skin.base.adj = item.data === "(none)" ? "" : item.data;
+						player.skin.base.adj = item == "(none)" ? "" : item;
 						dumpPlayerData();
 						tagDemosSkin();
 					}
@@ -1046,7 +1046,7 @@ public class DebugMenu extends BaseContent
 			);
 			addBeComboBox("Coat adj", SKIN_ADJ_CONSTANTS, player.skin.coat.adj,
 					function (item:*):void {
-						player.skin.coat.adj = item.data === "(none)" ? "" : item.data;
+						player.skin.coat.adj = item == "(none)" ? "" : item;
 						dumpPlayerData();
 						tagDemosSkin();
 					}
@@ -1063,7 +1063,7 @@ public class DebugMenu extends BaseContent
 						COLOR_CONSTANTS,
 						player.bodyMaterialColor1(type.value),
 						curry(function (id:int,item:*):void {
-							player.setBodyMaterialColor1(id, item.data);
+							player.setBodyMaterialColor1(id, item);
 							dumpPlayerData();
 							tagDemosSkin();
 						}, type.value)
@@ -1072,7 +1072,7 @@ public class DebugMenu extends BaseContent
 						COLOR_CONSTANTS,
 						player.bodyMaterialColor2(type.value),
 						curry(function (id:int,item:*):void {
-							player.setBodyMaterialColor2(id, item.data);
+							player.setBodyMaterialColor2(id, item);
 							dumpPlayerData();
 							tagDemosSkin();
 						}, type.value)
@@ -1164,7 +1164,7 @@ public class DebugMenu extends BaseContent
 			);
 			addBeComboBox("Eye color", COLOR_CONSTANTS, player.eyes.colour,
 					function (item:*):void {
-						player.eyes.colour = item.data;
+						player.eyes.colour = item;
 						dumpPlayerData();
 					}
 			);
@@ -1195,7 +1195,7 @@ public class DebugMenu extends BaseContent
 			addBeComboBox("Horn count", HORN_COUNT_CONSTANTS,
 					player.horns.count,
 					function (item:*):void {
-						player.horns.count = item.data;
+						player.horns.count = item;
 						dumpPlayerData();
 					}
 			);
@@ -1218,7 +1218,7 @@ public class DebugMenu extends BaseContent
 			addBeComboBox("Beard length", BEARD_LENGTH_CONSTANTS,
 					player.beardLength,
 					function (item:*):void {
-						player.beardLength = item.data;
+						player.beardLength = item;
 						dumpPlayerData();
 					}
 			);
@@ -1271,7 +1271,7 @@ public class DebugMenu extends BaseContent
 			addBeComboBox("Claw color", COLOR_CONSTANTS,
 					player.clawsPart.tone,
 					function (item:*):void {
-						player.clawsPart.tone = item.data;
+						player.clawsPart.tone = item;
 						dumpPlayerData();
 					}
 			);
@@ -1286,7 +1286,7 @@ public class DebugMenu extends BaseContent
 			addBeComboBox("Tail count", TAIL_COUNT_CONSTANTS,
 					player.tail.count,
 					function (item:*):void {
-						player.tail.count = item.data;
+						player.tail.count = item;
 						dumpPlayerData();
 					}
 			);
@@ -1301,7 +1301,7 @@ public class DebugMenu extends BaseContent
 			addBeComboBox("Wing desc", WING_DESC_CONSTANTS,
 					player.wings.desc,
 					function (item:*):void {
-						player.wings.desc = item.data;
+						player.wings.desc = item;
 						dumpPlayerData();
 					}
 			);
@@ -1316,7 +1316,7 @@ public class DebugMenu extends BaseContent
 			addBeComboBox("Leg count", LEG_COUNT_CONSTANTS,
 					player.lowerBodyPart.legCount,
 					function (item:*):void {
-						player.lowerBodyPart.legCount = item.data;
+						player.lowerBodyPart.legCount = item;
 						dumpPlayerData();
 					}
 			);
