@@ -4,30 +4,55 @@ import classes.GlobalFlags.*;
 import classes.Scenes.SceneLib;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Horns;
-public class IngramTavern extends BaseContent {
+import classes.internals.SaveableState;
+
+public class IngramTavern extends BaseContent implements SaveableState {
+
+    public static var IngramRumors:Number;
     public function IngramTavern() {
+        Saves.registerSaveableState(this);
+    }
+    public function stateObjectName():String {
+        return "IngramTavern";
+    }
+    public function resetState():void {
+        IngramRumors = 0;
+    }
+    public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
+        if (o) {
+            IngramRumors = o["IngramRumors"]
+        } else  {
+            resetState();
+        }
+    }
+    public function saveToObject():Object {
+        return {
+            "IngramRumors":IngramRumors
+        }
     }
     public function hearRumors():void { //Hear rumors. Will be altered after defeating Lethice so he will say "Welcome back".
         clearOutput();
         var rumor:int = rand(4);
         outputText("You ask the innkeeper if he has anything special to tell you.");
-        if (flags[kFLAGS.INGNAM_RUMORS] == 0) {
-            outputText("\n\nHe nods and says, \"<i>Let me tell you. You know what happens to the so-called 'champions'?</i>\" ");
-            outputText("\n\nYou nod in response and he continues, \"<i>Well... Nobody ever came back. I've seen twenty people depart over the course of my career. Twenty years. None of them ever returned. Who knows what happened to them? Some say they're abducted by an evil presence as soon as they set foot into the portal.</i>\"");
-            outputText("\n\nHe looks at you and sniffles. \"<i>Truth be told, you're going to be the Champion of Ingnam. You will be sent to the so-called 'portal' that is supposedly located in Mount Ilgast. I will miss your patronage at the inn. You're still welcome anytime.</i>\"");
-            flags[kFLAGS.INGNAM_RUMORS] = 1;
-        }
-        else if (flags[kFLAGS.INGNAM_RUMORS] == 1) {
-            outputText("\n\nHe nods and says, \"<i>You know Mount Ilgast?</i>\" ");
-            outputText("\n\nYou nod in response and he continues, \"<i>Before I began my work as an innkeeper, I was an adventurer. I've explored Mount Ilgast once. There was something glowing. It's a portal but it's no ordinary portal. Even stranger was that there was something stirring in my groin. Honestly, I swear I never felt that sensation before. I winded up masturbating at the cave entrance just because of that warmth. As soon as I go near the portal, the warm sensation came back again. It's just strange, really strange. So I've hurried back to Ingnam and never visited the mountain again.</i>\"");
-            outputText("\n\nYou thank him for telling you.");
-            flags[kFLAGS.INGNAM_RUMORS] = 2;
-        }
-        else if (flags[kFLAGS.INGNAM_RUMORS] == 2) {
-            outputText("\n\n\"He nods and says, \"<i>Do you want to know something special?</i>\" You nod in response before he continues, \"<i>One time I saw a man with cat ears and a tail. I thought they were just accessories, but he insisted it was real. I tugged on his ears, and it was... real. I thought he used a lot of glue, but he insisted that it was real. His ears do feel real. His tail even swished from side to side like it was an actual cat tail. He told me about something called 'Whisker Fruit' or something. So I guess that the food in the so-called 'demon realm' can change you.</i>");
-            outputText("\n\nYou ask him if he has some tips for you. He nods as he speaks, \"<i>Yes. If I were you, I would eat them only as last resort. Even food that could transform you can make the difference between life and death.</i>\" You thank him for the advice.");
-            outputText("\n\n\"<i>You're welcome. I have nothing left to tell you but you're always welcome,</i>\" he replies.");
-            flags[kFLAGS.INGNAM_RUMORS] = 3; //Finished
+        switch (IngramRumors) {
+            case 0:
+                outputText("\n\nHe nods and says, \"<i>Let me tell you. You know what happens to the so-called 'champions'?</i>\" ");
+                outputText("\n\nYou nod in response and he continues, \"<i>Well... Nobody ever came back. I've seen twenty people depart over the course of my career. Twenty years. None of them ever returned. Who knows what happened to them? Some say they're abducted by an evil presence as soon as they set foot into the portal.</i>\"");
+                outputText("\n\nHe looks at you and sniffles. \"<i>Truth be told, you're going to be the Champion of Ingnam. You will be sent to the so-called 'portal' that is supposedly located in Mount Ilgast. I will miss your patronage at the inn. You're still welcome anytime.</i>\"");
+                IngramRumors = 1;
+                break;
+            case 1:
+                outputText("\n\nHe nods and says, \"<i>You know Mount Ilgast?</i>\" ");
+                outputText("\n\nYou nod in response and he continues, \"<i>Before I began my work as an innkeeper, I was an adventurer. I've explored Mount Ilgast once. There was something glowing. It's a portal but it's no ordinary portal. Even stranger was that there was something stirring in my groin. Honestly, I swear I never felt that sensation before. I winded up masturbating at the cave entrance just because of that warmth. As soon as I go near the portal, the warm sensation came back again. It's just strange, really strange. So I've hurried back to Ingnam and never visited the mountain again.</i>\"");
+                outputText("\n\nYou thank him for telling you.");
+                IngramRumors = 2;
+                break;
+            case 2:
+                outputText("\n\n\"He nods and says, \"<i>Do you want to know something special?</i>\" You nod in response before he continues, \"<i>One time I saw a man with cat ears and a tail. I thought they were just accessories, but he insisted it was real. I tugged on his ears, and it was... real. I thought he used a lot of glue, but he insisted that it was real. His ears do feel real. His tail even swished from side to side like it was an actual cat tail. He told me about something called 'Whisker Fruit' or something. So I guess that the food in the so-called 'demon realm' can change you.</i>");
+                outputText("\n\nYou ask him if he has some tips for you. He nods as he speaks, \"<i>Yes. If I were you, I would eat them only as last resort. Even food that could transform you can make the difference between life and death.</i>\" You thank him for the advice.");
+                outputText("\n\n\"<i>You're welcome. I have nothing left to tell you but you're always welcome,</i>\" he replies.");
+                IngramRumors = 3; //Finished
+                break;
         }
         doNext(camp.returnToCampUseOneHour);
     }
@@ -47,7 +72,7 @@ public class IngramTavern extends BaseContent {
         menu();
         addButton(0, "Order Drink", orderDrink).hint("Buy some refreshing beverages.");
         addButton(1, "Order Food", orderFood).hint("Buy some food" + (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 50 ? " and curb that hunger of yours!": ".") + "");
-        if (flags[kFLAGS.INGNAM_RUMORS] < 3) addButton(2, "Stories", hearRumors).hint("Hear the stories the innkeeper has to offer.");
+        if (IngramRumors < 3) addButton(2, "Stories", hearRumors).hint("Hear the stories the innkeeper has to offer.");
         //if (player.hasPerk(PerkLib.HistoryWhore)) addButton(5, "Prostitute", whoreForGems).hint("Seek someone who's willing to have sex with you for profit.");
         addButton(14, "Leave", SceneLib.ingnam.menuIngnam);
     }
