@@ -3453,6 +3453,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.GOTTA_CAMP_THEM_ALL_MODE] < 2) addButton(11, "Activate", GottaCampThemALLOn).hint("Turn on 'Gotta Camp them ALL' Mode.");
 		if (flags[kFLAGS.GOTTA_CAMP_THEM_ALL_MODE] == 2) addButton(11, "Deactivate", GottaCampThemALLOff).hint("Turn off 'Gotta Camp them ALL' Mode.");
         
+		addButton(12, "Members", SparrableNPCsMenuCampNPCs)..hint("Enable or Disable Camp Followers from appearing.");
 		addButton(13, "Others", SparrableNPCsMenuOthers).hint("Out of camp encounters only.");
 		addButton(14, "Back", campActions);
 	}
@@ -3478,8 +3479,8 @@ public class Camp extends NPCAwareContent{
 		clearOutput();
 		SparrableNPCsMenuText();
 		menu();
-		addButton(0, "Callu", toggleNPCStatus, StatusEffects.CalluOff).hint("Enable or Disable Callu (Otter girl). This will remove her from enc table.");
-		addButton(1, "Venus", toggleNPCStatus, StatusEffects.VenusOff).hint("Enable or Disable Venus (Gigantic Turtle). This will remove her from enc table.");
+		addButton(0, "Callu", toggleNPCStatus, StatusEffects.CalluOff, SparrableNPCsMenuOthers).hint("Enable or Disable Callu (Otter girl). This will remove her from enc table.");
+		addButton(1, "Venus", toggleNPCStatus, StatusEffects.VenusOff, SparrableNPCsMenuOthers).hint("Enable or Disable Venus (Gigantic Turtle). This will remove her from enc table.");
 		addButton(14, "Back", SparrableNPCsMenu);
 	}
 
@@ -3504,10 +3505,13 @@ public class Camp extends NPCAwareContent{
 		doNext(SparrableNPCsMenu);
 	}
 
-	private function toggleNPCStatus(status:StatusEffectType):void {
+	private function toggleNPCStatus(status:StatusEffectType, returnFunc:Function = null):void {
 		if (player.hasStatusEffect(status)) player.removeStatusEffect(status);
 		else player.createStatusEffect(status, 0, 0, 0, 0);
-		SparrableNPCsMenu();
+		if (returnFunc != null) 
+			returnFunc();
+		else 
+			SparrableNPCsMenuCampNPCs();
 	}
 
 	private function toggleLuna():void {
