@@ -2264,6 +2264,10 @@ public class Combat extends BaseContent {
                 outputText("Luna tears your body with her claws.");
                 player.takePhysDamage(5 + rand(5));
             }
+            if (monster is WerewolfFemale || monster is WerewolfHuntress) {
+                outputText("The wolf tears at your body with her maw, ripping skin and muscle as she starts to eat you alive!");
+                player.takePhysDamage(5 + rand(5));
+            }
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.TrollHold)) {
             clearOutput();
@@ -2591,13 +2595,13 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) accmod += 40;
         if (player.hasPerk(PerkLib.HistoryFeral) || player.hasPerk(PerkLib.PastLifeFeral)) accmod += 20;
         if (player.isFlying() && player.hasPerk(PerkLib.AerialCombat) && !player.haveWeaponForJouster() && !player.haveThrowableMeleeWeapon()) {
-            if (player.jewelryName != "Ring of Ambidexty") accmod -= 60;
+            if (player.jewelry1 != jewelries.RNGAMBI) accmod -= 60;
             if (player.hasPerk(PerkLib.Aerobatics)) accmod += 40;
             if (player.hasPerk(PerkLib.AdvancedAerobatics)) accmod += 100;
         }
 		if (player.hasPerk(PerkLib.TrueSeeing)) accmod += 40;
         if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport) && !player.hasPerk(PerkLib.TrueSeeing)) accmod -= monster.statusEffectv1(StatusEffects.EvasiveTeleport);
-        if (player.jewelryName == "Ring of Ambidexty") accmod += 30;
+        if (player.jewelry1 == jewelries.RNGAMBI) accmod += 30;
         if (player.hasMutation(IMutationsLib.EyeOfTheTigerIM)) accmod += 5;
         if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.racialScore(Races.HUMAN) > 17) {
 			accmod += 5;
@@ -2714,13 +2718,13 @@ public class Combat extends BaseContent {
         }
         if (player.hasPerk(PerkLib.CarefulButRecklessAimAndShooting)) baccmod += 60;
         if (player.isFlying()) {
-            if (player.jewelryName != "Ring of deadeye aim") baccmod -= 100;
+            if (player.jewelry1 != jewelries.RINGDEA) baccmod -= 100;
             if (player.hasPerk(PerkLib.Aerobatics)) baccmod += 40;
             if (player.hasPerk(PerkLib.AdvancedAerobatics)) baccmod += 100;
         }
 		if (player.hasPerk(PerkLib.TrueSeeing)) baccmod += 40;
         if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport) && !player.hasPerk(PerkLib.TrueSeeing)) baccmod -= player.statusEffectv1(StatusEffects.EvasiveTeleport);
-        if (player.jewelryName == "Ring of deadeye aim") baccmod += 40;
+        if (player.jewelry1 == jewelries.RINGDEA) baccmod += 40;
         if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.racialScore(Races.HUMAN) > 17) {
 			baccmod += 10;
 			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 3) baccmod += 10;
