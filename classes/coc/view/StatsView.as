@@ -149,6 +149,8 @@ public class StatsView extends Block {
 			bgColor : '#ff0000',
 			showMax : true
 		}));
+		hpBar.addEventListener("rollOver",Utils.curry(hoverStat,'hp'));
+		hpBar.addEventListener("rollOut",Utils.curry(hoverStat,'hp'));
 		col2.addElement(lustBar = new StatBar({
 			statName   : "Lust:",
 		//	barColor   : '#ff1493',
@@ -162,6 +164,8 @@ public class StatsView extends Block {
 			statName: "Wrath:",
 			showMax : true
 		}));
+		wrathBar.addEventListener("rollOver",Utils.curry(hoverStat,'wrath'));
+		wrathBar.addEventListener("rollOut",Utils.curry(hoverStat,'wrath'));
 		col2.addElement(fatigueBar = new StatBar({
 			statName: "Fatigue:",
 			showMax : true
@@ -318,12 +322,18 @@ public class StatsView extends Block {
 		senBar.maxValue       = player.sens;
 		senBar.value          = player.effectiveSensitivity();
 		corBar.value          = player.cor;
+		var hpPercent:Boolean = game.flags[kFLAGS.HP_STATBAR_PERCENTAGE] == 1;
 		hpBar.maxValue        = player.maxHP();
 		hpBar.value           = player.HP;
+		hpBar.percentage	  = hpPercent;
+		var wrathPercent:Boolean = game.flags[kFLAGS.WRATH_STATBAR_PERCENTAGE] == 1;
 		wrathBar.maxValue 	  = player.maxWrath();
 		wrathBar.value    	  = player.wrath;
+		wrathBar.percentage	  = wrathPercent;
+		var lustPercent:Boolean = game.flags[kFLAGS.LUST_STATBAR_PERCENTAGE] == 1;
 		lustBar.maxValue      = player.maxLust();
 		lustBar.minValue      = player.minLust();
+		lustBar.percentage	  = lustPercent;
 		lustBar.value         = player.lust;
 		fatigueBar.maxValue   = player.maxFatigue();
 		fatigueBar.value      = player.fatigue;
@@ -417,7 +427,9 @@ public class StatsView extends Block {
 					if (!bar) return;
 					if (statname == "sens" || statname == "cor" || statname == "minlust") isPositiveStat = false;
 					if (statname == "minlust") {
-						var text:String = StatUtils.describeBuffs(stat, false, isPositiveStat);
+						var lustValue:String = (CoC.instance.flags[kFLAGS.LUST_STATBAR_PERCENTAGE])? "Lust: " +
+							 Utils.formatNumber(Math.floor(player.lust)) + (bar.showMax ? '/' + Utils.formatNumber(player.maxLust()) : '') + "\n": "";
+						var text:String = lustValue + StatUtils.describeBuffs(stat, false, isPositiveStat);
 						player.listMinLustMultiBuffs();
 						text += StatUtils.describeBuffs(player.minLustXStat, true, isPositiveStat);
 						CoC.instance.mainView.toolTipView.showForElement(
@@ -445,6 +457,16 @@ public class StatsView extends Block {
 								"" + StatUtils.describeBuffs(primStat.mult, true, isPositiveStat) + "";
 					}
 					CoC.instance.mainView.toolTipView.showForElement(bar,bar.statName,s);
+				} else if (statname == "hp") {
+					if (!bar) return;
+					if (!CoC.instance.flags[kFLAGS.HP_STATBAR_PERCENTAGE]) return;
+					var hpText:String = "HP: " + Utils.formatNumber(Math.floor(player.HP)) + (bar.showMax ? '/' + Utils.formatNumber(player.maxHP()) : '');
+					CoC.instance.mainView.toolTipView.showForElement(bar,bar.statName,hpText);
+				} else if (statname == "wrath") {
+					if (!bar) return;
+					if (!CoC.instance.flags[kFLAGS.WRATH_STATBAR_PERCENTAGE]) return;
+					var wrathText:String = "Wrath: " + Utils.formatNumber(Math.floor(player.wrath)) + (bar.showMax ? '/' + Utils.formatNumber(player.maxWrath()) : '');
+					CoC.instance.mainView.toolTipView.showForElement(bar,bar.statName,wrathText);
 				}
 				break;
 			case MouseEvent.ROLL_OUT:

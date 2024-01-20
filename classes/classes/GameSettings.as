@@ -10,6 +10,7 @@ import classes.Stats.RawStat;
 import classes.Stats.StatUtils;
 import classes.StatusEffects.CombatStatusEffect;
 
+import coc.view.ButtonDataList;
 import coc.view.CoCLoader;
 import coc.view.MainView;
 
@@ -934,23 +935,42 @@ public class GameSettings extends BaseContent {
 			outputText("Stat bar animations: <b>ON</b>");
 		outputText("\n\n");
 
+		if (flags[kFLAGS.HP_STATBAR_PERCENTAGE] == 0)
+			outputText("HP bars show percentages: <b>OFF</b>");
+		else
+			outputText("HP bars show percentages: <b>ON</b>");
+		outputText("\n\n");
+
+		if (flags[kFLAGS.LUST_STATBAR_PERCENTAGE] == 0)
+			outputText("Lust bars show percentages: <b>OFF</b>");
+		else
+			outputText("Lust bars show percentages: <b>ON</b>");
+		outputText("\n\n");
+
+		if (flags[kFLAGS.WRATH_STATBAR_PERCENTAGE] == 0)
+			outputText("Wrath bars show percentages: <b>OFF</b>");
+		else
+			outputText("Wrath bars show percentages: <b>ON</b>");
+		outputText("\n\n");
+
+		var buttons:ButtonDataList = new ButtonDataList();
 		menu();
-		// [ Font   ] [ Main BG] [ Text BG] [ Sprites] [CV Style]
-		// [ Images ] [ Time   ] [Measurem] [ CV Off ] [CV Armor]
-		// [BtnIcons] [ BarAnim] [        ] [        ] [ Back   ]
-		addButton(0, "Side Bar Font", toggleFlag, kFLAGS.USE_OLD_FONT, settingsScreenInterfaceSettings).hint("Toggle between old and new font for side bar.");
-		addButton(1, "Main BG", menuMainBackground).hint("Choose a background for main game interface.");
-		addButton(2, "Text BG", menuTextBackground).hint("Choose a background for text.");
-		addButton(3, "Sprites", menuSpriteSelect).hint("Turn sprites on/off and change sprite style preference.");
-		addButton(4, "Charview Style",toggleCharViewerStyle).hint("Change between in text and sidebar display");
-		addButton(5, "Toggle Images", toggleImages).hint("Enable or disable image pack.");
-		addButton(6, "Time Format", toggleTimeFormat).hint("Toggles between 12-hour and 24-hour format.");
-		addButton(7, "Measurements", toggleMeasurements).hint("Switch between imperial and metric measurements.  \n\nNOTE: Only applies to your appearance screen.");
-		addButton(8, "Toggle CharView", toggleCharViewer).hint("Turn PC visualizer on/off.");
-		addButton(9, "Charview Armor",toggleFlag, kFLAGS.CHARVIEW_ARMOR_HIDDEN, settingsScreenInterfaceSettings).hint("Turn PC armor and underwear display on/off");
-		addButton(10, "Button Icons", toggleFlag, kFLAGS.BUTTON_ICONS_DISABLED, settingsScreenInterfaceSettings);
-		addButton(11, "Statbar Anim.", toggleFlag, kFLAGS.STATBAR_ANIMATIONS, settingsScreenInterfaceSettings).hint("Toggle stat bar animations when value changes");
-		addButton(14, "Back", settingsScreenMain);
+		buttons.add("Side Bar Font", curry(toggleFlag, kFLAGS.USE_OLD_FONT, settingsScreenInterfaceSettings), "Toggle between old and new font for side bar.");
+		buttons.add("Main BG", menuMainBackground, "Choose a background for main game interface.");
+		buttons.add("Text BG", menuTextBackground, "Choose a background for text.");
+		buttons.add("Sprites", menuSpriteSelect, "Turn sprites on/off and change sprite style preference.");
+		buttons.add("Charview Style",toggleCharViewerStyle, "Change between in text and sidebar display");
+		buttons.add("Toggle Images", toggleImages, "Enable or disable image pack.");
+		buttons.add("Time Format", toggleTimeFormat, "Toggles between 12-hour and 24-hour format.");
+		buttons.add("Measurements", toggleMeasurements, "Switch between imperial and metric measurements.  \n\nNOTE: Only applies to your appearance screen.");
+		buttons.add("Toggle CharView", toggleCharViewer, "Turn PC visualizer on/off.");
+		buttons.add("Charview Armor", curry(toggleFlag, kFLAGS.CHARVIEW_ARMOR_HIDDEN, settingsScreenInterfaceSettings), "Turn PC armor and underwear display on/off");
+		buttons.add("Button Icons", curry(toggleFlag, kFLAGS.BUTTON_ICONS_DISABLED, settingsScreenInterfaceSettings));
+		buttons.add("Statbar Anim.", curry(toggleFlag, kFLAGS.STATBAR_ANIMATIONS, settingsScreenInterfaceSettings), "Toggle stat bar animations when value changes");
+		buttons.add("HP Percent", curry(toggleFlag, kFLAGS.HP_STATBAR_PERCENTAGE, settingsScreenInterfaceSettings), "Toggle between showing the HP stat as a percentage");
+		buttons.add("Lust Percent", curry(toggleFlag, kFLAGS.LUST_STATBAR_PERCENTAGE, settingsScreenInterfaceSettings), "Toggle between showing the Lust stat as a percentage");
+		buttons.add("Wrath Percent", curry(toggleFlag, kFLAGS.WRATH_STATBAR_PERCENTAGE, settingsScreenInterfaceSettings), "Toggle between showing the Wrath stat as a percentage");
+		submenu(buttons, settingsScreenMain, 0, false);
 	}
 	public function menuMainBackground():void {
 		menu();
