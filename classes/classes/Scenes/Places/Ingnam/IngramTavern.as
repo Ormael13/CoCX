@@ -60,7 +60,13 @@ public class IngramTavern extends BaseContent implements SaveableState {
                 outputText("\n\n\"He nods and says, \"<i>Do you want to know something special?</i>\" You nod in response before he continues, \"<i>One time I saw a man with cat ears and a tail. I thought they were just accessories, but he insisted it was real. I tugged on his ears, and it was... real. I thought he used a lot of glue, but he insisted that it was real. His ears do feel real. His tail even swished from side to side like it was an actual cat tail. He told me about something called 'Whisker Fruit' or something. So I guess that the food in the so-called 'demon realm' can change you.</i>");
                 outputText("\n\nYou ask him if he has some tips for you. He nods as he speaks, \"<i>Yes. If I were you, I would eat them only as last resort. Even food that could transform you can make the difference between life and death.</i>\" You thank him for the advice.");
                 outputText("\n\n\"<i>You're welcome. I have nothing left to tell you but you're always welcome,</i>\" he replies.");
-                IngramRumors = 3; //Finished
+                IngramRumors = 3;
+                break;
+            case 3:
+                outputText("\n\nI shouldnt tell you this but since you are soon going to be sent through the portal, about 4 years before you were chosen as the next tribute, I was approached by a group of people being lead by somone named ChiChi.");
+                outputText("\n\nThey came to my inn for lodging and paid heavily to keep it hush hush because they planned to sneak through the portal the next day.");
+                outputText("\n\nBefore they left I heard them talking about setting up some kind of settlement if they succeed in surviving on the other side of the portal. If they survived they may be able to help you.")
+                IngramRumors = 4;
                 break;
         }
         doNext(camp.returnToCampUseOneHour);
