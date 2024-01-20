@@ -472,7 +472,10 @@ import classes.Scenes.Combat.CombatAbility;
                     kFLAGS.CHARVIEW_STYLE,
                     kFLAGS.CHARVIEW_ARMOR_HIDDEN,
 					kFLAGS.EXPLORE_MENU_STYLE,
-                    kFLAGS.SPIRIT_STONES]) {
+                    kFLAGS.SPIRIT_STONES,
+					kFLAGS.HP_STATBAR_PERCENTAGE,
+					kFLAGS.LUST_STATBAR_PERCENTAGE,
+					kFLAGS.WRATH_STATBAR_PERCENTAGE]) {
 					    newFlags[flag] = flags[flag];
 				}
 			}
