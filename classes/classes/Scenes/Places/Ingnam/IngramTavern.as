@@ -74,7 +74,7 @@ public class IngramTavern extends BaseContent implements SaveableState {
         if (flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] > 0 && flags[kFLAGS.INGNAM_GREETED_AFTER_LONGTIME] <= 0) {
             welcomeBack();
         }
-        if ((player.ears.type > 0 && player.ears.type != flags[kFLAGS.INGNAM_EARS_LAST_TYPE] && flags[kFLAGS.INGNAM_EARS_FREAKOUT] <= 0) || (player.tailType > 0 && player.tailType != flags[kFLAGS.INGNAM_TAIL_LAST_TYPE] && flags[kFLAGS.INGNAM_TAIL_FREAKOUT] <= 0) && flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] <= 0) {
+        if ((player.ears.type > Ears.HUMAN && player.ears.type != flags[kFLAGS.INGNAM_EARS_LAST_TYPE] && IngramEarFreakout <= 0) || (player.tailType > 0 && player.tailType != flags[kFLAGS.INGNAM_TAIL_LAST_TYPE] && IngramTailFreakout <= 0) && flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] <= 0) {
             appearanceFreakout();
             return;
         }
@@ -123,7 +123,7 @@ public class IngramTavern extends BaseContent implements SaveableState {
                 outputText("\n\nHe says, \"<i>Your ears... They look like cat's! I have no idea how your ears changed but other than that, you look much cuter with cat ears!</i>\" He walks over to you and scratch your cat-ears. \"<i>They look and feel so real,</i>\" he says.");
             }
             flags[kFLAGS.INGNAM_EARS_LAST_TYPE] = player.ears.type;
-            flags[kFLAGS.INGNAM_EARS_FREAKOUT] = 1;
+            IngramEarFreakout = 1;
         }
         if (player.ears.type > 0 && player.tailType > 0 && player.hasLongTail()) outputText("Next, he walks behind you, taking a glance at your tail.");
         if (player.tailType > 0) {
@@ -132,7 +132,7 @@ public class IngramTavern extends BaseContent implements SaveableState {
                 outputText("\n\nYou wag your tail and thank him for the compliment and he walks behind the counter.");
             }
             flags[kFLAGS.INGNAM_TAIL_LAST_TYPE] = player.tailType;
-            flags[kFLAGS.INGNAM_TAIL_FREAKOUT] = 1;
+            IngramTailFreakout = 1;
         }
         doNext(menuTavern);
     }
