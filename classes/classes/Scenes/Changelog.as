@@ -105,8 +105,14 @@ public class Changelog extends BaseContent
 			outputText("-Adding alternate calculation functions for seamen volume (cumQMore(), cumQuantityMore(), ExponObject class) The world will flood (cumming soon probably) (NUZ/Shirane)\n");
 			outputText("-Fixed in Debug Menu Body part editor when selecting colours. (Demojay)\n");
 			outputText("-Moved Dragon Boi toggle to turn on/off from Members to Others subtab in NPC's tab from Camp Actions menu.\n");
-			outputText("-First four golem guardians in Hidden Cave now would wander their designed area appearing in one of eight rooms instead of four specific ones withing specific order. If PC have basic versions of albemic or furnance bought can find bit better one versions of them in Hidden Cave dungeon and then 'borrow' those for 'unlimited time duration'. ");
+			outputText("-First four golem guardians in Hidden Cave now would wander their designed area appearing in one of eight rooms instead of four specific ones in specific order. If PC have basic versions of albemic or furnance bought can find bit better one versions of them in Hidden Cave dungeon and then 'borrow' those for 'unlimited time duration'. ");
 			outputText("Orginal owner that bought them wouldn't mind, right? Not like he would care about those more than his loli bat golems...\n");
+			outputText("-Female Werewolf and Werewolf Huntresses will now display text and deal damage if you wait in their hold. (Demojay)\n");
+			outputText("-Changed text for buying Gym Life Time membership to show that you are actually shouting. (Demojay)\n");
+			outputText("-Ring checks in damage calculations should now check all ring slots, not just the first. (Demojay)\n");
+			outputText("-Fixing bugs where the game was checking for a fox hairpin or cow girl hat in one of the ring slots rather than the head jewelry slot. (Demojay)\n");
+			outputText("-Text fixes. (Demojay) (Alot of small ones)\n");
+			outputText("-Added 3 toggles in Interface Game Settings to control whether the HP Lust and Wrath of the player and Enemy should be displayed as a percentage or numbers. (Demojay)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -119,17 +125,13 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay) (NUZ/Shirane)
 			outputText("-\n");
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay) (NUZ/Shirane)
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Arigean above Recruit rank not immune to tf-ing effects, deer arms tf unlocking canine arms MM, unable to find tel'adre again after first time seeing it with too high corruption or other factor that not allowed entrance; Arigean above recruit rank marking, eye color and aura with mismatching colors; demon/arigean arms MM option giving instead devil/abyssal shark arms, ");
 			outputText("Zenji training stats not having gains decrease from +4 to +1 for repeated training before daily reset for other than wisdom stats, resources not been recovered after using specials/soulskills/spells, nail buy menu at carpenter having misleading text\n\n");
@@ -195,7 +197,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -220,6 +224,7 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
