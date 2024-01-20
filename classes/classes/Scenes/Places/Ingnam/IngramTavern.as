@@ -112,15 +112,15 @@ public class IngramTavern extends BaseContent implements SaveableState {
     public function appearanceFreakout():void {
         clearOutput();
         outputText("The innkeeper stands up to see that there's something unusual with your appearance.");
-        if (player.ears.type > 0) {
+        if (player.ears.type > Ears.HUMAN) {
             if (player.ears.type == Ears.HORSE) {
                 outputText("\n\nHe says, \"<i>Your ears... They look different! They look like horse's! I have no idea how your ears changed.</i>\"");
-            }
-            if (player.ears.type == Ears.DOG) {
+            } else if (player.ears.type == Ears.DOG) {
                 outputText("\n\nHe says, \"<i>Your ears... They look like dog's! I have no idea how your ears changed.</i>\"");
-            }
-            if (player.ears.type == Ears.CAT) {
+            } else if (player.ears.type == Ears.CAT) {
                 outputText("\n\nHe says, \"<i>Your ears... They look like cat's! I have no idea how your ears changed but other than that, you look much cuter with cat ears!</i>\" He walks over to you and scratch your cat-ears. \"<i>They look and feel so real,</i>\" he says.");
+            } else {
+                outputText("\n\nHe says, \"<i>Your ears... They look like [race]'s! I have no idea how your ears changed.</i>\"");
             }
             flags[kFLAGS.INGNAM_EARS_LAST_TYPE] = player.ears.type;
             IngramEarFreakout = 1;
