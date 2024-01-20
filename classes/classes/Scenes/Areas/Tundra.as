@@ -60,7 +60,7 @@ use namespace CoC;
 			}, */{
 				// choice[choice.length] = 2; //Young Frost Giant (lvl 47)
 				name: "frostgiant",
-				label : "Young Frost gigant",
+				label : "Young Frost Giant",
 				kind : 'monster',
 				night : false,
 				call: frostGiantEncounter
@@ -215,7 +215,7 @@ use namespace CoC;
 					player.mineXP(player.MiningMulti() * 2);
 				}
 				else {
-					outputText("After attempt to mine Sapphires you ended with unusable piece.");
+					outputText("After attempting to mine Sapphires, you ended with only unusable pieces.");
 					endEncounter(120);
 				}
 			}

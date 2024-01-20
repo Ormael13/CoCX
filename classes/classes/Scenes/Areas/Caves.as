@@ -301,7 +301,7 @@ use namespace CoC;
 					player.mineXP(player.MiningMulti() * 2);
 				}
 				else {
-					outputText("After attempt to mine Amethysts you ended with unusable piece.");
+					outputText("After attempting to mine Amethysts, you ended up with only unusable pieces.");
 					endEncounter(120);
 				}
 			}

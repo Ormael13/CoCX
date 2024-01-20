@@ -403,11 +403,11 @@ public class PerkLib
 				"Increase the duration of lingering nourishment effects by another 100% of base duration. And slows hunger progression even further if any(note does not raise racial scores).",
 				"You've chosen the 'Greater Metabolization' perk. Increase the duration of lingering nourishment effects by another 100% of base duration. And slows hunger progression even further if any(note does not raise racial scores).");
 		public static const PowerAttackSu:PerkType = mk("Power Attack (Su)", "Power Attack (Su)",
-				"Allow to use wrath above normal maximum to calculate bonus (overwrath) and effectivness of power attack increased fourfold (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).",
-				"You've chosen the 'Power Attack (Su)' perk. Allow to use wrath above normal maximum to calculate bonus (overwrath) and effectivness of power attack increased fourfold (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).");
+				"The effectiveness of 'Power Attack' is increased fourfold, and now uses overwrath for calculating bonuses (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).",
+				"You've chosen the 'Power Attack (Su)' perk. Power Attack's effectiveness is increased fourfold, and now uses overwrath instead of wrath for calculations (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).");
 		public static const PowerShotSu:PerkType = mk("Power Shot (Su)", "Power Shot (Su)",
-				"Allow to use wrath above normal maximum to calculate bonus (overwrath) and effectivness of power shot increased fourfold (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).",
-				"You've chosen the 'Power Shot (Su)' perk. Allow to use wrath above normal maximum to calculate bonus (overwrath) and effectivness of power shot increased fourfold (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).");
+				"The effectiveness of 'Power Shot' is increased fourfold, and now uses overwrath for calculating bonuses (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).",
+				"You've chosen the 'Power Shot (Su)' perk. Power Shot's effectiveness is increased fourfold, and now uses overwrath instead of wrath for calculations (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).");
 		public static const Penetrator:PerkType = mk("Penetrator", "Penetrator",
 				"Thrown weapons and firearms (+ mech weapons) ignore damage reductions piercing right through your opponent armor weak points (ignore enemy dmg red). (+5% range physical attacks multiplier)",
 				"You've chosen the 'Penetrator' perk. Thrown weapons and firearms (+ mech weapons) ignore damage reductions piercing right through your opponent armor weak points (ignore enemy dmg red). (+5% range physical attacks multiplier)");
@@ -2299,14 +2299,14 @@ public class PerkLib
 				"Some people get all the luck it seems... Shut up and take our money is what all enemies scream at you upon defeat, increasing your gains on victory. (15% more gems from victories)",
 				"You've chosen the 'Money Finder' perk, increasing gem gains from victories by 15%.");
 		public static const Motivation:PerkType = mk("Motivation", "Motivation",
-				"Decrease to 20% henchmans idle time during combat. Increase dmg dealt by ~50%.",
-				"You've chosen the 'Motivation' perk. Decrease to 10% henchmans idle time during combat. Increase dmg dealt by ~50%.");
+				"Decreases the idle time of followers to 20% during combat. Increases the damage dealt by followers by ~50%.",
+				"You've chosen the 'Motivation' perk. Decreases the idle time of followers to 20% during combat. Increases the damage dealt by followers by ~50%.");
 		public static const MotivationEx:PerkType = mk("Motivation (Ex)", "Motivation (Ex)",
-				"Decrease to 1% henchmans idle time during combat. Increase dmg dealt by ~50% each time you reach specific level treshold (up to 4 times).",
-				"You've chosen the 'Motivation (Ex)' perk. Increase dmg dealt by ~50% each time you reach specific level treshold (up to 4 times).");
+				"Decreases the idle time of followers to 1% during combat. Increases the damage dealt by followers by ~50% at level 6, 27, 54 and 102.",
+				"You've chosen the 'Motivation (Ex)' perk. Increases the damage dealt by followers by ~50% at level 6, 27, 54 and 102.");
 		public static const MotivationSu:PerkType = mk("Motivation (Su)", "Motivation (Su)",
-				"All henchman do two actions in their turn and increase power of their attacks by 150% of currently boost provided by previous Motivcation perks.",
-				"You've chosen the 'Motivation (Su)' perk. All henchman do two actions in their turn and increase power of their attacks by 150% of currently boost provided by previous Motivcation perks.");
+				"All followers can now do two actions per turn. Increases the damage bonuses of the other Motivcation perks by 1.5.",
+				"You've chosen the 'Motivation (Su)' perk. All followers do two actions per turn, and increases the damage bonuses of other Motivation perks by 1.5.");
 		public static const MusclesOfSteel:PerkType = mk("Muscles of Steel", "Muscles of Steel",
 				"Your body has further adapted to fighting, strengthening your muscles so that they too possess the power of steel to further your melee power. (+10% melee phys dmg)",
 				"You've chosen the 'Muscles of Steel' perk, gaining +10% melee phys dmg.");

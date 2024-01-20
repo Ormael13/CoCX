@@ -66,7 +66,7 @@ public class Crafting extends BaseContent implements SaveableState
 		// State
 
 		public static var BagSlot01:Number;
-		public static var BagSlot01Cap:Number;//Cooper Ore
+		public static var BagSlot01Cap:Number;//Copper Ore
 		public static var BagSlot02:Number;
 		public static var BagSlot02Cap:Number;//Tin Ore
 		public static var BagSlot03:Number;
@@ -517,7 +517,7 @@ public class Crafting extends BaseContent implements SaveableState
 public function accessCraftingMaterialsBag():void {
 	clearOutput();
 	outputText("Would you like to put some crafting materials into the bag, and if so, with ones?\n\n");
-	if (BagSlot01Cap > 0) outputText("<b>Cooper Ore:</b> "+BagSlot01+" / "+BagSlot01Cap+"\n");
+	if (BagSlot01Cap > 0) outputText("<b>Copper Ore:</b> "+BagSlot01+" / "+BagSlot01Cap+"\n");
 	if (BagSlot02Cap > 0) outputText("<b>Tin Ore:</b> "+BagSlot02+" / "+BagSlot02Cap+"\n");
 	if (BagSlot03Cap > 0) outputText("<b>Bronze Bar:</b> "+BagSlot03+" / "+BagSlot03Cap+"\n");
 	if (BagSlot04Cap > 0) outputText("<b>Iron Ore:</b> "+BagSlot04+" / "+BagSlot04Cap+"\n");
@@ -526,7 +526,7 @@ public function accessCraftingMaterialsBag():void {
 	if (BagSlot07Cap > 0) outputText("<b>Moonstone:</b> "+BagSlot07+" / "+BagSlot07Cap+"\n");
 	//if (BagSlot08Cap > 0) outputText("<b>Skymetal:</b> "+BagSlot08+" / "+BagSlot08Cap+"\n");
 	menu();
-	//Cooper Ore
+	//Copper Ore
 	if (BagSlot01 < BagSlot01Cap) {
 		if (player.hasItem(useables.COP_ORE, 1)) addButton(0, "CopperOre", craftingMaterialsCopperOre1UP);
 		else addButtonDisabled(0, "CopperOre", "You don't have any copper ore to store.");
