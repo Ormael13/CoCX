@@ -308,7 +308,7 @@ public class CampUpgrades extends BaseContent {
         flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] += 1;
         outputText("\n\nYou take the wood, saw it and then cut into planks. Like before you put four long and thick wood posts as base, then you connect them with nails. Next you cut few posts into short fragments and impale at the edges. Inside of prepared frame you put few large wood logs that you fix in place with a few short wood desks and stones. Rest of the stones fill the space inside due to need in future support weight of stones stored above. After that prelast part of building is to put all most of remaining wood planks on prepared base and nail them in place. Final thing to do is use remain wood and nails to make protective barrier around the whole storage.");
         buildWithHelpers(150, true);
-        outputText("\n\nNow you can store safetly larger amount of stones!");
+        outputText("\n\nNow you can safely store a larger amount of stones!");
         flushOutputTextToGUI();
     }
 

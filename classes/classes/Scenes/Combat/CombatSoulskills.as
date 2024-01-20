@@ -189,7 +189,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.DaoistWarriorStage)) modssc -= .1;
 		if (player.hasPerk(PerkLib.DaoistElderStage)) modssc -= .1;
 		if (player.hasPerk(PerkLib.DaoistOverlordStage)) modssc -= .1;
-		if (player.jewelryName == "fox hairpin") modssc -= .2;
+		if (player.headJewelry == headjewelries.FOXHAIR) modssc -= .2;
 		if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssc -= (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.02);
 		if (player.perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 4) modssc -= .1;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 2 && player.soulforce >= Math.round(player.maxSoulforce() * sfT())) modssc *= 1.5;

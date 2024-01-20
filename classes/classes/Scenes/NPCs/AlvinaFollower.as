@@ -223,7 +223,7 @@ public function alvinaThirdEncounter():void
 {
 	clearOutput();
 	outputText("As you wander the blight ridges, you stumble upon what looks to be a cave. Bright purple lights flash in its depths and various magical runes are etched onto the entrance. Do you dare enter? It looks like whatever lies in this cave is extremely dangerous.\n\n");
-	if (SecondDateSuccess) outputText("You have a feling Marae's Pure Pearl could be useful here.")
+	if (SecondDateSuccess) outputText("You have a feeling Marae's Pure Pearl could be useful here.")
 	menu();
 	addButton(0, "No", alvinaThirdEncounterNo);
 	addButton(4, "Yes", alvinaThirdEncounterYes);

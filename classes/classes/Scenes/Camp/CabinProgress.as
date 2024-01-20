@@ -311,7 +311,7 @@ import classes.Scenes.SceneLib;
 					inventory.takeItem(itype, curry(explorer.done,120));
 				}
 				else {
-					outputText(" After attempt to mine ore vein you ended with unusable piece.");
+					outputText(" After attempting to mine an Ore Vein, you ended up with unusable pieces.");
 					endEncounter(120);
 				}
 			}
@@ -361,7 +361,7 @@ import classes.Scenes.SceneLib;
 
 		public function incrementWoodSupply(amount:int):void {
 			CampStatsAndResources.WoodResc += amount;
-			outputText("<b>(+" + amount + " wood"+(amount>1?"s":"")+"! "+CampStatsAndResources.WoodResc+"/"+SceneLib.campUpgrades.checkMaterialsCapWood()+" total!");
+			outputText("<b>(+" + amount + " wood! "+CampStatsAndResources.WoodResc+"/"+SceneLib.campUpgrades.checkMaterialsCapWood()+" total!");
 			if (CampStatsAndResources.WoodResc >= SceneLib.campUpgrades.checkMaterialsCapWood()) {
 				CampStatsAndResources.WoodResc = SceneLib.campUpgrades.checkMaterialsCapWood();
 				outputText(" Your wood capacity is full.")

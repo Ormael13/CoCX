@@ -71,7 +71,7 @@ public class JojoScene extends NPCAwareContent implements TimeAwareInterface {
 //const JOJO_MOVE_IN_DISABLED:int = 550;
 //const TIMES_EGGED_JOJO:int = 590;
 //const JOJO_EGGCUBATE_COUNT:int = 591;
-//const TALKED_TO_JOJO_ABOUT_JOY:int = 1305; //set after you talked to jojo after debimboing him
+//const TALKED_TO_JOJO_ABOUT_JOY:int = 1305; //set after you talked to Jojo after debimboing him
 
 public function jojoSprite():void {
 	if (flags[kFLAGS.JOJO_BIMBO_STATE] != 3) {
@@ -119,7 +119,7 @@ private function jojoMutationOfferNo():void {
 	jojoSprite();
 	clearOutput();
 	outputText("There are some lines even you won't cross.  Besides, having a sex-addled mouse with a constantly drooling foot-long cock is all the fun you can handle.\n\nWith that decided you prepare to call on your slut.");
-	//Normal jojo sex scene here
+	//Normal Jojo sex scene here
 	doNext(corruptCampJojo);
 }
 
@@ -146,7 +146,7 @@ public function corruptCampJojo():void {
 			finter.amilyIsPissedAtYouForRuiningJojo();
 			return;
 		}
-		//Offer lethicite jojo tf if the player is ready
+		//Offer lethicite to Jojo tf if the player is ready
 		if(!player.hasStatusEffect(StatusEffects.JojoTFOffer) && player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemvX("Marae's Lethicite", 1) > 0 && player.cor >= 75 - player.corruptionTolerance && player.gender > 0) {
 			jojoMutationOffer();
 			player.createStatusEffect(StatusEffects.JojoTFOffer,0,0,0,0);
@@ -2768,7 +2768,7 @@ public function jojoForestPurifyMeFromDevilry():void {
 	jojoSprite();
 	clearOutput();
 
-	outputText("As you venture into  the woods you run into jojo who nods at you.[pg]");
+	outputText("As you venture into  the woods you run into Jojo who nods at you.[pg]");
 	outputText("\"<i>So you came after all [name] I was worried you would lose this near impossible battle with yourself. I can sense the pure item. Place it down here and I will prepare for the ceremony.</i>\"[pg]");
 	outputText("This consumable requires the use of a Legendary artifact. Which artifact will you use?\n\n<u>Available artifacts in inventory:</u>\n");
 
@@ -2783,10 +2783,10 @@ public function jojoForestPurifyMeFromDevilry():void {
 
 	function jojoDevilPurificationScene(item:ItemType):void {
 		outputText("[pg]Jojo begins to draw circles into the ground.[pg]");
-		outputText("\"<i>Sit in the middle and embrace the artefact like your soul depend on it wich may or may not be the case. You must thoroughly reject your corruption for this to work or nothing will happen there is no faking it or half hearted measure here. Brace yourself because it will hurt… a lot.</i>\"[pg]");
-		outputText("You do as jojo says, each second in the circle seems to stretch into an eternity of torture. You yearn for pleasure yet you deny yourself. At first the contact with the holy item is just a tingling but after a while it feels like a hot iron searing your flesh. You embrace pain, pain is your punishment, pain is your atonement. Through suffering you somehow slowly gain back focus as your corrupt though recedes one by one, burnt into the holy pyre of suffering that is your body at the time. This agonizing treatment continue for what seems to stretch like forever before Jojo calls out to you.[pg]");
-		outputText("\"<i>[name] are you all right?! I saw you burning as if engulfed in whitefire! The ritual worked but by Marae what I witnessed was not pretty… You just spent the past five minutes screaming I thought you were going to die!</i>\"[pg]");
-		outputText("Your body singed by pain is regenerating itself already but pain did cleanses your mind. Were the now consumed holy item used to be now rest a burnt mark not unlike a rune, clear reminder of your resolve to see this through. You can see everything with clarity again. Jojo notice the change too.[pg]");
+		outputText("\"<i>Sit in the middle and embrace the artefact like your soul depends on it, which may or may not be the case. You must thoroughly reject your corruption for this to work or nothing will happen. There is no faking it or half hearted measures here. Brace yourself because it will hurt… a lot.</i>\"[pg]");
+		outputText("You do as Jojo says. Each second in the circle seems to stretch into an eternity of torture. You yearn for pleasure yet you deny yourself. At first the contact with the holy item is just a tingling but after a while it feels like a hot iron searing your flesh. You embrace pain, pain is your punishment, pain is your atonement. Through suffering you somehow slowly gain back focus as your corrupt thoughts recede one by one, burnt into the holy pyre of suffering that is your body at the time. This agonizing treatment continues for what seems to stretch like forever before Jojo calls out to you.[pg]");
+		outputText("\"<i>[name] are you all right?! I saw you burning as if engulfed in whitefire! The ritual worked, but by Marae what I witnessed was not pretty… You just spent the past five minutes screaming! I thought you were going to die!</i>\"[pg]");
+		outputText("Your body, singed by pain, is regenerating itself already, but pain did cleanse your mind. Where the now-consumed holy item used to be now rests a burnt mark not unlike a rune, a clear reminder of your resolve to see this through. You can see everything with clarity again. Jojo notices the change too.[pg]");
 		outputText("\"<i>It worked! Your corruption is down to an acceptable, yet somewhat bad amount. I can't do much more for you [name], you will have to find your own solutions from now on.</i>\"[pg]");
 		player.createStatusEffect(StatusEffects.DevilPurificationScar, 0, 0, 0, 0);
 		player.cor -= 50;

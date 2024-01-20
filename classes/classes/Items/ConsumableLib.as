@@ -1207,7 +1207,7 @@ public final class ConsumableLib extends AlchemyLib
 		public const SMALL_EGGS:Array = [BLACKEG,BLUEEGG,BROWNEG,PINKEGG,PURPLEG,WHITEEG];
 
 		//ALCHEMICAL INGREDIANTS
-		public const GINSENG: Consumable  = mk("Ginseng", "Ginseng", "a Ginseng", 6, "A plant of wich the fragant root is commonly used for perfume and cooking. If properly refined its alchemical property can also be used as a component to enhance potions.", m.Ginseng);
+		public const GINSENG: Consumable  = mk("Ginseng", "Ginseng", "a Ginseng", 6, "A plant of which the fragant root is commonly used for perfume and cooking. If properly refined, its alchemical properties can also be used as a component to enhance potions.", m.Ginseng);
 		public const HEALHERB: Consumable  = mk("HealHerb", "HealHerb", "a Healing herb", 6, "An herb with healing properties. Can be consumed directly or processed into a poultice.", m.HealingHerb);
 		public const MOONGRASS: Consumable = mk("MoonGrass", "MoonGrass", "Moonlight grass", 6, "A tuft of grass with invigorative properties. Can be consumed directly or processed into a medicine.\n", m.MoonGrass);
 		public const SNAKEBANE: Consumable = mk("SnakFlowr", "SnakFlowr", "a Snakebane flower", 6, "This flower can cure poison but, when alchemically processed, remove burns and frostburns as well. Can be consumed directly or processed into a medicine.", m.SnakeFlower);

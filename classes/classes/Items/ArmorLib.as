@@ -293,7 +293,7 @@ public final class ArmorLib extends ItemConstants
 					'spellcost': -0.20,
 					'soulskillcost': -0.20
 				}) as Armor;
-		public const VLAR:Armor = new Armor("V.Regalia","V.Regalia","Vladimir Regalia","a Vladimir Regalia",0,20,6400,"These burgundy clothes fit for a noble seems to naturaly befit the style of what could be a vampire. Strangely the clothes seems to catch on fire when basked into sunlight yet remain intact when pulled back through the shadows.","Light")
+		public const VLAR:Armor = new Armor("V.Regalia","V.Regalia","Vladimir Regalia","a Vladimir Regalia",0,20,6400,"These burgundy clothes fit for a noble seem to naturally befit the style of a vampire. Strangely, the clothes seem to catch on fire when basked into sunlight yet remain intact when pulled back through the shadows.","Light")
 				.withBuffs({
 					'spellcost': -0.60
 				})
