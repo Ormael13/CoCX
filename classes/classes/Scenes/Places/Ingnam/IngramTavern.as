@@ -9,6 +9,8 @@ import classes.internals.SaveableState;
 public class IngramTavern extends BaseContent implements SaveableState {
 
     public static var IngramRumors:Number;
+    public static var IngramEarFreakout:Number;
+    public static var IngramTailFreakout:Number;
     public function IngramTavern() {
         Saves.registerSaveableState(this);
     }
@@ -17,17 +19,24 @@ public class IngramTavern extends BaseContent implements SaveableState {
     }
     public function resetState():void {
         IngramRumors = 0;
+        IngramEarFreakout =0;
+        IngramTailFreakout = 0;
+        
     }
     public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
         if (o) {
-            IngramRumors = o["IngramRumors"]
+            IngramRumors = o["IngramRumors"];
+            IngramEarFreakout = o["IngramEarFreakout"];
+            IngramTailFreakout = o["IngramTailFreakout"];
         } else  {
             resetState();
         }
     }
     public function saveToObject():Object {
         return {
-            "IngramRumors":IngramRumors
+            "IngramRumors":IngramRumors,
+            "IngramEarFreakout":IngramEarFreakout,
+            "IngramTailFreakout":IngramTailFreakout
         }
     }
     public function hearRumors():void { //Hear rumors. Will be altered after defeating Lethice so he will say "Welcome back".
