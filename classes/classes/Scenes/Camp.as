@@ -3470,7 +3470,6 @@ public class Camp extends NPCAwareContent{
 		addButton(8, "Shouldra", toggleShouldra).hint("Enable or Disable Shouldra. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(9, "Sophie", toggleSophie).hint("Enable or Disable Sophie. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(10, "Spooders", toggleNPCStatus, StatusEffects.SpoodersOff).hint("Enable or Disable spooder followers. This will remove them ONLY from enc table.");
-		addButton(11, "DragonBoi", toggleNPCStatus, StatusEffects.TedOff).hint("Enable or Disable Dragon Boi. This will remove him from enc table.");
 		addButton(14, "Back", SparrableNPCsMenu);
 	}
 	private function SparrableNPCsMenuOthers():void {
@@ -3479,6 +3478,7 @@ public class Camp extends NPCAwareContent{
 		menu();
 		addButton(0, "Callu", toggleNPCStatus, StatusEffects.CalluOff, SparrableNPCsMenuOthers).hint("Enable or Disable Callu (Otter girl). This will remove her from enc table.");
 		addButton(1, "Venus", toggleNPCStatus, StatusEffects.VenusOff, SparrableNPCsMenuOthers).hint("Enable or Disable Venus (Gigantic Turtle). This will remove her from enc table.");
+		addButton(13, "DragonBoi", toggleNPCStatus, StatusEffects.TedOff, SparrableNPCsMenuOthers).hint("Enable or Disable Dragon Boi. This will remove him from enc table.");
 		addButton(14, "Back", SparrableNPCsMenu);
 	}
 

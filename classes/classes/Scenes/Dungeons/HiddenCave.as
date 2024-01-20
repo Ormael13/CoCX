@@ -9,6 +9,8 @@ import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
 import classes.Scenes.Dungeons.HiddenCave.*;
+import classes.Scenes.Crafting;
+import classes.StatusEffects;
 import classes.Scenes.NPCs.Ted;
 
 public class HiddenCave extends DungeonAbstractContent
@@ -27,6 +29,20 @@ public class HiddenCave extends DungeonAbstractContent
 			endEncounter();
 		}
 		
+		public function meetLoliBatGolem():void {
+			if (player.statusEffectv1(StatusEffects.LoliBatGolems) > 9) {
+				player.removeStatusEffect(StatusEffects.LoliBatGolems);
+				outputText("\n\nA bat-shaped figures standing near you suddenly starting to move toward you with clearly hostile intentions.");
+				startCombat(new LoliBatGolem(), true);
+				flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS]++;
+				doNext(playerMenu);
+				return;
+			}
+			else {
+				if (player.hasStatusEffect(StatusEffects.LoliBatGolems)) player.addStatusValue(StatusEffects.LoliBatGolems, 1, (1+rand(2)));
+				else player.createStatusEffect(StatusEffects.LoliBatGolems, 1, 0, 0, 0);
+			}
+		}
 		public function defeatedByLoliBatGolem():void {
 			clearOutput();
 			outputText("As you fall defeated to the ground, the construct continue to pummel you to death. By the time it's done there will be nothing left of you but a bloodstain on the stone floor.\n\n");
@@ -59,13 +75,7 @@ public class HiddenCave extends DungeonAbstractContent
 			dungeonLoc = DUNGEON_HIDDEN_CAVE_SE_UP;
 			clearOutput();
 			outputText("<b><u>SE Underground Passage</u></b>\n");
-			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 1) {
-				outputText("\n\nA bat-shaped figures standing near you suddenly starting to move toward you with clearly hostile intentions.");
-				startCombat(new LoliBatGolem(), true);
-				flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] = 1;
-				doNext(playerMenu);
-				return;
-			}
+			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 4) meetLoliBatGolem();
 			outputText("The corridor in front of you is covered with crystal formation that glow eerily in the dark. Every now and then, you spot a shadow from the corner of your eyes but clearly this must only be your imagination.");
 			dungeons.setDungeonButtons(roomEUP, null, roomSUP, roomEntrance);
 		}
@@ -73,6 +83,7 @@ public class HiddenCave extends DungeonAbstractContent
 			dungeonLoc = DUNGEON_HIDDEN_CAVE_E_UP;
 			clearOutput();
 			outputText("<b><u>E Underground Passage</u></b>\n");
+			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 4) meetLoliBatGolem();
 			outputText("This corridor is decorated with many silent statue. You somehow have the impression that they are watching you.");
 			dungeons.setDungeonButtons(roomNEUP, roomSEUP, null, null);
 		}
@@ -80,13 +91,7 @@ public class HiddenCave extends DungeonAbstractContent
 			dungeonLoc = DUNGEON_HIDDEN_CAVE_NE_UP;
 			clearOutput();
 			outputText("<b><u>NE Underground Passage</u></b>\n");
-			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] == 1) {
-				outputText("\n\nA bat-shaped figures standing near you suddenly starting to move toward you with clearly hostile intentions.");
-				startCombat(new LoliBatGolem(), true);
-				flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] = 2;
-				doNext(playerMenu);
-				return;
-			}
+			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 4) meetLoliBatGolem();
 			outputText("The corridor in front of you is covered with crystal formation that glow eerily in the dark. Every now and then, you spot a shadow from the corner of your eyes but clearly this must only be your imagination.");
 			dungeons.setDungeonButtons(null, roomEUP, roomNUP, null);
 		}
@@ -94,6 +99,7 @@ public class HiddenCave extends DungeonAbstractContent
 			dungeonLoc = DUNGEON_HIDDEN_CAVE_N_UP;
 			clearOutput();
 			outputText("<b><u>N Underground Passage</u></b>\n");
+			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 4) meetLoliBatGolem();
 			outputText("Various shattered humanoid skeletons litter the floor in this corridor. They look demonic in origin. Whatever lives heres kills demon in cold blood.");
 			dungeons.setDungeonButtons(null, null, roomNWUP, roomNEUP);
 		}
@@ -109,6 +115,7 @@ public class HiddenCave extends DungeonAbstractContent
 			dungeonLoc = DUNGEON_HIDDEN_CAVE_S_UP;
 			clearOutput();
 			outputText("<b><u>S Underground Passage</u></b>\n");
+			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 4) meetLoliBatGolem();
 			outputText("This corridor is decorated with many silent statue. You somehow have the impression that they are watching you.");
 			dungeons.setDungeonButtons(null, null, roomSWUP, roomSEUP);
 		}
@@ -143,13 +150,7 @@ public class HiddenCave extends DungeonAbstractContent
 			dungeonLoc = DUNGEON_HIDDEN_CAVE_NW_UP;
 			clearOutput();
 			outputText("<b><u>NW Underground Passage</u></b>\n");
-			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] == 3) {
-				outputText("\n\nA bat-shaped figures standing near you suddenly starting to move toward you with clearly hostile intentions.");
-				startCombat(new LoliBatGolem(), true);
-				flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] = 4;
-				doNext(playerMenu);
-				return;
-			}
+			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 4) meetLoliBatGolem();
 			outputText("The corridor in front of you is covered with crystal formation that glow eerily in the dark. Every now and then, you spot a shadow from the corner of your eyes but clearly this must only be your imagination.");
 			dungeons.setDungeonButtons(null, roomWUP, null, roomNUP);
 		}
@@ -158,6 +159,7 @@ public class HiddenCave extends DungeonAbstractContent
             dungeonLoc = DUNGEON_HIDDEN_CAVE_W_UP;
 			clearOutput();
 			outputText("<b><u>W Underground Passage</u></b>\n");
+			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 4) meetLoliBatGolem();
 			outputText("Various shattered humanoid skeletons litter the floor in this corridor. They look demonic in origin. Whatever lives heres kills demon in cold blood.");
 			dungeons.setDungeonButtons(roomNWUP, roomSWUP, null, null);
 			if (flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] > 3 && flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] > 0) addButton(10, "West", roomNTE);
@@ -168,13 +170,7 @@ public class HiddenCave extends DungeonAbstractContent
 			dungeonLoc = DUNGEON_HIDDEN_CAVE_SW_UP;
 			clearOutput();
 			outputText("<b><u>SW Underground Passage</u></b>\n");
-			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] == 2) {
-				outputText("\n\nA bat-shaped figures standing near you suddenly starting to move toward you with clearly hostile intentions.");
-				startCombat(new LoliBatGolem(), true);
-				flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] = 3;
-				doNext(playerMenu);
-				return;
-			}
+			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 4) meetLoliBatGolem();
 			outputText("The corridor in front of you is covered with crystal formation that glow eerily in the dark. Every now and then, you spot a shadow from the corner of your eyes but clearly this must only be your imagination.");
 			dungeons.setDungeonButtons(roomWUP, null, null, roomSUP);
 			if (flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] > 3) addButton(11, "South", roomSStorage);
@@ -221,7 +217,15 @@ public class HiddenCave extends DungeonAbstractContent
 			}
 			outputText("A big heap of treasure is scattered around the room. For most gold and jewels.");
 			dungeons.setDungeonButtons(null, roomNTN, null, roomLStorageE);
-			if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_1] == 2) {
+			if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_1] == 4 && Crafting.furnaceLevel == Crafting.FURNACE_LEVEL_SIMPLE) {
+				outputText("\n\nThere is an opened crate with some furnace inside.\n\n");
+				addButton(0, "Crate 1", takeFurnaceGood);
+			}
+			else if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_1] == 3 && Crafting.alembicLevel == Crafting.ALEMBIC_LEVEL_SIMPLE) {
+				outputText("\n\nThere is an opened crate with some alembic inside.\n\n");
+				addButton(0, "Crate 1", takeAlembicGood);
+			}
+			else if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_1] == 2) {
 				outputText("\n\nThere is an opened crate with some sort of weapon inside.\n\n");
 				addButton(0, "Crate 1", takeEldritchRibbon);
 			}
@@ -552,6 +556,18 @@ public class HiddenCave extends DungeonAbstractContent
 		private function takeEldritchRibbon():void {
 			flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_1] = 3;
 			inventory.takeItem(weapons.ERIBBON, roomLStorageW);
+		}
+		private function takeAlembicGood():void {
+			flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_1] = 4;
+			outputText("\n\nInside box you find good looking alembic. Probably even better then the one you currently have. Shame to not 'borrow' it, right?");
+			Crafting.alembicLevel = Crafting.ALEMBIC_LEVEL_GOOD;
+			doNext(roomLStorageW);
+		}
+		private function takeFurnaceGood():void {
+			flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS_1] = 5;
+			outputText("\n\nInside box you find solid looking furnance. Probably even better then the one you currently have. Shame to leave it here gathering dust, right?");
+			Crafting.furnaceLevel = Crafting.FURNACE_LEVEL_GOOD;
+			doNext(roomLStorageW);
 		}
 	}
 }

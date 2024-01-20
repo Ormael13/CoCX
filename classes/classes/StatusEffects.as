@@ -821,6 +821,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const KitsuneFight:StatusEffectType       	= mk("Kitsune Fight");
 		public static const Level:StatusEffectType              	= mk("level");
 		public static const LingeringSlime:StatusEffectType     	= mk("Lingering Slime");
+		public static const LoliBatGolems:StatusEffectType          = mk("LoliBatGolems");
 		public static const LowtierMagicImmunity:StatusEffectType   = mk("Low-tier magic immunity");
 		public static const LustAura:StatusEffectType           	= mk("Lust Aura");
 		public static const LustStick:StatusEffectType          	= mk("LustStick");
@@ -1135,9 +1136,9 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CounterHighVoltage:StatusEffectType        = mkCombat("Counter High Voltage");
 		public static const CounterRagingInferno:StatusEffectType      = mkCombat("Counter Raging Inferno");
 		public static const CounterHighTide:StatusEffectType           = mkCombat("Counter High Tide");
-		public static const CounterHowlingGale:StatusEffectType           = mkCombat("Counter Howling Gale");
-		public static const CounterRumblingQuake:StatusEffectType           = mkCombat("Counter Rumbling Quake");
-		public static const CounterCorrosiveMeltdown:StatusEffectType           = mkCombat("Counter Corrosive Meltdown");
+		public static const CounterHowlingGale:StatusEffectType        = mkCombat("Counter Howling Gale");
+		public static const CounterRumblingQuake:StatusEffectType      = mkCombat("Counter Rumbling Quake");
+		public static const CounterCorrosiveMeltdown:StatusEffectType  = mkCombat("Counter Corrosive Meltdown");
 
 		//cooldowns
 		public static const CooldownAdamantineShell:StatusEffectType           	= mkCombat("Cooldown Adamantine Shell");

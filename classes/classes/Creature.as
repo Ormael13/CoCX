@@ -831,7 +831,7 @@ public class Creature extends Utils
 		}
 		public function maxHP():Number {
 			var max:Number = Math.round(maxHP_base()*maxHP_mult());
-			return Math.min(9999999,max);
+			return Math.min(19999999,max);
 		}
 		public function maxOverHP():Number {
 			var maxOver:Number = maxHP();
@@ -855,7 +855,7 @@ public class Creature extends Utils
 			if (perkv1(IMutationsLib.FerasBirthrightIM) >= 4) maxOver2 += 0.2;
 			maxOver *= maxOver2;//~270%
 			maxOver = Math.round(maxOver);
-			return Math.min(21999999,maxOver);
+			return Math.min(54999999,maxOver);
 		}
 		public function minHP():Number {
 			return 0;
