@@ -9,6 +9,7 @@ import classes.PerkLib;
 import classes.Player;
 import classes.internals.Utils;
 
+import flash.events.MouseEvent;
 import flash.text.TextField;
 import flash.text.TextFormat;
 
@@ -71,6 +72,8 @@ public class MonsterStatsView extends Block {
 			bgColor : '#ff0000',
 			showMax : true
 		}));
+		hpBar.addEventListener("rollOver",Utils.curry(hoverStat,'hp'));
+		hpBar.addEventListener("rollOut",Utils.curry(hoverStat,'hp'));
 		addElement(lustBar = new StatBar({
 			statName   : "Lust:",
 			//	barColor   : '#ff1493',
@@ -78,6 +81,8 @@ public class MonsterStatsView extends Block {
 			hasMinBar  : true,
 			showMax    : true
 		}));
+		lustBar.addEventListener("rollOver",Utils.curry(hoverStat,'lust'));
+		lustBar.addEventListener("rollOut",Utils.curry(hoverStat,'lust'));
 		addElement(fatigueBar = new StatBar({
 			statName: "Fatigue:",
 			showMax : true
@@ -96,6 +101,8 @@ public class MonsterStatsView extends Block {
 			statName: "Wrath:",
 			showMax : true
 		}));
+		wrathBar.addEventListener("rollOver",Utils.curry(hoverStat,'wrath'));
+		wrathBar.addEventListener("rollOut",Utils.curry(hoverStat,'wrath'));
 		addElement(corBar = new StatBar({
 			statName: "Corruption:",
 			showMax : false,
@@ -142,11 +149,15 @@ public class MonsterStatsView extends Block {
 		nameText.text         = Utils.capitalizeFirstLetter(monster.short);
 		nameText.height       = nameText.textHeight+5;
 		levelBar.value        = monster.level;
+		var hpPercent:Boolean = game.flags[kFLAGS.HP_STATBAR_PERCENTAGE] == 1;
 		hpBar.maxValue        = monster.maxHP();
 		hpBar.value           = monster.HP;
+		hpBar.percentage	  = hpPercent;
+		var lustPercent:Boolean = game.flags[kFLAGS.LUST_STATBAR_PERCENTAGE] == 1;
 		lustBar.maxValue      = monster.maxLust();
 		lustBar.minValue      = monster.minLust();
 		lustBar.value         = monster.lust;
+		lustBar.percentage	  = lustPercent;
 		fatigueBar.value      = monster.fatigue;
 		fatigueBar.maxValue   = monster.maxFatigue();
 		soulforceBar.value    = monster.soulforce;
@@ -155,8 +166,10 @@ public class MonsterStatsView extends Block {
 		manaBar.value         = monster.mana;
 		manaBar.maxValue      = monster.maxMana();
 		manaBar.visible       = player.hasPerk(PerkLib.JobSorcerer);
+		var wrathPercent:Boolean = game.flags[kFLAGS.WRATH_STATBAR_PERCENTAGE] == 1;
 		wrathBar.value        = monster.wrath;
 		wrathBar.maxValue     = monster.maxWrath();
+		wrathBar.percentage	  = wrathPercent;
 		wrathBar.visible      = player.hasPerk(PerkLib.SenseWrath);
 		corBar.value          = monster.cor;
 		corBar.visible        = player.hasPerk(PerkLib.SenseCorruption);
@@ -197,6 +210,31 @@ public class MonsterStatsView extends Block {
 			dtf.color = style.statTextColor;
 			tf.defaultTextFormat = dtf;
 			tf.setTextFormat(dtf);
+		}
+	}
+	private function hoverStat(statname:String, event:MouseEvent):void {
+		var monster:Monster = CoC.instance.monster;
+		switch (event.type) {
+			case MouseEvent.ROLL_OVER:
+				var bar:StatBar = event.target as StatBar;
+				if (!bar) return;
+				if (statname == "hp") {
+					if (!CoC.instance.flags[kFLAGS.HP_STATBAR_PERCENTAGE]) return;
+					var hpText:String = "HP: " + Utils.formatNumber(Math.floor(monster.HP)) + (bar.showMax ? '/' + Utils.formatNumber(monster.maxHP()) : '');
+					CoC.instance.mainView.toolTipView.showForElement(bar,bar.statName,hpText);
+				} else if (statname == "lust") {
+					if (!CoC.instance.flags[kFLAGS.LUST_STATBAR_PERCENTAGE]) return;
+					var lustValue:String = "Lust: " + Utils.formatNumber(Math.floor(monster.lust)) + (bar.showMax ? '/' + Utils.formatNumber(monster.maxLust()) : '');
+					CoC.instance.mainView.toolTipView.showForElement(bar,bar.statName,lustValue);
+				} else if (statname == "wrath") {
+					if (!CoC.instance.flags[kFLAGS.WRATH_STATBAR_PERCENTAGE]) return;
+					var wrathText:String = "Wrath: " + Utils.formatNumber(Math.floor(monster.wrath)) + (bar.showMax ? '/' + Utils.formatNumber(monster.maxWrath()) : '');
+					CoC.instance.mainView.toolTipView.showForElement(bar,bar.statName,wrathText);
+				}
+				break;
+			case MouseEvent.ROLL_OUT: 
+				CoC.instance.mainView.toolTipView.hide();
+				break;
 		}
 	}
 }

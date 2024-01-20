@@ -36,7 +36,8 @@ public class StatBar extends Block {
 			barHeight  : 1.0, // relative to height
 			barColor   : '#0000ff',
 			minBarColor: '#8080ff',
-			bgColor    : null
+			bgColor    : null,
+			percentage : false
 		};
 	}
 	private static var DEFAULT_OPTIONS:Object     = factoryReset();
@@ -60,6 +61,8 @@ public class StatBar extends Block {
 	private var _showMax:Boolean;
 	private var _tween:SimpleTween;
 	private var _animate:Boolean;
+	private var _percentage:Boolean;
+
 	private function get arrowSz():Number {
 		return this.height-2;
 	}
@@ -171,11 +174,17 @@ public class StatBar extends Block {
 		update();
 	}
 	private function renderValue():void {
-		var bValue:String = Math.floor(value).toString();
-		var mValue:String = Math.floor(maxValue).toString();
-		if (value > 1000000) bValue = value.toPrecision(3);
-		if (maxValue > 1000000) mValue = maxValue.toPrecision(3);
-		valueText = '' + bValue + (showMax ? '/' + mValue : '');
+		if (percentage) {
+			var pValue:Number = (value / maxValue) * 100;
+			var valueStr:String = pValue.toFixed(1);
+			valueText = '' + valueStr + '%';
+		} else {
+			var bValue:String = Math.floor(value).toString();
+			var mValue:String = Math.floor(maxValue).toString();
+			if (value > 1000000) bValue = value.toPrecision(3);
+			if (maxValue > 1000000) mValue = maxValue.toPrecision(3);
+			valueText = '' + bValue + (showMax ? '/' + mValue : '');
+		}
 	}
 	public function get rawValue():Number {
 		return _value;
@@ -278,6 +287,17 @@ public class StatBar extends Block {
 	}
 	public function get arrowDown():BitmapDataSprite {
 		return _arrowDown;
+	}
+
+	public function get percentage():Boolean
+	{
+		return _percentage;
+	}
+
+	public function set percentage(value:Boolean):void
+	{
+		_percentage = value;
+		renderValue();
 	}
 }
 }

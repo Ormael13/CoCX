@@ -3004,7 +3004,9 @@ public static const CORRUPTION_TOLERANCE_MODE:int                               
 public static const ITS_EVERY_DAY:int                                               = 2996; // all special calender events occur every day!
 public static const LOW_STANDARDS_FOR_ALL:int                                       = 2997;
 public static const HYPER_HAPPY:int                                                 = 2998;
-public static const UNKNOWN_FLAG_NUMBER_02999:int                                   = 2999;
+public static const HP_STATBAR_PERCENTAGE:int                                   	= 2999; //HP bars show a percentage rather than the core number
+public static const LUST_STATBAR_PERCENTAGE:int                                   	= 3000; //Lust bars show a percentage rather than the core number
+public static const WRATH_STATBAR_PERCENTAGE:int                                   	= 3001; //Wrath bars show a percentage rather than the core number
 
 public static const GLOBAL_FLAGS_ARRAY:Array = [
 	NEW_GAME_PLUS_BONUS_UNLOCKED_HERM, SHOW_SPRITES_FLAG, SILLY_MODE_ENABLE_FLAG, SCENEHUNTER_PRINT_CHECKS,
