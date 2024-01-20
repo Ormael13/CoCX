@@ -1004,7 +1004,7 @@ public class Combat extends BaseContent {
 				}
 			}
 		}
-		if (player.hasPerk(PerkLib.Lustzerker) || player.jewelryName == "Flame Lizard ring" || player.jewelryName2 == "Flame Lizard ring" || player.jewelryName3 == "Flame Lizard ring" || player.jewelryName4 == "Flame Lizard ring") {
+		if (player.hasPerk(PerkLib.Lustzerker) || player.countRings(jewelries.FLLIRNG)) {
 			bd = buttons.add("Lustserk", mspecials.lustzerk);
 			if (player.hasPerk(PerkLib.ColderLust)) {
 				bd.hint("Throw yourself into a cold(er) lust rage!  Greatly increases the strength of your attacks and increases armor defense. \n");
@@ -5472,7 +5472,7 @@ public class Combat extends BaseContent {
 			damage = iceTypeDamageBonusLarge(damage);
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
-            if (player.isRaceCached(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
+            if (player.isRaceCached(Races.MOUSE, 2) && player.countRings(jewelries.INMORNG)) damage *= 2.2;
             else damage *= 2;
             damage = fireTypeDamageBonusLarge(damage);
 		}
@@ -15184,7 +15184,7 @@ public function asurasXFingersOfDestruction(fingercount:String):void {
     damage += ghostStrength();
     if (damage < 50) damage = 50;
     if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
-        if (player.isRaceCached(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
+        if (player.isRaceCached(Races.MOUSE, 2) && player.countRings(jewelries.INMORNG)) damage *= 2.2;
         else damage *= 2;
     }
     if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
@@ -15599,7 +15599,7 @@ public function firearmsForce():Number {
 		else mod *= 1.5;
 	}
     if (player.hasPerk(PerkLib.CowGunslingerOutfit)) mod += .5;//125% up to here
-    if (player.jewelryName == "cow girl hat") mod += .25;
+    if (player.headJewelry == headjewelries.COWHAT) mod += .25;
 	mod += rangePhysicalForce();
 	mod = Math.round(mod * 100) / 100;
     return mod;
