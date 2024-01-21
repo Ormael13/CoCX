@@ -7022,8 +7022,6 @@ public class Combat extends BaseContent {
         var damage:Number = (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
         if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
         if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
-        if (player.hasMutation(IMutationsLib.HellhoundFireBallsIM) && player.perkv1(IMutationsLib.HellhoundFireBallsIM) >= 2) damage *= (0.05* player.cumQ());
-        if (player.hasMutation(IMutationsLib.HellhoundFireBallsIM) && player.perkv1(IMutationsLib.HellhoundFireBallsIM) >= 3) damage *= (0.05* player.cumQ());
         return monster.lustVuln * damage;
     }
 
@@ -8435,6 +8433,16 @@ public class Combat extends BaseContent {
         if (player.shieldName == "Nekonomicon") damage *= 2;
 		damage *= EyesOfTheHunterDamageBonus();
         if (damage == 0) MSGControllForEvasion = true;
+        if (player.hasMutation(IMutationsLib.HellhoundFireBallsIM)) {
+            if(player.perkv1(IMutationsLib.HellhoundFireBallsIM) >= 3){
+                damage *= (0.1* player.cumQ());
+            }
+            else if(player.perkv1(IMutationsLib.HellhoundFireBallsIM) >= 2){
+                damage *= (0.05* player.cumQ())
+            }
+        }
+        // if (player.hasMutation(IMutationsLib.HellhoundFireBallsIM) && player.perkv1(IMutationsLib.HellhoundFireBallsIM) >= 2) damage *= (0.05* player.cumQ());
+        // if (player.hasMutation(IMutationsLib.HellhoundFireBallsIM) && player.perkv1(IMutationsLib.HellhoundFireBallsIM) >= 3) damage *= (0.05* player.cumQ());
         if (monster.HP - damage <= monster.minHP()) {
             /* No monsters use this perk, so it's been removed for now
 		if(monster.hasPerk(PerkLib.LastStrike)) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
