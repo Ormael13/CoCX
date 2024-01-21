@@ -4989,6 +4989,11 @@ use namespace CoC;
 						return this.hasStatusEffect(item);},this)
 					.length;
 		}
+		
+		public function enemiesKillCount():Number
+		{
+			return (flags[kFLAGS.GOBLINS_KILLED] + flags[kFLAGS.HELLHOUNDS_KILLED] +flags[kFLAGS.IMPS_KILLED] +flags[kFLAGS.MINOTAURS_KILLED] + flags[kFLAGS.TRUE_DEMONS_KILLED]);
+		}
 
 		public function armorDescript(nakedText:String = "gear"):String
 		{

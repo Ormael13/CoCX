@@ -158,6 +158,7 @@ public class Achievements extends BaseContent
 			addAchievement("Dungeon Seeker (1st layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_1ST_LAYER, "Clear 1st floor of the River Dungeon.");
 			addAchievement("Dungeon Seeker (2nd layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_2ND_LAYER, "Clear 2nd floor of the River Dungeon.");
 			addAchievement("Dungeon Seeker (3rd layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_3RD_LAYER, "Clear 3rd floor of the River Dungeon.");
+			addAchievement("Dungeon Seeker (4th layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_4TH_LAYER, "Clear 4th floor of the River Dungeon.");
 			//addAchievement("Dungeon Seeker (4th layer)", kACHIEVEMENTS., "Clear 4th floor of the River Dungeon.");
 			addAchievement("Honorary Minotaur", kACHIEVEMENTS.DUNGEON_HONORARY_MINOTAUR, "Reach 50th room of Ebon Labyrinth. Clear the Ebon Labyrinth.");
 			addAchievement("Got lost?", kACHIEVEMENTS.DUNGEON_GOT_LOST, "Reach 100th room of Ebon Labyrinth.");
@@ -165,7 +166,7 @@ public class Achievements extends BaseContent
 			addAchievement("Pan ain't got nothing on you", kACHIEVEMENTS.DUNGEON_PAN_AINT_GOT_NOTHING_ON_YOU, "Reach 200th room of Ebon Labyrinth.");
 			addAchievement("Master of the labyrinth", kACHIEVEMENTS.DUNGEON_MASTER_OF_THE_LABYRINT, "Reach 250th room of Ebon Labyrinth.");
 			addAchievement("Why are you here?", kACHIEVEMENTS.DUNGEON_WHY_ARE_YOU_HERE, "Reach 300th room of Ebon Labyrinth.");
-			//addAchievement("", kACHIEVEMENTS., "Reach 350th room of Ebon Labyrinth.");
+			addAchievement("We need to go deeper!", kACHIEVEMENTS.DUNGEON_WE_NEED_TO_GO_DEEPER, "Reach 350th room of Ebon Labyrinth.");
 			//addAchievement("", kACHIEVEMENTS., "Reach 400th room of Ebon Labyrinth.");
 			//addAchievement("", kACHIEVEMENTS., "Reach 450th room of Ebon Labyrinth.");
 			//addAchievement("", kACHIEVEMENTS., "Reach 500th room of Ebon Labyrinth.");
@@ -266,14 +267,14 @@ public class Achievements extends BaseContent
 			addAchievement("Champion Needs Food Badly (2)", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD_2, "Instantly refill your hunger from 0 to 250 in one go.");
 			addAchievement("Champion Needs Food Badly (3)", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD_3, "Instantly refill your hunger from 0 to 500 in one go.");
 			addAchievement("Champion Needs Food Badly (4)", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD_4, "Instantly refill your hunger from 0 to 1000 in one go.");
-			//addAchievement("Champion Needs Food Badly (5)", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD, "Instantly refill your hunger from 0 to 2500 in one go.");
+			//addAchievement("Champion Needs Food Badly (5)", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD, "Instantly refill your hunger from 0 to 2500 in one go.");obecnie max to 3378
 			//addAchievement("Champion Needs Food Badly (6)", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD, "Instantly refill your hunger from 0 to 5000 in one go.");
 			//addAchievement("Gourmand", kACHIEVEMENTS.REALISTIC_GOURMAND, "Refill hunger from 5 different sources.");
 			addAchievement("Glutton", kACHIEVEMENTS.REALISTIC_GLUTTON, "Eat while hunger is above 90.");
 			addAchievement("Epic Glutton", kACHIEVEMENTS.REALISTIC_EPIC_GLUTTON, "Eat while hunger is above 240.");
 			addAchievement("Legendary Glutton", kACHIEVEMENTS.REALISTIC_LEGENDARY_GLUTTON, "Eat while hunger is above 490.");
 			addAchievement("Mythical Glutton", kACHIEVEMENTS.REALISTIC_MYTHICAL_GLUTTON, "Eat while hunger is above 990.");
-			//addAchievement(" Glutton", kACHIEVEMENTS., "Eat while hunger is above 2490.", "", true);
+			//addAchievement(" Glutton", kACHIEVEMENTS., "Eat while hunger is above 2490.", "", true);obecnie max to 3378
 			//addAchievement(" Glutton", kACHIEVEMENTS., "Eat while hunger is above 4990.", "", true);
 			addAchievement("Fasting", kACHIEVEMENTS.REALISTIC_FASTING, "Keep hunger below 25 for a week but don't let it reach 0.");
 			addAchievement("Lent", kACHIEVEMENTS.REALISTIC_LENT, "Keep hunger below 25 for fourty days but don't let it reach 0.", "Keep hunger below 25 for fourty days but don't let it reach 0. Now you're ready for Easter.", true);
@@ -281,7 +282,7 @@ public class Achievements extends BaseContent
 			addAchievement("You not gonna eat those ribs?", kACHIEVEMENTS.REALISTIC_YOU_NOT_GONNA_EAT_THOSE_RIBS, "Increase your maximum hunger above 250.");
 			addAchievement("Dinner for Four", kACHIEVEMENTS.REALISTIC_DINNER_FOR_FOUR, "Increase your maximum hunger above 500.");
 			addAchievement("Dinner for Obelix", kACHIEVEMENTS.REALISTIC_DINNER_FOR_OBELIX, "Increase your maximum hunger above 1000.");
-			//HIDDEN ACHIEV - HUNGER OVER 2500 (feast for gluttons)
+			//HIDDEN ACHIEV - HUNGER OVER 2500 (feast for gluttons)obecnie max to 3378
 			//HIDDEN ACHIEV - HUNGER OVER 5000 (tang wuxlin eating buddy)
 			//keep hunger above 0 with  5 internal mutation score
 			//keep hunger above 0 with 10 internal mutation score

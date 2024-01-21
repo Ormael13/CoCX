@@ -440,10 +440,14 @@ package classes.GlobalFlags
 		public static const GENERAL_BEYOND_GODS_AND_MORTALS:int			= 393;
 		public static const GENERAL_DAWN_CHASING_AWAY_THE_NIGHT:int		= 394;
 		public static const HOLIDAY_YEAR_OF_THE_GOAT:int				= 395;
-		public static const UNKNOWN_ACHIEVEMENT_396:int					= 396;
-		public static const UNKNOWN_ACHIEVEMENT_397:int					= 397;
-		public static const UNKNOWN_ACHIEVEMENT_398:int					= 398;
-		public static const UNKNOWN_ACHIEVEMENT_399:int					= 399;
+		public static const DUNGEON_DUNGEON_SEEKER_4TH_LAYER:int		= 396;
+		public static const DUNGEON_DUNGEON_SEEKER_5TH_LAYER:int		= 397;
+		public static const DUNGEON_DUNGEON_SEEKER_6TH_LAYER:int		= 398;
+		public static const DUNGEON_WE_NEED_TO_GO_DEEPER:int			= 399;
+		public static const UNKNOWN_ACHIEVEMENT_400:int					= 400;
+		public static const UNKNOWN_ACHIEVEMENT_401:int					= 401;
+		public static const UNKNOWN_ACHIEVEMENT_402:int					= 402;
+		public static const UNKNOWN_ACHIEVEMENT_403:int					= 403;
 		
 	}
 }

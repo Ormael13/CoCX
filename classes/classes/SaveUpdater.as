@@ -213,6 +213,9 @@ public class SaveUpdater extends NPCAwareContent {
 			["Tiger stalking the Dragon", kACHIEVEMENTS.DUNGEON_TIGER_STALKING_THE_DRAGON, SceneLib.dungeons.checkHiddenCaveHiddenStageClear()],
 			["Mirror Flower, Water Moon", kACHIEVEMENTS.DUNGEON_MIRROR_FLOWER_WATER_MOON, SceneLib.dungeons.checkRiverDungeon1stFloorClear()],
 			["Dungeon Seeker (1st layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_1ST_LAYER, SceneLib.dungeons.checkRiverDungeon1stFloorClear()],
+			["Dungeon Seeker (2nd layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_2ND_LAYER, SceneLib.dungeons.checkRiverDungeon2ndFloorClear()],
+			["Dungeon Seeker (3rd layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_3RD_LAYER, SceneLib.dungeons.checkRiverDungeon3rdFloorClear()],
+			["Dungeon Seeker (4th layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_4TH_LAYER, SceneLib.dungeons.checkRiverDungeon4thFloorClear()],
 			["Slain the Heroslayer", kACHIEVEMENTS.DUNGEON_SLAIN_THE_HEROSLAYER, SceneLib.dungeons.checkDenOfDesireClear()],
 			//bee hive clear
 			["Delver", kACHIEVEMENTS.DUNGEON_DELVER, dungeonsCleared >= 1],
@@ -220,9 +223,6 @@ public class SaveUpdater extends NPCAwareContent {
 			["Delver Expert", kACHIEVEMENTS.DUNGEON_DELVER_MASTER, dungeonsCleared >= 4],
 			["Delver Master", kACHIEVEMENTS.DUNGEON_DELVER_EXPERT, dungeonsCleared >= 8],
 			["Delver Grand Master", kACHIEVEMENTS.DUNGEON_DELVER_GRAND_MASTER, dungeonsCleared >= 16],//obecnie max 10
-
-			["Dungeon Seeker (2nd layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_2ND_LAYER, SceneLib.dungeons.checkRiverDungeon2ndFloorClear()],
-			["Dungeon Seeker (3rd layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_3RD_LAYER, SceneLib.dungeons.checkRiverDungeon3rdFloorClear()],
 
 			//Fashion
 			["Wannabe Wizard", kACHIEVEMENTS.FASHION_WANNABE_WIZARD, player.armor == armors.W_ROBES && player.weapon == weapons.W_STAFF],

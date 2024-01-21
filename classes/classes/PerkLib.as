@@ -7087,8 +7087,7 @@ public class PerkLib
             //Tier 0
             //HeartCultivator.requirePerk(JobSoulCultivator);		//psionic/min powers cultivation/psion class from D&D?
             //requirePerk(JobSoulCultivator)		//allowing you to use soulforce options more times per day - 1/2/3 time more?
-            FlyingSwordPath.requirePerk(JobSoulCultivator);
-			//Tier 1
+            //Tier 1
             //Tier 2
             //Tier 3
 			KillingIntent.requirePerk(JobSoulCultivator)
