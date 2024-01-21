@@ -102,7 +102,7 @@ public class Changelog extends BaseContent
 			outputText("-Adjusted SF-infused Blood Requiem damage to be in line with other Blood Soulskills. (Demojay)\n");
 			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 4. Req. Sky Poison Pearl Mastery 3 perk. It costs 129 asc points and you gain +12 venom recharge speed, +40% to max venom cap, +40% to poison resistance, 400% more spirit stones carried over and lower req. level to open next sections of pearl by 24 levels.\n");
 			outputText("-Added Shouldra to disable/enable menu. Disabling her if she's in camp already would reset tracker how much min lust she rising.\n");
-			outputText("-Adding alternate calculation functions for seamen volume (cumQMore(), cumQuantityMore(), ExponObject class) The world will flood (cumming soon probably) (NUZ/Shirane)\n");
+			outputText("-Hellhound balls mutation firedamage bonus fix (Yes previously it doesn't give any, well have fun I guess) and some clean up. (NUZ/Shirane)\n");
 			outputText("-Fixed in Debug Menu Body part editor when selecting colours. (Demojay)\n");
 			outputText("-Moved Dragon Boi toggle to turn on/off from Members to Others subtab in NPC's tab from Camp Actions menu.\n");
 			outputText("-First four golem guardians in Hidden Cave now would wander their designed area appearing in one of eight rooms instead of four specific ones in specific order. If PC have basic versions of albemic or furnance bought can find bit better one versions of them in Hidden Cave dungeon and then 'borrow' those for 'unlimited time duration'. ");
@@ -116,8 +116,9 @@ public class Changelog extends BaseContent
 			outputText("-5 new achievments. (3 shadow one)\n");
 			outputText("-Killing Intent perk now is gained after having at least 10 kills on kill counter.\n");
 			outputText("-On stats page in kill counts section was added total kills count (maybe some would want to see total count without need to add all seperate kill counts and maybe in future we would get more kill counts...)\n");
-			outputText("-Added new option/toggle in Settings: Angelic Fraction - by default it removes all angelic presence ingame and need to be toggled on to find ANY angeloid/angel ingame. So if you not able to finish some task you may now thing... is it becasue i disliked angels so much that i wanted them be-gone and now i pay price for it?\n");
-			outputText("-All Angel Fraction enemies now can drop randomized item like Demon Fraction. Due to higher difficulty of defeating them their have higher chance to drop that gear and overeal chances for better prefixxes on tiems are increased.\n");
+			outputText("-Added new option/toggle in Settings: Angelic Faction - by default it removes all angelic presence ingame and need to be toggled on to find ANY angeloid/angel ingame. So if you not able to finish some task you may now thing... is it becasue i disliked angels so much that i wanted them be-gone and now i pay price for it?\n");
+			outputText("-All Angel Faction enemies now can drop randomized item like Demon Faction. Due to higher difficulty of defeating them their have higher chance to drop that gear and general chances for better prefixxes on items are increased.\n");
+			outputText("-I moved the code for the tavern to its own file, added checks to handle additional ear types, and finally introduced Xianxia early via a 'rumor' in the tavern. (NUZ/Shirane)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -139,14 +140,15 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay) (NUZ/Shirane)
-			outputText("-\n");
-			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Demojay) (jfmherokiller) (NUZ/Shirane) (Xetaxheb)
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Arigean above Recruit rank not immune to tf-ing effects, deer arms tf unlocking canine arms MM, unable to find tel'adre again after first time seeing it with too high corruption or other factor that not allowed entrance; Arigean above recruit rank marking, eye color and aura with mismatching colors; demon/arigean arms MM option giving instead devil/abyssal shark arms, ");
@@ -207,7 +209,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -232,6 +236,7 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

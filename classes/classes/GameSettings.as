@@ -954,9 +954,9 @@ public class GameSettings extends BaseContent {
 		outputText("\n\n");
 		
 		if (flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 1)
-			outputText("Angelic Fraction: <b>FULL PRESENCE</b>");
+			outputText("Angelic Faction: <b>FULL PRESENCE</b>");
 		else
-			outputText("Angelic Fraction: <b>ABSENT</b>");
+			outputText("Angelic Faction: <b>ABSENT</b>");
 		outputText("\n\n");
 
 		var buttons:ButtonDataList = new ButtonDataList();
