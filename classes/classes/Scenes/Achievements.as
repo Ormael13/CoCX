@@ -98,7 +98,7 @@ public class Achievements extends BaseContent
 			addAchievement("Are you a god?", kACHIEVEMENTS.LEVEL_ARE_YOU_A_GOD, "Get to level 100.", "Get to level 100. (Your powers would have surpassed weakest god by now.)", true);
 			addAchievement("Newb God(ess)", kACHIEVEMENTS.LEVEL_NEWB_GOD_ESS, "Get to level 120.", "Get to level 120. (You still new to all this 'god' stuff.)", true);
 			addAchievement("Lowest-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS, "Get to level 150.", "Get to level 150. (No more called newb god(ess) at least.)", true);
-			addAchievement("Low-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS_2, "Get to level 180.", "Get to level 180. (Private-tier god(ess)... wait what?)", true);
+			addAchievement("Lesser God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS_2, "Get to level 180.", "Get to level 180. (Private-tier god(ess)... wait what?)", true);
 			//lvl 210// (Your powers would have surpassed Marae's by now.)
 
 			titleAchievementSection("Population"); //21 achievements

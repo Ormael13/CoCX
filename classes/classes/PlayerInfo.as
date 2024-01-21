@@ -430,7 +430,7 @@ public class PlayerInfo extends BaseContent {
 			statEffects += "Alraune perfume - " + player.statusEffectv2(StatusEffects.ArousalPotion) + " hours remaining.\n";
 
 		if (player.hasStatusEffect(StatusEffects.CombatWounds)) 
-			statEffects += "Combat wounds - missing " + player.statusEffectv1(StatusEffects.CombatWounds) + " % of max health.\n";
+			statEffects += "Combat wounds - missing " + player.statusEffectv1(StatusEffects.CombatWounds)*100 + " % of max health.\n";
 
 		if (player.hasStatusEffect(StatusEffects.ArigeanInfected))
 			statEffects += "Mysterious Infection: You feel a bit under the weather...you should likely rest until it passes.\n";

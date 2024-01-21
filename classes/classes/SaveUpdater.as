@@ -168,7 +168,7 @@ public class SaveUpdater extends NPCAwareContent {
 			["Are you a god?", kACHIEVEMENTS.LEVEL_ARE_YOU_A_GOD, player.level >= 100],
 			["Newb God(ess)", kACHIEVEMENTS.LEVEL_NEWB_GOD_ESS, player.level >= 120],
 			["Lowest-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS, player.level >= 150],
-			["Low-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS_2, player.level >= 180],
+			["Lesser God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS_2, player.level >= 180],
 			//["-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS, player.level >= ?210?],
 			//["-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS, player.level >= ?240?],
 			//Population
