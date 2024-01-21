@@ -2414,7 +2414,7 @@ use namespace CoC;
 			if (player.hasPerk(PerkLib.Purifier)) player.purifyDemonBonus();
 			if (player.hasPerk(PerkLib.QueenOfTheFairies)) player.QueenOfTheForestDemonBonus();
 			if (player.cor < 25) dynStats("cor", -0.5);
-			if (player.enemiesKillCount() >= 10) {
+			if (player.enemiesKillCount() >= 10 && !player.hasPerk(PerkLib.KillingIntent)) {
 				outputText("Kill upon kill, corpse after corpse... Ashes... to ashes... Your fingers itch, your blood boils, there's still more to kill, more fiends to slay. The fire burning inside is but another weapon of murder. <b>(You have gained the Killing Intent perk!)</b> ");
 				player.createPerk(PerkLib.KillingIntent, 0, 0, 0, 0);
 			}
@@ -2431,7 +2431,7 @@ use namespace CoC;
 			if (player.hasPerk(PerkLib.Purifier)) player.purifyDemonBonus();
 			if (player.hasPerk(PerkLib.QueenOfTheFairies)) player.QueenOfTheForestDemonBonus();
 			if (player.cor < 25) dynStats("cor", -0.5);
-			if (player.enemiesKillCount() >= 10) {
+			if (player.enemiesKillCount() >= 10 && !player.hasPerk(PerkLib.KillingIntent)) {
 				outputText("Kill upon kill, corpse after corpse... Ashes... to ashes... Your fingers itch, your blood boils, there's still more to kill, more fiends to slay. The fire burning inside is but another weapon of murder. <b>(You have gained the Killing Intent perk!)</b> ");
 				player.createPerk(PerkLib.KillingIntent, 0, 0, 0, 0);
 			}

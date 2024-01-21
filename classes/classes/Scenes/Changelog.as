@@ -113,7 +113,13 @@ public class Changelog extends BaseContent
 			outputText("-Fixing bugs where the game was checking for a fox hairpin or cow girl hat in one of the ring slots rather than the head jewelry slot. (Demojay)\n");
 			outputText("-Text fixes. (Demojay) (Alot of small ones)\n");
 			outputText("-Added 3 toggles in Interface Game Settings to control whether the HP Lust and Wrath of the player and Enemy should be displayed as a percentage or numbers. (Demojay)\n");
+			outputText("-2 new achievments. (0 shadow one)\n");
 			outputText("-Killing Intent perk now is gained after having at least 10 kills on kill counter.\n");
+			outputText("-On stats page in kill counts section was added total kills count (maybe some would want to see total count without need to add all seperate kill counts and maybe in future we would get more kill counts...)\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -199,12 +205,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -227,6 +229,7 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

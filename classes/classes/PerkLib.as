@@ -7090,8 +7090,6 @@ public class PerkLib
             //Tier 1
             //Tier 2
             //Tier 3
-			KillingIntent.requirePerk(JobSoulCultivator)
-								.requireLevel(20);
 			FirstAttackFlyingSword.requirePerks(SoaringBlades, SoulWarrior)
 								.requireLevel(24);
             //2nd perk for flying swords slots
