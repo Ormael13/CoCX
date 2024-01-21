@@ -444,10 +444,16 @@ package classes.GlobalFlags
 		public static const DUNGEON_DUNGEON_SEEKER_5TH_LAYER:int		= 397;
 		public static const DUNGEON_DUNGEON_SEEKER_6TH_LAYER:int		= 398;
 		public static const DUNGEON_WE_NEED_TO_GO_DEEPER:int			= 399;
-		public static const UNKNOWN_ACHIEVEMENT_400:int					= 400;
-		public static const UNKNOWN_ACHIEVEMENT_401:int					= 401;
-		public static const UNKNOWN_ACHIEVEMENT_402:int					= 402;
+		public static const LEVEL_MID_TIER_GOD_ESS_2:int				= 400;
+		public static const REALISTIC_CHAMPION_NEEDS_FOOD_5:int			= 401;
+		public static const REALISTIC_FEAST_FOR_GLUTTONS:int			= 402;
 		public static const UNKNOWN_ACHIEVEMENT_403:int					= 403;
+		public static const UNKNOWN_ACHIEVEMENT_404:int					= 404;
+		public static const UNKNOWN_ACHIEVEMENT_405:int					= 405;
+		public static const UNKNOWN_ACHIEVEMENT_406:int					= 406;
+		public static const UNKNOWN_ACHIEVEMENT_407:int					= 407;
+		public static const UNKNOWN_ACHIEVEMENT_408:int					= 408;
+		public static const UNKNOWN_ACHIEVEMENT_409:int					= 409;
 		
 	}
 }

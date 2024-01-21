@@ -475,7 +475,8 @@ import classes.Scenes.Combat.CombatAbility;
                     kFLAGS.SPIRIT_STONES,
 					kFLAGS.HP_STATBAR_PERCENTAGE,
 					kFLAGS.LUST_STATBAR_PERCENTAGE,
-					kFLAGS.WRATH_STATBAR_PERCENTAGE]) {
+					kFLAGS.WRATH_STATBAR_PERCENTAGE,
+					kFLAGS.ANGELIC_FRACTION_TOGGLE]) {
 					    newFlags[flag] = flags[flag];
 				}
 			}
@@ -3419,4 +3420,4 @@ import classes.Scenes.Combat.CombatAbility;
 				return false;
 		}
 	} // what the fuck are those weird comments here? ^
-}
+}

@@ -168,8 +168,9 @@ public class SaveUpdater extends NPCAwareContent {
 			["Are you a god?", kACHIEVEMENTS.LEVEL_ARE_YOU_A_GOD, player.level >= 100],
 			["Newb God(ess)", kACHIEVEMENTS.LEVEL_NEWB_GOD_ESS, player.level >= 120],
 			["Lowest-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS, player.level >= 150],
-			//["Low-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS, player.level >= ?180?],
+			["Low-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS_2, player.level >= 180],
 			//["-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS, player.level >= ?210?],
+			//["-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS, player.level >= ?240?],
 			//Population
 			["My First Companion", kACHIEVEMENTS.POPULATION_FIRST, camp.getCampPopulation() >= 2],
 			["Hamlet", kACHIEVEMENTS.POPULATION_HAMLET, camp.getCampPopulation() >= 5],
@@ -279,6 +280,7 @@ public class SaveUpdater extends NPCAwareContent {
 			["You not gonna eat those ribs?", kACHIEVEMENTS.REALISTIC_YOU_NOT_GONNA_EAT_THOSE_RIBS, player.maxHunger() > 250],
 			["Dinner for Four", kACHIEVEMENTS.REALISTIC_DINNER_FOR_FOUR, player.maxHunger() > 500],
 			["Dinner for Obelix", kACHIEVEMENTS.REALISTIC_DINNER_FOR_OBELIX, player.maxHunger() > 1000],
+			["Feast for Gluttons", kACHIEVEMENTS.REALISTIC_FEAST_FOR_GLUTTONS, player.maxHunger() > 2500],
 			//Holiday
 			["The Lovable Snowman", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_III, flags[kFLAGS.NIEVE_STAGE] == 5],
 			//General
@@ -2638,4 +2640,4 @@ public class SaveUpdater extends NPCAwareContent {
 		}
 	}
 }
-}
+}

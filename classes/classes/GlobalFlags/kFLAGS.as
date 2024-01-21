@@ -2934,7 +2934,7 @@ public static const UNKNOWN_FLAG_NUMBER_02925:int                               
 public static const UNKNOWN_FLAG_NUMBER_02926:int                                   = 2926;
 public static const UNKNOWN_FLAG_NUMBER_02927:int                                   = 2927;
 public static const UNKNOWN_FLAG_NUMBER_02928:int                                   = 2928;
-public static const UNKNOWN_FLAG_NUMBER_02929:int                                   = 2929;
+public static const ANGELIC_FRACTION_TOGGLE:int                                   	= 2929;
 public static const UNKNOWN_FLAG_NUMBER_02930:int                                   = 2930;
 public static const UNKNOWN_FLAG_NUMBER_02931:int                                   = 2931;
 public static const UNKNOWN_FLAG_NUMBER_02932:int                                   = 2932;

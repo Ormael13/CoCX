@@ -952,6 +952,12 @@ public class GameSettings extends BaseContent {
 		else
 			outputText("Wrath bars show percentages: <b>ON</b>");
 		outputText("\n\n");
+		
+		if (flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 1)
+			outputText("Angelic Fraction: <b>FULL PRESENCE</b>");
+		else
+			outputText("Angelic Fraction: <b>ABSENT</b>");
+		outputText("\n\n");
 
 		var buttons:ButtonDataList = new ButtonDataList();
 		menu();
@@ -970,6 +976,7 @@ public class GameSettings extends BaseContent {
 		buttons.add("HP Percent", curry(toggleFlag, kFLAGS.HP_STATBAR_PERCENTAGE, settingsScreenInterfaceSettings), "Toggle between showing the HP stat as a percentage");
 		buttons.add("Lust Percent", curry(toggleFlag, kFLAGS.LUST_STATBAR_PERCENTAGE, settingsScreenInterfaceSettings), "Toggle between showing the Lust stat as a percentage");
 		buttons.add("Wrath Percent", curry(toggleFlag, kFLAGS.WRATH_STATBAR_PERCENTAGE, settingsScreenInterfaceSettings), "Toggle between showing the Wrath stat as a percentage");
+		buttons.add("Angelic Fract", curry(toggleFlag, kFLAGS.ANGELIC_FRACTION_TOGGLE, settingsScreenInterfaceSettings), "Toggle between full and no presence of angelic fraction ingame");
 		submenu(buttons, settingsScreenMain, 0, false);
 	}
 	public function menuMainBackground():void {

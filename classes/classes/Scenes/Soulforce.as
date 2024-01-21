@@ -81,9 +81,9 @@ public class Soulforce extends BaseContent
 		}
 		//addButton(5, "Upgrade", UpgradeItems).hint("."); //ulepszanie itemów
 		if (player.hasPerk(PerkLib.FlyingSwordPath)) addButton(6, "Imprinting", ImprintingSF).hint("Imprint your SF to combine or seperate sets of flying swords.");
-		else addButtonDisabled(6, "???", "Req. Flying Sword Path.");
+		else addButtonDisabled(6, "???", "Req. Flying Sword Path perk.");
 		if (player.hasPerk(PerkLib.SoulSense)) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounters."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
-		else addButtonDisabled(7, "???", "Req. Soul Sense.");
+		else addButtonDisabled(7, "???", "Req. Soul Sense perk.");
 		//button 8 - ?
 		if (player.hasPerk(PerkLib.Metamorph)) {
 			if (player.blockingBodyTransformations()) addButtonDisabled(10, "Metamorph", "Your current body state prevents you from using Metamorph. (Either cure it or ascend to gain access to metamorph menu again)");
