@@ -4717,8 +4717,6 @@ use namespace CoC;
 				total *= 1.5;
 			if (statusEffectv1(StatusEffects.LactationReduction) >= 48)
 				total = total * 1.5;
-			if (total > int.MAX_VALUE)
-				total = int.MAX_VALUE;
 			return total;
 		}
 

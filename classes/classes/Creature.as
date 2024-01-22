@@ -2802,8 +2802,6 @@ public class Creature extends Utils
 			//if (quantity < 0) trace("SOMETHING HORRIBLY WRONG WITH CUM CALCULATIONS");
 			if (quantity < 2)
 				quantity = 2;
-			if (quantity > int.MAX_VALUE)
-				quantity = int.MAX_VALUE;
 			return quantity;
 		}
 
@@ -2840,8 +2838,6 @@ public class Creature extends Utils
 
 			cumCap *= cumMultiplier;
 			cumCap = Math.round(cumCap);
-			if (cumCap > int.MAX_VALUE)
-				cumCap = int.MAX_VALUE;
 			return cumCap;
 		}
 		public function countCocksOfType(type:CockTypesEnum):int {
