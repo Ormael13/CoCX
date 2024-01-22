@@ -35,6 +35,7 @@ public class Changelog extends BaseContent
 			outputText("<b>Version 0.8w-z:</b>\n\n");
 			outputText("-New tier 1 intelligence lvl-up perk: Brutal Spells. Req. Job: Sorcerer perk and 75+ int. Effect: Reduces enemy magic resistance with each spell. (+5% base spell strength)\n");
 			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 1. No Req. It costs 21 asc points and you gain +3 venom recharge speed, +10% to max venom cap, +10% to poison resistance, 100% more spirit stones carried over and lower req. level to open next sections of pearl by 6 levels.\n");
+			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 2. Req. Sky Poison Pearl Mastery 1 perk. It costs 57 asc points and you gain +6 venom recharge speed, +20% to max venom cap, +20% to poison resistance, 200% more spirit stones carried over and lower req. level to open next sections of pearl by 12 levels.\n");
 			outputText("-New armor (by Sylabt & Ohaxer): Princess Regalia - obtained by completing Coronation quest at Trench or later from equipment shop. Cost 9,600 gems, 17 armor, 13 magic resistance, light type armor. Increases the damage of and reduces the cost of Mana shot, barrage and charged shot by 50%, also isn’t affected by Miracle Metal debuff for armor, and provides a 15% lifesteal from Mana shot, barrage, charged shot and crunch.\n");
 			outputText("-New P. Special: Ram. Req. to be Arigean Princess. Deals Physical Damage based on Speed, but cause recoil damage equal to 10% of user max HP.\n");
 			outputText("-When reaching lvl 30 and having done all misison from Grayda Arigean PC can have event proc at camp that unlocks new quest 'Coronation'. Visiting her at Trench would send PC to gather materials and then becoming new princess. It's pernament race option so can't return from been Arigean Princess.\n");
@@ -51,18 +52,17 @@ public class Changelog extends BaseContent
 			outputText("-Elf Villager dress cooldown effect only works if the player is an elf, and is changed to be a 1% percentage reduction instead of lustDmg/20 (since it is triggered for every single lust tick, making elves near immune to lust) Reduced lust heal from 'Fueled By Desire' from lustDmg/40 to 10% (to prevent Elves from being near-immune to lust loss) ");
 			outputText("Reduced HP heal from Verdent Leech for Green Magic from 5% to 1% (since they have Arcane Venom to trigger the effect multiple times per turn, making Green Magic better at healing that White Heals)\n");
 			outputText("-Briarthorn's DoT Duration is now affected by the 'Green Magic' perk. Green Magic now has the proper Tier Tags applied to them. Green Magic now properly scales from Intelligence rather than Tease damage, to prevent duplicate damage bonuses such as from the elf villager dress.\n");
+			outputText("-Split 'Plant Growth' spell into 'Plant Growth' and 'Plant Bloom' to make it more explicit when the spell will deal lust damage, and when it will set up plants.\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-\n");
 			//outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
 			//outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
-			outputText("-Split 'Plant Growth' spell into 'Plant Growth' and 'Plant Bloom' to make it more explicit when the spell will deal lust damage, and when it will set up plants. (Demojay)\n");
 			outputText("-Black and Green Arousal spells now scale from both intelligence and libido. Cooldowns for Wave of Ecstasy and Curse of Desire now use the same cooldown function as other spells of those tiers, meaning they don't have a minimum cooldown value to match Green spells. Altered Lust Storm's lust damage so that it uses scaling modifiers like the other lust auras. (Demojay)\n");
 			outputText("-Lust Auras now properly award tease exp upon hit. Added standard formulas for inflicting tease spell damage and awarding tease spell exp in the Abstract Spell class, so that the black arousal spells now benefit from Staff Channelling/ Gazer Eyes. (Demojay)\n");
 			outputText("-Wave of Ecstasy now deals similar damage to plant bloom spell (since they are both tier 1 spells) Curse of Desire now deals the base damage and damage ticks of a standard arouse cast. Fantasize command now scales from base tease damage. (Demojay)\n");
 			outputText("-Fixed bug where the check for whether a companion can act due to being occupied distracting an enemy now applies regardless of whether Simplified Pre-Turn is on. The River Dungeon and Arena team fights now no longer have the chance of softlocking the user if they can instantly kill the enemy, like the Minotaur fight. (Demojay)\n");
 			outputText("-Fixed bug where settings custom drops for certain enemies did not reset after dropping once. Backfire lust damage will now scale will lust rather than a flat rate. (Demojay)\n");
-			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 2. Req. Sky Poison Pearl Mastery 1 perk. It costs 57 asc points and you gain +6 venom recharge speed, +20% to max venom cap, +20% to poison resistance, 200% more spirit stones carried over and lower req. level to open next sections of pearl by 12 levels.\n");
 			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 3. Req. Sky Poison Pearl Mastery 2 perk. It costs 93 asc points and you gain +9 venom recharge speed, +30% to max venom cap, +30% to poison resistance, 300% more spirit stones carried over and lower req. level to open next sections of pearl by 18 levels.\n");
 			outputText("-Beautiful Sword and Whip would now have additional effect of giving 2x more exp for weapon mastery. Beautiful Staff would have additional effect of -1 turn cooldown duration of tier 1 spells.\n");
 			outputText("-New M. Special: Charged Shot. Req. to be Arigean Princess. A two turn charged str scaling range attack costing mana (~400) and dealing magic damage.\n");
@@ -121,6 +121,8 @@ public class Changelog extends BaseContent
 			outputText("-I moved the code for the tavern to its own file, added checks to handle additional ear types, and finally introduced Xianxia early via a 'rumor' in the tavern. (jfmherokiller)\n");
 			outputText("-New flying sword: Aquamarine Half-Moon - buyable at 'Flying Swords are always with you!' shop in He'Xin'Dao. Cost 150 spirit stones. Base atk is 15. It's classified as Large flying sword. Deal water damage instead of physical damage.\n");
 			outputText("-New flying sword: Obsidian Half-Moon - buyable at 'Flying Swords are always with you!' shop in He'Xin'Dao. Cost 150 spirit stones. Base atk is 15. It's classified as Large flying sword. Deal earth damage instead of physical damage.\n");
+			outputText("-PC can buy now in the same place as Simple Alembic or Simple Furnance 4 basic versions of Alembic Catalysts. They costs 1000 gems each and can be reused increasing chance to get the desires item when decomposing TF item by 1,5x.\n");
+			outputText("-Due to confusion on leaving river dungeon during first visit there there was added condition to help shield maiden henchmen find enough loot. It also extends to activating teleport circle to 2nd floor. Sad news... now all PC's must take time to explore first floor to find this seceretly hidden 2nd loot location without been distracted of going into deeper floors by accident.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -143,16 +145,15 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Demojay) (jfmherokiller) (NUZ/Shirane) (Xetaxheb)
 			outputText("-\n");
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Demojay) (jfmherokiller) (NUZ/Shirane) (Xetaxheb)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Arigean above Recruit rank not immune to tf-ing effects, deer arms tf unlocking canine arms MM, unable to find tel'adre again after first time seeing it with too high corruption or other factor that not allowed entrance; Arigean above recruit rank marking, eye color and aura with mismatching colors; demon/arigean arms MM option giving instead devil/abyssal shark arms, ");
 			outputText("Zenji training stats not having gains decrease from +4 to +1 for repeated training before daily reset for other than wisdom stats, resources not been recovered after using specials/soulskills/spells, nail buy menu at carpenter having misleading text, combat wounds % display at stats page been 100x lower\n\n");
@@ -214,7 +215,11 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -241,6 +246,8 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

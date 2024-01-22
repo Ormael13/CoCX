@@ -283,7 +283,6 @@ public class HeXinDao extends BaseContent
 		addButton(10, "Alch.Tools", alchemyTools).hint("Check out alchemy equipment.");
 		addButton(13, "IncenOfInsig", buyItem1,consumables.INCOINS, sayLine1(consumables.INCOINS,"These incenses are useful. They will grant you visions for a short moment while meditating. This should help you find the wisdom and insight you need.")).hint("Incense of Insight.");
 		addButton(14, "Back", riverislandVillageStuff);
-
         statScreenRefresh();
     }
 	private function alchemyTools():void {
@@ -303,7 +302,6 @@ public class HeXinDao extends BaseContent
 			}
 			outputText(" in your camp.</b>")
 		}
-
 		function buyAlembic(tier:int, priceGems:int):void {
 			Crafting.alembicLevel = tier;
 			player.gems -= priceGems;
@@ -318,7 +316,12 @@ public class HeXinDao extends BaseContent
 			statScreenRefresh();
 			doNext(alchemyTools);
 		}
-
+		function buyCatalyst(itype:ItemType):void {
+			player.gems -= 1000;
+			outputText("\n\n<b>"+itype.shortName+" purchased!</b>");
+			statScreenRefresh();
+			inventory.takeItem(itype, alchemyTools);
+		}
 		menu();
 		button(0).show("Alembic I", curry(buyAlembic, Crafting.ALEMBIC_LEVEL_SIMPLE, Crafting.ALEMBIC_LEVELS[Crafting.ALEMBIC_LEVEL_SIMPLE].value))
 				 .hint("Buy a simple alembic to refine substances from ingredients.\n\nCost: "+Crafting.ALEMBIC_LEVELS[Crafting.ALEMBIC_LEVEL_SIMPLE].value+" gems.")
@@ -329,6 +332,10 @@ public class HeXinDao extends BaseContent
 				 .hint("Buy a simple alchemic furnace to combine substances into pills.\n\nCost: "+Crafting.FURNACE_LEVELS[Crafting.FURNACE_LEVEL_SIMPLE].value+" gems.")
 				.disableIf(player.gems < Crafting.FURNACE_LEVELS[Crafting.FURNACE_LEVEL_SIMPLE].value)
 				 .disableIf(Crafting.furnaceLevel >= Crafting.FURNACE_LEVEL_SIMPLE, "++\n\n<b>You don't need that!</b>");
+		addButtonIfTrue(5, "Min.Sub.ACat", curry(buyCatalyst, useables.MIN_SUB_ACAT), "This item costs 1000 gems.", player.gems >= 1000, "This magical crystal, when placed inside alchemical alembic, slightly increases chances to extract substance. It is not consumed in the process and can be used muliple times.");
+		addButtonIfTrue(6, "Min.Ess.ACat", curry(buyCatalyst, useables.MIN_ESS_ACAT), "This item costs 1000 gems.", player.gems >= 1000, "This magical crystal, when placed inside alchemical alembic, slightly increases chances to extract essence. It is not consumed in the process and can be used muliple times.");
+		addButtonIfTrue(7, "Min.Res.ACat", curry(buyCatalyst, useables.MIN_RES_ACAT), "This item costs 1000 gems.", player.gems >= 1000, "This magical crystal, when placed inside alchemical alembic, slightly increases chances to extract residue. It is not consumed in the process and can be used muliple times.");
+		addButtonIfTrue(8, "Min.Pig.ACat", curry(buyCatalyst, useables.MIN_PIG_ACAT), "This item costs 1000 gems.", player.gems >= 1000, "This magical crystal, when placed inside alchemical alembic, slightly increases chances to extract pigment. It is not consumed in the process and can be used muliple times.");
 		button(14).show("Back", golemmerchant);
 	}
     private function debitItem1(returnFunc:Function,shopKeep:String,priceRate:int,itype:ItemType,onBuy:String):void{

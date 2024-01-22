@@ -719,7 +719,7 @@ public class RiverDungeon extends DungeonAbstractContent
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Small Bats fly out as you walk by above your head hangs some large stalactites. It would be most unfortunate if one of these was to randomly fall down and run you through.");
 			dungeons.setDungeonButtonsRD(roomA05, null, null, null);
-			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 1) addButton(11, "Down", roomB01);
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 1) addButtonIfTrue(11, "Down", roomB01, "You still need to find enough (two piles) of treasure to pay back shield maiden for help to get into this dungeon. Maybe search again whole floor carefully?", flags[kFLAGS.NEISA_FOLLOWER] >= 3);
 			else addButtonDisabled(11, "Down", "You still need to beat the guardians of this floor to descend into lower strata of the dungeon.");
 		}
 		public function roomA07():void {
@@ -1982,8 +1982,8 @@ public class RiverDungeon extends DungeonAbstractContent
 		private function teleportCircleFloor1():void {
 			menu();
 			addButtonDisabled(0, "Floor 1", "You're currently at Floor 1.");
-			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 1) addButton(1, "Floor 2", teleportToFloor2);
-			else addButtonDisabled(1, "Floor 2", "You still need to beat guardians of floor 1 to use this teleport option.");
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 1 && flags[kFLAGS.NEISA_FOLLOWER] >= 3) addButton(1, "Floor 2", teleportToFloor2);
+			else addButtonDisabled(1, "Floor 2", "You still need to beat guardians of floor 1 to use this teleport option. Also need to be able to leave dungeon at any time (paying back shield maiden for her help).");
 			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6) addButton(2, "Floor 3", teleportToFloor3);
 			else addButtonDisabled(2, "Floor 3", "You still need to beat guardian of floor 2 to use this teleport option.");
 			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(3, "Floor 4", teleportToFloor4);
