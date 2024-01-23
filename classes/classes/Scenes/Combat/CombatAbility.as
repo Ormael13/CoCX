@@ -213,7 +213,11 @@ public class CombatAbility extends BaseCombatContent {
 		name: 'Magical',
 		desc: "This ability deals magical damage"
 	});
-	public static const TAG_PLASMA:int = EnumValue.add(AllTags, 20, 'PLASMA', {
+	public static const TAG_POISON:int = EnumValue.add(AllTags, 20, 'POISON', {
+		name: 'Poison',
+		desc: "This ability's primary element is Poison"
+	});
+	public static const TAG_PLASMA:int = EnumValue.add(AllTags, 21, 'PLASMA', {
 		name: 'Plasma',
 		desc: "This ability's primary element is Plasma"
 	});

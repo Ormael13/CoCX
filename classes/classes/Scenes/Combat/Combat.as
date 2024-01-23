@@ -15625,7 +15625,8 @@ public function flyingSwordAttackCost():Number {
     if (player.weaponFlyingSwordsPerk == "Large") fsac *= 3;
     if (player.weaponFlyingSwordsPerk == "Massive") fsac *= 6;
     if (player.weaponFlyingSwordsCount > 1) fsac *= player.weaponFlyingSwordsCount;
-	 if (player.weaponFlyingSwords == weaponsflyingswords.ASAUCHI) fsac *= 0.6;
+	if (player.weaponFlyingSwords == weaponsflyingswords.ASAUCHI) fsac *= 0.6;
+	if (player.weaponFlyingSwords == weaponsflyingswords.C_NEW_M) fsac *= 1.1;
     return fsac;
 }
 
@@ -15980,4 +15981,4 @@ private function touSpeStrScale(stat:int):Number {
         return player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater) || explorer.areaTags.water;
     }
 }
-}
+}
