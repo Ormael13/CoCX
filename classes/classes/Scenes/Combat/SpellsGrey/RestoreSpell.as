@@ -49,7 +49,7 @@ public class RestoreSpell extends AbstractGreySpell {
 			if (display) {
 				outputText("As you incant the spell, your wounds begin to close on their own. Your pain fades away, and as your bleeding stops, you're filled with a sense of relief...and energy. You're not out of this fight yet!");
 			}
-			CombatAbilities.Heal.doEffect(false)
+			CombatAbilities.Heal.doEffect(false);
 			if (player.hasStatusEffect(StatusEffects.PlayerRegenerate)) player.addStatusValue(StatusEffects.PlayerRegenerate,1,calcDuration());
 			else player.createStatusEffect(StatusEffects.PlayerRegenerate,calcDuration(),0,0,0);
 		}

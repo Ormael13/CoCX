@@ -127,6 +127,7 @@ public class Changelog extends BaseContent
 			outputText("-New flying sword: Obsidian Half-Moon Duo - combined from two Obsidian Half-Moon swords. Cost 300 spirit stones. Base atk is 15. It's classified as Large flying sword (set of 2). Deal earth damage instead of physical damage.\n");
 			outputText("-New flying sword: Chrysolite New Moon - buyable at 'Flying Swords are always with you!' shop in He'Xin'Dao. Cost 375 spirit stones. Base atk is 40. It's classified as Massive flying sword. Deal plasma damage instead of physical damage. Soulforce cost of using it to fly or attack are increased by 10%.\n");
 			outputText("-New tier 9 misc lvl-up perk: Subzero Lustful Fury. Req. Prestige Job: Berzerker and Colder Lust / Colder Fury perks. Effect: Decreasing health loss from activating higher grades of berzerking/lustzerking by 25%. Allow to activate 2 grades of berzerker/lustzerker state at once when you have Endless Rage perk.\n");
+			outputText("-If player know spell Heal or Cure and have enough mana can use them out of combat in camp (Camp Actions > Spend Time).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -150,11 +151,14 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Demojay) (jfmherokiller) (NUZ/Shirane) (Xetaxheb)
+			outputText("-\n");
+			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Arigean above Recruit rank not immune to tf-ing effects, deer arms tf unlocking canine arms MM, unable to find tel'adre again after first time seeing it with too high corruption or other factor that not allowed entrance; Arigean above recruit rank marking, eye color and aura with mismatching colors; demon/arigean arms MM option giving instead devil/abyssal shark arms, ");
@@ -221,7 +225,11 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -252,6 +260,8 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

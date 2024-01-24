@@ -2210,6 +2210,8 @@ public class Camp extends NPCAwareContent{
 		if (player.hasKeyItem("Gryphon Statuette") >= 0) addButton(9, "Gryphon", useGryphonStatuette);
 		if (player.hasKeyItem("Peacock Statuette") >= 0) addButton(9, "Peacock", usePeacockStatuette);
 		if (player.hasKeyItem("Gryphon Statuette") == 0 && player.hasKeyItem("Peacock Statuette") == 0) addButtonDisabled(9, "???", "Perhaps if you had a magical statuette...");
+		addButtonIfTrue(10, "Heal", useHealAtCamp, "Req. knowing Heal spell and have 30+ mana.", player.hasStatusEffect(StatusEffects.KnowsHeal) && player.mana >= 30);
+		addButtonIfTrue(11, "Cure", useCureAtCamp, "Req. knowing Cure spell and have 500+ mana.", player.hasStatusEffect(StatusEffects.KnowsCure) && player.mana >= 500);
 		addButton(14, "Back", campActions);
 	}
 
@@ -3734,6 +3736,21 @@ public class Camp extends NPCAwareContent{
 	private function usePeacockStatuette():void {
 		CoC.instance.mutations.skybornSeed(2, player);
 		advanceMinutes(5);
+		doNext(playerMenu);
+	}
+	
+	private function useHealAtCamp():void {
+		clearOutput();
+		EngineCore.ManaChange(-30);
+		CombatAbilities.Heal.doEffect();
+		advanceMinutes(15);
+		doNext(playerMenu);
+	}
+	private function useCureAtCamp():void {
+		clearOutput();outputText("You channel white magic to rid yourself of all negative effect affecting you.");
+		EngineCore.ManaChange(-500);
+		CombatAbilities.Cure.doEffect();
+		advanceMinutes(15);
 		doNext(playerMenu);
 	}
 
