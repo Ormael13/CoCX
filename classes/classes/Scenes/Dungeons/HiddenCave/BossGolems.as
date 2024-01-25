@@ -100,7 +100,7 @@ public class BossGolems extends AbstractGargoyle
 			this.short = "guardian quasi-gargoyles";
 			this.imageName = "guardian quasi-gargoyles";
 			this.plural = true;
-			this.lustVuln = 0;
+			this.lustVuln = 0.01;
 			this.createBreastRow(0, 1);
 			initGenderless();
 			this.tallness = 72;

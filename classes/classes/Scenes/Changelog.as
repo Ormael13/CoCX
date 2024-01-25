@@ -37,12 +37,18 @@ public class Changelog extends BaseContent
 			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 1. No Req. It costs 21 asc points and you gain +3 venom recharge speed, +10% to max venom cap, +10% to poison resistance, 100% more spirit stones carried over and lower req. level to open next sections of pearl by 6 levels.\n");
 			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 2. Req. Sky Poison Pearl Mastery 1 perk. It costs 57 asc points and you gain +6 venom recharge speed, +20% to max venom cap, +20% to poison resistance, 200% more spirit stones carried over and lower req. level to open next sections of pearl by 12 levels.\n");
 			outputText("-New armor (by Sylabt & Ohaxer): Princess Regalia - obtained by completing Coronation quest at Trench or later from equipment shop. Cost 9,600 gems, 17 armor, 13 magic resistance, light type armor. Increases the damage of and reduces the cost of Mana shot, barrage and charged shot by 50%, also isn’t affected by Miracle Metal debuff for armor, and provides a 15% lifesteal from Mana shot, barrage, charged shot and crunch.\n");
+			outputText("-New flying sword: White Half-Moon Quartet - combined from two White Half-Moon Duo sword sets. Cost 240 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 4). Deal fire damage instead of physical damage.\n");
+			outputText("-New flying sword: Black Half-Moon Quartet - combined from two Black Half-Moon Duo sword sets. Cost 240 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 4). Deal ice damage instead of physical damage.\n");
+			outputText("-New flying sword: Scarlet Half-Moon Quartet - combined from two Scarlet Half-Moon Duo sword sets. Cost 240 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 4). Deal lightning damage instead of physical damage.\n");
+			outputText("-New flying sword: Ebon Half-Moon Quartet - combined from two Ebon Half-Moon Duo sword sets. Cost 240 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 4). Deal darkness damage instead of physical damage.\n");
 			outputText("-New P. Special: Ram. Req. to be Arigean Princess. Deals Physical Damage based on Speed, but cause recoil damage equal to 10% of user max HP.\n");
 			outputText("-When reaching lvl 30 and having done all misison from Grayda Arigean PC can have event proc at camp that unlocks new quest 'Coronation'. Visiting her at Trench would send PC to gather materials and then becoming new princess. It's pernament race option so can't return from been Arigean Princess.\n");
 			outputText("-Arigean Princess (23+) stat bonuses: +430% to str multi, +430% to spe multi, +310% to tou multi, -75% to int multi, -60% to wisdom multi, +65 Min Corruption, +10 armor. She can use additional specials: Grab and Guillotine (both works like the ones from Cancer race)\n");
 			outputText("-Juvenile abyssal sharks can sometimes be too happy to bite more then PC have (still left) so now they will stop when pc have penalty of 99% on combat wounds.\n");
+			outputText("-Beautiful Sword and Whip would now have additional effect of giving 2x more exp for weapon mastery. Beautiful Staff would have additional effect of -1 turn cooldown duration of tier 1 spells.\n");
 			outputText("-Fixes: Sval's All IMutations perks displayed, Buff display bug, parser bug when apllying a skin color change using snake oil. (Jtecx)\n");
 			outputText("-The Trench store no longer gives you stuff when you don't have the money for it. (Jtecx)\n");
+			outputText("-Hellhound balls mutation firedamage bonus fix (Yes previously it doesn't give any, well have fun I guess). (NUZ/Shirane)\n");
 			outputText("<b>Demojay contributions:</b>\n");
 			outputText("-Fixed: True Dragon Breath Bug, bug where Flying Swords could independently attack even without the needed perk at the start of the game, Goodra's wrong nail count display for carpenters store, 4th stage of Fey Bloodline not giving int bonuses.\n");
 			outputText("-Damaging Soulskills now cannot hit invisible targets. Great Dive now cannot hit invisible targets.\n");
@@ -53,29 +59,24 @@ public class Changelog extends BaseContent
 			outputText("Reduced HP heal from Verdent Leech for Green Magic from 5% to 1% (since they have Arcane Venom to trigger the effect multiple times per turn, making Green Magic better at healing that White Heals)\n");
 			outputText("-Briarthorn's DoT Duration is now affected by the 'Green Magic' perk. Green Magic now has the proper Tier Tags applied to them. Green Magic now properly scales from Intelligence rather than Tease damage, to prevent duplicate damage bonuses such as from the elf villager dress.\n");
 			outputText("-Split 'Plant Growth' spell into 'Plant Growth' and 'Plant Bloom' to make it more explicit when the spell will deal lust damage, and when it will set up plants.\n");
+			outputText("-Black and Green Arousal spells now scale from both intelligence and libido. Cooldowns for Wave of Ecstasy and Curse of Desire now use the same cooldown function as other spells of those tiers, meaning they don't have a minimum cooldown value to match Green spells. Altered Lust Storm's lust damage so that it uses scaling modifiers like the other lust auras.\n");
+			outputText("-Lust Auras now properly award tease exp upon hit. Added standard formulas for inflicting tease spell damage and awarding tease spell exp in the Abstract Spell class, so that the black arousal spells now benefit from Staff Channelling/ Gazer Eyes.\n");
+			outputText("-Wave of Ecstasy now deals similar damage to plant bloom spell (since they are both tier 1 spells) Curse of Desire now deals the base damage and damage ticks of a standard arouse cast. Fantasize command now scales from base tease damage.\n");
+			outputText("-Fixed bug where the check for whether a companion can act due to being occupied distracting an enemy now applies regardless of whether Simplified Pre-Turn is on. The River Dungeon and Arena team fights now no longer have the chance of softlocking the user if they can instantly kill the enemy, like the Minotaur fight.\n");
+			outputText("-Fixed bug where settings custom drops for certain enemies did not reset after dropping once. Backfire lust damage will now scale will lust rather than a flat rate.\n");
+			outputText("-Added Might spell to Zetaz that can be used once on difficulties higher than normal. Added monster damage function based off of libido.\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-\n");
 			//outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
 			//outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
-			outputText("-Black and Green Arousal spells now scale from both intelligence and libido. Cooldowns for Wave of Ecstasy and Curse of Desire now use the same cooldown function as other spells of those tiers, meaning they don't have a minimum cooldown value to match Green spells. Altered Lust Storm's lust damage so that it uses scaling modifiers like the other lust auras. (Demojay)\n");
-			outputText("-Lust Auras now properly award tease exp upon hit. Added standard formulas for inflicting tease spell damage and awarding tease spell exp in the Abstract Spell class, so that the black arousal spells now benefit from Staff Channelling/ Gazer Eyes. (Demojay)\n");
-			outputText("-Wave of Ecstasy now deals similar damage to plant bloom spell (since they are both tier 1 spells) Curse of Desire now deals the base damage and damage ticks of a standard arouse cast. Fantasize command now scales from base tease damage. (Demojay)\n");
-			outputText("-Fixed bug where the check for whether a companion can act due to being occupied distracting an enemy now applies regardless of whether Simplified Pre-Turn is on. The River Dungeon and Arena team fights now no longer have the chance of softlocking the user if they can instantly kill the enemy, like the Minotaur fight. (Demojay)\n");
-			outputText("-Fixed bug where settings custom drops for certain enemies did not reset after dropping once. Backfire lust damage will now scale will lust rather than a flat rate. (Demojay)\n");
 			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 3. Req. Sky Poison Pearl Mastery 2 perk. It costs 93 asc points and you gain +9 venom recharge speed, +30% to max venom cap, +30% to poison resistance, 300% more spirit stones carried over and lower req. level to open next sections of pearl by 18 levels.\n");
-			outputText("-Beautiful Sword and Whip would now have additional effect of giving 2x more exp for weapon mastery. Beautiful Staff would have additional effect of -1 turn cooldown duration of tier 1 spells.\n");
 			outputText("-New M. Special: Charged Shot. Req. to be Arigean Princess. A two turn charged str scaling range attack costing mana (~400) and dealing magic damage.\n");
 			outputText("-New event perk: Arigean Knowledge. Gained by becoming Arigean Princess. Effects: The knowledge of your Arigean ancestors rests in your mind. Gain immunity to mental debuffs and intelligence min is increased to 90.\n");
-			outputText("-New flying sword: White Half-Moon Quartet - combined from two White Half-Moon Duo sword sets. Cost 240 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 4). Deal fire damage instead of physical damage.\n");
-			outputText("-New flying sword: Black Half-Moon Quartet - combined from two Black Half-Moon Duo sword sets. Cost 240 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 4). Deal ice damage instead of physical damage.\n");
-			outputText("-New flying sword: Scarlet Half-Moon Quartet - combined from two Scarlet Half-Moon Duo sword sets. Cost 240 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 4). Deal lightning damage instead of physical damage.\n");
-			outputText("-New flying sword: Ebon Half-Moon Quartet - combined from two Ebon Half-Moon Duo sword sets. Cost 240 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 4). Deal darkness damage instead of physical damage.\n");
-			outputText("-Added Might spell to Zetaz that can be used once on difficulties higher than normal. Added monster damage function based off of libido. (Demojay)\n");
 			outputText("-Fixed bug relating to showing special statuses for bosses. (Demojay)\n");
 			outputText("-Added 'GigaWhitefire' spell to Zetaz. 'zetazMight' now causes Zetaz to start flying. Zetaz's 'Gust' attack is not used if the enemy is already blinded. (Demojay)\n");
 			outputText("-Omnibus Overseer's 'lust aura' and 'milk attack' moves now deal scaling damage. 'Lust Aura' DoT now deals scaling libido damage. Stunning/Confusing/Fearing the Overseer will disrupt their Lust Aura. Added message to Omnibus Overseer Lust Aura, to signal that they should try disrupting the boss to cancel the aura. (Demojay)\n");
-			outputText("-Qi - owner of 'Flying Swords are always with you!' no more in closed doors cultivation session. And now he can train or sell some more specialistic manuals to PC.\n");
+			outputText("-Qi - owner of 'Flying Swords are always with you!' is no more in closed doors cultivation session. And now he can train or sell some more specialistic manuals to PC.\n");
 			outputText("-Flying Sword Path, Soaring Blades, First Attack: Flying Sword Killing Intent perks no longer are in level up menu. All spend before perks are refunded no worried.\n");
 			outputText("-Flying Sword Path perk have now ranks and 1st rank is learned by training with Qi costing 50 spirit stones for training.\n");
 			outputText("-New consumable: Soaring Blades manual. Req. buying manual from Qi for 50 spirit stones after finsining basic training with him. Using will grant perk Soaring Blades.\n");
@@ -102,7 +103,6 @@ public class Changelog extends BaseContent
 			outputText("-Adjusted SF-infused Blood Requiem damage to be in line with other Blood Soulskills. (Demojay)\n");
 			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 4. Req. Sky Poison Pearl Mastery 3 perk. It costs 129 asc points and you gain +12 venom recharge speed, +40% to max venom cap, +40% to poison resistance, 400% more spirit stones carried over and lower req. level to open next sections of pearl by 24 levels.\n");
 			outputText("-Added Shouldra to disable/enable menu. Disabling her if she's in camp already would reset tracker how much min lust she rising.\n");
-			outputText("-Hellhound balls mutation firedamage bonus fix (Yes previously it doesn't give any, well have fun I guess). (NUZ/Shirane)\n");
 			outputText("-Fixed in Debug Menu Body part editor when selecting colours. (Demojay)\n");
 			outputText("-Moved Dragon Boi toggle to turn on/off from Members to Others subtab in NPC's tab from Camp Actions menu.\n");
 			outputText("-First four golem guardians in Hidden Cave now would wander their designed area appearing in one of eight rooms instead of four specific ones in specific order. If PC have basic versions of albemic or furnance bought can find bit better one versions of them in Hidden Cave dungeon and then 'borrow' those for 'unlimited time duration'. ");
@@ -128,6 +128,10 @@ public class Changelog extends BaseContent
 			outputText("-New flying sword: Chrysolite New Moon - buyable at 'Flying Swords are always with you!' shop in He'Xin'Dao. Cost 375 spirit stones. Base atk is 40. It's classified as Massive flying sword. Deal plasma damage instead of physical damage. Soulforce cost of using it to fly or attack are increased by 10%.\n");
 			outputText("-New tier 9 misc lvl-up perk: Subzero Lustful Fury. Req. Prestige Job: Berzerker and Colder Lust / Colder Fury perks. Effect: Decreasing health loss from activating higher grades of berzerking/lustzerking by 25%. Allow to activate 2 grades of berzerker/lustzerker state at once when you have Endless Rage perk.\n");
 			outputText("-If player know spell Heal or Cure and have enough mana can use them out of combat in camp (Camp Actions > Spend Time).\n");
+			outputText("-Construct enemy type can be now affected by lust attacks (and their lust vul been tiny bit incresed to not be 0 anymore). They not gonna masturbate but would getting more glitched until they deactivate allowing for lust win against them. Past 85% threshold they even could radomly skip actions in their turn.\n");
+			outputText("-Added to drop tables of all goblin type enemies: Healing herb, Moon grass, Snakebane, Ironweed, Blade fern. With low chance added to Goblin Shaman drop table Alraune nectar, Ginseng.\n");
+			outputText("-Healing herb and Snakebane flower can be found radomly during forest exploration like ehal pills or truffles.\n");
+			outputText("-Sand Witch drop table slight adjusted with weapons/spell teaching items been bit more common. Fetish male cultists enemies dropping more weapons and less lust drafts.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -151,12 +155,14 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Demojay) (jfmherokiller) (NUZ/Shirane) (Xetaxheb)
 			outputText("-\n");
-			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -227,7 +233,11 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -260,6 +270,8 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

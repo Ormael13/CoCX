@@ -38,25 +38,27 @@ package classes.Scenes.Monsters
 		
 		override protected function performCombatAction():void
 		{
-			if (hasStatusEffect(StatusEffects.Provoke)) {
-				var choiceP:Number = rand(3);
-				if (choiceP == 0) eAttack();
-				if (choiceP == 1) backhand();
-				if (choiceP == 2) overhandSmash();
-			}
-			else {
-				if (this.HPRatio() < 0.6) {
-					var choice2:Number = rand(5);
-					if (choice2 < 3) eAttack();
-					if (choice2 == 3) backhand();
-					if (choice2 == 4) overhandSmash();
+			if ((this.lust100 >= 85 && rand(2) == 0) || this.lust100 < 85) {
+				if (hasStatusEffect(StatusEffects.Provoke)) {
+					var choiceP:Number = rand(3);
+					if (choiceP == 0) eAttack();
+					if (choiceP == 1) backhand();
+					if (choiceP == 2) overhandSmash();
 				}
-				else if (this.HPRatio() < 0.8) {
-					var choice1:Number = rand(4);
-					if (choice1 < 3) eAttack();
-					if (choice1 == 3) backhand();
+				else {
+					if (this.HPRatio() < 0.6) {
+						var choice2:Number = rand(5);
+						if (choice2 < 3) eAttack();
+						if (choice2 == 3) backhand();
+						if (choice2 == 4) overhandSmash();
+					}
+					else if (this.HPRatio() < 0.8) {
+						var choice1:Number = rand(4);
+						if (choice1 < 3) eAttack();
+						if (choice1 == 3) backhand();
+					}
+					else eAttack();
 				}
-				else eAttack();
 			}
 		}
 		

@@ -35,7 +35,7 @@ import classes.internals.ChainedDrop;
 			this.long = "This animate marble statue shows numerous signs of wear and tear, but remains as strong and stable as the day it was carved. Its pearly, white skin is pockmarked in places from age, yet the alabaster muscles seem to move with almost liquid grace. You get the impression that the statue was hewn in the days before the demons, then brought to life shortly after. It bears a complete lack of genitalia - an immaculately carved leaf is all that occupies its loins. It wields a hammer carved from the same material as the rest of it.";
 			initStrTouSpeInte(400, 480, 100, 120);
 			initWisLibSensCor(120, 10, 10, 100);
-			this.lustVuln = 0;
+			this.lustVuln = 0.01;
 			this.tallness = 16 * 12;
 			this.createBreastRow(0, 1);
 			initGenderless();
@@ -187,30 +187,32 @@ import classes.internals.ChainedDrop;
 		
 		override protected function performCombatAction():void
 		{
-			if (hasStatusEffect(StatusEffects.Provoke)) {
-				if (!this.hasStatusEffect(StatusEffects.KnockedBack)) this.backhand();
-				else if (!this.hasStatusEffect(StatusEffects.Disarmed) && player.weaponName != "fists") this.disarm();
-				else {
-					var opts1:Array = [];
-					if (!player.hasStatusEffect(StatusEffects.Blind) && !player.hasStatusEffect(StatusEffects.Stunned)) opts1.push(dirtKick);
-					if (!player.hasStatusEffect(StatusEffects.Blind) && !player.hasStatusEffect(StatusEffects.Stunned)) opts1.push(concussiveBlow);
-					opts1.push(cycloneStrike);
-					opts1.push(cycloneStrike);
-					opts1.push(overhandSmash);
-					opts1[rand(opts1.length)]();
+			if ((this.lust100 >= 85 && rand(2) == 0) || this.lust100 < 85) {
+				if (hasStatusEffect(StatusEffects.Provoke)) {
+					if (!this.hasStatusEffect(StatusEffects.KnockedBack)) this.backhand();
+					else if (!this.hasStatusEffect(StatusEffects.Disarmed) && player.weaponName != "fists") this.disarm();
+					else {
+						var opts1:Array = [];
+						if (!player.hasStatusEffect(StatusEffects.Blind) && !player.hasStatusEffect(StatusEffects.Stunned)) opts1.push(dirtKick);
+						if (!player.hasStatusEffect(StatusEffects.Blind) && !player.hasStatusEffect(StatusEffects.Stunned)) opts1.push(concussiveBlow);
+						opts1.push(cycloneStrike);
+						opts1.push(cycloneStrike);
+						opts1.push(overhandSmash);
+						opts1[rand(opts1.length)]();
+					}
 				}
-			}
-			else {
-				if (this.HPRatio() < 0.7 && !this.hasStatusEffect(StatusEffects.KnockedBack)) this.backhand();
-				else if (this.HPRatio() < 0.4 && !this.hasStatusEffect(StatusEffects.Disarmed) && player.weaponName != "fists") this.disarm();
 				else {
-					var opts:Array = [];
-					if (!player.hasStatusEffect(StatusEffects.Blind) && !player.hasStatusEffect(StatusEffects.Stunned)) opts.push(dirtKick);
-					if (!player.hasStatusEffect(StatusEffects.Blind) && !player.hasStatusEffect(StatusEffects.Stunned)) opts.push(concussiveBlow);
-					opts.push(cycloneStrike);
-					opts.push(cycloneStrike);
-					opts.push(overhandSmash);
-					opts[rand(opts.length)]();
+					if (this.HPRatio() < 0.7 && !this.hasStatusEffect(StatusEffects.KnockedBack)) this.backhand();
+					else if (this.HPRatio() < 0.4 && !this.hasStatusEffect(StatusEffects.Disarmed) && player.weaponName != "fists") this.disarm();
+					else {
+						var opts:Array = [];
+						if (!player.hasStatusEffect(StatusEffects.Blind) && !player.hasStatusEffect(StatusEffects.Stunned)) opts.push(dirtKick);
+						if (!player.hasStatusEffect(StatusEffects.Blind) && !player.hasStatusEffect(StatusEffects.Stunned)) opts.push(concussiveBlow);
+						opts.push(cycloneStrike);
+						opts.push(cycloneStrike);
+						opts.push(overhandSmash);
+						opts[rand(opts.length)]();
+					}
 				}
 			}
 		}

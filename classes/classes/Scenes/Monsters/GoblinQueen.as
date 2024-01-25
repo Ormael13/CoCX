@@ -51,7 +51,14 @@ public class GoblinQueen extends Goblin
 							consumables.BLUEDYE,
 							consumables.ORANGDY,
 							consumables.GREEN_D,
-							consumables.PURPDYE);
+							consumables.PURPDYE,
+							consumables.HEALHERB,
+							consumables.MOONGRASS,
+							consumables.SNAKEBANE,
+							consumables.IRONWEED,
+							consumables.BLADEFERN,
+							consumables.RAUNENECT,
+							consumables.GINSENG);
 			this.special1 = goblinDrugAttack;
 			this.special2 = goblinTeaseAttack;
 			//this.special3 = castSpell;

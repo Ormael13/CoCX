@@ -30,9 +30,10 @@ public class HiddenCave extends DungeonAbstractContent
 		}
 		
 		public function meetLoliBatGolem():void {
-			if (player.statusEffectv1(StatusEffects.LoliBatGolems) > 9) {
+			if (player.statusEffectv1(StatusEffects.LoliBatGolems) > 9 && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
 				player.removeStatusEffect(StatusEffects.LoliBatGolems);
 				outputText("\n\nA bat-shaped figures standing near you suddenly starting to move toward you with clearly hostile intentions.");
+				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 				startCombat(new LoliBatGolem(), true);
 				flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS]++;
 				doNext(playerMenu);
@@ -77,7 +78,7 @@ public class HiddenCave extends DungeonAbstractContent
 			outputText("<b><u>SE Underground Passage</u></b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 4) meetLoliBatGolem();
 			outputText("The corridor in front of you is covered with crystal formation that glow eerily in the dark. Every now and then, you spot a shadow from the corner of your eyes but clearly this must only be your imagination.");
-			dungeons.setDungeonButtons(roomEUP, null, roomSUP, roomEntrance);
+			dungeons.setDungeonButtonsRD(roomEUP, null, roomSUP, roomEntrance);
 		}
 		public function roomEUP():void {
 			dungeonLoc = DUNGEON_HIDDEN_CAVE_E_UP;
@@ -85,7 +86,7 @@ public class HiddenCave extends DungeonAbstractContent
 			outputText("<b><u>E Underground Passage</u></b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 4) meetLoliBatGolem();
 			outputText("This corridor is decorated with many silent statue. You somehow have the impression that they are watching you.");
-			dungeons.setDungeonButtons(roomNEUP, roomSEUP, null, null);
+			dungeons.setDungeonButtonsRD(roomNEUP, roomSEUP, null, null);
 		}
 		public function roomNEUP():void {
 			dungeonLoc = DUNGEON_HIDDEN_CAVE_NE_UP;
@@ -93,7 +94,7 @@ public class HiddenCave extends DungeonAbstractContent
 			outputText("<b><u>NE Underground Passage</u></b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 4) meetLoliBatGolem();
 			outputText("The corridor in front of you is covered with crystal formation that glow eerily in the dark. Every now and then, you spot a shadow from the corner of your eyes but clearly this must only be your imagination.");
-			dungeons.setDungeonButtons(null, roomEUP, roomNUP, null);
+			dungeons.setDungeonButtonsRD(null, roomEUP, roomNUP, null);
 		}
 		public function roomNUP():void {
 			dungeonLoc = DUNGEON_HIDDEN_CAVE_N_UP;
@@ -101,7 +102,7 @@ public class HiddenCave extends DungeonAbstractContent
 			outputText("<b><u>N Underground Passage</u></b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 4) meetLoliBatGolem();
 			outputText("Various shattered humanoid skeletons litter the floor in this corridor. They look demonic in origin. Whatever lives heres kills demon in cold blood.");
-			dungeons.setDungeonButtons(null, null, roomNWUP, roomNEUP);
+			dungeons.setDungeonButtonsRD(null, null, roomNWUP, roomNEUP);
 		}
 		public function roomSStaircase():void {
             dungeonLoc = DUNGEON_HIDDEN_CAVE_S_STAIRCASE;
@@ -117,7 +118,7 @@ public class HiddenCave extends DungeonAbstractContent
 			outputText("<b><u>S Underground Passage</u></b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 4) meetLoliBatGolem();
 			outputText("This corridor is decorated with many silent statue. You somehow have the impression that they are watching you.");
-			dungeons.setDungeonButtons(null, null, roomSWUP, roomSEUP);
+			dungeons.setDungeonButtonsRD(null, null, roomSWUP, roomSEUP);
 		}
 		public function roomSStorage():void {
             var beatmore:int = 8 - flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] - flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS];
@@ -152,7 +153,7 @@ public class HiddenCave extends DungeonAbstractContent
 			outputText("<b><u>NW Underground Passage</u></b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 4) meetLoliBatGolem();
 			outputText("The corridor in front of you is covered with crystal formation that glow eerily in the dark. Every now and then, you spot a shadow from the corner of your eyes but clearly this must only be your imagination.");
-			dungeons.setDungeonButtons(null, roomWUP, null, roomNUP);
+			dungeons.setDungeonButtonsRD(null, roomWUP, null, roomNUP);
 		}
 		public function roomWUP():void {
 			var beatmore:int = 5 - flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] - flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS];
@@ -161,7 +162,7 @@ public class HiddenCave extends DungeonAbstractContent
 			outputText("<b><u>W Underground Passage</u></b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 4) meetLoliBatGolem();
 			outputText("Various shattered humanoid skeletons litter the floor in this corridor. They look demonic in origin. Whatever lives heres kills demon in cold blood.");
-			dungeons.setDungeonButtons(roomNWUP, roomSWUP, null, null);
+			dungeons.setDungeonButtonsRD(roomNWUP, roomSWUP, null, null);
 			if (flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] > 3 && flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] > 0) addButton(10, "West", roomNTE);
 			else addButtonDisabled(10, "West", "You still need to beat "+ beatmore +" enemies to deactivate restriction formation from this passage.");
 		}
@@ -172,7 +173,7 @@ public class HiddenCave extends DungeonAbstractContent
 			outputText("<b><u>SW Underground Passage</u></b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 4) meetLoliBatGolem();
 			outputText("The corridor in front of you is covered with crystal formation that glow eerily in the dark. Every now and then, you spot a shadow from the corner of your eyes but clearly this must only be your imagination.");
-			dungeons.setDungeonButtons(roomWUP, null, null, roomSUP);
+			dungeons.setDungeonButtonsRD(roomWUP, null, null, roomSUP);
 			if (flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] > 3) addButton(11, "South", roomSStorage);
 			else addButtonDisabled(11, "South", "You still need to beat "+ beatmore +" enemies to deactivate restriction formation from this passage.");
 		}

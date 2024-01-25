@@ -51,28 +51,30 @@ package classes.Scenes.Areas.Ashlands
 		
 		override protected function performCombatAction():void
 		{
-			if (hasStatusEffect(StatusEffects.Provoke)) {
-				var choiceP:Number = rand(4);
-				if (choiceP == 0) eAttack();
-				if (choiceP == 1) backhand();
-				if (choiceP == 2) overhandSmash();
-				if (choiceP == 3) fireBalls();
-			}
-			else {
-				if (this.HPRatio() < 0.6) {
-					var choice2:Number = rand(6);
-					if (choice2 < 3) eAttack();
-					if (choice2 == 3) backhand();
-					if (choice2 == 4) overhandSmash();
-					if (choice2 == 5) fireBalls();
+			if ((this.lust100 >= 85 && rand(2) == 0) || this.lust100 < 85) {
+				if (hasStatusEffect(StatusEffects.Provoke)) {
+					var choiceP:Number = rand(4);
+					if (choiceP == 0) eAttack();
+					if (choiceP == 1) backhand();
+					if (choiceP == 2) overhandSmash();
+					if (choiceP == 3) fireBalls();
 				}
-				else if (this.HPRatio() < 0.8) {
-					var choice1:Number = rand(5);
-					if (choice1 < 3) eAttack();
-					if (choice1 == 3) backhand();
-					if (choice1 == 4) fireBalls();
+				else {
+					if (this.HPRatio() < 0.6) {
+						var choice2:Number = rand(6);
+						if (choice2 < 3) eAttack();
+						if (choice2 == 3) backhand();
+						if (choice2 == 4) overhandSmash();
+						if (choice2 == 5) fireBalls();
+					}
+					else if (this.HPRatio() < 0.8) {
+						var choice1:Number = rand(5);
+						if (choice1 < 3) eAttack();
+						if (choice1 == 3) backhand();
+						if (choice1 == 4) fireBalls();
+					}
+					else eAttack();
 				}
-				else eAttack();
 			}
 		}
 		
@@ -90,7 +92,7 @@ package classes.Scenes.Areas.Ashlands
 			//this.plural = true;
 			initStrTouSpeInte(315, 295, 175, 20);
 			initWisLibSensCor(20, 10, 10, 50);
-			this.lustVuln = 0;
+			this.lustVuln = 0.01;
 			this.tallness = 290;
 			this.drop = NO_DROP;
 			this.createBreastRow(0, 1);
