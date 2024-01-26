@@ -20,29 +20,31 @@ public class HiddenCave extends DungeonAbstractContent
 		public function enterDungeon():void {
 			inDungeon = true;
 			dungeonLoc = DUNGEON_HIDDEN_CAVE_ENTRANCE;
+			player.createStatusEffect(StatusEffects.LoliBatGolems, 10, 0, 0, 0);
 			playerMenu();
 		}
 		public function exitDungeon():void {
 			inDungeon = false;
 			clearOutput();
 			outputText("You leave the cave behind and take off through the hills back towards camp.");
+			if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
+			player.removeStatusEffect(StatusEffects.LoliBatGolems);
 			endEncounter();
 		}
 		
 		public function meetLoliBatGolem():void {
-			if (player.statusEffectv1(StatusEffects.LoliBatGolems) > 9 && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
-				player.removeStatusEffect(StatusEffects.LoliBatGolems);
-				outputText("\n\nA bat-shaped figures standing near you suddenly starting to move toward you with clearly hostile intentions.");
+			if ((rand(100) < player.statusEffectv1(StatusEffects.LoliBatGolems)) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
+				var reset:Number = 10;
+				reset -= player.statusEffectv1(StatusEffects.LoliBatGolems);
+				player.addStatusValue(StatusEffects.LoliBatGolems, 1, reset);
 				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
-				startCombat(new LoliBatGolem(), true);
+				outputText("\n\nA bat-shaped figures standing near you suddenly starting to move toward you with clearly hostile intentions.");
 				flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS]++;
-				doNext(playerMenu);
-				return;
+				startCombat(new LoliBatGolem(), true);
+				//doNext(playerMenu);
+				//return;
 			}
-			else {
-				if (player.hasStatusEffect(StatusEffects.LoliBatGolems)) player.addStatusValue(StatusEffects.LoliBatGolems, 1, (1+rand(2)));
-				else player.createStatusEffect(StatusEffects.LoliBatGolems, 1, 0, 0, 0);
-			}
+			else player.addStatusValue(StatusEffects.LoliBatGolems, 1, 10);
 		}
 		public function defeatedByLoliBatGolem():void {
 			clearOutput();

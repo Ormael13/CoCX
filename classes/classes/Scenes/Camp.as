@@ -4759,6 +4759,7 @@ public function wakeFromBadEnd():void {
 	player.removeStatusEffect(StatusEffects.RiverDungeonA);
 	if (player.hasStatusEffect(StatusEffects.RivereDungeonIB)) player.removeStatusEffect(StatusEffects.RivereDungeonIB);
 	if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
+	player.removeStatusEffect(StatusEffects.LoliBatGolems);
     //Restore stats
 	player.HP = player.maxOverHP();
 	player.fatigue = 0;
@@ -4801,6 +4802,7 @@ public function rebirthFromBadEnd():void {
 	player.removeStatusEffect(StatusEffects.RiverDungeonA);
 	if (player.hasStatusEffect(StatusEffects.RivereDungeonIB)) player.removeStatusEffect(StatusEffects.RivereDungeonIB);
 	if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
+	player.removeStatusEffect(StatusEffects.LoliBatGolems);
     //Restore stats
 	player.HP = player.maxOverHP();
 	player.fatigue = 0;

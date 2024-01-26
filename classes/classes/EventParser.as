@@ -107,6 +107,10 @@ public class EventParser {
 			if (CoC.instance.player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) CoC.instance.player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
 			CoC.instance.player.removeStatusEffect(StatusEffects.RiverDungeonA);
 		}
+		if (CoC.instance.player.hasStatusEffect(StatusEffects.LoliBatGolems)) {
+			if (CoC.instance.player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) CoC.instance.player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
+			CoC.instance.player.removeStatusEffect(StatusEffects.LoliBatGolems);
+		}
     }
     private static function gameOverMenuOverride():void { //Game over event; override whatever the fuck has been done to the UI up to this point to force display of the data and new game buttons
         CoC.instance.mainView.showMenuButton(MainView.MENU_NEW_MAIN);
