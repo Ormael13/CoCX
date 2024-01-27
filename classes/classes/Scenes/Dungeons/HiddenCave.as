@@ -5,6 +5,7 @@
  */
 package classes.Scenes.Dungeons
 {
+import classes.CoC;
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
@@ -79,6 +80,7 @@ public class HiddenCave extends DungeonAbstractContent
 			clearOutput();
 			outputText("<b><u>SE Underground Passage</u></b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 4) meetLoliBatGolem();
+			if (CoC.instance.inCombat) return;
 			outputText("The corridor in front of you is covered with crystal formation that glow eerily in the dark. Every now and then, you spot a shadow from the corner of your eyes but clearly this must only be your imagination.");
 			dungeons.setDungeonButtonsRD(roomEUP, null, roomSUP, roomEntrance);
 		}
@@ -87,6 +89,7 @@ public class HiddenCave extends DungeonAbstractContent
 			clearOutput();
 			outputText("<b><u>E Underground Passage</u></b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 4) meetLoliBatGolem();
+			if (CoC.instance.inCombat) return;
 			outputText("This corridor is decorated with many silent statue. You somehow have the impression that they are watching you.");
 			dungeons.setDungeonButtonsRD(roomNEUP, roomSEUP, null, null);
 		}
@@ -95,6 +98,7 @@ public class HiddenCave extends DungeonAbstractContent
 			clearOutput();
 			outputText("<b><u>NE Underground Passage</u></b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 4) meetLoliBatGolem();
+			if (CoC.instance.inCombat) return;
 			outputText("The corridor in front of you is covered with crystal formation that glow eerily in the dark. Every now and then, you spot a shadow from the corner of your eyes but clearly this must only be your imagination.");
 			dungeons.setDungeonButtonsRD(null, roomEUP, roomNUP, null);
 		}
@@ -103,6 +107,7 @@ public class HiddenCave extends DungeonAbstractContent
 			clearOutput();
 			outputText("<b><u>N Underground Passage</u></b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 4) meetLoliBatGolem();
+			if (CoC.instance.inCombat) return;
 			outputText("Various shattered humanoid skeletons litter the floor in this corridor. They look demonic in origin. Whatever lives heres kills demon in cold blood.");
 			dungeons.setDungeonButtonsRD(null, null, roomNWUP, roomNEUP);
 		}
@@ -119,6 +124,7 @@ public class HiddenCave extends DungeonAbstractContent
 			clearOutput();
 			outputText("<b><u>S Underground Passage</u></b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 4) meetLoliBatGolem();
+			if (CoC.instance.inCombat) return;
 			outputText("This corridor is decorated with many silent statue. You somehow have the impression that they are watching you.");
 			dungeons.setDungeonButtonsRD(null, null, roomSWUP, roomSEUP);
 		}
@@ -154,6 +160,7 @@ public class HiddenCave extends DungeonAbstractContent
 			clearOutput();
 			outputText("<b><u>NW Underground Passage</u></b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 4) meetLoliBatGolem();
+			if (CoC.instance.inCombat) return;
 			outputText("The corridor in front of you is covered with crystal formation that glow eerily in the dark. Every now and then, you spot a shadow from the corner of your eyes but clearly this must only be your imagination.");
 			dungeons.setDungeonButtonsRD(null, roomWUP, null, roomNUP);
 		}
@@ -163,6 +170,7 @@ public class HiddenCave extends DungeonAbstractContent
 			clearOutput();
 			outputText("<b><u>W Underground Passage</u></b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 4) meetLoliBatGolem();
+			if (CoC.instance.inCombat) return;
 			outputText("Various shattered humanoid skeletons litter the floor in this corridor. They look demonic in origin. Whatever lives heres kills demon in cold blood.");
 			dungeons.setDungeonButtonsRD(roomNWUP, roomSWUP, null, null);
 			if (flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] > 3 && flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] > 0) addButton(10, "West", roomNTE);
@@ -174,6 +182,7 @@ public class HiddenCave extends DungeonAbstractContent
 			clearOutput();
 			outputText("<b><u>SW Underground Passage</u></b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 4) meetLoliBatGolem();
+			if (CoC.instance.inCombat) return;
 			outputText("The corridor in front of you is covered with crystal formation that glow eerily in the dark. Every now and then, you spot a shadow from the corner of your eyes but clearly this must only be your imagination.");
 			dungeons.setDungeonButtonsRD(roomWUP, null, null, roomSUP);
 			if (flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] > 3) addButton(11, "South", roomSStorage);
