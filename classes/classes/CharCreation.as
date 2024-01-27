@@ -1902,7 +1902,7 @@ import classes.Scenes.Combat.CombatAbility;
 			//doYesNo(goToIngnam, arrival);
 			menu();
 			addButton(0, "Ingnam", goToIngnam);
-			addButton(1,"Skip Ingnam", arrival);
+			addButton(1, "Skip Ingnam", arrival);
 		}
 
 		public function goToIngnam():void {
@@ -2457,6 +2457,20 @@ import classes.Scenes.Combat.CombatAbility;
 			}
 			else addButtonDisabled(btn, "SPPearlMst4", "You need to buy Sky Poison Pearl Mastery 3 perk first.");
 			btn++;
+			if (player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX) && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 3) {
+				if (player.ascensionPerkPoints >= 165 && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) == 4) addButton(btn, "SPPearlMst5", perkSkyPoisonPearlMasteryStage5).hint("Perk allowing you to have increased venom recharge, max venom, poison resistance, amount of carried over spirit stones and unlock next sections of sky poison pearl 30 levels earlier.\n\nCost: 129 points");
+				else if (player.ascensionPerkPoints < 165) addButtonDisabled(btn, "SPPearlMst5", "You do not have enough ascension perk points!");
+				else if (player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 4) addButtonDisabled(btn, "SPPearlMst5", "You already bought Sky Poison Pearl Mastery 5 perk.");
+			}
+			else addButtonDisabled(btn, "SPPearlMst5", "You need to buy Sky Poison Pearl Mastery 4 perk first.");
+			btn++;
+			if (player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX) && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 4) {
+				if (player.ascensionPerkPoints >= 201 && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) == 5) addButton(btn, "SPPearlMst6", perkSkyPoisonPearlMasteryStage6).hint("Perk allowing you to have increased venom recharge, max venom, poison resistance, amount of carried over spirit stones and unlock next sections of sky poison pearl 36 levels earlier.\n\nCost: 129 points");
+				else if (player.ascensionPerkPoints < 201) addButtonDisabled(btn, "SPPearlMst6", "You do not have enough ascension perk points!");
+				else if (player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 5) addButtonDisabled(btn, "SPPearlMst5", "You already bought Sky Poison Pearl Mastery 6 perk.");
+			}
+			else addButtonDisabled(btn, "SPPearlMst6", "You need to buy Sky Poison Pearl Mastery 5 perk first.");
+			btn++;
 		//	if (player.ascensionPerkPoints >= 10 && !player.hasPerk(PerkLib.AscensionHybridTheory)) addButton(btn, "HybridTheory", perkHybridTheory).hint("Perk allowing you to receive race bonuses for one point less. (still req. min 3 race points to work).\n\nCost: 10 points");
 		//	else if (player.ascensionPerkPoints < 10) addButtonDisabled(btn, "HybridTheory", "You do not have enough ascension perk points!");
 		//	else addButtonDisabled(btn, "HybridTheory", "You already bought this perk.");
@@ -2573,6 +2587,20 @@ import classes.Scenes.Combat.CombatAbility;
 			player.addPerkValue(PerkLib.AscensionSkyPoisonPearlMasteryStageX,1,1);
 			clearOutput();
 			outputText("You increased Sky Poison Pearl Mastery from 3 to 4.");
+			doNext(rarePerks2);
+		}
+		private function perkSkyPoisonPearlMasteryStage5():void {
+			player.ascensionPerkPoints -= 165;
+			player.addPerkValue(PerkLib.AscensionSkyPoisonPearlMasteryStageX,1,1);
+			clearOutput();
+			outputText("You increased Sky Poison Pearl Mastery from 4 to 5.");
+			doNext(rarePerks2);
+		}
+		private function perkSkyPoisonPearlMasteryStage6():void {
+			player.ascensionPerkPoints -= 201;
+			player.addPerkValue(PerkLib.AscensionSkyPoisonPearlMasteryStageX,1,1);
+			clearOutput();
+			outputText("You increased Sky Poison Pearl Mastery from 5 to 6.");
 			doNext(rarePerks2);
 		}
 

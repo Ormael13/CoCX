@@ -130,11 +130,11 @@ public class Changelog extends BaseContent
 			outputText("-If player know spell Heal or Cure and have enough mana can use them out of combat in camp (Camp Actions > Spend Time).\n");
 			outputText("-Construct enemy type can be now affected by lust attacks (and their lust vul been tiny bit incresed to not be 0 anymore). They not gonna masturbate but would getting more glitched until they deactivate allowing for lust win against them. Past 85% threshold they even could radomly skip actions in their turn.\n");
 			outputText("-Added to drop tables of all goblin type enemies: Healing herb, Moon grass, Snakebane, Ironweed, Blade fern. With low chance added to Goblin Shaman drop table Alraune nectar, Ginseng.\n");
-			outputText("-Healing herb and Snakebane flower can be found radomly during forest exploration like ehal pills or truffles.\n");
+			outputText("-Healing herb and Snakebane flower can be found radomly during forest exploration like heal pills or truffles.\n");
 			outputText("-Sand Witch drop table slight adjusted with weapons/spell teaching items been bit more common. Fetish male cultists enemies dropping more weapons and less lust drafts.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 5. Req. Sky Poison Pearl Mastery 4 perk. It costs 165 asc points and you gain +15 venom recharge speed, +50% to max venom cap, +50% to poison resistance, 500% more spirit stones carried over and lower req. level to open next sections of pearl by 30 levels.\n");
+			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 6. Req. Sky Poison Pearl Mastery 5 perk. It costs 201 asc points and you gain +18 venom recharge speed, +60% to max venom cap, +60% to poison resistance, 600% more spirit stones carried over and lower req. level to open next sections of pearl by 36 levels.\n");
+			outputText("-Killing Intent soulskill won't be unusable if PC wrath is too high or use other powers that would interfere with magical soulskills.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -251,7 +251,11 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -287,6 +291,7 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

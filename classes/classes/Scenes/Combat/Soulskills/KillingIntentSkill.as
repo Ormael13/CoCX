@@ -21,7 +21,7 @@ public class KillingIntentSkill extends AbstractSoulSkill {
 		baseSFCost = 200;
 		lastAttackType = Combat.LAST_ATTACK_SPELL;
     }
-
+/*
     override protected function usabilityCheck():String {
         var uc:String =  super.usabilityCheck();
         if (uc) return uc;
@@ -32,7 +32,7 @@ public class KillingIntentSkill extends AbstractSoulSkill {
 
         return "";
     }
-
+*/
 	override public function describeEffectVs(target:Monster):String {
 		return "~" + numberFormat(calcDamage(target)) + " true damage. Can cause fear";
 	}
