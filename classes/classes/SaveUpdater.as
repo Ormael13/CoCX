@@ -51,6 +51,7 @@ public class SaveUpdater extends NPCAwareContent {
 			if (dung) ++dungeonsCleared;
 		//Kill count
 		var totalKillCount:int = 0;
+		if (flags[kFLAGS.THIEFS_KILLED] > 0) totalKillCount += flags[kFLAGS.THIEFS_KILLED];
 		if (flags[kFLAGS.IMPS_KILLED] > 0) totalKillCount += flags[kFLAGS.IMPS_KILLED];
 		if (flags[kFLAGS.GOBLINS_KILLED] > 0) totalKillCount += flags[kFLAGS.GOBLINS_KILLED];
 		if (flags[kFLAGS.HELLHOUNDS_KILLED] > 0) totalKillCount += flags[kFLAGS.HELLHOUNDS_KILLED];
@@ -301,6 +302,9 @@ public class SaveUpdater extends NPCAwareContent {
 			["Killing the bull by the horns", kACHIEVEMENTS.GENERAL_KILLING_THE_BULL_BY_THE_HORNS, flags[kFLAGS.MINOTAURS_KILLED] >= 10],
 			["Killing the bull by the horns 2: Kill Harder", kACHIEVEMENTS.GENERAL_KILLING_THE_BULL_BY_THE_HORNS_2_KILL_HARDER, flags[kFLAGS.MINOTAURS_KILLED] >= 50],
 			["Killing the bull by the horns 3: I'm Back", kACHIEVEMENTS.GENERAL_KILLING_THE_BULL_BY_THE_HORNS_3_IM_BACK, flags[kFLAGS.MINOTAURS_KILLED] >= 250],
+			["Vigilante", kACHIEVEMENTS.GENERAL_VIGILANTE, flags[kFLAGS.THIEFS_KILLED] >= 10],
+			["Vigilante 2: Kill Harder", kACHIEVEMENTS.GENERAL_VIGILANTE_2_KILL_HARDER, flags[kFLAGS.THIEFS_KILLED] >= 50],
+			["Vigilante 3: I'm Back", kACHIEVEMENTS.GENERAL_VIGILANTE_3_IM_BACK, flags[kFLAGS.THIEFS_KILLED] >= 250],
 
 			["Body Count: Monty Python and the Holy Grail", kACHIEVEMENTS.GENERAL_BODY_COUNT_MPATHG, totalKillCount >= 47],
 			["Body Count: Deadpool", kACHIEVEMENTS.GENERAL_BODY_COUNT_DEADPOOL, totalKillCount >= 80],

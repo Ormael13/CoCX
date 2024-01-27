@@ -1338,7 +1338,7 @@ public static const UNKNOWN_FLAG_NUMBER_01328:int                               
 public static const UNKNOWN_FLAG_NUMBER_01329:int                                   = 1329;
 public static const THE_TRENCH_ENTERED:int                                   		= 1330;
 public static const GHOULISH_VAMPIRE_SERVANT_NAME:int                               = 1331;  
-public static const UNKNOWN_FLAG_NUMBER_01333:int                                   = 1333;
+public static const THIEFS_KILLED:int                                   			= 1333;
 public static const UNKNOWN_FLAG_NUMBER_01334:int                                   = 1334;
 public static const UNKNOWN_FLAG_NUMBER_01335:int                                   = 1335;
 public static const UNKNOWN_FLAG_NUMBER_01336:int                                   = 1336;

@@ -53,8 +53,25 @@ package classes.Scenes.Places.Ingnam
 					else outputText(" <b>Your cock is too big to fit!</b>");
 				}
 				if (player.hasVagina()) addButton(1, "Get Licked", getLicked).hint("Punish the thief by having him lick your [vagina].");
-				addButton(4, "Leave", thiefEncEnd);
-				return;
+			}
+			addButton(2, "Guards", handovertoGuards).hint("Hand over him to local guards for small reward.");
+			addButton(3, "Kill him", killThief);
+			addButton(4, "Leave", thiefEncEnd);
+		}
+		private function handovertoGuards():void {
+			clearOutput();
+			flags[kFLAGS.THIEFS_KILLED]++;
+			outputText("You tie up the thief and drag him with you, searching for the village guards. You hand him over to the first patrol you meet. They recognize him as a wanted man, and give you his bounty. ");
+			player.gems += 20;
+			thiefEncEnd();
+		}
+		private function killThief():void {
+			clearOutput();
+			flags[kFLAGS.THIEFS_KILLED]++;
+			outputText("You make quick work of the thief before dragging the corpse into a nearby alley. That's one less vile human prowling the village. ");
+			if (player.enemiesKillCount() >= 10 && !player.hasPerk(PerkLib.KillingIntent)) {
+				outputText("Kill upon kill, corpse after corpse... Ashes... to ashes... Your fingers itch, your blood boils, there's still more to kill, more fiends to slay. The fire burning inside is but another weapon of murder. <b>(You have gained the Killing Intent perk!)</b> ");
+				player.createPerk(PerkLib.KillingIntent, 0, 0, 0, 0);
 			}
 			thiefEncEnd();
 		}

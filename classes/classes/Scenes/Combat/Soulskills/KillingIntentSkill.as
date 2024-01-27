@@ -39,7 +39,6 @@ public class KillingIntentSkill extends AbstractSoulSkill {
 
 	private function calcDeathCap():Number {
 		var cap:Number = 0;
-
 		if (player.hasPerk(PerkLib.SoulApprentice)) cap += 10;
 		if (player.hasPerk(PerkLib.SoulPersonage)) cap += 10;
 		if (player.hasPerk(PerkLib.SoulWarrior)) cap += 10;
@@ -52,14 +51,14 @@ public class KillingIntentSkill extends AbstractSoulSkill {
 		if (player.hasPerk(PerkLib.SoulTyrant)) cap += 10;
 		if (player.hasPerk(PerkLib.SoulKing)) cap += 10;
 		if (player.hasPerk(PerkLib.SoulEmperor)) cap += 10;
-    
 		return cap;
 	}
 
 	private function calcDeathMod():Number {
 		var mod:Number = 1;
 		var deathCap:Number = calcDeathCap();
-		var monstersKilled:int = 	flags[kFLAGS.GOBLINS_KILLED] + 
+		var monstersKilled:int = 	flags[kFLAGS.THIEFS_KILLED] +
+									flags[kFLAGS.GOBLINS_KILLED] + 
 									flags[kFLAGS.HELLHOUNDS_KILLED] +
 									flags[kFLAGS.IMPS_KILLED] +
 									flags[kFLAGS.MINOTAURS_KILLED] +

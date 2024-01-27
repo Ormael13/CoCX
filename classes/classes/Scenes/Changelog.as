@@ -36,6 +36,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 1 intelligence lvl-up perk: Brutal Spells. Req. Job: Sorcerer perk and 75+ int. Effect: Reduces enemy magic resistance with each spell. (+5% base spell strength)\n");
 			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 1. No Req. It costs 21 asc points and you gain +3 venom recharge speed, +10% to max venom cap, +10% to poison resistance, 100% more spirit stones carried over and lower req. level to open next sections of pearl by 6 levels.\n");
 			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 2. Req. Sky Poison Pearl Mastery 1 perk. It costs 57 asc points and you gain +6 venom recharge speed, +20% to max venom cap, +20% to poison resistance, 200% more spirit stones carried over and lower req. level to open next sections of pearl by 12 levels.\n");
+			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 3. Req. Sky Poison Pearl Mastery 2 perk. It costs 93 asc points and you gain +9 venom recharge speed, +30% to max venom cap, +30% to poison resistance, 300% more spirit stones carried over and lower req. level to open next sections of pearl by 18 levels.\n");
 			outputText("-New armor (by Sylabt & Ohaxer): Princess Regalia - obtained by completing Coronation quest at Trench or later from equipment shop. Cost 9,600 gems, 17 armor, 13 magic resistance, light type armor. Increases the damage of and reduces the cost of Mana shot, barrage and charged shot by 50%, also isn’t affected by Miracle Metal debuff for armor, and provides a 15% lifesteal from Mana shot, barrage, charged shot and crunch.\n");
 			outputText("-New flying sword: White Half-Moon Quartet - combined from two White Half-Moon Duo sword sets. Cost 240 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 4). Deal fire damage instead of physical damage.\n");
 			outputText("-New flying sword: Black Half-Moon Quartet - combined from two Black Half-Moon Duo sword sets. Cost 240 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 4). Deal ice damage instead of physical damage.\n");
@@ -46,6 +47,7 @@ public class Changelog extends BaseContent
 			outputText("-Arigean Princess (23+) stat bonuses: +430% to str multi, +430% to spe multi, +310% to tou multi, -75% to int multi, -60% to wisdom multi, +65 Min Corruption, +10 armor. She can use additional specials: Grab and Guillotine (both works like the ones from Cancer race)\n");
 			outputText("-Juvenile abyssal sharks can sometimes be too happy to bite more then PC have (still left) so now they will stop when pc have penalty of 99% on combat wounds.\n");
 			outputText("-Beautiful Sword and Whip would now have additional effect of giving 2x more exp for weapon mastery. Beautiful Staff would have additional effect of -1 turn cooldown duration of tier 1 spells.\n");
+			outputText("-Qi - owner of 'Flying Swords are always with you!' is no more in closed doors cultivation session. And now he can train or sell some more specialistic manuals to PC.\n");
 			outputText("-Fixes: Sval's All IMutations perks displayed, Buff display bug, parser bug when apllying a skin color change using snake oil. (Jtecx)\n");
 			outputText("-The Trench store no longer gives you stuff when you don't have the money for it. (Jtecx)\n");
 			outputText("-Hellhound balls mutation firedamage bonus fix (Yes previously it doesn't give any, well have fun I guess). (NUZ/Shirane)\n");
@@ -65,18 +67,16 @@ public class Changelog extends BaseContent
 			outputText("-Fixed bug where the check for whether a companion can act due to being occupied distracting an enemy now applies regardless of whether Simplified Pre-Turn is on. The River Dungeon and Arena team fights now no longer have the chance of softlocking the user if they can instantly kill the enemy, like the Minotaur fight.\n");
 			outputText("-Fixed bug where settings custom drops for certain enemies did not reset after dropping once. Backfire lust damage will now scale will lust rather than a flat rate.\n");
 			outputText("-Added Might spell to Zetaz that can be used once on difficulties higher than normal. Added monster damage function based off of libido.\n");
+			outputText("-Fixed bug relating to showing special statuses for bosses.\n");
+			outputText("-Added 'GigaWhitefire' spell to Zetaz. 'zetazMight' now causes Zetaz to start flying. Zetaz's 'Gust' attack is not used if the enemy is already blinded.\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-\n");
 			//outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
 			//outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
-			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 3. Req. Sky Poison Pearl Mastery 2 perk. It costs 93 asc points and you gain +9 venom recharge speed, +30% to max venom cap, +30% to poison resistance, 300% more spirit stones carried over and lower req. level to open next sections of pearl by 18 levels.\n");
 			outputText("-New M. Special: Charged Shot. Req. to be Arigean Princess. A two turn charged str scaling range attack costing mana (~400) and dealing magic damage.\n");
 			outputText("-New event perk: Arigean Knowledge. Gained by becoming Arigean Princess. Effects: The knowledge of your Arigean ancestors rests in your mind. Gain immunity to mental debuffs and intelligence min is increased to 90.\n");
-			outputText("-Fixed bug relating to showing special statuses for bosses. (Demojay)\n");
-			outputText("-Added 'GigaWhitefire' spell to Zetaz. 'zetazMight' now causes Zetaz to start flying. Zetaz's 'Gust' attack is not used if the enemy is already blinded. (Demojay)\n");
 			outputText("-Omnibus Overseer's 'lust aura' and 'milk attack' moves now deal scaling damage. 'Lust Aura' DoT now deals scaling libido damage. Stunning/Confusing/Fearing the Overseer will disrupt their Lust Aura. Added message to Omnibus Overseer Lust Aura, to signal that they should try disrupting the boss to cancel the aura. (Demojay)\n");
-			outputText("-Qi - owner of 'Flying Swords are always with you!' is no more in closed doors cultivation session. And now he can train or sell some more specialistic manuals to PC.\n");
 			outputText("-Flying Sword Path, Soaring Blades, First Attack: Flying Sword Killing Intent perks no longer are in level up menu. All spend before perks are refunded no worried.\n");
 			outputText("-Flying Sword Path perk have now ranks and 1st rank is learned by training with Qi costing 50 spirit stones for training.\n");
 			outputText("-New consumable: Soaring Blades manual. Req. buying manual from Qi for 50 spirit stones after finsining basic training with him. Using will grant perk Soaring Blades.\n");
@@ -113,7 +113,7 @@ public class Changelog extends BaseContent
 			outputText("-Fixing bugs where the game was checking for a fox hairpin or cow girl hat in one of the ring slots rather than the head jewelry slot. (Demojay)\n");
 			outputText("-Text fixes. (Demojay) (Alot of small ones)\n");
 			outputText("-Added 3 toggles in Interface Game Settings to control whether the HP Lust and Wrath of the player and Enemy should be displayed as a percentage or numbers. (Demojay)\n");
-			outputText("-5 new achievments. (3 shadow one)\n");
+			outputText("-10 new achievments. (4 shadow one)\n");
 			outputText("-Killing Intent perk now is gained after having at least 10 kills on kill counter.\n");
 			outputText("-On stats page in kill counts section was added total kills count (maybe some would want to see total count without need to add all seperate kill counts and maybe in future we would get more kill counts...)\n");
 			outputText("-Added new option/toggle in Settings: Angelic Faction - by default it removes all angelic presence ingame and need to be toggled on to find ANY angeloid/angel ingame. So if you not able to finish some task you may now thing... is it becasue i disliked angels so much that i wanted them be-gone and now i pay price for it?\n");
@@ -135,7 +135,7 @@ public class Changelog extends BaseContent
 			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 5. Req. Sky Poison Pearl Mastery 4 perk. It costs 165 asc points and you gain +15 venom recharge speed, +50% to max venom cap, +50% to poison resistance, 500% more spirit stones carried over and lower req. level to open next sections of pearl by 30 levels.\n");
 			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 6. Req. Sky Poison Pearl Mastery 5 perk. It costs 201 asc points and you gain +18 venom recharge speed, +60% to max venom cap, +60% to poison resistance, 600% more spirit stones carried over and lower req. level to open next sections of pearl by 36 levels.\n");
 			outputText("-Killing Intent soulskill won't be unusable if PC wrath is too high or use other powers that would interfere with magical soulskills.\n");
-			outputText("-\n");
+			outputText("-Added two new post fight options for thiefs: Guards (give enemy to local guards for smol reward), Kill (that Killing Intent not gonna come from nowhere does it?). Added new kill count for stats page: Thiefs.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -254,7 +254,14 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -291,6 +298,7 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
