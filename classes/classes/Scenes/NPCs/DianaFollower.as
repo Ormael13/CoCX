@@ -13,6 +13,36 @@ import coc.view.ButtonDataList;
 public class DianaFollower extends NPCAwareContent
 	{
 
+public function dianaAtJttEMain():void {
+	
+}
+/*
+public function aaa():void {
+	
+}
 
+public function aaa():void {
+	
+}
+
+public function aaa():void {
+	
+}
+
+public function aaa():void {
+	
+}
+
+public function aaa():void {
+	
+}
+
+public function aaa():void {
+	
+}
+
+public function aaa():void {
+	
+}*/
 	}
 }

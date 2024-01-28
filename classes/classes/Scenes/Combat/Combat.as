@@ -836,6 +836,17 @@ public class Combat extends BaseContent {
             removeButton(1); //Removes bow usage.
         }
     }
+	
+	public function disableEachHelperIfTheyCauseSoftLock():void {
+		if (flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] != 0 && flags[kFLAGS.BLOOD_PUPPY_SUMMONS] > 0) flags[kFLAGS.BLOOD_PUPPY_SUMMONS] = 0;
+		if (flags[kFLAGS.IN_COMBAT_PLAYER_EPIC_ELEMENTAL_ATTACKED] != 0 && flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] > 1) flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 1;
+		if (flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] != 0 && flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] > 1) flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 1;
+		if (flags[kFLAGS.IN_COMBAT_PLAYER_SKELETONS_ATTACKED] != 0 && flags[kFLAGS.NECROMANCER_SKELETONS] == 1) flags[kFLAGS.NECROMANCER_SKELETONS] = 0;
+		if (flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 0 && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] = 0;
+		if (flags[kFLAGS.IN_COMBAT_PLAYER_FLYING_SWORD_ATTACKED] != 0 && flags[kFLAGS.FLYING_SWORD] == 1) flags[kFLAGS.FLYING_SWORD] = 0;
+		if (flags[kFLAGS.IN_COMBAT_PLAYER_MUMMY_ATTACKED] != 0 && flags[kFLAGS.MUMMY_ATTACK] == 1) flags[kFLAGS.MUMMY_ATTACK] = 01;
+		if (flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 0 && flags[kFLAGS.WILL_O_THE_WISP] == 0) flags[kFLAGS.WILL_O_THE_WISP] = 1;
+	}
 
     internal function buildOtherActions(buttons:ButtonDataList, backFunc:Function, aspectButtons:ButtonDataList = null):void {
         var bd:ButtonData;

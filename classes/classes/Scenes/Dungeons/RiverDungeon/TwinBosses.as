@@ -195,7 +195,10 @@ use namespace CoC;
 				player.removeStatusEffect(StatusEffects.MinoKing);
 				SceneLib.dungeons.riverdungeon.defeatTwinBosses();
 			}
-			else twinSwitchWithOtherOne();
+			else {
+				if (hpVictory && !player.hasStatusEffect(StatusEffects.MinoKing)) SceneLib.combat.disableEachHelperIfTheyCauseSoftLock();
+				twinSwitchWithOtherOne();
+			}
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void

@@ -157,7 +157,10 @@ public class AngelLR extends AbstractAngel
 						player.removeStatusEffect(StatusEffects.MinoKing);
 						SceneLib.hexindao.intermediateleadershippostfight();
 					}
-					else angelSwitchWithOtherOne();
+					else {
+						SceneLib.combat.disableEachHelperIfTheyCauseSoftLock();
+						angelSwitchWithOtherOne();
+					}
 				}
 				else cleanupAfterCombat();
 			}

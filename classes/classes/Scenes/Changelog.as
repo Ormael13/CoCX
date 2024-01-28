@@ -37,11 +37,13 @@ public class Changelog extends BaseContent
 			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 1. No Req. It costs 21 asc points and you gain +3 venom recharge speed, +10% to max venom cap, +10% to poison resistance, 100% more spirit stones carried over and lower req. level to open next sections of pearl by 6 levels.\n");
 			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 2. Req. Sky Poison Pearl Mastery 1 perk. It costs 57 asc points and you gain +6 venom recharge speed, +20% to max venom cap, +20% to poison resistance, 200% more spirit stones carried over and lower req. level to open next sections of pearl by 12 levels.\n");
 			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 3. Req. Sky Poison Pearl Mastery 2 perk. It costs 93 asc points and you gain +9 venom recharge speed, +30% to max venom cap, +30% to poison resistance, 300% more spirit stones carried over and lower req. level to open next sections of pearl by 18 levels.\n");
+			outputText("-Added new weapon (by Demojay) - 'Beautiful Fly Whisk'. Obtained from the Lake like other Holy Items. Beautiful Fly Whisk reduces soulskill cooldown by 1 when equipped.\n");
 			outputText("-New armor (by Sylabt & Ohaxer): Princess Regalia - obtained by completing Coronation quest at Trench or later from equipment shop. Cost 9,600 gems, 17 armor, 13 magic resistance, light type armor. Increases the damage of and reduces the cost of Mana shot, barrage and charged shot by 50%, also isn’t affected by Miracle Metal debuff for armor, and provides a 15% lifesteal from Mana shot, barrage, charged shot and crunch.\n");
 			outputText("-New flying sword: White Half-Moon Quartet - combined from two White Half-Moon Duo sword sets. Cost 240 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 4). Deal fire damage instead of physical damage.\n");
 			outputText("-New flying sword: Black Half-Moon Quartet - combined from two Black Half-Moon Duo sword sets. Cost 240 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 4). Deal ice damage instead of physical damage.\n");
 			outputText("-New flying sword: Scarlet Half-Moon Quartet - combined from two Scarlet Half-Moon Duo sword sets. Cost 240 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 4). Deal lightning damage instead of physical damage.\n");
 			outputText("-New flying sword: Ebon Half-Moon Quartet - combined from two Ebon Half-Moon Duo sword sets. Cost 240 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 4). Deal darkness damage instead of physical damage.\n");
+			outputText("-New consumable: Soaring Blades manual. Req. buying manual from Qi for 50 spirit stones after finsining basic training with him. Using will grant perk Soaring Blades.\n");
 			outputText("-New P. Special: Ram. Req. to be Arigean Princess. Deals Physical Damage based on Speed, but cause recoil damage equal to 10% of user max HP.\n");
 			outputText("-When reaching lvl 30 and having done all misison from Grayda Arigean PC can have event proc at camp that unlocks new quest 'Coronation'. Visiting her at Trench would send PC to gather materials and then becoming new princess. It's pernament race option so can't return from been Arigean Princess.\n");
 			outputText("-Arigean Princess (23+) stat bonuses: +430% to str multi, +430% to spe multi, +310% to tou multi, -75% to int multi, -60% to wisdom multi, +65 Min Corruption, +10 armor. She can use additional specials: Grab and Guillotine (both works like the ones from Cancer race)\n");
@@ -69,6 +71,7 @@ public class Changelog extends BaseContent
 			outputText("-Added Might spell to Zetaz that can be used once on difficulties higher than normal. Added monster damage function based off of libido.\n");
 			outputText("-Fixed bug relating to showing special statuses for bosses.\n");
 			outputText("-Added 'GigaWhitefire' spell to Zetaz. 'zetazMight' now causes Zetaz to start flying. Zetaz's 'Gust' attack is not used if the enemy is already blinded.\n");
+			outputText("-Omnibus Overseer's 'lust aura' and 'milk attack' moves now deal scaling damage. 'Lust Aura' DoT now deals scaling libido damage. Stunning/Confusing/Fearing the Overseer will disrupt their Lust Aura. Added message to Omnibus Overseer Lust Aura, to signal that they should try disrupting the boss to cancel the aura.\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-\n");
@@ -76,10 +79,8 @@ public class Changelog extends BaseContent
 			//outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
 			outputText("-New M. Special: Charged Shot. Req. to be Arigean Princess. A two turn charged str scaling range attack costing mana (~400) and dealing magic damage.\n");
 			outputText("-New event perk: Arigean Knowledge. Gained by becoming Arigean Princess. Effects: The knowledge of your Arigean ancestors rests in your mind. Gain immunity to mental debuffs and intelligence min is increased to 90.\n");
-			outputText("-Omnibus Overseer's 'lust aura' and 'milk attack' moves now deal scaling damage. 'Lust Aura' DoT now deals scaling libido damage. Stunning/Confusing/Fearing the Overseer will disrupt their Lust Aura. Added message to Omnibus Overseer Lust Aura, to signal that they should try disrupting the boss to cancel the aura. (Demojay)\n");
-			outputText("-Flying Sword Path, Soaring Blades, First Attack: Flying Sword Killing Intent perks no longer are in level up menu. All spend before perks are refunded no worried.\n");
+			outputText("-Flying Sword Path, Soaring Blades, First Attack: Flying Sword, Killing Intent perks no longer are in level up menu. All spend before perks are refunded no worried.\n");
 			outputText("-Flying Sword Path perk have now ranks and 1st rank is learned by training with Qi costing 50 spirit stones for training.\n");
-			outputText("-New consumable: Soaring Blades manual. Req. buying manual from Qi for 50 spirit stones after finsining basic training with him. Using will grant perk Soaring Blades.\n");
 			outputText("-Add proper number formatting to the HP display function. Player Info now shows correct Soulskill cost reduction. (Demojay)\n");
 			outputText("-Fixed bug with Spiritual Enlightenment Ascension Perk where soulskill cost was being reduced by 20% per rank, rather than 2%. Fixed bug where you could obtain higher ranks in the Daoist and Body Cultivation Subpaths without purchasing the previous tiers. (Demojay)\n");
 			outputText("-The 'monsterDodgeSkill' function for soulskills can now take hitmodifiers into account. Standardized dodge chance of different ranks of the 'Hail of Blades' soulskills. (Demojay)\n");
@@ -94,7 +95,6 @@ public class Changelog extends BaseContent
 			outputText("-Fixed bug where Draculina Embrace will always hit. (Demojay)\n");
 			outputText("-Ceraph is now classed as a proper True Demon. (Demojay)\n");
 			outputText("-The enemy will now act after using a turn picking up spent weapons instead of getting another turn. (Demojay)\n");
-			outputText("-Added new weapon (by Demojay) - 'Beautiful Fly Whisk'. Obtained from the Lake like other Holy Items. Beautiful Fly Whisk reduces soulskill cooldown by 1 when equipped.\n");
 			outputText("-Beautiful Bow now gains x2 combat EXP, similar to the Beautiful Sword and Whip. (Demojay)\n");
 			outputText("-Claw Rend now properly prints out properly formatted damage. (Demojay)\n");
 			outputText("-Fixed bug where cooldown might not appear in cost description for Blood Soulskills. (Demojay)\n");
@@ -136,9 +136,9 @@ public class Changelog extends BaseContent
 			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 6. Req. Sky Poison Pearl Mastery 5 perk. It costs 201 asc points and you gain +18 venom recharge speed, +60% to max venom cap, +60% to poison resistance, 600% more spirit stones carried over and lower req. level to open next sections of pearl by 36 levels.\n");
 			outputText("-Killing Intent soulskill won't be unusable if PC wrath is too high or use other powers that would interfere with magical soulskills.\n");
 			outputText("-Added two new post fight options for thiefs: Guards (give enemy to local guards for smol reward), Kill (that Killing Intent not gonna come from nowhere does it?). Added new kill count for stats page: Thiefs.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New npc to interact with in Journey to the East inn. It's a healer that can heal or cure stats penalties (not as good / effective as Nadia treatments thou) for small pay in gems. Cure option have 6 hours cooldown.\n");
+			outputText("-Nadia cooldown for cure options been shortened from 12 hours to 2 hours. It also can restore a bit more stats now.\n");
+			outputText("-Minotaur King, Intermediate Leadership challange enemies and bosses from 4th floor of river dungeon would have harder time to softlock PC that got too OP minions to not even able to act personlay. From last to first it would change behaviour of minions to stop attacking until after X cycle enemy not die to any of minions and let PC act personaly.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

@@ -26,6 +26,8 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 		public static var EvelynnPerksToStatsConvertCounter:Number;
 		public static var EvelynnTavernTalks:Boolean;
 		public static var EvelynnCoreLimitBreakerCounter:Number;
+		public static var DianaTavernTalks1:Boolean;
+		public static var DianaTavernTalks2:Boolean;
 
 		public function stateObjectName():String {
 			return "JourneyToTheEast";
@@ -38,6 +40,8 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 			EvelynnPerksToStatsConvertCounter = 0;
 			EvelynnTavernTalks = false;
 			EvelynnCoreLimitBreakerCounter = 0;
+			DianaTavernTalks1 = false;
+			DianaTavernTalks2 = false;
 		}
 
 		public function saveToObject():Object {
@@ -47,7 +51,9 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 				"AhriStatsToSuperPerksConvertCounter": AhriStatsToSuperPerksConvertCounter,
 				"EvelynnPerksToStatsConvertCounter": EvelynnPerksToStatsConvertCounter,
 				"EvelynnTavernTalks": EvelynnTavernTalks,
-				"EvelynnCoreLimitBreakerCounter": EvelynnCoreLimitBreakerCounter
+				"EvelynnCoreLimitBreakerCounter": EvelynnCoreLimitBreakerCounter,
+				"DianaTavernTalks1": DianaTavernTalks1,
+				"DianaTavernTalks2": DianaTavernTalks2
 			};
 		}
 
@@ -59,6 +65,8 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 				EvelynnPerksToStatsConvertCounter = valueOr(o["EvelynnPerksToStatsConvertCounter"], 0);
 				EvelynnTavernTalks = valueOr(o["EvelynnTavernTalks"], false);
 				EvelynnCoreLimitBreakerCounter = valueOr(o["EvelynnCoreLimitBreakerCounter"], 0);
+				DianaTavernTalks1 = valueOr(o["DianaTavernTalks1"], false);
+				DianaTavernTalks2 = valueOr(o["DianaTavernTalks1"], false);
 			} else {
 				// loading from old save
 				resetState();
@@ -97,7 +105,8 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 3) addButton(10, "Neisa", NeisabutPCgotKOd);
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 4 || flags[kFLAGS.NEISA_FOLLOWER] == 5) addButton(10, "Neisa", meetingNeisaPostDungeonExploration).hint("Neisa is sitting at a table enjoying one of the local drinks.");
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 6) addButton(10, "Neisa", meetingNeisaPostDungeonExploration2).hint("Neisa is sitting at a table enjoying one of the local drinks.");
-			//addButtonDisabled(11, "???", "You see a horse woman sitting at a table on your left.");//Diana
+			if (DianaTavernTalks1) addButton(11, "Healer", dianaAtJttEMain).hint("You see a horse woman healer sitting at a table on your left.");
+			else addButton(11, "???", dianaAtJttEMain).hint("You see a horse woman sitting at a table on your left.");
 			addButton(14, "Leave", heXinDao.riverislandVillageStuff);
 		}
 
@@ -292,6 +301,77 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 				doNext(enteringInn,false);
 				advanceMinutes(30);
 			}
+		}
+
+		public function dianaAtJttEMain():void {
+			clearOutput();//\"<i></i>\"
+			if (DianaTavernTalks1) outputText("\"<i>You came again.</i>\" Her eyes alight with anticipation. \"<i>Do you need any healing or curing?</i>\"");
+			else {
+				outputText("\"<i>Greetings, I am a healer. Anyone that has any health problems or issues can come to me and I will lend aid.</i>\" Her eyes dart to her sides before returning to you, \"<i>With an appropriate price, of course.</i>\" The Horse-morph pauses, \"<i>So. Do you need any healing or curing ailments?</i>\"");
+				DianaTavernTalks1 = true;
+			}
+			menu();
+			if (player.HP < player.maxOverHP()) addButtonIfTrue(0, "Healing", dianaAtJttEMainHeal, "You need to have 50 gems.", player.gems >= 50);
+			else addButtonDisabled(0, "Healing", "You're fully healed already.");
+			if ((player.statStore.hasBuff("Weakened") || player.statStore.hasBuff("Drained") || player.statStore.hasBuff("Damaged")) && flags[kFLAGS.DIANA_CURE_COOLDOWN] <= 0) {
+				addButtonIfTrue(1, "C.C.(Base)", dianaAtJttEMainCurses1, "You need to have 150 gems.", player.gems >= 150, "Cure curses that affect stats non-multiplier bonuses.");
+				addButtonIfTrue(2, "C.C.(Mult)", dianaAtJttEMainCurses2, "You need to have 150 gems.", player.gems >= 150, "Cure curses that affect stats multiplier bonsues.");
+			}
+			else if (flags[kFLAGS.DIANA_CURE_COOLDOWN] > 0) {
+				addButtonDisabled(1, "C.C.(Base)", "Healer is not yet ready to cure your curses again.");
+				addButtonDisabled(2, "C.C.(Mult)", "Healer is not yet ready to cure your curses again.");
+			}
+			else {
+				addButtonDisabled(1, "C.C.(Base)", "You don't have any curses to cure. (non-multiplier)");
+				addButtonDisabled(2, "C.C.(Mult)", "You don't have any curses to cure. (multiplier)");
+			}
+			addButton(14, "Back", curry(enteringInn,false));
+		}
+		public function dianaAtJttEMainHeal():void {
+			clearOutput();
+			player.gems -= 50;
+			outputText("You ask if she could tend to your injuries, to which she perks up, rubbing her hands together with grinning eyes, \"<i>Of course I can!</i>\"\n\n");
+			outputText("The horse-morph stands up, walking around you as she stops at your back before moving her hands across your [skin], making you gasp as you feel a strong tingling sensation from her fingertips. Sparks of magic dance across your [skin] as her potent magic washes away your pains and injuries.\n\n");
+			outputText("The sparks intensify, becoming almost painful, causing you to grimace, but she quickly hushes you as the sound touch from her on your body soothes the pain. Then, it's all over as Nadia lets go, taking a step back. Your wounds have sealed, and injuries fade as if they never existed.\n\n");
+			if (player.hasStatusEffect(StatusEffects.CombatWounds)) {
+				if (player.statusEffectv1(StatusEffects.CombatWounds) > 0.2) player.addStatusValue(StatusEffects.CombatWounds, 1, -0.2);
+				else player.removeStatusEffect(StatusEffects.CombatWounds);
+			}
+			HPChange(player.maxOverHP() * 0.25, true);
+			EngineCore.changeFatigue( -(Math.round(player.maxFatigue() * 0.125)));
+			doNext(dianaAtJttEMain);
+			advanceMinutes(15);
+		}
+		public function dianaAtJttEMainCurses1():void {
+			clearOutput();
+			player.gems -= 150;
+			flags[kFLAGS.DIANA_CURE_COOLDOWN] = 8;
+			outputText("You ask if she can cure your curses, to which she nods. The horse-morph stands up and walks around you, stopping at your back. She begins to move her hands across your body, rubbing your [skin], forcing a small gasp as you feel a strong tingling sensation from her fingertips as it washes away your curses.\n\n");
+			outputText("The sparks of magic intensify, to an almost painful state. Your grimace, but she quickly hushes you, her soft touch of your body soothing the pain. Then, it's over. She steps back as your curses have lessened.\n\n");
+			for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
+				player.removeCurse(stat, 5,1);
+				player.removeCurse(stat, 5,2);
+				player.removeCurse(stat, 5,3);
+			}
+			doNext(dianaAtJttEMain);
+			advanceMinutes(15);
+		}
+		public function dianaAtJttEMainCurses2():void {
+			clearOutput();
+			player.gems -= 150;
+			flags[kFLAGS.DIANA_CURE_COOLDOWN] = 8;
+			outputText("You ask if she can cure your curses, to which she nods. The horse-morph stands up and walks around you, stopping at your back. She begins to move her hands across your body, rubbing your [skin], forcing a small gasp as you feel a strong tingling sensation from her fingertips as it washes away your curses.\n\n");
+			outputText("The sparks of magic intensify, to an almost painful state. Your grimace, but she quickly hushes you, her soft touch of your body soothing the pain. Then, it's over. She steps back as your curses have lessened.\n\n");
+			for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
+				if (stat != "sens")
+				{
+					player.removeCurse(stat+".mult", 0.05,1);
+					player.removeCurse(stat+".mult", 0.05,2);
+					player.removeCurse(stat+".mult", 0.05,3);
+				}
+			}
+			doNext(dianaAtJttEMain);
+			advanceMinutes(30);
 		}
 
 		public function NeisabutPCgotKOd():void {

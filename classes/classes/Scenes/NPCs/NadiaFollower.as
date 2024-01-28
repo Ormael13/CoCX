@@ -730,33 +730,34 @@ public function HealingScene():void {
 
 public function CuringCurseScene1():void {	//value related curses removal
 	clearOutput();
-	flags[kFLAGS.NADIA_CURE_COOLDOWN] = 12;
+	flags[kFLAGS.NADIA_CURE_COOLDOWN] = 2;
 	outputText("You ask Nadia if she could remove the curses ailing you. \"<i>Curses are a bit harder, but I can do that. I need access to your whole body though.</i>\" You remove your clothing, and when you look back, she's looking up and down your body. Nadia gives you a reassuring smile, spreading her arms wide as if for a hug. You raise one eyebrow, but comply, allowing her to hold you against her wonderful body.\n\n");
 	outputText("She then starts to move her hands across your body, rubbing sensually against your [skin], making you gasp as you feel a strong tingling feeling from her fingertips, washing away your curses.\n\n");
 	outputText("Nadia gives you a wicked little smile, rubbing her chest against yours. Her magic flares, causing more of the strange, shocking sensation as her soft mounds move against your [skin], your gasps soon turning into moans as her fingers move from your hips to your groin, sparks of pleasure shooting up your spine as she caresses your " + (player.hasCock() ? "" : "wo") + "manhood.\n\n");
 	outputText("The sparks of magic intensify, becoming almost painful. You grimace, but she hushes you, soft touch on your body countering the pain. Soon enough, it's all over. Nadia lets go, stepping back. Your curses have lessened, although now you feel rather aroused.\n\n");
 	dynStats("lus", 50, "scale", false);
 	for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
-		player.removeCurse(stat, 10,1);
-		player.removeCurse(stat, 10,2);
-		player.removeCurse(stat, 10,3);
+		player.removeCurse(stat, 20,1);
+		player.removeCurse(stat, 20,2);
+		player.removeCurse(stat, 20,3);
 	}
 	doNext(mainCampMenu);
 	advanceMinutes(15);
 }
 public function CuringCurseScene2():void {	//bonus multi related curses removal
 	clearOutput();
-	flags[kFLAGS.NADIA_CURE_COOLDOWN] = 12;
+	flags[kFLAGS.NADIA_CURE_COOLDOWN] = 2;
 	outputText("You ask Nadia if she could cure your curses, and she nods. Nadia gestures you to come into her arms, which you do, allowing her to hold you against her wonderful body.\n\n");
 	outputText("She then starts to move her hands across your body, rubbing sensually against your [skin], making you gasp as you feel a strong tingling feeling from her fingertips, washing away your curses.\n\n");
 	outputText("Nadia starts to rub her chest against yours, causing more of the strange, shocking sensation as her soft mounds move against your [skin], your gasps soon turning into moans as her fingers move from your hips to your groin, sparks of pleasure shooting up your spine as she caresses your " + (player.hasCock() ? "" : "wo") + "manhood.\n\n");
 	outputText("The sparks of magic intensify, becoming almost painful. You grimace, but she hushes you, soft touch on your body countering the pain. Soon enough, it's all over. Nadia lets go, stepping back. Your curses have lessened, although now you feel rather aroused.\n\n");
+	dynStats("lus", 50, "scale", false);
 	for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
 		if (stat != "sens")
 		{
-			player.removeCurse(stat+".mult", 0.10,1);
-			player.removeCurse(stat+".mult", 0.10,2);
-			player.removeCurse(stat+".mult", 0.10,3);
+			player.removeCurse(stat+".mult", 0.20,1);
+			player.removeCurse(stat+".mult", 0.20,2);
+			player.removeCurse(stat+".mult", 0.20,3);
 		}
 	}
 	doNext(mainCampMenu);

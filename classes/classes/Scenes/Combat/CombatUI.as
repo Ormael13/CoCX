@@ -523,7 +523,6 @@ public class CombatUI extends BaseCombatContent {
 						flags[kFLAGS.PLAYER_COMPANION_1] == "" ? kFLAGS.PLAYER_COMPANION_1 :
 								flags[kFLAGS.PLAYER_COMPANION_2] == "" ? kFLAGS.PLAYER_COMPANION_2 :
 										kFLAGS.PLAYER_COMPANION_3;
-
 				var strKiha:Number = 85;
 				var meleeAtkKiha:Number = 28
 				if (flags[kFLAGS.KIHA_LVL_UP] >= 1) {
@@ -563,7 +562,6 @@ public class CombatUI extends BaseCombatContent {
 			else if(!combat.combatIsOver(false)) {
 				// Migrate Sand Trap/Alruine/Drider Incubus/Minotaur King/AngelLR/TwinBosses/Lethice/WoodElvesHuntingParty
 				monster.postPlayerBusyBtnSpecial(btnSpecial1,btnSpecial2);
-
 				if ((player.weaponRange == weaponsrange.GTHRSPE && player.ammo <= 15) || ((player.weaponRange == weaponsrange.ATKNIFE || player.weaponRange == weaponsrange.RTKNIFE || player.weaponRange == weaponsrange.STKNIFE || player.weaponRange == weaponsrange.TTKNIFE) && player.ammo <= 10)
 				|| ((player.weaponRange == weaponsrange.GTHRAXE || player.weaponRange == weaponsrange.O_JAVEL || player.weaponRange == weaponsrange.TRJAVEL) && player.ammo <= 5)) {
 					btnSpecial3.show("Pick", combat.pickUpThrownWeapons, "Pick up some of the thrown weapons.");
