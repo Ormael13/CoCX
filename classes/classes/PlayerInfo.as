@@ -103,8 +103,8 @@ public class PlayerInfo extends BaseContent {
 		bodyStats += "<b>Fertility (With Bonuses) Rating:</b> " + Math.round(player.totalFertility()) + "\n";
 		if (player.cumQ() > 0)
 			bodyStats += "<b>Virility Rating:</b> " + Math.round(player.virilityQ() * 100) + "\n";
-		if (flags[kFLAGS.HUNGER_ENABLED] >= 1) bodyStats += "<b>Cum Production:</b> " + addComma(Math.round(player.cumQ())) + " / " + addComma(Math.round(player.cumCapacity())) + "mL (" + Math.round((player.cumQ() / player.cumCapacity()) * 100) + "%) \n";
-		else bodyStats += "<b>Cum Production:</b> " + addComma(Math.round(player.cumQ())) + "mL\n";
+		if (flags[kFLAGS.HUNGER_ENABLED] >= 1) bodyStats += "<b>Cum Production:</b> " + formatNumber(Math.round(player.cumQ())) + " / " + formatNumber(Math.round(player.cumCapacity())) + "mL (" + Math.round((player.cumQ() / player.cumCapacity()) * 100) + "%) \n";
+		else bodyStats += "<b>Cum Production:</b> " + formatNumber(Math.round(player.cumQ())) + "mL\n";
 		// New cum volume testing
 //		var cumQExp:ExponObject = player.cumQMore();
 //		// var cumString:String = ""; In case someone want to implement unit changes
@@ -142,7 +142,7 @@ public class PlayerInfo extends BaseContent {
 //		// bodyStats += cumCapExp.debug;
 		// End of testing
 		if (player.lactationQ() > 0)
-			bodyStats += "<b>Milk Production:</b> " + addComma(Math.round(player.lactationQ())) + "mL\n";
+			bodyStats += "<b>Milk Production:</b> " + formatNumber(Math.round(player.lactationQ())) + "mL\n";
 		if (player.hasStatusEffect(StatusEffects.Feeder)) {
 			bodyStats += "<b>Hours Since Last Time Breastfed Someone:</b>  " + player.statusEffectv2(StatusEffects.Feeder);
 			if (player.statusEffectv2(StatusEffects.Feeder) >= 72)

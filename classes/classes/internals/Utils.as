@@ -53,6 +53,7 @@ public class Utils extends Object
 			"Eighty-First", "Eighty-Second", "Eighty-Third", "Eighty-Fourth", "Eighty-Fifth", "Eighty-Sixth", "Eighty-Seventh", "Eighty-Eighth", "Eighty-Ninth", "Ninetieth", 
 			"Ninety-First", "Ninety-Second", "Ninety-Third", "Ninety-Fourth", "Ninety-Fifth", "Ninety-Sixth", "Ninety-Seventh", "Ninety-Eighth", "Ninety-Ninth", "Hundredth"];
 
+		public static const MAX_SAFE_NUMBER_VALUE:Number = 1e300;
 		//returns logical XOR of two values without much fuckery
 		public static function xor(a:Boolean, b:Boolean):Boolean {
 			return a && !b || !a && b;
