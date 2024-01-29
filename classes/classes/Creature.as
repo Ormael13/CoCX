@@ -2802,6 +2802,8 @@ public class Creature extends Utils
 			//if (quantity < 0) trace("SOMETHING HORRIBLY WRONG WITH CUM CALCULATIONS");
 			if (quantity < 2)
 				quantity = 2;
+			//limit to prevent reaching infinity
+			if(quantity >= Utils.MAX_SAFE_NUMBER_VALUE) quantity = Utils.MAX_SAFE_NUMBER_VALUE;
 			return quantity;
 		}
 
