@@ -34,9 +34,11 @@ public class Changelog extends BaseContent
 			//0 of 11 pages
 			outputText("<b>Version 0.8w-z:</b>\n\n");
 			outputText("-New tier 1 intelligence lvl-up perk: Brutal Spells. Req. Job: Sorcerer perk and 75+ int. Effect: Reduces enemy magic resistance with each spell. (+5% base spell strength)\n");
+			outputText("-New tier 9 misc lvl-up perk: Subzero Lustful Fury. Req. Prestige Job: Berzerker and Colder Lust / Colder Fury perks. Effect: Decreasing health loss from activating higher grades of berzerking/lustzerking by 25%. Allow to activate 2 grades of berzerker/lustzerker state at once when you have Endless Rage perk.\n");
 			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 1. No Req. It costs 21 asc points and you gain +3 venom recharge speed, +10% to max venom cap, +10% to poison resistance, 100% more spirit stones carried over and lower req. level to open next sections of pearl by 6 levels.\n");
 			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 2. Req. Sky Poison Pearl Mastery 1 perk. It costs 57 asc points and you gain +6 venom recharge speed, +20% to max venom cap, +20% to poison resistance, 200% more spirit stones carried over and lower req. level to open next sections of pearl by 12 levels.\n");
 			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 3. Req. Sky Poison Pearl Mastery 2 perk. It costs 93 asc points and you gain +9 venom recharge speed, +30% to max venom cap, +30% to poison resistance, 300% more spirit stones carried over and lower req. level to open next sections of pearl by 18 levels.\n");
+			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 4. Req. Sky Poison Pearl Mastery 3 perk. It costs 129 asc points and you gain +12 venom recharge speed, +40% to max venom cap, +40% to poison resistance, 400% more spirit stones carried over and lower req. level to open next sections of pearl by 24 levels.\n");
 			outputText("-Added new weapon (by Demojay) - 'Beautiful Fly Whisk'. Obtained from the Lake like other Holy Items. Beautiful Fly Whisk reduces soulskill cooldown by 1 when equipped.\n");
 			outputText("-New armor (by Sylabt & Ohaxer): Princess Regalia - obtained by completing Coronation quest at Trench or later from equipment shop. Cost 9,600 gems, 17 armor, 13 magic resistance, light type armor. Increases the damage of and reduces the cost of Mana shot, barrage and charged shot by 50%, also isn’t affected by Miracle Metal debuff for armor, and provides a 15% lifesteal from Mana shot, barrage, charged shot and crunch.\n");
 			outputText("-New flying sword: White Half-Moon Quartet - combined from two White Half-Moon Duo sword sets. Cost 240 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 4). Deal fire damage instead of physical damage.\n");
@@ -72,6 +74,8 @@ public class Changelog extends BaseContent
 			outputText("-Fixed bug relating to showing special statuses for bosses.\n");
 			outputText("-Added 'GigaWhitefire' spell to Zetaz. 'zetazMight' now causes Zetaz to start flying. Zetaz's 'Gust' attack is not used if the enemy is already blinded.\n");
 			outputText("-Omnibus Overseer's 'lust aura' and 'milk attack' moves now deal scaling damage. 'Lust Aura' DoT now deals scaling libido damage. Stunning/Confusing/Fearing the Overseer will disrupt their Lust Aura. Added message to Omnibus Overseer Lust Aura, to signal that they should try disrupting the boss to cancel the aura.\n");
+			outputText("-Add proper number formatting to the HP display function. Player Info now shows correct Soulskill cost reduction.\n");
+			outputText("-Fixed bug with Spiritual Enlightenment Ascension Perk where soulskill cost was being reduced by 20% per rank, rather than 2%. Fixed bug where you could obtain higher ranks in the Daoist and Body Cultivation Subpaths without purchasing the previous tiers.\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-\n");
@@ -81,8 +85,6 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Arigean Knowledge. Gained by becoming Arigean Princess. Effects: The knowledge of your Arigean ancestors rests in your mind. Gain immunity to mental debuffs and intelligence min is increased to 90.\n");
 			outputText("-Flying Sword Path, Soaring Blades, First Attack: Flying Sword, Killing Intent perks no longer are in level up menu. All spend before perks are refunded no worried.\n");
 			outputText("-Flying Sword Path perk have now ranks and 1st rank is learned by training with Qi costing 50 spirit stones for training.\n");
-			outputText("-Add proper number formatting to the HP display function. Player Info now shows correct Soulskill cost reduction. (Demojay)\n");
-			outputText("-Fixed bug with Spiritual Enlightenment Ascension Perk where soulskill cost was being reduced by 20% per rank, rather than 2%. Fixed bug where you could obtain higher ranks in the Daoist and Body Cultivation Subpaths without purchasing the previous tiers. (Demojay)\n");
 			outputText("-The 'monsterDodgeSkill' function for soulskills can now take hitmodifiers into account. Standardized dodge chance of different ranks of the 'Hail of Blades' soulskills. (Demojay)\n");
 			outputText("-Comet changes: baseSFCost 60 -> 400, given cooldown of 4, base damage scalingBonusWisdom * 1 -> 6 (similar to tier 2 magic AOE) (Demojay)\n");
 			outputText("-Many Birds Changes: baseSFCost 10 -> 200, cooldown of 2, given AOE effect, base damage scalingBonusWisdom * 1 -> 2 (similar to tier 1 magic AOE) (Demojay)\n");
@@ -101,7 +103,6 @@ public class Changelog extends BaseContent
 			outputText("-Added soulskills cooldown modifiers to soulskills (currently only Beautiful FlyWhisk modifier in game) (Demojay)\n");
 			outputText("-Altered SF-infused Blood Soulskill damage values so that maxed-out Blood Puppy attack are equal damage to the standard cast of the player version. (Demojay)\n");
 			outputText("-Adjusted SF-infused Blood Requiem damage to be in line with other Blood Soulskills. (Demojay)\n");
-			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 4. Req. Sky Poison Pearl Mastery 3 perk. It costs 129 asc points and you gain +12 venom recharge speed, +40% to max venom cap, +40% to poison resistance, 400% more spirit stones carried over and lower req. level to open next sections of pearl by 24 levels.\n");
 			outputText("-Added Shouldra to disable/enable menu. Disabling her if she's in camp already would reset tracker how much min lust she rising.\n");
 			outputText("-Fixed in Debug Menu Body part editor when selecting colours. (Demojay)\n");
 			outputText("-Moved Dragon Boi toggle to turn on/off from Members to Others subtab in NPC's tab from Camp Actions menu.\n");
@@ -126,7 +127,6 @@ public class Changelog extends BaseContent
 			outputText("-New flying sword: Aquamarine Half-Moon Duo - combined from two Aquamarine Half-Moon swords. Cost 300 spirit stones. Base atk is 15. It's classified as Large flying sword (set of 2). Deal water damage instead of physical damage.\n");
 			outputText("-New flying sword: Obsidian Half-Moon Duo - combined from two Obsidian Half-Moon swords. Cost 300 spirit stones. Base atk is 15. It's classified as Large flying sword (set of 2). Deal earth damage instead of physical damage.\n");
 			outputText("-New flying sword: Chrysolite New Moon - buyable at 'Flying Swords are always with you!' shop in He'Xin'Dao. Cost 375 spirit stones. Base atk is 40. It's classified as Massive flying sword. Deal plasma damage instead of physical damage. Soulforce cost of using it to fly or attack are increased by 10%.\n");
-			outputText("-New tier 9 misc lvl-up perk: Subzero Lustful Fury. Req. Prestige Job: Berzerker and Colder Lust / Colder Fury perks. Effect: Decreasing health loss from activating higher grades of berzerking/lustzerking by 25%. Allow to activate 2 grades of berzerker/lustzerker state at once when you have Endless Rage perk.\n");
 			outputText("-If player know spell Heal or Cure and have enough mana can use them out of combat in camp (Camp Actions > Spend Time).\n");
 			outputText("-Construct enemy type can be now affected by lust attacks (and their lust vul been tiny bit incresed to not be 0 anymore). They not gonna masturbate but would getting more glitched until they deactivate allowing for lust win against them. Past 85% threshold they even could radomly skip actions in their turn.\n");
 			outputText("-Added to drop tables of all goblin type enemies: Healing herb, Moon grass, Snakebane, Ironweed, Blade fern. With low chance added to Goblin Shaman drop table Alraune nectar, Ginseng.\n");
@@ -139,7 +139,7 @@ public class Changelog extends BaseContent
 			outputText("-New npc to interact with in Journey to the East inn. It's a healer that can heal or cure stats penalties (not as good / effective as Nadia treatments thou) for small pay in gems. Cure option have 6 hours cooldown.\n");
 			outputText("-Nadia cooldown for cure options been shortened from 12 hours to 2 hours. It also can restore a bit more stats now.\n");
 			outputText("-Minotaur King, Intermediate Leadership challange enemies and bosses from 4th floor of river dungeon would have harder time to softlock PC that got too OP minions to not even able to act personlay. From last to first it would change behaviour of minions to stop attacking until after X cycle enemy not die to any of minions and let PC act personaly.\n");
-			outputText("-\n");
+			outputText("-Remove the int max limit on cum and lactation. (jfmherokiller)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -260,7 +260,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -298,6 +300,7 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
