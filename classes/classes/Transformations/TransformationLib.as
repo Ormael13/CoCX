@@ -554,7 +554,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const FaceFoxFangs: Transformation 			= face.FaceFoxFangs.registerTf(AS_FACE, AE_WEREFOX);
     public const FaceAbyssalShark: Transformation 		= face.FaceAbyssalShark.registerTf(AS_FACE, AE_ABYSSAL_SHARK);
     public const FaceArigean: Transformation 			= face.FaceArigean.registerTf(AS_FACE, AE_ARIGEAN);
-    public const FaceDemon: Transformation 				= face.FaceArigean.registerTf(AS_FACE, AE_DEMON);
+    public const FaceDemon: Transformation 				= face.FaceDemon.registerTf(AS_FACE, AE_DEMON);
 
 
 //GILLS
