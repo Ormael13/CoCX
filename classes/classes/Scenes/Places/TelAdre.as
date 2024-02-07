@@ -1663,7 +1663,7 @@ private function weightLifting():void {
 	player.trainStat("tou",1,player.trainStatCap("tou",75));
 	//Body changes here
 	//Muscleness boost!
-	outputText(player.modTone(85,5+rand(5)));
+	outputText(player.modTone(player.maxToneCap(),5+rand(5)));
 	outputText("\n\nDo you want to hit the showers before you leave the gym??");
 	if(flags[kFLAGS.BROOKE_MET] == 1) {
 		menu();
