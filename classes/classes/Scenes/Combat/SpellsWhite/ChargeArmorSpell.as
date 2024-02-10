@@ -90,7 +90,7 @@ public class ChargeArmorSpell extends AbstractWhiteSpell {
 			ChargeArmorBoostCap *= 2;
 			ChargeArmorBoost *= 2;
 		}
-		//ChargeArmorBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
+		//ChargeArmorBoost += player.inte / 10;player.inte * 0.1 - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells (maybe only if they have a perk from the prestige job: magus/warlock/another related to spells)
 		if (player.hasPerk(PerkLib.JobEnchanter)) ChargeArmorBoost *= 1.2;
 		ChargeArmorBoost *= spellModWhite();
 		//ChargeArmorBoost = FnHelpers.FN.logScale(ChargeArmorBoost,ChargeArmorABC,10);

@@ -67,7 +67,7 @@ public class MightSpell extends AbstractBlackSpell {
 		MightBoostCap *= player.intStat.core.max;
 		MightBoostCap            = Math.round(MightBoostCap);
 		var MightBoost:Number    = player.intStat.core.value;
-		//MightBoost += Math.round(player.intStat.max * 0.1); - może tylko jak bedzie mieć perk z prestige job: magus / warock / inny związany z spells
+		//MightBoost += Math.round(player.intStat.max * 0.1); - może tylko jak bedzie mieć perk z prestige job: magus / warock / inny związany z spells (maybe only when they have a perk from the prestige job: magus/warlock/another related to spells)
 		if (MightBoost < 10) MightBoost = 10;
 		if (player.hasPerk(PerkLib.JobEnchanter)) MightBoost *= 1.2;
 		MightBoost *= spellModBlack();
