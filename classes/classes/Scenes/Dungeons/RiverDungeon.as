@@ -430,7 +430,11 @@ public class RiverDungeon extends DungeonAbstractContent
 				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 				//spriteSelect(SpriteDb.s_green_slime);
 				if (player.hasKeyItem("Key Of Darkness") >= 0 || flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 7) flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(4);
-				else flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(5);
+				else {
+					var rdem:Number = rand(5);
+					if (rand(3) > 0) rdem = 4;
+					flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rdem;
+				}
 				if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
 					outputText("A soft shuffling sound catches your attention and you turn around, spotting a large, shadowy mass rushing towards you!  When it it almost next to you it starts to morph into a copy of you, made up of an inky, black darkness. nearly nine feet tall, the creature seems to draw in light, casting a dark shadow through the hallway.");
 					outputText("As you strain to see this blackened doppelganger, it lurches toward you!");
@@ -439,7 +443,10 @@ public class RiverDungeon extends DungeonAbstractContent
 				startCombat(new DarknessElemental(), true);
 				//doNext(playerMenu);
 			}
-			else player.addStatusValue(StatusEffects.RiverDungeonA, 1, 10);
+			else {
+				player.addStatusValue(StatusEffects.RiverDungeonA, 1, 10);
+				if (player.hasKeyItem("Key Of Darkness") < 0 || flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] <= 7) outputText("\n\n<b>High chance to find Unique Darkness Elemental</b>\n\n");
+			}
 		}
 		
 		public function defeatVegot():void {

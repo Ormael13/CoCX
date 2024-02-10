@@ -4326,6 +4326,11 @@ public final class Mutations extends MutationsHelper {
 		}
     }
 
+	/*public function redManuscript(player:Player):void {
+		menu();
+		addButton();
+		addButton(14, "Back", inventory.takeItem(consumables.RMANUSC, playerMenu));
+	}*/
 	public function redManuscript(player:Player):void {
 		clearOutput();
         outputText("You open the red manuscript and discover it to be an instructional on the use of blood magic.  The book shares generic information about blood magic, generally what you'd expect anyway - how to draw it using your blood as well as the positive and negative effects of repeated use.  It doesn't take long to read a few pages, but before you can stow it away for later, the book vanishes within your hands. The same metallic scent lingers on your [claws], the lingering smell of blood is stained on you... at least for the time being.");
