@@ -875,6 +875,12 @@ public class LowerBody extends SaveableBodyPart {
 		canTaur: true,
 		fur: true
 	});
+	public static const MOTH:int = 84;//button 0 on 2nd page of metamorph
+	EnumValue.add(Types, MOTH, "MOTH", {
+		name: "moth",
+		appearanceDesc: "Your insectile {legCount} legs are covered in a layer of fuzzy [chitin color1] hair",
+		chitin: true
+	});
 
 	override public function set type(value:int):void {
 		super.type = value;
