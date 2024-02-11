@@ -3424,13 +3424,13 @@ import classes.Scenes.Combat.CombatAbility;
 			return perk.ptype.keepOnAscension(respec) || (perk.value4 > 0);
 		}
 
-		private function isSpecialKeyItem(keyName:* = null):Boolean {//tylko sky poinson pearl zostawić tutaj
+		private function isSpecialKeyItem(keyName:* = null):Boolean {//tylko sky poinson pearl zostawić tutaj (only leave sky, poison, pearl here)
 			return (keyName == "Ascension" || keyName == "Sky Poison Pearl" || keyName == "Nieve's Tear");
 		}
 
 		private function isSpecialStatus(statusEffects:StatusEffectClass, statusEffect:* = null):Boolean {
-			return (statusEffect == StatusEffects.KnowsWereBeast || statusEffects.value4 == 9000);	//na razie jest tu tylko werebeast
-		}	//ale potem zamienić to na specialne soulskills z każdego z klanów
+			return (statusEffect == StatusEffects.KnowsWereBeast || statusEffects.value4 == 9000);	//na razie jest tu tylko werebeast (so far, there is only a werebeast here)
+		}	//ale potem zamienić to na specialne soulskills z każdego z klanów (but then replace it with special soulskills from each of the clans)
 
 		public static function hasAscensionSpell(spellCat:int):Boolean {
 			var spellsToCheck:/*StatusEffect*/Array;

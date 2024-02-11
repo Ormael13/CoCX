@@ -95,7 +95,7 @@ public class ChargeRangeWeaponSpell extends AbstractWhiteSpell {
 			ChargeRangeWeaponBoostCap *= 2;
 			ChargeRangeWeaponBoost *= 2;
 		}
-		//ChargeRangeWeaponBoost += Math.round(player.intStat.max * 0.1); - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
+		//ChargeRangeWeaponBoost += Math.round(player.intStat.max * 0.1); - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells (maybe only when they have a perk from the prestige job: magus/warlock/another related to spells)
 		if (player.hasPerk(PerkLib.JobEnchanter)) ChargeRangeWeaponBoost *= 1.2;
 		ChargeRangeWeaponBoost *= spellModWhite();
 		//ChargeRangeWeaponBoost = FnHelpers.FN.logScale(ChargeRangeWeaponBoost,ChargeWeaponABC,10);

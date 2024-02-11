@@ -8052,7 +8052,7 @@ public class PerkLib
             //        .requireLevel(1)
             //        .requireCustomFunction(function (player:Player):Boolean {
             //            return player.internalChimeraScore() >= 2;
-            //        }, "Two of any race internal mutations");//TYLKO do szybkich testów rasowych/rasowych perków mutacyjnych
+            //        }, "Two of any race internal mutations");//TYLKO do szybkich testów rasowych/rasowych perków mutacyjnych (ONLY for quick tests of racial/mutational racial perks)
 			
 			// validate tier lists
 			for each (var tierlist:Array in PERK_TIER_LISTS) {
