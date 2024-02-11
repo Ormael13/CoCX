@@ -193,11 +193,11 @@ public final class ConsumableLib extends AlchemyLib
 		public const SSPONGE:Consumable = new ShimmeringSponge();
 
 		//MAGIC BOOKS
-		public const B__BOOK: Consumable = mk("B. Book", "B. Book", "a small book with a midnight-black cover", 40, "This solid black book is totally unmarked, saved for a blood red clasp that holds the covers closed until you are ready to read it.  The pages are edged with gold, like some of the fancy books in the monastary back home.", m.blackSpellbook);
-		public const G__BOOK: Consumable = mk("G. Book", "G. Book", "a small book with a ash-grey cover", 200, "This grey book is totally unmarked, and on the cover is wrote few words that seems have no meaning or maybe you just aren't able to decipher them yet. A plain green clasp keeps the covers closed until you are ready to read it.", m.greySpellbook);
-		public const W__BOOK: Consumable = mk("W. Book", "W. Book", "a small book with a pristine white cover", 40, "This white book is totally unmarked, and the cover is devoid of any lettering or title.  A shiny brass clasp keeps the covers closed until you are ready to read it.", m.whiteSpellbook);
-		public const RMANUSC: Consumable = mk("R.Manusc", "R. Manuscript", "a Red Manuscript", 50, "This manuscript contains knowledge about blood spells.  There's a faint metallic scent that lingers around it, the unmistakable scent of blood from some creature.", m.redManuscript);
-		public const CRIMS_J: Consumable = mk("Crims.J", "Crimson Jade", "a Crimson Jade", 50, "This jade seems to contain knowledge about the usage of blood soulskills. There's a faint metallic scent that lingers around it, the unmistakable scent of blood from some creature.", m.crimsonJade);
+		public const B__BOOK: Consumable = new BlackBook();
+		public const G__BOOK: Consumable = new GreyBook();
+		public const W__BOOK: Consumable = new WhiteBook();
+		public const RMANUSC: Consumable = new RedManuscript();
+		public const CRIMS_J: Consumable = new CrimsonJade();
 		public const POL_MID: Consumable = mk("Pol.Mid", "Pol.Mid.Spell", "a scroll with Polar Midnight spell", 200, "This scroll, wrote down by Alvina Shadowbane, contain knowledge about Polar Midnight spell.", m.blackPolarMidnight);
 		public const MET_SHO: Consumable = mk("Met.Sho", "Met.Sho.Spell", "a tome with Meteor Shower spell", 200, "This tome, contain knowledge about Meteor Shower spell.", m.whiteMeteorShower);
 
