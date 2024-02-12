@@ -30,7 +30,7 @@ public class RedManuscript extends Consumable {
 	public function redManuscript():void {
 		EngineCore.menu();
 		EngineCore.addButton(0, "Back", redManuscript0);
-		EngineCore.addButton(1, "Use", redManuscript1).hint("Only Int gain with no spell learned.");
+		EngineCore.addButton(1, "Use", redManuscript1, 0).hint("Only Int gain with no spell learned.");
 		if (player.hasPerk(PerkLib.HiddenJobBloodDemon) || player.hasPerk(PerkLib.PrestigeJobGreySage)) {
 			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsBloodMissiles)) EngineCore.addButton(2, "B.Miss", redManuscript1, 1).hint("Learn Blood Missiles spell.");
 			else EngineCore.addButtonDisabled(2, "B.Miss", "You not have have enough int or already know this spell.");

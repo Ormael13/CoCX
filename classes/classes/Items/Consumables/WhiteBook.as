@@ -30,7 +30,7 @@ public class WhiteBook extends Consumable {
 	public function whiteSpellbook():void {
 		EngineCore.menu();
 		EngineCore.addButton(0, "Back", whiteSpellbook0);
-		EngineCore.addButton(1, "Use", whiteSpellbook1).hint("Only Int gain with no spell learned.");
+		EngineCore.addButton(1, "Use", whiteSpellbook1, 0).hint("Only Int gain with no spell learned.");
 		if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsWhitefire)) EngineCore.addButton(2, "Whitef", whiteSpellbook1, 1).hint("Learn Whitefire spell.");
 		else EngineCore.addButtonDisabled(2, "Whitef", "You not have have enough int or already know this spell.");
 		if (player.inte >= 25 && !player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) EngineCore.addButton(3, "L.Bolt", whiteSpellbook1, 2).hint("Learn Lightning Bolt spell.");

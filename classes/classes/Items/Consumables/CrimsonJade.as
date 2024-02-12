@@ -30,7 +30,7 @@ public class CrimsonJade extends Consumable {
 	public function crimsonJade():void {
 		EngineCore.menu();
         EngineCore.addButton(0, "Back", crimsonJade0);
-		EngineCore.addButton(1, "Use", crimsonJade1).hint("Only Wis gain with no soulskill learned.");
+		EngineCore.addButton(1, "Use", crimsonJade1, 0).hint("Only Wis gain with no soulskill learned.");
 		if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) {
 			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.KnowsBloodSwipe)) EngineCore.addButton(2, "B.Swip", crimsonJade1, 1).hint("Learn Blood Swipe soulskill.");
 			else EngineCore.addButtonDisabled(2, "B.Swip", "You not have have enough wis or already know this soulskill.");

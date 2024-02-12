@@ -30,7 +30,7 @@ public class BlackBook extends Consumable {
 	public function blackSpellbook():void {
 		EngineCore.menu();
 		EngineCore.addButton(0, "Back", blackSpellbook0);
-		EngineCore.addButton(1, "Use", blackSpellbook1).hint("Only Int gain with no spell learned.");
+		EngineCore.addButton(1, "Use", blackSpellbook1, 0).hint("Only Int gain with no spell learned.");
 		if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsIceSpike)) EngineCore.addButton(2, "I.Spik", blackSpellbook1, 1).hint("Learn Ice Spike spell.");
 		else EngineCore.addButtonDisabled(2, "I.Spik", "You not have have enough int or already know this spell.");
 		if (player.inte >= 25 && !player.hasStatusEffect(StatusEffects.KnowsDarknessShard)) EngineCore.addButton(3, "D.Shar", blackSpellbook1, 2).hint("Learn Darkness Shard spell.");

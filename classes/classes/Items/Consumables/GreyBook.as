@@ -30,7 +30,7 @@ public class GreyBook extends Consumable {
 	public function greySpellbook():void {
 		EngineCore.menu();
 		EngineCore.addButton(0, "Back", greySpellbook0);
-		EngineCore.addButton(1, "Use", greySpellbook1).hint("Only Int gain with no spell learned.");
+		EngineCore.addButton(1, "Use", greySpellbook1, 0).hint("Only Int gain with no spell learned.");
 		if (player.hasPerk(PerkLib.GreyMagic) || player.hasPerk(PerkLib.PrestigeJobGreySage)) {
 			if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsManaShield)) EngineCore.addButton(2, "M.Shie", greySpellbook1, 1).hint("Learn Mana Shield spell.");
 			else EngineCore.addButtonDisabled(2, "M.Shie", "You not have have enough int or already know this spell.");
