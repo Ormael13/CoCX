@@ -48,7 +48,8 @@ public class MothRace extends Race {
                 .armType(Arms.MOTH, +1)
                 .legType(LowerBody.MOTH, +1)
                 .hasCockOfType(CockTypesEnum.INSECT, +1)
-                .wingType(Wings.MOTH, +2)
+                .wingType(ANY(Wings.MOTH_SMALL,Wings.MOTH_LARGE), +1)
+                .wingType(Wings.MOTH_LARGE, +2)
                 .hasPerk(PerkLib.AntyDexterity, +1)
                 .hasPerk(PerkLib.AntOvipositor, +1);
         addMutation(IMutationsLib.TrachealSystemIM);
