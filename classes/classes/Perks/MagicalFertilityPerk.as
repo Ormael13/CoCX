@@ -9,7 +9,7 @@ package classes.Perks
 		override public function desc(params:PerkClass = null):String
 		{
 			if (!player || !params) return _desc;
-			return "" + 10 + (params.value1 * 5) + "% higher chance of pregnancy and increased pregnancy speed.";
+			return "" + (10 + (params.value1 * 5)) + "% higher chance of pregnancy and increased pregnancy speed.";
 		}
 
 		public function MagicalFertilityPerk()

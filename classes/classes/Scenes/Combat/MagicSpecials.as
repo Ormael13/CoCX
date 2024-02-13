@@ -66,7 +66,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.SubzeroLustfulFury) && player.hasPerk(PerkLib.EndlessRage)) {
 				player.HP -= Math.round(player.maxOverHP() * berzerkerandlustzerkerHPdrain());
 				if (!player.hasPerk(PerkLib.EndlessRage)) player.createStatusEffect(StatusEffects.Lustzerking,(lustzerkDuration-1),0,0,0);
-				player.createStatusEffect(StatusEffects.Berzerking,berzerkDuration,1,0,0);
+				player.createStatusEffect(StatusEffects.Lustzerking,lustzerkDuration,1,0,0);
 				outputText("<b>Lustzerking Grade 2 was used successfully.</b>\n\n");
 			}
 			else {
