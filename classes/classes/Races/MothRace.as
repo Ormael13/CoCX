@@ -46,7 +46,7 @@ public class MothRace extends Race {
                 .earType(Ears.INSECT, +1, -1)
                 .skinCoatType(Skin.CHITIN, +1)
                 .armType(Arms.MOTH, +1)
-                .legType(LowerBody.MOTH, +2)
+                .legType(LowerBody.MOTH, +1)
                 .hasCockOfType(CockTypesEnum.INSECT, +1)
                 .wingType(Wings.MOTH, +2)
                 .hasPerk(PerkLib.AntyDexterity, +1)
