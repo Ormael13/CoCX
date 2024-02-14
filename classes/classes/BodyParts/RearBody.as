@@ -196,6 +196,11 @@ public class RearBody extends BodyPart {
 		name: "thirsty neck",
 		appearanceDesc: "Your throat is constantly parched, aching for the sweet taste of blood. It’s difficult for you to not go crazy when the liquid is spilled nearby and at time you even fully lose control. The exact spot where your sire has bitten you is still marked by a pair of faint scars, the only wound on your entire body that won’t fully heal no matter how much you try."
 	});
+	public static const MOTH_COLLAR: int = 33;
+	EnumValue.add(Types, MOTH_COLLAR, "MOTH_COLLAR", {
+		name: "moth collar",
+		appearanceDesc: "You have a fluffy collar"
+	});
 
 	public function RearBody(creature:Creature) {
 		super(creature, null);
