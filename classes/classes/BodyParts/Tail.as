@@ -509,6 +509,11 @@ public class Tail extends SaveableBodyPart {
 		//tailSlam: true,
 		isLong: true
 	});
+	public static const MOTH_ABDOMEN: int = 61;
+	EnumValue.add(Types, MOTH_ABDOMEN, "MOTH_ABDOMEN", {
+		name:"moth abdomen",
+		appearanceDesc: "You have a moth abdomen"
+	});
 
 	override public function set type(value:int):void {
 		var old:int = type;
