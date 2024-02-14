@@ -713,7 +713,10 @@ public class AlchemyLib extends BaseContent {
 		short: "Peafowl",
 		name : "Peafowl"
 	});
-	
+	public static const AE_MOTH:int         = EnumValue.add(Essences, 217, "MOTH", {
+		short: "Moth",
+		name : "Moth"
+	});
 	public static function DEFAULT_ESSENCE_DROP_TABLE(mainEssencee:int, withHuman:Boolean = false):Array {
 		var result:Array = [
 			[10, mainEssencee],
