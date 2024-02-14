@@ -531,10 +531,7 @@ public class Arms extends BodyPart {
 	public static const MOTH:int = 68;
 	EnumValue.add(Types, MOTH, "MOTH", {
 		name:"ant",
-		appearanceDesc: "Where a normal creature would have only two arms, you instead have four, with fluffy [chitin color] hair covering them from the biceps down, resembling a pair of long [chitin color] fluffy gloves from a distance.",
-		armCount: 4,
-		claw: true,
-		chitin: true
+		appearanceDesc: "your arms are covered in a sleeve like fuzzy mass."
 	});
 	public static function canFly(id: int): Boolean {
 		return Types[id].canFly || false;
