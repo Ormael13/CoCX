@@ -157,6 +157,21 @@ public class AntennaeTransformations extends MutationsHelper {
 				return player.antennae.type === Antennae.ANT;
 			}
 	);
+	public const AntennaeMoth: Transformation = new SimpleTransformation("Moth Antennae",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += " you suddenly feel a headache as you look around the world, you suddenly feel calm as if the headache you had before was never there,  you look in the lake and see 2 antennae sticking out of your head. <b>You now have Antennae</b>";
+				player.antennae.type = Antennae.MOTH;
+				if (doOutput) outputText(desc);
+				//Metamorph.unlockMetamorph(AntennaeMem.getMemory(AntennaeMem.JABBERWOCKY));
+			},
+			// is present
+			function (): Boolean {
+				return player.antennae.type === Antennae.MOTH;
+			}
+	);
 	/*
   */
 }
