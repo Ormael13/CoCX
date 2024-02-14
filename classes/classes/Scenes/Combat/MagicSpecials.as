@@ -823,7 +823,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.SubzeroLustfulFury) && player.hasPerk(PerkLib.EndlessRage)) {
 				bd = buttons.add("Lustserk G1+2", lustzerkG1and2);
 				bd.requireWrath(50);
-				if (player.hasStatusEffect(StatusEffects.Berzerking) && player.statusEffectv2(StatusEffects.Berzerking) >= 1) {
+				if (player.hasStatusEffect(StatusEffects.Lustzerking) && player.statusEffectv2(StatusEffects.Lustzerking) >= 1) {
 					bd.disable("You're already reached 2nd grade of Lustserk!");
 				}
 			}
@@ -835,7 +835,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			if (player.hasPerk(PerkLib.EndlessRage) && player.hasPerk(PerkLib.SubzeroLustfulFury)) {
 				bd = buttons.add("Lustserk G2+3", lustzerkG2and3);
-				if (player.statusEffectv2(StatusEffects.Berzerking) >= 2) {
+				if (player.statusEffectv2(StatusEffects.Lustzerking) >= 2) {
 					bd.disable("You're already reached 3rd grade of Lustserk!");
 				}
 			}
@@ -847,7 +847,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			if (player.hasPerk(PerkLib.EndlessRage) && player.statusEffectv2(StatusEffects.Lustzerking) >= 1 && player.hasPerk(PerkLib.SubzeroLustfulFury)) {
 				bd = buttons.add("Lustserk G3+4", lustzerkG3and4);
-				if (player.statusEffectv2(StatusEffects.Berzerking) >= 3) {
+				if (player.statusEffectv2(StatusEffects.Lustzerking) >= 3) {
 					bd.disable("You're already reached 4th grade of Lustserk!");
 				}
 			}

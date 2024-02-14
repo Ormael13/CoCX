@@ -142,7 +142,7 @@ public class Changelog extends BaseContent
 			outputText("-Remove the int max limit on cum and lactation. (jfmherokiller)\n");
 			outputText("-Added additional notes to rooms where can find subboss on 3rd floor of river dungeon and made it chance to appear been largely increased.\n");
 			outputText("-Changes to White Book, Black Book, Grey Book, Red Manuscript and Crimson Jade. Each of these items now allow to have choice: no use it, use only stat increasing part or if meet req. choose which spell, soulskill to learn. It mean now can learn even the last on the list spell if stat is high enought without need to use 10+ items before that.\n");
-			outputText("-\n");
+			outputText("-Added short explanation how to increase 'Additional Soulforce from training' on Soulforce page.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
