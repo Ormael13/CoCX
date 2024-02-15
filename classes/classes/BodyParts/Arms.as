@@ -528,7 +528,11 @@ public class Arms extends BodyPart {
 		appearanceDesc: "Your arms are covered by thick [fur color] fur, ending in hands with paw pads and four fingers ending with hoof-like fingernails.",
 		fur: true
 	});
-
+	public static const MOTH:int = 68;
+	EnumValue.add(Types, MOTH, "MOTH", {
+		name:"ant",
+		appearanceDesc: "your arms are covered in a sleeve like fuzzy mass."
+	});
 	public static function canFly(id: int): Boolean {
 		return Types[id].canFly || false;
 	}

@@ -1327,6 +1327,22 @@ public class ArmsTransformations extends MutationsHelper {
 				return player.arms.type === Arms.REINDEER;
 			}
 	);
+	public const ArmsMoth: Transformation = new SimpleTransformation("Moth Arms",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "Your arms begin to itch so you scratch at them, eventually you look over and discover your arms are now covered in a sleeve like fuzzy mass. <b>You now have Moth arms</b>";
+
+				player.arms.type = Arms.MOTH;
+				if (doOutput) outputText(desc);
+				//Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.REINDEER));
+			},
+			// is present
+			function (): Boolean {
+				return player.arms.type === Arms.MOTH;
+			}
+	);
 	/*
   */
 }

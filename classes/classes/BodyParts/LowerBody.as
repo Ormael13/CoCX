@@ -867,13 +867,18 @@ public class LowerBody extends SaveableBodyPart {
 		appearanceDesc: "Your {legCount} perfect lissom legs end in delicate, clawed feet allowing you to move with supernatural grace."
 	});
 
-	public static const CLOVEN_HOOFED_2:int = 83;
+	public static const CLOVEN_HOOFED_2:int = 83;//button 0 on 2nd page of metamorph
 	EnumValue.add(Types, CLOVEN_HOOFED_2, "CLOVEN_HOOFED_2", {
 		name: "reindeer",
 		legsPrefixes: ["deer-like", "cloven-hoofed", "", ""],
 		appearanceDesc: "{legCount} digitigrade legs covered with thick [fur color] fur form below your [hips], ending in cloven hooves.",
 		canTaur: true,
 		fur: true
+	});
+	public static const MOTH:int = 84;
+	EnumValue.add(Types, MOTH, "MOTH", {
+		name: "moth",
+		appearanceDesc: "your legs are covered in a bell bottom like fuzzy mass"
 	});
 
 	override public function set type(value:int):void {

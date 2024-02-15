@@ -476,6 +476,22 @@ public class RearBodyTransformations extends MutationsHelper {
 				return player.rearBody.type === RearBody.ARIGEAN_YELLOW_AURA;
 			}
 	);
+	public const RearBodyMoth: Transformation = new SimpleTransformation("Moth Fluffy Collar",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "Your neck begins to itch as you scratch it, when the itching stops you look in your reflection and you find a fuzzy collar of fur around your neck. <b>You now have a fluffy collar.</b>";
+				player.rearBody.type = RearBody.MOTH_COLLAR;
+
+				if (doOutput) outputText(desc);
+				//Metamorph.unlockMetamorph(RearBodyMem.getMemory(RearBodyMem.ABYSSAL_SHARK_FIN));
+			},
+			// is present
+			function (): Boolean {
+				return player.rearBody.type === RearBody.MOTH_COLLAR;
+			}
+	);
 	/*
   */
 }

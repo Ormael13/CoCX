@@ -378,7 +378,22 @@ public class Wings extends SaveableBodyPart {
 		canFly: true,
 		physical: true
 	});
-
+	public static const MOTH_SMALL: int = 45;
+	EnumValue.add(Types, MOTH_SMALL, "MOTH_SMALL", {
+		name:"moth",
+		desc:"fuzzy, small",
+		appearanceDesc: "A pair of small [chitin color1] fuzzy satin covered insectile wings.",
+		canFly: true,
+		physical: true
+	});
+	public static const MOTH_LARGE: int = 46;
+	EnumValue.add(Types, MOTH_LARGE, "MOTH_LARGE", {
+		name:"moth",
+		desc:"fuzzy, large",
+		appearanceDesc: "A pair of large [chitin color1] fuzzy satin covered insectile wings.",
+		canFly: true,
+		physical: true
+	});
 	public var desc:String = "non-existant";
 	public function Wings(creature:Creature) {
 		super(creature, "wings", []);
