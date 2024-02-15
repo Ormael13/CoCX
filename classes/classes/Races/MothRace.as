@@ -40,18 +40,21 @@ public class MothRace extends Race {
     }
     public override function setup():void {
         addScores()
-                .faceType(ANY(Face.HUMAN, Face.ANT), +1, -1)
-                .hornType(Horns.NONE, +1)
+                //.faceType(ANY(Face.HUMAN, Face.ANT), +1, -1)
+                //.hornType(Horns.NONE, +1)
                 .antennaeType(Antennae.MOTH, +1)
                 .earType(Ears.INSECT, +1, -1)
-                .skinCoatType(Skin.CHITIN, +1)
+				.eyeType(Eyes.MOTH, +1)
                 .armType(Arms.MOTH, +1)
                 .legType(LowerBody.MOTH, +1)
-                .hasCockOfType(CockTypesEnum.INSECT, +1)
-                .wingType(ANY(Wings.MOTH_SMALL,Wings.MOTH_LARGE), +1)
+				.tailType(Tail.MOTH_ABDOMEN, +1)
+				.rearType(RearBody.MOTH_COLLAR, +1)
+                .wingType(Wings.MOTH_SMALL, +1)
                 .wingType(Wings.MOTH_LARGE, +2)
-                .hasPerk(PerkLib.AntyDexterity, +1)
-                .hasPerk(PerkLib.AntOvipositor, +1);
+                .skinCoatType(Skin.CHITIN, +1)
+                .hasCockOfType(CockTypesEnum.INSECT, +1);
+                //.hasPerk(PerkLib.AntyDexterity, +1)
+		
         addMutation(IMutationsLib.TrachealSystemIM);
     }
 }

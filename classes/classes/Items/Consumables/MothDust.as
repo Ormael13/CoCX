@@ -15,7 +15,7 @@ import classes.Items.ItemTags;
 
 public class MothDust extends Consumable {
     public function MothDust() {
-        super("M.Dust", "M.Dust", "a handful of luminescent dust", 6, "A handful of luminescent dust.  It glows very softly, and smells sweet. You look at the handful of dust and wonder just how it'll affect you.");
+        super("MothDus", "MothDust", "a handful of luminescent dust", 6, "A handful of luminescent dust.  It glows very softly, and smells sweet. You look at the handful of dust and wonder just how it'll affect you.");
         withTag(ItemTags.U_TF);
         refineableInto(
                 AlchemyLib.DEFAULT_SUBSTANCES_DROP_TABLE,

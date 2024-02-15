@@ -819,6 +819,11 @@ public final class ConsumableLib extends AlchemyLib
 							[1, AR_TOU]
 						]
 				);
+		public const M_GOSSR: Consumable = mk("M.Gossr", "M.Gossr", "a bundle of midnight black gossamer webbing", 50, "This strange webbing is darker than night. It's so thick that light fails to get through it. It likely would be most unwise to consume it.", m.midnightGossamer, ItemTags.U_TF)
+				.refineableInto(
+						DEFAULT_SUBSTANCES_DROP_TABLE,
+						MULTIRACE_ESSENCE_DROP_TABLE(AE_ATLACH_NACHA, AE_SPIDER)
+				);
 		public const MAGSEED: Consumable = mk("MagSeed", "MagSeed", "a magically-enhanced golden seed", 6, "This seed glows with power.  It's been enhanced by Lumi to unlock its full potential, allowing it to transform you more easily.", curry(m.goldenSeed, 1), ItemTags.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
@@ -862,11 +867,8 @@ public final class ConsumableLib extends AlchemyLib
 						DEFAULT_SUBSTANCES_DROP_TABLE,
 						[[1, KANGAFT]]
 				);
-		public const M_GOSSR: Consumable = mk("M.Gossr", "M.Gossr", "a bundle of midnight black gossamer webbing", 50, "This strange webbing is darker than night. It's so thick that light fails to get through it. It likely would be most unwise to consume it.", m.midnightGossamer, ItemTags.U_TF)
-				.refineableInto(
-						DEFAULT_SUBSTANCES_DROP_TABLE,
-						MULTIRACE_ESSENCE_DROP_TABLE(AE_ATLACH_NACHA, AE_SPIDER)
-				);
+		public const MINOBLO:MinotaurBlood    = new MinotaurBlood();
+		public const MOTHDUS:MothDust    = new MothDust();
 		public const MOUSECO: Consumable = mk("MouseCo", "MouseCo", "a handful of mouse cocoa", 6, "A handful of rare aromatic beans with sharp creases in the middle, making them look like small mouse ears.  Allegedly very popular and plentiful before the mice-folk were wiped out.", curry(m.mouseCocoa, 0), ItemTags.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
@@ -875,7 +877,6 @@ public final class ConsumableLib extends AlchemyLib
 							[1, AR_SPE]
 						]
 				);
-		public const MINOBLO:MinotaurBlood    = new MinotaurBlood();
 		public const MYSTJWL: Consumable = mk("MystJwl", "MystJwl", "a mystic jewel", 50, "The flames within this jewel glow brighter than before, and have taken on a sinister purple hue.  It has been enhanced to increase its potency, allowing it to transform you more easily, but may have odd side-effects...", curry(m.foxJewel, true), ItemTags.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,

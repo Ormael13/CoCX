@@ -1355,7 +1355,7 @@ use namespace CoC;
 		}
 		public function playerHasFourArms():Boolean
 		{
-			return (arms.type == Arms.DISPLACER || arms.type == Arms.ANT);
+			return hasFourArms();
 		}
 		public function flameBladeActive():Boolean
 		{

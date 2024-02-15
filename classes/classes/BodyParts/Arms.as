@@ -531,7 +531,8 @@ public class Arms extends BodyPart {
 	public static const MOTH:int = 68;
 	EnumValue.add(Types, MOTH, "MOTH", {
 		name:"ant",
-		appearanceDesc: "your arms are covered in a sleeve like fuzzy mass."
+		appearanceDesc: "Where a normal creature would have only two arms, you instead have four covered in a sleeve like fuzzy mass.",
+		armCount: 4
 	});
 	public static function canFly(id: int): Boolean {
 		return Types[id].canFly || false;
@@ -581,6 +582,10 @@ public class Arms extends BodyPart {
 
 	public function hasPawsOrHands():String {
 		return Types[type].canPounce ? "paws" : "hands";
+	}
+
+	public function hasFourArms():Boolean {
+		return armCount == 4;
 	}
 }
 }

@@ -90,6 +90,9 @@ public class ArmsTransformations extends MutationsHelper {
 						desc += "You double over, a sudden pain just below your shoulders. Finding you cannot reach your lower arms to feel at each other, you look down and realize that they're shrinking back into your torso."
 						if (!player.isChitinCovered()) desc += " Because you are shocked over your lower arms going away, you don't even notice the carapace of your primary arms softening into [skin coat]."
 						break;
+					case Arms.MOTH:
+						desc += "You double over, a sudden pain just below your shoulders. Finding you cannot reach your lower arms to feel at each other, you look down and realize that they're shrinking back into your torso."
+						break;
 					default:
 						desc += "You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form.";
 						break;
@@ -1332,7 +1335,9 @@ public class ArmsTransformations extends MutationsHelper {
 			function (doOutput: Boolean): void {
 				var desc: String = "";
 
-				desc += "Your arms begin to itch so you scratch at them, eventually you look over and discover your arms are now covered in a sleeve like fuzzy mass. <b>You now have Moth arms</b>";
+				TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
+
+				desc += "Your arms begin to itch so you scratch at them, eventually you look over and discover your arms are now covered in a sleeve like fuzzy mass. A second pair has even begun sprouting just underneath, forming these same traits. <b>You now have Moth arms</b>";
 
 				player.arms.type = Arms.MOTH;
 				if (doOutput) outputText(desc);
