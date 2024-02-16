@@ -151,7 +151,7 @@ public class Races {
 			NAGA, GORGON, VOUIVRE, COUATL, HYDRA, APOPHIS
 	];
 	public static const InsectRaces:/*Race*/Array = [
-			BEE, MANTIS, SCORPION, SPIDER, ANT, OOMUKADE, CANCER, ATLACH_NACHA, SANDWORM, WERESPIDER
+			BEE, MANTIS, SCORPION, SPIDER, ANT, OOMUKADE, CANCER, ATLACH_NACHA, SANDWORM, WERESPIDER, MOTH
 	];
 	public static const GoblinoidRaces:/*Race*/Array = [
 			GOBLIN, GREMLIN

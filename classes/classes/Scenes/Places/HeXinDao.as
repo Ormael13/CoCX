@@ -419,6 +419,7 @@ public class HeXinDao extends BaseContent
             [consumables.KANGAFT, "kangaroo"],
             [consumables.BLADEGR, "mantis"],
             [consumables.SCORICO, "scorpion"],
+            [consumables.MOTHDUS, "moth"],
             [consumables.YETICUM, "yeti"],
             [consumables.BAYRLEA, "bear"],
             [consumables.SMRTNUT, "squirrel"],
