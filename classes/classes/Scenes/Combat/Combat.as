@@ -8140,6 +8140,7 @@ public class Combat extends BaseContent {
     //DEAL DAMAGE
     public function doTrueDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
+		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) damage *= doDamageAscensionModifer();
         if (damage < 1) damage = 1;
 		if (monster.damageReductionBasedOnDifficulty() > 1) damage *= (1 / monster.damageReductionBasedOnDifficulty());
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
@@ -8217,6 +8218,7 @@ public class Combat extends BaseContent {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
 		if (!ignoreDR) damage *= (monster.damagePercent() / 100);
+		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) damage *= doDamageAscensionModifer();
 		if (damage < 1) damage = 1;
 		if (monster.damageReductionBasedOnDifficulty() > 1) damage *= (1 / monster.damageReductionBasedOnDifficulty());
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
@@ -8322,10 +8324,25 @@ public class Combat extends BaseContent {
     public function doMinionPhysDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
         return doDamage(damage, apply, display, ignoreDR);
     }
+	
+	public function doDamageAscensionModifer():Number {
+		var dDAM:Number = 1;
+		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) dDAM *= (1 / 2);
+		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) dDAM *= (1 / 5);
+		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) dDAM *= (1 / 9);
+		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 4) dDAM *= (1 / 14);
+		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 5) dDAM *= (1 / 20);
+		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 6) dDAM *= (1 / 27);//dla gier powyżej obecnego ostatniego NG+ posiadającego nowe perki dla graczy
+		//if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 7) dDAM *= (1 / 35);
+		//if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 8) dDAM *= (1 / 44);
+		//if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 9) dDAM *= (1 / 54);
+		return dDAM;
+	}
 
     public function doMagicDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
+		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) damage *= doDamageAscensionModifer();
 		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
 		if (monster.damageReductionBasedOnDifficulty() > 1) damage *= (1 / monster.damageReductionBasedOnDifficulty());
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
@@ -8394,6 +8411,7 @@ public class Combat extends BaseContent {
     }
 
     private function doElementalDamageMultiplier(damage:Number):Number {
+		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) damage *= doDamageAscensionModifer();
         if (damage < 1) damage = 1;
 		if (monster.damageReductionBasedOnDifficulty() > 1) damage *= (1 / monster.damageReductionBasedOnDifficulty());
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
@@ -16000,4 +16018,4 @@ private function touSpeStrScale(stat:int):Number {
         return player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater) || explorer.areaTags.water;
     }
 }
-}
+}

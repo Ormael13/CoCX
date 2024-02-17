@@ -1400,6 +1400,8 @@ import classes.Scenes.Combat.CombatAbility;
 			else addButtonDisabled(7, "Orc", "You already have this bloodline!");
 			if (!player.hasPerk(PerkLib.BloodlineVampire)) addButton(8, "Vampire", confirmBloodline, PerkLib.VampiresDescendant).hint("(+2 to vampire score)");
 			else addButtonDisabled(8, "Vampire", "You already have this bloodline!");
+			if (!player.hasPerk(PerkLib.BloodlineMelkie)) addButton(9, "Melkie", confirmBloodline, PerkLib.MelkiesDescendant).hint("(+2 to melkie score)");
+			else addButtonDisabled(9, "Melkie", "You already have this bloodline!");
 			addButton(14, "None", noBloodlineAtAllCuzYouAscendedTooManyTimesAlready).hint("You either cannot add a new unstable bloodline, or you have a stable bloodline. (It mean you only will get some bonus perk points for start instead of new bloodline.)");
 		}
 
@@ -1432,6 +1434,9 @@ import classes.Scenes.Combat.CombatAbility;
 					break;
 				case PerkLib.VampiresDescendant:
 					outputText("Your ancestor was a vampire?");
+					break;
+				case PerkLib.MelkiesDescendant:
+					outputText("Your ancestor was a melkie?");
 					break;
 				default:
 					outputText("Your ancestor was a dragon?");

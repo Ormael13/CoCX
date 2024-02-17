@@ -1136,11 +1136,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else damage *= (critMulti + buffMultiplier);
 		}
 		damage = Math.round(damage);
-		doDamage(damage);
-		outputText("<b>([font-damage]" + damage + "</font>)</b> ");
+		doDamage(damage, true, true);
 		if (player.hasPerk(PerkLib.PhantomStrike)) {
-			doDamage(damage);
-			outputText("<b>([font-damage]" + damage + "</font>)</b> ");
+			doDamage(damage, true, true);
 			damage *= 2;
 		}
 		if (crit) {
