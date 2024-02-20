@@ -4387,7 +4387,7 @@ public class Creature extends Utils
 
 			if (hasStatusEffect(StatusEffects.Illusion)) {
 				var illDodgeChance:int = 10;
-				if (perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3) illDodgeChance += 20;
+				if (perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 3) illDodgeChance += 20;
 				chance += illDodgeChance;
 			}
 
@@ -4470,7 +4470,7 @@ public class Creature extends Utils
 
 			if (hasStatusEffect(StatusEffects.Illusion)) {
 				var illDodgeChance:int = 10;
-				if (perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3) illDodgeChance += 20;
+				if (perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 3) illDodgeChance += 20;
 				dodgeArray.push([illDodgeChance, EVASION_ILLUSION]);
 			}
 

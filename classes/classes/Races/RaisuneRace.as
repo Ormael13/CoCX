@@ -63,6 +63,7 @@ public class RaisuneRace extends Race {
 				.hasPerk(PerkLib.StarSphereMastery, +1);
 				
 		addBloodline(PerkLib.RaijusDescendant, PerkLib.BloodlineRaiju);
+		addMutation(IMutationsLib.KitsuneParathyroidGlandsIM);
 		
 		buildTier(11, "raisune")
 				.buffs({

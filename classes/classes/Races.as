@@ -159,6 +159,9 @@ public class Races {
 	public static const HarpylikeRaces:/*Race*/Array = [
 			HARPY, THUNDERBIRD, PHOENIX
 	];
+	public static const KitsunelikeRaces:/*Race*/Array = [
+			KITSUNE, KITSHOO, RAISUNE
+	];
 	public static const RacesForRandomEnchantments:/*Race*/Array = [
 			// populated in load() as AllVisibleRaces - RacesExcludedFromRandomEnchantments
 	];

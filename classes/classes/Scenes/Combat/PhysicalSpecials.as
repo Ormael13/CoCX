@@ -1890,7 +1890,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.armorName == "white kimono" || player.armorName == "red kimono" || player.armorName == "blue kimono" || player.armorName == "purple kimono" || player.armorName == "black kimono") foxfiremulti += .2;
 				if (player.headjewelryName == "fox hairpin") foxfiremulti += .2;
 				if (player.hasPerk(PerkLib.StarSphereMastery)) foxfiremulti += player.perkv1(PerkLib.StarSphereMastery) * 0.05;
-				if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2) foxfiremulti += 1;
+				if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 2) foxfiremulti += 1;
 				damage *= foxfiremulti;
 			}
 			if (monster.plural) damage *= 5;

@@ -2209,7 +2209,7 @@ public class KitsuneScene extends BaseContent
 			}
 			flags[kFLAGS.KITSUNE_SHRINE_VISIT]++;
 			var SphereMastery:Number = 10;
-			if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 3) SphereMastery += 10;
+			if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3) SphereMastery += 10;
 			//[Read Books] [Meditate] [Steal Statue] - [Leave]
 			menu();
 			addButton(0, "Read Books", readKitsuneBooks);
@@ -2513,3 +2513,4 @@ public class KitsuneScene extends BaseContent
 		}
 	}
 }
+
