@@ -192,6 +192,7 @@
             <color name="abyssal black">#000000</color>
             <color name="white and black">#eff3f6</color>
 			<color name="fiendish pink">#ffccf3</color>
+			<color name="fiendish dark pink">#ea7bc5</color>
 			<color name="fiendish blue">#91a0e3</color>
         </common>
         <property name="hair" src="hairColor1" default="#ffffff">
@@ -275,6 +276,7 @@
 		<key src="#5c5cfe" base="scales" transform="lighten(10)"/>
         <key src="#4444FF" base="scales"/>
         <key src="#0000CC" base="scales" transform="darken(25)"/>
+		<key src="#2f2fe7" base="scales" transform="darken(35)"/>
         <key src="#000033" base="scales" transform="darken(50)"/>
         <key src="#AAFFAA" base="scales2" transform="lighten(25)"/>
 		<key src="#55ab55" base="scales2" transform="lighten(10)"/>
@@ -444,7 +446,8 @@
         <cell rect="251,1124,49,59" name="arms_overlay/feral_orca" dx="101" dy="56"/>
         <cell rect="851,210,49,59" name="arms_fg/demonlewd" dx="100" dy="53"/>
         <cell rect="638,702,90,90" name="arms_fg/manticore_sit" dx="60" dy="61"/>
-		<cell rect="1401,150,49,59" name="arms_fg/prayer" dx="78" dy="56"/>
+		<cell rect="1401,150,49,59" name="arms_fg/prayer" dx="78" dy="56"/> 
+		<cell rect="1451,150,49,59" name="arms_fg/marilith" dx="78" dy="56"/> 
         <cell rect="451,210,49,59" name="arms_pattern/Bstripe" dx="104" dy="64"/>
         <cell rect="501,210,49,59" name="arms_pattern/Blightning" dx="104" dy="64"/>
         <cell rect="651,210,49,59" name="arms_pattern/Btatoo" dx="104" dy="64"/>
