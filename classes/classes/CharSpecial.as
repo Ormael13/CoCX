@@ -57,6 +57,7 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],oni start
 			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],orc start
 			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],chimera start (Layla - based on FoE companion - female herm pc)
+			[ "Solaria", customSolaria, true, "You are a rather average villager with the exception of cute salamander like fangs growing out of your mouth and a predisposition to enter a lust fueled frenzy. That damn ancestor of yours had to go and fuck some salamander, didn't he? But at least he managed to put some loads where it counts and not just her backdoor and you are very grateful for that fact." ],
 			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],race 1 start
 			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],race 2 start
 
@@ -1295,7 +1296,7 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			player.createPerk(PerkLib.BigCock, 1.25, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.Kelt, 100, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PastLifeSlut)) player.createPerk(PerkLib.HistorySlut,0,0,0,0);
-			if (!player.hasPerk(PerkLib.PastLifeWhore)) player.createPerk(PerkLib.HistoryScout,0,0,0,0);
+			if (!player.hasPerk(PerkLib.PastLifeWhore)) player.createPerk(PerkLib.HistoryWhore,0,0,0,0);
 			outputText("The villagers sure liked to pierce their arrows into you... Though, with your natural agility and a bit of elven blood flowing in your veins, they sure were <i>trying.</i>");
 		}
 
@@ -1343,6 +1344,27 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			if(player.hasVagina()) player.vaginas[0].virgin = true;
 			player.intStat.train.value = 30;
 			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
+		}
+
+		private function customSolaria():void {
+			//Character Creation	Female,virgin	A human with salamander bloodline	Solaria
+			player.createPerk(PerkLib.Lustzerker,0,0,0,1);
+			player.createPerk(PerkLib.BloodlineSalamander,0,0,0,0);
+			player.createBreastRow();
+			player.breastRows[0].breastRating = 7;
+			player.butt.type = 12;
+			player.hips.type = 9;
+			player.createVagina();
+			player.vaginas[0].virgin = true;
+			player.libStat.train.value = 50;
+			player.tallness = 84;
+			player.gems += 100;
+			player.tone = 30;
+			player.femininity = 70;
+			player.hairColor = "red";
+			if (!player.hasPerk(PerkLib.PastLifeFighter)) player.createPerk(PerkLib.HistoryFighter,0,0,0,0);
+			if (!player.hasPerk(PerkLib.PastLifeWhore)) player.createPerk(PerkLib.HistoryWhore,0,0,0,0);
+			outputText("You are a rather average villager with the exception of cute salamander like fangs growing out of your mouth and a predisposition to enter a lust fueled frenzy. That damn ancestor of yours had to go and fuck some salamander, didn't he? But at least he managed to put some loads where it counts and not just her backdoor and you are very grateful for that fact.");
 		}
 
 		private function customTestChar():void {

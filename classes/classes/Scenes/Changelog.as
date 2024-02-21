@@ -148,7 +148,7 @@ public class Changelog extends BaseContent
 			outputText("-Ng+ tiers will not cause enemies stats going higher replaced by higher DR effect.\n");
 			outputText("-Kitsune IM's have their effects grouped to Parathyroid one increase resources generation and boost foxfire and Thyroid to boost other kitsune specials. One of req. for Parathyroid IM changed to be kitsune(-like) race.\n");
 			outputText("-Kitsumori no longer gain points to race score from Kitsune Thyroid IM.\n");
-			outputText("-\n");
+			outputText("-New Special name: Solaria (salamander). It will start with matching bloodline perk to match it ancestor race.\n");//s	, Teekna (goblin), Veseshe (elf). Each of them	their 
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -188,7 +188,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-Fixed bugs: Arigean above Recruit rank not immune to tf-ing effects, deer arms tf unlocking canine arms MM, unable to find tel'adre again after first time seeing it with too high corruption or other factor that not allowed entrance; Arigean above recruit rank marking, eye color and aura with mismatching colors; demon/arigean arms MM option giving instead devil/abyssal shark arms, ");
 			outputText("Zenji training stats not having gains decrease from +4 to +1 for repeated training before daily reset for other than wisdom stats, resources not been recovered after using specials/soulskills/spells, nail buy menu at carpenter having misleading text, combat wounds % display at stats page been 100x lower, Sandworm PC not counting toward checks for having natural armor, demon face tf");
-			outputText("giving arigean face instead, gym weight lifting capping tone at 85, when building cabin text not picking correct name for Jojo/Joy line, Magical Fertility & Magical Virility perk desc bonus value display error, differences between desc dmg reduction and actualt DR from main difficulty setting, sneak melee/range attack diff between displayer and actualy dealt dmg to enemy\n\n");
+			outputText("giving arigean face instead, gym weight lifting capping tone at 85, when building cabin text not picking correct name for Jojo/Joy line, Magical Fertility & Magical Virility perk desc bonus value display error, differences between desc dmg reduction and actualt DR from main difficulty setting, sneak melee/range attack diff between displayer and actualy dealt dmg to enemy, ");
+			outputText("Veseshe preset giving History: Scout instead of History: Whore\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8w-z:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
