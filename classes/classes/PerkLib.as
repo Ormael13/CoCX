@@ -187,6 +187,10 @@ public class PerkLib
 				"You are a descendant of your ancestor, who was the child of a human and a Goblin. (+2 to goblin score)");
 		public static const BloodlineGoblin:PerkType = mk("Bloodline: Goblin", "Bloodline: Goblin",
 				"Your Goblin bloodline appears strongly within you. (+2 to goblin score)", null, true);
+		public static const HydrasDescendant:PerkType = mk("Hydra's descendant", "Hydra's descendant",
+				"You are a descendant of your ancestor, who was the child of a human and a Hydra. (+2 to hydra score)");
+		public static const BloodlineHydra:PerkType = mk("Bloodline: Hydra", "Bloodline: Hydra",
+				"Your Hydra bloodline appears strongly within you. (+2 to hydra score)", null, true);
 		public static const KitsunesDescendant:PerkType = mk("Kitsune's descendant", "Kitsune's descendant",
 				"You are a descendant of your ancestor, who was the child of a human and a Kitsune. (+2 to kitsune score)");
 		public static const BloodlineKitsune:PerkType = mk("Bloodline: Kitsune", "Bloodline: Kitsune",
@@ -211,6 +215,10 @@ public class PerkLib
 				"You are a descendant of your ancestor, who was the child of a human and an Orc. (+2 to orc score)");
 		public static const BloodlineOrc:PerkType = mk("Bloodline: Orc", "Bloodline: Orc",
 				"Your Orc bloodline appears strongly within you. (+2 to orc score)", null, true);
+		public static const SalamandersDescendant:PerkType = mk("Salamander's descendant", "Salamander's descendant",
+				"You are a descendant of your ancestor, who was the child of a human and a Salamander. (+2 to salamander score)");
+		public static const BloodlineSalamander:PerkType = mk("Bloodline: Salamander", "Bloodline: Salamander",
+				"Your Salamander bloodline appears strongly within you. (+2 to salamander score)", null, true);
 		public static const VampiresDescendant:PerkType = mk("Vampire's descendant", "Vampire's descendant",
 				"You are a descendant of your ancestor, who was the child of a human and a vampire. (+2 to vampire score)");
 		public static const BloodlineVampire:PerkType = mk("Bloodline: Vampire", "Bloodline: Vampire",
