@@ -156,7 +156,7 @@ public class CharViewContext extends ExecContext {
 					//PlayerHasAShieldMsHoly: player.shield == game.shields.SANCTYL,
 					//PlayerHasAShieldMsUnholy: player.shield == game.shields.SANCTYD,
 
-					PlayerhasACasterTome:player.shield == game.shields.IMPTOME || player.shield == game.shields.NEKONOM,
+					PlayerhasACasterTome:shieldSubtype == "tome" || player.shield == game.shields.NEKONOM,
 
 					PlayerHasABow: player.isBowTypeWeapon(),
 					PlayerHasABowHoly:player.weaponRange == game.weaponsrange.ARTEMIS,
