@@ -149,9 +149,9 @@ public class Changelog extends BaseContent
 			outputText("-Kitsune IM's have their effects grouped to Parathyroid one increase resources generation and boost foxfire and Thyroid to boost other kitsune specials. One of req. for Parathyroid IM changed to be kitsune(-like) race.\n");
 			outputText("-Kitsumori no longer gain points to race score from Kitsune Thyroid IM.\n");
 			outputText("-New Special name: Solaria (salamander). It will start with matching bloodline perk to match it ancestor race.\n");//s	, Teekna (goblin), Veseshe (elf). Each of them	their 
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Kitsumori tails now change color depending on your fur color and hair color (they're still orange, just what color your fur/hair is determines what shade of orange, basically) (Lord Shadeogorath)\n");
+			outputText("-Added a toggle to the appearance menu that should show up if you have active lycanthropy, vulpesthropy, or selachimorphanthropy allows you to choose whether you want to show your 'human form' while at camp or if you wanna stay beast form all the time. (Lord Shadeogorath)\n");
+			outputText("-Marilith sprite implementations. (Liadri)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
