@@ -127,8 +127,8 @@ public class PlayerAppearance extends BaseContent {
 		outputText("Human Form: <b>" + (player.hasStatusEffect(StatusEffects.HumanForm) ? "On" : "Off") + "</b>");
 		mainView.hideAllMenuButtons();
 		menu();
-		addButton(0, "Human On", HumanFormToggle, 0).disableIf(player.hasStatusEffect(StatusEffects.HumanForm));
-		addButton(1, "Human Off", HumanFormToggle, 1).disableIf(!player.hasStatusEffect(StatusEffects.HumanForm));
+		addButton(0, "Human On", HumanFormToggle).disableIf(player.hasStatusEffect(StatusEffects.HumanForm));
+		addButton(1, "Human Off", HumanFormToggle).disableIf(!player.hasStatusEffect(StatusEffects.HumanForm));
 		addButton(14, "Back", appearance);
 	}
 

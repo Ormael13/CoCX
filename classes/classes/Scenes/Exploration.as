@@ -482,8 +482,8 @@ public class Exploration extends BaseContent implements SaveableState
 			btnExploreCaves().applyTo(button(12));
 			
 			addButton(4, "Next", explorePageII);
-			if (debug) addButton(9, "Debug", exploreDebug.doExploreDebug);
-			else addButton(9, "Menu Style", toggleMenuStyle).hint("Switch to new menu style");
+			addButton(9, "Menu Style", toggleMenuStyle).hint("Switch to new menu style");
+			if (debug) addButton(13, "Debug", exploreDebug.doExploreDebug);
 			
 			addButton(14, "Back", playerMenu);
 		}
