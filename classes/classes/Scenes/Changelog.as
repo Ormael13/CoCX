@@ -152,7 +152,7 @@ public class Changelog extends BaseContent
 			outputText("-Kitsumori tails now change color depending on your fur color and hair color (they're still orange, just what color your fur/hair is determines what shade of orange, basically) (Lord Shadeogorath)\n");
 			outputText("-Added a toggle to the appearance menu that should show up if you have active lycanthropy, vulpesthropy, or selachimorphanthropy allows you to choose whether you want to show your 'human form' while at camp or if you wanna stay beast form all the time. (Lord Shadeogorath)\n");
 			outputText("-Marilith sprite implementations. (Liadri)\n");
-			outputText("-\n");
+			outputText("-Orca balls no longer deluded into thinking they're a dog dick. (Lord Shadeogorath)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
