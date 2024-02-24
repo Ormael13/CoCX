@@ -1366,10 +1366,10 @@
         <cell rect="161,350,49,29" name="balls/Bdscaleshuge" dx="79" dy="105"/>
         <cell rect="161,380,49,29" name="balls/Bdscalessillyhuge" dx="79" dy="106"/>
         <cell rect="161,560,49,36" name="balls/Bdscalesgigahuge" dx="82" dy="114"/>
-        <cell rect="311,290,49,29" name="balls/Borcasmall" dx="79" dy="104"/>
-        <cell rect="311,320,49,29" name="balls/Borcalarge" dx="79" dy="104"/>
-        <cell rect="311,350,49,29" name="balls/Borcahuge" dx="79" dy="105"/>
-        <cell rect="311,380,49,29" name="balls/Borcasillhugehuge" dx="79" dy="106"/>
+        <cell rect="211,290,49,29" name="balls/Borcasmall" dx="79" dy="104"/>
+        <cell rect="211,320,49,29" name="balls/Borcalarge" dx="79" dy="104"/>
+        <cell rect="211,350,49,29" name="balls/Borcahuge" dx="79" dy="105"/>
+        <cell rect="211,380,49,29" name="balls/Borcasillhugehuge" dx="79" dy="106"/>
         <cell rect="311,560,49,36" name="balls/Borcagigahuge" dx="82" dy="114"/>
         <cell rect="211,290,49,29" name="balls/Bbeesmall" dx="79" dy="104"/>
         <cell rect="211,320,49,29" name="balls/Bbeelarge" dx="79" dy="104"/>

@@ -124,7 +124,7 @@ public class PlayerAppearance extends BaseContent {
 	public function HumanFormDisplay():void {
 		clearOutput();
 		outputText("Choose if you want were-races to hide their true appearance out of combat.");
-		outputText("Human Form: <b>" + (player.hasStatusEffect(StatusEffects.HumanForm) ? "On" : "Off") + "</b>");
+		outputText("[pg]Human Form: <b>" + (player.hasStatusEffect(StatusEffects.HumanForm) ? "On" : "Off") + "</b>");
 		mainView.hideAllMenuButtons();
 		menu();
 		addButton(0, "Human On", HumanFormToggle).disableIf(player.hasStatusEffect(StatusEffects.HumanForm));
