@@ -2513,4 +2513,3 @@ public class KitsuneScene extends BaseContent
 		}
 	}
 }
-
