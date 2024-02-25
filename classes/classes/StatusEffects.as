@@ -1118,6 +1118,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const TrueFormAngel:StatusEffectType             = mkCombat("True Form (Angel)");
 		public static const TurquoiseBandProtection:StatusEffectType   = mkCombat("Turquoise Band Protection");
 		public static const TyrantState:StatusEffectType               = mkCombat("Tyrant State");
+		public static const TyrantiaTraining30:StatusEffectType        = mkCombat("TyrantiaTraining30");
 		public static const UBERWEB:StatusEffectType                   = mkCombat("UBERWEB");
 		public static const UnderwaterAndIgnis:StatusEffectType        = mkCombat("UnderwaterAndIgnis");
 		public static const UnderwaterCombatBoost:StatusEffectType     = mkCombat("UnderwaterCombatBoost");

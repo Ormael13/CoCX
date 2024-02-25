@@ -866,7 +866,7 @@ public class MagicSpecials extends BaseCombatContent {
 			} else {
 				bd = buttons.add("TyrantState(On)", activaterTyrantState).hint("Strain your body to its limit to increase melee damage dealt by "+boost+"% at the cost of getting horny. This also decrease physical resistance.");
 			}
-			if (TyrantiaFollower.TyrantiaTrainingSessions >= 15) {
+			if (player.hasStatusEffect(StatusEffects.TyrantState) && TyrantiaFollower.TyrantiaTrainingSessions >= 15) {
 				bd = buttons.add("False Weapon", activaterFalseWeapon).hint("Create False weapon based on currently wielded melee weapon to attack each time you attack with it. Deals 20% dmg (Phalluspear False Weapon deals 100%).");
 				bd.requireFatigue(physicalCost(100));
 				if (player.lust < Math.round(player.maxLust() * 0.1)) {
@@ -5713,7 +5713,7 @@ public class MagicSpecials extends BaseCombatContent {
 		selflust = Math.round(selflust);
 		dynStats("lus", selflust);
 		monster.createStatusEffect(StatusEffects.Polymorphed, 3, 0, 0, 0);
-		if (player.lust >= player.maxOverLust()) doNext(endLustLoss);
+		if (player.lust >= player.maxOverLust() && !combat.tyrantiaTrainingExtension()) doNext(endLustLoss);
 		else enemyAI();
 	}
 

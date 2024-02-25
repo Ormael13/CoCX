@@ -281,7 +281,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		if(player.lust >= player.maxOverLust()) doNext(endLustLoss);
+		if(player.lust >= player.maxOverLust() && !SceneLib.combat.tyrantiaTrainingExtension()) doNext(endLustLoss);
 		else enemyAI();
 	}*/
 	/*

@@ -2646,7 +2646,7 @@ use namespace CoC;
 			//Berseking reduces lust gains by 10%
 			if (hasStatusEffect(StatusEffects.Berzerking)) lust *= 0.9;
 			if (CombatAbilities.Overlimit.isActive() || CombatAbilities.FieryRage.isActive()) lust *= 0.9;
-			if (TyrantiaFollower.TyrantiaTrainingSessions >= 25 && lust100 >= 50) {
+			if (hasStatusEffect(StatusEffects.TyrantState) && TyrantiaFollower.TyrantiaTrainingSessions >= 25 && lust100 >= 50) {
 				if (lust100 >= 100) lust *= 0.3;
 				else if (lust100 >= 51) lust *= (1 - ((lust100 - 30) * 0.01));
 				else lust *= 0.8;
@@ -3208,7 +3208,7 @@ use namespace CoC;
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
 			if (hasStatusEffect(StatusEffects.TyrantState)) mult += 20;
-			if (TyrantiaFollower.TyrantiaTrainingSessions >= 25 && lust100 >= 50) {
+			if (hasStatusEffect(StatusEffects.TyrantState) && TyrantiaFollower.TyrantiaTrainingSessions >= 25 && lust100 >= 50) {
 				mult -= 20;
 				if (lust100 >= 51) {
 					if (lust100 >= 100) mult -= 50;

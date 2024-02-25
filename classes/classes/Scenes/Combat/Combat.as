@@ -131,7 +131,7 @@ public class Combat extends BaseContent {
             doNext(endHpVictory);
         } else if (monster.lust >= monster.maxOverLust()) {
             doNext(endLustVictory);
-        } else if(player.lust >= player.maxOverLust() && !player.statStore.hasBuff("Supercharged")) {
+        } else if(player.lust >= player.maxOverLust() && !player.statStore.hasBuff("Supercharged") && !tyrantiaTrainingExtension()) {
             doNext(endLustLoss);
         } else {
             enemyAI();
@@ -502,6 +502,12 @@ public class Combat extends BaseContent {
 			else monster.won_(false, false);
         }
     }
+	
+	public function tyrantiaTrainingExtension():Boolean {
+		var extension:Boolean = false;
+        if (player.hasStatusEffect(StatusEffects.TyrantState) && TyrantiaFollower.TyrantiaTrainingSessions >= 30 && (!player.hasStatusEffect(StatusEffects.TyrantiaTraining30) || (player.hasStatusEffect(StatusEffects.TyrantiaTraining30) && player.statusEffectv1(StatusEffects.TyrantiaTraining30) < 2))) extension = true;
+		return extension;
+	}
 
 //combat is over. Clear shit out and go to main
     public function cleanupAfterCombatImpl(nextFunc:Function = null, ThisIsNotATFScene:Boolean = true):void {
@@ -801,6 +807,11 @@ public class Combat extends BaseContent {
 			if (player.armor == armors.BMARMOR) dynStats("lus", -(Math.round(player.maxLust() * 0.05)));
 			if (player.hasStatusEffect(StatusEffects.TyrantState)) dynStats("lus", (Math.round(player.maxLust() * 0.05)));
 			if (player.hasStatusEffect(StatusEffects.VampThirstStacksHPMana)) player.removeStatusEffect(StatusEffects.VampThirstStacksHPMana);
+			if (player.hasStatusEffect(StatusEffects.TyrantState) && TyrantiaFollower.TyrantiaTrainingSessions >= 30) {
+				if (!player.hasStatusEffect(StatusEffects.TyrantiaTraining30)) player.createStatusEffect(StatusEffects.TyrantiaTraining30, 0, 0, 0, 0);
+				else player.addStatusValue(StatusEffects.TyrantiaTraining30, 1, 1);
+			}
+			if (player.hasStatusEffect(StatusEffects.TyrantiaTraining30) && player.lust < player.maxOverLust()) player.removeStatusEffect(StatusEffects.TyrantiaTraining30);
         }
         mainView.hideMenuButton(MainView.MENU_DATA);
         mainView.hideMenuButton(MainView.MENU_APPEARANCE);
@@ -4498,7 +4509,7 @@ public class Combat extends BaseContent {
         if (lustChange >= 20) outputText("The fantasy is so vivid and pleasurable you wish it was happening now.  You wonder if [themonster] can tell what you were thinking.\n\n");
         else outputText("\n");
         dynStats("lus", lustChange, "scale", false);
-        if (player.lust >= player.maxOverLust() && !player.statStore.hasBuff("Supercharged")) {
+        if (player.lust >= player.maxOverLust() && !player.statStore.hasBuff("Supercharged") && !tyrantiaTrainingExtension()) {
             if (monster is EncapsulationPod) {
                 outputText("<b>You nearly orgasm, but the terror of the situation reasserts itself, muting your body's need for release.  If you don't escape soon, you have no doubt you'll be too fucked up to ever try again!</b>\n\n");
                 player.lust = (player.maxOverLust() - 1);
@@ -10943,7 +10954,7 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) player.removeStatusEffect(StatusEffects.ResonanceVolley);
         if (player.hasStatusEffect(StatusEffects.Defend)) player.removeStatusEffect(StatusEffects.Defend);
         regeneration1(true);
-        if (player.lust >= player.maxOverLust() && !player.statStore.hasBuff("Supercharged")) doNext(endLustLoss);
+        if (player.lust >= player.maxOverLust() && !player.statStore.hasBuff("Supercharged") && !tyrantiaTrainingExtension()) doNext(endLustLoss);
         if (player.HP <= player.minHP()) doNext(endHpLoss);
 		if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
@@ -12294,11 +12305,11 @@ public function combatIsOver(goToPlayerMenu:Boolean = true):Boolean {
         doNext(endHpLoss);
         return true;
     }
-    if (player.lust >= player.maxOverLust() && !player.statStore.hasBuff("Supercharged")) {
+    if (player.lust >= player.maxOverLust() && !player.statStore.hasBuff("Supercharged") && !tyrantiaTrainingExtension()) {
         doNext(endLustLoss);
         return true;
     }
-    if (player.lust >= player.maxOverLust() && player.statStore.hasBuff("Supercharged") && monster is Doppleganger) {
+    if (player.lust >= player.maxOverLust() && player.statStore.hasBuff("Supercharged") && monster is Doppleganger && !tyrantiaTrainingExtension()) {
         doNext(endLustLoss);
         return true;
     }

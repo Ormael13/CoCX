@@ -682,7 +682,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						player.orgasm();
 						player.dynStats("sen", 2);
 						player.changeStatusValue(StatusEffects.LustyTongue, 1, player.statusEffectv1(StatusEffects.LustyTongue) + 10); //Tongue orgasming makes it last longer.
-
 					}
 					outputText("\n");
 					needNext = true;
