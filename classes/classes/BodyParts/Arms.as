@@ -588,12 +588,17 @@ public class Arms extends SaveableBodyPart {
 		return armCount == 4;
 	}
 	override protected function loadFromOldSave(savedata:Object):void {
+		type = intOr(savedata.arms, HUMAN);
 		armCount = intOr(savedata.armCount,2);
 	}
 
 	override protected function saveToOldSave(savedata:Object):void {
-		savedata.lowerBody = type;
-		savedata.legCount = armCount;
+		savedata.arms = type;
+		savedata.armCount = armCount;
+	}
+	override public function restore(keepColor:Boolean = true):void {
+		super.restore(keepColor);
+		armCount = 2;
 	}
 }
 }
