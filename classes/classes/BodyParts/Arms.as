@@ -2,7 +2,7 @@ package classes.BodyParts {
 import classes.Creature;
 import classes.internals.EnumValue;
 
-public class Arms extends BodyPart {
+public class Arms extends SaveableBodyPart {
 	/**
 	 * Entry properties:
 	 * - value: numerical id (0, 1)
@@ -539,7 +539,7 @@ public class Arms extends BodyPart {
 	}
 
 	public function Arms(creature:Creature) {
-		super(creature, null);
+		super(creature,"arms",["armCount"]);
 	}
 	
 	override public function hasMaterial(type:int):Boolean {
@@ -586,6 +586,14 @@ public class Arms extends BodyPart {
 
 	public function hasFourArms():Boolean {
 		return armCount == 4;
+	}
+	override protected function loadFromOldSave(savedata:Object):void {
+		armCount = intOr(savedata.armCount,2);
+	}
+
+	override protected function saveToOldSave(savedata:Object):void {
+		savedata.lowerBody = type;
+		savedata.legCount = armCount;
 	}
 }
 }
