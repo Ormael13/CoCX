@@ -941,7 +941,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		player.skin.saveToSaveData(saveFile.data);
 		player.tail.saveToSaveData(saveFile.data);
 		player.clawsPart.saveToSaveData(saveFile.data);
-
+		player.arms.saveToSaveData(saveFile.data);
 		saveFile.data.wingDesc = player.wings.desc;
 		saveFile.data.wingType = player.wings.type;
 		saveFile.data.hipRating = player.hips.type;
@@ -1964,6 +1964,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.gills.type = saveFile.data.gills ? Gills.ANEMONE : Gills.NONE;
 		player.hairLength = saveFile.data.hairLength;
 		player.lowerBodyPart.loadFromSaveData(data);
+		player.arms.loadFromSaveData(data);
 		player.wings.loadFromSaveData(data);
 		player.skin.loadFromSaveData(data);
 		player.clawsPart.loadFromSaveData(data);
