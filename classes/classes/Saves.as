@@ -937,6 +937,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		}
 		player.facePart.saveToSaveData(saveFile.data);
 		//player.underBody.saveToSaveData(saveFile.data);
+		player.arms.saveToSaveData(saveFile.data);
 		player.lowerBodyPart.saveToSaveData(saveFile.data);
 		player.skin.saveToSaveData(saveFile.data);
 		player.tail.saveToSaveData(saveFile.data);
@@ -1963,6 +1964,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		else
 			player.gills.type = saveFile.data.gills ? Gills.ANEMONE : Gills.NONE;
 		player.hairLength = saveFile.data.hairLength;
+		player.arms.loadFromSaveData(data);
 		player.lowerBodyPart.loadFromSaveData(data);
 		player.wings.loadFromSaveData(data);
 		player.skin.loadFromSaveData(data);
@@ -1981,7 +1983,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				player.chitinColor       = stringOr(data.chitinColor, player.chitinColor);
 				player.scaleColor        = stringOr(data.scalesColor, player.scaleColor);
 			}
-			
+
 		} else {
 			for (i = 0; i < player.bodyMaterials.length; i++) {
 				if (data.bodyMaterials[i]) {
@@ -1989,10 +1991,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				}
 			}
 		}
-		if (saveFile.data.armType == undefined)
-			player.arms.type = Arms.HUMAN;
-		else
-			player.arms.type = saveFile.data.armType;
 		if (saveFile.data.tongueType == undefined)
 			player.tongue.type = Tongue.HUMAN;
 		else
