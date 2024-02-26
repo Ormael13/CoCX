@@ -1990,10 +1990,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				}
 			}
 		}
-		if (saveFile.data.armType == undefined)
-			player.arms.type = Arms.HUMAN;
-		else
-			player.arms.type = saveFile.data.armType;
+		
 		if (saveFile.data.tongueType == undefined)
 			player.tongue.type = Tongue.HUMAN;
 		else
