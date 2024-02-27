@@ -7,6 +7,7 @@ package classes.Scenes.Monsters
 
 	import classes.*;
 	import classes.BodyParts.Wings;
+	import classes.Items.DynamicItems;
 	import classes.Scenes.SceneLib;
 	import classes.internals.ChainedDrop;
 	
@@ -205,6 +206,10 @@ package classes.Scenes.Monsters
 				this.createPerk(PerkLib.DieHardHP, 9, 0, 0, 0);
 			}
 			this.tallness = 30;
+			this.randomDropChance = 0.2;
+			this.randomDropParams = {
+				rarity: DynamicItems.RARITY_CHANCES_MINOR_LOW
+			};
 			this.drop = new ChainedDrop()
 					.add(useables.SRESIDUE, 1);
 			this.weaponName = "energy blast";

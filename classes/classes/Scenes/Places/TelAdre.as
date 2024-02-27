@@ -748,8 +748,8 @@ public function carpentryShopInside():void {
 public function carpentryShopBuyNails():void {
 	clearOutput();
 	if (player.hasKeyItem("Carpenter's Toolbox") >= 0) {
-		outputText("You ask him if he has nails for sale. He replies \"<i>Certainly! I've got nails. Your toolbox can hold up to "+(flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2 ? "seven":"two")+" hundred and fifty nails. I'll be selling nails at a price of two gems per nail.</i>\" \n\n");
-		outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapNails() + "");
+		outputText("You ask him if he has nails for sale. He replies \"<i>Certainly! I've got nails. I'll be selling nails at a price of two gems per nail.</i>\" \n\n");
+		outputText("Nails: " + CampStatsAndResources.NailsResc + "/" + SceneLib.campUpgrades.checkMaterialsCapNails() + "");
 		menu();
 		addButton(0, "Buy 10", carpentryShopBuyNailsAmount, 10);
 		addButton(1, "Buy 25", carpentryShopBuyNailsAmount, 25);
@@ -1134,10 +1134,10 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(9, "C.G Hat", "You already bought item from Kaiba today.");
 		}
 		else {
-			addButton(3, "R.DeadeyeAim", buyItem, jewelries.RINGDEA).hint("Ring of deadeye aim - Remove range accuracy penalty when flying and increase range accuracy by 20%.");
-			addButton(4, "R.Ambidexty", buyItem, jewelries.RNGAMBI).hint("Ring of Ambidexty - Remove melee accuracy penalty when flying and increase melee accuracy by 15%.");
+			addButton(3, "R.DeadeyeAim", buyItem, jewelries.RINGDEA).hint("Ring of deadeye aim - Removes ranged accuracy penalty when flying, and increases range accuracy by 20%.");
+			addButton(4, "R.Ambidexty", buyItem, jewelries.RNGAMBI).hint("Ring of Ambidexterity - Removes melee accuracy penalty when flying, and increases melee accuracy by 15%.");
 			addButton(5, "E.R.Armor", buyItem, armors.ERA).hint("Elven Ranger Armor - +50% to Bow and spear damage, Agile, Revealing, Slutty seduction +10.");
-			addButton(6, "I.Q.Gown", buyItem, armors.IQG).hint("Ice queen gown - A rare dress wich may only be in Kaiba inventory for a moment buy it while you can!");
+			addButton(6, "I.Q.Gown", buyItem, armors.IQG).hint("Ice Queen Gown - A rare dress wich may only be in Kaiba's inventory for a moment. Buy it while you can!");
 			addButton(7, "VladimirReg", buyItem, armors.VLAR).hint("Vladimir Regalia - These burgundy clothes fit for a noble seems to naturaly befit the style of what could be a vampire.");
 			addButton(8, "Asterius", buyItem, weapons.ASTERIUS).hint("Asterius Rage - A pair of mighty but clearly evil magical axes rumored to be the artefact of the fallen war deity Asterius.");
 			addButton(9, "C.G Hat", buyItem, headjewelries.COWHAT).hint("Cow Girl Hat - This hat was retrieved from an offworld gunslinger who became a cow. As such aside from its powerful enchantment that increase firearms potency it also raise milk production by 25%.");
@@ -1169,7 +1169,7 @@ public function kaibaShopMainMenu2():void {
 			addButton(5, "Hodr's bow", buyItem, weaponsrange.BOWHODR).hint("Hodr's bow - Bow that would apply blindess status or deal increased damage to blinded targets.");
 			addButton(6, "Avelynn", buyItem, weaponsrange.AVELYNN).hint("Avelynn - Crossbow that will shoot two additional bolts each time.");
 			addButton(7, "Oni enchanted drinking gourd", buyItem, miscjewelries.ONI_GOURD).hint("Oni enchanted drinking gourd - A magical drinking gourd beloved by onis. Suposedly it greatly increases its users attack power but also grants an endless supply of fresh drinks!");
-			addButton(8, "Storm Ruler", buyItem, weapons.S_RULER).hint("Storm Ruler - It's large sized weapon belonging to mace/hammer type with 10% chance to trigger stun effect. It deal lightning type of damage and 50% more damage to huge or larger enemies. Additionally have Body's Cultivator (20%).");
+			addButton(8, "Storm Ruler", buyItem, weapons.S_RULER).hint("Storm Ruler - A large sword that is wielded like a hammer. Naturally deals lightning-type damage, and inflicts 50% more damage to huge or larger enemies. Also increases physical soulskill damage by 20%.");
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
 		addButton(11, "-1-", kaibaShopMainMenuPage1);
@@ -1613,7 +1613,7 @@ private function gymMenu():void {
 private function buyGymLifeTimeMembership():void {
 	clearOutput();
 	//[Buy LifeTime Membership]
-	if (silly()) outputText("You tell \"<i>Shut up and take my gems!</i>\" as you pull out your gem-pouch. \n\n"); //Shut up and take my gems!
+	if (silly()) outputText("\"<i>Shut up and take my gems!</i>\" you shout as you pull out your gem-pouch. \n\n"); //Shut up and take my gems!
 	outputText("You fish into your pouches and pull out 500 gems, dumping them into the centaur's hands.  Her eyes widen as she turns and trots towards a counter in the back.  She leans over as she counts, giving you a generous view down her low-cut top at the cleavage she barely bothers to conceal.");
 	if(player.hasCock()) {
 		outputText("  It brings a flush to your face that has nothing to do with exercise."); // no you won't...
@@ -1663,7 +1663,7 @@ private function weightLifting():void {
 	player.trainStat("tou",1,player.trainStatCap("tou",75));
 	//Body changes here
 	//Muscleness boost!
-	outputText(player.modTone(85,5+rand(5)));
+	outputText(player.modTone(player.maxToneCap(),5+rand(5)));
 	outputText("\n\nDo you want to hit the showers before you leave the gym??");
 	if(flags[kFLAGS.BROOKE_MET] == 1) {
 		menu();

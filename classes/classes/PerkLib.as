@@ -3,6 +3,7 @@
  */
 package classes
 {
+import classes.BodyParts.Arms;
 import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
@@ -87,6 +88,7 @@ public class PerkLib
 		public static const AscensionOneRaceToRuleThemAllX:PerkType = new AscensionOneRaceToRuleThemX();
 		public static const AscensionHerosBirthrightRankX:PerkType = new AscensionHerosBirthrightX();
 		public static const AscensionAdvTrainingX:PerkType = new AscensionAdvancedTrainingX();
+		public static const AscensionSkyPoisonPearlMasteryStageX:PerkType = new AscensionSkyPoisonPearlMasteryX();
 
 		public static const AscensionBloodlineHeritage:PerkType = mk("Ascension: Bloodline Heritage", "Ascension: Bloodline Heritage",
 				"Your current body have faint trace of some unidentified bloodline in it. Not super good but how could you be picky at this point, right?");
@@ -186,6 +188,10 @@ public class PerkLib
 				"You are a descendant of your ancestor, who was the child of a human and a Goblin. (+2 to goblin score)");
 		public static const BloodlineGoblin:PerkType = mk("Bloodline: Goblin", "Bloodline: Goblin",
 				"Your Goblin bloodline appears strongly within you. (+2 to goblin score)", null, true);
+		public static const HydrasDescendant:PerkType = mk("Hydra's descendant", "Hydra's descendant",
+				"You are a descendant of your ancestor, who was the child of a human and a Hydra. (+2 to hydra score)");
+		public static const BloodlineHydra:PerkType = mk("Bloodline: Hydra", "Bloodline: Hydra",
+				"Your Hydra bloodline appears strongly within you. (+2 to hydra score)", null, true);
 		public static const KitsunesDescendant:PerkType = mk("Kitsune's descendant", "Kitsune's descendant",
 				"You are a descendant of your ancestor, who was the child of a human and a Kitsune. (+2 to kitsune score)");
 		public static const BloodlineKitsune:PerkType = mk("Bloodline: Kitsune", "Bloodline: Kitsune",
@@ -210,6 +216,10 @@ public class PerkLib
 				"You are a descendant of your ancestor, who was the child of a human and an Orc. (+2 to orc score)");
 		public static const BloodlineOrc:PerkType = mk("Bloodline: Orc", "Bloodline: Orc",
 				"Your Orc bloodline appears strongly within you. (+2 to orc score)", null, true);
+		public static const SalamandersDescendant:PerkType = mk("Salamander's descendant", "Salamander's descendant",
+				"You are a descendant of your ancestor, who was the child of a human and a Salamander. (+2 to salamander score)");
+		public static const BloodlineSalamander:PerkType = mk("Bloodline: Salamander", "Bloodline: Salamander",
+				"Your Salamander bloodline appears strongly within you. (+2 to salamander score)", null, true);
 		public static const VampiresDescendant:PerkType = mk("Vampire's descendant", "Vampire's descendant",
 				"You are a descendant of your ancestor, who was the child of a human and a vampire. (+2 to vampire score)");
 		public static const BloodlineVampire:PerkType = mk("Bloodline: Vampire", "Bloodline: Vampire",
@@ -371,13 +381,9 @@ public class PerkLib
 		//public static const BloodSacrifice:PerkType = mk("Blood Sacrifice", "Blood Sacrifice",
 				//"You are currently sacrificing blood to empower your spells.",
 				//"You are currently sacrificing blood to empower your spells.");
-		public static const FlyingSwordPath:PerkType = mk("Flying Sword Path", "Flying Sword Path",
-				"Allows you to control flying swords. With spending enough soulforce can even fly on them.",
-				"You've chosen the 'Flying Sword Path' perk. Allows you to control flying swords. With spending enough soulforce can even fly on them.")
-				.withBuffs({'maxsf_base':+50});
+		public static const FlyingSwordPath:FlyingSwordPathPerk = new FlyingSwordPathPerk();
 		public static const SoaringBlades:PerkType = mk("Soaring Blades", "Soaring Blades",
-				"Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of dantain attained.",
-				"You've chosen the 'Soaring Blades' perk. Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of dantain attained.");
+				"Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of dantain attained.");
 		public static const PartySynergy:PerkType = mk("Party Synergy", "Party Synergy",
 				"You and your companions in party will recieve multi bonus to basic stats like str or wis (+20% for PC and +50% for henchman). With each member beyond first bonus will increase arithmeticaly.",
 				"You've chosen the 'Party Synergy' perk. You and your companions in party will recieve multi bonus to basic stats like str or wis (+20% for PC and +50% for henchman). With each member beyond first bonus will increase arithmeticaly.");
@@ -406,11 +412,11 @@ public class PerkLib
 				"Increase the duration of lingering nourishment effects by another 100% of base duration. And slows hunger progression even further if any(note does not raise racial scores).",
 				"You've chosen the 'Greater Metabolization' perk. Increase the duration of lingering nourishment effects by another 100% of base duration. And slows hunger progression even further if any(note does not raise racial scores).");
 		public static const PowerAttackSu:PerkType = mk("Power Attack (Su)", "Power Attack (Su)",
-				"Allow to use wrath above normal maximum to calculate bonus (overwrath) and effectivness of power attack increased fourfold (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).",
-				"You've chosen the 'Power Attack (Su)' perk. Allow to use wrath above normal maximum to calculate bonus (overwrath) and effectivness of power attack increased fourfold (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).");
+				"The effectiveness of 'Power Attack' is increased fourfold, and now uses overwrath for calculating bonuses (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).",
+				"You've chosen the 'Power Attack (Su)' perk. Power Attack's effectiveness is increased fourfold, and now uses overwrath instead of wrath for calculations (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).");
 		public static const PowerShotSu:PerkType = mk("Power Shot (Su)", "Power Shot (Su)",
-				"Allow to use wrath above normal maximum to calculate bonus (overwrath) and effectivness of power shot increased fourfold (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).",
-				"You've chosen the 'Power Shot (Su)' perk. Allow to use wrath above normal maximum to calculate bonus (overwrath) and effectivness of power shot increased fourfold (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).");
+				"The effectiveness of 'Power Shot' is increased fourfold, and now uses overwrath for calculating bonuses (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).",
+				"You've chosen the 'Power Shot (Su)' perk. Power Shot's effectiveness is increased fourfold, and now uses overwrath instead of wrath for calculations (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).");
 		public static const Penetrator:PerkType = mk("Penetrator", "Penetrator",
 				"Thrown weapons and firearms (+ mech weapons) ignore damage reductions piercing right through your opponent armor weak points (ignore enemy dmg red). (+5% range physical attacks multiplier)",
 				"You've chosen the 'Penetrator' perk. Thrown weapons and firearms (+ mech weapons) ignore damage reductions piercing right through your opponent armor weak points (ignore enemy dmg red). (+5% range physical attacks multiplier)");
@@ -423,6 +429,9 @@ public class PerkLib
 		public static const UtilitySkillsSkilled:PerkType = mk("Utility Skills: Skilled", "Utility Skills: Skilled",
 				"Increasing mastery gains in non-combat skills by 300% of base and decreasing a bit req. exp to level up.",
 				"You've chosen the 'Utility Skills: Skilled' perk. Increasing mastery gains in non-combat skills by 300% of base and decreasing a bit req. exp to level up");//, , , Professional, Artisan, Master, and Guru
+		public static const SubzeroLustfulFury:PerkType = mk("Subzero Lustful Fury", "Subzero Lustful Fury",
+				"Decreasing health loss from activating higher grades of berzerking/lustzerking by 25%. Allow to activate 2 grades of berzerker/lustzerker state at once when you have Endless Rage perk.",
+				"You've chosen the 'Subzero Lustful Fury' perk, decreasing health loss from activating higher grades of berzerking/lustzerking by 25%. Allow to activate 2 grades of berzerker/lustzerker state at once when you have Endless Rage perk.");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -430,6 +439,12 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -754,6 +769,13 @@ public class PerkLib
 						"<b>You aren't strong enough to benefit from this anymore.</b>" +
 						"]",
 				"You've chosen the 'Brutal Blows' perk, which reduces enemy armor with each hit. (+5% melee physical attacks multiplier)");
+		public static const BrutalSpells:PerkType = mk("Brutal Spells", "Brutal Spells",
+				"[if(player.inte>=75)" +
+						"Reduces enemy magic resistance with each spell. (+5% base spell strength)" +
+						"|" +
+						"<b>You are too dumb to gain benefit from this perk.</b>" +
+						"]",
+				"You've chosen the 'Brutal Spells' perk, which reduces enemy magic resistance with each spell. (+5% base spell strength)");
 		public static const Brute:PerkType = mk("Brute", "Brute",
 				"You have increased your striking strength. (+20% of max core Str as phantom Str & +5% melee physical attacks multiplier)",
 				"You've chosen the 'Brute' perk, increased your striking strength. (+20% of max core Str as phantom Str & +5% melee physical attacks multiplier)");
@@ -983,7 +1005,7 @@ public class PerkLib
 				"When using Great Dive you may add your weapon damage as part of the attack damage as if using power attack at its current maximum value consuming no wrath in the process.",
 				"You've chosen the 'Death plunge' perk. When using Great Dive you may add your weapon damage as part of the attack damage as if using power attack at its current maximum value consuming no wrath in the process.");
 		public static const DefenceStance:PerkType = mk("Defence Stance", "Defence Stance",
-				"Defend move now reduce incoming damage a little more and allow recovering fatigue/mana/soulforce.",
+				"Defend move now reduce incoming damage a little more and allow for very small improvement of fatigue/mana/soulforce recovery.",
 				"You've chosen the 'Defence Stance' perk, training to master you defence pose.");
 		public static const DefensiveStaffChanneling:PerkType = mk("Defensive Staff Channeling", "Defensive Staff Channeling",
 				"When you would cast defensive spell holding staff it effects would be increased a bit (higher defensive effect or longer duration).",
@@ -1547,8 +1569,8 @@ public class PerkLib
 						"]",
 				"You've chosen the 'Grand Tactician' perk, increasing physical critical hit chance by up to 30% (Intelligence-based).");
 		public static const GreaterAerialCombat:PerkType = mk("Greater Aerial Combat", "Greater Aerial Combat",
-				"You have learned to use air and gravity to your own benefit. (extend flight duration while using wings by 4 turns and increase evasion when flying by 15%)",
-				"You've chosen the 'Greater Aerial Combat' perk, you learned to use air and gravity to your own benefit. (extend flight duration while using wings by 4 turns and increase evasion when flying by 15%)");
+				"You have learned to use air and gravity to your own benefit. (extend flight duration while using wings by 4 turns and increase evasion when flying by 10%)",
+				"You've chosen the 'Greater Aerial Combat' perk, you learned to use air and gravity to your own benefit. (extend flight duration while using wings by 4 turns and increase evasion when flying by 10%)");
 		public static const GreaterBrawn:PerkType = mk("Greater Brawn", "Greater Brawn",
 				"You have greatly improved your striking power. (+20% to phantom Str bonus, +15% to unarmed atk & melee physical attacks multiplier)",
 				"You've chosen the 'Greater Brawn' perk, greatly improving your striking power. (+20% to phantom Str bonus, +15% to unarmed atk & melee physical attacks multiplier)");
@@ -2295,14 +2317,14 @@ public class PerkLib
 				"Some people get all the luck it seems... Shut up and take our money is what all enemies scream at you upon defeat, increasing your gains on victory. (15% more gems from victories)",
 				"You've chosen the 'Money Finder' perk, increasing gem gains from victories by 15%.");
 		public static const Motivation:PerkType = mk("Motivation", "Motivation",
-				"Decrease to 20% henchmans idle time during combat. Increase dmg dealt by ~50%.",
-				"You've chosen the 'Motivation' perk. Decrease to 10% henchmans idle time during combat. Increase dmg dealt by ~50%.");
+				"Decreases the idle time of followers to 20% during combat. Increases the damage dealt by followers by ~50%.",
+				"You've chosen the 'Motivation' perk. Decreases the idle time of followers to 20% during combat. Increases the damage dealt by followers by ~50%.");
 		public static const MotivationEx:PerkType = mk("Motivation (Ex)", "Motivation (Ex)",
-				"Decrease to 1% henchmans idle time during combat. Increase dmg dealt by ~50% each time you reach specific level treshold (up to 4 times).",
-				"You've chosen the 'Motivation (Ex)' perk. Increase dmg dealt by ~50% each time you reach specific level treshold (up to 4 times).");
+				"Decreases the idle time of followers to 1% during combat. Increases the damage dealt by followers by ~50% at level 6, 27, 54 and 102.",
+				"You've chosen the 'Motivation (Ex)' perk. Increases the damage dealt by followers by ~50% at level 6, 27, 54 and 102.");
 		public static const MotivationSu:PerkType = mk("Motivation (Su)", "Motivation (Su)",
-				"All henchman do two actions in their turn and increase power of their attacks by 150% of currently boost provided by previous Motivcation perks.",
-				"You've chosen the 'Motivation (Su)' perk. All henchman do two actions in their turn and increase power of their attacks by 150% of currently boost provided by previous Motivcation perks.");
+				"All followers can now do two actions per turn. Increases the damage bonuses of the other Motivcation perks by 1.5.",
+				"You've chosen the 'Motivation (Su)' perk. All followers do two actions per turn, and increases the damage bonuses of other Motivation perks by 1.5.");
 		public static const MusclesOfSteel:PerkType = mk("Muscles of Steel", "Muscles of Steel",
 				"Your body has further adapted to fighting, strengthening your muscles so that they too possess the power of steel to further your melee power. (+10% melee phys dmg)",
 				"You've chosen the 'Muscles of Steel' perk, gaining +10% melee phys dmg.");
@@ -2462,7 +2484,7 @@ public class PerkLib
 				"Thrown weapons have such penetrating power they now have a chance to run through multiple enemies. When attacking groups the projectiles have a 75% (losing 10% after each successful piercing strike) chance to deal their damage more then once. (+20% range physical attacks multiplier)",
 				"You've chosen the 'Penetrating throw' perk. Thrown weapons have such penetrating power they now have a chance to run through multiple enemies. When attacking groups the projectiles have a 75% (losing 10% after each successful piercing strike) chance to deal their damage more then once. (+20% range physical attacks multiplier)");
 		public static const PerfectDefenceStance:PerkType = mk("Perfect Defence Stance", "Perfect Defence Stance",
-				"Defend move now massively reduce incoming damage and allow for improved fatigue/mana/soulforce recovery.",
+				"Defend move now massively reduce incoming damage and allow for minor improvement of fatigue/mana/soulforce recovery.",
 				"You've chosen the 'Perfect Defence Stance' perk, perfecting your defence pose beyond mastery level.");
 		public static const Perfection:PerkType = mk("Perfection", "Perfection",
 				"The ultimate stage of alchemy, you have perfected the art of making transformatives more effective. This is a level very few have reached +2% alchemy/mutagen boost.",
@@ -2930,7 +2952,7 @@ public class PerkLib
 				"Slows hunger rate by another 20%.",
 				"You've chosen the 'Survivalist 3' perk.  With this perk, your hunger rate is reduced second time by another 20%.");
 		public static const StaffChanneling:PerkType = mk("Staff Channeling", "Staff Channeling",
-				"Melee attacks with staffs would turn to ranged magic bolts. In additiona to hitting enemy next to you they would enable hitting enemies out of your reach (for ex. flying enemies).",
+				"Melee attacks with staffs would turn to ranged magic bolts. In addition to hitting enemy next to you they would enable hitting enemies out of your reach (for ex. flying enemies).",
 				"You've chosen the 'Staff Channeling' perk. Melee attacks with staffs would turn to ranged magic bolts. In addition to hitting an enemy next to you, they would enable hitting enemies out of your reach (for ex. flying enemies).");
 		public static const StrongBack:PerkType = mk("Strong Back", "Strong Back",
 				"Enables additional item slots. (+50%)",
@@ -3942,10 +3964,10 @@ public class PerkLib
 				"You are five times taller than your effective base size.");
 		public static const TitanicStrength:PerkType = mk("Titanic Strength", "Titanic Strength",
 				"While 10 ft tall or above ability increases total strength based on tallness up to 1% per 0.5 ft.");
+		public static const TransformationAcclimation:PerkType = mk("Transformation Acclimation", "Transformation Acclimation",
+				"Increases the likelihood of undergoing a transformation even if you have transformation resistance.");
 		public static const TransformationResistance:PerkType = mk("Transformation Resistance", "Transformation Resistance",
 				"Reduces the likelihood of undergoing a transformation. Disables Bad Ends from transformative items.");
-		public static const TransformationAcclimation:PerkType = mk("Transformation Acclimation", "Transformation Acclimation",
-				"Increases the likelihood of undergoing a transformation. Disables Bad Ends from transformative items.");
 		public static const UnnaturalStrength:PerkType = mk("Unnatural Strength", "Unnatural Strength",
 				"The more sated you are the stronger you get, although your satisfaction is fleeting.");
 		public static const WendigoCurse:PerkType = mk("Wendigo Curse", "Wendigo Curse",
@@ -3981,6 +4003,8 @@ public class PerkLib
 				"When outdoors you are considered to be permanently flying, allowing you to use great dive and flying skills at will. Useless underwater.");
 		public static const AffinityUndine:PerkType = mk("Affinity (Undine)", "Affinity (Undine)",
 				"Can breath underwater and gain +50 to speed and spell power while underwater. Weak to electricity (-100% resistance).");
+		public static const AlteredAnima:PerkType = mk("Altered Anima", "Altered Anima",
+				".");
 		public static const ArchmageEx:PerkType = mk("Archmage (Ex)", "Archmage (Ex)",
 				"[if (player.inte>=100)" +
 						"Increases base spell strength by 105%, mana pool by 600 and lust bar by 135." +
@@ -3988,6 +4012,8 @@ public class PerkLib
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]")
 				.withBuffs({'maxlust_base':+135});
+		public static const ArigeanKnowledge:PerkType = mk("Arigean Knowledge", "Arigean Knowledge",
+				"The knowledge of your Arigean ancestors rests in your mind. Gain immunity to mental debuffs and intelligence min is increased to 90.");
 		public static const AscensionMenuChoiceMaybe:PerkType = mk("AscensionMenuChoiceMaybe", "AscensionMenuChoiceMaybe",
 				"You shouldn't be here to see that description so *puts on black sunglasses and prepare erase devide* please look at the red light.");
 		public static const AuraOfCorruption:PerkType = mk("Aura of Corruption", "Aura of Corruption",
@@ -4006,7 +4032,7 @@ public class PerkLib
 				"Corruption meter now increase lust resistance based on purity.");
 		public static const Cornucopia:PerkType = mk("Cornucopia", "Cornucopia",
 				"Vaginal and Anal capacities increased by 30.");
-		public static const CorrosiveMeltdownMastered:PerkType = mk("Raging Inferno (Mastered)", "Raging Inferno (Mastered)",
+		public static const CorrosiveMeltdownMastered:PerkType = mk("Corrosive Meltdown (Mastered)", "Corrosive Meltdown (Mastered)",
 				"Cumulative 120% damage increase for every subsequent acid spell. Each turn without cast acid spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling acid based attack. Maximum 50 stacks.");
 		public static const CraftedArrows:PerkType = mk("Crafted Arrows", "Crafted Arrows",
 				"You have personaly crafted arrows in your quiver. Depending on their type it will increase bow attack from 10% to 40%");
@@ -4017,7 +4043,7 @@ public class PerkLib
 		public static const DominantAlpha:PerkType = new DominantAlphaPerk();
 		public static const DualMind:PerkType = mk("Dual Mind", "Dual Mind",
 				"Greatly empower the tease ability.");
-		public static const EclipsingShadowMastered:PerkType = mk("Raging Inferno (Mastered)", "Raging Inferno (Mastered)",
+		public static const EclipsingShadowMastered:PerkType = mk("Eclipsing Shadow (Mastered)", "Eclipsing Shadow (Mastered)",
 				"Cumulative 120% damage increase for every subsequent darkness spell. Each turn without cast darkness spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling darkness based attack. Maximum 50 stacks.");
 		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
 				"You are currently in elemental form.");
@@ -4068,7 +4094,7 @@ public class PerkLib
 				"Grants a corrupted fire coating to your body, dealing fire damage with all feral attacks.");
 		public static const HighTideMastered:PerkType = mk("High Tide (Mastered)", "High Tide (Mastered)",
 				"Cumulative 120% damage increase for every subsequent water spell. Each turn without cast water spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling water based attack. Maximum 50 stacks.");
-		public static const HighVoltageMastered:PerkType = mk("Raging Inferno (Mastered)", "Raging Inferno (Mastered)",
+		public static const HighVoltageMastered:PerkType = mk("High Voltage (Mastered)", "High Voltage (Mastered)",
 				"Cumulative 120% damage increase for every subsequent lightning spell. Each turn without cast lightning spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling lightning based attack. Maximum 50 stacks.");
 		public static const HowlingGaleMastered:PerkType = mk("Howling Gale (Mastered)", "Howling Gale (Mastered)",
 				"Cumulative 120% damage increase for every subsequent wind spell. Each turn without cast wind spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling wind based attack. Maximum 50 stacks.");
@@ -4120,7 +4146,7 @@ public class PerkLib
 				"When slaying or purifying demons their corrupted power is purified and sent back to you.");
 		public static const RagingInfernoMastered:PerkType = mk("Raging Inferno (Mastered)", "Raging Inferno (Mastered)",
 				"Cumulative 120% damage increase for every subsequent fire spell. Each turn without cast fire spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling fire based attack. Maximum 50 stacks.");
-		public static const RumblingQuakeMastered:PerkType = mk("Raging Inferno (Mastered)", "Raging Inferno (Mastered)",
+		public static const RumblingQuakeMastered:PerkType = mk("Rumbling Quake (Mastered)", "Rumbling Quake (Mastered)",
 				"Cumulative 120% damage increase for every subsequent earth spell. Each turn without cast earth spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling earth based attack. Maximum 50 stacks.");
 		public static const SageMedicine:PerkType = mk("Sage Medicine", "Sage Medicine",
 				"Sage Medicine used for the Azazel ascension, reduces minimum corruption caused by havinng a soul Phylactery");
@@ -4923,7 +4949,7 @@ public class PerkLib
             GigantGripSu.requireLevel(30)
                     .requireStr(140)
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.playerHasFourArms();
+                        return player.arms.isAny(Arms.DISPLACER, Arms.ANT, Arms.MOTH);//player.playerHasFourArms()
                     }, "Four arms")
                     .requirePerk(GigantGripEx);
             HalfStepToSuperiorTranquilness.requireStr(180)
@@ -5765,6 +5791,9 @@ public class PerkLib
 					.requirePerk(GreyMagic)
                     .requireInt(75)
                     .requireLevel(6);
+            BrutalSpells.requireLevel(6)
+                    .requireInt(75)
+                    .requirePerk(JobSorcerer);
             //Tier 2 Intelligence perks
             GrandMage.requirePerk(Mage)
                     .requireInt(75)
@@ -7076,13 +7105,9 @@ public class PerkLib
             //Tier 0
             //HeartCultivator.requirePerk(JobSoulCultivator);		//psionic/min powers cultivation/psion class from D&D?
             //requirePerk(JobSoulCultivator)		//allowing you to use soulforce options more times per day - 1/2/3 time more?
-            FlyingSwordPath.requirePerk(JobSoulCultivator);
-			SoaringBlades.requirePerks(Dantain, FlyingSwordPath);
             //Tier 1
             //Tier 2
             //Tier 3
-			KillingIntent.requirePerk(JobSoulCultivator)
-								.requireLevel(20);
 			FirstAttackFlyingSword.requirePerks(SoaringBlades, SoulWarrior)
 								.requireLevel(24);
             //2nd perk for flying swords slots
@@ -7838,6 +7863,9 @@ public class PerkLib
 					.requirePerks(HclassHeavenTribulationSurvivor, PrestigeJobDruid);
             FirstAttackSkeletons.requireLevel(54)
                     .requirePerks(FirstAttackGolems, PrestigeJobNecromancer);
+			SubzeroLustfulFury.requireLevel(54)
+					.requirePerk(PrestigeJobBerserker)
+                    .requireAnyPerk(ColderFury, ColderLust);
             //Tier 10
             ChimericalBodySemiPeerlessStage.requirePerk(ChimericalBodySuperiorStage)
                     .requireLevel(60)
@@ -8033,7 +8061,7 @@ public class PerkLib
             //        .requireLevel(1)
             //        .requireCustomFunction(function (player:Player):Boolean {
             //            return player.internalChimeraScore() >= 2;
-            //        }, "Two of any race internal mutations");//TYLKO do szybkich testów rasowych/rasowych perków mutacyjnych
+            //        }, "Two of any race internal mutations");//TYLKO do szybkich testów rasowych/rasowych perków mutacyjnych (ONLY for quick tests of racial/mutational racial perks)
 			
 			// validate tier lists
 			for each (var tierlist:Array in PERK_TIER_LISTS) {

@@ -14,7 +14,7 @@ import classes.Scenes.SceneLib;
 public class DarknessElemental extends Monster
 	{
 		public function baseElementalAttack():void {
-			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Undine":"The darkness elemental")+" envelops its fists within inky shadows before throwing a punch toward you.");
+			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Blackened doppelganger":"The darkness elemental")+" envelops its fists within inky shadows before throwing a punch toward you.");
 			var damage:Number = inte + wis;
 			if (player.hasPerk(PerkLib.DarknessAffinity)) damage *= 0.3;
 			if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 3;
@@ -31,7 +31,7 @@ public class DarknessElemental extends Monster
 		}
 		
 		public function fluffyOfPunches():void {
-			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Undine":"The darkness elemental")+" wraps its fists in wicks of darkness before zeroing in for a flurry of punches.");
+			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Blackened doppelganger":"The darkness elemental")+" wraps its fists in wicks of darkness before zeroing in for a flurry of punches.");
 			var damage:Number = inte + wis;
 			if (player.hasPerk(PerkLib.DarknessAffinity)) damage *= 0.3;
 			if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 3;
@@ -49,7 +49,7 @@ public class DarknessElemental extends Monster
 		}
 		
 		public function subbossSpecial():void {
-			outputText("The Undine concentrates, coalescing nearby ambient water into crescent-shaped shards of water before hurling them toward you with a flick of his wrist.");
+			outputText("Blackened doppelganger concentrates, coalescing nearby ambient darkness into crescent-shaped shards before hurling them toward you with a flick of his wrist.");
 			if (player.getEvasionRoll()) outputText(" You slide underneath the barrage!");
 			else {
 				var damage:Number = inte + wis;
@@ -58,7 +58,7 @@ public class DarknessElemental extends Monster
 				damage *= 3.75;
 				damage = Math.round(damage);
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
-				outputText(" The watery strikes connect with your body. ");
+				outputText(" The darkness shards connect with your body. ");
 				damage = player.takeDarknessDamage(damage, true);
 				damage = player.takeDarknessDamage(damage, true);
 				damage = player.takeDarknessDamage(damage, true);

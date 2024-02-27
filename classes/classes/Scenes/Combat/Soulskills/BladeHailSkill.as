@@ -58,34 +58,15 @@ public class BladeHailSkill extends AbstractSoulSkill {
 	}
 
 	override public function calcCooldown():int {
-		return hailArray[hailSelection][4];
-	}
-
-	//Calculate dodge chance for each version of skill
-	private function didDodge(display:Boolean):Boolean {
-		switch (hailSelection + 1) {
-			case 0: return monsterDodgeSkill("weapons", display);
-			case 1:
-				if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 10 && int(Math.random() * (((monster.spe - player.spe) / 5) + 70)) > 80)) {
-					if (display) {
-						if (monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids weapons!\n\n");
-						else if (monster.spe-player.spe < 20) outputText("[Themonster] dodges weapons with superior quickness!\n\n");
-						else outputText("[Themonster] deftly avoids weapons.\n\n");
-					}
-					return true;
-				} else
-					return false;
-			case 2:
-				if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 20 && int(Math.random() * (((monster.spe - player.spe) / 6) + 60)) > 80)) {
-					if (display) {
-						if (monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids weapons!\n\n");
-						else if (monster.spe-player.spe < 20) outputText("[Themonster] dodges weapons with superior quickness!\n\n");
-						else outputText("[Themonster] deftly avoids weapons.\n\n");
-					}
-					return true;
-				} else
-					return false;
-			default: return false;
+		var baseCooldown:int = hailArray[hailSelection][4];
+		switch (hailSelection) {
+			case 2: return soulskillTier3Cooldown(baseCooldown, false);
+					break;
+			case 1: return soulskillTier2Cooldown(baseCooldown, false);
+					break;
+			case 0: 
+			default:return soulskillCooldown(baseCooldown, false);
+					break;
 		}
 	}
 
@@ -95,7 +76,7 @@ public class BladeHailSkill extends AbstractSoulSkill {
 		if (damage < 10) damage = 10;
 
 		//soulskill mod effect
-		damage *= combat.soulskillMagicalMod();
+		damage *= soulskillMagicalMod();
 
 		//other bonuses
 		if (player.hasPerk(PerkLib.Heroism) && (monster && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType)))) damage *= 2;
@@ -151,7 +132,7 @@ public class BladeHailSkill extends AbstractSoulSkill {
 		if (display) outputText("Letting soulforce leak out around you, you form " + hailArray[hailSelection][1] +
 			" ethereal two meter long weapons in four rows. You thrust your hand outwards and in the blink of an eye, weapons shoot forwards [themonster].  ");
 
-		if (didDodge(display)) return;
+		if (monsterDodgeSkill("weapons", display)) return;
 
 		if (display) outputText("Weapons hits [themonster], dealing ");
 

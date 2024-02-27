@@ -856,7 +856,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("You decide to try your hardest at doing as many pull-ups as you can, the Troll has a bar that he practices on as well, he helps guide you on good form as he trains with you.\n\n");
 			outputText("Once you’re done, you feel that this exercise was worth the effort. You thank Zenji before dismissing yourself.\n\n");
 			if (player.statusEffectv1(StatusEffects.ZenjiTrainingsCounters1) < 3) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters1, 1, 1);
-			player.trainStat("str",(4 - player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters2)),player.trainStatCap("str",100));
+			player.trainStat("str",(4 - player.statusEffectv1(StatusEffects.ZenjiTrainingsCounters1)),player.trainStatCap("str",100));
 			outputText(player.modTone(player.maxToneCap(), 1));
 			player.fatigue += Math.round(player.maxFatigue() * 0.2);
 			followerZenjiMainCampMenuTrainingPerks();
@@ -874,7 +874,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("You begin planking, a few minutes pass and your arms start feeling weak. Zenji helps you and planks beside you, teaching you about endurance, form and technique.\n\n");
 			outputText("Once you’re done you feel that the exercise was worth the time. You thank Zenji before dismissing yourself.\n\n");
 			if (player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters1) < 3) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters1, 2, 1);
-			player.trainStat("tou",(4 - player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters2)),player.trainStatCap("tou",100));
+			player.trainStat("tou",(4 - player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters1)),player.trainStatCap("tou",100));
 			outputText(player.modThickness(0, 1));
 			outputText(player.modTone(player.maxToneCap(), 1));
 			player.fatigue += Math.round(player.maxFatigue() * 0.2);
@@ -893,7 +893,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("You jog back and forth with the troll, making sure to keep a good pace. Zenji soon joins you and instructs you on good form and technique.\n\n");
 			outputText("Once you’re done, you feel that the exercise was worth the time. You thank Zenji before dismissing yourself.\n\n");
 			if (player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters1) < 3) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters1, 3, 1);
-			player.trainStat("spe",(4 - player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters2)),player.trainStatCap("spe",100));
+			player.trainStat("spe",(4 - player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters1)),player.trainStatCap("spe",100));
 			outputText(player.modThickness(0, 1));
 			player.fatigue += Math.round(player.maxFatigue() * 0.2);
 			followerZenjiMainCampMenuTrainingPerks();
@@ -917,7 +917,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("Once you feel the rhythm and find a good balance with the stone, the magic you’ve conjured steadies and Zenji applauds.\n\n");
 			outputText("\"<i>Strength of mind requires balance and strategy. Know your limits and how much you are capable of.</i>\"\n\n");
 			if (player.statusEffectv1(StatusEffects.ZenjiTrainingsCounters2) < 3) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters2, 1, 1);
-			player.trainStat("int",(4 - player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters2)),player.trainStatCap("int",100));
+			player.trainStat("int",(4 - player.statusEffectv1(StatusEffects.ZenjiTrainingsCounters2)),player.trainStatCap("int",100));
 			player.fatigue += Math.round(player.maxFatigue() * 0.2);
 			followerZenjiMainCampMenuTrainingPerks();
 			endEncounter();

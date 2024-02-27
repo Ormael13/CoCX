@@ -7,110 +7,96 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Wings;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
+import classes.GlobalFlags.kFLAGS;
 
 public class Zetaz extends Monster
 	{
-		public function zetazAI():void {
-			//Zetaz taunts.
-			zetazTaunt();
-			outputText("\n\n");
-			//If afflicted by blind or whispered and over 50% lust,
-			//burns lust and clears statuses before continuing with
-			//turn.
-			if(lust > 50 && (hasStatusEffect(StatusEffects.Fear) || hasStatusEffect(StatusEffects.Blind))) {
-				if (hasStatusEffect(StatusEffects.Fear)) this.speStat.core.value += statusEffectv2(StatusEffects.Fear);
-				removeStatusEffect(StatusEffects.Fear);
-				removeStatusEffect(StatusEffects.Blind);
-				lust -= 10;
-				outputText("Zetaz blinks and shakes his head while stroking himself.  After a second his turgid member loses some of its rigidity, but his gaze has become clear.  He's somehow consumed some of his lust to clear away your magic!");
-			}
-			
-			//STANDARD COMBAT STATUS EFFECTS HERE
-			if(hasStatusEffect(StatusEffects.Stunned)) {
-				outputText("Your foe is too dazed from your last hit to strike back!");
-				removeStatusEffect(StatusEffects.Stunned);
-				return;
-			}
-			var select:Number=1;
-			var rando:Number=1;
-			if(hasStatusEffect(StatusEffects.Constricted)) {
-				//Enemy struggles -
-				outputText("Your prey pushes at your tail, twisting and writhing in an effort to escape from your tail's tight bonds.");
-				if(statusEffectv1(StatusEffects.Constricted) <= 0) {
-					outputText("  " + capitalA + short + " proves to be too much for your tail to handle, breaking free of your tightly bound coils.");
-					removeStatusEffect(StatusEffects.Constricted);
-				}
-				addStatusValue(StatusEffects.Constricted,1,-1);
-				return;
-			}
-			//STANDARD COMBAT STATUS AFFECTS END HERE
-			//-If over 50 lust and below 50% hp
-			//--burns 20 lust to restore 20% hp.
-			if(lust > 50 && HPRatio() <= .5) {
-				outputText("The imp lord shudders from his wounds and the pulsing member that's risen from under his tattered loincloth.  He strokes it and murmurs under his breath for a few moments.  You're so busy watching the spectacle of his masturbation that you nearly miss the sight of his bruises and wounds closing!  Zetaz releases his swollen member, and it deflates slightly.  He's used some kind of black magic to convert some of his lust into health!");
-				addHP(0.25 * maxHP());
-				lust -= 20;
-				player.takeLustDamage(2, true);
+
+		public function lustHeal():void {
+			outputText("The imp lord shudders from his wounds and the pulsing member that's risen from under his tattered loincloth.  He strokes it and murmurs under his breath for a few moments.  You're so busy watching the spectacle of his masturbation that you nearly miss the sight of his bruises and wounds closing!  Zetaz releases his swollen member, and it deflates slightly.  He's used some kind of black magic to convert some of his lust into health!");
+			addHP(0.25 * maxHP());
+			lust -= maxLust() * 0.2;
+			player.takeLustDamage(eBaseDamage() / 5, true);
+			createStatusEffect(StatusEffects.AbilityCooldown1, 3, 0, 0, 0);
+		}
+
+		public function heatDraft():void {
+			//Chucks faux-heat draft ala goblins. -
+			outputText("Zetaz grabs a bottle from a drawer and hurls it in your direction!  ");
+			if(player.getEvasionRoll()) {
+				outputText("You sidestep it a moment before it shatters on the wall, soaking the tapestries with red fluid!");
 			}
 			else {
-				var attackChoice:Number = rand(3);
-				if(attackChoice == 0) {
-					//Chucks faux-heat draft ala goblins. -
-					outputText("Zetaz grabs a bottle from a drawer and hurls it in your direction!  ");
-					if(player.getEvasionRoll()) {
-						outputText("You sidestep it a moment before it shatters on the wall, soaking the tapestries with red fluid!");
-					}
-					else {
-						outputText("You try to avoid it, but the fragile glass shatters against you, coating you in sticky red liquid.  It seeps into your [skin.type] and leaves a pleasant, residual tingle in its wake.  Oh no...");
-						//[Applies: "Temporary Heat" status]
-						if(!player.hasStatusEffect(StatusEffects.TemporaryHeat)) player.createStatusEffect(StatusEffects.TemporaryHeat,0,10,0,0);
-					}
-				}
-				else if(attackChoice == 1) {
-					//'Gust' – channels a pidgy's spirit to beat
-					//his wings and kick up dust, blinding the PC
-					//next turn and dealing light damage. -
-					outputText("The imp leaps into the air with a powerful spring, beating his wings hard to suspend himself in the center of his bedchamber.  Dust kicks up into the air from the force of his flight and turns the room into a blinding tornado!  Small objects smack off of you, ");
-					//(causing little damage/
-					if(player.tou > 60) outputText("causing little damage");
-					else {
-						var dmg:Number = 1 + rand(6);
-						outputText("wounding you slightly ");
-						dmg = player.takePhysDamage(dmg, true);
-					}
-					outputText(" while the dust gets into your eyes, temporarily blinding you!");
-					if (!player.isImmuneToBlind()) player.createStatusEffect(StatusEffects.Blind,1,0,0,0);
-				}
-				//Gigarouse – A stronger version of normal imp's
-				//'arouse' spell. - copy normal arouse text and
-				//spice it up with extra wetness!
-				else {
-					gigaArouse();
-				}
+				outputText("You try to avoid it, but the fragile glass shatters against you, coating you in sticky red liquid.  It seeps into your [skin.type] and leaves a pleasant, residual tingle in its wake.  Oh no...");
+				//[Applies: "Temporary Heat" status]
+				if(!player.hasStatusEffect(StatusEffects.TemporaryHeat)) player.createStatusEffect(StatusEffects.TemporaryHeat,0,10,0,0);
 			}
+		}
+
+		public function gust():void {
+			//'Gust' – channels a pidgy's spirit to beat
+			//his wings and kick up dust, blinding the PC
+			//next turn and dealing light damage. -
+			outputText("The imp leaps into the air with a powerful spring, beating his wings hard to suspend himself in the center of his bedchamber.  Dust kicks up into the air from the force of his flight and turns the room into a blinding tornado!  Small objects smack off of you, ");
+			//(causing little damage/
+			if(player.tou > 60) outputText("causing little damage");
+			else {
+				var dmg:Number = eBaseDamage();
+				outputText("wounding you slightly");
+				dmg = player.takePhysDamage(dmg, true);
+			}
+			outputText(" while the dust gets into your eyes, temporarily blinding you!");
+			if (!player.isImmuneToBlind()) player.createStatusEffect(StatusEffects.Blind,1,0,0,0);
 		}
 		
 		public function gigaArouse():void {
-			outputText("You see " + a + short + " make familiar arcane gestures at you, but his motions seem a lot more over the top than you'd expect from an imp.\n\n");
-			player.takeLustDamage(rand(player.lib/10)+player.cor/10+15, true);
-			if(player.lust < 30) outputText("Your nethers pulse with pleasant warmth that brings to mind pleasant sexual memories.  ");
-			if(player.lust >= 30 && player.lust < 60) outputText("Blood rushes to your groin in a rush as your body is hit by a tidal-wave of arousal.  ");
-			if(player.lust >= 60) outputText("Your mouth begins to drool as you close your eyes and imagine yourself sucking off Zetaz, then riding him, letting him sate his desires in your inviting flesh.  The unnatural visions send pulses of lust through you so strongly that your body shivers.  ");
+			outputText("You see " + a + short + " make familiar arcane gestures at you, but his motions seem a lot more over the top than you'd expect from an imp. ");
+			var lustDmg:Number = inteligencescalingbonus() / 3;
+			lustDmg *= 1 + (0.5 * (player.cor / 100));
+			lustDmg += 15;
+			
+			player.takeLustDamage(lustDmg, true);
+			outputText("\n");
+			if(player.lust100 < 30) outputText("Your nethers pulse with pleasant warmth that brings to mind pleasant sexual memories.  ");
+			if(player.lust100 >= 30 && player.lust100 < 60) outputText("Blood rushes to your groin in a rush as your body is hit by a tidal-wave of arousal.  ");
+			if(player.lust100 >= 60) outputText("Your mouth begins to drool as you close your eyes and imagine yourself sucking off Zetaz, then riding him, letting him sate his desires in your inviting flesh.  The unnatural visions send pulses of lust through you so strongly that your body shivers.  ");
 			if(player.cocks.length > 0) {
-				if(player.lust >= 60 && player.cocks.length > 0) outputText("You feel [eachcock] dribble pre-cum, bouncing with each beat of your heart and aching to be touched.  ");
-				if(player.lust >= 30 && player.lust < 60 && player.cocks.length == 1) outputText(player.SMultiCockDesc() + " hardens and twitches, distracting you further.  ");
+				if(player.lust100 >= 60 && player.cocks.length > 0) outputText("You feel [eachcock] dribble pre-cum, bouncing with each beat of your heart and aching to be touched.  ");
+				if(player.lust100 >= 30 && player.lust100 < 60 && player.cocks.length == 1) outputText(player.SMultiCockDesc() + " hardens and twitches, distracting you further.  ");
 			}
 			if(player.vaginas.length > 0) {
-				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL && player.vaginas.length == 1) outputText("Your [vagina] dampens perceptibly, feeling very empty.  ");
-				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET && player.vaginas.length > 0) outputText("Your crotch becomes sticky with girl-lust, making it clear to " + a + short + " just how welcome your body finds the spell.  ");
-				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK && player.vaginas.length == 1) outputText("Your [vagina] becomes sloppy and wet, dribbling with desire to be mounted and fucked.  ");
-				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING && player.vaginas.length > 0) outputText("Thick runners of girl-lube stream down the insides of your thighs as your crotch gives into the demonic magics.  You wonder what " + a + short + "'s cock would feel like inside you?  ");
-				if (player.lust >= 60 && player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING && player.vaginas.length == 1) outputText("Your [vagina] instantly soaks your groin with the heady proof of your need.  You wonder just how slippery you could " + a + short + "'s dick when it's rammed inside you?  ");
+				if(player.lust100 >= 60 && player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL && player.vaginas.length == 1) outputText("Your [vagina] dampens perceptibly, feeling very empty.  ");
+				if(player.lust100 >= 60 && player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET && player.vaginas.length > 0) outputText("Your crotch becomes sticky with girl-lust, making it clear to " + a + short + " just how welcome your body finds the spell.  ");
+				if(player.lust100 >= 60 && player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK && player.vaginas.length == 1) outputText("Your [vagina] becomes sloppy and wet, dribbling with desire to be mounted and fucked.  ");
+				if(player.lust100 >= 60 && player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING && player.vaginas.length > 0) outputText("Thick runners of girl-lube stream down the insides of your thighs as your crotch gives into the demonic magics.  You wonder what " + a + short + "'s cock would feel like inside you?  ");
+				if (player.lust100 >= 60 && player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING && player.vaginas.length == 1) outputText("Your [vagina] instantly soaks your groin with the heady proof of your need.  You wonder just how slippery you could " + a + short + "'s dick when it's rammed inside you?  ");
 			}
-			if(player.lust >= player.maxOverLust()) doNext(SceneLib.combat.endLustLoss);
+			if(player.lust >= player.maxOverLust() && !SceneLib.combat.tyrantiaTrainingExtension()) doNext(SceneLib.combat.endLustLoss);
 		}
 
+		public function gigaWhitefire():void {
+			outputText("The imp lord glares daggers at you, before snapping his fingers.");
+			outputText(" In a flash, you and the area around are bathed in white flames!");
+
+			var damage:Number = eBaseIntelligenceDamage() * 5;
+
+			if (player.hasStatusEffect(StatusEffects.Blizzard)) {
+				player.addStatusValue(StatusEffects.Blizzard, 1, -1);
+				damage *= 0.2;
+				outputText(" Luckily, your conjured blizzard lessens the effect. ")
+			}
+			player.takeFireDamage(damage, true);
+
+			var burnChance:Number = 25;
+			if (player.hasStatusEffect(StatusEffects.BurnDoT)) {
+				player.addStatusValue(StatusEffects.BurnDoT, 1, 1);
+			} else if (!player.immuneToBurn()) {
+				player.createStatusEffect(StatusEffects.BurnDoT, 3, 0.1, 0, 0);
+				outputText(" His spell leaves burns all over your body!");
+			}
+		}
 		
+
 		public function zetazTaunt():void {
 			if(!hasStatusEffect(StatusEffects.round)) {
 				createStatusEffect(StatusEffects.round,1,0,0,0);
@@ -132,9 +118,49 @@ public class Zetaz extends Monster
 			}
 		}
 
-		override public function doAI():void
-		{
-			zetazAI();
+		//One time heal and empowerment for difficulties above normal
+		public function zetazMight():void {
+			outputText("Zetaz flushes, drawing on his body's desires to empower his muscles and spells. ");
+			outputText("Laughing from the rush of power, he quickly rises into air!");
+			statStore.addBuffObject({"int.mult":0.3, "tou.mult":0.3}, "ImpMight");
+			this.createStatusEffect(StatusEffects.Flying, 30, 0, 0, 0);
+			addHP(0.25 * maxHP());
+			this.mightCasted = true;
+		}
+
+		override protected function performCombatAction():void {
+			if (hasStatusEffect(StatusEffects.Blind) && lust100 > 50)
+				blindHeal();
+			
+			//Zetaz taunts.
+			zetazTaunt();
+			outputText("\n\n");
+
+			super.performCombatAction();
+		}
+
+		override protected function handleFear():Boolean {
+			if (lust100 > 50) {
+				this.speStat.core.value += statusEffectv2(StatusEffects.Fear);
+				removeStatusEffect(StatusEffects.Fear);
+				removeStatusEffect(StatusEffects.Blind);
+				outputText("Zetaz blinks and shakes his head while stroking himself.  After a second his turgid member loses some of its rigidity, but his gaze has become clear.  He's somehow consumed some of his lust to clear away your magic!\n");
+				lust -= maxLust()/10;
+				return true;
+			}
+			return super.handleFear();
+		}
+
+		override public function displaySpecialStatuses():Array {
+			var statusArray:Array = super.displaySpecialStatuses();
+			if (statStore.hasBuff("ImpMight")) statusArray.push("Imp Might");
+			return statusArray;
+		}
+
+		public function blindHeal():void {
+			removeStatusEffect(StatusEffects.Blind);
+			outputText("Zetaz blinks and shakes his head while stroking himself.  After a second his turgid member loses some of its rigidity, but his gaze has become clear.  He's somehow consumed some of his lust to clear away your magic!\n");
+			lust -= maxLust()/10;
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
@@ -150,6 +176,35 @@ public class Zetaz extends Monster
 			} else {
 				SceneLib.dungeons.deepcave.loseToZetaz();
 			}
+		}
+
+		private function buildAbilities():Array {
+			var abilities:Array = [
+				{call: lustHeal, type: ABILITY_SPECIAL, range: RANGE_SELF, condition: lustHealCheck, weight: Infinity, tags:[TAG_HEAL] },
+				{call: heatDraft, type: ABILITY_MAGIC, range: RANGE_RANGED},
+				{call: gigaArouse, type: ABILITY_MAGIC, range: RANGE_RANGED, weight: 2},
+				{call: gust, type: ABILITY_PHYSICAL, condition: gustCheck, range: RANGE_RANGED},
+				{call: gigaWhitefire, type: ABILITY_MAGIC, range: RANGE_RANGED, weight: 2, tags:[TAG_FIRE]}
+			];
+
+			//Zetaz gains the ability to use Might under 50%HP in difficulties over Normal 
+			if (flags[kFLAGS.GAME_DIFFICULTY] > 0) {
+				abilities.push({call: zetazMight, type: ABILITY_SPECIAL, range: RANGE_SELF, condition: mightCheck, weight: Infinity, tags:[TAG_HEAL]});
+			}
+
+			return abilities;
+		}
+
+		public function lustHealCheck():Boolean {
+			return lust100 >= 10 && HPRatio() <= .5 && !hasStatusEffect(StatusEffects.AbilityCooldown1);
+		}
+
+		public function mightCheck():Boolean {
+			return HPRatio() <= .5 && !mightCasted;
+		}
+
+		public function gustCheck():Boolean {
+			return !player.hasStatusEffect(StatusEffects.Blind);
 		}
 
 		public function Zetaz()
@@ -197,8 +252,11 @@ public class Zetaz extends Monster
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			this.createPerk(PerkLib.OverMaxHP, 40, 0, 0, 0);
+			this.abilities = this.buildAbilities();
 			checkMonster();
 		}
+
+		private var mightCasted:Boolean = false;
 		
 	}
 

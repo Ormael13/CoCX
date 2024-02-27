@@ -274,11 +274,11 @@ public class CombatUI extends BaseCombatContent {
 			doFlyingSwordTurn();
 		else if (isCompanionTurn(0))
 			doCompanionTurn(0);
-		else if (isCompanionTurn(1) && !player.hasStatusEffect(StatusEffects.MinoKing) && player.statusEffectv1(StatusEffects.MinoKing) != 1)
+		else if (isCompanionTurn(1))
 			doCompanionTurn(1);
-		else if (isCompanionTurn(2) && !player.hasStatusEffect(StatusEffects.MinoKing) && player.statusEffectv1(StatusEffects.MinoKing) != 2)
+		else if (isCompanionTurn(2))
 			doCompanionTurn(2);
-		else if (isCompanionTurn(3) && !player.hasStatusEffect(StatusEffects.MinoKing) && player.statusEffectv1(StatusEffects.MinoKing) != 3)
+		else if (isCompanionTurn(3))
 			doCompanionTurn(3);
 		//PC: is busy with something
 		else if (isPlayerBound()) {
@@ -523,7 +523,6 @@ public class CombatUI extends BaseCombatContent {
 						flags[kFLAGS.PLAYER_COMPANION_1] == "" ? kFLAGS.PLAYER_COMPANION_1 :
 								flags[kFLAGS.PLAYER_COMPANION_2] == "" ? kFLAGS.PLAYER_COMPANION_2 :
 										kFLAGS.PLAYER_COMPANION_3;
-
 				var strKiha:Number = 85;
 				var meleeAtkKiha:Number = 28
 				if (flags[kFLAGS.KIHA_LVL_UP] >= 1) {
@@ -559,10 +558,10 @@ public class CombatUI extends BaseCombatContent {
 			else if (isBloodPuppiesTurn())
 				doBloodPuppiesTurn();
 			//UNIQUE OPTIONS - No changes applied, player turn, no status/CC
-			else {
+			//Do not display if enemy is already dead
+			else if(!combat.combatIsOver(false)) {
 				// Migrate Sand Trap/Alruine/Drider Incubus/Minotaur King/AngelLR/TwinBosses/Lethice/WoodElvesHuntingParty
 				monster.postPlayerBusyBtnSpecial(btnSpecial1,btnSpecial2);
-
 				if ((player.weaponRange == weaponsrange.GTHRSPE && player.ammo <= 15) || ((player.weaponRange == weaponsrange.ATKNIFE || player.weaponRange == weaponsrange.RTKNIFE || player.weaponRange == weaponsrange.STKNIFE || player.weaponRange == weaponsrange.TTKNIFE) && player.ammo <= 10)
 				|| ((player.weaponRange == weaponsrange.GTHRAXE || player.weaponRange == weaponsrange.O_JAVEL || player.weaponRange == weaponsrange.TRJAVEL) && player.ammo <= 5)) {
 					btnSpecial3.show("Pick", combat.pickUpThrownWeapons, "Pick up some of the thrown weapons.");
@@ -600,11 +599,11 @@ public class CombatUI extends BaseCombatContent {
 	}
 
 	public function isFlyingSwordTurn():Boolean {
-		return CombatAbilities.FlyingSwordAttack.isKnownAndUsable && flags[kFLAGS.FLYING_SWORD] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_FLYING_SWORD_ATTACKED] != 1;
+		return player.hasPerk(PerkLib.FirstAttackFlyingSword) && CombatAbilities.FlyingSwordAttack.isKnownAndUsable && flags[kFLAGS.FLYING_SWORD] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_FLYING_SWORD_ATTACKED] != 1;
 	}
 
 	public function doFlyingSwordTurn():void {
-		if (CombatAbilities.FlyingSwordAttack.isKnownAndUsable) {
+		if (player.hasPerk(PerkLib.FirstAttackFlyingSword) && CombatAbilities.FlyingSwordAttack.isKnownAndUsable) {
 			CombatAbilities.FlyingSwordAttack.preTurnAttack = true;
 			CombatAbilities.FlyingSwordAttack.perform();
 			CombatAbilities.FlyingSwordAttack.preTurnAttack = false;
@@ -782,6 +781,7 @@ public class CombatUI extends BaseCombatContent {
 	public function isCompanionTurn(num:int):Boolean {
 		var present:Boolean;
 		var acted:Boolean;
+		var occupied:Boolean = player.hasStatusEffect(StatusEffects.MinoKing) && player.statusEffectv1(StatusEffects.MinoKing) == num;
 		switch(num) {
 			case 0:
 				present = flags[kFLAGS.PLAYER_COMPANION_0] != "";
@@ -800,7 +800,7 @@ public class CombatUI extends BaseCombatContent {
 				acted = flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION];
 				break;
 		}
-		return present && !acted;
+		return present && !acted && !occupied;
 	}
 
 	public function doCompanionTurn(num:int, clearAndNext:Boolean = true):void {
@@ -993,10 +993,10 @@ public class CombatUI extends BaseCombatContent {
 						break;
 					case 7:
 						btnContinue.show("Continue", combat.pspecials.buzzingTone, "Continue buzzing.");
-						break;/*
-					case 8:
-						btnContinue.show("Continue", combat.magic., "Continue casting  spell.");
 						break;
+					case 8:
+						btnContinue.show("Continue", combat.mspecials.arigeanChargedShot, "Continue gathering energy.");
+						break;/*
 					case 9:
 						btnContinue.show("Continue", combat.magic., "Continue casting  spell.");
 						break;

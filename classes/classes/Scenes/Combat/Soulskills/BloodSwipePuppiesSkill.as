@@ -47,7 +47,7 @@ public class BloodSwipePuppiesSkill extends AbstractBloodSoulSkill {
 	}
 
     override public function doEffect(display:Boolean = true):void {
-		if (display) outputText("Giving command your blood puppies, they start focusing the power of blood. Within an instant, many red claw-like lines coalesce briefly before being shot from their paws, flying toward [themonster]! ");
+		if (display) outputText("Giving command to your blood puppies, they start focusing the power of blood. Within an instant, many red claw-like lines coalesce briefly before being shot from their paws, flying toward [themonster]! ");
 
 		var damage:Number = calcDamage(monster);
 

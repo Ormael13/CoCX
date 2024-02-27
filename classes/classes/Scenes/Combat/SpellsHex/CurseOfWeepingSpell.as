@@ -26,7 +26,7 @@ public class CurseOfWeepingSpell extends AbstractHexSpell {
 	
 	override public function describeEffectVs(target:Monster):String {
 		return "" +
-				calcDamage(target, false, false) + " damage over "+
+				numberFormat(calcDamage(target, false, false)) + " damage over "+
 				numberOfThings(calcDuration(),"round") +
 				"; " + calcBackfirePercent() + "% backfire"
 	}

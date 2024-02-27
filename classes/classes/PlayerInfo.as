@@ -103,10 +103,46 @@ public class PlayerInfo extends BaseContent {
 		bodyStats += "<b>Fertility (With Bonuses) Rating:</b> " + Math.round(player.totalFertility()) + "\n";
 		if (player.cumQ() > 0)
 			bodyStats += "<b>Virility Rating:</b> " + Math.round(player.virilityQ() * 100) + "\n";
-		if (flags[kFLAGS.HUNGER_ENABLED] >= 1) bodyStats += "<b>Cum Production:</b> " + addComma(Math.round(player.cumQ())) + " / " + addComma(Math.round(player.cumCapacity())) + "mL (" + Math.round((player.cumQ() / player.cumCapacity()) * 100) + "%) \n";
-		else bodyStats += "<b>Cum Production:</b> " + addComma(Math.round(player.cumQ())) + "mL\n";
+		if (flags[kFLAGS.HUNGER_ENABLED] >= 1) bodyStats += "<b>Cum Production:</b> " + formatNumber(Math.round(player.cumQ())) + " / " + formatNumber(Math.round(player.cumCapacity())) + "mL (" + Math.round((player.cumQ() / player.cumCapacity()) * 100) + "%) \n";
+		else bodyStats += "<b>Cum Production:</b> " + formatNumber(Math.round(player.cumQ())) + "mL\n";
+		// New cum volume testing
+//		var cumQExp:ExponObject = player.cumQMore();
+//		// var cumString:String = ""; In case someone want to implement unit changes
+//		var cumQRemaining:Number = cumQExp.coeff%3;
+//		cumQExp.coeff -= cumQRemaining;
+//		cumQExp.number *= Math.pow(10,cumQRemaining);
+//		bodyStats += "<b>Cum Production (New):</b> ";
+//		bodyStats += addComma(Math.round(cumQExp.number));
+//
+//		for(cumQExp.coeff;cumQExp.coeff>0;cumQExp.coeff-=3){
+//			bodyStats += ",000";
+//		}
+//
+//		bodyStats += "mL";
+//
+//		if (flags[kFLAGS.HUNGER_ENABLED] >= 1){
+//			var cumCapExp:ExponObject = player.cumCapacityMore();
+//			var cumCapRemaining:Number = cumCapExp.coeff%3;
+//			cumCapExp.coeff -= cumCapRemaining;
+//			cumCapExp.number *= Math.pow(10,cumCapRemaining);
+//
+//			bodyStats += " / ";
+//			bodyStats += addComma(cumCapExp.number);
+//
+//			for(cumCapExp.coeff;cumCapExp.coeff>0;cumCapExp.coeff-=3){
+//				bodyStats += ",000";
+//			}
+//
+//			// Both coefficient should be the same since they derive from the same cumMultiplier and ballsize
+//			bodyStats += "mL (" + Math.round((cumQExp.number / cumCapExp.number) * 100) + "%) ";
+//		}
+//
+//		bodyStats += "\n";
+//		// bodyStats += cumQExp.debug.toString();
+//		// bodyStats += cumCapExp.debug;
+		// End of testing
 		if (player.lactationQ() > 0)
-			bodyStats += "<b>Milk Production:</b> " + addComma(Math.round(player.lactationQ())) + "mL\n";
+			bodyStats += "<b>Milk Production:</b> " + formatNumber(Math.round(player.lactationQ())) + "mL\n";
 		if (player.hasStatusEffect(StatusEffects.Feeder)) {
 			bodyStats += "<b>Hours Since Last Time Breastfed Someone:</b>  " + player.statusEffectv2(StatusEffects.Feeder);
 			if (player.statusEffectv2(StatusEffects.Feeder) >= 72)
@@ -394,7 +430,7 @@ public class PlayerInfo extends BaseContent {
 			statEffects += "Alraune perfume - " + player.statusEffectv2(StatusEffects.ArousalPotion) + " hours remaining.\n";
 
 		if (player.hasStatusEffect(StatusEffects.CombatWounds)) 
-			statEffects += "Combat wounds - missing " + player.statusEffectv1(StatusEffects.CombatWounds) + " % of max health.\n";
+			statEffects += "Combat wounds - missing " + player.statusEffectv1(StatusEffects.CombatWounds)*100 + " % of max health.\n";
 
 		if (player.hasStatusEffect(StatusEffects.ArigeanInfected))
 			statEffects += "Mysterious Infection: You feel a bit under the weather...you should likely rest until it passes.\n";
@@ -515,7 +551,7 @@ public class PlayerInfo extends BaseContent {
 		if (maxMeleeAttacks >= 8) combatStats += "<b>Accuracy (8th melee attack):</b> " + ((mAcc / 2) - (mAccPen * 7)) + "%\n";
 		if (maxMeleeAttacks >= 9) combatStats += "<b>Accuracy (9th melee attack):</b> " + ((mAcc / 2) - (mAccPen * 8)) + "%\n";
 		if (maxMeleeAttacks >= 10) combatStats += "<b>Accuracy (10th melee attack):</b> " + ((mAcc / 2) - (mAccPen * 9)) + "%\n";
-		combatStats += "<i>(All accuracy values above includes bonus to accuracy from Mastery for currently equipped type of melee weapon)\n(They not include penalty for using dual weapons that is "+combat.meleeDualWieldAccuracyPenalty()+"% (addictive) to each attack)</i>\n";
+		combatStats += "<i>(All accuracy values above includes bonus to accuracy from Mastery for currently equipped type of melee weapon)\n(They not include the penalty for using dual weapons, that is "+combat.meleeDualWieldAccuracyPenalty()+"% (addictive) to each attack)</i>\n";
 		combatStats += "\n";
 		combatStats += "<b>Range Physical Attacks Multiplier:</b> " + Math.round(100 * combat.rangePhysicalForce()) + "%\n";
 		combatStats += "<b>Firearms Attacks Multiplier:</b> " + Math.round(100 * combat.firearmsForce()) + "%\n";
@@ -551,11 +587,11 @@ public class PlayerInfo extends BaseContent {
 		if (maxCrossBowAttacks >= 2) combatStats += "<b>Crossbow Accuracy (2nd range attack):</b> " + ((bAcc / 2) - bAccPen) + "%\n";
 		if (maxCrossBowAttacks >= 3) combatStats += "<b>Crossbow Accuracy (3rd range attack):</b> " + ((bAcc / 2) - (bAccPen * 2)) + "%\n";
 		combatStats += "<i>(All accuracy values above includes bonus to accuracy from Archery Mastery)</i>\n";
-		combatStats += "<b>Throwed Weapon Accuracy (1st range attack):</b> " + (combat.throwingAccuracy() / 2) + "%\n";
+		combatStats += "<b>Throwing Weapon Accuracy (1st range attack):</b> " + (combat.throwingAccuracy() / 2) + "%\n";
 		
 		var maxThrowAttacks:int = combat.maxThrowingAttacks();
-		if (maxThrowAttacks >= 2) combatStats += "<b>Throwed Weapon Accuracy (2nd range attack):</b> " + ((combat.throwingAccuracy() / 2) - 15) + "%\n";
-		if (maxThrowAttacks >= 3) combatStats += "<b>Throwed Weapon Accuracy (3rd range attack):</b> " + ((combat.throwingAccuracy() / 2) - 30) + "%\n";
+		if (maxThrowAttacks >= 2) combatStats += "<b>Throwing Weapon Accuracy (2nd range attack):</b> " + ((combat.throwingAccuracy() / 2) - 15) + "%\n";
+		if (maxThrowAttacks >= 3) combatStats += "<b>Throwing Weapon Accuracy (3rd range attack):</b> " + ((combat.throwingAccuracy() / 2) - 30) + "%\n";
 		combatStats += "<i>(All accuracy values above includes bonus to accuracy from Throwing Weapons Mastery)</i>\n";
 		combatStats += "<b>Firearms Accuracy (1st range attack):</b> " + (fAcc / 2) + "%\n";
 		
@@ -567,7 +603,7 @@ public class PlayerInfo extends BaseContent {
 			combatStats += "<b>Firearms Accuracy (5th range attack):</b> " + ((fAcc / 2) - (fAccPen * 4)) + "%\n";
 			combatStats += "<b>Firearms Accuracy (6th range attack):</b> " + ((fAcc / 2) - (fAccPen * 5)) + "%\n";
 		}
-		combatStats += "<i>(All accuracy values above includes bonus to accuracy from Firearms Mastery)\n(They not include penalty for using dual firearms that is "+combat.firearmsDualWieldAccuracyPenalty()+"% (addictive) to each shoot)</i>\n";
+		combatStats += "<i>(All accuracy values above includes bonus to accuracy from Firearms Mastery)\n(They not include the penalty for using dual firearms, that is "+combat.firearmsDualWieldAccuracyPenalty()+"% (addictive) to each shoot)</i>\n";
 		combatStats += "\n";
 		if (player.hasPerk(PerkLib.FlyingSwordPath)) {
 			combatStats += "<b>Cost of flying on Flying Sword (Soulforce / per turn): </b> " + combat.flyingSwordUseCost() + "\n";
@@ -577,11 +613,11 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillMod()) + "%\n";
 		combatStats += "<b>Physical Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillPhysicalMod()) + "%\n";
 		combatStats += "<b>Magical Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillMagicalMod()) + "%\n";
-		combatStats += "<b>Soulskill Cost:</b> " + Math.round(100 * combat.soulskillCost()) + "%\n";
+		combatStats += "<b>Soulskill Cost:</b> " + Math.round(100 * combat.soulskillCost() * combat.soulskillcostmulti()) + "%\n";
 		combatStats += "\n";
 		combatStats += "<b>Unarmed:</b> +" + combat.unarmedAttack() + "\n";
 		combatStats += "<b>Venom/Web:</b> " + Math.floor(player.tailVenom) + " / " + player.maxVenom() + "\n";
-		combatStats += "<b>Venom/Web Recharge:</b> +" + combat.venomCombatRecharge2() * 2 + " / turn, +" + combat.venomCombatRechargeInfo() + " / 5 minutes\n";
+		combatStats += "<b>Venom/Web Recharge:</b> +" + combat.venomCombatRecharge2() + " / turn, +" + Math.round(combat.venomCombatRecharge2() * 0.1) + " / 5 minutes\n";
 		combatStats += "<b>Max lvl diff between PC and Enemy to still deal 100%:</b> +" + combat.playerLevelAdjustment() + "\n";
 		combatStats += "\n";
 		var mins:Object = player.getAllMinStats();
@@ -636,11 +672,13 @@ public class PlayerInfo extends BaseContent {
 		// Begin Kill Counters Stats
 		var killCountStats:String = "";
 
+		killCountStats += "<b>Thiefs:</b> " + flags[kFLAGS.THIEFS_KILLED] + "\n";
 		killCountStats += "<b>Goblins:</b> " + flags[kFLAGS.GOBLINS_KILLED] + "\n";
 		killCountStats += "<b>Hellhounds:</b> " + flags[kFLAGS.HELLHOUNDS_KILLED] + "\n";
 		killCountStats += "<b>Imps:</b> " + flags[kFLAGS.IMPS_KILLED] + "\n";
 		killCountStats += "<b>Minotaurs:</b> " + flags[kFLAGS.MINOTAURS_KILLED] + "\n";
 		killCountStats += "<b>True Demons:</b> " + flags[kFLAGS.TRUE_DEMONS_KILLED] + "\n";
+		killCountStats += "<i>Total kill count: " + player.enemiesKillCount() + "</i>\n";
 
 		if (killCountStats != "")
 			outputText("\n<b><u>Kill Counters</u></b>\n" + killCountStats);
@@ -894,7 +932,7 @@ public class PlayerInfo extends BaseContent {
 		
 		if (TyrantiaFollower.TyrantiaFollowerStage > 0) {
 			interpersonStats += "<b>Tyrantia Affection:</b> " + TyrantiaFollower.TyrantiaAffectionMeter + "%\n";
-			if (TyrantiaFollower.TyrantiaTrainingSessions >= 1) interpersonStats += "<b>Training sessions with Tyrantia:</b> " + TyrantiaFollower.TyrantiaTrainingSessions + " / 25\n";
+			if (TyrantiaFollower.TyrantiaTrainingSessions >= 1) interpersonStats += "<b>Training sessions with Tyrantia:</b> " + TyrantiaFollower.TyrantiaTrainingSessions + " / 30\n";
 			if (flags[kFLAGS.TYRANTIA_LVL_UP] == 4) interpersonStats += "<b>Tyrantia lvl:</b> 76 (current max lvl)\n";
 			if (flags[kFLAGS.TYRANTIA_LVL_UP] == 3) interpersonStats += "<b>Tyrantia lvl:</b> 70\n";
 			if (flags[kFLAGS.TYRANTIA_LVL_UP] == 2) interpersonStats += "<b>Tyrantia lvl:</b> 64\n";
@@ -2647,4 +2685,4 @@ public class PlayerInfo extends BaseContent {
 		doNext(superPerkBuyMenu, 5);
 	}
 }
-}
+}

@@ -652,7 +652,7 @@ use namespace CoC;
 		//Natural Armor (need at least to partialy covering whole body)
 		public function haveNaturalArmor():Boolean
 		{
-			return hasPerk(PerkLib.ThickSkin) || skin.isFurCovered() || skin.isChitinCovered() || skin.isScaleCovered() || skin.hasBark() || skin.isDragonScaleCovered() || skin.hasBaseOnly(Skin.STONE);
+			return hasPerk(PerkLib.ThickSkin) || skin.isFurCovered() || skin.isChitinCovered() || skin.isScaleCovered() || skin.hasBark() || skin.isDragonScaleCovered() || skin.hasBaseOnly(Skin.STONE) || lowerBody == LowerBody.SANDWORM;
 		}
 		//Unhindered related acceptable armor types
 		public function meetUnhinderedReq():Boolean
@@ -672,11 +672,7 @@ use namespace CoC;
 			armorDef += armor.def;
 			armorDef += upperGarment.armorDef;
 			armorDef += lowerGarment.armorDef;
-			if (hasPerk(PerkLib.MiracleMetal)) {
-				var aD2:Number = armorDef;
-				if (armor.name == "Arigean Ne-Class Uniform") aD2 -= armor.def;
-				armorDef = Math.round(armorDef * 0.6);
-			}
+			if (hasPerk(PerkLib.MiracleMetal) && armor.name != "Arigean Ne-Class Uniform" && armor.name != "Princess Regalia") armorDef = Math.round(armorDef * 0.6);
 			var tier:int;
 			//Blacksmith history!
 			if (armorDef > 0 && (hasPerk(PerkLib.HistorySmith) || hasPerk(PerkLib.PastLifeSmith))) {
@@ -1359,7 +1355,7 @@ use namespace CoC;
 		}
 		public function playerHasFourArms():Boolean
 		{
-			return (arms.type == Arms.DISPLACER || arms.type == Arms.ANT);
+			return hasFourArms();
 		}
 		public function flameBladeActive():Boolean
 		{
@@ -3631,6 +3627,7 @@ use namespace CoC;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= necklaceEffectMagnitude;
 			if (jewelry1.hasBuff('res_poison') && jewelry2.hasBuff('res_poison') && jewelry3.hasBuff('res_poison') && jewelry4.hasBuff('res_poison') && headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R && necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= 15;
 			if (hasStatusEffect(StatusEffects.DaoOfPoison) && (statusEffectv2(StatusEffects.DaoOfPoison) > 3)) mult -= (10 * (statusEffectv2(StatusEffects.DaoOfPoison) - 3));
+			if (hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX)) mult -= (10 * perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX));
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
@@ -3865,6 +3862,103 @@ use namespace CoC;
 			//Apply acid damage resistance percentage.
 			damage *= damageAcidPercent() / 100;
 			return damage;
+		}
+
+		/**
+		* Look into perks and special effects and @return summery extra chance to avoid attack granted by them.
+		*/
+		override public function getEvasionChance():Number {
+			var chance:Number = 0;
+
+			if (tallness < 48 && isBiped() && !isFlying()) {
+				var goblinDodgeChance:int = 0;
+				if (hasKeyItem("Spring Boots") >= 0) goblinDodgeChance = 10;
+				else if (hasKeyItem("Rocket Boots") >= 0) goblinDodgeChance = 20;
+				else if (hasKeyItem("Nitro Boots") >= 0) goblinDodgeChance = 30;
+				chance += goblinDodgeChance;
+			}
+
+			if (hasPerk(PerkLib.Misdirection) && armor.hasTag(ItemTags.A_AGILE)) chance += 10;
+			if (hasPerk(PerkLib.Unhindered) && armor.hasTag(ItemTags.A_AGILE)) chance += 10;
+			if (CombatAbilities.HurricaneDance.isActive()) chance += 25;
+
+			if (isRace(Races.FAIRY)) {
+				var fairyDodgeChance:int = 30;
+				if (hasStatusEffect(StatusEffects.Minimise)) fairyDodgeChance += 50;
+				chance += fairyDodgeChance;
+			}
+
+			if (isRace(Races.CHESHIRE)) {
+				var chesDodgeChance:int = 30;
+				if (hasStatusEffect(StatusEffects.EverywhereAndNowhere)) chesDodgeChance += 50;
+				chance += chesDodgeChance;
+			}
+
+			if (isRace(Races.DISPLACERBEAST)) {
+				var disDodgeChance:int = 30;
+				if (hasStatusEffect(StatusEffects.Displacement)) disDodgeChance += 50;
+				chance += disDodgeChance;
+			}
+
+			chance += super.getEvasionChance();
+			if (hasStatusEffect(StatusEffects.GreenCovenant) || canAutoHit()) chance = 0;
+			return chance;
+		}
+
+		override public function canAutoHit():Boolean {
+			return flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1 && flags[kFLAGS.WAIT_STAND_STILL] == 1;
+		}
+
+		override public function calcSpeedDodge(attackSpeed:int):int {
+			if (canAutoHit()) return 0;
+			return super.calcSpeedDodge(attackSpeed);
+		}
+
+		override public function getEvasionReason(considerBlindSpeed:Boolean = true, attackSpeed:int = int.MIN_VALUE, hitModifier:int = 0, dodgeArray:Array = null):String {
+			var evasionReason:String;
+
+			if (canAutoHit()) return null;
+			if (!dodgeArray) dodgeArray = [];
+
+
+			if (considerBlindSpeed && game.monster.hasStatusEffect(StatusEffects.Blind) && rand(100) < 66) evasionReason = EVASION_BLIND;
+
+			if (considerBlindSpeed && game.monster && attackSpeed == int.MIN_VALUE) attackSpeed = game.monster.spe;
+
+			if (tallness < 48 && isBiped() && !isFlying()) {
+				var goblinDodgeChance:int = 0;
+				if (hasKeyItem("Spring Boots") >= 0) goblinDodgeChance = 10;
+				else if (hasKeyItem("Rocket Boots") >= 0) goblinDodgeChance = 20;
+				else if (hasKeyItem("Nitro Boots") >= 0) goblinDodgeChance = 30;
+				if (goblinDodgeChance > 0) dodgeArray.push([goblinDodgeChance, EVASION_EVADE]);
+			}
+
+			if (hasPerk(PerkLib.Misdirection) && armor.hasTag(ItemTags.A_AGILE)) dodgeArray.push([10, EVASION_MISDIRECTION]);
+			if (hasPerk(PerkLib.Unhindered) && armor.hasTag(ItemTags.A_AGILE)) dodgeArray.push([10, EVASION_UNHINDERED]);
+			if (CombatAbilities.HurricaneDance.isActive()) dodgeArray.push([25, EVASION_HURRICANE_DANCE]);
+
+			if (isRace(Races.FAIRY)) {
+				var fairyDodgeChance:int = 30;
+				if (hasStatusEffect(StatusEffects.Minimise)) fairyDodgeChance += 50;
+				dodgeArray.push([fairyDodgeChance, EVASION_MINIMISE]);
+			}
+
+			if (isRace(Races.CHESHIRE)) {
+				var chesDodgeChance:int = 30;
+				if (hasStatusEffect(StatusEffects.EverywhereAndNowhere)) chesDodgeChance += 50;
+				dodgeArray.push([chesDodgeChance, EVASION_PHASING]);
+			}
+
+			if (isRace(Races.DISPLACERBEAST)) {
+				var disDodgeChance:int = 30;
+				if (hasStatusEffect(StatusEffects.Displacement)) disDodgeChance += 50;
+				dodgeArray.push([disDodgeChance, EVASION_DISPLACING]);
+			}
+
+			if (!evasionReason) evasionReason = super.getEvasionReason(considerBlindSpeed, attackSpeed, hitModifier, dodgeArray);
+
+			if (evasionReason && necklace == game.necklaces.CATBELL && isAnyRaceCached(Races.CatlikeRaces)) CombatAbilities.Tease.perform();
+			return evasionReason;
 		}
 
 		public function eyesOfTheHunterAdeptBoost():Boolean {
@@ -4623,8 +4717,8 @@ use namespace CoC;
 				total *= 1.5;
 			if (statusEffectv1(StatusEffects.LactationReduction) >= 48)
 				total = total * 1.5;
-			if (total > int.MAX_VALUE)
-				total = int.MAX_VALUE;
+			//limit to prevent reaching infinity
+			if(total >= Utils.MAX_SAFE_NUMBER_VALUE) total = Utils.MAX_SAFE_NUMBER_VALUE;
 			return total;
 		}
 
@@ -4722,6 +4816,7 @@ use namespace CoC;
 				if (oldHunger < 1 && hunger >= 250) EngineCore.awardAchievement("Champion Needs Food Badly (2)", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD_2);
 				if (oldHunger < 1 && hunger >= 500) EngineCore.awardAchievement("Champion Needs Food Badly (3)", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD_3);
 				if (oldHunger < 1 && hunger >= 1000) EngineCore.awardAchievement("Champion Needs Food Badly (4)", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD_4);
+				if (oldHunger < 1 && hunger >= 2500) EngineCore.awardAchievement("Champion Needs Food Badly (5)", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD_5);
 				if (oldHunger >= 90) EngineCore.awardAchievement("Glutton ", kACHIEVEMENTS.REALISTIC_GLUTTON);
 				if (oldHunger >= 240) EngineCore.awardAchievement("Epic Glutton ", kACHIEVEMENTS.REALISTIC_EPIC_GLUTTON);
 				if (oldHunger >= 490) EngineCore.awardAchievement("Legendary Glutton ", kACHIEVEMENTS.REALISTIC_LEGENDARY_GLUTTON);
@@ -4894,6 +4989,11 @@ use namespace CoC;
 					.filter(function(item:StatusEffectType, index:int, array:Array):Boolean{
 						return this.hasStatusEffect(item);},this)
 					.length;
+		}
+		
+		public function enemiesKillCount():Number
+		{
+			return (flags[kFLAGS.THIEFS_KILLED] + flags[kFLAGS.GOBLINS_KILLED] + flags[kFLAGS.HELLHOUNDS_KILLED] +flags[kFLAGS.IMPS_KILLED] +flags[kFLAGS.MINOTAURS_KILLED] + flags[kFLAGS.TRUE_DEMONS_KILLED]);
 		}
 
 		public function armorDescript(nakedText:String = "gear"):String
@@ -5160,9 +5260,14 @@ use namespace CoC;
 			var minLib:int = 0;
 			var minSen:int = 10;
 			var minCor:int = 0;
+			//Minimum Intelligence
+			if (this.hasPerk(PerkLib.ArigeanKnowledge)) {
+				minInt += 89;
+			}
 			//Minimum Libido
-			if (this.gender > 0) minLib += 5;
-
+			if (this.gender > 0) {
+				minLib += 5;
+			}
 			if (this.armorName == "lusty maiden's armor") {
 				if (minLib < 50) minLib = 50;
 			}
@@ -6748,8 +6853,8 @@ use namespace CoC;
 		}
 
 		public function blockingBodyTransformations():Boolean {
-			return hasPerk(PerkLib.TransformationImmunity) || hasPerk(PerkLib.TransformationImmunity2) || hasPerk(PerkLib.TransformationImmunityBeeHandmaiden) || hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse)
-					|| hasPerk(PerkLib.BlessingOfTheAncestorTree) || hasEnchantment(EnchantmentLib.TfImmunity) || hasStatusEffect(StatusEffects.ArigeanInfected) || tailType == Tail.ARIGEAN_GREEN;
+			return hasPerk(PerkLib.TransformationImmunity) || hasPerk(PerkLib.TransformationImmunity2) || hasPerk(PerkLib.TransformationImmunityBeeHandmaiden) || hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse)|| hasPerk(PerkLib.BlessingOfTheAncestorTree) 
+					|| hasEnchantment(EnchantmentLib.TfImmunity) || hasStatusEffect(StatusEffects.ArigeanInfected) || tailType == Tail.ARIGEAN_GREEN || tailType == Tail.ARIGEAN_RED || tailType == Tail.ARIGEAN_YELLOW || tailType == Tail.ARIGEAN_PRINCESS;
 		}
 
 		public function manticoreFeed():void {

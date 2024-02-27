@@ -17,10 +17,11 @@ public class GooGirl extends Monster
 		 */
 		
 		
-		override public function postPlayerAbility(ability:CombatAbility):void {
+		override public function postPlayerAbility(ability:CombatAbility, display:Boolean = true):void {
 			//[Using fire attacks on the goo]
 			if (ability.hasTag(CombatAbility.TAG_DAMAGING) && ability.hasTag(CombatAbility.TAG_FIRE)) {
-				outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + bodyColor + " skin has lost some of its shimmer.");
+				if (display) outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture." + 
+					" When the fire passes, she seems a bit smaller and her slimy " + bodyColor + " skin has lost some of its shimmer.");
 				if(!hasPerk(PerkLib.Acid)) createPerk(PerkLib.Acid,0,0,0,0);
 			}
 		}

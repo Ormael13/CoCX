@@ -200,7 +200,7 @@ use namespace CoC;
 					player.mineXP(player.MiningMulti() * 2);
 				}
 				else {
-					outputText("After attempt to mine Topaz you ended with unusable piece.");
+					outputText("After attempting to mine Topaz, you ended up with unusable pieces.");
 					endEncounter(120);
 				}
 			}

@@ -344,7 +344,7 @@ import classes.Scenes.SceneLib;
 					player.mineXP(player.MiningMulti() * 2);
 				}
 				else {
-					outputText("After attempt to mine Emeralds you ended with unusable piece.");
+					outputText("After attempting to mine Emeralds, you ended with only unusable pieces.");
 					endEncounter(120);
 				}
 			}

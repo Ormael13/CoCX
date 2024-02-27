@@ -21,13 +21,13 @@ public class KitsuneParathyroidGlandMutation extends IMutationPerkType
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
-                descS += "Illusion and Terror cooldown reduced by 3 turns";
+                descS += "50% reduced mana costs of FoxFire";
             }
             if (pTier >= 2){
-                descS += ", Mana and fatigue recovery increased, 50% reduced costs for Illusion and Terror";
+                descS += ", FoxFire +50% damage (fire and lust), Mana and SF recovery increased";
             }
             if (pTier >= 3){
-                descS += ", further boost mana regen based on star sphere rank, speed debuff from Terror increased to 70, evasion boost from Illusion increased by 30%";
+                descS += ", fatigue recover increased, +SF/Mana regen based on star sphere rank (Star Sphere rank x3/2 respectively), increase Star Sphere Max to 20";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -42,7 +42,7 @@ public class KitsuneParathyroidGlandMutation extends IMutationPerkType
                 if (pTier == 0){
                     this.requireParathyroidGlandMutationSlot()
                     .requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune, PerkLib.StarSphereMastery)
-                    .requireAnyRace(Races.KITSUNE, Races.KITSHOO);
+                    .requireRacialGroup(Races.KitsunelikeRaces, "Any kitsune-like race");
                 }
                 else{
                     var pLvl:int = pTier * 30;

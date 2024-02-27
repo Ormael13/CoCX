@@ -183,11 +183,23 @@ use namespace CoC;
 						call  : SceneLib.werewolfFemaleScene.introWerewolfFemale,
 						chance: 0.50
 					}, {
+						name  : "healingherb",
+						label : "HealingHerb",
+						kind : 'item',
+						call  : findHealingherb,
+						chance: 0.20
+					}, {
+						name  : "snakebane",
+						label : "Snakebane",
+						kind : 'item',
+						call  : findSnakebaneflower,
+						chance: 0.20
+					}, {
 						name  : "ginseng",
 						label : "Ginseng",
 						kind : 'item',
 						call  : findGinseng,
-						chance: 0.20
+						chance: 0.10
 					}, {
 						name  : "truffle",
 						label : "Truffle",
@@ -796,11 +808,23 @@ use namespace CoC;
 				call  : SceneLib.werewolfFemaleScene.introWerewolfFemale,
 				chance: 0.50
 			}, {
+				name  : "healingherb",
+				label : "HealingHerb",
+				kind : 'item',
+				call  : findHealingherb,
+				chance: 0.20
+			}, {
+				name  : "snakebane",
+				label : "Snakebane",
+				kind : 'item',
+				call  : findSnakebaneflower,
+				chance: 0.20
+			}, {
 				name  : "ginseng",
 				label : "Ginseng",
 				kind : 'item',
 				call  : findGinseng,
-				chance: 0.20
+				chance: 0.10
 			}, {
 				name  : "truffle",
 				label : "Truffle",
@@ -860,6 +884,14 @@ use namespace CoC;
 				player.takePhysDamage(10);
 			}
 			endEncounter();
+		}
+		public function findHealingherb():void {
+			outputText("You spot something unusual. Taking a closer look, it's definitely a healing herb.");
+			inventory.takeItem(consumables.HEALHERB, explorer.done);
+		}
+		public function findSnakebaneflower():void {
+			outputText("You spot something unusual. Taking a closer look, it's definitely a snakebane flower.");
+			inventory.takeItem(consumables.SNAKEBANE, explorer.done);
 		}
 		public function findGinseng():void {
 			outputText("You spot something unusual. Taking a closer look, it's definitely a ginseng.");

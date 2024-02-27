@@ -22,7 +22,7 @@ public class ThunderstormSpell extends AbstractDivineSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~"+calcDamage(target, false, false)+" lightning damage for "+numberOfThings(calcDuration(),"round");
+		return "~"+numberFormat(calcDamage(target, false, false))+" lightning damage for "+numberOfThings(calcDuration(),"round");
 	}
 	
 	override public function isActive():Boolean {

@@ -26,29 +26,27 @@ public class WaveOfEcstasySpell extends AbstractBlackSpell {
 	}
 	
 	override public function calcCooldown():int {
-		var calcC:int = 3;
-		calcC += spellGenericCooldown();
-		return calcC;
+		return spellBlackCooldown();
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target, false), false + " lust damage"
+		return "~" + numberFormat(calcDamage(target, false, false)) + " lust damage"
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
 		return adjustLustDamage(
-				scalingBonusIntelligence(),
+				(scalingBonusIntelligence() + scalingBonusLibido()),
 				monster,
 				CAT_SPELL_BLACK,
 				randomize
-		) * 0.5;
+		);
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
 			outputText("You almost moan in pleasure as you draw on this spell, sending forth your lust like a shockwave. ");
 			if (player.perkv1(PerkLib.ImpNobility) > 0) {
-				outputText("Your imp cohorts assist you spellcasting adding their diagrams to your own.  ");
+				outputText("Your imp cohorts assist your spellcasting, adding their diagrams to your own.  ");
 			}
 		}
 		if (monster is WormMass) {
@@ -79,29 +77,11 @@ public class WaveOfEcstasySpell extends AbstractBlackSpell {
 			} else {
 				outputText("Unable to evade it [themonster] is struck squarely by the pleasure wave");
 			}
-			outputText(" for ");
 		}
 		
-		//Determine if critical tease!
-		var crit:Boolean   = false;
-		var critChance:int = 5;
-		critChance += combat.teases.combatTeaseCritical();
-		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-		if (rand(100) < critChance) {
-			crit = true;
-			lustDmg *= 1.75;
-		}
-		monster.teased(lustDmg, false, display);
-		if (display) {
-			outputText(" damage.");
-		}
-		if (crit && display) outputText(" <b>Critical!</b>");
+		var resultArray:Array = critAndRepeatLust(display, lustDmg, CAT_SPELL_BLACK);
 		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
-		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-		if (player.hasPerk(PerkLib.VerdantLeech)) {
-			if (monster.lustVuln != 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.025;
-			HPChange(Math.round(player.maxHP() * 0.05), false);
-		}
+		postLustSpellEffect(resultArray[1]);
 	}
 }
 }

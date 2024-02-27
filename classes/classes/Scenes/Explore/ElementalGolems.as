@@ -314,7 +314,7 @@ public class ElementalGolems extends AbstractGargoyle
 				this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			}
 			this.a = "the ";
-			this.lustVuln = 0;
+			this.lustVuln = 0.01;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);

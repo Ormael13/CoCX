@@ -60,7 +60,7 @@ package classes.Scenes.Monsters
 			this.level = 24;
 			this.bonusHP = 500;
 			this.additionalXP = 500;
-			this.lustVuln = 0;
+			this.lustVuln = 0.01;
 			this.weaponName = "stone claws";
 			this.weaponVerb = "claw-slash";
 			this.weaponAttack = 75;

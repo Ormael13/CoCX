@@ -193,11 +193,11 @@ public final class ConsumableLib extends AlchemyLib
 		public const SSPONGE:Consumable = new ShimmeringSponge();
 
 		//MAGIC BOOKS
-		public const B__BOOK: Consumable = mk("B. Book", "B. Book", "a small book with a midnight-black cover", 40, "This solid black book is totally unmarked, saved for a blood red clasp that holds the covers closed until you are ready to read it.  The pages are edged with gold, like some of the fancy books in the monastary back home.", m.blackSpellbook);
-		public const G__BOOK: Consumable = mk("G. Book", "G. Book", "a small book with a ash-grey cover", 200, "This grey book is totally unmarked, and on the cover is wrote few words that seems have no meaning or maybe you just aren't able to decipher them yet. A plain green clasp keeps the covers closed until you are ready to read it.", m.greySpellbook);
-		public const W__BOOK: Consumable = mk("W. Book", "W. Book", "a small book with a pristine white cover", 40, "This white book is totally unmarked, and the cover is devoid of any lettering or title.  A shiny brass clasp keeps the covers closed until you are ready to read it.", m.whiteSpellbook);
-		public const RMANUSC: Consumable = mk("R.Manusc", "R. Manuscript", "a Red Manuscript", 50, "This manuscript contains knowledge about blood spells.  There's a faint metallic scent that lingers around it, the unmistakable scent of blood from some creature.", m.redManuscript);
-		public const CRIMS_J: Consumable = mk("Crims.J", "Crimson Jade", "a Crimson Jade", 50, "This jade seems to contain knowledge about the usage of blood soulskills. There's a faint metallic scent that lingers around it, the unmistakable scent of blood from some creature.", m.crimsonJade);
+		public const B__BOOK: Consumable = new BlackBook();
+		public const G__BOOK: Consumable = new GreyBook();
+		public const W__BOOK: Consumable = new WhiteBook();
+		public const RMANUSC: Consumable = new RedManuscript();
+		public const CRIMS_J: Consumable = new CrimsonJade();
 		public const POL_MID: Consumable = mk("Pol.Mid", "Pol.Mid.Spell", "a scroll with Polar Midnight spell", 200, "This scroll, wrote down by Alvina Shadowbane, contain knowledge about Polar Midnight spell.", m.blackPolarMidnight);
 		public const MET_SHO: Consumable = mk("Met.Sho", "Met.Sho.Spell", "a tome with Meteor Shower spell", 200, "This tome, contain knowledge about Meteor Shower spell.", m.whiteMeteorShower);
 
@@ -208,7 +208,7 @@ public final class ConsumableLib extends AlchemyLib
 
 		//MAGIC STORAGES AND LOOT BAGS OF COSMOS
 		public const BAGOCOS: Consumable = mk("BagOCos", "BagOfCosmos", "a Bag of Cosmos", 1200, "It's small bag used by Soul Cultivtors covered with a complex symbols making it object that allow to store many more things that the size of itself would indicate.", m.bagofcosmos);
-		public const SPPEARL: Consumable = mk("SPPearl", "SkyPoisonPearl", "a Sky Poison Pearl", 12000, "Mysterious Pearl.", m.skypoisonpearl);//moze jednak zmniejszyc do 6k tylko - 60 slotow po 200 gems kazdy wart = 12k
+		public const SPPEARL: Consumable = mk("SPPearl", "SkyPoisonPearl", "a Sky Poison Pearl", 12000, "Mysterious Pearl.", m.skypoisonpearl);//moze jednak zmniejszyc do 6k tylko - 60 slotow po 200 gems kazdy wart = 12k (maybe reduce it to only 6k - 60 slots with 200 gems each worth = 12k)
 		public const BAGOCA1: Consumable = mk("BagOCA1", "BagOfCosmosA1", "a Bag of Cosmos (A1)", 0, "It's small bag used by enemy Soul Cultivtor to store much more things that the size of itself would indicate. What could be in this one?", m.bagofcosmosA1);
 		public const BAGOCA2: Consumable = mk("BagOCA2", "BagOfCosmosA2", "a Bag of Cosmos (A2)", 0, "It's small bag used by enemy Soul Cultivtor to store much more things that the size of itself would indicate. What could be in this one?", m.bagofcosmosA2);
 		public const BAGOCA3: Consumable = mk("BagOCA3", "BagOfCosmosA3", "a Bag of Cosmos (A3)", 0, "It's small bag used by enemy Soul Cultivtor to store much more things that the size of itself would indicate. What could be in this one?", m.bagofcosmosA3);
@@ -247,16 +247,12 @@ public final class ConsumableLib extends AlchemyLib
 		//public const HOB4MAN: Consumable = mk("HOB4MAN", "Manual", "a manual for Grandiose Hailstorm of Yin-Yang Blades: Endless Tide", x, ".", m.hailofbladesmanual4);secret grandmaster ver of Hail of Blades ^^
 		public const CEB_MAN: Consumable = mk("CEB_MAN", "CEBManual", "a manual for Create Element (Basic)", 100, "This manual would teach you how to use Create Element (Basic) soulskill. (Mag)", m.createelementmanual1);
 		public const CEA_MAN: Consumable = mk("CEA_MAN", "CEAManual", "a manual for Create Element (Advanced)", 400, "This manual would teach you how to use Create Element (Advanced) soulskill. (Mag)", m.createelementmanual2);
+		public const S_B_MAN: Consumable = mk("S_B_MAN", "SoarBManual", "a manual for Soaring Blades passive", 1000, "This manual would teach you Soaring Blades passive.", m.soaringbladesmanual);
 		//public const YYB_MAN: Consumable = mk("YYB_MAN", "YYBlastManual", "a manual for Yin Yang Blast", x, "This manual would teach you how to use Yin Yang Blast combination soulskill and it components Yin Palm and Yang Fist soulskills.", m.xxx);
-	/*	public const FOLLMAN: Consumable = mk("MAN", "Manual", "a manual for Flames of Love (Low Rank) Soulskill", x, "This manual would teach you how to use Flames of Love (Low Rank) soulskill.", m.xxx);
-		public const IOLLMAN: Consumable = mk("MAN", "Manual", "a manual for Icicles of Love (Low Rank) Soulskill", x, "This manual would teach you how to use Icicles of Love (Low Rank) soulskill.", m.xxx);
-		public const SOSLMAN: Consumable = mk("MAN", "Manual", "a manual for Storm of Sisterhood (Low Rank) Soulskill", x, "This manual would teach you how to use Storm of Sisterhood (Low Rank) soulskill.", m.xxx);
-		public const NOBLMAN: Consumable = mk("MAN", "Manual", "a manual for Night of Brotherhood (Low Rank) Soulskill", x, "This manual would teach you how to use Night of Brotherhood (Low Rank) soulskill.", m.xxx);
-		public const FOLXMAN: Consumable = mk("MAN", "Manual", "a manual for Flames of Love () Soulskill", x, "This manual would teach you how to use Flames of Love (... Rank) soulskill.", m.xxx);
+	/*	public const FOLXMAN: Consumable = mk("MAN", "Manual", "a manual for Flames of Love () Soulskill", x, "This manual would teach you how to use Flames of Love (... Rank) soulskill.", m.xxx);
 		public const IOLXMAN: Consumable = mk("MAN", "Manual", "a manual for Icicles of Love () Soulskill", x, ".", m.xxx);
 		public const SOSXMAN: Consumable = mk("MAN", "Manual", "a manual for Storm of Sisterhood () Soulskill", x, ".", m.xxx);
 		public const NOBXMAN: Consumable = mk("MAN", "Manual", "a manual for Night of Brotherhood () Soulskill", x, ".", m.xxx);
-		public const XXXXMAN: Consumable = mk("MAN", "Manual", "a manual for ", x, ".", m.xxx);
 		public const XXXXMAN: Consumable = mk("MAN", "Manual", "a manual for ", x, ".", m.xxx);
 		public const XXXXMAN: Consumable = mk("MAN", "Manual", "a manual for ", x, ".", m.xxx);
 		public const XXXXMAN: Consumable = mk("MAN", "Manual", "a manual for ", x, ".", m.xxx);
@@ -823,6 +819,11 @@ public final class ConsumableLib extends AlchemyLib
 							[1, AR_TOU]
 						]
 				);
+		public const M_GOSSR: Consumable = mk("M.Gossr", "M.Gossr", "a bundle of midnight black gossamer webbing", 50, "This strange webbing is darker than night. It's so thick that light fails to get through it. It likely would be most unwise to consume it.", m.midnightGossamer, ItemTags.U_TF)
+				.refineableInto(
+						DEFAULT_SUBSTANCES_DROP_TABLE,
+						MULTIRACE_ESSENCE_DROP_TABLE(AE_ATLACH_NACHA, AE_SPIDER)
+				);
 		public const MAGSEED: Consumable = mk("MagSeed", "MagSeed", "a magically-enhanced golden seed", 6, "This seed glows with power.  It's been enhanced by Lumi to unlock its full potential, allowing it to transform you more easily.", curry(m.goldenSeed, 1), ItemTags.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
@@ -866,11 +867,8 @@ public final class ConsumableLib extends AlchemyLib
 						DEFAULT_SUBSTANCES_DROP_TABLE,
 						[[1, KANGAFT]]
 				);
-		public const M_GOSSR: Consumable = mk("M.Gossr", "M.Gossr", "a bundle of midnight black gossamer webbing", 50, "This strange webbing is darker than night. It's so thick that light fails to get through it. It likely would be most unwise to consume it.", m.midnightGossamer, ItemTags.U_TF)
-				.refineableInto(
-						DEFAULT_SUBSTANCES_DROP_TABLE,
-						MULTIRACE_ESSENCE_DROP_TABLE(AE_ATLACH_NACHA, AE_SPIDER)
-				);
+		public const MINOBLO:MinotaurBlood    = new MinotaurBlood();
+		public const MOTHDUS:MothDust    = new MothDust();
 		public const MOUSECO: Consumable = mk("MouseCo", "MouseCo", "a handful of mouse cocoa", 6, "A handful of rare aromatic beans with sharp creases in the middle, making them look like small mouse ears.  Allegedly very popular and plentiful before the mice-folk were wiped out.", curry(m.mouseCocoa, 0), ItemTags.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
@@ -879,7 +877,6 @@ public final class ConsumableLib extends AlchemyLib
 							[1, AR_SPE]
 						]
 				);
-		public const MINOBLO:MinotaurBlood    = new MinotaurBlood();
 		public const MYSTJWL: Consumable = mk("MystJwl", "MystJwl", "a mystic jewel", 50, "The flames within this jewel glow brighter than before, and have taken on a sinister purple hue.  It has been enhanced to increase its potency, allowing it to transform you more easily, but may have odd side-effects...", curry(m.foxJewel, true), ItemTags.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
@@ -1211,7 +1208,7 @@ public final class ConsumableLib extends AlchemyLib
 		public const SMALL_EGGS:Array = [BLACKEG,BLUEEGG,BROWNEG,PINKEGG,PURPLEG,WHITEEG];
 
 		//ALCHEMICAL INGREDIANTS
-		public const GINSENG: Consumable  = mk("Ginseng", "Ginseng", "a Ginseng", 6, "A plant of wich the fragant root is commonly used for perfume and cooking. If properly refined its alchemical property can also be used as a component to enhance potions.", m.Ginseng);
+		public const GINSENG: Consumable  = mk("Ginseng", "Ginseng", "a Ginseng", 6, "A plant of which the fragant root is commonly used for perfume and cooking. If properly refined, its alchemical properties can also be used as a component to enhance potions.", m.Ginseng);
 		public const HEALHERB: Consumable  = mk("HealHerb", "HealHerb", "a Healing herb", 6, "An herb with healing properties. Can be consumed directly or processed into a poultice.", m.HealingHerb);
 		public const MOONGRASS: Consumable = mk("MoonGrass", "MoonGrass", "Moonlight grass", 6, "A tuft of grass with invigorative properties. Can be consumed directly or processed into a medicine.\n", m.MoonGrass);
 		public const SNAKEBANE: Consumable = mk("SnakFlowr", "SnakFlowr", "a Snakebane flower", 6, "This flower can cure poison but, when alchemically processed, remove burns and frostburns as well. Can be consumed directly or processed into a medicine.", m.SnakeFlower);

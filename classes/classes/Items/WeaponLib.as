@@ -81,6 +81,7 @@ public final class WeaponLib extends ItemConstants
 		public const B_STAFF:BeautifulStaff = new BeautifulStaff();
 		public const B_SWORD:BeautifulSword = new BeautifulSword();
 		public const B_WHIP :BeautifulWhip = new BeautifulWhip();
+		public const B_FLYWHISK :BeautifulFlyWhisk = new BeautifulFlyWhisk();
 		public const B_SCARB:Weapon = new Weapon("B.ScarB", "B.ScarBlade", "broken scarred blade", "a broken scarred blade", "slash", 12, 480, "This saber, made from lethicite-imbued metal, seems to no longer seek flesh; whatever demonic properties in this weapon is gone now but it's still an effective weapon.", "", WT_SWORD);
 		public const B_WIDOW:BlackWidow = new BlackWidow();
 		public const BCLAWS:BlizzardClaws = new BlizzardClaws();
@@ -204,7 +205,7 @@ public final class WeaponLib extends ItemConstants
 		}) as Weapon;
 		public const S_BLADE:Weapon = new Weapon("S.Blade", "S.Blade", "inscribed spellblade", "a spellblade", "slash", 8, 640, "Forged not by a swordsmith but a sorceress, this arcane-infused blade amplifies your magic. Unlike the wizard staves it is based on, this weapon also has a sharp edge, a technological innovation which has proven historically useful in battle.", "", "Sword, StaffPart").withBuff('spellpower', +0.5) as Weapon;
 		public const S_GAUNT:Weapon = new Weapon("S.Gaunt","S.Gauntlet","spiked gauntlet","a spiked gauntlet","spiked punch",0,200,"This single metal gauntlet has the knuckles tipped with metal spikes.  Though it lacks the damaging potential of other weapons, the sheer pain of its wounds has a chance of stunning your opponent.", "Stun10", "Gauntlet");
-		public const S_RULER:Weapon = new Weapon("S.Ruler", "S.Ruler", "Storm Ruler", "a Storm Ruler", "smash", 15, 4800, "It's looking like a greatword with broken blade still possesing residual power of lightning. Also known as the Giantslayer for bringings giants to their knees.", "Large, Stun10", WT_MACE_HAMMER).withBuffs({
+		public const S_RULER:Weapon = new Weapon("S.Ruler", "S.Ruler", "Storm Ruler", "a Storm Ruler", "smash", 15, 4800, "A greatword with a broken blade, still possessing the residual power of lightning. Also known as the 'Giantslayer', for bringing giants to their knees. Deals increased damage to large enemies.", "Large, Stun10", WT_MACE_HAMMER).withBuffs({
 			'psoulskillpower': +0.2
 		}) as Weapon;
 		public const S_STAFF:Weapon = new Weapon("S.Staff", "S. Staff", "sapphire staff", "a sapphire staff", "smack", 2, 240, "This staff is made of very old wood and seems to tingle to the touch.  The top has sapphire embedded in it, and the wood is worn smooth from lots of use.  It probably belonged to a wizard at some point and would aid magic use.", "Large, Staff", WT_STAFF).withBuff('spellpower', +0.2) as Weapon;

@@ -90,7 +90,7 @@ public class Imp extends Monster
 				}
 			}
 			outputText("\n");
-			if (player.lust >= player.maxOverLust())
+			if (player.lust >= player.maxOverLust() && !SceneLib.combat.tyrantiaTrainingExtension())
 				doNext(SceneLib.combat.endLustLoss);
 			else doNext(EventParser.playerMenu);
 		}
@@ -131,7 +131,7 @@ public class Imp extends Monster
 				}
 			}
 			outputText("\n");
-			if (player.lust >= player.maxOverLust())
+			if (player.lust >= player.maxOverLust() && !SceneLib.combat.tyrantiaTrainingExtension())
 				doNext(SceneLib.combat.endLustLoss);
 			else doNext(EventParser.playerMenu);
 		}

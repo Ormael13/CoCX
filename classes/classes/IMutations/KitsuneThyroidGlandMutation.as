@@ -21,13 +21,13 @@ import classes.BodyParts.Tail;
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
-                descS += "50% reduced mana costs of FoxFire";
+                descS += "Illusion and Terror cooldown reduced by 3 turns";
             }
             if (pTier >= 2){
-                descS += ", FoxFire +50% damage (fire and lust)";
+                descS += ", 50% reduced costs for Illusion and Terror";
             }
             if (pTier >= 3){
-                descS += ", +20% Evasion to Illusion, +50 speed debuff to Terror target, +SF/Mana regen (Star Sphere rank x3/2 respectively), increase Star Sphere Max to 20";
+                descS += ", speed debuff from Terror increased to 70, evasion boost from Illusion increased by 30%";//add some more effects to both specials
             }
             if (descS != "")descS += ".";
             return descS;

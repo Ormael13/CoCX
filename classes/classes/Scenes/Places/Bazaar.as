@@ -86,43 +86,83 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	spriteSelect(null);
 	outputText(images.showImage("location-bazaar"));
 	//Make sure flags to allow entrance is set.
-	if(flags[kFLAGS.BAZAAR_ENTERED] == 0) flags[kFLAGS.BAZAAR_ENTERED] = 1;
-	outputText("You breeze past the crimson guard and enter the interior of the Bizarre Bazaar.  The ground is hard-packed, trampled as if walked over by hundreds of hooves, paws, and feet.  A massive bonfire rages in the center of the clearing, crackling and popping as it consumes its fuel gluttonously.  Surrounding the blazing behemoth are tiny, wheeled food-carts with vendors hawking everything from sausage to something called a 'marshmallow'.  Huge wagons ring the clearing, many set up to display exotic wares or services.  You can see everything from dancing centaurs to demons browsing the wares, but it seems an uneasy truce of sorts reigns here.  Then again, maybe the demons have just not had the chance to openly attack this place yet.");
-	outputText("\n\nOne of the wagons proudly proclaims itself to be \"Greta's Garments,\" though both 'G's are emphasized with cute, stylized devil horns, and the 'S' is shaped in the form of a spaded, demonic tail.  Obviously it must some kind of clothing shop.");
-	roxanne.RoxanneAppearance();
-	benoit.setBenoitShop();
-	fapArena.fapAppearance();
-	blackCock.blackCockDescription();
-	//Set menu. The top row is always available.
+	if (flags[kFLAGS.BAZAAR_ENTERED] == 0) flags[kFLAGS.BAZAAR_ENTERED] = 1;
+	if (flags[kFLAGS.THE_TRENCH_ENTERED] == 13) eventLiquidDiamond();
+	else {
+		outputText("You breeze past the crimson guard and enter the interior of the Bizarre Bazaar.  The ground is hard-packed, trampled as if walked over by hundreds of hooves, paws, and feet.  A massive bonfire rages in the center of the clearing, crackling and popping as it consumes its fuel gluttonously.  Surrounding the blazing behemoth are tiny, wheeled food-carts with vendors hawking everything from sausage to something called a 'marshmallow'.  Huge wagons ring the clearing, many set up to display exotic wares or services.  You can see everything from dancing centaurs to demons browsing the wares, but it seems an uneasy truce of sorts reigns here.  Then again, maybe the demons have just not had the chance to openly attack this place yet.");
+		outputText("\n\nOne of the wagons proudly proclaims itself to be \"Greta's Garments,\" though both 'G's are emphasized with cute, stylized devil horns, and the 'S' is shaped in the form of a spaded, demonic tail.  Obviously it must some kind of clothing shop.");
+		roxanne.RoxanneAppearance();
+		benoit.setBenoitShop();
+		fapArena.fapAppearance();
+		blackCock.blackCockDescription();
+		menu();//Set menu. The top row is always available.
+		addButton(0, "Shops", shopMenu);
+		addButton(1, (flags[kFLAGS.FAP_ARENA_RULES_EXPLAINED] > 0 ? "Fap Arena" : "Tent"), fapArena.fapArenaGOOOO);
+		addButton(2, "Food Tent", blackCock.enterTheBlackCock).hint("The incredible smell seems to come from that tent.", "The Black Cock");
+	//	addButton(4, "Back Alley", investigateBackAlley).hint("That back alley looks suspicious. Do you dare investigate?");
+		//Cinnabar
+		if (model.time.hours >= 15 && model.time.hours <= 20) addButton(5, (flags[kFLAGS.CINNABAR_NUMBER_ENCOUNTERS] > 0 ? "Cinnabar" : "Rat"), cinnabar.cinnabarAppearance(false));
+		//Griping Demons
+		if(flags[kFLAGS.BAZAAR_DEMONS_CONVERSATION] == 0 && rand(4) == 0 && demons) {
+			overHearDemonsAboutSyrena();
+			return;
+		}
+		if((flags[kFLAGS.BAZAAR_DEMONS_CONVERSATION] == 1 || flags[kFLAGS.BAZAAR_DEMONS_CONVERSATION] == 2) && demons && rand(10) == 0) {
+			//[Repeat Variant]
+			outputText("\n\n<b>The familiar sounds of the two griping demons can be heard nearby.  Do you listen in again?</b>");
+			addButton(6, "GripingDemons", overHearDemonsAboutSyrena).hint("Overhear the conversation of the two griping demons.", "Griping Demons");
+		}
+		//Lilium
+		if (lilium.LiliumText(false) != null) {
+			addButton(7, (flags[kFLAGS.TIMES_FUCKED_LILIUM] > 0 ? "Lilium" : "Demon"), lilium.LiliumText(false));
+		}
+		//Roxanne
+		addButton(8, (flags[kFLAGS.ROXANNE_MET] > 0 ? "Roxanne" : "Lizans"), (flags[kFLAGS.ROXANNE_MET] > 0 ? roxanne.RoxanneChooseApproachOrRepeat : roxanne.Roxanne1stApproach));
+		//Bimbo Niamh
+		if (flags[kFLAGS.NIAMH_STATUS] == 2 && flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] == -1) {
+			outputText("\n\nThe sounds of voices raised in song and girlish laughter makes it obvious where Niamh is holding a perpetual party.");
+			addButton(9, "Niamh", SceneLib.telAdre.niamh.bazaarNiamh);
+		}
+		addButton(14, "Leave", camp.returnToCampUseOneHour);
+	}
+}
+
+private function eventLiquidDiamond():void {
+	outputText("A man seems to be standing on a series of crates in front of a small crowd, holding what looks like a large glass bottle with some sort of sparkly liquid. Is this the ‘Liquid Diamond’ Grayda mentioned? It could be worth an investigation.\n\n");
+	outputText("\"<i>That’s right folks, a potion of eternal youth! Guaranteed to put you back in your prime for the low, low cost of 5000 gems!</i>\" At that mention, the crowd seems to disperse. Leaving only you and the man.\n\n");
+	outputText("\"<i>You there! Are you interested in buying this miracle drink?</i>\"\n\n");
+	outputText("It seems this con artist isn’t very convincing, but you need that bottle regardless of the snake oil salesman’s intentions, so you’ll play along for now. And you give the sleazy man "+(silly() ? "who is obviously voiced by Danny Devito ":"")+"a nice smile and \"<i>yes sir!</i>\"\n\n");
+	outputText("The odd man hops down from the stack of crates, several of his features showing severe taint. \"<i>Excellent! Why don’t you take a sample sniff.</i>\" The man quickly uncorks the bottle before putting it underneath your nose as he tries to hold back a gag from the presumably foul smell.\n\n");
+	outputText("Or at least that’s what you think he’s smelling, but to you, it smells like cherry trees baked into a nice citrus cake. Your daydreaming is interrupted however by another onset of itching assaults your eyes.\n\n");
+	outputText("\"<i>It could be yours! For only 7000 gems.</i>\"\n\n");
+	outputText("7000 gems? That’s 2000 more than he originally offered!\n\n");
+	outputText("\"<i>It’s very obvious this is something you want, and you react uniquely to it, so it’s 7000 gems or nothing.</i>\"\n\n");
+	outputText("Well, it seems like you have a choice to make here; you could either pay him the required amount or tell him you don’t have that many gems on you. However he doesn’t look particularly strong, and you could easily overpower him and flee the scene with the bottle, but you feel like this may come to bite you back later.\n\n");
 	menu();
-	addButton(0, "Shops", shopMenu);
-	addButton(1, (flags[kFLAGS.FAP_ARENA_RULES_EXPLAINED] > 0 ? "Fap Arena" : "Tent"), fapArena.fapArenaGOOOO);
-	addButton(2, "Food Tent", blackCock.enterTheBlackCock).hint("The incredible smell seems to come from that tent.", "The Black Cock");
-//	addButton(4, "Back Alley", investigateBackAlley).hint("That back alley looks suspicious. Do you dare investigate?");
-	//Cinnabar
-	if (model.time.hours >= 15 && model.time.hours <= 20) addButton(5, (flags[kFLAGS.CINNABAR_NUMBER_ENCOUNTERS] > 0 ? "Cinnabar" : "Rat"), cinnabar.cinnabarAppearance(false));
-	//Griping Demons
-	if(flags[kFLAGS.BAZAAR_DEMONS_CONVERSATION] == 0 && rand(4) == 0 && demons) {
-		overHearDemonsAboutSyrena();
-		return;
-	}
-	if((flags[kFLAGS.BAZAAR_DEMONS_CONVERSATION] == 1 || flags[kFLAGS.BAZAAR_DEMONS_CONVERSATION] == 2) && demons && rand(10) == 0) {
-		//[Repeat Variant]
-		outputText("\n\n<b>The familiar sounds of the two griping demons can be heard nearby.  Do you listen in again?</b>");
-		addButton(6, "GripingDemons", overHearDemonsAboutSyrena).hint("Overhear the conversation of the two griping demons.", "Griping Demons");
-	}
-	//Lilium
-	if (lilium.LiliumText(false) != null) {
-		addButton(7, (flags[kFLAGS.TIMES_FUCKED_LILIUM] > 0 ? "Lilium" : "Demon"), lilium.LiliumText(false));
-	}
-	//Roxanne
-	addButton(8, (flags[kFLAGS.ROXANNE_MET] > 0 ? "Roxanne" : "Lizans"), (flags[kFLAGS.ROXANNE_MET] > 0 ? roxanne.RoxanneChooseApproachOrRepeat : roxanne.Roxanne1stApproach));
-	//Bimbo Niamh
-	if (flags[kFLAGS.NIAMH_STATUS] == 2 && flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] == -1) {
-		outputText("\n\nThe sounds of voices raised in song and girlish laughter makes it obvious where Niamh is holding a perpetual party.");
-        addButton(9, "Niamh", SceneLib.telAdre.niamh.bazaarNiamh);
-    }
-	addButton(14,"Leave",camp.returnToCampUseOneHour);
+	addButtonIfTrue(1, "Pay", eventLiquidDiamondPay, "You need 7,000 gems!", player.gems >= 7000);
+	addButton(2, "Don’t Pay", eventLiquidDiamondDontPay);
+	addButton(3, "Steal", eventLiquidDiamondSteal);
+}
+private function eventLiquidDiamondPay():void {
+	outputText("You begrudgingly hand over the required amount of gems, which the man swiftly takes while handing you the bottle quickly muttering something about no refunds before scampering off somewhere else. Hopefully, you never see the scalper again.\n\n");
+	outputText("<b>(Obtained ‘Liquid Diamond’ key item)</b>\n\n");
+	player.gems -= 7000;
+	player.createKeyItem("Liquid Diamond", 0, 0, 0, 0);
+	flags[kFLAGS.THE_TRENCH_ENTERED] = 14;
+	doNext(enterTheBazaarAndMenu);
+}
+private function eventLiquidDiamondDontPay():void {
+	outputText("You tell him that you currently don’t have the right amount of gems for purchase.\n\n");
+	outputText("\"<i>Shame. Come back when you can pay.</i>\"\n\n");
+	flags[kFLAGS.THE_TRENCH_ENTERED] = 13.5;
+	doNext(enterTheBazaarAndMenu);
+}
+private function eventLiquidDiamondSteal():void {
+	outputText("Dropping the friendly act. You viscously growl as you slam your fist into his stomach, and snag the bottle from his now loose hand before turning tail and running as he cries out. Luckily for you it seems no one paid attention to the scene or they simply don’t care, allowing you to get away without incident. You can’t help but feel a little bad about the whole ordeal, but it got you what you desperately needed, and to be fair he was a con artist.\n\n");
+	outputText("<b>(Obtained ‘Liquid Diamond’ key item)</b>\n\n");
+	player.createKeyItem("Liquid Diamond", 0, 0, 0, 0);
+	flags[kFLAGS.THE_TRENCH_ENTERED] = 14;
+	doNext(enterTheBazaarAndMenu);
 }
 
 private function shopMenu():void {

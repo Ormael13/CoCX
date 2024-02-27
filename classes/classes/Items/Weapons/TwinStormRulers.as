@@ -12,7 +12,7 @@ package classes.Items.Weapons
 		
 		public function TwinStormRulers() 
 		{
-			super("TSRuler", "T.S.Rulers", "Twin Storm Rulers", "a Twin Storm Rulers", "smash", 15, 9600, "It's looking like a pair of greatwords with broken blade still possesing residual power of lightning. Also known as the Giantslayers for bringings giants to their knees.", "Dual Large, Stun10", WT_MACE_HAMMER);
+			super("TSRuler", "T.S.Rulers", "Twin Storm Rulers", "a pair of Storm Rulers", "smash", 15, 9600, "A pair of greatwords with broken blades, still possessing the residual power of lightning. Also known as the 'Giantslayer', for bringing giants to their knees. Deals increased damage to large enemies.", "Dual Large, Stun10", WT_MACE_HAMMER);
 			withBuffs({'psoulskillpower': +0.4});
 		}
 		

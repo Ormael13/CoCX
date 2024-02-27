@@ -494,9 +494,10 @@ public class Lethice extends Monster
 			}
 		}
 
-		override public function postPlayerAbility(ability:CombatAbility):void {
+		override public function postPlayerAbility(ability:CombatAbility, display:Boolean = true):void {
 			if (fightPhase == 3 && ability is AbstractSpell && ability.hasTag(CombatAbility.TAG_DAMAGING)) {
-				outputText("\n\n<i>\"Ouch. Such arcane skills for one so uncouth,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your magics?\"</i>\n\n");
+				if (display) outputText("\n\n<i>\"Ouch. Such arcane skills for one so uncouth,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her." + 
+					" <i>\"How will you beat me without your magics?\"</i>\n\n");
 				createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 			}
 		}
@@ -778,15 +779,15 @@ public class Lethice extends Monster
 		{
 			outputText("Several of the demons nearest you have grown immense sets of curling, sharp horns. When they can’t get at you to sexually provoke or hurl magic at you, they’re more than content to just give you an old-fashioned ram!");
 			var ev:String = player.getEvasionReason();
-			if (ev == "Misdirection")
+			if (ev == EVASION_MISDIRECTION)
 			{
 				outputText(" At least, they try to! Too bad for them you’re already elsewhere in the crowd, well away from harm!");
 			}
-			else if (ev == "Flexibility")
+			else if (ev == EVASION_FLEXIBILITY)
 			{
 				outputText(" You contort and bend in ways a human never could, easily twisting between all the pairs of horns the demons can thrust at you. By the time they’re done, you’re sitting on top of a demon’s head, balanced on his antlers until with a furious howl he throws you back into the sea of maledicts.");
 			}
-			else if (ev == "Evade")
+			else if (ev == EVASION_EVADE)
 			{
 				outputText(" You manage to duck down enough to avoid the worst of the horn-spikes, and your [armor] deflects the rest!");
 			}
@@ -821,15 +822,15 @@ public class Lethice extends Monster
 		{
 			outputText("Considering how half of the demon host is just getting fucked by whoever’s behind them, it’s just a question of how long they last before the cum starts flowing. The answer just happens to be now! You gasp and gag as the air is suddenly flooded by the reek of potent, virile jizz, and ropes of thick white spunk start flying through the air. This is less of a gank mob and more of an orgy now!");
 			var ev:String = player.getEvasionReason();
-			if (ev == "Misdirection")
+			if (ev == EVASION_MISDIRECTION)
 			{
 				outputText(" You duck under the nearest group of succubi, happily letting the demonic hussies get plastering with the wave of flying spooge. They seem to enjoy it, too, and quickly you’re surrounded by less demonic fighting and much, much more infernal cock-sucking. Seems they’re hungry!");
 			}
-			else if (ev == "Flexibility")
+			else if (ev == EVASION_FLEXIBILITY)
 			{
 				outputText(" You do a graceful backflip out of the way, making sure it’s a group of eager succubi who get painted white with cum rather than you!");
 			}
-			else if (ev == "Evade")
+			else if (ev == EVASION_EVADE)
 			{
 				outputText(" You at least manage to close your eyes before the wave of spooge hits you, splattering all over your [armor].");
 				player.takeLustDamage(Math.round(player.maxLust() * 0.05), true);
@@ -1064,15 +1065,15 @@ public class Lethice extends Monster
 		{
 			outputText("Lethice retrieves three squirming, star-shaped creatures from beneath her clothes and flings them at you. A split second after they leave her hand, needles burst from their edges!");
 			var ev:String = player.getEvasionReason();
-			if (ev == "Evade")
+			if (ev == EVASION_EVADE)
 			{
 				outputText(" You barely avoid the living throwing stars.");
 			}
-			else if (ev == "Misdirection")
+			else if (ev == EVASION_MISDIRECTION)
 			{
 				outputText(" Your misdirecting movements allow you to avoid the living throwing stars.");
 			}
-			else if (ev == "Flexibility")
+			else if (ev == EVASION_FLEXIBILITY)
 			{
 				outputText(" You bend over backwards to avoid the living throwing stars.");
 			}
@@ -1163,15 +1164,15 @@ public class Lethice extends Monster
 		{
 			outputText("<i>\"Silence your prattling, curr.\"</i> Lethice strikes out with her whip, aimed at your neck!");
 			var ev:String = player.getEvasionReason();
-			if (ev == "Evade")
+			if (ev == EVASION_EVADE)
 			{
 				outputText(" You evade the targeted strike.");
 			}
-			else if (ev == "Flexibility")
+			else if (ev == EVASION_FLEXIBILITY)
 			{
 				outputText(" You twist aside at the last moment.");
 			}
-			else if (ev == "Misdirection")
+			else if (ev == EVASION_MISDIRECTION)
 			{
 				outputText(" Raphael taught you well. Lethice failed to account for your misleading movements and swung wide.");
 			}

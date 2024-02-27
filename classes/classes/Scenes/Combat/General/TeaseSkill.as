@@ -72,6 +72,7 @@ public class TeaseSkill extends AbstractGeneral {
 	public function calcLustDamage(monster:Monster):Number {
 		var lustDmg:Number = combat.teases.teaseBaseLustDamage();
         if (player.hasPerk(PerkLib.BroadSelection) && player.differentTypesOfCocks() > 1) lustDmg *= (1 + (0.25 * player.differentTypesOfCocks()));
+		lustDmg = combat.teases.fueledByDesireDamageBonus(lustDmg);
 		if (SceneLib.urtaQuest.isUrta()) lustDmg *= 2;
 		if (monster) lustDmg *= monster.lustVuln;
 
@@ -138,6 +139,7 @@ public class TeaseSkill extends AbstractGeneral {
 			if (monster.handleTease(lustDmg, true, display)) {
 				monster.teased(lustDmg, false, display);
 				if (crit && display) outputText(" <b>Critical!</b>");
+				combat.teases.fueledByDesireHeal(display);
 			}
 
             if (flags[kFLAGS.PC_FETISH] >= 1 && !SceneLib.urtaQuest.isUrta()) {
@@ -158,13 +160,6 @@ public class TeaseSkill extends AbstractGeneral {
 			}
         }
 		if (display) outputText("\n\n");
-
-        combat.wrathregeneration1();
-		combat.fatigueRecovery1();
-		combat.manaregeneration1();
-		combat.soulforceregeneration1();
-    }
-
-    
+    }    
 }
 }

@@ -107,7 +107,7 @@ import classes.internals.ChainedDrop;
 					player.buff("hornet paralyze venom").addStats( {"str":-9, "spe":-9} ).withText("hornet paralyze venom").combatPermanent();
 				}
 			}
-			if (player.lust >= player.maxOverLust())
+			if (player.lust >= player.maxOverLust() && !combat.tyrantiaTrainingExtension())
 				doNext(SceneLib.combat.endLustLoss);
 			else doNext(EventParser.playerMenu);
 		}

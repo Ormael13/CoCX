@@ -163,7 +163,12 @@ public class Goblin extends Monster
 							consumables.PINKDYE,
 							consumables.BLUEDYE,
 							consumables.ORANGDY,
-							consumables.PURPDYE);
+							consumables.PURPDYE,
+							consumables.HEALHERB,
+							consumables.MOONGRASS,
+							consumables.SNAKEBANE,
+							consumables.IRONWEED,
+							consumables.BLADEFERN);
 			this.abilities = [
 				{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
 				{ call: goblinDrugAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[TAG_FLUID]},

@@ -89,8 +89,8 @@ public class GoblinRace extends Race {
 				.legType(NOT(LowerBody.TINY), 0, -10)
 				.noAntennae(+1);
 		
-		addMutation(IMutationsLib.NaturalPunchingBagIM);
 		addBloodline(PerkLib.GoblinsDescendant, PerkLib.BloodlineGoblin);
+		addMutation(IMutationsLib.NaturalPunchingBagIM);
 		
 		buildTier(10, "goblin")
 				.buffs({

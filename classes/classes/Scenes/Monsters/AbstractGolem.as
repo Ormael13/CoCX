@@ -9,7 +9,7 @@ public class AbstractGolem extends Monster {
 	public function AbstractGolem(plural:Boolean) {
 		// argument so superclass constructor always called
 		this.plural = plural;
-		this.lustVuln = 0;
+		this.lustVuln = 0.01;
 		this.createBreastRow(0, 1);
 		initGenderless();
 		createPerk(PerkLib.Resolute, 0, 0, 0, 0);

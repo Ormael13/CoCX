@@ -16,7 +16,7 @@ import classes.internals.*;
 	{
 		public function WendigoPossess():void {
 			outputText("The wendigo suddenly seems to vanish into thin air. Just as you thought the monster was gone you feel something entering your body. ");
-			if (SceneLib.shouldraFollower.followerShouldra()) {
+			if (SceneLib.shouldraFollower.followerShouldra() && !player.hasStatusEffect(StatusEffects.ShouldraOff)) {
 				outputText("For a split second you feel the malevolent presence within your body before suddenly shouldra manifest herself forcing it out.\n\n");
 				outputText("\"<i>Always glad to have your back champ. I ain't letting anything else go piggy back on this ride, not on my watch!</i>\"");
 			}

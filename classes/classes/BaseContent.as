@@ -194,6 +194,11 @@ import coc.xxc.StoryContext;
 			SceneLib.combat.cleanupAfterCombatImpl(nextFunc,ThisIsNotATFScene);
 		}
 
+		protected function recoveryOfResources():void
+		{
+			SceneLib.combat.recoveryOfResourcesImpl();
+		}
+
 		protected function enemyAI():void
 		{
 			SceneLib.combat.enemyAIImpl();

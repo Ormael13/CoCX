@@ -33,6 +33,20 @@ public class DynamicItems extends ItemConstants {
 		[5, RARITY_RARE]
 	];
 	
+	public static const RARITY_CHANCES_MINOR_LOW:Array = [
+		// weights sum to 100 so chances are in %
+		[40, RARITY_COMMON],
+		[40, RARITY_MAGICAL],
+		[20, RARITY_RARE]
+	];
+	
+	public static const RARITY_CHANCES_MINOR_HIGH:Array = [
+		// weights sum to 100 so chances are in %
+		[20, RARITY_COMMON],
+		[30, RARITY_MAGICAL],
+		[50, RARITY_RARE]
+	];
+	
 	/**
 	 * Weighted random table for quality rolls at specific NG+ level
 	 */

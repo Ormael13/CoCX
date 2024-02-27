@@ -52,7 +52,7 @@ public function fixed():Boolean {
 
 public function ExcelliaPathChoice():void {
 	clearOutput();
-	if (followerShouldra()) {
+	if (followerShouldra() && !player.hasStatusEffect(StatusEffects.ShouldraOff)) {
 		outputText("When you arrive back at camp you notice the cow-queen Excellia sitting patiently by your bedroll, seemingly waiting for your return. Approaching carefully, she gently opens her eyes and reveals to you that Shouldra is still driving the Queen.\n\n");
 		outputText("\"<i>Hey, champ! Good to see ya again! ...Does this mean you managed to defeat Lethice?</i>\"\n\n");
 		outputText("She stands up, bringing herself to her full height. She must be over seven feet tall, you realise as she pulls you into a soft, squishy embrace. Her tail gently caresses your butt, and she lets out a moo of happiness. Pulling away, she looks at you.\n\n");

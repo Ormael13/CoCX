@@ -90,6 +90,7 @@ public class PlayerAppearance extends BaseContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) addButton(1, "Set Race.", ApexRaceSetting);
 		addButton(2, "Weap View", WeaponDisplay);
 		addButton(3, "Superboob", BoobDisplay);
+		if (player.hasPerk(PerkLib.Lycanthropy) || player.hasPerk(PerkLib.Vulpesthropy) || player.hasPerk(PerkLib.Selachimorphanthropy)) addButton(4, "Were/Human", HumanFormDisplay);
 		addButton(7, "Reflect", campActionsReflect).hint("Reflect on your current state and future plans. (Also would make your body fully adjust to any sudden changes to natural limits of your attributes after eating any odd things and etc.)");
 		addButton(10, "RacialScores", RacialScores);
 		addButton(11, "Gender Set.", GenderForcedSetting);
@@ -120,6 +121,17 @@ public class PlayerAppearance extends BaseContent {
 		addButton(14, "Back", appearance);
 	}
 
+	public function HumanFormDisplay():void {
+		clearOutput();
+		outputText("Choose if you want were-races to hide their true appearance out of combat.");
+		outputText("[pg]Human Form: <b>" + (player.hasStatusEffect(StatusEffects.HumanForm) ? "On" : "Off") + "</b>");
+		mainView.hideAllMenuButtons();
+		menu();
+		addButton(0, "Human On", HumanFormToggle).disableIf(player.hasStatusEffect(StatusEffects.HumanForm));
+		addButton(1, "Human Off", HumanFormToggle).disableIf(!player.hasStatusEffect(StatusEffects.HumanForm));
+		addButton(14, "Back", appearance);
+	}
+
 	public function	WeaponDisplaySwitch(Display:Number):void {
 		flags[kFLAGS.WEAPON_DISPLAY_FLAG] = Display;
 		WeaponDisplay();
@@ -128,6 +140,12 @@ public class PlayerAppearance extends BaseContent {
 	public function	BoobDisplaySwitch(Display:Number):void {
 		flags[kFLAGS.BOOB_DISPLAY_FLAG] = Display;
 		BoobDisplay();
+	}
+
+	public function HumanFormToggle():void {
+		if (!player.hasStatusEffect(StatusEffects.HumanForm)) player.createStatusEffect(StatusEffects.HumanForm,1,0,0,0);
+		else player.removeStatusEffect(StatusEffects.HumanForm);
+		HumanFormDisplay();
 	}
 
 	public function ApexRaceSetting():void {

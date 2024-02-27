@@ -54,12 +54,12 @@ public class FirePunchSkill extends AbstractSoulSkill {
 		damage += player.wis;
 		damage += scalingBonusWisdom();
 		if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
-			if (player.isRaceCached(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
+			if (player.isRaceCached(Races.MOUSE, 2) && player.countRings(jewelries.INMORNG)) damage *= 2.2;
 			else damage *= 2;
 		}
 		//other bonuses
-		if (player.hasPerk(PerkLib.PerfectStrike) && monster.monsterIsStunned()) damage *= 1.5;
-		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
+		if (player.hasPerk(PerkLib.PerfectStrike) && monster && monster.monsterIsStunned()) damage *= 1.5;
+		if (player.hasPerk(PerkLib.Heroism) && monster && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		damage *= combat.fireDamageBoostedByDao();
 		return Math.round(damage);

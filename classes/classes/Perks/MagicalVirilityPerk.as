@@ -12,7 +12,7 @@ package classes.Perks
 		override public function desc(params:PerkClass = null):String
 		{
 			if (!player || !params) return _desc;
-			return "" + 200 + (params.value1 * 100) + " mLs more cum per orgasm and enhanced virility.";
+			return "" + (200 + (params.value1 * 100)) + " mLs more cum per orgasm and enhanced virility.";
 		}
 
 		public function MagicalVirilityPerk()

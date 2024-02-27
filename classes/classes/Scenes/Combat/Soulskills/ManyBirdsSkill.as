@@ -14,10 +14,10 @@ public class ManyBirdsSkill extends AbstractSoulSkill {
             "Project a figment of your soulforce as a crystal traveling at extreme speeds.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING, TAG_MAGICAL],
+            [TAG_DAMAGING, TAG_MAGICAL, TAG_TIER1, TAG_AOE],
             StatusEffects.KnowsManyBirds
         )
-		baseSFCost = 10;
+		baseSFCost = 200;
 		lastAttackType = Combat.LAST_ATTACK_SPELL;
     }
 
@@ -40,11 +40,20 @@ public class ManyBirdsSkill extends AbstractSoulSkill {
 		return "~" + numberFormat(calcDamage(target)) + " magical damage";
 	}
 
+	override public function calcCooldown():int {
+		return soulskillCooldown(2, false);
+	}
+
 	public function calcDamage(monster:Monster):Number {
-		var damage:Number = scalingBonusWisdom();
+		var damage:Number = scalingBonusWisdom() * 2;
 		if (damage < 10) damage = 10;
+
 		//soulskill mod effect
-		damage *= combat.soulskillMagicalMod();
+		damage *= soulskillMagicalMod();
+
+		//group enemies bonus
+		if (monster && monster.plural) damage *= 5;
+
 		//other bonuses
 		if (player.hasPerk(PerkLib.Heroism) && (monster && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType)))) damage *= 2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
@@ -56,8 +65,8 @@ public class ManyBirdsSkill extends AbstractSoulSkill {
 		if (silly()) 
 			if (display) outputText("You focus your soulforce, projecting it as an aura around you.  As you concentrate, dozens, hundreds, thousands of tiny, ethereal birds shimmer into existence.  As you raise your hand up, more and more appear, until the area around you and [themonster]  is drowned in spectral flappy shapes.  ");
 		else {
-			outputText("You thrust your hand outwards with deadly intent, and in the blink of an eye a crystal shoots towards [themonster].  ");
-			if (monsterDodgeSkill("crystal", display)) return;
+			outputText("You thrust your hand outwards with deadly intent, and in the blink of an eye a storm of crystals shoot towards [themonster].  ");
+			if (monsterDodgeSkill("crystal storm", display)) return;
 		}
 
 		var damage:Number = calcDamage(monster);
@@ -80,7 +89,7 @@ public class ManyBirdsSkill extends AbstractSoulSkill {
 			if (display) outputText(" damage) ");
 		}
 		else {
-			if (display) outputText("Crystal hits [themonster], dealing ");
+			if (display) outputText("The crystals hit [themonster], dealing ");
 			doMagicDamage(damage, true, display);
 			if (display) outputText(" damage! ");
 		}

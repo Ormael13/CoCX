@@ -108,18 +108,30 @@ public class FlyingSwordSkill extends AbstractGeneral {
 
 		damage = Math.round(damage);
 
-		if (display) outputText("You send a bit of soulforce to " + player.weaponFlyingSwordsName+" and direct it towards [themonster]. " + 
+		if (display) outputText("You send a bit of soulforce to " + player.weaponFlyingSwordsName+" and with a graceful hand gesture direct it towards [themonster]. " + 
 			(hitCounter == 1?"It slashes":"They slash") + " the target, leaving " + (hitCounter == 1?"a minor wound":"minor wounds") + ". ");
 
 		var damageFunc:Function;
 		switch(player.weaponFlyingSwords.element) {
+			case TAG_FIRE: 				damageFunc = doFireDamage;
+										break;
 			case TAG_ICE: 				damageFunc = doIceDamage;
 										break;
-			case TAG_FIRE: 				damageFunc = doFireDamage;
+			case TAG_LIGHTNING: 		damageFunc = doLightningDamage;
 										break;
 			case TAG_DARKNESS: 			damageFunc = doDarknessDamage;
 										break;
-			case TAG_LIGHTNING: 		damageFunc = doLightningDamage;
+			case TAG_POISON: 			damageFunc = doPoisonDamage;
+										break;
+			case TAG_WIND: 				damageFunc = doWindDamage;
+										break;
+			case TAG_WATER: 			damageFunc = doWaterDamage;
+										break;
+			case TAG_EARTH: 			damageFunc = doEarthDamage;
+										break;
+			case TAG_ACID: 				damageFunc = doAcidDamage;
+										break;
+			case TAG_PLASMA: 			damageFunc = doPlasmaDamage;
 										break;
 			default: 					damageFunc = doPhysicalDamage;
 										break;

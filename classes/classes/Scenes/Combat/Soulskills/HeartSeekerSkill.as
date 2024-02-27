@@ -15,7 +15,7 @@ public class HeartSeekerSkill extends AbstractBloodSoulSkill {
 			: "Heart Seeker will strike the vital points of your enemy, dealing true damage.  ",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING, TAG_PHYSICAL],
+            [TAG_DAMAGING, TAG_PHYSICAL, TAG_TIER2],
             sfInfusion? StatusEffects.KnowsHeartSeekerSF: StatusEffects.KnowsHeartSeeker,
 			true,
 			sfInfusion
@@ -33,22 +33,20 @@ public class HeartSeekerSkill extends AbstractBloodSoulSkill {
 	}
 
 	override public function calcCooldown():int {
-		return bloodSoulSkillCoolDown(3);
+		return soulskillTier2Cooldown(bloodSoulSkillCoolDown(3));
 	}
 
 	public function calcDamage(monster:Monster):Number {
 		var damage:Number = scalingBonusWisdom() * spellModBlood();
 		var damageFloor:Number = 10;
 
-		if (sfInfusion) {
-			damage *= 2;
-			damageFloor *= 3;
-			damage *= soulskillPhysicalMod();
-		}
-
 		if (damage < damageFloor) damage = damageFloor;
 		if (player.hasPerk(PerkLib.BloodAffinity)) damage *= 2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
+
+		if (sfInfusion) {
+			damage *= soulskillPhysicalMod();
+		}
 
 		return Math.round(damage);
 

@@ -1024,10 +1024,6 @@ public function nagaTease():void {
         enemyAI();
         return;
 	}
-	SceneLib.combat.wrathregeneration1();
-    SceneLib.combat.fatigueRecovery1();
-	SceneLib.combat.manaregeneration1();
-	SceneLib.combat.soulforceregeneration1();
 	var damage:Number;
     var chance:Number = 70;
     var bimbo:Boolean = false;

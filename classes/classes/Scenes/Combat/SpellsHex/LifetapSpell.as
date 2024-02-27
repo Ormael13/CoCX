@@ -20,7 +20,7 @@ public class LifetapSpell extends AbstractHexSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "" + hpCost() + " HP to mana; " + calcBackfirePercent() + "% backfire"
+		return "" + numberFormat(hpCost()) + " HP to mana; " + calcBackfirePercent() + "% backfire"
 	}
 	
 	override public function get isKnown():Boolean {

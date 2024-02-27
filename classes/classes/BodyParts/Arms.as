@@ -528,7 +528,12 @@ public class Arms extends BodyPart {
 		appearanceDesc: "Your arms are covered by thick [fur color] fur, ending in hands with paw pads and four fingers ending with hoof-like fingernails.",
 		fur: true
 	});
-
+	public static const MOTH:int = 68;
+	EnumValue.add(Types, MOTH, "MOTH", {
+		name:"moth",
+		appearanceDesc: "Where a normal creature would have only two arms, you instead have four covered in a sleeve like fuzzy mass.",
+		armCount: 4
+	});
 	public static function canFly(id: int): Boolean {
 		return Types[id].canFly || false;
 	}
@@ -577,6 +582,10 @@ public class Arms extends BodyPart {
 
 	public function hasPawsOrHands():String {
 		return Types[type].canPounce ? "paws" : "hands";
+	}
+
+	public function hasFourArms():Boolean {
+		return armCount == 4;
 	}
 }
 }

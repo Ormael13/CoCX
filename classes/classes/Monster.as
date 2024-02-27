@@ -255,7 +255,7 @@ import classes.Scenes.Combat.CombatAbilities;
 		 * Called after monster was affected by player's ability.
 		 * @param ability
 		 */
-		public function postPlayerAbility(ability:CombatAbility):void {
+		public function postPlayerAbility(ability:CombatAbility, display:Boolean = true):void {
 			// default - do nothing
 		}
 
@@ -897,12 +897,6 @@ import classes.Scenes.Combat.CombatAbilities;
 				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 2;
 				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 3;
 				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp *= 5;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp *= 1.2;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp *= 1.4;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) temp *= 1.6;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 4) temp *= 1.8;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 5) temp *= 2;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 6) temp *= 2.2;//dla gier powyżej obecnego ostatniego NG+ posiadającego nowe perki dla graczy
 			}
 			else {
 				if (hasPerk(PerkLib.EnemyBossType)) {
@@ -918,12 +912,6 @@ import classes.Scenes.Combat.CombatAbilities;
 					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp *= 100;
 					
 				}
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp *= 2;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp *= 3;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) temp *= 4;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 4) temp *= 5;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 5) temp *= 6;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 6) temp *= 7;//dla gier powyżej obecnego ostatniego NG+ posiadającego nowe perki dla graczy
 			}
 			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) temp = 1;
 			return temp;
@@ -938,16 +926,16 @@ import classes.Scenes.Combat.CombatAbilities;
 		public function damageReductionBasedOnDifficulty():Number {
 			var dRBOD:Number = 1;
 			if (hasPerk(PerkLib.EnemyForBeginnersType)) {
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) dRBOD *= 1.05;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) dRBOD *= 1.125;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) dRBOD *= 1.25;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) dRBOD *= 1.5;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) dRBOD *= 1.1;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) dRBOD *= 1.25;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) dRBOD *= 1.5;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) dRBOD *= 2;
 			}
 			else {
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) dRBOD *= 1.5;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) dRBOD *= 2.5;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) dRBOD *= 5;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) dRBOD *= 12.5;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) dRBOD *= 2;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) dRBOD *= 5;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) dRBOD *= 10;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) dRBOD *= 25;
 			}
 			return dRBOD;
 		}
@@ -1062,6 +1050,40 @@ import classes.Scenes.Combat.CombatAbilities;
 			return mult;
 		}
 
+		/**
+		* Look into perks and special effects and @return summery extra chance to avoid attack granted by them.
+		*/
+		override public function getEvasionChance():Number {
+			var chance:Number = 0;
+
+			if (hasStatusEffect(StatusEffects.HurricaneDance)) chance += 25;
+
+			chance += super.getEvasionChance();
+			if (hasStatusEffect(StatusEffects.GreenCovenant) || canAutoHit()) chance = 0;
+			return chance;
+		}
+
+		override public function canAutoHit():Boolean {
+			return hasPerk(PerkLib.NoDodges);
+		}
+
+		override public function calcSpeedDodge(attackSpeed:int):int {
+			if (canAutoHit()) return 0;
+			return super.calcSpeedDodge(attackSpeed);
+		}
+
+		override public function getEvasionReason(considerBlindSpeed:Boolean = true, attackSpeed:int = int.MIN_VALUE, hitModifier:int = 0, dodgeArray:Array = null):String {
+			var evasionReason:String;
+
+			if (canAutoHit()) return null;
+
+			if (hasStatusEffect(StatusEffects.HurricaneDance)) dodgeArray.push([25, EVASION_HURRICANE_DANCE]);
+
+			if (!evasionReason) evasionReason = super.getEvasionReason(considerBlindSpeed, attackSpeed, hitModifier, dodgeArray);
+
+			return evasionReason;
+		}
+
 		public function canMonsterBleed():Boolean
 		{
 			return !hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.EnemyPlantType) && !hasPerk(PerkLib.EnemyGooType) && !hasPerk(PerkLib.EnemyGhostType) && !hasPerk(PerkLib.EnemyUndeadType);
@@ -1139,84 +1161,47 @@ import classes.Scenes.Combat.CombatAbilities;
 		}
 
 		public function eBaseStrengthDamage():Number {
-			var damage:Number = 0;
-			damage += str;
-			if (str >= 21) damage += (str - 20);
-			if (str >= 41) damage += (str - 40);
-			if (str >= 61) damage += (str - 60);
-			if (str >= 81) damage += (str - 80);
-			if (str >= 101) damage += tieredBonus(str, 50, 100);
-			if (str < 10) damage = 10;
-			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
-			if (hasStatusEffect(StatusEffects.Provoke)) damage *= statusEffectv2(StatusEffects.Provoke);
-			//monster exclusive perks bonus
-			damage *= eBaseMultis();
-			damage = Math.round(damage);
-			return damage;
+			return eBasePhysModifier(eBaseStatDamage(str));
 		}
 
 		public function eBaseToughnessDamage():Number {
-			var damage:Number = 0;
-			damage += tou;
-			if (tou >= 21) damage += (tou - 20);
-			if (tou >= 41) damage += (tou - 40);
-			if (tou >= 61) damage += (tou - 60);
-			if (tou >= 81) damage += (tou - 80);
-			if (tou >= 101) damage += tieredBonus(tou, 50, 100);
-			if (tou < 10) damage = 10;
-			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
-			if (hasStatusEffect(StatusEffects.Provoke)) damage *= statusEffectv2(StatusEffects.Provoke);
-			//monster exclusive perks bonus
-			damage *= eBaseMultis();
-			damage = Math.round(damage);
-			return damage;
+			return eBasePhysModifier(eBaseStatDamage(tou));
 		}
 
 		public function eBaseSpeedDamage():Number {
-			var damage:Number = 0;
-			damage += spe;
-			if (spe >= 21) damage += (spe - 20);
-			if (spe >= 41) damage += (spe - 40);
-			if (spe >= 61) damage += (spe - 60);
-			if (spe >= 81) damage += (spe - 80);
-			if (spe >= 101) damage += tieredBonus(spe, 50, 100);
-			if (spe < 10) damage = 10;
-			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
-			if (hasStatusEffect(StatusEffects.Provoke)) damage *= statusEffectv2(StatusEffects.Provoke);
-			//monster exclusive perks bonus
-			damage *= eBaseMultis();
-			damage = Math.round(damage);
-			return damage;
+			return eBasePhysModifier(eBaseStatDamage(spe));
 		}
 
 		public function eBaseIntelligenceDamage():Number {
-			var damage:Number = 0;
-			damage += inte;
-			if (inte >= 21) damage += (inte - 20);
-			if (inte >= 41) damage += (inte - 40);
-			if (inte >= 61) damage += (inte - 60);
-			if (inte >= 81) damage += (inte - 80);
-			if (inte >= 101) damage += tieredBonus(inte, 50, 100);
-			if (inte < 10) damage = 10;
+			return eBaseStatDamage(inte);
+		}
+
+		public function eBaseWisdomDamage():Number {
+			return eBaseStatDamage(wis);
+		}
+
+		public function eBaseLibidoDamage():Number {
+			return eBaseStatDamage(lib);
+		}
+
+		private function eBaseStatDamage(stat:Number):Number {
+			var damage:Number = stat;
+			if (stat >= 21) damage += (stat - 20);
+			if (stat >= 41) damage += (stat - 40);
+			if (stat >= 61) damage += (stat - 60);
+			if (stat >= 81) damage += (stat - 80);
+			if (stat >= 101) damage += tieredBonus(stat, 50, 100);
+			if (stat < 10) damage = 10;
 			//monster exclusive perks bonus
 			damage *= eBaseMultis();
 			damage = Math.round(damage);
 			return damage;
 		}
 
-		public function eBaseWisdomDamage():Number {
-			var damage:Number = 0;
-			damage += wis;
-			if (wis >= 21) damage += (wis - 20);
-			if (wis >= 41) damage += (wis - 40);
-			if (wis >= 61) damage += (wis - 60);
-			if (wis >= 81) damage += (wis - 80);
-			if (wis >= 101) damage += tieredBonus(wis, 50, 100);
-			if (wis < 10) damage = 10;
-			//monster exclusive perks bonus
-			damage *= eBaseMultis();
-			damage = Math.round(damage);
-			return damage;
+		private function eBasePhysModifier(damage:Number):Number {
+			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
+			if (hasStatusEffect(StatusEffects.Provoke)) damage *= statusEffectv2(StatusEffects.Provoke);
+			return Math.round(damage);
 		}
 
 		private function inteligencescalingbonusMonster(stat:int):Number{
@@ -1324,10 +1309,10 @@ import classes.Scenes.Combat.CombatAbilities;
 		protected function baseXP():Number
 		{
 			var baseMonXP:Number = this.level * 5;
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) baseMonXP += this.level * 0.5;
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 2) baseMonXP += this.level * 1.5;
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 3) baseMonXP += this.level * 3;
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 4) baseMonXP += this.level * 5;
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) baseMonXP += this.level;
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 2) baseMonXP += this.level * 2.5;
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 3) baseMonXP += this.level * 5;
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 4) baseMonXP += this.level * 7.5;
 			if (this.level < 7) baseMonXP += (this.level * 5) + rand(this.level * 5);
 			else baseMonXP += rand(this.level * 5);
 			return baseMonXP;
@@ -2860,7 +2845,7 @@ import classes.Scenes.Combat.CombatAbilities;
 		 * To be overwritten by child monster classes
 		 * @return statues (Array) - List of String repreenting each unique status the monster is currently under
 		 */
-		public function displaySpecialStatues():Array {
+		public function displaySpecialStatuses():Array {
 			return [];
 		}
 
@@ -3016,9 +3001,9 @@ import classes.Scenes.Combat.CombatAbilities;
 			lustDelta = Math.round(lustDelta);
 			lust += lustDelta;
 			if (display) SceneLib.combat.CommasForDigits(lustDelta, true);//outputText(" <b>([font-lust]" + Utils.formatNumber(lustDelta) + "</font>)</b>");
-			if (player.armor == armors.ELFDRES && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0 && lustDelta >= 1) {
-				outputText(" You cool down a little bit ");
-				player.takeLustDamage(Math.round(-lustDelta)/20);
+			if (player.armor == armors.ELFDRES && player.isElf() && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0 && lustDelta >= 1) {
+				if (display) outputText(" You cool down a little bit ");
+				player.takeLustDamage(Math.round(-(player.maxLust() * 0.01)), display, true);
 			}
 		}
 
@@ -3244,20 +3229,20 @@ import classes.Scenes.Combat.CombatAbilities;
 					healingPercent += 20;
 					if (perkv1(IMutationsLib.FerasBirthrightIM) >= 4) healingPercent += 10;
 				}
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp3 += 0.55;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp3 += 0.25;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp3 += 0.15;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) temp3 += 0.08;
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp3 += 0.3;
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp3 += 0.2;
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp3 += 0.12;
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp3 += 0.05;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp3 += 0.6;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp3 += 0.47;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) temp3 += 0.4;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 4) temp3 += 0.36;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 5) temp3 += 0.34;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 6) temp3 += 0.32;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp3 += 0.05;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp3 += 0.15;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp3 += 0.25;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) temp3 += 0.55;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp3 += 0.05;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp3 += 0.12;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp3 += 0.2;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp3 += 0.3;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp3 += 0.1;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp3 += 0.2;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) temp3 += 0.3;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 4) temp3 += 0.4;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 5) temp3 += 0.5;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 6) temp3 += 0.6;
 				if (temp3 > 0) healingPercent *= temp3;
 				temp2 = Math.round(maxHP() * healingPercent / 100);
 				if (hasPerk(PerkLib.Lifeline)) temp2 += (45 * (1 + newGamePlusMod()));
@@ -3827,32 +3812,34 @@ import classes.Scenes.Combat.CombatAbilities;
 				if(flags[kFLAGS.PC_FETISH] >= 2) player.dynStats("lus", 3);
 			}
 			if(this is SecretarialSuccubus || this is MilkySuccubus) {
-				if(player.lust < (player.maxLust() * 0.45)) outputText("There is something in the air around your opponent that makes you feel warm.\n\n");
-				else if(player.lust < (player.maxLust() * 0.70)) outputText("You aren't sure why but you have difficulty keeping your eyes off your opponent's lewd form.\n\n");
-				else if(player.lust < (player.maxLust() * 0.90)) outputText("You blush when you catch yourself staring at your foe's rack, watching it wobble with every step she takes.\n\n");
-				else outputText("You have trouble keeping your greedy hands away from your groin.  It would be so easy to just lay down and masturbate to the sight of your curvy enemy.  The succubus looks at you with a sexy, knowing expression.\n\n");
-				player.takeLustDamage(1+rand(8), true);
+				if(player.lust < (player.maxLust() * 0.45)) outputText("There is something in the air around your opponent that makes you feel warm. ");
+				else if(player.lust < (player.maxLust() * 0.70)) outputText("You aren't sure why but you have difficulty keeping your eyes off your opponent's lewd form. ");
+				else if(player.lust < (player.maxLust() * 0.90)) outputText("You blush when you catch yourself staring at your foe's rack, watching it wobble with every step she takes. ");
+				else outputText("You have trouble keeping your greedy hands away from your groin.  It would be so easy to just lay down and masturbate to the sight of your curvy enemy.  The succubus looks at you with a sexy, knowing expression. ");
+				player.takeLustDamage((eBaseLibidoDamage() / 40) + rand(8), true);
+				outputText("\n\n");
 			}
 			//[LUST GAINED PER ROUND] - Omnibus
 			if(hasStatusEffect(StatusEffects.LustAura)) {
 				if (this is OmnibusOverseer || this is HeroslayerOmnibus) {
-					if(player.lust < (player.maxLust() * 0.33)) outputText("Your groin tingles warmly.  The demon's aura is starting to get to you.\n\n");
-					if(player.lust >= (player.maxLust() * 0.33) && player.lust < (player.maxLust() * 0.66)) outputText("You blush as the demon's aura seeps into you, arousing you more and more.\n\n");
+					if(player.lust < (player.maxLust() * 0.33)) outputText("Your groin tingles warmly.  The demon's aura is starting to get to you. ");
+					if(player.lust >= (player.maxLust() * 0.33) && player.lust < (player.maxLust() * 0.66)) outputText("You blush as the demon's aura seeps into you, arousing you more and more. ");
 					if(player.lust >= (player.maxLust() * 0.66)) {
 						outputText("You flush bright red with desire as the lust in the air worms its way inside you.  ");
 						temp = rand(4);
-						if(temp == 0) outputText("You have a hard time not dropping to your knees to service her right now.\n\n");
-						if(temp == 2) outputText("The urge to bury your face in her breasts and suckle her pink nipples nearly overwhelms you.\n\n");
-						if(temp == 1) outputText("You swoon and lick your lips, tasting the scent of the demon's pussy in the air.\n\n");
-						if(temp == 3) outputText("She winks at you and licks her lips, and you can't help but imagine her tongue sliding all over your body.  You regain composure moments before throwing yourself at her.  That was close.\n\n");
+						if(temp == 0) outputText("You have a hard time not dropping to your knees to service her right now. ");
+						if(temp == 2) outputText("The urge to bury your face in her breasts and suckle her pink nipples nearly overwhelms you. ");
+						if(temp == 1) outputText("You swoon and lick your lips, tasting the scent of the demon's pussy in the air. ");
+						if(temp == 3) outputText("She winks at you and licks her lips, and you can't help but imagine her tongue sliding all over your body.  You regain composure moments before throwing yourself at her.  That was close. ");
 					}
 				}
 				if (this is Alraune || this is Marae) {
-					if(player.lust < (player.maxLust() * 0.33)) outputText("The pollen in the air gradually increase your arousal.\n\n");
-					if(player.lust >= (player.maxLust() * 0.33) && player.lust < (player.maxLust() * 0.66)) outputText("The pollen in the air is getting to you.\n\n");
-					if(player.lust >= (player.maxLust() * 0.66)) outputText("You flush bright red with desire as the lust in the air worms its way inside you.\n\n");
+					if(player.lust < (player.maxLust() * 0.33)) outputText("The pollen in the air gradually increase your arousal. ");
+					if(player.lust >= (player.maxLust() * 0.33) && player.lust < (player.maxLust() * 0.66)) outputText("The pollen in the air is getting to you. ");
+					if(player.lust >= (player.maxLust() * 0.66)) outputText("You flush bright red with desire as the lust in the air worms its way inside you. ");
 				}
-				player.takeLustDamage((3 + int(player.lib/20 + player.cor/25)), true);
+				player.takeLustDamage(((eBaseLibidoDamage() / 40) + int(player.lib/20 + player.cor/25)), true);
+				outputText("\n\n");
 			}
 			//immolation DoT
 			if (hasStatusEffect(StatusEffects.ImmolationDoT)) {

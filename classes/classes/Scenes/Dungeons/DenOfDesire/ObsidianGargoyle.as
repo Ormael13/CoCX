@@ -140,7 +140,7 @@ public class ObsidianGargoyle extends AbstractGargoyle
 			this.level = 28;
 			this.bonusHP = 2500;
 			this.additionalXP = 500;
-			this.lustVuln = 0;
+			this.lustVuln = 0.01;
 			this.weaponName = "stone claws";
 			this.weaponVerb = "claw-slash";
 			this.weaponAttack = 75;

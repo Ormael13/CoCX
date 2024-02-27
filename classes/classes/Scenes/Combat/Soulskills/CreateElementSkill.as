@@ -26,7 +26,7 @@ public class CreateElementSkill extends AbstractSoulSkill {
     }
 
 	private function buildTagList(element:String):Array {
-		var tagArr:Array = [TAG_DAMAGING, TAG_MAGICAL];
+		var tagArr:Array = [TAG_DAMAGING, TAG_MAGICAL, TAG_TIER1];
 
 		var tagToAdd:int;
 		switch(element.toLowerCase()) {
