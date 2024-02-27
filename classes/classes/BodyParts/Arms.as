@@ -17,6 +17,7 @@ public class Arms extends BodyPart {
 	 * - armSlam: whether the arms enable armSlam
 	 * - canFly: [for winged arms] whether allows flight at the expense of using both arms
 	 * - wingSlap: [for winged arms] whether part allows a wing slap
+	 * - fourArms: whenever arms are four not two
 	 *
 	 * - hairy: has hair material
 	 * - fur: has fur material
@@ -25,8 +26,6 @@ public class Arms extends BodyPart {
 	 * - chitin: has chitin material
 	 * */
 	public static var Types:/*EnumValue*/Array = [];
-
-	public var armCount:int = 2;
 
 	public static const HUMAN:int = 0;
 	EnumValue.add(Types, HUMAN, "HUMAN", {
@@ -272,7 +271,7 @@ public class Arms extends BodyPart {
 	EnumValue.add(Types, DISPLACER, "DISPLACER", {
 		name:"displacer",
 		appearanceDesc: "Where a normal creature would have only two arms, you instead have four [fur color] furred appendages, all of which end in a pair of five-toed lion paws armed with lethal claws.",
-		armCount: 4,
+		fourArms: true,
 		claw: true,
 		canPounce: true,
 		feline: true,
@@ -459,7 +458,7 @@ public class Arms extends BodyPart {
 	EnumValue.add(Types, ANT, "ANT", {
 		name:"ant",
 		appearanceDesc: "Where a normal creature would have only two arms, you instead have four, with shining [chitin color] exoskeleton covering them from the biceps down, resembling a pair of long [chitin color] gloves from a distance.",
-		armCount: 4,
+		fourArms: true,
 		claw: true,
 		chitin: true
 	});
@@ -532,7 +531,7 @@ public class Arms extends BodyPart {
 	EnumValue.add(Types, MOTH, "MOTH", {
 		name:"moth",
 		appearanceDesc: "Where a normal creature would have only two arms, you instead have four covered in a sleeve like fuzzy mass.",
-		armCount: 4
+		fourArms: true
 	});
 	public static function canFly(id: int): Boolean {
 		return Types[id].canFly || false;
@@ -585,7 +584,7 @@ public class Arms extends BodyPart {
 	}
 
 	public function hasFourArms():Boolean {
-		return armCount == 4;
+		return Types[type].fourArms || false;
 	}
 }
 }
