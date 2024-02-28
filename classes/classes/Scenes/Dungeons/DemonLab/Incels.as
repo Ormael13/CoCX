@@ -107,6 +107,7 @@ public class Incels extends Monster {
 
     // idk if there's a better implementation, but let's keep it simple for now?
     public var dsTurnCounter:int = 0;
+	private var grappleCooldown:Number;
 
     // In doAI to avoid stun checks.
     public function DraftSupportCheck():void {
@@ -138,7 +139,7 @@ public class Incels extends Monster {
     }
 
     public function RipStruggle():void {
-        if (rand(player.str) > (this.str / 10) * (1 + player.getStatusValue(StatusEffects.Pounced, 1)) || player.hasPerk(PerkLib.FluidBody)) RipBreakOut();
+        if (rand(player.str) > (this.str / 10) * (1 + player.getStatusValue(StatusEffects.Pounced, 1)) || (player.hasStatusEffect(StatusEffects.Pounced) && player.statusEffectv1(StatusEffects.Pounced) < 1) || player.hasPerk(PerkLib.FluidBody)) RipBreakOut();
         else RipCont();
         SceneLib.combat.enemyAIImpl();
     }
@@ -160,11 +161,13 @@ public class Incels extends Monster {
         player.removeStatusEffect(StatusEffects.Pounced);
         outputText("You manage to get your elbow into the mouth of one particularly tenacious creature, and it recoils, headbutting another by accident. The two begin fighting, and the flailing starts a miniature brawl between the Sexless freaks. You feel the weight on you lessening, and you heave, sending two more of the creatures tumbling. You scramble, pulling yourself out, but as you do, the creatures refocus on you, almost immediately.");
         takePhysDamage(eBaseDamage());
+		grappleCooldown = 2;
     }
 
     override protected function performCombatAction():void {
 		restoreLustTick();
-        if (!player.hasStatusEffect(StatusEffects.Pounced) && rand(2) == 0) RipAndTearUntilYourDone();
+        if (grappleCooldown > 0) --grappleCooldown;
+		if (grappleCooldown == 0 && !player.hasStatusEffect(StatusEffects.Pounced) && rand(2) == 0) RipAndTearUntilYourDone();
         else IncelRush();
     }
 }
