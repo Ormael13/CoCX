@@ -6,8 +6,8 @@ import classes.Scenes.Combat.AbstractSummonMonster;
 import classes.Scenes.Combat.DamageType;
 import classes.StatusEffects;
 
-public class AlchemicalElderRalthazul extends AbstractSummonMonster {
-	public function AlchemicalElderRalthazul() {
+public class DivineMommyUrta extends AbstractSummonMonster {
+	public function DivineMommyUrta() {
 		super(
 			"",
 			"Summons your  to aid you in combat",
@@ -17,7 +17,7 @@ public class AlchemicalElderRalthazul extends AbstractSummonMonster {
 
     override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("A simple door appears in thin air, and from it steps a pregnant-looking Fox-morph, dressed in a simple hauberk and wielding a dangerous-looking Halberd. She emanates a radiance that is at once divine, maternal and fierce. Beside her is an emancipated fox-morph with a devilish grin on his face. \n");
+			outputText("You place a stone card on your conduit. The device lights up...A simple door appears in thin air, and from it steps a pregnant-looking Fox-morph, dressed in a simple hauberk and wielding a dangerous-looking Halberd. She emanates a radiance that is at once divine, maternal and fierce. Beside her is an emancipated fox-morph with a devilish grin on his face. \n");
 		}
 		
 	}

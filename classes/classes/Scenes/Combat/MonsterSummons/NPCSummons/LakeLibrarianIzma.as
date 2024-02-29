@@ -6,8 +6,8 @@ import classes.Scenes.Combat.AbstractSummonMonster;
 import classes.Scenes.Combat.DamageType;
 import classes.StatusEffects;
 
-public class AlchemicalElderRalthazul extends AbstractSummonMonster {
-	public function AlchemicalElderRalthazul() {
+public class LakeLibrarianIzma extends AbstractSummonMonster {
+	public function LakeLibrarianIzma() {
 		super(
 			"",
 			"Summons your  to aid you in combat",
@@ -17,7 +17,7 @@ public class AlchemicalElderRalthazul extends AbstractSummonMonster {
 
     override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("\n");
+			outputText("A patch of lakewater forms in front of you, and from it, a womanly figure rises, her shark teeth gleaming white. She gives you a simpering look before glaring daggers at your foe, ready to beat them into submission. \n");
 		}
 		
 	}

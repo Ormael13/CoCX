@@ -17,7 +17,7 @@ public class AlchemicalElderRalthazul extends AbstractSummonMonster {
 
     override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("\n");
+			outputText("You place a stone card on your conduit. The device lights up, and from the ground in front of you rises a\n");
 		}
 		
 	}

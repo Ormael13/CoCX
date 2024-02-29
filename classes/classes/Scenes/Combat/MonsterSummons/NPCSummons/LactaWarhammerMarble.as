@@ -6,8 +6,8 @@ import classes.Scenes.Combat.AbstractSummonMonster;
 import classes.Scenes.Combat.DamageType;
 import classes.StatusEffects;
 
-public class AlchemicalElderRalthazul extends AbstractSummonMonster {
-	public function AlchemicalElderRalthazul() {
+public class LactaWarhammerMarble extends AbstractSummonMonster {
+	public function LactaWarhammerMarble() {
 		super(
 			"",
 			"Summons your  to aid you in combat",
@@ -17,7 +17,7 @@ public class AlchemicalElderRalthazul extends AbstractSummonMonster {
 
     override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("\n");
+			outputText("From your card springs a lacta bovine with nothing but a simple smock on. Her multiple rows of milk-dripping breasts are on display, and she wields a warhammer in one hand.\n");
 		}
 		
 	}

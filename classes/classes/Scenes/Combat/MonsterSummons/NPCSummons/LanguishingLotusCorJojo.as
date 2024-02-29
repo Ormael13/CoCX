@@ -6,8 +6,8 @@ import classes.Scenes.Combat.AbstractSummonMonster;
 import classes.Scenes.Combat.DamageType;
 import classes.StatusEffects;
 
-public class AlchemicalElderRalthazul extends AbstractSummonMonster {
-	public function AlchemicalElderRalthazul() {
+public class LanguishingLotusCorJojo extends AbstractSummonMonster {
+	public function LanguishingLotusCorJojo() {
 		super(
 			"",
 			"Summons your  to aid you in combat",
@@ -17,7 +17,7 @@ public class AlchemicalElderRalthazul extends AbstractSummonMonster {
 
     override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("\n");
+			outputText("A diseased lotus flower shoots from the ground. It’s purple, and its stem is blackened, rotting at the roots. From inside the folded petals, a form stirs. The petals fall off, revealing a nude mouselike form. Clearly male, with an erect member, the corrupted mouse leers at your enemy, purple aura visible around him.\n");
 		}
 		
 	}

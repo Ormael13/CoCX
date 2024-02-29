@@ -6,8 +6,8 @@ import classes.Scenes.Combat.AbstractSummonMonster;
 import classes.Scenes.Combat.DamageType;
 import classes.StatusEffects;
 
-public class AlchemicalElderRalthazul extends AbstractSummonMonster {
-	public function AlchemicalElderRalthazul() {
+public class FlamingBreakerFistChiChi extends AbstractSummonMonster {
+	public function FlamingBreakerFistChiChi() {
 		super(
 			"",
 			"Summons your  to aid you in combat",
@@ -17,7 +17,7 @@ public class AlchemicalElderRalthazul extends AbstractSummonMonster {
 
     override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("\n");
+			outputText("Flames erupt in front of you, and from them spills a mouse-shaped woman, her body covered by a red gi. With hands gloved in fiery mitts, she glares at [enemy] with an almost literal fire in her eyes.\n");
 		}
 		
 	}

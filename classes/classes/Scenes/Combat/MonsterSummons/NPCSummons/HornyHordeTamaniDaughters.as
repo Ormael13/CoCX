@@ -6,8 +6,8 @@ import classes.Scenes.Combat.AbstractSummonMonster;
 import classes.Scenes.Combat.DamageType;
 import classes.StatusEffects;
 
-public class AlchemicalElderRalthazul extends AbstractSummonMonster {
-	public function AlchemicalElderRalthazul() {
+public class HornyHordeTamaniDaughters extends AbstractSummonMonster {
+	public function HornyHordeTamaniDaughters() {
 		super(
 			"",
 			"Summons your  to aid you in combat",
@@ -17,7 +17,7 @@ public class AlchemicalElderRalthazul extends AbstractSummonMonster {
 
     override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("\n");
+			outputText("The ground around you trembles, and from within the earth, goblins spew out. Even smaller than normal, barely a foot and a half tall, these creatures eye both you and [enemy] with lust, sharp teeth glinting.\n");
 		}
 		
 	}

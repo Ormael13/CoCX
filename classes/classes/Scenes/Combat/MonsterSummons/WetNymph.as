@@ -14,5 +14,11 @@ public class AlchemicalElderRalthazul extends AbstractSummonMonster {
 		);
 		baseSFCost = 100;
 	}
+     override protected function doSpellEffect(display:Boolean = true):void {
+		if (display) {
+			outputText("You place a stone card on your conduit. The device lights up, and from the ground in front of you rises a\n");
+		}
+		
+	}
 }
 }

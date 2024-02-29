@@ -6,8 +6,8 @@ import classes.Scenes.Combat.AbstractSummonMonster;
 import classes.Scenes.Combat.DamageType;
 import classes.StatusEffects;
 
-public class AlchemicalElderRalthazul extends AbstractSummonMonster {
-	public function AlchemicalElderRalthazul() {
+public class MartyrMageArian extends AbstractSummonMonster {
+	public function MartyrMageArian() {
 		super(
 			"",
 			"Summons your  to aid you in combat",
@@ -17,7 +17,7 @@ public class AlchemicalElderRalthazul extends AbstractSummonMonster {
 
     override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("\n");
+			outputText("A bolt of lightning strikes the ground in front of you. From within the electricity, An androgynous lizard-morph steps out, clad in robes fitting for a magician. Sparks fly on their fingertips, and they take a stance beside you. You can feel your own magic strengthening. \n");
 		}
 		
 	}

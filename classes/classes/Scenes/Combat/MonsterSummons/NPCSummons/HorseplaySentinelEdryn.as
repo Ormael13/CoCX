@@ -6,8 +6,8 @@ import classes.Scenes.Combat.AbstractSummonMonster;
 import classes.Scenes.Combat.DamageType;
 import classes.StatusEffects;
 
-public class AlchemicalElderRalthazul extends AbstractSummonMonster {
-	public function AlchemicalElderRalthazul() {
+public class HorseplaySentinelEdryn extends AbstractSummonMonster {
+	public function HorseplaySentinelEdryn() {
 		super(
 			"",
 			"Summons your  to aid you in combat",
@@ -17,7 +17,7 @@ public class AlchemicalElderRalthazul extends AbstractSummonMonster {
 
     override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("\n");
+			outputText("As you focus your magic, sands whirl into existence in front of you. They form into a centaur woman, covered in metal armour and wielding a large halberd. The smell of leather and hay fills the air, invigorating you. \n");
 		}
 		
 	}

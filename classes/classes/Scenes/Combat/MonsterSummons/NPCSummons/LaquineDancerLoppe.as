@@ -6,8 +6,8 @@ import classes.Scenes.Combat.AbstractSummonMonster;
 import classes.Scenes.Combat.DamageType;
 import classes.StatusEffects;
 
-public class AlchemicalElderRalthazul extends AbstractSummonMonster {
-	public function AlchemicalElderRalthazul() {
+public class LaquineDancerLoppe extends AbstractSummonMonster {
+	public function LaquineDancerLoppe() {
 		super(
 			"",
 			"Summons your  to aid you in combat",
@@ -17,7 +17,7 @@ public class AlchemicalElderRalthazul extends AbstractSummonMonster {
 
     override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("\n");
+			outputText("Sensual, slow music echoes through the air, and as if stepping from a stage, a rabbit-morph, clothed scantily in an exotic dancer’s attire, joins you on the battlefield.\n");
 		}
 		
 	}

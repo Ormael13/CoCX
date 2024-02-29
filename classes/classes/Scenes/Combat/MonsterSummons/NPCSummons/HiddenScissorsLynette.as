@@ -6,8 +6,8 @@ import classes.Scenes.Combat.AbstractSummonMonster;
 import classes.Scenes.Combat.DamageType;
 import classes.StatusEffects;
 
-public class AlchemicalElderRalthazul extends AbstractSummonMonster {
-	public function AlchemicalElderRalthazul() {
+public class HiddenScissorsLynette extends AbstractSummonMonster {
+	public function HiddenScissorsLynette() {
 		super(
 			"",
 			"Summons your  to aid you in combat",
@@ -17,7 +17,7 @@ public class AlchemicalElderRalthazul extends AbstractSummonMonster {
 
     override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("\n");
+			outputText("A single goblin forms in front of you. While she’s slightly bigger than most, what catches your eye is the oversized pair of scissors in each hand, and the wicked-looking shine on that steel. Your summoned goblin eyes [enemy] with a devilish grin.\n");
 		}
 		
 	}

@@ -9794,9 +9794,11 @@ public class Combat extends BaseContent {
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedWetNymph)) {
             outputText("Your Nymph slides forward, fingers slipping into her crotch and giving [themonster] a clear view of her gushing pussy. ");
+            
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedDarkMage)) {
-            outputText("Black energy spirals from the violet orb on the end of Dark mage’s staff. Your monster hurls a black blob of energy, striking [enemy] square in the chest");
+            outputText("Black energy spirals from the violet orb on the end of Dark mage’s staff. Your monster hurls a black blob of energy, striking [themonster] square in the chest");
+        
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedDarkEnchantress)) {
             outputText("Your Dark enchantress gives an evil little giggle, twirling her staff. She shoves it forward, sending a violet, heart-shaped blob of darkness at [themonster]");
@@ -9811,36 +9813,36 @@ public class Combat extends BaseContent {
             outputText("");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedVampireBaroness)) {
-            outputText("Your Vampire Baroness’s teeth elongate, and she flaps her bat wings, sending her cape floating as she latches onto the [enemy]. Her teeth sink into their neck, and she closes her eyes in delight. After a few moments, she kicks off, coming back to you.");
+            outputText("Your Vampire Baroness’s teeth elongate, and she flaps her bat wings, sending her cape floating as she latches onto the [themonster]. Her teeth sink into their neck, and she closes her eyes in delight. After a few moments, she kicks off, coming back to you.");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedFlameheartedDragonAxe)) {
-            outputText("Your Axe-dragon roars, belching flame at the [enemy]. It leaps after the flames, following it up with its blade-wings, cutting an X in their body.");
+            outputText("Your Axe-dragon roars, belching flame at the [themonster]. It leaps after the flames, following it up with its blade-wings, cutting an X in their body.");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedWhiteLotus)) {
-            outputText("Your lotus monk rushes the [enemy], arms, legs and tail a blur of motion. He lands several strikes, and as the [enemy] rallies, he leaps back, avoiding the counterattack with practised ease. He stands on his flower, looking at them with calm detachment.");
+            outputText("Your lotus monk rushes the [themonster], arms, legs and tail a blur of motion. He lands several strikes, and as the [themonster] rallies, he leaps back, avoiding the counterattack with practised ease. He stands on his flower, looking at them with calm detachment.");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedPinkLotus)) {
             outputText("Lady Lotus’s flower withers as she spreads her arms. She comes behind you, wrapping both arms around your waist. You can feel your body relaxing, muscles filling with power. Your fatigue vanishes, but as you look around, your Lady Lotus seems to be gone");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedLanguishingLotus)) {
-            outputText("Your corrupted mouse seems to vanish, reappearing in front of [enemy]. He fires off a series of rapid jabs, then a kick, then in an odd, somewhat off-putting move, thrusts his hips forward into [enemy]’s stomach, striking them with his dick. While they’re off-balance, he vanishes, reappearing in front of you. ");
+            outputText("Your corrupted mouse seems to vanish, reappearing in front of [themonster]. He fires off a series of rapid jabs, then a kick, then in an odd, somewhat off-putting move, thrusts his hips forward into [themonster]’s stomach, striking them with his dick. While they’re off-balance, he vanishes, reappearing in front of you. ");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedBlackLotus)) {
-            outputText("The tentacled creature lopes forward, jabbing at [enemy] with his arms. Two of his tendrils wrap around their legs, while the others slither up");
-            outputText("(If male) They jam into [enemy]’s ass, pumping a few times. Black Lotus licks his lips, withdrawing before they can throw him off.");
-            outputText("They prod at the entrance to [enemy]’s pussy and ass, Black Lotus licking his lips. [enemy] lashes out, and Black Lotus chuckles, withdrawing fast as lightning. ");
-            outputText("(If genderless or immune) They strike [enemy]’s undercarriage, to no effect. Seemingly frustrated, Black Lotus returns to your side. ");
+            outputText("The tentacled creature lopes forward, jabbing at [themonster] with his arms. Two of his tendrils wrap around their legs, while the others slither up");
+            outputText("(If male) They jam into [themonster]’s ass, pumping a few times. Black Lotus licks his lips, withdrawing before they can throw him off.");
+            outputText("They prod at the entrance to [themonster]’s pussy and ass, Black Lotus licking his lips. [themonster] lashes out, and Black Lotus chuckles, withdrawing fast as lightning. ");
+            outputText("(If genderless or immune) They strike [themonster]’s undercarriage, to no effect. Seemingly frustrated, Black Lotus returns to your side. ");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedFlamingBreakerFist)) {
-            outputText("Flaming Breaker fist lunges at [enemy], leaving a trail of flame in her wake. [enemy] reels back as she strikes once, twice, with her burning knuckles. ");
+            outputText("Flaming Breaker fist lunges at [themonster], leaving a trail of flame in her wake. [themonster] reels back as she strikes once, twice, with her burning knuckles. ");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedSpectreofSpite)) {
-            outputText("Your spectre floats towards [enemy], enveloping their body in smoke. ");
+            outputText("Your spectre floats towards [themonster], enveloping their body in smoke. ");
             outputText("(Success) Your foe stops to pleasure themselves, eyes wide. After a few seconds, they shudder, and your spectre emerges, seemingly thrown out. ");
             outputText("(Failure) Your foe shudders, but your spectre is unable to possess them.");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedLactaWarhammer)) {
-            outputText("Your Milky Monster rubs her milky breasts, getting close to [enemy] before letting loose a war cry. Raising her hammer high, she brings it down onto [enemy]. ");
+            outputText("Your Milky Monster rubs her milky breasts, getting close to [themonster] before letting loose a war cry. Raising her hammer high, she brings it down onto [themonster]. ");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedMilkyShieldmaiden)) {
             outputText("With a mix between a moo and a roar, your milky shieldmaiden rushes the enemy. ");
@@ -9851,50 +9853,50 @@ public class Combat extends BaseContent {
             outputText("");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedJealousSheWolf)) {
-            outputText("A small teacup appears beside your head. You take the cup, slugging the contents. Your mana and stamina are filling faster. Your she-wolf sprints at [enemy], slashing with her claws.");
+            outputText("A small teacup appears beside your head. You take the cup, slugging the contents. Your mana and stamina are filling faster. Your she-wolf sprints at [themonster], slashing with her claws.");
             outputText("(If you have other monsters out) She slashes even harder than usual, digging into the foe with wild abandon!");
             outputText("As your she-wolf jumps back to you, her tail wags happily.");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedAlchemicalElder)) {
-            outputText("With a squeak, your alchemical elder chucks a random vial on his workbench at [enemy]. ");
+            outputText("With a squeak, your alchemical elder chucks a random vial on his workbench at [themonster]. ");
             
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedSequesteredSiren)) {
-            outputText("Your siren dives towards [enemy], taking you with her. She lashes out with her talons, cutting gashes across [enemy]’s upper body!");
+            outputText("Your siren dives towards [themonster], taking you with her. She lashes out with her talons, cutting gashes across [themonster]’s upper body!");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedFinalFlamebearer)) {
-            outputText("Attack: Your draconic Flamebearer roars, swooping down on your foe. They grab [enemy] in their razor-sharp talons, then bring their maw in close, shooting a stream of flames into their face. ");
+            outputText("Attack: Your draconic Flamebearer roars, swooping down on your foe. They grab [themonster] in their razor-sharp talons, then bring their maw in close, shooting a stream of flames into their face. ");
         }
 if (player.hasStatusEffect(StatusEffects.MonsterSummonedFeatheredBroodmother)) {
-            outputText("Your broodmother leaps at [enemy], talons out…and lands a kiss on their lips, rubbing her pussy lips on them. They swipe at her, but your broodmother’s already moving, wings pumping. She lands back in front of you, ready to attack again. ");
+            outputText("Your broodmother leaps at [themonster], talons out…and lands a kiss on their lips, rubbing her pussy lips on them. They swipe at her, but your broodmother’s already moving, wings pumping. She lands back in front of you, ready to attack again. ");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedHarpyMatriarch)) {
-            outputText("Your harpy matriarch swoops down upon [enemy], grabbing them with her razor-sharp talons. She pulls her head in, kissing [enemy] before letting go, flying back to you.");
+            outputText("Your harpy matriarch swoops down upon [themonster], grabbing them with her razor-sharp talons. She pulls her head in, kissing [themonster] before letting go, flying back to you.");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedFeatheredHorde)) {
-            outputText("[enemy] is suddenly engulfed by a feathery storm! You hear muffled sounds from within the bunch, kissing, rubbing…A few even try to grab at them and pull them away, with no success. After a few seconds, they break off, circling you again. [Enemy] is covered in little lipstick marks. ");
+            outputText("[themonster] is suddenly engulfed by a feathery storm! You hear muffled sounds from within the bunch, kissing, rubbing…A few even try to grab at them and pull them away, with no success. After a few seconds, they break off, circling you again. [themonster] is covered in little lipstick marks. ");
             
         }
 if (player.hasStatusEffect(StatusEffects.MonsterSummonedArmouredGoo)) {
             outputText("");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedReluctantRebirther)) {
-            outputText("The Reluctant Rebirther reaches into her pouch, finding a blowpipe and several nasty-looking darts. She rapidly fires the darts at [enemy].");
+            outputText("The Reluctant Rebirther reaches into her pouch, finding a blowpipe and several nasty-looking darts. She rapidly fires the darts at [themonster].");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedShackledRat)) {
             outputText("");
         }
 if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
-            outputText("With many high pitched war cries, your little army charges [enemy]. Some shoot undersized darts, others rush in with tiny weapons. Individually, they don’t seem to be doing much, but they’re many, and [enemy] constantly has to watch their footing. ");
+            outputText("With many high pitched war cries, your little army charges [themonster]. Some shoot undersized darts, others rush in with tiny weapons. Individually, they don’t seem to be doing much, but they’re many, and [themonster] constantly has to watch their footing. ");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedMartyrMagician)) {
-            outputText("Your Martyr Magician spreads their fingers, sending a bolt of electricity arcing from their fingertips to [enemy]. You can feel the raw power…and a draining sensation. This power is sapping your health!");
+            outputText("Your Martyr Magician spreads their fingers, sending a bolt of electricity arcing from their fingertips to [themonster]. You can feel the raw power…and a draining sensation. This power is sapping your health!");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedLakeLibrarian)) {
-            outputText("Your Lake Librarian rushes at [enemy], deftly dodging their attempts to fend her off and sinking her teeth into them. She punches once, twice, before ripping her teeth off and away. ");
+            outputText("Your Lake Librarian rushes at [themonster], deftly dodging their attempts to fend her off and sinking her teeth into them. She punches once, twice, before ripping her teeth off and away. ");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedQueenUnderEarth)) {
-            outputText("The Queen Under the Earth motions imperiously, pointing at [enemy]. The ground trembles, and hundreds of small holes seemingly open from below. Ants, more like the ones from your home, pour from the holes, rushing at [enemy], covering them. A few moments pass, and your foe is covered in bites.");
+            outputText("The Queen Under the Earth motions imperiously, pointing at [themonster]. The ground trembles, and hundreds of small holes seemingly open from below. Ants, more like the ones from your home, pour from the holes, rushing at [themonster], covering them. A few moments pass, and your foe is covered in bites.");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedLactationDrowned)) {
             outputText("You feel the milk absorbing into your [skin]. Your injuries are knitting together! ");
@@ -9904,13 +9906,13 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
             outputText("");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedFetishMerchant)) {
-            outputText("Your summoned omnibus tackles [enemy], smothering their face in her breasts. She coos, her demonic dick rubbing between their legs. After a few seconds, your foe pushes her off, but the damage is already done. A small sigil glows on your foe’s body. ");
+            outputText("Your summoned omnibus tackles [themonster], smothering their face in her breasts. She coos, her demonic dick rubbing between their legs. After a few seconds, your foe pushes her off, but the damage is already done. A small sigil glows on your foe’s body. ");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedFriendlyFuckinFisherwoman)) {
             outputText("Your Friendly Fisherwoman heaves on her rod. From below [themonster], you see a large, spiny fish, pulled up as fast as any arrow would fly. It smacks [themonster] hard, bouncing back into your fisherwoman’s arms. ");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedHorseplaySentinel)) {
-            outputText("Your sentinel charges your foe, swinging her halberd. [enemy] tries to block, but her blade cuts deep. As she turns around, you can see [themonster] swooning slightly at the musk.");
+            outputText("Your sentinel charges your foe, swinging her halberd. [themonster] tries to block, but her blade cuts deep. As she turns around, you can see [themonster] swooning slightly at the musk.");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedCockHunter)) {
             outputText("");
@@ -9919,7 +9921,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
             outputText("");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedmountainscissors)) {
-            outputText("Your summoned goblin approaches [enemy] slowly, but pounces once she’s within range. Her scissors flash out like swords, leaving gashes on [enemy]’s body. ");
+            outputText("Your summoned goblin approaches [themonster] slowly, but pounces once she’s within range. Her scissors flash out like swords, leaving gashes on [themonster]’s body. ");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedEquineYogamaster)) {
             outputText("Your Yogamaster saunters in, before leaping into the air, kicking [themonster] hard. She lands quickly, landing two more solid strikes before leaping into a backflip, kicking [themonster] again and rolling backwards toward you. ");
@@ -9931,7 +9933,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
             outputText("");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedDivineMother)) {
-            outputText("Your Divine Mother advances, her ‘child’ behind her. She swings her halberd with both hands, and while [enemy] tries to block that, her ‘child’ leaps over her, landing on them. He claws their face, then leaps off as she swings her halberd once more. The two then step back, rejoining you. ");
+            outputText("Your Divine Mother advances, her ‘child’ behind her. She swings her halberd with both hands, and while [themonster] tries to block that, her ‘child’ leaps over her, landing on them. He claws their face, then leaps off as she swings her halberd once more. The two then step back, rejoining you. ");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedCorruptedKaiju)) {
             outputText("Your Kaiju makes lewd noises. You’re assuming from the angle of her arms that she’s jilling off, but you can’t see from back here. ");
@@ -9944,10 +9946,10 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
             outputText("The Pharaoh begins to fade, your power stretched thin. He turns, giving you a respectful salute before his body explodes into fragments of light. “Until you need me again, my friend.”");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedDriderLadyCorruptedSteel)) {
-            outputText("Your giant Drider lady silently charges at [enemy], arms outstretched. She rears back, and with the squeal of tortured steel, she strikes, a brutal warhammer of a fist striking [enemy] in the face. ");
+            outputText("Your giant Drider lady silently charges at [themonster], arms outstretched. She rears back, and with the squeal of tortured steel, she strikes, a brutal warhammer of a fist striking [themonster] in the face. ");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedDriderLadyManaWeaver)) {
-            outputText("Your Weaver shoots a braided strand of webbing at [enemy], the thick strands wrapping around them. She pulls, anchoring the silk to the ground. [enemy] will have a hard time moving with this silk dragging them down!");
+            outputText("Your Weaver shoots a braided strand of webbing at [themonster], the thick strands wrapping around them. She pulls, anchoring the silk to the ground. [themonster] will have a hard time moving with this silk dragging them down!");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedDriderLadyHuntressBound)) {
             outputText("As [themonster] attacks, your Bound huntress moves into their way, latching onto them. 

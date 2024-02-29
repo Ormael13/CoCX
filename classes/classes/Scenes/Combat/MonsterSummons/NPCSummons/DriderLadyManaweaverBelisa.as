@@ -6,8 +6,8 @@ import classes.Scenes.Combat.AbstractSummonMonster;
 import classes.Scenes.Combat.DamageType;
 import classes.StatusEffects;
 
-public class AlchemicalElderRalthazul extends AbstractSummonMonster {
-	public function AlchemicalElderRalthazul() {
+public class DriderLadyManaweaver extends AbstractSummonMonster {
+	public function DriderLadyManaweaver() {
 		super(
 			"",
 			"Summons your  to aid you in combat",
@@ -17,7 +17,7 @@ public class AlchemicalElderRalthazul extends AbstractSummonMonster {
 
     override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("Pure White strands of silk form beside you, making a cocoon nearly six feet tall. From within, six violet eyes peek out. The cocoon cracks, and a small Drider stands, her back legs tapping nervously. \n");
+			outputText("You place a stone card on your conduit. The device lights up, and pure White strands of silk form beside you, making a cocoon nearly six feet tall. From within, six violet eyes peek out. The cocoon cracks, and a small Drider stands, her back legs tapping nervously. \n");
 		}
 		
 	}
