@@ -494,7 +494,7 @@ public function BuyGel():void {
 		addButton(0,"Next", MouseTownRareGoods);
 		return;
 	}
-	outputText("Rum-Runner winces as you look at the Ebonblooms. <i>\"Those are without a doubt one of the most annoying plants I've encountered. Worth a pretty gem, but those caves are crawling with all kinds of nasty buggers, most of em best avoided.\"</i> He \n\n");
+	outputText("Rum-Runner winces as you look at the Ebonblooms. <i>\"Those are without a doubt one of the most annoying plants I've encountered. Worth a pretty gem, but those caves are crawling with all kinds of nasty buggers, most of em best avoided.\"\n\n");
 	player.gems -= 500;
 	statScreenRefresh();
 	inventory.takeItem(useables.EBONBLO, curry(MouseTownRareGoods));
