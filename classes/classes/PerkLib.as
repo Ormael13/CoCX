@@ -3,7 +3,6 @@
  */
 package classes
 {
-import classes.BodyParts.Arms;
 import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
@@ -4954,7 +4953,7 @@ public class PerkLib
             GigantGripSu.requireLevel(30)
                     .requireStr(140)
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.arms.isAny(Arms.DISPLACER, Arms.ANT, Arms.MOTH);//player.playerHasFourArms()
+                        return player.playerHasFourArms();
                     }, "Four arms")
                     .requirePerk(GigantGripEx);
             HalfStepToSuperiorTranquilness.requireStr(180)
