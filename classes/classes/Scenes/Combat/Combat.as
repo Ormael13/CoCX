@@ -9790,6 +9790,7 @@ public class Combat extends BaseContent {
         //Desert Summoner Spells
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedFluffBall)) {
             outputText("[themonster] comes in for an attack, but your fluffball jumps between you and [themonster]. Fur flies, your fluffball vanishing into shards of light. But the [themonster]  is thrown back, their attack foiled. ");
+            player.removeStatusEffect (StatusEffects.MonsterSummonedFluffBall);
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedWetNymph)) {
             outputText("Your Nymph slides forward, fingers slipping into her crotch and giving [themonster] a clear view of her gushing pussy. ");
