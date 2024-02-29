@@ -1401,7 +1401,7 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			player.butt.type = 12;
 			player.hips.type = 9;
 			player.createVagina();
-			player.vaginas[0].virgin = true;
+			player.vaginas[0].virgin = false;
 			player.libStat.train.value = 50;
 			player.tallness = 84;
 			player.gems += 100;

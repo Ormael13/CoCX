@@ -154,7 +154,7 @@ public class Changelog extends BaseContent
 			outputText("-Marilith sprite implementations. (Liadri)\n");
 			outputText("-Orca balls no longer deluded into thinking they're a dog dick. (Lord Shadeogorath)\n");
 			outputText("-In Tyrant State: You can delay your own defeat by Lust for two turns. Reducing your own Lust below the max will reset the timer. (30 training sessions with Tyrantia)\n");
-			outputText("-\n");
+			outputText("-Incels enemy in Demon Laboratory would end grapple after few turns and right after will wait at least 2 round to grapple again.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
