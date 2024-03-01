@@ -155,8 +155,8 @@ public class Changelog extends BaseContent
 			outputText("-Orca balls no longer deluded into thinking they're a dog dick. (Lord Shadeogorath)\n");
 			outputText("-In Tyrant State: You can delay your own defeat by Lust for two turns. Reducing your own Lust below the max will reset the timer. (30 training sessions with Tyrantia)\n");
 			outputText("-Incels enemy in Demon Laboratory would end grapple after few turns and right after will wait at least 2 round to grapple again.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New M. Special for Dracula/lina race: Shadow Teleport - Similar to displacer beast allow to temporarily dodge all attack for a short time (6 turns durtation and 10 turns cd, base cost 30 fatigue)\n");
+			outputText("-New passive for Dracula/lina race: Bat swarm - When in battle, bat familiars swarm around you, biting and wounding your foes. The blood spilled is shared back to you. (gives thirst stack(s) and regenerate up to 3% max HP per turn)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
