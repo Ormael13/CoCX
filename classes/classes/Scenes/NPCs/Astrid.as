@@ -56,7 +56,53 @@ public class Astrid extends Monster {
         this.tailType = Tail.MOTH_ABDOMEN;
         this.tailRecharge = 0;
         this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
-
+        checkMonster();
     }
+    //Gold Dust
+    //Effect: Blinding you for 2 turns
+    //Tooltip:You become blinded
+    //Battle Text:The Moth Girl flaps her wings, giggling as she does so and gold dust flies towards you, causing you to go temporarily blind. (not dodgeable
+    private function GoldDustAttack() {
+        outputText("The Moth Girl flaps her wings, giggling as she does so and gold dust flies towards you, causing you to go temporarily blind. ");
+        player.createStatusEffect(StatusEffects.Blind, 2, 0, 0, 0);
+    }
+    //Grapple
+    //Effect: You are unable to do anything but struggle.
+    //Tooltip:You can't attack or escape, only struggle.
+    //Battle Text:She flaps her wings and grabs a hold of you, straddling you as she does.
+    private function GrappleAttack() {
+        outputText("She flaps her wings and grabs a hold of you, straddling you as she does.");
+        player.createStatusEffect(StatusEffects.Constricted, 0, 0, 0, 0);
+    }
+    //
+    //Lust attacks
+    //Effect: your lust increases.
+    //Tooltip: just a variant of the lust attack
+    //Battle Text: Flying high and doing a seductive dance in the air, she is rocking her hips side to side as she moves her arms over her breasts and across her tummy and legs, looking at you with do me eyes.
+    private function MothLusterAttack() {
+        outputText("Flying high and doing a seductive dance in the air, she is rocking her hips side to side as she moves her arms over her breasts and across her tummy and legs, looking at you with do me eyes.");
+        player.dynStats("lus", 10);
+    }
+    override protected function performCombatAction():void
+    {
+        //randomly choose which attack to proc
+        var choice:Number = rand(3);
+        if (choice == 0) {
+            GoldDustAttack();
+        } else if (choice == 1) {
+            GrappleAttack();
+        } else {
+            MothLusterAttack();
+        }
+    }
+    override public function defeated(hpVictory:Boolean):void
+    {
+        SceneLib.astridFollower.astridDefeated();
+    }
+    override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+    {
+        SceneLib.astridFollower.astridWon();
+    }
+
 }
 }
