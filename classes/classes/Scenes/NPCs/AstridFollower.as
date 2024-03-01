@@ -30,5 +30,20 @@ package classes.Scenes.NPCs
 		outputText("thanking her for her offer to help you and give you company as you return to camp.");
 		addButton(1, "Return to Camp", endEncounter);
 	}
-}
+
+		//Win Scene: the moth girl falls on her back,
+		// a panting mess, as you approach you decide to give her a taste of her own medicine,
+		// you rub your foot on her pussy causing her to cry out in ecstasy as you continue to rub against her clit before you remove your pants and expose your dick/vagina and stroke/rub yourself as you torment the fallen moth girl before reaching orgasm and covering her in your cum/juices, smiling as the moth girl lays on the ground panting while covered in your cum/love juices you pull your pants back up and return to camp.
+		public function astridDefeated():void {
+			clearOutput();
+			outputText("the moth girl falls on her back, a panting mess, as you approach you decide to give her a taste of her own medicine, you rub your foot on her pussy causing her to cry out in ecstasy as you continue to rub against her clit before you remove your pants and expose your dick/vagina and stroke/rub yourself as you torment the fallen moth girl before reaching orgasm and covering her in your cum/juices, smiling as the moth girl lays on the ground panting while covered in your cum/love juices you pull your pants back up and return to camp.\n");
+			cleanupAfterCombat();
+		}
+		//Loss Scene: you fall to the ground a panting mess as the moth girl approaches you and rubs her feet against your sex, she looks down at you with a mischievous smile before flying away leaving you hard as she giggles mockingly. You are left alone without release.
+		public function astridWon():void {
+			clearOutput();
+			outputText("you fall to the ground a panting mess as the moth girl approaches you and rubs her feet against your sex, she looks down at you with a mischievous smile before flying away leaving you hard as she giggles mockingly. You are left alone without release.");
+			cleanupAfterCombat();
+		}
+	}
 }
