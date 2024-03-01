@@ -866,7 +866,7 @@ public class MagicSpecials extends BaseCombatContent {
 			} else {
 				bd = buttons.add("TyrantState(On)", activaterTyrantState).hint("Strain your body to its limit to increase melee damage dealt by "+boost+"% at the cost of getting horny. This also decrease physical resistance.");
 			}
-			if (player.hasStatusEffect(StatusEffects.TyrantState) && TyrantiaFollower.TyrantiaTrainingSessions >= 15) {
+			if (TyrantiaFollower.TyrantiaTrainingSessions >= 15) {
 				bd = buttons.add("False Weapon", activaterFalseWeapon).hint("Create False weapon based on currently wielded melee weapon to attack each time you attack with it. Deals 20% dmg (Phalluspear False Weapon deals 100%).");
 				bd.requireFatigue(physicalCost(100));
 				if (player.lust < Math.round(player.maxLust() * 0.1)) {
@@ -911,6 +911,13 @@ public class MagicSpecials extends BaseCombatContent {
 			bd.requireFatigue(physicalCost(30));
 			if (player.hasStatusEffect(StatusEffects.CooldownEveryAndNowhere)) {
 				bd.disable("You need more time before you can use Everywhere and nowhere again.\n\n");
+			}
+		}
+		if (player.isRaceCached(Races.DRACULA)) {
+			bd = buttons.add("ShadowTeleport", ShadowTeleport).hint("Periodically phase out of reality increasing your invasion as well as granting you the ability to surprise your opponent denying their defences.  \n\nWould go into cooldown after use for: "+(player.hasPerk(PerkLib.NaturalInstincts) ? "9":"10")+" rounds");
+			bd.requireFatigue(physicalCost(30));
+			if (player.hasStatusEffect(StatusEffects.CooldownShadowTeleport)) {
+				bd.disable("You need more time before you can use Shadow Teleport again.\n\n");
 			}
 		}
 		if (player.isRaceCached(Races.FAIRY)) {
@@ -3555,6 +3562,16 @@ public class MagicSpecials extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.EverywhereAndNowhere,6,0,0,0);
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.EverywhereAndNowhere,9,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownEveryAndNowhere,10,0,0,0);
+		enemyAI();
+	}
+
+	public function ShadowTeleport():void {
+		clearOutput();
+		fatigue(30, USEFATG_PHYSICAL);
+		outputText("You begin to use vampire power in order to displace yourself between shadows this is only going to last for a short time but let them try and hurt you meanwhile.\n\n");
+		player.createStatusEffect(StatusEffects.ShadowTeleport,6,0,0,0);
+		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.ShadowTeleport,9,0,0,0);
+		else player.createStatusEffect(StatusEffects.CooldownShadowTeleport,10,0,0,0);
 		enemyAI();
 	}
 

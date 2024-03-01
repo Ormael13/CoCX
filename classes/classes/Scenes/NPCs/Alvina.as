@@ -195,7 +195,7 @@ public class Alvina extends Monster
 			outputText("all pointing in your direction. There's so many of them you don't believe you'd be able to dodge everything, if you could dodge at all!\n\n");
 			outputText("\"<i>Let's see if this is your limit [name]. Will you be found wanting?</i>\"\n\n");
 			outputText("Alvina snaps her finger again and all the blades suddenly converge in your direction!\n\n");
-			if (player.hasStatusEffect(StatusEffects.EverywhereAndNowhere)) {
+			if (player.hasStatusEffect(StatusEffects.EverywhereAndNowhere) || player.hasStatusEffect(StatusEffects.ShadowTeleport)) {
 				outputText("Little does she know that you have the ability to completely remove yourself from existence if only for a brief moment thanks to "
 						+ "being everywhere and nowhere at the same time, a living paradox"
 						+ ". You are barely conscious of the blades colliding together at your previous position with a deafening crash as you appear a few yards away!\n\n");

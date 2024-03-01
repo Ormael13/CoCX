@@ -9598,7 +9598,7 @@ public class Combat extends BaseContent {
                 else if (player.perkv1(IMutationsLib.EclipticMindIM) >= 3 && monster.cor > player.cor / 2) damage = Math.round(damage * 3);
 				damage *= fireDamageBoostedByDao();
                 damage = Math.round(damage);
-                damage = combat.fixPercentDamage(damage);
+                damage = fixPercentDamage(damage);
                 outputText("Your aura of purity burns [themonster] with holy fire for ");
                 doFireDamage(damage, true, true);
                 outputText(" damage!");
@@ -9618,10 +9618,8 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= RacialParagonAbilityBoost();
             if (player.perkv1(IMutationsLib.EclipticMindIM) >= 2 && monster.cor < (player.cor / 2)) lustDmg = Math.round(lustDmg * 2);
             else if (player.perkv1(IMutationsLib.EclipticMindIM) >= 3 && monster.cor < (player.cor / 2)) lustDmg = Math.round(lustDmg * 3);
-
             outputText("[Themonster] slowly succumbs to [monster his] basest desires as your aura of corruption seeps through [monster him]. ");
             if (monster.cor < 100) outputText("Your victims purity is slowly becoming increasingly eroded by your seeping corruption. ");
-            
             lustDmg *= monster.lustVuln;
             lustDmg = combat.fixPercentLust(lustDmg);
             monster.teased(Math.round(lustDmg), false);
@@ -9642,7 +9640,6 @@ public class Combat extends BaseContent {
                 if (!monster.plural) outputText("The effects of your pollen are quite pronounced on [themonster] as [monster he] begin to shake, occasionally stealing glances at your body. ");
                 else outputText("The effects of your pollen are quite pronounced on [themonster] as [monster he] begin to shake, stealing glances at your body. ");
             }
-            
             var lustDmgA:Number = (scalingBonusLibido() * 0.5);
             lustDmgA = teases.teaseAuraLustDamageBonus(monster, lustDmgA);
             if (player.hasPerk(PerkLib.RacialParagon)) lustDmgA *= RacialParagonAbilityBoost();
@@ -9655,7 +9652,6 @@ public class Combat extends BaseContent {
                 if (rand(100) > 69) monster.createStatusEffect(StatusEffects.Fascinated,0,0,0,0);
                 lustDmgA *= 1.3;
             }
-
             lustDmgA *= monster.lustVuln;
             lustDmgA = combat.fixPercentLust(lustDmgA);
             monster.teased(Math.round(lustDmgA), false);
@@ -9680,17 +9676,13 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.RacialParagon)) damage0 *= RacialParagonAbilityBoost();
             damage0 = Math.round(damage0);
             dynStats("lus", (Math.round(player.maxLust() * 0.02)), "scale", false);
-            
             var lustDmgF:Number = (scalingBonusLibido() * 0.1 + scalingBonusIntelligence() * 0.1);
             var lustBoostToLustDmg:Number = lustDmgF * 0.01;
-            
             lustDmgF = teases.teaseAuraLustDamageBonus(monster, lustDmgF);
             if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= RacialParagonAbilityBoost();
-            
             if (player.lust100 * 0.01 >= 0.9) lustDmgF += (lustBoostToLustDmg * 140);
             else if (player.lust100 * 0.01 < 0.2) lustDmgF += (lustBoostToLustDmg * 140);
             else lustDmgF += (lustBoostToLustDmg * 2 * (20 - (player.lust100 * 0.01)));
-            
             //Determine if critical tease!
             var crit2:Boolean = false;
             var critChance2:int = 5;
@@ -9700,7 +9692,6 @@ public class Combat extends BaseContent {
                 crit2 = true;
                 lustDmgF *= 1.75;
             }
-
             lustDmgF = lustDmgF * monster.lustVuln;
             lustDmgF = Math.round(lustDmgF);
             outputText("Your opponent is struck by lightning as your lust storm rages on.")
@@ -9709,7 +9700,6 @@ public class Combat extends BaseContent {
             monster.teased(lustDmgF, false);
             if (crit2) outputText(" <b>Critical!</b>");
             outputText(" as a bolt falls from the sky!\n\n");
-
             if (player.hasPerk(PerkLib.EromancyMaster)) teaseXP(1 + bonusExpAfterSuccesfullTease());
             if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3){
                 if (rand(100) < 10) {
@@ -9786,6 +9776,41 @@ public class Combat extends BaseContent {
             } else {
                 outputText("Your opponent seems not to be affected by the cold of your aura of black frost. Probably because [monster he] is immune to the cold's effects.");
             }
+        }
+		//Bat swarm
+        if (player.isRaceCached(Races.DRACULA) && !flags[kFLAGS.DISABLE_AURAS]) {
+            var damageBS:Number = scalingBonusIntelligence();
+            //Determine if critical hit!
+            var crit4:Boolean = false;
+            var critChance5:int = 5;
+            critChance5 += combatMagicalCritical();
+            if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance5 = 0;
+            if (rand(100) < critChance5) {
+                crit4 = true;
+                damageBS *= 1.75;
+            }
+            damageBS *= 0.5;
+            var SpellMultiplierBS:Number = 1;
+            SpellMultiplierBS += spellMod() - 1;
+            damageBS *= SpellMultiplierBS;
+            if (player.hasPerk(PerkLib.RacialParagon)) damageBS *= RacialParagonAbilityBoost();
+            damageBS = Math.round(damageBS);
+            damageBS = fixPercentDamage(damageBS);
+            outputText("The cloud of bat surrounding you bite and scratch at your opponent"+(monster.plural?"s":"")+" viciously harvesting its lifeblood wich you promptly take onto yourself with your fiendish magic. ");
+            doPhysicalDamage(damageBS, true, true);
+            outputText(" damage!");
+            if (crit4) outputText(" <b>*Critical Hit!*</b>");
+            outputText("\n\n");
+			var dmg002:Number = damageBS;
+			if (dmg002 > Math.round(player.maxHP() * 0.03)) dmg002 = Math.round(player.maxHP() * 0.03);
+			HPChange(dmg002, true);
+			var thirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
+			var drinked:Number = 1;
+			if (player.perkv1(IMutationsLib.HollowFangsIM) >= 3) drinked += 1;
+			if (player.perkv1(IMutationsLib.HollowFangsIM) >= 4) drinked += 3;
+			if (player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 4) drinked *= 2;
+			if (player.hasPerk(PerkLib.BloodMastery)) drinked *= 2;
+			thirst.drink(drinked);
         }
         //Plant Growth
         if (player.hasStatusEffect(StatusEffects.PlantGrowth) && monster.lustVuln > 0) {
@@ -10326,6 +10351,13 @@ public class Combat extends BaseContent {
                 outputText("<b>Everywhere and nowhere effect ended!</b>\n\n");
             } else player.addStatusValue(StatusEffects.EverywhereAndNowhere, 1, -1);
         }
+        //Shadow Teleport
+        if (player.hasStatusEffect(StatusEffects.ShadowTeleport)) {
+            if (player.statusEffectv1(StatusEffects.ShadowTeleport) <= 0) {
+                player.removeStatusEffect(StatusEffects.ShadowTeleport);
+                outputText("<b>You sense your shadow teleport approaching its limit as the spell ends.</b>\n\n");
+            } else player.addStatusValue(StatusEffects.ShadowTeleport, 1, -1);
+        }
 		//Blackout
         if (player.hasStatusEffect(StatusEffects.Blackout)) {
             if (player.statusEffectv1(StatusEffects.Blackout) <= 0) {
@@ -10418,6 +10450,14 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.CooldownEveryAndNowhere);
             } else {
                 player.addStatusValue(StatusEffects.CooldownEveryAndNowhere, 1, -1);
+            }
+        }
+        //Shadow Teleport
+        if (player.hasStatusEffect(StatusEffects.CooldownShadowTeleport)) {
+            if (player.statusEffectv1(StatusEffects.CooldownShadowTeleport) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownShadowTeleport);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownShadowTeleport, 1, -1);
             }
         }
         //Flicker

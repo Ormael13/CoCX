@@ -2646,7 +2646,7 @@ use namespace CoC;
 			//Berseking reduces lust gains by 10%
 			if (hasStatusEffect(StatusEffects.Berzerking)) lust *= 0.9;
 			if (CombatAbilities.Overlimit.isActive() || CombatAbilities.FieryRage.isActive()) lust *= 0.9;
-			if (hasStatusEffect(StatusEffects.TyrantState) && TyrantiaFollower.TyrantiaTrainingSessions >= 25 && lust100 >= 50) {
+			if (TyrantiaFollower.TyrantiaTrainingSessions >= 25 && lust100 >= 50) {
 				if (lust100 >= 100) lust *= 0.3;
 				else if (lust100 >= 51) lust *= (1 - ((lust100 - 30) * 0.01));
 				else lust *= 0.8;
@@ -3208,7 +3208,7 @@ use namespace CoC;
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
 			if (hasStatusEffect(StatusEffects.TyrantState)) mult += 20;
-			if (hasStatusEffect(StatusEffects.TyrantState) && TyrantiaFollower.TyrantiaTrainingSessions >= 25 && lust100 >= 50) {
+			if (TyrantiaFollower.TyrantiaTrainingSessions >= 25 && lust100 >= 50) {
 				mult -= 20;
 				if (lust100 >= 51) {
 					if (lust100 >= 100) mult -= 50;
@@ -3900,6 +3900,12 @@ use namespace CoC;
 				chance += disDodgeChance;
 			}
 
+			if (isRace(Races.DRACULA)) {
+				var draDodgeChance:int = 30;
+				if (hasStatusEffect(StatusEffects.ShadowTeleport)) draDodgeChance += 50;
+				chance += draDodgeChance;
+			}
+
 			chance += super.getEvasionChance();
 			if (hasStatusEffect(StatusEffects.GreenCovenant) || canAutoHit()) chance = 0;
 			return chance;
@@ -3953,6 +3959,12 @@ use namespace CoC;
 				var disDodgeChance:int = 30;
 				if (hasStatusEffect(StatusEffects.Displacement)) disDodgeChance += 50;
 				dodgeArray.push([disDodgeChance, EVASION_DISPLACING]);
+			}
+
+			if (isRace(Races.DRACULA)) {
+				var dreDodgeChance:int = 30;
+				if (hasStatusEffect(StatusEffects.ShadowTeleport)) dreDodgeChance += 50;
+				dodgeArray.push([dreDodgeChance, EVASION_PHASING]);
 			}
 
 			if (!evasionReason) evasionReason = super.getEvasionReason(considerBlindSpeed, attackSpeed, hitModifier, dodgeArray);
@@ -5754,6 +5766,9 @@ use namespace CoC;
 			}
 			if(hasStatusEffect(StatusEffects.EverywhereAndNowhere)) {
 				removeStatusEffect(StatusEffects.EverywhereAndNowhere);
+			}
+			if(hasStatusEffect(StatusEffects.ShadowTeleport)) {
+				removeStatusEffect(StatusEffects.ShadowTeleport);
 			}
 			if(hasStatusEffect(StatusEffects.Displacement)) {
 				removeStatusEffect(StatusEffects.Displacement);
