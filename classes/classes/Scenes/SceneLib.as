@@ -348,5 +348,7 @@ public class SceneLib {
     public static var holidays:Holidays = new Holidays();
 
     public static var werewolfFemaleScene:WerewolfFemaleScene = new WerewolfFemaleScene();
+
+    public static var astridFollower:AstridFollower = new AstridFollower();
 }
 }
