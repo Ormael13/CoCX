@@ -21,7 +21,7 @@ package classes.Items.Weapons
 		
 		override public function get attack():Number {
 			var boost:int = 0;
-			if (game.player.str >= 80) boost += 12;
+			if (game.player.str >= 80 || game.player.hasPerk(PerkLib.HiddenJobSwordImmortal)) boost += 12;
 			return (12 + boost); 
 		}	
 	}

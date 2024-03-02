@@ -1020,7 +1020,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		clearOutput();
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		if (player.fatigue + physicalCost(50) > player.maxFatigue()) {
+		if (player.fatigue + physicalCost(50) > player.maxOverFatigue()) {
 			outputText("You are too tired to attack [themonster].");
 			addButton(0, "Next", combatMenu, false);
 			return;
@@ -1090,7 +1090,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function sneakAttack():void {
 		clearOutput();
-		if ((player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(40) > player.maxFatigue())) || (!player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(20) > player.maxFatigue()))) {
+		if ((player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(40) > player.maxOverFatigue())) || (!player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(20) > player.maxOverFatigue()))) {
 			clearOutput();
 			outputText("You're too fatigued to use sneak attack!");
 			menu();
@@ -1326,7 +1326,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function sneakAttackRange():void {
 		clearOutput();
-		if (player.fatigue + physicalCost(20) > player.maxFatigue()) {
+		if (player.fatigue + physicalCost(20) > player.maxOverFatigue()) {
 			clearOutput();
 			outputText("You're too fatigued to use sneak attack!");
 			menu();
@@ -1531,7 +1531,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function whirlwind():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		if (player.fatigue + physicalCost(50) > player.maxFatigue()) {
+		if (player.fatigue + physicalCost(50) > player.maxOverFatigue()) {
 			outputText("You are too tired to attack [themonster].");
 			addButton(0, "Next", combatMenu, false);
 			return;
@@ -1612,7 +1612,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.DL_WHIP) flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		else flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		if (player.fatigue + physicalCost(50) > player.maxFatigue()) {
+		if (player.fatigue + physicalCost(50) > player.maxOverFatigue()) {
 			outputText("You are too tired to attack [themonster].");
 			addButton(0, "Next", combatMenu, false);
 			return;
@@ -1687,7 +1687,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function whirlwindClaws():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		if (player.fatigue + physicalCost(50) > player.maxFatigue()) {
+		if (player.fatigue + physicalCost(50) > player.maxOverFatigue()) {
 			outputText("You are too tired to attack [themonster].");
 			addButton(0, "Next", combatMenu, false);
 			return;
@@ -3558,7 +3558,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function scyllaGrapple():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		if(player.fatigue + physicalCost(10) > player.maxFatigue()) {
+		if(player.fatigue + physicalCost(10) > player.maxOverFatigue()) {
 			clearOutput();
 			outputText("You just don't have the energy to wrap your tentacles so tightly around someone right now...");
 			//Gone		menuLoc = 1;
@@ -3602,7 +3602,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function whipGrapple():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		if(player.fatigue + physicalCost(10) > player.maxFatigue()) {
+		if(player.fatigue + physicalCost(10) > player.maxOverFatigue()) {
 			clearOutput();
 			outputText("You just don't have the energy to wrap your "+(player.weapon == weapons.D_FLAIL?"flail":"whip")+" so tightly around someone right now...");
 			//Gone		menuLoc = 1;
@@ -3648,7 +3648,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			addButton(0, "Next", combatMenu, false);
 		}
 		else{
-			if(player.fatigue + physicalCost(10) > player.maxFatigue()) {
+			if(player.fatigue + physicalCost(10) > player.maxOverFatigue()) {
 				clearOutput();
 				outputText("You just don't have the energy to start playing right now...");
 				//Gone		menuLoc = 1;
@@ -3763,7 +3763,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function gooEngulf():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		if(player.fatigue + physicalCost(10) > player.maxFatigue()) {
+		if(player.fatigue + physicalCost(10) > player.maxOverFatigue()) {
 			clearOutput();
 			outputText("You just don't have the energy to engulf yourself around someone right now...");
 			//Gone		menuLoc = 1;
@@ -3804,7 +3804,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function vampireEmbrace():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		if(player.fatigue + physicalCost(10) > player.maxFatigue()) {
+		if(player.fatigue + physicalCost(10) > player.maxOverFatigue()) {
 			clearOutput();
 			outputText("You're too tired to wrap your wings around enemy!");
 			//Gone		menuLoc = 1;
@@ -3838,7 +3838,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function catPounce():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		if (player.fatigue + physicalCost(10) > player.maxFatigue()) {
+		if (player.fatigue + physicalCost(10) > player.maxOverFatigue()) {
 			clearOutput();
 			outputText("You just don't have the energy to pounce at anyone right now...");
 			//Gone		menuLoc = 1;
@@ -3878,7 +3878,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function arigeanCrunch():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		if (player.fatigue + physicalCost(100) > player.maxFatigue()) {
+		if (player.fatigue + physicalCost(100) > player.maxOverFatigue()) {
 			clearOutput();
 			outputText("You just don't have the energy to crunch at anyone right now...");
 			//Gone		menuLoc = 1;
@@ -3963,7 +3963,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function arigeanRam():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		if (player.fatigue + physicalCost(100) > player.maxFatigue()) {
+		if (player.fatigue + physicalCost(100) > player.maxOverFatigue()) {
 			clearOutput();
 			outputText("You just don't have the energy to ram anyone right now...");
 			//Gone		menuLoc = 1;
@@ -4006,7 +4006,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function bearGrab():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		if (player.fatigue + physicalCost(10) > player.maxFatigue()) {
+		if (player.fatigue + physicalCost(10) > player.maxOverFatigue()) {
 			clearOutput();
 			outputText("You just don't have the energy to grab at anyone right now...");
 			//Gone		menuLoc = 1;
@@ -4047,7 +4047,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function bearSlam():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		if ((player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(60) > player.maxFatigue())) || (!player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(30) > player.maxFatigue()))) {
+		if ((player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(60) > player.maxOverFatigue())) || (!player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(30) > player.maxOverFatigue()))) {
 			clearOutput();
 			outputText("You just don't have the energy to slap anyone right now...");
 			//Gone		menuLoc = 1;
@@ -4142,7 +4142,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function skyPounce():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		if ((player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(20) > player.maxFatigue())) || (!player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(10) > player.maxFatigue()))) {
+		if ((player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(20) > player.maxOverFatigue())) || (!player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(10) > player.maxOverFatigue()))) {
 			clearOutput();
 			outputText("You just don't have the energy to grapple with anyone right now...");
 			//Gone		menuLoc = 1;
@@ -4492,7 +4492,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
 		//FATIIIIGUE
-		if(player.fatigue + physicalCost(100) > player.maxFatigue()) {
+		if(player.fatigue + physicalCost(100) > player.maxOverFatigue()) {
 			clearOutput();
 			outputText("You just don't have the energy to bite something right now...");
 //Pass false to combatMenu instead:		menuLoc = 1;
@@ -4677,7 +4677,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		if ((player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(50) > player.maxFatigue())) || (!player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(25) > player.maxFatigue()))) {
+		if ((player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(50) > player.maxOverFatigue())) || (!player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(25) > player.maxOverFatigue()))) {
 			outputText("You're too fatigued to use a charge attack!");
 			menu();
 			addButton(0, "Next", combatMenu, false);
@@ -4822,7 +4822,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		if ((player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(50) > player.maxFatigue())) || (!player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(25) > player.maxFatigue()))) {
+		if ((player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(50) > player.maxOverFatigue())) || (!player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(25) > player.maxOverFatigue()))) {
 			outputText("You're too fatigued to use a charge attack!");
 			menu();
 			addButton(0, "Next", combatMenu, false);
@@ -5368,7 +5368,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 // (Similar to the bow attack, high damage but it raises your fatigue).
 	public function bite():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
-		if ((player.fatigue + physicalCost(50) > player.maxFatigue()) && player.perkv1(IMutationsLib.SharkOlfactorySystemIM) < 2 && player.faceType != Face.SHARK_TEETH && player.faceType != Face.ABYSSAL_SHARK) {
+		if ((player.fatigue + physicalCost(50) > player.maxOverFatigue()) && player.perkv1(IMutationsLib.SharkOlfactorySystemIM) < 2 && player.faceType != Face.SHARK_TEETH && player.faceType != Face.ABYSSAL_SHARK) {
 			clearOutput();
 			if (player.faceType == Face.SHARK_TEETH || player.faceType == Face.ABYSSAL_SHARK) outputText("You're too fatigued to use your shark-like jaws!");
 			if (player.faceType == Face.ORCA) outputText("You're too fatigued to use your orca-like jaws!");
@@ -5508,7 +5508,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function kick():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		if ((player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(40) > player.maxFatigue())) || (!player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(20) > player.maxFatigue()))) {
+		if ((player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(40) > player.maxOverFatigue())) || (!player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(20) > player.maxOverFatigue()))) {
 			clearOutput();
 			outputText("You're too fatigued to use a charge attack!");
 			menu();
@@ -5840,7 +5840,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (maxRangedAttacks >= 6) costSidewinder += 5;
 		else costSidewinder += (maxRangedAttacks - 1);
 
-		if (player.fatigue + bowCost(200 * costSidewinder) > player.maxFatigue()) {
+		if (player.fatigue + bowCost(200 * costSidewinder) > player.maxOverFatigue()) {
 			outputText("You are too tired to attack [themonster].");
 			addButton(0, "Next", combatMenu, false);
 			return;
@@ -6051,7 +6051,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var maxBowAttacks:int = combat.maxBowAttacks();
 		flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = maxBowAttacks;
 		clearOutput();
-		if (player.fatigue + bowCost(200) > player.maxFatigue()) {
+		if (player.fatigue + bowCost(200) > player.maxOverFatigue()) {
 			outputText("You are too tired to attack [themonster].");
 			addButton(0, "Next", combatMenu, false);
 			return;
@@ -6091,7 +6091,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else archerBarrage2();
 	}
 	private function archerBarrage2():void {
-		if (player.fatigue + bowCost(200) > player.maxFatigue()) {
+		if (player.fatigue + bowCost(200) > player.maxOverFatigue()) {
 			outputText("You are too tired to shoot next volley of arrows.");
 			enemyAI();
 			return;

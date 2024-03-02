@@ -331,21 +331,21 @@ public function siegweirdCampStudy():void
 			outputText("\"<i>Yes, that should do, you seem to be ready for the next step, however, you should first purge your mind of corruption entirely.</i>\"\n\n");
 			player.createStatusEffect(StatusEffects.SiegweirdTraining, 0, 0, 0, 0);
 			dynStats("inte", 10, "cor", -3);
-			player.fatigue = player.maxFatigue();
+			player.fatigue = player.maxOverFatigue();
 			flags[kFLAGS.SIEGWEIRD_FOLLOWER] = 7;
 		}
 		else if (player.inte > 50 && flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 5) {
 			outputText("A few pieces was a literal joke on the bear’s part, what he displayed was nothing short of his full inventory! You spend the entire day enchanting armor pieces and weapons. It's quite an exhausting task but you eventually finish enchanting the last item. You feel yourself growing better each time you try. Siegweird examines your progress and nods. \n\n");
 			outputText("\"<i>Great job so far but you can still improve. Come back again when you are rested, then we can resume the training.</i>\"\n\n");
 			dynStats("inte", 7, "cor", -2);
-			player.fatigue = player.maxFatigue();
+			player.fatigue = player.maxOverFatigue();
 			flags[kFLAGS.SIEGWEIRD_FOLLOWER] = 6;
 		}
 		else {
 			outputText("A few pieces was a literal joke on the bear’s part, what he displayed was nothing short of his full inventory! You spend the entire day enchanting armor pieces and weapons. It's quite an exhausting task and truth be told, you ran out of energy way before you were finished enchanting the last piece of gear.\n\n");
 			outputText("\"<i>You are only starting so it's normal that you are exhausted. Come back again when you are rested, then we can resume the training.</i>\"\n\n");
 			dynStats("inte", 4, "cor", -1);
-			player.fatigue = player.maxFatigue();
+			player.fatigue = player.maxOverFatigue();
 			flags[kFLAGS.SIEGWEIRD_FOLLOWER] = 5;
 		}
 		explorer.stopExploring();

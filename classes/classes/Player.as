@@ -4586,6 +4586,8 @@ use namespace CoC;
 				hiddenJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobGreySage))
 				hiddenJobs1++;
+			if (hasPerk(PerkLib.HiddenJobSwordImmortal))
+				hiddenJobs1++;
 			return hiddenJobs1;
 		}
 		public function maxHiddenJobs():Number {
@@ -7624,4 +7626,4 @@ use namespace CoC;
 			}
 		}		
 	}
-}
+}

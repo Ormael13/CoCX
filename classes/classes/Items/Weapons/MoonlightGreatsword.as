@@ -5,6 +5,7 @@
 package classes.Items.Weapons 
 {
 	import classes.Items.Weapon;
+	import classes.PerkLib;
 	import classes.Player;
 
 	public class MoonlightGreatsword extends Weapon
@@ -17,8 +18,11 @@ package classes.Items.Weapons
 		
 		override public function get attack():Number {
 			var boost:int = 0;
-			if (game.player.str >= 50) boost += 10;
-			if (game.player.str >= 25) boost += 10;
+			if (game.player.hasPerk(PerkLib.HiddenJobSwordImmortal)) boost += 20;
+			else {
+				if (game.player.str >= 50) boost += 10;
+				if (game.player.str >= 25) boost += 10;
+			}
 			return (5 + boost); 
 		}
 	}

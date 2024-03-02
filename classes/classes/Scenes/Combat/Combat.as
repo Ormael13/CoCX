@@ -4370,7 +4370,7 @@ public class Combat extends BaseContent {
     public function reloadWeapon1():void {
         clearOutput();
         reloadWeapon();
-        if (player.fatigue + (oneBulletReloadCost() * player.ammo) > player.maxFatigue()) {
+        if (player.fatigue + (oneBulletReloadCost() * player.ammo) > player.maxOverFatigue()) {
             outputText(" You are too tired to act in this round after reloading your weapon.\n\n");
             player.fatigue += (oneBulletReloadCost() * player.ammo);
             enemyAIImpl();
@@ -4388,7 +4388,7 @@ public class Combat extends BaseContent {
 
     public function reloadWeapon2():void {
         reloadWeapon();
-        if (player.fatigue + (oneBulletReloadCost() * player.ammo) > player.maxFatigue()) {
+        if (player.fatigue + (oneBulletReloadCost() * player.ammo) > player.maxOverFatigue()) {
             outputText("You are too tired to keep shooting in this round after reloading your weapon.\n\n");
             player.fatigue += (oneBulletReloadCost() * player.ammo);
             enemyAIImpl();
@@ -4597,7 +4597,7 @@ public class Combat extends BaseContent {
     public function seconwindGo():void {
         clearOutput();
         outputText("You enter your second wind, recovering your energy.\n\n");
-        fatigue((player.maxFatigue() - player.fatigue) / 2);
+        fatigue((player.maxOverFatigue() - player.fatigue) / 2);
         player.createStatusEffect(StatusEffects.SecondWindRegen, 10, 0, 0, 0);
         player.createStatusEffect(StatusEffects.CooldownSecondWind, 0, 0, 0, 0);
         enemyAIImpl();
@@ -5681,7 +5681,13 @@ public class Combat extends BaseContent {
         if (weaponSize == 1) Mastery_bonus_damage += 0.01 * weaponSizeNormal();
         if (weaponSize == 2) Mastery_bonus_damage += 0.01 * weaponSizeLarge();
         if (weaponSize == 3) Mastery_bonus_damage += 0.01 * weaponSizeMassive();
+		if (compatibileSwordImmortalWeapons() && player.hasPerk(PerkLib.HiddenJobSwordImmortal)) Mastery_bonus_damage *= 2;
 		return Mastery_bonus_damage;
+	}
+	
+	public function compatibileSwordImmortalWeapons():Boolean {
+		if (player.isSwordTypeWeapon() || player.isDuelingTypeWeapon() || player.isDaggerTypeWeapon()) return true;
+		else return false;
 	}
 
     /*
@@ -5798,6 +5804,7 @@ public class Combat extends BaseContent {
     private function meleeMasteryGain(hit:int, crit:int):void{
         var baseMasteryXP:Number = 1;
         if (player.hasPerk(PerkLib.MeleeWeaponsMastery)) baseMasteryXP += 2;
+        if (compatibileSwordImmortalWeapons() && player.hasPerk(PerkLib.HiddenJobSwordImmortal)) baseMasteryXP += 2;
         if (monster is TrainingDummy && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) {
             var bMXPMulti:Number = 1;
             if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 2) bMXPMulti += 1.5;
@@ -6551,7 +6558,7 @@ public class Combat extends BaseContent {
 					else i = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] + 1;
 				}
 				else {
-					if (player.fatigue + 5 > player.maxFatigue()) i = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] + 1;
+					if (player.fatigue + 5 > player.maxOverFatigue()) i = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] + 1;
 					else fatigue(5);
 				}
 			}
@@ -8986,7 +8993,7 @@ public class Combat extends BaseContent {
                 return;
             }
         }
-        if (player.fatigue >= player.maxFatigue() && mod > 0) return;
+        if (player.fatigue >= player.maxOverFatigue() && mod > 0) return;
         if (player.fatigue <= 0 && mod < 0) return;
         //Fatigue restoration buffs!
         if (mod < 0) {
@@ -9001,7 +9008,7 @@ public class Combat extends BaseContent {
             mainView.statsView.showStatDown('fatigue');
         }
         dynStats("lus", 0, "scale", false); //Force display fatigue up/down by invoking zero lust change.
-        if (player.fatigue > player.maxFatigue()) player.fatigue = player.maxFatigue();
+        if (player.fatigue > player.maxOverFatigue()) player.fatigue = player.maxOverFatigue();
         if (player.fatigue < 0) player.fatigue = 0;
         statScreenRefresh();
     }
@@ -12369,7 +12376,7 @@ public function OrcaJuggle():void {
         addButton(0, "Next", combatMenu, false);
         return;
     }
-    if (player.fatigue + physicalCost(20) > player.maxFatigue()) {
+    if (player.fatigue + physicalCost(20) > player.maxOverFatigue()) {
         outputText("You are too tired to juggle with [themonster].");
         addButton(0, "Next", combatMenu, false);
     } else {
@@ -12450,7 +12457,7 @@ public function OrcaCleanup():void {
 
 public function OrcaWack():void {
     clearOutput();
-    if (player.fatigue + physicalCost(20) > player.maxFatigue()) {
+    if (player.fatigue + physicalCost(20) > player.maxOverFatigue()) {
         outputText("You are too tired to wack your opponent with your tail.");
         addButton(0, "Next", combatMenu, false);
     } else {
@@ -12484,7 +12491,7 @@ public function OrcaWack():void {
 
 public function OrcaSmash():void {
     clearOutput();
-    if (player.fatigue + physicalCost(20) > player.maxFatigue()) {
+    if (player.fatigue + physicalCost(20) > player.maxOverFatigue()) {
         outputText("You are too tired to smash your opponent.");
         addButton(0, "Next", combatMenu, false);
     } else {
@@ -12628,7 +12635,7 @@ public function CancerGrab():void {
         outputText("You cannot grab a single target while fighting multiple opponents at the same times!");
         addButton(0, "Next", combatMenu, false);
     }
-    if (player.fatigue + physicalCost(10) > player.maxFatigue()) {
+    if (player.fatigue + physicalCost(10) > player.maxOverFatigue()) {
         clearOutput();
         outputText("You just don't have the energy to grab your opponent right now...");
         //Gone		menuLoc = 1;
@@ -12732,7 +12739,7 @@ public function Tremor():void {
         addButton(0, "Next", combatMenu, false);
         return;
     }
-    if (player.fatigue + physicalCost(10) > player.maxFatigue()) {
+    if (player.fatigue + physicalCost(10) > player.maxOverFatigue()) {
         clearOutput();
         outputText("You just don't have the energy to create a tremor right now...");
         //Gone		menuLoc = 1;
@@ -12863,7 +12870,7 @@ public function SingOut():void {
 public function Straddle():void {
     flags[kFLAGS.LAST_ATTACK_TYPE] = LAST_ATTACK_PHYS;
     clearOutput();
-        if (player.fatigue + physicalCost(10) > player.maxFatigue()) {
+        if (player.fatigue + physicalCost(10) > player.maxOverFatigue()) {
             clearOutput();
             outputText("You just don't have the energy to straddle your opponent right now...");
             //Gone		menuLoc = 1;
@@ -13356,13 +13363,13 @@ public function DigOut():void {
 public function Guillotine():void {
     clearOutput();
     if (monster.plural) {
-        if (player.fatigue + physicalCost(50) > player.maxFatigue()) {
+        if (player.fatigue + physicalCost(50) > player.maxOverFatigue()) {
             outputText("You are too tired to crush [themonster].");
             addButton(0, "Next", combatMenu, false);
             return;
         }
     } else {
-        if (player.fatigue + physicalCost(20) > player.maxFatigue()) {
+        if (player.fatigue + physicalCost(20) > player.maxOverFatigue()) {
             outputText("You are too tired to crush [themonster].");
             addButton(0, "Next", combatMenu, false);
             return;
@@ -13391,13 +13398,13 @@ public function Guillotine():void {
 public function ScyllaSqueeze():void {
     clearOutput();
     if (monster.plural) {
-        if (player.fatigue + physicalCost(50) > player.maxFatigue()) {
+        if (player.fatigue + physicalCost(50) > player.maxOverFatigue()) {
             outputText("You are too tired to squeeze [themonster].");
             addButton(0, "Next", combatMenu, false);
             return;
         }
     } else {
-        if (player.fatigue + physicalCost(20) > player.maxFatigue()) {
+        if (player.fatigue + physicalCost(20) > player.maxOverFatigue()) {
             outputText("You are too tired to squeeze [themonster].");
             addButton(0, "Next", combatMenu, false);
             return;
@@ -13561,7 +13568,7 @@ public function ScyllaLeggoMyEggo():void {
 public function SwallowWhole():void {
     flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
     clearOutput();
-    if(player.fatigue + combat.physicalCost(10) > player.maxFatigue()) {
+    if(player.fatigue + combat.physicalCost(10) > player.maxOverFatigue()) {
         outputText("You just don't have the energy to swallow someone right now...");
         //Gone		menuLoc = 1;
         menu();
@@ -13719,7 +13726,7 @@ public function SwallowLeggoMyEggo():void {
 
 public function WhipStrangulate():void {
 	clearOutput();
-	if (player.fatigue + combat.physicalCost(20) > player.maxFatigue()) {
+	if (player.fatigue + combat.physicalCost(20) > player.maxOverFatigue()) {
 		outputText("You are too tired to strangulate [themonster].");
 		addButton(0, "Next", SceneLib.combat.combatMenu, false);
 		return;
@@ -15018,7 +15025,7 @@ public function landAfterUsingSoulforce():void {
 public function greatDive():void {
     flags[kFLAGS.LAST_ATTACK_TYPE] = LAST_ATTACK_SPELL;
     clearOutput();
-    if (player.fatigue + physicalCost(50) > player.maxFatigue()) {
+    if (player.fatigue + physicalCost(50) > player.maxOverFatigue()) {
         clearOutput();
         outputText("You are too tired to perform a great dive.");
         doNext(combatMenu);

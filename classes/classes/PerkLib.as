@@ -452,6 +452,15 @@ public class PerkLib
 				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
 				"You've chosen the '' perk, .");*/
 		public static const Acclimation:PerkType = mk("Acclimation", "Acclimation",
 				"Reduces lust gain by 15%.",
@@ -4404,8 +4413,8 @@ public class PerkLib
 				". (+10% of OverMax )");
 		public static const DemonSovereignToughnessAndLibido:PerkType = mk("Demon Sovereign Toughness & Libido", "Demon Sovereign Toughness & Libido",
 				". (+10% of OverMax , +5% Base TOU/LIB Cap)");
-		public static const HiddenJob4:PerkType = mk("Hidden Job: 4", "Hidden Job: 4",
-				".");
+		public static const HiddenJobSwordImmortal:PerkType = mk("Hidden Job: Sword Immortal", "Job ( Hiden ): Sword Immortal",
+				"You began your journey as beginner Sword Immortal. (+4% of OverMax Wrath / Fatigue / Soulforce)");
 		public static const HiddenJob3:PerkType = mk("Hidden Job: 3", "Hidden Job: 3",
 				".");
 		public static const HiddenJob2:PerkType = mk("Hidden Job: 2", "Hidden Job: 2",
