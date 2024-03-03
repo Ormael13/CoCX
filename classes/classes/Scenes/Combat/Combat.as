@@ -5681,13 +5681,8 @@ public class Combat extends BaseContent {
         if (weaponSize == 1) Mastery_bonus_damage += 0.01 * weaponSizeNormal();
         if (weaponSize == 2) Mastery_bonus_damage += 0.01 * weaponSizeLarge();
         if (weaponSize == 3) Mastery_bonus_damage += 0.01 * weaponSizeMassive();
-		if (compatibileSwordImmortalWeapons() && player.hasPerk(PerkLib.HiddenJobSwordImmortal)) Mastery_bonus_damage *= 2;
+		if (player.compatibileSwordImmortalWeapons() && player.hasPerk(PerkLib.HiddenJobSwordImmortal)) Mastery_bonus_damage *= 2;
 		return Mastery_bonus_damage;
-	}
-	
-	public function compatibileSwordImmortalWeapons():Boolean {
-		if (player.isSwordTypeWeapon() || player.isDuelingTypeWeapon() || player.isDaggerTypeWeapon()) return true;
-		else return false;
 	}
 
     /*
@@ -5804,7 +5799,7 @@ public class Combat extends BaseContent {
     private function meleeMasteryGain(hit:int, crit:int):void{
         var baseMasteryXP:Number = 1;
         if (player.hasPerk(PerkLib.MeleeWeaponsMastery)) baseMasteryXP += 2;
-        if (compatibileSwordImmortalWeapons() && player.hasPerk(PerkLib.HiddenJobSwordImmortal)) baseMasteryXP += 2;
+        if (player.compatibileSwordImmortalWeapons() && player.hasPerk(PerkLib.HiddenJobSwordImmortal)) baseMasteryXP += 2;
         if (monster is TrainingDummy && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) {
             var bMXPMulti:Number = 1;
             if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 2) bMXPMulti += 1.5;
