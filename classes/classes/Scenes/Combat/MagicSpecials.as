@@ -913,6 +913,13 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You need more time before you can use Everywhere and nowhere again.\n\n");
 			}
 		}
+		if (player.isRaceCached(Races.DRACULA)) {
+			bd = buttons.add("ShadowTeleport", ShadowTeleport).hint("Periodically phase out of reality increasing your invasion as well as granting you the ability to surprise your opponent denying their defences.  \n\nWould go into cooldown after use for: "+(player.hasPerk(PerkLib.NaturalInstincts) ? "9":"10")+" rounds");
+			bd.requireFatigue(physicalCost(30));
+			if (player.hasStatusEffect(StatusEffects.CooldownShadowTeleport)) {
+				bd.disable("You need more time before you can use Shadow Teleport again.\n\n");
+			}
+		}
 		if (player.isRaceCached(Races.FAIRY)) {
 			bd = buttons.add("Fae Storm", FaeStorm).hint("Use a beam of chaotic magic, damaging your foe and inflicting various status effects. Single target but very likely to cause a lot of effects.");
 			bd.requireMana(spellCost(80));
@@ -3555,6 +3562,16 @@ public class MagicSpecials extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.EverywhereAndNowhere,6,0,0,0);
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.EverywhereAndNowhere,9,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownEveryAndNowhere,10,0,0,0);
+		enemyAI();
+	}
+
+	public function ShadowTeleport():void {
+		clearOutput();
+		fatigue(30, USEFATG_PHYSICAL);
+		outputText("You begin to use vampire power in order to displace yourself between shadows this is only going to last for a short time but let them try and hurt you meanwhile.\n\n");
+		player.createStatusEffect(StatusEffects.ShadowTeleport,6,0,0,0);
+		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.ShadowTeleport,9,0,0,0);
+		else player.createStatusEffect(StatusEffects.CooldownShadowTeleport,10,0,0,0);
 		enemyAI();
 	}
 

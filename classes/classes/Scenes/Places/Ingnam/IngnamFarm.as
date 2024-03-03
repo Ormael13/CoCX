@@ -32,7 +32,7 @@ public class IngnamFarm extends BaseContent
 		
 		public function workAtFarm():void { //Job at the farm.
 			clearOutput();
-			if (player.fatigue + 10 > player.maxFatigue()) {
+			if (player.fatigue + 10 > player.maxOverFatigue()) {
 				outputText("You are too exhausted to work at the farm!");
 				doNext(menuFarm);
 				return;

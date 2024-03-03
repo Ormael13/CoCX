@@ -666,6 +666,7 @@ public class TestMenu extends BaseContent
 		if (!player.hasPerk(PerkLib.HiddenJobAsura)) player.createPerk(PerkLib.HiddenJobAsura, 0, 0, 0, 0);
 		if (!player.hasPerk(PerkLib.HiddenJobBloodDemon)) player.createPerk(PerkLib.HiddenJobBloodDemon, 0, 0, 0, 0);
 		if (!player.hasPerk(PerkLib.PrestigeJobGreySage)) player.createPerk(PerkLib.PrestigeJobGreySage, 0, 0, 0, 0);
+		if (!player.hasPerk(PerkLib.HiddenJobSwordImmortal)) player.createPerk(PerkLib.HiddenJobSwordImmortal, 0, 0, 0, 0);
 		doNext(SoulforceCheats);
 	}
 	public function learnHexes():void {

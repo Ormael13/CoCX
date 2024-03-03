@@ -15,10 +15,13 @@ public class GuanDao extends Weapon {
 		
 		override public function get attack():Number {
 			var base:int = 0;
-			if (game.player.str >= 300) base += 28;
-			if (game.player.str >= 200) base += 20;
-			if (game.player.str >= 100) base += 12;
-			if (game.player.str >= 50) base += 9;
+			if (game.player.hasPerk(PerkLib.HiddenJobSwordImmortal)) base += 69;
+			else {
+				if (game.player.str >= 300) base += 28;
+				if (game.player.str >= 200) base += 20;
+				if (game.player.str >= 100) base += 12;
+				if (game.player.str >= 50) base += 9;
+			}
 			return (6 + base);
 		}
 		

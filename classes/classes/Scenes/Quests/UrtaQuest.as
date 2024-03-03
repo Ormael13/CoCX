@@ -1250,7 +1250,7 @@ private function urtaSecondWind():void {
 private function urtaComboAttack():void {
 	if(!player.hasStatusEffect(StatusEffects.Attacks)) {
 		clearOutput();
-		if(player.fatigue + 75 > player.maxFatigue()) {
+		if(player.fatigue + 75 > player.maxOverFatigue()) {
 			outputText("You are too fatigued to use that attack!");
 //Gone			menuLoc = 3;
 //			doNext(combat.combatMenu);
@@ -1345,7 +1345,7 @@ private function urtaComboAttack():void {
 //Dirt Kick
 private function urtaDirtKick():void {
 	clearOutput();
-	if(player.fatigue + 25 > player.maxFatigue()) {
+	if(player.fatigue + 25 > player.maxOverFatigue()) {
 		outputText("You are too fatigued to use that ability!");
 //Gone		menuLoc = 3;
 //		doNext(combat.combatMenu);
@@ -1374,7 +1374,7 @@ private function urtaDirtKick():void {
 //SideWinder: 75% damage + 80% chance for stun
 private function urtaSidewinder():void {
 	clearOutput();
-	if(player.fatigue + 100 > player.maxFatigue()) {
+	if(player.fatigue + 100 > player.maxOverFatigue()) {
 		outputText("You are too fatigued to use that attack!");
 //Gone		menuLoc = 3;
 //		doNext(combat.combatMenu);
@@ -1459,7 +1459,7 @@ private function urtaSidewinder():void {
 //Vault: Use the halberd to support her weight and deliver a high power kick to the enemy, deals 15% more damage. If the enemy is stunned, auto-critical. This is like the move she uses during the fight against the wolf in that scene at Tel'Adre.
 private function urtaVaultAttack():void {
 	clearOutput();
-	if (player.fatigue + 60 > player.maxFatigue()) {
+	if (player.fatigue + 60 > player.maxOverFatigue()) {
 		outputText("You are too fatigued to use that attack!");
 //Gone		menuLoc = 3;
 //		doNext(combat.combatMenu);

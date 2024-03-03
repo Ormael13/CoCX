@@ -875,7 +875,7 @@ import classes.lists.Gender;
 				doYesNo(screwTrainingLetsFuck, screwTrainingButNoThanks);
 				return;
 			}
-			if (player.fatigue > player.maxFatigue() - 40) { //Too tired!
+			if (player.fatigue > player.maxOverFatigue() - 40) { //Too tired!
 				outputText("\n\nJoy looks you over and shadly shakes her head. \"<i>Like, sorry, [name], but you're too worn out to train with me. Go and, like, get some sleep; when you're rested up, then we'll train, I promise.</i>\"");
 				doNext(playerMenu);
 				return;

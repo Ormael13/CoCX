@@ -2,6 +2,7 @@ package classes.Items.Weapons
 {
 import classes.Items.Weapon;
 import classes.Items.ItemTags;
+import classes.PerkLib;
 
 public class MoonlitSnow extends Weapon
 	{
@@ -16,16 +17,19 @@ public class MoonlitSnow extends Weapon
 		}
 		override public function get attack():Number {
 			var boost:int = 0;
-			var scal:Number = 10;
-			if (game.player.spe >= 100) {
-				boost += 15;
-				scal -= 3;
+			if (game.player.hasPerk(PerkLib.HiddenJobSwordImmortal)) boost += 50;
+			else {
+				var scal:Number = 10;
+				if (game.player.spe >= 100) {
+					boost += 15;
+					scal -= 3;
+				}
+				if (game.player.spe >= 50) {
+					boost += 15;
+					scal -= 2;
+				}
+				boost += Math.round((100 - game.player.cor) / scal);
 			}
-			if (game.player.spe >= 50) {
-				boost += 15;
-				scal -= 2;
-			}
-			boost += Math.round((100 - game.player.cor) / scal);
 			return (15 + (2 * boost));
 		}
 	}

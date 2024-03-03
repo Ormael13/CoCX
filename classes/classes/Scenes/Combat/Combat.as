@@ -4370,7 +4370,7 @@ public class Combat extends BaseContent {
     public function reloadWeapon1():void {
         clearOutput();
         reloadWeapon();
-        if (player.fatigue + (oneBulletReloadCost() * player.ammo) > player.maxFatigue()) {
+        if (player.fatigue + (oneBulletReloadCost() * player.ammo) > player.maxOverFatigue()) {
             outputText(" You are too tired to act in this round after reloading your weapon.\n\n");
             player.fatigue += (oneBulletReloadCost() * player.ammo);
             enemyAIImpl();
@@ -4388,7 +4388,7 @@ public class Combat extends BaseContent {
 
     public function reloadWeapon2():void {
         reloadWeapon();
-        if (player.fatigue + (oneBulletReloadCost() * player.ammo) > player.maxFatigue()) {
+        if (player.fatigue + (oneBulletReloadCost() * player.ammo) > player.maxOverFatigue()) {
             outputText("You are too tired to keep shooting in this round after reloading your weapon.\n\n");
             player.fatigue += (oneBulletReloadCost() * player.ammo);
             enemyAIImpl();
@@ -4597,7 +4597,7 @@ public class Combat extends BaseContent {
     public function seconwindGo():void {
         clearOutput();
         outputText("You enter your second wind, recovering your energy.\n\n");
-        fatigue((player.maxFatigue() - player.fatigue) / 2);
+        fatigue((player.maxOverFatigue() - player.fatigue) / 2);
         player.createStatusEffect(StatusEffects.SecondWindRegen, 10, 0, 0, 0);
         player.createStatusEffect(StatusEffects.CooldownSecondWind, 0, 0, 0, 0);
         enemyAIImpl();
@@ -5681,6 +5681,7 @@ public class Combat extends BaseContent {
         if (weaponSize == 1) Mastery_bonus_damage += 0.01 * weaponSizeNormal();
         if (weaponSize == 2) Mastery_bonus_damage += 0.01 * weaponSizeLarge();
         if (weaponSize == 3) Mastery_bonus_damage += 0.01 * weaponSizeMassive();
+		if (player.compatibileSwordImmortalWeapons() && player.hasPerk(PerkLib.HiddenJobSwordImmortal)) Mastery_bonus_damage *= 2;
 		return Mastery_bonus_damage;
 	}
 
@@ -5798,6 +5799,7 @@ public class Combat extends BaseContent {
     private function meleeMasteryGain(hit:int, crit:int):void{
         var baseMasteryXP:Number = 1;
         if (player.hasPerk(PerkLib.MeleeWeaponsMastery)) baseMasteryXP += 2;
+        if (player.compatibileSwordImmortalWeapons() && player.hasPerk(PerkLib.HiddenJobSwordImmortal)) baseMasteryXP += 2;
         if (monster is TrainingDummy && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) {
             var bMXPMulti:Number = 1;
             if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 2) bMXPMulti += 1.5;
@@ -6551,7 +6553,7 @@ public class Combat extends BaseContent {
 					else i = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] + 1;
 				}
 				else {
-					if (player.fatigue + 5 > player.maxFatigue()) i = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] + 1;
+					if (player.fatigue + 5 > player.maxOverFatigue()) i = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] + 1;
 					else fatigue(5);
 				}
 			}
@@ -8986,7 +8988,7 @@ public class Combat extends BaseContent {
                 return;
             }
         }
-        if (player.fatigue >= player.maxFatigue() && mod > 0) return;
+        if (player.fatigue >= player.maxOverFatigue() && mod > 0) return;
         if (player.fatigue <= 0 && mod < 0) return;
         //Fatigue restoration buffs!
         if (mod < 0) {
@@ -9001,7 +9003,7 @@ public class Combat extends BaseContent {
             mainView.statsView.showStatDown('fatigue');
         }
         dynStats("lus", 0, "scale", false); //Force display fatigue up/down by invoking zero lust change.
-        if (player.fatigue > player.maxFatigue()) player.fatigue = player.maxFatigue();
+        if (player.fatigue > player.maxOverFatigue()) player.fatigue = player.maxOverFatigue();
         if (player.fatigue < 0) player.fatigue = 0;
         statScreenRefresh();
     }
@@ -9598,7 +9600,7 @@ public class Combat extends BaseContent {
                 else if (player.perkv1(IMutationsLib.EclipticMindIM) >= 3 && monster.cor > player.cor / 2) damage = Math.round(damage * 3);
 				damage *= fireDamageBoostedByDao();
                 damage = Math.round(damage);
-                damage = combat.fixPercentDamage(damage);
+                damage = fixPercentDamage(damage);
                 outputText("Your aura of purity burns [themonster] with holy fire for ");
                 doFireDamage(damage, true, true);
                 outputText(" damage!");
@@ -9618,10 +9620,8 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= RacialParagonAbilityBoost();
             if (player.perkv1(IMutationsLib.EclipticMindIM) >= 2 && monster.cor < (player.cor / 2)) lustDmg = Math.round(lustDmg * 2);
             else if (player.perkv1(IMutationsLib.EclipticMindIM) >= 3 && monster.cor < (player.cor / 2)) lustDmg = Math.round(lustDmg * 3);
-
             outputText("[Themonster] slowly succumbs to [monster his] basest desires as your aura of corruption seeps through [monster him]. ");
             if (monster.cor < 100) outputText("Your victims purity is slowly becoming increasingly eroded by your seeping corruption. ");
-            
             lustDmg *= monster.lustVuln;
             lustDmg = combat.fixPercentLust(lustDmg);
             monster.teased(Math.round(lustDmg), false);
@@ -9642,7 +9642,6 @@ public class Combat extends BaseContent {
                 if (!monster.plural) outputText("The effects of your pollen are quite pronounced on [themonster] as [monster he] begin to shake, occasionally stealing glances at your body. ");
                 else outputText("The effects of your pollen are quite pronounced on [themonster] as [monster he] begin to shake, stealing glances at your body. ");
             }
-            
             var lustDmgA:Number = (scalingBonusLibido() * 0.5);
             lustDmgA = teases.teaseAuraLustDamageBonus(monster, lustDmgA);
             if (player.hasPerk(PerkLib.RacialParagon)) lustDmgA *= RacialParagonAbilityBoost();
@@ -9655,7 +9654,6 @@ public class Combat extends BaseContent {
                 if (rand(100) > 69) monster.createStatusEffect(StatusEffects.Fascinated,0,0,0,0);
                 lustDmgA *= 1.3;
             }
-
             lustDmgA *= monster.lustVuln;
             lustDmgA = combat.fixPercentLust(lustDmgA);
             monster.teased(Math.round(lustDmgA), false);
@@ -9680,17 +9678,13 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.RacialParagon)) damage0 *= RacialParagonAbilityBoost();
             damage0 = Math.round(damage0);
             dynStats("lus", (Math.round(player.maxLust() * 0.02)), "scale", false);
-            
             var lustDmgF:Number = (scalingBonusLibido() * 0.1 + scalingBonusIntelligence() * 0.1);
             var lustBoostToLustDmg:Number = lustDmgF * 0.01;
-            
             lustDmgF = teases.teaseAuraLustDamageBonus(monster, lustDmgF);
             if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= RacialParagonAbilityBoost();
-            
             if (player.lust100 * 0.01 >= 0.9) lustDmgF += (lustBoostToLustDmg * 140);
             else if (player.lust100 * 0.01 < 0.2) lustDmgF += (lustBoostToLustDmg * 140);
             else lustDmgF += (lustBoostToLustDmg * 2 * (20 - (player.lust100 * 0.01)));
-            
             //Determine if critical tease!
             var crit2:Boolean = false;
             var critChance2:int = 5;
@@ -9700,7 +9694,6 @@ public class Combat extends BaseContent {
                 crit2 = true;
                 lustDmgF *= 1.75;
             }
-
             lustDmgF = lustDmgF * monster.lustVuln;
             lustDmgF = Math.round(lustDmgF);
             outputText("Your opponent is struck by lightning as your lust storm rages on.")
@@ -9709,7 +9702,6 @@ public class Combat extends BaseContent {
             monster.teased(lustDmgF, false);
             if (crit2) outputText(" <b>Critical!</b>");
             outputText(" as a bolt falls from the sky!\n\n");
-
             if (player.hasPerk(PerkLib.EromancyMaster)) teaseXP(1 + bonusExpAfterSuccesfullTease());
             if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3){
                 if (rand(100) < 10) {
@@ -9787,6 +9779,7 @@ public class Combat extends BaseContent {
                 outputText("Your opponent seems not to be affected by the cold of your aura of black frost. Probably because [monster he] is immune to the cold's effects.");
             }
         }
+
         //Desert Summoner Spells
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedFluffBall)) {
             outputText("[themonster] comes in for an attack, but your fluffball jumps between you and [themonster]. Fur flies, your fluffball vanishing into shards of light. But the [themonster]  is thrown back, their attack foiled. ");
@@ -9963,6 +9956,41 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
             outputText("");
         }
 
+		//Bat swarm
+        if (player.isRaceCached(Races.DRACULA) && !flags[kFLAGS.DISABLE_AURAS]) {
+            var damageBS:Number = scalingBonusIntelligence();
+            //Determine if critical hit!
+            var crit4:Boolean = false;
+            var critChance5:int = 5;
+            critChance5 += combatMagicalCritical();
+            if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance5 = 0;
+            if (rand(100) < critChance5) {
+                crit4 = true;
+                damageBS *= 1.75;
+            }
+            damageBS *= 0.5;
+            var SpellMultiplierBS:Number = 1;
+            SpellMultiplierBS += spellMod() - 1;
+            damageBS *= SpellMultiplierBS;
+            if (player.hasPerk(PerkLib.RacialParagon)) damageBS *= RacialParagonAbilityBoost();
+            damageBS = Math.round(damageBS);
+            damageBS = fixPercentDamage(damageBS);
+            outputText("The cloud of bat surrounding you bite and scratch at your opponent"+(monster.plural?"s":"")+" viciously harvesting its lifeblood wich you promptly take onto yourself with your fiendish magic. ");
+            doPhysicalDamage(damageBS, true, true);
+            outputText(" damage!");
+            if (crit4) outputText(" <b>*Critical Hit!*</b>");
+            outputText("\n\n");
+			var dmg002:Number = damageBS;
+			if (dmg002 > Math.round(player.maxHP() * 0.03)) dmg002 = Math.round(player.maxHP() * 0.03);
+			HPChange(dmg002, true);
+			var thirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
+			var drinked:Number = 1;
+			if (player.perkv1(IMutationsLib.HollowFangsIM) >= 3) drinked += 1;
+			if (player.perkv1(IMutationsLib.HollowFangsIM) >= 4) drinked += 3;
+			if (player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 4) drinked *= 2;
+			if (player.hasPerk(PerkLib.BloodMastery)) drinked *= 2;
+			thirst.drink(drinked);
+        }
 
         //Plant Growth
         if (player.hasStatusEffect(StatusEffects.PlantGrowth) && monster.lustVuln > 0) {
@@ -10503,6 +10531,13 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
                 outputText("<b>Everywhere and nowhere effect ended!</b>\n\n");
             } else player.addStatusValue(StatusEffects.EverywhereAndNowhere, 1, -1);
         }
+        //Shadow Teleport
+        if (player.hasStatusEffect(StatusEffects.ShadowTeleport)) {
+            if (player.statusEffectv1(StatusEffects.ShadowTeleport) <= 0) {
+                player.removeStatusEffect(StatusEffects.ShadowTeleport);
+                outputText("<b>You sense your shadow teleport approaching its limit as the spell ends.</b>\n\n");
+            } else player.addStatusValue(StatusEffects.ShadowTeleport, 1, -1);
+        }
 		//Blackout
         if (player.hasStatusEffect(StatusEffects.Blackout)) {
             if (player.statusEffectv1(StatusEffects.Blackout) <= 0) {
@@ -10595,6 +10630,14 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
                 player.removeStatusEffect(StatusEffects.CooldownEveryAndNowhere);
             } else {
                 player.addStatusValue(StatusEffects.CooldownEveryAndNowhere, 1, -1);
+            }
+        }
+        //Shadow Teleport
+        if (player.hasStatusEffect(StatusEffects.CooldownShadowTeleport)) {
+            if (player.statusEffectv1(StatusEffects.CooldownShadowTeleport) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownShadowTeleport);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownShadowTeleport, 1, -1);
             }
         }
         //Flicker
@@ -12506,7 +12549,7 @@ public function OrcaJuggle():void {
         addButton(0, "Next", combatMenu, false);
         return;
     }
-    if (player.fatigue + physicalCost(20) > player.maxFatigue()) {
+    if (player.fatigue + physicalCost(20) > player.maxOverFatigue()) {
         outputText("You are too tired to juggle with [themonster].");
         addButton(0, "Next", combatMenu, false);
     } else {
@@ -12587,7 +12630,7 @@ public function OrcaCleanup():void {
 
 public function OrcaWack():void {
     clearOutput();
-    if (player.fatigue + physicalCost(20) > player.maxFatigue()) {
+    if (player.fatigue + physicalCost(20) > player.maxOverFatigue()) {
         outputText("You are too tired to wack your opponent with your tail.");
         addButton(0, "Next", combatMenu, false);
     } else {
@@ -12621,7 +12664,7 @@ public function OrcaWack():void {
 
 public function OrcaSmash():void {
     clearOutput();
-    if (player.fatigue + physicalCost(20) > player.maxFatigue()) {
+    if (player.fatigue + physicalCost(20) > player.maxOverFatigue()) {
         outputText("You are too tired to smash your opponent.");
         addButton(0, "Next", combatMenu, false);
     } else {
@@ -12765,7 +12808,7 @@ public function CancerGrab():void {
         outputText("You cannot grab a single target while fighting multiple opponents at the same times!");
         addButton(0, "Next", combatMenu, false);
     }
-    if (player.fatigue + physicalCost(10) > player.maxFatigue()) {
+    if (player.fatigue + physicalCost(10) > player.maxOverFatigue()) {
         clearOutput();
         outputText("You just don't have the energy to grab your opponent right now...");
         //Gone		menuLoc = 1;
@@ -12869,7 +12912,7 @@ public function Tremor():void {
         addButton(0, "Next", combatMenu, false);
         return;
     }
-    if (player.fatigue + physicalCost(10) > player.maxFatigue()) {
+    if (player.fatigue + physicalCost(10) > player.maxOverFatigue()) {
         clearOutput();
         outputText("You just don't have the energy to create a tremor right now...");
         //Gone		menuLoc = 1;
@@ -13000,7 +13043,7 @@ public function SingOut():void {
 public function Straddle():void {
     flags[kFLAGS.LAST_ATTACK_TYPE] = LAST_ATTACK_PHYS;
     clearOutput();
-        if (player.fatigue + physicalCost(10) > player.maxFatigue()) {
+        if (player.fatigue + physicalCost(10) > player.maxOverFatigue()) {
             clearOutput();
             outputText("You just don't have the energy to straddle your opponent right now...");
             //Gone		menuLoc = 1;
@@ -13493,13 +13536,13 @@ public function DigOut():void {
 public function Guillotine():void {
     clearOutput();
     if (monster.plural) {
-        if (player.fatigue + physicalCost(50) > player.maxFatigue()) {
+        if (player.fatigue + physicalCost(50) > player.maxOverFatigue()) {
             outputText("You are too tired to crush [themonster].");
             addButton(0, "Next", combatMenu, false);
             return;
         }
     } else {
-        if (player.fatigue + physicalCost(20) > player.maxFatigue()) {
+        if (player.fatigue + physicalCost(20) > player.maxOverFatigue()) {
             outputText("You are too tired to crush [themonster].");
             addButton(0, "Next", combatMenu, false);
             return;
@@ -13528,13 +13571,13 @@ public function Guillotine():void {
 public function ScyllaSqueeze():void {
     clearOutput();
     if (monster.plural) {
-        if (player.fatigue + physicalCost(50) > player.maxFatigue()) {
+        if (player.fatigue + physicalCost(50) > player.maxOverFatigue()) {
             outputText("You are too tired to squeeze [themonster].");
             addButton(0, "Next", combatMenu, false);
             return;
         }
     } else {
-        if (player.fatigue + physicalCost(20) > player.maxFatigue()) {
+        if (player.fatigue + physicalCost(20) > player.maxOverFatigue()) {
             outputText("You are too tired to squeeze [themonster].");
             addButton(0, "Next", combatMenu, false);
             return;
@@ -13698,7 +13741,7 @@ public function ScyllaLeggoMyEggo():void {
 public function SwallowWhole():void {
     flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
     clearOutput();
-    if(player.fatigue + combat.physicalCost(10) > player.maxFatigue()) {
+    if(player.fatigue + combat.physicalCost(10) > player.maxOverFatigue()) {
         outputText("You just don't have the energy to swallow someone right now...");
         //Gone		menuLoc = 1;
         menu();
@@ -13856,7 +13899,7 @@ public function SwallowLeggoMyEggo():void {
 
 public function WhipStrangulate():void {
 	clearOutput();
-	if (player.fatigue + combat.physicalCost(20) > player.maxFatigue()) {
+	if (player.fatigue + combat.physicalCost(20) > player.maxOverFatigue()) {
 		outputText("You are too tired to strangulate [themonster].");
 		addButton(0, "Next", SceneLib.combat.combatMenu, false);
 		return;
@@ -15155,7 +15198,7 @@ public function landAfterUsingSoulforce():void {
 public function greatDive():void {
     flags[kFLAGS.LAST_ATTACK_TYPE] = LAST_ATTACK_SPELL;
     clearOutput();
-    if (player.fatigue + physicalCost(50) > player.maxFatigue()) {
+    if (player.fatigue + physicalCost(50) > player.maxOverFatigue()) {
         clearOutput();
         outputText("You are too tired to perform a great dive.");
         doNext(combatMenu);

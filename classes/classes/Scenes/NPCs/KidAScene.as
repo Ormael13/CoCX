@@ -164,8 +164,8 @@ public class KidAScene extends BaseContent implements TimeAwareInterface
 			addButton(1, weaponT, weaponB);
 			addButton(5, "Leave Anemones", dontTakeAnemones).hint("Please dont take away any anemones you bear.").disableIf(flags[kFLAGS.DONT_TAKE_ANEMONES_PLEZ] == 1, "She has agreed to leave your anemones alone");
 			if (flags[kFLAGS.KID_SITTER] <= 1) {
-				if (flags[kFLAGS.ANEMONE_WEAPON_ID] != 0 && player.fatigue <= (player.maxFatigue() - 25)) addButton(3, "Tutor", tutorAnemoneKid);
-				else if (player.fatigue > (player.maxFatigue() - 25)) outputText("\n\nYou're too tired to tutor Kid A.");
+				if (flags[kFLAGS.ANEMONE_WEAPON_ID] != 0 && player.fatigue <= (player.maxOverFatigue() - 25)) addButton(3, "Tutor", tutorAnemoneKid);
+				else if (player.fatigue > (player.maxOverFatigue() - 25)) outputText("\n\nYou're too tired to tutor Kid A.");
 				addButton(4, "Watch", anemoneWatchToggle);
 				addButton(8, "Evict", evictANemone);
 				addButton(2, "Sex", kidASex, false)

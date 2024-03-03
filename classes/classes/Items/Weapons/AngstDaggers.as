@@ -16,12 +16,15 @@ public class AngstDaggers extends Weapon {
 		
 		override public function get attack():Number {
 			var boost:int = 0;
-			if (game.player.str >= 60 && game.player.spe >= 300) boost += 3;
-			if (game.player.str >= 50 && game.player.spe >= 250) boost += 3;
-			if (game.player.str >= 40 && game.player.spe >= 200) boost += 3;
-			if (game.player.str >= 30 && game.player.spe >= 150) boost += 3;
-			if (game.player.str >= 20 && game.player.spe >= 100) boost += 3;
-			if (game.player.str >= 10 && game.player.spe >= 50) boost += 3;
+			if (game.player.hasPerk(PerkLib.HiddenJobSwordImmortal)) boost += 18;
+			else {
+				if (game.player.str >= 60 && game.player.spe >= 300) boost += 3;
+				if (game.player.str >= 50 && game.player.spe >= 250) boost += 3;
+				if (game.player.str >= 40 && game.player.spe >= 200) boost += 3;
+				if (game.player.str >= 30 && game.player.spe >= 150) boost += 3;
+				if (game.player.str >= 20 && game.player.spe >= 100) boost += 3;
+				if (game.player.str >= 10 && game.player.spe >= 50) boost += 3;
+			}
 			return (2 + boost);
 		}
 		
