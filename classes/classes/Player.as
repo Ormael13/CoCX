@@ -7628,6 +7628,7 @@ use namespace CoC;
 			for (var i:int = 0; i<durations.length; i++) {
 				durations[i] = 0;
 			}
-		}		
+		}
+				
 	}
 }
