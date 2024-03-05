@@ -944,6 +944,7 @@ public class Combat extends BaseContent {
             }
             bd = buttons.add("Elem.Asp", buttonFunc, "Use the once-per-battle elemental aspects of your basic elementals.", "Elemental Aspects");
         }
+		if (player.shieldName == "Ancient Conduit") bd = buttons.add("A.Conduit", AncientConduitMenu);
 		if (player.hasPerk(PerkLib.PrestigeJobNecromancer) && player.perkv2(PerkLib.PrestigeJobNecromancer) > 0) {
 			bd = buttons.add("S.S. to F.", sendSkeletonToFight).hint("Send Skeleton to fight - Order your Skeletons to beat the crap out of your foe.");
 			if (monster.isFlying() && (!player.hasPerk(PerkLib.GreaterHarvest) || (player.perkv1(PerkLib.GreaterHarvest) == 0 && player.perkv2(PerkLib.GreaterHarvest) == 0))) {
@@ -1251,6 +1252,19 @@ public class Combat extends BaseContent {
 		}
 		//?lust?
 		addButton(14, "Back", combat.combatMenu, false);
+	}
+	public function AncientConduitMenu(page:int = 1):void {
+		menu();
+		if (page == 1) {
+			
+			addButton(9, "-2-", AncientConduitMenu, page + 1);
+			addButton(14, "Back", combat.combatMenu, false);
+		}
+		if (page == 2) {
+			
+			addButton(9, "-1-", AncientConduitMenu, page - 1);
+			addButton(14, "Back", combat.combatMenu, false);
+		}
 	}
 	
     public function calcHerbalismPower():Number{
@@ -9839,7 +9853,7 @@ public class Combat extends BaseContent {
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedMilkyShieldmaiden)) {
             outputText("With a mix between a moo and a roar, your milky shieldmaiden rushes the enemy. ");
-            outputText("(On hit) her shield collides with "[themonster] "with a loud, metallic clang of impact. ");
+            outputText("(On hit) her shield collides with [themonster] with a loud, metallic clang of impact. ");
             outputText("(on miss) [themonster] dodges, and your shieldmaiden huffs, returning to your side. ");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedUnicornsAscent)) {
@@ -9945,16 +9959,16 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
             outputText("Your Weaver shoots a braided strand of webbing at [themonster], the thick strands wrapping around them. She pulls, anchoring the silk to the ground. [themonster] will have a hard time moving with this silk dragging them down!");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedDriderLadyHuntressBound)) {
-            outputText("As [themonster] attacks, your Bound huntress moves into their way, latching onto them. 
-(if immune to lust damage) [Themonster] throws her off, more annoyed than aroused
-(otherwise) you see a blush rise in their cheeks as they push past her. ");
+            outputText("As [themonster] attacks, your Bound huntress moves into their way, latching onto them. "); 
+			outputText("(if immune to lust damage) [Themonster] throws her off, more annoyed than aroused. ");
+			outputText("(otherwise) you see a blush rise in their cheeks as they push past her. ");
         }
         if (player.hasStatusEffect(StatusEffects.MonsterSummonedDriderLadySisters)) {
             outputText("");
-        }
+        }/*
         if (player.hasStatusEffect(StatusEffects.)) {
             outputText("");
-        }
+        }*/
 
 		//Bat swarm
         if (player.isRaceCached(Races.DRACULA) && !flags[kFLAGS.DISABLE_AURAS]) {

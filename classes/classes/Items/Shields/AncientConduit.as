@@ -1,10 +1,15 @@
-package classes.Items.Shields
+/**
+ * ...
+ * @author Liadri
+ */
+package classes.Items.Shields 
 {
 	import classes.Items.Shield;
 
-	public class BeautifulShield extends Shield {
+	public class AncientConduit extends Shield
+	{
 		
-		public function AncientConduit()
+		public function AncientConduit() 
 		{
 			super("AConduit", "A.Conduit", "Ancient Conduit", "a gold, wing-shaped device", 1, 100, "This golden, wing-shaped Conduit was given to you by the ancient Pharaoh of the Sands. Worn on your off-hand, you can feel the power coursing through the world beneath you as long as you wear it. Your stone slabs, shrunken to the size of playing cards, sit next to your wrist, just waiting for you to draw");
 		}

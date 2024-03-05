@@ -377,6 +377,11 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.isElf()) mod += .2;
 			else mod += .1;
 		}
+		if (player.weaponRange == weaponsrange.RW_TOME && player.level < 18) {
+			if (player.level < 6) mod += 1;
+			if (player.level < 12) mod += 1;
+			mod += 1;
+		}
 		if (player.weapon == weapons.PURITAS) mod *= 2.5;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
@@ -391,6 +396,11 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.PrestigeJobArchpriest)) mod -= .4;
 		if (player.hasPerk(PerkLib.PrestigeJobWarlock)) mod += .2;
 		if (player.countMiscJewelry(miscjewelries.DMAGETO) > 0) mod += 0.25;
+		if (player.weaponRange == weaponsrange.RB_TOME && player.level < 18) {
+			if (player.level < 6) mod += 1;
+			if (player.level < 12) mod += 1;
+			mod += 1;
+		}
 		if (player.weapon == weapons.DEPRAVA) mod *= 2.5;
 		mod = Math.round(mod * 100) / 100;
 		return mod;

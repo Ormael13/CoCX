@@ -1,4 +1,4 @@
-package classes.Scenes.Combat.MonsterSummons.NPCSummons {
+package classes.Scenes.Combat.MonsterSummons {
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.Monster;
 import classes.PerkLib;
@@ -6,8 +6,8 @@ import classes.Scenes.Combat.AbstractSummonMonster;
 import classes.Scenes.Combat.DamageType;
 import classes.StatusEffects;
 
-public class AlchemicalElderRalthazul extends AbstractSummonMonster {
-	public function AlchemicalElderRalthazul() {
+public class DarkEnchantress extends AbstractSummonMonster {
+	public function DarkEnchantress() {
 		super(
 			"D.Enchantress",
 			"Summons the Dark Enchantress to aid you in combat",
