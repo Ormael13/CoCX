@@ -560,6 +560,16 @@ import classes.Scenes.NPCs.Forgefather;
 			if (max > 1499999) max = 1499999;
 			return max;
 		}
+		public override function maxOverFatigue():Number {
+			var max1:Number = maxFatigue();
+			var max2:Number = 1;
+			if (hasPerk(PerkLib.HiddenJobSwordImmortal)) max2 += 0.04;
+			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
+			max1 *= max2;//~115%
+			max1 = Math.round(max1);
+			if (max1 > 1799999) max1 = 1799999;
+			return max1;
+		}
 
 		public override function maxSoulforce():Number
 		{
@@ -669,6 +679,7 @@ import classes.Scenes.NPCs.Forgefather;
 		public override function maxOverSoulforce():Number {
 			var max1:Number = maxSoulforce();
 			var max2:Number = 1;
+			if (hasPerk(PerkLib.HiddenJobSwordImmortal)) max2 += 0.04;
 			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
 			if (perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 4) max2 += 0.2;
 			max1 *= max2;//~110%
@@ -723,6 +734,7 @@ import classes.Scenes.NPCs.Forgefather;
 			if (hasPerk(PerkLib.AsuraToughness)) max2 += 0.1;
 			//
 			if (hasPerk(PerkLib.AsuraSpeed)) max2 += 0.1;
+			if (hasPerk(PerkLib.HiddenJobSwordImmortal)) max2 += 0.04;
 			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
 			max1 *= max2;//~180%
 			max1 = Math.round(max1);//~857 546,5

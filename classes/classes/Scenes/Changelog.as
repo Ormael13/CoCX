@@ -157,9 +157,10 @@ public class Changelog extends BaseContent
 			outputText("-Incels enemy in Demon Laboratory would end grapple after few turns and right after will wait at least 2 round to grapple again.\n");
 			outputText("-New M. Special for Dracula/lina race: Shadow Teleport - Similar to displacer beast allow to temporarily dodge all attack for a short time (6 turns durtation and 10 turns cd, base cost 30 fatigue)\n");
 			outputText("-New passive for Dracula/lina race: Bat swarm - When in battle, bat familiars swarm around you, biting and wounding your foes. The blood spilled is shared back to you. (gives thirst stack(s) and regenerate up to 3% max HP per turn)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New event perk: Hidden Job: Sword Immortal. Gained by having free slot for hidden job and perks: Soul Apprentice & Killing Intent. Effects: Allow to reach OverMax Wrath / Fatigue / Soulforce equal to 104% of current max wrath / fatigue / soulforce. Allow to use any sword, dueling sword, dagger weapon with max possible atk value, ");
+			outputText("increase mastery gains for those three types of weapons by 200% of base value, increase dealt damage by 2x for those three types of weapons.\n");
+			outputText("-New range weapon/tome (by Ormael): Restrained Black Tome - buyable at Library in Tel'Adre. Cost 100 gems. Increase by 300/200/100% black spellpower and reduce by 3/2/1 turns cd of black spells at levels below 6/12/18.\n");
+			outputText("-New range weapon/tome (by Ormael): Restrained White Tome - buyable at Library in Tel'Adre. Cost 100 gems. Increase by 300/200/100% white spellpower and reduce by 3/2/1 turns cd of white spells at levels below 6/12/18.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

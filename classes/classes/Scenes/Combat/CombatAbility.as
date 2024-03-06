@@ -131,6 +131,10 @@ public class CombatAbility extends BaseCombatContent {
 		name:"Blood Soulskill",
 		group:"soulskill"
 	});
+	public static const CAT_MONSTER_SUMMON:int   = EnumValue.add(AllCategories, 13, "MONSTER_SUMMON", {
+		name:"Monster Summon",
+		group:"monstersummon"
+	});
 	
 	public static var AllTags:/*EnumValue*/Array = [];
 	public static const TAG_DAMAGING:int = EnumValue.add(AllTags, 0, 'DAMAGING', {

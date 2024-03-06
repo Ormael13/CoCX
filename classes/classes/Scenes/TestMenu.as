@@ -666,6 +666,7 @@ public class TestMenu extends BaseContent
 		if (!player.hasPerk(PerkLib.HiddenJobAsura)) player.createPerk(PerkLib.HiddenJobAsura, 0, 0, 0, 0);
 		if (!player.hasPerk(PerkLib.HiddenJobBloodDemon)) player.createPerk(PerkLib.HiddenJobBloodDemon, 0, 0, 0, 0);
 		if (!player.hasPerk(PerkLib.PrestigeJobGreySage)) player.createPerk(PerkLib.PrestigeJobGreySage, 0, 0, 0, 0);
+		if (!player.hasPerk(PerkLib.HiddenJobSwordImmortal)) player.createPerk(PerkLib.HiddenJobSwordImmortal, 0, 0, 0, 0);
 		doNext(SoulforceCheats);
 	}
 	public function learnHexes():void {
@@ -1688,7 +1689,7 @@ public class TestMenu extends BaseContent
 			addButton(3, "NineTailWhip", AddNineTailWhip).hint("Add 1 Nine Tail Whip.");
 			addButton(4, "DualLAxes", AddDualMinoAxes).hint("Add 1 pair of Large Axes.");
 			addButton(5, "UH Ayo Arm", AddUltraHeavyAyoArmor).hint("Add 1 Ultra heavy Ayo Armor for testing purposes.");
-			//6
+			addButton(6, "AncientConduit", AddAncientConduit).hint("Add 1 Ancient Conduit.");
 			addButton(7, "HB Mech", AddHBMech).hint("Add 1 Howling Banshee Mech for testing purposes.");
 			addButton(8, "GobMechPrime", AddGoblinMechPrime).hint("Add 1 Goblin Mech Prime for testing purposes.");
 			addButton(9, "GiantSlayerMech", AddGiantSlayerMech).hint("Add 1 Giant Slayer Mech for testing purposes.");
@@ -1874,6 +1875,10 @@ public class TestMenu extends BaseContent
 	public function AddDualMinoAxes():void {
 		outputText("\n\n<b>(Gained 1 pair of Large Axes!)</b>\n\n");
 		inventory.takeItem(weapons.DL_AXE_, curry(EquipmentMenu, 1));
+	}
+	public function AddAncientConduit():void {
+		outputText("\n\n<b>(Gained 1 Ancient Conduit!)</b>\n\n");
+		inventory.takeItem(shields.ANC_CON, curry(EquipmentMenu, 1));
 	}
 	public function AddUltraHeavyAyoArmor():void {
 		outputText("\n\n<b>(Gained 1 Ultra Heavy Ayo Armor!)</b>\n\n");
@@ -2692,4 +2697,4 @@ public class TestMenu extends BaseContent
 		SceneLib.lily.lilyEncounter();
 	}
 	}
-}
+}

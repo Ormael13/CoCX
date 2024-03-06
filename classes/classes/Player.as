@@ -1400,6 +1400,10 @@ use namespace CoC;
 			if (hasPerk(PerkLib.BloodDemonIntelligence)) progressBD += 1;
 			return progressBD;
 		}
+		public function compatibileSwordImmortalWeapons():Boolean {
+			if (isSwordTypeWeapon() || isDuelingTypeWeapon() || isDaggerTypeWeapon()) return true;
+			else return false;
+		}
 
 		public function allEquipment():/*ItemType*/Array {
 			var result:Array = [];
@@ -4586,6 +4590,8 @@ use namespace CoC;
 				hiddenJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobGreySage))
 				hiddenJobs1++;
+			if (hasPerk(PerkLib.HiddenJobSwordImmortal))
+				hiddenJobs1++;
 			return hiddenJobs1;
 		}
 		public function maxHiddenJobs():Number {
@@ -7622,6 +7628,7 @@ use namespace CoC;
 			for (var i:int = 0; i<durations.length; i++) {
 				durations[i] = 0;
 			}
-		}		
+		}
+				
 	}
-}
+}

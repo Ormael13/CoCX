@@ -6,6 +6,7 @@ package classes.Items.Weapons
 import classes.CoC;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Weapon;
+import classes.PerkLib;
 
 public class JeweledRapier extends Weapon {
 		
@@ -15,8 +16,11 @@ public class JeweledRapier extends Weapon {
 		
 		override public function get attack():Number {
 			var boost:int = 0;
-			if (CoC.instance.flags[kFLAGS.RAPHAEL_RAPIER_TRANING] < 2) boost += CoC.instance.flags[kFLAGS.RAPHAEL_RAPIER_TRANING] * 2;
-			else boost += 4 + (CoC.instance.flags[kFLAGS.RAPHAEL_RAPIER_TRANING] - 2);
+			if (game.player.hasPerk(PerkLib.HiddenJobSwordImmortal)) boost += 4;
+			else {
+				if (CoC.instance.flags[kFLAGS.RAPHAEL_RAPIER_TRANING] < 2) boost += CoC.instance.flags[kFLAGS.RAPHAEL_RAPIER_TRANING] * 2;
+				else boost += 4 + (CoC.instance.flags[kFLAGS.RAPHAEL_RAPIER_TRANING] - 2);
+			}
 			return (13 + boost);
 		}
 	}
