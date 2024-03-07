@@ -51,7 +51,7 @@ public function visitZeMagesTower():void {
 			addButton(10, "R.B.Tome", buyRestrainedTome, 100, weaponsrange.RB_TOME).hint("Buy Restrained Black Tome.");
 			addButton(12, "R.W.Tome", buyRestrainedTome, 100, weaponsrange.RW_TOME).hint("Buy Restrained White Tome.");
 		}
-		//if (player.gems >= 200) //11
+		if (player.gems >= 200) addButton(11, "R.G.Tome", buyRestrainedTome, 200, weaponsrange.RG_TOME).hint("Buy Restrained Grey Tome.");
 	}
 	//13 - diamond staff ^^
 	flags[kFLAGS.TIMES_BEEN_TO_LIBRARY]++;
