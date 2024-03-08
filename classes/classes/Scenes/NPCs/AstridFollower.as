@@ -45,5 +45,7 @@ package classes.Scenes.NPCs
 			outputText("you fall to the ground a panting mess as the moth girl approaches you and rubs her feet against your sex, she looks down at you with a mischievous smile before flying away leaving you hard as she giggles mockingly. You are left alone without release.");
 			cleanupAfterCombat();
 		}
+
+		//TODO sex scenes and actual conversation
 	}
 }
