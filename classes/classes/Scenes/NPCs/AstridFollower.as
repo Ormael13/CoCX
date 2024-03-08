@@ -25,9 +25,10 @@ package classes.Scenes.NPCs
 		addButton(1, "No", endEncounter);
 	}
 	public function introduceYourself():void {
-		outputText("She introduces herself... Do you reply back introducing yourself?(yes/no)");
+		outputText("She introduces herself as Astrid... Do you reply back introducing yourself?");
 		outputText("You look at her and smile telling her that your name is [PC name] she smiles at you and says nice to meet you,come by my cart anytime and I will sell you whatever you need maybe we can even chat.");
 		outputText("thanking her for her offer to help you and give you company as you return to camp.");
+		//TODO add Astrid to soulsense list here
 		addButton(1, "Return to Camp", endEncounter);
 	}
 
