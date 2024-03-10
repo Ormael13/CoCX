@@ -40,7 +40,8 @@ public class LizanMarrowMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireBonesAndMarrowMutationSlot()
-                    .requirePerk(PerkLib.LizanRegeneration).requireRace(Races.LIZARD);
+                    .requirePerk(PerkLib.LizanRegeneration)
+					.requireRace(Races.LIZARD);
                 }
                 else{
                     var pLvl:int = pTier * 30;

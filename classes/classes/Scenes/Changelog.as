@@ -152,7 +152,7 @@ public class Changelog extends BaseContent
 			outputText("-Kitsumori tails now change color depending on your fur color and hair color (they're still orange, just what color your fur/hair is determines what shade of orange, basically) (Lord Shadeogorath)\n");
 			outputText("-Added a toggle to the appearance menu that should show up if you have active lycanthropy, vulpesthropy, or selachimorphanthropy allows you to choose whether you want to show your 'human form' while at camp or if you wanna stay beast form all the time. (Lord Shadeogorath)\n");
 			outputText("-Marilith sprite implementations. (Liadri)\n");
-			outputText("-Orca balls no longer deluded into thinking they're a dog dick. (Lord Shadeogorath)\n");
+			outputText("-Sprite alignment adjustments. Orca balls no longer deluded into thinking they're a dog dick. Imp tome display fix. (Lord Shadeogorath)\n");
 			outputText("-In Tyrant State: You can delay your own defeat by Lust for two turns. Reducing your own Lust below the max will reset the timer. (30 training sessions with Tyrantia)\n");
 			outputText("-Incels enemy in Demon Laboratory would end grapple after few turns and right after will wait at least 2 round to grapple again.\n");
 			outputText("-New M. Special for Dracula/lina race: Shadow Teleport - Similar to displacer beast allow to temporarily dodge all attack for a short time (6 turns durtation and 10 turns cd, base cost 30 fatigue)\n");
@@ -162,7 +162,7 @@ public class Changelog extends BaseContent
 			outputText("-New range weapon/tome (by Ormael): Restrained Black Tome - buyable at Library in Tel'Adre. Cost 100 gems. Increase by 300/200/100% black spellpower and reduce by 3/2/1 turns cd of offensive black spells at levels below 6/12/18.\n");
 			outputText("-New range weapon/tome (by Ormael): Restrained White Tome - buyable at Library in Tel'Adre. Cost 100 gems. Increase by 300/200/100% white spellpower and reduce by 3/2/1 turns cd of offensive white spells at levels below 6/12/18.\n");
 			outputText("-New range weapon/tome (by Ormael): Restrained Grey Tome - buyable at Library in Tel'Adre. Cost 200 gems. Increase by 300/200/100% grey spellpower and reduce by 3/2/1 turns cd of offensive grey spells at levels below 6/12/18.\n");
-			outputText("-\n");
+			outputText("-Hellhound Fire Balls internal mutation req. for race changed to cerber or dog-morph at 8+ points and having hellfire perk.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
