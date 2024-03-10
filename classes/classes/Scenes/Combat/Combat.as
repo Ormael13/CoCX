@@ -930,6 +930,15 @@ public class Combat extends BaseContent {
 		if ((monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.StunnedTornado) || monster.hasStatusEffect(StatusEffects.Polymorphed) || monster.hasStatusEffect(StatusEffects.Sleep) || monster.hasStatusEffect(StatusEffects.Fascinated)) && (player.fatigueLeft() > combat.physicalCost(20)) && player.perkv1(IMutationsLib.HollowFangsIM) >= 2) {
 			bd = buttons.add("Bite", VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
 		}// || monster.hasStatusEffect(StatusEffects.InvisibleOrStealth)
+		if (player.hasPerk(PerkLib.SwordIntentAura)) {
+			if (player.statStore.hasBuff("SwordIntentAura")) {
+				buttons.add("SwordIntentAD", deactivateSwordIntentAura).hint("Disperse sword intent aura.");
+			} else {
+				bd = buttons.add("SwordIntentAA", activateSwordIntentAura, "Coat your weapons with sword intent aura. (It would drain soulforce and fatigue until dispersed)\n");
+				bd.requireSoulforce(10 * soulskillCost() * soulskillcostmulti());
+				bd.requireFatigue(10);
+			}
+		}
 		if (player.hasStatusEffect(StatusEffects.CombatFollowerZenji) && (player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 1 || player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 3)) {
 			bd = buttons.add("Heal Zenji", HealZenji);
 		}
@@ -6034,25 +6043,30 @@ public class Combat extends BaseContent {
                     //Damage is delivered HERE
                     if (isFireTypeWeapon()) {
                         damage = Math.round(damage * fireDamage);
+						if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
 						doFireDamage(damage, true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
                     }
                     else if (isIceTypeWeapon()) {
                         damage = Math.round(damage * iceDamage);
+						if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
                         doIceDamage(damage, true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
                     }
                     else if (isLightningTypeWeapon()) {
                         damage = Math.round(damage * lightningDamage);
+						if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
                         doLightningDamage(damage, true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
                     }
                     else if (isDarknessTypeWeapon()) {
                         damage = Math.round(damage * darkDamage);
+						if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
                         doDarknessDamage(damage, true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
                     }
                     else if (isPlasmaTypeWeapon()) {
+						if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
                         doPlasmaDamage(damage, true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
                     }
@@ -6087,11 +6101,13 @@ public class Combat extends BaseContent {
 						}
 					}
                     else if (player.hasStatusEffect(StatusEffects.ChargeWeapon) && !player.isUnarmedCombat()) {
+						if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
 						doPhysicalDamage(damage, true, true);
                         doMagicDamage(Math.round(damage * 0.2), true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 					}
                     else if (player.weapon == weapons.MGSWORD) {
+						if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
 						doMagicDamage(damage, true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 					}
@@ -6146,10 +6162,12 @@ public class Combat extends BaseContent {
 						}
                     }
                     if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) {
+						if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
 						doLightningDamage(Math.round(damage * 0.3), true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 					}
                     if (player.weapon == weapons.PRURUMI && player.spe >= 150) {
+						if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
                         doPhysicalDamage(damage, true, true);
                         if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightningDamage(Math.round(damage * 0.3), true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
@@ -6165,6 +6183,7 @@ public class Combat extends BaseContent {
                         }
                     }
                     if (player.hasStatusEffect(StatusEffects.FalseWeapon)) {
+						if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
                         if (player.weapon == weapons.PHALLUS) {
 							doPhysicalDamage((damage * 2), true, true);
 							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
@@ -6595,6 +6614,17 @@ public class Combat extends BaseContent {
 		doFireDamage(Math.round(damage * 2 * fireDamageBoostedByDao()), true, display);
 		var foxpunchlust:Number = (10 + player.cor / 8);
 		monster.teased((monster.lustVuln * foxpunchlust), false);
+	}
+	public function canLayerSwordIntentAura():Boolean {
+		if (player.statStore.hasBuff("SwordIntentAura") && player.compatibileSwordImmortalWeapons()) return true;
+		else return false;
+	}
+	public function layerSwordIntentAuraOnThis(damage:Number):Number {
+		var swordintentaura:Number = damage;
+		var siai:Number = 1.1;
+		swordintentaura *= siai;
+		swordintentaura = Math.round(swordintentaura);
+		return swordintentaura;
 	}
 
     public function JabbingStyleIncrement():void{
@@ -8282,7 +8312,7 @@ public class Combat extends BaseContent {
 		}
 		if (player.hasPerk(PerkLib.SharedPower) && player.perkv1(PerkLib.SharedPower) > 0) damage *= (1+(0.1*player.perkv1(PerkLib.SharedPower)));
 		damage *= EyesOfTheHunterDamageBonus();
-		if (monster.hasPerk(PerkLib.EnemyGhostType)) damage = 0;
+		if (monster.hasPerk(PerkLib.EnemyGhostType) && !canLayerSwordIntentAura()) damage = 0;
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             doNext(endHpVictory);
@@ -9041,6 +9071,11 @@ public class Combat extends BaseContent {
 			var soulforcecost:int = 50 * soulskillCost() * soulskillcostmulti();
 			player.soulforce -= soulforcecost;
 			useMana((100 * combat.mspecials.kitsuneskill2Cost()), Combat.USEMANA_MAGIC_NOBM);
+		}
+		if (player.statStore.hasBuff("SwordIntentAura")) {
+			var soulforcecost2:int = 10 * soulskillCost() * soulskillcostmulti();
+			player.soulforce -= soulforcecost2;
+			fatigue(physicalCost(10));
 		}
         combatRoundOver();
     }
@@ -10526,6 +10561,16 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
             if (player.HP <= (player.minHP() + Math.round(player.maxHP()*0.05))) {
                 player.statStore.removeBuffs("ScarletSpiritCharge");
                 outputText("<b>The flow of blood within you is disturbed, causing your body to slump as the glow radiating from your [skin] dissipates back into your natural hue.</b>\n\n");
+            }
+            //	else {
+            //		outputText("<b>As your soulforce is drained you can feel the Violet Pupil Transformation's regenerative power spreading in your body.</b>\n\n");
+            //	}
+        }
+        //Sword Intent Aura
+        if (player.statStore.hasBuff("SwordIntentAura")) {
+            if ((player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) || (player.fatigue + physicalCost(10) > player.maxOverFatigue())) {
+                player.statStore.removeBuffs("SwordIntentAura");
+                outputText("<b>You can't no longer sustain sword intent aura, which flicker before it disperse fully.</b>\n\n");
             }
             //	else {
             //		outputText("<b>As your soulforce is drained you can feel the Violet Pupil Transformation's regenerative power spreading in your body.</b>\n\n");
@@ -14693,6 +14738,26 @@ public function taintedMindAttackAttempt():void {
     outputText("You ready an attack, but find your hands groping your own body instead. Somehow the demon’s magic has made it impossible to strike at him, crossing wires that weren’t meant to be crossed. Frowning, you look down at your more aroused form, determined not to fall for this a second time.");
     player.takeLustDamage(15, true);
     enemyAIImpl();
+}
+
+public function activateSwordIntentAura():void {
+	flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+	clearOutput();
+	var soulforcecost:int = 10 * soulskillCost() * soulskillcostmulti();
+	player.soulforce -= soulforcecost;
+	activateSwordIntentAura2();
+}
+public function activateSwordIntentAura2():void {
+	fatigue(10, USEFATG_PHYSICAL);
+	outputText("Holding out your palm, you conjure sword energy that dances across your fingertips.  Then is spread all over your weapons!\n\n");
+	player.buff("SwordIntentAura").combatPermanent();
+	enemyAI();
+}
+public function deactivateSwordIntentAura():void {
+	clearOutput();
+	outputText("You disperse sword intent aura coating weapons.");
+	player.buff("SwordIntentAura").remove();
+	enemyAI();
 }
 
 //Heal Zenji

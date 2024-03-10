@@ -563,11 +563,13 @@ import classes.Scenes.NPCs.Forgefather;
 		public override function maxOverFatigue():Number {
 			var max1:Number = maxFatigue();
 			var max2:Number = 1;
-			if (hasPerk(PerkLib.HiddenJobSwordImmortal)) max2 += 0.04;
+			if (hasPerk(PerkLib.HiddenJobSwordImmortal)) max2 += 0.05;
+			if (hasPerk(PerkLib.SwordIntentAura)) max2 += 0.05;
+			if (hasPerk(PerkLib.SwordImmortalFirstForm)) max2 += 0.05;
 			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
-			max1 *= max2;//~115%
+			max1 *= max2;//~125%
 			max1 = Math.round(max1);
-			if (max1 > 1799999) max1 = 1799999;
+			if (max1 > 1899999) max1 = 1899999;
 			return max1;
 		}
 
@@ -679,12 +681,14 @@ import classes.Scenes.NPCs.Forgefather;
 		public override function maxOverSoulforce():Number {
 			var max1:Number = maxSoulforce();
 			var max2:Number = 1;
-			if (hasPerk(PerkLib.HiddenJobSwordImmortal)) max2 += 0.04;
+			if (hasPerk(PerkLib.HiddenJobSwordImmortal)) max2 += 0.05;
+			if (hasPerk(PerkLib.SwordIntentAura)) max2 += 0.05;
+			if (hasPerk(PerkLib.SwordImmortalFirstForm)) max2 += 0.05;
 			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
 			if (perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 4) max2 += 0.2;
-			max1 *= max2;//~110%
+			max1 *= max2;//~125%
 			max1 = Math.round(max1);
-			if (max1 > 1699999) max1 = 1699999;
+			if (max1 > 1899999) max1 = 1899999;
 			return max1;
 		}
 
@@ -719,7 +723,7 @@ import classes.Scenes.NPCs.Forgefather;
 			}
 			max *= multimax;//~245%
 			max = Math.round(max);//476 414,75
-			if (max > 476999) max = 476999;
+			if (max > 495999) max = 495999;
 			return max;
 		}
 		public override function maxOverWrath():Number {
@@ -734,11 +738,13 @@ import classes.Scenes.NPCs.Forgefather;
 			if (hasPerk(PerkLib.AsuraToughness)) max2 += 0.1;
 			//
 			if (hasPerk(PerkLib.AsuraSpeed)) max2 += 0.1;
-			if (hasPerk(PerkLib.HiddenJobSwordImmortal)) max2 += 0.04;
+			if (hasPerk(PerkLib.HiddenJobSwordImmortal)) max2 += 0.05;
+			if (hasPerk(PerkLib.SwordIntentAura)) max2 += 0.05;
+			if (hasPerk(PerkLib.SwordImmortalFirstForm)) max2 += 0.05;
 			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
-			max1 *= max2;//~180%
-			max1 = Math.round(max1);//~857 546,5
-			if (max1 > 859999) max1 = 859999;
+			max1 *= max2;//~190%
+			max1 = Math.round(max1);//~905 188,025
+			if (max1 > 915999) max1 = 915999;
 			return max1;
 		}
 		public function maxSafeWrathMagicalAbilities():Number {

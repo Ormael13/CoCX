@@ -2432,8 +2432,13 @@ public class PlayerInfo extends BaseContent {
 		if (page == 5) {
 			if (player.hasPerk(PerkLib.HiddenJobSwordImmortal)) addButtonDisabled(0, "HJ:SI", "You already have this perk.");
 			else {
-				if (player.freeHiddenJobsSlots() > 0 && player.hasPerk(PerkLib.SoulApprentice) && player.hasPerk(PerkLib.KillingIntent)) addButton(0, "HJ:SI", perkHiddenJobSwordImmortal).hint("Choose the 'Hidden Job: Sword Immortal' super perk. You began your journey as beginner Sword Immortal. (+4% of OverMax Wrath / Fatigue / Soulforce)");
-				else addButtonDisabled(0, "HJ:SI", "You do not have a free slot for this hidden job. Or not meet other requirements.");
+				if (player.freeHiddenJobsSlots() > 0 && player.hasPerk(PerkLib.SoulApprentice) && player.hasPerk(PerkLib.KillingIntent)) addButton(0, "HJ:SI", perkHiddenJobSwordImmortal).hint("Choose the 'Hidden Job: Sword Immortal' super perk. You began your journey as beginner Sword Immortal. (+5% of OverMax Wrath / Fatigue / Soulforce)");
+				else addButtonDisabled(0, "HJ:SI", "You do not have a free slot for this hidden job. Or not meet other requirements (Soul Apprentice / Killing Intent perks).");
+			}
+			if (player.hasPerk(PerkLib.SwordIntentAura)) addButtonDisabled(1, "SIA", "You already have this perk.");
+			else {
+				if (player.hasPerk(PerkLib.SoulPersonage) && player.hasPerk(PerkLib.HiddenJobSwordImmortal)) addButton(1, "SIA", perkSwordIntentAura).hint("Choose the 'Sword Intent (Aura)' super perk. Your Killing Intent can become focused into Sword Intent aura enveloping your weapons as long they are sword-type. Would apply bonuses from the job to flying swords too. (+5% of OverMax Wrath / Fatigue / Soulforce)");
+				else addButtonDisabled(1, "SIA", "You need to first have the 'Hidden Job: Sword Immortal' super perk and Soul Personage perk.");
 			}
 			addButton(12, "Previous", superPerkBuyMenu, page - 1);
 			addButton(13, "Next", superPerkBuyMenu, page + 1);
@@ -2678,6 +2683,12 @@ public class PlayerInfo extends BaseContent {
 		player.createPerk(PerkLib.HiddenJobSwordImmortal,0,0,0,0);
 		clearOutput();
 		outputText("You gained 'Hidden Job: Sword Immortal' super perk.");
+		doNext(superPerkBuyMenu, 5);
+	}
+	private function perkSwordIntentAura():void {
+		player.createPerk(PerkLib.SwordIntentAura,0,0,0,0);
+		clearOutput();
+		outputText("You gained 'Sword Intent (Aura)' super perk.");
 		doNext(superPerkBuyMenu, 5);
 	}
 	private function perkDeityJobMunchkin():void {
