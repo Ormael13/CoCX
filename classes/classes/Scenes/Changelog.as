@@ -157,10 +157,11 @@ public class Changelog extends BaseContent
 			outputText("-Incels enemy in Demon Laboratory would end grapple after few turns and right after will wait at least 2 round to grapple again.\n");
 			outputText("-New M. Special for Dracula/lina race: Shadow Teleport - Similar to displacer beast allow to temporarily dodge all attack for a short time (6 turns durtation and 10 turns cd, base cost 30 fatigue)\n");
 			outputText("-New passive for Dracula/lina race: Bat swarm - When in battle, bat familiars swarm around you, biting and wounding your foes. The blood spilled is shared back to you. (gives thirst stack(s) and regenerate up to 3% max HP per turn)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New event perk: Hidden Job: Sword Immortal. Gained by having free slot for hidden job and perks: Soul Apprentice & Killing Intent. Effects: Allow to reach OverMax Wrath / Fatigue / Soulforce equal to 104% of current max wrath / fatigue / soulforce. Allow to use any sword, dueling sword, dagger weapon with max possible atk value, ");
+			outputText("increase mastery gains for those three types of weapons by 200% of base value, increase dealt damage by 2x for those three types of weapons.\n");
+			outputText("-New range weapon/tome (by Ormael): Restrained Black Tome - buyable at Library in Tel'Adre. Cost 100 gems. Increase by 300/200/100% black spellpower and reduce by 3/2/1 turns cd of offensive black spells at levels below 6/12/18.\n");
+			outputText("-New range weapon/tome (by Ormael): Restrained White Tome - buyable at Library in Tel'Adre. Cost 100 gems. Increase by 300/200/100% white spellpower and reduce by 3/2/1 turns cd of offensive white spells at levels below 6/12/18.\n");
+			outputText("-New range weapon/tome (by Ormael): Restrained Grey Tome - buyable at Library in Tel'Adre. Cost 200 gems. Increase by 300/200/100% grey spellpower and reduce by 3/2/1 turns cd of offensive grey spells at levels below 6/12/18.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -189,7 +190,7 @@ public class Changelog extends BaseContent
 			outputText("-Fixed bugs: Arigean above Recruit rank not immune to tf-ing effects, deer arms tf unlocking canine arms MM, unable to find tel'adre again after first time seeing it with too high corruption or other factor that not allowed entrance; Arigean above recruit rank marking, eye color and aura with mismatching colors; demon/arigean arms MM option giving instead devil/abyssal shark arms, ");
 			outputText("Zenji training stats not having gains decrease from +4 to +1 for repeated training before daily reset for other than wisdom stats, resources not been recovered after using specials/soulskills/spells, nail buy menu at carpenter having misleading text, combat wounds % display at stats page been 100x lower, Sandworm PC not counting toward checks for having natural armor, demon face tf");
 			outputText("giving arigean face instead, gym weight lifting capping tone at 85, when building cabin text not picking correct name for Jojo/Joy line, Magical Fertility & Magical Virility perk desc bonus value display error, differences between desc dmg reduction and actualt DR from main difficulty setting, sneak melee/range attack diff between displayer and actualy dealt dmg to enemy, ");
-			outputText("Veseshe preset giving History: Scout instead of History: Whore, Tyrantia training capping at 20 sessions\n\n");
+			outputText("Veseshe preset giving History: Scout instead of History: Whore, Tyrantia training capping at 20 sessions, elfs IM instead of orca/whale IM increasing thickness cap\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8w-z:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");

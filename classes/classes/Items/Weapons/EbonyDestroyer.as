@@ -2,6 +2,7 @@ package classes.Items.Weapons
 {
 	import classes.Items.Weapon;
 	import classes.Items.ItemTags;
+	import classes.PerkLib;
 
 	public class EbonyDestroyer extends Weapon
 	{
@@ -16,28 +17,31 @@ package classes.Items.Weapons
 		}
 		override public function get attack():Number {
 			var boost:int = 0;
-			var scal:Number = 10;
-			if (game.player.str >= 250) {
-				boost += 50;
-				scal -= 1;
+			if (game.player.hasPerk(PerkLib.HiddenJobSwordImmortal)) boost += 170;
+			else {
+				var scal:Number = 10;
+				if (game.player.str >= 250) {
+					boost += 50;
+					scal -= 1;
+				}
+				if (game.player.str >= 200) {
+					boost += 40;
+					scal -= 1;
+				}
+				if (game.player.str >= 150) {
+					boost += 30;
+					scal -= 1;
+				}
+				if (game.player.str >= 100) {
+					boost += 20;
+					scal -= 1;
+				}
+				if (game.player.str >= 50) {
+					boost += 10;
+					scal -= 1;
+				}
+				boost += Math.round(game.player.cor / scal);
 			}
-			if (game.player.str >= 200) {
-				boost += 40;
-				scal -= 1;
-			}
-			if (game.player.str >= 150) {
-				boost += 30;
-				scal -= 1;
-			}
-			if (game.player.str >= 100) {
-				boost += 20;
-				scal -= 1;
-			}
-			if (game.player.str >= 50) {
-				boost += 10;
-				scal -= 1;
-			}
-			boost += Math.round(game.player.cor / scal);
 			return (10 + boost);
 		}
 	}

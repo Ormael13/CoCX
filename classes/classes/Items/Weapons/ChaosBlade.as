@@ -2,6 +2,7 @@ package classes.Items.Weapons
 {
 import classes.Items.Weapon;
 import classes.Items.ItemTags;
+import classes.PerkLib;
 import classes.Player;
 
 public class ChaosBlade extends Weapon
@@ -18,16 +19,19 @@ public class ChaosBlade extends Weapon
     }
     override public function get attack():Number {
         var boost:int = 0;
-        var scal:Number = 10;
-		if (game.player.spe >= 100) {
-			boost += 10;
-			scal -= 3;
+		if (game.player.hasPerk(PerkLib.HiddenJobSwordImmortal)) boost += 40;
+		else {
+			var scal:Number = 10;
+			if (game.player.spe >= 100) {
+				boost += 10;
+				scal -= 3;
+			}
+			if (game.player.spe >= 50) {
+				boost += 10;
+				scal -= 2;
+			}
+			boost += Math.round(game.player.cor / scal);
 		}
-		if (game.player.spe >= 50) {
-			boost += 10;
-			scal -= 2;
-		}
-		boost += Math.round(game.player.cor / scal);
         return (15 + (3 * boost));
     }
 }

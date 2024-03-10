@@ -4,6 +4,7 @@ import classes.CoC;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Weapon;
 import classes.Items.ItemTags;
+import classes.PerkLib;
 
 public class BlackWidow extends Weapon
 	{
@@ -17,19 +18,22 @@ public class BlackWidow extends Weapon
 		}
 		override public function get attack():Number{
 			var boost:int = 0;
-			var scal:Number = 20;
-			if (game.player.spe >= 100) {
-				boost += 20;
-				scal -= 5;
+			if (game.player.hasPerk(PerkLib.HiddenJobSwordImmortal)) boost += 64;
+			else {
+				var scal:Number = 20;
+				if (game.player.spe >= 100) {
+					boost += 20;
+					scal -= 5;
+				}
+				if (game.player.spe >= 50) {
+					boost += 20;
+					scal -= 5;
+				}
+				boost += Math.round(game.player.cor / scal);
+				boost += (game.player.femininity / scal);
+				if (CoC.instance.flags[kFLAGS.RAPHAEL_RAPIER_TRANING] < 2) boost += CoC.instance.flags[kFLAGS.RAPHAEL_RAPIER_TRANING] * 2;
+				else boost += 4 + (CoC.instance.flags[kFLAGS.RAPHAEL_RAPIER_TRANING] - 2);
 			}
-			if (game.player.spe >= 50) {
-				boost += 20;
-				scal -= 5;
-			}
-			boost += Math.round(game.player.cor / scal);
-			boost += (game.player.femininity / scal);
-			if (CoC.instance.flags[kFLAGS.RAPHAEL_RAPIER_TRANING] < 2) boost += CoC.instance.flags[kFLAGS.RAPHAEL_RAPIER_TRANING] * 2;
-			else boost += 4 + (CoC.instance.flags[kFLAGS.RAPHAEL_RAPIER_TRANING] - 2);
 			return (20 + boost);
 		}
 	}

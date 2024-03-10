@@ -1400,6 +1400,10 @@ use namespace CoC;
 			if (hasPerk(PerkLib.BloodDemonIntelligence)) progressBD += 1;
 			return progressBD;
 		}
+		public function compatibileSwordImmortalWeapons():Boolean {
+			if (isSwordTypeWeapon() || isDuelingTypeWeapon() || isDaggerTypeWeapon()) return true;
+			else return false;
+		}
 
 		public function allEquipment():/*ItemType*/Array {
 			var result:Array = [];
@@ -4586,6 +4590,8 @@ use namespace CoC;
 				hiddenJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobGreySage))
 				hiddenJobs1++;
+			if (hasPerk(PerkLib.HiddenJobSwordImmortal))
+				hiddenJobs1++;
 			return hiddenJobs1;
 		}
 		public function maxHiddenJobs():Number {
@@ -5475,7 +5481,7 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 1) maxThicknessCap += 10;
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 2) maxThicknessCap += 20;
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 3) maxThicknessCap += 30;
-			if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 2) maxThicknessCap += 10;
+			if (perkv1(IMutationsLib.WhaleFatIM) >= 2) maxThicknessCap += 10;
 			if (perkv1(IMutationsLib.HumanFatIM) >= 1 && racialScore(Races.HUMAN) > 17) maxThicknessCap += 5;
 			if (perkv1(IMutationsLib.HumanFatIM) >= 2 && racialScore(Races.HUMAN) > 17) maxThicknessCap += 10;
 			if (perkv1(IMutationsLib.HumanFatIM) >= 3 && racialScore(Races.HUMAN) > 17) maxThicknessCap += 15;
@@ -7622,6 +7628,7 @@ use namespace CoC;
 			for (var i:int = 0; i<durations.length; i++) {
 				durations[i] = 0;
 			}
-		}		
+		}
+				
 	}
-}
+}

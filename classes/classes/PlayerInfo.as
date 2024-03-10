@@ -649,6 +649,7 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Maximum Safe Wrath II (treshold after which magic soulskills are unaccesable):</b> " + player.maxSafeWrathMagicalAbilities() + "\n";
 		combatStats += "<b>Over HP (HP amount that can be reached beyond default 100% of Health bar):</b> " + (player.maxOverHP() - player.maxHP()) + "\n";
 		combatStats += "<b>Over Lust (Lust amount that can be reached beyond default 100% of Lust bar):</b> " + (player.maxOverLust() - player.maxLust()) + "\n";
+		combatStats += "<b>Over Fatigue (Fatigue amount that can be reached beyond default 100% of Fatigue bar):</b> " + (player.maxOverFatigue() - player.maxFatigue()) + "\n";
 		combatStats += "<b>Over Wrath (Wrath amount that can be reached beyond default 100% of Wrath bar):</b> " + (player.maxOverWrath() - player.maxWrath()) + "\n";
 		combatStats += "<b>Over Mana (Mana amount that can be reached beyond default 100% of Mana bar):</b> " + (player.maxOverMana() - player.maxMana()) + "\n";
 		combatStats += "<b>Over Soulforce (Soulforce amount that can be reached beyond default 100% of Soulforce bar):</b> " + (player.maxOverSoulforce() - player.maxSoulforce()) + "\n";
@@ -2429,6 +2430,27 @@ public class PlayerInfo extends BaseContent {
 			addButton(14, "Back", playerMenu);
 		}
 		if (page == 5) {
+			if (player.hasPerk(PerkLib.HiddenJobSwordImmortal)) addButtonDisabled(0, "HJ:SI", "You already have this perk.");
+			else {
+				if (player.freeHiddenJobsSlots() > 0 && player.hasPerk(PerkLib.SoulApprentice) && player.hasPerk(PerkLib.KillingIntent)) addButton(0, "HJ:SI", perkHiddenJobSwordImmortal).hint("Choose the 'Hidden Job: Sword Immortal' super perk. You began your journey as beginner Sword Immortal. (+4% of OverMax Wrath / Fatigue / Soulforce)");
+				else addButtonDisabled(0, "HJ:SI", "You do not have a free slot for this hidden job. Or not meet other requirements.");
+			}
+			addButton(12, "Previous", superPerkBuyMenu, page - 1);
+			addButton(13, "Next", superPerkBuyMenu, page + 1);
+			addButton(14, "Back", playerMenu);
+		}/*
+		if (page == 6) {
+			if (player.superPerkPoints > 0) {
+			
+			}
+			else {
+			
+			}
+			addButton(12, "Previous", superPerkBuyMenu, page - 1);
+			addButton(13, "Next", superPerkBuyMenu, page + 1);
+			addButton(14, "Back", playerMenu);
+		}*/
+		if (page == 6) {
 			if (player.superPerkPoints > 0) {
 				if (player.level >= 90) {
 					if (player.hasPerk(PerkLib.DeityJobMunchkin)) addButtonDisabled(0, "DJ:M", "You already have this perk.");
@@ -2467,17 +2489,6 @@ public class PlayerInfo extends BaseContent {
 			}
 			addButton(12, "Previous", superPerkBuyMenu, page - 1);
 			//12 -> page + 1 button
-			addButton(14, "Back", playerMenu);
-		}
-		if (page == 6) {
-			if (player.superPerkPoints > 0) {
-			
-			}
-			else {
-			
-			}
-			//12 -> page - 1 button
-			//13 -> page + 1 button
 			addButton(14, "Back", playerMenu);
 		}
 	}
@@ -2663,26 +2674,32 @@ public class PlayerInfo extends BaseContent {
 		outputText("You gained 'Grey Sage Wisdom' super perk.");
 		doNext(superPerkBuyMenu, 4);
 	}
+	private function perkHiddenJobSwordImmortal():void {
+		player.createPerk(PerkLib.HiddenJobSwordImmortal,0,0,0,0);
+		clearOutput();
+		outputText("You gained 'Hidden Job: Sword Immortal' super perk.");
+		doNext(superPerkBuyMenu, 5);
+	}
 	private function perkDeityJobMunchkin():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.DeityJobMunchkin,0,0,0,0);
 		clearOutput();
 		outputText("You gained 'Deity Job: Munchkin' super munchkin perk. (Because it's too cool to merely be a super perk, right?)");
-		doNext(superPerkBuyMenu, 5);
+		doNext(superPerkBuyMenu, 6);
 	}
 	private function perkMunchkinAtGym():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.MunchkinAtGym,0,0,0,0);
 		clearOutput();
 		outputText("You gained 'Munchkin @ Gym' super munchkin perk. (Because it's too cool to merely be a super perk, right?)");
-		doNext(superPerkBuyMenu, 5);
+		doNext(superPerkBuyMenu, 6);
 	}
 	private function perkMunchkinAtWork():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.MunchkinAtWork,0,0,0,0);
 		clearOutput();
 		outputText("You gained 'Munchkin @ Work' super munchkin perk. (Because it's too cool to merely be a super perk, right?)");
-		doNext(superPerkBuyMenu, 5);
+		doNext(superPerkBuyMenu, 6);
 	}
 }
 }

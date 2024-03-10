@@ -11402,7 +11402,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("You gulp the bottle's contents, and its sweet taste immediately invigorates you, making you feel calm and concentrated");
         //-60 fatigue, -2 libido, -20 lust]
-        fatigue(-(Math.round(player.maxFatigue() * 0.05) + 180));
+        fatigue(-(Math.round(player.maxOverFatigue() * 0.05) + 180));
         dynStats("lus", -(Math.round(player.maxLust() * 0.05) + 90), "cor", -2);
         player.addCurse("lib", 2, 1);
 		if (player.perkv1(IMutationsLib.DisplacerMetabolismIM) >= 1) player.displacerFeedFromBottle();
@@ -11414,7 +11414,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("The water is cool and sweet to the taste, and every swallow makes you feel calmer, cleaner, and refreshed.  You drink until your thirst is quenched, feeling purer in both mind and body. ");
         //-30 fatigue, -2 libido, -10 lust]
-        fatigue(-(Math.round(player.maxFatigue() * 0.02) + 40));
+        fatigue(-(Math.round(player.maxOverFatigue() * 0.02) + 40));
         dynStats("lus", -(Math.round(player.maxLust() * 0.06) + 100), "cor", (-4 - rand(3)));
         player.addCurse("lib", 2, 1);
         HPChange(100 + (10 * player.level) + rand(10 * player.level), true);
@@ -12070,7 +12070,7 @@ public final class Mutations extends MutationsHelper {
     public function purityPeach(player:Player):void {
         clearOutput();
         outputText("You bite into the sweet, juicy peach, feeling a sensation of energy sweeping through your limbs and your mind.  You feel revitalized, refreshed, and somehow cleansed.  ");
-        fatigue(-(Math.round(player.maxFatigue() * 0.01)+10));
+        fatigue(-(Math.round(player.maxOverFatigue() * 0.01)+10));
         HPChange(Math.round(player.maxHP() * 0.20), true);
         player.refillHunger(20);
     }

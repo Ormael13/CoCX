@@ -2,6 +2,7 @@ package classes.Items.Weapons
 {
 import classes.Items.Weapon;
 import classes.Scenes.SceneLib;
+import classes.PerkLib;
 
 public class ScarredBlade extends Weapon
 	{
@@ -14,6 +15,7 @@ public class ScarredBlade extends Weapon
 		override public function get attack():Number {
 			var temp:int = 10 + int((game.player.cor - 70) / 3);
 			if (temp < 10) temp = 10;
+			if (game.player.hasPerk(PerkLib.HiddenJobSwordImmortal)) temp = 20;
 			return temp;
 		}
 		
