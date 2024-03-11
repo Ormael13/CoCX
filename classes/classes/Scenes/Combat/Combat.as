@@ -6620,11 +6620,11 @@ public class Combat extends BaseContent {
 		else return false;
 	}
 	public function layerSwordIntentAuraOnThis(damage:Number):Number {
-		var swordintentaura:Number = damage;
-		var siai:Number = 1.1;
-		swordintentaura *= siai;
-		swordintentaura = Math.round(swordintentaura);
-		return swordintentaura;
+		var swordintentaura:Number = 1.1;
+		if (player.hasPerk(PerkLib.SwordImmortalFirstForm)) swordintentaura += 0.15;
+		damage *= swordintentaura;
+		damage = Math.round(damage);
+		return damage;
 	}
 
     public function JabbingStyleIncrement():void{
@@ -11977,6 +11977,14 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 			player.wrath += 300;
 			if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
 		}
+		if (player.hasPerk(PerkLib.SwordImmortalFirstForm)) {
+			player.wrath += 100;
+			if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
+			player.fatigue -= 100;
+			if (player.fatigue < 0) player.fatigue = 0;
+			player.soulforce += 100;
+			if (player.soulforce > player.maxOverSoulforce()) player.soulforce = player.maxOverSoulforce();
+		}
 		meleeDamageNoLag = 0;
 		applyAutocast0();
         if (!player.statStore.hasBuff("Supercharged")) magic.applyAutocast();
@@ -14750,7 +14758,18 @@ public function activateSwordIntentAura():void {
 public function activateSwordIntentAura2():void {
 	fatigue(10, USEFATG_PHYSICAL);
 	outputText("Holding out your palm, you conjure sword energy that dances across your fingertips.  Then is spread all over your weapons!\n\n");
-	player.buff("SwordIntentAura").combatPermanent();
+	var temp1:Number = 0;
+	var temp2:Number = 0.05;
+	var tempSpe:Number;
+	if (player.hasPerk(PerkLib.SwordImmortalFirstForm)) temp2 += 0.15;
+	temp1 += player.speStat.core.value * temp2;
+	temp1 = Math.round(temp1);
+	var oldHPratio:Number = player.hp100/100;
+	tempSpe = temp1;
+	mainView.statsView.showStatUp('spe');
+	player.buff("SwordIntentAura").addStats({spe:tempSpe}).withText("Sword Intent Aura").combatPermanent();
+	player.HP = oldHPratio*player.maxHP();
+	statScreenRefresh();
 	enemyAI();
 }
 public function deactivateSwordIntentAura():void {

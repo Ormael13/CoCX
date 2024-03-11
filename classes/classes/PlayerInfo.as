@@ -2437,8 +2437,13 @@ public class PlayerInfo extends BaseContent {
 			}
 			if (player.hasPerk(PerkLib.SwordIntentAura)) addButtonDisabled(1, "SIA", "You already have this perk.");
 			else {
-				if (player.hasPerk(PerkLib.SoulPersonage) && player.hasPerk(PerkLib.HiddenJobSwordImmortal)) addButton(1, "SIA", perkSwordIntentAura).hint("Choose the 'Sword Intent (Aura)' super perk. Your Killing Intent can become focused into Sword Intent aura enveloping your weapons as long they are sword-type. Would apply bonuses from the job to flying swords too. (+5% of OverMax Wrath / Fatigue / Soulforce)");
+				if (player.hasPerk(PerkLib.SoulPersonage) && player.hasPerk(PerkLib.HiddenJobSwordImmortal)) addButton(1, "SIA", perkSwordIntentAura).hint("Choose the 'Sword Intent (Aura)' super perk. Your Killing Intent can become focused into Sword Intent aura enveloping your weapons as long they are sword-type (+5% of core spe, +10% dmg). Would apply bonuses from the job to flying swords too. (+5% of OverMax Wrath / Fatigue / Soulforce)");
 				else addButtonDisabled(1, "SIA", "You need to first have the 'Hidden Job: Sword Immortal' super perk and Soul Personage perk.");
+			}
+			if (player.hasPerk(PerkLib.SwordImmortalFirstForm)) addButtonDisabled(2, "SIFF", "You already have this perk.");
+			else {
+				if (player.hasPerk(PerkLib.SoulWarrior) && player.hasPerk(PerkLib.SwordIntentAura)) addButton(2, "SIFF", perkSwordImmortalFirstForm).hint("Choose the 'Sword Immortal: First Form' super perk. You reached First Form stage. Increase sword intent aura effects (+15% of core spe, +15% dmg) and gives small boost at the combat start (+100 wrath/sf, -100 fatigue) (+5% of OverMax Wrath / Base STR Cap / Fatigue / Base SPE Cap / Soulforce / Base WIS Cap)");
+				else addButtonDisabled(2, "SIFF", "You need to first have the 'Sword Intent (Aura)' super perk and Soul Warrior perk.");
 			}
 			addButton(12, "Previous", superPerkBuyMenu, page - 1);
 			addButton(13, "Next", superPerkBuyMenu, page + 1);
@@ -2689,6 +2694,12 @@ public class PlayerInfo extends BaseContent {
 		player.createPerk(PerkLib.SwordIntentAura,0,0,0,0);
 		clearOutput();
 		outputText("You gained 'Sword Intent (Aura)' super perk.");
+		doNext(superPerkBuyMenu, 5);
+	}
+	private function perkSwordImmortalFirstForm():void {
+		player.createPerk(PerkLib.SwordImmortalFirstForm,0,0,0,0);
+		clearOutput();
+		outputText("You gained 'Sword Immortal: First Form' super perk.");
 		doNext(superPerkBuyMenu, 5);
 	}
 	private function perkDeityJobMunchkin():void {

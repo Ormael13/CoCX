@@ -4422,9 +4422,9 @@ public class PerkLib
 		public static const HiddenJobSwordImmortal:PerkType = mk("Hidden Job: Sword Immortal", "Job ( Hiden ): Sword Immortal",
 				"You began your journey as beginner Sword Immortal. (+5% of OverMax Wrath / Fatigue / Soulforce)");
 		public static const SwordIntentAura:PerkType = mk("Sword Intent (Aura)", "Sword Intent (Aura)",
-				"Your Killing Intent can become focused into Sword Intent aura enveloping your weapons as long they are sword-type. Would apply bonuses from the job to flying swords too. (+5% of OverMax Wrath / Fatigue / Soulforce)");
+				"Your Killing Intent can become focused into Sword Intent aura enveloping your weapons as long they are sword-type (+5% of core spe, +10% dmg). Would apply bonuses from the job to flying swords too. (+5% of OverMax Wrath / Fatigue / Soulforce)");
 		public static const SwordImmortalFirstForm:PerkType = mk("Sword Immortal: First Form", "Sword Immortal: First Form",
-				"You reached First Form stage. (+5% of OverMax Wrath / Base STR Cap / Fatigue / Base SPE Cap / Soulforce / Base WIS Cap)");
+				"You reached First Form stage. Increase sword intent aura effects (+15% of core spe, +15% dmg) and gives small boost at the combat start (+100 wrath/sf, -100 fatigue) (+5% of OverMax Wrath / Base STR Cap / Fatigue / Base SPE Cap / Soulforce / Base WIS Cap)");
 		public static const SwordImmortalSecondForm:PerkType = mk("Sword Immortal: Second Form", "Sword Immortal: Second Form",
 				"You reached Second Form stage. (+5% of OverMax Wrath / Base STR Cap / Fatigue / Base SPE Cap / Soulforce / Base WIS Cap)");
 		public static const SwordImmortalThirdForm:PerkType = mk("Sword Immortal: Third Form", "Sword Immortal: Third Form",
@@ -8115,4 +8115,4 @@ public class PerkLib
         }
 	}
 }
-}
+}

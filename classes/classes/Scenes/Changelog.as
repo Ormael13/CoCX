@@ -163,8 +163,8 @@ public class Changelog extends BaseContent
 			outputText("-New range weapon/tome (by Ormael): Restrained White Tome - buyable at Library in Tel'Adre. Cost 100 gems. Increase by 300/200/100% white spellpower and reduce by 3/2/1 turns cd of offensive white spells at levels below 6/12/18.\n");
 			outputText("-New range weapon/tome (by Ormael): Restrained Grey Tome - buyable at Library in Tel'Adre. Cost 200 gems. Increase by 300/200/100% grey spellpower and reduce by 3/2/1 turns cd of offensive grey spells at levels below 6/12/18.\n");
 			outputText("-Hellhound Fire Balls internal mutation req. for race changed to cerber or dog-morph at 8+ points and having hellfire perk.\n");
-			outputText("-New event perk: Sword Intent (Aura). Gained by having 'Hidden Job: Sword Immortal' super perk and Soul Personage perk. Effects: Your Killing Intent can become focused into Sword Intent aura enveloping your weapons as long they are sword-type (with aura they can then hurt enemies immune to physical attacks). Would apply bonuses from the job to flying swords too. (+5% of OverMax Wrath / Fatigue / Soulforce)\n");
-			//outputText("-New event perk: Sword Immortal: First Form. Gained by having 'Sword Intent (Aura)' super perk and Soul Warrior perk. Effects: \n");
+			outputText("-New event perk: Sword Intent (Aura). Gained by having 'Hidden Job: Sword Immortal' super perk and Soul Personage perk. Effects: Your Killing Intent can become focused into Sword Intent aura enveloping your weapons as long they are sword-type (+5% of core spe, +10% dmg). Would apply bonuses from the job to flying swords too. (+5% of OverMax Wrath / Fatigue / Soulforce)\n");
+			outputText("-New event perk: Sword Immortal: First Form. Gained by having 'Sword Intent (Aura)' super perk and Soul Warrior perk. Effects: You reached First Form stage. Increase sword intent aura effects (+15% of core spe, +15% dmg) and gives small boost at the combat start (+100 wrath/sf, -100 fatigue) (+5% of OverMax Wrath / Base STR Cap / Fatigue / Base SPE Cap / Soulforce / Base WIS Cap)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
