@@ -51,7 +51,6 @@ public class SecretarialSuccubus extends AbstractSuccubus
 			this.weaponName = "claws";
 			this.weaponVerb="slap";
 			this.weaponAttack = 12;
-			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "demonic skin";
 			this.armorDef = 8;

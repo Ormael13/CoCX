@@ -354,7 +354,7 @@ public class PerkMenu extends BaseContent {
 		var currentAttacks:int = flags[kFLAGS.MULTIATTACK_STYLE];
 		var maxAttacks:int = combat.maxCurrentAttacks();
 		clearOutput();
-		if (player.weaponSpecials("Staff") || player.weaponSpecials("Wand")) {
+		if (player.weapon.isStaffType() || player.weapon.isWandType()) {
 			outputText("You can't multi-attack with wands or staves!\n\n");
 			doNext(meleeOptions);
 			return;

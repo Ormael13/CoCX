@@ -5,7 +5,6 @@
 package classes.Items.Armors
 {
 import classes.Items.Armor;
-import classes.Items.ItemTags;
 import classes.PerkLib;
 import classes.Player;
 import classes.StatusEffects;
@@ -18,10 +17,10 @@ import classes.StatusEffects;
 			withBuffs({
 				'teasedmg': +15
 			});
-			withTag(ItemTags.A_AGILE);
+			withTag(A_AGILE);
 			withPerk(PerkLib.CowGunslingerOutfit,0,0,0,0);
-			withTag(ItemTags.A_REVEALING);
-			withTag(ItemTags.I_LEGENDARY);
+			withTag(A_REVEALING);
+			withTag(I_LEGENDARY);
 		}
 		
 		override public function get def():Number{

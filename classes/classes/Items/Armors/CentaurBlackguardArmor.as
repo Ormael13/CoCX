@@ -1,8 +1,7 @@
 package classes.Items.Armors
 {
 	import classes.Items.Armor;
-	import classes.Items.ItemTags;
-	import classes.Scenes.NPCs.CelessScene;
+		import classes.Scenes.NPCs.CelessScene;
 	/**
 	 * ...
 	 * @author Liadri
@@ -13,7 +12,7 @@ package classes.Items.Armors
 		public function CentaurBlackguardArmor()
 		{
 			super("TaurBAr","Taur B. Armor","some taur blackguard armor","a set of taur blackguard armor",40,20,1698,"A suit of blackguard's armor for centaurs.","Heavy");
-			withTag(ItemTags.I_LEGENDARY);
+			withTag(I_LEGENDARY);
 		}
 		override public function canEquip(doOutput:Boolean):Boolean {
 			if (game.player.isTaur()) return super.canEquip(doOutput)

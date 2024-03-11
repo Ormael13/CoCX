@@ -49,7 +49,7 @@ public class CombatTeases extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();
 		if (player.hasPerk(PerkLib.DazzlingDisplay)) damagemultiplier += 0.2;
 		if (player.hasPerk(PerkLib.SuperSensual)) damagemultiplier += 0.50;
-		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemTags.A_REVEALING)) tBLD *= (1 + ((10 + rand(11)) / 100));
+		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemConstants.A_REVEALING)) tBLD *= (1 + ((10 + rand(11)) / 100));
 		if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
 		if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
 		if (player.armor == armors.ELFDRES && player.isElf()) damagemultiplier += 1;
@@ -152,7 +152,7 @@ public class CombatTeases extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
 		if (player.hasPerk(PerkLib.ArcaneLash) && player.isWhipTypeWeapon()) lustDmg *= 1.5;
 		if (player.hasPerk(PerkLib.JobCourtesan) && monster && monster.hasPerk(PerkLib.EnemyBossType)) lustDmg *= 1.2;
-		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemTags.A_REVEALING)) lustDmg *= (1 + ((10 + rand(11)) / 100));
+		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemConstants.A_REVEALING)) lustDmg *= (1 + ((10 + rand(11)) / 100));
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) lustDmg *= (1 + (player.lust100 * 0.01));
 		if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) lustDmg *= (1 + combat.historyWhoreBonus());
 		if (player.hasPerk(PerkLib.ArouseTheAudience) && monster && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) lustDmg *= 1.2;

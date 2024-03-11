@@ -70,8 +70,8 @@ public class DynamicWeaponRange extends WeaponRange implements IDynamicItem {
 		var value:Number        = parsedParams.value;
 		var buffs:Object        = parsedParams.buffs;
 		var verb:String         = subtype.verb;
-		var perk:Array         = (subtype.perk || []).slice();
-		var tags:Object         = subtype.tags || {};
+		var perk:Array          = (subtype.perk || []).slice();
+		var tags:Array          = subtype.tags || [];
 		var attack:Number       = subtype.attack;
 		if (parsedParams.error) {
 			trace("[ERROR] Failed to parse " + id + " with error " + parsedParams.error);

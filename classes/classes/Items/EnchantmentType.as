@@ -67,43 +67,11 @@ public class EnchantmentType extends ItemConstants {
 	 * </pre>
 	 */
 	public static function parseEnchantmentText(pattern:String, enchantment:Enchantment):String {
-		const substitute:RegExp = /\{[^}]+}/g;
-		const fmtPattern:RegExp  = /^\{(.*);(\+?)(\d*)(\w)}$/;
-		return pattern.replace(substitute, function ($0:String, ...rest):String {
-			var fmt:Array = $0.match(fmtPattern);
-			if (fmt) {
-				// fmt = [match, expr, sign, decimals, type]
-				var expr:*         = fmt[1];
-				var signed:Boolean = fmt[2] === "+";
-				var decimals:int   = fmt[3] ? parseInt(fmt[3]) : -1;
-				var type:String    = fmt[4];
-				var context:Object  = CoC.instance ? {
-					player: CoC.instance.player,
-					game: CoC.instance
-				} : {};
-				var rawValue:*   = Eval.compile(expr).call(enchantment, context);
-				if (type === "C") {
-					return capitalizeFirstLetter(String(rawValue));
-				} else {
-					var numValue:Number = rawValue;
-					var sign:String     = (signed && numValue >= 0) ? "+" : "";
-					if (type === "d") {
-						return sign + numValue.toFixed(0);
-					} else if (type === "f") {
-						if (decimals >= 0) {
-							return sign + numValue.toFixed(decimals);
-						} else {
-							return sign + numValue.toString();
-						}
-					} else {
-						trace("[ERROR] Bad description substitution " + fmt);
-						return "(Unknown formatter " + type + ")" + numValue;
-					}
-				}
-			} else {
-				return Eval.compile($0.substr(1, $0.length-2)).call(enchantment);
-			}
-		})
+		var context:Object  = CoC.instance ? {
+			player: CoC.instance.player,
+			game: CoC.instance
+		} : {};
+		return substitute(pattern, enchantment, context);
 	}
 	
 	/**

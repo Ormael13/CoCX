@@ -71,7 +71,7 @@ public class DynamicShield extends Shield implements IDynamicItem {
 		var value:Number        = parsedParams.value;
 		var buffs:Object        = parsedParams.buffs;
 		var perk:Array          = (subtype.perk || []).slice();
-		var tags:Object         = subtype.tags || {};
+		var tags:Array          = subtype.tags || [];
 		var block:Number        = subtype.block;
 		if (parsedParams.error) {
 			trace("[ERROR] Failed to parse " + id + " with error " + parsedParams.error);

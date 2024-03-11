@@ -10,7 +10,7 @@ import classes.internals.*;
 	 * ...
 	 * @author ...
 	 */
-	public class Gnoll extends Monster 
+	public class Gnoll extends Monster
 	{
 
 		//Gnoll Description
@@ -199,7 +199,6 @@ import classes.internals.*;
 			this.weaponName = "twisted club";
 			this.weaponVerb="smash";
 			this.weaponAttack = 11;
-			this.weaponPerk = "";
 			this.weaponValue = 25;
 			this.armorName = "skin";
 			this.armorDef = 7;

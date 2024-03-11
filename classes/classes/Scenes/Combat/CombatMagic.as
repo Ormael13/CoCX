@@ -925,12 +925,12 @@ public class CombatMagic extends BaseCombatContent {
 		combat.darkRitualCheckDamage();
 		if (handleShell()) return;
 		outputText("You narrow your eyes, focusing your mind with deadly intent.  ");
-		if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponSpecials("Staff")) outputText("You point your staff and shoot a magic bolt toward [themonster]!\n\n");
+		if (player.hasPerk(PerkLib.StaffChanneling) && player.weapon.isStaffType()) outputText("You point your staff and shoot a magic bolt toward [themonster]!\n\n");
 		else outputText("You point your hand toward [themonster] and shoot a magic bolt!\n\n");
 		var damage:Number = scalingBonusIntelligence() * spellMod() * 1.2;
 		if (damage < 10) damage = 10;
 		//weapon bonus
-		if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponSpecials("Staff")) {
+		if (player.hasPerk(PerkLib.StaffChanneling) && player.weapon.isStaffType()) {
 			if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.04));
 			else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (3 + ((player.weaponAttack - 50) * 0.035));
 			else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (4.75 + ((player.weaponAttack - 100) * 0.03));

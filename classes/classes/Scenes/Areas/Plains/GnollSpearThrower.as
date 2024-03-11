@@ -11,7 +11,7 @@ import classes.Scenes.Combat.CombatAbilities;
 	 * ...
 	 * @author ...
 	 */
-	public class GnollSpearThrower extends Monster 
+	public class GnollSpearThrower extends Monster
 	{
 		
 		//<Writers note: I recommend that the javelin have a chance to greatly decrease speed for the remaining battle.  I am writing the flavor text for this event if you choose to include it>
@@ -177,7 +177,6 @@ import classes.Scenes.Combat.CombatAbilities;
 			this.weaponName = "teeth";
 			this.weaponVerb="bite";
 			this.weaponAttack = 5;
-			this.weaponPerk = "";
 			this.weaponValue = 25;
 			this.armorName = "skin";
 			this.armorDef = 7;

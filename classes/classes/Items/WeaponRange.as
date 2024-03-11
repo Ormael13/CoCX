@@ -42,6 +42,10 @@ public class WeaponRange extends Equipable
 		
 		public function get perk():String { return _perk; }
 		
+		public function hasSpecial(_special:String):Boolean {
+			return perk.split(", ").indexOf(_special) >= 0;
+		}
+		
 		override public function effectDescriptionParts():Array {
 			var list:Array = super.effectDescriptionParts();
 			// Type
@@ -73,17 +77,19 @@ public class WeaponRange extends Equipable
 			}
 			return super.beforeEquip(doOutput);
 		}
-
-		override public function getLegItemEquipFailureMessage():String {
-			var itemType:String = _perk;
-			if ([ItemConstants.WT_PISTOL, ItemConstants.WT_RIFLE, ItemConstants.WT_2H_FIREARM, ItemConstants.WT_DUAL_FIREARMS, ItemConstants.WT_DUAL_2H_FIREARMS].indexOf(_perk) > -1) {
-				itemType = "firearm";
-			} else if (_perk == ItemConstants.WT_THROWING || !itemType) {
-				itemType = "weapon";
+		override public function getItemText(textid:String):String {
+			if (textid == "legendary_fail") {
+				var itemType:String = _perk;
+				if ([ItemConstants.WT_PISTOL, ItemConstants.WT_RIFLE, ItemConstants.WT_2H_FIREARM, ItemConstants.WT_DUAL_FIREARMS, ItemConstants.WT_DUAL_2H_FIREARMS].indexOf(_perk) > -1) {
+					itemType = "firearm";
+				} else if (_perk == ItemConstants.WT_THROWING || !itemType) {
+					itemType = "weapon";
+				}
+				
+				return "You try to equip the legendary " + itemType.toLowerCase() +
+						", but to your disappointment the item simply refuses to stay in your hands. It seems you still lack the right to wield this item.";
 			}
-
-			return "You try to equip the legendary " + itemType.toLowerCase() + 
-				", but to your disappointment the item simply refuses to stay in your hands. It seems you still lack the right to wield this item.";
+			return super.getItemText(textid);
 		}
 	}
 }

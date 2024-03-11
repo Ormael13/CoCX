@@ -19,6 +19,7 @@ import classes.Items.ArmorLib;
 import classes.Items.ConsumableLib;
 import classes.Items.DynamicItems;
 import classes.Items.HeadJewelryLib;
+import classes.Items.IELib;
 import classes.Items.ItemConstants;
 import classes.Items.JewelryLib;
 import classes.Items.NecklaceLib;
@@ -183,7 +184,7 @@ import classes.Scenes.Combat.CombatAbilities;
 		public var special3:Function = null;
 
 		//Amount of turns an enemy may gain a temporary resolute perk coming out of stun
-		public var resoluteBuffDuration:int = 2; 
+		public var resoluteBuffDuration:int = 2;
 
 		/**
 		 * Monster ability descriptors.
@@ -947,19 +948,11 @@ import classes.Scenes.Combat.CombatAbilities;
 			//Modify armor rating based on melee weapons
 			if ((game.player.weaponName.indexOf("staff") != -1 && game.player.hasPerk(PerkLib.StaffChanneling) )) {
 				armorMod = 0;
-			} else if (game.player.weapon.hasSpecial(ItemConstants.WP_AP10)) {
-				if (armorMod < 100) armorMod -= 10;
-				else armorMod *= 0.9;
-			} else if (game.player.weapon.hasSpecial(ItemConstants.WP_AP30)) {
-				armorMod *= 0.7;
-			} else if (game.player.weapon.hasSpecial(ItemConstants.WP_AP40)) {
-				armorMod *= 0.6;
-			} else if (game.player.weapon.hasSpecial(ItemConstants.WP_AP45)) {
-				armorMod *= 0.45;
-			} else if (game.player.weapon.hasSpecial(ItemConstants.WP_AP60)) {
-				armorMod *= 0.4;
-			} else if (game.player.weapon.hasSpecial(ItemConstants.WP_AP100)) {
-				armorMod = 0;
+			} else {
+				var ar:int = game.player.weapon.effectPower(IELib.ArmorReduction);
+				armorMod -= ar;
+				var ap:int = game.player.weapon.effectPower(IELib.ArmorPenetration);
+				armorMod *= (100 - ap) / 100;
 			}
 			if (game.player.hasPerk(PerkLib.LungingAttacks)) armorMod *= 0.5;
 			if (armorMod < 0) armorMod = 0;
@@ -1826,7 +1819,7 @@ import classes.Scenes.Combat.CombatAbilities;
 		/**
 		 * @return Return true if the original tease damage should be applied
 		 */
-		public function handleTease(damage:Number, successful:Boolean, display:Boolean = true):Boolean 
+		public function handleTease(damage:Number, successful:Boolean, display:Boolean = true):Boolean
 		{
 			return true;
 		}
@@ -1920,7 +1913,7 @@ import classes.Scenes.Combat.CombatAbilities;
 					if (plural) outputText("' attacks ");
 					else outputText("'s attack ");
 					outputText("with your [weapon].\n");
-					if (game.player.hasPerk(PerkLib.TwinRiposte) && (game.player.weaponSpecials("Dual") || game.player.weaponSpecials("Dual Large")) && game.player.wrath >= 2) {
+					if (game.player.hasPerk(PerkLib.TwinRiposte) && (game.player.weapon.isDualMedium() || game.player.weapon.isDualLarge()) && game.player.wrath >= 2) {
 						player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
 						SceneLib.combat.basemeleeattacks();
 					}
@@ -2382,7 +2375,7 @@ import classes.Scenes.Combat.CombatAbilities;
 			interruptAbility();
 			if (statusEffectv1(StatusEffects.Stunned) <= 0) {
 				handleStunEnd(StatusEffects.Stunned);
-			} 
+			}
 			else addStatusValue(StatusEffects.Stunned, 1, -1);
 			if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.Stunned,1,-5);
 			if (statusEffectv1(StatusEffects.StunnedTornado) <= 0) {
@@ -2634,7 +2627,7 @@ import classes.Scenes.Combat.CombatAbilities;
 
 		}
 
-		/** 
+		/**
      	 * <p>CombatUI.mainMenuWhenBound() Override Series - Part 1 (Ongoing maybe)</p>
 		 * <ul>
 		 *     <li>Called after passing playerWhenBound() check</li>
@@ -3095,7 +3088,7 @@ import classes.Scenes.Combat.CombatAbilities;
 			result +=".\n\n";
 			// COMBAT AND OTHER STATS
 			result += Hehas + "str=" + this.strStat.core.value + ", tou=" + this.touStat.core.value + ", spe=" + this.speStat.core.value +", inte=" + this.intStat.core.value +", wis=" + this.wisStat.core.value +", lib=" + this.libStat.core.value + ", sens=" + sens + ", cor=" + cor + ".\n";
-			result += Pronoun1 + " can " + weaponVerb + " you with  " + weaponPerk + " " + weaponName+" (attack " + weaponAttack + ", value " + weaponValue+").\n";
+			result += Pronoun1 + " can " + weaponVerb + " you with  " + weaponName+" (attack " + weaponAttack + ", value " + weaponValue+").\n";
 			result += Pronoun1 + " is guarded with " + armorPerk + " " + armorName+" (phys defense " + armorDef + ", mag defense " + armorMDef + ", value " + armorValue+").\n";
 			result += Hehas + HP + "/" + maxHP() + " HP, " + lust + "/" + maxLust() + " lust, " + fatigue + "/" + maxFatigue() + " fatigue, " + wrath + "/" + maxWrath() + " wrath, " + soulforce + "/" + maxSoulforce() + " soulforce, " + mana + "/" + maxMana() + " mana. ";
 			result += Pronoun3 + " bonus HP=" + bonusHP + ", bonus lust=" + bonusLust + ", bonus wrath=" + bonusWrath + ", bonus mana=" + bonusMana + ", bonus soulforce=" + bonusSoulforce + ", and lust vulnerability=" + lustVuln + ".\n"
@@ -3538,7 +3531,7 @@ import classes.Scenes.Combat.CombatAbilities;
 					SceneLib.combat.CommasForDigits(store14);
 					outputText("[pg]");
 					if(rand(4) == 3 && !hasPerk(PerkLib.Resolute)) {
-						createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0); 
+						createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 						outputText("<b>A random flying object caught in the hurricane rams into your opponent, stunning it!</b>");
 					}
 					if (statusEffectv2(StatusEffects.CouatlHurricane) > 0) {
@@ -3605,7 +3598,7 @@ import classes.Scenes.Combat.CombatAbilities;
 				store13 = Math.round(store13);
 				
 				//Gain 20% per stack for regular Kamaitachi and 40% for Greater Kamaitachi
-				var kamMultiplier:Number = 0.2 * player.racialTierCached(Races.KAMAITACHI); 
+				var kamMultiplier:Number = 0.2 * player.racialTierCached(Races.KAMAITACHI);
 
 				store13 *= 1 + (kamMultiplier * statusEffectv1(StatusEffects.KamaitachiBleed)); //Kamaitachi bleed stacks on itself growing ever stronger
 				store13 = SceneLib.combat.doDamage(store13);

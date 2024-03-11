@@ -9,7 +9,6 @@ import classes.CoC;
 import classes.EngineCore;
 import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Consumable;
-import classes.Items.ItemTags;
 import classes.Races;
 
 public class VampireBlood extends Consumable {
@@ -25,7 +24,7 @@ public class VampireBlood extends Consumable {
                         "A vial of thick, deep red liquid. It has a slightly metallic scent."
         );
         pure = purified;
-        withTag(ItemTags.U_TF);
+        withTag(U_TF);
         if (purified) {
             refineableInto(
                     AlchemyLib.DEFAULT_SUBSTANCES_DROP_TABLE,

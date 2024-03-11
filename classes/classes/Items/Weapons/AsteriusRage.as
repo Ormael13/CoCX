@@ -5,14 +5,15 @@
 package classes.Items.Weapons
 {
 import classes.Items.Weapon;
-import classes.Items.ItemTags;
 import classes.PerkLib;
 
 public class AsteriusRage extends Weapon {
 		
 		public function AsteriusRage() {
-			super("A.R", "A.R", "Asterius Rage", "Asterius Rage", "cleaves", 200, 20000, "This pair of massive axes once belonged to Asterius the god of the minotaurs.  It'd be hard for anyone smaller than a giant to wield effectively and as a mather of fact seems to work best in the hand of someone of truly titanic strength.  Those axes are double-bladed and deadly-looking.  Requires height of 6'6 or above\".", [WP_DUAL_MASSIVE,WP_MGWRATH].join(", "), WT_AXE);
-			withTag(ItemTags.I_LEGENDARY);		
+			super("A.R", "A.R", "Asterius Rage", "Asterius Rage", "cleaves", 200, 20000, "This pair of massive axes once belonged to Asterius the god of the minotaurs.  It'd be hard for anyone smaller than a giant to wield effectively and as a mather of fact seems to work best in the hand of someone of truly titanic strength.  Those axes are double-bladed and deadly-looking.  Requires height of 6'6 or above\".",
+					WT_AXE,WSZ_MASSIVE,true);
+			withTag(W_MGWRATH);
+			withTag(I_LEGENDARY);
 		}
 		
 		override public function get attack():Number {
@@ -32,18 +33,6 @@ public class AsteriusRage extends Weapon {
 			if (game.player.str >= 100) boost += 1;
 			boost += (game.player.cor) / 5;
 			return (1 + boost);
-		}
-		
-		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.hasPerk(PerkLib.DualWield) && (game.player.hasPerk(PerkLib.TitanGrip) || (game.player.hasPerk(PerkLib.GigantGripSu) && game.player.playerHasFourArms()))) return super.canEquip(doOutput);
-			if (doOutput) {
-				if (!game.player.hasPerk(PerkLib.TitanGrip)) outputText("You aren't skilled enough to handle this pair of weapons with only two hands!  Unless you want to hurt yourself instead of your enemies when trying to use them...  ");
-				else {
-					if (game.player.playerHasFourArms()) outputText("You aren't skilled enough to handle this pair of weapons!  Unless you want to hurt yourself instead of your enemies when trying to use them...  ");
-					else outputText("You lack second pair of arms!  ");
-				}
-			}
-			return false;
 		}
 	}
 }

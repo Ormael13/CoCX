@@ -147,7 +147,6 @@ public class IncubusMechanic extends Monster {
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
 			this.weaponAttack = 14;
-			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "demonic skin";
 			this.armorDef = 15;

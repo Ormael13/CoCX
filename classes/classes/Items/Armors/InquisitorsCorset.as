@@ -4,7 +4,6 @@
 package classes.Items.Armors
 {
 	import classes.Items.Armor;
-import classes.Items.ItemTags;
 import classes.PerkLib;
 	import classes.Player;
 
@@ -13,7 +12,7 @@ import classes.PerkLib;
 		public function InquisitorsCorset() {
 			super("I.Corst", "I.Corst", "inquisitor's corset", "an inquisitor's corset", 0, 16, 2000, "This sexualized and feminine red and gold ensemble carries with it the hopes of a shamed sorcerer.  Wearing it will allow cast blood magic spells.", "Light", false, false);
 			withBuffs({'teasedmg': +10});
-			withTag(ItemTags.A_REVEALING);
+			withTag(A_REVEALING);
 			withPerk(PerkLib.BloodMage,0,0,0,0);
 		}
 		

@@ -24,7 +24,6 @@ import classes.Items.HeadJewelry;
 import classes.Items.HeadJewelryLib;
 import classes.Items.IDynamicItem;
 import classes.Items.ItemConstants;
-import classes.Items.ItemTags;
 import classes.Items.Jewelry;
 import classes.Items.JewelryLib;
 import classes.Items.MiscJewelry;
@@ -135,7 +134,7 @@ use namespace CoC;
 			alchemySkillStat = new AlchemySkill(this);
 			statStore.addStat(alchemySkillStat);
 		}
-				
+		
 		protected final function outputText(text:String, clear:Boolean = false):void
 		{
 			if (clear) EngineCore.clearOutputTextOnly();
@@ -349,11 +348,6 @@ use namespace CoC;
 		override public function set weaponAttack(value:Number):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.weaponAttack.");
-		}
-
-		override public function set weaponPerk(value:String):void
-		{
-			CoC_Settings.error("ERROR: attempt to directly set player.weaponPerk.");
 		}
 
 		override public function set weaponValue(value:Number):void
@@ -657,7 +651,7 @@ use namespace CoC;
 		//Unhindered related acceptable armor types
 		public function meetUnhinderedReq():Boolean
 		{
-			return armor.hasTag(ItemTags.A_AGILE);
+			return armor.hasTag(ItemConstants.A_AGILE);
 		}
 		//override public function get armors
 		override public function get armorName():String {
@@ -784,7 +778,7 @@ use namespace CoC;
 			armorDef += speedBonus;
 			//Feral armor boosts armor ratings!
 			var toughnessBonus:int = 0;
-			if (hasPerk(PerkLib.FeralArmor) && haveNaturalArmor() && armor.hasTag(ItemTags.A_AGILE)) {
+			if (hasPerk(PerkLib.FeralArmor) && haveNaturalArmor() && armor.hasTag(ItemConstants.A_AGILE)) {
 				toughnessBonus += Math.round(tou / 20);
 			}
 			if (perkv1(IMutationsLib.NukiNutsIM) >= 1) {
@@ -1137,27 +1131,27 @@ use namespace CoC;
 		//Weapons for Whirlwind
 		public function isWeaponForWhirlwind():Boolean
 		{
-			return isSwordTypeWeapon() || isAxeTypeWeapon() || weaponSpecials("Whirlwind");// || weapon == game.weapons.
+			return isSwordTypeWeapon() || isAxeTypeWeapon() || weapon.isWhirlwind();// || weapon == game.weapons.
 		}
 		//Weapons for Whipping
 		public function isWeaponsForWhipping():Boolean
 		{
-			return weaponSpecials("Whipping");
+			return weapon.isWhipping();
 		}
 		//1H Weapons
 		public function isOneHandedWeapons():Boolean
 		{
-			return (!weaponSpecials("Dual Large") && !weaponSpecials("Dual") && !weaponSpecials("Dual Small") && !weaponSpecials("Dual Massive") && !weaponSpecials("Staff") && !weaponSpecials("Large") && !weaponSpecials("Massive") && weapon != game.weapons.DAISHO);
+			return !weapon.isDual() && weapon.size < ItemConstants.WSZ_LARGE  && weapon != game.weapons.DAISHO && !weapon.isStaffType();
 		}
 		//Non Large/Massive weapons
 		public function isNoLargeNoStaffWeapon():Boolean
 		{
-			return (!weaponSpecials("Dual Large") && !weaponSpecials("Large") && !weaponSpecials("Dual Massive") && !weaponSpecials("Massive") && !isStaffTypeWeapon());
+			return (!weapon.isDualLarge() && !weapon.isSingleLarge() && !weapon.isDualMassive() && !weapon.isSingleMassive() && !isStaffTypeWeapon());
 		}
 		//Wrath Weapons
 		public function isLowGradeWrathWeapon():Boolean
 		{
-			return weaponSpecials("LGWrath") || weaponRange == game.weaponsrange.B_F_BOW || hasAetherTwinsTier2();
+			return weapon.isLGWrath() || weaponRange == game.weaponsrange.B_F_BOW || hasAetherTwinsTier2();
 		}
 		public function isDualLowGradeWrathWeapon():Boolean
 		{
@@ -1165,7 +1159,7 @@ use namespace CoC;
 		}
 		public function isMidGradeWrathWeapon():Boolean
 		{
-			return weaponSpecials("MGWrath") || weapon == game.weapons.ANGSTD1 || weapon == game.weapons.NTWHIP || hasAetherTwinsTierS1();
+			return weapon.isMGWrath() || weapon == game.weapons.ANGSTD1 || weapon == game.weapons.NTWHIP || hasAetherTwinsTierS1();
 		}
 		public function isDualMidGradeWrathWeapon():Boolean
 		{
@@ -1195,71 +1189,71 @@ use namespace CoC;
 			return weaponName == "fists" || isGauntletWeapon();
 		}
 		public function isGauntletWeapon():Boolean {
-			return (weaponClass("Gauntlet")) || (hasAetherTwinsTier1() || hasAetherTwinsTier2()) || (weapon == game.weapons.CATGLOV && flags[kFLAGS.FERAL_COMBAT_MODE] != 1);
+			return (weapon.isGauntletType()) || (hasAetherTwinsTier1() || hasAetherTwinsTier2()) || (weapon == game.weapons.CATGLOV && flags[kFLAGS.FERAL_COMBAT_MODE] != 1);
 		}
 		//Sword-type weapons
 		public function isSwordTypeWeapon():Boolean {
-			return (weaponClass("Sword"));
+			return (weapon.isSwordType());
 		}
 		//Axe-type weapons
 		public function isAxeTypeWeapon():Boolean {
-			return (weaponClass("Axe"));
+			return (weapon.isAxeType());
 		}
 		//Mace/Hammer-type weapons
 		public function isMaceHammerTypeWeapon():Boolean {
-			return (weaponClass("Mace/Hammer"));
+			return (weapon.isMaceHammerType());
 		}
 		public function isTetsubo():Boolean {
-			return (weaponClass("Tetsubo"));
+			return (weapon.isTetsubo());
 		}
 		//Dueling sword-type weapons (rapier & katana)
 		public function isDuelingTypeWeapon():Boolean {
-			return (weaponClass("Dueling"));
+			return (weapon.isDuelingType());
 		}
 		//Polearm-type
 		public function isPolearmTypeWeapon():Boolean {
-			return (weaponClass("Polearm"));
+			return (weapon.isPolearmType());
 		}
 		//Spear-type
 		public function isSpearTypeWeapon():Boolean {
-			return (weaponClass("Spear")) || weapon == game.weapons.SKYPIER;
+			return (weapon.isSpearType()) || weapon == game.weapons.SKYPIER;
 		}
 		//Scythe-type
 		public function isScytheTypeWeapon():Boolean {
-			return (weaponClass("Scythe"));
+			return (weapon.isScytheType());
 		}
 		//Dagger-type weapons
 		public function isDaggerTypeWeapon():Boolean {
-			return (weaponClass(ItemConstants.WT_DAGGER)) || hasAetherTwinsTierWeapon() || hasAetherTwinsTierWeapon2();
+			return (weapon.isDaggerType()) || hasAetherTwinsTierWeapon() || hasAetherTwinsTierWeapon2();
 		}
 		//Staff <<SCECOMM(scepter not staff)>>
 		public function isStaffTypeWeapon():Boolean {
-			return (weaponClass(ItemConstants.WT_STAFF)) || weapon == game.weapons.ASCENSU || weapon == game.weapons.B_STAFF || weapon == game.weapons.DEPRAVA || weapon == game.weapons.PURITAS || weapon == game.weapons.WDSTAFF;
+			return (weapon.isStaffType()) || weapon == game.weapons.ASCENSU || weapon == game.weapons.B_STAFF || weapon == game.weapons.DEPRAVA || weapon == game.weapons.PURITAS || weapon == game.weapons.WDSTAFF;
 		}
 		//Staff <<SCECOMM(scepter not staff)>>
 		public function isWandTypeWeapon():Boolean {
-			return (weaponClass(ItemConstants.WT_WAND));
+			return (weapon.isWandType());
 		}
 		//Whip-type weapons
 		public function isWhipTypeWeapon():Boolean {
-			return (weaponClass("Whip"));
+			return (weapon.isWhipType());
 		}
 		//Ribbon-type weapons
 		public function isRibbonTypeWeapon():Boolean {
-			return (weaponClass("Ribbon"));
+			return (weapon.isRibbonType());
 		}
 		//Exotic-type weapons
 		public function isExoticTypeWeapon():Boolean {
-			return (isRibbonTypeWeapon() || weaponClass("Exotic") || weaponClass("Scythe"));
+			return (isRibbonTypeWeapon() || weapon.isExoticType() || weapon.isScytheType());
 		}
 		//Partial staff type weapons
 		public function isPartiallyStaffTypeWeapon():Boolean {
-			return (weaponClass("StaffPart")) || weapon == game.weapons.DEMSCYT || weapon == game.weapons.LHSCYTH || hasAetherTwinsTierS1() || hasAetherTwinsTierS2();// || weapon == game.weapons.E_STAFF || weapon == game.weapons.L_STAFF || weapon == game.weapons.W_STAFF || weapon == game.weapons.WDSTAFF
+			return (weapon.isStaffPart()) || weapon == game.weapons.DEMSCYT || weapon == game.weapons.LHSCYTH || hasAetherTwinsTierS1() || hasAetherTwinsTierS2();// || weapon == game.weapons.E_STAFF || weapon == game.weapons.L_STAFF || weapon == game.weapons.W_STAFF || weapon == game.weapons.WDSTAFF
 		}
 		//Weapons for Sneak Attack (Meele and Range)
 		public function haveWeaponForSneakAttack():Boolean
 		{
-			return weaponSpecials("Small") || weaponSpecials("Dual Small");
+			return weapon.isSingleSmall() || weapon.isDualSmall();
 		}
 		public function haveWeaponForSneakAttackRange():Boolean
 		{
@@ -1269,7 +1263,7 @@ use namespace CoC;
 		//Throwable melee weapons
 		public function haveThrowableMeleeWeapon():Boolean
 		{
-			return (weaponClass("Thrown")) || hasAetherTwinsTierS1() || hasAetherTwinsTierS2();//wrath large weapon that can be throwed or used in melee xD
+			return (weapon.isThrown()) || hasAetherTwinsTierS1() || hasAetherTwinsTierS2();//wrath large weapon that can be throwed or used in melee xD
 		}
 		//Cleave compatibile weapons
 		public function haveWeaponForCleave():Boolean
@@ -1329,12 +1323,12 @@ use namespace CoC;
 		}
 		public function usingSingleFlyingSword():Boolean
 		{
-			return weaponFlyingSwords.count == 1;//weaponSpecials("Dual Massive") ||  || 
+			return weaponFlyingSwords.count == 1;//weapon.isDualMassive() ||  ||
 		}
 		//Hold with Both Hands checks
 		public function gaindHoldWithBothHandBonus():Boolean
 		{
-			return hasPerk(PerkLib.HoldWithBothHands) && !isFistOrFistWeapon() && isNotHavingShieldCuzPerksNotWorkingOtherwise() && (!isDualWieldMelee() || (playerHasFourArms() && (weaponSpecials("Dual Small") || weaponSpecials("Dual") || (weaponSpecials("Dual Large") && hasPerk(PerkLib.GigantGripSu)))));
+			return hasPerk(PerkLib.HoldWithBothHands) && !isFistOrFistWeapon() && isNotHavingShieldCuzPerksNotWorkingOtherwise() && (!isDualWieldMelee() || (playerHasFourArms() && (weapon.isDualSmall() || weapon.isDualMedium() || (weapon.isDualLarge() && hasPerk(PerkLib.GigantGripSu)))));
 		}
 		//Natural Jouster perks req check
 		public function isMeetingNaturalJousterReq():Boolean
@@ -1499,39 +1493,39 @@ use namespace CoC;
 		override public function get weaponAttack():Number {
 			var newGamePlusMod:int = this.newGamePlusMod()+1;
 			var attack:Number = weapon.attack;
-			if (hasPerk(PerkLib.JobSwordsman) && (weaponSpecials("Large") || hasAetherTwinsTier2())) {
+			if (hasPerk(PerkLib.JobSwordsman) && (weapon.isSingleLarge() || hasAetherTwinsTier2())) {
 				if (hasPerk(PerkLib.WeaponMastery) && str >= 100) {
 					if (hasPerk(PerkLib.WeaponGrandMastery) && str >= 140) attack *= 2;
 					else attack *= 1.5;
 				}
 				else attack *= 1.25;
 			}
-			if (hasPerk(PerkLib.WeaponGrandMastery) && weaponSpecials("Dual Large") && str >= 140) {
+			if (hasPerk(PerkLib.WeaponGrandMastery) && weapon.isDualLarge() && str >= 140) {
 				attack *= 2;
 			}
-			if (hasPerk(PerkLib.GigantGripEx) && (weaponSpecials("Massive") || weaponSpecials("Dual Massive"))) {
+			if (hasPerk(PerkLib.GigantGripEx) && weapon.isMassive()) {
 				if (hasPerk(PerkLib.WeaponMastery) && str >= 100) {
 					if (hasPerk(PerkLib.WeaponGrandMastery) && str >= 140) attack *= 2;
 					else attack *= 1.5;
 				}
 				else attack *= 1.25;
 			}
-			if (hasPerk(PerkLib.HiddenMomentum) && (weaponSpecials("Large") || hasAetherTwinsTier2() || (hasPerk(PerkLib.GigantGripEx) && weaponSpecials("Massive"))) && str >= 75 && spe >= 50) {
+			if (hasPerk(PerkLib.HiddenMomentum) && (weapon.isSingleLarge() || hasAetherTwinsTier2() || (hasPerk(PerkLib.GigantGripEx) && weapon.isSingleMassive())) && str >= 75 && spe >= 50) {
 				attack += (((str + spe) - 100) * 0.2);
 			}//30-70-110
-			if (hasPerk(PerkLib.HiddenDualMomentum) && weaponSpecials("Dual Large") && str >= 150 && spe >= 100) {
+			if (hasPerk(PerkLib.HiddenDualMomentum) && weapon.isDualLarge() && str >= 150 && spe >= 100) {
 				attack += (((str + spe) - 200) * 0.2);
 			}
-			if (hasPerk(PerkLib.HiddenDualMomentum) && hasPerk(PerkLib.GigantGripEx) && weaponSpecials("Dual Massive") && str >= 150 && spe >= 100) {
+			if (hasPerk(PerkLib.HiddenDualMomentum) && hasPerk(PerkLib.GigantGripEx) && weapon.isDualMassive() && str >= 150 && spe >= 100) {
 				attack += (((str + spe) - 200) * 0.2);
 			}//20-60-100
-			if (hasPerk(PerkLib.LightningStrikes) && spe >= 60 && (!weaponSpecials("Dual Massive") && !weaponSpecials("Massive") && !weaponSpecials("Large") && !weaponSpecials("Dual Large") && !weaponSpecials("Small") && !weaponSpecials("Dual Small") && !isFistOrFistWeapon())) {
+			if (hasPerk(PerkLib.LightningStrikes) && spe >= 60 && (weapon.isMedium() && !isFistOrFistWeapon())) {
 				attack += ((spe - 50) * 0.3);
 			}//45-105-165
-			if (weaponSpecials("Hybrid") && shieldName == "nothing"){
+			if (weapon.isHybrid() && shieldName == "nothing"){
 				attack *= 1.5;
 			}
-			if (hasPerk(PerkLib.StarlightStrikes) && spe >= 60 && (weaponSpecials("Small") || weaponSpecials("Dual Small"))) {
+			if (hasPerk(PerkLib.StarlightStrikes) && spe >= 60 && (weapon.isSingleSmall() || weapon.isDualSmall())) {
 				attack += ((spe - 50) * 0.2);
 			}
 			if (hasPerk(PerkLib.SteelImpact)) {
@@ -1636,40 +1630,16 @@ use namespace CoC;
 		public function get weaponBaseAttack():Number {
 			return weapon.attack;
 		}
-		override public function get weaponPerk():String {
-			return weapon.perk || "";
-		}
 		override public function get weaponType():String {
 			return weapon.type || "";
 		}
 		override public function get weaponValue():Number {
 			return weapon.value;
 		}
-		//First arg is weapon type. Second is override, in case you want to check specific weapon.
-		public function weaponClass(pWeaponClass:String = "", orWeaponCheck:* = null):Boolean {
-			var temp:Array;
-			if (orWeaponCheck != null){
-				temp = orWeaponCheck.type.split(", ");
-			}
-			else{
-				temp = weapon.type.split(", ");
-			}
-			return (temp.indexOf(pWeaponClass) >= 0);
-		}
-		public function weaponSpecials(pWeaponSpecials:String = "", orWeaponCheck:* = null):Boolean {
-			var temp:Array;
-			if (orWeaponCheck != null){
-				temp = orWeaponCheck.perk.split(", ");
-			}
-			else{
-				temp = weapon.perk.split(", ");
-			}
-			return (temp.indexOf(pWeaponSpecials) >= 0);
-		}
 		//Is DualWield
 		public function isDualWieldMelee():Boolean
         {
-        	return weaponSpecials("Dual Massive") || weaponSpecials("Dual Large") || weaponSpecials("Dual Small") || weaponSpecials("Dual");
+        	return weapon.isDual()
         }
         public function isDualWieldRanged():Boolean
         {
@@ -1711,7 +1681,7 @@ use namespace CoC;
 		//Using a spear DEPRECATED
 		public function isUsingSpear():Boolean
 		{
-			return (weaponClass("Spear"));
+			return (weapon.isSpearType());
 		}
 		//Using Staff
 		public function isUsingStaff():Boolean
@@ -1721,7 +1691,7 @@ use namespace CoC;
 		//Using Wand
 		public function isUsingWand():Boolean
 		{
-			return weaponSpecials("Wand");
+			return weapon.isWandType();
 		}
 		//override public function get weapons
 		override public function get weaponRangeName():String {
@@ -3179,7 +3149,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.KnightlySword) && isSwordTypeWeapon() && isShieldsForShieldBash()) {
 				mult -= 10;
 			}
-			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && armor.hasTag(ItemTags.A_REVEALING)) {
+			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && armor.hasTag(ItemConstants.A_REVEALING)) {
 				mult -= 10;
 			}
 			if (hasPerk(PerkLib.FluidBody) && meetUnhinderedReq()) {
@@ -3294,7 +3264,7 @@ use namespace CoC;
 			mult -= armorMMod;
 			if (mult < 50) mult = 50;
 			//--PERKS--
-			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && armor.hasTag(ItemTags.A_REVEALING)) {
+			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && armor.hasTag(ItemConstants.A_REVEALING)) {
 				mult -= 10;
 			}
 			if (perkv1(IMutationsLib.DraconicBonesIM) >= 2) {
@@ -3878,8 +3848,8 @@ use namespace CoC;
 				chance += goblinDodgeChance;
 			}
 
-			if (hasPerk(PerkLib.Misdirection) && armor.hasTag(ItemTags.A_AGILE)) chance += 10;
-			if (hasPerk(PerkLib.Unhindered) && armor.hasTag(ItemTags.A_AGILE)) chance += 10;
+			if (hasPerk(PerkLib.Misdirection) && armor.hasTag(ItemConstants.A_AGILE)) chance += 10;
+			if (hasPerk(PerkLib.Unhindered) && armor.hasTag(ItemConstants.A_AGILE)) chance += 10;
 			if (CombatAbilities.HurricaneDance.isActive()) chance += 25;
 
 			if (isRace(Races.FAIRY)) {
@@ -3933,8 +3903,8 @@ use namespace CoC;
 				if (goblinDodgeChance > 0) dodgeArray.push([goblinDodgeChance, EVASION_EVADE]);
 			}
 
-			if (hasPerk(PerkLib.Misdirection) && armor.hasTag(ItemTags.A_AGILE)) dodgeArray.push([10, EVASION_MISDIRECTION]);
-			if (hasPerk(PerkLib.Unhindered) && armor.hasTag(ItemTags.A_AGILE)) dodgeArray.push([10, EVASION_UNHINDERED]);
+			if (hasPerk(PerkLib.Misdirection) && armor.hasTag(ItemConstants.A_AGILE)) dodgeArray.push([10, EVASION_MISDIRECTION]);
+			if (hasPerk(PerkLib.Unhindered) && armor.hasTag(ItemConstants.A_AGILE)) dodgeArray.push([10, EVASION_UNHINDERED]);
 			if (CombatAbilities.HurricaneDance.isActive()) dodgeArray.push([25, EVASION_HURRICANE_DANCE]);
 
 			if (isRace(Races.FAIRY)) {
@@ -5958,8 +5928,11 @@ use namespace CoC;
 		}
 
 		public function hasLegendaryItem():Boolean {
+			for each (var itemSlot:ItemSlotClass in itemSlots){
+				if (itemSlot.itype.hasTag(ItemConstants.I_LEGENDARY)) return true;
+			}
 			for each (var item:ItemType in CoC.instance.weapons.Legendary())
-				for each (var itemSlot:ItemSlotClass in itemSlots){
+				for each (itemSlot in itemSlots){
 					if (itemSlot.itype == item) return true
 				}
 			for each (item in CoC.instance.weaponsrange.Legendary())
@@ -6506,9 +6479,9 @@ use namespace CoC;
 				[Combat.MASTERY_FERAL, isFeralCombat(), [10, 20, 30, 40]],
 				[Combat.MASTERY_GAUNTLET, isGauntletWeapon(), [10, 20, 30, 40]],
 				[Combat.MASTERY_UNARMED, isUnarmedCombat(), [10, 20, 30, 40]],
-				[Combat.MASTERY_SMALL, weaponSpecials("Small") || weaponSpecials("Dual Small"), [10, 20, 30, 40]],
-				[Combat.MASTERY_LARGE, weaponSpecials("Large") || weaponSpecials("Dual Large"), [15, 30]],
-				[Combat.MASTERY_MASSIVE, weaponSpecials("Massive") || weaponSpecials("Dual Massive"), [30]],
+				[Combat.MASTERY_SMALL, weapon.isSmall(), [10, 20, 30, 40]],
+				[Combat.MASTERY_LARGE, weapon.isLarge(), [15, 30]],
+				[Combat.MASTERY_MASSIVE, weapon.isMassive(), [30]],
 				//[Combat.MASTERY_RANGED, isBowTypeWeapon() || isThrownTypeWeapon(), []],
 				[Combat.MASTERY_NORMAL, true, [10, 25, 40]] //the last one for "everything else"
 			];
@@ -6595,6 +6568,10 @@ use namespace CoC;
 				if( rval < combatMastery[i].level ){ rval = combatMastery[i].level ;}
 			}
 			return rval;
+		}
+		
+		public function getRapierTrainingLevel():int {
+			return flags[kFLAGS.RAPHAEL_RAPIER_TRANING];
 		}
 
 		public function MiningMulti():Number {
@@ -6853,7 +6830,7 @@ use namespace CoC;
 		}
 
 		public function blockingBodyTransformations():Boolean {
-			return hasPerk(PerkLib.TransformationImmunity) || hasPerk(PerkLib.TransformationImmunity2) || hasPerk(PerkLib.TransformationImmunityBeeHandmaiden) || hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse)|| hasPerk(PerkLib.BlessingOfTheAncestorTree) 
+			return hasPerk(PerkLib.TransformationImmunity) || hasPerk(PerkLib.TransformationImmunity2) || hasPerk(PerkLib.TransformationImmunityBeeHandmaiden) || hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse)|| hasPerk(PerkLib.BlessingOfTheAncestorTree)
 					|| hasEnchantment(EnchantmentLib.TfImmunity) || hasStatusEffect(StatusEffects.ArigeanInfected) || tailType == Tail.ARIGEAN_GREEN || tailType == Tail.ARIGEAN_RED || tailType == Tail.ARIGEAN_YELLOW || tailType == Tail.ARIGEAN_PRINCESS;
 		}
 
@@ -7607,6 +7584,6 @@ use namespace CoC;
 			for (var i:int = 0; i<durations.length; i++) {
 				durations[i] = 0;
 			}
-		}		
+		}
 	}
 }

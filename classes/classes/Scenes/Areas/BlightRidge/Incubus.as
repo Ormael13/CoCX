@@ -158,7 +158,6 @@ use namespace CoC;
 			this.hairLength = 12;
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "demonic skin";
 			this.lust = 30;

@@ -70,7 +70,7 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 		var value:Number         = parsedParams.value;
 		var buffs:Object         = parsedParams.buffs;
 		var type:String          = subtype.type;
-		var tags:Object          = subtype.tags || {};
+		var tags:Array           = subtype.tags || [];
 		var def:Number           = subtype.def;
 		var mdef:Number          = subtype.mdef;
 		var qdef:Number          = numberOr(subtype.qdef, 0);

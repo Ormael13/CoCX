@@ -173,7 +173,6 @@ public class SandWitchMob extends Monster
 			this.weaponName = "fists";
 			this.weaponVerb="punches";
 			this.weaponAttack = 1;
-			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "robes";
 			this.armorDef = 2;
