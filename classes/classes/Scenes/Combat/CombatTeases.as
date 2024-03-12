@@ -62,8 +62,8 @@ public class CombatTeases extends BaseCombatContent {
 		if (player.perkv1(PerkLib.ImpNobility) > 0) {
 			tBLD *= (100 + player.perkv1(PerkLib.ImpNobility))/100;
 		}
-		for each (var f:SimpleRaceEnchantment in player.allEnchantments(EnchantmentLib.RaceSpellPowerDoubled)) {
-			tBLD *= f.power * (player.isRaceCached(f.race)? 3:2);
+		for each (var f:ItemEffect in player.allItemEffects(IELib.Tease_RaceX2)) {
+			tBLD *= 1 + f.power * (player.isRaceCached(f.value1 as Race)? 2:1) / 100;
 		}
 		if (SceneLib.urtaQuest.isUrta()) tBLD *= 2;
 		return tBLD;
@@ -869,7 +869,7 @@ public class CombatTeases extends BaseCombatContent {
 				break;
 				//11 Show off dick
 			case 11:
-				if (display) { 
+				if (display) {
 					if (silly() && rand(2) == 0) outputText("You strike a herculean pose and flex, whispering, \"<i>Do you even lift?</i>\" to [themonster].");
 					else {
 						outputText("You open your [armor] just enough to let your [cock] and [balls] dangle free.  A shiny rope of pre-cum dangles from your cock, showing that your reproductive system is every bit as fit as the rest of you.  ");
@@ -1129,7 +1129,7 @@ public class CombatTeases extends BaseCombatContent {
 					if (player.gender == 3) outputText(" and ");
 					if (player.gender >= 2) outputText("your " + vaginaDescript(0));
 					outputText(".  Your bushy tail" + ((player.tailCount > 1) ? "s" : "" ) + " cross" + ((player.tailCount > 1) ? "" : "es") + " in front, wrapping around your genitals and obscuring the view teasingly.");
-				}	
+				}
 				options.vagina = true;
 				options.penis  = true;
 				options.damage += 6;
@@ -1224,7 +1224,7 @@ public class CombatTeases extends BaseCombatContent {
 						if (player.hasVirginVagina()) outputText("Think you can handle a virgin's infinite lust?");
 						else outputText("Think you have what it takes to satisfy this perfect pussy?");
 						outputText("</i>\"");
-					}	
+					}
 					options.vagina = true;
 					options.damage += 9;
 				}
@@ -1286,7 +1286,7 @@ public class CombatTeases extends BaseCombatContent {
 						outputText("\"<i>Can't you see what delights you're missing out on?</i>\"\n\n");
 						outputText("\"<i>Just give up and we'll give you a good time.</i>\"\n\n");
 						outputText("\"<i>If you think you have the stamina to take both of us, that is.</i>\"\n\n");
-					}	
+					}
 					options.breasts = true;
 					options.chance += 9;
 				 	options.damage += 30;
@@ -1298,7 +1298,7 @@ public class CombatTeases extends BaseCombatContent {
 				if (display) {
 					outputText("You suddenly open your tail pussy presenting your drooling hole to [themonster] and smirk.\n\n");
 					outputText("\"<i>Bet you want a shot at this, look how much this bad girl is ready for you.</i>\"");
-				}	
+				}
 				options.chance += 9;
 				options.damage += 9;
 				break;

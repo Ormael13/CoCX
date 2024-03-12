@@ -156,15 +156,6 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		return DynamicItems.copyWithoutEnchantment(this, e);
 	}
 	
-	override public function get attack():Number {
-		var attack:Number = super.attack;
-		var e:SimpleRaceEnchantment = enchantmentOfType(EnchantmentLib.RaceAttackBonus) as SimpleRaceEnchantment;
-		if (e) {
-			attack *= 1 + 0.05 * e.power * game.player.racialTier(e.race);
-		}
-		return attack;
-	}
-	
 	override public function equipText():void {
 		DynamicItems.equipText(this);
 	}

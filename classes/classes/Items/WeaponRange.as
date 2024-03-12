@@ -5,7 +5,10 @@
 package classes.Items
 {
 
+import classes.CoC;
 import classes.PerkLib;
+import classes.Player;
+import classes.Race;
 import classes.Scenes.SceneLib;
 import classes.Items.ItemConstants;
 
@@ -38,7 +41,37 @@ public class WeaponRange extends Equipable
 		
 		public function get verb():String { return _verb; }
 		
-		public function get attack():Number { return _attack; }
+		public function get attack():Number {
+			if (!CoC.instance || !CoC.instance.player) return _attack;
+			var player:Player = CoC.instance.player;
+			
+			var baseAttackBonuss:Number = 0;
+			var multiplier:Number = 100;
+			var bonus:Number = 0;
+			
+			for each (var ie:ItemEffect in effectsFlagged(IEF_ATTACK)) {
+				switch (ie.type) {
+					//------------------------//
+					// Multiplicative bonuses //
+					//------------------------//
+					case IELib.AttackMult_RaceTier: {
+						multiplier += ie.power * player.racialTier(ie.value1 as Race);
+						break;
+					}
+					//------------------//
+					// Additive bonuses //
+					//------------------//
+					case IELib.AttackBonus_RaceTier: {
+						bonus += ie.power * player.racialTier(ie.value1 as Race)
+						break;
+					}
+				}
+			}
+			
+			var attack:Number = (_attack + baseAttackBonuss) * multiplier / 100 + bonus;
+			
+			return attack;
+		}
 		
 		public function get perk():String { return _perk; }
 		

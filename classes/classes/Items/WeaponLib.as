@@ -13,8 +13,6 @@ public final class WeaponLib extends ItemConstants
 		//1 atk for dual weapons = 80 lub 160 jeśli z dodatkowym perkiem lub 240 jeśli z dwoma dodatkowymi perkami
 		//40 za 1 atk normalnie lub za wrath weapon lub 80 za 1 atk broni z perkiem/dod. efektem lub 120 za 1 atk broni z 2 perki/dod. efekty itd.
 		//200 za 1 atk broni typu gaunlet (bo każda ma jakiś efekt lub perk dodany) lub 400 za 1 atk jeśli ma 2 efekty/perki lub 600 jak ma 3 itd.
-		//In order for weapons to be tracked for the type that it is (gauntlet, sword, hammer...), make sure the type parameter matches the element in the isXWeapon function.
-		//Type is a comma-seperated string, and is the last parameter.
 		
 		/** @paam subtypeId key in DynamicWeapon.Subtypes */
 		private static function findCommonDynamicWeapon(subtypeId:String):DynamicWeapon {
@@ -743,6 +741,7 @@ public final class WeaponLib extends ItemConstants
 					'psoulskillpower': +0.2
 				})
 				.withEffect(IELib.Stun, 10) as Weapon;
+		public const SWORD :Weapon = findCommonDynamicWeapon("sword");
 		public const S_BLADE:Weapon = new Weapon(
 				"S.Blade", "S.Blade", "inscribed spellblade", "a spellblade", "slash", 8, 640,
 				"Forged not by a swordsmith but a sorceress, this arcane-infused blade amplifies your magic. Unlike the wizard staves it is based on, this weapon also has a sharp edge, a technological innovation which has proven historically useful in battle.",

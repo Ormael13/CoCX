@@ -320,7 +320,12 @@ public class Equipable extends Useable {
 	public function hasBuff(statname:String):Boolean {
 		return _buffs && statname in _buffs;
 	}
-	
+	public function hasAnyBuffs():Boolean {
+		return _buffs;
+	}
+	public function getBuffs():Object {
+		return _buffs || {};
+	}
 	/**
 	 * Give perk when equipping this item.
 	 * Only use when constructing the item type!
@@ -337,6 +342,12 @@ public class Equipable extends Useable {
 		if (!this._playerPerks) return false;
 		for each (var entry:Array in _playerPerks) if (entry[0] == perk) return true;
 		return false;
+	}
+	public function givesAnyPerk():Boolean {
+		return _playerPerks && _playerPerks.length > 0
+	}
+	public function getPlayerPerks():/*Array*/Array {
+		return _playerPerks || [];
 	}
 }
 }

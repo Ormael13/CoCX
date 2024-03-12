@@ -256,7 +256,6 @@ public class ItemConstants extends Utils {
 	public static const W_TETSUBO:String        = "Tetsubo";
 	public static const W_LGWRATH:String        = "LGWrath";
 	public static const W_MGWRATH:String        = "MGWrath";
-	public static const W_MAGICAL:String        = "MAGICDMG";
 	public static const W_RAPIER:String         = "Rapier"; // Gets bonus from Raphael training
 	public static const W_PURE_TYPE:String      = "Pure-type Weapon";
 	public static const W_CORRUPT_TYPE:String   = "Corrupt-type Weapon";
@@ -340,7 +339,8 @@ public class ItemConstants extends Utils {
 	// bit flags from 1 << 1 to 1 << 31
 	public static const IEF_REQUIREMENT:int      = 1 << 1; // equipment requirement
 	public static const IEF_ATTACK:int           = 1 << 2; // attack bonus/penalty
-	public static const ItemEffectLastFlag:int   = 1 << 2; // keep updated
+	public static const IEF_DEFENSE:int          = 1 << 3; // defense bonus/penalty
+	public static const ItemEffectLastFlag:int   = 1 << 3; // keep updated
 	
 	///////////////////
 	// Enchanted items

@@ -7,6 +7,8 @@ import classes.Items.EnchantmentLib;
 import classes.Items.EnchantmentType;
 import classes.Items.Equipable;
 import classes.Items.IDynamicItem;
+import classes.Items.IELib;
+import classes.Items.ItemEffect;
 import classes.Items.WeaponRange;
 
 public class DynamicWeaponRange extends WeaponRange implements IDynamicItem {
@@ -149,15 +151,6 @@ public class DynamicWeaponRange extends WeaponRange implements IDynamicItem {
 
 	public function copyWithoutEnchantment(e:Enchantment):ItemType {
 		return DynamicItems.copyWithoutEnchantment(this, e);
-	}
-
-	override public function get attack():Number {
-		var attack:Number = super.attack;
-		var e:SimpleRaceEnchantment = enchantmentOfType(EnchantmentLib.RaceAttackBonus) as SimpleRaceEnchantment;
-		if (e) {
-			attack *= 1 + 0.05 * e.power * game.player.racialTier(e.race);
-		}
-		return attack;
 	}
 
 	override public function equipText():void {

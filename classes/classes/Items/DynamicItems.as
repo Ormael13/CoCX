@@ -349,7 +349,10 @@ public class DynamicItems extends ItemConstants {
 		for each (e in effects) {
 			if (e.identified) {
 				if (!e.type.hideDescription(e)) {
-					effectDesc.push([80+i,"Effect: "+e.description]);
+					var description:String = e.description;
+					if (description) {
+						effectDesc.push([80 + i, "Effect: " + description]);
+					}
 				}
 				value += e.valueAdd;
 				valueMul *= e.valueMul;

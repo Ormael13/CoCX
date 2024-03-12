@@ -23,7 +23,10 @@ import classes.Items.FlyingSwords;
 import classes.Items.HeadJewelry;
 import classes.Items.HeadJewelryLib;
 import classes.Items.IDynamicItem;
+import classes.Items.IELib;
 import classes.Items.ItemConstants;
+import classes.Items.ItemEffect;
+import classes.Items.ItemEffectType;
 import classes.Items.Jewelry;
 import classes.Items.JewelryLib;
 import classes.Items.MiscJewelry;
@@ -1467,6 +1470,61 @@ use namespace CoC;
 			}
 			return result;
 		}
+		
+		public function hasItemEffect(type: ItemEffectType):Boolean {
+			for each (var itype:ItemType in allEquipment()) {
+				if (itype.hasEffect(type)) return true;
+			}
+			return false;
+		}
+		
+		/**
+		 * @param type
+		 * @param aggregate "sum"|"max"|"min"
+		 * @return
+		 */
+		public function itemEffectPower(type:ItemEffectType, aggregate:String="sum"):Number {
+			var power:Number = 0;
+			for each (var itype:ItemType in allEquipment()) {
+				var ipower:Number = itype.effectPower(type);
+				if (aggregate === "sum") {
+					power += ipower
+				} else if (aggregate === "max") {
+					power = Math.max(power, ipower);
+				} else if (aggregate === "min") {
+					power = Math.min(power, ipower);
+				}
+			}
+			return power;
+		}
+		public function findItemEffect(type:ItemEffectType):ItemEffect {
+			for each (var itype:ItemType in allEquipment()) {
+				var e:ItemEffect = itype.findEffect(type);
+				if (e) return e;
+			}
+			return null
+		}
+		
+		/**
+		 * @param type
+		 * @return {Array} [ItemEffect,ItemType]
+		 */
+		public function findItemEffectAndItem(type:ItemEffectType):Array {
+			for each (var itype:ItemType in allEquipment()) {
+				var e:ItemEffect = itype.findEffect(type);
+				if (e) return [e, itype];
+			}
+			return null
+		}
+		public function allItemEffects(type:ItemEffectType):/*ItemEffect*/Array {
+			var result:/*ItemEffect*/Array = [];
+			for each (var itype:ItemType in allEquipment()) {
+				var e:ItemEffect = itype.findEffect(type);
+				if (e) result.push(e);
+			}
+			return result;
+		}
+		
 		public function equippedKnownCursedItems():/*ItemType*/Array {
 			var result:/*ItemType*/Array = [];
 			for each (var slot:int in ItemConstants.EquipmentSlotIds) {
@@ -6831,7 +6889,7 @@ use namespace CoC;
 
 		public function blockingBodyTransformations():Boolean {
 			return hasPerk(PerkLib.TransformationImmunity) || hasPerk(PerkLib.TransformationImmunity2) || hasPerk(PerkLib.TransformationImmunityBeeHandmaiden) || hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse)|| hasPerk(PerkLib.BlessingOfTheAncestorTree)
-					|| hasEnchantment(EnchantmentLib.TfImmunity) || hasStatusEffect(StatusEffects.ArigeanInfected) || tailType == Tail.ARIGEAN_GREEN || tailType == Tail.ARIGEAN_RED || tailType == Tail.ARIGEAN_YELLOW || tailType == Tail.ARIGEAN_PRINCESS;
+					|| hasItemEffect(IELib.TfImmunity) || hasStatusEffect(StatusEffects.ArigeanInfected) || tailType == Tail.ARIGEAN_GREEN || tailType == Tail.ARIGEAN_RED || tailType == Tail.ARIGEAN_YELLOW || tailType == Tail.ARIGEAN_PRINCESS;
 		}
 
 		public function manticoreFeed():void {
@@ -7412,7 +7470,7 @@ use namespace CoC;
 		
 		public function get XPMultiplier():Number {
 			var gain:Number = 1.0;
-			gain += 0.05*enchantmentPower(EnchantmentLib.BonusXp);
+			gain += itemEffectPower(IELib.BonusXp)/100;
 			return gain;
 		}
 		
@@ -7422,7 +7480,7 @@ use namespace CoC;
 				if (gender == 0 || gender == 3) min1 = 20;
 				if (gender == 2) min1 = 30;
 			}
-			var min2:Number = enchantmentPower(EnchantmentLib.MinFem) + enchantmentPower(EnchantmentLib.Androgyny);
+			var min2:Number = itemEffectPower(IELib.MinFem);
 			return Math.min(Math.max(min1, min2), 50);
 		}
 		public function get maxFem():Number {
@@ -7431,7 +7489,7 @@ use namespace CoC;
 				if (gender == 0 || gender == 3) max1 = 75;
 				if (gender == 1) max1 = 70;
 			}
-			var max2:Number = 100 - enchantmentPower(EnchantmentLib.MaxFem) - enchantmentPower(EnchantmentLib.Androgyny);
+			var max2:Number = 100 - itemEffectPower(IELib.MaxFem);
 			return Math.max(Math.min(max1, max2), 50);
 		}
 		//Modify femininity!

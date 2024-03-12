@@ -15,8 +15,14 @@ public class SimpleEnchantmentType extends EnchantmentType {
 	public var valueAddPerPower:int;
 	public var valueMulBase:Number;
 	public var valueMulPerPower:Number;
+	public var fHideDescription:Boolean;
 	public var onEquipFn:Function;
 	public var onUnequipFn:Function;
+	public var onAddFn:Function;
+	
+	override public function hideDescription(enchantment:Enchantment):Boolean {
+		return fHideDescription
+	}
 	
 	protected override function doDecode(identified:Boolean, paramsOnly:Array):Enchantment {
 		var power:Number = paramsOnly[0];
@@ -52,6 +58,7 @@ public class SimpleEnchantmentType extends EnchantmentType {
 										  suffix:String,
 										  shortSuffix:String,
 										  descPattern:String,
+	                                      hideDescription:Boolean,
 										  rarity:int,
 										  minLevel:int,
 										  minPower:int,
@@ -61,8 +68,10 @@ public class SimpleEnchantmentType extends EnchantmentType {
 										  valueMulBase:Number,
 										  valueMulPerPower:Number,
 										  onEquipFn:Function = null,
-										  onUnequipFn:Function = null) {
+										  onUnequipFn:Function = null,
+	                                      onAddFn:Function = null) {
 		super(id, name, curse, descPattern, rarity, minLevel);
+		this.fHideDescription = hideDescription;
 		this.prefix           = prefix;
 		this.suffix           = suffix;
 		this.shortSuffix      = shortSuffix;
@@ -74,6 +83,12 @@ public class SimpleEnchantmentType extends EnchantmentType {
 		this.valueMulPerPower = valueMulPerPower;
 		this.onEquipFn        = onEquipFn;
 		this.onUnequipFn      = onUnequipFn;
+		this.onAddFn          = onUnequipFn;
+	}
+	
+	override public function onAdd(enchantment:Enchantment, item:Equipable):void {
+		super.onAdd(enchantment, item);
+		if (onAddFn != null) varargify(onAddFn)(item, enchantment.power, enchantment);
 	}
 	
 	override public function onEquip(player:Player, enchantment:Enchantment, item:Equipable):void {

@@ -7,9 +7,12 @@ import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.*;
 import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 import classes.Items.EnchantmentLib;
+import classes.Items.IELib;
+import classes.Items.ItemEffect;
 import classes.Items.JewelryLib;
 import classes.Items.NecklaceLib;
 import classes.PerkLib;
+import classes.Race;
 import classes.Races;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.NPCs.Forgefather;
@@ -227,12 +230,12 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
         if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
 		// hope it doesn't lag too much
-		for each (var e:SimpleRaceEnchantment in player.allEnchantments(EnchantmentLib.RaceSpellPowerBonus)) {
-			mod += 0.02 * e.power * player.racialTier(e.race);
+		for each (var e:ItemEffect in player.allItemEffects(IELib.Spellpower_RaceTier)) {
+			mod += e.power * player.racialTier(e.value1 as Race) / 100;
 		}
-		for each (var f:SimpleRaceEnchantment in player.allEnchantments(EnchantmentLib.RaceSpellPowerDoubled)) {
-			mod += f.power * (player.isRaceCached(f.race)? 2:1);
-		}
+	    for each (var f:ItemEffect in player.allItemEffects(IELib.Spellpower_RaceX2)) {
+		    mod += f.power * (player.isRaceCached(f.value1 as Race) ? 2 : 1) / 100;
+	    }
         return mod;
     }
 
@@ -722,7 +725,7 @@ public class CombatMagic extends BaseCombatContent {
 					}
                 }
                 else {
-					if (player.hasPerk(perkObj.tier4)) 
+					if (player.hasPerk(perkObj.tier4))
 						player.createStatusEffect(perkObj.counter,24,1,0,0);
                     else if (player.hasPerk(perkObj.tier2))
                         player.createStatusEffect(perkObj.counter,12,1,0,0);
@@ -742,7 +745,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.hasPerk(perkObj.tier3) || player.hasPerk(perkObj.tier4)) player.addStatusValue(perkObj.counter, 1, 4);
 			else if (player.hasPerk(perkObj.tier2)) player.addStatusValue(perkObj.counter, 1, 6);
 			player.addStatusValue(perkObj.counter, 1, 8);
-		}	
+		}
 	}
 
 	internal function calcInfernoModImpl(damage:Number, casting:Boolean = true):Number {

@@ -140,10 +140,10 @@ public class Weapon extends Equipable
 					//------------------------//
 					// Multiplicative bonuses //
 					//------------------------//
-					/*case IELib.AttackBonus_xxx: {
-						multiplier += ie.power;
+					case IELib.AttackMult_RaceTier: {
+						multiplier += ie.power * player.racialTier(ie.value1 as Race);
 						break;
-					}*/
+					}
 					//------------------//
 					// Additive bonuses //
 					//------------------//

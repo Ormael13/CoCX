@@ -56,6 +56,63 @@ public class IELib extends ItemConstants {
 	public static const Require_Cor:ItemEffectType = mk("Require_Cor", "Requires corruption {power} or more").withFlags(IEF_REQUIREMENT);
 	/** must have corruption < (power) to equip */
 	public static const Require_CorBelow:ItemEffectType = mk("Require_CorBelow", "Requires coruption less than {power}").withFlags(IEF_REQUIREMENT);
+	/** Change min femininity by (+power) */
+	public static const MinFem:ItemEffectType = mk("MinFem", "Min. femininity {power;+d}")
+	/** Change max femininity by (power). Power should be negative */
+	public static const MaxFem:ItemEffectType = mk("MaxFem", "Max. femininity {power;+d}")
+	/** increase XP gain by (power)% */
+	public static const BonusXp:ItemEffectType = mk("BonusXp", "XP gain {power;+d}%")
+	/** power doesn't matter */
+	public static const TfImmunity:ItemEffectType = mk("TfImmunity", "Transformation immunity")
+	/**
+	 * Add (power)% to spellpower per racial tier.
+	 * - value1:Race = race to check (Races.XXXX, not race id)
+	 */
+	public static const Spellpower_RaceTier:ItemEffectType = mkfn("Spellpower_RaceTier",
+			function (ie:ItemEffect, item:ItemType):String {
+				return Utils.substitute("{power;+d}% spellpower per {race} racial tier", ie, {
+					race: (ie.value1 as Race).name
+				})
+			});
+	/**
+	 * Add (power)% to spellpower. Effect player for certain race.
+	 * - value1:Race = race to check (Races.XXXX, not race id)
+	 */
+	public static const Spellpower_RaceX2:ItemEffectType = mkfn("Spellpower_RaceX2",
+			function (ie:ItemEffect, item:ItemType):String {
+				return Utils.substitute("{power;+d}% spellpower. Effect doubled for {race} race", ie, {
+					race: (ie.value1 as Race).name
+				})
+			});
+	/**
+	 * Add (power)% to tease power. Effect player for certain race.
+	 * - value1:Race = race to check (Races.XXXX, not race id)
+	 */
+	public static const Tease_RaceX2:ItemEffectType = mkfn("Tease_RaceX2",
+			function (ie:ItemEffect, item:ItemType):String {
+				return Utils.substitute("{power;+d}% tease potency. Effect doubled for {race} race", ie, {
+					race: (ie.value1 as Race).name
+				})
+			});
+	
+	//===================//
+	// Shields and armor //
+	//===================//
+	/**
+	 * Add (power)% to defensse per racial tier.
+	 * - value1:Race = race to check (Races.XXXX, not race id)
+	 */
+	public static const DefenseMult_RaceTier:ItemEffectType  = mkfn("DefenseMult_RaceTier",
+			function (ie:ItemEffect, item:ItemType):String {
+				return Utils.substitute("{power;+d}% defense per {race} racial tier", ie, {
+					race: (ie.value1 as Race).name
+				})
+			}).withFlags(IEF_DEFENSE);
+	
+	//============================//
+	// Weapons (melee and ranged) //
+	//============================//
+	
 	
 	//=================//
 	// Weapons (melee) //
@@ -84,6 +141,16 @@ public class IELib extends ItemConstants {
 	public static const AttackBonus_RaceTier:ItemEffectType = mkfn("AttackBonus_RaceTier",
 			function (ie:ItemEffect, item:ItemType):String {
 				return Utils.substitute("{power;+2F} attack per {race} racial tier", ie, {
+					race: (ie.value1 as Race).name
+				})
+			}).withFlags(IEF_ATTACK);
+	/**
+	 * Add (power)% to attack per racial tier.
+	 * - value1:Race = race to check (Races.XXXX, not race id)
+	 */
+	public static const AttackMult_RaceTier:ItemEffectType  = mkfn("AttackMult_RaceTier",
+			function (ie:ItemEffect, item:ItemType):String {
+				return Utils.substitute("{power;+d}% attack per {race} racial tier", ie, {
 					race: (ie.value1 as Race).name
 				})
 			}).withFlags(IEF_ATTACK);
