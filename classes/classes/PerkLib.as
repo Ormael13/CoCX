@@ -148,17 +148,17 @@ public class PerkLib
 				"Numerous internal mutations changed your body to allow handle a 5th mutation of the same organ/internal body part.");
 		//Prestige
 		public static const AscensionBuildingPrestige01:PerkType = mk("Ascension: Building Prestige (1st Stage)", "Ascension: Building Prestige (1st Stage)",
-				"Your understanding of prestige jobs from your previous life allows you to pick a 2nd one at lvl 42+.");
+				"Your understanding of prestige jobs from your previous life allows you to pick a 2nd one at lvl 54+.");
 		public static const AscensionBuildingPrestige02:PerkType = mk("Ascension: Building Prestige (2nd Stage)", "Ascension: Building Prestige (2nd Stage)",
-				"Your understanding of prestige jobs from previous lives allows you to pick a 3rd one at lvl 42+.");
+				"Your understanding of prestige jobs from previous lives allows you to pick a 3rd one at lvl 54+.");
 		public static const AscensionBuildingPrestige03:PerkType = mk("Ascension: Building Prestige (3rd Stage)", "Ascension: Building Prestige (3rd Stage)",
-				"Your understanding of prestige jobs from previous lives allows you to pick a 4th one at lvl 42+.");
+				"Your understanding of prestige jobs from previous lives allows you to pick a 4th one at lvl 54+.");
 		public static const AscensionBuildingPrestige04:PerkType = mk("Ascension: Building Prestige (4th Stage)", "Ascension: Building Prestige (4th Stage)",
-				"Your understanding of prestige jobs from previous lives allows you to pick a 5th one at lvl 42+.");
+				"Your understanding of prestige jobs from previous lives allows you to pick a 5th one at lvl 54+.");
 		public static const AscensionBuildingPrestige05:PerkType = mk("Ascension: Building Prestige (5th Stage)", "Ascension: Building Prestige (5th Stage)",
-				"Your understanding of prestige jobs from previous lives allows you to pick a 6th one at lvl 42+.");
+				"Your understanding of prestige jobs from previous lives allows you to pick a 6th one at lvl 54+.");
 		public static const AscensionBuildingPrestige06:PerkType = mk("Ascension: Building Prestige (6th Stage)", "Ascension: Building Prestige (6th Stage)",
-				"Your understanding of prestige jobs from previous lives allows you to pick a 7th one at lvl 42+.");
+				"Your understanding of prestige jobs from previous lives allows you to pick a 7th one at lvl 54+.");
 		//GenMem
 		public static const AscensionTranscendentalGeneticMemoryStage1:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 1)", "Ascension: Transcendental Genetic Memory (Stage 1)",
 				"Allows you to retain up to 15 chosen unlocked metamorphic options.");
@@ -1413,8 +1413,8 @@ public class PerkLib
 				"Your time running into disaster to take care of others allows you to take better care of wounds, further increasing your regen.",
 				"You've chosen the 'First Response' perk, increasing HP gains by 20%.");
 		public static const FlurryOfBlows:PerkType = mk("Flurry of Blows", "Flurry of Blows",
-				"Gain two additional attacks when fighting with fists or fist weapons (not using feral stance). All physical soulforce ability now also strike thrice!",
-				"You've chosen the 'Flurry of Blows' perk, gaining two additional attacks when fighting with fists or fist weapons (not using feral stance). All physical soulforce ability now also strike thrice.");
+				"Gain two additional attacks when fighting with fists or fist weapons (not using feral stance). All physical soulskills (used with fists or fist weapons) now also strike thrice!",
+				"You've chosen the 'Flurry of Blows' perk, gaining two additional attacks when fighting with fists or fist weapons (not using feral stance). All physical soulskills (used with fists or fist weapons) now also strike thrice.");
 		public static const FocusedMind:PerkType = mk("Focused Mind", "Focused Mind",
 				"Black Magic is less likely to backfire and White Magic threshold is increased.",
 				"You've chosen the 'Focused Mind' perk. Black Magic is less likely to backfire and White Magic threshold is increased.");
@@ -4408,7 +4408,9 @@ public class PerkLib
 		public static const MunchkinAtGym:PerkType = mk("Munchkin @Gym", "Munchkin @Gym",
 				"Increase by 5% caps for mutagen, alchemic, knowledge multi.").withBuffs({'str.mult':0.25,'tou.mult':0.25,'spe.mult':0.25,"int.mult":0.25,'wis.mult':0.25,'lib.mult':0.25,'sens':100}, false);
 		public static const MunchkinAtWork:PerkType = mk("Munchkin @Work", "Munchkin @Work",
-				"+10% to OverMax HP / Lust / Wrath / Mana / Soulforce, +2 prestige job slots, +1 hidden job slot.");
+				"+10% to OverMax HP / Lust / Wrath / Mana / Soulforce / Fatigue, +2 prestige job slots, +1 hidden job slot.");
+		public static const MunchkinAtBioLab:PerkType = mk("Munchkin @Biolab", "Munchkin @Biolab",
+				"Increase core/train caps for stats by 10. +1 to internal mutations slots capacity (+2 for adaptation slots)");
 		public static const BloodDemonWisdom:PerkType = mk("Blood Demon Wisdom", "Blood Demon Wisdom",
 				"X th Blood demon super perk. (+10% of OverMax HP, -5% blood spells/soulskills cost, +30% blood spells/soulskills power, +10% Base WIS Cap)");
 		public static const AsuraSpeed:PerkType = mk("Asura Speed", "Asura Speed",

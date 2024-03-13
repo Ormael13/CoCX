@@ -4617,7 +4617,7 @@ use namespace CoC;
 		public function maxTotalMutationsInSlot(slot:String):int {
 			switch (slot) {
 				case IMutationPerkType.SLOT_ADAPTATIONS:
-					return 2 * (1 + maxHumanityBoost() + maxAscensionBoost());
+					return 2 * (1 + maxSlotsBoost());
 				case IMutationPerkType.SLOT_HEART:
 				case IMutationPerkType.SLOT_MUSCLE:
 				case IMutationPerkType.SLOT_MOUTH:
@@ -4634,7 +4634,7 @@ use namespace CoC;
 				case IMutationPerkType.SLOT_THYROID:
 				case IMutationPerkType.SLOT_PARATHYROID:
 				default:
-					return 1 + maxHumanityBoost() + maxAscensionBoost();
+					return 1 + maxSlotsBoost();
 			}
 		}
 		public function maxCurrentMutationsInSlot(slot:String):int {
@@ -4688,13 +4688,12 @@ use namespace CoC;
 		public function maxAdaptationsMutations():Number {
 			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_ADAPTATIONS);
 		}
-		public function maxAscensionBoost():Number {
-			return perkv1(PerkLib.AscensionAdditionalOrganMutationX);
-		}
-		public function maxHumanityBoost():Number {
-			var mHB:Number = 0;
-			if (hasPerk(PerkLib.HumanSupremacyAdvanced)) mHB += 1;
-			return mHB;
+		public function maxSlotsBoost():Number {
+			var mSB:Number = 0;
+			if (hasPerk(PerkLib.AscensionAdditionalOrganMutationX)) mSB += perkv1(PerkLib.AscensionAdditionalOrganMutationX);
+			if (hasPerk(PerkLib.HumanSupremacyAdvanced)) mSB += 1;
+			if (hasPerk(PerkLib.MunchkinAtBioLab)) mSB += 1;
+			return mSB;
 		}
 
 		public function lactationQ():Number
