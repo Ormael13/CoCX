@@ -358,6 +358,11 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 175) mod += .3;
 		if (player.hasPerk(PerkLib.GrandGreyArchmage) && player.inte >= 225) mod += .4;
 		if (player.hasPerk(PerkLib.GrandGreyArchmage2ndCircle) && player.inte >= 275) mod += .5;
+		if (player.weaponRange == weaponsrange.RG_TOME && player.level < 18) {
+			if (player.level < 6) mod += 1;
+			if (player.level < 12) mod += 1;
+			mod += 1;
+		}
 		return mod;
 	}
 

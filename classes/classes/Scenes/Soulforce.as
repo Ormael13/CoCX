@@ -814,14 +814,6 @@ public class Soulforce extends BaseContent
 		addButton(14, "Back", accessSoulforceMenu);
 	}
 
-	private function soulforceForDaughters():int {
-		return 10 * (8 + (Math.floor(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 20)));
-	}
-
-	private function soulforceForSons():int {
-		return 10 * (26 + Math.round((flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3)/2));
-	}
-
 	public function theUnknown(page:int = 1):void {
 		if (player.soulforce >= 100) {
 			player.soulforce -= 100;

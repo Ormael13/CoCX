@@ -26,6 +26,7 @@ import classes.CockTypesEnum;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Dynamic.DynamicArmor;
 import classes.Items.Dynamic.DynamicWeapon;
+import classes.Items.Dynamic.DynamicShield;
 import classes.PerkLib;
 import classes.Player;
 import classes.StatusEffects;
@@ -44,6 +45,7 @@ public class CharViewContext extends ExecContext {
 			var game:CoC = CoC.instance;
 			var weaponSubtype:String = (player.weapon is DynamicWeapon) ? (player.weapon as DynamicWeapon).subtypeId : "";
 			var armorSubtype:String = (player.armor is DynamicArmor) ? (player.armor as DynamicArmor).subtypeId : "";
+			var shieldSubtype:String = (player.shield is DynamicShield) ? (player.shield as DynamicShield).subtypeId : "";
 
 			function showLegClothing():Boolean {
 				return !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.humanForm() || ([LowerBody.GAZER, LowerBody.YETI, LowerBody.KIRIN, LowerBody.HOOFED, LowerBody.CLOVEN_HOOFED, LowerBody.HARPY, LowerBody.JABBERWOCKY, LowerBody.BUNNY, LowerBody.GOO, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2, LowerBody.WERESHARK].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing());
@@ -156,7 +158,7 @@ public class CharViewContext extends ExecContext {
 					//PlayerHasAShieldMsHoly: player.shield == game.shields.SANCTYL,
 					//PlayerHasAShieldMsUnholy: player.shield == game.shields.SANCTYD,
 
-					PlayerhasACasterTome:player.shield == game.shields.IMPTOME || player.shield == game.shields.NEKONOM,
+					PlayerhasACasterTome: shieldSubtype == "tome" || player.shield == game.shields.NEKONOM,
 
 					PlayerHasABow: player.isBowTypeWeapon(),
 					PlayerHasABowHoly:player.weaponRange == game.weaponsrange.ARTEMIS,
