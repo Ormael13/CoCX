@@ -83,6 +83,10 @@ public class Changelog extends BaseContent
 			outputText("-Omnibus Overseer's 'lust aura' and 'milk attack' moves now deal scaling damage. 'Lust Aura' DoT now deals scaling libido damage. Stunning/Confusing/Fearing the Overseer will disrupt their Lust Aura. Added message to Omnibus Overseer Lust Aura, to signal that they should try disrupting the boss to cancel the aura.\n");
 			outputText("-Add proper number formatting to the HP display function. Player Info now shows correct Soulskill cost reduction.\n");
 			outputText("-Fixed bug with Spiritual Enlightenment Ascension Perk where soulskill cost was being reduced by 20% per rank, rather than 2%. Fixed bug where you could obtain higher ranks in the Daoist and Body Cultivation Subpaths without purchasing the previous tiers.\n");
+			outputText("-The 'monsterDodgeSkill' function for soulskills can now take hitmodifiers into account. Standardized dodge chance of different ranks of the 'Hail of Blades' soulskills.\n");
+			outputText("-Comet changes: baseSFCost 60 -> 400, given cooldown of 4, base damage scalingBonusWisdom * 1 -> 6 (similar to tier 2 magic AOE)\n");
+			outputText("-Many Birds Changes: baseSFCost 10 -> 200, cooldown of 2, given AOE effect, base damage scalingBonusWisdom * 1 -> 2 (similar to tier 1 magic AOE)\n");
+			outputText("-Soul Blast changes: baseSFCost 100 -> 900, cooldown 15 -> 10, base damage scalingBonusStrength/Wisdom/Intelligence * 1.8 -> scalingBonusStrength/Wisdom/Intelligence * 3\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-\n");
@@ -92,10 +96,6 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Arigean Knowledge. Gained by becoming Arigean Princess. Effects: The knowledge of your Arigean ancestors rests in your mind. Gain immunity to mental debuffs and intelligence min is increased to 90.\n");
 			outputText("-Flying Sword Path, Soaring Blades, First Attack: Flying Sword, Killing Intent perks no longer are in level up menu. All spend before perks are refunded no worried.\n");
 			outputText("-Flying Sword Path perk have now ranks and 1st rank is learned by training with Qi costing 50 spirit stones for training.\n");
-			outputText("-The 'monsterDodgeSkill' function for soulskills can now take hitmodifiers into account. Standardized dodge chance of different ranks of the 'Hail of Blades' soulskills. (Demojay)\n");
-			outputText("-Comet changes: baseSFCost 60 -> 400, given cooldown of 4, base damage scalingBonusWisdom * 1 -> 6 (similar to tier 2 magic AOE) (Demojay)\n");
-			outputText("-Many Birds Changes: baseSFCost 10 -> 200, cooldown of 2, given AOE effect, base damage scalingBonusWisdom * 1 -> 2 (similar to tier 1 magic AOE) (Demojay)\n");
-			outputText("-Soul Blast changes: baseSFCost 100 -> 900, cooldown 15 -> 10, base damage scalingBonusStrength/Wisdom/Intelligence * 1.8 -> scalingBonusStrength/Wisdom/Intelligence * 3 (Demojay)\n");
 			outputText("-Fixed bug where Blind could not used against Draculina when invisible. (Demojay)\n");
 			outputText("-Flames Of Love/ Icicles Of Love/ Night Of Brotherhood/ Storm Of SisterHood Skills now have 4 levels: Rankless, Low Rank (adds AOE (x2), wisdom and magical soulskill scaling, increases restore amount to 20%, and cooldown to 1 turn - Level up requirements: Soul Apprentice perk and 5 uses), Mid Rank (increases AOE scaling (x5), increases restore amount to 25% and cooldown to 2 turns - Level up requirements: Soul Warrior perk and 10 uses), ");
 			outputText("High Rank ( increases restore amount to 30% and cooldown to 3 turns - Level up requirements: Soul Scholar perk and 10 uses). (Demojay)\n");
@@ -166,8 +166,8 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Sword Intent (Aura). Gained by having 'Hidden Job: Sword Immortal' super perk and Soul Personage perk. Effects: Your Killing Intent can become focused into Sword Intent aura enveloping your weapons as long they are sword-type (+5% of core spe, +10% dmg). Would apply bonuses from the job to flying swords too. (+5% of OverMax Wrath / Fatigue / Soulforce)\n");
 			outputText("-New event perk: Sword Immortal: First Form. Gained by having 'Sword Intent (Aura)' super perk and Soul Warrior perk. Effects: You reached First Form stage. Increase sword intent aura effects (+15% of core spe, +15% dmg) and gives small boost at the combat start (+100 wrath/sf, -100 fatigue) (+5% of OverMax Wrath / Base STR Cap / Fatigue / Base SPE Cap / Soulforce / Base WIS Cap)\n");
 			outputText("-New super perk: Munchkin@Biolab. Gained by having merely 1 super perk, having 'Munchkin@Work' super munchkin perk, lvl 135+. Effect: Increase core/train caps for stats by 10. +1 to internal mutations slots capacity (+2 for adaptation slots)\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Killing Intent scaling based on cultivation rank will no longer have soft caps that increase at each major cultivation step instead increase a bit after each minor step. it also mean too high kill count will not be lowered due too low cultivation rank.\n");
+			outputText("-Jojo wisdom training effect been increased 3x.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

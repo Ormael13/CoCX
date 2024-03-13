@@ -81,8 +81,10 @@ public class AbstractSpell extends CombatAbility {
 			if (player.HP - player.minHP() <= finalCost) {
 				return "Your HP is too low to cast this spell."
 			}
-		} else if (isLastResortApplicable && player.hasPerk(PerkLib.LastResort) && player.mana + (player.HP - player.minHP()) < finalCost) {
-			return "Your HP and mana are too low to cast this spell.";
+		} else if (isLastResortApplicable && player.hasPerk(PerkLib.LastResort)) {
+			if (player.mana + (player.HP - player.minHP()) < finalCost) {
+				return "Your HP and mana are too low to cast this spell.";
+			}
 		} else if (player.mana < finalCost)
 			return "Your mana is too low to cast this spell.";
 
