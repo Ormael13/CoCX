@@ -1002,7 +1002,7 @@
 		<cell rect="572,2362,89,105" name="shield/shieldMsGeneric" dx="66" dy="60"/>
 		<cell rect="482,2362,89,105" name="shield/shieldMSHoly" dx="66" dy="60"/>
 		<cell rect="662,2362,89,105" name="shield/shieldMSUnholy" dx="66" dy="60"/>
-		<cell rect="572,1938,88,90" name="shield/CasterTomeOfImps" dx="80" dy="10"/>
+		<cell rect="572,1938,88,90" name="shield/CasterTomeOfImps" dx="80" dy="50"/>
         <cell rect="1022,1620,80,90" name="backAccessory/LactoblasterTank" dx="59" dy="32"/>
 		<cell rect="2325,325,77,44" name="backAccessory/kabutoMempoBack" dx="67" dy="32"/>
         <cell rect="1022,1726,85,45" name="weapon/LactoblasterGun" dx="60" dy="97"/>
@@ -1366,10 +1366,10 @@
         <cell rect="161,350,49,29" name="balls/Bdscaleshuge" dx="79" dy="105"/>
         <cell rect="161,380,49,29" name="balls/Bdscalessillyhuge" dx="79" dy="106"/>
         <cell rect="161,560,49,36" name="balls/Bdscalesgigahuge" dx="82" dy="114"/>
-        <cell rect="311,290,49,29" name="balls/Borcasmall" dx="79" dy="104"/>
-        <cell rect="311,320,49,29" name="balls/Borcalarge" dx="79" dy="104"/>
-        <cell rect="311,350,49,29" name="balls/Borcahuge" dx="79" dy="105"/>
-        <cell rect="311,380,49,29" name="balls/Borcasillhugehuge" dx="79" dy="106"/>
+        <cell rect="211,290,49,29" name="balls/Borcasmall" dx="79" dy="104"/>
+        <cell rect="211,320,49,29" name="balls/Borcalarge" dx="79" dy="104"/>
+        <cell rect="211,350,49,29" name="balls/Borcahuge" dx="79" dy="105"/>
+        <cell rect="211,380,49,29" name="balls/Borcasillhugehuge" dx="79" dy="106"/>
         <cell rect="311,560,49,36" name="balls/Borcagigahuge" dx="82" dy="114"/>
         <cell rect="211,290,49,29" name="balls/Bbeesmall" dx="79" dy="104"/>
         <cell rect="211,320,49,29" name="balls/Bbeelarge" dx="79" dy="104"/>
@@ -1652,7 +1652,7 @@
         <cell rect="759,561,83,139" name="tail/wendigo" dx="95" dy="40"/>
         <cell rect="759,561,83,139" name="tail/wendigo_taur" dx="144" dy="49"/>
         <cell rect="508,351,82,69" name="tail/kamaitachi" dx="95" dy="87"/>
-        <cell rect="508,351,82,69" name="tail/kamaitachi_taur" dx="144" dy="50"/>
+        <cell rect="508,351,82,69" name="tail/kamaitachi_taur" dx="149" dy="94"/>
 		<cell rect="593,351,82,69" name="tail/kirin" dx="95" dy="87"/>
         <cell rect="593,351,82,69" name="tail/kirin_taur" dx="140" dy="88"/>
         <cell rect="255,211,83,139" name="tail_bg/cat" dx="108" dy="40"/>
@@ -1683,28 +1683,24 @@
         <cell rect="175,701,173,156" name="tail_bg/fox8_taur" dx="60" dy="47"/>
         <cell rect="1,701,173,156" name="tail_bg/fox9" dx="21" dy="37"/>
         <cell rect="1,701,173,156" name="tail_bg/fox9_taur" dx="60" dy="47"/>		
-		<cell rect="1,1486,173,156" name="tail_bg/firefox1" dx="4" dy="31"/>
-        <cell rect="1,1486,173,156" name="tail_bg/firefox1_taur" dx="60" dy="47"/>
-        <cell rect="523,1329,173,156" name="tail_bg/firefox2" dx="16" dy="36"/>
-        <cell rect="523,1329,173,156" name="tail_bg/firefox2_taur" dx="63" dy="43"/>
-        <cell rect="349,1329,173,156" name="tail_bg/firefox3" dx="17" dy="35"/>
-        <cell rect="349,1329,173,156" name="tail_bg/firefox3_taur" dx="67" dy="47"/>
-        <cell rect="175,1329,173,156" name="tail_bg/firefox4" dx="20" dy="36"/>
-        <cell rect="175,1329,173,156" name="tail_bg/firefox4_taur" dx="65" dy="47"/>
-        <cell rect="1,1329,173,156" name="tail_bg/firefox5" dx="21" dy="37"/>
-        <cell rect="1,1329,173,156" name="tail_bg/firefox5_taur" dx="61" dy="47"/>
-        <cell rect="523,1172,173,156" name="tail_bg/firefox6" dx="21" dy="37"/>
-        <cell rect="523,1172,173,156" name="tail_bg/firefox6_taur" dx="60" dy="47"/>
-        <cell rect="349,1172,173,156" name="tail_bg/firefox7" dx="21" dy="37"/>
-        <cell rect="349,1172,173,156" name="tail_bg/firefox7_taur" dx="60" dy="47"/>
-        <cell rect="175,1172,173,156" name="tail_bg/firefox8" dx="21" dy="37"/>
-        <cell rect="175,1172,173,156" name="tail_bg/firefox8_taur" dx="60" dy="47"/>
-        <cell rect="1,1172,173,156" name="tail_bg/firefox9" dx="21" dy="37"/>
-        <cell rect="1,1172,173,156" name="tail_bg/firefox9_taur" dx="60" dy="47"/>
-        <cell rect="175,1015,173,156" name="tail_bg/Kumiho" dx="21" dy="37"/>
-        <cell rect="175,1015,173,156" name="tail_bg/Kumiho_taur" dx="60" dy="47"/>
-		<cell rect="255,561,83,139" name="tail_bg/spider" dx="95" dy="40"/>
-        <cell rect="255,561,83,139" name="tail_bg/spider_taur" dx="135" dy="50"/>
+		<cell rect="1,1486,173,156" name="tail_bg_overlay/firefox1" dx="4" dy="31"/>
+        <cell rect="1,1486,173,156" name="tail_bg_overlay/firefox1_taur" dx="60" dy="47"/>
+        <cell rect="523,1329,173,156" name="tail_bg_overlay/firefox2" dx="16" dy="36"/>
+        <cell rect="523,1329,173,156" name="tail_bg_overlay/firefox2_taur" dx="63" dy="43"/>
+        <cell rect="349,1329,173,156" name="tail_bg_overlay/firefox3" dx="17" dy="35"/>
+        <cell rect="349,1329,173,156" name="tail_bg_overlay/firefox3_taur" dx="67" dy="47"/>
+        <cell rect="175,1329,173,156" name="tail_bg_overlay/firefox4" dx="20" dy="36"/>
+        <cell rect="175,1329,173,156" name="tail_bg_overlay/firefox4_taur" dx="65" dy="47"/>
+        <cell rect="1,1329,173,156" name="tail_bg_overlay/firefox5" dx="21" dy="37"/>
+        <cell rect="1,1329,173,156" name="tail_bg_overlay/firefox5_taur" dx="61" dy="47"/>
+        <cell rect="523,1172,173,156" name="tail_bg_overlay/firefox6" dx="21" dy="37"/>
+        <cell rect="523,1172,173,156" name="tail_bg_overlay/firefox6_taur" dx="60" dy="47"/>
+        <cell rect="349,1172,173,156" name="tail_bg_overlay/firefox7" dx="21" dy="37"/>
+        <cell rect="349,1172,173,156" name="tail_bg_overlay/firefox7_taur" dx="60" dy="47"/>
+        <cell rect="175,1172,173,156" name="tail_bg_overlay/firefox8" dx="21" dy="37"/>
+        <cell rect="175,1172,173,156" name="tail_bg_overlay/firefox8_taur" dx="60" dy="47"/>
+        <cell rect="1,1172,173,156" name="tail_bg_overlay/firefox9" dx="21" dy="37"/>
+        <cell rect="1,1172,173,156" name="tail_bg_overlay/firefox9_taur" dx="60" dy="47"/>
     </spritemap>
     <spritemap file="wings.png">
         <cell rect="1,70,84,139" name="wings_bg/mantibig" dx="20" dy="20"/>
@@ -1876,6 +1872,7 @@
 		<layer name="backtentacles_bg"/>
 		<layer name="wings"/>
         <layer name="wings_bg"/>
+		<layer name="tail_bg_overlay"/>
 		<layer name="tail_bg"/>
 		<layer name="legs_bg"/>
 		<layer name="aura"/>
@@ -4879,7 +4876,8 @@
 				<show part="tail_bg/fox$tailCount$taur"/>
             </case>
 			<case values="Tail.KITSHOO">
-				<show part="tail_bg/firefox$tailCount$taur"/>
+				<show part="tail_bg/fox$tailCount$taur"/>
+				<show part="tail_bg_overlay/firefox$tailCount$taur"/>
             </case>
             <case values="Tail.KANGAROO"><!--TODO -->
                 <show part="tail/cat"/>
@@ -4955,9 +4953,6 @@
 						<show part="tail_fg/reptile_fire"/>
 					</else>
 				</if>
-            </case>
-            <case values="Tail.KITSHOO">
-                <!--TODO -->
             </case>
             <case values="Tail.MANTICORE_PUSSYTAIL">
 				<if test="isTaur()">

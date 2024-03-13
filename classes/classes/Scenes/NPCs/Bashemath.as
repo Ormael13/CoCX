@@ -50,7 +50,7 @@ use namespace CoC;
 					else {
 						if (rand(2) == 0) {
 							outputText("a bit more tired");
-							if (player.fatigue + 25 > player.maxFatigue()) player.fatigue = player.maxFatigue();
+							if (player.fatigue + 25 > player.maxOverFatigue()) player.fatigue = player.maxOverFatigue();
 							else player.fatigue += 25;
 						}
 						else {

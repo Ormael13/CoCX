@@ -86,7 +86,7 @@ public class FetishCultist extends Monster
 			var mlt:Number = 10;
 			if (flags[kFLAGS.FETISH_FOLLOWER_SUBTYPE] == 3) mlt -= 5;
 			player.takeLustDamage((player.lib/mlt + player.cor/(mlt*2))+4, true);
-			if (player.lust >= player.maxOverLust())
+			if (player.lust >= player.maxOverLust() && !SceneLib.combat.tyrantiaTrainingExtension())
 				doNext(SceneLib.combat.endLustLoss);
 			else doNext(SceneLib.combat.combatMenu);
 		}
@@ -114,7 +114,7 @@ public class FetishCultist extends Monster
 				lust -= 50;
 				if(lust < 0) lust = 10;
 			}
-			if (player.lust >= player.maxOverLust())
+			if (player.lust >= player.maxOverLust() && !SceneLib.combat.tyrantiaTrainingExtension())
 				doNext(SceneLib.combat.endLustLoss);
 			else doNext(SceneLib.combat.combatMenu);
 		}

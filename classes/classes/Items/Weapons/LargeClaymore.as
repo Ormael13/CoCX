@@ -4,6 +4,7 @@
 package classes.Items.Weapons
 {
 	import classes.Items.Weapon;
+	import classes.PerkLib;
 	import classes.Player;
 
 	public class LargeClaymore extends Weapon {
@@ -14,7 +15,7 @@ package classes.Items.Weapons
 		
 		override public function get attack():Number {
 			var boost:int = 0;
-			if (game.player.str >= 40) boost += 8;
+			if (game.player.str >= 40 || game.player.hasPerk(PerkLib.HiddenJobSwordImmortal)) boost += 8;
 			return (7 + boost); 
 		}
 	}

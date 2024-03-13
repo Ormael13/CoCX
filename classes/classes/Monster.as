@@ -615,6 +615,17 @@ import classes.Scenes.Combat.CombatAbilities;
 			temp = Math.round(temp);
 			return temp;
 		}
+		public override function maxOverFatigue():Number {
+			var max1:Number = maxSoulforce();
+			var max2:Number = 1;
+			if (hasPerk(PerkLib.HiddenJobSwordImmortal)) max2 += 0.05;
+			if (hasPerk(PerkLib.SwordIntentAura)) max2 += 0.05;
+			if (hasPerk(PerkLib.SwordImmortalFirstForm)) max2 += 0.05;
+			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
+			max1 *= max2;//~125%
+			max1 = Math.round(max1);
+			return max1;
+		}
 
 		public override function maxSoulforce():Number {
 			//Base soulforce
@@ -698,8 +709,11 @@ import classes.Scenes.Combat.CombatAbilities;
 		public override function maxOverSoulforce():Number {
 			var max1:Number = maxSoulforce();
 			var max2:Number = 1;
+			if (hasPerk(PerkLib.HiddenJobSwordImmortal)) max2 += 0.05;
+			if (hasPerk(PerkLib.SwordIntentAura)) max2 += 0.05;
+			if (hasPerk(PerkLib.SwordImmortalFirstForm)) max2 += 0.05;
 			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
-			max1 *= max2;//~110%
+			max1 *= max2;//~125%
 			max1 = Math.round(max1);
 			return max1;
 		}
@@ -795,6 +809,9 @@ import classes.Scenes.Combat.CombatAbilities;
 			if (hasPerk(PerkLib.AsuraToughness)) temp2 += 0.1;
 			//
 			if (hasPerk(PerkLib.AsuraSpeed)) temp2 += 0.1;
+			if (hasPerk(PerkLib.HiddenJobSwordImmortal)) temp2 += 0.05;
+			if (hasPerk(PerkLib.SwordIntentAura)) temp2 += 0.05;
+			if (hasPerk(PerkLib.SwordImmortalFirstForm)) temp2 += 0.05;
 			if (hasPerk(PerkLib.MunchkinAtWork)) temp2 += 0.1;
 			temp1 *= temp2;
 			temp1 = Math.round(temp1);

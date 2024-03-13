@@ -281,7 +281,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		if(player.lust >= player.maxOverLust()) doNext(endLustLoss);
+		if(player.lust >= player.maxOverLust() && !SceneLib.combat.tyrantiaTrainingExtension()) doNext(endLustLoss);
 		else enemyAI();
 	}*/
 	/*
@@ -290,14 +290,14 @@ public class CombatSoulskills extends BaseCombatContent {
 	 flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 	 clearOutput();
 	 if (monster.plural) {
-	 if (player.fatigue + physicalCost(50) > player.maxFatigue()) {
+	 if (player.fatigue + physicalCost(50) > player.maxOverFatigue()) {
 	 outputText("You are too tired to slash " + monster.a + " [monster name].");
 	 addButton(0, "Next", combatMenu, false);
 	 return;
 	 }
 	 }
 	 else {
-	 if (player.fatigue + physicalCost(20) > player.maxFatigue()) {
+	 if (player.fatigue + physicalCost(20) > player.maxOverFatigue()) {
 	 outputText("You are too tired to slash " + monster.a + " [monster name].");
 	 addButton(0, "Next", combatMenu, false);
 	 return;

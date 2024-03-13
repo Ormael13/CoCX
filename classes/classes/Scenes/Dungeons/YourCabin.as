@@ -218,7 +218,7 @@ public class YourCabin extends DungeonAbstractContent
 			SceneLib.campUpgrades.checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
-				if (player.fatigue <= player.maxFatigue() - 40) {
+				if (player.fatigue <= player.maxOverFatigue() - 40) {
 					if (CampStatsAndResources.NailsResc >= 45 && CampStatsAndResources.WoodResc >= 25)
 					{
 						doYesNo(constructFurnitureBed, menuFurniture);
@@ -261,7 +261,7 @@ public class YourCabin extends DungeonAbstractContent
 			SceneLib.campUpgrades.checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
-				if (player.fatigue <= player.maxFatigue() - 20) {
+				if (player.fatigue <= player.maxOverFatigue() - 20) {
 					if (CampStatsAndResources.NailsResc >= 20 && CampStatsAndResources.WoodResc >= 10)
 					{
 						doYesNo(constructFurnitureNightstand, menuFurniture);
@@ -304,7 +304,7 @@ public class YourCabin extends DungeonAbstractContent
 			SceneLib.campUpgrades.checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
-				if (player.fatigue <= player.maxFatigue() - 60) {
+				if (player.fatigue <= player.maxOverFatigue() - 60) {
 					if (CampStatsAndResources.NailsResc >= 50 && CampStatsAndResources.WoodResc >= 30)
 					{
 						doYesNo(constructFurnitureDresser, menuFurniture);
@@ -348,7 +348,7 @@ public class YourCabin extends DungeonAbstractContent
 			SceneLib.campUpgrades.checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
-				if (player.fatigue <= player.maxFatigue() - 50) {
+				if (player.fatigue <= player.maxOverFatigue() - 50) {
 					if (CampStatsAndResources.NailsResc >= 20 && CampStatsAndResources.WoodResc >= 15)
 					{
 						doYesNo(constructFurnitureTable, menuFurniture);
@@ -391,7 +391,7 @@ public class YourCabin extends DungeonAbstractContent
 			SceneLib.campUpgrades.checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
-				if (player.fatigue <= player.maxFatigue() - 20) {
+				if (player.fatigue <= player.maxOverFatigue() - 20) {
 					if (CampStatsAndResources.NailsResc >= 40 && CampStatsAndResources.WoodResc >= 10)
 					{
 						doYesNo(constructFurnitureChair, menuFurniture);
@@ -442,7 +442,7 @@ public class YourCabin extends DungeonAbstractContent
 			SceneLib.campUpgrades.checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
-				if (player.fatigue <= player.maxFatigue() - 50) {
+				if (player.fatigue <= player.maxOverFatigue() - 50) {
 					if (CampStatsAndResources.NailsResc >= 75 && CampStatsAndResources.WoodResc >= 25)
 					{
 						doYesNo(constructFurnitureBookshelf, menuFurniture);
@@ -488,7 +488,7 @@ public class YourCabin extends DungeonAbstractContent
 			SceneLib.campUpgrades.checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
-				if (player.fatigue <= player.maxFatigue() - 60) {
+				if (player.fatigue <= player.maxOverFatigue() - 60) {
 					if (CampStatsAndResources.NailsResc >= 60 && CampStatsAndResources.WoodResc >= 20)
 					{
 						doYesNo(constructFurnitureDesk, menuFurniture);
@@ -532,7 +532,7 @@ public class YourCabin extends DungeonAbstractContent
 			SceneLib.campUpgrades.checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
-				if (player.fatigue <= player.maxFatigue() - 20) {
+				if (player.fatigue <= player.maxOverFatigue() - 20) {
 					if (CampStatsAndResources.NailsResc >= 40 && CampStatsAndResources.WoodResc >= 10)
 					{
 						doYesNo(constructFurnitureChairForDesk, menuFurniture);

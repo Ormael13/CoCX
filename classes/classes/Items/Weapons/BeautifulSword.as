@@ -7,6 +7,7 @@ package classes.Items.Weapons
 	import classes.Creature;
 	import classes.CoC;
 	import classes.Items.Weapon;
+	import classes.PerkLib;
 	import classes.Player;
 
 	public class BeautifulSword extends Weapon {
@@ -18,6 +19,7 @@ package classes.Items.Weapons
 		override public function get attack():Number {
 			var temp:int = 7 + (10 - game.player.cor / 3);
 			if (temp < 5) temp = 5;
+			if (game.player.hasPerk(PerkLib.HiddenJobSwordImmortal)) temp = 17;
 			return temp;
 		}
 		

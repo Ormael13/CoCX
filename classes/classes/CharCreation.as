@@ -1402,6 +1402,10 @@ import classes.Scenes.Combat.CombatAbility;
 			else addButtonDisabled(8, "Vampire", "You already have this bloodline!");
 			if (!player.hasPerk(PerkLib.BloodlineMelkie)) addButton(9, "Melkie", confirmBloodline, PerkLib.MelkiesDescendant).hint("(+2 to melkie score)");
 			else addButtonDisabled(9, "Melkie", "You already have this bloodline!");
+			if (!player.hasPerk(PerkLib.BloodlineHydra)) addButton(10, "Hydra", confirmBloodline, PerkLib.HydrasDescendant).hint("(+2 to hydra score)");
+			else addButtonDisabled(10, "Hydra", "You already have this bloodline!");
+			if (!player.hasPerk(PerkLib.BloodlineSalamander)) addButton(11, "Salamander", confirmBloodline, PerkLib.SalamandersDescendant).hint("(+2 to salamander score)");
+			else addButtonDisabled(11, "Salamander", "You already have this bloodline!");
 			addButton(14, "None", noBloodlineAtAllCuzYouAscendedTooManyTimesAlready).hint("You either cannot add a new unstable bloodline, or you have a stable bloodline. (It mean you only will get some bonus perk points for start instead of new bloodline.)");
 		}
 
@@ -1437,6 +1441,12 @@ import classes.Scenes.Combat.CombatAbility;
 					break;
 				case PerkLib.MelkiesDescendant:
 					outputText("Your ancestor was a melkie?");
+					break;
+				case PerkLib.HydrasDescendant:
+					outputText("Your ancestor was a hydra?");
+					break;
+				case PerkLib.SalamandersDescendant:
+					outputText("Your ancestor was a salamander?");
 					break;
 				default:
 					outputText("Your ancestor was a dragon?");
@@ -2748,7 +2758,16 @@ import classes.Scenes.Combat.CombatAbility;
 				player.createPerk(PerkLib.BloodlineMelkie,0,0,0,1);
 				bloodlineACQ2();
 			}
-
+			else if (player.hasPerk(PerkLib.HydrasDescendant)) {
+				player.removePerk(PerkLib.HydrasDescendant);
+				player.createPerk(PerkLib.BloodlineHydra,0,0,0,1);
+				bloodlineACQ2();
+			}
+			else if (player.hasPerk(PerkLib.SalamandersDescendant)) {
+				player.removePerk(PerkLib.SalamandersDescendant);
+				player.createPerk(PerkLib.BloodlineSalamander,0,0,0,1);
+				bloodlineACQ2();
+			}
 			else {
 				clearOutput();
 				outputText("You don't have any Descendant perks to change into Bloodline perks.");
@@ -3453,4 +3472,4 @@ import classes.Scenes.Combat.CombatAbility;
 				return false;
 		}
 	} // what the fuck are those weird comments here? ^
-}
+}

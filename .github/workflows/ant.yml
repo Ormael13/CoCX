@@ -32,18 +32,18 @@ jobs:
 
     steps:
       - name: Set up JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '11'
 
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: true
 
       - name: Cache FlexSDK Install
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           key: apache-stuff
           path: |
@@ -64,37 +64,37 @@ jobs:
         run: ant allCI
 
       - name: Save Debug SWF
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: debug-swf
           path: target/CoC-debug.swf
 
       - name: Save Release SWF
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: release-swf
           path: target/CoC-release.swf
 
       - name: Save Android armv7 Beta APK
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: CoC-Mobile-Beta-32bit
           path: target/CoC-Mobile-Beta-32bit.apk
 
       - name: Save Android armv8 Beta APK
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: CoC-Mobile-Beta-64bit
           path: target/CoC-Mobile-Beta-64bit.apk
 
       - name: Save Android armv7 Release APK
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: CoC-Mobile-Release-32bit
           path: target/CoC-Mobile-Release-32bit.apk
 
       - name: Save Android armv8 Release APK
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: CoC-Mobile-Release-64bit
           path: target/CoC-Mobile-Release-64bit.apk

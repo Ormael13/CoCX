@@ -22,6 +22,7 @@ package classes.Items.Weapons
 		override public function get attack():Number {
 			var temp:int = 10 + int((90 - game.player.cor) / 3);
 			if (temp < 10) temp = 10;
+			if (game.player.hasPerk(PerkLib.HiddenJobSwordImmortal)) temp = 40;
 			return temp;
 		}
 		

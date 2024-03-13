@@ -91,7 +91,7 @@ import classes.internals.ChainedDrop;
 					player.buff("wasp paralyze venom").addStats( {"str":-6, "spe":-6} ).withText("wasp paralyze venom").combatPermanent();
 				}
 			}
-			if (player.lust >= player.maxOverLust()) doNext(SceneLib.combat.endLustLoss);
+			if (player.lust >= player.maxOverLust() && !SceneLib.combat.tyrantiaTrainingExtension()) doNext(SceneLib.combat.endLustLoss);
 			else doNext(EventParser.playerMenu);
 		}
 

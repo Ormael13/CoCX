@@ -75,7 +75,7 @@ public class BeeGirl extends Monster {
 					player.buff("bee paralyze venom").addStats( {"str":-3, "spe":-3} ).withText("bee paralyze venom").combatPermanent();
 				}
 			}
-			if (player.lust >= player.maxOverLust())
+			if (player.lust >= player.maxOverLust() && !SceneLib.combat.tyrantiaTrainingExtension())
 				doNext(SceneLib.combat.endLustLoss);
 			else doNext(EventParser.playerMenu);
 		}

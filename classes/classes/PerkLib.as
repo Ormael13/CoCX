@@ -148,17 +148,17 @@ public class PerkLib
 				"Numerous internal mutations changed your body to allow handle a 5th mutation of the same organ/internal body part.");
 		//Prestige
 		public static const AscensionBuildingPrestige01:PerkType = mk("Ascension: Building Prestige (1st Stage)", "Ascension: Building Prestige (1st Stage)",
-				"Your understanding of prestige jobs from your previous life allows you to pick a 2nd one at lvl 42+.");
+				"Your understanding of prestige jobs from your previous life allows you to pick a 2nd one at lvl 54+.");
 		public static const AscensionBuildingPrestige02:PerkType = mk("Ascension: Building Prestige (2nd Stage)", "Ascension: Building Prestige (2nd Stage)",
-				"Your understanding of prestige jobs from previous lives allows you to pick a 3rd one at lvl 42+.");
+				"Your understanding of prestige jobs from previous lives allows you to pick a 3rd one at lvl 54+.");
 		public static const AscensionBuildingPrestige03:PerkType = mk("Ascension: Building Prestige (3rd Stage)", "Ascension: Building Prestige (3rd Stage)",
-				"Your understanding of prestige jobs from previous lives allows you to pick a 4th one at lvl 42+.");
+				"Your understanding of prestige jobs from previous lives allows you to pick a 4th one at lvl 54+.");
 		public static const AscensionBuildingPrestige04:PerkType = mk("Ascension: Building Prestige (4th Stage)", "Ascension: Building Prestige (4th Stage)",
-				"Your understanding of prestige jobs from previous lives allows you to pick a 5th one at lvl 42+.");
+				"Your understanding of prestige jobs from previous lives allows you to pick a 5th one at lvl 54+.");
 		public static const AscensionBuildingPrestige05:PerkType = mk("Ascension: Building Prestige (5th Stage)", "Ascension: Building Prestige (5th Stage)",
-				"Your understanding of prestige jobs from previous lives allows you to pick a 6th one at lvl 42+.");
+				"Your understanding of prestige jobs from previous lives allows you to pick a 6th one at lvl 54+.");
 		public static const AscensionBuildingPrestige06:PerkType = mk("Ascension: Building Prestige (6th Stage)", "Ascension: Building Prestige (6th Stage)",
-				"Your understanding of prestige jobs from previous lives allows you to pick a 7th one at lvl 42+.");
+				"Your understanding of prestige jobs from previous lives allows you to pick a 7th one at lvl 54+.");
 		//GenMem
 		public static const AscensionTranscendentalGeneticMemoryStage1:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 1)", "Ascension: Transcendental Genetic Memory (Stage 1)",
 				"Allows you to retain up to 15 chosen unlocked metamorphic options.");
@@ -187,6 +187,10 @@ public class PerkLib
 				"You are a descendant of your ancestor, who was the child of a human and a Goblin. (+2 to goblin score)");
 		public static const BloodlineGoblin:PerkType = mk("Bloodline: Goblin", "Bloodline: Goblin",
 				"Your Goblin bloodline appears strongly within you. (+2 to goblin score)", null, true);
+		public static const HydrasDescendant:PerkType = mk("Hydra's descendant", "Hydra's descendant",
+				"You are a descendant of your ancestor, who was the child of a human and a Hydra. (+2 to hydra score)");
+		public static const BloodlineHydra:PerkType = mk("Bloodline: Hydra", "Bloodline: Hydra",
+				"Your Hydra bloodline appears strongly within you. (+2 to hydra score)", null, true);
 		public static const KitsunesDescendant:PerkType = mk("Kitsune's descendant", "Kitsune's descendant",
 				"You are a descendant of your ancestor, who was the child of a human and a Kitsune. (+2 to kitsune score)");
 		public static const BloodlineKitsune:PerkType = mk("Bloodline: Kitsune", "Bloodline: Kitsune",
@@ -211,6 +215,10 @@ public class PerkLib
 				"You are a descendant of your ancestor, who was the child of a human and an Orc. (+2 to orc score)");
 		public static const BloodlineOrc:PerkType = mk("Bloodline: Orc", "Bloodline: Orc",
 				"Your Orc bloodline appears strongly within you. (+2 to orc score)", null, true);
+		public static const SalamandersDescendant:PerkType = mk("Salamander's descendant", "Salamander's descendant",
+				"You are a descendant of your ancestor, who was the child of a human and a Salamander. (+2 to salamander score)");
+		public static const BloodlineSalamander:PerkType = mk("Bloodline: Salamander", "Bloodline: Salamander",
+				"Your Salamander bloodline appears strongly within you. (+2 to salamander score)", null, true);
 		public static const VampiresDescendant:PerkType = mk("Vampire's descendant", "Vampire's descendant",
 				"You are a descendant of your ancestor, who was the child of a human and a vampire. (+2 to vampire score)");
 		public static const BloodlineVampire:PerkType = mk("Bloodline: Vampire", "Bloodline: Vampire",
@@ -430,6 +438,15 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -1396,8 +1413,8 @@ public class PerkLib
 				"Your time running into disaster to take care of others allows you to take better care of wounds, further increasing your regen.",
 				"You've chosen the 'First Response' perk, increasing HP gains by 20%.");
 		public static const FlurryOfBlows:PerkType = mk("Flurry of Blows", "Flurry of Blows",
-				"Gain two additional attacks when fighting with fists or fist weapons (not using feral stance). All physical soulforce ability now also strike thrice!",
-				"You've chosen the 'Flurry of Blows' perk, gaining two additional attacks when fighting with fists or fist weapons (not using feral stance). All physical soulforce ability now also strike thrice.");
+				"Gain two additional attacks when fighting with fists or fist weapons (not using feral stance). All physical soulskills (used with fists or fist weapons) now also strike thrice!",
+				"You've chosen the 'Flurry of Blows' perk, gaining two additional attacks when fighting with fists or fist weapons (not using feral stance). All physical soulskills (used with fists or fist weapons) now also strike thrice.");
 		public static const FocusedMind:PerkType = mk("Focused Mind", "Focused Mind",
 				"Black Magic is less likely to backfire and White Magic threshold is increased.",
 				"You've chosen the 'Focused Mind' perk. Black Magic is less likely to backfire and White Magic threshold is increased.");
@@ -3328,6 +3345,12 @@ public class PerkLib
 		public static const CrossedBand:CrossedBandPerk = new CrossedBandPerk();
 		public static const BlueBand:BlueBandPerk = new BlueBandPerk();
 */
+		// Ancient Sands Duelling perks
+		public static const MonsterSummonerI:PerkType =mk("Monster Summoner I", "Monster Summoner I", "Allows you to summon an additional monster, to a max of 3"); 
+		public static const MonsterSummonerII:PerkType =mk("Monster Summoner II", "Monster Summoner II", "Allows you to summon an additional monster, to a max of 4");
+		public static const MonsterSummonerIII:PerkType =mk("Monster Summoner III", "Monster Summoner III", "Allows you to summon an additional monster, to a max of 5");
+		public static const PassionateDuelistI:PerkType = mk("Passionate Duelist I", "Passionate Duelist I", "Increases the amount of your heart in your cards: Your monsters deal more damage.")
+		
 		// Non-weapon equipment perks
 		public static const Ambition:AmbitionPerk = new AmbitionPerk();
 		public static const BerserkerArmor:PerkType = mk("Berserker Armor", "Berserker Armor",
@@ -4348,7 +4371,7 @@ public class PerkLib
 		public static const LikeAnAsuraBoss:PerkType = mk("Like A-sura Boss", "Like A-sura Boss",
 				"Adds to toggle starting in Asura Form at combat start, increase to physical might raise to 180%/90%/60% of core str/tou/spe and generate two additional pairs of semi-transparent arms. (+10% of OverMax Wrath)");
 		public static const AsuraToughness:PerkType = mk("Asura Toughness", "Asura Toughness",
-				"Gain Asura Strength. If you can use Warrior's Rage if would have increased boost and even could activate it with Asura Form for no additonal cost. (+10% of OverMax Wrath/Base TOU Cap, +0,5% Wrath generated)");
+				"Gain Asura Toughness. If you can use Warrior's Rage if would have increased boost and even could activate it with Asura Form for no additonal cost. (+10% of OverMax Wrath/Base TOU Cap, +0,5% Wrath generated)");
 		public static const HiddenJobBloodDemon:PerkType = mk("Hidden Job: Blood Demon", "Job ( Hiden ): Blood Demon",
 				"You've trained in the Art of Blood Demons. Beings that reached mastery of using their own or others blood to great effect. (+10% of OverMax HP, -5% blood spells/soulskills cost, +10% blood spells/soulskills power)");
 		public static const WayOfTheBlood:PerkType = mk("Way of the Blood", "Way of the Blood",
@@ -4385,7 +4408,9 @@ public class PerkLib
 		public static const MunchkinAtGym:PerkType = mk("Munchkin @Gym", "Munchkin @Gym",
 				"Increase by 5% caps for mutagen, alchemic, knowledge multi.").withBuffs({'str.mult':0.25,'tou.mult':0.25,'spe.mult':0.25,"int.mult":0.25,'wis.mult':0.25,'lib.mult':0.25,'sens':100}, false);
 		public static const MunchkinAtWork:PerkType = mk("Munchkin @Work", "Munchkin @Work",
-				"+10% to OverMax HP / Lust / Wrath / Mana / Soulforce, +2 prestige job slots, +1 hidden job slot.");
+				"+10% to OverMax HP / Lust / Wrath / Mana / Soulforce / Fatigue, +2 prestige job slots, +1 hidden job slot.");
+		public static const MunchkinAtBioLab:PerkType = mk("Munchkin @Biolab", "Munchkin @Biolab",
+				"Increase core/train caps for stats by 10. +1 to internal mutations slots capacity (+2 for adaptation slots)");
 		public static const BloodDemonWisdom:PerkType = mk("Blood Demon Wisdom", "Blood Demon Wisdom",
 				"X th Blood demon super perk. (+10% of OverMax HP, -5% blood spells/soulskills cost, +30% blood spells/soulskills power, +10% Base WIS Cap)");
 		public static const AsuraSpeed:PerkType = mk("Asura Speed", "Asura Speed",
@@ -4396,11 +4421,19 @@ public class PerkLib
 				". (+10% of OverMax )");
 		public static const DemonSovereignToughnessAndLibido:PerkType = mk("Demon Sovereign Toughness & Libido", "Demon Sovereign Toughness & Libido",
 				". (+10% of OverMax , +5% Base TOU/LIB Cap)");
-		public static const HiddenJob4:PerkType = mk("Hidden Job: 4", "Hidden Job: 4",
-				".");
-		public static const HiddenJob3:PerkType = mk("Hidden Job: 3", "Hidden Job: 3",
-				".");
-		public static const HiddenJob2:PerkType = mk("Hidden Job: 2", "Hidden Job: 2",
+		public static const HiddenJobSwordImmortal:PerkType = mk("Hidden Job: Sword Immortal", "Job ( Hiden ): Sword Immortal",
+				"You began your journey as beginner Sword Immortal. (+5% of OverMax Wrath / Fatigue / Soulforce)");
+		public static const SwordIntentAura:PerkType = mk("Sword Intent (Aura)", "Sword Intent (Aura)",
+				"Your Killing Intent can become focused into Sword Intent aura enveloping your weapons as long they are sword-type (+5% of core spe, +10% dmg). Would apply bonuses from the job to flying swords too. (+5% of OverMax Wrath / Fatigue / Soulforce)");
+		public static const SwordImmortalFirstForm:PerkType = mk("Sword Immortal: First Form", "Sword Immortal: First Form",
+				"You reached First Form stage. Increase sword intent aura effects (+15% of core spe, +15% dmg) and gives small boost at the combat start (+100 wrath/sf, -100 fatigue) (+5% of OverMax Wrath / Base STR Cap / Fatigue / Base SPE Cap / Soulforce / Base WIS Cap)");
+		public static const SwordImmortalSecondForm:PerkType = mk("Sword Immortal: Second Form", "Sword Immortal: Second Form",
+				"You reached Second Form stage. (+5% of OverMax Wrath / Base STR Cap / Fatigue / Base SPE Cap / Soulforce / Base WIS Cap)");
+		public static const SwordImmortalThirdForm:PerkType = mk("Sword Immortal: Third Form", "Sword Immortal: Third Form",
+				"You reached Third Form stage. (+5% of OverMax Wrath / Base STR Cap / Fatigue / Base SPE Cap / Soulforce / Base WIS Cap)");
+		public static const SwordIntent:PerkType = mk("Sword Intent", "Sword Intent",
+				"Your Killing Intent can become focused into Sword Intent when you are using sword-type weapon.");
+		public static const SwordImmortal:PerkType = mk("Sword Immortal: 2", "Sword Immortal: 2",
 				".");
 		public static const HiddenJob1:PerkType = mk("Hidden Job: 1", "Hidden Job: 1",
 				".");
@@ -8084,4 +8117,4 @@ public class PerkLib
         }
 	}
 }
-}
+}

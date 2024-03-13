@@ -69,6 +69,7 @@ public class SalamanderRace extends Race {
 				.noHorns(+1)
 				.noRearBody(+1);
 		
+		addBloodline(PerkLib.SalamandersDescendant, PerkLib.BloodlineSalamander);
 		addMutation(IMutationsLib.SalamanderAdrenalGlandsIM);
 		
 		buildTier(7, "salamander")

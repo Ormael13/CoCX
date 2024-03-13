@@ -178,7 +178,7 @@ use namespace CoC;
 			if (Forgefather.materialsExplained != 1) endEncounter();
 			else {
 				clearOutput();
-				if (player.fatigue > player.maxFatigue() - 50) {
+				if (player.fatigue > player.maxOverFatigue() - 50) {
 					outputText("\n\n<b>You are too tired to consider mining. Perhaps some rest will suffice?</b>");
 					endEncounter();
 					return;
