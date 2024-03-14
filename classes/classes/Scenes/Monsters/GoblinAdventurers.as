@@ -31,6 +31,7 @@ public class GoblinAdventurers extends Monster
 			//Dodge chance!
 			if(player.getEvasionRoll()) {
 				outputText("\nYou narrowly avoid the gush of alchemic fluids!\n");
+				player.resolveRevenge(true);
 			} else {
 				//Get hit!
 				//Temporary heat
@@ -64,6 +65,8 @@ public class GoblinAdventurers extends Monster
 				//Miss:
 				outputText("\nYou’ve already prepared, however, as you hold your breath and grab the goblin by her sides. Unhindered by her advance, you take the opportunity to move backwards, throwing the goblin off balance and leaving you only faintly smelling of her pussy.");
 				player.takeLustDamage(rand(player.lib/10)+4, true);
+				player.resolveRevenge(true);
+
 			}
 			//Hit:
 			else
@@ -79,6 +82,7 @@ public class GoblinAdventurers extends Monster
 			if (player.getEvasionRoll())
 			{
 				outputText("\nYou jump backwards, far enough to avoid quick thrust upwards as the middle one attempts to lick the area in which your crotch once stood. Realising situation, they quickly remove themselves from the ground and faces you, more determined than before.");
+				player.resolveRevenge(true);
 			}
 			//Hit:
 			else {

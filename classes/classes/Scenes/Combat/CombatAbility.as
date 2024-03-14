@@ -479,12 +479,15 @@ public class CombatAbility extends BaseCombatContent {
 	 * @param free Do not use resources or set cooldown
 	 * @param interceptable Can be intercepted by monster
 	 */
-	public function perform(output:Boolean=true,free:Boolean=false,interceptable:Boolean=true):void {
+	public function perform(output:Boolean=true,free:Boolean=false,interceptable:Boolean=true,doRevenge:Boolean=false):void {
+		if (doRevenge){
+			revenge();
+		}
 		if (!free) {
 			setCooldown();
 			useResources();
 		}
-		if (!interceptable || !monster.interceptPlayerAbility(this)) {
+		if ((!interceptable || !monster.interceptPlayerAbility(this)) && !doRevenge) {
 			doEffect(output);
 			monster.postPlayerAbility(this, output);
 		}
@@ -532,6 +535,10 @@ public class CombatAbility extends BaseCombatContent {
 	 */
 	public function doEffect(display:Boolean = true):void {
 		throw new Error("Method doEffect() not implemented for ability "+name);
+	}
+
+	public function revenge(display:Boolean = true):void {
+		throw new Error("Method revenge() not implemented for ability "+name);
 	}
 	
 	public function manaCost():Number {
