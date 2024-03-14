@@ -166,9 +166,9 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Sword Intent (Aura). Gained by having 'Hidden Job: Sword Immortal' super perk and Soul Personage perk. Effects: Your Killing Intent can become focused into Sword Intent aura enveloping your weapons as long they are sword-type (+5% of core spe, +10% dmg). Would apply bonuses from the job to flying swords too. (+5% of OverMax Wrath / Fatigue / Soulforce)\n");
 			outputText("-New event perk: Sword Immortal: First Form. Gained by having 'Sword Intent (Aura)' super perk and Soul Warrior perk. Effects: You reached First Form stage. Increase sword intent aura effects (+15% of core spe, +15% dmg) and gives small boost at the combat start (+100 wrath/sf, -100 fatigue) (+5% of OverMax Wrath / Base STR Cap / Fatigue / Base SPE Cap / Soulforce / Base WIS Cap)\n");
 			outputText("-New super perk: Munchkin@Biolab. Gained by having merely 1 super perk, having 'Munchkin@Work' super munchkin perk, lvl 135+. Effect: Increase core/train caps for stats by 10. +1 to internal mutations slots capacity (+2 for adaptation slots)\n");
-			outputText("-Killing Intent scaling based on cultivation rank will no longer have soft caps that increase at each major cultivation step instead increase a bit after each minor step. it also mean too high kill count will not be lowered due too low cultivation rank.\n");
+			outputText("-Killing Intent scaling based on cultivation rank will no longer have soft caps that increase at each major cultivation step instead increase a bit after each minor step. It also mean too high kill count will not be lowered due too low cultivation rank.\n");
 			outputText("-Jojo wisdom training effect been increased 3x.\n");
-			outputText("-\n");
+			outputText("-Implemented the revenge mechanic. Cat bell now has a sprite. Added all possible missing bodyparts for Marilith. (Liadri)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

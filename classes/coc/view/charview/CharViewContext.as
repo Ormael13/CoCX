@@ -309,7 +309,7 @@ public class CharViewContext extends ExecContext {
 							player.necklace == game.necklaces.NECKWIS || player.necklace == game.necklaces.FIRENEC || player.necklace == game.necklaces.ICENECK ||
 							player.necklace == game.necklaces.LIGHNEC || player.necklace == game.necklaces.DARKNEC || player.necklace == game.necklaces.POISNEC ||
 							player.necklace == game.necklaces.LUSTNEC,
-					CowBellAmulet: player.necklace == game.necklaces.COWBELL || player.necklace == game.necklaces.CATBELL,
+					CowBellAmulet: player.necklace == game.necklaces.COWBELL || player.necklace == game.necklaces.CATBELL
 				}
 			]);
 			this.charview = charview;
