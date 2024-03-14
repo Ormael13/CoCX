@@ -2341,6 +2341,14 @@ public class PlayerInfo extends BaseContent {
 					}
 				}
 				else addButtonDisabled(5, "AT", "You need to reach level 60 first.");
+				if (player.level >= 70) {
+					if (player.hasPerk(PerkLib.ItsZerkingTime)) addButtonDisabled(6, "IZT", "You already have this super perk.");
+					else {
+						if (player.hasPerk(PerkLib.AsuraToughness)) addButton(6, "IZT", perkItsZerkingTime).hint("Choose the 'It's Zerking Time!!!' super perk. If you can use Berzerker or Lustzerker they would be activated with Asura Form for no additional cost (with Prestige Job: Berserker will be activated G2). Asura Form increase to physical might raise to 240%/120%/80% of core str/tou/spe and generate five pairs of semi-transparent arms. (+10% of OverMax Wrath)");
+						else addButtonDisabled(6, "IZT", "You need to first have the 'Asura Toughness' super perk.");
+					}
+				}
+				else addButtonDisabled(6, "IZT", "You need to reach level 70 first.");
 			}
 			else {
 				if (player.hasPerk(PerkLib.HiddenJobAsura)) addButtonDisabled(0, "HJ:A", "You already have this perk.");
@@ -2355,6 +2363,8 @@ public class PlayerInfo extends BaseContent {
 				else addButtonDisabled(4, "LAB", "You do not have enough super perk points to obtain this perk.");
 				if (player.hasPerk(PerkLib.AsuraToughness)) addButtonDisabled(5, "AT", "You already have this perk.");
 				else addButtonDisabled(5, "AT", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.ItsZerkingTime)) addButtonDisabled(6, "IZT", "You already have this perk.");
+				else addButtonDisabled(6, "IZT", "You do not have enough super perk points to obtain this perk.");
 			}
 			addButton(12, "Previous", superPerkBuyMenu, page - 1);
 			addButton(13, "Next", superPerkBuyMenu, page + 1);
@@ -2650,6 +2660,13 @@ public class PlayerInfo extends BaseContent {
 		player.createPerk(PerkLib.AsuraToughness,0,0,0,0);
 		clearOutput();
 		outputText("You gained 'Asura Toughness' super perk.");
+		doNext(superPerkBuyMenu, 3);
+	}
+	private function perkItsZerkingTime():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.ItsZerkingTime,0,0,0,0);
+		clearOutput();
+		outputText("You gained 'It's Zerking Time!!!' super perk.");
 		doNext(superPerkBuyMenu, 3);
 	}
 	private function perkHiddenJobGreySage():void {

@@ -805,8 +805,8 @@ import classes.Scenes.Combat.CombatAbilities;
 			if (hasPerk(PerkLib.AsuraStrength)) temp2 += 0.1;
 			if (hasPerk(PerkLib.ICastAsuraFist)) temp2 += 0.1;
 			if (hasPerk(PerkLib.LikeAnAsuraBoss)) temp2 += 0.1;
-			//
 			if (hasPerk(PerkLib.AsuraToughness)) temp2 += 0.1;
+			if (hasPerk(PerkLib.ItsZerkingTime)) temp2 += 0.1;
 			//
 			if (hasPerk(PerkLib.AsuraSpeed)) temp2 += 0.1;
 			if (hasPerk(PerkLib.HiddenJobSwordImmortal)) temp2 += 0.05;
@@ -4467,4 +4467,4 @@ import classes.Scenes.Combat.CombatAbilities;
 			}
 		}
 	}
-}
+}

@@ -974,7 +974,8 @@ public class Combat extends BaseContent {
 					bd.disable("Your wrath is too low to unleash your howl!");
 				}
 				if (player.hasPerk(PerkLib.AbsoluteStrength)) {
-					if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) bd = buttons.add("TFoD", asuras10FingersOfDestruction).hint("Ten Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
+					if (player.hasPerk(PerkLib.ItsZerkingTime)) bd = buttons.add("TwFoD", asuras12FingersOfDestruction).hint("Twelve Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
+					else if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) bd = buttons.add("TFoD", asuras10FingersOfDestruction).hint("Ten Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
 					else if (player.hasPerk(PerkLib.AsuraStrength)) bd = buttons.add("EFoD", asuras8FingersOfDestruction).hint("Eight Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
 					else bd = buttons.add("SFoD", asuras6FingersOfDestruction).hint("Six Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
 					if (player.wrath < (player.maxWrath() * 0.5)) {
@@ -5558,6 +5559,7 @@ public class Combat extends BaseContent {
 			var AFAAM:Number = 3;
             if (player.hasPerk(PerkLib.AsuraStrength)) AFAAM += 1;
 			if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) AFAAM += 1;
+			if (player.hasPerk(PerkLib.ItsZerkingTime)) AFAAM += 1;
 			if (player.isUnarmedCombat() && player.playerHasFourArms()) AFAAM *= 0.5;
             damage *= AFAAM;
         }
@@ -10368,6 +10370,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 						}
 					}
 				} else player.addStatusValue(StatusEffects.Berzerking, 1, -1);
+				if (player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.ItsZerkingTime)) player.addStatusValue(StatusEffects.Berzerking, 1, 1);
 			}
         }
         if (player.hasStatusEffect(StatusEffects.Lustzerking)) {
@@ -10391,6 +10394,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 						}
 					}
 				} else player.addStatusValue(StatusEffects.Lustzerking, 1, -1);
+				if (player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.ItsZerkingTime)) player.addStatusValue(StatusEffects.Lustzerking, 1, 1);
 			}
         }
         if (player.hasStatusEffect(StatusEffects.OniRampage)) {
@@ -11755,6 +11759,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 				gainedwrath += 2 * BonusWrathMult;
 				if (player.hasPerk(PerkLib.AsuraStrength)) gainedwrath += 2 * BonusWrathMult;
                 if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) gainedwrath += 2 * BonusWrathMult;
+                if (player.hasPerk(PerkLib.ItsZerkingTime)) gainedwrath += 2 * BonusWrathMult;
 			}
             if (player.hasPerk(PerkLib.Ferocity) && player.HP < 1) gainedwrath *= 2 * BonusWrathMult;
             EngineCore.WrathChange(gainedwrath);
@@ -15435,7 +15440,10 @@ public function asuraformCost():Number {
 		if (player.perkv1(IMutationsLib.HumanMusculatureIM) >= 3 && player.racialScore(Races.HUMAN) > 17) modcsc += 2;
 		else modcsc += 5;
 	}
-    //if (player.hasPerk(PerkLib.)) modcsc += 20;
+    if (player.hasPerk(PerkLib.ItsZerkingTime) && (player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker) || player.countRings(jewelries.FLLIRNG))) {
+		if (player.hasPerk(PerkLib.Berzerker)) modcsc += 5;
+		if (player.hasPerk(PerkLib.Lustzerker) || player.countRings(jewelries.FLLIRNG)) modcsc += 5;
+	}
     //if (player.hasPerk(PerkLib.)) modcsc += 20;
     return modcsc;
 }
@@ -15445,13 +15453,24 @@ public function assumeAsuraForm():void {
     outputText("As you starts to unleash your inner wrath two additional faces emerge from head"+(player.faceType == Face.CERBERUS?"s":"")+" on sides and " + (player.playerHasFourArms() ? "":"two ") + "additional pair" + (player.playerHasFourArms() ? "":"s") + " of arms grows under your " + (player.playerHasFourArms() ? "second":"first") + " pair" + (player.playerHasFourArms() ? "s":"") + " of arms. ");
     if (player.hasPerk(PerkLib.AsuraStrength)) {
         outputText("Additionaly from your back emerge ");
-		if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) outputText("two ");
+		if (player.hasPerk(PerkLib.ItsZerkingTime)) outputText("three ");
+		else if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) outputText("two ");
         outputText("pair ");
         outputText("of semi-transparent arms. ");
     }
     outputText("Finishing assuming Asura form you're ready to destroy anyone that would dare to stand in your way!\n\n");
     assumeAsuraForm007();
 	if (player.hasPerk(PerkLib.JobWarrior) && player.hasPerk(PerkLib.AsuraToughness)) mspecials.warriorsrage007();
+	if (player.hasPerk(PerkLib.ItsZerkingTime) && (player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker) || player.countRings(jewelries.FLLIRNG))) {
+		if (player.hasPerk(PerkLib.Berzerker)) {
+			if (player.hasPerk(PerkLib.PrestigeJobBerserker)) player.createStatusEffect(StatusEffects.Berzerking,0,1,0,0);
+			else player.createStatusEffect(StatusEffects.Berzerking,0,0,0,0);
+		}
+		if (player.hasPerk(PerkLib.Lustzerker) || player.countRings(jewelries.FLLIRNG)) {
+			if (player.hasPerk(PerkLib.PrestigeJobBerserker)) player.createStatusEffect(StatusEffects.Lustzerking,0,1,0,0);
+			else player.createStatusEffect(StatusEffects.Lustzerking,0,0,0,0);
+		}
+	}
     statScreenRefresh();
     enemyAIImpl();
 }
@@ -15471,6 +15490,11 @@ public function assumeAsuraForm007():void {
         temp3 += player.speStat.core.value * 0.2;
     }
     if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
+        temp1 += player.strStat.core.value * 0.6;
+        temp2 += player.touStat.core.value * 0.3;
+        temp3 += player.speStat.core.value * 0.2;
+    }
+    if (player.hasPerk(PerkLib.ItsZerkingTime)) {
         temp1 += player.strStat.core.value * 0.6;
         temp2 += player.touStat.core.value * 0.3;
         temp3 += player.speStat.core.value * 0.2;
@@ -15544,6 +15568,9 @@ public function asuras8FingersOfDestruction():void {
 }
 public function asuras10FingersOfDestruction():void {
 	asurasXFingersOfDestruction("Ten");
+}
+public function asuras12FingersOfDestruction():void {
+	asurasXFingersOfDestruction("Twelve");
 }
 public function asurasXFingersOfDestruction(fingercount:String):void {
     clearOutput();
