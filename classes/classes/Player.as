@@ -3976,8 +3976,8 @@ use namespace CoC;
 			return evasionReason;
 		}
 
-		public function resolveRevenge(isDodge:Boolean = false):void {
-			if (isDodge && necklace == game.necklaces.CATBELL && isAnyRaceCached(Races.CatlikeRaces)){
+		public function evadeRetaliate():void {
+			if (necklace == game.necklaces.CATBELL && isAnyRaceCached(Races.CatlikeRaces)){
 				CombatAbilities.Tease.perform(true,true, false,true);
 			}
 		}

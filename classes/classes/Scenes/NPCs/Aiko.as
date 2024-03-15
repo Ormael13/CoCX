@@ -112,48 +112,60 @@ import classes.internals.*;
 				}
 			}
 		}
-		
+
+		// A Compromise since post dodging text will disappear after dodging rework
+		override protected function outputPlayerDodged(dodge:int):void{
+			if(game.flags[kFLAGS.AIKO_CORRUPTION] >= 50 && game.flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]!=0){
+				switch(dodge) {
+					case 1:
+					case 2:
+						super.outputPlayerDodged(dodge);
+						break;
+					case 3:
+						outputText("<i>\"Just hold still, I promise to make it hurt good!\"</i> Aiko yells as using your skills at evading attacks, you anticipate and sidestep her ferocious attacks.");
+						break;
+					case 4:
+						outputText("<i>\"Just hold still, I promise to make it hurt good!\"</i> Aiko yells as using Raphael's teachings, you anticipate and sidestep her ferocious attacks.");
+						break;
+					case 5:
+						outputText("<i>\"Just hold still, I promise to make it hurt good!\"</i> Aiko yells as with your incredible flexibility, you squeeze out of the way of her ferocious attacks.");
+						break;
+					default:
+						outputText("<i>\"Just hold still, I promise to make it hurt good!\"</i> Aiko yells as using your superior combat skills you dodge her ferocious attacks.\n");
+				}
+			}
+			else
+				super.outputPlayerDodged(dodge);
+		}
+
+		// Compromise to preserve parry text after parrying rework
+		override public function playerParry():Boolean{
+			var pResult:Boolean = super.playerParry();
+			if(pResult && game.flags[kFLAGS.AIKO_CORRUPTION] >= 50 && game.flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]!=0){
+				outputText("<i>\"Just hold still, I promise to make it hurt good!\"</i> Aiko yells as you parry her ferocious attacks with your [weapon].");
+			}
+			return pResult;
+		}
+
+		// Compromise to preserve blocking text after blocking rework
+		override public function playerBlock():Boolean{
+			var pResult:Boolean = super.playerBlock();
+			if(pResult && game.flags[kFLAGS.AIKO_CORRUPTION] >= 50 && game.flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]!=0){
+				outputText("<i>\"Just hold still, I promise to make it hurt good!\"</i> Aiko yells as you block her ferocious attacks with your [shield].");
+			}
+			return pResult
+		}
+
 		//Corrupted Aiko Attacks
 		private function aikoCorruptBasic():void
 		{
 			outputText("<i>\"Hack! Slash! Maim! Kill! Isn’t it the fucking greatest?!\"</i> Aiko yells with a psychotic laugh as she strikes out at you with reckless abandon. \n\n<i>\"\Lacerate! Eviscerate! Mutilate!\"</i> Aiko chants with each reckless swing. <i>\"Ever notice how all the best words end in -ate?!\"\n\n\"You know I’d bleed for you!\"</i> she yells, grinning crazily as she hacks at you with her billhook. <i>\"Now you’ll do the SAME!\"</i>  ");
-			
-			var dodge:int = player.speedDodge(this);
-			if (dodge>0) {
-				outputPlayerDodged(dodge);
-				var evasionResult:String = player.getEvasionReason(false);
-				//Determine if evaded
-				if (evasionResult === EVASION_EVADE) {
-					outputText("<i>\"Just hold still, I promise to make it hurt good!\"</i> Aiko yells as using your skills at evading attacks, you anticipate and sidestep her ferocious attacks.");
-				}
-				//("Misdirection"
-				else if (evasionResult === EVASION_MISDIRECTION) {
-					outputText("<i>\"Just hold still, I promise to make it hurt good!\"</i> Aiko yells as using Raphael's teachings, you anticipate and sidestep her ferocious attacks.");
-				}
-				//Determine if cat'ed
-				else if (evasionResult === EVASION_FLEXIBILITY) {
-					outputText("<i>\"Just hold still, I promise to make it hurt good!\"</i> Aiko yells as with your incredible flexibility, you squeeze out of the way of her ferocious attacks.");
-				}
-				else if (evasionResult !== null) {
-					outputText("<i>\"Just hold still, I promise to make it hurt good!\"</i> Aiko yells as using your superior combat skills you dodge her ferocious attacks.\n");
-				}
-				//Parry with weapon
-				else if (combatParry()) {
-					outputText("<i>\"Just hold still, I promise to make it hurt good!\"</i> Aiko yells as you parry her ferocious attacks with your [weapon].");
-				}
-				//Block with shield
-				else if (combatBlock(true)) {
-					outputText("<i>\"Just hold still, I promise to make it hurt good!\"</i> Aiko yells as you block her ferocious attacks with your [shield].");
-					SceneLib.combat.ShieldsStatusProcs();
-				}
-			} else {
-				var damage:int = int(str) + rand(15);
-				player.takePhysDamage(damage, true);
-				player.addCombatBuff("spe", -4, "Combat Debuff", "CombatDebuffSpe");
-				if (!player.immuneToBleed()) {
-					if (!player.hasStatusEffect(StatusEffects.IzmaBleed)) player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
-					else player.addStatusValue(StatusEffects.IzmaBleed, 1, 1);
-				}
+			var damage:int = int(str) + rand(15);
+			player.takePhysDamage(damage, true);
+			player.addCombatBuff("spe", -4, "Combat Debuff", "CombatDebuffSpe");
+			if (!player.immuneToBleed()) {
+				if (!player.hasStatusEffect(StatusEffects.IzmaBleed)) player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
+				else player.addStatusValue(StatusEffects.IzmaBleed, 1, 1);
 			}
 		}
 		
