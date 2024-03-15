@@ -67,10 +67,14 @@ public class Diva extends Monster {
         return str;
     }
 
-    override protected function performCombatAction():void {
+    override protected function attackSucceeded():Boolean{
         if (_sonicScreamCooldown > 0) {
             _sonicScreamCooldown--;
         }
+        return super.attackSucceeded();
+    }
+
+    override protected function performCombatAction():void {
         if (player.hasStatusEffect(StatusEffects.NagaBind)) {
             moveBite();
         } else {
@@ -81,9 +85,7 @@ public class Diva extends Monster {
             if (finalFight && !player.hasStatusEffect(StatusEffects.Blind)) {
                 options.push(moveDarkness);
             }
-            if (attackSucceeded()) {
-                options[rand(options.length)]();
-            }
+            options[rand(options.length)]();
         }
     }
 

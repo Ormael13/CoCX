@@ -92,15 +92,15 @@ import classes.Scenes.Combat.CombatAbilities;
 			}
 		}
 
+		override protected function outputPlayerDodged(dodge:int):void{
+			outputText("You see the gnoll's black lips pull back ever so slightly and the powerful muscles in her shapely thighs tense moments before she charges.  With a leap you throw yourself to the side, feeling the wind and fury pass through where you had just been standing.  You gracefully turn to face the hyena as she does the same, knowing that could have been very bad.");
+		}
+
 		override public function eAttack():void
 		{
 			var damage:Number;
 //return to combat menu when finished
 			doNext(EventParser.playerMenu);
-//Determine if dodged!
-			if (player.getEvasionRoll()) {
-				outputText("You see the gnoll's black lips pull back ever so slightly and the powerful muscles in her shapely thighs tense moments before she charges.  With a leap you throw yourself to the side, feeling the wind and fury pass through where you had just been standing.  You gracefully turn to face the hyena as she does the same, knowing that could have been very bad.");
-			}
 //Determine damage - str modified by enemy toughness!
 			damage = int((str + weaponAttack) - Math.random() * (player.tou) - player.armorDef);
 			
