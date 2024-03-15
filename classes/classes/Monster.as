@@ -805,8 +805,8 @@ import classes.Scenes.Combat.CombatAbilities;
 			if (hasPerk(PerkLib.AsuraStrength)) temp2 += 0.1;
 			if (hasPerk(PerkLib.ICastAsuraFist)) temp2 += 0.1;
 			if (hasPerk(PerkLib.LikeAnAsuraBoss)) temp2 += 0.1;
-			//
 			if (hasPerk(PerkLib.AsuraToughness)) temp2 += 0.1;
+			if (hasPerk(PerkLib.ItsZerkingTime)) temp2 += 0.1;
 			//
 			if (hasPerk(PerkLib.AsuraSpeed)) temp2 += 0.1;
 			if (hasPerk(PerkLib.HiddenJobSwordImmortal)) temp2 += 0.05;
@@ -1883,6 +1883,7 @@ import classes.Scenes.Combat.CombatAbilities;
 					player.removeStatusEffect(StatusEffects.MirrorImage);
 					outputText(" Your last illusion now destroyed, you will now have to be cautious of your opponent attacks.");
 				}
+				player.resolveRevenge(false);
 				return true;
 			} else {
 				//Determine if dodged!
@@ -1890,6 +1891,7 @@ import classes.Scenes.Combat.CombatAbilities;
 				if (dodge>0) {
 					outputPlayerDodged(dodge);
 					if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
+					player.resolveRevenge(true);
 					return true;
 				}
 				var evasionResult:String = player.getEvasionReason(false); // use separate function for speed dodge for expanded dodge description
@@ -1899,12 +1901,14 @@ import classes.Scenes.Combat.CombatAbilities;
 					if (!plural) outputText("s");
 					outputText(" attack.\n");
 					if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
+					player.resolveRevenge(true);
 					return true;
 				}
 				//("Misdirection"
 				if (evasionResult == EVASION_MISDIRECTION) {
 					outputText("Using Raphael's teachings, you anticipate and sidestep [themonster]' attacks.\n");
 					if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
+					player.resolveRevenge(true);
 					return true;
 				}
 				//Determine if cat'ed
@@ -1913,11 +1917,13 @@ import classes.Scenes.Combat.CombatAbilities;
 					if (plural) outputText("' attacks.\n");
 					else outputText("'s attack.\n");
 					if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
+					player.resolveRevenge(true);
 					return true;
 				}
 				if (evasionResult != null) { // Failsafe fur unhandled
 					outputText("Using your superior combat skills you manage to avoid attack completely.\n");
 					if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
+					player.resolveRevenge(true);
 					return true;
 				}
 				//Zenji parry enemy attack
@@ -1927,6 +1933,7 @@ import classes.Scenes.Combat.CombatAbilities;
 					if (rand(100) > parryChance) {
 						outputText("[Themonster] goes in for a strike, but Zenji is able to intervene, blocking any opening they have on you, leaving you safe behind him.\n\n");
 						outputText("\"<i>You’re gonna have ta try harda dan dat!</i>\" Zenji shouts.");
+						player.resolveRevenge(false);
 						return true;
 					}
 				}
@@ -1947,6 +1954,7 @@ import classes.Scenes.Combat.CombatAbilities;
 						SceneLib.combat.basemeleeattacks();
 					}
 					if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
+					player.resolveRevenge(false);
 					return true;
 				}
 				//Block with shield
@@ -1958,6 +1966,7 @@ import classes.Scenes.Combat.CombatAbilities;
 					}
 					SceneLib.combat.ShieldsStatusProcs();
 					if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
+					player.resolveRevenge(false);
 					return true;
 				}
 				return false;
@@ -4458,4 +4467,4 @@ import classes.Scenes.Combat.CombatAbilities;
 			}
 		}
 	}
-}
+}

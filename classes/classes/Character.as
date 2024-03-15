@@ -734,8 +734,8 @@ import classes.Scenes.NPCs.Forgefather;
 			if (hasPerk(PerkLib.AsuraStrength)) max2 += 0.1;
 			if (hasPerk(PerkLib.ICastAsuraFist)) max2 += 0.1;
 			if (hasPerk(PerkLib.LikeAnAsuraBoss)) max2 += 0.1;
-			//
 			if (hasPerk(PerkLib.AsuraToughness)) max2 += 0.1;
+			if (hasPerk(PerkLib.ItsZerkingTime)) max2 += 0.1;
 			//
 			if (hasPerk(PerkLib.AsuraSpeed)) max2 += 0.1;
 			if (hasPerk(PerkLib.HiddenJobSwordImmortal)) max2 += 0.05;

@@ -3973,8 +3973,13 @@ use namespace CoC;
 
 			if (!evasionReason) evasionReason = super.getEvasionReason(considerBlindSpeed, attackSpeed, hitModifier, dodgeArray);
 
-			if (evasionReason && necklace == game.necklaces.CATBELL && isAnyRaceCached(Races.CatlikeRaces)) CombatAbilities.Tease.perform();
 			return evasionReason;
+		}
+
+		public function resolveRevenge(isDodge:Boolean = false):void {
+			if (isDodge && necklace == game.necklaces.CATBELL && isAnyRaceCached(Races.CatlikeRaces)){
+				CombatAbilities.Tease.perform(true,true, false,true);
+			}
 		}
 
 		public function eyesOfTheHunterAdeptBoost():Boolean {
