@@ -223,14 +223,14 @@ public class PerkLib
 				"You are a descendant of your ancestor, who was the child of a human and a vampire. (+2 to vampire score)");
 		public static const BloodlineVampire:PerkType = mk("Bloodline: Vampire", "Bloodline: Vampire",
 				"Your Vampire bloodline appears strongly within you. (+2 to vampire score)", null, true);
-	//	public static const sDescendant:PerkType = mk("Race's descendant", "Race's descendant",
-	//			"You are a descendant of your ancestor, who was the child of a human and a (Race). (+2 to  score)");
-	//	public static const Bloodline:PerkType = mk("Bloodline: Demon", "Bloodline: Demon",
-	//			"Your Demonic bloodline appears strongly within you. (+2 to  score)", null, true);
-	//	public static const sDescendant:PerkType = mk("Race's descendant", "Race's descendant",
-	//			"You are a descendant of your ancestor, who was the child of a human and a (Race). (+2 to  score)");
-	//	public static const Bloodline:PerkType = mk("Bloodline: Demon", "Bloodline: Demon",
-	//			"Your Demonic bloodline appears strongly within you. (+2 to  score)", null, true);
+		public static const WerewolfsDescendant:PerkType = mk("Werewolf's descendant", "Werewolf's descendant",
+				"You are a descendant of your ancestor, who was the child of a human and a Werewolf. (+2 to werewolf score)");
+		public static const BloodlineWerewolf:PerkType = mk("Bloodline: Werewolf", "Bloodline: Werewolf",
+				"Your Wereshark bloodline appears strongly within you. (+2 to werewolf score)", null, true);
+		public static const WeresharksDescendant:PerkType = mk("Wereshark's descendant", "Wereshark's descendant",
+				"You are a descendant of your ancestor, who was the child of a human and a Wereshark. (+2 to wereshark score)");
+		public static const BloodlineWereshark:PerkType = mk("Bloodline: Wereshark", "Bloodline: Wereshark",
+				"Your Wereshark bloodline appears strongly within you. (+2 to wereshark score)", null, true);
 	//	public static const sDescendant:PerkType = mk("Race's descendant", "Race's descendant",
 	//			"You are a descendant of your ancestor, who was the child of a human and a (Race). (+2 to  score)");
 	//	public static const Bloodline:PerkType = mk("Bloodline: Demon", "Bloodline: Demon",

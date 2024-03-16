@@ -144,7 +144,7 @@ public class Changelog extends BaseContent
 			outputText("-Changes to White Book, Black Book, Grey Book, Red Manuscript and Crimson Jade. Each of these items now allow to have choice: no use it, use only stat increasing part or if meet req. choose which spell, soulskill to learn. It mean now can learn even the last on the list spell if stat is high enought without need to use 10+ items before that.\n");
 			outputText("-Added short explanation how to increase 'Additional Soulforce from training' on Soulforce page.\n");
 			outputText("-New TF item (by Shigure): Moth's Dust. Buyable in Moga Hen shop. Using this item will turn PC into moth. Moth bonuses at 10 pts in racial score (scalable): -30% to Tou multi, +150% to Spe multi, +70% to Wis multi, +30% to Lib multi, +70 to sensitivity.\n");//Dropped by Corrupted Troll enemies.
-			outputText("-Added Descendant and Bloodline perks for Melkie, Hydra, Salamander races.\n");
+			outputText("-Added Descendant and Bloodline perks for Melkie, Hydra, Salamander, Werewolf, Wereshark races.\n");
 			outputText("-Ng+ tiers will not cause enemies stats going higher replaced by higher DR effect.\n");
 			outputText("-Kitsune IM's have their effects grouped to Parathyroid one increase resources generation and boost foxfire and Thyroid to boost other kitsune specials. One of req. for Parathyroid IM changed to be kitsune(-like) race.\n");
 			outputText("-Kitsumori no longer gain points to race score from Kitsune Thyroid IM.\n");
@@ -189,17 +189,17 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Demojay) (jfmherokiller) (NUZ/Shirane) (Xetaxheb)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
