@@ -100,6 +100,7 @@ public class Weapon extends Equipable
 					// Stat scaling //
 					//--------------//
 					case IELib.ScaleAttack_Str: {
+						if (player.hasPerk(PerkLib.HiddenJobSwordImmortal)) break;
 						// Strength non-massive
 						stat = player.str * 100 / ie.power;
 						if (stat < 50) {
@@ -112,6 +113,7 @@ public class Weapon extends Equipable
 						break;
 					}
 					case IELib.ScaleAttack_StrXL: {
+						if (player.hasPerk(PerkLib.HiddenJobSwordImmortal)) break;
 						// Strength massive
 						stat = player.str * 100 / ie.power;
 						if (stat < 40) {
@@ -126,6 +128,7 @@ public class Weapon extends Equipable
 						break;
 					}
 					case IELib.ScaleAttack_Spe: {
+						if (player.hasPerk(PerkLib.HiddenJobSwordImmortal)) break;
 						// Speed non-massive
 						stat = player.spe * 100 / ie.power;
 						if (stat < 50) {
