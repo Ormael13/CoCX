@@ -19,7 +19,7 @@ public class AlchemySkill extends SkillXpStat {
 		//-2;//4th
 		//-3;//6th
 		if (player.hasMutation(IMutationsLib.HumanVersatilityIM) && player.perkv1(IMutationsLib.HumanVersatilityIM) >= 2 && player.racialScore(Races.HUMAN) > 17) factor2 -= 1;
-		//if (hasPerk(PerkLib.Sensual)) factor2 -= 2;
+		if (player.hasMutation(IMutationsLib.HumanVersatilityIM) && player.perkv1(IMutationsLib.HumanVersatilityIM) >= 3 && player.racialScore(Races.HUMAN) > 17) factor2 -= 2;
 		//if (hasPerk(PerkLib.SuperSensual)) factor2 -= 1;
 		if (player.hasPerk(PerkLib.UtilitySkillsBeginner)) factor3 -= 1;
 		if (player.hasPerk(PerkLib.UtilitySkillsSkilled)) factor3 -= 2;

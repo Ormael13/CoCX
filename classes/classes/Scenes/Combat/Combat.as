@@ -5840,6 +5840,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.MeleeWeaponsMasteryEx)) masteryXPCrit *= 2;
         var masteryXPNatural:Number = baseMasteryXP * (hit - crit);
         var meleeMasteryEXPgains:Number = masteryXPCrit + masteryXPNatural;
+		if (player.hasMutation(IMutationsLib.HumanVersatilityIM) && player.perkv1(IMutationsLib.HumanVersatilityIM) >= 3 && rand(5) == 0) meleeMasteryEXPgains *= 3;
         if (player.isGauntletWeapon()) gauntletXP(meleeMasteryEXPgains);
         if (player.isSwordTypeWeapon()) swordXP(meleeMasteryEXPgains);
         if (player.isAxeTypeWeapon()) axeXP(meleeMasteryEXPgains);
@@ -5875,6 +5876,7 @@ public class Combat extends BaseContent {
 		var masteryXPCrit:Number = baseMasteryXP * crit * 2;
         var masteryXPNatural:Number = baseMasteryXP * (hit - crit);
         var meleeMasteryEXPgains:Number = masteryXPCrit + masteryXPNatural;
+		if (player.hasMutation(IMutationsLib.HumanVersatilityIM) && player.perkv1(IMutationsLib.HumanVersatilityIM) >= 3 && rand(5) == 0) meleeMasteryEXPgains *= 3;
 		unarmedCombatXP(meleeMasteryEXPgains);
 	}
 
@@ -12460,6 +12462,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
             if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 6) bMXPMulti += 5;
 			teaseEXPgogo *= bMXPMulti;
         }
+		if (player.hasMutation(IMutationsLib.HumanVersatilityIM) && player.perkv1(IMutationsLib.HumanVersatilityIM) >= 3 && rand(5) == 0) teaseEXPgogo *= 3;
         player.SexXP(teaseEXPgogo);
     }
 
@@ -16064,6 +16067,7 @@ public function rangeMasteryEXPgained(crit:Boolean = false):Number {
         rangeMasteryEXPgains *= 2;
         if (player.hasPerk(PerkLib.RangeWeaponsMasteryEx)) rangeMasteryEXPgains *= 2;
     }
+	if (player.hasMutation(IMutationsLib.HumanVersatilityIM) && player.perkv1(IMutationsLib.HumanVersatilityIM) >= 3 && rand(5) == 0) rangeMasteryEXPgains *= 3;
     return rangeMasteryEXPgains;
 }
 

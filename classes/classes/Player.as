@@ -4381,7 +4381,7 @@ use namespace CoC;
 			if (hasMutation(IMutationsLib.HumanSmartsIM)) internalHumanCounter += perkv1(IMutationsLib.HumanSmartsIM);//3
 			if (hasMutation(IMutationsLib.HumanTesticlesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanTesticlesIM);//4
 			if (hasMutation(IMutationsLib.HumanThyroidGlandIM)) internalHumanCounter += perkv1(IMutationsLib.HumanThyroidGlandIM);//3
-			if (hasMutation(IMutationsLib.HumanVersatilityIM)) internalHumanCounter += perkv1(IMutationsLib.HumanVersatilityIM);//2
+			if (hasMutation(IMutationsLib.HumanVersatilityIM)) internalHumanCounter += perkv1(IMutationsLib.HumanVersatilityIM);//3
 			End("Player","racialScore");
 			return internalHumanCounter;
 		}
@@ -6449,6 +6449,7 @@ use namespace CoC;
 			var WeaponMasteryModifier:Number = 5;
             if ((hasPerk(PerkLib.RangeWeaponsMastery) && !melee) || (hasPerk(PerkLib.MeleeWeaponsMastery) && melee)) WeaponMasteryModifier -= 1;
 			if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) >= 2 && racialScore(Races.HUMAN) > 17) WeaponMasteryModifier -= 1;
+			if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) >= 3 && racialScore(Races.HUMAN) > 17) WeaponMasteryModifier -= 2;
 			var WeaponMasteryEXModifier:Number = masteryLevel + 1;
             if ((hasPerk(PerkLib.RangeWeaponsMasteryEx) && !melee) || (hasPerk(PerkLib.MeleeWeaponsMasteryEx) && melee)) WeaponMasteryEXModifier = Math.round(1 + (masteryLevel *.5));
 			var WeaponMasterySUModifier:Number = masteryLevel + 1;
@@ -6647,7 +6648,7 @@ use namespace CoC;
 			//-2;//4th
 			//-3;//6th
 			if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) >= 2 && racialScore(Races.HUMAN) > 17) expToLevelUp01 -= 1;
-			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) >= 3 && racialScore(Races.HUMAN) > 17) expToLevelUp01 -= 2;
 			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
 			if (hasPerk(PerkLib.UtilitySkillsBeginner)) expToLevelUp02 -= 1;
 			if (hasPerk(PerkLib.UtilitySkillsSkilled)) expToLevelUp02 -= 2;
@@ -6694,7 +6695,7 @@ use namespace CoC;
 			//-2;//4th
 			//-3;//6th
 			if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) >= 2 && racialScore(Races.HUMAN) > 17) expToLevelUp01 -= 1;
-			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) >= 3 && racialScore(Races.HUMAN) > 17) expToLevelUp01 -= 2;
 			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
 			if (hasPerk(PerkLib.UtilitySkillsBeginner)) expToLevelUp02 -= 1;
 			if (hasPerk(PerkLib.UtilitySkillsSkilled)) expToLevelUp02 -= 2;
@@ -6759,7 +6760,7 @@ use namespace CoC;
 			//-2;//4th
 			//-3;//6th
 			if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) >= 2 && racialScore(Races.HUMAN) > 17) expToLevelUp01 -= 1;
-			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) >= 3 && racialScore(Races.HUMAN) > 17) expToLevelUp01 -= 2;
 			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
 			if (hasPerk(PerkLib.UtilitySkillsBeginner)) expToLevelUp02 -= 1;
 			if (hasPerk(PerkLib.UtilitySkillsSkilled)) expToLevelUp02 -= 2;
@@ -6841,6 +6842,7 @@ use namespace CoC;
 			//-2;//4th
 			//-3;//6th
 			if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) >= 2 && racialScore(Races.HUMAN) > 17) expToLevelUp01 -= 1;
+			if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) >= 3 && racialScore(Races.HUMAN) > 17) expToLevelUp01 -= 2;
 			if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
 			if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
 			if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st

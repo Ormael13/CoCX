@@ -411,6 +411,7 @@ import classes.Scenes.Combat.CombatAbilities;
 				min -= (2400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}//nastepny diehard to 10% i 3000
 			if (perkv1(IMutationsLib.LizanMarrowIM) >= 3) min -= maxHP() * 0.05;
+			if (perkv1(IMutationsLib.LizanMarrowIM) >= 4) min -= maxHP() * 0.05;
 			if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 1) min -= maxHP() * 0.01;
 			if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 2) min -= maxHP() * 0.02;
 			if (hasPerk(PerkLib.Ferocity)) min -= maxHP() * 0.07;
