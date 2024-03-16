@@ -124,7 +124,7 @@ public class Changelog extends BaseContent
 			outputText("-10 new achievments. (4 shadow one)\n");
 			outputText("-Killing Intent perk now is gained after having at least 10 kills on kill counter.\n");
 			outputText("-On stats page in kill counts section was added total kills count (maybe some would want to see total count without need to add all seperate kill counts and maybe in future we would get more kill counts...)\n");
-			outputText("-Added new option/toggle in Settings: Angelic Faction - by default it removes all angelic presence ingame and need to be toggled on to find ANY angeloid/angel ingame. So if you not able to finish some task you may now thing... is it becasue i disliked angels so much that i wanted them be-gone and now i pay price for it?\n");
+			outputText("-Added new option/toggle in Settings: Angelic Faction - by default it active and all angelic present ingame and need to be toggled on to disable chance to meet ANY angeloid/angel ingame.\n");
 			outputText("-All Angel Faction enemies now can drop randomized item like Demon Faction. Due to higher difficulty of defeating them their have higher chance to drop that gear and general chances for better prefixxes on items are increased.\n");
 			outputText("-I moved the code for the tavern to its own file, added checks to handle additional ear types, and finally introduced Xianxia early via a 'rumor' in the tavern. (jfmherokiller)\n");
 			outputText("-PC can buy now in the same place as Simple Alembic or Simple Furnance 4 basic versions of Alembic Catalysts. They costs 1000 gems each and can be reused increasing chance to get the desired item when decomposing TF item by 1,5x.\n");
@@ -173,8 +173,9 @@ public class Changelog extends BaseContent
 			outputText("Asura Form increase to physical might raise to 240%/120%/80% of core str/tou/spe and generate five pairs of semi-transparent arms. (+10% of OverMax Wrath)\n");
 			outputText("-Most Enemy attack should be now actually has to pass PC's evasion/parry/block checks (Formerly almost everyone has guaranteed hit) Lia's retaliation function should work properly now. (NUZ/Shirane)\n");
 			outputText("-Zetaz Pod Bad End/Alternate End is finally BACK!!!! (NUZ/Shirane)\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New mutation perk: Lizan Marrow (Final Form). Req. Lizan Marrow (Evolved) and lvl 90+. Effects: Regenerates 2% of HP per round in combat and 4% of HP per hour. Additionaly your limit for innate self-regeneration rate increased. When below 60%/20% of max HP regeneration provided by Lizan regeneration is 2x/3x. Could slowly recover lost bodyparts (~0.5/1% per combat round/hour). ");
+			outputText("You can't lose by HP until your health drops into the negatives more than 10% of max HP, +10% OverMax HP.\n");
+			outputText("-Lizan Marrow IM would now give small tou multi bonus: 10% / 30% / 70% / 150%. It % of HP regenerated was corrected to match description of mutation.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -191,6 +192,18 @@ public class Changelog extends BaseContent
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Arigean above Recruit rank not immune to tf-ing effects, deer arms tf unlocking canine arms MM, unable to find tel'adre again after first time seeing it with too high corruption or other factor that not allowed entrance; Arigean above recruit rank marking, eye color and aura with mismatching colors; demon/arigean arms MM option giving instead devil/abyssal shark arms, ");
 			outputText("Zenji training stats not having gains decrease from +4 to +1 for repeated training before daily reset for other than wisdom stats, resources not been recovered after using specials/soulskills/spells, nail buy menu at carpenter having misleading text, combat wounds % display at stats page been 100x lower, Sandworm PC not counting toward checks for having natural armor, demon face tf");
@@ -268,13 +281,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -311,9 +318,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

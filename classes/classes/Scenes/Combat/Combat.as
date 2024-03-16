@@ -11314,6 +11314,10 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
             if ((player.hasPerk(PerkLib.Diehard) || player.hasPerk(PerkLib.GreaterDiehardEx)) && !player.hasPerk(PerkLib.EpicDiehard) && player.HP < 1) negativeHPRegen -= 1;
             if (player.perkv1(IMutationsLib.LizanMarrowIM) >= 3 && player.HP < 1) negativeHPRegen -= 1;
 			if (negativeHPRegen < 0 && !player.hasPerk(PerkLib.BloodDemonToughness)) healingPercent += negativeHPRegen;
+			if (player.hasStatusEffect(StatusEffects.CombatWounds) && player.hasMutation(IMutationsLib.LizanMarrowIM) && player.perkv1(IMutationsLib.LizanMarrowIM) > 3) {
+				if (player.statusEffectv1(StatusEffects.CombatWounds) > 0.005) player.addStatusValue(StatusEffects.CombatWounds, 1, -0.005);
+				else player.removeStatusEffect(StatusEffects.CombatWounds);
+			}
             if (healingPercent > maximumRegeneration()) healingPercent = maximumRegeneration();
             HPChange(Math.round((player.maxHP() * healingPercent / 100) + nonPercentBasedRegeneration()), false);
         }
@@ -11350,11 +11354,11 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         if (player.weapon == weapons.SESPEAR) maxPercentRegen += 2;
         if (player.hasPerk(PerkLib.LustyRegeneration)) maxPercentRegen += 0.5;
         if (player.hasPerk(PerkLib.LizanRegeneration)) maxPercentRegen += 1.5;
-        if (player.perkv1(IMutationsLib.LizanMarrowIM) >= 1) maxPercentRegen += 0.5;
-        if (player.perkv1(IMutationsLib.LizanMarrowIM) >= 2) maxPercentRegen += 1;
-        if (player.perkv1(IMutationsLib.LizanMarrowIM) >= 3) {
-			maxPercentRegen += 1.5;
-			if (player.HP < (player.maxHP() * 0.25)) maxPercentRegen += 4.5;
+        if (player.perkv1(IMutationsLib.LizanMarrowIM) >= 1) maxPercentRegen += 0.5 * player.perkv1(IMutationsLib.LizanMarrowIM);
+		if (player.perkv1(IMutationsLib.LizanMarrowIM) == 3 && player.HP < (player.maxHP() * 0.25)) maxPercentRegen += 1.5;
+		if (player.perkv1(IMutationsLib.LizanMarrowIM) == 4) {
+			if (player.HP < (player.maxHP() * 0.6)) maxPercentRegen += 2;
+			if (player.HP < (player.maxHP() * 0.2)) maxPercentRegen += 2;
 		}
 		if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) maxPercentRegen += 1;
         if (player.perkv1(IMutationsLib.EclipticMindIM) >= 3) maxPercentRegen += 1.5;
@@ -11412,11 +11416,11 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
     public function maximumRegeneration():Number {
         var maxRegen:Number = 2;
         if (player.hasPerk(PerkLib.LizanRegeneration)) maxRegen += 1.5;
-        if (player.perkv1(IMutationsLib.LizanMarrowIM) >= 1) maxRegen += 0.5;
-        if (player.perkv1(IMutationsLib.LizanMarrowIM) >= 2) maxRegen += 1;
-        if (player.perkv1(IMutationsLib.LizanMarrowIM) >= 3) {
-			maxRegen += 1.5;
-			if (player.HP < (player.maxHP() * 0.25)) maxRegen += 4.5;
+        if (player.perkv1(IMutationsLib.LizanMarrowIM) >= 1) maxRegen += 0.5 * player.perkv1(IMutationsLib.LizanMarrowIM);
+        if (player.perkv1(IMutationsLib.LizanMarrowIM) == 3 && player.HP < (player.maxHP() * 0.25)) maxRegen += 1.5;
+		if (player.perkv1(IMutationsLib.LizanMarrowIM) == 4) {
+			if (player.HP < (player.maxHP() * 0.6)) maxRegen += 2;
+			if (player.HP < (player.maxHP() * 0.2)) maxRegen += 2;
 		}
 		if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) maxRegen += 1;
         if (player.perkv1(IMutationsLib.FerasBirthrightIM) >= 1 && !player.hasStatusEffect(StatusEffects.WereraceRegenerationDisabled)) {

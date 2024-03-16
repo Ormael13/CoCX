@@ -546,7 +546,7 @@ public class RiverDungeon extends DungeonAbstractContent
 				reset -= player.statusEffectv1(StatusEffects.RiverDungeonA);
 				player.addStatusValue(StatusEffects.RiverDungeonA, 1, reset);
 				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
-				if (flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 0) reset00 -= 1;
+				if (flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 1) reset00 -= 1;
 				var choice:Number = rand(reset00);
 				if (choice == 0) {
 					//spriteSelect(SpriteDb.s_green_slime);
