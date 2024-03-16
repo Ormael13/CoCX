@@ -446,6 +446,8 @@ public class Creature extends Utils
 		}
 		public function trainStatCap(statName: String, limit: Number):Number {
 			var cap:Number = limit;
+			//cap += 2 * host.perkv1(PerkLib.AscensionTranshumanism);
+			if (game.player.hasPerk(PerkLib.MunchkinAtBioLab)) cap += 10;
 			switch (statName) {
 				case "str":
 					var str:Number = 1;
@@ -933,6 +935,9 @@ public class Creature extends Utils
 		public function maxFatigue():Number {
 			return 150;
 		}
+		public function maxOverFatigue():Number {
+			return 150;
+		}
 		public function maxWrath():Number {
 			return 0;
 		}
@@ -1131,7 +1136,7 @@ public class Creature extends Utils
 		 */
 		public function fatigueLeft():Number
 		{
-			return maxFatigue() - fatigue;
+			return maxOverFatigue() - fatigue;
 		}
 
 		/**

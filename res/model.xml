@@ -1002,7 +1002,7 @@
 		<cell rect="572,2362,89,105" name="shield/shieldMsGeneric" dx="66" dy="60"/>
 		<cell rect="482,2362,89,105" name="shield/shieldMSHoly" dx="66" dy="60"/>
 		<cell rect="662,2362,89,105" name="shield/shieldMSUnholy" dx="66" dy="60"/>
-		<cell rect="572,1938,88,90" name="shield/CasterTomeOfImps" dx="80" dy="10"/>
+		<cell rect="572,1938,88,90" name="shield/CasterTomeOfImps" dx="80" dy="50"/>
         <cell rect="1022,1620,80,90" name="backAccessory/LactoblasterTank" dx="59" dy="32"/>
 		<cell rect="2325,325,77,44" name="backAccessory/kabutoMempoBack" dx="67" dy="32"/>
         <cell rect="1022,1726,85,45" name="weapon/LactoblasterGun" dx="60" dy="97"/>
@@ -1652,7 +1652,7 @@
         <cell rect="759,561,83,139" name="tail/wendigo" dx="95" dy="40"/>
         <cell rect="759,561,83,139" name="tail/wendigo_taur" dx="144" dy="49"/>
         <cell rect="508,351,82,69" name="tail/kamaitachi" dx="95" dy="87"/>
-        <cell rect="508,351,82,69" name="tail/kamaitachi_taur" dx="144" dy="50"/>
+        <cell rect="508,351,82,69" name="tail/kamaitachi_taur" dx="149" dy="94"/>
 		<cell rect="593,351,82,69" name="tail/kirin" dx="95" dy="87"/>
         <cell rect="593,351,82,69" name="tail/kirin_taur" dx="140" dy="88"/>
         <cell rect="255,211,83,139" name="tail_bg/cat" dx="108" dy="40"/>
@@ -4953,9 +4953,6 @@
 						<show part="tail_fg/reptile_fire"/>
 					</else>
 				</if>
-            </case>
-            <case values="Tail.KITSHOO">
-                <!--TODO -->
             </case>
             <case values="Tail.MANTICORE_PUSSYTAIL">
 				<if test="isTaur()">

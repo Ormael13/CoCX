@@ -4789,7 +4789,7 @@ public function rebirthFromBadEnd():void {
 //Camp wall
 	private function buildCampWallPrompt():void {
 		clearOutput();
-		if (player.fatigue >= player.maxFatigue() - 50) {
+		if (player.fatigue >= player.maxOverFatigue() - 50) {
 			outputText("You are too exhausted to work on your [camp] wall!");
 			doNext(doCamp);
 			return;
@@ -4879,7 +4879,7 @@ public function rebirthFromBadEnd():void {
 //Camp gate
 	private function buildCampGatePrompt():void {
 		clearOutput();
-		if (player.fatigue >= player.maxFatigue() - 50) {
+		if (player.fatigue >= player.maxOverFatigue() - 50) {
 			outputText("You are too exhausted to work on your [camp] wall!");
 			doNext(doCamp);
 			return;

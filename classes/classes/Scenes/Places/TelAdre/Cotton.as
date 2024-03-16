@@ -212,7 +212,7 @@ private function acceptYoga():void {
 	spriteSelect(SpriteDb.s_cotton);
 	clearOutput();
 	outputText(images.showImage("cotton-yoga"));
-	if(player.fatigue > player.maxFatigue() - 20) {
+	if(player.fatigue > player.maxOverFatigue() - 20) {
 		outputText("You're way too tired to do any yoga right now.");
 		doNext(telAdre.telAdreMenu);
 		return;

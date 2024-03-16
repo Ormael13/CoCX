@@ -1408,6 +1408,7 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			player.tone = 30;
 			player.femininity = 70;
 			player.hairColor = "red";
+			player.faceType = Face.SALAMANDER_FANGS;
 			if (!player.hasPerk(PerkLib.PastLifeFighter)) player.createPerk(PerkLib.HistoryFighter,0,0,0,0);
 			if (!player.hasPerk(PerkLib.PastLifeWhore)) player.createPerk(PerkLib.HistoryWhore,0,0,0,0);
 			outputText("You are a rather average villager with the exception of cute salamander like fangs growing out of your mouth and a predisposition to enter a lust fueled frenzy. That damn ancestor of yours had to go and fuck some salamander, didn't he? But at least he managed to put some loads where it counts and not just her backdoor and you are very grateful for that fact.");

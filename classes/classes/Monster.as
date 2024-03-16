@@ -616,6 +616,17 @@ import classes.Scenes.Combat.CombatAbilities;
 			temp = Math.round(temp);
 			return temp;
 		}
+		public override function maxOverFatigue():Number {
+			var max1:Number = maxSoulforce();
+			var max2:Number = 1;
+			if (hasPerk(PerkLib.HiddenJobSwordImmortal)) max2 += 0.05;
+			if (hasPerk(PerkLib.SwordIntentAura)) max2 += 0.05;
+			if (hasPerk(PerkLib.SwordImmortalFirstForm)) max2 += 0.05;
+			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
+			max1 *= max2;//~125%
+			max1 = Math.round(max1);
+			return max1;
+		}
 
 		public override function maxSoulforce():Number {
 			//Base soulforce
@@ -699,8 +710,11 @@ import classes.Scenes.Combat.CombatAbilities;
 		public override function maxOverSoulforce():Number {
 			var max1:Number = maxSoulforce();
 			var max2:Number = 1;
+			if (hasPerk(PerkLib.HiddenJobSwordImmortal)) max2 += 0.05;
+			if (hasPerk(PerkLib.SwordIntentAura)) max2 += 0.05;
+			if (hasPerk(PerkLib.SwordImmortalFirstForm)) max2 += 0.05;
 			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
-			max1 *= max2;//~110%
+			max1 *= max2;//~125%
 			max1 = Math.round(max1);
 			return max1;
 		}
@@ -792,10 +806,13 @@ import classes.Scenes.Combat.CombatAbilities;
 			if (hasPerk(PerkLib.AsuraStrength)) temp2 += 0.1;
 			if (hasPerk(PerkLib.ICastAsuraFist)) temp2 += 0.1;
 			if (hasPerk(PerkLib.LikeAnAsuraBoss)) temp2 += 0.1;
-			//
 			if (hasPerk(PerkLib.AsuraToughness)) temp2 += 0.1;
+			if (hasPerk(PerkLib.ItsZerkingTime)) temp2 += 0.1;
 			//
 			if (hasPerk(PerkLib.AsuraSpeed)) temp2 += 0.1;
+			if (hasPerk(PerkLib.HiddenJobSwordImmortal)) temp2 += 0.05;
+			if (hasPerk(PerkLib.SwordIntentAura)) temp2 += 0.05;
+			if (hasPerk(PerkLib.SwordImmortalFirstForm)) temp2 += 0.05;
 			if (hasPerk(PerkLib.MunchkinAtWork)) temp2 += 0.1;
 			temp1 *= temp2;
 			temp1 = Math.round(temp1);
@@ -1702,7 +1719,11 @@ import classes.Scenes.Combat.CombatAbilities;
 		}
 
 		/**
-		 * return true if we land a hit
+		 * <ul>
+		 * <li>Please call super method to continue player evade check and shit if you override unless you really know wtf you are doing</li>
+		 * <li>See Diva for example</li>
+		 * <li>return true if we land a hit</li>
+		 * </ul>
 		 */
 		protected function attackSucceeded():Boolean
 		{
@@ -1714,7 +1735,9 @@ import classes.Scenes.Combat.CombatAbilities;
 			if (hasStatusEffect(StatusEffects.Blind)) {
 				attack &&= handleBlind();
 			}
-			attack &&= !playerDodged();
+
+			// Remaining function wouldn't be called if one of them return true
+			attack &&= !playerAttackedCheck();
 
 			return attack;
 		}
@@ -1735,13 +1758,11 @@ import classes.Scenes.Combat.CombatAbilities;
 			var attacks:int = statusEffectv1(StatusEffects.Attacks);
 			if (attacks == 0) attacks = 1;
 			while (attacks>0){
-				if (attackSucceeded()){
 				    var damage:int = eOneAttack();
 					outputAttack(damage);
 					postAttack(damage);
 					EngineCore.statScreenRefresh();
 					outputText("\n");
-				}
 				if (statusEffectv1(StatusEffects.Attacks) >= 0) {
 					addStatusValue(StatusEffects.Attacks, 1, -1);
 				}
@@ -1831,20 +1852,71 @@ import classes.Scenes.Combat.CombatAbilities;
 		{
 			if (dodge==1) outputText("You narrowly avoid [themonster]'s " + weaponVerb + "!\n");
 			else if (dodge==2) outputText("You dodge [themonster]'s " + weaponVerb + " with superior quickness!\n");
-			else {
-				outputText("You deftly avoid " + a + short);
-				if (plural) outputText("'");
-				else outputText("'s");
-				outputText(" slow " + weaponVerb + ".\n");
+			// Reason output goes here (EVADE/MISDIRECTION/FLEXIBILITY/whatever)
+			switch(dodge){
+				case 3:
+					outputText("Using your skills at evading attacks, you anticipate and sidestep [themonster]'");
+					if (!plural) outputText("s");
+					outputText(" attack.\n");
+					break;
+				case 4:
+					outputText("Using Raphael's teachings, you anticipate and sidestep [themonster]' attacks.\n");
+					break;
+				case 5:
+					outputText("With your incredible flexibility, you squeeze out of the way of [themonster]");
+					if (plural) outputText("' attacks.\n");
+					else outputText("'s attack.\n");
+					break;
+				case 6:
+					outputText("Using your superior combat skills you manage to avoid attack completely.\n");
+					break;
+				default:
+					outputText("You deftly avoid " + a + short);
+					if (plural) outputText("'");
+					else outputText("'s");
+					outputText(" slow " + weaponVerb + ".\n");
+
 			}
 		}
 
-		private function playerDodged():Boolean
+		/**
+		 * Series of checks when player received attacks (PreDodge,Evade,Parry,Block)
+		 * If you want to override any of these function to add special effects, please call super method at some point to start evade check and shit
+		 * Aiko overriding playerParry and playerBlock function is one of the example
+		 * @return True if enemy attack nullified
+		 */
+		public function playerAttackedCheck():Boolean{
+			// Comment indicate future support
+			// Unconditional Intercept/Retaliate Effect
+			if(playerPreDodged()){
+				// Retaliate Effect
+				return true;
+			}
+			else if(playerDodged()){
+				player.evadeRetaliate();
+				return true;
+			}
+			else if(playerParry()){
+				// Parry Retaliate Effect
+				return true;
+			}
+			else if(playerBlock()){
+				// Block Retaliate Effect
+				return true;
+			}
+			return false;
+		}
+
+		/**
+		 * Mirror Image or Non-player parrying or other check before evasion Goes Here
+		 * Migrated Mirror Image and Zenji follower parry
+		 * @return True if enemy attack avoided
+		 */
+		public function playerPreDodged():Boolean
 		{
 			//Check if player has shadow clones or similar gimmick
-			if (player.hasStatusEffect(StatusEffects.MirrorImage) && !hasPerk(PerkLib.TrueSeeing)) {
-			}
-			if (player.hasStatusEffect(StatusEffects.MirrorImage) && rand(1+player.statusEffectv1(StatusEffects.MirrorImage)) != 1){
+			// True seeing should crack through Mirror Image
+			if (player.hasStatusEffect(StatusEffects.MirrorImage) && !hasPerk(PerkLib.TrueSeeing) && rand(1+player.statusEffectv1(StatusEffects.MirrorImage)) != 1){
 				outputText("Unable to determine the real one from the fake");
 				if (player.statusEffectv1(StatusEffects.MirrorImage) >= 2)outputText("s");
 				outputText(", your opponent");
@@ -1860,84 +1932,106 @@ import classes.Scenes.Combat.CombatAbilities;
 					outputText(" Your last illusion now destroyed, you will now have to be cautious of your opponent attacks.");
 				}
 				return true;
-			} else {
-				//Determine if dodged!
-				var dodge:int = player.speedDodge(this);
-				if (dodge>0) {
-					outputPlayerDodged(dodge);
-					if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
+			}
+			//Zenji parry enemy attack
+			else if (player.hasStatusEffect(StatusEffects.CombatFollowerZenji)) {
+				var parryChance:Number = 25;
+				if (player.statusEffectv4(StatusEffects.CombatFollowerZenji) > 1) parryChance += 15;
+				if (rand(100) > parryChance) {
+					outputText("[Themonster] goes in for a strike, but Zenji is able to intervene, blocking any opening they have on you, leaving you safe behind him.\n\n");
+					outputText("\"<i>You’re gonna have ta try harda dan dat!</i>\" Zenji shouts.");
 					return true;
 				}
-				var evasionResult:String = player.getEvasionReason(false); // use separate function for speed dodge for expanded dodge description
-				//Determine if evaded
-				if (evasionResult == EVASION_EVADE) {
-					outputText("Using your skills at evading attacks, you anticipate and sidestep [themonster]'");
-					if (!plural) outputText("s");
-					outputText(" attack.\n");
+			}
+			return false;
+		}
+
+		/**
+		 * Evasion goes here
+		 * @return True if enemy attack evaded
+		 */
+		public function playerDodged():Boolean
+		{
+			//Determine if dodged!
+			var dodge:int = player.speedDodge(this);
+			if (dodge>0 && dodge<3) {
+				outputPlayerDodged(dodge);
+				if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
+				return true;
+			}
+			var evasionResult:String = player.getEvasionReason(false); // use separate function for speed dodge for expanded dodge description
+			//Determine if evaded
+			switch(evasionResult){
+				case EVASION_EVADE:
+					outputPlayerDodged(3);
 					if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
 					return true;
-				}
-				//("Misdirection"
-				if (evasionResult == EVASION_MISDIRECTION) {
-					outputText("Using Raphael's teachings, you anticipate and sidestep [themonster]' attacks.\n");
+					// break;
+				case EVASION_MISDIRECTION:
+					outputPlayerDodged(4);
 					if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
 					return true;
-				}
-				//Determine if cat'ed
-				if (evasionResult == EVASION_FLEXIBILITY) {
-					outputText("With your incredible flexibility, you squeeze out of the way of [themonster]");
-					if (plural) outputText("' attacks.\n");
-					else outputText("'s attack.\n");
+					// break;
+				case EVASION_FLEXIBILITY:
+					outputPlayerDodged(5);
 					if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
 					return true;
-				}
-				if (evasionResult != null) { // Failsafe fur unhandled
-					outputText("Using your superior combat skills you manage to avoid attack completely.\n");
-					if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
-					return true;
-				}
-				//Zenji parry enemy attack
-				if (player.hasStatusEffect(StatusEffects.CombatFollowerZenji)) {
-					var parryChance:Number = 25;
-					if (player.statusEffectv4(StatusEffects.CombatFollowerZenji) > 1) parryChance += 15;
-					if (rand(100) > parryChance) {
-						outputText("[Themonster] goes in for a strike, but Zenji is able to intervene, blocking any opening they have on you, leaving you safe behind him.\n\n");
-						outputText("\"<i>You’re gonna have ta try harda dan dat!</i>\" Zenji shouts.");
+					// break;
+				default:
+					if(evasionResult!=null){
+						outputPlayerDodged(6);
+						// These are not resolvedReason at all these are just extra dodge chance from perks and shit
+						if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
 						return true;
 					}
-				}
-
-				//Parry with weapon
-				if (combatParry()) {
-					outputText("You manage to block [themonster]");
-					if (plural) outputText("' attacks ");
-					else outputText("'s attack ");
-					outputText("with your [weapon].\n");
-					if (game.player.hasPerk(PerkLib.TwinRiposte) && (game.player.weapon.isDualMedium() || game.player.weapon.isDualLarge()) && game.player.wrath >= 2) {
-						player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
-						SceneLib.combat.basemeleeattacks();
-					}
-					if (game.player.hasPerk(PerkLib.Backlash) && game.player.isFistOrFistWeapon()) {
-						player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
-						outputText("As you block the blow you exploit the opening in your opponent’s guard to deliver a vicious kick.");
-						SceneLib.combat.basemeleeattacks();
-					}
-					if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
-					return true;
-				}
-				//Block with shield
-				if (combatBlock(true)) {
-					outputText("You block [themonster]'s " + weaponVerb + " with your [shield]! ");
-					if (game.player.hasPerk(PerkLib.ShieldCombat) && game.player.fatigue >= 20) {
-						player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
-						SceneLib.combat.pspecials.shieldBash();
-					}
-					SceneLib.combat.ShieldsStatusProcs();
-					if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
-					return true;
-				}
-				return false;
 			}
+			return false;
+		}
+
+		/**
+		 * Player Parry Checks
+		 * @return True if enemy attack parried
+		 */
+		public function playerParry():Boolean{
+			//Parry with weapon
+			if (combatParry()) {
+				outputText("You manage to block [themonster]");
+				if (plural) outputText("' attacks ");
+				else outputText("'s attack ");
+				outputText("with your [weapon].\n");
+					if (game.player.hasPerk(PerkLib.TwinRiposte) && (game.player.weapon.isDualMedium() || game.player.weapon.isDualLarge()) && game.player.wrath >= 2) {
+					player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
+					SceneLib.combat.basemeleeattacks();
+				}
+				if (game.player.hasPerk(PerkLib.Backlash) && game.player.isFistOrFistWeapon()) {
+					player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
+					outputText("As you block the blow you exploit the opening in your opponent’s guard to deliver a vicious kick.");
+					SceneLib.combat.basemeleeattacks();
+				}
+				if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
+				return true;
+			}
+			return false;
+		}
+
+		/**
+		 * Player Block Checks
+		 * @return True if enemy attack blocked
+		 */
+		public function playerBlock():Boolean
+		{
+			//Block with shield
+			if (combatBlock(true)) {
+				outputText("You block [themonster]'s " + weaponVerb + " with your [shield]! ");
+				if (game.player.hasPerk(PerkLib.ShieldCombat) && game.player.fatigue >= 20) {
+					player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
+					SceneLib.combat.pspecials.shieldBash();
+				}
+				SceneLib.combat.ShieldsStatusProcs();
+				if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
+				return true;
+			}
+			return false;
 		}
 
 		public function monsterIsStunned():Boolean {
@@ -2026,6 +2120,9 @@ import classes.Scenes.Combat.CombatAbilities;
 			return false;
 		}
 
+		/**
+		 * Stop overrding this shit go to performCombatAbility()
+		 */
 		public function doAI():void
 		{
 			if (hasStatusEffect(StatusEffects.AbilityCooldown1) ) {
@@ -2139,7 +2236,10 @@ import classes.Scenes.Combat.CombatAbilities;
 
 			//Only start temp resolute decay once monster is no longer incapacitated
 			if (hasTempResolute() && getPerkValue(PerkLib.Resolute, 3) == 2) setPerkValue(PerkLib.Resolute, 3, 1);
+
+			if(attackSucceeded())
 			performCombatAction();
+
 		}
 
 		/**

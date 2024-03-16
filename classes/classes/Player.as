@@ -1397,6 +1397,10 @@ use namespace CoC;
 			if (hasPerk(PerkLib.BloodDemonIntelligence)) progressBD += 1;
 			return progressBD;
 		}
+		public function compatibileSwordImmortalWeapons():Boolean {
+			if (isSwordTypeWeapon() || isDuelingTypeWeapon() || isDaggerTypeWeapon()) return true;
+			else return false;
+		}
 
 		public function allEquipment():/*ItemType*/Array {
 			var result:Array = [];
@@ -3928,6 +3932,12 @@ use namespace CoC;
 				chance += disDodgeChance;
 			}
 
+			if (isRace(Races.DRACULA)) {
+				var draDodgeChance:int = 30;
+				if (hasStatusEffect(StatusEffects.ShadowTeleport)) draDodgeChance += 50;
+				chance += draDodgeChance;
+			}
+
 			chance += super.getEvasionChance();
 			if (hasStatusEffect(StatusEffects.GreenCovenant) || canAutoHit()) chance = 0;
 			return chance;
@@ -3983,10 +3993,21 @@ use namespace CoC;
 				dodgeArray.push([disDodgeChance, EVASION_DISPLACING]);
 			}
 
+			if (isRace(Races.DRACULA)) {
+				var dreDodgeChance:int = 30;
+				if (hasStatusEffect(StatusEffects.ShadowTeleport)) dreDodgeChance += 50;
+				dodgeArray.push([dreDodgeChance, EVASION_PHASING]);
+			}
+
 			if (!evasionReason) evasionReason = super.getEvasionReason(considerBlindSpeed, attackSpeed, hitModifier, dodgeArray);
 
-			if (evasionReason && necklace == game.necklaces.CATBELL && isAnyRaceCached(Races.CatlikeRaces)) CombatAbilities.Tease.perform();
 			return evasionReason;
+		}
+
+		public function evadeRetaliate():void {
+			if (necklace == game.necklaces.CATBELL && isAnyRaceCached(Races.CatlikeRaces)){
+				CombatAbilities.Tease.perform(true,true, false,true);
+			}
 		}
 
 		public function eyesOfTheHunterAdeptBoost():Boolean {
@@ -4602,6 +4623,8 @@ use namespace CoC;
 				hiddenJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobGreySage))
 				hiddenJobs1++;
+			if (hasPerk(PerkLib.HiddenJobSwordImmortal))
+				hiddenJobs1++;
 			return hiddenJobs1;
 		}
 		public function maxHiddenJobs():Number {
@@ -4627,7 +4650,7 @@ use namespace CoC;
 		public function maxTotalMutationsInSlot(slot:String):int {
 			switch (slot) {
 				case IMutationPerkType.SLOT_ADAPTATIONS:
-					return 2 * (1 + maxHumanityBoost() + maxAscensionBoost());
+					return 2 * (1 + maxSlotsBoost());
 				case IMutationPerkType.SLOT_HEART:
 				case IMutationPerkType.SLOT_MUSCLE:
 				case IMutationPerkType.SLOT_MOUTH:
@@ -4644,7 +4667,7 @@ use namespace CoC;
 				case IMutationPerkType.SLOT_THYROID:
 				case IMutationPerkType.SLOT_PARATHYROID:
 				default:
-					return 1 + maxHumanityBoost() + maxAscensionBoost();
+					return 1 + maxSlotsBoost();
 			}
 		}
 		public function maxCurrentMutationsInSlot(slot:String):int {
@@ -4698,13 +4721,12 @@ use namespace CoC;
 		public function maxAdaptationsMutations():Number {
 			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_ADAPTATIONS);
 		}
-		public function maxAscensionBoost():Number {
-			return perkv1(PerkLib.AscensionAdditionalOrganMutationX);
-		}
-		public function maxHumanityBoost():Number {
-			var mHB:Number = 0;
-			if (hasPerk(PerkLib.HumanSupremacyAdvanced)) mHB += 1;
-			return mHB;
+		public function maxSlotsBoost():Number {
+			var mSB:Number = 0;
+			if (hasPerk(PerkLib.AscensionAdditionalOrganMutationX)) mSB += perkv1(PerkLib.AscensionAdditionalOrganMutationX);
+			if (hasPerk(PerkLib.HumanSupremacyAdvanced)) mSB += 1;
+			if (hasPerk(PerkLib.MunchkinAtBioLab)) mSB += 1;
+			return mSB;
 		}
 
 		public function lactationQ():Number
@@ -5491,7 +5513,7 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 1) maxThicknessCap += 10;
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 2) maxThicknessCap += 20;
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 3) maxThicknessCap += 30;
-			if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 2) maxThicknessCap += 10;
+			if (perkv1(IMutationsLib.WhaleFatIM) >= 2) maxThicknessCap += 10;
 			if (perkv1(IMutationsLib.HumanFatIM) >= 1 && racialScore(Races.HUMAN) > 17) maxThicknessCap += 5;
 			if (perkv1(IMutationsLib.HumanFatIM) >= 2 && racialScore(Races.HUMAN) > 17) maxThicknessCap += 10;
 			if (perkv1(IMutationsLib.HumanFatIM) >= 3 && racialScore(Races.HUMAN) > 17) maxThicknessCap += 15;
@@ -5782,6 +5804,9 @@ use namespace CoC;
 			}
 			if(hasStatusEffect(StatusEffects.EverywhereAndNowhere)) {
 				removeStatusEffect(StatusEffects.EverywhereAndNowhere);
+			}
+			if(hasStatusEffect(StatusEffects.ShadowTeleport)) {
+				removeStatusEffect(StatusEffects.ShadowTeleport);
 			}
 			if(hasStatusEffect(StatusEffects.Displacement)) {
 				removeStatusEffect(StatusEffects.Displacement);
@@ -7643,5 +7668,6 @@ use namespace CoC;
 				durations[i] = 0;
 			}
 		}
+		
 	}
 }

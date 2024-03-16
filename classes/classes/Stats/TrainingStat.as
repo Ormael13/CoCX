@@ -11,6 +11,7 @@ public class TrainingStat extends RawStat {
 	override public function get max():Number {
 		var train:Number = 100;
 		//train += 2 * host.perkv1(PerkLib.AscensionTranshumanism);
+		if (host.hasPerk(PerkLib.MunchkinAtBioLab)) train += 10;
 		switch (statName) {
 			case 'str.train':
 				var str:Number = 1;

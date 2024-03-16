@@ -2603,7 +2603,7 @@ public function apparantlyJojoDOESlift():void
 	// {Repeatable Generic Training Session Stuffs}
 	else
 	{
-		if (player.fatigue >= player.maxFatigue() - 150)
+		if (player.fatigue >= player.maxOverFatigue() - 150)
 		{
 			outputText("You ask the monk to continue your training; but he shakes his head.\n\n");
 			outputText("\"<i>Not yet [name]. Your body must be fit and rested before our training sessions. Rest first, and come back to me later.</i>\"\n\n");
@@ -2699,29 +2699,17 @@ public function apparantlyJojoDOESlift():void
 		outputText(enlightenedBlurbs[rand(enlightenedBlurbs.length)] + "\n\n");
 	}
 	//Boost attributes!
-	if (player.canTrain('str', player.trainStatCap("str",50))) {
-		dynStats("str", 1); //Str boost to 45
-		player.trainStat("str", .5, player.trainStatCap("str",50));
-	}
 	if (player.canTrain('str', player.trainStatCap("str",80))) {
-		dynStats("str", 1); //Str boost to 45
-		player.trainStat("str", .5, player.trainStatCap("str",80));
+		dynStats("str", 2); //Str boost to 80
+		player.trainStat("str", 1, player.trainStatCap("str",80));
 	}
 	if (player.canTrain('int', player.trainStatCap("int",80))){
-		dynStats("int", 1); //Int boost to 80
-		player.trainStat("int", .5, player.trainStatCap("int",80));
-	}
-	if (player.canTrain('int', player.trainStatCap("int",80))){
-		dynStats("int", 1); //Int boost to 80
-		player.trainStat("int", .5, player.trainStatCap("int",80));
-	}
-	if (player.canTrain('wis', player.trainStatCap("wis",50))){
-		dynStats("wis", 1); //Wisdom boost to 100
-		player.trainStat("wis", .5, player.trainStatCap("wis",50));
+		dynStats("int", 2); //Int boost to 80
+		player.trainStat("int", 1, player.trainStatCap("int",80));
 	}
 	if (player.canTrain('wis', player.trainStatCap("wis",100))){
-		dynStats("wis", 1); //Wisdom boost to 100
-		player.trainStat("wis", .5, player.trainStatCap("wis",100));
+		dynStats("wis", 6); //Wisdom boost to 100
+		player.trainStat("wis", 3, player.trainStatCap("wis",100));
 	}
 	endEncounter();
 }

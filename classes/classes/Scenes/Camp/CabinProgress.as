@@ -32,7 +32,7 @@ import classes.Scenes.SceneLib;
 				SceneLib.dungeons.cabin.enterCabin();
 				return;
 			}
-			if (player.fatigue <= player.maxFatigue() - gatherWoodsORquarrySiteMineCost())
+			if (player.fatigue <= player.maxOverFatigue() - gatherWoodsORquarrySiteMineCost())
 			{
 				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 1) startWork();
 				else if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 2) startLayout();
@@ -111,7 +111,7 @@ import classes.Scenes.SceneLib;
 				player.addStatusValue(StatusEffects.ResourceNode1, 1, 1);
 			}
 			menu();
-			if (player.fatigue > player.maxFatigue() - gatherWoodsORquarrySiteMineCost()) {
+			if (player.fatigue > player.maxOverFatigue() - gatherWoodsORquarrySiteMineCost()) {
 				outputText("<b>You are too tired to consider cutting down the trees. Perhaps some rest will suffice?</b>");
 				endEncounter();
 				return;
@@ -259,7 +259,7 @@ import classes.Scenes.SceneLib;
 			return fatigueAmount;
 		}
 		private function quarrySiteMine(nightExploration:Boolean = false):void {
-			if (player.fatigue > player.maxFatigue() - gatherWoodsORquarrySiteMineCost()) {
+			if (player.fatigue > player.maxOverFatigue() - gatherWoodsORquarrySiteMineCost()) {
 				outputText("\n\n<b>You are too tired to consider mining. Perhaps some rest will suffice?</b>");
 				endEncounter();
 				return;

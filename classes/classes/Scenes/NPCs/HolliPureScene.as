@@ -32,14 +32,14 @@ public function treeMenu():void {
 		outputText("The sprout looks about the same as when you first noticed it.  It's a simple, leafy shoot that only goes to about knee height.  It looks healthy and strong, with a few dozen branches and shiny green leaves.  You could easily destroy it.");
 		menu();
 		addButton(6, "Burn It", destroyDatTree);
-		addButton(7, "Water It", waterIt).disableIf(player.fatigue + 50 > player.maxFatigue(), "You're too tired!");
+		addButton(7, "Water It", waterIt).disableIf(player.fatigue + 50 > player.maxOverFatigue(), "You're too tired!");
 		addButton(8, "Back", inventory.inventoryMenu);
 	}
 	else if (flags[kFLAGS.FLOWER_LEVEL] == 2) {
 		outputText("Before you is a large, waist-high plant of questionable origin.  A huge, violet bloom sits atop a strong, central stalk, and the obscene flower looks positively female in every sense, right down to a clit-shaped bump and moist, gently parted lips.  Inside that central passage, you can see a bevy of wiggling staman surrounding a larger, flared stalk.  The scent that wafts out of that opening is sweet and floral, but undoubtedly sexual.  It looks like an organic sex toy and it may be corrupted.  It wouldn't be hard to get rid of right now, assuming you don't let it grow larger.");
 		menu();
 		addButton(6, "Destroy It", destroyDatFuckingPlantAtP2);
-		addButton(7, "Water It", waterIt).disableIf(player.fatigue + 50 > player.maxFatigue(), "You're too tired!");
+		addButton(7, "Water It", waterIt).disableIf(player.fatigue + 50 > player.maxOverFatigue(), "You're too tired!");
 		addButton(8, "Use SFIB", useSouforceInfusedBlood).disableIf(player.HP <= 150 && player.soulforce < 50 && !player.hasPerk(PerkLib.SoulApprentice), "You may lack one or all of those req.: Soul Apprentite perk, 150+ HP, 50+ SF!");
 		addButton(9, "Back", inventory.inventoryMenu);
 	}
@@ -51,7 +51,7 @@ public function treeMenu():void {
 		menu();
 		addButton(5, "Drink Sap", drinkThePlantGirlsSap);
 		addButton(6, "Torch It", torchP3Tree);
-		addButton(7, "Water It", waterIt).disableIf(player.fatigue + 50 > player.maxFatigue(), "You're too tired!");
+		addButton(7, "Water It", waterIt).disableIf(player.fatigue + 50 > player.maxOverFatigue(), "You're too tired!");
 		addButton(8, "Use SFIB", useSouforceInfusedBlood).disableIf(player.HP <= 150 && player.soulforce < 50 && !player.hasPerk(PerkLib.SoulApprentice), "You may lack one or all of those req.: Soul Apprentite perk, 150+ HP, 50+ SF!");
 		addButton(9, "Back", inventory.inventoryMenu);
 	}
