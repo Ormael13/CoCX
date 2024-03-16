@@ -475,6 +475,7 @@ public class EnchantmentLib extends ItemConstants {
 				valueOr(params.suffix, ""),
 				valueOr(params.shortSuffix, ""),
 				valueOrThrow(params.description, "Missing description"),
+				valueOr(params.hide, false),
 				valueOr(params.rarity, RARITY_MAGICAL),
 				valueOr(params.races, Races.RacesForRandomEnchantments),
 				valueOr(params.minLevel, 0),
