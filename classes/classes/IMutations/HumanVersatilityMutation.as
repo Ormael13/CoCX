@@ -26,7 +26,7 @@ public class HumanVersatilityMutation extends IMutationPerkType
                 descS = "Mastery gains increased by 2 point or in case of multiplier +2 to multiplier. Decrease a bit needed exp to lvl up weapon/lifeskill masteries.";
             }
             if (pTier == 3){
-                descS = "Your fat tissue increased again your natural toughness and thickness limit. Increased damage reduction against physical damage & increase natural resistance to damage, increase max Hunger cap by 50 (if PC have Hunger bar active) (+45% of max core Tou as phantom Tou)";
+                descS = "Mastery gains increased by 3 point or in case of multiplier +3 to multiplier. Decrease needed exp to lvl up weapon/lifeskill masteries.  (if PC have Hunger bar active) (+45% of max core Tou as phantom Tou)";
             }
             return descS;
         }

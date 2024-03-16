@@ -954,7 +954,7 @@ public class GameSettings extends BaseContent {
 			outputText("Wrath bars show percentages: <b>ON</b>");
 		outputText("\n\n");
 		
-		if (flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 1)
+		if (flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 0)
 			outputText("Angelic Faction: <b>FULL PRESENCE</b>");
 		else
 			outputText("Angelic Faction: <b>ABSENT</b>");
