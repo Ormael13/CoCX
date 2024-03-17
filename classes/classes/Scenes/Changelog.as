@@ -178,7 +178,7 @@ public class Changelog extends BaseContent
 			outputText("-Lizan Marrow IM would now give small tou multi bonus: 10% / 30% / 70% / 150%. It % of HP regenerated was corrected to match description of mutation.\n");
 			outputText("-New mutation perk: Human Versatility (Evolved). Req. Human Versatility (Primitive) and lvl 60+. Effects: Mastery gains increased by 3 point or in case of multiplier +3 to multiplier. Decrease needed exp to lvl up weapon/lifeskill masteries and have 20% chance to gain 3x more XP for Mastery.\n");
 			outputText("-Item Effect system code changes. (aimozg)\n");
-			outputText("-\n");
+			outputText("-Removed form some races req. to reach x points in racial score to get points for some bodyparts varaints.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -216,7 +216,7 @@ public class Changelog extends BaseContent
 			outputText("-Fixed bugs: Arigean above Recruit rank not immune to tf-ing effects, deer arms tf unlocking canine arms MM, unable to find tel'adre again after first time seeing it with too high corruption or other factor that not allowed entrance; Arigean above recruit rank marking, eye color and aura with mismatching colors; demon/arigean arms MM option giving instead devil/abyssal shark arms, ");
 			outputText("Zenji training stats not having gains decrease from +4 to +1 for repeated training before daily reset for other than wisdom stats, resources not been recovered after using specials/soulskills/spells, nail buy menu at carpenter having misleading text, combat wounds % display at stats page been 100x lower, Sandworm PC not counting toward checks for having natural armor, demon face tf");
 			outputText("giving arigean face instead, gym weight lifting capping tone at 85, when building cabin text not picking correct name for Jojo/Joy line, Magical Fertility & Magical Virility perk desc bonus value display error, differences between desc dmg reduction and actualt DR from main difficulty setting, sneak melee/range attack diff between displayer and actualy dealt dmg to enemy, ");
-			outputText("Veseshe preset giving History: Scout instead of History: Whore, Tyrantia training capping at 20 sessions, elfs IM instead of orca/whale IM increasing thickness cap, Belisa holy band and call Kiha minor errors\n\n");
+			outputText("Veseshe preset giving History: Scout instead of History: Whore, Tyrantia training capping at 20 sessions, elfs IM instead of orca/whale IM increasing thickness cap, Belisa holy band button typo, parser in Call Kiha text\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8w-z:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");

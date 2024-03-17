@@ -43,10 +43,8 @@ public class EchidnaRace extends Race {
 				.tailType(Tail.ECHIDNA, +1)
 				.faceType(Face.ECHIDNA, +1)
 				.tongueType(Tongue.ECHIDNA, +1)
-				.legType(LowerBody.ECHIDNA, +1);
-		addScoresAfter(2)
-				.skinCoatType(Skin.FUR,+1);
-		addScoresAfter(3)
+				.legType(LowerBody.ECHIDNA, +1)
+				.skinCoatType(Skin.FUR,+1)
 				.hasCockOfType(CockTypesEnum.ECHIDNA, +1);
 		
 		buildTier(4, "echidna")

@@ -2800,6 +2800,21 @@ import classes.Scenes.Combat.CombatAbility;
 				player.createPerk(PerkLib.BloodlineSalamander,0,0,0,1);
 				bloodlineACQ2();
 			}
+			else if (player.hasPerk(PerkLib.WerewolfsDescendant)) {
+				player.removePerk(PerkLib.WerewolfsDescendant);
+				player.createPerk(PerkLib.BloodlineWerewolf,0,0,0,1);
+				bloodlineACQ2();
+			}
+			else if (player.hasPerk(PerkLib.WeresharksDescendant)) {
+				player.removePerk(PerkLib.WeresharksDescendant);
+				player.createPerk(PerkLib.BloodlineWereshark,0,0,0,1);
+				bloodlineACQ2();
+			}
+			else if (player.hasPerk(PerkLib.RatatoskrsDescendant)) {
+				player.removePerk(PerkLib.RatatoskrsDescendant);
+				player.createPerk(PerkLib.BloodlineRatatoskr,0,0,0,1);
+				bloodlineACQ2();
+			}
 			else {
 				clearOutput();
 				outputText("You don't have any Descendant perks to change into Bloodline perks.");

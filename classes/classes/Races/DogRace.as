@@ -50,7 +50,7 @@ public class DogRace extends Race {
 				.customRequirement("","not Cerberus",
 						function (body:BodyData):Boolean {
 							return !(CerberusRace.isCerberus(body));
-						}, 0, -1000);;
+						}, 0, -1000);
 		
 		buildTier(4, "dog-morph")
 				.namesMaleFemaleMorphTaur("dog-boy", "dog-girl", "dog-morph", "dog-taur")
