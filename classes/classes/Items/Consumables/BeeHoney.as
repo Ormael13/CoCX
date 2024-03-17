@@ -16,7 +16,6 @@ import classes.CockTypesEnum;
 import classes.GlobalFlags.*;
 import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Consumable;
-import classes.Items.ItemTags;
 import classes.Player;
 import classes.PregnancyStore;
 import classes.Races;
@@ -41,7 +40,7 @@ public class BeeHoney extends Consumable
 					honeyValue,
 					honeyDesc
 			);
-			withTag(ItemTags.U_TF);
+			withTag(U_TF);
 			refineableInto(
 					AlchemyLib.DEFAULT_SUBSTANCES_DROP_TABLE,
 					AlchemyLib.DEFAULT_ESSENCE_DROP_TABLE(AlchemyLib.AE_BEE),

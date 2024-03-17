@@ -15,7 +15,7 @@ import classes.Scenes.SceneLib;
 		public function SageMedicine()
 		{
 			super("SageMed", "SageMed", "a bottle of Sage medicine", 6, "This drink is made from a bottle of infernal wine, a devil draft, but purified by Alvina. Are you sure it would be a smart idea to drink this?");
-			withTag(ItemTags.U_TF);
+			withTag(U_TF);
 		}
 		
 		override public function useItem():Boolean {

@@ -15,7 +15,6 @@ import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Consumable;
-import classes.Items.ItemTags;
 import classes.PerkLib;
 import classes.StatusEffects;
 import classes.VaginaClass;
@@ -23,7 +22,7 @@ import classes.VaginaClass;
 public class MinotaurBlood extends Consumable {
 	public function MinotaurBlood() {
 		super("MinoBlo","MinoBlo", "a vial of Minotaur blood", 6, "You've got a scratched up looking vial full of bright red minotaur blood.  Any time you move it around it seems to froth up, as if eager to escape.")
-		withTag(ItemTags.U_TF);
+		withTag(U_TF);
 		refineableInto(
 				AlchemyLib.DEFAULT_SUBSTANCES_DROP_TABLE,
 				AlchemyLib.DEFAULT_ESSENCE_DROP_TABLE(AlchemyLib.AE_COW)

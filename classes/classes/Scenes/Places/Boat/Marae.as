@@ -175,7 +175,6 @@ public class Marae extends Monster
 			this.bodyColor = "white";
 			this.hairColor = "green";
 			this.hairLength = 36;
-			this.weaponPerk = "";
 			this.weaponValue = 70;
 			this.armorName = "bark";
 			this.bonusHP = 17500;

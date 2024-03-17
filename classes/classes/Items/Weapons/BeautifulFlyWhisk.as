@@ -3,6 +3,7 @@
  */
 package classes.Items.Weapons
 {
+import classes.Items.IELib;
 import classes.Items.Weapon;
 import classes.PerkLib;
 	import classes.EventParser;
@@ -26,19 +27,22 @@ import classes.PerkLib;
 		public function BeautifulFlyWhisk()
 		{
 			super(
-				"B.FlyWhisk", 
-				"B.FlyWhisk", 
-				"beautiful fly-whisk", 
-				"a beautiful shining fly-whisk", 
-				"slash", 
-				0, 
-				400, 
-				"This beautiful fly-whisk shines brilliantly in the light, showing its flawless craftsmanship." + 
-				"  The pommel and guard are heavily decorated in gold and brass.  Some craftsman clearly poured his heart and soul into this tool.", 
-				"", 
-				WT_EXOTIC);
-			withBuff('psoulskillpower', 0)
+				"B.FlyWhisk",
+				"B.FlyWhisk",
+				"beautiful fly-whisk",
+				"a beautiful shining fly-whisk",
+				"slash",
+				0,
+				400,
+				"This beautiful fly-whisk shines brilliantly in the light, showing its flawless craftsmanship." +
+				"  The pommel and guard are heavily decorated in gold and brass.  Some craftsman clearly poured his heart and soul into this tool.",
+				WT_EXOTIC,
+				WSZ_MEDIUM,
+				false
+			);
+			withBuff('psoulskillpower', 0);
 			withBuff('msoulskillpower', 0);
+			withEffect(IELib.Require_CorBelow, 33);
             EventParser.timeAwareClassAdd(this);
 		}
 		
@@ -81,12 +85,6 @@ import classes.PerkLib;
             else
                 return _description;
         }
-		
-		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.cor < (33 + game.player.corruptionTolerance)) return super.canEquip(doOutput);
-			if(doOutput) outputText("You grab hold of the handle of the fly-whisk only to have it grow burning hot. You're forced to let it go lest you burn yourself. Something within the tool must be displeased.");
-			return false;
-		}
 
 		override public function get description():String {
 			updateCultivatorMult(); //To display *correct* values

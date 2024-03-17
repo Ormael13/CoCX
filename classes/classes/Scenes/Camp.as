@@ -2306,38 +2306,7 @@ public class Camp extends NPCAwareContent{
 		clearOutput();
 		outputText("You can combine two single weapons into one dual weapon or separate dual weapons into two single weapons. <b>(WARNING: ENCHANTED ITEMS WOULD IRREVERSABLE LOOSE ENCHANTMENTS DURING COMBINING!!!)</b>");
 		menu();
-		var weaponList: Array = [
-			[weapons.KAMA, weapons.D_KAMA],
-			[weapons.DAGGER, weapons.DDAGGER],
-			[weapons.ANGSTD1, weapons.ANGSTD],
-			[weapons.DAGWHIP, weapons.DDAGWHIP],
-			[weapons.BFSWORD, weapons.DBFSWO],
-			[weapons.BFTHSWORD, weapons.DBFTHSWO],
-			[weapons.BFWHIP, weapons.DBFWHIP],
-			[weapons.NODACHI, weapons.DNODACHI],
-			[weapons.WHIP, weapons.PWHIP],
-			[weapons.WARHAMR, weapons.D_WHAM_],
-			[weapons.SUCWHIP, weapons.PSWHIP],
-			[weapons.KATANA, weapons.DKATANA],//1st page
-			[weapons.L__AXE, weapons.DL_AXE_],
-			[weapons.MACGRSW, weapons.TMACGRSW],
-			[weapons.RIPPER1, weapons.TRIPPER1],
-			[weapons.RIPPER2, weapons.TRIPPER2],
-			[weapons.ACLAYMO, weapons.TACLAYM],
-			[weapons.RCLAYMO, weapons.TRCLAYM],
-			[weapons.SCLAYMO, weapons.TSCLAYM],
-			[weapons.TCLAYMO, weapons.TTCLAYM],
-			[weapons.S_RULER, weapons.TSRULER],
-			[weapons.PHALLUS, weapons.PHALUSS],
-			[weapons.L_WHIP, weapons.DL_WHIP],
-			[weapons.B_SWORD, weapons.DBSWORD],//2nd page
-			[weapons.EXCALIB, weapons.DEXCALI],
-			[weaponsrange.SIXSHOT, weaponsrange.TWINSIXS],
-			[weaponsrange.M1CERBE, weaponsrange.TM1CERB],
-			[weaponsrange.ALAKABL, weaponsrange.DALAKABL],
-			[weaponsrange.DESEAGL, weaponsrange.TDEEAGL]
-			//[weaponsrange.HARKON1, weaponsrange.HARKON2],
-		];
+		var weaponList: Array = weapons.SingleDualPairList.concat(weaponsrange.SingleDualPairList);
 		addButton(0, "Combine Weapons", menuCombineStaging, weaponList);
 		addButton(4, "Seperate Weapons", menuSeperateStaging, weaponList)
 		addButton(14, "Back", campMiscActions);
@@ -2432,22 +2401,22 @@ public class Camp extends NPCAwareContent{
 			addButton(13, "Next", mainPagePocketWatch, page + 1);
 		}
 
-		if (page == 3) {			
+		if (page == 3) {
 			addButton(0, "E C M & B R (Ex)", mainPagePocketWatchElementalConjurerMindAndBodyResolveEx)
-			.disableIf(!player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolve), 
+			.disableIf(!player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolve),
 				"Req. Elemental Conjurer Mind and Body Resolve perks")
-			.disableIf(player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolveEx) 
+			.disableIf(player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolveEx)
 				|| player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedicationEx)
 				|| player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrificeEx), "You already got this merged perk");
 
 			addButton(1, "E C M & B D (Ex)", mainPagePocketWatchElementalConjurerMindAndBodyDedicationEx)
-			.disableIf(!player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedication) || !player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolveEx), 
+			.disableIf(!player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedication) || !player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolveEx),
 				"Req. Elemental Conjurer Mind and Body Resolve (Ex) & Elemental Conjurer Mind and Body Dedication perks")
 			.disableIf(player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedicationEx)
 				|| player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrificeEx), "You already got this merged perk");
 			
 			addButton(2, "E C M & B S (Ex)", mainPagePocketWatchElementalConjurerMindAndBodySacrificeEx)
-			.disableIf(!player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrifice) || !player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedicationEx), 
+			.disableIf(!player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrifice) || !player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedicationEx),
 				"Req. Elemental Conjurer Mind and Body Dedication (Ex) & Elemental Conjurer Mind and Body Sacrifice perks")
 			.disableIf(player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrificeEx), "You already got this merged perk");
 			
@@ -2455,22 +2424,22 @@ public class Camp extends NPCAwareContent{
 			addButton(13, "Next", mainPagePocketWatch, page + 1);
 		}
 		
-		if (page == 4) {			
+		if (page == 4) {
 			addButton(0, "ChBS-I (Ex)", mainPagePocketWatchChimericalBodySemiImprovedStageEx)
-			.disableIf(!player.hasPerk(PerkLib.ChimericalBodySemiImprovedStage), 
+			.disableIf(!player.hasPerk(PerkLib.ChimericalBodySemiImprovedStage),
 				"Req. Chimerical Body: Semi-Improved Stage perk")
-			.disableIf(player.hasPerk(PerkLib.ChimericalBodySemiImprovedStageEx) 
+			.disableIf(player.hasPerk(PerkLib.ChimericalBodySemiImprovedStageEx)
 				|| player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStageEx)
 				|| player.hasPerk(PerkLib.ChimericalBodySemiEpicStageEx), "You already got this merged perk");
 
 			addButton(1, "ChBS-S (Ex)", mainPagePocketWatchChimericalBodySemiSuperiorStageEx)
-			.disableIf(!player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStage) || !player.hasPerk(PerkLib.ChimericalBodySemiImprovedStageEx), 
+			.disableIf(!player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStage) || !player.hasPerk(PerkLib.ChimericalBodySemiImprovedStageEx),
 				"Req. Chimerical Body: Semi-Superior Stage & Chimerical Body: Semi-Improved (Ex) Stage perks")
 			.disableIf(player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStageEx)
 				|| player.hasPerk(PerkLib.ChimericalBodySemiEpicStageEx), "You already got this merged perk");
 			
 			addButton(2, "ChBS-E (Ex)", mainPagePocketWatchChimericalBodySemiEpicStageEx)
-			.disableIf(!player.hasPerk(PerkLib.ChimericalBodySemiEpicStage) || !player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStageEx), 
+			.disableIf(!player.hasPerk(PerkLib.ChimericalBodySemiEpicStage) || !player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStageEx),
 				"Req. Chimerical Body: Semi-Epic Stage & Chimerical Body: Semi-Superior (Ex) Stage perks")
 			.disableIf(player.hasPerk(PerkLib.ChimericalBodySemiEpicStageEx), "You already got this merged perk");
 			
@@ -2516,7 +2485,7 @@ public class Camp extends NPCAwareContent{
 			.disableIf(player.hasPerk(PerkLib.CorrosiveMeltdownMastered), "You already got this merged perk");
 
 			addButton(12, "Previous", mainPagePocketWatch, page - 1);
-			addButton(13, "Next", mainPagePocketWatch, page + 1);		
+			addButton(13, "Next", mainPagePocketWatch, page + 1);
 		}
 
 		if (page == 6) {
@@ -3263,7 +3232,7 @@ public class Camp extends NPCAwareContent{
 		outputText("The shell cracks before your clone emerges from the incubator. It's a glorious reflection of you, though it seems to have the common decency to give itself a simple grey robe before presenting its barren body.\n\n");
 	}
 	/*
-	 * old primaltwin flavor	 * 
+	 * old primaltwin flavor	 *
 			/*if (player.statusEffectv3(StatusEffects.PCClone) < 4) {
 				outputText("Your clone is ");
 				if (player.statusEffectv3(StatusEffects.PCClone) == 1) outputText("slowly rotating basketball sized sphere of soul and life essences");
@@ -3508,9 +3477,9 @@ public class Camp extends NPCAwareContent{
 	private function toggleNPCStatus(status:StatusEffectType, returnFunc:Function = null):void {
 		if (player.hasStatusEffect(status)) player.removeStatusEffect(status);
 		else player.createStatusEffect(status, 0, 0, 0, 0);
-		if (returnFunc != null) 
+		if (returnFunc != null)
 			returnFunc();
-		else 
+		else
 			SparrableNPCsMenuCampNPCs();
 	}
 

@@ -5,8 +5,7 @@
 package classes.Items.WeaponsRange 
 {
 	import classes.Items.WeaponRange;
-	import classes.Items.ItemTags;
-	import classes.GlobalFlags.kFLAGS;
+		import classes.GlobalFlags.kFLAGS;
 	
 	public class KrakenSlayerHarpoons extends WeaponRange
 	{
@@ -14,7 +13,7 @@ package classes.Items.WeaponsRange
 		public function KrakenSlayerHarpoons() 
 		{
 			super("KSlHarp", "Kraken Slayer Harpoons", "kraken slayer harpoons", "a kraken slayer harpoons", "shot", 140, 7000, "A set of ornamented harpoons engraved with design of sea animals. This magical weapon replenish ammunition in its stack naturally allowing the hunter to fight unimpeded and smite the corrupt.", "Throwing");
-			withTag(ItemTags.I_LEGENDARY);
+			withTag(I_LEGENDARY);
 		}
 		
 		override public function get attack():Number {

@@ -1,22 +1,17 @@
 package classes.Items.Weapons
 {
+import classes.Items.IELib;
 import classes.Items.Weapon;
 import classes.Scenes.SceneLib;
-import classes.PerkLib;
 
 public class ScarredBlade extends Weapon
 	{
 		
 		public function ScarredBlade()
 		{
-			super("ScarBld", "ScarBlade", "scarred blade", "a scarred blade", "slash", 10, 800, "This saber, made from lethicite-imbued metal, eagerly seeks flesh; it resonates with disdain and delivers deep, jagged wounds as it tries to bury itself in the bodies of others. It only cooperates with the corrupt.", "", "Sword");
-		}
-		
-		override public function get attack():Number {
-			var temp:int = 10 + int((game.player.cor - 70) / 3);
-			if (temp < 10) temp = 10;
-			if (game.player.hasPerk(PerkLib.HiddenJobSwordImmortal)) temp = 20;
-			return temp;
+			super("ScarBld", "ScarBlade", "scarred blade", "a scarred blade", "slash", 10, 800, "This saber, made from lethicite-imbued metal, eagerly seeks flesh; it resonates with disdain and delivers deep, jagged wounds as it tries to bury itself in the bodies of others. It only cooperates with the corrupt.", WT_SWORD, WSZ_MEDIUM);
+			withEffect(IELib.Require_Cor, 66);
+			withEffect(IELib.AttackBonus_Cor, 1/3);
 		}
 		
 		override public function canEquip(doOutput:Boolean):Boolean {
@@ -24,5 +19,6 @@ public class ScarredBlade extends Weapon
 			if (doOutput) SceneLib.sheilaScene.rebellingScarredBlade(true);
 			return false;
 		}
+		
 	}
 }

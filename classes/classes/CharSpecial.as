@@ -2176,7 +2176,7 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 		
 		private function customKhovel():void {
 			// Feral Goblin Wolf-Girl Alchemist
-			// Full Goblin, Wolf Claws/Legs and with Fenrir Ice Shards. Feral upbringing. 
+			// Full Goblin, Wolf Claws/Legs and with Fenrir Ice Shards. Feral upbringing.
 			
 			// ascension cleanup
 			while (player.hasVagina())
@@ -2212,8 +2212,8 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			player.tone = 20;
 			player.skin.setAllProps({base:{adj:"smooth",color:"emerald"}}); // Goblin Skin Color
 			player.hairColor   = "silver blonde";
-			player.hairType    = Hair.CRAZY; // Gremlin Hair. 
-			player.hairLength  = 42; // Long compared to height. Never had a haircut. 
+			player.hairType    = Hair.CRAZY; // Gremlin Hair.
+			player.hairLength  = 42; // Long compared to height. Never had a haircut.
 			player.femininity  = 20; // Not so Femenine looking when raised by wolves
 			player.beardLength = 0;
 			player.beardStyle  = 0;
@@ -2231,8 +2231,8 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			player.rearBody.type = RearBody.FENRIR_ICE_SPIKES;
 			player.strStat.train.value += 10; // Being raised by Wolves has it's advantages
 			player.touStat.train.value += 10;
-			player.speStat.train.value += 10; 
-			//player.intStat.train.value = 55; 
+			player.speStat.train.value += 10;
+			//player.intStat.train.value = 55;
 			//player.wisStat.train.value = 55;
 			player.libStat.train.value = 100;
 			
@@ -2298,7 +2298,7 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			
 			/* Rarity : RARITY_DIVINE, RARITY_LEGENDARY, RARITY_RARE, RARITY_MAGICAL, RARITY_COMMON
 			 * quality : ngLevel * 2
-			 * 
+			 *
 		    */
 
 			
@@ -2327,3 +2327,4 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 	}
 
 }
+

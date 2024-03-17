@@ -365,7 +365,25 @@ public class GameSettings extends BaseContent {
 		// items
 		for (k in ItemType.getItemLibrary()) {
 			var it:ItemType = ItemType.lookupItem(k);
-			entry = {name: it.longName, id: k};
+			var itemEffects:Array = [];
+			for each (var ie:ItemEffect in it.itemEffects) {
+				var jie:Object = {name:ie.type.name, power:ie.power};
+				function sanitizeIEValue(value:*):* {
+					if (value is Race) return "Race["+(value as Race).name+"]"
+					return value;
+				}
+				if (ie.value1 !== undefined) jie.value1 = sanitizeIEValue(ie.value1);
+				if (ie.value2 !== undefined) jie.value2 = sanitizeIEValue(ie.value2);
+				if (ie.value3 !== undefined) jie.value3 = sanitizeIEValue(ie.value3);
+				if (ie.value4 !== undefined) jie.value4 = sanitizeIEValue(ie.value4);
+				itemEffects.push(jie);
+			}
+			entry = {name: it.longName, id: k, tags:keys(it.tags), effects:itemEffects};
+			try {
+				entry.desc = it.description;
+			} catch (e:*) {
+				entry.desc = '';
+			}
 			if (it is Armor) {
 				entry.category = "armor";
 				gamedata.items.armor[k] = entry;
@@ -399,6 +417,9 @@ public class GameSettings extends BaseContent {
 				gamedata.items.vehicle[k] = entry;
 			} else if (it is Weapon) {
 				entry.category = "weapon";
+				entry.type = (it as Weapon).type;
+				entry.size = (it as Weapon).size;
+				entry.dual = (it as Weapon).isDual();
 				gamedata.items.weapon[k] = entry;
 			} else if (it is WeaponRange) {
 				entry.category = "weaponrange";

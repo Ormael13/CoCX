@@ -19,7 +19,6 @@ import classes.EngineCore;
 import classes.GeneticMemories.BallsMem;
 import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Consumable;
-import classes.Items.ItemTags;
 import classes.Races.KirinRace;
 import classes.Scenes.Metamorph;
 import classes.StatusEffects;
@@ -28,7 +27,7 @@ import classes.VaginaClass;
 public class AsumaKirin extends Consumable {
 	public function AsumaKirin() {
 		super("Asumaki", "Asumaki", "a bottle of Asuma Kirin", 20, "A glass bottle containing a golden liquid. The label features various symbols that you don't know, but you can still read Azuma Kirin written in golden letters! Even closed, you can still smell alcohol, musk and ozone on this thing!");
-		withTag(ItemTags.U_TF);
+		withTag(U_TF);
 		refineableInto(
 				AlchemyLib.DEFAULT_SUBSTANCES_DROP_TABLE,
 				AlchemyLib.MULTIRACE_ESSENCE_DROP_TABLE(

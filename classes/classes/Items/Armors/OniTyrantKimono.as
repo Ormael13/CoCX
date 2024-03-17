@@ -5,7 +5,6 @@ package classes.Items.Armors
 {
 	import classes.CoC;
 	import classes.Items.Armor;
-import classes.Items.ItemTags;
 import classes.PerkLib;
 import classes.Player;
 	
@@ -15,8 +14,8 @@ import classes.Player;
 		public function OniTyrantKimono()
 		{
 			super("OT Kimo", "OniTyrantKimono", "Oni Tyrant kimono", "a oni tyrant kimono", 30, 50, 27000, "This deceptively sturdy kimono belonged to a tyrant amonst oni nobility. In their homeland oni rules over lesser race with an iron fist. Might makes right or so they say.", "Light");
-			withTag(ItemTags.A_AGILE);
-			withTag(ItemTags.I_LEGENDARY);
+			withTag(A_AGILE);
+			withTag(I_LEGENDARY);
 			withPerk(PerkLib.OniTyrantKimono, 0, 0, 0, 0);
 		}
 		

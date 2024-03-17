@@ -1,8 +1,7 @@
 package classes.Items.WeaponsRange 
 {
 	import classes.Items.WeaponRange;
-	import classes.Items.ItemTags;
-	import classes.Player;
+		import classes.Player;
 	
 	/**
 	 * ...
@@ -17,7 +16,7 @@ package classes.Items.WeaponsRange
 					"The ebony wood of this corrupt bow seems to ignore light. Arrows fired with this weapon seem to have a malignant mind of their own, striking down the weak with brutal efficiency.",
 					"Bow"
 			);
-			withTag(ItemTags.I_LEGENDARY);
+			withTag(I_LEGENDARY);
 		}
 		override public function get attack():Number{
 			var boost:int = 0;

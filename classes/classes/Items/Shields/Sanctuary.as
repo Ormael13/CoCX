@@ -5,7 +5,6 @@
 package classes.Items.Shields
 {
 import classes.Items.Shield;
-import classes.Items.ItemTags;
 import classes.PerkLib;
 
 	public class Sanctuary extends Shield
@@ -17,7 +16,7 @@ import classes.PerkLib;
 					"Shining in snow-white ivory with a silver trim, this legendary shield is said to heal and protect a knight of pure heart. Embellishments carved on the ivory cover most of its surface.",
 					"Large");
 			withPerk(PerkLib.Sanctuary, 1, 0, 0, 0);
-			withTag(ItemTags.I_LEGENDARY);
+			withTag(I_LEGENDARY);
 		}
 		
 		override public function get block():Number {

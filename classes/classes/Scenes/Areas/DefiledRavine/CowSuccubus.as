@@ -87,7 +87,6 @@ use namespace CoC;
 			this.weaponName = "succubi whip";
 			this.weaponVerb="sexy whipping";
 			this.weaponAttack = 34;
-			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "demonic skin";
 			this.armorDef = 50;

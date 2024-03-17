@@ -19,7 +19,7 @@ import mx.formatters.NumberFormatter;
  * - **Timing type** - Duration of the ability:<ul>
  *     <li> Instant (happens immediately), </li>
  *     <li> Lasting (started and lasts for some time and cannot be cast multiple times),</li>
- *     <li> Toggle (lasting that could be toggle off by player). </li>
+ *     <li> Toggle (lasting that could be toggle off by player). </li></ul>
  * - **Tags** - A set of extra flags (damaging or buffing, primary element, AoE and others) that could be used in checks, reactions, or modifiers
  *
  * Subclasses MUST implement:
@@ -243,7 +243,7 @@ public class CombatAbility extends BaseCombatContent {
 	public var processPostCallback:Boolean = true;
 	//Used to tell the system the type of damage the last used ability inflicted
 	protected var lastAttackType:int = 0;
-	//Custom toggle to allow an ability to hit an invisible enemy 
+	//Custom toggle to allow an ability to hit an invisible enemy
 	protected var affectsInvisible:Boolean = false;
 	
 	public function CombatAbility(
@@ -351,7 +351,7 @@ public class CombatAbility extends BaseCombatContent {
 				durationEnd(display);
 			}
 		}
-        
+  
 	}
 	
 	/**

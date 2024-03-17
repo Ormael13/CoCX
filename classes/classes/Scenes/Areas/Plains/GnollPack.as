@@ -2,7 +2,7 @@
  * ...
  * @author Coalsack
  */
-package classes.Scenes.Areas.Plains 
+package classes.Scenes.Areas.Plains
 {
 	import classes.*;
 	import classes.BodyParts.Butt;
@@ -95,7 +95,7 @@ package classes.Scenes.Areas.Plains
 			SceneLib.sidonieFollower.lostGnollPackFight();
 		}
 		
-		public function GnollPack() 
+		public function GnollPack()
 		{
 			this.a = "the ";
 			this.short = "gnoll pack";
@@ -118,7 +118,6 @@ package classes.Scenes.Areas.Plains
 			this.weaponName = "twisted club";
 			this.weaponVerb="smash";
 			this.weaponAttack = 11;
-			this.weaponPerk = "";
 			this.weaponValue = 25;
 			this.armorName = "skin";
 			this.armorDef = 7;

@@ -29,7 +29,6 @@ import classes.Items.EnchantmentType;
 import classes.Items.FlyingSwords;
 import classes.Items.HeadJewelry;
 import classes.Items.ItemConstants;
-import classes.Items.ItemTags;
 import classes.Items.Jewelry;
 import classes.Items.MiscJewelry;
 import classes.Items.Shield;
@@ -644,7 +643,7 @@ public class DebugMenu extends BaseContent
 				if (item is HairDye) {
 					dyeArray.push(item);
 				} else if (materialArray.indexOf(item) == -1 && rareArray.indexOf(item) == -1) {
-					if (item.hasTag(ItemTags.U_TF)) {
+					if (item.hasTag(ItemConstants.U_TF)) {
 						transformativeArray.push(item);
 					} else
 						consumableArray.push(item);

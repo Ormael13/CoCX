@@ -1,8 +1,8 @@
 package classes.Items.Weapons
 {
 import classes.EventParser;
+import classes.Items.IELib;
 import classes.Items.Weapon;
-import classes.Items.ItemTags;
 import classes.PerkLib;
 import classes.TimeAwareInterface;
 
@@ -25,10 +25,12 @@ public class NocturnusStaff extends Weapon implements TimeAwareInterface
 		public function NocturnusStaff()
 		{
 			super("N.Staff", "N. Staff", "nocturnus staff", "a nocturnus staff", "bonk", 23, 3680,
-					"This corrupted staff is made in black ebonwood and decorated with a bat ornament in bronze. Malice seems to seep through the item, devouring the wielder’s mana to channel its unholy power.",
-					"Large, Staff, +200% Spell cost, Spellpower bonus for corruption", WT_STAFF);
+					"This corrupted staff is made in black ebonwood and decorated with a bat ornament in bronze. Malice seems to seep through the item, devouring the wielder’s mana to channel its unholy power. (+200% Spell cost, Spellpower bonus for corruption)",
+					WT_STAFF, WSZ_LARGE);
 			withBuff('spellpower', +1.0);
-			withTag(ItemTags.I_LEGENDARY);
+			withTag(I_LEGENDARY);
+			withEffect(IELib.AttackBonus_Cor,1/10);
+			withEffect(IELib.ScaleAttack_Str,60);
 			EventParser.timeAwareClassAdd(this);
 		}
 		
@@ -51,21 +53,6 @@ public class NocturnusStaff extends Weapon implements TimeAwareInterface
             }
             lastCor = game.player.cor;
         }
-
-		override public function get attack():Number {
-			var boost:int = 0;
-			var scal:Number = 20;
-			if (game.player.str >= 50) {
-				boost += 5;
-				scal -= 5;
-			}
-			if (game.player.str >= 25) {
-				boost += 5;
-				scal -= 5;
-			}
-			boost += Math.round(game.player.cor / scal);
-			return (3 + boost); 
-		}
 
         override public function get descBase():String {
             if (game && game.player)

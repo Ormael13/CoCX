@@ -7,6 +7,7 @@ import classes.Items.EnchantmentLib;
 import classes.Items.EnchantmentType;
 import classes.Items.Equipable;
 import classes.Items.IDynamicItem;
+import classes.Items.IELib;
 import classes.Items.Weapon;
 
 public class DynamicWeapon extends Weapon implements IDynamicItem {
@@ -71,8 +72,9 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		var buffs:Object        = parsedParams.buffs;
 		var verb:String         = subtype.verb;
 		var type:String         = subtype.type;
-		var perks:Array         = (subtype.perks || []).slice();
-		var tags:Object         = subtype.tags || {};
+		var size:int            = valueOr(subtype.size, WSZ_LARGE);
+		var dual:Boolean        = valueOr(subtype.dual, false);
+		var tags:Array          = subtype.tags || [];
 		var attack:Number       = subtype.attack;
 		if (parsedParams.error) {
 			trace("[ERROR] Failed to parse " + id + " with error " + parsedParams.error);
@@ -93,8 +95,9 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 				Math.max(1, attack),
 				Math.max(1, value),
 				desc,
-				perks.join(", "),
-				type
+				type,
+				size,
+				dual
 		);
 		
 		DynamicItems.postConstruct(this, tags, buffs);
@@ -153,15 +156,6 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 		return DynamicItems.copyWithoutEnchantment(this, e);
 	}
 	
-	override public function get attack():Number {
-		var attack:Number = super.attack;
-		var e:SimpleRaceEnchantment = enchantmentOfType(EnchantmentLib.RaceAttackBonus) as SimpleRaceEnchantment;
-		if (e) {
-			attack *= 1 + 0.05 * e.power * game.player.racialTier(e.race);
-		}
-		return attack;
-	}
-	
 	override public function equipText():void {
 		DynamicItems.equipText(this);
 	}
@@ -196,9 +190,11 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 	 * - verb: used in attack texts, ex. "slash"
 	 * - desc: description, can contain templates
 	 * - type: Weapon class (WT_XXXX)
-	 * - (optional) perks: Array of weapon perks (WP_XXXX)
+	 * - (optional) size: WSZ_XXXX, default WSZ_MEDIUM
+	 * - (optional) dual: Boolean, default faluse
 	 * - (optional) tags: Array of item tags (ItemTag.XXXX)
 	 * - (optional) quality: force quality
+	 * - (optional) effects: item effects, array of pairs [ItemEffectType, value]
 	 * - attack: Base attack power
 	 * - qattack: Attack-per-quality (0.25 = +25% per +1 qualiity)
 	 * - value: Base cost in gems
@@ -210,7 +206,7 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 			shortName: "Dagger",
 			verb: "stab",
 			desc: "A small blade. Preferred weapon for the rogues.",
-			perks: [WP_SMALL],
+			size: WSZ_SMALL,
 			type: WT_DAGGER,
 			attack: 3,
 			qattack: 0.25,
@@ -222,7 +218,7 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 			shortName: "Flail",
 			verb: "smash",
 			desc: "This is a flail, a weapon consisting of a metal spiked ball attached to a stick by chain. Be careful with this as you might end up injuring yourself.",
-			perks: [WP_WHIPPING],
+			tags: [W_WHIPPING],
 			type: WT_MACE_HAMMER,
 			attack: 10,
 			qattack: 0.25,
@@ -234,7 +230,10 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 			shortName: "Katana",
 			verb: "keen cut",
 			desc: "A curved bladed weapon that cuts through flesh with the greatest of ease.",
-			perks: [WP_LARGE, WP_AP10],
+			size: WSZ_LARGE,
+			effects: [
+				[IELib.ArmorReduction, 10]
+			],
 			type: WT_DUELING,
 			attack: 17,
 			qattack: 0.25,
@@ -258,7 +257,9 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 			verb: "stab",
 			desc: "A staff with a sharp blade at the tip designed to pierce through the toughest armor.",
 			type: WT_SPEAR,
-			perks: [WP_AP40],
+			effects: [
+					[IELib.ArmorPenetration, 40]
+			],
 			attack: 7,
 			qattack: 0.25,
 			value: 400
@@ -280,7 +281,7 @@ public class DynamicWeapon extends Weapon implements IDynamicItem {
 			shortName: "Uchigatana",
 			verb: "keen cut",
 			desc: "A one-handed curved bladed weapon that cuts through flesh with the greatest of ease. Can also be wielded with both hands.",
-			perks: [WP_HYBRID],
+			tags: [W_HYBRID],
 			type: WT_DUELING,
 			attack: 15,
 			qattack: 0.25,

@@ -1,8 +1,7 @@
 package classes.Items.WeaponsRange 
 {
 	import classes.Items.WeaponRange;
-	import classes.Items.ItemTags;
-	import classes.Player;
+		import classes.Player;
 	
 	/**
 	 * ...
@@ -17,7 +16,7 @@ package classes.Items.WeaponsRange
 					"The white sandalwood of this blessed bow seems to draw light in. The radiant arrows fired with this holy weapon strike true as if guided by divine hands.",
 					"Bow"
 			);
-			withTag(ItemTags.I_LEGENDARY);
+			withTag(I_LEGENDARY);
 		}
 		override public function get attack():Number{
 			var boost:int = 0;

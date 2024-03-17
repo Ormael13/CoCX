@@ -25,7 +25,6 @@ import classes.BodyParts.UnderBody;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.*;
-import classes.Items.ItemTags;
 import classes.Items.JewelryLib;
 import classes.Races.ElementalRace;
 import classes.Scenes.Combat.Combat;
@@ -97,20 +96,17 @@ public class Creature extends Utils
 		private var _weaponName:String = "";
 		private var _weaponVerb:String = "";
 		private var _weaponAttack:Number = 0;
-		private var _weaponPerk:String = "";
 		private var _weaponType:String = "";
 		private var _weaponValue:Number = 0;
 		public function get weaponName():String { return _weaponName; }
 		public function get weaponVerb():String { return _weaponVerb; }
 		public function get weaponAttack():Number { return _weaponAttack; }
 		//Warning: Deprecated since 0.8s2. New tagging system uses this args. DO NOT USE, MUST REPLACE WITH weaponSpecials
-		public function get weaponPerk():String { return _weaponPerk; }
 		public function get weaponType():String { return _weaponType; }
 		public function get weaponValue():Number { return _weaponValue; }
 		public function set weaponName(value:String):void { _weaponName = value; }
 		public function set weaponVerb(value:String):void { _weaponVerb = value; }
 		public function set weaponAttack(value:Number):void { _weaponAttack = value; }
-		public function set weaponPerk(value:String):void { _weaponPerk = value; }
 		public function set weaponValue(value:Number):void { _weaponValue = value; }
 		//Weapon range
 		private var _weaponRangeName:String = "";
@@ -680,7 +676,7 @@ public class Creature extends Utils
 					if (wis >= 81) max += Math.round(wis);
 					if (wis >= 101) max += Math.round(wis) * Math.floor( (wis-100)/50 + 1);
 				}
-			} 
+			}
 			if (hasPerk(PerkLib.IcyFlesh)) {
 				if (perkv1(IMutationsLib.FrozenHeartIM) >= 3) {
 					if (hasPerk(PerkLib.TankI)) max += Math.round(inte*18);
