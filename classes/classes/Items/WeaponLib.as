@@ -413,7 +413,7 @@ public final class WeaponLib extends ItemConstants
 				WT_SWORD, WSZ_MEDIUM)
 				.withTag(I_LEGENDARY)
 				.withEffect(IELib.Require_CorBelow, 33)
-				.withEffect(IELib.AttackBonus_Cor, 1/3) as Weapon;
+				.withEffect(IELib.AttackBonus_Cor, -1/3) as Weapon;
 		public const FLAIL  :Weapon = findCommonDynamicWeapon("flail");
 		public const FLYINGC:Weapon = new Weapon(
 				"FlyingC", "FlyingClaw", "Flying Claw", "a flying claw", "rend", 4, 640, "A metal claws that is tied to the wrist by an 8 ft. cloth.  Could be used to attack few enemies at once.", WT_EXOTIC, WSZ_SMALL)
@@ -481,7 +481,7 @@ public final class WeaponLib extends ItemConstants
 				.withBuff('spellpower', +2)
 				.withEffect(IELib.Bleed, 10)
 				.withEffect(IELib.ScaleAttack_Str, 100)
-				.withEffect(IELib.AttackBonus_Cor, 10)
+				.withEffect(IELib.AttackBonus_Cor, 0.1)
 				.withTags(W_STAFFPART, W_WHIRLWIND, I_LEGENDARY) as Weapon;
 		public const HNTCANE:Weapon = new HuntsmansCane();
 		public const HSWORDS:Weapon = new Weapon(

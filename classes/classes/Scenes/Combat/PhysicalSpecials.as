@@ -3755,7 +3755,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		fatigue(30, USEFATG_PHYSICAL);
 		clearOutput();
-		outputText("You mentally reach for your ring, and you feel a surge of anger, love and fear. You can all but feel Kiha’s wingbeats, the sensation making your own shoulder blades itch. You can’t relax, not with [enemy] in front of you, but you know that help is on the way!")
+		outputText("You mentally reach for your ring, and you feel a surge of anger, love and fear. You can all but feel Kiha’s wingbeats, the sensation making your own shoulder blades itch. You can’t relax, not with [themonster] in front of you, but you know that help is on the way!")
 		player.createStatusEffect(StatusEffects.CallOutKiha, 0, 0, 0, 0);
 		outputText("\n\n");
 		enemyAI();

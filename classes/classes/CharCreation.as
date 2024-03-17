@@ -1415,6 +1415,8 @@ import classes.Scenes.Combat.CombatAbility;
 			else addButtonDisabled(2, "Werewolf", "You already have this bloodline!");
 			if (!player.hasPerk(PerkLib.BloodlineWereshark)) addButton(3, "Wereshark", confirmBloodline2, PerkLib.WeresharksDescendant).hint("(+2 to wereshark score)");
 			else addButtonDisabled(3, "Wereshark", "You already have this bloodline!");
+			if (!player.hasPerk(PerkLib.BloodlineRatatoskr)) addButton(4, "Ratatoskr", confirmBloodline2, PerkLib.RatatoskrsDescendant).hint("(+2 to ratatoskr score)");
+			else addButtonDisabled(4, "Ratatoskr", "You already have this bloodline!");
 			addButton(13, "-1-", chooseBloodline);
 			addButton(14, "None", noBloodlineAtAllCuzYouAscendedTooManyTimesAlready).hint("You either cannot add a new unstable bloodline, or you have a stable bloodline. (It mean you only will get some bonus perk points for start instead of new bloodline.)");
 		}
@@ -1474,6 +1476,9 @@ import classes.Scenes.Combat.CombatAbility;
 					break;
 				case PerkLib.WeresharksDescendant:
 					outputText("Your ancestor was a wereshark?");
+					break;
+				case PerkLib.RatatoskrsDescendant:
+					outputText("Your ancestor was a ratatoskr?");
 					break;
 				default:
 					outputText("Your ancestor was a hydra?");
