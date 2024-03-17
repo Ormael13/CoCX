@@ -13,7 +13,7 @@ package classes.Items.Weapons
 		
 		public function SoulDrill()
 		{
-			super("SDrill", "SoulDrill", "soul drill", "a soul drill", "pierce", 20, 9600, "Soul Drill - the best solution for 'my drill is my soul' cases on this side of Mareth!  This huge hand drill could be powered by soulforce to spin. The more you power it up the faster it spin.", "Large", "Exotic");
+			super("SDrill", "SoulDrill", "soul drill", "a soul drill", "pierce", 20, 9600, "Soul Drill - the best solution for 'my drill is my soul' cases on this side of Mareth!  This huge hand drill could be powered by soulforce to spin. The more you power it up the faster it spin.", WT_EXOTIC, WSZ_LARGE);
 		}
 		
 		override public function get attack():Number {

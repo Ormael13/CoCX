@@ -180,7 +180,7 @@ public class DilapidatedShrine extends BaseContent
 				try{
 					if (player.itemSlot(i).itype is Weapon){
 						itemClassReplace = player.itemSlot(i).itype as Weapon;
-						weaponType = itemClassReplace['type'].split(',')[0];
+						weaponType = itemClassReplace.type;
 						//outputText(weaponType + "\n");
 					}
 					else if (player.itemSlot(i).itype is WeaponRange){

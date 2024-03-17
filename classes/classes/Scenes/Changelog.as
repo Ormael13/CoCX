@@ -124,7 +124,7 @@ public class Changelog extends BaseContent
 			outputText("-10 new achievments. (4 shadow one)\n");
 			outputText("-Killing Intent perk now is gained after having at least 10 kills on kill counter.\n");
 			outputText("-On stats page in kill counts section was added total kills count (maybe some would want to see total count without need to add all seperate kill counts and maybe in future we would get more kill counts...)\n");
-			outputText("-Added new option/toggle in Settings: Angelic Faction - by default it removes all angelic presence ingame and need to be toggled on to find ANY angeloid/angel ingame. So if you not able to finish some task you may now thing... is it becasue i disliked angels so much that i wanted them be-gone and now i pay price for it?\n");
+			outputText("-Added new option/toggle in Settings: Angelic Faction - by default it active and all angelic present ingame and need to be toggled on to disable chance to meet ANY angeloid/angel ingame.\n");
 			outputText("-All Angel Faction enemies now can drop randomized item like Demon Faction. Due to higher difficulty of defeating them their have higher chance to drop that gear and general chances for better prefixxes on items are increased.\n");
 			outputText("-I moved the code for the tavern to its own file, added checks to handle additional ear types, and finally introduced Xianxia early via a 'rumor' in the tavern. (jfmherokiller)\n");
 			outputText("-PC can buy now in the same place as Simple Alembic or Simple Furnance 4 basic versions of Alembic Catalysts. They costs 1000 gems each and can be reused increasing chance to get the desired item when decomposing TF item by 1,5x.\n");
@@ -144,7 +144,7 @@ public class Changelog extends BaseContent
 			outputText("-Changes to White Book, Black Book, Grey Book, Red Manuscript and Crimson Jade. Each of these items now allow to have choice: no use it, use only stat increasing part or if meet req. choose which spell, soulskill to learn. It mean now can learn even the last on the list spell if stat is high enought without need to use 10+ items before that.\n");
 			outputText("-Added short explanation how to increase 'Additional Soulforce from training' on Soulforce page.\n");
 			outputText("-New TF item (by Shigure): Moth's Dust. Buyable in Moga Hen shop. Using this item will turn PC into moth. Moth bonuses at 10 pts in racial score (scalable): -30% to Tou multi, +150% to Spe multi, +70% to Wis multi, +30% to Lib multi, +70 to sensitivity.\n");//Dropped by Corrupted Troll enemies.
-			outputText("-Added Descendant and Bloodline perks for Melkie, Hydra, Salamander races.\n");
+			outputText("-Added Descendant and Bloodline perks for Melkie, Hydra, Salamander, Werewolf, Wereshark, Ratatoskr races.\n");
 			outputText("-Ng+ tiers will not cause enemies stats going higher replaced by higher DR effect.\n");
 			outputText("-Kitsune IM's have their effects grouped to Parathyroid one increase resources generation and boost foxfire and Thyroid to boost other kitsune specials. One of req. for Parathyroid IM changed to be kitsune(-like) race.\n");
 			outputText("-Kitsumori no longer gain points to race score from Kitsune Thyroid IM.\n");
@@ -171,6 +171,31 @@ public class Changelog extends BaseContent
 			outputText("-Implemented the revenge mechanic. Cat bell now has a sprite. Added all possible missing bodyparts for Marilith. (Liadri)\n");
 			outputText("-New event perk: It's Zerking Time!!! Gained by spending 1 super perk point and having 'Asura Toughness' super perk. Effects: If you can use Berzerker or Lustzerker they would be activated with Asura Form for no additional cost (with Prestige Job: Berserker will be activated G2). ");
 			outputText("Asura Form increase to physical might raise to 240%/120%/80% of core str/tou/spe and generate five pairs of semi-transparent arms. (+10% of OverMax Wrath)\n");
+			outputText("-Most Enemy attack should be now actually has to pass PC's evasion/parry/block checks (Formerly almost everyone has guaranteed hit) Lia's retaliation function should work properly now. (NUZ/Shirane)\n");
+			outputText("-Zetaz Pod Bad End/Alternate End is finally BACK!!!! (NUZ/Shirane)\n");
+			outputText("-New mutation perk: Lizan Marrow (Final Form). Req. Lizan Marrow (Evolved) and lvl 90+. Effects: Regenerates 2% of HP per round in combat and 4% of HP per hour. Additionaly your limit for innate self-regeneration rate increased. When below 60%/20% of max HP regeneration provided by Lizan regeneration is 2x/3x. Could slowly recover lost bodyparts (~0.5/1% per combat round/hour). ");
+			outputText("You can't lose by HP until your health drops into the negatives more than 10% of max HP, +10% OverMax HP.\n");
+			outputText("-Lizan Marrow IM would now give small tou multi bonus: 10% / 30% / 70% / 150%. It % of HP regenerated was corrected to match description of mutation.\n");
+			outputText("-New mutation perk: Human Versatility (Evolved). Req. Human Versatility (Primitive) and lvl 60+. Effects: Mastery gains increased by 3 point or in case of multiplier +3 to multiplier. Decrease needed exp to lvl up weapon/lifeskill masteries and have 20% chance to gain 3x more XP for Mastery.\n");
+			outputText("-Item Effect system code changes. (aimozg)\n");
+			outputText("-Removed form some races req. to reach x points in racial score to get points for some bodyparts varaints.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -188,14 +213,10 @@ public class Changelog extends BaseContent
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Demojay) (jfmherokiller) (NUZ/Shirane) (Xetaxheb)
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed bugs: Arigean above Recruit rank not immune to tf-ing effects, deer arms tf unlocking canine arms MM, unable to find tel'adre again after first time seeing it with too high corruption or other factor that not allowed entrance; Arigean above recruit rank marking, eye color and aura with mismatching colors; demon/arigean arms MM option giving instead devil/abyssal shark arms, ");
 			outputText("Zenji training stats not having gains decrease from +4 to +1 for repeated training before daily reset for other than wisdom stats, resources not been recovered after using specials/soulskills/spells, nail buy menu at carpenter having misleading text, combat wounds % display at stats page been 100x lower, Sandworm PC not counting toward checks for having natural armor, demon face tf");
 			outputText("giving arigean face instead, gym weight lifting capping tone at 85, when building cabin text not picking correct name for Jojo/Joy line, Magical Fertility & Magical Virility perk desc bonus value display error, differences between desc dmg reduction and actualt DR from main difficulty setting, sneak melee/range attack diff between displayer and actualy dealt dmg to enemy, ");
-			outputText("Veseshe preset giving History: Scout instead of History: Whore, Tyrantia training capping at 20 sessions, elfs IM instead of orca/whale IM increasing thickness cap\n\n");
+			outputText("Veseshe preset giving History: Scout instead of History: Whore, Tyrantia training capping at 20 sessions, elfs IM instead of orca/whale IM increasing thickness cap, Belisa holy band button typo, parser in Call Kiha text\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8w-z:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -266,17 +287,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -311,11 +322,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

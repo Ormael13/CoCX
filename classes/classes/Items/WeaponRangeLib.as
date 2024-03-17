@@ -4,7 +4,6 @@
  */
 package classes.Items
 {
-import classes.Items.Weapons.DualBFSword;
 import classes.Items.WeaponsRange.*;
 import classes.PerkLib;
 
@@ -109,7 +108,19 @@ public final class WeaponRangeLib extends ItemConstants
 		public const SSKETCH:WeaponRange = new WeaponRange("SSketch", "S.Sketchbook", "Sage’s Sketchbook", "a Sage’s Sketchbook", "nothing", 0, 500, "Strangely, this ornate blue book is completely blank.  Yet, as you flip through it, you occasionally see magical glyphs and complicated diagrams out of the corner of your eye, only to disappear as you focus.  Still, the arcane energies within the book could augment your spellcraft.", "Tome").withBuffs({'spellpower': + 0.6}) as WeaponRange;
 
 		public const NEKONOM:WeaponRange = new WeaponRange("MissingNo", "MissingNo", "MissingNo", "MissingNo", "nothing", 0, 500, "This is a deprecated weapon no longer in use it will be removed from the game in a few version. Please remove it from your character and delete it for safety", "Tome");
-
+		
+		//===================//
+		// Single/Dual pairs //
+		//===================//
+		
+		public const SingleDualPairList:/*Array*/Array = [
+			[SIXSHOT, TWINSIXS],
+			[M1CERBE, TM1CERB],
+			[ALAKABL, DALAKABL],
+			[DESEAGL, TDEEAGL]
+			//[HARKON1, HARKON2],
+		];
+		
 		/*
 		private static function mk(id:String,shortName:String,name:String,longName:String,verb:String,attack:Number,value:Number,description:String,perk:String=""):Weapon {
 			return new Weapon(id,shortName,name,longName,verb,attack,value,description,perk);

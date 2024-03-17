@@ -63,6 +63,7 @@ public class WeresharkRace extends Race {
 				.corruption(AT_LEAST(80), +1)
 				.hasAnyPerk([PerkLib.Selachimorphanthropy, PerkLib.SelachimorphanthropyDormant], +2, -11);
 		
+		addBloodline(PerkLib.WeresharksDescendant,PerkLib.BloodlineWereshark);
 		addMutation(IMutationsLib.FerasBirthrightIM);
 		addMutation(IMutationsLib.SharkOlfactorySystemIM);
 		

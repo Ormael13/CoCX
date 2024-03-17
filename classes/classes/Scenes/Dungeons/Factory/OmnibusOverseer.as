@@ -131,7 +131,6 @@ public class OmnibusOverseer extends Monster
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
 			this.weaponAttack = 15;
-			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "demonic skin";
 			this.armorDef = 22;

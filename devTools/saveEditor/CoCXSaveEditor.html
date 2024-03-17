@@ -56,6 +56,10 @@
                 <nav-tab v-model="tab" code="world" icon="mdi-earth" label="World"></nav-tab>
                 <nav-tab v-model="tab" code="other" icon="mdi-dots-horizontal" label="Other"></nav-tab>
             </v-list>
+            </v-divider v-if="loaded">
+            <v-list dense nav>
+                <nav-tab v-model="tab" code="itemdatabase" icon="mdi-sword" label="Item Database"></nav-tab>
+            </v-list>
         </v-navigation-drawer>
 
         <v-main>
@@ -1116,6 +1120,29 @@
                         controls
                         -->
                     </v-tab-item>
+                    <v-tab-item value="itemdatabase">
+                        <h1>Item database</h1>
+                        <v-tabs v-model="itemDBTab">
+                            <v-tab>Weapons</v-tab>
+                            <v-tab>Weapons (Ranged)</v-tab>
+                        </v-tabs>
+                        <div v-for="item in Gamedata.items.weapon">
+                            <h4>{{item.id}} ({{item.name}})</h4>
+                            <!--<p>
+                                <b>Type:</b> {{item.dual?'Dual':''}} {{['Small','Medium','Large','Massive'][item.size]}} {{item.type}}
+                                <br/>
+                                <b>Base Attack:</b> {{item.baseAttack}}
+                                <br/>
+                                <b>Tags:</b> {{item.tags.join()}}
+                                <br/>
+                                <b>Effects:</b> {{item.effects.length == 0 ? '-' : ''}}
+                                <div v-for="ie in item.effects">
+                                    - {{ie.desc}} ({{ie.name}} {{ie.power}})
+                                </div>
+                            </p>-->
+                            <p v-html="item.desc.replace(/\n/g,'<br>')"></p>
+                        </div>
+                    </v-tab-item>
                 </v-tabs-items>
             </v-container>
         </v-main>
@@ -1483,6 +1510,9 @@
 		if (pattern.base) Gamedata.bptypes.pattern_base[pattern.value] = pattern;
 		if (pattern.coat) Gamedata.bptypes.pattern_coat[pattern.value] = pattern;
 	}
+	for (let category of Object.keys(Gamedata.items)) {
+		Gamedata.items[category] = Object.fromEntries(Object.entries(Gamedata.items[category]).sort());
+	}
 
 	function itemSelector(categories) {
 		return categories.flatMap(category =>
@@ -1814,6 +1844,8 @@
 			})),
 			// World tab
 			worldTab: Gamedata.storyGroups[0][0],
+            // Other
+            itemDBTab: 0,
 		},
 		watch: {
 			tab(newValue) {

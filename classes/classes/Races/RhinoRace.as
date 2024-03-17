@@ -41,8 +41,7 @@ public class RhinoRace extends Race {
 				.earType(Ears.RHINO, +1)
 				.tailType(Tail.RHINO, +1)
 				.faceType(Face.RHINO, +1)
-				.hornType(Horns.RHINO, +1);
-		addScoresAfter(2)
+				.hornType(Horns.RHINO, +1)
 				.skinColor1("gray", +1)
 				.hasCockOfType(CockTypesEnum.RHINO, +1);
 		

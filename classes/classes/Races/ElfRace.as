@@ -46,20 +46,15 @@ public class ElfRace extends Race {
 				.armType(Arms.ELF, +1)
 				.legType(LowerBody.ELF, +1)
 				.hairType(Hair.SILKEN, +1)
+				.hairColor1(ANY(ElfHairColors), +1)
+				.skinColor1(ANY(ElfSkinColors), +1)
 				.noWings(+1)
+				.tone(AT_MOST(60), +1)
+				.thickness(AT_MOST(50), +1)
+				.plainSkinOfAdj("flawless", +1)
 				.hasPerk(PerkLib.FlawlessBody, +1)
 				.hasPerk(PerkLib.ElvenSense, +1)
 				.hasPerk(PerkLib.NaturalSpellcasting, +1)
-				.customRequirement("","not a wood elf",
-						function (body:BodyData):Boolean {
-							return !body.player.hasPerk(PerkLib.BlessingOfTheAncestorTree)
-						}, 0, -1000);
-		addScoresAfter(2)
-				.hairColor1(ANY(ElfHairColors), +1)
-				.skinColor1(ANY(ElfSkinColors), +1)
-				.plainSkinOfAdj("flawless", +1)
-				.tone(AT_MOST(60), +1)
-				.thickness(AT_MOST(50), +1)
 				.customRequirement("","small cock",
 						function (body:BodyData):Boolean {
 							return body.hasCock && body.biggestCockSize < 6
@@ -67,7 +62,11 @@ public class ElfRace extends Race {
 				.customRequirement("","vagina and big tits",
 						function (body:BodyData):Boolean {
 							return body.hasVagina && body.biggestTitSize >= 3
-						}, +1);
+						}, +1)
+				.customRequirement("","not a wood elf",
+						function (body:BodyData):Boolean {
+							return !body.player.hasPerk(PerkLib.BlessingOfTheAncestorTree)
+						}, 0, -1000);
 		
 		addBloodline(PerkLib.ElfsDescendant, PerkLib.BloodlineElf);
 		addMutation(IMutationsLib.ElvishPeripheralNervSysIM);

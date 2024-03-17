@@ -788,13 +788,13 @@ public class Exploration extends BaseContent implements SaveableState
 				SceneLib.impScene.impPackEncounter2();
 			}
 			else if (gobimpChooser >= 20 && gobimpChooser < 30) {
-				if (rand(10) == 0 && flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 1) SceneLib.angelScene.angeloidGroupEncounter();
+				if (rand(10) == 0 && flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 0) SceneLib.angelScene.angeloidGroupEncounter();
 				else SceneLib.impScene.impPackEncounter();
 			}
 			else if (gobimpChooser >= 30) {
 				if (flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_WARRIOR] >= 1) SceneLib.goblinScene.goblinWarriorsEncounter();
 				else {
-					if (rand(10) == 0 && flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 1) SceneLib.angelScene.angeloidGroupEncounter();
+					if (rand(10) == 0 && flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 0) SceneLib.angelScene.angeloidGroupEncounter();
 					else SceneLib.impScene.impPackEncounter();
 				}
 			}
@@ -904,7 +904,7 @@ public class Exploration extends BaseContent implements SaveableState
 			return 1;
 		}
 		private function angelicFraction():Boolean {
-            return flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 1;
+            return flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 0;
         }
 		
 		private var _explorationEncounters:GroupEncounter = null;
@@ -1411,7 +1411,7 @@ public class Exploration extends BaseContent implements SaveableState
 //Temporaly place of finding enemies for lvl between 31 and 49
 		public function tryDiscoverLL():void {
 			clearOutput();
-			if (rand(4) == 0 && flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 1) {
+			if (rand(4) == 0 && flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 0) {
                 if (silly()) {
                     outputText("You're walking in the woods\n\n");
                     outputText("There's no one around\n\n");

@@ -33,7 +33,12 @@ package classes.Scenes.Camp
 				player.addStatusValue(StatusEffects.HeavenTribulationCR,2,ThDa);
 			}
 		}
-		
+
+		// True strike cuz Tribulation
+		override public function playerAttackedCheck():Boolean{
+			return false;
+		}
+
 		override protected function performCombatAction():void
 		{
 			if (!player.hasStatusEffect(StatusEffects.HeavenTribulationCR)) player.createStatusEffect(StatusEffects.HeavenTribulationCR,1,1,0,0);

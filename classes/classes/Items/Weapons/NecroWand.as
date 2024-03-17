@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Items.Weapons 
+package classes.Items.Weapons
 {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.CoC;
@@ -14,11 +14,11 @@ package classes.Items.Weapons
 	public class NecroWand extends Weapon
 	{
 		
-		public function NecroWand() 
+		public function NecroWand()
 		{
 			super("NecroWa", "necrowand", "necro wand", "a necro wand", "smack", 2, 1280,
 					"A simple wand made from bones. Increase user mastery over animated bone constructs.",
-					"Wand", WT_WAND
+					WT_WAND, WSZ_MEDIUM
 			);
 			withBuff('spellpower', +0.1);
 		}

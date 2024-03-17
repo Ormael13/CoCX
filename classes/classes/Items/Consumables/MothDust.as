@@ -3,13 +3,12 @@ import classes.BodyParts.*;
 import classes.CoC;
 import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Consumable;
-import classes.Items.ItemTags;
 import classes.Races.MothRace;
 
 public class MothDust extends Consumable {
     public function MothDust() {
         super("MothDus", "MothDust", "a handful of luminescent dust", 6, "A handful of luminescent dust.  It glows very softly, and smells sweet. You look at the handful of dust and wonder just how it'll affect you.");
-        withTag(ItemTags.U_TF);
+        withTag(U_TF);
         refineableInto(
                 AlchemyLib.DEFAULT_SUBSTANCES_DROP_TABLE,
                 AlchemyLib.DEFAULT_ESSENCE_DROP_TABLE(AlchemyLib.AE_MOTH)

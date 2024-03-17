@@ -5,15 +5,14 @@
 package classes.Items.Armors
 {
 import classes.Items.Armor;
-import classes.Items.ItemTags;
 
 	public class BattleMaidenArmor extends Armor {
 		
 		public function BattleMaidenArmor()
 		{
 			super("BMArmor", "BMArmor", "Battle maiden armor", "a Battle maiden armor", 80, 40, 4800, "The purified original maiden armor recovered its former property. It fully protect the virginity of its wielder even going so far as to progressively clear the fog of lust from her mind.", "Light", false, false);
-			withTag(ItemTags.A_REVEALING);
-			withTag(ItemTags.I_LEGENDARY);
+			withTag(A_REVEALING);
+			withTag(I_LEGENDARY);
 		}
 		
 		override public function get def():Number{

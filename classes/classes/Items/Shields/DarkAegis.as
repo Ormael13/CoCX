@@ -5,7 +5,6 @@
 package classes.Items.Shields
 {
 import classes.Items.Shield;
-import classes.Items.ItemTags;
 import classes.PerkLib;
 
 	public class DarkAegis extends Shield
@@ -17,7 +16,7 @@ import classes.PerkLib;
 					"Gleaming in black metal and obsidian plates, this legendary shield is said to heal and protect a fallen knight. Demonic ornaments cover most of its obsidian-carved surface.",
 					"Large");
 			withPerk(PerkLib.Sanctuary, 2, 0, 0, 0);
-			withTag(ItemTags.I_LEGENDARY);
+			withTag(I_LEGENDARY);
 		}
 		
 		override public function get block():Number {

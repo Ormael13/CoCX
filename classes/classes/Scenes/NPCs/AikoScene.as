@@ -7,6 +7,7 @@ package classes.Scenes.NPCs
 import classes.*;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.ItemConstants;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
@@ -1956,7 +1957,7 @@ private function killYamata():void {
 				break;
 		case "smash": outputText("crush the defeated opponent's ribcage");
 				break;
-		default: if (player.weapon.name.indexOf("staff") >= 0)
+		default: if (player.weapon.type == ItemConstants.WT_STAFF)
 				{
 					outputText("You raise your [weapon], letting out an immense blast of magic, engulfing Yamata and searing her flesh and crushing her windpipe. Aiko yelps in surprise and gives you a shocked look");
 				}

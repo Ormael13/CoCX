@@ -5,15 +5,14 @@
 package classes.Items.WeaponsRange 
 {
 	import classes.Items.WeaponRange;
-	import classes.Items.ItemTags;
-	import classes.GlobalFlags.kFLAGS;
+		import classes.GlobalFlags.kFLAGS;
 	
 	public class BadOmen extends WeaponRange {
 		
 		public function BadOmen() 
 		{
 			super("BadOmen", "BadOmen", "Bad Omen", "a Bad Omen", "shot", 150, 7500, "A single 22mm, four-round revolver, the Bad Omen has even largest bullets than desert eagle. Its shots are deadly and precise through the gun has one hell of a recoil. Requires 200 strength to fully unleash it power.", "Pistol")
-			withTag(ItemTags.I_LEGENDARY);
+			withTag(I_LEGENDARY);
 		}
 		
 		override public function get attack():Number{
