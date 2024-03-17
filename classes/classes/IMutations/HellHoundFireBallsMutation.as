@@ -55,7 +55,7 @@ public class HellHoundFireBallsMutation extends IMutationPerkType
                     this.requireBallsMutationSlot()
                     .requirePerk(PerkLib.Hellfire)
 					.requireCustomFunction(function (player:Player):Boolean {
-                        return player.isRace(Races.CERBERUS) || player.racialScore(Races.DOG) > 8;
+                        return player.isRace(Races.CERBERUS) || player.racialScore(Races.DOG) >= 8;
                     }, "Cerberus race or Dog-morph (8+) with Hellfire perk");
                 }
                 else{
