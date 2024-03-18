@@ -2160,7 +2160,13 @@ public function refuseOfferOfHelp():void
 	jojoSprite();
 
 	outputText("You assure Jojo you're fine, and that you'll consider his offer.  \"<i>But... I... we...</i>\" he stammers. \"<i>Alright, but please do not let the corruption get the better of you.  You’re my friend and I couldn't bear to lose you to its vile influence.</i>\"  He recomposes himself and asks, \"<i>So... is there anything I can assist you with?</i>\"\n\n");
+	if (JOJO_DEBIMBOED !=3) {
 	jojoCampMenu();
+	}
+	if (JOJO_DEBIMBOED !=3) {
+	Joyscene.JojoyCampMenu();
+	}
+
 }
 
 public function jojoCamp2():void {
@@ -2168,7 +2174,14 @@ public function jojoCamp2():void {
 		if ((flags[kFLAGS.LUNA_JEALOUSY] > 200 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 300 && rand(10) < 8)) mishapsLunaJojo();
 		else jojoCamp();
 	}
-	else jojoCamp();
+	else { 
+	if (JOJO_DEBIMBOED !=3) {
+	jojoCampMenu();
+	}
+	if (JOJO_DEBIMBOED !=3) {
+	Joyscene.JojoyCampMenu();
+		}
+	}
 }
 
 public function jojoCamp():void {
