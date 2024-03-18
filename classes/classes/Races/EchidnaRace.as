@@ -34,6 +34,7 @@ public class EchidnaRace extends Race {
 		super("Echidna", id, []);//RaceBody);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
+		disabled = true;
 	}
 	
 	public override function setup():void {

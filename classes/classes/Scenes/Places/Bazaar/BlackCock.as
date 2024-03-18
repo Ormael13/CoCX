@@ -25,9 +25,7 @@ import classes.lists.Gender;
 	{
 
 		public function BlackCock()
-		{
-
-		}
+		{}
 
 		public function blackCockDescription():void {
 			if (isChristmas()) outputText("\n\nThere is also a large marquee-style tent made with black canvas. Smoke rises out of an open flap in the rear. There is a wooden sign next to the front flap depicting a small black rooster; beneath its yellow feet the words \"The Black Cock\" are etched into the old sign. Around the sign there is a festive Christmas wreath with flickering candles. The smell of greasy food and sweets wafts out of the open entrance.");
@@ -78,7 +76,7 @@ import classes.lists.Gender;
 
 			outputText("\n\n<b><u>Special Meals</u></b>");
 			addFoodPlate("Rhino Steak", 10, "Despite the name, it doesn't come from any rhinoceros or a rhino-morph. We can guarantee you that no rhinoceros were harmed in the production of this food.\n\nDISCLAIMER: We are not responsible if you find yourself altered.", "When the satyr brings you your steak you can tell from the way it sizzles that it just came off the grill. You take a fork and knife and eat the succulent steak piece by juicy piece, enjoying the explosion of flavor as the tender, juicy meat disappears into your mouth and fills your belly.");
-			addFoodPlate("Echidna Cake", 10, "Try our special cake, a favorite among the echidna-morphs!\n\nDISCLAIMER: We are not responsible if you find yourself altered.", "You waste no time digging into the cake and it is absolutely delicious! Within moments every savory morsel is gone. Despite the generous size of the piece you were given you can't help wishing that there had been more.");
+			//addFoodPlate("Echidna Cake", 10, "Try our special cake, a favorite among the echidna-morphs!\n\nDISCLAIMER: We are not responsible if you find yourself altered.", "You waste no time digging into the cake and it is absolutely delicious! Within moments every savory morsel is gone. Despite the generous size of the piece you were given you can't help wishing that there had been more.");
 			addFoodPlate("Giant Burger", 8, "Want something a bit modern and delicious? We're pleased to offer a large burger fit for a king!", "The satyr brings you a huge burger piled high with meat and bacon and more meat. A generous helping of crisp tomatoes and a single leafy piece of lettuce join in the fray along with a big thick onion ring. When you bite it you taste spices and sauce and cheese along with the meat and veggies you can see. Each bite is a tidal wave of flavor. When you've finished you feel satisfied and a little heavier.");
 			addFoodPlate("P. Potatoes", 5, "It's a party! Try these special potatoes for a guaranteed blast of a taste!", "When the satyr brings you your plate the food on it is still sizzling. Your party potatoes sit alongside sliced bits of beef and wedges of green, red and yellow peppers. Its a messy meal and when you're done you feel a little heavier. With a belch you realize that this is going to go straight to your butt.");
 			addFoodPlate("Spicy Chilli", 7, "Not for the faint of heart! Try a delicious chili infused with spicy peppers, measured at 100,000 Scoville heat units! We'll gladly offer you a cup of milk to extinguish the inferno in your mouth after you eat these.", "When the satyr brings you your plate just the smell of the bright red chilli burns. Your waiter sits down a cup of white liquid and you begin to chow down. With a mouth full of fiery flavor and your [face] contorted in a grimace of triumph and pain you finish the flavorful chili from hell and wash it all down with the glass of what you find is simply ice cold milk. Once you finish the chilli you feel a little heavier and realize that it's going to go straight to your hips.");
