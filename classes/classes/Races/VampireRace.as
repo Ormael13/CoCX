@@ -46,14 +46,13 @@ public class VampireRace extends Race {
 				.wingType(Wings.VAMPIRE, +4)
 				.faceType(Face.VAMPIRE, +2)
 				.eyeType(Eyes.VAMPIRE, +1)
+				.armType(Arms.HUMAN, +1)
+				.legType(LowerBody.HUMAN, +1)
 				.eyeColor("blood-red", +1)
 				.skinColor1("pale", +1)
 				.noTail(+1)
 				.noHorns(+1)
 				.noAntennae(+1);
-		addScoresAfter(8)
-				.armType(Arms.HUMAN, +1)
-				.legType(LowerBody.HUMAN, +1)
 		
 		addBloodline(PerkLib.VampiresDescendant,PerkLib.BloodlineVampire);
 		addMutation(IMutationsLib.VampiricBloodstreamIM);

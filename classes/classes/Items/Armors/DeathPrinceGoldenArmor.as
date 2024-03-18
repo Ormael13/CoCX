@@ -5,15 +5,14 @@ package classes.Items.Armors
 {
 	import classes.Items.Armor;
 	import classes.StatusEffects;
-	import classes.Items.ItemTags;
-	
+		
 	public class DeathPrinceGoldenArmor extends Armor
 	{
 		
 		public function DeathPrinceGoldenArmor() 
 		{
 			super("DeathPGA","DeathPrinceGoldenArmor","Death Prince Golden Armor","a Death Prince Golden Armor",20,40,19200,"A set of golden armor worn by Anubi lords, both a symbol of status and power. These armors are generally granted to an anubis who has acquired a sizable amount of slaves. (empowers Anubi ability by 50%, +200% Magic Soulskill power, grants 5% regeneration when soulforce is above half)","Medium")
-			withTag(ItemTags.I_LEGENDARY);
+			withTag(I_LEGENDARY);
 		}
 		
 		override public function afterEquip(doOutput:Boolean):void {

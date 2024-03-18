@@ -2,9 +2,10 @@
  * ...
  * @author Canadian Snas
  */
-package classes.Items.Weapons 
+package classes.Items.Weapons
 {
-	import classes.Items.Weapon;
+import classes.Items.IELib;
+import classes.Items.Weapon;
 	import classes.Player;
 	import classes.PerkLib;
 	import classes.StatusEffects;
@@ -12,22 +13,15 @@ package classes.Items.Weapons
 	public class ThePhalluspears extends Weapon
 	{
 		
-		public function ThePhalluspears() 
+		public function ThePhalluspears()
 		{
 			super("D.Phallus", "Phalluspears", "The Phalluspears", "The Phalluspears", "piercing stab", 40, 2600,
 				"Those spears are a polearms with a dick-shaped point. You can rotate the shaft to reveal or conceal a wicked, poison-dripping blade hidden within the phalluses. Pleasure or pain, this weapon can do both.",
-				"Dual Large", "Spear"
+				WT_SPEAR, WSZ_LARGE, true
 			);
+			withEffect(IELib.ScaleAttack_Spe, 200);
 		}
 		
-		override public function get attack():Number {
-			var boost:int = 0;
-			if (game.player.spe >= 200) boost += 10;
-			if (game.player.spe >= 150) boost += 9;
-			if (game.player.spe >= 100) boost += 9;
-			if (game.player.spe >= 50) boost += 8;
-			return (4 + boost);
-		}
 		
 		override public function afterEquip(doOutput:Boolean):void {
 			game.player.createStatusEffect(StatusEffects.ThePhalluspear1,0,0,0,0);
@@ -39,12 +33,5 @@ package classes.Items.Weapons
 			super.afterUnequip(doOutput);
 		}
 		
-		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.hasPerk(PerkLib.DualWield) || game.player.hasPerk(PerkLib.AntyDexterity)) {
-				return super.canEquip(doOutput);
-			}
-			if (doOutput) outputText("You aren't skilled enough to handle this pair of spears!  ");
-			return false;
-		}
 	}
 }

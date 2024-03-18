@@ -4,6 +4,7 @@
  */
 package classes.Items.Weapons
 {
+import classes.CoC;
 import classes.ItemType;
 import classes.StatusEffects;
 import classes.GlobalFlags.kFLAGS;
@@ -15,7 +16,12 @@ import classes.Scenes.NPCs.AetherTwinsFollowers;
 		
 		public function AetherD()
 		{
-			super("AetherD", "AetherD", "Aether (Dex)", "an Aether (Dex)", "punch", 0, 0, "Aether - dexter part of mysterious sentient weapons pair rumored to be forged by the god of blacksmiths.", "", "Gauntlet");
+			super("AetherD", "AetherD", "Aether (Dex)", "an Aether (Dex)", "punch", 0, 0, "Aether - dexter part of mysterious sentient weapons pair rumored to be forged by the god of blacksmiths.", WT_GAUNTLET, WSZ_MEDIUM);
+		}
+		
+		override public function isDual():Boolean {
+			if (CoC.instance && CoC.instance.player && CoC.instance.player.shield == game.shields.AETHERS && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dual Daggers") return true;
+			return false;
 		}
 		
 		override public function get description():String {
@@ -62,6 +68,7 @@ import classes.Scenes.NPCs.AetherTwinsFollowers;
 		}
 		
 		override public function beforeUnequip(doOutput:Boolean):ItemType {
+			super.beforeUnequip(doOutput);
 			return WeaponLib.FISTS;
 		}
 	}

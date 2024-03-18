@@ -157,7 +157,6 @@ import classes.internals.*;
 			this.weaponName = "dual scimitars";
 			this.weaponVerb="slash";
 			this.weaponAttack = 28;
-			this.weaponPerk = "";
 			this.weaponValue = 25;
 			this.armorName = "tunic and pants";
 			this.armorDef = 14;

@@ -1,6 +1,7 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
+import classes.CockTypesEnum;
 import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
@@ -76,8 +77,8 @@ public class ScyllaRace extends Race {
 		}, "scylla or kraken lower body;")
 				.faceType(Face.HUMAN, +1)
 				.hairType(Hair.NORMAL, +1)
+				.cockOrVaginaOfType(CockTypesEnum.SCYLLATENTACLE, VaginaClass.SCYLLA, +1)
 				.noWings(+2);
-		//potem tentacle dick lub scylla vag też bedą sie liczyć do wyniku)
 		
 		addMutation(IMutationsLib.ScyllaInkGlandsIM);
 		

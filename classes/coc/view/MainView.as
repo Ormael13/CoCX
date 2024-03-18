@@ -20,19 +20,14 @@ import classes.EngineCore;
 import com.bit101.components.ComboBox;
 import com.bit101.components.ScrollBar;
 import com.bit101.components.TextFieldVScroll;
-import com.bit101.components.VScrollBar;
 import com.bit101.components.ScrollPane;
 
-import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.display.DisplayObject;
-import flash.display.MovieClip;
 import flash.display.Sprite;
 import flash.events.Event;
-import flash.events.GesturePhase;
 import flash.events.MouseEvent;
 import flash.events.TextEvent;
-import flash.events.TransformGestureEvent;
 import flash.text.TextField;
 import flash.text.TextFormat;
 import flash.ui.Multitouch;
@@ -832,7 +827,7 @@ public class MainView extends Block {
 			element.height = mainText.y + mainText.height - element.y;
 		}
 		if (scroll && stretch) {
-			//innerElement.width = container.width - container.verticalScrollBar.width;
+			innerElement.width = container.width - ScrollBar.VWIDTH;
 			// innerElement.height = container.height;
 		}
 		this.addElement(element);

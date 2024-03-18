@@ -20,7 +20,6 @@ import classes.GeneticMemories.BallsMem;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Consumable;
-import classes.Items.ItemTags;
 import classes.Items.Mutations;
 import classes.PerkLib;
 import classes.Races;
@@ -36,7 +35,7 @@ public class AbstractEquinum extends Consumable {
 	public function AbstractEquinum(type:Number, id:String, shortName:String, longName:String, value:Number, description:String) {
 		super(id, shortName, longName, value, description);
 		this.type = type;
-		withTag(ItemTags.U_TF);
+		withTag(U_TF);
 		switch (type) {
 			case 0: // equinum
 				refineableInto(

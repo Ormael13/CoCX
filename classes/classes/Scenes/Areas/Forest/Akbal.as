@@ -11,9 +11,22 @@ import classes.internals.WeightedDrop;
 
 public class Akbal extends Monster
 	{
-
 		override public function midDodge():void{
 			outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
+		}
+		// Akbal now actually immune to blind
+		override protected function handleBlind():Boolean{
+			return true;
+		}
+		// Compromise to preserve content even if attack dodged not necessarily fire
+		override protected function outputPlayerDodged(dodge:int):void{
+			outputText("Akbal releases an ear-splitting roar, hurling a torrent of emerald green flames towards you.\n");
+			if (player.spe - spe < 8)
+				outputText("You narrowly avoid " + a + short + "'s fire!");
+			else if (player.spe - spe >= 8 && player.spe - spe < 20)
+				outputText("You dodge " + a + short + "'s fire with superior quickness!");
+			else if (player.spe - spe >= 20)
+				outputText("You deftly avoid " + a + short + "'s slow fire-breath.");
 		}
 		override public function eAttack():void
 		{
@@ -22,16 +35,6 @@ public class Akbal extends Monster
 			//Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind)) {
 				outputText(capitalA + short + " seems to have no problem guiding his attacks towards you, despite his blindness.\n");
-			}
-			//Determine if dodged!
-			if (player.getEvasionRoll()) {
-				if (player.spe - spe < 8)
-					outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!");
-				if (player.spe - spe >= 8 && player.spe - spe < 20)
-					outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!");
-				if (player.spe - spe >= 20)
-					outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".");
-				return;
 			}
 			//Determine damage - str modified by enemy toughness!
 			//*Normal Attack A - 
@@ -117,17 +120,6 @@ public class Akbal extends Monster
 			{
 				outputText("Akbal releases an ear-splitting roar, hurling a torrent of emerald green flames towards you.\n");
 				//(high HP damage)
-				//Determine if dodged!
-				if (player.getEvasionRoll())
-				{
-					if (player.spe - spe < 8)
-						outputText("You narrowly avoid " + a + short + "'s fire!");
-					if (player.spe - spe >= 8 && player.spe - spe < 20)
-						outputText("You dodge " + a + short + "'s fire with superior quickness!");
-					if (player.spe - spe >= 20)
-						outputText("You deftly avoid " + a + short + "'s slow fire-breath.");
-					return;
-				}
 				if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 					player.addStatusValue(StatusEffects.Blizzard, 1, -1);
 					var damage2:int = inte / 4;

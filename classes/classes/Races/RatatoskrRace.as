@@ -1,6 +1,7 @@
 package classes.Races {
 import classes.BodyParts.*;
 import classes.IMutations.IMutationsLib;
+import classes.PerkLib;
 import classes.Race;
 
 public class RatatoskrRace extends Race{
@@ -52,9 +53,8 @@ public class RatatoskrRace extends Race{
 				.skinCoatType(Skin.FUR, +1)
 				.furColor1(ANY(RatatoskrHairColors), +1)
 				.height(LESS_THAN(48), +1);
-		//if (hasPerk(PerkLib.RatatoskrsDescendant) || hasPerk(PerkLib.BloodlineRatatoskr))
-		//	ratatoskrCounter += increaseFromBloodlinePerks();
 		
+		addBloodline(PerkLib.RatatoskrsDescendant, PerkLib.BloodlineRatatoskr);
 		addMutation(IMutationsLib.RatatoskrSmartsIM);
 		
 		buildTier(12, "squirrel")

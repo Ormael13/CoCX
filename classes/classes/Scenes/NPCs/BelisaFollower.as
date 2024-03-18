@@ -885,7 +885,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		if (HolyBand3 > 0) addButton(6, "Yellow", BelisaHolyBandsManagmentYellowRemove).hint("Take off one Yellow Holy Band.");
 		if (HolyBand4 > 0) addButton(8, "Turqouise", BelisaHolyBandsManagmentTurqouiseRemove).hint("Take off Turqouise Holy Band.");
 		if (HolyBand5 > 0) addButton(11, "Crossed", BelisaHolyBandsManagmentCrossedRemove).hint("Take off Crossed Holy Band.");
-		if (HolyBand6 > 0) addButton(13, "Royal Blue", BelisaHolyBandsManagmentBrownAndBeigeRemove).hint("Take off Brown and Beige Holy Band.");
+		if (HolyBand6 > 0) addButton(13, "Brown and Beige", BelisaHolyBandsManagmentBrownAndBeigeRemove).hint("Take off Brown and Beige Holy Band.");
 		if (HolyBand7 > 0) addButton(9, "Royal Blue", BelisaHolyBandsManagmentRoyalBlueRemove).hint("Take off one Royal Blue Holy Band.");
 		if (BelisaInCamp) addButton(14, "Back", BelisaMainCampMenu);
 		else addButton(14, "Never mind", Encounterback);

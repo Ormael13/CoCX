@@ -39,13 +39,12 @@ public class KangarooRace extends Race {
 	
 	public override function setup():void {
 		addScores()
-				.hasCockOfType(CockTypesEnum.KANGAROO, +1)
 				.earType(Ears.KANGAROO, +1)
 				.tailType(Tail.KANGAROO, +1)
 				.legType(LowerBody.KANGAROO, +1)
-				.faceType(Face.KANGAROO,1);
-		addScoresAfter(2)
-				.skinCoatType(Skin.FUR, +1);
+				.faceType(Face.KANGAROO,1)
+				.skinCoatType(Skin.FUR, +1)
+				.hasCockOfType(CockTypesEnum.KANGAROO, +1);
 		
 		buildTier(4, "kangaroo-morph")
 				.buffs({

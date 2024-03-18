@@ -158,7 +158,6 @@ public class SandMother extends Monster
 			this.weaponName = "fists";
 			this.weaponVerb="punches";
 			this.weaponAttack = 6;
-			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "robes";
 			this.armorDef = 10;

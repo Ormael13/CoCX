@@ -41,8 +41,8 @@ public class BatRace extends Race {
 				.armType(Arms.BAT, +5)
 				.faceType(Face.VAMPIRE, +2)
 				.eyeType(Eyes.VAMPIRE, +1)
-				.rearType(RearBody.BAT_COLLAR, +1);
-		addScoresAfter(8)
+				.rearType(RearBody.BAT_COLLAR, +1)
+				.armType(Arms.HUMAN, +1)
 				.legType(LowerBody.HUMAN, +1);
 		
 		buildTier(10,"bat")

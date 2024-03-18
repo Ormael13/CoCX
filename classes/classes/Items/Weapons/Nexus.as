@@ -2,7 +2,6 @@ package classes.Items.Weapons
 {
 import classes.EventParser;
 import classes.Items.Weapon;
-import classes.Items.ItemTags;
 import classes.PerkLib;
 import classes.TimeAwareInterface;
 
@@ -25,11 +24,11 @@ public class Nexus extends Weapon implements TimeAwareInterface
 		public function Nexus()
 		{
 			super("Nexus", "Nexus", "Nexus", "a Nexus", "bonk", 5, 1600,
-					"Through the combination of the Occulus and Eclipse you somehow obtained this anomaly of an item. A wand of unknown origin. Wizards often refers to it as the source of all magic. A point in space where all mana converges. Magic is neither good noor evil but is capable of both when the raw chaos it is made from is shaped in the hands of such beings. Only a creature attuned to true balance could wield the raw power of the nexus as is. While this wand indeed seems to manipulate the essence of raw chaos its name was probably a wimsy of the deity who made it. Theres no way you could legitimately be plaing with the origin point of magic itself right?",
-					"Wand, Increase spell resistance by 20%, Increases Spellpower based on neutrality", WT_WAND
+					"Through the combination of the Occulus and Eclipse you somehow obtained this anomaly of an item. A wand of unknown origin. Wizards often refers to it as the source of all magic. A point in space where all mana converges. Magic is neither good noor evil but is capable of both when the raw chaos it is made from is shaped in the hands of such beings. Only a creature attuned to true balance could wield the raw power of the nexus as is. While this wand indeed seems to manipulate the essence of raw chaos its name was probably a wimsy of the deity who made it. Theres no way you could legitimately be plaing with the origin point of magic itself right? (Increase spell resistance by 20%, Increases Spellpower based on neutrality)",
+					WT_WAND, WSZ_MEDIUM
 			);
 			withBuff('spellpower', +0.6);
-			withTag(ItemTags.I_LEGENDARY);
+			withTag(I_LEGENDARY);
 			EventParser.timeAwareClassAdd(this);
 		}
 

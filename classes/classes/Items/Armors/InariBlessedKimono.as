@@ -5,7 +5,6 @@
 package classes.Items.Armors
 {
 import classes.Items.Armor;
-import classes.Items.ItemTags;
 import classes.PerkLib;
 import classes.Player;
 import classes.StatusEffects;
@@ -20,8 +19,8 @@ import classes.StatusEffects;
 				'teasedmg': +15
 			});
 			withPerk(PerkLib.InariBlessedKimono,0,0,0,0);
-			withTag(ItemTags.A_REVEALING);
-			withTag(ItemTags.I_LEGENDARY);
+			withTag(A_REVEALING);
+			withTag(I_LEGENDARY);
 		}
 		
 		override public function get def():Number{

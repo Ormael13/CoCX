@@ -8,6 +8,9 @@ import classes.Items.EnchantmentLib;
 import classes.Items.EnchantmentType;
 import classes.Items.Equipable;
 import classes.Items.IDynamicItem;
+import classes.Items.IELib;
+import classes.Items.ItemEffect;
+import classes.Race;
 
 public class DynamicArmor extends Armor implements IDynamicItem {
 	public var _subtypeId:String;
@@ -70,7 +73,7 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 		var value:Number         = parsedParams.value;
 		var buffs:Object         = parsedParams.buffs;
 		var type:String          = subtype.type;
-		var tags:Object          = subtype.tags || {};
+		var tags:Array           = subtype.tags || [];
 		var def:Number           = subtype.def;
 		var mdef:Number          = subtype.mdef;
 		var qdef:Number          = numberOr(subtype.qdef, 0);
@@ -159,9 +162,9 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 	
 	override public function get def():Number {
 		var def:Number = super.def;
-		var e:SimpleRaceEnchantment = enchantmentOfType(EnchantmentLib.RaceDefenseBonus) as SimpleRaceEnchantment;
-		if (e) {
-			def *= 1 + 0.05 * e.power * game.player.racialTier(e.race);
+		var ie:ItemEffect = findEffect(IELib.DefenseMult_RaceTier);
+		if (ie) {
+			def *= 1 + ie.power * game.player.racialTier(ie.value1 as Race) / 100;
 		}
 		return def;
 	}

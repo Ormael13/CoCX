@@ -1032,7 +1032,7 @@ public function soularena():void {
 			//else addButton(6, "Miss Mander", arenaSelection,Asuka).hint("Young salamander girl.");
 			//addButton(7, "Miss Oni", arenaSelection,Rangiku);
 			addButton(9, "-1-", soularenaChallengeSubpages, page - 1);
-			if (flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 1) {
+			if (flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 0) {
 				if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButtonDisabled(10, "IntermedLeader", "Req. to have any henchman with you to start this fight.");
 				else addButton(10, "IntermedLeader", intermediateleadershipfight1).hint("Intermediate Leadership fight");
 			}
@@ -1826,4 +1826,4 @@ public function soularena():void {
         doNext(camp.returnToCampUseOneHour);
     }
 }
-}
+}
