@@ -4,7 +4,7 @@ import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.*;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
-
+import classes.Scenes.NPCs.JoyScene
 import coc.view.CoCButton;
 
 public class JojoScene extends NPCAwareContent implements TimeAwareInterface {
@@ -22,7 +22,7 @@ public class JojoScene extends NPCAwareContent implements TimeAwareInterface {
 	public static const JOJO_NOSEX_2:int      = -2;
 	// Jojo agreed to sex
 	public static const JOJO_SEXED:int        = -3;
-
+	public static const JOJO_DEBIMBOED:int	  = 0; // 0 is default, 1 is if you've debimboed him, 2 if you've unlocked Jojoy, 3 is if he is Debimboed Joy, 4 is Debimboed Jojo
 
     public static var monk:Number = JOJO_NOT_MET;
 
@@ -2160,7 +2160,13 @@ public function refuseOfferOfHelp():void
 	jojoSprite();
 
 	outputText("You assure Jojo you're fine, and that you'll consider his offer.  \"<i>But... I... we...</i>\" he stammers. \"<i>Alright, but please do not let the corruption get the better of you.  You’re my friend and I couldn't bear to lose you to its vile influence.</i>\"  He recomposes himself and asks, \"<i>So... is there anything I can assist you with?</i>\"\n\n");
+	if (JOJO_DEBIMBOED !=3) {
 	jojoCampMenu();
+	}
+	if (JOJO_DEBIMBOED !=3) {
+	Joyscene.JojoyCampMenu();
+	}
+
 }
 
 public function jojoCamp2():void {
@@ -2168,7 +2174,14 @@ public function jojoCamp2():void {
 		if ((flags[kFLAGS.LUNA_JEALOUSY] > 200 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 300 && rand(10) < 8)) mishapsLunaJojo();
 		else jojoCamp();
 	}
-	else jojoCamp();
+	else { 
+	if (JOJO_DEBIMBOED !=3) {
+	jojoCampMenu();
+	}
+	if (JOJO_DEBIMBOED !=3) {
+	Joyscene.JojoyCampMenu();
+		}
+	}
 }
 
 public function jojoCamp():void {
@@ -2181,6 +2194,9 @@ public function jojoCamp():void {
 	if (flags[kFLAGS.JOJO_RATHAZUL_INTERACTION_COUNTER] == 1 && rand(2) == 0) {
         SceneLib.followerInteractions.catchRathazulNapping();
         return;
+	}
+	if (JOJO_DEBIMBOED = 3) {
+	JoyScene.joJoyCampMenu();
 	}
 	if (player.hasStatusEffect(StatusEffects.Infested)) { // Worms overrides everything else
 		outputText("As you approach the serene monk, you see his nose twitch.\n\n");
@@ -2215,7 +2231,7 @@ public function jojoCamp():void {
 	}
 }
 
-private function jojoCampMenu():void {
+public function jojoCampMenu():void {
 //Normal Follower Choices
 //[Appearance] [Talk] [Train] [Meditate] [Night Watch toggle]
 	var jojoDefense:String = "N.Watch:";
@@ -2278,8 +2294,62 @@ public function talkMenu():void
 	if (player.cor <= 10 && player.lust >= 33 && flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 6 && flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] >= 10 && player.statusEffectv1(StatusEffects.JojoMeditationCount) >= 10 && monk > -3) addButton(9, "Sex?", offerSexFirstTimeHighAffection).hint("You've spent quite the time with Jojo, maybe you can offer him if he's willing to have sex with you?"); //Will unlock consensual sex scenes.
 	if (monk <= -3) removeButton(9);
 	if (TyrantiaFollower.TyrantiaFollowerStage == 5) addButton(10, "Tyrantia", TyrantiaEggQuestJoJo);
-	addButton(14, "Back", jojoCamp);
+if (JOJO_DEBIMBOED == 1) {addButton(11, "Bimbo",JojoyBimboTalk).hint("Ask him about his time as a bimbo, maybe you can get him to turn back?");
 }
+if (JOJO_DEBIMBOED == 2) {addButton(11, "Gender",JojoyGenderTalk).hint("ask him about how he feels about being Joy again.")
+}
+	addButton(14, "Back", jojoCamp); 
+}
+private function JojoyBimboTalk():void {
+outputText("You decide to ask Jojo what He thinks about his time as a Bimbo.  \n\n");
+outputText("“Honestly, I remember a decent chunk of it.” He responds neutrally. “Mainly, the…well… ‘fun times’.” You give him a smirk, and he blushes. “...Well, I really enjoyed sharing that with you…circumstances aside. He shudders slightly. “I did not appreciate being so dumb, however. I am very happy to be rid of that, at least.\n\n");
+outputText("You ask Jojo whether or not He’d be willing to revisit that time…maybe a bit of roleplay? \n\n");
+outputText("his eyes widen, and he blushes, nodding once. “Only with you, though…It’s embarrassing.”  \n\n");
+outputText("You give your mousey lover a hug, telling him that it was pretty sexy. 
+“...Well, if you enjoyed it, like, I’m sure I could sort of, put it on for you.” 
+ \n\n");
+outputText("That doesn't really help you right now...But if Jojo was willing to become Joy again...? \n\n");
+JOJO_DEBIMBOED == 2;
+}
+public function JojoyGenderTalk():void {
+		clearOutput();
+		outputText("You ask Jojo what he thinks of their time as a woman.  \n\n"); 
+		outputText("Jojo looks away from you for a second, before exhaling through his nose. \n\n");
+		outputText("“Honestly, I…kind of like looking back on it.” He blushes, but doesn’t seem too nervous. “If I could go back without losing myself…I think I’d enjoy it.” He chuckles. “Honestly, I was never really that attached to…You know…” He motions between his legs. \n\n");
+		f (flags[kFLAGS.JOJO_LITTERS] > 0) {
+			outputText("“And…We have mouselets together. I mean…Some real good came out of that.” \n\n");
+		}
+		outputText("You mention that there are safe ways to turn him back. The effects of Bimbo Liqueur on his body might have been potent, but there are other ways to transform himself. \n\n");
+		if (!player.isRace(Races.HUMAN, 1, false)) {
+		outputText("You note that you would know, since you’ve clearly done some of that yourself.  \n\n");
+		}
+		outputText("“In that case…I have a question for you.” Jojo looks you dead in the eyes. “Would you…Prefer me to go back to being Joy?” He waves his hands in front of him. “Not the bimbo part! I can’t go back to that!” He blushes. “B-but I enjoyed being Joy…since I finally could be with you…for real. I felt confident…and you turned me back, so…no harm done, right? \n\n");
+		
+menu();
+addButton (1, "GoFemale", JojoyBecomeJoy);
+addButton (2, "StayMale", JojoStayMale);
+}
+public function JojoyBecomeJoy():void {
+		clearOutput();
+		outputText("You tell Jojo that you very much enjoyed it when he was female. Even though you enjoy spending time with your mousey monk, you liked the look of Joy better. 
+Jojo gives you a small smile, and stretches. “Then I’ll see you in a bit.” Jojo dashes off towards the desert. You’re assuming he’s heading to Tel’adre...But he could be heading to He Din Xiao. \n\n"); 
+		outputText("You decide to stay at camp and wait for your mouse to return \n\n");
+		outputText("As you walk into camp, you sit down at the fireplace. Your [ears] perk up, and you hear slight footsteps headed your way. You stand, turning around as Joy runs at you, a big ol’ grin on her face, her bouncy breasts returned to their bimboed glory.  \n\n");
+		outputText("You step in, scooping her up by her hips, using Joy’s own momentum to spin her around. Her eyes widen, and she scrabbles, grabbing your shoulders before you put her down.  \n\n");
+		outputText("You jokingly tell Joy that you didn’t expect that reaction, apologising if you startled her. Joy blinks, looking you dead in the eyes, and tilts her head.  \n\n");
+		outputText("“Uh…Whee?” She folds her arms, raising one eyebrow. “Just because I’m Joy again doesn’t mean I returned to that…mental state, [player].” You apologise again, and Joy gives you a sly little smile, wrapping her tail around your [leg]. “Well, if you’re sorry, there’s a way to make it up to me.” Well, at least some parts of the old Joy remain.  \n\n");
+		outputText("Joy has returned, with her mind intact! \n\n");
+		JOJO_DEBIMBOED == 3;
+doNext (returnToCampUseTwoHours);
+}
+public function JojoStayMale():void {
+		clearOutput();
+		outputText("You tell Jojo that you like him the way he is. He gives you a wry smile, putting a hand on your cheek. “That’s very sweet. Thank you.” He stands back up, stretching his legs. “Anything else you wanted from me?” \n\n"); 
+menu();
+addButton (1, "back", talkMenu);
+}
+
+
 
 private function TyrantiaEggQuestJoJo():void {
 	clearOutput();
@@ -3069,8 +3139,11 @@ public function afterDebimboTalk():void {
     outputText("\n\n\"<i>I’ll be in my usual spot at camp.</i>\" Jojo says, looking back at you. \"<i>Visit me often, won’t you?</i>\"");
     flags[kFLAGS.TALKED_TO_JOJO_ABOUT_JOY] = 1;
     flags[kFLAGS.DISABLED_JOJO_RAPE] = 1;
+	[JOJO_DEBIMBOED] = 1;
 	monk = JOJO_SEXED; //probably should lock the sex before... but better to change bimbo acquisition first.
     doNext(playerMenu);
 }
+
+
 }
 }
