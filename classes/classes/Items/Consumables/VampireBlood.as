@@ -94,7 +94,6 @@ public class VampireBlood extends Consumable {
                     CoC.instance.transformations.SkinPlain.applyEffect();
                     outputText("\n\n");
                 }
-
                 CoC.instance.transformations.WingsVampire.applyEffect();
                 changes++;
             }
