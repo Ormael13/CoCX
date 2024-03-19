@@ -60,22 +60,10 @@ public class GremlinRace extends Race {
 				.hasPerk(PerkLib.GoblinoidBlood, +1)
 				.hasPerk(PerkLib.BouncyBody, +1)
 				.hasPerk(PerkLib.Soulless, +1);
-		/*	if (hasPerk(MutationsLib.BlackHeart))
-				gremlinCounter++;
-			if (hasPerk(MutationsLib.BlackHeartPrimitive))
-				gremlinCounter++;
-			if (hasPerk(MutationsLib.BlackHeartEvolved))
-				gremlinCounter++;
-			if (hasPerk(MutationsLib.BlackHeart) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				gremlinCounter++;
-			if (hasPerk(MutationsLib.BlackHeartPrimitive) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				gremlinCounter++;
-			if (hasPerk(PerkLib.DemonicLethicite))
-				gremlinCounter+=1;
-		*/
 		
 		addBloodline(PerkLib.GoblinsDescendant, PerkLib.BloodlineGoblin);
 		addMutation(IMutationsLib.NaturalPunchingBagIM);
+		addMutation(IMutationsLib.BlackHeartIM);
 		
 		buildTier(15, "gremlin")
 				.buffs({

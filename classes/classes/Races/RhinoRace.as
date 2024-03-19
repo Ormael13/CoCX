@@ -42,7 +42,7 @@ public class RhinoRace extends Race {
 				.tailType(Tail.RHINO, +1)
 				.faceType(Face.RHINO, +1)
 				.hornType(Horns.RHINO, +1)
-				.skinColor1("gray", +1)
+				.skinColor1("gray", +1)//thic skin perk also form numb rocks
 				.hasCockOfType(CockTypesEnum.RHINO, +1);
 		
 		buildTier(4, "rhino")
