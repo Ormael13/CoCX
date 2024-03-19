@@ -47,8 +47,9 @@ public class OrcRace extends Race {
 				.skinPlainOnly(+1)
 				.noTail(+1)
 				.height(AT_LEAST(48), 0, -1000)
-				.tone(AT_LEAST(70), +1)
-				.tone(AT_LEAST(105), +1)
+				.tone(AT_LEAST(80), +1)
+				.tone(AT_LEAST(100), +1)
+				.tone(AT_LEAST(120), +1)
 				.thickness(AT_MOST(60), +1)
 				.thickness(AT_MOST(20), +1)
 				.hasPerk(PerkLib.Ferocity, +1);

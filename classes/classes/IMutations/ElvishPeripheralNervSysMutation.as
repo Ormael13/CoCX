@@ -65,7 +65,7 @@ public class ElvishPeripheralNervSysMutation extends IMutationPerkType
             var pBuffs:Object = {};
             if (pTier == 2) pBuffs['spe.mult'] = 0.05;
             if (pTier == 3) pBuffs['spe.mult'] = 0.1;
-            if (pTier == 3) pBuffs['spe.mult'] = 0.2;
+            if (pTier == 4) pBuffs['spe.mult'] = 0.2;
             return pBuffs;
         }
 

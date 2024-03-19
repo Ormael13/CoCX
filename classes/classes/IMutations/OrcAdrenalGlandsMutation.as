@@ -57,8 +57,9 @@ public class OrcAdrenalGlandsMutation extends IMutationPerkType
         //Mutations Buffs
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
-            if (pTier == 2) pBuffs['str.mult'] = 0.5;
-            else if (pTier == 3) pBuffs['str.mult'] = 1;
+			if (pTier == 2) pBuffs['str.mult'] = 0.5;
+			if (pTier == 3) pBuffs['str.mult'] = 1;
+			if (pTier == 4) pBuffs['str.mult'] = 3;
             return pBuffs;
         }
 
