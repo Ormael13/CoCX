@@ -155,7 +155,7 @@ public class BeeHoney extends Consumable
 				changes++;
 			}
 			//Eyes
-			if (player.eyes.type != Eyes.BLACK_EYES_SAND_TRAP && rand(3) == 0 && changes < changeLimit) {
+			if (player.eyes.type != Eyes.BLACK_EYES_SAND_TRAP && Utils.rand(3) == 0 && changes < changeLimit) {
 				outputText("\n\n");
 				CoC.instance.transformations.EyesSandTrap.applyEffect();
 				changes++;

@@ -179,9 +179,9 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Human Versatility (Evolved). Req. Human Versatility (Primitive) and lvl 60+. Effects: Mastery gains increased by 3 point or in case of multiplier +3 to multiplier. Decrease needed exp to lvl up weapon/lifeskill masteries and have 20% chance to gain 3x more XP for Mastery.\n");
 			outputText("-Item Effect system code changes. (aimozg)\n");
 			outputText("-Removed form some races req. to reach x points in racial score to get points for some bodyparts varaints.\n");
-			outputText("-Inspection of Maretian Sanitary Inspection found dangerous stuff in Echidna Cake sold in Black Cock food tent at Bazaar. Until solving problem this menu option would be not unaccesable.\n");
-			outputText("-Black Hear IM can be accessed by Gremlins too. Small corrections and fixing errors in elf and orc IM's.\n");
-			outputText("-\n");
+			outputText("-Maretian Sanitary Inspection routine control found dangerous stuff in Echidna Cake and Rhino Steak sold in Black Cock food tent at Bazaar. Until solving problem those menu options would be not accesable.\n");
+			outputText("-Black Heart IM can be accessed by Gremlins too. Small corrections and fixing errors in elf and orc IM's.\n");
+			outputText("-Mysterious Meat sold at Black Cock food tent will have it effects as Revamp planned. (Randomn tf effects so enjoy your 44 shades of tf-ing)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

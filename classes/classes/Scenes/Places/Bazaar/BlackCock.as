@@ -1,19 +1,7 @@
 package classes.Scenes.Places.Bazaar
 {
 import classes.*;
-import classes.BodyParts.Antennae;
-import classes.BodyParts.Arms;
-import classes.BodyParts.Ears;
-import classes.BodyParts.Eyes;
-import classes.BodyParts.Face;
-import classes.BodyParts.Gills;
-import classes.BodyParts.Hair;
-import classes.BodyParts.Horns;
-import classes.BodyParts.LowerBody;
-import classes.BodyParts.Skin;
-import classes.BodyParts.Tail;
-import classes.BodyParts.Tongue;
-import classes.BodyParts.Wings;
+import classes.BodyParts.*;
 import classes.GlobalFlags.*;
 import classes.lists.Gender;
 
@@ -75,7 +63,7 @@ import classes.lists.Gender;
 			addFoodToGo(consumables.GODMEAD, 100);
 
 			outputText("\n\n<b><u>Special Meals</u></b>");
-			addFoodPlate("Rhino Steak", 10, "Despite the name, it doesn't come from any rhinoceros or a rhino-morph. We can guarantee you that no rhinoceros were harmed in the production of this food.\n\nDISCLAIMER: We are not responsible if you find yourself altered.", "When the satyr brings you your steak you can tell from the way it sizzles that it just came off the grill. You take a fork and knife and eat the succulent steak piece by juicy piece, enjoying the explosion of flavor as the tender, juicy meat disappears into your mouth and fills your belly.");
+			//addFoodPlate("Rhino Steak", 10, "Despite the name, it doesn't come from any rhinoceros or a rhino-morph. We can guarantee you that no rhinoceros were harmed in the production of this food.\n\nDISCLAIMER: We are not responsible if you find yourself altered.", "When the satyr brings you your steak you can tell from the way it sizzles that it just came off the grill. You take a fork and knife and eat the succulent steak piece by juicy piece, enjoying the explosion of flavor as the tender, juicy meat disappears into your mouth and fills your belly.");
 			//addFoodPlate("Echidna Cake", 10, "Try our special cake, a favorite among the echidna-morphs!\n\nDISCLAIMER: We are not responsible if you find yourself altered.", "You waste no time digging into the cake and it is absolutely delicious! Within moments every savory morsel is gone. Despite the generous size of the piece you were given you can't help wishing that there had been more.");
 			addFoodPlate("Giant Burger", 8, "Want something a bit modern and delicious? We're pleased to offer a large burger fit for a king!", "The satyr brings you a huge burger piled high with meat and bacon and more meat. A generous helping of crisp tomatoes and a single leafy piece of lettuce join in the fray along with a big thick onion ring. When you bite it you taste spices and sauce and cheese along with the meat and veggies you can see. Each bite is a tidal wave of flavor. When you've finished you feel satisfied and a little heavier.");
 			addFoodPlate("P. Potatoes", 5, "It's a party! Try these special potatoes for a guaranteed blast of a taste!", "When the satyr brings you your plate the food on it is still sizzling. Your party potatoes sit alongside sliced bits of beef and wedges of green, red and yellow peppers. Its a messy meal and when you're done you feel a little heavier. With a belch you realize that this is going to go straight to your butt.");
@@ -1545,6 +1533,7 @@ import classes.lists.Gender;
 			if (rand(3) == 0 && player.racialScore(Races.RHINO, false) >= 2 && (rand(2) == 0 || !player.inRut) && player.hasCock()) {
 				player.goIntoRut(true);
 			}
+			if (player.blockingBodyTransformations()) changeLimit = 0;
 			// Special TFs
 			//------------
 			if (rand(4) == 0 && changes < changeLimit && player.horns.type != Horns.UNICORN && player.horns.type != Horns.ORCHID && player.ears.type == Ears.HORSE && (player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.CLOVEN_HOOFED || player.racialScore(Races.HORSE, false) >= 3)) {
@@ -1793,6 +1782,7 @@ import classes.lists.Gender;
 			//------------
 			//None at the moment
 
+			if (player.blockingBodyTransformations()) changeLimit = 0;
 			// Normal TFs
 			//------------
 			//Hair turns back to normal
@@ -2027,7 +2017,236 @@ import classes.lists.Gender;
 		}
 
 		public function mysteryMeatTFs():void {
-			//outputText("\n\n<b>Mystery meat transformations are not yet implemented.</b>");
+			var changes:int = 0;
+			var changeLimit:int = 3 + player.additionalTransformationChances;
+			if (player.blockingBodyTransformations()) changeLimit = 0;
+			if (changes < changeLimit && rand(3) == 0 && player.ears.type != Ears.DRAGON) {
+				outputText("[pg]");
+				transformations.EarsDraconic.applyEffect();
+				changes++;
+			}
+			if (player.faceType == Face.HUMAN && player.ears.type != Ears.ELFIN && changes < changeLimit && rand(3) == 0) {
+				outputText("[pg]");
+				transformations.EarsElfin.applyEffect();
+				changes++;
+			}
+			if (player.faceType == Face.HUMAN && player.faceType != Face.SALAMANDER_FANGS && changes < changeLimit && rand(3) == 0) {
+				outputText("[pg]");
+				transformations.FaceSalamanderFangs.applyEffect();
+				changes++;
+			}
+			if (player.wings.type == Wings.NONE && rand(3) == 0) {
+				outputText("[pg]");
+				transformations.WingsDemonicTiny.applyEffect();
+				changes++;
+			}
+			if (player.rearBody.type != RearBody.DISPLACER_TENTACLES && rand(3) == 0 && changes < changeLimit) {
+				outputText("[pg]");
+				transformations.RearBodyDisplacerTentacles.applyEffect();
+				changes++;
+			}
+			if (player.tailType != Tail.DEMONIC && player.horns.count > 0 && rand(4) == 0 && changes < changeLimit) {
+				outputText("[pg]");
+				transformations.TailDemonic.applyEffect();
+				changes++;
+			}
+			if (player.lowerBody != LowerBody.AVIAN && changes < changeLimit && rand(3) == 0) {
+				outputText("[pg]");
+				transformations.LowerBodyAvian.applyEffect();
+				changes++;
+			}
+			if (player.rearBody.type != RearBody.WOLF_COLLAR && changes < changeLimit && rand(3) == 0) {
+				outputText("[pg]");
+				transformations.RearBodyWolfCollar.applyEffect();
+				changes++;
+			}
+			if (!player.hasStatusEffect(StatusEffects.BlackNipples) && rand(3) == 0 && changes < changeLimit) {
+				outputText("[pg]");
+				transformations.NipplesBlack.applyEffect();
+				changes++;
+			}
+			if (rand(3) == 0 && changes < changeLimit && player.ears.type != Ears.PIG) {
+				outputText("[pg]");
+				transformations.EarsPig.applyEffect();
+				changes++;
+			}
+			if (player.arms.type != Arms.KRAKEN && changes < changeLimit && rand(3) == 0) {
+				outputText("[pg]");
+				transformations.ArmsKraken.applyEffect();
+				changes++;
+			}
+			if (player.arms.type != Arms.PHOENIX && changes < changeLimit && rand(3) == 0) {
+				outputText("[pg]");
+				transformations.ArmsPhoenix.applyEffect();
+				changes++;
+			}
+			if (player.lowerBody != LowerBody.GRYPHON && changes < changeLimit && rand(3) == 0) {
+				outputText("[pg]");
+				transformations.LowerBodyGryphon(2).applyEffect();
+				changes++;
+			}
+			if (player.tongue.type != Tongue.DEMONIC && rand(3) == 0) {
+				outputText("[pg]");
+				transformations.TongueDemonic.applyEffect();
+				changes++;
+			}
+			if (player.tailType != Tail.BEAR && player.lowerBody == LowerBody.BEAR && changes < changeLimit && rand(3) == 0) {
+				outputText("[pg]");
+				transformations.TailBear.applyEffect();
+				changes++;
+			}
+			if (player.rearBody.type != RearBody.SNAIL_SHELL && changes < changeLimit && rand(3) == 0) {
+				outputText("[pg]");
+				transformations.RearBodySnailShell.applyEffect();
+				changes++;
+			}
+			if (changes < changeLimit && player.faceType == Face.FIRE_SNAIL && player.antennae.type != Antennae.FIRE_SNAIL && rand(3) == 0) {
+				outputText("[pg]");
+				transformations.AntennaeFireSnail.applyEffect();
+				changes++;
+			}
+			if (player.ears.type != Ears.KIRIN && changes < changeLimit && rand(3) == 0) {
+				outputText("[pg]");
+				transformations.EarsKirin.applyEffect();
+				changes++;
+			}
+			if (changes < changeLimit && rand(3) == 0 && player.tongue.type != Tongue.DRACONIC) {
+				outputText("[pg]");
+				transformations.TongueDraconic.applyEffect();
+				changes++;
+			}
+			if (changes < changeLimit && player.antennae.type != Antennae.BEE && rand(3) == 0) {
+				outputText("[pg]");
+				transformations.AntennaeBee.applyEffect();
+				changes++;
+			}
+			if (player.eyes.type != Eyes.BLACK_EYES_SAND_TRAP && rand(3) == 0 && changes < changeLimit) {
+				outputText("[pg]");
+				transformations.EyesSandTrap.applyEffect();
+				changes++;
+			}
+			if (player.faceType != Face.ANIMAL_TOOTHS && changes < changeLimit && rand(3) == 0) {
+				outputText("[pg]");
+				transformations.FaceAnimalTeeth.applyEffect();
+				changes++;
+			}
+			if (player.wings.type == Wings.NONE && changes < changeLimit && rand(3) == 0) {
+				outputText("[pg]");
+				transformations.WingsFeatheredSphinx.applyEffect();
+				changes++;
+			}
+			if (rand(3) == 0 && changes < changeLimit && player.horns.type == Horns.NONE) {
+				outputText("\n\nYou feel an immense pressure from your forehead, and you reach up, feeling the nubs of two new horns.");
+				transformations.HornsAntlers.applyEffect(false);
+				player.horns.count = 1;
+				changes++;
+			}
+			if (rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.DEER) {
+				outputText("[pg]");
+				transformations.ArmsDeer.applyEffect();
+				changes++;
+			}
+			if (player.arms.type != Arms.ANT && changes < changeLimit && rand(3) == 0) {
+				outputText("[pg]");
+				transformations.ArmsAnt.applyEffect();
+				changes++;
+			}
+			if (changes < changeLimit && player.tailType != Tail.SCORPION && rand(3) == 0) {
+				outputText("[pg]");
+				transformations.TailScorpion.applyEffect();
+				changes++;
+			}
+			if (player.ears.type != Ears.LION && changes < changeLimit && rand(3) == 0) {
+				outputText("[pg]");
+				transformations.EarsLion.applyEffect();
+				changes++;
+			}
+			if (changes < changeLimit && rand(3) == 0 && player.tailType != Tail.COW) {
+				outputText("[pg]");
+				transformations.TailCow.applyEffect();
+				changes++;
+			}
+			if (transformations.HairCrazy.isPossible() && changes < changeLimit && rand(3) == 0) {
+				outputText("[pg]");
+				transformations.HairCrazy.applyEffect();
+				changes++;
+			}
+			if (changes < changeLimit && rand(3) == 0 && player.ears.type != Ears.INSECT) {
+				outputText("[pg]");
+				transformations.EarsInsect.applyEffect();
+				changes++;
+			}
+			if (changes < changeLimit && rand(3) == 0 && player.eyes.type != Eyes.MOTH) {
+				outputText("[pg]");
+				transformations.EyesMoth.applyEffect();
+				changes++;
+			}
+			if (player.skin.base.type == Skin.PLAIN && !player.skin.hasBattleTattoo() && rand(3) == 0 && changes < changeLimit) {
+				outputText("[pg]");
+				transformations.SkinPatternOni.applyEffect();
+				changes++;
+			}
+			if (rand(3) == 0 && changes < changeLimit && player.arms.type == Arms.ONI) {
+				outputText("[pg]");
+				if (rand(2) == 0 || player.horns.type == Horns.ONI) transformations.HornsOniDual.applyEffect();
+				else transformations.HornsOni.applyEffect();
+				changes++;
+			}
+			if (rand(3) == 0 && changes < changeLimit && player.wings.type !== Wings.VAMPIRE) {
+                outputText("[pg]");
+                if (player.isGooSkin()) {
+                    transformations.SkinPlain.applyEffect();
+                    outputText("[pg]");
+                }
+                transformations.WingsVampire.applyEffect();
+                changes++;
+            }
+			if (rand(3) == 0 && changes < changeLimit && player.faceType != Face.RED_PANDA) {
+				outputText("[pg]");
+				transformations.FaceRedPanda.applyEffect();
+				changes++;
+			}
+			if (!InCollection(Arms.SPIDER) && changes < changeLimit && rand(3) == 0) {
+				outputText("[pg]");
+				transformations.ArmsSpider.applyEffect();
+				changes++;
+			}
+			if (changes < changeLimit && rand(3) == 0 && player.lowerBody == LowerBody.HUMAN) {
+                outputText("[pg]");
+				transformations.LowerBodyCrab.applyEffect();
+                changes++;
+            }
+			if (changes < changeLimit && player.hairType != Hair.NORMAL && rand(3) == 0) {
+				outputText("[pg]");
+				transformations.HairHuman.applyEffect();
+				changes++;
+			}
+			if (rand(3) == 0 && transformations.LowerBodyDog(2).isPossible() && changes < changeLimit) {
+				outputText("[pg]");
+				transformations.LowerBodyDog(2).applyEffect();
+				changes++;
+			}
+			if (changes < changeLimit && rand(3) == 0 && player.eyes.type == Eyes.HUMAN) {
+				player.eyes.type = Eyes.GREMLIN;
+				outputText("Aw gosh, you feel tired as hell, it’s like you spent the better part of yesterday night working on some stupid project. Truth is with those darkened eyelids of yours you might just have. That said, perhaps you should think of it less like a sign of fatigue and more like a sign of demonic nature because you easily imagine these on the faces of small fiends or possessed people too. <b>Seems like you have darkened eyelids now.</b>");
+				changes++;
+			}
+			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.CLOVEN_HOOFED) {
+				outputText("[pg]");
+				transformations.LowerBodyClovenHoofed(2).applyEffect();
+				changes++;
+			}
+			if (player.skin.base.type == Skin.PLAIN && !player.skin.hasGlyphTattoo() && rand(3) == 0 && changes < changeLimit) {
+				outputText("[pg]");
+				transformations.SkinPatternAnubis.applyEffect();
+				changes++;
+			}
+			if (rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.BAT) {
+                outputText("[pg]");
+                transformations.ArmsBatWing.applyEffect();
+                changes++;
+            }
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 	}
 }
