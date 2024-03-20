@@ -182,7 +182,7 @@ public class Changelog extends BaseContent
 			outputText("-Maretian Sanitary Inspection routine control found dangerous stuff in Echidna Cake and Rhino Steak sold in Black Cock food tent at Bazaar. Until solving problem those menu options would be not accesable.\n");
 			outputText("-Black Heart IM can be accessed by Gremlins too. Small corrections and fixing errors in elf and orc IM's.\n");
 			outputText("-Mysterious Meat sold at Black Cock food tent will have it effects as Revamp planned. (Randomn tf effects so enjoy your 44 shades of tf-ing)\n");
-			outputText("-\n");
+			outputText("-Ayane when recruited to camp now could be combat henchman with support mage options like: healing, i-frame (expire after 1 round) and foxfire.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

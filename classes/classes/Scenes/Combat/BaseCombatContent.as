@@ -207,6 +207,9 @@ public class BaseCombatContent extends BaseContent {
 	protected function scalingBonusWisdom(randomize:Boolean = true):Number {
 		return combat.scalingBonusWisdom(randomize);
 	}
+	protected function scalingBonusWisdomCompanion(randomize:Boolean = true):Number {
+		return combat.scalingBonusWisdomCompanion(randomize);
+	}
 	protected function scalingBonusLibido(randomize:Boolean = true):Number {
 		return combat.scalingBonusLibido(randomize);
 	}

@@ -125,7 +125,7 @@ import classes.StatusEffects.VampireThirstEffect;
 			}
 			else {
 				outputText("\n\n");
-				player.createStatusEffect(StatusEffects.CombatFollowerDiana, 0, 0, 0, 0);
+				player.addStatusValue(StatusEffects.CombatFollowerDiana, 4, 1);
 			}
 		}
 		public function dianaCombatActions0():void {
@@ -153,7 +153,7 @@ import classes.StatusEffects.VampireThirstEffect;
 			}
 			else {
 				outputText("\n\n");
-				player.createStatusEffect(StatusEffects.CombatFollowerNadia, 0, 0, 0, 0);
+				player.addStatusValue(StatusEffects.CombatFollowerNadia, 4, 1);
 			}
 		}
 		public function nadiaCombatActions0():void {
@@ -396,19 +396,140 @@ import classes.StatusEffects.VampireThirstEffect;
 			clearOutput();
 			if (player.statusEffectv4(StatusEffects.CombatFollowerAyane) > 0) {
 				var choice5:Number = rand(20);
-				if (choice5 < 10) outputText("\n\n");
-				if (choice5 >= 10 && choice5 < 14) outputText("\n\n");
-				if (choice5 >= 14 && choice5 < 17) outputText("\n\n");
-				if (choice5 == 17 || choice5 == 18) outputText("\n\n");
-				if (choice5 == 19) outputText("\n\n");
+				if (player.hasPerk(PerkLib.MotivationEx)) {
+					if (rand(100) == 0) ayaneCombatActions0();
+					else {
+						if (choice5 < 7) {
+							if (player.HP < player.maxOverHP()) ayaneCombatActions1();
+							else {
+								if (rand(2) == 0) {
+									if (player.statusEffectv4(StatusEffects.CombatFollowerAyane) > 1) ayaneCombatActions3();
+									else ayaneCombatActions2();
+								}
+								else ayaneCombatActions3();
+							}
+						}
+						if (choice5 >= 7 && choice5 < 15) {
+							if (player.statusEffectv4(StatusEffects.CombatFollowerAyane) > 1) ayaneCombatActions3();
+							else ayaneCombatActions2();
+						}
+						if (choice5 >= 15) ayaneCombatActions3();
+					}
+				}
+				else if (player.hasPerk(PerkLib.Motivation)) {
+					if (choice5 < 4) ayaneCombatActions0();
+					if (choice5 >= 4 && choice5 < 10) {
+						if (player.HP < player.maxOverHP()) ayaneCombatActions1();
+						else {
+							if (rand(2) == 0) {
+								if (player.statusEffectv4(StatusEffects.CombatFollowerAyane) > 1) ayaneCombatActions3();
+								else ayaneCombatActions2();
+							}
+							else ayaneCombatActions3();
+						}
+					}
+					if (choice5 >= 10 && choice5 < 16) {
+						if (player.statusEffectv4(StatusEffects.CombatFollowerAyane) > 1) ayaneCombatActions3();
+						else ayaneCombatActions2();
+					}
+					if (choice5 >= 16) ayaneCombatActions3();
+				}
+				else {
+					if (choice5 < 10) ayaneCombatActions0();
+					if (choice5 >= 10 && choice5 < 14) {
+						if (player.HP < player.maxOverHP()) ayaneCombatActions1();
+						else {
+							if (rand(2) == 0) {
+								if (player.statusEffectv4(StatusEffects.CombatFollowerAyane) > 1) ayaneCombatActions3();
+								else ayaneCombatActions2();
+							}
+							else ayaneCombatActions3();
+						}
+					}
+					if (choice5 >= 14 && choice5 < 18) {
+						if (player.statusEffectv4(StatusEffects.CombatFollowerAyane) > 1) ayaneCombatActions3();
+						else ayaneCombatActions2();
+					}
+					if (choice5 >= 18) ayaneCombatActions3();
+				}
 			}
 			else {
-				outputText("\n\n");
-				player.createStatusEffect(StatusEffects.CombatFollowerAyane, 0, 0, 0, 0);
+				outputText("Ayane takes her staff and arcane focus out, ready to assist you.\n\n");
+				player.addStatusValue(StatusEffects.CombatFollowerAyane, 4, 1);
 			}
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Ayane" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Ayane" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Ayane" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 1;
+			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxOverLust()) enemyAI();
 		}
 		public function ayaneCombatActions0():void {
-
+			outputText("Ayane looks for an opening in the battle.\n\n");
+		}
+		public function ayaneCombatActions1():void {
+			outputText("Ayane incants a spell and you sigh in relief as your wounds heal slightly.");
+			var heal1:Number = player.statusEffectv1(StatusEffects.CombatFollowerAyane);
+			heal1 += scalingBonusIntelligenceCompanion();
+			heal1 *= player.statusEffectv3(StatusEffects.CombatFollowerAyane);
+			//Determine if critical heal!
+			var crit:Boolean = false;
+			var critHeal:int = 25;
+			if (rand(100) < critHeal) {
+				crit = true;
+				heal1 *= 1.75;
+			}
+			heal1 = Math.round(heal1);
+			if (player.hasStatusEffect(StatusEffects.CombatWounds)) {
+				if (player.statusEffectv1(StatusEffects.CombatWounds) > 0.03) player.addStatusValue(StatusEffects.CombatWounds, 1, -0.03);
+				else player.removeStatusEffect(StatusEffects.CombatWounds);
+			}
+			outputText("<b>(<font color=\"#008000\">+" + heal1 + "</font>)</b>.");
+			if (crit) outputText(" <b>*Critical Heal!*</b>");
+			HPChange(heal1, false);
+			outputText("\n\n");
+		}
+		public function ayaneCombatActions2():void {
+			outputText("Ayane surges in front of you, her staff at the ready.\n\n");
+			player.addStatusValue(StatusEffects.CombatFollowerAyane, 4, 1);
+		}
+		public function ayaneCombatActions3():void {
+			outputText("Ayane spins her staff in a circle as her tails starts to move, wildly dousing [themonster] in foxfire. ");
+			var damageFF:Number = player.statusEffectv1(StatusEffects.CombatFollowerAyane) + player.statusEffectv2(StatusEffects.CombatFollowerAyane);
+			damageFF += (scalingBonusIntelligenceCompanion() * 0.6) + (scalingBonusWisdomCompanion() * 0.4);
+			//Determine if critical hit!
+			var crit:Boolean = false;
+			var critChance:int = 25;
+			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+			if (rand(100) < critChance) {
+				crit = true;
+				damageFF *= 1.75;
+			}
+			damageFF *= 0.5;
+			damageFF *= (1 + ((player.statusEffectv3(StatusEffects.CombatFollowerAyane) * 2) - 2));
+			//High damage to goes.
+			if(monster.short == "goo-girl") damageFF = Math.round(damageFF * 1.5);
+			damageFF *= 4;
+			damageFF = Math.round(damageFF * increasedEfficiencyOfAttacks());
+			if (monster.lustVuln == 0) {
+				outputText("  It has no effect!  Ayane foe clearly does not experience lust in the same way as her.");
+			}
+			var lustDmg:Number = monster.lustVuln * ((player.statusEffectv1(StatusEffects.CombatFollowerAyane) / 12 + player.statusEffectv2(StatusEffects.CombatFollowerAyane) / 8) * (((player.statusEffectv3(StatusEffects.CombatFollowerAyane) * 2) / 2) + rand(monster.lib + monster.cor) / 5));
+			if (monster.lust < (monster.maxLust() * 0.3)) outputText("[Themonster] squirms as the magic affects [monster him].  ");
+			if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
+				if(monster.plural) outputText("[Themonster] stagger, suddenly weak and having trouble focusing on staying upright.  ");
+				else outputText("[Themonster] staggers, suddenly weak and having trouble focusing on staying upright.  ");
+			}
+			if (monster.lust >= (monster.maxLust() * 0.6)) {
+				outputText("[Themonster]'");
+				if(!monster.plural) outputText("s");
+				outputText(" eyes glaze over with desire for a moment.  ");
+			}
+			lustDmg *= 0.125;
+			lustDmg = Math.round(monster.lustVuln * lustDmg);
+			monster.teased(lustDmg);
+			outputText(" ");
+			doFireDamage(damageFF, true, true);
+			if (crit) outputText(" <b>*Critical Hit!*</b>");
+			outputText("\n\n");
 		}
 
 		public function divaCombatActions():void {
@@ -423,7 +544,7 @@ import classes.StatusEffects.VampireThirstEffect;
 			}
 			else {
 				outputText("\n\n");
-				player.createStatusEffect(StatusEffects.CombatFollowerDiva, 0, 0, 0, 0);
+				player.addStatusValue(StatusEffects.CombatFollowerDiva, 4, 1);
 			}
 		}
 		public function divaCombatActions0():void {
@@ -442,7 +563,7 @@ import classes.StatusEffects.VampireThirstEffect;
 			}
 			else {
 				outputText("\n\n");
-				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+				player.addStatusValue(StatusEffects., 4, 1);
 			}
 		}*/
 		
@@ -803,7 +924,7 @@ import classes.StatusEffects.VampireThirstEffect;
 			}
 			else {
 				outputText("\n\n");
-				player.createStatusEffect(StatusEffects.CombatFollowerSiegweird, 0, 0, 0, 0);
+				player.addStatusValue(StatusEffects.CombatFollowerSiegweird, 4, 1);
 			}
 		}
 		
@@ -1222,7 +1343,7 @@ import classes.StatusEffects.VampireThirstEffect;
 			}
 			else {
 				outputText("\n\n");
-				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+				player.addStatusValue(StatusEffects., 4, 1);
 			}
 		}
 		public function ayaneCombatActions0():void {
@@ -1241,7 +1362,7 @@ import classes.StatusEffects.VampireThirstEffect;
 			}
 			else {
 				outputText("\n\n");
-				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+				player.addStatusValue(StatusEffects., 4, 1);
 			}
 		}
 		public function ayaneCombatActions0():void {

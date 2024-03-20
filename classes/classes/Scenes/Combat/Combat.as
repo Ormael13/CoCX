@@ -11225,6 +11225,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         }
 		if (player.statusEffectv3(StatusEffects.CombatFollowerZenji) > 0 && (player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 1 || player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 3)) player.addStatusValue(StatusEffects.CombatFollowerZenji, 3, 1);
 		if (player.statusEffectv4(StatusEffects.CombatFollowerZenji) > 1) player.addStatusValue(StatusEffects.CombatFollowerZenji, 4, -1);
+		if (player.statusEffectv4(StatusEffects.CombatFollowerAyane) > 1) player.addStatusValue(StatusEffects.CombatFollowerAyane, 4, -1);
         if (player.hasStatusEffect(StatusEffects.BladeDance)) player.removeStatusEffect(StatusEffects.BladeDance);
         if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) player.removeStatusEffect(StatusEffects.ResonanceVolley);
         if (player.hasStatusEffect(StatusEffects.Defend)) player.removeStatusEffect(StatusEffects.Defend);
@@ -16232,11 +16233,23 @@ private function ghostRealIntelligenceCompanion():Number {
     if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") ghostRealInteCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAlvina);
     if (flags[kFLAGS.PLAYER_COMPANION_2] == "Alvina") ghostRealInteCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAlvina);
     if (flags[kFLAGS.PLAYER_COMPANION_3] == "Alvina") ghostRealInteCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAlvina);
+    if (flags[kFLAGS.PLAYER_COMPANION_1] == "Ayane") ghostRealInteCompanion += player.statusEffectv1(StatusEffects.CombatFollowerAyane);
+    if (flags[kFLAGS.PLAYER_COMPANION_2] == "Ayane") ghostRealInteCompanion += player.statusEffectv1(StatusEffects.CombatFollowerAyane);
+    if (flags[kFLAGS.PLAYER_COMPANION_3] == "Ayane") ghostRealInteCompanion += player.statusEffectv1(StatusEffects.CombatFollowerAyane);
     if (flags[kFLAGS.PLAYER_COMPANION_0] == "Tyrantia") ghostRealInteCompanion += player.statusEffectv3(StatusEffects.CombatFollowerTyrantia);
     if (flags[kFLAGS.PLAYER_COMPANION_1] == "Tyrantia") ghostRealInteCompanion += player.statusEffectv3(StatusEffects.CombatFollowerTyrantia);
     if (flags[kFLAGS.PLAYER_COMPANION_2] == "Tyrantia") ghostRealInteCompanion += player.statusEffectv3(StatusEffects.CombatFollowerTyrantia);
     if (flags[kFLAGS.PLAYER_COMPANION_3] == "Tyrantia") ghostRealInteCompanion += player.statusEffectv3(StatusEffects.CombatFollowerTyrantia);
     return ghostRealInteCompanion;
+}
+
+private function ghostRealWisdomCompanion():Number {
+    var ghostRealWisCompanion:Number = 0;
+    if (!player.companionsInPCParty()) return ghostRealWisCompanion;
+    if (flags[kFLAGS.PLAYER_COMPANION_1] == "Ayane") ghostRealWisCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAyane);
+    if (flags[kFLAGS.PLAYER_COMPANION_2] == "Ayane") ghostRealWisCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAyane);
+    if (flags[kFLAGS.PLAYER_COMPANION_3] == "Ayane") ghostRealWisCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAyane);
+    return ghostRealWisCompanion;
 }
 
 private function touSpeStrScale(stat:int):Number {
@@ -16303,6 +16316,11 @@ private function touSpeStrScale(stat:int):Number {
     public function scalingBonusWisdom(randomize:Boolean = true):Number {
         if (flags[kFLAGS.WISDOM_SCALING] == 1) return touSpeStrScale(player.wis);
         else return inteWisLibScale(player.wis, randomize);
+    }
+
+    public function scalingBonusWisdomCompanion(randomize:Boolean = true):Number {
+        if (flags[kFLAGS.WISDOM_SCALING] == 1) return touSpeStrScale(ghostRealWisdomCompanion());
+        else return inteWisLibScale(ghostRealWisdomCompanion(), randomize);
     }
 
     public function scalingBonusIntelligence(randomize:Boolean = true):Number {
