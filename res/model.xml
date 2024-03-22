@@ -2000,26 +2000,54 @@
 
 					<!-- Sword -->
 					<if test="PlayerHasASword">
-						<switch>
-							<case test="PlayerHasASwordHoly">
+						<if test="PlayerHasASwordHoly or PlayerHasASwordUnholy">
+							<if test="PlayerHasASwordHoly">
 								<show part="weapon/swordHoly"/>
 								<if test="PlayerHasADualMeleeWeapon">
 									<show part="weapon/swordHolyOH"/>
 								</if>
-							</case>
-							<case test="PlayerHasASwordUnholy">
+							</if>
+							<if test="PlayerHasASwordUnholy">
 								<show part="weapon/swordUnholy"/>
 								<if test="PlayerHasADualMeleeWeapon">
 									<show part="weapon/swordUnholyOH"/>
+								</if>
+							</if>
+							<else>
+								<show part="weapon/swordGeneric"/>
+								<if test="PlayerHasADualMeleeWeapon">
+									<show part="weapon/swordGenericOH"/>
+								</if>
+							</else>
+						</if>
+						<if test="FireBuff">
+							<show part="weaponBuff/swordFireBuff"/>
+							<if test="PlayerHasADualMeleeWeapon">
+								<show part="weaponBuff/swordFireBuffOH"/>
+							</if>
+						</if>
+					</if>
+					<if test="PlayerHasALargeSword">
+						<switch>
+							<case test="PlayerHasALargeSwordHoly">
+								<show part="weapon/swordLargeHoly"/>
+								<if test="PlayerHasADualMeleeWeapon">
+									<show part="weapon/swordLargeHolyOH"/>
+								</if>
+							</case>
+							<case test="PlayerHasALargeSwordUnholy">
+								<show part="weapon/swordLargeUnholy"/>
+								<if test="PlayerHasADualMeleeWeapon">
+									<show part="weapon/swordLargeUnholyOH"/>
 								</if>
 							</case>
 							<case test="PlayerHasASwordMoonGS">
 								<show part="weapon/swordMoonlightGS"/>
 							</case>
 							<default>
-								<show part="weapon/swordGeneric"/>
+								<show part="weapon/swordLargeGeneric"/>
 								<if test="PlayerHasADualMeleeWeapon">
-									<show part="weapon/swordGenericOH"/>
+									<show part="weapon/swordLargeGenericOH"/>
 								</if>
 							</default>
 						</switch>
@@ -2029,39 +2057,17 @@
 									<show part="weaponBuff/swordFireBuffMlGS"/>
 								</case>
 								<default>
-									<show part="weaponBuff/swordFireBuff"/>
+									<show part="weaponBuff/swordLargeFireBuff"/>
 									<if test="PlayerHasADualMeleeWeapon">
-										<show part="weaponBuff/swordFireBuffOH"/>
+										<show part="weaponBuff/swordLargeFireBuffOH"/>
 									</if>
 								</default>
 							</switch>
 						</if>
 					</if>
-					<if test="PlayerHasALargeSword">
-						<if test="PlayerHasALargeSwordHoly or PlayerHasALargeSwordUnholy">
-							<if test="PlayerHasALargeSwordHoly">
-								<show part="weapon/swordLargeHoly"/>
-								<if test="PlayerHasADualMeleeWeapon">
-									<show part="weapon/swordLargeHolyOH"/>
-								</if>
-							</if>
-							<if test="PlayerHasALargeSwordUnholy">
-								<show part="weapon/swordLargeUnholy"/>
-								<if test="PlayerHasADualMeleeWeapon">
-									<show part="weapon/swordLargeUnholyOH"/>
-								</if>
-							</if>
-							<else>
-								<show part="weapon/swordLargeGeneric"/>
-								<if test="PlayerHasADualMeleeWeapon">
-									<show part="weapon/swordLargeGenericOH"/>
-								</if>
-							</else>
-						</if>
-					</if>
 					<if test="PlayerHasAMassiveSword">
 						<if test="PlayerHasAMassiveSwordHoly or PlayerHasAMassiveSwordUnholy">
-						`	<if test="PlayerHasAMassiveSwordHoly">
+							<if test="PlayerHasAMassiveSwordHoly">
 								<show part="weapon/swordMassiveHoly"/>
 								<if test="PlayerHasADualMeleeWeapon">
 									<show part="weapon/swordMassiveHolyOH"/>
@@ -2079,6 +2085,12 @@
 									<show part="weapon/swordMassiveGenericOH"/>
 								</if>
 							</else>
+						</if>
+						<if test="FireBuff">
+							<show part="weaponBuff/swordMassiveFireBuff"/>
+							<if test="PlayerHasADualMeleeWeapon">
+								<show part="weaponBuff/swordMassiveFireBuffOH"/>
+							</if>
 						</if>
 					</if>
 
