@@ -1448,9 +1448,9 @@ import classes.lists.Gender;
 				CoC.instance.transformations.LowerBodyClovenHoofed(2).applyEffect();
 				changes++;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LowerBody.CLOVEN_HOOFED && player.arms.type != Arms.HUMAN) {
-				outputText("\n\nYou feel a pleasant heat in your arms as smoke rises from them, <b>leaving normal human arms</b>.");
-				player.arms.type = Arms.HUMAN;
+			if (player.lowerBody == LowerBody.CLOVEN_HOOFED && rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.SATYR) {
+				outputText("[pg]");
+				CoC.instance.transformations.ArmsSatyr.applyEffect();
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.tailType == Tail.NONE) {
@@ -1467,6 +1467,11 @@ import classes.lists.Gender;
 				outputText("[pg]");
 				if (player.horns.type == Horns.GOAT) CoC.instance.transformations.HornsGoatQuadruple.applyEffect();
 				else CoC.instance.transformations.HornsGoat.applyEffect();
+				changes++;
+			}
+			if (rand(3) == 0 && changes < changeLimit && (player.horns.type == Horns.GOAT || player.horns.type == Horns.GOATQUAD) && player.horns.count == 1) {
+				outputText("You feel heat blooming in your forehead. Confused you reach up to find your goat horns growing and thickening into a pair of horns with ridges and a slight curve. <b>You now have a pair of tall-standing goat horns.</b>");
+				player.horns.count = 6;
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.horns.type == Horns.GOAT && player.faceType != Face.HUMAN) {
@@ -2288,4 +2293,4 @@ import classes.lists.Gender;
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 	}
-}
+}

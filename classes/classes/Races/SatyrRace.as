@@ -53,7 +53,7 @@ public class SatyrRace extends Race {
 				.furColor1(ANY(SatyrFurColors), +1)
 				.earType(Ears.ELFIN, +1)
 				.tongueType(Tongue.ELF, +1)
-				//.armType(Arms.SPHINX, +1)
+				.armType(Arms.SATYR, +1)
 				.tailType(Tail.GOAT, +1)
 				.legType(LowerBody.HOOFED, +1)
 				.customRequirement("", "High Masculinity Satyr",
@@ -66,7 +66,7 @@ public class SatyrRace extends Race {
 						}, +1)
 				.cockOrVaginaOfType(CockTypesEnum.HUMAN,VaginaClass.HUMAN, +1);
 		
-		//addMutation(IMutationsLib.MelkieLungIM);
+		addMutation(IMutationsLib.MelkieLungIM);
 		
 		buildTier(12,"satyr")
 				.namesMaleFemale("satyr", "faun")
@@ -74,6 +74,16 @@ public class SatyrRace extends Race {
 					"str.mult": +0.50,
 					"tou.mult": +0.40,
 					"lib.mult": +1.50,
+					"sens": +60
+				})
+				.end();
+		
+		buildTier(18,"elder satyr")
+				.namesMaleFemale("elder satyr", "elder faun")
+				.buffs({
+					"str.mult": +0.85,
+					"tou.mult": +0.70,
+					"lib.mult": +1.75,
 					"sens": +60
 				})
 				.end();

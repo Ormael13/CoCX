@@ -186,6 +186,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const ArmsDeer: Transformation 				= arms.ArmsDeer.registerTf(AS_ARMS, AE_DEER);
 	public const ArmsReindeer: Transformation 			= arms.ArmsReindeer.registerTf(AS_ARMS, AE_REINDEER);
     public const ArmsMoth: Transformation               = arms.ArmsMoth.registerTf(AS_ARMS, AE_MOTH);
+    public const ArmsSatyr: Transformation              = arms.ArmsSatyr.registerTf(AS_ARMS, AE_SATYR);
 
 
 //ASS

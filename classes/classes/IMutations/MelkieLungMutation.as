@@ -12,7 +12,7 @@ import classes.Races;
 public class MelkieLungMutation extends IMutationPerkType
     {
         override public function get mName():String {
-            return "Melkie Lung";
+            return "Feyfolk Voice";
         }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
@@ -43,7 +43,7 @@ public class MelkieLungMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireLungsMutationSlot()
-                    .requireRace(Races.MELKIE);
+                    .requireAnyRace(Races.MELKIE, Races.SATYR);
                 }
                 else{
                     var pLvl:int = pTier * 30;

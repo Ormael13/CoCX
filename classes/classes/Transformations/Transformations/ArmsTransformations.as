@@ -1348,6 +1348,26 @@ public class ArmsTransformations extends MutationsHelper {
 				return player.arms.type === Arms.MOTH;
 			}
 	);
+
+	public const ArmsSatyr: Transformation = new SimpleTransformation("Satyr Arms",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
+
+				desc += "Your hands suddenly start to tingle as your arms grow a thin layer of [fur color] fur up to your shoulders. You watch, enthralled, as your nails sharpen to lethal point. You try out your hands at various things discovering that your overall dexterity has also been enhanced. Heck you got some instinctual know-how of how to use a few musical instruments. Must be the whole goat man/woman deal. With hands like those the dream of becoming a skilled musician is easily within your reach. <b>Your arms are now covered in fur and end with sharpened nails like those of a satyr or faun.</b>";
+				player.arms.type = Arms.SATYR;
+
+				if (doOutput) outputText(desc);
+
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.SATYR));
+			},
+			// is present
+			function (): Boolean {
+				return player.arms.type === Arms.SATYR;
+			}
+	);
 	/*
   */
 }

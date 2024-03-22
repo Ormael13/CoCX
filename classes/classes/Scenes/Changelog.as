@@ -183,13 +183,13 @@ public class Changelog extends BaseContent
 			outputText("-Black Heart IM can be accessed by Gremlins too. Small corrections and fixing errors in elf and orc IM's.\n");
 			outputText("-Mysterious Meat sold at Black Cock food tent will have it effects as Revamp planned. (Randomn tf effects so enjoy your 44 shades of tf-ing)\n");
 			outputText("-Ayane when recruited to camp now could be combat henchman with support mage options like: healing, i-frame (expire after 1 round) and foxfire.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New bodypart: Satyr Arms (from satyr tf).\n");
+			outputText("-'Melkie Lung' internal mutation been renamed to 'Feyfolk Voice' and now can be additionaly picked by satyr race.\n");
+			outputText("-Satyr race racial score and bonuses been reworked. Now it will be giving bonuses for 12/18 pts as satyr/faun and elder satyr/faun: +50%/+85% to str multi, +40%/+70% to tou multi, +150%/+175% to lib multi, +60 to sens\n");
+			outputText("-Long enough goat / quad goat horns would allow to use Gore p.special.\n");
+			outputText("-Goat horns redux + satyr sprite prep. (Liadri)\n");
+			outputText("-Large and massive swords now have sprites. (Lord Shadeogorath)\n");
+			outputText("-\n");//Red Panda race score req. increased from 8 to 10 and bonuses to stats increased by 10% each to 25% to str, 
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -216,7 +216,7 @@ public class Changelog extends BaseContent
 			outputText("-Fixed bugs: Arigean above Recruit rank not immune to tf-ing effects, deer arms tf unlocking canine arms MM, unable to find tel'adre again after first time seeing it with too high corruption or other factor that not allowed entrance; Arigean above recruit rank marking, eye color and aura with mismatching colors; demon/arigean arms MM option giving instead devil/abyssal shark arms, ");
 			outputText("Zenji training stats not having gains decrease from +4 to +1 for repeated training before daily reset for other than wisdom stats, resources not been recovered after using specials/soulskills/spells, nail buy menu at carpenter having misleading text, combat wounds % display at stats page been 100x lower, Sandworm PC not counting toward checks for having natural armor, demon face tf");
 			outputText("giving arigean face instead, gym weight lifting capping tone at 85, when building cabin text not picking correct name for Jojo/Joy line, Magical Fertility & Magical Virility perk desc bonus value display error, differences between desc dmg reduction and actualt DR from main difficulty setting, sneak melee/range attack diff between displayer and actualy dealt dmg to enemy, ");
-			outputText("Veseshe preset giving History: Scout instead of History: Whore, Tyrantia training capping at 20 sessions, elfs IM instead of orca/whale IM increasing thickness cap, Belisa holy band button typo, parser in Call Kiha text\n\n");
+			outputText("Veseshe preset giving History: Scout instead of History: Whore, Tyrantia training capping at 20 sessions, elfs IM instead of orca/whale IM increasing thickness cap, Belisa holy band button typo, parser in Call Kiha text, Raiju Cathode IM not selectable by Kirin race\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8w-z:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
