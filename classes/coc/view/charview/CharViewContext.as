@@ -99,7 +99,7 @@ public class CharViewContext extends ExecContext {
 
 					PlayerHasASword: player.isSwordTypeWeapon() && player.weapon.isMedium(),
 					PlayerHasASwordHoly: player.weapon == game.weapons.EXCALIB,
-					//PlayerHasASwordUnholy: player.weapon == game.weapons.SCARBLD,
+					PlayerHasASwordUnholy: player.weapon == game.weapons.SCARBLD,
 					PlayerHasASwordMoonGS: player.weapon == game.weapons.MGSWORD,
 					PlayerHasALargeSword: player.isSwordTypeWeapon() && player.weapon.isLarge(),
 					PlayerHasALargeSwordHoly: player.weapon == game.weapons.NPHBLDE || player.weapon == game.weapons.T_HEART,
