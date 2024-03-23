@@ -1539,6 +1539,11 @@ import classes.lists.Gender;
 				player.cocks[player.findFirstCockNotInType([CockTypesEnum.HUMAN])].cockType = CockTypesEnum.HUMAN;
 				changes++;
 			}
+			if (player.racialScore(Races.SATYR) >= 15 && !player.hasPerk(PerkLib.Aelfwine) && changes < changeLimit && rand(3) == 0) {
+				outputText("[pg]Damn you feel like the wine is getting to you you feel hornier… stronger… <b>It looks like you acquired Aelfwine ability.</b>");
+				player.createPerk(PerkLib.Aelfwine, 0, 0, 0, 0);
+				changes++;
+			}
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
@@ -2293,4 +2298,4 @@ import classes.lists.Gender;
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 	}
-}
+}

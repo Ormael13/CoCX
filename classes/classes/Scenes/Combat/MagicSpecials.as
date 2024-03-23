@@ -1017,7 +1017,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		//Sing
-		if (player.hasPerk(PerkLib.MelkieSong) || player.hasPerk(PerkLib.HarpySong) || player.hasPerk(PerkLib.PrestigeJobBard)) {
+		if (player.hasPerk(PerkLib.MelkieSong) || player.hasPerk(PerkLib.HarpySong) || player.hasPerk(PerkLib.PanLabyrinth) || player.hasPerk(PerkLib.PrestigeJobBard)) {
 			bd = buttons.add("Sing", SingInitiate).hint("Begin singing. While singing, you may add various powerful effects to your tune.\n.");
 		}
 		//Telekinetic Grab
@@ -1248,6 +1248,7 @@ public class MagicSpecials extends BaseCombatContent {
 		var IntligenceModifier:Number = 0;
 		if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) IntligenceModifier += scalingBonusIntelligence();
 		if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) IntligenceModifier += scalingBonusIntelligence();
+		if (player.hasPerk(PerkLib.Aelfwine)) IntligenceModifier += scalingBonusToughness();
 		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 2) {
 			outputText("You end your theme with a powerful finale compelling everyone around to adore and love you.");
 			var lustDmgF:Number = monster.lustVuln * 3 * (player.inte / 5 * (player.teaseLevel * 0.2) + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
@@ -1259,6 +1260,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
+			if (player.hasPerk(PerkLib.Aelfwine)) lustDmg *= 1.5;
 			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) lustDmgF *= 1.2;
 			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) lustDmgF *= 1.3;
 			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) lustDmgF *= 1.4;
@@ -1267,6 +1269,7 @@ public class MagicSpecials extends BaseCombatContent {
 			lustDmgF = Math.round(lustDmgF);
 			monster.teased(lustDmgF);
 			if(!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned,4,0,0,0);
+			if (player.hasPerk(PerkLib.Aelfwine) && monster.hasStatusEffect(StatusEffects.LustDoTSP)) monster.addStatusValue(StatusEffects.LustDoTSP, 1, 1);
 			if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownCompellingAria,11,0,0,0);
 			else player.createStatusEffect(StatusEffects.CooldownCompellingAria,10,0,0,0);
 			player.removeStatusEffect(StatusEffects.ChanneledAttack);
@@ -1290,6 +1293,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg2 *= 1.5;
 			if (player.hasPerk(PerkLib.RacialParagon)) lustDmg2 *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg2 *= 1.50;
+			if (player.hasPerk(PerkLib.Aelfwine)) lustDmg *= 1.5;
 			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) lustDmg2 *= 1.2;
 			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) lustDmg2 *= 1.3;
 			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) lustDmg2 *= 1.4;
@@ -1297,6 +1301,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg2 *= 2;
 			lustDmg2 = Math.round(lustDmg2);
 			monster.teased(lustDmg2);
+			if (player.hasPerk(PerkLib.Aelfwine) && monster.hasStatusEffect(StatusEffects.LustDoTSP)) monster.addStatusValue(StatusEffects.LustDoTSP, 1, 1);
 			player.addStatusValue(StatusEffects.ChanneledAttack, 1, 1);
 			outputText("\n\n");
 			enemyAI();
@@ -1310,6 +1315,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
 			if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
+			if (player.hasPerk(PerkLib.Aelfwine)) lustDmg *= 1.5;
 			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) lustDmg *= 1.2;
 			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) lustDmg *= 1.3;
 			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) lustDmg *= 1.4;
@@ -1317,6 +1323,10 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 			lustDmg = Math.round(lustDmg);
 			monster.teased(lustDmg);
+			if (player.hasPerk(PerkLib.Aelfwine)) {
+				if (monster.hasStatusEffect(StatusEffects.LustDoTSP)) monster.addStatusValue(StatusEffects.LustDoTSP, 1, 1);
+				else monster.createStatusEffect(StatusEffects.LustDoTSP, 5, 0, 0, 0);
+			}
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.ChanneledAttackType, 1, 0, 0, 0);
 			outputText("\n\n");

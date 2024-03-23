@@ -24,6 +24,7 @@ import classes.Scenes.SceneLib;
 		override public function useItem():Boolean {
 			outputText("Feeling parched you tug the cork from a bottle of wine. As you put the bottle to your lips and drink the rich, invigorating liquid you soon find yourself with an empty bottle and a smile. ");
 			mutations.DrunkenPowerEmpowerIfPossible();
+			mutations.AelfwineEmpowerIfPossible();
             player.refillHunger(10);
 			SceneLib.bazaar.blackCock.satyrTFs();
             return false;

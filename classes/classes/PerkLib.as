@@ -4009,6 +4009,8 @@ public class PerkLib
 		// Quest, Event & NPC perks
 		public static const AdvancedLeadership:PerkType = mk("Advanced Leadership", "Advanced Leadership",
 				"Allows to form 4 people party.");
+		public static const Aelfwine:PerkType = mk("Aelfwine", "Aelfwine",
+				"When drinking alcohol double libido but halve intelligence while drunk.");
 		public static const AffinityGnome:PerkType = mk("Affinity (Gnome)", "Affinity (Gnome)",
 				"Gain a boon based on the terrain, abundance of plants grants regeneration 15% while rocky ground gives +20% Damage reduction. Aquatic or snowy terrain gives nothing.");
 		public static const AffinityIgnis:PerkType = mk("Affinity (Ignis)", "Affinity (Ignis)",
@@ -4148,6 +4150,8 @@ public class PerkLib
 				.withBuffs({'maxlust_base':+45,'minlustx':0.35});
 		public static const OneTrackMind:PerkType = mk("One Track Mind", "One Track Mind",
 				"Your constant desire for sex causes your sexual organs to be able to take larger insertions and disgorge greater amounts of fluid.");
+		public static const PanLabyrinth:PerkType = mk("Pan Labyrinth", "Pan Labyrinth",
+				"Allow the use of Sing. Sing and Perform tease effect is 50% more powerful. Sing and Perform inflicts lingering tease damage for 5 rounds that has a chance to cause confusion on each turn causing the target to lose its turn. Sing and Perform gain a toughness scaling.");
 		public static const Phylactery:PerkType = mk("Phylactery", "Phylactery",
 				"Your soul has been safely stored into a phylactery allowing you to fully unlock your potential as a demon.").withBuffs({'int.mult':0.75});
 		public static const PilgrimsBounty:PerkType = mk("Pilgrim's Bounty", "Pilgrim's Bounty",

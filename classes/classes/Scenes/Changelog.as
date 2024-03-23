@@ -191,8 +191,8 @@ public class Changelog extends BaseContent
 			outputText("-Large and massive swords now have sprites. (Lord Shadeogorath)\n");
 			outputText("-Red Panda race score req. increased from 8 to 10 and bonuses to stats slight changed: +20% to str multi, +80% to spe multi and +50% to wis multi. It can also use Grab & Slam specials like bear/panda race and Body Slam special that pig/boar can use.\n");
 			outputText("-All human internal mutations desc have added part on need to keep high human score to have their effects all active (some effects could still happen when it's below req. score but mostly it's needed to have those 18+ pts)\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New event perk: Pan Labyrinth. Gained by having 15+ in satyr score. Effects: Allow the use of Sing. Sing and Perform tease effect is 50% more powerful. Sing and Perform inflicts lingering tease damage for 5 rounds that has a chance to cause confusion on each turn causing the target to lose its turn. Sing and Perform gain a toughness scaling.\n");
+			outputText("-New event perk: Aelfwine. Gained by using Satyr Wine when having 15+ in satyr score. Effects: When drinking alcohol double libido but halve intelligence while drunk.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -208,15 +208,15 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Demojay) (jfmherokiller) (NUZ/Shirane) (Xetaxheb)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed bugs: Arigean above Recruit rank not immune to tf-ing effects, deer arms tf unlocking canine arms MM, unable to find tel'adre again after first time seeing it with too high corruption or other factor that not allowed entrance; Arigean above recruit rank marking, eye color and aura with mismatching colors; demon/arigean arms MM option giving instead devil/abyssal shark arms, ");
 			outputText("Zenji training stats not having gains decrease from +4 to +1 for repeated training before daily reset for other than wisdom stats, resources not been recovered after using specials/soulskills/spells, nail buy menu at carpenter having misleading text, combat wounds % display at stats page been 100x lower, Sandworm PC not counting toward checks for having natural armor, demon face tf");
 			outputText("giving arigean face instead, gym weight lifting capping tone at 85, when building cabin text not picking correct name for Jojo/Joy line, Magical Fertility & Magical Virility perk desc bonus value display error, differences between desc dmg reduction and actualt DR from main difficulty setting, sneak melee/range attack diff between displayer and actualy dealt dmg to enemy, ");

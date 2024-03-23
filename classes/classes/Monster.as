@@ -3424,7 +3424,6 @@ import classes.Scenes.Combat.CombatAbilities;
 				if (hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) manaRecovery = 0;
 				addMana(manaRecovery);
 			}
-
 			if(hasStatusEffect(StatusEffects.MilkyUrta)) {
 				SceneLib.urtaQuest.milkyUrtaTic();
 			}
@@ -3613,7 +3612,6 @@ import classes.Scenes.Combat.CombatAbilities;
 				//Countdown to heal
 				if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.CouatlHurricane, 1, -2);
 				else addStatusValue(StatusEffects.CouatlHurricane, 1, -1);
-
 				//Heal wounds
 				if (statusEffectv1(StatusEffects.CouatlHurricane) <= 0) {
 					outputText("The wounds you left on [themonster] stop bleeding so profusely.\n\n");
@@ -3623,7 +3621,6 @@ import classes.Scenes.Combat.CombatAbilities;
 					//Deal severe true damage each round
 					var store14:Number = (player.inte + player.spe) * 2;
 					var couatlExtraDmg:Number = (player.spe*5)+(player.inte*5);
-
 					if (statusEffectv2(StatusEffects.CouatlHurricane) > 0) store14 += couatlExtraDmg; //If reapplied, temporarily increase damage
 					store14 += maxHP()*0.02;
 					store14 = SceneLib.combat.fixPercentDamage(store14, false);
@@ -3659,7 +3656,6 @@ import classes.Scenes.Combat.CombatAbilities;
 					var procentvalue:Number = (4 + rand(7));
 					if (statusEffectv2(StatusEffects.IzmaBleed) > 0) procentvalue += statusEffectv2(StatusEffects.IzmaBleed);
 					procentvalue = Math.round(procentvalue);
-
 					var store:Number = maxHP() * (procentvalue) / 100;
 					store *= SceneLib.combat.BleedDamageBoost();
 					store = SceneLib.combat.fixPercentDamage(store);
@@ -3701,15 +3697,12 @@ import classes.Scenes.Combat.CombatAbilities;
 				
 				//Gain 20% per stack for regular Kamaitachi and 40% for Greater Kamaitachi
 				var kamMultiplier:Number = 0.2 * player.racialTierCached(Races.KAMAITACHI);
-
 				store13 *= 1 + (kamMultiplier * statusEffectv1(StatusEffects.KamaitachiBleed)); //Kamaitachi bleed stacks on itself growing ever stronger
 				store13 = SceneLib.combat.doDamage(store13);
-
 				if(plural) outputText("[Themonster] bleed profusely from the deep wounds your scythes left behind. ");
 				else outputText("[Themonster] bleeds profusely from the deep wounds your scythes left behind. ");
 				SceneLib.combat.CommasForDigits(store13);
 				outputText("[pg]");
-
 				//Decay Kamaitachi stacks for each turn the effect is not applied
 				if (statusEffectv4(StatusEffects.KamaitachiBleed) == 0 && statusEffectv1(StatusEffects.KamaitachiBleed) > 1) addStatusValue(StatusEffects.KamaitachiBleed, 1, -1);
 				changeStatusValue(StatusEffects.KamaitachiBleed, 4, 0);
@@ -4227,6 +4220,30 @@ import classes.Scenes.Combat.CombatAbilities;
 						else outputText("[Themonster] is aroused by lingering lust-induncing after-effect. ");
 						teased(lustDmg2, false);
 						outputText("\n\n");
+					}
+				}
+			}
+			//Lust Dot (Sing / Perform)
+			if (hasStatusEffect(StatusEffects.LustDoTSP)) {
+				//Countdown to heal
+				addStatusValue(StatusEffects.LustDoTSP,1,-1);
+				if (statusEffectv4(StatusEffects.LustDoTSP) == 0) {
+					if (statusEffectv1(StatusEffects.LustDoTSP) > 1) addStatusValue(StatusEffects.LustDoTSP, 1, -1);
+					//Heal wounds
+					if (statusEffectv1(StatusEffects.LustDoTSP) <= 0) {
+						outputText("Lingering lust-induncing after-effect on [themonster] finally ends.\n\n");
+						removeStatusEffect(StatusEffects.LustDoTSP);
+					}
+					//Deal damage if still wounded.
+					else {
+						var lustDmg3:Number = SceneLib.combat.teases.teaseBaseLustDamage();
+						if (game.player.hasPerk(PerkLib.KingOfTheJungle)) lustDmg3 *= 1.2;
+						lustDmg3 = Math.round(lustDmg3);
+						if(plural) outputText("[Themonster] are both confused and aroused by your musical performance! ");
+						else outputText("[Themonster] is both confused and aroused by your musical performance! ");
+						teased(lustDmg3, false);
+						outputText("\n\n");
+						if (rand(10) == 0 && hasPerk(PerkLib.Resolute)) createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 					}
 				}
 			}
