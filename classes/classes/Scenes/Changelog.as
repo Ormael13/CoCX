@@ -184,7 +184,7 @@ public class Changelog extends BaseContent
 			outputText("-Mysterious Meat sold at Black Cock food tent will have it effects as Revamp planned. (Randomn tf effects so enjoy your 44 shades of tf-ing)\n");
 			outputText("-Ayane when recruited to camp now could be combat henchman with support mage options like: healing, i-frame (expire after 1 round) and foxfire.\n");
 			outputText("-New bodypart: Satyr Arms (from satyr tf).\n");
-			outputText("-'Melkie Lung' internal mutation been renamed to 'Feyfolk Voice' and now can be additionaly picked by satyr race.\n");
+			outputText("-'Melkie Lung' internal mutation been renamed to 'Feyfolk Voice' and now can be additionaly picked by satyr race. It spell damage reduction been changed to be 5% * tier and increasing sing/perform power to be 25 * tier. Stat multi been changed form speed to toughness and bit lowered on 2nd and 3rd tier.\n");
 			outputText("-Satyr race racial score and bonuses been reworked. Now it will be giving bonuses for 12/18 pts as satyr/faun and elder satyr/faun: +50%/+85% to str multi, +40%/+70% to tou multi, +150%/+175% to lib multi, +60 to sens\n");
 			outputText("-Long enough goat / quad goat horns would allow to use Gore p.special.\n");
 			outputText("-Goat horns redux + satyr sprite prep. (Liadri)\n");
@@ -193,10 +193,10 @@ public class Changelog extends BaseContent
 			outputText("-All human internal mutations desc have added part on need to keep high human score to have their effects all active (some effects could still happen when it's below req. score but mostly it's needed to have those 18+ pts)\n");
 			outputText("-New event perk: Pan Labyrinth. Gained by having 15+ in satyr score. Effects: Allow the use of Sing. Sing and Perform tease effect is 50% more powerful. Sing and Perform inflicts lingering tease damage for 5 rounds that has a chance to cause confusion on each turn causing the target to lose its turn. Sing and Perform gain a toughness scaling.\n");
 			outputText("-New event perk: Aelfwine. Gained by using Satyr Wine when having 15+ in satyr score. Effects: When drinking alcohol double libido but halve intelligence while drunk.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New mutation perk: Feyfolk Voice (Final Form). Req. Feyfolk Voice (Evolved) and lvl 90+. Effects: Increase damage reduction against spells by 20% and increase the power of Sing/Perform by 100%. Sing/Perform is kept at all time. Sing/Perform now has an Intelligence scaling and it’s doubled. Increase Intensify limit by 10 stages.\n");
+			outputText("-New melee weapon: Satyr Flute. Currently dropped by Satyr enemies. Cost 160 gems. Is small mace/hammer type weapon with atk 1. Effects: +50% spellpower, +50% performance power.\n");
+			outputText("-New melee weapon: Pan Flute. Currently buyable in Oddities shop. Cost 160 gems. Is small mace/hammer type weapon with atk 1. Effects: +50% spellpower, +100% performance power.\n");
+			outputText("-New weapon peark: Performance Power. Gained by equipping any melee weapon classified as Music Instrument. Effect: Increase Performance special power by x% (depending on melee weapon).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

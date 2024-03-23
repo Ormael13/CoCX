@@ -3336,13 +3336,7 @@ use namespace CoC;
 				mult -= 5;
 			}
 			if (perkv1(IMutationsLib.MelkieLungIM) >= 1) {
-				mult -= 5;
-			}
-			if (perkv1(IMutationsLib.MelkieLungIM) >= 2) {
-				mult -= 10;
-			}
-			if (perkv1(IMutationsLib.MelkieLungIM) >= 3) {
-				mult -= 15;
+				mult -= (5 * perkv1(IMutationsLib.MelkieLungIM));
 			}
 			if (perkv1(IMutationsLib.WhaleFatIM) >= 1) {
 				mult -= 5;

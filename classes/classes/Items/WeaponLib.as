@@ -1023,6 +1023,16 @@ public final class WeaponLib extends ItemConstants
 				"WDagger","W.Dagger","witch dagger","a witch dagger","stab",3,500,"A dagger engraved with magical runes. While not the best catalyst around it is light, discreet and excelent for delivering spells.", WT_DAGGER, WSZ_SMALL)
 				.withBuff('spellpower', +0.20)
 				.withTags(W_STAFFPART) as Weapon;
+		public const SFLUTTE:Weapon = new Weapon(
+				"SFlute","S.Flute","Satyr Flute","a Satyr Flute","smack",1,160,".", WT_MACE_HAMMER, WSZ_SMALL)
+				.withBuff('spellpower', +0.50)
+				.withPerk(PerkLib.PerformancePower, 0.5, 0, 0, 0)
+				.withTags(W_MUSICINSTR) as Weapon;
+		public const PFLUTTE:Weapon = new Weapon(
+				"PFlute","P.Flute","Pan Flute","a Pan Flute","smack",1,160,".", WT_MACE_HAMMER, WSZ_SMALL)
+				.withBuff('spellpower', +0.50)
+				.withPerk(PerkLib.PerformancePower, 1, 0, 0, 0)
+				.withTags(W_MUSICINSTR) as Weapon;
 		public const OCCULUS:Weapon = new Occulus();
 		public const ECLIPSE:Weapon = new Eclipse();
 		public const NEXUS:Weapon = new Nexus(); //We may need to add a special event or forge for this item
