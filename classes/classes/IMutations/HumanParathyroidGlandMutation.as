@@ -29,6 +29,7 @@ public class HumanParathyroidGlandMutation extends IMutationPerkType
             if (pTier >= 3){
                 descS += " Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.";
             }
+            if (pTier >= 1) descS += " (req. 18+ human score to have all effects active)";
             return descS;
         }
 

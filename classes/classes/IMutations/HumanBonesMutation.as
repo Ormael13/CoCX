@@ -29,6 +29,7 @@ public class HumanBonesMutation extends IMutationPerkType
             if (pTier == 3){
                 descS += "10, maximum trainable Int/Wis by 20%. Increase effects of body cultivation by 50%. ";
             }
+            if (pTier >= 1) descS += " (req. 18+ human score to have all effects active)";
             return descS;
         }
 

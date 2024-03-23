@@ -28,6 +28,7 @@ public class HumanVersatilityMutation extends IMutationPerkType
             if (pTier == 3){
                 descS = "Mastery gains increased by 3 point or in case of multiplier +3 to multiplier. Decrease needed exp to lvl up weapon/lifeskill masteries and have 20% chance to gain 3x more XP for Mastery.";
             }
+            if (pTier >= 1) descS += " (req. 18+ human score to have all effects active)";
             return descS;
         }
 

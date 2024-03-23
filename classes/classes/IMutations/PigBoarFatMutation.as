@@ -27,7 +27,7 @@ public class PigBoarFatMutation extends IMutationPerkType
                 descS = "Body Slam req. lower thickness to be used, increase max Hunger cap by 15 (if PC have Hunger bar active)";
             }
             if (pTier == 3){
-                descS = "Body Slam req. lower thickness and doubled power, pig/boar req. removed, thickness requirement lowered, increase max Hunger cap by 35 (if PC have Hunger bar active)";
+                descS = "Body Slam thickness requirement lowered and it power is doubled, pig/boar/red panda req. removed, increase max Hunger cap by 35 (if PC have Hunger bar active)";
             }
             if (descS != "")descS += ".";
             return descS;

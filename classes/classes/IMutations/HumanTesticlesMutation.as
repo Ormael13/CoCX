@@ -32,6 +32,7 @@ public class HumanTesticlesMutation extends IMutationPerkType
                 descS += "Increases virility rating by 60, +20% to lust resistance, increase cum production by ~100%, +10% to max overlust, negative effects of libido are reduced by 5%, +200 to max lust and allow to use Cum Cannon once per fight";
             }
             if (descS != "")descS += ".";
+            if (pTier >= 1) descS += " (req. 18+ human score to have all effects active)";
             return descS;
         }
 

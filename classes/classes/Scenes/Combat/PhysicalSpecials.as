@@ -217,7 +217,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					}
 				}
 				//Grab & Slam
-				if (player.isRaceCached(Races.BEARANDPANDA) && !monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType)) {
+				if ((player.isRaceCached(Races.BEARANDPANDA) || player.isRaceCached(Races.REDPANDA)) && !monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType)) {
 					bd = buttons.add("Grab", bearGrab).hint("Attempt to grab the opponent in your powerful paws. Does not work on opponent taller than you.");
 					if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 					bd = buttons.add("Slam", bearSlam).hint("Furiously slam your target with your powerful paw, staggering and stunning it.");
@@ -298,7 +298,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 						bd.disable("<b>You need more time before you can perform Tail Smack again.</b>\n\n");
 					} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
-				if ((player.isRaceCached(Races.PIG) || player.perkv1(IMutationsLib.PigBoarFatIM) >= 3) && player.thickness >= minThicknessReq()) {
+				if ((player.isRaceCached(Races.PIG) || player.perkv1(IMutationsLib.PigBoarFatIM) >= 3 || player.isRaceCached(Races.REDPANDA)) && player.thickness >= minThicknessReq()) {
 					bd = buttons.add("Body Slam", bodySlam).hint("Body slam your opponent (small chance to stun). Damage scale with toughness and thickness.");
 					bd.requireFatigue(physicalCost(50));
 					if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
@@ -2125,9 +2125,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		fatigue(50, USEFATG_PHYSICAL);
 		outputText("You take a low stance and begin to charge at [themonster]. Letting your momentum take over, you crash into your opponent and tackle them to the ground, dealing massive damage as they're crushed underneath your weight. ");
 		if (silly()) {
-			outputText("As you collide with [themonster], everything goes grey, and [themonster] looks directly at the camera. <i>\"Yep, that is me. The one being crushed underneath a fatty. Now you might be wondering how this all happened, ");
-			outputText("and honestly, I am too. Here I am doing my job, and out of nowhere I'm attacked by a pig. Next thing I know, I'm about to be crushed under a mountain of fat. Now there's probably some joke you can make right now, the only thing coming to my mind is Space Jam.\"</i>");
-			outputText(" Everything returns to normal, and [themonster] gets comically crushed in slow motion under a mountain of fat, with the camera taking extra care to zoom in on [themonster]'s face.");
+			outputText("As you collide with [themonster], everything goes grey, and [themonster] looks directly at the camera. <i>\"Yep, that is me. The one being crushed underneath a fatty. Now you might be wondering how this all happened, and honestly, I am too. ");
+			outputText("Here I am doing my job, and out of nowhere I'm attacked by a pig. Next thing I know, I'm about to be crushed under a mountain of fat. Now there's probably some joke you can make right now, the only thing coming to my mind is Space Jam.\"</i> ");
+			outputText("Everything returns to normal, and [themonster] gets comically crushed in slow motion under a mountain of fat, with the camera taking extra care to zoom in on [themonster]'s face.");
 		}
 		var slamDmg:Number = player.thickness;
 		if (player.perkv1(IMutationsLib.PigBoarFatIM) >= 1) slamDmg += player.thickness;

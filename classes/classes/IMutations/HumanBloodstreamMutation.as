@@ -29,6 +29,7 @@ public class HumanBloodstreamMutation extends IMutationPerkType
             if (pTier == 3){
                 descS += "10, maximum trainable Spe/Libs by 20%. Increase a bit fatigue recovery and wrath generation.";
             }
+            if (pTier >= 1) descS += " (req. 18+ human score to have all effects active)";
             return descS;
         }
 
