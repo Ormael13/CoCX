@@ -995,6 +995,7 @@
         <cell rect="842,1620,80,90" name="weapon/tetsuGeneric" dx="38" dy="55"/>
         <cell rect="842,1726,80,90" name="weapon/tetsuHoly" dx="38" dy="55"/>
         <cell rect="842,1832,80,90" name="weapon/tetsuUnholy" dx="38" dy="55"/>
+		<cell rect="1022,2100,89,55" name="weapon/panFlute" dx="43" dy="94"/>
         <cell rect="1112,1620,80,90" name="weapon/daggerGeneric" dx="38" dy="55"/>
         <cell rect="1112,1726,80,90" name="weapon/daggerHoly" dx="38" dy="55"/>
         <cell rect="1112,1832,80,90" name="weapon/daggerUnholy" dx="38" dy="55"/>
@@ -2155,6 +2156,11 @@
 								</if>
 							</else>
 						</if>
+					</if>
+
+					<!-- Pan Flute -->
+					<if test="PlayerHasAPanFlute">
+						<show part="weapon/panFlute"/>
 					</if>
 
 					<!-- Spear -->
