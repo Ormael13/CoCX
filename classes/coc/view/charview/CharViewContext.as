@@ -114,7 +114,7 @@ public class CharViewContext extends ExecContext {
 					PlayerHasAnAxeHoly:player.weapon == game.weapons.WG_GAXE,
 					PlayerHasAnAxeUnholy:player.weapon == game.weapons.DE_GAXE || player.weapon == game.weapons.ASTERIUS,
 
-					PlayerHasAHammer: player.isMaceHammerTypeWeapon() && !player.isTetsubo(),
+					PlayerHasAHammer: player.isMaceHammerTypeWeapon() && !player.isTetsubo() && player.weapon != game.weapons.SFLUTTE && player.weapon != game.weapons.PFLUTTE,
 					//PlayerHasAHammerHoly:player.weapon == game.weapons.POCDEST,
 					//PlayerHasAHammerUnholy:player.weapon == game.weapons.DOCDEST,
 					PlayerHasATetsu: player.weapon == game.weapons.OTETSU || player.weapon == game.weapons.POCDEST || player.weapon == game.weapons.DOCDEST,
