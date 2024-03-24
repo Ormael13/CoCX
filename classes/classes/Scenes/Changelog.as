@@ -55,7 +55,7 @@ public class Changelog extends BaseContent
 			outputText("-New flying sword: Aquamarine Half-Moon Duo - combined from two Aquamarine Half-Moon swords. Cost 300 spirit stones. Base atk is 15. It's classified as Large flying sword (set of 2). Deal water damage instead of physical damage.\n");
 			outputText("-New flying sword: Obsidian Half-Moon Duo - combined from two Obsidian Half-Moon swords. Cost 300 spirit stones. Base atk is 15. It's classified as Large flying sword (set of 2). Deal earth damage instead of physical damage.\n");
 			outputText("-New flying sword: Chrysolite New Moon - buyable at 'Flying Swords are always with you!' shop in He'Xin'Dao. Cost 375 spirit stones. Base atk is 40. It's classified as Massive flying sword. Deal plasma damage instead of physical damage. Soulforce cost of using it to fly or attack are increased by 10%.\n");
-			outputText("-New consumable: Soaring Blades manual. Req. buying manual from Qi for 50 spirit stones after finsining basic training with him. Using will grant perk Soaring Blades.\n");
+			outputText("-New consumable: Soaring Blades manual. Req. buying manual from Qi for 50 spirit stones after finishing basic training with him. Using will grant perk Soaring Blades.\n");
 			outputText("-New P. Special: Ram. Req. to be Arigean Princess. Deals Physical Damage based on Speed, but cause recoil damage equal to 10% of user max HP.\n");
 			outputText("-When reaching lvl 30 and having done all misison from Grayda Arigean PC can have event proc at camp that unlocks new quest 'Coronation'. Visiting her at Trench would send PC to gather materials and then becoming new princess. It's pernament race option so can't return from been Arigean Princess.\n");
 			outputText("-Arigean Princess (23+) stat bonuses: +430% to str multi, +430% to spe multi, +310% to tou multi, -75% to int multi, -60% to wisdom multi, +65 Min Corruption, +10 armor. She can use additional specials: Grab and Guillotine (both works like the ones from Cancer race)\n");
@@ -197,12 +197,14 @@ public class Changelog extends BaseContent
 			outputText("-New melee weapon: Satyr Flute. Currently dropped by Satyr enemies. Cost 160 gems. Is small mace/hammer type weapon with atk 1. Effects: +50% spellpower, +50% performance power.\n");
 			outputText("-New melee weapon: Pan Flute. Currently buyable in Oddities shop. Cost 160 gems. Is small mace/hammer type weapon with atk 1. Effects: +50% spellpower, +100% performance power.\n");
 			outputText("-New weapon peark: Performance Power. Gained by equipping any melee weapon classified as Music Instrument. Effect: Increase Performance special power by x% (depending on melee weapon).\n");
-			outputText("-Pan Flute sprite (by Liadri) implementation. (Lord Shadeogorath)\n");
+			outputText("-Pan Flute sprite (by Liadri) implementation, Legendary pan flutes now use the pan flute sprite. (Lord Shadeogorath)\n");
 			outputText("-When having equipped melee weapon with music instrument tag special 'Sing' would be replaced with special 'Perform'. It change some of texts when using special and in case of 'Arouse' option when perfomring would have stun chance based on intensify scale not fixed 20% with Dazzling Display perk.\n");
 			outputText("-New melee weapon (by Liadri): Elysium - obtainable by giving Pan Flute to Pure Celess to purify. +150% perform power, +150% spell catalyst modifier, +100% tease modifier based on Purity. Increase Arouse potency by 100%.\n");
 			outputText("-New melee weapon (by Liadri): Hellcaller - obtainable by giving Pan Flute to Corrupted Celess/Tyrantia to corrupt. +150% perform power, +150% spell catalyst modifier, +100% tease modifier based on corruption. Increase devastating Aria potency by 50%.\n");
 			outputText("-New mutation perk: Orc Adrenal Glands (Final Form). Req. Orc Adrenal Glands (Evolved) and lvl 90+. Effects: Your Orc adrenal glands are increasing Ferocity limit by 8%, +50% of max core Str as phantom Str, increase your natural strength and tone, boost natural wrath generation rate, allow to use Ferocity even when been no longer an orc, ");
 			outputText("out of combat when below 10% would not loose wrath and gain +2% per hour, +0.5% wrath generated in combat.\n");
+			outputText("-New consumable: 'First Attack: Flying Sword' manual. Req. buying manual from Qi for 50 spirit stones after learning Soaring Blades passive, reaching Soul Warrior stage and be lvl 24+. Using will grant perk First Attack: Flying Sword.\n");
+			outputText("-Fully scaled lizard/dragon-morphs got a facelift (by Liadri) (Lord Shadeogorath)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -216,12 +218,14 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
 			outputText("-\n");
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -296,28 +300,26 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
 			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");full stats bonuses not added yet to: Echidna, Scorpion-morph
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");wolf pepper - nieużywany item chyba co można go by w wolf TF zmienić: dodaje special coś na kształt likantropii ^^
 			outputText("\n");aqua seed - item mający być siren tf item
@@ -329,7 +331,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

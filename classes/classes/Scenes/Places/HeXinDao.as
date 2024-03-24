@@ -875,6 +875,7 @@ public class HeXinDao extends BaseContent
 		if (player.hasPerk(PerkLib.SoulSense) && flags[kFLAGS.SPIRIT_STONES] >= 50) addButtonIfTrue(0, "Basic training", qimerchantTraningMainFlyingSwordPath1, "You already learned basic control of flying swords.", !player.hasPerk(PerkLib.FlyingSwordPath));
 		else addButtonDisabled(0, "Basic training", "Req. Soul Sense perk & 50 spirit stones.");
 		addButtonIfTrue(10, "Soaring Blades", qimerchantTraningMainSoaringBladesManual, "You need to learn how to control flying swords first (Req. Flying Sword Path perk).", player.hasPerk(PerkLib.FlyingSwordPath));
+		addButtonIfTrue(11, "1stAtk: F.Sword", qimerchantTraningMainFirstAttackFlyingSwordManual, "You need to learn how to control flying swords first (Req. Flying Sword Path perk).", player.hasPerk(PerkLib.FirstAttackFlyingSword));
 		addButton(14, "Back", qimerchant);
 	}
 	private function qimerchantTraningMainFlyingSwordPath1():void {
@@ -905,7 +906,7 @@ public class HeXinDao extends BaseContent
 	}
 	private function qimerchantTraningMainSoaringBladesManual():void {
 		clearOutput();
-		outputText("Qi holds up the manual and says, \"<i>It would teach you Soaring Blades, that helps with reducing soulfroce consumption to operate flying swords.  It is <b>50 spirit stones</b></i>.\" ");
+		outputText("Qi holds up the manual and says, \"<i>It would teach you Soaring Blades, that helps with reducing soulforce consumption to operate flying swords.  It is <b>50 spirit stones</b></i>.\" ");
 		doYesNo(buySoaringBladesManual, qimerchantTraningMain);
 	}	
 	private function buySoaringBladesManual():void {
@@ -917,6 +918,22 @@ public class HeXinDao extends BaseContent
 		else {
 			flags[kFLAGS.SPIRIT_STONES] -= 50;
 			inventory.takeItem(consumables.S_B_MAN, qimerchantTraningMain);
+		}
+	}
+	private function qimerchantTraningMainFirstAttackFlyingSwordManual():void {
+		clearOutput();
+		outputText("Qi holds up the manual and says, \"<i>It would teach you 'First Attack: Flying Sword', that allows you to use your flying sword in more semi-independent way.  It is <b>50 spirit stones</b></i>.\" ");
+		doYesNo(buybuyFirstAttackFlyingSwordManual, qimerchantTraningMain);
+	}	
+	private function buybuyFirstAttackFlyingSwordManual():void {
+		if (flags[kFLAGS.SPIRIT_STONES] < 50) {
+			clearOutput();
+			outputText("\n\nQi sighs, indicating you need " + String(50 - flags[kFLAGS.SPIRIT_STONES]) + " more spirit stones to purchase this manual.");
+			doNext(qimerchantTraningMain);
+		}
+		else {
+			flags[kFLAGS.SPIRIT_STONES] -= 50;
+			inventory.takeItem(consumables.FAFSMAN, qimerchantTraningMain);
 		}
 	}
 
