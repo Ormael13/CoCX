@@ -21,7 +21,7 @@ public class EyeOfTheTigerMutation extends IMutationPerkType
             if (pTier >= 1){
                 descS = "Increase precision of all attacks by 5%";
             }
-           if (pTier >= 2){
+			if (pTier >= 2){
                 descS += " and increase critical chance with natural weapons and weapons by 5%. Increase Rake and Claw attack damage by 50%.";
             }
              if (pTier == 1){

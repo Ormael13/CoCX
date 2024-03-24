@@ -11720,6 +11720,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
     public function wrathregeneration(minutes:Number = 1):void {
         var gainedwrath:Number = 0;
         if (player.hasPerk(PerkLib.AbsoluteStrength)) gainedwrath += wrathregeneration2() * 0.02 * minutes;
+		else if (player.perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 4 && player.wrath < Math.round(player.maxWrath()*0.1)) gainedwrath += Math.round(player.maxWrath()*0.02) * 0.02 * minutes;
 		else {
 			var LostWrathPerTick:Number = player.maxWrath();
 			LostWrathPerTick *= -0.01 * minutes;
@@ -11761,6 +11762,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         }
 		else {
 			if (player.hasPerk(PerkLib.AbsoluteStrength)) gainedwrath += wrathregeneration2();
+			else if (player.perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 4 && player.wrath < Math.round(player.maxWrath()*0.1)) gainedwrath += Math.round(player.maxWrath()*0.02);
 			else {
 				var LostWrathPerTick:Number = player.maxWrath();
 				LostWrathPerTick *= -0.6;
@@ -11807,6 +11809,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         if (player.jewelry4 == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS || player.jewelry2 == jewelries.UNDKINS || player.jewelry1 == jewelries.UNDKINS) wrathregen += 3;
 		if (player.hasPerk(PerkLib.AsuraStrength)) wrathregen += Math.round(player.maxWrath() * 0.005);
 		if (player.hasPerk(PerkLib.AsuraToughness)) wrathregen += Math.round(player.maxWrath() * 0.005);
+        if (player.perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 4) wrathregen += Math.round(player.maxWrath() * 0.005);
         if (player.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult += 1;
 		if (player.perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 3 && player.racialScore(Races.HUMAN) > 17) {
 			BonusWrathMult += 1;
@@ -13032,7 +13035,8 @@ public function SingIntensify(Bee:Boolean = false):void {
 
 public function SingArouse(Bee:Boolean = false):void {
     clearOutput();
-    outputText("You continue singing. Your compelling voice reaches far up to your opponent’s ears insidiously increasing [monster his] lust for you.");
+    if (player.weapon.isMusicInstrument()) outputText("You continue playing. Your compelling performance reaches far up to your opponent’s ears insidiously increasing [monster his] lust for you.");
+    else outputText("You continue singing. Your compelling voice reaches far up to your opponent’s ears insidiously increasing [monster his] lust for you.");
     var LustDamage:int = combat.teases.teaseBaseLustDamage();
     if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) LustDamage += scalingBonusIntelligence();
     if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) LustDamage += scalingBonusIntelligence();
@@ -13049,9 +13053,18 @@ public function SingArouse(Bee:Boolean = false):void {
         outputText("\n[themonster] dreamily wave around to your tune.");
         monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
     }
+    if (player.weapon.isMusicInstrument()) {
+		var stuuu:Number = player.statusEffectv1(StatusEffects.Sing);
+		if (stuuu > 100) stuuu = 100;
+		if (rand(100) < stuuu) {
+			outputText("\n[themonster] dreamily wave around to your tune.");
+			monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+		}
+    }
     if (player.hasPerk(PerkLib.RacialParagon)) LustDamage *= combat.RacialParagonAbilityBoost();
     if (player.hasPerk(PerkLib.NaturalArsenal)) LustDamage *= 1.50;
     if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) LustDamage *= (1 + (0.25 * player.perkv1(IMutationsLib.MelkieLungIM)));
+	if (player.weapon == weapons.ELYSIUM) LustDamage *= 2;
     //Apply intensity multiplier
     LustDamage *= player.statusEffectv1(StatusEffects.Sing);
     //Resolve
@@ -13095,6 +13108,7 @@ public function SingDevastatingAria():void {
 	if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 	if (player.hasPerk(PerkLib.PerformancePower)) damage *= (1 + player.perkv1(PerkLib.PerformancePower));
     if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.MelkieLungIM)));
+	if (player.weapon == weapons.HELLCAL) damage *= 1.5;
     damage = Math.round(damage);
     doMagicDamage(damage, true, true);
     if (crit) outputText(" Critical hit!");
@@ -16125,6 +16139,7 @@ public function ghostStrength():Number {
     if (player.perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 1) ghostStrMulti += 0.05;
     if (player.perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 2) ghostStrMulti += 0.1;
     if (player.perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 3) ghostStrMulti += 0.15;
+    if (player.perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 3) ghostStrMulti += 0.2;
     if (player.perkv1(IMutationsLib.HumanMusculatureIM) >= 2 && player.racialScore(Races.HUMAN) > 17) ghostStrMulti += 0.15;
     if (player.perkv1(IMutationsLib.HumanMusculatureIM) >= 3 && player.racialScore(Races.HUMAN) > 17) ghostStrMulti += 0.3;
     ghostStr *= ghostStrMulti;
