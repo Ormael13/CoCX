@@ -39,7 +39,8 @@ public final class WeaponLib extends ItemConstants
 				OCCULUS,
 				EXCALIB,
 				DEXCALI,
-				ASTERIUS
+				ASTERIUS,
+				ELYSIUM
 			];
 		}
 		public function LegendaryCorrupt():Array {
@@ -56,7 +57,8 @@ public final class WeaponLib extends ItemConstants
 				B_WIDOW,
 				DOCDEST,
 				CHAOSEA,
-				ECLIPSE
+				ECLIPSE,
+				HELLCAL
 			];
 		}
 		
@@ -1024,15 +1026,25 @@ public final class WeaponLib extends ItemConstants
 				.withBuff('spellpower', +0.20)
 				.withTags(W_STAFFPART) as Weapon;
 		public const SFLUTTE:Weapon = new Weapon(
-				"SFlute","S.Flute","Satyr Flute","a Satyr Flute","smack",1,160,".", WT_MACE_HAMMER, WSZ_SMALL)
+				"SFlute","S.Flute","Satyr Flute","a Satyr Flute","smack",1,160,"hey its a fucking piper you didnt expect a miracle right?", WT_MACE_HAMMER, WSZ_SMALL)
 				.withBuff('spellpower', +0.50)
 				.withPerk(PerkLib.PerformancePower, 0.5, 0, 0, 0)
 				.withTags(W_MUSICINSTR) as Weapon;
 		public const PFLUTTE:Weapon = new Weapon(
-				"PFlute","P.Flute","Pan Flute","a Pan Flute","smack",1,160,".", WT_MACE_HAMMER, WSZ_SMALL)
+				"PFlute","P.Flute","Pan Flute","a Pan Flute","smack",1,160,"hey its a fucking piper you didnt expect a miracle right?", WT_MACE_HAMMER, WSZ_SMALL)
 				.withBuff('spellpower', +0.50)
 				.withPerk(PerkLib.PerformancePower, 1, 0, 0, 0)
 				.withTags(W_MUSICINSTR) as Weapon;
+		public const HELLCAL:Weapon = new Weapon(
+				"Hellcaller","Hellcaller","Hellcaller","a Hellcaller","smack",1,640,"hey its a fucking piper you didnt expect a miracle right?", WT_MACE_HAMMER, WSZ_SMALL)
+				.withBuff('spellpower', +1.50)
+				.withPerk(PerkLib.PerformancePower, 1.5, 0, 0, 0)
+				.withTags(W_MUSICINSTR, I_LEGENDARY, W_CORRUPT_TYPE) as Weapon;
+		public const ELYSIUM:Weapon = new Weapon(
+				"Elysium","Elysium","Elysium","a Elysium","smack",1,640,"hey its a fucking piper you didnt expect a miracle right?", WT_MACE_HAMMER, WSZ_SMALL)
+				.withBuff('spellpower', +1.50)
+				.withPerk(PerkLib.PerformancePower, 1.5, 0, 0, 0)
+				.withTags(W_MUSICINSTR, I_LEGENDARY, W_PURE_TYPE) as Weapon;
 		public const OCCULUS:Weapon = new Occulus();
 		public const ECLIPSE:Weapon = new Eclipse();
 		public const NEXUS:Weapon = new Nexus(); //We may need to add a special event or forge for this item

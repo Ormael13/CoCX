@@ -884,6 +884,25 @@ public final class Mutations extends MutationsHelper {
             outputText("You should be more careful next time to not waste any new manual by trying to learn it when you not even found your own Dantian.");
 		}
     }
+	
+    public function firstattackflyingswordmanual(player:Player):void {
+        clearOutput();
+		if (player.hasPerk(PerkLib.SoulWarrior) && player.hasPerk(PerkLib.SoaringBlades) && player.level >= 24) {
+			if (!player.hasPerk(PerkLib.FirstAttackFlyingSword)) {
+				outputText("You open the manual and read it slowly. Initially, it seems needlessly complicated, but you take a moment to read it a again, slowly working out the parts as the aspect becomes clearer. It goes into depth about using flying swords to attack enemy before you act. You can see the ways it teaches you how to use them in way allowing more independent actions with very minimal amount of concentration, which you could now use elsewhere.\n\n");
+				outputText("You're feeling more enlightened, closer and closer with each thorough read. You read from the beginning once again, before you finally close the manual with a sense of enlightenment. You barely notice the manual fading away in your grasp. (<b>Gained Perk: First Attack: Flying Sword!</b>)");
+				player.createPerk(PerkLib.FirstAttackFlyingSword, 0, 0, 0, 0);
+				return;
+			}
+			if (player.hasPerk(PerkLib.FirstAttackFlyingSword)) {
+				outputText("When you open the manual, it turns out you already know this passive.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+				EngineCore.SoulforceChange(150);
+			}
+		} else {
+			outputText("You open the manual, and discover to your horror it's way too complicated passive to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
+            outputText("You should be more careful next time to not waste any new manual by trying to learn it when you neither: reached Soul Warrior stage, learned Souaring Blades passive, been strong enough (lvl 24+).");
+		}
+    }
 
     public function verydilutedarcaneregenconcotion(player:Player):void {
 		var verydilutedarcaneregen:Number = Math.round(player.maxMana() * 0.02) + 200;

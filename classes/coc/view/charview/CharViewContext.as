@@ -97,7 +97,7 @@ public class CharViewContext extends ExecContext {
 					PlayerHasAWandHoly: player.weapon == game.weapons.OCCULUS,
 					PlayerHasAWandUnholy: player.weapon == game.weapons.ECLIPSE,
 
-					PlayerHasAPanFlute: player.weapon == game.weapons.SFLUTTE || player.weapon == game.weapons.PFLUTTE,
+					PlayerHasAPanFlute: player.weapon == game.weapons.SFLUTTE || player.weapon == game.weapons.PFLUTTE || player.weapon == game.weapons.HELLCAL || player.weapon == game.weapons.ELYSIUM,
 
 					PlayerHasASword: player.isSwordTypeWeapon() && player.weapon.isMedium(),
 					PlayerHasASwordHoly: player.weapon == game.weapons.EXCALIB,
@@ -114,7 +114,7 @@ public class CharViewContext extends ExecContext {
 					PlayerHasAnAxeHoly:player.weapon == game.weapons.WG_GAXE,
 					PlayerHasAnAxeUnholy:player.weapon == game.weapons.DE_GAXE || player.weapon == game.weapons.ASTERIUS,
 
-					PlayerHasAHammer: player.isMaceHammerTypeWeapon() && !player.isTetsubo(),
+					PlayerHasAHammer: player.isMaceHammerTypeWeapon() && !player.isTetsubo() && player.weapon != game.weapons.SFLUTTE && player.weapon != game.weapons.PFLUTTE && player.weapon != game.weapons.HELLCAL && player.weapon != game.weapons.ELYSIUM,
 					//PlayerHasAHammerHoly:player.weapon == game.weapons.POCDEST,
 					//PlayerHasAHammerUnholy:player.weapon == game.weapons.DOCDEST,
 					PlayerHasATetsu: player.weapon == game.weapons.OTETSU || player.weapon == game.weapons.POCDEST || player.weapon == game.weapons.DOCDEST,

@@ -7140,8 +7140,7 @@ public class PerkLib
             //Tier 1
             //Tier 2
             //Tier 3
-			FirstAttackFlyingSword.requirePerks(SoaringBlades, SoulWarrior)
-								.requireLevel(24);
+			//					.requireLevel(24);
             //2nd perk for flying swords slots
             //Tier 4
             //Tier 5
