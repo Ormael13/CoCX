@@ -42,6 +42,9 @@ public class Changelog extends BaseContent
 			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 5. Req. Sky Poison Pearl Mastery 4 perk. It costs 165 asc points and you gain +15 venom recharge speed, +50% to max venom cap, +50% to poison resistance, 500% more spirit stones carried over and lower req. level to open next sections of pearl by 30 levels.\n");
 			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 6. Req. Sky Poison Pearl Mastery 5 perk. It costs 201 asc points and you gain +18 venom recharge speed, +60% to max venom cap, +60% to poison resistance, 600% more spirit stones carried over and lower req. level to open next sections of pearl by 36 levels.\n");
 			outputText("-Added new weapon (by Demojay) - 'Beautiful Fly Whisk'. Obtained from the Lake like other Holy Items. Beautiful Fly Whisk reduces soulskill cooldown by 1 when equipped.\n");
+			outputText("-New range weapon/tome (by Ormael): Restrained Black Tome - buyable at Library in Tel'Adre. Cost 100 gems. Increase by 300/200/100% black spellpower and reduce by 3/2/1 turns cd of offensive black spells at levels below 6/12/18.\n");
+			outputText("-New range weapon/tome (by Ormael): Restrained White Tome - buyable at Library in Tel'Adre. Cost 100 gems. Increase by 300/200/100% white spellpower and reduce by 3/2/1 turns cd of offensive white spells at levels below 6/12/18.\n");
+			outputText("-New range weapon/tome (by Ormael): Restrained Grey Tome - buyable at Library in Tel'Adre. Cost 200 gems. Increase by 300/200/100% grey spellpower and reduce by 3/2/1 turns cd of offensive grey spells at levels below 6/12/18.\n");
 			outputText("-New armor (by Sylabt & Ohaxer): Princess Regalia - obtained by completing Coronation quest at Trench or later from equipment shop. Cost 9,600 gems, 17 armor, 13 magic resistance, light type armor. Increases the damage of and reduces the cost of Mana shot, barrage and charged shot by 50%, also isn’t affected by Miracle Metal debuff for armor, and provides a 15% lifesteal from Mana shot, barrage, charged shot and crunch.\n");
 			outputText("-New flying sword: White Half-Moon Quartet - combined from two White Half-Moon Duo sword sets. Cost 240 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 4). Deal fire damage instead of physical damage.\n");
 			outputText("-New flying sword: Black Half-Moon Quartet - combined from two Black Half-Moon Duo sword sets. Cost 240 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 4). Deal ice damage instead of physical damage.\n");
@@ -56,6 +59,7 @@ public class Changelog extends BaseContent
 			outputText("-New P. Special: Ram. Req. to be Arigean Princess. Deals Physical Damage based on Speed, but cause recoil damage equal to 10% of user max HP.\n");
 			outputText("-When reaching lvl 30 and having done all misison from Grayda Arigean PC can have event proc at camp that unlocks new quest 'Coronation'. Visiting her at Trench would send PC to gather materials and then becoming new princess. It's pernament race option so can't return from been Arigean Princess.\n");
 			outputText("-Arigean Princess (23+) stat bonuses: +430% to str multi, +430% to spe multi, +310% to tou multi, -75% to int multi, -60% to wisdom multi, +65 Min Corruption, +10 armor. She can use additional specials: Grab and Guillotine (both works like the ones from Cancer race)\n");
+			outputText("-10 new achievments. (4 shadow one)\n");
 			outputText("-Juvenile abyssal sharks can sometimes be too happy to bite more then PC have (still left) so now they will stop when pc have penalty of 99% on combat wounds.\n");
 			outputText("-Beautiful Sword and Whip would now have additional effect of giving 2x more exp for weapon mastery. Beautiful Staff would have additional effect of -1 turn cooldown duration of tier 1 spells.\n");
 			outputText("-Qi - owner of 'Flying Swords are always with you!' is no more in closed doors cultivation session. And now he can train or sell some more specialistic manuals to PC.\n");
@@ -87,6 +91,10 @@ public class Changelog extends BaseContent
 			outputText("-Comet changes: baseSFCost 60 -> 400, given cooldown of 4, base damage scalingBonusWisdom * 1 -> 6 (similar to tier 2 magic AOE)\n");
 			outputText("-Many Birds Changes: baseSFCost 10 -> 200, cooldown of 2, given AOE effect, base damage scalingBonusWisdom * 1 -> 2 (similar to tier 1 magic AOE)\n");
 			outputText("-Soul Blast changes: baseSFCost 100 -> 900, cooldown 15 -> 10, base damage scalingBonusStrength/Wisdom/Intelligence * 1.8 -> scalingBonusStrength/Wisdom/Intelligence * 3\n");
+			outputText("-Fixed bug where Blind could not used against Draculina when invisible.\n");
+			outputText("-Flames Of Love/ Icicles Of Love/ Night Of Brotherhood/ Storm Of SisterHood Skills now have 4 levels: Rankless, Low Rank (adds AOE (x2), wisdom and magical soulskill scaling, increases restore amount to 20%, and cooldown to 1 turn - Level up requirements: Soul Apprentice perk and 5 uses), Mid Rank (increases AOE scaling (x5), increases restore amount to 25% and cooldown to 2 turns - Level up requirements: Soul Warrior perk and 10 uses), ");
+			outputText("High Rank ( increases restore amount to 30% and cooldown to 3 turns - Level up requirements: Soul Scholar perk and 10 uses).\n");
+			outputText("-Fixed bug where cooldowns based on the CombatAbility class were ending 1 turn too early.\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-\n");
@@ -96,10 +104,6 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Arigean Knowledge. Gained by becoming Arigean Princess. Effects: The knowledge of your Arigean ancestors rests in your mind. Gain immunity to mental debuffs and intelligence min is increased to 90.\n");
 			outputText("-Flying Sword Path, Soaring Blades, First Attack: Flying Sword, Killing Intent perks no longer are in level up menu. All spend before perks are refunded no worried.\n");
 			outputText("-Flying Sword Path perk have now ranks and 1st rank is learned by training with Qi costing 50 spirit stones for training.\n");
-			outputText("-Fixed bug where Blind could not used against Draculina when invisible. (Demojay)\n");
-			outputText("-Flames Of Love/ Icicles Of Love/ Night Of Brotherhood/ Storm Of SisterHood Skills now have 4 levels: Rankless, Low Rank (adds AOE (x2), wisdom and magical soulskill scaling, increases restore amount to 20%, and cooldown to 1 turn - Level up requirements: Soul Apprentice perk and 5 uses), Mid Rank (increases AOE scaling (x5), increases restore amount to 25% and cooldown to 2 turns - Level up requirements: Soul Warrior perk and 10 uses), ");
-			outputText("High Rank ( increases restore amount to 30% and cooldown to 3 turns - Level up requirements: Soul Scholar perk and 10 uses). (Demojay)\n");
-			outputText("-Fixed bug where cooldowns based on the CombatAbility class were ending 1 turn too early. (Demojay)\n");
 			outputText("-Blind Spell no longer has a random chance of not working, even after passing the success check. Blind now cannot be used if the monster is already blinded. Blind now has a max duration of 10 turns, rather than infinitely scaling with player intelligence. (Demojay)\n");
 			outputText("-Fixed bug where Draculina Embrace will always hit. (Demojay)\n");
 			outputText("-Ceraph is now classed as a proper True Demon. (Demojay)\n");
@@ -121,7 +125,6 @@ public class Changelog extends BaseContent
 			outputText("-Fixing bugs where the game was checking for a fox hairpin or cow girl hat in one of the ring slots rather than the head jewelry slot. (Demojay)\n");
 			outputText("-Text fixes. (Demojay) (Alot of small ones)\n");
 			outputText("-Added 3 toggles in Interface Game Settings to control whether the HP Lust and Wrath of the player and Enemy should be displayed as a percentage or numbers. (Demojay)\n");
-			outputText("-10 new achievments. (4 shadow one)\n");
 			outputText("-Killing Intent perk now is gained after having at least 10 kills on kill counter.\n");
 			outputText("-On stats page in kill counts section was added total kills count (maybe some would want to see total count without need to add all seperate kill counts and maybe in future we would get more kill counts...)\n");
 			outputText("-Added new option/toggle in Settings: Angelic Faction - by default it active and all angelic present ingame and need to be toggled on to disable chance to meet ANY angeloid/angel ingame.\n");
@@ -159,9 +162,6 @@ public class Changelog extends BaseContent
 			outputText("-New passive for Dracula/lina race: Bat swarm - When in battle, bat familiars swarm around you, biting and wounding your foes. The blood spilled is shared back to you. (gives thirst stack(s) and regenerate up to 3% max HP per turn)\n");
 			outputText("-New event perk: Hidden Job: Sword Immortal. Gained by having free slot for hidden job and perks: Soul Apprentice & Killing Intent. Effects: Allow to reach OverMax Wrath / Fatigue / Soulforce equal to 105% of current max wrath / fatigue / soulforce. Allow to use any sword, dueling sword, dagger weapon with max possible atk value, ");
 			outputText("increase mastery gains for those three types of weapons by 200% of base value, increase dealt damage by 2x for those three types of weapons.\n");
-			outputText("-New range weapon/tome (by Ormael): Restrained Black Tome - buyable at Library in Tel'Adre. Cost 100 gems. Increase by 300/200/100% black spellpower and reduce by 3/2/1 turns cd of offensive black spells at levels below 6/12/18.\n");
-			outputText("-New range weapon/tome (by Ormael): Restrained White Tome - buyable at Library in Tel'Adre. Cost 100 gems. Increase by 300/200/100% white spellpower and reduce by 3/2/1 turns cd of offensive white spells at levels below 6/12/18.\n");
-			outputText("-New range weapon/tome (by Ormael): Restrained Grey Tome - buyable at Library in Tel'Adre. Cost 200 gems. Increase by 300/200/100% grey spellpower and reduce by 3/2/1 turns cd of offensive grey spells at levels below 6/12/18.\n");
 			outputText("-Hellhound Fire Balls internal mutation req. for race changed to cerber or dog-morph at 8+ points and having hellfire perk.\n");
 			outputText("-New event perk: Sword Intent (Aura). Gained by having 'Hidden Job: Sword Immortal' super perk and Soul Personage perk. Effects: Your Killing Intent can become focused into Sword Intent aura enveloping your weapons as long they are sword-type (+5% of core spe, +10% dmg). Would apply bonuses from the job to flying swords too. (+5% of OverMax Wrath / Fatigue / Soulforce)\n");
 			outputText("-New event perk: Sword Immortal: First Form. Gained by having 'Sword Intent (Aura)' super perk and Soul Warrior perk. Effects: You reached First Form stage. Increase sword intent aura effects (+15% of core spe, +15% dmg) and gives small boost at the combat start (+100 wrath/sf, -100 fatigue) (+5% of OverMax Wrath / Base STR Cap / Fatigue / Base SPE Cap / Soulforce / Base WIS Cap)\n");
@@ -198,6 +198,11 @@ public class Changelog extends BaseContent
 			outputText("-New melee weapon: Pan Flute. Currently buyable in Oddities shop. Cost 160 gems. Is small mace/hammer type weapon with atk 1. Effects: +50% spellpower, +100% performance power.\n");
 			outputText("-New weapon peark: Performance Power. Gained by equipping any melee weapon classified as Music Instrument. Effect: Increase Performance special power by x% (depending on melee weapon).\n");
 			outputText("-Pan Flute sprite (by Liadri) implementation. (Lord Shadeogorath)\n");
+			outputText("-When having equipped melee weapon with music instrument tag special 'Sing' would be replaced with special 'Perform'. It change some of texts when using special and in case of 'Arouse' option when perfomring would have stun chance based on intensify scale not fixed 20% with Dazzling Display perk.\n");
+			outputText("-New melee weapon (by Liadri): Elysium - obtainable by giving Pan Flute to Pure Celess to purify. +150% perform power, +150% spell catalyst modifier, +100% tease modifier based on Purity. Increase Arouse potency by 100%.\n");
+			outputText("-New melee weapon (by Liadri): Hellcaller - obtainable by giving Pan Flute to Corrupted Celess/Tyrantia to corrupt. +150% perform power, +150% spell catalyst modifier, +100% tease modifier based on corruption. Increase devastating Aria potency by 50%.\n");
+			outputText("-New mutation perk: Orc Adrenal Glands (Final Form). Req. Orc Adrenal Glands (Evolved) and lvl 90+. Effects: Your Orc adrenal glands are increasing Ferocity limit by 8%, +50% of max core Str as phantom Str, increase your natural strength and tone, boost natural wrath generation rate, allow to use Ferocity even when been no longer an orc, ");
+			outputText("out of combat when below 10% would not loose wrath and gain +2% per hour, +0.5% wrath generated in combat.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -207,16 +212,16 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
-			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
+			outputText("-\n");
+			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
+			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -292,9 +297,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -326,7 +329,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

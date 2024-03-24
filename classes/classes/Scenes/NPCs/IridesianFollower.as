@@ -64,6 +64,7 @@ public function itemImproveMenuPure():void {
 		[weapons.OTETSU, weapons.POCDEST, weapons.DOCDEST],
 		[weapons.BFTHSWORD, weapons.ARMAGED, weapons.CHAOSEA],
 		[weapons.A_WAND, weapons.OCCULUS, weapons.ECLIPSE],
+		[weapons.PFLUTTE, weapons.ELYSIUM, weapons.HELLCAL],
 		[weaponsrange.BOWLONG, weaponsrange.ARTEMIS, weaponsrange.WILDHUN],
 		[weaponsrange.SHUNHAR, weaponsrange.KSLHARP, weaponsrange.LEVHARP],
 		[weaponsrange.SIXSHOT, weaponsrange.GOODSAM, weaponsrange.BADOMEN],
