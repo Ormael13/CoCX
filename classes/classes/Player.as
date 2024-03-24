@@ -3336,13 +3336,7 @@ use namespace CoC;
 				mult -= 5;
 			}
 			if (perkv1(IMutationsLib.MelkieLungIM) >= 1) {
-				mult -= 5;
-			}
-			if (perkv1(IMutationsLib.MelkieLungIM) >= 2) {
-				mult -= 10;
-			}
-			if (perkv1(IMutationsLib.MelkieLungIM) >= 3) {
-				mult -= 15;
+				mult -= (5 * perkv1(IMutationsLib.MelkieLungIM));
 			}
 			if (perkv1(IMutationsLib.WhaleFatIM) >= 1) {
 				mult -= 5;
@@ -4026,12 +4020,16 @@ use namespace CoC;
 		}
 
 		public function henchmanBasedInvulnerabilityFrame():Boolean {
-			return statusEffectv3(StatusEffects.CombatFollowerZenji) == 1 || statusEffectv3(StatusEffects.CombatFollowerZenji) == 3;
+			return statusEffectv3(StatusEffects.CombatFollowerZenji) == 1 || statusEffectv3(StatusEffects.CombatFollowerZenji) == 3 || statusEffectv4(StatusEffects.CombatFollowerAyane) == 2;
 		}
 		public function henchmanBasedInvulnerabilityFrameTexts():void {
 			if (statusEffectv3(StatusEffects.CombatFollowerZenji) == 1 || statusEffectv3(StatusEffects.CombatFollowerZenji) == 3) {
 				outputText(" Zenji grits his teeth as he shields you, enduring several strikes from your opponent.");
 				addStatusValue(StatusEffects.CombatFollowerZenji, 3, 1);
+			}
+			if (statusEffectv4(StatusEffects.CombatFollowerAyane) == 2) {
+				outputText(" Ayane is defending you, parrying [themonster]’s attack with her weapon.");
+				addStatusValue(StatusEffects.CombatFollowerAyane, 4, -1);
 			}
 		}
 

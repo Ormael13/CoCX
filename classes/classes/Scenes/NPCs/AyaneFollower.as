@@ -64,10 +64,12 @@ public function ayaneCampMenu():void
 	addButton(2, "Shop", ayaneShop).hint("Check Ayane shop.");
 	addButton(3, "Sex", ayaneSexMenu).hint("Have some sex with Ayane.");
 	addButton(4, "Spar", sparAyane).hint("Go to the woods and fight her!");
+	if (player.hasPerk(PerkLib.BasicLeadership)) addButton(5, "Team", ayaneHenchmanOption);
+	else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");
 	if (player.statStore.hasBuff("Weakened") || player.statStore.hasBuff("Drained") || player.statStore.hasBuff("Damaged"))
-		addButtonIfTrue(5, "Cure C.", ayaneCuringCurse, "Ayane is not yet ready to cure your curses again.",
+		addButtonIfTrue(6, "Cure C.", ayaneCuringCurse, "Ayane is not yet ready to cure your curses again.",
 			flags[kFLAGS.AYANE_CURE_COOLDOWN] <= 0, "Cure curse effects.");
-	else addButtonDisabled(5, "Cure C.", "You don't have any curses to cure.");
+	else addButtonDisabled(6, "Cure C.", "You don't have any curses to cure.");
 	if (BelisaFollower.BelisaQuestOn && !BelisaFollower.BelisaQuestComp) addButton(13, "ToothacheQ", BelisaAyaneTalk);
 	addButton(14, "Back", camp.campFollowers);
 }
@@ -409,6 +411,78 @@ public function ayaneTribadism():void {
 		+ "As your climax begins to ebb, you slump downward, sliding off of her in satisfaction and panting on the grass. You lie head to toe with her, legs spread apart, breathing in deeply in an attempt to catch your breath. Your eyes close, a contented sigh issuing from your lips as Ayane move to rest on your chest. The both of you wake up later and redress ready for adventuring.");
 	player.sexReward("vaginalFluids", "Vaginal");
 	endEncounter();
+}
+
+public function ayaneHenchmanOption():void
+{
+	menu();
+	if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
+		if (flags[kFLAGS.PLAYER_COMPANION_2] == "Ayane" || flags[kFLAGS.PLAYER_COMPANION_3] == "Ayane") addButtonDisabled(0, "Team (1)", "You already have Ayane accompany you.");
+		else addButton(0, "Team (1)", ayaneHenchmanOption2, 1).hint("Ask Ayane to join you in adventures outside camp.");
+	}
+	else {
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Ayane") addButton(5, "Team (1)", ayaneHenchmanOption2, 21).hint("Ask Ayane to stay in camp.");
+		else addButtonDisabled(5, "Team (1)", "You already have other henchman accompany you as first party member. Ask him/her to stay at camp before you talk with Ayane about accompaning you as first party member.");
+	}
+	if (player.hasPerk(PerkLib.IntermediateLeadership)) {
+		if (flags[kFLAGS.PLAYER_COMPANION_2] == "") {
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Ayane" || flags[kFLAGS.PLAYER_COMPANION_3] == "Ayane") addButtonDisabled(1, "Team (2)", "You already have Ayane accompany you.");
+			else addButton(1, "Team (2)", ayaneHenchmanOption2, 2).hint("Ask Ayane to join you in adventures outside camp.");
+		}
+		else {
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Ayane") addButton(6, "Team (2)", ayaneHenchmanOption2, 22).hint("Ask Ayane to stay in camp.");
+			else addButtonDisabled(6, "Team (2)", "You already have other henchman accompany you as second party member. Ask him/her to stay at camp before you talk with Ayane about accompaning you as second party member.");
+		}
+	}
+	else {
+		addButtonDisabled(1, "Team (2)", "Req. Intermediate Leadership.");
+		addButtonDisabled(6, "Team (2)", "Req. Intermediate Leadership.");
+	}
+	addButton(14, "Back", ayaneCampMenu);
+}
+public function ayaneHenchmanOption2(slot:Number = 1):void
+{
+	clearOutput();
+	if (slot < 21) {
+		outputText("\"<i>On your call divine one.</i>\"\n\n");
+		outputText("Ayane is now following you around.\n\n");
+		var intAyane:Number = 220;
+		var wisAyane:Number = 110;
+		var spellsoulskillpowerAyane:Number = 1.5;/*
+		if (flags[kFLAGS.AURORA_LVL] >= 1) {
+			if (flags[kFLAGS.AURORA_LVL] == 2) {
+				intAyane += 22;
+				wisAyane += 11;
+				spellsoulskillpowerAyane += 0.1;
+			}
+			if (flags[kFLAGS.AURORA_LVL] == 3) {
+				intAyane += 22;
+				wisAyane += 11;
+				spellsoulskillpowerAyane += 0.1;
+			}
+			if (flags[kFLAGS.AURORA_LVL] >= 4) {
+				intAyane += 66 + (22 * (5 - flags[kFLAGS.AURORA_LVL]));
+				wisAyane += 33 + (11 * (5 - flags[kFLAGS.AURORA_LVL]));
+				spellsoulskillpowerAyane += 0.3 + (0.1 * (5 - flags[kFLAGS.AURORA_LVL]));
+			}
+		}*/
+		intAyane *= (1 + (0.2 * player.newGamePlusMod()));
+		intAyane = Math.round(intAyane);
+		wisAyane *= (1 + (0.2 * player.newGamePlusMod()));
+		wisAyane = Math.round(wisAyane);
+		spellsoulskillpowerAyane += (0.5 * player.newGamePlusMod());
+		player.createStatusEffect(StatusEffects.CombatFollowerAyane, intAyane, wisAyane, spellsoulskillpowerAyane, 0);
+		if (slot == 2) flags[kFLAGS.PLAYER_COMPANION_2] = "Ayane";
+		if (slot == 1) flags[kFLAGS.PLAYER_COMPANION_1] = "Ayane";
+	}
+	else {
+		outputText("Ayane is no longer following you around.\n\n");
+		player.removeStatusEffect(StatusEffects.CombatFollowerAyane);
+		if (slot == 22) flags[kFLAGS.PLAYER_COMPANION_2] = "";
+		if (slot == 21) flags[kFLAGS.PLAYER_COMPANION_1] = "";
+	}
+	doNext(ayaneCampMenu);
+	cheatTime(1/12);
 }
 
 public function ayaneCuringCurse():void {

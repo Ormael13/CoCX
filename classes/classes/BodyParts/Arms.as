@@ -527,12 +527,22 @@ public class Arms extends SaveableBodyPart {
 		appearanceDesc: "Your arms are covered by thick [fur color] fur, ending in hands with paw pads and four fingers ending with hoof-like fingernails.",
 		fur: true
 	});
+	
 	public static const MOTH:int = 68;
 	EnumValue.add(Types, MOTH, "MOTH", {
 		name:"moth",
 		appearanceDesc: "Where a normal creature would have only two arms, you instead have four covered in a sleeve like fuzzy mass.",
 		fourArms: true
 	});
+
+	public static const SATYR:int = 69;
+	EnumValue.add(Types, SATYR, "SATYR", {
+		name:"satyr",
+		appearanceDesc: "Your arms are covered with [fur color] fur. They end with somewhat human-like hands with sharp nails. Such dexterous hands are as adept at playing a piper as they would to draw out moans out of a partner.",
+		claw: true,
+		fur: true
+	});
+	
 	public static function canFly(id: int): Boolean {
 		return Types[id].canFly || false;
 	}

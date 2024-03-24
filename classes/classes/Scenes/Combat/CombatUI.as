@@ -799,17 +799,18 @@ public class CombatUI extends BaseCombatContent {
 			return;
 		}
 		var actFunction:Function = companionName == "Alvina" ? combat.comfoll.alvinaCombatActions
-			: companionName == "Amily" ? combat.comfoll.amilyCombatActions
-				: companionName == "Aurora" ? combat.comfoll.auroraCombatActions
-					: companionName == "Etna" ? combat.comfoll.etnaCombatActions
-						: companionName == "Excellia" ? combat.comfoll.excelliaCombatActions
-							: companionName == ""+flags[kFLAGS.GHOULISH_VAMPIRE_SERVANT_NAME]+"" ? combat.comfoll.ghoulishVampServCombatActions
+								: companionName == "Amily" ? combat.comfoll.amilyCombatActions
+								: companionName == "Aurora" ? combat.comfoll.auroraCombatActions
+								: companionName == "Ayane" ? combat.comfoll.ayaneCombatActions
+								: companionName == "Etna" ? combat.comfoll.etnaCombatActions
+								: companionName == "Excellia" ? combat.comfoll.excelliaCombatActions
+								: companionName == ""+flags[kFLAGS.GHOULISH_VAMPIRE_SERVANT_NAME]+"" ? combat.comfoll.ghoulishVampServCombatActions
 								: companionName == "Kiha" ? combat.comfoll.kihaCombatActions
-									: companionName == "Midoka" ? combat.comfoll.midokaCombatActions
-										: companionName == "Mitzi" ? combat.comfoll.mitziCombatActions
-											: companionName == "Neisa" ? combat.comfoll.neisaCombatActions
-												: companionName == "Tyrantia" ? combat.comfoll.tyrantiaCombatActions
-													: companionName == "Zenji" ? combat.comfoll.zenjiCombatActions : null;
+								: companionName == "Midoka" ? combat.comfoll.midokaCombatActions
+								: companionName == "Mitzi" ? combat.comfoll.mitziCombatActions
+								: companionName == "Neisa" ? combat.comfoll.neisaCombatActions
+								: companionName == "Tyrantia" ? combat.comfoll.tyrantiaCombatActions
+								: companionName == "Zenji" ? combat.comfoll.zenjiCombatActions : null;
 		//do action
 		if (clearAndNext) {
 			clearOutput();

@@ -3,6 +3,7 @@ package classes.Scenes.Places.Bazaar
 import classes.*;
 import classes.BodyParts.*;
 import classes.GlobalFlags.*;
+import classes.Races.SatyrRace;
 import classes.lists.Gender;
 
 /**
@@ -1385,6 +1386,8 @@ import classes.lists.Gender;
 		public function satyrTFs():void {
 			var changes:int = 0;
 			var changeLimit:int = 3 + player.additionalTransformationChances;
+			var satyr_hair:Array = ["red", "mahogany", "brown"];
+			var satyr_fur:Array = ["red", "mahogany", "brown"];
 			//Stats and genital changes
 			if (rand(2) == 0) {
 				outputText("\n\nHeat floods your loins as thoughts of tight round asses and dripping pussies flood your mind.");
@@ -1421,7 +1424,7 @@ import classes.lists.Gender;
 				}
 				changes++;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.hasVagina() && !player.hasCock()) {
+			if (rand(3) == 0 && changes < changeLimit && player.hasVagina() && !player.hasCock() && player.femininity < 50) {
 				outputText("\n\nYour vagina begins to feel hot. Removing your [armor], you look down and watch your vagina shrinks to nothing, <b>while your clitoris enlarges to form a human dick</b>.");
 				player.removeVagina();
 				transformations.CockHuman(0, 6).applyEffect(false);
@@ -1434,15 +1437,20 @@ import classes.lists.Gender;
 				player.orgasm();
 				changes++;
 			}
+			if (player.femininity > 50 && player.vaginas.length == 0 && rand(3) == 0 && changes < changeLimit) {
+                transformations.VaginaHuman().applyEffect(false);
+                if (player.fertility <= 5) player.fertility = 6;
+                outputText("[pg]An itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
+            }
 			//Transformations
 			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.lowerBody != LowerBody.CLOVEN_HOOFED) {
 				outputText("\n\n");
-				transformations.LowerBodyClovenHoofed(2).applyEffect();
+				CoC.instance.transformations.LowerBodyClovenHoofed(2).applyEffect();
 				changes++;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LowerBody.CLOVEN_HOOFED && player.arms.type != Arms.HUMAN) {
-				outputText("\n\nYou feel a pleasant heat in your arms as smoke rises from them, <b>leaving normal human arms</b>.");
-				player.arms.type = Arms.HUMAN;
+			if (player.lowerBody == LowerBody.CLOVEN_HOOFED && rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.SATYR) {
+				outputText("[pg]");
+				CoC.instance.transformations.ArmsSatyr.applyEffect();
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.tailType == Tail.NONE) {
@@ -1455,19 +1463,20 @@ import classes.lists.Gender;
 				CoC.instance.transformations.TailGoat.applyEffect();
 				changes++;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.horns.type != Horns.GOAT && player.horns.type != Horns.ORCHID) {
-				outputText("\n\n");
-				CoC.instance.transformations.HornsGoat.applyEffect();
+			if (rand(3) == 0 && changes < changeLimit && player.horns.type != Horns.ORCHID) {
+				outputText("[pg]");
+				if (player.horns.type == Horns.GOAT) CoC.instance.transformations.HornsGoatQuadruple.applyEffect();
+				else CoC.instance.transformations.HornsGoat.applyEffect();
 				changes++;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.horns.type == Horns.GOAT && player.horns.count == 1) {
+			if (rand(3) == 0 && changes < changeLimit && (player.horns.type == Horns.GOAT || player.horns.type == Horns.GOATQUAD) && player.horns.count == 1) {
 				outputText("You feel heat blooming in your forehead. Confused you reach up to find your goat horns growing and thickening into a pair of horns with ridges and a slight curve. <b>You now have a pair of tall-standing goat horns.</b>");
-				player.horns.count = 2;
+				player.horns.count = 6;
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.horns.type == Horns.GOAT && player.faceType != Face.HUMAN) {
 				outputText("\n\nYour face grows warm as suddenly your vision is engulfed in smoke, coughing and beating the smoke back you noticed a marked change in your features. Touching yourself you confirm you have a <b>normal human shaped face once again</b>.");
-        CoC.instance.transformations.FaceHuman.applyEffect(false);
+				CoC.instance.transformations.FaceHuman.applyEffect(false);
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.faceType == Face.HUMAN && player.ears.type != Ears.ELFIN) {
@@ -1475,9 +1484,44 @@ import classes.lists.Gender;
 				CoC.instance.transformations.EarsElfin.applyEffect();
 				changes++;
 			}
+			if (rand(3) == 0 && changes < changeLimit && player.eyes.type != Eyes.GOAT) {
+				outputText("[pg]");
+				CoC.instance.transformations.EyesGoat.applyEffect();
+				changes++;
+			}
+			if (rand(3) == 0 && changes < changeLimit && CoC.instance.transformations.EyesChangeColor(["golden"]).isPossible()) {
+                outputText("\n\n");
+                CoC.instance.transformations.EyesChangeColor(["golden"]).applyEffect();
+                changes++;
+            }
+			if (rand(4) == 0 && changes < changeLimit && CoC.instance.transformations.HairHuman.isPossible()) {
+				outputText("\n\n");
+				CoC.instance.transformations.HairHuman.applyEffect();
+				changes++;
+			}
+			if (!InCollection(player.hairColor, SatyrRace.SatyrHairColors) && changes < changeLimit && rand(3) == 0) {
+				player.hairColor = randomChoice(SatyrRace.SatyrHairColors);
+				outputText("[pg]Your hair tingles as the strands turns <b>[haircolor]!</b>");
+				changes++;
+			}
+			if (!InCollection(player.furColor, SatyrRace.SatyrFurColors) && changes < changeLimit && rand(2) == 0) {
+				player.furColor = randomChoice(SatyrRace.SatyrFurColors);
+				outputText("[pg]Woa! Your fur suddenly changed color to <b>[fur color]</b>!");
+				changes++;
+			}
 			if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0 && player.faceType == Face.HUMAN) {
 				outputText("\n\n");
 				CoC.instance.transformations.SkinPlain.applyEffect();
+				changes++;
+			}
+			if (player.tongue.type == Tongue.HUMAN && player.tongue.type != Tongue.ELF && changes < changeLimit && rand(3) == 0) {
+				outputText("[pg]");
+				CoC.instance.transformations.TongueElf.applyEffect();
+				changes++;
+			}
+			if (player.tongue.type != Tongue.HUMAN && player.tongue.type != Tongue.ELF && changes < changeLimit && rand(3) == 0) {
+				outputText("[pg]");
+				CoC.instance.transformations.TongueHuman.applyEffect();
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.antennae.type != Antennae.NONE) {
@@ -1493,6 +1537,11 @@ import classes.lists.Gender;
 			if (rand(3) == 0 && changes < changeLimit && player.cockTotal() > 1 && (player.cockTotal() - player.countCocksOfType(CockTypesEnum.HUMAN)) > 0) {
 				outputText("One of your penises begins to feel strange. You " + player.clothedOrNakedLower("pull it out from your [armor], releasing", "notice") + " a plume of thick smoke. When you look down you see it has <b>become a human dick</b>.");
 				player.cocks[player.findFirstCockNotInType([CockTypesEnum.HUMAN])].cockType = CockTypesEnum.HUMAN;
+				changes++;
+			}
+			if (player.racialScore(Races.SATYR) >= 15 && !player.hasPerk(PerkLib.Aelfwine) && changes < changeLimit && rand(3) == 0) {
+				outputText("[pg]Damn you feel like the wine is getting to you you feel hornier… stronger… <b>It looks like you acquired Aelfwine ability.</b>");
+				player.createPerk(PerkLib.Aelfwine, 0, 0, 0, 0);
 				changes++;
 			}
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -1651,7 +1700,7 @@ import classes.lists.Gender;
 			//Change face to rhino
 			if (rand(4) == 0 && changes < changeLimit && player.ears.type == Ears.RHINO && player.skinColor == "gray" && player.faceType != Face.RHINO) {
 				outputText("\n\n");
-        CoC.instance.transformations.FaceRhino.applyEffect();
+				CoC.instance.transformations.FaceRhino.applyEffect();
 				changes++;
 			}
 			//Change tail to rhino
@@ -1966,7 +2015,7 @@ import classes.lists.Gender;
 			//Gain Echidna face if you have the right conditions.
 			if (rand(4) == 0 && changes < changeLimit && player.isFurCovered() && player.ears.type == Ears.ECHIDNA && player.tailType == Tail.ECHIDNA && player.tongue.type == Tongue.ECHIDNA) {
 				outputText("\n\n");
-        CoC.instance.transformations.FaceEchidna.applyEffect();
+				CoC.instance.transformations.FaceEchidna.applyEffect();
 				changes++;
 			}
 			// Other Changes

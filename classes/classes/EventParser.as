@@ -181,6 +181,9 @@ public class EventParser {
             if (player.statStore.recentlyRemovedTags["DrunkenPowerEmpower"]) {
                 EngineCore.outputText("\nYou sober up, loosing the benefits of your oni drunken rampage.\n");
             }
+            if (player.statStore.recentlyRemovedTags["AelfwineEmpower"]) {
+                EngineCore.outputText("\nYou sober up, loosing the benefits of Aelfwine.\n");
+            }
             if (player.statStore.recentlyRemovedTags["Hangover"]) {
                 EngineCore.outputText("\nYour head finally clears as your hangover wears off. Drinking with the shemale lizard was definitely a bad idea.\n");
             }

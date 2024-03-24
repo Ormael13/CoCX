@@ -1919,6 +1919,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (!player.isRaceCached(Races.KIRIN) && (player.hasStatusEffect(StatusEffects.IsRaiju) || player.hasStatusEffect(StatusEffects.IsThunderbird)) && player.hasStatusEffect(StatusEffects.IsKirin)) {
 				player.removeStatusEffect(StatusEffects.IsKirin);
 			}
+			if (player.racialScore(Races.SATYR) >= 15 && !player.hasPerk(PerkLib.PanLabyrinth)) {
+				outputText("\nAs you become more satyr like your ability for music seems to have improved further. Whistling out to yourself you notice the ambient animals behaving strangely. It would seem your song acquired the ability to confuse and daze foes. <b>You gained the Pan Labyrinth ability!</b>\n");
+				player.createPerk(PerkLib.PanLabyrinth, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if (player.racialScore(Races.SATYR) < 15 && player.hasPerk(PerkLib.Aelfwine) && player.hasPerk(PerkLib.PanLabyrinth)) {
+				outputText("\nAs you become less of a satyr your improved ability to sing and empower yourself from alcohol are also lost to you. <b>You lost the Pan Labyrinth and Aelfwine ability!</b>\n");
+				player.removePerk(PerkLib.Aelfwine);
+				player.removePerk(PerkLib.PanLabyrinth);
+				needNext = true;
+			}
 			if (player.hasStatusEffect(StatusEffects.PostfluidIntakeRegeneration)) player.removeStatusEffect(StatusEffects.PostfluidIntakeRegeneration);
 			/*
 

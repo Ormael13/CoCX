@@ -205,6 +205,7 @@ public class Weapon extends Equipable
 		
 		public function isHybrid():Boolean { return hasTag(W_HYBRID); }
 		public function isStaffPart():Boolean { return hasTag(W_STAFFPART); }
+		public function isMusicInstrument():Boolean { return hasTag(W_MUSICINSTR); }
 		public function isTetsubo():Boolean { return hasTag(W_TETSUBO); }
 		public function isThrown():Boolean { return hasTag(W_THROWN); }
 		public function isWhirlwind():Boolean { return hasTag(W_WHIRLWIND); }

@@ -53,6 +53,7 @@ public class OnikiriSake extends Consumable {
 		}
 		else outputText("Woa! That sake sure is powerful. You laugh as your cheeks redden with the obvious sign of complete inebriation. You're so drunk you barely register as your body begins to change.");
 		mutations.DrunkenPowerEmpowerIfPossible();
+		mutations.AelfwineEmpowerIfPossible();
 		if (rand(3) == 0 && changes < changeLimit && player.MutagenBonus("str", 2)) {
 			if (player.str <= 50)
 				outputText("\n\nPainful aches ripple through your body, flooding you with pain as your muscles flex and bulge, growing much stronger and more well-defined.");

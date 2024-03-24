@@ -54,6 +54,7 @@ public class PhoukaWhiskey extends Consumable {
 					outputText("You feel queasy and want to throw up.  There's a pain in your belly and you realize the baby you're carrying didn't like that at all.");
 			}
 			mutations.DrunkenPowerEmpowerIfPossible();
+			mutations.AelfwineEmpowerIfPossible();
 			game.flags[kFLAGS.PREGNANCY_CORRUPTION]++; //Faerie or phouka babies become more corrupted, no effect if the player is not pregnant or on other types of babies
 			phoukaWhiskeyAddStatus(game.player);
 			return false;

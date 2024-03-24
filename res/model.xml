@@ -920,8 +920,24 @@
         <cell rect="212,2044,80,90" name="weapon/swordHolyOH" dx="82" dy="55"/>
         <cell rect="212,2150,80,90" name="weapon/swordUnholyOH" dx="82" dy="55"/>
         <cell rect="122,2044,80,90" name="weaponBuff/swordFireBuffOH" dx="86" dy="31"/>
-		<cell rect="212,2256,89,105" name="weapon/swordMoonlightGS" dx="34" dy="42"/>
-		<cell rect="122,2256,89,105" name="weaponBuff/swordFireBuffMlGS" dx="30" dy="34"/>
+		<cell rect="122,2150,89,105" name="weapon/swordMoonlightGS" dx="34" dy="42"/>
+		<cell rect="32,2150,89,105" name="weaponBuff/swordFireBuffMlGS" dx="30" dy="34"/>
+		<cell rect="122,2256,89,105" name="weapon/swordLargeGeneric" dx="38" dy="55"/>
+		<cell rect="212,2256,89,105" name="weapon/swordLargeGenericOH" dx="82" dy="55"/>
+		<cell rect="122,2362,89,105" name="weapon/swordLargeHoly" dx="38" dy="55"/>
+		<cell rect="212,2362,89,105" name="weapon/swordLargeHolyOH" dx="82" dy="55"/>
+		<cell rect="122,2468,89,105" name="weapon/swordLargeUnholy" dx="38" dy="55"/>
+		<cell rect="212,2468,89,105" name="weapon/swordLargeUnholyOH" dx="82" dy="55"/>
+		<cell rect="122,2574,89,105" name="weaponBuff/swordLargeFireBuff" dx="31" dy="22"/>
+		<cell rect="212,2574,89,105" name="weaponBuff/swordLargeFireBuffOH" dx="89" dy="22"/>
+		<cell rect="302,2256,89,105" name="weapon/swordMassiveGeneric" dx="26" dy="43"/>
+		<cell rect="392,2256,89,105" name="weapon/swordMassiveGenericOH" dx="94" dy="43"/>
+		<cell rect="302,2362,89,105" name="weapon/swordMassiveHoly" dx="26" dy="43"/>
+		<cell rect="392,2362,89,105" name="weapon/swordMassiveHolyOH" dx="94" dy="43"/>
+		<cell rect="302,2468,89,105" name="weapon/swordMassiveUnholy" dx="26" dy="43"/>
+		<cell rect="392,2468,89,105" name="weapon/swordMassiveUnholyOH" dx="94" dy="43"/>
+		<cell rect="302,2574,89,105" name="weaponBuff/swordMassiveFireBuff" dx="38" dy="11"/>
+		<cell rect="392,2574,89,105" name="weaponBuff/swordMassiveFireBuffOH" dx="82" dy="11"/>
         <cell rect="302,1620,80,90" name="weapon/axeGeneric" dx="38" dy="55"/>
         <cell rect="302,1726,80,90" name="weapon/axeHoly" dx="38" dy="55"/>
         <cell rect="302,1832,80,90" name="weapon/axeUnholy" dx="38" dy="55"/>
@@ -1161,7 +1177,7 @@
 		<cell rect="691,256,89,65" name="ears_bg/fennec" dx="57" dy="2"/>
         <cell rect="541,330,87,97" name="ears_truebg/melkie" dx="60" dy="36"/>
         <cell rect="1,396,59,65" name="horns/orchid" dx="73" dy="4"/>
-        <cell rect="61,396,59,65" name="horns/devil" dx="72" dy="4"/>
+        <cell rect="61,396,59,65" name="horns/devil" dx="76" dy="5"/>
         <cell rect="121,396,59,65" name="horns/cow" dx="75" dy="4"/>
         <cell rect="181,330,29,65" name="horns/2small" dx="90" dy="4"/>
         <cell rect="211,330,29,65" name="horns/2large" dx="90" dy="4"/>
@@ -1174,7 +1190,7 @@
         <cell rect="211,429,29,30" name="horns/frostWyrmLeft" dx="73" dy="23"/>
 		<cell rect="631,396,58,32" name="horns/blackOracle" dx="74" dy="28"/>
         <cell rect="1,330,59,65" name="horns_bg/orchid" dx="73" dy="4"/>
-        <cell rect="61,330,59,65" name="horns_bg/devil" dx="72" dy="4"/>
+        <cell rect="61,330,59,65" name="horns_bg/devil" dx="76" dy="5"/>
         <cell rect="121,330,59,65" name="horns_bg/cow" dx="75" dy="4"/>
         <cell rect="241,330,59,65" name="horns_bg/kraken" dx="75" dy="4"/>
         <cell rect="301,330,59,65" name="horns_bg/demon" dx="75" dy="4"/>
@@ -1984,26 +2000,54 @@
 
 					<!-- Sword -->
 					<if test="PlayerHasASword">
-						<switch>
-							<case test="PlayerHasASwordHoly">
+						<if test="PlayerHasASwordHoly or PlayerHasASwordUnholy">
+							<if test="PlayerHasASwordHoly">
 								<show part="weapon/swordHoly"/>
 								<if test="PlayerHasADualMeleeWeapon">
 									<show part="weapon/swordHolyOH"/>
 								</if>
-							</case>
-							<case test="PlayerHasASwordUnholy">
+							</if>
+							<if test="PlayerHasASwordUnholy">
 								<show part="weapon/swordUnholy"/>
 								<if test="PlayerHasADualMeleeWeapon">
 									<show part="weapon/swordUnholyOH"/>
+								</if>
+							</if>
+							<else>
+								<show part="weapon/swordGeneric"/>
+								<if test="PlayerHasADualMeleeWeapon">
+									<show part="weapon/swordGenericOH"/>
+								</if>
+							</else>
+						</if>
+						<if test="FireBuff">
+							<show part="weaponBuff/swordFireBuff"/>
+							<if test="PlayerHasADualMeleeWeapon">
+								<show part="weaponBuff/swordFireBuffOH"/>
+							</if>
+						</if>
+					</if>
+					<if test="PlayerHasALargeSword">
+						<switch>
+							<case test="PlayerHasALargeSwordHoly">
+								<show part="weapon/swordLargeHoly"/>
+								<if test="PlayerHasADualMeleeWeapon">
+									<show part="weapon/swordLargeHolyOH"/>
+								</if>
+							</case>
+							<case test="PlayerHasALargeSwordUnholy">
+								<show part="weapon/swordLargeUnholy"/>
+								<if test="PlayerHasADualMeleeWeapon">
+									<show part="weapon/swordLargeUnholyOH"/>
 								</if>
 							</case>
 							<case test="PlayerHasASwordMoonGS">
 								<show part="weapon/swordMoonlightGS"/>
 							</case>
 							<default>
-								<show part="weapon/swordGeneric"/>
+								<show part="weapon/swordLargeGeneric"/>
 								<if test="PlayerHasADualMeleeWeapon">
-									<show part="weapon/swordGenericOH"/>
+									<show part="weapon/swordLargeGenericOH"/>
 								</if>
 							</default>
 						</switch>
@@ -2013,12 +2057,40 @@
 									<show part="weaponBuff/swordFireBuffMlGS"/>
 								</case>
 								<default>
-									<show part="weaponBuff/swordFireBuff"/>
+									<show part="weaponBuff/swordLargeFireBuff"/>
 									<if test="PlayerHasADualMeleeWeapon">
-										<show part="weaponBuff/swordFireBuffOH"/>
+										<show part="weaponBuff/swordLargeFireBuffOH"/>
 									</if>
 								</default>
 							</switch>
+						</if>
+					</if>
+					<if test="PlayerHasAMassiveSword">
+						<if test="PlayerHasAMassiveSwordHoly or PlayerHasAMassiveSwordUnholy">
+							<if test="PlayerHasAMassiveSwordHoly">
+								<show part="weapon/swordMassiveHoly"/>
+								<if test="PlayerHasADualMeleeWeapon">
+									<show part="weapon/swordMassiveHolyOH"/>
+								</if>
+							</if>
+							<if test="PlayerHasAMassiveSwordUnholy">
+								<show part="weapon/swordMassiveUnholy"/>
+								<if test="PlayerHasADualMeleeWeapon">
+									<show part="weapon/swordMassiveUnholyOH"/>
+								</if>
+							</if>
+							<else>
+								<show part="weapon/swordMassiveGeneric"/>
+								<if test="PlayerHasADualMeleeWeapon">
+									<show part="weapon/swordMassiveGenericOH"/>
+								</if>
+							</else>
+						</if>
+						<if test="FireBuff">
+							<show part="weaponBuff/swordMassiveFireBuff"/>
+							<if test="PlayerHasADualMeleeWeapon">
+								<show part="weaponBuff/swordMassiveFireBuffOH"/>
+							</if>
 						</if>
 					</if>
 
@@ -3937,7 +4009,7 @@
 					</else>
 				</if>
             </case>
-			<case values="Arms.RACCOON,Arms.FOX,Arms.SPHINX,Arms.WEASEL">
+			<case values="Arms.RACCOON,Arms.FOX,Arms.SPHINX,Arms.WEASEL,Arms.SATYR">
                 <show part="hands/furracoon"/>
                 <show part="hands_bg/furracoon"/>
             </case>

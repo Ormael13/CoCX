@@ -170,6 +170,7 @@ public class BimboLiqueur extends Consumable {
 				player.addCurse("int", 20, 2);
 				player.MutagenBonus("lib", 5);
 				mutations.DrunkenPowerEmpowerIfPossible();
+				mutations.AelfwineEmpowerIfPossible();
 				//FULL ON BITCHFACE
 				game.player.modFem(100, 100);
 				//Body

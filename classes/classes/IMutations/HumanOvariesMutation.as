@@ -32,6 +32,7 @@ public class HumanOvariesMutation extends IMutationPerkType
                 descS += "Increases fertility rating by 60, +20% to lust resistance, increase milk production by ~100%, +10% to max overlust, negative effects of libido are reduced by 5%, +200 to max lust and allow to use Milk Blast once per fight";
             }
             if (descS != "")descS += ".";
+            if (pTier >= 1) descS += " (req. 18+ human score to have all effects active)";
             return descS;
         }
 

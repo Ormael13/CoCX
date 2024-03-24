@@ -182,21 +182,21 @@ public class Changelog extends BaseContent
 			outputText("-Maretian Sanitary Inspection routine control found dangerous stuff in Echidna Cake and Rhino Steak sold in Black Cock food tent at Bazaar. Until solving problem those menu options would be not accesable.\n");
 			outputText("-Black Heart IM can be accessed by Gremlins too. Small corrections and fixing errors in elf and orc IM's.\n");
 			outputText("-Mysterious Meat sold at Black Cock food tent will have it effects as Revamp planned. (Randomn tf effects so enjoy your 44 shades of tf-ing)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Ayane when recruited to camp now could be combat henchman with support mage options like: healing, i-frame (expire after 1 round) and foxfire.\n");
+			outputText("-New bodypart: Satyr Arms (from satyr tf).\n");
+			outputText("-'Melkie Lung' internal mutation been renamed to 'Feyfolk Voice' and now can be additionaly picked by satyr race. It spell damage reduction been changed to be 5% * tier and increasing sing/perform power to be 25 * tier. Stat multi been changed form speed to toughness and bit lowered on 2nd and 3rd tier.\n");
+			outputText("-Satyr race racial score and bonuses been reworked. Now it will be giving bonuses for 12/18 pts as satyr/faun and elder satyr/faun: +50%/+85% to str multi, +40%/+70% to tou multi, +150%/+175% to lib multi, +60 to sens\n");
+			outputText("-Long enough goat / quad goat horns would allow to use Gore p.special.\n");
+			outputText("-Goat horns redux + satyr sprite prep. (Liadri)\n");
+			outputText("-Large and massive swords now have sprites. (Lord Shadeogorath)\n");
+			outputText("-Red Panda race score req. increased from 8 to 10 and bonuses to stats slight changed: +20% to str multi, +80% to spe multi and +50% to wis multi. It can also use Grab & Slam specials like bear/panda race and Body Slam special that pig/boar can use.\n");
+			outputText("-All human internal mutations desc have added part on need to keep high human score to have their effects all active (some effects could still happen when it's below req. score but mostly it's needed to have those 18+ pts)\n");
+			outputText("-New event perk: Pan Labyrinth. Gained by having 15+ in satyr score. Effects: Allow the use of Sing. Sing and Perform tease effect is 50% more powerful. Sing and Perform inflicts lingering tease damage for 5 rounds that has a chance to cause confusion on each turn causing the target to lose its turn. Sing and Perform gain a toughness scaling.\n");
+			outputText("-New event perk: Aelfwine. Gained by using Satyr Wine when having 15+ in satyr score. Effects: When drinking alcohol double libido but halve intelligence while drunk.\n");
+			outputText("-New mutation perk: Feyfolk Voice (Final Form). Req. Feyfolk Voice (Evolved) and lvl 90+. Effects: Increase damage reduction against spells by 20% and increase the power of Sing/Perform by 100%. Sing/Perform is kept at all time. Sing/Perform now has an Intelligence scaling and it’s doubled. Increase Intensify limit by 10 stages.\n");
+			outputText("-New melee weapon: Satyr Flute. Currently dropped by Satyr enemies. Cost 160 gems. Is small mace/hammer type weapon with atk 1. Effects: +50% spellpower, +50% performance power.\n");
+			outputText("-New melee weapon: Pan Flute. Currently buyable in Oddities shop. Cost 160 gems. Is small mace/hammer type weapon with atk 1. Effects: +50% spellpower, +100% performance power.\n");
+			outputText("-New weapon peark: Performance Power. Gained by equipping any melee weapon classified as Music Instrument. Effect: Increase Performance special power by x% (depending on melee weapon).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -208,15 +208,19 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Demojay) (jfmherokiller) (NUZ/Shirane) (Xetaxheb)
-			outputText("-\n");
 			outputText("-Fixed bugs: Arigean above Recruit rank not immune to tf-ing effects, deer arms tf unlocking canine arms MM, unable to find tel'adre again after first time seeing it with too high corruption or other factor that not allowed entrance; Arigean above recruit rank marking, eye color and aura with mismatching colors; demon/arigean arms MM option giving instead devil/abyssal shark arms, ");
 			outputText("Zenji training stats not having gains decrease from +4 to +1 for repeated training before daily reset for other than wisdom stats, resources not been recovered after using specials/soulskills/spells, nail buy menu at carpenter having misleading text, combat wounds % display at stats page been 100x lower, Sandworm PC not counting toward checks for having natural armor, demon face tf");
 			outputText("giving arigean face instead, gym weight lifting capping tone at 85, when building cabin text not picking correct name for Jojo/Joy line, Magical Fertility & Magical Virility perk desc bonus value display error, differences between desc dmg reduction and actualt DR from main difficulty setting, sneak melee/range attack diff between displayer and actualy dealt dmg to enemy, ");
-			outputText("Veseshe preset giving History: Scout instead of History: Whore, Tyrantia training capping at 20 sessions, elfs IM instead of orca/whale IM increasing thickness cap, Belisa holy band button typo, parser in Call Kiha text\n\n");
+			outputText("Veseshe preset giving History: Scout instead of History: Whore, Tyrantia training capping at 20 sessions, elfs IM instead of orca/whale IM increasing thickness cap, Belisa holy band button typo, parser in Call Kiha text, Raiju Cathode IM not selectable by Kirin race\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8w-z:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -286,9 +290,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -322,7 +324,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

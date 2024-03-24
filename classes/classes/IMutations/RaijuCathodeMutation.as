@@ -39,7 +39,7 @@ public class RaijuCathodeMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requirePeripheralNervSysMutationSlot()
-                    .requireRace(Races.RAIJU);
+                    .requireAnyRace(Races.RAIJU, Races.KIRIN);
                 }
                 else{
                     var pLvl:int = pTier * 30;

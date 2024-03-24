@@ -37,6 +37,7 @@ public class MothRace extends Race {
         /*Perks*/		"Human"];
     public function MothRace(id:int)  {
         super("Moth", id, []);
+		disabled = true;
     }
     public override function setup():void {
         addScores()

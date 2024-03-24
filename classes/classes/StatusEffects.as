@@ -1029,6 +1029,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const LoweredAccuracy:StatusEffectType           = mkCombat("Lowered Accuracy");
 		public static const LustDoT:StatusEffectType                   = mkCombat("Lust DoT");
 		public static const LustDoTH:StatusEffectType                  = mkCombat("Lust DoT (H)");
+		public static const LustDoTSP:StatusEffectType                 = mkCombat("Lust DoT (Sing/Perform)");
 		public static const LustStones:StatusEffectType                = mkCombat("lust stones");
 		public static const lustStorm:StatusEffectType             	   = mkCombat("lust storm");
 		public static const LustTransferance:StatusEffectType          = mkCombat("lust Transferance");
@@ -1408,4 +1409,4 @@ import classes.StatusEffects.VampireThirstEffect;
 			return new StatusEffectType(id,CombatStatusEffect,1);
 		}
 	}
-}
+}

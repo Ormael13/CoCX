@@ -9773,9 +9773,7 @@ public class Combat extends BaseContent {
             }
             if (player.hasPerk(PerkLib.RacialParagon)) LustDamage *= combat.RacialParagonAbilityBoost();
             if (player.hasPerk(PerkLib.NaturalArsenal)) LustDamage *= 1.50;
-            if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) LustDamage *= 1.2;
-            if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) LustDamage *= 1.3;
-            if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) LustDamage *= 1.4;
+            if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) LustDamage *= (1 + (0.25 * player.perkv1(IMutationsLib.MelkieLungIM)));
             //Apply intensity multiplier
             LustDamage *= player.statusEffectv1(StatusEffects.Sing);
             if (player.armor == armors.ELFDRES && player.isElf()) LustDamage *= 2;
@@ -11225,6 +11223,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         }
 		if (player.statusEffectv3(StatusEffects.CombatFollowerZenji) > 0 && (player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 1 || player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 3)) player.addStatusValue(StatusEffects.CombatFollowerZenji, 3, 1);
 		if (player.statusEffectv4(StatusEffects.CombatFollowerZenji) > 1) player.addStatusValue(StatusEffects.CombatFollowerZenji, 4, -1);
+		if (player.statusEffectv4(StatusEffects.CombatFollowerAyane) > 1) player.addStatusValue(StatusEffects.CombatFollowerAyane, 4, -1);
         if (player.hasStatusEffect(StatusEffects.BladeDance)) player.removeStatusEffect(StatusEffects.BladeDance);
         if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) player.removeStatusEffect(StatusEffects.ResonanceVolley);
         if (player.hasStatusEffect(StatusEffects.Defend)) player.removeStatusEffect(StatusEffects.Defend);
@@ -13008,11 +13007,15 @@ public function Tremor():void {
 public function SingIntensify(Bee:Boolean = false):void {
     clearOutput();
     var MaxIntensify:int = 5;
+	if (player.perkv1(IMutationsLib.MelkieLungIM) >= 4) MaxIntensify += 10;
     if (player.hasPerk(PerkLib.MelkieSong) || player.hasPerk(PerkLib.HarpySong)) MaxIntensify *= 2;
     if (player.hasPerk(PerkLib.EmpoweredAria)) MaxIntensify *= 2;
     if (player.statusEffectv1(StatusEffects.Sing) < MaxIntensify){
         if (Bee) outputText("You increase the tempo and intensify the strength of your buzzing.");
-        else outputText("You increase the tempo and intensify the strength of your aria.");
+        else {
+			if (player.weapon.isMusicInstrument()) outputText("You increase the tempo and intensify the strength of your performance.");
+			else outputText("You increase the tempo and intensify the strength of your aria.");
+		}
         player.addStatusValue(StatusEffects.Sing,1,+1);
         if (player.hasPerk(PerkLib.EmpoweredAria)){
             player.addStatusValue(StatusEffects.Sing,1,+1);
@@ -13048,9 +13051,7 @@ public function SingArouse(Bee:Boolean = false):void {
     }
     if (player.hasPerk(PerkLib.RacialParagon)) LustDamage *= combat.RacialParagonAbilityBoost();
     if (player.hasPerk(PerkLib.NaturalArsenal)) LustDamage *= 1.50;
-    if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) LustDamage *= 1.2;
-    if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) LustDamage *= 1.3;
-    if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) LustDamage *= 1.4;
+    if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) LustDamage *= (1 + (0.25 * player.perkv1(IMutationsLib.MelkieLungIM)));
     //Apply intensity multiplier
     LustDamage *= player.statusEffectv1(StatusEffects.Sing);
     //Resolve
@@ -13074,7 +13075,8 @@ public function SingCaptivate():void {
 
 public function SingDevastatingAria():void {
     clearOutput();
-    outputText("You unleash a devastating wave of sound!");
+    if (player.weapon.isMusicInstrument()) outputText("You strike a deafening note unleashing a devastating wave of sound!");
+	else outputText("You unleash a devastating wave of sound!");
     var damage:Number = combat.teases.teaseBaseLustDamage();
     if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) damage *= scalingBonusIntelligence();
     if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) damage *= scalingBonusIntelligence();
@@ -13091,9 +13093,8 @@ public function SingDevastatingAria():void {
     if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
     if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 	if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
-    if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) damage *= 1.2;
-    if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) damage *= 1.3;
-    if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) damage *= 1.4;
+	if (player.hasPerk(PerkLib.PerformancePower)) damage *= (1 + player.perkv1(PerkLib.PerformancePower));
+    if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.MelkieLungIM)));
     damage = Math.round(damage);
     doMagicDamage(damage, true, true);
     if (crit) outputText(" Critical hit!");
@@ -16232,11 +16233,23 @@ private function ghostRealIntelligenceCompanion():Number {
     if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") ghostRealInteCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAlvina);
     if (flags[kFLAGS.PLAYER_COMPANION_2] == "Alvina") ghostRealInteCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAlvina);
     if (flags[kFLAGS.PLAYER_COMPANION_3] == "Alvina") ghostRealInteCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAlvina);
+    if (flags[kFLAGS.PLAYER_COMPANION_1] == "Ayane") ghostRealInteCompanion += player.statusEffectv1(StatusEffects.CombatFollowerAyane);
+    if (flags[kFLAGS.PLAYER_COMPANION_2] == "Ayane") ghostRealInteCompanion += player.statusEffectv1(StatusEffects.CombatFollowerAyane);
+    if (flags[kFLAGS.PLAYER_COMPANION_3] == "Ayane") ghostRealInteCompanion += player.statusEffectv1(StatusEffects.CombatFollowerAyane);
     if (flags[kFLAGS.PLAYER_COMPANION_0] == "Tyrantia") ghostRealInteCompanion += player.statusEffectv3(StatusEffects.CombatFollowerTyrantia);
     if (flags[kFLAGS.PLAYER_COMPANION_1] == "Tyrantia") ghostRealInteCompanion += player.statusEffectv3(StatusEffects.CombatFollowerTyrantia);
     if (flags[kFLAGS.PLAYER_COMPANION_2] == "Tyrantia") ghostRealInteCompanion += player.statusEffectv3(StatusEffects.CombatFollowerTyrantia);
     if (flags[kFLAGS.PLAYER_COMPANION_3] == "Tyrantia") ghostRealInteCompanion += player.statusEffectv3(StatusEffects.CombatFollowerTyrantia);
     return ghostRealInteCompanion;
+}
+
+private function ghostRealWisdomCompanion():Number {
+    var ghostRealWisCompanion:Number = 0;
+    if (!player.companionsInPCParty()) return ghostRealWisCompanion;
+    if (flags[kFLAGS.PLAYER_COMPANION_1] == "Ayane") ghostRealWisCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAyane);
+    if (flags[kFLAGS.PLAYER_COMPANION_2] == "Ayane") ghostRealWisCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAyane);
+    if (flags[kFLAGS.PLAYER_COMPANION_3] == "Ayane") ghostRealWisCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAyane);
+    return ghostRealWisCompanion;
 }
 
 private function touSpeStrScale(stat:int):Number {
@@ -16303,6 +16316,11 @@ private function touSpeStrScale(stat:int):Number {
     public function scalingBonusWisdom(randomize:Boolean = true):Number {
         if (flags[kFLAGS.WISDOM_SCALING] == 1) return touSpeStrScale(player.wis);
         else return inteWisLibScale(player.wis, randomize);
+    }
+
+    public function scalingBonusWisdomCompanion(randomize:Boolean = true):Number {
+        if (flags[kFLAGS.WISDOM_SCALING] == 1) return touSpeStrScale(ghostRealWisdomCompanion());
+        else return inteWisLibScale(ghostRealWisdomCompanion(), randomize);
     }
 
     public function scalingBonusIntelligence(randomize:Boolean = true):Number {

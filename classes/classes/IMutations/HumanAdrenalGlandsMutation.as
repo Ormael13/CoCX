@@ -32,7 +32,8 @@ public class HumanAdrenalGlandsMutation extends IMutationPerkType
             if (pTier == 4){
                 descS += ", strength, speed; wrath gained naturaly and from taking damage or dealing damage increased; rising Diehard limit by 50%";
             }
-            if (descS != "")descS += ".";
+			if (descS != "")descS += ".";
+            if (pTier >= 1) descS += " (req. 18+ human score to have all effects active)";
             return descS;
         }
 

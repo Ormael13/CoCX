@@ -168,7 +168,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 						bd = buttons.add("Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horns. This attack is stronger and easier to land with large horns.");
 						if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 					}
-					if ((player.horns.type == Horns.UNICORN || player.horns.type == Horns.BICORN) && player.horns.count >= 6) {
+					if ((player.horns.type == Horns.UNICORN || player.horns.type == Horns.BICORN || player.horns.type == Horns.GOAT || player.horns.type == Horns.GOATQUAD) && player.horns.count >= 6) {
 						bd = buttons.add("Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horn" + (player.horns.type == Horns.BICORN ? "s" : "") + ".  This attack is stronger and easier to land with large horn" + (player.horns.type == Horns.BICORN ? "s" : "") + ".");
 						if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 					}
@@ -217,7 +217,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					}
 				}
 				//Grab & Slam
-				if (player.isRaceCached(Races.BEARANDPANDA) && !monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType)) {
+				if ((player.isRaceCached(Races.BEARANDPANDA) || player.isRaceCached(Races.REDPANDA)) && !monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType)) {
 					bd = buttons.add("Grab", bearGrab).hint("Attempt to grab the opponent in your powerful paws. Does not work on opponent taller than you.");
 					if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 					bd = buttons.add("Slam", bearSlam).hint("Furiously slam your target with your powerful paw, staggering and stunning it.");
@@ -298,7 +298,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 						bd.disable("<b>You need more time before you can perform Tail Smack again.</b>\n\n");
 					} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
-				if ((player.isRaceCached(Races.PIG) || player.perkv1(IMutationsLib.PigBoarFatIM) >= 3) && player.thickness >= minThicknessReq()) {
+				if ((player.isRaceCached(Races.PIG) || player.perkv1(IMutationsLib.PigBoarFatIM) >= 3 || player.isRaceCached(Races.REDPANDA)) && player.thickness >= minThicknessReq()) {
 					bd = buttons.add("Body Slam", bodySlam).hint("Body slam your opponent (small chance to stun). Damage scale with toughness and thickness.");
 					bd.requireFatigue(physicalCost(50));
 					if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
@@ -2125,9 +2125,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		fatigue(50, USEFATG_PHYSICAL);
 		outputText("You take a low stance and begin to charge at [themonster]. Letting your momentum take over, you crash into your opponent and tackle them to the ground, dealing massive damage as they're crushed underneath your weight. ");
 		if (silly()) {
-			outputText("As you collide with [themonster], everything goes grey, and [themonster] looks directly at the camera. <i>\"Yep, that is me. The one being crushed underneath a fatty. Now you might be wondering how this all happened, ");
-			outputText("and honestly, I am too. Here I am doing my job, and out of nowhere I'm attacked by a pig. Next thing I know, I'm about to be crushed under a mountain of fat. Now there's probably some joke you can make right now, the only thing coming to my mind is Space Jam.\"</i>");
-			outputText(" Everything returns to normal, and [themonster] gets comically crushed in slow motion under a mountain of fat, with the camera taking extra care to zoom in on [themonster]'s face.");
+			outputText("As you collide with [themonster], everything goes grey, and [themonster] looks directly at the camera. <i>\"Yep, that is me. The one being crushed underneath a fatty. Now you might be wondering how this all happened, and honestly, I am too. ");
+			outputText("Here I am doing my job, and out of nowhere I'm attacked by a pig. Next thing I know, I'm about to be crushed under a mountain of fat. Now there's probably some joke you can make right now, the only thing coming to my mind is Space Jam.\"</i> ");
+			outputText("Everything returns to normal, and [themonster] gets comically crushed in slow motion under a mountain of fat, with the camera taking extra care to zoom in on [themonster]'s face.");
 		}
 		var slamDmg:Number = player.thickness;
 		if (player.perkv1(IMutationsLib.PigBoarFatIM) >= 1) slamDmg += player.thickness;
@@ -3682,18 +3682,21 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function buzzingTone():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
+		var LustyLusty:Number = 1;
+		if (player.hasPerk(PerkLib.EromancyExpert)) LustyLusty *= 1.5;
+		if (player.hasPerk(PerkLib.RacialParagon)) LustyLusty *= combat.RacialParagonAbilityBoost();
+		if (player.hasPerk(PerkLib.NaturalArsenal)) LustyLusty *= 1.50;
+		if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) LustyLusty *= (1 + (0.25 * player.perkv1(IMutationsLib.MelkieLungIM)));
+		if (player.armor == armors.ELFDRES && player.isElf()) LustyLusty *= 2;
+		if (player.armor == armors.FMDRESS && player.isWoodElf()) LustyLusty *= 2;
 		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 2) {
 			outputText("You end your tune with a powerful finale, compelling your would-be incubator to surrender to your tender ministration.");
 			var lustDmgF:Number = monster.lustVuln * 3 * (player.inte / 5 * (player.teaseLevel * 0.2) + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
-			if (player.hasPerk(PerkLib.EromancyExpert)) lustDmgF *= 1.5;
 			if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) {
 				if (player.hasPerk(PerkLib.ArouseTheAudience)) lustDmgF *= 7.5;
 				else lustDmgF *= 5;
 			}
-			if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= combat.RacialParagonAbilityBoost();
-			if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
-			if (player.armor == armors.ELFDRES && player.isElf()) lustDmgF *= 2;
-			if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmgF *= 2;
+			lustDmgF *= LustyLusty;
 			lustDmgF *= 5;
 			lustDmgF = Math.round(lustDmgF);
 			monster.teased(lustDmgF);
@@ -3715,14 +3718,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if(monster.plural) outputText("s");
 			outputText(" ears.");
 			var lustDmg2:Number = monster.lustVuln * (player.inte / 5 * (player.teaseLevel * 0.2) + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
-			if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg2 *= 1.5;
-			if (player.hasPerk(PerkLib.RacialParagon)) lustDmg2 *= combat.RacialParagonAbilityBoost();
-			if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg2 *= 1.50;
-			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) lustDmg2 *= 1.2;
-			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) lustDmg2 *= 1.3;
-			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) lustDmg2 *= 1.4;
-			if (player.armor == armors.ELFDRES && player.isElf()) lustDmg2 *= 2;
-			if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg2 *= 2;
+			lustDmg2 *= LustyLusty;
 			lustDmg2 = Math.round(lustDmg2);
 			monster.teased(lustDmg2);
 			player.addStatusValue(StatusEffects.ChanneledAttack, 1, 1);
@@ -3734,14 +3730,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			clearOutput();
 			outputText("You start singing an enrapturing song. Buzzing over enticingly.");
 			var lustDmg:Number = monster.lustVuln * 0.5 * (player.inte / 5 * (player.teaseLevel * 0.2) + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
-			if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
-			if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
-			if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
-			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) lustDmg *= 1.2;
-			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) lustDmg *= 1.3;
-			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) lustDmg *= 1.4;
-			if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
-			if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
+			lustDmg *= LustyLusty;
 			lustDmg = Math.round(lustDmg);
 			monster.teased(lustDmg);
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);

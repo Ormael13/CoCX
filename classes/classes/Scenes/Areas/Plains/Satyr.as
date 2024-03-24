@@ -171,7 +171,9 @@ public class Satyr extends Monster
 			this.lustVuln = 0.30;
 			this.level = 19;
 			this.gems = rand(30) + 30;
-			this.drop = new ChainedDrop().add(consumables.INCUBID,1/2);
+			this.drop = new ChainedDrop()
+					.add(consumables.INCUBID,1/2)
+					.add(weapons.SFLUTTE,1/4);
 			this.tailType = Tail.COW;
 			checkMonster();
 		}

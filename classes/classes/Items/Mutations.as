@@ -45,21 +45,37 @@ public final class Mutations extends MutationsHelper {
             minlustx: 0.5
         }, "DrunkenPowerEmpower", {text: "Drunken Power", rate: Buff.RATE_HOURS, tick: durationhour});
     }
-	
-	
 	public function DrunkenPowerEmpowerIfPossible():void {
 		if (CanDrunkenPowerEmpower()) DrunkenPowerEmpower();
 	}
 	public function CanDrunkenPowerEmpower():Boolean {
 		return !player.statStore.hasBuff("DrunkenPowerEmpower") && CoC.instance.inCombat && player.racialScore(Races.ONI) >= DrunkenPowerEmpowerOni();
 	}
-
     public function DrunkenPowerEmpowerOni():Number {
         var bonusempoweroni:Number = 12;
         if (player.perkv1(IMutationsLib.OniMusculatureIM) >= 1) bonusempoweroni -= 6;
         if (player.perkv1(IMutationsLib.OniMusculatureIM) >= 2) bonusempoweroni -= 3;
         return bonusempoweroni;
     }
+	
+	public function AelfwineEmpower():void {
+		outputText("\n\nDamn all this alcohol makes you feel horny… too horny to hide it. You could use getting laid a few times right now, ideally with multiple partners. As you drown your personality and morales into alcohol becoming increasingly more degenerate and lascivious your opponent gets all the more aroused by the sight!");
+        var bonusempower:Number = 2;
+        var bonusdepower:Number = 0.5;
+        var durationhour:Number = 2;
+        bonusempower *= player.lib;
+		bonusdepower *= player.inte;
+        player.statStore.replaceBuffObject({
+            inte: -bonusdepower,
+            lib: bonusempower
+        }, "AelfwineEmpower", {text: "Aelfwine Power", rate: Buff.RATE_HOURS, tick: durationhour});
+    }
+	public function AelfwineEmpowerIfPossible():void {
+		if (CanAelfwineEmpower()) AelfwineEmpower();
+	}
+	public function CanAelfwineEmpower():Boolean {
+		return !player.statStore.hasBuff("AelfwineEmpower") && player.hasPerk(PerkLib.Aelfwine);
+	}
 
     //ManUp Beer
     public function manUpBeer(player:Player):void {
@@ -74,6 +90,7 @@ public final class Mutations extends MutationsHelper {
         }
         player.refillHunger(10);
         DrunkenPowerEmpowerIfPossible();
+		AelfwineEmpowerIfPossible();
     }
 	
 	//Agility Elixir
@@ -4013,6 +4030,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("Whoa it was definitely tasting just as bad as it smelled but hey it's not like your drinking this disgusting concoction for fun right? Or maybe you are?");
 		DrunkenPowerEmpowerIfPossible();
+		AelfwineEmpowerIfPossible();
         dynStats("lus", 15, "scale", false);
         dynStats("cor", 2);
         //Stronger
@@ -4228,6 +4246,7 @@ public final class Mutations extends MutationsHelper {
         outputText("You drink the ale, finding it to have a remarkably smooth yet potent taste.  You lick your lips and sneeze, feeling slightly tipsy.");
         //STAT CHANGES
 		DrunkenPowerEmpowerIfPossible();
+		AelfwineEmpowerIfPossible();
         dynStats("lus", 15, "scale", false);
         //Stronger
         if (player.str > 50 && rand(3) == 0 && changes < changeLimit) {
@@ -7169,6 +7188,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("You uncork the hip flash and drink it down.  The taste is actualy quite good, like an alcohol but with a little fire within.  Just as you expected it makes you feel all hot and ready to take whole world head on.");
 		DrunkenPowerEmpowerIfPossible();
+		AelfwineEmpowerIfPossible();
         //Statistical changes:
         //-Reduces speed down to 70.
         if (player.spe > 70 && changes < changeLimit && rand(4) == 0) {
@@ -7558,6 +7578,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("You uncork the bottle and drink it down.  The taste is actualy quite sweet, like an alcohol but with a hint of hazelnuts flavor.  Would it change anything about you than making feeling of warmth spreading inside?");
 		DrunkenPowerEmpowerIfPossible();
+		AelfwineEmpowerIfPossible();
         //Statistical changes:
         //-Raises speed up to 90.
         if (changes < changeLimit && rand(3) == 0 && MutagenBonus("spe", 1)) {
@@ -9138,6 +9159,7 @@ public final class Mutations extends MutationsHelper {
         if (player.blockingBodyTransformations()) {
             outputText("[pg]<b>You won't get anything from drinking this... aside getting drunk.</b>");
 			DrunkenPowerEmpowerIfPossible();
+			AelfwineEmpowerIfPossible();
             return;
         }
         //no drink for bimbos!
@@ -9263,6 +9285,7 @@ public final class Mutations extends MutationsHelper {
             player.removePerk(PerkLib.Feeder);
         }
 		DrunkenPowerEmpowerIfPossible();
+		AelfwineEmpowerIfPossible();
         dynStats("str", 35, "tou", 35, "lib", 5, "lus", 40);
         player.addCurse("int", 1, 1);
         player.refillHunger(30);
@@ -9631,6 +9654,7 @@ public final class Mutations extends MutationsHelper {
         changeLimit += player.additionalTransformationChances;
         outputText("You drink the mead, finding it to have a remarkably smooth yet potent taste.  You lick your lips and sneeze, feeling slightly tipsy.");
 		DrunkenPowerEmpowerIfPossible();
+		AelfwineEmpowerIfPossible();
         //Stats
         if (rand(3) == 0 && changes < changeLimit && MutagenBonus("str", 1)) {
             outputText("[pg]Your fill your muscles filling with orc might.");
@@ -11099,6 +11123,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("You examine the jewel for a bit, rolling it around in your hand as you ponder its mysteries.  You hold it up to the light with fascinated curiosity, watching the eerie red fluid swirling within.  Without warning, the gem splits into four pieces, dissolving into nothing in your hand.  Liquid from within quickly seeps into your skin leaving you a bit tipsy.");
 		DrunkenPowerEmpowerIfPossible();
+		AelfwineEmpowerIfPossible();
         //Statistical changes:
 		//-Reduces speed down to 70.
         if (player.spe > 70 && changes < changeLimit && rand(2) == 0) {
@@ -11352,6 +11377,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Grow hair: Your scalp is beset by pins and needles as your hair grows out, stopping after it reaches [medium/long] length.}
 		DrunkenPowerEmpowerIfPossible();
+		AelfwineEmpowerIfPossible();
         player.refillHunger(20);
     }
 
@@ -11385,6 +11411,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Grow hair: Your scalp is beset by pins and needles as your hair grows out, stopping after it reaches [medium/long] length.}
 		DrunkenPowerEmpowerIfPossible();
+		AelfwineEmpowerIfPossible();
         player.refillHunger(80);
     }
 
@@ -15049,6 +15076,7 @@ public final class Mutations extends MutationsHelper {
             player.removePerk(IMutationsLib.DiamondHeartIM);
         }
 		DrunkenPowerEmpowerIfPossible();
+		AelfwineEmpowerIfPossible();
         player.refillHunger(10);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
@@ -15414,6 +15442,7 @@ public final class Mutations extends MutationsHelper {
         if (player.tone < 70) player.modTone(70, rand(3));
         if (player.femininity > 30) player.modFem(30, rand(3));
 		DrunkenPowerEmpowerIfPossible();
+		AelfwineEmpowerIfPossible();
     }
 
     public function jabberwockyScale(player:Player):void {
