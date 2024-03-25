@@ -470,10 +470,17 @@ public class AbstractEquinum extends Consumable {
 			CoC.instance.transformations.VaginaHorse().applyEffect();
 		}
 
-		if (player.lowerBody != LowerBody.HOOFED && player.lowerBody != LowerBody.GARGOYLE) {
+		if (type == 0 && player.lowerBody != LowerBody.HOOFED && player.lowerBody != LowerBody.GARGOYLE) {
 			if (changes < changeLimit && rand(3) == 0) {
 				outputText("\n\n");
 				CoC.instance.transformations.LowerBodyHoofed(2).applyEffect();
+				changes++;
+			}
+		}
+		if ((type == 1 || type == 2) && player.lowerBody != LowerBody.CLOVEN_HOOFED && player.lowerBody != LowerBody.GARGOYLE) {
+			if (changes < changeLimit && rand(3) == 0) {
+				outputText("\n\n");
+				CoC.instance.transformations.LowerBodyClovenHoofed(2).applyEffect();
 				changes++;
 			}
 		}

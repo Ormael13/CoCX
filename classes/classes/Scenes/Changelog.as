@@ -205,9 +205,9 @@ public class Changelog extends BaseContent
 			outputText("out of combat when below 10% would not loose wrath and gain +2% per hour, +0.5% wrath generated in combat.\n");
 			outputText("-New consumable: 'First Attack: Flying Sword' manual. Req. buying manual from Qi for 50 spirit stones after learning Soaring Blades passive, reaching Soul Warrior stage and be lvl 24+. Using will grant perk First Attack: Flying Sword.\n");
 			outputText("-Fully scaled lizard/dragon-morphs got a facelift (by Liadri) (Lord Shadeogorath)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Maretian Sanitary Inspection temporaly quarantined sandtrap race for undisclosed reason. Expected to set them free in few weeks to few months.\n");
+			outputText("-Devil, Minotaur, Lacta Bovina, Uni/Bicorn, Alicorn and Nightmare races would now gain cloven hoofed lower body variants. Uni/Bicorns and Alicorns/Nightmares would still able to get +1 to race scrore for either normal hoofed or cloven hoofed legs.\n");
+			outputText("-New event perk: Altered Anima. Gained by becoming Arigean Princess. Effects: Gain 5% pure damage reduction for every 20 corruption and the inability to lose your soul (any effect that would cause loosing even part of soul would instead cause very small amount of mana restored), reduce lust resistance by 20%, reduce soulforce recovery by 70% and -10 Humanity.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

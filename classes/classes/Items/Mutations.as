@@ -3820,10 +3820,10 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Give the player hoofs, if the player already has hoofs STRIP FUR
-        if (tainted && player.lowerBody != LowerBody.HOOFED && player.ears.type == Ears.COW) {
+        if (tainted && player.lowerBody != LowerBody.CLOVEN_HOOFED && player.ears.type == Ears.COW) {
             if (changes < changeLimit && rand(3) == 0) {
                 outputText("[pg]");
-                transformations.LowerBodyHoofed().applyEffect();
+                transformations.LowerBodyClovenHoofed().applyEffect();
                 dynStats("cor", 0);
                 changes++;
             }
@@ -14992,13 +14992,13 @@ public final class Mutations extends MutationsHelper {
         }
         //physical changes
         //legs
-        if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.HOOFED) {
+        if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.CLOVEN_HOOFED) {
             outputText("[pg]");
-            transformations.LowerBodyHoofed(2).applyEffect();
+            transformations.LowerBodyClovenHoofed(2).applyEffect();
             changes++;
         }
         //tail
-        if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LowerBody.HOOFED && (player.tailType != Tail.GOAT && player.tailType != Tail.DEMONIC)) {
+        if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LowerBody.CLOVEN_HOOFED && (player.tailType != Tail.GOAT && player.tailType != Tail.DEMONIC)) {
             outputText("[pg]");
             if (rand(2) == 0) {
                 transformations.TailGoat.applyEffect();
@@ -17150,4 +17150,4 @@ public final class Mutations extends MutationsHelper {
 		player.herbXP(HE);
     }
 }
-}
+}

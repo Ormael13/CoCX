@@ -263,10 +263,10 @@ public class MinotaurBlood extends Consumable {
 			changes++;
 		}
 		//+hooves
-		if (player.lowerBody != LowerBody.HOOFED && player.lowerBody != LowerBody.GARGOYLE) {
+		if (player.lowerBody != LowerBody.CLOVEN_HOOFED && player.lowerBody != LowerBody.GARGOYLE) {
 			if (changes < changeLimit && rand(3) == 0) {
 				outputText("\n\n");
-				CoC.instance.transformations.LowerBodyHoofed(2).applyEffect();
+				CoC.instance.transformations.LowerBodyClovenHoofed(2).applyEffect();
 				player.MutagenBonus("spe", 1);
 				changes++;
 			}

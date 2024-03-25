@@ -55,7 +55,7 @@ public class SatyrRace extends Race {
 				.tongueType(Tongue.ELF, +1)
 				.armType(Arms.SATYR, +1)
 				.tailType(Tail.GOAT, +1)
-				.legType(LowerBody.HOOFED, +1)
+				.legType(LowerBody.CLOVEN_HOOFED, +1)
 				.customRequirement("", "High Masculinity Satyr",
 						function (body:BodyData):Boolean {
 							return (body.player.femininity < 50 && body.player.hasCock())
