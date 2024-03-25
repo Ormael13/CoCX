@@ -1443,9 +1443,9 @@ import classes.lists.Gender;
                 outputText("[pg]An itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
             }
 			//Transformations
-			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.lowerBody != LowerBody.CLOVEN_HOOFED) {
+			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.lowerBody != LowerBody.HOOFED) {
 				outputText("\n\n");
-				CoC.instance.transformations.LowerBodyClovenHoofed(2).applyEffect();
+				CoC.instance.transformations.LowerBodyHoofed(2).applyEffect();
 				changes++;
 			}
 			if (player.lowerBody == LowerBody.CLOVEN_HOOFED && rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.SATYR) {
@@ -1504,7 +1504,7 @@ import classes.lists.Gender;
 				outputText("[pg]Your hair tingles as the strands turns <b>[haircolor]!</b>");
 				changes++;
 			}
-			if (!InCollection(player.furColor, SatyrRace.SatyrFurColors) && changes < changeLimit && rand(2) == 0) {
+			if (!InCollection(player.furColor, SatyrRace.SatyrFurColors) && changes < changeLimit && rand(3) == 0) {
 				player.furColor = randomChoice(SatyrRace.SatyrFurColors);
 				outputText("[pg]Woa! Your fur suddenly changed color to <b>[fur color]</b>!");
 				changes++;

@@ -50,7 +50,7 @@ public class SatyrRace extends Race {
 				.faceType(Face.HUMAN, +1)
 				.hairType(Hair.NORMAL, +1)
 				.hairColor1(ANY(SatyrHairColors), +1)
-				.furColor1(ANY(SatyrFurColors), +1)
+				.furColor01(ANY(SatyrFurColors), +1)
 				.earType(Ears.ELFIN, +1)
 				.tongueType(Tongue.ELF, +1)
 				.armType(Arms.SATYR, +1)
