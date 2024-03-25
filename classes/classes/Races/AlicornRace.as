@@ -53,7 +53,7 @@ public class AlicornRace extends Race {
 				.hornType(ANY(Horns.UNICORN, Horns.BICORN), 0, -1000)
 				.earType(Ears.HORSE, +1)
 				.tailType(Tail.HORSE, +1)
-				.legType(LowerBody.HOOFED, +2)
+				.legType(ANY(LowerBody.CLOVEN_HOOFED, LowerBody.HOOFED), +2)
 				.eyeType(Eyes.HUMAN, +1)
 				.skinPlainOnly(+1)
 				.hasCockOfType(CockTypesEnum.HORSE, +1)

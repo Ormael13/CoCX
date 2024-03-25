@@ -50,7 +50,7 @@ public class UnicornRace extends Race{
 				.faceType(ANY(Face.HUMAN, Face.HORSE), +1, -1000)
 				.earType(Ears.HORSE, +1)
 				.tailType(Tail.HORSE, +1)
-				.legType(LowerBody.HOOFED, +2)
+				.legType(ANY(LowerBody.CLOVEN_HOOFED, LowerBody.HOOFED), +2)
 				.eyeType(Eyes.HUMAN, +1)
 				.hornType(ANY(Horns.UNICORN, Horns.BICORN), 0, -1000)
 				

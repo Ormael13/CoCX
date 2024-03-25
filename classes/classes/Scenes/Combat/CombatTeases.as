@@ -55,6 +55,8 @@ public class CombatTeases extends BaseCombatContent {
 		if (player.armor == armors.ELFDRES && player.isElf()) damagemultiplier += 1;
 		if (player.armor == armors.FMDRESS && player.isWoodElf()) damagemultiplier += 1;
 		if (player.hasStatusEffect(StatusEffects.TeasePotion)) damagemultiplier += 0.05;
+		if (player.weapon == weapons.HELLCAL) damagemultiplier *= (1 + (0.01 * player.cor));
+		if (player.weapon == weapons.ELYSIUM) damagemultiplier *= (1 + (0.01 * (100 - player.cor)));
 		tBLD *= damagemultiplier;
 
 		if (player.hasPerk(PerkLib.ChiReflowLust)) tBLD *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;

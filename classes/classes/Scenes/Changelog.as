@@ -205,6 +205,12 @@ public class Changelog extends BaseContent
 			outputText("out of combat when below 10% would not loose wrath and gain +2% per hour, +0.5% wrath generated in combat.\n");
 			outputText("-New consumable: 'First Attack: Flying Sword' manual. Req. buying manual from Qi for 50 spirit stones after learning Soaring Blades passive, reaching Soul Warrior stage and be lvl 24+. Using will grant perk First Attack: Flying Sword.\n");
 			outputText("-Fully scaled lizard/dragon-morphs got a facelift (by Liadri) (Lord Shadeogorath)\n");
+			outputText("-Maretian Sanitary Inspection temporaly quarantined sandtrap race for undisclosed reason. Expected to set them free in few weeks to few months.\n");
+			outputText("-Devil, Minotaur, Lacta Bovina, Uni/Bicorn, Alicorn and Nightmare races would now gain cloven hoofed lower body variants. Uni/Bicorns and Alicorns/Nightmares would still able to get +1 to race scrore for either normal hoofed or cloven hoofed legs.\n");
+			outputText("-New event perk: Altered Anima. Gained by becoming Arigean Princess. Effects: Gain 5% pure damage reduction for every 20 corruption and the inability to lose your soul (any effect that would cause loosing even part of soul would instead cause very small amount of mana restored), reduce lust resistance by 20%, reduce soulforce recovery by 70% and -10 Humanity.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -224,12 +230,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed bugs: Arigean above Recruit rank not immune to tf-ing effects, deer arms tf unlocking canine arms MM, unable to find tel'adre again after first time seeing it with too high corruption or other factor that not allowed entrance; Arigean above recruit rank marking, eye color and aura with mismatching colors; demon/arigean arms MM option giving instead devil/abyssal shark arms, ");
 			outputText("Zenji training stats not having gains decrease from +4 to +1 for repeated training before daily reset for other than wisdom stats, resources not been recovered after using specials/soulskills/spells, nail buy menu at carpenter having misleading text, combat wounds % display at stats page been 100x lower, Sandworm PC not counting toward checks for having natural armor, demon face tf");
 			outputText("giving arigean face instead, gym weight lifting capping tone at 85, when building cabin text not picking correct name for Jojo/Joy line, Magical Fertility & Magical Virility perk desc bonus value display error, differences between desc dmg reduction and actualt DR from main difficulty setting, sneak melee/range attack diff between displayer and actualy dealt dmg to enemy, ");

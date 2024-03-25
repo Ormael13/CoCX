@@ -1504,7 +1504,7 @@ import classes.lists.Gender;
 				outputText("[pg]Your hair tingles as the strands turns <b>[haircolor]!</b>");
 				changes++;
 			}
-			if (!InCollection(player.furColor, SatyrRace.SatyrFurColors) && changes < changeLimit && rand(2) == 0) {
+			if (!InCollection(player.furColor, SatyrRace.SatyrFurColors) && changes < changeLimit && rand(3) == 0) {
 				player.furColor = randomChoice(SatyrRace.SatyrFurColors);
 				outputText("[pg]Woa! Your fur suddenly changed color to <b>[fur color]</b>!");
 				changes++;

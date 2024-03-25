@@ -4020,7 +4020,7 @@ public class PerkLib
 		public static const AffinityUndine:PerkType = mk("Affinity (Undine)", "Affinity (Undine)",
 				"Can breath underwater and gain +50 to speed and spell power while underwater. Weak to electricity (-100% resistance).");
 		public static const AlteredAnima:PerkType = mk("Altered Anima", "Altered Anima",
-				".");
+				"The process of becoming a Princess has severely contaminated and mutated your soul, making it unable to leave your body, but at what cost?");
 		public static const ArchmageEx:PerkType = mk("Archmage (Ex)", "Archmage (Ex)",
 				"[if (player.inte>=100)" +
 						"Increases base spell strength by 105%, mana pool by 600 and lust bar by 135." +
@@ -4730,7 +4730,7 @@ public class PerkLib
 			[Tongs, Bellows, Furnace, Hammer, Anvil, Weap0n],
 			[TraditionalMageI, TraditionalMageII, TraditionalMageIII, TraditionalMageIV, TraditionalMageV, TraditionalMageVI],
 			[TitanicStrength],
-			[TransformationResistance,TransformationAcclimation],
+			//[TransformationResistance,TransformationAcclimation],
 			[WarMageNovice, WarMageApprentice, WarMageAdept, WarMageExpert, WarMageMaster],
 			//[WeaponClawsClawTraining, WeaponClawsExtraClawAttack, WeaponClawsMultiClawAttack, WeaponClawsClawingFlurry, WeaponClawsSavageRend],
 			//[WeaponLargeDoubleAttack, WeaponLargeTripleAttack],
@@ -8087,7 +8087,6 @@ public class PerkLib
 					.requirePerk(SmallArmy);
 			SexChampion.requireLevel(180)
 					.requirePerk(Pornstar);
-			TransformationAcclimation.requirePerk(TransformationResistance);
 			// ChimericalBodyUltimateStage.requirePerk(ChimericalBodyInitialStage)
             //        .requireLevel(1)
             //        .requireCustomFunction(function (player:Player):Boolean {

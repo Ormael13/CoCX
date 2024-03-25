@@ -10172,9 +10172,15 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         }
         if (player.hasStatusEffect(StatusEffects.KissOfDeath)) {
             //Effect
-            outputText("Your lips burn with an unexpected flash of heat.  They sting and burn with unholy energies as a puff of ectoplasmic gas escapes your lips.  That puff must be a part of your soul!  It darts through the air to [themonster], who slurps it down like a delicious snack.  You feel feverishly hot and exhausted...\n\n");
-            player.takeLustDamage(5, true);
-            player.takePhysDamage(15);
+            if (player.hasPerk(PerkLib.AlteredAnima)) {
+				outputText("Your body suddenly goes slack as you feel bits of your soul leave your body. But before long, violet whisps return to your body with a reinvigorating spasm, as you try desperately to hold back frenzied laughter from the sensation.\n\n");
+				EngineCore.ManaChange(Math.round(player.maxMana() * 0.005));
+			}
+			else {
+				outputText("Your lips burn with an unexpected flash of heat.  They sting and burn with unholy energies as a puff of ectoplasmic gas escapes your lips.  That puff must be a part of your soul!  It darts through the air to [themonster], who slurps it down like a delicious snack.  You feel feverishly hot and exhausted...\n\n");
+				player.takeLustDamage(5, true);
+				player.takePhysDamage(15);
+			}
         }
         if (player.hasStatusEffect(StatusEffects.DemonSeed)) {
             outputText("You feel something shift inside you, making you feel warm.  Finding the desire to fight this... hunk gets harder and harder.\n\n");
@@ -11612,6 +11618,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 		if (player.headJewelry == headjewelries.DEATHPR && player.soulforce >= Math.round(player.maxSoulforce() * 0.5)) soulforceregen += Math.round(player.maxSoulforce() * 0.01);
 		if (player.armor == armors.DEATHPO && player.soulforce >= Math.round(player.maxSoulforce() * 0.5)) soulforceregen += Math.round(player.maxSoulforce() * 0.02);
 		if (player.armor == armors.DEATHPGA && player.soulforce >= Math.round(player.maxSoulforce() * 0.5)) soulforceregen += Math.round(player.maxSoulforce() * 0.05);
+		if (player.hasPerk(PerkLib.AlteredAnima)) soulforceregen = Math.round(soulforceregen * 0.3);
         if (player.hasPerk(PerkLib.EnergyDependent)) soulforceregen = 0;
         return soulforceregen;
     }
