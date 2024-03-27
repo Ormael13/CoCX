@@ -23,18 +23,22 @@ public class ArigeanAssociationCortexMutation extends IMutationPerkType
 			if (pTier == 1) descS += "Overtime your way of thinking has changed to be more alike to that of an Arigean";
 			if (pTier == 2) descS += "Your way of thinking has become even more alike to that of an Arigean";
 			if (pTier == 3) descS += "Your way of thinking has become identical to that of an Arigean";
-			if (pTier == 4) descS += "You’ve adapted a way of thinking that surpasses the normal Arigean";
+			if (pTier == 4) descS += "You’ve adapted a way of thinking that surpasses the normal Arigean. Unlocks the risky but rewarding Finality Barrage";
             if (pTier >= 1) descS += ". Charged shot, Mana shot and Mana Barrage all deal ";
             if (pTier == 1) descS += "20%";
             if (pTier == 2) descS += "50%";
             if (pTier == 3) descS += "90%";
+            if (pTier == 4) descS += "140%";
             if (pTier >= 1) descS += " more damage";
             if (pTier >= 2) descS += " and now cost ";
             if (pTier == 2) descS += "20%";
             if (pTier == 3) descS += "30%";
+            if (pTier == 4) descS += "40%";
             if (pTier >= 2) descS += " less mana";
-            if (pTier >= 3) descS += ", additionally your mana regen is increased by 10% of your toughness";
-            //if (pTier >= 4)descS += ". Heal for an amount of hit points equal to the mana cost when spending mana. Spells have a 10% increased critical chance";
+            if (pTier >= 3) descS += ", additionally your mana regen is increased by ";
+            if (pTier == 3) descS += "10%";
+            if (pTier == 4) descS += "15%";
+            if (pTier >= 3) descS += " of your toughness";
             if (descS != "")descS += ".";
             return descS;
         }
@@ -61,14 +65,27 @@ public class ArigeanAssociationCortexMutation extends IMutationPerkType
         //Mutations Buffs
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
-            //if (pTier == 2) pBuffs['spe.mult'] = 0.05;
-            //if (pTier == 3) pBuffs['spe.mult'] = 0.1;
-            //if (pTier == 3) pBuffs['spe.mult'] = 0.2;
+            if (pTier == 1) {
+				pBuffs['tou.mult'] = 0.06;
+				pBuffs['spe.mult'] = 0.04;
+			}
+            if (pTier == 2) {
+				pBuffs['tou.mult'] = 0.12;
+				pBuffs['spe.mult'] = 0.08;
+			}
+            if (pTier == 3) {
+				pBuffs['tou.mult'] = 0.24;
+				pBuffs['spe.mult'] = 0.16;
+			}
+            if (pTier == 4) {
+				pBuffs['tou.mult'] = 0.48;
+				pBuffs['spe.mult'] = 0.32;
+			}
             return pBuffs;
         }
 
         public function ArigeanAssociationCortexMutation() {
-            super(mName + " IM", mName, SLOT_NERVSYS, 3);
+            super(mName + " IM", mName, SLOT_NERVSYS, 4);
         }
 
     }

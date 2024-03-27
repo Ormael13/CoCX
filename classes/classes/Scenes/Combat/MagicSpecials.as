@@ -402,7 +402,7 @@ public class MagicSpecials extends BaseCombatContent {
 				if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 4) {
 					var amount:Number = 0.6;
 					if (player.hasStatusEffect(StatusEffects.DarkRitual)) amount += 0.1;
-					bd = buttons.add("Finality Barrage", arigeanFinalityBarrage).hint("Sacrifice 60% of your max hp to deal 30% of the enemy’s max hp. \n");
+					bd = buttons.add("Finality Barrage", arigeanFinalityBarrage).hint("Sacrifice "+(amount*100)+"% of your max hp to deal "+(player.hasStatusEffect(StatusEffects.DarkRitual)?"9":"3")+"0% of the enemy’s max hp. \n");
 					if (player.HP - Math.round(player.maxHP() * amount) < player.minHP() + 1) {
 						bd.disable("Your HP is too low to use Finality Barrage.\n\n");
 					} else if (player.hasStatusEffect(StatusEffects.CooldownFinalityBarrage)) {
@@ -4281,6 +4281,7 @@ public class MagicSpecials extends BaseCombatContent {
 		var aACB:Number = 1.2;
 		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 2) aACB += 0.3;
 		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 3) aACB += 0.4;
+		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 4) aACB += 0.5;
 		return aACB;
 	}
 	private function arigeanMagicSpecialsCost():Number {
@@ -4289,6 +4290,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.armor == armors.P_REGAL) aMSC -= 0.5;
 		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 2) aMSC -= 0.2;
 		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 3) aMSC -= 0.1;
+		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 4) aMSC -= 0.1;
 		if (aMSC < 0.1) aMSC = 0.1;
 		return aMSC;
 	}

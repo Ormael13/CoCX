@@ -57,6 +57,7 @@ public class Changelog extends BaseContent
 			outputText("-New flying sword: Chrysolite New Moon - buyable at 'Flying Swords are always with you!' shop in He'Xin'Dao. Cost 375 spirit stones. Base atk is 40. It's classified as Massive flying sword. Deal plasma damage instead of physical damage. Soulforce cost of using it to fly or attack are increased by 10%.\n");
 			outputText("-New consumable: Soaring Blades manual. Req. buying manual from Qi for 50 spirit stones after finishing basic training with him. Using will grant perk Soaring Blades.\n");
 			outputText("-New P. Special: Ram. Req. to be Arigean Princess. Deals Physical Damage based on Speed, but cause recoil damage equal to 10% of user max HP.\n");
+			outputText("-New M. Special: Charged Shot. Req. to be Arigean Princess. A two turn charged str scaling range attack costing mana (~400) and dealing magic damage.\n");
 			outputText("-When reaching lvl 30 and having done all misison from Grayda Arigean PC can have event proc at camp that unlocks new quest 'Coronation'. Visiting her at Trench would send PC to gather materials and then becoming new princess. It's pernament race option so can't return from been Arigean Princess.\n");
 			outputText("-Arigean Princess (23+) stat bonuses: +430% to str multi, +430% to spe multi, +310% to tou multi, -75% to int multi, -60% to wisdom multi, +65 Min Corruption, +10 armor. She can use additional specials: Grab and Guillotine (both works like the ones from Cancer race)\n");
 			outputText("-10 new achievments. (4 shadow one)\n");
@@ -100,7 +101,6 @@ public class Changelog extends BaseContent
 			//outputText("-\n");
 			//outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
 			//outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
-			outputText("-New M. Special: Charged Shot. Req. to be Arigean Princess. A two turn charged str scaling range attack costing mana (~400) and dealing magic damage.\n");
 			outputText("-New event perk: Arigean Knowledge. Gained by becoming Arigean Princess. Effects: The knowledge of your Arigean ancestors rests in your mind. Gain immunity to mental debuffs and intelligence min is increased to 90.\n");
 			outputText("-Flying Sword Path, Soaring Blades, First Attack: Flying Sword, Killing Intent perks no longer are in level up menu. All spend before perks are refunded no worried.\n");
 			outputText("-Flying Sword Path perk have now ranks and 1st rank is learned by training with Qi costing 50 spirit stones for training.\n");
@@ -208,8 +208,8 @@ public class Changelog extends BaseContent
 			outputText("-Maretian Sanitary Inspection temporaly quarantined sandtrap race for undisclosed reason. Expected to set them free in few weeks to few months.\n");
 			outputText("-Devil, Minotaur, Lacta Bovina, Uni/Bicorn, Alicorn and Nightmare races would now gain cloven hoofed lower body variants. Uni/Bicorns and Alicorns/Nightmares would still able to get +1 to race scrore for either normal hoofed or cloven hoofed legs.\n");
 			outputText("-New event perk: Altered Anima. Gained by becoming Arigean Princess. Effects: Gain 5% pure damage reduction for every 20 corruption and the inability to lose your soul (any effect that would cause loosing even part of soul would instead cause very small amount of mana restored), reduce lust resistance by 20%, reduce soulforce recovery by 70% and -10 Humanity.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New M. Special: Finality Barrage. Req. to be Arigean Princess. Sacrifice 60% of your max hp to deal 30% of the enemy’s max hp.\n");
+			outputText("-New mutation perk: Arigean Association Cortex (Final Form). Req. Arigean Association Cortex (Evolved) and lvl 90+. Effects: You’ve adapted a way of thinking that surpasses the normal Arigean. Unlocks the risky but rewarding Finality Barrage. Charged shot, Mana shot and Mana Barrage all deal 140% more damage and now cost 40% less mana, additionally your mana regen is increased by 15% of your toughness.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
