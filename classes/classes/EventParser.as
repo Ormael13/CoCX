@@ -524,7 +524,7 @@ public class EventParser {
                 return 1;
             } else if (chance > Utils.rand(100) && !player.hasStatusEffect(StatusEffects.DefenseCanopy)) {
                 if (player.gender > 0 && (!player.hasStatusEffect(StatusEffects.JojoNightWatch) || !player.hasStatusEffect(StatusEffects.PureCampJojo)) && (flags[kFLAGS.HEL_GUARDING] == 0 || !SceneLib.helFollower.followerHel()) && !player.hasStatusEffect(StatusEffects.HeliaOff) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !SceneLib.kihaFollower.followerKiha()) && EtnaDaughterScene.EtnaDaughterGuardingCamp != 2 && SceneLib.midokaScene.MidokaGuardingCamp != 2 &&
-                        !(SceneLib.camp.sleepInCabin() && (player.inte / 5 >= Utils.rand(15) || player.lust < 0.8 * player.maxLust() || CoC.instance.gameSettings.sceneHunter_inst.other)) && !flags[kFLAGS.IN_INGNAM] || flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 2) {
+                        (!player.hasStatusEffect(StatusEffects.Familiar) && player.statusEffectv1(StatusEffects.Familiar) == 0) && !(SceneLib.camp.sleepInCabin() && (player.inte / 5 >= Utils.rand(15) || player.lust < 0.8 * player.maxLust() || CoC.instance.gameSettings.sceneHunter_inst.other)) && !flags[kFLAGS.IN_INGNAM] || flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 2) {
                     SceneLib.impScene.impGangabangaEXPLOSIONS();
                     EngineCore.doNext(playerMenu);
                     return 2;
@@ -559,6 +559,10 @@ public class EventParser {
                 }
                 else if (EtnaDaughterScene.EtnaDaughterGuardingCamp == 2) {
                     EngineCore.outputText("\n<b>A group of imps tried to attack that night but you heard their screams in the distance as [etnakidname] laughed and made a feast out of them.</b>\n");
+                    return 1;
+                }
+                else if (player.hasStatusEffect(StatusEffects.Familiar) && player.statusEffectv1(StatusEffects.Familiar) == 1) {
+                    EngineCore.outputText("\n<b>The screams and roars alerts you to the fact your ghoul caught and defeated some invaders. You sleep comfortably to the sound of the bloodshed ongoing nearby.</b>\n");
                     return 1;
                 }
                 else if (SceneLib.camp.sleepInCabin() && player.inte / 5 >= Utils.rand(15) && player.lust < 0.8 * player.maxLust()) { //lust condition: horny - less smart!

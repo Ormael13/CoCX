@@ -4267,13 +4267,15 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownFinalityBarrage,9,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownFinalityBarrage,10,0,0,0);
 		outputText("You let loose a blood curdling yell, driving all the force you can into your maw for a overcharged blast of raw uncontrolled mana, scorching your insides as well as the foe in front of you! ");
+		var enemyHPlost:Number = 0.3;
+		if (player.armor == armors.P_REGAL) enemyHPlost *= 1.5;
 		if (player.hasStatusEffect(StatusEffects.DarkRitual)) {
 			HPChange(-Math.round(player.maxHP() * 0.7), true);
-			monster.HP -= Math.round(monster.maxHP() * 0.9);
+			monster.HP -= Math.round(monster.maxHP() * (enemyHPlost * 3));
 		}
 		else {
 			HPChange(-Math.round(player.maxHP() * 0.6), true);
-			monster.HP -= Math.round(monster.maxHP() * 0.3);
+			monster.HP -= Math.round(monster.maxHP() * enemyHPlost);
 		}
 		enemyAI();
 	}

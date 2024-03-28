@@ -45,7 +45,7 @@ public class Changelog extends BaseContent
 			outputText("-New range weapon/tome (by Ormael): Restrained Black Tome - buyable at Library in Tel'Adre. Cost 100 gems. Increase by 300/200/100% black spellpower and reduce by 3/2/1 turns cd of offensive black spells at levels below 6/12/18.\n");
 			outputText("-New range weapon/tome (by Ormael): Restrained White Tome - buyable at Library in Tel'Adre. Cost 100 gems. Increase by 300/200/100% white spellpower and reduce by 3/2/1 turns cd of offensive white spells at levels below 6/12/18.\n");
 			outputText("-New range weapon/tome (by Ormael): Restrained Grey Tome - buyable at Library in Tel'Adre. Cost 200 gems. Increase by 300/200/100% grey spellpower and reduce by 3/2/1 turns cd of offensive grey spells at levels below 6/12/18.\n");
-			outputText("-New armor (by Sylabt & Ohaxer): Princess Regalia - obtained by completing Coronation quest at Trench or later from equipment shop. Cost 9,600 gems, 17 armor, 13 magic resistance, light type armor. Increases the damage of and reduces the cost of Mana shot, barrage and charged shot by 50%, also isn’t affected by Miracle Metal debuff for armor, and provides a 15% lifesteal from Mana shot, barrage, charged shot and crunch.\n");
+			outputText("-New armor (by Sylabt & Ohaxer): Princess Regalia - obtained by completing Coronation quest at Trench or later from equipment shop. Cost 9,600 gems, 17 armor, 13 magic resistance, light type armor. Increases the damage of and reduces the cost of Mana Shot, Barrage, Charged Shot and Finality Barrage by 50%, also isn’t affected by Miracle Metal debuff for armor, and provides a 15% lifesteal from Mana shot, barrage, charged shot and crunch.\n");
 			outputText("-New flying sword: White Half-Moon Quartet - combined from two White Half-Moon Duo sword sets. Cost 240 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 4). Deal fire damage instead of physical damage.\n");
 			outputText("-New flying sword: Black Half-Moon Quartet - combined from two Black Half-Moon Duo sword sets. Cost 240 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 4). Deal ice damage instead of physical damage.\n");
 			outputText("-New flying sword: Scarlet Half-Moon Quartet - combined from two Scarlet Half-Moon Duo sword sets. Cost 240 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 4). Deal lightning damage instead of physical damage.\n");
@@ -210,8 +210,8 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Altered Anima. Gained by becoming Arigean Princess. Effects: Gain 5% pure damage reduction for every 20 corruption and the inability to lose your soul (any effect that would cause loosing even part of soul would instead cause very small amount of mana restored), reduce lust resistance by 20%, reduce soulforce recovery by 70% and -10 Humanity.\n");
 			outputText("-New M. Special: Finality Barrage. Req. to be Arigean Princess. Sacrifice 60% of your max hp to deal 30% of the enemy’s max hp.\n");
 			outputText("-New mutation perk: Arigean Association Cortex (Final Form). Req. Arigean Association Cortex (Evolved) and lvl 90+. Effects: You’ve adapted a way of thinking that surpasses the normal Arigean. Unlocks the risky but rewarding Finality Barrage. Charged shot, Mana shot and Mana Barrage all deal 140% more damage and now cost 40% less mana, additionally your mana regen is increased by 15% of your toughness.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Ghoulish Vampire Servant hae now two (three) new interactions: Turn Male/Female & Guard Camp. First two allow to change it gender using incubus draft/succubus milk and last allow to make it guard camp at night like some other npc's could.\n");
+			outputText("-Grayda after coronation (in camp) have now additional interactions: Talk (5 subjects)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

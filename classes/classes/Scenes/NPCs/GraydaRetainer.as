@@ -116,6 +116,80 @@ private function graydaMainAppearance():void {
 	outputText("\"<i>Princess? Are you alright? Do you need me to move you somewhere darker or out of the light?</i>\"\n\n");
 	doNext(graydaMainWhenCalled);
 }
+private	function graydaMainTalk():void {
+	clearOutput();
+	spriteSelect(SpriteDb.s_grayda);
+	outputText("You ask Grayda if she wouldn’t mind talking with you about a few things.\n\n");
+	outputText("\"<i>Of course not my princess. What is on your mind?</i>\"\n\n");
+	menu();
+	addButton(1, "Her", graydaMainTalkHer);
+	addButton(2, "Outsiders", graydaMainTalkOutsiders);
+	addButton(3, "Other Arigeans?", graydaMainTalkOtherArigeans);
+	addButton(6, "Sunlight", graydaMainTalkSunlight);
+	//7
+	addButton(8, "The Camp?", graydaMainTalkTheCamp);
+	addButton(14, "Back", graydaMainWhenCalled);
+}
+private	function graydaMainTalkHer():void {
+	clearOutput();
+	spriteSelect(SpriteDb.s_grayda);
+	outputText("You ask what she was like before she became an Arigean.\n\n");
+	outputText("\"<i>I suppose I could, after all, we are going to be together for quite a long time. Just… give me a moment, talking about such a subject never gets easy.</i>\" She sits down, pulls out a flask, and takes a small sip from it before re-hiding it somewhere in her cloak. \"<i>Déanann alcól rudaí i gcónaí níos fearr… much better.</i>\" Her voice gains a slight echo at the end, signaling she’s started using your kind’s native language.\n\n");
+	outputText("You take a seat by her, and patiently wait for her to start her story of what she was like before.\n\n");
+	outputText("\"<i>Let’s see…</i>\" she seems to almost space out, lost in thought. \"<i>Me and my sister used to be a part of a line of sailors, and we used to live a calm life almost entirely free from the corruption that plagued the land. However… our peace could not last forever, and the threat of being found by demons was becoming too great to ignore, so we stockpiled supplies, and tried to sail away from the mainland with a few close friends, family, and anyone who was willing to contribute.</i>\"\n\n");
+	outputText("Her glowing yellow eyes seem to dim to a low amber as she grabs, and takes another sip from her concealed flask. \"<i>It was all going well, we had enough supplies to last us a while… until a violent storm started hounding our ship, and left us in a very poor condition, but that wasn’t the worst of it. One of those fanatic ‘Sea Witches’ attempted to attack our boat while turning us against each other.</i>\"\n\n");
+	outputText("Her eyes lose all of their glow, leaving them as nothing but milky white with a faint brown coloring where her irises should be, and a frown appears on her face as watery drops started to fall from her eyes. \"<i>I… was knocked overboard during the attack, and in my weakened state was unable to stay above the water. Before I was about to pass out from a lack of air, this...</i>\" ");
+	outputText("she pats the hat-like organism on her head in an affectionate manner. \"<i>It saved me from drowning by allowing me to breathe again… however there were no remains among the wreckage of the ship when I checked it. Meaning almost everyone I knew was most likely dead or turned into more fanatics.</i>\"\n\n");
+	outputText("She takes a long gulp of whatever the continents of the flask were, before returning the empty container to her cloak for a final time, a flush of blue on her cheeks makes it quite obvious as to what the contents were. \"<i>I'm not sure how long I stayed there, unable to move… to live with the reality that was forced upon me… eventually I couldn't remain conscious and collapsed from exhaustion. However when I woke up, I was somewhere different, as well as something I wasn't before, but the thing that mattered most to me was the desire to grow stronger. I wanted revenge, I would become a one-woman army if it meant finally being able to catch the one who caused so much ruin in a day.</i>\"\n\n");
+	outputText("She leans back into her chair and takes a deep breath before continuing. \"<i>But that was all so long ago, and I was much too young to have a proper understanding of how the world works. So for now, my duty is protecting you and giving you my guidance. Or at least until we both perish.</i>\" Her eyes regain their glow as she seems to return to her normal attitude.\n\n");
+	outputText("She shuffles a bit as her attention is regained on you. \"<i>I suppose you wouldn’t mind if I asked what you did before our encounter? I understand you have a duty that takes priority over being a leader for our kind, but what were you like before our encounter?</i>\"\n\n");
+	outputText("You can’t help but let out a low growl looking back on your time in your hometown. ");
+	if (SceneLib.dungeons.checkFactoryClear()) outputText("After all, you were nothing but a sacrifice to the elders for their own personal gain, and worst of all is that they are continuing on unpunished. How long until someone you held dear is thrown through and defiled by the land?");
+	else outputText("This reaction seems to somewhat concern you, nothing bad exactly happened. In fact, you are your village’s champion, so why does this upset you?");
+	outputText("\n\n\"<i>Princess I understand if you don’t wish to discuss this, but please know I will stay by your side to the end regardless of your past.</i>\"\n\n");
+	doNext(graydaMainTalk);
+	advanceMinutes(15);
+}
+private	function graydaMainTalkOutsiders():void {
+	clearOutput();
+	spriteSelect(SpriteDb.s_grayda);
+	outputText("You ask Grayda what she thinks of the other races of mareth.\n\n");
+	outputText("\"<i>Outsiders? With all due respect Princess I don't trust them, they seem quick to turn on each other, however, the demons are a more serious threat for the moment. I would also be wary of any Mindbreakers you come across my princess, they seem to have some ulterior motive which could prove detrimental if left unchecked.</i>\"\n\n");
+	outputText("She takes a moment to look around the camp before continuing. \"<i>Although, most of the folk you’ve gathered around here seem quite pleasant, and trade between one of the nearby towns could help this place grow quite nicely.</i>\"\n\n");
+	doNext(graydaMainTalk);
+	advanceMinutes(5);
+}
+private	function graydaMainTalkOtherArigeans():void {
+	clearOutput();
+	spriteSelect(SpriteDb.s_grayda);
+	outputText(" You ask how the Arigeans at the trench will fare without you or Grayda present.\n\n");
+	outputText("\"<i>Well, they aren’t completely without leadership as the other princesses would have placed a replacement for me there. However, I'm sure they would benefit from a visit from us every once in a while though.</i>\" She closes her eyes to think for a few moments. \"<i>Any infectees might find their way there, some might even find themselves drawn here if we have enough space for them.</i>\"\n\n");
+	doNext(graydaMainTalk);
+	advanceMinutes(5);
+}
+private	function graydaMainTalkSunlight():void {
+	clearOutput();
+	spriteSelect(SpriteDb.s_grayda);
+	outputText("You’ve noticed how when Grayda isn’t by your side or patrolling then she’s staying in a shaded area. You’ve also noticed that the sun has been irritating your skin ever since you’ve become an Arigean, is there a reason for this?\n\n");
+	outputText("\"<i>Yes my Princess. We lack the chemicals in our skin that give us color like most other surface dwellers, so we can’t handle constant sunlight exposure like most other races can. I would recommend wearing eye protection and resting in the shade every once in a while to avoid irritation.</i>\"\n\n");
+	doNext(graydaMainTalk);
+	advanceMinutes(5);
+}
+private	function graydaMainTalkOthersAtCamp():void {
+	clearOutput();
+	spriteSelect(SpriteDb.s_grayda);
+	outputText("\"<i></i>\"\n\n");
+	doNext(graydaMainTalk);
+	advanceMinutes(5);
+}
+private	function graydaMainTalkTheCamp():void {
+	clearOutput();
+	spriteSelect(SpriteDb.s_grayda);
+	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("\"<i>It’s nice, there’s at least some shelter so our skins don’t burn. But shouldn't we try to continue to expand our defense a bit given we are currently out in the open?</i>\"\n\n");
+	else outputText("\"<i>It’s… something, but don’t you think you should build some shelter, my princess? I'm not sure how you handle constantly being in this harsh sunlight.</i>\"\n\n");
+	doNext(graydaMainTalk);
+	advanceMinutes(5);
+}
 private	function graydaA():void {
 	outputText("\"<i></i>\"\n\n");
 }
