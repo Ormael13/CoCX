@@ -1284,8 +1284,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				//Neisa counter to payment
 				if (flags[kFLAGS.NEISA_FOLLOWER] >= 7 && flags[kFLAGS.NEISA_FOLLOWER] < 17) flags[kFLAGS.NEISA_FOLLOWER]++;
-				//Reset of event for Coronation quest at Bazzar
+				//Reset of event for Coronation quest at Bazzar / Bathing timer in camp
 				if (flags[kFLAGS.THE_TRENCH_ENTERED] == 13.5) flags[kFLAGS.THE_TRENCH_ENTERED] = 13;
+				if (flags[kFLAGS.THE_TRENCH_ENTERED] > 14) flags[kFLAGS.GRAYDA_BATHING]++;
 				//Kaiba daily buy limit refresh
 				if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) player.removeStatusEffect(StatusEffects.KaibaDailyLimit);
 				//Daily reset on finding blessed ittem(s) at the lake

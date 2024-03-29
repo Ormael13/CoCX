@@ -204,6 +204,7 @@ public class Achievements extends BaseContent
 			addAchievement("Throne of Strength", kACHIEVEMENTS.FASHION_THRONE_OF_STRENGTH, "Equip all strength boosting accessories.");
 			addAchievement("Throne of Toughness", kACHIEVEMENTS.FASHION_THRONE_OF_TOUGHNESS, "Equip all toughness boosting accessories.");
 			addAchievement("Throne of Wisdom", kACHIEVEMENTS.FASHION_THRONE_OF_WISDOM, "Equip all wisdom boosting accessories.");
+			addAchievement("Hammer Time!!!", kACHIEVEMENTS.FASHION_HAMMER_TIME, "Equip any musical instrument.", "", true);
 			addAchievement("Suit Up!", kACHIEVEMENTS.FASHION_SUIT_UP, "Equip any vehicle.");
 			addAchievement("Rollin'", kACHIEVEMENTS.FASHION_ROLLIN_ROLLIN, "Equip Goblin Mech Prime.", "", true);
 			addAchievement("Asura's Wrath", kACHIEVEMENTS.FASHION_ASURAS_WRATH, "Equip Giant Slayer Mech.", "", true);

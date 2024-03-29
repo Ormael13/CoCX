@@ -60,7 +60,7 @@ public class Changelog extends BaseContent
 			outputText("-New M. Special: Charged Shot. Req. to be Arigean Princess. A two turn charged str scaling range attack costing mana (~400) and dealing magic damage.\n");
 			outputText("-When reaching lvl 30 and having done all misison from Grayda Arigean PC can have event proc at camp that unlocks new quest 'Coronation'. Visiting her at Trench would send PC to gather materials and then becoming new princess. It's pernament race option so can't return from been Arigean Princess.\n");
 			outputText("-Arigean Princess (23+) stat bonuses: +430% to str multi, +430% to spe multi, +310% to tou multi, -75% to int multi, -60% to wisdom multi, +65 Min Corruption, +10 armor. She can use additional specials: Grab and Guillotine (both works like the ones from Cancer race)\n");
-			outputText("-10 new achievments. (4 shadow one)\n");
+			outputText("-11 new achievments. (5 shadow one)\n");
 			outputText("-Juvenile abyssal sharks can sometimes be too happy to bite more then PC have (still left) so now they will stop when pc have penalty of 99% on combat wounds.\n");
 			outputText("-Beautiful Sword and Whip would now have additional effect of giving 2x more exp for weapon mastery. Beautiful Staff would have additional effect of -1 turn cooldown duration of tier 1 spells.\n");
 			outputText("-Qi - owner of 'Flying Swords are always with you!' is no more in closed doors cultivation session. And now he can train or sell some more specialistic manuals to PC.\n");
@@ -210,8 +210,8 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Altered Anima. Gained by becoming Arigean Princess. Effects: Gain 5% pure damage reduction for every 20 corruption and the inability to lose your soul (any effect that would cause loosing even part of soul would instead cause very small amount of mana restored), reduce lust resistance by 20%, reduce soulforce recovery by 70% and -10 Humanity.\n");
 			outputText("-New M. Special: Finality Barrage. Req. to be Arigean Princess. Sacrifice 60% of your max hp to deal 30% of the enemy’s max hp.\n");
 			outputText("-New mutation perk: Arigean Association Cortex (Final Form). Req. Arigean Association Cortex (Evolved) and lvl 90+. Effects: You’ve adapted a way of thinking that surpasses the normal Arigean. Unlocks the risky but rewarding Finality Barrage. Charged shot, Mana shot and Mana Barrage all deal 140% more damage and now cost 40% less mana, additionally your mana regen is increased by 15% of your toughness.\n");
-			outputText("-Ghoulish Vampire Servant hae now two (three) new interactions: Turn Male/Female & Guard Camp. First two allow to change it gender using incubus draft/succubus milk and last allow to make it guard camp at night like some other npc's could.\n");
-			outputText("-Grayda after coronation (in camp) have now additional interactions: Talk (5 subjects)\n");
+			outputText("-Ghoulish Vampire Servant have now two (three) new interactions: Turn Male/Female & Guard Camp. First two allow to change it gender using incubus draft/succubus milk and last allow to make it guard camp at night like some other npc's could.\n");
+			outputText("-Grayda after coronation (in camp) have now additional interactions: Talk (6 subjects), Sex (req. 60%+ affection), Bathing (Forced / Willingly). Each of this options will increase Grayda affection by 2,5% or 5%. Added to player info page: grayda affection & days since last bathing\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -233,7 +233,7 @@ public class Changelog extends BaseContent
 			outputText("-Fixed bugs: Arigean above Recruit rank not immune to tf-ing effects, deer arms tf unlocking canine arms MM, unable to find tel'adre again after first time seeing it with too high corruption or other factor that not allowed entrance; Arigean above recruit rank marking, eye color and aura with mismatching colors; demon/arigean arms MM option giving instead devil/abyssal shark arms, ");
 			outputText("Zenji training stats not having gains decrease from +4 to +1 for repeated training before daily reset for other than wisdom stats, resources not been recovered after using specials/soulskills/spells, nail buy menu at carpenter having misleading text, combat wounds % display at stats page been 100x lower, Sandworm PC not counting toward checks for having natural armor, demon face tf");
 			outputText("giving arigean face instead, gym weight lifting capping tone at 85, when building cabin text not picking correct name for Jojo/Joy line, Magical Fertility & Magical Virility perk desc bonus value display error, differences between desc dmg reduction and actualt DR from main difficulty setting, sneak melee/range attack diff between displayer and actualy dealt dmg to enemy, ");
-			outputText("Veseshe preset giving History: Scout instead of History: Whore, Tyrantia training capping at 20 sessions, elfs IM instead of orca/whale IM increasing thickness cap, Belisa holy band button typo, parser in Call Kiha text, Raiju Cathode IM not selectable by Kirin race\n\n");
+			outputText("Veseshe preset giving History: Scout instead of History: Whore, Tyrantia training capping at 20 sessions, elfs IM instead of orca/whale IM increasing thickness cap, Belisa holy band button typo, parser in Call Kiha text, Raiju Cathode IM not selectable by Kirin race, Ghoulish Vampire Servant event appearing after PC get the ghoul\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8w-z:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");

@@ -250,6 +250,7 @@ public class SaveUpdater extends NPCAwareContent {
 			["Throne of Strength", kACHIEVEMENTS.FASHION_THRONE_OF_STRENGTH, player.headJewelry == headjewelries.CROWSTR && player.necklace == necklaces.NECKSTR && player.countRings(jewelries.RINGSTR) > 0],
 			["Throne of Toughness", kACHIEVEMENTS.FASHION_THRONE_OF_TOUGHNESS, player.headJewelry == headjewelries.CROWTOU && player.necklace == necklaces.NECKTOU && player.countRings(jewelries.RINGTOU) > 0],
 			["Throne of Wisdom", kACHIEVEMENTS.FASHION_THRONE_OF_WISDOM, player.headJewelry == headjewelries.CROWWIS && player.necklace == necklaces.NECKWIS && player.countRings(jewelries.RINGWIS) > 0],
+			["Hammer Time!!!", kACHIEVEMENTS.FASHION_HAMMER_TIME, player.weapon.isMusicInstrument()],
 			["Suit Up!", kACHIEVEMENTS.FASHION_SUIT_UP, player.isInGoblinMech() || player.isInNonGoblinMech()],
 			["Rollin' Rollin'", kACHIEVEMENTS.FASHION_ROLLIN_ROLLIN, player.vehicles == vehicles.GOBMPRI],
 			["Asura's Wrath", kACHIEVEMENTS.FASHION_ASURAS_WRATH, player.vehicles == vehicles.GS_MECH],

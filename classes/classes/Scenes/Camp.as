@@ -744,6 +744,10 @@ public class Camp extends NPCAwareContent{
 			flags[kFLAGS.D3_GOBLIN_MECH_PRIME] = 2;
 			return;
 		}
+		if (flags[kFLAGS.GRAYDA_BATHING] >= 10) {
+			SceneLib.graydaScene.graydaMainBathingByForce();
+			return;
+		}
 		//Reset.
 		flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 0;
 		campQ = false;
@@ -1957,7 +1961,7 @@ public class Camp extends NPCAwareContent{
 			}
 			//Grayda
 			if (flags[kFLAGS.THE_TRENCH_ENTERED] > 14) {
-				outputText("You can see Grayda patrolling the edges of the camp, keeping an eye out for any potential threats.");
+				outputText("You can see Grayda patrolling the edges of the camp, keeping an eye out for any potential threats."+(flags[kFLAGS.GRAYDA_AFFECTION] >= 60?" Her attention occasionally turns to you every once in a while.":"")+"");
 				buttons.add("Grayda", SceneLib.graydaScene.graydaMainWhenCalled).hint("Visit Grayda.").disableIf(player.statusEffectv2(StatusEffects.CampLunaMishaps3) > 0, "Grayda is still curled up underneath the water at the stream.");
 			}
 			//Kindra
@@ -5303,3 +5307,4 @@ public function rebirthFromBadEnd():void {
 
 }
 }
+

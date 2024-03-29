@@ -8,6 +8,8 @@ import classes.*;
 import classes.BodyParts.Eyes;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.NPCs.DivaScene;
+import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 	
@@ -16,8 +18,14 @@ public class GraydaRetainer extends NPCAwareContent
 		
 		public function GraydaRetainer() 
 		{
-			
 		}
+		
+public function graydaAffection(changes:Number = 0):Number
+{
+	flags[kFLAGS.GRAYDA_AFFECTION] += changes;
+	if (flags[kFLAGS.GRAYDA_AFFECTION] > 100) flags[kFLAGS.GRAYDA_AFFECTION] = 100;
+	return flags[kFLAGS.GRAYDA_AFFECTION];
+}
 
 public function graydaEncounter():void {
 	spriteSelect(SpriteDb.s_grayda);
@@ -92,6 +100,10 @@ public function graydaMainWhenCalled():void {
 	outputText("\"<i>Do you need something, my Princess?</i>\"\n\n");
 	menu();
 	addButton(0, "Appearance", graydaMainAppearance);
+	addButton(1, "Talk", graydaMainTalk);
+	addButtonIfTrue(2, "Sex", graydaMainSex, "Req. 60%+ affection and 33+ lust.", (flags[kFLAGS.GRAYDA_AFFECTION] >= 60 && player.lust >= 33));
+	addButtonIfTrue(3, "Bathing", graydaMainBathingWillingly, "At least 1 day since last Bathing.", flags[kFLAGS.GRAYDA_BATHING] > 0);
+	//5 - team option
 	addButton(14, "Back", camp.campFollowers);
 }
 public function mishapsLunaGrayda():void {
@@ -126,7 +138,7 @@ private	function graydaMainTalk():void {
 	addButton(2, "Outsiders", graydaMainTalkOutsiders);
 	addButton(3, "Other Arigeans?", graydaMainTalkOtherArigeans);
 	addButton(6, "Sunlight", graydaMainTalkSunlight);
-	//7
+	addButton(7, "Others at camp?", graydaMainTalkOthersAtCamp)
 	addButton(8, "The Camp?", graydaMainTalkTheCamp);
 	addButton(14, "Back", graydaMainWhenCalled);
 }
@@ -147,6 +159,7 @@ private	function graydaMainTalkHer():void {
 	if (SceneLib.dungeons.checkFactoryClear()) outputText("After all, you were nothing but a sacrifice to the elders for their own personal gain, and worst of all is that they are continuing on unpunished. How long until someone you held dear is thrown through and defiled by the land?");
 	else outputText("This reaction seems to somewhat concern you, nothing bad exactly happened. In fact, you are your village’s champion, so why does this upset you?");
 	outputText("\n\n\"<i>Princess I understand if you don’t wish to discuss this, but please know I will stay by your side to the end regardless of your past.</i>\"\n\n");
+	graydaAffection(2.5);
 	doNext(graydaMainTalk);
 	advanceMinutes(15);
 }
@@ -156,6 +169,7 @@ private	function graydaMainTalkOutsiders():void {
 	outputText("You ask Grayda what she thinks of the other races of mareth.\n\n");
 	outputText("\"<i>Outsiders? With all due respect Princess I don't trust them, they seem quick to turn on each other, however, the demons are a more serious threat for the moment. I would also be wary of any Mindbreakers you come across my princess, they seem to have some ulterior motive which could prove detrimental if left unchecked.</i>\"\n\n");
 	outputText("She takes a moment to look around the camp before continuing. \"<i>Although, most of the folk you’ve gathered around here seem quite pleasant, and trade between one of the nearby towns could help this place grow quite nicely.</i>\"\n\n");
+	graydaAffection(2.5);
 	doNext(graydaMainTalk);
 	advanceMinutes(5);
 }
@@ -164,6 +178,7 @@ private	function graydaMainTalkOtherArigeans():void {
 	spriteSelect(SpriteDb.s_grayda);
 	outputText(" You ask how the Arigeans at the trench will fare without you or Grayda present.\n\n");
 	outputText("\"<i>Well, they aren’t completely without leadership as the other princesses would have placed a replacement for me there. However, I'm sure they would benefit from a visit from us every once in a while though.</i>\" She closes her eyes to think for a few moments. \"<i>Any infectees might find their way there, some might even find themselves drawn here if we have enough space for them.</i>\"\n\n");
+	graydaAffection(2.5);
 	doNext(graydaMainTalk);
 	advanceMinutes(5);
 }
@@ -172,13 +187,25 @@ private	function graydaMainTalkSunlight():void {
 	spriteSelect(SpriteDb.s_grayda);
 	outputText("You’ve noticed how when Grayda isn’t by your side or patrolling then she’s staying in a shaded area. You’ve also noticed that the sun has been irritating your skin ever since you’ve become an Arigean, is there a reason for this?\n\n");
 	outputText("\"<i>Yes my Princess. We lack the chemicals in our skin that give us color like most other surface dwellers, so we can’t handle constant sunlight exposure like most other races can. I would recommend wearing eye protection and resting in the shade every once in a while to avoid irritation.</i>\"\n\n");
+	graydaAffection(2.5);
 	doNext(graydaMainTalk);
 	advanceMinutes(5);
 }
 private	function graydaMainTalkOthersAtCamp():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_grayda);
-	outputText("\"<i></i>\"\n\n");
+	outputText("You ask Grayda what she thinks of the others at camp.\n\n");
+	if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) outputText("\"<i>That maid, Luna, seems to be a good maid but she has a few issues, such as her lust towards you, keep a close eye on her.</i>\"\n\n");
+	if (flags[kFLAGS.LUNA_FOLLOWER] >= 7 && !player.hasStatusEffect(StatusEffects.LunaOff)) outputText("\"<i>That maid, Luna, seems to be a good maid but she has a few issues, such as her lust towards you, and her...condition...thank you for not firing her by the way my princess, I feel as if you did...nothing good would have come from it.</i>\"\n\n");
+	if (player.hasStatusEffect(StatusEffects.CampRathazul)) outputText("\"<i>The old one seems quite friendly, but I wish he would stop trying to collect ‘samples’ from me. It's getting quite irritating. Please let me know if he starts bugging you, my Princess.</i>\"\n\n");
+	if (EvangelineFollower.EvangelineFollowerStage >= 1) outputText("\"<i>That rather tall human with the cross-shaped pupils seems almost afraid of us, did you do something, my princess? Or is she just always weary?</i>\"\n\n");
+	if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2 && !player.hasStatusEffect(StatusEffects.KonstantinOff)) outputText("\"<i>The smith seems surprisingly polite for how large he is, hopefully, he doesn’t get the wrong idea if I were to ask to sample his wares, or put off by our… strange diets</i>\"\n\n");
+	if (player.hasStatusEffect(StatusEffects.PureCampJojo)) outputText("\"<i>I'm sorry my Princess, but I can’t help but see that little monk as prey. Surely I'm not the only one thinking he would taste well with a bit of seasoning. However, other than that I've noticed he seems quite cautious around me, I hope I haven’t scared him too badly.</i>\"\n\n");
+	if (DivaScene.instance.isCompanion()) outputText("\"<i>Is… that a vampire? I thought they were nothing but a myth, although it is nice to meet another who is irritated by the harsh sun here.</i>\"\n\n");
+	if (flags[kFLAGS.ALVINA_FOLLOWER] > 12 && flags[kFLAGS.ALVINA_FOLLOWER] < 20 && !SceneLib.alvinaFollower.AlvinaPurified) outputText("\"<i>My Princess there seems to be a witch near our camp who reeks of corruption, and when I tried confronting her she shooed me away saying you had allowed her to be here. I would be cautious of her Princess, she seems to be the kind to have her own interests in mind.</i>\"\n\n");
+	if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3) outputText("\"<i>That paladin doesn’t seem to be the brightest, but he certainly is dedicated towards his cause. If he wasn’t so hostile towards me then I could imagine we would get along quite well. That soup also smells lovely.</i>\"\n\n");
+	outputText("\"<i>Overall you have quite a collection of people here my princess, this should prove to be quite interesting.</i>\"\n\n");
+	graydaAffection(2.5);
 	doNext(graydaMainTalk);
 	advanceMinutes(5);
 }
@@ -187,11 +214,100 @@ private	function graydaMainTalkTheCamp():void {
 	spriteSelect(SpriteDb.s_grayda);
 	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("\"<i>It’s nice, there’s at least some shelter so our skins don’t burn. But shouldn't we try to continue to expand our defense a bit given we are currently out in the open?</i>\"\n\n");
 	else outputText("\"<i>It’s… something, but don’t you think you should build some shelter, my princess? I'm not sure how you handle constantly being in this harsh sunlight.</i>\"\n\n");
+	graydaAffection(2.5);
 	doNext(graydaMainTalk);
 	advanceMinutes(5);
 }
-private	function graydaA():void {
-	outputText("\"<i></i>\"\n\n");
+private	function graydaMainSex():void {
+	clearOutput();
+	spriteSelect(SpriteDb.s_grayda);
+	outputText("The effects of this land have been taking it’s toll on you, maybe Grayda wouldn’t mind helping you relieve yourself of stress?\n\n");
+	outputText("\"<i>I… would prefer not to give in to my baser urges, but if my Princess is in need of relief I don’t mind helping, but only for you, my Princess.</i>\"\n\n");
+	menu();
+	addButton(1, "-1-", graydaMainSex1);
+	addButton(3, "-2-", graydaMainSex2);
+}
+private	function graydaMainSex1():void {
+	clearOutput();
+	spriteSelect(SpriteDb.s_grayda);
+	outputText("Grayda sheepishly leads you towards your shared resting place. Her hands start by slowly working their way onto you. Her glowing orbs pierce into yours as she very delicately places her warm lips against yours. She makes slow work of roaming her hands softly against every curve of your body. You sigh into her, your nervousness slipping away, being replaced by overwhelming lust. Your body reacts in lewd ways, your nether regions growing awfully needy, your skin becomes sensitive to the slightest whisper of air. Her lips leave yours to much discontent. You feel her lips trail to your jawline, and her hands working ever slowly further down to your growing heat.\n\n");
+	outputText("\"<i>My, my princess… you’re so sensitive, I can feel the heat of your lips from here…</i>\" You blush at her remark, making your body react, rubbing your thighs to create some sort of friction. She quickly pins you down, using her legs to spread your legs apart to stop your self-pleasuring. You try to use your tail to create friction as well, but quickly she uses her wet tongue to lick you from your core to your perky breasts. You moan in pleasure and begin to sigh with satisfaction as she begins to softly suck on your breasts, leaving hickeys scattered all over them. ");
+	outputText("She uses her hand to fondle the other, but then sticks two fingers into your mouth when you begin moaning. “!!!”. You were shocked at first but then succumbed and began sucking on her fingers, wetting them while she littered your body in wet kisses and soft caresses. She removes her fingers with a loud pop from your lips.\n\n");
+	outputText("Quickly undoing your armor, she sees your heat. You see her eyes glow brighter in arousal. She looks at you directly and begins to slowly leave touches down your thighs. You buck your hips to desperately achieve some sort of relief. Seeing your impatience she licks your wet folds slowly, watching your arch your back, withering in lust. She keeps her tongue moving constantly, licking your clit and slightly penetrating your wet core. You grab onto her hair hoping to create more friction to satisfy your growing desires. She lifts your legs onto her shoulders and pushes her tongue as deep as it can go inside of you. You push into her face as you feel your climax approaching. ");
+	outputText("She sees you getting close and inserts her wet digits. You moan out grinding your hips against her, trying to move to get more and more stimulation. She quickly thrusts her hand in and out of you, curling her long fingers, hitting the special spot inside of your folds making you moan loudly, almost shouting in pure ecstasy. You look down seeing her also play with her own wet core, moaning into your growing orgasm, the vibrations making you shake with the need of relief. ");
+	outputText("You can help it anymore and feel the orgasm rip through your body, her moaning from her own orgasm vibrating into you making you feel even more. You slump in exhaustion and sweat as she crawls up next to you. Placing a chaste kiss to your lips before you lull into a deep slumber.\n\n");
+	outputText("You wake up after what feels like a short nap, your body completely intertwined with Grayda’s. You slowly and gently try to free yourself from her grasp without waking her, thankfully her sleep seems to be much deeper than the one you were in, allowing you to successfully escape without waking her and re-dress. Before you leave, you plant a small quick peck on her forehead as thanks.\n\n");
+	player.sexReward("Default", "Vaginal", true, false);
+	graydaAffection(5);
+	doNext(camp.returnToCampUseOneHour);
+}
+private	function graydaMainSex2():void {
+	clearOutput();
+	spriteSelect(SpriteDb.s_grayda);
+	outputText("Grayda sheepishly leads you towards your shared resting place. As you slowly strip off your armor, her lust-filled gaze grows stronger. Without a warning, she pins you to the wall. You struggle against her strength as she kisses your neck furiously. You try to speak but she quickly engulfs your lips in a passionate kiss. Her eyes were completely coated in lewd thoughts. You go weak as she kisses and nips at your soft yet strong chest. Her lips and tongue leaving no inch untouched.\n\n");
+	outputText("Her hands leave yours as she grabs your chin looking at you intensely before she pinches your nipples, making you shake and wriggle in pain and pleasure. She watches you intently, savoring every expression. She picks you up and throws you over her shoulder as she carries you to bed. Quickly laying you down gently enough to not hurt you. Bite marks and kisses litter you, your body covered in a light sweat. She licks your neck before rubbing her wet core against your member. ");
+	outputText("You rut against her in desperation, she smirks and sinks down onto you. Her hips move fast and rough against you. You know she has left bruises on your hips, arms, and legs. She leans down while she continues grinding against your throbbing cock, kissing you softly and peering into your soft orbs.\n\n");
+	outputText("You feel her fingers grab your shoulder to create leverage. Before you can reach your peak orgasm she pulls away, leaving you feeling empty. Quickly she uses her mouth, wet and hot tongue curling around places unexplored. Your body is almost paralyzed in arousal before she finally licks away the pain of holding in the ecstasy. You arch in the overwhelming waves of pleasure, her eyes never abandoning your face, eating every single detail of your bruised, sweaty, and albino body. You can’t seem to move but she pushes away the stray hairs on your face. She lays against you, slipping you into a deep slumber.\n\n");
+	outputText("You wake up after what feels like a short nap, your body completely intertwined with Grayda’s. You slowly and gently try to free yourself from her grasp without waking her, thankfully her sleep seems to be much deeper than the one you were in, allowing you to successfully escape without waking her and re-dress. Before you leave, you plant a small quick peck on her forehead as thanks.\n\n");
+	player.sexReward("Default", "Vaginal", true, false);
+	graydaAffection(5);
+	doNext(camp.returnToCampUseOneHour);
+}
+public function graydaMainBathingByForce():void {
+	clearOutput();
+	spriteSelect(SpriteDb.s_grayda);
+	outputText("You can see Grayda storming around the camp, her eyes intensely glowing with the haze around her being much thicker than normal. Suddenly her glowing yellows lock with your blues as she heads straight towards you.\n\n");
+	outputText("\"<i>My Princess, do you have any idea how poorly you’ve been treating your body? You're covered in dirt, dried bodily fluids, and your scent could be picked up far too easily. When was the last time you bathed?</i>\" She takes up a more commanding stance like what you were used to seeing when you first properly met her.\n\n");
+	outputText("\"<i>Eh… well, you see…</i>\" now come to think of it, when was the last time you bathed? And she may have a point, you’ve been so focused on completing your current task that you haven’t been taking much time to care for your body. Speaking of it feels like something is currently stuck in a joint on your natural armor.\n\n");
+	outputText("\"<i>Princess, like it or not we’re taking a bath so you can get cleaned up.</i>\"\n\n");
+	outputText("Before you can even protest she’s grabbed you by the hand and led you to the stream located nearby the camp.\n\n");
+	outputText("\"<i>Please strip down Princess, I won't be able to thoroughly wash you with all of your equipment on.</i>\" As if to ease any embarrassment you might be experiencing, she also begins stripping herself of her own gear as you do the same.\n\n");
+	outputText("Dressing down, folding your [armor] into a neat pile, and leaving your weapons by them. You turn and are greeted by the semi-shocking sight of a nude Grayda bending over, rummaging in the sack she brought for a few items. Seemingly done searching for what she was looking for, she turns back to you with a few small glass bottles, brushes, and a couple of rags in her arms.\n\n");
+	outputText("\"<i>You can go first, my Princess, I'll be right behind you.</i>\"\n\n");
+	outputText("Stepping into a shallow-ish part of the stream and resting on your knees while stretching your large extra maw out, Grayda is quick to keep her word and seats herself right behind you.\n\n");
+	outputText("\"<i>We’re going to start with your hair, so please close your eyes so the soap doesn’t sting them.</i>\" She immediately gets to work, she starts with dumping some water over your head before beginning to softly massage your scalp as a sweet smell begins to enter your nose. Before long she’s started gently running a brush through your hair to get any remaining knots out, finishing with a couple more rinses.\n\n");
+	outputText("\"<i>I'm going to move onto your back, please stay still, my Princess.</i>\"\n\n");
+	outputText("Compiling with her request, you allow her to begin scrubbing off the dirt and grime with a rag and begin to press into her blissful ministrations. But before long, she’s done washing you back and shoulders.\n\n");
+	outputText("\"<i>Please forgive me, Princess.</i>\"\n\n");
+	outputText("\"<i>Forgive you for wh-</i>\" your words are cut off by a moan from the sudden pleasure of your chest being teased by two pale, soapy hands as they expertly go over the entirety of your chest before moving on to your stomach. Leaving you completely breathless as a heat begins to creep up your cheeks and nethers.\n\n");
+	outputText("\"<i>I'm so sorry Princess,</i>\" she quickly says as her hands quickly go over your light blue folds before retreating to douse your body.\n\n");
+	outputText("Still panting with a face flushed blue, you turn your head to face her equally flushed face before she presents you with a large brush.\n\n");
+	outputText("\"<i>Next we’re going to clean your armored bits. Starting with your legs, so please stretch your legs out, my Princess.</i>\"\n\n");
+	outputText("Stretching your legs out she immediately gets to work, with an occasional fleck of dried blood coming off from the injuries you’ve sustained. Whenever she nears one of your joints she slows her pace and eventually uses her fingers to massage the black skin in between, earning soft mewls from you and an even further blue flushed face. Before long she’s finished, with your armor being comparable to a freshly polished sword.\n\n");
+	outputText("\"<i>Please stay still, my Princess. I'm going to move onto your tail.</i>\" She quickly orientates herself to sit right in between your extra maw and you.\n\n");
+	outputText("And she’s swift to go to work, following the same method she used for your legs, getting multiple moans and twitches as she works her way painfully slowly across your occasionally jerking tail. You could’ve sworn you orgasmed from the ordeal, and Grayda being painfully aware of that by the end with a face completely flushed blue.\n\n");
+	outputText("\"<i>T-That should be it, my Princess, now if you don’t mind. I'm going to stay here a bit longer so I can clean myself. Please try not to dirty yourself too quickly.</i>\"\n\n");
+	outputText("You give your thanks and partings to your loyal Retainer as you watch her sink into a deeper part of the stream to hide her completely blue face. You feel completely refreshed and like you could crush a whole army to dust with your renewed vigor.\n\n");
+	flags[kFLAGS.GRAYDA_BATHING] = 0;
+	graydaAffection(2.5);
+	doNext(camp.returnToCampUseOneHour);
+}
+private	function graydaMainBathingWillingly():void {
+	clearOutput();
+	spriteSelect(SpriteDb.s_grayda);
+	outputText("Maybe your most loyal Subordinate could help you clean up?\n\n");
+	outputText("\"<i>It would be my pleasure, Princess. Please lead the way.</i>\"\n\n");
+	outputText("Before long, you find yourself at the stream near camp with Grayda following closely behind.\n\n");
+	outputText("\"<i>Please strip down Princess, I won't be able to thoroughly wash you with all of your equipment on.</i>\" As if to ease any embarrassment you might be experiencing, she also begins stripping herself of her own gear as you do the same.\n\n");
+	outputText("Dressing down, folding your [armor] into a neat pile, and leaving your weapons by them. You turn and are greeted by the semi-shocking sight of a nude Grayda bending over, rummaging in the sack she brought for a few items. Seemingly done searching for what she was looking for, she turns back to you with a few small glass bottles, brushes, and a couple of rags in her arms.\n\n");
+	outputText("\"<i>You can go, first Princess, I'll be right behind you.</i>\"\n\n");
+	outputText("Stepping into a shallow-ish part of the stream and resting on your knees while stretching your large extra maw out, Grayda is quick to keep her word and seats herself right behind you.\n\n");
+	outputText("\"<i>We’re going to start with your hair, so please close your eyes so the soap doesn’t sting them.</i>\" She immediately gets to work, she starts with dumping some water over your head before beginning to softly massage your scalp as a sweet smell begins to enter your nose. Before long she’s started gently running a brush through your hair to get any remaining knots out, finishing with a couple more rinses.\n\n");
+	outputText("\"<i>I'm going to move onto your back, please stay still, my Princess.</i>\"\n\n");
+	outputText("Compiling with her request, you allow her to begin scrubbing off the dirt and grime with a rag and begin to press into her blissful ministrations. But before long, she’s done washing you back and shoulders.\n\n");
+	outputText("\"<i>Please forgive me, Princess.</i>\"\n\n");
+	outputText("\"<i>Forgive you for wh-</i>\" your words are cut off by a moan from the sudden pleasure of your chest being teased by two pale, soapy hands as they expertly go over the entirety of your chest before moving on to your stomach. Leaving you completely breathless as a heat begins to creep up your cheeks and nethers.\n\n");
+	outputText("\"<i>I'm so sorry Princess,</i>\" she quickly says as her hands quickly go over your light blue folds before retreating to douse your body.\n\n");
+	outputText("Still panting with a face flushed blue, you turn your head to face her equally flushed face before she presents you with a large brush.\n\n");
+	outputText("\"<i>Next we’re going to clean your armored bits. Starting with your legs, so please stretch your legs out, my Princess.</i>\"\n\n");
+	outputText("Stretching your legs out she immediately gets to work, with an occasional fleck of dried blood coming off from the injuries you’ve sustained. Whenever she nears one of your joints she slows her pace and eventually uses her fingers to massage the black skin in between, earning soft mewls from you and an even further blue flushed face. Before long she’s finished, with your armor being comparable to a freshly polished sword.\n\n");
+	outputText("\"<i>Please stay still, my Princess. I'm going to move onto your tail.</i>\" She quickly orientates herself to sit right in between your extra maw and you.\n\n");
+	outputText("And she’s swift to go to work, following the same method she used for your legs, getting multiple moans and twitches as she works her way painfully slowly across your occasionally jerking tail. You could’ve sworn you orgasmed from the ordeal, and Grayda being painfully aware of that by the end with a face completely flushed blue.\n\n");
+	outputText("\"<i>T-That should be it, my Princess, now if you don’t mind. I'm going to stay here a bit longer so I can clean myself. Please try not to dirty yourself too quickly.</i>\"\n\n");
+	outputText("You give your thanks and partings to your loyal Retainer as you watch her sink into a deeper part of the stream to hide her completely blue face. You feel completely refreshed and like you could crush a whole army to dust with your renewed vigor.\n\n");
+	flags[kFLAGS.GRAYDA_BATHING] = 0;
+	graydaAffection(5);
+	doNext(camp.returnToCampUseOneHour);
 }
 private	function grayda():void {
 	outputText("\"<i></i>\"\n\n");

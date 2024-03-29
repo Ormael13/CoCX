@@ -790,6 +790,11 @@ public class PlayerInfo extends BaseContent {
             interpersonStats += getNPCLevel("Ember", 20, 0, 13, 6, flags[kFLAGS.EMBER_LVL_UP]);
 		}
 
+		if (flags[kFLAGS.THE_TRENCH_ENTERED] > 14) {
+			interpersonStats += "<b>Grayda Affection:</b> " + Math.round(flags[kFLAGS.GRAYDA_AFFECTION]) + "%\n";
+			interpersonStats += "<b>Days since last Bathing w/ Grayda:</b> " + Math.round(flags[kFLAGS.GRAYDA_BATHING]) + "\n";
+		}
+
 		if (SceneLib.helFollower.helAffection() > 0)
             interpersonStats += "<b>Helia Affection:</b> " + Math.round(SceneLib.helFollower.helAffection()) + "%\n";
         if (SceneLib.helFollower.helAffection() >= 100)
