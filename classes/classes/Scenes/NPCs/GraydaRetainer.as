@@ -104,6 +104,9 @@ public function graydaMainWhenCalled():void {
 	addButtonIfTrue(2, "Sex", graydaMainSex, "Req. 60%+ affection and 33+ lust.", (flags[kFLAGS.GRAYDA_AFFECTION] >= 60 && player.lust >= 33));
 	addButtonIfTrue(3, "Bathing", graydaMainBathingWillingly, "At least 1 day since last Bathing.", flags[kFLAGS.GRAYDA_BATHING] > 0);
 	//5 - team option
+	//6 - night guard
+	if (flags[kFLAGS.SLEEP_WITH] != "Grayda") addButton(7, "Sleep With", graydaSleepToggle).hint("Spend your nights with Grayda.");
+	else addButton(7, "Sleep Alone", graydaSleepToggle).hint("Stop sleeping with Grayda.");
 	addButton(14, "Back", camp.campFollowers);
 }
 public function mishapsLunaGrayda():void {
@@ -309,9 +312,109 @@ private	function graydaMainBathingWillingly():void {
 	graydaAffection(5);
 	doNext(camp.returnToCampUseOneHour);
 }
+private function graydaSleepToggle():void {
+	clearOutput();
+	if (flags[kFLAGS.SLEEP_WITH] != "Grayda") {
+		outputText("You ask Grayda if she wouldn’t mind keeping you company for the night.\n\n");
+		outputText("\"<i>I don’t mind, My Princess. I’ll make sure no harm comes your way while you rest.</i>\"\n\n");
+		flags[kFLAGS.SLEEP_WITH] = "Grayda";
+	} else {
+		outputText("You ask Grayda if she wouldn’t mind letting you sleep alone for a little.");
+		outputText("\"<i>If it is what you wish, my Princess.</i>\"\n\n");
+		flags[kFLAGS.SLEEP_WITH] = "";
+	}
+	doNext(graydaMainWhenCalled);
+}
+public function sleepWithGrayda():void {
+	clearOutput();
+	spriteSelect(SpriteDb.s_grayda);
+	outputText("You lay down and curl up as you plan to sleep through the night. Grayda eventually joins you as she proceeds to protectively hug you from behind while resting against your large tail. Her presence allows you to rest throughout the night with very little worry as you drift off into bliss.\n\n");
+	if (rand(100) < 15) {
+		switch (rand(3)) {
+			case 0:
+				outputText("Your sleep doesn’t last long without disruption, however, and the feeling of something squeezing you becomes too much to bear, forcing you to open your eyes.\n\n");
+				outputText("\"<i>T-Thora… D-Don’t go!</i>\" the source of the squeezing weakly calls out behind you.\n\n");
+				outputText("It seems Grayda is having a nightmare of some sort, and from the sounds of it, it’s especially unpleasant. Maybe it would be best to give her a bit of comfort before she breaks your spine or ribs? You shift around in her iron grasp so that you're now chest to chest with her.\n\n");
+				outputText("\"<i>N-No please… I've gotten stronger.</i>\" Tears can be seen forming at the corners of her eyes as she starts slightly shaking. You slowly return her embrace and rest your head on her shoulder as her tremble slowly comes to a stop.\n\n");
+				outputText("\"<i>Don’t… leave me.</i>\" Are the last words you're able to hear her mumble as you drift back into sleep with the newfound comfort of her embrace.\n\n");
+				break;
+			case 1:
+				outputText("One after another they keep coming, for everyone you defeat three more swiftly takes its place in a never-ending onslaught, and slowly one by one those around you who you’ve come to know and love slowly fall to the shadows. Before long you're the only one standing as the shadowy tendrils wrap around your being, and swallow you within it’s icy darkness.\n\n");
+				outputText("The painful feeling of freezing to death consumes every inch of your body as it slowly works its way to your very core, and the feeling of tendrils piercing your skin to drink your very life essence. Your attempts to cry out are quickly muffled.\n\n");
+				outputText("However, the pain slowly fades, as if an invisible hand was caressing away the pain and filling the void with a loving warmth. Slowly mending your injuries and lighting the darkness with a loving violet glow.\n\n");
+				outputText("\"<i>I'm… here… for… you.</i>\" An echoed voice is all you're able to hear as you feel yourself become embraced within a pair of invisible arms as you begin to lose consciousness from the soothing warmth. \"<i>Please… let… me… ease… your… burd-</i>\" but before the voice can finish, you're already deep in sleep.\n\n");
+				break;
+			case 2:
+				outputText("Suddenly you find yourself waking up well into the night with all hints of tiredness gone, but what strikes you the strangest is that you are completely unable to move any part of your body. The only thing you're able to do is look around and feel the slow rise and fall of Grayda’s chest on your back as fear begins to take hold.\n\n");
+				outputText("Suddenly a hooded figure walks up to your not so sleeping form, staring down at you with two ominous blue orbs for an uncomfortable amount of time before making any further action. Slowly, she raises what looks like a gray, armored hand towards your face and tilts your head up to stare her directly in the eyes. With a decent look now you're able to identify her as an Arigean princess with her glowing blue eyes, albino skin, and white hair, however, her tails seem to be out of your view for now.\n\n");
+				outputText("\"<i>Hmph, you might actually be worthwhile,</i>\" she whispers before quickly stealing a kiss while you're incapable of resisting, but suddenly she stops and leaves.\n\n");
+				outputText("After a few minutes, you jolt up as if you just woke up from a dream. Was this whole encounter nothing but a dream? And you could’ve sworn you’ve seen that woman before, but the memory feels hazy.\n\n");
+				outputText("\"<i>Is something wrong Princess?</i>\" it seems your sudden action woke Grayda up.\n\n");
+				outputText("You tell her it was nothing but a dream before gently lying back down into her chest, resuming the position you had before.\n\n");
+				outputText("\"<i>Princess… that must’ve been some dream, because I saw it too.</i>\" You turn to face her, but it seems she’s swiftly put herself back to sleep leaving you with a shiver at the thought of that woman. Maybe you should talk to her about it later once you're both awake.\n\n");
+				break;
+			default:
+				outputText("");
+				break;
+		}
+	}
+	doNext(camp.sleepWrapper, 1.2);
+}
+public function graydaRandomnCampEvents():void {
+	clearOutput();
+	spriteSelect(SpriteDb.s_grayda);/*
+	if ((flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) && rand(2) == 0) {
+		if (flags[kFLAGS.LUNA_AFFECTION] > 65 && flags[kFLAGS.LUNA_JEALOUSY] >= 100) outputText("\"<i></i>\"\n\n");
+		else if (flags[kFLAGS.LUNA_AFFECTION] > 65) outputText("\"<i></i>\"\n\n");
+		else if (flags[kFLAGS.LUNA_AFFECTION] > 35) outputText("\"<i></i>\"\n\n");
+		else outputText("\"<i></i>\"\n\n");
+	}*/
+	if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3 && rand(2) == 0) {
+		outputText("You decide to take a breather for the moment and just lie down to relax for a minute or two… or you would if it weren’t for the sudden noise and chaos that erupted out of seemingly nowhere to torture your ears.\n\n");
+		outputText("\"<i>Damn fiend! Get back here!</i>\"\n\n");
+		outputText("The sound of an angry Siegweird and what sounds like the sizzling of magic is enough to draw your attention. Has a demon attempted to invade your camp? Or were they simply unlucky enough to come across Siegweird? Regardless it might be best to see what all the commotion is.\n\n");
+		outputText("\"<i>I'm sorry bear! I promise to never attempt to take more than offered again. Just please cease your attack!</i>\" The sound of a panicked Grayda speaking your echoed language draws your attention, has there been some sort of misunderstanding?\n\n");
+		outputText("\"<i>Praying to your gods won’t save you now!</i>\" It definitely seems there has been a misunderstanding, it might be best to step in before either of your subjects in question get hurt. A stray construct crashes a couple inches in front of your feet with a loud blast. Better get this handled quick.\n\n");
+		outputText("Observing the scene. You can see Grayda perched up on top of a rock attempting to keep an angered Siegweird at bay with her staff, however, neither have seemed to notice your presence. Now, what would be the best way to get their attention? Maybe something loud would do. Taking in a deep breath, you utter a deep, fearsome roar from your extra maw that could bring any beast to fear.\n\n");
+		outputText("\"<i>Princess?</i>\" Grayda’s gaze is drawn to you in a surprisingly calm fashion despite the scenario. however the same can’t be said for Siegweird, how is alarmed by the sudden noise.\n\n");
+		outputText("\"<i>[name]? Forgive me, but this isn’t it what it looks like!</i>\"\n\n");
+		outputText("Some explaining of the current situation would be nice as this could be taken as something much worse than it might actually be. Would he care to start first?\n\n");
+		outputText("\"<i>Well, the magic cauldron needs time to refill its contents. So we need to limit how much a single person can have from it.</i>\" He seems to have eased up a little, but why was he so aggressive over a bit of soup?\n\n");
+		outputText("\"<i>I get it, no more than one serving. lesson learned, but was violence necessary, surface walker?</i>\" Seems like this small incident might be another black mark on their relationship.\n\n");
+		outputText("Maybe they should have a fair bit of time apart, clearly, they don’t mix well and infighting isn’t going to help anyone here.\n\n");
+		outputText("\"<i>Gladly.</i>\" They both seem to have come to an agreement at least. Hopefully, this doesn’t happen again.\n\n");
+	}
+	if (player.hasStatusEffect(StatusEffects.CampRathazul) && rand(2) == 0) {
+		outputText("Another pleasant day at camp is what crosses your mind as you take a moment to breathe and relax after facing the tribulations this land has to offer. Or at least that’s what you wanted to do if it weren’t for Grayda’s sudden outburst that could be audibly heard throughout the camp.\n\n");
+		outputText("\"<i>KEEP POKING ME YOU DAMN RAT, AND I'M GOING TO PULL YOUR TAIL UP AND CONVERT YOU PERSONALLY!</i>\"\n\n");
+		outputText("Come to think of it, is this the first time you’ve ever heard Grayda being genuinely angry? Maybe it wouldn’t hurt to check what’s going on over there that’s got her so riled up. Approaching the scene you can see Grayda attempting to re-find her composure in front of Rathazul.\n\n");
+		outputText("\"<i>In Fact… I would take great pleasure in the action.</i>\" She pats down her stomach as if she was attempting to remove dirt which may be clinging to her clothing. Rathazul looks like he is about to speak before he is abruptly cut off by Grayda. \"<i>And don’t ask my Princess for samples… this is my only warning.</i>\"\n\n");
+		outputText("Well, it seems like someone is certainly a bit overprotective of you.\n\n");
+	}
+	if (player.hasStatusEffect(StatusEffects.PureCampJojo) && rand(2) == 0) {
+		outputText("You can see Jojo and Grayda meditating a bit further out on the camp’s perimeter, or at least Jojo is. Grayda seems to be giving him a side glance as she tries to hide her drooling mouth. However, this doesn’t seem to last long as the small mouse boy takes notice of Grayda.\n\n");
+		outputText("\"<i>Please focus, Grayda. The sooner you focus, the sooner we can get to solving the mystery of your and [name]’s corruption.</i>\"\n\n");
+		outputText("\"<i>R-Right!</i>\" Grayda seems to quickly regain her composure and goes back to attempting to meditate. It doesn’t last long however as she seemingly goes back to looking at Jojo as if he was prey.\n\n");
+	}
+	if (followerKiha() && rand(2) == 0){
+		outputText("Surprisingly it seems a commotion has started in camp. Unsurprisingly it seems someone has gotten Kiha fired up, best you try and calm things down before they get out of hand.\n\n");
+		outputText("\"<i>Listen here, ocean slut! I don’t want you going anywhere near [name]!</i>\"\n\n");
+		outputText("\"<i>Why would I neglect my duties as her loyal retainer?</i>\" it seems Grayda has somehow gotten herself entangled in a conflict with Kiha... over you oddly enough.\n\n");
+		outputText("\"<i>Loyal retainer my ass! It doesn’t take a master tactician to know you're obviously manipulating her, and the cause of her corruption!</i>\" Kiha seems to be getting more and more irritated\n\n");
+		outputText("\"<i>Manipulating her? How outlandish! I'm at my Princess’s beck and call. As for her ‘Corruption’, it’s something not even I know the source of, but I highly doubt my Princess is even capable of becoming a demon.</i>\" She crosses her arms and looks as though she is about to lose herself in thought before being snapped out of it by Kiha’s continued outburst.\n\n");
+		outputText("\"<i>Corruption is Corruption, Fiend, so what if it doesn't turn people into demons, it still taints the mind, and in some cases, the very soul!</i>\" Kiha looks like she’s very close to snapping and taking a swing at Grayda.\n\n");
+		outputText("\"<i>You are not much better, 'Dragon', you reek of corruption as well.</i>\"\n\n");
+		outputText("And with that Kiha swings her ax down upon Grayda, who swiftly steps out of the way, but their fight is stopped just as fast as it started as they finally take note of your presence.\n\n");
+	}
+	else doNext(playerMenu);
+}
+public function graydaRandomnCampEvents2():void {
+	flags[kFLAGS.THE_TRENCH_ENTERED]++;
+	graydaAffection(2.5);
+	doNext(camp.returnToCampUseOneHour);
+}
 private	function grayda():void {
 	outputText("\"<i></i>\"\n\n");
 }
 	}
-
 }
