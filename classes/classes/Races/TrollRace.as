@@ -31,7 +31,6 @@ public class TrollRace extends Race {
 
 	public function TrollRace(id:int) {
 		super("Troll", id, []);//RaceBody);
-		disabled = true;
 	}
 	
 	public override function setup():void {

@@ -38,7 +38,6 @@ public class SandTrapRace extends Race {
 		super("Sand Trap", id, []);//RaceBody);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
-		disabled = true;
 	}
 	
 	public override function setup():void {

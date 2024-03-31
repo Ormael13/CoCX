@@ -14,7 +14,7 @@ public class Changelog extends BaseContent
 		{}
 		
 		public function accessChangelogMenu():void {
-			Changelog52();
+			Changelog53();
 		}
 		//zrobić do 2022 na świeta event z reniferami i nie odblokowywać go do ok. 20-24 grudnia 2021 xD
 		private function Changelog55():void {
@@ -167,6 +167,16 @@ public class Changelog extends BaseContent
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");*/
+			outputText("\n\n\n");
+			outputText("Plans for future builds (I know some of them are HUGE ones but without dreams to chase how can one change?):\n");
+			outputText("-Add more soulforce options.\n");
+			outputText("-Add soulforce stuff to our lovely monk-ish mouse ^^\n");
+			outputText("-Add soulforce stuff to kitsune encounters.\n");
+			outputText("-Add Wuxia themed area and enemies.\n");
+			outputText("-Add few new options during chara creation.\n");
+			outputText("-Add option to upgrade some of the items ingame (ofc using soulforce) and generaly few new shiny things to find/buy/store/use.\n");
+			outputText("-More camp build options (involving using stones and etc.)\n");
+			outputText("-Make use of Metamorph perk (ofc all TF would be powered by soulforce ^^)\n");
 			menu();
 			addButton(0, "Next", Changelog52);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
@@ -272,16 +282,6 @@ public class Changelog extends BaseContent
 			outputText("Zenji training stats not having gains decrease from +4 to +1 for repeated training before daily reset for other than wisdom stats, resources not been recovered after using specials/soulskills/spells, nail buy menu at carpenter having misleading text, combat wounds % display at stats page been 100x lower, Sandworm PC not counting toward checks for having natural armor, demon face tf");
 			outputText("giving arigean face instead, gym weight lifting capping tone at 85, when building cabin text not picking correct name for Jojo/Joy line, Magical Fertility & Magical Virility perk desc bonus value display error, differences between desc dmg reduction and actualt DR from main difficulty setting, sneak melee/range attack diff between displayer and actualy dealt dmg to enemy, ");
 			outputText("Veseshe preset giving History: Scout instead of History: Whore, Tyrantia training capping at 20 sessions, elfs IM instead of orca/whale IM increasing thickness cap, Belisa holy band button typo, parser in Call Kiha text, Raiju Cathode IM not selectable by Kirin race, Ghoulish Vampire Servant event appearing after PC get the ghoul, Amily Urta date, unable to gain Incorporeality perk using ghost tf's\n\n");
-			outputText("\n\n\n");
-			outputText("Plans for future builds (I know some of them are HUGE ones but without dreams to chase how can one change?):\n");
-			outputText("-Add more soulforce options.\n");
-			outputText("-Add soulforce stuff to our lovely monk-ish mouse ^^\n");
-			outputText("-Add soulforce stuff to kitsune encounters.\n");
-			outputText("-Add Wuxia themed area and enemies.\n");
-			outputText("-Add few new options during chara creation.\n");
-			outputText("-Add option to upgrade some of the items ingame (ofc using soulforce) and generaly few new shiny things to find/buy/store/use.\n");
-			outputText("-More camp build options (involving using stones and etc.)\n");
-			outputText("-Make use of Metamorph perk (ofc all TF would be powered by soulforce ^^)\n");
 			menu();
 			addButton(0, "Next", Changelog51);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);

@@ -38,7 +38,6 @@ public class RaisuneRace extends Race {
 	public function RaisuneRace(id:int) {
 		super("Raisune", id, []);//RaceBody);
 		mutationThreshold = 6;
-		disabled = true;
 	}
 	
 	public override function setup():void {
