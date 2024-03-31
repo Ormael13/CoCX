@@ -666,7 +666,7 @@ private function talkToHel():void {
 		outputText("\n\n\"<i>What?  That's how it ended -- I'm just a spooky ghost come to haunt sexy adventurers!</i>\"");
 		
 		//If Shouldra follower: 
-		if(shouldraFollower.followerShouldra()) outputText("\n\nSuddenly, Shouldra pops out, seemingly from nowhere, and snaps, \"<i>Hey!  That's my job!</i>\" before vanishing.");
+		if(shouldraFollower.followerShouldra() && !player.hasStatusEffect(StatusEffects.ShouldraOff)) outputText("\n\nSuddenly, Shouldra pops out, seemingly from nowhere, and snaps, \"<i>Hey!  That's my job!</i>\" before vanishing.");
 		
 		outputText("\n\nYou give her a little punch on the shoulder.");
 		

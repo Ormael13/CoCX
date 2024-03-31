@@ -690,17 +690,17 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("\"<i>Ya may remember da challenge I put up against ya, it not be hard ta practice and become stronga, all you gotta do is prepare ya self for your next task and ta overcome it.</i>\" He guides you to a pull up bar that he presumably crafted himself.\n\n");
 			outputText("\"<i>Keep ya hand ova da bar or unda it, you pick, but I want ya to pull yourself ova the bar as many times as you can, try to go for as many as ya can.</i>\"\n\n");
 			outputText("You decide to try your hardest at doing as many pull-ups as you can, the Troll has a bar that he practices on as well.\n\n");
-			if (player.fatigue > player.maxFatigue() * 0.5) {
+			if (player.fatigue > player.maxOverFatigue() * 0.5) {
 				outputText("You try to do as many pull-ups as you can, but your tired arms can't support you, and you are worn out after barely doing one.\n\n");
 				if (flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] < 30) outputText("\"<i>Are... are sure you’re okay? Dere's... You don' have ta train wit me if ya don' wanna. Dere's oda ways to...</i>\" Zenji shakes his head, \"<i>Ya should go home and get some rest, I'll tink of sometin lata.</i>\"\n\n");
 				else outputText("\"<i>Das all ya got? Maybe dere's an easier ting I got next time, ya should go home and rest for a moment so I can prepare for next time.</i>\"\n\n");
-				player.fatigue += Math.round(player.maxFatigue() * 0.2);
+				player.fatigue += Math.round(player.maxOverFatigue() * 0.2);
 				zenjiPerspectiveOnPlayer(-3);
 			}
 			else {
 				outputText("Some time passes and you can't do anymore, but you feel that this exercise was worth the effort and return to camp after dismissing yourself.\n\n");
 				player.trainStat("str",2,player.trainStatCap("str",90));
-				player.fatigue += Math.round(player.maxFatigue() * 0.35);
+				player.fatigue += Math.round(player.maxOverFatigue() * 0.35);
 				zenjiPerspectiveOnPlayer(3);
 			}
 			endEncounter();
@@ -713,17 +713,17 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("\"<i>Ya may remember da challenge I put up against ya, toughness is not about being strong, it about endurance, and tenathity, how much can ya take before ya break?</i>\" He guides you to a pile of rocks.\n\n");
 			outputText("\"<i>Don't actually break yaself, dis is for training. All I want you ta do is start by stretching, ya don't want ta hurt yaself, do ya?</i>\" He extends his arm over himself and repeats with the other arm, stretching himself as far out as he can, you follow in his lead. \"<i>Now, follow my lead.</i>\"\n\n");
 			outputText("Zenji lowers himself to the ground and begins planking, \"<i>Simple, no? Keep dis stance until ya can't take it anymore, endure it, don't break unda de pressure.</i>\"\n\n");
-			if (player.fatigue > player.maxFatigue() * 0.5) {
+			if (player.fatigue > player.maxOverFatigue() * 0.5) {
 				outputText("You try to hold the plank for as long as you can, but you feel too weak to hold it much longer than nearly half a minute and collapse to the ground.\n\n");
 				if (flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] < 30) outputText("\"<i>Are... are sure you’re okay? Dere's... You don' have ta train wit me if ya don' wanna. Dere's oda ways to...</i>\" Zenji shakes his head, \"<i>Ya should go home and get some rest, I'll tink of sometin lata.</i>\"\n\n");
 				else outputText("\"<i>Dat’s all ya got? Maybe dere's an easier ting I got next time, ya should go home and rest for a moment so I can prepare for next time.</i>\"\n\n");
-				player.fatigue += Math.round(player.maxFatigue() * 0.2);
+				player.fatigue += Math.round(player.maxOverFatigue() * 0.2);
 				zenjiPerspectiveOnPlayer(-3);
 			}
 			else {
 				outputText("You begin planking, a few minutes pass and your arms start feeling weak, you figure you've been planking for enough time and relax. You feel that the exercise was worth the time and return to camp after dismissing yourself.\n\n");
 				player.trainStat("tou",1,player.trainStatCap("tou",90))
-				player.fatigue += Math.round(player.maxFatigue() * 0.35);
+				player.fatigue += Math.round(player.maxOverFatigue() * 0.35);
 				zenjiPerspectiveOnPlayer(3);
 			}
 			endEncounter();
@@ -734,13 +734,13 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			clearOutput();
 			outputText("Zenji leads you to a clearing in the bog, it's a more open area, ideal for an exercise that requires space.\n\n");
 			outputText("\"<i>Ya may remember da challenge I put up against ya, it not be hard ta practice and work on ya speed, train and aim for da goal, each time a little quicka dan before.</i>\" He guides you to the edge of the clearing. \"<i>Ya see dat tree ova der? All you gotta do is make good speed from here ta der. Ya don't have ta go too fast, just ta make yaself feel da effort.</i>\"\n\n");
-			if (player.fatigue > player.maxFatigue() * 0.5) {
+			if (player.fatigue > player.maxOverFatigue() * 0.5) {
 				outputText("You start at a slow pace, sure that you can work up slowly from there.\n\n");
 				outputText("\"<i>Dat's ya top speed? Come on, ya can afford a little more dan dat.</i>\"\n\n");
 				outputText("You're unsure if you can go much faster in your fatigued state and tell him so.\n\n");
 				if (flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] < 30) outputText("\"<i>Are... are sure you’re okay? Dere's... You don' have ta train wit me if ya don' wanna. Dere's oda ways to...</i>\" Zenji shakes his head, \"<i>Ya should go home and get some rest, I'll tink of sometin lata.</i>\"\n\n");
 				else outputText("\"<i>Das all ya got? Maybe dere's an easier ting I got next time, ya should go home and rest for a moment so I can prepare for next time.</i>\"\n\n");
-				player.fatigue += Math.round(player.maxFatigue() * 0.2);
+				player.fatigue += Math.round(player.maxOverFatigue() * 0.2);
 				zenjiPerspectiveOnPlayer(-3);
 			}
 			else {
@@ -748,7 +748,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 				outputText("\"<i>Das a good start, try ta go fasta each time.</i>\"\n\n");
 				outputText("You jog back and forth with the troll, making sure to keep a good pace. You feel that the exercise was worth the time and return to camp after dismissing yourself.\n\n");
 				player.trainStat("spe",2,player.trainStatCap("spe",90));
-				player.fatigue += Math.round(player.maxFatigue() * 0.35);
+				player.fatigue += Math.round(player.maxOverFatigue() * 0.35);
 				zenjiPerspectiveOnPlayer(3);
 			}
 			endEncounter();
@@ -830,7 +830,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
 			outputText("Zenji is a troll to your knowledge, at least that’s what he calls himself.\n\n");
-			if (player.fatigue >= player.maxFatigue() * .75) {
+			if (player.fatigue >= player.maxOverFatigue() * .75) {
 				outputText("Zenji shakes his head, \"<i>[name], go get some rest, ya look exhausted, and it’s neva a good idea ta hurt yaself. Even a trained mind will struggle ta concentrate when tired.</i>\"\n\n");
 				menu();
 				addButton(14, "Back", followerZenjiMainCampMenu);
@@ -856,9 +856,9 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("You decide to try your hardest at doing as many pull-ups as you can, the Troll has a bar that he practices on as well, he helps guide you on good form as he trains with you.\n\n");
 			outputText("Once you’re done, you feel that this exercise was worth the effort. You thank Zenji before dismissing yourself.\n\n");
 			if (player.statusEffectv1(StatusEffects.ZenjiTrainingsCounters1) < 3) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters1, 1, 1);
-			player.trainStat("str",(4 - player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters2)),player.trainStatCap("str",100));
+			player.trainStat("str",(4 - player.statusEffectv1(StatusEffects.ZenjiTrainingsCounters1)),player.trainStatCap("str",100));
 			outputText(player.modTone(player.maxToneCap(), 1));
-			player.fatigue += Math.round(player.maxFatigue() * 0.2);
+			player.fatigue += Math.round(player.maxOverFatigue() * 0.2);
 			followerZenjiMainCampMenuTrainingPerks();
 			endEncounter();
 		}
@@ -874,10 +874,10 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("You begin planking, a few minutes pass and your arms start feeling weak. Zenji helps you and planks beside you, teaching you about endurance, form and technique.\n\n");
 			outputText("Once you’re done you feel that the exercise was worth the time. You thank Zenji before dismissing yourself.\n\n");
 			if (player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters1) < 3) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters1, 2, 1);
-			player.trainStat("tou",(4 - player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters2)),player.trainStatCap("tou",100));
+			player.trainStat("tou",(4 - player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters1)),player.trainStatCap("tou",100));
 			outputText(player.modThickness(0, 1));
 			outputText(player.modTone(player.maxToneCap(), 1));
-			player.fatigue += Math.round(player.maxFatigue() * 0.2);
+			player.fatigue += Math.round(player.maxOverFatigue() * 0.2);
 			followerZenjiMainCampMenuTrainingPerks();
 			endEncounter();
 		}
@@ -893,9 +893,9 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("You jog back and forth with the troll, making sure to keep a good pace. Zenji soon joins you and instructs you on good form and technique.\n\n");
 			outputText("Once you’re done, you feel that the exercise was worth the time. You thank Zenji before dismissing yourself.\n\n");
 			if (player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters1) < 3) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters1, 3, 1);
-			player.trainStat("spe",(4 - player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters2)),player.trainStatCap("spe",100));
+			player.trainStat("spe",(4 - player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters1)),player.trainStatCap("spe",100));
 			outputText(player.modThickness(0, 1));
-			player.fatigue += Math.round(player.maxFatigue() * 0.2);
+			player.fatigue += Math.round(player.maxOverFatigue() * 0.2);
 			followerZenjiMainCampMenuTrainingPerks();
 			endEncounter();
 		}
@@ -917,8 +917,8 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("Once you feel the rhythm and find a good balance with the stone, the magic you’ve conjured steadies and Zenji applauds.\n\n");
 			outputText("\"<i>Strength of mind requires balance and strategy. Know your limits and how much you are capable of.</i>\"\n\n");
 			if (player.statusEffectv1(StatusEffects.ZenjiTrainingsCounters2) < 3) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters2, 1, 1);
-			player.trainStat("int",(4 - player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters2)),player.trainStatCap("int",100));
-			player.fatigue += Math.round(player.maxFatigue() * 0.2);
+			player.trainStat("int",(4 - player.statusEffectv1(StatusEffects.ZenjiTrainingsCounters2)),player.trainStatCap("int",100));
+			player.fatigue += Math.round(player.maxOverFatigue() * 0.2);
 			followerZenjiMainCampMenuTrainingPerks();
 			endEncounter();
 		}
@@ -940,7 +940,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("\"<i>Remember everting you’ve learned, wisdom is about how ya use de knowledge ya have.</i>\"\n\n");
 			if (player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters2) < 3) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters2, 2, 1);
 			player.trainStat("wis",(4 - player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters2)),player.trainStatCap("wis",100));
-			player.fatigue += Math.round(player.maxFatigue() * 0.2);
+			player.fatigue += Math.round(player.maxOverFatigue() * 0.2);
 			followerZenjiMainCampMenuTrainingPerks();
 			endEncounter();
 		}
@@ -2012,7 +2012,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 		public function loverZenjiSexCuddle2():void {
 			outputText("Rested, Zenji helps you up and assists in getting you dressed as you prepare to take on the day.\n\n");
 			player.addStatusValue(StatusEffects.ZenjiZList, 3, 1);
-			fatigue(-(Math.round(player.maxFatigue() * 0.15)));
+			fatigue(-(Math.round(player.maxOverFatigue() * 0.15)));
 			dynStats("lust", 15);
 			dynStats("cor", -0.25);
 			endEncounter();
@@ -2102,7 +2102,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("You agree, the hot spring is surely a lot hotter with him in it.\n\n");
 			outputText("Zenji chuckles softly before sitting next to you, drying the two of you off with a towel. Once both of you are dried up Zenji pulls you in for a hug. \"<i>Dried off and ready ta continue da day!</i>\"\n\n");
 			outputText("You smile back at Zenji, with his support you feel like nothing can get in your way.\n\n");
-			fatigue(-(Math.round(player.maxFatigue() * 0.25)));
+			fatigue(-(Math.round(player.maxOverFatigue() * 0.25)));
 			endEncounter();
 		}
 		public function loverZenjiHotSpringRideAnal():void{

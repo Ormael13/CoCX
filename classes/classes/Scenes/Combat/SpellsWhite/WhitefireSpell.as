@@ -38,7 +38,15 @@ public class WhitefireSpell extends AbstractWhiteSpell {
 	}
 	
 	override public function calcCooldown():int {
-		return spellWhiteCooldown();
+		var calcC:int = 0;
+		calcC += spellWhiteCooldown();
+		if (player.weaponRange == weaponsrange.RW_TOME && player.level < 18) {
+			if (player.level < 6) calcC -= 1;
+			if (player.level < 12) calcC -= 1;
+			calcC -= 1;
+			if (calcC < 0) calcC = 0;
+		}
+		return calcC;
 	}
 	
 	/**
@@ -65,7 +73,6 @@ public class WhitefireSpell extends AbstractWhiteSpell {
 				outputText("You narrow your eyes, focusing your mana into your thumb and middle finger.  You let the heat build, flowing from your mind and down your arm, until you raise your hand. You snap your fingers, releasing your power and the heat in an instant. [themonster] is enveloped in a flash of white flames.\n");
 			}
 		}
-		if(monster is Diva){(monster as Diva).handlePlayerSpell("whitefire");}
 		var damage:Number = calcDamage(monster, true, true);
 		damage = critAndRepeatDamage(display, damage, DamageType.FIRE);
 		if (ex) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);

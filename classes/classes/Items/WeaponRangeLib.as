@@ -4,7 +4,6 @@
  */
 package classes.Items
 {
-import classes.Items.Weapons.DualBFSword;
 import classes.Items.WeaponsRange.*;
 import classes.PerkLib;
 
@@ -103,10 +102,25 @@ public final class WeaponRangeLib extends ItemConstants
 		public const E_TOME_:WeaponRange = new WeaponRange("E. Tome", "E. Tome", "Elementalist’s Tome", "an Elementalist's Tome", "nothing", 0, 500, "This ornate navy blue book is inscribed filled with magical glyphs and complicated diagrams, concealed within a detailed treatise on the nature of the world. The magic within this tome allows you to strengthen your connection with summoned elementals. (+50% to elementals damage)", "Tome");
 		public const G_E_MAN:WeaponRange = new WeaponRange("G.E.Book", "G.E.Book", "Golemancy Evocation Manuscript", "A bundle of pages haphazardly bound together within a worn-out leather book.", "nothing", 0, 200, "This black tome is filled with golemancy knowledge. The magic within this tome allows you to control your manufactured golems with greater control and precision. (+50% to golems damage)", "Tome");
 		public const I_TOME_:InquisitorsTome = new InquisitorsTome();
+		public const RB_TOME:WeaponRange = new WeaponRange("R.B.Tome", "R.B.Tome", "Restrained Black Tome", "a Restrained Black Tome", "nothing", 0, 100, "This solid black tome is totally unmarked, saved for a blood red thin chain that is wrapped around it.  The pages are edged with gold, like some of the fancy books in the monastary back home. (Increase spellpower and reduce cooldown for tier 1 black spells at levels below 18)", "Tome");
+		public const RG_TOME:WeaponRange = new WeaponRange("R.G.Tome", "R.G.Tome", "Restrained Grey Tome", "a Restrained Grey Tome", "nothing", 0, 200, "This grey tome is totally unmarked, and on the cover is wrote few words that seems have no meaning or maybe you just aren't able to decipher them yet. A plain green thin chains is wrapped around it. (Increase spellpower and reduce cooldown for tier 1 grey spells at levels below 18)", "Tome");
+		public const RW_TOME:WeaponRange = new WeaponRange("R.W.Tome", "R.W.Tome", "Restrained White Tome", "a Restrained White Tome", "nothing", 0, 100, "This white tome is totally unmarked, and the cover is devoid of any lettering or title.  A shiny brass thin chain is wrapped around it. (Increase spellpower and reduce cooldown for tier 1 white spells at levels below 18)", "Tome");
 		public const SSKETCH:WeaponRange = new WeaponRange("SSketch", "S.Sketchbook", "Sage’s Sketchbook", "a Sage’s Sketchbook", "nothing", 0, 500, "Strangely, this ornate blue book is completely blank.  Yet, as you flip through it, you occasionally see magical glyphs and complicated diagrams out of the corner of your eye, only to disappear as you focus.  Still, the arcane energies within the book could augment your spellcraft.", "Tome").withBuffs({'spellpower': + 0.6}) as WeaponRange;
 
 		public const NEKONOM:WeaponRange = new WeaponRange("MissingNo", "MissingNo", "MissingNo", "MissingNo", "nothing", 0, 500, "This is a deprecated weapon no longer in use it will be removed from the game in a few version. Please remove it from your character and delete it for safety", "Tome");
-
+		
+		//===================//
+		// Single/Dual pairs //
+		//===================//
+		
+		public const SingleDualPairList:/*Array*/Array = [
+			[SIXSHOT, TWINSIXS],
+			[M1CERBE, TM1CERB],
+			[ALAKABL, DALAKABL],
+			[DESEAGL, TDEEAGL]
+			//[HARKON1, HARKON2],
+		];
+		
 		/*
 		private static function mk(id:String,shortName:String,name:String,longName:String,verb:String,attack:Number,value:Number,description:String,perk:String=""):Weapon {
 			return new Weapon(id,shortName,name,longName,verb,attack,value,description,perk);

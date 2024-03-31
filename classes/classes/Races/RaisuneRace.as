@@ -1,49 +1,70 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
+import classes.CockTypesEnum;
 import classes.CoC;
 import classes.GeneticMemories.RaceMem;
+import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
+import classes.VaginaClass;
 
 public class RaisuneRace extends Race {
     public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
-        /*Arms*/		"Human",
+        /*Arms*/		"Raiju",
         /*Balls*/		"Human",
         /*Breasts*/		"Human",
         /*Nips*/		"Human",
-        /*Ears*/		"Human",
-        /*Eyes*/		"Human",
-        /*Face*/		"Human",
+        /*Ears*/		"Fox",
+        /*Eyes*/		"Fox",
+        /*Face*/		"Fox",
         /*Gills*/		"Human",
-        /*Hair*/		"Human",
+        /*Hair*/		"Raiju",
         /*Horns*/		"Human",
-        /*LowerBody*/	"Human",
-        /*RearBody*/	"Human",
+        /*LowerBody*/	"Raiju",
+        /*RearBody*/	"Raiju",
         /*Skin*/		"Human",
         /*Ovipositor*/	"Human",
         /*Oviposition*/	"Human",
         /*GlowingAss*/	"Human",
-        /*Tail*/		"Human",
+        /*Tail*/		"Raisune",
         /*Tongue*/		"Human",
-        /*Wings*/		"Human",
-        /*Penis*/		"Human",
-        /*Vagina*/		"Human",
+        /*Wings*/		"Thunder",
+        /*Penis*/		"Raiju",
+        /*Vagina*/		"Raiju",
         /*Perks*/		"Human"];
 
 	public function RaisuneRace(id:int) {
 		super("Raisune", id, []);//RaceBody);
-		chimeraTier = 0;
-		grandChimeraTier = 0;
+		mutationThreshold = 6;
 		disabled = true;
 	}
 	
 	public override function setup():void {
 		
 		addScores()
-				//start ctrl-spacing here
-		;
+				.eyeType(Eyes.FOX, +1)
+				.earType(Ears.FOX, +1, -1)
+				.faceType(ANY(Face.ANIMAL_TOOTHS, Face.HUMAN, Face.FOX), +1, -1)
+				.armType(ANY(Arms.RAIJU,Arms.RAIJU_PAWS), +1)
+				.legType(LowerBody.RAIJU, +1)
+				.wingType(Wings.THUNDEROUS_AURA, +4)
+				.rearType(RearBody.RAIJU_MANE, +1)
+				.hairType(Hair.STORM, +1)
+				.skinCoatType(NOT(Skin.CHITIN), 0, -2)
+				.skinBaseType(NOT(Skin.GOO), 0, -3)
+				.cockOrVaginaOfType(CockTypesEnum.RAIJU, VaginaClass.RAIJU, +1);
+		addScoresAfter(5)
+				.customRequirement("skin", "fur or magical tatoo",
+						function (body:BodyData):Boolean {
+							return body.skinCoatType == Skin.FUR
+									|| body.skinBasePattern == Skin.PATTERN_MAGICAL_TATTOO
+						}, +1)
+				.hasPerk(PerkLib.StarSphereMastery, +1);
+				
+		addBloodline(PerkLib.RaijusDescendant, PerkLib.BloodlineRaiju);
+		addMutation(IMutationsLib.KitsuneParathyroidGlandsIM);
 		
 		buildTier(11, "raisune")
 				.buffs({

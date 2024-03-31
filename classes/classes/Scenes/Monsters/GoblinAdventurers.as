@@ -12,6 +12,21 @@ import classes.internals.*;
 
 public class GoblinAdventurers extends Monster
 	{
+		override protected function outputPlayerDodged(dodge:int):void{
+			var pRdm:Number = rand(3);
+			switch(pRdm){
+				case 0:
+					outputText("\nYou narrowly avoid the gush of alchemic fluids!\n");
+					break;
+				case 1:
+					outputText("With a swift step, one of adventurers vanishes, her movements too quick for you to follow. You take a sharp breath as you feel her ample thighs clench your head in between them, her slick cunt in full view as you take in her scent.\nYou’ve already prepared, however, as you hold your breath and grab the goblin by her sides. Unhindered by her advance, you take the opportunity to move backwards, throwing the goblin off balance and leaving you only faintly smelling of her pussy.");
+					player.takeLustDamage(rand(player.lib/10)+4, true);
+					break;
+				case 2:
+					outputText("Three adventurers throws a syringe onto the ground, shattering it and allowing the dissipating smoke from its contents to distract you long enough for them to slip underneath you or to your sides. With a quick flick of wrists two needles are placed into their hands, though you’ve already caught wind of their movements.\nYou jump backwards, far enough to avoid quick thrust upwards as the middle one attempts to lick the area in which your crotch once stood. Realising situation, they quickly remove themselves from the ground and faces you, more determined than before.");
+					break;
+			}
+		}
 		protected function goblinDrugAttack():void {
 			var color:String = randomChoice("red", "green", "blue", "white", "black");
 			var multiplier:Number = 4 + player.newGamePlusMod() * 0.5;
@@ -28,10 +43,6 @@ public class GoblinAdventurers extends Monster
 				}
 				else outputText("  There doesn't seem to be any effect.\n");
 			}
-			//Dodge chance!
-			if(player.getEvasionRoll()) {
-				outputText("\nYou narrowly avoid the gush of alchemic fluids!\n");
-			} else {
 				//Get hit!
 				//Temporary heat
 				if (color == "red") {
@@ -53,35 +64,17 @@ public class GoblinAdventurers extends Monster
 					outputText("\nThe black fluid splashes all over you and wicks into your skin near-instantly.  It makes you feel tired and drowsy.\n");
 					EngineCore.fatigue(30 + rand(30) * multiplier);
 				}
-			}
 		}
 		//Lust Needle
 		protected function lustNeedle():void {
 			outputText("With a swift step, one of adventurers vanishes, her movements too quick for you to follow. You take a sharp breath as you feel her ample thighs clench your head in between them, her slick cunt in full view as you take in her scent.");
-			//Miss
-			if (player.getEvasionRoll())
-			{
-				//Miss:
-				outputText("\nYou’ve already prepared, however, as you hold your breath and grab the goblin by her sides. Unhindered by her advance, you take the opportunity to move backwards, throwing the goblin off balance and leaving you only faintly smelling of her pussy.");
-				player.takeLustDamage(rand(player.lib/10)+4, true);
-			}
-			//Hit:
-			else
-			{
-				outputText("\nYou’re far too distracted to notice few needle injected into your back and neck, but by the time she flips back into her original position you already feel the contents of the syringe beginning to take effect.");
-				player.takeLustDamage(rand(player.lib)+50, true);
-			}
+			outputText("\nYou’re far too distracted to notice few needle injected into your back and neck, but by the time she flips back into her original position you already feel the contents of the syringe beginning to take effect.");
+			player.takeLustDamage(rand(player.lib)+50, true);
 		}
 		//Dual Shot
 		protected function dualShot():void {
 			outputText("Three adventurers throws a syringe onto the ground, shattering it and allowing the dissipating smoke from its contents to distract you long enough for them to slip underneath you or to your sides. With a quick flick of wrists two needles are placed into their hands, though you’ve already caught wind of their movements.");
-			//Miss:
-			if (player.getEvasionRoll())
-			{
-				outputText("\nYou jump backwards, far enough to avoid quick thrust upwards as the middle one attempts to lick the area in which your crotch once stood. Realising situation, they quickly remove themselves from the ground and faces you, more determined than before.");
-			}
-			//Hit:
-			else {
+
 				outputText("\nBefore you can do anything to stop them, the middle one lifts her head and takes a swift lick of your crotch, taking a small moan from you and giving her, and her two companions, enough time to stab into the back of your knees. They all rolls out of the way just as you pluck the needles out and throw them back to the ground. They didn’t seem to have anything in them, but the pain is enough to make you stagger. ");
 				//(Medium HP loss, small lust gain)
 				var damage:int = int(str + weaponAttack + 40);
@@ -89,7 +82,6 @@ public class GoblinAdventurers extends Monster
 				damage -= rand(player.tou);
 				damage -= player.armorDef;
 				damage = player.takePhysDamage(damage, true);
-			}
 		}
 		//Explosion
 		protected function goblinExplosion():void {
@@ -156,7 +148,12 @@ public class GoblinAdventurers extends Monster
 							consumables.PINKDYE,
 							consumables.BLUEDYE,
 							consumables.ORANGDY,
-							consumables.PURPDYE);
+							consumables.PURPDYE,
+							consumables.HEALHERB,
+							consumables.MOONGRASS,
+							consumables.SNAKEBANE,
+							consumables.IRONWEED,
+							consumables.BLADEFERN);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			checkMonster();
 		}

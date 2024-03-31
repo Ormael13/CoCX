@@ -15,13 +15,13 @@ public class KillingIntentSkill extends AbstractSoulSkill {
             "Project your bloodlust through your soul sense, damaging the enemies' mind. Damage increases with the number of monsters killed and cultivation rank.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING, TAG_MAGICAL],
+            [TAG_DAMAGING, TAG_MAGICAL, TAG_TIER1],
             PerkLib.KillingIntent
         )
-		baseSFCost = 50;
+		baseSFCost = 200;
 		lastAttackType = Combat.LAST_ATTACK_SPELL;
     }
-
+/*
     override protected function usabilityCheck():String {
         var uc:String =  super.usabilityCheck();
         if (uc) return uc;
@@ -32,46 +32,25 @@ public class KillingIntentSkill extends AbstractSoulSkill {
 
         return "";
     }
-
+*/
 	override public function describeEffectVs(target:Monster):String {
 		return "~" + numberFormat(calcDamage(target)) + " true damage. Can cause fear";
 	}
 
-	private function calcDeathCap():Number {
-		var cap:Number = 0;
-
-		if (player.hasPerk(PerkLib.SoulApprentice)) cap += 10;
-		if (player.hasPerk(PerkLib.SoulPersonage)) cap += 10;
-		if (player.hasPerk(PerkLib.SoulWarrior)) cap += 10;
-		if (player.hasPerk(PerkLib.SoulSprite)) cap += 10;
-		if (player.hasPerk(PerkLib.SoulScholar)) cap += 10;
-		if (player.hasPerk(PerkLib.SoulGrandmaster)) cap += 10;
-		if (player.hasPerk(PerkLib.SoulElder)) cap += 10;
-		if (player.hasPerk(PerkLib.SoulExalt)) cap += 10;
-		if (player.hasPerk(PerkLib.SoulOverlord)) cap += 10;
-		if (player.hasPerk(PerkLib.SoulTyrant)) cap += 10;
-		if (player.hasPerk(PerkLib.SoulKing)) cap += 10;
-		if (player.hasPerk(PerkLib.SoulEmperor)) cap += 10;
-    
-		return cap;
-	}
-
 	private function calcDeathMod():Number {
 		var mod:Number = 1;
-		var deathCap:Number = calcDeathCap();
-		var monstersKilled:int = 	flags[kFLAGS.GOBLINS_KILLED] + 
+		var monstersKilled:int = 	flags[kFLAGS.THIEFS_KILLED] +
+									flags[kFLAGS.GOBLINS_KILLED] + 
 									flags[kFLAGS.HELLHOUNDS_KILLED] +
 									flags[kFLAGS.IMPS_KILLED] +
 									flags[kFLAGS.MINOTAURS_KILLED] +
 									flags[kFLAGS.TRUE_DEMONS_KILLED];
-		if (deathCap != -1) monstersKilled = Math.min(deathCap, monstersKilled);
-		mod += 0.1 * monstersKilled;
+		mod += 0.1 * flags[kFLAGS.SOUL_CULTIVATION] * monstersKilled;
 		return mod;
 	}
 
 	override public function calcCooldown():int {
-		var cooldown:int = 3;
-		return cooldown;
+		return soulskillCooldown(3, false);
 	}
 
 	public function calcDamage(monster:Monster):Number {
@@ -90,7 +69,7 @@ public class KillingIntentSkill extends AbstractSoulSkill {
     override public function doEffect(display:Boolean = true):void {
 		clearOutput();
 		if (monster.hasPerk(PerkLib.Insanity) || monster.inte == 0) {
-			if (display) outputText("You try to strike the enemies' resolve with your bloodlust, but the monater is unaffected. It doesn't seem as though bloodlust registers to them!\n\n");
+			if (display) outputText("You try to strike the enemy's resolve with your bloodlust, but the monster is unaffected. It doesn't seem as though bloodlust registers to them!\n\n");
 			return;
 		} else if (monster is LivingStatue) {
 			if (display) outputText("Bloodlust does not matter to a statue!\n\n");
@@ -100,7 +79,7 @@ public class KillingIntentSkill extends AbstractSoulSkill {
 		if (silly()) 
 			if (display) outputText("You narrow your eyes at this foolish upstart. \"<i>Junior, you dare!</i>\" Your power of your soul flares from your body, seeking to strike them down. ");
 		else {
-			outputText("You set your focus on [themonster], sending your desire to kill them through your soulforce. ");
+			if (display) outputText("You set your focus on [themonster], sending your desire to kill them through your soulforce. ");
 		}
 
 		var damage:Number = calcDamage(monster);

@@ -23,8 +23,10 @@ import classes.Items.FlyingSwords;
 import classes.Items.HeadJewelry;
 import classes.Items.HeadJewelryLib;
 import classes.Items.IDynamicItem;
+import classes.Items.IELib;
 import classes.Items.ItemConstants;
-import classes.Items.ItemTags;
+import classes.Items.ItemEffect;
+import classes.Items.ItemEffectType;
 import classes.Items.Jewelry;
 import classes.Items.JewelryLib;
 import classes.Items.MiscJewelry;
@@ -135,7 +137,7 @@ use namespace CoC;
 			alchemySkillStat = new AlchemySkill(this);
 			statStore.addStat(alchemySkillStat);
 		}
-				
+		
 		protected final function outputText(text:String, clear:Boolean = false):void
 		{
 			if (clear) EngineCore.clearOutputTextOnly();
@@ -349,11 +351,6 @@ use namespace CoC;
 		override public function set weaponAttack(value:Number):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.weaponAttack.");
-		}
-
-		override public function set weaponPerk(value:String):void
-		{
-			CoC_Settings.error("ERROR: attempt to directly set player.weaponPerk.");
 		}
 
 		override public function set weaponValue(value:Number):void
@@ -652,12 +649,12 @@ use namespace CoC;
 		//Natural Armor (need at least to partialy covering whole body)
 		public function haveNaturalArmor():Boolean
 		{
-			return hasPerk(PerkLib.ThickSkin) || skin.isFurCovered() || skin.isChitinCovered() || skin.isScaleCovered() || skin.hasBark() || skin.isDragonScaleCovered() || skin.hasBaseOnly(Skin.STONE);
+			return hasPerk(PerkLib.ThickSkin) || skin.isFurCovered() || skin.isChitinCovered() || skin.isScaleCovered() || skin.hasBark() || skin.isDragonScaleCovered() || skin.hasBaseOnly(Skin.STONE) || lowerBody == LowerBody.SANDWORM;
 		}
 		//Unhindered related acceptable armor types
 		public function meetUnhinderedReq():Boolean
 		{
-			return armor.hasTag(ItemTags.A_AGILE);
+			return armor.hasTag(ItemConstants.A_AGILE);
 		}
 		//override public function get armors
 		override public function get armorName():String {
@@ -672,11 +669,7 @@ use namespace CoC;
 			armorDef += armor.def;
 			armorDef += upperGarment.armorDef;
 			armorDef += lowerGarment.armorDef;
-			if (hasPerk(PerkLib.MiracleMetal)) {
-				var aD2:Number = armorDef;
-				if (armor.name == "Arigean Ne-Class Uniform") aD2 -= armor.def;
-				armorDef = Math.round(armorDef * 0.6);
-			}
+			if (hasPerk(PerkLib.MiracleMetal) && armor.name != "Arigean Ne-Class Uniform" && armor.name != "Princess Regalia") armorDef = Math.round(armorDef * 0.6);
 			var tier:int;
 			//Blacksmith history!
 			if (armorDef > 0 && (hasPerk(PerkLib.HistorySmith) || hasPerk(PerkLib.PastLifeSmith))) {
@@ -788,7 +781,7 @@ use namespace CoC;
 			armorDef += speedBonus;
 			//Feral armor boosts armor ratings!
 			var toughnessBonus:int = 0;
-			if (hasPerk(PerkLib.FeralArmor) && haveNaturalArmor() && armor.hasTag(ItemTags.A_AGILE)) {
+			if (hasPerk(PerkLib.FeralArmor) && haveNaturalArmor() && armor.hasTag(ItemConstants.A_AGILE)) {
 				toughnessBonus += Math.round(tou / 20);
 			}
 			if (perkv1(IMutationsLib.NukiNutsIM) >= 1) {
@@ -1141,27 +1134,27 @@ use namespace CoC;
 		//Weapons for Whirlwind
 		public function isWeaponForWhirlwind():Boolean
 		{
-			return isSwordTypeWeapon() || isAxeTypeWeapon() || weaponSpecials("Whirlwind");// || weapon == game.weapons.
+			return isSwordTypeWeapon() || isAxeTypeWeapon() || weapon.isWhirlwind();// || weapon == game.weapons.
 		}
 		//Weapons for Whipping
 		public function isWeaponsForWhipping():Boolean
 		{
-			return weaponSpecials("Whipping");
+			return weapon.isWhipping();
 		}
 		//1H Weapons
 		public function isOneHandedWeapons():Boolean
 		{
-			return (!weaponSpecials("Dual Large") && !weaponSpecials("Dual") && !weaponSpecials("Dual Small") && !weaponSpecials("Dual Massive") && !weaponSpecials("Staff") && !weaponSpecials("Large") && !weaponSpecials("Massive") && weapon != game.weapons.DAISHO);
+			return !weapon.isDual() && weapon.size < ItemConstants.WSZ_LARGE  && weapon != game.weapons.DAISHO && !weapon.isStaffType();
 		}
 		//Non Large/Massive weapons
 		public function isNoLargeNoStaffWeapon():Boolean
 		{
-			return (!weaponSpecials("Dual Large") && !weaponSpecials("Large") && !weaponSpecials("Dual Massive") && !weaponSpecials("Massive") && !isStaffTypeWeapon());
+			return (!weapon.isDualLarge() && !weapon.isSingleLarge() && !weapon.isDualMassive() && !weapon.isSingleMassive() && !isStaffTypeWeapon());
 		}
 		//Wrath Weapons
 		public function isLowGradeWrathWeapon():Boolean
 		{
-			return weaponSpecials("LGWrath") || weaponRange == game.weaponsrange.B_F_BOW || hasAetherTwinsTier2();
+			return weapon.isLGWrath() || weaponRange == game.weaponsrange.B_F_BOW || hasAetherTwinsTier2();
 		}
 		public function isDualLowGradeWrathWeapon():Boolean
 		{
@@ -1169,7 +1162,7 @@ use namespace CoC;
 		}
 		public function isMidGradeWrathWeapon():Boolean
 		{
-			return weaponSpecials("MGWrath") || weapon == game.weapons.ANGSTD1 || weapon == game.weapons.NTWHIP || hasAetherTwinsTierS1();
+			return weapon.isMGWrath() || weapon == game.weapons.ANGSTD1 || weapon == game.weapons.NTWHIP || hasAetherTwinsTierS1();
 		}
 		public function isDualMidGradeWrathWeapon():Boolean
 		{
@@ -1199,71 +1192,71 @@ use namespace CoC;
 			return weaponName == "fists" || isGauntletWeapon();
 		}
 		public function isGauntletWeapon():Boolean {
-			return (weaponClass("Gauntlet")) || (hasAetherTwinsTier1() || hasAetherTwinsTier2()) || (weapon == game.weapons.CATGLOV && flags[kFLAGS.FERAL_COMBAT_MODE] != 1);
+			return (weapon.isGauntletType()) || (hasAetherTwinsTier1() || hasAetherTwinsTier2()) || (weapon == game.weapons.CATGLOV && flags[kFLAGS.FERAL_COMBAT_MODE] != 1);
 		}
 		//Sword-type weapons
 		public function isSwordTypeWeapon():Boolean {
-			return (weaponClass("Sword"));
+			return (weapon.isSwordType());
 		}
 		//Axe-type weapons
 		public function isAxeTypeWeapon():Boolean {
-			return (weaponClass("Axe"));
+			return (weapon.isAxeType());
 		}
 		//Mace/Hammer-type weapons
 		public function isMaceHammerTypeWeapon():Boolean {
-			return (weaponClass("Mace/Hammer"));
+			return (weapon.isMaceHammerType());
 		}
 		public function isTetsubo():Boolean {
-			return (weaponClass("Tetsubo"));
+			return (weapon.isTetsubo());
 		}
 		//Dueling sword-type weapons (rapier & katana)
 		public function isDuelingTypeWeapon():Boolean {
-			return (weaponClass("Dueling"));
+			return (weapon.isDuelingType());
 		}
 		//Polearm-type
 		public function isPolearmTypeWeapon():Boolean {
-			return (weaponClass("Polearm"));
+			return (weapon.isPolearmType());
 		}
 		//Spear-type
 		public function isSpearTypeWeapon():Boolean {
-			return (weaponClass("Spear")) || weapon == game.weapons.SKYPIER;
+			return (weapon.isSpearType()) || weapon == game.weapons.SKYPIER;
 		}
 		//Scythe-type
 		public function isScytheTypeWeapon():Boolean {
-			return (weaponClass("Scythe"));
+			return (weapon.isScytheType());
 		}
 		//Dagger-type weapons
 		public function isDaggerTypeWeapon():Boolean {
-			return (weaponClass(ItemConstants.WT_DAGGER)) || hasAetherTwinsTierWeapon() || hasAetherTwinsTierWeapon2();
+			return (weapon.isDaggerType()) || hasAetherTwinsTierWeapon() || hasAetherTwinsTierWeapon2();
 		}
 		//Staff <<SCECOMM(scepter not staff)>>
 		public function isStaffTypeWeapon():Boolean {
-			return (weaponClass(ItemConstants.WT_STAFF)) || weapon == game.weapons.ASCENSU || weapon == game.weapons.B_STAFF || weapon == game.weapons.DEPRAVA || weapon == game.weapons.PURITAS || weapon == game.weapons.WDSTAFF;
+			return (weapon.isStaffType()) || weapon == game.weapons.ASCENSU || weapon == game.weapons.B_STAFF || weapon == game.weapons.DEPRAVA || weapon == game.weapons.PURITAS || weapon == game.weapons.WDSTAFF;
 		}
 		//Staff <<SCECOMM(scepter not staff)>>
 		public function isWandTypeWeapon():Boolean {
-			return (weaponClass(ItemConstants.WT_WAND));
+			return (weapon.isWandType());
 		}
 		//Whip-type weapons
 		public function isWhipTypeWeapon():Boolean {
-			return (weaponClass("Whip"));
+			return (weapon.isWhipType());
 		}
 		//Ribbon-type weapons
 		public function isRibbonTypeWeapon():Boolean {
-			return (weaponClass("Ribbon"));
+			return (weapon.isRibbonType());
 		}
 		//Exotic-type weapons
 		public function isExoticTypeWeapon():Boolean {
-			return (isRibbonTypeWeapon() || weaponClass("Exotic") || weaponClass("Scythe"));
+			return (isRibbonTypeWeapon() || weapon.isExoticType() || weapon.isScytheType());
 		}
 		//Partial staff type weapons
 		public function isPartiallyStaffTypeWeapon():Boolean {
-			return (weaponClass("StaffPart")) || weapon == game.weapons.DEMSCYT || weapon == game.weapons.LHSCYTH || hasAetherTwinsTierS1() || hasAetherTwinsTierS2();// || weapon == game.weapons.E_STAFF || weapon == game.weapons.L_STAFF || weapon == game.weapons.W_STAFF || weapon == game.weapons.WDSTAFF
+			return (weapon.isStaffPart()) || weapon == game.weapons.DEMSCYT || weapon == game.weapons.LHSCYTH || hasAetherTwinsTierS1() || hasAetherTwinsTierS2();// || weapon == game.weapons.E_STAFF || weapon == game.weapons.L_STAFF || weapon == game.weapons.W_STAFF || weapon == game.weapons.WDSTAFF
 		}
 		//Weapons for Sneak Attack (Meele and Range)
 		public function haveWeaponForSneakAttack():Boolean
 		{
-			return weaponSpecials("Small") || weaponSpecials("Dual Small");
+			return weapon.isSingleSmall() || weapon.isDualSmall();
 		}
 		public function haveWeaponForSneakAttackRange():Boolean
 		{
@@ -1273,7 +1266,7 @@ use namespace CoC;
 		//Throwable melee weapons
 		public function haveThrowableMeleeWeapon():Boolean
 		{
-			return (weaponClass("Thrown")) || hasAetherTwinsTierS1() || hasAetherTwinsTierS2();//wrath large weapon that can be throwed or used in melee xD
+			return (weapon.isThrown()) || hasAetherTwinsTierS1() || hasAetherTwinsTierS2();//wrath large weapon that can be throwed or used in melee xD
 		}
 		//Cleave compatibile weapons
 		public function haveWeaponForCleave():Boolean
@@ -1333,12 +1326,12 @@ use namespace CoC;
 		}
 		public function usingSingleFlyingSword():Boolean
 		{
-			return weaponFlyingSwords.count == 1;//weaponSpecials("Dual Massive") ||  || 
+			return weaponFlyingSwords.count == 1;//weapon.isDualMassive() ||  ||
 		}
 		//Hold with Both Hands checks
 		public function gaindHoldWithBothHandBonus():Boolean
 		{
-			return hasPerk(PerkLib.HoldWithBothHands) && !isFistOrFistWeapon() && isNotHavingShieldCuzPerksNotWorkingOtherwise() && (!isDualWieldMelee() || (playerHasFourArms() && (weaponSpecials("Dual Small") || weaponSpecials("Dual") || (weaponSpecials("Dual Large") && hasPerk(PerkLib.GigantGripSu)))));
+			return hasPerk(PerkLib.HoldWithBothHands) && !isFistOrFistWeapon() && isNotHavingShieldCuzPerksNotWorkingOtherwise() && (!isDualWieldMelee() || (playerHasFourArms() && (weapon.isDualSmall() || weapon.isDualMedium() || (weapon.isDualLarge() && hasPerk(PerkLib.GigantGripSu)))));
 		}
 		//Natural Jouster perks req check
 		public function isMeetingNaturalJousterReq():Boolean
@@ -1359,7 +1352,7 @@ use namespace CoC;
 		}
 		public function playerHasFourArms():Boolean
 		{
-			return (arms.type == Arms.DISPLACER || arms.type == Arms.ANT);
+			return hasFourArms();
 		}
 		public function flameBladeActive():Boolean
 		{
@@ -1403,6 +1396,10 @@ use namespace CoC;
 			if (hasPerk(PerkLib.YourPainMyPower)) progressBD += 1;
 			if (hasPerk(PerkLib.BloodDemonIntelligence)) progressBD += 1;
 			return progressBD;
+		}
+		public function compatibileSwordImmortalWeapons():Boolean {
+			if (isSwordTypeWeapon() || isDuelingTypeWeapon() || isDaggerTypeWeapon()) return true;
+			else return false;
 		}
 
 		public function allEquipment():/*ItemType*/Array {
@@ -1477,6 +1474,61 @@ use namespace CoC;
 			}
 			return result;
 		}
+		
+		public function hasItemEffect(type: ItemEffectType):Boolean {
+			for each (var itype:ItemType in allEquipment()) {
+				if (itype.hasEffect(type)) return true;
+			}
+			return false;
+		}
+		
+		/**
+		 * @param type
+		 * @param aggregate "sum"|"max"|"min"
+		 * @return
+		 */
+		public function itemEffectPower(type:ItemEffectType, aggregate:String="sum"):Number {
+			var power:Number = 0;
+			for each (var itype:ItemType in allEquipment()) {
+				var ipower:Number = itype.effectPower(type);
+				if (aggregate === "sum") {
+					power += ipower
+				} else if (aggregate === "max") {
+					power = Math.max(power, ipower);
+				} else if (aggregate === "min") {
+					power = Math.min(power, ipower);
+				}
+			}
+			return power;
+		}
+		public function findItemEffect(type:ItemEffectType):ItemEffect {
+			for each (var itype:ItemType in allEquipment()) {
+				var e:ItemEffect = itype.findEffect(type);
+				if (e) return e;
+			}
+			return null
+		}
+		
+		/**
+		 * @param type
+		 * @return {Array} [ItemEffect,ItemType]
+		 */
+		public function findItemEffectAndItem(type:ItemEffectType):Array {
+			for each (var itype:ItemType in allEquipment()) {
+				var e:ItemEffect = itype.findEffect(type);
+				if (e) return [e, itype];
+			}
+			return null
+		}
+		public function allItemEffects(type:ItemEffectType):/*ItemEffect*/Array {
+			var result:/*ItemEffect*/Array = [];
+			for each (var itype:ItemType in allEquipment()) {
+				var e:ItemEffect = itype.findEffect(type);
+				if (e) result.push(e);
+			}
+			return result;
+		}
+		
 		public function equippedKnownCursedItems():/*ItemType*/Array {
 			var result:/*ItemType*/Array = [];
 			for each (var slot:int in ItemConstants.EquipmentSlotIds) {
@@ -1503,39 +1555,39 @@ use namespace CoC;
 		override public function get weaponAttack():Number {
 			var newGamePlusMod:int = this.newGamePlusMod()+1;
 			var attack:Number = weapon.attack;
-			if (hasPerk(PerkLib.JobSwordsman) && (weaponSpecials("Large") || hasAetherTwinsTier2())) {
+			if (hasPerk(PerkLib.JobSwordsman) && (weapon.isSingleLarge() || hasAetherTwinsTier2())) {
 				if (hasPerk(PerkLib.WeaponMastery) && str >= 100) {
 					if (hasPerk(PerkLib.WeaponGrandMastery) && str >= 140) attack *= 2;
 					else attack *= 1.5;
 				}
 				else attack *= 1.25;
 			}
-			if (hasPerk(PerkLib.WeaponGrandMastery) && weaponSpecials("Dual Large") && str >= 140) {
+			if (hasPerk(PerkLib.WeaponGrandMastery) && weapon.isDualLarge() && str >= 140) {
 				attack *= 2;
 			}
-			if (hasPerk(PerkLib.GigantGripEx) && (weaponSpecials("Massive") || weaponSpecials("Dual Massive"))) {
+			if (hasPerk(PerkLib.GigantGripEx) && weapon.isMassive()) {
 				if (hasPerk(PerkLib.WeaponMastery) && str >= 100) {
 					if (hasPerk(PerkLib.WeaponGrandMastery) && str >= 140) attack *= 2;
 					else attack *= 1.5;
 				}
 				else attack *= 1.25;
 			}
-			if (hasPerk(PerkLib.HiddenMomentum) && (weaponSpecials("Large") || hasAetherTwinsTier2() || (hasPerk(PerkLib.GigantGripEx) && weaponSpecials("Massive"))) && str >= 75 && spe >= 50) {
+			if (hasPerk(PerkLib.HiddenMomentum) && (weapon.isSingleLarge() || hasAetherTwinsTier2() || (hasPerk(PerkLib.GigantGripEx) && weapon.isSingleMassive())) && str >= 75 && spe >= 50) {
 				attack += (((str + spe) - 100) * 0.2);
 			}//30-70-110
-			if (hasPerk(PerkLib.HiddenDualMomentum) && weaponSpecials("Dual Large") && str >= 150 && spe >= 100) {
+			if (hasPerk(PerkLib.HiddenDualMomentum) && weapon.isDualLarge() && str >= 150 && spe >= 100) {
 				attack += (((str + spe) - 200) * 0.2);
 			}
-			if (hasPerk(PerkLib.HiddenDualMomentum) && hasPerk(PerkLib.GigantGripEx) && weaponSpecials("Dual Massive") && str >= 150 && spe >= 100) {
+			if (hasPerk(PerkLib.HiddenDualMomentum) && hasPerk(PerkLib.GigantGripEx) && weapon.isDualMassive() && str >= 150 && spe >= 100) {
 				attack += (((str + spe) - 200) * 0.2);
 			}//20-60-100
-			if (hasPerk(PerkLib.LightningStrikes) && spe >= 60 && (!weaponSpecials("Dual Massive") && !weaponSpecials("Massive") && !weaponSpecials("Large") && !weaponSpecials("Dual Large") && !weaponSpecials("Small") && !weaponSpecials("Dual Small") && !isFistOrFistWeapon())) {
+			if (hasPerk(PerkLib.LightningStrikes) && spe >= 60 && (weapon.isMedium() && !isFistOrFistWeapon())) {
 				attack += ((spe - 50) * 0.3);
 			}//45-105-165
-			if (weaponSpecials("Hybrid") && shieldName == "nothing"){
+			if (weapon.isHybrid() && shieldName == "nothing"){
 				attack *= 1.5;
 			}
-			if (hasPerk(PerkLib.StarlightStrikes) && spe >= 60 && (weaponSpecials("Small") || weaponSpecials("Dual Small"))) {
+			if (hasPerk(PerkLib.StarlightStrikes) && spe >= 60 && (weapon.isSingleSmall() || weapon.isDualSmall())) {
 				attack += ((spe - 50) * 0.2);
 			}
 			if (hasPerk(PerkLib.SteelImpact)) {
@@ -1640,40 +1692,16 @@ use namespace CoC;
 		public function get weaponBaseAttack():Number {
 			return weapon.attack;
 		}
-		override public function get weaponPerk():String {
-			return weapon.perk || "";
-		}
 		override public function get weaponType():String {
 			return weapon.type || "";
 		}
 		override public function get weaponValue():Number {
 			return weapon.value;
 		}
-		//First arg is weapon type. Second is override, in case you want to check specific weapon.
-		public function weaponClass(pWeaponClass:String = "", orWeaponCheck:* = null):Boolean {
-			var temp:Array;
-			if (orWeaponCheck != null){
-				temp = orWeaponCheck.type.split(", ");
-			}
-			else{
-				temp = weapon.type.split(", ");
-			}
-			return (temp.indexOf(pWeaponClass) >= 0);
-		}
-		public function weaponSpecials(pWeaponSpecials:String = "", orWeaponCheck:* = null):Boolean {
-			var temp:Array;
-			if (orWeaponCheck != null){
-				temp = orWeaponCheck.perk.split(", ");
-			}
-			else{
-				temp = weapon.perk.split(", ");
-			}
-			return (temp.indexOf(pWeaponSpecials) >= 0);
-		}
 		//Is DualWield
 		public function isDualWieldMelee():Boolean
         {
-        	return weaponSpecials("Dual Massive") || weaponSpecials("Dual Large") || weaponSpecials("Dual Small") || weaponSpecials("Dual");
+        	return weapon.isDual()
         }
         public function isDualWieldRanged():Boolean
         {
@@ -1715,7 +1743,7 @@ use namespace CoC;
 		//Using a spear DEPRECATED
 		public function isUsingSpear():Boolean
 		{
-			return (weaponClass("Spear"));
+			return (weapon.isSpearType());
 		}
 		//Using Staff
 		public function isUsingStaff():Boolean
@@ -1725,7 +1753,7 @@ use namespace CoC;
 		//Using Wand
 		public function isUsingWand():Boolean
 		{
-			return weaponSpecials("Wand");
+			return weapon.isWandType();
 		}
 		//override public function get weapons
 		override public function get weaponRangeName():String {
@@ -2625,6 +2653,8 @@ use namespace CoC;
 			if(necklaceEffectId == NecklaceLib.MODIFIER_LUST_R) lust -= necklaceEffectMagnitude;
 			if(jewelry1.hasBuff('res_lust') && jewelry2.hasBuff('res_lust') && jewelry3.hasBuff('res_lust') && jewelry4.hasBuff('res_lust') && headjewelryEffectId == HeadJewelryLib.MODIFIER_LUST_R && necklaceEffectId == NecklaceLib.MODIFIER_LUST_R) lust -= 15;
 			if(BelisaFollower.HolyBand2 > 0) lust -= 10 * BelisaFollower.HolyBand2;
+			if(hasPerk(PerkLib.AlteredAnima)) lust += 20;
+			if(lust >= 100) lust = 100;
 			if(lust < minLustCap) lust = minLustCap;
 			if(statusEffectv1(StatusEffects.BlackCatBeer) > 0) {
 				if(lust >= 80) lust = 100;
@@ -2855,6 +2885,7 @@ use namespace CoC;
 			if (hasStatusEffect(StatusEffects.GreenCovenant)) damage *= 0.25;
 			if (CoC.instance.monster.hasStatusEffect(StatusEffects.BloodShower)) damage *= 0.2;
 			if (CoC.instance.monster.hasStatusEffect(StatusEffects.CorpseExplosion)) damage *= (1 - (0.2 * CoC.instance.monster.statusEffectv1(StatusEffects.CorpseExplosion)));
+			if (hasPerk(PerkLib.AlteredAnima) && cor >= 20) damage *= (1 - (0.05 * Math.round((cor - 10) / 20)));
 			//Round
 			damage = Math.round(damage);
 			// we return "1 damage received" if it is in (0..1) but deduce no HP
@@ -3183,7 +3214,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.KnightlySword) && isSwordTypeWeapon() && isShieldsForShieldBash()) {
 				mult -= 10;
 			}
-			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && armor.hasTag(ItemTags.A_REVEALING)) {
+			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && armor.hasTag(ItemConstants.A_REVEALING)) {
 				mult -= 10;
 			}
 			if (hasPerk(PerkLib.FluidBody) && meetUnhinderedReq()) {
@@ -3298,7 +3329,7 @@ use namespace CoC;
 			mult -= armorMMod;
 			if (mult < 50) mult = 50;
 			//--PERKS--
-			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && armor.hasTag(ItemTags.A_REVEALING)) {
+			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && armor.hasTag(ItemConstants.A_REVEALING)) {
 				mult -= 10;
 			}
 			if (perkv1(IMutationsLib.DraconicBonesIM) >= 2) {
@@ -3308,13 +3339,7 @@ use namespace CoC;
 				mult -= 5;
 			}
 			if (perkv1(IMutationsLib.MelkieLungIM) >= 1) {
-				mult -= 5;
-			}
-			if (perkv1(IMutationsLib.MelkieLungIM) >= 2) {
-				mult -= 10;
-			}
-			if (perkv1(IMutationsLib.MelkieLungIM) >= 3) {
-				mult -= 15;
+				mult -= (5 * perkv1(IMutationsLib.MelkieLungIM));
 			}
 			if (perkv1(IMutationsLib.WhaleFatIM) >= 1) {
 				mult -= 5;
@@ -3631,6 +3656,7 @@ use namespace CoC;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= necklaceEffectMagnitude;
 			if (jewelry1.hasBuff('res_poison') && jewelry2.hasBuff('res_poison') && jewelry3.hasBuff('res_poison') && jewelry4.hasBuff('res_poison') && headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R && necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= 15;
 			if (hasStatusEffect(StatusEffects.DaoOfPoison) && (statusEffectv2(StatusEffects.DaoOfPoison) > 3)) mult -= (10 * (statusEffectv2(StatusEffects.DaoOfPoison) - 3));
+			if (hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX)) mult -= (10 * perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX));
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
@@ -3867,6 +3893,120 @@ use namespace CoC;
 			return damage;
 		}
 
+		/**
+		* Look into perks and special effects and @return summery extra chance to avoid attack granted by them.
+		*/
+		override public function getEvasionChance():Number {
+			var chance:Number = 0;
+
+			if (tallness < 48 && isBiped() && !isFlying()) {
+				var goblinDodgeChance:int = 0;
+				if (hasKeyItem("Spring Boots") >= 0) goblinDodgeChance = 10;
+				else if (hasKeyItem("Rocket Boots") >= 0) goblinDodgeChance = 20;
+				else if (hasKeyItem("Nitro Boots") >= 0) goblinDodgeChance = 30;
+				chance += goblinDodgeChance;
+			}
+
+			if (hasPerk(PerkLib.Misdirection) && armor.hasTag(ItemConstants.A_AGILE)) chance += 10;
+			if (hasPerk(PerkLib.Unhindered) && armor.hasTag(ItemConstants.A_AGILE)) chance += 10;
+			if (CombatAbilities.HurricaneDance.isActive()) chance += 25;
+
+			if (isRace(Races.FAIRY)) {
+				var fairyDodgeChance:int = 30;
+				if (hasStatusEffect(StatusEffects.Minimise)) fairyDodgeChance += 50;
+				chance += fairyDodgeChance;
+			}
+
+			if (isRace(Races.CHESHIRE)) {
+				var chesDodgeChance:int = 30;
+				if (hasStatusEffect(StatusEffects.EverywhereAndNowhere)) chesDodgeChance += 50;
+				chance += chesDodgeChance;
+			}
+
+			if (isRace(Races.DISPLACERBEAST)) {
+				var disDodgeChance:int = 30;
+				if (hasStatusEffect(StatusEffects.Displacement)) disDodgeChance += 50;
+				chance += disDodgeChance;
+			}
+
+			if (isRace(Races.DRACULA)) {
+				var draDodgeChance:int = 30;
+				if (hasStatusEffect(StatusEffects.ShadowTeleport)) draDodgeChance += 50;
+				chance += draDodgeChance;
+			}
+
+			chance += super.getEvasionChance();
+			if (hasStatusEffect(StatusEffects.GreenCovenant) || canAutoHit()) chance = 0;
+			return chance;
+		}
+
+		override public function canAutoHit():Boolean {
+			return flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1 && flags[kFLAGS.WAIT_STAND_STILL] == 1;
+		}
+
+		override public function calcSpeedDodge(attackSpeed:int):int {
+			if (canAutoHit()) return 0;
+			return super.calcSpeedDodge(attackSpeed);
+		}
+
+		override public function getEvasionReason(considerBlindSpeed:Boolean = true, attackSpeed:int = int.MIN_VALUE, hitModifier:int = 0, dodgeArray:Array = null):String {
+			var evasionReason:String;
+
+			if (canAutoHit()) return null;
+			if (!dodgeArray) dodgeArray = [];
+
+
+			if (considerBlindSpeed && game.monster.hasStatusEffect(StatusEffects.Blind) && rand(100) < 66) evasionReason = EVASION_BLIND;
+
+			if (considerBlindSpeed && game.monster && attackSpeed == int.MIN_VALUE) attackSpeed = game.monster.spe;
+
+			if (tallness < 48 && isBiped() && !isFlying()) {
+				var goblinDodgeChance:int = 0;
+				if (hasKeyItem("Spring Boots") >= 0) goblinDodgeChance = 10;
+				else if (hasKeyItem("Rocket Boots") >= 0) goblinDodgeChance = 20;
+				else if (hasKeyItem("Nitro Boots") >= 0) goblinDodgeChance = 30;
+				if (goblinDodgeChance > 0) dodgeArray.push([goblinDodgeChance, EVASION_EVADE]);
+			}
+
+			if (hasPerk(PerkLib.Misdirection) && armor.hasTag(ItemConstants.A_AGILE)) dodgeArray.push([10, EVASION_MISDIRECTION]);
+			if (hasPerk(PerkLib.Unhindered) && armor.hasTag(ItemConstants.A_AGILE)) dodgeArray.push([10, EVASION_UNHINDERED]);
+			if (CombatAbilities.HurricaneDance.isActive()) dodgeArray.push([25, EVASION_HURRICANE_DANCE]);
+
+			if (isRace(Races.FAIRY)) {
+				var fairyDodgeChance:int = 30;
+				if (hasStatusEffect(StatusEffects.Minimise)) fairyDodgeChance += 50;
+				dodgeArray.push([fairyDodgeChance, EVASION_MINIMISE]);
+			}
+
+			if (isRace(Races.CHESHIRE)) {
+				var chesDodgeChance:int = 30;
+				if (hasStatusEffect(StatusEffects.EverywhereAndNowhere)) chesDodgeChance += 50;
+				dodgeArray.push([chesDodgeChance, EVASION_PHASING]);
+			}
+
+			if (isRace(Races.DISPLACERBEAST)) {
+				var disDodgeChance:int = 30;
+				if (hasStatusEffect(StatusEffects.Displacement)) disDodgeChance += 50;
+				dodgeArray.push([disDodgeChance, EVASION_DISPLACING]);
+			}
+
+			if (isRace(Races.DRACULA)) {
+				var dreDodgeChance:int = 30;
+				if (hasStatusEffect(StatusEffects.ShadowTeleport)) dreDodgeChance += 50;
+				dodgeArray.push([dreDodgeChance, EVASION_PHASING]);
+			}
+
+			if (!evasionReason) evasionReason = super.getEvasionReason(considerBlindSpeed, attackSpeed, hitModifier, dodgeArray);
+
+			return evasionReason;
+		}
+
+		public function evadeRetaliate():void {
+			if (necklace == game.necklaces.CATBELL && isAnyRaceCached(Races.CatlikeRaces)){
+				CombatAbilities.Tease.perform(true,true, false,true);
+			}
+		}
+
 		public function eyesOfTheHunterAdeptBoost():Boolean {
 			return CoC.instance.monster.hasPerk(PerkLib.EnemyHugeType) || CoC.instance.monster.hasPerk(PerkLib.EnemyGroupType) || CoC.instance.monster.hasPerk(PerkLib.EnemyBeastOrAnimalMorphType) || CoC.instance.monster.hasPerk(PerkLib.EnemyConstructType) || CoC.instance.monster.hasPerk(PerkLib.EnemyFeralType) || CoC.instance.monster.hasPerk(PerkLib.EnemyGooType)
 			|| CoC.instance.monster.hasPerk(PerkLib.EnemyTrueDemon) || CoC.instance.monster.hasPerk(PerkLib.EnemyTrueAngel) || CoC.instance.monster.hasPerk(PerkLib.EnemyEliteType);
@@ -3883,12 +4023,16 @@ use namespace CoC;
 		}
 
 		public function henchmanBasedInvulnerabilityFrame():Boolean {
-			return statusEffectv3(StatusEffects.CombatFollowerZenji) == 1 || statusEffectv3(StatusEffects.CombatFollowerZenji) == 3;
+			return statusEffectv3(StatusEffects.CombatFollowerZenji) == 1 || statusEffectv3(StatusEffects.CombatFollowerZenji) == 3 || statusEffectv4(StatusEffects.CombatFollowerAyane) == 2;
 		}
 		public function henchmanBasedInvulnerabilityFrameTexts():void {
 			if (statusEffectv3(StatusEffects.CombatFollowerZenji) == 1 || statusEffectv3(StatusEffects.CombatFollowerZenji) == 3) {
 				outputText(" Zenji grits his teeth as he shields you, enduring several strikes from your opponent.");
 				addStatusValue(StatusEffects.CombatFollowerZenji, 3, 1);
+			}
+			if (statusEffectv4(StatusEffects.CombatFollowerAyane) == 2) {
+				outputText(" Ayane is defending you, parrying [themonster]’s attack with her weapon.");
+				addStatusValue(StatusEffects.CombatFollowerAyane, 4, -1);
 			}
 		}
 
@@ -4266,7 +4410,7 @@ use namespace CoC;
 			if (hasMutation(IMutationsLib.HumanSmartsIM)) internalHumanCounter += perkv1(IMutationsLib.HumanSmartsIM);//3
 			if (hasMutation(IMutationsLib.HumanTesticlesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanTesticlesIM);//4
 			if (hasMutation(IMutationsLib.HumanThyroidGlandIM)) internalHumanCounter += perkv1(IMutationsLib.HumanThyroidGlandIM);//3
-			if (hasMutation(IMutationsLib.HumanVersatilityIM)) internalHumanCounter += perkv1(IMutationsLib.HumanVersatilityIM);//2
+			if (hasMutation(IMutationsLib.HumanVersatilityIM)) internalHumanCounter += perkv1(IMutationsLib.HumanVersatilityIM);//3
 			End("Player","racialScore");
 			return internalHumanCounter;
 		}
@@ -4480,6 +4624,8 @@ use namespace CoC;
 				hiddenJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobGreySage))
 				hiddenJobs1++;
+			if (hasPerk(PerkLib.HiddenJobSwordImmortal))
+				hiddenJobs1++;
 			return hiddenJobs1;
 		}
 		public function maxHiddenJobs():Number {
@@ -4505,7 +4651,7 @@ use namespace CoC;
 		public function maxTotalMutationsInSlot(slot:String):int {
 			switch (slot) {
 				case IMutationPerkType.SLOT_ADAPTATIONS:
-					return 2 * (1 + maxHumanityBoost() + maxAscensionBoost());
+					return 2 * (1 + maxSlotsBoost());
 				case IMutationPerkType.SLOT_HEART:
 				case IMutationPerkType.SLOT_MUSCLE:
 				case IMutationPerkType.SLOT_MOUTH:
@@ -4522,7 +4668,7 @@ use namespace CoC;
 				case IMutationPerkType.SLOT_THYROID:
 				case IMutationPerkType.SLOT_PARATHYROID:
 				default:
-					return 1 + maxHumanityBoost() + maxAscensionBoost();
+					return 1 + maxSlotsBoost();
 			}
 		}
 		public function maxCurrentMutationsInSlot(slot:String):int {
@@ -4576,13 +4722,12 @@ use namespace CoC;
 		public function maxAdaptationsMutations():Number {
 			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_ADAPTATIONS);
 		}
-		public function maxAscensionBoost():Number {
-			return perkv1(PerkLib.AscensionAdditionalOrganMutationX);
-		}
-		public function maxHumanityBoost():Number {
-			var mHB:Number = 0;
-			if (hasPerk(PerkLib.HumanSupremacyAdvanced)) mHB += 1;
-			return mHB;
+		public function maxSlotsBoost():Number {
+			var mSB:Number = 0;
+			if (hasPerk(PerkLib.AscensionAdditionalOrganMutationX)) mSB += perkv1(PerkLib.AscensionAdditionalOrganMutationX);
+			if (hasPerk(PerkLib.HumanSupremacyAdvanced)) mSB += 1;
+			if (hasPerk(PerkLib.MunchkinAtBioLab)) mSB += 1;
+			return mSB;
 		}
 
 		public function lactationQ():Number
@@ -4623,8 +4768,8 @@ use namespace CoC;
 				total *= 1.5;
 			if (statusEffectv1(StatusEffects.LactationReduction) >= 48)
 				total = total * 1.5;
-			if (total > int.MAX_VALUE)
-				total = int.MAX_VALUE;
+			//limit to prevent reaching infinity
+			if(total >= Utils.MAX_SAFE_NUMBER_VALUE) total = Utils.MAX_SAFE_NUMBER_VALUE;
 			return total;
 		}
 
@@ -4722,6 +4867,7 @@ use namespace CoC;
 				if (oldHunger < 1 && hunger >= 250) EngineCore.awardAchievement("Champion Needs Food Badly (2)", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD_2);
 				if (oldHunger < 1 && hunger >= 500) EngineCore.awardAchievement("Champion Needs Food Badly (3)", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD_3);
 				if (oldHunger < 1 && hunger >= 1000) EngineCore.awardAchievement("Champion Needs Food Badly (4)", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD_4);
+				if (oldHunger < 1 && hunger >= 2500) EngineCore.awardAchievement("Champion Needs Food Badly (5)", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD_5);
 				if (oldHunger >= 90) EngineCore.awardAchievement("Glutton ", kACHIEVEMENTS.REALISTIC_GLUTTON);
 				if (oldHunger >= 240) EngineCore.awardAchievement("Epic Glutton ", kACHIEVEMENTS.REALISTIC_EPIC_GLUTTON);
 				if (oldHunger >= 490) EngineCore.awardAchievement("Legendary Glutton ", kACHIEVEMENTS.REALISTIC_LEGENDARY_GLUTTON);
@@ -4894,6 +5040,11 @@ use namespace CoC;
 					.filter(function(item:StatusEffectType, index:int, array:Array):Boolean{
 						return this.hasStatusEffect(item);},this)
 					.length;
+		}
+		
+		public function enemiesKillCount():Number
+		{
+			return (flags[kFLAGS.THIEFS_KILLED] + flags[kFLAGS.GOBLINS_KILLED] + flags[kFLAGS.HELLHOUNDS_KILLED] +flags[kFLAGS.IMPS_KILLED] +flags[kFLAGS.MINOTAURS_KILLED] + flags[kFLAGS.TRUE_DEMONS_KILLED]);
 		}
 
 		public function armorDescript(nakedText:String = "gear"):String
@@ -5160,9 +5311,14 @@ use namespace CoC;
 			var minLib:int = 0;
 			var minSen:int = 10;
 			var minCor:int = 0;
+			//Minimum Intelligence
+			if (this.hasPerk(PerkLib.ArigeanKnowledge)) {
+				minInt += 89;
+			}
 			//Minimum Libido
-			if (this.gender > 0) minLib += 5;
-
+			if (this.gender > 0) {
+				minLib += 5;
+			}
 			if (this.armorName == "lusty maiden's armor") {
 				if (minLib < 50) minLib = 50;
 			}
@@ -5348,6 +5504,8 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.OniMusculatureIM) >= 2) maxToneCap += 20;
 			if (perkv1(IMutationsLib.OniMusculatureIM) >= 3) maxToneCap += 30;
 			if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 2) maxToneCap += 10;
+			if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 3) maxToneCap += 10;
+			if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 4) maxToneCap += 10;
 			if (perkv1(IMutationsLib.HumanMusculatureIM) >= 1 && racialScore(Races.HUMAN) > 17) maxToneCap += 5;
 			if (perkv1(IMutationsLib.HumanMusculatureIM) >= 2 && racialScore(Races.HUMAN) > 17) maxToneCap += 10;
 			if (perkv1(IMutationsLib.HumanMusculatureIM) >= 3 && racialScore(Races.HUMAN) > 17) maxToneCap += 15;
@@ -5358,7 +5516,7 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 1) maxThicknessCap += 10;
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 2) maxThicknessCap += 20;
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 3) maxThicknessCap += 30;
-			if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 2) maxThicknessCap += 10;
+			if (perkv1(IMutationsLib.WhaleFatIM) >= 2) maxThicknessCap += 10;
 			if (perkv1(IMutationsLib.HumanFatIM) >= 1 && racialScore(Races.HUMAN) > 17) maxThicknessCap += 5;
 			if (perkv1(IMutationsLib.HumanFatIM) >= 2 && racialScore(Races.HUMAN) > 17) maxThicknessCap += 10;
 			if (perkv1(IMutationsLib.HumanFatIM) >= 3 && racialScore(Races.HUMAN) > 17) maxThicknessCap += 15;
@@ -5650,6 +5808,9 @@ use namespace CoC;
 			if(hasStatusEffect(StatusEffects.EverywhereAndNowhere)) {
 				removeStatusEffect(StatusEffects.EverywhereAndNowhere);
 			}
+			if(hasStatusEffect(StatusEffects.ShadowTeleport)) {
+				removeStatusEffect(StatusEffects.ShadowTeleport);
+			}
 			if(hasStatusEffect(StatusEffects.Displacement)) {
 				removeStatusEffect(StatusEffects.Displacement);
 			}
@@ -5853,8 +6014,11 @@ use namespace CoC;
 		}
 
 		public function hasLegendaryItem():Boolean {
+			for each (var itemSlot:ItemSlotClass in itemSlots){
+				if (itemSlot.itype.hasTag(ItemConstants.I_LEGENDARY)) return true;
+			}
 			for each (var item:ItemType in CoC.instance.weapons.Legendary())
-				for each (var itemSlot:ItemSlotClass in itemSlots){
+				for each (itemSlot in itemSlots){
 					if (itemSlot.itype == item) return true
 				}
 			for each (item in CoC.instance.weaponsrange.Legendary())
@@ -6319,6 +6483,7 @@ use namespace CoC;
 			var WeaponMasteryModifier:Number = 5;
             if ((hasPerk(PerkLib.RangeWeaponsMastery) && !melee) || (hasPerk(PerkLib.MeleeWeaponsMastery) && melee)) WeaponMasteryModifier -= 1;
 			if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) >= 2 && racialScore(Races.HUMAN) > 17) WeaponMasteryModifier -= 1;
+			if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) >= 3 && racialScore(Races.HUMAN) > 17) WeaponMasteryModifier -= 2;
 			var WeaponMasteryEXModifier:Number = masteryLevel + 1;
             if ((hasPerk(PerkLib.RangeWeaponsMasteryEx) && !melee) || (hasPerk(PerkLib.MeleeWeaponsMasteryEx) && melee)) WeaponMasteryEXModifier = Math.round(1 + (masteryLevel *.5));
 			var WeaponMasterySUModifier:Number = masteryLevel + 1;
@@ -6401,9 +6566,9 @@ use namespace CoC;
 				[Combat.MASTERY_FERAL, isFeralCombat(), [10, 20, 30, 40]],
 				[Combat.MASTERY_GAUNTLET, isGauntletWeapon(), [10, 20, 30, 40]],
 				[Combat.MASTERY_UNARMED, isUnarmedCombat(), [10, 20, 30, 40]],
-				[Combat.MASTERY_SMALL, weaponSpecials("Small") || weaponSpecials("Dual Small"), [10, 20, 30, 40]],
-				[Combat.MASTERY_LARGE, weaponSpecials("Large") || weaponSpecials("Dual Large"), [15, 30]],
-				[Combat.MASTERY_MASSIVE, weaponSpecials("Massive") || weaponSpecials("Dual Massive"), [30]],
+				[Combat.MASTERY_SMALL, weapon.isSmall(), [10, 20, 30, 40]],
+				[Combat.MASTERY_LARGE, weapon.isLarge(), [15, 30]],
+				[Combat.MASTERY_MASSIVE, weapon.isMassive(), [30]],
 				//[Combat.MASTERY_RANGED, isBowTypeWeapon() || isThrownTypeWeapon(), []],
 				[Combat.MASTERY_NORMAL, true, [10, 25, 40]] //the last one for "everything else"
 			];
@@ -6491,6 +6656,10 @@ use namespace CoC;
 			}
 			return rval;
 		}
+		
+		public function getRapierTrainingLevel():int {
+			return flags[kFLAGS.RAPHAEL_RAPIER_TRANING];
+		}
 
 		public function MiningMulti():Number {
 			var mineMlt:Number = 1;
@@ -6517,7 +6686,7 @@ use namespace CoC;
 			//-2;//4th
 			//-3;//6th
 			if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) >= 2 && racialScore(Races.HUMAN) > 17) expToLevelUp01 -= 1;
-			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) >= 3 && racialScore(Races.HUMAN) > 17) expToLevelUp01 -= 2;
 			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
 			if (hasPerk(PerkLib.UtilitySkillsBeginner)) expToLevelUp02 -= 1;
 			if (hasPerk(PerkLib.UtilitySkillsSkilled)) expToLevelUp02 -= 2;
@@ -6564,7 +6733,7 @@ use namespace CoC;
 			//-2;//4th
 			//-3;//6th
 			if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) >= 2 && racialScore(Races.HUMAN) > 17) expToLevelUp01 -= 1;
-			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) >= 3 && racialScore(Races.HUMAN) > 17) expToLevelUp01 -= 2;
 			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
 			if (hasPerk(PerkLib.UtilitySkillsBeginner)) expToLevelUp02 -= 1;
 			if (hasPerk(PerkLib.UtilitySkillsSkilled)) expToLevelUp02 -= 2;
@@ -6629,7 +6798,7 @@ use namespace CoC;
 			//-2;//4th
 			//-3;//6th
 			if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) >= 2 && racialScore(Races.HUMAN) > 17) expToLevelUp01 -= 1;
-			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) >= 3 && racialScore(Races.HUMAN) > 17) expToLevelUp01 -= 2;
 			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
 			if (hasPerk(PerkLib.UtilitySkillsBeginner)) expToLevelUp02 -= 1;
 			if (hasPerk(PerkLib.UtilitySkillsSkilled)) expToLevelUp02 -= 2;
@@ -6711,6 +6880,7 @@ use namespace CoC;
 			//-2;//4th
 			//-3;//6th
 			if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) >= 2 && racialScore(Races.HUMAN) > 17) expToLevelUp01 -= 1;
+			if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) >= 3 && racialScore(Races.HUMAN) > 17) expToLevelUp01 -= 2;
 			if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
 			if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
 			if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
@@ -6748,8 +6918,8 @@ use namespace CoC;
 		}
 
 		public function blockingBodyTransformations():Boolean {
-			return hasPerk(PerkLib.TransformationImmunity) || hasPerk(PerkLib.TransformationImmunity2) || hasPerk(PerkLib.TransformationImmunityBeeHandmaiden) || hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse)
-					|| hasPerk(PerkLib.BlessingOfTheAncestorTree) || hasEnchantment(EnchantmentLib.TfImmunity) || hasStatusEffect(StatusEffects.ArigeanInfected) || tailType == Tail.ARIGEAN_GREEN;
+			return hasPerk(PerkLib.TransformationImmunity) || hasPerk(PerkLib.TransformationImmunity2) || hasPerk(PerkLib.TransformationImmunityBeeHandmaiden) || hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse)|| hasPerk(PerkLib.BlessingOfTheAncestorTree)
+					|| hasItemEffect(IELib.TfImmunity) || hasStatusEffect(StatusEffects.ArigeanInfected) || tailType == Tail.ARIGEAN_GREEN || tailType == Tail.ARIGEAN_RED || tailType == Tail.ARIGEAN_YELLOW || tailType == Tail.ARIGEAN_PRINCESS;
 		}
 
 		public function manticoreFeed():void {
@@ -7330,7 +7500,7 @@ use namespace CoC;
 		
 		public function get XPMultiplier():Number {
 			var gain:Number = 1.0;
-			gain += 0.05*enchantmentPower(EnchantmentLib.BonusXp);
+			gain += itemEffectPower(IELib.BonusXp)/100;
 			return gain;
 		}
 		
@@ -7340,7 +7510,7 @@ use namespace CoC;
 				if (gender == 0 || gender == 3) min1 = 20;
 				if (gender == 2) min1 = 30;
 			}
-			var min2:Number = enchantmentPower(EnchantmentLib.MinFem) + enchantmentPower(EnchantmentLib.Androgyny);
+			var min2:Number = itemEffectPower(IELib.MinFem);
 			return Math.min(Math.max(min1, min2), 50);
 		}
 		public function get maxFem():Number {
@@ -7349,7 +7519,7 @@ use namespace CoC;
 				if (gender == 0 || gender == 3) max1 = 75;
 				if (gender == 1) max1 = 70;
 			}
-			var max2:Number = 100 - enchantmentPower(EnchantmentLib.MaxFem) - enchantmentPower(EnchantmentLib.Androgyny);
+			var max2:Number = 100 - itemEffectPower(IELib.MaxFem);
 			return Math.max(Math.min(max1, max2), 50);
 		}
 		//Modify femininity!
@@ -7502,6 +7672,7 @@ use namespace CoC;
 			for (var i:int = 0; i<durations.length; i++) {
 				durations[i] = 0;
 			}
-		}		
+		}
+		
 	}
 }

@@ -25,7 +25,6 @@ import classes.BodyParts.UnderBody;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.*;
-import classes.Items.ItemTags;
 import classes.Items.JewelryLib;
 import classes.Races.ElementalRace;
 import classes.Scenes.Combat.Combat;
@@ -97,20 +96,17 @@ public class Creature extends Utils
 		private var _weaponName:String = "";
 		private var _weaponVerb:String = "";
 		private var _weaponAttack:Number = 0;
-		private var _weaponPerk:String = "";
 		private var _weaponType:String = "";
 		private var _weaponValue:Number = 0;
 		public function get weaponName():String { return _weaponName; }
 		public function get weaponVerb():String { return _weaponVerb; }
 		public function get weaponAttack():Number { return _weaponAttack; }
 		//Warning: Deprecated since 0.8s2. New tagging system uses this args. DO NOT USE, MUST REPLACE WITH weaponSpecials
-		public function get weaponPerk():String { return _weaponPerk; }
 		public function get weaponType():String { return _weaponType; }
 		public function get weaponValue():Number { return _weaponValue; }
 		public function set weaponName(value:String):void { _weaponName = value; }
 		public function set weaponVerb(value:String):void { _weaponVerb = value; }
 		public function set weaponAttack(value:Number):void { _weaponAttack = value; }
-		public function set weaponPerk(value:String):void { _weaponPerk = value; }
 		public function set weaponValue(value:Number):void { _weaponValue = value; }
 		//Weapon range
 		private var _weaponRangeName:String = "";
@@ -450,6 +446,8 @@ public class Creature extends Utils
 		}
 		public function trainStatCap(statName: String, limit: Number):Number {
 			var cap:Number = limit;
+			//cap += 2 * host.perkv1(PerkLib.AscensionTranshumanism);
+			if (game.player.hasPerk(PerkLib.MunchkinAtBioLab)) cap += 10;
 			switch (statName) {
 				case "str":
 					var str:Number = 1;
@@ -678,7 +676,7 @@ public class Creature extends Utils
 					if (wis >= 81) max += Math.round(wis);
 					if (wis >= 101) max += Math.round(wis) * Math.floor( (wis-100)/50 + 1);
 				}
-			} 
+			}
 			if (hasPerk(PerkLib.IcyFlesh)) {
 				if (perkv1(IMutationsLib.FrozenHeartIM) >= 3) {
 					if (hasPerk(PerkLib.TankI)) max += Math.round(inte*18);
@@ -831,7 +829,7 @@ public class Creature extends Utils
 		}
 		public function maxHP():Number {
 			var max:Number = Math.round(maxHP_base()*maxHP_mult());
-			return Math.min(9999999,max);
+			return Math.min(19999999,max);
 		}
 		public function maxOverHP():Number {
 			var maxOver:Number = maxHP();
@@ -852,10 +850,11 @@ public class Creature extends Utils
 				if (bonus > limit) bonus = limit;
 				maxOver2 += (0.01 * bonus);
 			}
+			if (perkv1(IMutationsLib.LizanMarrowIM) >= 4) maxOver2 += 0.1;
 			if (perkv1(IMutationsLib.FerasBirthrightIM) >= 4) maxOver2 += 0.2;
 			maxOver *= maxOver2;//~270%
 			maxOver = Math.round(maxOver);
-			return Math.min(21999999,maxOver);
+			return Math.min(54999999,maxOver);
 		}
 		public function minHP():Number {
 			return 0;
@@ -935,6 +934,9 @@ public class Creature extends Utils
 			return Math.min(1609999,max1);
 		}
 		public function maxFatigue():Number {
+			return 150;
+		}
+		public function maxOverFatigue():Number {
 			return 150;
 		}
 		public function maxWrath():Number {
@@ -1126,7 +1128,7 @@ public class Creature extends Utils
 			if (applyRes) lustDmg *= lustPercent()/100; //the same as dynStats("lus", lustDmg, applyRes);
 			var ldi:int = int(lustDmg);
 			dynStats("lus", ldi);
-			SceneLib.combat.CommasForDigits(ldi, true);
+			if (display) SceneLib.combat.CommasForDigits(ldi, true);
 			return ldi;
 		}
 		/**
@@ -1135,7 +1137,7 @@ public class Creature extends Utils
 		 */
 		public function fatigueLeft():Number
 		{
-			return maxFatigue() - fatigue;
+			return maxOverFatigue() - fatigue;
 		}
 
 		/**
@@ -1151,7 +1153,6 @@ public class Creature extends Utils
 		 * speeds (1: narrowly avoid, 3: deftly avoid)
 		 */
 		public function calcSpeedDodge(attackSpeed:int):int {
-			if (this is Player && Combat.autoHitPlayer()) return 0;
 			var diff:Number = spe - attackSpeed;
 			var rnd:int = int(Math.random() * ((diff / 4) + 80));
 			if (rnd<=80) return 0;
@@ -2803,8 +2804,8 @@ public class Creature extends Utils
 			//if (quantity < 0) trace("SOMETHING HORRIBLY WRONG WITH CUM CALCULATIONS");
 			if (quantity < 2)
 				quantity = 2;
-			if (quantity > int.MAX_VALUE)
-				quantity = int.MAX_VALUE;
+			//limit to prevent reaching infinity
+			if(quantity >= Utils.MAX_SAFE_NUMBER_VALUE) quantity = Utils.MAX_SAFE_NUMBER_VALUE;
 			return quantity;
 		}
 
@@ -2841,11 +2842,8 @@ public class Creature extends Utils
 
 			cumCap *= cumMultiplier;
 			cumCap = Math.round(cumCap);
-			if (cumCap > int.MAX_VALUE)
-				cumCap = int.MAX_VALUE;
 			return cumCap;
 		}
-
 		public function countCocksOfType(type:CockTypesEnum):int {
             return countCocksWithType(type, -1, -1);
 		}
@@ -3621,6 +3619,7 @@ public class Creature extends Utils
 		public function hands():String { return arms.hasPawsOrHands(); }
 		// </mod>
 
+		public function hasFourArms():Boolean { return arms.hasFourArms(); }
 		public function legs():String { return lowerBodyPart.legs(); }
 		public function leg():String { return lowerBodyPart.leg(); }
 		public function feet():String { return lowerBodyPart.feet(); }
@@ -4357,106 +4356,66 @@ public class Creature extends Utils
 		public function getEvasionChance():Number
 		{
 			var chance:Number = 0;
-			var flychance:Number = 20;
-			if (hasPerk(PerkLib.AdvancedAerialCombat)) flychance += 5;
-			if (hasPerk(PerkLib.GreaterAerialCombat)) flychance += 15;
-			if (perkv1(IMutationsLib.HarpyHollowBonesIM) >= 2) flychance += 10;
-			if ((game.player.hasKeyItem("Jetpack") >= 0 || game.player.hasKeyItem("MK2 Jetpack") >= 0) && game.player.isInGoblinMech()) flychance += 25;
-			if (hasPerk(PerkLib.Evade)) {
-				chance += 5;
-				if (hasPerk(PerkLib.ImprovedEvade)) chance += 10;
-				if (hasPerk(PerkLib.GreaterEvade)) chance += 15;
-				if (hasPerk(PerkLib.JobRogue)) chance += 5;
-				if (hasPerk(PerkLib.Spectre) && hasPerk(PerkLib.Incorporeality)) chance += 10;
+
+			if (hasPerk(PerkLib.GreaterEvade)) chance += 15;
+			else if (hasPerk(PerkLib.ImprovedEvade)) chance += 10;
+			else if (hasPerk(PerkLib.Evade)) chance += 5;
+
+			if (hasPerk(PerkLib.JobRogue)) chance += 5;
+			if (hasPerk(PerkLib.Spectre) && hasPerk(PerkLib.Incorporeality)) chance += 10;
+			if (hasPerk(PerkLib.ElvenSense)) chance += 5;
+
+			if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) chance += 15;
+			else if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 2) chance += 10;
+
+			if (isFlying()) {
+				if (hasPerk(PerkLib.GreaterAerialCombat)) chance += 20;
+				else if (hasPerk(PerkLib.AdvancedAerialCombat)) chance += 10;
+				else chance += 5;
+			} else {
+				chance += (evadeStat.value * (game.time.hours < 7 || game.time.hours > 19? 2:1));
 			}
-			if (hasPerk(PerkLib.ElvenSense)) {
-				chance += 5;
-				if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 2) chance += 10;
-				if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) chance += 15;
-			}
+
+			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 4) chance += 20;
+			else if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 3) chance += 15;
+			else if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 2) chance += 10;
+			else if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1) chance += 5;
+
 			if (hasPerk(PerkLib.Flexibility)) chance += 6;
+
 			if (hasPerk(PerkLib.SmallFrame)) chance += 6;
-			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1) chance += 5;
-			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 2) chance += 5;
-			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 3) chance += 10;
-			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 4) chance += 10;
-			if (hasPerk(PerkLib.Misdirection) && (armorName == "red, high-society bodysuit" || armorName == "Fairy Queen Regalia")) chance += 10;
-			//if (hasPerk(PerkLib.Unhindered) && meetUnhinderedReq()) chance += 10;
-			if (hasPerk(PerkLib.Unhindered) && game.player.armor.hasTag(ItemTags.A_AGILE)) chance += 10;
-			if (game.player.armor == game.armors.R_CHANG || game.player.armor == game.armors.R_QIPAO || game.player.armor == game.armors.G_CHANG || game.player.armor == game.armors.G_QIPAO || game.player.armor == game.armors.B_CHANG || game.player.armor == game.armors.B_QIPAO || game.player.armor == game.armors.P_CHANG || game.player.armor == game.armors.P_QIPAO) chance += 5;
-			if (game.player.hasKeyItem("Spring Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) chance += 10;
-			if (game.player.hasKeyItem("Rocket Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) chance += 20;
-			if (game.player.hasKeyItem("Nitro Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) chance += 30;
-			if (game.player.necklace == game.necklaces.LEAFAMU) {
-				if (game.player.isElf()) chance += 20;
-				else chance += 10;
-			}
+
 			if (hasPerk(PerkLib.JunglesWanderer)) chance += 35;
+
 			if (hasStatusEffect(StatusEffects.Illusion)) {
-				if (perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3) chance += 30;
-				else chance += 10;
+				var illDodgeChance:int = 10;
+				if (perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 3) illDodgeChance += 20;
+				chance += illDodgeChance;
 			}
-			if (hasStatusEffect(StatusEffects.HurricaneDance)) chance += 25;
+
 			if (hasStatusEffect(StatusEffects.BladeDance)) chance += 30;
-			if (game.player.isRace(Races.CHESHIRE)) {
-				if (hasStatusEffect(StatusEffects.EverywhereAndNowhere)) chance += 80;
-				else chance += 30;
-			}
-			if (game.player.isRace(Races.DISPLACERBEAST)) {
-				if (hasStatusEffect(StatusEffects.Displacement)) chance += 80;
-				else chance += 30;
-			}
-			if (hasStatusEffect(StatusEffects.Displacement)) chance += 60;
-			if (game.player.shieldPerk == "Large" && !hasPerk(PerkLib.GigantGrip)) chance -= 20;
-			if (game.player.shieldPerk == "Massive") {
-				if (!hasPerk(PerkLib.GigantGrip)) chance -= 75;
-				else chance -= 30;
-			}
-			if (hasPerk(PerkLib.SereneMind) && (hasStatusEffect(StatusEffects.Berzerking) || hasStatusEffect(StatusEffects.Lustzerking))) chance += 10;
-			chance += evadeStat.value * (game.time.hours < 7 || game.time.hours > 19? 2:1);
-			if (game.player.hasStatusEffect(StatusEffects.Snow) && game.player.tallness < 84) chance -= 50;
-			if (hasPerk(PerkLib.ElementalBody)) {
-				switch (ElementalRace.getElementAndTier(this)) {
-					case ElementalRace.SYLPH_1:
-						chance += 10;
-						break;
-					case ElementalRace.SYLPH_2:
-						chance += 20;
-						break;
-					case ElementalRace.SYLPH_3:
-						chance += 30;
-						break;
-					case ElementalRace.SYLPH_4:
-						chance += 40;
-						break;
-					case ElementalRace.IGNIS_1:
-					case ElementalRace.UNDINE_1:
-						chance += 5;
-						break;
-					case ElementalRace.IGNIS_2:
-					case ElementalRace.UNDINE_2:
-						chance += 10;
-						break;
-					case ElementalRace.IGNIS_3:
-					case ElementalRace.UNDINE_3:
-						chance += 15;
-						break;
-					case ElementalRace.IGNIS_4:
-					case ElementalRace.UNDINE_4:
-						chance += 20;
-						break;
-				}
-			}
-			if (hasStatusEffect(StatusEffects.Flying)) chance += flychance;
-			if (hasStatusEffect(StatusEffects.GreenCovenant)) chance = 0;
 			return chance;
 		}
 
-		public const EVASION_SPEED:String = "Speed";
-		public const EVASION_EVADE:String = "Evade";
-		public const EVASION_FLEXIBILITY:String = "Flexibility";
-		public const EVASION_MISDIRECTION:String = "Misdirection";
-		public const EVASION_UNHINDERED:String = "Unhindered";
+		public static const EVASION_SPEED:String = "Speed";
+		public static const EVASION_EVADE:String = "Evade";
+		public static const EVASION_FLEXIBILITY:String = "Flexibility";
+		public static const EVASION_MISDIRECTION:String = "Misdirection";
+		public static const EVASION_UNHINDERED:String = "Unhindered";
+		public static const EVASION_BLIND:String = "Blind";
+		public static const EVASION_SMALL_FRAME:String = "Small frame";
+		public static const EVASION_HURRICANE_DANCE:String = "Hurricane Dance";
+		public static const EVASION_WANDERER:String = "Jungle's Wanderer";
+		public static const EVASION_ILLUSION:String = "Illusion";
+		public static const EVASION_BLADE_DANCE:String = "Blade Dance";
+		public static const EVASION_MINIMISE:String = "Minimise";
+		public static const EVASION_PHASING:String = "Phasing";
+		public static const EVASION_DISPLACING:String = "Displacing";
+		public static const EVASION_FLYING:String = "Flying";
+
+		public function canAutoHit():Boolean {
+			return false;
+		}
 
 		/**
 	    * Try to avoid and @return a reason if successfull or null if failed to evade.
@@ -4465,51 +4424,69 @@ public class Creature extends Utils
 		*
 		* This DOES account blind!
 	    */
-		public function getEvasionReason(useMonster:Boolean = true, attackSpeed:int = int.MIN_VALUE):String
-		{
+		public function getEvasionReason(considerBlindSpeed:Boolean = true, attackSpeed:int = int.MIN_VALUE, hitModifier:int = 0, dodgeArray:Array = null):String {
 			var evasionReason:String;
-			if (this is Player && Combat.autoHitPlayer()) return null;
-			if (useMonster && game.monster.hasStatusEffect(StatusEffects.Blind) && rand(100) < 66) return "Blind"; //first, handle blind
-			if (useMonster && game.monster != null && attackSpeed == int.MIN_VALUE) attackSpeed = game.monster.spe;
-			if (attackSpeed != int.MIN_VALUE && spe - attackSpeed > 0 && calcSpeedDodge(attackSpeed) > 0) return "Speed"; // now, handle speed
-			var generalevasion:Number = 0;
-			var flyeavsion:Number = 20;
-			if (hasPerk(PerkLib.Evade)) generalevasion += 5;
-			if (hasPerk(PerkLib.ImprovedEvade)) generalevasion += 10;
-			if (hasPerk(PerkLib.GreaterEvade)) generalevasion += 15;
-			if (hasPerk(PerkLib.JobRogue)) generalevasion += 5;
-			if (hasPerk(PerkLib.Spectre) && hasPerk(PerkLib.Incorporeality)) generalevasion += 10;
-			if (hasPerk(PerkLib.ElvenSense)) generalevasion += 5;
-			if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 2) generalevasion += 10;
-			if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) generalevasion += 15;
-			if (hasPerk(PerkLib.Flexibility)) generalevasion += 6;
-			if (hasPerk(PerkLib.SmallFrame)) generalevasion += 6;
-			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1) generalevasion += 5;
-			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 2) generalevasion += 5;
-			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 3) generalevasion += 10;
-			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 4) generalevasion += 10;
-			if (generalevasion > 0) flyeavsion += generalevasion;
-			if (hasPerk(PerkLib.AdvancedAerialCombat)) flyeavsion += 5;
-			if (hasPerk(PerkLib.GreaterAerialCombat)) flyeavsion += 15;
-			if (game.player.hasKeyItem("Spring Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) generalevasion += 10;
-			if (game.player.hasKeyItem("Rocket Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) generalevasion += 20;
-			if (game.player.hasKeyItem("Nitro Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) generalevasion += 30;
-			generalevasion += (evadeStat.value * (game.time.hours < 7 || game.time.hours > 19? 2:1));
-			// perks
-			if ((hasPerk(PerkLib.Evade) || hasPerk(PerkLib.ElvenSense) || game.player.necklace == game.necklaces.LEAFAMU || ((game.player.hasKeyItem("Nitro Boots") >= 0 || game.player.hasKeyItem("Rocket Boots") >= 0 || game.player.hasKeyItem("Spring Boots") >= 0) && game.player.tallness < 48 && game.player.isBiped())) && (rand(100) < generalevasion)) evasionReason = "Evade";
-			if ((hasPerk(PerkLib.Flexibility) || perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1) && (rand(100) < 6)) evasionReason = "Flexibility";
-			if ((hasPerk(PerkLib.SmallFrame) && (rand(100) < 6))) evasionReason = "Small frame";
-			if (hasPerk(PerkLib.Misdirection) && (game.player.armor.hasTag(ItemTags.A_AGILE)) && (rand(100) < 10)) evasionReason = "Misdirection";
-			if (hasPerk(PerkLib.Unhindered) && game.player.armor.hasTag(ItemTags.A_AGILE) && (rand(100) < 10)) evasionReason = "Unhindered";
-			if (hasPerk(PerkLib.JunglesWanderer) && (rand(100) < 35)) evasionReason = "Jungle's Wanderer";
-			if (hasStatusEffect(StatusEffects.Illusion) && rand(100) < (perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3 ? 30 : 10)) evasionReason = "Illusion";
-			if (hasStatusEffect(StatusEffects.Flying) && (rand(100) < flyeavsion)) evasionReason = "Flying";
-			if (hasStatusEffect(StatusEffects.HurricaneDance) && (rand(100) < 25)) evasionReason = "Hurricane Dance";
-			if (hasStatusEffect(StatusEffects.BladeDance) && (rand(100) < 30)) evasionReason = "Blade Dance";
-			if (game.player.isRace(Races.CHESHIRE) && ((!hasStatusEffect(StatusEffects.Minimise) && (rand(100) < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (rand(100) < 80)))) evasionReason = "Minimise";
-			if (game.player.isRace(Races.CHESHIRE) && ((!hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (rand(100) < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (rand(100) < 80)))) evasionReason = "Phasing";
-			if (game.player.isRace(Races.DISPLACERBEAST) && ((!hasStatusEffect(StatusEffects.Displacement) && (rand(100) < 30)) || (hasStatusEffect(StatusEffects.Displacement) && (rand(100) < 80)))) evasionReason = "Displacing";
-			if (game.player.necklace == game.necklaces.CATBELL && game.player.isAnyRaceCached(Races.CatlikeRaces) && evasionReason) CombatAbilities.Tease.perform();
+			if (!dodgeArray) dodgeArray = [];
+			
+			if (hasStatusEffect(StatusEffects.GreenCovenant)) return null;
+			if (considerBlindSpeed && attackSpeed != int.MIN_VALUE && spe - attackSpeed > 0 && calcSpeedDodge(attackSpeed) > 0) return EVASION_SPEED;
+
+			var evadeChance:int = 0;
+
+			if (hitModifier > 0) evadeChance += hitModifier;
+			else if (hitModifier < 0) dodgeArray.push([hitModifier, null]);
+
+			if (hasPerk(PerkLib.GreaterEvade)) evadeChance += 15;
+			else if (hasPerk(PerkLib.ImprovedEvade)) evadeChance += 10;
+			else if (hasPerk(PerkLib.Evade)) evadeChance += 5;
+
+			if (hasPerk(PerkLib.JobRogue)) evadeChance += 5;
+			if (hasPerk(PerkLib.Spectre) && hasPerk(PerkLib.Incorporeality)) evadeChance += 10;
+			if (hasPerk(PerkLib.ElvenSense)) evadeChance += 5;
+
+			if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) evadeChance += 15;
+			else if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 2) evadeChance += 10;
+
+			if (isFlying()) {
+				if (hasPerk(PerkLib.GreaterAerialCombat)) evadeChance += 20;
+				else if (hasPerk(PerkLib.AdvancedAerialCombat)) evadeChance += 10;
+				else evadeChance += 5;
+
+				dodgeArray.push([evadeChance, EVASION_FLYING]);
+			} else {
+				evadeChance += (evadeStat.value * (game.time.hours < 7 || game.time.hours > 19? 2:1));
+				dodgeArray.push([evadeChance, EVASION_EVADE]);
+			}
+
+			var flexDodgeChance:int = 0;
+			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 4) flexDodgeChance += 20;
+			else if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 3) flexDodgeChance += 15;
+			else if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 2) flexDodgeChance += 10;
+			else if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1) flexDodgeChance += 5;
+			if (hasPerk(PerkLib.Flexibility)) flexDodgeChance += 6;
+			if (flexDodgeChance > 0) dodgeArray.push([flexDodgeChance, EVASION_FLEXIBILITY]);
+
+			if (hasPerk(PerkLib.SmallFrame)) dodgeArray.push([6, EVASION_SMALL_FRAME]);
+
+			if (hasPerk(PerkLib.JunglesWanderer)) dodgeArray.push([35, EVASION_WANDERER]);
+
+			if (hasStatusEffect(StatusEffects.Illusion)) {
+				var illDodgeChance:int = 10;
+				if (perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 3) illDodgeChance += 20;
+				dodgeArray.push([illDodgeChance, EVASION_ILLUSION]);
+			}
+
+			if (hasStatusEffect(StatusEffects.BladeDance)) dodgeArray.push([30, EVASION_BLADE_DANCE]);
+
+			//Any remaining chances will cause the attack to hit
+			var currentDodgeSum:int = 0;
+			for each (var pair:Array in dodgeArray) {
+				currentDodgeSum += pair[0];
+			}
+			if (currentDodgeSum < 100) dodgeArray.push([(100 - currentDodgeSum), null]);
+
+			evasionReason = Utils.weightedRandom(dodgeArray);
+			
 			return evasionReason;
 		}
 
@@ -4581,9 +4558,9 @@ public class Creature extends Utils
 
 		}
 
-		public function getEvasionRoll(useMonster:Boolean = true, attackSpeed:int = int.MIN_VALUE):Boolean
+		public function getEvasionRoll(considerBlindSpeed:Boolean = true, attackSpeed:int = int.MIN_VALUE, hitModifier:int = 0):Boolean
 		{
-			return getEvasionReason(useMonster, attackSpeed) != null;
+			return getEvasionReason(considerBlindSpeed, attackSpeed, hitModifier) != null;
 		}
 
 		public function get vagorass():IOrifice {
@@ -4829,6 +4806,22 @@ public class Creature extends Utils
 					trace("External Function Trigger Failed. \n" + e.getStackTrace());
 				}
 			}
+		}
+
+		/**
+		 * Function called when a statuseffect is added to a creature, to allow for additional functionality
+		 * @param Status Effect Instance being attached
+		 */
+		public function onStatusAttach(sec:StatusEffectClass):void {
+			//Do nothing
+		}
+
+		/**
+		 * Function called when a statuseffect is removed from a creature, to allow for additional functionality
+		 * @param Status Effect Instance being removed
+		 */
+		public function onStatusRemove(sec:StatusEffectClass):void {
+			//Do nothing
 		}
 	}
 }

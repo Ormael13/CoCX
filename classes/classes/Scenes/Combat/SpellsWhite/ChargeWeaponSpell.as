@@ -1,4 +1,5 @@
 package classes.Scenes.Combat.SpellsWhite {
+import classes.Items.ItemConstants;
 import classes.PerkLib;
 import classes.Scenes.Combat.AbstractWhiteSpell;
 import classes.Scenes.Combat.CombatAbilities;
@@ -55,20 +56,20 @@ public class ChargeWeaponSpell extends AbstractWhiteSpell {
 	
 	private function weaponSizeBoost():Number {
 		var ab12:Number = 1;
-		if (player.weaponSpecials("") || player.weaponSpecials("Dual")) ab12 *= 2;
-		if (player.weaponSpecials("Hybrid")) ab12 *= 2.5;
-		if (player.weaponSpecials("Large") || player.weaponSpecials("Dual Large")) ab12 *= 3;
-		if (player.weaponSpecials("Massive")) ab12 *= 4;
+		if (player.weapon.isHybrid()) ab12 *= 2.5;
+		else if (player.weapon.isMedium()) ab12 *= 2;
+		else if (player.weapon.isLarge()) ab12 *= 3;
+		else if (player.weapon.isMassive()) ab12 *= 4;
 		if (player.weapon == weapons.MGSWORD) ab12 *= 2;
 		return ab12;
 	}
 	
 	private function weaponSizeManaCost():Number {
 		var ba21:Number = 1;
-		if (player.weaponSpecials("") || player.weaponSpecials("Dual Small")) ba21 *= 2;
-		if (player.weaponSpecials("Hybrid")) ba21 *= 3;
-		if (player.weaponSpecials("Large") || player.weaponSpecials("Dual")) ba21 *= 4;
-		if (player.weaponSpecials("Massive") || player.weaponSpecials("Dual Large")) ba21 *= 8;
+		if (player.weapon.isHybrid()) ba21 *= 3;
+		else if (player.weapon.isDualSmall() || player.weapon.isSingleMedium()) ba21 *= 2;
+		else if (player.weapon.isDualMedium() || player.weapon.isSingleLarge()) ba21 *= 4;
+		else if (player.weapon.isDualLarge() || player.weapon.isSingleMassive()) ba21 *= 8;
 		return ba21;
 	}
 	
@@ -97,7 +98,7 @@ public class ChargeWeaponSpell extends AbstractWhiteSpell {
 			ChargeWeaponBoostCap *= 2;
 			ChargeWeaponBoost *= 2;
 		}
-		//ChargeWeaponBoost += Math.round(player.intStat.max * 0.1); - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
+		//ChargeWeaponBoost += Math.round(player.intStat.max * 0.1); - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells (maybe only when they have a perk from the prestige job: magus/warlock/another related to spells)
 		if (player.hasPerk(PerkLib.JobEnchanter)) ChargeWeaponBoost *= 1.2;
 		ChargeWeaponBoost *= spellModWhite();
 		//ChargeWeaponBoost = FnHelpers.FN.logScale(ChargeWeaponBoost,ChargeWeaponABC,10);

@@ -45,21 +45,37 @@ public final class Mutations extends MutationsHelper {
             minlustx: 0.5
         }, "DrunkenPowerEmpower", {text: "Drunken Power", rate: Buff.RATE_HOURS, tick: durationhour});
     }
-	
-	
 	public function DrunkenPowerEmpowerIfPossible():void {
 		if (CanDrunkenPowerEmpower()) DrunkenPowerEmpower();
 	}
 	public function CanDrunkenPowerEmpower():Boolean {
 		return !player.statStore.hasBuff("DrunkenPowerEmpower") && CoC.instance.inCombat && player.racialScore(Races.ONI) >= DrunkenPowerEmpowerOni();
 	}
-
     public function DrunkenPowerEmpowerOni():Number {
         var bonusempoweroni:Number = 12;
         if (player.perkv1(IMutationsLib.OniMusculatureIM) >= 1) bonusempoweroni -= 6;
         if (player.perkv1(IMutationsLib.OniMusculatureIM) >= 2) bonusempoweroni -= 3;
         return bonusempoweroni;
     }
+	
+	public function AelfwineEmpower():void {
+		outputText("\n\nDamn all this alcohol makes you feel horny… too horny to hide it. You could use getting laid a few times right now, ideally with multiple partners. As you drown your personality and morales into alcohol becoming increasingly more degenerate and lascivious your opponent gets all the more aroused by the sight!");
+        var bonusempower:Number = 2;
+        var bonusdepower:Number = 0.5;
+        var durationhour:Number = 2;
+        bonusempower *= player.lib;
+		bonusdepower *= player.inte;
+        player.statStore.replaceBuffObject({
+            inte: -bonusdepower,
+            lib: bonusempower
+        }, "AelfwineEmpower", {text: "Aelfwine Power", rate: Buff.RATE_HOURS, tick: durationhour});
+    }
+	public function AelfwineEmpowerIfPossible():void {
+		if (CanAelfwineEmpower()) AelfwineEmpower();
+	}
+	public function CanAelfwineEmpower():Boolean {
+		return !player.statStore.hasBuff("AelfwineEmpower") && player.hasPerk(PerkLib.Aelfwine);
+	}
 
     //ManUp Beer
     public function manUpBeer(player:Player):void {
@@ -74,6 +90,7 @@ public final class Mutations extends MutationsHelper {
         }
         player.refillHunger(10);
         DrunkenPowerEmpowerIfPossible();
+		AelfwineEmpowerIfPossible();
     }
 	
 	//Agility Elixir
@@ -714,11 +731,15 @@ public final class Mutations extends MutationsHelper {
         if (player.hasPerk(PerkLib.SoulApprentice)) {
             if (!player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
                 outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into flames.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new soul skill: Flames of Love (Rankless).</b>");
-                player.createStatusEffect(StatusEffects.KnowsFlamesOfLove, 1, 0, 0, 0);
+                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new soul skill: Flames of Love (Low Rank).</b>");
+                player.createStatusEffect(StatusEffects.KnowsFlamesOfLove, 2, 0, 0, 0);
                 return;
             }
-            if (player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
+            else if (player.statusEffectv1(StatusEffects.KnowsFlamesOfLove) < 2) {
+                outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into flames.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new soul skill: Flames of Love (Low Rank).</b>");
+                player.changeStatusValue(StatusEffects.KnowsFlamesOfLove, 1, 2);
+            } else {
                 outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
                 EngineCore.SoulforceChange(50);
             }
@@ -748,10 +769,14 @@ public final class Mutations extends MutationsHelper {
             if (!player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
                 outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into icicles.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new soul skill: Icicles of Love (Low Rank).</b>");
-                player.createStatusEffect(StatusEffects.KnowsIciclesOfLove, 1, 0, 0, 0);
+                player.createStatusEffect(StatusEffects.KnowsIciclesOfLove, 2, 0, 0, 0);
                 return;
             }
-            if (player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
+            else if (player.statusEffectv1(StatusEffects.KnowsIciclesOfLove) < 2) {
+                outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into icicles.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new soul skill: Icicles of Love (Low Rank).</b>");
+                player.changeStatusValue(StatusEffects.KnowsIciclesOfLove, 1, 2);
+            } else {
                 outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
                 EngineCore.SoulforceChange(50);
             }
@@ -780,11 +805,15 @@ public final class Mutations extends MutationsHelper {
         if (player.hasPerk(PerkLib.SoulApprentice)) {
             if (!player.hasStatusEffect(StatusEffects.KnowsStormOfSisterhood)) {
                 outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling wrath into lighting.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new soul skill: Storm of Sisterhood (Rankless).</b>");
-                player.createStatusEffect(StatusEffects.KnowsStormOfSisterhood, 1, 0, 0, 0);
+                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new soul skill: Storm of Sisterhood (Low Rank).</b>");
+                player.createStatusEffect(StatusEffects.KnowsStormOfSisterhood, 2, 0, 0, 0);
                 return;
             }
-            if (player.hasStatusEffect(StatusEffects.KnowsStormOfSisterhood)) {
+            else if (player.statusEffectv1(StatusEffects.KnowsStormOfSisterhood) < 2) {
+                outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling wrath into lighting.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new soul skill: Storm of Sisterhood (Low Rank).</b>");
+                player.changeStatusValue(StatusEffects.KnowsStormOfSisterhood, 1, 2);
+            } else {
                 outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
                 EngineCore.SoulforceChange(50);
             }
@@ -813,11 +842,15 @@ public final class Mutations extends MutationsHelper {
         if (player.hasPerk(PerkLib.SoulApprentice)) {
             if (!player.hasStatusEffect(StatusEffects.KnowsNightOfBrotherhood)) {
                 outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling wrath into darkness.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new soul skill: Night of Brotherhood (Rankless).</b>");
-                player.createStatusEffect(StatusEffects.KnowsNightOfBrotherhood, 1, 0, 0, 0);
+                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new soul skill: Night of Brotherhood (Low Rank).</b>");
+                player.createStatusEffect(StatusEffects.KnowsNightOfBrotherhood, 2, 0, 0, 0);
                 return;
             }
-            if (player.hasStatusEffect(StatusEffects.KnowsNightOfBrotherhood)) {
+            else if (player.hasStatusEffect(StatusEffects.KnowsNightOfBrotherhood)) {
+                outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling wrath into darkness.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new soul skill: Night of Brotherhood (Low Rank).</b>");
+                player.changeStatusValue(StatusEffects.KnowsNightOfBrotherhood, 1, 2);
+            } else {
                 outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
                 EngineCore.SoulforceChange(50);
             }
@@ -831,6 +864,44 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("You open the manual, and discover it seems to be almost unreadable. It looks like it would teach the reader to use some sort of soul skill, but it seems all very fragmentary. In no time at all, you've read the whole thing, and like other manuscripts, it starts to disappear into thin air. When you are left with nothing to do, you are considering your next course of action when a new thought begins to circulate in your mind. The more it circles, it seems to literally 'suck you in'. You try to stop it, but it's too late. 'Would I at least not hit the ground...' is the last not devoured thought you have before blanking out. [pg]After an unknown amount of time, you awake on the floor with the knowledge of a b>new soul skill: Devourer/b> seared into your mind.");
         player.createStatusEffect(StatusEffects.KnowsHeavensDevourer, 1, 0, 0, 0);
+    }
+	
+    public function soaringbladesmanual(player:Player):void {
+        clearOutput();
+		if (player.hasPerk(PerkLib.Dantain)) {
+			if (!player.hasPerk(PerkLib.SoaringBlades)) {
+				outputText("You open the manual and read it slowly. Initially, it seems needlessly complicated, but you take a moment to read it a again, slowly working out the parts as the aspect becomes clearer. It goes into depth about lowering the consumption of soulforce when manipulating flying swords. You can see the ways it teaches you how to lower consumption when the change is not related to progressing through each minor or major cultivation realm, but due to progression developing dantain. From Qi Condensation and Foundation Establishment toward Golden Core or Nascent Soul.\n\n");
+				outputText("You're feeling more enlightened, closer and closer with each thorough read. You read from the beginning once again, before you finally close the manual with a sense of enlightenment. You barely notice the manual fading away in your grasp. (<b>Gained Perk: Soaring Blades!</b>)");
+				player.createPerk(PerkLib.SoaringBlades, 0, 0, 0, 0);
+				return;
+			}
+			if (player.hasPerk(PerkLib.SoaringBlades)) {
+				outputText("When you open the manual, it turns out you already know this passive.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+				EngineCore.SoulforceChange(150);
+			}
+		} else {
+			outputText("You open the manual, and discover to your horror it's way too complicated passive to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
+            outputText("You should be more careful next time to not waste any new manual by trying to learn it when you not even found your own Dantian.");
+		}
+    }
+	
+    public function firstattackflyingswordmanual(player:Player):void {
+        clearOutput();
+		if (player.hasPerk(PerkLib.SoulWarrior) && player.hasPerk(PerkLib.SoaringBlades) && player.level >= 24) {
+			if (!player.hasPerk(PerkLib.FirstAttackFlyingSword)) {
+				outputText("You open the manual and read it slowly. Initially, it seems needlessly complicated, but you take a moment to read it a again, slowly working out the parts as the aspect becomes clearer. It goes into depth about using flying swords to attack enemy before you act. You can see the ways it teaches you how to use them in way allowing more independent actions with very minimal amount of concentration, which you could now use elsewhere.\n\n");
+				outputText("You're feeling more enlightened, closer and closer with each thorough read. You read from the beginning once again, before you finally close the manual with a sense of enlightenment. You barely notice the manual fading away in your grasp. (<b>Gained Perk: First Attack: Flying Sword!</b>)");
+				player.createPerk(PerkLib.FirstAttackFlyingSword, 0, 0, 0, 0);
+				return;
+			}
+			if (player.hasPerk(PerkLib.FirstAttackFlyingSword)) {
+				outputText("When you open the manual, it turns out you already know this passive.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+				EngineCore.SoulforceChange(150);
+			}
+		} else {
+			outputText("You open the manual, and discover to your horror it's way too complicated passive to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
+            outputText("You should be more careful next time to not waste any new manual by trying to learn it when you neither: reached Soul Warrior stage, learned Souaring Blades passive, been strong enough (lvl 24+).");
+		}
     }
 
     public function verydilutedarcaneregenconcotion(player:Player):void {
@@ -3749,10 +3820,10 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Give the player hoofs, if the player already has hoofs STRIP FUR
-        if (tainted && player.lowerBody != LowerBody.HOOFED && player.ears.type == Ears.COW) {
+        if (tainted && player.lowerBody != LowerBody.CLOVEN_HOOFED && player.ears.type == Ears.COW) {
             if (changes < changeLimit && rand(3) == 0) {
                 outputText("[pg]");
-                transformations.LowerBodyHoofed().applyEffect();
+                transformations.LowerBodyClovenHoofed().applyEffect();
                 dynStats("cor", 0);
                 changes++;
             }
@@ -3862,159 +3933,6 @@ public final class Mutations extends MutationsHelper {
         player.refillHunger(20);
     }
 
-    public function blackSpellbook(player:Player):void {
-        clearOutput();
-        outputText("You open the small black book, and discover it to be an instructional book on the use of black magic.  Most of it is filled with generic information about black magic - how it is drawn from emotions (typically lust), and how it has the power to affect bodies and emotions.  It also warns against using it on oneself, as it is difficult to draw on your emotions while meddling with your own body.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-        if (player.inte < 30) {
-            outputText("[pg]You feel greatly enlightened by your time spent reading.");
-            KnowledgeBonus("int", 4);
-        } else if (player.inte < 60) {
-            outputText("[pg]Spending some time reading was probably good for you, and you definitely feel smarter for it.");
-            KnowledgeBonus("int", 2);
-        } else if (player.inte < 90) {
-            outputText("[pg]After reading the small tome your already quick mind feels invigorated.");
-            KnowledgeBonus("int", 1);
-        } else {
-            outputText("[pg]The contents of the book did little for your already considerable intellect.");
-            KnowledgeBonus("int", 0.5);
-        }
-        //Smart enough for ice spike and doesnt have it
-        if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsIceSpike)) {
-            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Ice Spike.</b>");
-            player.createStatusEffect(StatusEffects.KnowsIceSpike, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for darkness shard and doesnt have it
-        if (player.inte >= 25 && !player.hasStatusEffect(StatusEffects.KnowsDarknessShard)) {
-            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Darkness Shard.</b>");
-            player.createStatusEffect(StatusEffects.KnowsDarknessShard, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for arouse and doesnt have it
-        if (player.inte >= 30 && !player.hasStatusEffect(StatusEffects.KnowsArouse)) {
-            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Arouse.</b>");
-            player.createStatusEffect(StatusEffects.KnowsArouse, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for regenerate and doesnt have it
-        if (player.inte >= 35 && !player.hasStatusEffect(StatusEffects.KnowsRegenerate)) {
-            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Regenerate.</b>");
-            player.createStatusEffect(StatusEffects.KnowsRegenerate, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for might and doesnt have it
-        if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsMight)) {
-            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Might.</b>");
-            player.createStatusEffect(StatusEffects.KnowsMight, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for blink and doesnt have it
-        if (player.inte >= 45 && !player.hasStatusEffect(StatusEffects.KnowsBlink)) {
-            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Blink.</b>");
-            player.createStatusEffect(StatusEffects.KnowsBlink, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for arctic gale and doesnt have it
-        if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsArcticGale)) {
-            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Arctic Gale.</b>");
-            player.createStatusEffect(StatusEffects.KnowsArcticGale, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for dusk wave and doesnt have it
-        if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsDuskWave)) {
-            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Dusk Wave.</b>");
-            player.createStatusEffect(StatusEffects.KnowsDuskWave, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for wave of ecstasy and doesnt have it
-        if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsWaveOfEcstasy)) {
-            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Wave of Ecstasy.</b>");
-            player.createStatusEffect(StatusEffects.KnowsWaveOfEcstasy, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for ice rain and doesnt have it
-        if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsIceRain)) {
-            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Ice Rain.</b>");
-            player.createStatusEffect(StatusEffects.KnowsIceRain, 0, 0, 0, 0);
-            return;
-        }
-		//Smart enough for nosferatu and doesnt have it
-		if (player.inte >= 110 && !player.hasStatusEffect(StatusEffects.KnowsNosferatu)) {
-			outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Nosferatu.</b>");
-			player.createStatusEffect(StatusEffects.KnowsNosferatu, 0, 0, 0, 0);
-			return;
-		}
-		if (player.hasPerk(PerkLib.PrestigeJobNecromancer) || player.hasPerk(PerkLib.PrestigeJobGreySage)) {
-			//Smart enough for Bone spirit and doesnt have it
-			if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsBoneSpirit)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Bone spirit.</b>");
-				player.createStatusEffect(StatusEffects.KnowsBoneSpirit, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for Bone armor and doesnt have it
-			if (player.inte >= 105 && !player.hasStatusEffect(StatusEffects.KnowsBoneArmor)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Bone armor.</b>");
-				player.createStatusEffect(StatusEffects.KnowsBoneArmor, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for Corpse Explosion and doesnt have it
-			if (player.inte >= 110 && !player.hasStatusEffect(StatusEffects.KnowsCorpseExplosion)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Corpse Explosion.</b>");
-				player.createStatusEffect(StatusEffects.KnowsCorpseExplosion, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for Blood Shower and doesnt have it
-			if (player.inte >= 115 && !player.hasStatusEffect(StatusEffects.KnowsBloodShower)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Blood Shower.</b>");
-				player.createStatusEffect(StatusEffects.KnowsBloodShower, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for Boneshatter and doesnt have it
-			if (player.inte >= 120 && !player.hasStatusEffect(StatusEffects.KnowsBoneshatter)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Boneshatter.</b>");
-				player.createStatusEffect(StatusEffects.KnowsBoneshatter, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for Necrotic Rot and doesnt have it
-			if (player.inte >= 125 && !player.hasStatusEffect(StatusEffects.KnowsNecroticRot)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Necrotic Rot.</b>");
-				player.createStatusEffect(StatusEffects.KnowsNecroticRot, 0, 0, 0, 0);
-				return;
-			}
-		}
-		if (player.hasPerk(PerkLib.HexKnowledge) || player.hasPerk(PerkLib.PrestigeJobGreySage)) {
-			//Smart enough for lifetap and doesnt have it
-			if (player.inte >= 150 && !player.hasStatusEffect(StatusEffects.KnowsLifetap)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Lifetap.</b>");
-				player.createStatusEffect(StatusEffects.KnowsLifetap, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for life siphon and doesnt have it
-			if (player.inte >= 160 && !player.hasStatusEffect(StatusEffects.KnowsLifeSiphon)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Life siphon.</b>");
-				player.createStatusEffect(StatusEffects.KnowsLifeSiphon, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for consuming darkness and doesnt have it
-			if (player.inte >= 170 && !player.hasStatusEffect(StatusEffects.KnowsConsumingDarkness)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Consuming darkness.</b>");
-				player.createStatusEffect(StatusEffects.KnowsConsumingDarkness, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for curse of desire and doesnt have it
-			if (player.inte >= 180 && !player.hasStatusEffect(StatusEffects.KnowsCurseOfDesire)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Curse of Desire.</b>");
-				player.createStatusEffect(StatusEffects.KnowsCurseOfDesire, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for curse of weeping and doesnt have it
-			if (player.inte >= 190 && !player.hasStatusEffect(StatusEffects.KnowsCurseOfWeeping)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Curse of Weeping.</b>");
-				player.createStatusEffect(StatusEffects.KnowsCurseOfWeeping, 0, 0, 0, 0);
-			}
-		}
-    }
-
     public function blackPolarMidnight(player:Player):void {
         clearOutput();
         outputText("You open the small scroll, and discover it to be an instructional scroll on the use of grey magic.  Most of it is filled with generic information about grey magic - how it is drawn from both mental focus and emotions (typically lust), is difficult to use when tired and too little or too much aroused, and is used to at the same time create or control energy and affect bodies or emotions to create final effect.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
@@ -4028,408 +3946,6 @@ public final class Mutations extends MutationsHelper {
         outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Meteor Shower.</b>");
         player.createStatusEffect(StatusEffects.KnowsMeteorShower, 0, 0, 0, 0);
     }
-
-    public function greySpellbook(player:Player):void {
-        clearOutput();
-        outputText("You open the grey volume, and discover it to be an instructional book on the use of grey magic.  Most of it is filled with generic information about grey magic - how it is drawn from both mental focus and emotions (typically lust), is difficult to use when tired and too little or too much aroused, and is used to at the same time create or control energy and affect bodies or emotions to create final effect.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-        if (player.inte < 75) {
-            outputText("[pg]You feel greatly enlightened by your time spent reading.");
-            KnowledgeBonus("int", 4);
-        } else if (player.inte < 100) {
-            outputText("[pg]Spending some time reading was probably good for you, and you definitely feel smarter for it.");
-            KnowledgeBonus("int", 2);
-        } else if (player.inte < 125) {
-            outputText("[pg]After reading the small tome your already quick mind feels invigorated.");
-            KnowledgeBonus("int", 1);
-        } else {
-            outputText("[pg]The contents of the book did little for your already considerable intellect.");
-            KnowledgeBonus("int", 0.5);
-        }
-        if (player.hasPerk(PerkLib.GreyMagic) || player.hasPerk(PerkLib.PrestigeJobGreySage)) {
-            //Smart enough for mana shield and doesnt have it
-            if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsManaShield)) {
-                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Mana Shield.</b>");
-                player.createStatusEffect(StatusEffects.KnowsManaShield, 0, 0, 0, 0);
-				return;
-            }
-            //Smart enough for Water Ball and doesnt have it
-            if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsWaterBall)) {
-                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Water Ball.</b>");
-                player.createStatusEffect(StatusEffects.KnowsWaterBall, 0, 0, 0, 0);
-				return;
-            }
-            //Smart enough for Wind Bullet and doesnt have it
-            if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsWindBullet)) {
-                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Wind Bullet.</b>");
-                player.createStatusEffect(StatusEffects.KnowsWindBullet, 0, 0, 0, 0);
-				return;
-            }
-            //Smart enough for Stalagmite and doesnt have it
-            if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsStalagmite)) {
-                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Stalagmite.</b>");
-                player.createStatusEffect(StatusEffects.KnowsStalagmite, 0, 0, 0, 0);
-				return;
-            }
-            //Smart enough for Acid Spray and doesnt have it
-            if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsAcidSpray)) {
-                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Acid Spray.</b>");
-                player.createStatusEffect(StatusEffects.KnowsAcidSpray, 0, 0, 0, 0);
-				return;
-            }
-            //Smart enough for Clear Mind and doesnt have it
-            if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsClearMind)) {
-                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Clear Mind.</b>");
-                player.createStatusEffect(StatusEffects.KnowsClearMind, 0, 0, 0, 0);
-				return;
-            }
-            //Smart enough for Water Sphere and doesnt have it
-            if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsWaterSphere)) {
-                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Water Sphere.</b>");
-                player.createStatusEffect(StatusEffects.KnowsWaterSphere, 0, 0, 0, 0);
-				return;
-            }
-            //Smart enough for Wind Blast and doesnt have it
-            if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsWindBlast)) {
-                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Wind Blast.</b>");
-                player.createStatusEffect(StatusEffects.KnowsWindBlast, 0, 0, 0, 0);
-				return;
-            }
-            //Smart enough for Shatterstone and doesnt have it
-            if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsShatterstone)) {
-                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Shatterstone.</b>");
-                player.createStatusEffect(StatusEffects.KnowsShatterstone, 0, 0, 0, 0);
-				return;
-            }
-            //Smart enough for Corrosive Wave and doesnt have it
-            if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsCorrosiveWave)) {
-                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Corrosive Wave.</b>");
-                player.createStatusEffect(StatusEffects.KnowsCorrosiveWave, 0, 0, 0, 0);
-				return;
-            }
-            //Smart enough for Hydro Acid and doesnt have it
-            if (player.inte >= 75 && !player.hasStatusEffect(StatusEffects.KnowsHydroAcid)) {
-                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Hydro Acid.</b>");
-                player.createStatusEffect(StatusEffects.KnowsHydroAcid, 0, 0, 0, 0);
-				return;
-            }
-            //Smart enough for Energy Drain and doesnt have it
-            if (player.inte >= 80 && !player.hasStatusEffect(StatusEffects.KnowsEnergyDrain)) {
-                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Energy Drain.</b>");
-                player.createStatusEffect(StatusEffects.KnowsEnergyDrain, 0, 0, 0, 0);
-				return;
-            }
-            //Smart enough for Acid Rain and doesnt have it
-            if (player.inte >= 85 && !player.hasStatusEffect(StatusEffects.KnowsAcidRain)) {
-                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Acid Rain.</b>");
-                player.createStatusEffect(StatusEffects.KnowsAcidRain, 0, 0, 0, 0);
-				return;
-            }
-            //Smart enough for Restore and doesnt have it
-            if (player.inte >= 90 && !player.hasStatusEffect(StatusEffects.KnowsRestore)) {
-                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Restore.</b>");
-                player.createStatusEffect(StatusEffects.KnowsRestore, 0, 0, 0, 0);
-				return;
-            }
-            //Smart enough for Balance of Life and doesnt have it
-            if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsBalanceOfLife)) {
-                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Balance of Life.</b>");
-                player.createStatusEffect(StatusEffects.KnowsBalanceOfLife, 0, 0, 0, 0);
-            }
-        }
-    }
-
-    public function whiteSpellbook(player:Player):void {
-        clearOutput();
-        outputText("You open the white tome, and discover it to be an instructional book on the use of white magic.  Most of it is filled with generic information about white magic - how it is drawn for mental focus, is difficult to use when tired or aroused, and can be used to create and control energy.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-        if (player.inte < 30) {
-            outputText("[pg]You feel greatly enlightened by your time spent reading.");
-            KnowledgeBonus("int", 4);
-        } else if (player.inte < 60) {
-            outputText("[pg]Spending some time reading was probably good for you, and you definitely feel smarter for it.");
-            KnowledgeBonus("int", 2);
-        } else if (player.inte < 90) {
-            outputText("[pg]After reading the small tome your already quick mind feels invigorated.");
-            KnowledgeBonus("int", 1);
-        } else {
-            outputText("[pg]The contents of the book did little for your already considerable intellect.");
-            KnowledgeBonus("int", 0.6);
-        }
-        //Smart enough for whitefire and doesnt have it
-        if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
-            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Whitefire.</b>");
-            player.createStatusEffect(StatusEffects.KnowsWhitefire, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for lightning bolt and doesnt have it
-        if (player.inte >= 25 && !player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) {
-            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Lightning Bolt.</b>");
-            player.createStatusEffect(StatusEffects.KnowsLightningBolt, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for charge weapon and doesnt have it
-        if (player.inte >= 30 && !player.hasStatusEffect(StatusEffects.KnowsCharge)) {
-            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Charge Weapon.</b>");
-            player.createStatusEffect(StatusEffects.KnowsCharge, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for charge range weapon and doesnt have it
-        if (player.inte >= 35 && !player.hasStatusEffect(StatusEffects.KnowsChargeR)) {
-            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Charge Range Weapon.</b>");
-            player.createStatusEffect(StatusEffects.KnowsChargeR, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for charge armor and doesnt have it
-        if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
-            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Charge Armor.</b>");
-            player.createStatusEffect(StatusEffects.KnowsChargeA, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for heal and doesnt have it
-        if (player.inte >= 45 && !player.hasStatusEffect(StatusEffects.KnowsHeal)) {
-            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Heal.</b>");
-            player.createStatusEffect(StatusEffects.KnowsHeal, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for blind and doesnt have it
-        if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBlind)) {
-            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Blind.</b>");
-            player.createStatusEffect(StatusEffects.KnowsBlind, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for pyre burst and doesnt have it
-        if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsPyreBurst)) {
-            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Pyre Burst.</b>");
-            player.createStatusEffect(StatusEffects.KnowsPyreBurst, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for chain lightning and doesnt have it
-        if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsChainLighting)) {
-            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Chain Lighting.</b>");
-            player.createStatusEffect(StatusEffects.KnowsChainLighting, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for blizzard and doesnt have it
-        if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
-            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Blizzard.</b>");
-            player.createStatusEffect(StatusEffects.KnowsBlizzard, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for Mental Shield and doesnt have it
-        if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsMentalShield)) {
-            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Mental Shield.</b>");
-            player.createStatusEffect(StatusEffects.KnowsMentalShield, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for Cure and doesnt have it
-        if (player.inte >= 75 && !player.hasStatusEffect(StatusEffects.KnowsCure)) {
-            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Cure.</b>");
-            player.createStatusEffect(StatusEffects.KnowsCure, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for fire storm and doesnt have it
-        if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsFireStorm)) {
-            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Fire Storm.</b>");
-            player.createStatusEffect(StatusEffects.KnowsFireStorm, 0, 0, 0, 0);
-            return;
-        }
-		if (player.hasPerk(PerkLib.DivineKnowledge) || player.hasPerk(PerkLib.PrestigeJobGreySage)) {
-			//Smart enough for Aegis and doesnt have it
-			if (player.inte >= 150 && !player.hasStatusEffect(StatusEffects.KnowsAegis)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Aegis.</b>");
-				player.createStatusEffect(StatusEffects.KnowsAegis, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for Exorcise and doesnt have it
-			if (player.inte >= 160 && !player.hasStatusEffect(StatusEffects.KnowsExorcise)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Exorcise.</b>");
-				player.createStatusEffect(StatusEffects.KnowsExorcise, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for Divine Shield and doesnt have it
-			if (player.inte >= 170 && !player.hasStatusEffect(StatusEffects.KnowsDivineShield)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Divine Shield.</b>");
-				player.createStatusEffect(StatusEffects.KnowsDivineShield, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for Thunderstorm and doesnt have it
-			if (player.inte >= 180 && !player.hasStatusEffect(StatusEffects.KnowsThunderstorm)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Thunderstorm.</b>");
-				player.createStatusEffect(StatusEffects.KnowsThunderstorm, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for Tears of Denial and doesnt have it
-			if (player.inte >= 190 && !player.hasStatusEffect(StatusEffects.KnowsTearsOfDenial)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Tears of Denial.</b>");
-				player.createStatusEffect(StatusEffects.KnowsTearsOfDenial, 0, 0, 0, 0);
-			}
-		}
-		if (player.hasPerk(PerkLib.PrestigeJobGreySage)) {
-			//Smart enough for Plant growth and doesnt have it
-			if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsPlantGrowth)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new green spell: Plant growth.</b>");
-				player.createStatusEffect(StatusEffects.KnowsPlantGrowth, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for Entangle and doesnt have it
-			if (player.inte >= 110 && !player.hasStatusEffect(StatusEffects.KnowsEntangle)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new green spell: Entangle.</b>");
-				player.createStatusEffect(StatusEffects.KnowsEntangle, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for Briarthorn and doesnt have it
-			if (player.inte >= 120 && !player.hasStatusEffect(StatusEffects.KnowsBriarthorn)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new green spell: Briarthorn.</b>");
-				player.createStatusEffect(StatusEffects.KnowsBriarthorn, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for Death Blossom and doesnt have it
-			if (player.inte >= 130 && !player.hasStatusEffect(StatusEffects.KnowsDeathBlossom)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new green spell: Death Blossom.</b>");
-				player.createStatusEffect(StatusEffects.KnowsDeathBlossom, 0, 0, 0, 0);
-				return;
-			}
-		}
-    }
-
-	public function redManuscript(player:Player):void {
-		clearOutput();
-        outputText("You open the red manuscript and discover it to be an instructional on the use of blood magic.  The book shares generic information about blood magic, generally what you'd expect anyway - how to draw it using your blood as well as the positive and negative effects of repeated use.  It doesn't take long to read a few pages, but before you can stow it away for later, the book vanishes within your hands. The same metallic scent lingers on your [claws], the lingering smell of blood is stained on you... at least for the time being.");
-        if (player.inte < 30) {
-            outputText("[pg]You feel greatly enlightened by your time spent reading.");
-            KnowledgeBonus("int", 4);
-        } else if (player.inte < 60) {
-            outputText("[pg]Spending some time reading was probably good for you, and you definitely feel smarter for it.");
-            KnowledgeBonus("int", 2);
-        } else if (player.inte < 90) {
-            outputText("[pg]After reading the small tome your already quick mind feels invigorated.");
-            KnowledgeBonus("int", 1);
-        } else {
-            outputText("[pg]The contents of the manuscript did little for your already considerable intellect.");
-            KnowledgeBonus("int", 0.6);
-        }
-		if (player.hasPerk(PerkLib.HiddenJobBloodDemon) || player.hasPerk(PerkLib.PrestigeJobGreySage)) {
-			//Smart enough for Blood Missiles and doesnt have it
-			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsBloodMissiles)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Missiles.</b>");
-				player.createStatusEffect(StatusEffects.KnowsBloodMissiles, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for Blood Shield and doesnt have it
-			if (player.inte >= 30 && !player.hasStatusEffect(StatusEffects.KnowsBloodShield)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Shield.</b>");
-				player.createStatusEffect(StatusEffects.KnowsBloodShield, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for Blood Explosion and doesnt have it
-			if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsBloodExplosion)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Explosion.</b>");
-				player.createStatusEffect(StatusEffects.KnowsBloodExplosion, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for Blood Chains and doesnt have it
-			if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBloodChains)) {//not yet have additional effect from Way of the Blood
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Chains.</b>");
-				player.createStatusEffect(StatusEffects.KnowsBloodChains, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for Blood Wave and doesnt have it
-			if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsBloodWave)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Wave.</b>");
-				player.createStatusEffect(StatusEffects.KnowsBloodWave, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for Lifesteal Enchantment and doesnt have it
-			if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsLifestealEnchantment)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood spell: Lifesteal Enchantment.</b>");
-				player.createStatusEffect(StatusEffects.KnowsLifestealEnchantment, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for Blood Field and doesnt have it
-			if (player.inte >= 80 && !player.hasStatusEffect(StatusEffects.KnowsBloodField)) {//not yet have additional effect from Way of the Blood
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Field.</b>");
-				player.createStatusEffect(StatusEffects.KnowsBloodField, 0, 0, 0, 0);
-			}
-		}
-	}
-
-	public function crimsonJade(player:Player):void {
-		clearOutput();
-        outputText("You touch the crimson jade only to discover that it seems to be an instructional on the use of blood soulskills. The jade shares generic information about blood soulskills. The contents seem to go over the basics; how to draw power using your blood as well as the consequences of repeated use, beneficial or not.[pg]");
-		outputText("It doesn't take long to absorb all knowledge stored in jade, but before you can stow it away for later, the crystal crumbles into crimson dust. The same metallic scent lingers on your [claws], the lingering smell of blood is stained on you... at least for the time being.");
-        if (player.wis < 30) {
-            outputText("[pg]You feel greatly enlightened by your time spent reading.");
-            KnowledgeBonus("wis", 4);
-        } else if (player.wis < 60) {
-            outputText("[pg]Spending some time reading was probably good for you, and you definitely feel wiser for it.");
-            KnowledgeBonus("wis", 2);
-        } else if (player.wis < 90) {
-            outputText("[pg]After reading the crimson jade your already quick mind feels invigorated.");
-            KnowledgeBonus("wis", 1);
-        } else {
-            outputText("[pg]The contents of the jade did little for your already considerable wisdom.");
-            KnowledgeBonus("wis", 0.6);
-        }
-		if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) {
-			//Smart enough for Blood Swipe and doesnt have it
-			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.KnowsBloodSwipe)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Blood Swipe.</b>");
-				player.createStatusEffect(StatusEffects.KnowsBloodSwipe, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for Heart Seeker and doesnt have it
-			if (player.wis >= 30 && !player.hasStatusEffect(StatusEffects.KnowsHeartSeeker)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Heart Seeker.</b>");
-				player.createStatusEffect(StatusEffects.KnowsHeartSeeker, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for Blood Dewdrops and doesnt have it
-			if (player.wis >= 40 && !player.hasStatusEffect(StatusEffects.KnowsBloodDewdrops)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Blood Dewdrops.</b>");
-				player.createStatusEffect(StatusEffects.KnowsBloodDewdrops, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for Blood Requiem and doesnt have it
-			if (player.wis >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBloodRequiem)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Blood Requiem.</b>");
-				player.createStatusEffect(StatusEffects.KnowsBloodRequiem, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for Crimson Overflow and doesnt have it
-			
-			//Smart enough for Scarlet Spirit Charge and doesnt have it
-			if (player.wis >= 70 && !player.hasStatusEffect(StatusEffects.KnowsScarletSpiritCharge)) {//not yet have additional effect from Way of the Blood
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Scarlet Spirit Charge.</b>");
-				player.createStatusEffect(StatusEffects.KnowsScarletSpiritCharge, 0, 0, 0, 0);
-				return;
-			}
-		}
-		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) {
-			//Smart enough for SF Infused Blood Swipe and doesnt have it
-			if (player.wis >= 30 && !player.hasStatusEffect(StatusEffects.KnowsBloodSwipeSF)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Blood Swipe.</b>");
-				player.createStatusEffect(StatusEffects.KnowsBloodSwipeSF, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for SF Infused Heart Seeker and doesnt have it
-			if (player.wis >= 40 && !player.hasStatusEffect(StatusEffects.KnowsHeartSeekerSF)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Heart Seeker.</b>");
-				player.createStatusEffect(StatusEffects.KnowsHeartSeekerSF, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for SF Infused Blood Dewdrops and doesnt have it
-			if (player.wis >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBloodDewdropsSF)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Blood Dewdrops.</b>");
-				player.createStatusEffect(StatusEffects.KnowsBloodDewdropsSF, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for SF Infused Blood Requiem and doesnt have it
-			if (player.wis >= 60 && !player.hasStatusEffect(StatusEffects.KnowsBloodRequiemSF)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Blood Requiem.</b>");
-				player.createStatusEffect(StatusEffects.KnowsBloodRequiemSF, 0, 0, 0, 0);
-				//return;
-			}
-		}
-	}
 
     public function lustDraft(fuck:Boolean, player:Player):void {
         player.slimeFeed();
@@ -4533,6 +4049,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("Whoa it was definitely tasting just as bad as it smelled but hey it's not like your drinking this disgusting concoction for fun right? Or maybe you are?");
 		DrunkenPowerEmpowerIfPossible();
+		AelfwineEmpowerIfPossible();
         dynStats("lus", 15, "scale", false);
         dynStats("cor", 2);
         //Stronger
@@ -4748,6 +4265,7 @@ public final class Mutations extends MutationsHelper {
         outputText("You drink the ale, finding it to have a remarkably smooth yet potent taste.  You lick your lips and sneeze, feeling slightly tipsy.");
         //STAT CHANGES
 		DrunkenPowerEmpowerIfPossible();
+		AelfwineEmpowerIfPossible();
         dynStats("lus", 15, "scale", false);
         //Stronger
         if (player.str > 50 && rand(3) == 0 && changes < changeLimit) {
@@ -5593,8 +5111,8 @@ public final class Mutations extends MutationsHelper {
         if (type == 1 && player.skinColor != "light purple" && changes < changeLimit && rand(3) == 0) {
             changes++;
             outputText("[pg]It takes a while for you to notice, but <b>");
-            if (player.hasCoat()) outputText("the skin under your [fur color] [skin coat.desc]");
-            else outputText("your [skin desc]" + player.skinDesc);
+            if (player.hasCoat()) outputText("the skin under your [fur color] " + player.skinDesc);
+            else outputText("your " + player.skinDesc);
             outputText(" has changed to become ");
             player.skinColor = "light purple";
             outputText("[skin color] colored.</b>");
@@ -7689,6 +7207,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("You uncork the hip flash and drink it down.  The taste is actualy quite good, like an alcohol but with a little fire within.  Just as you expected it makes you feel all hot and ready to take whole world head on.");
 		DrunkenPowerEmpowerIfPossible();
+		AelfwineEmpowerIfPossible();
         //Statistical changes:
         //-Reduces speed down to 70.
         if (player.spe > 70 && changes < changeLimit && rand(4) == 0) {
@@ -8078,6 +7597,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("You uncork the bottle and drink it down.  The taste is actualy quite sweet, like an alcohol but with a hint of hazelnuts flavor.  Would it change anything about you than making feeling of warmth spreading inside?");
 		DrunkenPowerEmpowerIfPossible();
+		AelfwineEmpowerIfPossible();
         //Statistical changes:
         //-Raises speed up to 90.
         if (changes < changeLimit && rand(3) == 0 && MutagenBonus("spe", 1)) {
@@ -9658,6 +9178,7 @@ public final class Mutations extends MutationsHelper {
         if (player.blockingBodyTransformations()) {
             outputText("[pg]<b>You won't get anything from drinking this... aside getting drunk.</b>");
 			DrunkenPowerEmpowerIfPossible();
+			AelfwineEmpowerIfPossible();
             return;
         }
         //no drink for bimbos!
@@ -9783,6 +9304,7 @@ public final class Mutations extends MutationsHelper {
             player.removePerk(PerkLib.Feeder);
         }
 		DrunkenPowerEmpowerIfPossible();
+		AelfwineEmpowerIfPossible();
         dynStats("str", 35, "tou", 35, "lib", 5, "lus", 40);
         player.addCurse("int", 1, 1);
         player.refillHunger(30);
@@ -9916,12 +9438,11 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Incorporeality perk
-        if (changes < changeLimit && rand(3) == 0) {
+        if ((player.lowerBody == LowerBody.GHOST || player.lowerBody == LowerBody.GHOST_2) && !player.hasPerk(PerkLib.Incorporeality) && changes < changeLimit && rand(3) == 0) {
             //(ghost-legs!  Absolutely no problem with regular encounters, though! [if you somehow got this with a centaur it'd probably do nothing cuz you're not supposed to be a centaur with ectoplasm ya dingus])
-            player.gainPerk(PerkLib.Incorporeality,
-                    InCollection(player.skinColor, "white", "sable") && player.hairType == Hair.GHOST,
-                    "An otherworldly sensation begins in your belly, working its way to your [hips]. Before you can react, your [legs] begin to tingle, and you fall on your rump as a large shudder runs through them. As you watch, your lower body shimmers, becoming ethereal, wisps rising from the newly ghost-like [legs]. You manage to rise, surprised to find your new, ghostly form to be as sturdy as its former corporeal version. Suddenly, like a dam breaking, fleeting visions and images flow into your head, never lasting long enough for you to concentrate on one. You don't even realize it, but your arms fly up to your head, grasping your temples as you groan in pain. As fast as the mental bombardment came, it disappears, leaving you with a surprising sense of spiritual superiority.  <b>You have ghost legs!</b>"
-            );
+            outputText("An otherworldly sensation begins in your belly, working its way to your [hips]. Before you can react, your [legs] begin to tingle, and you fall on your rump as a large shudder runs through them. As you watch, your lower body shimmers, becoming ethereal, wisps rising from the newly ghost-like [legs]. You manage to rise, surprised to find your new, ghostly form to be as sturdy as its former corporeal version. Suddenly, like a dam breaking, fleeting visions and images flow into your head, never lasting long enough for you to concentrate on one. You don't even realize it, but your arms fly up to your head, grasping your temples as you groan in pain. As fast as the mental bombardment came, it disappears, leaving you with a surprising sense of spiritual superiority.  <b>You have ghost legs!</b>");
+			player.createPerk(PerkLib.Incorporeality, 0, 0, 0, 0);
+            changes++;
         }
         //Face
         if (player.eyes.type == Eyes.GHOST && player.faceType != Face.GHOST && changes < changeLimit && rand(3) == 0 && type == 1) {
@@ -10151,6 +9672,7 @@ public final class Mutations extends MutationsHelper {
         changeLimit += player.additionalTransformationChances;
         outputText("You drink the mead, finding it to have a remarkably smooth yet potent taste.  You lick your lips and sneeze, feeling slightly tipsy.");
 		DrunkenPowerEmpowerIfPossible();
+		AelfwineEmpowerIfPossible();
         //Stats
         if (rand(3) == 0 && changes < changeLimit && MutagenBonus("str", 1)) {
             outputText("[pg]Your fill your muscles filling with orc might.");
@@ -11619,6 +11141,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("You examine the jewel for a bit, rolling it around in your hand as you ponder its mysteries.  You hold it up to the light with fascinated curiosity, watching the eerie red fluid swirling within.  Without warning, the gem splits into four pieces, dissolving into nothing in your hand.  Liquid from within quickly seeps into your skin leaving you a bit tipsy.");
 		DrunkenPowerEmpowerIfPossible();
+		AelfwineEmpowerIfPossible();
         //Statistical changes:
 		//-Reduces speed down to 70.
         if (player.spe > 70 && changes < changeLimit && rand(2) == 0) {
@@ -11872,6 +11395,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Grow hair: Your scalp is beset by pins and needles as your hair grows out, stopping after it reaches [medium/long] length.}
 		DrunkenPowerEmpowerIfPossible();
+		AelfwineEmpowerIfPossible();
         player.refillHunger(20);
     }
 
@@ -11905,6 +11429,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Grow hair: Your scalp is beset by pins and needles as your hair grows out, stopping after it reaches [medium/long] length.}
 		DrunkenPowerEmpowerIfPossible();
+		AelfwineEmpowerIfPossible();
         player.refillHunger(80);
     }
 
@@ -11922,7 +11447,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("You gulp the bottle's contents, and its sweet taste immediately invigorates you, making you feel calm and concentrated");
         //-60 fatigue, -2 libido, -20 lust]
-        fatigue(-(Math.round(player.maxFatigue() * 0.05) + 180));
+        fatigue(-(Math.round(player.maxOverFatigue() * 0.05) + 180));
         dynStats("lus", -(Math.round(player.maxLust() * 0.05) + 90), "cor", -2);
         player.addCurse("lib", 2, 1);
 		if (player.perkv1(IMutationsLib.DisplacerMetabolismIM) >= 1) player.displacerFeedFromBottle();
@@ -11934,7 +11459,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("The water is cool and sweet to the taste, and every swallow makes you feel calmer, cleaner, and refreshed.  You drink until your thirst is quenched, feeling purer in both mind and body. ");
         //-30 fatigue, -2 libido, -10 lust]
-        fatigue(-(Math.round(player.maxFatigue() * 0.02) + 40));
+        fatigue(-(Math.round(player.maxOverFatigue() * 0.02) + 40));
         dynStats("lus", -(Math.round(player.maxLust() * 0.06) + 100), "cor", (-4 - rand(3)));
         player.addCurse("lib", 2, 1);
         HPChange(100 + (10 * player.level) + rand(10 * player.level), true);
@@ -12590,7 +12115,7 @@ public final class Mutations extends MutationsHelper {
     public function purityPeach(player:Player):void {
         clearOutput();
         outputText("You bite into the sweet, juicy peach, feeling a sensation of energy sweeping through your limbs and your mind.  You feel revitalized, refreshed, and somehow cleansed.  ");
-        fatigue(-(Math.round(player.maxFatigue() * 0.01)+10));
+        fatigue(-(Math.round(player.maxOverFatigue() * 0.01)+10));
         HPChange(Math.round(player.maxHP() * 0.20), true);
         player.refillHunger(20);
     }
@@ -15466,13 +14991,13 @@ public final class Mutations extends MutationsHelper {
         }
         //physical changes
         //legs
-        if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.HOOFED) {
+        if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.CLOVEN_HOOFED) {
             outputText("[pg]");
-            transformations.LowerBodyHoofed(2).applyEffect();
+            transformations.LowerBodyClovenHoofed(2).applyEffect();
             changes++;
         }
         //tail
-        if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LowerBody.HOOFED && (player.tailType != Tail.GOAT && player.tailType != Tail.DEMONIC)) {
+        if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LowerBody.CLOVEN_HOOFED && (player.tailType != Tail.GOAT && player.tailType != Tail.DEMONIC)) {
             outputText("[pg]");
             if (rand(2) == 0) {
                 transformations.TailGoat.applyEffect();
@@ -15569,6 +15094,7 @@ public final class Mutations extends MutationsHelper {
             player.removePerk(IMutationsLib.DiamondHeartIM);
         }
 		DrunkenPowerEmpowerIfPossible();
+		AelfwineEmpowerIfPossible();
         player.refillHunger(10);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
@@ -15934,6 +15460,7 @@ public final class Mutations extends MutationsHelper {
         if (player.tone < 70) player.modTone(70, rand(3));
         if (player.femininity > 30) player.modFem(30, rand(3));
 		DrunkenPowerEmpowerIfPossible();
+		AelfwineEmpowerIfPossible();
     }
 
     public function jabberwockyScale(player:Player):void {
@@ -17622,4 +17149,4 @@ public final class Mutations extends MutationsHelper {
 		player.herbXP(HE);
     }
 }
-}
+}

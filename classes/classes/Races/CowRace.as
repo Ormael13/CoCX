@@ -38,7 +38,7 @@ public class CowRace extends Race {
 		addScores()
 				.earType(Ears.COW, +1)
 				.tailType(Tail.COW, +1)
-				.legType(LowerBody.HOOFED, +1)
+				.legType(LowerBody.CLOVEN_HOOFED, +1)
 				.hornType(Horns.COW_MINOTAUR, +1)
 				.customRequirement("","milk production > 500",
 						function (body:BodyData):Boolean {

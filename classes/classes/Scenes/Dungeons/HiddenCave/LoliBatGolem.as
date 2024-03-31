@@ -28,9 +28,11 @@ public class LoliBatGolem extends Monster
 		
 		override protected function performCombatAction():void
 		{
-			var choice:Number = rand(2);
-			if (choice == 0) eAttack();
-			if (choice == 1) clawstrike();
+			if ((this.lust100 >= 85 && rand(2) == 0) || this.lust100 < 85) {
+				var choice:Number = rand(2);
+				if (choice == 0) eAttack();
+				if (choice == 1) clawstrike();
+			}
 		}
 		
 	//	override public function defeated(hpVictory:Boolean):void
@@ -61,7 +63,7 @@ public class LoliBatGolem extends Monster
 			this.hips.type = Hips.RATING_SLENDER + 1;
 			this.butt.type = Butt.RATING_AVERAGE;
 			this.bodyColor = "light grey";
-			this.lustVuln = 0;
+			this.lustVuln = 0.01;
 			this.tallness = 48;
 			this.drop = new ChainedDrop()
 					.add(useables.GOLCORE, 1);

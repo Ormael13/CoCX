@@ -28,6 +28,17 @@ public class ItemConstants extends Utils {
 	public static const CATEGORY_USABLE:String        = "useable";
 	public static const CATEGORY_OTHER:String         = "other";
 	
+	// Item tags
+	
+	/**
+	 * To legendary items, which will have a level requirement to equip
+	 */
+	public static const I_LEGENDARY:String     = "Legendary";
+	/**
+	 * For consumables that trigger a transformation
+	 */
+	public static const U_TF:String             = "tf";
+	
 	/////////////////////
 	// Generic equipable
 	/////////////////////
@@ -184,14 +195,27 @@ public class ItemConstants extends Utils {
 	public static const AP_LIGHT_AYO:String       = "Light Ayo";
 	public static const AP_HEAVY_AYO:String       = "Heavy Ayo";
 	public static const AP_ULTRA_HEAVY_AYO:String = "Ultra Heavy Ayo";
+	// Armor tags
+	/**
+	 * For armors that display a lot of skin and thus count as naked for tease purpose and perks such as naked truth
+	 * Value: none.
+	 */
+	public static const A_REVEALING:String      = "Revealing";
+	/**
+	 * For armors that are flexible or nearly as flexible as if wearing nothing
+	 * Value: none.
+	 */
+	public static const A_AGILE:String          = "Agile";
 	
 	/////////////////
 	// Weapons
 	/////////////////
 	
 	// Weapon classes
+	public static const WT_FISTS:String         = "Fists"; // Only for *the* fists (no weapon equipped)
+	public static const WT_BOW:String           = "Bow";
 	public static const WT_AXE:String           = "Axe";
-	public static const WT_DAGGER:String        = "Dagger"; //~
+	public static const WT_DAGGER:String        = "Dagger";
 	public static const WT_DUELING:String       = "Dueling";
 	public static const WT_EXOTIC:String        = "Exotic";
 	public static const WT_GAUNTLET:String      = "Gauntlet";
@@ -204,9 +228,7 @@ public class ItemConstants extends Utils {
 	public static const WT_SWORD:String         = "Sword";
 	public static const WT_WHIP:String          = "Whip";
 	public static const WT_WAND:String         	= "Wand";
-	public static const WT_TOME:String         	= "Tome";
 	// Ranged weapon classes
-	public static const WT_BOW:String           = "Bow";
 	public static const WT_CROSSBOW:String      = "Crossbow";
 	public static const WT_THROWING:String      = "Throwing";
 	public static const WT_DUAL_FIREARMS:String = "Dual Firearms";
@@ -214,61 +236,34 @@ public class ItemConstants extends Utils {
 	public static const WT_RIFLE:String         = "Rifle";
 	public static const WT_2H_FIREARM:String    = "2H Firearm";
 	public static const WT_DUAL_2H_FIREARMS:String = "Dual 2H Firearms";
+	public static const WT_TOME:String         	= "Tome";
 	
-	// Weapon 'perks' (specials)
-	public static const WP_DUAL:String         = "Dual";
-	public static const WP_DUAL_SMALL:String   = "Dual Small";
-	public static const WP_DUAL_LARGE:String   = "Dual Large";
-	public static const WP_DUAL_MASSIVE:String = "Dual Massive";
-	public static const WP_SMALL:String        = "Small";
-	public static const WP_LARGE:String        = "Large";
-	public static const WP_MASSIVE:String      = "Massive";
-	public static const WP_HYBRID:String       = "Hybrid";
-	public static const WP_WHIPPING:String     = "Whipping";
-	public static const WP_WHIRLWIND:String    = "Whirlwind";
-	public static const WP_STAFF:String        = "Staff";
-	public static const WP_AP10:String         = "AP10";
-	public static const WP_AP30:String         = "AP30";
-	public static const WP_AP40:String         = "AP40";
-	public static const WP_AP45:String         = "AP45";
-	public static const WP_AP60:String         = "AP60";
-	public static const WP_AP100:String        = "AP100";
-	public static const WP_STUN10:String       = "Stun10";
-	public static const WP_STUN15:String       = "Stun15";
-	public static const WP_STUN20:String       = "Stun20";
-	public static const WP_STUN25:String       = "Stun25";
-	public static const WP_STUN30:String       = "Stun30";
-	public static const WP_STUN40:String       = "Stun40";
-	public static const WP_STUN50:String       = "Stun50";
-	public static const WP_BLEED10:String      = "Bleed10";
-	public static const WP_BLEED25:String      = "Bleed25";
-	public static const WP_BLEED45:String      = "Bleed45";
-	public static const WP_BLEED100:String     = "Bleed100";
-	public static const WP_LGWRATH:String      = "LGWrath";
-	public static const WP_MGWRATH:String      = "MGWrath";
-	public static const WP_MAGICAL:String	   = "MAGICDMG";
+	// Weapon sizes - not saved anywhere, can be changed between game versions
+	public static const WSZ_SMALL:int          = 0;
+	public static const WSZ_MEDIUM:int         = 1;
+	public static const WSZ_LARGE:int          = 2;
+	public static const WSZ_MASSIVE:int        = 3;
 	
-	public static const WEAPON_PERK_NAMES:Object = createMapFromPairs([
-		[WP_AP10, "10% Armor Penetration"],
-		[WP_AP30, "30% Armor Penetration"],
-		[WP_AP40, "40% Armor Penetration"],
-		[WP_AP45, "45% Armor Penetration"],
-		[WP_AP60, "60% Armor Penetration"],
-		[WP_AP100, "100% Armor Penetration"],
-		[WP_STUN10, "+10% Stun"],
-		[WP_STUN15, "+15% Stun"],
-		[WP_STUN20, "+20% Stun"],
-		[WP_STUN25, "+25% Stun"],
-		[WP_STUN30, "+30% Stun"],
-		[WP_STUN40, "+40% Stun"],
-		[WP_STUN50, "+50% Stun"],
-		[WP_BLEED10, "+10% Bleed"],
-		[WP_BLEED25, "+25% Bleed"],
-		[WP_BLEED45, "+45% Bleed"],
-		[WP_BLEED100, "+100% Bleed"],
-		[WP_LGWRATH, "Low Grade Wrath"],
-		[WP_MGWRATH, "Mid Grade Wrath"],
-	])
+	public static const WeaponSizeNames: /*String*/Array = [
+			"Small","Medium","Large","Massive"
+	];
+	// Weapon tags.
+	public static const W_HYBRID:String         = "Hybrid";
+	public static const W_WHIPPING:String       = "Whipping";
+	public static const W_WHIRLWIND:String      = "Whirlwind";
+	public static const W_STAFFPART:String      = "StaffPart";
+	public static const W_THROWN:String         = "Thrown";
+	public static const W_TETSUBO:String        = "Tetsubo";
+	public static const W_MUSICINSTR:String     = "MusicalInstrument";
+	public static const W_LGWRATH:String        = "LGWrath";
+	public static const W_MGWRATH:String        = "MGWrath";
+	public static const W_RAPIER:String         = "Rapier"; // Gets bonus from Raphael training
+	public static const W_PURE_TYPE:String      = "Pure-type Weapon";
+	public static const W_CORRUPT_TYPE:String   = "Corrupt-type Weapon";
+	public static const W_FIRE_TYPE:String      = "Fire-type Weapon";
+	public static const W_ICE_TYPE:String       = "Ice-type Weapon";
+	public static const W_LIGHTNING_TYPE:String = "Lightning-type Weapon";
+	public static const W_DARKNESS_TYPE:String  = "Darkness-type Weapon";
 	
 	///////////////////
 	// Jewelry (rings)
@@ -326,6 +321,27 @@ public class ItemConstants extends Utils {
 	public static const UT_TOP:int      = 0;
 	public static const UT_BOTTOM:int   = 1;
 	public static const UT_FULL:int     = 2;
+	
+	////////////////
+	// Tag names  //
+	////////////////
+	
+	// Add an empty string if the tag should be hidden in the description
+	public static const ItemTagNames:Object = createMapFromPairs([
+		[W_LGWRATH,   "Low Grade Wrath"],
+		[W_MGWRATH,   "Mid Grade Wrath"],
+		[W_STAFFPART, "Staff Part"],
+		[U_TF,        ""]
+	]);
+	
+	///////////////////////
+	// Item Effect Flags //
+	///////////////////////
+	// bit flags from 1 << 1 to 1 << 31
+	public static const IEF_REQUIREMENT:int      = 1 << 1; // equipment requirement
+	public static const IEF_ATTACK:int           = 1 << 2; // attack bonus/penalty
+	public static const IEF_DEFENSE:int          = 1 << 3; // defense bonus/penalty
+	public static const ItemEffectLastFlag:int   = 1 << 3; // keep updated
 	
 	///////////////////
 	// Enchanted items

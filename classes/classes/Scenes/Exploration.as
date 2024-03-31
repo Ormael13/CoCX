@@ -482,8 +482,8 @@ public class Exploration extends BaseContent implements SaveableState
 			btnExploreCaves().applyTo(button(12));
 			
 			addButton(4, "Next", explorePageII);
-			if (debug) addButton(9, "Debug", exploreDebug.doExploreDebug);
-			else addButton(9, "Menu Style", toggleMenuStyle).hint("Switch to new menu style");
+			addButton(9, "Menu Style", toggleMenuStyle).hint("Switch to new menu style");
+			if (debug) addButton(13, "Debug", exploreDebug.doExploreDebug);
 			
 			addButton(14, "Back", playerMenu);
 		}
@@ -788,13 +788,13 @@ public class Exploration extends BaseContent implements SaveableState
 				SceneLib.impScene.impPackEncounter2();
 			}
 			else if (gobimpChooser >= 20 && gobimpChooser < 30) {
-				if (rand(10) == 0) SceneLib.angelScene.angeloidGroupEncounter();
+				if (rand(10) == 0 && flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 0) SceneLib.angelScene.angeloidGroupEncounter();
 				else SceneLib.impScene.impPackEncounter();
 			}
 			else if (gobimpChooser >= 30) {
 				if (flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_WARRIOR] >= 1) SceneLib.goblinScene.goblinWarriorsEncounter();
 				else {
-					if (rand(10) == 0) SceneLib.angelScene.angeloidGroupEncounter();
+					if (rand(10) == 0 && flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 0) SceneLib.angelScene.angeloidGroupEncounter();
 					else SceneLib.impScene.impPackEncounter();
 				}
 			}
@@ -903,6 +903,9 @@ public class Exploration extends BaseContent implements SaveableState
 			if (flags[kFLAGS.GALIA_LVL_UP] > 0 && flags[kFLAGS.GALIA_LVL_UP] < 0.5) return 2;
 			return 1;
 		}
+		private function angelicFraction():Boolean {
+            return flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 0;
+        }
 		
 		private var _explorationEncounters:GroupEncounter = null;
 		private var _commonEncounters:GroupEncounter = null;
@@ -930,7 +933,7 @@ public class Exploration extends BaseContent implements SaveableState
 						when: fn.ifLevelMin(12),
 						call: angelEncounterHigh
 					}
-			);
+			).withCondition(angelicFraction);
 			
 			_commonEncounters = Encounters.group("common",
 					{
@@ -1186,7 +1189,7 @@ public class Exploration extends BaseContent implements SaveableState
 						unique: true,
 						night : true,
 						when  : function ():Boolean {
-							return (player.racialScore(Races.VAMPIRE) >= 20 || player.racialScore(Races.DRACULA) >= 22) && player.hasStatusEffect(StatusEffects.Familiar) && player.statusEffectv1(StatusEffects.Familiar) == 0;
+							return (player.racialScore(Races.VAMPIRE) >= 20 || player.racialScore(Races.DRACULA) >= 22) && player.hasStatusEffect(StatusEffects.Familiar) && player.statusEffectv3(StatusEffects.Familiar) == 0;
 						},
 						call  : creatingTheServant
 					}, {
@@ -1211,7 +1214,7 @@ public class Exploration extends BaseContent implements SaveableState
 						kind  : "place",
 						unique: true,
 						when  : function ():Boolean {
-							return !player.hasStatusEffect(StatusEffects.TelAdre);
+							return (!player.hasStatusEffect(StatusEffects.TelAdre) || player.statusEffectv1(StatusEffects.TelAdre) < 1);
 						},
 						call  : SceneLib.telAdre.discoverTelAdre
 					}, {
@@ -1408,7 +1411,7 @@ public class Exploration extends BaseContent implements SaveableState
 //Temporaly place of finding enemies for lvl between 31 and 49
 		public function tryDiscoverLL():void {
 			clearOutput();
-			if (rand(4) == 0) {
+			if (rand(4) == 0 && flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 0) {
                 if (silly()) {
                     outputText("You're walking in the woods\n\n");
                     outputText("There's no one around\n\n");

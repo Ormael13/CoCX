@@ -660,7 +660,7 @@ public class KatherineEmployment extends TelAdreAbstractContent {
 				outputText("You joke that maybe you should be ready to defend yourself against ghosts here? Just in case?\n\n");
             //it's not THAT silly. It's normal for Shouldra :) Left ghostbusting joke in silly cause it's still a reference
             outputText("\"<i>There’s no such thing as ghosts!</i>\" Urta snaps.");
-            if (SceneLib.shouldraFollower.followerShouldra()) {
+            if (SceneLib.shouldraFollower.followerShouldra() && !player.hasStatusEffect(StatusEffects.ShouldraOff)) {
                 outputText("You would beg to differ, you happen to not only know one... but is also carrying one right at this instant...\n\n");
                 outputText("\"<i>Oh? So why doesn’t he come out and say hello, huh?</i>\" Urta snarks, clearly feeling very put out.\n\n");
                 outputText("\"<i>Don’t mind if I do!</i>\" an ethereal voice replies out of your chest.  A familiar face emerges, grinning widely.  \"<i>Boo,</i>\" Shouldra states, simply.\n\n");

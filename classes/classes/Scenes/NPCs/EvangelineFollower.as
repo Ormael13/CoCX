@@ -190,6 +190,7 @@ public function meetEvangeline():void {
 	if (player.hasStatusEffect(StatusEffects.ArigeanInfected) && player.statusEffectv3(StatusEffects.ArigeanInfected) == 0) curingArigean1();
 	if (!player.hasStatusEffect(StatusEffects.ArigeanInfected) && player.statusEffectv3(StatusEffects.ArigeanInfected) == 0 && player.tailType == Tail.ARIGEAN_GREEN) curingArigean2();
 	if (!player.hasStatusEffect(StatusEffects.ArigeanInfected) && player.statusEffectv3(StatusEffects.ArigeanInfected) == 0 && player.tailType == Tail.ARIGEAN_RED) curingArigean3();
+	if (!player.hasStatusEffect(StatusEffects.ArigeanInfected) && player.statusEffectv3(StatusEffects.ArigeanInfected) == 0 && player.tailType == Tail.ARIGEAN_YELLOW) curingArigean4();
 	outputText("\"<i>Hi [name]! Anything I can help you with?</i>\"");
 	// [Appearan] [ Talk   ] [   Sex  ] [ Spar   ] [GiveGems]
 	// [Alchemy ] [Ingreds ] [        ] [I.Mutati] [Experime]
@@ -214,7 +215,7 @@ public function meetEvangeline():void {
 	addButton(6, "Ingredients", ingredientsMenu).hint("Ask Evangeline to make some alchemy ingredients");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) addButton(9, "Experiments", Experiments).hint("Check on what experiments Evangeline can work on.");//menu do eksperymentow alchemicznych jak tworzenie eksperymentalnych TF lub innych specialnych tworow evangeline typu specjalny bimbo liq lub tonik/coskolwiek nazwane wzmacniajace postacie do sparingu w obozie
 	else addButtonDisabled(9, "???", "Req. Evangeline been lvl 16+.");
-	if (player.hasStatusEffect(StatusEffects.ArigeanInfected) || player.tailType == Tail.ARIGEAN_GREEN || player.tailType == Tail.ARIGEAN_RED) addButton(10, "Arigean I.", curingArigeanMain)
+	if (player.hasStatusEffect(StatusEffects.ArigeanInfected) || player.tailType == Tail.ARIGEAN_GREEN || player.tailType == Tail.ARIGEAN_RED || player.tailType == Tail.ARIGEAN_YELLOW || player.tailType == Tail.ARIGEAN_PRINCESS) addButton(10, "Arigean I.", curingArigeanMain);
 	else addButtonDisabled(10, "???", "Req. to be infected by Arigean.");
 	if (player.hasPerk(PerkLib.WendigoCurse)) {
 		if (player.perkv1(PerkLib.WendigoCurse) > 0) {
@@ -320,13 +321,13 @@ private function TalkPastLife1():void {
 }
 private function TalkYourFather():void {
 	clearOutput();
-	outputText("It's been some time she have been living here. Maybe she would tell you a bit more about herself, her past or 'the tresure' she hidden? You asks her if she could tell you something about her father.\n\n");
-	if (EvangelineTalks >= 4) outputText("\"<i>Hahahaha so you want hear that stories about me and my father again? Well not like i got so 'much more important' things to do now.</i>\"\n\n");
-	else outputText("\"<i>Hmmm. My father...</i>\" Evangeline muse to herself when she heard your reason to finsing her today. \"<i>Well i been living pretty good here for some time and you seems not so untrusty like many others... fine.</i>\"\n\n");
-	outputText("After you finds a comfortbale place to sit she stay silent for a while before starting to talking. It manly consists of some shorter or longer sotries that whould be nearly any kid tell how their father took them on a stroll or played with them. They focus much more on the places they both visited with telling not much about her father itself.\n\n");
-	outputText("\"<i>...and few times my father took me to this old shrine. I not sure why we had to visit that place. It looked more like place where would some devoted belivers or similar people come and...</i>\"\n\n");
-	outputText("Listening to her talk you noticed some interesting fact. Of all places she been taken by her father there was one where she wasn't allowed to run freely around. One where she been strictly forbidden from acting in any way that her father told her. You asks her to tell a bit more about this place.\n\n");
-	outputText("\"<i>This place?</i>\" Evangeline goes silent for a moment. \"<i>It's not good place. Even forgetting that it was located in area where was massive battle between two armies it's not good to go there, it's place where not many people would find interesting to visit.</i>\" She seems to be bit flustered when talking about and excusing herself she walks away to work on something in her alchemic lab.\n\n");
+	outputText("It's been some time she have been living here. Maybe she would tell you a bit more about herself, her past or 'the treasure' she hidden? You ask her if she could tell you something about her father.\n\n");
+	if (EvangelineTalks >= 4) outputText("\"<i>Hahahaha, so you want hear that stories about me and my father again? Well, not like I got so 'much more important' things to do now.</i>\"\n\n");
+	else outputText("\"<i>Hmmm. My father...</i>\" Evangeline muses to herself when she hears your reason to finding her today. \"<i>Well I've been living pretty good here for some time, and you seem to be not so untrustworthy like many others... fine.</i>\"\n\n");
+	outputText("After you find a comfortable place to sit, she stays silent for a while before starting to talk. It mainly consists of stories that nearly any kid would tell, like how their father took them on a stroll or played with them. They focus much more on the places they both visited while not telling not much about her father himself.\n\n");
+	outputText("\"<i>...and a few times my father took me to this old shrine. I'm not sure why we had to visit that place. It looked more like a place where devoted believers or similar people would go and...</i>\"\n\n");
+	outputText("Listening to her talk, you notice some interesting facts. Of all places she been taken by her father, there was one where she wasn't allowed to run freely around. One where she had been strictly forbidden from acting in any other way than her father told her. You ask her to tell a bit more about this place.\n\n");
+	outputText("\"<i>That place?</i>\" Evangeline goes silent for a moment. \"<i>It's not a good place. Even forgetting that it was located in an area where there was a massive battle between two armies, it's a place that not many people would find interesting to visit.</i>\" She seems to be bit flustered when talking about it, and excuses herself to work on something in her alchemic lab.\n\n");
 	if (flags[kFLAGS.DILAPIDATED_SHRINE_UNLOCKED] < 1) flags[kFLAGS.DILAPIDATED_SHRINE_UNLOCKED] = 1;
 	evangelineAffection(1);
 	if (EvangelineTalks == 3) EvangelineTalks = 4;
@@ -976,7 +977,8 @@ private function curingArigeanMain():void {
 	else {
 		addButtonIfTrue(1, "Arigean I.", curingArigean2a, "Req. 1000 gems and 3 spring waters.", (player.gems >= 1000 && player.hasItem(consumables.S_WATER, 3) && player.tailType == Tail.ARIGEAN_GREEN));
 		addButtonIfTrue(2, "Arigean I.", curingArigean3a, "Req. 1250 gems, 4 pure honey and 4 spring waters.", (player.gems >= 1250 && player.hasItem(consumables.PURHONY, 4) && player.hasItem(consumables.S_WATER, 4) && player.tailType == Tail.ARIGEAN_RED));
-		addButtonDisabled(3, "Arigean I.", "Soon ;) ");
+		addButtonIfTrue(3, "Arigean I.", curingArigean4a, "Req. 2000 gems, 5 pure honey and 5 spring waters.", (player.gems >= 2000 && player.hasItem(consumables.PURHONY, 5) && player.hasItem(consumables.S_WATER, 5) && player.tailType == Tail.ARIGEAN_YELLOW));
+		addButtonIfTrue(4, "Arigean I.", curingArigean5a, "Req. to be Arigean Princess.", player.tailType == Tail.ARIGEAN_PRINCESS);
 	}
 	addButton(14, "Back", meetEvangeline);
 }
@@ -1062,6 +1064,57 @@ private function curingArigean3a():void {
 	player.tailType = Tail.NONE;
 	player.gems -= 1250;
 	statScreenRefresh();
+	doNext(camp.campFollowers);
+	advanceMinutes(15);
+}
+private function curingArigean4():void {
+	outputText("\"<i>[name]?.. Is that still you in there?</i>\" she nervously takes a few steps back, attempting to keep a safe distance from you. \"<i>You’ve been acting very strange as of late, and everyone's a little worried.</i>\" A tinge of fear evident in her voice.\n\n");
+	outputText("You attempt to reassure her that you're still very much you, and the reason you wanted to speak to her was to see if your condition is still curable.\n\n");
+	outputText("\"<i>I'm surprised you still have the willpower to even want to be cured,</i>\" she seems to have eased up a bit, but you feel she still doesn’t entirely trust you. \"<i>It’s not going to be easy, however.</i>\" She takes out a piece of paper, a quill and begins writing a long list. \"<i>I'm going to need you to fetch me 5 jars of Purified bee honey, 5 bottles of pure spring water, and 2000 gems to cover the cost of other materials.</i>\"\n\n");
+	doNext(meetEvangeline);
+}
+private function curingArigean4a():void {
+	clearOutput();
+	outputText("You present her with her payment, items, and she responds by grabbing them before hurriedly jogging off to grab some things from her encampment. After waiting for about 10 minutes she returns with a vial in hand.\n\n");
+	outputText("\"<i>Here you go [name]! Don’t mind the smell… or taste..</i>\" She presents you the vial which holds a foul-smelling, indigo liquid that you can’t help but gag upon smelling it.\n\n");
+	outputText("\"<i>Down the hatch,</i>\" you murmur as you attempt to drink down the foul liquid all in one go while not throwing it back up.\n\n");
+	outputText("A burning sensation crawling up your spine is all you feel as the creature attached to you starts screeching viscously before detaching from you and withering away on the floor. leaving a nasty gash in its wake. You can’t help but look on in horror as your former friend ceases it’s movements and slowly dissolves away, leaving you with a numb feeling in your chest, was this the right choice? <b>You no longer have a parasite attached to you.</b>\n\n");
+	if (EvangelineCuringArigeanInfection == 0) EvangelineCuringArigeanInfection += 1;
+	if (flags[kFLAGS.THE_TRENCH_ENTERED] >= 1) flags[kFLAGS.THE_TRENCH_ENTERED] = 0;
+	player.destroyItems(consumables.S_WATER, 5);
+	player.destroyItems(consumables.PURHONY, 5);
+	player.removePerk(PerkLib.MiracleMetal);
+	player.rearBody.type = RearBody.NONE;
+	player.tailType = Tail.NONE;
+	player.gems -= 2000;
+	statScreenRefresh();
+	doNext(camp.campFollowers);
+	advanceMinutes(15);
+}
+private function curingArigean5a():void {
+	outputText("\"<i>Ah [name]?.. Is something troubling you?</i>\" She takes a couple of steps back as the fear becomes evident in her voice. \"<i>You look quite different, would you mind if I checked you over?</i>\" It’s obvious she doesn’t feel too safe around you in your new form.\n\n");
+	outputText("You attempt to give her a reassuring smile to help ease her nerves as you tell her you wouldn’t mind. But a part of you still thinks she may be frightened.\n\n");
+	outputText("\"<i>Just wait here, and I’ll be right back.</i>\" She hurriedly jogs off to where you presume her original encampment is, this may take a little.\n\n");
+	outputText("You sit back on your tail-like mouth to pass the time, and now that you actually take a moment to think about it, why is she so afraid of you? It’s not like you’ve harmed or threatened her in any way, she also seems to be quite uncomfortable around Grayda as well. Has she had some previous encounter with your kind before? ");
+	outputText("Or does she just find you intimidating? Have you really changed so much as to put people on edge by your very presence? What would your loved ones say if they were to see you now, would they also be afraid?\n\n");
+	outputText("\"<i>Princess? Is everything alright over here?</i>\" Grayda seems to have somehow picked up on your internal distress. Whether this is just her intuition or some sort of signal you're giving off is anyone’s guess at this point.\n\n");
+	outputText("You tell her your fine, just waiting for Evangeline so she can give you an examination.\n\n");
+	outputText("\"<i>If you don’t mind, my princess, would you allow me to watch?</i>\"\n\n");
+	outputText("You tell her you don’t mind, she has your best intentions in mind after all.\n\n");
+	outputText("After a few moments of idling Evangeline returns with the items she needs, and begins her examination with simple probing and inspecting your magnificent new maw. Her attention seems focused on where it connects to your hip, however, and after several ticklish pokes and rubs, she turns to face you with a small glass vial.\n\n");
+	outputText("\"<i>[name] I'm going to need a small amount of your blood.</i>\" Her face and tone hold a great air of seriousness as she offers you a knife. It’s just a little blood, what’s the worst that could happen?\n\n");
+	outputText("You use the knife to cut the palm of your hand, while Evangeline moves the vial under your hand to catch any blue ichor that escapes the wound. After a sufficient amount of it has been collected she adds a few drops of a white liquid to it with seemingly no results, which draws a look of concern on Evangeline’s face.\n\n");
+	outputText("\"<i>I don’t think there’s any way I can fix your condition without it being lethal, but do you even want to turn back at this point?</i>\"\n\n");
+	outputText("The answer to you was quite obvious, why would you want to turn back to how you were before? Why give up so many advantageous benefits in a hostile land like Mareth? Why remove the very part of you that makes you, you? That which makes you royalty amongst your kind?\n\n");
+	outputText("\"<i>I see… But [name], just know you’ve changed drastically from the person you once were</i>\" and with that Evangeline goes to return her retrieved items back to her encampment as you try to gesture Grayda to follow you with a friendly nod of your head.\n\n");
+	if (silly()) {
+		outputText("However much to your shock at the sudden action. Grayda swiftly stabs Evangeline with the end of her staff. Causing her to fall with an abrupt scream.\n\n");
+		outputText("\"<i>What the hell, Grayda?!</i>\"\n\n");
+		outputText("\"<i>But… you nodded the “stabbing nod”, my Princess.</i>\"\n\n");
+		outputText("\"<i>There’s a nod for stabbing people?!</i>\"\n\n");
+		outputText("\"<i>Yes, my Princess.</i>\"\n\n");
+		outputText("As you bandage up the surprisingly shallow wound, you consider it might be best to not nod so often, lest you accidentally start a war you don’t want. She should wake up soon, hopefully with no memory of this crazed incident. Maybe Grayda should educate you on the various different nods in the future.\n\n");
+	}
 	doNext(camp.campFollowers);
 	advanceMinutes(15);
 }
@@ -1636,4 +1689,4 @@ private function IMutationsSelector(page:int = 0):void {
 	}
 }
 }
-}
+}

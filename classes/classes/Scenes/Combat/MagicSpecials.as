@@ -13,7 +13,7 @@ import classes.BodyParts.Wings;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
-import classes.Items.ItemTags;
+import classes.Items.ItemConstants;
 import classes.Scenes.Areas.GlacialRift.FrostGiant;
 import classes.Scenes.Areas.Tundra.YoungFrostGiant;
 import classes.Scenes.Dungeons.D3.Doppleganger;
@@ -43,8 +43,16 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 2) berzerkDuration += 1;
 			if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) berzerkDuration += 4;
-			player.createStatusEffect(StatusEffects.Berzerking,berzerkDuration,0,0,0);
-			outputText("<b>Berzerking was used successfully.</b>\n\n");
+			if (player.hasPerk(PerkLib.SubzeroLustfulFury) && player.hasPerk(PerkLib.EndlessRage)) {
+				player.HP -= Math.round(player.maxOverHP() * berzerkerandlustzerkerHPdrain());
+				if (!player.hasPerk(PerkLib.EndlessRage)) player.createStatusEffect(StatusEffects.Berzerking,(berzerkDuration-1),0,0,0);
+				player.createStatusEffect(StatusEffects.Berzerking,berzerkDuration,1,0,0);
+				outputText("<b>Berzerking Grade 2 was used successfully.</b>\n\n");
+			}
+			else {
+				player.createStatusEffect(StatusEffects.Berzerking,berzerkDuration,0,0,0);
+				outputText("<b>Berzerking was used successfully.</b>\n\n");
+			}
 		}
 		if ((player.wrath >= 50 || player.hasPerk(PerkLib.EndlessRage)) && (flags[kFLAGS.ZERKER_COMBAT_MODE] == 2 || flags[kFLAGS.ZERKER_COMBAT_MODE] == 3)) {
 			var lustzerkDuration:Number = 0;
@@ -55,8 +63,16 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 2) lustzerkDuration += 1;
 			if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) lustzerkDuration += 4;
-			player.createStatusEffect(StatusEffects.Lustzerking,lustzerkDuration,0,0,0);
-			outputText("<b>Lustzerking was used successfully.</b>\n\n");
+			if (player.hasPerk(PerkLib.SubzeroLustfulFury) && player.hasPerk(PerkLib.EndlessRage)) {
+				player.HP -= Math.round(player.maxOverHP() * berzerkerandlustzerkerHPdrain());
+				if (!player.hasPerk(PerkLib.EndlessRage)) player.createStatusEffect(StatusEffects.Lustzerking,(lustzerkDuration-1),0,0,0);
+				player.createStatusEffect(StatusEffects.Lustzerking,lustzerkDuration,1,0,0);
+				outputText("<b>Lustzerking Grade 2 was used successfully.</b>\n\n");
+			}
+			else {
+				player.createStatusEffect(StatusEffects.Lustzerking,lustzerkDuration,0,0,0);
+				outputText("<b>Lustzerking was used successfully.</b>\n\n");
+			}
 		}
 		if (flags[kFLAGS.CRINOS_SHAPE_COMBAT_MODE] == 1 && player.wrath >= crinosshapeCost() && !player.hasPerk(PerkLib.ElementalBody)) {
 			outputText("You roar and unleash your inner beast assuming Crinos Shape in order to destroy your foe!\n\n");
@@ -182,11 +198,11 @@ public class MagicSpecials extends BaseCombatContent {
 				var terror:Number = 9;
 				if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) terror -= 1;
 				if (player.hasPerk(PerkLib.NaturalInstincts)) terror -= 1;
-				if (player.tailCount == 9 && player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 1) {
+				if (player.tailCount == 9 && player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1) {
 					bd.toolTipText += "\nWould go into cooldown after use for: " + (terror - 4) + " rounds\n";
 					bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
 					bd.requireFatigue(200 * kitsuneskill2Cost());
-				} else if (player.tailCount == 9 || player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 1) {
+				} else if (player.tailCount == 9 || player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1) {
 					bd.toolTipText += "\nWould go into cooldown after use for: " + (terror - 2) + " rounds\n";
 					bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
 					bd.requireFatigue(100 * kitsuneskill2Cost());
@@ -214,11 +230,11 @@ public class MagicSpecials extends BaseCombatContent {
 				var illusion:Number = 9;
 				if (player.hasPerk(PerkLib.InariBlessedKimono)) illusion -= 1;
 				if (player.hasPerk(PerkLib.NaturalInstincts)) illusion -= 1;
-				if (player.tailType == 13 && player.tailCount == 9 && player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 1) {
+				if (player.tailType == 13 && player.tailCount == 9 && player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1) {
 					bd.toolTipText += "\nWould go into cooldown after use for: " + (illusion - 4) + " rounds\n";
 					bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
 					bd.requireFatigue(200 * kitsuneskill2Cost());
-				} else if ((player.tailType == 13 && player.tailCount == 9) || player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 1) {
+				} else if ((player.tailType == 13 && player.tailCount == 9) || player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1) {
 					bd.toolTipText += "\nWould go into cooldown after use for: " + (illusion - 2) + " rounds\n";
 					bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
 					bd.requireFatigue(100 * kitsuneskill2Cost());
@@ -298,7 +314,8 @@ public class MagicSpecials extends BaseCombatContent {
 						bd.disable("Your wrath is too low to unleash howl!");
 					}
 					if (player.hasPerk(PerkLib.AbsoluteStrength)) {
-						if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) bd = buttons.add("TFoD", combat.asuras10FingersOfDestruction).hint("Ten Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
+						if (player.hasPerk(PerkLib.ItsZerkingTime)) bd = buttons.add("TwFoD", combat.asuras12FingersOfDestruction).hint("Twelve Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
+						else if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) bd = buttons.add("TFoD", combat.asuras10FingersOfDestruction).hint("Ten Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
 						else if (player.hasPerk(PerkLib.AsuraStrength)) bd = buttons.add("EFoD", combat.asuras8FingersOfDestruction).hint("Eight Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
 						else bd = buttons.add("SFoD", combat.asuras6FingersOfDestruction).hint("Six Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
 						if (player.wrath < (player.maxWrath() * 0.5)) {
@@ -374,6 +391,24 @@ public class MagicSpecials extends BaseCombatContent {
 				if (player.hasStatusEffect(StatusEffects.CooldownManaBarrage)) {
 					bd.disable("You need more time before you can use Mana Barrage again.\n\n");
 				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
+			//Charged Shot & Finality Barrage
+			if (player.tailType == Tail.ARIGEAN_PRINCESS) {
+				bd = buttons.add("Charged Shot", arigeanChargedShot).hint("Charge and fire a barrage of blasts from your extra maw. \n");
+				bd.requireMana(spellCost(400*arigeanMagicSpecialsCost()), true);
+				if (player.hasStatusEffect(StatusEffects.CooldownChargedShot)) {
+					bd.disable("You need more time before you can use Charged Shot again.\n\n");
+				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+				if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 4) {
+					var amount:Number = 0.6;
+					if (player.hasStatusEffect(StatusEffects.DarkRitual)) amount += 0.1;
+					bd = buttons.add("Finality Barrage", arigeanFinalityBarrage).hint("Sacrifice "+(amount*100)+"% of your max hp to deal "+(player.hasStatusEffect(StatusEffects.DarkRitual)?"9":"3")+"0% of the enemy’s max hp. \n");
+					if (player.HP - Math.round(player.maxHP() * amount) < player.minHP() + 1) {
+						bd.disable("Your HP is too low to use Finality Barrage.\n\n");
+					} else if (player.hasStatusEffect(StatusEffects.CooldownFinalityBarrage)) {
+						bd.disable("You need more time before you can use Finality Barrage again.\n\n");
+					} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+				}
 			}
 		}
 		if (player.hasPerk(PerkLib.DarkCharm)) {
@@ -599,7 +634,7 @@ public class MagicSpecials extends BaseCombatContent {
 			} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
 		if (player.hasPerk(PerkLib.DragonLustPoisonBreath)) {
-			bd = buttons.add("Poison Breath", DragonLustPoisonBreath).hint("Unleash a cloud of aphrodisiac poison. Particularly powerful against groups");
+			bd = buttons.add("Poison Breath", DragonLustPoisonBreath).hint("Unleash a cloud of aphrodisiac poison. Particularly powerful against groups.  \n\nVenom: " + player.tailVenom + "/" + player.maxVenom());
 			if (player.tailVenom < player.VenomWebCost() * 5) {
 				bd.disable("You do not have enough poison in your glands to breath a cloud right now! (Req. "+player.VenomWebCost()*5+"+)");
 			} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
@@ -673,9 +708,9 @@ public class MagicSpecials extends BaseCombatContent {
 			bd.requireFatigue(spellCost(40));
 			if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
-		if ((player.isRaceCached(Races.MOUSE, 2)) || player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring") {
+		if ((player.isRaceCached(Races.MOUSE, 2)) || player.countRings(jewelries.INMORNG)) {
 			bd = buttons.add("Blazing battle spirit", blazingBattleSpirit);
-			if (player.isRaceCached(Races.MOUSE, 2) && player.jewelryName == "Infernal Mouse ring") {
+			if (player.isRaceCached(Races.MOUSE, 2) && player.countRings(jewelries.INMORNG)) {
 				bd.hint("Unarmed damage is increased by 150% as fire damage, lust resistance is maximized. Take very highly increased damage from ice attacks. (Cannot be used underwater) \n", "Blazing battle spirit");
 			} else {
 				bd.hint("Unarmed damage is increased by 100% as fire damage, lust resistance is maximized. Take massively increased damage from ice attacks. (Cannot be used underwater) \n", "Blazing battle spirit");
@@ -724,20 +759,36 @@ public class MagicSpecials extends BaseCombatContent {
 			bd.requireWrath(50);
 			if (player.hasStatusEffect(StatusEffects.Berzerking)) {
 				bd.disable("You're already pretty goddamn mad!");
-			}/*
-			if () {
-				bd = buttons.add("Berserk G1+2", berzerk);
-			}*/
+			}
+			if (player.hasPerk(PerkLib.SubzeroLustfulFury) && player.hasPerk(PerkLib.EndlessRage)) {
+				bd = buttons.add("Berserk G1+2", berzerkG1and2);
+				bd.requireWrath(50);
+				if (player.hasStatusEffect(StatusEffects.Berzerking) && player.statusEffectv2(StatusEffects.Berzerking) >= 1) {
+					bd.disable("You're already reached 2nd grade of Berserk!");
+				}
+			}
 		}
 		if (player.hasPerk(PerkLib.PrestigeJobBerserker) && player.hasStatusEffect(StatusEffects.Berzerking)) {
 			bd = buttons.add("Berserk G2", berzerkG2);
 			if (player.statusEffectv2(StatusEffects.Berzerking) >= 1) {
 				bd.disable("You're already reached 2nd grade of Berserk!");
 			}
+			if (player.hasPerk(PerkLib.EndlessRage) && player.hasPerk(PerkLib.SubzeroLustfulFury)) {
+				bd = buttons.add("Berserk G2+3", berzerkG2and3);
+				if (player.statusEffectv2(StatusEffects.Berzerking) >= 2) {
+					bd.disable("You're already reached 3rd grade of Berserk!");
+				}
+			}
 			if (player.statusEffectv2(StatusEffects.Berzerking) >= 1) {
 				bd = buttons.add("Berserk G3", berzerkG3);
 				if (player.statusEffectv2(StatusEffects.Berzerking) >= 2) {
 					bd.disable("You're already reached 3rd grade of Berserk!");
+				}
+			}
+			if (player.hasPerk(PerkLib.EndlessRage) && player.statusEffectv2(StatusEffects.Berzerking) >= 1 && player.hasPerk(PerkLib.SubzeroLustfulFury)) {
+				bd = buttons.add("Berserk G3+4", berzerkG3and4);
+				if (player.statusEffectv2(StatusEffects.Berzerking) >= 3) {
+					bd.disable("You're already reached 4th grade of Berserk!");
 				}
 			}
 			if (player.hasPerk(PerkLib.EndlessRage) && player.statusEffectv2(StatusEffects.Berzerking) >= 2) {
@@ -757,7 +808,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You're already frenzied!");
 			}
 		}
-		if (player.hasPerk(PerkLib.Lustzerker) || player.jewelryName == "Flame Lizard ring" || player.jewelryName2 == "Flame Lizard ring" || player.jewelryName3 == "Flame Lizard ring" || player.jewelryName4 == "Flame Lizard ring") {
+		if (player.hasPerk(PerkLib.Lustzerker) || player.countRings(jewelries.FLLIRNG)) {
 			bd = buttons.add("Lustserk G1", lustzerk);
 			if (player.hasPerk(PerkLib.ColderLust)) {
 				bd.hint("Throw yourself into a cold(er) lust rage!  Greatly increases the strength of your weapon and increases armor defense. \n");
@@ -769,20 +820,36 @@ public class MagicSpecials extends BaseCombatContent {
 			bd.requireWrath(50);
 			if (player.hasStatusEffect(StatusEffects.Lustzerking)) {
 				bd.disable("You're already pretty goddamn mad & lustfull!");
-			}/*
-			if () {
-				bd = buttons.add("Lustserk G1+2", lustzerk);
-			}*/
+			}
+			if (player.hasPerk(PerkLib.SubzeroLustfulFury) && player.hasPerk(PerkLib.EndlessRage)) {
+				bd = buttons.add("Lustserk G1+2", lustzerkG1and2);
+				bd.requireWrath(50);
+				if (player.hasStatusEffect(StatusEffects.Lustzerking) && player.statusEffectv2(StatusEffects.Lustzerking) >= 1) {
+					bd.disable("You're already reached 2nd grade of Lustserk!");
+				}
+			}
 		}
 		if (player.hasPerk(PerkLib.PrestigeJobBerserker) && player.hasStatusEffect(StatusEffects.Lustzerking)) {
 			bd = buttons.add("Lustserk G2", lustzerkG2);
 			if (player.statusEffectv2(StatusEffects.Lustzerking) >= 1) {
 				bd.disable("You're already reached 2nd grade of Lustserk!");
 			}
+			if (player.hasPerk(PerkLib.EndlessRage) && player.hasPerk(PerkLib.SubzeroLustfulFury)) {
+				bd = buttons.add("Lustserk G2+3", lustzerkG2and3);
+				if (player.statusEffectv2(StatusEffects.Lustzerking) >= 2) {
+					bd.disable("You're already reached 3rd grade of Lustserk!");
+				}
+			}
 			if (player.statusEffectv2(StatusEffects.Lustzerking) >= 1) {
 				bd = buttons.add("Lustserk G3", lustzerkG3);
 				if (player.statusEffectv2(StatusEffects.Lustzerking) >= 2) {
 					bd.disable("You're already reached 3rd grade of Lustserk!");
+				}
+			}
+			if (player.hasPerk(PerkLib.EndlessRage) && player.statusEffectv2(StatusEffects.Lustzerking) >= 1 && player.hasPerk(PerkLib.SubzeroLustfulFury)) {
+				bd = buttons.add("Lustserk G3+4", lustzerkG3and4);
+				if (player.statusEffectv2(StatusEffects.Lustzerking) >= 3) {
+					bd.disable("You're already reached 4th grade of Lustserk!");
 				}
 			}
 			if (player.hasPerk(PerkLib.EndlessRage) && player.statusEffectv2(StatusEffects.Lustzerking) >= 2) {
@@ -845,6 +912,13 @@ public class MagicSpecials extends BaseCombatContent {
 			bd.requireFatigue(physicalCost(30));
 			if (player.hasStatusEffect(StatusEffects.CooldownEveryAndNowhere)) {
 				bd.disable("You need more time before you can use Everywhere and nowhere again.\n\n");
+			}
+		}
+		if (player.isRaceCached(Races.DRACULA)) {
+			bd = buttons.add("ShadowTeleport", ShadowTeleport).hint("Periodically phase out of reality increasing your invasion as well as granting you the ability to surprise your opponent denying their defences.  \n\nWould go into cooldown after use for: "+(player.hasPerk(PerkLib.NaturalInstincts) ? "9":"10")+" rounds");
+			bd.requireFatigue(physicalCost(30));
+			if (player.hasStatusEffect(StatusEffects.CooldownShadowTeleport)) {
+				bd.disable("You need more time before you can use Shadow Teleport again.\n\n");
 			}
 		}
 		if (player.isRaceCached(Races.FAIRY)) {
@@ -943,8 +1017,9 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		//Sing
-		if (player.hasPerk(PerkLib.MelkieSong) || player.hasPerk(PerkLib.HarpySong) || player.hasPerk(PerkLib.PrestigeJobBard)) {
-			bd = buttons.add("Sing", SingInitiate).hint("Begin singing. While singing, you may add various powerful effects to your tune.\n.");
+		if (player.hasPerk(PerkLib.MelkieSong) || player.hasPerk(PerkLib.HarpySong) || player.hasPerk(PerkLib.PanLabyrinth) || player.hasPerk(PerkLib.PrestigeJobBard)) {
+			if (player.weapon.isMusicInstrument()) bd = buttons.add("Perform", SingInitiate).hint("Players begin a musical performance. While performing, players may add various mystical effects to the tune.\n.");
+			else bd = buttons.add("Sing", SingInitiate).hint("Begin singing. While singing, you may add various powerful effects to your tune.\n.");
 		}
 		//Telekinetic Grab
 		if ((player.racialScore(Races.VAMPIRE) >= 20 || player.racialScore(Races.DRACULA) >= 22) && !monster.hasStatusEffect(StatusEffects.TelekineticGrab)) {
@@ -1074,8 +1149,8 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster is Lethice && (monster as Lethice).fightPhase == 3) {
 			outputText("\n\n<i>\"Ouch. Such arcane skills for one so uncouth,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your magics?\"</i>\n\n");
 			monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
-			enemyAI();
-		} else combatRoundOver();
+		}
+		enemyAI();
 	}
 
 	public function yetiFreezingBreath():void {
@@ -1161,10 +1236,11 @@ public class MagicSpecials extends BaseCombatContent {
 	public function SingInitiate(Bee:Boolean = false):void {
 		clearOutput();
 		if (Bee) outputText("You start singing an enrapturing song. Buzzing over enticingly.");
-		else outputText("You start singing an enrapturing song.");
-		if (player.hasPerk(PerkLib.EmpoweredAria)){
-			player.createStatusEffect(StatusEffects.Sing,5,0,0,0);
+		else {
+			if (player.weapon.isMusicInstrument()) outputText("You start an enrapturing musical performance using your [weaponName].");
+			else outputText("You start singing an enrapturing song.");
 		}
+		if (player.hasPerk(PerkLib.EmpoweredAria)) player.createStatusEffect(StatusEffects.Sing,5,0,0,0);
 		else player.createStatusEffect(StatusEffects.Sing,1,0,0,0);
 		outputText("\n\n");
 		enemyAI();
@@ -1174,27 +1250,33 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		var IntligenceModifier:Number = 0;
+		var LustyLusty:Number = 1;
 		if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) IntligenceModifier += scalingBonusIntelligence();
 		if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) IntligenceModifier += scalingBonusIntelligence();
+		if (player.hasPerk(PerkLib.PanLabyrinth)) {
+			IntligenceModifier += scalingBonusToughness();
+			LustyLusty *= 1.5;
+		}
+		if (player.hasPerk(PerkLib.EromancyExpert)) LustyLusty *= 1.5;
+		if (player.hasPerk(PerkLib.RacialParagon)) LustyLusty *= combat.RacialParagonAbilityBoost();
+		if (player.hasPerk(PerkLib.NaturalArsenal)) LustyLusty *= 1.50;
+		if (player.hasPerk(PerkLib.PerformancePower)) LustyLusty *= (1 + player.perkv1(PerkLib.PerformancePower));
+		if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) LustyLusty *= (1 + (0.25 * player.perkv1(IMutationsLib.MelkieLungIM)));
+		if (player.armor == armors.ELFDRES && player.isElf()) LustyLusty *= 2;
+		if (player.armor == armors.FMDRESS && player.isWoodElf()) LustyLusty *= 2;
 		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 2) {
 			outputText("You end your theme with a powerful finale compelling everyone around to adore and love you.");
 			var lustDmgF:Number = monster.lustVuln * 3 * (player.inte / 5 * (player.teaseLevel * 0.2) + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
 			lustDmgF += IntligenceModifier;
-			if (player.hasPerk(PerkLib.EromancyExpert)) lustDmgF *= 1.5;
 			if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) {
 				if (player.hasPerk(PerkLib.ArouseTheAudience)) lustDmgF *= 7.5;
 				else lustDmgF *= 5;
 			}
-			if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= combat.RacialParagonAbilityBoost();
-			if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
-			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) lustDmgF *= 1.2;
-			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) lustDmgF *= 1.3;
-			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) lustDmgF *= 1.4;
-			if (player.armor == armors.ELFDRES && player.isElf()) lustDmgF *= 2;
-			if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmgF *= 2;
+			lustDmgF *= LustyLusty; 
 			lustDmgF = Math.round(lustDmgF);
 			monster.teased(lustDmgF);
 			if(!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned,4,0,0,0);
+			if (player.hasPerk(PerkLib.PanLabyrinth) && monster.hasStatusEffect(StatusEffects.LustDoTSP)) monster.addStatusValue(StatusEffects.LustDoTSP, 1, 1);
 			if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownCompellingAria,11,0,0,0);
 			else player.createStatusEffect(StatusEffects.CooldownCompellingAria,10,0,0,0);
 			player.removeStatusEffect(StatusEffects.ChanneledAttack);
@@ -1215,16 +1297,10 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText(" ears.");
 			var lustDmg2:Number = monster.lustVuln * (player.inte / 5 * (player.teaseLevel * 0.2) + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
 			lustDmg2 += IntligenceModifier * 0.5;
-			if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg2 *= 1.5;
-			if (player.hasPerk(PerkLib.RacialParagon)) lustDmg2 *= combat.RacialParagonAbilityBoost();
-			if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg2 *= 1.50;
-			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) lustDmg2 *= 1.2;
-			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) lustDmg2 *= 1.3;
-			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) lustDmg2 *= 1.4;
-			if (player.armor == armors.ELFDRES && player.isElf()) lustDmg2 *= 2;
-			if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg2 *= 2;
+			lustDmg2 *= LustyLusty; 
 			lustDmg2 = Math.round(lustDmg2);
 			monster.teased(lustDmg2);
+			if (player.hasPerk(PerkLib.PanLabyrinth) && monster.hasStatusEffect(StatusEffects.LustDoTSP)) monster.addStatusValue(StatusEffects.LustDoTSP, 1, 1);
 			player.addStatusValue(StatusEffects.ChanneledAttack, 1, 1);
 			outputText("\n\n");
 			enemyAI();
@@ -1235,16 +1311,13 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("You start singing a enrapturing song.");
 			var lustDmg:Number = monster.lustVuln * 0.5 * (player.inte / 5 * (player.teaseLevel * 0.2) + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
 			lustDmg += IntligenceModifier * 0.25;
-			if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
-			if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
-			if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
-			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) lustDmg *= 1.2;
-			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) lustDmg *= 1.3;
-			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) lustDmg *= 1.4;
-			if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
-			if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
+			lustDmg *= LustyLusty; 
 			lustDmg = Math.round(lustDmg);
 			monster.teased(lustDmg);
+			if (player.hasPerk(PerkLib.PanLabyrinth)) {
+				if (monster.hasStatusEffect(StatusEffects.LustDoTSP)) monster.addStatusValue(StatusEffects.LustDoTSP, 1, 1);
+				else monster.createStatusEffect(StatusEffects.LustDoTSP, 5, 0, 0, 0);
+			}
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.ChanneledAttackType, 1, 0, 0, 0);
 			outputText("\n\n");
@@ -1300,7 +1373,7 @@ public class MagicSpecials extends BaseCombatContent {
 			dynStats("lus", temp2, "scale", false);
 			var lustDmgF:Number = combat.teases.teaseBaseLustDamage();
 			var lustBoostToLustDmg:Number = 0;
-			if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemTags.A_REVEALING)) lustDmgF *= (1 + ((10 + rand(11)) / 100));
+			if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemConstants.A_REVEALING)) lustDmgF *= (1 + ((10 + rand(11)) / 100));
 			if (player.hasPerk(PerkLib.ElectrifiedDesire)) {
 				lustDmgF *= (1 + (player.lust100 * 0.01));
 			}
@@ -1699,7 +1772,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage = Math.round(0.5 * damage);
 		}
 		//Miss:
-		if(((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) && !monster.monsterIsStunned()) {
+		if(((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe)))) && !monster.monsterIsStunned()) {
 			outputText("  Despite the heavy impact caused by your attack, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
@@ -1950,7 +2023,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("You spit a blob of neon blue acid at [themonster] your corrosive fluids burning at "+((monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) ? "their" : "[monster his]")+" flesh.");
 		//Miss:
-		if(((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) && !monster.monsterIsStunned()) {
+		if(((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe)))) && !monster.monsterIsStunned()) {
 			outputText("  Despite the heavy impact caused by your attack, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
@@ -2028,7 +2101,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage = Math.round(0.5 * damage);
 		}
 		//Miss:
-		if(((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) && !monster.monsterIsStunned()) {
+		if(((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) && !monster.monsterIsStunned()) {
 			outputText("  Despite the heavy impact caused by your attack, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
@@ -2129,7 +2202,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage = Math.round(0.5 * damage);
 		}
 		//Miss:
-		if(((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) && !monster.monsterIsStunned()) {
+		if(((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) && !monster.monsterIsStunned()) {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
@@ -2205,7 +2278,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around [monster him].  [Themonster] does [monster his] best to avoid it, but the wave of force is too fast.");
 		//Miss:
-		if(((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) && !monster.monsterIsStunned()) {
+		if(((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) && !monster.monsterIsStunned()) {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
@@ -2271,7 +2344,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around [monster him].  [Themonster] does [monster his] best to avoid it, but the wave of force is too fast.");
 		//Miss:
-		if(((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) && !monster.monsterIsStunned()) {
+		if(((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) && !monster.monsterIsStunned()) {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
@@ -2474,7 +2547,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around [monster him].  [Themonster] does [monster his] best to avoid it, but the wave of force is too fast.<b>Your opponent is now wet with water!</b>");
 		//Miss:
-		if(((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) && !monster.monsterIsStunned()) {
+		if(((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) && !monster.monsterIsStunned()) {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
@@ -2539,7 +2612,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around [monster him].  [Themonster] does [monster his] best to avoid it, but the wave of force is too fast.");
 		//Miss:
-		if(((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) && !monster.monsterIsStunned()) {
+		if(((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) && !monster.monsterIsStunned()) {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
@@ -2634,7 +2707,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (combat.checkConcentration()) return; //Amily concentration
 		outputText("You inhale deeply before releasing a roar so long it erupts into a shockwave of sound pushing debris away and blasting [monster him]! Leaving them stunned and confused and bleeding! ");
 		//Miss:
-		if(((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) && !monster.monsterIsStunned()) {
+		if(((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) && !monster.monsterIsStunned()) {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		else {
@@ -2715,7 +2788,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			outputText("You wreel back your head, sucking in a large breath of air before letting out all the collected energy. You let loose a bellowing roar at [themonster], so forceful that even the landscape begins to warp around the blast. [Themonster] attempts to dodge but the sheer size and speed is to immense to avoid as they are slammed with Fire, Ice, Lightning and Darkness. ");
 			//Miss:
-			if(((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) && !monster.monsterIsStunned()) {
+			if(((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) && !monster.monsterIsStunned()) {
 				outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 			}
 			//Special enemy avoidances
@@ -2746,7 +2819,7 @@ public class MagicSpecials extends BaseCombatContent {
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.ChanneledAttackType, 4, 0, 0, 0);
 			for each (var perkDragonObj:Object in CombatMagic.magicCounterPerks) {
-				if (player.hasPerk(perkDragonObj.tier3) || player.hasPerk(perkObj.tier4)) player.addStatusValue(perkDragonObj.counter, 3, 1);
+				if (player.hasPerk(perkDragonObj.tier3) || player.hasPerk(perkDragonObj.tier4)) player.addStatusValue(perkDragonObj.counter, 3, 1);
 			}
 			enemyAI();
 		}
@@ -3034,6 +3107,11 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 	}
 
+	public function berzerkerandlustzerkerHPdrain():Number {
+		var balHd:Number = 0.5;
+		if (player.hasPerk(PerkLib.SubzeroLustfulFury) && player.hasPerk(PerkLib.EndlessRage)) balHd -= 0.25;
+		return balHd;
+	}
 	public function berzerk():void {
 		clearOutput();
 		player.wrath -= 50;
@@ -3050,27 +3128,62 @@ public class MagicSpecials extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.Berzerking,berzerkDuration,0,0,0);
 		enemyAI();
 	}
+	public function berzerkG1and2():void {
+		clearOutput();
+		player.wrath -= 50;
+		var berzerkDuration:Number = 10;
+		if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 2) berzerkDuration += 2;
+		if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) berzerkDuration += 8;
+		if (player.hasPerk(PerkLib.ColderFury)) {
+			outputText("You roar and unleash your savage fury in order to destroy your foe!\n\n");
+		}
+		else if (player.hasPerk(PerkLib.ColdFury)) {
+			outputText("You roar and unleash your savage fury, forgetting about defense from magical attacks in order to destroy your foe!\n\n");
+		}
+		else outputText("You roar and unleash your savage fury, forgetting about defense from any physical or magical attacks in order to destroy your foe!\n\n");
+		outputText(" +1 large/massive weapon atk. - "+berzerkerandlustzerkerHPdrain()*100+"% max over HP.");
+		player.HP -= Math.round(player.maxOverHP() * berzerkerandlustzerkerHPdrain());
+		if (!player.hasPerk(PerkLib.EndlessRage)) player.createStatusEffect(StatusEffects.Berzerking,(berzerkDuration-2),0,0,0);
+		player.createStatusEffect(StatusEffects.Berzerking,berzerkDuration,1,0,0);
+		enemyAI();
+	}
 	public function berzerkG2():void {
 		clearOutput();
-		outputText("Placeholder text that only meantion savage fury reaching Grade 2."+(player.hasPerk(PerkLib.Anger)?" +1 large/massive weapon atk.":"")+" - 50% max over HP.\n\n");
-		player.HP -= Math.round(player.maxOverHP() * 0.5);
-		if (!player.hasPerk(PerkLib.EndlessRage)) player.addStatusValue(StatusEffects.Berzerking, 1, -2);
+		outputText("Placeholder text that only meantion savage fury reaching Grade 2."+(player.hasPerk(PerkLib.Anger)?" +1 large/massive weapon atk.":"")+" - "+berzerkerandlustzerkerHPdrain()*100+"% max over HP.\n\n");
+		player.HP -= Math.round(player.maxOverHP() * berzerkerandlustzerkerHPdrain());
+		if (!player.hasPerk(PerkLib.EndlessRage) && player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.ItsZerkingTime)) player.addStatusValue(StatusEffects.Berzerking, 1, -2);
 		player.addStatusValue(StatusEffects.Berzerking, 2, 1);
+		enemyAI();
+	}
+	public function berzerkG2and3():void {
+		clearOutput();
+		outputText("Placeholder text that only meantion savage fury reaching Grade 3."+(player.hasPerk(PerkLib.Anger)?" +2 large/massive weapon atk.":"")+" - "+berzerkerandlustzerkerHPdrain()*200+"% max over HP.\n\n");
+		player.HP -= Math.round(player.maxOverHP() * berzerkerandlustzerkerHPdrain() * 2);
+		if (!player.hasPerk(PerkLib.EndlessRage) && player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.ItsZerkingTime)) player.addStatusValue(StatusEffects.Berzerking, 1, -4);
+		player.addStatusValue(StatusEffects.Berzerking, 2, 2);
 		enemyAI();
 	}
 	public function berzerkG3():void {
 		clearOutput();
-		outputText("Placeholder text that only meantion savage fury reaching Grade 3."+(player.hasPerk(PerkLib.Anger)?" +1 large/massive weapon atk.":"")+" - 50% max over HP.\n\n");
-		player.HP -= Math.round(player.maxOverHP() * 0.5);
-		if (!player.hasPerk(PerkLib.EndlessRage)) player.addStatusValue(StatusEffects.Berzerking, 1, -2);
+		outputText("Placeholder text that only meantion savage fury reaching Grade 3."+(player.hasPerk(PerkLib.Anger)?" +1 large/massive weapon atk.":"")+" - "+berzerkerandlustzerkerHPdrain()*100+"% max over HP.\n\n");
+		player.HP -= Math.round(player.maxOverHP() * berzerkerandlustzerkerHPdrain());
+		if (!player.hasPerk(PerkLib.EndlessRage) && player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.ItsZerkingTime)) player.addStatusValue(StatusEffects.Berzerking, 1, -2);
 		player.addStatusValue(StatusEffects.Berzerking, 2, 1);
+		enemyAI();
+	}
+	public function berzerkG3and4():void {
+		clearOutput();
+		outputText("Placeholder text that only meantion savage fury reaching Grade 4."+(player.hasPerk(PerkLib.Anger)?" +2 large/massive weapon atk.":"")+" - "+berzerkerandlustzerkerHPdrain()*200+"% max over HP.\n\n");
+		player.HP -= Math.round(player.maxOverHP() * berzerkerandlustzerkerHPdrain() * 2);
+		if (!player.hasPerk(PerkLib.EndlessRage) && player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.ItsZerkingTime)) player.addStatusValue(StatusEffects.Berzerking, 1, -4);
+		player.addStatusValue(StatusEffects.Berzerking, 2, 2);
 		enemyAI();
 	}
 	public function berzerkG4():void {
 		clearOutput();
-		outputText("Placeholder text that only meantion savage fury reaching Grade 4. +1 large/massive weapon atk. - 50% max over HP.\n\n");
-		player.HP -= Math.round(player.maxOverHP() * 0.5);
-		if (!player.hasPerk(PerkLib.EndlessRage)) player.addStatusValue(StatusEffects.Berzerking, 1, -2);
+		outputText("Placeholder text that only meantion savage fury reaching Grade 4. +1 large/massive weapon atk. - "+berzerkerandlustzerkerHPdrain()*100+"% max over HP.\n\n");
+		player.HP -= Math.round(player.maxOverHP() * berzerkerandlustzerkerHPdrain());
+		if (!player.hasPerk(PerkLib.EndlessRage) && player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.ItsZerkingTime)) player.addStatusValue(StatusEffects.Berzerking, 1, -2);
 		player.addStatusValue(StatusEffects.Berzerking, 2, 1);
 		enemyAI();
 	}
@@ -3106,27 +3219,62 @@ public class MagicSpecials extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.Lustzerking,lustzerkDuration,0,0,0);
 		enemyAI();
 	}
+	public function lustzerkG1and2():void {
+		clearOutput();
+		player.wrath -= 50;
+		var lustzerkDuration:Number = 10;
+		if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 2) lustzerkDuration += 2;
+		if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) lustzerkDuration += 8;
+		if (player.hasPerk(PerkLib.ColderLust)) {
+			outputText("You roar and unleash your lustful fury in order to destroy your foe!\n\n");
+		}
+		else if (player.hasPerk(PerkLib.ColdLust)) {
+			outputText("You roar and unleash your lustful fury, forgetting about defense from magical attacks in order to destroy your foe!\n\n");
+		}
+		else outputText("You roar and unleash your lustful fury, forgetting about defense from any sexual attacks or magical attacks in order to destroy your foe!\n\n");
+		outputText(" +1 large/massive weapon atk. - "+berzerkerandlustzerkerHPdrain()*100+"% max over HP.");
+		player.HP -= Math.round(player.maxOverHP() * berzerkerandlustzerkerHPdrain());
+		if (!player.hasPerk(PerkLib.EndlessRage)) player.createStatusEffect(StatusEffects.Lustzerking,(lustzerkDuration-2),0,0,0);
+		player.createStatusEffect(StatusEffects.Lustzerking,lustzerkDuration,1,0,0);
+		enemyAI();
+	}
 	public function lustzerkG2():void {
 		clearOutput();
-		outputText("Placeholder text that only meantion lusty fury reaching Grade 2."+(player.hasPerk(PerkLib.Anger)?" +1 large/massive weapon atk.":"")+" - 50% max over HP.\n\n");
-		player.HP -= Math.round(player.maxOverHP() * 0.5);
-		if (!player.hasPerk(PerkLib.EndlessRage)) player.addStatusValue(StatusEffects.Lustzerking, 1, -2);
+		outputText("Placeholder text that only meantion lusty fury reaching Grade 2."+(player.hasPerk(PerkLib.Anger)?" +1 large/massive weapon atk.":"")+" - "+berzerkerandlustzerkerHPdrain()*100+"% max over HP.\n\n");
+		player.HP -= Math.round(player.maxOverHP() * berzerkerandlustzerkerHPdrain());
+		if (!player.hasPerk(PerkLib.EndlessRage) && player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.ItsZerkingTime)) player.addStatusValue(StatusEffects.Lustzerking, 1, -2);
 		player.addStatusValue(StatusEffects.Lustzerking, 2, 1);
+		enemyAI();
+	}
+	public function lustzerkG2and3():void {
+		clearOutput();
+		outputText("Placeholder text that only meantion lusty fury reaching Grade 3."+(player.hasPerk(PerkLib.Anger)?" +2 large/massive weapon atk.":"")+" - "+berzerkerandlustzerkerHPdrain()*200+"% max over HP.\n\n");
+		player.HP -= Math.round(player.maxOverHP() * berzerkerandlustzerkerHPdrain() * 2);
+		if (!player.hasPerk(PerkLib.EndlessRage) && player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.ItsZerkingTime)) player.addStatusValue(StatusEffects.Lustzerking, 1, -4);
+		player.addStatusValue(StatusEffects.Lustzerking, 2, 2);
 		enemyAI();
 	}
 	public function lustzerkG3():void {
 		clearOutput();
-		outputText("Placeholder text that only meantion lusty fury reaching Grade 3."+(player.hasPerk(PerkLib.Anger)?" +1 large/massive weapon atk.":"")+" - 50% max over HP.\n\n");
-		player.HP -= Math.round(player.maxOverHP() * 0.5);
-		if (!player.hasPerk(PerkLib.EndlessRage)) player.addStatusValue(StatusEffects.Lustzerking, 1, -2);
+		outputText("Placeholder text that only meantion lusty fury reaching Grade 3."+(player.hasPerk(PerkLib.Anger)?" +1 large/massive weapon atk.":"")+" - "+berzerkerandlustzerkerHPdrain()*100+"% max over HP.\n\n");
+		player.HP -= Math.round(player.maxOverHP() * berzerkerandlustzerkerHPdrain());
+		if (!player.hasPerk(PerkLib.EndlessRage) && player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.ItsZerkingTime)) player.addStatusValue(StatusEffects.Lustzerking, 1, -2);
 		player.addStatusValue(StatusEffects.Lustzerking, 2, 1);
+		enemyAI();
+	}
+	public function lustzerkG3and4():void {
+		clearOutput();
+		outputText("Placeholder text that only meantion lusty fury reaching Grade 4."+(player.hasPerk(PerkLib.Anger)?" +2 large/massive weapon atk.":"")+" - "+berzerkerandlustzerkerHPdrain()*200+"% max over HP.\n\n");
+		player.HP -= Math.round(player.maxOverHP() * berzerkerandlustzerkerHPdrain() * 2);
+		if (!player.hasPerk(PerkLib.EndlessRage) && player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.ItsZerkingTime)) player.addStatusValue(StatusEffects.Lustzerking, 1, -4);
+		player.addStatusValue(StatusEffects.Lustzerking, 2, 2);
 		enemyAI();
 	}
 	public function lustzerkG4():void {
 		clearOutput();
-		outputText("Placeholder text that only meantion lusty fury reaching Grade 4. +1 large/massive weapon atk. - 50% max over HP.\n\n");
-		player.HP -= Math.round(player.maxOverHP() * 0.5);
-		if (!player.hasPerk(PerkLib.EndlessRage)) player.addStatusValue(StatusEffects.Lustzerking, 1, -2);
+		outputText("Placeholder text that only meantion lusty fury reaching Grade 4. +1 large/massive weapon atk. - "+berzerkerandlustzerkerHPdrain()*100+"% max over HP.\n\n");
+		player.HP -= Math.round(player.maxOverHP() * berzerkerandlustzerkerHPdrain());
+		if (!player.hasPerk(PerkLib.EndlessRage) && player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.ItsZerkingTime)) player.addStatusValue(StatusEffects.Lustzerking, 1, -2);
 		player.addStatusValue(StatusEffects.Lustzerking, 2, 1);
 		enemyAI();
 	}
@@ -3416,6 +3564,16 @@ public class MagicSpecials extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.EverywhereAndNowhere,6,0,0,0);
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.EverywhereAndNowhere,9,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownEveryAndNowhere,10,0,0,0);
+		enemyAI();
+	}
+
+	public function ShadowTeleport():void {
+		clearOutput();
+		fatigue(30, USEFATG_PHYSICAL);
+		outputText("You begin to use vampire power in order to displace yourself between shadows this is only going to last for a short time but let them try and hurt you meanwhile.\n\n");
+		player.createStatusEffect(StatusEffects.ShadowTeleport,6,0,0,0);
+		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.ShadowTeleport,9,0,0,0);
+		else player.createStatusEffect(StatusEffects.CooldownShadowTeleport,10,0,0,0);
 		enemyAI();
 	}
 
@@ -3915,7 +4073,6 @@ public class MagicSpecials extends BaseCombatContent {
 	public function manaShot():void {
 		clearOutput();
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
-		clearOutput();
 		doNext(combatMenu);
 		useMana((40*arigeanMagicSpecialsCost()), Combat.USEMANA_MAGIC);
 		combat.darkRitualCheckDamage();
@@ -3934,11 +4091,11 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		clearOutput();
-		player.createStatusEffect(StatusEffects.CooldownManaShot, 3, 0, 0, 0);
+		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownManaShot,2,0,0,0);
+		else player.createStatusEffect(StatusEffects.CooldownManaShot, 3, 0, 0, 0);
 		outputText("You focus your eyes upon your target and fire a single blast from " + (player.tailCount > 1?"one of your extra maws":"your large extra mouth") + ". ");
 		if (40 + rand(player.spe) > monster.spe) {
-			var damage:Number = player.str;
-			damage += scalingBonusStrength();
+			var damage:Number = scalingBonusStrength() * 2;
 			damage *= spellMod();
 			//Determine if critical hit!
 			var crit:Boolean = false;
@@ -3954,12 +4111,14 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 			if (player.armor == armors.ANE_UNI) damage *= 1.2;
+			if (player.armor == armors.P_REGAL) damage *= 1.5;
 			if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 1) damage *= arigeanAssociationCortexBoost();
 			damage = Math.round(damage);
 			outputText("It hits its mark dealing ");
 			doMagicDamage(damage, true, true);
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
 			outputText(" damage!\n\n");
+			if (player.armor == armors.P_REGAL) HPChange(Math.round(damage*0.15), true);
 			checkAchievementDamage(damage);
 			combat.heroBaneProc(damage);
 			statScreenRefresh();
@@ -3982,7 +4141,6 @@ public class MagicSpecials extends BaseCombatContent {
 	public function manaBarrage():void {
 		clearOutput();
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
-		clearOutput();
 		doNext(combatMenu);
 		useMana((200*arigeanMagicSpecialsCost()), Combat.USEMANA_MAGIC);
 		combat.darkRitualCheckDamage();
@@ -4001,11 +4159,11 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		clearOutput();
-		player.createStatusEffect(StatusEffects.CooldownManaBarrage, 3, 0, 0, 0);
+		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownManaBarrage,2,0,0,0);
+		else player.createStatusEffect(StatusEffects.CooldownManaBarrage, 3, 0, 0, 0);
 		outputText("You focus your eyes upon your target and fire a barrage of blasts from your extra maw" + (player.tailCount > 1?"s":"") + ". ");
 		if (40 + rand(player.spe) > monster.spe) {
-			var damage:Number = player.str;
-			damage += scalingBonusStrength();
+			var damage:Number = scalingBonusStrength() * 2;
 			damage *= spellMod();
 			//Determine if critical hit!
 			var crit:Boolean = false;
@@ -4021,6 +4179,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 			if (player.armor == armors.ANE_UNI) damage *= 1.2;
+			if (player.armor == armors.P_REGAL) damage *= 1.5;
 			if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 1) damage *= arigeanAssociationCortexBoost();
 			damage = Math.round(damage);
 			outputText("Your target is unable to avoid the barrage of blasts and takes ");
@@ -4032,6 +4191,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
 			outputText(" damage!\n\n");
 			damage *= 5;
+			if (player.armor == armors.P_REGAL) HPChange(Math.round(damage*0.15), true);
 			checkAchievementDamage(damage);
 			combat.heroBaneProc(damage);
 			statScreenRefresh();
@@ -4051,17 +4211,89 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 		}
 	}
+	public function arigeanChargedShot():void {
+		clearOutput();
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 1) {
+			outputText("You release the built up energy into a powerful combination of shots towards your target with a yell! The combined shots hit dealing ");
+			var damage:Number = scalingBonusStrength() * 2;
+			damage *= spellMod();
+			//Determine if critical hit!
+			var crit:Boolean = false;
+			var critChance:int = 5;
+			critChance += combatMagicalCritical();
+			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+			if (rand(100) < critChance) {
+				crit = true;
+				damage *= 1.75;
+			}
+			//High damage to goes.
+			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
+			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+			if (player.armor == armors.ANE_UNI) damage *= 1.2;
+			if (player.armor == armors.P_REGAL) damage *= 1.5;
+			if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 1) damage *= arigeanAssociationCortexBoost();
+			damage *= 20;
+			damage = Math.round(damage);
+			doMagicDamage(damage, true, true);
+			if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownChargedShot,3,0,0,0);
+			else player.createStatusEffect(StatusEffects.CooldownChargedShot,4,0,0,0);
+			player.removeStatusEffect(StatusEffects.ChanneledAttack);
+			player.removeStatusEffect(StatusEffects.ChanneledAttackType);
+			outputText(" damage!\n\n");
+			if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+			if (monster is Lethice && (monster as Lethice).fightPhase == 3)
+			{
+				outputText("\n\n<i>\"Ouch. Such arcane skills for one so uncouth,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your magics?\"</i>\n\n");
+				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
+				enemyAI();
+			}
+			else enemyAI();
+		}
+		else {
+			useMana((400*arigeanMagicSpecialsCost()), Combat.USEMANA_MAGIC);
+			combat.darkRitualCheckDamage();
+			clearOutput();
+			outputText("You begin charging your extra mouth in preparation for a heavy attack.\n\n");
+			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.ChanneledAttackType, 8, 0, 0, 0);
+			enemyAI();
+		}
+	}
+	public function arigeanFinalityBarrage():void {
+		clearOutput();
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownFinalityBarrage,9,0,0,0);
+		else player.createStatusEffect(StatusEffects.CooldownFinalityBarrage,10,0,0,0);
+		outputText("You let loose a blood curdling yell, driving all the force you can into your maw for a overcharged blast of raw uncontrolled mana, scorching your insides as well as the foe in front of you! ");
+		var enemyHPlost:Number = 0.3;
+		if (player.armor == armors.P_REGAL) enemyHPlost *= 1.5;
+		if (player.hasStatusEffect(StatusEffects.DarkRitual)) {
+			HPChange(-Math.round(player.maxHP() * 0.7), true);
+			monster.HP -= Math.round(monster.maxHP() * (enemyHPlost * 3));
+		}
+		else {
+			HPChange(-Math.round(player.maxHP() * 0.6), true);
+			monster.HP -= Math.round(monster.maxHP() * enemyHPlost);
+		}
+		enemyAI();
+	}
 	private function arigeanAssociationCortexBoost():Number {
 		var aACB:Number = 1.2;
 		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 2) aACB += 0.3;
 		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 3) aACB += 0.4;
+		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 4) aACB += 0.5;
 		return aACB;
 	}
 	private function arigeanMagicSpecialsCost():Number {
 		var aMSC:Number = 1;
 		if (player.armor == armors.ANE_UNI) aMSC -= 0.2;
+		if (player.armor == armors.P_REGAL) aMSC -= 0.5;
 		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 2) aMSC -= 0.2;
 		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 3) aMSC -= 0.1;
+		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 4) aMSC -= 0.1;
+		if (aMSC < 0.1) aMSC = 0.1;
 		return aMSC;
 	}
 
@@ -4241,7 +4473,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.StarSphereMastery)) basicfoxfiredmgmulti += player.perkv1(PerkLib.StarSphereMastery) * 0.05;
 		if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) basicfoxfiredmgmulti += .5;
 		//Hosohi No Tama and bonus damage
-		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2) basicfoxfiredmgmulti += 1;
+		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 2) basicfoxfiredmgmulti += 1;
 		damage *= basicfoxfiredmgmulti;
 		//High damage to goes.
 		if(monster.short == "goo-girl") damage = Math.round(damage * 1.5);
@@ -4341,7 +4573,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.StarSphereMastery)) corruptedfoxfiredmgmulti += player.perkv1(PerkLib.StarSphereMastery) * 0.05;
 		if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) corruptedfoxfiredmgmulti += .25;
 		//Hosohi No Tama bonus damage
-		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2 && player.tailType == Tail.FOX && player.tailCount == 9) corruptedfoxfiredmgmulti += .5;
+		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 2 && player.tailType == Tail.FOX && player.tailCount == 9) corruptedfoxfiredmgmulti += .5;
 		damage *= corruptedfoxfiredmgmulti;
 		damage = combat.monsterCorruptDamageBonus(damage);
 		//High damage to goes.
@@ -4373,7 +4605,7 @@ public class MagicSpecials extends BaseCombatContent {
 		lustDmg *= 0.5;
 		if (player.hasPerk(PerkLib.EnlightenedNinetails) && player.tailType == Tail.FOX && player.tailCount == 9) lustDmg *= 2;
 		if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.tailType == Tail.FOX && player.tailCount == 9)  lustDmg *= 1.2;
-		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2 && player.tailType == Tail.FOX && player.tailCount == 9) lustDmg *= 1.5;
+		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 2 && player.tailType == Tail.FOX && player.tailCount == 9) lustDmg *= 1.5;
 		if (player.shieldName == "spirit focus") lustDmg *= 1.2;
 		if (player.headjewelryName == "fox hairpin") lustDmg *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
@@ -4443,7 +4675,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.StarSphereMastery)) fusedfoxfiredmgmulti += player.perkv1(PerkLib.StarSphereMastery) * 0.05;
 		if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) fusedfoxfiredmgmulti += .5;
 		//Hosohi No Tama and Fusion bonus damage
-		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2 && player.tailType == Tail.FOX && player.tailCount == 9) fusedfoxfiredmgmulti += 1;
+		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 2 && player.tailType == Tail.FOX && player.tailCount == 9) fusedfoxfiredmgmulti += 1;
 		damage *= fusedfoxfiredmgmulti;
 		damage = Math.round(damage * 2);
 		//High damage to goes.
@@ -4473,7 +4705,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
 		lustDmg *= 0.5;
 		if (player.tailType == Tail.FOX && player.tailCount == 9) lustDmg *= 2.8;
-		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2 && player.tailType == Tail.FOX && player.tailCount == 9) lustDmg *= 1.5;
+		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 2 && player.tailType == Tail.FOX && player.tailCount == 9) lustDmg *= 1.5;
 		if (player.shieldName == "spirit focus") lustDmg *= 1.2;
 		if (player.headjewelryName == "fox hairpin") lustDmg *= 1.2;
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) lustDmg *= 2.5;
@@ -4545,7 +4777,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.StarSphereMastery)) purefoxfiredmgmulti += player.perkv1(PerkLib.StarSphereMastery) * 0.05;
 		if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) purefoxfiredmgmulti += .25;
 		//Hosohi No Tama bonus damage
-		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2 && player.tailType == Tail.FOX && player.tailCount == 9) purefoxfiredmgmulti += .5;
+		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 2 && player.tailType == Tail.FOX && player.tailCount == 9) purefoxfiredmgmulti += .5;
 		damage *= purefoxfiredmgmulti;
 		damage = combat.monsterPureDamageBonus(damage);
 		//High damage to goes.
@@ -4576,7 +4808,7 @@ public class MagicSpecials extends BaseCombatContent {
 		lustDmg *= 0.125;
 		if (player.hasPerk(PerkLib.EnlightenedNinetails) && player.tailType == Tail.FOX && player.tailCount == 9) lustDmg *= 0.5;
 		if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.tailType == Tail.FOX && player.tailCount == 9) lustDmg *= 1.2;
-		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2 && player.tailType == Tail.FOX && player.tailCount == 9) lustDmg *= 1.5;
+		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 2 && player.tailType == Tail.FOX && player.tailCount == 9) lustDmg *= 1.5;
 		if (player.shieldName == "spirit focus") lustDmg *= 1.2;
 		if (player.headjewelryName == "fox hairpin") lustDmg *= 1.2;
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) lustDmg *= 2.5;
@@ -4610,17 +4842,17 @@ public class MagicSpecials extends BaseCombatContent {
 
 	public function kitsuneskillCost():Number {
 		var modksc:Number = 1;
-		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1) modksc -= 0.5;
+		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 1) modksc -= 0.5;
 		if (player.tailCount == 9 && (player.tailType == Tail.FOX || player.tailType == Tail.KITSHOO)) {
-			if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 3) modksc *= 3;
-			else if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2) modksc *= 2;
+			if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3) modksc *= 3;
+			else if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 2) modksc *= 2;
 			else modksc += 0.5;
 		}
 		return modksc;
 	}
 	public function kitsuneskill2Cost():Number {
 		var modks2c:Number = 1;
-		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 2) modks2c -= 0.5;
+		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2) modks2c -= 0.5;
 		return modks2c;
 	}
 
@@ -4647,11 +4879,11 @@ public class MagicSpecials extends BaseCombatContent {
 		var ItemMod:Number = 0;
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) ItemMod += 1;
 		if (player.hasPerk(PerkLib.NaturalInstincts)) ItemMod += 1;
-		if (player.tailCount == 9 && player.tailType == Tail.FOX && player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 1) {
+		if (player.tailCount == 9 && player.tailType == Tail.FOX && player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1) {
 			player.createStatusEffect(StatusEffects.CooldownTerror, 5-ItemMod, 0, 0, 0);
 			fatigue((200 * kitsuneskill2Cost()), USEFATG_MAGIC_NOBM);
 		}
-		else if ((player.tailCount == 9 && player.tailType == Tail.FOX) || player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 1) {
+		else if ((player.tailCount == 9 && player.tailType == Tail.FOX) || player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1) {
 			player.createStatusEffect(StatusEffects.CooldownTerror, 7-ItemMod, 0, 0, 0);
 			fatigue((100 * kitsuneskill2Cost()), USEFATG_MAGIC_NOBM);
 		}
@@ -4662,7 +4894,7 @@ public class MagicSpecials extends BaseCombatContent {
 		//Inflicts fear and reduces enemy SPD.
 		outputText("The world goes dark, an inky shadow blanketing everything in sight as you fill [themonster]'s mind with visions of otherworldly terror that defy description.  They cower in horror as they succumb to your illusion, believing themselves beset by eldritch horrors beyond their wildest nightmares.\n\n");
 		var speedDebuff:Number = 0;
-		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3) {
+		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 3) {
 			if (monster.spe >= 71) speedDebuff += 70;
 			else speedDebuff += 70 - monster.spe;
 		}
@@ -4696,11 +4928,11 @@ public class MagicSpecials extends BaseCombatContent {
 		var ItemMod:Number = 0;
 		if (player.hasPerk(PerkLib.InariBlessedKimono)) ItemMod += 1;
 		if (player.hasPerk(PerkLib.NaturalInstincts)) ItemMod += 1;
-		if (player.tailCount == 9 && player.tailType == Tail.FOX && player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 1) {
+		if (player.tailCount == 9 && player.tailType == Tail.FOX && player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1) {
 			player.createStatusEffect(StatusEffects.CooldownIllusion,5-ItemMod,0,0,0);
 			fatigue((200 * kitsuneskill2Cost()), USEFATG_MAGIC_NOBM);
 		}
-		else if ((player.tailCount == 9 && player.tailType == Tail.FOX) || player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 1) {
+		else if ((player.tailCount == 9 && player.tailType == Tail.FOX) || player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1) {
 			player.createStatusEffect(StatusEffects.CooldownIllusion,7-ItemMod,0,0,0);
 			fatigue((100 * kitsuneskill2Cost()), USEFATG_MAGIC_NOBM);
 		}
@@ -4848,7 +5080,7 @@ public class MagicSpecials extends BaseCombatContent {
 				lustDmgF += (4 * (1 + player.newGamePlusMod()));
 				break;
 		}
-		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemTags.A_REVEALING)) lustDmgF *= (1 + ((10 + rand(11)) / 100));
+		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemConstants.A_REVEALING)) lustDmgF *= (1 + ((10 + rand(11)) / 100));
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) lustDmgF *= (1 + (player.lust100 * 0.01));
 		if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) lustDmgF *= (1 + combat.historyWhoreBonus());
 		if (player.armor == armors.ELFDRES && player.isElf()) lustDmgF *= 2;
@@ -4872,11 +5104,6 @@ public class MagicSpecials extends BaseCombatContent {
 		lustDmgF = lustDmgF * monster.lustVuln;
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
-		if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
-			outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
-			player.takeLustDamage(Math.round(-lustDmgF)/40, true);
-			lustDmgF *= 1.2;
-		}
 		lustDmgF = Math.round(monster.lustVuln * lustDmgF);
 		monster.teased(lustDmgF);
 		if (critL) outputText(" <b>Critical!</b>");
@@ -5254,11 +5481,6 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
-			outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
-			player.takeLustDamage(Math.round(-lustDmg)/40, true);
-			lustDmg *= 1.2;
-		}
 		if(monster.lust < (monster.maxLust() * 0.3)) outputText("[Themonster] squirms as the magic affects [monster him].  ");
 		if(monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
 			if(monster.plural) outputText("[Themonster] stagger, suddenly weak and having trouble focusing on staying upright.  ");
@@ -5323,11 +5545,6 @@ public class MagicSpecials extends BaseCombatContent {
 		if(player.armorName == "Scandalous Succubus Clothing") lustDmg *= 1.25;
 		if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
 		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
-		if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
-			outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
-			player.takeLustDamage(Math.round(-lustDmg)/40, true);
-			lustDmg *= 1.2;
-		}
 		if (player.perkv1(IMutationsLib.BlackHeartIM) >= 4) lustDmg += combat.teases.teaseBaseLustDamage();
 		monster.teased(Math.round(monster.lustVuln * lustDmg));
 		outputText("\n\n");
@@ -5457,11 +5674,6 @@ public class MagicSpecials extends BaseCombatContent {
 				damage += Math.round(player.lust * 0.1);
 				player.lust -= Math.round(player.lust * 0.1);
 			}
-			if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
-				outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
-				player.takeLustDamage(Math.round(-damage)/40, true);
-				damage *= 1.2;
-			}
 			monster.teased(Math.round(monster.lustVuln * damage));
 			outputText("\n\n");
 			if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
@@ -5524,7 +5736,7 @@ public class MagicSpecials extends BaseCombatContent {
 		selflust = Math.round(selflust);
 		dynStats("lus", selflust);
 		monster.createStatusEffect(StatusEffects.Polymorphed, 3, 0, 0, 0);
-		if (player.lust >= player.maxOverLust()) doNext(endLustLoss);
+		if (player.lust >= player.maxOverLust() && !combat.tyrantiaTrainingExtension()) doNext(endLustLoss);
 		else enemyAI();
 	}
 
@@ -5587,7 +5799,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage = Math.round(damage);
 		monster.HP -= damage;
-		outputText("You call on the power of your tainted blood drawing out an almighty scream so strong and sharp it explode from you like a shockwave sending [themonster] flying. [monster he] will be shaken from the glass shattering blast for a moment " + damage + " damage.");
+		outputText("You call on the power of your tainted blood drawing out an almighty scream so strong and sharp it explode from you like a shockwave sending [themonster] flying. [monster He] will be shaken from the glass shattering blast for a moment " + damage + " damage.");
 		if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
 			if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 		}
@@ -5675,7 +5887,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage = Math.round(0.5 * damage);
 		}
 		//Miss:
-		if(((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) && !monster.monsterIsStunned()) {
+		if(((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) && !monster.monsterIsStunned()) {
 			outputText("  Against all odds, [themonster] manages to avoid your deadly winds. [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
@@ -5761,7 +5973,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage = Math.round(0.5 * damage);
 		}
 		//Miss:
-		if(((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) && !monster.monsterIsStunned()) {
+		if(((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) && !monster.monsterIsStunned()) {
 			outputText("  Against all odds, [themonster] manages to avoid your deadly winds. [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances

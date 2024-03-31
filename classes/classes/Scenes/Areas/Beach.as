@@ -322,7 +322,7 @@ import classes.Scenes.SceneLib;
 			if (Forgefather.materialsExplained != true) NothingHappened();
 			else {
 				clearOutput();
-				if (player.fatigue > player.maxFatigue() - 50) {
+				if (player.fatigue > player.maxOverFatigue() - 50) {
 					outputText("\n\n<b>You are too tired to consider mining. Perhaps some rest will suffice?</b>");
 					endEncounter();
 					return;
@@ -344,7 +344,7 @@ import classes.Scenes.SceneLib;
 					player.mineXP(player.MiningMulti() * 2);
 				}
 				else {
-					outputText("After attempt to mine Emeralds you ended with unusable piece.");
+					outputText("After attempting to mine Emeralds, you ended with only unusable pieces.");
 					endEncounter(120);
 				}
 			}

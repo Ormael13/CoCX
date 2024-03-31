@@ -193,7 +193,7 @@ public class Ashlands extends BaseContent
 		if (Forgefather.materialsExplained != 1) endEncounter();
 		else {
 			clearOutput();
-			if (player.fatigue > player.maxFatigue() - 50) {
+			if (player.fatigue > player.maxOverFatigue() - 50) {
 				outputText("\n\n<b>You are too tired to consider mining. Perhaps some rest will suffice?</b>");
 				endEncounter();
 				return;
@@ -214,7 +214,7 @@ public class Ashlands extends BaseContent
 				player.mineXP(player.MiningMulti() * 2);
 			}
 			else {
-				outputText("After attempt to mine Rubies you ended with unusable piece.");
+				outputText("After attempting to mine Rubies, you ended up with only unusable pieces.");
 				endEncounter(120);
 			}
 		}

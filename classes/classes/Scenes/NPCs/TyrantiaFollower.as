@@ -274,7 +274,7 @@ public function repeatEncounterBattlefield():void {
 	addButton(1, "Talk", repeatEncounterBattlefieldTalk);
 	if (TyrantiaAffectionMeter >= 15) addButton(2, "Spar", TyrantiaSpar);
 	else addButtonDisabled(2, "???", "Req. 15%+ affection.");
-	if (TyrantiaTrainingSessions >= 25) addButtonDisabled(3, "Training", "You finished all training session with her.");
+	if (TyrantiaTrainingSessions >= 30) addButtonDisabled(3, "Training", "You finished all training session with her.");
 	else addButton(3, "Training", TyrantiaTraining);
 	if (TyraniaPostFinalKissScene) addButton(4, "Sex", TyrantiaSexMenu);
 	else addButtonDisabled(4, "Sex", "Req. special scene after reaching 40%+ affection.");
@@ -295,7 +295,7 @@ public function repeatEncounterBattlefieldRe():void {
 	addButton(1, "Talk", repeatEncounterBattlefieldTalk);
 	if (TyrantiaAffectionMeter >= 15) addButton(2, "Spar", TyrantiaSpar);
 	else addButtonDisabled(2, "???", "Req. 15%+ affection.");
-	if (TyrantiaTrainingSessions >= 25) addButtonDisabled(3, "Training", "You finished all training session with her.");
+	if (TyrantiaTrainingSessions >= 30) addButtonDisabled(3, "Training", "You finished all training session with her.");
 	else addButton(3, "Training", TyrantiaTraining);
 	if (TyraniaPostFinalKissScene) addButton(4, "Sex", TyrantiaSexMenu);
 	else addButtonDisabled(4, "Sex", "Req. special scene after reaching 40%+ affection.");
@@ -906,9 +906,9 @@ public function TyrantiaTraining2():void {
 		if (TyrantiaTrainingSessions == 14) outputText("<b>You have gained new magic special: False Weapon - costs 10% of your max Lust and 100 Fatigue and lasts until the end of combat.</b>\n\n");
 		if (TyrantiaTrainingSessions == 19) outputText("<b>You can now use toggle to turn on/off auto-cast of Tyrant State at the combat start.</b>\n\n");
 		if (TyrantiaTrainingSessions == 24) outputText("<b>You have gained ability to take less physical and lust damage the closer you're to the maximum lust. (20% at 50% Max Lust, up to 70% at max)</b>\n\n");
-		//if (TyrantiaTrainingSessions == 29) outputText("<b></b>\n\n");
-		//if (TyrantiaTrainingSessions == 34) outputText("<b></b>\n\n");
-		//if (TyrantiaTrainingSessions == 39) outputText("<b></b>\n\n");
+		if (TyrantiaTrainingSessions == 29) outputText("<b>You can delay your own defeat by Lust for two turns. Reducing your own Lust below the max will reset the timer.</b>\n\n");
+		if (TyrantiaTrainingSessions == 34) outputText("<b>If you are in Rut or Heat, halve the lust DoT you take from it, and deal an additional 20% physical damage while under the effects.</b>\n\n");
+		//if (TyrantiaTrainingSessions == 39) outputText("<b></b>\n\n");//TyrantiaFollower.TyrantiaTrainingSessions >= 35
 	}
 	else {
 		outputText("Tyrantia considers your state, shaking her head.\n\n");
@@ -1253,7 +1253,7 @@ public function TyrantiaAtCamp():void {
 	addButton(2, "Spar", TyrantiaSpar)
 		.disableIf((flags[kFLAGS.PLAYER_COMPANION_1] == "Tyrantia" || flags[kFLAGS.PLAYER_COMPANION_2] == "Tyrantia"), "You can't fight against her as long she's in your team.")
 		.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "You need a good sparring ring for that.");
-	if (TyrantiaTrainingSessions >= 20) addButtonDisabled(3, "Training", "You finished all training session with her.");
+	if (TyrantiaTrainingSessions >= 30) addButtonDisabled(3, "Training", "You finished all training session with her.");
 	else addButton(3, "Training", TyrantiaTraining);
 	addButton(4, "Sex", TyrantiaSexMenu);
 	if (player.hasPerk(PerkLib.BasicLeadership) && TyrantiaAffectionMeter >= 60) addButton(5, "JoinMe", TyrantiaHenchmanOption);
@@ -1408,6 +1408,7 @@ public function itemImproveMenuCorrupt():void {
 		[weapons.OTETSU, weapons.POCDEST, weapons.DOCDEST],
 		[weapons.BFTHSWORD, weapons.ARMAGED, weapons.CHAOSEA],
 		[weapons.A_WAND, weapons.OCCULUS, weapons.ECLIPSE],
+		[weapons.PFLUTTE, weapons.ELYSIUM, weapons.HELLCAL],
 		[weaponsrange.BOWLONG, weaponsrange.ARTEMIS, weaponsrange.WILDHUN],
 		[weaponsrange.SHUNHAR, weaponsrange.KSLHARP, weaponsrange.LEVHARP],
 		[weaponsrange.SIXSHOT, weaponsrange.GOODSAM, weaponsrange.BADOMEN],

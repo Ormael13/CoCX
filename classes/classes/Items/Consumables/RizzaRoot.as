@@ -3,7 +3,6 @@
  */
 package classes.Items.Consumables
 {
-import classes.Items.ItemTags;
 import classes.Player;
 import classes.internals.Utils;
 
@@ -49,7 +48,7 @@ public class RizzaRoot extends SimpleConsumable
         public function RizzaRoot()
         {
             super("RizzaRt", "Rizza Root", "a tube of rizza root strands", rizzaRootEffect, 10, "A small ceramic tube full of fine red root strands.  They smell something like citrus fruit.");
-			withTag(ItemTags.U_TF);
+			withTag(U_TF);
         }
 
     }

@@ -2,7 +2,6 @@ package classes.Items.Weapons
 {
 import classes.EventParser;
 import classes.Items.Weapon;
-import classes.Items.ItemTags;
 import classes.PerkLib;
 import classes.TimeAwareInterface;
 
@@ -25,11 +24,11 @@ public class Occulus extends Weapon implements TimeAwareInterface
 		public function Occulus()
 		{
 			super("Occulus", "Occulus", "Occulus", "an Occulus", "bonk", 10, 1600,
-					"A wand rumored to have been the favorite catalyst of the now missing in action god of magic. The Occulus is rumored to have been seen and used as early as the genesis of Mareth. Occulus was made to create not to destroy and thus perform best when used to cast restorative magic",
-					"Wand, greatly empowers healing spells, increases Spellpower based on purity", WT_WAND
+					"A wand rumored to have been the favorite catalyst of the now missing in action god of magic. The Occulus is rumored to have been seen and used as early as the genesis of Mareth. Occulus was made to create not to destroy and thus perform best when used to cast restorative magic. (greatly empowers healing spells, increases Spellpower based on purity)",
+					WT_WAND, WSZ_MEDIUM
 			);
 			withBuff('spellpower', +1.0);
-			withTag(ItemTags.I_LEGENDARY);
+			withTag(I_LEGENDARY);
 			EventParser.timeAwareClassAdd(this);
 		}
 
@@ -72,7 +71,7 @@ public class Occulus extends Weapon implements TimeAwareInterface
 				scal -= 5;
 			}
 			boost += Math.round(game.player.cor / scal);
-			return (1 + boost); 
+			return (1 + boost);
 		}
 
 		override public function get description():String {

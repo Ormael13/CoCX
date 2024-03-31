@@ -29,6 +29,7 @@ public class HumanThyroidGlandMutation extends IMutationPerkType
                 descS += "Regenerates 6% of max HP/hour and 3% of max HP/round. Gain soulforce recovery equal to 1% of your total soulforce and mana recovery increased by 0,5% of max mana";
             }
             if (descS != "")descS += ".";
+            if (pTier >= 1) descS += " (req. 18+ human score to have all effects active)";
             return descS;
         }
 

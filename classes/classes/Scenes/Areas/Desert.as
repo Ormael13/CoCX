@@ -101,14 +101,14 @@ use namespace CoC;
 					when: fn.ifLevelMin(4),
 					chance: nagaChance,
 					call: nagaScene.nagaEncounter
-				}, {
+				}, {/*
 					name  : "sandtrap",
 					label : "Sand Trap",
 					kind  : 'monster',
 					chance: 0.5,
 					when  : fn.ifLevelMin(2),
 					call  : sandTrapScene.encounterASandTarp
-				}, {
+				}, {*/
 					name: "sandwitch",
 					label : "Sand Witch",
 					kind  : 'monster',

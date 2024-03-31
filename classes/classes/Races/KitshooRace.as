@@ -65,7 +65,7 @@ public class KitshooRace extends Race {
 				.hairColor1(ANY(KitshooHairColors), +1)
 				.hasPerk(PerkLib.StarSphereMastery, +1);
 		
-		addMutation(IMutationsLib.KitsuneThyroidGlandIM);
+		addBloodline(PerkLib.SalamandersDescendant, PerkLib.BloodlineSalamander);
 		addMutation(IMutationsLib.KitsuneParathyroidGlandsIM);
 		addMutation(IMutationsLib.SalamanderAdrenalGlandsIM);
 		

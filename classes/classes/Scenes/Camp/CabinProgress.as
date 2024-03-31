@@ -32,7 +32,7 @@ import classes.Scenes.SceneLib;
 				SceneLib.dungeons.cabin.enterCabin();
 				return;
 			}
-			if (player.fatigue <= player.maxFatigue() - gatherWoodsORquarrySiteMineCost())
+			if (player.fatigue <= player.maxOverFatigue() - gatherWoodsORquarrySiteMineCost())
 			{
 				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 1) startWork();
 				else if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 2) startLayout();
@@ -111,7 +111,7 @@ import classes.Scenes.SceneLib;
 				player.addStatusValue(StatusEffects.ResourceNode1, 1, 1);
 			}
 			menu();
-			if (player.fatigue > player.maxFatigue() - gatherWoodsORquarrySiteMineCost()) {
+			if (player.fatigue > player.maxOverFatigue() - gatherWoodsORquarrySiteMineCost()) {
 				outputText("<b>You are too tired to consider cutting down the trees. Perhaps some rest will suffice?</b>");
 				endEncounter();
 				return;
@@ -259,7 +259,7 @@ import classes.Scenes.SceneLib;
 			return fatigueAmount;
 		}
 		private function quarrySiteMine(nightExploration:Boolean = false):void {
-			if (player.fatigue > player.maxFatigue() - gatherWoodsORquarrySiteMineCost()) {
+			if (player.fatigue > player.maxOverFatigue() - gatherWoodsORquarrySiteMineCost()) {
 				outputText("\n\n<b>You are too tired to consider mining. Perhaps some rest will suffice?</b>");
 				endEncounter();
 				return;
@@ -311,7 +311,7 @@ import classes.Scenes.SceneLib;
 					inventory.takeItem(itype, curry(explorer.done,120));
 				}
 				else {
-					outputText(" After attempt to mine ore vein you ended with unusable piece.");
+					outputText(" After attempting to mine an Ore Vein, you ended up with unusable pieces.");
 					endEncounter(120);
 				}
 			}
@@ -361,7 +361,7 @@ import classes.Scenes.SceneLib;
 
 		public function incrementWoodSupply(amount:int):void {
 			CampStatsAndResources.WoodResc += amount;
-			outputText("<b>(+" + amount + " wood"+(amount>1?"s":"")+"! "+CampStatsAndResources.WoodResc+"/"+SceneLib.campUpgrades.checkMaterialsCapWood()+" total!");
+			outputText("<b>(+" + amount + " wood! "+CampStatsAndResources.WoodResc+"/"+SceneLib.campUpgrades.checkMaterialsCapWood()+" total!");
 			if (CampStatsAndResources.WoodResc >= SceneLib.campUpgrades.checkMaterialsCapWood()) {
 				CampStatsAndResources.WoodResc = SceneLib.campUpgrades.checkMaterialsCapWood();
 				outputText(" Your wood capacity is full.")
@@ -425,7 +425,7 @@ import classes.Scenes.SceneLib;
 			//if (CoC.instance.amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1) outputText("\"<i>PLACEHOLDER</i>\" Amily asks. \n\n");
 			outputText("You start to construct a wooden frame according to the instructions. Using your hammer and nails, you put the wood frame together and put it up. You then add temporary supports to ensure it doesn't fall down. You make two more frames of the same shape. Lastly, you construct one more frame, this time the frame is designed to have door and window.\n\n");
 			if (player.hasStatusEffect(StatusEffects.CampRathazul)) outputText("\"<i>My, my. What are you building?</i>\" Rathazul asks. \n\n");
-			if (player.hasStatusEffect(StatusEffects.PureCampJojo)) outputText("\"<i>You're building something?</i>\" Jojo asks. \n\n");
+			if (player.hasStatusEffect(StatusEffects.PureCampJojo)) outputText("\"<i>You're building something?</i>\" Jo"+(flags[kFLAGS.JOJO_BIMBO_STATE] == 3 ? "y":"jo")+" asks. \n\n");
 			if (camp.marbleFollower()) outputText("\"<i>Sweetie, you're building a cabin? That's nice,</i>\" Marble says. \n\n");
 			if (camp.companionsCount() > 0) outputText("You announce that yes, you're building a cabin.\n\n");
 			outputText("You nail the frames together and finally you secure the frame to the foundation.\n\n");

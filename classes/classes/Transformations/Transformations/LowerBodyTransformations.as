@@ -2345,6 +2345,26 @@ public class LowerBodyTransformations extends MutationsHelper {
 			return player.lowerBody === LowerBody.DEMONIC_GRACEFUL_FEET;
 		}
 	);
+
+	public const LowerBodyMoth: Transformation = new SimpleTransformation("Moth lower body",
+			// apply effect
+			function (doOutput: Boolean): void {
+				if (doOutput) {
+					var desc: String = "";
+
+					desc += "Your legs begin to itch as you scratch at them, eventually you look over and discover your legs are now covered in a bell bottom like fuzzy mass. <b>You now have Moth Legs</b>";
+
+					if (doOutput) outputText(desc);
+					player.legCount = 2;
+				}
+				player.lowerBody = LowerBody.MOTH;
+				//Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.ARIGEAN));
+			},
+			// is present
+			function (): Boolean {
+				return player.lowerBody === LowerBody.MOTH;
+			}
+	);
 	
 	/*
   */

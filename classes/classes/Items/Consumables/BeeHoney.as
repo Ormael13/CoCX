@@ -16,7 +16,6 @@ import classes.CockTypesEnum;
 import classes.GlobalFlags.*;
 import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Consumable;
-import classes.Items.ItemTags;
 import classes.Player;
 import classes.PregnancyStore;
 import classes.Races;
@@ -41,7 +40,7 @@ public class BeeHoney extends Consumable
 					honeyValue,
 					honeyDesc
 			);
-			withTag(ItemTags.U_TF);
+			withTag(U_TF);
 			refineableInto(
 					AlchemyLib.DEFAULT_SUBSTANCES_DROP_TABLE,
 					AlchemyLib.DEFAULT_ESSENCE_DROP_TABLE(AlchemyLib.AE_BEE),
@@ -156,7 +155,7 @@ public class BeeHoney extends Consumable
 				changes++;
 			}
 			//Eyes
-			if (player.eyes.type != Eyes.BLACK_EYES_SAND_TRAP && rand(3) == 0 && changes < changeLimit) {
+			if (player.eyes.type != Eyes.BLACK_EYES_SAND_TRAP && Utils.rand(3) == 0 && changes < changeLimit) {
 				outputText("\n\n");
 				CoC.instance.transformations.EyesSandTrap.applyEffect();
 				changes++;

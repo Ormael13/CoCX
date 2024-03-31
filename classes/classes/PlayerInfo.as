@@ -103,10 +103,46 @@ public class PlayerInfo extends BaseContent {
 		bodyStats += "<b>Fertility (With Bonuses) Rating:</b> " + Math.round(player.totalFertility()) + "\n";
 		if (player.cumQ() > 0)
 			bodyStats += "<b>Virility Rating:</b> " + Math.round(player.virilityQ() * 100) + "\n";
-		if (flags[kFLAGS.HUNGER_ENABLED] >= 1) bodyStats += "<b>Cum Production:</b> " + addComma(Math.round(player.cumQ())) + " / " + addComma(Math.round(player.cumCapacity())) + "mL (" + Math.round((player.cumQ() / player.cumCapacity()) * 100) + "%) \n";
-		else bodyStats += "<b>Cum Production:</b> " + addComma(Math.round(player.cumQ())) + "mL\n";
+		if (flags[kFLAGS.HUNGER_ENABLED] >= 1) bodyStats += "<b>Cum Production:</b> " + formatNumber(Math.round(player.cumQ())) + " / " + formatNumber(Math.round(player.cumCapacity())) + "mL (" + Math.round((player.cumQ() / player.cumCapacity()) * 100) + "%) \n";
+		else bodyStats += "<b>Cum Production:</b> " + formatNumber(Math.round(player.cumQ())) + "mL\n";
+		// New cum volume testing
+//		var cumQExp:ExponObject = player.cumQMore();
+//		// var cumString:String = ""; In case someone want to implement unit changes
+//		var cumQRemaining:Number = cumQExp.coeff%3;
+//		cumQExp.coeff -= cumQRemaining;
+//		cumQExp.number *= Math.pow(10,cumQRemaining);
+//		bodyStats += "<b>Cum Production (New):</b> ";
+//		bodyStats += addComma(Math.round(cumQExp.number));
+//
+//		for(cumQExp.coeff;cumQExp.coeff>0;cumQExp.coeff-=3){
+//			bodyStats += ",000";
+//		}
+//
+//		bodyStats += "mL";
+//
+//		if (flags[kFLAGS.HUNGER_ENABLED] >= 1){
+//			var cumCapExp:ExponObject = player.cumCapacityMore();
+//			var cumCapRemaining:Number = cumCapExp.coeff%3;
+//			cumCapExp.coeff -= cumCapRemaining;
+//			cumCapExp.number *= Math.pow(10,cumCapRemaining);
+//
+//			bodyStats += " / ";
+//			bodyStats += addComma(cumCapExp.number);
+//
+//			for(cumCapExp.coeff;cumCapExp.coeff>0;cumCapExp.coeff-=3){
+//				bodyStats += ",000";
+//			}
+//
+//			// Both coefficient should be the same since they derive from the same cumMultiplier and ballsize
+//			bodyStats += "mL (" + Math.round((cumQExp.number / cumCapExp.number) * 100) + "%) ";
+//		}
+//
+//		bodyStats += "\n";
+//		// bodyStats += cumQExp.debug.toString();
+//		// bodyStats += cumCapExp.debug;
+		// End of testing
 		if (player.lactationQ() > 0)
-			bodyStats += "<b>Milk Production:</b> " + addComma(Math.round(player.lactationQ())) + "mL\n";
+			bodyStats += "<b>Milk Production:</b> " + formatNumber(Math.round(player.lactationQ())) + "mL\n";
 		if (player.hasStatusEffect(StatusEffects.Feeder)) {
 			bodyStats += "<b>Hours Since Last Time Breastfed Someone:</b>  " + player.statusEffectv2(StatusEffects.Feeder);
 			if (player.statusEffectv2(StatusEffects.Feeder) >= 72)
@@ -394,7 +430,7 @@ public class PlayerInfo extends BaseContent {
 			statEffects += "Alraune perfume - " + player.statusEffectv2(StatusEffects.ArousalPotion) + " hours remaining.\n";
 
 		if (player.hasStatusEffect(StatusEffects.CombatWounds)) 
-			statEffects += "Combat wounds - missing " + player.statusEffectv1(StatusEffects.CombatWounds) + " % of max health.\n";
+			statEffects += "Combat wounds - missing " + player.statusEffectv1(StatusEffects.CombatWounds)*100 + " % of max health.\n";
 
 		if (player.hasStatusEffect(StatusEffects.ArigeanInfected))
 			statEffects += "Mysterious Infection: You feel a bit under the weather...you should likely rest until it passes.\n";
@@ -515,7 +551,7 @@ public class PlayerInfo extends BaseContent {
 		if (maxMeleeAttacks >= 8) combatStats += "<b>Accuracy (8th melee attack):</b> " + ((mAcc / 2) - (mAccPen * 7)) + "%\n";
 		if (maxMeleeAttacks >= 9) combatStats += "<b>Accuracy (9th melee attack):</b> " + ((mAcc / 2) - (mAccPen * 8)) + "%\n";
 		if (maxMeleeAttacks >= 10) combatStats += "<b>Accuracy (10th melee attack):</b> " + ((mAcc / 2) - (mAccPen * 9)) + "%\n";
-		combatStats += "<i>(All accuracy values above includes bonus to accuracy from Mastery for currently equipped type of melee weapon)\n(They not include penalty for using dual weapons that is "+combat.meleeDualWieldAccuracyPenalty()+"% (addictive) to each attack)</i>\n";
+		combatStats += "<i>(All accuracy values above includes bonus to accuracy from Mastery for currently equipped type of melee weapon)\n(They not include the penalty for using dual weapons, that is "+combat.meleeDualWieldAccuracyPenalty()+"% (addictive) to each attack)</i>\n";
 		combatStats += "\n";
 		combatStats += "<b>Range Physical Attacks Multiplier:</b> " + Math.round(100 * combat.rangePhysicalForce()) + "%\n";
 		combatStats += "<b>Firearms Attacks Multiplier:</b> " + Math.round(100 * combat.firearmsForce()) + "%\n";
@@ -551,11 +587,11 @@ public class PlayerInfo extends BaseContent {
 		if (maxCrossBowAttacks >= 2) combatStats += "<b>Crossbow Accuracy (2nd range attack):</b> " + ((bAcc / 2) - bAccPen) + "%\n";
 		if (maxCrossBowAttacks >= 3) combatStats += "<b>Crossbow Accuracy (3rd range attack):</b> " + ((bAcc / 2) - (bAccPen * 2)) + "%\n";
 		combatStats += "<i>(All accuracy values above includes bonus to accuracy from Archery Mastery)</i>\n";
-		combatStats += "<b>Throwed Weapon Accuracy (1st range attack):</b> " + (combat.throwingAccuracy() / 2) + "%\n";
+		combatStats += "<b>Throwing Weapon Accuracy (1st range attack):</b> " + (combat.throwingAccuracy() / 2) + "%\n";
 		
 		var maxThrowAttacks:int = combat.maxThrowingAttacks();
-		if (maxThrowAttacks >= 2) combatStats += "<b>Throwed Weapon Accuracy (2nd range attack):</b> " + ((combat.throwingAccuracy() / 2) - 15) + "%\n";
-		if (maxThrowAttacks >= 3) combatStats += "<b>Throwed Weapon Accuracy (3rd range attack):</b> " + ((combat.throwingAccuracy() / 2) - 30) + "%\n";
+		if (maxThrowAttacks >= 2) combatStats += "<b>Throwing Weapon Accuracy (2nd range attack):</b> " + ((combat.throwingAccuracy() / 2) - 15) + "%\n";
+		if (maxThrowAttacks >= 3) combatStats += "<b>Throwing Weapon Accuracy (3rd range attack):</b> " + ((combat.throwingAccuracy() / 2) - 30) + "%\n";
 		combatStats += "<i>(All accuracy values above includes bonus to accuracy from Throwing Weapons Mastery)</i>\n";
 		combatStats += "<b>Firearms Accuracy (1st range attack):</b> " + (fAcc / 2) + "%\n";
 		
@@ -567,7 +603,7 @@ public class PlayerInfo extends BaseContent {
 			combatStats += "<b>Firearms Accuracy (5th range attack):</b> " + ((fAcc / 2) - (fAccPen * 4)) + "%\n";
 			combatStats += "<b>Firearms Accuracy (6th range attack):</b> " + ((fAcc / 2) - (fAccPen * 5)) + "%\n";
 		}
-		combatStats += "<i>(All accuracy values above includes bonus to accuracy from Firearms Mastery)\n(They not include penalty for using dual firearms that is "+combat.firearmsDualWieldAccuracyPenalty()+"% (addictive) to each shoot)</i>\n";
+		combatStats += "<i>(All accuracy values above includes bonus to accuracy from Firearms Mastery)\n(They not include the penalty for using dual firearms, that is "+combat.firearmsDualWieldAccuracyPenalty()+"% (addictive) to each shoot)</i>\n";
 		combatStats += "\n";
 		if (player.hasPerk(PerkLib.FlyingSwordPath)) {
 			combatStats += "<b>Cost of flying on Flying Sword (Soulforce / per turn): </b> " + combat.flyingSwordUseCost() + "\n";
@@ -577,11 +613,11 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillMod()) + "%\n";
 		combatStats += "<b>Physical Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillPhysicalMod()) + "%\n";
 		combatStats += "<b>Magical Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillMagicalMod()) + "%\n";
-		combatStats += "<b>Soulskill Cost:</b> " + Math.round(100 * combat.soulskillCost()) + "%\n";
+		combatStats += "<b>Soulskill Cost:</b> " + Math.round(100 * combat.soulskillCost() * combat.soulskillcostmulti()) + "%\n";
 		combatStats += "\n";
 		combatStats += "<b>Unarmed:</b> +" + combat.unarmedAttack() + "\n";
 		combatStats += "<b>Venom/Web:</b> " + Math.floor(player.tailVenom) + " / " + player.maxVenom() + "\n";
-		combatStats += "<b>Venom/Web Recharge:</b> +" + combat.venomCombatRecharge2() * 2 + " / turn, +" + combat.venomCombatRechargeInfo() + " / 5 minutes\n";
+		combatStats += "<b>Venom/Web Recharge:</b> +" + combat.venomCombatRecharge2() + " / turn, +" + Math.round(combat.venomCombatRecharge2() * 0.1) + " / 5 minutes\n";
 		combatStats += "<b>Max lvl diff between PC and Enemy to still deal 100%:</b> +" + combat.playerLevelAdjustment() + "\n";
 		combatStats += "\n";
 		var mins:Object = player.getAllMinStats();
@@ -613,6 +649,7 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Maximum Safe Wrath II (treshold after which magic soulskills are unaccesable):</b> " + player.maxSafeWrathMagicalAbilities() + "\n";
 		combatStats += "<b>Over HP (HP amount that can be reached beyond default 100% of Health bar):</b> " + (player.maxOverHP() - player.maxHP()) + "\n";
 		combatStats += "<b>Over Lust (Lust amount that can be reached beyond default 100% of Lust bar):</b> " + (player.maxOverLust() - player.maxLust()) + "\n";
+		combatStats += "<b>Over Fatigue (Fatigue amount that can be reached beyond default 100% of Fatigue bar):</b> " + (player.maxOverFatigue() - player.maxFatigue()) + "\n";
 		combatStats += "<b>Over Wrath (Wrath amount that can be reached beyond default 100% of Wrath bar):</b> " + (player.maxOverWrath() - player.maxWrath()) + "\n";
 		combatStats += "<b>Over Mana (Mana amount that can be reached beyond default 100% of Mana bar):</b> " + (player.maxOverMana() - player.maxMana()) + "\n";
 		combatStats += "<b>Over Soulforce (Soulforce amount that can be reached beyond default 100% of Soulforce bar):</b> " + (player.maxOverSoulforce() - player.maxSoulforce()) + "\n";
@@ -636,11 +673,13 @@ public class PlayerInfo extends BaseContent {
 		// Begin Kill Counters Stats
 		var killCountStats:String = "";
 
+		killCountStats += "<b>Thiefs:</b> " + flags[kFLAGS.THIEFS_KILLED] + "\n";
 		killCountStats += "<b>Goblins:</b> " + flags[kFLAGS.GOBLINS_KILLED] + "\n";
 		killCountStats += "<b>Hellhounds:</b> " + flags[kFLAGS.HELLHOUNDS_KILLED] + "\n";
 		killCountStats += "<b>Imps:</b> " + flags[kFLAGS.IMPS_KILLED] + "\n";
 		killCountStats += "<b>Minotaurs:</b> " + flags[kFLAGS.MINOTAURS_KILLED] + "\n";
 		killCountStats += "<b>True Demons:</b> " + flags[kFLAGS.TRUE_DEMONS_KILLED] + "\n";
+		killCountStats += "<i>Total kill count: " + player.enemiesKillCount() + "</i>\n";
 
 		if (killCountStats != "")
 			outputText("\n<b><u>Kill Counters</u></b>\n" + killCountStats);
@@ -749,6 +788,11 @@ public class PlayerInfo extends BaseContent {
 		if (SceneLib.emberScene.emberAffection() > 0) {
             interpersonStats += "<b>Ember Affection:</b> " + Math.round(SceneLib.emberScene.emberAffection()) + "%\n";
             interpersonStats += getNPCLevel("Ember", 20, 0, 13, 6, flags[kFLAGS.EMBER_LVL_UP]);
+		}
+
+		if (flags[kFLAGS.THE_TRENCH_ENTERED] > 14) {
+			interpersonStats += "<b>Grayda Affection:</b> " + Math.round(flags[kFLAGS.GRAYDA_AFFECTION]) + "%\n";
+			interpersonStats += "<b>Days since last Bathing w/ Grayda:</b> " + Math.round(flags[kFLAGS.GRAYDA_BATHING]) + "\n";
 		}
 
 		if (SceneLib.helFollower.helAffection() > 0)
@@ -894,7 +938,7 @@ public class PlayerInfo extends BaseContent {
 		
 		if (TyrantiaFollower.TyrantiaFollowerStage > 0) {
 			interpersonStats += "<b>Tyrantia Affection:</b> " + TyrantiaFollower.TyrantiaAffectionMeter + "%\n";
-			if (TyrantiaFollower.TyrantiaTrainingSessions >= 1) interpersonStats += "<b>Training sessions with Tyrantia:</b> " + TyrantiaFollower.TyrantiaTrainingSessions + " / 25\n";
+			if (TyrantiaFollower.TyrantiaTrainingSessions >= 1) interpersonStats += "<b>Training sessions with Tyrantia:</b> " + TyrantiaFollower.TyrantiaTrainingSessions + " / 30\n";
 			if (flags[kFLAGS.TYRANTIA_LVL_UP] == 4) interpersonStats += "<b>Tyrantia lvl:</b> 76 (current max lvl)\n";
 			if (flags[kFLAGS.TYRANTIA_LVL_UP] == 3) interpersonStats += "<b>Tyrantia lvl:</b> 70\n";
 			if (flags[kFLAGS.TYRANTIA_LVL_UP] == 2) interpersonStats += "<b>Tyrantia lvl:</b> 64\n";
@@ -2302,6 +2346,14 @@ public class PlayerInfo extends BaseContent {
 					}
 				}
 				else addButtonDisabled(5, "AT", "You need to reach level 60 first.");
+				if (player.level >= 70) {
+					if (player.hasPerk(PerkLib.ItsZerkingTime)) addButtonDisabled(6, "IZT", "You already have this super perk.");
+					else {
+						if (player.hasPerk(PerkLib.AsuraToughness)) addButton(6, "IZT", perkItsZerkingTime).hint("Choose the 'It's Zerking Time!!!' super perk. If you can use Berzerker or Lustzerker they would be activated with Asura Form for no additional cost (with Prestige Job: Berserker will be activated G2). Asura Form increase to physical might raise to 240%/120%/80% of core str/tou/spe and generate five pairs of semi-transparent arms. (+10% of OverMax Wrath)");
+						else addButtonDisabled(6, "IZT", "You need to first have the 'Asura Toughness' super perk.");
+					}
+				}
+				else addButtonDisabled(6, "IZT", "You need to reach level 70 first.");
 			}
 			else {
 				if (player.hasPerk(PerkLib.HiddenJobAsura)) addButtonDisabled(0, "HJ:A", "You already have this perk.");
@@ -2316,6 +2368,8 @@ public class PlayerInfo extends BaseContent {
 				else addButtonDisabled(4, "LAB", "You do not have enough super perk points to obtain this perk.");
 				if (player.hasPerk(PerkLib.AsuraToughness)) addButtonDisabled(5, "AT", "You already have this perk.");
 				else addButtonDisabled(5, "AT", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.ItsZerkingTime)) addButtonDisabled(6, "IZT", "You already have this perk.");
+				else addButtonDisabled(6, "IZT", "You do not have enough super perk points to obtain this perk.");
 			}
 			addButton(12, "Previous", superPerkBuyMenu, page - 1);
 			addButton(13, "Next", superPerkBuyMenu, page + 1);
@@ -2391,6 +2445,37 @@ public class PlayerInfo extends BaseContent {
 			addButton(14, "Back", playerMenu);
 		}
 		if (page == 5) {
+			if (player.hasPerk(PerkLib.HiddenJobSwordImmortal)) addButtonDisabled(0, "HJ:SI", "You already have this perk.");
+			else {
+				if (player.freeHiddenJobsSlots() > 0 && player.hasPerk(PerkLib.SoulApprentice) && player.hasPerk(PerkLib.KillingIntent)) addButton(0, "HJ:SI", perkHiddenJobSwordImmortal).hint("Choose the 'Hidden Job: Sword Immortal' super perk. You began your journey as beginner Sword Immortal. (+5% of OverMax Wrath / Fatigue / Soulforce)");
+				else addButtonDisabled(0, "HJ:SI", "You do not have a free slot for this hidden job. Or not meet other requirements (Soul Apprentice / Killing Intent perks).");
+			}
+			if (player.hasPerk(PerkLib.SwordIntentAura)) addButtonDisabled(1, "SIA", "You already have this perk.");
+			else {
+				if (player.hasPerk(PerkLib.SoulPersonage) && player.hasPerk(PerkLib.HiddenJobSwordImmortal)) addButton(1, "SIA", perkSwordIntentAura).hint("Choose the 'Sword Intent (Aura)' super perk. Your Killing Intent can become focused into Sword Intent aura enveloping your weapons as long they are sword-type (+5% of core spe, +10% dmg). Would apply bonuses from the job to flying swords too. (+5% of OverMax Wrath / Fatigue / Soulforce)");
+				else addButtonDisabled(1, "SIA", "You need to first have the 'Hidden Job: Sword Immortal' super perk and Soul Personage perk.");
+			}
+			if (player.hasPerk(PerkLib.SwordImmortalFirstForm)) addButtonDisabled(2, "SIFF", "You already have this perk.");
+			else {
+				if (player.hasPerk(PerkLib.SoulWarrior) && player.hasPerk(PerkLib.SwordIntentAura)) addButton(2, "SIFF", perkSwordImmortalFirstForm).hint("Choose the 'Sword Immortal: First Form' super perk. You reached First Form stage. Increase sword intent aura effects (+15% of core spe, +15% dmg) and gives small boost at the combat start (+100 wrath/sf, -100 fatigue) (+5% of OverMax Wrath / Base STR Cap / Fatigue / Base SPE Cap / Soulforce / Base WIS Cap)");
+				else addButtonDisabled(2, "SIFF", "You need to first have the 'Sword Intent (Aura)' super perk and Soul Warrior perk.");
+			}
+			addButton(12, "Previous", superPerkBuyMenu, page - 1);
+			addButton(13, "Next", superPerkBuyMenu, page + 1);
+			addButton(14, "Back", playerMenu);
+		}/*
+		if (page == 6) {
+			if (player.superPerkPoints > 0) {
+			
+			}
+			else {
+			
+			}
+			addButton(12, "Previous", superPerkBuyMenu, page - 1);
+			addButton(13, "Next", superPerkBuyMenu, page + 1);
+			addButton(14, "Back", playerMenu);
+		}*/
+		if (page == 6) {
 			if (player.superPerkPoints > 0) {
 				if (player.level >= 90) {
 					if (player.hasPerk(PerkLib.DeityJobMunchkin)) addButtonDisabled(0, "DJ:M", "You already have this perk.");
@@ -2413,11 +2498,19 @@ public class PlayerInfo extends BaseContent {
 				if (player.level >= 120) {
 					if (player.hasPerk(PerkLib.MunchkinAtWork)) addButtonDisabled(2, "M(at)W", "You already have this perk.");
 					else {
-						if (player.hasPerk(PerkLib.MunchkinAtGym)) addButton(2, "M(at)W", perkMunchkinAtWork).hint("Choose the 'Munchkin @Work' super munchkin perk. (+25% to Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, increase by 5% caps for mutagen, alchemic, knowledge multi)");
+						if (player.hasPerk(PerkLib.MunchkinAtGym)) addButton(2, "M(at)W", perkMunchkinAtWork).hint("Choose the 'Munchkin @Work' super munchkin perk. (+10% to OverMax HP / Lust / Wrath / Mana / Soulforce / Fatigue, +2 prestige job slots, +1 hidden job slot)");
 						else addButtonDisabled(2, "M(at)W", "You do not have yet 'Munchkin @Gym' super munchkin perk.");
 					}
 				}
 				else addButtonDisabled(2, "M(at)W", "You need to reach level 120 first.");
+				if (player.level >= 135) {
+					if (player.hasPerk(PerkLib.MunchkinAtBioLab)) addButtonDisabled(3, "M(at)BL", "You already have this perk.");
+					else {
+						if (player.hasPerk(PerkLib.MunchkinAtWork)) addButton(3, "M(at)BL", perkMunchkinAtBiolab).hint("Choose the 'Munchkin @Biolab' super munchkin perk. (Increase core/train caps for stats by 10. +1 to internal mutations slots capacity (+2 for adaptation slots))");
+						else addButtonDisabled(3, "M(at)BL", "You do not have yet 'Munchkin @Work' super munchkin perk.");
+					}
+				}
+				else addButtonDisabled(3, "M(at)BL", "You need to reach level 135 first.");
 			}
 			else {
 				if (player.hasPerk(PerkLib.DeityJobMunchkin)) addButtonDisabled(0, "DJ:M", "You already have this perk.");
@@ -2426,20 +2519,11 @@ public class PlayerInfo extends BaseContent {
 				else addButtonDisabled(1, "M(at)G", "You do not have enough super perk points to obtain this perk.");
 				if (player.hasPerk(PerkLib.MunchkinAtWork)) addButtonDisabled(2, "M(at)W", "You already have this perk.");
 				else addButtonDisabled(2, "M(at)W", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.MunchkinAtBioLab)) addButtonDisabled(3, "M(at)BL", "You already have this perk.");
+				else addButtonDisabled(3, "M(at)BL", "You do not have enough super perk points to obtain this perk.");
 			}
 			addButton(12, "Previous", superPerkBuyMenu, page - 1);
 			//12 -> page + 1 button
-			addButton(14, "Back", playerMenu);
-		}
-		if (page == 6) {
-			if (player.superPerkPoints > 0) {
-			
-			}
-			else {
-			
-			}
-			//12 -> page - 1 button
-			//13 -> page + 1 button
 			addButton(14, "Back", playerMenu);
 		}
 	}
@@ -2583,6 +2667,13 @@ public class PlayerInfo extends BaseContent {
 		outputText("You gained 'Asura Toughness' super perk.");
 		doNext(superPerkBuyMenu, 3);
 	}
+	private function perkItsZerkingTime():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.ItsZerkingTime,0,0,0,0);
+		clearOutput();
+		outputText("You gained 'It's Zerking Time!!!' super perk.");
+		doNext(superPerkBuyMenu, 3);
+	}
 	private function perkHiddenJobGreySage():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.PrestigeJobGreySage,0,0,0,0);
@@ -2625,26 +2716,51 @@ public class PlayerInfo extends BaseContent {
 		outputText("You gained 'Grey Sage Wisdom' super perk.");
 		doNext(superPerkBuyMenu, 4);
 	}
+	private function perkHiddenJobSwordImmortal():void {
+		player.createPerk(PerkLib.HiddenJobSwordImmortal,0,0,0,0);
+		clearOutput();
+		outputText("You gained 'Hidden Job: Sword Immortal' super perk.");
+		doNext(superPerkBuyMenu, 5);
+	}
+	private function perkSwordIntentAura():void {
+		player.createPerk(PerkLib.SwordIntentAura,0,0,0,0);
+		clearOutput();
+		outputText("You gained 'Sword Intent (Aura)' super perk.");
+		doNext(superPerkBuyMenu, 5);
+	}
+	private function perkSwordImmortalFirstForm():void {
+		player.createPerk(PerkLib.SwordImmortalFirstForm,0,0,0,0);
+		clearOutput();
+		outputText("You gained 'Sword Immortal: First Form' super perk.");
+		doNext(superPerkBuyMenu, 5);
+	}
 	private function perkDeityJobMunchkin():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.DeityJobMunchkin,0,0,0,0);
 		clearOutput();
 		outputText("You gained 'Deity Job: Munchkin' super munchkin perk. (Because it's too cool to merely be a super perk, right?)");
-		doNext(superPerkBuyMenu, 5);
+		doNext(superPerkBuyMenu, 6);
 	}
 	private function perkMunchkinAtGym():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.MunchkinAtGym,0,0,0,0);
 		clearOutput();
 		outputText("You gained 'Munchkin @ Gym' super munchkin perk. (Because it's too cool to merely be a super perk, right?)");
-		doNext(superPerkBuyMenu, 5);
+		doNext(superPerkBuyMenu, 6);
 	}
 	private function perkMunchkinAtWork():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.MunchkinAtWork,0,0,0,0);
 		clearOutput();
 		outputText("You gained 'Munchkin @ Work' super munchkin perk. (Because it's too cool to merely be a super perk, right?)");
-		doNext(superPerkBuyMenu, 5);
+		doNext(superPerkBuyMenu, 6);
+	}
+	private function perkMunchkinAtBiolab():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.MunchkinAtBioLab,0,0,0,0);
+		clearOutput();
+		outputText("You gained 'Munchkin @ Biolab' super munchkin perk. (Because it's too cool to merely be a super perk, right?)");
+		doNext(superPerkBuyMenu, 6);
 	}
 }
 }

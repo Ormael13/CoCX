@@ -57,7 +57,6 @@ public class FlyingSwordSkill extends AbstractGeneral {
 	public function calcDamage(monster:Monster):Number {
 		var damage:Number = player.weaponFlyingSwordsAttack * 25;
 		damage += scalingBonusWisdom() * 0.5;
-
 		if (player.hasPerk(PerkLib.FlyingSwordPath) && player.perkv1(PerkLib.FlyingSwordPath) > 0) {
 			if (player.hasPerk(PerkLib.SpeedDemon) && player.weaponFlyingSwordsPerk != "Large" && player.weaponFlyingSwordsPerk != "Massive") {
 				damage += player.spe;
@@ -68,21 +67,20 @@ public class FlyingSwordSkill extends AbstractGeneral {
 				damage += scalingBonusSpeed() * 0.1;
 			}
 		}
-
 		damage *= 1 + player.perkv1(PerkLib.FlyingSwordPath);
-
 		//Weapon addition!
 		damage = combat.flyingSwordAttackModifier(damage);
 		if (player.weaponFlyingSwords.perk == "Large") damage *= 4;
 		if (player.weaponFlyingSwords.perk == "Massive") damage *= 10;
-		
 		var sizeMatters:Number = 1;
 		sizeMatters += (0.01 * combat.masterySwordLevel());
 		if (player.weaponFlyingSwords.perk == "Small") sizeMatters += 0.01 * combat.weaponSizeSmall();
 		else if (player.weaponFlyingSwords.perk == "Large") sizeMatters += 0.01 * combat.weaponSizeLarge();
 		else if (player.weaponFlyingSwords.perk == "Massive") sizeMatters += 0.01 * combat.weaponSizeMassive();
 		else if (player.weaponFlyingSwords.perk == "") sizeMatters += 0.01 * combat.weaponSizeNormal();
-
+		if (sizeMatters > 1) damage *= sizeMatters;
+		if (player.hasPerk(PerkLib.SwordIntentAura)) damage *= 2;
+		if (player.statStore.hasBuff("SwordIntentAura")) damage += combat.layerSwordIntentAuraOnThis(damage);
 		return Math.round(damage);
 	}
 
@@ -108,18 +106,30 @@ public class FlyingSwordSkill extends AbstractGeneral {
 
 		damage = Math.round(damage);
 
-		if (display) outputText("You send a bit of soulforce to " + player.weaponFlyingSwordsName+" and direct it towards [themonster]. " + 
+		if (display) outputText("You send a bit of soulforce to " + player.weaponFlyingSwordsName+" and with a graceful hand gesture direct it towards [themonster]. " + 
 			(hitCounter == 1?"It slashes":"They slash") + " the target, leaving " + (hitCounter == 1?"a minor wound":"minor wounds") + ". ");
 
 		var damageFunc:Function;
 		switch(player.weaponFlyingSwords.element) {
+			case TAG_FIRE: 				damageFunc = doFireDamage;
+										break;
 			case TAG_ICE: 				damageFunc = doIceDamage;
 										break;
-			case TAG_FIRE: 				damageFunc = doFireDamage;
+			case TAG_LIGHTNING: 		damageFunc = doLightningDamage;
 										break;
 			case TAG_DARKNESS: 			damageFunc = doDarknessDamage;
 										break;
-			case TAG_LIGHTNING: 		damageFunc = doLightningDamage;
+			case TAG_POISON: 			damageFunc = doPoisonDamage;
+										break;
+			case TAG_WIND: 				damageFunc = doWindDamage;
+										break;
+			case TAG_WATER: 			damageFunc = doWaterDamage;
+										break;
+			case TAG_EARTH: 			damageFunc = doEarthDamage;
+										break;
+			case TAG_ACID: 				damageFunc = doAcidDamage;
+										break;
+			case TAG_PLASMA: 			damageFunc = doPlasmaDamage;
 										break;
 			default: 					damageFunc = doPhysicalDamage;
 										break;
@@ -136,6 +146,7 @@ public class FlyingSwordSkill extends AbstractGeneral {
 		combat.WeaponFlyingSwordsStatusProcs();
 		var baseMasteryXP:Number = 1;
 		if (player.hasPerk(PerkLib.MeleeWeaponsMastery)) baseMasteryXP += 2;
+        if (player.hasPerk(PerkLib.SwordIntentAura)) baseMasteryXP += 2;
 		if (monster is TrainingDummy && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) {
 			var bMXPMulti:Number = 1;
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 2) bMXPMulti += 1.5;
@@ -152,7 +163,6 @@ public class FlyingSwordSkill extends AbstractGeneral {
 		}
 		var meleeMasteryEXPgains:Number = baseMasteryXP * hitCounter * critCounter;
 		combat.swordXP(meleeMasteryEXPgains);
-
 		if (player.weaponFlyingSwords.perk == "Small") combat.weaponSmallMastery(meleeMasteryEXPgains);
 		else if (player.weaponFlyingSwords.perk == "Large") combat.weaponLargeMastery(meleeMasteryEXPgains);
 		else if (player.weaponFlyingSwords.perk == "Massive") combat.weaponMassiveMastery(meleeMasteryEXPgains);

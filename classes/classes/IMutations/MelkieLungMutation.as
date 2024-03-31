@@ -12,25 +12,16 @@ import classes.Races;
 public class MelkieLungMutation extends IMutationPerkType
     {
         override public function get mName():String {
-            return "Melkie Lung";
+            return "Feyfolk Voice";
         }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
-			var perkCent1:int = 5;
-			var perkCent2:int = 20;
-            pTier = (pTier == -1)? currentTier(this, player): pTier;
-			if (pTier >= 2) {
-				perkCent1 += 10;
-				perkCent2 += 30;
-			}
-			if (pTier >= 3) {
-				perkCent1 += 15;
-				perkCent2 += 40;
-			}
-            if (pTier >= 1) descS += "Increase damage reduction against spells by " + perkCent1 + "% and increase the power of compelling aria by " + perkCent2 + "%. Compelling Aria is kept at all time";
-            if (pTier >= 2) descS += ". Compelling Aria now has an Intelligence scaling";
+			pTier = (pTier == -1)? currentTier(this, player): pTier;
+			if (pTier >= 1) descS += "Increase damage reduction against spells by " + (5 * pTier) + "% and increase the power of Sing/Perform by " + (25 * pTier) + "%. Sing/Perform is kept at all time";
+            if (pTier >= 2) descS += ". Sing/Perform now has an Intelligence scaling";
             if (pTier >= 3) descS += " and it's doubled";
+            if (pTier >= 4) descS += ". Increase Intensify limit by 10 stages";
             if (descS != "")descS += ".";
             return descS;
         }
@@ -43,7 +34,7 @@ public class MelkieLungMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireLungsMutationSlot()
-                    .requireRace(Races.MELKIE);
+                    .requireAnyRace(Races.MELKIE, Races.SATYR);
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -57,14 +48,15 @@ public class MelkieLungMutation extends IMutationPerkType
         //Mutations Buffs
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
-            if (pTier == 1) pBuffs['spe.mult'] = 0.05;
-            if (pTier == 2) pBuffs['spe.mult'] = 0.15;
-            if (pTier == 3) pBuffs['spe.mult'] = 0.35;
+            if (pTier == 1) pBuffs['tou.mult'] = 0.05;
+            if (pTier == 2) pBuffs['tou.mult'] = 0.15;
+            if (pTier == 3) pBuffs['tou.mult'] = 0.30;
+            if (pTier == 4) pBuffs['tou.mult'] = 0.50;
             return pBuffs;
         }
 
         public function MelkieLungMutation() {
-            super(mName + " IM", mName, SLOT_LUNGS, 3);
+            super(mName + " IM", mName, SLOT_LUNGS, 4);
         }
         
     }

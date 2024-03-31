@@ -7,6 +7,7 @@ package classes.Scenes.Monsters
 
 	import classes.*;
 	import classes.BodyParts.Wings;
+	import classes.Items.DynamicItems;
 	import classes.Scenes.SceneLib;
 	import classes.internals.ChainedDrop;
 
@@ -52,7 +53,7 @@ public class AngelLR extends AbstractAngel
 				removeStatusEffect(StatusEffects.JabberwockyVenom);
 				buff("Poison").remove();
 			}
-			SceneLib.combat.combatRoundOver();
+			doNext(SceneLib.combat.combatMenu, false);
 		}
 		
 		private function AngelEnergyRays():void {
@@ -156,7 +157,10 @@ public class AngelLR extends AbstractAngel
 						player.removeStatusEffect(StatusEffects.MinoKing);
 						SceneLib.hexindao.intermediateleadershippostfight();
 					}
-					else angelSwitchWithOtherOne();
+					else {
+						SceneLib.combat.disableEachHelperIfTheyCauseSoftLock();
+						angelSwitchWithOtherOne();
+					}
 				}
 				else cleanupAfterCombat();
 			}
@@ -197,6 +201,10 @@ public class AngelLR extends AbstractAngel
 				this.short = "low-rank angel of mist";
 				initStrTouSpeInte(14, 170, 90, 40);
 				initWisLibSensCor(240, 4, 60, 0);
+				this.randomDropChance = 0.2;
+				this.randomDropParams = {
+					rarity: DynamicItems.RARITY_CHANCES_MINOR_HIGH
+				};
 				this.drop = new ChainedDrop()
 						.add(useables.SRESIDUE, 0.5)
 						.add(useables.PCSHARD, 1);
@@ -217,6 +225,10 @@ public class AngelLR extends AbstractAngel
 				else this.short = "Uriel";
 				initStrTouSpeInte(6, 75, 35, 15);
 				initWisLibSensCor(100, 3, 25, 0);
+				this.randomDropChance = 0.5;
+				this.randomDropParams = {
+					rarity: DynamicItems.RARITY_CHANCES_MINOR_HIGH
+				};
 				this.drop = new ChainedDrop()
 						.add(useables.SRESIDUE, 1);
 				this.level = 9;
@@ -235,6 +247,10 @@ public class AngelLR extends AbstractAngel
 				this.short = "low-rank angel";
 				initStrTouSpeInte(7, 80, 40, 20);
 				initWisLibSensCor(120, 4, 30, 0);
+				this.randomDropChance = 0.2;
+				this.randomDropParams = {
+					rarity: DynamicItems.RARITY_CHANCES_MINOR_HIGH
+				};
 				this.drop = new ChainedDrop()
 						.add(useables.SRESIDUE, 1);
 				this.level = 15;

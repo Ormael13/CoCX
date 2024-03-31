@@ -36,6 +36,10 @@ import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.NPCs.WaizAbi;
 import classes.Scenes.Places.Boat.Marae;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
+import classes.Scenes.Dungeons.DeepCave.Zetaz;
+import classes.Scenes.Dungeons.Factory.OmnibusOverseer;
+import classes.Scenes.Dungeons.DemonLab.Incels;
+import classes.Scenes.Dungeons.EbonLabyrinth.Draculina;
 import classes.Stats.Buff;
 
 import coc.view.ButtonDataList;
@@ -56,7 +60,7 @@ public class TestMenu extends BaseContent
 		bd.add("Equip", EquipmentMenu, "For creating various equipment items for tests.");
 		bd.add("NonEquip", NonEquipmentMenu, "For creating various non-equipment items for tests.");
 		bd.add("Materials", MaterialMenu, "For creating various materials for tests.");
-		bd.add("Enemies", EnemiesMenu, "For spawning various enemies to test fight them.");
+		bd.add("Enemies", enemiesMenu, "For spawning various enemies to test fight them.");
 		bd.add("Camp NPC's", FasterOrInstantCampNPCRecruitment, "Menu to speed up recruitment of camp npc's due to testing needs.");
 		bd.add("Body State", BodyStateMenu, "For more precisely adjusting a few other body values or parts than Stats Adj option.");
 		bd.add("MetamorphFull", AllMetamorphOptionsUnlock, "Unlock all Metamorph options.").disableIf(!player.hasPerk(PerkLib.Metamorph));
@@ -85,6 +89,7 @@ public class TestMenu extends BaseContent
 		bd.add("Bugfixes", cheatBugfixes, "Buttons or fixing some rare old bugs that can't be fixd with save-updater.");
 		bd.add("Testing", cheatTesting, "Buttons for testing some new stuff. May break your game if something is outdated.");
 		bd.add("Bags expansion", SceneLib.garden.justForTestBuildsAdjustingBagsCapacityCuzINotWannaWasteSaveUpdateForThat, "Expand the bags. (If you not own any of them will not have any effect)");
+		bd.add("NoMoreKillInst", FairyTest4, "Removing bonus 'Killing Intent' perks after first one.").disableIf(!player.hasPerk(PerkLib.KillingIntent));
 		submenu(bd, playerMenu, 0, false);
 	}
 
@@ -279,6 +284,10 @@ public class TestMenu extends BaseContent
 		if (player.hasPerk(PerkLib.BodyTempering)) player.removePerk(PerkLib.BodyTempering);
 		if (player.hasPerk(PerkLib.SoulTempering)) player.removePerk(PerkLib.SoulTempering);
 		if (flags[kFLAGS.SOUL_CULTIVATION] > 0) flags[kFLAGS.SOUL_CULTIVATION] = 0;
+		doNext(SoulforceCheats);
+	}
+	public function FairyTest4():void {
+		player.removePerk(PerkLib.KillingIntent);
 		doNext(SoulforceCheats);
 	}
 	public function FairyTest3():void {
@@ -657,6 +666,7 @@ public class TestMenu extends BaseContent
 		if (!player.hasPerk(PerkLib.HiddenJobAsura)) player.createPerk(PerkLib.HiddenJobAsura, 0, 0, 0, 0);
 		if (!player.hasPerk(PerkLib.HiddenJobBloodDemon)) player.createPerk(PerkLib.HiddenJobBloodDemon, 0, 0, 0, 0);
 		if (!player.hasPerk(PerkLib.PrestigeJobGreySage)) player.createPerk(PerkLib.PrestigeJobGreySage, 0, 0, 0, 0);
+		if (!player.hasPerk(PerkLib.HiddenJobSwordImmortal)) player.createPerk(PerkLib.HiddenJobSwordImmortal, 0, 0, 0, 0);
 		doNext(SoulforceCheats);
 	}
 	public function learnHexes():void {
@@ -1679,7 +1689,7 @@ public class TestMenu extends BaseContent
 			addButton(3, "NineTailWhip", AddNineTailWhip).hint("Add 1 Nine Tail Whip.");
 			addButton(4, "DualLAxes", AddDualMinoAxes).hint("Add 1 pair of Large Axes.");
 			addButton(5, "UH Ayo Arm", AddUltraHeavyAyoArmor).hint("Add 1 Ultra heavy Ayo Armor for testing purposes.");
-			//6
+			addButton(6, "AncientConduit", AddAncientConduit).hint("Add 1 Ancient Conduit.");
 			addButton(7, "HB Mech", AddHBMech).hint("Add 1 Howling Banshee Mech for testing purposes.");
 			addButton(8, "GobMechPrime", AddGoblinMechPrime).hint("Add 1 Goblin Mech Prime for testing purposes.");
 			addButton(9, "GiantSlayerMech", AddGiantSlayerMech).hint("Add 1 Giant Slayer Mech for testing purposes.");
@@ -1722,10 +1732,12 @@ public class TestMenu extends BaseContent
 			addButton(1, "CDI", AddCurrentDebugItem).hint("Add 1 Gun.");
 			addButton(2, "TrollFig", AddTrollFig).hint("Add 1 Troll Fig.");
 			addButton(3, "CyclopTF", AddEyedrop).hint("Add 1 cyclop TF.");
-			//addButton(4, "", ).hint("Add 1 .");
+			//addButton(4, "", ).hint("Add 1  .");
 			addButton(5, "ALICORN", AddAlicornium).hint("Add 1 Alicornium.");
 			addButton(6, "D.Fruit", AddDisplacerFruit).hint("Add 1 Displacer Fruit.");
 			addButton(7, "AbyssalSTooth", AddAbyssalSharkTooth).hint("Add 1 Abyssal Shark Tooth.");
+			//addButton(8, "", ).hint("Add 1 .");
+			//addButton(9, "", ).hint("Add 1 .");
 			addButton(10, "SBMan", AddSoulBlastManual).hint("Add 1 Soul Blast manual.");
 			//addButton(11, "", ).hint("Add 1 .");
 			addButton(12, "-2-", NonEquipmentMenu, page + 1);
@@ -1810,42 +1822,36 @@ public class TestMenu extends BaseContent
 			addButton(14, "Back", SoulforceCheats);
 		}
 	}
-	public function EnemiesMenu(page:int = 1):void {
+	public function enemiesMenu():void {
+		var buttons:ButtonDataList = new ButtonDataList();
 		menu();
-		if (page == 1) {
-			addButton(0, "FightForPearl", FightForPearl).hint("Test fight to get Sky Poison Pearl legally (aside we cheat to start fight)");
-			addButton(1, "B.Monke", FightWaizAbi).hint("You not even want to let the innocent bimbo monke free? <i>*sigh*</i>");
-			if (player.level >= 45) addButton(2, "Oculicorn", FightIridesian).hint("Test fight with Oculicorn.");
-			//3
-			addButton(4, "The Dummy", FightTheDummy).hint("Fight with The Dummy.");
-			addButton(5, "Sand Mother", FightSandMother).hint("Test fight with Sand Mother.");
-			addButton(6, "GothGirl", FightLilith).hint("Fight with devilish cute goth girl.");
-			//7
-			addButton(8, "Sonya", FightSonya).hint("Test fight with Sonya.");
-			addButton(9, "RyuBi", FightRyuBi).hint("Test fight with RyuBi.");
-			addButton(10, "Marae", FightMarae).hint("Test fight with Marae (depending on game stage she can be buffed or unbuffed).");
-			addButton(11, "SuccGard", FightSuccubusGardener).hint("Test fight with Succubus Gardener. (Also it will glitch right after fight so not start this fight if you got unsaved progress that you not wanna loose as only way to handle post fight glitch is restarting game)");
-			addButton(12, "Lethice", FightLethice).hint("Test fight with Lethice.");
-			addButton(13, "-2-", EnemiesMenu, page + 1);
-			addButton(14, "Back", SoulforceCheats);
-		}
-		if (page == 2)  {
-			addButton(0, "Galia", FightGalia).hint("Test fight with Galia.");
-			//1
-			//2
-			addButton(3, "ChaosChimera", FightChaosChimera).hint("Test fight with Chaos Chimera.");
-			addButton(4, "AnotSucc", FightCarrera).hint("Fight with probably another succubus out there...");
-			addButton(5, "LvLUP Eva", LvLUPEva).hint("LvL UP forcefully Evangeline for testing purpose up to the limit.");
-			addButton(6, "DELvL Eva", DELvLEva).hint("DE LvL forcefully Evangeline for testing purpose down toward the lvl 12.");
-			addButton(7, "LvLUP Aurora", LvLUPAurora).hint("LvL UP forcefully Aurora for testing purpose up to the limit.");
-			addButton(8, "DELvL Aurora", DELvLAurora).hint("DE LvL forcefully Aurora for testing purpose down toward the lvl 1.");
-			addButton(9, "Aria", FightAria).hint("Test fight with melkie huntress Aria.");
-			addButton(10, "SomeMalikore", FightRandomnMalikore).hint("Test fight with some malikore.");
-			addButton(11, "Pierce", FightPierce).hint("Test fight with Pierce.");
-			//12
-			addButton(13, "-1-", EnemiesMenu, page - 1);
-			addButton(14, "Back", SoulforceCheats);
-		}
+		
+		buttons.add("Overseer", curry(fightMonster, OmnibusOverseer), "Test Fight against Omnibus Overseer");
+		buttons.add("Sand Mother", FightSandMother, "Test Fight against Sand Mother");
+		buttons.add("Zetaz", curry(fightMonster, Zetaz), "Test Fight against Zetaz");
+		buttons.add("Incels", curry(fightMonster, Incels), "Test Fight against Incels");
+		buttons.add("SuccGard", FightSuccubusGardener, "Test fight with Succubus Gardener. (Also it will glitch right after fight so not start this fight if you got unsaved progress that you not wanna loose as only way to handle post fight glitch is restarting game)");
+		buttons.add("Lethice", FightLethice, "Test Fight against Lethice");
+		buttons.add("Marae", FightMarae, "Test fight with Marae (depending on game stage she can be buffed or unbuffed).");
+		buttons.add("The Dummy", FightTheDummy, "Test Fight against The Dummy");
+		buttons.add("FightForPearl", FightForPearl, "Test fight to get Sky Poison Pearl legally (aside we cheat to start fight)");
+		buttons.add("B.Monke", FightWaizAbi, "You not even want to let the innocent bimbo monke free? <i>*sigh*</i>");
+		if (player.level >= 45) buttons.add("Oculicorn", FightIridesian, "Test fight with Oculicorn.");
+		buttons.add("Draculina", curry(fightMonster, Draculina), "Test Fight against Draculina");
+		buttons.add("GothGirl", FightLilith, "Fight with devilish cute goth girl.");
+		buttons.add("Sonya", FightSonya, "Test fight with Sonya.");
+		buttons.add("RyuBi", FightRyuBi, "Test fight with RyuBi.");
+		buttons.add("Galia", FightGalia, "Test fight with Galia.");
+		buttons.add("ChaosChimera", FightChaosChimera, "Test fight with Chaos Chimera.");
+		buttons.add("AnotSucc", FightCarrera, "Fight with probably another succubus out there...");
+		buttons.add("Aria", FightAria, "Test fight with melkie huntress Aria.");
+		buttons.add("SomeMalikore", FightRandomnMalikore, "Test fight with some malikore.");
+		buttons.add("Pierce", FightPierce, "Test fight with Pierce.");
+		buttons.add("LvLUP Eva", LvLUPEva, "LvL UP forcefully Evangeline for testing purpose up to the limit.");
+		buttons.add("DELvL Eva", DELvLEva, "DE LvL forcefully Evangeline for testing purpose down toward the lvl 12.");
+		buttons.add("LvLUP Aurora", LvLUPAurora, "LvL UP forcefully Aurora for testing purpose up to the limit.");
+		buttons.add("DELvL Aurora", DELvLAurora, "DE LvL forcefully Aurora for testing purpose down toward the lvl 1.");
+		submenu(buttons, SoulforceCheats, 0, false);
 	}
 
 	public function AddRapPerk():void {
@@ -1869,6 +1875,10 @@ public class TestMenu extends BaseContent
 	public function AddDualMinoAxes():void {
 		outputText("\n\n<b>(Gained 1 pair of Large Axes!)</b>\n\n");
 		inventory.takeItem(weapons.DL_AXE_, curry(EquipmentMenu, 1));
+	}
+	public function AddAncientConduit():void {
+		outputText("\n\n<b>(Gained 1 Ancient Conduit!)</b>\n\n");
+		inventory.takeItem(shields.ANC_CON, curry(EquipmentMenu, 1));
 	}
 	public function AddUltraHeavyAyoArmor():void {
 		outputText("\n\n<b>(Gained 1 Ultra Heavy Ayo Armor!)</b>\n\n");
@@ -2412,6 +2422,13 @@ public class TestMenu extends BaseContent
 		statScreenRefresh();
 		curry(MaterialMenu, 1);
 	}
+	public function fightMonster(monsterClass:Class, setupFunc:Function = null):void {
+		clearOutput();
+		var monster:Monster = new monsterClass();
+		if (setupFunc != null) setupFunc(monster);
+		outputText("Entering battle with " + monster.short + "! Enjoy ^^");
+		startCombat(monster);
+	}
 	public function FightForPearl():void {
 		clearOutput();
 		outputText("Entering battle with Deep Sea Kraken Boss! Enjoy ^^");
@@ -2483,22 +2500,22 @@ public class TestMenu extends BaseContent
 	public function LvLUPAurora():void {
 		outputText("\n\n<b>Aurora get stronger! (cheat stop working when she reach max possible lvl for now (atm it's lvl 73))</b>");
 		if (flags[kFLAGS.AURORA_LVL] < 13) flags[kFLAGS.AURORA_LVL]++;
-		EnemiesMenu(2);
+		enemiesMenu();
 	}
 	public function DELvLAurora():void {
 		outputText("\n\n<b>Aurora get weaker! (cheat stop working when she reach lvl 1)</b>");
 		if (flags[kFLAGS.AURORA_LVL] > 1) flags[kFLAGS.AURORA_LVL]--;
-		EnemiesMenu(2);
+		enemiesMenu();
 	}
 	public function LvLUPEva():void {
 		outputText("\n\n<b>Evangeline get stronger! (cheat stop working when she reach max possible lvl for now (atm it's lvl 42))</b>");
 		if (flags[kFLAGS.EVANGELINE_LVL_UP] < 17) flags[kFLAGS.EVANGELINE_LVL_UP]++;
-		EnemiesMenu(1);
+		enemiesMenu();
 	}
 	public function DELvLEva():void {
 		outputText("\n\n<b>Evangeline get weaker! (cheat stop working when she reach lvl 12)</b>");
 		if (flags[kFLAGS.EVANGELINE_LVL_UP] > 6) flags[kFLAGS.EVANGELINE_LVL_UP]--;
-		EnemiesMenu(1);
+		enemiesMenu();
 	}
 	public function RevertCabinProgress():void {
 		flags[kFLAGS.CAMP_CABIN_PROGRESS] = 2;

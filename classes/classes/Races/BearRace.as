@@ -40,7 +40,7 @@ public class BearRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				.faceType(ANY(Face.BEAR, Face.PANDA), +1)
+				.faceType(ANY(Face.BEAR, Face.PANDA), +2)
 				.earType(ANY(Ears.BEAR, Ears.PANDA), +1)
 				.tailType(Tail.BEAR, +1)
 				.armType(Arms.BEAR, +1)
@@ -53,7 +53,7 @@ public class BearRace extends Race {
 		
 		buildTier(10,"bear")
 				.customNamingFunction(function(body:BodyData):String {
-					return body.faceType == Face.PANDA ? "panda-morph" : "bear-morph";
+					return (body.faceType == Face.PANDA || body.earType == Ears.PANDA) ? "panda-morph" : "bear-morph";
 				})
 				.buffs({
 					"str.mult": +1.00,

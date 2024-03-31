@@ -21,18 +21,18 @@ public class ArouseSpell extends AbstractBlackSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target, false, false) + " lust damage"
+		return "~" + numberFormat(calcDamage(target, false, false)) + " lust damage"
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
-		return adjustLustDamage(scalingBonusIntelligence() / 3, monster, CAT_SPELL_BLACK, randomize);
+		return adjustLustDamage((scalingBonusIntelligence() * 0.75 + scalingBonusLibido() * 0.75), monster, CAT_SPELL_BLACK, randomize);
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
 			outputText("You make a series of arcane gestures, drawing on your own lust to inflict it upon your foe!\n");
 			if (player.perkv1(PerkLib.ImpNobility) > 0) {
-				outputText("  Your imp cohorts assist you spellcasting adding their diagrams to your own.\n");
+				outputText("  Your imp cohorts assist your spellcasting, adding their diagrams to your own.\n");
 			}
 		}
 		if (monster is WormMass) {
@@ -70,37 +70,23 @@ public class ArouseSpell extends AbstractBlackSpell {
 			}
 			if (monster.vaginas.length > 0 && monster.lust100 >= 60) {
 				if (monster.plural) {
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL) outputText("[Themonster]'s [monster vagina]s dampen perceptibly.  ");
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET) outputText("[Themonster]'s crotches become sticky with girl-lust.  ");
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK) outputText("[Themonster]'s [monster vagina]s become sloppy and wet.  ");
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of [themonster]'s thighs.  ");
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText("[Themonster]'s [monster vagina]s instantly soak [monster him] groin.  ");
+					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL) outputText("[Themonster]'s [monster vagina]s dampen perceptibly.");
+					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET) outputText("[Themonster]'s crotches become sticky with girl-lust.");
+					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK) outputText("[Themonster]'s [monster vagina]s become sloppy and wet.");
+					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of [themonster]'s thighs.");
+					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText("[Themonster]'s [monster vagina]s instantly soak [monster him] groin.");
 				} else {
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL) outputText("[Themonster]'s [monster vagina] dampens perceptibly.  ");
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET) outputText("[Themonster]'s crotch becomes sticky with girl-lust.  ");
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK) outputText("[Themonster]'s [monster vagina] becomes sloppy and wet.  ");
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of [themonster]'s thighs.  ");
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText("[Themonster]'s [monster vagina] instantly soaks her groin.  ");
+					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL) outputText("[Themonster]'s [monster vagina] dampens perceptibly.");
+					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET) outputText("[Themonster]'s crotch becomes sticky with girl-lust.");
+					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK) outputText("[Themonster]'s [monster vagina] becomes sloppy and wet.");
+					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of [themonster]'s thighs.");
+					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText("[Themonster]'s [monster vagina] instantly soaks her groin.");
 				}
 			}
 		}
 		
-		//Determine if critical tease!
-		var crit:Boolean   = false;
-		var critChance:int = 5;
-		critChance += combat.teases.combatTeaseCritical();
-		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-		if (rand(100) < critChance) {
-			crit = true;
-			lustDmg *= 1.75;
-		}
-		monster.teased(lustDmg, false, display);
-		if (crit && display) outputText(" <b>Critical!</b>");
-		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-		if (player.hasPerk(PerkLib.VerdantLeech)) {
-			if (monster.lustVuln != 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.025;
-			HPChange(Math.round(player.maxHP() * 0.05), false);
-		}
+		var resultArray:Array = critAndRepeatLust(display, lustDmg, CAT_SPELL_BLACK);
+		postLustSpellEffect(resultArray[1]);
 	}
 }
 }

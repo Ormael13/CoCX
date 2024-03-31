@@ -354,7 +354,7 @@ public class PerkMenu extends BaseContent {
 		var currentAttacks:int = flags[kFLAGS.MULTIATTACK_STYLE];
 		var maxAttacks:int = combat.maxCurrentAttacks();
 		clearOutput();
-		if (player.weaponSpecials("Staff") || player.weaponSpecials("Wand")) {
+		if (player.weapon.isStaffType() || player.weapon.isWandType()) {
 			outputText("You can't multi-attack with wands or staves!\n\n");
 			doNext(meleeOptions);
 			return;
@@ -1051,8 +1051,14 @@ public class PerkMenu extends BaseContent {
 
 				if (flags[kFLAGS.IMDB_DETAILS]) {
 					outputText("\nAll Tier Descriptions:");
-					for (var tier:int = 1; tier <= mutation.maxLvl; ++tier)
-						outputText("\n" + tier + ": " + mutation.mDesc(player.getPerk(mutation), tier) + "; " + mutation.explainBuffs(tier));
+					for (var tier:int = 1; tier <= mutation.maxLvl; ++tier) {
+						var temptxt:String = ("\n" + tier + ": " + mutation.mDesc(player.getPerk(mutation), tier));
+						var temptxt2:String = mutation.explainBuffs(tier)
+						if(!(temptxt2.indexOf("null") >= 0)){
+							temptxt += temptxt2;
+						}
+						outputText(temptxt);
+					}
 				} else if (mutation.maxLvl != pMutateLvl) {
 					outputText("\nNext Tier Description: ");
 					if (mutation.mDesc(player.getPerk(mutation), pMutateLvl).length <= 1) {	//Some desc. contains only "."

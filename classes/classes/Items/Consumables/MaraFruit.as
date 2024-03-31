@@ -12,7 +12,6 @@ import classes.CoC;
 import classes.CockTypesEnum;
 import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Consumable;
-import classes.Items.ItemTags;
 import classes.Races;
 import classes.StatusEffects;
 import classes.VaginaClass;
@@ -20,7 +19,7 @@ import classes.VaginaClass;
 public class MaraFruit extends Consumable{
 	public function MaraFruit() {
 		super("MaraFru", "MaraFruit", "an apple-shaped fruit", 10, "This green apple-shaped fruit that spread delicious scent around. You have second thoughts about eating it as this may alter your form in some way like many other fruits.");
-		withTag(ItemTags.U_TF);
+		withTag(U_TF);
 		refineableInto(
 				AlchemyLib.DEFAULT_SUBSTANCES_DROP_TABLE,
 				AlchemyLib.MULTIRACE_ESSENCE_DROP_TABLE(AlchemyLib.AE_ALRAUNE, AlchemyLib.AE_PLANT)

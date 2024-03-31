@@ -244,7 +244,7 @@ public class HeXinDao extends BaseContent
 			addButton(9, "Create E (B)", curry(buyItem2,consumables.CEB_MAN), sayLine2(consumables.CEB_MAN,"It's a manual for Create Element (Basic). This very simple technique allows you to unleash ball of basic element (fire, water, air, earth)."), "\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  It seems like the name of the manual wasn't influenced by this realm's nature... either that or it's just a coincidence.", true).hint("Create Element (Basic).").disableIf(!hasSoulCultivator);
             addButton(10, "FlamesOfLove", curry(buyItem1,consumables.FOLBMAN), sayLine1(consumables.FOLBMAN,"It's a manual for Flames of Love (Rankless), this simple technique allows you to convert excess lust into flames."), "\n\nIt seems like some sort of art to deal with needless lust by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  ").hint("Flames of Love (Rankless) Manual.");
 			addButton(11, "IciclesOfLove", curry(buyItem1,consumables.IOLBMAN), sayLine1(consumables.IOLBMAN,"It's a manual for Icicles of Love (Rankless), this simple technique allows you to covert excess lust into icicles."), "\n\nIt seems like some sort of art to deal with needless lust by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  ").hint("Icicles of Love (Rankless) Manual.");
-			addButton(12, "SoSisterhood", curry(buyItem1,consumables.SOSBMAN), sayLine1(consumables.SOSBMAN,"It's a manual for Storm of Sisterhood (Rankless), this simple technique allows you to convert excess wrath into lighting."), "\n\nIt seems like some sort of art to deal with needless wrath by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  ").hint("Storm of Sisterhood (Rankless) Manual.");
+			addButton(12, "SoSisterhood", curry(buyItem1,consumables.SOSBMAN), sayLine1(consumables.SOSBMAN,"It's a manual for Storm of Sisterhood (Rankless), this simple technique allows you to convert excess wrath into lightning."), "\n\nIt seems like some sort of art to deal with needless wrath by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  ").hint("Storm of Sisterhood (Rankless) Manual.");
 			addButton(13, "NoBrotherhood", curry(buyItem1,consumables.NOBBMAN), sayLine1(consumables.NOBBMAN,"It's a manual for Night of Brotherhood (Rankless), this simple technique allows you to covert excess wrath into darkness."), "\n\nIt seems like some sort of art to deal with needless wrath by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  ").hint("Night of Brotherhood (Rankless) Manual.");
 			addButton(14, "Back", golemmerchant);
             statScreenRefresh();
@@ -253,11 +253,11 @@ public class HeXinDao extends BaseContent
             buyItem1 = curry(MultiBuy.confirmBuyMulti,TierII,"Golem",1);
             buyItem2 = curry(MultiBuy.confirmBuyMulti,TierII,"Golem",5);
 			menu();
-            addButton(5, "Comet", curry(buyItem2,consumables.COMETMA),sayLine2(consumables.COMETMA,"It's a manual for Comet, this technique allows you to project a shard of soulforce, which will come crashing down upon your opponent as a crystalline comet.  Perfect for when you are fighting groups of enemies, it also becomes more powerful as long as you keep training your body and soul."),"\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to use when fighting groups of enemies.  You don't often meet more than one enemy at at a time, but you're sure that deeper in this forsaken realm you will face groups or maybe even hordes of demons at once. Best to be prepared. ", true).hint("Comet Manual.");
-			addButton(6, "V P Trans", curry(buyItem2,consumables.VPTRMAN),sayLine2(consumables.VPTRMAN,"It's a manual for Violet Pupil Transformation, this advanced technique allows you to channel soulforce into regenerative power, allowing you to recover even from the brink of death.  Its only flaw is that it constantly drains the cultivator's soulforce. "),"\n\nIt seems like it's similar to a healing spell soul skill, but instead of being used immediately, with enough soulforce it could be kept active for a very long period of time.  It could give you an edge against the demons.  Additionally, the ability to heal from the brink of death could prove to be useful in future fights.  ", true).hint("Violet Pupil Transformation Manual.");
-            addButton(7, "Sextuple Thrust", curry(buyItem2,consumables.SEXTMAN), sayLine2(consumables.SEXTMAN,"It's a manual for Sextuple Thrust, this simple technique allows you to unleash six thrusts. As you train your body and soul, this skill will become stronger."), "\n\nWhether you are going to go deeper into all that 'soulforce' stuff or not, at least you now have something to train with. The name of the manual seems like it could have been influenced by this realm...or it's just a coincidence.  ", true).hint("Sextuple Thrust Manual.").disableIf(!hasSoulPersonage);
-            addButton(8, "Grandiose Hail of Blades", curry(buyItem2,consumables.HOB2MAN), sayLine2(consumables.HOB2MAN,"It's a manual for Grandiose Hail of Blades, this technique allows you to form many etheral weapons traveling at extreme speeds. As you train your body and soul, this skill will become stronger."), "\n\nWhether you are going to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  The name of the manual is strange, but it makes you remember something...but what and from where you not certain.  ", true).hint("Grandiose Hail of Blades Manual.").disableIf(!hasSoulSprite);
-			addButton(9, "Create E (A)", curry(buyItem2,consumables.CEA_MAN),sayLine2(consumables.CEA_MAN,"It's a manual for Create Element (Advanced), this technique allows you to unleash ball of advanced element (ice, lightning, darkness), it also becomes more powerful as long as you keep training your body and soul."),"\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to use when enemies resistant to more basic elements. Best to be prepared. ", true).hint("Create Element (Advanced).");
+            addButton(5, "Comet", curry(buyItem2,consumables.COMETMA),sayLine2(consumables.COMETMA,"It's a manual for Comet, this technique allows you to project a shard of soulforce, which will come crashing down upon your opponent as a crystalline comet.  Perfect for when you are fighting groups of enemies, it also becomes more powerful as long as you keep training your body and soul."),"\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to use when fighting groups of enemies.  You don't often meet more than one enemy at at a time, but you're sure that deeper in this forsaken realm you will face groups or maybe even hordes of demons at once. Best to be prepared.\n", true).hint("Comet Manual.");
+			addButton(6, "V P Trans", curry(buyItem2,consumables.VPTRMAN),sayLine2(consumables.VPTRMAN,"It's a manual for Violet Pupil Transformation, this advanced technique allows you to channel soulforce into regenerative power, allowing you to recover even from the brink of death.  Its only flaw is that it constantly drains the cultivator's soulforce. "),"\n\nIt seems like it's similar to a healing spell soul skill, but instead of being used immediately, with enough soulforce it could be kept active for a very long period of time.  It could give you an edge against the demons.  Additionally, the ability to heal from the brink of death could prove to be useful in future fights.\n", true).hint("Violet Pupil Transformation Manual.");
+            addButton(7, "Sextuple Thrust", curry(buyItem2,consumables.SEXTMAN), sayLine2(consumables.SEXTMAN,"It's a manual for Sextuple Thrust, this simple technique allows you to unleash six thrusts. As you train your body and soul, this skill will become stronger."), "\n\nWhether you are going to go deeper into all that 'soulforce' stuff or not, at least you now have something to train with. The name of the manual seems like it could have been influenced by this realm...or it's just a coincidence.\n", true).hint("Sextuple Thrust Manual.").disableIf(!hasSoulPersonage);
+            addButton(8, "Grandiose HoB", curry(buyItem2,consumables.HOB2MAN), sayLine2(consumables.HOB2MAN,"It's a manual for Grandiose Hail of Blades, this technique allows you to form many etheral weapons traveling at extreme speeds. As you train your body and soul, this skill will become stronger."), "\n\nWhether you are going to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  The name of the manual is strange, but it makes you remember something...but what and from where you not certain.\n", true).hint("Grandiose Hail of Blades Manual.").disableIf(!hasSoulSprite);
+			addButton(9, "Create E (A)", curry(buyItem2,consumables.CEA_MAN),sayLine2(consumables.CEA_MAN,"It's a manual for Create Element (Advanced), this technique allows you to unleash ball of advanced element (ice, lightning, darkness), it also becomes more powerful as long as you keep training your body and soul."),"\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to use when enemies resistant to more basic elements. Best to be prepared.\n", true).hint("Create Element (Advanced).");
 			addButton(14, "Back", golemmerchant);
             statScreenRefresh();
 		}
@@ -283,7 +283,6 @@ public class HeXinDao extends BaseContent
 		addButton(10, "Alch.Tools", alchemyTools).hint("Check out alchemy equipment.");
 		addButton(13, "IncenOfInsig", buyItem1,consumables.INCOINS, sayLine1(consumables.INCOINS,"These incenses are useful. They will grant you visions for a short moment while meditating. This should help you find the wisdom and insight you need.")).hint("Incense of Insight.");
 		addButton(14, "Back", riverislandVillageStuff);
-
         statScreenRefresh();
     }
 	private function alchemyTools():void {
@@ -303,7 +302,6 @@ public class HeXinDao extends BaseContent
 			}
 			outputText(" in your camp.</b>")
 		}
-
 		function buyAlembic(tier:int, priceGems:int):void {
 			Crafting.alembicLevel = tier;
 			player.gems -= priceGems;
@@ -318,7 +316,12 @@ public class HeXinDao extends BaseContent
 			statScreenRefresh();
 			doNext(alchemyTools);
 		}
-
+		function buyCatalyst(itype:ItemType):void {
+			player.gems -= 1000;
+			outputText("\n\n<b>"+itype.shortName+" purchased!</b>");
+			statScreenRefresh();
+			inventory.takeItem(itype, alchemyTools);
+		}
 		menu();
 		button(0).show("Alembic I", curry(buyAlembic, Crafting.ALEMBIC_LEVEL_SIMPLE, Crafting.ALEMBIC_LEVELS[Crafting.ALEMBIC_LEVEL_SIMPLE].value))
 				 .hint("Buy a simple alembic to refine substances from ingredients.\n\nCost: "+Crafting.ALEMBIC_LEVELS[Crafting.ALEMBIC_LEVEL_SIMPLE].value+" gems.")
@@ -329,6 +332,10 @@ public class HeXinDao extends BaseContent
 				 .hint("Buy a simple alchemic furnace to combine substances into pills.\n\nCost: "+Crafting.FURNACE_LEVELS[Crafting.FURNACE_LEVEL_SIMPLE].value+" gems.")
 				.disableIf(player.gems < Crafting.FURNACE_LEVELS[Crafting.FURNACE_LEVEL_SIMPLE].value)
 				 .disableIf(Crafting.furnaceLevel >= Crafting.FURNACE_LEVEL_SIMPLE, "++\n\n<b>You don't need that!</b>");
+		addButtonIfTrue(5, "Min.Sub.ACat", curry(buyCatalyst, useables.MIN_SUB_ACAT), "This item costs 1000 gems.", player.gems >= 1000, "This magical crystal, when placed inside alchemical alembic, slightly increases chances to extract substance. It is not consumed in the process and can be used muliple times.");
+		addButtonIfTrue(6, "Min.Ess.ACat", curry(buyCatalyst, useables.MIN_ESS_ACAT), "This item costs 1000 gems.", player.gems >= 1000, "This magical crystal, when placed inside alchemical alembic, slightly increases chances to extract essence. It is not consumed in the process and can be used muliple times.");
+		addButtonIfTrue(7, "Min.Res.ACat", curry(buyCatalyst, useables.MIN_RES_ACAT), "This item costs 1000 gems.", player.gems >= 1000, "This magical crystal, when placed inside alchemical alembic, slightly increases chances to extract residue. It is not consumed in the process and can be used muliple times.");
+		addButtonIfTrue(8, "Min.Pig.ACat", curry(buyCatalyst, useables.MIN_PIG_ACAT), "This item costs 1000 gems.", player.gems >= 1000, "This magical crystal, when placed inside alchemical alembic, slightly increases chances to extract pigment. It is not consumed in the process and can be used muliple times.");
 		button(14).show("Back", golemmerchant);
 	}
     private function debitItem1(returnFunc:Function,shopKeep:String,priceRate:int,itype:ItemType,onBuy:String):void{
@@ -412,6 +419,7 @@ public class HeXinDao extends BaseContent
             [consumables.KANGAFT, "kangaroo"],
             [consumables.BLADEGR, "mantis"],
             [consumables.SCORICO, "scorpion"],
+            [consumables.MOTHDUS, "moth"],
             [consumables.YETICUM, "yeti"],
             [consumables.BAYRLEA, "bear"],
             [consumables.SMRTNUT, "squirrel"],
@@ -420,7 +428,7 @@ public class HeXinDao extends BaseContent
             [consumables.COAL___, "horny"],
             [consumables.DRYTENT, "anemone"],
             [consumables.ECTOPLS, "ghost"],
-            [consumables.TRAPOIL, "sand trap"],
+            //[consumables.TRAPOIL, "sand trap"],
             [consumables.ICICLE_, "ice shard"],
             [consumables.SDELITE, "cum hose"],
             [consumables.SSPONGE, "dryness"],
@@ -845,17 +853,89 @@ public class HeXinDao extends BaseContent
         outputText("Behind the desk in the central point of the shop you see a flesh golem on unidentified gender.");
         outputText("\n\n\"<i>Greetings, customer. Go ahead and look around, if something catches your eye, simply let me know,</i>\" it say all that almost entirely in one breath after noticing your presence.");
         menu();
-		addButton(0, weaponsflyingswords.S_HALFM.shortName, flyingSwordBuy, weaponsflyingswords.S_HALFM, qimerchant);
-		addButton(1, weaponsflyingswords.E_HALFM.shortName, flyingSwordBuy, weaponsflyingswords.E_HALFM, qimerchant);
-		addButton(2, weaponsflyingswords.B_HALFM.shortName, flyingSwordBuy, weaponsflyingswords.B_HALFM, qimerchant);
-		addButton(3, weaponsflyingswords.W_HALFM.shortName, flyingSwordBuy, weaponsflyingswords.W_HALFM, qimerchant);
-		addButton(4, weaponsflyingswords.MOONLGT.shortName, flyingSwordBuy, weaponsflyingswords.MOONLGT, qimerchant);
+		addButton(0, weaponsflyingswords.MOONLGT.shortName, flyingSwordBuy, weaponsflyingswords.MOONLGT, qimerchant);
+		addButton(1, weaponsflyingswords.S_HALFM.shortName, flyingSwordBuy, weaponsflyingswords.S_HALFM, qimerchant);
+		addButton(2, weaponsflyingswords.E_HALFM.shortName, flyingSwordBuy, weaponsflyingswords.E_HALFM, qimerchant);
+		addButton(3, weaponsflyingswords.B_HALFM.shortName, flyingSwordBuy, weaponsflyingswords.B_HALFM, qimerchant);
+		addButton(4, weaponsflyingswords.W_HALFM.shortName, flyingSwordBuy, weaponsflyingswords.W_HALFM, qimerchant);
 		addButton(5, weaponsflyingswords.S_TWINS.shortName, flyingSwordBuy, weaponsflyingswords.S_TWINS, qimerchant);
+		addButton(6, weaponsflyingswords.A_HALFM.shortName, flyingSwordBuy, weaponsflyingswords.A_HALFM, qimerchant);
+		addButton(7, weaponsflyingswords.O_HALFM.shortName, flyingSwordBuy, weaponsflyingswords.O_HALFM, qimerchant);
 		addButton(10, weaponsflyingswords.ASAUCHI.shortName, flyingSwordBuy, weaponsflyingswords.ASAUCHI, qimerchant);
-        addButtonDisabled(13, "Training", "The shop owner, Qi, is in the middle of closed door cultivations. It shouldn't take longer than a few months for him to finish.");//.hint("Flying Sword training.")
+        addButton(11, weaponsflyingswords.C_NEW_M.shortName, flyingSwordBuy, weaponsflyingswords.C_NEW_M, qimerchant);
+        addButton(13, "Qi", qimerchantTraningMain).hint("Flying Sword training and others related matters.");
         addButton(14, "Back", riverislandVillageStuff);
         statScreenRefresh();
     }
+	
+	private function qimerchantTraningMain():void {
+		clearOutput();
+		outputText("\"<i>Welcome customer,</i>\" Qi stretches his arms out toward you before gesturing to his inventory. \"<i>Please, browse my wares. Can I interest you in a sword, or are you looking for something else?</i>\"");
+		menu();
+		if (player.hasPerk(PerkLib.SoulSense) && flags[kFLAGS.SPIRIT_STONES] >= 50) addButtonIfTrue(0, "Basic training", qimerchantTraningMainFlyingSwordPath1, "You already learned basic control of flying swords.", !player.hasPerk(PerkLib.FlyingSwordPath));
+		else addButtonDisabled(0, "Basic training", "Req. Soul Sense perk & 50 spirit stones.");
+		addButtonIfTrue(10, "Soaring Blades", qimerchantTraningMainSoaringBladesManual, "You need to learn how to control flying swords first (Req. Flying Sword Path perk).", player.hasPerk(PerkLib.FlyingSwordPath));
+		addButtonIfTrue(11, "1stAtk: F.Sword", qimerchantTraningMainFirstAttackFlyingSwordManual, "You need to learn how to control flying swords first (Req. Flying Sword Path perk).", player.hasPerk(PerkLib.FirstAttackFlyingSword));
+		addButton(14, "Back", qimerchant);
+	}
+	private function qimerchantTraningMainFlyingSwordPath1():void {
+		clearOutput();
+		outputText("He motions you to follow him to next room. Once inside after him, you notice something a strange sensation. The room feels off, as if it's larger than it has any right to be. Should you go back out and double check?\n\n");
+		outputText("Qi notices your confusion, \"<i>It's just minor space expansion effect set up. It's useful when I need to do some training or teach others such as you. It prevents accidents when you have more room to learn in.</i>\" He then points you to sit on one of cushions set in the middle of the room.\n\n");
+		outputText("He settles down with you before he resumes the lesson, \"<i>Using flying swords require two things: First it's to imprint mark on the sword using your own soulforce. Let me show you.</i>\"\n\n");
+		outputText("He pulls out a small flying sword from a Bag of Holding. While he explains the whole process, he makes new imprint of it. He follows with explaining how to find if a particular sword already has an imprint. Then, he takes out another sword and gives it to you to repeat what he has shown.\n\n");
+		outputText("It takes a tremendous effort to get used to, but Qi remains patient, watching you intently with a steady gaze. After several initial failures, you managed to imprint the sword.\n\n");
+		outputText("Qi applauds briefly, \"<i>Good. Now, the second step: Controlling it to do what you want utilizing your Soul Sense. Imagine using it as you would with your hand and control flying sword.</i>\"\n\n");
+		outputText("Qi takes out four smaller swords before tossing them into air. He watches them float as they bring themselves into a basic formation instead of falling down on the floor. \"<i>At first, you may find it difficult to not gesticulate as you draw on your soul force to guide the swords...</i>\" He moves his right hand, causing all the swords follow his gesture, \"<i>As you find your sense of self, I'd advise against any movements or somatics. Work your way until you don't have to make a single movement...</i>\" He pauses his hand as the swords continue circling the both of you until they all return to his side like faithful hounds.\n\n");
+		outputText("\"<i>Naturally, it'll be much easier to control multiple smaller weapons over larger ones.</i>\" With a wave of his hand, the swords seem to fold over one another before vanishing into his bag. \"<i>Though, that is a lesson for the future. Now, if you succeed, you will be able to, at best, use one massive, two large or four small ones.</i>\"\n\n");
+		outputText("For the next half hour, you work on controlling the swords under Qi's guidance, watching his lessons with intent as he instructs each moment meticulously, ensuring you can reach your full potential.\n\n");
+		outputText("\"<i>Good, it would appear that you understand the basics of using flying swords. Besides using them to move and attack, you could also use ride on a sword that's large enough, though, this inhibits all offensive potential, of course.</i>\"\n\n");
+		outputText("He extends his hand to you, \"<i>Now, please return that sword. You can always buy one from me when you need it, that one is solely for practice.</i>\"\n\n");
+		outputText("You return the sword to him, to which he responds with a respectful bow before running a piece of cloth over it, clearing any imprints upon it as he stashes it away. \"<i>Until your cultivation base not attain major breakthrough i can't teach you anything new beside providing you with manual for minor technique that helps you to lessen burden of using flying swords as your progress through each major realm. It's not super cheap one but I can sell it to you. As long you got enough spirit stones to buy it.</i>\" He laugh heartly then stands up and leading you back to first room where the golem stays.\n\n");
+		outputText("<b>(<b>Gained Perk: Flying Sword Path (Rank 1)!</b>)</b>\n\n");
+		player.createPerk(PerkLib.FlyingSwordPath, 1, 0, 0, 0);
+		flags[kFLAGS.SPIRIT_STONES] -= 50;
+		advanceMinutes(150);
+		doNext(qimerchantTraningMain);
+	}
+	private function qimerchantTraningMainFlyingSwordPath2():void {
+		clearOutput();
+		outputText("\"<i></i>\"\n\n");
+		advanceMinutes(150);
+		doNext(qimerchantTraningMain);
+	}
+	private function qimerchantTraningMainSoaringBladesManual():void {
+		clearOutput();
+		outputText("Qi holds up the manual and says, \"<i>It would teach you Soaring Blades, that helps with reducing soulforce consumption to operate flying swords.  It is <b>50 spirit stones</b></i>.\" ");
+		doYesNo(buySoaringBladesManual, qimerchantTraningMain);
+	}	
+	private function buySoaringBladesManual():void {
+		if (flags[kFLAGS.SPIRIT_STONES] < 50) {
+			clearOutput();
+			outputText("\n\nQi sighs, indicating you need " + String(50 - flags[kFLAGS.SPIRIT_STONES]) + " more spirit stones to purchase this manual.");
+			doNext(qimerchantTraningMain);
+		}
+		else {
+			flags[kFLAGS.SPIRIT_STONES] -= 50;
+			inventory.takeItem(consumables.S_B_MAN, qimerchantTraningMain);
+		}
+	}
+	private function qimerchantTraningMainFirstAttackFlyingSwordManual():void {
+		clearOutput();
+		outputText("Qi holds up the manual and says, \"<i>It would teach you 'First Attack: Flying Sword', that allows you to use your flying sword in more semi-independent way.  It is <b>50 spirit stones</b></i>.\" ");
+		doYesNo(buybuyFirstAttackFlyingSwordManual, qimerchantTraningMain);
+	}	
+	private function buybuyFirstAttackFlyingSwordManual():void {
+		if (flags[kFLAGS.SPIRIT_STONES] < 50) {
+			clearOutput();
+			outputText("\n\nQi sighs, indicating you need " + String(50 - flags[kFLAGS.SPIRIT_STONES]) + " more spirit stones to purchase this manual.");
+			doNext(qimerchantTraningMain);
+		}
+		else {
+			flags[kFLAGS.SPIRIT_STONES] -= 50;
+			inventory.takeItem(consumables.FAFSMAN, qimerchantTraningMain);
+		}
+	}
 
 	private function flyingSwordBuy(itype:ItemType, returnFunc:Function):void {
 		var descString:String = "After entering the shop with a sign saying 'Flying Swords are always with you!' over the doors you see a few shelves filled with various flying swords. "
@@ -969,8 +1049,10 @@ public function soularena():void {
 			//else addButton(6, "Miss Mander", arenaSelection,Asuka).hint("Young salamander girl.");
 			//addButton(7, "Miss Oni", arenaSelection,Rangiku);
 			addButton(9, "-1-", soularenaChallengeSubpages, page - 1);
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButtonDisabled(10, "IntermedLeader", "Req. to have any henchman with you to start this fight.");
-			else addButton(10, "IntermedLeader", intermediateleadershipfight1).hint("Intermediate Leadership fight");
+			if (flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 0) {
+				if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButtonDisabled(10, "IntermedLeader", "Req. to have any henchman with you to start this fight.");
+				else addButton(10, "IntermedLeader", intermediateleadershipfight1).hint("Intermediate Leadership fight");
+			}
 			addButton(14, "Back", soularenaChallengeBack);
 		}
 	}

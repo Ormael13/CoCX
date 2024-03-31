@@ -683,7 +683,7 @@ import classes.Scenes.SceneLib;
 			else addButton(0, "Healing herb", putInHerbIntoHerbBag, CoC.instance.consumables.HEALHERB);
 		}
 		if (player.hasItem(consumables.MOONGRASS)) {
-			if (IngrediantBagSlot02 >= IngrediantBagSlot02Cap) addButtonDisabled(1, "Moon grass", "You not have space to put in another healing herb.");
+			if (IngrediantBagSlot02 >= IngrediantBagSlot02Cap) addButtonDisabled(1, "Moon grass", "You not have space to put in another moon grass.");
 			else addButton(1, "Moon grass", putInHerbIntoHerbBag, CoC.instance.consumables.MOONGRASS);
 		}
 		if (player.hasItem(consumables.SNAKEBANE)) {
@@ -691,7 +691,7 @@ import classes.Scenes.SceneLib;
 			else addButton(2, "Snakebane", putInHerbIntoHerbBag, CoC.instance.consumables.SNAKEBANE);
 		}
 		if (player.hasItem(consumables.IRONWEED)) {
-			if (IngrediantBagSlot04 >= IngrediantBagSlot04Cap) addButtonDisabled(0, "Healing herb", "You not have space to put in another ironweed.");
+			if (IngrediantBagSlot04 >= IngrediantBagSlot04Cap) addButtonDisabled(3, "Ironweed", "You not have space to put in another ironweed.");
 			else addButton(3, "Ironweed", putInHerbIntoHerbBag, CoC.instance.consumables.IRONWEED);
 		}
 		if (player.hasItem(consumables.BLADEFERN)) {

@@ -472,7 +472,11 @@ import classes.Scenes.Combat.CombatAbility;
                     kFLAGS.CHARVIEW_STYLE,
                     kFLAGS.CHARVIEW_ARMOR_HIDDEN,
 					kFLAGS.EXPLORE_MENU_STYLE,
-                    kFLAGS.SPIRIT_STONES]) {
+                    kFLAGS.SPIRIT_STONES,
+					kFLAGS.HP_STATBAR_PERCENTAGE,
+					kFLAGS.LUST_STATBAR_PERCENTAGE,
+					kFLAGS.WRATH_STATBAR_PERCENTAGE,
+					kFLAGS.ANGELIC_FRACTION_TOGGLE]) {
 					    newFlags[flag] = flags[flag];
 				}
 			}
@@ -481,7 +485,9 @@ import classes.Scenes.Combat.CombatAbility;
 			CoC.instance.saves.loadPermObject();
 			//Carry over data if new game plus.
 			if (player.hasKeyItem("Ascension") >= 0) CoC.instance.flags = newFlags;
-			if (flags[kFLAGS.SPIRIT_STONES] > (100 * (1 + player.newGamePlusMod()))) flags[kFLAGS.SPIRIT_STONES] = (100 * (1 + player.newGamePlusMod()));
+			var aSPPMX:Number = 1;
+			if (player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX)) aSPPMX += player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX);
+			if (flags[kFLAGS.SPIRIT_STONES] > (100 * (1 + player.newGamePlusMod()) * aSPPMX)) flags[kFLAGS.SPIRIT_STONES] = (100 * (1 + player.newGamePlusMod()) * aSPPMX);
 			//Time reset
 			model.time.days = 0;
 			model.time.hours = 0;
@@ -1376,28 +1382,46 @@ import classes.Scenes.Combat.CombatAbility;
 			clearOutput();
 			outputText("There is a possibility that you were descended from non-human blood.  Was one of your ancestors non-human, and if so, what were they?");
 			menu();
-			if (!player.hasPerk(PerkLib.BloodlineDragon)) addButton(0, "Dragon", confirmBloodline, PerkLib.DragonsDescendant).hint("(+2 to dragon score)");
+			if (!player.hasPerk(PerkLib.BloodlineDragon)) addButton(0, "Dragon", confirmBloodline1, PerkLib.DragonsDescendant).hint("(+2 to dragon score)");
 			else addButtonDisabled(0, "Dragon", "You already have this bloodline!");
-			if (!player.hasPerk(PerkLib.BloodlineElf)) addButton(1, "Elf", confirmBloodline, PerkLib.ElfsDescendant).hint("(+2 to elf score)");
+			if (!player.hasPerk(PerkLib.BloodlineElf)) addButton(1, "Elf", confirmBloodline1, PerkLib.ElfsDescendant).hint("(+2 to elf score)");
 			else addButtonDisabled(1, "Elf", "You already have this bloodline!");
-			if (!player.hasPerk(PerkLib.BloodlineGoblin)) addButton(2, "Goblin", confirmBloodline, PerkLib.GoblinsDescendant).hint("(+2 to goblin score)");
+			if (!player.hasPerk(PerkLib.BloodlineGoblin)) addButton(2, "Goblin", confirmBloodline1, PerkLib.GoblinsDescendant).hint("(+2 to goblin score)");
 			else addButtonDisabled(2, "Goblin", "You already have this bloodline!");
-			if (!player.hasPerk(PerkLib.BloodlineKitsune)) addButton(3, "Kitsune", confirmBloodline, PerkLib.KitsunesDescendant).hint("(+2 to kitsune score)");
+			if (!player.hasPerk(PerkLib.BloodlineKitsune)) addButton(3, "Kitsune", confirmBloodline1, PerkLib.KitsunesDescendant).hint("(+2 to kitsune score)");
 			else addButtonDisabled(3, "Kitsune", "You already have this bloodline!");
-			if (!player.hasPerk(PerkLib.BloodlineRaiju)) addButton(4, "Raiju", confirmBloodline, PerkLib.RaijusDescendant).hint("(+2 to raiju score)");
+			if (!player.hasPerk(PerkLib.BloodlineRaiju)) addButton(4, "Raiju", confirmBloodline1, PerkLib.RaijusDescendant).hint("(+2 to raiju score)");
 			else addButtonDisabled(4, "Raiju", "You already have this bloodline!");
-			if (!player.hasPerk(PerkLib.BloodlineMinotaur)) addButton(5, "Minotaur", confirmBloodline, PerkLib.MinotaursDescendant).hint("(+2 to minotaur score)");
+			if (!player.hasPerk(PerkLib.BloodlineMinotaur)) addButton(5, "Minotaur", confirmBloodline1, PerkLib.MinotaursDescendant).hint("(+2 to minotaur score)");
 			else addButtonDisabled(5, "Minotaur", "You already have this bloodline!");
-			if (!player.hasPerk(PerkLib.BloodlineOni)) addButton(6, "Oni", confirmBloodline, PerkLib.OnisDescendant).hint("(+2 to oni score)");
+			if (!player.hasPerk(PerkLib.BloodlineOni)) addButton(6, "Oni", confirmBloodline1, PerkLib.OnisDescendant).hint("(+2 to oni score)");
 			else addButtonDisabled(6, "Oni", "You already have this bloodline!");
-			if (!player.hasPerk(PerkLib.BloodlineOrc)) addButton(7, "Orc", confirmBloodline, PerkLib.OrcsDescendant).hint("(+2 to orc score)");
+			if (!player.hasPerk(PerkLib.BloodlineOrc)) addButton(7, "Orc", confirmBloodline1, PerkLib.OrcsDescendant).hint("(+2 to orc score)");
 			else addButtonDisabled(7, "Orc", "You already have this bloodline!");
-			if (!player.hasPerk(PerkLib.BloodlineVampire)) addButton(8, "Vampire", confirmBloodline, PerkLib.VampiresDescendant).hint("(+2 to vampire score)");
+			if (!player.hasPerk(PerkLib.BloodlineVampire)) addButton(8, "Vampire", confirmBloodline1, PerkLib.VampiresDescendant).hint("(+2 to vampire score)");
 			else addButtonDisabled(8, "Vampire", "You already have this bloodline!");
+			if (!player.hasPerk(PerkLib.BloodlineMelkie)) addButton(9, "Melkie", confirmBloodline1, PerkLib.MelkiesDescendant).hint("(+2 to melkie score)");
+			else addButtonDisabled(9, "Melkie", "You already have this bloodline!");
+			addButton(13, "-2-", chooseBloodline1);
+			addButton(14, "None", noBloodlineAtAllCuzYouAscendedTooManyTimesAlready).hint("You either cannot add a new unstable bloodline, or you have a stable bloodline. (It mean you only will get some bonus perk points for start instead of new bloodline.)");
+		}
+		public function chooseBloodline1():void {
+			menu();
+			if (!player.hasPerk(PerkLib.BloodlineHydra)) addButton(0, "Hydra", confirmBloodline2, PerkLib.HydrasDescendant).hint("(+2 to hydra score)");
+			else addButtonDisabled(0, "Hydra", "You already have this bloodline!");
+			if (!player.hasPerk(PerkLib.BloodlineSalamander)) addButton(1, "Salamander", confirmBloodline2, PerkLib.SalamandersDescendant).hint("(+2 to salamander score)");
+			else addButtonDisabled(1, "Salamander", "You already have this bloodline!");
+			if (!player.hasPerk(PerkLib.BloodlineWerewolf)) addButton(2, "Werewolf", confirmBloodline2, PerkLib.WerewolfsDescendant).hint("(+2 to werewolf score)");
+			else addButtonDisabled(2, "Werewolf", "You already have this bloodline!");
+			if (!player.hasPerk(PerkLib.BloodlineWereshark)) addButton(3, "Wereshark", confirmBloodline2, PerkLib.WeresharksDescendant).hint("(+2 to wereshark score)");
+			else addButtonDisabled(3, "Wereshark", "You already have this bloodline!");
+			if (!player.hasPerk(PerkLib.BloodlineRatatoskr)) addButton(4, "Ratatoskr", confirmBloodline2, PerkLib.RatatoskrsDescendant).hint("(+2 to ratatoskr score)");
+			else addButtonDisabled(4, "Ratatoskr", "You already have this bloodline!");
+			addButton(13, "-1-", chooseBloodline);
 			addButton(14, "None", noBloodlineAtAllCuzYouAscendedTooManyTimesAlready).hint("You either cannot add a new unstable bloodline, or you have a stable bloodline. (It mean you only will get some bonus perk points for start instead of new bloodline.)");
 		}
 
-		private function confirmBloodline(choice:PerkType):void {
+		private function confirmBloodline1(choice:PerkType):void {
 			clearOutput();
 			switch (choice) {
 				case PerkLib.DragonsDescendant:
@@ -1427,12 +1451,41 @@ import classes.Scenes.Combat.CombatAbility;
 				case PerkLib.VampiresDescendant:
 					outputText("Your ancestor was a vampire?");
 					break;
+				case PerkLib.MelkiesDescendant:
+					outputText("Your ancestor was a melkie?");
+					break;
 				default:
 					outputText("Your ancestor was a dragon?");
 			}
 			menu();
 			addButton(0, "Yes", setBloodline, choice);
 			addButton(1, "No", chooseBloodline);
+		}
+
+		private function confirmBloodline2(choice:PerkType):void {
+			clearOutput();
+			switch (choice) {
+				case PerkLib.HydrasDescendant:
+					outputText("Your ancestor was a hydra?");
+					break;
+				case PerkLib.SalamandersDescendant:
+					outputText("Your ancestor was a salamander?");
+					break;
+				case PerkLib.WerewolfsDescendant:
+					outputText("Your ancestor was a werewolf?");
+					break;
+				case PerkLib.WeresharksDescendant:
+					outputText("Your ancestor was a wereshark?");
+					break;
+				case PerkLib.RatatoskrsDescendant:
+					outputText("Your ancestor was a ratatoskr?");
+					break;
+				default:
+					outputText("Your ancestor was a hydra?");
+			}
+			menu();
+			addButton(0, "Yes", setBloodline, choice);
+			addButton(1, "No", chooseBloodline1);
 		}
 
 		private function setBloodline(choice:PerkType):void {
@@ -1896,7 +1949,7 @@ import classes.Scenes.Combat.CombatAbility;
 			//doYesNo(goToIngnam, arrival);
 			menu();
 			addButton(0, "Ingnam", goToIngnam);
-			addButton(1,"Skip Ingnam", arrival);
+			addButton(1, "Skip Ingnam", arrival);
 		}
 
 		public function goToIngnam():void {
@@ -2398,12 +2451,12 @@ import classes.Scenes.Combat.CombatAbility;
 			else if (player.ascensionPerkPoints < 5 && !player.hasPerk(PerkLib.AscensionUnderdog)) addButtonDisabled(btn, "Underdog", "You do not have enough ascension perk points!");
 			else addButtonDisabled(btn, "Underdog", "You already bought Underdog perk.");
 			btn++;
-			if (player.ascensionPerkPoints >= 5 && !player.hasPerk(PerkLib.AscensionUnlockedPotential)) addButton(btn, "UnlockPotent", perkUnlockedPotential).hint("Perk allowing you to have increased passive gains of max hp, lust and fatigue at each lvl-up.\n\nCost: 5 point");
+			if (player.ascensionPerkPoints >= 5 && !player.hasPerk(PerkLib.AscensionUnlockedPotential)) addButton(btn, "UnlockPotent", perkUnlockedPotential).hint("Perk allowing you to have increased passive gains of max hp, lust and fatigue at each lvl-up.\n\nCost: 5 points");
 			else if (player.ascensionPerkPoints < 5 && !player.hasPerk(PerkLib.AscensionUnlockedPotential)) addButtonDisabled(btn, "UnlockPotent", "You do not have enough ascension perk points!");
 			else addButtonDisabled(btn, "UnlockPotent", "You already bought Unlocked Potential perk.");
 			btn++;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.hasPerk(PerkLib.AscensionUnlockedPotential)) {
-				if (player.ascensionPerkPoints >= 5 && !player.hasPerk(PerkLib.AscensionUnlockedPotential2ndStage)) addButton(btn, "U.Potent2nd", perkUnlockedPotential2ndStage).hint("Perk allowing you to have increased passive gains of max wrath, mana and soulforce at each lvl-up.\n\nCost: 5 point");
+				if (player.ascensionPerkPoints >= 5 && !player.hasPerk(PerkLib.AscensionUnlockedPotential2ndStage)) addButton(btn, "U.Potent2nd", perkUnlockedPotential2ndStage).hint("Perk allowing you to have increased passive gains of max wrath, mana and soulforce at each lvl-up.\n\nCost: 5 points");
 				else if (player.ascensionPerkPoints < 5) addButtonDisabled(btn, "U.Potent2nd", "You do not have enough ascension perk points!");
 				else addButtonDisabled(btn, "U.Potent2nd", "You already bought Unlocked Potential (2nd Stage) perk.");
 			}
@@ -2411,7 +2464,7 @@ import classes.Scenes.Combat.CombatAbility;
 			else addButtonDisabled(btn, "U.Potent2nd", "You need ascend more times to buy this perk.");
 			btn++;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && player.hasPerk(PerkLib.AscensionUnlockedPotential2ndStage)) {
-				if (player.ascensionPerkPoints >= 10 && !player.hasPerk(PerkLib.AscensionUnlockedPotential3rdStage)) addButton(btn, "U.Potent3rd", perkUnlockedPotential3rdStage).hint("Perk allowing you to have increased passive gains of max hp, lust and fatigue at each lvl-up.\n\nCost: 10 point");
+				if (player.ascensionPerkPoints >= 10 && !player.hasPerk(PerkLib.AscensionUnlockedPotential3rdStage)) addButton(btn, "U.Potent3rd", perkUnlockedPotential3rdStage).hint("Perk allowing you to have increased passive gains of max hp, lust and fatigue at each lvl-up.\n\nCost: 10 points");
 				else if (player.ascensionPerkPoints < 10) addButtonDisabled(btn, "U.Potent3rd", "You do not have enough ascension perk points!");
 				else addButtonDisabled(btn, "U.Potent3rd", "You already bought Unlocked Potential (3rd Stage) perk.");
 			}
@@ -2419,12 +2472,51 @@ import classes.Scenes.Combat.CombatAbility;
 			else addButtonDisabled(btn, "U.Potent3rd", "You need ascend more times to buy this perk.");
 			btn++;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.hasPerk(PerkLib.AscensionUnlockedPotential3rdStage)) {
-				if (player.ascensionPerkPoints >= 10 && !player.hasPerk(PerkLib.AscensionUnlockedPotential4thStage)) addButton(btn, "U.Potent4th", perkUnlockedPotential4thStage).hint("Perk allowing you to have increased passive gains of max wrath, mana and soulforce at each lvl-up.\n\nCost: 10 point");
+				if (player.ascensionPerkPoints >= 10 && !player.hasPerk(PerkLib.AscensionUnlockedPotential4thStage)) addButton(btn, "U.Potent4th", perkUnlockedPotential4thStage).hint("Perk allowing you to have increased passive gains of max wrath, mana and soulforce at each lvl-up.\n\nCost: 10 points");
 				else if (player.ascensionPerkPoints < 10) addButtonDisabled(btn, "U.Potent4th", "You do not have enough ascension perk points!");
 				else addButtonDisabled(btn, "U.Potent4th", "You already bought Unlocked Potential (4th Stage) perk.");
 			}
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && !player.hasPerk(PerkLib.AscensionUnlockedPotential4thStage)) addButtonDisabled(btn, "U.Potent4th", "You need to buy Unlocked Potential (3rd Stage) perk first.");
 			else addButtonDisabled(btn, "U.Potent4th", "You need ascend more times to buy this perk.");
+			btn++;
+			if (player.ascensionPerkPoints >= 21 && !player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX)) addButton(btn, "SPPearlMst1", perkSkyPoisonPearlMasteryStage1).hint("Perk allowing you to have increased venom recharge, max venom, poison resistance, amount of carried over spirit stones and unlock next sections of sky poison pearl 6 levels earlier.\n\nCost: 21 points");
+			else if (player.ascensionPerkPoints < 21 && !player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX)) addButtonDisabled(btn, "SPPearlMst1", "You do not have enough ascension perk points!");
+			else addButtonDisabled(btn, "SPPearlMst1", "You already bought Sky Poison Pearl Mastery 1 perk.");
+			btn++;
+			if (player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX) && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 0) {
+				if (player.ascensionPerkPoints >= 57 && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) == 1) addButton(btn, "SPPearlMst2", perkSkyPoisonPearlMasteryStage2).hint("Perk allowing you to have increased venom recharge, max venom, poison resistance, amount of carried over spirit stones and unlock next sections of sky poison pearl 12 levels earlier.\n\nCost: 57 points");
+				else if (player.ascensionPerkPoints < 57) addButtonDisabled(btn, "SPPearlMst2", "You do not have enough ascension perk points!");
+				else if (player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 1) addButtonDisabled(btn, "SPPearlMst2", "You already bought Sky Poison Pearl Mastery 2 perk.");
+			}
+			else addButtonDisabled(btn, "SPPearlMst2", "You need to buy Sky Poison Pearl Mastery 1 perk first.");
+			btn++;
+			if (player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX) && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 1) {
+				if (player.ascensionPerkPoints >= 93 && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) == 2) addButton(btn, "SPPearlMst3", perkSkyPoisonPearlMasteryStage3).hint("Perk allowing you to have increased venom recharge, max venom, poison resistance, amount of carried over spirit stones and unlock next sections of sky poison pearl 18 levels earlier.\n\nCost: 93 points");
+				else if (player.ascensionPerkPoints < 93) addButtonDisabled(btn, "SPPearlMst3", "You do not have enough ascension perk points!");
+				else if (player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 2) addButtonDisabled(btn, "SPPearlMst3", "You already bought Sky Poison Pearl Mastery 3 perk.");
+			}
+			else addButtonDisabled(btn, "SPPearlMst3", "You need to buy Sky Poison Pearl Mastery 2 perk first.");
+			btn++;
+			if (player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX) && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 2) {
+				if (player.ascensionPerkPoints >= 129 && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) == 3) addButton(btn, "SPPearlMst4", perkSkyPoisonPearlMasteryStage4).hint("Perk allowing you to have increased venom recharge, max venom, poison resistance, amount of carried over spirit stones and unlock next sections of sky poison pearl 24 levels earlier.\n\nCost: 129 points");
+				else if (player.ascensionPerkPoints < 129) addButtonDisabled(btn, "SPPearlMst4", "You do not have enough ascension perk points!");
+				else if (player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 3) addButtonDisabled(btn, "SPPearlMst4", "You already bought Sky Poison Pearl Mastery 4 perk.");
+			}
+			else addButtonDisabled(btn, "SPPearlMst4", "You need to buy Sky Poison Pearl Mastery 3 perk first.");
+			btn++;
+			if (player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX) && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 3) {
+				if (player.ascensionPerkPoints >= 165 && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) == 4) addButton(btn, "SPPearlMst5", perkSkyPoisonPearlMasteryStage5).hint("Perk allowing you to have increased venom recharge, max venom, poison resistance, amount of carried over spirit stones and unlock next sections of sky poison pearl 30 levels earlier.\n\nCost: 129 points");
+				else if (player.ascensionPerkPoints < 165) addButtonDisabled(btn, "SPPearlMst5", "You do not have enough ascension perk points!");
+				else if (player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 4) addButtonDisabled(btn, "SPPearlMst5", "You already bought Sky Poison Pearl Mastery 5 perk.");
+			}
+			else addButtonDisabled(btn, "SPPearlMst5", "You need to buy Sky Poison Pearl Mastery 4 perk first.");
+			btn++;
+			if (player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX) && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 4) {
+				if (player.ascensionPerkPoints >= 201 && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) == 5) addButton(btn, "SPPearlMst6", perkSkyPoisonPearlMasteryStage6).hint("Perk allowing you to have increased venom recharge, max venom, poison resistance, amount of carried over spirit stones and unlock next sections of sky poison pearl 36 levels earlier.\n\nCost: 129 points");
+				else if (player.ascensionPerkPoints < 201) addButtonDisabled(btn, "SPPearlMst6", "You do not have enough ascension perk points!");
+				else if (player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 5) addButtonDisabled(btn, "SPPearlMst5", "You already bought Sky Poison Pearl Mastery 6 perk.");
+			}
+			else addButtonDisabled(btn, "SPPearlMst6", "You need to buy Sky Poison Pearl Mastery 5 perk first.");
 			btn++;
 		//	if (player.ascensionPerkPoints >= 10 && !player.hasPerk(PerkLib.AscensionHybridTheory)) addButton(btn, "HybridTheory", perkHybridTheory).hint("Perk allowing you to receive race bonuses for one point less. (still req. min 3 race points to work).\n\nCost: 10 points");
 		//	else if (player.ascensionPerkPoints < 10) addButtonDisabled(btn, "HybridTheory", "You do not have enough ascension perk points!");
@@ -2514,6 +2606,48 @@ import classes.Scenes.Combat.CombatAbility;
 			player.createPerk(PerkLib.AscensionUnlockedPotential4thStage,0,0,0,1);
 			clearOutput();
 			outputText("You gained Unlocked Potential (4th Stage) perk.");
+			doNext(rarePerks2);
+		}
+		private function perkSkyPoisonPearlMasteryStage1():void {
+			player.ascensionPerkPoints -= 21;
+			player.createPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX,1,0,0,1);
+			clearOutput();
+			outputText("You gained Sky Poison Pearl Mastery 1 perk.");
+			doNext(rarePerks2);
+		}
+		private function perkSkyPoisonPearlMasteryStage2():void {
+			player.ascensionPerkPoints -= 57;
+			player.addPerkValue(PerkLib.AscensionSkyPoisonPearlMasteryStageX,1,1);
+			clearOutput();
+			outputText("You increased Sky Poison Pearl Mastery from 1 to 2.");
+			doNext(rarePerks2);
+		}
+		private function perkSkyPoisonPearlMasteryStage3():void {
+			player.ascensionPerkPoints -= 93;
+			player.addPerkValue(PerkLib.AscensionSkyPoisonPearlMasteryStageX,1,1);
+			clearOutput();
+			outputText("You increased Sky Poison Pearl Mastery from 2 to 3.");
+			doNext(rarePerks2);
+		}
+		private function perkSkyPoisonPearlMasteryStage4():void {
+			player.ascensionPerkPoints -= 129;
+			player.addPerkValue(PerkLib.AscensionSkyPoisonPearlMasteryStageX,1,1);
+			clearOutput();
+			outputText("You increased Sky Poison Pearl Mastery from 3 to 4.");
+			doNext(rarePerks2);
+		}
+		private function perkSkyPoisonPearlMasteryStage5():void {
+			player.ascensionPerkPoints -= 165;
+			player.addPerkValue(PerkLib.AscensionSkyPoisonPearlMasteryStageX,1,1);
+			clearOutput();
+			outputText("You increased Sky Poison Pearl Mastery from 4 to 5.");
+			doNext(rarePerks2);
+		}
+		private function perkSkyPoisonPearlMasteryStage6():void {
+			player.ascensionPerkPoints -= 201;
+			player.addPerkValue(PerkLib.AscensionSkyPoisonPearlMasteryStageX,1,1);
+			clearOutput();
+			outputText("You increased Sky Poison Pearl Mastery from 5 to 6.");
 			doNext(rarePerks2);
 		}
 
@@ -2656,7 +2790,31 @@ import classes.Scenes.Combat.CombatAbility;
 				player.createPerk(PerkLib.BloodlineMelkie,0,0,0,1);
 				bloodlineACQ2();
 			}
-
+			else if (player.hasPerk(PerkLib.HydrasDescendant)) {
+				player.removePerk(PerkLib.HydrasDescendant);
+				player.createPerk(PerkLib.BloodlineHydra,0,0,0,1);
+				bloodlineACQ2();
+			}
+			else if (player.hasPerk(PerkLib.SalamandersDescendant)) {
+				player.removePerk(PerkLib.SalamandersDescendant);
+				player.createPerk(PerkLib.BloodlineSalamander,0,0,0,1);
+				bloodlineACQ2();
+			}
+			else if (player.hasPerk(PerkLib.WerewolfsDescendant)) {
+				player.removePerk(PerkLib.WerewolfsDescendant);
+				player.createPerk(PerkLib.BloodlineWerewolf,0,0,0,1);
+				bloodlineACQ2();
+			}
+			else if (player.hasPerk(PerkLib.WeresharksDescendant)) {
+				player.removePerk(PerkLib.WeresharksDescendant);
+				player.createPerk(PerkLib.BloodlineWereshark,0,0,0,1);
+				bloodlineACQ2();
+			}
+			else if (player.hasPerk(PerkLib.RatatoskrsDescendant)) {
+				player.removePerk(PerkLib.RatatoskrsDescendant);
+				player.createPerk(PerkLib.BloodlineRatatoskr,0,0,0,1);
+				bloodlineACQ2();
+			}
 			else {
 				clearOutput();
 				outputText("You don't have any Descendant perks to change into Bloodline perks.");
@@ -3337,13 +3495,13 @@ import classes.Scenes.Combat.CombatAbility;
 			return perk.ptype.keepOnAscension(respec) || (perk.value4 > 0);
 		}
 
-		private function isSpecialKeyItem(keyName:* = null):Boolean {//tylko sky poinson pearl zostawić tutaj
+		private function isSpecialKeyItem(keyName:* = null):Boolean {//tylko sky poinson pearl zostawić tutaj (only leave sky, poison, pearl here)
 			return (keyName == "Ascension" || keyName == "Sky Poison Pearl" || keyName == "Nieve's Tear");
 		}
 
 		private function isSpecialStatus(statusEffects:StatusEffectClass, statusEffect:* = null):Boolean {
-			return (statusEffect == StatusEffects.KnowsWereBeast || statusEffects.value4 == 9000);	//na razie jest tu tylko werebeast
-		}	//ale potem zamienić to na specialne soulskills z każdego z klanów
+			return (statusEffect == StatusEffects.KnowsWereBeast || statusEffects.value4 == 9000);	//na razie jest tu tylko werebeast (so far, there is only a werebeast here)
+		}	//ale potem zamienić to na specialne soulskills z każdego z klanów (but then replace it with special soulskills from each of the clans)
 
 		public static function hasAscensionSpell(spellCat:int):Boolean {
 			var spellsToCheck:/*StatusEffect*/Array;

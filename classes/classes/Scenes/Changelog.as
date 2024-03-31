@@ -14,24 +14,37 @@ public class Changelog extends BaseContent
 		{}
 		
 		public function accessChangelogMenu():void {
-			Changelog50();
+			Changelog52();
 		}
 		//zrobić do 2022 na świeta event z reniferami i nie odblokowywać go do ok. 20-24 grudnia 2021 xD
-		private function Changelog52():void {
+		private function Changelog55():void {
 			clearOutput();
 			menu();
-			addButton(0, "Next", Changelog51);
+			addButton(0, "Next", Changelog54);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
-		private function Changelog51():void {
+		private function Changelog54():void {
+			clearOutput();
+			menu();
+			addButton(0, "Next", Changelog53);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
+		}
+		private function Changelog53():void {
 			clearOutput();
 			//0 of 11 pages
-			outputText("<b>Version 0.8w-z:</b>\n\n");
+			outputText("<b>Version 0.9a:</b>\n\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-\n");
 			//outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
 			//outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
+			//outputText("-New TF item (by Shigure): Moth's Dust. Buyable in Moga Hen shop. Using this item will turn PC into moth. Moth bonuses at 10 pts in racial score (scalable): -30% to Tou multi, +150% to Spe multi, +70% to Wis multi, +30% to Lib multi, +70 to sensitivity.\n");//Dropped by Corrupted Troll enemies.
+			//outputText("-New Special names: Solaria (salamander), Drake (hydra). Each of them will start with matching bloodline perk to match their ancestor race.\n");//, Veseshe (elf)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -43,14 +56,10 @@ public class Changelog extends BaseContent
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay) (NUZ/Shirane)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
 			outputText("-Fixed bugs: \n\n");
 			/*ostatni punkt changelogu
-			outputText("<b>Version 0.8w-z:</b>\n\n");
+			outputText("(Part 2/2) <b>Version 0.9a:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-Fixed bugs: \n\n");
 			//remove this line when other two lines below get added ingame
@@ -115,28 +124,26 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
 			outputText("\n");
-			outputText("\n");full stats bonuses not added yet to: Echidna, Ferret-morph, Scorpion-morph
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");full stats bonuses not added yet to: Echidna, Scorpion-morph
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");wolf pepper - nieużywany item chyba co można go by w wolf TF zmienić: dodaje special coś na kształt likantropii ^^
 			outputText("\n");aqua seed - item mający być siren tf item
@@ -155,7 +162,213 @@ public class Changelog extends BaseContent
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");*/
+			menu();
+			addButton(0, "Next", Changelog52);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
+		}
+		private function Changelog52():void {
+			clearOutput();
+			outputText("(Part 2/2) <b>Version 0.8w-z:</b>\n\n");
+			outputText("-Construct enemy type can be now affected by lust attacks (and their lust vul been tiny bit incresed to not be 0 anymore). They not gonna masturbate but would getting more glitched until they deactivate allowing for lust win against them. Past 85% threshold they even could radomly skip actions in their turn.\n");
+			outputText("-Added to drop tables of all goblin type enemies: Healing herb, Moon grass, Snakebane, Ironweed, Blade fern. With low chance added to Goblin Shaman drop table Alraune nectar, Ginseng.\n");
+			outputText("-Healing herb and Snakebane flower can be found radomly during forest exploration like heal pills or truffles.\n");
+			outputText("-Sand Witch drop table slight adjusted with weapons/spell teaching items been bit more common. Fetish male cultists enemies dropping more weapons and less lust drafts.\n");
+			outputText("-Killing Intent soulskill won't be unusable if PC wrath is too high or use other powers that would interfere with magical soulskills.\n");
+			outputText("-Added two new post fight options for thiefs: Guards (give enemy to local guards for smol reward), Kill (that Killing Intent not gonna come from nowhere does it?). Added new kill count for stats page: Thiefs.\n");
+			outputText("-New npc to interact with in Journey to the East inn. It's a healer that can heal or cure stats penalties (not as good / effective as Nadia treatments thou) for small pay in gems. Cure option have 6 hours cooldown.\n");
+			outputText("-Nadia cooldown for cure options been shortened from 12 hours to 2 hours. It also can restore a bit more stats now.\n");
+			outputText("-Minotaur King, Intermediate Leadership challange enemies and bosses from 4th floor of river dungeon would have harder time to softlock PC that got too OP minions to not even able to act personaly. From last to first it would change behaviour of minions to stop attacking until after X cycle enemy not die to any of minions and let PC act personaly.\n");
+			outputText("-Added additional notes to rooms where can find subboss on 3rd floor of river dungeon and made it chance to appear been largely increased.\n");
+			outputText("-Changes to White Book, Black Book, Grey Book, Red Manuscript and Crimson Jade. Each of these items now allow to have choice: no use it, use only stat increasing part or if meet req. choose which spell, soulskill to learn. It mean now can learn even the last on the list spell if stat is high enought without need to use 10+ items before that.\n");
+			outputText("-Added short explanation how to increase 'Additional Soulforce from training' on Soulforce page.\n");
+			outputText("-Ng+ tiers will not cause enemies stats going higher replaced by higher DR effect.\n");
+			outputText("-Kitsune IM's have their effects grouped to Parathyroid one increase resources generation and boost foxfire and Thyroid to boost other kitsune specials. One of req. for Parathyroid IM changed to be kitsune(-like) race.\n");
+			outputText("-Kitsumori no longer gain points to race score from Kitsune Thyroid IM.\n");
+			outputText("-Incels enemy in Demon Laboratory would end grapple after few turns and right after will wait at least 2 round to grapple again.\n");
+			outputText("-Hellhound Fire Balls internal mutation req. for race changed to cerber or dog-morph at 8+ points and having hellfire perk.\n");
+			outputText("-Killing Intent scaling based on cultivation rank will no longer have soft caps that increase at each major cultivation step instead increase a bit after each minor step. It also mean too high kill count will not be lowered due too low cultivation rank.\n");
+			outputText("-Jojo wisdom training effect been increased 3x.\n");
+			outputText("-Lizan Marrow IM would now give small tou multi bonus: 10% / 30% / 70% / 150%. It % of HP regenerated was corrected to match description of mutation.\n");
+			outputText("-Removed form some races req. to reach x points in racial score to get points for some bodyparts varaints.\n");
+			outputText("-Maretian Sanitary Inspection routine control found dangerous stuff in Echidna Cake and Rhino Steak sold in Black Cock food tent at Bazaar. Until solving problem those menu options would be not accesable.\n");
+			outputText("-Black Heart IM can be accessed by Gremlins too. Small corrections and fixing errors in elf and orc IM's.\n");
+			outputText("-Mysterious Meat sold at Black Cock food tent will have it effects as Revamp planned. (Randomn tf effects so enjoy your 44 shades of tf-ing)\n");
+			outputText("-Maretian Sanitary Inspection temporaly quarantined sandtrap race for undisclosed reason. Expected to set them free in few weeks to few months.\n");
+			outputText("-Long enough goat / quad goat horns would allow to use Gore p.special.\n");
+			outputText("-When having equipped melee weapon with music instrument tag special 'Sing' would be replaced with special 'Perform'. It change some of texts when using special and in case of 'Arouse' option when perfomring would have stun chance based on intensify scale not fixed 20% with Dazzling Display perk.\n");
+			outputText("-Devil, Minotaur, Lacta Bovina, Uni/Bicorn, Alicorn and Nightmare races would now gain cloven hoofed lower body variants. Uni/Bicorns and Alicorns/Nightmares would still able to get +1 to race scrore for either normal hoofed or cloven hoofed legs.\n");
+			outputText("-Ghoulish Vampire Servant have now two (three) new interactions: Turn Male/Female & Guard Camp. First two allow to change it gender using incubus draft/succubus milk and last allow to make it guard camp at night like some other npc's could.\n");
+			outputText("-Grayda after coronation (in camp) have now additional interactions: Talk (6 subjects), Sex (req. 60%+ affection), Bathing (Forced / Willingly), Sleep with & randomn camp interactions with some other camp members. Each of this options will increase Grayda affection by 2,5% or 5%. Added to player info page: grayda affection & days since last bathing.\n");
+			outputText("-When meeting Draculina boss in Ebon Labyrinth as Dracula/lina it will lead to sex scene not fight.\n");
+			outputText("-Marilith sprite implementations. (Liadri)\n");
+			outputText("-Implemented the revenge mechanic. Cat bell now has a sprite. Added all possible missing bodyparts for Marilith. (Liadri)\n");
+			outputText("-Goat horns redux + satyr sprite prep. (Liadri)\n");
+			outputText("-Item Effect system code changes. (aimozg)\n");
+			outputText("-Fixes: Sval's All IMutations perks displayed, Buff display bug, parser bug when apllying a skin color change using snake oil. (Jtecx)\n");
+			outputText("-The Trench store no longer gives you stuff when you don't have the money for it. (Jtecx)\n");
+			outputText("-Kitsumori tails now change color depending on your fur color and hair color (they're still orange, just what color your fur/hair is determines what shade of orange, basically) (Lord Shadeogorath)\n");
+			outputText("-Added a toggle to the appearance menu that should show up if you have active lycanthropy, vulpesthropy, or selachimorphanthropy allows you to choose whether you want to show your 'human form' while at camp or if you wanna stay beast form all the time. (Lord Shadeogorath)\n");
+			outputText("-Sprite alignment adjustments. Orca balls no longer deluded into thinking they're a dog dick. Imp tome display fix. (Lord Shadeogorath)\n");
+			outputText("-Large and massive swords now have sprites. (Lord Shadeogorath)\n");
+			outputText("-Pan Flute sprite (by Liadri) implementation, Legendary pan flutes now use the pan flute sprite. (Lord Shadeogorath)\n");
+			outputText("-Fully scaled lizard/dragon-morphs got a facelift (by Liadri) (Lord Shadeogorath)\n");
+			outputText("-I moved the code for the tavern to its own file, added checks to handle additional ear types, and finally introduced Xianxia early via a 'rumor' in the tavern. (jfmherokiller)\n");
+			outputText("-Remove the int max limit on cum and lactation. (jfmherokiller)\n");
+			outputText("-Hellhound balls mutation firedamage bonus fix (Yes previously it doesn't give any, well have fun I guess). (NUZ/Shirane)\n");
+			outputText("-Most Enemy attack should be now actually has to pass PC's evasion/parry/block checks (Formerly almost everyone has guaranteed hit) Lia's retaliation function should work properly now. (NUZ/Shirane)\n");
+			outputText("-Zetaz Pod Bad End/Alternate End is finally BACK!!!! (NUZ/Shirane)\n");
+			outputText("<b>Demojay contributions:</b>\n");
+			outputText("-Fixed: True Dragon Breath Bug, bug where Flying Swords could independently attack even without the needed perk at the start of the game, Goodra's wrong nail count display for carpenters store, 4th stage of Fey Bloodline not giving int bonuses.\n");
+			outputText("-Damaging Soulskills now cannot hit invisible targets. Great Dive now cannot hit invisible targets.\n");
+			outputText("-Monster specific special actions should not appear if the enemy is already dead. Alvina's 'Take Her' option now properly ends the encounter. Alvina's 'Let Her' now has properly closed HTML Tags. Cupid Arrows now use the correct tease function. Corrected elf armor damage bonus in teaseBaseLustDamage.\n");
+			outputText("-Guild quests explicitly say what they give as rewards. Fixed bugs for soulskill not displayed their description properly in the stats screen. Fixed damage calculation bugs with soulskills that use spell and soulskill damage bonuses. Fixed some spelling mistakes for Killing Intent soulskill, and increased base sf cost to reflect it's damage.\n");
+			outputText("-Reworked Dodge formula, to separate out Player/Monster specific actions, prevent certain conditions being applied twice and to add the option of adding a chance modifier in the actual function call.\n");
+			outputText("-Elf Villager dress cooldown effect only works if the player is an elf, and is changed to be a 1% percentage reduction instead of lustDmg/20 (since it is triggered for every single lust tick, making elves near immune to lust) Reduced lust heal from 'Fueled By Desire' from lustDmg/40 to 10% (to prevent Elves from being near-immune to lust loss) ");
+			outputText("Reduced HP heal from Verdent Leech for Green Magic from 5% to 1% (since they have Arcane Venom to trigger the effect multiple times per turn, making Green Magic better at healing that White Heals)\n");
+			outputText("-Briarthorn's DoT Duration is now affected by the 'Green Magic' perk. Green Magic now has the proper Tier Tags applied to them. Green Magic now properly scales from Intelligence rather than Tease damage, to prevent duplicate damage bonuses such as from the elf villager dress.\n");
+			outputText("-Split 'Plant Growth' spell into 'Plant Growth' and 'Plant Bloom' to make it more explicit when the spell will deal lust damage, and when it will set up plants.\n");
+			outputText("-Black and Green Arousal spells now scale from both intelligence and libido. Cooldowns for Wave of Ecstasy and Curse of Desire now use the same cooldown function as other spells of those tiers, meaning they don't have a minimum cooldown value to match Green spells. Altered Lust Storm's lust damage so that it uses scaling modifiers like the other lust auras.\n");
+			outputText("-Lust Auras now properly award tease exp upon hit. Added standard formulas for inflicting tease spell damage and awarding tease spell exp in the Abstract Spell class, so that the black arousal spells now benefit from Staff Channelling/ Gazer Eyes.\n");
+			outputText("-Wave of Ecstasy now deals similar damage to plant bloom spell (since they are both tier 1 spells) Curse of Desire now deals the base damage and damage ticks of a standard arouse cast. Fantasize command now scales from base tease damage.\n");
+			outputText("-Fixed bug where the check for whether a companion can act due to being occupied distracting an enemy now applies regardless of whether Simplified Pre-Turn is on. The River Dungeon and Arena team fights now no longer have the chance of softlocking the user if they can instantly kill the enemy, like the Minotaur fight.\n");
+			outputText("-Fixed bug where settings custom drops for certain enemies did not reset after dropping once. Backfire lust damage will now scale will lust rather than a flat rate.\n");
+			outputText("-Added Might spell to Zetaz that can be used once on difficulties higher than normal. Added monster damage function based off of libido.\n");
+			outputText("-Fixed bug relating to showing special statuses for bosses.\n");
+			outputText("-Added 'GigaWhitefire' spell to Zetaz. 'zetazMight' now causes Zetaz to start flying. Zetaz's 'Gust' attack is not used if the enemy is already blinded.\n");
+			outputText("-Omnibus Overseer's 'lust aura' and 'milk attack' moves now deal scaling damage. 'Lust Aura' DoT now deals scaling libido damage. Stunning/Confusing/Fearing the Overseer will disrupt their Lust Aura. Added message to Omnibus Overseer Lust Aura, to signal that they should try disrupting the boss to cancel the aura.\n");
+			outputText("-Add proper number formatting to the HP display function. Player Info now shows correct Soulskill cost reduction.\n");
+			outputText("-Fixed bug with Spiritual Enlightenment Ascension Perk where soulskill cost was being reduced by 20% per rank, rather than 2%. Fixed bug where you could obtain higher ranks in the Daoist and Body Cultivation Subpaths without purchasing the previous tiers.\n");
+			outputText("-The 'monsterDodgeSkill' function for soulskills can now take hitmodifiers into account. Standardized dodge chance of different ranks of the 'Hail of Blades' soulskills.\n");
+			outputText("-Comet changes: baseSFCost 60 -> 400, given cooldown of 4, base damage scalingBonusWisdom * 1 -> 6 (similar to tier 2 magic AOE)\n");
+			outputText("-Many Birds Changes: baseSFCost 10 -> 200, cooldown of 2, given AOE effect, base damage scalingBonusWisdom * 1 -> 2 (similar to tier 1 magic AOE)\n");
+			outputText("-Soul Blast changes: baseSFCost 100 -> 900, cooldown 15 -> 10, base damage scalingBonusStrength/Wisdom/Intelligence * 1.8 -> scalingBonusStrength/Wisdom/Intelligence * 3\n");
+			outputText("-Fixed bug where Blind could not used against Draculina when invisible.\n");
+			outputText("-Flames Of Love/ Icicles Of Love/ Night Of Brotherhood/ Storm Of SisterHood Skills now have 4 levels: Rankless, Low Rank (adds AOE (x2), wisdom and magical soulskill scaling, increases restore amount to 20%, and cooldown to 1 turn - Level up requirements: Soul Apprentice perk and 5 uses), Mid Rank (increases AOE scaling (x5), increases restore amount to 25% and cooldown to 2 turns - Level up requirements: Soul Warrior perk and 10 uses), ");
+			outputText("High Rank ( increases restore amount to 30% and cooldown to 3 turns - Level up requirements: Soul Scholar perk and 10 uses).\n");
+			outputText("-Fixed bug where cooldowns based on the CombatAbility class were ending 1 turn too early.\n");
+			outputText("-Blind Spell no longer has a random chance of not working, even after passing the success check. Blind now cannot be used if the monster is already blinded. Blind now has a max duration of 10 turns, rather than infinitely scaling with player intelligence.\n");
+			outputText("-Fixed bug where Draculina Embrace will always hit.\n");
+			outputText("-Ceraph is now classed as a proper True Demon.\n");
+			outputText("-The enemy will now act after using a turn picking up spent weapons instead of getting another turn.\n");
+			outputText("-Beautiful Bow now gains x2 combat EXP, similar to the Beautiful Sword and Whip.\n");
+			outputText("-Claw Rend now properly prints out properly formatted damage.\n");
+			outputText("-Fixed bug where cooldown might not appear in cost description for Blood Soulskills.\n");
+			outputText("-Added soulskills cooldown modifiers to soulskills (currently only Beautiful FlyWhisk modifier in game)\n");
+			outputText("-Altered SF-infused Blood Soulskill damage values so that maxed-out Blood Puppy attack are equal damage to the standard cast of the player version.\n");
+			outputText("-Adjusted SF-infused Blood Requiem damage to be in line with other Blood Soulskills.\n");
+			outputText("-Fixed in Debug Menu Body part editor when selecting colours.\n");
+			outputText("-Female Werewolf and Werewolf Huntresses will now display text and deal damage if you wait in their hold.\n");
+			outputText("-Changed text for buying Gym Life Time membership to show that you are actually shouting.\n");
+			outputText("-Ring checks in damage calculations should now check all ring slots, not just the first.\n");
+			outputText("-Fixing bugs where the game was checking for a fox hairpin or cow girl hat in one of the ring slots rather than the head jewelry slot.\n");
+			outputText("-Added 3 toggles in Interface Game Settings to control whether the HP Lust and Wrath of the player and Enemy should be displayed as a percentage or numbers.\n");
+			outputText("-Text fixes. (Alot of small ones)\n");
+			outputText("-Fixed bugs: Arigean above Recruit rank not immune to tf-ing effects, deer arms tf unlocking canine arms MM, unable to find tel'adre again after first time seeing it with too high corruption or other factor that not allowed entrance; Arigean above recruit rank marking, eye color and aura with mismatching colors; demon/arigean arms MM option giving instead devil/abyssal shark arms, ");
+			outputText("Zenji training stats not having gains decrease from +4 to +1 for repeated training before daily reset for other than wisdom stats, resources not been recovered after using specials/soulskills/spells, nail buy menu at carpenter having misleading text, combat wounds % display at stats page been 100x lower, Sandworm PC not counting toward checks for having natural armor, demon face tf");
+			outputText("giving arigean face instead, gym weight lifting capping tone at 85, when building cabin text not picking correct name for Jojo/Joy line, Magical Fertility & Magical Virility perk desc bonus value display error, differences between desc dmg reduction and actualt DR from main difficulty setting, sneak melee/range attack diff between displayer and actualy dealt dmg to enemy, ");
+			outputText("Veseshe preset giving History: Scout instead of History: Whore, Tyrantia training capping at 20 sessions, elfs IM instead of orca/whale IM increasing thickness cap, Belisa holy band button typo, parser in Call Kiha text, Raiju Cathode IM not selectable by Kirin race, Ghoulish Vampire Servant event appearing after PC get the ghoul, Amily Urta date, unable to gain Incorporeality perk using ghost tf's\n\n");
+			outputText("\n\n\n");
+			outputText("Plans for future builds (I know some of them are HUGE ones but without dreams to chase how can one change?):\n");
+			outputText("-Add more soulforce options.\n");
+			outputText("-Add soulforce stuff to our lovely monk-ish mouse ^^\n");
+			outputText("-Add soulforce stuff to kitsune encounters.\n");
+			outputText("-Add Wuxia themed area and enemies.\n");
+			outputText("-Add few new options during chara creation.\n");
+			outputText("-Add option to upgrade some of the items ingame (ofc using soulforce) and generaly few new shiny things to find/buy/store/use.\n");
+			outputText("-More camp build options (involving using stones and etc.)\n");
+			outputText("-Make use of Metamorph perk (ofc all TF would be powered by soulforce ^^)\n");
+			menu();
+			addButton(0, "Next", Changelog51);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
+		}
+		private function Changelog51():void {
+			clearOutput();
+			outputText("(Part 1/2) <b>Version 0.8w-z:</b>\n\n");
+			outputText("-New tier 1 intelligence lvl-up perk: Brutal Spells. Req. Job: Sorcerer perk and 75+ int. Effect: Reduces enemy magic resistance with each spell. (+5% base spell strength)\n");
+			outputText("-New tier 9 misc lvl-up perk: Subzero Lustful Fury. Req. Prestige Job: Berzerker and Colder Lust / Colder Fury perks. Effect: Decreasing health loss from activating higher grades of berzerking/lustzerking by 25%. Allow to activate 2 grades of berzerker/lustzerker state at once when you have Endless Rage perk.\n");
+			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 1. No Req. It costs 21 asc points and you gain +3 venom recharge speed, +10% to max venom cap, +10% to poison resistance, 100% more spirit stones carried over and lower req. level to open next sections of pearl by 6 levels.\n");
+			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 2. Req. Sky Poison Pearl Mastery 1 perk. It costs 57 asc points and you gain +6 venom recharge speed, +20% to max venom cap, +20% to poison resistance, 200% more spirit stones carried over and lower req. level to open next sections of pearl by 12 levels.\n");
+			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 3. Req. Sky Poison Pearl Mastery 2 perk. It costs 93 asc points and you gain +9 venom recharge speed, +30% to max venom cap, +30% to poison resistance, 300% more spirit stones carried over and lower req. level to open next sections of pearl by 18 levels.\n");
+			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 4. Req. Sky Poison Pearl Mastery 3 perk. It costs 129 asc points and you gain +12 venom recharge speed, +40% to max venom cap, +40% to poison resistance, 400% more spirit stones carried over and lower req. level to open next sections of pearl by 24 levels.\n");
+			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 5. Req. Sky Poison Pearl Mastery 4 perk. It costs 165 asc points and you gain +15 venom recharge speed, +50% to max venom cap, +50% to poison resistance, 500% more spirit stones carried over and lower req. level to open next sections of pearl by 30 levels.\n");
+			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 6. Req. Sky Poison Pearl Mastery 5 perk. It costs 201 asc points and you gain +18 venom recharge speed, +60% to max venom cap, +60% to poison resistance, 600% more spirit stones carried over and lower req. level to open next sections of pearl by 36 levels.\n");
+			outputText("-New event perk: Arigean Knowledge. Gained by becoming Arigean Princess. Effects: The knowledge of your Arigean ancestors rests in your mind. Gain immunity to mental debuffs and intelligence min is increased to 90.\n");
+			outputText("-New passive for Dracula/lina race: Bat swarm - When in battle, bat familiars swarm around you, biting and wounding your foes. The blood spilled is shared back to you. (gives thirst stack(s) and regenerate up to 3% max HP per turn)\n");
+			outputText("-New event perk: Pan Labyrinth. Gained by having 15+ in satyr score. Effects: Allow the use of Sing. Sing and Perform tease effect is 50% more powerful. Sing and Perform inflicts lingering tease damage for 5 rounds that has a chance to cause confusion on each turn causing the target to lose its turn. Sing and Perform gain a toughness scaling.\n");
+			outputText("-New event perk: Aelfwine. Gained by using Satyr Wine when having 15+ in satyr score. Effects: When drinking alcohol double libido but halve intelligence while drunk.\n");
+			outputText("-New event perk: Altered Anima. Gained by becoming Arigean Princess. Effects: Gain 5% pure damage reduction for every 20 corruption and the inability to lose your soul (any effect that would cause loosing even part of soul would instead cause very small amount of mana restored), reduce lust resistance by 20%, reduce soulforce recovery by 70% and -10 Humanity.\n");
+			outputText("-New weapon perk: Performance Power. Gained by equipping any melee weapon classified as Music Instrument. Effect: Increase Performance special power by x% (depending on melee weapon).\n");
+			outputText("-New super perk: It's Zerking Time!!! Gained by spending 1 super perk point and having 'Asura Toughness' super perk. Effects: If you can use Berzerker or Lustzerker they would be activated with Asura Form for no additional cost (with Prestige Job: Berserker will be activated G2). ");
+			outputText("Asura Form increase to physical might raise to 240%/120%/80% of core str/tou/spe and generate five pairs of semi-transparent arms. (+10% of OverMax Wrath)\n");
+			outputText("-New super perk: Hidden Job: Sword Immortal. Gained by having free slot for hidden job and perks: Soul Apprentice & Killing Intent. Effects: Allow to reach OverMax Wrath / Fatigue / Soulforce equal to 105% of current max wrath / fatigue / soulforce. Allow to use any sword, dueling sword, dagger weapon with max possible atk value, ");
+			outputText("increase mastery gains for those three types of weapons by 200% of base value, increase dealt damage by 2x for those three types of weapons.\n");
+			outputText("-New super perk: Sword Intent (Aura). Gained by having 'Hidden Job: Sword Immortal' super perk and Soul Personage perk. Effects: Your Killing Intent can become focused into Sword Intent aura enveloping your weapons as long they are sword-type (+5% of core spe, +10% dmg). Would apply bonuses from the job to flying swords too. (+5% of OverMax Wrath / Fatigue / Soulforce)\n");
+			outputText("-New super perk: Sword Immortal: First Form. Gained by having 'Sword Intent (Aura)' super perk and Soul Warrior perk. Effects: You reached First Form stage. Increase sword intent aura effects (+15% of core spe, +15% dmg) and gives small boost at the combat start (+100 wrath/sf, -100 fatigue) (+5% of OverMax Wrath / Base STR Cap / Fatigue / Base SPE Cap / Soulforce / Base WIS Cap)\n");
+			outputText("-New super perk: Munchkin@Biolab. Gained by having merely 1 super perk, having 'Munchkin@Work' super munchkin perk, lvl 135+. Effect: Increase core/train caps for stats by 10. +1 to internal mutations slots capacity (+2 for adaptation slots)\n");
+			outputText("-New mutation perk: Lizan Marrow (Final Form). Req. Lizan Marrow (Evolved) and lvl 90+. Effects: Regenerates 2% of HP per round in combat and 4% of HP per hour. Additionaly your limit for innate self-regeneration rate increased. When below 60%/20% of max HP regeneration provided by Lizan regeneration is 2x/3x. Could slowly recover lost bodyparts (~0.5/1% per combat round/hour). ");
+			outputText("You can't lose by HP until your health drops into the negatives more than 10% of max HP, +10% OverMax HP.\n");
+			outputText("-New mutation perk: Human Versatility (Evolved). Req. Human Versatility (Primitive) and lvl 60+. Effects: Mastery gains increased by 3 point or in case of multiplier +3 to multiplier. Decrease needed exp to lvl up weapon/lifeskill masteries and have 20% chance to gain 3x more XP for Mastery.\n");
+			outputText("-New mutation perk: Feyfolk Voice (Final Form). Req. Feyfolk Voice (Evolved) and lvl 90+. Effects: Increase damage reduction against spells by 20% and increase the power of Sing/Perform by 100%. Sing/Perform is kept at all time. Sing/Perform now has an Intelligence scaling and it’s doubled. Increase Intensify limit by 10 stages.\n");
+			outputText("-New mutation perk: Orc Adrenal Glands (Final Form). Req. Orc Adrenal Glands (Evolved) and lvl 90+. Effects: Your Orc adrenal glands are increasing Ferocity limit by 8%, +50% of max core Str as phantom Str, increase your natural strength and tone, boost natural wrath generation rate, allow to use Ferocity even when been no longer an orc, ");
+			outputText("out of combat when below 10% would not loose wrath and gain +2% per hour, +0.5% wrath generated in combat.\n");
+			outputText("-New mutation perk: Arigean Association Cortex (Final Form). Req. Arigean Association Cortex (Evolved) and lvl 90+. Effects: You’ve adapted a way of thinking that surpasses the normal Arigean. Unlocks the risky but rewarding Finality Barrage. Charged shot, Mana shot and Mana Barrage all deal 140% more damage and now cost 40% less mana, additionally your mana regen is increased by 15% of your toughness.\n");
+			outputText("-Added new weapon (by Demojay) - 'Beautiful Fly Whisk'. Obtained from the Lake like other Holy Items. Beautiful Fly Whisk reduces soulskill cooldown by 1 when equipped.\n");
+			outputText("-New melee weapon (by Liadri): Satyr Flute. Currently dropped by Satyr enemies. Cost 160 gems. Is small mace/hammer type weapon with atk 1. Effects: +50% spellpower, +50% performance power.\n");
+			outputText("-New melee weapon (by Liadri): Pan Flute. Currently buyable in Oddities shop. Cost 160 gems. Is small mace/hammer type weapon with atk 1. Effects: +50% spellpower, +100% performance power.\n");
+			outputText("-New melee weapon (by Liadri): Elysium - obtainable by giving Pan Flute to Pure Celess to purify. +150% perform power, +150% spell catalyst modifier, +100% tease modifier based on Purity. Increase Arouse potency by 100%.\n");
+			outputText("-New melee weapon (by Liadri): Hellcaller - obtainable by giving Pan Flute to Corrupted Celess/Tyrantia to corrupt. +150% perform power, +150% spell catalyst modifier, +100% tease modifier based on corruption. Increase devastating Aria potency by 50%.\n");
+			outputText("-New range weapon/tome (by Ormael): Restrained Black Tome - buyable at Library in Tel'Adre. Cost 100 gems. Increase by 300/200/100% black spellpower and reduce by 3/2/1 turns cd of offensive black spells at levels below 6/12/18.\n");
+			outputText("-New range weapon/tome (by Ormael): Restrained White Tome - buyable at Library in Tel'Adre. Cost 100 gems. Increase by 300/200/100% white spellpower and reduce by 3/2/1 turns cd of offensive white spells at levels below 6/12/18.\n");
+			outputText("-New range weapon/tome (by Ormael): Restrained Grey Tome - buyable at Library in Tel'Adre. Cost 200 gems. Increase by 300/200/100% grey spellpower and reduce by 3/2/1 turns cd of offensive grey spells at levels below 6/12/18.\n");
+			outputText("-New armor (by Sylabt & Ohaxer): Princess Regalia - obtained by completing Coronation quest at Trench or later from equipment shop. Cost 9,600 gems, 17 armor, 13 magic resistance, light type armor. Increases the damage of and reduces the cost of Mana Shot, Barrage, Charged Shot and Finality Barrage by 50%, also isn’t affected by Miracle Metal debuff for armor, and provides a 15% lifesteal from Mana shot, barrage, charged shot and crunch.\n");
+			outputText("-New flying sword: White Half-Moon Quartet - combined from two White Half-Moon Duo sword sets. Cost 240 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 4). Deal fire damage instead of physical damage.\n");
+			outputText("-New flying sword: Black Half-Moon Quartet - combined from two Black Half-Moon Duo sword sets. Cost 240 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 4). Deal ice damage instead of physical damage.\n");
+			outputText("-New flying sword: Scarlet Half-Moon Quartet - combined from two Scarlet Half-Moon Duo sword sets. Cost 240 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 4). Deal lightning damage instead of physical damage.\n");
+			outputText("-New flying sword: Ebon Half-Moon Quartet - combined from two Ebon Half-Moon Duo sword sets. Cost 240 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 4). Deal darkness damage instead of physical damage.\n");
+			outputText("-New flying sword: Aquamarine Half-Moon - buyable at 'Flying Swords are always with you!' shop in He'Xin'Dao. Cost 150 spirit stones. Base atk is 15. It's classified as Large flying sword. Deal water damage instead of physical damage.\n");
+			outputText("-New flying sword: Obsidian Half-Moon - buyable at 'Flying Swords are always with you!' shop in He'Xin'Dao. Cost 150 spirit stones. Base atk is 15. It's classified as Large flying sword. Deal earth damage instead of physical damage.\n");
+			outputText("-New flying sword: Aquamarine Half-Moon Duo - combined from two Aquamarine Half-Moon swords. Cost 300 spirit stones. Base atk is 15. It's classified as Large flying sword (set of 2). Deal water damage instead of physical damage.\n");
+			outputText("-New flying sword: Obsidian Half-Moon Duo - combined from two Obsidian Half-Moon swords. Cost 300 spirit stones. Base atk is 15. It's classified as Large flying sword (set of 2). Deal earth damage instead of physical damage.\n");
+			outputText("-New flying sword: Chrysolite New Moon - buyable at 'Flying Swords are always with you!' shop in He'Xin'Dao. Cost 375 spirit stones. Base atk is 40. It's classified as Massive flying sword. Deal plasma damage instead of physical damage. Soulforce cost of using it to fly or attack are increased by 10%.\n");
+			outputText("-New consumable: Soaring Blades manual. Req. buying manual from Qi for 50 spirit stones after finishing basic training with him. Using will grant perk Soaring Blades.\n");
+			outputText("-New consumable: 'First Attack: Flying Sword' manual. Req. buying manual from Qi for 50 spirit stones after learning Soaring Blades passive, reaching Soul Warrior stage and be lvl 24+. Using will grant perk First Attack: Flying Sword.\n");
+			outputText("-New P. Special: Ram. Req. to be Arigean Princess. Deals Physical Damage based on Speed, but cause recoil damage equal to 10% of user max HP.\n");
+			outputText("-New M. Special: Charged Shot. Req. to be Arigean Princess. A two turn charged str scaling range attack costing mana (~400) and dealing magic damage.\n");
+			outputText("-New M. Special: Finality Barrage. Req. to be Arigean Princess and have Arigean Association Cortex (Final Form) internal mutation. Sacrifice 60% of your max hp to deal 30% of the enemy’s max hp.\n");
+			outputText("-New M. Special for Dracula/lina race: Shadow Teleport - Similar to displacer beast allow to temporarily dodge all attack for a short time (6 turns durtation and 10 turns cd, base cost 30 fatigue)\n");
+			outputText("-New bodypart: Satyr Arms (from satyr tf).\n");
+			outputText("-When reaching lvl 30 and having done all misison from Grayda Arigean PC can have event proc at camp that unlocks new quest 'Coronation'. Visiting her at Trench would send PC to gather materials and then becoming new princess. It's pernament race option so can't return from been Arigean Princess.\n");
+			outputText("-Arigean Princess (23+) stat bonuses: +430% to str multi, +430% to spe multi, +310% to tou multi, -75% to int multi, -60% to wisdom multi, +65 Min Corruption, +10 armor. She can use additional specials: Grab and Guillotine (both works like the ones from Cancer race)\n");
+			outputText("-Satyr race racial score and bonuses been reworked. Now it will be giving bonuses for 12/18 pts as satyr/faun and elder satyr/faun: +50%/+85% to str multi, +40%/+70% to tou multi, +150%/+175% to lib multi, +60 to sens\n");
+			outputText("-Red Panda race score req. increased from 8 to 10 and bonuses to stats slight changed: +20% to str multi, +80% to spe multi and +50% to wis multi. It can also use Grab & Slam specials like bear/panda race and Body Slam special that pig/boar can use.\n");
+			outputText("-Added Descendant and Bloodline perks for Melkie, Hydra, Salamander, Werewolf, Wereshark, Ratatoskr races.\n");
+			outputText("-New Special names: Solaria (salamander), Drake (hydra). Each of them will start with matching bloodline perk to match their ancestor race.\n");//, Veseshe (elf)
+			outputText("-'Melkie Lung' internal mutation been renamed to 'Feyfolk Voice' and now can be additionaly picked by satyr race. It spell damage reduction been changed to be 5% * tier and increasing sing/perform power to be 25 * tier. Stat multi been changed form speed to toughness and bit lowered on 2nd and 3rd tier.\n");
+			outputText("-All human internal mutations desc have added part on need to keep high human score to have their effects all active (some effects could still happen when it's below req. score but mostly it's needed to have those 18+ pts)\n");
+			outputText("-Ayane when recruited to camp now could be combat henchman with support mage options like: healing, i-frame (expire after 1 round) and foxfire.\n");
+			outputText("-In Tyrant State: You can delay your own defeat by Lust for two turns. Reducing your own Lust below the max will reset the timer. (30 training sessions with Tyrantia)\n");
+			outputText("-11 new achievments. (5 shadow one)\n");
+			outputText("-Juvenile abyssal sharks can sometimes be too happy to bite more then PC have (still left) so now they will stop when pc have penalty of 99% on combat wounds.\n");
+			outputText("-Beautiful Sword and Whip would now have additional effect of giving 2x more exp for weapon mastery. Beautiful Staff would have additional effect of -1 turn cooldown duration of tier 1 spells.\n");
+			outputText("-Qi - owner of 'Flying Swords are always with you!' is no more in closed doors cultivation session. And now he can train or sell some more specialistic manuals to PC.\n");
+			outputText("-Flying Sword Path, Soaring Blades, First Attack: Flying Sword, Killing Intent perks no longer are in level up menu. All spend before perks are refunded no worried.\n");
+			outputText("-Flying Sword Path perk have now ranks and 1st rank is learned by training with Qi costing 50 spirit stones for training.\n");
+			outputText("-Added Shouldra to disable/enable menu. Disabling her if she's in camp already would reset tracker how much min lust she rising.\n");
+			outputText("-Moved Dragon Boi toggle to turn on/off from Members to Others subtab in NPC's tab from Camp Actions menu.\n");
+			outputText("-First four golem guardians in Hidden Cave now would wander their designed area appearing in one of eight rooms instead of four specific ones in specific order. If PC have basic versions of albemic or furnance bought can find bit better one versions of them in Hidden Cave dungeon and then 'borrow' those for 'unlimited time duration'. ");
+			outputText("Orginal owner that bought them wouldn't mind, right? Not like he would care about those more than his loli bat golems...\n");
+			outputText("-Killing Intent perk now is gained after having at least 10 kills on kill counter.\n");
+			outputText("-On stats page in kill counts section was added total kills count (maybe some would want to see total count without need to add all seperate kill counts and maybe in future we would get more kill counts...)\n");
+			outputText("-Added new option/toggle in Settings: Angelic Faction - by default it active and all angelic present ingame and need to be toggled on to disable chance to meet ANY angeloid/angel ingame.\n");
+			outputText("-All Angel Faction enemies now can drop randomized item like Demon Faction. Due to higher difficulty of defeating them their have higher chance to drop that gear and general chances for better prefixxes on items are increased.\n");
+			outputText("-PC can buy now in the same place as Simple Alembic or Simple Furnance 4 basic versions of Alembic Catalysts. They costs 1000 gems each and can be reused increasing chance to get the desired item when decomposing TF item by 1,5x.\n");
+			outputText("-Due to confusion on leaving river dungeon during first visit there there was added condition to help shield maiden henchmen find enough loot. It also extends to activating teleport circle to 2nd floor. Sad news... now all PC's must take time to explore first floor to find this seceretly hidden 2nd loot location without been distracted of going into deeper floors by accident.\n");
+			outputText("-If player know spell Heal or Cure and have enough mana can use them out of combat in camp (Camp Actions > Spend Time).\n");
 			menu();
 			addButton(0, "Next", Changelog50);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
@@ -223,7 +436,7 @@ public class Changelog extends BaseContent
 			outputText("large portion of her storyline, corrupt Celess sex scenes not reseting lust/not giving tease exp, 2nd promotion in Adventure Guld been not accesable, Diva/Project Nightwalker dropping/giving Bat TF instead of Vampire TF, Sky-tier Aether Twins been excluded from some of BFGaunlets bonuses, silly mode event in hills involving minotaurs got it lvl req. below lvl req. for area ");
 			outputText("(fix was removing the lvl req. on it), races with Undeath perk scaling HP from tou instead of lib, Salamander IM not keeping Lustzerker perk from loosing if no longer race with lustzerker ability, Gryphon Statuette only allowing cock tf scene, Weasel Eyes tf not triggering when having Raiju Eyes, Library not teaching all curretly existing tier 1 white and black spells, ");
 			outputText("Werewolf pity system not working with FemDom post fight option, cow score req. both fur and plain skin\n\n");
-			outputText("<b>Version 0.8v2:</b>\n\n");
+			outputText("<b>Version 0.8v2 (Few new merged perks, more Arigean content, Increasing lvl cap, Madam and Tempress minor changes and bugfixes):</b>\n\n");
 			outputText("-New tier 3 intelligence lvl-up perk (by Demojay): Autocast. Req. Any buff spell and 100+ int. Effect: Allows buff spells to be automatically cast at the start of battle, if you meet the lust requirements to cast them.\n");
 			outputText("-New event perk: Raging Inferno (Mastered). Gained by use of the Pocket Watch when req. are meet. Effects: Cumulative 120% damage increase for every subsequent fire spell. Each turn without cast fire spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling fire based attack. Maximum 50 stacks.\n");
 			outputText("-New event perk: Glacial Storm (Mastered). Gained by use of the Pocket Watch when req. are meet. Effects: Cumulative 120% damage increase for every subsequent ice spell. Each turn without cast ice spell lower damage by 40% down to normal (100%) damage. Prevent decay of cumulative damage increase bonus when channeling ice based attack. Maximum 50 stacks.\n");
@@ -251,16 +464,6 @@ public class Changelog extends BaseContent
 			outputText("Pixie Dust Special now has to pay the dark ritual HP cost for its increased damage. Proc Check loop for Fae Storm/Pixie Dust no longer stops after first failed check. (Demojay)\n");
 			outputText("-Made level check function for handling legendary items tied to a 'Legendary' Tag, for easy identification of legendary items. Added 'Death Prince Golden Armor', 'Asterius Rage' and 'Nexus' to legendary lists. (Demojay)\n");
 			outputText("-Fixed bugs: When picking Yes instead of Maybe? on ascension game not allowing to pick some of asc perks, elemental damage cumulation stacks decaying 2x slower, faerie dragon tier 1 incorrect HP bonus, Error w/ Shouldra 'Crush' options, Belisa Holy Band managment bugs\n\n");
-			outputText("\n\n\n");
-			outputText("Plans for future builds (I know some of them are HUGE ones but without dreams to chase how can one change?):\n");
-			outputText("-Add more soulforce options.\n");
-			outputText("-Add soulforce stuff to our lovely monk-ish mouse ^^\n");
-			outputText("-Add soulforce stuff to kitsune encounters.\n");
-			outputText("-Add Wuxia themed area and enemies.\n");
-			outputText("-Add few new options during chara creation.\n");
-			outputText("-Add option to upgrade some of the items ingame (ofc using soulforce) and generaly few new shiny things to find/buy/store/use.\n");
-			outputText("-More camp build options (involving using stones and etc.)\n");
-			outputText("-Make use of Metamorph perk (ofc all TF would be powered by soulforce ^^)\n");
 			menu();
 			addButton(0, "Next", Changelog49);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
@@ -1994,7 +2197,7 @@ public class Changelog extends BaseContent
 			outputText("-New flying sword: Black Half-Moon - buyable at Soul Equipment shop in He'Xin'Dao. Cost 60 spirit stones. Base atk is 6. It's classified as Small flying sword. Deal ice damage instead of physical damage.\n");
 			outputText("-New flying sword: Scarlet Half-Moon - buyable at Soul Equipment shop in He'Xin'Dao. Cost 60 spirit stones. Base atk is 6. It's classified as Small flying sword. Deal lightning damage instead of physical damage.\n");
 			outputText("-New flying sword: Ebon Half-Moon - buyable at Soul Equipment shop in He'Xin'Dao. Cost 60 spirit stones. Base atk is 6. It's classified as Small flying sword. Deal darkness damage instead of physical damage.\n");
-			outputText("-New flying sword: Asauchi - buyable at Soul Equipment shop in He'Xin'Dao. Cost 160 spirit stones. Base atk is 32. It's classified as Massive flying sword. I have lowered by 5% chance to apply bleed effect and 15% lower base to deal crit damage. Soulforce cost of using it to fly or attack are lowered by 20%.\n");
+			outputText("-New flying sword: Asauchi - buyable at Soul Equipment shop in He'Xin'Dao. Cost 160 spirit stones. Base atk is 32. It's classified as Massive flying sword. Lowered by 5% chance to apply bleed effect and 15% lower base to deal crit damage. Soulforce cost of using it to fly or attack are lowered by 20%.\n");
 			outputText("-New flying sword: Sky Twins - buyable at Soul Equipment shop in He'Xin'Dao. Cost 120 spirit stones. Base atk is 12. It's classified as Large (set of 2) flying swords.\n");
 			outputText("-New misc accesory (by Ormael): Atlatl - buyable at weapon shop in Tel'Adre. Cost 800 gems. Increase accuracy of thrown range weapons by 25% and their damage by 25%.\n");
 			outputText("-New misc accesory (by Liadri): Snowboard - buyable at Yu shop. Cost 400 gems. Increase the odds of escaping in glacial rift (Due to the snow and blizzards hindering conventional escape using the run option will be 50% less effective in glacial rift from now on. The snowboard offset this penalty).\n");

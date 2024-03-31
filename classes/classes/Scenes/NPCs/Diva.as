@@ -10,6 +10,9 @@ import classes.PerkLib;
 import classes.StatusEffects;
 import classes.VaginaClass;
 import classes.internals.ChainedDrop;
+import classes.Scenes.Combat.SpellsWhite.WhitefireSpell;
+import classes.Scenes.Combat.SpellsWhite.BlindSpell;
+import classes.Scenes.Combat.CombatAbility;
 
 public class Diva extends Monster {
     private var _biteCounter:int = 0;
@@ -64,10 +67,14 @@ public class Diva extends Monster {
         return str;
     }
 
-    override protected function performCombatAction():void {
+    override protected function attackSucceeded():Boolean{
         if (_sonicScreamCooldown > 0) {
             _sonicScreamCooldown--;
         }
+        return super.attackSucceeded();
+    }
+
+    override protected function performCombatAction():void {
         if (player.hasStatusEffect(StatusEffects.NagaBind)) {
             moveBite();
         } else {
@@ -78,9 +85,7 @@ public class Diva extends Monster {
             if (finalFight && !player.hasStatusEffect(StatusEffects.Blind)) {
                 options.push(moveDarkness);
             }
-            if (attackSucceeded()) {
-                options[rand(options.length)]();
-            }
+            options[rand(options.length)]();
         }
     }
 
@@ -96,6 +101,19 @@ public class Diva extends Monster {
         if (spell == "blind" && this.hasStatusEffect(StatusEffects.Blind)) {
             outputText("Diva recoils in pain as the bright light strikes her like a hammer, temporarily pinning her to the ground and stunning her.");
             this.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+        }
+    }
+
+    override public function postPlayerAbility(ability:CombatAbility, display:Boolean = true):void {
+        if (ability is BlindSpell && hasStatusEffect(StatusEffects.Blind)) {
+            if (display) {
+                outputText("Diva recoils in pain as the bright light strikes her like a hammer, temporarily pinning her to the ground and stunning her.");
+            }
+            this.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+        } else if (ability is WhitefireSpell && hasStatusEffect(StatusEffects.Blind)) {
+            if (display) {
+                outputText("The room lights back as the flame dispels the shadow.");
+            }
         }
     }
 

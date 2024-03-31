@@ -24,7 +24,6 @@ import classes.Scenes.SceneLib;
 			outputText("\"<i>Well, would you look at that, another scavenger and food thief…well no! You won’t have any of my fish, hunter!</i>\"\n\n");
 			outputText("Under her glacial blonde hair is two eyes that stare at you with barely contained aggression. She bares her now obvious fang at you and smashes her weapon in the ground revealing that you both are standing on a layer of ice as she dives underwater, using the newly opened hole and swims toward you. Well, seems you are the victim of a massive misunderstanding.\n\n");
 			outputText("<b>You are fighting a Melkie!</b>\n\n");
-			
 			SceneLib.glacialRift.GlacialRiftConditions();
 			startCombat(new Aria());
 		}

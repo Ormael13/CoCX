@@ -430,7 +430,11 @@ public class RiverDungeon extends DungeonAbstractContent
 				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 				//spriteSelect(SpriteDb.s_green_slime);
 				if (player.hasKeyItem("Key Of Darkness") >= 0 || flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 7) flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(4);
-				else flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(5);
+				else {
+					var rdem:Number = rand(5);
+					if (rand(3) > 0) rdem = 4;
+					flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rdem;
+				}
 				if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
 					outputText("A soft shuffling sound catches your attention and you turn around, spotting a large, shadowy mass rushing towards you!  When it it almost next to you it starts to morph into a copy of you, made up of an inky, black darkness. nearly nine feet tall, the creature seems to draw in light, casting a dark shadow through the hallway.");
 					outputText("As you strain to see this blackened doppelganger, it lurches toward you!");
@@ -439,7 +443,10 @@ public class RiverDungeon extends DungeonAbstractContent
 				startCombat(new DarknessElemental(), true);
 				//doNext(playerMenu);
 			}
-			else player.addStatusValue(StatusEffects.RiverDungeonA, 1, 10);
+			else {
+				player.addStatusValue(StatusEffects.RiverDungeonA, 1, 10);
+				if (player.hasKeyItem("Key Of Darkness") < 0 || flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] <= 7) outputText("\n\n<b>High chance to find Unique Darkness Elemental</b>\n\n");
+			}
 		}
 		
 		public function defeatVegot():void {
@@ -535,10 +542,12 @@ public class RiverDungeon extends DungeonAbstractContent
 		private function encountersRuletteD():void {
 			if (encountersRulette()) {
 				var reset:Number = 10;
+				var reset00:Number = 6;
 				reset -= player.statusEffectv1(StatusEffects.RiverDungeonA);
 				player.addStatusValue(StatusEffects.RiverDungeonA, 1, reset);
 				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
-				var choice:Number = rand(6);
+				if (flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 1) reset00 -= 1;
+				var choice:Number = rand(reset00);
 				if (choice == 0) {
 					//spriteSelect(SpriteDb.s_green_slime);
 					outputText("A soft shuffling splat catches your attention and you turn around, spotting an amorphous red mass sliding towards you!  Realizing it's been spotted, the ooze's mass surges upwards into a humanoid form with thick arms and wide shoulders.  Then you notice it's covered with nearly blending with rest of it skin purple glowing veins.  The beast surges forward to attack!");
@@ -562,13 +571,13 @@ public class RiverDungeon extends DungeonAbstractContent
 				}
 				if (choice == 4) {
 					//spriteSelect(SpriteDb.s_electra);
-					outputText("As you’re wandering through the passage you suddenly hear sound of many wings flapping.  Turning around you notice an angel accompanied by two angeloids flying toward you. They're closing in with supernatural speed, and before you can take more than a few steps, they're surrounding you. \"<i>Don't be afraid of the Mist!!!</i>\"  No way around it, you ready your [weapon] for the fight.");
-					startCombat(new AngelLR(), true);
+					outputText("A loud sound attract your attention and you turn around, spotting large oni covered with purple glowing lines walking slowly towards you.  Sounds you heard moment before resounds again and it's caused by her simply walking ahead.  No way around it, you ready your [weapon] for the fight.");
+					startCombat(new Izumi(), true);
 				}
 				if (choice == 5) {
 					//spriteSelect(SpriteDb.s_electra);
-					outputText("A loud sound attract your attention and you turn around, spotting large oni covered with purple glowing lines walking slowly towards you.  Sounds you heard moment before resounds again and it's caused by her simply walking ahead.  No way around it, you ready your [weapon] for the fight.");
-					startCombat(new Izumi(), true);
+					outputText("As you’re wandering through the passage you suddenly hear sound of many wings flapping.  Turning around you notice an angel accompanied by two angeloids flying toward you. They're closing in with supernatural speed, and before you can take more than a few steps, they're surrounding you. \"<i>Don't be afraid of the Mist!!!</i>\"  No way around it, you ready your [weapon] for the fight.");
+					startCombat(new AngelLR(), true);
 				}
 				//doNext(playerMenu);
 			}
@@ -717,7 +726,7 @@ public class RiverDungeon extends DungeonAbstractContent
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Small Bats fly out as you walk by above your head hangs some large stalactites. It would be most unfortunate if one of these was to randomly fall down and run you through.");
 			dungeons.setDungeonButtonsRD(roomA05, null, null, null);
-			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 1) addButton(11, "Down", roomB01);
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 1) addButtonIfTrue(11, "Down", roomB01, "You still need to find enough (two piles) of treasure to pay back shield maiden for help to get into this dungeon. Maybe search again whole floor carefully?", flags[kFLAGS.NEISA_FOLLOWER] >= 3);
 			else addButtonDisabled(11, "Down", "You still need to beat the guardians of this floor to descend into lower strata of the dungeon.");
 		}
 		public function roomA07():void {
@@ -1980,8 +1989,8 @@ public class RiverDungeon extends DungeonAbstractContent
 		private function teleportCircleFloor1():void {
 			menu();
 			addButtonDisabled(0, "Floor 1", "You're currently at Floor 1.");
-			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 1) addButton(1, "Floor 2", teleportToFloor2);
-			else addButtonDisabled(1, "Floor 2", "You still need to beat guardians of floor 1 to use this teleport option.");
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 1 && flags[kFLAGS.NEISA_FOLLOWER] >= 3) addButton(1, "Floor 2", teleportToFloor2);
+			else addButtonDisabled(1, "Floor 2", "You still need to beat guardians of floor 1 to use this teleport option. Also need to be able to leave dungeon at any time (paying back shield maiden for her help).");
 			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6) addButton(2, "Floor 3", teleportToFloor3);
 			else addButtonDisabled(2, "Floor 3", "You still need to beat guardian of floor 2 to use this teleport option.");
 			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(3, "Floor 4", teleportToFloor4);

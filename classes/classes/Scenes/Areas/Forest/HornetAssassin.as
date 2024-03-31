@@ -16,7 +16,7 @@ import classes.Scenes.Areas.Forest.HornetGirl;
 			var choice:Number = rand(5);
 			if (choice == 0) hornetStingAttack();
 			if (choice == 1) hornetSpearAttack();
-			if (choice == 2) eAttack();//special dla niej tylko
+			if (choice == 2) eAttack();//special dla niej tylko (special only for her)
 			if (choice >= 3) eAttack();
 		}
 		

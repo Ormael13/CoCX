@@ -64,6 +64,7 @@ public class FeyArcaneBloodstreamMutation extends IMutationPerkType
             if (pTier == 1) pBuffs['int.mult'] = 0.05;
             if (pTier == 2) pBuffs['int.mult'] = 0.15;
             if (pTier == 3) pBuffs['int.mult'] = 0.35;
+            if (pTier == 4) pBuffs['int.mult'] = 0.75;
             return pBuffs;
         }
 

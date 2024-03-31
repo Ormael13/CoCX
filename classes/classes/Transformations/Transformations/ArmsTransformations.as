@@ -90,6 +90,9 @@ public class ArmsTransformations extends MutationsHelper {
 						desc += "You double over, a sudden pain just below your shoulders. Finding you cannot reach your lower arms to feel at each other, you look down and realize that they're shrinking back into your torso."
 						if (!player.isChitinCovered()) desc += " Because you are shocked over your lower arms going away, you don't even notice the carapace of your primary arms softening into [skin coat]."
 						break;
+					case Arms.MOTH:
+						desc += "You double over, a sudden pain just below your shoulders. Finding you cannot reach your lower arms to feel at each other, you look down and realize that they're shrinking back into your torso."
+						break;
 					default:
 						desc += "You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form.";
 						break;
@@ -1303,7 +1306,7 @@ public class ArmsTransformations extends MutationsHelper {
 
 				player.arms.type = Arms.DEER;
 				if (doOutput) outputText(desc);
-				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.CANINE));
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.DEER));
 			},
 			// is present
 			function (): Boolean {
@@ -1325,6 +1328,44 @@ public class ArmsTransformations extends MutationsHelper {
 			// is present
 			function (): Boolean {
 				return player.arms.type === Arms.REINDEER;
+			}
+	);
+	public const ArmsMoth: Transformation = new SimpleTransformation("Moth Arms",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
+
+				desc += "Your arms begin to itch so you scratch at them, eventually you look over and discover your arms are now covered in a sleeve like fuzzy mass. A second pair has even begun sprouting just underneath, forming these same traits. <b>You now have Moth arms</b>";
+
+				player.arms.type = Arms.MOTH;
+				if (doOutput) outputText(desc);
+				//Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.REINDEER));
+			},
+			// is present
+			function (): Boolean {
+				return player.arms.type === Arms.MOTH;
+			}
+	);
+
+	public const ArmsSatyr: Transformation = new SimpleTransformation("Satyr Arms",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
+
+				desc += "Your hands suddenly start to tingle as your arms grow a thin layer of [fur color] fur up to your shoulders. You watch, enthralled, as your nails sharpen to lethal point. You try out your hands at various things discovering that your overall dexterity has also been enhanced. Heck you got some instinctual know-how of how to use a few musical instruments. Must be the whole goat man/woman deal. With hands like those the dream of becoming a skilled musician is easily within your reach. <b>Your arms are now covered in fur and end with sharpened nails like those of a satyr or faun.</b>";
+				player.arms.type = Arms.SATYR;
+
+				if (doOutput) outputText(desc);
+
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.SATYR));
+			},
+			// is present
+			function (): Boolean {
+				return player.arms.type === Arms.SATYR;
 			}
 	);
 	/*

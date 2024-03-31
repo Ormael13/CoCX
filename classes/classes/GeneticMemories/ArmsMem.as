@@ -549,6 +549,17 @@ import classes.CoC;
             }
         });
 
+        public static const SATYR:int = _partid++;
+        EnumValue.add(Memories, SATYR, "SATYR", {
+            id: "Satyr Arms",
+            name: "Satyr Arms",
+            cost: 100,
+            title: "Satyr",
+            transformation: function(): Transformation {
+                return CoC.instance.transformations.ArmsSphinx;
+            }
+        });
+
         public static const SEA_DRAGON:int = _partid++;
         EnumValue.add(Memories, SEA_DRAGON, "SEA_DRAGON", {
             id: "SeaDragon Arms",
@@ -710,7 +721,7 @@ import classes.CoC;
             cost: 100,
             title: "Arigean",
             transformation: function(): Transformation {
-                return CoC.instance.transformations.ArmsAbyssalShark;
+                return CoC.instance.transformations.ArmsArigean;
             }
         });
 
@@ -721,7 +732,7 @@ import classes.CoC;
 			cost: 100,
 			title: "Demon",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.ArmsDevil;
+				return CoC.instance.transformations.ArmsDemon;
 			}
 		});
 

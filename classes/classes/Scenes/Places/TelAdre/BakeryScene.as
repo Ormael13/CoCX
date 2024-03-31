@@ -13,7 +13,7 @@ public function bakeryuuuuuu():void {
 		easterBakeSale();
 		return;
 	}
-	if(rand(10) <= 1 && SceneLib.shouldraFollower.followerShouldra() && player.gender > 0 && flags[kFLAGS.MADDIE_QUEST_STATE] == 4) {
+	if(rand(10) <= 1 && SceneLib.shouldraFollower.followerShouldra() && !player.hasStatusEffect(StatusEffects.ShouldraOff) && player.gender > 0 && flags[kFLAGS.MADDIE_QUEST_STATE] == 4) {
 		SceneLib.shouldraFollower.shouldraBakeryIntro();
 		return;
 	}

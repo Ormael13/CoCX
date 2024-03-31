@@ -159,14 +159,21 @@ public class GoblinShaman extends Goblin
 					add(consumables.GOB_ALE,5).
 					add(weapons.W_STAFF,1).
 					add(undergarments.FURLOIN,1).
-					add(jewelries.MYSTRNG, 1).
+					add(jewelries.MYSTRNG,1).
 					add(jewelries.LIFERNG,1).
+					add(consumables.GINSENG,1).
 					addMany(1,consumables.L_DRAFT,
 							consumables.PINKDYE,
 							consumables.BLUEDYE,
 							consumables.ORANGDY,
 							consumables.GREEN_D,
-							consumables.PURPDYE);
+							consumables.PURPDYE).
+					addMany(3,consumables.HEALHERB,
+							consumables.MOONGRASS,
+							consumables.SNAKEBANE,
+							consumables.IRONWEED,
+							consumables.BLADEFERN,
+							consumables.RAUNENECT);
 			this.abilities = [
 				{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON]},
 				{ call: goblinDrugAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[TAG_FLUID]},

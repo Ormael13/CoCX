@@ -300,7 +300,6 @@ public class Minerva extends Monster
 			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10) cor = 80; //Set to 80 corruption if corrupted.
 			this.weaponName = "halberd";
 			this.weaponVerb="slash";
-			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = game.armors.TUBETOP.name;
 			this.armorPerk = "";

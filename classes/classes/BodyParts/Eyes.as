@@ -282,6 +282,12 @@ public class Eyes extends BodyPart {
 		appearanceDesc: "Your [eyecolor] demonic eyes look somewhat human, save for their cat-like vertical slit which draws light right in, though the real bonus is your ability to see just about anything in a lewd way.",
 		Darkvision: true
 	});
+	public static const MOTH: int = 47;
+	EnumValue.add(Types, MOTH, "MOTH", {
+		name:"moth",
+		appearanceDesc: "Your eyes are like a moth’s eyes",
+		Darkvision: true
+	});
 
 	public var count:int;
 	public var colour:String = "brown";

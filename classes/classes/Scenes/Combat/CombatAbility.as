@@ -19,7 +19,7 @@ import mx.formatters.NumberFormatter;
  * - **Timing type** - Duration of the ability:<ul>
  *     <li> Instant (happens immediately), </li>
  *     <li> Lasting (started and lasts for some time and cannot be cast multiple times),</li>
- *     <li> Toggle (lasting that could be toggle off by player). </li>
+ *     <li> Toggle (lasting that could be toggle off by player). </li></ul>
  * - **Tags** - A set of extra flags (damaging or buffing, primary element, AoE and others) that could be used in checks, reactions, or modifiers
  *
  * Subclasses MUST implement:
@@ -131,6 +131,10 @@ public class CombatAbility extends BaseCombatContent {
 		name:"Blood Soulskill",
 		group:"soulskill"
 	});
+	public static const CAT_MONSTER_SUMMON:int   = EnumValue.add(AllCategories, 13, "MONSTER_SUMMON", {
+		name:"Monster Summon",
+		group:"monstersummon"
+	});
 	
 	public static var AllTags:/*EnumValue*/Array = [];
 	public static const TAG_DAMAGING:int = EnumValue.add(AllTags, 0, 'DAMAGING', {
@@ -213,6 +217,14 @@ public class CombatAbility extends BaseCombatContent {
 		name: 'Magical',
 		desc: "This ability deals magical damage"
 	});
+	public static const TAG_POISON:int = EnumValue.add(AllTags, 20, 'POISON', {
+		name: 'Poison',
+		desc: "This ability's primary element is Poison"
+	});
+	public static const TAG_PLASMA:int = EnumValue.add(AllTags, 21, 'PLASMA', {
+		name: 'Plasma',
+		desc: "This ability's primary element is Plasma"
+	});
 	
 	/**
 	 * Unique id of this ability.
@@ -229,7 +241,10 @@ public class CombatAbility extends BaseCombatContent {
 	public var baseSFCost:Number = 0;
 	public var baseFatigueCost:Number = 0;
 	public var processPostCallback:Boolean = true;
+	//Used to tell the system the type of damage the last used ability inflicted
 	protected var lastAttackType:int = 0;
+	//Custom toggle to allow an ability to hit an invisible enemy
+	protected var affectsInvisible:Boolean = false;
 	
 	public function CombatAbility(
 			name:String,
@@ -336,7 +351,7 @@ public class CombatAbility extends BaseCombatContent {
 				durationEnd(display);
 			}
 		}
-        
+  
 	}
 	
 	/**
@@ -464,14 +479,17 @@ public class CombatAbility extends BaseCombatContent {
 	 * @param free Do not use resources or set cooldown
 	 * @param interceptable Can be intercepted by monster
 	 */
-	public function perform(output:Boolean=true,free:Boolean=false,interceptable:Boolean=true):void {
+	public function perform(output:Boolean=true,free:Boolean=false,interceptable:Boolean=true,doRevenge:Boolean=false):void {
+		if (doRevenge){
+			revenge();
+		}
 		if (!free) {
 			setCooldown();
 			useResources();
 		}
-		if (!interceptable || !monster.interceptPlayerAbility(this)) {
+		if ((!interceptable || !monster.interceptPlayerAbility(this)) && !doRevenge) {
 			doEffect(output);
-			monster.postPlayerAbility(this);
+			monster.postPlayerAbility(this, output);
 		}
 	}
 	
@@ -489,7 +507,9 @@ public class CombatAbility extends BaseCombatContent {
 	// "Use ablity" = setCooldown() + useResources() + doEffect()
 	
 	public function setCooldown():void {
-		player.cooldowns[id] = calcCooldown();
+		var cooldown:int = calcCooldown();
+		if (cooldown > 0) cooldown++;
+		player.cooldowns[id] = cooldown;
 	}
 
 	/**
@@ -497,7 +517,8 @@ public class CombatAbility extends BaseCombatContent {
 	 * Must be manually called as part of doEffect()
 	 */
 	public function setDuration():void {
-		player.durations[id] = calcDuration();
+		var duration:int = calcDuration();
+		player.durations[id] = duration;
 	}
 	
 	/**
@@ -514,6 +535,10 @@ public class CombatAbility extends BaseCombatContent {
 	 */
 	public function doEffect(display:Boolean = true):void {
 		throw new Error("Method doEffect() not implemented for ability "+name);
+	}
+
+	public function revenge(display:Boolean = true):void {
+		throw new Error("Method revenge() not implemented for ability "+name);
 	}
 	
 	public function manaCost():Number {
@@ -582,6 +607,11 @@ public class CombatAbility extends BaseCombatContent {
 		} else if (ccd == -2) {
 			return "This ability can only be used once per day."
 		}
+
+		if (!affectsInvisible && targetType == TARGET_ENEMY && combat.isEnemyInvisible) {
+            return "You cannot use offensive skills against an opponent you cannot see or target."
+        }
+
 		return "";
 	}
 	

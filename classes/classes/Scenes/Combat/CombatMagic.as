@@ -7,9 +7,12 @@ import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.*;
 import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 import classes.Items.EnchantmentLib;
+import classes.Items.IELib;
+import classes.Items.ItemEffect;
 import classes.Items.JewelryLib;
 import classes.Items.NecklaceLib;
 import classes.PerkLib;
+import classes.Race;
 import classes.Races;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.NPCs.Forgefather;
@@ -227,17 +230,18 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
         if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
 		// hope it doesn't lag too much
-		for each (var e:SimpleRaceEnchantment in player.allEnchantments(EnchantmentLib.RaceSpellPowerBonus)) {
-			mod += 0.02 * e.power * player.racialTier(e.race);
+		for each (var e:ItemEffect in player.allItemEffects(IELib.Spellpower_RaceTier)) {
+			mod += e.power * player.racialTier(e.value1 as Race) / 100;
 		}
-		for each (var f:SimpleRaceEnchantment in player.allEnchantments(EnchantmentLib.RaceSpellPowerDoubled)) {
-			mod += f.power * (player.isRaceCached(f.race)? 2:1);
-		}
+	    for each (var f:ItemEffect in player.allItemEffects(IELib.Spellpower_RaceX2)) {
+		    mod += f.power * (player.isRaceCached(f.value1 as Race) ? 2 : 1) / 100;
+	    }
         return mod;
     }
 
     internal function modChange_spell_1():Number {
 		var mod:Number = 0;
+		if (player.hasPerk(PerkLib.BrutalSpells) && player.inte >= 75) mod += .05;
 		if (player.hasPerk(PerkLib.Archmage) && player.inte >= 100) mod += .3;
 		if (player.hasPerk(PerkLib.ArchmageEx) && player.inte >= 100) mod += 1.05;
 		if (player.hasPerk(PerkLib.Channeling) && player.inte >= 60) mod += .2;
@@ -357,6 +361,11 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 175) mod += .3;
 		if (player.hasPerk(PerkLib.GrandGreyArchmage) && player.inte >= 225) mod += .4;
 		if (player.hasPerk(PerkLib.GrandGreyArchmage2ndCircle) && player.inte >= 275) mod += .5;
+		if (player.weaponRange == weaponsrange.RG_TOME && player.level < 18) {
+			if (player.level < 6) mod += 1;
+			if (player.level < 12) mod += 1;
+			mod += 1;
+		}
 		return mod;
 	}
 
@@ -376,6 +385,11 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.isElf()) mod += .2;
 			else mod += .1;
 		}
+		if (player.weaponRange == weaponsrange.RW_TOME && player.level < 18) {
+			if (player.level < 6) mod += 1;
+			if (player.level < 12) mod += 1;
+			mod += 1;
+		}
 		if (player.weapon == weapons.PURITAS) mod *= 2.5;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
@@ -390,6 +404,11 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.PrestigeJobArchpriest)) mod -= .4;
 		if (player.hasPerk(PerkLib.PrestigeJobWarlock)) mod += .2;
 		if (player.countMiscJewelry(miscjewelries.DMAGETO) > 0) mod += 0.25;
+		if (player.weaponRange == weaponsrange.RB_TOME && player.level < 18) {
+			if (player.level < 6) mod += 1;
+			if (player.level < 12) mod += 1;
+			mod += 1;
+		}
 		if (player.weapon == weapons.DEPRAVA) mod *= 2.5;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
@@ -484,6 +503,7 @@ public class CombatMagic extends BaseCombatContent {
 
 	internal function spellGreyCooldownImpl():Number {
 		var mod:Number = 3;
+		if (player.weapon == weapons.B_STAFF) mod -= 1;
 		if (player.hasPerk(PerkLib.NaturalSpellcasting)) {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
 			else mod -= 1;
@@ -506,6 +526,7 @@ public class CombatMagic extends BaseCombatContent {
 
 	internal function spellWhiteCooldownImpl():Number {
 		var mod:Number = 3;
+		if (player.weapon == weapons.B_STAFF) mod -= 1;
 		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod -= 1;
 		if (player.hasPerk(PerkLib.NaturalSpellcasting)) {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
@@ -542,6 +563,7 @@ public class CombatMagic extends BaseCombatContent {
 
 	internal function spellBlackCooldownImpl():Number {
 		var mod:Number = 3;
+		if (player.weapon == weapons.B_STAFF) mod -= 1;
 		if (player.hasPerk(PerkLib.AvatorOfCorruption)) mod -= 1;
 		if (player.hasPerk(PerkLib.NaturalSpellcasting)) {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
@@ -581,6 +603,7 @@ public class CombatMagic extends BaseCombatContent {
 
 	internal function spellGenericCooldownImpl():Number {
 		var mod:Number = 3;
+		if (player.weapon == weapons.B_STAFF) mod -= 1;
 		if (player.hasPerk(PerkLib.NaturalSpellcasting)) {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
 			else mod -= 1;
@@ -717,7 +740,7 @@ public class CombatMagic extends BaseCombatContent {
 					}
                 }
                 else {
-					if (player.hasPerk(perkObj.tier4)) 
+					if (player.hasPerk(perkObj.tier4))
 						player.createStatusEffect(perkObj.counter,24,1,0,0);
                     else if (player.hasPerk(perkObj.tier2))
                         player.createStatusEffect(perkObj.counter,12,1,0,0);
@@ -737,7 +760,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.hasPerk(perkObj.tier3) || player.hasPerk(perkObj.tier4)) player.addStatusValue(perkObj.counter, 1, 4);
 			else if (player.hasPerk(perkObj.tier2)) player.addStatusValue(perkObj.counter, 1, 6);
 			player.addStatusValue(perkObj.counter, 1, 8);
-		}	
+		}
 	}
 
 	internal function calcInfernoModImpl(damage:Number, casting:Boolean = true):Number {
@@ -819,7 +842,7 @@ public class CombatMagic extends BaseCombatContent {
 					outputText("[Themonster], stunned by the sudden change in your bearing and…manhood, gives you more than enough time to finish your spell. ");
 				}
 				if (player.perkv1(PerkLib.ImpNobility) > 0) {
-					outputText("  Your imp cohorts assist you spellcasting adding their diagrams to your own.");
+					outputText("  Your imp cohorts assist your spellcasting, adding their diagrams to your own.");
 				}
 			}
 			var damage:Number = 0;
@@ -829,6 +852,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (2 - player.statusEffectv1(StatusEffects.ControlFreak));
 			damage *= damagemultiplier;
 			if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
+			damage = combat.teases.fueledByDesireDamageBonus(damage);
 			
 			//Determine if critical tease!
 			var crit:Boolean = false;
@@ -840,15 +864,11 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			if (monster.hasStatusEffect(StatusEffects.HypnosisNaga)) damage *= 0.5;
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-			if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
-				outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
-				player.takeLustDamage(Math.round(-damage)/40, true);
-				damage *= 1.2;
-			}
 			monster.teased(Math.round(monster.lustVuln * damage));
-			if (crit) outputText(" <b>Critical!</b>");
+			if (crit && display) outputText(" <b>Critical!</b>");
 			SceneLib.combat.teaseXP(1 + SceneLib.combat.bonusExpAfterSuccesfullTease());
 			outputText("\n\n");
+			combat.teases.fueledByDesireHeal(display);
 		}
 	}
 
@@ -895,6 +915,13 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		if (player.hasStatusEffect(StatusEffects.BalanceOfLife)) HPChange((player.maxHP() * numberOfProcs * 0.05), false);
 	}
+	
+	public function brutalSpellsEffect(display:Boolean = true):void {
+		if (monster.armorMDef > 0 && display) outputText("\nYour spells are so brutal that you damage [themonster]'s magical resistance!");
+        var bbc:Number = (Math.round(monster.armorMDef * 0.1) + 5);
+		if (monster.armorMDef - bbc > 0) monster.armorMDef -= bbc;
+        else monster.armorMDef = 0;
+	}
 
 	public function spellMagicBolt():void {
 		spellMagicBolt2(false, false);
@@ -916,12 +943,12 @@ public class CombatMagic extends BaseCombatContent {
 		combat.darkRitualCheckDamage();
 		if (handleShell()) return;
 		outputText("You narrow your eyes, focusing your mind with deadly intent.  ");
-		if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponSpecials("Staff")) outputText("You point your staff and shoot a magic bolt toward [themonster]!\n\n");
+		if (player.hasPerk(PerkLib.StaffChanneling) && player.weapon.isStaffType()) outputText("You point your staff and shoot a magic bolt toward [themonster]!\n\n");
 		else outputText("You point your hand toward [themonster] and shoot a magic bolt!\n\n");
 		var damage:Number = scalingBonusIntelligence() * spellMod() * 1.2;
 		if (damage < 10) damage = 10;
 		//weapon bonus
-		if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponSpecials("Staff")) {
+		if (player.hasPerk(PerkLib.StaffChanneling) && player.weapon.isStaffType()) {
 			if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.04));
 			else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (3 + ((player.weaponAttack - 50) * 0.035));
 			else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (4.75 + ((player.weaponAttack - 100) * 0.03));

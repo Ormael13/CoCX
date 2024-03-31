@@ -303,13 +303,16 @@ public class EbonLabyrinth extends DungeonAbstractContent {
                 case 300:
                     awardAchievement("Why are you here?", kACHIEVEMENTS.DUNGEON_WHY_ARE_YOU_HERE);
                     break;
+                case 350:
+                    awardAchievement("We need to go deeper!", kACHIEVEMENTS.DUNGEON_WE_NEED_TO_GO_DEEPER);
+                    break;
             }
             //award checking
             if (dungeons.checkEbonLabyrinthNotAwarded())
                 outputText("<b>New awards are available in 'Questlog' menu!</b>\n\n");
             //cleared message
             //check if unlocked
-            if (room == dungeons.clearRoomEL()) { //first time level 300
+            if (room == dungeons.clearRoomEL()) { //first time room 351
                 outputText("\n\nYou notice the familiar patterns in the corridors. Seems like you won't be able to find anything special down there. Or will you? The corridor slowly but inevitably leads you deeper underground, and the monsters slowly become stronger there. You're sure you'll still encounter big ones sometimes, no matter if you're looking forward to it or not. Focusing your attention, you can even hear the faint sounds of water far ahead - could it be that the fountain you just stumbled upon wasn't the only one in the labyrinth?");
                 outputText("\n\nInvestigating your surroundings, you notice a small ladder leading down. You're sure the room below is still a part of the labyrinth, but loud noices warn you that that part is much deeper. The ladder is durable though - you can always return back up... unless you descend even deeper through these intertwined corridors.");
                 outputText("\n\n<b>Labyrinth is (semi-)cleared. Endless mode unlocked!</b>");

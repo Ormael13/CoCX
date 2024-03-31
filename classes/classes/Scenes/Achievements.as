@@ -98,7 +98,8 @@ public class Achievements extends BaseContent
 			addAchievement("Are you a god?", kACHIEVEMENTS.LEVEL_ARE_YOU_A_GOD, "Get to level 100.", "Get to level 100. (Your powers would have surpassed weakest god by now.)", true);
 			addAchievement("Newb God(ess)", kACHIEVEMENTS.LEVEL_NEWB_GOD_ESS, "Get to level 120.", "Get to level 120. (You still new to all this 'god' stuff.)", true);
 			addAchievement("Lowest-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS, "Get to level 150.", "Get to level 150. (No more called newb god(ess) at least.)", true);
-			//lvl 180// (Your powers would have surpassed Marae's by now.)
+			addAchievement("Lesser God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS_2, "Get to level 180.", "Get to level 180. (Private-tier god(ess)... wait what?)", true);
+			//lvl 210// (Your powers would have surpassed Marae's by now.)
 
 			titleAchievementSection("Population"); //21 achievements
 			addAchievement("My First Companion", kACHIEVEMENTS.POPULATION_FIRST, "Have a camp population of 2.");
@@ -158,14 +159,15 @@ public class Achievements extends BaseContent
 			addAchievement("Dungeon Seeker (1st layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_1ST_LAYER, "Clear 1st floor of the River Dungeon.");
 			addAchievement("Dungeon Seeker (2nd layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_2ND_LAYER, "Clear 2nd floor of the River Dungeon.");
 			addAchievement("Dungeon Seeker (3rd layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_3RD_LAYER, "Clear 3rd floor of the River Dungeon.");
-			//addAchievement("Dungeon Seeker (4th layer)", kACHIEVEMENTS., "Clear 4th floor of the River Dungeon.");
+			addAchievement("Dungeon Seeker (4th layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_4TH_LAYER, "Clear 4th floor of the River Dungeon.");
+			//addAchievement("Dungeon Seeker (5th layer)", kACHIEVEMENTS., "Clear 5th floor of the River Dungeon.");
 			addAchievement("Honorary Minotaur", kACHIEVEMENTS.DUNGEON_HONORARY_MINOTAUR, "Reach 50th room of Ebon Labyrinth. Clear the Ebon Labyrinth.");
 			addAchievement("Got lost?", kACHIEVEMENTS.DUNGEON_GOT_LOST, "Reach 100th room of Ebon Labyrinth.");
 			addAchievement("Hug the left wall", kACHIEVEMENTS.DUNGEON_HUG_THE_LEFT_WALL, "Reach 150th room of Ebon Labyrinth.");
 			addAchievement("Pan ain't got nothing on you", kACHIEVEMENTS.DUNGEON_PAN_AINT_GOT_NOTHING_ON_YOU, "Reach 200th room of Ebon Labyrinth.");
 			addAchievement("Master of the labyrinth", kACHIEVEMENTS.DUNGEON_MASTER_OF_THE_LABYRINT, "Reach 250th room of Ebon Labyrinth.");
 			addAchievement("Why are you here?", kACHIEVEMENTS.DUNGEON_WHY_ARE_YOU_HERE, "Reach 300th room of Ebon Labyrinth.");
-			//addAchievement("", kACHIEVEMENTS., "Reach 350th room of Ebon Labyrinth.");
+			addAchievement("We need to go deeper!", kACHIEVEMENTS.DUNGEON_WE_NEED_TO_GO_DEEPER, "Reach 350th room of Ebon Labyrinth.");
 			//addAchievement("", kACHIEVEMENTS., "Reach 400th room of Ebon Labyrinth.");
 			//addAchievement("", kACHIEVEMENTS., "Reach 450th room of Ebon Labyrinth.");
 			//addAchievement("", kACHIEVEMENTS., "Reach 500th room of Ebon Labyrinth.");
@@ -202,6 +204,7 @@ public class Achievements extends BaseContent
 			addAchievement("Throne of Strength", kACHIEVEMENTS.FASHION_THRONE_OF_STRENGTH, "Equip all strength boosting accessories.");
 			addAchievement("Throne of Toughness", kACHIEVEMENTS.FASHION_THRONE_OF_TOUGHNESS, "Equip all toughness boosting accessories.");
 			addAchievement("Throne of Wisdom", kACHIEVEMENTS.FASHION_THRONE_OF_WISDOM, "Equip all wisdom boosting accessories.");
+			addAchievement("Hammer Time!!!", kACHIEVEMENTS.FASHION_HAMMER_TIME, "Equip any musical instrument.", "", true);
 			addAchievement("Suit Up!", kACHIEVEMENTS.FASHION_SUIT_UP, "Equip any vehicle.");
 			addAchievement("Rollin'", kACHIEVEMENTS.FASHION_ROLLIN_ROLLIN, "Equip Goblin Mech Prime.", "", true);
 			addAchievement("Asura's Wrath", kACHIEVEMENTS.FASHION_ASURAS_WRATH, "Equip Giant Slayer Mech.", "", true);
@@ -227,6 +230,8 @@ public class Achievements extends BaseContent
 			//learn all grey spells
 			//learn all white/black/grey spells
 			//learn all blood spells
+			//learn all necromancer spells
+			//learn all green spells
 			//learn all warlock/archpriest/green spells (3 diff achievs)
 			addAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER, "Cast your first wrath-empowered spell.", "", true);
 			addAchievement("Cum Cannon", kACHIEVEMENTS.COMBAT_CUM_CANNON, "Cum in the middle of battle.");
@@ -264,14 +269,14 @@ public class Achievements extends BaseContent
 			addAchievement("Champion Needs Food Badly (2)", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD_2, "Instantly refill your hunger from 0 to 250 in one go.");
 			addAchievement("Champion Needs Food Badly (3)", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD_3, "Instantly refill your hunger from 0 to 500 in one go.");
 			addAchievement("Champion Needs Food Badly (4)", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD_4, "Instantly refill your hunger from 0 to 1000 in one go.");
-			//addAchievement("Champion Needs Food Badly (5)", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD, "Instantly refill your hunger from 0 to 2500 in one go.");
-			//addAchievement("Champion Needs Food Badly (6)", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD, "Instantly refill your hunger from 0 to 5000 in one go.");
+			addAchievement("Champion Needs Food Badly (5)", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD_5, "Instantly refill your hunger from 0 to 2500 in one go.", "", true);
+			//addAchievement("Champion Needs Food Badly (6)", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD, "Instantly refill your hunger from 0 to 5000 in one go.");obecnie max to 3378
 			//addAchievement("Gourmand", kACHIEVEMENTS.REALISTIC_GOURMAND, "Refill hunger from 5 different sources.");
 			addAchievement("Glutton", kACHIEVEMENTS.REALISTIC_GLUTTON, "Eat while hunger is above 90.");
 			addAchievement("Epic Glutton", kACHIEVEMENTS.REALISTIC_EPIC_GLUTTON, "Eat while hunger is above 240.");
 			addAchievement("Legendary Glutton", kACHIEVEMENTS.REALISTIC_LEGENDARY_GLUTTON, "Eat while hunger is above 490.");
 			addAchievement("Mythical Glutton", kACHIEVEMENTS.REALISTIC_MYTHICAL_GLUTTON, "Eat while hunger is above 990.");
-			//addAchievement(" Glutton", kACHIEVEMENTS., "Eat while hunger is above 2490.", "", true);
+			//addAchievement(" Glutton", kACHIEVEMENTS., "Eat while hunger is above 2490.", "", true);obecnie max to 3378
 			//addAchievement(" Glutton", kACHIEVEMENTS., "Eat while hunger is above 4990.", "", true);
 			addAchievement("Fasting", kACHIEVEMENTS.REALISTIC_FASTING, "Keep hunger below 25 for a week but don't let it reach 0.");
 			addAchievement("Lent", kACHIEVEMENTS.REALISTIC_LENT, "Keep hunger below 25 for fourty days but don't let it reach 0.", "Keep hunger below 25 for fourty days but don't let it reach 0. Now you're ready for Easter.", true);
@@ -279,8 +284,8 @@ public class Achievements extends BaseContent
 			addAchievement("You not gonna eat those ribs?", kACHIEVEMENTS.REALISTIC_YOU_NOT_GONNA_EAT_THOSE_RIBS, "Increase your maximum hunger above 250.");
 			addAchievement("Dinner for Four", kACHIEVEMENTS.REALISTIC_DINNER_FOR_FOUR, "Increase your maximum hunger above 500.");
 			addAchievement("Dinner for Obelix", kACHIEVEMENTS.REALISTIC_DINNER_FOR_OBELIX, "Increase your maximum hunger above 1000.");
-			//HIDDEN ACHIEV - HUNGER OVER 2500 (feast for gluttons)
-			//HIDDEN ACHIEV - HUNGER OVER 5000 (tang wuxlin eating buddy)
+			addAchievement("Feast for Gluttons", kACHIEVEMENTS.REALISTIC_FEAST_FOR_GLUTTONS, "Increase your maximum hunger above 2500.", "", true);
+			//HIDDEN ACHIEV - HUNGER OVER 5000 (tang wuxlin eating buddy)obecnie max to 3378
 			//keep hunger above 0 with  5 internal mutation score
 			//keep hunger above 0 with 10 internal mutation score
 			//keep hunger above 0 with 20 internal mutation score
@@ -351,6 +356,9 @@ public class Achievements extends BaseContent
 			addAchievement("Killing the bull by the horns", kACHIEVEMENTS.GENERAL_KILLING_THE_BULL_BY_THE_HORNS, "Kill 10 minotaurs during your time in Mareth.");
 			addAchievement("Killing the bull by the horns 2: Kill Harder", kACHIEVEMENTS.GENERAL_KILLING_THE_BULL_BY_THE_HORNS_2_KILL_HARDER, "Kill 50 minotaurs during your time in Mareth.");
 			addAchievement("Killing the bull by the horns 3: I'm back", kACHIEVEMENTS.GENERAL_KILLING_THE_BULL_BY_THE_HORNS_3_IM_BACK, "Kill 250 minotaurs during your time in Mareth.");
+			addAchievement("Vigilante", kACHIEVEMENTS.GENERAL_VIGILANTE, "Kill 10 thiefs during your time in Ignam.");
+			addAchievement("Vigilante 2: Kill Harder", kACHIEVEMENTS.GENERAL_VIGILANTE_2_KILL_HARDER, "Kill 50 thiefs during your time in Ignam.");
+			addAchievement("Vigilante 3: I'm back", kACHIEVEMENTS.GENERAL_VIGILANTE_3_IM_BACK, "Kill 250 thiefs during your time in Ignam.");
 			addAchievement("Body Count: Monty Python and the Holy Grail", kACHIEVEMENTS.GENERAL_BODY_COUNT_MPATHG, "Kill 47 enemies.");
 			addAchievement("Body Count: Deadpool", kACHIEVEMENTS.GENERAL_BODY_COUNT_DEADPOOL, "Kill 80 enemies.");
 			addAchievement("Body Count: Robocop", kACHIEVEMENTS.GENERAL_BODY_COUNT_ROBOCOP, "Kill 144 enemies.");
@@ -360,7 +368,7 @@ public class Achievements extends BaseContent
 			addAchievement("Body Count: The Lord of the Rings - Two Towers", kACHIEVEMENTS.GENERAL_BODY_COUNT_LOTR_TT, "Kill 468 enemies.");
 			addAchievement("Body Count: 300", kACHIEVEMENTS.GENERAL_BODY_COUNT_300, "Kill 600 enemies.");
 			addAchievement("Body Count: The Lord of the Rings - Return of the King", kACHIEVEMENTS.GENERAL_BODY_COUNT_LOTR_ROTK, "Kill 836 enemies.");
-			//addAchievement("Body Count: Bloodiest Champion Ever", kACHIEVEMENTS.GENERAL_BODY_COUNT_BLOODIEST_CHAMPION_EVER, "Kill 1410 enemies.", "", true);
+			addAchievement("Body Count: Bloodiest Champion Ever", kACHIEVEMENTS.GENERAL_BODY_COUNT_BLOODIEST_CHAMPION_EVER, "Kill 1410 enemies.", "", true);
 			addAchievement("Bad Ender", kACHIEVEMENTS.GENERAL_BAD_ENDER, "Cause or witness 2 Bad Ends to various NPCs.");
 			addAchievement("Bad Ender 2: Electric Boogaloo", kACHIEVEMENTS.GENERAL_BAD_ENDER_2, "Cause or witness 4 Bad Ends to various NPCs.");
 			addAchievement("Bad Ender 3: Serious Serial Slayer", kACHIEVEMENTS.GENERAL_BAD_ENDER_3, "Cause or witness 8 Bad Ends to various NPCs.");
@@ -399,7 +407,7 @@ public class Achievements extends BaseContent
 			addAchievement("All Your People are Belong to Me (2)", kACHIEVEMENTS.GENERAL_ALL_UR_PPLZ_R_BLNG_2_ME_2, "Obtain in total thirty eight followers, lovers, and slaves. (Excluding mutual exclusivity)");//Obtain every follower, lover, and slave.
 			addAchievement("Scholar (1)", kACHIEVEMENTS.GENERAL_SCHOLAR, "Fill out twenty codex entries available in the game.");
 			addAchievement("Scholar (2)", kACHIEVEMENTS.GENERAL_SCHOLAR_2, "Fill out thirty codex entries available in the game.");
-			//addAchievement("Scholar (3)", kACHIEVEMENTS.GENERAL_SCHOLAR_3, "Fill out fourty codex entries available in the game.");//Fill out all codex entries available in the game.
+			addAchievement("Scholar (3)", kACHIEVEMENTS.GENERAL_SCHOLAR_3, "Fill out fourty codex entries available in the game.");//Fill out all codex entries available in the game.
 			addAchievement("Freeloader", kACHIEVEMENTS.GENERAL_FREELOADER, "Visit the Kitsune's mansion 3 times.");
 			addAchievement("Schizophrenic", kACHIEVEMENTS.GENERAL_SCHIZO, "Go between pure and corrupt 4 times. (Threshold of 20 and 80 corruption)");
 			addAchievement("Clean Slate", kACHIEVEMENTS.GENERAL_CLEAN_SLATE, "Go from 100 corruption to zero for the first time.");

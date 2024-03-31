@@ -72,10 +72,94 @@ public class TeaseSkill extends AbstractGeneral {
 	public function calcLustDamage(monster:Monster):Number {
 		var lustDmg:Number = combat.teases.teaseBaseLustDamage();
         if (player.hasPerk(PerkLib.BroadSelection) && player.differentTypesOfCocks() > 1) lustDmg *= (1 + (0.25 * player.differentTypesOfCocks()));
+		lustDmg = combat.teases.fueledByDesireDamageBonus(lustDmg);
 		if (SceneLib.urtaQuest.isUrta()) lustDmg *= 2;
 		if (monster) lustDmg *= monster.lustVuln;
 
 		return Math.round(lustDmg);
+	}
+
+	override public function revenge(display:Boolean = true):void{
+		outputText("\n\nAs you narrowly avoid the attack you use this lull in the battle to strike back with a lecherous trick!\n\n");
+		if (monster.lustVuln == 0) {
+			if (display) outputText("You do your best to tease [themonster] with your body but it has no effect!  Your foe clearly does not experience lust the same way as you.\n\n");
+			return;
+		}
+		else if (monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind)) {
+			clearOutput();
+			if (display) outputText("You do your best to tease [themonster] with your body.  It doesn't work - you blinded [monster him], remember?\n\n");
+			return;
+		}
+		else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 1) {
+			clearOutput();
+			if (display) outputText("You do your best to tease [themonster] with your body.  Your artless twirls have no effect, as <b>your ability to tease has been sealed.</b>\n\n");
+			return;
+		}
+
+		var baseChance:Number = calcBaseHitChance();
+
+		var teaseChoiceArray:Array = combat.teases.genTeaseChoiceArray();
+
+		var selectedTease:int = teaseChoiceArray[rand(teaseChoiceArray.length)];
+		//Override selected tease conditions
+		if (monster.short.indexOf("minotaur") != -1) {
+			//Cowgirl Tease
+			if (player.hasVagina() && player.lactationQ() >= 500 && player.biggestTitSize() >= 6 && player.racialScore(Races.COW) >= 3 && player.tailType == Tail.COW)
+				selectedTease = 43;
+		}
+		//Alraune and Liliraune Tease
+		if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) {
+			selectedTease = 46;
+		}
+
+		var teaseOpt:TeaseOptions = combat.teases.applySelectedTease(selectedTease, display);
+
+		if (rand(100) <= baseChance + rand(teaseOpt.bonusChance)) {
+			var lustDmg:Number = calcLustDamage(monster);
+			var damageMod:Number = teaseOpt.damage + rand(teaseOpt.bonusDamage)
+			lustDmg *= 1 + (1 * damageMod/20);
+
+			//Determine if critical tease!
+			var crit:Boolean = false;
+			var critChance:int = 5;
+			critChance += combat.teases.combatTeaseCritical();
+			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+			if (rand(100) < critChance) {
+				crit = true;
+				lustDmg *= 1.75;
+				if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.05;
+			}
+
+			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 20 && !monster.hasPerk(PerkLib.Resolute)) {
+				if (display) outputText("\n[themonster] is so mesmerised by your show that it stands there gawking.");
+				monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+			}
+
+			//Handle any possible enemy interruptions
+			if (monster.handleTease(lustDmg, true, display)) {
+				monster.teased(lustDmg, false, display);
+				if (crit && display) outputText(" <b>Critical!</b>");
+				combat.teases.fueledByDesireHeal(display);
+			}
+
+			if (flags[kFLAGS.PC_FETISH] >= 1 && !SceneLib.urtaQuest.isUrta()) {
+				if (display) {
+					if (player.lust < (player.maxLust() * 0.75)) outputText("\nFlaunting your body in such a way gets you a little hot and bothered.");
+					else outputText("\nIf you keep exposing yourself you're going to get too horny to fight back.  This exhibitionism fetish makes it hard to resist just stripping naked and giving up.");
+				}
+				player.takeLustDamage(7 + rand(6), true);
+			}
+			// Similar to fetish check, only add XP if the player IS the player...
+			if (!SceneLib.urtaQuest.isUrta()) player.SexXP(1 + combat.teases.bonusExpAfterSuccesfullTease());
+
+		} else {
+			if (!SceneLib.urtaQuest.isUrta()) player.SexXP(1);
+			//Handle any possible enemy interruptions
+			if (monster.handleTease(0, false, display) && display) {
+				outputText("\n[Themonster] seems unimpressed.");
+			}
+		}
+		if (display) outputText("\n\n");
 	}
 
     override public function doEffect(display:Boolean = true):void {
@@ -138,6 +222,7 @@ public class TeaseSkill extends AbstractGeneral {
 			if (monster.handleTease(lustDmg, true, display)) {
 				monster.teased(lustDmg, false, display);
 				if (crit && display) outputText(" <b>Critical!</b>");
+				combat.teases.fueledByDesireHeal(display);
 			}
 
             if (flags[kFLAGS.PC_FETISH] >= 1 && !SceneLib.urtaQuest.isUrta()) {
@@ -158,13 +243,6 @@ public class TeaseSkill extends AbstractGeneral {
 			}
         }
 		if (display) outputText("\n\n");
-
-        combat.wrathregeneration1();
-		combat.fatigueRecovery1();
-		combat.manaregeneration1();
-		combat.soulforceregeneration1();
-    }
-
-    
+    }    
 }
 }

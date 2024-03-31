@@ -502,6 +502,18 @@ public class Tail extends SaveableBodyPart {
 		//tailSlam: true,
 		isLong: true
 	});
+	public static const ARIGEAN_PRINCESS: int = 60;
+	EnumValue.add(Types, ARIGEAN_PRINCESS, "ARIGEAN_PRINCESS", {
+		name:"a. princess",
+		appearanceDesc: "Your large, glorious tail-like mouth is attached to you at the end of your tailbone, you can’t help but giggle at the thought of a foe being crushed by the large teeth found in your lipless extra mouth, your able to easily and comfortably rest upon its strong natural armor-like hide. You silently exhale a blue haze through its teeth every few seconds.",
+		//tailSlam: true,
+		isLong: true
+	});
+	public static const MOTH_ABDOMEN: int = 61;
+	EnumValue.add(Types, MOTH_ABDOMEN, "MOTH_ABDOMEN", {
+		name:"moth abdomen",
+		appearanceDesc: "You have a moth abdomen"
+	});
 
 	override public function set type(value:int):void {
 		var old:int = type;

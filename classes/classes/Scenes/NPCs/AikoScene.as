@@ -7,6 +7,7 @@ package classes.Scenes.NPCs
 import classes.*;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.ItemConstants;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
@@ -1561,7 +1562,7 @@ private function aikoSexDoggy():void {
 	//possible play with aiko tails on pc pussy
 	+"<i>\"Go, go go! Ah, yes!\"</i>\n\n"
 	+"You begin to worry if her yelps are going to attract a forest predator, but you push the thought away and resolve to focus on the task at hand.\n\n"
-	+(y != 0 && player.cocks.length >1 ?"While you passionately fuck her pussy, your [cock "+(y+1)+"] slides between her buttocks, significantly lubed up by the seemingly never-ending gush of fluids. Whenever you take a particularly long draw, it occasionally presses up against her pursed anus for a moment before moving along. Aiko looks back at you with a deep blush on her face and says, <i>\"NN… ah! You can… Ooh! … If…. youuuUAuuh… want… F-fuck… my… a-ass, I m-meeeeeaAAhhn….\"</i>"+"With her permission, you draw back and press up against her tight pucker, leaning forward to pierce her ass with your [cock "+(y+1)+"]! Aiko lets out a deep moan, wincing a little at first, but her warm innards are quite receptive to your shaft and her pain turns into pleasure within moments. Her anus begins to squeeze and suck you further in with every push, and the dual sensations of her holes drives you mad with pleasure.\n\n":"")
+	+(y != -1 && player.cocks.length >1 ?"While you passionately fuck her pussy, your [cock "+(y+1)+"] slides between her buttocks, significantly lubed up by the seemingly never-ending gush of fluids. Whenever you take a particularly long draw, it occasionally presses up against her pursed anus for a moment before moving along. Aiko looks back at you with a deep blush on her face and says, <i>\"NN… ah! You can… Ooh! … If…. youuuUAuuh… want… F-fuck… my… a-ass, I m-meeeeeaAAhhn….\"</i>"+"With her permission, you draw back and press up against her tight pucker, leaning forward to pierce her ass with your [cock "+(y+1)+"]! Aiko lets out a deep moan, wincing a little at first, but her warm innards are quite receptive to your shaft and her pain turns into pleasure within moments. Her anus begins to squeeze and suck you further in with every push, and the dual sensations of her holes drives you mad with pleasure.\n\n":"")
 	+"Impaled on your shaft[if ("+(y+1)+" != 0)s], Aiko starts to buck back into you with redoubled passion, pressing her cheek into the grass as she continues to flick and squeeze her clitoris.\n\n"
 	+(player.hasKnot(x) && player.hasKnot(y) ?"You slam home your knots into her pussy and tight ass, extracting a high-pitched, excited screech from her throat at the overly stuffed sensation she is now being subjected to. Your knots swell and locks you thoroughly in place. ":(player.hasKnot(x)?"You slam home your knot into her pussy and she moans at the now very stuffed feeling in her pussy as your knot swells and locks you in place. ":(player.hasKnot(y) ?"You slam home your knot into her tight ass and she screams at the now very stuffed feeling in her ass as your knot swells and locks you in place.\n\n":"")))
 	+"She cums HARD, and the effect is immediate and intense—her pussy [if ("+(y+1)+" != 0)and asshole] squeeze[if ("+(y+1)+" == 0)s] down on your cock[if ("+(y+1)+" != 0)s], and the heat inside her becomes almost unbearably pleasurable. You can’t hold back any longer, and have no reason to, squeezing her hips and thrusting with one final moan as you release your load inside her.\n\n"
@@ -1956,7 +1957,7 @@ private function killYamata():void {
 				break;
 		case "smash": outputText("crush the defeated opponent's ribcage");
 				break;
-		default: if (player.weapon.name.indexOf("staff") >= 0)
+		default: if (player.weapon.type == ItemConstants.WT_STAFF)
 				{
 					outputText("You raise your [weapon], letting out an immense blast of magic, engulfing Yamata and searing her flesh and crushing her windpipe. Aiko yelps in surprise and gives you a shocked look");
 				}

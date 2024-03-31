@@ -58,6 +58,7 @@ public class WerewolfRace extends Race {
 				.corruption(AT_LEAST(80), +1)
 				.hasAnyPerk([PerkLib.Lycanthropy, PerkLib.LycanthropyDormant], +2, -11);
 		
+		addBloodline(PerkLib.WerewolfsDescendant,PerkLib.BloodlineWerewolf);
 		addMutation(IMutationsLib.FerasBirthrightIM);
 		addMutation(IMutationsLib.AlphaHowlIM);
 		

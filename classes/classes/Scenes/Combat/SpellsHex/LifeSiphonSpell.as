@@ -20,7 +20,7 @@ public class LifeSiphonSpell extends AbstractHexSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "" + calcDamage(target, false, false) + " HP leech for "+
+		return "" + numberFormat(calcDamage(target, false, false)) + " HP leech for "+
 				numberOfThings(calcDuration(),"round") +
 				"; " + calcBackfirePercent() + "% backfire"
 	}

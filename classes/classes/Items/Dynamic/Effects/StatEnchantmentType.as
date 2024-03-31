@@ -39,7 +39,7 @@ public class StatEnchantmentType extends SimpleEnchantmentType {
 		} else {
 			descPattern = displayName + " {power*" + statPerPower + ";+d}%";
 		}
-		super(id, name, curse, prefix, suffix, shortSuffix, descPattern,
+		super(id, name, curse, prefix, suffix, shortSuffix, descPattern, true,
 				rarity, minLevel,
 				minPower, maxPower, valueAddBase, valueAddPerPower, valueMulBase, valueMulPerPower);
 	}
@@ -47,10 +47,6 @@ public class StatEnchantmentType extends SimpleEnchantmentType {
 	override public function onAdd(enchantment:Enchantment, item:Equipable):void {
 		super.onAdd(enchantment, item);
 		item.withBuff(statName, statPerPower*enchantment.power);
-	}
-	
-	override public function hideDescription(enchantment:Enchantment):Boolean {
-		return true; // buffs are printed in Equipable.effectDescription()
 	}
 }
 }

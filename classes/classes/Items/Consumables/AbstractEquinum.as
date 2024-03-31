@@ -20,7 +20,6 @@ import classes.GeneticMemories.BallsMem;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Consumable;
-import classes.Items.ItemTags;
 import classes.Items.Mutations;
 import classes.PerkLib;
 import classes.Races;
@@ -36,7 +35,7 @@ public class AbstractEquinum extends Consumable {
 	public function AbstractEquinum(type:Number, id:String, shortName:String, longName:String, value:Number, description:String) {
 		super(id, shortName, longName, value, description);
 		this.type = type;
-		withTag(ItemTags.U_TF);
+		withTag(U_TF);
 		switch (type) {
 			case 0: // equinum
 				refineableInto(
@@ -471,10 +470,17 @@ public class AbstractEquinum extends Consumable {
 			CoC.instance.transformations.VaginaHorse().applyEffect();
 		}
 
-		if (player.lowerBody != LowerBody.HOOFED && player.lowerBody != LowerBody.GARGOYLE) {
+		if (type == 0 && player.lowerBody != LowerBody.HOOFED && player.lowerBody != LowerBody.GARGOYLE) {
 			if (changes < changeLimit && rand(3) == 0) {
 				outputText("\n\n");
 				CoC.instance.transformations.LowerBodyHoofed(2).applyEffect();
+				changes++;
+			}
+		}
+		if ((type == 1 || type == 2) && player.lowerBody != LowerBody.CLOVEN_HOOFED && player.lowerBody != LowerBody.GARGOYLE) {
+			if (changes < changeLimit && rand(3) == 0) {
+				outputText("\n\n");
+				CoC.instance.transformations.LowerBodyClovenHoofed(2).applyEffect();
 				changes++;
 			}
 		}

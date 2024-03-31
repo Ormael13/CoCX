@@ -46,12 +46,11 @@ public class DogRace extends Race {
 				.hasCockOfType(CockTypesEnum.DOG, +1)
 				.breastRowCount(2, +1)
 				.breastRowCount(3, +2)
-		addScoresAfter(1)
 				.skinCoatType(Skin.FUR, +1)
 				.customRequirement("","not Cerberus",
 						function (body:BodyData):Boolean {
 							return !(CerberusRace.isCerberus(body));
-						}, 0, -1000);;
+						}, 0, -1000);
 		
 		buildTier(4, "dog-morph")
 				.namesMaleFemaleMorphTaur("dog-boy", "dog-girl", "dog-morph", "dog-taur")

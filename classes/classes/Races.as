@@ -141,6 +141,7 @@ public class Races {
 	public static const ABYSSAL_SHARK:AbyssalSharkRace     = new AbyssalSharkRace(116);
 	public static const ARIGEAN:ArigeanRace                = new ArigeanRace(117);
 	public static const DRACULA:DraculaRace                = new DraculaRace(118);
+	public static const MOTH:MothRace                      = new MothRace(119);
 
 	// Racial groups
 	public static const CatlikeRaces:/*Race*/Array   = [
@@ -150,13 +151,16 @@ public class Races {
 			NAGA, GORGON, VOUIVRE, COUATL, HYDRA, APOPHIS
 	];
 	public static const InsectRaces:/*Race*/Array = [
-			BEE, MANTIS, SCORPION, SPIDER, ANT, OOMUKADE, CANCER, ATLACH_NACHA, SANDWORM, WERESPIDER
+			BEE, MANTIS, SCORPION, SPIDER, ANT, OOMUKADE, CANCER, ATLACH_NACHA, SANDWORM, WERESPIDER, MOTH
 	];
 	public static const GoblinoidRaces:/*Race*/Array = [
 			GOBLIN, GREMLIN
 	];
 	public static const HarpylikeRaces:/*Race*/Array = [
 			HARPY, THUNDERBIRD, PHOENIX
+	];
+	public static const KitsunelikeRaces:/*Race*/Array = [
+			KITSUNE, KITSHOO, RAISUNE
 	];
 	public static const RacesForRandomEnchantments:/*Race*/Array = [
 			// populated in load() as AllVisibleRaces - RacesExcludedFromRandomEnchantments

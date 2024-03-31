@@ -251,7 +251,7 @@ public class CampUpgrades extends BaseContent {
     //Materials Storages Upgrade
     public function materialgatheringstorageupgrade():void {
         clearOutput();
-        if (player.fatigue <= player.maxFatigue() - usedFatigue(150, true)) {
+        if (player.fatigue <= player.maxOverFatigue() - usedFatigue(150, true)) {
             if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 1) neednailsbox();
             else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 2) startWoodStorage();
             else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 3) startStoneStorage();
@@ -308,14 +308,14 @@ public class CampUpgrades extends BaseContent {
         flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] += 1;
         outputText("\n\nYou take the wood, saw it and then cut into planks. Like before you put four long and thick wood posts as base, then you connect them with nails. Next you cut few posts into short fragments and impale at the edges. Inside of prepared frame you put few large wood logs that you fix in place with a few short wood desks and stones. Rest of the stones fill the space inside due to need in future support weight of stones stored above. After that prelast part of building is to put all most of remaining wood planks on prepared base and nail them in place. Final thing to do is use remain wood and nails to make protective barrier around the whole storage.");
         buildWithHelpers(150, true);
-        outputText("\n\nNow you can store safetly larger amount of stones!");
+        outputText("\n\nNow you can safely store a larger amount of stones!");
         flushOutputTextToGUI();
     }
 
     //Warehouse + Granary Upgrade
     public function warehousegranary():void {
         clearOutput();
-        if (player.fatigue <= player.maxFatigue() - usedFatigue(250, true)) {
+        if (player.fatigue <= player.maxOverFatigue() - usedFatigue(250, true)) {
             if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 0) start1stWarehouse1();
             else if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 1) startWarehouse2();
             else if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2) startGranary1();
@@ -444,8 +444,8 @@ public class CampUpgrades extends BaseContent {
     public function kitsuneshrine():void {
         clearOutput();
         if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] < 1) findSpotForShrine();
-        else if (player.fatigue <= player.maxFatigue() - usedFatigue(300) && flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 1) buildStructure();
-        else if (player.fatigue <= player.maxFatigue() - usedFatigue(200) && flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 2) buildAltar();
+        else if (player.fatigue <= player.maxOverFatigue() - usedFatigue(300) && flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 1) buildStructure();
+        else if (player.fatigue <= player.maxOverFatigue() - usedFatigue(200) && flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 2) buildAltar();
         else {
             outputText("You are too exhausted to work on constructing shrine!");
             doNext(playerMenu);
@@ -511,7 +511,7 @@ public class CampUpgrades extends BaseContent {
     //Hot Spring Upgrade
     public function hotspring():void {
         clearOutput();
-        if (player.fatigue <= player.maxFatigue() - usedFatigue(100, true)) {
+        if (player.fatigue <= player.maxOverFatigue() - usedFatigue(100, true)) {
             if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 2) digApool();
             else if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 3) addAWoodenWalls();
         } else {
@@ -564,10 +564,10 @@ public class CampUpgrades extends BaseContent {
     //Sparring Ring Upgrade
     public function sparringRing():void {
         clearOutput();
-        if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 1 && player.fatigue <= player.maxFatigue() - usedFatigue(50, true)) buildSmallRing();
-        else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 2 && player.fatigue <= player.maxFatigue() - usedFatigue(150, true)) buildLargeRing();
-        else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 3 && player.fatigue <= player.maxFatigue() - usedFatigue(450, true)) buildMassiveRing();
-        else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 4 && player.fatigue <= player.maxFatigue() - usedFatigue(1350, true)) buildRingWoodFloor();
+        if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 1 && player.fatigue <= player.maxOverFatigue() - usedFatigue(50, true)) buildSmallRing();
+        else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 2 && player.fatigue <= player.maxOverFatigue() - usedFatigue(150, true)) buildLargeRing();
+        else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 3 && player.fatigue <= player.maxOverFatigue() - usedFatigue(450, true)) buildMassiveRing();
+        else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 4 && player.fatigue <= player.maxOverFatigue() - usedFatigue(1350, true)) buildRingWoodFloor();
         else {
             outputText("You are too exhausted to work on sparring ring!");
             doNext(playerMenu);
@@ -661,7 +661,7 @@ public class CampUpgrades extends BaseContent {
     //Arcane Circle Upgrade
     public function arcaneCircle():void {
         clearOutput();
-        if (player.fatigue <= player.maxFatigue() - 50) {
+        if (player.fatigue <= player.maxOverFatigue() - 50) {
             if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] < 1)
                 buildArcaneCircle(1);
             else if (player.statusEffectv1(StatusEffects.ArcaneCircle) > (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] - 1))
@@ -710,7 +710,7 @@ public class CampUpgrades extends BaseContent {
     //Arcane Circle Elemental Energy Conduits Upgrade
     public function arcaneCircleUpgrade():void {
         clearOutput();
-        if (player.fatigue <= player.maxFatigue() - 50) {
+        if (player.fatigue <= player.maxOverFatigue() - 50) {
             if (!player.hasStatusEffect(StatusEffects.ElementalEnergyConduits) || player.statusEffectv3(StatusEffects.ElementalEnergyConduits) < 10) {
                 var currentTier:int = !player.hasStatusEffect(StatusEffects.ElementalEnergyConduits) ? 0
                     : player.statusEffectv3(StatusEffects.ElementalEnergyConduits) / 2;
@@ -787,7 +787,7 @@ public class CampUpgrades extends BaseContent {
     //Magic Ward Upgrade
     public function magicWard():void {
         clearOutput();
-        if (player.fatigue <= player.maxFatigue() - 200 && flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 1) setUpMagicWard();
+        if (player.fatigue <= player.maxOverFatigue() - 200 && flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 1) setUpMagicWard();
         else {
             outputText("You are too exhausted to work on magic ward!");
             doNext(playerMenu);
@@ -825,10 +825,10 @@ public class CampUpgrades extends BaseContent {
     //Dam Upgrade
     public function dam():void {
         clearOutput();
-        if (flags[kFLAGS.CAMP_UPGRADES_DAM] < 1 && player.fatigue <= player.maxFatigue() - usedFatigue(200, true)) buildUpMinorWoodDam();
-        else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 1 && player.fatigue <= player.maxFatigue() - usedFatigue(400, true)) buildUpWoodDam();
-        else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 2 && player.fatigue <= player.maxFatigue() - usedFatigue(600, true)) buildUpMajorWoodDam();
-        //else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 3 && player.fatigue <= player.maxFatigue() - usedFatigue(800, true)) buildUpMinorStoneDam();
+        if (flags[kFLAGS.CAMP_UPGRADES_DAM] < 1 && player.fatigue <= player.maxOverFatigue() - usedFatigue(200, true)) buildUpMinorWoodDam();
+        else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 1 && player.fatigue <= player.maxOverFatigue() - usedFatigue(400, true)) buildUpWoodDam();
+        else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 2 && player.fatigue <= player.maxOverFatigue() - usedFatigue(600, true)) buildUpMajorWoodDam();
+        //else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 3 && player.fatigue <= player.maxOverFatigue() - usedFatigue(800, true)) buildUpMinorStoneDam();
         else {
             outputText("You are too exhausted to work on dam!");
             doNext(playerMenu);
@@ -903,7 +903,7 @@ public class CampUpgrades extends BaseContent {
     //Fishery Upgrade
     public function fishery():void {
         clearOutput();
-        if (player.fatigue <= player.maxFatigue() - usedFatigue(200, true)) {
+        if (player.fatigue <= player.maxOverFatigue() - usedFatigue(200, true)) {
             if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] < 1) {
                 buildUpFishery1();
                 return;

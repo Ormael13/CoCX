@@ -68,10 +68,10 @@ public class CoC extends MovieClip
         return _instance;
     }
     //Game Version
-    public var debugGameVer:String = "v0.8v2";
+    public var debugGameVer:String = "v0.8w-z";
 
     //Mod save version.
-    public var modSaveVersion:Number = 36.36;
+    public var modSaveVersion:Number = 36.45;
     public const levelCap:Number = 205;
 
     //Lock cheats menus from public
@@ -285,7 +285,7 @@ public class CoC extends MovieClip
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_" + debugGameVer;
-			ver += " (<b>Few new merged perks, more Arigean content, Increasing lvl cap, Madam and Tempress minor changes and bugfixes</b>)";
+			ver += " (<b>Sword Immortal (hidden job), Arigean TF perm stage + retainer npc for camp, Flying swords system minor QoL changes, Satyr race minor rework, Golems no longer lust-immune, Spells learning QoL changes, IM's additions/changes, tons of QoL changes from Demojay and many smaller changes, bugfixing and etc.</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

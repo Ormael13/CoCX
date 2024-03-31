@@ -13,7 +13,7 @@ public class PunishingKickSkill extends AbstractSoulSkill {
             "A vicious kick that can daze an opponent, reducing its damage for a while.",
             TARGET_ENEMY,
             TIMING_INSTANT,
-            [TAG_DAMAGING, TAG_DEBUFF, TAG_PHYSICAL],
+            [TAG_DAMAGING, TAG_DEBUFF, TAG_PHYSICAL, TAG_TIER2],
             StatusEffects.KnowsPunishingKick
         )
 		baseSFCost = 30;
@@ -40,7 +40,7 @@ public class PunishingKickSkill extends AbstractSoulSkill {
 	}
 
 	override public function calcCooldown():int {
-        return 10;
+        return soulskillTier2Cooldown(10);
     }
 
 	override public function calcDuration():int {
@@ -53,15 +53,11 @@ public class PunishingKickSkill extends AbstractSoulSkill {
 		damage += player.wis;
 		damage += scalingBonusWisdom();
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
-			if (player.isRaceCached(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
+			if (player.isRaceCached(Races.MOUSE, 2) && player.countRings(jewelries.INMORNG)) damage *= 2.2;
 			else damage *= 2;
 			damage = combat.fireTypeDamageBonusLarge(damage);
 		}
-		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
-			damage = combat.fireTypeDamageBonus(damage);
-			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
-			damage *= 1.1;
-		}
+		
 		//other bonuses
 		if (monster) {
 			if (player.hasPerk(PerkLib.PerfectStrike) && monster.monsterIsStunned()) damage *= 1.5;
@@ -74,6 +70,13 @@ public class PunishingKickSkill extends AbstractSoulSkill {
     override public function doEffect(display:Boolean = true):void {        
 
 		var damage:Number = calcDamage(monster);
+
+		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
+			damage = combat.fireTypeDamageBonus(damage);
+			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
+			damage *= 1.1;
+		}
+
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		critChance += combat.combatPhysicalCritical();

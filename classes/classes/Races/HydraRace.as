@@ -72,6 +72,7 @@ public class HydraRace extends Race {
 									|| ApophisRace.isApophisLike(body));
 						}, 0, -1000);
 		
+		addBloodline(PerkLib.HydrasDescendant, PerkLib.BloodlineHydra);
 		addMutation(IMutationsLib.VenomGlandsIM);
 		
 		buildTier(14, "hydra")

@@ -803,6 +803,48 @@ public class WingsTransformations extends MutationsHelper {
 				return player.wings.type === Wings.YGGDRASIL_LARGE;
 			}
 	);
+	public const WingsMothSmall: Transformation = new SimpleTransformation("Small Moth Wings",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "You feel your back itching. ";
+				if ((player.wings.type != Wings.NONE)) {
+					desc += "Your wings feel…warm, lethargic, almost. They begin to sag, ignoring your commands. They wither, turning to a dark, putrid brown before falling off your body. ";
+				}
+				desc += "your back hurts as you suddenly feel something burst out your shoulder blades, reaching back you feel 2 small silky things like wings.\n\n <b>You now have small Moth Wings.</b>";
+
+				player.wings.type = Wings.MOTH_SMALL;
+				//Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.YGGDRASIL_LARGE));
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function (): Boolean {
+				return player.wings.type === Wings.MOTH_SMALL;
+			}
+	);
+
+	public const WingsMothLarge: Transformation = new SimpleTransformation("Large Moth Wings",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "You feel your back itching. ";
+				if ((player.wings.type != Wings.NONE)) {
+					desc += "Your wings feel…warm, lethargic, almost. They begin to sag, ignoring your commands. They wither, turning to a dark, putrid brown before falling off your body. ";
+				}
+				desc += " you suddenly feel a burst of pain in your back before the pain goes away, looking over you see the large white moth wings sticking out your back, with a flex of your muscles you find out that you can flap them. <b>You now have Large Moth Wings.</b>";
+
+				player.wings.type = Wings.MOTH_LARGE;
+				//Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.YGGDRASIL_LARGE));
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function (): Boolean {
+				return player.wings.type === Wings.MOTH_LARGE;
+			}
+	);
+
 	/*
   */
 }

@@ -51,6 +51,7 @@ public class SaveUpdater extends NPCAwareContent {
 			if (dung) ++dungeonsCleared;
 		//Kill count
 		var totalKillCount:int = 0;
+		if (flags[kFLAGS.THIEFS_KILLED] > 0) totalKillCount += flags[kFLAGS.THIEFS_KILLED];
 		if (flags[kFLAGS.IMPS_KILLED] > 0) totalKillCount += flags[kFLAGS.IMPS_KILLED];
 		if (flags[kFLAGS.GOBLINS_KILLED] > 0) totalKillCount += flags[kFLAGS.GOBLINS_KILLED];
 		if (flags[kFLAGS.HELLHOUNDS_KILLED] > 0) totalKillCount += flags[kFLAGS.HELLHOUNDS_KILLED];
@@ -168,8 +169,9 @@ public class SaveUpdater extends NPCAwareContent {
 			["Are you a god?", kACHIEVEMENTS.LEVEL_ARE_YOU_A_GOD, player.level >= 100],
 			["Newb God(ess)", kACHIEVEMENTS.LEVEL_NEWB_GOD_ESS, player.level >= 120],
 			["Lowest-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS, player.level >= 150],
-			//["Low-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS, player.level >= ?180?],
+			["Lesser God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS_2, player.level >= 180],
 			//["-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS, player.level >= ?210?],
+			//["-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS, player.level >= ?240?],
 			//Population
 			["My First Companion", kACHIEVEMENTS.POPULATION_FIRST, camp.getCampPopulation() >= 2],
 			["Hamlet", kACHIEVEMENTS.POPULATION_HAMLET, camp.getCampPopulation() >= 5],
@@ -213,6 +215,9 @@ public class SaveUpdater extends NPCAwareContent {
 			["Tiger stalking the Dragon", kACHIEVEMENTS.DUNGEON_TIGER_STALKING_THE_DRAGON, SceneLib.dungeons.checkHiddenCaveHiddenStageClear()],
 			["Mirror Flower, Water Moon", kACHIEVEMENTS.DUNGEON_MIRROR_FLOWER_WATER_MOON, SceneLib.dungeons.checkRiverDungeon1stFloorClear()],
 			["Dungeon Seeker (1st layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_1ST_LAYER, SceneLib.dungeons.checkRiverDungeon1stFloorClear()],
+			["Dungeon Seeker (2nd layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_2ND_LAYER, SceneLib.dungeons.checkRiverDungeon2ndFloorClear()],
+			["Dungeon Seeker (3rd layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_3RD_LAYER, SceneLib.dungeons.checkRiverDungeon3rdFloorClear()],
+			["Dungeon Seeker (4th layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_4TH_LAYER, SceneLib.dungeons.checkRiverDungeon4thFloorClear()],
 			["Slain the Heroslayer", kACHIEVEMENTS.DUNGEON_SLAIN_THE_HEROSLAYER, SceneLib.dungeons.checkDenOfDesireClear()],
 			//bee hive clear
 			["Delver", kACHIEVEMENTS.DUNGEON_DELVER, dungeonsCleared >= 1],
@@ -220,9 +225,6 @@ public class SaveUpdater extends NPCAwareContent {
 			["Delver Expert", kACHIEVEMENTS.DUNGEON_DELVER_MASTER, dungeonsCleared >= 4],
 			["Delver Master", kACHIEVEMENTS.DUNGEON_DELVER_EXPERT, dungeonsCleared >= 8],
 			["Delver Grand Master", kACHIEVEMENTS.DUNGEON_DELVER_GRAND_MASTER, dungeonsCleared >= 16],//obecnie max 10
-
-			["Dungeon Seeker (2nd layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_2ND_LAYER, SceneLib.dungeons.checkRiverDungeon2ndFloorClear()],
-			["Dungeon Seeker (3rd layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_3RD_LAYER, SceneLib.dungeons.checkRiverDungeon3rdFloorClear()],
 
 			//Fashion
 			["Wannabe Wizard", kACHIEVEMENTS.FASHION_WANNABE_WIZARD, player.armor == armors.W_ROBES && player.weapon == weapons.W_STAFF],
@@ -248,6 +250,7 @@ public class SaveUpdater extends NPCAwareContent {
 			["Throne of Strength", kACHIEVEMENTS.FASHION_THRONE_OF_STRENGTH, player.headJewelry == headjewelries.CROWSTR && player.necklace == necklaces.NECKSTR && player.countRings(jewelries.RINGSTR) > 0],
 			["Throne of Toughness", kACHIEVEMENTS.FASHION_THRONE_OF_TOUGHNESS, player.headJewelry == headjewelries.CROWTOU && player.necklace == necklaces.NECKTOU && player.countRings(jewelries.RINGTOU) > 0],
 			["Throne of Wisdom", kACHIEVEMENTS.FASHION_THRONE_OF_WISDOM, player.headJewelry == headjewelries.CROWWIS && player.necklace == necklaces.NECKWIS && player.countRings(jewelries.RINGWIS) > 0],
+			["Hammer Time!!!", kACHIEVEMENTS.FASHION_HAMMER_TIME, player.weapon.isMusicInstrument()],
 			["Suit Up!", kACHIEVEMENTS.FASHION_SUIT_UP, player.isInGoblinMech() || player.isInNonGoblinMech()],
 			["Rollin' Rollin'", kACHIEVEMENTS.FASHION_ROLLIN_ROLLIN, player.vehicles == vehicles.GOBMPRI],
 			["Asura's Wrath", kACHIEVEMENTS.FASHION_ASURAS_WRATH, player.vehicles == vehicles.GS_MECH],
@@ -279,6 +282,7 @@ public class SaveUpdater extends NPCAwareContent {
 			["You not gonna eat those ribs?", kACHIEVEMENTS.REALISTIC_YOU_NOT_GONNA_EAT_THOSE_RIBS, player.maxHunger() > 250],
 			["Dinner for Four", kACHIEVEMENTS.REALISTIC_DINNER_FOR_FOUR, player.maxHunger() > 500],
 			["Dinner for Obelix", kACHIEVEMENTS.REALISTIC_DINNER_FOR_OBELIX, player.maxHunger() > 1000],
+			["Feast for Gluttons", kACHIEVEMENTS.REALISTIC_FEAST_FOR_GLUTTONS, player.maxHunger() > 2500],
 			//Holiday
 			["The Lovable Snowman", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_III, flags[kFLAGS.NIEVE_STAGE] == 5],
 			//General
@@ -299,6 +303,9 @@ public class SaveUpdater extends NPCAwareContent {
 			["Killing the bull by the horns", kACHIEVEMENTS.GENERAL_KILLING_THE_BULL_BY_THE_HORNS, flags[kFLAGS.MINOTAURS_KILLED] >= 10],
 			["Killing the bull by the horns 2: Kill Harder", kACHIEVEMENTS.GENERAL_KILLING_THE_BULL_BY_THE_HORNS_2_KILL_HARDER, flags[kFLAGS.MINOTAURS_KILLED] >= 50],
 			["Killing the bull by the horns 3: I'm Back", kACHIEVEMENTS.GENERAL_KILLING_THE_BULL_BY_THE_HORNS_3_IM_BACK, flags[kFLAGS.MINOTAURS_KILLED] >= 250],
+			["Vigilante", kACHIEVEMENTS.GENERAL_VIGILANTE, flags[kFLAGS.THIEFS_KILLED] >= 10],
+			["Vigilante 2: Kill Harder", kACHIEVEMENTS.GENERAL_VIGILANTE_2_KILL_HARDER, flags[kFLAGS.THIEFS_KILLED] >= 50],
+			["Vigilante 3: I'm Back", kACHIEVEMENTS.GENERAL_VIGILANTE_3_IM_BACK, flags[kFLAGS.THIEFS_KILLED] >= 250],
 
 			["Body Count: Monty Python and the Holy Grail", kACHIEVEMENTS.GENERAL_BODY_COUNT_MPATHG, totalKillCount >= 47],
 			["Body Count: Deadpool", kACHIEVEMENTS.GENERAL_BODY_COUNT_DEADPOOL, totalKillCount >= 80],
@@ -2586,10 +2593,30 @@ public class SaveUpdater extends NPCAwareContent {
 				}
 				if (JourneyToTheEast.EvelynnPerksToStatsConvertCounter > 0) JourneyToTheEast.EvelynnCoreLimitBreakerCounter += JourneyToTheEast.EvelynnPerksToStatsConvertCounter;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.36;
-			}/*
+			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.40) {
+				if (flags[kFLAGS.THE_TRENCH_ENTERED] >= 1 && player.tailType != Tail.ARIGEAN_RED && player.tailType != Tail.ARIGEAN_YELLOW) {
+					flags[kFLAGS.THE_TRENCH_ENTERED] = 0;
+					player.removePerk(PerkLib.MiracleMetal);
+					player.tailType = Tail.NONE;
+				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.40;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.42) {
+				outputText("\n\nArigeans likes their eyes like their tails...in matching colors ;)");
+				if (player.tailType == Tail.ARIGEAN_RED) player.eyes.colour = "red";
+				if (player.tailType == Tail.ARIGEAN_YELLOW) player.eyes.colour = "yellow";
+				if (player.tailType == Tail.ARIGEAN_PRINCESS) player.eyes.colour = "blue";
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.42;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.45) {
+				outputText("\n\nFlying swords tree no longer will ask for perk points.");
+				refundPerk(PerkLib.FlyingSwordPath);
+				refundPerk(PerkLib.SoaringBlades);
+				refundPerk(PerkLib.FirstAttackFlyingSword);
+				refundPerk(PerkLib.KillingIntent);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.45;
+			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.50) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.50;
 			}

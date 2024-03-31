@@ -193,7 +193,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			flags[kFLAGS.AMILY_VILLAGE_EXPLORED]++;
 			clearOutput();
 			//40% chance of ghost-girl
-			if ((flags[kFLAGS.SHOULDRA_MAIDEN_COUNTDOWN] == 0 && rackCount() >= 2 && rand(10) <= 4) && !followerShouldra() && flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != .5) {
+			if ((flags[kFLAGS.SHOULDRA_MAIDEN_COUNTDOWN] == 0 && rackCount() >= 2 && rand(10) <= 4) && !followerShouldra() && !player.hasStatusEffect(StatusEffects.ShouldraOff) && flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != .5) {
 				shouldraScene.shouldraGreeting();
 				return;
 			}
@@ -2578,7 +2578,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 					addButton(8, "Date", dateNightFirstTime)
 						.hint("Take Amily on a date to Tel'Adre?")
 						.disableIf(SceneLib.urtaQuest.urtaBusy(), "Urta is busy right now.")
-						.disableIf(flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] >= 5 || urtaLove(),
+						.disableIf((flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] < 5 && !urtaLove()),
 							"You don't know Urta close enough to introduce your mouse girlfriend to her.");
 				}
 				//if (AbandonedTownRebuilt.InTown = false) {

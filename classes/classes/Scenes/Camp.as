@@ -744,6 +744,14 @@ public class Camp extends NPCAwareContent{
 			flags[kFLAGS.D3_GOBLIN_MECH_PRIME] = 2;
 			return;
 		}
+		if (flags[kFLAGS.GRAYDA_BATHING] >= 10 && rand(3) == 0) {
+			SceneLib.graydaScene.graydaMainBathingByForce();
+			return;
+		}
+		if (flags[kFLAGS.THE_TRENCH_ENTERED] > 14 && flags[kFLAGS.THE_TRENCH_ENTERED] < 16 && rand(5) == 0 && (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3 || player.hasStatusEffect(StatusEffects.CampRathazul) || player.hasStatusEffect(StatusEffects.PureCampJojo) || followerKiha())) {//(flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) || 
+			SceneLib.graydaScene.graydaRandomnCampEvents();
+			return;
+		}
 		//Reset.
 		flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 0;
 		campQ = false;
@@ -954,20 +962,15 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) {
 			outputText("A shrine to Taoth stands next to your [camp], its presence warms your heart with the fox god’s laughter.\n\n");
 		}
-
 		//Display NPCs
 		campFollowers(true);
-
 		//MOUSEBITCH
 		if (amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1) {
 			if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0) outputText("Amily has relocated her grass bedding to the opposite side of the [camp] from the strange tree; every now and then, she gives it a suspicious glance, as if deciding whether to move even further.\n\n");
 			else outputText("A surprisingly tidy nest of soft grasses and sweet-smelling herbs has been built close to your " + (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 ? "cabin" : "bedroll") + ". A much-patched blanket draped neatly over the top is further proof that Amily sleeps here. She changes the bedding every few days, to ensure it stays as nice as possible.\n\n");
 		}
-
 		campLoversMenu(true);
-
 		campSlavesMenu(true);
-
 		//Hunger check!
 		if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 25) {
 			outputText("<b>You have to eat something; your stomach is growling " + (player.hunger < 1 ? "painfully" : "loudly") + ". </b>");
@@ -979,7 +982,6 @@ public class Camp extends NPCAwareContent{
 			}
 			outputText("\n\n");
 		}
-
 		//The uber horny
 		if (overLustCheck() == 2) {
 			exploreEvent = null;
@@ -1001,7 +1003,6 @@ public class Camp extends NPCAwareContent{
 			if (model.time.hours == 20) outputText("The sun has already set below the horizon. The sky glows orange. ");
 			outputText("It's light outside, a good time to explore and forage for supplies with which to fortify your [camp].\n");
 		}
-
 		//Unlock cabin.
 		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] <= 0 && model.time.days >= 7) {
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 1;
@@ -1025,6 +1026,16 @@ public class Camp extends NPCAwareContent{
 		//Unlock sparring ring.
 		if (sparableCampMembersCount() >= 2) {
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 1) flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] = 1;
+		}
+		//Unlock Coronation Quest
+		if (flags[kFLAGS.THE_TRENCH_ENTERED] == 11 && player.level >= 30 && rand(4) == 0) {
+			clearOutput();
+			outputText("You can’t help but furiously start rubbing your eyes as you feel a sharp pricking, as if something was in your eyes, maybe the nearby stream could help you wash whatever has gotten in your eyes out.\n\n");
+			outputText("Now over at the stream, you dip your face into the water, and after a few moments of attempting to clear out whatever has gotten stuck in your eyes with no progress, you begrudgingly give up and stare at the water’s surface as you start to go over your options. ");
+			outputText("However you see something quite strange in the reflection, mainly your eyes which seem to be shifting from their usual yellow to a blue before reverting with an irritating itch. Maybe Grayda knows what’s happening to you?\n\n");
+			flags[kFLAGS.THE_TRENCH_ENTERED] = 12;
+			doNext(playerMenu);
+			return;
 		}
 		//Wood Elf weapon fix.
 		if (!player.hasPerk(PerkLib.Rigidity) && ((flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0) || (flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0))) {
@@ -1082,7 +1093,7 @@ public class Camp extends NPCAwareContent{
 				addButtonDisabled(12, "Sleep", "Try as you may you cannot find sleep tonight. The damn moon won't let you rest as your urges to hunt and fuck are on the rise.");
 			}
 		}
-		if (CoC_Settings.debugBuild) addButton(14, "Cheats", testmenu.SoulforceCheats).hint("This should be obvious. ^^");
+		//if (CoC_Settings.debugBuild) addButton(14, "Cheats", testmenu.SoulforceCheats).hint("This should be obvious. ^^");
 
 		//Remove buttons according to conditions.
 		if (isNightTime) {
@@ -1147,7 +1158,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] > 0) counter++;
 		if (player.hasStatusEffect(StatusEffects.PureCampJojo)) counter++;
 		if (player.hasStatusEffect(StatusEffects.CampRathazul)) counter++;
-		if (followerShouldra()) counter++;
+		if (followerShouldra() && !player.hasStatusEffect(StatusEffects.ShouldraOff)) counter++;
 		if (sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0 && !player.hasStatusEffect(StatusEffects.SophieOff)) counter++;
 		if (EvangelineFollower.EvangelineFollowerStage >= 1) counter++;
 		if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) counter++;
@@ -1165,6 +1176,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) counter++;
 		if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2 && !player.hasStatusEffect(StatusEffects.KonstantinOff)) counter++;
 		if (flags[kFLAGS.SIDONIE_FOLLOWER] >= 1) counter++;
+		if (flags[kFLAGS.THE_TRENCH_ENTERED] > 14) counter++;
 		if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
 		if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 0) counter++;
 		if (flags[kFLAGS.TIFA_FOLLOWER] > 5) counter++;
@@ -1284,6 +1296,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9 || ZenjiScenes.isLover()) counter++;
 		if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) counter++;
 		if (flags[kFLAGS.MITZI_RECRUITED] >= 4) counter++;
+		if (flags[kFLAGS.THE_TRENCH_ENTERED] > 14) counter++;
 		if (player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) counter++;
 		if (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) counter++;
 		if (followerKiha()) counter++;
@@ -1314,7 +1327,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) counter++;
 		if (flags[kFLAGS.NADIA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.NadiaOff)) counter++;
 		if (flags[kFLAGS.DINAH_LVL_UP] >= 1) counter++;
-		//if (flags[kFLAGS.GALIA_LVL_UP] >= 1) counter++;
+		if (flags[kFLAGS.GALIA_LVL_UP] >= 1) counter++;
 		if (flags[kFLAGS.NEISA_FOLLOWER] >= 7) counter++;
 		if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) counter++;
 		if (helspawnFollower()) counter++;
@@ -1330,7 +1343,7 @@ public class Camp extends NPCAwareContent{
 
 	public function nightTimeActiveFollowers():Number {
 		var counter:Number = 0;
-		if (followerShouldra()) counter++;
+		if (followerShouldra() && !player.hasStatusEffect(StatusEffects.ShouldraOff)) counter++;
 		if (flags[kFLAGS.LUNA_FOLLOWER] > 10 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
 		return counter;
 	}
@@ -1943,6 +1956,11 @@ public class Camp extends NPCAwareContent{
 				outputText("Evangeline isn't in the [camp] as she went to buy some items. She should be out no longer than a few hours.\n\n");
 				//if () outputText("Evangeline is busy training now. She should be done with it in a few hours.\n\n");
 			}
+			//Grayda
+			if (flags[kFLAGS.THE_TRENCH_ENTERED] > 14) {
+				outputText("You can see Grayda patrolling the edges of the camp, keeping an eye out for any potential threats."+(flags[kFLAGS.GRAYDA_AFFECTION] >= 60?" Her attention occasionally turns to you every once in a while.":"")+"");
+				buttons.add("Grayda", SceneLib.graydaScene.graydaMainWhenCalled).hint("Visit Grayda.").disableIf(player.statusEffectv2(StatusEffects.CampLunaMishaps3) > 0, "Grayda is still curled up underneath the water at the stream.");
+			}
 			//Kindra
 			if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) {
 				outputText("You can see a set of finely crafted traps around your [camp]. Kindra must be hunting nearby.\n\n");
@@ -2121,7 +2139,7 @@ public class Camp extends NPCAwareContent{
 			if (flags[kFLAGS.TIFA_FOLLOWER] > 5) buttons.add("Tifa", SceneLib.tifaFollower.tifaMainMenu).hint("Check up on Tifa.");
 		}
 		//Shouldra
-		if (followerShouldra()) {
+		if (followerShouldra() && !player.hasStatusEffect(StatusEffects.ShouldraOff)) {
 			buttons.add("Shouldra", shouldraFollower.shouldraFollowerScreen).hint("Talk to Shouldra. She is currently residing in your body.");
 		}
 		//Luna
@@ -2193,6 +2211,8 @@ public class Camp extends NPCAwareContent{
 		if (player.hasKeyItem("Gryphon Statuette") >= 0) addButton(9, "Gryphon", useGryphonStatuette);
 		if (player.hasKeyItem("Peacock Statuette") >= 0) addButton(9, "Peacock", usePeacockStatuette);
 		if (player.hasKeyItem("Gryphon Statuette") == 0 && player.hasKeyItem("Peacock Statuette") == 0) addButtonDisabled(9, "???", "Perhaps if you had a magical statuette...");
+		addButtonIfTrue(10, "Heal", useHealAtCamp, "Req. knowing Heal spell and have 30+ mana.", player.hasStatusEffect(StatusEffects.KnowsHeal) && player.mana >= 30);
+		addButtonIfTrue(11, "Cure", useCureAtCamp, "Req. knowing Cure spell and have 500+ mana.", player.hasStatusEffect(StatusEffects.KnowsCure) && player.mana >= 500);
 		addButton(14, "Back", campActions);
 	}
 
@@ -2287,38 +2307,7 @@ public class Camp extends NPCAwareContent{
 		clearOutput();
 		outputText("You can combine two single weapons into one dual weapon or separate dual weapons into two single weapons. <b>(WARNING: ENCHANTED ITEMS WOULD IRREVERSABLE LOOSE ENCHANTMENTS DURING COMBINING!!!)</b>");
 		menu();
-		var weaponList: Array = [
-			[weapons.KAMA, weapons.D_KAMA],
-			[weapons.DAGGER, weapons.DDAGGER],
-			[weapons.ANGSTD1, weapons.ANGSTD],
-			[weapons.DAGWHIP, weapons.DDAGWHIP],
-			[weapons.BFSWORD, weapons.DBFSWO],
-			[weapons.BFTHSWORD, weapons.DBFTHSWO],
-			[weapons.BFWHIP, weapons.DBFWHIP],
-			[weapons.NODACHI, weapons.DNODACHI],
-			[weapons.WHIP, weapons.PWHIP],
-			[weapons.WARHAMR, weapons.D_WHAM_],
-			[weapons.SUCWHIP, weapons.PSWHIP],
-			[weapons.KATANA, weapons.DKATANA],//1st page
-			[weapons.L__AXE, weapons.DL_AXE_],
-			[weapons.MACGRSW, weapons.TMACGRSW],
-			[weapons.RIPPER1, weapons.TRIPPER1],
-			[weapons.RIPPER2, weapons.TRIPPER2],
-			[weapons.ACLAYMO, weapons.TACLAYM],
-			[weapons.RCLAYMO, weapons.TRCLAYM],
-			[weapons.SCLAYMO, weapons.TSCLAYM],
-			[weapons.TCLAYMO, weapons.TTCLAYM],
-			[weapons.S_RULER, weapons.TSRULER],
-			[weapons.PHALLUS, weapons.PHALUSS],
-			[weapons.L_WHIP, weapons.DL_WHIP],
-			[weapons.B_SWORD, weapons.DBSWORD],//2nd page
-			[weapons.EXCALIB, weapons.DEXCALI],
-			[weaponsrange.SIXSHOT, weaponsrange.TWINSIXS],
-			[weaponsrange.M1CERBE, weaponsrange.TM1CERB],
-			[weaponsrange.ALAKABL, weaponsrange.DALAKABL],
-			[weaponsrange.DESEAGL, weaponsrange.TDEEAGL]
-			//[weaponsrange.HARKON1, weaponsrange.HARKON2],
-		];
+		var weaponList: Array = weapons.SingleDualPairList.concat(weaponsrange.SingleDualPairList);
 		addButton(0, "Combine Weapons", menuCombineStaging, weaponList);
 		addButton(4, "Seperate Weapons", menuSeperateStaging, weaponList)
 		addButton(14, "Back", campMiscActions);
@@ -2413,22 +2402,22 @@ public class Camp extends NPCAwareContent{
 			addButton(13, "Next", mainPagePocketWatch, page + 1);
 		}
 
-		if (page == 3) {			
+		if (page == 3) {
 			addButton(0, "E C M & B R (Ex)", mainPagePocketWatchElementalConjurerMindAndBodyResolveEx)
-			.disableIf(!player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolve), 
+			.disableIf(!player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolve),
 				"Req. Elemental Conjurer Mind and Body Resolve perks")
-			.disableIf(player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolveEx) 
+			.disableIf(player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolveEx)
 				|| player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedicationEx)
 				|| player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrificeEx), "You already got this merged perk");
 
 			addButton(1, "E C M & B D (Ex)", mainPagePocketWatchElementalConjurerMindAndBodyDedicationEx)
-			.disableIf(!player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedication) || !player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolveEx), 
+			.disableIf(!player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedication) || !player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolveEx),
 				"Req. Elemental Conjurer Mind and Body Resolve (Ex) & Elemental Conjurer Mind and Body Dedication perks")
 			.disableIf(player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedicationEx)
 				|| player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrificeEx), "You already got this merged perk");
 			
 			addButton(2, "E C M & B S (Ex)", mainPagePocketWatchElementalConjurerMindAndBodySacrificeEx)
-			.disableIf(!player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrifice) || !player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedicationEx), 
+			.disableIf(!player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrifice) || !player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedicationEx),
 				"Req. Elemental Conjurer Mind and Body Dedication (Ex) & Elemental Conjurer Mind and Body Sacrifice perks")
 			.disableIf(player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrificeEx), "You already got this merged perk");
 			
@@ -2436,22 +2425,22 @@ public class Camp extends NPCAwareContent{
 			addButton(13, "Next", mainPagePocketWatch, page + 1);
 		}
 		
-		if (page == 4) {			
+		if (page == 4) {
 			addButton(0, "ChBS-I (Ex)", mainPagePocketWatchChimericalBodySemiImprovedStageEx)
-			.disableIf(!player.hasPerk(PerkLib.ChimericalBodySemiImprovedStage), 
+			.disableIf(!player.hasPerk(PerkLib.ChimericalBodySemiImprovedStage),
 				"Req. Chimerical Body: Semi-Improved Stage perk")
-			.disableIf(player.hasPerk(PerkLib.ChimericalBodySemiImprovedStageEx) 
+			.disableIf(player.hasPerk(PerkLib.ChimericalBodySemiImprovedStageEx)
 				|| player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStageEx)
 				|| player.hasPerk(PerkLib.ChimericalBodySemiEpicStageEx), "You already got this merged perk");
 
 			addButton(1, "ChBS-S (Ex)", mainPagePocketWatchChimericalBodySemiSuperiorStageEx)
-			.disableIf(!player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStage) || !player.hasPerk(PerkLib.ChimericalBodySemiImprovedStageEx), 
+			.disableIf(!player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStage) || !player.hasPerk(PerkLib.ChimericalBodySemiImprovedStageEx),
 				"Req. Chimerical Body: Semi-Superior Stage & Chimerical Body: Semi-Improved (Ex) Stage perks")
 			.disableIf(player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStageEx)
 				|| player.hasPerk(PerkLib.ChimericalBodySemiEpicStageEx), "You already got this merged perk");
 			
 			addButton(2, "ChBS-E (Ex)", mainPagePocketWatchChimericalBodySemiEpicStageEx)
-			.disableIf(!player.hasPerk(PerkLib.ChimericalBodySemiEpicStage) || !player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStageEx), 
+			.disableIf(!player.hasPerk(PerkLib.ChimericalBodySemiEpicStage) || !player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStageEx),
 				"Req. Chimerical Body: Semi-Epic Stage & Chimerical Body: Semi-Superior (Ex) Stage perks")
 			.disableIf(player.hasPerk(PerkLib.ChimericalBodySemiEpicStageEx), "You already got this merged perk");
 			
@@ -2497,7 +2486,7 @@ public class Camp extends NPCAwareContent{
 			.disableIf(player.hasPerk(PerkLib.CorrosiveMeltdownMastered), "You already got this merged perk");
 
 			addButton(12, "Previous", mainPagePocketWatch, page - 1);
-			addButton(13, "Next", mainPagePocketWatch, page + 1);		
+			addButton(13, "Next", mainPagePocketWatch, page + 1);
 		}
 
 		if (page == 6) {
@@ -3244,7 +3233,7 @@ public class Camp extends NPCAwareContent{
 		outputText("The shell cracks before your clone emerges from the incubator. It's a glorious reflection of you, though it seems to have the common decency to give itself a simple grey robe before presenting its barren body.\n\n");
 	}
 	/*
-	 * old primaltwin flavor	 * 
+	 * old primaltwin flavor	 *
 			/*if (player.statusEffectv3(StatusEffects.PCClone) < 4) {
 				outputText("Your clone is ");
 				if (player.statusEffectv3(StatusEffects.PCClone) == 1) outputText("slowly rotating basketball sized sphere of soul and life essences");
@@ -3419,6 +3408,7 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.HeliaOff)) outputText("\nHelia: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.KonstantinOff)) outputText("\nKonstantin: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.SpoodersOff)) outputText("\nSpooders: <font color=\"#800000\"><b>Disabled</b></font>");
+		if (player.hasStatusEffect(StatusEffects.ShouldraOff)) outputText("\nShouldra: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.CalluOff)) outputText("\nCallu (Otter girl): <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.VenusOff)) outputText("\nVenus (Gigantic Turtle): <font color=\"#800000\"><b>Disabled</b></font>");
 	}
@@ -3426,16 +3416,6 @@ public class Camp extends NPCAwareContent{
 		clearOutput();
 		SparrableNPCsMenuText();
 		menu();
-		addButton(0, "Chi Chi", toggleNPCStatus, StatusEffects.ChiChiOff).hint("Enable or Disable Chi Chi. This will remove her from enc table and if already in [camp] disable access to her.");
-		addButton(1, "Nadia", toggleNPCStatus, StatusEffects.NadiaOff).hint("Enable or Disable Nadia. This will remove her from enc table and if already in [camp] disable access to her.");
-		addButton(2, "Diva", toggleNPCStatus, StatusEffects.DivaOff).hint("Enable or Disable Diva. This will remove her from enc table and if already in [camp] disable access to her.");
-		addButton(3, "Electra", toggleNPCStatus, StatusEffects.ElectraOff).hint("Enable or Disable Electra. This will remove her from enc table and if already in [camp] disable access to her.");
-		addButton(4, "Etna", toggleEtna).hint("Enable or Disable Etna. This will remove her from enc table and if already in [camp] disable access to her.");
-		addButton(5, "Luna", toggleLuna).hint("Enable or Disable Luna. This will remove her from enc table and if already in [camp] disable access to her.");
-		addButton(6, "DragonBoi", toggleNPCStatus, StatusEffects.TedOff).hint("Enable or Disable Dragon Boi. This will remove him from enc table.");
-		addButton(7, "Konstantin", toggleNPCStatus, StatusEffects.KonstantinOff).hint("Enable or Disable Konstantin. This will remove him from enc table and if already in [camp] disable access to him.");
-		addButton(8, "Sophie", toggleSophie).hint("Enable or Disable Sophie. This will remove her from enc table and if already in [camp] disable access to her.");
-		addButton(9, "Helia", toggleHelia).hint("Enable or Disable Helia. This will remove her from enc table and if already in [camp] disable access to her.");
 		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] < 2) addButton(10, "Train", NPCsTrain);
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) addButton(10, "Relax", NPCsRelax);
@@ -3443,16 +3423,34 @@ public class Camp extends NPCAwareContent{
 		//since this section is WIP anyway, let her be here too, lol
 		if (flags[kFLAGS.GOTTA_CAMP_THEM_ALL_MODE] < 2) addButton(11, "Activate", GottaCampThemALLOn).hint("Turn on 'Gotta Camp them ALL' Mode.");
 		if (flags[kFLAGS.GOTTA_CAMP_THEM_ALL_MODE] == 2) addButton(11, "Deactivate", GottaCampThemALLOff).hint("Turn off 'Gotta Camp them ALL' Mode.");
-        addButton(12, "Spooders", toggleNPCStatus, StatusEffects.SpoodersOff).hint("Enable or Disable spooder followers. This will remove them ONLY from enc table.");
+		addButton(12, "Members", SparrableNPCsMenuCampNPCs)..hint("Enable or Disable Camp Followers from appearing.");
 		addButton(13, "Others", SparrableNPCsMenuOthers).hint("Out of camp encounters only.");
 		addButton(14, "Back", campActions);
+	}
+	private function SparrableNPCsMenuCampNPCs():void {
+		clearOutput();
+		SparrableNPCsMenuText();
+		menu();
+		addButton(0, "Chi Chi", toggleNPCStatus, StatusEffects.ChiChiOff).hint("Enable or Disable Chi Chi. This will remove her from enc table and if already in [camp] disable access to her.");
+		addButton(1, "Diva", toggleNPCStatus, StatusEffects.DivaOff).hint("Enable or Disable Diva. This will remove her from enc table and if already in [camp] disable access to her.");
+		addButton(2, "Electra", toggleNPCStatus, StatusEffects.ElectraOff).hint("Enable or Disable Electra. This will remove her from enc table and if already in [camp] disable access to her.");
+		addButton(3, "Etna", toggleEtna).hint("Enable or Disable Etna. This will remove her from enc table and if already in [camp] disable access to her.");
+		addButton(4, "Helia", toggleHelia).hint("Enable or Disable Helia. This will remove her from enc table and if already in [camp] disable access to her.");
+		addButton(5, "Konstantin", toggleNPCStatus, StatusEffects.KonstantinOff).hint("Enable or Disable Konstantin. This will remove him from enc table and if already in [camp] disable access to him.");
+		addButton(6, "Luna", toggleLuna).hint("Enable or Disable Luna. This will remove her from enc table and if already in [camp] disable access to her.");
+		addButton(7, "Nadia", toggleNPCStatus, StatusEffects.NadiaOff).hint("Enable or Disable Nadia. This will remove her from enc table and if already in [camp] disable access to her.");
+		addButton(8, "Shouldra", toggleShouldra).hint("Enable or Disable Shouldra. This will remove her from enc table and if already in [camp] disable access to her.");
+		addButton(9, "Sophie", toggleSophie).hint("Enable or Disable Sophie. This will remove her from enc table and if already in [camp] disable access to her.");
+		addButton(10, "Spooders", toggleNPCStatus, StatusEffects.SpoodersOff).hint("Enable or Disable spooder followers. This will remove them ONLY from enc table.");
+		addButton(14, "Back", SparrableNPCsMenu);
 	}
 	private function SparrableNPCsMenuOthers():void {
 		clearOutput();
 		SparrableNPCsMenuText();
 		menu();
-		addButton(0, "Callu", toggleNPCStatus, StatusEffects.CalluOff).hint("Enable or Disable Callu (Otter girl). This will remove her from enc table.");
-		addButton(1, "Venus", toggleNPCStatus, StatusEffects.VenusOff).hint("Enable or Disable Venus (Gigantic Turtle). This will remove her from enc table.");
+		addButton(0, "Callu", toggleNPCStatus, StatusEffects.CalluOff, SparrableNPCsMenuOthers).hint("Enable or Disable Callu (Otter girl). This will remove her from enc table.");
+		addButton(1, "Venus", toggleNPCStatus, StatusEffects.VenusOff, SparrableNPCsMenuOthers).hint("Enable or Disable Venus (Gigantic Turtle). This will remove her from enc table.");
+		addButton(13, "DragonBoi", toggleNPCStatus, StatusEffects.TedOff, SparrableNPCsMenuOthers).hint("Enable or Disable Dragon Boi. This will remove him from enc table.");
 		addButton(14, "Back", SparrableNPCsMenu);
 	}
 
@@ -3477,10 +3475,13 @@ public class Camp extends NPCAwareContent{
 		doNext(SparrableNPCsMenu);
 	}
 
-	private function toggleNPCStatus(status:StatusEffectType):void {
+	private function toggleNPCStatus(status:StatusEffectType, returnFunc:Function = null):void {
 		if (player.hasStatusEffect(status)) player.removeStatusEffect(status);
 		else player.createStatusEffect(status, 0, 0, 0, 0);
-		SparrableNPCsMenu();
+		if (returnFunc != null)
+			returnFunc();
+		else
+			SparrableNPCsMenuCampNPCs();
 	}
 
 	private function toggleLuna():void {
@@ -3498,6 +3499,10 @@ public class Camp extends NPCAwareContent{
 	private function toggleHelia():void {
 		if (flags[kFLAGS.SLEEP_WITH] == "Helia") flags[kFLAGS.SLEEP_WITH] = ""; //reset sleeping thingy
 		toggleNPCStatus(StatusEffects.HeliaOff);
+	}
+	private function toggleShouldra():void {
+		if (flags[kFLAGS.SHOULDRA_SLEEP_TIMER] != 0) flags[kFLAGS.SHOULDRA_SLEEP_TIMER] = 0; //reset neglation tracker
+		toggleNPCStatus(StatusEffects.ShouldraOff);
 	}
 
 	private function swimInStream():void {
@@ -3701,6 +3706,21 @@ public class Camp extends NPCAwareContent{
 	private function usePeacockStatuette():void {
 		CoC.instance.mutations.skybornSeed(2, player);
 		advanceMinutes(5);
+		doNext(playerMenu);
+	}
+	
+	private function useHealAtCamp():void {
+		clearOutput();
+		EngineCore.ManaChange(-30);
+		CombatAbilities.Heal.doEffect();
+		advanceMinutes(15);
+		doNext(playerMenu);
+	}
+	private function useCureAtCamp():void {
+		clearOutput();outputText("You channel white magic to rid yourself of all negative effect affecting you.");
+		EngineCore.ManaChange(-500);
+		CombatAbilities.Cure.doEffect();
+		advanceMinutes(15);
 		doNext(playerMenu);
 	}
 
@@ -3968,7 +3988,7 @@ public class Camp extends NPCAwareContent{
 				return;
 			}
 			//Shouldra xgartuan fight
-			if (followerShouldra() && SceneLib.exgartuan.dickPresent()) {
+			if (followerShouldra() && !player.hasStatusEffect(StatusEffects.ShouldraOff) && SceneLib.exgartuan.dickPresent()) {
 				if (flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] == 0) {
 					shouldraFollower.shouldraAndExgartumonFightGottaCatchEmAll();
 					sleepRecovery(false);
@@ -3979,7 +3999,7 @@ public class Camp extends NPCAwareContent{
 					return;
 				}
 			}
-			if (player.hasCock() && followerShouldra() && flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] == -0.5) {
+			if (player.hasCock() && followerShouldra() && !player.hasStatusEffect(StatusEffects.ShouldraOff) && flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] == -0.5) {
 				shouldraFollower.keepShouldraPartIIExgartumonsUndeatH();
 				sleepRecovery(false);
 				return;
@@ -4077,6 +4097,9 @@ public class Camp extends NPCAwareContent{
 					emberScene.sleepWithEmber();
 					return;
 				}
+			} else if (flags[kFLAGS.SLEEP_WITH] == "Grayda") {
+				SceneLib.graydaScene.sleepWithGrayda();
+				return;
 			} else if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && jojoScene.pregnancy.isPregnant && jojoScene.pregnancy.event == 4 && player.hasCock() && flags[kFLAGS.SLEEP_WITH] == 0) {
 				joyScene.hornyJoyIsPregnant();
 				return;
@@ -4709,6 +4732,7 @@ public function wakeFromBadEnd():void {
 	player.removeStatusEffect(StatusEffects.RiverDungeonA);
 	if (player.hasStatusEffect(StatusEffects.RivereDungeonIB)) player.removeStatusEffect(StatusEffects.RivereDungeonIB);
 	if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
+	player.removeStatusEffect(StatusEffects.LoliBatGolems);
     //Restore stats
 	player.HP = player.maxOverHP();
 	player.fatigue = 0;
@@ -4751,6 +4775,7 @@ public function rebirthFromBadEnd():void {
 	player.removeStatusEffect(StatusEffects.RiverDungeonA);
 	if (player.hasStatusEffect(StatusEffects.RivereDungeonIB)) player.removeStatusEffect(StatusEffects.RivereDungeonIB);
 	if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
+	player.removeStatusEffect(StatusEffects.LoliBatGolems);
     //Restore stats
 	player.HP = player.maxOverHP();
 	player.fatigue = 0;
@@ -4768,7 +4793,7 @@ public function rebirthFromBadEnd():void {
 //Camp wall
 	private function buildCampWallPrompt():void {
 		clearOutput();
-		if (player.fatigue >= player.maxFatigue() - 50) {
+		if (player.fatigue >= player.maxOverFatigue() - 50) {
 			outputText("You are too exhausted to work on your [camp] wall!");
 			doNext(doCamp);
 			return;
@@ -4858,7 +4883,7 @@ public function rebirthFromBadEnd():void {
 //Camp gate
 	private function buildCampGatePrompt():void {
 		clearOutput();
-		if (player.fatigue >= player.maxFatigue() - 50) {
+		if (player.fatigue >= player.maxOverFatigue() - 50) {
 			outputText("You are too exhausted to work on your [camp] wall!");
 			doNext(doCamp);
 			return;
@@ -5039,6 +5064,8 @@ public function rebirthFromBadEnd():void {
 		if (player.hasStatusEffect(StatusEffects.EtnaOff)) performancePointsPrediction++;
 		if (player.hasStatusEffect(StatusEffects.LunaOff)) performancePointsPrediction++;
 		if (player.hasStatusEffect(StatusEffects.NadiaOff)) performancePointsPrediction++;
+		if (player.hasStatusEffect(StatusEffects.ShouldraOff)) performancePointsPrediction++;
+		if (player.hasStatusEffect(StatusEffects.HeliaOff)) performancePointsPrediction++;
 		//Dungeons
 		performancePointsPrediction += possibleToGainAscensionPointsDungeons();
 		//Quests
@@ -5280,3 +5307,4 @@ public function rebirthFromBadEnd():void {
 
 }
 }
+

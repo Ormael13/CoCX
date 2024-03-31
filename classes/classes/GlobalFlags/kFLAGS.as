@@ -1338,7 +1338,7 @@ public static const UNKNOWN_FLAG_NUMBER_01328:int                               
 public static const UNKNOWN_FLAG_NUMBER_01329:int                                   = 1329;
 public static const THE_TRENCH_ENTERED:int                                   		= 1330;
 public static const GHOULISH_VAMPIRE_SERVANT_NAME:int                               = 1331;  
-public static const UNKNOWN_FLAG_NUMBER_01333:int                                   = 1333;
+public static const THIEFS_KILLED:int                                   			= 1333;
 public static const UNKNOWN_FLAG_NUMBER_01334:int                                   = 1334;
 public static const UNKNOWN_FLAG_NUMBER_01335:int                                   = 1335;
 public static const UNKNOWN_FLAG_NUMBER_01336:int                                   = 1336;
@@ -1920,14 +1920,14 @@ public static const UNKNOWN_FLAG_NUMBER_01911:int                               
 public static const UNKNOWN_FLAG_NUMBER_01912:int                                   = 1912;
 public static const UNKNOWN_FLAG_NUMBER_01913:int                                   = 1913;
 public static const UNKNOWN_FLAG_NUMBER_01914:int                                   = 1914;
-public static const UNKNOWN_FLAG_NUMBER_01915:int                                   = 1915;
-public static const UNKNOWN_FLAG_NUMBER_01916:int                                   = 1916;
-public static const UNKNOWN_FLAG_NUMBER_01917:int                                   = 1917;
-public static const UNKNOWN_FLAG_NUMBER_01918:int                                   = 1918;
-public static const UNKNOWN_FLAG_NUMBER_01919:int                                   = 1919;
-public static const UNKNOWN_FLAG_NUMBER_01920:int                                 	= 1920;
-public static const UNKNOWN_FLAG_NUMBER_01921:int                                   = 1921;
-public static const UNKNOWN_FLAG_NUMBER_01922:int                                   = 1922;
+public static const GRAYDA_BATHING:int                                   			= 1915;
+public static const GRAYDA_AFFECTION:int                                   			= 1916;
+public static const TAMANI_DAUGHTERS_DEFEATS_COUNTER:int                            = 1917;
+public static const TAMANI_DAUGHTERS_LVL_UP:int                                   	= 1918;
+public static const TAMANI_DEFEATS_COUNTER:int                                   	= 1919;
+public static const TAMANI_LVL_UP:int                                 				= 1920;
+public static const MINO_SONS_DEFEATS_COUNTER:int                                   = 1921;
+public static const MINO_SONS_LVL_UP:int                                   			= 1922;
 public static const GOTTA_CAMP_THEM_ALL_MODE:int                                   	= 1923;
 public static const DEMON_SOLDIERS_ENCOUNTERED:int                                  = 1924;
 public static const DEMON_SOLDIERS_KILLED:int                                   	= 1925;
@@ -2934,7 +2934,7 @@ public static const UNKNOWN_FLAG_NUMBER_02925:int                               
 public static const UNKNOWN_FLAG_NUMBER_02926:int                                   = 2926;
 public static const UNKNOWN_FLAG_NUMBER_02927:int                                   = 2927;
 public static const UNKNOWN_FLAG_NUMBER_02928:int                                   = 2928;
-public static const UNKNOWN_FLAG_NUMBER_02929:int                                   = 2929;
+public static const ANGELIC_FRACTION_TOGGLE:int                                   	= 2929;
 public static const UNKNOWN_FLAG_NUMBER_02930:int                                   = 2930;
 public static const UNKNOWN_FLAG_NUMBER_02931:int                                   = 2931;
 public static const UNKNOWN_FLAG_NUMBER_02932:int                                   = 2932;
@@ -3004,7 +3004,9 @@ public static const CORRUPTION_TOLERANCE_MODE:int                               
 public static const ITS_EVERY_DAY:int                                               = 2996; // all special calender events occur every day!
 public static const LOW_STANDARDS_FOR_ALL:int                                       = 2997;
 public static const HYPER_HAPPY:int                                                 = 2998;
-public static const UNKNOWN_FLAG_NUMBER_02999:int                                   = 2999;
+public static const HP_STATBAR_PERCENTAGE:int                                   	= 2999; //HP bars show a percentage rather than the core number
+public static const LUST_STATBAR_PERCENTAGE:int                                   	= 3000; //Lust bars show a percentage rather than the core number
+public static const WRATH_STATBAR_PERCENTAGE:int                                   	= 3001; //Wrath bars show a percentage rather than the core number
 
 public static const GLOBAL_FLAGS_ARRAY:Array = [
 	NEW_GAME_PLUS_BONUS_UNLOCKED_HERM, SHOW_SPRITES_FLAG, SILLY_MODE_ENABLE_FLAG, SCENEHUNTER_PRINT_CHECKS,

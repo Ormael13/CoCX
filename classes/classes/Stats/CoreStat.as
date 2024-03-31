@@ -15,6 +15,7 @@ public class CoreStat extends RawStat{
 		if (host is Monster) return Infinity;
 		var base:Number = 100;
 		base += 2 * host.perkv1(PerkLib.AscensionTranshumanism);
+		if (host.hasPerk(PerkLib.MunchkinAtBioLab)) base += 10;
 		switch (statName) {
 			case 'str.core':
 				base += 16 * host.perkv1(PerkLib.AscensionTranshumanismStr);
@@ -22,7 +23,10 @@ public class CoreStat extends RawStat{
 				if (host.perkv1(IMutationsLib.HumanBonesIM) >= 1) base += 5;
 				if (host.perkv1(IMutationsLib.HumanBonesIM) >= 2) base += 5;
 				if (host is Player && JourneyToTheEast.EvelynnCoreLimitBreakerCounter > 0) base += JourneyToTheEast.EvelynnCoreLimitBreakerCounter;
-				if (host.hasPerk(PerkLib.AsuraStrength)) base *= 1.1;
+				var str:Number = 1;
+				if (host.hasPerk(PerkLib.AsuraStrength)) str += 0.1;
+				if (host.hasPerk(PerkLib.SwordImmortalFirstForm)) str += 0.05;
+				base *= str;
 				base = Math.round(base);
 				break;
 			case 'tou.core':
@@ -44,7 +48,10 @@ public class CoreStat extends RawStat{
 				if (host.perkv1(IMutationsLib.HumanBloodstreamIM) >= 1) base += 5;
 				if (host.perkv1(IMutationsLib.HumanBloodstreamIM) >= 2) base += 5;
 				if (host is Player && JourneyToTheEast.EvelynnCoreLimitBreakerCounter > 0) base += JourneyToTheEast.EvelynnCoreLimitBreakerCounter;
-				if (host.hasPerk(PerkLib.AsuraSpeed)) base *= 1.1;
+				var spe:Number = 1;
+				if (host.hasPerk(PerkLib.AsuraSpeed)) spe += 0.1;
+				if (host.hasPerk(PerkLib.SwordImmortalFirstForm)) spe += 0.05;
+				base *= spe;
 				base = Math.round(base);
 				break;
 			case 'int.core':
@@ -68,6 +75,7 @@ public class CoreStat extends RawStat{
 				var wis:Number = 1;
 				if (host.hasPerk(PerkLib.BloodDemonWisdom)) wis += 0.1;
 				if (host.hasPerk(PerkLib.GreySageWisdom)) wis += 0.1;
+				if (host.hasPerk(PerkLib.SwordImmortalFirstForm)) wis += 0.05;
 				base *= wis;
 				base = Math.round(base);
 				break;

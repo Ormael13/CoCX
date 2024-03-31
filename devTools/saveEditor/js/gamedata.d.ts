@@ -36,6 +36,10 @@ declare interface IExportedGamedata {
 	breastCups: string[];
 	itemSlotCount: number;
 }
+declare type IGDSpecialItemTypes = {
+	weapon: Record<string,IGDItemWeapon>;
+	undergarment: Record<string,IGDItemUndergarment>;
+}
 
 /**
  * Extra data added in gamedata-ex.js
@@ -234,6 +238,20 @@ declare interface IGDItem {
 	name: string;
 	/** (exported) */
 	category: IGDItemCategory;
+	/** (exported) */
+	desc: string;
+	/** (exported) */
+	tags: string[];
+	/** (exported) */
+	effects: IGDItemEffect[];
+}
+declare interface IGDItemEffect {
+	name: string;
+	power: number;
+	value1?: any;
+	value2?: any;
+	value3?: any;
+	value4?: any;
 }
 declare interface IGDItemUndergarment extends IGDItem {
 	/**
@@ -241,8 +259,13 @@ declare interface IGDItemUndergarment extends IGDItem {
 	 */
 	type: 0|1|2;
 }
-declare type IGDSpecialItemTypes = {
-	undergarment: IGDItemUndergarment;
+declare interface IGDItemWeapon extends IGDItem {
+	/** (exported) */
+	type: string;
+	/** (exported) */
+	size: number;
+	/** (exported) */
+	dual: boolean;
 }
 declare interface IGDItemTemplate {
 	id: string;

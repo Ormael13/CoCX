@@ -25,9 +25,10 @@ public class Tidarion extends Weapon implements TimeAwareInterface {
     }
 
     public function Tidarion() {
-        super("Tidarion", "Tidarion", "ethereal blade", "the blade of Tidarion", "slash", 20, 2000, "Forged by a powerful sorceress and strengthened by the white magic of the Covenant, this ethereal blade is designed to be used by a mage. The original spellblade's enchantment was studied and dissolved, so the only thing left is the sword's handle, encrusted with some glowing stone. When you take it in your hand, the glowing ethereal blade forms from it, enveloped by a fire aura. It's named after one mighty ancient white wizard, Tidarion. The blade gets stronger when you're free from the corruption; its attacks use your magic energy to deal extra damage to your enemy.", "", "Sword, StaffPart");
-        EventParser.timeAwareClassAdd(this);
+        super("Tidarion", "Tidarion", "ethereal blade", "the blade of Tidarion", "slash", 20, 2000, "Forged by a powerful sorceress and strengthened by the white magic of the Covenant, this ethereal blade is designed to be used by a mage. The original spellblade's enchantment was studied and dissolved, so the only thing left is the sword's handle, encrusted with some glowing stone. When you take it in your hand, the glowing ethereal blade forms from it, enveloped by a fire aura. It's named after one mighty ancient white wizard, Tidarion. The blade gets stronger when you're free from the corruption; its attacks use your magic energy to deal extra damage to your enemy.", WT_SWORD, WSZ_MEDIUM);
+        withTags(W_STAFFPART, W_PURE_TYPE, W_FIRE_TYPE);
         withBuff('spellpower', +1.0);
+        EventParser.timeAwareClassAdd(this);
     }
 
     public function calcWizardsMult():Number {

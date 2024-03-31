@@ -286,6 +286,7 @@ public function blackCatBeerEffects(player:Player,clearScreen:Boolean = true,new
 	}
 	player.slimeFeed();
 	CoC.instance.mutations.DrunkenPowerEmpowerIfPossible();
+	CoC.instance.mutations.AelfwineEmpowerIfPossible();
 }
 
 //Black Cat Beer Wears Off: This message is displayed eight hours after the last drink.
@@ -475,6 +476,7 @@ public function bimboChampagne(player:Player,clearScreen:Boolean,intro:Boolean):
 		dynStats("spe", -10, "lib", 1, "lus", 25);
 	}
 	CoC.instance.mutations.DrunkenPowerEmpowerIfPossible();
+	CoC.instance.mutations.AelfwineEmpowerIfPossible();
 }
 
 public function removeBimboChampagne():void {

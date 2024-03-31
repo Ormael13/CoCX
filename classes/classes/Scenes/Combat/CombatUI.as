@@ -11,23 +11,10 @@ import classes.BodyParts.Wings;
 import classes.CoC_Settings;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
-import classes.Items.Weapons.MoonlightClaws;
-import classes.Items.Weapons.MoonlightGreatsword;
 import classes.Items.Weapons.Tidarion;
 import classes.PerkLib;
 import classes.Races;
-import classes.Scenes.Areas.Beach.CancerAttack;
-import classes.Scenes.Areas.Desert.SandTrap;
-import classes.Scenes.Areas.Desert.SandWorm;
-import classes.Scenes.Areas.Forest.Alraune;
-import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
-import classes.Scenes.Areas.HighMountains.Izumi;
 import classes.Scenes.Dungeons.D3.*;
-import classes.Scenes.Dungeons.DemonLab.Incels;
-import classes.Scenes.Dungeons.DemonLab.ProjectTyrant;
-import classes.Scenes.Dungeons.RiverDungeon.TwinBosses;
-import classes.Scenes.Monsters.AngelLR;
-import classes.Scenes.NPCs.*;
 import classes.Scenes.SceneLib;
 import classes.StatusEffectClass;
 import classes.StatusEffects;
@@ -203,8 +190,8 @@ public class CombatUI extends BaseCombatContent {
 			else btnRanged.disable("Your range weapon is not compatibile to be used with current piloted mech.");
 		}
 		if (player.hasPerk(PerkLib.ElementalBody) && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("Throw", combat.throwElementalAttack, "Attack enemy with range elemental attack.  Damage done is determined by your strength.").icon("A_Ranged");
-		if (player.weapon is MoonlightGreatsword && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("MoonWave", combat.throwElementalAttack, "Attack enemy with wave of moonlight.  Damage done is determined by your intelligence and weapon.").icon("A_Ranged");
-		if (player.weapon is MoonlightClaws && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("MoonWave", combat.throwElementalAttack, "Attack enemy with wave of moonlight.  Damage done is determined by your intelligence and weapon.").icon("A_Ranged");
+		if (player.weapon == weapons.MGSWORD && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("MoonWave", combat.throwElementalAttack, "Attack enemy with wave of moonlight.  Damage done is determined by your intelligence and weapon.").icon("A_Ranged");
+		if (player.weapon == weapons.MCLAWS && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("MoonWave", combat.throwElementalAttack, "Attack enemy with wave of moonlight.  Damage done is determined by your intelligence and weapon.").icon("A_Ranged");
 		if (player.weapon is Tidarion && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("FireBeam", combat.throwElementalAttack, "Attack enemy with a beam of fire.  Damage done is determined by your intelligence and weapon.").icon("A_Ranged");
 		btnItems.show("Items", inventory.inventoryMenu, "The inventory allows you to use an item.  Be careful, as this leaves you open to a counterattack when in combat.").icon("I_red potion icon id")
 
@@ -274,11 +261,11 @@ public class CombatUI extends BaseCombatContent {
 			doFlyingSwordTurn();
 		else if (isCompanionTurn(0))
 			doCompanionTurn(0);
-		else if (isCompanionTurn(1) && !player.hasStatusEffect(StatusEffects.MinoKing) && player.statusEffectv1(StatusEffects.MinoKing) != 1)
+		else if (isCompanionTurn(1))
 			doCompanionTurn(1);
-		else if (isCompanionTurn(2) && !player.hasStatusEffect(StatusEffects.MinoKing) && player.statusEffectv1(StatusEffects.MinoKing) != 2)
+		else if (isCompanionTurn(2))
 			doCompanionTurn(2);
-		else if (isCompanionTurn(3) && !player.hasStatusEffect(StatusEffects.MinoKing) && player.statusEffectv1(StatusEffects.MinoKing) != 3)
+		else if (isCompanionTurn(3))
 			doCompanionTurn(3);
 		//PC: is busy with something
 		else if (isPlayerBound()) {
@@ -523,7 +510,6 @@ public class CombatUI extends BaseCombatContent {
 						flags[kFLAGS.PLAYER_COMPANION_1] == "" ? kFLAGS.PLAYER_COMPANION_1 :
 								flags[kFLAGS.PLAYER_COMPANION_2] == "" ? kFLAGS.PLAYER_COMPANION_2 :
 										kFLAGS.PLAYER_COMPANION_3;
-
 				var strKiha:Number = 85;
 				var meleeAtkKiha:Number = 28
 				if (flags[kFLAGS.KIHA_LVL_UP] >= 1) {
@@ -559,10 +545,10 @@ public class CombatUI extends BaseCombatContent {
 			else if (isBloodPuppiesTurn())
 				doBloodPuppiesTurn();
 			//UNIQUE OPTIONS - No changes applied, player turn, no status/CC
-			else {
+			//Do not display if enemy is already dead
+			else if(!combat.combatIsOver(false)) {
 				// Migrate Sand Trap/Alruine/Drider Incubus/Minotaur King/AngelLR/TwinBosses/Lethice/WoodElvesHuntingParty
 				monster.postPlayerBusyBtnSpecial(btnSpecial1,btnSpecial2);
-
 				if ((player.weaponRange == weaponsrange.GTHRSPE && player.ammo <= 15) || ((player.weaponRange == weaponsrange.ATKNIFE || player.weaponRange == weaponsrange.RTKNIFE || player.weaponRange == weaponsrange.STKNIFE || player.weaponRange == weaponsrange.TTKNIFE) && player.ammo <= 10)
 				|| ((player.weaponRange == weaponsrange.GTHRAXE || player.weaponRange == weaponsrange.O_JAVEL || player.weaponRange == weaponsrange.TRJAVEL) && player.ammo <= 5)) {
 					btnSpecial3.show("Pick", combat.pickUpThrownWeapons, "Pick up some of the thrown weapons.");
@@ -600,11 +586,11 @@ public class CombatUI extends BaseCombatContent {
 	}
 
 	public function isFlyingSwordTurn():Boolean {
-		return CombatAbilities.FlyingSwordAttack.isKnownAndUsable && flags[kFLAGS.FLYING_SWORD] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_FLYING_SWORD_ATTACKED] != 1;
+		return player.hasPerk(PerkLib.FirstAttackFlyingSword) && CombatAbilities.FlyingSwordAttack.isKnownAndUsable && flags[kFLAGS.FLYING_SWORD] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_FLYING_SWORD_ATTACKED] != 1;
 	}
 
 	public function doFlyingSwordTurn():void {
-		if (CombatAbilities.FlyingSwordAttack.isKnownAndUsable) {
+		if (player.hasPerk(PerkLib.FirstAttackFlyingSword) && CombatAbilities.FlyingSwordAttack.isKnownAndUsable) {
 			CombatAbilities.FlyingSwordAttack.preTurnAttack = true;
 			CombatAbilities.FlyingSwordAttack.perform();
 			CombatAbilities.FlyingSwordAttack.preTurnAttack = false;
@@ -613,7 +599,7 @@ public class CombatUI extends BaseCombatContent {
 				menu();
 				addButton(0, "Next", combatMenu, false);
 			}
-		}	
+		}
 	}
 
 	public function isMummyTurn():Boolean {
@@ -782,6 +768,7 @@ public class CombatUI extends BaseCombatContent {
 	public function isCompanionTurn(num:int):Boolean {
 		var present:Boolean;
 		var acted:Boolean;
+		var occupied:Boolean = player.hasStatusEffect(StatusEffects.MinoKing) && player.statusEffectv1(StatusEffects.MinoKing) == num;
 		switch(num) {
 			case 0:
 				present = flags[kFLAGS.PLAYER_COMPANION_0] != "";
@@ -800,7 +787,7 @@ public class CombatUI extends BaseCombatContent {
 				acted = flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION];
 				break;
 		}
-		return present && !acted;
+		return present && !acted && !occupied;
 	}
 
 	public function doCompanionTurn(num:int, clearAndNext:Boolean = true):void {
@@ -812,17 +799,18 @@ public class CombatUI extends BaseCombatContent {
 			return;
 		}
 		var actFunction:Function = companionName == "Alvina" ? combat.comfoll.alvinaCombatActions
-			: companionName == "Amily" ? combat.comfoll.amilyCombatActions
-				: companionName == "Aurora" ? combat.comfoll.auroraCombatActions
-					: companionName == "Etna" ? combat.comfoll.etnaCombatActions
-						: companionName == "Excellia" ? combat.comfoll.excelliaCombatActions
-							: companionName == ""+flags[kFLAGS.GHOULISH_VAMPIRE_SERVANT_NAME]+"" ? combat.comfoll.ghoulishVampServCombatActions
+								: companionName == "Amily" ? combat.comfoll.amilyCombatActions
+								: companionName == "Aurora" ? combat.comfoll.auroraCombatActions
+								: companionName == "Ayane" ? combat.comfoll.ayaneCombatActions
+								: companionName == "Etna" ? combat.comfoll.etnaCombatActions
+								: companionName == "Excellia" ? combat.comfoll.excelliaCombatActions
+								: companionName == ""+flags[kFLAGS.GHOULISH_VAMPIRE_SERVANT_NAME]+"" ? combat.comfoll.ghoulishVampServCombatActions
 								: companionName == "Kiha" ? combat.comfoll.kihaCombatActions
-									: companionName == "Midoka" ? combat.comfoll.midokaCombatActions
-										: companionName == "Mitzi" ? combat.comfoll.mitziCombatActions
-											: companionName == "Neisa" ? combat.comfoll.neisaCombatActions
-												: companionName == "Tyrantia" ? combat.comfoll.tyrantiaCombatActions
-													: companionName == "Zenji" ? combat.comfoll.zenjiCombatActions : null;
+								: companionName == "Midoka" ? combat.comfoll.midokaCombatActions
+								: companionName == "Mitzi" ? combat.comfoll.mitziCombatActions
+								: companionName == "Neisa" ? combat.comfoll.neisaCombatActions
+								: companionName == "Tyrantia" ? combat.comfoll.tyrantiaCombatActions
+								: companionName == "Zenji" ? combat.comfoll.zenjiCombatActions : null;
 		//do action
 		if (clearAndNext) {
 			clearOutput();
@@ -844,7 +832,7 @@ public class CombatUI extends BaseCombatContent {
 		//Most basic spell ever ^^
 		if (player.hasPerk(PerkLib.JobSorcerer)) {
 			bd = buttons.add("M.Bolt", combat.magic.spellMagicBolt);
-			if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponSpecials("Staff")) bd.hint("Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Magic Bolt");
+			if (player.hasPerk(PerkLib.StaffChanneling) && player.weapon.isStaffType()) bd.hint("Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Magic Bolt");
 			else bd.hint("Attempt to attack the enemy with magic bolt.  Damage done is determined by your intelligence.", "Magic Bolt");
 			if (player.mana < spellCost(40)) {
 				bd.disable("Your mana is too low to cast this spell.");
@@ -855,7 +843,7 @@ public class CombatUI extends BaseCombatContent {
 			}
 			if (player.hasPerk(PerkLib.MagesWrath)) {
 				bd = buttons.add("M.Bolt(Ex)", combat.magic.spellEdgyMagicBolt);
-				if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponSpecials("Staff")) bd.hint("Attempt to attack the enemy with wrath-empowered magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Wrath-Empowered Magic Bolt");
+				if (player.hasPerk(PerkLib.StaffChanneling) && player.weapon.isStaffType()) bd.hint("Attempt to attack the enemy with wrath-empowered magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Wrath-Empowered Magic Bolt");
 				else bd.hint("Attempt to attack the enemy with wrath-empowered magic bolt.  Damage done is determined by your intelligence.", "Wrath-Empowered Magic Bolt");
 				if (player.mana < spellCost(40)) {
 					bd.disable("Your mana is too low to cast this spell.");
@@ -870,7 +858,7 @@ public class CombatUI extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.ElementalBolt)) {
 			bd = buttons.add("E.Bolt", combat.magic.spellElementalBolt);
-			if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponSpecials("Staff")) bd.hint("Attempt to attack the enemy with elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Elemental Bolt");
+			if (player.hasPerk(PerkLib.StaffChanneling) && player.weapon.isStaffType()) bd.hint("Attempt to attack the enemy with elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Elemental Bolt");
 			else bd.hint("Attempt to attack the enemy with elemental bolt.  Damage done is determined by your intelligence.", "Elemental Bolt");
 			if (player.mana < spellCost(80)) {
 				bd.disable("Your mana is too low to cast this spell.");
@@ -881,7 +869,7 @@ public class CombatUI extends BaseCombatContent {
 			}
 			if (player.hasPerk(PerkLib.MagesWrath)) {
 				bd = buttons.add("E.Bolt(Ex)", combat.magic.spellEdgyElementalBolt);
-				if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponSpecials("Staff")) bd.hint("Attempt to attack the enemy with wrath-empowered elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Wrath-Empowered Elemental Bolt");
+				if (player.hasPerk(PerkLib.StaffChanneling) && player.weapon.isStaffType()) bd.hint("Attempt to attack the enemy with wrath-empowered elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Wrath-Empowered Elemental Bolt");
 				else bd.hint("Attempt to attack the enemy with wrath-empowered elemental bolt.  Damage done is determined by your intelligence.", "Wrath-Empowered Elemental Bolt");
 				if (player.mana < spellCost(80)) {
 					bd.disable("Your mana is too low to cast this spell.");
@@ -993,10 +981,10 @@ public class CombatUI extends BaseCombatContent {
 						break;
 					case 7:
 						btnContinue.show("Continue", combat.pspecials.buzzingTone, "Continue buzzing.");
-						break;/*
-					case 8:
-						btnContinue.show("Continue", combat.magic., "Continue casting  spell.");
 						break;
+					case 8:
+						btnContinue.show("Continue", combat.mspecials.arigeanChargedShot, "Continue gathering energy.");
+						break;/*
 					case 9:
 						btnContinue.show("Continue", combat.magic., "Continue casting  spell.");
 						break;

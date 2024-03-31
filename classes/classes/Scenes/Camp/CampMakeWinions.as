@@ -1457,7 +1457,7 @@ public class CampMakeWinions extends BaseContent
 			if (rankUpElementalManaCost()*elemLvl > player.mana){
 				addButtonDisabled(0, btnName,"You don't have enough Mana within you. Try again when you have "+ rankUpElementalManaCost()*elemLvl +" stored up!");
 			}
-			else if(player.maxFatigue() <= (player.fatigue + rankUpElementalFatigueCost()*elemLvl)){
+			else if(player.maxOverFatigue() <= (player.fatigue + rankUpElementalFatigueCost()*elemLvl)){
 				addButtonDisabled(0, btnName,"You are too tired to attempt this. Try again when you have more energy!");
 			}
 			else{
@@ -1755,7 +1755,7 @@ public class CampMakeWinions extends BaseContent
 			clearOutput();
 			outputText("If you don't have enough mana (100+) and fatigue (50+) it will be impossible to summon any elementals.\n\n");
 			menu();
-			if (player.mana >= 100 && (player.fatigue + 50 <= player.maxFatigue())) {
+			if (player.mana >= 100 && (player.fatigue + 50 <= player.maxOverFatigue())) {
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsAir) < 1) addButton(0, "Air", summonElementalAir);
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsEarth) < 1) addButton(1, "Earth", summonElementalEarth);
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsFire) < 1) addButton(2, "Fire", summonElementalFire);
@@ -1783,7 +1783,7 @@ public class CampMakeWinions extends BaseContent
 			clearOutput();
 			outputText("If you don't have matching item, two elemental shards and enough fatigue (200+) it will be impossible to summon any epic elementals.\n\n");
 			menu();
-			if (player.hasItem(useables.ELSHARD, 2) && (player.fatigue + 200 <= player.maxFatigue())) {
+			if (player.hasItem(useables.ELSHARD, 2) && (player.fatigue + 200 <= player.maxOverFatigue())) {
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsAirE) < 1) addButton(0, "Air", summonElementalAirEpic);
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsEarthE) < 1) addButton(1, "Earth", summonElementalEarthEpic);
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsFireE) < 1) addButton(2, "Fire", summonElementalFireEpic);

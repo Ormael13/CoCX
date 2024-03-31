@@ -682,7 +682,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						player.orgasm();
 						player.dynStats("sen", 2);
 						player.changeStatusValue(StatusEffects.LustyTongue, 1, player.statusEffectv1(StatusEffects.LustyTongue) + 10); //Tongue orgasming makes it last longer.
-
 					}
 					outputText("\n");
 					needNext = true;
@@ -729,6 +728,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						needNext = true;
 					}
 				}
+			}
+			if (player.hasStatusEffect(StatusEffects.CombatWounds) && player.hasMutation(IMutationsLib.LizanMarrowIM) && player.perkv1(IMutationsLib.LizanMarrowIM) > 3) {
+				if (player.statusEffectv1(StatusEffects.CombatWounds) > 0.01) player.addStatusValue(StatusEffects.CombatWounds, 1, -0.01);
+				else player.removeStatusEffect(StatusEffects.CombatWounds);
 			}
 			if (player.statusEffectv2(StatusEffects.Kelt) > 0) player.addStatusValue(StatusEffects.Kelt, 2, -0.15); //Reduce kelt submissiveness by 1 every 5 hours
 			//Mino cum update.
@@ -1281,6 +1284,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				//Neisa counter to payment
 				if (flags[kFLAGS.NEISA_FOLLOWER] >= 7 && flags[kFLAGS.NEISA_FOLLOWER] < 17) flags[kFLAGS.NEISA_FOLLOWER]++;
+				//Reset of event for Coronation quest at Bazzar / Bathing timer in camp
+				if (flags[kFLAGS.THE_TRENCH_ENTERED] == 13.5) flags[kFLAGS.THE_TRENCH_ENTERED] = 13;
+				if (flags[kFLAGS.THE_TRENCH_ENTERED] > 14) flags[kFLAGS.GRAYDA_BATHING]++;
+				if (flags[kFLAGS.THE_TRENCH_ENTERED] > 15) flags[kFLAGS.THE_TRENCH_ENTERED] = 15;
 				//Kaiba daily buy limit refresh
 				if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) player.removeStatusEffect(StatusEffects.KaibaDailyLimit);
 				//Daily reset on finding blessed ittem(s) at the lake
@@ -1913,6 +1920,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			if (!player.isRaceCached(Races.KIRIN) && (player.hasStatusEffect(StatusEffects.IsRaiju) || player.hasStatusEffect(StatusEffects.IsThunderbird)) && player.hasStatusEffect(StatusEffects.IsKirin)) {
 				player.removeStatusEffect(StatusEffects.IsKirin);
+			}
+			if (player.racialScore(Races.SATYR) >= 15 && !player.hasPerk(PerkLib.PanLabyrinth)) {
+				outputText("\nAs you become more satyr like your ability for music seems to have improved further. Whistling out to yourself you notice the ambient animals behaving strangely. It would seem your song acquired the ability to confuse and daze foes. <b>You gained the Pan Labyrinth ability!</b>\n");
+				player.createPerk(PerkLib.PanLabyrinth, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if (player.racialScore(Races.SATYR) < 15 && player.hasPerk(PerkLib.Aelfwine) && player.hasPerk(PerkLib.PanLabyrinth)) {
+				outputText("\nAs you become less of a satyr your improved ability to sing and empower yourself from alcohol are also lost to you. <b>You lost the Pan Labyrinth and Aelfwine ability!</b>\n");
+				player.removePerk(PerkLib.Aelfwine);
+				player.removePerk(PerkLib.PanLabyrinth);
+				needNext = true;
 			}
 			if (player.hasStatusEffect(StatusEffects.PostfluidIntakeRegeneration)) player.removeStatusEffect(StatusEffects.PostfluidIntakeRegeneration);
 			/*

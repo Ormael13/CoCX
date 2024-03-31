@@ -37,6 +37,7 @@ public class HumanEyesMutation extends IMutationPerkType
             if (pTier == 4){
 				descS += "60 lvl's. 10% less penalty to acc per each next attack during multiattack.";
             }
+            if (pTier >= 1) descS += " (req. 18+ human score to have all effects active)";
             return descS;
         }
 

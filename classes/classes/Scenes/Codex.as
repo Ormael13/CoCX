@@ -81,8 +81,8 @@ import coc.view.ButtonDataList;
 		public function checkAchievements():void {
 			var unlocked:int = checkUnlocked();
 			if (unlocked >= 20) awardAchievement("Scholar (1)", kACHIEVEMENTS.GENERAL_SCHOLAR);
-			if (unlocked >= 30) awardAchievement("Scholar (2)", kACHIEVEMENTS.GENERAL_SCHOLAR_2);//aktualnie 36 codex entries exist ingame
-			if (unlocked >= 40) awardAchievement("Scholar (3)", kACHIEVEMENTS.GENERAL_SCHOLAR_3);
+			if (unlocked >= 30) awardAchievement("Scholar (2)", kACHIEVEMENTS.GENERAL_SCHOLAR_2);
+			if (unlocked >= 40) awardAchievement("Scholar (3)", kACHIEVEMENTS.GENERAL_SCHOLAR_3);//aktualnie 40 codex entries exist ingame: 32 races, 3 demon projects, 2 factions, 3 other
 		}
 
 		//CODEX MENUS

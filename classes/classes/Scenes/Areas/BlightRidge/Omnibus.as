@@ -107,7 +107,6 @@ use namespace CoC;
 			this.hairLength = 13;
 			this.weaponName = "whip";
 			this.weaponVerb="whipping";
-			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "demonic skin";
 			this.lust = 30;

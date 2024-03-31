@@ -79,7 +79,7 @@ import classes.VaginaClass;
 				doNext(SceneLib.combat.endHpLoss);
 				return;
 			}
-			if (player.lust >= player.maxOverLust())
+			if (player.lust >= player.maxOverLust() && !SceneLib.combat.tyrantiaTrainingExtension())
 			{
 				doNext(SceneLib.combat.endLustLoss);
 				return;
@@ -192,36 +192,19 @@ import classes.VaginaClass;
 		{
 			outputText("Your doppleganger similarly opts to take a momentary break from the ebb and flow of combat.");
 		}
-		
-		override public function doAI():void
-		{
-			if (monsterIsStunned()) {
-				outputText("Your duplicate is too stunned, buying you another round!");
-				return;
-			}
-			if (hasStatusEffect(StatusEffects.ConstrictedWhip) || hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce) || hasStatusEffect(StatusEffects.GrabBear) || hasStatusEffect(StatusEffects.CancerGrab) || hasStatusEffect(StatusEffects.ManticorePlug)) {
-				if (!handleConstricted()) return;
-			}
-			if (hasStatusEffect(StatusEffects.OrcaPlay)) {
-				return;
-			}
-			if (hasStatusEffect(StatusEffects.Straddle)) {
-				return;
-			}
-			if (hasStatusEffect(StatusEffects.Dig)) {
-				outputText("\n\nYour opponent is still looking for you as you remain quietly hiding underground, away from view.");
-				addStatusValue(StatusEffects.Dig, 1, -1);
-				return;
-			}
-			if (hasStatusEffect(StatusEffects.OrcaHasWackedFinish)) {
-				outputText("\n\nYour opponent is still stunned from the powerful blow of your tail.");
-				createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
-				return;
-			}
+
+		// Doppelganger has no attack, skip the attack and countdown
+		override public function playerAttackedCheck():Boolean{
 			outputText("\n\nYour duplicate chuckles in the face of your attacks.");
 			addTalkShit();
+			return true;
 		}
-		
+
+		override protected function handleStun():Boolean{
+			outputText("Your duplicate is too stunned, buying you another round!");
+			return false;
+		}
+
 		public function Doppleganger()
 		{
 			this.a = "the ";

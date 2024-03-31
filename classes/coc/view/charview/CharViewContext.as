@@ -26,6 +26,7 @@ import classes.CockTypesEnum;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Dynamic.DynamicArmor;
 import classes.Items.Dynamic.DynamicWeapon;
+import classes.Items.Dynamic.DynamicShield;
 import classes.PerkLib;
 import classes.Player;
 import classes.StatusEffects;
@@ -44,6 +45,7 @@ public class CharViewContext extends ExecContext {
 			var game:CoC = CoC.instance;
 			var weaponSubtype:String = (player.weapon is DynamicWeapon) ? (player.weapon as DynamicWeapon).subtypeId : "";
 			var armorSubtype:String = (player.armor is DynamicArmor) ? (player.armor as DynamicArmor).subtypeId : "";
+			var shieldSubtype:String = (player.shield is DynamicShield) ? (player.shield as DynamicShield).subtypeId : "";
 
 			function showLegClothing():Boolean {
 				return !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.humanForm() || ([LowerBody.GAZER, LowerBody.YETI, LowerBody.KIRIN, LowerBody.HOOFED, LowerBody.CLOVEN_HOOFED, LowerBody.HARPY, LowerBody.JABBERWOCKY, LowerBody.BUNNY, LowerBody.GOO, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2, LowerBody.WERESHARK].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing());
@@ -95,16 +97,24 @@ public class CharViewContext extends ExecContext {
 					PlayerHasAWandHoly: player.weapon == game.weapons.OCCULUS,
 					PlayerHasAWandUnholy: player.weapon == game.weapons.ECLIPSE,
 
-					PlayerHasASword: player.isSwordTypeWeapon(),
-					PlayerHasASwordHoly: player.weapon == game.weapons.EXCALIB || player.weapon == game.weapons.NPHBLDE || player.weapon == game.weapons.T_HEART || player.weapon == game.weapons.ARMAGED,
-					PlayerHasASwordUnholy: player.weapon == game.weapons.EBNYBLD || player.weapon == game.weapons.DORSOUL || player.weapon == game.weapons.CHAOSEA,
+					PlayerHasAPanFlute: player.weapon == game.weapons.SFLUTTE || player.weapon == game.weapons.PFLUTTE || player.weapon == game.weapons.HELLCAL || player.weapon == game.weapons.ELYSIUM,
+
+					PlayerHasASword: player.isSwordTypeWeapon() && player.weapon.isMedium(),
+					PlayerHasASwordHoly: player.weapon == game.weapons.EXCALIB,
+					PlayerHasASwordUnholy: player.weapon == game.weapons.SCARBLD,
 					PlayerHasASwordMoonGS: player.weapon == game.weapons.MGSWORD,
+					PlayerHasALargeSword: player.isSwordTypeWeapon() && player.weapon.isLarge(),
+					PlayerHasALargeSwordHoly: player.weapon == game.weapons.NPHBLDE || player.weapon == game.weapons.T_HEART,
+					PlayerHasALargeSwordUnholy: player.weapon == game.weapons.EBNYBLD || player.weapon == game.weapons.DORSOUL,
+					PlayerHasAMassiveSword: player.isSwordTypeWeapon() && player.weapon.isMassive(),
+					PlayerHasAMassiveSwordHoly: player.weapon == game.weapons.ARMAGED,
+					PlayerHasAMassiveSwordUnholy: player.weapon == game.weapons.CHAOSEA,
 
 					PlayerHasAnAxe: player.isAxeTypeWeapon(),
 					PlayerHasAnAxeHoly:player.weapon == game.weapons.WG_GAXE,
 					PlayerHasAnAxeUnholy:player.weapon == game.weapons.DE_GAXE || player.weapon == game.weapons.ASTERIUS,
 
-					PlayerHasAHammer: player.isMaceHammerTypeWeapon() && !player.isTetsubo(),
+					PlayerHasAHammer: player.isMaceHammerTypeWeapon() && !player.isTetsubo() && player.weapon != game.weapons.SFLUTTE && player.weapon != game.weapons.PFLUTTE && player.weapon != game.weapons.HELLCAL && player.weapon != game.weapons.ELYSIUM,
 					//PlayerHasAHammerHoly:player.weapon == game.weapons.POCDEST,
 					//PlayerHasAHammerUnholy:player.weapon == game.weapons.DOCDEST,
 					PlayerHasATetsu: player.weapon == game.weapons.OTETSU || player.weapon == game.weapons.POCDEST || player.weapon == game.weapons.DOCDEST,
@@ -156,7 +166,7 @@ public class CharViewContext extends ExecContext {
 					//PlayerHasAShieldMsHoly: player.shield == game.shields.SANCTYL,
 					//PlayerHasAShieldMsUnholy: player.shield == game.shields.SANCTYD,
 
-					PlayerhasACasterTome:player.shield == game.shields.IMPTOME || player.shield == game.shields.NEKONOM,
+					PlayerhasACasterTome: shieldSubtype == "tome" || player.shield == game.shields.NEKONOM,
 
 					PlayerHasABow: player.isBowTypeWeapon(),
 					PlayerHasABowHoly:player.weaponRange == game.weaponsrange.ARTEMIS,
@@ -307,7 +317,7 @@ public class CharViewContext extends ExecContext {
 							player.necklace == game.necklaces.NECKWIS || player.necklace == game.necklaces.FIRENEC || player.necklace == game.necklaces.ICENECK ||
 							player.necklace == game.necklaces.LIGHNEC || player.necklace == game.necklaces.DARKNEC || player.necklace == game.necklaces.POISNEC ||
 							player.necklace == game.necklaces.LUSTNEC,
-					CowBellAmulet: player.necklace == game.necklaces.COWBELL
+					CowBellAmulet: player.necklace == game.necklaces.COWBELL || player.necklace == game.necklaces.CATBELL
 				}
 			]);
 			this.charview = charview;

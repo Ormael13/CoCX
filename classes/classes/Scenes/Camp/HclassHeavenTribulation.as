@@ -16,7 +16,7 @@ package classes.Scenes.Camp
 			var ThDa:Number = player.statusEffectv2(StatusEffects.HeavenTribulationCR);
 			outputText("A bolt of crimson lightning lances down towards you, burning the very air as it travels.");
 			if (hasStatusEffect(StatusEffects.Dig)) outputText("It strikes the ground above you, and you feel a slight tingle as the power disperses into the ground around you.");
-			else if (player.hasStatusEffect(StatusEffects.EverywhereAndNowhere)) outputText("But due to your current state it's unable to even touch you.");
+			else if (player.hasStatusEffect(StatusEffects.EverywhereAndNowhere) || player.hasStatusEffect(StatusEffects.ShadowTeleport)) outputText("But due to your current state it's unable to even touch you.");
 			else {// || player.hasStatusEffect(StatusEffects.Displacement) || hasStatusEffect(StatusEffects.InvisibleOrStealth)
 				var THUNDER:Number = (750 * player.statusEffectv2(StatusEffects.HeavenTribulationCR));
 				var body_choice:Array = ["head", "arm", "[leg]", "[face]"];//, "[wings]", "[tail]"
@@ -33,7 +33,12 @@ package classes.Scenes.Camp
 				player.addStatusValue(StatusEffects.HeavenTribulationCR,2,ThDa);
 			}
 		}
-		
+
+		// True strike cuz Tribulation
+		override public function playerAttackedCheck():Boolean{
+			return false;
+		}
+
 		override protected function performCombatAction():void
 		{
 			if (!player.hasStatusEffect(StatusEffects.HeavenTribulationCR)) player.createStatusEffect(StatusEffects.HeavenTribulationCR,1,1,0,0);

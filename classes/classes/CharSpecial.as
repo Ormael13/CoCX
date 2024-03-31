@@ -56,9 +56,11 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],raiju start
 			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],oni start
 			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],orc start
+			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],vampire start
+			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],melkie start
+			[ "Drake", customDrake, true, "You were a rather average villager. What made you stand out was your uncanny ability to self-heal along with your long, forked tongue. Your ancestors seemed to lack the ability to keep it in their pants, but at least you have all these strange, inhuman traits to help you out?" ],
+			[ "Solaria", customSolaria, true, "You are a rather average villager with the exception of cute salamander like fangs growing out of your mouth and a predisposition to enter a lust fueled frenzy. That damn ancestor of yours had to go and fuck some salamander, didn't he? But at least he managed to put some loads where it counts and not just her backdoor and you are very grateful for that fact." ],
 			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],chimera start (Layla - based on FoE companion - female herm pc)
-			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],race 1 start
-			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],race 2 start
 
 			[ "With pre-defined history:", null, false, "" ],
 			[ "Annetta", customAnnetta, true, "You're a rather well-endowed hermaphrodite that sports a thick, dog-knotted cock, an unused pussy, and a nice, stretchy butt-hole.  You've also got horns and demonic high-heels on your feet.  It makes you wonder why you would ever get chosen to be champion!" ],
@@ -1239,7 +1241,6 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			player.createPerk(PerkLib.BloodlineDragon,0,0,0,0);
 			player.balls = 2;
 			player.ballSize = 1;
-			player.clitLength = 0;
 			player.createCock();
 			player.cocks[0].cockLength = 8;
 			player.cocks[0].cockThickness = 1.5;
@@ -1295,7 +1296,7 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			player.createPerk(PerkLib.BigCock, 1.25, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.Kelt, 100, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PastLifeSlut)) player.createPerk(PerkLib.HistorySlut,0,0,0,0);
-			if (!player.hasPerk(PerkLib.PastLifeWhore)) player.createPerk(PerkLib.HistoryScout,0,0,0,0);
+			if (!player.hasPerk(PerkLib.PastLifeWhore)) player.createPerk(PerkLib.HistoryWhore,0,0,0,0);
 			outputText("The villagers sure liked to pierce their arrows into you... Though, with your natural agility and a bit of elven blood flowing in your veins, they sure were <i>trying.</i>");
 		}
 
@@ -1343,6 +1344,74 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			if(player.hasVagina()) player.vaginas[0].virgin = true;
 			player.intStat.train.value = 30;
 			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
+		}
+
+		private function customSora8():void {
+			//Character Creation	Female,virgin	A human with orc bloodline	Sora
+			player.createPerk(PerkLib.BloodlineOrc,0,0,0,0);
+			if(player.hasVagina()) player.vaginas[0].virgin = true;
+			player.intStat.train.value = 30;
+			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
+		}
+
+		private function customSora9():void {
+			//Character Creation	Female,virgin	A human with vampire bloodline	Sora
+			player.createPerk(PerkLib.BloodlineVampire,0,0,0,0);
+			if(player.hasVagina()) player.vaginas[0].virgin = true;
+			player.intStat.train.value = 30;
+			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
+		}
+
+		private function customSora10():void {
+			//Character Creation	Female,virgin	A human with melkie bloodline	Sora
+			player.createPerk(PerkLib.BloodlineMelkie,0,0,0,0);
+			if(player.hasVagina()) player.vaginas[0].virgin = true;
+			player.intStat.train.value = 30;
+			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
+		}
+
+		private function customDrake():void {
+			//Character Creation	Male	A human with hydra bloodline	Drake
+			player.createPerk(PerkLib.LizanRegeneration,0,0,0,1);
+			player.createPerk(PerkLib.BloodlineHydra,0,0,0,0);
+			player.tongue.type = Tongue.SNAKE;
+			player.balls = 2;
+			player.ballSize = 1;
+			player.createCock();
+			player.cocks[0].cockLength = 6;
+			player.cocks[0].cockThickness = 1.1;
+			player.cocks[0].cockType = CockTypesEnum.HUMAN;
+			player.createBreastRow();
+			player.strStat.train.value = 40;
+			player.touStat.train.value = 20;
+			player.speStat.train.value = 25;
+			player.tone = 50;
+			player.femininity = 20;
+			if (!player.hasPerk(PerkLib.PastLifeFighter)) player.createPerk(PerkLib.HistoryFighter,0,0,0,0);
+			if (!player.hasPerk(PerkLib.PastLifeHealer)) player.createPerk(PerkLib.HistoryHealer,0,0,0,0);
+			outputText("You were a rather average villager. What made you stand out was your uncanny ability to self-heal along with your long, forked tongue. Your ancestors seemed to lack the ability to keep it in their pants, but at least you have all these strange, inhuman traits to help you out?");
+		}
+
+		private function customSolaria():void {
+			//Character Creation	Female,virgin	A human with salamander bloodline	Solaria
+			player.createPerk(PerkLib.Lustzerker,0,0,0,1);
+			player.createPerk(PerkLib.BloodlineSalamander,0,0,0,0);
+			player.createBreastRow();
+			player.breastRows[0].breastRating = 7;
+			player.butt.type = 12;
+			player.hips.type = 9;
+			player.createVagina();
+			player.vaginas[0].virgin = false;
+			player.libStat.train.value = 50;
+			player.tallness = 84;
+			player.gems += 100;
+			player.tone = 30;
+			player.femininity = 70;
+			player.hairColor = "red";
+			player.faceType = Face.SALAMANDER_FANGS;
+			if (!player.hasPerk(PerkLib.PastLifeFighter)) player.createPerk(PerkLib.HistoryFighter,0,0,0,0);
+			if (!player.hasPerk(PerkLib.PastLifeWhore)) player.createPerk(PerkLib.HistoryWhore,0,0,0,0);
+			outputText("You are a rather average villager with the exception of cute salamander like fangs growing out of your mouth and a predisposition to enter a lust fueled frenzy. That damn ancestor of yours had to go and fuck some salamander, didn't he? But at least he managed to put some loads where it counts and not just her backdoor and you are very grateful for that fact.");
 		}
 
 		private function customTestChar():void {
@@ -2107,7 +2176,7 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 		
 		private function customKhovel():void {
 			// Feral Goblin Wolf-Girl Alchemist
-			// Full Goblin, Wolf Claws/Legs and with Fenrir Ice Shards. Feral upbringing. 
+			// Full Goblin, Wolf Claws/Legs and with Fenrir Ice Shards. Feral upbringing.
 			
 			// ascension cleanup
 			while (player.hasVagina())
@@ -2143,8 +2212,8 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			player.tone = 20;
 			player.skin.setAllProps({base:{adj:"smooth",color:"emerald"}}); // Goblin Skin Color
 			player.hairColor   = "silver blonde";
-			player.hairType    = Hair.CRAZY; // Gremlin Hair. 
-			player.hairLength  = 42; // Long compared to height. Never had a haircut. 
+			player.hairType    = Hair.CRAZY; // Gremlin Hair.
+			player.hairLength  = 42; // Long compared to height. Never had a haircut.
 			player.femininity  = 20; // Not so Femenine looking when raised by wolves
 			player.beardLength = 0;
 			player.beardStyle  = 0;
@@ -2162,8 +2231,8 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			player.rearBody.type = RearBody.FENRIR_ICE_SPIKES;
 			player.strStat.train.value += 10; // Being raised by Wolves has it's advantages
 			player.touStat.train.value += 10;
-			player.speStat.train.value += 10; 
-			//player.intStat.train.value = 55; 
+			player.speStat.train.value += 10;
+			//player.intStat.train.value = 55;
 			//player.wisStat.train.value = 55;
 			player.libStat.train.value = 100;
 			
@@ -2229,7 +2298,7 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			
 			/* Rarity : RARITY_DIVINE, RARITY_LEGENDARY, RARITY_RARE, RARITY_MAGICAL, RARITY_COMMON
 			 * quality : ngLevel * 2
-			 * 
+			 *
 		    */
 
 			

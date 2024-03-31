@@ -40,9 +40,9 @@ public class ObsidianGargoyle extends AbstractGargoyle
 				if (!monsterIsStunned()) {
 					outputText("You feel your magical energy being forcefully drawn out of you, coming out as a bluish aura that rushes straight into the Gargoyle waiting mouth. She take it in like a breath of fresh air, looking healthier as she feasts on your magic. The gargoyle licks her lips like she just had an excellent meal.");
 					var devour:Number = 0;
-					if (player.fatigue + 200 > player.maxFatigue()) {
-						devour += player.maxFatigue() - player.fatigue;
-						player.fatigue = player.maxFatigue();
+					if (player.fatigue + 200 > player.maxOverFatigue()) {
+						devour += player.maxOverFatigue() - player.fatigue;
+						player.fatigue = player.maxOverFatigue();
 					}
 					else {
 						devour += 200;
@@ -140,7 +140,7 @@ public class ObsidianGargoyle extends AbstractGargoyle
 			this.level = 28;
 			this.bonusHP = 2500;
 			this.additionalXP = 500;
-			this.lustVuln = 0;
+			this.lustVuln = 0.01;
 			this.weaponName = "stone claws";
 			this.weaponVerb = "claw-slash";
 			this.weaponAttack = 75;

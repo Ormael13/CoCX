@@ -33,6 +33,7 @@ public class RhinoRace extends Race {
 		super("Rhino", id, []);//RaceBody);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
+		disabled = true;
 	}
 	
 	public override function setup():void {
@@ -41,9 +42,8 @@ public class RhinoRace extends Race {
 				.earType(Ears.RHINO, +1)
 				.tailType(Tail.RHINO, +1)
 				.faceType(Face.RHINO, +1)
-				.hornType(Horns.RHINO, +1);
-		addScoresAfter(2)
-				.skinColor1("gray", +1)
+				.hornType(Horns.RHINO, +1)
+				.skinColor1("gray", +1)//thic skin perk also form numb rocks
 				.hasCockOfType(CockTypesEnum.RHINO, +1);
 		
 		buildTier(4, "rhino")

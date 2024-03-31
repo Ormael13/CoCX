@@ -55,10 +55,12 @@ public class AbstractBloodSoulSkill extends AbstractSoulSkill {
     }
 
     override public function costDescription():Array {
-        var costs:/*String*/Array = super.costDescription().concat();
+        var costs:/*String*/Array = super.costDescription();
         //Remove addition from Abstract soulSkill Implementation
         if (sfCost() > 0) {
-            costs.pop();
+            costs = costs.filter(function (cost:String,index:int,array:Array):Boolean {
+                return cost.indexOf("Soulforce Cost:") != 0;
+            });
             if (sfInfusion) costs.push("Soulforce Cost: "+super.sfCost());
             costs.push("Blood Cost: "+sfCost());
         }
@@ -70,7 +72,7 @@ public class AbstractBloodSoulSkill extends AbstractSoulSkill {
         if (lastAttackType != 0)
 			flags[kFLAGS.LAST_ATTACK_TYPE] = lastAttackType;
             
-        HPChange(sfCost(), false);
+        HPChange(-sfCost(), false);
 
         if (sfInfusion) {
             player.soulforce -= super.sfCost();

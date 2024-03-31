@@ -81,17 +81,16 @@ public class AbstractSpell extends CombatAbility {
 			if (player.HP - player.minHP() <= finalCost) {
 				return "Your HP is too low to cast this spell."
 			}
-		} else if (isLastResortApplicable && player.hasPerk(PerkLib.LastResort) && player.mana + (player.HP - player.minHP()) < finalCost) {
-			return "Your HP and mana are too low to cast this spell.";
+		} else if (isLastResortApplicable && player.hasPerk(PerkLib.LastResort)) {
+			if (player.mana + (player.HP - player.minHP()) < finalCost) {
+				return "Your HP and mana are too low to cast this spell.";
+			}
 		} else if (player.mana < finalCost)
 			return "Your mana is too low to cast this spell.";
 
 		if (targetType == TARGET_ENEMY) {
 			if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				return "You can only use buff magic while underground."
-			}
-			if (combat.isEnemyInvisible) {
-				return "You cannot use offensive spells against an opponent you cannot see or target."
 			}
 		}
 		
@@ -112,7 +111,9 @@ public class AbstractSpell extends CombatAbility {
 	protected function postSpellEffect(display:Boolean = true):void {
 		MagicAddonEffect(magicAddonProcs);
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		if (targetType == TARGET_ENEMY && hasTag(TAG_LUSTDMG)) combat.teases.fueledByDesireHeal(display);
 		if (monster is SiegweirdBoss) (monster as SiegweirdBoss).castedSpellThisTurn = true;
+		if (targetType == TARGET_ENEMY && hasTag(TAG_DAMAGING) && player.hasPerk(PerkLib.BrutalSpells)) combat.magic.brutalSpellsEffect(display);
 	}
 	
 	public override function doEffect(display:Boolean = true):void {
@@ -199,7 +200,8 @@ public class AbstractSpell extends CombatAbility {
 			baseDamage:Number,
 			monster:Monster,
 			category:int,
-			randomize:Boolean=true
+			randomize:Boolean=true,
+			applyOmnicaster:Boolean = true
 	): Number {
 		var lustDmg:Number = baseDamage;
 		lustDmg *= spellModByCat(category);
@@ -213,12 +215,18 @@ public class AbstractSpell extends CombatAbility {
 		}
 		if(player.hasPerk(PerkLib.ArcaneLash) && player.isWhipTypeWeapon()) lustDmg *= 1.5;
 		if(player.hasStatusEffect(StatusEffects.AlvinaTraining2)) lustDmg *= 1.2;
+		lustDmg = combat.teases.fueledByDesireDamageBonus(lustDmg);
 		if (monster != null) {
 			if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) lustDmg *= 1.2;
 			lustDmg *= corruptMagicPerkFactor(monster);
 		}
 		if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
 		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
+
+		if (applyOmnicaster && (category != CAT_SPELL_GREEN || !player.hasPerk(PerkLib.ArcaneVenom))) {
+			lustDmg *= omnicasterDamageFactor();
+		}
+
 		return Math.round(lustDmg);
 	}
 	
@@ -460,6 +468,68 @@ public class AbstractSpell extends CombatAbility {
 		if (player.hasPerk(PerkLib.BloodAffinity)) bAB += 1;
 		return bAB;
 	}
+
+	/**
+	 * Award tease exp if nessecary, and apply verdent leech effects
+	 * @param hits (int) - number of hits applied by the lust spell
+	 */
+	protected function postLustSpellEffect(hits:int):void {
+		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP((1 + combat.bonusExpAfterSuccesfullTease()) * hits);
+		if (player.hasPerk(PerkLib.VerdantLeech)) {
+			if (monster.lustVuln != 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += hits * 0.025;
+			HPChange(Math.round(player.maxHP() * 0.01 * hits), false);
+		}
+	}
+
+	/**
+	 * Do a crit roll and apply crit multiplier.
+	 * Deal damage once or repeatedly (if Omnicaster and param set). Does NOT apply Omnicaster damage downscale!
+	 * Also prints "Monster takes N N N N damage. Critical Hit!"
+	 * @param lustDmg Lust damage to deal
+	 * @param Spell category (e.g. CAT_SPELL_GREEN)
+	 * @param omnicaterRepeat Determine if spell should hit multiple times
+	 * @return {Array} [Total damage dealt (int), number of hits (int), crit or not (boolean)]
+	 */
+	protected function critAndRepeatLust(
+			display:Boolean,
+			lustDmg:Number,
+			category:int,
+			displayDamageOnly:Boolean=false,
+			omnicasterRepeat:Boolean=true
+	):Array {
+		
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5 + combat.teases.combatTeaseCritical();
+        if (player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 4) critChance += 10;
+		if (player.perkv1(IMutationsLib.GazerEyesIM) >= 3) critChance += 10;
+		if (player.perkv1(IMutationsLib.GazerEyesIM) >= 4) critChance += 25;
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (critChance > 0 && rand(100) < critChance) {
+			crit = true;
+			lustDmg *= 1.75;
+		}
+
+		var repeats:int = 1;
+		if (omnicasterRepeat) {
+			if (category == CAT_SPELL_GREEN && player.hasPerk(PerkLib.ArcaneVenom)) {
+				repeats += stackingArcaneVenom();
+			} else {
+				repeats = omnicasterRepeatCount();
+			}
+		}
+
+		var i:int = repeats;
+		while (i-->0) {
+			if (display) outputText(" ");
+			monster.teased(lustDmg, false, display || displayDamageOnly);
+		}
+		if (display) {
+			if (crit) outputText(" <b>*Critical Hit!*</b>");
+		}
+
+		return [lustDmg * repeats, repeats, crit];
+	}
 	
 	/**
 	 * Do a crit roll and apply crit multiplier.
@@ -561,7 +631,7 @@ public class AbstractSpell extends CombatAbility {
 					break;
 			}
 		}
-		dynStats("lib", .25, "lus", 15);
+		dynStats("lib", .25, "lus", Math.max(player.maxLust() * 0.01, 15));
 	}
 	
 	/**

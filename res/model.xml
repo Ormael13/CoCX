@@ -192,6 +192,8 @@
             <color name="abyssal black">#000000</color>
             <color name="white and black">#eff3f6</color>
 			<color name="fiendish pink">#ffccf3</color>
+			<color name="fiendish dark pink">#ea7bc5</color>
+			<color name="fiendish blue">#91a0e3</color>
         </common>
         <property name="hair" src="hairColor1" default="#ffffff">
             <color name="red">#d85741</color>
@@ -274,6 +276,7 @@
 		<key src="#5c5cfe" base="scales" transform="lighten(10)"/>
         <key src="#4444FF" base="scales"/>
         <key src="#0000CC" base="scales" transform="darken(25)"/>
+		<key src="#2f2fe7" base="scales" transform="darken(35)"/>
         <key src="#000033" base="scales" transform="darken(50)"/>
         <key src="#AAFFAA" base="scales2" transform="lighten(25)"/>
 		<key src="#55ab55" base="scales2" transform="lighten(10)"/>
@@ -394,7 +397,7 @@
         <cell rect="951,150,49,59" name="arms_bg_pattern/Bvenom" dx="56" dy="64"/>
 		<cell rect="1301,150,49,59" name="arms_bg_pattern/Bdemonic" dx="56" dy="64"/>
         <cell rect="1,1364,49,59" name="arms_bg/gazer" dx="65" dy="65"/>
-		<cell rect="1201,150,49,55" name="arms_bg/prayer" dx="78" dy="64"/>
+		<cell rect="1351,150,49,55" name="arms_bg/prayer" dx="78" dy="64"/>
         <cell rect="1,210,49,59" name="arms/human" dx="104" dy="64"/>
         <cell rect="51,210,49,59" name="arms/fur" dx="104" dy="64"/>
         <cell rect="551,210,49,59" name="arms/furracoon" dx="104" dy="64"/>
@@ -424,7 +427,7 @@
         <cell rect="201,913,49,59" name="arms/displacerquad_chitin" dx="101" dy="56"/>
         <cell rect="251,913,49,59" name="arms/displacerquad_orca" dx="101" dy="56"/>
         <cell rect="1,1124,49,59" name="arms/feral_human" dx="101" dy="56"/>
-		<cell rect="1201,210,49,55" name="arms/prayer" dx="78" dy="64"/>
+		<cell rect="1351,210,49,55" name="arms_front/prayer" dx="78" dy="64"/>
 		<cell rect="351,1124,49,59" name="arms/feral_dragon" dx="101" dy="56"/>
         <cell rect="801,210,49,59" name="arms/demonlewd" dx="100" dy="53"/>
         <cell rect="1,1184,99,119" name="arms/hinezumistanced_human" dx="58" dy="55"/>
@@ -443,7 +446,8 @@
         <cell rect="251,1124,49,59" name="arms_overlay/feral_orca" dx="101" dy="56"/>
         <cell rect="851,210,49,59" name="arms_fg/demonlewd" dx="100" dy="53"/>
         <cell rect="638,702,90,90" name="arms_fg/manticore_sit" dx="60" dy="61"/>
-		<cell rect="1251,150,49,59" name="arms_fg/prayer" dx="78" dy="56"/>
+		<cell rect="1401,150,49,59" name="arms_fg/prayer" dx="78" dy="56"/> 
+		<cell rect="1451,150,49,59" name="arms_fg/marilith" dx="78" dy="56"/> 
         <cell rect="451,210,49,59" name="arms_pattern/Bstripe" dx="104" dy="64"/>
         <cell rect="501,210,49,59" name="arms_pattern/Blightning" dx="104" dy="64"/>
         <cell rect="651,210,49,59" name="arms_pattern/Btatoo" dx="104" dy="64"/>
@@ -916,8 +920,24 @@
         <cell rect="212,2044,80,90" name="weapon/swordHolyOH" dx="82" dy="55"/>
         <cell rect="212,2150,80,90" name="weapon/swordUnholyOH" dx="82" dy="55"/>
         <cell rect="122,2044,80,90" name="weaponBuff/swordFireBuffOH" dx="86" dy="31"/>
-		<cell rect="212,2256,89,105" name="weapon/swordMoonlightGS" dx="34" dy="42"/>
-		<cell rect="122,2256,89,105" name="weaponBuff/swordFireBuffMlGS" dx="30" dy="34"/>
+		<cell rect="122,2150,89,105" name="weapon/swordMoonlightGS" dx="34" dy="42"/>
+		<cell rect="32,2150,89,105" name="weaponBuff/swordFireBuffMlGS" dx="30" dy="34"/>
+		<cell rect="122,2256,89,105" name="weapon/swordLargeGeneric" dx="38" dy="55"/>
+		<cell rect="212,2256,89,105" name="weapon/swordLargeGenericOH" dx="82" dy="55"/>
+		<cell rect="122,2362,89,105" name="weapon/swordLargeHoly" dx="38" dy="55"/>
+		<cell rect="212,2362,89,105" name="weapon/swordLargeHolyOH" dx="82" dy="55"/>
+		<cell rect="122,2468,89,105" name="weapon/swordLargeUnholy" dx="38" dy="55"/>
+		<cell rect="212,2468,89,105" name="weapon/swordLargeUnholyOH" dx="82" dy="55"/>
+		<cell rect="122,2574,89,105" name="weaponBuff/swordLargeFireBuff" dx="31" dy="22"/>
+		<cell rect="212,2574,89,105" name="weaponBuff/swordLargeFireBuffOH" dx="89" dy="22"/>
+		<cell rect="302,2256,89,105" name="weapon/swordMassiveGeneric" dx="26" dy="43"/>
+		<cell rect="392,2256,89,105" name="weapon/swordMassiveGenericOH" dx="94" dy="43"/>
+		<cell rect="302,2362,89,105" name="weapon/swordMassiveHoly" dx="26" dy="43"/>
+		<cell rect="392,2362,89,105" name="weapon/swordMassiveHolyOH" dx="94" dy="43"/>
+		<cell rect="302,2468,89,105" name="weapon/swordMassiveUnholy" dx="26" dy="43"/>
+		<cell rect="392,2468,89,105" name="weapon/swordMassiveUnholyOH" dx="94" dy="43"/>
+		<cell rect="302,2574,89,105" name="weaponBuff/swordMassiveFireBuff" dx="38" dy="11"/>
+		<cell rect="392,2574,89,105" name="weaponBuff/swordMassiveFireBuffOH" dx="82" dy="11"/>
         <cell rect="302,1620,80,90" name="weapon/axeGeneric" dx="38" dy="55"/>
         <cell rect="302,1726,80,90" name="weapon/axeHoly" dx="38" dy="55"/>
         <cell rect="302,1832,80,90" name="weapon/axeUnholy" dx="38" dy="55"/>
@@ -975,6 +995,7 @@
         <cell rect="842,1620,80,90" name="weapon/tetsuGeneric" dx="38" dy="55"/>
         <cell rect="842,1726,80,90" name="weapon/tetsuHoly" dx="38" dy="55"/>
         <cell rect="842,1832,80,90" name="weapon/tetsuUnholy" dx="38" dy="55"/>
+		<cell rect="1022,2100,89,55" name="weapon/panFlute" dx="43" dy="94"/>
         <cell rect="1112,1620,80,90" name="weapon/daggerGeneric" dx="38" dy="55"/>
         <cell rect="1112,1726,80,90" name="weapon/daggerHoly" dx="38" dy="55"/>
         <cell rect="1112,1832,80,90" name="weapon/daggerUnholy" dx="38" dy="55"/>
@@ -998,7 +1019,7 @@
 		<cell rect="572,2362,89,105" name="shield/shieldMsGeneric" dx="66" dy="60"/>
 		<cell rect="482,2362,89,105" name="shield/shieldMSHoly" dx="66" dy="60"/>
 		<cell rect="662,2362,89,105" name="shield/shieldMSUnholy" dx="66" dy="60"/>
-		<cell rect="572,1938,88,90" name="shield/CasterTomeOfImps" dx="80" dy="10"/>
+		<cell rect="572,1938,88,90" name="shield/CasterTomeOfImps" dx="80" dy="50"/>
         <cell rect="1022,1620,80,90" name="backAccessory/LactoblasterTank" dx="59" dy="32"/>
 		<cell rect="2325,325,77,44" name="backAccessory/kabutoMempoBack" dx="67" dy="32"/>
         <cell rect="1022,1726,85,45" name="weapon/LactoblasterGun" dx="60" dy="97"/>
@@ -1108,6 +1129,7 @@
 		<cell rect="451,150,29,32" name="eyes/corruptcat" dx="90" dy="37"/>
         <cell rect="481,150,29,32" name="eyes/mindbreakerMale" dx="90" dy="37"/>
 		<cell rect="511,150,29,32" name="eyes_fg/corruptinfernal" dx="90" dy="37"/>
+		<cell rect="541,150,29,32" name="antennae/marilithEye" dx="90" dy="37"/>
         <cell rect="1,190,29,32" name="ears_bg/human" dx="90" dy="37"/>
         <cell rect="31,190,29,32" name="ears/fur" dx="90" dy="37"/>
         <cell rect="61,190,59,32" name="ears_bg/elfin" dx="75" dy="36"/>
@@ -1156,7 +1178,7 @@
 		<cell rect="691,256,89,65" name="ears_bg/fennec" dx="57" dy="2"/>
         <cell rect="541,330,87,97" name="ears_truebg/melkie" dx="60" dy="36"/>
         <cell rect="1,396,59,65" name="horns/orchid" dx="73" dy="4"/>
-        <cell rect="61,396,59,65" name="horns/devil" dx="72" dy="4"/>
+        <cell rect="61,396,59,65" name="horns/devil" dx="76" dy="5"/>
         <cell rect="121,396,59,65" name="horns/cow" dx="75" dy="4"/>
         <cell rect="181,330,29,65" name="horns/2small" dx="90" dy="4"/>
         <cell rect="211,330,29,65" name="horns/2large" dx="90" dy="4"/>
@@ -1169,7 +1191,7 @@
         <cell rect="211,429,29,30" name="horns/frostWyrmLeft" dx="73" dy="23"/>
 		<cell rect="631,396,58,32" name="horns/blackOracle" dx="74" dy="28"/>
         <cell rect="1,330,59,65" name="horns_bg/orchid" dx="73" dy="4"/>
-        <cell rect="61,330,59,65" name="horns_bg/devil" dx="72" dy="4"/>
+        <cell rect="61,330,59,65" name="horns_bg/devil" dx="76" dy="5"/>
         <cell rect="121,330,59,65" name="horns_bg/cow" dx="75" dy="4"/>
         <cell rect="241,330,59,65" name="horns_bg/kraken" dx="75" dy="4"/>
         <cell rect="301,330,59,65" name="horns_bg/demon" dx="75" dy="4"/>
@@ -1361,10 +1383,10 @@
         <cell rect="161,350,49,29" name="balls/Bdscaleshuge" dx="79" dy="105"/>
         <cell rect="161,380,49,29" name="balls/Bdscalessillyhuge" dx="79" dy="106"/>
         <cell rect="161,560,49,36" name="balls/Bdscalesgigahuge" dx="82" dy="114"/>
-        <cell rect="311,290,49,29" name="balls/Borcasmall" dx="79" dy="104"/>
-        <cell rect="311,320,49,29" name="balls/Borcalarge" dx="79" dy="104"/>
-        <cell rect="311,350,49,29" name="balls/Borcahuge" dx="79" dy="105"/>
-        <cell rect="311,380,49,29" name="balls/Borcasillhugehuge" dx="79" dy="106"/>
+        <cell rect="211,290,49,29" name="balls/Borcasmall" dx="79" dy="104"/>
+        <cell rect="211,320,49,29" name="balls/Borcalarge" dx="79" dy="104"/>
+        <cell rect="211,350,49,29" name="balls/Borcahuge" dx="79" dy="105"/>
+        <cell rect="211,380,49,29" name="balls/Borcasillhugehuge" dx="79" dy="106"/>
         <cell rect="311,560,49,36" name="balls/Borcagigahuge" dx="82" dy="114"/>
         <cell rect="211,290,49,29" name="balls/Bbeesmall" dx="79" dy="104"/>
         <cell rect="211,320,49,29" name="balls/Bbeelarge" dx="79" dy="104"/>
@@ -1647,7 +1669,7 @@
         <cell rect="759,561,83,139" name="tail/wendigo" dx="95" dy="40"/>
         <cell rect="759,561,83,139" name="tail/wendigo_taur" dx="144" dy="49"/>
         <cell rect="508,351,82,69" name="tail/kamaitachi" dx="95" dy="87"/>
-        <cell rect="508,351,82,69" name="tail/kamaitachi_taur" dx="144" dy="50"/>
+        <cell rect="508,351,82,69" name="tail/kamaitachi_taur" dx="149" dy="94"/>
 		<cell rect="593,351,82,69" name="tail/kirin" dx="95" dy="87"/>
         <cell rect="593,351,82,69" name="tail/kirin_taur" dx="140" dy="88"/>
         <cell rect="255,211,83,139" name="tail_bg/cat" dx="108" dy="40"/>
@@ -1678,28 +1700,24 @@
         <cell rect="175,701,173,156" name="tail_bg/fox8_taur" dx="60" dy="47"/>
         <cell rect="1,701,173,156" name="tail_bg/fox9" dx="21" dy="37"/>
         <cell rect="1,701,173,156" name="tail_bg/fox9_taur" dx="60" dy="47"/>		
-		<cell rect="1,1486,173,156" name="tail_bg/firefox1" dx="4" dy="31"/>
-        <cell rect="1,1486,173,156" name="tail_bg/firefox1_taur" dx="60" dy="47"/>
-        <cell rect="523,1329,173,156" name="tail_bg/firefox2" dx="16" dy="36"/>
-        <cell rect="523,1329,173,156" name="tail_bg/firefox2_taur" dx="63" dy="43"/>
-        <cell rect="349,1329,173,156" name="tail_bg/firefox3" dx="17" dy="35"/>
-        <cell rect="349,1329,173,156" name="tail_bg/firefox3_taur" dx="67" dy="47"/>
-        <cell rect="175,1329,173,156" name="tail_bg/firefox4" dx="20" dy="36"/>
-        <cell rect="175,1329,173,156" name="tail_bg/firefox4_taur" dx="65" dy="47"/>
-        <cell rect="1,1329,173,156" name="tail_bg/firefox5" dx="21" dy="37"/>
-        <cell rect="1,1329,173,156" name="tail_bg/firefox5_taur" dx="61" dy="47"/>
-        <cell rect="523,1172,173,156" name="tail_bg/firefox6" dx="21" dy="37"/>
-        <cell rect="523,1172,173,156" name="tail_bg/firefox6_taur" dx="60" dy="47"/>
-        <cell rect="349,1172,173,156" name="tail_bg/firefox7" dx="21" dy="37"/>
-        <cell rect="349,1172,173,156" name="tail_bg/firefox7_taur" dx="60" dy="47"/>
-        <cell rect="175,1172,173,156" name="tail_bg/firefox8" dx="21" dy="37"/>
-        <cell rect="175,1172,173,156" name="tail_bg/firefox8_taur" dx="60" dy="47"/>
-        <cell rect="1,1172,173,156" name="tail_bg/firefox9" dx="21" dy="37"/>
-        <cell rect="1,1172,173,156" name="tail_bg/firefox9_taur" dx="60" dy="47"/>
-        <cell rect="175,1015,173,156" name="tail_bg/Kumiho" dx="21" dy="37"/>
-        <cell rect="175,1015,173,156" name="tail_bg/Kumiho_taur" dx="60" dy="47"/>
-		<cell rect="255,561,83,139" name="tail_bg/spider" dx="95" dy="40"/>
-        <cell rect="255,561,83,139" name="tail_bg/spider_taur" dx="135" dy="50"/>
+		<cell rect="1,1486,173,156" name="tail_bg_overlay/firefox1" dx="4" dy="31"/>
+        <cell rect="1,1486,173,156" name="tail_bg_overlay/firefox1_taur" dx="60" dy="47"/>
+        <cell rect="523,1329,173,156" name="tail_bg_overlay/firefox2" dx="16" dy="36"/>
+        <cell rect="523,1329,173,156" name="tail_bg_overlay/firefox2_taur" dx="63" dy="43"/>
+        <cell rect="349,1329,173,156" name="tail_bg_overlay/firefox3" dx="17" dy="35"/>
+        <cell rect="349,1329,173,156" name="tail_bg_overlay/firefox3_taur" dx="67" dy="47"/>
+        <cell rect="175,1329,173,156" name="tail_bg_overlay/firefox4" dx="20" dy="36"/>
+        <cell rect="175,1329,173,156" name="tail_bg_overlay/firefox4_taur" dx="65" dy="47"/>
+        <cell rect="1,1329,173,156" name="tail_bg_overlay/firefox5" dx="21" dy="37"/>
+        <cell rect="1,1329,173,156" name="tail_bg_overlay/firefox5_taur" dx="61" dy="47"/>
+        <cell rect="523,1172,173,156" name="tail_bg_overlay/firefox6" dx="21" dy="37"/>
+        <cell rect="523,1172,173,156" name="tail_bg_overlay/firefox6_taur" dx="60" dy="47"/>
+        <cell rect="349,1172,173,156" name="tail_bg_overlay/firefox7" dx="21" dy="37"/>
+        <cell rect="349,1172,173,156" name="tail_bg_overlay/firefox7_taur" dx="60" dy="47"/>
+        <cell rect="175,1172,173,156" name="tail_bg_overlay/firefox8" dx="21" dy="37"/>
+        <cell rect="175,1172,173,156" name="tail_bg_overlay/firefox8_taur" dx="60" dy="47"/>
+        <cell rect="1,1172,173,156" name="tail_bg_overlay/firefox9" dx="21" dy="37"/>
+        <cell rect="1,1172,173,156" name="tail_bg_overlay/firefox9_taur" dx="60" dy="47"/>
     </spritemap>
     <spritemap file="wings.png">
         <cell rect="1,70,84,139" name="wings_bg/mantibig" dx="20" dy="20"/>
@@ -1823,6 +1841,7 @@
 		<layer name="clotheLegs"/>
 		<layer name="armorLegs"/>
 		<layer name="panty"/>
+		<layer name="arms_front"/>
 		<layer name="overhands"/>
         <layer name="hands"/>
 		<layer name="arms_pattern"/>
@@ -1870,6 +1889,7 @@
 		<layer name="backtentacles_bg"/>
 		<layer name="wings"/>
         <layer name="wings_bg"/>
+		<layer name="tail_bg_overlay"/>
 		<layer name="tail_bg"/>
 		<layer name="legs_bg"/>
 		<layer name="aura"/>
@@ -1981,26 +2001,54 @@
 
 					<!-- Sword -->
 					<if test="PlayerHasASword">
-						<switch>
-							<case test="PlayerHasASwordHoly">
+						<if test="PlayerHasASwordHoly or PlayerHasASwordUnholy">
+							<if test="PlayerHasASwordHoly">
 								<show part="weapon/swordHoly"/>
 								<if test="PlayerHasADualMeleeWeapon">
 									<show part="weapon/swordHolyOH"/>
 								</if>
-							</case>
-							<case test="PlayerHasASwordUnholy">
+							</if>
+							<if test="PlayerHasASwordUnholy">
 								<show part="weapon/swordUnholy"/>
 								<if test="PlayerHasADualMeleeWeapon">
 									<show part="weapon/swordUnholyOH"/>
+								</if>
+							</if>
+							<else>
+								<show part="weapon/swordGeneric"/>
+								<if test="PlayerHasADualMeleeWeapon">
+									<show part="weapon/swordGenericOH"/>
+								</if>
+							</else>
+						</if>
+						<if test="FireBuff">
+							<show part="weaponBuff/swordFireBuff"/>
+							<if test="PlayerHasADualMeleeWeapon">
+								<show part="weaponBuff/swordFireBuffOH"/>
+							</if>
+						</if>
+					</if>
+					<if test="PlayerHasALargeSword">
+						<switch>
+							<case test="PlayerHasALargeSwordHoly">
+								<show part="weapon/swordLargeHoly"/>
+								<if test="PlayerHasADualMeleeWeapon">
+									<show part="weapon/swordLargeHolyOH"/>
+								</if>
+							</case>
+							<case test="PlayerHasALargeSwordUnholy">
+								<show part="weapon/swordLargeUnholy"/>
+								<if test="PlayerHasADualMeleeWeapon">
+									<show part="weapon/swordLargeUnholyOH"/>
 								</if>
 							</case>
 							<case test="PlayerHasASwordMoonGS">
 								<show part="weapon/swordMoonlightGS"/>
 							</case>
 							<default>
-								<show part="weapon/swordGeneric"/>
+								<show part="weapon/swordLargeGeneric"/>
 								<if test="PlayerHasADualMeleeWeapon">
-									<show part="weapon/swordGenericOH"/>
+									<show part="weapon/swordLargeGenericOH"/>
 								</if>
 							</default>
 						</switch>
@@ -2010,12 +2058,40 @@
 									<show part="weaponBuff/swordFireBuffMlGS"/>
 								</case>
 								<default>
-									<show part="weaponBuff/swordFireBuff"/>
+									<show part="weaponBuff/swordLargeFireBuff"/>
 									<if test="PlayerHasADualMeleeWeapon">
-										<show part="weaponBuff/swordFireBuffOH"/>
+										<show part="weaponBuff/swordLargeFireBuffOH"/>
 									</if>
 								</default>
 							</switch>
+						</if>
+					</if>
+					<if test="PlayerHasAMassiveSword">
+						<if test="PlayerHasAMassiveSwordHoly or PlayerHasAMassiveSwordUnholy">
+							<if test="PlayerHasAMassiveSwordHoly">
+								<show part="weapon/swordMassiveHoly"/>
+								<if test="PlayerHasADualMeleeWeapon">
+									<show part="weapon/swordMassiveHolyOH"/>
+								</if>
+							</if>
+							<if test="PlayerHasAMassiveSwordUnholy">
+								<show part="weapon/swordMassiveUnholy"/>
+								<if test="PlayerHasADualMeleeWeapon">
+									<show part="weapon/swordMassiveUnholyOH"/>
+								</if>
+							</if>
+							<else>
+								<show part="weapon/swordMassiveGeneric"/>
+								<if test="PlayerHasADualMeleeWeapon">
+									<show part="weapon/swordMassiveGenericOH"/>
+								</if>
+							</else>
+						</if>
+						<if test="FireBuff">
+							<show part="weaponBuff/swordMassiveFireBuff"/>
+							<if test="PlayerHasADualMeleeWeapon">
+								<show part="weaponBuff/swordMassiveFireBuffOH"/>
+							</if>
 						</if>
 					</if>
 
@@ -2080,6 +2156,11 @@
 								</if>
 							</else>
 						</if>
+					</if>
+
+					<!-- Pan Flute -->
+					<if test="PlayerHasAPanFlute">
+						<show part="weapon/panFlute"/>
 					</if>
 
 					<!-- Spear -->
@@ -3934,7 +4015,7 @@
 					</else>
 				</if>
             </case>
-			<case values="Arms.RACCOON,Arms.FOX,Arms.SPHINX,Arms.WEASEL">
+			<case values="Arms.RACCOON,Arms.FOX,Arms.SPHINX,Arms.WEASEL,Arms.SATYR">
                 <show part="hands/furracoon"/>
                 <show part="hands_bg/furracoon"/>
             </case>
@@ -4873,7 +4954,8 @@
 				<show part="tail_bg/fox$tailCount$taur"/>
             </case>
 			<case values="Tail.KITSHOO">
-				<show part="tail_bg/firefox$tailCount$taur"/>
+				<show part="tail_bg/fox$tailCount$taur"/>
+				<show part="tail_bg_overlay/firefox$tailCount$taur"/>
             </case>
             <case values="Tail.KANGAROO"><!--TODO -->
                 <show part="tail/cat"/>
@@ -4949,9 +5031,6 @@
 						<show part="tail_fg/reptile_fire"/>
 					</else>
 				</if>
-            </case>
-            <case values="Tail.KITSHOO">
-                <!--TODO -->
             </case>
             <case values="Tail.MANTICORE_PUSSYTAIL">
 				<if test="isTaur()">

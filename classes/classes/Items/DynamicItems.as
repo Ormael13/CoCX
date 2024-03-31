@@ -33,6 +33,20 @@ public class DynamicItems extends ItemConstants {
 		[5, RARITY_RARE]
 	];
 	
+	public static const RARITY_CHANCES_MINOR_LOW:Array = [
+		// weights sum to 100 so chances are in %
+		[40, RARITY_COMMON],
+		[40, RARITY_MAGICAL],
+		[20, RARITY_RARE]
+	];
+	
+	public static const RARITY_CHANCES_MINOR_HIGH:Array = [
+		// weights sum to 100 so chances are in %
+		[20, RARITY_COMMON],
+		[30, RARITY_MAGICAL],
+		[50, RARITY_RARE]
+	];
+	
 	/**
 	 * Weighted random table for quality rolls at specific NG+ level
 	 */
@@ -335,7 +349,10 @@ public class DynamicItems extends ItemConstants {
 		for each (e in effects) {
 			if (e.identified) {
 				if (!e.type.hideDescription(e)) {
-					effectDesc.push([80+i,"Effect: "+e.description]);
+					var description:String = e.description;
+					if (description) {
+						effectDesc.push([80 + i, "Effect: " + description]);
+					}
 				}
 				value += e.valueAdd;
 				valueMul *= e.valueMul;
@@ -426,10 +443,10 @@ public class DynamicItems extends ItemConstants {
 		};
 	}
 	
-	public static function postConstruct(item:Equipable, tags:Object, buffs:Object):void {
+	public static function postConstruct(item:Equipable, tags:Array, buffs:Object):void {
 		item.stackSize = 1;
 		item.pearlStackSize = 1;
-		item.withTags(tags);
+		item.withTagsV(tags);
 		item.withBuffs(buffs);
 		for each (var enchantment:Enchantment in item.getEnchantments()) {
 			if (enchantment.identified) {
