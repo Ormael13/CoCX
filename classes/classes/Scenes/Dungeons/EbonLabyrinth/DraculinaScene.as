@@ -54,6 +54,8 @@ public class DraculinaScene extends BaseContent {
 			outputText("Thoroughly satisfied, you bid your sire to take care and head back down into the labyrinth.\n\n");
 			if (player.hasCock()) player.sexReward("vaginalFluids","Dick");
 			else player.sexReward("vaginalFluids");
+			inventory.takeItem(consumables.VAMPBLD, playerMenu);
+            return;
 		}
 		else {
 			outputText("As you turn the next corner, you end up face to face with a large stone door. Lacking any other options, you force the door open with a loud grinding noise and enter what appears to be a large, cavernous section. The door slowly closes behind you with a loud clang. Startled by the sudden noise, bats take off into the black depths. Your [skin] crawls, almost like you’re being watched.\n\n");

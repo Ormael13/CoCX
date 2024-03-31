@@ -120,7 +120,7 @@ public class SkinTransformations extends MutationsHelper {
 				}
 				const color: String = randomChoice("white", "sable");
 				var adj: String = "milky";
-				if(color == "sable") adj = "ashen"
+				if (color == "sable") adj = "ashen";
 				desc += "[pg]You feel lightheaded all of a sudden. You bring your hands up to clutch your head only to find the color slowly fading from your skin or rather it’s losing its opacity altogether. You examine your body and see that you’ve become almost entirely transparent, adding to your ethereal appearance. <b>You now have transparent "+adj+" "+color+" skin.</b>";
 
 				if (doOutput) outputText(desc);
