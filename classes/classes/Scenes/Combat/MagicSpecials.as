@@ -402,7 +402,7 @@ public class MagicSpecials extends BaseCombatContent {
 				if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 4) {
 					var amount:Number = 0.6;
 					if (player.hasStatusEffect(StatusEffects.DarkRitual)) amount += 0.1;
-					bd = buttons.add("Finality Barrage", arigeanFinalityBarrage).hint("Sacrifice 60% of your max hp to deal 30% of the enemy’s max hp. \n");
+					bd = buttons.add("Finality Barrage", arigeanFinalityBarrage).hint("Sacrifice "+(amount*100)+"% of your max hp to deal "+(player.hasStatusEffect(StatusEffects.DarkRitual)?"9":"3")+"0% of the enemy’s max hp. \n");
 					if (player.HP - Math.round(player.maxHP() * amount) < player.minHP() + 1) {
 						bd.disable("Your HP is too low to use Finality Barrage.\n\n");
 					} else if (player.hasStatusEffect(StatusEffects.CooldownFinalityBarrage)) {
@@ -4267,13 +4267,15 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownFinalityBarrage,9,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownFinalityBarrage,10,0,0,0);
 		outputText("You let loose a blood curdling yell, driving all the force you can into your maw for a overcharged blast of raw uncontrolled mana, scorching your insides as well as the foe in front of you! ");
+		var enemyHPlost:Number = 0.3;
+		if (player.armor == armors.P_REGAL) enemyHPlost *= 1.5;
 		if (player.hasStatusEffect(StatusEffects.DarkRitual)) {
 			HPChange(-Math.round(player.maxHP() * 0.7), true);
-			monster.HP -= Math.round(monster.maxHP() * 0.9);
+			monster.HP -= Math.round(monster.maxHP() * (enemyHPlost * 3));
 		}
 		else {
 			HPChange(-Math.round(player.maxHP() * 0.6), true);
-			monster.HP -= Math.round(monster.maxHP() * 0.3);
+			monster.HP -= Math.round(monster.maxHP() * enemyHPlost);
 		}
 		enemyAI();
 	}
@@ -4281,6 +4283,7 @@ public class MagicSpecials extends BaseCombatContent {
 		var aACB:Number = 1.2;
 		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 2) aACB += 0.3;
 		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 3) aACB += 0.4;
+		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 4) aACB += 0.5;
 		return aACB;
 	}
 	private function arigeanMagicSpecialsCost():Number {
@@ -4289,6 +4292,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.armor == armors.P_REGAL) aMSC -= 0.5;
 		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 2) aMSC -= 0.2;
 		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 3) aMSC -= 0.1;
+		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 4) aMSC -= 0.1;
 		if (aMSC < 0.1) aMSC = 0.1;
 		return aMSC;
 	}
@@ -5795,7 +5799,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage = Math.round(damage);
 		monster.HP -= damage;
-		outputText("You call on the power of your tainted blood drawing out an almighty scream so strong and sharp it explode from you like a shockwave sending [themonster] flying. [monster he] will be shaken from the glass shattering blast for a moment " + damage + " damage.");
+		outputText("You call on the power of your tainted blood drawing out an almighty scream so strong and sharp it explode from you like a shockwave sending [themonster] flying. [monster He] will be shaken from the glass shattering blast for a moment " + damage + " damage.");
 		if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
 			if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 		}

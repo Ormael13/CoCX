@@ -2578,7 +2578,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 					addButton(8, "Date", dateNightFirstTime)
 						.hint("Take Amily on a date to Tel'Adre?")
 						.disableIf(SceneLib.urtaQuest.urtaBusy(), "Urta is busy right now.")
-						.disableIf(flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] >= 5 || urtaLove(),
+						.disableIf((flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] < 5 && !urtaLove()),
 							"You don't know Urta close enough to introduce your mouse girlfriend to her.");
 				}
 				//if (AbandonedTownRebuilt.InTown = false) {

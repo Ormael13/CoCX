@@ -1920,8 +1920,8 @@ public static const UNKNOWN_FLAG_NUMBER_01911:int                               
 public static const UNKNOWN_FLAG_NUMBER_01912:int                                   = 1912;
 public static const UNKNOWN_FLAG_NUMBER_01913:int                                   = 1913;
 public static const UNKNOWN_FLAG_NUMBER_01914:int                                   = 1914;
-public static const UNKNOWN_FLAG_NUMBER_01915:int                                   = 1915;
-public static const UNKNOWN_FLAG_NUMBER_01916:int                                   = 1916;
+public static const GRAYDA_BATHING:int                                   			= 1915;
+public static const GRAYDA_AFFECTION:int                                   			= 1916;
 public static const TAMANI_DAUGHTERS_DEFEATS_COUNTER:int                            = 1917;
 public static const TAMANI_DAUGHTERS_LVL_UP:int                                   	= 1918;
 public static const TAMANI_DEFEATS_COUNTER:int                                   	= 1919;

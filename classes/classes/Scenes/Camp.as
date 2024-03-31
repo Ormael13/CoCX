@@ -744,6 +744,14 @@ public class Camp extends NPCAwareContent{
 			flags[kFLAGS.D3_GOBLIN_MECH_PRIME] = 2;
 			return;
 		}
+		if (flags[kFLAGS.GRAYDA_BATHING] >= 10 && rand(3) == 0) {
+			SceneLib.graydaScene.graydaMainBathingByForce();
+			return;
+		}
+		if (flags[kFLAGS.THE_TRENCH_ENTERED] > 14 && flags[kFLAGS.THE_TRENCH_ENTERED] < 16 && rand(5) == 0 && (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3 || player.hasStatusEffect(StatusEffects.CampRathazul) || player.hasStatusEffect(StatusEffects.PureCampJojo) || followerKiha())) {//(flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) || 
+			SceneLib.graydaScene.graydaRandomnCampEvents();
+			return;
+		}
 		//Reset.
 		flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 0;
 		campQ = false;
@@ -954,20 +962,15 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) {
 			outputText("A shrine to Taoth stands next to your [camp], its presence warms your heart with the fox god’s laughter.\n\n");
 		}
-
 		//Display NPCs
 		campFollowers(true);
-
 		//MOUSEBITCH
 		if (amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1) {
 			if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0) outputText("Amily has relocated her grass bedding to the opposite side of the [camp] from the strange tree; every now and then, she gives it a suspicious glance, as if deciding whether to move even further.\n\n");
 			else outputText("A surprisingly tidy nest of soft grasses and sweet-smelling herbs has been built close to your " + (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 ? "cabin" : "bedroll") + ". A much-patched blanket draped neatly over the top is further proof that Amily sleeps here. She changes the bedding every few days, to ensure it stays as nice as possible.\n\n");
 		}
-
 		campLoversMenu(true);
-
 		campSlavesMenu(true);
-
 		//Hunger check!
 		if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 25) {
 			outputText("<b>You have to eat something; your stomach is growling " + (player.hunger < 1 ? "painfully" : "loudly") + ". </b>");
@@ -979,7 +982,6 @@ public class Camp extends NPCAwareContent{
 			}
 			outputText("\n\n");
 		}
-
 		//The uber horny
 		if (overLustCheck() == 2) {
 			exploreEvent = null;
@@ -1001,7 +1003,6 @@ public class Camp extends NPCAwareContent{
 			if (model.time.hours == 20) outputText("The sun has already set below the horizon. The sky glows orange. ");
 			outputText("It's light outside, a good time to explore and forage for supplies with which to fortify your [camp].\n");
 		}
-
 		//Unlock cabin.
 		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] <= 0 && model.time.days >= 7) {
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 1;
@@ -1326,7 +1327,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) counter++;
 		if (flags[kFLAGS.NADIA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.NadiaOff)) counter++;
 		if (flags[kFLAGS.DINAH_LVL_UP] >= 1) counter++;
-		//if (flags[kFLAGS.GALIA_LVL_UP] >= 1) counter++;
+		if (flags[kFLAGS.GALIA_LVL_UP] >= 1) counter++;
 		if (flags[kFLAGS.NEISA_FOLLOWER] >= 7) counter++;
 		if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) counter++;
 		if (helspawnFollower()) counter++;
@@ -1957,7 +1958,7 @@ public class Camp extends NPCAwareContent{
 			}
 			//Grayda
 			if (flags[kFLAGS.THE_TRENCH_ENTERED] > 14) {
-				outputText("You can see Grayda patrolling the edges of the camp, keeping an eye out for any potential threats.");
+				outputText("You can see Grayda patrolling the edges of the camp, keeping an eye out for any potential threats."+(flags[kFLAGS.GRAYDA_AFFECTION] >= 60?" Her attention occasionally turns to you every once in a while.":"")+"");
 				buttons.add("Grayda", SceneLib.graydaScene.graydaMainWhenCalled).hint("Visit Grayda.").disableIf(player.statusEffectv2(StatusEffects.CampLunaMishaps3) > 0, "Grayda is still curled up underneath the water at the stream.");
 			}
 			//Kindra
@@ -4096,6 +4097,9 @@ public class Camp extends NPCAwareContent{
 					emberScene.sleepWithEmber();
 					return;
 				}
+			} else if (flags[kFLAGS.SLEEP_WITH] == "Grayda") {
+				SceneLib.graydaScene.sleepWithGrayda();
+				return;
 			} else if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && jojoScene.pregnancy.isPregnant && jojoScene.pregnancy.event == 4 && player.hasCock() && flags[kFLAGS.SLEEP_WITH] == 0) {
 				joyScene.hornyJoyIsPregnant();
 				return;
@@ -5303,3 +5307,4 @@ public function rebirthFromBadEnd():void {
 
 }
 }
+

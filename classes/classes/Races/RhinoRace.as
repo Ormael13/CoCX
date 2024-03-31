@@ -33,6 +33,7 @@ public class RhinoRace extends Race {
 		super("Rhino", id, []);//RaceBody);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
+		disabled = true;
 	}
 	
 	public override function setup():void {

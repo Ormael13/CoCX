@@ -428,7 +428,7 @@ public class HeXinDao extends BaseContent
             [consumables.COAL___, "horny"],
             [consumables.DRYTENT, "anemone"],
             [consumables.ECTOPLS, "ghost"],
-            [consumables.TRAPOIL, "sand trap"],
+            //[consumables.TRAPOIL, "sand trap"],
             [consumables.ICICLE_, "ice shard"],
             [consumables.SDELITE, "cum hose"],
             [consumables.SSPONGE, "dryness"],

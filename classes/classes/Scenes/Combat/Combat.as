@@ -11690,7 +11690,10 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) manaregen += 15;
 		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 2) manaregen += 30;
         if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3 && player.hasPerk(PerkLib.StarSphereMastery)) manaregen += (player.perkv1(PerkLib.StarSphereMastery) * 3);
-		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 3) manaregen += Math.round(player.tou * 0.1);
+		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 3) {
+			if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 4) manaregen += Math.round(player.tou * 0.15);
+			else manaregen += Math.round(player.tou * 0.1);
+		}
 		if (player.perkv1(IMutationsLib.HumanSmartsIM) >= 3 && player.racialScore(Races.HUMAN) > 17) manaregen += Math.round(player.maxMana() * 0.005);
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) manaregen += Math.round(player.maxMana() * 0.005);
 		if (player.hasPerk(PerkLib.WarMageExpert)) manaregen += Math.round(player.maxMana() * 0.005);
