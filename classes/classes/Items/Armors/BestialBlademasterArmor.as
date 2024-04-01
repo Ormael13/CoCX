@@ -17,6 +17,7 @@ import classes.PerkLib;
 				withBuffs({'teasedmg':8});
 				withPerk(PerkLib.InfernalRage, 0, 0, 0, 0);
 				withTag(A_AGILE);
+				withTag(A_REVEALING);
 		}
 		
 		override public function afterEquip(doOutput:Boolean):void {
