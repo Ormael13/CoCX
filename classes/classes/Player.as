@@ -4518,6 +4518,8 @@ use namespace CoC;
 			var advancedJobs1:Number = 0;
 			if (hasPerk(PerkLib.JobBrawler))
 				advancedJobs1++;
+			if (hasPerk(PerkLib.JobBeastlord))
+				advancedJobs1++;
 			if (hasPerk(PerkLib.JobCourtesan))
 				advancedJobs1++;
 			if (hasPerk(PerkLib.JobDefender))

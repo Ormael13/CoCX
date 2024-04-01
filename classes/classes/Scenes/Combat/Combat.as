@@ -11304,6 +11304,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 				if (player.perkv1(IMutationsLib.FerasBirthrightIM) >= 3) healingPercent += 2;
 				healingPercent += 2;
 			}
+            if (player.hasPerk(PerkLib.NaturalRecovery) && player.shield.isNothing && player.weapon.isNothing && player.armor.hasTag(ItemConstants.A_REVEALING)) healingPercent += 5;
             if (player.hasPerk(PerkLib.Sanctuary)) healingPercent += 1;
             if (player.shield == shields.SANCTYL) healingPercent += ((player.corruptionTolerance - player.cor) / (100 + player.corruptionTolerance)) * 4;
             if (player.shield == shields.SANCTYD) healingPercent += (player.cor / (100 + player.corruptionTolerance)) * 4;
@@ -11454,6 +11455,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 			if (player.perkv1(IMutationsLib.FerasBirthrightIM) >= 3) maxRegen += 2;
 			maxRegen += 2;
 		}
+		if (player.hasPerk(PerkLib.NaturalRecovery) && player.shield.isNothing && player.weapon.isNothing && player.armor.hasTag(ItemConstants.A_REVEALING)) maxRegen += 5;
         if (player.hasStatusEffect(StatusEffects.SecondWindRegen)) maxRegen += 5;
         if (player.hasStatusEffect(StatusEffects.Cauterize)) {
             maxRegen += 1.5;

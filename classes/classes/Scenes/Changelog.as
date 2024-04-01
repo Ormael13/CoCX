@@ -40,10 +40,10 @@ public class Changelog extends BaseContent
 			//outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
 			//outputText("-New TF item (by Shigure): Moth's Dust. Buyable in Moga Hen shop. Using this item will turn PC into moth. Moth bonuses at 10 pts in racial score (scalable): -30% to Tou multi, +150% to Spe multi, +70% to Wis multi, +30% to Lib multi, +70 to sensitivity.\n");//Dropped by Corrupted Troll enemies.
 			//outputText("-New Special names: Solaria (salamander), Drake (hydra). Each of them will start with matching bloodline perk to match their ancestor race.\n");//, Veseshe (elf)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New tier 1 misc lvl-up perk: Job: Beastlord. Req. Job: Beast Warrior perk, free advanced job slot, 25+ in tou/spe. Effect: You've trained to use of your own body and natural weapons to their limits in fights.\n");
+			outputText("-Natural Instincts perk req. of Job: Beast Warrior changed to req. perk Job: Beastlord.\n");
+			outputText("-New tier 3 misc lvl-up perk: Natural recovery. Req. Job: Beastlord perk. Effect: Gain 5% health regeneration so long as you are wearing no armor (or armor with Revealing tag), shield or melee weapon.\n");
+			outputText("-New tier 2 misc lvl-up perk: Improved evasion. Req. Job: Beastlord and Evade perks. Effect: Gain extra evasion so long as you are not wearing armor or clothes (or wearing armor with Revealing tag).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -183,7 +183,7 @@ public class Changelog extends BaseContent
 		}
 		private function Changelog52():void {
 			clearOutput();
-			outputText("(Part 2/2) <b>Version 0.8w-z:</b>\n\n");
+			outputText("(Part 2/2) <b>Version 0.8w-z (Sword Immortal (hidden job), Arigean TF perm stage + retainer npc for camp, Flying swords system minor QoL changes, Satyr race minor rework, Golems no longer lust-immune, Spells learning QoL changes, IM's additions/changes, tons of QoL changes from Demojay and many smaller changes, bugfixing and etc.):</b>\n\n");
 			outputText("-Construct enemy type can be now affected by lust attacks (and their lust vul been tiny bit incresed to not be 0 anymore). They not gonna masturbate but would getting more glitched until they deactivate allowing for lust win against them. Past 85% threshold they even could radomly skip actions in their turn.\n");
 			outputText("-Added to drop tables of all goblin type enemies: Healing herb, Moon grass, Snakebane, Ironweed, Blade fern. With low chance added to Goblin Shaman drop table Alraune nectar, Ginseng.\n");
 			outputText("-Healing herb and Snakebane flower can be found radomly during forest exploration like heal pills or truffles.\n");
@@ -288,7 +288,7 @@ public class Changelog extends BaseContent
 		}
 		private function Changelog51():void {
 			clearOutput();
-			outputText("(Part 1/2) <b>Version 0.8w-z:</b>\n\n");
+			outputText("(Part 1/2) <b>Version 0.8w-z (Sword Immortal (hidden job), Arigean TF perm stage + retainer npc for camp, Flying swords system minor QoL changes, Satyr race minor rework, Golems no longer lust-immune, Spells learning QoL changes, IM's additions/changes, tons of QoL changes from Demojay and many smaller changes, bugfixing and etc.):</b>\n\n");
 			outputText("-New tier 1 intelligence lvl-up perk: Brutal Spells. Req. Job: Sorcerer perk and 75+ int. Effect: Reduces enemy magic resistance with each spell. (+5% base spell strength)\n");
 			outputText("-New tier 9 misc lvl-up perk: Subzero Lustful Fury. Req. Prestige Job: Berzerker and Colder Lust / Colder Fury perks. Effect: Decreasing health loss from activating higher grades of berzerking/lustzerking by 25%. Allow to activate 2 grades of berzerker/lustzerker state at once when you have Endless Rage perk.\n");
 			outputText("-New rare ascension perk -> Sky Poison Pearl Mastery 1. No Req. It costs 21 asc points and you gain +3 venom recharge speed, +10% to max venom cap, +10% to poison resistance, 100% more spirit stones carried over and lower req. level to open next sections of pearl by 6 levels.\n");
