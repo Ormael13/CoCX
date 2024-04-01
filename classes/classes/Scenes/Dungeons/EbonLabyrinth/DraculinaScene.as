@@ -174,7 +174,8 @@ public class DraculinaScene extends BaseContent {
 		player.rearBody.type = RearBody.THIRSTY_NECK;
 		if (player.hasCock()) transformations.CockDemon().applyEffect(false);
 		if (player.hasVagina()) transformations.VaginaDemonic().applyEffect(false);
-        if (!player.hasPerk(PerkLib.Familiar)) player.createPerk(PerkLib.Familiar,0,0,0,0);
+		if (!player.hasStatusEffect(StatusEffects.Familiar)) player.createStatusEffect(StatusEffects.Familiar, 0, 0, 0, 0);
+        if (!player.hasPerk(PerkLib.Familiar)) player.createPerk(PerkLib.Familiar, 0, 0, 0, 0);
 		IMutationsLib.BlackHeartIM.trueMutation = true;
         IMutationsLib.VampiricBloodstreamIM.trueMutation = true;
         IMutationsLib.HollowFangsIM.trueMutation = true;

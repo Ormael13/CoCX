@@ -2616,6 +2616,11 @@ public class SaveUpdater extends NPCAwareContent {
 				refundPerk(PerkLib.FirstAttackFlyingSword);
 				refundPerk(PerkLib.KillingIntent);
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.45;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.47) {
+				outputText("\n\nSometimes Dracula/lina must go back to basic about making Ghoul Servants.");
+				if (player.racialScore(Races.DRACULA) >= 22 && !player.hasStatusEffect(StatusEffects.Familiar)) player.createStatusEffect(StatusEffects.Familiar, 0, 0, 0, 0);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.47;
 			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.50) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.50;
