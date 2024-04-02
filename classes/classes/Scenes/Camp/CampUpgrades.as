@@ -167,15 +167,15 @@ public class CampUpgrades extends BaseContent {
             helperArray[helperArray.length] = "A group of your ant children";
             helpers.count++;
         }
-        if (SceneLib.marbleScene.marbleFollower()) {
+        if (SceneLib.marbleScene.marbleFollower() && !isNightTime) {
             helperArray[helperArray.length] = "Marble";
             helpers.count++;
         }
-        if (SceneLib.helFollower.followerHel() && !player.hasStatusEffect(StatusEffects.HeliaOff)) {
+        if (SceneLib.helFollower.followerHel() && !isNightTime && !player.hasStatusEffect(StatusEffects.HeliaOff)) {
             helperArray[helperArray.length] = "Helia";
             helpers.count++;
         }
-        if (SceneLib.kihaFollower.followerKiha()) {
+        if (SceneLib.kihaFollower.followerKiha() && !isNightTime) {
             helperArray[helperArray.length] = "Kiha";
             helpers.count++;
         }

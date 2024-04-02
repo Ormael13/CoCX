@@ -2177,7 +2177,7 @@ public class Camp extends NPCAwareContent{
 		// [Questlog] [Recall ] [Dummy    ] [Ascension] [Back      ]
 		clearOutput();
 		outputText("What would you like to do?");
-		addButton(0, "Build", campBuildingSim).hint("Check your [camp] build options.").disableIf(isNightTime,"It's too dark for that!");
+		addButton(0, "Build", campBuildingSim).hint("Check your [camp] build options.").disableIf((isNightTime && !player.isNightCreature()),"It's too dark for that!");
 		addButton(1, "Winions", campWinionsArmySim).hint("Check your options for making some Winions.").disableIf((!player.hasPerk(PerkLib.JobElementalConjurer) && !player.hasPerk(PerkLib.JobGolemancer) && !player.hasPerk(PerkLib.PrestigeJobNecromancer)), "You need to be able to make some minions that fight for you to use this option.");
 		addButton(2, "Misc", campMiscActions).hint("Misc options to do things in and around [camp].");
 		addButton(3, "Spend Time", campSpendTimeActions).hint("Check your options to spend time in and around [camp].");

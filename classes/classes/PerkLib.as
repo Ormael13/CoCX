@@ -4609,8 +4609,8 @@ public class PerkLib
 			JobWarrior
 		];
 		public static const ADVANCED_JOBS:/*PerkType*/Array = [
-			JobBrawler,
 			JobBeastlord,
+			JobBrawler,
 			JobCourtesan,
 			JobDefender,
 			JobDervish,
