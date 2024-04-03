@@ -25,7 +25,6 @@ import classes.BodyParts.UnderBody;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.*;
-import classes.Items.ItemConstants;
 import classes.Items.JewelryLib;
 import classes.Races.ElementalRace;
 import classes.Scenes.Combat.Combat;
@@ -4361,7 +4360,6 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.GreaterEvade)) chance += 15;
 			else if (hasPerk(PerkLib.ImprovedEvade)) chance += 10;
 			else if (hasPerk(PerkLib.Evade)) chance += 5;
-			if (hasPerk(PerkLib.ImprovedEvasion) && game.player.armorName == "nothing" && game.player.armor.hasTag(ItemConstants.A_REVEALING)) chance += 10;
 
 			if (hasPerk(PerkLib.JobRogue)) chance += 5;
 			if (hasPerk(PerkLib.Spectre) && hasPerk(PerkLib.Incorporeality)) chance += 10;

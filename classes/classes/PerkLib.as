@@ -432,11 +432,14 @@ public class PerkLib
 				"Decreasing health loss from activating higher grades of berzerking/lustzerking by 25%. Allow to activate 2 grades of berzerker/lustzerker state at once when you have Endless Rage perk.",
 				"You've chosen the 'Subzero Lustful Fury' perk, decreasing health loss from activating higher grades of berzerking/lustzerking by 25%. Allow to activate 2 grades of berzerker/lustzerker state at once when you have Endless Rage perk.");
 		public static const NaturalRecovery:PerkType = mk("Natural recovery", "Natural recovery",
-				"Gain 5% health regeneration so long as you are wearing no armor (or wearing armor with Revealing tag), shield or melee weapon.",
-				"You've chosen the 'Natural recovery' perk. Gain 5% health regeneration so long as you are wearing no armor (or wearing armor with Revealing tag), shield or melee weapon.");
+				"Gain 2% health regeneration so long as you are wearing no armor (or wearing armor with Revealing tag), shield or melee weapon.",
+				"You've chosen the 'Natural recovery' perk. Gain 2% health regeneration so long as you are wearing no armor (or wearing armor with Revealing tag), shield or melee weapon.");
 		public static const ImprovedEvasion:PerkType = mk("Improved evasion", "Improved evasion",
-				"Gain extra evasion so long as you are not wearing armor or clothes (or wearing armor with Revealing tag).",
-				"You've chosen the 'Improved evasion' perk. Gain extra evasion so long as you are not wearing armor or clothes (or wearing armor with Revealing tag).");
+				".",
+				"You've chosen the '' perk.");
+		public static const WoundFocus:PerkType = mk("Wound focus", "Wound focus",
+				"Any bleeding you cause gains a 20% periodic damage increase.",
+				"You've chosen the 'Wound focus' perk. Any bleeding you cause gains a 20% periodic damage increase.");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -444,9 +447,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk.");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk.");
@@ -7217,7 +7217,11 @@ public class PerkLib
             PrimalFuryIII.requirePerk(PrimalFuryII)
 					.requireLevel(4)
 					.requireNGPlus(2);
-			ToughHide.requirePerk(JobBeastWarrior)
+            JobBeastlord.requireAdvancedJobSlot()
+					.requirePerk(JobBeastWarrior)
+					.requireTou(25)
+					.requireSpe(25);
+			ToughHide.requirePerk(JobBeastlord)
 					.requireTou(30);
 			AerialCombat.requireStr(20)
 					.requireSpe(20)
@@ -7340,11 +7344,6 @@ public class PerkLib
                     .requireWis(80)
                     .requirePerk(BiggerGolemBagII)
                     .requireNGPlus(2);
-            JobBeastlord.requireAdvancedJobSlot()
-					.requirePerk(JobBeastWarrior)
-                    .requireLevel(6)
-					.requireTou(25)
-					.requireSpe(25);
             ImprovingNaturesBlueprintsNaturalWeapons.requirePerk(JobBeastWarrior)
                     .requireStr(35)
                     .requireTou(35)
@@ -7360,7 +7359,7 @@ public class PerkLib
                     .requireNGPlus(5);
             FeralArmor.requirePerk(ToughHide)
 					.requireLevel(6)
-					.requireTou(60);
+					.requireTou(50);
 //            WeaponClawsClawTraining.requirePerk(JobBeastWarrior)
 //					.requireLevel(6)
 //					.requireCustomFunction(function (player:Player):Boolean {
@@ -7498,8 +7497,11 @@ public class PerkLib
                     .requireTou(50)
                     .requireSpe(50)
                     .requireLevel(12);
-            ImprovedEvasion.requireLevel(12)
-                    .requirePerks(JobBeastlord, Evade);
+            WoundFocus.requireLevel(12)
+                    .requirePerks(JobBeastlord)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.pcHaveBleedAbility();
+                    }, "At least one bleeding ability");
 //            WeaponClawsExtraClawAttack.requireLevel(12)
 //                    .requirePerk(WeaponClawsClawTraining)
 //					.requireCustomFunction(function (player:Player):Boolean {
@@ -7575,7 +7577,8 @@ public class PerkLib
                     .requireSpe(65)
                     .requireLevel(18);
             NaturalRecovery.requireLevel(18)
-                    .requirePerk(JobBeastlord);
+                    .requirePerk(ToughHide)
+					.requireTou(60);
             NaturalHealingMajor.requireLevel(18)
                     .requirePerk(NaturalHealingMinor)
                     .requireInt(20)
