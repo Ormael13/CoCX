@@ -698,6 +698,7 @@ private function theTrenchGraydaQuestNPCMissionsCoronationFinalPart1():void {
 	player.eyes.colour = "blue";
 	player.createPerk(PerkLib.AlteredAnima, 0, 0, 0, 0);
 	player.createPerk(PerkLib.ArigeanKnowledge, 0, 0, 0, 0);
+	player.createPerk(PerkLib.TransformationImmunity2, 8, 0, 0, 0);
 	doNext(theTrenchGraydaQuestNPCMissionsCoronationFinalPart2);
 }
 private function theTrenchGraydaQuestNPCMissionsCoronationFinalPart2():void {
