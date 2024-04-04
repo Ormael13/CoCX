@@ -89,7 +89,7 @@ public class TestMenu extends BaseContent
 		bd.add("Bugfixes", cheatBugfixes, "Buttons or fixing some rare old bugs that can't be fixd with save-updater.");
 		bd.add("Testing", cheatTesting, "Buttons for testing some new stuff. May break your game if something is outdated.");
 		bd.add("Bags expansion", SceneLib.garden.justForTestBuildsAdjustingBagsCapacityCuzINotWannaWasteSaveUpdateForThat, "Expand the bags. (If you not own any of them will not have any effect)");
-		bd.add("NoMoreKillInst", FairyTest4, "Removing bonus 'Killing Intent' perks after first one.").disableIf(!player.hasPerk(PerkLib.KillingIntent));
+		bd.add("NoMoreImprEvasion", FairyTest4, "Removing 'Improved Evasion' perk.").disableIf(!player.hasPerk(PerkLib.ImprovedEvasion));
 		submenu(bd, playerMenu, 0, false);
 	}
 
@@ -287,7 +287,8 @@ public class TestMenu extends BaseContent
 		doNext(SoulforceCheats);
 	}
 	public function FairyTest4():void {
-		player.removePerk(PerkLib.KillingIntent);
+		player.removePerk(PerkLib.ImprovedEvasion);
+		player.perkPoints += 1;
 		doNext(SoulforceCheats);
 	}
 	public function FairyTest3():void {

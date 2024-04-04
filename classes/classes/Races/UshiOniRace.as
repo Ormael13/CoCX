@@ -35,7 +35,6 @@ public class UshiOniRace extends Race{
 	
 	public function UshiOniRace(id:int) {
 		super("Ushi-Onna", id, []);//RaceBody);
-		disabled = true;
 	}
 	
 	public override function setup():void {

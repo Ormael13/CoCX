@@ -431,6 +431,15 @@ public class PerkLib
 		public static const SubzeroLustfulFury:PerkType = mk("Subzero Lustful Fury", "Subzero Lustful Fury",
 				"Decreasing health loss from activating higher grades of berzerking/lustzerking by 25%. Allow to activate 2 grades of berzerker/lustzerker state at once when you have Endless Rage perk.",
 				"You've chosen the 'Subzero Lustful Fury' perk, decreasing health loss from activating higher grades of berzerking/lustzerking by 25%. Allow to activate 2 grades of berzerker/lustzerker state at once when you have Endless Rage perk.");
+		public static const NaturalRecovery:PerkType = mk("Natural recovery", "Natural recovery",
+				"Gain 2% health regeneration so long as you are wearing no armor (or wearing armor with Revealing tag), shield or melee weapon.",
+				"You've chosen the 'Natural recovery' perk. Gain 2% health regeneration so long as you are wearing no armor (or wearing armor with Revealing tag), shield or melee weapon.");
+		public static const ImprovedEvasion:PerkType = mk("Improved evasion", "Improved evasion",
+				".",
+				"You've chosen the '' perk.");
+		public static const WoundFocus:PerkType = mk("Wound focus", "Wound focus",
+				"Any bleeding you cause gains a 20% periodic damage increase.",
+				"You've chosen the 'Wound focus' perk. Any bleeding you cause gains a 20% periodic damage increase.");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -440,28 +449,34 @@ public class PerkLib
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
 		public static const :PerkType = mk("", "",
 				".",
-				"You've chosen the '' perk, .");
+				"You've chosen the '' perk.");
 		public static const :PerkType = mk("", "",
 				".",
-				"You've chosen the '' perk, .");
+				"You've chosen the '' perk.");
 		public static const :PerkType = mk("", "",
 				".",
-				"You've chosen the '' perk, .");
+				"You've chosen the '' perk.");
 		public static const :PerkType = mk("", "",
 				".",
-				"You've chosen the '' perk, .");
+				"You've chosen the '' perk.");
 		public static const :PerkType = mk("", "",
 				".",
-				"You've chosen the '' perk, .");
+				"You've chosen the '' perk.");
 		public static const :PerkType = mk("", "",
 				".",
-				"You've chosen the '' perk, .");
+				"You've chosen the '' perk.");
 		public static const :PerkType = mk("", "",
 				".",
-				"You've chosen the '' perk, .");
+				"You've chosen the '' perk.");
 		public static const :PerkType = mk("", "",
 				".",
-				"You've chosen the '' perk, .");*/
+				"You've chosen the '' perk.");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk.");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk.");*/
 		public static const Acclimation:PerkType = mk("Acclimation", "Acclimation",
 				"Reduces lust gain by 15%.",
 				"You've chosen the 'Acclimation' perk, making your body 15% more resistant to lust, up to a maximum of 75%.");
@@ -4266,10 +4281,9 @@ public class PerkLib
 		public static const JobBrawler:PerkType = mk("Job: Brawler", "Job ( Advanced ): Brawler",
 				"You've trained in unarmed combat.",
 				"You chose 'Job ( Advanced ): Brawler' perk, training yourself to become a(n) Brawler.").withBuffs({'str.mult':0.10});
-		/*public static const JobBeastlord:PerkType = mk("Job: Beastlord", "Job ( Advanced ): Beastlord",
+		public static const JobBeastlord:PerkType = mk("Job: Beastlord", "Job ( Advanced ): Beastlord",
 				"You've trained to use of your own body and natural weapons to their limits in fights.",
 				"You chose 'Job ( Advanced ): Beastlord' perk, training yourself to become a(n) Beastlord.").withBuffs({'str.mult':0.05,'tou.mult':0.05,'spe.mult':0.05, "int.mult":-0.05, "wis.mult":-0.05});
-		*/
 		public static const JobCourtesan:PerkType = mk("Job: Courtesan", "Job ( Advanced ): Courtesan",
 				"You've mastered all various uses of tease.",
 				"You chose 'Job ( Advanced ): Courtesan' perk, training yourself to become a(n) Courtesan.").withBuffs({'lib.mult':0.15,'maxlust_base':+60});
@@ -4595,8 +4609,8 @@ public class PerkLib
 			JobWarrior
 		];
 		public static const ADVANCED_JOBS:/*PerkType*/Array = [
+			JobBeastlord,
 			JobBrawler,
-			/* JobBeastlord, */
 			JobCourtesan,
 			JobDefender,
 			JobDervish,
@@ -7203,7 +7217,11 @@ public class PerkLib
             PrimalFuryIII.requirePerk(PrimalFuryII)
 					.requireLevel(4)
 					.requireNGPlus(2);
-			ToughHide.requirePerk(JobBeastWarrior)
+            JobBeastlord.requireAdvancedJobSlot()
+					.requirePerk(JobBeastWarrior)
+					.requireTou(25)
+					.requireSpe(25);
+			ToughHide.requirePerk(JobBeastlord)
 					.requireTou(30);
 			AerialCombat.requireStr(20)
 					.requireSpe(20)
@@ -7341,7 +7359,7 @@ public class PerkLib
                     .requireNGPlus(5);
             FeralArmor.requirePerk(ToughHide)
 					.requireLevel(6)
-					.requireTou(60);
+					.requireTou(50);
 //            WeaponClawsClawTraining.requirePerk(JobBeastWarrior)
 //					.requireLevel(6)
 //					.requireCustomFunction(function (player:Player):Boolean {
@@ -7435,7 +7453,7 @@ public class PerkLib
             WhirlwindFeral.requireLevel(12)
                     .requirePerk(JobBeastWarrior);
             NaturalInstincts.requireLevel(12)
-                    .requirePerk(JobBeastWarrior);
+                    .requirePerk(JobBeastlord);
             ArcanePoolIV.requireLevel(12)
                     .requireInt(60)
                     .requireWis(60)
@@ -7479,6 +7497,11 @@ public class PerkLib
                     .requireTou(50)
                     .requireSpe(50)
                     .requireLevel(12);
+            WoundFocus.requireLevel(12)
+                    .requirePerks(JobBeastlord)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.pcHaveBleedAbility();
+                    }, "At least one bleeding ability");
 //            WeaponClawsExtraClawAttack.requireLevel(12)
 //                    .requirePerk(WeaponClawsClawTraining)
 //					.requireCustomFunction(function (player:Player):Boolean {
@@ -7553,6 +7576,9 @@ public class PerkLib
                     .requireTou(65)
                     .requireSpe(65)
                     .requireLevel(18);
+            NaturalRecovery.requireLevel(18)
+                    .requirePerk(ToughHide)
+					.requireTou(60);
             NaturalHealingMajor.requireLevel(18)
                     .requirePerk(NaturalHealingMinor)
                     .requireInt(20)

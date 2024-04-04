@@ -428,7 +428,7 @@ public class HeXinDao extends BaseContent
             [consumables.COAL___, "horny"],
             [consumables.DRYTENT, "anemone"],
             [consumables.ECTOPLS, "ghost"],
-            //[consumables.TRAPOIL, "sand trap"],
+            [consumables.TRAPOIL, "sand trap"],
             [consumables.ICICLE_, "ice shard"],
             [consumables.SDELITE, "cum hose"],
             [consumables.SSPONGE, "dryness"],
@@ -875,7 +875,7 @@ public class HeXinDao extends BaseContent
 		if (player.hasPerk(PerkLib.SoulSense) && flags[kFLAGS.SPIRIT_STONES] >= 50) addButtonIfTrue(0, "Basic training", qimerchantTraningMainFlyingSwordPath1, "You already learned basic control of flying swords.", !player.hasPerk(PerkLib.FlyingSwordPath));
 		else addButtonDisabled(0, "Basic training", "Req. Soul Sense perk & 50 spirit stones.");
 		addButtonIfTrue(10, "Soaring Blades", qimerchantTraningMainSoaringBladesManual, "You need to learn how to control flying swords first (Req. Flying Sword Path perk).", player.hasPerk(PerkLib.FlyingSwordPath));
-		addButtonIfTrue(11, "1stAtk: F.Sword", qimerchantTraningMainFirstAttackFlyingSwordManual, "You need to learn how to control flying swords first (Req. Flying Sword Path perk).", player.hasPerk(PerkLib.FirstAttackFlyingSword));
+		addButtonIfTrue(11, "1stAtk: F.Sword", qimerchantTraningMainFirstAttackFlyingSwordManual, "You need to learn how to control flying swords first (Req. Flying Sword Path perk).", player.hasPerk(PerkLib.FlyingSwordPath));
 		addButton(14, "Back", qimerchant);
 	}
 	private function qimerchantTraningMainFlyingSwordPath1():void {
