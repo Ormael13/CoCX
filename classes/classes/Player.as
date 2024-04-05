@@ -1015,6 +1015,10 @@ use namespace CoC;
 			if (hasPerk(PerkLib.ChiReflowAttack)) armorDef *= UmasShop.NEEDLEWORK_ATTACK_DEFENSE_MULTI;*/
 			//Other bonuses
 			if (hasPerk(PerkLib.ToughHide) && haveNaturalArmor()) armorMDef += (1 * newGamePlusMod);
+			if (hasPerk(PerkLib.MageslayingBeast) && (isNaked() || armor.hasTag(ItemConstants.A_REVEALING))) {
+				if (speStat.core.value >= 100) armorMDef += 40;
+				else armorMDef += Math.round((speStat.core.value/100)*40);
+			}
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 1) armorMDef += (1 * newGamePlusMod);
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 2) armorMDef += (2 * newGamePlusMod);
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 3) armorMDef += (12 * newGamePlusMod);
@@ -1103,7 +1107,7 @@ use namespace CoC;
 		public function haveNaturalClaws():Boolean { return Arms.Types[arms.type].claw || Arms.Types[arms.type].armSlam || Arms.Types[arms.type].scythe || LowerBody.hasClaws(this);}
 		public function haveNaturalClawsTypeWeapon():Boolean {return weaponName == "gauntlet with claws" || weaponName == "gauntlet with an aphrodisiac-coated claws" || weaponName == "Venoclaw" || weaponName == "hooked gauntlets" || hasAetherTwinsTier1() || hasAetherTwinsTier2() || weaponName == "moonlight claws" || weaponName == "blizzard claws";}
 		public function haveWeaponAllowingClaws():Boolean {return weaponName == "black cat glove" ;}
-        public function isFeralCombat():Boolean { return flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (((weaponName == "fists" || haveWeaponAllowingClaws() || weapon == game.weapons.CATGLOV) && haveNaturalClaws()) || haveNaturalClawsTypeWeapon()) ;}
+        public function isFeralCombat():Boolean { return ((flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (((weaponName == "fists" || haveWeaponAllowingClaws() || weapon == game.weapons.CATGLOV) && haveNaturalClaws()) || haveNaturalClawsTypeWeapon())) || statStore.hasBuff("Atavism")) ;}
         public function isUnarmedCombat():Boolean { return flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && isFistOrFistWeapon() ;}
         //Other natural weapon checks
 		public function hasABiteAttack():Boolean { return (lowerBody == LowerBody.HYDRA || Face.Types[faceType].bite);}

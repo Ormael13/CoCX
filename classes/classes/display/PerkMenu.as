@@ -1242,7 +1242,6 @@ public class PerkMenu extends BaseContent {
 			["Wrr", PerkLib.JobWarrior]
 		];
 		var advancedJobs:Array = [
-			["BsL", PerkLib.JobBeastlord],
 			["Bwr", PerkLib.JobBrawler],
 			["Csn", PerkLib.JobCourtesan],
 			["Dfr", PerkLib.JobDefender],
@@ -1250,6 +1249,7 @@ public class PerkMenu extends BaseContent {
 			["ECj", PerkLib.JobElementalConjurer],
 			["Enc", PerkLib.JobEnchanter],
 			["Ero", PerkLib.JobEromancer],
+			["FCh", PerkLib.JobBeastlord],
 			["Glm", PerkLib.JobGolemancer],
 			["Gsg", PerkLib.JobGunslinger],
 			["Hlr", PerkLib.JobHealer],

@@ -306,6 +306,16 @@ public class MagicSpecials extends BaseCombatContent {
 					}
 				}
 			}
+			if (player.hasPerk(PerkLib.Atavism)) {
+			if (player.statStore.hasBuff("Atavism")) {
+					buttons.add("Return", returnToNormalStateA).hint("Return to normal from Atavism State.");
+				} else {
+					bd = buttons.add("Atavism", assumeAtavismState).hint("Turn feral for a while, abandoning yourself to your animalistic instincts. Unlock the full potential in your body by boosting your physical might and sharpening your senses but silence your ability to process intelligent logical thoughts. \n");
+					if (player.hasStatusEffect(StatusEffects.CooldownAtavism)) {
+						bd.disable("You lack the focus to use this ability at the time.");
+					}
+				}
+			}
 			if (player.hasPerk(PerkLib.HiddenJobAsura)) {
 				if (player.statStore.hasBuff("AsuraForm")) {
 					bd = buttons.add("Return", combat.returnToNormalShape).hint("Return to normal from Asura form.");
@@ -3503,6 +3513,29 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		outputText("Gathering all you willpower you forcefully subduing your inner beast and returning to your normal shape.");
 		player.statStore.removeBuffs("CrinosShape");
+		enemyAI();
+	}
+	
+	public function assumeAtavismState():void {
+		clearOutput();
+		outputText("You let out a bestial roar as you let your mind fully slip into a feral state.");
+		var tempStr:Number;
+		var tempSpe:Number;
+		var oldHPratio:Number = player.hp100/100;
+		tempStr += player.strStat.core.value;
+		tempSpe += player.speStat.core.value;
+		mainView.statsView.showStatUp('str');
+		mainView.statsView.showStatUp('spe');
+		player.buff("Atavism").addStats({str:tempStr,spe:tempSpe}).withText("Atavism State").combatPermanent();
+		player.HP = oldHPratio*player.maxHP();
+		statScreenRefresh();
+		enemyAI();
+	}
+	public function returnToNormalStateA():void {
+		clearOutput();
+		outputText("You calm down regaining your clarity of mind as your bestial instincts are drawn off. It will take you some time before you can regain the focus necesary to enter into your bestial state again.");
+		player.createStatusEffect(StatusEffects.CooldownAtavism,6,0,0,0);
+		player.statStore.removeBuffs("Atavism");
 		enemyAI();
 	}
 

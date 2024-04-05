@@ -779,6 +779,7 @@ public class Combat extends BaseContent {
         else if (player.hasStatusEffect(StatusEffects.WhipSilence)) return false;
         else if (player.hasStatusEffect(StatusEffects.PiercingBlow)) return false;
 		else if (player.statStore.hasBuff("Supercharged")) return false;
+		else if (player.statStore.hasBuff("Atavism")) return false;
         return true;
     }
 
@@ -1080,6 +1081,13 @@ public class Combat extends BaseContent {
 				if (player.statStore.hasBuff("AsuraForm")) {// && !player.hasPerk(PerkLib.HiddenJobAsura)
 					bd.disable("You are under transformantion effect incompatibile with Crinos Shape!");
 				}
+			}
+		}
+		if (player.hasPerk(PerkLib.Atavism)) {
+			if (player.statStore.hasBuff("Atavism")) {
+				buttons.add("Return", mspecials.returnToNormalStateA).hint("Return to normal from Atavism State.");
+			} else {
+				bd = buttons.add("Atavism", mspecials.assumeAtavismState).hint("Turn feral for a while, abandoning yourself to your animalistic instincts. Unlock the full potential in your body by boosting your physical might and sharpening your senses but silence your ability to process intelligent logical thoughts. \n");
 			}
 		}
 		if (player.racialScore(Races.ONI, false) >= mspecials.minOniScoreReq()) {
@@ -8002,6 +8010,7 @@ public class Combat extends BaseContent {
 			}
 		}
         if (player.perkv1(IMutationsLib.EyeOfTheTigerIM) >= 2) critPChance += 5;
+		if (player.statStore.hasBuff("Atavism")) critPChance += 35;
         return critPChance;
     }
 
@@ -10727,6 +10736,14 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         if (player.hasStatusEffect(StatusEffects.JabbingStyle)) {
             player.removeStatusEffect(StatusEffects.JabbingStyle);
         }
+        //Atavism
+        if (player.hasStatusEffect(StatusEffects.CooldownAtavism)) {
+            if (player.statusEffectv1(StatusEffects.CooldownAtavism) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownAtavism);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownAtavism, 1, -1);
+            }
+        }
         //Play
         if (player.hasStatusEffect(StatusEffects.CooldownPlay)) {
             if (player.statusEffectv1(StatusEffects.CooldownPlay) <= 0) {
@@ -11312,7 +11329,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 				if (player.perkv1(IMutationsLib.FerasBirthrightIM) >= 3) healingPercent += 2;
 				healingPercent += 2;
 			}
-            if (player.hasPerk(PerkLib.NaturalRecovery) && player.shield.isNothing && player.weapon.isNothing && player.armor.hasTag(ItemConstants.A_REVEALING)) healingPercent += 2;
+            if (player.hasPerk(PerkLib.NaturalRecovery) && player.shield.isNothing && player.weapon.isNothing && (player.isNaked() || player.armor.hasTag(ItemConstants.A_REVEALING))) healingPercent += 2;
             if (player.hasPerk(PerkLib.Sanctuary)) healingPercent += 1;
             if (player.shield == shields.SANCTYL) healingPercent += ((player.corruptionTolerance - player.cor) / (100 + player.corruptionTolerance)) * 4;
             if (player.shield == shields.SANCTYD) healingPercent += (player.cor / (100 + player.corruptionTolerance)) * 4;
@@ -11463,7 +11480,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 			if (player.perkv1(IMutationsLib.FerasBirthrightIM) >= 3) maxRegen += 2;
 			maxRegen += 2;
 		}
-		if (player.hasPerk(PerkLib.NaturalRecovery) && player.shield.isNothing && player.weapon.isNothing && player.armor.hasTag(ItemConstants.A_REVEALING)) maxRegen += 2;
+		if (player.hasPerk(PerkLib.NaturalRecovery) && player.shield.isNothing && player.weapon.isNothing && (player.isNaked() || player.armor.hasTag(ItemConstants.A_REVEALING))) maxRegen += 2;
         if (player.hasStatusEffect(StatusEffects.SecondWindRegen)) maxRegen += 5;
         if (player.hasStatusEffect(StatusEffects.Cauterize)) {
             maxRegen += 1.5;
@@ -16427,3 +16444,4 @@ private function touSpeStrScale(stat:int):Number {
     }
 }
 }
+
