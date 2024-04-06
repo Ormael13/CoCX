@@ -9,6 +9,7 @@ import classes.*;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
+import classes.Scenes.Areas.Lake.SwordInStone;
 import classes.Scenes.Areas.Forest.AlrauneScene;
 import classes.Scenes.Areas.Tundra.*;
 import classes.Scenes.NPCs.Forgefather;
@@ -20,6 +21,7 @@ use namespace CoC;
 	{
 		public var valkyrieScene:ValkyrieScene = new ValkyrieScene();
 		public var alrauneScene:AlrauneScene = new AlrauneScene();
+		public var swordInStone:SwordInStone = new SwordInStone();
 
 		public const areaLevel:int = 35;
 		public function isDiscovered():Boolean {
@@ -46,6 +48,16 @@ use namespace CoC;
 				when: SceneLib.glacialRift.canDiscover,
 				chance: Encounters.ALWAYS,
 				call: SceneLib.glacialRift.discover
+			},{
+				name: "tombstone",
+				label : "Tombstone",
+				kind  : 'item',
+				chance: 0.2,
+				unique: true,
+				when: function():Boolean {
+					return !player.hasStatusEffect(StatusEffects.TookGlacialGraveaxe) && !player.hasStatusEffect(StatusEffects.GlacialGraveaxeNever);
+				},
+				call: swordInStone.findGlacialGraveaxe
 			},{
 				// choice[choice.length] = 0; //Valkyrie (lvl 44)
 				name: "valkyrie",

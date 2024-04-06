@@ -7640,8 +7640,11 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //-Reduces strength down to 70.
-        if (MutagenBonus("str", -1))
-            outputText("[pg]You feel a little weaker, but maybe it's just the liqueur.");
+        if (player.str > 70 && changes < changeLimit && rand(4) == 0) {
+			outputText("[pg]You feel a little weaker, but maybe it's just the liqueur.");
+            player.addCurse("str", 1, 1);
+            changes++;
+		}
         if (player.blockingBodyTransformations()) changeLimit = 0;
         //Sexual Changes:
         //-Lizard dick - first one

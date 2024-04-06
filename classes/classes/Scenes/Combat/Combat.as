@@ -6062,12 +6062,20 @@ public class Combat extends BaseContent {
 						if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
 						doFireDamage(damage, true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+						if (player.weapon == weapons.VGRAVEH && player.hasStatusEffect(StatusEffects.ChargeWeapon) && crit && rand(10) == 0) {
+							if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,1);
+							else monster.createStatusEffect(StatusEffects.BurnDoT, 4, 0.02, 0, 0);
+						}
                     }
                     else if (isIceTypeWeapon()) {
                         damage = Math.round(damage * iceDamage);
 						if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
                         doIceDamage(damage, true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+						if (player.weapon == weapons.GGRAVEA && player.hasStatusEffect(StatusEffects.ChargeWeapon) && crit && rand(10) == 0) {
+							if (monster.hasStatusEffect(StatusEffects.FrostburnDoT)) monster.addStatusValue(StatusEffects.FrostburnDoT,1,1);
+							else monster.createStatusEffect(StatusEffects.FrostburnDoT, 4, 0.02, 0, 0);
+						}
                     }
                     else if (isLightningTypeWeapon()) {
                         damage = Math.round(damage * lightningDamage);
@@ -6871,15 +6879,14 @@ public class Combat extends BaseContent {
     }
 
     public function isFireTypeWeapon():Boolean {
-        return (
-                        (player.weapon == weapons.RCLAYMO || player.weapon == weapons.TRCLAYM || player.weapon == weapons.RDAGGER)
-                        && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "ruby"))
+        return ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.TRCLAYM || player.weapon == weapons.RDAGGER || player.weapon == weapons.VGRAVEH)
+                && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "ruby"))
                 || player.weapon.hasTag(ItemConstants.W_FIRE_TYPE)
                 || (player.hasStatusEffect(StatusEffects.FlameBlade) && !player.hasStatusEffect(StatusEffects.ElectrifyWeapon));
     }
     public function isIceTypeWeapon():Boolean {
-        return (
-                (player.weapon == weapons.SCLAYMO || player.weapon == weapons.TSCLAYM || player.weapon == weapons.SDAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "sapphire"))
+        return ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.TSCLAYM || player.weapon == weapons.SDAGGER || player.weapon == weapons.GGRAVEA)
+				&& (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "sapphire"))
                 || player.weapon.hasTag(ItemConstants.W_ICE_TYPE);
     }
     public function isLightningTypeWeapon():Boolean {
@@ -10367,23 +10374,23 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
                 player.removeStatusEffect(StatusEffects.Berzerking);
                 outputText("<b>Berserker effect wore off!</b>\n\n");
             } else {
-				if (player.hasPerk(PerkLib.EndlessRage)) {
+				if (player.hasPerk(PerkLib.EndlessRage) && player.statusEffectv3(StatusEffects.Berzerking) == 0) {
 					if (player.hasStatusEffect(StatusEffects.TooAngryTooDie)) {
-						if (player.wrath >= (player.maxWrath() * (0.1*(1+player.statusEffectv2(StatusEffects.Berzerking))))) player.wrath -= (player.maxWrath() * (0.1*(1+player.statusEffectv2(StatusEffects.Berzerking))));
+						if (player.wrath >= Math.round(player.maxWrath() * (0.1*(1+player.statusEffectv2(StatusEffects.Berzerking))))) player.wrath -= Math.round(player.maxWrath() * (0.1*(1+player.statusEffectv2(StatusEffects.Berzerking))));
 						else {
 							player.removeStatusEffect(StatusEffects.TooAngryTooDie);
 							player.removeStatusEffect(StatusEffects.Berzerking);
 							outputText("<b>Berserker effect wore off!</b>\n\n");
 						}
 					} else {
-						if (player.wrath >= (50*(1+player.statusEffectv2(StatusEffects.Berzerking)))) player.wrath -= (50*(1+player.statusEffectv2(StatusEffects.Berzerking)));
+						if (player.wrath >= (5*(1+player.statusEffectv2(StatusEffects.Berzerking)))) player.wrath -= (5*(1+player.statusEffectv2(StatusEffects.Berzerking)));
 						else {
 							player.removeStatusEffect(StatusEffects.Berzerking);
 							outputText("<b>Berserker effect wore off!</b>\n\n");
 						}
 					}
 				} else player.addStatusValue(StatusEffects.Berzerking, 1, -1);
-				if (player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.ItsZerkingTime)) player.addStatusValue(StatusEffects.Berzerking, 1, 1);
+				if (!player.hasPerk(PerkLib.EndlessRage) && player.statusEffectv3(StatusEffects.Berzerking) == 1) player.addStatusValue(StatusEffects.Berzerking, 1, 1);
 			}
         }
         if (player.hasStatusEffect(StatusEffects.Lustzerking)) {
@@ -10391,23 +10398,23 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
                 player.removeStatusEffect(StatusEffects.Lustzerking);
                 outputText("<b>Lustzerker effect wore off!</b>\n\n");
             } else {
-				if (player.hasPerk(PerkLib.EndlessRage)) {
+				if (player.hasPerk(PerkLib.EndlessRage) && player.statusEffectv3(StatusEffects.Lustzerking) == 0) {
 					if (player.hasStatusEffect(StatusEffects.TooAngryTooDie)) {
-						if (player.wrath >= (player.maxWrath() * (0.1*(1+player.statusEffectv2(StatusEffects.Lustzerking))))) player.wrath -= (player.maxWrath() * (0.1*(1+player.statusEffectv2(StatusEffects.Lustzerking))));
+						if (player.wrath >= Math.round(player.maxWrath() * (0.1*(1+player.statusEffectv2(StatusEffects.Lustzerking))))) player.wrath -= Math.round(player.maxWrath() * (0.1*(1+player.statusEffectv2(StatusEffects.Lustzerking))));
 						else {
 							player.removeStatusEffect(StatusEffects.TooAngryTooDie);
 							player.removeStatusEffect(StatusEffects.Lustzerking);
 							outputText("<b>Lustzerker effect wore off!</b>\n\n");
 						}
 					} else {
-						if (player.wrath >= (50*(1+player.statusEffectv2(StatusEffects.Lustzerking)))) player.wrath -= (50*(1+player.statusEffectv2(StatusEffects.Lustzerking)));
+						if (player.wrath >= (5*(1+player.statusEffectv2(StatusEffects.Lustzerking)))) player.wrath -= (5*(1+player.statusEffectv2(StatusEffects.Lustzerking)));
 						else {
 							player.removeStatusEffect(StatusEffects.Lustzerking);
 							outputText("<b>Lustzerker effect wore off!</b>\n\n");
 						}
 					}
 				} else player.addStatusValue(StatusEffects.Lustzerking, 1, -1);
-				if (player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.ItsZerkingTime)) player.addStatusValue(StatusEffects.Lustzerking, 1, 1);
+				if (!player.hasPerk(PerkLib.EndlessRage) && player.statusEffectv3(StatusEffects.Lustzerking) == 1) player.addStatusValue(StatusEffects.Lustzerking, 1, 1);
 			}
         }
         if (player.hasStatusEffect(StatusEffects.OniRampage)) {
@@ -10557,6 +10564,11 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
             if (player.wrath < asuraformCost()) {
                 player.statStore.removeBuffs("AsuraForm");
 				if (player.buff("WarriorsRage").getRemainingTicks() > 9000) player.statStore.removeBuffs("WarriorsRage");
+				if ((player.hasStatusEffect(StatusEffects.Berzerking) && player.statusEffectv3(StatusEffects.Berzerking) > 0) || (player.hasStatusEffect(StatusEffects.Lustzerking) && player.statusEffectv3(StatusEffects.Lustzerking) > 0)) {
+					if (player.hasStatusEffect(StatusEffects.Berzerking)) player.removeStatusEffect(StatusEffects.Berzerking);
+					if (player.hasStatusEffect(StatusEffects.Lustzerking)) player.removeStatusEffect(StatusEffects.Lustzerking);
+					if (player.hasStatusEffect(StatusEffects.TooAngryTooDie)) player.removeStatusEffect(StatusEffects.TooAngryTooDie);
+				}
                 outputText("<b>The flow of power through you suddenly stops, as you no longer have the wrath to sustain it.  Your Asura form slowly fades away, leaving you in your normal form.</b>\n\n");
             }
             //	else {
@@ -12232,6 +12244,8 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
                 if (monster.monsterIsBleeding()) statusTypes.push("Bleeding");
                 if (monster.monsterIsPoisoned()) statusTypes.push("Poisoned");
                 if (monster.monsterIsLustPoisoned()) statusTypes.push("Lust Poisoned");
+                if (monster.monsterIsBurned()) statusTypes.push("Fire Burned");
+                if (monster.monsterIsFrostbiten()) statusTypes.push("Frostbiten");
                 if (monster.monsterIsAcidBurned()) statusTypes.push("Acid Burned");
                 if (monster.hasStatusEffect(StatusEffects.Provoke)) statusTypes.push("Provoked");
                 if (monster.hasStatusEffect(StatusEffects.Fear)) statusTypes.push("Afraid");
@@ -15490,8 +15504,14 @@ public function asuraformCost():Number {
 		else modcsc += 5;
 	}
     if (player.hasPerk(PerkLib.ItsZerkingTime) && (player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker) || player.countRings(jewelries.FLLIRNG))) {
-		if (player.hasPerk(PerkLib.Berzerker)) modcsc += 5;
-		if (player.hasPerk(PerkLib.Lustzerker) || player.countRings(jewelries.FLLIRNG)) modcsc += 5;
+		if (player.hasPerk(PerkLib.Berzerker)) {
+			if (player.hasStatusEffect(StatusEffects.TooAngryTooDie)) modcsc += Math.round(player.maxWrath() * (0.1 * (1 + player.statusEffectv2(StatusEffects.Berzerking))));
+			else modcsc += 5;
+		}
+		if (player.hasPerk(PerkLib.Lustzerker) || player.countRings(jewelries.FLLIRNG)) {
+			if (player.hasStatusEffect(StatusEffects.TooAngryTooDie)) modcsc += Math.round(player.maxWrath() * (0.1 * (1 + player.statusEffectv2(StatusEffects.Lustzerking))));
+			else modcsc += 5;
+		}
 	}
     //if (player.hasPerk(PerkLib.)) modcsc += 20;
     return modcsc;
@@ -15512,12 +15532,12 @@ public function assumeAsuraForm():void {
 	if (player.hasPerk(PerkLib.JobWarrior) && player.hasPerk(PerkLib.AsuraToughness)) mspecials.warriorsrage007();
 	if (player.hasPerk(PerkLib.ItsZerkingTime) && (player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker) || player.countRings(jewelries.FLLIRNG))) {
 		if (player.hasPerk(PerkLib.Berzerker)) {
-			if (player.hasPerk(PerkLib.PrestigeJobBerserker)) player.createStatusEffect(StatusEffects.Berzerking,0,1,0,0);
-			else player.createStatusEffect(StatusEffects.Berzerking,0,0,0,0);
+			if (player.hasPerk(PerkLib.PrestigeJobBerserker)) player.createStatusEffect(StatusEffects.Berzerking,2,1,1,0);
+			else player.createStatusEffect(StatusEffects.Berzerking,2,0,1,0);
 		}
 		if (player.hasPerk(PerkLib.Lustzerker) || player.countRings(jewelries.FLLIRNG)) {
-			if (player.hasPerk(PerkLib.PrestigeJobBerserker)) player.createStatusEffect(StatusEffects.Lustzerking,0,1,0,0);
-			else player.createStatusEffect(StatusEffects.Lustzerking,0,0,0,0);
+			if (player.hasPerk(PerkLib.PrestigeJobBerserker)) player.createStatusEffect(StatusEffects.Lustzerking,2,1,1,0);
+			else player.createStatusEffect(StatusEffects.Lustzerking,2,0,1,0);
 		}
 	}
     statScreenRefresh();
@@ -15567,6 +15587,10 @@ public function returnToNormalShape():void {
 	//if (perkBonusDamage po asura toughness)
     player.statStore.removeBuffs("AsuraForm");
 	if (player.buff("WarriorsRage").getRemainingTicks() > 9000) player.statStore.removeBuffs("WarriorsRage");
+	if ((player.hasStatusEffect(StatusEffects.Berzerking) && player.statusEffectv3(StatusEffects.Berzerking) > 0) || (player.hasStatusEffect(StatusEffects.Lustzerking) && player.statusEffectv3(StatusEffects.Lustzerking) > 0)) {
+		if (player.hasStatusEffect(StatusEffects.Berzerking)) player.removeStatusEffect(StatusEffects.Berzerking);
+		if (player.hasStatusEffect(StatusEffects.Lustzerking)) player.removeStatusEffect(StatusEffects.Lustzerking);
+	}
     enemyAIImpl();
 }
 

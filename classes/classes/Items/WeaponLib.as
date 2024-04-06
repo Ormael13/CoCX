@@ -452,6 +452,9 @@ public final class WeaponLib extends ItemConstants
 				WT_EXOTIC, WSZ_MASSIVE)
 				.withTags(W_THROWN)
 				.withEffect(IELib.ScaleAttack_StrXL, 250) as Weapon;
+		public const GGRAVEA:Weapon = new Weapon("GGravea", "GlacialGraveaxe", "Glacial Graveaxe", "a Glacial Graveaxe", "cleave", 160, 160, "The titanic greataxe you found in the glacial rift, most of the weapon seems to have been carved from bedrock, with the head being made of solid, dense, ice from the heart of a glacier. The ice is light, razor sharp, and appears to never melt. The stone’s slightly discolored, as if carvings had once adorned its surface…However, such decoration seems to have been lost to time.", WT_AXE, WSZ_MASSIVE)
+				.withTag(W_LGWRATH)
+				.withEffect(IELib.ScaleAttack_StrXL, 800) as Weapon;
 		public const GUANDAO:Weapon = new Weapon(
 				"GuanDao", "GuanDao", "Guan Dao", "a Guan Dao", "slash", 75, 3000,
 				"Made of a 7 foot long wooden pole, attached on top is an imposing sword blade measuring about 21 inches long, gleaming with a sharp light. You figure this weapon should be effective versus groups of foes.  Req. 300 strength to unleash full attack power.",
@@ -943,6 +946,9 @@ public final class WeaponLib extends ItemConstants
 				"This set of catclaw gloves was tempered using Etna's own venom and reinforced using some of her tail bone spikes, a proof of her eternal love to you. Its also enchanted to reinforce natural attacks.",
 				WT_GAUNTLET, WSZ_MEDIUM)
 				.withEffect(IELib.Bleed, 10) as Weapon;
+		public const VGRAVEH:Weapon = new Weapon("VGraveh", "VolcanicGravehammer", "Volcanic Gravehammer", "a Volcanic Gravehammer", "smash", 160, 160, "The titanic greathammer you found in the volcanic crag. This weapon seems to have been hewn from perpetually molten bedrock from deep within a volcano. How it remains this way is unknown to you, but you wonder if it was enchanted to be as such, or if it's just a natural property of the materials it's been crafted from.", WT_MACE_HAMMER, WSZ_MASSIVE)
+				.withTag(W_LGWRATH)
+				.withEffect(IELib.ScaleAttack_StrXL, 800) as Weapon;
 		public const W_STAFF:Weapon = new Weapon(
 				"W.Staff", "W. Staff", "wizard's staff", "a wizard's staff", "smack", 3, 240,
 				"This staff is made of very old wood and seems to tingle to the touch.  The top has an odd zig-zag shape to it, and the wood is worn smooth from lots of use.  It probably belonged to a wizard at some point and would aid magic use.",
