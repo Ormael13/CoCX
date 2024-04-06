@@ -2621,6 +2621,11 @@ public class SaveUpdater extends NPCAwareContent {
 				outputText("\n\nSometimes Dracula/lina must go back to basic about making Ghoul Servants.");
 				if (player.racialScore(Races.DRACULA) >= 22 && !player.hasStatusEffect(StatusEffects.Familiar)) player.createStatusEffect(StatusEffects.Familiar, 0, 0, 0, 0);
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.47;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.48) {
+				outputText("\n\nPrincesses from the North been displeased with newest princess been too easily transformable and gave her First's blessing ;p");
+				if (player.tailType == Tail.ARIGEAN_PRINCESS && !player.hasPerk(PerkLib.TransformationImmunity2)) player.createPerk(PerkLib.TransformationImmunity2, 8, 0, 0, 0);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.48;
 			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.50) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.50;

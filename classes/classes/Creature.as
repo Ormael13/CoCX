@@ -416,9 +416,13 @@ public class Creature extends Utils
 				return touStat.value;
 			}
 		}
-
 		public function get spe():Number { return speStat.value; }
-		public function get inte():Number { return intStat.value; }
+		public function get inte():Number {if (this.statStore.hasBuff("Atavism")) {
+			return 1;
+			} else {
+				return intStat.value;
+			}
+		}
 		public function get wis():Number { return Math.round(wisStat.value); }
 		public function get lib():Number { return Math.round(libStat.value); }
 
@@ -4356,18 +4360,14 @@ public class Creature extends Utils
 		public function getEvasionChance():Number
 		{
 			var chance:Number = 0;
-
 			if (hasPerk(PerkLib.GreaterEvade)) chance += 15;
 			else if (hasPerk(PerkLib.ImprovedEvade)) chance += 10;
 			else if (hasPerk(PerkLib.Evade)) chance += 5;
-
 			if (hasPerk(PerkLib.JobRogue)) chance += 5;
 			if (hasPerk(PerkLib.Spectre) && hasPerk(PerkLib.Incorporeality)) chance += 10;
 			if (hasPerk(PerkLib.ElvenSense)) chance += 5;
-
 			if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) chance += 15;
 			else if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 2) chance += 10;
-
 			if (isFlying()) {
 				if (hasPerk(PerkLib.GreaterAerialCombat)) chance += 20;
 				else if (hasPerk(PerkLib.AdvancedAerialCombat)) chance += 10;
@@ -4375,24 +4375,19 @@ public class Creature extends Utils
 			} else {
 				chance += (evadeStat.value * (game.time.hours < 7 || game.time.hours > 19? 2:1));
 			}
-
 			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 4) chance += 20;
 			else if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 3) chance += 15;
 			else if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 2) chance += 10;
 			else if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1) chance += 5;
-
 			if (hasPerk(PerkLib.Flexibility)) chance += 6;
-
 			if (hasPerk(PerkLib.SmallFrame)) chance += 6;
-
 			if (hasPerk(PerkLib.JunglesWanderer)) chance += 35;
-
 			if (hasStatusEffect(StatusEffects.Illusion)) {
 				var illDodgeChance:int = 10;
 				if (perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 3) illDodgeChance += 20;
 				chance += illDodgeChance;
 			}
-
+			if (this.statStore.hasBuff("Atavism")) chance += 10;
 			if (hasStatusEffect(StatusEffects.BladeDance)) chance += 30;
 			return chance;
 		}
@@ -4825,3 +4820,4 @@ public class Creature extends Utils
 		}
 	}
 }
+

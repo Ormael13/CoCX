@@ -211,6 +211,14 @@ public class DungeonEngine extends DungeonAbstractContent {
 			case DUNGEON_RIVER_FLOOR_04_ROOM_25: return riverdungeon.roomD25;
             //River Dungeon 5th floor
 			//case DUNGEON_RIVER_FLOOR_05_ROOM_01: return riverdungeon.roomE01;
+			//case DUNGEON_RIVER_FLOOR_05_ROOM_02: return riverdungeon.roomE02;
+			//case DUNGEON_RIVER_FLOOR_05_ROOM_03: return riverdungeon.roomE03;
+			//case DUNGEON_RIVER_FLOOR_05_ROOM_04: return riverdungeon.roomE04;
+			//case DUNGEON_RIVER_FLOOR_05_ROOM_05: return riverdungeon.roomE05;
+			//case DUNGEON_RIVER_FLOOR_05_ROOM_06: return riverdungeon.roomE06;
+			//case DUNGEON_RIVER_FLOOR_05_ROOM_07: return riverdungeon.roomE07;
+            //River Dungeon 6th floor
+			//case DUNGEON_RIVER_FLOOR_06_ROOM_01: return riverdungeon.roomF01;
             //Den of Desire
             case DUNGEON_DEN_OF_DESIRE_ENTRANCE:            return denofdesire.roomEntrance;
             case DUNGEON_DEN_OF_DESIRE_GREAT_HALL_AREA:     return denofdesire.roomGreatHallArea;
@@ -254,6 +262,13 @@ public class DungeonEngine extends DungeonAbstractContent {
             case DUNGEON_LAB_NIGHTWALKER_1: return demonLab.NightwalkerLab1;
             case DUNGEON_LAB_NIGHTWALKER_2: return demonLab.NightwalkerLab2;
             case DUNGEON_LAB_PANIC_ROOM: 	return demonLab.Ballroom3;
+			//Twilight Grove
+			//case DUNGEON_TWILIGHT_GROVE_1: return riverdungeon.roomE01;
+			//case DUNGEON_TWILIGHT_GROVE_2: return riverdungeon.roomE02;
+			//case DUNGEON_TWILIGHT_GROVE_3: return riverdungeon.roomE03;
+			//case DUNGEON_TWILIGHT_GROVE_4: return riverdungeon.roomE04;
+			//case DUNGEON_TWILIGHT_GROVE_5: return riverdungeon.roomE05;
+			//case DUNGEON_TWILIGHT_GROVE_6: return riverdungeon.roomE06;
             //error
             default: throw new Error("Illegal dungeon location!")
         }

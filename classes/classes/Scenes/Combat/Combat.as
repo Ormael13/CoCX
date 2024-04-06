@@ -779,6 +779,7 @@ public class Combat extends BaseContent {
         else if (player.hasStatusEffect(StatusEffects.WhipSilence)) return false;
         else if (player.hasStatusEffect(StatusEffects.PiercingBlow)) return false;
 		else if (player.statStore.hasBuff("Supercharged")) return false;
+		else if (player.statStore.hasBuff("Atavism")) return false;
         return true;
     }
 
@@ -1080,6 +1081,13 @@ public class Combat extends BaseContent {
 				if (player.statStore.hasBuff("AsuraForm")) {// && !player.hasPerk(PerkLib.HiddenJobAsura)
 					bd.disable("You are under transformantion effect incompatibile with Crinos Shape!");
 				}
+			}
+		}
+		if (player.hasPerk(PerkLib.Atavism)) {
+			if (player.statStore.hasBuff("Atavism")) {
+				buttons.add("Return", mspecials.returnToNormalStateA).hint("Return to normal from Atavism State.");
+			} else {
+				bd = buttons.add("Atavism", mspecials.assumeAtavismState).hint("Turn feral for a while, abandoning yourself to your animalistic instincts. Unlock the full potential in your body by boosting your physical might and sharpening your senses but silence your ability to process intelligent logical thoughts. \n");
 			}
 		}
 		if (player.racialScore(Races.ONI, false) >= mspecials.minOniScoreReq()) {
@@ -7366,7 +7374,8 @@ public class Combat extends BaseContent {
                         break;
                     default:
                         doPhysicalDamage(damage, true, true);
-                } // Below down here are just for lust damage dont be confused by The Enemy I mean the damage variable
+                }
+				// Below down here are just for lust damage dont be confused by The Enemy I mean the damage variable
                 if (player.hasPerk(PerkLib.LightningClaw)) {
                     damage = enwa_lustClawDamage + rand(3);
                     //+ slutty armor bonus
@@ -7413,6 +7422,13 @@ public class Combat extends BaseContent {
 				if (curseLib < 1) curseLib = 1;
 				else curseLib = Math.round(curseLib);
 				player.addCurse("lib", curseLib, 1);
+			}
+			if (isClawAttack && monster.canMonsterBleed() && player.hasPerk(PerkLib.DeepWounds) && rand(5) == 0) {
+				if (monster.hasStatusEffect(StatusEffects.IzmaBleed)) {
+					if (monster.statusEffectv4(StatusEffects.IzmaBleed) == 0) monster.addStatusValue(StatusEffects.IzmaBleed, 4, 1);
+					monster.addStatusValue(StatusEffects.IzmaBleed, 2, 1);
+				}
+				else monster.createStatusEffect(StatusEffects.IzmaBleed,3,0,0,0);
 			}
 			if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln, false);
         }
@@ -7478,7 +7494,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
         if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
         if (player.perkv1(IMutationsLib.FloralOvariesIM) >= 1) damage *= 1.25;
-        if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+        if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
         damage *= 2;
         damage = Math.round(damage);
@@ -7546,7 +7562,7 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) lustDmgF *= 1.3;
         if (player.perkv1(IMutationsLib.RaijuCathodeIM) >= 2) lustDmgF *= 1.2;
         if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= RacialParagonAbilityBoost();
-        if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
+        if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 2;
         if (player.armor == armors.ELFDRES && player.isElf()) lustDmgF *= 2;
         if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmgF *= 2;
         lustDmgF = lustDmgF * monster.lustVuln;
@@ -7994,6 +8010,7 @@ public class Combat extends BaseContent {
 			}
 		}
         if (player.perkv1(IMutationsLib.EyeOfTheTigerIM) >= 2) critPChance += 5;
+		if (player.statStore.hasBuff("Atavism")) critPChance += 35;
         return critPChance;
     }
 
@@ -9772,7 +9789,7 @@ public class Combat extends BaseContent {
                 LustDamage *= 1.75;
             }
             if (player.hasPerk(PerkLib.RacialParagon)) LustDamage *= combat.RacialParagonAbilityBoost();
-            if (player.hasPerk(PerkLib.NaturalArsenal)) LustDamage *= 1.50;
+            if (player.hasPerk(PerkLib.NaturalArsenal)) LustDamage *= 2;
             if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) LustDamage *= (1 + (0.25 * player.perkv1(IMutationsLib.MelkieLungIM)));
             //Apply intensity multiplier
             LustDamage *= player.statusEffectv1(StatusEffects.Sing);
@@ -10719,6 +10736,14 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         if (player.hasStatusEffect(StatusEffects.JabbingStyle)) {
             player.removeStatusEffect(StatusEffects.JabbingStyle);
         }
+        //Atavism
+        if (player.hasStatusEffect(StatusEffects.CooldownAtavism)) {
+            if (player.statusEffectv1(StatusEffects.CooldownAtavism) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownAtavism);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownAtavism, 1, -1);
+            }
+        }
         //Play
         if (player.hasStatusEffect(StatusEffects.CooldownPlay)) {
             if (player.statusEffectv1(StatusEffects.CooldownPlay) <= 0) {
@@ -11254,7 +11279,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 			dmg *= 1.75;
 		}
 		if (player.hasPerk(PerkLib.RacialParagon)) dmg *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) dmg *= 1.50;
+		if (player.hasPerk(PerkLib.NaturalArsenal)) dmg *= 2;
 		if (player.hasPerk(PerkLib.LionHeart)) dmg *= 2;
 
 		var arve:Number = 1;
@@ -11304,7 +11329,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 				if (player.perkv1(IMutationsLib.FerasBirthrightIM) >= 3) healingPercent += 2;
 				healingPercent += 2;
 			}
-            if (player.hasPerk(PerkLib.NaturalRecovery) && player.shield.isNothing && player.weapon.isNothing && player.armor.hasTag(ItemConstants.A_REVEALING)) healingPercent += 2;
+            if (player.hasPerk(PerkLib.NaturalRecovery) && player.shield.isNothing && player.weapon.isNothing && (player.isNaked() || player.armor.hasTag(ItemConstants.A_REVEALING))) healingPercent += 2;
             if (player.hasPerk(PerkLib.Sanctuary)) healingPercent += 1;
             if (player.shield == shields.SANCTYL) healingPercent += ((player.corruptionTolerance - player.cor) / (100 + player.corruptionTolerance)) * 4;
             if (player.shield == shields.SANCTYD) healingPercent += (player.cor / (100 + player.corruptionTolerance)) * 4;
@@ -11455,7 +11480,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 			if (player.perkv1(IMutationsLib.FerasBirthrightIM) >= 3) maxRegen += 2;
 			maxRegen += 2;
 		}
-		if (player.hasPerk(PerkLib.NaturalRecovery) && player.shield.isNothing && player.weapon.isNothing && player.armor.hasTag(ItemConstants.A_REVEALING)) maxRegen += 2;
+		if (player.hasPerk(PerkLib.NaturalRecovery) && player.shield.isNothing && player.weapon.isNothing && (player.isNaked() || player.armor.hasTag(ItemConstants.A_REVEALING))) maxRegen += 2;
         if (player.hasStatusEffect(StatusEffects.SecondWindRegen)) maxRegen += 5;
         if (player.hasStatusEffect(StatusEffects.Cauterize)) {
             maxRegen += 1.5;
@@ -13074,7 +13099,7 @@ public function SingArouse(Bee:Boolean = false):void {
 		}
     }
     if (player.hasPerk(PerkLib.RacialParagon)) LustDamage *= combat.RacialParagonAbilityBoost();
-    if (player.hasPerk(PerkLib.NaturalArsenal)) LustDamage *= 1.50;
+    if (player.hasPerk(PerkLib.NaturalArsenal)) LustDamage *= 2;
     if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) LustDamage *= (1 + (0.25 * player.perkv1(IMutationsLib.MelkieLungIM)));
 	if (player.weapon == weapons.ELYSIUM) LustDamage *= 2;
     //Apply intensity multiplier
@@ -13116,7 +13141,7 @@ public function SingDevastatingAria():void {
         damage *= 1.75;
     }
     if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-    if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+    if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 	if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 	if (player.hasPerk(PerkLib.PerformancePower)) damage *= (1 + player.perkv1(PerkLib.PerformancePower));
     if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.MelkieLungIM)));
@@ -13355,7 +13380,7 @@ public function randomTeaseMindflayerCriticalOverload(straddleDamage:Number, ran
             " Your opponent shove you off in panic but the damage is already done and you smile knowingly as you spot telltale sign of [monster his] increased arousal.");
     var multiplier:Number = 1;
     if (player.hasPerk(PerkLib.RacialParagon)) multiplier += RacialParagonAbilityBoost() - 1;
-    if (player.hasPerk(PerkLib.NaturalArsenal)) multiplier += 0.5;
+    if (player.hasPerk(PerkLib.NaturalArsenal)) multiplier += 1;
     if (player.hasPerk(PerkLib.MindbreakerBrain1toX)) multiplier += player.perkv1(PerkLib.MindbreakerBrain1toX)*0.5;
     straddleDamage *= multiplier;
     straddleDamage += scalingBonusIntelligence() * 2;
@@ -13373,7 +13398,7 @@ public function randomTeaseManticoreTailSpike(straddleDamage:Number, randomcrit:
     
     var multiplier:Number = 1;
     if (player.hasPerk(PerkLib.RacialParagon)) multiplier += RacialParagonAbilityBoost() - 1;
-    if (player.hasPerk(PerkLib.NaturalArsenal)) multiplier += 0.5;
+    if (player.hasPerk(PerkLib.NaturalArsenal)) multiplier += 1;
     straddleDamage *= multiplier;
 
     monster.teased(straddleDamage, false);
@@ -13419,7 +13444,7 @@ public function randomTeaseJabberwocky(straddleDamage:Number, randomcrit:Boolean
     if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) multiplier += 2;
     if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 4) multiplier += 2;
     if (player.hasPerk(PerkLib.RacialParagon)) multiplier += RacialParagonAbilityBoost() - 1;
-    if (player.hasPerk(PerkLib.NaturalArsenal)) multiplier += 0.5;
+    if (player.hasPerk(PerkLib.NaturalArsenal)) multiplier += 1;
     dam4Ba *= multiplier;
 
     monster.statStore.addBuffObject({tou:-(dam4Ba*2)}, "Poison",{text:"Poison"});
@@ -14269,7 +14294,7 @@ public function spiderBiteAttack():void {
         poisonScaling += player.lib/100;
         poisonScaling += player.tou/100;
         if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= RacialParagonAbilityBoost();
-        if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
+        if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 2;
         if (player.level < 10) lustDmg += 20 + (player.level * 3);
         else if (player.level < 20) lustDmg += 50 + (player.level - 10) * 2;
         else if (player.level < 30) lustDmg += 70 + (player.level - 20) * 1;
@@ -16419,3 +16444,4 @@ private function touSpeStrScale(stat:int):Number {
     }
 }
 }
+

@@ -434,12 +434,18 @@ public class PerkLib
 		public static const NaturalRecovery:PerkType = mk("Natural recovery", "Natural recovery",
 				"Gain 2% health regeneration so long as you are wearing no armor (or wearing armor with Revealing tag), shield or melee weapon.",
 				"You've chosen the 'Natural recovery' perk. Gain 2% health regeneration so long as you are wearing no armor (or wearing armor with Revealing tag), shield or melee weapon.");
-		public static const ImprovedEvasion:PerkType = mk("Improved evasion", "Improved evasion",
-				".",
-				"You've chosen the '' perk.");
+		public static const MageslayingBeast:PerkType = mk("Mageslaying beast", "Mageslaying beast",
+				"Gain spell resistance based on core speed so long as you are naked up to 40%.",
+				"You've chosen the 'Mageslaying beast' perk. Gain spell resistance based on core speed so long as you are naked up to 40%.");
 		public static const WoundFocus:PerkType = mk("Wound focus", "Wound focus",
 				"Any bleeding you cause gains a 20% periodic damage increase.",
 				"You've chosen the 'Wound focus' perk. Any bleeding you cause gains a 20% periodic damage increase.");
+		public static const DeepWounds:PerkType = mk("Deep wounds", "Deep wounds",
+				"Natural claw attacks have a 20% chance to cause bleeding for 6 rounds.",
+				"You've chosen the 'Deep wounds' perk. Natural claw attacks have a 20% chance to cause bleeding for 6 rounds.");
+		public static const Atavism:PerkType = mk("Atavism", "Atavism",
+				"Unlocks the ability to temporarily turn into a feral beast of pure instinct while in battle.",
+				"You've chosen the 'Atavism' perk. Unlocks the ability to temporarily turn into a feral beast of pure instinct while in battle.");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -447,12 +453,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk.");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk.");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk.");
@@ -2407,8 +2407,8 @@ public class PerkLib
 				"Sample Text Here/+20% fatigue recovery rate",
 				"You've chosen the 'Napping' perk, gaining +20% fatigue recovery rate.");
 		public static const NaturalArsenal:PerkType = mk("Natural Arsenal", "Natural Arsenal",
-				"All natural weapon-based racial abilities gain a +50% damage bonus.",
-				"You've chosen the 'Natural Arsenal' perk, all natural weapon-based racial abilities gain a +50% damage bonus.");
+				"All natural weapon-based racial abilities gain a +100% damage bonus.",
+				"You've chosen the 'Natural Arsenal' perk, all natural weapon-based racial abilities gain a +100% damage bonus.");
 		public static const NaturalHealingEpic:PerkType = mk("Natural healing (Epic)", "Natural healing (Epic)",
 				"Incease healing power by 50% and lower healing spells mana costs by 20%.",
 				"You've chosen the 'Natural healing (Epic)' perk, increasing healing spell effectiveness and lowering their costs.");
@@ -4281,9 +4281,9 @@ public class PerkLib
 		public static const JobBrawler:PerkType = mk("Job: Brawler", "Job ( Advanced ): Brawler",
 				"You've trained in unarmed combat.",
 				"You chose 'Job ( Advanced ): Brawler' perk, training yourself to become a(n) Brawler.").withBuffs({'str.mult':0.10});
-		public static const JobBeastlord:PerkType = mk("Job: Beastlord", "Job ( Advanced ): Beastlord",
-				"You've trained to use of your own body and natural weapons to their limits in fights.",
-				"You chose 'Job ( Advanced ): Beastlord' perk, training yourself to become a(n) Beastlord.").withBuffs({'str.mult':0.05,'tou.mult':0.05,'spe.mult':0.05, "int.mult":-0.05, "wis.mult":-0.05});
+		public static const JobBeastlord:PerkType = mk("Job: Feral Champion", "Job ( Advanced ): Feral Champion",
+				"A wild animal in both name and behavior the feral champion focus on mastering natural weapon such as tooth and claws and delivering deadly status effect. A specialization used best when fighting naked.",
+				"You chose 'Job ( Advanced ): Feral Champion' perk, training yourself to become a(n) Feral Champion.").withBuffs({'str.mult':0.05, 'spe.mult':0.05, "int.mult":-0.05});
 		public static const JobCourtesan:PerkType = mk("Job: Courtesan", "Job ( Advanced ): Courtesan",
 				"You've mastered all various uses of tease.",
 				"You chose 'Job ( Advanced ): Courtesan' perk, training yourself to become a(n) Courtesan.").withBuffs({'lib.mult':0.15,'maxlust_base':+60});
@@ -7360,6 +7360,8 @@ public class PerkLib
             FeralArmor.requirePerk(ToughHide)
 					.requireLevel(6)
 					.requireTou(50);
+            Atavism.requireLevel(6)
+                    .requirePerks(JobBeastlord);
 //            WeaponClawsClawTraining.requirePerk(JobBeastWarrior)
 //					.requireLevel(6)
 //					.requireCustomFunction(function (player:Player):Boolean {
@@ -7579,6 +7581,12 @@ public class PerkLib
             NaturalRecovery.requireLevel(18)
                     .requirePerk(ToughHide)
 					.requireTou(60);
+            DeepWounds.requireLevel(18)
+                    .requirePerks(WoundFocus)
+					.requireStr(50);
+            MageslayingBeast.requirePerk(ToughHide)
+					.requireLevel(6)
+					.requireTou(50);
             NaturalHealingMajor.requireLevel(18)
                     .requirePerk(NaturalHealingMinor)
                     .requireInt(20)

@@ -33,7 +33,11 @@ public class Changelog extends BaseContent
 			clearOutput();
 			//0 of 11 pages
 			outputText("<b>Version 0.9a:</b>\n\n");
-			outputText("-New tier 0 misc lvl-up perk: Job: Beastlord. Req. Job: Beast Warrior perk, free advanced job slot, 25+ in tou/spe. Effect: You've trained to use of your own body and natural weapons to their limits in fights.\n");
+			outputText("-New tier 0 misc lvl-up perk: Job: Feral Champion. Req. Job: Beast Warrior perk, free advanced job slot, 25+ in tou/spe. Effect: A wild animal in both name and behavior the feral champion focus on mastering natural weapon such as tooth and claws and delivering deadly status effect. A specialization used best when fighting naked\n");
+			outputText("-New tier 2 misc lvl-up perk: Wound focus. Req. Job: Feral Champion perk and at least one bleeding ability. Effect: Any bleeding you cause gains a 20% periodic damage increase.\n");
+			outputText("-New tier 3 misc lvl-up perk: Natural recovery. Req. Tough Hide perk and 60+ tou. Effect: Gain 2% health regeneration so long as you are wearing no armor (or armor with Revealing tag), shield or melee weapon.\n");
+			outputText("-Natural Instincts & Tough Hide perks req. of Job: Beast Warrior changed to req. perk Job: Feral Champion. Natural arsenal effect increased from +50% to +100%. Feral Armor req. for tou stat lowered from 60 to 50.\n");
+			outputText("-Enabled camp building at night for night races. But would limit possible helpers to those that could be still active at night.\n");
 			outputText("-Bestial Blademaster armor has the revealing tag now, because reasons. (Lord Shadeogorath)\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
@@ -42,10 +46,13 @@ public class Changelog extends BaseContent
 			//outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
 			//outputText("-New TF item (by Shigure): Moth's Dust. Buyable in Moga Hen shop. Using this item will turn PC into moth. Moth bonuses at 10 pts in racial score (scalable): -30% to Tou multi, +150% to Spe multi, +70% to Wis multi, +30% to Lib multi, +70 to sensitivity.\n");//Dropped by Corrupted Troll enemies.
 			//outputText("-New Special names: Solaria (salamander), Drake (hydra). Each of them will start with matching bloodline perk to match their ancestor race.\n");//, Veseshe (elf)
-			outputText("-Natural Instincts & Tough Hide perks req. of Job: Beast Warrior changed to req. perk Job: Beastlord. Feral Armor req. for tou stat lowered from 60 to 50.\n");
-			outputText("-New tier 3 misc lvl-up perk: Natural recovery. Req. Tough Hide perk and 60+ tou. Effect: Gain 2% health regeneration so long as you are wearing no armor (or armor with Revealing tag), shield or melee weapon.\n");
-			outputText("-New tier 2 misc lvl-up perk: Wound focus. Req. Job: Beastlord perk and at least one bleeding ability. Effect: Any bleeding you cause gains a 20% periodic damage increase.\n");
-			outputText("-Enabled camp building at night for night races. But would limit possible helpers to those that could be still active at night.\n");
+			outputText("-New tier 3 misc lvl-up perk: Deep wounds. Req. Wound focus perk and 50+ str. Effect: Natural claw attacks have a 20% chance to cause bleeding for 6 rounds.\n");
+			outputText("-New tier 3 misc lvl-up perk: Mageslaying beast. Req. Tough Hide perk and 60+ tou. Effect: Gain spell resistance based on core speed so long as you are naked up to 40%.\n");
+			outputText("-New tier 1 misc lvl-up perk: Atavism. Req. Job: Feral Champion perk. Effect: Unlocks the ability to temporarily turn into a feral beast of pure instinct while in battle. ");
+			outputText("(Drops intelligence to 0 silence self, increase critical rate by 35%, increase Strength and Speed modifier by 100% and raise dodge by 10% while fighting with feral combat. It obviously lock you into feral combat for the duration too.)\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -63,13 +70,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-Fixed bugs: Dracula/lina PC unable to find get ghoul if they not learned this as normal Vampire, unable to buy manual for 1st atk: f. swords\n\n");
+			outputText("-Fixed bugs: Dracula/lina PC unable to find get ghoul if they not learned this as normal Vampire, unable to buy manual for 1st atk: f. swords, Arigean Princess PC not been fully immune to TF-ing like other perm races\n\n");
 			/*ostatni punkt changelogu
 			outputText("(Part 2/2) <b>Version 0.9a:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
