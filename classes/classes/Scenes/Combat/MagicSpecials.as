@@ -3476,7 +3476,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) tempWW += 0.04;
 			if (tempWW > 1) {
 				if (player.racialScore(Races.WEREWOLF) > 15) tempWW *= 2;
-				if (player.racialScore(Races.WEREWOLF) > 19) tempWF *= 1.5;
+				if (player.racialScore(Races.WEREWOLF) > 19) tempWW *= 1.5;
 				temp1 *= (tempWW * 10);
 				temp2 *= (tempWW * 6);
 				temp3 *= (tempWW * 4);
@@ -3494,6 +3494,20 @@ public class MagicSpecials extends BaseCombatContent {
 				temp1 *= tempWF;
 				temp2 *= (tempWF * 10);
 				temp3 *= (tempWF * 4);
+			}
+		}
+		if (player.hasPerk(PerkLib.Selachimorphanthropy) && player.racialScore(Races.WERESHARK) > 11) {
+			var tempWS:Number = 1;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) tempWS += 0.01;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) tempWS += 0.02;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) tempWS += 0.03;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) tempWS += 0.04;
+			if (tempWS > 1) {
+				if (player.racialScore(Races.WERESHARK) > 15) tempWS *= 2;
+				if (player.racialScore(Races.WERESHARK) > 19) tempWS *= 1.5;
+				temp1 *= (tempWS * 10);
+				temp2 *= (tempWS * 5);
+				temp3 *= (tempWS * 5);
 			}
 		}
 		temp1 = Math.round(temp1);
@@ -3519,11 +3533,11 @@ public class MagicSpecials extends BaseCombatContent {
 	public function assumeAtavismState():void {
 		clearOutput();
 		outputText("You let out a bestial roar as you let your mind fully slip into a feral state.");
-		var tempStr:Number;
-		var tempSpe:Number;
+		var tempStr:Number = 0;
+		var tempSpe:Number = 0;
 		var oldHPratio:Number = player.hp100/100;
-		tempStr += player.strStat.core.value;
-		tempSpe += player.speStat.core.value;
+		tempStr += player.strStat.totalCore;
+		tempSpe += player.speStat.totalCore;
 		mainView.statsView.showStatUp('str');
 		mainView.statsView.showStatUp('spe');
 		player.buff("Atavism").addStats({str:tempStr,spe:tempSpe}).withText("Atavism State").combatPermanent();

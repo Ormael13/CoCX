@@ -1235,6 +1235,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						player.statStore.replaceBuffObject({ 'str.mult': changeV*0.01*ngMult,'tou.mult': changeV*0.1*ngMult,'spe.mult': changeV*0.04*ngMult, 'minlustx': changeV * 0.005}, 'Vulpesthropy', { text: 'Vulpesthropy'});
 						player.setPerkValue(PerkLib.Vulpesthropy,1,changeV);
 					}
+					if (player.hasPerk(PerkLib.Selachimorphanthropy)) {
+						player.statStore.replaceBuffObject({ 'str.mult': changeV*0.1*ngMult,'tou.mult': changeV*0.05*ngMult,'spe.mult': changeV*0.05*ngMult, 'minlustx': changeV * 0.01}, 'Selachimorphanthropy', { text: 'Selachimorphanthropy'});
+						player.setPerkValue(PerkLib.Selachimorphanthropy,1,changeV);
+					}
 					needNext = true;
 				}
 				if (player.hasStatusEffect(StatusEffects.MitziIzmaDaughters)) player.removeStatusEffect(StatusEffects.MitziIzmaDaughters);

@@ -7223,6 +7223,12 @@ public class PerkLib
 					.requireSpe(25);
 			ToughHide.requirePerk(JobBeastlord)
 					.requireTou(30);
+			VenomousDiet.requireHungerEnabled()
+					.requirePerk(JobBeastlord)
+					.requireMaxVenom(100);
+			VenomousAdiposeTissue.requirePerk(JobBeastlord)
+					.requireTou(10)
+					.requireMaxVenom(100);
 			AerialCombat.requireStr(20)
 					.requireSpe(20)
                     .requireCustomFunction(function (player:Player):Boolean {
@@ -7232,10 +7238,6 @@ public class PerkLib
             JobLeader.requireInt(10)
 					.requireWis(10);
             Motivation.requirePerks(JobLeader, BasicLeadership);
-			VenomousDiet.requireHungerEnabled()
-					.requireMaxVenom(100);
-			VenomousAdiposeTissue.requireTou(10)
-					.requireMaxVenom(100);
 			CursedTag.requireRace(Races.JIANGSHI);
 			ImprovedCursedTag.requirePerk(CursedTag).requireRace(Races.JIANGSHI);
 			GreaterCursedTag.requirePerk(ImprovedCursedTag).requireRace(Races.JIANGSHI);
