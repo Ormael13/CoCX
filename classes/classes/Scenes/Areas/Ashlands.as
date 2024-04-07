@@ -56,13 +56,13 @@ public class Ashlands extends BaseContent
 		},{
 			name: "tombstone",
 			label : "Tombstone",
-			kind  : 'item',
-			chance: 0.2,
+			kind  : 'event',
+			chance: 0.5,
 			unique: true,
 			when: function():Boolean {
 				return !player.hasStatusEffect(StatusEffects.TookVolcanicGravehammer) && !player.hasStatusEffect(StatusEffects.VolcanicGravehammerNever);
 			},
-			call: swordInStone.findGlacialGraveaxe
+			call: swordInStone.findVolcanicGravehammer
 		}, {
 			name: "phoenix",
 			label : "Quasi-Phoenix",

@@ -51,8 +51,8 @@ use namespace CoC;
 			},{
 				name: "tombstone",
 				label : "Tombstone",
-				kind  : 'item',
-				chance: 0.2,
+				kind  : 'event',
+				chance: 0.5,
 				unique: true,
 				when: function():Boolean {
 					return !player.hasStatusEffect(StatusEffects.TookGlacialGraveaxe) && !player.hasStatusEffect(StatusEffects.GlacialGraveaxeNever);

@@ -41,6 +41,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 3 misc lvl-up perk: Deep wounds. Req. Wound focus perk and 50+ str. Effect: Natural claw attacks have a 20% chance to cause bleeding for 6 rounds.\n");
 			outputText("-New tier 3 misc lvl-up perk: Mageslaying beast. Req. Tough Hide perk and 60+ tou. Effect: Gain spell resistance based on core speed so long as you are naked up to 40%.\n");
 			outputText("-Natural Instincts & Tough Hide perks req. of Job: Beast Warrior changed to req. perk Job: Feral Champion. Natural arsenal effect increased from +50% to +100%. Feral Armor req. for tou stat lowered from 60 to 50.\n");
+			outputText("-Venomous Adipose Tissue & Venomous Diet perks have additional req. of having perk Job: Feral Champion.\n");
 			outputText("-Enabled camp building at night for night races. But would limit possible helpers to those that could be still active at night.\n");
 			outputText("-Bestial Blademaster armor has the revealing tag now, because reasons. (Lord Shadeogorath)\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
@@ -50,7 +51,6 @@ public class Changelog extends BaseContent
 			//outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
 			//outputText("-New TF item (by Shigure): Moth's Dust. Buyable in Moga Hen shop. Using this item will turn PC into moth. Moth bonuses at 10 pts in racial score (scalable): -30% to Tou multi, +150% to Spe multi, +70% to Wis multi, +30% to Lib multi, +70 to sensitivity.\n");//Dropped by Corrupted Troll enemies.
 			//outputText("-New Special names: Solaria (salamander), Drake (hydra). Each of them will start with matching bloodline perk to match their ancestor race.\n");//, Veseshe (elf)
-			outputText("-Venomous Adipose Tissue & Venomous Diet perks have additional req. of having perk Job: Feral Champion.\n");
 			outputText("-New melee weapon (by Lord Shadeogorath): Glacial Graveaxe - pulled from unnamed grave at tundra. Base atk is 160. It's massive axe type low grade wrath weapon. When using charge weapon it will deal ice damage and have 10% to apply Frostburn DoT after critical hit.\n");
 			outputText("-New melee weapon (by Lord Shadeogorath): Volcanic Gravehammer - pulled from unnamed grave at ashlands. Base atk is 160. It's massive mace/hammer type low grade wrath weapon. When using charge weapon it will deal fire damage and have 10% to apply Burn DoT after critical hit.\n");
 			outputText("-\n");
@@ -74,8 +74,12 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Fixed bugs: Dracula/lina PC unable to find get ghoul if they not learned this as normal Vampire, unable to buy manual for 1st atk: f. swords, Arigean Princess PC not been fully immune to TF-ing like other perm races, Weresharks not having their stats changing according to moon phase or boosted during use of Crinos Shape, Phoenix TF adding mutagen penatly instead of stat curse, ");
-			outputText("Endless Rage draining 10x too much wrath per turn\n\n");
+			outputText("Endless Rage draining 10x too much wrath per turn, Berzerker/Lustzerker still req. to be activated after they been activated as part of Asura Form activation\n\n");
 			/*ostatni punkt changelogu
 			outputText("(Part 2/2) <b>Version 0.9a:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -137,10 +141,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -165,7 +167,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

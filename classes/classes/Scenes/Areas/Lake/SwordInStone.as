@@ -275,7 +275,7 @@ public class SwordInStone extends AbstractLakeContent
 			outputText("On the other hand you reckon if you were strong enough, you could dislodge the titanic weapon and wield it.\n\n");
 			menu();
 			addButton(1, "Leave", findVolcanicGravehammerLeave);
-			addButtonIfTrue(2, "Dislodge", findVolcanicGravehammerDislodge, "The thought of attempting to lift something of that caliber already exhausts you. (Req. 600+ fatigue)", player.fatigue >= 600);
+			addButtonIfTrue(2, "Dislodge", findVolcanicGravehammerDislodge, "The thought of attempting to lift something of that caliber already exhausts you. (Req. 600+ fatigue)", (player.fatigue <= player.maxOverFatigue() - 600));
 			addButton(3, "Never", findVolcanicGravehammerNever);
 		}
 		private function findVolcanicGravehammerLeave():void {
@@ -315,7 +315,7 @@ public class SwordInStone extends AbstractLakeContent
 			outputText("On the other hand, you could dislodge the titanic weapon and wield it… If you’re strong enough.\n\n");
 			menu();
 			addButton(1, "Leave", findGlacialGraveaxeLeave);
-			addButtonIfTrue(2, "Dislodge", findGlacialGraveaxeDislodge, "The thought of attempting to lift something of that caliber already exhausts you. (Req. 600+ fatigue)", player.fatigue >= 600);
+			addButtonIfTrue(2, "Dislodge", findGlacialGraveaxeDislodge, "The thought of attempting to lift something of that caliber already exhausts you. (Req. 600+ fatigue)", (player.fatigue <= player.maxOverFatigue() - 600));
 			addButton(3, "Never", findGlacialGraveaxeNever);
 		}
 		private function findGlacialGraveaxeLeave():void {
