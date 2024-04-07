@@ -21,6 +21,7 @@ public class DungeonEngine extends DungeonAbstractContent {
     public var ebonlabyrinth:EbonLabyrinth = new EbonLabyrinth;
     public var beehive:BeeHive = new BeeHive;
     public var demonLab:DemonLab = new DemonLab();
+    public var twilightgrove:TwilightGrove = new TwilightGrove();
 
     public var map:DungeonMaps = new DungeonMaps;
 
@@ -263,7 +264,7 @@ public class DungeonEngine extends DungeonAbstractContent {
             case DUNGEON_LAB_NIGHTWALKER_2: return demonLab.NightwalkerLab2;
             case DUNGEON_LAB_PANIC_ROOM: 	return demonLab.Ballroom3;
 			//Twilight Grove
-			//case DUNGEON_TWILIGHT_GROVE_1: return riverdungeon.roomE01;
+			case DUNGEON_TWILIGHT_GROVE_1: return twilightgrove.room1TG;
 			//case DUNGEON_TWILIGHT_GROVE_2: return riverdungeon.roomE02;
 			//case DUNGEON_TWILIGHT_GROVE_3: return riverdungeon.roomE03;
 			//case DUNGEON_TWILIGHT_GROVE_4: return riverdungeon.roomE04;
@@ -307,6 +308,9 @@ public class DungeonEngine extends DungeonAbstractContent {
     }
     public function checkBeeHiveClear():Boolean {
         return (flags[kFLAGS.TIFA_FOLLOWER] > 5);
+    }
+    public function checkTwilightGroveClear():Boolean {
+        return (flags[kFLAGS.TWILIGHT_GROVE_PURIFICATION] > 1);
     }
     public function checkRiverDungeon1stFloorClear():Boolean {
         return (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 1);//1 - pokonanie 1 golema, 2 pokonanie obu golemów

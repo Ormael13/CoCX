@@ -1339,8 +1339,8 @@ public static const UNKNOWN_FLAG_NUMBER_01329:int                               
 public static const THE_TRENCH_ENTERED:int                                   		= 1330;
 public static const GHOULISH_VAMPIRE_SERVANT_NAME:int                               = 1331;  
 public static const THIEFS_KILLED:int                                   			= 1333;
-public static const UNKNOWN_FLAG_NUMBER_01334:int                                   = 1334;
-public static const UNKNOWN_FLAG_NUMBER_01335:int                                   = 1335;
+public static const DISCOVERED_TWILIGHT_GROVE_DUNGEON:int                           = 1334;
+public static const TWILIGHT_GROVE_PURIFICATION:int                                 = 1335;
 public static const UNKNOWN_FLAG_NUMBER_01336:int                                   = 1336;
 public static const UNKNOWN_FLAG_NUMBER_01337:int                                   = 1337;
 public static const UNKNOWN_FLAG_NUMBER_01338:int                                   = 1338;
@@ -3018,4 +3018,4 @@ public static const GLOBAL_FLAGS_ARRAY:Array = [
 	BUTTON_ICONS_DISABLED,STATBAR_ANIMATIONS
 ];
 	}
-}
+}
