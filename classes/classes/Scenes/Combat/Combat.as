@@ -6058,6 +6058,7 @@ public class Combat extends BaseContent {
                     }
                     //Damage is delivered HERE
                     if (isFireTypeWeapon()) {
+						if (player.weapon == weapons.VGRAVEH) damage *= 1.25;
                         damage = Math.round(damage * fireDamage);
 						if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
 						doFireDamage(damage, true, true);
@@ -6068,6 +6069,7 @@ public class Combat extends BaseContent {
 						}
                     }
                     else if (isIceTypeWeapon()) {
+						if (player.weapon == weapons.GGRAVEA) damage *= 1.25;
                         damage = Math.round(damage * iceDamage);
 						if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
                         doIceDamage(damage, true, true);
@@ -6179,6 +6181,8 @@ public class Combat extends BaseContent {
 							else bonus += 1.6;
 						}
                         doPhysicalDamage(damage, true, true);
+						if (player.weapon == weapons.VGRAVEH) doFireDamage(Math.round(damage * fireDamage * 0.25), true, true);
+						if (player.weapon == weapons.GGRAVEA) doIceDamage(Math.round(damage * iceDamage * 0.25), true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
                         if (player.weapon == weapons.DAISHO) {
 							doPhysicalDamage(Math.round(damage * 0.5), true, true);
