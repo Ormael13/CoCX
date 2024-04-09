@@ -406,7 +406,7 @@ public function graydaRandomnCampEvents():void {
 		outputText("\"<i>You are not much better, 'Dragon', you reek of corruption as well.</i>\"\n\n");
 		outputText("And with that Kiha swings her ax down upon Grayda, who swiftly steps out of the way, but their fight is stopped just as fast as it started as they finally take note of your presence.\n\n");
 	}
-	else doNext(playerMenu);
+	endEncounter();
 }
 public function graydaRandomnCampEvents2():void {
 	flags[kFLAGS.THE_TRENCH_ENTERED]++;

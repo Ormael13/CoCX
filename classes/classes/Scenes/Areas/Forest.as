@@ -796,6 +796,13 @@ use namespace CoC;
 				call: SceneLib.dungeons.deepcave.enterDungeon,
 				when: SceneLib.dungeons.canFindDeepCave
 			}, {
+				name: "dungeon",
+				label : "Twilight Grove",
+				kind  : 'event',
+				unique: true,
+				call: SceneLib.dungeons.twilightgrove.enterDungeon,
+				when: function ():Boolean { return (flags[kFLAGS.DISCOVERED_TWILIGHT_GROVE_DUNGEON] < 1); }
+			}, {
 				name  : "walk",
 				call  : deepwoodsWalkFn,
 				kind:'walk',

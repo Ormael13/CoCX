@@ -11,6 +11,7 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Ashlands.*;
+import classes.Scenes.Areas.Lake.SwordInStone;
 import classes.Scenes.Areas.Forest.AlrauneScene;
 import classes.Scenes.Areas.HighMountains.PhoenixScene;
 import classes.Scenes.NPCs.Forgefather;
@@ -23,6 +24,7 @@ public class Ashlands extends BaseContent
 	public var phoenixScene:PhoenixScene = new PhoenixScene();
 	public var alrauneScene:AlrauneScene = new AlrauneScene();
 	public var hellcatScene:HellCatScene = new HellCatScene();
+	public var swordInStone:SwordInStone = new SwordInStone();
 
 	public function Ashlands() {
 		onGameInit(init);
@@ -51,6 +53,16 @@ public class Ashlands extends BaseContent
 			unique: true,
 			when: SceneLib.volcanicCrag.canDiscover,
 			call: discoverCrags
+		},{
+			name: "tombstone",
+			label : "Tombstone",
+			kind  : 'event',
+			chance: 0.5,
+			unique: true,
+			when: function():Boolean {
+				return !player.hasStatusEffect(StatusEffects.TookVolcanicGravehammer) && !player.hasStatusEffect(StatusEffects.VolcanicGravehammerNever);
+			},
+			call: swordInStone.findVolcanicGravehammer
 		}, {
 			name: "phoenix",
 			label : "Quasi-Phoenix",

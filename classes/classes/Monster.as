@@ -2105,9 +2105,16 @@ import classes.Scenes.Combat.CombatAbilities;
 		public function monsterIsBurned():Boolean {
 			var effects:Array = [
 				StatusEffects.BurnDoT,
-				StatusEffects.BurnDoT2,
 				StatusEffects.FirePunchBurnDoT,
 				StatusEffects.ImmolationDoT
+			]
+			for each (var effect:StatusEffectType in effects) if (hasStatusEffect(effect)) return true;
+			return false;
+		}
+
+		public function monsterIsFrostbiten():Boolean {
+			var effects:Array = [
+				StatusEffects.FrostburnDoT
 			]
 			for each (var effect:StatusEffectType in effects) if (hasStatusEffect(effect)) return true;
 			return false;
@@ -3972,6 +3979,26 @@ import classes.Scenes.Combat.CombatAbilities;
 					outputText("\n\n");
 				}
 			}
+			//Fire Punch Burn DoT
+			if (hasStatusEffect(StatusEffects.FirePunchBurnDoT)) {
+				//Countdown to heal
+				addStatusValue(StatusEffects.FirePunchBurnDoT,1,-1);
+				//Heal wounds
+				if(statusEffectv1(StatusEffects.FirePunchBurnDoT) <= 0) {
+					outputText("Flames left by Fire Punch on [themonster] finally stop burning.\n\n");
+					removeStatusEffect(StatusEffects.FirePunchBurnDoT);
+				}
+				//Deal damage if still wounded.
+				else {
+					var store6:Number = (player.spe + player.inte) * SceneLib.combat.soulskillMod() * 0.5;
+					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store6 *= 1.2;
+					store6 = Math.round(store6 * SceneLib.combat.fireDamageBoostedByDao());
+					if(plural) outputText("[Themonster] burn from lingering Fire Punch after-effect. ");
+					else outputText("[Themonster] burns from lingering Fire Punch after-effect. ");
+					store6 = SceneLib.combat.doFireDamage(store6, true, true);
+					outputText("\n\n");
+				}
+			}
 			//Formic Acid DoT
 			if (hasStatusEffect(StatusEffects.AntAcid)) {
 				//Countdown to heal
@@ -4012,48 +4039,6 @@ import classes.Scenes.Combat.CombatAbilities;
 					store18 = SceneLib.combat.fixPercentDamage(store18);
 					store18 = SceneLib.combat.doAcidDamage(store18, true, true);
 					if (!lustVuln <= 0) teased(SceneLib.combat.teases.teaseBaseLustDamage()  * lustVuln);
-					outputText("\n\n");
-				}
-			}
-			//Burn DoT
-			if (hasStatusEffect(StatusEffects.BurnDoT2)) {
-				//Countdown to heal
-				addStatusValue(StatusEffects.BurnDoT2,1,-1);
-				//Heal wounds
-				if(statusEffectv1(StatusEffects.BurnDoT2) <= 0) {
-					outputText("Flames left by Burn on [themonster] finally stop burning.\n\n");
-					removeStatusEffect(StatusEffects.BurnDoT2);
-				}
-				//Deal damage if still wounded.
-				else {
-					var store8:Number = (player.str + player.spe + player.tou) * 2.5;
-					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store8 *= 1.2;
-					store8 = Math.round(store8 * SceneLib.combat.fireDamageBoostedByDao());
-					store8 += maxHP() * statusEffectv2(StatusEffects.BurnDoT2);
-					store8 = SceneLib.combat.fixPercentDamage(store8);
-					if(plural) outputText("[Themonster] burn from lingering Burn after-effect. ");
-					else outputText("[Themonster] burns from lingering Burn after-effect. ");
-					store8 = SceneLib.combat.doFireDamage(store8, true, true);
-					outputText("\n\n");
-				}
-			}
-			//Fire Punch Burn DoT
-			if (hasStatusEffect(StatusEffects.FirePunchBurnDoT)) {
-				//Countdown to heal
-				addStatusValue(StatusEffects.FirePunchBurnDoT,1,-1);
-				//Heal wounds
-				if(statusEffectv1(StatusEffects.FirePunchBurnDoT) <= 0) {
-					outputText("Flames left by Fire Punch on [themonster] finally stop burning.\n\n");
-					removeStatusEffect(StatusEffects.FirePunchBurnDoT);
-				}
-				//Deal damage if still wounded.
-				else {
-					var store6:Number = (player.spe + player.inte) * SceneLib.combat.soulskillMod() * 0.5;
-					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store6 *= 1.2;
-					store6 = Math.round(store6 * SceneLib.combat.fireDamageBoostedByDao());
-					if(plural) outputText("[Themonster] burn from lingering Fire Punch after-effect. ");
-					else outputText("[Themonster] burns from lingering Fire Punch after-effect. ");
-					store6 = SceneLib.combat.doFireDamage(store6, true, true);
 					outputText("\n\n");
 				}
 			}

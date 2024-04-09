@@ -229,6 +229,29 @@ public class DungeonMaps extends DungeonAbstractContent
 					'd': DUNGEON_DEN_OF_DESIRE_HERO_SLAYER_OMNIBUS
 				}
 			),
+			new DungeonMap("Twilight Grove", [
+					"    [f]    ",
+					"     |     ",
+					"    [e]    ",
+					"     |     ",
+					"    [d]    ",
+					"     |     ",
+					"    [c]    ",
+					"     |     ",
+					"    [b]    ",
+					"     |     ",
+					"    [a]    ",
+					"     |     ",
+				],
+				{
+					'a': DUNGEON_TWILIGHT_GROVE_1,
+					'b': DUNGEON_TWILIGHT_GROVE_2,
+					'c': DUNGEON_TWILIGHT_GROVE_3,
+					'd': DUNGEON_TWILIGHT_GROVE_4,
+					'e': DUNGEON_TWILIGHT_GROVE_5,
+					'f': DUNGEON_TWILIGHT_GROVE_6
+				}
+			),
 			new DungeonMap("River Dungeon, 1st floor", [
 					"        [h]    ",
 					" |       |     ",
@@ -476,7 +499,7 @@ public class DungeonMaps extends DungeonAbstractContent
 					'c': DUNGEON_RIVER_FLOOR_02_ROOM_27
 				}
 			),*/
-            //TODO: place other RD levels here
+            //TODO: place other RD levels here/*
             //FFS, ANOTHER TOWER, I HATE YOU
 			new DungeonMap("Anzu's Palace, 1st floor", [
 					"[c]     [e]",
