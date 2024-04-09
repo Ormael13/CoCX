@@ -60,7 +60,8 @@ public class WerefoxRace extends Race {
 				.skinCoatType(Skin.FUR, +1)
 				.rearType(RearBody.WOLF_COLLAR, +1)
 				.noWings(+4)
-				.hasAnyPerk([PerkLib.Vulpesthropy, PerkLib.VulpesthropyDormant], +2, -11);
+				.hasPerk(PerkLib.VulpesthropyDormant, +1)
+				.hasPerk(PerkLib.Vulpesthropy, +2, -11);
 		
 		addMutation(IMutationsLib.WhiteFacedOneBirthrightIM);
 		

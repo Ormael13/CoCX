@@ -54,7 +54,7 @@ public class Changelog extends BaseContent
 			outputText("-New melee weapon (by Lord Shadeogorath): Glacial Graveaxe - pulled from unnamed grave at tundra. Base atk is 160. It's massive axe type low grade wrath weapon. Normaly it deal 80% of physical dmg and 20% ice dmg. When using charge weapon it will deal 100% ice damage and have 10% to apply Frostburn DoT after critical hit.\n");
 			outputText("-New melee weapon (by Lord Shadeogorath): Volcanic Gravehammer - pulled from unnamed grave at ashlands. Base atk is 160. It's massive mace/hammer type low grade wrath weapon. Normaly it deal 80% of physical dmg and 20% fire dmg. When using charge weapon it will deal 100% fire damage and have 10% to apply Burn DoT after critical hit.\n");
 			outputText("-When exploring Deepwoods can find new dungeon - Twilight Grove. It's potentialy dangerous place for pure PC's but resort-like placefor alraunes and/or corrupt PC's.\n");
-			outputText("-\n");
+			outputText("-Female mindbreaker been reeducated causing their corruption increase by 40 pts. Re: Convert option was moved to different button in super perks menu to avoid misclicks due to same position as Previous button.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -79,7 +79,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Dracula/lina PC unable to find get ghoul if they not learned this as normal Vampire, unable to buy manual for 1st atk: f. swords, Arigean Princess PC not been fully immune to TF-ing like other perm races, Weresharks not having their stats changing according to moon phase or boosted during use of Crinos Shape, Phoenix TF adding mutagen penatly instead of stat curse, ");
-			outputText("Endless Rage draining 10x too much wrath per turn, Berzerker/Lustzerker still req. to be activated after they been activated as part of Asura Form activation\n\n");
+			outputText("Endless Rage draining 10x too much wrath per turn, Berzerker/Lustzerker still req. to be activated after they been activated as part of Asura Form activation, dormant state of wereraces 'blessings' increasing race score and not lowering it\n\n");
 			/*ostatni punkt changelogu
 			outputText("(Part 2/2) <b>Version 0.9a:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");

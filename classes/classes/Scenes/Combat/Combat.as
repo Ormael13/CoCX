@@ -6066,6 +6066,7 @@ public class Combat extends BaseContent {
 						if (player.weapon == weapons.VGRAVEH && player.hasStatusEffect(StatusEffects.ChargeWeapon) && crit && rand(10) == 0) {
 							if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,1);
 							else monster.createStatusEffect(StatusEffects.BurnDoT, 4, 0.02, 0, 0);
+							outputText(" [weapon] left lingering Burn at [themonster].");
 						}
                     }
                     else if (isIceTypeWeapon()) {
@@ -6077,6 +6078,7 @@ public class Combat extends BaseContent {
 						if (player.weapon == weapons.GGRAVEA && player.hasStatusEffect(StatusEffects.ChargeWeapon) && crit && rand(10) == 0) {
 							if (monster.hasStatusEffect(StatusEffects.FrostburnDoT)) monster.addStatusValue(StatusEffects.FrostburnDoT,1,1);
 							else monster.createStatusEffect(StatusEffects.FrostburnDoT, 4, 0.02, 0, 0);
+							outputText(" [weapon] left lingering Frostburn at [themonster].");
 						}
                     }
                     else if (isLightningTypeWeapon()) {
