@@ -341,7 +341,8 @@ public class ItemConstants extends Utils {
 	public static const IEF_REQUIREMENT:int      = 1 << 1; // equipment requirement
 	public static const IEF_ATTACK:int           = 1 << 2; // attack bonus/penalty
 	public static const IEF_DEFENSE:int          = 1 << 3; // defense bonus/penalty
-	public static const ItemEffectLastFlag:int   = 1 << 3; // keep updated
+	public static const IEF_ONEQUIP:int          = 1 << 4; // invokes onequip/unequip
+	public static const ItemEffectLastFlag:int   = 1 << 4; // keep updated
 	
 	///////////////////
 	// Enchanted items

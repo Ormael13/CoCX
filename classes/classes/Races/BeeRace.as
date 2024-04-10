@@ -7,6 +7,7 @@ import classes.PerkLib;
 import classes.Race;
 import classes.StatusEffects;
 import classes.Transformations.GradualTransformation;
+import classes.Transformations.TransformationLib;
 import classes.VaginaClass;
 
 public class BeeRace extends Race {
@@ -38,26 +39,27 @@ public class BeeRace extends Race {
 
 
     public function get TfList():/*PossibleEffect*/Array {
-		return [
-			game.transformations.HairChangeColor(BeeHairColors),
-			game.transformations.BreastRowsRemoveToOne,
-			game.transformations.AntennaeBee,
-			game.transformations.EyesSandTrap,
-			game.transformations.HornsNone,
-			game.transformations.SkinPatternBeeStripes,
-			game.transformations.LowerBodyBee,
-			game.transformations.ArmsBee,
-			game.transformations.NipplesPerBreastOne,
-			game.transformations.OvipositorBee,
-			game.transformations.TailBee,
+	    var t:TransformationLib = game.transformations;
+	    return [
+			t.HairChangeColor(BeeHairColors),
+			t.BreastRowsRemoveToOne,
+			t.AntennaeBee,
+			t.EyesSandTrap,
+			t.HornsNone,
+			t.SkinPatternBeeStripes,
+			t.LowerBodyBee,
+			t.ArmsBee,
+			t.NipplesPerBreastOne,
+			t.OvipositorBee,
+			t.TailBee,
 			new GradualTransformation("BeeWings", [
-				game.transformations.WingsNone,
-				game.transformations.WingsBeeSmall,
-				game.transformations.WingsBeeLarge
+				t.WingsNone,
+				t.WingsBeeSmall,
+				t.WingsBeeLarge
 			]),
-			game.transformations.GillsNone,
-			game.transformations.CockChangeType(CockTypesEnum.BEE, false),
-			game.transformations.RearBodyNone
+			t.GillsNone,
+			t.CockChangeType(CockTypesEnum.BEE, false),
+			t.RearBodyNone
 		];
 	}
 	

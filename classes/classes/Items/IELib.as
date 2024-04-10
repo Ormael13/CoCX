@@ -1,9 +1,12 @@
 package classes.Items {
 import classes.ItemType;
 import classes.Items.Effects.DescriptionFnItemEffect;
+import classes.Items.Effects.RaceTfItemEffect;
 import classes.Items.Effects.SimpleItemEffect;
+import classes.Player;
 import classes.Race;
 import classes.Races;
+import classes.Stats.StatUtils;
 import classes.internals.Utils;
 
 /**
@@ -52,14 +55,44 @@ public class IELib extends ItemConstants {
 	// All equipables //
 	//================//
 	
+	/**
+	 * Add (power) to buffable stat.
+	 * * value1:String = buffable stat id
+	 */
+	public static const Buff:ItemEffectType = mkfn("Buff",
+			// descripion
+			function (ie:ItemEffect, item:ItemType):String {
+				return StatUtils.explainBuff(ie.value1 as String, ie.power)
+			}, 80,
+			// on equip
+			function (player:Player, item:Equipable, effect:ItemEffect):void {
+				player.buff(item.tagForBuffs)
+						.addStat(effect.value1 as String, effect.power)
+						.withText(item.name)
+						.withOptions({save:false});
+			},
+			// on unequip
+			function (player:Player, item:Equipable, effect:ItemEffect):void {
+				if (player.countSameEquippedItems(item) == 0) {
+					player.buff(item.tagForBuffs).removeFromStat(effect.value1 as String)
+				} else {
+					player.buff(item.tagForBuffs).subtractStat(effect.value1 as String, effect.power)
+				}
+			}).withFlags(IEF_ONEQUIP);
 	/** must have corruption >= (power) to equip */
 	public static const Require_Cor:ItemEffectType = mk("Require_Cor", "Requires corruption {power} or more").withFlags(IEF_REQUIREMENT);
 	/** must have corruption < (power) to equip */
 	public static const Require_CorBelow:ItemEffectType = mk("Require_CorBelow", "Requires coruption less than {power}").withFlags(IEF_REQUIREMENT);
 	/** Change min femininity by (+power) */
-	public static const MinFem:ItemEffectType = mk("MinFem", "Min. femininity {power;+d}")
+	public static const MinFem:ItemEffectType = mk("MinFem", "Min. femininity {power;+d}", 80,
+			function(player:Player,item:ItemType,effect:ItemEffect):void {
+				player.fixFemininity();
+			})
 	/** Change max femininity by (power). Power should be negative */
-	public static const MaxFem:ItemEffectType = mk("MaxFem", "Max. femininity {power;+d}")
+	public static const MaxFem:ItemEffectType = mk("MaxFem", "Max. femininity {power;+d}", 80,
+			function(player:Player,item:ItemType,effect:ItemEffect):void {
+				player.fixFemininity();
+			})
 	/** increase XP gain by (power)% */
 	public static const BonusXp:ItemEffectType = mk("BonusXp", "XP gain {power;+d}%")
 	/** power doesn't matter */
@@ -94,6 +127,7 @@ public class IELib extends ItemConstants {
 					race: (ie.value1 as Race).name
 				})
 			});
+	public static const RaceTf:ItemEffectType = new RaceTfItemEffect();
 	
 	//===================//
 	// Shields and armor //
@@ -196,11 +230,29 @@ public class IELib extends ItemConstants {
 		throw new Error("This class should not be instantiated");
 	}
 	
-	private static function mk(name:String, descPattern:String, priority:int = 80):ItemEffectType {
-		return new SimpleItemEffect(name, descPattern, priority);
+	/**
+	 *
+	 * @param name
+	 * @param descPattern
+	 * @param priority
+	 * @param onEquipFn `function(player:Player, item:Equipable, effect:ItemEffect):void`
+	 * @param onUnequipFn `function(player:Player, item:Equipable, effect:ItemEffect):void`
+	 * @return
+	 */
+	private static function mk(name:String, descPattern:String, priority:int = 80, onEquipFn:Function = null, onUnequipFn:Function = null):ItemEffectType {
+		return new SimpleItemEffect(name, descPattern, priority, onEquipFn, onUnequipFn);
 	}
-	private static function mkfn(name:String, descFn:Function, priority:int = 80):ItemEffectType {
-		return new DescriptionFnItemEffect(name, descFn, priority);
+	/**
+	 *
+	 * @param name
+	 * @param descFn
+	 * @param priority
+	 * @param onEquipFn `function(player:Player, item:Equipable, effect:ItemEffect):void`
+	 * @param onUnequipFn `function(player:Player, item:Equipable, effect:ItemEffect):void`
+	 * @return
+	 */
+	private static function mkfn(name:String, descFn:Function, priority:int = 80, onEquipFn:Function = null, onUnequipFn:Function = null):ItemEffectType {
+		return new DescriptionFnItemEffect(name, descFn, priority, onEquipFn, onUnequipFn);
 	}
 }
 }
