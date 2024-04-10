@@ -9731,6 +9731,10 @@ public class Combat extends BaseContent {
             lustDmgA = combat.fixPercentLust(lustDmgA);
             monster.teased(Math.round(lustDmgA), false);
             outputText("\n\n");
+			if (player.hasPerk(PerkLib.Nightshade) && monster.lustVuln > 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) {
+				monster.lustVuln += 0.05;
+				if (monster.lustVuln > 1) monster.lustVuln = 1;
+			}
             if (player.hasPerk(PerkLib.EromancyMaster)) teaseXP(1 + bonusExpAfterSuccesfullTease());
         }
         //Lust storm

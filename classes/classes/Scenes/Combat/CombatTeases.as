@@ -18,7 +18,6 @@ public class CombatTeases extends BaseCombatContent {
 		tBLD += scalingBonusLibido() * 0.2;
 		tBLD += (2 * player.teaseDmgStat.value);
 
-
 		if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) tBLD *= 1.75;
 		if (player.hasPerk(PerkLib.SensualLover)) tBLD *= 1.3;
 		if (player.hasPerk(PerkLib.Seduction)) tBLD *= 1.75;
@@ -43,6 +42,7 @@ public class CombatTeases extends BaseCombatContent {
 		if (player.isElf() && player.hasPerk(PerkLib.ELFElvenSpearDancingTechnique) && player.isSpearTypeWeapon()) tBLD += scalingBonusSpeed() * 0.1;
 		tBLD *= masteryBonusDamageTease();
 		if (player.hasPerk(PerkLib.JobCourtesan) && monster.hasPerk(PerkLib.EnemyBossType)) tBLD *= 1.2;
+		if (player.hasPerk(PerkLib.Nightshade)) tBLD *= 1.5;
 
 		var damagemultiplier:Number = 1;
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damagemultiplier += player.lust100 * 0.01;

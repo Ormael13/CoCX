@@ -15586,6 +15586,24 @@ public final class Mutations extends MutationsHelper {
         }
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
+	
+	public function alrauneBlackLily(player:Player):void {
+		clearOutput();
+		if (player.isRaceCached(Races.ALRAUNE)) {
+			outputText("Upon absorbing the Black Lily, you start to feel lightheaded "+(player.lowerBody == LowerBody.FLOWER_LILIRAUNE?"which you can also see in your sister ":"")+"and you decide to close up your lily and sleep it off"+(player.lowerBody == LowerBody.FLOWER_LILIRAUNE?" with your sister in your arms":"")+". When you "+(player.lowerBody == LowerBody.FLOWER_LILIRAUNE?"both ":"")+"wake up an hour later, your bod"+(player.lowerBody == LowerBody.FLOWER_LILIRAUNE?"ies":"y")+" and the lily you reside in have already changed. ");
+			outputText("The petals became as black as the absorbed flower, with " + (player.lowerBody == LowerBody.FLOWER_LILIRAUNE?"both of ":"") + "your skin tone" + (player.lowerBody == LowerBody.FLOWER_LILIRAUNE?"s":"") + " taking on a lavender hue. Your eyes became red, and your hair has changed from " + player.hairColor + " to a light and bright pink. Along with even more lewd thoughts from before coursing through " + (player.lowerBody == LowerBody.FLOWER_LILIRAUNE?"both ":"") + "your mind" + (player.lowerBody == LowerBody.FLOWER_LILIRAUNE?"s":"") + ", your intoxicating nectar has become more potent and has gained the viscosity of semen, ");
+			outputText("practically mimicking said fluid in all except the color, smell and taste. The smell is so strong, mesmerizing and erotic, you " + (player.lowerBody == LowerBody.FLOWER_LILIRAUNE?"both ":"") + "almost cum from smelling your own nectar. Hell, any weak-willed being that comes close to you might just cum on the spot just from smelling it. ");
+			outputText("People might say you make no sense, that you're crazy but at the end of the day they are just blind idiots trying to make sense of a reality they have no access to. You've seen it all and understand it all.  (<b>Gain the Nightshade perk and Dark Affinity.</b>)");
+			player.skinColor = "lavender";
+			player.hairColor = "bright pink";
+			player.eyes.colour = "red";
+			player.createPerk(PerkLib.Nightshade, 0, 0, 0, 0);
+			player.createPerk(PerkLib.DarknessAffinity, 0, 0, 1, 0);
+			if (player.hasPerk(PerkLib.ColdAffinity) && player.perkv3(PerkLib.ColdAffinity) == 1) player.removePerk(PerkLib.ColdAffinity);
+			if (player.hasPerk(PerkLib.FireAffinity) && player.perkv3(PerkLib.FireAffinity) == 1) player.removePerk(PerkLib.FireAffinity);
+		}
+		else outputText("No text for this case. enjoy your LIA-SUPRISE!!!");
+	}
 
     public function bayrleaf(player:Player):void {
         player.slimeFeed();

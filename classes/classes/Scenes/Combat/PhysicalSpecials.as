@@ -2891,7 +2891,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("You send a cloud of your pollen outward into the air, smiling lustfully at your opponent. Sneezing slightly as they inhale the potent pollen, they begin showing clear signs of arousal. Just how long can they resist coming to pollinate you now? Not for long, you hope. ");
 		monster.teased(pollen, false);
 		outputText("\n\n");
-		player.createStatusEffect(StatusEffects.AlraunePollen,0,0,0,0);
+		player.createStatusEffect(StatusEffects.AlraunePollen, 0, 0, 0, 0);
 		enemyAI();
 	}
 
@@ -2928,9 +2928,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		damage = Math.round(damage);
-		doDamage(damage);
+		outputText("You tighten your vines around your opponent's neck to strangle it. [Themonster] struggles against your natural noose, getting obvious marks on its neck and ");
+		if (player.hasPerk(PerkLib.Nightshade)) doDarknessDamage(damage, true, true);
+		else doDamage(damage, true, true);
+		outputText(" damage for their trouble.\n\n");
 		combat.WrathGenerationPerHit2(5);
-		outputText("You tighten your vines around your opponent's neck to strangle it. [Themonster] struggles against your natural noose, getting obvious marks on its neck and " + damage + " damage for their trouble.\n\n");
 		enemyAI();
 	}
 

@@ -4337,6 +4337,7 @@ public class Camp extends NPCAwareContent{
 			|| flags[kFLAGS.HIDDEN_CAVE_FOUND] > 0
 			|| flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 0
 			|| flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] > 0
+			|| flags[kFLAGS.DISCOVERED_TWILIGHT_GROVE_DUNGEON] > 0
 			|| flags[kFLAGS.LUMI_MET] > 0
 			|| flags[kFLAGS.ANZU_PALACE_UNLOCKED] > 0;
 	}
