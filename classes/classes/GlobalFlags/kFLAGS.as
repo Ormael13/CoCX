@@ -3018,4 +3018,4 @@ public static const GLOBAL_FLAGS_ARRAY:Array = [
 	BUTTON_ICONS_DISABLED,STATBAR_ANIMATIONS
 ];
 	}
-}
+}
