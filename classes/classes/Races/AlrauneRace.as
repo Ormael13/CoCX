@@ -11,9 +11,9 @@ import classes.VaginaClass;
 import classes.internals.Utils;
 
 public class AlrauneRace extends Race {
-	public static const AlrauneEyeColor:/*String*/Array = ["light purple", "green", "light green", "red"];
-	public static const AlrauneHairColor:/*String*/Array = ["green", "light purple", "bright pink"];
-	public static const AlrauneSkinColor:/*String*/Array = ["leaf green", "lime green", "turquoise", "light green", "lavender"];
+	public static const AlrauneEyeColor:/*String*/Array = ["light purple", "green", "light green", "pale blue", "fiery red", "red"];
+	public static const AlrauneHairColor:/*String*/Array = ["green", "light purple", "pink", "white", "bluish white", "orange", "red", "bright pink"];
+	public static const AlrauneSkinColor:/*String*/Array = ["leaf green", "lime green", "turquoise", "light green", "pale blue", "burnt brown", "lavender"];
     public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
         /*Arms*/		"Plant",
@@ -89,7 +89,9 @@ public class AlrauneRace extends Race {
 		if (tier == 2) s = "greater "
 		//else if (tier == 3) s = "true ";
 		
-		if (body.player.hasPerk(PerkLib.Nightshade)) s += "nightshade ";
+		if (body.player.hasPerk(PerkLib.SnowLily)) s += "snow lily ";
+		else if (body.player.hasPerk(PerkLib.Cinderbloom)) s += "cinderbloom ";
+		else if (body.player.hasPerk(PerkLib.Nightshade)) s += "nightshade ";
 		
 		if (body.legType == LowerBody.FLOWER_LILIRAUNE) s += "liliraune";
 		else s += "alraune";

@@ -15587,6 +15587,38 @@ public final class Mutations extends MutationsHelper {
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
 	
+	public function alrauneSnowFlower(player:Player):void {
+		clearOutput();
+		if (player.isRaceCached(Races.ALRAUNE)) {
+			outputText("You smell the flower, taking in the scent. Suddenly you feel yourself changing, your green skin progressively turning blue and your petals white. Your eyes also lose their green shade in favor of taking on a pale blue. Somehow you feel the cold won’t be bothering you much anymore, although you're afraid you might have become highly flammable. <b>You are now a snow lily alraune and gained the perk Snow Lily and Cold Affinity.</b>");
+			player.skinColor = "pale blue";
+			player.hairColor = randomChoice("pink", "white", "bluish white");
+			player.eyes.colour = "pale blue";
+			player.createPerk(PerkLib.SnowLily, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.Cinderbloom)) player.removePerk(PerkLib.Cinderbloom);
+			if (player.hasPerk(PerkLib.Nightshade)) player.removePerk(PerkLib.Nightshade);
+			if (!player.hasPerk(PerkLib.ColdAffinity)) player.createPerk(PerkLib.ColdAffinity, 0, 0, 1, 0);
+			if (player.hasPerk(PerkLib.FireAffinity) && player.perkv3(PerkLib.FireAffinity) == 1) player.removePerk(PerkLib.FireAffinity);
+			if (player.hasPerk(PerkLib.DarknessAffinity) && player.perkv3(PerkLib.DarknessAffinity) == 1) player.removePerk(PerkLib.DarknessAffinity);
+		}
+		else outputText("No text for this case. enjoy your LIA-SUPRISE!!!");
+	}
+	public function alrauneEmberFlower(player:Player):void {
+		clearOutput();
+		if (player.isRaceCached(Races.ALRAUNE)) {
+			outputText("You smell the flower, taking in the scent. Suddenly you feel yourself changing, as your green skin progressively turns charred black and your petals red. Your eyes also lose their green shade in favor of taking on a deep fire red. Somehow you feel the heat won’t be bothering you much anymore, although you're afraid you will wilt in cold temperature. <b>You are now a cinderbloom Alraune and gained the Cinderbloom perk and fire affinity.</b>");
+			player.skinColor = "burnt brown";
+			player.hairColor = randomChoice("pink", "orange", "red");
+			player.eyes.colour = "fiery red";
+			player.createPerk(PerkLib.Cinderbloom, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.SnowLily)) player.removePerk(PerkLib.SnowLily);
+			if (player.hasPerk(PerkLib.Nightshade)) player.removePerk(PerkLib.Nightshade);
+			if (!player.hasPerk(PerkLib.FireAffinity)) player.createPerk(PerkLib.FireAffinity, 0, 0, 1, 0);
+			if (player.hasPerk(PerkLib.ColdAffinity) && player.perkv3(PerkLib.ColdAffinity) == 1) player.removePerk(PerkLib.ColdAffinity);
+			if (player.hasPerk(PerkLib.DarknessAffinity) && player.perkv3(PerkLib.DarknessAffinity) == 1) player.removePerk(PerkLib.DarknessAffinity);
+		}
+		else outputText("No text for this case. enjoy your LIA-SUPRISE!!!");
+	}
 	public function alrauneBlackLily(player:Player):void {
 		clearOutput();
 		if (player.isRaceCached(Races.ALRAUNE)) {
@@ -15598,7 +15630,9 @@ public final class Mutations extends MutationsHelper {
 			player.hairColor = "bright pink";
 			player.eyes.colour = "red";
 			player.createPerk(PerkLib.Nightshade, 0, 0, 0, 0);
-			player.createPerk(PerkLib.DarknessAffinity, 0, 0, 1, 0);
+			if (player.hasPerk(PerkLib.Cinderbloom)) player.removePerk(PerkLib.Cinderbloom);
+			if (player.hasPerk(PerkLib.SnowLily)) player.removePerk(PerkLib.SnowLily);
+			if (!player.hasPerk(PerkLib.DarknessAffinity)) player.createPerk(PerkLib.DarknessAffinity, 0, 0, 1, 0);
 			if (player.hasPerk(PerkLib.ColdAffinity) && player.perkv3(PerkLib.ColdAffinity) == 1) player.removePerk(PerkLib.ColdAffinity);
 			if (player.hasPerk(PerkLib.FireAffinity) && player.perkv3(PerkLib.FireAffinity) == 1) player.removePerk(PerkLib.FireAffinity);
 		}
@@ -17170,4 +17204,4 @@ public final class Mutations extends MutationsHelper {
 		player.herbXP(HE);
     }
 }
-}
+}

@@ -2929,7 +2929,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		damage = Math.round(damage);
 		outputText("You tighten your vines around your opponent's neck to strangle it. [Themonster] struggles against your natural noose, getting obvious marks on its neck and ");
-		if (player.hasPerk(PerkLib.Nightshade)) doDarknessDamage(damage, true, true);
+		if (player.hasPerk(PerkLib.SnowLily)) doIceDamage(Math.round(damage * combat.iceDamageBoostedByDao()), true, true);
+		else if (player.hasPerk(PerkLib.Cinderbloom)) doFireDamage(Math.round(damage * combat.fireDamageBoostedByDao()), true, true);
+		else if (player.hasPerk(PerkLib.Nightshade)) doDarknessDamage(Math.round(damage * combat.darknessDamageBoostedByDao()), true, true);
 		else doDamage(damage, true, true);
 		outputText(" damage for their trouble.\n\n");
 		combat.WrathGenerationPerHit2(5);
