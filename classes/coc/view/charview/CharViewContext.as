@@ -111,12 +111,12 @@ public class CharViewContext extends ExecContext {
 					PlayerHasAMassiveSwordUnholy: player.weapon == game.weapons.CHAOSEA,
 
 					PlayerHasAnAxe: player.isAxeTypeWeapon(),
-					PlayerHasAnAxeHoly:player.weapon == game.weapons.WG_GAXE,
+					PlayerHasAnAxeHoly:player.weapon == game.weapons.WG_GAXE || player.weapon == game.weapons.GGRAVEA,
 					PlayerHasAnAxeUnholy:player.weapon == game.weapons.DE_GAXE || player.weapon == game.weapons.ASTERIUS,
 
 					PlayerHasAHammer: player.isMaceHammerTypeWeapon() && !player.isTetsubo() && player.weapon != game.weapons.SFLUTTE && player.weapon != game.weapons.PFLUTTE && player.weapon != game.weapons.HELLCAL && player.weapon != game.weapons.ELYSIUM,
 					//PlayerHasAHammerHoly:player.weapon == game.weapons.POCDEST,
-					//PlayerHasAHammerUnholy:player.weapon == game.weapons.DOCDEST,
+					PlayerHasAHammerUnholy:player.weapon == game.weapons.VGRAVEH,
 					PlayerHasATetsu: player.weapon == game.weapons.OTETSU || player.weapon == game.weapons.POCDEST || player.weapon == game.weapons.DOCDEST,
 					PlayerHasATetsuHoly:player.weapon == game.weapons.POCDEST,
 					PlayerHasATetsuUnholy:player.weapon == game.weapons.DOCDEST,
