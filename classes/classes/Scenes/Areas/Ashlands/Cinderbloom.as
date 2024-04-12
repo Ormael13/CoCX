@@ -48,8 +48,8 @@ public class Cinderbloom extends Alraune
 			this.bonusLust = 290;
 			this.level = 40;
 			this.gems = rand(25) + 15;
-			this.drop = new ChainedDrop().add(consumables.MARAFRU, 1 / 6);
-				//	.add(consumables.W__BOOK, 1 / 4)
+			this.drop = new ChainedDrop().add(consumables.EMBER_F, 1 / 6)
+					.add(consumables.MARAFRU, 1 / 4);
 				//	.add(consumables.BEEHONY, 1 / 2)
 				//	.elseDrop(useables.B_CHITN);
 			this.removePerk(PerkLib.FireVulnerability);

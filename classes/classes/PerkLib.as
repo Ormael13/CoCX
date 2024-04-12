@@ -3941,6 +3941,12 @@ public class PerkLib
 				"Reduce all spell cooldowns by 1 round (2 if wearing the leaf necklace).");
 		public static const Necromancy:PerkType = mk("Necromancy", "Necromancy",
 				"Black, Hex and Necromancy magic effectiveness is increased by 50%. Cooldowns for all those spells are 1 turn shorter. Soulforce regenerate passively by 2%.");
+		public static const SnowLily:PerkType = mk("Snow Lily", "Snow Lily",
+				"Your alraune abilities are now considered to be Cold Elements effect and your vine attack delivers extra cold damage.");
+		public static const Cinderbloom:PerkType = mk("Cinderbloom", "Cinderbloom",
+				"Your alraune abilities are now considered to be Fire Elements effect and your vine attack delivers extra fire damage.");
+		public static const Nightshade:PerkType = mk("Nightshade", "Nightshade",
+				"Raise min corruption by 20% permanently +50% tease damage. Pollen now erodes lust resistance by 5% per round. Your alraune abilities are now considered Dark Elements and your vine attack delivers extra dark damage.");
 		public static const NinetailsKitsuneOfBalance:PerkType = mk("Nine-tails Kitsune of Balance", "Nine-tails Kitsune of Balance",
 				"The mystical energy of the nine-tails surges through you, filling you with phenomenal cosmic power!  You tread the narrow path between corruption and true enlightment maintaining a balance that allows you to fuse both sides powers.",null,true);
 		public static const OneWiththeForest:OneWithTheForest = new OneWithTheForest();

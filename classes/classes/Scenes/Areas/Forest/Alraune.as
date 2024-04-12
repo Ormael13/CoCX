@@ -171,30 +171,13 @@ public class Alraune extends Monster
 				this.bodyColor = "light green";
 				this.hairColor = "dark green";
 			}
-			this.imageName = "alraune";
-			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_GAPING);
-			createBreastRow(Appearance.breastCupInverse("DD"));
-			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
-			this.ass.analWetness = AssClass.WETNESS_NORMAL;
-			this.tallness = rand(14) + 59;
-			this.hips.type = Hips.RATING_CURVY + 3;
-			this.butt.type = Butt.RATING_EXPANSIVE;
-			this.lowerBody = LowerBody.PLANT_FLOWER;
-			this.hairLength = 6;
 			initStrTouSpeInte(10, 120, 10, 60);
 			initWisLibSensCor(60, 100, 50, 0);
-			this.weaponName = "fist";
-			this.weaponVerb="punch";
-			this.weaponAttack = 1;
-			this.armorName = "skin";
 			this.armorDef = 45;
 			this.armorMDef = 5;
 			this.bonusHP = 100;
 			this.bonusLust = 174;
-			this.lust = 20 + rand(40);
-			this.lustVuln = 0.2;
 			this.level = 28;
-			this.gems = rand(20) + 5;
 			this.drop = new WeightedDrop().
 			add(consumables.RAUNENECT,7).
 			addMany(1,consumables.MARAFRU,
@@ -205,9 +188,25 @@ public class Alraune extends Monster
 					consumables.SNAKEBANE,
 					consumables.IRONWEED,
 					consumables.BLADEFERN);
+			this.imageName = "alraune";
+			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_GAPING);
+			createBreastRow(Appearance.breastCupInverse("DD"));
+			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
+			this.tallness = rand(14) + 59;
+			this.hips.type = Hips.RATING_CURVY + 3;
+			this.butt.type = Butt.RATING_EXPANSIVE;
+			this.lowerBody = LowerBody.PLANT_FLOWER;
+			this.hairLength = 6;
+			this.weaponName = "fist";
+			this.weaponVerb="punch";
+			this.weaponAttack = 1;
+			this.armorName = "skin";
+			this.lust = 20 + rand(40);
+			this.lustVuln = 0.2;
+			this.gems = rand(20) + 5;
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyPlantType, 0, 0, 0, 0);
-			//this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);
 			this.createStatusEffect(StatusEffects.AlrauneRunDisabled, 0, 0, 0, 0);
 			createStatusEffect(StatusEffects.Level,6,0,0,0);
 			checkMonster();

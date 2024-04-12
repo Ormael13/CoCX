@@ -5,13 +5,15 @@ import classes.CoC;
 import classes.CockTypesEnum;
 import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
+import classes.PerkLib;
 import classes.Race;
 import classes.VaginaClass;
+import classes.internals.Utils;
 
 public class AlrauneRace extends Race {
-	public static const AlrauneEyeColor:/*String*/Array = ["light purple", "green", "light green"];
-	public static const AlrauneHairColor:/*String*/Array = ["green", "light purple"];
-	public static const AlrauneSkinColor:/*String*/Array = ["leaf green", "lime green", "turquoise", "light green"];
+	public static const AlrauneEyeColor:/*String*/Array = ["light purple", "green", "light green", "pale blue", "fiery red", "red"];
+	public static const AlrauneHairColor:/*String*/Array = ["green", "light purple", "pink", "white", "bluish white", "orange", "red", "bright pink"];
+	public static const AlrauneSkinColor:/*String*/Array = ["leaf green", "lime green", "turquoise", "light green", "pale blue", "burnt brown", "lavender"];
     public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
         /*Arms*/		"Plant",
@@ -62,9 +64,7 @@ public class AlrauneRace extends Race {
 		addMutation(IMutationsLib.FloralOvariesIM);
 
 		buildTier(13, "alraune")
-				.customNamingFunction(function (body:BodyData):String {
-					return body.legType == LowerBody.FLOWER_LILIRAUNE ? "liliraune" : "alraune";
-				})
+				.customNamingFunction(Utils.curry(nameFn,1))
 				.buffs({
 					"tou.mult": +1.00,
 					"spe.mult": -0.50,
@@ -74,9 +74,7 @@ public class AlrauneRace extends Race {
 				.end();
 
 		buildTier(17, "greater alraune")
-				.customNamingFunction(function (body:BodyData):String {
-					return body.legType == LowerBody.FLOWER_LILIRAUNE ? "greater liliraune" : "greater alraune";
-				})
+				.customNamingFunction(Utils.curry(nameFn,2))
 				.buffs({
 					"tou.mult": +1.15,
 					"spe.mult": -0.60,
@@ -84,6 +82,21 @@ public class AlrauneRace extends Race {
 					"def": +10
 				})
 				.end();
+	}
+	private function nameFn(tier:int, body:BodyData):String {
+		var s:String = "";
+		
+		if (tier == 2) s = "greater "
+		//else if (tier == 3) s = "true ";
+		
+		if (body.player.hasPerk(PerkLib.SnowLily)) s += "snow lily ";
+		else if (body.player.hasPerk(PerkLib.Cinderbloom)) s += "cinderbloom ";
+		else if (body.player.hasPerk(PerkLib.Nightshade)) s += "nightshade ";
+		
+		if (body.legType == LowerBody.FLOWER_LILIRAUNE) s += "liliraune";
+		else s += "alraune";
+		
+		return s;
 	}
 }
 }

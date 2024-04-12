@@ -206,6 +206,14 @@ use namespace CoC;
 				chance: 0.33,
 				call: encounterItem
 			}, {
+				name: "findsnowflower",
+				label : "Snow Flower",
+				kind  : 'item',
+				when: function():Boolean {
+					return player.isAlraune();
+				},
+				call: findSnowFlower
+			}, {
 				//Ornate Chest or cache of gems/pile of stones
 				name: "chest",
 				label : "Chest",
@@ -297,13 +305,15 @@ use namespace CoC;
 			}
 			endEncounter();
 		}
+
+		private function findSnowFlower():void {
+			clearOutput();
+			outputText("You stumble upon a strange white flower, which seems to grow in the rift heedless of the cold. You feel oddly drawn towards the plant, deciding to pick it up. ");
+			inventory.takeItem(consumables.SNOWFLO, explorer.done);
+		}
 		
 		public function encounterItem():void {
-			clearOutput();/*
-					if (rand(2) == 0) {
-						SceneLib.ariaScene.MelkieEncounter();
-					}
-					else {*/
+			clearOutput();
 			var itemChooser:Number = rand(2);
 			if (itemChooser == 0) {
 				outputText("As you cross one of the floating ice sheets that make up the bulk of the rift, your eyes are drawn to a bright glint amidst the white backdrop.  As you eagerly approach the gleam, you discover a single tiny spire of ice, jutting from the surrounding snow.  You pluck it gently from the ground, give it a quick glance over and, satisfied that it won’t try and kill you, drop it in your bag. ");
@@ -312,7 +322,6 @@ use namespace CoC;
 				outputText("As you make your way across the icy wastes, you notice a small corked ivory horns half-buried under the snow, filled with a thick sweet-looking liquor. You stop and dig it up, sniffing curiously at the liquid. The scent reminds you of the honey secreted by the bee-girls of Mareth, though with hints of alcohol and... something else. You place the horns of mead in your bag and continue on your way. ");
 				inventory.takeItem(consumables.GODMEAD, explorer.done);
 			}
-			//}
 		}
 		
 		public function encounterValeria():void {

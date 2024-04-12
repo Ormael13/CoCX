@@ -147,6 +147,9 @@ public final class ConsumableLib extends AlchemyLib
 		//Others
 		public const DRGNEGG: Consumable = mk("DrgnEgg", "DrgnEgg", "an unfertilized dragon egg", 6, "A large, solid egg, easily the size of your clenched fist.  Its shell color is reddish-white, with blue splotches.", m.eatEmberEgg);
 		public const NPNKEGG: Consumable = mk("NPnkEgg", "NPnkEgg", "a neon pink egg", 6, "This is an oblong egg with an unnatural neon pink coloration.  It tingles in your hand with odd energies that make you feel as if you could jump straight into the sky.", curry(m.neonPinkEgg, false));
+		public const SNOWFLO: Consumable = mk("SnowFlo", "SnowFlower", "a Snow Flower", 6, "This beautiful flower grows even in the frozen wastes of the Glacial Rift, defying the arctic cold.", m.alrauneSnowFlower);
+		public const EMBER_F: Consumable = mk("Ember.F", "EmberFlower", "a Ember Flower", 6, "This beautiful flower grows even in the ash of the Volcanic Crag, defying the heat.", m.alrauneEmberFlower);
+		public const BLACK_L: Consumable = mk("Black.L", "BlackLily", "a Black Lily", 6, "You obtained this rather peculiar flower from Rafflesia, and despite its corrupted origins, it probably has the best smell ever.", m.alrauneBlackLily);
 
 		//FOOD & BEVERAGES
 		public const AjidAji: Consumable = mk ("AjidAji", "Aji de Aji", "a bag of Aji de Aji", 6, "A small bag of Aji de Aji Peppers.",function(player:Player):void{SceneLib.trollVillage.elderstore.itemsConsumed("AjidAji")});

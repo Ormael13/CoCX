@@ -9731,6 +9731,10 @@ public class Combat extends BaseContent {
             lustDmgA = combat.fixPercentLust(lustDmgA);
             monster.teased(Math.round(lustDmgA), false);
             outputText("\n\n");
+			if (player.hasPerk(PerkLib.Nightshade) && monster.lustVuln > 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) {
+				monster.lustVuln += 0.05;
+				if (monster.lustVuln > 1) monster.lustVuln = 1;
+			}
             if (player.hasPerk(PerkLib.EromancyMaster)) teaseXP(1 + bonusExpAfterSuccesfullTease());
         }
         //Lust storm
@@ -15008,6 +15012,11 @@ public function runAway(callHook:Boolean = true):void {
             doNext(playerMenu);
         } else if (monster is TwinBosses) {
 			SceneLib.dungeons.riverdungeon.almostdefeatedByTwinBosses();
+		} else if (monster.hasPerk(PerkLib.AlwaysSuccesfullRunaway)) {
+			inCombat = false;
+            clearStatuses(false);
+			outputText("You're decide to retreat fro the fight and [monster name] not even stops you from this!\n\n");
+            doNext(playerMenu);
 		} else {
             outputText("You're trapped in your foe's domain - there is nowhere to run!\n\n");
             enemyAIImpl();
@@ -15708,7 +15717,8 @@ public function asurasXFingersOfDestruction(fingercount:String):void {
 }
 
 public function sendSkeletonToFight():void {
-    if (!monster.isFlying()) outputText("Your skeleton warrior"+(player.perkv2(PerkLib.PrestigeJobNecromancer) > 1 ? "s":"")+" charge into battle swinging "+(player.perkv2(PerkLib.PrestigeJobNecromancer) > 1 ? "their":"his")+" blade"+(player.perkv2(PerkLib.PrestigeJobNecromancer) > 1 ? "s":"")+" around. ");
+    if (flags[kFLAGS.NECROMANCER_SKELETONS] == 1) outputText("\n\n");
+	if (!monster.isFlying()) outputText("Your skeleton warrior"+(player.perkv2(PerkLib.PrestigeJobNecromancer) > 1 ? "s":"")+" charge into battle swinging "+(player.perkv2(PerkLib.PrestigeJobNecromancer) > 1 ? "their":"his")+" blade"+(player.perkv2(PerkLib.PrestigeJobNecromancer) > 1 ? "s":"")+" around. ");
     var damage:Number = 0;
     var dmgamp:Number = 1;
     damage += 1500 + rand(451);
@@ -15750,7 +15760,7 @@ public function sendSkeletonToFight():void {
 			while (sSMTF-->0) doMinionPhysDamage(damage, true, true);
         }
     }
-    outputText("\n\n");
+    if (flags[kFLAGS.NECROMANCER_SKELETONS] == 0) outputText("\n\n");
     //checkAchievementDamage(damage);
     statScreenRefresh();
 	if (monster.HP <= monster.minHP()) doNext(endHpVictory);
@@ -16474,4 +16484,3 @@ private function touSpeStrScale(stat:int):Number {
     }
 }
 }
-
