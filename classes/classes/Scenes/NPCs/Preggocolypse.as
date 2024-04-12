@@ -2,7 +2,7 @@
 /*
 This is a temporary file, used to store scenes for the wave of preggable NPCs that should be introduced. Once these scenes are implemented, this file can be deleted. 
 Scenes are for the following NPCs: Arian, Nadia, Electra, Samirah, Sidonie, Luna and Diva. 
-
+-Announcement scenes are for a day or so after conception
 ARIAN SCENES
 */
 public function ArianPregChampCarries1():void {
@@ -84,16 +84,13 @@ public function ArianCarriesChampBabies2():void {
         outputText("With one hand, you grab Arian’s breast, kneading the soft white scales as you sink three fingers into her pussy. Arian bites her lip, moaning slightly. You finger her at a moderate pace, reveling in her squirming on your lap. After a minute or so, Arian turns, still in your lap, facing you with a sheepish look on her face.  \n\n");
 		outputText("“Look, ever since I knew I was carrying, I’ve…Been thinking about you…more and more.” She explains. “I…I want you to fuck me now…Please.” \n\n");
 //Arian Sex menu here
+doNext(playerMenu);
 }
 
 public function ArianCarriesChampBabies3():void {
 		clearOutput();
 		outputText("You see Arian, looking at her egg-filled belly with a small frown on her face. You ask what’s wrong, and she shakes her head. “I feel so…heavy. So bloated. I don’t do much physical activity, but this…Is so inconvenient. I just want them out of me.”  \n\n"); 
 		outputText("“No offence, but I really hope so.” You give Arian an encouraging smile, before heading back to what you were doing.  \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
 doNext(playerMenu);
 }
 
@@ -151,7 +148,8 @@ doNext(playerMenu);
 //--------
 // Nadia
 //--------
-//one day after you concieve with her
+
+
 public function NadiaPregAnnouncement():void {
 		clearOutput();
 		outputText("Your mare is waiting for you back at camp, with a smile on her face, nearly jumping from joy. Her eyes gleam as she sees you, and she nearly skips over, her J-cup breasts bouncing with each step. She breaks into a run, and you brace yourself as Nadia tackles you, Smothering you in her massive mammaries. \n\n"); 
@@ -411,10 +409,10 @@ doNext(playerMenu);
 //Sidonie Preg Progression
 public function SidoniePCKnockedUp1():void {
 		clearOutput();
-		outputText(" \n\n"); 
-		outputText(" \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
+		outputText("You wake up, stomach growling, and your vision slightly blurred. You feel nauseous, but before you can really think about it, you see a wooden bowl at the foot of your (bed/bedroll).  \n\n"); 
+		outputText("You already know what this is, and who left it for you. The bowl is filled with oats and granola, with a sprinkling of sugar. Your stomach rumbles, and you begin eating. Your stomach stops grumbling, and you sigh with relief. You stretch and get ready for the day, before dropping the bowl back at Sidonie’s workstation. She looks up from a plank she’s sanding down, and gives you a smile.  \n\n");
+		outputText("“Wow. Ate the whole bowl, huh?” Sidonie gives you a wink, and you feel your cheeks heating up. “Oh, c’mon, that's the thanks I get for pre-emptively dealing with your morning problems?”  \n\n");
+		outputText("Morning problems she gave you…But fair enough. Sidonie walks over, giving you a big hug. “Aw…” You feel a slight burst of irritation, but Sidonie sighs. “Okay, okay. I’ll let you be.” She walks back over to her station. “Just don’t overdo it, okay?”  \n\n");
 		outputText(" \n\n");
 		outputText(" \n\n");
 doNext(playerMenu);
@@ -422,20 +420,16 @@ doNext(playerMenu);
 
 public function SidoniePCKnockedUp2():void {
 		clearOutput();
-		outputText(" \n\n"); 
-		outputText(" \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
-		outputText(" \n\n");
+		outputText("Your stomach’s gotten visibly larger, and occasionally, you get a sudden, strong urge to go for a run. You see Sidonie looking your way, a smirk on her face. You turn, asking her if she’s happy with herself, and she grins, giving you a thumbs-up. “Hell yeah I am. That’s my kid in there.” You give her a glare, telling her that your eyes are up here. \n\n"); 
+		outputText("“Yeah, but our kid’s down there.” She gives your belly a goofy smile, and you decide to leave. “Hey, c’mon! I like to see my handiwork!” Sidonie giggles as you walk away. “I love you!” You turn your head back, making a face at Sidonie and flipping her off. This gets another howl of laughter from your horsey carpenter.  \n\n");
 doNext(playerMenu);
 }
 
 public function SidoniePCKnockedUp3():void {
 		clearOutput();
-		outputText(" \n\n"); 
-		outputText(" \n\n");
-		outputText(" \n\n");
+		outputText("Your belly’s getting much larger, and whenever you’re around camp, you can feel Sidonie watching you, concerned. The baby inside you occasionally moves fitfully, usually in the afternoon. Your [Breasts] have started leaking milk, and you find yourself feeling more tired than usual. \n\n"); 
+		outputText("You decide to sit by the campfire, and Sidonie immediately stops working, coming over to sit beside you. “...Hey.” She awkwardly reaches out, bringing her hand to your belly. “C-can I?” You nod, and she places her hand on your pregnant bulge, a goofy smile on her face. You wince, feeling the baby move, and Sidonie gasps.  \n\n");
+		outputText("“I-I just felt them move!” She says, eyes wide. You roll your eyes, saying that they’ve been moving a lot, the last little while. “O-oh…Yeah. I guess that isn’t as cool for you, huh?” Sidonie says, scratching her head. You give Sidonie a playful punch on the stomach, telling her that it isn’t too bad…Besides, the look on her face there was pretty funny. \n\n");
 		outputText(" \n\n");
 		outputText(" \n\n");
 		outputText(" \n\n");
