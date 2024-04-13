@@ -1527,9 +1527,9 @@ public class CampMakeWinions extends BaseContent
 				else addButtonDisabled(10, "1K", "You not have enough (10,000) SF for conversion.");
 				if (player.soulforce >= 20000) addButton(11, "2K", soulforceConversionGo, 2000).hint("Convert 20,000 SF into 2,000 EE");
 				else addButtonDisabled(11, "2K", "You not have enough (20,000) SF for conversion.");
-				if (player.soulforce >= 10000) addButton(12, "5K", soulforceConversionGo, 5000).hint("Convert 50,000 SF into 5,000 EE");
+				if (player.soulforce >= 50000) addButton(12, "5K", soulforceConversionGo, 5000).hint("Convert 50,000 SF into 5,000 EE");
 				else addButtonDisabled(12, "5K", "You not have enough (50,000) SF for conversion.");
-				if (player.soulforce >= 20000) addButton(13, "10K", soulforceConversionGo, 10000).hint("Convert 100,000 SF into 10,000 EE");
+				if (player.soulforce >= 100000) addButton(13, "10K", soulforceConversionGo, 10000).hint("Convert 100,000 SF into 10,000 EE");
 				else addButtonDisabled(13, "10K", "You not have enough (100,000) SF for conversion.");
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu);

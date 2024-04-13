@@ -489,19 +489,19 @@ public class DungeonMaps extends DungeonAbstractContent
 				}; }
 			),
 			new DungeonMap("River Dungeon, 5th floor", [
-					              //"[S]—[a]—[b]     [c]—[d]—[e]",e1
-					              //"         |       |         ",
-					              //"        [f]—[g]—[h]        ",
-					              //"         |       |         ",//powyżej jedna ruletka
-					"        [s]",//"[i]     [j]     [k]     [s]",//j, k, w, A, E - mieszana ruletka
-					"         | ",//" |       |       |       | ",
-					"[o]—[p]—[r]",//"[l]—[m]—[n]     [o]—[p]—[r]",
-					" |       | ",//" |       |       |       | ",
-					"[x]     [y]",//"[t]     [u]—[w]—[x]     [y]",
-					"         | ",//" |           |           | ",e3 (lewe)+e2(prawe)
-					"        [B]",//"[z]         [A]         [B]",
-					"         | ",//" |           |           | ",
-					"    [F]—[G]",//"[C]—[D]     [E]     [F]—[G]",
+					"                [c]—[d]—[e]",//"[S]—[a]—[b]     [c]—[d]—[e]",e1
+					"                 |         ",//"         |       |         ",
+					"        [f]—[g]—[h]        ",
+					"         |       |         ",//powyżej jedna ruletka
+					"        [j]     [k]     [s]",//"[i]     [j]     [k]     [s]",//j, k, w, A, E - mieszana ruletka
+					"         |       |       | ",//" |       |       |       | ",
+					"[l]—[m]—[n]     [o]—[p]—[r]",
+					"         |       |       | ",//" |       |       |       | ",
+					"        [u]     [x]     [y]",//"[t]     [u]—[w]—[x]     [y]",
+					"                         | ",//" |           |           | ",e3 (lewe)+e2(prawe)
+					"                        [B]",//"[z]         [A]         [B]",
+					"                         | ",//" |           |           | ",
+					"                    [F]—[G]",//"[C]—[D]     [E]     [F]—[G]",
 				],
 				{
 					'S': DUNGEON_RIVER_FLOOR_04_ROOM_01,

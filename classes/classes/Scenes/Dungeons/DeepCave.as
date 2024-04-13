@@ -1210,7 +1210,6 @@ use namespace CoC;
 				flags[kFLAGS.ZETAZ_DOOR_UNLOCKED] = 1;
 			}
 			outputText("\n\n");
-
 			if(flags[kFLAGS.DEFEATED_ZETAZ] == 0) {
 				outputText("A familiar imp is looking at you with a bewildered expression painted across his face.  You recognize his face immediately – this is Zetaz!  Oddly, he seems to have grown much larger in the time since your previous meeting.  He's over four feet tall and much more solidly built!\n\n");
 				outputText("Zetaz whines, \"<i>Seriously?  You show up here!?  First you make me lose my job, and now you beat up my friends and track dirt in my bedroom!?  I've had enough!</i>\"");
@@ -1218,7 +1217,8 @@ use namespace CoC;
 			}
 			else {
 				dungeons.setDungeonButtons(null, roomGatheringHall, null, roomSecretPassage);
-				if (player.hasKeyItem("Soul Gem Research") < 0) addButton(0, "Drawer", ZetazsBedroomDrawer); //no conditions. Drawer was ALREADY there!
+				addButton(0, "Desk", readTheLetter);
+				if (player.hasKeyItem("Soul Gem Research") < 0) addButton(1, "Drawer", ZetazsBedroomDrawer); //no conditions. Drawer was ALREADY there!
 			}
 		}
 
@@ -1227,6 +1227,23 @@ use namespace CoC;
 			outputText("Inside the drawer you find a book of advanced research notes on Lethicite, as well as soul containment inside of gems. Such research seems to imply that the creation of a soul gem requires both a large amount of concentrated pure water and ectoplasm obtained from the manifested imprint of a soul that has survived for decades or more to be combined and crystallized through some complicated alchemical process.");
 			outputText("\n\n<b>(Key Item Acquired: Soul Gem Research!)</b>");
 			player.createKeyItem("Soul Gem Research", 0, 0, 0, 0);
+			doNext(playerMenu);
+		}
+		private function readTheLetter():void {
+			clearOutput();
+			outputText("Going through Zetaz’s desk, you find quite a few papers…and notice a rather elegant looking envelope. Curious, you open it and begin reading.\n\n");
+			outputText("<i>Zetaz:</i>\n\n");
+			outputText("<i>I hope this letter finds you in good health. It should, considering the circumstances…and your own stolen resources.</i>\n\n");
+			outputText("<i>I must admit, I’m impressed. It took my people nearly a month just to figure out what went wrong, that the dosage was incorrect for nearly ten percent of our experiments. It took another week, and several lives, to figure out what EXACTLY the problem was. Clever, taking materials that leave little trace, so we couldn’t just do our usual toxicity tests.</i>\n\n");
+			outputText("<i>Even then, after the factory’s destruction, it would have been nearly impossible for us to conclude it was anyone but the Overseer at fault, for it would be her and only a few others capable of easily gaining access to the chemicals. Most of us would have simply concluded that the overseer was to blame. And with her operation in ruins, at the hands of the runaway ‘Champion’, most of the evidence would have been destroyed with her.</i>\n\n");
+			outputText("<i>You just made one, fatal, mistake. A mistake you couldn’t have known WAS a mistake. Sheer chance alone exposed you, a fact that, despite my anger, I must commend you for. It shows a surprising amount of competence, especially from a simple imp.</i>\n\n");
+			outputText("<i>Grevia was an old friend of mine. I know for a fact that she’s too competent to make such measuring mistakes, too controlling of her underlings for THEM to make such a mistake, and considering our agreements, she had every incentive to follow through properly.</i>\n\n");
+			outputText("<i>I suspected you, due to your bungling of the most recent ‘delivery’ from Ignam. I knew you’d be eager to cover your tracks and give yourself a leg-up. But I must admit, the way you went about it was impressive in its ingenuity, if nothing else.</i>\n\n");
+			outputText("<i>It wasn’t until your recent “Glow up”, so to speak, that my suspicions were confirmed. You have made a very powerful enemy, little imp. But don’t worry, I’m not coming after you.</i>\n\n");
+			outputText("<i>I’m not sure how much you know about my organisation, or about what I’ve been doing…But if a small, stolen amount of ‘that’ gave you the power to contend with us demons…Well…You can imagine what a far larger amount would do to a much more powerful denizen of Mareth.</i>\n\n");
+			outputText("<i>You will learn to fear the fire, and the dark, before you die, Zetaz. This, I promise. Those projects might be in their infancy…But when they mature, you’ll be on their hit list. You and that ‘Champion’ you let get away.</i>\n\n");
+			outputText("<i>See you soon~</i>\n\n");
+			outputText("<i>-A</i>");
 			doNext(playerMenu);
 		}
 	}
