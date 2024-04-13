@@ -13,6 +13,9 @@ import classes.Items.Weapon;
 import classes.PerkLib;
 import classes.Scenes.Areas.BlightRidge.Omnibus;
 import classes.Scenes.Areas.Bog.Phouka;
+import classes.Scenes.Areas.Forest.Alraune;
+import classes.Scenes.Areas.Forest.AlrauneMaiden;
+import classes.Scenes.Areas.Forest.BeeGirlHuntress;
 import classes.Scenes.Areas.GlacialRift.Yeti;
 import classes.Scenes.Areas.HighMountains.Izumi;
 import classes.Scenes.Areas.Mountain.HellHound;
@@ -33,7 +36,7 @@ public class RiverDungeon extends DungeonAbstractContent
 		//1 - pok 1 golema, 2 pokonanie obu golemów
 		//3-6 pokonanie 4 żywiołaków sub bossów, 7 pokonanie chimerycznego żywiołaka
 		//8 otwarcie drzwi do bossa 3 poziomu, 9 pokonanie bossa 3 poziomu
-		//10 oczyszczenie przejścia do bossów 4 poziomu, 11 pokonanie bossów 4 poziomu
+		//10 oczyszczenie przejścia do bossów 4 poziomu, 11 pokonanie bossów 4 poziomu, 12 oczyszczenie przejścia do schodów do poziomu 5
 		
 		public function enterDungeon():void {
 			inDungeon = true;
@@ -666,6 +669,40 @@ public class RiverDungeon extends DungeonAbstractContent
 			outputText("\"<i>We’ll meet again</i>\", the scowling one says, swinging his club down. You see stars…and your consciousness fades.\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
+		}
+		
+		private function encountersRuletteE3():void {
+			if (encountersRulette()) {
+				var reset:Number = 10;
+				var reset00:Number = 3;
+				reset -= player.statusEffectv1(StatusEffects.RiverDungeonA);
+				player.addStatusValue(StatusEffects.RiverDungeonA, 1, reset);
+				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
+				if (flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 1) reset00 -= 1;
+				var choice:Number = rand(reset00);
+				if (choice == 0) {
+					//spriteSelect(SpriteDb.s_green_slime);
+					outputText("As you approach the nearby glade, a sweet scent wafts into your nose. Tantalizing, teasing, alluring. As you sniff the air, you find yourself following it, as if an invisible hand is pulling you toward its origin.  Little do you know, that is essentially what's happening. The further and further you go, the more heavy the scent grows, as well as a sound. A sound of a buzz, but not in a maddening tone, as if someone is humming. It's a lovely tune, one that would stick in the back of the mind, but not in a bad way.\n\n");
+					outputText("That's when she comes into view.  A great woman, yellow and black, a Bee-like handmaiden would be the best comparison.  She sits atop a great flower while humming her tune, happily picking the petals off of another flower.  Her body is thin, save her abdomen.  Her head is more humanoid than bee, with black eyes, floppy antennae, and luscious black lips that glimmer wetly in the light. Her body covers nearly not visible network of faint purple vein-like lines.\n\n");
+					camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GIANTBEES);
+					startCombat(new BeeGirlHuntress(), true);
+				}
+				if (choice == 1) {
+					//spriteSelect(SpriteDb.s_green_slime);
+					outputText("As you wander the cavern you come across a rather large flower, easily twice your size. You ponder how plants even manage to grow this big even on Mareth. The flower has pink petals and a pitcher-like center. While you are busy examining it, several large vines surge out at you, binding your arms and legs and reeling you toward the flower as it opens up, revealing a beautiful woman with light green skin marked by many of purple lines and deep green eyes.\n\n");
+					outputText("\"<i>Mmmmmm such a nice catch... Come closer into my pitcher.</i>\"\n\n");
+					outputText("There's no way you will let this thing pull you in!\n\n");
+					camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_ALRAUNE);
+					startCombat(new AlrauneMaiden(), true);
+				}
+				if (choice == 2) {
+					//spriteSelect(SpriteDb.s_electra);
+					outputText("As you’re wandering through the cavern you suddenly hear sound of many wings flapping.  Turning around you notice an angel accompanied by four angeloids flying toward you. They're closing in with supernatural speed, and before you can take more than a few steps, they're surrounding you. \"<i>Don't be afraid of the Mist!!!</i>\"  No way around it, you ready your [weapon] for the fight.");
+					startCombat(new MistAngelMR(), true);
+				}
+				//doNext(playerMenu);
+			}
+			else player.addStatusValue(StatusEffects.RiverDungeonA, 1, 10);
 		}
 
 		//Rooms
@@ -1557,7 +1594,12 @@ public class RiverDungeon extends DungeonAbstractContent
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("The corridor is made of a smooth, natural looking stone, almost like the wall had been carved by water, the passages twisting and turning.\n\nThe place feels like it should be pitch-dark, but there's enough light to see, an eerie purple light coming from thin streaks, placed seemingly at random on the walls, floor and ceiling. As you move across them, the purple lines have slightly more give to them than the stone. It makes your [skin] crawl, treading on that odd material.");
-			dungeons.setDungeonButtonsRD(null, null, roomD04, roomD02);
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 11) dungeons.setDungeonButtonsRD(null, null, roomD04, roomD02);
+			else {
+				dungeons.setDungeonButtonsRD(null, null, null, roomD02);
+				if (player.hasKeyItem("Black Crystal") >= 0) addButton(10, "West", useBlackCrystalRe).hint("Would you like to use Black Crystal here?");
+				else addButtonDisabled(10, "West", "There are massive rumble that even with any previous visitors attempts seems to be not clearable. Looking like whole celling just caved in and blocked passage to room behind it. So how could you go to check what is on the other end of passage? Maybe somewhere on this floor you can find the solution? You also feel lingering aura of floor boss here suggesting even with correct solution boss itself could interfere with attempts to clear this rumble...");
+			}
 		}
 		public function roomD04():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_04;
@@ -1567,8 +1609,7 @@ public class RiverDungeon extends DungeonAbstractContent
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Many fine pebbles coat your path, crunching softly beneath your presence. The dilapidated walls are sloughing off pebbles seemingly in response to each movement you make, causing faint echoes to ring all around you.\n\nVeins of purple lights mark the ground beneath you, breathing in and out with a faint glow almost as if it were alive, beating like a living heart.");
 			dungeons.setDungeonButtonsRD(null, null, null, roomD03);
-			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 10) addButtonDisabled(10, "Down", "Stairs down are blocked by massive rumble.");//addButton(10, "Down", roomD07);
-			else addButtonDisabled(10, "Down", "You still need to beat guardian of this floor to descend into lower strata of the dungeon.");
+			addButton(10, "Down", roomE13);
 		}
 		public function roomD05():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_05;
@@ -1772,7 +1813,7 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function roomE01():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_01;
 			clearOutput();
-			encountersRuletteD();
+			encountersRuletteE();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
@@ -1781,7 +1822,7 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function roomE02():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_02;
 			clearOutput();
-			encountersRuletteD();
+			encountersRuletteE();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
@@ -1790,7 +1831,7 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function roomE03():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_03;
 			clearOutput();
-			encountersRuletteD();
+			encountersRuletteE();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
@@ -1799,7 +1840,7 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function roomE04():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_04;
 			clearOutput();
-			encountersRuletteD();
+			encountersRuletteE();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
@@ -1808,7 +1849,262 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function roomE05():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_05;
 			clearOutput();
-			encountersRuletteD();
+			encountersRuletteE();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(null, null, null, null);
+		}
+		public function roomE06():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_06;
+			clearOutput();
+			encountersRuletteE();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(null, null, null, null);
+		}
+		public function roomE07():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_07;
+			clearOutput();
+			encountersRuletteE();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(null, null, null, null);
+		}
+		public function roomE08():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_08;
+			clearOutput();
+			encountersRuletteE();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(null, null, null, null);
+		}
+		public function roomE09():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_09;
+			clearOutput();
+			encountersRuletteE();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(null, null, null, null);
+		}
+		public function roomE10():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_10;
+			clearOutput();
+			encountersRuletteE();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(null, null, null, null);
+		}
+		public function roomE11():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_11;
+			clearOutput();
+			encountersRuletteE();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(null, null, null, null);
+		}
+		public function roomE12():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_12;
+			clearOutput();
+			encountersRuletteE();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(null, null, null, null);
+		}*/
+		public function roomE13():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_13;
+			clearOutput();
+			encountersRuletteE3();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(null, roomE19, null, null);
+			addButton(0, "Teleport C.", teleportCircleFloor5);
+			addButton(12, "Up", roomD04);
+		}/*
+		public function roomE14():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_14;
+			clearOutput();
+			encountersRuletteE();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(null, null, null, null);
+		}
+		public function roomE15():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_15;
+			clearOutput();
+			encountersRuletteE();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(null, null, null, null);
+		}
+		public function roomE16():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_16;
+			clearOutput();
+			encountersRuletteE();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(null, null, null, null);
+		}*/
+		public function roomE17():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_17;
+			clearOutput();
+			encountersRuletteE3();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(null, roomE23, null, roomE18);
+		}
+		public function roomE18():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_18;
+			clearOutput();
+			encountersRuletteE3();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(null, null, roomE17, roomE19);
+		}
+		public function roomE19():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_19;
+			clearOutput();
+			encountersRuletteE3();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(roomE13, roomE24, roomE18, null);
+		}/*
+		public function roomE20():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_20;
+			clearOutput();
+			encountersRuletteE();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(null, null, null, null);
+		}
+		public function roomE21():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_21;
+			clearOutput();
+			encountersRuletteE();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(null, null, null, null);
+		}
+		public function roomE22():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_22;
+			clearOutput();
+			encountersRuletteE();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(null, null, null, null);
+		}*/
+		public function roomE23():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_23;
+			clearOutput();
+			encountersRuletteE3();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(roomE17, null, null, null);
+		}
+		public function roomE24():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_24;
+			clearOutput();
+			encountersRuletteE3();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(roomE19, roomE27, null, null);
+		}/*
+		public function roomE25():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_25;
+			clearOutput();
+			encountersRuletteE();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(null, null, null, null);
+		}
+		public function roomE26():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_26;
+			clearOutput();
+			encountersRuletteE();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(null, null, null, null);
+		}*/
+		public function roomE27():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_27;
+			clearOutput();
+			encountersRuletteE3();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(roomE24, roomE32, null, null);
+		}/*
+		public function roomE28():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_28;
+			clearOutput();
+			encountersRuletteE();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(null, null, null, null);
+		}
+		public function roomE29():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_29;
+			clearOutput();
+			encountersRuletteE();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(null, null, null, null);
+		}
+		public function roomE30():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_30;
+			clearOutput();
+			encountersRuletteE();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(null, null, null, null);
+		}*/
+		public function roomE31():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_31;
+			clearOutput();
+			encountersRuletteE3();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(null, null, null, roomE32);
+		}
+		public function roomE32():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_32;
+			clearOutput();
+			encountersRuletteE3();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(roomE27, null, roomE31, null);
+		}
+		/*
+		public function roomF01():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_06_ROOM_01;
+			clearOutput();
+			encountersRuletteF();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
@@ -1855,8 +2151,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			doNext(roomC32);
 		}
 		private function anvilMaterialsCheck():Boolean {
-			return ((player.hasItem(useables.PCSHARD, 6)) ||
-					(player.hasItem(useables.PCSHARD, 3) && player.hasItem(useables.SRESIDUE, 3)) ||
+			return (/*(player.hasItem(useables.PCSHARD, 6)) ||
+					(player.hasItem(useables.PCSHARD, 3) && player.hasItem(useables.SRESIDUE, 3)) ||*/
 					(player.hasItem(useables.RED_GEL, 1) && player.hasItem(consumables.CHOCBOX, 1) && player.hasItem(consumables.LETHITE, 1) && player.hasItem(consumables.SALAMFW, 1) && player.hasItem(useables.SRESIDUE, 1) && player.hasItem(consumables.ONISAKE, 1)));
 		}
 		private function anvilMaterialsList():void {
@@ -1924,6 +2220,19 @@ public class RiverDungeon extends DungeonAbstractContent
 			if (player.hasKeyItem("Black Crystal") >= 0) player.removeKeyItem("Black Crystal");
 			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
 			doNext(roomD05);
+		}
+		private function useBlackCrystalRe():void {
+			clearOutput();
+			outputText("You approach the ceiling-high pile of rubble blocking your path. Taking the Black crystal from your pocket, you throw it at the top of the pile. The crystal shatters, the sound far louder than it has any right to be, echoing through the cavern. Black liquid pours from the point of impact, spreading down, seeping into the displaced stone below. Your [hair] stands on end, as static fills the air, white sparks popping from the black liquid.\n\n");
+			outputText("<i>Tick…</i> The sound echoes, far louder than the shattering before. The stone rumbles, quivering slightly.\n\n");
+			outputText("<i>Tock…</i> The stone begins to rise, slowly at first.\n\n");
+			outputText("<i>Tick…</i> The stone leaps skyward, merging seamlessly with the ceiling above it. The ticking sounds get faster and faster, the cacophony of falling stone echoing in reverse, an unnatural sound that makes your [skin] crawl. You close your eyes instinctively as a stone from the other side of the cavern shoots into the pile, narrowly missing your head.\n\n");
+			outputText("<i>Tock. Tick. Tock. TICKTOCKTICKTOCKTICKTOCK</i>\n\n");
+			outputText("...\n\n");
+			outputText("Silence fills the cave. You open your [eyes]. A black and white tiled room is on the other side of where that stone had once been. The ceiling is pristine, like it had never collapsed at all. Your path forward is clear.\n\n");
+			if (player.hasKeyItem("Black Crystal") >= 0) player.removeKeyItem("Black Crystal");
+			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
+			doNext(roomD03);
 		}
 		public function dishHelperTB():void {
 			menu();
@@ -1995,7 +2304,9 @@ public class RiverDungeon extends DungeonAbstractContent
 			else addButtonDisabled(2, "Floor 3", "You still need to beat guardian of floor 2 to use this teleport option.");
 			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(3, "Floor 4", teleportToFloor4);
 			else addButtonDisabled(3, "Floor 4", "You still need to beat guardian of floor 3 to use this teleport option.");
-			//5
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 11) addButton(4, "Floor 5", teleportToFloor5);
+			else addButtonDisabled(4, "Floor 5", "You still need to beat guardians of floor 4 to use this teleport option.");
+			//6
 			addButton(14, "Back", roomA01);
 		}
 		private function teleportCircleFloor2():void {
@@ -2006,7 +2317,9 @@ public class RiverDungeon extends DungeonAbstractContent
 			else addButtonDisabled(2, "Floor 3", "You need to beat the guardian of floor 2 to use this teleport.");
 			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(3, "Floor 4", teleportToFloor4);
 			else addButtonDisabled(3, "Floor 4", "You still need to beat guardian of floor 3 to use this teleport option.");
-			//5
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 11) addButton(4, "Floor 5", teleportToFloor5);
+			else addButtonDisabled(4, "Floor 5", "You still need to beat guardians of floor 4 to use this teleport option.");
+			//6
 			addButton(14, "Back", roomB01);
 		}
 		private function teleportCircleFloor3():void {
@@ -2016,7 +2329,9 @@ public class RiverDungeon extends DungeonAbstractContent
 			addButtonDisabled(2, "Floor 3", "You're currently at Floor 3.");
 			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(3, "Floor 4", teleportToFloor4);
 			else addButtonDisabled(3, "Floor 4", "You still need to beat guardian of floor 3 to use this teleport option.");
-			//5
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 11) addButton(4, "Floor 5", teleportToFloor5);
+			else addButtonDisabled(4, "Floor 5", "You still need to beat guardians of floor 4 to use this teleport option.");
+			//6
 			addButton(14, "Back", roomC01);
 		}
 		private function teleportCircleFloor4():void {
@@ -2025,17 +2340,41 @@ public class RiverDungeon extends DungeonAbstractContent
 			addButton(1, "Floor 2", teleportToFloor2);
 			addButton(2, "Floor 3", teleportToFloor3);
 			addButtonDisabled(3, "Floor 4", "You're currently at Floor 4.");
-			//5
-			addButton(14, "Back", roomC01);
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 11) addButton(4, "Floor 5", teleportToFloor5);
+			else addButtonDisabled(4, "Floor 5", "You still need to beat guardians of floor 4 to use this teleport option.");
+			//6
+			addButton(14, "Back", roomD07);
 		}
 		private function teleportCircleFloor5():void {
+			menu();
+			addButton(0, "Floor 1", teleportToFloor1);
+			addButton(1, "Floor 2", teleportToFloor2);
+			addButton(2, "Floor 3", teleportToFloor3);
+			addButton(3, "Floor 4", teleportToFloor4);
+			addButtonDisabled(4, "Floor 5", "You're currently at Floor 5.");
+			//6
+			addButton(14, "Back", roomE13);
+		}
+		private function teleportCircleFloor6():void {
+			menu();
+			addButton(0, "Floor 1", teleportToFloor1);
+			addButton(1, "Floor 2", teleportToFloor2);
+			addButton(2, "Floor 3", teleportToFloor3);
+			addButton(3, "Floor 4", teleportToFloor4);
+			addButton(4, "Floor 5", teleportToFloor5);
+			addButtonDisabled(5, "Floor 6", "You're currently at Floor 6.");
+			addButton(14, "Back", roomE13);
+		}
+		private function teleportCircleFloor7():void {
 			menu();
 			addButton(0, "Floor 1", teleportToFloor1);//02-04-06->09
 			addButton(1, "Floor 2", teleportToFloor2);//12-14-16-18->21->24
 			addButton(2, "Floor 3", teleportToFloor3);//26-28-30-32-34->37->40
 			addButton(3, "Floor 4", teleportToFloor4);//42-44-46-48-50-52->55
-			addButtonDisabled(4, "Floor 5", "You're currently at Floor 5.");//58
-			addButton(14, "Back", roomC01);
+			addButton(4, "Floor 5", teleportToFloor5);//58-60-62-64-66-68-70->73
+			addButtonDisabled(5, "Floor 6", "You're currently at Floor 6.");//76-78-80-82-84-86-88-90->93
+			addButtonDisabled(6, "Floor 7", "You're currently at Floor 7.");//96
+			addButton(14, "Back", roomE13);
 		}
 		private function teleportToFloor1():void {
 			clearOutput();
@@ -2059,6 +2398,12 @@ public class RiverDungeon extends DungeonAbstractContent
 			clearOutput();
 			outputText("A circle of energy slowly emerges, wrapping around your team. Magic surges as your vision blurs. In nearly an instant, you're transported to the fourth floor.\n\n");
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_07;
+			playerMenu();
+		}
+		private function teleportToFloor5():void {
+			clearOutput();
+			outputText("A circle of energy slowly emerges, wrapping around your team. Magic surges as your vision blurs. In nearly an instant, you're transported to the fifth floor.\n\n");
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_13;
 			playerMenu();
 		}
 	}

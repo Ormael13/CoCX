@@ -4077,7 +4077,7 @@ import classes.Scenes.Combat.CombatAbilities;
 					if (statusEffectv1(StatusEffects.FrostburnDoT) > 1) addStatusValue(StatusEffects.FrostburnDoT, 1, -1);
 					//Heal wounds
 					if (statusEffectv1(StatusEffects.FrostburnDoT) <= 0) {
-						outputText("The lingering frostbite on [themonster] finally fades away.\n\n");
+						outputText("The lingering frostburn on [themonster] finally fades away.\n\n");
 						removeStatusEffect(StatusEffects.FrostburnDoT);
 					}
 					//Deal damage if still wounded.
@@ -4087,8 +4087,8 @@ import classes.Scenes.Combat.CombatAbilities;
 						store12 = Math.round(store12 * SceneLib.combat.iceDamageBoostedByDao());
 						store12 += maxHP() * statusEffectv2(StatusEffects.FrostburnDoT);
 						store12 = SceneLib.combat.fixPercentDamage(store12);
-						if(plural) outputText("[Themonster] are hurt by the lingering frostbite. ");
-						else outputText("[Themonster] is hurt by the lingering frostbite. ");
+						if(plural) outputText("[Themonster] are hurt by the lingering frostburn. ");
+						else outputText("[Themonster] is hurt by the lingering frostburn. ");
 						store12 = SceneLib.combat.doIceDamage(store12, true, true);
 						outputText("\n\n");
 					}

@@ -18,7 +18,6 @@ public class CombatTeases extends BaseCombatContent {
 		tBLD += scalingBonusLibido() * 0.2;
 		tBLD += (2 * player.teaseDmgStat.value);
 
-
 		if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) tBLD *= 1.75;
 		if (player.hasPerk(PerkLib.SensualLover)) tBLD *= 1.3;
 		if (player.hasPerk(PerkLib.Seduction)) tBLD *= 1.75;
@@ -49,12 +48,13 @@ public class CombatTeases extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();
 		if (player.hasPerk(PerkLib.DazzlingDisplay)) damagemultiplier += 0.2;
 		if (player.hasPerk(PerkLib.SuperSensual)) damagemultiplier += 0.50;
-		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemConstants.A_REVEALING)) tBLD *= (1 + ((10 + rand(11)) / 100));
 		if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
 		if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
 		if (player.armor == armors.ELFDRES && player.isElf()) damagemultiplier += 1;
 		if (player.armor == armors.FMDRESS && player.isWoodElf()) damagemultiplier += 1;
 		if (player.hasStatusEffect(StatusEffects.TeasePotion)) damagemultiplier += 0.05;
+		if (player.hasPerk(PerkLib.Nightshade)) damagemultiplier += 0.5;
+		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemConstants.A_REVEALING)) tBLD *= (1 + ((10 + rand(11)) / 100));
 		if (player.weapon == weapons.HELLCAL) damagemultiplier *= (1 + (0.01 * player.cor));
 		if (player.weapon == weapons.ELYSIUM) damagemultiplier *= (1 + (0.01 * (100 - player.cor)));
 		tBLD *= damagemultiplier;

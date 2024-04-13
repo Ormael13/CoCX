@@ -2220,10 +2220,10 @@ public class PlayerInfo extends BaseContent {
 				if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 6) addButtonDisabled(5, "SP:ST(R6)", "You already have this perk.");
 				else addButtonDisabled(5, "SP:ST(R6)", "You do not have enough super perk points to obtain this perk.");
 			}
+			if (player.superPerkPoints > 0) addButton(10, "Re: Convert", superPerkReverseConvertMenu);
+			else addButtonDisabled(10, "Re: Convert", "You need at least 1 super perk point to convert it.");
 			if (player.perkPoints > 2) addButton(11, "Convert", superPerkConvertMenu);
 			else addButtonDisabled(11, "Convert", "You need at least 3 perk points to convert them.");
-			if (player.superPerkPoints > 0) addButton(12, "Re: Convert", superPerkReverseConvertMenu);
-			else addButtonDisabled(12, "Re: Convert", "You need at least 1 super perk point to convert it.");
 			addButton(13, "Next", superPerkBuyMenu, page + 1);
 			addButton(14, "Back", playerMenu);
 		}

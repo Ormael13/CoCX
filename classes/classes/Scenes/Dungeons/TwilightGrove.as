@@ -5,9 +5,15 @@
 package classes.Scenes.Dungeons 
 {
 import classes.EventParser;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Ears;
+import classes.BodyParts.Face;
+import classes.BodyParts.Hair;
 import classes.BodyParts.LowerBody;
+import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Races;
+import classes.CoC;
 
 	public class TwilightGrove extends DungeonAbstractContent
 	{
@@ -25,7 +31,7 @@ import classes.Races;
 			inDungeon = false;
 			clearOutput();
 			outputText("You leave the twilight grove behind and take off back towards the camp.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 		private function room1TGPure():void {
@@ -41,30 +47,35 @@ import classes.Races;
 			inDungeon = false;
 			clearOutput();
 			outputText("The malice in this area is almost palpable. You should come back when you’re better prepared.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 		private function room1TGCorrupt():void {
 			clearOutput();
 			dungeonLoc = DUNGEON_TWILIGHT_GROVE_1;
 			if (flags[kFLAGS.DISCOVERED_TWILIGHT_GROVE_DUNGEON] > 1) {
+				if (flags[kFLAGS.PC_CANT_DECIDE_ON_BEEN_ALRAUNE_OR_NOT] == 1 && !playerIsAlraune()) flags[kFLAGS.PC_CANT_DECIDE_ON_BEEN_ALRAUNE_OR_NOT] = 0;
 				menu();
-				//2 - dryad boss npc
 				addButton(3, "Leave", room1TGCorruptLeave);
 				if (playerIsAlraune()) {
-					outputText("Aster the satyr is quietly waiting at his desk at the entrance for potential customers. Since you are the sister of the owner you can enjoy the place for free.\n\n");
-					addButton(1, "Have a rest", corruptTGHaveARest);
+					if (flags[kFLAGS.PC_CANT_DECIDE_ON_BEEN_ALRAUNE_OR_NOT] == 0) room1TGCorruptEnter2();
+					else {
+						outputText("Aster the satyr is quietly waiting at his desk at the entrance for potential customers. Since you are the sister of the owner you can enjoy the place for free.");
+						addButton(1, "Have a rest", corruptTGHaveARest2);
+						addButton(2, "Rafflesia", corruptTGRafflesia).hint("Discuss various topics with your elder sister.");
+					}
 				}
 				else {
-					outputText("Aster the satyr is quietly waiting at his desk at the entrance for potential customers. If you have corrupted items you could buy yourself some well needed-relaxation.\n\n");
-					if (flags[kFLAGS.DISCOVERED_TWILIGHT_GROVE_DUNGEON] > 2) addButton(1, "Have a rest", corruptTGHaveARest);
+					outputText("Aster the satyr is quietly waiting at his desk at the entrance for potential customers.");
+					if (flags[kFLAGS.DISCOVERED_TWILIGHT_GROVE_DUNGEON] > 2) addButton(1, "Have a rest", corruptTGEnjoySomeRest);
 					else {
-						addButtonIfTrue(1, "Have a rest", corruptTGHaveARest, "You would like to use the resort but don’t have any corrupted items to pay for it.", (player.hasItem(consumables.SUCMILK, 1) || player.hasItem(consumables.INCUBID, 1) || player.hasItem(consumables.SDELITE, 1)));
+						outputText(" If you have corrupted items you could buy yourself some well needed-relaxation.");
+						addButtonIfTrue(1, "Have a rest", corruptTGHaveARestPay, "You would like to use the resort but don’t have any corrupted items to pay for it.", (player.hasItem(consumables.SUCMILK, 1) || player.hasItem(consumables.INCUBID, 1) || player.hasItem(consumables.SDELITE, 1)));
 						if (flags[kFLAGS.DISCOVERED_TWILIGHT_GROVE_DUNGEON] == 2) addButtonIfTrue(7, "VIP", corruptTGHaveARestVIPBuyItBuyItNowBeforeItPriceRise, "Req. 500+ gems", player.gems >= 500);
 					}
 				}
-				outputText("\"<i></i>\"\n\n");
-				outputText("\n\n");
+				//outputText("\"<i></i>\"\n\n");
+				//outputText("\n\n");
 			}
 			else {
 				outputText("As you wander the woods, you stumble on a corrupt glade similar to those you have come across before except at its edge stands a large ornate gate made of entwined brambles. When you approach and touch the brambles out of curiosity, the plant moves on its own, slithering away to open the path for you. Clearly, you are expected. Will you enter this eerie place or leave?");
@@ -78,7 +89,7 @@ import classes.Races;
 			inDungeon = false;
 			clearOutput();
 			outputText("This of course, looks interesting, but you have better things to do and simply decide to come back later.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		private function room1TGCorruptEnter():void {
 			clearOutput();
@@ -111,10 +122,28 @@ import classes.Races;
 			outputText("\"<i>So, would you like a trial run?</i>\"\n\n");
 			flags[kFLAGS.DISCOVERED_TWILIGHT_GROVE_DUNGEON]++;
 			menu();
-			addButton(1, "Enjoy some rest", corruptTGHaveARest);
+			addButton(1, "Enjoy some rest", corruptTGEnjoySomeRest);
 			addButton(3, "Leave", exitDungeon);
 		}
-		private function corruptTGHaveARest():void {
+		private function room1TGCorruptEnter2():void {
+			clearOutput();
+			outputText("As you enter the twilight grove the atmosphere suddenly changes as if the forest itself became keenly aware of your presence. While you ponder the sudden shift of ambiance you hear Rafflesia's voice echo through the green canopy.\n\n");
+			outputText("\"<i>Visitor I sense the mark of Marae from you, whoever you are. Come closer to my pitcher so we may discuss.</i>\"\n\n");
+			outputText("It looks like you somehow got the attention of the mistress of the grove? Perhaps this has to do with your newfound familial bond with Marae. You remember that Rafflesia is related to Marae and thus in theory your sister. Seeing as the place still radiates a welcoming feeling you guess Rafflesia does not see you as a threat. As you move closer Rafflesia flowers blossom to welcome you properly.\n\n");
+			outputText("\"<i>Well, would you look at that! I thought I had seen everything but mom somehow made you one of her blessed offspring? Birthing a new sister is one thing but making a fleshling into one? She must’ve seen something quite amazing in you to grant you such a privilege. Regardless, I twice welcome you to the grove little sister. Please take your time and enjoy your stay. As an addition to the normal services feel free to use any of my handmaidens or manservants as if they were your own. ");
+			outputText("The pond is replenished continuously, so drink to satiety. It has been so long since last I had a talk with a sibling of mine. Perhaps you may even have some news for me. Calling you sister [name] is gonna take some getting used to.</i>\"\n\n");
+			flags[kFLAGS.PC_CANT_DECIDE_ON_BEEN_ALRAUNE_OR_NOT] = 1;
+			menu();
+			addButton(1, "Have a rest", corruptTGHaveARest2);
+			addButton(2, "Rafflesia", corruptTGRafflesia).hint("Discuss various topics with your elder sister.");
+			addButton(3, "Leave", room1TGCorruptLeave);
+		}
+		private function corruptTGEnjoySomeRest():void {
+			clearOutput();
+			outputText("Aster nods then helps you into the Grove.");
+			corruptTGHaveARest2();
+		}
+		private function corruptTGHaveARestPay():void {
 			clearOutput();
 			outputText("Aster nods ");
 			if (flags[kFLAGS.DISCOVERED_TWILIGHT_GROVE_DUNGEON] == 2 && !playerIsAlraune()) {
@@ -124,6 +153,9 @@ import classes.Races;
 				outputText("and takes the payment ");
 			}
 			outputText("then helps you into the Grove.");
+			corruptTGHaveARest2();
+		}
+		private function corruptTGHaveARest2():void {
 			outputText("\"<i>Please take a spot next to the pond and enjoy yourself."+(playerIsAlraune()?" We have a large selection of cocks and pussy to select from feel free to use whichever you like.":"")+"</i>\"\n\n");
 			if (playerIsAlraune()) {
 				outputText("Your elder sister is most generous, offering free access to all of these willing stamens and pistils, you gleefully set down near the pond, browsing the selection.");
@@ -145,7 +177,7 @@ import classes.Races;
 			outputText("\"<i>May I offer you some food and drink " + player.mf("sir", "milady") + "? We have a local specialty drink called Sangria.</i>\"\n\n");
 			menu();
 			addButton(1, "Fruits", corruptTGHaveARestFruits);
-			//2 - Sangria
+			addButton(2, "Sangria", corruptTGHaveARestSangria);
 			addButtonIfTrue(3, "Fertilizer", corruptTGHaveARestFertilizer, "Req. to be plant-morph or alraune/liliraune.", (player.isRaceCached(Races.ALRAUNE) || player.isRaceCached(Races.PLANT)));
 		}
 		private function corruptTGHaveARestFruits():void {
@@ -154,15 +186,117 @@ import classes.Races;
 			outputText("Those fruits look juicy, so you request a plate. You slowly eat black cherries and purple plums as "+(playerIsAlraune()?"you work a green succubus slit over with your stamens":"the vines work you up")+". You never would’ve thought that eating while fucking would feel so good. The fruits also seem to have an effect on your body, granting you a greater clarity of spirit as well as leaving your mind wandering about the numerous sexy things you’ve yet to try out. ");
 			outputText("The simple act of slowly eating these delicious fruits, their juices running over your tongue and their soft flesh yielding to you makes you shudder in pleasure as if your mouth was an actual vagina. This is enough to drive you over the edge as you climax from "+(playerIsAlraune()?"your":"the")+" vines ministration, some of your fluids flowing down into the pond.\n\n");
 			outputText("Done enjoying yourself, you head back to camp thanking the Satyr for the quality time.\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		private function corruptTGHaveARestSangria():void {
+			clearOutput();
+			outputText("You need a drink and tell the Satyr as such. He comes back with a pitcher of what seems to be a strong alcoholic beverage.\n\n");
+			outputText("\"<i>This Sangria is made out of the most intoxicating fruits and the pond’s sacred water, please savor it slowly.</i>\"\n\n");
+			outputText("The Satyr didn’t lie, you barely took a sip of this thing and you're already tipsy. Furthermore, despite the refreshing nature of the drink, you feel increasingly hot after each sip. You can’t help basking in a dreamy state as the "+(playerIsAlraune()?"sensation of your ":"")+"vines work you over. You cum once, twice… you lost count. You could easily let yourself drift off into a delicious unconsciousness from this, and the vines "+(playerIsAlraune()?"of your elder sister ":"")+"are starting to move around you.\n\n");
+			outputText("Do you leave yourself to the care of the vines?\n\n");
+			menu();
+			addButton(1, "Yes", corruptTGHaveARestSangriaYes);
+			addButton(3, "No", corruptTGHaveARestSangriaNo);
+		}
+		private function corruptTGHaveARestSangriaYes():void {
 			inDungeon = false;
 			clearOutput();
-			outputText("\n\n");
-			outputText("\"<i></i>\"\n\n");
-			outputText("\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			outputText("You let yourself drift off in the delicious embrace of the vine-like tentacles which proceed to form a slithering blanket around you. Losing all notion of time, you wake several hours later still getting played with by the vines. ");
+			outputText(""+(playerIsAlraune()?"You idly ponder what would have happened to you had you not already been a plant":"Something in you changed, as if the sap of the alraune began modifying your body, not unlike the demons on the beach. You feel plant-like strength moving through you")+".\n\n");
+			if (!playerIsAlraune()) {
+				var changes:Number = 0;
+				var changeLimit:Number = 4;
+				if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0 && player.faceType == Face.HUMAN) {
+					outputText("\n\n");
+					CoC.instance.transformations.SkinPlain.applyEffect();
+					changes++;
+				}
+				if (player.hasPlainSkinOnly() && !InCollection(player.skinColor, "leaf green", "lime green", "turquoise", "light green") && changes < changeLimit && rand(2) == 0) {
+					player.skinColor = randomChoice("turquoise", "lime green", "leaf green", "light green");
+					changes++;
+					outputText("\n\nWhoah, that was weird.  You just hallucinated that your skin turned " + player.skinColor + ".  No way!  It's staying, it really changed color!");
+				}
+				if (player.skin.hasPlainSkinOnly() && (player.skinColor == "leaf green" || player.skinColor == "lime green" || player.skinColor == "turquoise" || player.skinColor == "light green") && changes < changeLimit && rand(3) == 0) {
+					//Males/genderless get clawed feet
+					if (player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {
+						if (player.lowerBody != LowerBody.PLANT_ROOT_CLAWS) {
+							outputText("\n\n");
+							CoC.instance.transformations.LowerBodyPlantRootClaws.applyEffect();
+						}
+					}
+					//Females/futa get high heels
+					else {
+						if (player.lowerBody != LowerBody.PLANT_HIGH_HEELS && player.lowerBody != LowerBody.PLANT_FLOWER) {
+							outputText("\n\n");
+							CoC.instance.transformations.LowerBodyPlantHighHeels.applyEffect();
+						}
+					}
+					changes++;
+				}
+				if ((player.lowerBody == LowerBody.PLANT_HIGH_HEELS || player.lowerBody == LowerBody.PLANT_ROOT_CLAWS) && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.PLANT) && changes < changeLimit && rand(3) == 0) {
+					outputText("\n\n");
+					CoC.instance.transformations.ArmsPlant.applyEffect();
+					changes++;
+				}
+				if (player.arms.type == Arms.PLANT && player.wings.type != Wings.PLANT && player.lowerBody != LowerBody.PLANT_FLOWER && changes < changeLimit && rand(3) == 0) {
+					CoC.instance.transformations.WingsPlant.applyEffect();
+					changes++;
+				}
+				if (player.ears.type != Ears.ELFIN && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
+					outputText("\n\n");
+					CoC.instance.transformations.EarsElfin.applyEffect();
+					changes++;
+				}
+				if (CoC.instance.transformations.EyesPlantColors.isPossible() && changes < changeLimit && rand(4) == 0) {
+					CoC.instance.transformations.EyesPlantColors.applyEffect(false);
+					outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you.  As you steady yourself and open your eyes, you realize something seems different, as if the nerves have been optimized.  Your vision has been changed somehow absorbing more light then normal. When you go look into a water puddle you notice your the changes in full. <b>Your eyes color has changed to [eyecolor].</b>");
+					changes++;
+				}
+				if (player.faceType != Face.HUMAN && changes < changeLimit && rand(4) == 0) {
+					changes++;
+					outputText("\n\n");
+					CoC.instance.transformations.FaceHuman.applyEffect(false);
+					outputText("\n\nAnother violent sneeze escapes you.  It hurt!  You feel your nose and discover your face has changed back into a more normal look. <b>You have a human looking face again!</b>");
+				}
+				if (player.hairColor == "green" && (player.hairType != Hair.LEAF && player.hairType != Hair.GRASS) && !player.isGargoyle() && rand(3) == 0 && changes < changeLimit)
+				{
+					if (rand(2) == 0) {
+						outputText("\n\n");
+						CoC.instance.transformations.HairGrass.applyEffect(false);
+					}
+					else {
+						outputText("\n\n");
+						CoC.instance.transformations.HairLeaf.applyEffect(false);
+					}
+					changes++;
+				}
+				if (player.hairColor != "green" && !player.isGargoyle() && rand(3) == 0 && changes < changeLimit)
+				{
+					outputText("\n\nAt first it looks like nothing changed but then you realize all the hair on your body has shifted to a verdant green color.  <b>You now have green hair.</b>");
+					player.hairColor = "green";
+				}
+				if ((player.hairType == Hair.LEAF || player.hairType == Hair.GRASS) && changes < changeLimit && rand(2) == 0) {
+					//Males/genderless get oak horns
+					if (player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {
+						outputText("\n\n");
+						CoC.instance.transformations.HornsOak.applyEffect();
+					}
+					//Females/futa get orchid flowers
+					else {
+						outputText("\n\n");
+						CoC.instance.transformations.HornsOrchid.applyEffect();
+					}
+					changes++;
+				}
+			}
+			endEncounter();
+		}
+		private function corruptTGHaveARestSangriaNo():void {
+			inDungeon = false;
+			clearOutput();
+			outputText("You proceed to dress back up highly satisfied. Done enjoying yourself you head back to camp thanking the Satyr for the quality time.\n\n");
+			player.dynStats("lib", 10, "cor", 5);
+			endEncounter();
 		}
 		private function corruptTGHaveARestFertilizer():void {
 			inDungeon = false;
@@ -188,16 +322,66 @@ import classes.Races;
 				player.tallness += 1 + rand(3);
 				if (player.basetallness > 132) player.tallness = 132;
 			}
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		private function corruptTGHaveARestVIPBuyItBuyItNowBeforeItPriceRise():void {
 			clearOutput();
 			outputText("You pay Aster 500 gems in order to aquire a VIP pass and the satyr gladly oblige you will now be able to use the grove for free at all time!\n\n");
 			player.gems -= 500;
+			flags[kFLAGS.DISCOVERED_TWILIGHT_GROVE_DUNGEON] = 3;
 			menu();
-			addButton(1, "Have a rest", corruptTGHaveARest);
-			//2 - dryad boss npc
+			addButton(1, "Have a rest", corruptTGEnjoySomeRest);
 			addButton(3, "Leave", room1TGCorruptLeave);
+		}
+		private function corruptTGRafflesia():void {
+			clearOutput();
+			outputText("You approach Rafflesia intent on having a friendly chat with your verdant sibling. Amazingly despite constantly fucking a dozen demons all at the same time your sister is keeping a calm face. You guess that is the kind of power that comes with years. Even sex and mind blowing pleasure can’t shake away the serene look on your sister's face. She takes the whole thing as if it was as natural as breathing air, basking in the sun or drinking water.\n\n");
+			outputText("\"<i>Oh [name], I was resting and didn't notice you coming close. Running this place can be so tiresome I don’t look like it but my vines are managing a hundred or so activities all at the same time. Is there anything I can do for you or perhaps you simply wanted to chat?</i>\"\n\n");
+			menu();
+			addButtonIfTrue(1, "Children", corruptTGRafflesiaChildren, "Only for pregnant PC.", player.isPregnant());
+			addButton(2, "The Grove", corruptTGRafflesiaTheGrove);
+			addButton(8, "Back", room1TGCorrupt);
+		}
+		private function corruptTGRafflesiaChildren():void {
+			clearOutput();
+			outputText("You gently ask your big sister what she thinks of children as you slowly bask in the motherly delight of your full pitcher.\n\n");
+			outputText("\"<i>Oh, sister, there are few things I love more than having children. However, upon my so-called fall from grace mother cursed me with complete infertility.</i>\"\n\n");
+			outputText("You gasp in horror; what a terrible punishment. To be unable to bear fruit is something as an Alraune you have a keen fear of.\n\n");
+			outputText("\"<i>Oh don’t worry dear I found a way around it. While I can no longer produce seeds or bear fruits on my own, my womb is so corrupted I can use it to remodel what I absorb into my progeny, body and mind. I thoroughly enjoy every one of these pregnancies as the individuals I rebirth are always those I love the most. They all start rowdy and rebellious, fighting to get free, but become such sweet children afterward.</i>\"\n\n");
+			outputText("Reassured of your sister’s health, you ask when last she had a child.\n\n");
+			outputText("\"<i>Oh, that was a fair year since. As I said: while rare, I treasure these pregnancies even more. Most of my children stay with me to attend the grove.</i>\"\n\n");
+			outputText("You both close the subject, having nothing more to say about it.\n\n");
+			doNext(corruptTGRafflesia);
+			advanceMinutes(10);
+		}
+		private function corruptTGRafflesiaTheGrove():void {
+			clearOutput();
+			outputText("So how did this lovely grove come to be, when did she decide to settle here in the first place?\n\n");
+			outputText("\"<i>Oh it was mother who made me grow here to begin with. I was here way before the demons came tending this sacred grove, growing beautiful flowers and providing counsel to mortals who came to visit. When the demons came from the mountains, they came to me and taught me many joys. I was always very sexual as all of my siblings are but what the demon taught me made it so much better. I soaked in the corruption until my soul poured out and gleefully devoured the crystal. ");
+			outputText("You cannot fathom the pleasure of tasting the soul of a demigod or the power I got from it, it was like meeting a new me. I tried to share my joy with mother, but she cut off all contact, saying I was not her daughter anymore but a ‘thing’. I still hope she will one day come to her senses and expand her roots back all the way to this place.</i>\"\n\n");
+			if (player.cor >= 51) {
+				if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) {
+					outputText("You feel terribly sorry for your big sister but indeed maybe there is a way you could bring mother on this side of the curtain, the factory isn’t destroyed and all it takes is to reactivate it and perhaps even break the valve. There is enough corrupted fluid stuck in those tanks to completely flood the lake.\n\n");
+					doNext(corruptTGRafflesia);
+					advanceMinutes(10);
+				}
+				else {
+					outputText("You chuckle and tell your sister the good news, Marae has already fallen to corruption thanks to your scheme at the factory. Rafflesia begins shedding tears of happiness.\n\n");
+					outputText("\"<i>Sister, if you knew how much joy this brings to me to know that mother will forgive me. We will once again be a united family. I will even be able to show my lovely offsprings to mother. Say, I have been thinking, you are the only one left of us who still has a soul. Are you really ok with that? I could fuck it out for you if you asked.</i>\"\n\n");
+					outputText("Yea you will be keeping your soul for now. There is absolutely no rush to lose it.\n\n");
+					outputText("\"<i>Well, that is your loss. Regardless, I want to thank you for uniting us all again. I prepared this flower for you just in case you did wish to get a taste of what it is like to have real power. Use it when you are ready.</i>\"\n\n");
+					outputText("Rafflesia produces a small black flower and hands it to you.\n\n");
+					inventory.takeItem(consumables.BLACK_L, corruptTGRafflesia);
+					advanceMinutes(10);
+				}
+			}
+			else {
+				outputText("While corrupt and perhaps even lost this woman is still your elder sister. You cannot and will not revert Marae’s decision but you might look into a way of redeeming your wayward sister anyway. You tell her that regardless of her path in life so far it's not too late for her to redeem herself. Your fallen sister chuckles at this suggestion.\n\n");
+				outputText("\"<i>Redeem myself? That’s absurd. I know you seek my wellbeing but I’m not yet ready to lose all I acquired since my downfall. Truthfully, I think it is you "+(flags[kFLAGS.FACTORY_SHUTDOWN] == 1?"and mother ":"")+"who should join me on this side of the curtain. If you ever consider joining the good side, sister, then just ask me. I can produce you a petal that will allow you to partake in some of my powers. You "+(flags[kFLAGS.FACTORY_SHUTDOWN] == 1?"and mom both ":"")+"got this whole situation wrong, this power shouldn’t be kept under lock and key. We should all embrace it and devote ourselves to parenting a myriad of cute offspring</i>\"\n\n");
+				outputText("You have no interest in defiling your body with demonic taint but regardless you give your sister a polite nod, acknowledging your common interest in birthing many childrens.\n\n");
+				doNext(corruptTGRafflesia);
+				advanceMinutes(10);
+			}
 		}
 		private function playerIsAlraune():Boolean {
 			if (player.isRaceCached(Races.ALRAUNE)) return true;
@@ -208,14 +392,15 @@ import classes.Races;
 			dungeonLoc = DUNGEON_TWILIGHT_GROVE_1;
 			clearOutput();
 			outputText("<b><u></u>Entrance</b>\n");
-			if (flags[kFLAGS.TIFA_FOLLOWER] > 5) {
-				outputText("The guards let you pass into the Hive reminding you not to stir troubles.\n\n");
-				outputText("\"<i>You are welcome into the Hive azzz by the queen'zzz orderzzz zzzo long azzz you don’t go further than the honeybrewerzzz hallzzz</i>\"");
-			}
-			else if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] > 2.5) outputText("No one's there to block your path to the Hive, it seems you can proceed.");
-			else outputText("The two guards fall to the ground, "+(flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] == 2.5 ? "too busy masturbating":"their wounds too great")+" to keep up on fighting. You get past them and enter the Hive.");
+			outputText("You stand at the entrance. The formerly sealed shut vegetal gate is breached and allows you to enter and leave at your leisure.");
 			//dungeons.setDungeonButtons(room2Center, null, null, null);
 			addButton(11, "Leave", exitDungeon);
+			//outputText("\n\n");
+			//outputText("\"<i></i>\"\n\n");
+			//outputText("\"<i></i>\"\n\n");
+			//		outputText("\n\n");
+			//		outputText("\"<i></i>\"\n\n");
+			//		outputText("\"<i></i>\"\n\n");
 		}
 		
 	}
