@@ -1787,7 +1787,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.ColdAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if (!player.isRaceCached(Races.YETI) && !player.isRaceCached(Races.YUKIONNA) && !player.isRaceCached(Races.MELKIE) && !player.isRaceCached(Races.FROSTWYRM) && !player.perkv1(IMutationsLib.WhaleFatIM) >= 1 && player.hasPerk(PerkLib.ColdAffinity)) {
+			else if (!player.isRaceCached(Races.YETI) && !player.isRaceCached(Races.YUKIONNA) && !player.isRaceCached(Races.MELKIE) && !player.isRaceCached(Races.FROSTWYRM) && !player.perkv1(IMutationsLib.WhaleFatIM) >= 1 && !player.hasPerk(PerkLib.SnowLily) && player.hasPerk(PerkLib.ColdAffinity)) {
 				outputText("\nYou suddenly feel a chill in the air. You guess you somehow no longer resist the cold.\n\n<b>(Lost Perks: Cold Affinity");
 				player.removePerk(PerkLib.ColdAffinity);
 				if (player.hasPerk(PerkLib.FreezingBreathYeti)){
@@ -1808,7 +1808,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Blood Affinity
 			needNext ||= player.gainOrLosePerk(PerkLib.BloodAffinity, player.isAnyRaceCached(Races.VAMPIRE, Races.WERESPIDER, Races.DRACULA), "Your ability to hone the power of the red, flowing essence heightens. Hemophilia is a delightful chance for you to revel in the hemorrhage of freshly spilt blood.", "The sight of blood no longer fuels you with the same rousing sensations you once had. Any affinity you carried for the crimson fluid is now lost.");
 			//Dark Affinity
-			needNext ||= player.gainOrLosePerk(PerkLib.DarknessAffinity, player.isAnyRaceCached(Races.VAMPIRE, Races.APOPHIS, Races.ANUBIS, Races.DRACULA), "You are at home while shrouded in darkness, seeing clearly within the shadows as if it were broad daylight.", "The inky black darkness grows hostile toward you once more as your affinity for it is lost.");
+			needNext ||= player.gainOrLosePerk(PerkLib.DarknessAffinity, player.isAnyRaceCached(Races.VAMPIRE, Races.APOPHIS, Races.ANUBIS, Races.DRACULA) || player.hasPerk(PerkLib.Nightshade), "You are at home while shrouded in darkness, seeing clearly within the shadows as if it were broad daylight.", "The inky black darkness grows hostile toward you once more as your affinity for it is lost.");
 			//Compelling Aria
 			needNext ||= player.gainOrLosePerk(PerkLib.HarpySong, player.isAnyRaceCached(Races.SIREN, Races.HARPY, Races.PHOENIX, Races.THUNDERBIRD) || player.hasMutation(IMutationsLib.HarpyHollowBonesIM), "Your voice sound like magicaly entrancing music to your ears now, it would seem you have gained the infamous magicaly compeling voices common to harpies.", "Your voice no longer carries the magical power it used to and thus you are no longer able to use your compelling aria.");
 			needNext ||= player.gainOrLosePerk(PerkLib.MelkieSong, player.tongue.type == Tongue.MELKIE || player.hasMutation(IMutationsLib.MelkieLungIM), "Your words are notes, your sentence a melody. Your voice is like music to your ears and you realise it is because your body became closer to that of a Melkie adapting even your tongue and voice. Well you could always go sit on a rock and sing in case some sailor came by.", "Your voice no longer carries the magical power it used to and thus you are no longer able to use your compelling aria.")
@@ -1848,7 +1848,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			//Fire Affinity
-			needNext ||= player.gainOrLosePerk(PerkLib.FireAffinity, player.isAnyRaceCached(Races.SALAMANDER, Races.PHOENIX, Races.HELLCAT, Races.FIRESNAILS, Races.KITSHOO, Races.CERBERUS) || player.isRaceCached(Races.MOUSE, 2), "You suddenly feels your body temperature rising to ridiculus level. You pant for several minutes until you're finally at ease with your bodily heat. You doubt any more heat is going to make you more uncomfortable then this as you quietly soak in the soothing warmth your body naturally produce. It's like your body is made out of living fire.", "You suddenly feel chilly as your bodily temperature drop down to human level. You lost your natural warmth reverting to that of a standard human.");
+			needNext ||= player.gainOrLosePerk(PerkLib.FireAffinity, player.isAnyRaceCached(Races.SALAMANDER, Races.PHOENIX, Races.HELLCAT, Races.FIRESNAILS, Races.KITSHOO, Races.CERBERUS) || player.isRaceCached(Races.MOUSE, 2) || player.hasPerk(PerkLib.Cinderbloom), "You suddenly feels your body temperature rising to ridiculus level. You pant for several minutes until you're finally at ease with your bodily heat. You doubt any more heat is going to make you more uncomfortable then this as you quietly soak in the soothing warmth your body naturally produce. It's like your body is made out of living fire.", "You suddenly feel chilly as your bodily temperature drop down to human level. You lost your natural warmth reverting to that of a standard human.");
 			//Lightning Affinity
 			if ((player.isRaceCached(Races.SEA_DRAGON)) && !player.hasPerk(PerkLib.LightningAffinity)) {
 				outputText("\nYou suddenly feel a rush of electricity run across your skin as your biolight goes crazy! It would seem you gained the ability to generate and control electricity not unlike an electric eel or more specificaly a sea dragon\n");

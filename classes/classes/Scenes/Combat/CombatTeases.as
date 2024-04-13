@@ -42,19 +42,19 @@ public class CombatTeases extends BaseCombatContent {
 		if (player.isElf() && player.hasPerk(PerkLib.ELFElvenSpearDancingTechnique) && player.isSpearTypeWeapon()) tBLD += scalingBonusSpeed() * 0.1;
 		tBLD *= masteryBonusDamageTease();
 		if (player.hasPerk(PerkLib.JobCourtesan) && monster.hasPerk(PerkLib.EnemyBossType)) tBLD *= 1.2;
-		if (player.hasPerk(PerkLib.Nightshade)) tBLD *= 1.5;
 
 		var damagemultiplier:Number = 1;
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damagemultiplier += player.lust100 * 0.01;
 		if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();
 		if (player.hasPerk(PerkLib.DazzlingDisplay)) damagemultiplier += 0.2;
 		if (player.hasPerk(PerkLib.SuperSensual)) damagemultiplier += 0.50;
-		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemConstants.A_REVEALING)) tBLD *= (1 + ((10 + rand(11)) / 100));
 		if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
 		if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
 		if (player.armor == armors.ELFDRES && player.isElf()) damagemultiplier += 1;
 		if (player.armor == armors.FMDRESS && player.isWoodElf()) damagemultiplier += 1;
 		if (player.hasStatusEffect(StatusEffects.TeasePotion)) damagemultiplier += 0.05;
+		if (player.hasPerk(PerkLib.Nightshade)) damagemultiplier += 0.5;
+		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemConstants.A_REVEALING)) tBLD *= (1 + ((10 + rand(11)) / 100));
 		if (player.weapon == weapons.HELLCAL) damagemultiplier *= (1 + (0.01 * player.cor));
 		if (player.weapon == weapons.ELYSIUM) damagemultiplier *= (1 + (0.01 * (100 - player.cor)));
 		tBLD *= damagemultiplier;

@@ -2684,7 +2684,8 @@ public class Combat extends BaseContent {
 		if (player.weapon.isDualMassive()) accmod += Math.round((dualWMLevel() - 1) / 2);
 		if (player.weapon.isDual()) accmod += meleeDualWieldAccuracyPenalty();
         var weaponSize:Number = 1;
-        if (player.weapon.isSingleSmall()) weaponSize = 0;
+        if (player.weapon.isSingleSmall() && !player.isFistOrFistWeapon()) weaponSize = 0;
+        if (player.weapon.isSingleMedium()) weaponSize = 1;
         if (player.weapon.isSingleLarge()) weaponSize = 2;
         if (player.weapon.isSingleMassive()) weaponSize = 3;
         if (weaponSize == 0 || player.hasAetherTwinsTierS1() || player.hasAetherTwinsTierS2()) accmod += Math.round((weaponSizeSmall() - 1) / 2);
@@ -5711,9 +5712,10 @@ public class Combat extends BaseContent {
 		if (player.weapon.isDualLarge()) Mastery_bonus_damage += 0.01 * dualWLLevel();
 		if (player.weapon.isDualMassive()) Mastery_bonus_damage += 0.01 * dualWMLevel();
         var weaponSize:Number = 1;
-        if( player.weapon.isSmall() ) weaponSize = 0;
-        if( player.weapon.isLarge() ) weaponSize = 2;
-        if( player.weapon.isMassive() ) weaponSize = 3;
+        if (player.weapon.isSmall() && !player.isFistOrFistWeapon()) weaponSize = 0;
+        if (player.weapon.isMedium()) weaponSize = 1;
+        if (player.weapon.isLarge()) weaponSize = 2;
+        if (player.weapon.isMassive()) weaponSize = 3;
         if (weaponSize == 0) Mastery_bonus_damage += 0.01 * weaponSizeSmall();
         if (weaponSize == 1) Mastery_bonus_damage += 0.01 * weaponSizeNormal();
         if (weaponSize == 2) Mastery_bonus_damage += 0.01 * weaponSizeLarge();
@@ -5869,7 +5871,7 @@ public class Combat extends BaseContent {
         if (player.weapon.isDualMassive()) dualWieldMassiveXP(meleeMasteryEXPgains);
         if (player.isFeralCombat()) feralCombatXP(meleeMasteryEXPgains);
         else if (flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && player.weaponName == "fists") unarmedCombatXP(meleeMasteryEXPgains);
-        else if (player.weapon.isSmall() || player.hasAetherTwinsTierWeapon() || player.hasAetherTwinsTierWeapon2()) weaponSmallMastery(meleeMasteryEXPgains);
+        else if ((player.weapon.isSmall() || player.hasAetherTwinsTierWeapon() || player.hasAetherTwinsTierWeapon2()) && !player.isFeralCombat() && (flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && player.weaponName == "fists")) weaponSmallMastery(meleeMasteryEXPgains);
         else if (player.weapon.isLarge()) weaponLargeMastery(meleeMasteryEXPgains);
         else if (player.weapon.isMassive()) weaponMassiveMastery(meleeMasteryEXPgains);
         else weaponNormalMastery(meleeMasteryEXPgains);
