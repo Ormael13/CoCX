@@ -734,8 +734,10 @@ public final class ConsumableLib extends AlchemyLib
 		public const ICY_FIG: Consumable = mk("Icy Fig", "Icy Fig", "an Icy Fig", 12, "A frozen fig that's a common delicacy among trolls that live in cold regions, it’s said that it infuses the consumer with tremendous insight.", curry(m.trollFig, 1), ItemConstants.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
-						DEFAULT_ESSENCE_DROP_TABLE(AE_TROLL),
+						DEFAULT_ESSENCE_DROP_TABLE(AE_GLACIAL_TROLL),
 						[
+							[1, AR_STR],
+							[1, AR_TOU],
 							[1, AR_WIS]
 						]
 				);
@@ -1091,6 +1093,8 @@ public final class ConsumableLib extends AlchemyLib
 						DEFAULT_SUBSTANCES_DROP_TABLE,
 						DEFAULT_ESSENCE_DROP_TABLE(AE_TROLL),
 						[
+							[1, AR_STR],
+							[1, AR_TOU],
 							[1, AR_WIS]
 						]
 				);

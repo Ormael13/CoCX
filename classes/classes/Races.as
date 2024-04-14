@@ -142,6 +142,7 @@ public class Races {
 	public static const ARIGEAN:ArigeanRace                = new ArigeanRace(117);
 	public static const DRACULA:DraculaRace                = new DraculaRace(118);
 	public static const MOTH:MothRace                      = new MothRace(119);
+	public static const GLACIAL_TROLL:GlacialTrollRace     = new GlacialTrollRace(120);
 
 	// Racial groups
 	public static const CatlikeRaces:/*Race*/Array   = [

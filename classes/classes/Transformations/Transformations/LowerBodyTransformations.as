@@ -2358,11 +2358,53 @@ public class LowerBodyTransformations extends MutationsHelper {
 					player.legCount = 2;
 				}
 				player.lowerBody = LowerBody.MOTH;
-				//Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.ARIGEAN));
+				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.MOTH));
 			},
 			// is present
 			function (): Boolean {
 				return player.lowerBody === LowerBody.MOTH;
+			}
+	);
+
+	public const LowerBodyTroll: Transformation = new SimpleTransformation("Troll lower body",
+			// apply effect
+			function (doOutput: Boolean): void {
+				if (doOutput) {
+					var desc: String = "";
+
+					TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyHuman, doOutput);
+					desc += "You can feel your toes start to merge together and you look down to notice a coat of fur now covering your feet. <b>You now have troll feet!</b>";
+
+					if (doOutput) outputText(desc);
+					player.legCount = 2;
+				}
+				player.lowerBody = LowerBody.TROLL;
+				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.TROLL));
+			},
+			// is present
+			function (): Boolean {
+				return player.lowerBody === LowerBody.TROLL;
+			}
+	);
+
+	public const LowerBodyGlacialTroll: Transformation = new SimpleTransformation("Glacial Troll lower body",
+			// apply effect
+			function (doOutput: Boolean): void {
+				if (doOutput) {
+					var desc: String = "";
+
+					TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyHuman, doOutput);
+					desc += "You can feel your toes start to merge together and you look down to notice a heavy coat of fur now covering your feet. <b>You now have glacial troll feet!</b>";
+
+					if (doOutput) outputText(desc);
+					player.legCount = 2;
+				}
+				player.lowerBody = LowerBody.GLACIAL_TROLL;
+				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.GLACIAL_TROLL));
+			},
+			// is present
+			function (): Boolean {
+				return player.lowerBody === LowerBody.GLACIAL_TROLL;
 			}
 	);
 	

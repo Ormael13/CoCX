@@ -15820,9 +15820,17 @@ public final class Mutations extends MutationsHelper {
         //Speed down
 
         //Toughness up
-
+		if (rand(3) == 0 && changes < changeLimit && MutagenBonus("tou", 1)) {
+            outputText("[pg]You become more... solid. Sinewy. A memory comes unbidden from your youth of a grizzled wolf you encountered while hunting, covered in scars, yet still moving with an easy grace. You imagine that must have felt something like this. You don't feel the cold as much as before either maybe you're just getting used to it.");
+            changes++;
+        }
         //Libido up
-
+		if (rand(2) == 0 && changes < changeLimit && MutagenBonus("lib", 10)) {
+            outputText("[pg]A knot of fire in your gut doubles you over but passes after a few moments. " +
+                    "As you straighten you can feel the need seeping into you, puddling in your nethers."
+                    + " An instinctive desire to mate spreads through you, increasing your lust and boosting your sex-drive.");
+            changes++;
+        }
         if (player.blockingBodyTransformations()) changeLimit = 0;
         //Skin
         if (player.skinAdj != "sticky glistering" && player.hasPlainSkinOnly() && rand(3) == 0 && changes < changeLimit) {
@@ -16621,18 +16629,113 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         if (type == 0) outputText("You bite into the fig, it’s sour, very sour. Trolls are supposed to enjoy this?");
 		if (type == 1) outputText("You bite into the fig. The icy crust gives a crunch before you’re met with the juice trapped within. It’s sour, very sour. Trolls are supposed to enjoy this?");
-		//wis change
-        if (rand(3) == 0 && changes < changeLimit && MutagenBonus("wis", 1)) {
+		if (player.blockingBodyTransformations()) changeLimit = 0;
+		if (rand(3) == 0 && changes < changeLimit && MutagenBonus("wis", 1)) {
             outputText("[pg]You feel a tremendous rush of mental celerity, as if your mind were clear of all doubt.");
             changes++;
         }
-		if (player.blockingBodyTransformations()) changeLimit = 0;
+		if (rand(3) == 0 && changes < changeLimit && MutagenBonus("str", 1)) {
+            outputText("[pg]You feel raw bestial power coursing through you.");
+            changes++;
+        }
+        if (rand(3) == 0 && changes < changeLimit && MutagenBonus("spe", 1)) {
+            outputText("[pg]You feel you could run forever enjoying the feeling of the wind on your [skin.type].");
+            changes++;
+        }
+        if (rand(3) == 0 && changes < changeLimit && MutagenBonus("tou", 1)) {
+            outputText("[pg]You become more... solid. Sinewy. A memory comes unbidden from your youth of a grizzled wolf you encountered while hunting, covered in scars, yet still moving with an easy grace. You imagine that must have felt something like this. You don't feel the cold as much as before either maybe you're just getting used to it.");
+            changes++;
+        }
 		//Boost cum production
         if (player.hasBalls() && player.hasCock() && rand(4) == 0 && changes < changeLimit) {
             player.cumMultiplier += 15;
             outputText("[pg]You feel your balls churn slightly, it’s apparent your <b>cum production has increased.</b>");
             changes++;
         }
+		if (!player.blockingBodyTransformations()) {
+			if (changes < changeLimit && rand(3) == 0 && player.biggestTitSize() > 2) {
+                player.shrinkTits();
+                changes++;
+            }
+			//Remove odd eyes
+			if (changes < changeLimit && rand(4) == 0 && player.eyes.type > Eyes.HUMAN) {
+				outputText("[pg]");
+				transformations.EyesHuman.applyEffect();
+				changes++;
+			}
+			if (type == 0) {
+				if (player.basetallness < 94) {
+					outputText("[pg]Whoa wait did you just gain some height!? You indeed notice you've grown by a few inches.");
+					player.tallness += 1 + rand(3);
+				}
+				if (changes < changeLimit && rand(4) == 0 && player.eyes.type == Eyes.HUMAN && transformations.EyesChangeColor(["green"]).isPossible()) {
+					transformations.EyesChangeColor(["green"]).applyEffect(false);
+					outputText("[pg]You shiver as cold wind passes over your face. Something’s changed in your vision, and though you’re not sure what, you press on regardless. After going out and checking your reflection in a puddle, you discover your pupil color has changed to a blue as cold as ice. <b>You now have cold blue eyes.\n</b>");
+					changes++;
+				}
+				if (rand(3) == 0 && changes < changeLimit && player.ears.type != Ears.TROLL) {
+					outputText("[pg]");
+					transformations.EarsTroll.applyEffect();
+					changes++;
+				}
+				if (rand(3) == 0 && changes < changeLimit && player.faceType != Face.TROLL && player.ears.type == Ears.TROLL) {
+					outputText("[pg]");
+					transformations.FaceTroll.applyEffect();
+					changes++;
+				}
+				if (rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.TROLL) {
+					outputText("[pg]");
+					transformations.ArmsTroll.applyEffect();
+					changes++;
+				}
+				if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.TROLL && player.arms.type == Arms.TROLL) {
+					outputText("[pg]");
+					transformations.LowerBodyTroll.applyEffect();
+					changes++;
+				}
+				if (rand(3) == 0 && changes < changeLimit && player.tailType != Tail.RED_PANDA && player.hasCock()) {
+					outputText("[pg]");
+					transformations.TailRedPanda.applyEffect();
+					changes++;
+				}
+			}
+			if (type == 1) {
+				if (player.basetallness < 98) {
+					outputText("[pg]Whoa wait did you just gain some height!? You indeed notice you've grown by a few inches.");
+					player.tallness += 1 + rand(3);
+				}
+				if (changes < changeLimit && rand(4) == 0 && player.eyes.type == Eyes.HUMAN && transformations.EyesChangeColor(["blue"]).isPossible()) {
+					transformations.EyesChangeColor(["blue"]).applyEffect(false);
+					outputText("[pg]You shiver as cold wind passes over your face. Something’s changed in your vision, and though you’re not sure what, you press on regardless. After going out and checking your reflection in a puddle, you discover your pupil color has changed to a blue as cold as ice. <b>You now have cold blue eyes.\n</b>");
+					changes++;
+				}
+				if (rand(3) == 0 && changes < changeLimit && player.ears.type != Ears.GLACIAL_TROLL) {
+					outputText("[pg]");
+					transformations.EarsGlacialTroll.applyEffect();
+					changes++;
+				}
+				if (rand(3) == 0 && changes < changeLimit && player.faceType != Face.GLACIAL_TROLL && player.ears.type == Ears.GLACIAL_TROLL) {
+					outputText("[pg]");
+					transformations.FaceGlacialTroll.applyEffect();
+					changes++;
+				}
+				if (rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.GLACIAL_TROLL) {
+					outputText("[pg]");
+					transformations.ArmsGlacialTroll.applyEffect();
+					changes++;
+				}
+				if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GLACIAL_TROLL && player.arms.type == Arms.GLACIAL_TROLL) {
+					outputText("[pg]");
+					transformations.LowerBodyGlacialTroll.applyEffect();
+					changes++;
+				}
+				if (rand(3) == 0 && changes < changeLimit && player.tailType != Tail.RED_PANDA && player.hasCock()) {
+					outputText("[pg]");
+					transformations.TailRedPanda.applyEffect();
+					changes++;
+				}
+			}
+		}
 		player.refillHunger(20);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 	}

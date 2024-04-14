@@ -3,9 +3,8 @@ import classes.BodyData;
 import classes.BodyParts.*;
 import classes.PerkLib;
 import classes.Race;
-public class TrollRace extends Race {
-    public static const TrollEyeColors:/*String*/Array = ["green", "grey"];
-	public static const RaceBody:/*String*/Array = [
+public class GlacialTrollRace extends Race {
+    public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
         /*Arms*/		"Human",
         /*Balls*/		"Human",
@@ -30,29 +29,29 @@ public class TrollRace extends Race {
         /*Vagina*/		"Human",
         /*Perks*/		"Human"];
 
-	public function TrollRace(id:int) {
-		super("Troll", id, []);//RaceBody);
+	public function GlacialTrollRace(id:int) {
+		super("Glacial Troll", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {
 		addScores()
-				.faceType(Face.TROLL, +1)
-				.earType(Ears.TROLL, +1)
-				.eyeTypeAndColor(Eyes.HUMAN, ANY(TrollEyeColors), +2)
-				.armType(Arms.TROLL, +2)
-				.legType(LowerBody.TROLL, +2)
+				.faceType(Face.GLACIAL_TROLL, +1)
+				.earType(Ears.GLACIAL_TROLL, +1)
+				.eyeTypeAndColor(Eyes.HUMAN, "blue", +2)
+				.armType(Arms.GLACIAL_TROLL, +2)
+				.legType(LowerBody.GLACIAL_TROLL, +2)
 				//.tailType(Tail., +1)
 				//.skinCoatType(Skin.FUR, +1)
 				.biggestTitSize(AT_MOST(2), +1)
 				.height(AT_LEAST(84), +1);
 		
-		buildTier(10, "troll")
+		buildTier(10, "glacial troll")
 				.buffs({
 					"str.mult": +0.30,
-					"tou.mult": +0.30,
-					"spe.mult": +0.20,
+					"tou.mult": +0.40,
+					"spe.mult": +0.10,
 					"int.mult": +0.20,
-					"wis.mult": +0.60
+					"wis.mult": +0.50
 				})
 				.end();
 	}
