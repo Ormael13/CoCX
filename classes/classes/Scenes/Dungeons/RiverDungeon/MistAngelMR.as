@@ -32,8 +32,8 @@ package classes.Scenes.Dungeons.RiverDungeon
 			outputText("\n\n");
 		}
 		private function AngelEnergyRaysD():void {
-			var damage:Number = eBaseWisdomDamage() * 0.55;
-			damage += eBaseIntelligenceDamage() * 0.15;
+			var damage:Number = eBaseWisdomDamage() * 0.65;
+			damage += eBaseIntelligenceDamage() * 0.17;
 			damage = Math.round(damage);
 			damage = player.takeMagicDamage(damage, true);
 		}
