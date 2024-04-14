@@ -16693,11 +16693,21 @@ public final class Mutations extends MutationsHelper {
 					transformations.LowerBodyTroll.applyEffect();
 					changes++;
 				}
-				if (rand(3) == 0 && changes < changeLimit && player.tailType != Tail.RED_PANDA && player.hasCock()) {
-					outputText("[pg]");
-					transformations.TailRedPanda.applyEffect();
+				if (rand(3) == 0 && changes < changeLimit && !player.hasCoatOfType(Skin.FUR)) {
+					if (!player.hasCoatOfType(Skin.FUR)) {
+						outputText("[pg]");
+						transformations.SkinPlain.applyEffect();
+					}
+					outputText("[pg]Your [skin.type] begins to tingle, then itch. ");
+					transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["green", "gray"]}).applyEffect();
 					changes++;
 				}
+				if (rand(3) == 0 && changes < changeLimit && player.tailType != Tail.TROLL && player.hasCock()) {
+					outputText("[pg]");
+					transformations.TailTroll.applyEffect();
+					changes++;
+				}
+				if (changes < changeLimit && rand(3) == 0) outputText(player.modFem(70, 3));
 			}
 			if (type == 1) {
 				if (player.basetallness < 98) {
@@ -16729,11 +16739,21 @@ public final class Mutations extends MutationsHelper {
 					transformations.LowerBodyGlacialTroll.applyEffect();
 					changes++;
 				}
-				if (rand(3) == 0 && changes < changeLimit && player.tailType != Tail.RED_PANDA && player.hasCock()) {
-					outputText("[pg]");
-					transformations.TailRedPanda.applyEffect();
+				if (rand(3) == 0 && changes < changeLimit && !player.hasCoatOfType(Skin.FUR)) {
+					if (!player.hasCoatOfType(Skin.FUR)) {
+						outputText("[pg]");
+						transformations.SkinPlain.applyEffect();
+					}
+					outputText("[pg]Your [skin.type] begins to tingle, then itch. ");
+					transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["blue", "white"]}).applyEffect();
 					changes++;
 				}
+				if (rand(3) == 0 && changes < changeLimit && player.tailType != Tail.GLACIAL_TROLL && player.hasCock()) {
+					outputText("[pg]");
+					transformations.TailGlacialTroll.applyEffect();
+					changes++;
+				}
+				if (changes < changeLimit && rand(3) == 0) outputText(player.modFem(55, 3));
 			}
 		}
 		player.refillHunger(20);

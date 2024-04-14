@@ -5,7 +5,8 @@ import classes.PerkLib;
 import classes.Race;
 public class TrollRace extends Race {
     public static const TrollEyeColors:/*String*/Array = ["green", "grey"];
-	public static const RaceBody:/*String*/Array = [
+	public static const TrollFurColors:/*String*/Array = ["green", "grey"];
+    public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
         /*Arms*/		"Human",
         /*Balls*/		"Human",
@@ -41,10 +42,17 @@ public class TrollRace extends Race {
 				.eyeTypeAndColor(Eyes.HUMAN, ANY(TrollEyeColors), +2)
 				.armType(Arms.TROLL, +2)
 				.legType(LowerBody.TROLL, +2)
-				//.tailType(Tail., +1)
-				//.skinCoatType(Skin.FUR, +1)
+				.skinCoatTypeAndColor1(Skin.FUR, ANY(TrollFurColors), +2)
 				.biggestTitSize(AT_MOST(2), +1)
-				.height(AT_LEAST(84), +1);
+				.height(AT_LEAST(84), +1)
+				.customRequirement("",'Glacial Troll Tail and having cock',
+						function (body:BodyData):Boolean {
+							return body.tailType == Tail.GLACIAL_TROLL && body.player.hasCock()
+						}, +1)
+				.customRequirement("",'Feminity <= 70',
+						function (body:BodyData):Boolean {
+							return body.player.femininity <= 70
+						}, +1);
 		
 		buildTier(10, "troll")
 				.buffs({

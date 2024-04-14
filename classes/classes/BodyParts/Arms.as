@@ -554,6 +554,7 @@ public class Arms extends BodyPart {
 	EnumValue.add(Types, GLACIAL_TROLL, "GLACIAL_TROLL", {
 		name:"g.troll",
 		appearanceDesc: "Your arms are covered with [fur color] fur. They end with somewhat human-like hands with sharp nails. Such dexterous hands are as adept at playing a piper as they would to draw out moans out of a partner.",
+		claw: true,
 		fur: true
 	});
 	

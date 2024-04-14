@@ -1737,6 +1737,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			needNext ||= player.gainOrLosePerk(PerkLib.Lustzerker, player.isAnyRaceCached(Races.SALAMANDER, Races.PHOENIX, Races.KITSHOO) || player.hasMutation(IMutationsLib.SalamanderAdrenalGlandsIM), "You start to feel a weird, slightly unpleasant feeling inside your body. Like many tiny flames coursing through your veins, making you ponder what is happening with your body. Remembering about salamanders' natural talent for entering a berserk-like state, you guess that should be it.", "All of a sudden, something changes inside your body. You think about it for a long time until it dawns on you. You can't feel that fire in your veins anymore, meaning for now, no more lustzerking.", player.perkv4(PerkLib.Lustzerker) == 0);
 			//Jungle’s Wanderer
 			needNext ||= player.gainOrLosePerk(PerkLib.JunglesWanderer, player.isRaceCached(Races.REDPANDA), "Your nimble body has adapted to moving through jungles and forests, evading enemy attacks with ease and making yourself harder to catch.", "You notice that you aren't as adept at manuevering through the jungle anymore.");
+			//Troll passives / perks
+			needNext ||= player.gainOrLosePerk(PerkLib.PheromoneCloud, player.isAnyRaceCached(Races.TROLL, Races.GLACIAL_TROLL) && player.hasVagina(), "You take a deep breath as your heart beats. You reflexively clench your legs at the thought of finding a man to slake your desires. The air around you feels dense as you notice a pheromone cloud is growing around you to attract another male.", "Your breathing gets a little easier as your heart rate slows slightly. You don't feel a need to find another male as the pheromone cloud around you dissipates.");
+			needNext ||= player.gainOrLosePerk(PerkLib.SpearAffinity, player.isAnyRaceCached(Races.TROLL, Races.GLACIAL_TROLL), "As your thoughts coalesce together, you can feel your hands itching for a proper spear to wield. You feel invigorated and ready to use it with deadly force as needed.", "Your fingers twitch and your take a moment to look at your hands, you don't feel the same knack as you used to for holding a spear.");
+			needNext ||= player.gainOrLosePerk(PerkLib.TrollResistance, player.isAnyRaceCached(Races.TROLL, Races.GLACIAL_TROLL), "You reflexively scratch your coat of fur, feeling the luxurious softness beneath your fingers. You feel a sense of safety, as if you were impenetrable to outside forces. Maybe not invicible, but magic should be a little less effective on you.", "You scratch you arm as you can no longer feel that same protective aura around yourself from your fur. You feel less protected from magical forces now.");
 
 			if (player.hasKeyItem("Gleipnir Collar") >= 0) {
 				//Freezing Breath
@@ -1782,12 +1786,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.FreezingBreathYeti, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if ((player.isRaceCached(Races.MELKIE) || player.isRaceCached(Races.FROSTWYRM)) && !player.hasPerk(PerkLib.ColdAffinity)) {
+			if ((player.isRaceCached(Races.MELKIE) || player.isRaceCached(Races.FROSTWYRM) || player.isRaceCached(Races.GLACIAL_TROLL)) && !player.hasPerk(PerkLib.ColdAffinity)) {
 				outputText("\nYou suddenly no longer feel the cold so you guess you finally got acclimated to the icy winds of the glacial rift. You feel at one with the cold. So well that you actually developed icy power of your own.\n\n(<b>Gained Perks: Cold Affinity</b>)\n");
 				player.createPerk(PerkLib.ColdAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if (!player.isRaceCached(Races.YETI) && !player.isRaceCached(Races.YUKIONNA) && !player.isRaceCached(Races.MELKIE) && !player.isRaceCached(Races.FROSTWYRM) && !player.perkv1(IMutationsLib.WhaleFatIM) >= 1 && !player.hasPerk(PerkLib.SnowLily) && player.hasPerk(PerkLib.ColdAffinity)) {
+			else if (!player.isRaceCached(Races.YETI) && !player.isRaceCached(Races.YUKIONNA) && !player.isRaceCached(Races.MELKIE) && !player.isRaceCached(Races.FROSTWYRM) && !player.isRaceCached(Races.GLACIAL_TROLL) && !player.perkv1(IMutationsLib.WhaleFatIM) >= 1 && !player.hasPerk(PerkLib.SnowLily) && player.hasPerk(PerkLib.ColdAffinity)) {
 				outputText("\nYou suddenly feel a chill in the air. You guess you somehow no longer resist the cold.\n\n<b>(Lost Perks: Cold Affinity");
 				player.removePerk(PerkLib.ColdAffinity);
 				if (player.hasPerk(PerkLib.FreezingBreathYeti)){
