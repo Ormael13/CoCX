@@ -105,7 +105,7 @@ import classes.internals.*;
 			this.gems = 70 + rand(80);
 			this.drop = new WeightedDrop().add(consumables.TROLFIG, 5)
 					.add(consumables.HEALHERB, 2);
-			this.createPerk(PerkLib.HydraRegeneration, 3, 0, 0, 0);
+			this.createPerk(PerkLib.TrollRegeneration, 3, 0, 0, 0);
 			this.createPerk(PerkLib.TrollResistance, 0, 0, 0, 0);
 			checkMonster();
 		}

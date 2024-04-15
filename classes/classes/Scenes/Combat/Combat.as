@@ -3258,7 +3258,7 @@ public class Combat extends BaseContent {
 					monster.teased(lustDMG, false);
 					combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 					if (player.hasPerk(PerkLib.VerdantLeech)) {
-						if (monster.lustVuln != 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.01;
+						if (monster.lustVuln != 0 && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.01;
 						HPChange(Math.round(player.maxHP() * 0.05), false);
 					}
 					if (monster.hasStatusEffect(StatusEffects.Rosethorn) && monster.statusEffectv1(StatusEffects.Rosethorn) < 6) monster.addStatusValue(StatusEffects.Rosethorn, 1, 1);
@@ -3391,7 +3391,7 @@ public class Combat extends BaseContent {
                         if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
                         if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
                         monster.teased(lustDmg);
-                        if (monster.lustVuln > 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) {
+                        if (monster.lustVuln > 0 && !player.enemiesImmuneToLustResistanceDebuff()) {
                             monster.lustVuln += 0.01;
                             if (monster.lustVuln > 1) monster.lustVuln = 1;
                         }
@@ -4870,7 +4870,7 @@ public class Combat extends BaseContent {
                             var lustDmg:int = 6 * monster.lustVuln;
                             lustDmg *= sharedVenomMulti;
                             monster.teased(lustDmg);
-                            if (monster.lustVuln > 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) {
+                            if (monster.lustVuln > 0 && !player.enemiesImmuneToLustResistanceDebuff()) {
                                 monster.lustVuln += 0.01;
                                 if (monster.lustVuln > 1) monster.lustVuln = 1;
                             }
@@ -6456,7 +6456,7 @@ public class Combat extends BaseContent {
                                     if (player.armor == armors.ELFDRES && player.isElf()) lustdamage *= 2;
                                     if (player.armor == armors.FMDRESS && player.isWoodElf()) lustdamage *= 2;
                                     monster.teased(lustDmg);
-                                    if (monster.lustVuln > 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) {
+                                    if (monster.lustVuln > 0 && !player.enemiesImmuneToLustResistanceDebuff()) {
                                         monster.lustVuln += 0.01;
                                         if (monster.lustVuln > 1) monster.lustVuln = 1;
                                     }
@@ -8597,12 +8597,10 @@ public class Combat extends BaseContent {
         //Keep shit in bounds.
         if (monster.HP < monster.minHP()) monster.HP = monster.minHP();
         if (monster.hasPerk(PerkLib.HydraRegeneration)) {
-            if (monster is Hydra) {
-				monster.createStatusEffect(StatusEffects.HydraRegenerationDisabled, 5, 0, 0, 0);
-				outputText(" The hydra hisses in anger as her wound cauterised, preventing regeneration. It's the time to strike!");
-			}
-			if (monster is CorruptedMaleTroll || monster is CorruptedFemaleTroll || monster is Zenji) monster.createStatusEffect(StatusEffects.HydraRegenerationDisabled, 2, 0, 0, 0);
+            monster.createStatusEffect(StatusEffects.HydraRegenerationDisabled, 5, 0, 0, 0);
+			outputText(" [Themonster] hisses in anger as [monster his] wound cauterised, preventing regeneration. It's the time to strike!");
         }
+		if (monster.hasPerk(PerkLib.TrollRegeneration)) monster.createStatusEffect(StatusEffects.TrollRegenerationDisabled, 2, 0, 0, 0);
         if (monster.hasStatusEffect(StatusEffects.IceArmor)) {
             monster.addStatusValue(StatusEffects.IceArmor, 1, -1);
             outputText(" The icy shield encasing [themonster] begins to melt from the heat.");
@@ -9579,7 +9577,7 @@ public class Combat extends BaseContent {
 			}
         }
         //Apophis Unholy Aura
-        if (player.isRaceCached(Races.APOPHIS) && monster.lustVuln > 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel) && !flags[kFLAGS.DISABLE_AURAS]) {
+        if (player.isRaceCached(Races.APOPHIS) && monster.lustVuln > 0 && !player.enemiesImmuneToLustResistanceDebuff() && !flags[kFLAGS.DISABLE_AURAS]) {
             outputText("Your unholy aura seeps into [themonster], slowly and insidiously eroding its resiliance to your unholy charms.\n\n");
             monster.lustVuln += 0.10;
         }
@@ -9741,7 +9739,7 @@ public class Combat extends BaseContent {
             lustDmgA = combat.fixPercentLust(lustDmgA);
             monster.teased(Math.round(lustDmgA), false);
             outputText("\n\n");
-			if (player.hasPerk(PerkLib.Nightshade) && monster.lustVuln > 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) {
+			if (player.hasPerk(PerkLib.Nightshade) && monster.lustVuln > 0 && !player.enemiesImmuneToLustResistanceDebuff()) {
 				monster.lustVuln += 0.05;
 				if (monster.lustVuln > 1) monster.lustVuln = 1;
 			}
@@ -10395,6 +10393,11 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         if (player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) {
             player.addStatusValue(StatusEffects.HydraRegenerationDisabled, 1, -1);
             if (player.statusEffectv1(StatusEffects.HydraRegenerationDisabled) <= 0) player.removeStatusEffect(StatusEffects.HydraRegenerationDisabled);
+        }
+        //Troll Regeneration Inhibition
+        if (player.hasStatusEffect(StatusEffects.TrollRegenerationDisabled)) {
+            player.addStatusValue(StatusEffects.TrollRegenerationDisabled, 1, -1);
+            if (player.statusEffectv1(StatusEffects.TrollRegenerationDisabled) <= 0) player.removeStatusEffect(StatusEffects.TrollRegenerationDisabled);
         }
         //Giant boulder
         if (player.hasStatusEffect(StatusEffects.GiantBoulder)) {
@@ -11071,7 +11074,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
                 player.addStatusValue(StatusEffects.CooldownTremor, 1, -1);
             }
         }
-        //Tremor
+        //Thunder Gore
         if (player.hasStatusEffect(StatusEffects.CooldownThunderGore)) {
             if (player.statusEffectv1(StatusEffects.CooldownThunderGore) <= 0) {
                 player.removeStatusEffect(StatusEffects.CooldownThunderGore);
@@ -11085,6 +11088,14 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
                 player.removeStatusEffect(StatusEffects.CooldownCharging);
             } else {
                 player.addStatusValue(StatusEffects.CooldownCharging, 1, -1);
+            }
+        }
+        //Feint Bash
+        if (player.hasStatusEffect(StatusEffects.CooldownFeintBash)) {
+            if (player.statusEffectv1(StatusEffects.CooldownFeintBash) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownFeintBash);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownFeintBash, 1, -1);
             }
         }
         //Net
@@ -11345,7 +11356,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 		if (subtype == 1) combat.teaseXP((1 + combat.bonusExpAfterSuccesfullTease()*2));
 		else combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		if (player.hasPerk(PerkLib.VerdantLeech)) {
-			if (monster.lustVuln != 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.025;
+			if (monster.lustVuln != 0 && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.025;
 			HPChange(Math.round(player.maxHP() * 0.01), false);
 		}
 	}
@@ -11461,6 +11472,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) maxPercentRegen += 1;
 		if (player.hasStatusEffect(StatusEffects.PostfluidIntakeRegeneration)) maxPercentRegen += 1 * (player.perkv1(IMutationsLib.SlimeMetabolismIM)-2);
         if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxPercentRegen += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
+		if (player.hasPerk(PerkLib.TrollRegeneration) && !player.hasStatusEffect(StatusEffects.TrollRegenerationDisabled)) maxPercentRegen += 3;
         if (player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 1;
         if (player.hasPerk(PerkLib.FleshBodyApprenticeStage)) maxPercentRegen += 0.5 * player.humanBodyCultivators();
         if (player.hasPerk(PerkLib.FleshBodyWarriorStage)) maxPercentRegen += 0.5 * player.humanBodyCultivators();
@@ -11522,6 +11534,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) maxRegen += 1;
 		if (player.hasStatusEffect(StatusEffects.PostfluidIntakeRegeneration)) maxRegen += 1 * (player.perkv1(IMutationsLib.SlimeMetabolismIM)-2);
         if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxRegen += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
+		if (player.hasPerk(PerkLib.TrollRegeneration) && !player.hasStatusEffect(StatusEffects.TrollRegenerationDisabled)) maxRegen += 3;
         if (isNearWater() && (player.hasPerk(PerkLib.AquaticAffinity) || player.hasPerk(PerkLib.AffinityUndine)) && player.necklaceName == "Magic coral and pearl necklace") maxRegen += 1;
         //if (player.hasStatusEffect(StatusEffects.GnomeHomeBuff) && player.statusEffectv1(StatusEffects.GnomeHomeBuff) == 1) maxRegen += 15;
 		if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator) && !player.hasStatusEffect(StatusEffects.WereraceRegenerationDisabled)) {
@@ -11585,6 +11598,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 		if (player.perkv1(IMutationsLib.HumanBloodstreamIM) >= 2 && player.racialScore(Races.HUMAN) > 17) fatiguecombatrecovery += 5;
 		if (player.perkv1(IMutationsLib.HumanBloodstreamIM) >= 3 && player.racialScore(Races.HUMAN) > 17) fatiguecombatrecovery += 5;
         if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) fatiguecombatrecovery += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
+		if (player.hasPerk(PerkLib.TrollRegeneration) && !player.hasStatusEffect(StatusEffects.TrollRegenerationDisabled)) fatiguecombatrecovery += 3;
         if (player.hasPerk(PerkLib.JobGunslinger)) fatiguecombatrecovery += 1;
 		if (maxFirearmAttacks >= 2) fatiguecombatrecovery += 1;
 		if (maxFirearmAttacks >= 2) fatiguecombatrecovery += 1;
@@ -13274,7 +13288,7 @@ public function StraddleTease():void {
     if (rand(100) < critChance) {
         randomcrit = true;
         straddleDamage *= 1.75;
-        if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.05;
+        if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.05;
     }
     straddleDamage = (straddleDamage) * monster.lustVuln;
     if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) straddleDamage *= 2;
@@ -13879,7 +13893,7 @@ public function ScyllaTease():void {
             if (rand(100) < critChance) {
                 crit = true;
                 damage *= 1.75;
-                if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.05;
+                if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.05;
             }
             if (player.hasPerk(PerkLib.KrakenBlackDress)) damage *= 2;
             monster.teased(Math.round(monster.lustVuln * damage));
@@ -14034,7 +14048,7 @@ public function SwallowTease():void {
             if (rand(100) < critChance) {
                 crit = true;
                 damage *= 1.75;
-                if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.05;
+                if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.05;
             }
             monster.teased(Math.round(monster.lustVuln * damage));
             if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 20) {
@@ -14188,7 +14202,7 @@ public function WebTease():void {
             if (rand(100) < critChance) {
                 crit = true;
                 damage *= 1.75;
-                if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.05;
+                if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.05;
             }
             monster.teased(Math.round(monster.lustVuln * damage), false);
             outputText(" Your unwilling toy makes an involuntary moan letting you know that your touch hit the mark.");
@@ -14297,7 +14311,7 @@ public function GooTease():void {
             if (rand(100) < critChance) {
                 crit = true;
                 damage *= 1.75;
-                if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.05;
+                if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.05;
             }
             monster.teased(Math.round(monster.lustVuln * damage));
             if (crit) outputText(" <b>Critical!</b>");
@@ -14412,7 +14426,7 @@ public function ManticoreFeed():void {
         if (rand(100) < critChance) {
             crit = true;
             damage *= 1.75;
-            if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.05;
+            if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.05;
         }
         monster.teased(Math.round(monster.lustVuln * damage), false);
         if (crit) outputText(" <b>Critical!</b>");
@@ -14478,7 +14492,7 @@ public function displacerFeedContinue():void {
         if (rand(100) < critChance) {
             crit = true;
             damage *= 1.75;
-            if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.05;
+            if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.05;
         }
         monster.teased(Math.round(monster.lustVuln * damage), false);
         if (crit) outputText(" <b>Critical!</b>");
@@ -14545,7 +14559,7 @@ public function SlimeRapeFeed():void {
         if (rand(100) < critChance) {
             crit = true;
             damage *= 1.75;
-            if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.05;
+            if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.05;
         }
         monster.teased(Math.round(monster.lustVuln * damage), false);
         if (crit) outputText(" <b>Critical!</b>");

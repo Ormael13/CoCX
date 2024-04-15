@@ -143,6 +143,21 @@ public class PhysicalSpecials extends BaseCombatContent {
 						bd = buttons.add("Devastating Bite", devastatingBiteAttack).hint("Attempt to bite your opponent with your giant sandworm maw. (deal acid dmg)");
 						if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 					}
+					//Troll specials
+					if ((player.faceType == Face.TROLL || player.faceType == Face.GLACIAL_TROLL) && player.isAnyRaceCached([Races.TROLL, Races.GLACIAL_TROLL])) {
+						bd = buttons.add("Feint Bash", feintBash).hint("Go in for a strike against your opponent, but instead bash them with your tusks in an attempt to stun them.");
+						if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(50));
+						else bd.requireFatigue(physicalCost(25));
+						if (player.hasStatusEffect(StatusEffects.CooldownFeintBash)) {
+							bd.disable("<b>You need more time before you can perform Thunder Gore again.</b>\n\n");
+							if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+						}
+					}
+					if (player.arms.type == Arms.GLACIAL_TROLL && player.isRaceCached(Races.GLACIAL_TROLL)) {
+						bd = buttons.add("Savage Claws", savageClaws).hint("Your claws are sharp like other glacial trolls, they can easily rip and grip into things as well as tear through objects.");
+						if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(200));
+						else bd.requireFatigue(physicalCost(100));
+					}
 					//Constrict
 					if (player.isNaga()) {
 						bd = buttons.add("Constrict", SceneLib.desert.nagaScene.nagaPlayerConstrict).hint("Attempt to bind an enemy in your long snake-tail.");
@@ -1285,7 +1300,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 							if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 							lustDmg *= monster.lustVuln;
 							monster.teased(lustDmg);
-							if (monster.lustVuln > 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) {
+							if (monster.lustVuln > 0 && !player.enemiesImmuneToLustResistanceDebuff()) {
 								monster.lustVuln += 0.01;
 								if (monster.lustVuln > 1) monster.lustVuln = 1;
 							}
@@ -3023,7 +3038,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			monster.teased(lustDmgF,false);
 			if (crit) outputText(" <b>Critical!</b>");
 			combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-			if (monster.lustVuln > 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) {
+			if (monster.lustVuln > 0 && !player.enemiesImmuneToLustResistanceDebuff()) {
 				monster.lustVuln += 0.05;
 				if (monster.lustVuln > 1) monster.lustVuln = 1;
 			}
@@ -4409,7 +4424,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					lustDmg *= d3Bdcc;
 					monster.teased(Math.round(monster.lustVuln * lustDmg), true);
 					combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-					if (monster.lustVuln > 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) {
+					if (monster.lustVuln > 0 && !player.enemiesImmuneToLustResistanceDebuff()) {
 						monster.lustVuln += 0.05;
 						if (monster.lustVuln > 1) monster.lustVuln = 1;
 					}
@@ -4868,7 +4883,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 				monster.removeStatusEffect(StatusEffects.GoreBleed);
 				monster.createStatusEffect(StatusEffects.GoreBleed,16,0,0,0);
 			}
-			if (!monster.hasStatusEffect(StatusEffects.Stunned)) monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);else {
+			if (!monster.hasStatusEffect(StatusEffects.Stunned)) monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
+			else {
 				monster.removeStatusEffect(StatusEffects.Stunned);
 				monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
 			}
@@ -5640,6 +5656,103 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (!combatIsOver())enemyAI();
 	}
 
+	public function feintBash():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		clearOutput();
+		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownFeintBash,4,0,0,0);
+		else player.createStatusEffect(StatusEffects.CooldownFeintBash,5,0,0,0);
+		if (player.hasPerk(PerkLib.PhantomStrike)) fatigue(50, USEFATG_PHYSICAL);
+		else fatigue(25, USEFATG_PHYSICAL);
+		outputText("You prepare to swing at your opponent with your [weapon], but as they ready to defend themselves, you abruptly charge forward and bash them with your tusks.  ");
+		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
+			outputText("Your opponent was wary enough and barely dodges your tusks.");
+			enemyAI();
+			return;
+		}
+		var damage:int = 10 + (player.str / 1.5) + rand(player.str / 2);
+		damage = combat.statusEffectBonusDamage(damage);
+		doDamage(damage);
+		if (player.hasPerk(PerkLib.PhantomStrike)) {
+			doDamage(damage);
+			damage *= 2;
+		}
+		outputText("You successfully bash your opponent with your tusks");
+		if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
+			outputText(", briefly disorienting "+(monster.plural?"them":"it")+"");
+			monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
+		} else {
+			monster.removeStatusEffect(StatusEffects.Stunned);
+			monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
+		}
+		outputText(". ");
+		checkAchievementDamage(damage);
+		outputText("\n\n");
+		enemyAI();
+	}
+
+	public function savageClaws():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		clearOutput();
+		if (player.hasPerk(PerkLib.PhantomStrike)) fatigue(200, USEFATG_PHYSICAL);
+		else fatigue(100, USEFATG_PHYSICAL);
+		if (combat.checkConcentration()) return; //Amily concentration
+		outputText("You ready your claws and charge at your opponent. ");
+		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
+			outputText("But your claws don't connect as they avoid your oncoming attack.");
+			enemyAI();
+			return;
+		}
+		outputText("Your claws rip into them, as you ravage your opponent. ");
+		var damage:Number = 0;
+		damage += combat.meleeUnarmedDamageNoLagSingle();
+		//addictive bonuses
+		if (player.hasPerk(PerkLib.IronFistsI)) damage += 10;
+		if (player.hasPerk(PerkLib.IronFistsII)) damage += 10;
+		if (player.hasPerk(PerkLib.IronFistsIII)) damage += 10;
+		if (player.hasPerk(PerkLib.IronFistsIV)) damage += 10;
+		if (player.hasPerk(PerkLib.IronFistsV)) damage += 10;
+		if (player.hasPerk(PerkLib.IronFistsVI)) damage += 10;
+		if (player.hasPerk(PerkLib.JobBrawler)) damage += (5 * (1 + player.newGamePlusMod()));
+		if (player.hasPerk(PerkLib.JobMonk)) damage += (10 * (1 + player.newGamePlusMod()));
+		if (player.hasStatusEffect(StatusEffects.Berzerking)) damage += (30 + (15 * player.newGamePlusMod()));
+		if (player.hasStatusEffect(StatusEffects.Lustzerking)) damage += (30 + (15 * player.newGamePlusMod()));
+		//multiplicative bonuses
+		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
+		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
+		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
+		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
+		if (player.hasPerk(PerkLib.JobBeastWarrior)) damage *= 1.1;
+		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
+		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
+		if (player.armor == armors.SPKIMO) damage *= 1.2;
+		if (player.hasPerk(PerkLib.OniTyrantKimono)) damage *= 2;
+		if (player.hasPerk(PerkLib.OniEnlightenedKimono)) damage *= 1.5;
+		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
+		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combat.combatPhysicalCritical();
+		if (player.hasPerk(PerkLib.Blademaster)) critChance += 5;
+		if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
+		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			var buffMultiplier:Number = 0;
+			buffMultiplier += combat.bonusCriticalDamageFromMissingHP();
+			damage *= (1.75 + buffMultiplier);
+		}
+		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
+		damage = Math.round(damage);
+		doDamage(damage, true, true);
+		if (player.hasPerk(PerkLib.PhantomStrike)) doDamage(damage, true, true);
+		outputText("\n\n");
+		enemyAI();
+	}
+
 	public function shieldBash():void {
 		clearOutput();
 		EngineCore.WrathChange(-shieldbashcostly());
@@ -6022,7 +6135,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
 					if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 					monster.teased(lustDmg*Omnishot);
-					if (monster.lustVuln > 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) {
+					if (monster.lustVuln > 0 && !player.enemiesImmuneToLustResistanceDebuff()) {
 						monster.lustVuln += 0.01;
 						if (monster.lustVuln > 1) monster.lustVuln = 1;
 					}
