@@ -556,6 +556,27 @@ package classes.GeneticMemories {
           title: "Reindeer Legs",
           transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyReindeerToggle(true)}});
 
+      public static const MOTH: int = _partid++;
+      EnumValue.add(Memories, MOTH, "MOTH", {
+          id: "Moth Lower Body",name: "Moth Legs",
+          cost: 100,
+          title: "Moth Legs",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyMoth}});
+
+      public static const TROLL: int = _partid++;
+      EnumValue.add(Memories, TROLL, "TROLL", {
+          id: "Troll Lower Body",name: "Troll Legs",
+          cost: 100,
+          title: "Troll Legs",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyTroll}});
+
+      public static const GLACIAL_TROLL: int = _partid++;
+      EnumValue.add(Memories, GLACIAL_TROLL, "GLACIAL_TROLL", {
+          id: "G.Troll Lower Body",name: "G.Troll Legs",
+          cost: 100,
+          title: "G.Troll Legs",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyGlacialTroll}});
+
       public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

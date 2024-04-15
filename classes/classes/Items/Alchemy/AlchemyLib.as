@@ -717,6 +717,10 @@ public class AlchemyLib extends BaseContent {
 		short: "Moth",
 		name : "Moth"
 	});
+	public static const AE_GLACIAL_TROLL:int           = EnumValue.add(Essences, 218, "GLACIAL_TROLL", {
+		short: "GTroll",
+		name : "Glacial Troll"
+	});
 	public static function DEFAULT_ESSENCE_DROP_TABLE(mainEssencee:int, withHuman:Boolean = false):Array {
 		var result:Array = [
 			[10, mainEssencee],

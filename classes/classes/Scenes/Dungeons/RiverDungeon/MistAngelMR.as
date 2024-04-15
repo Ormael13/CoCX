@@ -32,7 +32,7 @@ package classes.Scenes.Dungeons.RiverDungeon
 			outputText("\n\n");
 		}
 		private function AngelEnergyRaysD():void {
-			var damage:Number = eBaseWisdomDamage() * 0.85;
+			var damage:Number = eBaseWisdomDamage() * 0.65;
 			damage += eBaseIntelligenceDamage() * 0.17;
 			damage = Math.round(damage);
 			damage = player.takeMagicDamage(damage, true);
@@ -125,8 +125,8 @@ package classes.Scenes.Dungeons.RiverDungeon
 			this.short = "mid-rank angel of mist";
 			this.imageName = "angel";
 			this.long = "";
-			initStrTouSpeInte(14, 170, 90, 40);
-			initWisLibSensCor(240, 4, 70, 0);
+			initStrTouSpeInte(18, 200, 110, 60);
+			initWisLibSensCor(270, 6, 90, 0);
 			this.tallness = 30;
 			this.randomDropChance = 0.2;
 			this.randomDropParams = {
@@ -136,8 +136,8 @@ package classes.Scenes.Dungeons.RiverDungeon
 					.add(useables.SRESIDUE, 0.5)
 					.add(useables.PCSHARD, 1);
 			this.level = 58;
-			this.bonusHP =2000;
-			this.bonusLust = 132;
+			this.bonusHP = 2000;
+			this.bonusLust = 154;
 			this.bonusWrath = 400;
 			this.bonusSoulforce = 1000;
 			this.additionalXP = 250;

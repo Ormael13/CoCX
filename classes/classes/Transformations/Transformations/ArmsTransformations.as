@@ -1368,6 +1368,42 @@ public class ArmsTransformations extends MutationsHelper {
 				return player.arms.type === Arms.SATYR;
 			}
 	);
+
+	public const ArmsTroll: Transformation = new SimpleTransformation("Troll Arms",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
+				desc += " You feel your fingers tighten as they feel more dexterous. You look down and before you know it you’ve lost a finger, the rest seem slightly bigger now as well. <b>You now have troll arms!</b>!";
+
+				player.arms.type = Arms.TROLL;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.TROLL));
+			},
+			// is present
+			function (): Boolean {
+				return player.arms.type === Arms.TROLL;
+			}
+	);
+
+	public const ArmsGlacialTroll: Transformation = new SimpleTransformation("Glacial Troll Arms",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
+				desc += " You can feel your nails elongate and sharpen, before you know it you have claws! As this happens they feel more dexterous. You look down and before you know it you’ve lost a finger, the rest seem slightly bigger now as well. <b>You now have glacial troll arms!</b>!";
+
+				player.arms.type = Arms.GLACIAL_TROLL;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.GLACIAL_TROLL));
+			},
+			// is present
+			function (): Boolean {
+				return player.arms.type === Arms.GLACIAL_TROLL;
+			}
+	);
 	/*
   */
 }

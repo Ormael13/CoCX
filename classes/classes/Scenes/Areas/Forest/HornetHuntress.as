@@ -25,7 +25,7 @@ import classes.Scenes.Areas.Forest.HornetGirl;
 			super();
 			this.a = "a ";
 			this.short = "hornet huntress";
-			this.long = "A hornet huntress buzzes around you, filling the air with intoxicatingly sweet scents and a buzz that gets inside your head.  She has a humanoid face with small antennae, black chitin on her quad arms and legs that looks like shiny gloves and boots, sizable breasts, and a swollen abdomen tipped with a gleaming stinger.";
+			this.long = "A hornet huntress buzzes around you, filling the air with intoxicatingly sweet scents and a buzz that gets inside your head.  She has a humanoid face with small antennae, black chitin on her arms and legs that looks like shiny gloves and boots, sizable breasts, and a swollen abdomen tipped with a gleaming stinger.";
 			createBreastRow(Appearance.breastCupInverse("EE_BIG"));
 			initStrTouSpeInte(50, 100, 50, 35);
 			initWisLibSensCor(35, 90, 75, 0);

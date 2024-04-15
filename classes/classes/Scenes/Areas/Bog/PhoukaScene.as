@@ -255,18 +255,13 @@ public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 			}
 			flags[kFLAGS.PREGNANCY_CORRUPTION]++; //Faerie or phouka babies become more corrupted, no effect if the player is not pregnant or on other types of babies
 			consumables.P_WHSKY.phoukaWhiskeyAddStatus(player);
-			if (player.tou < 30) {
+			if (player.touStat.core.value < 30) {
 				outputText("\n\nYou quickly end up drunk and begin a rambling story about your adventures.  The phooka is a good listener, though he asks for lots of detail whenever you bring up sex or potential sex of any kind.  You realize you're in real trouble, turned on and watching the phouka stroking his cock, which is still hard despite the alcohol he's been downing.  He notices your interest and says <i>\"Now that you're relaxed, let's go for the main course.  I'll make sure you'll remember it even once you're sober.\"</i>");
-
 				menu();
 				phoukaSexAddStandardMenuChoices();
 			}
-			if (player.tou < 70) {
-				outputText("  It looks like the phouka is holding his liquor about as well as you are.");
-			}
-			else {
-				outputText("  It seems you can handle your liquor better than the phouka.");
-			}
+			else if (player.touStat.core.value < 70) outputText("  It looks like the phouka is holding his liquor about as well as you are.");
+			else outputText("  It seems you can handle your liquor better than the phouka.");
 			outputText("  Soon both of you start to share stories about your adventures in Mareth.");
 			phoukaDrinkTalk(false);
 		}

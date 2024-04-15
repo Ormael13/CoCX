@@ -5480,6 +5480,14 @@ public class Combat extends BaseContent {
 				damage += scalingBonusIntelligence() * 0.2;
 				if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) damage*=1+(0.2*player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4));
 			}
+			else if (player.hasPerk(PerkLib.SpearAffinity)) {
+				damage += player.str * 1.15;
+				damage += scalingBonusStrength() * 0.23;
+				damage += player.spe * 0.15;
+				damage += scalingBonusSpeed() * 0.03;
+				damage += player.wis * 0.15;
+				damage += scalingBonusWisdom() * 0.03;
+			}
 			else if (player.weapon == weapons.MGSWORD || player.weapon == weapons.MCLAWS || player.weapon is Tidarion || player.isInGoblinMech() || player.isInNonGoblinMech()) {
 				damage += player.inte;
 				damage += scalingBonusIntelligence() * 0.2;
@@ -9738,6 +9746,22 @@ public class Combat extends BaseContent {
 				if (monster.lustVuln > 1) monster.lustVuln = 1;
 			}
             if (player.hasPerk(PerkLib.EromancyMaster)) teaseXP(1 + bonusExpAfterSuccesfullTease());
+        }
+        //Pheromone Cloud
+        if (player.hasPerk(PerkLib.PheromoneCloud) && monster.lustVuln > 0 && !flags[kFLAGS.DISABLE_AURAS]) {
+			outputText("Your pheromone cloud is currently exuding it’s aura on your potential mate. ");
+			if (monster.cocks.length > 0) {
+				outputText("[monster He] cock"+(monster.plural?"s are":" is")+" already beginning to leak pre.");
+				var lustDmgPC:Number = (scalingBonusLibido() * 0.5);
+				lustDmgPC = teases.teaseAuraLustDamageBonus(monster, lustDmgPC);
+				if (player.hasPerk(PerkLib.RacialParagon)) lustDmgPC *= RacialParagonAbilityBoost();
+				lustDmgPC *= monster.lustVuln;
+				lustDmgPC = combat.fixPercentLust(lustDmg);
+				monster.teased(Math.round(lustDmgPC), false);
+				outputText("\n\n");
+				if (player.hasPerk(PerkLib.EromancyMaster)) teaseXP(1 + bonusExpAfterSuccesfullTease());
+			}
+			else outputText("But it’s ineffective since they lack a penis.");
         }
         //Lust storm
         if (player.hasStatusEffect(StatusEffects.lustStorm)) {

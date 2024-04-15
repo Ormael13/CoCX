@@ -286,6 +286,18 @@ public class Ears extends BodyPart {
 		appearanceDesc: "A pair of jackal ears that gives you an austere outlook. With that kind of getup no one can question that you are the one in charge.",
 		fur: true
 	});
+	public static const TROLL: int = 47;
+	EnumValue.add(Types, TROLL, "TROLL", {
+		name: "troll",
+		appearanceDesc: "A pair of troll ears stick out from the sides of your head, each covered in soft, green fur.",
+		fur: true
+	});
+	public static const GLACIAL_TROLL: int = 48;
+	EnumValue.add(Types, GLACIAL_TROLL, "GLACIAL_TROLL", {
+		name: "g.troll",
+		appearanceDesc: "A pair of glacial troll ears stick out from the sides of your head, each covered in soft, white fur.",
+		fur: true
+	});
 	
 	public static const HoleEars:/*String*/Array = [LIZARD, DRAGON, ORCA2, AVIAN, INSECT];
 	

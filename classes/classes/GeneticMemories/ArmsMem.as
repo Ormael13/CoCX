@@ -556,7 +556,7 @@ import classes.CoC;
             cost: 100,
             title: "Satyr",
             transformation: function(): Transformation {
-                return CoC.instance.transformations.ArmsSphinx;
+                return CoC.instance.transformations.ArmsSatyr;
             }
         });
 
@@ -755,6 +755,39 @@ import classes.CoC;
 			title: "Reindeer",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.ArmsReindeer;
+			}
+		});
+
+		public static const MOTH:int = _partid++;
+		EnumValue.add(Memories, MOTH, "MOTH", {
+			id: "Moth Arms",
+			name: "Moth Arms",
+			cost: 100,
+			title: "Moth",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsMoth;
+			}
+		});
+
+		public static const TROLL:int = _partid++;
+		EnumValue.add(Memories, TROLL, "TROLL", {
+			id: "Troll Arms",
+			name: "Troll Arms",
+			cost: 100,
+			title: "Troll",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsTroll;
+			}
+		});
+
+		public static const GLACIAL_TROLL:int = _partid++;
+		EnumValue.add(Memories, GLACIAL_TROLL, "GLACIAL_TROLL", {
+			id: "G.Troll Arms",
+			name: "G.Troll Arms",
+			cost: 100,
+			title: "G.Troll",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsGlacialTroll;
 			}
 		});
 

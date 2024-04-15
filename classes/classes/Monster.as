@@ -972,6 +972,7 @@ import classes.Scenes.Combat.CombatAbilities;
 				var ar:int = game.player.weapon.effectPower(IELib.ArmorReduction);
 				armorMod -= ar;
 				var ap:int = game.player.weapon.effectPower(IELib.ArmorPenetration);
+				if (game.player.isSpearTypeWeapon() && game.player.hasPerk(PerkLib.SpearAffinity)) ap = 100;
 				armorMod *= (100 - ap) / 100;
 			}
 			if (game.player.hasPerk(PerkLib.LungingAttacks)) armorMod *= 0.5;

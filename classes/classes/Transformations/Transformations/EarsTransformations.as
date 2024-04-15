@@ -814,6 +814,40 @@ public class EarsTransformations extends MutationsHelper {
 				return player.ears.type === Ears.JACKAL;
 			}
 	);
+
+	public const EarsTroll: Transformation = new SimpleTransformation("Troll Ears",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "Your ears prickle and itch as you feel the cartilage shift and contort as your skin is stretched taut. You can feel your ears growing, gaining an acute sense of hearing as fur starts to coat your ears. <b>Your hand reaches up as the transformation stops and you realize that you now have troll ears!</b>";
+
+				player.ears.type = Ears.TROLL;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.TROLL));
+			},
+			// is present
+			function (): Boolean {
+				return player.ears.type === Ears.TROLL;
+			}
+	);
+
+	public const EarsGlacialTroll: Transformation = new SimpleTransformation("Glacial Troll Ears",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "Your ears prickle and itch as you feel the cartilage shift and contort as your skin is stretched taut. You can feel your ears growing, gaining an acute sense of hearing as a heavy coat of fur starts to coat your ears. <b>Your hand reaches up as the transformation stops and you realize that you now have glacial troll ears!</b>";
+
+				player.ears.type = Ears.GLACIAL_TROLL;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.GLACIAL_TROLL));
+			},
+			// is present
+			function (): Boolean {
+				return player.ears.type === Ears.GLACIAL_TROLL;
+			}
+	);
 	/*
   */
 }

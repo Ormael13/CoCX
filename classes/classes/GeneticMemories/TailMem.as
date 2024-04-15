@@ -815,6 +815,28 @@ import classes.CoC;
 			}
 		});
 
+		public static const TROLL:int = _partid++;
+		EnumValue.add(Memories, TROLL, "TROLL", {
+			id: "Troll Tail",
+			name: "Troll Tail",
+			cost: function():Number { return getTailCost(player.tailCount, 1);},
+			title: "Troll",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TailAbyssalShark;
+			}
+		});
+
+		public static const GLACIAL_TROLL:int = _partid++;
+		EnumValue.add(Memories, GLACIAL_TROLL, "GLACIAL_TROLL", {
+			id: "Glacial Troll Tail",
+			name: "G.Troll Tail",
+			cost: function():Number { return getTailCost(player.tailCount, 1);},
+			title: "G.Troll",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TailAbyssalShark;
+			}
+		});
+
 		public static function getTailCost(startTails:int, endTails:int):int {
 			return Math.abs(startTails - endTails)*100 || 100;
 		}

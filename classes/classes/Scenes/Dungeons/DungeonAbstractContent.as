@@ -273,20 +273,19 @@ public class DungeonAbstractContent extends BaseContent
     public static const DUNGEON_RIVER_FLOOR_05_ROOM_30:int = 240;
     public static const DUNGEON_RIVER_FLOOR_05_ROOM_31:int = 241;
     public static const DUNGEON_RIVER_FLOOR_05_ROOM_32:int = 242;
-    public static const DUNGEON_RIVER_FLOOR_05_ROOM_33:int = 243;
 	
     public static const DUNGEON_TWILIGHT_GROVE_1:int	= 132;
     public static const DUNGEON_TWILIGHT_GROVE_2:int	= 133;
     public static const DUNGEON_TWILIGHT_GROVE_3:int	= 134;
-    public static const DUNGEON_TWILIGHT_GROVE_4:int	= 244;
-    public static const DUNGEON_TWILIGHT_GROVE_5:int	= 245;
-    public static const DUNGEON_TWILIGHT_GROVE_6:int	= 246;
+    public static const DUNGEON_TWILIGHT_GROVE_4:int	= 243;
+    public static const DUNGEON_TWILIGHT_GROVE_5:int	= 244;
+    public static const DUNGEON_TWILIGHT_GROVE_6:int	= 245;
 	
-    public static const DUNGEON_RIVER_FLOOR_06_ROOM_01:int = 247;
-    public static const DUNGEON_RIVER_FLOOR_06_ROOM_02:int = 248;
-    public static const DUNGEON_RIVER_FLOOR_06_ROOM_03:int = 249;
-    public static const DUNGEON_RIVER_FLOOR_06_ROOM_04:int = 250;
-    public static const DUNGEON_RIVER_FLOOR_06_ROOM_05:int = 251;
-    public static const DUNGEON_RIVER_FLOOR_06_ROOM_06:int = 252;
+    public static const DUNGEON_RIVER_FLOOR_06_ROOM_01:int = 246;
+    public static const DUNGEON_RIVER_FLOOR_06_ROOM_02:int = 247;
+    public static const DUNGEON_RIVER_FLOOR_06_ROOM_03:int = 248;
+    public static const DUNGEON_RIVER_FLOOR_06_ROOM_04:int = 249;
+    public static const DUNGEON_RIVER_FLOOR_06_ROOM_05:int = 250;
+    public static const DUNGEON_RIVER_FLOOR_06_ROOM_06:int = 251;
 }
 }

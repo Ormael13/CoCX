@@ -28,10 +28,10 @@ public class AlrauneMaiden extends Alraune
 			super();
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
 				this.a = "a ";
-				this.short = "mist alraune";
+				this.short = "mist alraune maiden";
 				this.long = "You are fighting against a Mist Alraune Maiden, an intelligent plant with the torso of a woman and the lower body of a giant flower. Whole her body cover faint vein-like lines. She seems really keen on raping you.";
 				this.bodyColor = "light green";
-				this.hairColor = "light purple";
+				this.hairColor = "dark green";
 			}
 			else if (Holidays.isHalloween()) {
 				this.a = "";
@@ -48,13 +48,13 @@ public class AlrauneMaiden extends Alraune
 				this.hairColor = "dark green";
 			}
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
-				initStrTouSpeInte(17, 330, 17, 130);
+				initStrTouSpeInte(17, 350, 17, 130);
 				initWisLibSensCor(130, 220, 90, 0);
 				this.armorDef = 115;
 				this.armorMDef = 23;
 				this.bonusHP = 700;
-				this.bonusLust = 372;
-				this.level = 62;
+				this.bonusLust = 376;
+				this.level = 66;
 				this.drop = new WeightedDrop().
 				add(useables.PCSHARD,10).
 				add(consumables.RAUNENECT,4).

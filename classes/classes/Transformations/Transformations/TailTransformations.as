@@ -1614,6 +1614,46 @@ public class TailTransformations extends MutationsHelper {
 				return player.tailType === Tail.MOTH_ABDOMEN;
 			}
 	);
+
+	public const TailTroll: Transformation = new SimpleTransformation("Troll Tail",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.TailNone, doOutput);
+
+				desc += "You feel your spine tingle as pressure builds up right above your rear end. A sharp pain briefly flows through you for a fleeting moment before you can feel more pressure build up. You feel a tail sprout from just above your rear coil down to your legs which is about 3 feet long. <b>You now have a troll tail!</b>";
+				player.tailType = Tail.TROLL;
+				player.tailCount = 1;
+
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.TROLL));
+			},
+			// is present
+			function (): Boolean {
+				return player.tailType === Tail.TROLL;
+			}
+	);
+
+	public const TailGlacialTroll: Transformation = new SimpleTransformation("Glacial Troll Tail",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.TailNone, doOutput);
+
+				desc += "You feel your spine tingle as pressure builds up right above your rear end. A sharp pain briefly flows through you for a fleeting moment before you can feel more pressure build up. You feel a tail sprout from just above your rear coil down to your legs which is about 3 feet long. <b>You now have a glacial troll tail!</b>";
+				player.tailType = Tail.GLACIAL_TROLL;
+				player.tailCount = 1;
+
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.GLACIAL_TROLL));
+			},
+			// is present
+			function (): Boolean {
+				return player.tailType === Tail.GLACIAL_TROLL;
+			}
+	);
 	/*
   */
 }
