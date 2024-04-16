@@ -71,6 +71,12 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Pheromone cloud. Gained by been female troll / female glacial troll. Effects: Like most female trolls, you exude a pheromone cloud when aroused. This will drive men around you crazy with lust. (Passively deal lust damage to enemies that have a penis each turn. Damage scales off Libido)\n");
 			outputText("-New event perk: Troll Resistance. Gained by been troll / glacial troll. Effects: Your troll hide grants you protection from magical effects. (Increases magic resist by 15% (fire resist by 7,5%))\n");
 			outputText("-Glacial trolls could gain Cold Affnity perk.\n");
+			outputText("-Zenji now have hp and lust variants for defeats pre-camp and for camp sparring, in case combat would change his perspective on PC wining by lust have onbly 50% chance to change that perspective. Also when fighting to the death would have full lust resistance and no effect to lower that resistance would work on him.\n");
+			outputText("-New P. Special: Feint Bash. Usable by Troll/Glacial Troll with Troll/Glacial Troll face. Cost 25 fatigue and can stun for 3 turns. Have 5 turns cooldown after use.\n");
+			outputText("-New P. Special: Savage Claws. Usable by Glacial Troll with Glacial Troll arms. Cost 100 fatigue.\n");
+			outputText("-New event perk: Troll Regeneration. Gained by been troll / glacial troll. Effects: 6% health and 6 points of fatigue regeneration but double hunger decaying speed. Stops for 3 rounds when damaged by fire.\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -84,8 +90,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -149,11 +153,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -174,6 +175,7 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

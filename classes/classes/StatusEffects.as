@@ -692,6 +692,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const TensionReleased:StatusEffectType                = mk("TensionReleased");
 		public static const TribulationCountdown:StatusEffectType           = mk("TribulationCountdown");
 		public static const TrollDefeatsCounter:StatusEffectType            = mk("Troll Defeats Counter");
+		public static const TrollRegenerationDisabled:StatusEffectType  	= mk("Troll Regeneration Disabled");
 		public static const TFWarning:StatusEffectType                      = mk("TF badend warning"); //1 - race ID to distinguish, 2 - counter, 3 - timer until removed
 		public static const TF2:StatusEffectType                            = mk("TF2");
 		public static const TFDealer1:StatusEffectType                      = mk("TF Dealer 1");
@@ -1281,6 +1282,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CooldownEclipsingShadow:StatusEffectType     		= mkCombat("Cooldown Eclipsing shadow");
 		public static const CooldownEveryAndNowhere:StatusEffectType     		= mkCombat("Cooldown Everywhere And Nowhere");
 		public static const CooldownFascinate:StatusEffectType           		= mkCombat("Cooldown Fascinate");
+		public static const CooldownFeintBash:StatusEffectType           		= mkCombat("Cooldown Feint Bash");
 		public static const CooldownFelineCurse:StatusEffectType         		= mkCombat("Cooldown Feline Curse");
 		public static const CooldownFinalityBarrage:StatusEffectType       	 	= mkCombat("Cooldown Finality Barrage");
 		public static const CooldownFingerOfDeath:StatusEffectType      		= mkCombat("Cooldown Finger of death");

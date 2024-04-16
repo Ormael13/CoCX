@@ -2727,6 +2727,10 @@ use namespace CoC;
 			return lust;
 		}
 
+		public function enemiesImmuneToLustResistanceDebuff():Boolean {
+			return (CoC.instance.monster.hasPerk(PerkLib.EnemyTrueAngel) || flags[kFLAGS.ZENJI_PROGRESS] == -1);
+		}
+
 		public function jewelryAttackModifier():Number {
 			var attackMod:Number = 1;
 			if(jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
@@ -7692,3 +7696,4 @@ use namespace CoC;
 		
 	}
 }
+

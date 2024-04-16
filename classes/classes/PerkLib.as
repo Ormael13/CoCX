@@ -3729,6 +3729,8 @@ public class PerkLib
 				"Your chimerical body attained Semi-Superior (Ex) Stage. (negate up to 56 racial perk points negative effects // +1/+2 to racial score when PC have first/second racial specific mutation perk)").withBuffs({'str.mult':0.55,'tou.mult':0.55,'spe.mult':0.55,'int.mult':0.35,'wis.mult':0.40,'lib.mult':0.35,'sens':35});
 		public static const ChimericalBodySemiEpicStageEx:PerkType = mk("Chimerical Body: Semi-Epic (Ex) Stage", "Chimerical Body: Semi-Epic (Ex) Stage",
 				"Your chimerical body attained Semi-Epic (Ex) Stage. (negate up to 118 racial perk points negative effects // +1/+2/+3 to racial score when PC have first/second/third racial specific mutation perk)").withBuffs({'str.mult':1.1,'tou.mult':1.1,'spe.mult':1.1,'int.mult':0.7,'wis.mult':0.75,'lib.mult':0.65,'sens':70});
+		public static const Cinderbloom:PerkType = mk("Cinderbloom", "Cinderbloom",
+				"Your alraune abilities are now considered to be Fire Elements effect and your vine attack delivers extra fire damage.");
 		public static const ColdAffinity:PerkType = mk("Cold Affinity", "Cold Affinity",
 				"You have high resistance to cold effects, immunity to the frostburn condition, and mastery over ice abilities and magic. However, you are highly susceptible to fire.");
 		public static const ColdMastery:PerkType = mk("Cold Mastery", "Cold Mastery",
@@ -3941,10 +3943,6 @@ public class PerkLib
 				"Reduce all spell cooldowns by 1 round (2 if wearing the leaf necklace).");
 		public static const Necromancy:PerkType = mk("Necromancy", "Necromancy",
 				"Black, Hex and Necromancy magic effectiveness is increased by 50%. Cooldowns for all those spells are 1 turn shorter. Soulforce regenerate passively by 2%.");
-		public static const SnowLily:PerkType = mk("Snow Lily", "Snow Lily",
-				"Your alraune abilities are now considered to be Cold Elements effect and your vine attack delivers extra cold damage.");
-		public static const Cinderbloom:PerkType = mk("Cinderbloom", "Cinderbloom",
-				"Your alraune abilities are now considered to be Fire Elements effect and your vine attack delivers extra fire damage.");
 		public static const Nightshade:PerkType = mk("Nightshade", "Nightshade",
 				"Raise min corruption by 20% permanently +50% tease damage. Pollen now erodes lust resistance by 5% per round. Your alraune abilities are now considered Dark Elements and your vine attack delivers extra dark damage.");
 		public static const NinetailsKitsuneOfBalance:PerkType = mk("Nine-tails Kitsune of Balance", "Nine-tails Kitsune of Balance",
@@ -3981,6 +3979,8 @@ public class PerkLib
 				"Spells are more potent based on inverted size.");
 		public static const SmallFrame:PerkType = mk("Small frame", "Small frame",
 				"Naturally small species have better evasion");
+		public static const SnowLily:PerkType = mk("Snow Lily", "Snow Lily",
+				"Your alraune abilities are now considered to be Cold Elements effect and your vine attack delivers extra cold damage.");
 		public static const SoulEater:PerkType = mk("Soul Eater", "Soul eater",
 				"You have the ability to consume souls for power.");
 		public static const SoulNexus:PerkType = mk("Soul Nexus", "Soul Nexus",
@@ -4003,6 +4003,8 @@ public class PerkLib
 				"Increases the likelihood of undergoing a transformation even if you have transformation resistance.");
 		public static const TransformationResistance:PerkType = mk("Transformation Resistance", "Transformation Resistance",
 				"Reduces the likelihood of undergoing a transformation. Disables Bad Ends from transformative items.");
+		public static const TrollRegeneration:PerkType = mk("Troll Regeneration", "Troll Regeneration",
+				"3% health and 3 points of fatigue regeneration but double hunger decaying speed. Stops for 2 rounds when damaged by fire.");
 		public static const UnnaturalStrength:PerkType = mk("Unnatural Strength", "Unnatural Strength",
 				"The more sated you are the stronger you get, although your satisfaction is fleeting.");
 		public static const WendigoCurse:PerkType = mk("Wendigo Curse", "Wendigo Curse",
