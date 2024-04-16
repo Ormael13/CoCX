@@ -130,7 +130,7 @@ import classes.internals.*;
 			this.drop = new WeightedDrop().add(consumables.ICY_FIG, 5)
 					.add(consumables.HEALHERB, 2);
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
-			this.createPerk(PerkLib.TrollRegeneration, 3, 0, 0, 0);
+			this.createPerk(PerkLib.TrollRegeneration, 6, 0, 0, 0);
 			this.createPerk(PerkLib.TrollResistance, 0, 0, 0, 0);
 			checkMonster();
 		}

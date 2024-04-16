@@ -16657,6 +16657,9 @@ public final class Mutations extends MutationsHelper {
                 player.shrinkTits();
                 changes++;
             }
+			if (player.vaginas.length > 0 && player.vaginaType() != VaginaClass.HUMAN && rand(3) == 0) {
+				transformations.VaginaHuman().applyEffect(false);
+			}
 			//Remove odd eyes
 			if (changes < changeLimit && rand(4) == 0 && player.eyes.type > Eyes.HUMAN) {
 				outputText("[pg]");
@@ -17327,4 +17330,4 @@ public final class Mutations extends MutationsHelper {
 		player.herbXP(HE);
     }
 }
-}
+}

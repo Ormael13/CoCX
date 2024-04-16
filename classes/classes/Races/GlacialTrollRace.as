@@ -3,6 +3,7 @@ import classes.BodyData;
 import classes.BodyParts.*;
 import classes.PerkLib;
 import classes.Race;
+import classes.VaginaClass;
 public class GlacialTrollRace extends Race {
     public static const GlacialTrollFurColors:/*String*/Array = ["blue", "white"];
     public static const RaceBody:/*String*/Array = [
@@ -44,11 +45,11 @@ public class GlacialTrollRace extends Race {
 				.skinCoatTypeAndColor1(Skin.FUR, ANY(GlacialTrollFurColors), +2)
 				.biggestTitSize(AT_MOST(2), +1)
 				.height(AT_LEAST(84), +1)
-				.customRequirement("",'Troll Tail and having cock',
+				.customRequirement("",'Troll Tail and having cock OR having human vagina',
 						function (body:BodyData):Boolean {
-							return body.tailType == Tail.TROLL && body.player.hasCock()
+							return (body.tailType == Tail.TROLL && body.player.hasCock()) || (body.player.hasVagina() && body.player.vaginaType() == VaginaClass.HUMAN)
 						}, +1)
-				.customRequirement("",'Feminity <= 55',
+				.customRequirement("",'Feminity less than 56',
 						function (body:BodyData):Boolean {
 							return body.player.femininity <= 55
 						}, +1);
