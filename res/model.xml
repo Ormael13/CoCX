@@ -599,7 +599,7 @@
         <cell rect="2,55,147,128" name="legs_fg/alraune" dx="34" dy="82"/>
         <cell rect="9,351,175,119" name="legs_fg/drider" dx="31" dy="64"/>
         <cell rect="9,231,175,119" name="legs_fg/atlach" dx="31" dy="64"/>
-        <cell rect="463,101,143,107" name="legs_fg/centaur" dx="57" dy="93"/>
+        <cell rect="463,101,143,128" name="legs_fg/centaur" dx="57" dy="93"/>
         <cell rect="255,230,125,88" name="legs_fg/cattaur" dx="81" dy="103"/>
         <cell rect="381,230,125,88" name="legs_fg/reptaur" dx="81" dy="103"/>
         <cell rect="370,445,125,88" name="legs_fg/pandataur" dx="81" dy="103"/>
@@ -620,7 +620,7 @@
 		<cell rect="1253,1114,70,100" name="legs_truefg/sandWorm" dx="98" dy="45"/>
 		<cell rect="1166,1234,70,100" name="hands/sandWorm" dx="93" dy="46"/>
 		<cell rect="1253,1234,70,100" name="hands_bg/sandWorm" dx="46" dy="35"/>
-        <cell rect="607,101,143,107" name="legs/centaur" dx="57" dy="93"/>
+        <cell rect="607,101,143,128" name="legs/centaur" dx="57" dy="93"/>
         <cell rect="507,230,125,88" name="legs/cattaur" dx="81" dy="103"/>
         <cell rect="633,230,125,88" name="legs/reptaur" dx="81" dy="103"/>
         <cell rect="496,445,125,88" name="legs/pandataur" dx="81" dy="103"/>
@@ -3288,7 +3288,7 @@
         </if>
 
         <switch value="faceType">
-            <case values="Face.HUMAN">
+            <case values="Face.HUMAN,Face.DEMON">
 				<show part="face/human"/>
 				<if test="cor &gt;=50">
 					<hide part="face/*"/>
@@ -6332,12 +6332,12 @@
 						</switch>
 					</if>
 					<show part="armorChest/gooplatebottom"/>
-					<if test="showLegClothing">
+					<if test="(legCount!=4) and (showLegClothing)">
 						<show part="armorLegs/gooplateLegs"/>
-						<if test="legCount==4">
-							<hide part="armorLegs/*"/>
-							<show part="armorLegs_fg/gootaurarmorbottom"/>
-						</if>
+					</if>	
+					<if test="legCount==4">
+						<hide part="armorLegs/*"/>
+						<show part="armorLegs_fg/gooTaurarmorbottom"/>
 					</if>
 					<if test="showArmClothing">
 						<show part="armorLeftArm/gooplateleftarm"/>
