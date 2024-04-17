@@ -1149,4 +1149,3 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
     }
 }
 }
-

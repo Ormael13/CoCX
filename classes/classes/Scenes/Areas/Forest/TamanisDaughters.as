@@ -98,6 +98,8 @@ public class TamanisDaughters extends Goblin
 		public function TamanisDaughters()
 		{
 			super(true);
+			var mod1:int = (flags[kFLAGS.TAMANI_DAUGHTERS_LVL_UP] + flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS]);
+			var mod2:int = ((flags[kFLAGS.TAMANI_DAUGHTERS_LVL_UP]*6) + flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS]);
 			this.a = "the group of ";
 			this.short = "Tamani's daughters";
 			this.imageName = "tamanisdaughters";
@@ -118,22 +120,19 @@ public class TamanisDaughters extends Goblin
 			this.bodyColor = "greenish gray";
 			this.hairColor = "pink";
 			this.hairLength = 16;
-			initStrTouSpeInte(55, 30, 45, 50);
-			initWisLibSensCor(50, 70, 70, 50);
+			initStrTouSpeInte(55+mod1*4, 30+mod1*2, 45+mod1*3, 50+mod1*5);
+			initWisLibSensCor(50+mod1*5, 70+mod1*30, 70+mod1*10, 50);
 			this.weaponName = "fists";
 			this.weaponVerb="tiny punch";
-			this.weaponAttack = 5;
+			this.weaponAttack = 5 + mod1;
 			this.armorName = "leather straps";
-			this.armorDef = 5;
-			this.armorMDef = 1;
-			this.bonusHP = 50 + (int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 2) * 15);
-			if (bonusHP > 3350) bonusHP = 3350;
-			this.bonusLust = 148 + (int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 2) * 10);
-			if (bonusLust > 2048) bonusLust = 2048;
+			this.armorDef = 5 + (mod1*5);
+			this.armorMDef = 1 + mod1;
+			this.bonusHP = (50 * (1 + mod2));
+			this.bonusLust = 148 + (mod1 * 46) + mod2;
 			this.lust = 30;
 			this.lustVuln = .65;
-			this.level = 8 + (Math.floor(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 20));
-			if (level > 30) level = 30;
+			this.level = 8 + mod2;
 			this.gems = rand(15) + 5;
 			this.drop = new WeightedDrop().
 					add(consumables.GOB_ALE,5).

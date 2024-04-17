@@ -116,6 +116,7 @@ public class Tamani extends Goblin
 		public function Tamani()
 		{
 			super(false);
+			var mod:int = flags[kFLAGS.TAMANI_LVL_UP]; //just to be concise
 			this.a = "";
 			this.short = "Tamani";
 			this.imageName = "tamani";

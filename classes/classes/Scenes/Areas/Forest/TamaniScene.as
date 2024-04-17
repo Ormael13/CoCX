@@ -98,6 +98,15 @@ public function tamaniDefeated(hpVictory:Boolean):void {
 	clearOutput();
 	if (hpVictory) outputText("Tamani is defeated!");
 	else outputText("Tamani gives up on defeating you and starts masturbating!");
+	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
+		if (flags[kFLAGS.TAMANI_DEFEATS_COUNTER] >= 1) flags[kFLAGS.TAMANI_DEFEATS_COUNTER]++;
+		else flags[kFLAGS.TAMANI_DEFEATS_COUNTER] = 1;
+		//level up
+		if (flags[kFLAGS.TAMANI_LVL_UP] < 3 && flags[kFLAGS.TAMANI_DEFEATS_COUNTER] >= flags[kFLAGS.TAMANI_LVL_UP] + 1) {
+			flags[kFLAGS.TAMANI_DEFEATS_COUNTER] = 0;
+			++flags[kFLAGS.TAMANI_LVL_UP];
+		}
+	}
 	if(player.lust >= 33) {
 		outputText("  You could fuck her, but if that's the case why did you bother fighting her?\n\nWhat do you do to her?");
 		menu();

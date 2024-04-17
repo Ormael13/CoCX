@@ -75,6 +75,7 @@ public class Changelog extends BaseContent
 			outputText("-New P. Special: Feint Bash. Usable by Troll/Glacial Troll with Troll/Glacial Troll face. Cost 25 fatigue and can stun for 3 turns. Have 5 turns cooldown after use.\n");
 			outputText("-New P. Special: Savage Claws. Usable by Glacial Troll with Glacial Troll arms. Cost 100 fatigue.\n");
 			outputText("-New event perk: Troll Regeneration. Gained by been troll / glacial troll. Effects: 6% health and 6 points of fatigue regeneration but double hunger decaying speed. Stops for 3 rounds when damaged by fire.\n");
+			outputText("-Tamani daughters & Minotaur Sons can now level-up (their lvl depends on how many of them are and seperate lvl up counter so the max level isn't clearly defines but would be at least around 100/105 lvl). Like Tamani daughters now Minotaur sons would slowly die out when there is too many of them + added their count on children page right below Tamani daughters.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -85,17 +86,16 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//Tamani+her brood - for out of camp lvl-ing npc's
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed bugs: Dracula/lina PC unable to find get ghoul if they not learned this as normal Vampire, unable to buy manual for 1st atk: f. swords, Arigean Princess PC not been fully immune to TF-ing like other perm races, Weresharks not having their stats changing according to moon phase or boosted during use of Crinos Shape, Phoenix TF adding mutagen penatly instead of stat curse, ");
 			outputText("Endless Rage draining 10x too much wrath per turn, Berzerker/Lustzerker still req. to be activated after they been activated as part of Asura Form activation, dormant state of wereraces 'blessings' increasing race score and not lowering it, Hinezumi Buring Blood IM accesable by Bunny race, returning from teleportation circle at 4th floor of river dungeon sending PC to ");
 			outputText("3rd floor teleportation circle room, perk allowing to always run away from enemy/ies been ignored in dungeons, unarmed/feral giving mastery gains for small weapons, 2 of 4 SF to Elemental Energy conversion options having wrong check for usable SF\n\n");
