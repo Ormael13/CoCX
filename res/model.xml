@@ -636,7 +636,7 @@
         <cell rect="644,1114,173,156" name="legs/centipede" dx="45" dy="75"/>
         <cell rect="722,434,130,108" name="legs/frostWyrm" dx="42" dy="97"/>
         <cell rect="853,543,80,88" name="legs/fairyFlying" dx="65" dy="89"/>
-		<cell rect="1340,798,173,156" name="legs/kirin" dx="57" dy="93"/>
+		<cell rect="1340,798,173,156" name="legs/kirin" dx="43" dy="104"/>
         <cell rect="122,1114,173,156" name="legs_bg/hydra2" dx="29" dy="47"/>
         <cell rect="296,1114,173,156" name="legs_bg/hydra3" dx="29" dy="47"/>
         <cell rect="470,1114,173,156" name="legs_bg/hydra4" dx="29" dy="47"/>
