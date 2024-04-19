@@ -489,19 +489,19 @@ public class DungeonMaps extends DungeonAbstractContent
 				}; }
 			),
 			new DungeonMap("River Dungeon, 5th floor", [
-					"                [c]—[d]—[e]",//"[S]—[a]—[b]     [c]—[d]—[e]",e1
-					"                 |         ",//"         |       |         ",
+					"[S]—[a]—[b]     [c]—[d]—[e]",
+					"         |       |         ",
 					"        [f]—[g]—[h]        ",
-					"         |       |         ",//powyżej jedna ruletka
-					"        [j]     [k]     [s]",//"[i]     [j]     [k]     [s]",//j, k, w, A, E - mieszana ruletka
-					"         |       |       | ",//" |       |       |       | ",
+					"         |       |         ",
+					"[i]     [j]     [k]     [s]",
+					" |       |       |       | ",
 					"[l]—[m]—[n]     [o]—[p]—[r]",
-					"         |       |       | ",//" |       |       |       | ",
-					"        [u]     [x]     [y]",//"[t]     [u]—[w]—[x]     [y]",
-					"                         | ",//" |           |           | ",e3 (lewe)+e2(prawe)
-					"                        [B]",//"[z]         [A]         [B]",
-					"                         | ",//" |           |           | ",
-					"                    [F]—[G]",//"[C]—[D]     [E]     [F]—[G]",
+					" |       |       |       | ",
+					"[t]     [u]—[w]—[x]     [y]",
+					" |           |           | ",
+					"[z]         [A]         [B]",
+					" |           |           | ",
+					"[C]—[D]     [E]     [F]—[G]",
 				],
 				{
 					'S': DUNGEON_RIVER_FLOOR_04_ROOM_01,
@@ -522,7 +522,7 @@ public class DungeonMaps extends DungeonAbstractContent
 					'n': DUNGEON_RIVER_FLOOR_05_ROOM_16,
 					'o': DUNGEON_RIVER_FLOOR_05_ROOM_17,
 					'p': DUNGEON_RIVER_FLOOR_05_ROOM_18,
-					'r': DUNGEON_RIVER_FLOOR_05_ROOM_19,
+					'r': DUNGEON_RIVER_FLOOR_05_ROOM_19, //s missed - used for stairs
 					't': DUNGEON_RIVER_FLOOR_05_ROOM_20,
 					'u': DUNGEON_RIVER_FLOOR_05_ROOM_21,
 					'w': DUNGEON_RIVER_FLOOR_05_ROOM_22,
@@ -533,7 +533,7 @@ public class DungeonMaps extends DungeonAbstractContent
 					'B': DUNGEON_RIVER_FLOOR_05_ROOM_27,
 					'C': DUNGEON_RIVER_FLOOR_05_ROOM_28,
 					'D': DUNGEON_RIVER_FLOOR_05_ROOM_29,
-					'E': DUNGEON_RIVER_FLOOR_05_ROOM_30,//altair to summon floor boss
+					'E': DUNGEON_RIVER_FLOOR_05_ROOM_30,
 					'F': DUNGEON_RIVER_FLOOR_05_ROOM_31,
 					'G': DUNGEON_RIVER_FLOOR_05_ROOM_32
 				}
@@ -544,9 +544,20 @@ public class DungeonMaps extends DungeonAbstractContent
 					"[b]—[c]",
 				],
 				{
-					'a': DUNGEON_RIVER_FLOOR_02_ROOM_25,
-					'b': DUNGEON_RIVER_FLOOR_02_ROOM_26,
-					'c': DUNGEON_RIVER_FLOOR_02_ROOM_27
+					'a': DUNGEON_RIVER_FLOOR_06_ROOM_01,
+					'b': DUNGEON_RIVER_FLOOR_06_ROOM_02,
+					'c': DUNGEON_RIVER_FLOOR_06_ROOM_03
+				}
+			),
+			new DungeonMap("River Dungeon, 7th floor", [
+					"[a]—   ",
+					" |     ",
+					"[b]—[c]",
+				],
+				{
+					'a': DUNGEON_RIVER_FLOOR_07_ROOM_01,
+					'b': DUNGEON_RIVER_FLOOR_07_ROOM_02,
+					'c': DUNGEON_RIVER_FLOOR_07_ROOM_03
 				}
 			),*/
             //TODO: place other RD levels here/*

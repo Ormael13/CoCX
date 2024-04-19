@@ -42,7 +42,7 @@ use namespace CoC;
 			"A Bronze bar.",
 			"You look over the Bronze bar. Likely usefull to making some equipment.");
 		public const B_CHITN:SimpleUseable = new SimpleUseable("B.Chitn", "B.Chitn", "a large shard of chitinous plating", 100,
-			"A perfect piece of black chitin from a bee-girl.  It still has some fuzz on it.",
+			"An unscathed piece of black chitin, not a single blemish aside from the bit of fuzz still on the back of it.",
 			"You look over the scale carefully but cannot find a use for it.  Maybe someone else will know how to use it.");
 		public const GREENGL:SimpleUseable = new SimpleUseable("GreenGl", "GreenGl", "a clump of green gel", 50,
 			"This tough substance has no obvious use that you can discern.",

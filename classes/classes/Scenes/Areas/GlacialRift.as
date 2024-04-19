@@ -389,11 +389,12 @@ use namespace CoC;
 		public function GlacialRiftConditions():void {
 			if (!player.headJewelry == headjewelries.SKIGOGG) player.createStatusEffect(StatusEffects.Snowstorms,0,0,0,0);
 			if (player.countMiscJewelry(miscjewelries.SNOWBOA) == 0) player.createStatusEffect(StatusEffects.Snow,0,0,0,0);
-			if (!player.hasPerk(PerkLib.ColdAffinity)) player.createStatusEffect(StatusEffects.SubZeroConditions,0,0,0,0);
+			if (!player.hasPerk(PerkLib.ColdAffinity)) player.createStatusEffect(StatusEffects.SubZeroConditions,2,0,0,0);
 		}
 
 		public function SubZeroConditionsTick():void {
-			var HPD:Number = 0.05;
+			var HPD:Number = 0.025;
+			HPD *= player.statusEffectv1(StatusEffects.SubZeroConditions);
 			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) HPD *= 2;
 			HPD *= player.maxHP();
 			HPD = Math.round(HPD);
