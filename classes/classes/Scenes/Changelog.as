@@ -48,9 +48,10 @@ public class Changelog extends BaseContent
 			outputText("-New consumable (by Liadri): Ember Flower. Obtained from Cinderbloom or founded in ashlands/vulcanic crag. Effects: When used by alraune/lilaraune would grant Cinderbloom perk and Fife Affinity.\n");
 			outputText("-Natural Instincts & Tough Hide perks req. of Job: Beast Warrior changed to req. perk Job: Feral Champion. Natural arsenal effect increased from +50% to +100%. Feral Armor req. for tou stat lowered from 60 to 50.\n");
 			outputText("-Venomous Adipose Tissue & Venomous Diet perks have additional req. of having perk Job: Feral Champion.\n");
-			outputText("-Enabled camp building at night for night races. But would limit possible helpers to those that could be still active at night. Herbalism and Dummy option can also be used at night by night races.\n");
+			outputText("-Enabled camp building at night for night races. But would limit possible helpers to those that could be still active at night. Herbalism and Dummy camp options can also be used at night by night races.\n");
 			outputText("-Female mindbreaker been reeducated causing their corruption increase by 40 pts. Re: Convert option was moved to different button in super perks menu to avoid misclicks due to same position as Previous button.\n");
 			outputText("-Bestial Blademaster armor has the revealing tag now, because reasons. (Lord Shadeogorath)\n");
+			outputText("-Implemented horse and kirin taur revamp sprites (by Liadri). (Lord Shadeogorath)\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-\n");
@@ -62,7 +63,7 @@ public class Changelog extends BaseContent
 			outputText("-New melee weapon (by Lord Shadeogorath): Volcanic Gravehammer - pulled from unnamed grave at ashlands. Base atk is 160. It's massive mace/hammer type low grade wrath weapon. Normaly it deal 80% of physical dmg and 20% fire dmg. When using charge weapon it will deal 100% fire damage and have 10% to apply Burn DoT after critical hit.\n");
 			outputText("-When exploring Deepwoods can find new dungeon - Twilight Grove. It's potentialy dangerous place for pure PC's but resort-like placefor alraunes and/or corrupt PC's.\n");
 			outputText("-Can explore and clear 5th floor of River Dungeon. It have monsters from lvl 58 to 70 and boss is lvl 58. Floor is divided into three subareas: first is normal, second is hot enough to have weaker effect found in Vulcanic Crag (constant fire dmg) and third is cold enough to have weaker effect found in Glacial Rift (constant ice damage). ");
-			outputText("There are also few rooms where two nearby subareas meets. In rooms where second and third area meets climate is much more harsh and player is affected by both constant fire and ice dmg that are much stronged then in second or third subarea.\n");
+			outputText("There are also few rooms where two nearby subareas meets. In rooms where second and third area meets climate is much more harsh and player is affected by both constant fire and ice dmg that are much stronger then in second or third subarea.\n");
 			outputText("-New enemies: Mid rank Angel of Mist - lvl 58, Mist Bee Huntress - lvl 60, Mist Wasp Huntress - lvl 62, Mist Hornet Huntress - lvl 64, Mist Alraune Maiden - lvl 66, Mist Cinderbloom - lvl 68, Mist Snow Lily - lvl 70. Encounterable on 5th floor of River Dungeon\n");
 			outputText("-Phouka Drink scene when pc toughness is between 30 and 70 bug fixed. Also scene will now check for core toughness value not total.\n");
 			outputText("-New bodyparts: Troll Arms, Troll lower body, Troll Tusks, Troll Ears, Troll Tail (from Troll Fig); Glacial Troll Arms, Glacial Troll lower body, Glacial Troll Tusks, Glacial Troll Ears, Glacial Troll Tail (from Icy Fig)\n");
@@ -77,26 +78,30 @@ public class Changelog extends BaseContent
 			outputText("-New P. Special: Savage Claws. Usable by Glacial Troll with Glacial Troll arms. Cost 100 fatigue.\n");
 			outputText("-New event perk: Troll Regeneration. Gained by been troll / glacial troll. Effects: 6% health and 6 points of fatigue regeneration but double hunger decaying speed. Stops for 3 rounds when damaged by fire.\n");
 			outputText("-Tamani daughters & Minotaur Sons can now level-up (their lvl depends on how many of them are and seperate lvl up counter so the max level isn't clearly defines but would be at least around 100/105 lvl). Like Tamani daughters now Minotaur sons would slowly die out when there is too many of them + added their count on children page right below Tamani daughters.\n");
-			outputText("-Implemented horse and kirin taur revamp sprites (by Liadri). (Lord Shadeogorath)\n");
 			outputText("-Demon face now changes based on corruption. (Lord Shadeogorath)\n");
 			outputText("-Fixed a bug causing the goo armor taur sprite to not show. (Lord Shadeogorath)\n");
+			outputText("-New mutation perk: Goblin Ovaries. Req. having free ovaries mutation slot, one of goblinoid races. Effects: Increase fertility rating by 10, While pregnant increase total libido by 10%. Double the number of kids you birth.\n");
+			outputText("-New mutation perk: Goblin Ovaries (Primitive). Req. Goblin Ovaries and lvl 30+. Effects: Increase fertility rating by 20, While pregnant increase total libido by 20%. Double the number of kids you birth. Increase physical damage done while pregnant by 30%.\n");
+			outputText("-New mutation perk: Goblin Ovaries (Evolved). Req. Goblin Ovaries (Primitive) and lvl 60+. Effects: Increase fertility rating by 30, While pregnant increase total libido by 30%. Double the number of kids you birth. Increase physical damage done while pregnant by 40%. Lust damage against male opponents increased by 25%.\n");
+			outputText("-New mutation perk: Goblin Ovaries (Final Form). Req. Goblin Ovaries (Evolved) and lvl 90+. Effects: Increase fertility rating by 40, While pregnant increase total libido by 40%. Double the number of kids you birth. Increase physical damage done while pregnant by 50%. Lust damage against male opponents increased by 50%. Add your fertility score as a bonus to libido.\n");
+			outputText("-Goblin race race bonuses req. 2 more points (12) and would give 30% ore to libido multi.\n");
+			outputText("-Golemancer in HXD could sell metal pieces/plates to PC golemancer that can buy energy cores from her. She even gives 3 options of how many metal pieces/plates to buy at once - 1x, 5x, 10x.\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//New mutation perk: Equine Muscle. Req. having free musculature mutation slot, one of races: horse-morph, centuar, unicorn. Effects: 
+			outputText("-\n");//New mutation perk: Equine Muscle (Primitive). Req. Equine Muscle and lvl 30+. Effects: 
+			outputText("-\n");//New mutation perk: Equine Muscle (Evolved). Req. Equine Muscle (Primitive) and lvl 60+. Effects: 
+			outputText("-\n");//New mutation perk: Equine Muscle (Final Form). Req. Equine Muscle (Evolved) and lvl 90+. Effects: 
 			outputText("-\n");//Tamani+her brood - for out of camp lvl-ing npc's
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Fixed bugs: Dracula/lina PC unable to find get ghoul if they not learned this as normal Vampire, unable to buy manual for 1st atk: f. swords, Arigean Princess PC not been fully immune to TF-ing like other perm races, Weresharks not having their stats changing according to moon phase or boosted during use of Crinos Shape, Phoenix TF adding mutagen penatly instead of stat curse, ");
 			outputText("Endless Rage draining 10x too much wrath per turn, Berzerker/Lustzerker still req. to be activated after they been activated as part of Asura Form activation, dormant state of wereraces 'blessings' increasing race score and not lowering it, Hinezumi Buring Blood IM accesable by Bunny race, returning from teleportation circle at 4th floor of river dungeon sending PC to ");
 			outputText("3rd floor teleportation circle room, perk allowing to always run away from enemy/ies been ignored in dungeons, unarmed/feral giving mastery gains for small weapons, 2 of 4 SF to Elemental Energy conversion options having wrong check for usable SF\n\n");
@@ -150,13 +155,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

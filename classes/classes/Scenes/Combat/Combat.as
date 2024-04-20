@@ -8395,6 +8395,12 @@ public class Combat extends BaseContent {
 			if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) ddd += 0.25;
 			damage *= ddd;
 		}
+		if (player.perkv1(IMutationsLib.GoblinOvariesIM) >= 2 && player.isGoblinoid()) {
+			var dddd:Number = 1.3;
+			if (player.perkv1(IMutationsLib.GoblinOvariesIM) >= 3) dddd += 0.1;
+			if (player.perkv1(IMutationsLib.GoblinOvariesIM) >= 4) dddd += 0.1;
+			damage *= dddd;
+		}
         if (monster.hasStatusEffect(StatusEffects.WoundPoison)) damage *= 1+(monster.statusEffectv1(StatusEffects.WoundPoison)/100);
         if (player.perkv1(IMutationsLib.AlphaHowlIM) >= 3) {
             var packmultiplier:Number = 1.0;

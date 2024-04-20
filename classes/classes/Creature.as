@@ -3581,6 +3581,8 @@ public class Creature extends Utils
 				counter += 30;
 			if (hasPerk(PerkLib.MagicalFertility))
 				counter += 10 + (perkv1(PerkLib.MagicalFertility) * 5);
+			if (perkv1(IMutationsLib.GoblinOvariesIM) >= 1)
+				counter += (10 * perkv1(IMutationsLib.GoblinOvariesIM));
 			if (perkv1(IMutationsLib.HumanOvariesIM) >= 1 && game.player.racialScore(Races.HUMAN) > 17)
 				counter += (15 * perkv1(IMutationsLib.HumanOvariesIM));
 			counter += perkv2(PerkLib.ElvenBounty);

@@ -3064,6 +3064,11 @@ import classes.Scenes.Combat.CombatAbilities;
 				}
 			}
 			if (hasStatusEffect(StatusEffects.BerzerkingSiegweird)) lustDelta *= 0.5;
+			if (player.isGoblinoid() && player.perkv1(IMutationsLib.GoblinOvariesIM) >= 3 && hasCock()) {
+				var lustMDM:Number = 1.25;
+				if (player.perkv1(IMutationsLib.GoblinOvariesIM) >= 4) lustMDM += 0.25;
+				lustDelta *= lustMDM;
+			}
 			applyTease(lustDelta, display);
 		}
 

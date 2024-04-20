@@ -5681,6 +5681,8 @@ use namespace CoC;
 			if (hasPerk(PerkLib.StrengthOfStone)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(tou/2))}, 'Strength of stone', { text: 'Strength of stone' });
 			if (!hasPerk(PerkLib.StrengthOfStone) && statStore.hasBuff('Strength of stone')) statStore.removeBuffs('Strength of stone');
 			if (hasPerk(PerkLib.PsionicEmpowerment)) statStore.replaceBuffObject({'int.mult':(0.01 * Mindbreaker.MindBreakerFullConvert)}, 'Psionic Empowerment', { text: 'Psionic Empowerment' });
+			if (isGoblinoid() && hasMutation(IMutationsLib.GoblinOvariesIM) && perkv1(IMutationsLib.GoblinOvariesIM) >= 4) statStore.replaceBuffObject({'lib.mult':(totalFertility()*0.01)}, 'Goblin Ovaries bonus', { text: 'Goblin Ovaries bonus' });
+			if (isGoblinoid() && hasMutation(IMutationsLib.GoblinOvariesIM) && perkv1(IMutationsLib.GoblinOvariesIM) >= 4 && statStore.hasBuff("Goblin Ovaries bonus")) statStore.removeBuffs('Goblin Ovaries bonus');
 			var power:Number = 0;
 			if (hasPerk(PerkLib.BullStrength)){
 				if (isRaceCached(Races.COW, 2)) power = lactationQ()*0.001;

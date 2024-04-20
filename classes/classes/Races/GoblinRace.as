@@ -91,13 +91,14 @@ public class GoblinRace extends Race {
 		
 		addBloodline(PerkLib.GoblinsDescendant, PerkLib.BloodlineGoblin);
 		addMutation(IMutationsLib.NaturalPunchingBagIM);
+		addMutation(IMutationsLib.GoblinOvariesIM);
 		
-		buildTier(10, "goblin")
+		buildTier(12, "goblin")
 				.buffs({
 					"str.mult": -0.50,
 					"spe.mult": +0.75,
 					"int.mult": +1.00,
-					"lib.mult": +0.25
+					"lib.mult": +0.55
 				})
 				.end();
 	}
