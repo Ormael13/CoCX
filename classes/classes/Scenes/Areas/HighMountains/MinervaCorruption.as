@@ -2,6 +2,7 @@
 package classes.Scenes.Areas.HighMountains {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.SceneLib;
 
 public class MinervaCorruption extends BaseContent {
@@ -1417,8 +1418,9 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
         minervaScene.minervaSprite();
         player.cuntChange(40, true, false, true, womb);
         outputText("<b>You're birthing Minerva's siren kid! No scene written for you, sorry.</b>");
-        ++flags[kFLAGS.MINERVA_CHILDREN];
-        ++flags[kFLAGS.TIMES_BIRTHED_SHARPIES];
+        if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) flags[kFLAGS.MINERVA_CHILDREN] += 2;
+		else flags[kFLAGS.MINERVA_CHILDREN]++;
+		flags[kFLAGS.TIMES_BIRTHED_SHARPIES]++;
         if (flags[kFLAGS.MINERVA_CHILDREN] <= 4) sceneHunter.print("But some other scenes surely can change...");
     }
 

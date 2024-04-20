@@ -6,6 +6,7 @@ package classes.Scenes.Areas.HighMountains
 import classes.*;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
@@ -352,7 +353,8 @@ public class BasiliskScene extends BaseContent
 				//Subsequent: Sheepishly, you give him an egg to feel.  Benoit shakes his head in exasperation, but lets you in.
 				else outputText("\n\nHe puts your latest batch with the others and then shares breakfast with you.  You leave with his final words lingering in your ears:  \"More eggs is always good [name], but for ze Gods sake: Be.  More.  Careful.\"");
 				outputText("\n");
-				flags[kFLAGS.BENOIT_GENERIC_EGGS] += Math.floor(player.totalFertility() / 10);
+				if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) flags[kFLAGS.BENOIT_GENERIC_EGGS] += Math.floor(player.totalFertility() / 5);
+				else flags[kFLAGS.BENOIT_GENERIC_EGGS] += Math.floor(player.totalFertility() / 10);
 			}
 			else {
 				outputText("A sudden shift in the weight of your pregnant belly staggers you, dropping you to your knees.  You realize something is about to be birthed, and you shed your [armor] before it can be ruined by what's coming.  A contraction pushes violently through your midsection, stretching your " + vaginaDescript() + " painfully, the lips opening wide as something begins sliding down your passage.  A burst of green slime soaks the ground below as the birthing begins in earnest, and the rounded surface of a strangely colored egg peaks between your lips.  You push hard and the large egg pops free at last, making you sigh with relief as it drops into the pool of slime.");

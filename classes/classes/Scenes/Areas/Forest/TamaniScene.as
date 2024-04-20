@@ -102,7 +102,7 @@ public function tamaniDefeated(hpVictory:Boolean):void {
 		if (flags[kFLAGS.TAMANI_DEFEATS_COUNTER] >= 1) flags[kFLAGS.TAMANI_DEFEATS_COUNTER]++;
 		else flags[kFLAGS.TAMANI_DEFEATS_COUNTER] = 1;
 		//level up
-		if (flags[kFLAGS.TAMANI_LVL_UP] < 3 && flags[kFLAGS.TAMANI_DEFEATS_COUNTER] >= flags[kFLAGS.TAMANI_LVL_UP] + 1) {
+		if (flags[kFLAGS.TAMANI_LVL_UP] < 15 && flags[kFLAGS.TAMANI_DEFEATS_COUNTER] >= flags[kFLAGS.TAMANI_LVL_UP] + 1) {
 			flags[kFLAGS.TAMANI_DEFEATS_COUNTER] = 0;
 			++flags[kFLAGS.TAMANI_LVL_UP];
 		}

@@ -1,6 +1,7 @@
 package classes.Scenes.Areas.HighMountains {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Items.ArmorLib;
 import classes.Scenes.SceneLib;
 import classes.lists.BreastCup;
@@ -614,7 +615,8 @@ public class CockatriceScene extends BaseContent {
     public function cockatriceBirth(womb:int = 0):void {
         outputText(images.showImage("birth-cockatrice"));
         var kids:int = Math.floor(player.totalFertility() / 7);
-        outputText("A sudden shift in the weight of your pregnant belly staggers you, dropping you to your knees. You realize something is about to be birthed, and you shed your [armor] before it can be ruined by what's coming. "
+        if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) kids *= 2;
+		outputText("A sudden shift in the weight of your pregnant belly staggers you, dropping you to your knees. You realize something is about to be birthed, and you shed your [armor] before it can be ruined by what's coming. "
             + "A contraction pushes violently through your midsection, stretching your " + player.vaginaDescript(womb) + " painfully, the lips opening wide as something begins sliding down your passage. "
             + "A burst of pink slime soaks the ground below as the birthing begins in earnest, and the white chicken egg peaks between your lips. You push hard and the medium egg pops free at last, making you sigh with relief as it drops into the pool of slime. ");
         player.cuntChange(15, true, true, false);

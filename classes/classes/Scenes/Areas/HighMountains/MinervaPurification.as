@@ -5,6 +5,7 @@ import classes.*;
 import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 import classes.lists.Gender;
@@ -1686,7 +1687,8 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			if (flags[kFLAGS.MINERVA_CHILDREN] > 0) outputText(". My daughters are already excited to see their new addition to our family");
 			outputText(",</i>\" she says. You spend some time resting while she breastfeeds her newborn sirens.");
 			outputText("\n\nEventually, you get up and give her a kiss. \"<i>Come back later. Our daughters are already excited to see you come back,</i>\" she says. You acknowledge and head back to your camp.");
-			flags[kFLAGS.MINERVA_CHILDREN] += 2;
+			if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) flags[kFLAGS.MINERVA_CHILDREN] += 4;
+			else flags[kFLAGS.MINERVA_CHILDREN] += 2;
 			flags[kFLAGS.TIMES_BIRTHED_SHARPIES]++;
 			doNext(camp.returnToCampUseOneHour);
 		}

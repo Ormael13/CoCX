@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
@@ -2322,12 +2323,14 @@ public function pcPopsOutASharkTot(womb:int = 0):void {
 		if(rand(100) <= 59) {
 			outputText("grey");
 			type = 0;
-			flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS]++;
+			if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] += 2;
+			else flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS]++;
 		}
 		else {
 			outputText("black-striped orange");
 			type = 1;
-			flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS]++;
+			if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] += 2;
+			else flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS]++;
 		}
 		outputText(" skin, it's obvious she's a baby ");
 		if(type == 0) outputText("shark-girl");

@@ -1046,7 +1046,9 @@ public class PlayerInfo extends BaseContent {
 			else if (flags[kFLAGS.PRISCILLA_LVL_UP] < 1) outsideCampNpcsStats += "<b>Priscilla lvl:</b> 32\n";
 			else outsideCampNpcsStats += getNPCLevel("Priscilla", 32, 0, 11, 6, flags[kFLAGS.PRISCILLA_LVL_UP]);
 		}
-		if (flags[kFLAGS.TAMANI_LVL_UP] < 1) outsideCampNpcsStats += "<b>Tamani lvl:</b> 8 (current max lvl she can reach)\n";
+		if (flags[kFLAGS.TAMANI_LVL_UP] == 15) outsideCampNpcsStats += "<b>Tamani lvl:</b> 98 (current max lvl she can reach)\n";
+		else if (flags[kFLAGS.TAMANI_LVL_UP] < 1) outsideCampNpcsStats += "<b>Tamani lvl:</b> 8\n";
+		else outsideCampNpcsStats += getNPCLevel("Tamani", 8, 0, 15, 6, flags[kFLAGS.TAMANI_LVL_UP]);
 		if (flags[kFLAGS.TAMANI_DAUGHTERS_LVL_UP] < 1) outsideCampNpcsStats += "<b>Tamani's daughters lvl:</b> " + Math.round(8 + flags[kFLAGS.TAMANI_DAUGHTERS_LVL_UP]) + "\n";
 		if (flags[kFLAGS.MINO_SONS_LVL_UP] < 1) {
 			if (flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] < 20) outsideCampNpcsStats += "<b>Minotaur Gang lvl:</b> ";

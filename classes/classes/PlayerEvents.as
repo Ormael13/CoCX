@@ -2288,12 +2288,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\nNo longer pregnant, you feel a void in your belly as the need to be impregnated again claw at your mind.\n");
 				player.statStore.addBuffObject({"lib.mult":0.50}, "Impregnate me!!!",{text:"You strongly desire to be impregnated."});
 			}
-			if(player.isPregnant() && player.isGoblinoid() && player.hasMutation(IMutationsLib.GoblinOvariesIM) && !player.statStore.hasBuff("PregGoblinoid")){
-				var libMulti:Number = 0;
-				libMulti += 0.1 * player.perkv1(IMutationsLib.GoblinOvariesIM);
-				player.statStore.addBuffObject({"lib.mult":libMulti}, "PregGoblinoid",{text:""});
+			if(player.isPregnant() && player.hasMutation(IMutationsLib.GoblinOvariesIM) && !player.statStore.hasBuff("PregGoblinoid")){
+				var libMulti:Number = player.lib;
+				libMulti *= (0.1 * player.perkv1(IMutationsLib.GoblinOvariesIM));
+				libMulti = Math.round(libMulti);
+				player.statStore.addBuffObject({"lib":libMulti}, "PregGoblinoid",{text:""});
 			}
-			if(!player.isPregnant() && player.isGoblinoid() && player.hasMutation(IMutationsLib.GoblinOvariesIM) && player.statStore.hasBuff("PregGoblinoid")){
+			if(!player.isPregnant() && player.statStore.hasBuff("PregGoblinoid")){
 				player.statStore.removeBuffs("PregGoblinoid");
 			}
 			if(SophieFollowerScene.HarpyKids >= 21 && !player.hasPerk(PerkLib.HarpyQueen)){

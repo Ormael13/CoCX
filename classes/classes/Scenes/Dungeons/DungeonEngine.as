@@ -363,7 +363,7 @@ public class DungeonEngine extends DungeonAbstractContent {
         else return (int(flags[kFLAGS.EBON_LABYRINTH] / 150) + 1) * 150;
     }
     public function checkEbonLabyrinthClear():Boolean {
-        //Now the dungeon contains different bosses up to floor 300. Let's give people a hint?
+        //Now the dungeon contains different bosses up to floor 350. Let's give people a hint?
         return (flags[kFLAGS.EBON_LABYRINTH_RECORD] >= clearRoomEL());
         //return (flags[kFLAGS.EBON_LABYRINTH] > 1);//exploracja 50 pokoi bez porażki
     }

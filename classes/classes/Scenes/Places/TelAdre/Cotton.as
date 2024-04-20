@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.Places.TelAdre {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
@@ -1306,6 +1307,7 @@ public function goTellCottonShesAMomDad():void {
 //Birthing*
 public function birthingCottonsKids():void {
 	var kid:int = rand(3) + 1; //1,2,3
+	if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) kid *= 2; 
 	function kidSel(male:String, fem:String, herm:String = ""):String {
 		return kid == 1 ? male : kid == 2 || !herm ? fem : herm;
 	}

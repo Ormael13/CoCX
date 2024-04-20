@@ -2,6 +2,7 @@ package classes.Scenes.NPCs{
 import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.*;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
@@ -3020,7 +3021,8 @@ public function giveBirthToPureJojoBabies():void {
 		flags[kFLAGS.JOJO_LITTERS_AMILY_REACTION_COUNTER]++;
 	}
 	else outputText("\"<i>Look at them all. You... I never thought I would be able to have kids when my village was destroyed, but you made it happen. Thank you,</i>\" Jojo tells you sincerely. You ask him how they were going to raise them. Jojo frowned thoughtfully and says, \"<i>Hmm, you’re right...we can’t raise them here... I know of a place we can send them. It’s safe from corruption and it should do till we find better arrangements.</i>\" As sad as you were about sending your kids away, you agree with Jojo; it was for the best. You're too exhausted to keep your eyes open for long, but he promises watch them and even as you fall asleep, he’s gathering up your children and taking them away.\n\n");
-	flags[kFLAGS.JOJO_LITTERS]++;
+	if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) flags[kFLAGS.JOJO_LITTERS] += 2;
+    else flags[kFLAGS.JOJO_LITTERS]++;
 }
 
 private function suckJojosCock():void {

@@ -288,6 +288,11 @@ import classes.display.SpriteDb;
 			if (flags[kFLAGS.MINOTAUR_SONS_GROW_COUNTDOWN] > 20 || flags[kFLAGS.ETNA_FOLLOWER] == 3) this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
 			else this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINO_SONS_LVL_UP] >= 2) this.createPerk(PerkLib.JobBeastWarrior, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINO_SONS_LVL_UP] >= 4) this.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINO_SONS_LVL_UP] >= 6) this.createPerk(PerkLib.JobBeastlord, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINO_SONS_LVL_UP] >= 8) this.createPerk(PerkLib.EpicStrength, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINO_SONS_LVL_UP] >= 10) this.createPerk(PerkLib.EpicLibido, 0, 0, 0, 0);
 			checkMonster();
 		}
 	}
