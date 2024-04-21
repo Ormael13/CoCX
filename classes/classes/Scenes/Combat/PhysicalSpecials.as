@@ -23,6 +23,7 @@ import classes.Scenes.Dungeons.D3.LivingStatue;
 import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
 import classes.Scenes.Dungeons.DeepCave.Vala;
 import classes.Scenes.NPCs.AetherTwinsFollowers;
+import classes.Scenes.NPCs.Kiha;
 import classes.Scenes.Places.Boat.Anemone;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Places.WoodElves;
@@ -89,6 +90,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 					if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
 				if (!player.hasPerk(PerkLib.ElementalBody)) {
+					if (player.isTaur()) {
+						if (player.hasStatusEffect(StatusEffects.Gallop)) bd = buttons.add("Gallop(Stop)", gallopingStop).hint("Stop galloping.");
+						else {
+							bd = buttons.add("Gallop", gallopingStart).hint("Start galloping. Deals 50% more damage with physical specials but disable melee and range base attacks.");
+							bd.requireFatigue(gallopingcoooooost());
+						}
+					}
 					if (player.hairType == 4) {
 						bd = buttons.add("AnemoneSting", anemoneSting).hint("Attempt to strike an opponent with the stinging tentacles growing from your scalp.  Reduces enemy speed and increases enemy lust.", "Anemone Sting");
 						if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
@@ -572,7 +580,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd = buttons.add("Buzzing tune", buzzingTone).hint("Sing a buzzing hypnotic tune in battle, causing the opponent to be stunned for 6 rounds with massive lust damage. This move takes 2 rounds of preparation during which pc must do nothing but sing.");
 				bd.requireFatigue(spellCost(50));
 			}
-			if (player.hasStatusEffect(StatusEffects.FieryBand)) {
+			if (player.hasStatusEffect(StatusEffects.FieryBand) && monster is Kiha) {
 				bd = buttons.add("Call Kiha", callKiha).hint("Call out to Kiha using the Starfire band.");
 				bd.requireFatigue(physicalCost(30));
 			}
@@ -915,6 +923,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage *= 2;
 		}
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
+		//if (player.hasStatusEffect(StatusEffects.Gallop)) damage *= 1.5;
 		damage *= PAMulti;
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -985,6 +994,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.weaponRangeName == "Wild Hunt" && player.level > monster.level) damage *= 1.2;
 		if (player.weaponRangeName == "Hodr's bow" && monster.hasStatusEffect(StatusEffects.Blind)) damage *= 1.1;
+		//if (player.hasStatusEffect(StatusEffects.Gallop)) damage *= 1.5;
 		damage *= PSMulti;
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1053,6 +1063,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage += combat.meleeDamageNoLagSingle();
 		if (damage < 10) damage = 10;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
+		if (player.hasStatusEffect(StatusEffects.Gallop)) damage *= 1.5;
 		if (monster.hasPerk(PerkLib.EnemyGroupType)) damage *= 3;
 		if (monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 5;
 		var crit:Boolean = false;
@@ -1135,6 +1146,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage += combat.meleeDamageNoLagSingle();
 		if (damage < 10) damage = 10;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
+		//if (player.hasStatusEffect(StatusEffects.Gallop)) damage *= 1.5;
 		damage *= SAMulti;
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1392,6 +1404,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.ExplosiveCartridge) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 			if (player.hasPerk(PerkLib.NamedBullet) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 1.5;
 		}
+		//if (player.hasStatusEffect(StatusEffects.Gallop)) damage *= 1.5;
 		damage *= SAMulti;
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1480,6 +1493,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.DevastatingCharge)) damage *= 1.5;
 		if (player.armor.name == "some taur paladin armor" || player.armor.name == "some taur blackguard armor") damage *= 2;
+		if (player.hasStatusEffect(StatusEffects.Gallop)) damage *= 1.5;
 		damage *= PAM2;
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1543,6 +1557,28 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		return chargingcostvalue;
 	}
+	
+	public function gallopingStart():void {
+		clearOutput();
+		var costvalue:Number = gallopingcoooooost();
+		fatigue(costvalue, USEFATG_PHYSICAL);
+		outputText("You take some distance before making a U-turn and start galloping. (no not Lia text as she not provide any for this. want to know more? ask her about that) ");
+		player.createStatusEffect(StatusEffects.Gallop, 0, 0, 0, 0);
+		enemyAI();
+	}
+	public function gallopingStop():void {
+		clearOutput();
+		outputText("You stop galloping. (no not Lia text as she not provide any for this. want to know more? ask her about that) ");
+		player.removeStatusEffect(StatusEffects.Gallop);
+		enemyAI();
+	}
+	public function gallopingcoooooost():Number {
+		var percent:Number = 40;
+		if (player.perkv1(IMutationsLib.TwinHeartIM) >= 1) percent -= (4 * player.perkv1(IMutationsLib.TwinHeartIM));
+		if (player.hasPerk(PerkLib.IronMan)) percent *= 0.5;
+		var gallopingcostvalue:Number = Math.round(player.maxFatigue() * 0.01 * percent);
+		return gallopingcostvalue;
+	}
 
 	public function whirlwind():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
@@ -1576,6 +1612,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else damage *= 1.25;
 		}
 		if (player.hasPerk(PerkLib.GiantsReach) && (player.weapon.isLarge() || (player.hasPerk(PerkLib.GigantGripEx) && player.weapon.isSingleMassive()) || (player.hasPerk(PerkLib.GigantGripSu) && player.weapon.isDualMassive()))) damage *= 1.25;
+		if (player.hasStatusEffect(StatusEffects.Gallop)) damage *= 1.5;
 		//crit
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1652,6 +1689,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else damage *= 1.25;
 		}
 		if (player.hasPerk(PerkLib.GiantsReach) && (player.weapon.isLarge() || (player.hasPerk(PerkLib.GigantGripEx) && player.weapon.isSingleMassive()))) damage *= 1.25;
+		if (player.hasStatusEffect(StatusEffects.Gallop)) damage *= 1.5;
 		//crit
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1737,6 +1775,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else damage *= 2;
 		}
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
+		if (player.hasStatusEffect(StatusEffects.Gallop)) damage *= 1.5;
 		//crit
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1831,12 +1870,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//Each sting does 5-10 lust damage and 2.5-5 speed damage
 			var damage:Number = 0;
 			var hairDamage:int = 1 + rand(2);
-			if(player.hairLength >= 12) hairDamage += 1 + rand(2);
-			if(player.hairLength >= 24) hairDamage += 1 + rand(2);
-			if(player.hairLength >= 36) hairDamage += 1;
+			if (player.hairLength >= 12) hairDamage += 1 + rand(2);
+			if (player.hairLength >= 24) hairDamage += 1 + rand(2);
+			if (player.hairLength >= 36) hairDamage += 1;
 			if (player.hasPerk(PerkLib.RacialParagon)) hairDamage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) hairDamage *= 2;
 			if (player.hasPerk(PerkLib.LionHeart)) hairDamage *= 2;
+			if (player.hasStatusEffect(StatusEffects.Gallop)) hairDamage *= 1.5;
 			while(hairDamage > 0) {
 				hairDamage--;
 				damage += 5 + rand(6);
@@ -1925,6 +1965,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+			if (player.hasStatusEffect(StatusEffects.Gallop)) damage *= 1.5;
 			damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 			damage *= monster.damagePercent() / 100;
 			if (damage < 5) damage = 5;
@@ -2060,6 +2101,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		if (player.upperGarment == player.game.undergarments.COW_BRA) damage *= 1.50;
+		if (player.hasStatusEffect(StatusEffects.Gallop)) damage *= 1.5;
 		damage = Math.round(damage);
 		if (damage < 1) damage = 1;
 		doDamage(damage);
@@ -2097,6 +2139,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+		if (player.hasStatusEffect(StatusEffects.Gallop)) damage *= 1.5;
 		damage = Math.round(damage);
 		doDamage(damage);
 		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
@@ -2158,6 +2201,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) slamDmg *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) slamDmg *= 2;
 		if (player.hasPerk(PerkLib.LionHeart)) slamDmg *= 2;
+		if (player.hasStatusEffect(StatusEffects.Gallop)) slamDmg *= 1.5;
 		slamDmg *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		slamDmg = Math.round(slamDmg);
 		doDamage(slamDmg);
@@ -2299,6 +2343,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.isRaceCached(Races.MOUSE, 2) && player.countRings(jewelries.INMORNG)) damage *= 2.2;
 				else damage *= 2;
 			}
+			if (player.hasStatusEffect(StatusEffects.Gallop)) damage *= 1.5;
 			damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 			damage *= monster.damagePercent() / 100;
 			if (damage < 5) damage = 5;
@@ -2959,6 +3004,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var damage:Number = 0;
 		damage += (combat.meleeUnarmedDamageNoLagSingle() * 2);
 		damage *= (spellMod() * 2);
+		if (player.hasStatusEffect(StatusEffects.Gallop)) damage *= 1.5;
 		damage = Math.round(damage);
 		outputText(" ");
 		doDamage(damage, true, true);
@@ -4112,6 +4158,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+		if (player.hasStatusEffect(StatusEffects.Gallop)) damage *= 1.5;
 		damage *= 1.6;
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -4552,6 +4599,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 				if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 				if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+				if (player.hasStatusEffect(StatusEffects.Gallop)) damage *= 1.5;
 				damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 				damage = Math.round(damage);
 				doDamage(damage);
@@ -4631,6 +4679,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+		if (player.hasStatusEffect(StatusEffects.Gallop)) damage *= 1.5;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -4771,6 +4820,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+			if (player.hasStatusEffect(StatusEffects.Gallop)) damage *= 1.5;
 			if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
 				damage = Math.round(damage * combat.fireDamageBoostedByDao());
 				doFireDamage(damage, true, true);
@@ -4915,6 +4965,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+			if (player.hasStatusEffect(StatusEffects.Gallop)) damage *= 1.5;
 			doDamage(damage, true, true);
 			doLightningDamage(Math.round(damage*0.1), true, true);
 			if (player.hasPerk(PerkLib.PhantomStrike)) {
@@ -5014,6 +5065,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 				if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 				if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+				if (player.hasStatusEffect(StatusEffects.Gallop)) damage *= 1.5;
 				if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
 					damage = Math.round(damage * combat.fireDamageBoostedByDao());
 					doFireDamage(damage, true, true);
@@ -5440,6 +5492,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+			if (player.hasStatusEffect(StatusEffects.Gallop)) damage *= 1.5;
 			damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 			damage = Math.round(damage);
 			var totalDamage:Number;
@@ -5610,6 +5663,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+		if (player.hasStatusEffect(StatusEffects.Gallop)) damage *= 1.5;
 		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		//(None yet!)
 		damage = Math.round(damage);
@@ -5731,6 +5785,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+		if (player.hasStatusEffect(StatusEffects.Gallop)) damage *= 1.5;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -6263,7 +6318,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function StealthModeDeactivate():void {
 		clearOutput();
-		outputText("Depowering system you cause mech form to become visible.\n\n");
+		outputText("Depowering system you cause mech to become visible again.\n\n");
 		monster.removeStatusEffect(StatusEffects.InvisibleOrStealth);
 		enemyAI();
 	}

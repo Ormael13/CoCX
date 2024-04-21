@@ -998,6 +998,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const FrostburnDoT:StatusEffectType              = mkCombat("Frostburn DoT");
 		public static const FrozenLung:StatusEffectType	               = mkCombat("Frozen Lung");
 		public static const FrozenSolid:StatusEffectType       		   = mkCombat("FrozenSolid");
+		public static const Gallop:StatusEffectType		               = mkCombat("Gallop");
 		public static const GiantBoulder:StatusEffectType              = mkCombat("Giant Boulder");
 		public static const GiantGrabbed:StatusEffectType              = mkCombat("Giant Grabbed");
 		public static const GoblinMechStimpack:StatusEffectType        = mkCombat("Goblin Mech Stimpack");

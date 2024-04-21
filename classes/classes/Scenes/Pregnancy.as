@@ -2470,8 +2470,14 @@ public class Pregnancy extends NPCAwareContent {
                             EngineCore.outputText("You notice that Marble seems to be deep in thought, and you ask her what is wrong.  She starts after a moment and says, \"<i>Oh sweetie, no, it's nothing really.  I just never thought that I'd actually be able to father a son is all.  The thought never occurred to me.\"</i>");
                         }
                         //Add to marble-kids:
-                        flags[kFLAGS.MARBLE_KIDS]++;
-                        flags[kFLAGS.MARBLE_BOYS]++; //increase the number of male kids with Marble
+                        if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) {
+							flags[kFLAGS.MARBLE_KIDS] += 2;
+							flags[kFLAGS.MARBLE_BOYS] += 2;
+						}
+						else {
+							flags[kFLAGS.MARBLE_KIDS]++;
+							flags[kFLAGS.MARBLE_BOYS]++; //increase the number of male kids with Marble
+						}
                     }
                     else // end of new content
                             //it's a girl!
@@ -2488,7 +2494,8 @@ public class Pregnancy extends NPCAwareContent {
                         }
                         EngineCore.outputText("The little girl is already starting to look like she is a few years old; she's trotting around on her little hooves.");
                         //Add to marble-kids:
-                        flags[kFLAGS.MARBLE_KIDS]++;
+                        if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) flags[kFLAGS.MARBLE_KIDS] += 2;
+                        else flags[kFLAGS.MARBLE_KIDS]++;
                     }
                     //Increase the size of the PC's hips, as per normal for pregnancies, increase birth counter
                     if(player.hips.type < 10) {
@@ -2529,7 +2536,8 @@ public class Pregnancy extends NPCAwareContent {
                 //326 Number of sons grown
                 //327 Number of sons pending
                 //328 growup countdown
-                flags[kFLAGS.MINOTAUR_SONS_CHILDREN]++;
+                if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) flags[kFLAGS.MINOTAUR_SONS_CHILDREN] += 2;
+                else flags[kFLAGS.MINOTAUR_SONS_CHILDREN]++;
                 if(flags[kFLAGS.MINOTAUR_SONS_GROW_COUNTDOWN] == 0) flags[kFLAGS.MINOTAUR_SONS_GROW_COUNTDOWN] = 150;
             }
             //Amily failsafe - converts PC with pure babies to mouse babies if Amily is corrupted
@@ -2715,7 +2723,8 @@ public class Pregnancy extends NPCAwareContent {
                     EngineCore.outputText("\n\nWith a sudden gush of nectar you feel something slowly sliding out of you, prying your body open with slow but steady progress. Something is coming out and it feels so good, causing you to periodically spasm in reaction to the crashing waves of pleasure rushing to your brain. You pussy starts gushing and you know exactly what is coming next.");
                     EngineCore.outputText("\n\nYour eyes roll inward and you lose yourself to consecutive orgasms as you feel seeds the size of an apple drop, one by one, out of your abused pussy. One, two, three... Eventually, you lose count of the seeds as your mind temporarily loses the ability of rational thought.  Before long the ground is covered with seeds which you proceed to swiftly throw away in the forest. Despite how wrong it was you can’t help but think you want to do this again as soon as possible.");
                 }
-                flags[kFLAGS.ALRAUNE_SEEDS] += 5;
+                if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) flags[kFLAGS.ALRAUNE_SEEDS] += 10;
+                else flags[kFLAGS.ALRAUNE_SEEDS] += 5;
                 if (flags[kFLAGS.ALRAUNE_GROWING] < 1) flags[kFLAGS.ALRAUNE_GROWING] = 1;
                 player.dynStats("lib", 1, "sen", 5);
                 player.knockUpForce(0, 0, 1); //Clear Pregnancy

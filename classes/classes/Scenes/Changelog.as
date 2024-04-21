@@ -14,7 +14,7 @@ public class Changelog extends BaseContent
 		{}
 		
 		public function accessChangelogMenu():void {
-			Changelog53();
+			Changelog53();//new: lvl-up perk, rare asc perk, event perk, items perk, super perk, enemy perk, internal mutation, item, consumable, usable, p.special, m.special, spell, soulskill, bodypart
 		}
 		//zrobić do 2022 na świeta event z reniferami i nie odblokowywać go do ok. 20-24 grudnia 2021 xD
 		private function Changelog55():void {
@@ -43,15 +43,25 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Nightshade. Gained by using Black Lily. Effects: Raise min corruption by 20% permanently +50% tease damage. Pollen now erodes lust resistance by 5% per round. Your alraune abilities are now considered Dark Elements and your vine attack delivers extra dark damage.\n");
 			outputText("-New event perk: Snow Lily. Gained by using Snow Flower. Effects: Your alraune abilities are now considered to be Cold Elements effect and your vine attack delivers extra cold damage.\n");
 			outputText("-New event perk: Cinderbloom. Gained by using Ember Flower. Effects: Your alraune abilities are now considered to be Fire Elements effect and your vine attack delivers extra fire damage.\n");
+			outputText("-New event perk: Spear Affinity. Gained by been troll / glacial troll. Effects: Spears deal increased damage equal to 15% of your strength, speed, wisdom and now have 100% armor penetration.\n");
+			outputText("-New event perk: Pheromone cloud. Gained by been female troll / female glacial troll. Effects: Like most female trolls, you exude a pheromone cloud when aroused. This will drive men around you crazy with lust. (Passively deal lust damage to enemies that have a penis each turn. Damage scales off Libido)\n");
+			outputText("-New event perk: Troll Resistance. Gained by been troll / glacial troll. Effects: Your troll hide grants you protection from magical effects. (Increases magic resist by 15% (fire resist by 7,5%))\n");
+			outputText("-New event perk: Troll Regeneration. Gained by been troll / glacial troll. Effects: 6% health and 6 points of fatigue regeneration but double hunger decaying speed. Stops for 3 rounds when damaged by fire.\n");
 			outputText("-New consumable (by Liadri): Black Lily. Obtained from Rafflesia. Effects: When used by alraune/lilaraune would grant Nightshade perk and Darkness Affinity.\n");
 			outputText("-New consumable (by Liadri): Snow Flower. Obtained from Snow Lily or founded in tundra/glacial rift. Effects: When used by alraune/lilaraune would grant Snow Lily perk and Cold Affinity.\n");
 			outputText("-New consumable (by Liadri): Ember Flower. Obtained from Cinderbloom or founded in ashlands/vulcanic crag. Effects: When used by alraune/lilaraune would grant Cinderbloom perk and Fife Affinity.\n");
+			outputText("-New P. Special: Feint Bash. Usable by Troll/Glacial Troll with Troll/Glacial Troll face. Cost 25 fatigue and can stun for 3 turns. Have 5 turns cooldown after use.\n");
+			outputText("-New P. Special: Savage Claws. Usable by Glacial Troll with Glacial Troll arms. Cost 100 fatigue.\n");
 			outputText("-Natural Instincts & Tough Hide perks req. of Job: Beast Warrior changed to req. perk Job: Feral Champion. Natural arsenal effect increased from +50% to +100%. Feral Armor req. for tou stat lowered from 60 to 50.\n");
 			outputText("-Venomous Adipose Tissue & Venomous Diet perks have additional req. of having perk Job: Feral Champion.\n");
 			outputText("-Enabled camp building at night for night races. But would limit possible helpers to those that could be still active at night. Herbalism and Dummy camp options can also be used at night by night races.\n");
 			outputText("-Female mindbreaker been reeducated causing their corruption increase by 40 pts. Re: Convert option was moved to different button in super perks menu to avoid misclicks due to same position as Previous button.\n");
+			outputText("-Glacial trolls could gain Cold Affnity perk.\n");
+			outputText("-Zenji now have hp and lust variants for defeats pre-camp and for camp sparring, in case combat would change his perspective on PC wining by lust have onbly 50% chance to change that perspective. Also when fighting to the death would have full lust resistance and no effect to lower that resistance would work on him.\n");
 			outputText("-Bestial Blademaster armor has the revealing tag now, because reasons. (Lord Shadeogorath)\n");
 			outputText("-Implemented horse and kirin taur revamp sprites (by Liadri). (Lord Shadeogorath)\n");
+			outputText("-Demon face now changes based on corruption. (Lord Shadeogorath)\n");
+			outputText("-Fixed a bug causing the goo armor taur sprite to not show. (Lord Shadeogorath)\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-\n");
@@ -67,19 +77,9 @@ public class Changelog extends BaseContent
 			outputText("-New enemies: Mid rank Angel of Mist - lvl 58, Mist Bee Huntress - lvl 60, Mist Wasp Huntress - lvl 62, Mist Hornet Huntress - lvl 64, Mist Alraune Maiden - lvl 66, Mist Cinderbloom - lvl 68, Mist Snow Lily - lvl 70. Encounterable on 5th floor of River Dungeon\n");
 			outputText("-Phouka Drink scene when pc toughness is between 30 and 70 bug fixed. Also scene will now check for core toughness value not total.\n");
 			outputText("-New bodyparts: Troll Arms, Troll lower body, Troll Tusks, Troll Ears, Troll Tail (from Troll Fig); Glacial Troll Arms, Glacial Troll lower body, Glacial Troll Tusks, Glacial Troll Ears, Glacial Troll Tail (from Icy Fig)\n");
-			outputText("-New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies. Using this item will turn PC into troll. Troll bonuses at 10 pts in racial score (scalable): +30% to Str multi, +30% to Tou multi, +20% to Spr multi, +20% to Int multi, +60% to Wis multi.\n");
-			outputText("-New TF item (by Pyromania): Icy Fig. Dropped by Glacial Troll enemies. Using this item will turn PC into glacial troll. Glacial Troll bonuses at 10 pts in racial score (scalable): +30% to Str multi, +40% to Tou multi, +10% to Spe multi, +20% to Int multi, +60% to Wis multi.\n");
-			outputText("-New event perk: Spear Affinity. Gained by been troll / glacial troll. Effects: Spears deal increased damage equal to 15% of your strength, speed, wisdom and now have 100% armor penetration.\n");
-			outputText("-New event perk: Pheromone cloud. Gained by been female troll / female glacial troll. Effects: Like most female trolls, you exude a pheromone cloud when aroused. This will drive men around you crazy with lust. (Passively deal lust damage to enemies that have a penis each turn. Damage scales off Libido)\n");
-			outputText("-New event perk: Troll Resistance. Gained by been troll / glacial troll. Effects: Your troll hide grants you protection from magical effects. (Increases magic resist by 15% (fire resist by 7,5%))\n");
-			outputText("-Glacial trolls could gain Cold Affnity perk.\n");
-			outputText("-Zenji now have hp and lust variants for defeats pre-camp and for camp sparring, in case combat would change his perspective on PC wining by lust have onbly 50% chance to change that perspective. Also when fighting to the death would have full lust resistance and no effect to lower that resistance would work on him.\n");
-			outputText("-New P. Special: Feint Bash. Usable by Troll/Glacial Troll with Troll/Glacial Troll face. Cost 25 fatigue and can stun for 3 turns. Have 5 turns cooldown after use.\n");
-			outputText("-New P. Special: Savage Claws. Usable by Glacial Troll with Glacial Troll arms. Cost 100 fatigue.\n");
-			outputText("-New event perk: Troll Regeneration. Gained by been troll / glacial troll. Effects: 6% health and 6 points of fatigue regeneration but double hunger decaying speed. Stops for 3 rounds when damaged by fire.\n");
+			outputText("-New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies. Using this item will turn PC into troll. Troll bonuses at 10 pts in racial score (scalable): +30% to Str multi, +30% to Tou multi, +20% to Spr multi, +20% to Int multi, +60% to Wis multi, +20 to max tone cap, +50 to max satiety.\n");
+			outputText("-New TF item (by Pyromania): Icy Fig. Dropped by Glacial Troll enemies. Using this item will turn PC into glacial troll. Glacial Troll bonuses at 10 pts in racial score (scalable): +30% to Str multi, +40% to Tou multi, +10% to Spe multi, +20% to Int multi, +60% to Wis multi, +20 to max tone cap, +75 to max satiety.\n");
 			outputText("-Tamani daughters & Minotaur Sons can now level-up (their lvl depends on how many of them are and seperate lvl up counter so the max level isn't clearly defines but would be at least around 100/105 lvl). Like Tamani daughters now Minotaur sons would slowly die out when there is too many of them + added their count on children page right below Tamani daughters.\n");
-			outputText("-Demon face now changes based on corruption. (Lord Shadeogorath)\n");
-			outputText("-Fixed a bug causing the goo armor taur sprite to not show. (Lord Shadeogorath)\n");
 			outputText("-New mutation perk: Goblin Ovaries. Req. having free ovaries mutation slot, one of goblinoid races. Effects: Increase fertility rating by 10, While pregnant increase total libido by 10%. Double the number of kids you birth.\n");
 			outputText("-New mutation perk: Goblin Ovaries (Primitive). Req. Goblin Ovaries and lvl 30+. Effects: Increase fertility rating by 20, While pregnant increase total libido by 20%. Double the number of kids you birth. Increase physical damage done while pregnant by 30%.\n");
 			outputText("-New mutation perk: Goblin Ovaries (Evolved). Req. Goblin Ovaries (Primitive) and lvl 60+. Effects: Increase fertility rating by 30, While pregnant increase total libido by 30%. Double the number of kids you birth. Increase physical damage done while pregnant by 40%. Lust damage against male opponents increased by 25%.\n");
@@ -88,21 +88,23 @@ public class Changelog extends BaseContent
 			outputText("-Golemancer in HXD could sell metal pieces/plates to PC golemancer that can buy energy cores from her. She even gives 3 options of how many metal pieces/plates to buy at once - 1x, 5x, 10x.\n");
 			outputText("-Tamani could level up (up to lvl 98). After first level up she would gain Elite type which would be upgraded to Champion type and then to Boss type.\n");
 			outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP / Lust effect of 10% magnitude.\n");
+			outputText("-New P. Special: Gallop. Can be only used by any taur PC. Effects: Run at high speed across the battlefield evading melee combat but not ranged attack, does not disable P.Special but prevents the use of the regular melee attack action. While galloping all P.Special abilities are 50% stronger due to momentum. Galloping costs fatigue every round.\n");
+			outputText("-New event perk: Equine Strength. Gained by been horse-morph or centaur. Effects: Add 25% of your speed and libido to your strength stat.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New mutation perk: Equine Muscle. Req. having free musculature mutation slot, one of races: horse-morph, centuar, unicorn, bicorn, alicorn, nightmare. Effects: 
 			outputText("-\n");//New mutation perk: Equine Muscle (Primitive). Req. Equine Muscle and lvl 30+. Effects: 
 			outputText("-\n");//New mutation perk: Equine Muscle (Evolved). Req. Equine Muscle (Primitive) and lvl 60+. Effects: 
 			outputText("-\n");//New mutation perk: Equine Muscle (Final Form). Req. Equine Muscle (Evolved) and lvl 90+. Effects: 
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Dracula/lina PC unable to find get ghoul if they not learned this as normal Vampire, unable to buy manual for 1st atk: f. swords, Arigean Princess PC not been fully immune to TF-ing like other perm races, Weresharks not having their stats changing according to moon phase or boosted during use of Crinos Shape, Phoenix TF adding mutagen penatly instead of stat curse, ");
@@ -168,8 +170,6 @@ public class Changelog extends BaseContent
 			outputText("\n");full stats bonuses not added yet to: Echidna, Scorpion-morph
 			outputText("\n");wolf pepper - nieużywany item chyba co można go by w wolf TF zmienić: dodaje special coś na kształt likantropii ^^
 			outputText("\n");aqua seed - item mający być siren tf item
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bedą one wcześniej już za czesto wypadać
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
 			outputText("\n");cel na 0.8(/9): dodać w mieście kultywatorów arene/ring na którym sie można pojedynkować z niektórymi przedstawicielami ras bedącymi soul cultivators (opcje ras do walki: goblinka, salamander, male(/lub female jeśli kanon nie pozwala na male) kitsune, scylla)
