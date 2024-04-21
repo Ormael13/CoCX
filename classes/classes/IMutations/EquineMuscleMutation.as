@@ -9,27 +9,28 @@ import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Player;
+import classes.Races;
 
-public class GoblinOvariesMutation extends IMutationPerkType
+public class EquineMuscleMutation extends IMutationPerkType
 	{
 		override public function get mName():String {
-            return "Goblin Ovaries";
+            return "Equine Muscle";
         }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
 			if (pTier >= 1){
-				descS += "Increase fertility rating by "+pTier+"0, While pregnant increase total libido by "+pTier+"0%. Double the number of kids you birth";
+				descS += "+"+(pTier*25)+"% to all Physical Ability damage. Gallop cost "+pTier+"0% less fatigue";
 			}
             if (pTier >= 2){
-                descS += ". Increase physical damage done while pregnant by "+(pTier+1)+"0%";
+                descS += ". Physical ability consumes "+((pTier-1)*5)+"% less fatigue";
             }
-            if (pTier == 3){
-                descS += ". Lust damage against male opponents increased by 25%";
+            if (pTier >= 3){
+                descS += ". Physical ability that stuns do so for one extra round";
             }
-            if (pTier == 4){
-                descS += ". Lust damage against male opponents increased by 50%. Add your fertility score as a bonus to libido";
+            if (pTier >= 4){
+                descS += ". While Galloping gains +10% evasion against ranged attack";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -42,10 +43,10 @@ public class GoblinOvariesMutation extends IMutationPerkType
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
-                    this.requireOvariesMutationSlot()
+                    this.requireMusclesMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.isGoblinoid();
-                    }, "Goblin race");
+                        return player.isAnyRaceCached(Races.HORSE, Races.CENTAUR, Races.UNICORN, Races.ALICORN);
+                    }, "Horse/Centaur/Unicorn/Bicorn/Alicorn/Nightmare race");
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -59,16 +60,16 @@ public class GoblinOvariesMutation extends IMutationPerkType
         //Mutations Buffs
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
-            if (pTier == 1) pBuffs['lib.mult'] = 0.05;
-            if (pTier == 2) pBuffs['lib.mult'] = 0.15;
-            if (pTier == 3) pBuffs['lib.mult'] = 0.35;
-            if (pTier == 4) pBuffs['lib.mult'] = 0.75;
+            if (pTier == 1) pBuffs['str.mult'] = 0.05;
+            if (pTier == 2) pBuffs['str.mult'] = 0.15;
+            if (pTier == 3) pBuffs['str.mult'] = 0.35;
+            if (pTier == 4) pBuffs['str.mult'] = 0.75;
             return pBuffs;
         }
 
-        public function GoblinOvariesMutation() 
+        public function EquineMuscleMutation() 
 		{
-			super(mName + " IM", mName, SLOT_OVARIES, 4);
+			super(mName + " IM", mName, SLOT_MUSCLE, 3);
 		}
 		
 	}

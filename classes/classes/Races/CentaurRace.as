@@ -57,6 +57,7 @@ public class CentaurRace extends Race {
 				.faceType(Face.HUMAN,+1);
 		
 		addMutation(IMutationsLib.TwinHeartIM, +2);
+		addMutation(IMutationsLib.EquineMuscleIM, +1);
 		
 		buildTier(8, "centaur")
 				.buffs({
