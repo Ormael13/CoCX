@@ -2735,7 +2735,7 @@ public class Creature extends Utils
 			if (flags[kFLAGS.HUNGER_ENABLED] >= 1)
 			{
 				lustCoefficient = (lust + 50) / 5;
-				if (hasPerk(PerkLib.PilgrimsBounty)) lustCoefficient = 30;
+				if (hasPerk(PerkLib.PilgrimsBounty)) lustCoefficient = (maxOverLust + 50) / 5;
 				var percent:Number = 0;
 				percent = lustCoefficient + (hoursSinceCum + 10);
 				if (percent > 100)
@@ -2746,7 +2746,7 @@ public class Creature extends Utils
 			}
 			//Pilgrim's bounty maxes lust coefficient
 			if (hasPerk(PerkLib.PilgrimsBounty))
-				lustCoefficient = 150 / 10;
+				lustCoefficient = (maxOverLust + 50) / 10;
 			if (balls == 0)
 				quantity = int(1.25 * 2 * cumMultiplier * 2 * lustCoefficient * (hoursSinceCum + 10) / 24) / 10;
 			else
