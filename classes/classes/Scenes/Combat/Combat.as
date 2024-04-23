@@ -5373,7 +5373,12 @@ public class Combat extends BaseContent {
         if (player.isAlraune()) {
             outputText("You lash at your opponent with your many vines, striking twelve times.");
             var x:int = 12;
-            while (x-->0) ExtraNaturalWeaponAttack();
+            while (x-->0) {
+				if (player.hasPerk(PerkLib.SnowLily)) ExtraNaturalWeaponAttack(1, "ice");
+				else if (player.hasPerk(PerkLib.Cinderbloom)) ExtraNaturalWeaponAttack(1, "fire");
+				else if (player.hasPerk(PerkLib.Nightshade)) ExtraNaturalWeaponAttack(1, "darkness");
+				else ExtraNaturalWeaponAttack();
+			}
             outputText("\n");
         }
         //Unique TENTACLES STRIKES
