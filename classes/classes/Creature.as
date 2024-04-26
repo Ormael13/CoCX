@@ -2730,12 +2730,12 @@ public class Creature extends Utils
 			//Other things that affect it:
 			//lust - 50% = normal output.  0 = half output. 100 = +50% output.
 			//trace("CUM ESTIMATE: " + int(1.25*2*cumMultiplier*2*(lust + 50)/10 * (hoursSinceCum+10)/24)/10 + "(no balls), " + int(ballSize*balls*cumMultiplier*2*(lust + 50)/10 * (hoursSinceCum+10)/24)/10 + "(withballs)");
-			var lustCoefficient:Number = (lust + 50) / 10;
+			var lustCoefficient:Number = lust / 10;
 			//If realistic mode is enabled, limits cum to capacity.
 			if (flags[kFLAGS.HUNGER_ENABLED] >= 1)
 			{
-				lustCoefficient = (lust + 50) / 5;
-				if (hasPerk(PerkLib.PilgrimsBounty)) lustCoefficient = (maxOverLust + 50) / 5;
+				lustCoefficient = lust / 5;
+				if (hasPerk(PerkLib.PilgrimsBounty)) lustCoefficient = maxOverLust() / 5;
 				var percent:Number = 0;
 				percent = lustCoefficient + (hoursSinceCum + 10);
 				if (percent > 100)
@@ -2746,7 +2746,7 @@ public class Creature extends Utils
 			}
 			//Pilgrim's bounty maxes lust coefficient
 			if (hasPerk(PerkLib.PilgrimsBounty))
-				lustCoefficient = (maxOverLust + 50) / 10;
+				lustCoefficient = maxOverLust() / 10;
 			if (balls == 0)
 				quantity = int(1.25 * 2 * cumMultiplier * 2 * lustCoefficient * (hoursSinceCum + 10) / 24) / 10;
 			else

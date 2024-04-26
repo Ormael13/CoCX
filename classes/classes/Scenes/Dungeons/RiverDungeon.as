@@ -1954,7 +1954,9 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE1();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("The space around this floor is decorated in array of floral herbs that bloom in a wild variety of colors. Each flower shares the same large, bulbous stamen, yet the petals of each one have a unique shape and color to them.\n\n");
+			outputText("The ground squelches softly beneath your body as you move. Bits of pollen float in the air while also giving a slightly sticky feel to the place.\n\n");
+			outputText("The sweet aroma is impossible to ignore, much like honey.\n\n");
 			dungeons.setDungeonButtonsRD(null, null, null, roomE02);
 			addButtonDisabled(10, "Down", "Staircase is blocked by impenetrable thorn wall. Maybe go check floor boss first to do something about this wall?");//addButton(10, "Down", roomF01);
 		}
@@ -1964,7 +1966,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE1();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("The sweet smell is stronger over here, there are honeycombs that cluster along the walls as the flowers bloom more around them. There's a faint buzzing nearby, whatever is pollinating these plants may be getting closer.\n\n");
+			outputText("The wall is coated in honey, perhaps it'd be unwise to touch it.\n\n");
 			dungeons.setDungeonButtonsRD(null, null, roomE01, roomE03);
 		}
 		public function roomE03():void {
@@ -1973,7 +1976,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE1();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("Rays of light shine from a source between the cracks that you cannot see. The blooming flowers face the shine intently, as if opening up their petals to welcome in the light so they can synthesize.\n\n");
+			outputText("The flowers move almost as if they were sentient beings, quickly folding as the light passes away only to open up again as more light draws in.\n\n");
 			dungeons.setDungeonButtonsRD(null, roomE07, roomE02, null);
 		}
 		public function roomE04():void {
@@ -1982,7 +1986,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE1();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("Rays of light shine from a source between the cracks that you cannot see. The blooming flowers face the shine intently, as if opening up their petals to welcome in the light so they can synthesize.\n\n");
+			outputText("The flowers move almost as if they were sentient beings, quickly folding as the light passes away only to open up again as more light draws in.\n\n");
 			dungeons.setDungeonButtonsRD(null, roomE09, null, roomE05);
 		}
 		public function roomE05():void {
@@ -1991,7 +1996,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE1();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("The sweet smell is stronger over here, there are honeycombs that cluster along the walls as the flowers bloom more around them. There's a faint buzzing nearby, whatever is pollinating these plants may be getting closer.\n\n");
+			outputText("The wall is coated in honey, perhaps it'd be unwise to touch it.\n\n");
 			dungeons.setDungeonButtonsRD(null, null, roomE04, roomE06);
 		}
 		public function roomE06():void {
@@ -2000,7 +2006,9 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE1();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("The space around this floor is decorated in array of floral herbs that bloom in a wild variety of colors. Each flower shares the same large, bulbous stamen, yet the petals of each one have a unique shape and color to them.\n\n");
+			outputText("The ground squelches softly beneath your body as you move. Bits of pollen float in the air while also giving a slightly sticky feel to the place.\n\n");
+			outputText("The sweet aroma is impossible to ignore, much like honey.\n\n");
 			dungeons.setDungeonButtonsRD(null, null, roomE05, null);
 		}
 		public function roomE07():void {
@@ -2009,7 +2017,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE1();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("Rays of light shine from a source between the cracks that you cannot see. The blooming flowers face the shine intently, as if opening up their petals to welcome in the light so they can synthesize.\n\n");
+			outputText("The flowers move almost as if they were sentient beings, quickly folding as the light passes away only to open up again as more light draws in.\n\n");
 			dungeons.setDungeonButtonsRD(roomE03, roomE11, null, roomE08);
 		}
 		public function roomE08():void {
@@ -2018,7 +2027,9 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE1();//1st slab for boss summon
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("The space around this floor is decorated in array of floral herbs that bloom in a wild variety of colors. Each flower shares the same large, bulbous stamen, yet the petals of each one have a unique shape and color to them.\n\n");
+			outputText("The ground squelches softly beneath your body as you move. Bits of pollen float in the air while also giving a slightly sticky feel to the place.\n\n");
+			outputText("The sweet aroma is impossible to ignore, much like honey.\n\n");
 			dungeons.setDungeonButtonsRD(null, null, roomE07, roomE09);
 		}
 		public function roomE09():void {
@@ -2027,7 +2038,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE1();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("The sweet smell is stronger over here, there are honeycombs that cluster along the walls as the flowers bloom more around them. There's a faint buzzing nearby, whatever is pollinating these plants may be getting closer.\n\n");
+			outputText("The wall is coated in honey, perhaps it'd be unwise to touch it.\n\n");
 			dungeons.setDungeonButtonsRD(roomE04, roomE12, roomE08, null);
 		}
 		public function roomE10():void {
@@ -2036,7 +2048,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE3();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("The flowers around your feet are completely still. Dewdrops along the petals crystalize quickly into small flakes of ice that slowly peter away, dropping off of the flowers like snowfall. The honey along the walls are solid and dense, still liquid, but as motionless as the flowers.\n\n");
+			outputText("The chilly air is pervasive, almost enough to freeze any moisture in the air, bearable, but not the most welcome feeling.\n\n");
 			dungeons.setDungeonButtonsRD(null, roomE14, null, null);
 		}
 		public function roomE11():void {
@@ -2046,7 +2059,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			else encountersRuletteE3();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("The flowers around your feet are completely still. Dewdrops along the petals crystalize quickly into small flakes of ice that slowly peter away, dropping off of the flowers like snowfall. The honey along the walls are solid and dense, still liquid, but as motionless as the flowers.\n\n");
+			outputText("The chilly air is pervasive, almost enough to freeze any moisture in the air, bearable, but not the most welcome feeling.\n\n");
 			dungeons.setDungeonButtonsRD(roomE07, roomE16, null, null);
 		}
 		public function roomE12():void {
@@ -2056,7 +2070,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			else encountersRuletteE2();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("The flowers around your feet are wilting slightly, petals falling off in a slow cascade as the stems shift up and down in a steady, gentle manner as if the flora was breathing heavily. The honey around you runs quickly as if it were melting off the wall.\n\n");
+			outputText("The unwelcoming heat is almost enough to cause blisters, bearable, but noticeably uncomfortable with the shift in temperature.\n\n");
 			dungeons.setDungeonButtonsRD(roomE09, roomE17, null, null);
 		}
 		public function roomE13():void {
@@ -2065,7 +2080,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE2();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("The flowers around your feet are wilting slightly, petals falling off in a slow cascade as the stems shift up and down in a steady, gentle manner as if the flora was breathing heavily. The honey around you runs quickly as if it were melting off the wall.\n\n");
+			outputText("The unwelcoming heat is almost enough to cause blisters, bearable, but noticeably uncomfortable with the shift in temperature.\n\n");
 			dungeons.setDungeonButtonsRD(null, roomE19, null, null);
 			addButton(0, "Teleport C.", teleportCircleFloor5);
 			addButton(12, "Up", roomD04);
@@ -2076,7 +2092,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE3();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
 			dungeons.setDungeonButtonsRD(roomE10, roomE20, null, roomE15);
 		}
 		public function roomE15():void {
@@ -2085,7 +2102,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE3();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
 			dungeons.setDungeonButtonsRD(null, null, roomE14, roomE16);
 		}
 		public function roomE16():void {
@@ -2094,7 +2112,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE3();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
 			dungeons.setDungeonButtonsRD(roomE11, roomE21, roomE15, null);
 		}
 		public function roomE17():void {
@@ -2103,7 +2122,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE2();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
 			dungeons.setDungeonButtonsRD(roomE12, roomE23, null, roomE18);
 		}
 		public function roomE18():void {
@@ -2112,7 +2132,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE2();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
 			dungeons.setDungeonButtonsRD(null, null, roomE17, roomE19);
 		}
 		public function roomE19():void {
@@ -2121,7 +2142,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE2();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
 			dungeons.setDungeonButtonsRD(roomE13, roomE24, roomE18, null);
 		}
 		public function roomE20():void {
@@ -2130,7 +2152,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE3();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("The flowers around your feet are completely still. Dewdrops along the petals crystalize quickly into small flakes of ice that slowly peter away, dropping off of the flowers like snowfall. The honey along the walls are solid and dense, still liquid, but as motionless as the flowers.\n\n");
+			outputText("The chilly air is pervasive, almost enough to freeze any moisture in the air, bearable, but not the most welcome feeling.\n\n");
 			dungeons.setDungeonButtonsRD(roomE14, roomE25, null, null);
 		}
 		public function roomE21():void {
@@ -2139,7 +2162,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE3();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("The flowers around your feet are completely still. Dewdrops along the petals crystalize quickly into small flakes of ice that slowly peter away, dropping off of the flowers like snowfall. The honey along the walls are solid and dense, still liquid, but as motionless as the flowers.\n\n");
+			outputText("The chilly air is pervasive, almost enough to freeze any moisture in the air, bearable, but not the most welcome feeling.\n\n");
 			dungeons.setDungeonButtonsRD(roomE16, null, null, roomE22);
 		}
 		public function roomE22():void {
@@ -2148,7 +2172,9 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE2and3();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("The walls flicker from a soft, glowing orange to a pale lavender as you advance your step. It's as if the air has completely changed, separate between this hall. In two places at once, you could be sweating and shivering.\n\n");
+			outputText("The flowers on the warm side are wilting and moving with slow, deliberate motions, but the flowers on the cooler side are motionless as flakes of ice dance around the leaves.\n\n");
+			outputText("It's a strange feeling with how quickly the temperature shifts at this place.\n\n");
 			dungeons.setDungeonButtonsRD(null, roomE26, roomE21, roomE23);
 		}
 		public function roomE23():void {
@@ -2157,7 +2183,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE2();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("The flowers around your feet are wilting slightly, petals falling off in a slow cascade as the stems shift up and down in a steady, gentle manner as if the flora was breathing heavily. The honey around you runs quickly as if it were melting off the wall.\n\n");
+			outputText("The unwelcoming heat is almost enough to cause blisters, bearable, but noticeably uncomfortable with the shift in temperature.\n\n");
 			dungeons.setDungeonButtonsRD(roomE17, null, roomE22, null);
 		}
 		public function roomE24():void {
@@ -2166,7 +2193,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE2();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("The flowers around your feet are wilting slightly, petals falling off in a slow cascade as the stems shift up and down in a steady, gentle manner as if the flora was breathing heavily. The honey around you runs quickly as if it were melting off the wall.\n\n");
+			outputText("The unwelcoming heat is almost enough to cause blisters, bearable, but noticeably uncomfortable with the shift in temperature.\n\n");
 			dungeons.setDungeonButtonsRD(roomE19, roomE27, null, null);
 		}
 		public function roomE25():void {
@@ -2175,7 +2203,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE3();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
 			dungeons.setDungeonButtonsRD(roomE20, roomE28, null, null);
 		}
 		public function roomE26():void {
@@ -2184,7 +2213,9 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE2and3();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("The walls flicker from a soft, glowing orange to a pale lavender as you advance your step. It's as if the air has completely changed, separate between this hall. In two places at once, you could be sweating and shivering.\n\n");
+			outputText("The flowers on the warm side are wilting and moving with slow, deliberate motions, but the flowers on the cooler side are motionless as flakes of ice dance around the leaves.\n\n");
+			outputText("It's a strange feeling with how quickly the temperature shifts at this place.\n\n");
 			dungeons.setDungeonButtonsRD(roomE22, roomE30, null, null);
 		}
 		public function roomE27():void {
@@ -2193,7 +2224,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE2();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
 			dungeons.setDungeonButtonsRD(roomE24, roomE32, null, null);
 		}
 		public function roomE28():void {
@@ -2202,7 +2234,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE3();//3rd slab for boss summon
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
 			dungeons.setDungeonButtonsRD(roomE25, null, null, roomE29);
 		}
 		public function roomE29():void {
@@ -2211,7 +2244,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE3();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
 			dungeons.setDungeonButtonsRD(null, null, roomE28, null);
 		}
 		public function roomE30():void {
@@ -2220,7 +2254,9 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE2and3();//altair to summon floor boss
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("The walls flicker from a soft, glowing orange to a pale lavender as you advance your step. It's as if the air has completely changed, separate between this hall. In two places at once, you could be sweating and shivering.\n\n");
+			outputText("The flowers on the warm side are wilting and moving with slow, deliberate motions, but the flowers on the cooler side are motionless as flakes of ice dance around the leaves.\n\n");
+			outputText("It's a strange feeling with how quickly the temperature shifts at this place.\n\n");
 			dungeons.setDungeonButtonsRD(roomE26, null, null, null);
 		}
 		public function roomE31():void {
@@ -2229,7 +2265,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE2();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
 			dungeons.setDungeonButtonsRD(null, null, null, roomE32);
 		}
 		public function roomE32():void {
@@ -2238,12 +2275,22 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE2();//2nd slab for boss summon
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
 			dungeons.setDungeonButtonsRD(roomE27, null, roomE31, null);
 		}
 		/*
 		public function roomF01():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_06_ROOM_01;
+			clearOutput();
+			encountersRuletteF();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(null, null, null, null);
+		}
+		public function roomF02():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_06_ROOM_02;
 			clearOutput();
 			encountersRuletteF();
 			if (CoC.instance.inCombat) return;
