@@ -203,7 +203,7 @@ public class KihaFollower extends NPCAwareContent implements TimeAwareInterface,
         chance -= totalKihaChildren() / 5;
         if (chance < 10) chance = 10;
         //Roll
-        if (rand(100) <= chance) {
+        if (rand(100) <= chance || player.hasPerk(PerkLib.PilgrimsBounty)) {
             if (debug) outputText("\n\n<b>DEBUG: Kiha is impregnated.</b>");
             trace("Kiha got PREGNANT!");
             pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_KIHA);

@@ -4182,7 +4182,7 @@ public class PerkLib
 		public static const Phylactery:PerkType = mk("Phylactery", "Phylactery",
 				"Your soul has been safely stored into a phylactery allowing you to fully unlock your potential as a demon.").withBuffs({'int.mult':0.75});
 		public static const PilgrimsBounty:PerkType = mk("Pilgrim's Bounty", "Pilgrim's Bounty",
-				"Causes you to always cum as hard as if you had max lust.");
+				"Causes you to always cum as hard as if you had max lust. If partner can get pregnant chances increases to 100%.");
 		public static const ProductivityDrugs:PerkType = new ProductivityDrugsPerk();
 		public static const PureAndLoving:PerkType = mk("Pure and Loving", "Pure and Loving",
 				"Your caring attitude towards love and romance makes you slightly more resistant to lust and corruption.");

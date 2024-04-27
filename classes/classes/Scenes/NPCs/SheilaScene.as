@@ -115,7 +115,7 @@ private function sheilaPreg(reducedChance:Boolean = false):void {
 	chance += player.virilityQ() * 100;
 	if (chance > 75) chance = 75;
 	if (reducedChance) chance /= 3.0;
-	if (rand(100) <= chance) {
+	if (rand(100) <= chance || player.hasPerk(PerkLib.PilgrimsBounty)) {
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SHIELA);
 		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Sheila is pregnant!</b>");
 	}

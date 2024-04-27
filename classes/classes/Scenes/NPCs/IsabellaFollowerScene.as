@@ -32,7 +32,7 @@ public function isabellaKnockUpAttempt():void {
 		chance += player.virilityQ() * 100;
 		if (chance > 90) chance = 90;
 		//Attempt to knock up!
-		if (rand(100) < chance) isabellaScene.pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_ISABELLA);
+		if (rand(100) < chance || player.hasPerk(PerkLib.PilgrimsBounty)) isabellaScene.pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_ISABELLA);
 		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Isabella is pregnant!</b>");
 		trace("Isabella got PREGNANT!");
 	}
@@ -1557,3 +1557,4 @@ public function isabellaGivesBirth():void {
 }
 }
 }
+

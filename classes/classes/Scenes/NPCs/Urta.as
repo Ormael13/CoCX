@@ -201,7 +201,7 @@ public function knockUpUrtaChance():void { //Moved here from UrtaPregs since it 
 	//Bonus virility time!
 	chance += Math.min(player.virilityQ() * 100, 50);
 	//FINAL ROLL!
-	if (chance > rand(100)) {
+	if (chance > rand(100) || player.hasPerk(PerkLib.PilgrimsBounty)) {
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, 384);
 		flags[kFLAGS.URTA_PREGNANT_DELIVERY_SCENE] = 0;
 		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Urta is pregnant!</b>");

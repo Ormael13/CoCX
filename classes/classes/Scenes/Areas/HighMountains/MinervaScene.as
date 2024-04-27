@@ -88,7 +88,7 @@ public class MinervaScene extends BaseContent implements TimeAwareInterface {
 			//Chance is between 10 and 75 percent.
 			if (chance < 10) chance = 10;
 			if (chance > 80) chance = 80;
-			if (rand(100) < chance && !pregnancy.isPregnant) {
+			if ((rand(100) < chance || player.hasPerk(PerkLib.PilgrimsBounty)) && !pregnancy.isPregnant) {
 				trace("Minerva got PREGNANT!");
 				pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_MINERVA);
 				if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Minerva is pregnant!</b>");
@@ -1553,3 +1553,4 @@ private function sleepWithMinervaII():void {
 
 }
 }
+

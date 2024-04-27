@@ -43,7 +43,7 @@ private function pregCottonChance(bonusMult:Number = 1):void {
 	//Okay, we have a chance!  Run the numbers!
 	//Herbs off?  Good chances!
 	if (flags[kFLAGS.COTTON_HERBS_OFF] > 0) {
-		if (rand(5) == 0 || player.cumQ() > rand(1000) || player.virilityQ() >= 0.5) {
+		if (rand(5) == 0 || player.cumQ() > rand(1000) || player.virilityQ() >= 0.5 || player.hasPerk(PerkLib.PilgrimsBounty)) {
 			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_COTTON);
 			if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Cotton is pregnant!</b>");
 		}
@@ -52,13 +52,13 @@ private function pregCottonChance(bonusMult:Number = 1):void {
 	else {
 		//First kid is lucky!
 		if (flags[kFLAGS.COTTON_KID_COUNT] == 0) {
-			if (rand(5) == 0 || player.cumQ() * player.virilityQ() >= rand(1000)) {
+			if (rand(5) == 0 || player.cumQ() * player.virilityQ() >= rand(1000) || player.hasPerk(PerkLib.PilgrimsBounty)) {
 				pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_COTTON);
 				if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Cotton is pregnant!</b>");
 			}
 		}
 		//NOT FIRST KID - LESS LUCKY!
-		else if (player.cumQ() * player.virilityQ() >= rand(1000)) {
+		else if (player.cumQ() * player.virilityQ() >= rand(1000) || player.hasPerk(PerkLib.PilgrimsBounty)) {
 			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_COTTON);
 			if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Cotton is pregnant!</b>");
 		}

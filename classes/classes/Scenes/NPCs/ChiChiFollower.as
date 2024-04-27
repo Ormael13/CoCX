@@ -1182,7 +1182,7 @@ public function mishapsLunaChiChi():void {
 		score += player.virilityQ() * 200;
 		if (flags[kFLAGS.CHI_CHI_FOLLOWER] >= 4) score *= 1.5;
 		trace("ChiChi Preg Check Virility Score: " + score);
-		if((player.cumQ() > (flags[kFLAGS.CHI_CHI_FOLLOWER] < 4? 150 : 250) && score >= rand(100))) {
+		if((player.cumQ() > (flags[kFLAGS.CHI_CHI_FOLLOWER] < 4? 150 : 250) && score >= rand(100)) || player.hasPerk(PerkLib.PilgrimsBounty)) {
 			preg = true;
 			trace("ChiChi knocked up!");
 		}

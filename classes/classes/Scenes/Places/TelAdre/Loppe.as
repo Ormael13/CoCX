@@ -3,6 +3,7 @@ import classes.BodyParts.Tongue;
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
+import classes.PerkLib;
 import classes.PregnancyStore;
 import classes.Saves;
 import classes.Scenes.NPCs.NPCAwareContent;
@@ -2339,7 +2340,7 @@ public function loppeKnockupAttempt(isplayer:Boolean = false):void {
 	} else {
 		if (pregnancy.isPregnant || !canGetPreg) return;
 		if (flags[kFLAGS.LOPPE_FERTILE] > 0) {
-			if (rand(5) == 0 || player.cumQ() > rand(1000) || player.virilityQ() >= 0.5) {
+			if (rand(5) == 0 || player.cumQ() > rand(1000) || player.virilityQ() >= 0.5 || player.hasPerk(PerkLib.PilgrimsBounty)) {
 				pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_LOPPE);
 				if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Loppe is pregnant!</b>");
 			}

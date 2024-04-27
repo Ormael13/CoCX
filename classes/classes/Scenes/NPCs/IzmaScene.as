@@ -1621,7 +1621,7 @@ private function followerIzmaMountsPC(lastHalf:Boolean = false):void {
 private function izmaPreg():void {
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) return;
 	//PREGGO CHANCES
-	if (flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 1 && !pregnancy.isPregnant && rand(100) < (10 + Math.round(player.cumQ() / 100))) {
+	if (flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 1 && !pregnancy.isPregnant && (rand(100) < (10 + Math.round(player.cumQ() / 100)) || player.hasPerk(PerkLib.PilgrimsBounty))) {
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_IZMA);
 		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Izma is pregnant!</b>");
 	}

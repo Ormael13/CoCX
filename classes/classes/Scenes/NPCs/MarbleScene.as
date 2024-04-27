@@ -3372,7 +3372,7 @@ private function marblePreggoChance(preggerMult:Number):void {
 	//GET HER PREGNANT
 	trace("MARBLE PREGGO ODDS: " + preggerOdds);
 
-	if(rand(100) < preggerOdds && (player.hasPerk(PerkLib.MarblesMilk) || flags[kFLAGS.MARBLE_PURIFICATION_STAGE] >= 5)) {
+	if((rand(100) < preggerOdds || player.hasPerk(PerkLib.PilgrimsBounty)) && (player.hasPerk(PerkLib.MarblesMilk) || flags[kFLAGS.MARBLE_PURIFICATION_STAGE] >= 5)) {
 		//SHUT UP SHES ALREADY PREGNANT
 		if (!pregnancy.isPregnant) {
 			trace("Marble got PREGNANT!");

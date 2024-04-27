@@ -733,7 +733,7 @@ public function totalExcelliaChildren():int {
 	return flags[kFLAGS.EXCELLIA_FEMALE_KIDS] + flags[kFLAGS.EXCELLIA_MALE_KIDS] + flags[kFLAGS.EXCELLIA_FEMALE_COW_KIDS] + flags[kFLAGS.EXCELLIA_MALE_COW_KIDS]
 }
 private function excelliaPreg():void {
-	if (!pregnancy.isPregnant) {// && rand(100) < (10 + Math.round(player.cumQ() / 100))
+	if (!pregnancy.isPregnant && (rand(100) < (10 + Math.round(player.cumQ() / 100)) || player.hasPerk(PerkLib.PilgrimsBounty))) {
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_EXCELLIA);
 		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Excellia is pregnant!</b>");
 	}
