@@ -410,44 +410,19 @@ public class Combat extends BaseContent {
     }
 
     public function maxBowAttacks():int {
-        /*var extraHits:Number = 0;
-        var baseHits:Number;
-        if (player.isElf() && player.hasPerk(PerkLib.ELFMasterShot)) extraHits = 1;
-        if (player.hasPerk(PerkLib.Multishot)) baseHits = 6;
-        else if (player.hasPerk(PerkLib.WildQuiver)) baseHits = 5;
-        else if (player.hasPerk(PerkLib.Manyshot)) baseHits = 4;
-        else if (player.hasPerk(PerkLib.WeaponRangeTripleStrike)) baseHits = 3;
-        else if (player.hasPerk(PerkLib.WeaponRangeDoubleStrike)) baseHits = 2;
-        else baseHits = 1;
-        return (baseHits+extraHits) * (flags[kFLAGS.ELVEN_TWINSHOT_ENABLED] ? 2 : 1);*/
         return player.calculateMaxAttacksForClass(false, 0) +
             (player.isBowTypeWeapon() && player.hasPerk(PerkLib.ELFMasterShot))? 1: 0;
     }
 
     public function maxCrossbowAttacks():int {
-        /*if (player.hasPerk(PerkLib.WeaponRangeTripleStrike)) return 3;
-        else if (player.hasPerk(PerkLib.WeaponRangeDoubleStrike)) return 2;
-        else return 1;*/
         return player.calculateMaxAttacksForClass(false, 1);
     }
 
     public function maxThrowingAttacks():int {
-        /*if (player.hasPerk(PerkLib.WeaponRangeTripleStrike)) return 3;
-        else if (player.hasPerk(PerkLib.WeaponRangeDoubleStrike)) return 2;
-        else return 1;*/
         return player.calculateMaxAttacksForClass(false, 2);
     }
 
     public function maxFirearmsAttacks():int {
-		/*var bonusShots:Number = 0;
-		if (player.hasPerk(PerkLib.LockAndLoad)) {
-			if (player.hasPerk(PerkLib.Multishot)) bonusShots = 2;
-			bonusShots = 1;
-		}
-        if (player.hasPerk(PerkLib.MasterGunslinger)) return 4+bonusShots;
-        else if (player.hasPerk(PerkLib.ExpertGunslinger)) return 3+bonusShots;
-        else if (player.hasPerk(PerkLib.AmateurGunslinger)) return 2+bonusShots;
-        else return 1;*/
         return player.calculateMaxAttacksForClass(false, 3);
     }
 
@@ -2828,6 +2803,7 @@ public class Combat extends BaseContent {
         if (player.hasKeyItem("Gun Scope with Aimbot") >= 0) faccmod += 80;
 		faccmod += Math.round((masteryFirearmsLevel() - 1) / 2);
         if (player.weaponRangeName == "Touhouna M3") faccmod -= 20;
+		if (player.hasPerk(PerkLib.AmateurGunslinger)) faccmod += 20;
 		if (player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Dual 2H Firearms") faccmod += Math.round((dualWFLevel() - 1) / 2);
 		if (player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Dual 2H Firearms") faccmod += firearmsDualWieldAccuracyPenalty();
         return faccmod;
@@ -2850,7 +2826,8 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.DualWieldFirearms)) accfdwmodpenalty += 10;
 		}
         if (player.weaponRange.hasSpecial("Dual 2H Firearms")) {
-			accfdwmodpenalty -= 50;
+			if (player.hasPerk(PerkLib.DualWield2HFirearms)) accfdwmodpenalty -= 10;
+			else accfdwmodpenalty -= 50;
 		}
         return accfdwmodpenalty;
 	}
@@ -2860,9 +2837,12 @@ public class Combat extends BaseContent {
         if (player.weaponRange.hasSpecial("Dual Firearms")) {
 			if (player.hasPerk(PerkLib.DualWieldFirearms)) dmgfdwmodpenalty -= 0.3;
 			else dmgfdwmodpenalty -= 0.5;
+			if (player.hasPerk(PerkLib.ExpertGunslinger)) dmgfdwmodpenalty += 0.3;
 		}
         if (player.weaponRange.hasSpecial("Dual 2H Firearms")) {
-			dmgfdwmodpenalty -= 0.9;
+			if (player.hasPerk(PerkLib.DualWield2HFirearms)) dmgfdwmodpenalty -= 0.5;
+			else dmgfdwmodpenalty -= 0.9;
+			if (player.hasPerk(PerkLib.MasterGunslinger)) dmgfdwmodpenalty += 0.5;
 		}
         return dmgfdwmodpenalty;
 	}
@@ -2959,17 +2939,9 @@ public class Combat extends BaseContent {
         }
         else if (player.weaponRangePerk == ItemConstants.WT_THROWING) {
             flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = Math.min((flags[kFLAGS.MULTISHOT_STYLE] || 0) + 1, maxRangedAttacks);
-            /*if (flags[kFLAGS.MULTISHOT_STYLE] >= 2) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
-            else if (flags[kFLAGS.MULTISHOT_STYLE] == 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
-            else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;*/
         }
         else if (player.isFirearmTypeWeapon()) {
-            /*if (flags[kFLAGS.MULTISHOT_STYLE] >= 3) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 4;
-            else if (flags[kFLAGS.MULTISHOT_STYLE] == 2) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
-            else if (flags[kFLAGS.MULTISHOT_STYLE] == 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
-            else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1; */
             flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = Math.min((flags[kFLAGS.MULTISHOT_STYLE] || 0) + 1, maxRangedAttacks);
-
 			if (player.weaponRange == weaponsrange.GOODSAM || player.weaponRange == weaponsrange.BADOMEN) {
 				var recoil:Number = 1;
 				if (player.str >= 50) recoil += 1;
@@ -3004,9 +2976,7 @@ public class Combat extends BaseContent {
             if (player.isDualWieldRanged()) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] *= 2;
 
             if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2 && player.hasPerk(PerkLib.LockAndLoad)) {
-				/*if (flags[kFLAGS.MULTISHOT_STYLE] >= 3) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 2;
-				else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 1;*/
-                flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += Math.floor(flags[kFLAGS.MULTIPLE_ARROWS_STYLE] / 2);
+				flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += Math.floor(flags[kFLAGS.MULTIPLE_ARROWS_STYLE] / 2);
 			}
         }
         if (flags[kFLAGS.ARROWS_ACCURACY] > 0) flags[kFLAGS.ARROWS_ACCURACY] = 0;
@@ -4071,7 +4041,6 @@ public class Combat extends BaseContent {
                     else outputText("You casually fire an " + ammoWord + " at [themonster] with supreme skill");
                 }
             }
-			if (player.isDualWieldRanged()) damage *= firearmsDualWieldDamagePenalty();
             //any aoe effect from firearms
             if (monster.plural) {
                 if (player.weaponRange == weaponsrange.ADBSCAT || player.weaponRange == weaponsrange.DBDRAGG) damage *= 2;
@@ -4147,8 +4116,8 @@ public class Combat extends BaseContent {
             }
             var ignoreDR:Boolean = player.hasPerk(PerkLib.Penetrator);
             if (!ignoreDR) damage *= (monster.damageRangePercent() / 100);
-            if (player.hasPerk(PerkLib.ExplosiveCartridge) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType) || monster.hasPerk(PerkLib.EnemyHugeType) || monster.hasPerk(PerkLib.Enemy300Type) || monster.hasPerk(PerkLib.EnemyGigantType) || monster.hasPerk(PerkLib.EnemyColossalType))) damage *= 2;
-            if (player.hasPerk(PerkLib.NamedBullet) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 1.5;
+            if (player.hasPerk(PerkLib.ExplosiveCartridge) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType) || monster.hasPerk(PerkLib.EnemyHugeType) || monster.hasPerk(PerkLib.Enemy300Type) || monster.hasPerk(PerkLib.EnemyGigantType) || monster.hasPerk(PerkLib.EnemyColossalType))) damage *= 3;
+            if (player.hasPerk(PerkLib.NamedBullet) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 3;
             if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
             if (player.hasPerk(PerkLib.PhantomShooting)) damage *= 1.05;
 			if (player.hasPerk(PerkLib.SilverForMonsters) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1.2;
@@ -5686,15 +5655,38 @@ public class Combat extends BaseContent {
 		var damage:Number = 0;
 		damage += player.weaponRangeAttack * 2;
 		damage += player.speStat.core.value + player.intStat.core.value + player.wisStat.core.value;
-        if (player.hasPerk(PerkLib.JobGunslinger)) damage *= 2;
-        if (player.hasPerk(PerkLib.ChurchOfTheGun)) damage += scalingBonusWisdom() * 0.5;
-        if (player.hasPerk(PerkLib.AlchemicalCartridge)) damage += scalingBonusIntelligence() * 0.25;
+        if (player.hasPerk(PerkLib.JobGunslinger)) {
+			damage += player.wis * 1.5;
+            damage += scalingBonusWisdom() * 0.3;
+			damage += player.inte;
+            damage += scalingBonusIntelligence() * 0.2;
+			damage += player.spe * 0.5;
+			damage += scalingBonusSpeed() * 0.1;
+		}
+        if (player.hasPerk(PerkLib.ChurchOfTheGun)) {
+			damage += player.wis * 2;
+            damage += scalingBonusWisdom() * 0.6;
+		}
+        if (player.hasPerk(PerkLib.AlchemicalCartridge)) {
+			damage += player.inte * 1.5;
+            damage += scalingBonusIntelligence() * 0.3;
+		}
 		if (player.hasPerk(PerkLib.SaintOfZariman)) {
-			damage += scalingBonusSpeed() * 0.25;
-			damage += scalingBonusIntelligence() * 0.25;
-			damage += scalingBonusWisdom() * 0.5;
+			damage += player.spe * 1.5;
+			damage += scalingBonusSpeed() * 0.3;
+			damage += player.inte * 1.5;
+            damage += scalingBonusIntelligence() * 0.3;
+			damage += player.wis * 2;
+            damage += scalingBonusWisdom() * 0.6;
+		}
+		if (player.hasPerk(PerkLib.AmateurGunslinger)) {
+			var moreDMG:Number = 2;
+			if (player.hasPerk(PerkLib.ExpertGunslinger)) moreDMG += 1;
+			if (player.hasPerk(PerkLib.MasterGunslinger)) moreDMG += 1;
+			damage *= moreDMG;
 		}
 		damage *= (1 + (0.01 * masteryFirearmsLevel()));
+		if (player.isDualWieldRanged()) damage *= firearmsDualWieldDamagePenalty();
         damage = rangeAttackModifier(damage);
         damage = archerySkillDamageMod(damage);
         damage *= player.jewelryRangeModifier();
@@ -16121,6 +16113,9 @@ public function firearmsForce():Number {
 	var mod:Number = 0;
     var maxFirearmAttacks:int = maxFirearmsAttacks();
 	if (player.hasPerk(PerkLib.JobGunslinger)) mod += .1;
+	if (player.hasPerk(PerkLib.AmateurGunslinger)) mod += .05;
+	if (player.hasPerk(PerkLib.ExpertGunslinger)) mod += .1;
+	if (player.hasPerk(PerkLib.MasterGunslinger)) mod += .15;
 	if (maxFirearmAttacks >= 2) mod += .05;
 	if (maxFirearmAttacks >= 3) mod += .1;
 	if (maxFirearmAttacks >= 4) mod += .15;
@@ -16130,7 +16125,7 @@ public function firearmsForce():Number {
     if (player.hasPerk(PerkLib.TaintedMagazine)) mod += .1;
     if (player.hasPerk(PerkLib.SaintOfZariman)) mod += .15;
     if (player.hasPerk(PerkLib.SilverForMonsters)) mod += .15;
-    if (player.hasPerk(PerkLib.NamedBullet)) mod += .2;//125% up to here
+    if (player.hasPerk(PerkLib.NamedBullet)) mod += .2;//155% up to here
 	if (player.hasPerk(PerkLib.FirearmsAttackMultiplier)) {
 		mod += .1;
 		if (player.hasPerk(PerkLib.SkilledGunslingerEx)) {
