@@ -48,8 +48,11 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Troll Resistance. Gained by been troll / glacial troll. Effects: Your troll hide grants you protection from magical effects. (Increases magic resist by 15% (fire resist by 7,5%))\n");
 			outputText("-New event perk: Troll Regeneration. Gained by been troll / glacial troll. Effects: 6% health and 6 points of fatigue regeneration but double hunger decaying speed. Stops for 3 rounds when damaged by fire.\n");
 			outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP / Lust effect of 10% magnitude.\n");
+			outputText("-New mutation perk: Equine Muscle. Req. having free musculature mutation slot, one of races: horse-morph, centuar, unicorn, bicorn, alicorn, nightmare. Effects: +25% to all Physical Ability damage. Gallop cost 10% less fatigue.\n");
 			outputText("-New mutation perk: Goblin Ovaries. Req. having free ovaries mutation slot, one of goblinoid races. Effects: Increase fertility rating by 10, While pregnant increase total libido by 10%. Double the number of kids you birth.\n");
+			outputText("-New mutation perk: Equine Muscle (Primitive). Req. Equine Muscle and lvl 30+. Effects: +50% to all Physical Ability damage. Gallop cost 20% less fatigue. Physical ability consumes 5% less fatigue.\n");
 			outputText("-New mutation perk: Goblin Ovaries (Primitive). Req. Goblin Ovaries and lvl 30+. Effects: Increase fertility rating by 20, While pregnant increase total libido by 20%. Double the number of kids you birth. Increase physical damage done while pregnant by 30%.\n");
+			outputText("-New mutation perk: Equine Muscle (Evolved). Req. Equine Muscle (Primitive) and lvl 60+. Effects: +75% to all Physical Ability damage. Gallop cost 30% less fatigue. Physical ability consumes 10% less fatigues. Physical ability that stuns do so for one extra round.\n");
 			outputText("-New mutation perk: Goblin Ovaries (Evolved). Req. Goblin Ovaries (Primitive) and lvl 60+. Effects: Increase fertility rating by 30, While pregnant increase total libido by 30%. Double the number of kids you birth. Increase physical damage done while pregnant by 40%. Lust damage against male opponents increased by 25%.\n");
 			outputText("-New mutation perk: Goblin Ovaries (Final Form). Req. Goblin Ovaries (Evolved) and lvl 90+. Effects: Increase fertility rating by 40, While pregnant increase total libido by 40%. Double the number of kids you birth. Increase physical damage done while pregnant by 50%. Lust damage against male opponents increased by 50%. Add your fertility score as a bonus to libido.\n");
 			outputText("-New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies. Using this item will turn PC into troll. Troll bonuses at 10 pts in racial score (scalable): +30% to Str multi, +30% to Tou multi, +20% to Spr multi, +20% to Int multi, +60% to Wis multi, +20 to max tone cap, +50 to max satiety.\n");
@@ -90,9 +93,6 @@ public class Changelog extends BaseContent
 			outputText("-Tamani could level up (up to lvl 98). After first level up she would gain Elite type which would be upgraded to Champion type and then to Boss type.\n");
 			outputText("-New P. Special: Gallop. Can be only used when having legs ending in hooves (not cloven hooves). Effects: Run at high speed across the battlefield evading melee combat but not ranged attack, does not disable P.Special but prevents the use of the regular melee attack action. While galloping all P.Special abilities are 50% stronger due to momentum. Galloping costs fatigue every round.\n");
 			outputText("-New event perk: Equine Strength. Gained by been horse-morph or centaur. Effects: Add 25% of your speed and libido to your strength stat.\n");
-			outputText("-New mutation perk: Equine Muscle. Req. having free musculature mutation slot, one of races: horse-morph, centuar, unicorn, bicorn, alicorn, nightmare. Effects: +25% to all Physical Ability damage. Gallop cost 10% less fatigue.\n");
-			outputText("-New mutation perk: Equine Muscle (Primitive). Req. Equine Muscle and lvl 30+. Effects: +50% to all Physical Ability damage. Gallop cost 20% less fatigue. Physical ability consumes 5% less fatigue.\n");
-			outputText("-New mutation perk: Equine Muscle (Evolved). Req. Equine Muscle (Primitive) and lvl 60+. Effects: +75% to all Physical Ability damage. Gallop cost 30% less fatigue. Physical ability consumes 10% less fatigues. Physical ability that stuns do so for one extra round.\n");
 			outputText("-Fix for small weapons giving wrong weapons mastery. (Imperfect Spell)\n");
 			outputText("-Pilgrim's Bounty perk effect changed from having cum volume calculated as been always at max lust to give 100% chance to make npc's pregnant after sex with pc. In some cases when npc only get fertile post some event/quest it will only trigger when the npc is fertile (no kids with urta, marble or hel right of the bat).\n");
 			outputText("-Job: Gunslinger perk would now add low stat scaling from wis, int, spe instead of doubling the damage. Church of the gun, Alchemical cartridge and Saint of Zariman perks stat scaling improved.\n");
@@ -105,7 +105,12 @@ public class Changelog extends BaseContent
 			outputText("-New key Item (by Liadri): Upgraded Armor plating 4.0 - req. Upgraded Armor plating 3.0 - +20 armor/magic resistance to the mech. +70% Health.\n");
 			outputText("-New key Item (by Liadri): Upgraded Armor plating 5.0 - req. Upgraded Armor plating 4.0 - +25 armor/magic resistance to the mech. +90% Health.\n");
 			outputText("-New key Item (by Liadri): Upgraded Armor plating 6.0 - req. Upgraded Armor plating 5.0 - +30 armor/magic resistance to the mech. +110% Health.\n");
-			outputText("-Dinah upgrade option for HB mech now have 2 more tiers of Armor Plating & Leather Insulation upgrades.\n");
+			outputText("-Dinah upgrade options for HB mech now have 2 more tiers of Armor Plating & Leather Insulation upgrades.\n");
+			outputText("-New key Item (by Liadri): Machine Gun MK4 - req. Machine Gun MK3 - Increase range attack by 125% if using a firearm. Change the firearm text to a goblin machine gun text.\n");
+			outputText("-New key Item (by Liadri): Machine Gun MK5 - req. Machine Gun MK4 - Increase range attack by 150% if using a firearm. Change the firearm text to a goblin machine gun text.\n");
+			outputText("-New key Item (by Liadri): Machine Gun MK6 - req. Machine Gun MK5 - Increase range attack by 200% if using a firearm. Change the firearm text to a goblin machine gun text.\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -115,6 +120,10 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -185,14 +194,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -220,9 +223,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

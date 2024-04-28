@@ -5672,10 +5672,10 @@ use namespace CoC;
 		public function updateRacialAndPerkBuffs():void{
 			if (needToUpdateRacialCache())
 				updateRacialCache();
-			if (effectiveTallness>=80 && hasPerk(PerkLib.TitanicStrength)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(effectiveTallness/2))}, 'Titanic Strength', { text: 'Titanic Strength' });
-			if (effectiveTallness<80 && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
-			if (effectiveTallness<=60 && hasPerk(PerkLib.CondensedPower)) statStore.replaceBuffObject({'str.mult':(0.01 * ((120 - Math.round(effectiveTallness))*10))}, 'Condensed Power', { text: 'Condensed Power' });
-			if (effectiveTallness<=60 && hasPerk(PerkLib.SmallCaster)) statStore.replaceBuffObject({'spellpower':(0.01 * ((120 - Math.round(effectiveTallness))*10))}, 'Small Caster', { text: 'Small Caster' });
+			if (effectiveTallness>=120 && hasPerk(PerkLib.TitanicStrength)) statStore.replaceBuffObject({'str.mult':(0.01 * effectiveTallness * 2)}, 'Titanic Strength', { text: 'Titanic Strength' });
+			if (effectiveTallness<120 && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
+			if (effectiveTallness<=60 && hasPerk(PerkLib.CondensedPower)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round((132 - basetallness)/2))}, 'Condensed Power', { text: 'Condensed Power' });
+			if (effectiveTallness<=60 && hasPerk(PerkLib.SmallCaster)) statStore.replaceBuffObject({'spellpower':(0.01 * (132 - basetallness))}, 'Small Caster', { text: 'Small Caster' });
 			if ((effectiveTallness>60 || !hasPerk(PerkLib.CondensedPower)) && statStore.hasBuff('Condensed Power')) statStore.removeBuffs('Condensed Power');
 			if ((effectiveTallness>60 || !hasPerk(PerkLib.SmallCaster)) && statStore.hasBuff('Small Caster')) statStore.removeBuffs('Small Caster');
 			if (statStore.hasBuff('Small frame')) statStore.removeBuffs('Small frame');

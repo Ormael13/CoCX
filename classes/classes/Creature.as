@@ -807,19 +807,19 @@ public class Creature extends Utils
 			maxHP_mult1 += (countCockSocks("green") * 0.02);
 			if (game.player.vehiclesName == "Goblin Mech Alpha") {
 				if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) maxHP_mult1 += 0.2;
-				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.35;
-				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 0.5;
-				if (game.player.hasKeyItem("Upgraded Armor plating 4.0") >= 0) maxHP_mult1 += 0.7;
-				if (game.player.hasKeyItem("Upgraded Armor plating 5.0") >= 0) maxHP_mult1 += 0.9;
-				if (game.player.hasKeyItem("Upgraded Armor plating 6.0") >= 0) maxHP_mult1 += 1.1;
+				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.4;
+				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 0.6;
+				if (game.player.hasKeyItem("Upgraded Armor plating 4.0") >= 0) maxHP_mult1 += 0.8;
+				if (game.player.hasKeyItem("Upgraded Armor plating 5.0") >= 0) maxHP_mult1 += 1;
+				if (game.player.hasKeyItem("Upgraded Armor plating 6.0") >= 0) maxHP_mult1 += 1.2;
 			}
 			if (game.player.vehiclesName == "Goblin Mech Prime") {
 				if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) maxHP_mult1 += 0.4;
-				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.7;
-				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 1;
-				if (game.player.hasKeyItem("Upgraded Armor plating 4.0") >= 0) maxHP_mult1 += 1.4;
-				if (game.player.hasKeyItem("Upgraded Armor plating 5.0") >= 0) maxHP_mult1 += 1.8;
-				if (game.player.hasKeyItem("Upgraded Armor plating 6.0") >= 0) maxHP_mult1 += 2.2;
+				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.8;
+				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 1.2;
+				if (game.player.hasKeyItem("Upgraded Armor plating 4.0") >= 0) maxHP_mult1 += 1.6;
+				if (game.player.hasKeyItem("Upgraded Armor plating 5.0") >= 0) maxHP_mult1 += 2;
+				if (game.player.hasKeyItem("Upgraded Armor plating 6.0") >= 0) maxHP_mult1 += 2.4;
 			}
 			if (game.player.vehiclesName == "Giant Slayer Mech") {
 				if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) maxHP_mult1 += 0.25;
@@ -833,9 +833,18 @@ public class Creature extends Utils
 				if (game.player.hasKeyItem("Upgraded Leather Insulation 3.0") >= 0) maxHP_mult1 += 0.75;
 			}
 			if (game.player.vehiclesName == "Howling Banshee Mech") {
-				if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) maxHP_mult1 += 0.25;
-				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.5;
-				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 0.75;
+				if (game.player.hasKeyItem("HB Armor Plating") >= 1) maxHP_mult1 += 0.25;
+				if (game.player.hasKeyItem("HB Armor Plating") >= 2) maxHP_mult1 += 0.5;
+				if (game.player.hasKeyItem("HB Armor Plating") >= 3) maxHP_mult1 += 0.75;
+				if (game.player.hasKeyItem("HB Armor Plating") >= 4) maxHP_mult1 += 1;
+				if (game.player.hasKeyItem("HB Armor Plating") >= 5) maxHP_mult1 += 1.25;
+				if (game.player.hasKeyItem("HB Armor Plating") >= 6) maxHP_mult1 += 1.5;
+				if (game.player.hasKeyItem("HB Leather Insulation") >= 1) maxHP_mult1 += 0.25;
+				if (game.player.hasKeyItem("HB Leather Insulation") >= 2) maxHP_mult1 += 0.5;
+				if (game.player.hasKeyItem("HB Leather Insulation") >= 3) maxHP_mult1 += 0.75;
+				if (game.player.hasKeyItem("HB Leather Insulation") >= 4) maxHP_mult1 += 1;
+				if (game.player.hasKeyItem("HB Leather Insulation") >= 5) maxHP_mult1 += 1.25;
+				if (game.player.hasKeyItem("HB Leather Insulation") >= 6) maxHP_mult1 += 1.5;
 			}
 			if (game.player.hasPerk(PerkLib.SharedPower) && game.player.perkv1(PerkLib.SharedPower) > 0) maxHP_mult1 += (0.1*game.player.perkv1(PerkLib.SharedPower));
 			return maxHP_mult1;
@@ -1203,15 +1212,13 @@ public class Creature extends Utils
 		public function get effectiveTallness():Number {
 			var multiplier:Number = 1;
 			if (hasPerk(PerkLib.GiantMight)) multiplier += 4;
-			if (hasPerk(PerkLib.TitanicSize)) multiplier += 4;
 			return tallness*multiplier;
 		}
 
 		public function set tallness(value:Number):void {
 			var multiplier:Number = 1;
-			if (hasPerk(PerkLib.TitanicSize)) multiplier = 5;
-			_tallness = value/multiplier;
-			//_tallness = value;
+			if (hasPerk(PerkLib.TitanicSize)) multiplier += 4;
+			_tallness = value*multiplier;
 		}
 		
 		public var bodyMaterials:/*BodyMaterial*/Array = [];

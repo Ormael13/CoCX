@@ -4011,12 +4011,12 @@ public class Combat extends BaseContent {
                 outputText("The " + ammoWord + " lodges deep into the pod's fleshy wall");
                 if (player.isInGoblinMech()) {
                     if (player.hasKeyItem("Repeater Gun") >= 0) outputText("You shoot the pod with your mech’s repeater gun");
-                    if (player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) outputText("You fire metal rounds at pod using the mech’s machine gun");
+                    if (player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0 || player.hasKeyItem("Machine Gun MK4") >= 0 || player.hasKeyItem("Machine Gun MK5") >= 0 || player.hasKeyItem("Machine Gun MK6") >= 0) outputText("You fire metal rounds at pod using the mech’s machine gun");
                 }
             } else if (monster.plural) {
                 if (player.isInGoblinMech()) {
                     if (player.hasKeyItem("Repeater Gun") >= 0) outputText("You shoot your opponent with your mech’s repeater gun");
-                    if (player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) outputText("You fire metal rounds at [themonster] with your mech’s machine gun");
+                    if (player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0 || player.hasKeyItem("Machine Gun MK4") >= 0 || player.hasKeyItem("Machine Gun MK5") >= 0 || player.hasKeyItem("Machine Gun MK6") >= 0) outputText("You fire metal rounds at [themonster] with your mech’s machine gun");
                 } else {
                     var textChooser1:int = rand(12);
                     if (textChooser1 >= 9) {
@@ -4032,7 +4032,7 @@ public class Combat extends BaseContent {
             } else {
                 if (player.isInGoblinMech()) {
                     if (player.hasKeyItem("Repeater Gun") >= 0) outputText("You shoot your opponent using the mech repeater gun");
-                    if (player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) outputText("You fire metal rounds at [themonster] using the mech machine gun");
+                    if (player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0 || player.hasKeyItem("Machine Gun MK4") >= 0 || player.hasKeyItem("Machine Gun MK5") >= 0 || player.hasKeyItem("Machine Gun MK6") >= 0) outputText("You fire metal rounds at [themonster] using the mech machine gun");
                 } else {
                     var textChooser2:int = rand(12);
                     if (textChooser2 >= 9) outputText("[Themonster] looks down at the mark left by the " + ammoWord + " on it body");
@@ -4058,61 +4058,88 @@ public class Combat extends BaseContent {
                 damage = goblinDamageBonus(damage);
                 if (player.hasKeyItem("Repeater Gun") >= 0) {
                     if (player.vehicles == vehicles.GOBMPRI) {
-                        damage *= 1.3;
-                        if (damage < 60) damage = 60;
+                        damage *= 1.45;
+                        if (damage < 70) damage = 70;
 					} else if (player.vehicles == vehicles.GS_MECH) {
-						damage *= 1.25;
-                        if (damage < 50) damage = 50;
+						damage *= 1.35;
+                        if (damage < 60) damage = 60;
 					} else {
-                        damage *= 1.2;
-                        if (damage < 40) damage = 40;
+                        damage *= 1.25;
+                        if (damage < 50) damage = 50;
                     }
                 }
                 if (player.hasKeyItem("Machine Gun MK1") >= 0) {
                     if (player.vehicles == vehicles.GOBMPRI) {
-                        damage *= 1.6;
-                        if (damage < 120) damage = 120;
+                        damage *= 1.9;
+                        if (damage < 140) damage = 140;
                     } else if (player.vehicles == vehicles.GS_MECH) {
-						damage *= 1.5;
-                        if (damage < 100) damage = 100;
+						damage *= 1.7;
+                        if (damage < 120) damage = 120;
 					} else {
-                        damage *= 1.4;
-                        if (damage < 80) damage = 80;
+                        damage *= 1.5;
+                        if (damage < 100) damage = 100;
                     }
                 }
                 if (player.hasKeyItem("Machine Gun MK2") >= 0) {
                     if (player.vehicles == vehicles.GOBMPRI) {
-                        damage *= 1.9;
-                        if (damage < 180) damage = 180;
+                        damage *= 2.35;
+                        if (damage < 210) damage = 210;
                     } else if (player.vehicles == vehicles.GS_MECH) {
-						damage *= 1.75;
-                        if (damage < 150) damage = 150;
+						damage *= 2.05;
+                        if (damage < 180) damage = 180;
 					} else {
-                        damage *= 1.6;
-                        if (damage < 120) damage = 120;
+                        damage *= 1.75;
+                        if (damage < 150) damage = 150;
                     }
                 }
                 if (player.hasKeyItem("Machine Gun MK3") >= 0) {
                     if (player.vehicles == vehicles.GOBMPRI) {
-                        damage *= 2.2;
-                        if (damage < 240) damage = 240;
+                        damage *= 2.8;
+                        if (damage < 280) damage = 280;
                     } else if (player.vehicles == vehicles.GS_MECH) {
-						damage *= 2;
-                        if (damage < 200) damage = 200;
-					} else {
-                        damage *= 1.8;
-                        if (damage < 160) damage = 160;
-                    }
-                }
-				if (player.hasKeyItem("Machine Gun MK4") >= 0) {
-					if (player.vehicles == vehicles.GS_MECH) {
-						damage *= 2.25;
-                        if (damage < 250) damage = 250;
+						damage *= 2.4;
+                        if (damage < 240) damage = 240;
 					} else {
                         damage *= 2;
                         if (damage < 200) damage = 200;
                     }
-				}
+                }
+                if (player.hasKeyItem("Machine Gun MK4") >= 0) {
+                    if (player.vehicles == vehicles.GOBMPRI) {
+                        damage *= 3;
+                        if (damage < 350) damage = 350;
+                    } else if (player.vehicles == vehicles.GS_MECH) {
+						damage *= 2.5;
+                        if (damage < 300) damage = 300;
+					} else {
+                        damage *= 2.25;
+                        if (damage < 250) damage = 250;
+                    }
+                }
+                if (player.hasKeyItem("Machine Gun MK5") >= 0) {
+                    if (player.vehicles == vehicles.GOBMPRI) {
+                        damage *= 3.7;
+                        if (damage < 420) damage = 420;
+                    } else if (player.vehicles == vehicles.GS_MECH) {
+						damage *= 3.1;
+                        if (damage < 360) damage = 360;
+					} else {
+                        damage *= 2.5;
+                        if (damage < 300) damage = 300;
+                    }
+                }
+                if (player.hasKeyItem("Machine Gun MK6") >= 0) {
+                    if (player.vehicles == vehicles.GOBMPRI) {
+                        damage *= 4.6;
+                        if (damage < 560) damage = 560;
+                    } else if (player.vehicles == vehicles.GS_MECH) {
+						damage *= 3.8;
+                        if (damage < 480) damage = 480;
+					} else {
+                        damage *= 3;
+                        if (damage < 400) damage = 400;
+                    }
+                }
             }
             var ignoreDR:Boolean = player.hasPerk(PerkLib.Penetrator);
             if (!ignoreDR) damage *= (monster.damageRangePercent() / 100);
@@ -4160,7 +4187,7 @@ public class Combat extends BaseContent {
                 var maxFirearmAttacks:int = player.calculateMultiAttacks(false);
                 if (player.hasPerk(PerkLib.LockAndLoad)) maxFirearmAttacks += 1;
 
-                if (player.isInGoblinMech() && (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0)) {
+                if (player.isInGoblinMech() && (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0 || player.hasKeyItem("Machine Gun MK4") >= 0 || player.hasKeyItem("Machine Gun MK5") >= 0 || player.hasKeyItem("Machine Gun MK6") >= 0)) {
                     outputText(".  It's clearly very painful. ");
                     if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
 						doPhysicalDamage(damage, true, true, ignoreDR);

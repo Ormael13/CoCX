@@ -425,7 +425,10 @@ public class Lumi extends BaseContent {
 		if (player.hasKeyItem("Taser with an overcharged battery") < 0 && player.hasKeyItem("Blueprint - Taser with an overcharged battery") < 0) addButton(1, "Taser O.B.", lumiEngineeringBuyBlueprintTaserOverchargeBattery).hint("Taser overcharge battery BP - 1000 gems");
 		if (player.hasKeyItem("Taser") < 0 && player.hasKeyItem("Taser with an overcharged battery") < 0 && player.hasKeyItem("Blueprint - Taser") < 0) addButton(1, "Taser", lumiEngineeringBuyBlueprintTaser).hint("Taser BP - 500 gems");
 		if (player.hasKeyItem("Safety bubble") < 0 && player.hasKeyItem("Blueprint - Safety bubble") < 0) addButton(2, "Safety bubble", lumiEngineeringBuyBlueprintSafetyBubble).hint("Safety bubble BP - 100 gems");
-		if (player.hasKeyItem("Machine Gun MK3") < 0 && player.hasKeyItem("Blueprint - Machine Gun MK3") < 0) addButton(3, "Machine Gun MK3", lumiEngineeringBuyBlueprintMachineGunMK3).hint("Machine Gun MK3 BP - 2000 gems");
+		if (player.hasKeyItem("Machine Gun MK6") < 0 && player.hasKeyItem("Blueprint - Machine Gun MK6") < 0) addButton(3, "Machine Gun MK6", lumiEngineeringBuyBlueprintMachineGunMK6).hint("Machine Gun MK6 BP - 5000 gems");
+		if (player.hasKeyItem("Machine Gun MK5") < 0 && player.hasKeyItem("Machine Gun MK6") < 0 && player.hasKeyItem("Blueprint - Machine Gun MK5") < 0) addButton(3, "Machine Gun MK5", lumiEngineeringBuyBlueprintMachineGunMK5).hint("Machine Gun MK5 BP - 4000 gems");
+		if (player.hasKeyItem("Machine Gun MK4") < 0 && player.hasKeyItem("Machine Gun MK5") < 0 && player.hasKeyItem("Blueprint - Machine Gun MK4") < 0) addButton(3, "Machine Gun MK4", lumiEngineeringBuyBlueprintMachineGunMK4).hint("Machine Gun MK4 BP - 3000 gems");
+		if (player.hasKeyItem("Machine Gun MK3") < 0 && player.hasKeyItem("Machine Gun MK4") < 0 && player.hasKeyItem("Blueprint - Machine Gun MK3") < 0) addButton(3, "Machine Gun MK3", lumiEngineeringBuyBlueprintMachineGunMK3).hint("Machine Gun MK3 BP - 2000 gems");
 		if (player.hasKeyItem("Machine Gun MK2") < 0 && player.hasKeyItem("Machine Gun MK3") < 0 && player.hasKeyItem("Blueprint - Machine Gun MK2") < 0) addButton(3, "Machine Gun MK2", lumiEngineeringBuyBlueprintMachineGunMK2).hint("Machine Gun MK2 BP - 1000 gems");
 		if (player.hasKeyItem("Machine Gun MK1") < 0 && player.hasKeyItem("Machine Gun MK2") < 0 && player.hasKeyItem("Machine Gun MK3") < 0 && player.hasKeyItem("Blueprint - Machine Gun MK1") < 0) addButton(3, "Machine Gun MK1", lumiEngineeringBuyBlueprintMachineGunMK1).hint("Machine Gun MK1 BP - 500 gems");
 		if (player.hasKeyItem("Repeater Gun") < 0 && player.hasKeyItem("Machine Gun MK1") < 0 && player.hasKeyItem("Machine Gun MK2") < 0 && player.hasKeyItem("Machine Gun MK3") < 0 && player.hasKeyItem("Blueprint - Repeater Gun") < 0) addButton(3, "Repeater Gun", lumiEngineeringBuyBlueprintRepeaterGun).hint("Repeater Gun BP - 100 gems");
@@ -806,6 +809,45 @@ public class Lumi extends BaseContent {
 			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
 			outputText("<b>Gained Key Item: Blueprint - Safety bubble!</b>");
 			player.createKeyItem("Blueprint - Safety bubble", 0, 0, 0, 0);
+			statScreenRefresh();
+			doNext(lumiEngineering);
+		}
+		else lumiEngineeringBuyBlueprintNotEnoughGems();
+	}
+	public function lumiEngineeringBuyBlueprintMachineGunMK6():void {
+		clearOutput();
+		if (player.gems >= 5000) {
+			player.gems -= 5000;
+			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
+			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
+			outputText("<b>Gained Key Item: Blueprint - Machine Gun MK6!</b>");
+			player.createKeyItem("Blueprint - Machine Gun MK6", 0, 0, 0, 0);
+			statScreenRefresh();
+			doNext(lumiEngineering);
+		}
+		else lumiEngineeringBuyBlueprintNotEnoughGems();
+	}
+	public function lumiEngineeringBuyBlueprintMachineGunMK5():void {
+		clearOutput();
+		if (player.gems >= 4000) {
+			player.gems -= 4000;
+			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
+			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
+			outputText("<b>Gained Key Item: Blueprint - Machine Gun MK5!</b>");
+			player.createKeyItem("Blueprint - Machine Gun MK5", 0, 0, 0, 0);
+			statScreenRefresh();
+			doNext(lumiEngineering);
+		}
+		else lumiEngineeringBuyBlueprintNotEnoughGems();
+	}
+	public function lumiEngineeringBuyBlueprintMachineGunMK4():void {
+		clearOutput();
+		if (player.gems >= 3000) {
+			player.gems -= 3000;
+			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
+			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
+			outputText("<b>Gained Key Item: Blueprint - Machine Gun MK4!</b>");
+			player.createKeyItem("Blueprint - Machine Gun MK4", 0, 0, 0, 0);
 			statScreenRefresh();
 			doNext(lumiEngineering);
 		}
@@ -1281,7 +1323,10 @@ public class Lumi extends BaseContent {
 		if (player.hasKeyItem("Blueprint - Taser with an overcharged battery") >= 0) outputText("Taser with an overcharged battery - Req. 100+ int, Tazer, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core.\n");
 		if (player.hasKeyItem("Blueprint - Taser") >= 0) outputText("Taser - Req. 75+ int, Toolbelt, 10 metal pieces, 300 nails, 1 mechanism, 1 energy core.\n");
 		if (player.hasKeyItem("Blueprint - Safety bubble") >= 0) outputText("Safety bubble - Req. 1 metal pieces, 100 nails, 1 energy core.\n");
-		if (player.hasKeyItem("Blueprint - Machine Gun MK3") >= 0) outputText("Machine Gun MK3 - Req. 125+ int, 15 metal pieces, 500 nails, 10 mechanism.\n");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK6") >= 0) outputText("Machine Gun MK6 - Req. 200+ int, 25 metal pieces, 1000 nails, 20 mechanism.\n");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK5") >= 0) outputText("Machine Gun MK5 - Req. 175+ int, 20 metal pieces, 800 nails, 15 mechanism.\n");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK4") >= 0) outputText("Machine Gun MK4 - Req. 150+ int, 15 metal pieces, 700 nails, 10 mechanism.\n");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK3") >= 0) outputText("Machine Gun MK3 - Req. 125+ int, 15 metal pieces, 600 nails, 10 mechanism.\n");
 		if (player.hasKeyItem("Blueprint - Machine Gun MK2") >= 0) outputText("Machine Gun MK2 - Req. 100+ int, 10 metal pieces, 500 nails, 5 mechanism.\n");
 		if (player.hasKeyItem("Blueprint - Machine Gun MK1") >= 0) outputText("Machine Gun MK1 - Req. 75+ int, 10 metal pieces, 200 nails, 5 mechanism.\n");
 		if (player.hasKeyItem("Blueprint - Repeater Gun") >= 0) outputText("Repeater Gun - Req. 50+ int, 2 metal pieces, 100 nails.\n");
@@ -1311,10 +1356,13 @@ public class Lumi extends BaseContent {
 		if (player.hasKeyItem("Blueprint - Taser with an overcharged battery") >= 0 && player.hasKeyItem("Taser") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 15 && CampStatsAndResources.NailsResc >= 500 && CampStatsAndResources.EnergyCoreResc >= 5 && CampStatsAndResources.MechanismResc >= 2) addButton(1, "Tazer O.B.", lumiWorkshopTaserOverchargeBattery).hint("Taser with an overcharged battery - Increases the Taser’s effectiveness and paralysis duration. - 100+ int, Tazer, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core and 8 hours of work");
 		if (player.hasKeyItem("Blueprint - Taser") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 75 && CampStatsAndResources.MetalPieces >= 10 && CampStatsAndResources.NailsResc >= 300 && CampStatsAndResources.EnergyCoreResc >= 1 && CampStatsAndResources.MechanismResc >= 1) addButton(1, "Tazer", lumiWorkshopTaser).hint("Tazer - Adds an Tazer option to your mech. - 75+ int, Toolbelt, 10 metal pieces, 300 nails, 1 mechanism, 1 energy core and 8 hours of work");
 		if (player.hasKeyItem("Blueprint - Safety bubble") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && CampStatsAndResources.EnergyCoreResc >= 1 && CampStatsAndResources.MetalPieces >= 1 && CampStatsAndResources.NailsResc >= 100) addButton(2, "Safety bubble", lumiWorkshopSafetyBubble).hint("Safety bubble - Allows you to use the mech underwater. Too fragile for standard combat use but provide fresh air. - 1 metal pieces, 100 nails, 1 energy core and 4 hours of work.");
-		if (player.hasKeyItem("Blueprint - Machine Gun MK3") >= 0 && player.hasKeyItem("Machine Gun MK2") >= 0 && player.inte >= 125 && CampStatsAndResources.MetalPieces >= 15 && CampStatsAndResources.NailsResc >= 500 && CampStatsAndResources.MechanismResc >= 10) addButton(3, "Machine Gun MK3", lumiWorkshopMachineGunMK3).hint("Machine Gun MK3 - Increase range attack by 80% if using a firearm. Change the firearm text to a goblin machine gun text. - 125+ int, Machine Gun MK2, 15 metal pieces, 500 nails, 10 mechanism and 12 hours of work.");
-		if (player.hasKeyItem("Blueprint - Machine Gun MK2") >= 0 && player.hasKeyItem("Machine Gun MK1") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 10 && CampStatsAndResources.NailsResc >= 500 && CampStatsAndResources.MechanismResc >= 5) addButton(3, "Machine Gun MK2", lumiWorkshopMachineGunMK2).hint("Machine Gun MK2 - Increase range attack by 60% if using a firearm. Change the firearm text to a goblin machine gun text. - 100+ int, Machine Gun MK1, 10 metal pieces, 500 nails, 5 mechanism, and 8 hours of work.");
-		if (player.hasKeyItem("Blueprint - Machine Gun MK1") >= 0 && player.hasKeyItem("Repeater Gun") >= 0 && player.inte >= 75 && CampStatsAndResources.MetalPieces >= 10 && CampStatsAndResources.NailsResc >= 200 && CampStatsAndResources.MechanismResc >= 5) addButton(3, "Machine Gun MK1", lumiWorkshopMachineGunMK1).hint("Machine Gun MK1 - Increase range attack by 40% if using a firearm. Change the firearm text to a goblin machine gun text. - 75+ int, Repeater Gun, 10 metal pieces, 200 nails, 5 mechanism and 4 hours of work.");
-		if (player.hasKeyItem("Blueprint - Repeater Gun") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && CampStatsAndResources.MetalPieces >= 2 && CampStatsAndResources.NailsResc >= 100) addButton(3, "Repeater Gun", lumiWorkshopRepeaterGun).hint("Repeater Gun - Increase range attack by 20% if using a firearm. Change the firearm text to a goblin machine gun text. - 50+ int, Toolbelt, 2 metal pieces, 100 nails and 4 hour work.");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK6") >= 0 && player.hasKeyItem("Machine Gun MK5") >= 0 && player.inte >= 200 && CampStatsAndResources.MetalPieces >= 25 && CampStatsAndResources.NailsResc >= 1000 && CampStatsAndResources.MechanismResc >= 20) addButton(3, "Machine Gun MK6", lumiWorkshopMachineGunMK6).hint("Machine Gun MK6 - Increase range attack by 200% if using a firearm. Change the firearm text to a goblin machine gun text. - 200+ int, Machine Gun MK5, 25 metal pieces, 1000 nails, 20 mechanism and 12 hours of work.");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK5") >= 0 && player.hasKeyItem("Machine Gun MK4") >= 0 && player.inte >= 175 && CampStatsAndResources.MetalPieces >= 20 && CampStatsAndResources.NailsResc >= 800 && CampStatsAndResources.MechanismResc >= 15) addButton(3, "Machine Gun MK5", lumiWorkshopMachineGunMK5).hint("Machine Gun MK5 - Increase range attack by 150% if using a firearm. Change the firearm text to a goblin machine gun text. - 175+ int, Machine Gun MK4, 20 metal pieces, 800 nails, 15 mechanism and 12 hours of work.");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK4") >= 0 && player.hasKeyItem("Machine Gun MK3") >= 0 && player.inte >= 150 && CampStatsAndResources.MetalPieces >= 15 && CampStatsAndResources.NailsResc >= 700 && CampStatsAndResources.MechanismResc >= 10) addButton(3, "Machine Gun MK4", lumiWorkshopMachineGunMK4).hint("Machine Gun MK4 - Increase range attack by 125% if using a firearm. Change the firearm text to a goblin machine gun text. - 150+ int, Machine Gun MK3, 15 metal pieces, 700 nails, 10 mechanism and 8 hours of work.");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK3") >= 0 && player.hasKeyItem("Machine Gun MK2") >= 0 && player.inte >= 125 && CampStatsAndResources.MetalPieces >= 15 && CampStatsAndResources.NailsResc >= 600 && CampStatsAndResources.MechanismResc >= 10) addButton(3, "Machine Gun MK3", lumiWorkshopMachineGunMK3).hint("Machine Gun MK3 - Increase range attack by 100% if using a firearm. Change the firearm text to a goblin machine gun text. - 125+ int, Machine Gun MK2, 15 metal pieces, 600 nails, 10 mechanism and 8 hours of work.");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK2") >= 0 && player.hasKeyItem("Machine Gun MK1") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 10 && CampStatsAndResources.NailsResc >= 500 && CampStatsAndResources.MechanismResc >= 5) addButton(3, "Machine Gun MK2", lumiWorkshopMachineGunMK2).hint("Machine Gun MK2 - Increase range attack by 75% if using a firearm. Change the firearm text to a goblin machine gun text. - 100+ int, Machine Gun MK1, 10 metal pieces, 500 nails, 5 mechanism, and 8 hours of work.");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK1") >= 0 && player.hasKeyItem("Repeater Gun") >= 0 && player.inte >= 75 && CampStatsAndResources.MetalPieces >= 10 && CampStatsAndResources.NailsResc >= 200 && CampStatsAndResources.MechanismResc >= 5) addButton(3, "Machine Gun MK1", lumiWorkshopMachineGunMK1).hint("Machine Gun MK1 - Increase range attack by 50% if using a firearm. Change the firearm text to a goblin machine gun text. - 75+ int, Repeater Gun, 10 metal pieces, 200 nails, 5 mechanism and 4 hours of work.");
+		if (player.hasKeyItem("Blueprint - Repeater Gun") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && CampStatsAndResources.MetalPieces >= 2 && CampStatsAndResources.NailsResc >= 100) addButton(3, "Repeater Gun", lumiWorkshopRepeaterGun).hint("Repeater Gun - Increase range attack by 25% if using a firearm. Change the firearm text to a goblin machine gun text. - 50+ int, Toolbelt, 2 metal pieces, 100 nails and 4 hour work.");
 		if (player.hasKeyItem("Blueprint - Dynapunch Glove") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && CampStatsAndResources.MetalPieces >= 2 && CampStatsAndResources.NailsResc >= 100 && CampStatsAndResources.MechanismResc >= 1) addButton(4, "Dynapunch G.", lumiWorkshopDynapunchGlove).hint("Dynapunch Glove - Adds a punching option to your mech. - 50+ int, Toolbelt, 2 metal pieces, 100 nails, 1 mechanism and 4 hour work.");
 		if (player.hasKeyItem("Blueprint - Whitefire Beam Cannon") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 75 && CampStatsAndResources.MetalPieces >= 20 && CampStatsAndResources.NailsResc >= 500 && CampStatsAndResources.EnergyCoreResc >= 5 && player.hasStatusEffect(StatusEffects.KnowsWhitefire)) addButton(5, "Whitefire B.C.", lumiWorkshopWhitefireBeamCannon).hint("Whitefire Beam Cannon - Adds a whitefire beam cannon option to your mech. - 75+ int, knowing Whitefire spell, 20 metal pieces, 500 nails, 5 energy core and 8 hours of work.");
 		if (player.hasKeyItem("Blueprint - Snowball Generator") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 75 && CampStatsAndResources.MetalPieces >= 20 && CampStatsAndResources.NailsResc >= 500 && CampStatsAndResources.EnergyCoreResc >= 5 && player.hasStatusEffect(StatusEffects.KnowsIceSpike)) addButton(6, "Snowball G.", lumiWorkshopSnowballGenerator).hint("Snowball Generator - Adds a snowball generator option to your mech. - 75+ int, knowing Ice Spike spell, 20 metal pieces, 500 nails, 5 energy core and 8 hours of work.");
@@ -1696,18 +1744,57 @@ public class Lumi extends BaseContent {
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
 		else doNext(camp.returnToCampUseFourHours);
 	}
+	public function lumiWorkshopMachineGunMK6():void {
+		clearOutput();
+		CampStatsAndResources.MetalPieces -= 25;
+		CampStatsAndResources.NailsResc -= 1000;
+		CampStatsAndResources.MechanismResc -= 20;
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new Machine Gun MK3 is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem("Machine Gun MK6", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - Machine Gun MK6");
+		player.removeKeyItem("Machine Gun MK5");
+		statScreenRefresh();
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
+		else doNext(camp.returnToCampUseTwelveHours);
+	}
+	public function lumiWorkshopMachineGunMK5():void {
+		clearOutput();
+		CampStatsAndResources.MetalPieces -= 20;
+		CampStatsAndResources.NailsResc -= 800;
+		CampStatsAndResources.MechanismResc -= 15;
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new Machine Gun MK3 is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem("Machine Gun MK5", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - Machine Gun MK5");
+		player.removeKeyItem("Machine Gun MK4");
+		statScreenRefresh();
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
+		else doNext(camp.returnToCampUseTwelveHours);
+	}
+	public function lumiWorkshopMachineGunMK4():void {
+		clearOutput();
+		CampStatsAndResources.MetalPieces -= 15;
+		CampStatsAndResources.NailsResc -= 700;
+		CampStatsAndResources.MechanismResc -= 10;
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Machine Gun MK3 is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem("Machine Gun MK4", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - Machine Gun MK4");
+		player.removeKeyItem("Machine Gun MK3");
+		statScreenRefresh();
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
+		else doNext(camp.returnToCampUseEightHours);
+	}
 	public function lumiWorkshopMachineGunMK3():void {
 		clearOutput();
 		CampStatsAndResources.MetalPieces -= 15;
-		CampStatsAndResources.NailsResc -= 500;
+		CampStatsAndResources.NailsResc -= 600;
 		CampStatsAndResources.MechanismResc -= 10;
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new Machine Gun MK3 is ready and installed up your " + player.vehiclesName + ".\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Machine Gun MK3 is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Machine Gun MK3", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Machine Gun MK3");
 		player.removeKeyItem("Machine Gun MK2");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
-		else doNext(camp.returnToCampUseTwelveHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
+		else doNext(camp.returnToCampUseEightHours);
 	}
 	public function lumiWorkshopMachineGunMK2():void {
 		clearOutput();
