@@ -416,7 +416,10 @@ public class Lumi extends BaseContent {
 	}
 	public function lumiEngineeringMechUpgrades():void {
 		menu();
-		if (player.hasKeyItem("Upgraded Armor plating 3.0") < 0 && player.hasKeyItem("Blueprint - Upgraded Armor plating 3.0") < 0) addButton(0, "UpgrArmor 3.0", lumiEngineeringBuyBlueprintUpgradedArmorPlating3).hint("Upgraded Armor plating 3.0 BP - 1000 gems");
+		if (player.hasKeyItem("Upgraded Armor plating 6.0") < 0 && player.hasKeyItem("Blueprint - Upgraded Armor plating 6.0") < 0) addButton(0, "UpgrArmor 6.0", lumiEngineeringBuyBlueprintUpgradedArmorPlating6).hint("Upgraded Armor plating 6.0 BP - 2500 gems");
+		if (player.hasKeyItem("Upgraded Armor plating 5.0") < 0 && player.hasKeyItem("Upgraded Armor plating 6.0") < 0 && player.hasKeyItem("Blueprint - Upgraded Armor plating 5.0") < 0) addButton(0, "UpgrArmor 5.0", lumiEngineeringBuyBlueprintUpgradedArmorPlating5).hint("Upgraded Armor plating 5.0 BP - 2000 gems");
+		if (player.hasKeyItem("Upgraded Armor plating 4.0") < 0 && player.hasKeyItem("Upgraded Armor plating 5.0") < 0 && player.hasKeyItem("Blueprint - Upgraded Armor plating 4.0") < 0) addButton(0, "UpgrArmor 4.0", lumiEngineeringBuyBlueprintUpgradedArmorPlating4).hint("Upgraded Armor plating 4.0 BP - 1500 gems");
+		if (player.hasKeyItem("Upgraded Armor plating 3.0") < 0 && player.hasKeyItem("Upgraded Armor plating 4.0") < 0 && player.hasKeyItem("Blueprint - Upgraded Armor plating 3.0") < 0) addButton(0, "UpgrArmor 3.0", lumiEngineeringBuyBlueprintUpgradedArmorPlating3).hint("Upgraded Armor plating 3.0 BP - 1000 gems");
 		if (player.hasKeyItem("Upgraded Armor plating 2.0") < 0 && player.hasKeyItem("Upgraded Armor plating 3.0") < 0 && player.hasKeyItem("Blueprint - Upgraded Armor plating 2.0") < 0) addButton(0, "UpgrArmor 2.0", lumiEngineeringBuyBlueprintUpgradedArmorPlating2).hint("Upgraded Armor plating 2.0 BP - 500 gems");
 		if (player.hasKeyItem("Upgraded Armor plating 1.0") < 0 && player.hasKeyItem("Upgraded Armor plating 2.0") < 0 && player.hasKeyItem("Upgraded Armor plating 3.0") < 0 && player.hasKeyItem("Blueprint - Upgraded Armor plating 1.0") < 0) addButton(0, "UpgrArmor 1.0", lumiEngineeringBuyBlueprintUpgradedArmorPlating1).hint("Upgraded Armor plating 1.0 BP - 100 gems");
 		if (player.hasKeyItem("Taser with an overcharged battery") < 0 && player.hasKeyItem("Blueprint - Taser with an overcharged battery") < 0) addButton(1, "Taser O.B.", lumiEngineeringBuyBlueprintTaserOverchargeBattery).hint("Taser overcharge battery BP - 1000 gems");
@@ -686,6 +689,45 @@ public class Lumi extends BaseContent {
 			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
 			outputText("<b>Gained Key Item: Blueprint - Machined greatsword!</b>");
 			player.createKeyItem("Blueprint - Machined greatsword", 0, 0, 0, 0);
+			statScreenRefresh();
+			doNext(lumiEngineering);
+		}
+		else lumiEngineeringBuyBlueprintNotEnoughGems();
+	}
+	public function lumiEngineeringBuyBlueprintUpgradedArmorPlating6():void {
+		clearOutput();
+		if (player.gems >= 2500) {
+			player.gems -= 2500;
+			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
+			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
+			outputText("<b>Gained Key Item: Blueprint - Upgraded Armor plating 6.0!</b>");
+			player.createKeyItem("Blueprint - Upgraded Armor plating 6.0", 0, 0, 0, 0);
+			statScreenRefresh();
+			doNext(lumiEngineering);
+		}
+		else lumiEngineeringBuyBlueprintNotEnoughGems();
+	}
+	public function lumiEngineeringBuyBlueprintUpgradedArmorPlating5():void {
+		clearOutput();
+		if (player.gems >= 2000) {
+			player.gems -= 2000;
+			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
+			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
+			outputText("<b>Gained Key Item: Blueprint - Upgraded Armor plating 5.0!</b>");
+			player.createKeyItem("Blueprint - Upgraded Armor plating 5.0", 0, 0, 0, 0);
+			statScreenRefresh();
+			doNext(lumiEngineering);
+		}
+		else lumiEngineeringBuyBlueprintNotEnoughGems();
+	}
+	public function lumiEngineeringBuyBlueprintUpgradedArmorPlating4():void {
+		clearOutput();
+		if (player.gems >= 1500) {
+			player.gems -= 1500;
+			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
+			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
+			outputText("<b>Gained Key Item: Blueprint - Upgraded Armor plating 4.0!</b>");
+			player.createKeyItem("Blueprint - Upgraded Armor plating 4.0", 0, 0, 0, 0);
 			statScreenRefresh();
 			doNext(lumiEngineering);
 		}
@@ -1230,7 +1272,10 @@ public class Lumi extends BaseContent {
 		}
 	}
 	public function lumiWorkshopMechUpgrades():void {
-		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 3.0") >= 0) outputText("Upgraded Armor plating 3.0 - Req. 100+ int, Upgraded Armor plating 2.0, 20 metal pieces, 500 nails.\n");
+		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 6.0") >= 0) outputText("Upgraded Armor plating 6.0 - Req. 175+ int, Upgraded Armor plating 5.0, 30 metal pieces, 700 nails.\n");
+		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 5.0") >= 0) outputText("Upgraded Armor plating 5.0 - Req. 150+ int, Upgraded Armor plating 4.0, 25 metal pieces, 600 nails.\n");
+		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 4.0") >= 0) outputText("Upgraded Armor plating 4.0 - Req. 125+ int, Upgraded Armor plating 3.0, 20 metal pieces, 500 nails.\n");
+		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 3.0") >= 0) outputText("Upgraded Armor plating 3.0 - Req. 100+ int, Upgraded Armor plating 2.0, 15 metal pieces, 400 nails.\n");
 		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 2.0") >= 0) outputText("Upgraded Armor plating 2.0 - Req. 75+ int, Upgraded Armor plating 1.0, 10 metal pieces, 300 nails.\n");
 		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 1.0") >= 0) outputText("Upgraded Armor plating 1.0 - Req. 50+ int, 5 metal pieces, 200 nails.\n");
 		if (player.hasKeyItem("Blueprint - Taser with an overcharged battery") >= 0) outputText("Taser with an overcharged battery - Req. 100+ int, Tazer, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core.\n");
@@ -1257,8 +1302,11 @@ public class Lumi extends BaseContent {
 		if (player.hasKeyItem("Blueprint - MK2 Jetpack") >= 0) outputText("MK2 Jetpack - Req. 100+ int, Jetpack, 10 metal pieces, 300 nails, 2 energy core.\n");
 		if (player.hasKeyItem("Blueprint - Jetpack") >= 0) outputText("Jetpack - Req. 50+ int, Toolbelt, 3 metal pieces, 100 nails, 1 energy core.\n");
 		menu();
-		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 3.0") >= 0 && player.hasKeyItem("Upgraded Armor plating 2.0") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 20 && CampStatsAndResources.NailsResc >= 500) addButton(0, "UpgrArmor 3.0", lumiWorkshopUpgradedArmorPlating3).hint("Upgraded Armor plating 3.0 - +15 armor/magic resistance to the mech. +50% Health. - 100+ int, Upgraded Armor plating 2.0, 20 metal pieces, 500 nails and 12 hours of work");
-		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 2.0") >= 0 && player.hasKeyItem("Upgraded Armor plating 1.0") >= 0 && player.inte >= 75 && CampStatsAndResources.MetalPieces >= 10 && CampStatsAndResources.NailsResc >= 300) addButton(0, "UpgrArmor 2.0", lumiWorkshopUpgradedArmorPlating2).hint("Upgraded Armor plating 2.0 - +10 armor/magic resistance to the mech. +35% Health. - 75+ int, Upgraded Armor plating 1.0, 10 metal pieces, 300 nails and 8 hours of work");
+		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 6.0") >= 0 && player.hasKeyItem("Upgraded Armor plating 5.0") >= 0 && player.inte >= 175 && CampStatsAndResources.MetalPieces >= 30 && CampStatsAndResources.NailsResc >= 700) addButton(0, "UpgrArmor 6.0", lumiWorkshopUpgradedArmorPlating6).hint("Upgraded Armor plating 6.0 - +15 armor/magic resistance to the mech. +110% Health. - 175+ int, Upgraded Armor plating 5.0, 30 metal pieces, 700 nails and 12 hours of work");
+		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 5.0") >= 0 && player.hasKeyItem("Upgraded Armor plating 4.0") >= 0 && player.inte >= 150 && CampStatsAndResources.MetalPieces >= 25 && CampStatsAndResources.NailsResc >= 600) addButton(0, "UpgrArmor 5.0", lumiWorkshopUpgradedArmorPlating5).hint("Upgraded Armor plating 5.0 - +15 armor/magic resistance to the mech. +90% Health. - 150+ int, Upgraded Armor plating 4.0, 25 metal pieces, 600 nails and 12 hours of work");
+		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 4.0") >= 0 && player.hasKeyItem("Upgraded Armor plating 3.0") >= 0 && player.inte >= 125 && CampStatsAndResources.MetalPieces >= 20 && CampStatsAndResources.NailsResc >= 500) addButton(0, "UpgrArmor 4.0", lumiWorkshopUpgradedArmorPlating4).hint("Upgraded Armor plating 4.0 - +15 armor/magic resistance to the mech. +70% Health. - 125+ int, Upgraded Armor plating 3.0, 20 metal pieces, 500 nails and 8 hours of work");
+		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 3.0") >= 0 && player.hasKeyItem("Upgraded Armor plating 2.0") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 15 && CampStatsAndResources.NailsResc >= 400) addButton(0, "UpgrArmor 3.0", lumiWorkshopUpgradedArmorPlating3).hint("Upgraded Armor plating 3.0 - +15 armor/magic resistance to the mech. +50% Health. - 100+ int, Upgraded Armor plating 2.0, 15 metal pieces, 400 nails and 8 hours of work");
+		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 2.0") >= 0 && player.hasKeyItem("Upgraded Armor plating 1.0") >= 0 && player.inte >= 75 && CampStatsAndResources.MetalPieces >= 10 && CampStatsAndResources.NailsResc >= 300) addButton(0, "UpgrArmor 2.0", lumiWorkshopUpgradedArmorPlating2).hint("Upgraded Armor plating 2.0 - +10 armor/magic resistance to the mech. +35% Health. - 75+ int, Upgraded Armor plating 1.0, 10 metal pieces, 300 nails and 4 hours of work");
 		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 1.0") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && CampStatsAndResources.MetalPieces >= 5 && CampStatsAndResources.NailsResc >= 200) addButton(0, "UpgrArmor 1.0", lumiWorkshopUpgradedArmorPlating1).hint("Upgraded Armor plating 1.0 - +5 armor/magic resistance to the mech. +20% Health. - 50+ int, Toolbelt, 5 metal pieces, 200 nails and 4 hours of work");
 		if (player.hasKeyItem("Blueprint - Taser with an overcharged battery") >= 0 && player.hasKeyItem("Taser") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 15 && CampStatsAndResources.NailsResc >= 500 && CampStatsAndResources.EnergyCoreResc >= 5 && CampStatsAndResources.MechanismResc >= 2) addButton(1, "Tazer O.B.", lumiWorkshopTaserOverchargeBattery).hint("Taser with an overcharged battery - Increases the Taser’s effectiveness and paralysis duration. - 100+ int, Tazer, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core and 8 hours of work");
 		if (player.hasKeyItem("Blueprint - Taser") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 75 && CampStatsAndResources.MetalPieces >= 10 && CampStatsAndResources.NailsResc >= 300 && CampStatsAndResources.EnergyCoreResc >= 1 && CampStatsAndResources.MechanismResc >= 1) addButton(1, "Tazer", lumiWorkshopTaser).hint("Tazer - Adds an Tazer option to your mech. - 75+ int, Toolbelt, 10 metal pieces, 300 nails, 1 mechanism, 1 energy core and 8 hours of work");
@@ -1539,29 +1587,65 @@ public class Lumi extends BaseContent {
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) inventory.takeItem(weapons.MACGRSW, explorer.done);
 		else inventory.takeItem(weapons.MACGRSW, camp.returnToCampUseFourHours);
 	}
-	public function lumiWorkshopUpgradedArmorPlating3():void {
+	public function lumiWorkshopUpgradedArmorPlating6():void {
+		clearOutput();
+		CampStatsAndResources.MetalPieces -= 30;
+		CampStatsAndResources.NailsResc -= 700;
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new Upgraded Armor plating 6.0 is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem("Upgraded Armor plating 6.0", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - Upgraded Armor plating 6.0");
+		player.removeKeyItem("Upgraded Armor plating 5.0");
+		statScreenRefresh();
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
+		else doNext(camp.returnToCampUseTwelveHours);
+	}
+	public function lumiWorkshopUpgradedArmorPlating5():void {
+		clearOutput();
+		CampStatsAndResources.MetalPieces -= 25;
+		CampStatsAndResources.NailsResc -= 600;
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new Upgraded Armor plating 5.0 is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem("Upgraded Armor plating 5.0", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - Upgraded Armor plating 5.0");
+		player.removeKeyItem("Upgraded Armor plating 4.0");
+		statScreenRefresh();
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
+		else doNext(camp.returnToCampUseTwelveHours);
+	}
+	public function lumiWorkshopUpgradedArmorPlating4():void {
 		clearOutput();
 		CampStatsAndResources.MetalPieces -= 20;
 		CampStatsAndResources.NailsResc -= 500;
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new Upgraded Armor plating 3.0 is ready and installed up your " + player.vehiclesName + ".\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Upgraded Armor plating 4.0 is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem("Upgraded Armor plating 4.0", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - Upgraded Armor plating 4.0");
+		player.removeKeyItem("Upgraded Armor plating 3.0");
+		statScreenRefresh();
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
+		else doNext(camp.returnToCampUseEightHours);
+	}
+	public function lumiWorkshopUpgradedArmorPlating3():void {
+		clearOutput();
+		CampStatsAndResources.MetalPieces -= 15;
+		CampStatsAndResources.NailsResc -= 400;
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Upgraded Armor plating 3.0 is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Upgraded Armor plating 3.0", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Upgraded Armor plating 3.0");
 		player.removeKeyItem("Upgraded Armor plating 2.0");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
-		else doNext(camp.returnToCampUseTwelveHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
+		else doNext(camp.returnToCampUseEightHours);
 	}
 	public function lumiWorkshopUpgradedArmorPlating2():void {
 		clearOutput();
 		CampStatsAndResources.MetalPieces -= 10;
 		CampStatsAndResources.NailsResc -= 300;
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Upgraded Armor plating 2.0 is ready and installed up your " + player.vehiclesName + ".\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Upgraded Armor plating 2.0 is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Upgraded Armor plating 2.0", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Upgraded Armor plating 2.0");
 		player.removeKeyItem("Upgraded Armor plating 1.0");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
-		else doNext(camp.returnToCampUseEightHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
+		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopUpgradedArmorPlating1():void {
 		clearOutput();

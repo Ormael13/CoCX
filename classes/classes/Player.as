@@ -830,18 +830,27 @@ use namespace CoC;
 				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorDef += 5;
 				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorDef += 10;
 				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorDef += 15;
+				if (hasKeyItem("Upgraded Armor plating 4.0") >= 0) armorDef += 20;
+				if (hasKeyItem("Upgraded Armor plating 5.0") >= 0) armorDef += 25;
+				if (hasKeyItem("Upgraded Armor plating 6.0") >= 0) armorDef += 30;
 			}
 			if (vehiclesName == "Goblin Mech Prime") {
 				armorDef += 20;
 				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorDef += 10;
 				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorDef += 20;
 				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorDef += 30;
+				if (hasKeyItem("Upgraded Armor plating 4.0") >= 0) armorDef += 40;
+				if (hasKeyItem("Upgraded Armor plating 5.0") >= 0) armorDef += 50;
+				if (hasKeyItem("Upgraded Armor plating 6.0") >= 0) armorDef += 60;
 			}
 			if (vehiclesName == "Giant Slayer Mech") {
 				armorDef += 20;
 				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorDef += 40;
 				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorDef += 60;
 				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorDef += 80;
+				if (hasKeyItem("Upgraded Armor plating 4.0") >= 0) armorDef += 100;
+				if (hasKeyItem("Upgraded Armor plating 5.0") >= 0) armorDef += 120;
+				if (hasKeyItem("Upgraded Armor plating 6.0") >= 0) armorDef += 140;
 			}
 			if (vehiclesName == "Howling Banshee Mech") {
 				armorDef += 15;
@@ -1041,12 +1050,18 @@ use namespace CoC;
 				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorMDef += 5;
 				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorMDef += 10;
 				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorMDef += 15;
+				if (hasKeyItem("Upgraded Armor plating 4.0") >= 0) armorMDef += 20;
+				if (hasKeyItem("Upgraded Armor plating 5.0") >= 0) armorMDef += 25;
+				if (hasKeyItem("Upgraded Armor plating 6.0") >= 0) armorMDef += 30;
 			}
 			if (vehiclesName == "Goblin Mech Prime") {
 				armorMDef += 20;
 				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorMDef += 10;
 				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorMDef += 20;
 				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorMDef += 30;
+				if (hasKeyItem("Upgraded Armor plating 4.0") >= 0) armorMDef += 40;
+				if (hasKeyItem("Upgraded Armor plating 5.0") >= 0) armorMDef += 50;
+				if (hasKeyItem("Upgraded Armor plating 6.0") >= 0) armorMDef += 60;
 			}
 			if (vehiclesName == "Giant Slayer Mech") {
 				armorMDef += 20;
@@ -3927,6 +3942,8 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Misdirection) && armor.hasTag(ItemConstants.A_AGILE)) chance += 10;
 			if (hasPerk(PerkLib.Unhindered) && armor.hasTag(ItemConstants.A_AGILE)) chance += 10;
 			if (CombatAbilities.HurricaneDance.isActive()) chance += 25;
+
+			if (hasStatusEffect(StatusEffects.Gallop) && perkv1(IMutationsLib.EquineMuscleIM) >= 4) chance += 10;
 
 			if (isRace(Races.FAIRY)) {
 				var fairyDodgeChance:int = 30;

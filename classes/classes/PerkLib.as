@@ -550,8 +550,8 @@ public class PerkLib
 				"You've just started out on your sex life. You don't know much, but you can tease well. (+15% tease dmg)",
 				"You've chosen the 'Amateur' perk, gaining +15% tease dmg.");
 		public static const AmateurGunslinger:PerkType = mk("Amateur Gunslinger", "Amateur Gunslinger",
-				"Increase damage (+100%) base and accuracy (+10%) of firearms attacks. (+5% firearms attacks multiplier bonus)",
-				"You've chosen the 'Amateur Gunslinger' perk. Increase damage (+100%) base and accuracy (+10%) of firearms attacks. (+5% firearms attacks multiplier bonus)");
+				"Increase damage base by 100% (+100%) and accuracy by 10% for firearms attacks. (+5% firearms attacks multiplier bonus)",
+				"You've chosen the 'Amateur Gunslinger' perk. Increase damage base by 100% (+100%) and accuracy by 10% for firearms attacks. (+5% firearms attacks multiplier bonus)");
 		public static const AnatomyExpert:PerkType = mk("Anatomy expert", "Anatomy expert",
 				"Your continued study of your opponents anatomy granted you insight to their weak point allowing you to strike precisely where it will hurt the most for increased critical chances and damage with thrown weapon. (+10% crit chance, +50% crit dmg and +15% range physical attacks multiplier)",
 				"You've chosen the 'Anatomy expert' perk. Your continued study of your opponents' anatomy has granted you insight into their weak points, allowing you to strike precisely where it will hurt the most for increased critical chances and damage with thrown weapons. (+10% crit chance, +50% crit dmg and +15% range physical attacks multiplier)");
@@ -1364,8 +1364,8 @@ public class PerkLib
 				"Your proficiency in making golems allows them to attack even flying enemies, lower by 5% chance of core shattering, storing more golems/golem cores and increase dmg scaling up on current int/wis.",
 				"You've chosen the 'Expert Golem Maker' perk, increasing your proficiency in making golems.");
 		public static const ExpertGunslinger:PerkType = mk("Expert Gunslinger", "Expert Gunslinger",
-				"Increase damage (+100%) base and reduce dmg penalty from dual wielding non 2H firearms by 30%. (+10% firearms attacks multiplier bonus)",
-				"You've chosen the 'Expert Gunslinger' perk. Increase damage (+100%) base and reduce dmg penalty from dual wielding non 2H firearms by 30%. (+10% firearms attacks multiplier bonus)");
+				"Increase damage base by 100% (+200%) and reduce dmg penalty from dual wielding non 2H firearms by 30%. (+10% firearms attacks multiplier bonus)",
+				"You've chosen the 'Expert Gunslinger' perk. Increase damage base by 100% (+200%) and reduce dmg penalty from dual wielding non 2H firearms by 30%. (+10% firearms attacks multiplier bonus)");
 		public static const ExplosiveCartridge:PerkType = mk("Explosive cartridge", "Explosive cartridge",
 				"Gunshots deals 250% damage against groups (of any size) and large enemies (9+ ft. tall). (+10% firearms attacks multiplier)",
 				"You've chosen the 'Explosive cartridge' perk. Gunshots deals 250% damage against groups (of any size) and large enemies (9+ ft. tall). (+10% firearms attacks multiplier)");
@@ -2279,8 +2279,8 @@ public class PerkLib
 				"Your proficiency in making golems allows to make permanent golems that will not longer shatter after one attack. Allows to store one such golem in golem bag. Storing more temporal golems/golem cores and increase their dmg scaling up on current int/wis.",
 				"You've chosen the 'Master Golem Maker' perk, increasing your proficiency in making golems.");
 		public static const MasterGunslinger:PerkType = mk("Master Gunslinger", "Master Gunslinger",
-				"Increase damage (+100%) base and reduce dmg penalty from dual wielding 2H firearms by 50%. (+15% firearms attacks multiplier bonus)",
-				"You've chosen the 'Master Gunslinger' perk. Increase damage (+100%) base and reduce dmg penalty from dual wielding 2H firearms by 50%. (+15% firearms attacks multiplier bonus)");
+				"Increase damage base by 100% (+300%) and reduce dmg penalty from dual wielding 2H firearms by 50%. (+15% firearms attacks multiplier bonus)",
+				"You've chosen the 'Master Gunslinger' perk. Increase damage base by 100% (+300%) and reduce dmg penalty from dual wielding 2H firearms by 50%. (+15% firearms attacks multiplier bonus)");
 		public static const Medic:PerkType = mk("MEDIC!!!", "MEDIC!!!",
 				"You stole someone's skeleton from them, and nobody noticed until the patient woke up. While your doctor's license may be revoked, you are still the best medic in the world, increasing your health regen... now if only Heavy would stop screaming at you.",
 				"You've chosen the 'MEDIC!!!' perk, increasing HP gains by 20%.");

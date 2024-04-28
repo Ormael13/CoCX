@@ -39,6 +39,9 @@ public class GoblinMechAlpha extends Vehicles
 				if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) game.player.HP = 1.2 * game.player.maxHP();
 				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) game.player.HP = 1.35 * game.player.maxHP();
 				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) game.player.HP = 1.5 * game.player.maxHP();
+				if (game.player.hasKeyItem("Upgraded Armor plating 4.0") >= 0) game.player.HP = 1.7 * game.player.maxHP();
+				if (game.player.hasKeyItem("Upgraded Armor plating 5.0") >= 0) game.player.HP = 1.9 * game.player.maxHP();
+				if (game.player.hasKeyItem("Upgraded Armor plating 6.0") >= 0) game.player.HP = 2.1 * game.player.maxHP();
 			}
 			super.afterEquip(doOutput);
 		}
@@ -47,6 +50,9 @@ public class GoblinMechAlpha extends Vehicles
 			if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) game.player.HP /= 1.2;
 			if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) game.player.HP /= 1.35;
 			if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) game.player.HP /= 1.5;
+			if (game.player.hasKeyItem("Upgraded Armor plating 4.0") >= 0) game.player.HP /= 1.7;
+			if (game.player.hasKeyItem("Upgraded Armor plating 5.0") >= 0) game.player.HP /= 1.9;
+			if (game.player.hasKeyItem("Upgraded Armor plating 6.0") >= 0) game.player.HP /= 2.1;
 			game.player.HP = Math.round(game.player.HP);
 			super.afterUnequip(doOutput);
 		}
