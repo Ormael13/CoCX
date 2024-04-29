@@ -14,7 +14,7 @@ public class Changelog extends BaseContent
 		{}
 		
 		public function accessChangelogMenu():void {
-			Changelog53();//new: lvl-up perk, rare asc perk, event perk, items perk, super perk, enemy perk, internal mutation, item, consumable, usable, p.special, m.special, spell, soulskill, bodypart
+			Changelog53();//new: lvl-up perk, rare asc perk, event perk, items perk, super perk, enemy perk, internal mutation, key item, item, consumable, usable, p.special, m.special, spell, soulskill, bodypart
 		}
 		//zrobić do 2022 na świeta event z reniferami i nie odblokowywać go do ok. 20-24 grudnia 2021 xD
 		private function Changelog55():void {
@@ -55,6 +55,9 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Equine Muscle (Evolved). Req. Equine Muscle (Primitive) and lvl 60+. Effects: +75% to all Physical Ability damage. Gallop cost 30% less fatigue. Physical ability consumes 10% less fatigues. Physical ability that stuns do so for one extra round.\n");
 			outputText("-New mutation perk: Goblin Ovaries (Evolved). Req. Goblin Ovaries (Primitive) and lvl 60+. Effects: Increase fertility rating by 30, While pregnant increase total libido by 30%. Double the number of kids you birth. Increase physical damage done while pregnant by 40%. Lust damage against male opponents increased by 25%.\n");
 			outputText("-New mutation perk: Goblin Ovaries (Final Form). Req. Goblin Ovaries (Evolved) and lvl 90+. Effects: Increase fertility rating by 40, While pregnant increase total libido by 40%. Double the number of kids you birth. Increase physical damage done while pregnant by 50%. Lust damage against male opponents increased by 50%. Add your fertility score as a bonus to libido.\n");
+			outputText("-New key Item (by Liadri): Upgraded Armor plating 4.0 - req. Upgraded Armor plating 3.0 - +20 armor/magic resistance to the mech. +80% Health.\n");
+			outputText("-New key Item (by Liadri): Upgraded Armor plating 5.0 - req. Upgraded Armor plating 4.0 - +25 armor/magic resistance to the mech. +100% Health.\n");
+			outputText("-New key Item (by Liadri): Upgraded Armor plating 6.0 - req. Upgraded Armor plating 5.0 - +30 armor/magic resistance to the mech. +120% Health.\n");
 			outputText("-New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies. Using this item will turn PC into troll. Troll bonuses at 10 pts in racial score (scalable): +30% to Str multi, +30% to Tou multi, +20% to Spr multi, +20% to Int multi, +60% to Wis multi, +20 to max tone cap, +50 to max satiety.\n");
 			outputText("-New TF item (by Pyromania): Icy Fig. Dropped by Glacial Troll enemies. Using this item will turn PC into glacial troll. Glacial Troll bonuses at 10 pts in racial score (scalable): +30% to Str multi, +40% to Tou multi, +10% to Spe multi, +20% to Int multi, +60% to Wis multi, +20 to max tone cap, +75 to max satiety.\n");
 			outputText("-New consumable (by Liadri): Black Lily. Obtained from Rafflesia. Effects: When used by alraune/lilaraune would grant Nightshade perk and Darkness Affinity.\n");
@@ -102,13 +105,17 @@ public class Changelog extends BaseContent
 			outputText("-All gunslinger perks was adjusted to req. wis, int and spe instead of ocassional req. tou instead one of those three stats. That is to match stats from which firearms dmg scaling.\n");
 			outputText("-Explosive cartridge perk increase dmg done to large enemies or group of enemies (+100% > +200%). Named Bullet deal much more dmg to bosses (+50% > +200%).\n");
 			//outputText("-New mutation perk: Equine Muscle (Final Form). Req. Equine Muscle (Evolved) and lvl 90+. Effects: +100% to all Physical Ability damage. Gallop cost 40% less fatigue. Physical ability consumes 15% less fatigues. Physical ability that stuns do so for one extra round. While Galloping gains +10% evasion against ranged attack.\n");
-			outputText("-New key Item (by Liadri): Upgraded Armor plating 4.0 - req. Upgraded Armor plating 3.0 - +20 armor/magic resistance to the mech. +70% Health.\n");
-			outputText("-New key Item (by Liadri): Upgraded Armor plating 5.0 - req. Upgraded Armor plating 4.0 - +25 armor/magic resistance to the mech. +90% Health.\n");
-			outputText("-New key Item (by Liadri): Upgraded Armor plating 6.0 - req. Upgraded Armor plating 5.0 - +30 armor/magic resistance to the mech. +110% Health.\n");
-			outputText("-Dinah upgrade options for HB mech now have 2 more tiers of Armor Plating & Leather Insulation upgrades.\n");
+			outputText("-Dinah upgrade options for HB mech now have 2 more tiers of Armor Plating, Leather Insulation & Dragon's Breath Flamer upgrades.\n");
 			outputText("-New key Item (by Liadri): Machine Gun MK4 - req. Machine Gun MK3 - Increase range attack by 125% if using a firearm. Change the firearm text to a goblin machine gun text.\n");
 			outputText("-New key Item (by Liadri): Machine Gun MK5 - req. Machine Gun MK4 - Increase range attack by 150% if using a firearm. Change the firearm text to a goblin machine gun text.\n");
 			outputText("-New key Item (by Liadri): Machine Gun MK6 - req. Machine Gun MK5 - Increase range attack by 200% if using a firearm. Change the firearm text to a goblin machine gun text.\n");
+			//outputText("-New HB Mech upgrade options: Armor Plating (+armor), Leather Insulation (+magic resistance), Agility (+base melee atk dmg), Dragon's Breath Flamer (fire dmg special), Scatter Laser (lightning dmg special), Rapid Reload (+base ranged atk dmg), Internal Systems (increase mech SF capacity and lower it consumption during high activity)\n");
+			//outputText(", Camouflage Mode (allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials), Invisibility Mode (the same as Camouflage Mode but can last until PC run out of SF to keep it active or deactivate it manualy / upgrade to decrease SF consumption)");
+			outputText("-New key Item (by Liadri): Artificial Intelligence - req. Toolbelt - Add an artificial intelligence to your mech which will greet you when you board. Aside from the friendliness of this new interface feature it cannot do much on its own yet.\n");
+			outputText("-New key Item (by Liadri): Improved Artificial Intelligence - req. Artificial Intelligence - The mech can now use an auto turret.\n");
+			outputText("-New key Item (by Liadri): Auto turret - req. Improved Artificial Intelligence - Add passive ranged attack per round to your AI routine no matter your action choice.\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -131,10 +138,14 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Fixed bugs: Dracula/lina PC unable to find get ghoul if they not learned this as normal Vampire, unable to buy manual for 1st atk: f. swords, Arigean Princess PC not been fully immune to TF-ing like other perm races, Weresharks not having their stats changing according to moon phase or boosted during use of Crinos Shape, Phoenix TF adding mutagen penatly instead of stat curse, ");
 			outputText("Endless Rage draining 10x too much wrath per turn, Berzerker/Lustzerker still req. to be activated after they been activated as part of Asura Form activation, dormant state of wereraces 'blessings' increasing race score and not lowering it, Hinezumi Buring Blood IM accesable by Bunny race, returning from teleportation circle at 4th floor of river dungeon sending PC to ");
 			outputText("3rd floor teleportation circle room, perk allowing to always run away from enemy/ies been ignored in dungeons, unarmed/feral giving mastery gains for small weapons, 2 of 4 SF to Elemental Energy conversion options having wrong check for usable SF, using Fiery Band for calling Kiha to help fight... Kiha, Ceraph after update still not able to win using her super cool lust beam attack, ");
-			outputText("Pilgrim's Bounty perk setting cumQ as if max lust was 100, Raphael rape scene treating all PC cocks as tentalce cocks\n\n");
+			outputText("Pilgrim's Bounty perk setting cumQ as if max lust was 100, Raphael rape scene treating all PC cocks as tentalce cocks, Condensed Power and Titanic Strength perks desc/effects been misaligned/incorectly calculated, HB Mech Dragon's Breath Flamer & Scatter Laser upgrade(s) after instaling each weapon\n\n");
 			/*ostatni punkt changelogu
 			outputText("(Part 2/2) <b>Version 0.9a:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -191,14 +202,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -223,9 +228,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -1559,8 +1561,7 @@ public class Changelog extends BaseContent
 			outputText("-Spell-Knight str req. was lowered from 200 to 150.\n");
 			outputText("-Basic Job: All-Rounder no longer req. Job: Soul Cultivator but it lib and sens req. was increased to 75 and 50 respectively.\n");
 			outputText("-Dinah would provide PC with HB Mech upgrade options after it's bought. They could boost mech defences, attack or even provide with specials. As with all other items upgrades cost can vary depending on her mood ^^\n");
-			outputText("-HB Mech upgrade options includes: Armor Plating (+armor), Leather Insulation (+magic resistance), Agility (+base melee atk dmg), Dragon's Breath Flamer (fire dmg special), Scatter Laser (lightning dmg special)\n");//, Rapid Reload (+base ranged atk dmg), Internal Systems (increase mech SF capacity and lower it consumption during high activity)
-			//outputText(", Camouflage Mode (allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials), Invisibility Mode (the same as Camouflage Mode but can last until PC run out of SF to keep it active or deactivate it manualy / upgrade to decrease SF consumption)");
+			outputText("-HB Mech upgrade options includes: Armor Plating (+armor), Leather Insulation (+magic resistance), Agility (+base melee atk dmg), Dragon's Breath Flamer (fire dmg special), Scatter Laser (lightning dmg special)\n");
 			outputText("-Swift casting spells won't have cooldowns but their power and mana cost will be lowered by 80%.\n");
 			outputText("-Soul Sense unlock req. chganged to having 'Soul Sense and You' Manual and reaching at least Early Soul Personage stage.\n");
 			outputText("-Using Wait or Defend w/ Defense Pose perk move will increase fatigue recovery 2x.\n");

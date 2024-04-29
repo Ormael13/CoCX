@@ -4186,7 +4186,6 @@ public class Combat extends BaseContent {
             } else {
                 var maxFirearmAttacks:int = player.calculateMultiAttacks(false);
                 if (player.hasPerk(PerkLib.LockAndLoad)) maxFirearmAttacks += 1;
-
                 if (player.isInGoblinMech() && (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0 || player.hasKeyItem("Machine Gun MK4") >= 0 || player.hasKeyItem("Machine Gun MK5") >= 0 || player.hasKeyItem("Machine Gun MK6") >= 0)) {
                     outputText(".  It's clearly very painful. ");
                     if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
@@ -4282,7 +4281,6 @@ public class Combat extends BaseContent {
 						outputText(" ");
                         doPhysicalDamage(damage, true, true, ignoreDR);
 						if (crit) outputText(" <b>*Critical Hit!*</b>");
-
                         for (var touAttack:int = 0; touAttack < maxFirearmAttacks; touAttack++) {
                             outputText(" ");
                             doPhysicalDamage(damage, true, true, ignoreDR);
@@ -4350,6 +4348,53 @@ public class Combat extends BaseContent {
             } else enemyAIImpl();
         }
     }
+	
+	public function shootMechWeaponByAI():void {
+		outputText("Your mech shoot the enemy with auto turret. ");
+		var damage:Number = 0;
+        damage += firearmsDamageNoLagSingle();
+		if (player.armor == armors.GTECHC_ && !player.isInGoblinMech()) damage *= 1.2;
+        if (player.hasKeyItem("Gun Scope") >= 0) damage *= 1.2;
+        if (player.hasKeyItem("Gun Scope with Aim tech") >= 0) damage *= 1.4;
+        if (player.hasKeyItem("Gun Scope with Aimbot") >= 0) damage *= 1.6;
+        damage = goblinDamageBonus(damage);/*
+                if (player.hasKeyItem("Machine Gun MK1") >= 0) {
+                    if (player.vehicles == vehicles.GOBMPRI) {
+                        damage *= 1.9;
+                        if (damage < 140) damage = 140;
+                    } else if (player.vehicles == vehicles.GS_MECH) {
+						damage *= 1.7;
+                        if (damage < 120) damage = 120;
+					} else {
+                        damage *= 1.5;
+                        if (damage < 100) damage = 100;
+                    }
+                }*/
+        var ignoreDR:Boolean = player.hasPerk(PerkLib.Penetrator);
+        if (!ignoreDR) damage *= (monster.damageRangePercent() / 100);
+        if (player.hasPerk(PerkLib.ExplosiveCartridge) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType) || monster.hasPerk(PerkLib.EnemyHugeType) || monster.hasPerk(PerkLib.Enemy300Type) || monster.hasPerk(PerkLib.EnemyGigantType) || monster.hasPerk(PerkLib.EnemyColossalType))) damage *= 3;
+        if (player.hasPerk(PerkLib.NamedBullet) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 3;
+        if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
+        if (player.hasPerk(PerkLib.PhantomShooting)) damage *= 1.05;
+		if (player.hasPerk(PerkLib.SilverForMonsters) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1.2;
+        if (monster.hasStatusEffect(StatusEffects.WoundPoison)) damage*=1+(monster.statusEffectv1(StatusEffects.WoundPoison)/100);
+        //Determine if critical hit!
+		var crit:Boolean;
+        var critChance:Number = calculateCritFirearms();
+		var critDamage:Number = calculateCritDamageFirearms();
+        crit = rand(100) < critChance;
+        if(crit) damage *= critDamage;
+		damage = Math.round(damage);
+        checkAchievementDamage(damage);
+		WeaponRangeStatusProcs();
+		WrathGenerationPerHit1(5);
+		doPhysicalDamage(damage, true, true, ignoreDR);
+		if (monster.HP <= monster.minHP()) {
+            doNext(endHpVictory);
+            return;
+        }
+		else doNext(playerMenu);
+	}
 
     public function oneBulletReloadCost():Number {
         var reloaderCost:Number = 4;

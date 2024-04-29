@@ -269,6 +269,8 @@ public class CombatUI extends BaseCombatContent {
 			doCompanionTurn(2);
 		else if (isCompanionTurn(3))
 			doCompanionTurn(3);
+		else if (isMechAITurn())
+			doMechAITurn();
 		//PC: is busy with something
 		else if (isPlayerBound()) {
 			mainMenuWhenBound();
@@ -617,6 +619,14 @@ public class CombatUI extends BaseCombatContent {
 				addButton(0, "Next", combatMenu, false);
 			}
 		}
+	}
+	
+	public function isMechAITurn():Boolean {
+		return player.isInGoblinMech() && (player.hasKeyItem("Improved Artificial Intelligence") >= 0) && (player.hasKeyItem("Auto turret") >= 0);
+	}
+	
+	public function doMechAITurn():void {
+		combat.shootMechWeaponByAI();
 	}
 
 	public function isGolemTurn():Boolean {

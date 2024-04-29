@@ -51,6 +51,7 @@ public class GiantSlayerMech extends Vehicles
 					game.player.HP = EHP * game.player.maxHP();
 				}
 			}
+			outputText("As you turn the mech on the welcoming voice of your AI booms in. \"<i>Welcome back aboard operator [name]. All functions are nominal.</i>\"");
 			super.afterEquip(doOutput);
 		}
 		

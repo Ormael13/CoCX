@@ -469,8 +469,10 @@ public class DinahFollower extends NPCAwareContent// implements TimeAwareInterfa
 				}
 				else addButton(5, "Internal Systems v1", buyHowlingBansheeMechUpgrade, "Internal Systems v1", 750).hint("Decrease mech SF reserves drain by 10 pts and max SF capacity by 2,000 (when PC wear Ayo armor).");*/
 				if (player.hasKeyItem("HB Dragon's Breath Flamer") >= 0) {
-					if (player.keyItemvX("HB Dragon's Breath Flamer", 1) == 2) addButtonDisabled(6, "DB Flamer v2", "Your HB Mech already have this upgrade.");
-					else addButton(6, "DB Flamer v2", buyHowlingBansheeMechUpgrade, "Dragon's Breath Flamer v2", 3000, 19).hint("Instal second Dragon's Breath Flamer weapon - adds second fire attack when using this special and cost of use increase twicefold.");
+					if (player.keyItemvX("HB Dragon's Breath Flamer", 1) == 1) addButton(6, "DB Flamer v2", buyHowlingBansheeMechUpgrade, "Dragon's Breath Flamer v2", 3000, 19).hint("Instal second Dragon's Breath Flamer weapon - adds second fire attack when using this special and cost of use increase 2x.");
+					if (player.keyItemvX("HB Dragon's Breath Flamer", 1) == 2) addButton(6, "DB Flamer v3", buyHowlingBansheeMechUpgrade, "Dragon's Breath Flamer v3", 4500, 20).hint("Instal third Dragon's Breath Flamer weapon - adds third fire attack when using this special and cost of use increase 3x.");
+					if (player.keyItemvX("HB Dragon's Breath Flamer", 1) == 3) addButton(6, "DB Flamer v4", buyHowlingBansheeMechUpgrade, "Dragon's Breath Flamer v4", 5000, 21).hint("Remodeling Dragon's Breath Flamers into one with shared Nozzle - adds aoe effect to slight stronger compared to previous version fire attack when using this special and cost of use increase 4x.");
+					if (player.keyItemvX("HB Dragon's Breath Flamer", 1) == 4) addButtonDisabled(6, "DB Flamer v4", "Your HB Mech already have this upgrade.");
 				}
 				else addButton(6, "DB Flamer v1", buyHowlingBansheeMechUpgrade, "Dragon's Breath Flamer v1", 1500, 18).hint("Add Dragon's Breath Flamer weapon - Allow to enter use special dealing fire damage.");
 				if (player.hasKeyItem("HB Scatter Laser") >= 0) {
@@ -484,7 +486,7 @@ public class DinahFollower extends NPCAwareContent// implements TimeAwareInterfa
 				if (player.hasKeyItem("HB Stealth System") >= 0) {
 					if (player.keyItemvX("HB Stealth System", 1) >= 1) {
 						if (player.keyItemvX("HB Stealth System", 1) == 1) {
-							if (player.hasKeyItem("HB Internal Systems") >= 1) addButton(10, "Invisibility Mode v2", buyHowlingBansheeMechUpgrade, "Invisibility Mode v2", 10000).hint("Upgrades Invisibility Mode from v1 to v2. Decrease cost of activating and sustaining this mobe by 20%.");
+							if (player.hasKeyItem("HB Internal Systems") >= 1) addButton(10, "Invisibility Mode v2", buyHowlingBansheeMechUpgrade, "Invisibility Mode v2", 10000).hint("Upgrades Invisibility Mode from v1 to v2. Decrease cost of activating and sustaining this mode by 20%.");
 							else addButtonDisabled(10, "Invisibility Mode v2", "Your need to have installed Internal Systems v2 or better to unlock this upgrade.");
 						}
 						if (player.keyItemvX("HB Stealth System", 1) == 2) addButtonDisabled(10, "Invisibility Mode v2", "Your HB Mech already have this upgrade.");
@@ -571,10 +573,12 @@ public class DinahFollower extends NPCAwareContent// implements TimeAwareInterfa
 							break;
 						case 18:
 						case 19:
+						case 20:
+						case 21:
 							outputText("On your mech’s arm is a gleaming new weapon. A tank mounted just at the shoulder, and a metal tube leading down the arm to a nozzle at the mech’s “hand”.\n\n");
 							outputText("\"<i>The Dragon’s Breath. They call it the ‘heavy flamer’. A weapon that engulfs enemies in burning fuel.</i>\" Dinah gives a dainty sigh. \"<i>I hope you like the smell of imp charcoal.</i>\"\n\n");
 							break;
-						case 20:
+						case 22:
 							outputText("\"<i>We’ll be back soon!</i>\"\n\n");
 							break;
 					}
@@ -601,6 +605,8 @@ public class DinahFollower extends NPCAwareContent// implements TimeAwareInterfa
 			if (upgrade == "Internal Systems v2") player.addKeyValue("HB Internal Systems",1,1);
 			if (upgrade == "Dragon's Breath Flamer v1") player.createKeyItem("HB Dragon's Breath Flamer",1,0,0,0);
 			if (upgrade == "Dragon's Breath Flamer v2") player.addKeyValue("HB Dragon's Breath Flamer",1,1);
+			if (upgrade == "Dragon's Breath Flamer v3") player.addKeyValue("HB Dragon's Breath Flamer",1,1);
+			if (upgrade == "Dragon's Breath Flamer v4") player.addKeyValue("HB Dragon's Breath Flamer",1,1);
 			if (upgrade == "Scatter Laser v1") player.createKeyItem("HB Scatter Laser",1,0,0,0);
 			if (upgrade == "Scatter Laser v2") player.addKeyValue("HB Scatter Laser",1,1);
 			if (upgrade == "Scatter Laser v3") player.addKeyValue("HB Scatter Laser",1,1);

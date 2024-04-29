@@ -668,15 +668,15 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 			if (player.hasKeyItem("HB Dragon's Breath Flamer") >= 0) {
 				var HBDBFC:Number = 100;
-				if (player.keyItemvX("HB Dragon's Breath Flamer", 2) == 2) HBDBFC *= 2;
+				if (player.keyItemvX("HB Dragon's Breath Flamer", 1) > 1) HBDBFC *= player.keyItemvX("HB Dragon's Breath Flamer", 1);
 				bd = buttons.add("DB Flamer", mechWhitefireBeamCannon).hint("Shoot with Dragon's Breath Flamer at enemy burning him. \n\nWould drain "+HBDBFC+" SF from mech reserves or your own SF pool.");
 				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] < HBDBFC && player.soulforce < HBDBFC) bd.disable("<b>You are too low on SF reserves to use this option.</b>\n\n");
 				else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.hasKeyItem("HB Scatter Laser") >= 0) {
 				var LazorC:Number = 100;
-				if (player.keyItemvX("HB Scatter Laser", 2) > 1) {
-					if (player.keyItemvX("HB Scatter Laser", 2) == 3) {
+				if (player.keyItemvX("HB Scatter Laser", 1) > 1) {
+					if (player.keyItemvX("HB Scatter Laser", 1) == 3) {
 						if (monster.plural) LazorC += 500;
 						else LazorC += 300;
 					}
@@ -685,7 +685,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 						else LazorC += 100;
 					}
 				}
-				bd = buttons.add("Scatter Laser", mechScatterLaser).hint("Shoot with Scatter Laser"+((player.keyItemvX("HB Scatter Laser", 2) > 1)?"s":"")+" at enemy. \n\nWould drain "+LazorC+" SF from mech reserves or your own SF pool.");
+				bd = buttons.add("Scatter Laser", mechScatterLaser).hint("Shoot with Scatter Laser"+((player.keyItemvX("HB Scatter Laser", 1) > 1)?"s":"")+" at enemy. \n\nWould drain "+LazorC+" SF from mech reserves or your own SF pool.");
 				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] < LazorC && player.soulforce < LazorC) bd.disable("<b>You are too low on SF reserves to use this option.</b>\n\n");
 				else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
@@ -6405,8 +6405,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		outputText("You press the lightning button and aim, as the Scatter Laser" + ((player.keyItemvX("HB Scatter Laser", 2) > 1)?"s":"") + " power up your mech shoot [themonster] for ");
 		var LazorC:Number = 100;
-		if (player.keyItemvX("HB Scatter Laser", 2) > 1) {
-			if (player.keyItemvX("HB Scatter Laser", 2) == 3) {
+		if (player.keyItemvX("HB Scatter Laser", 1) > 1) {
+			if (player.keyItemvX("HB Scatter Laser", 1) == 3) {
 				if (monster.plural) LazorC += 500;
 				else LazorC += 300;
 			}
@@ -6432,8 +6432,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		damage = Math.round(damage);
 		doLightningDamage(damage, true, true);
-		if (player.keyItemvX("HB Scatter Laser", 2) > 1) {
-			if (player.keyItemvX("HB Scatter Laser", 2) == 3) {
+		if (player.keyItemvX("HB Scatter Laser", 1) > 1) {
+			if (player.keyItemvX("HB Scatter Laser", 1) == 3) {
 				if (monster.plural) {
 					doLightningDamage(damage, true, true);
 					doLightningDamage(damage, true, true);
@@ -6700,16 +6700,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function mechWhitefireBeamCannon():void {
 		clearOutput();
 		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_SPELL;
-		outputText("You shoot with the "+(player.vehicles == vehicles.HB_MECH ? "Dragon's Breath Flamer"+((player.keyItemvX("HB Dragon's Breath Flamer", 2) == 2)?"s":"")+"":"Whitefire beam cannon")+" at [themonster] burning [monster his] badly for ");
+		outputText("You shoot with the "+(player.vehicles == vehicles.HB_MECH ? "Dragon's Breath Flamer"+((player.keyItemvX("HB Dragon's Breath Flamer", 1) > 1)?"s":"")+"":"Whitefire beam cannon")+" at [themonster] burning [monster his] badly for ");
 		if (player.vehicles == vehicles.HB_MECH) {
-			if (player.keyItemvX("HB Dragon's Breath Flamer", 2) == 2) {
-				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] >= 200) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 200;
-				else player.soulforce -= 200;
-			}
-			else {
-				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] >= 100) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 100;
-				else player.soulforce -= 100;
-			}
+			if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] >= 100) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= (100*player.keyItemvX("HB Dragon's Breath Flamer", 1));
+			else player.soulforce -= (100*player.keyItemvX("HB Dragon's Breath Flamer", 1));
 		}
 		else player.createStatusEffect(StatusEffects.CooldownWhitefireBeamCannon,8,0,0,0);
 		var damage:Number;
@@ -6728,9 +6722,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (monster is GooGirl) damage = Math.round(damage * 1.5);
 		if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
+		if (player.keyItemvX("HB Dragon's Breath Flamer", 1) == 3) {
+			damage *= 1.3;
+			if (monster.plural) damage *= 2.5;
+		}
 		damage = Math.round(damage);
 		doFireDamage(damage, true, true);
-		if (player.keyItemvX("HB Dragon's Breath Flamer", 2) == 2) doFireDamage(damage, true, true);
+		if (player.keyItemvX("HB Dragon's Breath Flamer", 1) > 1) doFireDamage(damage, true, true);
+		if (player.keyItemvX("HB Dragon's Breath Flamer", 1) > 2) doFireDamage(damage, true, true);
 		outputText(" damage!");
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");

@@ -43,6 +43,7 @@ public class GoblinMechAlpha extends Vehicles
 				if (game.player.hasKeyItem("Upgraded Armor plating 5.0") >= 0) game.player.HP = 2 * game.player.maxHP();
 				if (game.player.hasKeyItem("Upgraded Armor plating 6.0") >= 0) game.player.HP = 2.2 * game.player.maxHP();
 			}
+			outputText("As you turn the mech on the welcoming voice of your AI booms in. \"<i>Welcome back aboard operator [name]. All functions are nominal.</i>\"");
 			super.afterEquip(doOutput);
 		}
 		
