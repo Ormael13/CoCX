@@ -203,7 +203,6 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 		}
 		private function workHoursMadam():Boolean {
 			return (model.time.hours >= 7 && model.time.hours <= 9) || (model.time.hours >= 18 && model.time.hours <= 22);
-
 		}
 		private function visitMadam():void {
 			clearOutput();
@@ -255,7 +254,6 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 		}
 		private function workHoursTemptress():Boolean {
 			return (model.time.hours >= 8 && model.time.hours <= 9) || (model.time.hours >= 18 && model.time.hours <= 23);
-
 		}
 		private function visitTemptress():void {
 			clearOutput();//Temptress - female displacer devil npc for perk points to stat points conversion outputText("\"<i></i>\"\n\n");

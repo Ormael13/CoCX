@@ -104,7 +104,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 4 wisdom lvl-up perk: Dual Wield (2H Firearms). Req. Dual Wield (Firearms) and Amateur Gunslinger perks; 50+ wis, 40+ int and 30+ spe. Effect: Allows you to wield two firearms (2H ones) more effectively. (damage and accuracy penalties decreased by 40% and 20%)\n");
 			outputText("-All gunslinger perks was adjusted to req. wis, int and spe instead of ocassional req. tou instead one of those three stats. That is to match stats from which firearms dmg scaling.\n");
 			outputText("-Explosive cartridge perk increase dmg done to large enemies or group of enemies (+100% > +200%). Named Bullet deal much more dmg to bosses (+50% > +200%).\n");
-			//outputText("-New mutation perk: Equine Muscle (Final Form). Req. Equine Muscle (Evolved) and lvl 90+. Effects: +100% to all Physical Ability damage. Gallop cost 40% less fatigue. Physical ability consumes 15% less fatigues. Physical ability that stuns do so for one extra round. While Galloping gains +10% evasion against ranged attack.\n");
+			outputText("-New mutation perk: Equine Muscle (Final Form). Req. Equine Muscle (Evolved) and lvl 90+. Effects: +100% to all Physical Ability damage. Gallop cost 40% less fatigue. Physical ability consumes 15% less fatigues. Physical ability that stuns do so for one extra round. Galloping gains +10% evasion. Double the momentum bonus from Galloping.\n");
 			outputText("-Dinah upgrade options for HB mech now have 2 more tiers of Armor Plating, Leather Insulation & Dragon's Breath Flamer upgrades.\n");
 			outputText("-New key Item (by Liadri): Machine Gun MK4 - req. Machine Gun MK3 - Increase range attack by 125% if using a firearm. Change the firearm text to a goblin machine gun text.\n");
 			outputText("-New key Item (by Liadri): Machine Gun MK5 - req. Machine Gun MK4 - Increase range attack by 150% if using a firearm. Change the firearm text to a goblin machine gun text.\n");
@@ -114,7 +114,12 @@ public class Changelog extends BaseContent
 			outputText("-New key Item (by Liadri): Artificial Intelligence - req. Toolbelt - Add an artificial intelligence to your mech which will greet you when you board. Aside from the friendliness of this new interface feature it cannot do much on its own yet.\n");
 			outputText("-New key Item (by Liadri): Improved Artificial Intelligence - req. Artificial Intelligence - The mech can now use an auto turret.\n");
 			outputText("-New key Item (by Liadri): Auto turret - req. Improved Artificial Intelligence - Add passive ranged attack per round to your AI routine no matter your action choice.\n");
-			outputText("-\n");
+			outputText("-New event perk: Centaur hunter style: Moving Shot. Gained by training with Kelt as Centaur and reaching 20+ in bow skill. Effects: As a centaur, you can use ranged weapons while galloping.\n");
+			outputText("-New event perk: Centaur hunter style: Wind Reader. Gained by training with Kelt as Centaur and reaching 40+ in bow skill. Effects: As a centaur, your Archery gains a half wisdom modifier to damage.\n");
+			outputText("-New event perk: Centaur hunter style: Great pull. Gained by training with Kelt as Centaur and reaching 60+ in bow skill. Effects: As a centaur, gain an extra half strength modifier on bow damage.\n");
+			outputText("-New event perk: Centaur hunter style: Meteor Shot. Gained by training with Kelt as Centaur and reaching 80+ in bow skill. Effects: As a centaur, Power shot has a chance to stun based on your strength modifier.\n");
+			outputText("-New event perk: Centaur hunter style: Meteor Shower. Gained by training with Kelt as Centaur and reaching 100+ in bow skill. Effects: As a centaur, Power shot unleash 4 arrows instead of one each dealing 60% of power shot damage.\n");
+			outputText("-Centaur race score caluclations was slight changed and can have now additionaly 3rd / 4th tier of race bonuses - Elder Centaur / True Centaur: +100 / +140 Strength +80 / +100 Toughness +175 / +185 Speed +80 / +100 Libido +75 Sens +350 / +500 Hp\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -127,11 +132,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

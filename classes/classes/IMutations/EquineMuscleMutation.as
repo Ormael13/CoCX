@@ -69,7 +69,7 @@ public class EquineMuscleMutation extends IMutationPerkType
 
         public function EquineMuscleMutation() 
 		{
-			super(mName + " IM", mName, SLOT_MUSCLE, 3);
+			super(mName + " IM", mName, SLOT_MUSCLE, 4);
 		}
 		
 	}

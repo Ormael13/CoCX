@@ -5691,6 +5691,14 @@ public class Combat extends BaseContent {
             damage += scalingBonusStrength() * 0.2;
 			damage += player.spe * 2;
 			damage += scalingBonusSpeed() * 0.4;
+			if (player.isTaur() && player.hasPerk(PerkLib.CentaurHunterStyleWindReader)) {
+				damage += player.wis * 0.5;
+				damage += scalingBonusWisdom() * 0.1;
+				if (player.hasPerk(PerkLib.CentaurHunterStyleGreatPull)) {
+					damage += player.str * 0.5;
+					damage += scalingBonusStrength() * 0.1;
+				}
+			}
 			if (damage < 20) damage = 20;
             damage *= (1 + (0.01 * masteryArcheryLevel()));
 		}

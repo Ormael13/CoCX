@@ -4072,6 +4072,16 @@ public class PerkLib
 				"Double the potency and gain of blood drain and blood magic.");
 		public static const BulgeArmor:PerkType = mk("Bulge Armor", "Bulge Armor",
 				"Grants a 5 point damage bonus to dick-based tease attacks.");
+		public static const CentaurHunterStyleGreatPull:PerkType = mk("Centaur hunter style: Great pull", "Centaur hunter style: Great pull",
+				"As a centaur, gain an extra half strength modifier on bow damage.");
+		public static const CentaurHunterStyleMeteorShot:PerkType = mk("Centaur hunter style: Meteor Shot", "Centaur hunter style: Meteor Shot",
+				"As a centaur, Power shot has a chance to stun based on your strength modifier.");
+		public static const CentaurHunterStyleMeteorShower:PerkType = mk("Centaur hunter style: Meteor Shower", "Centaur hunter style: Meteor Shower",
+				"As a centaur, Power shot unleash 4 arrows instead of one each dealing 60% of power shot damage.");
+		public static const CentaurHunterStyleMovingShot:PerkType = mk("Centaur hunter style: Moving Shot", "Centaur hunter style: Moving Shot",
+				"As a centaur, you can use ranged weapons while galloping.");
+		public static const CentaurHunterStyleWindReader:PerkType = mk("Centaur hunter style: Wind Reader", "Centaur hunter style: Wind Reader",
+				"As a centaur, your Archery gains a half wisdom modifier to damage.");
 		public static const ConvictionOfPurpose:PerkType = mk("Conviction of purpose", "Conviction of purpose",
 				"Corruption meter now increase lust resistance based on purity.");
 		public static const Cornucopia:PerkType = mk("Cornucopia", "Cornucopia",

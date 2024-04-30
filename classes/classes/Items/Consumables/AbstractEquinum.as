@@ -24,6 +24,7 @@ import classes.Items.Mutations;
 import classes.PerkLib;
 import classes.Races;
 import classes.Races.AlicornRace;
+import classes.Races.CentaurRace;
 import classes.Races.HorseRace;
 import classes.Scenes.Metamorph;
 import classes.StatusEffects;
@@ -505,9 +506,10 @@ public class AbstractEquinum extends Consumable {
 			changes++;
 		}
 		//HorseFace - Req's Fur && Ears
-		if (player.faceType != Face.HORSE && !player.isGargoyle() && player.isFurCovered() && changes < changeLimit && rand(4) == 0 && player.ears.type == Ears.HORSE) {
+		if (player.faceType != Face.HORSE && player.faceType != Face.ELF && !player.isGargoyle() && player.isFurCovered() && changes < changeLimit && rand(4) == 0 && (player.ears.type == Ears.HORSE ||  player.ears.type == Ears.HUMAN|| player.ears.type == Ears.ELFIN)) {
 			outputText("\n\n");
-			CoC.instance.transformations.FaceHorse.applyEffect();
+			if (rand(2) == 0) CoC.instance.transformations.FaceElf.applyEffect();
+			else CoC.instance.transformations.FaceHorse.applyEffect();
 			changes++;
 		}
 		//Fur - if has horsetail && ears and not at changelimit
@@ -518,9 +520,13 @@ public class AbstractEquinum extends Consumable {
 			changes++;
 		}
 		//Ears - requires tail
-		if (player.ears.type != Ears.HORSE && player.tailType == Tail.HORSE && player.tailType != Tail.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+		if (player.ears.type != Ears.HORSE && player.ears.type != Ears.HUMAN && player.ears.type != Ears.ELFIN && player.tailType == Tail.HORSE && player.tailType != Tail.GARGOYLE && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
-			CoC.instance.transformations.EarsHorse.applyEffect();
+			if (rand(3) == 0) CoC.instance.transformations.EarsHuman.applyEffect();
+			else {
+				if (rand(2) == 0) CoC.instance.transformations.EarsElven.applyEffect();
+				else CoC.instance.transformations.EarsHorse.applyEffect();
+			}
 			changes++;
 		}
 		//Tail - requires legs
@@ -530,12 +536,16 @@ public class AbstractEquinum extends Consumable {
 			changes++;
 		}
 		// Remove gills
-		if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
+		if (rand(3) == 0 && player.hasGills() && changes < changeLimit) {
 			outputText("\n\n");
 			CoC.instance.transformations.GillsNone.applyEffect();
 			changes++;
 		}
-
+		if (!player.hasPlainSkinOnly() && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\n");
+			CoC.instance.transformations.SkinPlain.applyEffect();
+            changes++;
+        }
 		if ((type == 1 || type == 2) && changes < changeLimit && rand(3) == 0 && player.ears.type == Ears.HORSE && player.tailType == Tail.HORSE) {
 			temp = 1;
 			//New horns or expanding unicorn/alicorn horns
@@ -589,6 +599,17 @@ public class AbstractEquinum extends Consumable {
 			CoC.instance.transformations.WingsNone.applyEffect();
 			changes++;
 		}
+		//Remove special hairs
+        if (changes < changeLimit && player.hairType != Hair.NORMAL && rand(3) == 0) {
+		    outputText("\n\n");
+			CoC.instance.transformations.HairHuman.applyEffect();
+            changes++;
+        }
+		if (player.hasPlainSkinOnly() && !InCollection(player.skinColor, CentaurRace.CentaurSkinColors) && changes < changeLimit && rand(3) == 0) {
+            player.skinColor = randomChoice(CentaurRace.CentaurSkinColors);
+            outputText("[pg]Whoah, that was weird.  You just hallucinated that your " + player.skinDesc + " turned " + player.skinColor + ".  No way!  It's staying, it really changed color!");
+            changes++;
+        }
 		if (rand(3) == 0) outputText(player.modTone(60, 1));
 		//FAILSAFE CHANGE
 		if (changes == 0) {

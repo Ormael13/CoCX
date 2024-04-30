@@ -176,7 +176,7 @@ public class CombatUI extends BaseCombatContent {
 				if (combat.isEnemyInvisible) btnRanged.disable("You cannot use shoot an opponent you cannot see or target.");
 		}
 		if (player.isFlying() && (!Wings.Types[player.wings.type].canFly && Arms.Types[player.arms.type].canFly)){btnRanged.disable("It would be rather difficult to aim while flapping your arms."); }
-		if (player.hasStatusEffect(StatusEffects.Gallop)){btnRanged.disable("It would be rather difficult to aim while galloping."); }
+		if (player.hasStatusEffect(StatusEffects.Gallop) && !player.hasPerk(PerkLib.CentaurHunterStyleMovingShot)){btnRanged.disable("It would be rather difficult to aim while galloping."); }
 		if (player.isInGoblinMech()) {
 			if (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) {
 				if (player.isFirearmTypeWeapon()) {

@@ -3943,7 +3943,10 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Unhindered) && armor.hasTag(ItemConstants.A_AGILE)) chance += 10;
 			if (CombatAbilities.HurricaneDance.isActive()) chance += 25;
 
-			if (hasStatusEffect(StatusEffects.Gallop) && perkv1(IMutationsLib.EquineMuscleIM) >= 4) chance += 10;
+			if (hasStatusEffect(StatusEffects.Gallop)) {
+				if (perkv1(IMutationsLib.EquineMuscleIM) >= 4) chance += 10;
+				chance += 10;
+			}
 
 			if (isRace(Races.FAIRY)) {
 				var fairyDodgeChance:int = 30;
