@@ -622,7 +622,7 @@ public class CombatUI extends BaseCombatContent {
 	}
 	
 	public function isMechAITurn():Boolean {
-		return player.isInGoblinMech() && (player.hasKeyItem("Improved Artificial Intelligence") >= 0) && (player.hasKeyItem("Auto turret") >= 0);
+		return player.isInGoblinMech() && (player.hasKeyItem("Improved Artificial Intelligence") >= 0) && (player.hasKeyItem("Auto turret") >= 0 || player.hasKeyItem("Auto turret MK2") >= 0) && flags[kFLAGS.IN_COMBAT_PLAYER_GOBLIN_MECH_AI_ATTACKED] != 1;
 	}
 	
 	public function doMechAITurn():void {

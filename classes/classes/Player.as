@@ -5675,7 +5675,7 @@ use namespace CoC;
 		public function updateRacialAndPerkBuffs():void{
 			if (needToUpdateRacialCache())
 				updateRacialCache();
-			if (effectiveTallness>=120 && hasPerk(PerkLib.TitanicStrength)) statStore.replaceBuffObject({'str.mult':(0.01 * effectiveTallness * 2)}, 'Titanic Strength', { text: 'Titanic Strength' });
+			if (effectiveTallness>=120 && hasPerk(PerkLib.TitanicStrength)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(effectiveTallness / 6))}, 'Titanic Strength', { text: 'Titanic Strength' });
 			if (effectiveTallness<120 && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
 			if (effectiveTallness<=60 && hasPerk(PerkLib.CondensedPower)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round((132 - basetallness)/2))}, 'Condensed Power', { text: 'Condensed Power' });
 			if (effectiveTallness<=60 && hasPerk(PerkLib.SmallCaster)) statStore.replaceBuffObject({'spellpower':(0.01 * (132 - basetallness))}, 'Small Caster', { text: 'Small Caster' });
