@@ -5,7 +5,7 @@
 package classes.Items.WeaponsRange 
 {
 	import classes.Items.WeaponRange;
-		import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kFLAGS;
 	
 	public class BadOmen extends WeaponRange {
 		

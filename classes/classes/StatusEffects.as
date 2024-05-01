@@ -706,6 +706,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const TookBlessedFlyWhisk:StatusEffectType            = mk("Took Blessed Fly Whisk");
 		public static const TookGlacialGraveaxe:StatusEffectType            = mk("Took Glacial Graveaxe");
 		public static const TookImpTome:StatusEffectType                    = mk("Took Imp Tome");
+		public static const TookSagittariusBanefulGreatBow:StatusEffectType = mk("Took Sagittarius Baneful Great Bow");
 		public static const TookVolcanicGravehammer:StatusEffectType        = mk("Took Volcanic Gravehammer");
 		public static const TrainingNPCsTimersReduction:StatusEffectType    = mk("TrainingNPCsTimersReduction");
 		public static const UshiOnnaVariant:StatusEffectType             	= mk("Ushi Onna Variant");

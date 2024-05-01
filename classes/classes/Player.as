@@ -1173,7 +1173,7 @@ use namespace CoC;
 		//Wrath Weapons
 		public function isLowGradeWrathWeapon():Boolean
 		{
-			return weapon.isLGWrath() || weaponRange == game.weaponsrange.B_F_BOW || hasAetherTwinsTier2();
+			return weapon.isLGWrath() || weaponRange == game.weaponsrange.B_F_BOW || weaponRange == game.weaponsrange.SAGITTB || hasAetherTwinsTier2();
 		}
 		public function isDualLowGradeWrathWeapon():Boolean
 		{
@@ -5502,6 +5502,8 @@ use namespace CoC;
 			if (jewelryEffectId4 == JewelryLib.MODIFIER_MINIMUM_LUST) {
 				min += jewelryEffectMagnitude4;
 			}*/
+			//Others
+			if (this.hasStatusEffect(StatusEffects.TookSagittariusBanefulGreatBow) && this.statusEffectv2(StatusEffects.TookSagittariusBanefulGreatBow) > 0) min += (minCap * 0.1 * this.statusEffectv1(StatusEffects.TookSagittariusBanefulGreatBow));
 			if (hasPerk(PerkLib.HotNCold) && min > Math.round(minCap * 0.75)) min = Math.round(minCap * 0.75);
 			//Constrain values
 			return boundFloat(0, min, minCap);
@@ -5736,6 +5738,7 @@ use namespace CoC;
 				statStore.replaceBuffObject({'str.mult':(Math.round(power))}, 'Absolute Strength', { text: 'Absolute Strength' });
 			}
 			if (!hasPerk(PerkLib.AbsoluteStrength) && statStore.hasBuff('Absolute Strength')) statStore.removeBuffs('Absolute Strength');
+			if (statStore.hasBuff('Sagittarius Focus')) statStore.replaceBuffObject({"wis.mult":(0.01 * Math.round(lib/2)),"int.mult":(0.01 * Math.round(lib/2))}, 'Sagittarius Focus', { text: 'Sagittarius Focus' });
 			var buffs:Object = calcRacialBuffs(true);
 			statStore.removeBuffs("Racials");
 			statStore.replaceBuffObject(buffs, "Racials", {text:"Racials"});
@@ -7141,6 +7144,7 @@ use namespace CoC;
 				if (hasPerk(IMutationsLib.HellhoundFireBallsIM)) {
 					addPerkValue(IMutationsLib.HellhoundFireBallsIM, 2, 1);
 				}
+				if (weaponRange == game.weaponsrange.SAGITTB && !statStore.hasBuff('Sagittarius Focus')) statStore.addBuffObject({"wis.mult":(0.01 * Math.round(lib/2)),"int.mult":(0.01 * Math.round(lib/2))}, "Sagittarius Focus",{text:"The immense relief you felt after plunging your aching horse cock in a wet hole grants you improved focus!"});
 			}
             if (SceneLib.exgartuan.boobsPresent()) SceneLib.exgartuan.boobsSleep(4 + rand(4)); //consider her touched, lol
 		}

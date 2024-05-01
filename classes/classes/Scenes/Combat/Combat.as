@@ -9684,12 +9684,22 @@ public class Combat extends BaseContent {
                 if (!monster.plural) outputText("The effects of your aura are quite pronounced on [themonster] as [monster he] begins to shake and steal glances at your body. ");
                 else outputText("The effects of your aura are quite pronounced on [themonster] as [monster he] begin to shake and steal glances at your body. ");
             }
-
             var lustAADmg:Number = (scalingBonusLibido() * 0.5);
             lustAADmg = teases.teaseAuraLustDamageBonus(monster, lustAADmg);
             lustAADmg *= monster.lustVuln;
             lustAADmg = combat.fixPercentLust(lustAADmg);
             monster.teased(Math.round(lustAADmg), false);
+            outputText("\n\n");
+            if (player.hasPerk(PerkLib.EromancyMaster)) teaseXP(1 + bonusExpAfterSuccesfullTease());
+        }
+        //Sagittarius Aura of Dominance
+        if (player.hasPerk(PerkLib.SagittariusAuraOfDominance) && monster.lustVuln > 0 && monster.hasVagina() && !flags[kFLAGS.DISABLE_AURAS]) {
+            outputText("The sheer overwhelming dominance and maleness radiating of your body causes [themonster] to slowly lose concentration and you can spy her taking quick glances at your erect [cock].  ");
+            var lustSAoDDmg:Number = scalingBonusLibido();
+            lustSAoDDmg = teases.teaseAuraLustDamageBonus(monster, lustSAoDDmg);
+            lustSAoDDmg *= monster.lustVuln;
+            lustSAoDDmg = combat.fixPercentLust(lustSAoDDmg);
+            monster.teased(Math.round(lustSAoDDmg), false);
             outputText("\n\n");
             if (player.hasPerk(PerkLib.EromancyMaster)) teaseXP(1 + bonusExpAfterSuccesfullTease());
         }

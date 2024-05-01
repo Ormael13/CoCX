@@ -291,6 +291,16 @@ use namespace CoC;
 				},
 				chance: 30,
 				call: partsofSnippler
+			}, {
+				name: "LWoodenBow",
+				label : "L.Wooden Bow",
+				kind  : 'item',
+				chance: 0.2,
+				unique: true,
+				when: function():Boolean {
+					return !player.hasStatusEffect(StatusEffects.TookSagittariusBanefulGreatBow);
+				},
+				call: findSagittariusBanefulGreatBow
 			},{
 				name: "satyr",
 				label : "Satyr",
@@ -353,6 +363,21 @@ use namespace CoC;
 			outputText(images.showImage("item-oElixir"));
 			outputText("While exploring the plains you nearly trip over a discarded, hexagonal bottle.  ");
 			inventory.takeItem(consumables.OVIELIX, explorer.done);
+		}
+		private function findSagittariusBanefulGreatBow():void {
+			clearOutput();
+			outputText("While exploring the plain you stumble upon what appears to have been the site of a battle. Quite a few bodies, those of centaurs and gnolls litter the floor. Amongst said bodies is a large wooden bow that looks beautifully crafted, more so than the average weapon. ");
+			outputText("It may have belonged to the centaur chieftain so why is it laying here? You think the centaur either forgot it or has been wiped out.\n\n");
+			menu();
+			addButton(1, "Bow", findSagittariusBanefulGreatBowTake);
+			addButton(3, "Leave", endEncounter);
+		}
+		private function findSagittariusBanefulGreatBowTake():void {
+			clearOutput();
+			outputText("As you pick up the amazing looking weapon you feel like a static run through your arm. What just happened? As you try to throw the weapon away by reflex you discover that you can't. ");
+			outputText("No way that weapon was actually a cursed item that's why the centaurs left it here! <b>You were cursed by Sagittarius Baneful Great Bow!</b>\n\n");
+			player.setWeaponRange(weaponsrange.SAGITTB);
+			endEncounter();
 		}
 	}
 }

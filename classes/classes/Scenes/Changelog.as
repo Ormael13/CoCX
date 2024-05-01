@@ -64,6 +64,8 @@ public class Changelog extends BaseContent
 			outputText("-New key Item (by Liadri): Machine Gun MK4 - req. Machine Gun MK3 - Increase range attack by 125% if using a firearm. Change the firearm text to a goblin machine gun text.\n");
 			outputText("-New key Item (by Liadri): Machine Gun MK5 - req. Machine Gun MK4 - Increase range attack by 150% if using a firearm. Change the firearm text to a goblin machine gun text.\n");
 			outputText("-New key Item (by Liadri): Machine Gun MK6 - req. Machine Gun MK5 - Increase range attack by 200% if using a firearm. Change the firearm text to a goblin machine gun text.\n");
+			outputText("-New key Item (by Liadri): Artificial Intelligence - req. Toolbelt - Add an artificial intelligence to your mech which will greet you when you board. Aside from the friendliness of this new interface feature it cannot do much on its own yet.\n");
+			outputText("-New key Item (by Liadri): Auto turret - req. Improved Artificial Intelligence - Add passive ranged attack per round to your AI routine no matter your action choice.\n");
 			outputText("-New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies. Using this item will turn PC into troll. Troll bonuses at 10 pts in racial score (scalable): +30% to Str multi, +30% to Tou multi, +20% to Spr multi, +20% to Int multi, +60% to Wis multi, +20 to max tone cap, +50 to max satiety.\n");
 			outputText("-New TF item (by Pyromania): Icy Fig. Dropped by Glacial Troll enemies. Using this item will turn PC into glacial troll. Glacial Troll bonuses at 10 pts in racial score (scalable): +30% to Str multi, +40% to Tou multi, +10% to Spe multi, +20% to Int multi, +60% to Wis multi, +20 to max tone cap, +75 to max satiety.\n");
 			outputText("-New consumable (by Liadri): Black Lily. Obtained from Rafflesia. Effects: When used by alraune/lilaraune would grant Nightshade perk and Darkness Affinity.\n");
@@ -79,6 +81,7 @@ public class Changelog extends BaseContent
 			outputText("-Glacial trolls could gain Cold Affnity perk.\n");
 			outputText("-Zenji now have hp and lust variants for defeats pre-camp and for camp sparring, in case combat would change his perspective on PC wining by lust have only 50% chance to change that perspective. Also when fighting to the death would have full lust resistance and no effect to lower that resistance would work on him.\n");
 			outputText("-Phouka Drink scene when pc toughness is between 30 and 70 bug fixed. Also scene will now check for core toughness value not total.\n");
+			outputText("-Centaur race score calculations was slight changed and can have now additionaly 3rd / 4th tier of race bonuses - Elder Centaur / True Centaur: +100 / +140 Strength +80 / +100 Toughness +175 / +185 Speed +80 / +100 Libido +75 Sens +350 / +500 Hp\n");
 			outputText("-Bestial Blademaster armor has the revealing tag now, because reasons. (Lord Shadeogorath)\n");
 			outputText("-Implemented horse and kirin taur revamp sprites (by Liadri). (Lord Shadeogorath)\n");
 			outputText("-Demon face now changes based on corruption. (Lord Shadeogorath)\n");
@@ -111,28 +114,30 @@ public class Changelog extends BaseContent
 			outputText("-Dinah upgrade options for HB mech now have 2 more tiers of Armor Plating, Leather Insulation & Dragon's Breath Flamer upgrades.\n");
 			//outputText("-New HB Mech upgrade options: Armor Plating (+armor), Leather Insulation (+magic resistance), Agility (+base melee atk dmg), Dragon's Breath Flamer (fire dmg special), Scatter Laser (lightning dmg special), Rapid Reload (+base ranged atk dmg), Internal Systems (increase mech SF capacity and lower it consumption during high activity)\n");
 			//outputText(", Camouflage Mode (allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials), Invisibility Mode (the same as Camouflage Mode but can last until PC run out of SF to keep it active or deactivate it manualy / upgrade to decrease SF consumption)");
-			outputText("-New key Item (by Liadri): Artificial Intelligence - req. Toolbelt - Add an artificial intelligence to your mech which will greet you when you board. Aside from the friendliness of this new interface feature it cannot do much on its own yet.\n");
 			outputText("-New key Item (by Liadri): Improved Artificial Intelligence - req. Artificial Intelligence - The mech can now use an auto turret.\n");
-			outputText("-New key Item (by Liadri): Auto turret - req. Improved Artificial Intelligence - Add passive ranged attack per round to your AI routine no matter your action choice.\n");
 			outputText("-New event perk: Centaur hunter style: Moving Shot. Gained by training with Kelt as Centaur and reaching 20+ in bow skill. Effects: As a centaur, you can use ranged weapons while galloping.\n");
 			outputText("-New event perk: Centaur hunter style: Wind Reader. Gained by training with Kelt as Centaur and reaching 40+ in bow skill. Effects: As a centaur, your Archery gains a half wisdom modifier to damage.\n");
 			outputText("-New event perk: Centaur hunter style: Great pull. Gained by training with Kelt as Centaur and reaching 60+ in bow skill. Effects: As a centaur, gain an extra half strength modifier on bow damage.\n");
 			outputText("-New event perk: Centaur hunter style: Meteor Shot. Gained by training with Kelt as Centaur and reaching 80+ in bow skill. Effects: As a centaur, Power shot has a chance to stun based on your strength modifier.\n");
 			outputText("-New event perk: Centaur hunter style: Meteor Shower. Gained by training with Kelt as Centaur and reaching 100+ in bow skill. Effects: As a centaur, Power shot unleash 4 arrows instead of one each dealing 60% of power shot damage.\n");
-			outputText("-Centaur race score calculations was slight changed and can have now additionaly 3rd / 4th tier of race bonuses - Elder Centaur / True Centaur: +100 / +140 Strength +80 / +100 Toughness +175 / +185 Speed +80 / +100 Libido +75 Sens +350 / +500 Hp\n");
 			outputText("-New key Item (by Liadri): Auto turret MK2 - req. Auto turret - Add two passive ranged attacks per round to your AI routine no matter your action choice.\n");
 			outputText("-New key Item (by Liadri): Auto turret MK3 - req. Auto turret MK2 - Add three passive ranged attacks per round to your AI routine no matter your action choice.\n");
 			outputText("-New key Item (by Liadri): Auto turret MK4 - req. Auto turret MK3 - Add four passive ranged attacks per round to your AI routine no matter your action choice.\n");
 			outputText("-New key Item (by Liadri): Auto turret MK5 - req. Auto turret MK4 - Add five passive ranged attacks per round to your AI routine no matter your action choice.\n");
 			outputText("-New key Item (by Liadri): Auto turret MK6 - req. Auto turret MK5 - Add six passive ranged attacks per round to your AI routine no matter your action choice.\n");
+			outputText("-New range weapon (by Liadri): Sagittarius Baneful Great Bow - obtained by finding it at Plains. 260 atk, costing 13000 gems, no accuracy penalty, is low-grade wrath weapon, can't be unequiped normal way.\n");
+			outputText("-New event perk: Sagittarius Aura of Dominance. Gained by having 50+ corruption while using Sagittarius Baneful Great Bow. Effects: Sagittarius cursed weapon corrupts the very air around you driving females horny for your dick. Deals 100% more tease damage to female opponents and causes them to take periodic tease damage per round.\n");
+			outputText("-Having sex when equipped with Sagittarius Baneful Great Bow proc the Sagittarius Focus bonus until next night. Effect: PC adds 50% of his libido to wisdom and intelligence until next night.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");//New event perk: Sagittarius Aura of Dominance. Gained by having 50+ corruption while using Sagittarius Baneful Great Bow. Effects: Sagittarius cursed weapon corrupts the very air around you driving females horny for your dick. Deals 100% more tease damage to female opponents and causes them to take periodic tease damage per round.
-			outputText("-\n");//New range weapon (by Liadri): Sagittarius Baneful Great Bow - obtained by finding it at Plains. 1 atk, costing 100 gems, no accuracy penalty, can't be used above 33 (+ corruption tolerance bonus) corruption and the less corruption PC have the stronger atk it'll have (max 4 pts).
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -154,10 +159,11 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Fixed bugs: Dracula/lina PC unable to find get ghoul if they not learned this as normal Vampire, unable to buy manual for 1st atk: f. swords, Arigean Princess PC not been fully immune to TF-ing like other perm races, Weresharks not having their stats changing according to moon phase or boosted during use of Crinos Shape, Phoenix TF adding mutagen penatly instead of stat curse, ");
 			outputText("Endless Rage draining 10x too much wrath per turn, Berzerker/Lustzerker still req. to be activated after they been activated as part of Asura Form activation, dormant state of wereraces 'blessings' increasing race score and not lowering it, Hinezumi Buring Blood IM accesable by Bunny race, returning from teleportation circle at 4th floor of river dungeon sending PC to ");
 			outputText("3rd floor teleportation circle room, perk allowing to always run away from enemy/ies been ignored in dungeons, unarmed/feral giving mastery gains for small weapons, 2 of 4 SF to Elemental Energy conversion options having wrong check for usable SF, using Fiery Band for calling Kiha to help fight... Kiha, Ceraph after update still not able to win using her super cool lust beam attack, ");
-			outputText("Pilgrim's Bounty perk setting cumQ as if max lust was 100, Raphael rape scene treating all PC cocks as tentalce cocks, Condensed Power and Titanic Strength perks desc/effects been misaligned/incorectly calculated, HB Mech Dragon's Breath Flamer & Scatter Laser upgrade(s) after instaling each weapon\n\n");
+			outputText("Pilgrim's Bounty perk setting cumQ as if max lust was 100, Raphael rape scene treating all PC cocks as tentalce cocks, Condensed Power and Titanic Strength perks desc/effects been misaligned/incorectly calculated, HB Mech Dragon's Breath Flamer & Scatter Laser upgrade(s) after instaling each weapon, HB Ayo Armor have it stored SF reset on loading save\n\n");
 			/*ostatni punkt changelogu
 			outputText("(Part 2/2) <b>Version 0.9a:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -208,12 +214,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -232,8 +234,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

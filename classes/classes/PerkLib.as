@@ -3451,6 +3451,8 @@ public class PerkLib
 		public static const MageWarden:PerkType = mk("Mage-Warden", "Mage-Warden",
 				"Enables Avatar Of the Song soul skill while equipped: Doublecast Charged Weapon and Might. Casts blind if Charged Weapon is already active. Casts Heal if Might is already active.",null,true);
 		public static const PerformancePower:PerformancePowerPerk = new PerformancePowerPerk();
+		public static const SagittariusAuraOfDominance:PerkType = mk("Sagittarius Aura of Dominance", "Sagittarius Aura of Dominance",
+			"Sagittarius cursed weapon corrupts the very air around you driving females horny for your dick. Deals 100% more tease damage to female opponents and causes them to take periodic tease damage per round.",null,true);
 		public static const StrifeWarden:PerkType = mk("Strife-Warden", "Strife-Warden",
 				"Enables Beat of War soul skill while equipped: Attack with low-moderate additional soul damage, gain strength equal to 15% your base strength until end of battle. This effect stacks.",null,true);
 		public static const TamamoNoMaeCursedKimono:PerkType = mk("Tamamo no Mae Cursed Kimono", "Tamamo no Mae Cursed Kimono",

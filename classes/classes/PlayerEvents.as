@@ -1361,6 +1361,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					outputText("\nCorruption seethes from your defiled equipment into you.\n");
 					player.cor += 5;
 				}
+				if (player.weaponRange == weaponsrange.SAGITTB) {
+					outputText("\nPussy… Cunt… Vagina… FUCK… you can only think about pussies! You wish you had their velvety folds and wet lubricated walls wrapping around your dick.\n");
+					outputText("\nYou begin drooling mindlessly as your penis slide out of its sheath inches by delicious inches, the very visible purplish veins pumping corruption along your length. Cum sloshes impatiently in your heavy balls as a thick blob of horse precum drips from your flared tip and splashes loudly onto the ground beneath as the curse of Sagittarius erodes your will to resist the urge to plunge your penis in and ravage the nearest wet hole.\n");
+					if (player.statusEffectv1(StatusEffects.TookSagittariusBanefulGreatBow) > 0 && player.cor < 70) player.cor += 2;
+					if (!player.statStore.hasBuff('Sagittarius Focus')) {
+						if (player.statusEffectv1(StatusEffects.TookSagittariusBanefulGreatBow) < 9) player.addStatusValue(StatusEffects.TookSagittariusBanefulGreatBow,1,1);
+						player.buff("Sagittarius Curse").remove();
+						player.buff("Sagittarius Curse").addStats( {"int.mult":-(0.05*player.statusEffectv1(StatusEffects.TookSagittariusBanefulGreatBow)), "sens":(10*player.statusEffectv1(StatusEffects.TookSagittariusBanefulGreatBow))} );
+					}
+					else player.buff("Sagittarius Focus").remove();
+				}
 				//Reset clone creation tracker
 				if (camp.gcc(true) && camp.gcc() == 0) player.removeStatusEffect(StatusEffects.PCClone);
 			}
@@ -2369,6 +2380,19 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				CoC.instance.transformations.EyesChangeColor(["red"]).applyEffect(false);
 				needNext = true;
 			}
+			//Sagittarius Aura of Dominance
+			if (player.cor >= 50 && player.weaponRange == weaponsrange.SAGITTB) {
+				outputText("The air around you seems to change. You feel in control… dominant… The bitch all around the world exists to worship that amazing cock of yours and it would be only fitting for them to willingly spread their legs to you so that you can breed them. With this aura of raw dominance and strength, what breedable female could ever refuse you?");
+				if (player.statusEffectv3(StatusEffects.Kelt) >= 5) outputText(" You recall that centaur Kelt had something similar going on about him.");
+				outputText(" <b>Gained Sagittarius Aura of Dominance.</b>\n");
+				player.createPerk(PerkLib.SagittariusAuraOfDominance, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if (player.cor < 50 || player.weaponRange != weaponsrange.SAGITTB) {
+				outputText("You feel relief as Sagittarius curse releases some of its hold over you. That accursed aura that used to turn normal women into sluts in heat is gone.\n");
+				player.removePerk(PerkLib.SagittariusAuraOfDominance);
+				needNext = true;
+			}
 			//Fixing wings
 			if (player.horns.type == Horns.BICORN && player.wings.type == Wings.FEATHERED_ALICORN) {
 				CoC.instance.transformations.WingsNightmare.applyEffect();
@@ -2760,6 +2784,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMP_TOME);
 				if (!camp.IsSleeping && !player.isRaceCached(Races.IMP, 3) && rand(3) < 2) {
 					CoC.instance.mutations.impTFgradual(player);
+					needNext = true;
+				}
+			}
+			if (player.weaponRange == weaponsrange.SAGITTB) {
+				if (!camp.IsSleeping && (!player.hasCock() || !player.hasBalls()) && rand(3) < 2) {
+					CoC.instance.mutations.sagittariusBowChanges(player);
 					needNext = true;
 				}
 			}
