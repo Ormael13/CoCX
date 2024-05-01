@@ -1523,6 +1523,8 @@ public class Combat extends BaseContent {
             ui.doMummyTurn();
         if (ui.isFlyingSwordTurn())
             ui.doFlyingSwordTurn();
+        if (ui.isMechAITurn())
+            ui.doMechAITurn();
         for (var ci:int = 0; ci <= 3; ++ci)
             if (ui.isCompanionTurn(ci))
                 ui.doCompanionTurn(ci, false);
@@ -4391,10 +4393,13 @@ public class Combat extends BaseContent {
 		WrathGenerationPerHit1(5);
 		var shotsCount:Number = 1;
 		if (player.hasKeyItem("Auto turret MK2") >= 0) shotsCount *= 2;
+		if (player.hasKeyItem("Auto turret MK3") >= 0) shotsCount *= 3;
+		if (player.hasKeyItem("Auto turret MK4") >= 0) shotsCount *= 4;
+		if (player.hasKeyItem("Auto turret MK5") >= 0) shotsCount *= 5;
+		if (player.hasKeyItem("Auto turret MK6") >= 0) shotsCount *= 6;
 		while (shotsCount-->0) doPhysicalDamage(damage, true, true, ignoreDR);
-		//set flag that mech ai shooted
-		flags[kFLAGS.IN_COMBAT_PLAYER_GOBLIN_MECH_AI_ATTACKED] = 1;
-		enemyAI();
+		outputText("\n\n");
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 	}
 
     public function oneBulletReloadCost():Number {

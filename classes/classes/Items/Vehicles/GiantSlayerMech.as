@@ -50,8 +50,8 @@ public class GiantSlayerMech extends Vehicles
 					if (game.player.hasKeyItem("Upgraded Leather Insulation 3.0") >= 0) EHP += 0.75;
 					game.player.HP = EHP * game.player.maxHP();
 				}
+				outputText("As you turn the mech on the welcoming voice of your AI booms in. \"<i>Welcome back aboard operator [name]. All functions are nominal.</i>\"");
 			}
-			outputText("As you turn the mech on the welcoming voice of your AI booms in. \"<i>Welcome back aboard operator [name]. All functions are nominal.</i>\"");
 			super.afterEquip(doOutput);
 		}
 		

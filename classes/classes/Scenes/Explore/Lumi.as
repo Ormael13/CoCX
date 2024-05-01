@@ -418,15 +418,15 @@ public class Lumi extends BaseContent {
 		menu();
 		if (player.hasKeyItem("Upgraded Armor plating 6.0") < 0 && player.hasKeyItem("Blueprint - Upgraded Armor plating 6.0") < 0) addButton(0, "UpgrArmor 6.0", lumiEngineeringBuyBlueprintUpgradedArmorPlating6).hint("Upgraded Armor plating 6.0 BP - 2500 gems");
 		if (player.hasKeyItem("Upgraded Armor plating 5.0") < 0 && player.hasKeyItem("Upgraded Armor plating 6.0") < 0 && player.hasKeyItem("Blueprint - Upgraded Armor plating 5.0") < 0) addButton(0, "UpgrArmor 5.0", lumiEngineeringBuyBlueprintUpgradedArmorPlating5).hint("Upgraded Armor plating 5.0 BP - 2000 gems");
-		if (player.hasKeyItem("Upgraded Armor plating 4.0") < 0 && player.hasKeyItem("Upgraded Armor plating 5.0") < 0 && player.hasKeyItem("Blueprint - Upgraded Armor plating 4.0") < 0) addButton(0, "UpgrArmor 4.0", lumiEngineeringBuyBlueprintUpgradedArmorPlating4).hint("Upgraded Armor plating 4.0 BP - 1500 gems");
-		if (player.hasKeyItem("Upgraded Armor plating 3.0") < 0 && player.hasKeyItem("Upgraded Armor plating 4.0") < 0 && player.hasKeyItem("Blueprint - Upgraded Armor plating 3.0") < 0) addButton(0, "UpgrArmor 3.0", lumiEngineeringBuyBlueprintUpgradedArmorPlating3).hint("Upgraded Armor plating 3.0 BP - 1000 gems");
-		if (player.hasKeyItem("Upgraded Armor plating 2.0") < 0 && player.hasKeyItem("Upgraded Armor plating 3.0") < 0 && player.hasKeyItem("Blueprint - Upgraded Armor plating 2.0") < 0) addButton(0, "UpgrArmor 2.0", lumiEngineeringBuyBlueprintUpgradedArmorPlating2).hint("Upgraded Armor plating 2.0 BP - 500 gems");
+		if (player.hasKeyItem("Upgraded Armor plating 4.0") < 0 && player.hasKeyItem("Upgraded Armor plating 5.0") < 0 && player.hasKeyItem("Upgraded Armor plating 6.0") < 0 && player.hasKeyItem("Blueprint - Upgraded Armor plating 4.0") < 0) addButton(0, "UpgrArmor 4.0", lumiEngineeringBuyBlueprintUpgradedArmorPlating4).hint("Upgraded Armor plating 4.0 BP - 1500 gems");
+		if (player.hasKeyItem("Upgraded Armor plating 3.0") < 0 && player.hasKeyItem("Upgraded Armor plating 4.0") < 0 && player.hasKeyItem("Upgraded Armor plating 5.0") < 0 && player.hasKeyItem("Upgraded Armor plating 6.0") < 0 && player.hasKeyItem("Blueprint - Upgraded Armor plating 3.0") < 0) addButton(0, "UpgrArmor 3.0", lumiEngineeringBuyBlueprintUpgradedArmorPlating3).hint("Upgraded Armor plating 3.0 BP - 1000 gems");
+		if (player.hasKeyItem("Upgraded Armor plating 2.0") < 0 && player.hasKeyItem("Upgraded Armor plating 3.0") < 0 && player.hasKeyItem("Upgraded Armor plating 4.0") < 0 && player.hasKeyItem("Upgraded Armor plating 5.0") < 0 && player.hasKeyItem("Upgraded Armor plating 6.0") < 0 && player.hasKeyItem("Blueprint - Upgraded Armor plating 2.0") < 0) addButton(0, "UpgrArmor 2.0", lumiEngineeringBuyBlueprintUpgradedArmorPlating2).hint("Upgraded Armor plating 2.0 BP - 500 gems");
 		if (player.hasKeyItem("Upgraded Armor plating 1.0") < 0 && player.hasKeyItem("Upgraded Armor plating 2.0") < 0 && player.hasKeyItem("Upgraded Armor plating 3.0") < 0 && player.hasKeyItem("Upgraded Armor plating 4.0") < 0 && player.hasKeyItem("Upgraded Armor plating 5.0") < 0 && player.hasKeyItem("Upgraded Armor plating 6.0") < 0 && player.hasKeyItem("Blueprint - Upgraded Armor plating 1.0") < 0) addButton(0, "UpgrArmor 1.0", lumiEngineeringBuyBlueprintUpgradedArmorPlating1).hint("Upgraded Armor plating 1.0 BP - 100 gems");
 		if (player.hasKeyItem("Taser with an overcharged battery") < 0 && player.hasKeyItem("Blueprint - Taser with an overcharged battery") < 0) addButton(1, "Taser O.B.", lumiEngineeringBuyBlueprintTaserOverchargeBattery).hint("Taser overcharge battery BP - 1000 gems");
 		if (player.hasKeyItem("Taser") < 0 && player.hasKeyItem("Taser with an overcharged battery") < 0 && player.hasKeyItem("Blueprint - Taser") < 0) addButton(1, "Taser", lumiEngineeringBuyBlueprintTaser).hint("Taser BP - 500 gems");
 		if (player.hasKeyItem("Safety bubble") < 0 && player.hasKeyItem("Blueprint - Safety bubble") < 0) addButton(2, "Safety bubble", lumiEngineeringBuyBlueprintSafetyBubble).hint("Safety bubble BP - 100 gems");
 		if (player.hasKeyItem("Dynapunch Glove") < 0 && player.hasKeyItem("Blueprint - Dynapunch Glove") < 0) addButton(3, "Dynapunch G.", lumiEngineeringBuyBlueprintDynapunchGlove).hint("Dynapunch Glove BP - 500 gems");
-		if (player.hasKeyItem("Improved Artificial Intelligence") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence") < 0) addButton(4, "Improved AI", lumiEngineeringBuyBlueprintImprovedArtificialIntelligence).hint("Improved Artificial Intelligence BP - 500 gems");
+		if (player.hasKeyItem("Improved Artificial Intelligence") < 0 && player.hasKeyItem("Blueprint - Artificial Intelligence") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence") < 0) addButton(4, "Improved AI", lumiEngineeringBuyBlueprintImprovedArtificialIntelligence).hint("Improved Artificial Intelligence BP - 500 gems");
 		if (player.hasKeyItem("Artificial Intelligence") < 0 && player.hasKeyItem("Blueprint - Artificial Intelligence") < 0) addButton(4, "AI", lumiEngineeringBuyBlueprintArtificialIntelligence).hint("Artificial Intelligence BP - 500 gems");
 		//5
 		//6
@@ -449,17 +449,21 @@ public class Lumi extends BaseContent {
 		menu();
 		if (player.hasKeyItem("Machine Gun MK6") < 0 && player.hasKeyItem("Blueprint - Machine Gun MK6") < 0) addButton(0, "Machine Gun MK6", lumiEngineeringBuyBlueprintMachineGunMK6).hint("Machine Gun MK6 BP - 5000 gems");
 		if (player.hasKeyItem("Machine Gun MK5") < 0 && player.hasKeyItem("Machine Gun MK6") < 0 && player.hasKeyItem("Blueprint - Machine Gun MK5") < 0) addButton(0, "Machine Gun MK5", lumiEngineeringBuyBlueprintMachineGunMK5).hint("Machine Gun MK5 BP - 4000 gems");
-		if (player.hasKeyItem("Machine Gun MK4") < 0 && player.hasKeyItem("Machine Gun MK5") < 0 && player.hasKeyItem("Blueprint - Machine Gun MK4") < 0) addButton(0, "Machine Gun MK4", lumiEngineeringBuyBlueprintMachineGunMK4).hint("Machine Gun MK4 BP - 3000 gems");
-		if (player.hasKeyItem("Machine Gun MK3") < 0 && player.hasKeyItem("Machine Gun MK4") < 0 && player.hasKeyItem("Blueprint - Machine Gun MK3") < 0) addButton(0, "Machine Gun MK3", lumiEngineeringBuyBlueprintMachineGunMK3).hint("Machine Gun MK3 BP - 2000 gems");
-		if (player.hasKeyItem("Machine Gun MK2") < 0 && player.hasKeyItem("Machine Gun MK3") < 0 && player.hasKeyItem("Blueprint - Machine Gun MK2") < 0) addButton(0, "Machine Gun MK2", lumiEngineeringBuyBlueprintMachineGunMK2).hint("Machine Gun MK2 BP - 1000 gems");
-		if (player.hasKeyItem("Machine Gun MK1") < 0 && player.hasKeyItem("Machine Gun MK2") < 0 && player.hasKeyItem("Machine Gun MK3") < 0 && player.hasKeyItem("Blueprint - Machine Gun MK1") < 0) addButton(0, "Machine Gun MK1", lumiEngineeringBuyBlueprintMachineGunMK1).hint("Machine Gun MK1 BP - 500 gems");
-		if (player.hasKeyItem("Repeater Gun") < 0 && player.hasKeyItem("Machine Gun MK1") < 0 && player.hasKeyItem("Machine Gun MK2") < 0 && player.hasKeyItem("Machine Gun MK3") < 0 && player.hasKeyItem("Blueprint - Repeater Gun") < 0) addButton(0, "Repeater Gun", lumiEngineeringBuyBlueprintRepeaterGun).hint("Repeater Gun BP - 100 gems");
+		if (player.hasKeyItem("Machine Gun MK4") < 0 && player.hasKeyItem("Machine Gun MK5") < 0 && player.hasKeyItem("Machine Gun MK6") < 0 && player.hasKeyItem("Blueprint - Machine Gun MK4") < 0) addButton(0, "Machine Gun MK4", lumiEngineeringBuyBlueprintMachineGunMK4).hint("Machine Gun MK4 BP - 3000 gems");
+		if (player.hasKeyItem("Machine Gun MK3") < 0 && player.hasKeyItem("Machine Gun MK4") < 0 && player.hasKeyItem("Machine Gun MK5") < 0 && player.hasKeyItem("Machine Gun MK6") < 0 && player.hasKeyItem("Blueprint - Machine Gun MK3") < 0) addButton(0, "Machine Gun MK3", lumiEngineeringBuyBlueprintMachineGunMK3).hint("Machine Gun MK3 BP - 2000 gems");
+		if (player.hasKeyItem("Machine Gun MK2") < 0 && player.hasKeyItem("Machine Gun MK3") < 0 && player.hasKeyItem("Machine Gun MK4") < 0 && player.hasKeyItem("Machine Gun MK5") < 0 && player.hasKeyItem("Machine Gun MK6") < 0 && player.hasKeyItem("Blueprint - Machine Gun MK2") < 0) addButton(0, "Machine Gun MK2", lumiEngineeringBuyBlueprintMachineGunMK2).hint("Machine Gun MK2 BP - 1000 gems");
+		if (player.hasKeyItem("Machine Gun MK1") < 0 && player.hasKeyItem("Machine Gun MK2") < 0 && player.hasKeyItem("Machine Gun MK3") < 0 && player.hasKeyItem("Machine Gun MK4") < 0 && player.hasKeyItem("Machine Gun MK5") < 0 && player.hasKeyItem("Machine Gun MK6") < 0 && player.hasKeyItem("Blueprint - Machine Gun MK1") < 0) addButton(0, "Machine Gun MK1", lumiEngineeringBuyBlueprintMachineGunMK1).hint("Machine Gun MK1 BP - 500 gems");
+		if (player.hasKeyItem("Repeater Gun") < 0 && player.hasKeyItem("Machine Gun MK1") < 0 && player.hasKeyItem("Machine Gun MK2") < 0 && player.hasKeyItem("Machine Gun MK3") < 0 && player.hasKeyItem("Machine Gun MK4") < 0 && player.hasKeyItem("Machine Gun MK5") < 0 && player.hasKeyItem("Machine Gun MK6") < 0 && player.hasKeyItem("Blueprint - Repeater Gun") < 0) addButton(0, "Repeater Gun", lumiEngineeringBuyBlueprintRepeaterGun).hint("Repeater Gun BP - 100 gems");
 		if (player.hasKeyItem("Whitefire Beam Cannon") < 0 && player.hasKeyItem("Blueprint - Whitefire Beam Cannon") < 0) addButton(1, "Whitefire B.C.", lumiEngineeringBuyBlueprintWhitefireBeamCannon).hint("Whitefire Beam Cannon BP - 1000 gems");
 		if (player.hasKeyItem("Snowball Generator") < 0 && player.hasKeyItem("Blueprint - Snowball Generator") < 0) addButton(2, "Snowball G.", lumiEngineeringBuyBlueprintSnowballGenerator).hint("Snowball Generator BP - 1000 gems");
 		if (player.hasKeyItem("Raijin blaster") < 0 && player.hasKeyItem("Blueprint - Raijin blaster") < 0 && player.hasKeyItem("Taser with an overcharged battery") >= 0) addButton(3, "Raijin blaster", lumiEngineeringBuyBlueprintRaijinBlaster).hint("Raijin blaster BP - 1500 gems");
 		if (player.hasKeyItem("Gravity shots") < 0 && player.hasKeyItem("Blueprint - Gravity shots") < 0 && player.hasKeyItem("MK2 Jetpack") >= 0) addButton(4, "Gravity shots", lumiEngineeringBuyBlueprintGravityShots).hint("Gravity shots - 1000 gems");
-		if (player.hasKeyItem("Auto turret MK2") < 0 && player.hasKeyItem("Blueprint - Auto turret MK2") < 0) addButton(5, "Auto turret", lumiEngineeringBuyBlueprintAutoTurretMK2).hint("Auto turret MK2 BP - 1000 gems");
-		if (player.hasKeyItem("Auto turret") < 0 && player.hasKeyItem("Blueprint - Auto turret") < 0) addButton(5, "Auto turret", lumiEngineeringBuyBlueprintAutoTurret).hint("Auto turret BP - 500 gems");
+		if (player.hasKeyItem("Auto turret MK6") < 0 && player.hasKeyItem("Blueprint - Auto turret MK6") < 0) addButton(5, "Auto turret MK6", lumiEngineeringBuyBlueprintAutoTurretMK6).hint("Auto turret MK6 BP - 3000 gems");
+		if (player.hasKeyItem("Auto turret MK5") < 0 && player.hasKeyItem("Blueprint - Auto turret MK5") < 0 && player.hasKeyItem("Blueprint - Auto turret MK6") < 0) addButton(5, "Auto turret MK5", lumiEngineeringBuyBlueprintAutoTurretMK5).hint("Auto turret MK5 BP - 2500 gems");
+		if (player.hasKeyItem("Auto turret MK4") < 0 && player.hasKeyItem("Blueprint - Auto turret MK4") < 0 && player.hasKeyItem("Blueprint - Auto turret MK5") < 0 && player.hasKeyItem("Blueprint - Auto turret MK6") < 0) addButton(5, "Auto turret MK4", lumiEngineeringBuyBlueprintAutoTurretMK4).hint("Auto turret MK4 BP - 2000 gems");
+		if (player.hasKeyItem("Auto turret MK3") < 0 && player.hasKeyItem("Blueprint - Auto turret MK3") < 0 && player.hasKeyItem("Blueprint - Auto turret MK4") < 0 && player.hasKeyItem("Blueprint - Auto turret MK5") < 0 && player.hasKeyItem("Blueprint - Auto turret MK6") < 0) addButton(5, "Auto turret MK3", lumiEngineeringBuyBlueprintAutoTurretMK3).hint("Auto turret MK3 BP - 1500 gems");
+		if (player.hasKeyItem("Auto turret MK2") < 0 && player.hasKeyItem("Blueprint - Auto turret MK2") < 0 && player.hasKeyItem("Blueprint - Auto turret MK3") < 0 && player.hasKeyItem("Blueprint - Auto turret MK4") < 0 && player.hasKeyItem("Blueprint - Auto turret MK5") < 0 && player.hasKeyItem("Blueprint - Auto turret MK6") < 0) addButton(5, "Auto turret MK2", lumiEngineeringBuyBlueprintAutoTurretMK2).hint("Auto turret MK2 BP - 1000 gems");
+		if (player.hasKeyItem("Auto turret") < 0 && player.hasKeyItem("Blueprint - Auto turret") < 0 && player.hasKeyItem("Blueprint - Auto turret MK2") < 0 && player.hasKeyItem("Blueprint - Auto turret MK3") < 0 && player.hasKeyItem("Blueprint - Auto turret MK4") < 0 && player.hasKeyItem("Blueprint - Auto turret MK5") < 0 && player.hasKeyItem("Blueprint - Auto turret MK6") < 0) addButton(5, "Auto turret", lumiEngineeringBuyBlueprintAutoTurret).hint("Auto turret BP - 500 gems");
 		addButton(14, "Back", lumiEngineeringMechUpgrades);
 	}
 	public function lumiEngineeringBuyBlueprintToolbelt():void {
@@ -1126,70 +1130,29 @@ public class Lumi extends BaseContent {
 		else lumiEngineeringBuyBlueprintNotEnoughGems();
 	}
 	public function lumiEngineeringBuyBlueprintArtificialIntelligence():void {
-		clearOutput();
-		if (player.gems >= 500) {
-			player.gems -= 500;
-			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
-			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
-			outputText("<b>Gained Key Item: Blueprint - Artificial Intelligence!</b>");
-			player.createKeyItem("Blueprint - Artificial Intelligence", 0, 0, 0, 0);
-			statScreenRefresh();
-			doNext(lumiEngineering);
-		}
-		else lumiEngineeringBuyBlueprintNotEnoughGems();
+		lumiEngineeringBuyBlueprintSharedPart(500, "Artificial Intelligence");
 	}
 	public function lumiEngineeringBuyBlueprintImprovedArtificialIntelligence():void {
-		clearOutput();
-		if (player.gems >= 500) {
-			player.gems -= 500;
-			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
-			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
-			outputText("<b>Gained Key Item: Blueprint - Improved Artificial Intelligence!</b>");
-			player.createKeyItem("Blueprint - Improved Artificial Intelligence", 0, 0, 0, 0);
-			statScreenRefresh();
-			doNext(lumiEngineering);
-		}
-		else lumiEngineeringBuyBlueprintNotEnoughGems();
+		lumiEngineeringBuyBlueprintSharedPart(500, "Improved Artificial Intelligence");
 	}
 	public function lumiEngineeringBuyBlueprintAutoTurret():void {
-		clearOutput();
-		if (player.gems >= 500) {
-			player.gems -= 500;
-			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
-			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
-			outputText("<b>Gained Key Item: Blueprint - Auto turret!</b>");
-			player.createKeyItem("Blueprint - Auto turret", 0, 0, 0, 0);
-			statScreenRefresh();
-			doNext(lumiEngineering);
-		}
-		else lumiEngineeringBuyBlueprintNotEnoughGems();
+		lumiEngineeringBuyBlueprintSharedPart(500, "Auto turret");
 	}
 	public function lumiEngineeringBuyBlueprintAutoTurretMK2():void {
-		clearOutput();
-		if (player.gems >= 1000) {
-			player.gems -= 1000;
-			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
-			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
-			outputText("<b>Gained Key Item: Blueprint - Auto turret MK2!</b>");
-			player.createKeyItem("Blueprint - Auto turret MK2", 0, 0, 0, 0);
-			statScreenRefresh();
-			doNext(lumiEngineering);
-		}
-		else lumiEngineeringBuyBlueprintNotEnoughGems();
-	}/*
-	public function lumiEngineeringBuyBlueprintToolbelt():void {
-		clearOutput();
-		if (player.gems >= 50) {
-			player.gems -= 100;
-			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
-			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
-			outputText("<b>Gained Key Item: Blueprint - Toolbelt!</b>");
-			player.createKeyItem("Blueprint - Toolbelt", 0, 0, 0, 0);
-			statScreenRefresh();
-			doNext(lumiEngineering);
-		}
-		else lumiEngineeringBuyBlueprintNotEnoughGems();
-	}*/
+		lumiEngineeringBuyBlueprintSharedPart(1000, "Auto turret MK2");
+	}
+	public function lumiEngineeringBuyBlueprintAutoTurretMK3():void {
+		lumiEngineeringBuyBlueprintSharedPart(1500, "Auto turret MK3");
+	}
+	public function lumiEngineeringBuyBlueprintAutoTurretMK4():void {
+		lumiEngineeringBuyBlueprintSharedPart(2000, "Auto turret MK4");
+	}
+	public function lumiEngineeringBuyBlueprintAutoTurretMK5():void {
+		lumiEngineeringBuyBlueprintSharedPart(2500, "Auto turret MK5");
+	}
+	public function lumiEngineeringBuyBlueprintAutoTurretMK6():void {
+		lumiEngineeringBuyBlueprintSharedPart(3000, "Auto turret MK6");
+	}
 	public function lumiEngineeringBuyBlueprintEnergyCore():void {
 		clearOutput();
 		if (player.gems >= 50) {
@@ -1211,6 +1174,19 @@ public class Lumi extends BaseContent {
 			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
 			outputText("<b>Gained Key Item: Blueprint - Mechanism!</b>");
 			player.createKeyItem("Blueprint - Mechanism", 0, 0, 0, 0);
+			statScreenRefresh();
+			doNext(lumiEngineering);
+		}
+		else lumiEngineeringBuyBlueprintNotEnoughGems();
+	}
+	public function lumiEngineeringBuyBlueprintSharedPart(cost:Number, itemName:String):void {
+		clearOutput();
+		if (player.gems >= cost) {
+			player.gems -= cost;
+			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
+			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
+			outputText("<b>Gained Key Item: Blueprint - "+itemName+"!</b>");
+			player.createKeyItem("Blueprint - "+itemName+"", 0, 0, 0, 0);
 			statScreenRefresh();
 			doNext(lumiEngineering);
 		}
@@ -1455,7 +1431,11 @@ public class Lumi extends BaseContent {
 		if (player.hasKeyItem("Blueprint - Snowball Generator") >= 0) outputText("Snowball Generator - Req. 75+ int, knowing Ice Spike spell, 20 metal pieces, 500 nails, 5 energy core.\n");
 		if (player.hasKeyItem("Blueprint - Raijin blaster") >= 0) outputText("Raijin blaster - Req. 100+ int, knowing Lightning Bolt spell, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core, 5 raiju plasma.\n");
 		if (player.hasKeyItem("Blueprint - Gravity shots") >= 0) outputText("Gravity shots - Req. 100+ int, knowing Darkness Shard spell, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core.\n");
-		if (player.hasKeyItem("Blueprint - Auto turret MK2") >= 0) outputText("Auto turret MK2 - Req. 100+ int, 5mechanism.\n");
+		if (player.hasKeyItem("Blueprint - Auto turret MK6") >= 0) outputText("Auto turret MK6 - Req. 300+ int, 25 mechanism.\n");
+		if (player.hasKeyItem("Blueprint - Auto turret MK5") >= 0) outputText("Auto turret MK5 - Req. 250+ int, 20 mechanism.\n");
+		if (player.hasKeyItem("Blueprint - Auto turret MK4") >= 0) outputText("Auto turret MK4 - Req. 200+ int, 15 mechanism.\n");
+		if (player.hasKeyItem("Blueprint - Auto turret MK3") >= 0) outputText("Auto turret MK3 - Req. 150+ int, 10 mechanism.\n");
+		if (player.hasKeyItem("Blueprint - Auto turret MK2") >= 0) outputText("Auto turret MK2 - Req. 100+ int, 5 mechanism.\n");
 		if (player.hasKeyItem("Blueprint - Auto turret") >= 0) outputText("Auto turret - Req. 50+ int, 1 mechanism.\n");
 		menu();
 		if (player.hasKeyItem("Blueprint - Machine Gun MK6") >= 0 && player.hasKeyItem("Machine Gun MK5") >= 0 && player.inte >= 200 && CampStatsAndResources.MetalPieces >= 25 && CampStatsAndResources.NailsResc >= 1000 && CampStatsAndResources.MechanismResc >= 20) addButton(0, "Machine Gun MK6", lumiWorkshopMachineGunMK6).hint("Machine Gun MK6 - Increase range attack by 200% if using a firearm. Change the firearm text to a goblin machine gun text. - 200+ int, Machine Gun MK5, 25 metal pieces, 1000 nails, 20 mechanism and 12 hours of work.");
@@ -1469,8 +1449,12 @@ public class Lumi extends BaseContent {
 		if (player.hasKeyItem("Blueprint - Snowball Generator") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 75 && CampStatsAndResources.MetalPieces >= 20 && CampStatsAndResources.NailsResc >= 500 && CampStatsAndResources.EnergyCoreResc >= 5 && player.hasStatusEffect(StatusEffects.KnowsIceSpike)) addButton(2, "Snowball G.", lumiWorkshopSnowballGenerator).hint("Snowball Generator - Adds a snowball generator option to your mech. - 75+ int, knowing Ice Spike spell, 20 metal pieces, 500 nails, 5 energy core and 8 hours of work.");
 		if (player.hasKeyItem("Blueprint - Raijin blaster") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 15 && CampStatsAndResources.NailsResc >= 500 && CampStatsAndResources.MechanismResc >= 2 && CampStatsAndResources.EnergyCoreResc >= 5 && player.hasItem(useables.RPLASMA, 5) && player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) addButton(3, "Raijin blaster", lumiWorkshopRaijinBlaster).hint("Raijin blaster - Adds a Raijin blaster option to your mech. - 100+ int, knowing Darkness Shard spell, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core, 5 raiju plasma and 8 hours of work.");
 		if (player.hasKeyItem("Blueprint - Gravity shots") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 15 && CampStatsAndResources.NailsResc >= 500 && CampStatsAndResources.MechanismResc >= 2 && CampStatsAndResources.EnergyCoreResc >= 5 && player.hasStatusEffect(StatusEffects.KnowsDarknessShard)) addButton(4, "Gravity shots", lumiWorkshopGravityShots).hint("Gravity shots - Adds a Gravity shots option to your mech. - 100+ int, knowing Darkness Shard spell, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core and 8 hours of work.");
-		if (player.hasKeyItem("Blueprint - Auto turret MK2") >= 0 && player.hasKeyItem("Artificial Intelligence") >= 0 && player.inte >= 100 && CampStatsAndResources.MechanismResc >= 5) addButton(5, "Auto turret MK2", lumiWorkshopAutoTurretMK2).hint("Auto turret MK2 - Add two passive ranged attacks per round to your AI routine no matter your action choice. - 100+ int, Auto turret, 5 mechanism and 4 hour work.");
-		if (player.hasKeyItem("Blueprint - Auto turret") >= 0 && player.hasKeyItem("Artificial Intelligence") >= 0 && player.inte >= 50 && CampStatsAndResources.MechanismResc >= 1) addButton(5, "Auto turret", lumiWorkshopAutoTurret).hint("Auto turret - Add passive ranged attack per round to your AI routine no matter your action choice. - 50+ int, Artificial Intelligence, 1 mechanism and 4 hour work.");
+		if (player.hasKeyItem("Blueprint - Auto turret MK6") >= 0 && player.hasKeyItem("Auto turret MK5") >= 0 && player.inte >= 300 && CampStatsAndResources.MechanismResc >= 25) addButton(5, "Auto turret MK6", lumiWorkshopAutoTurretMK6).hint("Auto turret MK6 - Add six passive ranged attacks per round to your AI routine no matter your action choice. - 300+ int, Auto turret MK5, 25 mechanism and 12 hours of work.");
+		if (player.hasKeyItem("Blueprint - Auto turret MK5") >= 0 && player.hasKeyItem("Auto turret MK4") >= 0 && player.inte >= 250 && CampStatsAndResources.MechanismResc >= 20) addButton(5, "Auto turret MK5", lumiWorkshopAutoTurretMK5).hint("Auto turret MK5 - Add five passive ranged attacks per round to your AI routine no matter your action choice. - 250+ int, Auto turret MK4, 20 mechanism and 12 hours of work.");
+		if (player.hasKeyItem("Blueprint - Auto turret MK4") >= 0 && player.hasKeyItem("Auto turret MK3") >= 0 && player.inte >= 200 && CampStatsAndResources.MechanismResc >= 15) addButton(5, "Auto turret MK4", lumiWorkshopAutoTurretMK4).hint("Auto turret MK4 - Add four passive ranged attacks per round to your AI routine no matter your action choice. - 200+ int, Auto turret MK3, 15 mechanism and 8 hours of work.");
+		if (player.hasKeyItem("Blueprint - Auto turret MK3") >= 0 && player.hasKeyItem("Auto turret MK2") >= 0 && player.inte >= 150 && CampStatsAndResources.MechanismResc >= 10) addButton(5, "Auto turret MK3", lumiWorkshopAutoTurretMK3).hint("Auto turret MK3 - Add three passive ranged attacks per round to your AI routine no matter your action choice. - 150+ int, Auto turret MK2, 10 mechanism and 8 hours of work.");
+		if (player.hasKeyItem("Blueprint - Auto turret MK2") >= 0 && player.hasKeyItem("Auto turret") >= 0 && player.inte >= 100 && CampStatsAndResources.MechanismResc >= 5) addButton(5, "Auto turret MK2", lumiWorkshopAutoTurretMK2).hint("Auto turret MK2 - Add two passive ranged attacks per round to your AI routine no matter your action choice. - 100+ int, Auto turret, 5 mechanism and 4 hours of work.");
+		if (player.hasKeyItem("Blueprint - Auto turret") >= 0 && player.hasKeyItem("Artificial Intelligence") >= 0 && player.inte >= 50 && CampStatsAndResources.MechanismResc >= 1) addButton(5, "Auto turret", lumiWorkshopAutoTurret).hint("Auto turret - Add passive ranged attack per round to your AI routine no matter your action choice. - 50+ int, Artificial Intelligence, 1 mechanism and 4 hours of work.");
 		addButton(14, "Back", lumiWorkshopMechUpgrades);
 	}
 	public function lumiWorkshopEnergyCore():void {
@@ -1839,23 +1823,13 @@ public class Lumi extends BaseContent {
 	public function lumiWorkshopImprovedArtificialIntelligence():void {
 		clearOutput();
 		CampStatsAndResources.EnergyCoreResc -= 1;
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Improved Artificial Intelligence is ready and installed up your " + player.vehiclesName + ".\n\n");
-		player.createKeyItem("Improved Artificial Intelligence", 0, 0, 0, 0);
-		player.removeKeyItem("Blueprint - Improved Artificial Intelligence");
 		player.removeKeyItem("Artificial Intelligence");
-		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
-		else doNext(camp.returnToCampUseFourHours);
+		lumiWorkshopSharedPart4Hours("Improved Artificial Intelligence");
 	}
 	public function lumiWorkshopArtificialIntelligence():void {
 		clearOutput();
 		player.destroyItems(useables.GOLCORE, 1);
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Artificial Intelligence is ready and installed up your " + player.vehiclesName + ".\n\n");
-		player.createKeyItem("Artificial Intelligence", 0, 0, 0, 0);
-		player.removeKeyItem("Blueprint - Artificial Intelligence");
-		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
-		else doNext(camp.returnToCampUseFourHours);
+		lumiWorkshopSharedPart4Hours("Artificial Intelligence");
 	}
 	public function lumiWorkshopMachineGunMK6():void {
 		clearOutput();
@@ -2123,76 +2097,74 @@ public class Lumi extends BaseContent {
 		CampStatsAndResources.MetalPieces -= 10;
 		CampStatsAndResources.NailsResc -= 300;
 		CampStatsAndResources.EnergyCoreResc -= 2;
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new MK2 Jetpack is ready and installed up your " + player.vehiclesName + ".\n\n");
-		player.createKeyItem("MK2 Jetpack", 0, 0, 0, 0);
-		player.removeKeyItem("Blueprint - MK2 Jetpack");
 		player.removeKeyItem("Jetpack");
-		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
-		else doNext(camp.returnToCampUseEightHours);
+		lumiWorkshopSharedPart8Hours("MK2 Jetpack");
 	}
 	public function lumiWorkshopJetpack():void {
 		clearOutput();
 		CampStatsAndResources.MetalPieces -= 3;
 		CampStatsAndResources.NailsResc -= 100;
 		CampStatsAndResources.EnergyCoreResc -= 1;
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Jetpack is ready and installed up your " + player.vehiclesName + ".\n\n");
-		player.createKeyItem("Jetpack", 0, 0, 0, 0);
-		player.removeKeyItem("Blueprint - Jetpack");
-		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
-		else doNext(camp.returnToCampUseFourHours);
+		lumiWorkshopSharedPart4Hours("Jetpack");
+	}
+	public function lumiWorkshopAutoTurretMK6():void {
+		clearOutput();
+		CampStatsAndResources.MechanismResc -= 25;
+		player.removeKeyItem("Auto turret MK5");
+		lumiWorkshopSharedPart12Hours("Auto turret MK6");
+	}
+	public function lumiWorkshopAutoTurretMK5():void {
+		clearOutput();
+		CampStatsAndResources.MechanismResc -= 20;
+		player.removeKeyItem("Auto turret MK4");
+		lumiWorkshopSharedPart12Hours("Auto turret MK5");
+	}
+	public function lumiWorkshopAutoTurretMK4():void {
+		clearOutput();
+		CampStatsAndResources.MechanismResc -= 15;
+		player.removeKeyItem("Auto turret MK3");
+		lumiWorkshopSharedPart8Hours("Auto turret MK4");
+	}
+	public function lumiWorkshopAutoTurretMK3():void {
+		clearOutput();
+		CampStatsAndResources.MechanismResc -= 10;
+		player.removeKeyItem("Auto turret MK2");
+		lumiWorkshopSharedPart8Hours("Auto turret MK3");
 	}
 	public function lumiWorkshopAutoTurretMK2():void {
 		clearOutput();
 		CampStatsAndResources.MechanismResc -= 5;
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Auto turret MK2 is ready and installed up your " + player.vehiclesName + ".\n\n");
-		player.createKeyItem("Auto turret MK2", 0, 0, 0, 0);
-		player.removeKeyItem("Blueprint - Auto turret MK2");
 		player.removeKeyItem("Auto turret");
-		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
-		else doNext(camp.returnToCampUseFourHours);
+		lumiWorkshopSharedPart4Hours("Auto turret MK2");
 	}
 	public function lumiWorkshopAutoTurret():void {
 		clearOutput();
 		CampStatsAndResources.MechanismResc -= 1;
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Auto turret is ready and installed up your " + player.vehiclesName + ".\n\n");
-		player.createKeyItem("Auto turret", 0, 0, 0, 0);
-		player.removeKeyItem("Blueprint - Auto turret");
-		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
-		else doNext(camp.returnToCampUseFourHours);
-	}/*
-	public function lumiWorkshop0():void {
-		clearOutput();
-		CampStatsAndResources.MetalPieces -= 1;
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Toolbelt is ready and installed up your " + player.vehiclesName + ".\n\n");
-		player.createKeyItem("Toolbelt", 0, 0, 0, 0);
-		player.removeKeyItem("Blueprint - Toolbelt");
+		lumiWorkshopSharedPart4Hours("Auto turret");
+	}
+	public function lumiWorkshopSharedPart4Hours(itemName:String):void {
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new "+itemName+" is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem(""+itemName+"", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - "+itemName+"");
 		statScreenRefresh();
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
 		else doNext(camp.returnToCampUseFourHours);
 	}
-	public function lumiWorkshop0():void {
-		clearOutput();
-		CampStatsAndResources.MetalPieces -= 1;
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Toolbelt is ready and installed up your " + player.vehiclesName + ".\n\n");
-		player.createKeyItem("Toolbelt", 0, 0, 0, 0);
-		player.removeKeyItem("Blueprint - Toolbelt");
+	public function lumiWorkshopSharedPart8Hours(itemName:String):void {
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new "+itemName+" is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem(""+itemName+"", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - "+itemName+"");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
-		else doNext(camp.returnToCampUseFourHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
+		else doNext(camp.returnToCampUseEightHours);
 	}
-	public function lumiWorkshop0():void {
-		clearOutput();
-		CampStatsAndResources.MetalPieces -= 1;
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Toolbelt is ready and installed up your " + player.vehiclesName + ".\n\n");
-		player.createKeyItem("Toolbelt", 0, 0, 0, 0);
-		player.removeKeyItem("Blueprint - Toolbelt");
+	public function lumiWorkshopSharedPart12Hours(itemName:String):void {
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new "+itemName+" is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem(""+itemName+"", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - "+itemName+"");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
-		else doNext(camp.returnToCampUseFourHours);
-	}*/
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
+		else doNext(camp.returnToCampUseTwelveHours);
+	}
 }
 }
