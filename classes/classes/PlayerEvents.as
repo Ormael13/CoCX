@@ -2381,14 +2381,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Sagittarius Aura of Dominance
-			if (player.cor >= 50 && player.weaponRange == weaponsrange.SAGITTB) {
+			if (player.cor >= 50 && player.weaponRange == weaponsrange.SAGITTB && !player.hasPerk(PerkLib.SagittariusAuraOfDominance)) {
 				outputText("The air around you seems to change. You feel in control… dominant… The bitch all around the world exists to worship that amazing cock of yours and it would be only fitting for them to willingly spread their legs to you so that you can breed them. With this aura of raw dominance and strength, what breedable female could ever refuse you?");
 				if (player.statusEffectv3(StatusEffects.Kelt) >= 5) outputText(" You recall that centaur Kelt had something similar going on about him.");
 				outputText(" <b>Gained Sagittarius Aura of Dominance.</b>\n");
 				player.createPerk(PerkLib.SagittariusAuraOfDominance, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if (player.cor < 50 || player.weaponRange != weaponsrange.SAGITTB) {
+			if ((player.cor < 50 || player.weaponRange != weaponsrange.SAGITTB) && player.hasPerk(PerkLib.SagittariusAuraOfDominance)) {
 				outputText("You feel relief as Sagittarius curse releases some of its hold over you. That accursed aura that used to turn normal women into sluts in heat is gone.\n");
 				player.removePerk(PerkLib.SagittariusAuraOfDominance);
 				needNext = true;

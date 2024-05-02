@@ -49,6 +49,11 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Troll Resistance. Gained by been troll / glacial troll. Effects: Your troll hide grants you protection from magical effects. (Increases magic resist by 15% (fire resist by 7,5%))\n");
 			outputText("-New event perk: Troll Regeneration. Gained by been troll / glacial troll. Effects: 6% health and 6 points of fatigue regeneration but double hunger decaying speed. Stops for 3 rounds when damaged by fire.\n");
 			outputText("-New event perk: Equine Strength. Gained by been horse-morph or centaur. Effects: Add 25% of your speed and libido to your strength stat.\n");
+			outputText("-New event perk: Centaur hunter style: Moving Shot. Gained by training with Kelt as Centaur and reaching 20+ in bow skill. Effects: As a centaur, you can use ranged weapons while galloping.\n");
+			outputText("-New event perk: Centaur hunter style: Wind Reader. Gained by training with Kelt as Centaur and reaching 40+ in bow skill. Effects: As a centaur, your Archery gains a half wisdom modifier to damage.\n");
+			outputText("-New event perk: Centaur hunter style: Great pull. Gained by training with Kelt as Centaur and reaching 60+ in bow skill. Effects: As a centaur, gain an extra half strength modifier on bow damage.\n");
+			outputText("-New event perk: Centaur hunter style: Meteor Shot. Gained by training with Kelt as Centaur and reaching 80+ in bow skill. Effects: As a centaur, Power shot has a chance to stun based on your strength modifier.\n");
+			outputText("-New event perk: Centaur hunter style: Meteor Shower. Gained by training with Kelt as Centaur and reaching 100+ in bow skill. Effects: As a centaur, Power shot unleash 4 arrows instead of one each dealing 60% of power shot damage.\n");
 			outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP / Lust effect of 10% magnitude.\n");
 			outputText("-New mutation perk: Equine Muscle. Req. having free musculature mutation slot, one of races: horse-morph, centuar, unicorn, bicorn, alicorn, nightmare. Effects: +25% to all Physical Ability damage. Gallop cost 10% less fatigue.\n");
 			outputText("-New mutation perk: Goblin Ovaries. Req. having free ovaries mutation slot, one of goblinoid races. Effects: Increase fertility rating by 10, While pregnant increase total libido by 10%. Double the number of kids you birth.\n");
@@ -115,11 +120,6 @@ public class Changelog extends BaseContent
 			//outputText("-New HB Mech upgrade options: Armor Plating (+armor), Leather Insulation (+magic resistance), Agility (+base melee atk dmg), Dragon's Breath Flamer (fire dmg special), Scatter Laser (lightning dmg special), Rapid Reload (+base ranged atk dmg), Internal Systems (increase mech SF capacity and lower it consumption during high activity)\n");
 			//outputText(", Camouflage Mode (allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials), Invisibility Mode (the same as Camouflage Mode but can last until PC run out of SF to keep it active or deactivate it manualy / upgrade to decrease SF consumption)");
 			outputText("-New key Item (by Liadri): Improved Artificial Intelligence - req. Artificial Intelligence - The mech can now use an auto turret.\n");
-			outputText("-New event perk: Centaur hunter style: Moving Shot. Gained by training with Kelt as Centaur and reaching 20+ in bow skill. Effects: As a centaur, you can use ranged weapons while galloping.\n");
-			outputText("-New event perk: Centaur hunter style: Wind Reader. Gained by training with Kelt as Centaur and reaching 40+ in bow skill. Effects: As a centaur, your Archery gains a half wisdom modifier to damage.\n");
-			outputText("-New event perk: Centaur hunter style: Great pull. Gained by training with Kelt as Centaur and reaching 60+ in bow skill. Effects: As a centaur, gain an extra half strength modifier on bow damage.\n");
-			outputText("-New event perk: Centaur hunter style: Meteor Shot. Gained by training with Kelt as Centaur and reaching 80+ in bow skill. Effects: As a centaur, Power shot has a chance to stun based on your strength modifier.\n");
-			outputText("-New event perk: Centaur hunter style: Meteor Shower. Gained by training with Kelt as Centaur and reaching 100+ in bow skill. Effects: As a centaur, Power shot unleash 4 arrows instead of one each dealing 60% of power shot damage.\n");
 			outputText("-New key Item (by Liadri): Auto turret MK2 - req. Auto turret - Add two passive ranged attacks per round to your AI routine no matter your action choice.\n");
 			outputText("-New key Item (by Liadri): Auto turret MK3 - req. Auto turret MK2 - Add three passive ranged attacks per round to your AI routine no matter your action choice.\n");
 			outputText("-New key Item (by Liadri): Auto turret MK4 - req. Auto turret MK3 - Add four passive ranged attacks per round to your AI routine no matter your action choice.\n");
@@ -143,10 +143,16 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -212,12 +218,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -234,8 +236,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

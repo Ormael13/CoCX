@@ -178,7 +178,7 @@ public class CombatUI extends BaseCombatContent {
 		if (player.isFlying() && (!Wings.Types[player.wings.type].canFly && Arms.Types[player.arms.type].canFly)){btnRanged.disable("It would be rather difficult to aim while flapping your arms."); }
 		if (player.hasStatusEffect(StatusEffects.Gallop) && !player.hasPerk(PerkLib.CentaurHunterStyleMovingShot)){btnRanged.disable("It would be rather difficult to aim while galloping."); }
 		if (player.isInGoblinMech()) {
-			if (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0 || player.hasKeyItem("Machine Gun MK4") >= 0 || player.hasKeyItem("Machine Gun MK5" || player.hasKeyItem("Machine Gun MK6") >= 0) >= 0) {
+			if (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0 || player.hasKeyItem("Machine Gun MK4") >= 0 || player.hasKeyItem("Machine Gun MK5") >= 0 || player.hasKeyItem("Machine Gun MK6") >= 0) {
 				if (player.isFirearmTypeWeapon()) {
 					if (player.isUsingGoblinMechFriendlyFirearms()) btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon. <b>AMMO LEFT: "+player.ammo+"</b>").icon("A_Ranged");
 					else btnRanged.disable("Your firearms are not compatibile with the current piloted mech.");
