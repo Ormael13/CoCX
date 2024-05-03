@@ -6,6 +6,7 @@ import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
+import classes.Items.Consumables.Centaurinum;
 import classes.Items.Consumables.EmberTF;
 import classes.Races.*;
 import classes.Scenes.Camp.CampStatsAndResources;
@@ -26,6 +27,7 @@ public final class Mutations extends MutationsHelper {
     //const BIKINI_ARMOR_BONUS:int = 769;
 
     public var emberTFchanges:EmberTF = new EmberTF();
+    public var sagittariusBowTFchanges:Centaurinum = new Centaurinum();
 	public var saveUpdater:SaveUpdater = new SaveUpdater();
 
     public function DrunkenPowerEmpower():void {
@@ -2947,80 +2949,8 @@ public final class Mutations extends MutationsHelper {
     }
 	
 	public function sagittariusBowChanges(player:Player):void {
-		var changes:Number = 0;
-        var changeLimit:Number = 1;
-		//Temporary storage
-		var temp:Number        = 0;
-		var temp2:Number       = 0;
-		var temp3:Number       = 0;
-		//MALENESS.
-		if (player.horseCocks() < player.cockTotal()) {
-			temp = player.findFirstCockNotInType([CockTypesEnum.HORSE,CockTypesEnum.DEMON]);
-			transformations.CockHorse(temp).applyEffect();
-			temp2 = player.growCock(temp, rand(4) + 4);
-			dynStats("lus", 35, "scale", false);
-			player.addCurse("sen", 4, 1);
-			player.MutagenBonus("lib", 5);
-			//Make cock thicker if not thick already!
-			if (player.cocks[temp].cockThickness <= 2) player.thickenCock(temp, 1);
-			changes++;
-		}
-		//Players cocks are all horse-type - increase size!
-		else {
-			//single cock
-			if (player.cocks.length == 1) {
-				temp2 = player.growCock(0, rand(3) + 1);
-				temp  = 0;
-				dynStats("lus", 10, "scale", false);
-				player.addCurse("sen", 1, 1);
-			}
-			//Multicock
-			else {
-				//Find smallest cock
-				//Temp2 = smallness size
-				//temp = current smallest
-				temp3 = player.cocks.length;
-				temp  = 0;
-				while (temp3 > 0) {
-					temp3--;
-					//If current cock is smaller than saved, switch values.
-					if (player.cocks[temp].cockLength > player.cocks[temp3].cockLength) {
-						temp2 = player.cocks[temp3].cockLength;
-						temp  = temp3;
-					}
-				}
-				//Grow smallest cock!
-				//temp2 changes to growth amount
-				temp2 = player.growCock(temp, rand(4) + 1);
-				dynStats("lus", 10, "scale", false);
-				player.addCurse("sen", 1, 1);
-			}
-			outputText("\n\n");
-			if (temp2 > 2) outputText("Your " + player.cockDescript(temp) + " tightens painfully, inches of taut horse-flesh pouring out from your sheath as it grows longer.  Thick animal-pre forms at the flared tip, drawn out from the pleasure of the change.");
-			if (temp2 > 1 && temp2 <= 2) outputText("Aching pressure builds within your sheath, suddenly releasing as an inch or more of extra dick flesh spills out.  A dollop of pre beads on the head of your enlarged " + player.cockDescript(temp) + " from the pleasure of the growth.");
-			if (temp2 <= 1) outputText("A slight pressure builds and releases as your " + player.cockDescript(temp) + " pushes a bit further out of your sheath.");
-			changes++;
-		}
-		//Chance of ball growth if not 3" yet
-		if (rand(2) == 0 && changes < changeLimit && player.ballSize <= 3 && player.horseCocks() > 0) {
-			if (player.balls == 0) {
-				player.balls    = 2;
-				player.ballSize = 1;
-				outputText("\n\nA nauseating pressure forms just under the base of your maleness.  With agonizing pain the flesh bulges and distends, pushing out a rounded lump of flesh that you recognize as a testicle!  A moment later relief overwhelms you as the second drops into your newly formed sack.");
-				dynStats("lus", 5, "scale", false);
-				player.MutagenBonus("lib", 2);
-				Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
-			}
-			else {
-				player.ballSize++;
-				if (player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " + Appearance.ballsDescription(false, true, player) + " have grown larger than a human's.");
-				if (player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your " + Appearance.sackDescript(player) + ".  Walking becomes difficult as you discover your " + Appearance.ballsDescription(false, true, player) + " have enlarged again.");
-				dynStats("lus", 3, "scale", false);
-				player.MutagenBonus("lib", 1);
-			}
-			changes++;
-		}
-        flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+		sagittariusBowTFchanges.centaurTFEffects(true);
+		if (!player.inRut) player.goIntoRut(true);
 	}
 
     public function succubisDelight(tainted:Boolean, player:Player):void {

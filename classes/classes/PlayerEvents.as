@@ -2788,7 +2788,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			if (player.weaponRange == weaponsrange.SAGITTB) {
-				if (!camp.IsSleeping && (!player.hasCock() || !player.hasBalls()) && rand(3) < 2) {
+				if (!camp.IsSleeping && player.racialScore(Races.CENTAUR) < 18 && rand(3) < 2) {
 					CoC.instance.mutations.sagittariusBowChanges(player);
 					needNext = true;
 				}

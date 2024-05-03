@@ -6,13 +6,17 @@ import classes.Appearance;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Face;
+import classes.BodyParts.Hair;
 import classes.BodyParts.LowerBody;
+import classes.BodyParts.RearBody;
 import classes.BodyParts.Tail;
+import classes.BodyParts.Wings;
 import classes.CoC;
 import classes.CockTypesEnum;
 import classes.EngineCore;
 import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Consumable;
+import classes.Races.CentaurRace;
 import classes.StatusEffects;
 import classes.VaginaClass;
 
@@ -26,13 +30,6 @@ public class Centaurinum extends Consumable {
 		)
 	}
 	public override function useItem():Boolean {
-		var changes:Number = 0;
-		var changeLimit:Number = 2;
-		if (rand(2) == 0) changeLimit++;
-		changeLimit += player.additionalTransformationChances;
-		//Temporary storage
-		var temp2:Number = 0;
-		var temp3:Number = 0;
 		player.slimeFeed();
 		clearOutput();
 		outputText("You down the potion, grimacing at the strong taste.");
@@ -47,6 +44,31 @@ public class Centaurinum extends Consumable {
 			changes++;
 		}
 		if (player.blockingBodyTransformations()) changeLimit = 0;
+		centaurTFEffects();
+		player.refillHunger(10);
+		return false;
+	}
+	public function centaurTFEffects(sagittariusBow:Boolean = false):void {
+		var changes:Number = 0;
+		var changeLimit:Number = 2;
+		if (rand(2) == 0) changeLimit++;
+		changeLimit += player.additionalTransformationChances;
+		//Temporary storage
+		var temp2:Number = 0;
+		var temp3:Number = 0;
+        if (changes < changeLimit && rand(2) == 0 && player.basetallness < 84) {
+            temp = rand(5) + 3;
+            //Slow rate of growth near ceiling
+            if (player.basetallness > 90) temp = Math.floor(temp / 2);
+            //Never 0
+            if (temp == 0) temp = 1;
+            //Flavor texts.  Flavored like 1950's cigarettes. Yum.
+            if (temp < 5) outputText("[pg]You shift uncomfortably as you realize you feel off balance.  Gazing down, you realize you have grown SLIGHTLY taller.");
+            if (temp >= 5 && temp < 7) outputText("[pg]You feel dizzy and slightly off, but quickly realize it's due to a sudden increase in height.");
+            if (temp == 7) outputText("[pg]Staggering forwards, you clutch at your head dizzily.  You spend a moment getting your balance, and stand up, feeling noticeably taller.");
+            player.tallness += temp;
+            changes++;
+        }
 		//Increase player's breast size, if they are big FF or smaller
 		if (player.smallestTitSize() <= 14 && player.gender == 2 && changes < changeLimit && rand(4) == 0) {
 			outputText("\n\nAfter eating it, your chest aches and tingles, and your hands reach up to scratch at it unthinkingly.  Silently, you hope that you aren't allergic to it.  Just as you start to scratch at your " + player.breastDescript(player.smallestTitRow()) + ", your chest pushes out in slight but sudden growth.");
@@ -60,7 +82,6 @@ public class Centaurinum extends Consumable {
 				var temp:int = player.findFirstCockNotInType([CockTypesEnum.HORSE,CockTypesEnum.DEMON]);
 				CoC.instance.transformations.CockHorse(temp).applyEffect();
 				temp2 = player.growCock(temp, rand(4) + 4);
-
 				dynStats("lus", 35, "scale", false);
 				player.addCurse("sen", 4, 1);
 				player.MutagenBonus("lib", 5);
@@ -148,7 +169,7 @@ public class Centaurinum extends Consumable {
 			}
 		}
 		//Mare
-		if (player.gender == 2 || player.gender == 3) {
+		if ((player.gender == 2 || player.gender == 3) && !sagittariusBow) {
 			//Single vag
 			if (player.vaginas.length == 1) {
 				if (player.vaginas[0].vaginalLooseness <= VaginaClass.LOOSENESS_GAPING && changes < changeLimit && rand(2) == 0) {
@@ -210,10 +231,87 @@ public class Centaurinum extends Consumable {
 			}
 		}
 		//Mare-gina
-		if (player.hasVagina() && player.vaginaType() != VaginaClass.EQUINE && changes < changeLimit && rand(3) == 0) {
+		if (player.hasVagina() && player.vaginaType() != VaginaClass.EQUINE && !sagittariusBow && changes < changeLimit && rand(3) == 0) {
 			CoC.instance.transformations.VaginaHorse().applyEffect();
 		}
-
+		if ((player.gender == 2 || player.gender == 3) && player.cocks.length > 0 && rand(3) == 0 && sagittariusBow) {
+            //Kills vagina size (and eventually the whole vagina)
+            if (player.vaginas.length > 0) {
+                if (player.vaginas[0].vaginalLooseness > VaginaClass.LOOSENESS_TIGHT) {
+                    //tighten that bitch up!
+                    outputText("[pg]Your [vagina] clenches up painfully as it tightens up, becoming smaller and tighter.");
+                    player.vaginas[0].vaginalLooseness--;
+                } else {
+                    outputText("[pg]A tightness in your groin is the only warning you get before your <b>[vagina] disappears forever</b>!");
+                    if (player.cocks.length == 0) {
+                        outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment. Eventually it ends, <b>leaving you with a completely human penis.</b>");
+                        player.createCock(player.clitLength + 2);
+                        player.clitLength = .25;
+                    }
+                    //Goodbye womanhood!
+                    player.removeVagina(0, 1);
+                }
+                changes++;
+            }
+            //-Remove extra breast rows
+            if (changes < changeLimit && player.bRows() > 1 && rand(3) == 0) {
+                changes++;
+                outputText("[pg]You stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + player.breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ");
+                if (player.bRows() >= 3) outputText("abdomen");
+                else outputText("chest");
+                outputText(". The " + player.nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
+                if (player.isFurCovered()) outputText(player.furColor + " " + player.skinDesc);
+                else outputText(player.skinColor + " " + player.skinDesc);
+                outputText(" remains. <b>You've lost a row of breasts!</b>");
+                dynStats("sen", -5);
+                player.removeBreastRow(player.breastRows.length - 1, 1);
+            }
+            //Shrink boobages till they are normal
+            else if (rand(2) == 0 && changes < changeLimit && player.breastRows.length > 0) {
+                //Single row
+                if (player.breastRows.length == 1) {
+                    //Shrink if bigger than B cups
+                    if (player.breastRows[0].breastRating >= 1) {
+                        temp = 1;
+                        player.breastRows[0].breastRating--;
+                        //Shrink again if huuuuge
+                        if (player.breastRows[0].breastRating > 8) {
+                            temp++;
+                            player.breastRows[0].breastRating--;
+                        }
+                        //Talk about shrinkage
+                        if (temp == 1) outputText("[pg]You feel a weight lifted from you, and realize your [breasts] have shrunk to " + player.breastCup(0) + "s.");
+                        if (temp == 2) outputText("[pg]You feel significantly lighter.  Looking down, you realize your breasts are MUCH smaller, down to " + player.breastCup(0) + "s.");
+                        changes++;
+                    }
+                }
+                //multiple
+                else {
+                    //temp2 = amount changed
+                    //temp3 = counter
+                    temp = 0;
+                    temp2 = 0;
+                    temp3 = 0;
+                    if (player.biggestTitSize() >= 1) outputText("\n");
+                    while (temp3 < player.breastRows.length) {
+                        if (player.breastRows[temp3].breastRating >= 1) {
+                            player.breastRows[temp3].breastRating--;
+                            temp2++;
+                            outputText("\n");
+                            //If this isn't the first change...
+                            if (temp2 > 1) outputText("...and y");
+                            else outputText("Y");
+                            outputText("our " + player.breastDescript(temp3) + " shrink, dropping to " + player.breastCup(temp3) + "s.");
+                        }
+                        temp3++;
+                    }
+                    if (temp2 == 2) outputText("\nYou feel so much lighter after the change.");
+                    if (temp2 == 3) outputText("\nWithout the extra weight you feel particularly limber.");
+                    if (temp2 >= 4) outputText("\nIt feels as if the weight of the world has been lifted from your shoulders, or in this case, your chest.");
+                    if (temp2 > 0) changes++;
+                }
+            }
+        }
 		//classic horse-taur version
 		if (changes < changeLimit && rand(2) == 0 && player.lowerBody == LowerBody.HOOFED && !player.isTaur()) {
 			outputText("\n\n");
@@ -226,6 +324,12 @@ public class Centaurinum extends Consumable {
 			outputText("\n\n");
 			CoC.instance.transformations.LowerBodyTaur().applyEffect();
 			player.MutagenBonus("spe", 3);
+			changes++;
+		}
+		//Remove odd eyes
+		if (changes < changeLimit && rand(4) == 0 && CoC.instance.transformations.EyesHuman.isPossible()) {
+			outputText("\n\n");
+			CoC.instance.transformations.EyesHuman.applyEffect();
 			changes++;
 		}
 		//Horse tail
@@ -246,23 +350,45 @@ public class Centaurinum extends Consumable {
 			CoC.instance.transformations.ArmsHuman.applyEffect();
 			changes++;
 		}
-		//Human ears
-		if (player.arms.type == Arms.HUMAN && !InCollection(player.ears.type, Ears.HUMAN, Ears.HORSE) && changes < changeLimit && rand(3) == 0) {
+		//Ears
+		if (player.ears.type != Ears.HORSE && player.ears.type != Ears.HUMAN && player.ears.type != Ears.ELFIN && player.tailType == Tail.HORSE && player.tailType != Tail.GARGOYLE && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
-			CoC.instance.transformations.EarsHuman.applyEffect();
+			if (rand(3) == 0) CoC.instance.transformations.EarsHuman.applyEffect();
+			else {
+				if (rand(2) == 0) CoC.instance.transformations.EarsElven.applyEffect();
+				else CoC.instance.transformations.EarsHorse.applyEffect();
+			}
 			changes++;
 		}
-		if (player.ears.type != Ears.HORSE && player.ears.type == Ears.HUMAN && changes < changeLimit && rand(3) == 0) {
+		//Face
+		if (player.faceType != Face.HORSE && player.faceType != Face.ELF && !player.isGargoyle() && player.isFurCovered() && changes < changeLimit && rand(4) == 0 && InCollection(player.ears.type, Ears.HUMAN, Ears.HORSE, Ears.ELFIN)) {
 			outputText("\n\n");
-			CoC.instance.transformations.EarsHorse.applyEffect();
+			if (rand(2) == 0) CoC.instance.transformations.FaceElf.applyEffect();
+			else CoC.instance.transformations.FaceHorse.applyEffect();
 			changes++;
 		}
-		//Human face
-		if (InCollection(player.ears.type, Ears.HUMAN, Ears.HORSE) && player.faceType != Face.HUMAN && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\n");
-			CoC.instance.transformations.FaceHuman.applyEffect();
-			changes++;
-		}
+		//Remove special hairs
+        if (changes < changeLimit && player.hairType != Hair.NORMAL && rand(3) == 0) {
+		    outputText("\n\n");
+			CoC.instance.transformations.HairHuman.applyEffect();
+            changes++;
+        }
+		if (player.hasPlainSkinOnly() && !InCollection(player.skinColor, CentaurRace.CentaurSkinColors) && changes < changeLimit && rand(3) == 0) {
+            player.skinColor = randomChoice(CentaurRace.CentaurSkinColors);
+            outputText("[pg]Whoah, that was weird.  You just hallucinated that your " + player.skinDesc + " turned " + player.skinColor + ".  No way!  It's staying, it really changed color!");
+            changes++;
+        }
+        //Removes wings & rear body
+        if (!InCollection(player.wings.type, Wings.NONE) && rand(3) == 0 && changes < changeLimit) {
+             outputText("\n\n");
+            CoC.instance.transformations.WingsNone.applyEffect();
+            changes++;
+        }
+		if (rand(3) == 0 && changes < changeLimit && player.rearBody.type != RearBody.NONE) {
+             outputText("\n\n");
+            CoC.instance.transformations.RearBodyNone.applyEffect();
+            changes++;
+        }
 		if (rand(3) == 0) outputText(player.modTone(60, 1));
 		//FAILSAFE CHANGE
 		if (changes == 0) {
@@ -270,8 +396,6 @@ public class Centaurinum extends Consumable {
 			EngineCore.HPChange(50, true);
 			dynStats("lus", 3, "scale", false);
 		}
-		player.refillHunger(10);
-		return false;
 	}
 }
 }
