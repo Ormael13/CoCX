@@ -107,7 +107,7 @@ public class Changelog extends BaseContent
 			outputText("-New enemies: Mid rank Angel of Mist - lvl 58, Mist Bee Huntress - lvl 60, Mist Wasp Huntress - lvl 62, Mist Hornet Huntress - lvl 64, Mist Alraune Maiden - lvl 66, Mist Cinderbloom - lvl 68, Mist Snow Lily - lvl 70. Encounterable on 5th floor of River Dungeon\n");
 			outputText("-New bodyparts: Troll Arms, Troll lower body, Troll Tusks, Troll Ears, Troll Tail (from Troll Fig); Glacial Troll Arms, Glacial Troll lower body, Glacial Troll Tusks, Glacial Troll Ears, Glacial Troll Tail (from Icy Fig)\n");
 			outputText("-Tamani daughters & Minotaur Sons can now level-up (their lvl depends on how many of them are and seperate lvl up counter so the max level isn't clearly defines but would be at least around 100/105 lvl). Like Tamani daughters now Minotaur sons would slowly die out when there is too many of them + added their count on children page right below Tamani daughters.\n");
-			outputText("-Goblin race race bonuses req. 2 more points (12) and would give 30% more to libido multi.\n");
+			outputText("-Goblin race bonuses have now tier 2 (goblin broodmother: -60% to str multi, +120% spe multi, +200% int multi, +80% lib multi, +40 sens).\n");
 			outputText("-Golemancer in HXD could sell metal pieces/plates to PC golemancer that can buy energy cores from her. She even gives 3 options of how many metal pieces/plates to buy at once - 1x, 5x, 10x.\n");
 			outputText("-Tamani could level up (up to lvl 98). After first level up she would gain Elite type which would be upgraded to Champion type and then to Boss type.\n");
 			outputText("-Pilgrim's Bounty perk effect changed from having cum volume calculated as been always at max lust to give 100% chance to make npc's pregnant after sex with pc. In some cases when npc only get fertile post some event/quest it will only trigger when the npc is fertile (no kids with urta, marble or hel right of the bat).\n");
@@ -129,11 +129,11 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Sagittarius Aura of Dominance. Gained by having 50+ corruption while using Sagittarius Baneful Great Bow. Effects: Sagittarius cursed weapon corrupts the very air around you driving females horny for your dick. Deals 100% more tease damage to female opponents and causes them to take periodic tease damage per round.\n");
 			outputText("-Having sex when equipped with Sagittarius Baneful Great Bow proc the Sagittarius Focus bonus until next night. Effect: PC adds 50% of his libido to wisdom and intelligence until next night.\n");
 			outputText("-Elemental Fusion forms stats bonuses (+armor/m.res for some fusions) been doubled to more fit temporal perm tf state.\n");
+			outputText("-\n");
 			//outputText("-New key Item (by Liadri): Improved Ammo Chemistry - req. Toolbelt - Add one extra attack to the mech ranged weapon.\n");
 			//outputText("-New key Item (by Liadri): Improved Ammo Chemistry MKII - req. Improved Ammo Chemistry - Add two extra attacks to the mech ranged weapon.\n");
 			//outputText("-New key Item (by Liadri): Hydraulics - req. Toolbelt - Mechs gain 25% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus.\n");
 			//outputText("-New key Item (by Liadri): Hydraulics MK2 - req. Hydraulics - Mechs gain 50% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus.\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

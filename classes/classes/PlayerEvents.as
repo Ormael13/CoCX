@@ -1366,9 +1366,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					outputText("\nYou begin drooling mindlessly as your penis slide out of its sheath inches by delicious inches, the very visible purplish veins pumping corruption along your length. Cum sloshes impatiently in your heavy balls as a thick blob of horse precum drips from your flared tip and splashes loudly onto the ground beneath as the curse of Sagittarius erodes your will to resist the urge to plunge your penis in and ravage the nearest wet hole.\n");
 					if (player.statusEffectv1(StatusEffects.TookSagittariusBanefulGreatBow) > 0 && player.cor < 70) player.cor += 2;
 					if (!player.statStore.hasBuff('Sagittarius Focus')) {
-						if (player.statusEffectv1(StatusEffects.TookSagittariusBanefulGreatBow) < 9) player.addStatusValue(StatusEffects.TookSagittariusBanefulGreatBow,1,1);
+						if (player.statusEffectv1(StatusEffects.TookSagittariusBanefulGreatBow) < 10) player.addStatusValue(StatusEffects.TookSagittariusBanefulGreatBow,1,1);
 						player.buff("Sagittarius Curse").remove();
-						player.buff("Sagittarius Curse").addStats( {"int.mult":-(0.05*player.statusEffectv1(StatusEffects.TookSagittariusBanefulGreatBow)), "sens":(10*player.statusEffectv1(StatusEffects.TookSagittariusBanefulGreatBow))} );
+						var curseInt:Number = 0.1 * player.statusEffectv1(StatusEffects.TookSagittariusBanefulGreatBow);
+						if (curseInt <= 0) curseInt = 0.01;
+						curseInt *= player.inte;
+						player.buff("Sagittarius Curse").addStats( {"int":-curseInt, "sens":Math.round(Math.sqrt(curseInt))} );
 					}
 					else player.buff("Sagittarius Focus").remove();
 				}
