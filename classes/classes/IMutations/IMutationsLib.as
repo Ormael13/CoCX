@@ -61,12 +61,14 @@ public class IMutationsLib
 		public static const EasterBunnyEggBagIM:IMutationPerkType = new EasterBunnyEggBagMutation();
 		public static const EclipticMindIM:IMutationPerkType = new EclipticMindMutation();
 		public static const ElvishPeripheralNervSysIM:IMutationPerkType = new ElvishPeripheralNervSysMutation();
+		public static const EquineMuscleIM:IMutationPerkType = new EquineMuscleMutation();
 		public static const EyeOfTheTigerIM:IMutationPerkType = new EyeOfTheTigerMutation();
 		public static const FerasBirthrightIM:IMutationPerkType = new FerasBirthrightMutation();
 		public static const FeyArcaneBloodstreamIM:IMutationPerkType = new FeyArcaneBloodstreamMutation();
 		public static const FloralOvariesIM:IMutationPerkType = new FloralOvariesMutation();
 		public static const FrozenHeartIM:IMutationPerkType = new FrozenHeartMutation();
 		public static const GazerEyesIM:IMutationPerkType = new GazerEyesMutation();
+		public static const GoblinOvariesIM:IMutationPerkType = new GoblinOvariesMutation();
 		public static const GorgonEyesIM:IMutationPerkType = new GorgonEyesMutation();
 		public static const HarpyHollowBonesIM:IMutationPerkType = new HarpyHollowBonesMutation();
 		public static const HeartOfTheStormIM:IMutationPerkType = new HeartOfTheStormMutation();

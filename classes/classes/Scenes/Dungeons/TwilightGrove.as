@@ -195,7 +195,7 @@ import classes.CoC;
 			outputText("The Satyr didn’t lie, you barely took a sip of this thing and you're already tipsy. Furthermore, despite the refreshing nature of the drink, you feel increasingly hot after each sip. You can’t help basking in a dreamy state as the "+(playerIsAlraune()?"sensation of your ":"")+"vines work you over. You cum once, twice… you lost count. You could easily let yourself drift off into a delicious unconsciousness from this, and the vines "+(playerIsAlraune()?"of your elder sister ":"")+"are starting to move around you.\n\n");
 			outputText("Do you leave yourself to the care of the vines?\n\n");
 			menu();
-			addButton(1, "Yes", corruptTGHaveARestSangriaYes);
+			addButtonIfTrue(1, "Yes", corruptTGHaveARestSangriaYes, "Your current body state prevents been transformed.", !player.blockingBodyTransformations());
 			addButton(3, "No", corruptTGHaveARestSangriaNo);
 		}
 		private function corruptTGHaveARestSangriaYes():void {

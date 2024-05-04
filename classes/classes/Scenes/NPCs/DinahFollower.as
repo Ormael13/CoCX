@@ -437,22 +437,26 @@ public class DinahFollower extends NPCAwareContent// implements TimeAwareInterfa
 				if (player.hasKeyItem("HB Armor Plating") >= 0) {
 					if (player.keyItemvX("HB Armor Plating", 1) == 1) addButton(0, "Armor Plating v2", buyHowlingBansheeMechUpgrade, "Armor Plating v2", 2500, 2).hint("Increase armor by 25.");
 					if (player.keyItemvX("HB Armor Plating", 1) == 2) addButton(0, "Armor Plating v3", buyHowlingBansheeMechUpgrade, "Armor Plating v3", 3500, 3).hint("Increase armor by 35.");
-					if (player.keyItemvX("HB Armor Plating", 1) == 3) addButton(0, "Armor Plating v3", buyHowlingBansheeMechUpgrade, "Armor Plating v4", 4500, 4).hint("Increase armor by 45.");
-					if (player.keyItemvX("HB Armor Plating", 1) == 4) addButtonDisabled(0, "Armor Plating v4", "Your HB Mech already have this upgrade.");
+					if (player.keyItemvX("HB Armor Plating", 1) == 3) addButton(0, "Armor Plating v4", buyHowlingBansheeMechUpgrade, "Armor Plating v4", 4500, 4).hint("Increase armor by 45.");
+					if (player.keyItemvX("HB Armor Plating", 1) == 4) addButton(0, "Armor Plating v5", buyHowlingBansheeMechUpgrade, "Armor Plating v5", 5500, 5).hint("Increase armor by 55.");
+					if (player.keyItemvX("HB Armor Plating", 1) == 5) addButton(0, "Armor Plating v6", buyHowlingBansheeMechUpgrade, "Armor Plating v6", 6500, 6).hint("Increase armor by 65.");
+					if (player.keyItemvX("HB Armor Plating", 1) == 6) addButtonDisabled(0, "Armor Plating v6", "Your HB Mech already have this upgrade.");
 				}
 				else addButton(0, "Armor Plating v1", buyHowlingBansheeMechUpgrade, "Armor Plating v1", 1500, 1).hint("Increase armor by 15.");
 				if (player.hasKeyItem("HB Leather Insulation") >= 0) {
-					if (player.keyItemvX("HB Leather Insulation", 1) == 1) addButton(1, "Leather Insulation v2", buyHowlingBansheeMechUpgrade, "Leather Insulation v2", 2500, 6).hint("Increase magic resistance by 25.");
-					if (player.keyItemvX("HB Leather Insulation", 1) == 2) addButton(1, "Leather Insulation v3", buyHowlingBansheeMechUpgrade, "Leather Insulation v3", 3500, 7).hint("Increase magic resistance by 35.");
-					if (player.keyItemvX("HB Leather Insulation", 1) == 3) addButton(1, "Leather Insulation v4", buyHowlingBansheeMechUpgrade, "Leather Insulation v3", 4500, 8).hint("Increase magic resistance by 45.");
-					if (player.keyItemvX("HB Leather Insulation", 1) == 4) addButtonDisabled(1, "Leather Insulation v4", "Your HB Mech already have this upgrade.");
+					if (player.keyItemvX("HB Leather Insulation", 1) == 1) addButton(1, "Leather Insulation v2", buyHowlingBansheeMechUpgrade, "Leather Insulation v2", 2500, 8).hint("Increase magic resistance by 25.");
+					if (player.keyItemvX("HB Leather Insulation", 1) == 2) addButton(1, "Leather Insulation v3", buyHowlingBansheeMechUpgrade, "Leather Insulation v3", 3500, 9).hint("Increase magic resistance by 35.");
+					if (player.keyItemvX("HB Leather Insulation", 1) == 3) addButton(1, "Leather Insulation v4", buyHowlingBansheeMechUpgrade, "Leather Insulation v4", 4500, 10).hint("Increase magic resistance by 45.");
+					if (player.keyItemvX("HB Leather Insulation", 1) == 4) addButton(1, "Leather Insulation v5", buyHowlingBansheeMechUpgrade, "Leather Insulation v5", 5500, 11).hint("Increase magic resistance by 55.");
+					if (player.keyItemvX("HB Leather Insulation", 1) == 5) addButton(1, "Leather Insulation v6", buyHowlingBansheeMechUpgrade, "Leather Insulation v6", 6500, 12).hint("Increase magic resistance by 65.");
+					if (player.keyItemvX("HB Leather Insulation", 1) == 6) addButtonDisabled(1, "Leather Insulation v6", "Your HB Mech already have this upgrade.");
 				}
-				else addButton(1, "Leather Insulation v1", buyHowlingBansheeMechUpgrade, "Leather Insulation v1", 1500, 5).hint("Increase magic resistance by 15.");
+				else addButton(1, "Leather Insulation v1", buyHowlingBansheeMechUpgrade, "Leather Insulation v1", 1500, 7).hint("Increase magic resistance by 15.");
 				if (player.hasKeyItem("HB Agility") >= 0) {
 					if (player.keyItemvX("HB Agility", 1) == 1) addButtonDisabled(2, "Agility v2", "Your HB Mech already have this upgrade.");
-					else addButton(2, "Agility v2", buyHowlingBansheeMechUpgrade, "Agility v2", 1000, 10).hint("Adding speed scaling similar to Quick Strike perk to melee mech attacks.");
+					else addButton(2, "Agility v2", buyHowlingBansheeMechUpgrade, "Agility v2", 1000, 14).hint("Adding speed scaling similar to Quick Strike perk to melee mech attacks.");
 				}
-				else addButton(2, "Agility v1", buyHowlingBansheeMechUpgrade, "Agility v1", 500, 9).hint("Adding speed scaling similar to Speed Demon perk to melee mech attacks.");/*
+				else addButton(2, "Agility v1", buyHowlingBansheeMechUpgrade, "Agility v1", 500, 13).hint("Adding speed scaling similar to Speed Demon perk to melee mech attacks.");/*
 				if (player.hasKeyItem("HB Rapid Reload") >= 0) {
 					if (player.keyItemvX("HB Rapid Reload", 1) == 1) addButtonDisabled(3, "Rapid Reload v2", "Your HB Mech already have this upgrade.");
 					else addButton(3, "Rapid Reload v2", buyHowlingBansheeMechUpgrade, "Rapid Reload v2", 1500).hint("Adding speed scaling bonus to damage (half of normal bow dmg scaling based on speed) and increase base range atk by ~25%. +1 more range shoots per turn.");
@@ -465,22 +469,24 @@ public class DinahFollower extends NPCAwareContent// implements TimeAwareInterfa
 				}
 				else addButton(5, "Internal Systems v1", buyHowlingBansheeMechUpgrade, "Internal Systems v1", 750).hint("Decrease mech SF reserves drain by 10 pts and max SF capacity by 2,000 (when PC wear Ayo armor).");*/
 				if (player.hasKeyItem("HB Dragon's Breath Flamer") >= 0) {
-					if (player.keyItemvX("HB Dragon's Breath Flamer", 1) == 2) addButtonDisabled(6, "DB Flamer v2", "Your HB Mech already have this upgrade.");
-					else addButton(6, "DB Flamer v2", buyHowlingBansheeMechUpgrade, "Dragon's Breath Flamer v2", 3000, 15).hint("Instal second Dragon's Breath Flamer weapon - adds second fire attack when using this special and cost of use increase twicefold.");
+					if (player.keyItemvX("HB Dragon's Breath Flamer", 1) == 1) addButton(6, "DB Flamer v2", buyHowlingBansheeMechUpgrade, "Dragon's Breath Flamer v2", 3000, 19).hint("Instal second Dragon's Breath Flamer weapon - adds second fire attack when using this special and cost of use increase 2x.");
+					if (player.keyItemvX("HB Dragon's Breath Flamer", 1) == 2) addButton(6, "DB Flamer v3", buyHowlingBansheeMechUpgrade, "Dragon's Breath Flamer v3", 4500, 20).hint("Instal third Dragon's Breath Flamer weapon - adds third fire attack when using this special and cost of use increase 3x.");
+					if (player.keyItemvX("HB Dragon's Breath Flamer", 1) == 3) addButton(6, "DB Flamer v4", buyHowlingBansheeMechUpgrade, "Dragon's Breath Flamer v4", 5000, 21).hint("Remodeling Dragon's Breath Flamers into one with shared Nozzle - adds aoe effect to slight stronger compared to previous version fire attack when using this special and cost of use increase 4x.");
+					if (player.keyItemvX("HB Dragon's Breath Flamer", 1) == 4) addButtonDisabled(6, "DB Flamer v4", "Your HB Mech already have this upgrade.");
 				}
-				else addButton(6, "DB Flamer v1", buyHowlingBansheeMechUpgrade, "Dragon's Breath Flamer v1", 1500, 14).hint("Add Dragon's Breath Flamer weapon - Allow to enter use special dealing fire damage.");
+				else addButton(6, "DB Flamer v1", buyHowlingBansheeMechUpgrade, "Dragon's Breath Flamer v1", 1500, 18).hint("Add Dragon's Breath Flamer weapon - Allow to enter use special dealing fire damage.");
 				if (player.hasKeyItem("HB Scatter Laser") >= 0) {
-					if (player.keyItemvX("HB Scatter Laser", 1) == 1) addButton(7, "Scatter Laser v2", buyHowlingBansheeMechUpgrade, "Scatter Laser v2", 2500, 12).hint("Adds 2 more units that allow either double shot at lone targets or using all three against groups.");
-					if (player.keyItemvX("HB Scatter Laser", 1) == 2) addButton(7, "Scatter Laser v3", buyHowlingBansheeMechUpgrade, "Scatter Laser v3", 3500, 13).hint("Adding 3 more units that allow either four shots at lone targets or using all six against groups.");
+					if (player.keyItemvX("HB Scatter Laser", 1) == 1) addButton(7, "Scatter Laser v2", buyHowlingBansheeMechUpgrade, "Scatter Laser v2", 2500, 16).hint("Adds 2 more units that allow either double shot at lone targets or using all three against groups.");
+					if (player.keyItemvX("HB Scatter Laser", 1) == 2) addButton(7, "Scatter Laser v3", buyHowlingBansheeMechUpgrade, "Scatter Laser v3", 3500, 17).hint("Adding 3 more units that allow either four shots at lone targets or using all six against groups.");
 					if (player.keyItemvX("HB Scatter Laser", 1) == 3) addButtonDisabled(7, "Scatter Laser v3", "Your HB Mech already have this upgrade.");
 				}
-				else addButton(7, "Scatter Laser v1", buyHowlingBansheeMechUpgrade, "Scatter Laser v1", 1500, 11).hint("Add Scatter Laser weapon - Allow to enter use special dealing lightning damage.");/*
+				else addButton(7, "Scatter Laser v1", buyHowlingBansheeMechUpgrade, "Scatter Laser v1", 1500, 15).hint("Add Scatter Laser weapon - Allow to enter use special dealing lightning damage.");/*
 				//8
 				//9 - for prev button?
 				if (player.hasKeyItem("HB Stealth System") >= 0) {
 					if (player.keyItemvX("HB Stealth System", 1) >= 1) {
 						if (player.keyItemvX("HB Stealth System", 1) == 1) {
-							if (player.hasKeyItem("HB Internal Systems") >= 1) addButton(10, "Invisibility Mode v2", buyHowlingBansheeMechUpgrade, "Invisibility Mode v2", 10000).hint("Upgrades Invisibility Mode from v1 to v2. Decrease cost of activating and sustaining this mobe by 20%.");
+							if (player.hasKeyItem("HB Internal Systems") >= 1) addButton(10, "Invisibility Mode v2", buyHowlingBansheeMechUpgrade, "Invisibility Mode v2", 10000).hint("Upgrades Invisibility Mode from v1 to v2. Decrease cost of activating and sustaining this mode by 20%.");
 							else addButtonDisabled(10, "Invisibility Mode v2", "Your need to have installed Internal Systems v2 or better to unlock this upgrade.");
 						}
 						if (player.keyItemvX("HB Stealth System", 1) == 2) addButtonDisabled(10, "Invisibility Mode v2", "Your HB Mech already have this upgrade.");
@@ -544,29 +550,35 @@ public class DinahFollower extends NPCAwareContent// implements TimeAwareInterfa
 						case 2:
 						case 3:
 						case 4:
-							outputText("Your mech’s armour is visibly thicker, and you can tell that it’ll be harder to damage than before. The metal shines. \"<i>Yeah, apparently they designed their armour to survive deep pressure in the mines, but this stuff works just as well as armour plate.</i>\"\n\n");
-							break;
 						case 5:
 						case 6:
+							outputText("Your mech’s armour is visibly thicker, and you can tell that it’ll be harder to damage than before. The metal shines. \"<i>Yeah, apparently they designed their armour to survive deep pressure in the mines, but this stuff works just as well as armour plate.</i>\"\n\n");
+							break;
 						case 7:
 						case 8:
-							outputText("You enter your mech, and the interior is lined with leather, oiled and shimmering. Dinah grins. \"<i>This stuff is great at fizzling magic. This should help protect ya from the worst of magical attacks.</i>\"\n\n");
-							break;
 						case 9:
 						case 10:
-							outputText("Your mech’s limbs are slightly smaller, and Dinah follows your gaze. \"<i>Yep, improved alloy and optimised limb hydraulics. Smaller, but every bit as deadly as before. This mech is now a leaner, meaner killing machine. Have fun!</i>\"\n\n");
-							break;
 						case 11:
 						case 12:
+							outputText("You enter your mech, and the interior is lined with leather, oiled and shimmering. Dinah grins. \"<i>This stuff is great at fizzling magic. This should help protect ya from the worst of magical attacks.</i>\"\n\n");
+							break;
 						case 13:
+						case 14:
+							outputText("Your mech’s limbs are slightly smaller, and Dinah follows your gaze. \"<i>Yep, improved alloy and optimised limb hydraulics. Smaller, but every bit as deadly as before. This mech is now a leaner, meaner killing machine. Have fun!</i>\"\n\n");
+							break;
+						case 15:
+						case 16:
+						case 17:
 							outputText("As you watch, a new hatch in your mech’s chest opens, and a glowing red tube opens up. Dinah squeals, hopping up and down. \"<i>Oh, I can hardly wait to see this baby in action! Kill some imps! No, some Demons! NO! Some GIANTS!</i>\" She pumps her fists. \"<i>I love lasers!</i>\"\n\n");
 							break;
-						case 14:
-						case 15:
+						case 18:
+						case 19:
+						case 20:
+						case 21:
 							outputText("On your mech’s arm is a gleaming new weapon. A tank mounted just at the shoulder, and a metal tube leading down the arm to a nozzle at the mech’s “hand”.\n\n");
 							outputText("\"<i>The Dragon’s Breath. They call it the ‘heavy flamer’. A weapon that engulfs enemies in burning fuel.</i>\" Dinah gives a dainty sigh. \"<i>I hope you like the smell of imp charcoal.</i>\"\n\n");
 							break;
-						case 16:
+						case 22:
 							outputText("\"<i>We’ll be back soon!</i>\"\n\n");
 							break;
 					}
@@ -577,10 +589,14 @@ public class DinahFollower extends NPCAwareContent// implements TimeAwareInterfa
 			if (upgrade == "Armor Plating v2") player.addKeyValue("HB Armor Plating",1,1);
 			if (upgrade == "Armor Plating v3") player.addKeyValue("HB Armor Plating",1,1);
 			if (upgrade == "Armor Plating v4") player.addKeyValue("HB Armor Plating",1,1);
+			if (upgrade == "Armor Plating v5") player.addKeyValue("HB Armor Plating",1,1);
+			if (upgrade == "Armor Plating v6") player.addKeyValue("HB Armor Plating",1,1);
 			if (upgrade == "Leather Insulation v1") player.createKeyItem("HB Leather Insulation",1,0,0,0);
 			if (upgrade == "Leather Insulation v2") player.addKeyValue("HB Leather Insulation",1,1);
 			if (upgrade == "Leather Insulation v3") player.addKeyValue("HB Leather Insulation",1,1);
 			if (upgrade == "Leather Insulation v4") player.addKeyValue("HB Leather Insulation",1,1);
+			if (upgrade == "Leather Insulation v5") player.addKeyValue("HB Leather Insulation",1,1);
+			if (upgrade == "Leather Insulation v6") player.addKeyValue("HB Leather Insulation",1,1);
 			if (upgrade == "Agility v1") player.createKeyItem("HB Agility",0,0,0,0);
 			if (upgrade == "Agility v2") player.addKeyValue("HB Agility",1,1);
 			if (upgrade == "Rapid Reload v1") player.createKeyItem("HB Rapid Reload",0,0,0,0);
@@ -589,6 +605,8 @@ public class DinahFollower extends NPCAwareContent// implements TimeAwareInterfa
 			if (upgrade == "Internal Systems v2") player.addKeyValue("HB Internal Systems",1,1);
 			if (upgrade == "Dragon's Breath Flamer v1") player.createKeyItem("HB Dragon's Breath Flamer",1,0,0,0);
 			if (upgrade == "Dragon's Breath Flamer v2") player.addKeyValue("HB Dragon's Breath Flamer",1,1);
+			if (upgrade == "Dragon's Breath Flamer v3") player.addKeyValue("HB Dragon's Breath Flamer",1,1);
+			if (upgrade == "Dragon's Breath Flamer v4") player.addKeyValue("HB Dragon's Breath Flamer",1,1);
 			if (upgrade == "Scatter Laser v1") player.createKeyItem("HB Scatter Laser",1,0,0,0);
 			if (upgrade == "Scatter Laser v2") player.addKeyValue("HB Scatter Laser",1,1);
 			if (upgrade == "Scatter Laser v3") player.addKeyValue("HB Scatter Laser",1,1);

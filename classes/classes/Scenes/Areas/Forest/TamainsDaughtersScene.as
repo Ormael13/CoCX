@@ -72,6 +72,7 @@ public class TamainsDaughtersScene extends BaseContent implements TimeAwareInter
 			}
 			//Lower daughter population by 1 every fourth day once population gets high
 			if (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] > 40 && model.time.hours > 23 && model.time.days % 4 == 0) {
+				if (flags[kFLAGS.TAMANI_DAUGHTERS_LVL_UP] > 0) flags[kFLAGS.TAMANI_DAUGHTERS_LVL_UP]--;
 				flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS]--;
 			}
 			return false;
@@ -1074,6 +1075,15 @@ private function knockUpDaughters():void {
 internal function combatWinAgainstDaughters():void {
 	spriteSelect(SpriteDb.s_tamani_s_daughters);
 	clearOutput();
+	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
+		if (flags[kFLAGS.TAMANI_DAUGHTERS_DEFEATS_COUNTER] >= 1) flags[kFLAGS.TAMANI_DAUGHTERS_DEFEATS_COUNTER]++;
+		else flags[kFLAGS.TAMANI_DAUGHTERS_DEFEATS_COUNTER] = 1;
+		//level up
+		if (flags[kFLAGS.TAMANI_DAUGHTERS_LVL_UP] < 10 && flags[kFLAGS.TAMANI_DAUGHTERS_DEFEATS_COUNTER] >= flags[kFLAGS.TAMANI_DAUGHTERS_LVL_UP] + 1) {
+			flags[kFLAGS.TAMANI_DAUGHTERS_DEFEATS_COUNTER] = 0;
+			++flags[kFLAGS.TAMANI_DAUGHTERS_LVL_UP];
+		}
+	}
 	if(monster.HP <= monster.minHP()) {
 		outputText("You smile in satisfaction as [themonster] collapses, unable to continue fighting.");
 		if(player.lust >= 33 && player.hasCock()) {

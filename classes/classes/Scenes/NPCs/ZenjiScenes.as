@@ -8,6 +8,7 @@ import classes.*;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.Areas.Forest.CorruptedGlade;
 import classes.Scenes.Places.TrollVillage;
 import classes.display.SpriteDb;
@@ -2834,7 +2835,8 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 		private function applyZenjikidName3():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
-			flags[kFLAGS.ZENJI_KIDS]++;
+			if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) flags[kFLAGS.ZENJI_KIDS] += 2;
+			else flags[kFLAGS.ZENJI_KIDS]++;
 			outputText("It's finally time for your pregnancy to come to an end. You feel yourself falling over as your cervix slowly dilates in preparation. This baby is coming out now! Your cry in pain as you start to feel the contractions as your abdominal muscles attempt to push out your child.\n\n");
 			outputText("You glance around for... for the father. Zenji... he is truly a deadbeat husband. He couldn't handle you for yourself, so he doesn't deserve to have this child.\n\n");
 			outputText("You groan in pain as you spread your legs, ready to give birth, hoping for a healthy child.\n\n");

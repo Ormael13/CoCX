@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.Areas.Plains{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Items.Armors.LustyMaidensArmor;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
@@ -445,7 +446,8 @@ public function satyrBirth(vag:Boolean, womb:int = 0):void {
 	if(player.cor < 33) outputText(" and more than a bit disgusted");
 	outputText(", you slip into a short, fitful sleep.");
 	//badabingbadaboom
-	flags[kFLAGS.SATYR_KIDS]++;
+	if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) flags[kFLAGS.SATYR_KIDS] += 2;
+	else flags[kFLAGS.SATYR_KIDS]++;
     //Butt increase
     if (player.butt.type < 10 && (rand(2) == 0 || player.hips.type >= 10)) {
         player.butt.type++;

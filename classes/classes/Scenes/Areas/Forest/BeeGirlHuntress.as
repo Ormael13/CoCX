@@ -25,7 +25,7 @@ import classes.Scenes.Areas.Forest.BeeGirl;
 				this.bonusHP = 500;
 				this.bonusLust = 420;//lib+sens+lvl
 				this.level = 60;
-				this.gems = rand(30) + 12;
+				this.gems = rand(25) + 20;
 				this.drop = new ChainedDrop().add(consumables.W__BOOK, 1 / 6)
 						.add(consumables.BEEHONY, 1 / 4)
 						.add(useables.PCSHARD, 1 / 2)

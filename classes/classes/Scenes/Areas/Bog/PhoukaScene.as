@@ -5,6 +5,7 @@ package classes.Scenes.Areas.Bog
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.SceneLib;
 
 public class PhoukaScene extends BaseContent implements TimeAwareInterface {
@@ -479,7 +480,8 @@ public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 				player.fertility -= 18; //At low fertility the PC just gained up to 3 fertility due to standard post-pregnancy code. So -18 is really more like -10.
 				if (player.fertility < 5) player.fertility = 5;
 				fatigue(75);
-				flags[kFLAGS.BIRTHS_PHOUKA]++;
+				if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) flags[kFLAGS.BIRTHS_PHOUKA] += 2;
+				else flags[kFLAGS.BIRTHS_PHOUKA]++;
 				player.orgasm();
 			}
 			else if (flags[kFLAGS.PREGNANCY_CORRUPTION] > 0) {
@@ -487,12 +489,14 @@ public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 				player.fertility -= 8; //At low fertility the PC just gained up to 3 fertility due to standard post-pregnancy code. So - 8 is really more like -5.
 				if (player.fertility < 5) player.fertility = 5;
 				fatigue(50);
-				flags[kFLAGS.BIRTHS_PHOUKA]++;
+				if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) flags[kFLAGS.BIRTHS_PHOUKA] += 2;
+				else flags[kFLAGS.BIRTHS_PHOUKA]++;
 			}
 			else {
 				outputText("Your belly begins to deflate and a stream of sweet smelling sugary water rushes from your vagina.  You lay on the ground and wait, hoping this birth will be relatively painless.  You only have to give one little push and you feel a tiny shape slide gently down your birth canal.  Before you're ready for it you expel a little faerie onto the ground between your legs.\n\nThe full grown faerie looks up at you and smiles.  She shakes her little pink faerie wings out until they're dry, then does a little circuit around you, looking you over.  She zips up to your face and gives you a kiss on the cheek before backing away.\n\nThe faerie girl starts to fly higher and higher, waving to you as she goes.  Finally she turns and zips off towards the forest to meet her sisters.");
 				fatigue(5);
-				flags[kFLAGS.BIRTHS_FAERIE]++;
+				if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) flags[kFLAGS.BIRTHS_FAERIE] += 2;
+				else flags[kFLAGS.BIRTHS_FAERIE]++;
 			}
 		}
 

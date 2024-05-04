@@ -565,6 +565,7 @@ private function keltMainEncounter3():void {
 		//player.addStatusValue(StatusEffects.Kelt,1,5+rand(4));
 		if (player.statusEffectv1(StatusEffects.Kelt) < 90) bowSkill(5 + rand(4));
 		else bowSkill(1);
+		if (keltTrainingPerksCheck()) keltTrainingPerks();
 	}
 	//NAKERS
 	else {
@@ -631,6 +632,7 @@ private function keltMainEncounter3():void {
 			//player.addStatusValue(StatusEffects.Kelt,1,4);
 			if (player.statusEffectv1(StatusEffects.Kelt) < 90) bowSkill(4);
 			else bowSkill(1);
+			if (keltTrainingPerksCheck()) keltTrainingPerks();
 			doNext(camp.returnToCampUseOneHour);
 			return;
 		}
@@ -669,6 +671,7 @@ private function keltMainEncounter3():void {
 			//player.addStatusValue(StatusEffects.Kelt,1,4);
 			if (player.statusEffectv1(StatusEffects.Kelt) < 90) bowSkill(4);
 			else bowSkill(1);
+			if (keltTrainingPerksCheck()) keltTrainingPerks();
 			return;
 		}
 		//(Naked, 20% Chance)
@@ -691,6 +694,7 @@ private function keltMainEncounter3():void {
 			if (player.statusEffectv1(StatusEffects.Kelt) < 90) bowSkill(4);
 			else bowSkill(1);
 			bowSkill(4);
+			if (keltTrainingPerksCheck()) keltTrainingPerks();
 			doNext(camp.returnToCampUseOneHour);
 			return;
 		}
@@ -760,6 +764,7 @@ private function keltMainEncounterPostBlowjob():void {
 			player.addStatusValue(StatusEffects.Kelt,2,5);
 			//player.addStatusValue(StatusEffects.Kelt,1,3);
 			bowSkill(3);
+			if (keltTrainingPerksCheck()) keltTrainingPerks();
 			dynStats("lus", 20, "cor", 1);
 			doNext(camp.returnToCampUseOneHour);
 			return;
@@ -786,6 +791,38 @@ private function keltMainEncounterPostBlowjob():void {
 		}
 	}
 	keltMainEncounter3();
+}
+
+private function keltTrainingPerksCheck():Boolean {
+	return (player.statusEffectv1(StatusEffects.Kelt) >= 20 && !player.hasPerk(PerkLib.CentaurHunterStyleMovingShot)) || (player.statusEffectv1(StatusEffects.Kelt) >= 40 && !player.hasPerk(PerkLib.CentaurHunterStyleWindReader)) || (player.statusEffectv1(StatusEffects.Kelt) >= 60 && !player.hasPerk(PerkLib.CentaurHunterStyleGreatPull)) || (player.statusEffectv1(StatusEffects.Kelt) >= 80 && !player.hasPerk(PerkLib.CentaurHunterStyleMeteorShot)) || (player.statusEffectv1(StatusEffects.Kelt) >= 100 && !player.hasPerk(PerkLib.CentaurHunterStyleMeteorShower));
+}
+private function keltTrainingPerks():void {
+	outputText("\r\rTraining with Kelt has its advantages and disadvantages. While he is terrible at social relations and would scare off just about anyone his technique is one of a kind. ");
+	if (player.isTaur()) {
+		outputText("Thanks to his archery technique being made to be used by a centaur you quickly picked up some skills of his which are made possible only by your current body configurations. By learning how to shoot while on movement you have learned something akin to a mounted archery technique… well except you don’t need a mount for it. You learned the <b>Centaur hunter style: </b>");
+		if (player.statusEffectv1(StatusEffects.Kelt) >= 20 && !player.hasPerk(PerkLib.CentaurHunterStyleMovingShot)) {
+			player.createPerk(PerkLib.CentaurHunterStyleMovingShot, 0, 0, 0, 0);
+			outputText("Moving Shot");
+		}
+		if (player.statusEffectv1(StatusEffects.Kelt) >= 40 && !player.hasPerk(PerkLib.CentaurHunterStyleWindReader)) {
+			player.createPerk(PerkLib.CentaurHunterStyleWindReader, 0, 0, 0, 0);
+			outputText("Wind Reader");
+		}
+		if (player.statusEffectv1(StatusEffects.Kelt) >= 60 && !player.hasPerk(PerkLib.CentaurHunterStyleGreatPull)) {
+			player.createPerk(PerkLib.CentaurHunterStyleGreatPull, 0, 0, 0, 0);
+			outputText("Great Pull");
+		}
+		if (player.statusEffectv1(StatusEffects.Kelt) >= 80 && !player.hasPerk(PerkLib.CentaurHunterStyleMeteorShot)) {
+			player.createPerk(PerkLib.CentaurHunterStyleMeteorShot, 0, 0, 0, 0);
+			outputText("Meteor Shot");
+		}
+		if (player.statusEffectv1(StatusEffects.Kelt) >= 100 && !player.hasPerk(PerkLib.CentaurHunterStyleMeteorShower)) {
+			player.createPerk(PerkLib.CentaurHunterStyleMeteorShower, 0, 0, 0, 0);
+			outputText("Meteor Shower");
+		}
+		outputText("!</b>");
+	}
+	else outputText("Had you been a centaur yourself you might have been able to learn something more useful from him then just aiming accuracy as Kelt technique seems to imitate something akin to mounted archery.");
 }
 
 //(Resist)

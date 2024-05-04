@@ -43,7 +43,7 @@ internal function sophiePregChance():void {
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] != 0) return;
 
 	//25% + gradually increasing cumQ bonus
-	if (rand(4) == 0 || player.cumQ() > rand(1000)) {
+	if (rand(4) == 0 || player.cumQ() > rand(1000) || player.hasPerk(PerkLib.PilgrimsBounty)) {
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_HARPY);
 	}
 }

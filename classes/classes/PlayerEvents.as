@@ -1361,6 +1361,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					outputText("\nCorruption seethes from your defiled equipment into you.\n");
 					player.cor += 5;
 				}
+				if (player.weaponRange == weaponsrange.SAGITTB) {
+					outputText("\nPussy… Cunt… Vagina… FUCK… you can only think about pussies! You wish you had their velvety folds and wet lubricated walls wrapping around your dick.\n");
+					outputText("\nYou begin drooling mindlessly as your penis slide out of its sheath inches by delicious inches, the very visible purplish veins pumping corruption along your length. Cum sloshes impatiently in your heavy balls as a thick blob of horse precum drips from your flared tip and splashes loudly onto the ground beneath as the curse of Sagittarius erodes your will to resist the urge to plunge your penis in and ravage the nearest wet hole.\n");
+					if (player.statusEffectv1(StatusEffects.TookSagittariusBanefulGreatBow) > 0 && player.cor < 70) player.cor += 2;
+					if (!player.statStore.hasBuff('Sagittarius Focus')) {
+						if (player.statusEffectv1(StatusEffects.TookSagittariusBanefulGreatBow) < 9) player.addStatusValue(StatusEffects.TookSagittariusBanefulGreatBow,1,1);
+						player.buff("Sagittarius Curse").remove();
+						player.buff("Sagittarius Curse").addStats( {"int.mult":-(0.05*player.statusEffectv1(StatusEffects.TookSagittariusBanefulGreatBow)), "sens":(10*player.statusEffectv1(StatusEffects.TookSagittariusBanefulGreatBow))} );
+					}
+					else player.buff("Sagittarius Focus").remove();
+				}
 				//Reset clone creation tracker
 				if (camp.gcc(true) && camp.gcc() == 0) player.removeStatusEffect(StatusEffects.PCClone);
 			}
@@ -2047,6 +2058,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
+			//Equine Strength
+			needNext ||= player.gainOrLosePerk(PerkLib.EquineStrength, player.isAnyRaceCached(Races.HORSE, Races.CENTAUR), "You are enough of a horse-mroph or centaur and have gained your special abilities!", "You are no longer enough of a horse-mroph or centaur and have lost your special abilities!");
 			//Titan Might
 			needNext ||= player.gainOrLosePerk(PerkLib.TitanicSize,(player.tallness >= 80 && (player.isRaceCached(Races.SCYLLA, 2) || player.isAnyRaceCached(Races.HYDRA, Races.FROSTWYRM, Races.SANDWORM))), "Whoa, you've grown so big its a sheer miracle you don't damage the landscape while moving. That said, your size now contributes to your strength as well.",
 					(player.tallness < 80) ? "You sadly are no longer able to benefit from your size as much as you did before. Probably because you have shrunk to a smaller size." : "You sadly are no longer able to benefit from your size as much as you did before. Probably because you have transformed again.");
@@ -2135,36 +2148,45 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.BouncyBody);
 				needNext = true;
 			}
-			if (player.vehiclesName == "Goblin Mech Alpha" && (player.isRaceCached(Races.ELF) || player.tallness > 48 || player.tailType != Tail.NONE || player.hasPhysicalWings())) { //Elf OR Taller than 4 ft or having wings/tail
-				if (player.isRaceCached(Races.ELF)) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
+			if (player.vehiclesName == "Goblin Mech Alpha" && (player.isAnyRaceCached(Races.ELF, Races.WOODELF) || player.tallness > 48 || player.tailType != Tail.NONE || player.hasPhysicalWings())) { //Elf OR Taller than 4 ft or having wings/tail
+				if (player.isAnyRaceCached(Races.ELF, Races.WOODELF)) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
 				else outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
 				if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) player.HP /= 1.2;
 				if (player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) player.HP /= 1.35;
 				if (player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) player.HP /= 1.5;
+				if (player.hasKeyItem("Upgraded Armor plating 4.0") >= 0) player.HP /= 1.7;
+				if (player.hasKeyItem("Upgraded Armor plating 5.0") >= 0) player.HP /= 1.9;
+				if (player.hasKeyItem("Upgraded Armor plating 6.0") >= 0) player.HP /= 2.1;
 				player.HP = Math.round(player.HP);
 				player.setVehicle(VehiclesLib.NOTHING);
 				inventory.takeItem(vehicles.GOBMALP, null);
 				needNext = true;
 			}
-			if (player.vehiclesName == "Goblin Mech Prime" && (player.isRaceCached(Races.ELF) || player.tallness > 48 || player.tailType != Tail.NONE || player.hasPhysicalWings())) { //Elf OR Taller than 4 ft or having wings/tail
-				if (player.isRaceCached(Races.ELF)) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
+			if (player.vehiclesName == "Goblin Mech Prime" && (player.isAnyRaceCached(Races.ELF, Races.WOODELF) || player.tallness > 48 || player.tailType != Tail.NONE || player.hasPhysicalWings())) { //Elf OR Taller than 4 ft or having wings/tail
+				if (player.isAnyRaceCached(Races.ELF, Races.WOODELF)) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
 				else outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
 				if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) player.HP /= 1.4;
 				if (player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) player.HP /= 1.7;
 				if (player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) player.HP /= 2;
+				if (player.hasKeyItem("Upgraded Armor plating 4.0") >= 0) player.HP /= 2.4;
+				if (player.hasKeyItem("Upgraded Armor plating 5.0") >= 0) player.HP /= 2.8;
+				if (player.hasKeyItem("Upgraded Armor plating 6.0") >= 0) player.HP /= 3.2;
 				player.HP = Math.round(player.HP);
 				player.setVehicle(VehiclesLib.NOTHING);
 				inventory.takeItem(vehicles.GOBMPRI, null);
 				needNext = true;
 			}
-			if (player.vehiclesName == "Giant Slayer Mech" && (player.isRaceCached(Races.ELF) || player.isRaceCached(Races.WOODELF) || player.tallness > 66 || player.hasPhysicalWings())) { //Elf OR Taller than 5'5" ft or having large wings
-				if (player.isRaceCached(Races.ELF) || player.isRaceCached(Races.WOODELF)) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
+			if (player.vehiclesName == "Giant Slayer Mech" && (player.isAnyRaceCached(Races.ELF, Races.WOODELF) || player.tallness > 66 || player.hasPhysicalWings())) { //Elf OR Taller than 5'5" ft or having large wings
+				if (player.isAnyRaceCached(Races.ELF, Races.WOODELF)) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
 				else outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
 				if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0 || player.hasKeyItem("Upgraded Leather Insulation 1.0") >= 0) {
 					var RHP:Number = 1;
 					if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) RHP += 0.25;
 					if (player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) RHP += 0.5;
 					if (player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) RHP += 0.75;
+					if (player.hasKeyItem("Upgraded Armor plating 4.0") >= 0) RHP += 1;
+					if (player.hasKeyItem("Upgraded Armor plating 5.0") >= 0) RHP += 1.25;
+					if (player.hasKeyItem("Upgraded Armor plating 6.0") >= 0) RHP += 1.5;
 					if (player.hasKeyItem("Upgraded Leather Insulation 1.0") >= 0) RHP += 0.25;
 					if (player.hasKeyItem("Upgraded Leather Insulation 2.0") >= 0) RHP += 0.5;
 					if (player.hasKeyItem("Upgraded Leather Insulation 3.0") >= 0) RHP += 0.75;
@@ -2287,7 +2309,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.statStore.removeBuffs("Pregomania");
 				outputText("\nNo longer pregnant, you feel a void in your belly as the need to be impregnated again claw at your mind.\n");
 				player.statStore.addBuffObject({"lib.mult":0.50}, "Impregnate me!!!",{text:"You strongly desire to be impregnated."});
-
+			}
+			if(player.isPregnant() && player.hasMutation(IMutationsLib.GoblinOvariesIM) && !player.statStore.hasBuff("PregGoblinoid")){
+				var libMulti:Number = player.lib;
+				libMulti *= (0.1 * player.perkv1(IMutationsLib.GoblinOvariesIM));
+				libMulti = Math.round(libMulti);
+				player.statStore.addBuffObject({"lib":libMulti}, "PregGoblinoid",{text:""});
+			}
+			if(!player.isPregnant() && player.statStore.hasBuff("PregGoblinoid")){
+				player.statStore.removeBuffs("PregGoblinoid");
 			}
 			if(SophieFollowerScene.HarpyKids >= 21 && !player.hasPerk(PerkLib.HarpyQueen)){
 				outputText("\nOverflowing with motherly pride you count your many grown daughters. There's more than twenty of them roosting all around your camp now." +
@@ -2348,6 +2378,19 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					CoC.instance.transformations.WingsNightmare.applyEffect(false);
 				}
 				CoC.instance.transformations.EyesChangeColor(["red"]).applyEffect(false);
+				needNext = true;
+			}
+			//Sagittarius Aura of Dominance
+			if (player.cor >= 50 && player.weaponRange == weaponsrange.SAGITTB && !player.hasPerk(PerkLib.SagittariusAuraOfDominance)) {
+				outputText("The air around you seems to change. You feel in control… dominant… The bitch all around the world exists to worship that amazing cock of yours and it would be only fitting for them to willingly spread their legs to you so that you can breed them. With this aura of raw dominance and strength, what breedable female could ever refuse you?");
+				if (player.statusEffectv3(StatusEffects.Kelt) >= 5) outputText(" You recall that centaur Kelt had something similar going on about him.");
+				outputText(" <b>Gained Sagittarius Aura of Dominance.</b>\n");
+				player.createPerk(PerkLib.SagittariusAuraOfDominance, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if ((player.cor < 50 || player.weaponRange != weaponsrange.SAGITTB) && player.hasPerk(PerkLib.SagittariusAuraOfDominance)) {
+				outputText("You feel relief as Sagittarius curse releases some of its hold over you. That accursed aura that used to turn normal women into sluts in heat is gone.\n");
+				player.removePerk(PerkLib.SagittariusAuraOfDominance);
 				needNext = true;
 			}
 			//Fixing wings
@@ -2744,6 +2787,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
+			if (player.weaponRange == weaponsrange.SAGITTB) {
+				if (!camp.IsSleeping && player.racialScore(Races.CENTAUR) < 18 && rand(3) < 2) {
+					CoC.instance.mutations.sagittariusBowChanges(player);
+					needNext = true;
+				}
+			}
 			if (flags[kFLAGS.ERLKING_CANE_ATTACK_COUNTER] > 0) flags[kFLAGS.ERLKING_CANE_ATTACK_COUNTER] -= 1;
 			//Wrap it up
 			return needNext;
@@ -2930,4 +2979,4 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		}
 		//End of Interface Implementation
 	}
-}
+}

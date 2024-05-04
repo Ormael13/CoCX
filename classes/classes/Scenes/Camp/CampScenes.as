@@ -7,6 +7,7 @@ package classes.Scenes.Camp
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.SceneLib;
 
@@ -542,8 +543,8 @@ public function EclassHTsurvived():void {
 
 public function goblinsBirthScene(womb:int = 0):void {
 	daughtersCount += 1 + rand(5);
-	outputText("\n");
-	outputText("A sudden gush of fluids erupts from your vagina - your water just broke. You moan in pleasure as you feel wriggling and squirming inside your belly, muscle contractions forcing it downwards.\n\n");
+	if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) daughtersCount *= 2;
+	outputText("\nA sudden gush of fluids erupts from your vagina - your water just broke. You moan in pleasure as you feel wriggling and squirming inside your belly, muscle contractions forcing it downwards.\n\n");
 	outputText("The pleasure only increase as your delivery continues... Arousal spikes through you as the contractions intensify, and as you feel something begin to pass you have a tiny orgasm. Yet this is only the beginning, and the contractions spike again, pushing you to orgasm as your daughter keeps moving forward. It repeats, over and over, nearly a dozen times she causes you to orgasm... this is even better then getting fucked! ");
 	if (daughtersCount > 1) outputText("Each new baby you pop is a new orgasm and by the end of it your tongue is panting out from pleasure. ");
 	outputText("After an eternity of procreation and pleasure, you sense your ordeal is over and look for your newborn daughter"+(daughtersCount > 1 ? "s":"")+". ");

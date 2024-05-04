@@ -16,34 +16,25 @@ import classes.internals.ChainedDrop;
 
 	public class WaspGirl extends Monster {
 
-		public function waspSpearAttack():void {
-			outputText("The " + short + " lunges at you, jabbing with her spear.  You dodge the first attack easily, ");
-			var evade:String = player.getEvasionReason();
-			if (evade == EVASION_EVADE)
-				outputText("and you anticipate the upcoming spear strikes, dodging her attacks thanks to your incredible evasive ability!");
-			else if (evade == EVASION_FLEXIBILITY)
-				outputText("and you use your incredible flexibility to barely fold your body and avoid her attacks!");
-			else if (evade == EVASION_MISDIRECTION)
-				outputText("and you use technique from Raphael to sidestep and completely avoid her barrage of attacks!");
-			else if (evade == EVASION_SPEED || evade != null)
-				outputText("and you successfully dodge her barrages of spear attacks!");
-			else if (hasStatusEffect(StatusEffects.Blind) && rand(3) > 0)
-					outputText("and step away as you watch the " + short + "'s blind attacks strike only air. ");
-			else {
-				outputText("but she follows through with a spear strike, tearing into your " + (player.armor.name == "nothing" ? "" : "[armorName] and the underlying") + " flesh. ");
-				if (player.buff("wasp paralyze venom").isPresent()) {
-					outputText("You've fallen prey to paralyzation venom!  Better end this quick! ");
-					player.buff("wasp paralyze venom").addStats( {"str":-10, "spe":-10} ).withText("wasp paralyze venom").combatPermanent();
-				} else {
-					outputText("It's getting much harder to move, you're not sure how many more stings like that you can take! ");
-					player.buff("wasp paralyze venom").addStats( {"str":-10, "spe":-10} ).withText("wasp paralyze venom").combatPermanent();
-				}
-				var damage:int = 0;
-				damage += ((str * 1.25) + rand(50));
-				player.takePhysDamage(damage, true);
+		public function waspBarrageOfDarts():void {
+			outputText("The "+short+" launches a barrage of darts in your direction! ");
+			if (player.buff("wasp paralyze venom").isPresent()) {
+				outputText("  You've fallen prey to paralyzation venom!  Better end this quick!");
+				player.buff("wasp paralyze venom").addStats( {"str":-2, "spe":-2, "tou":-4} ).withText("wasp paralyze venom").combatPermanent();
+			} else {
+				outputText("  It's getting much harder to move, you're not sure how many more darts like that you can take!");
+				player.buff("wasp paralyze venom").addStats( {"str":-2, "spe":-2, "tou":-4} ).withText("wasp paralyze venom").combatPermanent();
 			}
+			var damage:int = 0;
+			damage += (str + rand(20));
+			player.takePhysDamage(damage, true);
+			player.takePhysDamage(damage, true);
+			player.takePhysDamage(damage, true);
+			player.takePhysDamage(damage, true);
+			player.takePhysDamage(damage, true);
+			player.takePhysDamage(damage, true);
 		}
-
+		
 		public function waspStingAttack():void {
 			//Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind)) {
@@ -65,12 +56,12 @@ import classes.internals.ChainedDrop;
 			//Sting successful!  Paralize or lust?
 			//Lust 50% of the time
 			if (rand(2) == 0) {
-				outputText("Searing pain lances through you as " + a + short + " manages to sting you!  You stagger back a step and nearly trip, flushing hotly.  ");
+				outputText("Searing pain lances through you as " + a + short + " manages to sting you multiple times!  You stagger back a step and nearly trip, flushing hotly.  ");
 				outputText("Oh no!  You've been injected with some kind of aphrodisiac.  You've got to keep focused, you can't think about... fucking... ");
 				if (player.gender == 1) outputText("or dripping honey-slicked cunts beckoning you. ");
 				if (player.gender == 2) outputText("planting your aching sex over her face while you lick her sweet honeypot. ");
 				if (player.gender == 3) outputText("or cocks, tits, and puffy nipples. ");
-				player.takeLustDamage(50, true);
+				player.takeLustDamage(40, true);
 				if (player.lust > player.lust100 * 0.6) {
 					outputText(" You shake your head and struggle to stay focused,");
 					if (player.gender == 1 || player.gender == 3) outputText(" but it's difficult with the sensitive bulge in your groin.");
@@ -82,13 +73,13 @@ import classes.internals.ChainedDrop;
 			}
 			//Paralise the other 50%!
 			else {
-				outputText("Searing pain lances through you as " + a + short + " manages to sting you!  You stagger back a step and nearly trip, finding it hard to move yourself.");
+				outputText("Searing pain lances through you as " + a + short + " manages to sting you multiple times!  You stagger back a step and nearly trip, finding it hard to move yourself.");
 				if (player.buff("wasp paralyze venom").isPresent()) {
 					outputText("  You've fallen prey to paralyzation venom!  Better end this quick!");
-					player.buff("wasp paralyze venom").addStats( {"str":-6, "spe":-6} ).withText("wasp paralyze venom").combatPermanent();
+					player.buff("wasp paralyze venom").addStats( {"str":-10, "spe":-10, "tou":-20} ).withText("wasp paralyze venom").combatPermanent();
 				} else {
 					outputText("  It's getting much harder to move, you're not sure how many more stings like that you can take!");
-					player.buff("wasp paralyze venom").addStats( {"str":-6, "spe":-6} ).withText("wasp paralyze venom").combatPermanent();
+					player.buff("wasp paralyze venom").addStats( {"str":-10, "spe":-10, "tou":-20} ).withText("wasp paralyze venom").combatPermanent();
 				}
 			}
 			if (player.lust >= player.maxOverLust() && !SceneLib.combat.tyrantiaTrainingExtension()) doNext(SceneLib.combat.endLustLoss);
@@ -99,7 +90,7 @@ import classes.internals.ChainedDrop;
 		{
 			var choice:Number = rand(4);
 			if (choice == 0) waspStingAttack();
-			if (choice == 1) waspSpearAttack();
+			if (choice == 1) waspBarrageOfDarts();
 			if (choice >= 2) eAttack();
 		}
 
@@ -109,7 +100,7 @@ import classes.internals.ChainedDrop;
 			this.a = "a ";
 			this.short = "wasp girl";
 			this.imageName = "beegirl";
-			this.long = "A wasp girl buzzes around you, filling the air with intoxicatingly sweet scents and a buzz that gets inside your head.  She has a humanoid face with small antennae, black chitin on her arms and legs that looks like shiny gloves and boots, sizable breasts, and a swollen abdomen tipped with a gleaming stinger.";
+			this.long = "A wasp girl buzzes around you, filling the air with intoxicatingly sweet scents and a buzz that gets inside your head.  She has a humanoid face with small antennae, black chitin on her slim quad arms and legs that looks like shiny gloves and boots, sizable breasts, and an abdomen tipped with a gleaming stinger.";
 			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_GAPING);
 			createBreastRow(Appearance.breastCupInverse("D"));
 			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;

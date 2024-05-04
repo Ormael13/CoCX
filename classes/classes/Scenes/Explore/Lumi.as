@@ -416,33 +416,55 @@ public class Lumi extends BaseContent {
 	}
 	public function lumiEngineeringMechUpgrades():void {
 		menu();
-		if (player.hasKeyItem("Upgraded Armor plating 3.0") < 0 && player.hasKeyItem("Blueprint - Upgraded Armor plating 3.0") < 0) addButton(0, "UpgrArmor 3.0", lumiEngineeringBuyBlueprintUpgradedArmorPlating3).hint("Upgraded Armor plating 3.0 BP - 1000 gems");
-		if (player.hasKeyItem("Upgraded Armor plating 2.0") < 0 && player.hasKeyItem("Upgraded Armor plating 3.0") < 0 && player.hasKeyItem("Blueprint - Upgraded Armor plating 2.0") < 0) addButton(0, "UpgrArmor 2.0", lumiEngineeringBuyBlueprintUpgradedArmorPlating2).hint("Upgraded Armor plating 2.0 BP - 500 gems");
-		if (player.hasKeyItem("Upgraded Armor plating 1.0") < 0 && player.hasKeyItem("Upgraded Armor plating 2.0") < 0 && player.hasKeyItem("Upgraded Armor plating 3.0") < 0 && player.hasKeyItem("Blueprint - Upgraded Armor plating 1.0") < 0) addButton(0, "UpgrArmor 1.0", lumiEngineeringBuyBlueprintUpgradedArmorPlating1).hint("Upgraded Armor plating 1.0 BP - 100 gems");
+		if (player.hasKeyItem("Upgraded Armor plating 6.0") < 0 && player.hasKeyItem("Blueprint - Upgraded Armor plating 6.0") < 0) addButton(0, "UpgrArmor 6.0", lumiEngineeringBuyBlueprintUpgradedArmorPlating6).hint("Upgraded Armor plating 6.0 BP - 2500 gems");
+		if (player.hasKeyItem("Upgraded Armor plating 5.0") < 0 && player.hasKeyItem("Upgraded Armor plating 6.0") < 0 && player.hasKeyItem("Blueprint - Upgraded Armor plating 5.0") < 0) addButton(0, "UpgrArmor 5.0", lumiEngineeringBuyBlueprintUpgradedArmorPlating5).hint("Upgraded Armor plating 5.0 BP - 2000 gems");
+		if (player.hasKeyItem("Upgraded Armor plating 4.0") < 0 && player.hasKeyItem("Upgraded Armor plating 5.0") < 0 && player.hasKeyItem("Upgraded Armor plating 6.0") < 0 && player.hasKeyItem("Blueprint - Upgraded Armor plating 4.0") < 0) addButton(0, "UpgrArmor 4.0", lumiEngineeringBuyBlueprintUpgradedArmorPlating4).hint("Upgraded Armor plating 4.0 BP - 1500 gems");
+		if (player.hasKeyItem("Upgraded Armor plating 3.0") < 0 && player.hasKeyItem("Upgraded Armor plating 4.0") < 0 && player.hasKeyItem("Upgraded Armor plating 5.0") < 0 && player.hasKeyItem("Upgraded Armor plating 6.0") < 0 && player.hasKeyItem("Blueprint - Upgraded Armor plating 3.0") < 0) addButton(0, "UpgrArmor 3.0", lumiEngineeringBuyBlueprintUpgradedArmorPlating3).hint("Upgraded Armor plating 3.0 BP - 1000 gems");
+		if (player.hasKeyItem("Upgraded Armor plating 2.0") < 0 && player.hasKeyItem("Upgraded Armor plating 3.0") < 0 && player.hasKeyItem("Upgraded Armor plating 4.0") < 0 && player.hasKeyItem("Upgraded Armor plating 5.0") < 0 && player.hasKeyItem("Upgraded Armor plating 6.0") < 0 && player.hasKeyItem("Blueprint - Upgraded Armor plating 2.0") < 0) addButton(0, "UpgrArmor 2.0", lumiEngineeringBuyBlueprintUpgradedArmorPlating2).hint("Upgraded Armor plating 2.0 BP - 500 gems");
+		if (player.hasKeyItem("Upgraded Armor plating 1.0") < 0 && player.hasKeyItem("Upgraded Armor plating 2.0") < 0 && player.hasKeyItem("Upgraded Armor plating 3.0") < 0 && player.hasKeyItem("Upgraded Armor plating 4.0") < 0 && player.hasKeyItem("Upgraded Armor plating 5.0") < 0 && player.hasKeyItem("Upgraded Armor plating 6.0") < 0 && player.hasKeyItem("Blueprint - Upgraded Armor plating 1.0") < 0) addButton(0, "UpgrArmor 1.0", lumiEngineeringBuyBlueprintUpgradedArmorPlating1).hint("Upgraded Armor plating 1.0 BP - 100 gems");
 		if (player.hasKeyItem("Taser with an overcharged battery") < 0 && player.hasKeyItem("Blueprint - Taser with an overcharged battery") < 0) addButton(1, "Taser O.B.", lumiEngineeringBuyBlueprintTaserOverchargeBattery).hint("Taser overcharge battery BP - 1000 gems");
 		if (player.hasKeyItem("Taser") < 0 && player.hasKeyItem("Taser with an overcharged battery") < 0 && player.hasKeyItem("Blueprint - Taser") < 0) addButton(1, "Taser", lumiEngineeringBuyBlueprintTaser).hint("Taser BP - 500 gems");
 		if (player.hasKeyItem("Safety bubble") < 0 && player.hasKeyItem("Blueprint - Safety bubble") < 0) addButton(2, "Safety bubble", lumiEngineeringBuyBlueprintSafetyBubble).hint("Safety bubble BP - 100 gems");
-		if (player.hasKeyItem("Machine Gun MK3") < 0 && player.hasKeyItem("Blueprint - Machine Gun MK3") < 0) addButton(3, "Machine Gun MK3", lumiEngineeringBuyBlueprintMachineGunMK3).hint("Machine Gun MK3 BP - 2000 gems");
-		if (player.hasKeyItem("Machine Gun MK2") < 0 && player.hasKeyItem("Machine Gun MK3") < 0 && player.hasKeyItem("Blueprint - Machine Gun MK2") < 0) addButton(3, "Machine Gun MK2", lumiEngineeringBuyBlueprintMachineGunMK2).hint("Machine Gun MK2 BP - 1000 gems");
-		if (player.hasKeyItem("Machine Gun MK1") < 0 && player.hasKeyItem("Machine Gun MK2") < 0 && player.hasKeyItem("Machine Gun MK3") < 0 && player.hasKeyItem("Blueprint - Machine Gun MK1") < 0) addButton(3, "Machine Gun MK1", lumiEngineeringBuyBlueprintMachineGunMK1).hint("Machine Gun MK1 BP - 500 gems");
-		if (player.hasKeyItem("Repeater Gun") < 0 && player.hasKeyItem("Machine Gun MK1") < 0 && player.hasKeyItem("Machine Gun MK2") < 0 && player.hasKeyItem("Machine Gun MK3") < 0 && player.hasKeyItem("Blueprint - Repeater Gun") < 0) addButton(3, "Repeater Gun", lumiEngineeringBuyBlueprintRepeaterGun).hint("Repeater Gun BP - 100 gems");
-		if (player.hasKeyItem("Dynapunch Glove") < 0 && player.hasKeyItem("Blueprint - Dynapunch Glove") < 0) addButton(4, "Dynapunch G.", lumiEngineeringBuyBlueprintDynapunchGlove).hint("Dynapunch Glove BP - 500 gems");
-		if (player.hasKeyItem("Whitefire Beam Cannon") < 0 && player.hasKeyItem("Blueprint - Whitefire Beam Cannon") < 0) addButton(5, "Whitefire B.C.", lumiEngineeringBuyBlueprintWhitefireBeamCannon).hint("Whitefire Beam Cannon BP - 1000 gems");
-		if (player.hasKeyItem("Snowball Generator") < 0 && player.hasKeyItem("Blueprint - Snowball Generator") < 0) addButton(6, "Snowball G.", lumiEngineeringBuyBlueprintSnowballGenerator).hint("Snowball Generator BP - 1000 gems");
-		if (player.hasKeyItem("Raijin blaster") < 0 && player.hasKeyItem("Blueprint - Raijin blaster") < 0 && player.hasKeyItem("Taser with an overcharged battery") >= 0) addButton(7, "Raijin blaster", lumiEngineeringBuyBlueprintRaijinBlaster).hint("Raijin blaster BP - 1500 gems");
-		if (player.hasKeyItem("Gravity shots") < 0 && player.hasKeyItem("Blueprint - Gravity shots") < 0 && player.hasKeyItem("MK2 Jetpack") >= 0) addButton(8, "Gravity shots", lumiEngineeringBuyBlueprintGravityShots).hint("Gravity shots - 1000 gems");
-		if (player.hasKeyItem("Medical Dispenser 2.0") < 0 && player.hasKeyItem("Blueprint - Medical Dispenser 2.0") < 0) addButton(9, "Medical Dispenser 2.0", lumiEngineeringBuyBlueprintMedicalDispenser2).hint("Medical Dispenser 2.0 BP - 500 gems");
-		if (player.hasKeyItem("Stimpack Dispenser 1.0") < 0 && player.hasKeyItem("Medical Dispenser 2.0") < 0 && player.hasKeyItem("Blueprint - Stimpack Dispenser 1.0") < 0) addButton(9, "Stimpack Dispenser 1.0", lumiEngineeringBuyBlueprintStimpackDispenser1).hint("Stimpack Dispenser 1.0 BP - 100 gems");
-		if (player.hasKeyItem("Omni Missile") < 0 && player.hasKeyItem("Blueprint - Omni Missile") < 0) addButton(10, "Omni Missile", lumiEngineeringBuyBlueprintOmniMissile).hint("Omni Missile BP - 1000 gems");
-		if (player.hasKeyItem("Missile launcher") < 0 && player.hasKeyItem("Omni Missile") < 0 && player.hasKeyItem("Blueprint - Missile launcher") < 0) addButton(10, "Missile launcher", lumiEngineeringBuyBlueprintMissileLauncher).hint("Missile launcher BP - 500 gems");
-		if (player.hasKeyItem("Lustnade Launcher") < 0 && player.hasKeyItem("Blueprint - Lustnade Launcher") < 0) addButton(11, "Lustnade Launcher", lumiEngineeringBuyBlueprintLustnadeLauncher).hint("Lustnade Launcher BP - 1000 gems");
-		if (player.hasKeyItem("Aphrodigas Gun") < 0 && player.hasKeyItem("Lustnade Launcher") < 0 && player.hasKeyItem("Blueprint - Aphrodigas Gun") < 0) addButton(11, "Aphrodigas Gun", lumiEngineeringBuyBlueprintAphrodigasGun).hint("Aphrodigas Gun BP - 10 gems");
-		if (player.hasKeyItem("Impregnator 1.0") < 0 && player.hasKeyItem("Blueprint - Impregnator 1.0") < 0) addButton(12, "Impregnator 1.0", lumiEngineeringBuyBlueprintImpregnator1).hint("Impregnator 1.0 BP - 100 gems");
-		if (player.hasKeyItem("SPMK1") < 0 && player.hasKeyItem("Impregnator 1.0") < 0 && player.hasKeyItem("Blueprint - SPMK1") < 0) addButton(12, "SPMK1", lumiEngineeringBuyBlueprintSPMK1).hint("SPMK1 BP - 100 gems");
-		if (player.hasKeyItem("Cum Reservoir") < 0 && player.hasKeyItem("SPMK1") < 0 && player.hasKeyItem("Impregnator 1.0") < 0 && player.hasKeyItem("Blueprint - Cum Reservoir") < 0) addButton(12, "Cum Reservoir", lumiEngineeringBuyBlueprintCumReservoir).hint("Cum Reservoir BP - 100 gems");
-		if (player.hasKeyItem("MK2 Jetpack") < 0 && player.hasKeyItem("Blueprint - MK2 Jetpack") < 0) addButton(13, "MK2 Jetpack", lumiEngineeringBuyBlueprintMK2Jetpack).hint("MK2 Jetpack BP - 500 gems");
-		if (player.hasKeyItem("Jetpack") < 0 && player.hasKeyItem("MK2 Jetpack") < 0 && player.hasKeyItem("Blueprint - Jetpack") < 0) addButton(13, "Jetpack", lumiEngineeringBuyBlueprintJetpack).hint("Jetpack BP - 100 gems");
+		if (player.hasKeyItem("Dynapunch Glove") < 0 && player.hasKeyItem("Blueprint - Dynapunch Glove") < 0) addButton(3, "Dynapunch G.", lumiEngineeringBuyBlueprintDynapunchGlove).hint("Dynapunch Glove BP - 500 gems");
+		if (player.hasKeyItem("Improved Artificial Intelligence") < 0 && player.hasKeyItem("Blueprint - Artificial Intelligence") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence") < 0) addButton(4, "Improved AI", lumiEngineeringBuyBlueprintImprovedArtificialIntelligence).hint("Improved Artificial Intelligence BP - 500 gems");
+		if (player.hasKeyItem("Artificial Intelligence") < 0 && player.hasKeyItem("Blueprint - Artificial Intelligence") < 0) addButton(4, "AI", lumiEngineeringBuyBlueprintArtificialIntelligence).hint("Artificial Intelligence BP - 500 gems");
+		//5
+		//6
+		//7
+		if (player.hasKeyItem("Medical Dispenser 2.0") < 0 && player.hasKeyItem("Blueprint - Medical Dispenser 2.0") < 0) addButton(0, "Medical Dispenser 2.0", lumiEngineeringBuyBlueprintMedicalDispenser2).hint("Medical Dispenser 2.0 BP - 500 gems");
+		if (player.hasKeyItem("Stimpack Dispenser 1.0") < 0 && player.hasKeyItem("Medical Dispenser 2.0") < 0 && player.hasKeyItem("Blueprint - Stimpack Dispenser 1.0") < 0) addButton(0, "Stimpack Dispenser 1.0", lumiEngineeringBuyBlueprintStimpackDispenser1).hint("Stimpack Dispenser 1.0 BP - 100 gems");
+		if (player.hasKeyItem("Omni Missile") < 0 && player.hasKeyItem("Blueprint - Omni Missile") < 0) addButton(9, "Omni Missile", lumiEngineeringBuyBlueprintOmniMissile).hint("Omni Missile BP - 1000 gems");
+		if (player.hasKeyItem("Missile launcher") < 0 && player.hasKeyItem("Omni Missile") < 0 && player.hasKeyItem("Blueprint - Missile launcher") < 0) addButton(9, "Missile launcher", lumiEngineeringBuyBlueprintMissileLauncher).hint("Missile launcher BP - 500 gems");
+		if (player.hasKeyItem("Lustnade Launcher") < 0 && player.hasKeyItem("Blueprint - Lustnade Launcher") < 0) addButton(10, "Lustnade Launcher", lumiEngineeringBuyBlueprintLustnadeLauncher).hint("Lustnade Launcher BP - 1000 gems");
+		if (player.hasKeyItem("Aphrodigas Gun") < 0 && player.hasKeyItem("Lustnade Launcher") < 0 && player.hasKeyItem("Blueprint - Aphrodigas Gun") < 0) addButton(10, "Aphrodigas Gun", lumiEngineeringBuyBlueprintAphrodigasGun).hint("Aphrodigas Gun BP - 10 gems");
+		if (player.hasKeyItem("Impregnator 1.0") < 0 && player.hasKeyItem("Blueprint - Impregnator 1.0") < 0) addButton(11, "Impregnator 1.0", lumiEngineeringBuyBlueprintImpregnator1).hint("Impregnator 1.0 BP - 100 gems");
+		if (player.hasKeyItem("SPMK1") < 0 && player.hasKeyItem("Impregnator 1.0") < 0 && player.hasKeyItem("Blueprint - SPMK1") < 0) addButton(11, "SPMK1", lumiEngineeringBuyBlueprintSPMK1).hint("SPMK1 BP - 100 gems");
+		if (player.hasKeyItem("Cum Reservoir") < 0 && player.hasKeyItem("SPMK1") < 0 && player.hasKeyItem("Impregnator 1.0") < 0 && player.hasKeyItem("Blueprint - Cum Reservoir") < 0) addButton(11, "Cum Reservoir", lumiEngineeringBuyBlueprintCumReservoir).hint("Cum Reservoir BP - 100 gems");
+		if (player.hasKeyItem("MK2 Jetpack") < 0 && player.hasKeyItem("Blueprint - MK2 Jetpack") < 0) addButton(12, "MK2 Jetpack", lumiEngineeringBuyBlueprintMK2Jetpack).hint("MK2 Jetpack BP - 500 gems");
+		if (player.hasKeyItem("Jetpack") < 0 && player.hasKeyItem("MK2 Jetpack") < 0 && player.hasKeyItem("Blueprint - Jetpack") < 0) addButton(12, "Jetpack", lumiEngineeringBuyBlueprintJetpack).hint("Jetpack BP - 100 gems");
+		addButton(13, "-2-", lumiEngineeringMechUpgrades2);
 		addButton(14, "Back", lumiEngineering);
+	}
+	public function lumiEngineeringMechUpgrades2():void {
+		menu();
+		if (player.hasKeyItem("Machine Gun MK6") < 0 && player.hasKeyItem("Blueprint - Machine Gun MK6") < 0) addButton(0, "Machine Gun MK6", lumiEngineeringBuyBlueprintMachineGunMK6).hint("Machine Gun MK6 BP - 5000 gems");
+		if (player.hasKeyItem("Machine Gun MK5") < 0 && player.hasKeyItem("Machine Gun MK6") < 0 && player.hasKeyItem("Blueprint - Machine Gun MK5") < 0) addButton(0, "Machine Gun MK5", lumiEngineeringBuyBlueprintMachineGunMK5).hint("Machine Gun MK5 BP - 4000 gems");
+		if (player.hasKeyItem("Machine Gun MK4") < 0 && player.hasKeyItem("Machine Gun MK5") < 0 && player.hasKeyItem("Machine Gun MK6") < 0 && player.hasKeyItem("Blueprint - Machine Gun MK4") < 0) addButton(0, "Machine Gun MK4", lumiEngineeringBuyBlueprintMachineGunMK4).hint("Machine Gun MK4 BP - 3000 gems");
+		if (player.hasKeyItem("Machine Gun MK3") < 0 && player.hasKeyItem("Machine Gun MK4") < 0 && player.hasKeyItem("Machine Gun MK5") < 0 && player.hasKeyItem("Machine Gun MK6") < 0 && player.hasKeyItem("Blueprint - Machine Gun MK3") < 0) addButton(0, "Machine Gun MK3", lumiEngineeringBuyBlueprintMachineGunMK3).hint("Machine Gun MK3 BP - 2000 gems");
+		if (player.hasKeyItem("Machine Gun MK2") < 0 && player.hasKeyItem("Machine Gun MK3") < 0 && player.hasKeyItem("Machine Gun MK4") < 0 && player.hasKeyItem("Machine Gun MK5") < 0 && player.hasKeyItem("Machine Gun MK6") < 0 && player.hasKeyItem("Blueprint - Machine Gun MK2") < 0) addButton(0, "Machine Gun MK2", lumiEngineeringBuyBlueprintMachineGunMK2).hint("Machine Gun MK2 BP - 1000 gems");
+		if (player.hasKeyItem("Machine Gun MK1") < 0 && player.hasKeyItem("Machine Gun MK2") < 0 && player.hasKeyItem("Machine Gun MK3") < 0 && player.hasKeyItem("Machine Gun MK4") < 0 && player.hasKeyItem("Machine Gun MK5") < 0 && player.hasKeyItem("Machine Gun MK6") < 0 && player.hasKeyItem("Blueprint - Machine Gun MK1") < 0) addButton(0, "Machine Gun MK1", lumiEngineeringBuyBlueprintMachineGunMK1).hint("Machine Gun MK1 BP - 500 gems");
+		if (player.hasKeyItem("Repeater Gun") < 0 && player.hasKeyItem("Machine Gun MK1") < 0 && player.hasKeyItem("Machine Gun MK2") < 0 && player.hasKeyItem("Machine Gun MK3") < 0 && player.hasKeyItem("Machine Gun MK4") < 0 && player.hasKeyItem("Machine Gun MK5") < 0 && player.hasKeyItem("Machine Gun MK6") < 0 && player.hasKeyItem("Blueprint - Repeater Gun") < 0) addButton(0, "Repeater Gun", lumiEngineeringBuyBlueprintRepeaterGun).hint("Repeater Gun BP - 100 gems");
+		if (player.hasKeyItem("Whitefire Beam Cannon") < 0 && player.hasKeyItem("Blueprint - Whitefire Beam Cannon") < 0) addButton(1, "Whitefire B.C.", lumiEngineeringBuyBlueprintWhitefireBeamCannon).hint("Whitefire Beam Cannon BP - 1000 gems");
+		if (player.hasKeyItem("Snowball Generator") < 0 && player.hasKeyItem("Blueprint - Snowball Generator") < 0) addButton(2, "Snowball G.", lumiEngineeringBuyBlueprintSnowballGenerator).hint("Snowball Generator BP - 1000 gems");
+		if (player.hasKeyItem("Raijin blaster") < 0 && player.hasKeyItem("Blueprint - Raijin blaster") < 0 && player.hasKeyItem("Taser with an overcharged battery") >= 0) addButton(3, "Raijin blaster", lumiEngineeringBuyBlueprintRaijinBlaster).hint("Raijin blaster BP - 1500 gems");
+		if (player.hasKeyItem("Gravity shots") < 0 && player.hasKeyItem("Blueprint - Gravity shots") < 0 && player.hasKeyItem("MK2 Jetpack") >= 0) addButton(4, "Gravity shots", lumiEngineeringBuyBlueprintGravityShots).hint("Gravity shots - 1000 gems");
+		if (player.hasKeyItem("Auto turret MK6") < 0 && player.hasKeyItem("Blueprint - Auto turret MK6") < 0) addButton(5, "Auto turret MK6", lumiEngineeringBuyBlueprintAutoTurretMK6).hint("Auto turret MK6 BP - 3000 gems");
+		if (player.hasKeyItem("Auto turret MK5") < 0 && player.hasKeyItem("Blueprint - Auto turret MK5") < 0 && player.hasKeyItem("Blueprint - Auto turret MK6") < 0) addButton(5, "Auto turret MK5", lumiEngineeringBuyBlueprintAutoTurretMK5).hint("Auto turret MK5 BP - 2500 gems");
+		if (player.hasKeyItem("Auto turret MK4") < 0 && player.hasKeyItem("Blueprint - Auto turret MK4") < 0 && player.hasKeyItem("Blueprint - Auto turret MK5") < 0 && player.hasKeyItem("Blueprint - Auto turret MK6") < 0) addButton(5, "Auto turret MK4", lumiEngineeringBuyBlueprintAutoTurretMK4).hint("Auto turret MK4 BP - 2000 gems");
+		if (player.hasKeyItem("Auto turret MK3") < 0 && player.hasKeyItem("Blueprint - Auto turret MK3") < 0 && player.hasKeyItem("Blueprint - Auto turret MK4") < 0 && player.hasKeyItem("Blueprint - Auto turret MK5") < 0 && player.hasKeyItem("Blueprint - Auto turret MK6") < 0) addButton(5, "Auto turret MK3", lumiEngineeringBuyBlueprintAutoTurretMK3).hint("Auto turret MK3 BP - 1500 gems");
+		if (player.hasKeyItem("Auto turret MK2") < 0 && player.hasKeyItem("Blueprint - Auto turret MK2") < 0 && player.hasKeyItem("Blueprint - Auto turret MK3") < 0 && player.hasKeyItem("Blueprint - Auto turret MK4") < 0 && player.hasKeyItem("Blueprint - Auto turret MK5") < 0 && player.hasKeyItem("Blueprint - Auto turret MK6") < 0) addButton(5, "Auto turret MK2", lumiEngineeringBuyBlueprintAutoTurretMK2).hint("Auto turret MK2 BP - 1000 gems");
+		if (player.hasKeyItem("Auto turret") < 0 && player.hasKeyItem("Blueprint - Auto turret") < 0 && player.hasKeyItem("Blueprint - Auto turret MK2") < 0 && player.hasKeyItem("Blueprint - Auto turret MK3") < 0 && player.hasKeyItem("Blueprint - Auto turret MK4") < 0 && player.hasKeyItem("Blueprint - Auto turret MK5") < 0 && player.hasKeyItem("Blueprint - Auto turret MK6") < 0) addButton(5, "Auto turret", lumiEngineeringBuyBlueprintAutoTurret).hint("Auto turret BP - 500 gems");
+		addButton(14, "Back", lumiEngineeringMechUpgrades);
 	}
 	public function lumiEngineeringBuyBlueprintToolbelt():void {
 		clearOutput();
@@ -691,6 +713,45 @@ public class Lumi extends BaseContent {
 		}
 		else lumiEngineeringBuyBlueprintNotEnoughGems();
 	}
+	public function lumiEngineeringBuyBlueprintUpgradedArmorPlating6():void {
+		clearOutput();
+		if (player.gems >= 2500) {
+			player.gems -= 2500;
+			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
+			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
+			outputText("<b>Gained Key Item: Blueprint - Upgraded Armor plating 6.0!</b>");
+			player.createKeyItem("Blueprint - Upgraded Armor plating 6.0", 0, 0, 0, 0);
+			statScreenRefresh();
+			doNext(lumiEngineering);
+		}
+		else lumiEngineeringBuyBlueprintNotEnoughGems();
+	}
+	public function lumiEngineeringBuyBlueprintUpgradedArmorPlating5():void {
+		clearOutput();
+		if (player.gems >= 2000) {
+			player.gems -= 2000;
+			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
+			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
+			outputText("<b>Gained Key Item: Blueprint - Upgraded Armor plating 5.0!</b>");
+			player.createKeyItem("Blueprint - Upgraded Armor plating 5.0", 0, 0, 0, 0);
+			statScreenRefresh();
+			doNext(lumiEngineering);
+		}
+		else lumiEngineeringBuyBlueprintNotEnoughGems();
+	}
+	public function lumiEngineeringBuyBlueprintUpgradedArmorPlating4():void {
+		clearOutput();
+		if (player.gems >= 1500) {
+			player.gems -= 1500;
+			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
+			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
+			outputText("<b>Gained Key Item: Blueprint - Upgraded Armor plating 4.0!</b>");
+			player.createKeyItem("Blueprint - Upgraded Armor plating 4.0", 0, 0, 0, 0);
+			statScreenRefresh();
+			doNext(lumiEngineering);
+		}
+		else lumiEngineeringBuyBlueprintNotEnoughGems();
+	}
 	public function lumiEngineeringBuyBlueprintUpgradedArmorPlating3():void {
 		clearOutput();
 		if (player.gems >= 1000) {
@@ -764,6 +825,45 @@ public class Lumi extends BaseContent {
 			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
 			outputText("<b>Gained Key Item: Blueprint - Safety bubble!</b>");
 			player.createKeyItem("Blueprint - Safety bubble", 0, 0, 0, 0);
+			statScreenRefresh();
+			doNext(lumiEngineering);
+		}
+		else lumiEngineeringBuyBlueprintNotEnoughGems();
+	}
+	public function lumiEngineeringBuyBlueprintMachineGunMK6():void {
+		clearOutput();
+		if (player.gems >= 5000) {
+			player.gems -= 5000;
+			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
+			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
+			outputText("<b>Gained Key Item: Blueprint - Machine Gun MK6!</b>");
+			player.createKeyItem("Blueprint - Machine Gun MK6", 0, 0, 0, 0);
+			statScreenRefresh();
+			doNext(lumiEngineering);
+		}
+		else lumiEngineeringBuyBlueprintNotEnoughGems();
+	}
+	public function lumiEngineeringBuyBlueprintMachineGunMK5():void {
+		clearOutput();
+		if (player.gems >= 4000) {
+			player.gems -= 4000;
+			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
+			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
+			outputText("<b>Gained Key Item: Blueprint - Machine Gun MK5!</b>");
+			player.createKeyItem("Blueprint - Machine Gun MK5", 0, 0, 0, 0);
+			statScreenRefresh();
+			doNext(lumiEngineering);
+		}
+		else lumiEngineeringBuyBlueprintNotEnoughGems();
+	}
+	public function lumiEngineeringBuyBlueprintMachineGunMK4():void {
+		clearOutput();
+		if (player.gems >= 3000) {
+			player.gems -= 3000;
+			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
+			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
+			outputText("<b>Gained Key Item: Blueprint - Machine Gun MK4!</b>");
+			player.createKeyItem("Blueprint - Machine Gun MK4", 0, 0, 0, 0);
 			statScreenRefresh();
 			doNext(lumiEngineering);
 		}
@@ -1028,20 +1128,31 @@ public class Lumi extends BaseContent {
 			doNext(lumiEngineering);
 		}
 		else lumiEngineeringBuyBlueprintNotEnoughGems();
-	}/*
-	public function lumiEngineeringBuyBlueprintToolbelt():void {
-		clearOutput();
-		if (player.gems >= 50) {
-			player.gems -= 100;
-			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
-			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
-			outputText("<b>Gained Key Item: Blueprint - Toolbelt!</b>");
-			player.createKeyItem("Blueprint - Toolbelt", 0, 0, 0, 0);
-			statScreenRefresh();
-			doNext(lumiEngineering);
-		}
-		else lumiEngineeringBuyBlueprintNotEnoughGems();
-	}*/
+	}
+	public function lumiEngineeringBuyBlueprintArtificialIntelligence():void {
+		lumiEngineeringBuyBlueprintSharedPart(500, "Artificial Intelligence");
+	}
+	public function lumiEngineeringBuyBlueprintImprovedArtificialIntelligence():void {
+		lumiEngineeringBuyBlueprintSharedPart(500, "Improved Artificial Intelligence");
+	}
+	public function lumiEngineeringBuyBlueprintAutoTurret():void {
+		lumiEngineeringBuyBlueprintSharedPart(500, "Auto turret");
+	}
+	public function lumiEngineeringBuyBlueprintAutoTurretMK2():void {
+		lumiEngineeringBuyBlueprintSharedPart(1000, "Auto turret MK2");
+	}
+	public function lumiEngineeringBuyBlueprintAutoTurretMK3():void {
+		lumiEngineeringBuyBlueprintSharedPart(1500, "Auto turret MK3");
+	}
+	public function lumiEngineeringBuyBlueprintAutoTurretMK4():void {
+		lumiEngineeringBuyBlueprintSharedPart(2000, "Auto turret MK4");
+	}
+	public function lumiEngineeringBuyBlueprintAutoTurretMK5():void {
+		lumiEngineeringBuyBlueprintSharedPart(2500, "Auto turret MK5");
+	}
+	public function lumiEngineeringBuyBlueprintAutoTurretMK6():void {
+		lumiEngineeringBuyBlueprintSharedPart(3000, "Auto turret MK6");
+	}
 	public function lumiEngineeringBuyBlueprintEnergyCore():void {
 		clearOutput();
 		if (player.gems >= 50) {
@@ -1063,6 +1174,19 @@ public class Lumi extends BaseContent {
 			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
 			outputText("<b>Gained Key Item: Blueprint - Mechanism!</b>");
 			player.createKeyItem("Blueprint - Mechanism", 0, 0, 0, 0);
+			statScreenRefresh();
+			doNext(lumiEngineering);
+		}
+		else lumiEngineeringBuyBlueprintNotEnoughGems();
+	}
+	public function lumiEngineeringBuyBlueprintSharedPart(cost:Number, itemName:String):void {
+		clearOutput();
+		if (player.gems >= cost) {
+			player.gems -= cost;
+			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
+			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
+			outputText("<b>Gained Key Item: Blueprint - "+itemName+"!</b>");
+			player.createKeyItem("Blueprint - "+itemName+"", 0, 0, 0, 0);
 			statScreenRefresh();
 			doNext(lumiEngineering);
 		}
@@ -1230,21 +1354,24 @@ public class Lumi extends BaseContent {
 		}
 	}
 	public function lumiWorkshopMechUpgrades():void {
-		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 3.0") >= 0) outputText("Upgraded Armor plating 3.0 - Req. 100+ int, Upgraded Armor plating 2.0, 20 metal pieces, 500 nails.\n");
+		clearOutput();
+		SceneLib.camp.campUpgrades.checkMaterials();
+		outputText("Metal Pieces: " + CampStatsAndResources.MetalPieces + "/200" + "\n");
+		outputText("Mechanisms: " + CampStatsAndResources.MechanismResc + "/200" + "\n");
+		outputText("Energy Cores: " + CampStatsAndResources.EnergyCoreResc + "/200" + "\n");
+		outputText("\nWhich blueprints will you work on today?\n\n");
+		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 6.0") >= 0) outputText("Upgraded Armor plating 6.0 - Req. 175+ int, Upgraded Armor plating 5.0, 30 metal pieces, 700 nails.\n");
+		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 5.0") >= 0) outputText("Upgraded Armor plating 5.0 - Req. 150+ int, Upgraded Armor plating 4.0, 25 metal pieces, 600 nails.\n");
+		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 4.0") >= 0) outputText("Upgraded Armor plating 4.0 - Req. 125+ int, Upgraded Armor plating 3.0, 20 metal pieces, 500 nails.\n");
+		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 3.0") >= 0) outputText("Upgraded Armor plating 3.0 - Req. 100+ int, Upgraded Armor plating 2.0, 15 metal pieces, 400 nails.\n");
 		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 2.0") >= 0) outputText("Upgraded Armor plating 2.0 - Req. 75+ int, Upgraded Armor plating 1.0, 10 metal pieces, 300 nails.\n");
 		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 1.0") >= 0) outputText("Upgraded Armor plating 1.0 - Req. 50+ int, 5 metal pieces, 200 nails.\n");
 		if (player.hasKeyItem("Blueprint - Taser with an overcharged battery") >= 0) outputText("Taser with an overcharged battery - Req. 100+ int, Tazer, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core.\n");
 		if (player.hasKeyItem("Blueprint - Taser") >= 0) outputText("Taser - Req. 75+ int, Toolbelt, 10 metal pieces, 300 nails, 1 mechanism, 1 energy core.\n");
 		if (player.hasKeyItem("Blueprint - Safety bubble") >= 0) outputText("Safety bubble - Req. 1 metal pieces, 100 nails, 1 energy core.\n");
-		if (player.hasKeyItem("Blueprint - Machine Gun MK3") >= 0) outputText("Machine Gun MK3 - Req. 125+ int, 15 metal pieces, 500 nails, 10 mechanism.\n");
-		if (player.hasKeyItem("Blueprint - Machine Gun MK2") >= 0) outputText("Machine Gun MK2 - Req. 100+ int, 10 metal pieces, 500 nails, 5 mechanism.\n");
-		if (player.hasKeyItem("Blueprint - Machine Gun MK1") >= 0) outputText("Machine Gun MK1 - Req. 75+ int, 10 metal pieces, 200 nails, 5 mechanism.\n");
+		if (player.hasKeyItem("Blueprint - Improved Artificial Intelligence") >= 0) outputText("Improved Artificial Intelligence - Req. 50+ int, 1 energy core.\n");
+		if (player.hasKeyItem("Blueprint - Artificial Intelligence") >= 0) outputText("Artificial Intelligence - Req. 50+ int, 1 golem core.\n");
 		if (player.hasKeyItem("Blueprint - Repeater Gun") >= 0) outputText("Repeater Gun - Req. 50+ int, 2 metal pieces, 100 nails.\n");
-		if (player.hasKeyItem("Blueprint - Dynapunch Glove") >= 0) outputText("Dynapunch Glove - Req. 50+ int, 2 metal pieces, 100 nails, 1 mechanism.\n");
-		if (player.hasKeyItem("Blueprint - Whitefire Beam Cannon") >= 0) outputText("Whitefire Beam Cannon - Req. 75+ int, knowing Whitefire spell, 20 metal pieces, 500 nails, 5 energy core.\n");
-		if (player.hasKeyItem("Blueprint - Snowball Generator") >= 0) outputText("Snowball Generator - Req. 75+ int, knowing Ice Spike spell, 20 metal pieces, 500 nails, 5 energy core.\n");
-		if (player.hasKeyItem("Blueprint - Raijin blaster") >= 0) outputText("Raijin blaster - Req. 100+ int, knowing Lightning Bolt spell, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core, 5 raiju plasma.\n");
-		if (player.hasKeyItem("Blueprint - Gravity shots") >= 0) outputText("Gravity shots - Req. 100+ int, knowing Darkness Shard spell, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core.\n");
 		if (player.hasKeyItem("Blueprint - Medical Dispenser 2.0") >= 0) outputText("Medical Dispenser 2.0 - Req. 100+ int, Stimpack Dispenser 1.0, 20 metal pieces, 500 nails, 5 healing pills, 5 energy cores.\n");
 		if (player.hasKeyItem("Blueprint - Stimpack Dispenser 1.0") >= 0) outputText("Stimpack Dispenser 1.0 - Req. 50+ int, knowing Heal spell, Toolbelt, 10 metal pieces, 200 nails, 5 healing pills.\n");
 		if (player.hasKeyItem("Blueprint - Omni Missile") >= 0) outputText("Omni Missile - Req. 100+ int, Missile launcher, 20 metal pieces, 500 nails, 10 mechanism.\n");
@@ -1257,33 +1384,78 @@ public class Lumi extends BaseContent {
 		if (player.hasKeyItem("Blueprint - MK2 Jetpack") >= 0) outputText("MK2 Jetpack - Req. 100+ int, Jetpack, 10 metal pieces, 300 nails, 2 energy core.\n");
 		if (player.hasKeyItem("Blueprint - Jetpack") >= 0) outputText("Jetpack - Req. 50+ int, Toolbelt, 3 metal pieces, 100 nails, 1 energy core.\n");
 		menu();
-		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 3.0") >= 0 && player.hasKeyItem("Upgraded Armor plating 2.0") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 20 && CampStatsAndResources.NailsResc >= 500) addButton(0, "UpgrArmor 3.0", lumiWorkshopUpgradedArmorPlating3).hint("Upgraded Armor plating 3.0 - +15 armor/magic resistance to the mech. +50% Health. - 100+ int, Upgraded Armor plating 2.0, 20 metal pieces, 500 nails and 12 hours of work");
-		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 2.0") >= 0 && player.hasKeyItem("Upgraded Armor plating 1.0") >= 0 && player.inte >= 75 && CampStatsAndResources.MetalPieces >= 10 && CampStatsAndResources.NailsResc >= 300) addButton(0, "UpgrArmor 2.0", lumiWorkshopUpgradedArmorPlating2).hint("Upgraded Armor plating 2.0 - +10 armor/magic resistance to the mech. +35% Health. - 75+ int, Upgraded Armor plating 1.0, 10 metal pieces, 300 nails and 8 hours of work");
+		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 6.0") >= 0 && player.hasKeyItem("Upgraded Armor plating 5.0") >= 0 && player.inte >= 175 && CampStatsAndResources.MetalPieces >= 30 && CampStatsAndResources.NailsResc >= 700) addButton(0, "UpgrArmor 6.0", lumiWorkshopUpgradedArmorPlating6).hint("Upgraded Armor plating 6.0 - +15 armor/magic resistance to the mech. +110% Health. - 175+ int, Upgraded Armor plating 5.0, 30 metal pieces, 700 nails and 12 hours of work");
+		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 5.0") >= 0 && player.hasKeyItem("Upgraded Armor plating 4.0") >= 0 && player.inte >= 150 && CampStatsAndResources.MetalPieces >= 25 && CampStatsAndResources.NailsResc >= 600) addButton(0, "UpgrArmor 5.0", lumiWorkshopUpgradedArmorPlating5).hint("Upgraded Armor plating 5.0 - +15 armor/magic resistance to the mech. +90% Health. - 150+ int, Upgraded Armor plating 4.0, 25 metal pieces, 600 nails and 12 hours of work");
+		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 4.0") >= 0 && player.hasKeyItem("Upgraded Armor plating 3.0") >= 0 && player.inte >= 125 && CampStatsAndResources.MetalPieces >= 20 && CampStatsAndResources.NailsResc >= 500) addButton(0, "UpgrArmor 4.0", lumiWorkshopUpgradedArmorPlating4).hint("Upgraded Armor plating 4.0 - +15 armor/magic resistance to the mech. +70% Health. - 125+ int, Upgraded Armor plating 3.0, 20 metal pieces, 500 nails and 8 hours of work");
+		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 3.0") >= 0 && player.hasKeyItem("Upgraded Armor plating 2.0") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 15 && CampStatsAndResources.NailsResc >= 400) addButton(0, "UpgrArmor 3.0", lumiWorkshopUpgradedArmorPlating3).hint("Upgraded Armor plating 3.0 - +15 armor/magic resistance to the mech. +50% Health. - 100+ int, Upgraded Armor plating 2.0, 15 metal pieces, 400 nails and 8 hours of work");
+		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 2.0") >= 0 && player.hasKeyItem("Upgraded Armor plating 1.0") >= 0 && player.inte >= 75 && CampStatsAndResources.MetalPieces >= 10 && CampStatsAndResources.NailsResc >= 300) addButton(0, "UpgrArmor 2.0", lumiWorkshopUpgradedArmorPlating2).hint("Upgraded Armor plating 2.0 - +10 armor/magic resistance to the mech. +35% Health. - 75+ int, Upgraded Armor plating 1.0, 10 metal pieces, 300 nails and 4 hours of work");
 		if (player.hasKeyItem("Blueprint - Upgraded Armor plating 1.0") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && CampStatsAndResources.MetalPieces >= 5 && CampStatsAndResources.NailsResc >= 200) addButton(0, "UpgrArmor 1.0", lumiWorkshopUpgradedArmorPlating1).hint("Upgraded Armor plating 1.0 - +5 armor/magic resistance to the mech. +20% Health. - 50+ int, Toolbelt, 5 metal pieces, 200 nails and 4 hours of work");
 		if (player.hasKeyItem("Blueprint - Taser with an overcharged battery") >= 0 && player.hasKeyItem("Taser") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 15 && CampStatsAndResources.NailsResc >= 500 && CampStatsAndResources.EnergyCoreResc >= 5 && CampStatsAndResources.MechanismResc >= 2) addButton(1, "Tazer O.B.", lumiWorkshopTaserOverchargeBattery).hint("Taser with an overcharged battery - Increases the Taser’s effectiveness and paralysis duration. - 100+ int, Tazer, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core and 8 hours of work");
 		if (player.hasKeyItem("Blueprint - Taser") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 75 && CampStatsAndResources.MetalPieces >= 10 && CampStatsAndResources.NailsResc >= 300 && CampStatsAndResources.EnergyCoreResc >= 1 && CampStatsAndResources.MechanismResc >= 1) addButton(1, "Tazer", lumiWorkshopTaser).hint("Tazer - Adds an Tazer option to your mech. - 75+ int, Toolbelt, 10 metal pieces, 300 nails, 1 mechanism, 1 energy core and 8 hours of work");
 		if (player.hasKeyItem("Blueprint - Safety bubble") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && CampStatsAndResources.EnergyCoreResc >= 1 && CampStatsAndResources.MetalPieces >= 1 && CampStatsAndResources.NailsResc >= 100) addButton(2, "Safety bubble", lumiWorkshopSafetyBubble).hint("Safety bubble - Allows you to use the mech underwater. Too fragile for standard combat use but provide fresh air. - 1 metal pieces, 100 nails, 1 energy core and 4 hours of work.");
-		if (player.hasKeyItem("Blueprint - Machine Gun MK3") >= 0 && player.hasKeyItem("Machine Gun MK2") >= 0 && player.inte >= 125 && CampStatsAndResources.MetalPieces >= 15 && CampStatsAndResources.NailsResc >= 500 && CampStatsAndResources.MechanismResc >= 10) addButton(3, "Machine Gun MK3", lumiWorkshopMachineGunMK3).hint("Machine Gun MK3 - Increase range attack by 80% if using a firearm. Change the firearm text to a goblin machine gun text. - 125+ int, Machine Gun MK2, 15 metal pieces, 500 nails, 10 mechanism and 12 hours of work.");
-		if (player.hasKeyItem("Blueprint - Machine Gun MK2") >= 0 && player.hasKeyItem("Machine Gun MK1") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 10 && CampStatsAndResources.NailsResc >= 500 && CampStatsAndResources.MechanismResc >= 5) addButton(3, "Machine Gun MK2", lumiWorkshopMachineGunMK2).hint("Machine Gun MK2 - Increase range attack by 60% if using a firearm. Change the firearm text to a goblin machine gun text. - 100+ int, Machine Gun MK1, 10 metal pieces, 500 nails, 5 mechanism, and 8 hours of work.");
-		if (player.hasKeyItem("Blueprint - Machine Gun MK1") >= 0 && player.hasKeyItem("Repeater Gun") >= 0 && player.inte >= 75 && CampStatsAndResources.MetalPieces >= 10 && CampStatsAndResources.NailsResc >= 200 && CampStatsAndResources.MechanismResc >= 5) addButton(3, "Machine Gun MK1", lumiWorkshopMachineGunMK1).hint("Machine Gun MK1 - Increase range attack by 40% if using a firearm. Change the firearm text to a goblin machine gun text. - 75+ int, Repeater Gun, 10 metal pieces, 200 nails, 5 mechanism and 4 hours of work.");
-		if (player.hasKeyItem("Blueprint - Repeater Gun") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && CampStatsAndResources.MetalPieces >= 2 && CampStatsAndResources.NailsResc >= 100) addButton(3, "Repeater Gun", lumiWorkshopRepeaterGun).hint("Repeater Gun - Increase range attack by 20% if using a firearm. Change the firearm text to a goblin machine gun text. - 50+ int, Toolbelt, 2 metal pieces, 100 nails and 4 hour work.");
-		if (player.hasKeyItem("Blueprint - Dynapunch Glove") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && CampStatsAndResources.MetalPieces >= 2 && CampStatsAndResources.NailsResc >= 100 && CampStatsAndResources.MechanismResc >= 1) addButton(4, "Dynapunch G.", lumiWorkshopDynapunchGlove).hint("Dynapunch Glove - Adds a punching option to your mech. - 50+ int, Toolbelt, 2 metal pieces, 100 nails, 1 mechanism and 4 hour work.");
-		if (player.hasKeyItem("Blueprint - Whitefire Beam Cannon") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 75 && CampStatsAndResources.MetalPieces >= 20 && CampStatsAndResources.NailsResc >= 500 && CampStatsAndResources.EnergyCoreResc >= 5 && player.hasStatusEffect(StatusEffects.KnowsWhitefire)) addButton(5, "Whitefire B.C.", lumiWorkshopWhitefireBeamCannon).hint("Whitefire Beam Cannon - Adds a whitefire beam cannon option to your mech. - 75+ int, knowing Whitefire spell, 20 metal pieces, 500 nails, 5 energy core and 8 hours of work.");
-		if (player.hasKeyItem("Blueprint - Snowball Generator") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 75 && CampStatsAndResources.MetalPieces >= 20 && CampStatsAndResources.NailsResc >= 500 && CampStatsAndResources.EnergyCoreResc >= 5 && player.hasStatusEffect(StatusEffects.KnowsIceSpike)) addButton(6, "Snowball G.", lumiWorkshopSnowballGenerator).hint("Snowball Generator - Adds a snowball generator option to your mech. - 75+ int, knowing Ice Spike spell, 20 metal pieces, 500 nails, 5 energy core and 8 hours of work.");
-		if (player.hasKeyItem("Blueprint - Raijin blaster") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 15 && CampStatsAndResources.NailsResc >= 500 && CampStatsAndResources.MechanismResc >= 2 && CampStatsAndResources.EnergyCoreResc >= 5 && player.hasItem(useables.RPLASMA, 5) && player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) addButton(7, "Raijin blaster", lumiWorkshopRaijinBlaster).hint("Raijin blaster - Adds a Raijin blaster option to your mech. - 100+ int, knowing Darkness Shard spell, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core, 5 raiju plasma and 8 hours of work.");
-		if (player.hasKeyItem("Blueprint - Gravity shots") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 15 && CampStatsAndResources.NailsResc >= 500 && CampStatsAndResources.MechanismResc >= 2 && CampStatsAndResources.EnergyCoreResc >= 5 && player.hasStatusEffect(StatusEffects.KnowsDarknessShard)) addButton(8, "Gravity shots", lumiWorkshopGravityShots).hint("Gravity shots - Adds a Gravity shots option to your mech. - 100+ int, knowing Darkness Shard spell, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core and 8 hours of work.");
-		if (player.hasKeyItem("Blueprint - Medical Dispenser 2.0") >= 0 && player.hasKeyItem("Stimpack Dispenser 1.0") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 20 && CampStatsAndResources.NailsResc >= 500 && CampStatsAndResources.EnergyCoreResc >= 5 && player.hasItem(consumables.H_PILL, 5)) addButton(9, "Medical Dispenser 2.0", lumiWorkshopMedicalDispenser2).hint("Medical Dispenser 2.0 - Healing for 10 turns 20% of Heal spell value rising lust by 0,5% each turn. - 100+ int, Stimpack Dispenser 1.0, 20 metal pieces, 500 nails, 5 healing pills, 5 energy cores and 12 hours of work");
-		if (player.hasKeyItem("Blueprint - Stimpack Dispenser 1.0") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && CampStatsAndResources.MetalPieces >= 10 && CampStatsAndResources.NailsResc >= 200 && player.hasItem(consumables.H_PILL, 5) && player.hasStatusEffect(StatusEffects.KnowsHeal)) addButton(9, "Stimpack Dispenser 1.0", lumiWorkshopStimpackDispenser1).hint("Stimpack Dispenser 1.0 - Healing for 10 turns 10% of Heal spell value rising lust by 1% each turn. - 50+ int, knowing Heal spell, Toolbelt, 10 metal pieces, 200 nails, 5 healing pills and 4 hours of work");
-		if (player.hasKeyItem("Blueprint - Omni Missile") >= 0 && player.hasKeyItem("Missile launcher") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 20 && CampStatsAndResources.NailsResc >= 500 && CampStatsAndResources.MechanismResc >= 10) addButton(10, "Omni Missile", lumiWorkshopOmniMissile).hint("Omni Missile - Increases Missile launcher effectiveness vs groups. - 100+ int, Missile launcher, 20 metal pieces, 500 nails, 10 mechanism and 12 hours of work");
-		if (player.hasKeyItem("Blueprint - Missile launcher") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 75 && CampStatsAndResources.MetalPieces >= 10 && CampStatsAndResources.NailsResc >= 500 && CampStatsAndResources.MechanismResc >= 5) addButton(10, "Missile launcher", lumiWorkshopMissileLauncher).hint("Missile launcher - Adds an Missile launcher option to your mech. - 75+ int, Toolbelt, 10 metal pieces, 500 nails, 5 mechanisms and 8 hours of work");
-		if (player.hasKeyItem("Blueprint - Lustnade Launcher") >= 0 && player.hasKeyItem("Aphrodigas Gun") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 20 && CampStatsAndResources.NailsResc >= 500 && player.hasItem(consumables.L_DRAFT, 10) && CampStatsAndResources.MechanismResc >= 10) addButton(11, "Lustnade Launcher", lumiWorkshopLustnadeLauncher).hint("Lustnade Launcher - Upgraded version of Aphrodigas Gun. - 100+ int, Aphrodigas Gun, 20 metal pieces, 500 nails, 10 mechanism, 10 lust drafts and 4 hours of work");
-		if (player.hasKeyItem("Blueprint - Aphrodigas Gun") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 25 && CampStatsAndResources.MetalPieces >= 2 && CampStatsAndResources.NailsResc >= 100 && player.hasItem(consumables.L_DRAFT, 5)) addButton(11, "Aphrodigas Gun",lumiWorkshopAphrodigasGun).hint("Aphrodigas Gun - Adds an Aphrodigas Gun option to your mech. - 25+ int, Toolbelt, 2 metal pieces, 100 nails, 5 lust drafts and 4 hours of work");
-		if (player.hasKeyItem("Blueprint - Impregnator 1.0") >= 0 && player.hasKeyItem("SPMK1") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 5 && CampStatsAndResources.NailsResc >= 100) addButton(12, "Impregnator 1.0", lumiWorkshopImpregnator1).hint("Impregnator 1.0 - Allows you to store cum from defeated male opponents in the reservoir for future use. - 75+ int, Toolbelt, taken Cock Milker or Breast Pump from Factory, 5 metal pieces, 100 nails and 4 hours of work.");
-		if (player.hasKeyItem("Blueprint - SPMK1") >= 0 && player.hasKeyItem("Cum Reservoir") >= 0 && player.inte >= 75 && CampStatsAndResources.MetalPieces >= 1) addButton(12, "SPMK1", lumiWorkshopSPMK1).hint("SPMK1 - Allows you to store cum from defeated male opponents in the reservoir for future use. - 75+ int, Toolbelt, taken Cock Milker or Breast Pump from Factory, 5 metal pieces, 100 nails and 4 hours of work.");
-		if (player.hasKeyItem("Blueprint - Cum Reservoir") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && flags[kFLAGS.FACTORY_MILKER_BUILT] > 0 && CampStatsAndResources.MetalPieces >= 5 && CampStatsAndResources.NailsResc >= 100) addButton(12, "Cum Reservoir", lumiWorkshopCumReservoir).hint("Cum Reservoir - Allows you to store cum from defeated male opponents in the reservoir for future use. - 75+ int, Toolbelt, taken Cock Milker or Breast Pump from Factory, 5 metal pieces, 100 nails and 4 hours of work.");
-		if (player.hasKeyItem("Blueprint - MK2 Jetpack") >= 0 && player.hasKeyItem("Jetpack") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 10 && CampStatsAndResources.NailsResc >= 300 && CampStatsAndResources.EnergyCoreResc >= 2) addButton(13, "MK2 Jetpack", lumiWorkshopMK2Jetpack).hint("MK2 Jetpack - An improvement to the Jetpack, increasing your evasiveness by 25% while airborne. - 100+ int, Jetpack, 10 metal pieces, 300 nails, 2 energy cores and 8 hours of work");
-		if (player.hasKeyItem("Blueprint - Jetpack") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && CampStatsAndResources.MetalPieces >= 3 && CampStatsAndResources.NailsResc >= 100 && CampStatsAndResources.EnergyCoreResc >= 1) addButton(13, "Jetpack", lumiWorkshopJetpack).hint("Jetpack - The mech can hover in the air and fly, allowing for flight in battle. - 50+ int, Toolbelt, 3 metal pieces, 100 nails, 1 energy core and 4 hours of work");
+		if (player.hasKeyItem("Blueprint - Dynapunch Glove") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && CampStatsAndResources.MetalPieces >= 2 && CampStatsAndResources.NailsResc >= 100 && CampStatsAndResources.MechanismResc >= 1) addButton(3, "Dynapunch G.", lumiWorkshopDynapunchGlove).hint("Dynapunch Glove - Adds a punching option to your mech. - 50+ int, Toolbelt, 2 metal pieces, 100 nails, 1 mechanism and 4 hour work.");
+		if (player.hasKeyItem("Blueprint - Improved Artificial Intelligence") >= 0 && player.hasKeyItem("Artificial Intelligence") >= 0 && CampStatsAndResources.EnergyCoreResc >= 1) addButton(4, "Improved AI", lumiWorkshopImprovedArtificialIntelligence).hint("Improved Artificial Intelligence - The mech can now use an auto turret. - 1 energy core and 4 hours of work.");
+		if (player.hasKeyItem("Blueprint - Artificial Intelligence") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.hasItem(useables.GOLCORE, 1)) addButton(4, "AI", lumiWorkshopArtificialIntelligence).hint("Artificial Intelligence - Add an artificial intelligence to your mech which will greet you when you board. Aside from the friendliness of this new interface feature it cannot do much on its own yet. - 1 golem core and 4 hours of work.");
+		//5
+		//6
+		//7
+		if (player.hasKeyItem("Blueprint - Medical Dispenser 2.0") >= 0 && player.hasKeyItem("Stimpack Dispenser 1.0") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 20 && CampStatsAndResources.NailsResc >= 500 && CampStatsAndResources.EnergyCoreResc >= 5 && player.hasItem(consumables.H_PILL, 5)) addButton(8, "Medical Dispenser 2.0", lumiWorkshopMedicalDispenser2).hint("Medical Dispenser 2.0 - Healing for 10 turns 20% of Heal spell value rising lust by 0,5% each turn. - 100+ int, Stimpack Dispenser 1.0, 20 metal pieces, 500 nails, 5 healing pills, 5 energy cores and 12 hours of work");
+		if (player.hasKeyItem("Blueprint - Stimpack Dispenser 1.0") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && CampStatsAndResources.MetalPieces >= 10 && CampStatsAndResources.NailsResc >= 200 && player.hasItem(consumables.H_PILL, 5) && player.hasStatusEffect(StatusEffects.KnowsHeal)) addButton(8, "Stimpack Dispenser 1.0", lumiWorkshopStimpackDispenser1).hint("Stimpack Dispenser 1.0 - Healing for 10 turns 10% of Heal spell value rising lust by 1% each turn. - 50+ int, knowing Heal spell, Toolbelt, 10 metal pieces, 200 nails, 5 healing pills and 4 hours of work");
+		if (player.hasKeyItem("Blueprint - Omni Missile") >= 0 && player.hasKeyItem("Missile launcher") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 20 && CampStatsAndResources.NailsResc >= 500 && CampStatsAndResources.MechanismResc >= 10) addButton(9, "Omni Missile", lumiWorkshopOmniMissile).hint("Omni Missile - Increases Missile launcher effectiveness vs groups. - 100+ int, Missile launcher, 20 metal pieces, 500 nails, 10 mechanism and 12 hours of work");
+		if (player.hasKeyItem("Blueprint - Missile launcher") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 75 && CampStatsAndResources.MetalPieces >= 10 && CampStatsAndResources.NailsResc >= 500 && CampStatsAndResources.MechanismResc >= 5) addButton(9, "Missile launcher", lumiWorkshopMissileLauncher).hint("Missile launcher - Adds an Missile launcher option to your mech. - 75+ int, Toolbelt, 10 metal pieces, 500 nails, 5 mechanisms and 8 hours of work");
+		if (player.hasKeyItem("Blueprint - Lustnade Launcher") >= 0 && player.hasKeyItem("Aphrodigas Gun") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 20 && CampStatsAndResources.NailsResc >= 500 && player.hasItem(consumables.L_DRAFT, 10) && CampStatsAndResources.MechanismResc >= 10) addButton(10, "Lustnade Launcher", lumiWorkshopLustnadeLauncher).hint("Lustnade Launcher - Upgraded version of Aphrodigas Gun. - 100+ int, Aphrodigas Gun, 20 metal pieces, 500 nails, 10 mechanism, 10 lust drafts and 4 hours of work");
+		if (player.hasKeyItem("Blueprint - Aphrodigas Gun") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 25 && CampStatsAndResources.MetalPieces >= 2 && CampStatsAndResources.NailsResc >= 100 && player.hasItem(consumables.L_DRAFT, 5)) addButton(10, "Aphrodigas Gun",lumiWorkshopAphrodigasGun).hint("Aphrodigas Gun - Adds an Aphrodigas Gun option to your mech. - 25+ int, Toolbelt, 2 metal pieces, 100 nails, 5 lust drafts and 4 hours of work");
+		if (player.hasKeyItem("Blueprint - Impregnator 1.0") >= 0 && player.hasKeyItem("SPMK1") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 5 && CampStatsAndResources.NailsResc >= 100) addButton(11, "Impregnator 1.0", lumiWorkshopImpregnator1).hint("Impregnator 1.0 - Allows you to store cum from defeated male opponents in the reservoir for future use. - 75+ int, Toolbelt, taken Cock Milker or Breast Pump from Factory, 5 metal pieces, 100 nails and 4 hours of work.");
+		if (player.hasKeyItem("Blueprint - SPMK1") >= 0 && player.hasKeyItem("Cum Reservoir") >= 0 && player.inte >= 75 && CampStatsAndResources.MetalPieces >= 1) addButton(11, "SPMK1", lumiWorkshopSPMK1).hint("SPMK1 - Allows you to store cum from defeated male opponents in the reservoir for future use. - 75+ int, Toolbelt, taken Cock Milker or Breast Pump from Factory, 5 metal pieces, 100 nails and 4 hours of work.");
+		if (player.hasKeyItem("Blueprint - Cum Reservoir") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && flags[kFLAGS.FACTORY_MILKER_BUILT] > 0 && CampStatsAndResources.MetalPieces >= 5 && CampStatsAndResources.NailsResc >= 100) addButton(11, "Cum Reservoir", lumiWorkshopCumReservoir).hint("Cum Reservoir - Allows you to store cum from defeated male opponents in the reservoir for future use. - 75+ int, Toolbelt, taken Cock Milker or Breast Pump from Factory, 5 metal pieces, 100 nails and 4 hours of work.");
+		if (player.hasKeyItem("Blueprint - MK2 Jetpack") >= 0 && player.hasKeyItem("Jetpack") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 10 && CampStatsAndResources.NailsResc >= 300 && CampStatsAndResources.EnergyCoreResc >= 2) addButton(12, "MK2 Jetpack", lumiWorkshopMK2Jetpack).hint("MK2 Jetpack - An improvement to the Jetpack, increasing your evasiveness by 25% while airborne. - 100+ int, Jetpack, 10 metal pieces, 300 nails, 2 energy cores and 8 hours of work");
+		if (player.hasKeyItem("Blueprint - Jetpack") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && CampStatsAndResources.MetalPieces >= 3 && CampStatsAndResources.NailsResc >= 100 && CampStatsAndResources.EnergyCoreResc >= 1) addButton(12, "Jetpack", lumiWorkshopJetpack).hint("Jetpack - The mech can hover in the air and fly, allowing for flight in battle. - 50+ int, Toolbelt, 3 metal pieces, 100 nails, 1 energy core and 4 hours of work");
+		addButton(13, "-2-", lumiWorkshopMechUpgrades2);
 		addButton(14, "Back", lumiWorkshop);
+	}
+	public function lumiWorkshopMechUpgrades2():void {
+		clearOutput();
+		SceneLib.camp.campUpgrades.checkMaterials();
+		outputText("Metal Pieces: " + CampStatsAndResources.MetalPieces + "/200" + "\n");
+		outputText("Mechanisms: " + CampStatsAndResources.MechanismResc + "/200" + "\n");
+		outputText("Energy Cores: " + CampStatsAndResources.EnergyCoreResc + "/200" + "\n");
+		outputText("\nWhich blueprints will you work on today?\n\n");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK6") >= 0) outputText("Machine Gun MK6 - Req. 200+ int, 25 metal pieces, 1000 nails, 20 mechanism.\n");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK5") >= 0) outputText("Machine Gun MK5 - Req. 175+ int, 20 metal pieces, 800 nails, 15 mechanism.\n");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK4") >= 0) outputText("Machine Gun MK4 - Req. 150+ int, 15 metal pieces, 700 nails, 10 mechanism.\n");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK3") >= 0) outputText("Machine Gun MK3 - Req. 125+ int, 15 metal pieces, 600 nails, 10 mechanism.\n");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK2") >= 0) outputText("Machine Gun MK2 - Req. 100+ int, 10 metal pieces, 500 nails, 5 mechanism.\n");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK1") >= 0) outputText("Machine Gun MK1 - Req. 75+ int, 10 metal pieces, 200 nails, 5 mechanism.\n");
+		if (player.hasKeyItem("Blueprint - Repeater Gun") >= 0) outputText("Repeater Gun - Req. 50+ int, 2 metal pieces, 100 nails.\n");
+		if (player.hasKeyItem("Blueprint - Whitefire Beam Cannon") >= 0) outputText("Whitefire Beam Cannon - Req. 75+ int, knowing Whitefire spell, 20 metal pieces, 500 nails, 5 energy core.\n");
+		if (player.hasKeyItem("Blueprint - Snowball Generator") >= 0) outputText("Snowball Generator - Req. 75+ int, knowing Ice Spike spell, 20 metal pieces, 500 nails, 5 energy core.\n");
+		if (player.hasKeyItem("Blueprint - Raijin blaster") >= 0) outputText("Raijin blaster - Req. 100+ int, knowing Lightning Bolt spell, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core, 5 raiju plasma.\n");
+		if (player.hasKeyItem("Blueprint - Gravity shots") >= 0) outputText("Gravity shots - Req. 100+ int, knowing Darkness Shard spell, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core.\n");
+		if (player.hasKeyItem("Blueprint - Auto turret MK6") >= 0) outputText("Auto turret MK6 - Req. 300+ int, 25 mechanism.\n");
+		if (player.hasKeyItem("Blueprint - Auto turret MK5") >= 0) outputText("Auto turret MK5 - Req. 250+ int, 20 mechanism.\n");
+		if (player.hasKeyItem("Blueprint - Auto turret MK4") >= 0) outputText("Auto turret MK4 - Req. 200+ int, 15 mechanism.\n");
+		if (player.hasKeyItem("Blueprint - Auto turret MK3") >= 0) outputText("Auto turret MK3 - Req. 150+ int, 10 mechanism.\n");
+		if (player.hasKeyItem("Blueprint - Auto turret MK2") >= 0) outputText("Auto turret MK2 - Req. 100+ int, 5 mechanism.\n");
+		if (player.hasKeyItem("Blueprint - Auto turret") >= 0) outputText("Auto turret - Req. 50+ int, 1 mechanism.\n");
+		menu();
+		if (player.hasKeyItem("Blueprint - Machine Gun MK6") >= 0 && player.hasKeyItem("Machine Gun MK5") >= 0 && player.inte >= 200 && CampStatsAndResources.MetalPieces >= 25 && CampStatsAndResources.NailsResc >= 1000 && CampStatsAndResources.MechanismResc >= 20) addButton(0, "Machine Gun MK6", lumiWorkshopMachineGunMK6).hint("Machine Gun MK6 - Increase range attack by 200% if using a firearm. Change the firearm text to a goblin machine gun text. - 200+ int, Machine Gun MK5, 25 metal pieces, 1000 nails, 20 mechanism and 12 hours of work.");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK5") >= 0 && player.hasKeyItem("Machine Gun MK4") >= 0 && player.inte >= 175 && CampStatsAndResources.MetalPieces >= 20 && CampStatsAndResources.NailsResc >= 800 && CampStatsAndResources.MechanismResc >= 15) addButton(0, "Machine Gun MK5", lumiWorkshopMachineGunMK5).hint("Machine Gun MK5 - Increase range attack by 150% if using a firearm. Change the firearm text to a goblin machine gun text. - 175+ int, Machine Gun MK4, 20 metal pieces, 800 nails, 15 mechanism and 12 hours of work.");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK4") >= 0 && player.hasKeyItem("Machine Gun MK3") >= 0 && player.inte >= 150 && CampStatsAndResources.MetalPieces >= 15 && CampStatsAndResources.NailsResc >= 700 && CampStatsAndResources.MechanismResc >= 10) addButton(0, "Machine Gun MK4", lumiWorkshopMachineGunMK4).hint("Machine Gun MK4 - Increase range attack by 125% if using a firearm. Change the firearm text to a goblin machine gun text. - 150+ int, Machine Gun MK3, 15 metal pieces, 700 nails, 10 mechanism and 8 hours of work.");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK3") >= 0 && player.hasKeyItem("Machine Gun MK2") >= 0 && player.inte >= 125 && CampStatsAndResources.MetalPieces >= 15 && CampStatsAndResources.NailsResc >= 600 && CampStatsAndResources.MechanismResc >= 10) addButton(0, "Machine Gun MK3", lumiWorkshopMachineGunMK3).hint("Machine Gun MK3 - Increase range attack by 100% if using a firearm. Change the firearm text to a goblin machine gun text. - 125+ int, Machine Gun MK2, 15 metal pieces, 600 nails, 10 mechanism and 8 hours of work.");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK2") >= 0 && player.hasKeyItem("Machine Gun MK1") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 10 && CampStatsAndResources.NailsResc >= 500 && CampStatsAndResources.MechanismResc >= 5) addButton(0, "Machine Gun MK2", lumiWorkshopMachineGunMK2).hint("Machine Gun MK2 - Increase range attack by 75% if using a firearm. Change the firearm text to a goblin machine gun text. - 100+ int, Machine Gun MK1, 10 metal pieces, 500 nails, 5 mechanism, and 8 hours of work.");
+		if (player.hasKeyItem("Blueprint - Machine Gun MK1") >= 0 && player.hasKeyItem("Repeater Gun") >= 0 && player.inte >= 75 && CampStatsAndResources.MetalPieces >= 10 && CampStatsAndResources.NailsResc >= 200 && CampStatsAndResources.MechanismResc >= 5) addButton(0, "Machine Gun MK1", lumiWorkshopMachineGunMK1).hint("Machine Gun MK1 - Increase range attack by 50% if using a firearm. Change the firearm text to a goblin machine gun text. - 75+ int, Repeater Gun, 10 metal pieces, 200 nails, 5 mechanism and 4 hours of work.");
+		if (player.hasKeyItem("Blueprint - Repeater Gun") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && CampStatsAndResources.MetalPieces >= 2 && CampStatsAndResources.NailsResc >= 100) addButton(0, "Repeater Gun", lumiWorkshopRepeaterGun).hint("Repeater Gun - Increase range attack by 25% if using a firearm. Change the firearm text to a goblin machine gun text. - 50+ int, Toolbelt, 2 metal pieces, 100 nails and 4 hour work.");
+		if (player.hasKeyItem("Blueprint - Whitefire Beam Cannon") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 75 && CampStatsAndResources.MetalPieces >= 20 && CampStatsAndResources.NailsResc >= 500 && CampStatsAndResources.EnergyCoreResc >= 5 && player.hasStatusEffect(StatusEffects.KnowsWhitefire)) addButton(1, "Whitefire B.C.", lumiWorkshopWhitefireBeamCannon).hint("Whitefire Beam Cannon - Adds a whitefire beam cannon option to your mech. - 75+ int, knowing Whitefire spell, 20 metal pieces, 500 nails, 5 energy core and 8 hours of work.");
+		if (player.hasKeyItem("Blueprint - Snowball Generator") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 75 && CampStatsAndResources.MetalPieces >= 20 && CampStatsAndResources.NailsResc >= 500 && CampStatsAndResources.EnergyCoreResc >= 5 && player.hasStatusEffect(StatusEffects.KnowsIceSpike)) addButton(2, "Snowball G.", lumiWorkshopSnowballGenerator).hint("Snowball Generator - Adds a snowball generator option to your mech. - 75+ int, knowing Ice Spike spell, 20 metal pieces, 500 nails, 5 energy core and 8 hours of work.");
+		if (player.hasKeyItem("Blueprint - Raijin blaster") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 15 && CampStatsAndResources.NailsResc >= 500 && CampStatsAndResources.MechanismResc >= 2 && CampStatsAndResources.EnergyCoreResc >= 5 && player.hasItem(useables.RPLASMA, 5) && player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) addButton(3, "Raijin blaster", lumiWorkshopRaijinBlaster).hint("Raijin blaster - Adds a Raijin blaster option to your mech. - 100+ int, knowing Darkness Shard spell, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core, 5 raiju plasma and 8 hours of work.");
+		if (player.hasKeyItem("Blueprint - Gravity shots") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 15 && CampStatsAndResources.NailsResc >= 500 && CampStatsAndResources.MechanismResc >= 2 && CampStatsAndResources.EnergyCoreResc >= 5 && player.hasStatusEffect(StatusEffects.KnowsDarknessShard)) addButton(4, "Gravity shots", lumiWorkshopGravityShots).hint("Gravity shots - Adds a Gravity shots option to your mech. - 100+ int, knowing Darkness Shard spell, 15 metal pieces, 500 nails, 2 mechanism, 5 energy core and 8 hours of work.");
+		if (player.hasKeyItem("Blueprint - Auto turret MK6") >= 0 && player.hasKeyItem("Auto turret MK5") >= 0 && player.inte >= 300 && CampStatsAndResources.MechanismResc >= 25) addButton(5, "Auto turret MK6", lumiWorkshopAutoTurretMK6).hint("Auto turret MK6 - Add six passive ranged attacks per round to your AI routine no matter your action choice. - 300+ int, Auto turret MK5, 25 mechanism and 12 hours of work.");
+		if (player.hasKeyItem("Blueprint - Auto turret MK5") >= 0 && player.hasKeyItem("Auto turret MK4") >= 0 && player.inte >= 250 && CampStatsAndResources.MechanismResc >= 20) addButton(5, "Auto turret MK5", lumiWorkshopAutoTurretMK5).hint("Auto turret MK5 - Add five passive ranged attacks per round to your AI routine no matter your action choice. - 250+ int, Auto turret MK4, 20 mechanism and 12 hours of work.");
+		if (player.hasKeyItem("Blueprint - Auto turret MK4") >= 0 && player.hasKeyItem("Auto turret MK3") >= 0 && player.inte >= 200 && CampStatsAndResources.MechanismResc >= 15) addButton(5, "Auto turret MK4", lumiWorkshopAutoTurretMK4).hint("Auto turret MK4 - Add four passive ranged attacks per round to your AI routine no matter your action choice. - 200+ int, Auto turret MK3, 15 mechanism and 8 hours of work.");
+		if (player.hasKeyItem("Blueprint - Auto turret MK3") >= 0 && player.hasKeyItem("Auto turret MK2") >= 0 && player.inte >= 150 && CampStatsAndResources.MechanismResc >= 10) addButton(5, "Auto turret MK3", lumiWorkshopAutoTurretMK3).hint("Auto turret MK3 - Add three passive ranged attacks per round to your AI routine no matter your action choice. - 150+ int, Auto turret MK2, 10 mechanism and 8 hours of work.");
+		if (player.hasKeyItem("Blueprint - Auto turret MK2") >= 0 && player.hasKeyItem("Auto turret") >= 0 && player.inte >= 100 && CampStatsAndResources.MechanismResc >= 5) addButton(5, "Auto turret MK2", lumiWorkshopAutoTurretMK2).hint("Auto turret MK2 - Add two passive ranged attacks per round to your AI routine no matter your action choice. - 100+ int, Auto turret, 5 mechanism and 4 hours of work.");
+		if (player.hasKeyItem("Blueprint - Auto turret") >= 0 && (player.hasKeyItem("Artificial Intelligence") >= 0 || player.hasKeyItem("Improved Artificial Intelligence") >= 0) && player.inte >= 50 && CampStatsAndResources.MechanismResc >= 1) addButton(5, "Auto turret", lumiWorkshopAutoTurret).hint("Auto turret - Add passive ranged attack per round to your AI routine no matter your action choice. - 50+ int, Artificial Intelligence, 1 mechanism and 4 hours of work.");
+		addButton(14, "Back", lumiWorkshopMechUpgrades);
 	}
 	public function lumiWorkshopEnergyCore():void {
 		clearOutput();
@@ -1539,29 +1711,65 @@ public class Lumi extends BaseContent {
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) inventory.takeItem(weapons.MACGRSW, explorer.done);
 		else inventory.takeItem(weapons.MACGRSW, camp.returnToCampUseFourHours);
 	}
-	public function lumiWorkshopUpgradedArmorPlating3():void {
+	public function lumiWorkshopUpgradedArmorPlating6():void {
+		clearOutput();
+		CampStatsAndResources.MetalPieces -= 30;
+		CampStatsAndResources.NailsResc -= 700;
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new Upgraded Armor plating 6.0 is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem("Upgraded Armor plating 6.0", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - Upgraded Armor plating 6.0");
+		player.removeKeyItem("Upgraded Armor plating 5.0");
+		statScreenRefresh();
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
+		else doNext(camp.returnToCampUseTwelveHours);
+	}
+	public function lumiWorkshopUpgradedArmorPlating5():void {
+		clearOutput();
+		CampStatsAndResources.MetalPieces -= 25;
+		CampStatsAndResources.NailsResc -= 600;
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new Upgraded Armor plating 5.0 is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem("Upgraded Armor plating 5.0", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - Upgraded Armor plating 5.0");
+		player.removeKeyItem("Upgraded Armor plating 4.0");
+		statScreenRefresh();
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
+		else doNext(camp.returnToCampUseTwelveHours);
+	}
+	public function lumiWorkshopUpgradedArmorPlating4():void {
 		clearOutput();
 		CampStatsAndResources.MetalPieces -= 20;
 		CampStatsAndResources.NailsResc -= 500;
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new Upgraded Armor plating 3.0 is ready and installed up your " + player.vehiclesName + ".\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Upgraded Armor plating 4.0 is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem("Upgraded Armor plating 4.0", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - Upgraded Armor plating 4.0");
+		player.removeKeyItem("Upgraded Armor plating 3.0");
+		statScreenRefresh();
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
+		else doNext(camp.returnToCampUseEightHours);
+	}
+	public function lumiWorkshopUpgradedArmorPlating3():void {
+		clearOutput();
+		CampStatsAndResources.MetalPieces -= 15;
+		CampStatsAndResources.NailsResc -= 400;
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Upgraded Armor plating 3.0 is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Upgraded Armor plating 3.0", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Upgraded Armor plating 3.0");
 		player.removeKeyItem("Upgraded Armor plating 2.0");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
-		else doNext(camp.returnToCampUseTwelveHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
+		else doNext(camp.returnToCampUseEightHours);
 	}
 	public function lumiWorkshopUpgradedArmorPlating2():void {
 		clearOutput();
 		CampStatsAndResources.MetalPieces -= 10;
 		CampStatsAndResources.NailsResc -= 300;
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Upgraded Armor plating 2.0 is ready and installed up your " + player.vehiclesName + ".\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Upgraded Armor plating 2.0 is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Upgraded Armor plating 2.0", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Upgraded Armor plating 2.0");
 		player.removeKeyItem("Upgraded Armor plating 1.0");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
-		else doNext(camp.returnToCampUseEightHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
+		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopUpgradedArmorPlating1():void {
 		clearOutput();
@@ -1612,18 +1820,68 @@ public class Lumi extends BaseContent {
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
 		else doNext(camp.returnToCampUseFourHours);
 	}
+	public function lumiWorkshopImprovedArtificialIntelligence():void {
+		clearOutput();
+		CampStatsAndResources.EnergyCoreResc -= 1;
+		player.removeKeyItem("Artificial Intelligence");
+		lumiWorkshopSharedPart4Hours("Improved Artificial Intelligence");
+	}
+	public function lumiWorkshopArtificialIntelligence():void {
+		clearOutput();
+		player.destroyItems(useables.GOLCORE, 1);
+		lumiWorkshopSharedPart4Hours("Artificial Intelligence");
+	}
+	public function lumiWorkshopMachineGunMK6():void {
+		clearOutput();
+		CampStatsAndResources.MetalPieces -= 25;
+		CampStatsAndResources.NailsResc -= 1000;
+		CampStatsAndResources.MechanismResc -= 20;
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new Machine Gun MK3 is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem("Machine Gun MK6", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - Machine Gun MK6");
+		player.removeKeyItem("Machine Gun MK5");
+		statScreenRefresh();
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
+		else doNext(camp.returnToCampUseTwelveHours);
+	}
+	public function lumiWorkshopMachineGunMK5():void {
+		clearOutput();
+		CampStatsAndResources.MetalPieces -= 20;
+		CampStatsAndResources.NailsResc -= 800;
+		CampStatsAndResources.MechanismResc -= 15;
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new Machine Gun MK3 is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem("Machine Gun MK5", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - Machine Gun MK5");
+		player.removeKeyItem("Machine Gun MK4");
+		statScreenRefresh();
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
+		else doNext(camp.returnToCampUseTwelveHours);
+	}
+	public function lumiWorkshopMachineGunMK4():void {
+		clearOutput();
+		CampStatsAndResources.MetalPieces -= 15;
+		CampStatsAndResources.NailsResc -= 700;
+		CampStatsAndResources.MechanismResc -= 10;
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Machine Gun MK3 is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem("Machine Gun MK4", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - Machine Gun MK4");
+		player.removeKeyItem("Machine Gun MK3");
+		statScreenRefresh();
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
+		else doNext(camp.returnToCampUseEightHours);
+	}
 	public function lumiWorkshopMachineGunMK3():void {
 		clearOutput();
 		CampStatsAndResources.MetalPieces -= 15;
-		CampStatsAndResources.NailsResc -= 500;
+		CampStatsAndResources.NailsResc -= 600;
 		CampStatsAndResources.MechanismResc -= 10;
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new Machine Gun MK3 is ready and installed up your " + player.vehiclesName + ".\n\n");
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Machine Gun MK3 is ready and installed up your " + player.vehiclesName + ".\n\n");
 		player.createKeyItem("Machine Gun MK3", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Machine Gun MK3");
 		player.removeKeyItem("Machine Gun MK2");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
-		else doNext(camp.returnToCampUseTwelveHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
+		else doNext(camp.returnToCampUseEightHours);
 	}
 	public function lumiWorkshopMachineGunMK2():void {
 		clearOutput();
@@ -1839,65 +2097,74 @@ public class Lumi extends BaseContent {
 		CampStatsAndResources.MetalPieces -= 10;
 		CampStatsAndResources.NailsResc -= 300;
 		CampStatsAndResources.EnergyCoreResc -= 2;
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new MK2 Jetpack is ready and installed up your " + player.vehiclesName + ".\n\n");
-		player.createKeyItem("MK2 Jetpack", 0, 0, 0, 0);
-		player.removeKeyItem("Blueprint - MK2 Jetpack");
 		player.removeKeyItem("Jetpack");
-		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
-		else doNext(camp.returnToCampUseEightHours);
+		lumiWorkshopSharedPart8Hours("MK2 Jetpack");
 	}
 	public function lumiWorkshopJetpack():void {
 		clearOutput();
 		CampStatsAndResources.MetalPieces -= 3;
 		CampStatsAndResources.NailsResc -= 100;
 		CampStatsAndResources.EnergyCoreResc -= 1;
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Jetpack is ready and installed up your " + player.vehiclesName + ".\n\n");
-		player.createKeyItem("Jetpack", 0, 0, 0, 0);
-		player.removeKeyItem("Blueprint - Jetpack");
-		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
-		else doNext(camp.returnToCampUseFourHours);
-	}/*
-	public function lumiWorkshop0():void {
+		lumiWorkshopSharedPart4Hours("Jetpack");
+	}
+	public function lumiWorkshopAutoTurretMK6():void {
 		clearOutput();
-		CampStatsAndResources.MetalPieces -= 1;
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Toolbelt is ready and installed up your " + player.vehiclesName + ".\n\n");
-		player.createKeyItem("Toolbelt", 0, 0, 0, 0);
-		player.removeKeyItem("Blueprint - Toolbelt");
+		CampStatsAndResources.MechanismResc -= 25;
+		player.removeKeyItem("Auto turret MK5");
+		lumiWorkshopSharedPart12Hours("Auto turret MK6");
+	}
+	public function lumiWorkshopAutoTurretMK5():void {
+		clearOutput();
+		CampStatsAndResources.MechanismResc -= 20;
+		player.removeKeyItem("Auto turret MK4");
+		lumiWorkshopSharedPart12Hours("Auto turret MK5");
+	}
+	public function lumiWorkshopAutoTurretMK4():void {
+		clearOutput();
+		CampStatsAndResources.MechanismResc -= 15;
+		player.removeKeyItem("Auto turret MK3");
+		lumiWorkshopSharedPart8Hours("Auto turret MK4");
+	}
+	public function lumiWorkshopAutoTurretMK3():void {
+		clearOutput();
+		CampStatsAndResources.MechanismResc -= 10;
+		player.removeKeyItem("Auto turret MK2");
+		lumiWorkshopSharedPart8Hours("Auto turret MK3");
+	}
+	public function lumiWorkshopAutoTurretMK2():void {
+		clearOutput();
+		CampStatsAndResources.MechanismResc -= 5;
+		player.removeKeyItem("Auto turret");
+		lumiWorkshopSharedPart4Hours("Auto turret MK2");
+	}
+	public function lumiWorkshopAutoTurret():void {
+		clearOutput();
+		CampStatsAndResources.MechanismResc -= 1;
+		lumiWorkshopSharedPart4Hours("Auto turret");
+	}
+	public function lumiWorkshopSharedPart4Hours(itemName:String):void {
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new "+itemName+" is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem(""+itemName+"", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - "+itemName+"");
 		statScreenRefresh();
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
 		else doNext(camp.returnToCampUseFourHours);
 	}
-	public function lumiWorkshop0():void {
-		clearOutput();
-		CampStatsAndResources.MetalPieces -= 1;
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Toolbelt is ready and installed up your " + player.vehiclesName + ".\n\n");
-		player.createKeyItem("Toolbelt", 0, 0, 0, 0);
-		player.removeKeyItem("Blueprint - Toolbelt");
+	public function lumiWorkshopSharedPart8Hours(itemName:String):void {
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new "+itemName+" is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem(""+itemName+"", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - "+itemName+"");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
-		else doNext(camp.returnToCampUseFourHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
+		else doNext(camp.returnToCampUseEightHours);
 	}
-	public function lumiWorkshop0():void {
-		clearOutput();
-		CampStatsAndResources.MetalPieces -= 1;
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Toolbelt is ready and installed up your " + player.vehiclesName + ".\n\n");
-		player.createKeyItem("Toolbelt", 0, 0, 0, 0);
-		player.removeKeyItem("Blueprint - Toolbelt");
+	public function lumiWorkshopSharedPart12Hours(itemName:String):void {
+		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new "+itemName+" is ready and installed up your " + player.vehiclesName + ".\n\n");
+		player.createKeyItem(""+itemName+"", 0, 0, 0, 0);
+		player.removeKeyItem("Blueprint - "+itemName+"");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
-		else doNext(camp.returnToCampUseFourHours);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
+		else doNext(camp.returnToCampUseTwelveHours);
 	}
-	public function lumiWorkshop0():void {
-		clearOutput();
-		CampStatsAndResources.MetalPieces -= 1;
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Toolbelt is ready and installed up your " + player.vehiclesName + ".\n\n");
-		player.createKeyItem("Toolbelt", 0, 0, 0, 0);
-		player.removeKeyItem("Blueprint - Toolbelt");
-		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
-		else doNext(camp.returnToCampUseFourHours);
-	}*/
 }
 }

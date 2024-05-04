@@ -1,10 +1,12 @@
 package classes.Items {
 import classes.*;
 import classes.BodyParts.*;
+import classes.GeneticMemories.BallsMem;
 import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
+import classes.Items.Consumables.Centaurinum;
 import classes.Items.Consumables.EmberTF;
 import classes.Races.*;
 import classes.Scenes.Camp.CampStatsAndResources;
@@ -25,6 +27,7 @@ public final class Mutations extends MutationsHelper {
     //const BIKINI_ARMOR_BONUS:int = 769;
 
     public var emberTFchanges:EmberTF = new EmberTF();
+    public var sagittariusBowTFchanges:Centaurinum = new Centaurinum();
 	public var saveUpdater:SaveUpdater = new SaveUpdater();
 
     public function DrunkenPowerEmpower():void {
@@ -2680,19 +2683,15 @@ public final class Mutations extends MutationsHelper {
     public function impTFgradual(player:Player):void {
         var changes:Number = 0;
         var changeLimit:Number = 1;
-
         outputText("[pg]The Tome of Imps gives off a constant corrupting aura.");
         if (player.cor < 50 || rand(2) == 0)
             dynStats("lus", 2, "cor", 1);
-
         if (player.blockingBodyTransformations()) changeLimit = 0;
-
         //Shrinkage!
         if (player.tallness > 42 && rand(4) < 3 && changes < changeLimit) {
             outputText("[pg]Your skin crawls, making you close your eyes and shiver.  When you open them again the world seems... different.  After a bit of investigation, you realize you've become shorter!");
             player.tallness -= 1 + rand(5);
         }
-
         if (player.cocks.length > 0) {
             if (player.smallestCockLength() < 12 && changes < changeLimit) {
                 var i2:int = player.growCock(player.smallestCockIndex(), rand(2) + 1);
@@ -2705,7 +2704,6 @@ public final class Mutations extends MutationsHelper {
         if (player.vaginas.length > 0 && rand(3) == 0) {
             //0 = dry, 1 = wet, 2 = extra wet, 3 = always slick, 4 = drools constantly, 5 = female ejaculator
             outputText("[pg]");
-
             //0 = dry, 1 = wet, 2 = extra wet, 3 = always slick, 4 = drools constantly, 5 = female ejaculator
             if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING && rand(2) == 0 && changes < changeLimit) {
                 if (player.vaginas.length == 1) outputText("Your [vagina] gushes fluids down your leg as you spontaneously orgasm.");
@@ -2734,63 +2732,53 @@ public final class Mutations extends MutationsHelper {
             if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DRY) {
                 outputText("You feel a tingling in your crotch, but cannot identify it.");
             }
-
             var index:int = player.vaginas.length;
             while (index > 0) {
                 index--;
                 if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLAVERING) player.vaginas[index].vaginalWetness++;
             }
         }
-
         //grow horns!
         if (!InCollection(player.horns.type, Horns.ORCHID, Horns.DEMON, Horns.ARCH_IMP) && rand(4) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.HornsDemonic.applyEffect();
             changes++;
         }
-
         if (player.tailType != Tail.DEMONIC && player.horns.count > 0 && rand(4) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.TailDemonic.applyEffect();
             changes++;
         }
-
         if (rand(4) == 0 && changes < changeLimit) {
             outputText("[pg]");
             if (rand(2) == 0 && player.ears.type != Ears.ELFIN) transformations.EarsElfin.applyEffect();
             else transformations.EarsBig.applyEffect();
             changes++;
         }
-
         if ((player.wings.type != Wings.BAT_LIKE_TINY && rand(4) == 0) && changes < changeLimit) {
             outputText("[pg]");
             transformations.WingsDemonicTiny.applyEffect();
             changes++;
         }
-
         if (((!InCollection(player.hairColor1, ImpRace.ImpHairColors) && rand(3) == 0) || rand(10) == 0) && changes < changeLimit) {
             outputText("[pg]");
             transformations.HairChangeColor(ImpRace.ImpHairColors).applyEffect();
         }
-
         if (player.tallness <= 60 && changes < changeLimit) {
             if (player.tongue.type != Tongue.IMPISH && rand(3) == 0 && changes < changeLimit) {
                 outputText("[pg]");
                 transformations.TongueImp.applyEffect();
                 changes++;
             }
-
             if (player.lowerBody != LowerBody.TINY && rand(3) == 0 && changes < changeLimit) {
                 transformations.LowerBodyTiny.applyEffect();
                 changes++;
             }
-
             if (player.arms.type != Arms.TINY && rand(3) == 0 && changes < changeLimit) {
                 transformations.ArmsTiny.applyEffect();
                 changes++;
             }
         }
-
         //Red skin!
         if ((!InCollection(player.skinColor1, ImpRace.ImpSkinColors) &&  rand(3) == 0) && changes < changeLimit) {
             if (player.isFurCovered()) outputText("[pg]Underneath your fur, your skin ");
@@ -2803,7 +2791,6 @@ public final class Mutations extends MutationsHelper {
             outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely [skin color].");
             changes++;
         }
-
         //Face!
         if ((((player.faceType != Face.HUMAN || player.faceType != Face.ANIMAL_TOOTHS) && rand(3) == 0) || rand(10) == 0) && changes < changeLimit) {
             outputText("[pg]");
@@ -2815,13 +2802,11 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
         }
-
         if (!player.hasPlainSkinOnly() && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.SkinPlain.applyEffect();
             changes++;
         }
-
         //Remove odd eyes
         if (player.eyes.type > Eyes.HUMAN && rand(5) == 0 && changes < changeLimit) {
             outputText("[pg]");
@@ -2833,7 +2818,6 @@ public final class Mutations extends MutationsHelper {
             transformations.EyesChangeColor(ImpRace.ImpEyeColors).applyEffect();
             changes++;
         }
-
         //Change hair type to normal
         if (transformations.HairHuman.isPossible() && changes < changeLimit && rand(2) == 0) {
             outputText("[pg]");
@@ -2841,30 +2825,25 @@ public final class Mutations extends MutationsHelper {
             transformations.HairHuman.applyEffect();
             changes++;
         }
-
         if (rand(3) == 0 && changes < changeLimit && player.antennae.type != Antennae.NONE) {
             outputText("[pg]");
             transformations.AntennaeNone.applyEffect();
             changes++;
         }
-
         if (rand(3) == 0 && changes < changeLimit && player.rearBody.type != RearBody.NONE) {
             outputText("[pg]");
             transformations.RearBodyNone.applyEffect();
             changes++;
         }
-
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
 
     public function archImpTFforce(player:Player):void {
         var changes:Number = 0;
-
         //Shrinkage!
         if (player.tallness > 42) {
             player.tallness = 42;
         }
-
         if (player.cocks.length > 0) {
             var x:int = player.findFirstCockNotInType([CockTypesEnum.DEMON]);
             while (x >= 0 ) {
@@ -2884,7 +2863,6 @@ public final class Mutations extends MutationsHelper {
                 if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLAVERING) player.vaginas[index].vaginalWetness++;
             }
         }
-
         //Red skin!
         if (!InCollection(player.skinColor1, ImpRace.ImpSkinColors)) {
             var colors:Array = [];
@@ -2893,50 +2871,40 @@ public final class Mutations extends MutationsHelper {
             else colors = ImpRace.ImpSkinColorsMale;
             player.skinColor = randomChoice(colors);
         }
-
         if (player.tailType != Tail.DEMONIC) {
             transformations.TailDemonic.applyEffect(false);
             changes++;
         }
-
         if (!InCollection(player.ears.type, Ears.ELFIN, Ears.BIG)) {
             if (rand(2) == 0 && player.ears.type != Ears.ELFIN) transformations.EarsElfin.applyEffect(false);
             else transformations.EarsBig.applyEffect(false);
             changes++;
         }
-
         if (player.wings.type != Wings.BAT_LIKE_TINY) {
             transformations.WingsDemonicTiny.applyEffect(false);
             changes++;
         }
-
         //Face!
         if ((player.faceType != Face.HUMAN || player.faceType != Face.ANIMAL_TOOTHS)) {
             transformations.FaceAnimalTeeth.applyEffect(false);
             changes++;
         }
-
         if (!player.hasPlainSkinOnly()) {
             transformations.SkinPlain.applyEffect(false);
             changes++;
         }
-
-
         if (player.tongue.type != Tongue.IMPISH) {
             transformations.TongueImp.applyEffect(false);
             changes++;
         }
-
         if (player.lowerBody != LowerBody.TINY) {
             transformations.LowerBodyTiny.applyEffect(false);
             changes++;
         }
-
         if (player.arms.type != Arms.TINY) {
             transformations.ArmsTiny.applyEffect(false);
             changes++;
         }
-
         //Remove odd eyes
         if (player.eyes.type != Eyes.HUMAN) {
             transformations.EyesHuman.applyEffect(false);
@@ -2946,7 +2914,6 @@ public final class Mutations extends MutationsHelper {
             transformations.EyesChangeColor(ImpRace.ImpEyeColors).applyEffect(false);
             changes++;
         }
-
         //Change hair type to normal
         if (transformations.HairHuman.isPossible()) {
             transformations.HairHuman.applyEffect(false);
@@ -2955,43 +2922,36 @@ public final class Mutations extends MutationsHelper {
         if (!InCollection(player.hairColor1, ImpRace.ImpHairColors)) {
             transformations.HairChangeColor(ImpRace.ImpHairColors).applyEffect(false);
         }
-
         if (player.antennae.type != Antennae.NONE) {
             transformations.AntennaeNone.applyEffect(false);
             changes++;
         }
-
         if (player.rearBody.type != RearBody.NONE) {
             transformations.RearBodyNone.applyEffect(false);
             changes++;
         }
-
         //grow horns!
         transformations.HornsArchImp.applyEffect(false);
         changes++;
-
         transformations.SkinPatternArchImp.applyEffect(false);
         player.skinColor2 = "midnight black";
-
         outputText("\n<b>Gained Perk: Imp Nobility!</b> "+PerkLib.ImpNobility.desc());
         player.createPerk(PerkLib.ImpNobility, 0, 0, 0, 0);
-
         outputText("\n<b>Gained Perk: Soulless!</b> "+PerkLib.Soulless.desc());
         player.createPerk(PerkLib.Soulless, 0, 0, 0, 0);
-
         outputText("\n<b>Gained Perk: Transformation Immunity!</b> "+ PerkLib.TransformationImmunity2.desc());
         player.createPerk(PerkLib.TransformationImmunity2, 6, 0, 0, 0);
-
-        if (player.hasPerk(PerkLib.RacialParagon))
-            flags[kFLAGS.APEX_SELECTED_RACE] = Races.IMP;
-
+        if (player.hasPerk(PerkLib.RacialParagon)) flags[kFLAGS.APEX_SELECTED_RACE] = Races.IMP;
         IMutationsLib.BlackHeartIM.trueMutation = true;
-
         player.removeAllRacialMutation();
 		saveUpdater.bringBackEncoutersForSouless();
-
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
+	
+	public function sagittariusBowChanges(player:Player):void {
+		sagittariusBowTFchanges.centaurTFEffects(true);
+		if (!player.inRut) player.goIntoRut(true);
+	}
 
     public function succubisDelight(tainted:Boolean, player:Player):void {
         player.slimeFeed();
@@ -17330,4 +17290,4 @@ public final class Mutations extends MutationsHelper {
 		player.herbXP(HE);
     }
 }
-}
+}

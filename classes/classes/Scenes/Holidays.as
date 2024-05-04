@@ -921,7 +921,7 @@ public class Holidays extends BaseContent {
                 + "\n\n\"<i>That'll do, turkey,</i>\" you say, patting her jiggling tit. \"<i>That'll do.</i>\"");
             if (!player.hasPerk(PerkLib.PilgrimsBounty)) {
                 player.createPerk(PerkLib.PilgrimsBounty, 0, 0, 0, 0);
-                outputText("\n\n(<b>Perk Gained: Pilgrim's Bounty - Lower lust values no longer reduce the size of your orgasm.</b>)");
+                outputText("\n\n(<b>Perk Gained: Pilgrim's Bounty - Lower lust values no longer reduce the size of your orgasm. Your chance to impregnate parter increase to 100%.</b>)");
             }
             endEncounter(120);
         }

@@ -8,6 +8,7 @@ import classes.Race;
 import classes.VaginaClass;
 
 public class CentaurRace extends Race {
+	public static const CentaurSkinColors:/*String*/Array = ["dark", "light","tan","olive"];
     public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
         /*Arms*/		"Human",
@@ -40,25 +41,29 @@ public class CentaurRace extends Race {
 	public override function setup():void {
 		addScores()
 				.hornType(NONE(Horns.UNICORN,Horns.BICORN), 0, -1000)
+				.earType(ANY(Ears.HUMAN,Ears.ELFIN,Ears.HORSE),+1)
+				.faceType(ANY(Face.HUMAN,Face.ELF),+1)
+				.eyeType(Eyes.HUMAN,+1)
+				.hairType(Hair.NORMAL,+1)
 				.isTaur(+2, -1000)
 				.legType(ANY(LowerBody.HOOFED,LowerBody.CLOVEN_HOOFED),+1)
+				.skinColor1(ANY(CentaurSkinColors), +1)
 				.tailType(Tail.HORSE,+1)
 				.skinPlainOnly(+1)
-				.hasCockOfType(CockTypesEnum.HORSE, +1)
-				.vaginaType(VaginaClass.EQUINE, +1)
-				.noWings(0, -3)
-				.noRearBody(0, -3);
-		addConditionedScores(function(body:BodyData):Boolean{
-			return body.isTaur;
-		},"taur;")
+				.noWings(+3, -3)
+				.noRearBody(+1, -3)
 				.armType(Arms.HUMAN,+1)
-				.earType(Ears.HUMAN,+1)
-				.eyeType(Eyes.HUMAN,+1)
-				.faceType(Face.HUMAN,+1);
+				.height(AT_LEAST(84), +1)
+				.customRequirement("",'vagina and D+ tits or 15\"+ long cock',
+						function (body:BodyData):Boolean {
+							return body.hasVagina && body.biggestTitSize >= 3 || body.biggestCockSize > 14
+						}, +1)
+				.cockOrVaginaOfType(CockTypesEnum.HORSE, VaginaClass.EQUINE, +1);
 		
 		addMutation(IMutationsLib.TwinHeartIM, +2);
+		addMutation(IMutationsLib.EquineMuscleIM, +1);
 		
-		buildTier(8, "centaur")
+		buildTier(8, "lesser centaur")
 				.buffs({
 					"tou.mult": +0.40,
 					"spe.mult": +0.80,
@@ -66,11 +71,33 @@ public class CentaurRace extends Race {
 				})
 				.end();
 		
-		buildTier(16, "elder centaur")
+		buildTier(16, "centaur")
 				.buffs({
 					"tou.mult": +0.80,
 					"spe.mult": +1.60,
 					"maxhp_base": +250
+				})
+				.end();
+		
+		buildTier(24, "elder centaur")
+				.buffs({
+					"str.mult": +1.00,
+					"tou.mult": +0.80,
+					"spe.mult": +1.75,
+					"lib.mult": +0.80,
+					"sens": +75,
+					"maxhp_base": +350
+				})
+				.end();
+		
+		buildTier(30, "true centaur")
+				.buffs({
+					"str.mult": +1.40,
+					"tou.mult": +1.00,
+					"spe.mult": +1.85,
+					"lib.mult": +1.00,
+					"sens": +75,
+					"maxhp_base": +500
 				})
 				.end();
 	}

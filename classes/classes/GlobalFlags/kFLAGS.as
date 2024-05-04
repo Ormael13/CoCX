@@ -2466,7 +2466,7 @@ public static const MULTISHOT_STYLE:int                     	                   
 public static const ARROWS_ACCURACY:int            			                        = 2458;
 public static const PRISON_STORAGE_WEAPON_RANGE:int                                 = 2459;
 public static const ELEMENTAL_ARROWS:int                                 		    = 2460;
-public static const SOUL_SENSE_TAMANI:int                  		                    = 2461; // No longer used
+public static const IN_COMBAT_PLAYER_GOBLIN_MECH_AI_ATTACKED:int                  	= 2461;
 public static const SOUL_SENSE_TAMANI_DAUGHTERS:int                                 = 2462; // No longer used
 public static const SOUL_SENSE_KITSUNE_MANSION:int                                  = 2463; // No longer used
 public static const SOUL_SENSE_IZUMI:int                    		                = 2464; // No longer used

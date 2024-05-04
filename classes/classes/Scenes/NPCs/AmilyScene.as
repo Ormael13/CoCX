@@ -7,6 +7,7 @@ import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.Areas.Forest.CorruptedGlade;
 import classes.Scenes.Camp.CampStatsAndResources;
 import classes.Scenes.SceneLib;
@@ -2420,7 +2421,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] != 0) return;
 
 			//25% + gradually increasing cumQ bonus
-			if (rand(4) == 0 || player.cumQ() > rand(1000)) {
+			if (rand(4) == 0 || player.cumQ() > rand(1000) || player.hasPerk(PerkLib.PilgrimsBounty)) {
 				pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_MOUSE - 182); //Amily completes her pregnancies much faster than a regular player
 				if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Amily is pregnant!</b>");
 			}
@@ -4964,7 +4965,8 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 		//Player gives Birth (quest version):
 		public function pcBirthsAmilysKidsQuestVersion(womb:int = 0):void {
 			amilySprite();
-			flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]++;
+			if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] += 2;
+			else flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]++;
 			//In camp version:
 			if(flags[kFLAGS.AMILY_FOLLOWER] == 1) {
 				playerBirthsWifAmilyMiceInCamp();

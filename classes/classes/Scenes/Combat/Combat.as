@@ -410,44 +410,19 @@ public class Combat extends BaseContent {
     }
 
     public function maxBowAttacks():int {
-        /*var extraHits:Number = 0;
-        var baseHits:Number;
-        if (player.isElf() && player.hasPerk(PerkLib.ELFMasterShot)) extraHits = 1;
-        if (player.hasPerk(PerkLib.Multishot)) baseHits = 6;
-        else if (player.hasPerk(PerkLib.WildQuiver)) baseHits = 5;
-        else if (player.hasPerk(PerkLib.Manyshot)) baseHits = 4;
-        else if (player.hasPerk(PerkLib.WeaponRangeTripleStrike)) baseHits = 3;
-        else if (player.hasPerk(PerkLib.WeaponRangeDoubleStrike)) baseHits = 2;
-        else baseHits = 1;
-        return (baseHits+extraHits) * (flags[kFLAGS.ELVEN_TWINSHOT_ENABLED] ? 2 : 1);*/
         return player.calculateMaxAttacksForClass(false, 0) +
             (player.isBowTypeWeapon() && player.hasPerk(PerkLib.ELFMasterShot))? 1: 0;
     }
 
     public function maxCrossbowAttacks():int {
-        /*if (player.hasPerk(PerkLib.WeaponRangeTripleStrike)) return 3;
-        else if (player.hasPerk(PerkLib.WeaponRangeDoubleStrike)) return 2;
-        else return 1;*/
         return player.calculateMaxAttacksForClass(false, 1);
     }
 
     public function maxThrowingAttacks():int {
-        /*if (player.hasPerk(PerkLib.WeaponRangeTripleStrike)) return 3;
-        else if (player.hasPerk(PerkLib.WeaponRangeDoubleStrike)) return 2;
-        else return 1;*/
         return player.calculateMaxAttacksForClass(false, 2);
     }
 
     public function maxFirearmsAttacks():int {
-		/*var bonusShots:Number = 0;
-		if (player.hasPerk(PerkLib.LockAndLoad)) {
-			if (player.hasPerk(PerkLib.Multishot)) bonusShots = 2;
-			bonusShots = 1;
-		}
-        if (player.hasPerk(PerkLib.MasterGunslinger)) return 4+bonusShots;
-        else if (player.hasPerk(PerkLib.ExpertGunslinger)) return 3+bonusShots;
-        else if (player.hasPerk(PerkLib.AmateurGunslinger)) return 2+bonusShots;
-        else return 1;*/
         return player.calculateMaxAttacksForClass(false, 3);
     }
 
@@ -802,6 +777,7 @@ public class Combat extends BaseContent {
             flags[kFLAGS.IN_COMBAT_PLAYER_EPIC_ELEMENTAL_ATTACKED] = 0;
 			flags[kFLAGS.IN_COMBAT_PLAYER_MUMMY_ATTACKED] = 0;
 			flags[kFLAGS.IN_COMBAT_PLAYER_ANUBI_HEART_LEECH] = 0;
+            flags[kFLAGS.IN_COMBAT_PLAYER_GOBLIN_MECH_AI_ATTACKED] = 0;
 			if (player.hasPerk(PerkLib.FirstAttackSkeletons)) flags[kFLAGS.IN_COMBAT_PLAYER_SKELETONS_ATTACKED] = 0;
 			if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] = 0;
 			if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) flags[kFLAGS.IN_COMBAT_PLAYER_USED_SHARK_BITE] = 0;
@@ -856,7 +832,7 @@ public class Combat extends BaseContent {
 		if (flags[kFLAGS.IN_COMBAT_PLAYER_SKELETONS_ATTACKED] != 0 && flags[kFLAGS.NECROMANCER_SKELETONS] == 1) flags[kFLAGS.NECROMANCER_SKELETONS] = 0;
 		if (flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 0 && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] = 0;
 		if (flags[kFLAGS.IN_COMBAT_PLAYER_FLYING_SWORD_ATTACKED] != 0 && flags[kFLAGS.FLYING_SWORD] == 1) flags[kFLAGS.FLYING_SWORD] = 0;
-		if (flags[kFLAGS.IN_COMBAT_PLAYER_MUMMY_ATTACKED] != 0 && flags[kFLAGS.MUMMY_ATTACK] == 1) flags[kFLAGS.MUMMY_ATTACK] = 01;
+		if (flags[kFLAGS.IN_COMBAT_PLAYER_MUMMY_ATTACKED] != 0 && flags[kFLAGS.MUMMY_ATTACK] == 1) flags[kFLAGS.MUMMY_ATTACK] = 0;
 		if (flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 0 && flags[kFLAGS.WILL_O_THE_WISP] == 0) flags[kFLAGS.WILL_O_THE_WISP] = 1;
 	}
 
@@ -1547,6 +1523,8 @@ public class Combat extends BaseContent {
             ui.doMummyTurn();
         if (ui.isFlyingSwordTurn())
             ui.doFlyingSwordTurn();
+        if (ui.isMechAITurn())
+            ui.doMechAITurn();
         for (var ci:int = 0; ci <= 3; ++ci)
             if (ui.isCompanionTurn(ci))
                 ui.doCompanionTurn(ci, false);
@@ -2828,6 +2806,7 @@ public class Combat extends BaseContent {
         if (player.hasKeyItem("Gun Scope with Aimbot") >= 0) faccmod += 80;
 		faccmod += Math.round((masteryFirearmsLevel() - 1) / 2);
         if (player.weaponRangeName == "Touhouna M3") faccmod -= 20;
+		if (player.hasPerk(PerkLib.AmateurGunslinger)) faccmod += 20;
 		if (player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Dual 2H Firearms") faccmod += Math.round((dualWFLevel() - 1) / 2);
 		if (player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Dual 2H Firearms") faccmod += firearmsDualWieldAccuracyPenalty();
         return faccmod;
@@ -2850,7 +2829,8 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.DualWieldFirearms)) accfdwmodpenalty += 10;
 		}
         if (player.weaponRange.hasSpecial("Dual 2H Firearms")) {
-			accfdwmodpenalty -= 50;
+			if (player.hasPerk(PerkLib.DualWield2HFirearms)) accfdwmodpenalty -= 10;
+			else accfdwmodpenalty -= 50;
 		}
         return accfdwmodpenalty;
 	}
@@ -2860,9 +2840,12 @@ public class Combat extends BaseContent {
         if (player.weaponRange.hasSpecial("Dual Firearms")) {
 			if (player.hasPerk(PerkLib.DualWieldFirearms)) dmgfdwmodpenalty -= 0.3;
 			else dmgfdwmodpenalty -= 0.5;
+			if (player.hasPerk(PerkLib.ExpertGunslinger)) dmgfdwmodpenalty += 0.3;
 		}
         if (player.weaponRange.hasSpecial("Dual 2H Firearms")) {
-			dmgfdwmodpenalty -= 0.9;
+			if (player.hasPerk(PerkLib.DualWield2HFirearms)) dmgfdwmodpenalty -= 0.5;
+			else dmgfdwmodpenalty -= 0.9;
+			if (player.hasPerk(PerkLib.MasterGunslinger)) dmgfdwmodpenalty += 0.5;
 		}
         return dmgfdwmodpenalty;
 	}
@@ -2959,17 +2942,9 @@ public class Combat extends BaseContent {
         }
         else if (player.weaponRangePerk == ItemConstants.WT_THROWING) {
             flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = Math.min((flags[kFLAGS.MULTISHOT_STYLE] || 0) + 1, maxRangedAttacks);
-            /*if (flags[kFLAGS.MULTISHOT_STYLE] >= 2) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
-            else if (flags[kFLAGS.MULTISHOT_STYLE] == 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
-            else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;*/
         }
         else if (player.isFirearmTypeWeapon()) {
-            /*if (flags[kFLAGS.MULTISHOT_STYLE] >= 3) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 4;
-            else if (flags[kFLAGS.MULTISHOT_STYLE] == 2) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
-            else if (flags[kFLAGS.MULTISHOT_STYLE] == 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
-            else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1; */
             flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = Math.min((flags[kFLAGS.MULTISHOT_STYLE] || 0) + 1, maxRangedAttacks);
-
 			if (player.weaponRange == weaponsrange.GOODSAM || player.weaponRange == weaponsrange.BADOMEN) {
 				var recoil:Number = 1;
 				if (player.str >= 50) recoil += 1;
@@ -3004,9 +2979,7 @@ public class Combat extends BaseContent {
             if (player.isDualWieldRanged()) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] *= 2;
 
             if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2 && player.hasPerk(PerkLib.LockAndLoad)) {
-				/*if (flags[kFLAGS.MULTISHOT_STYLE] >= 3) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 2;
-				else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 1;*/
-                flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += Math.floor(flags[kFLAGS.MULTIPLE_ARROWS_STYLE] / 2);
+				flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += Math.floor(flags[kFLAGS.MULTIPLE_ARROWS_STYLE] / 2);
 			}
         }
         if (flags[kFLAGS.ARROWS_ACCURACY] > 0) flags[kFLAGS.ARROWS_ACCURACY] = 0;
@@ -4041,12 +4014,12 @@ public class Combat extends BaseContent {
                 outputText("The " + ammoWord + " lodges deep into the pod's fleshy wall");
                 if (player.isInGoblinMech()) {
                     if (player.hasKeyItem("Repeater Gun") >= 0) outputText("You shoot the pod with your mech’s repeater gun");
-                    if (player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) outputText("You fire metal rounds at pod using the mech’s machine gun");
+                    if (player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0 || player.hasKeyItem("Machine Gun MK4") >= 0 || player.hasKeyItem("Machine Gun MK5") >= 0 || player.hasKeyItem("Machine Gun MK6") >= 0) outputText("You fire metal rounds at pod using the mech’s machine gun");
                 }
             } else if (monster.plural) {
                 if (player.isInGoblinMech()) {
                     if (player.hasKeyItem("Repeater Gun") >= 0) outputText("You shoot your opponent with your mech’s repeater gun");
-                    if (player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) outputText("You fire metal rounds at [themonster] with your mech’s machine gun");
+                    if (player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0 || player.hasKeyItem("Machine Gun MK4") >= 0 || player.hasKeyItem("Machine Gun MK5") >= 0 || player.hasKeyItem("Machine Gun MK6") >= 0) outputText("You fire metal rounds at [themonster] with your mech’s machine gun");
                 } else {
                     var textChooser1:int = rand(12);
                     if (textChooser1 >= 9) {
@@ -4062,7 +4035,7 @@ public class Combat extends BaseContent {
             } else {
                 if (player.isInGoblinMech()) {
                     if (player.hasKeyItem("Repeater Gun") >= 0) outputText("You shoot your opponent using the mech repeater gun");
-                    if (player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) outputText("You fire metal rounds at [themonster] using the mech machine gun");
+                    if (player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0 || player.hasKeyItem("Machine Gun MK4") >= 0 || player.hasKeyItem("Machine Gun MK5") >= 0 || player.hasKeyItem("Machine Gun MK6") >= 0) outputText("You fire metal rounds at [themonster] using the mech machine gun");
                 } else {
                     var textChooser2:int = rand(12);
                     if (textChooser2 >= 9) outputText("[Themonster] looks down at the mark left by the " + ammoWord + " on it body");
@@ -4071,7 +4044,6 @@ public class Combat extends BaseContent {
                     else outputText("You casually fire an " + ammoWord + " at [themonster] with supreme skill");
                 }
             }
-			if (player.isDualWieldRanged()) damage *= firearmsDualWieldDamagePenalty();
             //any aoe effect from firearms
             if (monster.plural) {
                 if (player.weaponRange == weaponsrange.ADBSCAT || player.weaponRange == weaponsrange.DBDRAGG) damage *= 2;
@@ -4089,66 +4061,93 @@ public class Combat extends BaseContent {
                 damage = goblinDamageBonus(damage);
                 if (player.hasKeyItem("Repeater Gun") >= 0) {
                     if (player.vehicles == vehicles.GOBMPRI) {
-                        damage *= 1.3;
-                        if (damage < 60) damage = 60;
+                        damage *= 1.45;
+                        if (damage < 70) damage = 70;
 					} else if (player.vehicles == vehicles.GS_MECH) {
-						damage *= 1.25;
-                        if (damage < 50) damage = 50;
+						damage *= 1.35;
+                        if (damage < 60) damage = 60;
 					} else {
-                        damage *= 1.2;
-                        if (damage < 40) damage = 40;
+                        damage *= 1.25;
+                        if (damage < 50) damage = 50;
                     }
                 }
                 if (player.hasKeyItem("Machine Gun MK1") >= 0) {
                     if (player.vehicles == vehicles.GOBMPRI) {
-                        damage *= 1.6;
-                        if (damage < 120) damage = 120;
+                        damage *= 1.9;
+                        if (damage < 140) damage = 140;
                     } else if (player.vehicles == vehicles.GS_MECH) {
-						damage *= 1.5;
-                        if (damage < 100) damage = 100;
+						damage *= 1.7;
+                        if (damage < 120) damage = 120;
 					} else {
-                        damage *= 1.4;
-                        if (damage < 80) damage = 80;
+                        damage *= 1.5;
+                        if (damage < 100) damage = 100;
                     }
                 }
                 if (player.hasKeyItem("Machine Gun MK2") >= 0) {
                     if (player.vehicles == vehicles.GOBMPRI) {
-                        damage *= 1.9;
-                        if (damage < 180) damage = 180;
+                        damage *= 2.35;
+                        if (damage < 210) damage = 210;
                     } else if (player.vehicles == vehicles.GS_MECH) {
-						damage *= 1.75;
-                        if (damage < 150) damage = 150;
+						damage *= 2.05;
+                        if (damage < 180) damage = 180;
 					} else {
-                        damage *= 1.6;
-                        if (damage < 120) damage = 120;
+                        damage *= 1.75;
+                        if (damage < 150) damage = 150;
                     }
                 }
                 if (player.hasKeyItem("Machine Gun MK3") >= 0) {
                     if (player.vehicles == vehicles.GOBMPRI) {
-                        damage *= 2.2;
-                        if (damage < 240) damage = 240;
+                        damage *= 2.8;
+                        if (damage < 280) damage = 280;
                     } else if (player.vehicles == vehicles.GS_MECH) {
-						damage *= 2;
-                        if (damage < 200) damage = 200;
-					} else {
-                        damage *= 1.8;
-                        if (damage < 160) damage = 160;
-                    }
-                }
-				if (player.hasKeyItem("Machine Gun MK4") >= 0) {
-					if (player.vehicles == vehicles.GS_MECH) {
-						damage *= 2.25;
-                        if (damage < 250) damage = 250;
+						damage *= 2.4;
+                        if (damage < 240) damage = 240;
 					} else {
                         damage *= 2;
                         if (damage < 200) damage = 200;
                     }
-				}
+                }
+                if (player.hasKeyItem("Machine Gun MK4") >= 0) {
+                    if (player.vehicles == vehicles.GOBMPRI) {
+                        damage *= 3;
+                        if (damage < 350) damage = 350;
+                    } else if (player.vehicles == vehicles.GS_MECH) {
+						damage *= 2.5;
+                        if (damage < 300) damage = 300;
+					} else {
+                        damage *= 2.25;
+                        if (damage < 250) damage = 250;
+                    }
+                }
+                if (player.hasKeyItem("Machine Gun MK5") >= 0) {
+                    if (player.vehicles == vehicles.GOBMPRI) {
+                        damage *= 3.7;
+                        if (damage < 420) damage = 420;
+                    } else if (player.vehicles == vehicles.GS_MECH) {
+						damage *= 3.1;
+                        if (damage < 360) damage = 360;
+					} else {
+                        damage *= 2.5;
+                        if (damage < 300) damage = 300;
+                    }
+                }
+                if (player.hasKeyItem("Machine Gun MK6") >= 0) {
+                    if (player.vehicles == vehicles.GOBMPRI) {
+                        damage *= 4.6;
+                        if (damage < 560) damage = 560;
+                    } else if (player.vehicles == vehicles.GS_MECH) {
+						damage *= 3.8;
+                        if (damage < 480) damage = 480;
+					} else {
+                        damage *= 3;
+                        if (damage < 400) damage = 400;
+                    }
+                }
             }
             var ignoreDR:Boolean = player.hasPerk(PerkLib.Penetrator);
             if (!ignoreDR) damage *= (monster.damageRangePercent() / 100);
-            if (player.hasPerk(PerkLib.ExplosiveCartridge) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType) || monster.hasPerk(PerkLib.EnemyHugeType) || monster.hasPerk(PerkLib.Enemy300Type) || monster.hasPerk(PerkLib.EnemyGigantType) || monster.hasPerk(PerkLib.EnemyColossalType))) damage *= 2;
-            if (player.hasPerk(PerkLib.NamedBullet) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 1.5;
+            if (player.hasPerk(PerkLib.ExplosiveCartridge) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType) || monster.hasPerk(PerkLib.EnemyHugeType) || monster.hasPerk(PerkLib.Enemy300Type) || monster.hasPerk(PerkLib.EnemyGigantType) || monster.hasPerk(PerkLib.EnemyColossalType))) damage *= 3;
+            if (player.hasPerk(PerkLib.NamedBullet) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 3;
             if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
             if (player.hasPerk(PerkLib.PhantomShooting)) damage *= 1.05;
 			if (player.hasPerk(PerkLib.SilverForMonsters) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1.2;
@@ -4190,8 +4189,7 @@ public class Combat extends BaseContent {
             } else {
                 var maxFirearmAttacks:int = player.calculateMultiAttacks(false);
                 if (player.hasPerk(PerkLib.LockAndLoad)) maxFirearmAttacks += 1;
-
-                if (player.isInGoblinMech() && (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0)) {
+                if (player.isInGoblinMech() && (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0 || player.hasKeyItem("Machine Gun MK4") >= 0 || player.hasKeyItem("Machine Gun MK5") >= 0 || player.hasKeyItem("Machine Gun MK6") >= 0)) {
                     outputText(".  It's clearly very painful. ");
                     if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
 						doPhysicalDamage(damage, true, true, ignoreDR);
@@ -4286,7 +4284,6 @@ public class Combat extends BaseContent {
 						outputText(" ");
                         doPhysicalDamage(damage, true, true, ignoreDR);
 						if (crit) outputText(" <b>*Critical Hit!*</b>");
-
                         for (var touAttack:int = 0; touAttack < maxFirearmAttacks; touAttack++) {
                             outputText(" ");
                             doPhysicalDamage(damage, true, true, ignoreDR);
@@ -4354,6 +4351,128 @@ public class Combat extends BaseContent {
             } else enemyAIImpl();
         }
     }
+	
+	public function shootMechWeaponByAI():void {
+		outputText("Your mech shoot the enemy with auto turret. ");
+		var damage:Number = 0;
+        damage += firearmsDamageNoLagSingle();
+		if (player.armor == armors.GTECHC_ && !player.isInGoblinMech()) damage *= 1.2;
+        if (player.hasKeyItem("Gun Scope") >= 0) damage *= 1.2;
+        if (player.hasKeyItem("Gun Scope with Aim tech") >= 0) damage *= 1.4;
+        if (player.hasKeyItem("Gun Scope with Aimbot") >= 0) damage *= 1.6;
+        damage = goblinDamageBonus(damage);
+	if (player.hasKeyItem("Repeater Gun") >= 0) {
+            if (player.vehicles == vehicles.GOBMPRI) {
+                damage *= 1.45;
+                if (damage < 70) damage = 70;
+            } else if (player.vehicles == vehicles.GS_MECH) {
+                damage *= 1.35;
+                if (damage < 60) damage = 60;
+            } else {
+                damage *= 1.25;
+                if (damage < 50) damage = 50;
+            }
+        }
+        if (player.hasKeyItem("Machine Gun MK1") >= 0) {
+            if (player.vehicles == vehicles.GOBMPRI) {
+                damage *= 1.9;
+                if (damage < 140) damage = 140;
+            } else if (player.vehicles == vehicles.GS_MECH) {
+                damage *= 1.7;
+                if (damage < 120) damage = 120;
+            } else {
+                damage *= 1.5;
+                if (damage < 100) damage = 100;
+            }
+        }
+        if (player.hasKeyItem("Machine Gun MK2") >= 0) {
+            if (player.vehicles == vehicles.GOBMPRI) {
+                damage *= 2.35;
+                if (damage < 210) damage = 210;
+            } else if (player.vehicles == vehicles.GS_MECH) {
+                damage *= 2.05;
+                if (damage < 180) damage = 180;
+            } else {
+                damage *= 1.75;
+                if (damage < 150) damage = 150;
+            }
+        }
+        if (player.hasKeyItem("Machine Gun MK3") >= 0) {
+            if (player.vehicles == vehicles.GOBMPRI) {
+                damage *= 2.8;
+                if (damage < 280) damage = 280;
+            } else if (player.vehicles == vehicles.GS_MECH) {
+                damage *= 2.4;
+                if (damage < 240) damage = 240;
+            } else {
+                damage *= 2;
+                if (damage < 200) damage = 200;
+            }
+        }
+        if (player.hasKeyItem("Machine Gun MK4") >= 0) {
+            if (player.vehicles == vehicles.GOBMPRI) {
+                damage *= 3;
+                if (damage < 350) damage = 350;
+            } else if (player.vehicles == vehicles.GS_MECH) {
+                damage *= 2.5;
+                if (damage < 300) damage = 300;
+            } else {
+                damage *= 2.25;
+                if (damage < 250) damage = 250;
+            }
+        }
+        if (player.hasKeyItem("Machine Gun MK5") >= 0) {
+            if (player.vehicles == vehicles.GOBMPRI) {
+                damage *= 3.7;
+                if (damage < 420) damage = 420;
+            } else if (player.vehicles == vehicles.GS_MECH) {
+                damage *= 3.1;
+                if (damage < 360) damage = 360;
+            } else {
+                damage *= 2.5;
+                if (damage < 300) damage = 300;
+            }
+        }
+        if (player.hasKeyItem("Machine Gun MK6") >= 0) {
+            if (player.vehicles == vehicles.GOBMPRI) {
+                damage *= 4.6;
+                if (damage < 560) damage = 560;
+            } else if (player.vehicles == vehicles.GS_MECH) {
+                damage *= 3.8;
+                if (damage < 480) damage = 480;
+            } else {
+                damage *= 3;
+                if (damage < 400) damage = 400;
+            }
+        }
+        var ignoreDR:Boolean = player.hasPerk(PerkLib.Penetrator);
+        if (!ignoreDR) damage *= (monster.damageRangePercent() / 100);
+        if (player.hasPerk(PerkLib.ExplosiveCartridge) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType) || monster.hasPerk(PerkLib.EnemyHugeType) || monster.hasPerk(PerkLib.Enemy300Type) || monster.hasPerk(PerkLib.EnemyGigantType) || monster.hasPerk(PerkLib.EnemyColossalType))) damage *= 3;
+        if (player.hasPerk(PerkLib.NamedBullet) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 3;
+        if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
+        if (player.hasPerk(PerkLib.PhantomShooting)) damage *= 1.05;
+		if (player.hasPerk(PerkLib.SilverForMonsters) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1.2;
+        if (monster.hasStatusEffect(StatusEffects.WoundPoison)) damage*=1+(monster.statusEffectv1(StatusEffects.WoundPoison)/100);
+        //Determine if critical hit!
+		var crit:Boolean;
+        var critChance:Number = calculateCritFirearms();
+		var critDamage:Number = calculateCritDamageFirearms();
+        crit = rand(100) < critChance;
+        if(crit) damage *= critDamage;
+		damage = Math.round(damage);
+        checkAchievementDamage(damage);
+		WeaponRangeStatusProcs();
+		WrathGenerationPerHit1(5);
+		var shotsCount:Number = 1;
+		if (player.hasKeyItem("Auto turret MK2") >= 0) shotsCount *= 2;
+		if (player.hasKeyItem("Auto turret MK3") >= 0) shotsCount *= 3;
+		if (player.hasKeyItem("Auto turret MK4") >= 0) shotsCount *= 4;
+		if (player.hasKeyItem("Auto turret MK5") >= 0) shotsCount *= 5;
+		if (player.hasKeyItem("Auto turret MK6") >= 0) shotsCount *= 6;
+		while (shotsCount-->0) doPhysicalDamage(damage, true, true, ignoreDR);
+		outputText("\n\n");
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+	}
 
     public function oneBulletReloadCost():Number {
         var reloaderCost:Number = 4;
@@ -5373,7 +5492,12 @@ public class Combat extends BaseContent {
         if (player.isAlraune()) {
             outputText("You lash at your opponent with your many vines, striking twelve times.");
             var x:int = 12;
-            while (x-->0) ExtraNaturalWeaponAttack();
+            while (x-->0) {
+				if (player.hasPerk(PerkLib.SnowLily)) ExtraNaturalWeaponAttack(1, "ice");
+				else if (player.hasPerk(PerkLib.Cinderbloom)) ExtraNaturalWeaponAttack(1, "fire");
+				else if (player.hasPerk(PerkLib.Nightshade)) ExtraNaturalWeaponAttack(1, "darkness");
+				else ExtraNaturalWeaponAttack();
+			}
             outputText("\n");
         }
         //Unique TENTACLES STRIKES
@@ -5645,6 +5769,14 @@ public class Combat extends BaseContent {
             damage += scalingBonusStrength() * 0.2;
 			damage += player.spe * 2;
 			damage += scalingBonusSpeed() * 0.4;
+			if (player.isTaur() && player.hasPerk(PerkLib.CentaurHunterStyleWindReader)) {
+				damage += player.wis * 0.5;
+				damage += scalingBonusWisdom() * 0.1;
+				if (player.hasPerk(PerkLib.CentaurHunterStyleGreatPull)) {
+					damage += player.str * 0.5;
+					damage += scalingBonusStrength() * 0.1;
+				}
+			}
 			if (damage < 20) damage = 20;
             damage *= (1 + (0.01 * masteryArcheryLevel()));
 		}
@@ -5681,15 +5813,38 @@ public class Combat extends BaseContent {
 		var damage:Number = 0;
 		damage += player.weaponRangeAttack * 2;
 		damage += player.speStat.core.value + player.intStat.core.value + player.wisStat.core.value;
-        if (player.hasPerk(PerkLib.JobGunslinger)) damage *= 2;
-        if (player.hasPerk(PerkLib.ChurchOfTheGun)) damage += scalingBonusWisdom() * 0.5;
-        if (player.hasPerk(PerkLib.AlchemicalCartridge)) damage += scalingBonusIntelligence() * 0.25;
+        if (player.hasPerk(PerkLib.JobGunslinger)) {
+			damage += player.wis * 1.5;
+            damage += scalingBonusWisdom() * 0.3;
+			damage += player.inte;
+            damage += scalingBonusIntelligence() * 0.2;
+			damage += player.spe * 0.5;
+			damage += scalingBonusSpeed() * 0.1;
+		}
+        if (player.hasPerk(PerkLib.ChurchOfTheGun)) {
+			damage += player.wis * 2;
+            damage += scalingBonusWisdom() * 0.6;
+		}
+        if (player.hasPerk(PerkLib.AlchemicalCartridge)) {
+			damage += player.inte * 1.5;
+            damage += scalingBonusIntelligence() * 0.3;
+		}
 		if (player.hasPerk(PerkLib.SaintOfZariman)) {
-			damage += scalingBonusSpeed() * 0.25;
-			damage += scalingBonusIntelligence() * 0.25;
-			damage += scalingBonusWisdom() * 0.5;
+			damage += player.spe * 1.5;
+			damage += scalingBonusSpeed() * 0.3;
+			damage += player.inte * 1.5;
+            damage += scalingBonusIntelligence() * 0.3;
+			damage += player.wis * 2;
+            damage += scalingBonusWisdom() * 0.6;
+		}
+		if (player.hasPerk(PerkLib.AmateurGunslinger)) {
+			var moreDMG:Number = 2;
+			if (player.hasPerk(PerkLib.ExpertGunslinger)) moreDMG += 1;
+			if (player.hasPerk(PerkLib.MasterGunslinger)) moreDMG += 1;
+			damage *= moreDMG;
 		}
 		damage *= (1 + (0.01 * masteryFirearmsLevel()));
+		if (player.isDualWieldRanged()) damage *= firearmsDualWieldDamagePenalty();
         damage = rangeAttackModifier(damage);
         damage = archerySkillDamageMod(damage);
         damage *= player.jewelryRangeModifier();
@@ -5879,7 +6034,7 @@ public class Combat extends BaseContent {
         if (player.weapon.isDualMassive()) dualWieldMassiveXP(meleeMasteryEXPgains);
         if (player.isFeralCombat()) feralCombatXP(meleeMasteryEXPgains);
         else if (flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && player.weaponName == "fists") unarmedCombatXP(meleeMasteryEXPgains);
-        else if ((player.weapon.isSmall() || player.hasAetherTwinsTierWeapon() || player.hasAetherTwinsTierWeapon2()) && !player.isFeralCombat() && (flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && player.weaponName == "fists")) weaponSmallMastery(meleeMasteryEXPgains);
+        else if ((player.weapon.isSmall() || player.hasAetherTwinsTierWeapon() || player.hasAetherTwinsTierWeapon2()) && !player.isFeralCombat() && (flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && player.weaponName != "fists")) weaponSmallMastery(meleeMasteryEXPgains);
         else if (player.weapon.isLarge()) weaponLargeMastery(meleeMasteryEXPgains);
         else if (player.weapon.isMassive()) weaponMassiveMastery(meleeMasteryEXPgains);
         else weaponNormalMastery(meleeMasteryEXPgains);
@@ -8395,6 +8550,12 @@ public class Combat extends BaseContent {
 			if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) ddd += 0.25;
 			damage *= ddd;
 		}
+		if (player.perkv1(IMutationsLib.GoblinOvariesIM) >= 2 && player.isGoblinoid()) {
+			var dddd:Number = 1.3;
+			if (player.perkv1(IMutationsLib.GoblinOvariesIM) >= 3) dddd += 0.1;
+			if (player.perkv1(IMutationsLib.GoblinOvariesIM) >= 4) dddd += 0.1;
+			damage *= dddd;
+		}
         if (monster.hasStatusEffect(StatusEffects.WoundPoison)) damage *= 1+(monster.statusEffectv1(StatusEffects.WoundPoison)/100);
         if (player.perkv1(IMutationsLib.AlphaHowlIM) >= 3) {
             var packmultiplier:Number = 1.0;
@@ -9595,12 +9756,22 @@ public class Combat extends BaseContent {
                 if (!monster.plural) outputText("The effects of your aura are quite pronounced on [themonster] as [monster he] begins to shake and steal glances at your body. ");
                 else outputText("The effects of your aura are quite pronounced on [themonster] as [monster he] begin to shake and steal glances at your body. ");
             }
-
             var lustAADmg:Number = (scalingBonusLibido() * 0.5);
             lustAADmg = teases.teaseAuraLustDamageBonus(monster, lustAADmg);
             lustAADmg *= monster.lustVuln;
             lustAADmg = combat.fixPercentLust(lustAADmg);
             monster.teased(Math.round(lustAADmg), false);
+            outputText("\n\n");
+            if (player.hasPerk(PerkLib.EromancyMaster)) teaseXP(1 + bonusExpAfterSuccesfullTease());
+        }
+        //Sagittarius Aura of Dominance
+        if (player.hasPerk(PerkLib.SagittariusAuraOfDominance) && monster.lustVuln > 0 && monster.hasVagina() && !flags[kFLAGS.DISABLE_AURAS]) {
+            outputText("The sheer overwhelming dominance and maleness radiating of your body causes [themonster] to slowly lose concentration and you can spy her taking quick glances at your erect [cock].  ");
+            var lustSAoDDmg:Number = scalingBonusLibido();
+            lustSAoDDmg = teases.teaseAuraLustDamageBonus(monster, lustSAoDDmg);
+            lustSAoDDmg *= monster.lustVuln;
+            lustSAoDDmg = combat.fixPercentLust(lustSAoDDmg);
+            monster.teased(Math.round(lustSAoDDmg), false);
             outputText("\n\n");
             if (player.hasPerk(PerkLib.EromancyMaster)) teaseXP(1 + bonusExpAfterSuccesfullTease());
         }
@@ -16110,6 +16281,9 @@ public function firearmsForce():Number {
 	var mod:Number = 0;
     var maxFirearmAttacks:int = maxFirearmsAttacks();
 	if (player.hasPerk(PerkLib.JobGunslinger)) mod += .1;
+	if (player.hasPerk(PerkLib.AmateurGunslinger)) mod += .05;
+	if (player.hasPerk(PerkLib.ExpertGunslinger)) mod += .1;
+	if (player.hasPerk(PerkLib.MasterGunslinger)) mod += .15;
 	if (maxFirearmAttacks >= 2) mod += .05;
 	if (maxFirearmAttacks >= 3) mod += .1;
 	if (maxFirearmAttacks >= 4) mod += .15;
@@ -16119,7 +16293,7 @@ public function firearmsForce():Number {
     if (player.hasPerk(PerkLib.TaintedMagazine)) mod += .1;
     if (player.hasPerk(PerkLib.SaintOfZariman)) mod += .15;
     if (player.hasPerk(PerkLib.SilverForMonsters)) mod += .15;
-    if (player.hasPerk(PerkLib.NamedBullet)) mod += .2;//125% up to here
+    if (player.hasPerk(PerkLib.NamedBullet)) mod += .2;//155% up to here
 	if (player.hasPerk(PerkLib.FirearmsAttackMultiplier)) {
 		mod += .1;
 		if (player.hasPerk(PerkLib.SkilledGunslingerEx)) {

@@ -105,6 +105,7 @@ public class AlicornRace extends Race {
 		
 		addMutation(IMutationsLib.TwinHeartIM, +2);
 		addMutation(IMutationsLib.EclipticMindIM, +1);
+		addMutation(IMutationsLib.EquineMuscleIM, +1);
 		
 		buildTier(8, "Half Alicorn/Nightmare")
 				.customNamingFunction(Utils.curry(nameFn,1))

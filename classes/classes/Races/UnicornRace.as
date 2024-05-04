@@ -97,6 +97,7 @@ public class UnicornRace extends Race{
 		
 		addMutation(IMutationsLib.TwinHeartIM, +2);
 		addMutation(IMutationsLib.EclipticMindIM, +1);
+		addMutation(IMutationsLib.EquineMuscleIM, +1);
 		
 		buildTier(8, "Half Unicorn/Bicorn")
 				.customNamingFunction(Utils.curry(nameFn,1))
