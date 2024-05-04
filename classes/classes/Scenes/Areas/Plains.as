@@ -376,6 +376,7 @@ use namespace CoC;
 			clearOutput();
 			outputText("As you pick up the amazing looking weapon you feel like a static run through your arm. What just happened? As you try to throw the weapon away by reflex you discover that you can't. ");
 			outputText("No way that weapon was actually a cursed item that's why the centaurs left it here! <b>You were cursed by Sagittarius Baneful Great Bow!</b>\n\n");
+			player.createStatusEffect(StatusEffects.TookSagittariusBanefulGreatBow,1,0,0,0);
 			player.setWeaponRange(weaponsrange.SAGITTB);
 			endEncounter();
 		}

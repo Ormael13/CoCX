@@ -53,6 +53,7 @@ public class Centaurinum extends Consumable {
 		var changeLimit:Number = 2;
 		if (rand(2) == 0) changeLimit++;
 		changeLimit += player.additionalTransformationChances;
+		if (sagittariusBow) changeLimit = 1;
 		//Temporary storage
 		var temp2:Number = 0;
 		var temp3:Number = 0;
@@ -76,7 +77,7 @@ public class Centaurinum extends Consumable {
 			changes++;
 		}
 		//Stalion
-		if ((player.gender == 1 || player.gender == 3) && rand(3) == 0 && changes < changeLimit) {
+		if ((player.gender == 1 || player.gender == 3) && rand(3) == 0 && changes < changeLimit && !sagittariusBow) {
 			//If cocks that aren't horsified!
 			if ((player.horseCocks() + player.demonCocks()) < player.cockTotal()) {
 				var temp:int = player.findFirstCockNotInType([CockTypesEnum.HORSE,CockTypesEnum.DEMON]);
@@ -151,7 +152,7 @@ public class Centaurinum extends Consumable {
 				player.MutagenBonus("lib", 1);
 			}
 			//Chance of ball growth if not 3" yet
-			if (rand(2) == 0 && changes < changeLimit && player.ballSize <= 3 && player.horseCocks() > 0) {
+			if (rand(2) == 0 && changes < changeLimit && player.ballSize <= 3 && player.horseCocks() > 0 && !sagittariusBow) {
 				if (player.balls == 0) {
 					outputText("\n\nA nauseating pressure forms just under the base of your maleness.  With agonizing pain the flesh bulges and distends, pushing out a rounded lump of flesh that you recognize as a testicle!  A moment later relief overwhelms you as the second drops into your newly formed sack.");
 					CoC.instance.transformations.BallsDuo.applyEffect(false);
@@ -234,84 +235,6 @@ public class Centaurinum extends Consumable {
 		if (player.hasVagina() && player.vaginaType() != VaginaClass.EQUINE && !sagittariusBow && changes < changeLimit && rand(3) == 0) {
 			CoC.instance.transformations.VaginaHorse().applyEffect();
 		}
-		if ((player.gender == 2 || player.gender == 3) && player.cocks.length > 0 && rand(3) == 0 && sagittariusBow) {
-            //Kills vagina size (and eventually the whole vagina)
-            if (player.vaginas.length > 0) {
-                if (player.vaginas[0].vaginalLooseness > VaginaClass.LOOSENESS_TIGHT) {
-                    //tighten that bitch up!
-                    outputText("[pg]Your [vagina] clenches up painfully as it tightens up, becoming smaller and tighter.");
-                    player.vaginas[0].vaginalLooseness--;
-                } else {
-                    outputText("[pg]A tightness in your groin is the only warning you get before your <b>[vagina] disappears forever</b>!");
-                    if (player.cocks.length == 0) {
-                        outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment. Eventually it ends, <b>leaving you with a completely human penis.</b>");
-                        player.createCock(player.clitLength + 2);
-                        player.clitLength = .25;
-                    }
-                    //Goodbye womanhood!
-                    player.removeVagina(0, 1);
-                }
-                changes++;
-            }
-            //-Remove extra breast rows
-            if (changes < changeLimit && player.bRows() > 1 && rand(3) == 0) {
-                changes++;
-                outputText("[pg]You stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + player.breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ");
-                if (player.bRows() >= 3) outputText("abdomen");
-                else outputText("chest");
-                outputText(". The " + player.nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
-                if (player.isFurCovered()) outputText(player.furColor + " " + player.skinDesc);
-                else outputText(player.skinColor + " " + player.skinDesc);
-                outputText(" remains. <b>You've lost a row of breasts!</b>");
-                dynStats("sen", -5);
-                player.removeBreastRow(player.breastRows.length - 1, 1);
-            }
-            //Shrink boobages till they are normal
-            else if (rand(2) == 0 && changes < changeLimit && player.breastRows.length > 0) {
-                //Single row
-                if (player.breastRows.length == 1) {
-                    //Shrink if bigger than B cups
-                    if (player.breastRows[0].breastRating >= 1) {
-                        temp = 1;
-                        player.breastRows[0].breastRating--;
-                        //Shrink again if huuuuge
-                        if (player.breastRows[0].breastRating > 8) {
-                            temp++;
-                            player.breastRows[0].breastRating--;
-                        }
-                        //Talk about shrinkage
-                        if (temp == 1) outputText("[pg]You feel a weight lifted from you, and realize your [breasts] have shrunk to " + player.breastCup(0) + "s.");
-                        if (temp == 2) outputText("[pg]You feel significantly lighter.  Looking down, you realize your breasts are MUCH smaller, down to " + player.breastCup(0) + "s.");
-                        changes++;
-                    }
-                }
-                //multiple
-                else {
-                    //temp2 = amount changed
-                    //temp3 = counter
-                    temp = 0;
-                    temp2 = 0;
-                    temp3 = 0;
-                    if (player.biggestTitSize() >= 1) outputText("\n");
-                    while (temp3 < player.breastRows.length) {
-                        if (player.breastRows[temp3].breastRating >= 1) {
-                            player.breastRows[temp3].breastRating--;
-                            temp2++;
-                            outputText("\n");
-                            //If this isn't the first change...
-                            if (temp2 > 1) outputText("...and y");
-                            else outputText("Y");
-                            outputText("our " + player.breastDescript(temp3) + " shrink, dropping to " + player.breastCup(temp3) + "s.");
-                        }
-                        temp3++;
-                    }
-                    if (temp2 == 2) outputText("\nYou feel so much lighter after the change.");
-                    if (temp2 == 3) outputText("\nWithout the extra weight you feel particularly limber.");
-                    if (temp2 >= 4) outputText("\nIt feels as if the weight of the world has been lifted from your shoulders, or in this case, your chest.");
-                    if (temp2 > 0) changes++;
-                }
-            }
-        }
 		//classic horse-taur version
 		if (changes < changeLimit && rand(2) == 0 && player.lowerBody == LowerBody.HOOFED && !player.isTaur()) {
 			outputText("\n\n");
@@ -391,7 +314,7 @@ public class Centaurinum extends Consumable {
         }
 		if (rand(3) == 0) outputText(player.modTone(60, 1));
 		//FAILSAFE CHANGE
-		if (changes == 0) {
+		if (changes == 0 && !sagittariusBow) {
 			outputText("\n\nInhuman vitality spreads through your body, invigorating you!\n");
 			EngineCore.HPChange(50, true);
 			dynStats("lus", 3, "scale", false);

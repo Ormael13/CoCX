@@ -428,7 +428,12 @@ public class Lumi extends BaseContent {
 		if (player.hasKeyItem("Dynapunch Glove") < 0 && player.hasKeyItem("Blueprint - Dynapunch Glove") < 0) addButton(3, "Dynapunch G.", lumiEngineeringBuyBlueprintDynapunchGlove).hint("Dynapunch Glove BP - 500 gems");
 		if (player.hasKeyItem("Improved Artificial Intelligence") < 0 && player.hasKeyItem("Blueprint - Artificial Intelligence") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence") < 0) addButton(4, "Improved AI", lumiEngineeringBuyBlueprintImprovedArtificialIntelligence).hint("Improved Artificial Intelligence BP - 500 gems");
 		if (player.hasKeyItem("Artificial Intelligence") < 0 && player.hasKeyItem("Blueprint - Artificial Intelligence") < 0) addButton(4, "AI", lumiEngineeringBuyBlueprintArtificialIntelligence).hint("Artificial Intelligence BP - 500 gems");
-		//5
+		if (player.hasKeyItem("Hydraulics MK6") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK6") < 0) addButton(5, "Hydraulics MK6", lumiEngineeringBuyBlueprintHydraulicsMK6).hint("Hydraulics MK6 BP - 3000 gems");
+		if (player.hasKeyItem("Hydraulics MK5") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK5") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK6") < 0) addButton(5, "Hydraulics MK5", lumiEngineeringBuyBlueprintHydraulicsMK5).hint("Hydraulics MK5 BP - 2500 gems");
+		if (player.hasKeyItem("Hydraulics MK4") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK4") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK5") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK6") < 0) addButton(5, "Hydraulics MK4", lumiEngineeringBuyBlueprintHydraulicsMK4).hint("Hydraulics MK4 BP - 2000 gems");
+		if (player.hasKeyItem("Hydraulics MK3") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK3") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK4") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK5") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK6") < 0) addButton(5, "Hydraulics MK3", lumiEngineeringBuyBlueprintHydraulicsMK3).hint("Hydraulics MK3 BP - 1500 gems");
+		if (player.hasKeyItem("Hydraulics MK2") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK2") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK3") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK4") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK5") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK6") < 0) addButton(5, "Hydraulics MK2", lumiEngineeringBuyBlueprintHydraulicsMK2).hint("Hydraulics MK2 BP - 1000 gems");
+		if (player.hasKeyItem("Hydraulics") < 0 && player.hasKeyItem("Blueprint - Hydraulics") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK2") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK3") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK4") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK5") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK6") < 0) addButton(5, "Hydraulics", lumiEngineeringBuyBlueprintHydraulics).hint("Hydraulics BP - 500 gems");
 		//6
 		//7
 		if (player.hasKeyItem("Medical Dispenser 2.0") < 0 && player.hasKeyItem("Blueprint - Medical Dispenser 2.0") < 0) addButton(0, "Medical Dispenser 2.0", lumiEngineeringBuyBlueprintMedicalDispenser2).hint("Medical Dispenser 2.0 BP - 500 gems");
@@ -1153,6 +1158,24 @@ public class Lumi extends BaseContent {
 	public function lumiEngineeringBuyBlueprintAutoTurretMK6():void {
 		lumiEngineeringBuyBlueprintSharedPart(3000, "Auto turret MK6");
 	}
+	public function lumiEngineeringBuyBlueprintHydraulics():void {
+		lumiEngineeringBuyBlueprintSharedPart(500, "Hydraulics");
+	}
+	public function lumiEngineeringBuyBlueprintHydraulicsMK2():void {
+		lumiEngineeringBuyBlueprintSharedPart(1000, "Hydraulics MK2");
+	}
+	public function lumiEngineeringBuyBlueprintHydraulicsMK3():void {
+		lumiEngineeringBuyBlueprintSharedPart(1500, "Hydraulics MK3");
+	}
+	public function lumiEngineeringBuyBlueprintHydraulicsMK4():void {
+		lumiEngineeringBuyBlueprintSharedPart(2000, "Hydraulics MK4");
+	}
+	public function lumiEngineeringBuyBlueprintHydraulicsMK5():void {
+		lumiEngineeringBuyBlueprintSharedPart(2500, "Hydraulics MK5");
+	}
+	public function lumiEngineeringBuyBlueprintHydraulicsMK6():void {
+		lumiEngineeringBuyBlueprintSharedPart(3000, "Hydraulics MK6");
+	}
 	public function lumiEngineeringBuyBlueprintEnergyCore():void {
 		clearOutput();
 		if (player.gems >= 50) {
@@ -1371,6 +1394,12 @@ public class Lumi extends BaseContent {
 		if (player.hasKeyItem("Blueprint - Safety bubble") >= 0) outputText("Safety bubble - Req. 1 metal pieces, 100 nails, 1 energy core.\n");
 		if (player.hasKeyItem("Blueprint - Improved Artificial Intelligence") >= 0) outputText("Improved Artificial Intelligence - Req. 50+ int, 1 energy core.\n");
 		if (player.hasKeyItem("Blueprint - Artificial Intelligence") >= 0) outputText("Artificial Intelligence - Req. 50+ int, 1 golem core.\n");
+		if (player.hasKeyItem("Blueprint - Hydraulics MK6") >= 0) outputText("Hydraulics MK6 - Req. 300+ int, 50 metal pieces.\n");
+		if (player.hasKeyItem("Blueprint - Hydraulics MK5") >= 0) outputText("Hydraulics MK5 - Req. 250+ int, 40 metal pieces.\n");
+		if (player.hasKeyItem("Blueprint - Hydraulics MK4") >= 0) outputText("Hydraulics MK4 - Req. 200+ int, 30 metal pieces.\n");
+		if (player.hasKeyItem("Blueprint - Hydraulics MK3") >= 0) outputText("Hydraulics MK3 - Req. 150+ int, 20 metal pieces.\n");
+		if (player.hasKeyItem("Blueprint - Hydraulics MK2") >= 0) outputText("Hydraulics MK2 - Req. 100+ int, 10 metal pieces.\n");
+		if (player.hasKeyItem("Blueprint - Hydraulics") >= 0) outputText("Hydraulics - Req. 50+ int, 5 metal pieces.\n");
 		if (player.hasKeyItem("Blueprint - Repeater Gun") >= 0) outputText("Repeater Gun - Req. 50+ int, 2 metal pieces, 100 nails.\n");
 		if (player.hasKeyItem("Blueprint - Medical Dispenser 2.0") >= 0) outputText("Medical Dispenser 2.0 - Req. 100+ int, Stimpack Dispenser 1.0, 20 metal pieces, 500 nails, 5 healing pills, 5 energy cores.\n");
 		if (player.hasKeyItem("Blueprint - Stimpack Dispenser 1.0") >= 0) outputText("Stimpack Dispenser 1.0 - Req. 50+ int, knowing Heal spell, Toolbelt, 10 metal pieces, 200 nails, 5 healing pills.\n");
@@ -1394,9 +1423,14 @@ public class Lumi extends BaseContent {
 		if (player.hasKeyItem("Blueprint - Taser") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 75 && CampStatsAndResources.MetalPieces >= 10 && CampStatsAndResources.NailsResc >= 300 && CampStatsAndResources.EnergyCoreResc >= 1 && CampStatsAndResources.MechanismResc >= 1) addButton(1, "Tazer", lumiWorkshopTaser).hint("Tazer - Adds an Tazer option to your mech. - 75+ int, Toolbelt, 10 metal pieces, 300 nails, 1 mechanism, 1 energy core and 8 hours of work");
 		if (player.hasKeyItem("Blueprint - Safety bubble") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && CampStatsAndResources.EnergyCoreResc >= 1 && CampStatsAndResources.MetalPieces >= 1 && CampStatsAndResources.NailsResc >= 100) addButton(2, "Safety bubble", lumiWorkshopSafetyBubble).hint("Safety bubble - Allows you to use the mech underwater. Too fragile for standard combat use but provide fresh air. - 1 metal pieces, 100 nails, 1 energy core and 4 hours of work.");
 		if (player.hasKeyItem("Blueprint - Dynapunch Glove") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && CampStatsAndResources.MetalPieces >= 2 && CampStatsAndResources.NailsResc >= 100 && CampStatsAndResources.MechanismResc >= 1) addButton(3, "Dynapunch G.", lumiWorkshopDynapunchGlove).hint("Dynapunch Glove - Adds a punching option to your mech. - 50+ int, Toolbelt, 2 metal pieces, 100 nails, 1 mechanism and 4 hour work.");
-		if (player.hasKeyItem("Blueprint - Improved Artificial Intelligence") >= 0 && player.hasKeyItem("Artificial Intelligence") >= 0 && CampStatsAndResources.EnergyCoreResc >= 1) addButton(4, "Improved AI", lumiWorkshopImprovedArtificialIntelligence).hint("Improved Artificial Intelligence - The mech can now use an auto turret. - 1 energy core and 4 hours of work.");
-		if (player.hasKeyItem("Blueprint - Artificial Intelligence") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.hasItem(useables.GOLCORE, 1)) addButton(4, "AI", lumiWorkshopArtificialIntelligence).hint("Artificial Intelligence - Add an artificial intelligence to your mech which will greet you when you board. Aside from the friendliness of this new interface feature it cannot do much on its own yet. - 1 golem core and 4 hours of work.");
-		//5
+		if (player.hasKeyItem("Blueprint - Improved Artificial Intelligence") >= 0 && player.hasKeyItem("Artificial Intelligence") >= 0 && player.inte >= 100 && CampStatsAndResources.EnergyCoreResc >= 1) addButton(4, "Improved AI", lumiWorkshopImprovedArtificialIntelligence).hint("Improved Artificial Intelligence - The mech can now use an auto turret. - 100+ int, 1 energy core and 4 hours of work.");
+		if (player.hasKeyItem("Blueprint - Artificial Intelligence") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && player.hasItem(useables.GOLCORE, 1)) addButton(4, "AI", lumiWorkshopArtificialIntelligence).hint("Artificial Intelligence - Add an artificial intelligence to your mech which will greet you when you board. Aside from the friendliness of this new interface feature it cannot do much on its own yet. - 50+ int, Toolbelt, 1 golem core and 4 hours of work.");
+		if (player.hasKeyItem("Blueprint - Hydraulics MK6") >= 0 && player.hasKeyItem("Hydraulics MK 5") >= 0 && player.inte >= 300 && CampStatsAndResources.MetalPieces >= 50) addButton(5, "Hydraulics MK6", lumiWorkshopHydraulicsMK6).hint("Hydraulics MK6 - Mechs gain 150% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus. - 300+ int, 50 metal pieces and 12 hours of work.");
+		if (player.hasKeyItem("Blueprint - Hydraulics MK5") >= 0 && player.hasKeyItem("Hydraulics MK 4") >= 0 && player.inte >= 250 && CampStatsAndResources.MetalPieces >= 40) addButton(5, "Hydraulics MK5", lumiWorkshopHydraulicsMK5).hint("Hydraulics MK5 - Mechs gain 125% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus. - 250+ int, 40 metal pieces and 12 hours of work.");
+		if (player.hasKeyItem("Blueprint - Hydraulics MK4") >= 0 && player.hasKeyItem("Hydraulics MK 3") >= 0 && player.inte >= 200 && CampStatsAndResources.MetalPieces >= 30) addButton(5, "Hydraulics MK4", lumiWorkshopHydraulicsMK4).hint("Hydraulics MK4 - Mechs gain 100 of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus. - 200+ int, 30 metal pieces and 8 hours of work.");
+		if (player.hasKeyItem("Blueprint - Hydraulics MK3") >= 0 && player.hasKeyItem("Hydraulics MK 2") >= 0 && player.inte >= 150 && CampStatsAndResources.MetalPieces >= 20) addButton(5, "Hydraulics MK3", lumiWorkshopHydraulicsMK3).hint("Hydraulics MK3 - Mechs gain 75% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus. - 150+ int, 20 metal pieces and 8 hours of work.");
+		if (player.hasKeyItem("Blueprint - Hydraulics MK2") >= 0 && player.hasKeyItem("Hydraulics") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 10) addButton(5, "Hydraulics MK2", lumiWorkshopHydraulicsMK2).hint("Hydraulics MK2 - Mechs gain 50% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus. - 100+ int, 10 metal pieces and 4 hours of work.");
+		if (player.hasKeyItem("Blueprint - Hydraulics") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && CampStatsAndResources.MetalPieces >= 5) addButton(5, "Hydraulics", lumiWorkshopHydraulics).hint("Hydraulics - Mechs gain 25% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus. - 50+ int, Toolbelt, 5 metal pieces and 4 hours of work.");
 		//6
 		//7
 		if (player.hasKeyItem("Blueprint - Medical Dispenser 2.0") >= 0 && player.hasKeyItem("Stimpack Dispenser 1.0") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 20 && CampStatsAndResources.NailsResc >= 500 && CampStatsAndResources.EnergyCoreResc >= 5 && player.hasItem(consumables.H_PILL, 5)) addButton(8, "Medical Dispenser 2.0", lumiWorkshopMedicalDispenser2).hint("Medical Dispenser 2.0 - Healing for 10 turns 20% of Heal spell value rising lust by 0,5% each turn. - 100+ int, Stimpack Dispenser 1.0, 20 metal pieces, 500 nails, 5 healing pills, 5 energy cores and 12 hours of work");
@@ -1831,6 +1865,41 @@ public class Lumi extends BaseContent {
 		player.destroyItems(useables.GOLCORE, 1);
 		lumiWorkshopSharedPart4Hours("Artificial Intelligence");
 	}
+	public function lumiWorkshopHydraulicsMK6():void {
+		clearOutput();
+		CampStatsAndResources.MetalPieces -= 50;
+		player.removeKeyItem("Hydraulics MK5");
+		lumiWorkshopSharedPart12Hours("Hydraulics MK6");
+	}
+	public function lumiWorkshopHydraulicsMK5():void {
+		clearOutput();
+		CampStatsAndResources.MetalPieces -= 40;
+		player.removeKeyItem("Hydraulics MK4");
+		lumiWorkshopSharedPart12Hours("Hydraulics MK5");
+	}
+	public function lumiWorkshopHydraulicsMK4():void {
+		clearOutput();
+		CampStatsAndResources.MetalPieces -= 30;
+		player.removeKeyItem("Hydraulics MK3");
+		lumiWorkshopSharedPart8Hours("Hydraulics MK4");
+	}
+	public function lumiWorkshopHydraulicsMK3():void {
+		clearOutput();
+		CampStatsAndResources.MetalPieces -= 20;
+		player.removeKeyItem("Hydraulics MK2");
+		lumiWorkshopSharedPart8Hours("Hydraulics MK3");
+	}
+	public function lumiWorkshopHydraulicsMK2():void {
+		clearOutput();
+		CampStatsAndResources.MetalPieces -= 10;
+		player.removeKeyItem("Hydraulics");
+		lumiWorkshopSharedPart4Hours("Hydraulics MK2");
+	}
+	public function lumiWorkshopHydraulics():void {
+		clearOutput();
+		CampStatsAndResources.MetalPieces -= 5;
+		lumiWorkshopSharedPart4Hours("Hydraulics");
+	}
 	public function lumiWorkshopMachineGunMK6():void {
 		clearOutput();
 		CampStatsAndResources.MetalPieces -= 25;
@@ -1989,50 +2058,30 @@ public class Lumi extends BaseContent {
 		CampStatsAndResources.NailsResc -= 500;
 		CampStatsAndResources.EnergyCoreResc -= 5;
 		player.destroyItems(consumables.H_PILL, 5);
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new Medical Dispenser 2.0 is ready and installed up your " + player.vehiclesName + ".\n\n");
-		player.createKeyItem("Medical Dispenser 2.0", 0, 0, 0, 0);
-		player.removeKeyItem("Blueprint - Medical Dispenser 2.0");
 		player.removeKeyItem("Stimpack Dispenser 1.0");
-		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
-		else doNext(camp.returnToCampUseTwelveHours);
+		lumiWorkshopSharedPart12Hours("Medical Dispenser 2.0");
 	}
 	public function lumiWorkshopStimpackDispenser1():void {
 		clearOutput();
 		CampStatsAndResources.MetalPieces -= 10;
 		CampStatsAndResources.NailsResc -= 200;
 		player.destroyItems(consumables.H_PILL, 5);
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Stimpack Dispenser 1.0 is ready and installed up your " + player.vehiclesName + ".\n\n");
-		player.createKeyItem("Stimpack Dispenser 1.0", 0, 0, 0, 0);
-		player.removeKeyItem("Blueprint - Stimpack Dispenser 1.0");
-		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
-		else doNext(camp.returnToCampUseFourHours);
+		lumiWorkshopSharedPart4Hours("Stimpack Dispenser 1.0");
 	}
 	public function lumiWorkshopOmniMissile():void {
 		clearOutput();
 		CampStatsAndResources.MetalPieces -= 20;
 		CampStatsAndResources.NailsResc -= 500;
 		CampStatsAndResources.MechanismResc -= 10;
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "eight":"twelve")+" hours your brand new Omni Missile is ready and installed up your " + player.vehiclesName + ".\n\n");
-		player.createKeyItem("Omni Missile", 0, 0, 0, 0);
-		player.removeKeyItem("Blueprint - Omni Missile");
 		player.removeKeyItem("Missile launcher");
-		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseEightHours);
-		else doNext(camp.returnToCampUseTwelveHours);
+		lumiWorkshopSharedPart12Hours("Omni Missile");
 	}
 	public function lumiWorkshopMissileLauncher():void {
 		clearOutput();
 		CampStatsAndResources.MetalPieces -= 10;
 		CampStatsAndResources.NailsResc -= 500;
 		CampStatsAndResources.MechanismResc -= 5;
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "four":"eight")+" hours your brand new Missile launcher is ready and installed up your " + player.vehiclesName + ".\n\n");
-		player.createKeyItem("Missile launcher", 0, 0, 0, 0);
-		player.removeKeyItem("Blueprint - Missile launcher");
-		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseFourHours);
-		else doNext(camp.returnToCampUseEightHours);
+		lumiWorkshopSharedPart8Hours("Missile launcher");
 	}
 	public function lumiWorkshopLustnadeLauncher():void {
 		clearOutput();
@@ -2040,57 +2089,32 @@ public class Lumi extends BaseContent {
 		CampStatsAndResources.NailsResc -= 500;
 		CampStatsAndResources.MechanismResc -= 10;
 		player.destroyItems(consumables.L_DRAFT, 10);
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Lustnade Launcher is ready and installed up your " + player.vehiclesName + ".\n\n");
-		player.createKeyItem("Lustnade Launcher", 0, 0, 0, 0);
-		player.removeKeyItem("Blueprint - Lustnade Launcher");
 		player.removeKeyItem("Aphrodigas Gun");
-		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
-		else doNext(camp.returnToCampUseFourHours);
+		lumiWorkshopSharedPart4Hours("Lustnade Launcher");
 	}
 	public function lumiWorkshopAphrodigasGun():void {
 		clearOutput();
 		CampStatsAndResources.MetalPieces -= 2;
 		CampStatsAndResources.NailsResc -= 100;
 		player.destroyItems(consumables.L_DRAFT, 5);
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Aphrodigas Gun is ready and installed up your " + player.vehiclesName + ".\n\n");
-		player.createKeyItem("Aphrodigas Gun", 0, 0, 0, 0);
-		player.removeKeyItem("Blueprint - Aphrodigas Gun");
-		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
-		else doNext(camp.returnToCampUseFourHours);
+		lumiWorkshopSharedPart4Hours("Aphrodigas Gun");
 	}
 	public function lumiWorkshopImpregnator1():void {
 		clearOutput();
 		CampStatsAndResources.MetalPieces -= 5;
 		CampStatsAndResources.NailsResc -= 100;
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Impregnator 1.0 is ready and installed up your " + player.vehiclesName + ".\n\n");
-		player.createKeyItem("Impregnator 1.0", 0, 0, 0, 0);
-		player.removeKeyItem("Blueprint - Impregnator 1.0");
-		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
-		else doNext(camp.returnToCampUseFourHours);
+		lumiWorkshopSharedPart4Hours("Impregnator 1.0");
 	}
 	public function lumiWorkshopSPMK1():void {
 		clearOutput();
 		CampStatsAndResources.MetalPieces -= 1;
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new SPMK1 is ready and installed up your " + player.vehiclesName + ".\n\n");
-		player.createKeyItem("SPMK1", 0, 0, 0, 0);
-		player.removeKeyItem("Blueprint - SPMK1");
-		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
-		else doNext(camp.returnToCampUseFourHours);
+		lumiWorkshopSharedPart4Hours("SPMK1");
 	}
 	public function lumiWorkshopCumReservoir():void {
 		clearOutput();
 		CampStatsAndResources.MetalPieces -= 5;
 		CampStatsAndResources.NailsResc -= 100;
-		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Cum Reservoir is ready and installed up your " + player.vehiclesName + ".\n\n");
-		player.createKeyItem("Cum Reservoir", 0, 0, 0, 0);
-		player.removeKeyItem("Blueprint - Cum Reservoir");
-		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
-		else doNext(camp.returnToCampUseFourHours);
+		lumiWorkshopSharedPart4Hours("Cum Reservoir");
 	}
 	public function lumiWorkshopMK2Jetpack():void {
 		clearOutput();

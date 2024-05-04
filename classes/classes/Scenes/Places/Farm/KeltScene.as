@@ -800,25 +800,25 @@ private function keltTrainingPerks():void {
 	outputText("\r\rTraining with Kelt has its advantages and disadvantages. While he is terrible at social relations and would scare off just about anyone his technique is one of a kind. ");
 	if (player.isTaur()) {
 		outputText("Thanks to his archery technique being made to be used by a centaur you quickly picked up some skills of his which are made possible only by your current body configurations. By learning how to shoot while on movement you have learned something akin to a mounted archery technique… well except you don’t need a mount for it. You learned the <b>Centaur hunter style: </b>");
-		if (player.statusEffectv1(StatusEffects.Kelt) >= 20 && !player.hasPerk(PerkLib.CentaurHunterStyleMovingShot)) {
-			player.createPerk(PerkLib.CentaurHunterStyleMovingShot, 0, 0, 0, 0);
-			outputText("Moving Shot");
+		if (player.statusEffectv1(StatusEffects.Kelt) >= 100 && !player.hasPerk(PerkLib.CentaurHunterStyleMeteorShower) && player.hasPerk(PerkLib.CentaurHunterStyleMeteorShot)) {
+			player.createPerk(PerkLib.CentaurHunterStyleMeteorShower, 0, 0, 0, 0);
+			outputText("Meteor Shower");
 		}
-		if (player.statusEffectv1(StatusEffects.Kelt) >= 40 && !player.hasPerk(PerkLib.CentaurHunterStyleWindReader)) {
-			player.createPerk(PerkLib.CentaurHunterStyleWindReader, 0, 0, 0, 0);
-			outputText("Wind Reader");
-		}
-		if (player.statusEffectv1(StatusEffects.Kelt) >= 60 && !player.hasPerk(PerkLib.CentaurHunterStyleGreatPull)) {
-			player.createPerk(PerkLib.CentaurHunterStyleGreatPull, 0, 0, 0, 0);
-			outputText("Great Pull");
-		}
-		if (player.statusEffectv1(StatusEffects.Kelt) >= 80 && !player.hasPerk(PerkLib.CentaurHunterStyleMeteorShot)) {
+		if (player.statusEffectv1(StatusEffects.Kelt) >= 80 && !player.hasPerk(PerkLib.CentaurHunterStyleMeteorShot) && player.hasPerk(PerkLib.CentaurHunterStyleGreatPull)) {
 			player.createPerk(PerkLib.CentaurHunterStyleMeteorShot, 0, 0, 0, 0);
 			outputText("Meteor Shot");
 		}
-		if (player.statusEffectv1(StatusEffects.Kelt) >= 100 && !player.hasPerk(PerkLib.CentaurHunterStyleMeteorShower)) {
-			player.createPerk(PerkLib.CentaurHunterStyleMeteorShower, 0, 0, 0, 0);
-			outputText("Meteor Shower");
+		if (player.statusEffectv1(StatusEffects.Kelt) >= 60 && !player.hasPerk(PerkLib.CentaurHunterStyleGreatPull) && player.hasPerk(PerkLib.CentaurHunterStyleWindReader)) {
+			player.createPerk(PerkLib.CentaurHunterStyleGreatPull, 0, 0, 0, 0);
+			outputText("Great Pull");
+		}
+		if (player.statusEffectv1(StatusEffects.Kelt) >= 40 && !player.hasPerk(PerkLib.CentaurHunterStyleWindReader) && player.hasPerk(PerkLib.CentaurHunterStyleMovingShot)) {
+			player.createPerk(PerkLib.CentaurHunterStyleWindReader, 0, 0, 0, 0);
+			outputText("Wind Reader");
+		}
+		if (player.statusEffectv1(StatusEffects.Kelt) >= 20 && !player.hasPerk(PerkLib.CentaurHunterStyleMovingShot)) {
+			player.createPerk(PerkLib.CentaurHunterStyleMovingShot, 0, 0, 0, 0);
+			outputText("Moving Shot");
 		}
 		outputText("!</b>");
 	}

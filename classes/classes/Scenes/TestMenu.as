@@ -1711,12 +1711,17 @@ public class TestMenu extends BaseContent
 			addButton(7, "BerserkerSet", AddTheBBS).hint("Add set of items for Berserker set.");//7
 			addButton(8, "CheckWeapon", TestWeaponType).hint("Detect Weapon Type Equiped for sprite and battle testing.");
 			addButton(9, "Ascensus", AddTheStaffs).hint("Add set of items for Ascensus.");
-			addButton(10, "YODrops", AddYukiOnnaStuff).hint("Add both Yuki Onna equipment drops for testing purposes.");
+			addButton(10, "SagittariusBow", AddTheSagittarius);//addButton(10, "YODrops", AddYukiOnnaStuff).hint("Add both Yuki Onna equipment drops for testing purposes.");
 			addButton(11, "SpikeShields", AddSpikedShields).hint("Add set of two spiked shields of various sizes and weight for testing purposes.");
 			addButton(12, "MatrixArmory1", AddTheSeerHairpinAndCo).hint("Adds: 1 Eldritch Staff, 1 master Gloves, 1 Gnoll Throwing Axes, 1 Hodr's Bow, 1 Truestrike Sword, 1 Sceptre of Command, 1 Demonic Scythe, 1 Seer's Hairpin, Sakura Petal Kimono, Oni bead necklace");
 			addButton(13, "-1-", EquipmentMenu, page - 1);
 			addButton(14, "Back", SoulforceCheats);
 		}
+	}
+	public function AddTheSagittarius():void {
+		outputText("\n\n<b>(Gained Sagittarius Bow!)</b>\n\n");
+		if (!player.hasStatusEffect(StatusEffects.TookSagittariusBanefulGreatBow)) player.createStatusEffect(StatusEffects.TookSagittariusBanefulGreatBow,1,0,0,0);
+		inventory.takeItem(weaponsrange.SAGITTB, curry(EquipmentMenu, 2));
 	}
 	public function AddTheBBS():void {
 		outputText("\n\n<b>(Gained set of items to make berseker set!)</b>\n\n");
@@ -2698,4 +2703,4 @@ public class TestMenu extends BaseContent
 		SceneLib.lily.lilyEncounter();
 	}
 	}
-}
+}

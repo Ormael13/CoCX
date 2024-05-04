@@ -2949,7 +2949,200 @@ public final class Mutations extends MutationsHelper {
     }
 	
 	public function sagittariusBowChanges(player:Player):void {
-		sagittariusBowTFchanges.centaurTFEffects(true);
+		var changes:Number = 0;
+		var changeLimit:Number = 1;
+		//Temporary storage
+        var temp:Number = 0;
+		var temp2:Number = 0;
+		var temp3:Number = 0;
+		if ((player.gender == 1 || player.gender == 3) && rand(3) == 0 && changes < changeLimit) {
+			//If cocks that aren't horsified!
+			if ((player.horseCocks() + player.demonCocks()) < player.cockTotal()) {
+				var temp4:int = player.findFirstCockNotInType([CockTypesEnum.HORSE,CockTypesEnum.DEMON]);
+				transformations.CockHorse(temp4).applyEffect();
+				temp2 = player.growCock(temp4, rand(4) + 4);
+				dynStats("lus", 35, "scale", false);
+				player.addCurse("sen", 4, 1);
+				player.MutagenBonus("lib", 5);
+				//Make cock thicker if not thick already!
+				if (player.cocks[temp4].cockThickness <= 2) player.thickenCock(temp4, 1);
+				changes++;
+			}
+			//Players cocks are all horse-type - increase size!
+			else {
+				//single cock
+				if (player.cocks.length == 1) {
+					temp2 = player.growCock(0, rand(3) + 1);
+					temp = 0;
+					dynStats("lus", 10, "scale", false);
+					player.addCurse("sen", 1, 1);
+				}
+				//Multicock
+				else {
+					//Find smallest cock
+					//Temp2 = smallness size
+					//temp = current smallest
+					temp3 = player.cocks.length;
+					temp = 0;
+					while (temp3 > 0) {
+						temp3--;
+						//If current cock is smaller than saved, switch values.
+						if (player.cocks[temp].cockLength > player.cocks[temp3].cockLength) {
+							temp2 = player.cocks[temp3].cockLength;
+							temp = temp3;
+						}
+					}
+					//Grow smallest cock!
+					//temp2 changes to growth amount
+					temp2 = player.growCock(temp, rand(4) + 1);
+					dynStats("lus", 10, "scale", false);
+					player.addCurse("sen", 1, 1);
+				}
+				outputText("\n\n");
+				if (temp2 > 2) outputText("Your [cock "+ (temp+1) +"] tightens painfully, inches of taut horse-flesh pouring out from your sheath as it grows longer.  Thick animal-pre forms at the flared tip, drawn out from the pleasure of the change.");
+				if (temp2 > 1 && temp2 <= 2) outputText("Aching pressure builds within your sheath, suddenly releasing as an inch or more of extra dick flesh spills out.  A dollop of pre beads on the head of your enlarged " + player.cockDescript(temp) + " from the pleasure of the growth.");
+				if (temp2 <= 1) outputText("A slight pressure builds and releases as your [cock " + (temp+1) + "] pushes a bit further out of your sheath.");
+				changes++;
+			}
+			//Chance of thickness + daydream
+			if (rand(2) == 0 && changes < changeLimit && player.horseCocks() > 0) {
+				temp3 = 0;
+				temp2 = player.cocks.length;
+				while (temp2 > 0) {
+					temp2--;
+					if (player.cocks[temp2].cockThickness <= player.cocks[temp3].cockThickness) {
+						temp3 = temp2;
+					}
+				}
+				temp = temp3;
+				player.thickenCock(temp, .5);
+				outputText("\n\nYour " + Appearance.cockNoun(CockTypesEnum.HORSE) + " thickens inside its sheath, growing larger and fatter as your veins thicken, becoming more noticeable.  It feels right");
+				if (player.cor + player.lib < 60) outputText(" to have such a splendid tool.  You idly daydream about cunts and pussies, your " + Appearance.cockNoun(CockTypesEnum.HORSE) + " plowing them relentlessly, stuffing them pregnant with cum");
+				else if (player.cor + player.lib < 100) outputText(" to be this way... You breath the powerful animalistic scent and fantasize about fucking centaurs night and day until their bellies slosh with your cum");
+				else if (player.cor + player.lib <= 175) outputText(" to be a rutting stud.  You ache to find a mare or centaur to breed with.  Longing to spend your evenings plunging a " + Appearance.cockNoun(CockTypesEnum.HORSE) + " deep into their musky passages, dumping load after load of your thick animal-cum into them.  You'd be happy just fucking horsecunts morning, noon, and night.  Maybe somewhere there is a farm needing a breeder..");
+				else outputText(" to whinny loudly like a rutting stallion.  Your " + Appearance.cockNoun(CockTypesEnum.HORSE) + " is perfect for fucking centaurs and mares.  You imagine the feel of plowing an equine pussy deeply, bottoming out and unloading sticky jets of horse-jizz into its fertile womb.  Your hand strokes your horsecock of its own accord, musky pre dripping from the flared tip with each stroke.  Your mind wanders to the thought of you with a harem of pregnant centaurs.");
+				outputText(".");
+				if (player.cor < 30) outputText("  You shudder in revulsion at the strange thoughts and vow to control yourself better.");
+				else if (player.cor < 60) outputText("  You wonder why you thought such odd things, but they have a certain appeal.");
+				else if (player.cor < 90) outputText("  You relish your twisted fantasies, hoping to dream of them again.");
+				else outputText("  You flush hotly and give a twisted smile, resolving to find a fitting subject to rape and relive your fantasies.");
+				dynStats("lus", 10, "scale", false);
+				player.MutagenBonus("lib", 1);
+			}
+			//Chance of ball growth if not 3" yet
+			if (rand(2) == 0 && changes < changeLimit && player.ballSize <= 3 && player.horseCocks() > 0) {
+				if (player.balls == 0) {
+					outputText("\n\nA nauseating pressure forms just under the base of your maleness.  With agonizing pain the flesh bulges and distends, pushing out a rounded lump of flesh that you recognize as a testicle!  A moment later relief overwhelms you as the second drops into your newly formed sack.");
+					CoC.instance.transformations.BallsDuo.applyEffect(false);
+					dynStats("lus", 5, "scale", false);
+					player.MutagenBonus("lib", 2);
+				}
+				else {
+					player.ballSize++;
+					if (player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " + Appearance.ballsDescription(false, true, player) + " have grown larger than a human's.");
+					if (player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your [sack].  Walking becomes difficult as you discover your " + Appearance.ballsDescription(false, true, player) + " have enlarged again.");
+					dynStats("lus", 3, "scale", false);
+					player.MutagenBonus("lib", 1);
+				}
+				changes++;
+			}
+		}
+		if (((player.gender == 2 && player.cocks.length == 0) || player.gender == 3) && changes < changeLimit) {
+            //Kills vagina size (and eventually the whole vagina)
+            if (player.vaginas.length > 0) {
+                if (player.vaginas[0].vaginalLooseness > VaginaClass.LOOSENESS_TIGHT) {
+                    //tighten that bitch up!
+                    outputText("[pg]Your [vagina] clenches up painfully as it tightens up, becoming smaller and tighter.");
+                    player.vaginas[0].vaginalLooseness--;
+                } else {
+                    outputText("[pg]A tightness in your groin is the only warning you get before your <b>[vagina] disappears forever</b>!");
+                    if (player.cocks.length == 0) {
+                        outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment. Eventually it ends, <b>leaving you with a completely human penis.</b>");
+                        player.createCock(player.clitLength + 2);
+                        player.clitLength = .25;
+                    }
+                    //Goodbye womanhood!
+                    player.removeVagina(0, 1);
+                }
+                changes++;
+            }
+            //-Remove extra breast rows
+            if (changes < changeLimit && player.bRows() > 1 && rand(3) == 0) {
+                changes++;
+                outputText("[pg]You stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + player.breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ");
+                if (player.bRows() >= 3) outputText("abdomen");
+                else outputText("chest");
+                outputText(". The " + player.nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
+                if (player.isFurCovered()) outputText(player.furColor + " " + player.skinDesc);
+                else outputText(player.skinColor + " " + player.skinDesc);
+                outputText(" remains. <b>You've lost a row of breasts!</b>");
+                dynStats("sen", -5);
+                player.removeBreastRow(player.breastRows.length - 1, 1);
+            }
+            //Shrink boobages till they are normal
+            else if (rand(2) == 0 && changes < changeLimit && player.breastRows.length > 0) {
+                //Single row
+                if (player.breastRows.length == 1) {
+                    //Shrink if bigger than B cups
+                    if (player.breastRows[0].breastRating >= 1) {
+                        temp = 1;
+                        player.breastRows[0].breastRating--;
+                        //Shrink again if huuuuge
+                        if (player.breastRows[0].breastRating > 8) {
+                            temp++;
+                            player.breastRows[0].breastRating--;
+                        }
+                        //Talk about shrinkage
+                        if (temp == 1) outputText("[pg]You feel a weight lifted from you, and realize your [breasts] have shrunk to " + player.breastCup(0) + "s.");
+                        if (temp == 2) outputText("[pg]You feel significantly lighter.  Looking down, you realize your breasts are MUCH smaller, down to " + player.breastCup(0) + "s.");
+                        changes++;
+                    }
+                }
+                //multiple
+                else {
+                    //temp2 = amount changed
+                    //temp3 = counter
+                    temp = 0;
+                    temp2 = 0;
+                    temp3 = 0;
+                    if (player.biggestTitSize() >= 1) outputText("\n");
+                    while (temp3 < player.breastRows.length) {
+                        if (player.breastRows[temp3].breastRating >= 1) {
+                            player.breastRows[temp3].breastRating--;
+                            temp2++;
+                            outputText("\n");
+                            //If this isn't the first change...
+                            if (temp2 > 1) outputText("...and y");
+                            else outputText("Y");
+                            outputText("our " + player.breastDescript(temp3) + " shrink, dropping to " + player.breastCup(temp3) + "s.");
+                        }
+                        temp3++;
+                    }
+                    if (temp2 == 2) outputText("\nYou feel so much lighter after the change.");
+                    if (temp2 == 3) outputText("\nWithout the extra weight you feel particularly limber.");
+                    if (temp2 >= 4) outputText("\nIt feels as if the weight of the world has been lifted from your shoulders, or in this case, your chest.");
+                    if (temp2 > 0) changes++;
+                }
+            }
+        }
+		//Chance of ball growth if not 3" yet
+		if (rand(2) == 0 && changes < changeLimit && player.ballSize <= 3 && player.horseCocks() > 0) {
+			if (player.balls == 0) {
+				outputText("\n\nA nauseating pressure forms just under the base of your maleness.  With agonizing pain the flesh bulges and distends, pushing out a rounded lump of flesh that you recognize as a testicle!  A moment later relief overwhelms you as the second drops into your newly formed sack.");
+				transformations.BallsDuo.applyEffect(false);
+				dynStats("lus", 5, "scale", false);
+				player.MutagenBonus("lib", 2);
+			}
+			else {
+				player.ballSize++;
+				if (player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " + Appearance.ballsDescription(false, true, player) + " have grown larger than a human's.");
+				if (player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your [sack].  Walking becomes difficult as you discover your " + Appearance.ballsDescription(false, true, player) + " have enlarged again.");
+				dynStats("lus", 3, "scale", false);
+				player.MutagenBonus("lib", 1);
+			}
+			changes++;
+		}
+		if (changes < changeLimit) sagittariusBowTFchanges.centaurTFEffects(true);
 		if (!player.inRut) player.goIntoRut(true);
 	}
 
