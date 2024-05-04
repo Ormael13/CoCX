@@ -2045,6 +2045,16 @@ public class Combat extends BaseContent {
 		}
         damage += meleeDamageNoLagSingle(false, damage);
 		if (player.isInGoblinMech()) {
+			if (player.hasKeyItem("Hydraulics") >= 0 || player.hasKeyItem("Hydraulics MK2") >= 0 || player.hasKeyItem("Hydraulics MK3") >= 0 || player.hasKeyItem("Hydraulics MK4") >= 0 || player.hasKeyItem("Hydraulics MK5") >= 0 || player.hasKeyItem("Hydraulics MK6") >= 0) {
+				var hydraulicsMulti:Number = 0.25;
+				if (player.hasKeyItem("Hydraulics MK2") >= 0) hydraulicsMulti += 0.25;
+				if (player.hasKeyItem("Hydraulics MK3") >= 0) hydraulicsMulti += 0.5;
+				if (player.hasKeyItem("Hydraulics MK4") >= 0) hydraulicsMulti += 0.75;
+				if (player.hasKeyItem("Hydraulics MK5") >= 0) hydraulicsMulti += 1;
+				if (player.hasKeyItem("Hydraulics MK6") >= 0) hydraulicsMulti += 1.25;
+				if (player.isInHeavyArmor() || player.isInAyoArmor()) hydraulicsMulti *= 0.5;
+				damage += scalingBonusIntelligence() * hydraulicsMulti;
+			}
 			damage *= 1.3;
 			damage = goblinDamageBonus(damage);
 			if (player.vehicles == vehicles.GOBMPRI) damage *= 1.5;
