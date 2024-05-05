@@ -376,9 +376,9 @@ public class Lumi extends BaseContent {
         outputText("I will ask Lia to write smth for this section.\n\n");
 		menu();
 		addButton(0, "Metal pieces", lumiEngineeringBuyMetalPieces);
-		if (player.hasKeyItem("Blueprint - Energy Core") < 0) addButton(1, "EnergyCore BP", lumiEngineeringBuyBlueprintEnergyCore).hint("Energy Core BP - 50 gems");
+		if (player.hasKeyItem("Blueprint - Energy Core") < 0) addButton(1, "EnergyCore BP", curry(lumiEngineeringBuyBlueprintSharedPart, 50, "Energy Core")).hint("Energy Core BP - 50 gems");
 		else addButtonDisabled(1, "EnergyCore BP", "Already having this blueprint.");
-		if (player.hasKeyItem("Blueprint - Mechanism") < 0) addButton(2, "Mechanism BP", lumiEngineeringBuyBlueprintMechanism).hint("Mechanism BP - 50 gems");
+		if (player.hasKeyItem("Blueprint - Mechanism") < 0) addButton(2, "Mechanism BP", curry(lumiEngineeringBuyBlueprintSharedPart, 50, "Mechanism")).hint("Mechanism BP - 50 gems");
 		else addButtonDisabled(2, "Mechanism BP", "Already having this blueprint.");
 		if (player.hasKeyItem("Toolbelt") < 0 && player.hasKeyItem("Blueprint - Toolbelt") < 0) addButton(3, "Toolbelt", lumiEngineeringBuyBlueprintToolbelt).hint("Toolbelt BP - 100 gems");
 		else addButtonDisabled(3, "Toolbelt", "Already having this blueprint.");
@@ -426,35 +426,35 @@ public class Lumi extends BaseContent {
 		if (player.hasKeyItem("Taser with an overcharged battery") < 0 && player.hasKeyItem("Blueprint - Taser with an overcharged battery") < 0) addButton(1, "Taser O.B.", lumiEngineeringBuyBlueprintTaserOverchargeBattery).hint("Taser overcharge battery BP - 1000 gems");
 		if (player.hasKeyItem("Taser") < 0 && player.hasKeyItem("Taser with an overcharged battery") < 0 && player.hasKeyItem("Blueprint - Taser") < 0) addButton(1, "Taser", lumiEngineeringBuyBlueprintTaser).hint("Taser BP - 500 gems");
 		if (player.hasKeyItem("Safety bubble") < 0 && player.hasKeyItem("Blueprint - Safety bubble") < 0) addButton(2, "Safety bubble", lumiEngineeringBuyBlueprintSafetyBubble).hint("Safety bubble BP - 100 gems");
-		if (player.hasKeyItem("Dynapunch Glove") < 0 && player.hasKeyItem("Blueprint - Dynapunch Glove") < 0) addButton(3, "Dynapunch G.", lumiEngineeringBuyBlueprintDynapunchGlove).hint("Dynapunch Glove BP - 500 gems");
-		if (player.hasKeyItem("Medical Dispenser 2.0") < 0 && player.hasKeyItem("Blueprint - Medical Dispenser 2.0") < 0) addButton(4, "Medical Dispenser 2.0", lumiEngineeringBuyBlueprintMedicalDispenser2).hint("Medical Dispenser 2.0 BP - 500 gems");
-		if (player.hasKeyItem("Stimpack Dispenser 1.0") < 0 && player.hasKeyItem("Medical Dispenser 2.0") < 0 && player.hasKeyItem("Blueprint - Stimpack Dispenser 1.0") < 0) addButton(4, "Stimpack Dispenser 1.0", lumiEngineeringBuyBlueprintStimpackDispenser1).hint("Stimpack Dispenser 1.0 BP - 100 gems");
-		if (player.hasKeyItem("Omni Missile") < 0 && player.hasKeyItem("Blueprint - Omni Missile") < 0) addButton(5, "Omni Missile", lumiEngineeringBuyBlueprintOmniMissile).hint("Omni Missile BP - 1000 gems");
-		if (player.hasKeyItem("Missile launcher") < 0 && player.hasKeyItem("Omni Missile") < 0 && player.hasKeyItem("Blueprint - Missile launcher") < 0) addButton(5, "Missile launcher", lumiEngineeringBuyBlueprintMissileLauncher).hint("Missile launcher BP - 500 gems");
-		if (player.hasKeyItem("Lustnade Launcher") < 0 && player.hasKeyItem("Blueprint - Lustnade Launcher") < 0) addButton(6, "Lustnade Launcher", lumiEngineeringBuyBlueprintLustnadeLauncher).hint("Lustnade Launcher BP - 1000 gems");
-		if (player.hasKeyItem("Aphrodigas Gun") < 0 && player.hasKeyItem("Lustnade Launcher") < 0 && player.hasKeyItem("Blueprint - Aphrodigas Gun") < 0) addButton(6, "Aphrodigas Gun", lumiEngineeringBuyBlueprintAphrodigasGun).hint("Aphrodigas Gun BP - 10 gems");
-		if (player.hasKeyItem("Impregnator 1.0") < 0 && player.hasKeyItem("Blueprint - Impregnator 1.0") < 0) addButton(7, "Impregnator 1.0", lumiEngineeringBuyBlueprintImpregnator1).hint("Impregnator 1.0 BP - 100 gems");
-		if (player.hasKeyItem("SPMK1") < 0 && player.hasKeyItem("Impregnator 1.0") < 0 && player.hasKeyItem("Blueprint - SPMK1") < 0) addButton(7, "SPMK1", lumiEngineeringBuyBlueprintSPMK1).hint("SPMK1 BP - 100 gems");
-		if (player.hasKeyItem("Cum Reservoir") < 0 && player.hasKeyItem("SPMK1") < 0 && player.hasKeyItem("Impregnator 1.0") < 0 && player.hasKeyItem("Blueprint - Cum Reservoir") < 0) addButton(7, "Cum Reservoir", lumiEngineeringBuyBlueprintCumReservoir).hint("Cum Reservoir BP - 100 gems");
-		if (player.hasKeyItem("MK2 Jetpack") < 0 && player.hasKeyItem("Blueprint - MK2 Jetpack") < 0) addButton(8, "MK2 Jetpack", lumiEngineeringBuyBlueprintMK2Jetpack).hint("MK2 Jetpack BP - 500 gems");
-		if (player.hasKeyItem("Jetpack") < 0 && player.hasKeyItem("MK2 Jetpack") < 0 && player.hasKeyItem("Blueprint - Jetpack") < 0) addButton(8, "Jetpack", lumiEngineeringBuyBlueprintJetpack).hint("Jetpack BP - 100 gems");
-		if (player.hasKeyItem("Improved Artificial Intelligence MK4") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence MK4") < 0) addButton(9, "Improved AI MK4", lumiEngineeringBuyBlueprintImprovedArtificialIntelligenceMK4).hint("Improved Artificial Intelligence MK4 BP - 2000 gems");
-		if (player.hasKeyItem("Improved Artificial Intelligence MK3") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence MK3") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence MK4") < 0) addButton(9, "Improved AI MK3", lumiEngineeringBuyBlueprintImprovedArtificialIntelligenceMK3).hint("Improved Artificial Intelligence MK3 BP - 1500 gems");
-		if (player.hasKeyItem("Improved Artificial Intelligence MK2") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence MK2") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence MK3") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence MK4") < 0) addButton(9, "Improved AI MK2", lumiEngineeringBuyBlueprintImprovedArtificialIntelligenceMK2).hint("Improved Artificial Intelligence MK2 BP - 1000 gems");
-		if (player.hasKeyItem("Improved Artificial Intelligence") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence MK2") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence MK3") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence MK4") < 0) addButton(9, "Improved AI", lumiEngineeringBuyBlueprintImprovedArtificialIntelligence).hint("Improved Artificial Intelligence BP - 500 gems");
-		if (player.hasKeyItem("Artificial Intelligence") < 0 && player.hasKeyItem("Blueprint - Artificial Intelligence") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence MK2") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence MK3") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence MK4") < 0) addButton(9, "AI", lumiEngineeringBuyBlueprintArtificialIntelligence).hint("Artificial Intelligence BP - 500 gems");
-		if (player.hasKeyItem("Hydraulics MK6") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK6") < 0) addButton(10, "Hydraulics MK6", lumiEngineeringBuyBlueprintHydraulicsMK6).hint("Hydraulics MK6 BP - 3000 gems");
-		if (player.hasKeyItem("Hydraulics MK5") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK5") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK6") < 0) addButton(10, "Hydraulics MK5", lumiEngineeringBuyBlueprintHydraulicsMK5).hint("Hydraulics MK5 BP - 2500 gems");
-		if (player.hasKeyItem("Hydraulics MK4") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK4") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK5") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK6") < 0) addButton(10, "Hydraulics MK4", lumiEngineeringBuyBlueprintHydraulicsMK4).hint("Hydraulics MK4 BP - 2000 gems");
-		if (player.hasKeyItem("Hydraulics MK3") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK3") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK4") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK5") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK6") < 0) addButton(10, "Hydraulics MK3", lumiEngineeringBuyBlueprintHydraulicsMK3).hint("Hydraulics MK3 BP - 1500 gems");
-		if (player.hasKeyItem("Hydraulics MK2") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK2") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK3") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK4") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK5") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK6") < 0) addButton(10, "Hydraulics MK2", lumiEngineeringBuyBlueprintHydraulicsMK2).hint("Hydraulics MK2 BP - 1000 gems");
-		if (player.hasKeyItem("Hydraulics") < 0 && player.hasKeyItem("Blueprint - Hydraulics") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK2") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK3") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK4") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK5") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK6") < 0) addButton(10, "Hydraulics", lumiEngineeringBuyBlueprintHydraulics).hint("Hydraulics BP - 500 gems");
-		if (player.hasKeyItem("Improved Ammo Chemistry MK6") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK6") < 0) addButton(11, "Improved Ammo Chemistry MK6", lumiEngineeringBuyBlueprintImprovedAmmoChemistryMK6).hint("Improved Ammo Chemistry MK6 BP - 9000 gems");
-		if (player.hasKeyItem("Improved Ammo Chemistry MK5") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK5") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK6") < 0) addButton(11, "Improved Ammo Chemistry MK5", lumiEngineeringBuyBlueprintImprovedAmmoChemistryMK5).hint("Improved Ammo Chemistry MK5 BP - 7500 gems");
-		if (player.hasKeyItem("Improved Ammo Chemistry MK4") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK4") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK5") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK6") < 0) addButton(11, "Improved Ammo Chemistry MK4", lumiEngineeringBuyBlueprintImprovedAmmoChemistryMK4).hint("Improved Ammo Chemistry MK4 BP - 6000 gems");
-		if (player.hasKeyItem("Improved Ammo Chemistry MK3") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK3") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK4") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK5") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK6") < 0) addButton(11, "Improved Ammo Chemistry MK3", lumiEngineeringBuyBlueprintImprovedAmmoChemistryMK3).hint("Improved Ammo Chemistry MK3 BP - 4500 gems");
-		if (player.hasKeyItem("Improved Ammo Chemistry MK2") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK2") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK3") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK4") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK5") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK6") < 0) addButton(11, "Improved Ammo Chemistry MK2", lumiEngineeringBuyBlueprintImprovedAmmoChemistryMK2).hint("Improved Ammo Chemistry MK2 BP - 3000 gems");
-		if (player.hasKeyItem("Improved Ammo Chemistry") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK2") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK3") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK4") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK5") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK6") < 0) addButton(11, "Improved Ammo Chemistry", lumiEngineeringBuyBlueprintImprovedAmmoChemistry).hint("Improved Ammo Chemistry BP - 1500 gems");
+		if (player.hasKeyItem("Dynapunch Glove") < 0 && player.hasKeyItem("Blueprint - Dynapunch Glove") < 0) addButton(3, "Dynapunch G.", curry(lumiEngineeringBuyBlueprintSharedPart, 500, "Dynapunch Glove")).hint("Dynapunch Glove BP - 500 gems");
+		if (player.hasKeyItem("Medical Dispenser 2.0") < 0 && player.hasKeyItem("Blueprint - Medical Dispenser 2.0") < 0) addButton(4, "Medical Dispenser 2.0", curry(lumiEngineeringBuyBlueprintSharedPart, 500, "Medical Dispenser 2.0")).hint("Medical Dispenser 2.0 BP - 500 gems");
+		if (player.hasKeyItem("Stimpack Dispenser 1.0") < 0 && player.hasKeyItem("Medical Dispenser 2.0") < 0 && player.hasKeyItem("Blueprint - Stimpack Dispenser 1.0") < 0) addButton(4, "Stimpack Dispenser 1.0", curry(lumiEngineeringBuyBlueprintSharedPart, 100, "Stimpack Dispenser 1.0")).hint("Stimpack Dispenser 1.0 BP - 100 gems");
+		if (player.hasKeyItem("Omni Missile") < 0 && player.hasKeyItem("Blueprint - Omni Missile") < 0) addButton(5, "Omni Missile", curry(lumiEngineeringBuyBlueprintSharedPart, 1000, "Omni Missile")).hint("Omni Missile BP - 1000 gems");
+		if (player.hasKeyItem("Missile launcher") < 0 && player.hasKeyItem("Omni Missile") < 0 && player.hasKeyItem("Blueprint - Missile launcher") < 0) addButton(5, "Missile launcher", curry(lumiEngineeringBuyBlueprintSharedPart, 500, "Missile launcher")).hint("Missile launcher BP - 500 gems");
+		if (player.hasKeyItem("Lustnade Launcher") < 0 && player.hasKeyItem("Blueprint - Lustnade Launcher") < 0) addButton(6, "Lustnade Launcher", curry(lumiEngineeringBuyBlueprintSharedPart, 1000, "Lustnade Launcher")).hint("Lustnade Launcher BP - 1000 gems");
+		if (player.hasKeyItem("Aphrodigas Gun") < 0 && player.hasKeyItem("Lustnade Launcher") < 0 && player.hasKeyItem("Blueprint - Aphrodigas Gun") < 0) addButton(6, "Aphrodigas Gun", curry(lumiEngineeringBuyBlueprintSharedPart, 100, "Aphrodigas Gun")).hint("Aphrodigas Gun BP - 10 gems");
+		if (player.hasKeyItem("Impregnator 1.0") < 0 && player.hasKeyItem("Blueprint - Impregnator 1.0") < 0) addButton(7, "Impregnator 1.0", curry(lumiEngineeringBuyBlueprintSharedPart, 100, "Impregnator 1.0")).hint("Impregnator 1.0 BP - 100 gems");
+		if (player.hasKeyItem("SPMK1") < 0 && player.hasKeyItem("Impregnator 1.0") < 0 && player.hasKeyItem("Blueprint - SPMK1") < 0) addButton(7, "SPMK1", curry(lumiEngineeringBuyBlueprintSharedPart, 100, "SPMK1")).hint("SPMK1 BP - 100 gems");
+		if (player.hasKeyItem("Cum Reservoir") < 0 && player.hasKeyItem("SPMK1") < 0 && player.hasKeyItem("Impregnator 1.0") < 0 && player.hasKeyItem("Blueprint - Cum Reservoir") < 0) addButton(7, "Cum Reservoir", curry(lumiEngineeringBuyBlueprintSharedPart, 100, "Cum Reservoir")).hint("Cum Reservoir BP - 100 gems");
+		if (player.hasKeyItem("MK2 Jetpack") < 0 && player.hasKeyItem("Blueprint - MK2 Jetpack") < 0) addButton(8, "MK2 Jetpack", curry(lumiEngineeringBuyBlueprintSharedPart, 500, "MK2 Jetpack")).hint("MK2 Jetpack BP - 500 gems");
+		if (player.hasKeyItem("Jetpack") < 0 && player.hasKeyItem("MK2 Jetpack") < 0 && player.hasKeyItem("Blueprint - Jetpack") < 0) addButton(8, "Jetpack", curry(lumiEngineeringBuyBlueprintSharedPart, 100, "Jetpack")).hint("Jetpack BP - 100 gems");
+		if (player.hasKeyItem("Improved Artificial Intelligence MK4") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence MK4") < 0) addButton(9, "Improved AI MK4", curry(lumiEngineeringBuyBlueprintSharedPart, 2000, "Improved Artificial Intelligence MK4")).hint("Improved Artificial Intelligence MK4 BP - 2000 gems");
+		if (player.hasKeyItem("Improved Artificial Intelligence MK3") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence MK3") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence MK4") < 0) addButton(9, "Improved AI MK3", curry(lumiEngineeringBuyBlueprintSharedPart, 1500, "Improved Artificial Intelligence MK3")).hint("Improved Artificial Intelligence MK3 BP - 1500 gems");
+		if (player.hasKeyItem("Improved Artificial Intelligence MK2") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence MK2") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence MK3") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence MK4") < 0) addButton(9, "Improved AI MK2", curry(lumiEngineeringBuyBlueprintSharedPart, 1000, "Improved Artificial Intelligence MK2")).hint("Improved Artificial Intelligence MK2 BP - 1000 gems");
+		if (player.hasKeyItem("Improved Artificial Intelligence") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence MK2") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence MK3") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence MK4") < 0) addButton(9, "Improved AI", curry(lumiEngineeringBuyBlueprintSharedPart, 500, "Improved Artificial Intelligence")).hint("Improved Artificial Intelligence BP - 500 gems");
+		if (player.hasKeyItem("Artificial Intelligence") < 0 && player.hasKeyItem("Blueprint - Artificial Intelligence") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence MK2") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence MK3") < 0 && player.hasKeyItem("Blueprint - Improved Artificial Intelligence MK4") < 0) addButton(9, "AI", curry(lumiEngineeringBuyBlueprintSharedPart, 500, "Artificial Intelligence")).hint("Artificial Intelligence BP - 500 gems");
+		if (player.hasKeyItem("Hydraulics MK6") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK6") < 0) addButton(10, "Hydraulics MK6", curry(lumiEngineeringBuyBlueprintSharedPart, 3000, "Hydraulics MK6")).hint("Hydraulics MK6 BP - 3000 gems");
+		if (player.hasKeyItem("Hydraulics MK5") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK5") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK6") < 0) addButton(10, "Hydraulics MK5", curry(lumiEngineeringBuyBlueprintSharedPart, 2500, "Hydraulics MK5")).hint("Hydraulics MK5 BP - 2500 gems");
+		if (player.hasKeyItem("Hydraulics MK4") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK4") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK5") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK6") < 0) addButton(10, "Hydraulics MK4", curry(lumiEngineeringBuyBlueprintSharedPart, 2000, "Hydraulics MK4")).hint("Hydraulics MK4 BP - 2000 gems");
+		if (player.hasKeyItem("Hydraulics MK3") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK3") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK4") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK5") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK6") < 0) addButton(10, "Hydraulics MK3", curry(lumiEngineeringBuyBlueprintSharedPart, 1500, "Hydraulics MK3")).hint("Hydraulics MK3 BP - 1500 gems");
+		if (player.hasKeyItem("Hydraulics MK2") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK2") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK3") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK4") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK5") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK6") < 0) addButton(10, "Hydraulics MK2", curry(lumiEngineeringBuyBlueprintSharedPart, 1000, "Hydraulics MK2")).hint("Hydraulics MK2 BP - 1000 gems");
+		if (player.hasKeyItem("Hydraulics") < 0 && player.hasKeyItem("Blueprint - Hydraulics") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK2") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK3") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK4") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK5") < 0 && player.hasKeyItem("Blueprint - Hydraulics MK6") < 0) addButton(10, "Hydraulics", curry(lumiEngineeringBuyBlueprintSharedPart, 500, "Hydraulics")).hint("Hydraulics BP - 500 gems");
+		if (player.hasKeyItem("Improved Ammo Chemistry MK6") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK6") < 0) addButton(11, "Improved Ammo Chemistry MK6", curry(lumiEngineeringBuyBlueprintSharedPart, 9000, "Improved Ammo Chemistry MK6")).hint("Improved Ammo Chemistry MK6 BP - 9000 gems");
+		if (player.hasKeyItem("Improved Ammo Chemistry MK5") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK5") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK6") < 0) addButton(11, "Improved Ammo Chemistry MK5", curry(lumiEngineeringBuyBlueprintSharedPart, 7500, "Improved Ammo Chemistry MK5")).hint("Improved Ammo Chemistry MK5 BP - 7500 gems");
+		if (player.hasKeyItem("Improved Ammo Chemistry MK4") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK4") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK5") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK6") < 0) addButton(11, "Improved Ammo Chemistry MK4", curry(lumiEngineeringBuyBlueprintSharedPart, 6000, "Improved Ammo Chemistry MK4")).hint("Improved Ammo Chemistry MK4 BP - 6000 gems");
+		if (player.hasKeyItem("Improved Ammo Chemistry MK3") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK3") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK4") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK5") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK6") < 0) addButton(11, "Improved Ammo Chemistry MK3", curry(lumiEngineeringBuyBlueprintSharedPart, 4500, "Improved Ammo Chemistry MK3")).hint("Improved Ammo Chemistry MK3 BP - 4500 gems");
+		if (player.hasKeyItem("Improved Ammo Chemistry MK2") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK2") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK3") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK4") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK5") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK6") < 0) addButton(11, "Improved Ammo Chemistry MK2", curry(lumiEngineeringBuyBlueprintSharedPart, 3000, "Improved Ammo Chemistry MK2")).hint("Improved Ammo Chemistry MK2 BP - 3000 gems");
+		if (player.hasKeyItem("Improved Ammo Chemistry") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK2") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK3") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK4") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK5") < 0 && player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK6") < 0) addButton(11, "Improved Ammo Chemistry", curry(lumiEngineeringBuyBlueprintSharedPart, 1500, "Improved Ammo Chemistry")).hint("Improved Ammo Chemistry BP - 1500 gems");
 		addButton(13, "-2-", lumiEngineeringMechUpgrades2);
 		addButton(14, "Back", lumiEngineering);
 	}
@@ -467,16 +467,16 @@ public class Lumi extends BaseContent {
 		if (player.hasKeyItem("Machine Gun MK2") < 0 && player.hasKeyItem("Machine Gun MK3") < 0 && player.hasKeyItem("Machine Gun MK4") < 0 && player.hasKeyItem("Machine Gun MK5") < 0 && player.hasKeyItem("Machine Gun MK6") < 0 && player.hasKeyItem("Blueprint - Machine Gun MK2") < 0) addButton(0, "Machine Gun MK2", lumiEngineeringBuyBlueprintMachineGunMK2).hint("Machine Gun MK2 BP - 1000 gems");
 		if (player.hasKeyItem("Machine Gun MK1") < 0 && player.hasKeyItem("Machine Gun MK2") < 0 && player.hasKeyItem("Machine Gun MK3") < 0 && player.hasKeyItem("Machine Gun MK4") < 0 && player.hasKeyItem("Machine Gun MK5") < 0 && player.hasKeyItem("Machine Gun MK6") < 0 && player.hasKeyItem("Blueprint - Machine Gun MK1") < 0) addButton(0, "Machine Gun MK1", lumiEngineeringBuyBlueprintMachineGunMK1).hint("Machine Gun MK1 BP - 500 gems");
 		if (player.hasKeyItem("Repeater Gun") < 0 && player.hasKeyItem("Machine Gun MK1") < 0 && player.hasKeyItem("Machine Gun MK2") < 0 && player.hasKeyItem("Machine Gun MK3") < 0 && player.hasKeyItem("Machine Gun MK4") < 0 && player.hasKeyItem("Machine Gun MK5") < 0 && player.hasKeyItem("Machine Gun MK6") < 0 && player.hasKeyItem("Blueprint - Repeater Gun") < 0) addButton(0, "Repeater Gun", lumiEngineeringBuyBlueprintRepeaterGun).hint("Repeater Gun BP - 100 gems");
-		if (player.hasKeyItem("Whitefire Beam Cannon") < 0 && player.hasKeyItem("Blueprint - Whitefire Beam Cannon") < 0) addButton(1, "Whitefire B.C.", lumiEngineeringBuyBlueprintWhitefireBeamCannon).hint("Whitefire Beam Cannon BP - 1000 gems");
-		if (player.hasKeyItem("Snowball Generator") < 0 && player.hasKeyItem("Blueprint - Snowball Generator") < 0) addButton(2, "Snowball G.", lumiEngineeringBuyBlueprintSnowballGenerator).hint("Snowball Generator BP - 1000 gems");
-		if (player.hasKeyItem("Raijin blaster") < 0 && player.hasKeyItem("Blueprint - Raijin blaster") < 0 && player.hasKeyItem("Taser with an overcharged battery") >= 0) addButton(3, "Raijin blaster", lumiEngineeringBuyBlueprintRaijinBlaster).hint("Raijin blaster BP - 1500 gems");
-		if (player.hasKeyItem("Gravity shots") < 0 && player.hasKeyItem("Blueprint - Gravity shots") < 0 && player.hasKeyItem("MK2 Jetpack") >= 0) addButton(4, "Gravity shots", lumiEngineeringBuyBlueprintGravityShots).hint("Gravity shots - 1000 gems");
-		if (player.hasKeyItem("Auto turret MK6") < 0 && player.hasKeyItem("Blueprint - Auto turret MK6") < 0) addButton(5, "Auto turret MK6", lumiEngineeringBuyBlueprintAutoTurretMK6).hint("Auto turret MK6 BP - 3000 gems");
-		if (player.hasKeyItem("Auto turret MK5") < 0 && player.hasKeyItem("Blueprint - Auto turret MK5") < 0 && player.hasKeyItem("Blueprint - Auto turret MK6") < 0) addButton(5, "Auto turret MK5", lumiEngineeringBuyBlueprintAutoTurretMK5).hint("Auto turret MK5 BP - 2500 gems");
-		if (player.hasKeyItem("Auto turret MK4") < 0 && player.hasKeyItem("Blueprint - Auto turret MK4") < 0 && player.hasKeyItem("Blueprint - Auto turret MK5") < 0 && player.hasKeyItem("Blueprint - Auto turret MK6") < 0) addButton(5, "Auto turret MK4", lumiEngineeringBuyBlueprintAutoTurretMK4).hint("Auto turret MK4 BP - 2000 gems");
-		if (player.hasKeyItem("Auto turret MK3") < 0 && player.hasKeyItem("Blueprint - Auto turret MK3") < 0 && player.hasKeyItem("Blueprint - Auto turret MK4") < 0 && player.hasKeyItem("Blueprint - Auto turret MK5") < 0 && player.hasKeyItem("Blueprint - Auto turret MK6") < 0) addButton(5, "Auto turret MK3", lumiEngineeringBuyBlueprintAutoTurretMK3).hint("Auto turret MK3 BP - 1500 gems");
-		if (player.hasKeyItem("Auto turret MK2") < 0 && player.hasKeyItem("Blueprint - Auto turret MK2") < 0 && player.hasKeyItem("Blueprint - Auto turret MK3") < 0 && player.hasKeyItem("Blueprint - Auto turret MK4") < 0 && player.hasKeyItem("Blueprint - Auto turret MK5") < 0 && player.hasKeyItem("Blueprint - Auto turret MK6") < 0) addButton(5, "Auto turret MK2", lumiEngineeringBuyBlueprintAutoTurretMK2).hint("Auto turret MK2 BP - 1000 gems");
-		if (player.hasKeyItem("Auto turret") < 0 && player.hasKeyItem("Blueprint - Auto turret") < 0 && player.hasKeyItem("Blueprint - Auto turret MK2") < 0 && player.hasKeyItem("Blueprint - Auto turret MK3") < 0 && player.hasKeyItem("Blueprint - Auto turret MK4") < 0 && player.hasKeyItem("Blueprint - Auto turret MK5") < 0 && player.hasKeyItem("Blueprint - Auto turret MK6") < 0) addButton(5, "Auto turret", lumiEngineeringBuyBlueprintAutoTurret).hint("Auto turret BP - 500 gems");
+		if (player.hasKeyItem("Whitefire Beam Cannon") < 0 && player.hasKeyItem("Blueprint - Whitefire Beam Cannon") < 0) addButton(1, "Whitefire B.C.", curry(lumiEngineeringBuyBlueprintSharedPart, 1000, "Whitefire Beam Cannon")).hint("Whitefire Beam Cannon BP - 1000 gems");
+		if (player.hasKeyItem("Snowball Generator") < 0 && player.hasKeyItem("Blueprint - Snowball Generator") < 0) addButton(2, "Snowball G.", curry(lumiEngineeringBuyBlueprintSharedPart, 1000, "Snowball Generator")).hint("Snowball Generator BP - 1000 gems");
+		if (player.hasKeyItem("Raijin blaster") < 0 && player.hasKeyItem("Blueprint - Raijin blaster") < 0 && player.hasKeyItem("Taser with an overcharged battery") >= 0) addButton(3, "Raijin blaster", curry(lumiEngineeringBuyBlueprintSharedPart, 1500, "Raijin blaster")).hint("Raijin blaster BP - 1500 gems");
+		if (player.hasKeyItem("Gravity shots") < 0 && player.hasKeyItem("Blueprint - Gravity shots") < 0 && player.hasKeyItem("MK2 Jetpack") >= 0) addButton(4, "Gravity shots", curry(lumiEngineeringBuyBlueprintSharedPart, 1000, "Gravity shots")).hint("Gravity shots - 1000 gems");
+		if (player.hasKeyItem("Auto turret MK6") < 0 && player.hasKeyItem("Blueprint - Auto turret MK6") < 0) addButton(5, "Auto turret MK6", curry(lumiEngineeringBuyBlueprintSharedPart, 3000, "Auto turret MK6")).hint("Auto turret MK6 BP - 3000 gems");
+		if (player.hasKeyItem("Auto turret MK5") < 0 && player.hasKeyItem("Blueprint - Auto turret MK5") < 0 && player.hasKeyItem("Blueprint - Auto turret MK6") < 0) addButton(5, "Auto turret MK5", curry(lumiEngineeringBuyBlueprintSharedPart, 2500, "Auto turret MK5")).hint("Auto turret MK5 BP - 2500 gems");
+		if (player.hasKeyItem("Auto turret MK4") < 0 && player.hasKeyItem("Blueprint - Auto turret MK4") < 0 && player.hasKeyItem("Blueprint - Auto turret MK5") < 0 && player.hasKeyItem("Blueprint - Auto turret MK6") < 0) addButton(5, "Auto turret MK4", curry(lumiEngineeringBuyBlueprintSharedPart, 2000, "Auto turret MK4")).hint("Auto turret MK4 BP - 2000 gems");
+		if (player.hasKeyItem("Auto turret MK3") < 0 && player.hasKeyItem("Blueprint - Auto turret MK3") < 0 && player.hasKeyItem("Blueprint - Auto turret MK4") < 0 && player.hasKeyItem("Blueprint - Auto turret MK5") < 0 && player.hasKeyItem("Blueprint - Auto turret MK6") < 0) addButton(5, "Auto turret MK3", curry(lumiEngineeringBuyBlueprintSharedPart, 1500, "Auto turret MK3")).hint("Auto turret MK3 BP - 1500 gems");
+		if (player.hasKeyItem("Auto turret MK2") < 0 && player.hasKeyItem("Blueprint - Auto turret MK2") < 0 && player.hasKeyItem("Blueprint - Auto turret MK3") < 0 && player.hasKeyItem("Blueprint - Auto turret MK4") < 0 && player.hasKeyItem("Blueprint - Auto turret MK5") < 0 && player.hasKeyItem("Blueprint - Auto turret MK6") < 0) addButton(5, "Auto turret MK2", curry(lumiEngineeringBuyBlueprintSharedPart, 1000, "Auto turret MK2")).hint("Auto turret MK2 BP - 1000 gems");
+		if (player.hasKeyItem("Auto turret") < 0 && player.hasKeyItem("Blueprint - Auto turret") < 0 && player.hasKeyItem("Blueprint - Auto turret MK2") < 0 && player.hasKeyItem("Blueprint - Auto turret MK3") < 0 && player.hasKeyItem("Blueprint - Auto turret MK4") < 0 && player.hasKeyItem("Blueprint - Auto turret MK5") < 0 && player.hasKeyItem("Blueprint - Auto turret MK6") < 0) addButton(5, "Auto turret", curry(lumiEngineeringBuyBlueprintSharedPart, 500, "Auto turret")).hint("Auto turret BP - 500 gems");
 		addButton(14, "Back", lumiEngineeringMechUpgrades);
 	}
 	public function lumiEngineeringBuyBlueprintToolbelt():void {
@@ -933,6 +933,7 @@ public class Lumi extends BaseContent {
 			doNext(lumiEngineering);
 		}
 		else lumiEngineeringBuyBlueprintNotEnoughGems();
+		//curry(lumiEngineeringBuyBlueprintSharedPart, 50, "Mechanism")
 	}
 	public function lumiEngineeringBuyBlueprintRepeaterGun():void {
 		clearOutput();
@@ -946,240 +947,9 @@ public class Lumi extends BaseContent {
 			doNext(lumiEngineering);
 		}
 		else lumiEngineeringBuyBlueprintNotEnoughGems();
+		//curry(lumiEngineeringBuyBlueprintSharedPart, 100, "Repeater Gun")
 	}
-	public function lumiEngineeringBuyBlueprintDynapunchGlove():void {
-		clearOutput();
-		if (player.gems >= 500) {
-			player.gems -= 500;
-			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
-			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
-			outputText("<b>Gained Key Item: Blueprint - Dynapunch Glove!</b>");
-			player.createKeyItem("Blueprint - Dynapunch Glove", 0, 0, 0, 0);
-			statScreenRefresh();
-			doNext(lumiEngineering);
-		}
-		else lumiEngineeringBuyBlueprintNotEnoughGems();
-	}
-	public function lumiEngineeringBuyBlueprintWhitefireBeamCannon():void {
-		clearOutput();
-		if (player.gems >= 1000) {
-			player.gems -= 1000;
-			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
-			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
-			outputText("<b>Gained Key Item: Blueprint - Whitefire Beam Cannon!</b>");
-			player.createKeyItem("Blueprint - Whitefire Beam Cannon", 0, 0, 0, 0);
-			statScreenRefresh();
-			doNext(lumiEngineering);
-		}
-		else lumiEngineeringBuyBlueprintNotEnoughGems();
-	}
-	public function lumiEngineeringBuyBlueprintSnowballGenerator():void {
-		clearOutput();
-		if (player.gems >= 1000) {
-			player.gems -= 1000;
-			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
-			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
-			outputText("<b>Gained Key Item: Blueprint - Snowball Generator!</b>");
-			player.createKeyItem("Blueprint - Snowball Generator", 0, 0, 0, 0);
-			statScreenRefresh();
-			doNext(lumiEngineering);
-		}
-		else lumiEngineeringBuyBlueprintNotEnoughGems();
-	}
-	public function lumiEngineeringBuyBlueprintRaijinBlaster():void {
-		clearOutput();
-		if (player.gems >= 1500) {
-			player.gems -= 1500;
-			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
-			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
-			outputText("<b>Gained Key Item: Blueprint - Raijin blaster!</b>");
-			player.createKeyItem("Blueprint - Raijin blaster", 0, 0, 0, 0);
-			statScreenRefresh();
-			doNext(lumiEngineering);
-		}
-		else lumiEngineeringBuyBlueprintNotEnoughGems();
-	}
-	public function lumiEngineeringBuyBlueprintGravityShots():void {
-		clearOutput();
-		if (player.gems >= 1000) {
-			player.gems -= 1000;
-			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
-			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
-			outputText("<b>Gained Key Item: Blueprint - Gravity shots!</b>");
-			player.createKeyItem("Blueprint - Gravity shots", 0, 0, 0, 0);
-			statScreenRefresh();
-			doNext(lumiEngineering);
-		}
-		else lumiEngineeringBuyBlueprintNotEnoughGems();
-	}
-	public function lumiEngineeringBuyBlueprintMedicalDispenser2():void {
-		clearOutput();
-		if (player.gems >= 500) {
-			player.gems -= 500;
-			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
-			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
-			outputText("<b>Gained Key Item: Blueprint - Medical Dispenser 2.0!</b>");
-			player.createKeyItem("Blueprint - Medical Dispenser 2.0", 0, 0, 0, 0);
-			statScreenRefresh();
-			doNext(lumiEngineering);
-		}
-		else lumiEngineeringBuyBlueprintNotEnoughGems();
-	}
-	public function lumiEngineeringBuyBlueprintStimpackDispenser1():void {
-		clearOutput();
-		if (player.gems >= 100) {
-			player.gems -= 100;
-			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
-			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
-			outputText("<b>Gained Key Item: Blueprint - Stimpack Dispenser 1.0!</b>");
-			player.createKeyItem("Blueprint - Stimpack Dispenser 1.0", 0, 0, 0, 0);
-			statScreenRefresh();
-			doNext(lumiEngineering);
-		}
-		else lumiEngineeringBuyBlueprintNotEnoughGems();
-	}
-	public function lumiEngineeringBuyBlueprintMissileLauncher():void {
-		clearOutput();
-		if (player.gems >= 500) {
-			player.gems -= 500;
-			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
-			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
-			outputText("<b>Gained Key Item: Blueprint - Missile launcher!</b>");
-			player.createKeyItem("Blueprint - Missile launcher", 0, 0, 0, 0);
-			statScreenRefresh();
-			doNext(lumiEngineering);
-		}
-		else lumiEngineeringBuyBlueprintNotEnoughGems();
-	}
-	public function lumiEngineeringBuyBlueprintOmniMissile():void {
-		clearOutput();
-		if (player.gems >= 1000) {
-			player.gems -= 1000;
-			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
-			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
-			outputText("<b>Gained Key Item: Blueprint - Omni Missile!</b>");
-			player.createKeyItem("Blueprint - Omni Missile", 0, 0, 0, 0);
-			statScreenRefresh();
-			doNext(lumiEngineering);
-		}
-		else lumiEngineeringBuyBlueprintNotEnoughGems();
-	}
-	public function lumiEngineeringBuyBlueprintAphrodigasGun():void {
-		clearOutput();
-		if (player.gems >= 100) {
-			player.gems -= 100;
-			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
-			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
-			outputText("<b>Gained Key Item: Blueprint - Aphrodigas Gun!</b>");
-			player.createKeyItem("Blueprint - Aphrodigas Gun", 0, 0, 0, 0);
-			statScreenRefresh();
-			doNext(lumiEngineering);
-		}
-		else lumiEngineeringBuyBlueprintNotEnoughGems();
-	}
-	public function lumiEngineeringBuyBlueprintLustnadeLauncher():void {
-		clearOutput();
-		if (player.gems >= 1000) {
-			player.gems -= 1000;
-			outputText("Lumi seals the blueprint in a tube and displays it on the counter.\n\n");
-			outputText("\"<i>Greaf far you that ya starting a new project. Ya tell me the result in a few days gotcha?</i>\"\n\n");
-			outputText("<b>Gained Key Item: Blueprint - Lustnade Launcher!</b>");
-			player.createKeyItem("Blueprint - Lustnade Launcher", 0, 0, 0, 0);
-			statScreenRefresh();
-			doNext(lumiEngineering);
-		}
-		else lumiEngineeringBuyBlueprintNotEnoughGems();
-	}
-	public function lumiEngineeringBuyBlueprintCumReservoir():void {
-		lumiEngineeringBuyBlueprintSharedPart(100, "Cum Reservoir");
-	}
-	public function lumiEngineeringBuyBlueprintSPMK1():void {
-		lumiEngineeringBuyBlueprintSharedPart(100, "SPMK1");
-	}
-	public function lumiEngineeringBuyBlueprintImpregnator1():void {
-		lumiEngineeringBuyBlueprintSharedPart(100, "Impregnator 1.0");
-	}
-	public function lumiEngineeringBuyBlueprintJetpack():void {
-		lumiEngineeringBuyBlueprintSharedPart(100, "Jetpack");
-	}
-	public function lumiEngineeringBuyBlueprintMK2Jetpack():void {
-		lumiEngineeringBuyBlueprintSharedPart(500, "MK2 Jetpack");
-	}
-	public function lumiEngineeringBuyBlueprintArtificialIntelligence():void {
-		lumiEngineeringBuyBlueprintSharedPart(500, "Artificial Intelligence");
-	}
-	public function lumiEngineeringBuyBlueprintImprovedArtificialIntelligence():void {
-		lumiEngineeringBuyBlueprintSharedPart(500, "Improved Artificial Intelligence");
-	}
-	public function lumiEngineeringBuyBlueprintImprovedArtificialIntelligenceMK2():void {
-		lumiEngineeringBuyBlueprintSharedPart(1000, "Improved Artificial Intelligence MK2");
-	}
-	public function lumiEngineeringBuyBlueprintImprovedArtificialIntelligenceMK3():void {
-		lumiEngineeringBuyBlueprintSharedPart(1500, "Improved Artificial Intelligence MK3");
-	}
-	public function lumiEngineeringBuyBlueprintImprovedArtificialIntelligenceMK4():void {
-		lumiEngineeringBuyBlueprintSharedPart(2000, "Improved Artificial Intelligence MK4");
-	}
-	public function lumiEngineeringBuyBlueprintAutoTurret():void {
-		lumiEngineeringBuyBlueprintSharedPart(500, "Auto turret");
-	}
-	public function lumiEngineeringBuyBlueprintAutoTurretMK2():void {
-		lumiEngineeringBuyBlueprintSharedPart(1000, "Auto turret MK2");
-	}
-	public function lumiEngineeringBuyBlueprintAutoTurretMK3():void {
-		lumiEngineeringBuyBlueprintSharedPart(1500, "Auto turret MK3");
-	}
-	public function lumiEngineeringBuyBlueprintAutoTurretMK4():void {
-		lumiEngineeringBuyBlueprintSharedPart(2000, "Auto turret MK4");
-	}
-	public function lumiEngineeringBuyBlueprintAutoTurretMK5():void {
-		lumiEngineeringBuyBlueprintSharedPart(2500, "Auto turret MK5");
-	}
-	public function lumiEngineeringBuyBlueprintAutoTurretMK6():void {
-		lumiEngineeringBuyBlueprintSharedPart(3000, "Auto turret MK6");
-	}
-	public function lumiEngineeringBuyBlueprintHydraulics():void {
-		lumiEngineeringBuyBlueprintSharedPart(500, "Hydraulics");
-	}
-	public function lumiEngineeringBuyBlueprintHydraulicsMK2():void {
-		lumiEngineeringBuyBlueprintSharedPart(1000, "Hydraulics MK2");
-	}
-	public function lumiEngineeringBuyBlueprintHydraulicsMK3():void {
-		lumiEngineeringBuyBlueprintSharedPart(1500, "Hydraulics MK3");
-	}
-	public function lumiEngineeringBuyBlueprintHydraulicsMK4():void {
-		lumiEngineeringBuyBlueprintSharedPart(2000, "Hydraulics MK4");
-	}
-	public function lumiEngineeringBuyBlueprintHydraulicsMK5():void {
-		lumiEngineeringBuyBlueprintSharedPart(2500, "Hydraulics MK5");
-	}
-	public function lumiEngineeringBuyBlueprintHydraulicsMK6():void {
-		lumiEngineeringBuyBlueprintSharedPart(3000, "Hydraulics MK6");
-	}
-	public function lumiEngineeringBuyBlueprintImprovedAmmoChemistry():void {
-		lumiEngineeringBuyBlueprintSharedPart(1500, "Improved Ammo Chemistry");
-	}
-	public function lumiEngineeringBuyBlueprintImprovedAmmoChemistryMK2():void {
-		lumiEngineeringBuyBlueprintSharedPart(3000, "Improved Ammo Chemistry MK2");
-	}
-	public function lumiEngineeringBuyBlueprintImprovedAmmoChemistryMK3():void {
-		lumiEngineeringBuyBlueprintSharedPart(4500, "Improved Ammo Chemistry MK3");
-	}
-	public function lumiEngineeringBuyBlueprintImprovedAmmoChemistryMK4():void {
-		lumiEngineeringBuyBlueprintSharedPart(6000, "Improved Ammo Chemistry MK4");
-	}
-	public function lumiEngineeringBuyBlueprintImprovedAmmoChemistryMK5():void {
-		lumiEngineeringBuyBlueprintSharedPart(7500, "Improved Ammo Chemistry MK5");
-	}
-	public function lumiEngineeringBuyBlueprintImprovedAmmoChemistryMK6():void {
-		lumiEngineeringBuyBlueprintSharedPart(9000, "Improved Ammo Chemistry MK6");
-	}
-	public function lumiEngineeringBuyBlueprintEnergyCore():void {
-		lumiEngineeringBuyBlueprintSharedPart(50, "Energy Core");
-	}
-	public function lumiEngineeringBuyBlueprintMechanism():void {
-		lumiEngineeringBuyBlueprintSharedPart(50, "Mechanism");
-	}
+	//
 	public function lumiEngineeringBuyBlueprintSharedPart(cost:Number, itemName:String):void {
 		clearOutput();
 		if (player.gems >= cost) {
@@ -1438,10 +1208,10 @@ public class Lumi extends BaseContent {
 		if (player.hasKeyItem("Blueprint - Improved Artificial Intelligence MK2") >= 0 && player.hasKeyItem("Improved Artificial Intelligence") >= 0 && player.inte >= 100 && CampStatsAndResources.EnergyCoreResc >= 5) addButton(9, "Improved AI MK2", lumiWorkshopImprovedArtificialIntelligenceMK2).hint("Improved Artificial Intelligence MK2 - The mech will randomly activate one of its weapon functions every round on its own at half power value. - 100+ int, 5 energy cores and 8 hours of work.");
 		if (player.hasKeyItem("Blueprint - Improved Artificial Intelligence") >= 0 && player.hasKeyItem("Artificial Intelligence") >= 0 && player.inte >= 50 && CampStatsAndResources.EnergyCoreResc >= 1) addButton(9, "Improved AI", lumiWorkshopImprovedArtificialIntelligence).hint("Improved Artificial Intelligence - The mech can now use an auto turret. - 50+ int, 1 energy core and 4 hours of work.");
 		if (player.hasKeyItem("Blueprint - Artificial Intelligence") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && player.hasItem(useables.GOLCORE, 1)) addButton(9, "AI", lumiWorkshopArtificialIntelligence).hint("Artificial Intelligence - Add an artificial intelligence to your mech which will greet you when you board. Aside from the friendliness of this new interface feature it cannot do much on its own yet. - 50+ int, Toolbelt, 1 golem core and 4 hours of work.");
-		if (player.hasKeyItem("Blueprint - Hydraulics MK6") >= 0 && player.hasKeyItem("Hydraulics MK 5") >= 0 && player.inte >= 300 && CampStatsAndResources.MetalPieces >= 50) addButton(10, "Hydraulics MK6", lumiWorkshopHydraulicsMK6).hint("Hydraulics MK6 - Mechs gain 150% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus. - 300+ int, 50 metal pieces and 12 hours of work.");
-		if (player.hasKeyItem("Blueprint - Hydraulics MK5") >= 0 && player.hasKeyItem("Hydraulics MK 4") >= 0 && player.inte >= 250 && CampStatsAndResources.MetalPieces >= 40) addButton(10, "Hydraulics MK5", lumiWorkshopHydraulicsMK5).hint("Hydraulics MK5 - Mechs gain 125% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus. - 250+ int, 40 metal pieces and 12 hours of work.");
-		if (player.hasKeyItem("Blueprint - Hydraulics MK4") >= 0 && player.hasKeyItem("Hydraulics MK 3") >= 0 && player.inte >= 200 && CampStatsAndResources.MetalPieces >= 30) addButton(10, "Hydraulics MK4", lumiWorkshopHydraulicsMK4).hint("Hydraulics MK4 - Mechs gain 100 of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus. - 200+ int, 30 metal pieces and 8 hours of work.");
-		if (player.hasKeyItem("Blueprint - Hydraulics MK3") >= 0 && player.hasKeyItem("Hydraulics MK 2") >= 0 && player.inte >= 150 && CampStatsAndResources.MetalPieces >= 20) addButton(10, "Hydraulics MK3", lumiWorkshopHydraulicsMK3).hint("Hydraulics MK3 - Mechs gain 75% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus. - 150+ int, 20 metal pieces and 8 hours of work.");
+		if (player.hasKeyItem("Blueprint - Hydraulics MK6") >= 0 && player.hasKeyItem("Hydraulics MK5") >= 0 && player.inte >= 300 && CampStatsAndResources.MetalPieces >= 50) addButton(10, "Hydraulics MK6", lumiWorkshopHydraulicsMK6).hint("Hydraulics MK6 - Mechs gain 150% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus. - 300+ int, 50 metal pieces and 12 hours of work.");
+		if (player.hasKeyItem("Blueprint - Hydraulics MK5") >= 0 && player.hasKeyItem("Hydraulics MK4") >= 0 && player.inte >= 250 && CampStatsAndResources.MetalPieces >= 40) addButton(10, "Hydraulics MK5", lumiWorkshopHydraulicsMK5).hint("Hydraulics MK5 - Mechs gain 125% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus. - 250+ int, 40 metal pieces and 12 hours of work.");
+		if (player.hasKeyItem("Blueprint - Hydraulics MK4") >= 0 && player.hasKeyItem("Hydraulics MK3") >= 0 && player.inte >= 200 && CampStatsAndResources.MetalPieces >= 30) addButton(10, "Hydraulics MK4", lumiWorkshopHydraulicsMK4).hint("Hydraulics MK4 - Mechs gain 100 of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus. - 200+ int, 30 metal pieces and 8 hours of work.");
+		if (player.hasKeyItem("Blueprint - Hydraulics MK3") >= 0 && player.hasKeyItem("Hydraulics MK2") >= 0 && player.inte >= 150 && CampStatsAndResources.MetalPieces >= 20) addButton(10, "Hydraulics MK3", lumiWorkshopHydraulicsMK3).hint("Hydraulics MK3 - Mechs gain 75% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus. - 150+ int, 20 metal pieces and 8 hours of work.");
 		if (player.hasKeyItem("Blueprint - Hydraulics MK2") >= 0 && player.hasKeyItem("Hydraulics") >= 0 && player.inte >= 100 && CampStatsAndResources.MetalPieces >= 10) addButton(10, "Hydraulics MK2", lumiWorkshopHydraulicsMK2).hint("Hydraulics MK2 - Mechs gain 50% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus. - 100+ int, 10 metal pieces and 4 hours of work.");
 		if (player.hasKeyItem("Blueprint - Hydraulics") >= 0 && player.hasKeyItem("Toolbelt") >= 0 && player.inte >= 50 && CampStatsAndResources.MetalPieces >= 5) addButton(10, "Hydraulics", lumiWorkshopHydraulics).hint("Hydraulics - Mechs gain 25% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus. - 50+ int, Toolbelt, 5 metal pieces and 4 hours of work.");
 		if (player.hasKeyItem("Blueprint - Improved Ammo Chemistry MK6") >= 0 && player.hasKeyItem("Improved Ammo Chemistry MK5") >= 0 && player.inte >= 300 && CampStatsAndResources.MetalPieces >= 30 && player.hasItem(consumables.SALAMFW, 10) && player.hasItem(consumables.METHIRC, 10)) addButton(11, "Improved Ammo Chemistry MK6", lumiWorkshopImprovedAmmoChemistryMK6).hint("Improved Ammo Chemistry MK6 - Add six extra attacks to the mech ranged weapon. Ammo now has an incendiary property dealing doubled damage as fire. Ammo now has a caustic property dealing tripled damage as acid. - 300+ int, 30 metal pieces, 10 salamander firewater, 10 methir crystals and 12 hours of work.");
@@ -2182,3 +1952,4 @@ public class Lumi extends BaseContent {
 	}
 }
 }
+//
