@@ -66,7 +66,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 				EvelynnTavernTalks = valueOr(o["EvelynnTavernTalks"], false);
 				EvelynnCoreLimitBreakerCounter = valueOr(o["EvelynnCoreLimitBreakerCounter"], 0);
 				DianaTavernTalks1 = valueOr(o["DianaTavernTalks1"], false);
-				DianaTavernTalks2 = valueOr(o["DianaTavernTalks1"], false);
+				DianaTavernTalks2 = valueOr(o["DianaTavernTalks2"], false);
 			} else {
 				// loading from old save
 				resetState();
