@@ -636,50 +636,58 @@ public function mainCampMenu():void {
 		addButtonDisabled(6, "C.C.(Base)", "You don't have any curses to cure. (non-multiplier)");
 		addButtonDisabled(7, "C.C.(Mult)", "You don't have any curses to cure. (multiplier)");
 	}
-	addButton(8, "Uncurse", uncurseItemsMenu)
-			.disableIf(player.equippedKnownCursedItems().length == 0 && player.carriedKnownCursedItems().length == 0, "You don't have any cursed items");
-
+	if (player.weaponRange == weaponsrange.SAGITTB) addButton(8, "Uncurse", uncurseItemsMenu2);
+	addButton(8, "Uncurse", uncurseItemsMenu).disableIf(player.equippedKnownCursedItems().length == 0 && player.carriedKnownCursedItems().length == 0, "You don't have any cursed items");
 	if (BelisaFollower.BelisaQuestOn && !BelisaFollower.BelisaQuestComp) addButton(13, "ToothacheQ", BelisaNadiaTalk);
 	addButton(14, "Back", camp.campLoversMenu);
 }
-		public function uncurseCost(item:IDynamicItem, equipped:Boolean):int {
-			var cost:int = 250 * (1 + item.rarity);
-			if (equipped) cost *= 2;
-			return cost;
-		}
-		public function uncurseItemsMenu():void {
-			clearOutput();
-			outputText("Uncurse which item?");
-			var buttons:ButtonDataList = new ButtonDataList();
-			var cost:int;
-			for each (var slot:ItemSlotClass in player.carriedKnownCursedItems()) {
-				cost = uncurseCost(slot.itype as IDynamicItem, false);
-				buttons.add(slot.itype.shortName, curry(uncurseItem, slot))
-						.hint("Lift the curse from "+slot.itype.longName+" ("+cost+" gems)")
-						.disableIf(player.gems < cost, "Not enough gems ("+cost+")")
-			}
-			for each (var item:ItemType in player.equippedKnownCursedItems()) {
-				cost = uncurseCost(item as IDynamicItem, true);
-				buttons.add(item.shortName, curry(uncurseEquippedItem,item))
-						.hint("Lift the curse from "+item.longName+" ("+cost+" gems)")
-						.disableIf(player.gems < cost, "Not enough gems ("+cost+")")
-			}
-			submenu(buttons, mainCampMenu, 0, false);
-		}
-		public function uncurseItem(slot:ItemSlotClass):void {
-			clearOutput();
-			var newItem:ItemType = (slot.itype as IDynamicItem).uncursedCopy();
-			outputText("The curse is lifted from "+slot.itype.longName);
-			slot.setItemAndQty(newItem, slot.quantity);
-			doNext(mainCampMenu);
-		}
-		public function uncurseEquippedItem(item:ItemType):void {
-			clearOutput();
-			var newItem:ItemType = (item as IDynamicItem).uncursedCopy();
-			player.replaceEquipment(item as Equipable, newItem as Equipable);
-			outputText("The curse is lifted from "+newItem.longName+". You can unequip it now.");
-			doNext(mainCampMenu);
-		}
+private function uncurseItemsMenu2():void {
+	clearOutput();
+	outputText("As Nadia proceed with the purification ritual you struggle in pain at first as you feel the cursed weapon in your hand resist the unbinding before release washes over you as your grip opens dropping the malevolent item on the ground. ");
+	outputText("Nadia wrap the item in blessed cloth in order to seal its malice before handing you the neutralized cursed item back. Sure you can equip it again anytime but now you know the risks.\n\n");
+	player.removeStatusEffect(StatusEffects.TookSagittariusBanefulGreatBow);
+	player.createStatusEffect(StatusEffects.TookSagittariusBanefulGreatBow,1,0,0,0);
+	player.unequipWeaponRange(false,true);
+	inventory.takeItem(weaponsrange.SAGITTB, mainCampMenu);
+}
+public function uncurseCost(item:IDynamicItem, equipped:Boolean):int {
+	var cost:int = 250 * (1 + item.rarity);
+	if (equipped) cost *= 2;
+	return cost;
+}
+public function uncurseItemsMenu():void {
+	clearOutput();
+	outputText("Uncurse which item?");
+	var buttons:ButtonDataList = new ButtonDataList();
+	var cost:int;
+	for each (var slot:ItemSlotClass in player.carriedKnownCursedItems()) {
+		cost = uncurseCost(slot.itype as IDynamicItem, false);
+		buttons.add(slot.itype.shortName, curry(uncurseItem, slot))
+				.hint("Lift the curse from "+slot.itype.longName+" ("+cost+" gems)")
+				.disableIf(player.gems < cost, "Not enough gems ("+cost+")")
+	}
+	for each (var item:ItemType in player.equippedKnownCursedItems()) {
+		cost = uncurseCost(item as IDynamicItem, true);
+		buttons.add(item.shortName, curry(uncurseEquippedItem,item))
+				.hint("Lift the curse from "+item.longName+" ("+cost+" gems)")
+				.disableIf(player.gems < cost, "Not enough gems ("+cost+")")
+	}
+	submenu(buttons, mainCampMenu, 0, false);
+}
+public function uncurseItem(slot:ItemSlotClass):void {
+	clearOutput();
+	var newItem:ItemType = (slot.itype as IDynamicItem).uncursedCopy();
+	outputText("The curse is lifted from "+slot.itype.longName);
+	slot.setItemAndQty(newItem, slot.quantity);
+	doNext(mainCampMenu);
+}
+public function uncurseEquippedItem(item:ItemType):void {
+	clearOutput();
+	var newItem:ItemType = (item as IDynamicItem).uncursedCopy();
+	player.replaceEquipment(item as Equipable, newItem as Equipable);
+	outputText("The curse is lifted from "+newItem.longName+". You can unequip it now.");
+	doNext(mainCampMenu);
+}
 
 public function nadiaAppearance():void {
 	clearOutput();
@@ -952,4 +960,4 @@ private function BelisaNadiaTalk():void {
 	endEncounter();
 }
 	}
-}
+}

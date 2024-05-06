@@ -72,6 +72,16 @@ public class Changelog extends BaseContent
 			outputText("-New key Item (by Liadri): Artificial Intelligence - req. Toolbelt - Add an artificial intelligence to your mech which will greet you when you board. Aside from the friendliness of this new interface feature it cannot do much on its own yet.\n");
 			outputText("-New key Item (by Liadri): Auto turret - req. Improved Artificial Intelligence - Add passive ranged attack per round to your AI routine no matter your action choice.\n");
 			outputText("-New key Item (by Liadri): Auto turret MK2 - req. Auto turret - Add two passive ranged attacks per round to your AI routine no matter your action choice.\n");
+			outputText("-New key Item (by Liadri): Auto turret MK3 - req. Auto turret MK2 - Add three passive ranged attacks per round to your AI routine no matter your action choice.\n");
+			outputText("-New key Item (by Liadri): Auto turret MK4 - req. Auto turret MK3 - Add four passive ranged attacks per round to your AI routine no matter your action choice.\n");
+			outputText("-New key Item (by Liadri): Auto turret MK5 - req. Auto turret MK4 - Add five passive ranged attacks per round to your AI routine no matter your action choice.\n");
+			outputText("-New key Item (by Liadri): Auto turret MK6 - req. Auto turret MK5 - Add six passive ranged attacks per round to your AI routine no matter your action choice.\n");
+			outputText("-New key Item (by Liadri): Hydraulics - req. Toolbelt - Mechs gain 25% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus.\n");
+			outputText("-New key Item (by Liadri): Hydraulics MK2 - req. Hydraulics - Mechs gain 50% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus.\n");
+			outputText("-New key Item (by Liadri): Hydraulics MK3 - req. Hydraulics MK2 - Mechs gain 75% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus\n");
+			outputText("-New key Item (by Liadri): Hydraulics MK4 - req. Hydraulics MK3 - Mechs gain 100% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus\n");
+			outputText("-New key Item (by Liadri): Hydraulics MK5 - req. Hydraulics MK4 - Mechs gain 125% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus\n");
+			outputText("-New key Item (by Liadri): Hydraulics MK6 - req. Hydraulics MK5 - Mechs gain 150% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus\n");
 			outputText("-New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies. Using this item will turn PC into troll. Troll bonuses at 10 pts in racial score (scalable): +30% to Str multi, +30% to Tou multi, +20% to Spr multi, +20% to Int multi, +60% to Wis multi, +20 to max tone cap, +50 to max satiety.\n");
 			outputText("-New TF item (by Pyromania): Icy Fig. Dropped by Glacial Troll enemies. Using this item will turn PC into glacial troll. Glacial Troll bonuses at 10 pts in racial score (scalable): +30% to Str multi, +40% to Tou multi, +10% to Spe multi, +20% to Int multi, +60% to Wis multi, +20 to max tone cap, +75 to max satiety.\n");
 			outputText("-New consumable (by Liadri): Black Lily. Obtained from Rafflesia. Effects: When used by alraune/lilaraune would grant Nightshade perk and Darkness Affinity.\n");
@@ -117,33 +127,28 @@ public class Changelog extends BaseContent
 			outputText("Expert Gunslinger decrease dmg penalty from using non 2H dual firearms by 30%, Master Gunslinger decrease dmg penalty from using 2H dual firearms by 50%.\n");
 			outputText("-All gunslinger perks was adjusted to req. wis, int and spe instead of ocassional req. tou instead one of those three stats. That is to match stats from which firearms dmg scaling.\n");
 			outputText("-Explosive cartridge perk increase dmg done to large enemies or group of enemies (+100% > +200%). Named Bullet deal much more dmg to bosses (+50% > +200%).\n");
-			outputText("-Dinah upgrade options for HB mech now have 2 more tiers of Armor Plating, Leather Insulation & Dragon's Breath Flamer upgrades.\n");
+			outputText("-Dinah upgrade options for HB mech now have 3 more tiers of Armor Plating, Leather Insulation & Dragon's Breath Flamer upgrades.\n");
 			//outputText("-New HB Mech upgrade options: Armor Plating (+armor), Leather Insulation (+magic resistance), Agility (+base melee atk dmg), Dragon's Breath Flamer (fire dmg special), Scatter Laser (lightning dmg special), Rapid Reload (+base ranged atk dmg), Internal Systems (increase mech SF capacity and lower it consumption during high activity)\n");
 			//outputText(", Camouflage Mode (allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials), Invisibility Mode (the same as Camouflage Mode but can last until PC run out of SF to keep it active or deactivate it manualy / upgrade to decrease SF consumption)");
 			outputText("-New key Item (by Liadri): Improved Artificial Intelligence - req. Artificial Intelligence - The mech can now use an auto turret.\n");
-			outputText("-New key Item (by Liadri): Auto turret MK3 - req. Auto turret MK2 - Add three passive ranged attacks per round to your AI routine no matter your action choice.\n");
-			outputText("-New key Item (by Liadri): Auto turret MK4 - req. Auto turret MK3 - Add four passive ranged attacks per round to your AI routine no matter your action choice.\n");
-			outputText("-New key Item (by Liadri): Auto turret MK5 - req. Auto turret MK4 - Add five passive ranged attacks per round to your AI routine no matter your action choice.\n");
-			outputText("-New key Item (by Liadri): Auto turret MK6 - req. Auto turret MK5 - Add six passive ranged attacks per round to your AI routine no matter your action choice.\n");
-			outputText("-New range weapon (by Liadri): Sagittarius Baneful Great Bow - obtained by finding it at Plains. 260 atk, costing 13000 gems, no accuracy penalty, is low-grade wrath weapon, can't be unequiped normal way. Similary to Tome of Imps would gradualy change PC into male/herm centuar.\n");
+			outputText("-New range weapon (by Liadri): Sagittarius Baneful Great Bow - obtained by finding it at Plains. 260 atk, costing 13000 gems, no accuracy penalty, is low-grade wrath weapon, can't be unequiped normal way and would require visting NPC that can help uncurse items. Similary to Tome of Imps would gradualy change PC into male/herm centuar.\n");
 			outputText("-New event perk: Sagittarius Aura of Dominance. Gained by having 50+ corruption while using Sagittarius Baneful Great Bow. Effects: Sagittarius cursed weapon corrupts the very air around you driving females horny for your dick. Deals 100% more tease damage to female opponents and causes them to take periodic tease damage per round.\n");
 			outputText("-Having sex when equipped with Sagittarius Baneful Great Bow proc the Sagittarius Focus bonus until next night. Effect: PC adds 50% of his libido to wisdom and intelligence until next night.\n");
 			outputText("-Elemental Fusion forms stats bonuses (+armor/m.res for some fusions) been doubled to more fit temporal perm tf state.\n");
-			outputText("-New key Item (by Liadri): Hydraulics - req. Toolbelt - Mechs gain 25% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus.\n");
-			outputText("-New key Item (by Liadri): Hydraulics MK2 - req. Hydraulics - Mechs gain 50% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus.\n");
-			outputText("-New key Item (by Liadri): Hydraulics MK3 - req. Hydraulics MK2 - Mechs gain 75% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus\n");
-			outputText("-New key Item (by Liadri): Hydraulics MK4 - req. Hydraulics MK3 - Mechs gain 100% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus\n");
-			outputText("-New key Item (by Liadri): Hydraulics MK5 - req. Hydraulics MK4 - Mechs gain 125% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus\n");
-			outputText("-New key Item (by Liadri): Hydraulics MK6 - req. Hydraulics MK5 - Mechs gain 150% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus\n");
+			outputText("-New key Item (by Liadri): Improved Ammo Chemistry - req. Toolbelt - Add one extra attack to the mech ranged weapon.\n");
+			outputText("-New key Item (by Liadri): Improved Ammo Chemistry MK2 - req. Improved Ammo Chemistry - Add two extra attacks to the mech ranged weapon.\n");
+			outputText("-New key Item (by Liadri): Improved Ammo Chemistry MK3 - req. Improved Ammo Chemistry MK2 - Add three extra attacks to the mech ranged weapon. Ammo now has an incendiary property dealing doubled damage as fire.\n");
+			outputText("-New key Item (by Liadri): Improved Ammo Chemistry MK4 - req. Improved Ammo Chemistry MK3 - Add four extra attacks to the mech ranged weapon. Ammo now has an incendiary property dealing doubled damage as fire.\n");
+			outputText("-New key Item (by Liadri): Improved Ammo Chemistry MK5 - req. Improved Ammo Chemistry MK4 - Add five extra attacks to the mech ranged weapon. Ammo now has an incendiary property dealing doubled damage as fire. Ammo now has a caustic property dealing tripled damage as acid.\n");
+			outputText("-New key Item (by Liadri): Improved Ammo Chemistry MK6 - req. Improved Ammo Chemistry MK5 - Add six extra attacks to the mech ranged weapon. Ammo now has an incendiary property dealing doubled damage as fire. Ammo now has a caustic property dealing tripled damage as acid.\n");
+			outputText("-New key Item (by Liadri): Improved Artificial Intelligence MK2 - req. Improved Artificial Intelligence - The mech will randomly activate one of its weapon functions every round on its own at half power value.\n");
+			outputText("-New key Item (by Liadri): Improved Artificial Intelligence MK3 - req. Improved Artificial Intelligence MK2 - The mech will randomly activate one of its weapon functions every round on its own at full power.\n");
+			outputText("-New key Item (by Liadri): Improved Artificial Intelligence MK4 - req. Improved Artificial Intelligence MK3 - The mech will randomly activate two of its weapon functions every round on its own.\n");
+			outputText("-New melee weapon (by Liadri): Machine Spear - craftable at goblin workshop (3 metal pieces, 200 nails, 1 energy core, 2 mechanisms and BP). Cost 2720 gems, have 19 atk, have 100% armor penetration and increases critical damage by +25%\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//New key Item (by Liadri): Improved Ammo Chemistry - req. Toolbelt - Add one extra attack to the mech ranged weapon.
-			outputText("-\n");//New key Item (by Liadri): Improved Ammo Chemistry MKII - req. Improved Ammo Chemistry - Add two extra attacks to the mech ranged weapon.
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -162,8 +167,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Dracula/lina PC unable to find get ghoul if they not learned this as normal Vampire, unable to buy manual for 1st atk: f. swords, Arigean Princess PC not been fully immune to TF-ing like other perm races, Weresharks not having their stats changing according to moon phase or boosted during use of Crinos Shape, Phoenix TF adding mutagen penatly instead of stat curse, ");
@@ -219,8 +222,10 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -237,6 +242,7 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -3263,7 +3269,7 @@ public class Changelog extends BaseContent
 			outputText("-New melee weapon (by Ormael): Dual BF Whips - buyable at Orsbulg shop. 36 atk, costing 2880 gems, Low grade dual wrath weapon, max attack value reached at 225+ speed + strength stats combined value.\n");
 			outputText("-New melee weapon (by Ormael): Chakram - buyable at Soul Equipment shop in He'Xin'Dao. Cost 960 gems. Base atk is 12 and it's throwable melee weapon.\n");
 			outputText("-New melee weapon (by Ormael): Soul Drill - buyable at Kaiba shop. Cost 9600 gems. Base atk is 20, it's Large type weapon, require to use Titan Grip eprk (as it's build to be used with one hand not two) and by spending soulforce each turn it can be made to spin rising it base atk. Menu to pick it spinning speed is in 'Others' submenu of combat menu.\n");
-			outputText("-New melee weapon (by Liadri): Machined greatsword - craftable at goblin workshop (3 metal pieces, 200 nails, 1 energy core, 2 mechanisms and BP). Cost 4415 gems, have 19 atk and cause minor bleed on strike. Allow to cut wood without ened for axe form toolbox.\n");
+			outputText("-New melee weapon (by Liadri): Machine greatsword - craftable at goblin workshop (3 metal pieces, 200 nails, 1 energy core, 2 mechanisms and BP). Cost 4415 gems, have 19 atk and cause minor bleed on strike. Allow to cut wood without need for axe form toolbox.\n");
 			outputText("-New melee weapon (by Liadri): Ripper 1.0 - craftable at goblin workshop (10 metal pieces, 500 nails, 2 energy cores, 5 mechanisms, Machined greatsword and BP). Cost 14445 gems, have 24 atk and cause severe bleed on strike. Allow to cut wood without ened for axe form toolbox.\n");
 			outputText("-New melee weapon (by Liadri): Ripper 2.0 - craftable at goblin workshop (30 metal pieces, 500 nails, 5 energy cores, 10 mechanisms, Ripper 1.0 and BP). Cost 37520 gems, have 29 atk and cause severe bleed on strike (str) and burn (int). Allow to cut wood without ened for axe form toolbox.\n");
 			outputText("-New melee weapon (by Ormael): Undefeated King's Destroyer - buyable at Kaiba shop in Tel'Adre. Cost 9000 gems. Base atk is 75. Have 20% base chance for stun (3 rounds), increase by 15% parry chance.\n");

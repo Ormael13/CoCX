@@ -38,6 +38,7 @@ package classes.Items.Vehicles
 				if (value >= 4) boost += 0.25;
 				if (value >= 5) boost += 0.25;
 				if (value >= 6) boost += 0.25;
+				if (value >= 7) boost += 0.25;
 			}
 			if (game.player.hasKeyItem("HB Leather Insulation") >= 0) {
 				value = game.player.keyItemvX("HB Leather Insulation", 1);
@@ -47,6 +48,7 @@ package classes.Items.Vehicles
 				if (value >= 4) boost += 0.25;
 				if (value >= 5) boost += 0.25;
 				if (value >= 6) boost += 0.25;
+				if (value >= 7) boost += 0.25;
 			}
 			return boost;
 		}

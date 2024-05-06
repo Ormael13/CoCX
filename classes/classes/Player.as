@@ -859,6 +859,9 @@ use namespace CoC;
 					if (keyItemvX("HB Armor Plating", 1) == 2) armorDef += 25;
 					if (keyItemvX("HB Armor Plating", 1) == 3) armorDef += 35;
 					if (keyItemvX("HB Armor Plating", 1) == 4) armorDef += 45;
+					if (keyItemvX("HB Armor Plating", 1) == 5) armorDef += 55;
+					if (keyItemvX("HB Armor Plating", 1) == 6) armorDef += 65;
+					if (keyItemvX("HB Armor Plating", 1) == 7) armorDef += 75;
 				}
 			}
 			if (buff("SoftIronIgnotPhysicalDefenseBuff").isPresent()) armorDef *= 1.15;
@@ -1076,6 +1079,9 @@ use namespace CoC;
 					if (keyItemvX("HB Leather Insulation", 2) == 2) armorMDef += 25;
 					if (keyItemvX("HB Leather Insulation", 2) == 3) armorMDef += 35;
 					if (keyItemvX("HB Leather Insulation", 2) == 4) armorMDef += 45;
+					if (keyItemvX("HB Leather Insulation", 2) == 5) armorMDef += 55;
+					if (keyItemvX("HB Leather Insulation", 2) == 6) armorMDef += 65;
+					if (keyItemvX("HB Leather Insulation", 2) == 7) armorMDef += 75;
 				}
 			}
 			if (buff("LightBronzeBarMagicDefenseAndPoisonResistanceBuff").isPresent()) armorMDef *= 1.15;
@@ -1320,7 +1326,7 @@ use namespace CoC;
 		}
 		public function isUsingMechMeleeWeapons():Boolean
 		{
-			return weapon == game.weapons.RIPPER1 ||  weapon == game.weapons.TRIPPER1 || weapon == game.weapons.RIPPER2 || weapon == game.weapons.TRIPPER2 || weapon == game.weapons.MACGRSW || weapon == game.weapons.TMACGRSW;
+			return weapon == game.weapons.RIPPER1 ||  weapon == game.weapons.TRIPPER1 || weapon == game.weapons.RIPPER2 || weapon == game.weapons.TRIPPER2 || weapon == game.weapons.MACGRSW || weapon == game.weapons.TMACGRSW || weapon == game.weapons.MACSPEA;
 		}
 		//Is in medium sized mech (med sized races mech)(have upgrade option to allow smaller than medium races pilot it)
 		public function isInNonGoblinMech():Boolean

@@ -614,12 +614,17 @@ private function arianHomeMenu(back:Boolean = false):void {
 			addButton(2,"Talisman",imbueTalisman);
 		if(flags[kFLAGS.ARIAN_S_DIALOGUE] >= 5) addButton(4,"Treat Corr.",treatCorruption);
 		if(arianFollower()) addButton(5,"Appearance",arianAppearance);
+		if(player.weaponRange == weaponsrange.SAGITTB) addButton(6, "Cursed Bow", removeCursedItem2)
+				.hint("Ask Arian to remove your cursed bow. Costs 500 gems. ")
+				.disableIf(arianHealth() < 75, "Arian is too weak")
+				.disableIf(player.gems < 500, "Ask Arian to remove your cursed bow. Costs 500 gems (Can't afford).")
+				.disableIf(flags[kFLAGS.ARIAN_S_DIALOGUE] < 3, "???", "???");
 		addButton(6, "Cursed Item", removeCursedItem)
 				.hint("Ask Arian to remove your cursed item. Costs 500 gems. ")
-				// .disableIf(arianHealth() < 75, "Arian is too weak")
-				.disableIf(player.gems < 500, "Ask Arian to remove your cursed item. Costs 500 gems (Can't afford). ")
+				.disableIf(arianHealth() < 75, "Arian is too weak")
+				.disableIf(player.gems < 500, "Ask Arian to remove your cursed item. Costs 500 gems (Can't afford).")
 				.disableIf(player.equippedKnownCursedItems().length == 0, "Arian can remove cursed items, but you're not wearing any.")
-				.disableIf(flags[kFLAGS.ARIAN_S_DIALOGUE] < 3, "???", "???")
+				.disableIf(flags[kFLAGS.ARIAN_S_DIALOGUE] < 3, "???", "???");
 		if(model.time.hours >= 17 && arianFollower()) addButton(8,"Sleep With",sleepWithArian,true);
 		if(flags[kFLAGS.SLEEP_WITH] == "Arian") addButton(8,"NoSleepWith",dontSleepWithArian);
 		if(!arianFollower()) addButton(14,"Back",telAdre.telAdreMenu);
@@ -627,6 +632,16 @@ private function arianHomeMenu(back:Boolean = false):void {
 	}
 }
 
+private function removeCursedItem2():void {
+	clearOutput();
+	outputText("As Arian proceed with the purification ritual you struggle in pain at first as you feel the cursed weapon in your hand resist the unbinding before release washes over you as your grip opens dropping the malevolent item on the ground. ");
+	outputText("Arian wrap the item in blessed cloth in order to seal its malice before handing you the neutralized cursed item back. Sure you can equip it again anytime but now you know the risks.\n\n");
+	player.gems -= 500;
+	player.removeStatusEffect(StatusEffects.TookSagittariusBanefulGreatBow);
+	player.createStatusEffect(StatusEffects.TookSagittariusBanefulGreatBow,1,0,0,0);
+	player.unequipWeaponRange(false,true);
+	inventory.takeItem(weaponsrange.SAGITTB, arianHomeMenu);
+}
 private function removeCursedItem():void {
 	clearOutput();
 	var item:ItemType = player.equippedKnownCursedItems()[0];

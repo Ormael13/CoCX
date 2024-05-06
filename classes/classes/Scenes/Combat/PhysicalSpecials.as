@@ -7,6 +7,7 @@ import classes.CoC;
 import classes.EngineCore;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.DisplacerMetabolismMutation;
 import classes.IMutations.IMutationsLib;
 import classes.Items.ItemConstants;
 import classes.Items.Weapons.Tidarion;
@@ -826,7 +827,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd = buttons.add("Raijin Blaster", mechRaijinBlaster).hint("Activate the raijin blaster taking aim and zapping enemy. \n\nWould go into cooldown after use for: 8 rounds");
 				if (player.hasStatusEffect(StatusEffects.CooldownRaijinBlaster)) {
 					bd.disable("<b>You need more time before you can use Raijin Blaster again.</b>\n\n");
-				}
+				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.hasKeyItem("Gravity shots") >= 0) {
 				bd = buttons.add("Gravity Shots", mechGravityShots).hint("Activate the gravity shots unleashing the gravity sphere at the enemy. \n\nWould go into cooldown after use for: 8 rounds");
@@ -843,7 +844,84 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 		}
 		if (player.vehicles == vehicles.HB_MECH) {
-
+			
+		}
+	}
+	
+	public function goblinMechAIUseRadomlyItWeaponFunctions():void {
+		//The mech will randomly activate one of its weapon functions every round on its own at half power value.
+		//Aphrodigas Gun(Lustnade Launcher)
+		var halfPower:Boolean = false;
+		var alreadyUsedWeaponFunction:Boolean = false;
+		if (player.hasKeyItem("Improved Artificial Intelligence MK2") >= 0) halfPower = true;
+		if (player.hasKeyItem("Dynapunch Glove") >= 0 && player.vehicles != vehicles.GS_MECH && player.hasStatusEffect(StatusEffects.CooldownDynapunchGlove) && !alreadyUsedWeaponFunction) {
+			alreadyUsedWeaponFunction = true;
+			if (halfPower) mechDynapunchGlove(true, true);
+			else mechDynapunchGlove(true);
+		}
+		if (player.hasKeyItem("Taser") >= 0 && player.vehicles != vehicles.GS_MECH && !player.hasStatusEffect(StatusEffects.CooldownTazer) && !alreadyUsedWeaponFunction) {
+			alreadyUsedWeaponFunction = true;
+			if (halfPower) mechTazer(true, true);
+			else mechTazer(true);
+		}
+		if (player.hasKeyItem("Gravity shots") >= 0 && player.hasStatusEffect(StatusEffects.CooldownGravityShots) && !alreadyUsedWeaponFunction) {
+			alreadyUsedWeaponFunction = true;
+			if (halfPower) mechGravityShots(true, true);
+			else mechGravityShots(true);
+		}
+		if (player.hasKeyItem("Raijin blaster") >= 0 && player.hasStatusEffect(StatusEffects.CooldownRaijinBlaster) && !alreadyUsedWeaponFunction) {
+			alreadyUsedWeaponFunction = true;
+			if (halfPower) mechRaijinBlaster(true, true);
+			else mechRaijinBlaster(true);
+		}
+		if (player.hasKeyItem("Snowball Generator") >= 0 && player.hasStatusEffect(StatusEffects.CooldownSnowballGenerator) && !alreadyUsedWeaponFunction) {
+			alreadyUsedWeaponFunction = true;
+			if (halfPower) mechSnowballGenerator(true, true);
+			else mechSnowballGenerator(true);
+		}
+		if (player.hasKeyItem("Whitefire Beam Cannon") >= 0 && player.hasStatusEffect(StatusEffects.CooldownWhitefireBeamCannon) && !alreadyUsedWeaponFunction) {
+			alreadyUsedWeaponFunction = true;
+			if (halfPower) mechWhitefireBeamCannon(true, true);
+			else mechWhitefireBeamCannon(true);
+		}
+		if ((player.hasKeyItem("Lustnade Launcher")  >= 0 || player.hasKeyItem("Aphrodigas Gun") >= 0) && !alreadyUsedWeaponFunction) {
+			alreadyUsedWeaponFunction = true;
+			var lustDmg:Number = scalingBonusIntelligence() + scalingBonusLibido();
+			if (player.hasKeyItem("Improved Artificial Intelligence MK2") >= 0) lustDmg *= 0.5;
+			if (player.hasKeyItem("Lustnade Launcher") >= 0) {
+				lustDmg = combat.teases.teaseAuraLustDamageBonus(monster, lustDmg);
+			}
+			lustDmg = combat.goblinDamageBonus(lustDmg);
+			if (monster.plural) lustDmg *= 5;
+			lustDmg *= monster.lustVuln;
+			var hitChance:Number = 75;
+			//Determine if critical tease!
+			var crit:Boolean = false;
+			var critChance:int = 5;
+			critChance += combat.teases.combatTeaseCritical();
+			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+			if (rand(100) < critChance) {
+				crit = true;
+				lustDmg *= 1.75;
+				if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.05;
+			}
+			if (player.hasKeyItem("Lustnade Launcher") >= 0) {
+				outputText("Mech AI ready the Lustnade launcher and shoot. The exploding container covers the entire area in pink mist, massively arousing everyone in the vicinity.");
+				monster.teased(Math.round(lustDmg), false);
+			} else {
+				outputText("Mech AI spray a cloud of aphrodisiac with gas gun. [Themonster] tries to pinch [monster his] nose and hold [monster his] breath ");
+				if (rand(100) <= hitChance) {
+					outputText("but it’s too late and you can see arousal flushing [themonster]'s skin.\n");
+					monster.teased(Math.round(lustDmg), false);
+				} else outputText("and it worked, to an extent, allowing your opponent to retreat away from the gas.");
+			}
+			outputText("\n\n");
+			if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
+		}
+		if ((player.hasKeyItem("Missile launcher") >= 0 || player.hasKeyItem("Omni Missile") >= 0) && !alreadyUsedWeaponFunction) {
+			alreadyUsedWeaponFunction = true;
+			if (halfPower) mechOmniMissile(true, true);
+			else mechOmniMissile(true);
 		}
 	}
 
@@ -6560,9 +6638,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 */
-	public function mechTazer():void {
+	public function mechTazer(mechAI:Boolean = false, half:Boolean = false):void {
 		clearOutput();
-		outputText("You press the lightning button and aim, smirking at [themonster], your mech delivering a ");
+		if (mechAI) outputText("Your mech AI deliver a ");
+		else outputText("You press the lightning button and aim, smirking at [themonster], your mech delivering a ");
 		player.createStatusEffect(StatusEffects.CooldownTazer,8,0,0,0);
 		if (player.hasKeyItem("Taser overcharge battery") >= 0) {
 			flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_SPELL;
@@ -6581,6 +6660,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
 			damage = combat.goblinDamageBonus(damage);
 			damage *= 0.5;
+			if (half) damage *= 0.5;
 			damage = Math.round(damage);
 			outputText("potent discharge ");
 			doLightningDamage(damage, true, true);
@@ -6593,14 +6673,17 @@ public class PhysicalSpecials extends BaseCombatContent {
 			monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 		}
 		statScreenRefresh();
-		enemyAI();
+		if (!mechAI) enemyAI();
+		else {
+			if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		}
 	}
 
-	public function mechOmniMissile():void {
-		clearOutput();
+	public function mechOmniMissile(mechAI:Boolean = false, half:Boolean = false):void {
+		if (!mechAI) clearOutput();
 		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_PHYS;
-		if (player.hasKeyItem("Omni Missile") >= 0) outputText("You deploy the omni Missile and rain death on [themonster], covering the entire area with explosions for ");
-		else outputText("You deploy the missile launcher and aim at [themonster], for a big explosion. ");
+		if (player.hasKeyItem("Omni Missile") >= 0) outputText(""+(mechAI?"Mech AI":"You")+" deploy the omni Missile and rain death on [themonster], covering the entire area with explosions for ");
+		else outputText(""+(mechAI?"Mech AI":"You")+" deploy the missile launcher and aim at [themonster], for a big explosion. ");
 		var damage:Number = combat.firearmsDamageNoLagSingle();
 		var ignoreDR:Boolean = player.hasPerk(PerkLib.Penetrator);
 		if (!ignoreDR) damage *= (monster.damageRangePercent() / 100);
@@ -6624,6 +6707,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
+		if (half) damage *= 0.5;
 		damage = Math.round(damage);
 		doDamage(damage, true, true, ignoreDR);
 		outputText(" damage!");
@@ -6631,7 +6715,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		enemyAI();
+		if (!mechAI) enemyAI();
+		else {
+			if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		}
 	}
 
 	public function mechStimpackMedicalDispenser():void {
@@ -6665,14 +6752,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 
-	public function mechGravityShots():void {
-		clearOutput();
+	public function mechGravityShots(mechAI:Boolean = false, half:Boolean = false):void {
+		if (!mechAI) clearOutput();
 		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_SPELL;
-		outputText("You press the spiral button and aim, unleashing the gravity sphere at [themonster]. ");
+		outputText(""+(mechAI?"Mech AI":"You press the spiral button and")+" aim, unleashing the gravity sphere at [themonster]. ");
 		player.createStatusEffect(StatusEffects.CooldownGravityShots,8,0,0,0);
 		var damage:Number;
 		damage = scalingBonusIntelligence() * spellModBlack() * 8;
-
 		damage = calcEclypseMod(damage, true);
 		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 8;
 		damage = combat.goblinDamageBonus(damage);
@@ -6685,6 +6771,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
+		if (half) damage *= 0.5;
 		damage = Math.round(damage);
 		doDarknessDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
@@ -6695,13 +6782,16 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		enemyAI();
+		if (!mechAI) enemyAI();
+		else {
+			if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		}
 	}
 
-	public function mechRaijinBlaster():void {
-		clearOutput();
+	public function mechRaijinBlaster(mechAI:Boolean = false, half:Boolean = false):void {
+		if (!mechAI) clearOutput();
 		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_SPELL;
-		outputText("You press the BIG lightning button and aim, smirking wide as the Raijin blaster power up your mech zapping [themonster] for ");
+		outputText(""+(mechAI?"Mech AI aim as":"You press the BIG lightning button and aim, smirking wide as the")+" Raijin blaster power up your mech zapping [themonster] for ");
 		player.createStatusEffect(StatusEffects.CooldownRaijinBlaster,8,0,0,0);
 		var damage:Number;
 		damage = scalingBonusIntelligence() * spellModWhite() * 8;
@@ -6719,6 +6809,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
+		if (half) damage *= 0.5;
 		damage = Math.round(damage);
 		doLightningDamage(damage, true, true);
 		outputText(" damage! ");
@@ -6741,17 +6832,19 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		enemyAI();
+		if (!mechAI) enemyAI();
+		else {
+			if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		}
 	}
 
-	public function mechSnowballGenerator():void {
-		clearOutput();
+	public function mechSnowballGenerator(mechAI:Boolean = false, half:Boolean = false):void {
+		if (!mechAI) clearOutput();
 		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_SPELL;
-		outputText("You activate the snowball generator, taking aim and launching a volley of snowballs at the [themonster] for ");
+		outputText(""+(mechAI?"Mech AI":"You activate the snowball generator, taking")+" aim and launching a volley of snowballs at the [themonster] for ");
 		player.createStatusEffect(StatusEffects.CooldownSnowballGenerator,8,0,0,0);
 		var damage:Number;
 		damage = scalingBonusIntelligence() * spellModBlack() * 8;
-
 		damage = calcGlacialMod(damage, true);
 		damage = combat.goblinDamageBonus(damage);
 		//Determine if critical hit!
@@ -6764,6 +6857,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage *= 1.75;
 		}
 		if (combat.wearingWinterScarf()) damage *= 1.2;
+		if (half) damage *= 0.5;
 		damage = Math.round(damage);
 		doIceDamage(damage, true, true);
 		outputText(" damage!");
@@ -6771,13 +6865,16 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		enemyAI();
+		if (!mechAI) enemyAI();
+		else {
+			if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		}
 	}
 
-	public function mechWhitefireBeamCannon():void {
-		clearOutput();
+	public function mechWhitefireBeamCannon(mechAI:Boolean = false, half:Boolean = false):void {
+		if (!mechAI) clearOutput();
 		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_SPELL;
-		outputText("You shoot with the "+(player.vehicles == vehicles.HB_MECH ? "Dragon's Breath Flamer"+((player.keyItemvX("HB Dragon's Breath Flamer", 1) > 1)?"s":"")+"":"Whitefire beam cannon")+" at [themonster] burning [monster his] badly for ");
+		outputText(""+(mechAI?"Mech AI":"You")+" shoot with the "+(player.vehicles == vehicles.HB_MECH ? "Dragon's Breath Flamer"+((player.keyItemvX("HB Dragon's Breath Flamer", 1) > 1)?"s":"")+"":"Whitefire beam cannon")+" at [themonster] burning [monster his] badly for ");
 		if (player.vehicles == vehicles.HB_MECH) {
 			if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] >= 100) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= (100*player.keyItemvX("HB Dragon's Breath Flamer", 1));
 			else player.soulforce -= (100*player.keyItemvX("HB Dragon's Breath Flamer", 1));
@@ -6803,6 +6900,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage *= 1.3;
 			if (monster.plural) damage *= 2.5;
 		}
+		if (player.keyItemvX("HB Dragon's Breath Flamer", 1) == 4) {
+			damage *= 1.75;
+			if (monster.plural) damage *= 6;
+		}
+		if (half) damage *= 0.5;
 		damage = Math.round(damage);
 		doFireDamage(damage, true, true);
 		if (player.keyItemvX("HB Dragon's Breath Flamer", 1) > 1) doFireDamage(damage, true, true);
@@ -6812,16 +6914,29 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		enemyAI();
+		if (!mechAI) enemyAI();
+		else {
+			if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		}
 	}
 
-	public function mechDynapunchGlove():void {
-		clearOutput();
+	public function mechDynapunchGlove(mechAI:Boolean = false, half:Boolean = false):void {
+		if (!mechAI) clearOutput();
 		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_PHYS;
-		outputText("You launch the mech springed glove at [themonster] hitting [monster his] straight in the face for a K.O. [themonster] is hit for ");
+		outputText(""+(mechAI?"Mech AI":"You")+" launch the mech springed glove at [themonster] hitting [monster his] straight in the face for a K.O. [themonster] is hit for ");
 		player.createStatusEffect(StatusEffects.CooldownDynapunchGlove,8,0,0,0);
 		var damage:Number = 0;
 		damage += combat.meleeUnarmedDamageNoLagSingle(3);
+		if (player.hasKeyItem("Hydraulics") >= 0 || player.hasKeyItem("Hydraulics MK2") >= 0 || player.hasKeyItem("Hydraulics MK3") >= 0 || player.hasKeyItem("Hydraulics MK4") >= 0 || player.hasKeyItem("Hydraulics MK5") >= 0 || player.hasKeyItem("Hydraulics MK6") >= 0) {
+			var hydraulicsMulti:Number = 0.25;
+			if (player.hasKeyItem("Hydraulics MK2") >= 0) hydraulicsMulti += 0.25;
+			if (player.hasKeyItem("Hydraulics MK3") >= 0) hydraulicsMulti += 0.5;
+			if (player.hasKeyItem("Hydraulics MK4") >= 0) hydraulicsMulti += 0.75;
+			if (player.hasKeyItem("Hydraulics MK5") >= 0) hydraulicsMulti += 1;
+			if (player.hasKeyItem("Hydraulics MK6") >= 0) hydraulicsMulti += 1.25;
+			if (player.isInHeavyArmor() || player.isInAyoArmor()) hydraulicsMulti *= 0.5;
+			damage += scalingBonusIntelligence() * hydraulicsMulti;
+		}
 		damage = combat.goblinDamageBonus(damage);
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -6833,6 +6948,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= critDamage;
 		}
+		if (half) damage *= 0.5;
 		damage = Math.round(damage);
 		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
 		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
@@ -6852,7 +6968,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		enemyAI();
+		if (!mechAI) enemyAI();
+		else {
+			if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		}
 	}
 
 	public function PhysicalSpecials() {

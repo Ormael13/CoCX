@@ -2094,6 +2094,7 @@ public class Combat extends BaseContent {
             crit = true;
 			var buffMultiplier:Number = 0;
 			buffMultiplier += bonusCriticalDamageFromMissingHP();
+			if (player.weapon == weapons.MACSPEA) buffMultiplier += 0.25;
 			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * impaleMultiplier());
 			else damage *= (1.75 + buffMultiplier);
         }
@@ -2131,7 +2132,6 @@ public class Combat extends BaseContent {
             if (monster.hasStatusEffect(StatusEffects.Hemorrhage))  monster.removeStatusEffect(StatusEffects.Hemorrhage);
             if (player.weapon == weapons.MACGRSW || player.weapon == weapons.TMACGRSW) monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.02, 0, 0);
             else monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.05, 0, 0);
-
             if (monster.plural) outputText("\n[Themonster] bleed profusely from the many bloody gashes your [weapon] leave behind.");
             else outputText("\n[Themonster] bleeds profusely from the many bloody gashes your [weapon] left behind.");
         }
@@ -2934,20 +2934,22 @@ public class Combat extends BaseContent {
         }
         flags[kFLAGS.LAST_ATTACK_TYPE] = LAST_ATTACK_BOW;
         var maxRangedAttacks:int = player.calculateMultiAttacks(false);
-
-        if (player.vehicles == vehicles.HB_MECH) {
-            if (player.hasKeyItem("HB Rapid Reload") >= 0) {
-                if (player.keyItemvX("HB Rapid Reload", 1) == 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 4;
-                else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
-            }
-            else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
-        }
-        else if (player.weaponRangePerk == ItemConstants.WT_BOW) {
+        if (player.weaponRangePerk == ItemConstants.WT_BOW) {
             flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = Math.min((flags[kFLAGS.MULTISHOT_STYLE] || 0) + 1, maxRangedAttacks);
+			if (player.vehicles == vehicles.HB_MECH && player.hasKeyItem("HB Rapid Reload") >= 0) {
+				if (player.keyItemvX("HB Rapid Reload", 1) == 2) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 6;
+				else if (player.keyItemvX("HB Rapid Reload", 1) == 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 4;
+				else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 2;
+			}
 			if (player.isWoodElf() && player.hasPerk(PerkLib.ELFTwinShot)) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] *= (flags[kFLAGS.ELVEN_TWINSHOT_ENABLED] ? 2 : 1);
         }
         else if (player.weaponRangePerk == ItemConstants.WT_CROSSBOW) {
             flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = Math.min((flags[kFLAGS.MULTISHOT_STYLE] || 0) + 1, maxRangedAttacks);
+			if (player.vehicles == vehicles.HB_MECH && player.hasKeyItem("HB Rapid Reload") >= 0) {
+				if (player.keyItemvX("HB Rapid Reload", 1) == 2) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 6;
+				else if (player.keyItemvX("HB Rapid Reload", 1) == 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 4;
+				else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 2;
+			}
             if (player.weaponRange == weaponsrange.AVELYNN) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] *= 3;
         }
         else if (player.weaponRangePerk == ItemConstants.WT_THROWING) {
@@ -2970,7 +2972,6 @@ public class Combat extends BaseContent {
 				else if (flags[kFLAGS.MULTISHOT_STYLE] >= 1 && player.hasPerk(PerkLib.TaintedMagazine)) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
 				else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
 			}
-
             if ((player.weaponRange == weaponsrange.ADBSCAT || player.weaponRange == weaponsrange.ADBSHOT || player.weaponRange == weaponsrange.ALAKABL || player.weaponRange == weaponsrange.DALAKABL || player.weaponRange == weaponsrange.DBDRAGG) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 2) {
 				if (flags[kFLAGS.MULTISHOT_STYLE] >= 3 && player.hasPerk(PerkLib.PrimedClipWarp)) {
 					if (flags[kFLAGS.MULTISHOT_STYLE] >= 6) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 6;
@@ -2982,14 +2983,18 @@ public class Combat extends BaseContent {
 				}
 				else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
 			}
-
-            if ((player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.TM1CERB || player.weaponRange == weaponsrange.SNIPPLE) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1)
-                flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
-            
+            if ((player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.TM1CERB || player.weaponRange == weaponsrange.SNIPPLE) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
             if (player.isDualWieldRanged()) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] *= 2;
-
             if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2 && player.hasPerk(PerkLib.LockAndLoad)) {
 				flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += Math.floor(flags[kFLAGS.MULTIPLE_ARROWS_STYLE] / 2);
+			}
+			if (player.isInGoblinMech()) {
+				if (player.hasKeyItem("Improved Ammo Chemistry MK6") >= 0) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 6;
+				else if (player.hasKeyItem("Improved Ammo Chemistry MK5") >= 0) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 5;
+				else if (player.hasKeyItem("Improved Ammo Chemistry MK4") >= 0) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 4;
+				else if (player.hasKeyItem("Improved Ammo Chemistry MK3") >= 0) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 3;
+				else if (player.hasKeyItem("Improved Ammo Chemistry MK2") >= 0) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 2;
+				else if (player.hasKeyItem("Improved Ammo Chemistry") >= 0) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 1;
 			}
         }
         if (flags[kFLAGS.ARROWS_ACCURACY] > 0) flags[kFLAGS.ARROWS_ACCURACY] = 0;
@@ -4204,8 +4209,20 @@ public class Combat extends BaseContent {
                     if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
 						doPhysicalDamage(damage, true, true, ignoreDR);
 						doMagicDamage(Math.round(damage * 0.2), true, true, ignoreDR);
+						if (player.hasKeyItem("Improved Ammo Chemistry MK3") >= 0 || player.hasKeyItem("Improved Ammo Chemistry MK4") >= 0) doFireDamage(Math.round(damage * 1.2), true, true, ignoreDR);
+						if (player.hasKeyItem("Improved Ammo Chemistry MK5") >= 0 || player.hasKeyItem("Improved Ammo Chemistry MK6") >= 0) {
+							doFireDamage(Math.round(damage * 1.2), true, true, ignoreDR);
+							doAcidDamage(Math.round(damage * 1.2), true, true, ignoreDR);
+						}
 					}
-					else doPhysicalDamage(damage, true, true, ignoreDR);
+					else {
+						doPhysicalDamage(damage, true, true, ignoreDR);
+						if (player.hasKeyItem("Improved Ammo Chemistry MK3") >= 0 || player.hasKeyItem("Improved Ammo Chemistry MK4") >= 0) doFireDamage(damage, true, true, ignoreDR);
+						if (player.hasKeyItem("Improved Ammo Chemistry MK5") >= 0 || player.hasKeyItem("Improved Ammo Chemistry MK6") >= 0) {
+							doFireDamage(damage, true, true, ignoreDR);
+							doAcidDamage(damage, true, true, ignoreDR);
+						}
+					}
 					firearmsXP(rangeMasteryEXPgained(crit));
 					if (player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Dual 2H Firearms") {
 						dualWieldFirearmsXP(rangeMasteryEXPgained(crit));
@@ -4215,8 +4232,20 @@ public class Combat extends BaseContent {
                             if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
 								doPhysicalDamage(damage, true, true, ignoreDR);
 								doMagicDamage(Math.round(damage * 0.2), true, true, ignoreDR);
+								if (player.hasKeyItem("Improved Ammo Chemistry MK3") >= 0 || player.hasKeyItem("Improved Ammo Chemistry MK4") >= 0) doFireDamage(Math.round(damage * 1.2), true, true, ignoreDR);
+								if (player.hasKeyItem("Improved Ammo Chemistry MK5") >= 0 || player.hasKeyItem("Improved Ammo Chemistry MK6") >= 0) {
+									doFireDamage(Math.round(damage * 1.2), true, true, ignoreDR);
+									doAcidDamage(Math.round(damage * 1.2), true, true, ignoreDR);
+								}
 							}
-							else doPhysicalDamage(damage, true, true, ignoreDR);
+							else {
+								doPhysicalDamage(damage, true, true, ignoreDR);
+								if (player.hasKeyItem("Improved Ammo Chemistry MK3") >= 0 || player.hasKeyItem("Improved Ammo Chemistry MK4") >= 0) doFireDamage(damage, true, true, ignoreDR);
+								if (player.hasKeyItem("Improved Ammo Chemistry MK5") >= 0 || player.hasKeyItem("Improved Ammo Chemistry MK6") >= 0) {
+									doFireDamage(damage, true, true, ignoreDR);
+									doAcidDamage(damage, true, true, ignoreDR);
+								}
+							}
                         }
                         if (crit) outputText(" <b>*Critical Hit!*</b>");
 					}
@@ -5923,8 +5952,9 @@ public class Combat extends BaseContent {
         var critDamage:Number = 1.75;
         critDamage += bonusCriticalDamageFromMissingHP();
         if ((player.weapon == weapons.WG_GAXE && monster.cor > 66) || (player.weapon == weapons.DE_GAXE && monster.cor < 33)) critDamage += 0.1;
+        if (player.weapon == weapons.MACSPEA) critDamage += 0.25;
         if (player.hasPerk(PerkLib.OrthodoxDuelist) && player.isDuelingTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) critDamage += 0.2;
-        if (player.hasStatusEffect(StatusEffects.AlterBindScroll4)) critDamage += 1;
+		if (player.hasStatusEffect(StatusEffects.AlterBindScroll4)) critDamage += 1;
 		if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) critDamage *= impaleMultiplier();
         if (player.hasPerk(PerkLib.SkilledFighterEx) && calculateCrit() > 100) {
 			if (calculateCrit() > 200) critDamage *= 3;

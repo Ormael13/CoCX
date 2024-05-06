@@ -622,12 +622,15 @@ public class CombatUI extends BaseCombatContent {
 	}
 	
 	public function isMechAITurn():Boolean {
-		return player.isInGoblinMech() && (player.hasKeyItem("Improved Artificial Intelligence") >= 0)
-				&& (player.hasKeyItem("Auto turret") >= 0 || player.hasKeyItem("Auto turret MK2") >= 0 || player.hasKeyItem("Auto turret MK3") >= 0 || player.hasKeyItem("Auto turret MK4") >= 0 || player.hasKeyItem("Auto turret MK5") >= 0 || player.hasKeyItem("Auto turret MK6") >= 0) && flags[kFLAGS.IN_COMBAT_PLAYER_GOBLIN_MECH_AI_ATTACKED] != 1;
+		return player.isInGoblinMech() && (player.hasKeyItem("Improved Artificial Intelligence") >= 0 || player.hasKeyItem("Improved Artificial Intelligence MK2") >= 0 || player.hasKeyItem("Improved Artificial Intelligence MK3") >= 0 || player.hasKeyItem("Improved Artificial Intelligence MK4") >= 0)
+				&& (player.hasKeyItem("Auto turret") >= 0 || player.hasKeyItem("Auto turret MK2") >= 0 || player.hasKeyItem("Auto turret MK3") >= 0 || player.hasKeyItem("Auto turret MK4") >= 0 || player.hasKeyItem("Auto turret MK5") >= 0 || player.hasKeyItem("Auto turret MK6") >= 0)
+				&& flags[kFLAGS.IN_COMBAT_PLAYER_GOBLIN_MECH_AI_ATTACKED] != 1;
 	}
 	
 	public function doMechAITurn():void {
 		combat.shootMechWeaponByAI();
+		if (player.hasKeyItem("Improved Artificial Intelligence MK2") >= 0 || player.hasKeyItem("Improved Artificial Intelligence MK3") >= 0 || player.hasKeyItem("Improved Artificial Intelligence MK4") >= 0) combat.pspecials.goblinMechAIUseRadomlyItWeaponFunctions();
+		if (player.hasKeyItem("Improved Artificial Intelligence MK4") >= 0) combat.pspecials.goblinMechAIUseRadomlyItWeaponFunctions();
 		//set flag that mech ai shooted
 		flags[kFLAGS.IN_COMBAT_PLAYER_GOBLIN_MECH_AI_ATTACKED] = 1;
 		if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {

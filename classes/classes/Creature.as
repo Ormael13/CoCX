@@ -839,12 +839,14 @@ public class Creature extends Utils
 				if (game.player.hasKeyItem("HB Armor Plating") >= 4) maxHP_mult1 += 1;
 				if (game.player.hasKeyItem("HB Armor Plating") >= 5) maxHP_mult1 += 1.25;
 				if (game.player.hasKeyItem("HB Armor Plating") >= 6) maxHP_mult1 += 1.5;
+				if (game.player.hasKeyItem("HB Armor Plating") >= 7) maxHP_mult1 += 1.75;
 				if (game.player.hasKeyItem("HB Leather Insulation") >= 1) maxHP_mult1 += 0.25;
 				if (game.player.hasKeyItem("HB Leather Insulation") >= 2) maxHP_mult1 += 0.5;
 				if (game.player.hasKeyItem("HB Leather Insulation") >= 3) maxHP_mult1 += 0.75;
 				if (game.player.hasKeyItem("HB Leather Insulation") >= 4) maxHP_mult1 += 1;
 				if (game.player.hasKeyItem("HB Leather Insulation") >= 5) maxHP_mult1 += 1.25;
 				if (game.player.hasKeyItem("HB Leather Insulation") >= 6) maxHP_mult1 += 1.5;
+				if (game.player.hasKeyItem("HB Leather Insulation") >= 7) maxHP_mult1 += 1.75;
 			}
 			if (game.player.hasPerk(PerkLib.SharedPower) && game.player.perkv1(PerkLib.SharedPower) > 0) maxHP_mult1 += (0.1*game.player.perkv1(PerkLib.SharedPower));
 			return maxHP_mult1;
