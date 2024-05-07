@@ -26,10 +26,6 @@ public class JojoScene extends NPCAwareContent implements TimeAwareInterface {
 
 
     public static var monk:Number = JOJO_NOT_MET;
-	
-	public static var capacity:int = 40;
-	if (flags[kFLAGS.JOJO_ANAL_XP] < 10) capacity += (flags[kFLAGS.JOJO_ANAL_XP] * 3);
-	else capacity += 30; //Caps at 70.
 
     public function JojoScene()
 		{
@@ -2846,6 +2842,9 @@ public function confrontChastity():void {
 }
 
 private function pureJojoSexMenu():void {
+	var capacity:int = 40;
+	if (flags[kFLAGS.JOJO_ANAL_XP] < 10) capacity += (flags[kFLAGS.JOJO_ANAL_XP] * 3);
+	else capacity += 30; //Caps at 70.
 	//Call for the purpose of cock size.
 	//startCombat(new Jojo());
 	//CoC.instance.inCombat = false;
@@ -2878,6 +2877,9 @@ private function pureJojoSexMenu():void {
 }
 
 private function anallyFuckTheMouseButtSlut():void {
+	var capacity:int = 40;
+	if (flags[kFLAGS.JOJO_ANAL_XP] < 10) capacity += (flags[kFLAGS.JOJO_ANAL_XP] * 3);
+	else capacity += 30; //Caps at 70.
 	var x:int = player.cockThatFits(capacity);
 	//Begin
 	jojoSprite();
