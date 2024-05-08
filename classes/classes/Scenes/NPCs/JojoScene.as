@@ -10,7 +10,7 @@ import coc.view.CoCButton;
 
 public class JojoScene extends NPCAwareContent implements TimeAwareInterface {
 
-		public var pregnancy:PregnancyStore;
+	public var pregnancy:PregnancyStore;
 	public static const JOJO_NOT_MET:int      = 0;
 	public static const JOJO_MET:int          = 1;
 	public static const JOJO_CORRUPT_1:int    = 2;
@@ -2842,7 +2842,6 @@ public function confrontChastity():void {
 }
 
 private function pureJojoSexMenu():void {
-	//Capacity
 	var capacity:int = 40;
 	if (flags[kFLAGS.JOJO_ANAL_XP] < 10) capacity += (flags[kFLAGS.JOJO_ANAL_XP] * 3);
 	else capacity += 30; //Caps at 70.
@@ -2878,7 +2877,10 @@ private function pureJojoSexMenu():void {
 }
 
 private function anallyFuckTheMouseButtSlut():void {
-	var x:int = player.cockThatFits(40);
+	var capacity:int = 40;
+	if (flags[kFLAGS.JOJO_ANAL_XP] < 10) capacity += (flags[kFLAGS.JOJO_ANAL_XP] * 3);
+	else capacity += 30; //Caps at 70.
+	var x:int = player.cockThatFits(capacity);
 	//Begin
 	jojoSprite();
 	clearOutput();

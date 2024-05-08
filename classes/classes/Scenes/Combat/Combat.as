@@ -7981,7 +7981,7 @@ public class Combat extends BaseContent {
     public function WeaponFlyingSwordsStatusProcs():void {
 		var bleed:Boolean = false;
         var bleedChance:int = 10;
-		if (player.weaponFlyingSwords == weaponsflyingswords.MOONLGT) bleedChance += 15;
+		if (player.weaponFlyingSwords == weaponsflyingswords.MOONLGT || player.weaponFlyingSwords == weaponsflyingswords.MOONLGT2 || player.weaponFlyingSwords == weaponsflyingswords.MOONLGT3) bleedChance += 15;
 		if (player.weaponFlyingSwords == weaponsflyingswords.ASAUCHI) bleedChance -= 5;
         if (monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyPlantType) || monster.hasPerk(PerkLib.EnemyGooType) || monster.hasPerk(PerkLib.EnemyUndeadType)) bleedChance = 0;
         if (rand(100) < bleedChance) bleed = true;
@@ -16738,3 +16738,4 @@ private function touSpeStrScale(stat:int):Number {
     }
 }
 }
+
