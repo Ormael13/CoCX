@@ -72,6 +72,9 @@ public class Changelog extends BaseContent
 			outputText("-New key Item (by Liadri): Machine Gun MK6 - req. Machine Gun MK5 - Increase range attack by 200% if using a firearm. Change the firearm text to a goblin machine gun text.\n");
 			outputText("-New key Item (by Liadri): Artificial Intelligence - req. Toolbelt - Add an artificial intelligence to your mech which will greet you when you board. Aside from the friendliness of this new interface feature it cannot do much on its own yet.\n");
 			outputText("-New key Item (by Liadri): Improved Artificial Intelligence - req. Artificial Intelligence - The mech can now use an auto turret.\n");
+			outputText("-New key Item (by Liadri): Improved Artificial Intelligence MK2 - req. Improved Artificial Intelligence - The mech will randomly activate one of its weapon functions every round on its own at half power value.\n");
+			outputText("-New key Item (by Liadri): Improved Artificial Intelligence MK3 - req. Improved Artificial Intelligence MK2 - The mech will randomly activate one of its weapon functions every round on its own at full power.\n");
+			outputText("-New key Item (by Liadri): Improved Artificial Intelligence MK4 - req. Improved Artificial Intelligence MK3 - The mech will randomly activate two of its weapon functions every round on its own.\n");
 			outputText("-New key Item (by Liadri): Auto turret - req. Improved Artificial Intelligence - Add passive ranged attack per round to your AI routine no matter your action choice.\n");
 			outputText("-New key Item (by Liadri): Auto turret MK2 - req. Auto turret - Add two passive ranged attacks per round to your AI routine no matter your action choice.\n");
 			outputText("-New key Item (by Liadri): Auto turret MK3 - req. Auto turret MK2 - Add three passive ranged attacks per round to your AI routine no matter your action choice.\n");
@@ -116,8 +119,8 @@ public class Changelog extends BaseContent
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-\n");
-			//outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
-			//outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
+			outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
+			//outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment for odd one mist beings.\n");
 			//outputText("-New TF item (by Shigure): Moth's Dust. Buyable in Moga Hen shop. Using this item will turn PC into moth. Moth bonuses at 10 pts in racial score (scalable): -30% to Tou multi, +150% to Spe multi, +70% to Wis multi, +30% to Lib multi, +70 to sensitivity.\n");//Dropped by Corrupted Troll enemies.
 			//outputText("-New Special names: Solaria (salamander), Drake (hydra). Each of them will start with matching bloodline perk to match their ancestor race.\n");//, Veseshe (elf)
 			outputText("-New melee weapon (by Lord Shadeogorath): Glacial Graveaxe - pulled from unnamed grave at tundra. Base atk is 160. It's massive axe type low grade wrath weapon. Normaly it deal 80% of physical dmg and 20% ice dmg. When using charge weapon it will deal 100% ice damage and have 10% to apply Frostburn DoT after critical hit.\n");
@@ -141,14 +144,11 @@ public class Changelog extends BaseContent
 			//outputText("-New HB Mech upgrade options: Armor Plating (+armor), Leather Insulation (+magic resistance), Agility (+base melee atk dmg), Dragon's Breath Flamer (fire dmg special), Scatter Laser (lightning dmg special), Rapid Reload (+base ranged atk dmg), Internal Systems (increase mech SF capacity and lower it consumption during high activity)\n");
 			//outputText(", Camouflage Mode (allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials), Invisibility Mode (the same as Camouflage Mode but can last until PC run out of SF to keep it active or deactivate it manualy / upgrade to decrease SF consumption)");
 			outputText("-Elemental Fusion forms stats bonuses (+armor/m.res for some fusions) been doubled to more fit temporal perm tf state.\n");
-			outputText("-New key Item (by Liadri): Improved Artificial Intelligence MK2 - req. Improved Artificial Intelligence - The mech will randomly activate one of its weapon functions every round on its own at half power value.\n");
-			outputText("-New key Item (by Liadri): Improved Artificial Intelligence MK3 - req. Improved Artificial Intelligence MK2 - The mech will randomly activate one of its weapon functions every round on its own at full power.\n");
-			outputText("-New key Item (by Liadri): Improved Artificial Intelligence MK4 - req. Improved Artificial Intelligence MK3 - The mech will randomly activate two of its weapon functions every round on its own.\n");
 			outputText("-New melee weapon (by Liadri): Machine Spear - craftable at goblin workshop (3 metal pieces, 200 nails, 1 energy core, 2 mechanisms and BP). Cost 2720 gems, have 19 atk, have 100% armor penetration and increases critical damage by +25%\n");
 			outputText("-New flying sword: Moonlight Duo - combined from two Moonlight swords. Cost 160 spirit stones. Base atk is 16. It's classified as Small flying sword (set of 2). Increase chance of bleed effect by 15%. \n");
-			outputText("-New flying sword: Moonlight Quartet- combined from two Moonlight Duo sword sets. Cost 320 spirit stones. Base atk is 32. It's classified as Small flying sword (set of 4). Increase chance of bleed effect by 15%.\n");
-			outputText("-Costs of combine or seperate flying swords was adjsuted to be mroe related to their cost.\n");
-			outputText("-\n");
+			outputText("-New flying sword: Moonlight Quartet - combined from two Moonlight Duo sword sets. Cost 320 spirit stones. Base atk is 32. It's classified as Small flying sword (set of 4). Increase chance of bleed effect by 15%.\n");
+			outputText("-Costs of combine or seperate flying swords was adjusted to be more related to their cost.\n");
+			outputText("-Added option to remove cursed items to healer horse in JttE inn. She would charge pc for those services the same as Arian (500 gems).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -228,8 +228,18 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -252,6 +262,11 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

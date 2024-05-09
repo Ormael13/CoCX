@@ -636,8 +636,8 @@ public function mainCampMenu():void {
 		addButtonDisabled(6, "C.C.(Base)", "You don't have any curses to cure. (non-multiplier)");
 		addButtonDisabled(7, "C.C.(Mult)", "You don't have any curses to cure. (multiplier)");
 	}
-	if (player.weaponRange == weaponsrange.SAGITTB) addButton(8, "Uncurse", uncurseItemsMenu2);
 	addButton(8, "Uncurse", uncurseItemsMenu).disableIf(player.equippedKnownCursedItems().length == 0 && player.carriedKnownCursedItems().length == 0, "You don't have any cursed items");
+	if (player.weaponRange == weaponsrange.SAGITTB) addButton(9, "Uncurse", uncurseItemsMenu2);
 	if (BelisaFollower.BelisaQuestOn && !BelisaFollower.BelisaQuestComp) addButton(13, "ToothacheQ", BelisaNadiaTalk);
 	addButton(14, "Back", camp.campLoversMenu);
 }
