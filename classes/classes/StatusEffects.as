@@ -718,6 +718,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const YetiScarf:StatusEffectType                      = mk("Yeti Scarf");
 		public static const YukiOnnaHairpin:StatusEffectType                = mk("Snowy Hairpin");
 		public static const YukiOnnaKimono:StatusEffectType                 = mk("Yuki Onna Kimono");
+		public static const ZenjiArian:StatusEffectType        				= mk("Zenji Arian");
 		public static const ZenjiTrainingsCounters1:StatusEffectType        = mk("Zenji Trainings Counters 1");
 		public static const ZenjiTrainingsCounters2:StatusEffectType        = mk("Zenji Trainings Counters 2");
 

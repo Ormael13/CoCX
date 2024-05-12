@@ -2168,9 +2168,9 @@ public class PlayerInfo extends BaseContent {
 	
 	public function superPerkBuyMenu(page:int = 1):void {
 		clearOutput();
-		outputText("If you meet requirements and have enough points you can pick one or more super perks.\n");
-		if (player.superPerkPoints > 0) outputText("You have "+numberOfThings(player.superPerkPoints,"super perk point","super perk points")+".\n\n");
-		if (player.perkPoints > 0) outputText("You have "+numberOfThings(player.perkPoints,"perk point","perk points")+".\n\n");
+		outputText("If you meet requirements and have enough points you can pick one or more super perks.\n\n");
+		outputText("<b>Unused super perk points:</b> "+player.superPerkPoints+"\n");
+		outputText("<b>Unused perk points:</b> "+player.perkPoints+"\n\n");
 		hideMenus();
 		mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
 		menu();

@@ -450,8 +450,10 @@ public class Creature extends Utils
 		}
 		public function trainStatCap(statName: String, limit: Number):Number {
 			var cap:Number = limit;
+			var cap2:Number = 1;
 			//cap += 2 * host.perkv1(PerkLib.AscensionTranshumanism);
-			if (game.player.hasPerk(PerkLib.MunchkinAtBioLab)) cap += 10;
+			if (game.player.hasPerk(PerkLib.MunchkinAtBioLab)) cap2 += 0.1;
+			cap *= cap2;
 			switch (statName) {
 				case "str":
 					var str:Number = 1;

@@ -1672,7 +1672,7 @@ private function weightLifting():void {
 		if (flags[kFLAGS.SEX_MACHINE_STATUS] >= 0) {
 			addButton(0,"«Machine»",sexMachine.exploreShowers);
 			addButton(1,"Showers",brooke.repeatChooseShower);
-			addButton(4, "Leave", stopGoingBackEveryHourGymCheck);
+			addButton(2,"Again", stopGoingBackEveryHourGymCheck).hint("Train again without leaving gym.");
 		} else doYesNo(brooke.repeatChooseShower,stopGoingBackEveryHourGymCheck);
 	}
 	else doYesNo(sexMachine.exploreShowers,stopGoingBackEveryHourGymCheck);
@@ -1762,7 +1762,7 @@ private function goJogging():void {
 		if (flags[kFLAGS.SEX_MACHINE_STATUS] >= 0) {
 			addButton(0,"''Showers''",sexMachine.exploreShowers);
 			addButton(1,"Showers",brooke.repeatChooseShower);
-			addButton(4, "Leave", stopGoingBackEveryHourGymCheck);
+			addButton(2,"Again", stopGoingBackEveryHourGymCheck).hint("Train again without leaving gym.");
 		} else doYesNo(brooke.repeatChooseShower,stopGoingBackEveryHourGymCheck);
 	}
 	else doYesNo(sexMachine.exploreShowers,stopGoingBackEveryHourGymCheck);
