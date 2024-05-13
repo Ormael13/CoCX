@@ -20,7 +20,7 @@ import classes.Scenes.NPCs.AetherTwinsFollowers;
 		}
 		
 		override public function isDual():Boolean {
-			if (CoC.instance && CoC.instance.player && CoC.instance.player.shield == game.shields.AETHERS && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dual Daggers") return true;
+			if (game.player.hasAetherTwinsTierS2()) return true;
 			return false;
 		}
 		
@@ -47,6 +47,11 @@ import classes.Scenes.NPCs.AetherTwinsFollowers;
 			var boost:int = 0;
 			boost += game.player.statusEffectv1(StatusEffects.AetherTwins1);
 			return (0 + boost);
+		}
+		
+		override public function get size():int {
+			if (game.player.hasAetherTwinsTierS2()) return WSZ_SMALL;
+			return WSZ_MEDIUM;
 		}
 		
 		override public function useText():void {

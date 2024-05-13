@@ -450,8 +450,10 @@ public class Creature extends Utils
 		}
 		public function trainStatCap(statName: String, limit: Number):Number {
 			var cap:Number = limit;
+			var cap2:Number = 1;
 			//cap += 2 * host.perkv1(PerkLib.AscensionTranshumanism);
-			if (game.player.hasPerk(PerkLib.MunchkinAtBioLab)) cap += 10;
+			if (game.player.hasPerk(PerkLib.MunchkinAtBioLab)) cap2 += 0.1;
+			cap *= cap2;
 			switch (statName) {
 				case "str":
 					var str:Number = 1;
@@ -949,10 +951,10 @@ public class Creature extends Utils
 				if (bonus > limit) bonus = limit;
 				max2 += (0.01 * bonus);
 			}
-			if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 4) max2 += 0.1;
-			if (perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 4) max2 += 0.1;
-			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 4) max2 += 0.1;
-			if (perkv1(IMutationsLib.HumanOvariesIM) >= 4) max2 += 0.1;
+			if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 4 && hasCock()) max2 += 0.1;
+			if (perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 4 && hasVagina()) max2 += 0.1;
+			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 4 && hasCock()) max2 += 0.1;
+			if (perkv1(IMutationsLib.HumanOvariesIM) >= 4 && hasVagina()) max2 += 0.1;
 			max1 *= max2;//~230%
 			max1 = Math.round(max1);
 			return Math.min(1609999,max1);

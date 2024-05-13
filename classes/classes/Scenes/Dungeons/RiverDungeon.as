@@ -2339,8 +2339,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			doNext(roomC32);
 		}
 		private function anvilMaterialsCheck():Boolean {
-			return (/*(player.hasItem(useables.PCSHARD, 6)) ||
-					(player.hasItem(useables.PCSHARD, 3) && player.hasItem(useables.SRESIDUE, 3)) ||*/
+			return ((player.hasItem(useables.PCSHARD, 6)) ||
+					/*(player.hasItem(useables.PCSHARD, 3) && player.hasItem(useables.SRESIDUE, 3)) ||*/
 					(player.hasItem(useables.RED_GEL, 1) && player.hasItem(consumables.CHOCBOX, 1) && player.hasItem(consumables.LETHITE, 1) && player.hasItem(consumables.SALAMFW, 1) && player.hasItem(useables.SRESIDUE, 1) && player.hasItem(consumables.ONISAKE, 1)));
 		}
 		private function anvilMaterialsList():void {
@@ -2348,13 +2348,13 @@ public class RiverDungeon extends DungeonAbstractContent
 			outputText("<b>BP's</b>:");
 			outputText("\n<i>-1x clump of red gel + 1x box of chocolate + 1x chunk of lethicite + 1x hip flask of Salamander Firewater + 1x Soul Residue + 1x bottle of Onikiri Sake</i>");
 			//outputText("\n<i>-3x purple crystal shards + 3x Soul Residues</i>");
-			//outputText("\n<i>-6x purple crystal shards</i>");
+			outputText("\n<i>-6x purple crystal shards</i>");
 			doNext(roomD12);
 		}
 		private function anvilUncrafting():void {
 			clearOutput();
 			menu();
-			//if (player.hasItem(useables.PCSHARD, 6)) addButton(0, "???", anvilUncrafting2, 2).hint("Purple Crystal");
+			if (player.hasItem(useables.PCSHARD, 6)) addButton(0, "???", anvilUncrafting2, 2).hint("Purple Crystal");
 			//if (player.hasItem(useables.PCSHARD, 3) && player.hasItem(useables.SRESIDUE, 3)) addButton(1, "???", anvilUncrafting2, 3).hint("Large Purple Soul Crystal Shard");
 			if (player.hasItem(useables.RED_GEL, 1) && player.hasItem(consumables.CHOCBOX, 1) && player.hasItem(consumables.LETHITE, 1) && player.hasItem(consumables.SALAMFW, 1) && player.hasItem(useables.SRESIDUE, 1) && player.hasItem(consumables.ONISAKE, 1)) {
 				if (player.hasKeyItem("Black Crystal") >= 0) addButtonDisabled(7, "Black Crystal", "You can't craft 2nd one until you use the one you have.");

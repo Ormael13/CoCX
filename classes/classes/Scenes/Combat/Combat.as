@@ -7711,7 +7711,7 @@ public class Combat extends BaseContent {
         damage = combat.magic.calcVoltageModImpl(damage, true);
         if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
         if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
-        if (player.perkv1(IMutationsLib.FloralOvariesIM) >= 1) damage *= 1.25;
+        if (player.perkv1(IMutationsLib.FloralOvariesIM) >= 1 && player.hasVagina()) damage *= 1.25;
         if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
         damage *= 2;
@@ -8590,7 +8590,7 @@ public class Combat extends BaseContent {
 			if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) ddd += 0.25;
 			damage *= ddd;
 		}
-		if (player.perkv1(IMutationsLib.GoblinOvariesIM) >= 2 && player.isGoblinoid()) {
+		if (player.perkv1(IMutationsLib.GoblinOvariesIM) >= 2 && player.hasVagina() && player.isGoblinoid()) {
 			var dddd:Number = 1.3;
 			if (player.perkv1(IMutationsLib.GoblinOvariesIM) >= 3) dddd += 0.1;
 			if (player.perkv1(IMutationsLib.GoblinOvariesIM) >= 4) dddd += 0.1;
@@ -9937,15 +9937,17 @@ public class Combat extends BaseContent {
             var lustDmgA:Number = (scalingBonusLibido() * 0.5);
             lustDmgA = teases.teaseAuraLustDamageBonus(monster, lustDmgA);
             if (player.hasPerk(PerkLib.RacialParagon)) lustDmgA *= RacialParagonAbilityBoost();
-            if (player.perkv1(IMutationsLib.FloralOvariesIM) >= 1) lustDmgA *= 1.2;
-            if (player.perkv1(IMutationsLib.FloralOvariesIM) >= 2) {
-                if (monster.isMaleOrHerm()) lustDmgA *= 1.5;
-                lustDmgA *= 1.25;
-            }
-            if (player.perkv1(IMutationsLib.FloralOvariesIM) >= 3) {
-                if (rand(100) > 69) monster.createStatusEffect(StatusEffects.Fascinated,0,0,0,0);
-                lustDmgA *= 1.3;
-            }
+            if (player.perkv1(IMutationsLib.FloralOvariesIM) >= 1 && player.hasVagina()) {
+				lustDmgA *= 1.2;
+				if (player.perkv1(IMutationsLib.FloralOvariesIM) >= 2) {
+					if (monster.isMaleOrHerm()) lustDmgA *= 1.5;
+					lustDmgA *= 1.25;
+				}
+				if (player.perkv1(IMutationsLib.FloralOvariesIM) >= 3) {
+					if (rand(100) > 69) monster.createStatusEffect(StatusEffects.Fascinated,0,0,0,0);
+					lustDmgA *= 1.3;
+				}
+			}
             lustDmgA *= monster.lustVuln;
             lustDmgA = combat.fixPercentLust(lustDmgA);
             monster.teased(Math.round(lustDmgA), false);

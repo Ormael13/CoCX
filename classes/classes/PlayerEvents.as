@@ -1355,7 +1355,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					}
 					player.buff("EasterBunnyBalls").setStat("minlust", 0.1 * player.ballSize).withText("Easter Bunny Balls");
 				}
-				//Armor daily event
+				if (player.hasStatusEffect(StatusEffects.ZenjiArian)) {
+					if (player.statusEffectv1(StatusEffects.ZenjiArian) <= 0) player.removeStatusEffect(StatusEffects.ZenjiArian);
+					else player.addStatusValue(StatusEffects.ZenjiArian, 1, -1);
+				}
+				//Equipment daily events
 				//Scandalous succubus armor and other corruption updates
 				if ((player.armor == armors.SCANSC || player.countMiscJewelry(miscjewelries.DMAGETO) > 0) && player.cor < 100) {
 					outputText("\nCorruption seethes from your defiled equipment into you.\n");
