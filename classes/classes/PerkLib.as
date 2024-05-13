@@ -344,14 +344,14 @@ public class PerkLib
 				"Delay by 5 points appearing effect of negative HP regeneration. (+2 to human score)",
 				"You've chosen the 'Human Supremacy (Basic)' perk. Delay by 5 points appearing effect of negative HP regeneration. (+2 to human score)");
 		public static const HumanSupremacyImproved:PerkType = mk("Human Supremacy (Improved)", "Human Supremacy (Improved)",
-				"Delay by 10 points appearing effect of negative HP regeneration. (+2 to human score)",
-				"You've chosen the 'Human Supremacy (Improved)' perk. Delay by 10 points appearing effect of negative HP regeneration. (+2 to human score)");
+				"Delay by 10 points appearing effect of negative HP regeneration. (+3 to human score)",
+				"You've chosen the 'Human Supremacy (Improved)' perk. Delay by 10 points appearing effect of negative HP regeneration. (+3 to human score)");
 		public static const HumanSupremacyInitial:PerkType = mk("Human Supremacy (Initial)", "Human Supremacy (Initial)",
 				"Delay by 5 points appearing effect of negative HP regeneration. (+2 to human score)",
 				"You've chosen the 'Human Supremacy (Initial)' perk. Delay by 5 points appearing effect of negative HP regeneration. (+2 to human score)");
 		public static const HumanSupremacySuperior:PerkType = mk("Human Supremacy (Superior)", "Human Supremacy (Superior)",
-				"Delay by 15 points appearing effect of negative HP regeneration. (+3 to human score)",
-				"You've chosen the 'Human Supremacy (Superior)' perk. Delay by 15 points appearing effect of negative HP regeneration. (+3 to human score)");
+				"Delay by 15 points appearing effect of negative HP regeneration. (+4 to human score)",
+				"You've chosen the 'Human Supremacy (Superior)' perk. Delay by 15 points appearing effect of negative HP regeneration. (+4 to human score)");
 		public static const MattressActressActor:PerkType = mk("Mattress Actress/Actor", "Mattress Actress/Actor",
 				"You know just how they like it, every time. No need for words; just lay back and let the fantasy come to life. Don't worry, you'll take good care of them. +10% max lust, +5 to anal/vaginal capacity.",
 				"You've chosen the 'Mattress Actress/Actor' perk. +10% max lust, +5 to anal/vaginal capacity.")

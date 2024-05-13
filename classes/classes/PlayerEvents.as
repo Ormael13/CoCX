@@ -1355,6 +1355,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					}
 					player.buff("EasterBunnyBalls").setStat("minlust", 0.1 * player.ballSize).withText("Easter Bunny Balls");
 				}
+				if (player.hasStatusEffect(StatusEffects.GraydaRandomnCampEvents)) player.removeStatusEffect(StatusEffects.GraydaRandomnCampEvents);
 				if (player.hasStatusEffect(StatusEffects.ZenjiArian)) {
 					if (player.statusEffectv1(StatusEffects.ZenjiArian) <= 0) player.removeStatusEffect(StatusEffects.ZenjiArian);
 					else player.addStatusValue(StatusEffects.ZenjiArian, 1, -1);

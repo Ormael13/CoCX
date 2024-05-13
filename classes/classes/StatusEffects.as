@@ -398,6 +398,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Goojob:StatusEffectType                         = mk("GOOJOB");
 		public static const GooStuffed:StatusEffectType                     = mk("gooStuffed");
 		public static const GolemancerShop:StatusEffectType                 = mk("Golemancer Shop");
+		public static const GraydaRandomnCampEvents:StatusEffectType        = mk("Grayda Randomn Camp Events");
 		public static const Groundpound:StatusEffectType                    = mk("Groundpound");
 		public static const HairdresserMeeting:StatusEffectType             = mk("hairdresser meeting");
 		public static const Heat:StatusEffectType                           = HeatEffect.TYPE;
