@@ -31,19 +31,25 @@ public class RaceUtils {
 	 * Examples:
 	 * ```
 	 * parseOperatorObject("blue") => {
-	 * 		name: "blue",
+	 * 		nameFn() {
+	 *      return "blue"
+	 * 		},
 	 * 		operatorFn(value) {
 	 * 			return value == "blue"
 	 * 		}
 	 * 	}
 	 * parseOperatorObject(ANY("red", "blue")) => {
-	 * 		name: "red or blue",
+	 * 		nameFn() {
+	 * 			return "red or blue"
+	 *    },
 	 * 		operatorFn(value) {
 	 * 			return ["red", "blue"].indexOf(value) >= 0
 	 * 		}
 	 * 	}
 	 * parseOperatorObject(6, facePhraseToNameFn) => {
-	 * 		name: "cat face",
+	 * 		nameFn() {
+	 * 			return facePhraseToNameFn() //"cat face"
+	 *    },
 	 * 		operatorFn(value) {
 	 * 			return value == 6
 	 * 		}
@@ -52,7 +58,7 @@ public class RaceUtils {
 	 * @param op Operator definition. Simple value means "equal", otherwise should be operator definition object
 	 * @param phraseFn A function `(operator:*,value:*)=>String` to generate `name` field. Default is BodyData.defaultPhraseFn.
 	 * @param errorContext Prepended to error message, to help debugging
-	 * @return `{name:String, operatorFn:(value:*)=>Boolean}`
+	 * @return `{nameFn:()=>String, operatorFn:(value:*)=>Boolean}`
 	 */
 	public static function parseOperatorObject(
 			op:*,
@@ -63,7 +69,7 @@ public class RaceUtils {
 		errorContext += "["+Utils.stringify(op)+"] ";
 		
 		var operatorFn:Function;
-		var name:String;
+		var nameFn:Function;
 		
 		if (typeof op === "object") {
 			if (!op || !("operator" in op)) {
@@ -84,7 +90,9 @@ public class RaceUtils {
 					var anyOptions:Array = op["options"] as Array;
 					if (!anyOptions) throw new Error(errorContext+"Invalid operator");
 					operatorFn = none ? operatorNoneFn(anyOptions) : operatorAnyFn(anyOptions);
-					name = phraseProvider(operator, anyOptions);
+					nameFn = function (): String {
+						return phraseProvider(operator, anyOptions);
+					}
 					break;
 				case "lt":
 				case "le":
@@ -93,24 +101,28 @@ public class RaceUtils {
 				case "ne":
 					var compValue:* = op["value"];
 					operatorFn = operatorCompareFn(operator, compValue);
-					name = phraseProvider(operator, compValue);
+					nameFn = function (): String {
+						return phraseProvider(operator, compValue);
+					}
 					break;
 				default:
 					throw new Error(errorContext+"Unknown operator");
 			}
 		} else {
 			operatorFn = operatorEqFn(op);
-			name = phraseProvider("eq", op);
+			nameFn = function (): String {
+				return phraseProvider("eq", op);
+			}
 		}
 		return {
-			name: name,
+			nameFn: nameFn,
 			operatorFn: operatorFn
 		}
 	}
 	
 	public static function slotPhrase(slotId:int, expr:*, suffix:Boolean=true):String {
-		if (suffix) return parseOperatorObject(expr, BodyData.slotPhraseFn(slotId)).name;
-		return parseOperatorObject(expr, BodyData.defaultPhraseFn("", BodyData.Slots[slotId].nameFn)).name;
+		if (suffix) return parseOperatorObject(expr, BodyData.slotPhraseFn(slotId)).nameFn();
+		return parseOperatorObject(expr, BodyData.defaultPhraseFn("", BodyData.Slots[slotId].nameFn)).nameFn();
 	}
 	
 	/**
