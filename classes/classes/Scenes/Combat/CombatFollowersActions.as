@@ -482,7 +482,7 @@ import classes.StatusEffects.VampireThirstEffect;
 				if (player.statusEffectv1(StatusEffects.CombatWounds) > 0.03) player.addStatusValue(StatusEffects.CombatWounds, 1, -0.03);
 				else player.removeStatusEffect(StatusEffects.CombatWounds);
 			}
-			outputText("<b>(<font color=\"#008000\">+" + heal1 + "</font>)</b>.");
+			outputText("<b>([font-heal]+" + heal1 + "[/font])</b>.");
 			if (crit) outputText(" <b>*Critical Heal!*</b>");
 			HPChange(heal1, false);
 			outputText("\n\n");

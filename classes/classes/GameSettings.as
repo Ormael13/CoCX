@@ -155,10 +155,10 @@ public class GameSettings extends BaseContent {
 			if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) addButton(6, "Easy Mode", toggleFlag, kFLAGS.EASY_MODE_ENABLE_FLAG, settingsScreenGameSettings).hint("Toggles easy mode.  Enemy damage is 10% of normal and bad-ends can be ignored.");
 			else addButtonDisabled(6, "Easy Mode", "Diffulty setting is too high to allow toggle easy mode.");
 			addButton(7, "Enable Surv", enableSurvivalPrompt).hint("Enable Survival mode. This will enable hunger." +
-					" \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off!</font>");
+					" \n\n<b>[font-critical]Note: This is permanent and cannot be turned off![/font]</b>");
 			addButton(8, "Enable Real", enableRealisticPrompt).hint("Enable Realistic mode. This will make the game" +
-					" a bit realistic. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off!" +
-					" Do not turn this on if you have hyper endowments.</font>");
+					" a bit realistic. \n\n<b>[font-critical]Note: This is permanent and cannot be turned off!" +
+					" Do not turn this on if you have hyper endowments.[/font]</b>");
 			addButton(9, "Fetishes", fetishSubMenu).hint("Toggle some of the weird fetishes such as watersports and worms.");
 			addButton(10, "Timescale", timescaleCycle).hint("Change the way how time and date work in the game.");
 		}

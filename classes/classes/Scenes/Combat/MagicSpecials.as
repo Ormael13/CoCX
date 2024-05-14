@@ -3078,7 +3078,7 @@ public class MagicSpecials extends BaseCombatContent {
 				damage = Math.round(damage * combat.fireDamageBoostedByDao());
 				damage = int(damage);
 				doFireDamage(damage, true, true);
-				outputText("<b>(<font color=\"#800000\">+" + damage + "</font>)</b>\n");
+				outputText("<b>([font-damage]+" + damage + "[/font])</b>\n");
 			}
 			else
 			{
@@ -6377,7 +6377,7 @@ public class MagicSpecials extends BaseCombatContent {
 		temp += scalingBonusIntelligence() * multiInt;
 		temp += scalingBonusWisdom() * multiWis;
 		temp = Math.round(temp);
-		outputText("Your elemental encases your body within a bubble of curative spring water, slowly closing your wounds. The bubbles pop leaving you wet, but on the way to full recovery. <b>([font-heal]+" + temp + "</font>)</b>");
+		outputText("Your elemental encases your body within a bubble of curative spring water, slowly closing your wounds. The bubbles pop leaving you wet, but on the way to full recovery. <b>([font-heal]+" + temp + "[/font])</b>");
 		HPChange(temp,false);
 		outputText("\n\n");
 		enemyAI();
@@ -6530,7 +6530,7 @@ public class MagicSpecials extends BaseCombatContent {
 		temp += scalingBonusIntelligence() * multiInt;
 		temp += scalingBonusWisdom() * multiWis;
 		temp = Math.round(temp);
-		outputText("Your elemental temporarily covers your skin with bark, shielding you against strikes. This is the bark of medicinal plants and as such you recover from your injuries. <b>([font-heal]+" + temp + "</font>)</b>");
+		outputText("Your elemental temporarily covers your skin with bark, shielding you against strikes. This is the bark of medicinal plants and as such you recover from your injuries. <b>([font-heal]+" + temp + "[/font])</b>");
 		HPChange(temp,false);
 		outputText("\n\n");
 		enemyAI();
@@ -7047,7 +7047,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (type == 2) outputText("You gather energy from sunlight into the vines covering your body, converting the nutrients and repairing some of your sustained damage.");
 		if (type == 3) outputText("You channel warmth into your wounds soothing the pain and repairing the damages you sustained.");
 		if (type == 4) outputText("You relax and concentrate on your liquid form closing breaches and repairing any damage you sustained.");
-		outputText(" <b>([font-heal]+" + temp + "</font>)</b>");
+		outputText(" <b>([font-heal]+" + temp + "[/font])</b>");
 		HPChange(temp,false);
 		outputText("\n\n");
 		enemyAI();
@@ -7101,7 +7101,7 @@ public class MagicSpecials extends BaseCombatContent {
 //	if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
 		damage = Math.round(damage);
 		doDamage(damage);
-		outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");
+		outputText(" <b>([font-damage]" + damage + "[/font])</b>\n\n");
 		player.removeStatusEffect(StatusEffects.ImmolationSpell);
 		SceneLib.arianScene.clearTalisman();
 		monster.createStatusEffect(StatusEffects.ImmolationDoT,3,0,0,0);
@@ -7126,7 +7126,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage = calcGlacialMod(damage, true);
 		damage = Math.round(damage);
 		doIceDamage(damage);
-		outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");
+		outputText(" <b>([font-damage]" + damage + "[/font])</b>\n\n");
 		player.removeStatusEffect(StatusEffects.IcePrisonSpell);
 		SceneLib.arianScene.clearTalisman();
 		monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);

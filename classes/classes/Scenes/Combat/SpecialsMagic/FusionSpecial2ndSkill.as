@@ -117,7 +117,7 @@ public class FusionSpecial2ndSkill extends AbstractMagicSpecial {
 
         amountToHeal = Math.round(amountToHeal);
 
-        if (display) outputText(" <b>([font-heal]+" + numberFormat(amountToHeal) + "</font>)</b>");
+        if (display) outputText(" <b>([font-heal]+" + numberFormat(amountToHeal) + "[/font])</b>");
 		HPChange(amountToHeal,false);
 
         outputText("\n\n");

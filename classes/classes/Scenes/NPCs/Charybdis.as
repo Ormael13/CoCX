@@ -68,7 +68,7 @@ public class Charybdis extends Monster
 		private function charybdisRejuvenationRhythm():void {
 			outputText("The instruments at his gills sound out, a brassy sound in time with the beleaguered Scylla’s heartbeat. You notice his wounds begin to close. ");
 			var temp:Number = Math.round(maxHP() * 0.15);
-			outputText("<b>(<font color=\"#008000\">+" + temp + "</font>)</b>");
+			outputText("<b>([font-heal]+" + temp + "[/font])</b>");
 			addHP(temp);
 			var hpChange2:int = inte;
 			createStatusEffect(StatusEffects.MonsterRegen2, 8, hpChange2, 0, 0);

@@ -365,7 +365,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	 damage *= 1.75;
 	 }
 	 doDamage(damage);
-	 outputText("Your scythes swiftly sweeps against [themonster], dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!");
+	 outputText("Your scythes swiftly sweeps against [themonster], dealing <b>[font-damage]" + damage + "[/font]</b> damage!");
 	 if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 	 outputText("\n");
 	 checkAchievementDamage(damage);
@@ -449,7 +449,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	 //soulskill mod effect
 	 damage *= soulskillPhysicalMod();
 	 doDamage(damage);
-	 outputText("Your [weapon] hits thrice against [themonster], dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
+	 outputText("Your [weapon] hits thrice against [themonster], dealing <b>[font-damage]" + damage + "[/font]</b> damage! ");
 	 checkAchievementDamage(damage);
 	 combat.WrathGenerationPerHit2(5);
 	 combat.heroBaneProc(damage);

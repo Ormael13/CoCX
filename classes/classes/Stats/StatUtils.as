@@ -108,12 +108,12 @@ public class StatUtils {
 					continue;
 				}
 				if (isPositiveStat) {
-					if (value > 0) text += '<font color="#008000">';
-					else text += '<font color="#800000">';
+					if (value > 0) text += '[font-heal]';
+					else text += '[font-damage]';
 				}
 				if (!isPositiveStat) {
-					if (value > 0) text += '<font color="#800000">';
-					else text += '<font color="#008000">';
+					if (value > 0) text += '[font-damage]';
+					else text += '[font-heal]';
 				}
 				text += '<b>' + buff.text + ':</b> ';
 				if (asPercent) {
@@ -129,20 +129,20 @@ public class StatUtils {
 					}[buff.rate])+')'
 				}
 				text += '\n';
-				text += "</font>";
-				//if (!isPositiveStat) text += '<font color="#800000">'
-				//if (isPositiveStat) text = "<font color=\"#008000\">"+text+"</font>";
+				text += "[/font]";
+				//if (!isPositiveStat) text += '[font-damage]'
+				//if (isPositiveStat) text = "[font-heal]"+text+"[/font]";
 			}
 		}
 		if (PerkBuff != 0)
 		{
 			if (isPositiveStat) {
-				if (PerkBuff > 0) text += '<font color="#008000">';
-				else text += '<font color="#800000">';
+				if (PerkBuff > 0) text += '[font-heal]';
+				else text += '[font-damage]';
 			}
 			if (!isPositiveStat) {
-				if (PerkBuff > 0) text += '<font color="#800000">';
-				else text += '<font color="#008000">';
+				if (PerkBuff > 0) text += '[font-damage]';
+				else text += '[font-heal]';
 			}
 			text += "<b>Perk:</b> ";
 			if (asPercent) {
@@ -150,7 +150,7 @@ public class StatUtils {
 			} else {
 				text += (PerkBuff >= 0 ? '+' : '') + Utils.floor(PerkBuff, 1);
 			}
-			text += "</font>";
+			text += "[/font]";
 		}
 		if (hasHidden) text += '<b>Unknown Sources:</b> ±??';
 		return text;

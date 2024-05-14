@@ -717,23 +717,23 @@ private function craftingMaterialsMoonstone1Down():void {
 			outputText("<b>Item:</b> " + item.longName + "\n\n");
 			outputText("<b><u>Items Needed:</u></b>\n");
 			if (item1 != null) {
-				if (player.hasItem(item1, item1Quantity)) outputText("<font color=\"#008000\">" + player.itemCount(item1) + " / " + item1Quantity + " " + item1.longName + "</font>");
-				else outputText("<font color=\"#800000\">" + player.itemCount(item1) + " / " + item1Quantity + " " + item1.longName + "</font>");
+				if (player.hasItem(item1, item1Quantity)) outputText("[font-heal]" + player.itemCount(item1) + " / " + item1Quantity + " " + item1.longName + "[/font]");
+				else outputText("[font-damage]" + player.itemCount(item1) + " / " + item1Quantity + " " + item1.longName + "[/font]");
 				outputText("\n");
 			}
 			if (item2 != null) {
-				if (player.hasItem(item2, item2Quantity)) outputText("<font color=\"#008000\">" + player.itemCount(item2) + " / " + item2Quantity + " " + item2.longName + "</font>");
-				else outputText("<font color=\"#800000\">" + player.itemCount(item2) + " / " + item2Quantity + " " + item2.longName + "</font>");
+				if (player.hasItem(item2, item2Quantity)) outputText("[font-heal]" + player.itemCount(item2) + " / " + item2Quantity + " " + item2.longName + "[/font]");
+				else outputText("[font-damage]" + player.itemCount(item2) + " / " + item2Quantity + " " + item2.longName + "[/font]");
 				outputText("\n");
 			}
 			if (item3 != null) {
-				if (player.hasItem(item3, item3Quantity)) outputText("<font color=\"#008000\">" + player.itemCount(item3) + " / " + item3Quantity + " " + item3.longName + "</font>");
-				else outputText("<font color=\"#800000\">" + player.itemCount(item3) + " / " + item3Quantity + " " + item3.longName + "</font>");
+				if (player.hasItem(item3, item3Quantity)) outputText("[font-heal]" + player.itemCount(item3) + " / " + item3Quantity + " " + item3.longName + "[/font]");
+				else outputText("[font-damage]" + player.itemCount(item3) + " / " + item3Quantity + " " + item3.longName + "[/font]");
 				outputText("\n");
 			}
 			if (item4 != null) {
-				if (player.hasItem(item4, item4Quantity)) outputText("<font color=\"#008000\">" + player.itemCount(item4) + " / " + item4Quantity + " " + item4.longName + "</font>");
-				else outputText("<font color=\"#800000\">" + player.itemCount(item4) + " / " + item4Quantity + " " + item4.longName + "</font>");
+				if (player.hasItem(item4, item4Quantity)) outputText("[font-heal]" + player.itemCount(item4) + " / " + item4Quantity + " " + item4.longName + "[/font]");
+				else outputText("[font-damage]" + player.itemCount(item4) + " / " + item4Quantity + " " + item4.longName + "[/font]");
 				outputText("\n");
 			}
 			outputText("\n");

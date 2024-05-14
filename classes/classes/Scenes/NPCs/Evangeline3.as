@@ -142,7 +142,7 @@ public class Evangeline3 extends Monster
 			if (inte >= 101) temp += ((inte * 1.25) + rand(inte * 1.75));
 			temp *= SpellMod();
 			temp = Math.round(temp);
-			outputText("Evangeline flushes with success as her wounds begin to knit! <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
+			outputText("Evangeline flushes with success as her wounds begin to knit! <b>([font-heal]+" + temp + "[/font])</b>.");
 			addHP(temp);
 			fatigue += spellCostHeal();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED]++;

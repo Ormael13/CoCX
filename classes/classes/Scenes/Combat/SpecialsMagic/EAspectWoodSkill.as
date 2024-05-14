@@ -74,7 +74,7 @@ public class EAspectWoodSkill extends AbstractMagicSpecial {
 
     override public function doEffect(display:Boolean = true):void {
         var amountToHeal:Number = Math.round(calcDamage(monster));
-        if (display) outputText("Your elemental temporarily covers your skin with bark, shielding you against strikes. This is the bark of medicinal plants and as such you recover from your injuries. <b>([font-heal]+" + numberFormat(amountToHeal) + "</font>)</b>");
+        if (display) outputText("Your elemental temporarily covers your skin with bark, shielding you against strikes. This is the bark of medicinal plants and as such you recover from your injuries. <b>([font-heal]+" + numberFormat(amountToHeal) + "[/font])</b>");
 		HPChange(amountToHeal,false);
 		if (display) outputText("\n\n");   
         setDuration();

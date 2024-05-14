@@ -41,7 +41,7 @@ package classes.Items.Consumables
 					else damage *= 2;
 				}
 				if (game.monster.hasPerk(PerkLib.EnemyGroupType) || game.monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 5;
-				outputText(game.monster.capitalA + game.monster.short + " is hit with the bangball!  It breaks apart as it lacerates " + game.monster.pronoun2 + ". <b>([font-damage]" + damage + "</font>)</b>");
+				outputText(game.monster.capitalA + game.monster.short + " is hit with the bangball!  It breaks apart as it lacerates " + game.monster.pronoun2 + ". <b>([font-damage]" + damage + "[/font])</b>");
 				game.monster.HP -= damage;
 				if (game.monster.HP < game.monster.minHP()) game.monster.HP = game.monster.minHP() - 1;
 			}
