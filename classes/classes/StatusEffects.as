@@ -650,6 +650,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const SlimeCraving:StatusEffectType                   = mk("Slime Craving");
 		public static const SlimeCravingFeed:StatusEffectType               = mk("Slime Craving Feed");
 		public static const SlimeCravingOutput:StatusEffectType             = mk("Slime Craving Output");
+		public static const SlowTFingItems1:StatusEffectType        		= mk("Slow TFing Items 1");
+		public static const SlowTFingItems2:StatusEffectType        		= mk("Slow TFing Items 2");
 		public static const SoulArenaGaunlets1:StatusEffectType          	= mk("Soul Arena Gaunlets 1");
 		public static const SoulDrill1:StatusEffectType                   	= mk("Soul Drill 1");
 		public static const SoulGemCrafting:StatusEffectType                = mk("SoulGemCrafting");

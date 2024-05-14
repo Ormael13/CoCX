@@ -152,7 +152,7 @@ public class Changelog extends BaseContent
 			outputText("-Zenji + Arian scene when visting Arian proc chance lowered (15% > 10%) and won't trigger more then once each 4-5 days. Grayda related camp events can happen only once a day.\n");
 			outputText("-Ovaries and Testicles internal mutations would require to have either vagina or cock to give benefits.\n");
 			outputText("-Human Supremacy (Improved) and (Superior) perks increase human score by 1 more point.\n");
-			outputText("-Re: Convert option at super perk menu would give 50% more perk points (so their exchange form super to normal perks won't be giving penatly - praise the Morgan for complai... argumenting it well enough why it need to change)\n");
+			outputText("-Re: Convert option at super perk menu would give 50% more perk points (so their exchange from super to normal perks won't be giving penatly - praise the Morgan for complai... argumenting it well enough why it need to change)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -177,7 +177,7 @@ public class Changelog extends BaseContent
 			outputText("Endless Rage draining 10x too much wrath per turn, Berzerker/Lustzerker still req. to be activated after they been activated as part of Asura Form activation, dormant state of wereraces 'blessings' increasing race score and not lowering it, Hinezumi Buring Blood IM accesable by Bunny race, returning from teleportation circle at 4th floor of river dungeon sending PC to ");
 			outputText("3rd floor teleportation circle room, perk allowing to always run away from enemy/ies been ignored in dungeons, unarmed/feral giving mastery gains for small weapons, 2 of 4 SF to Elemental Energy conversion options having wrong check for usable SF, using Fiery Band for calling Kiha to help fight... Kiha, Ceraph after update still not able to win using her super cool lust beam attack, ");
 			outputText("Pilgrim's Bounty perk setting cumQ as if max lust was 100, Raphael rape scene treating all PC cocks as tentalce cocks, Condensed Power and Titanic Strength perks desc/effects been misaligned/incorectly calculated, HB Mech Dragon's Breath Flamer & Scatter Laser upgrade(s) after instaling each weapon, HB Ayo Armor have it stored SF reset on loading save, Vapula not longer will make Joy ");
-			outputText("join any threesome scenes, Patchouli sex scenes will now know when she gained cock she could use, Pure JoJo anal sex sex scene cock parser going postal\n\n");
+			outputText("join any threesome scenes, Patchouli sex scenes will now know when she gained cock she could use, Pure JoJo anal sex sex scene cock parser going postal, trapped satyr sex scenes not giving sex XP or triger any related effects\n\n");
 			/*ostatni punkt changelogu
 			outputText("(Part 2/2) <b>Version 0.9a:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");

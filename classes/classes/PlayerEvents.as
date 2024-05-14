@@ -2790,15 +2790,25 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			if (player.shieldName == "Tome of Imp" || player.shieldName == "cursed Tome of Imp") {
 				camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMP_TOME);
-				if (!camp.IsSleeping && !player.isRaceCached(Races.IMP, 3) && rand(3) < 2) {
+				if (!player.hasStatusEffect(StatusEffects.SlowTFingItems1) && !player.isRaceCached(Races.IMP, 3) && rand(3) < 2) {
+					player.createStatusEffect(StatusEffects.SlowTFingItems1, 5, 0, 0, 0);
 					CoC.instance.mutations.impTFgradual(player);
 					needNext = true;
 				}
+				else {
+					if (player.statusEffectv1(StatusEffects.SlowTFingItems1) <= 0) player.removeStatusEffect(StatusEffects.SlowTFingItems1);
+					else player.addStatusValue(StatusEffects.SlowTFingItems1, 1, -1);
+				}
 			}
 			if (player.weaponRange == weaponsrange.SAGITTB) {
-				if (!camp.IsSleeping && player.racialScore(Races.CENTAUR) < 18 && rand(3) < 2) {
+				if (!player.hasStatusEffect(StatusEffects.SlowTFingItems2) && player.racialScore(Races.CENTAUR) < 18 && rand(3) < 2) {
+					player.createStatusEffect(StatusEffects.SlowTFingItems2, 5, 0, 0, 0);
 					CoC.instance.mutations.sagittariusBowChanges(player);
 					needNext = true;
+				}
+				else {
+					if (player.statusEffectv1(StatusEffects.SlowTFingItems2) <= 0) player.removeStatusEffect(StatusEffects.SlowTFingItems2);
+					else player.addStatusValue(StatusEffects.SlowTFingItems2, 1, -1);
 				}
 			}
 			if (flags[kFLAGS.ERLKING_CANE_ATTACK_COUNTER] > 0) flags[kFLAGS.ERLKING_CANE_ATTACK_COUNTER] -= 1;

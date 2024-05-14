@@ -87,6 +87,8 @@ public function dianaAtJttECursedItemsRemoval2():void {
 	player.gems -= 500;
 	player.removeStatusEffect(StatusEffects.TookSagittariusBanefulGreatBow);
 	player.createStatusEffect(StatusEffects.TookSagittariusBanefulGreatBow,1,0,0,0);
+	if (player.statStore.hasBuff('Sagittarius Curse')) player.buff("Sagittarius Curse").remove();
+	if (player.statStore.hasBuff('Sagittarius Focus')) player.buff("Sagittarius Focus").remove();
 	player.unequipWeaponRange(false,true);
 	inventory.takeItem(weaponsrange.SAGITTB, SceneLib.journeyToTheEast.dianaAtJttEMain);
 }

@@ -3047,6 +3047,13 @@ public final class Mutations extends MutationsHelper {
 				changes++;
 			}
 		}
+		//Chance of horse cock growth if not any yet
+		if (!player.hasCock() && changes < changeLimit && rand(3) == 0) {
+			transformations.CockHorse(0, 10 + rand(7), 2 + rand(10) / 10);
+			player.addCurse("sen", 5, 1);
+			player.MutagenBonus("lib", 4);
+			changes++;
+		}
 		//Chance of ball growth if not 3" yet
 		if (rand(2) == 0 && changes < changeLimit && player.ballSize <= 3 && player.horseCocks() > 0) {
 			if (player.balls == 0) {
