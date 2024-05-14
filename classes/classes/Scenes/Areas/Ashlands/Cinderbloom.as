@@ -16,18 +16,27 @@ public class Cinderbloom extends Alraune
 	{
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.forest.alrauneScene.alrauneDeepwoodsWon();
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) cleanupAfterCombat();
+			else SceneLib.forest.alrauneScene.alrauneDeepwoodsWon();
 		}
 
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			SceneLib.forest.alrauneScene.alrauneDeepwoodsLost();
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) cleanupAfterCombat();
+			else SceneLib.forest.alrauneScene.alrauneDeepwoodsLost();
 		}
 		
 		public function Cinderbloom()
 		{
 			super();
-			if (Holidays.isHalloween()) {
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
+				this.a = "a ";
+				this.short = "mist cinderbloom alraune";
+				this.long = "You are fighting against a Mist Cinderbloom, an intelligent plant with the torso of a woman and the lower body of a giant flower. Whole her body cover faint vein-like lines. She seems really keen on raping you.";
+				this.bodyColor = "chocolate";
+				this.hairColor = "blonde";
+			}
+			else if (Holidays.isHalloween()) {
 				this.short = "Jack-O-Raune";
 				this.long = "You are fighting against a Jack-O-Raune, an intelligent plant with the torso of a woman and the lower body of a giant pumpkin with snaking tentacle vines. She seems really keen on raping you.";
 				this.bodyColor = "pale orange";
@@ -39,19 +48,34 @@ public class Cinderbloom extends Alraune
 				this.bodyColor = "chocolate";
 				this.hairColor = "blonde";
 			}
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
+				initStrTouSpeInte(18, 360, 18, 140);
+				initWisLibSensCor(140, 240, 100, 0);
+				this.armorDef = 120;
+				this.armorMDef = 25;
+				this.bonusHP = 800;
+				this.bonusLust = 408;
+				this.level = 68;
+				this.drop = new ChainedDrop().add(consumables.EMBER_F, 1 / 6)
+						.add(consumables.MARAFRU, 1 / 4)
+						.add(useables.PCSHARD, 1 / 2);
+					//	.elseDrop(useables.B_CHITN);
+			}
+			else {
+				initStrTouSpeInte(10, 250, 10, 100);
+				initWisLibSensCor(100, 200, 50, 0);
+				this.armorDef = 90;
+				this.armorMDef = 9;
+				this.bonusHP = 200;
+				this.bonusLust = 290;
+				this.level = 40;
+				this.drop = new ChainedDrop().add(consumables.EMBER_F, 1 / 6)
+						.add(consumables.MARAFRU, 1 / 4);
+					//	.add(consumables.BEEHONY, 1 / 2)
+					//	.elseDrop(useables.B_CHITN);
+			}
 			this.imageName = "cinderbloom alraune";
-			initStrTouSpeInte(10, 250, 10, 100);
-			initWisLibSensCor(100, 200, 50, 0);
-			this.armorDef = 90;
-			this.armorMDef = 9;
-			this.bonusHP = 200;
-			this.bonusLust = 290;
-			this.level = 40;
 			this.gems = rand(25) + 15;
-			this.drop = new ChainedDrop().add(consumables.MARAFRU, 1 / 6);
-				//	.add(consumables.W__BOOK, 1 / 4)
-				//	.add(consumables.BEEHONY, 1 / 2)
-				//	.elseDrop(useables.B_CHITN);
 			this.removePerk(PerkLib.FireVulnerability);
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyPlantType, 0, 0, 0, 0);

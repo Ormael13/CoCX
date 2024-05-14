@@ -450,8 +450,10 @@ public class Creature extends Utils
 		}
 		public function trainStatCap(statName: String, limit: Number):Number {
 			var cap:Number = limit;
+			var cap2:Number = 1;
 			//cap += 2 * host.perkv1(PerkLib.AscensionTranshumanism);
-			if (game.player.hasPerk(PerkLib.MunchkinAtBioLab)) cap += 10;
+			if (game.player.hasPerk(PerkLib.MunchkinAtBioLab)) cap2 += 0.1;
+			cap *= cap2;
 			switch (statName) {
 				case "str":
 					var str:Number = 1;
@@ -807,26 +809,46 @@ public class Creature extends Utils
 			maxHP_mult1 += (countCockSocks("green") * 0.02);
 			if (game.player.vehiclesName == "Goblin Mech Alpha") {
 				if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) maxHP_mult1 += 0.2;
-				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.35;
-				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 0.5;
+				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.4;
+				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 0.6;
+				if (game.player.hasKeyItem("Upgraded Armor plating 4.0") >= 0) maxHP_mult1 += 0.8;
+				if (game.player.hasKeyItem("Upgraded Armor plating 5.0") >= 0) maxHP_mult1 += 1;
+				if (game.player.hasKeyItem("Upgraded Armor plating 6.0") >= 0) maxHP_mult1 += 1.2;
 			}
 			if (game.player.vehiclesName == "Goblin Mech Prime") {
 				if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) maxHP_mult1 += 0.4;
-				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.7;
-				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 1;
+				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.8;
+				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 1.2;
+				if (game.player.hasKeyItem("Upgraded Armor plating 4.0") >= 0) maxHP_mult1 += 1.6;
+				if (game.player.hasKeyItem("Upgraded Armor plating 5.0") >= 0) maxHP_mult1 += 2;
+				if (game.player.hasKeyItem("Upgraded Armor plating 6.0") >= 0) maxHP_mult1 += 2.4;
 			}
 			if (game.player.vehiclesName == "Giant Slayer Mech") {
 				if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) maxHP_mult1 += 0.25;
 				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.5;
 				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 0.75;
+				if (game.player.hasKeyItem("Upgraded Armor plating 4.0") >= 0) maxHP_mult1 += 1;
+				if (game.player.hasKeyItem("Upgraded Armor plating 5.0") >= 0) maxHP_mult1 += 1.25;
+				if (game.player.hasKeyItem("Upgraded Armor plating 6.0") >= 0) maxHP_mult1 += 1.5;
 				if (game.player.hasKeyItem("Upgraded Leather Insulation 1.0") >= 0) maxHP_mult1 += 0.25;
 				if (game.player.hasKeyItem("Upgraded Leather Insulation 2.0") >= 0) maxHP_mult1 += 0.5;
 				if (game.player.hasKeyItem("Upgraded Leather Insulation 3.0") >= 0) maxHP_mult1 += 0.75;
 			}
 			if (game.player.vehiclesName == "Howling Banshee Mech") {
-				if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) maxHP_mult1 += 0.25;
-				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.5;
-				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 0.75;
+				if (game.player.hasKeyItem("HB Armor Plating") >= 1) maxHP_mult1 += 0.25;
+				if (game.player.hasKeyItem("HB Armor Plating") >= 2) maxHP_mult1 += 0.5;
+				if (game.player.hasKeyItem("HB Armor Plating") >= 3) maxHP_mult1 += 0.75;
+				if (game.player.hasKeyItem("HB Armor Plating") >= 4) maxHP_mult1 += 1;
+				if (game.player.hasKeyItem("HB Armor Plating") >= 5) maxHP_mult1 += 1.25;
+				if (game.player.hasKeyItem("HB Armor Plating") >= 6) maxHP_mult1 += 1.5;
+				if (game.player.hasKeyItem("HB Armor Plating") >= 7) maxHP_mult1 += 1.75;
+				if (game.player.hasKeyItem("HB Leather Insulation") >= 1) maxHP_mult1 += 0.25;
+				if (game.player.hasKeyItem("HB Leather Insulation") >= 2) maxHP_mult1 += 0.5;
+				if (game.player.hasKeyItem("HB Leather Insulation") >= 3) maxHP_mult1 += 0.75;
+				if (game.player.hasKeyItem("HB Leather Insulation") >= 4) maxHP_mult1 += 1;
+				if (game.player.hasKeyItem("HB Leather Insulation") >= 5) maxHP_mult1 += 1.25;
+				if (game.player.hasKeyItem("HB Leather Insulation") >= 6) maxHP_mult1 += 1.5;
+				if (game.player.hasKeyItem("HB Leather Insulation") >= 7) maxHP_mult1 += 1.75;
 			}
 			if (game.player.hasPerk(PerkLib.SharedPower) && game.player.perkv1(PerkLib.SharedPower) > 0) maxHP_mult1 += (0.1*game.player.perkv1(PerkLib.SharedPower));
 			return maxHP_mult1;
@@ -929,10 +951,10 @@ public class Creature extends Utils
 				if (bonus > limit) bonus = limit;
 				max2 += (0.01 * bonus);
 			}
-			if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 4) max2 += 0.1;
-			if (perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 4) max2 += 0.1;
-			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 4) max2 += 0.1;
-			if (perkv1(IMutationsLib.HumanOvariesIM) >= 4) max2 += 0.1;
+			if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 4 && hasCock()) max2 += 0.1;
+			if (perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 4 && hasVagina()) max2 += 0.1;
+			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 4 && hasCock()) max2 += 0.1;
+			if (perkv1(IMutationsLib.HumanOvariesIM) >= 4 && hasVagina()) max2 += 0.1;
 			max1 *= max2;//~230%
 			max1 = Math.round(max1);
 			return Math.min(1609999,max1);
@@ -1194,15 +1216,13 @@ public class Creature extends Utils
 		public function get effectiveTallness():Number {
 			var multiplier:Number = 1;
 			if (hasPerk(PerkLib.GiantMight)) multiplier += 4;
-			if (hasPerk(PerkLib.TitanicSize)) multiplier += 4;
 			return tallness*multiplier;
 		}
 
 		public function set tallness(value:Number):void {
 			var multiplier:Number = 1;
-			if (hasPerk(PerkLib.TitanicSize)) multiplier = 5;
-			_tallness = value/multiplier;
-			//_tallness = value;
+			if (hasPerk(PerkLib.TitanicSize)) multiplier += 4;
+			_tallness = value*multiplier;
 		}
 		
 		public var bodyMaterials:/*BodyMaterial*/Array = [];
@@ -2716,7 +2736,6 @@ public class Creature extends Utils
 				percent = 1;
 			if (percent < 0)
 				percent = 0;
-
 			return percent;
 		}
 
@@ -2730,12 +2749,11 @@ public class Creature extends Utils
 			//Other things that affect it:
 			//lust - 50% = normal output.  0 = half output. 100 = +50% output.
 			//trace("CUM ESTIMATE: " + int(1.25*2*cumMultiplier*2*(lust + 50)/10 * (hoursSinceCum+10)/24)/10 + "(no balls), " + int(ballSize*balls*cumMultiplier*2*(lust + 50)/10 * (hoursSinceCum+10)/24)/10 + "(withballs)");
-			var lustCoefficient:Number = (lust + 50) / 10;
+			var lustCoefficient:Number = lust / 10;
 			//If realistic mode is enabled, limits cum to capacity.
 			if (flags[kFLAGS.HUNGER_ENABLED] >= 1)
 			{
-				lustCoefficient = (lust + 50) / 5;
-				if (hasPerk(PerkLib.PilgrimsBounty)) lustCoefficient = 30;
+				lustCoefficient = lust / 5;
 				var percent:Number = 0;
 				percent = lustCoefficient + (hoursSinceCum + 10);
 				if (percent > 100)
@@ -2744,9 +2762,6 @@ public class Creature extends Utils
 					quantity = cumCapacity();
 				return (percent / 100) * cumCapacity();
 			}
-			//Pilgrim's bounty maxes lust coefficient
-			if (hasPerk(PerkLib.PilgrimsBounty))
-				lustCoefficient = 150 / 10;
 			if (balls == 0)
 				quantity = int(1.25 * 2 * cumMultiplier * 2 * lustCoefficient * (hoursSinceCum + 10) / 24) / 10;
 			else
@@ -3581,6 +3596,8 @@ public class Creature extends Utils
 				counter += 30;
 			if (hasPerk(PerkLib.MagicalFertility))
 				counter += 10 + (perkv1(PerkLib.MagicalFertility) * 5);
+			if (perkv1(IMutationsLib.GoblinOvariesIM) >= 1)
+				counter += (10 * perkv1(IMutationsLib.GoblinOvariesIM));
 			if (perkv1(IMutationsLib.HumanOvariesIM) >= 1 && game.player.racialScore(Races.HUMAN) > 17)
 				counter += (15 * perkv1(IMutationsLib.HumanOvariesIM));
 			counter += perkv2(PerkLib.ElvenBounty);
@@ -4820,4 +4837,3 @@ public class Creature extends Utils
 		}
 	}
 }
-

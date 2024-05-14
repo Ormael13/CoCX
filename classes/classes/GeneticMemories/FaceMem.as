@@ -682,6 +682,28 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const TROLL:int = _partid++;
+		EnumValue.add(Memories, TROLL, "TROLL", {
+			id: "Troll Face",
+			name: "Troll Face",
+			cost: 100,
+			title: "Troll Face",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.FaceTroll;
+			}
+		});
+
+		public static const GLACIAL_TROLL:int = _partid++;
+		EnumValue.add(Memories, GLACIAL_TROLL, "GLACIAL_TROLL", {
+			id: "G.Troll Face",
+			name: "G.Troll Face",
+			cost: 100,
+			title: "G.Troll Face",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.FaceGlacialTroll;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

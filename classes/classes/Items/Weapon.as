@@ -202,6 +202,7 @@ public class Weapon extends Equipable
 		public function isSingleMedium():Boolean { return !isDual() && isMedium(); }
 		public function isSingleLarge():Boolean { return !isDual() && isLarge(); }
 		public function isSingleMassive():Boolean { return !isDual() && isMassive(); }
+		public function isSingleOrDualSmallToMassive(): Boolean { return isSingleSmall() || isDualSmall() || isSingleMedium() || isDualMedium() || isSingleLarge() || isDualLarge() || isSingleMassive() || isDualMassive(); }
 		
 		public function isHybrid():Boolean { return hasTag(W_HYBRID); }
 		public function isStaffPart():Boolean { return hasTag(W_STAFFPART); }
@@ -318,7 +319,7 @@ public class Weapon extends Equipable
 					SceneLib.inventory.unequipShield();
 				}
 			}
-			if (game.flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && !game.player.isFeralCombat()) game.flags[kFLAGS.FERAL_COMBAT_MODE] = 0;
+			if (game.flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && isSingleOrDualSmallToMassive()) game.flags[kFLAGS.FERAL_COMBAT_MODE] = 0;
 			
 			return super.beforeEquip(doOutput);
 		}

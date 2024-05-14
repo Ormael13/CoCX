@@ -66,7 +66,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 				EvelynnTavernTalks = valueOr(o["EvelynnTavernTalks"], false);
 				EvelynnCoreLimitBreakerCounter = valueOr(o["EvelynnCoreLimitBreakerCounter"], 0);
 				DianaTavernTalks1 = valueOr(o["DianaTavernTalks1"], false);
-				DianaTavernTalks2 = valueOr(o["DianaTavernTalks1"], false);
+				DianaTavernTalks2 = valueOr(o["DianaTavernTalks2"], false);
 			} else {
 				// loading from old save
 				resetState();
@@ -203,7 +203,6 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 		}
 		private function workHoursMadam():Boolean {
 			return (model.time.hours >= 7 && model.time.hours <= 9) || (model.time.hours >= 18 && model.time.hours <= 22);
-
 		}
 		private function visitMadam():void {
 			clearOutput();
@@ -255,7 +254,6 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 		}
 		private function workHoursTemptress():Boolean {
 			return (model.time.hours >= 8 && model.time.hours <= 9) || (model.time.hours >= 18 && model.time.hours <= 23);
-
 		}
 		private function visitTemptress():void {
 			clearOutput();//Temptress - female displacer devil npc for perk points to stat points conversion outputText("\"<i></i>\"\n\n");
@@ -325,6 +323,11 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 				addButtonDisabled(1, "C.C.(Base)", "You don't have any curses to cure. (non-multiplier)");
 				addButtonDisabled(2, "C.C.(Mult)", "You don't have any curses to cure. (multiplier)");
 			}
+			addButton(3, "Uncurse", SceneLib.dianaScene.dianaAtJttECursedItemsRemoval1)
+				.hint("Ask horse healer to remove your cursed item. Costs 500 gems. ")
+				.disableIf(player.gems < 500, "Ask horse healer to remove your cursed item. Costs 500 gems (Can't afford).")
+				.disableIf(player.equippedKnownCursedItems().length == 0 && player.carriedKnownCursedItems().length == 0, "You don't have any cursed items");
+			if (player.weaponRange == weaponsrange.SAGITTB) addButton(4, "Uncurse", SceneLib.dianaScene.dianaAtJttECursedItemsRemoval2);
 			addButton(14, "Back", curry(enteringInn,false));
 		}
 		public function dianaAtJttEMainHeal():void {

@@ -497,7 +497,7 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 				.disableIf(amilyScene.amilyFollower() && amilyScene.amilyCorrupt(),
 					"You need a corrupted mouse for this.", "???");
 			addButton(1, "Jojo", vapulaJojoThreesomes)
-				.disableIf(jojoScene.campCorruptJojo(), "You need a corrupted mouse with a dick.", "???");
+				.disableIf((!jojoScene.campCorruptJojo() || flags[kFLAGS.JOJO_BIMBO_STATE] == 3), "You need a corrupted mouse with a dick.", "???");
 			addButton(2, "Izma", vapulaAndIzmaThreeSome)
 				.disableIf(flags[kFLAGS.IZMA_NO_COCK], "Izma must have a cock.")
 				.disableIf(!izmaFollower(), "No sharks at your camp... yet?", "???");

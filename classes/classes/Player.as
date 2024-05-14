@@ -776,7 +776,7 @@ use namespace CoC;
 				}
 			}
 			if (hasPerk(PerkLib.ArmorMaster)) {
-				if (armorPerk == "Heavy" || armor.name == "Drider-weave Armor") speedBonus += Math.round(spe / 50);
+				if (isInHeavyArmor()) speedBonus += Math.round(spe / 50);
 			}
 			armorDef += speedBonus;
 			//Feral armor boosts armor ratings!
@@ -794,7 +794,7 @@ use namespace CoC;
 				toughnessBonus += Math.round(ballSize);
 			}
 			armorDef += toughnessBonus;
-			if (hasPerk(PerkLib.PrestigeJobSentinel) && (armorPerk == "Heavy" || armor.name == "Drider-weave Armor")) armorDef += armor.def;
+			if (hasPerk(PerkLib.PrestigeJobSentinel) && isInHeavyArmor()) armorDef += armor.def;
 			if (hasPerk(PerkLib.ShieldExpertise) && shieldName != "nothing" && isShieldsForShieldBash()) {
 				if (shieldBlock >= 4) armorDef += Math.round(shieldBlock * 0.25);
 				else armorDef += 1;
@@ -830,18 +830,27 @@ use namespace CoC;
 				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorDef += 5;
 				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorDef += 10;
 				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorDef += 15;
+				if (hasKeyItem("Upgraded Armor plating 4.0") >= 0) armorDef += 20;
+				if (hasKeyItem("Upgraded Armor plating 5.0") >= 0) armorDef += 25;
+				if (hasKeyItem("Upgraded Armor plating 6.0") >= 0) armorDef += 30;
 			}
 			if (vehiclesName == "Goblin Mech Prime") {
 				armorDef += 20;
 				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorDef += 10;
 				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorDef += 20;
 				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorDef += 30;
+				if (hasKeyItem("Upgraded Armor plating 4.0") >= 0) armorDef += 40;
+				if (hasKeyItem("Upgraded Armor plating 5.0") >= 0) armorDef += 50;
+				if (hasKeyItem("Upgraded Armor plating 6.0") >= 0) armorDef += 60;
 			}
 			if (vehiclesName == "Giant Slayer Mech") {
 				armorDef += 20;
 				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorDef += 40;
 				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorDef += 60;
 				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorDef += 80;
+				if (hasKeyItem("Upgraded Armor plating 4.0") >= 0) armorDef += 100;
+				if (hasKeyItem("Upgraded Armor plating 5.0") >= 0) armorDef += 120;
+				if (hasKeyItem("Upgraded Armor plating 6.0") >= 0) armorDef += 140;
 			}
 			if (vehiclesName == "Howling Banshee Mech") {
 				armorDef += 15;
@@ -850,6 +859,9 @@ use namespace CoC;
 					if (keyItemvX("HB Armor Plating", 1) == 2) armorDef += 25;
 					if (keyItemvX("HB Armor Plating", 1) == 3) armorDef += 35;
 					if (keyItemvX("HB Armor Plating", 1) == 4) armorDef += 45;
+					if (keyItemvX("HB Armor Plating", 1) == 5) armorDef += 55;
+					if (keyItemvX("HB Armor Plating", 1) == 6) armorDef += 65;
+					if (keyItemvX("HB Armor Plating", 1) == 7) armorDef += 75;
 				}
 			}
 			if (buff("SoftIronIgnotPhysicalDefenseBuff").isPresent()) armorDef *= 1.15;
@@ -996,7 +1008,7 @@ use namespace CoC;
 				}
 			}
 			if (hasPerk(PerkLib.ArmorMaster)) {
-				if (armorPerk == "Heavy" || _armor.name == "Drider-weave Armor") speedBonus += Math.round(spe / 50);
+				if (isInHeavyArmor()) speedBonus += Math.round(spe / 50);
 			}
 			armorDef += speedBonus;
 			//Feral armor boosts armor ratings!
@@ -1005,7 +1017,7 @@ use namespace CoC;
 				toughnessBonus += Math.round(tou / 20);
 			}
 			armorDef += toughnessBonus;
-			if (hasPerk(PerkLib.PrestigeJobSentinel) && (armorPerk == "Heavy" || _armor.name == "Drider-weave Armor")) armorDef += _armor.def;
+			if (hasPerk(PerkLib.PrestigeJobSentinel) && isInHeavyArmor()) armorDef += _armor.def;
 			if (hasPerk(PerkLib.ShieldExpertise) && shieldName != "nothing") {
 				if (shieldBlock >= 4) armorDef += Math.round(shieldBlock);
 				else armorDef += 1;
@@ -1041,12 +1053,18 @@ use namespace CoC;
 				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorMDef += 5;
 				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorMDef += 10;
 				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorMDef += 15;
+				if (hasKeyItem("Upgraded Armor plating 4.0") >= 0) armorMDef += 20;
+				if (hasKeyItem("Upgraded Armor plating 5.0") >= 0) armorMDef += 25;
+				if (hasKeyItem("Upgraded Armor plating 6.0") >= 0) armorMDef += 30;
 			}
 			if (vehiclesName == "Goblin Mech Prime") {
 				armorMDef += 20;
 				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorMDef += 10;
 				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorMDef += 20;
 				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorMDef += 30;
+				if (hasKeyItem("Upgraded Armor plating 4.0") >= 0) armorMDef += 40;
+				if (hasKeyItem("Upgraded Armor plating 5.0") >= 0) armorMDef += 50;
+				if (hasKeyItem("Upgraded Armor plating 6.0") >= 0) armorMDef += 60;
 			}
 			if (vehiclesName == "Giant Slayer Mech") {
 				armorMDef += 20;
@@ -1061,6 +1079,9 @@ use namespace CoC;
 					if (keyItemvX("HB Leather Insulation", 2) == 2) armorMDef += 25;
 					if (keyItemvX("HB Leather Insulation", 2) == 3) armorMDef += 35;
 					if (keyItemvX("HB Leather Insulation", 2) == 4) armorMDef += 45;
+					if (keyItemvX("HB Leather Insulation", 2) == 5) armorMDef += 55;
+					if (keyItemvX("HB Leather Insulation", 2) == 6) armorMDef += 65;
+					if (keyItemvX("HB Leather Insulation", 2) == 7) armorMDef += 75;
 				}
 			}
 			if (buff("LightBronzeBarMagicDefenseAndPoisonResistanceBuff").isPresent()) armorMDef *= 1.15;
@@ -1158,7 +1179,7 @@ use namespace CoC;
 		//Wrath Weapons
 		public function isLowGradeWrathWeapon():Boolean
 		{
-			return weapon.isLGWrath() || weaponRange == game.weaponsrange.B_F_BOW || hasAetherTwinsTier2();
+			return weapon.isLGWrath() || weaponRange == game.weaponsrange.B_F_BOW || weaponRange == game.weaponsrange.SAGITTB || hasAetherTwinsTier2();
 		}
 		public function isDualLowGradeWrathWeapon():Boolean
 		{
@@ -1282,6 +1303,11 @@ use namespace CoC;
 		{
 			return weaponRange == game.weaponsrange.TRFATBI;//weaponRange == game.weaponsrange.TRFATBI ||
 		}
+		//Is in Heavy armor
+		public function isInHeavyArmor():Boolean
+		{
+			return armorPerk == "Heavy" || armor.name == "Drider-weave Armor";
+		}
 		//Is in Ayo armor
 		public function isInAyoArmor():Boolean
 		{
@@ -1300,7 +1326,7 @@ use namespace CoC;
 		}
 		public function isUsingMechMeleeWeapons():Boolean
 		{
-			return weapon == game.weapons.RIPPER1 ||  weapon == game.weapons.TRIPPER1 || weapon == game.weapons.RIPPER2 || weapon == game.weapons.TRIPPER2 || weapon == game.weapons.MACGRSW || weapon == game.weapons.TMACGRSW;
+			return weapon == game.weapons.RIPPER1 ||  weapon == game.weapons.TRIPPER1 || weapon == game.weapons.RIPPER2 || weapon == game.weapons.TRIPPER2 || weapon == game.weapons.MACGRSW || weapon == game.weapons.TMACGRSW || weapon == game.weapons.MACSPEA;
 		}
 		//Is in medium sized mech (med sized races mech)(have upgrade option to allow smaller than medium races pilot it)
 		public function isInNonGoblinMech():Boolean
@@ -2598,12 +2624,12 @@ use namespace CoC;
 			if(hasPerk(PerkLib.Saint)) lust -= 5;
 			if(hasPerk(PerkLib.Cardinal)) lust -= 5;
 			if(hasPerk(PerkLib.Pope)) lust -= 5;
-			if(perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 2) lust -= 5;
-			if(perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 4) lust -= 10;
-			if(perkv1(IMutationsLib.MinotaurTesticlesIM) >= 2) lust -= 5;
-			if(perkv1(IMutationsLib.MinotaurTesticlesIM) >= 4) lust -= 10;
-			if(perkv1(IMutationsLib.HumanOvariesIM) >= 1 && racialScore(Races.HUMAN) > 17) lust -= (5 * perkv1(IMutationsLib.HumanOvariesIM));
-			if(perkv1(IMutationsLib.HumanTesticlesIM) >= 1 && racialScore(Races.HUMAN) > 17) lust -= (5 * perkv1(IMutationsLib.HumanTesticlesIM));
+			if(perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 2 && hasVagina()) lust -= 5;
+			if(perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 4 && hasVagina()) lust -= 10;
+			if(perkv1(IMutationsLib.MinotaurTesticlesIM) >= 2 && hasCock()) lust -= 5;
+			if(perkv1(IMutationsLib.MinotaurTesticlesIM) >= 4 && hasCock()) lust -= 10;
+			if(perkv1(IMutationsLib.HumanOvariesIM) >= 1 && hasVagina() && racialScore(Races.HUMAN) > 17) lust -= (5 * perkv1(IMutationsLib.HumanOvariesIM));
+			if(perkv1(IMutationsLib.HumanTesticlesIM) >= 1 && hasCock() && racialScore(Races.HUMAN) > 17) lust -= (5 * perkv1(IMutationsLib.HumanTesticlesIM));
 			if((hasPerk(PerkLib.UnicornBlessing) && cor <= 20) || (hasPerk(PerkLib.BicornBlessing) && cor >= 80)) lust -= 10;
 			if(hasPerk(PerkLib.ChiReflowLust)) lust -= UmasShop.NEEDLEWORK_LUST_LUST_RESIST;
 			if(headjewelryEffectId == HeadJewelryLib.MODIFIER_LUST_R) lust -= headjewelryEffectMagnitude;
@@ -2675,6 +2701,10 @@ use namespace CoC;
 			return lust;
 		}
 
+		public function enemiesImmuneToLustResistanceDebuff():Boolean {
+			return (CoC.instance.monster.hasPerk(PerkLib.EnemyTrueAngel) || flags[kFLAGS.ZENJI_PROGRESS] == -1);
+		}
+
 		public function jewelryAttackModifier():Number {
 			var attackMod:Number = 1;
 			if(jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
@@ -2701,10 +2731,10 @@ use namespace CoC;
 			var mins:Object = getAllMinStats();
 			var baseLib:Number = lib;
 			var finalLib:Number = 1;
-			if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 4) finalLib -= 0.05;
-			if (perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 4) finalLib -= 0.05;
-			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 4) finalLib -= 0.05;
-			if (perkv1(IMutationsLib.HumanOvariesIM) >= 4) finalLib -= 0.05;
+			if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 4 && hasCock()) finalLib -= 0.05;
+			if (perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 4 && hasVagina()) finalLib -= 0.05;
+			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 4 && hasCock()) finalLib -= 0.05;
+			if (perkv1(IMutationsLib.HumanOvariesIM) >= 4 && hasVagina()) finalLib -= 0.05;
 			if (finalLib < 0.05) finalLib = 0.05;
 			baseLib = Math.round(baseLib * finalLib);
 			if (baseLib < mins.lib) baseLib = mins.lib;
@@ -3153,16 +3183,16 @@ use namespace CoC;
 			if (hasPerk(PerkLib.FenrirSpikedCollar)) {
 				mult -= 15;
 			}
-			if (hasPerk(PerkLib.Juggernaut) && tou >= 100 && (armorPerk == "Heavy" || armor.name == "Drider-weave Armor")) {
+			if (hasPerk(PerkLib.Juggernaut) && tou >= 100 && isInHeavyArmor()) {
 				mult -= 10;
 			}
 			if (hasPerk(PerkLib.ImmovableObject) && tou >= 75) {
 				mult -= 10;
 			}
-			if (hasPerk(PerkLib.AyoArmorProficiency) && tou >= 100 && (armorPerk == "Light Ayo" || armorPerk == "Heavy Ayo" || armorPerk == "Ultra Heavy Ayo")) {
+			if (hasPerk(PerkLib.AyoArmorProficiency) && tou >= 100 && isInAyoArmor()) {
 				mult -= 10;
 			}
-			if (hasPerk(PerkLib.HeavyArmorProficiency) && tou >= 75 && (armorPerk == "Heavy" || armor.name == "Drider-weave Armor")) {
+			if (hasPerk(PerkLib.HeavyArmorProficiency) && tou >= 75 && isInHeavyArmor()) {
 				mult -= 10;
 			}
 			if (hasPerk(PerkLib.ShieldHarmony) && tou >= 100 && isShieldsForShieldBash() && shieldName != "nothing" && !hasStatusEffect(StatusEffects.Stunned)) {
@@ -3289,6 +3319,9 @@ use namespace CoC;
 			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && armor.hasTag(ItemConstants.A_REVEALING)) {
 				mult -= 10;
 			}
+			if (hasPerk(PerkLib.TrollResistance)) {
+				mult -= 15;
+			}
 			if (perkv1(IMutationsLib.DraconicBonesIM) >= 2) {
 				mult -= 5;
 			}
@@ -3400,6 +3433,7 @@ use namespace CoC;
 			if (hasAnyPerk(PerkLib.FromTheFrozenWaste, PerkLib.ColdAffinity, PerkLib.ColdMastery)) mult += 100;
 			if (hasAnyPerk(PerkLib.FireAffinity, PerkLib.AffinityIgnis)) mult -= 50;
 			if (hasPerk(PerkLib.VegetalAffinity)) mult += 50;
+			if (hasPerk(PerkLib.TrollResistance)) mult += 7.5;
 			if (hasStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1) && (statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1) > 0)) mult -= statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1);
 			if (hasStatusEffect(StatusEffects.DaoOfFire) && (statusEffectv2(StatusEffects.DaoOfFire) > 3)) mult -= (10 * (statusEffectv2(StatusEffects.DaoOfFire) - 3));
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_FIRE_R) mult -= headjewelryEffectMagnitude;
@@ -3867,6 +3901,11 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Misdirection) && armor.hasTag(ItemConstants.A_AGILE)) chance += 10;
 			if (hasPerk(PerkLib.Unhindered) && armor.hasTag(ItemConstants.A_AGILE)) chance += 10;
 			if (CombatAbilities.HurricaneDance.isActive()) chance += 25;
+
+			if (hasStatusEffect(StatusEffects.Gallop)) {
+				if (perkv1(IMutationsLib.EquineMuscleIM) >= 4) chance += 10;
+				chance += 10;
+			}
 
 			if (isRace(Races.FAIRY)) {
 				var fairyDodgeChance:int = 30;
@@ -5360,6 +5399,7 @@ use namespace CoC;
 			if (this.hasStatusEffect(StatusEffects.DevilPurificationScar)) {minCor-=50;}
 			if (hasPerk(PerkLib.Phylactery) && hasPerk(PerkLib.SageMedicine)) minCor = 0;
 			if (this.hasPerk(PerkLib.PurityElixir)) minCor -= (this.perkv1(PerkLib.PurityElixir) * 20);
+			if (hasPerk(PerkLib.Nightshade)) minCor += 20;
 			if (racialScore(Races.ARIGEAN) >= 9) minCor += 5;
 			if (racialScore(Races.ARIGEAN) >= 16) minCor += 5;
 			if (racialScore(Races.ARIGEAN) >= 18) minCor += 15;
@@ -5421,6 +5461,11 @@ use namespace CoC;
 			if (jewelryEffectId4 == JewelryLib.MODIFIER_MINIMUM_LUST) {
 				min += jewelryEffectMagnitude4;
 			}*/
+			//Others
+			if (this.hasStatusEffect(StatusEffects.TookSagittariusBanefulGreatBow) && this.statusEffectv2(StatusEffects.TookSagittariusBanefulGreatBow) > 0) {
+				min += (minCap * 0.1 * this.statusEffectv1(StatusEffects.TookSagittariusBanefulGreatBow));
+				if (min > Math.round(minCap * 0.99)) min = Math.round(minCap * 0.99);
+			}
 			if (hasPerk(PerkLib.HotNCold) && min > Math.round(minCap * 0.75)) min = Math.round(minCap * 0.75);
 			//Constrain values
 			return boundFloat(0, min, minCap);
@@ -5468,6 +5513,8 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.HumanMusculatureIM) >= 1 && racialScore(Races.HUMAN) > 17) maxToneCap += 5;
 			if (perkv1(IMutationsLib.HumanMusculatureIM) >= 2 && racialScore(Races.HUMAN) > 17) maxToneCap += 10;
 			if (perkv1(IMutationsLib.HumanMusculatureIM) >= 3 && racialScore(Races.HUMAN) > 17) maxToneCap += 15;
+			if (isRace(Races.TROLL)) maxToneCap += 20;
+			if (isRace(Races.GLACIAL_TROLL)) maxToneCap += 20;
 			return maxToneCap;
 		}
 		public function maxThicknessCap():Number {
@@ -5592,10 +5639,10 @@ use namespace CoC;
 		public function updateRacialAndPerkBuffs():void{
 			if (needToUpdateRacialCache())
 				updateRacialCache();
-			if (effectiveTallness>=80 && hasPerk(PerkLib.TitanicStrength)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(effectiveTallness/2))}, 'Titanic Strength', { text: 'Titanic Strength' });
-			if (effectiveTallness<80 && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
-			if (effectiveTallness<=60 && hasPerk(PerkLib.CondensedPower)) statStore.replaceBuffObject({'str.mult':(0.01 * ((120 - Math.round(effectiveTallness))*10))}, 'Condensed Power', { text: 'Condensed Power' });
-			if (effectiveTallness<=60 && hasPerk(PerkLib.SmallCaster)) statStore.replaceBuffObject({'spellpower':(0.01 * ((120 - Math.round(effectiveTallness))*10))}, 'Small Caster', { text: 'Small Caster' });
+			if (effectiveTallness>=120 && hasPerk(PerkLib.TitanicStrength)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(effectiveTallness / 6))}, 'Titanic Strength', { text: 'Titanic Strength' });
+			if (effectiveTallness<120 && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
+			if (effectiveTallness<=60 && hasPerk(PerkLib.CondensedPower)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round((132 - basetallness)/2))}, 'Condensed Power', { text: 'Condensed Power' });
+			if (effectiveTallness<=60 && hasPerk(PerkLib.SmallCaster)) statStore.replaceBuffObject({'spellpower':(0.01 * (132 - basetallness))}, 'Small Caster', { text: 'Small Caster' });
 			if ((effectiveTallness>60 || !hasPerk(PerkLib.CondensedPower)) && statStore.hasBuff('Condensed Power')) statStore.removeBuffs('Condensed Power');
 			if ((effectiveTallness>60 || !hasPerk(PerkLib.SmallCaster)) && statStore.hasBuff('Small Caster')) statStore.removeBuffs('Small Caster');
 			if (statStore.hasBuff('Small frame')) statStore.removeBuffs('Small frame');
@@ -5607,6 +5654,8 @@ use namespace CoC;
 			if (!hasPerk(PerkLib.Enigma) && statStore.hasBuff('Enigma')) statStore.removeBuffs('Enigma');
 			if (hasPerk(PerkLib.LionHeart)) statStore.replaceBuffObject({'str.mult':Math.round(speStat.mult.value/2)}, 'Lion Heart', { text: 'Lion Heart' });
 			if (!hasPerk(PerkLib.LionHeart) && statStore.hasBuff('Lion Heart')) statStore.removeBuffs('Lion Heart');
+			if (hasPerk(PerkLib.EquineStrength)) statStore.replaceBuffObject({'str.mult':Math.round((speStat.mult.value+libStat.mult.value)/4)}, 'Equine Strength', { text: 'Equine Strength' });
+			if (!hasPerk(PerkLib.EquineStrength) && statStore.hasBuff('Equine Strength')) statStore.removeBuffs('Equine Strength');
 			if (hasPerk(PerkLib.WisdomoftheAges)) statStore.replaceBuffObject({'str.mult':Math.round(((intStat.mult.value/2)+(wisStat.mult.value/2))),'tou.mult':Math.round(((intStat.mult.value/2)+(wisStat.mult.value/2)))}, 'Wisdom of the Ages', { text: 'Wisdom of the Ages' });
 			if (!hasPerk(PerkLib.WisdomoftheAges) && statStore.hasBuff('Wisdom of the Ages')) statStore.removeBuffs('Wisdom of the Ages');
 			if (hasPerk(PerkLib.DeathPriest)) statStore.replaceBuffObject({'int.mult':Math.round(wisStat.mult.value)}, 'Death Priest', { text: 'Death Priest' });
@@ -5620,6 +5669,8 @@ use namespace CoC;
 			if (hasPerk(PerkLib.StrengthOfStone)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(tou/2))}, 'Strength of stone', { text: 'Strength of stone' });
 			if (!hasPerk(PerkLib.StrengthOfStone) && statStore.hasBuff('Strength of stone')) statStore.removeBuffs('Strength of stone');
 			if (hasPerk(PerkLib.PsionicEmpowerment)) statStore.replaceBuffObject({'int.mult':(0.01 * Mindbreaker.MindBreakerFullConvert)}, 'Psionic Empowerment', { text: 'Psionic Empowerment' });
+			if (isGoblinoid() && hasMutation(IMutationsLib.GoblinOvariesIM) && perkv1(IMutationsLib.GoblinOvariesIM) >= 4) statStore.replaceBuffObject({'lib.mult':(totalFertility()*0.01)}, 'Goblin Ovaries bonus', { text: 'Goblin Ovaries bonus' });
+			if (isGoblinoid() && hasMutation(IMutationsLib.GoblinOvariesIM) && perkv1(IMutationsLib.GoblinOvariesIM) >= 4 && statStore.hasBuff("Goblin Ovaries bonus")) statStore.removeBuffs('Goblin Ovaries bonus');
 			var power:Number = 0;
 			if (hasPerk(PerkLib.BullStrength)){
 				if (isRaceCached(Races.COW, 2)) power = lactationQ()*0.001;
@@ -5649,6 +5700,7 @@ use namespace CoC;
 				statStore.replaceBuffObject({'str.mult':(Math.round(power))}, 'Absolute Strength', { text: 'Absolute Strength' });
 			}
 			if (!hasPerk(PerkLib.AbsoluteStrength) && statStore.hasBuff('Absolute Strength')) statStore.removeBuffs('Absolute Strength');
+			if (statStore.hasBuff('Sagittarius Focus')) statStore.replaceBuffObject({"wis.mult":(0.01 * Math.round(lib/2)),"int.mult":(0.01 * Math.round(lib/2))}, 'Sagittarius Focus', { text: 'Sagittarius Focus' });
 			var buffs:Object = calcRacialBuffs(true);
 			statStore.removeBuffs("Racials");
 			statStore.replaceBuffObject(buffs, "Racials", {text:"Racials"});
@@ -7054,6 +7106,7 @@ use namespace CoC;
 				if (hasPerk(IMutationsLib.HellhoundFireBallsIM)) {
 					addPerkValue(IMutationsLib.HellhoundFireBallsIM, 2, 1);
 				}
+				if (weaponRange == game.weaponsrange.SAGITTB && !statStore.hasBuff('Sagittarius Focus')) statStore.addBuffObject({"wis.mult":(0.01 * Math.round(lib/2)),"int.mult":(0.01 * Math.round(lib/2))}, "Sagittarius Focus",{text:"The immense relief you felt after plunging your aching horse cock in a wet hole grants you improved focus!"});
 			}
             if (SceneLib.exgartuan.boobsPresent()) SceneLib.exgartuan.boobsSleep(4 + rand(4)); //consider her touched, lol
 		}
@@ -7166,12 +7219,12 @@ use namespace CoC;
 			if (isRace(Races.COW)) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (isRace(Races.MINOTAUR)) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.ElementalBondUrges) && statusEffectv1(StatusEffects.SummonedElementals) >= 2) max += maxLust_ElementalBondUrgesMulti() * statusEffectv1(StatusEffects.SummonedElementals);
-			if (perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 1) max += (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 3) max += (90 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 1) max += (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 3) max += (90 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (perkv1(IMutationsLib.HumanOvariesIM) >= 3 && racialScore(Races.HUMAN) > 17) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 3 && racialScore(Races.HUMAN) > 17) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 1 && hasVagina()) max += (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 3 && hasVagina()) max += (90 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 1 && hasCock()) max += (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 3 && hasCock()) max += (90 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (perkv1(IMutationsLib.HumanOvariesIM) >= 3 && hasVagina() && racialScore(Races.HUMAN) > 17) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 3 && hasCock() && racialScore(Races.HUMAN) > 17) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			return max;
 		}
 

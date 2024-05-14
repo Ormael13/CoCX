@@ -1654,10 +1654,20 @@ public function soularena():void {
 	}
 	private function golemancershop1():void {
 		menu();
-		if (player.hasPerk(PerkLib.AdvancedGolemancyTheory) || player.hasPerk(PerkLib.EpicGolemMaker)) addButton(0, "Energy Core", buyItemEnergyCore).hint("A power source for devices.");
-		else addButtonDisabled(0, "???", "Items only for Epic Golemancer users or possesing Advanced Golemancy Theory knowledge.");
-		if (player.hasPerk(PerkLib.EpicGolemMaker)) addButton(1, "Mechanism", buyItemMechanism).hint("A complex set of gears and gyros.");
-		else addButtonDisabled(1, "???", "Items only for Epic Golemancer users.");
+		if (player.hasPerk(PerkLib.AdvancedGolemancyTheory) || player.hasPerk(PerkLib.EpicGolemMaker)) {
+			addButton(0, "MetalPiecesx1", buyItemMetalPlates, 1).hint("A metal pieces for making better golems. (x1)");
+			addButton(1, "MetalPiecesx5", buyItemMetalPlates, 5).hint("A metal pieces for making better golems. (x5)");
+			addButton(2, "MetalPiecesx10", buyItemMetalPlates, 10).hint("A metal pieces for making better golems. (x10)");
+			addButton(3, "Energy Core", buyItemEnergyCore).hint("A power source for devices.");
+		}
+		else {
+			addButtonDisabled(0, "???", "Items only for Epic Golemancer users or possesing Advanced Golemancy Theory knowledge.");
+			addButtonDisabled(1, "???", "Items only for Epic Golemancer users or possesing Advanced Golemancy Theory knowledge.");
+			addButtonDisabled(2, "???", "Items only for Epic Golemancer users or possesing Advanced Golemancy Theory knowledge.");
+			addButtonDisabled(3, "???", "Items only for Epic Golemancer users or possesing Advanced Golemancy Theory knowledge.");
+		}
+		if (player.hasPerk(PerkLib.EpicGolemMaker)) addButton(4, "Mechanism", buyItemMechanism).hint("A complex set of gears and gyros.");
+		else addButtonDisabled(4, "???", "Items only for Epic Golemancer users.");
 		addButton(5, "G.Rod", buyItem, weapons.G_ROD).hint("Golemancer Rod");
 		addButton(6, "G.E.Man", buyItem, weaponsrange.G_E_MAN).hint("Golemancy Evocation Manuscript");
 		addButton(7, "Y.U.Panel", buyItem, shields.Y_U_PAN).hint("Yogi Uh Panel");
@@ -1711,6 +1721,25 @@ public function soularena():void {
 		player.createStatusEffect(StatusEffects.GolemUpgrades2, 0, 0, 0, 0);
 		player.createStatusEffect(StatusEffects.GolemUpgrades3, 0, 0, 0, 0);
 		player.createKeyItem("Golems, Animations and You", 0, 0, 0, 0);
+		doNext(golemancershopRepeat);
+	}
+	private function buyItemMetalPlates(amt:Number):void {
+		clearOutput();
+		var cost:int = (60 * amt) / 5;
+		if (player.hasPerk(PerkLib.MasterGolemMaker)) cost *= 0.5;
+		outputText("\"<i>That will be " + cost + " spirit stones. Show me da money baby.</i>\"\n\n");
+		menu();
+		if (flags[kFLAGS.SPIRIT_STONES] < cost) addButtonDisabled(1, "Buy", "You do not have enough spirit stones to buy this.");
+		else if (CampStatsAndResources.MetalPieces >= (201 - amt)) addButtonDisabled(1, "Buy", "You can't store any more of this type of items.");
+		else addButton(1, "Buy", curry(buyItemMetalPlatesYes, cost, amt));
+		addButton(3, "Don't Buy", golemancershopRepeat);
+	}
+	private function buyItemMetalPlatesYes(cost:Number, amt:Number):void {
+		flags[kFLAGS.SPIRIT_STONES] -= cost;
+		statScreenRefresh();
+		outputText("She counts the stones before handing your purchase over.\n\n");
+		outputText("\"<i>Always happy to do business, anything else you want to buy?</i>\"\n\n");
+		CampStatsAndResources.MetalPieces += amt;
 		doNext(golemancershopRepeat);
 	}
 	private function buyItemEnergyCore():void {

@@ -956,6 +956,8 @@ import classes.Scenes.NPCs.Forgefather;
 			if (tier == 1) max += 150;
 			else if (tier == 2) max += 300;
 			else if (tier >= 3) max += 450;
+			if (game.player.isRace(Races.TROLL)) max += 50;
+			if (game.player.isRace(Races.GLACIAL_TROLL)) max += 75;
 			if (hasPerk(PerkLib.EzekielBlessing)) max += 50;
 			if (perkv1(IMutationsLib.DisplacerMetabolismIM) >= 2) max += 50;
 			if (perkv1(IMutationsLib.ManticoreMetabolismIM) >= 2) max += 50;

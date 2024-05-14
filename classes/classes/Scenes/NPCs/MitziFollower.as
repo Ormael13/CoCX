@@ -330,7 +330,7 @@ public function mitziSexEatenOut():void {
 }
 
 private function mitziPreg():void {
-	if (!pregnancy.isPregnant && rand(100) < (10 + Math.round(player.cumQ() / 100))) {
+	if (!pregnancy.isPregnant && (rand(100) < (10 + Math.round(player.cumQ() / 100)) || player.hasPerk(PerkLib.PilgrimsBounty))) {
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_MITZI);
 		player.createStatusEffect(StatusEffects.MitziPregnant, 0, 0, 0, 0);
 		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Mitzi is pregnant!</b>");

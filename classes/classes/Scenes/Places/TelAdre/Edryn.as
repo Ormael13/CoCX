@@ -974,7 +974,7 @@ private function edrynPregChance():void {
 	score += player.virilityQ() * 200;
 
 	trace("Edryn Preg Check Virility Score: " + score);
-	if(player.cumQ() > 250 && score >= rand(100)) {
+	if((player.cumQ() > 250 && score >= rand(100)) || player.hasPerk(PerkLib.PilgrimsBounty)) {
 		preg = true;
 		trace("Edryn knocked up!");
 	}

@@ -448,7 +448,7 @@ public class DungeonMaps extends DungeonAbstractContent
 					"         |           L     ",
 					"        [e]         [d]    ",
 					"         |           |     ",
-					"[j]     [i]-[h]-[g]-[f]K[s]",
+					"[j]     [i]-[h]-[g]-[f]-[s]",
 					" |       |       |         ",
 					"[n]-[m]-[l]     [k]        ",
 					"     |           |         ",
@@ -484,19 +484,80 @@ public class DungeonMaps extends DungeonAbstractContent
 					'z': DUNGEON_RIVER_FLOOR_04_ROOM_25
 				},
 				function():Object { return {
-					'K': flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 10 ? "K": "—",
+					'K': flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 11 ? "—": "L",
 					'L': flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 9 ? "|": "L"
 				}; }
-			),/*
+			),
 			new DungeonMap("River Dungeon, 5th floor", [
+					"[S]—[a]—[b]     [c]—[d]—[e]",
+					"         |       |         ",
+					"        [f]—[g]—[h]        ",
+					"         |       |         ",
+					"[i]     [j]     [k]     [s]",
+					" |       |       |       | ",
+					"[l]—[m]—[n]     [o]—[p]—[r]",
+					" |       |       |       | ",
+					"[t]     [u]—[w]—[x]     [y]",
+					" |           |           | ",
+					"[z]         [A]         [B]",
+					" |           |           | ",
+					"[C]—[D]     [E]     [F]—[G]",
+				],
+				{
+					'S': DUNGEON_RIVER_FLOOR_04_ROOM_01,
+					'a': DUNGEON_RIVER_FLOOR_05_ROOM_02,
+					'b': DUNGEON_RIVER_FLOOR_05_ROOM_03,
+					'c': DUNGEON_RIVER_FLOOR_05_ROOM_04,
+					'd': DUNGEON_RIVER_FLOOR_05_ROOM_05,
+					'e': DUNGEON_RIVER_FLOOR_05_ROOM_06,
+					'f': DUNGEON_RIVER_FLOOR_05_ROOM_07,
+					'g': DUNGEON_RIVER_FLOOR_05_ROOM_08,
+					'h': DUNGEON_RIVER_FLOOR_05_ROOM_09,
+					'i': DUNGEON_RIVER_FLOOR_05_ROOM_10,
+					'j': DUNGEON_RIVER_FLOOR_05_ROOM_11,
+					'k': DUNGEON_RIVER_FLOOR_05_ROOM_12,
+					's': DUNGEON_RIVER_FLOOR_05_ROOM_13,
+					'l': DUNGEON_RIVER_FLOOR_05_ROOM_14,
+					'm': DUNGEON_RIVER_FLOOR_05_ROOM_15,
+					'n': DUNGEON_RIVER_FLOOR_05_ROOM_16,
+					'o': DUNGEON_RIVER_FLOOR_05_ROOM_17,
+					'p': DUNGEON_RIVER_FLOOR_05_ROOM_18,
+					'r': DUNGEON_RIVER_FLOOR_05_ROOM_19, //s missed - used for stairs
+					't': DUNGEON_RIVER_FLOOR_05_ROOM_20,
+					'u': DUNGEON_RIVER_FLOOR_05_ROOM_21,
+					'w': DUNGEON_RIVER_FLOOR_05_ROOM_22,
+					'x': DUNGEON_RIVER_FLOOR_05_ROOM_23,
+					'y': DUNGEON_RIVER_FLOOR_05_ROOM_24,
+					'z': DUNGEON_RIVER_FLOOR_05_ROOM_25,
+					'A': DUNGEON_RIVER_FLOOR_05_ROOM_26,
+					'B': DUNGEON_RIVER_FLOOR_05_ROOM_27,
+					'C': DUNGEON_RIVER_FLOOR_05_ROOM_28,
+					'D': DUNGEON_RIVER_FLOOR_05_ROOM_29,
+					'E': DUNGEON_RIVER_FLOOR_05_ROOM_30,
+					'F': DUNGEON_RIVER_FLOOR_05_ROOM_31,
+					'G': DUNGEON_RIVER_FLOOR_05_ROOM_32
+				}
+			),/*
+			new DungeonMap("River Dungeon, 6th floor", [
 					"[a]—   ",
 					" |     ",
 					"[b]—[c]",
 				],
 				{
-					'a': DUNGEON_RIVER_FLOOR_02_ROOM_25,
-					'b': DUNGEON_RIVER_FLOOR_02_ROOM_26,
-					'c': DUNGEON_RIVER_FLOOR_02_ROOM_27
+					'a': DUNGEON_RIVER_FLOOR_06_ROOM_01,
+					'b': DUNGEON_RIVER_FLOOR_06_ROOM_02,
+					'c': DUNGEON_RIVER_FLOOR_06_ROOM_03
+				}
+			),
+			new DungeonMap("River Dungeon, 7th floor", [
+					"[a]—   ",
+					" |     ",
+					"[b]—[c]",
+				],
+				{
+					'a': DUNGEON_RIVER_FLOOR_07_ROOM_01,
+					'b': DUNGEON_RIVER_FLOOR_07_ROOM_02,
+					'c': DUNGEON_RIVER_FLOOR_07_ROOM_03
 				}
 			),*/
             //TODO: place other RD levels here/*

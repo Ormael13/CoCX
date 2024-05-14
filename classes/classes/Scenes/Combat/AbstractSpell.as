@@ -476,7 +476,7 @@ public class AbstractSpell extends CombatAbility {
 	protected function postLustSpellEffect(hits:int):void {
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP((1 + combat.bonusExpAfterSuccesfullTease()) * hits);
 		if (player.hasPerk(PerkLib.VerdantLeech)) {
-			if (monster.lustVuln != 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += hits * 0.025;
+			if (monster.lustVuln != 0 && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += hits * 0.025;
 			HPChange(Math.round(player.maxHP() * 0.01 * hits), false);
 		}
 	}

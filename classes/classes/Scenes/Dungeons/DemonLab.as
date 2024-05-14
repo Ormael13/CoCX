@@ -673,7 +673,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
             FSpreaderState = 2;
 			doNext(Ballroom3);
         }
-		else if (canEnterPanic()) PanicRoom();
+		else if (canEnterPanic()) panicRoom();
 		else {
             clearOutput();
 			outputText("The panic room is still too hot to enter.");
@@ -681,7 +681,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         }
     }
 
-    public function PanicRoom():void {
+    public function panicRoom():void {
         dungeonLoc = DUNGEON_LAB_PANIC_ROOM;
         clearOutput();
         outputText("You enter the panic room, and it’s relatively plain, almost like a small warehouse. Other than the singed demon corpses, the panic room has only two things of interest: A desk and high-tech panel, similar to the ones on the doors before, but far larger. If you had to guess, you think you’ve found the diseased heart of this lab. Maybe you can open the way out!\n\n");
@@ -697,10 +697,11 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         menu();
         addButton(0, "Security Folder", Readme);
         addButton(1, "Control Panel", CntrlAltDenied);
-		addButton(2, "Video Log", VideoLog);
+		addButton(2, "Video Log", videoLog);
+		addButton(3, "Mails", readTheMail);
 		addButtonIfTrue(5, "GoblinHaxxors", GoblinHaxxors, "Req. to be Goblin, Gremlin, 'Smart' Human.", (player.isRaceCached(Races.GOBLIN) || player.isRaceCached(Races.GREMLIN) || (player.hasMutation(IMutationsLib.HumanSmartsIM) && player.perkv1(IMutationsLib.HumanSmartsIM) > 1)));
         addButton(6, "CAVEMAN!!!", WEHAVETECHNOLOGY);
-        addButton(14, "Leave", PanicRoom);
+        addButton(14, "Leave", panicRoom);
     }
 
     public function Desk():void {
@@ -712,23 +713,23 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
             + "<b>You’ve found a map to the Lethice’s Fortress!</b>");
         outputText("\n\n<b>(Key Item Acquired: Map to the Lethice’s Fortress!)</b>");
         player.createKeyItem("Map to the Lethice’s Fortress", 0, 0, 0, 0);
-		doNext(PanicRoom);
+		doNext(panicRoom);
     }
 
     public function Readme():void {
         clearOutput();
         outputText("Using the odd device by your right hand, you open the folder titled 'Security Protocols'. To your shock, it opens up some kind of... Light Book on the screen. You begin to read... But your eyes quickly begin to glaze over, the dull, long-winded sentences almost putting you to sleep. You recoil from the cursed thing, closing it and returning to the original screen. Was this some kind of magical mental trap?!\n\n");
-        doNext(PanicRoom);
+        doNext(panicRoom);
     }
 
     public function CntrlAltDenied():void {
         clearOutput();
         outputText("You open the \"settings\" folder, quickly flicking through the options. Some, like \"Brightness\" confuse you, but upon investigation, it just makes the device glow brighter or softer. Another, \"Sound\" would seem useful, but nothing happens when you adjust it. And what on Mareth is this \"BlueTooth\"? What are these demons into?\n\n");
         outputText("Quickly frustrated, you realise you're getting nowhere with this infernal device!\n\n");
-        doNext(PanicRoom);
+        doNext(panicRoom);
     }
 	
-	public function VideoLog():void {
+	public function videoLog():void {
 		clearOutput();
 		outputText("You open the file, and a video begins to play…Dated just a week or so after you entered this realm.\n\n");
 		outputText("A single demon, a grin on his face, fills the screen. “<i>Doctor Hemos’ Log…SHE’s coming here! Finally, I’ll be able to showcase my work!</i>” The camera moves, and is left on a table. As the demon walks backwards, you realise that this room is the white, sterile room at the front of the lab. You watch as the scientists file into view on the other side of the room, and wait. Most are still, sterile, but the demon who’d started the video is bursting with excitement. A moment or so later, the distant flapping of leathery wings sounds.\n\n");
@@ -744,7 +745,22 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
 		outputText("“<i>Doctor Hemos, you will behave yourself.</i>” Another demon says, taking the doctor’s hand and pulling him back in line. “<i>Apologies, Doctor Lucina, for my…colleague's outburst.</i>” He shakes his head. “<i>He’s been working in his own lab for quite some time, and doesn’t know how to interact with others.</i>”\n\n");
 		outputText("The odd chimeric woman nods, scribbling down more notes. “<i>Very well…His problematic behaviour has been noted, but we’ll deal with that when we’re off the queen’s clock.</i>” She gives a very direct look to the Incubus who’d started the recording. “<i>Be careful in the future, Doctor Hemos. We wouldn’t want anything to happen to you.</i>” She looks down at the camera, frowning. “And what is this device doing on the table?” She picks it up, and the recording stops.\n\n");
 		outputText("Lethice was here, and clearly knew what was happening…But who was that chimaera? Those eyes…You’ve seen their like before.\n\n");
-		doNext(PanicRoom);
+		doNext(panicRoom);
+	}
+	private function readTheMail():void {
+		clearOutput();
+		outputText("You click on a file labelled “Mail”. Most of it is erased, but there’s one recent “e-mail” hasn’t been deleted.\n\n");
+		outputText("<i>Doctor Grinder</i>\n<i>Doctor Streaks</i>\n\n");
+		outputText("<i>Your projects have been selected for a special assignment. The purpose of your projects was to give Lethice’s armies combat capabilities we currently do not possess, and your first wave of functional soldiers have been evaluated, and found sufficient.</i>\n\n");
+		outputText("<i>You are to give your soldiers this list of targets, one at a time. The first is time sensitive. The project that captures them has their funding doubled.</i>\n\n");
+		outputText("The picture is of a red-skinned demon hermaphrodite. She has the horns of a bull, piercing brown eyes, and long black hair. Her breasts are some of the largest you’ve ever seen, in the middle of dribbling milk. They look pillowy and soft, and in the picture, she’s looking down at her left tit, mouth wide open.\n\n");
+		outputText("She’s muscular, a six-pack partially concealed by her enormous tits, but very well defined. Her hips are extremely wide, giving her a pronounced hourglass figure, and her thighs look like she could crush a skull between them.\n\n");
+		outputText("Even more striking, however, are her draconic features. She has four massive draconic wings, the bright red a contrast to her dark, almost blood-red skin, and instead of a standard demon’s thin tail, hers is scaled and draconic, with several sharp-looking spines leading to a spade-tipped end. To your shock, she also has a large horsecock, with a palm-sized flare at the tip.\n\n");
+		outputText("<i>This creature is another project, considered to be more dangerous, individually, than Nightwalker or Flamespreader, and has used advancements from both projects. However, they do have exploitable weaknesses that your projects do not. Project Nightwalker will have an advantage during the night, due to this project’s lack of night-vision, and flamespreader appears to be more physically durable. Both are faster in flight, despite the four wings.</i>\n\n");
+		outputText("<i>Project Kass, however, is stronger than either, individually, and appears to have maintained far more mental capacity. Soldiers are not to engage project Kass without reinforcements and a significant numbers advantage.</i>\n\n");
+		outputText("<i>I would advise you to work together. Splitting the funding increase is a far better option than allowing this to get loose to the Marethians still opposing us. Get it done.</i>\n\n");
+		outputText("<i>-A</i>");
+		doNext(panicRoom);
 	}
 	
     public function GoblinHaxxors():void {
@@ -752,7 +768,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         outputText("You open the security protocols for the computer, your [ears] quivering with excitement. Demons using tech? Thanks for the free information! You quickly break into the userdata and pull up several passwords. Then, you attempt to log in. After a few attempts, you access the account of a \"Doctor Grindr\".\n\n");
         outputText("You deactivate the security protocols and rescind the lockdown. You hear a metallic \"clang\" in the distance. \n\n");
 		WayOutBlocked = false;
-        doNext(PanicRoom);
+        doNext(panicRoom);
     }
 
     public function WEHAVETECHNOLOGY():void {
@@ -760,7 +776,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         outputText("Roaring in fury at this inane device, you grab the screen in your hands, ripping it away from the wall. You quickly realise it's connected to a black, boxlike structure under the desk, and you rip it from the wall, throwing it against a wall and stomping on the sparking pieces for good measure.\n\n");
         outputText("You don't know if that did anything even remotely productive, but damn, it felt good. At least you don't have to clean the bits up after!\n\n");
         WayOutBlocked = false;
-        doNext(PanicRoom);
+        doNext(panicRoom);
     }
 
 

@@ -1,10 +1,12 @@
 package classes.Items {
 import classes.*;
 import classes.BodyParts.*;
+import classes.GeneticMemories.BallsMem;
 import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
+import classes.Items.Consumables.Centaurinum;
 import classes.Items.Consumables.EmberTF;
 import classes.Races.*;
 import classes.Scenes.Camp.CampStatsAndResources;
@@ -25,6 +27,7 @@ public final class Mutations extends MutationsHelper {
     //const BIKINI_ARMOR_BONUS:int = 769;
 
     public var emberTFchanges:EmberTF = new EmberTF();
+    public var sagittariusBowTFchanges:Centaurinum = new Centaurinum();
 	public var saveUpdater:SaveUpdater = new SaveUpdater();
 
     public function DrunkenPowerEmpower():void {
@@ -2680,19 +2683,15 @@ public final class Mutations extends MutationsHelper {
     public function impTFgradual(player:Player):void {
         var changes:Number = 0;
         var changeLimit:Number = 1;
-
         outputText("[pg]The Tome of Imps gives off a constant corrupting aura.");
         if (player.cor < 50 || rand(2) == 0)
             dynStats("lus", 2, "cor", 1);
-
         if (player.blockingBodyTransformations()) changeLimit = 0;
-
         //Shrinkage!
         if (player.tallness > 42 && rand(4) < 3 && changes < changeLimit) {
             outputText("[pg]Your skin crawls, making you close your eyes and shiver.  When you open them again the world seems... different.  After a bit of investigation, you realize you've become shorter!");
             player.tallness -= 1 + rand(5);
         }
-
         if (player.cocks.length > 0) {
             if (player.smallestCockLength() < 12 && changes < changeLimit) {
                 var i2:int = player.growCock(player.smallestCockIndex(), rand(2) + 1);
@@ -2705,7 +2704,6 @@ public final class Mutations extends MutationsHelper {
         if (player.vaginas.length > 0 && rand(3) == 0) {
             //0 = dry, 1 = wet, 2 = extra wet, 3 = always slick, 4 = drools constantly, 5 = female ejaculator
             outputText("[pg]");
-
             //0 = dry, 1 = wet, 2 = extra wet, 3 = always slick, 4 = drools constantly, 5 = female ejaculator
             if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING && rand(2) == 0 && changes < changeLimit) {
                 if (player.vaginas.length == 1) outputText("Your [vagina] gushes fluids down your leg as you spontaneously orgasm.");
@@ -2734,63 +2732,53 @@ public final class Mutations extends MutationsHelper {
             if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DRY) {
                 outputText("You feel a tingling in your crotch, but cannot identify it.");
             }
-
             var index:int = player.vaginas.length;
             while (index > 0) {
                 index--;
                 if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLAVERING) player.vaginas[index].vaginalWetness++;
             }
         }
-
         //grow horns!
         if (!InCollection(player.horns.type, Horns.ORCHID, Horns.DEMON, Horns.ARCH_IMP) && rand(4) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.HornsDemonic.applyEffect();
             changes++;
         }
-
         if (player.tailType != Tail.DEMONIC && player.horns.count > 0 && rand(4) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.TailDemonic.applyEffect();
             changes++;
         }
-
         if (rand(4) == 0 && changes < changeLimit) {
             outputText("[pg]");
             if (rand(2) == 0 && player.ears.type != Ears.ELFIN) transformations.EarsElfin.applyEffect();
             else transformations.EarsBig.applyEffect();
             changes++;
         }
-
         if ((player.wings.type != Wings.BAT_LIKE_TINY && rand(4) == 0) && changes < changeLimit) {
             outputText("[pg]");
             transformations.WingsDemonicTiny.applyEffect();
             changes++;
         }
-
         if (((!InCollection(player.hairColor1, ImpRace.ImpHairColors) && rand(3) == 0) || rand(10) == 0) && changes < changeLimit) {
             outputText("[pg]");
             transformations.HairChangeColor(ImpRace.ImpHairColors).applyEffect();
         }
-
         if (player.tallness <= 60 && changes < changeLimit) {
             if (player.tongue.type != Tongue.IMPISH && rand(3) == 0 && changes < changeLimit) {
                 outputText("[pg]");
                 transformations.TongueImp.applyEffect();
                 changes++;
             }
-
             if (player.lowerBody != LowerBody.TINY && rand(3) == 0 && changes < changeLimit) {
                 transformations.LowerBodyTiny.applyEffect();
                 changes++;
             }
-
             if (player.arms.type != Arms.TINY && rand(3) == 0 && changes < changeLimit) {
                 transformations.ArmsTiny.applyEffect();
                 changes++;
             }
         }
-
         //Red skin!
         if ((!InCollection(player.skinColor1, ImpRace.ImpSkinColors) &&  rand(3) == 0) && changes < changeLimit) {
             if (player.isFurCovered()) outputText("[pg]Underneath your fur, your skin ");
@@ -2803,7 +2791,6 @@ public final class Mutations extends MutationsHelper {
             outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely [skin color].");
             changes++;
         }
-
         //Face!
         if ((((player.faceType != Face.HUMAN || player.faceType != Face.ANIMAL_TOOTHS) && rand(3) == 0) || rand(10) == 0) && changes < changeLimit) {
             outputText("[pg]");
@@ -2815,13 +2802,11 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
         }
-
         if (!player.hasPlainSkinOnly() && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.SkinPlain.applyEffect();
             changes++;
         }
-
         //Remove odd eyes
         if (player.eyes.type > Eyes.HUMAN && rand(5) == 0 && changes < changeLimit) {
             outputText("[pg]");
@@ -2833,7 +2818,6 @@ public final class Mutations extends MutationsHelper {
             transformations.EyesChangeColor(ImpRace.ImpEyeColors).applyEffect();
             changes++;
         }
-
         //Change hair type to normal
         if (transformations.HairHuman.isPossible() && changes < changeLimit && rand(2) == 0) {
             outputText("[pg]");
@@ -2841,30 +2825,25 @@ public final class Mutations extends MutationsHelper {
             transformations.HairHuman.applyEffect();
             changes++;
         }
-
         if (rand(3) == 0 && changes < changeLimit && player.antennae.type != Antennae.NONE) {
             outputText("[pg]");
             transformations.AntennaeNone.applyEffect();
             changes++;
         }
-
         if (rand(3) == 0 && changes < changeLimit && player.rearBody.type != RearBody.NONE) {
             outputText("[pg]");
             transformations.RearBodyNone.applyEffect();
             changes++;
         }
-
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
 
     public function archImpTFforce(player:Player):void {
         var changes:Number = 0;
-
         //Shrinkage!
         if (player.tallness > 42) {
             player.tallness = 42;
         }
-
         if (player.cocks.length > 0) {
             var x:int = player.findFirstCockNotInType([CockTypesEnum.DEMON]);
             while (x >= 0 ) {
@@ -2884,7 +2863,6 @@ public final class Mutations extends MutationsHelper {
                 if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLAVERING) player.vaginas[index].vaginalWetness++;
             }
         }
-
         //Red skin!
         if (!InCollection(player.skinColor1, ImpRace.ImpSkinColors)) {
             var colors:Array = [];
@@ -2893,50 +2871,40 @@ public final class Mutations extends MutationsHelper {
             else colors = ImpRace.ImpSkinColorsMale;
             player.skinColor = randomChoice(colors);
         }
-
         if (player.tailType != Tail.DEMONIC) {
             transformations.TailDemonic.applyEffect(false);
             changes++;
         }
-
         if (!InCollection(player.ears.type, Ears.ELFIN, Ears.BIG)) {
             if (rand(2) == 0 && player.ears.type != Ears.ELFIN) transformations.EarsElfin.applyEffect(false);
             else transformations.EarsBig.applyEffect(false);
             changes++;
         }
-
         if (player.wings.type != Wings.BAT_LIKE_TINY) {
             transformations.WingsDemonicTiny.applyEffect(false);
             changes++;
         }
-
         //Face!
         if ((player.faceType != Face.HUMAN || player.faceType != Face.ANIMAL_TOOTHS)) {
             transformations.FaceAnimalTeeth.applyEffect(false);
             changes++;
         }
-
         if (!player.hasPlainSkinOnly()) {
             transformations.SkinPlain.applyEffect(false);
             changes++;
         }
-
-
         if (player.tongue.type != Tongue.IMPISH) {
             transformations.TongueImp.applyEffect(false);
             changes++;
         }
-
         if (player.lowerBody != LowerBody.TINY) {
             transformations.LowerBodyTiny.applyEffect(false);
             changes++;
         }
-
         if (player.arms.type != Arms.TINY) {
             transformations.ArmsTiny.applyEffect(false);
             changes++;
         }
-
         //Remove odd eyes
         if (player.eyes.type != Eyes.HUMAN) {
             transformations.EyesHuman.applyEffect(false);
@@ -2946,7 +2914,6 @@ public final class Mutations extends MutationsHelper {
             transformations.EyesChangeColor(ImpRace.ImpEyeColors).applyEffect(false);
             changes++;
         }
-
         //Change hair type to normal
         if (transformations.HairHuman.isPossible()) {
             transformations.HairHuman.applyEffect(false);
@@ -2955,43 +2922,151 @@ public final class Mutations extends MutationsHelper {
         if (!InCollection(player.hairColor1, ImpRace.ImpHairColors)) {
             transformations.HairChangeColor(ImpRace.ImpHairColors).applyEffect(false);
         }
-
         if (player.antennae.type != Antennae.NONE) {
             transformations.AntennaeNone.applyEffect(false);
             changes++;
         }
-
         if (player.rearBody.type != RearBody.NONE) {
             transformations.RearBodyNone.applyEffect(false);
             changes++;
         }
-
         //grow horns!
         transformations.HornsArchImp.applyEffect(false);
         changes++;
-
         transformations.SkinPatternArchImp.applyEffect(false);
         player.skinColor2 = "midnight black";
-
         outputText("\n<b>Gained Perk: Imp Nobility!</b> "+PerkLib.ImpNobility.desc());
         player.createPerk(PerkLib.ImpNobility, 0, 0, 0, 0);
-
         outputText("\n<b>Gained Perk: Soulless!</b> "+PerkLib.Soulless.desc());
         player.createPerk(PerkLib.Soulless, 0, 0, 0, 0);
-
         outputText("\n<b>Gained Perk: Transformation Immunity!</b> "+ PerkLib.TransformationImmunity2.desc());
         player.createPerk(PerkLib.TransformationImmunity2, 6, 0, 0, 0);
-
-        if (player.hasPerk(PerkLib.RacialParagon))
-            flags[kFLAGS.APEX_SELECTED_RACE] = Races.IMP;
-
+        if (player.hasPerk(PerkLib.RacialParagon)) flags[kFLAGS.APEX_SELECTED_RACE] = Races.IMP;
         IMutationsLib.BlackHeartIM.trueMutation = true;
-
         player.removeAllRacialMutation();
 		saveUpdater.bringBackEncoutersForSouless();
-
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
+	
+	public function sagittariusBowChanges(player:Player):void {
+		var changes:Number = 0;
+		var changeLimit:Number = 1;
+		//Temporary storage
+        var temp:Number = 0;
+		var temp2:Number = 0;
+		var temp3:Number = 0;
+		if ((player.gender == 1 || player.gender == 3) && rand(3) == 0 && changes < changeLimit) {
+			//If cocks that aren't horsified!
+			if ((player.horseCocks() + player.demonCocks()) < player.cockTotal()) {
+				var temp4:int = player.findFirstCockNotInType([CockTypesEnum.HORSE,CockTypesEnum.DEMON]);
+				transformations.CockHorse(temp4).applyEffect();
+				temp2 = player.growCock(temp4, rand(4) + 4);
+				dynStats("lus", 35, "scale", false);
+				player.addCurse("sen", 4, 1);
+				player.MutagenBonus("lib", 5);
+				//Make cock thicker if not thick already!
+				if (player.cocks[temp4].cockThickness <= 2) player.thickenCock(temp4, 1);
+				changes++;
+			}
+			//Players cocks are all horse-type - increase size!
+			else {
+				//single cock
+				if (player.cocks.length == 1) {
+					temp2 = player.growCock(0, rand(3) + 1);
+					temp = 0;
+					dynStats("lus", 10, "scale", false);
+					player.addCurse("sen", 1, 1);
+				}
+				//Multicock
+				else {
+					//Find smallest cock
+					//Temp2 = smallness size
+					//temp = current smallest
+					temp3 = player.cocks.length;
+					temp = 0;
+					while (temp3 > 0) {
+						temp3--;
+						//If current cock is smaller than saved, switch values.
+						if (player.cocks[temp].cockLength > player.cocks[temp3].cockLength) {
+							temp2 = player.cocks[temp3].cockLength;
+							temp = temp3;
+						}
+					}
+					//Grow smallest cock!
+					//temp2 changes to growth amount
+					temp2 = player.growCock(temp, rand(4) + 1);
+					dynStats("lus", 10, "scale", false);
+					player.addCurse("sen", 1, 1);
+				}
+				outputText("\n\n");
+				if (temp2 > 2) outputText("Your [cock "+ (temp+1) +"] tightens painfully, inches of taut horse-flesh pouring out from your sheath as it grows longer.  Thick animal-pre forms at the flared tip, drawn out from the pleasure of the change.");
+				if (temp2 > 1 && temp2 <= 2) outputText("Aching pressure builds within your sheath, suddenly releasing as an inch or more of extra dick flesh spills out.  A dollop of pre beads on the head of your enlarged " + player.cockDescript(temp) + " from the pleasure of the growth.");
+				if (temp2 <= 1) outputText("A slight pressure builds and releases as your [cock " + (temp+1) + "] pushes a bit further out of your sheath.");
+				changes++;
+			}
+			//Chance of thickness + daydream
+			if (rand(2) == 0 && changes < changeLimit && player.horseCocks() > 0) {
+				temp3 = 0;
+				temp2 = player.cocks.length;
+				while (temp2 > 0) {
+					temp2--;
+					if (player.cocks[temp2].cockThickness <= player.cocks[temp3].cockThickness) {
+						temp3 = temp2;
+					}
+				}
+				temp = temp3;
+				player.thickenCock(temp, .5);
+				outputText("\n\nYour " + Appearance.cockNoun(CockTypesEnum.HORSE) + " thickens inside its sheath, growing larger and fatter as your veins thicken, becoming more noticeable.  It feels right");
+				if (player.cor + player.lib < 60) outputText(" to have such a splendid tool.  You idly daydream about cunts and pussies, your " + Appearance.cockNoun(CockTypesEnum.HORSE) + " plowing them relentlessly, stuffing them pregnant with cum");
+				else if (player.cor + player.lib < 100) outputText(" to be this way... You breath the powerful animalistic scent and fantasize about fucking centaurs night and day until their bellies slosh with your cum");
+				else if (player.cor + player.lib <= 175) outputText(" to be a rutting stud.  You ache to find a mare or centaur to breed with.  Longing to spend your evenings plunging a " + Appearance.cockNoun(CockTypesEnum.HORSE) + " deep into their musky passages, dumping load after load of your thick animal-cum into them.  You'd be happy just fucking horsecunts morning, noon, and night.  Maybe somewhere there is a farm needing a breeder..");
+				else outputText(" to whinny loudly like a rutting stallion.  Your " + Appearance.cockNoun(CockTypesEnum.HORSE) + " is perfect for fucking centaurs and mares.  You imagine the feel of plowing an equine pussy deeply, bottoming out and unloading sticky jets of horse-jizz into its fertile womb.  Your hand strokes your horsecock of its own accord, musky pre dripping from the flared tip with each stroke.  Your mind wanders to the thought of you with a harem of pregnant centaurs.");
+				outputText(".");
+				if (player.cor < 30) outputText("  You shudder in revulsion at the strange thoughts and vow to control yourself better.");
+				else if (player.cor < 60) outputText("  You wonder why you thought such odd things, but they have a certain appeal.");
+				else if (player.cor < 90) outputText("  You relish your twisted fantasies, hoping to dream of them again.");
+				else outputText("  You flush hotly and give a twisted smile, resolving to find a fitting subject to rape and relive your fantasies.");
+				dynStats("lus", 10, "scale", false);
+				player.MutagenBonus("lib", 1);
+			}
+			//Chance of ball growth if not 3" yet
+			if (rand(2) == 0 && changes < changeLimit && player.ballSize <= 3 && player.horseCocks() > 0) {
+				if (player.balls == 0) {
+					outputText("\n\nA nauseating pressure forms just under the base of your maleness.  With agonizing pain the flesh bulges and distends, pushing out a rounded lump of flesh that you recognize as a testicle!  A moment later relief overwhelms you as the second drops into your newly formed sack.");
+					CoC.instance.transformations.BallsDuo.applyEffect(false);
+					dynStats("lus", 5, "scale", false);
+					player.MutagenBonus("lib", 2);
+				}
+				else {
+					player.ballSize++;
+					if (player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " + Appearance.ballsDescription(false, true, player) + " have grown larger than a human's.");
+					if (player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your [sack].  Walking becomes difficult as you discover your " + Appearance.ballsDescription(false, true, player) + " have enlarged again.");
+					dynStats("lus", 3, "scale", false);
+					player.MutagenBonus("lib", 1);
+				}
+				changes++;
+			}
+		}
+		//Chance of ball growth if not 3" yet
+		if (rand(2) == 0 && changes < changeLimit && player.ballSize <= 3 && player.horseCocks() > 0) {
+			if (player.balls == 0) {
+				outputText("\n\nA nauseating pressure forms just under the base of your maleness.  With agonizing pain the flesh bulges and distends, pushing out a rounded lump of flesh that you recognize as a testicle!  A moment later relief overwhelms you as the second drops into your newly formed sack.");
+				transformations.BallsDuo.applyEffect(false);
+				dynStats("lus", 5, "scale", false);
+				player.MutagenBonus("lib", 2);
+			}
+			else {
+				player.ballSize++;
+				if (player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " + Appearance.ballsDescription(false, true, player) + " have grown larger than a human's.");
+				if (player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your [sack].  Walking becomes difficult as you discover your " + Appearance.ballsDescription(false, true, player) + " have enlarged again.");
+				dynStats("lus", 3, "scale", false);
+				player.MutagenBonus("lib", 1);
+			}
+			changes++;
+		}
+		if (changes < changeLimit) sagittariusBowTFchanges.centaurTFEffects(true);
+		if (!player.inRut) player.goIntoRut(true);
+	}
 
     public function succubisDelight(tainted:Boolean, player:Player):void {
         player.slimeFeed();
@@ -15586,6 +15661,58 @@ public final class Mutations extends MutationsHelper {
         }
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
+	
+	public function alrauneSnowFlower(player:Player):void {
+		clearOutput();
+		if (player.isRaceCached(Races.ALRAUNE)) {
+			outputText("You smell the flower, taking in the scent. Suddenly you feel yourself changing, your green skin progressively turning blue and your petals white. Your eyes also lose their green shade in favor of taking on a pale blue. Somehow you feel the cold won’t be bothering you much anymore, although you're afraid you might have become highly flammable. <b>You are now a snow lily alraune and gained the perk Snow Lily and Cold Affinity.</b>");
+			player.skinColor = "pale blue";
+			player.hairColor = randomChoice("pink", "white", "bluish white");
+			player.eyes.colour = "pale blue";
+			player.createPerk(PerkLib.SnowLily, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.Cinderbloom)) player.removePerk(PerkLib.Cinderbloom);
+			if (player.hasPerk(PerkLib.Nightshade)) player.removePerk(PerkLib.Nightshade);
+			if (!player.hasPerk(PerkLib.ColdAffinity)) player.createPerk(PerkLib.ColdAffinity, 0, 0, 1, 0);
+			if (player.hasPerk(PerkLib.FireAffinity) && player.perkv3(PerkLib.FireAffinity) == 1) player.removePerk(PerkLib.FireAffinity);
+			if (player.hasPerk(PerkLib.DarknessAffinity) && player.perkv3(PerkLib.DarknessAffinity) == 1) player.removePerk(PerkLib.DarknessAffinity);
+		}
+		else outputText("No text for this case. enjoy your LIA-SUPRISE!!!");
+	}
+	public function alrauneEmberFlower(player:Player):void {
+		clearOutput();
+		if (player.isRaceCached(Races.ALRAUNE)) {
+			outputText("You smell the flower, taking in the scent. Suddenly you feel yourself changing, as your green skin progressively turns charred black and your petals red. Your eyes also lose their green shade in favor of taking on a deep fire red. Somehow you feel the heat won’t be bothering you much anymore, although you're afraid you will wilt in cold temperature. <b>You are now a cinderbloom Alraune and gained the Cinderbloom perk and fire affinity.</b>");
+			player.skinColor = "burnt brown";
+			player.hairColor = randomChoice("pink", "orange", "red");
+			player.eyes.colour = "fiery red";
+			player.createPerk(PerkLib.Cinderbloom, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.SnowLily)) player.removePerk(PerkLib.SnowLily);
+			if (player.hasPerk(PerkLib.Nightshade)) player.removePerk(PerkLib.Nightshade);
+			if (!player.hasPerk(PerkLib.FireAffinity)) player.createPerk(PerkLib.FireAffinity, 0, 0, 1, 0);
+			if (player.hasPerk(PerkLib.ColdAffinity) && player.perkv3(PerkLib.ColdAffinity) == 1) player.removePerk(PerkLib.ColdAffinity);
+			if (player.hasPerk(PerkLib.DarknessAffinity) && player.perkv3(PerkLib.DarknessAffinity) == 1) player.removePerk(PerkLib.DarknessAffinity);
+		}
+		else outputText("No text for this case. enjoy your LIA-SUPRISE!!!");
+	}
+	public function alrauneBlackLily(player:Player):void {
+		clearOutput();
+		if (player.isRaceCached(Races.ALRAUNE)) {
+			outputText("Upon absorbing the Black Lily, you start to feel lightheaded "+(player.lowerBody == LowerBody.FLOWER_LILIRAUNE?"which you can also see in your sister ":"")+"and you decide to close up your lily and sleep it off"+(player.lowerBody == LowerBody.FLOWER_LILIRAUNE?" with your sister in your arms":"")+". When you "+(player.lowerBody == LowerBody.FLOWER_LILIRAUNE?"both ":"")+"wake up an hour later, your bod"+(player.lowerBody == LowerBody.FLOWER_LILIRAUNE?"ies":"y")+" and the lily you reside in have already changed. ");
+			outputText("The petals became as black as the absorbed flower, with " + (player.lowerBody == LowerBody.FLOWER_LILIRAUNE?"both of ":"") + "your skin tone" + (player.lowerBody == LowerBody.FLOWER_LILIRAUNE?"s":"") + " taking on a lavender hue. Your eyes became red, and your hair has changed from " + player.hairColor + " to a light and bright pink. Along with even more lewd thoughts from before coursing through " + (player.lowerBody == LowerBody.FLOWER_LILIRAUNE?"both ":"") + "your mind" + (player.lowerBody == LowerBody.FLOWER_LILIRAUNE?"s":"") + ", your intoxicating nectar has become more potent and has gained the viscosity of semen, ");
+			outputText("practically mimicking said fluid in all except the color, smell and taste. The smell is so strong, mesmerizing and erotic, you " + (player.lowerBody == LowerBody.FLOWER_LILIRAUNE?"both ":"") + "almost cum from smelling your own nectar. Hell, any weak-willed being that comes close to you might just cum on the spot just from smelling it. ");
+			outputText("People might say you make no sense, that you're crazy but at the end of the day they are just blind idiots trying to make sense of a reality they have no access to. You've seen it all and understand it all.  (<b>Gain the Nightshade perk and Dark Affinity.</b>)");
+			player.skinColor = "lavender";
+			player.hairColor = "bright pink";
+			player.eyes.colour = "red";
+			player.createPerk(PerkLib.Nightshade, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.Cinderbloom)) player.removePerk(PerkLib.Cinderbloom);
+			if (player.hasPerk(PerkLib.SnowLily)) player.removePerk(PerkLib.SnowLily);
+			if (!player.hasPerk(PerkLib.DarknessAffinity)) player.createPerk(PerkLib.DarknessAffinity, 0, 0, 1, 0);
+			if (player.hasPerk(PerkLib.ColdAffinity) && player.perkv3(PerkLib.ColdAffinity) == 1) player.removePerk(PerkLib.ColdAffinity);
+			if (player.hasPerk(PerkLib.FireAffinity) && player.perkv3(PerkLib.FireAffinity) == 1) player.removePerk(PerkLib.FireAffinity);
+		}
+		else outputText("No text for this case. enjoy your LIA-SUPRISE!!!");
+	}
 
     public function bayrleaf(player:Player):void {
         player.slimeFeed();
@@ -15768,9 +15895,17 @@ public final class Mutations extends MutationsHelper {
         //Speed down
 
         //Toughness up
-
+		if (rand(3) == 0 && changes < changeLimit && MutagenBonus("tou", 1)) {
+            outputText("[pg]You become more... solid. Sinewy. A memory comes unbidden from your youth of a grizzled wolf you encountered while hunting, covered in scars, yet still moving with an easy grace. You imagine that must have felt something like this. You don't feel the cold as much as before either maybe you're just getting used to it.");
+            changes++;
+        }
         //Libido up
-
+		if (rand(2) == 0 && changes < changeLimit && MutagenBonus("lib", 10)) {
+            outputText("[pg]A knot of fire in your gut doubles you over but passes after a few moments. " +
+                    "As you straighten you can feel the need seeping into you, puddling in your nethers."
+                    + " An instinctive desire to mate spreads through you, increasing your lust and boosting your sex-drive.");
+            changes++;
+        }
         if (player.blockingBodyTransformations()) changeLimit = 0;
         //Skin
         if (player.skinAdj != "sticky glistering" && player.hasPlainSkinOnly() && rand(3) == 0 && changes < changeLimit) {
@@ -16569,18 +16704,136 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         if (type == 0) outputText("You bite into the fig, it’s sour, very sour. Trolls are supposed to enjoy this?");
 		if (type == 1) outputText("You bite into the fig. The icy crust gives a crunch before you’re met with the juice trapped within. It’s sour, very sour. Trolls are supposed to enjoy this?");
-		//wis change
-        if (rand(3) == 0 && changes < changeLimit && MutagenBonus("wis", 1)) {
+		if (player.blockingBodyTransformations()) changeLimit = 0;
+		if (rand(3) == 0 && changes < changeLimit && MutagenBonus("wis", 1)) {
             outputText("[pg]You feel a tremendous rush of mental celerity, as if your mind were clear of all doubt.");
             changes++;
         }
-		if (player.blockingBodyTransformations()) changeLimit = 0;
+		if (rand(3) == 0 && changes < changeLimit && MutagenBonus("str", 1)) {
+            outputText("[pg]You feel raw bestial power coursing through you.");
+            changes++;
+        }
+        if (rand(3) == 0 && changes < changeLimit && MutagenBonus("spe", 1)) {
+            outputText("[pg]You feel you could run forever enjoying the feeling of the wind on your [skin.type].");
+            changes++;
+        }
+        if (rand(3) == 0 && changes < changeLimit && MutagenBonus("tou", 1)) {
+            outputText("[pg]You become more... solid. Sinewy. A memory comes unbidden from your youth of a grizzled wolf you encountered while hunting, covered in scars, yet still moving with an easy grace. You imagine that must have felt something like this. You don't feel the cold as much as before either maybe you're just getting used to it.");
+            changes++;
+        }
 		//Boost cum production
         if (player.hasBalls() && player.hasCock() && rand(4) == 0 && changes < changeLimit) {
             player.cumMultiplier += 15;
             outputText("[pg]You feel your balls churn slightly, it’s apparent your <b>cum production has increased.</b>");
             changes++;
         }
+		if (!player.blockingBodyTransformations()) {
+			if (changes < changeLimit && rand(3) == 0 && player.biggestTitSize() > 2) {
+                player.shrinkTits();
+                changes++;
+            }
+			if (player.vaginas.length > 0 && player.vaginaType() != VaginaClass.HUMAN && rand(3) == 0) {
+				transformations.VaginaHuman().applyEffect(false);
+			}
+			//Remove odd eyes
+			if (changes < changeLimit && rand(4) == 0 && player.eyes.type > Eyes.HUMAN) {
+				outputText("[pg]");
+				transformations.EyesHuman.applyEffect();
+				changes++;
+			}
+			if (type == 0) {
+				if (player.basetallness < 94) {
+					outputText("[pg]Whoa wait did you just gain some height!? You indeed notice you've grown by a few inches.");
+					player.tallness += 1 + rand(3);
+				}
+				if (changes < changeLimit && rand(4) == 0 && player.eyes.type == Eyes.HUMAN && transformations.EyesChangeColor(["green"]).isPossible()) {
+					transformations.EyesChangeColor(["green"]).applyEffect(false);
+					outputText("[pg]You shiver as cold wind passes over your face. Something’s changed in your vision, and though you’re not sure what, you press on regardless. After going out and checking your reflection in a puddle, you discover your pupil color has changed to a blue as cold as ice. <b>You now have cold blue eyes.\n</b>");
+					changes++;
+				}
+				if (rand(3) == 0 && changes < changeLimit && player.ears.type != Ears.TROLL) {
+					outputText("[pg]");
+					transformations.EarsTroll.applyEffect();
+					changes++;
+				}
+				if (rand(3) == 0 && changes < changeLimit && player.faceType != Face.TROLL && player.ears.type == Ears.TROLL) {
+					outputText("[pg]");
+					transformations.FaceTroll.applyEffect();
+					changes++;
+				}
+				if (rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.TROLL) {
+					outputText("[pg]");
+					transformations.ArmsTroll.applyEffect();
+					changes++;
+				}
+				if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.TROLL && player.arms.type == Arms.TROLL) {
+					outputText("[pg]");
+					transformations.LowerBodyTroll.applyEffect();
+					changes++;
+				}
+				if (rand(3) == 0 && changes < changeLimit && !player.hasCoatOfType(Skin.FUR)) {
+					if (!player.hasCoatOfType(Skin.FUR)) {
+						outputText("[pg]");
+						transformations.SkinPlain.applyEffect();
+					}
+					outputText("[pg]Your [skin.type] begins to tingle, then itch. ");
+					transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["green", "gray"]}).applyEffect();
+					changes++;
+				}
+				if (rand(3) == 0 && changes < changeLimit && player.tailType != Tail.TROLL && player.hasCock()) {
+					outputText("[pg]");
+					transformations.TailTroll.applyEffect();
+					changes++;
+				}
+				if (changes < changeLimit && rand(3) == 0) outputText(player.modFem(70, 3));
+			}
+			if (type == 1) {
+				if (player.basetallness < 98) {
+					outputText("[pg]Whoa wait did you just gain some height!? You indeed notice you've grown by a few inches.");
+					player.tallness += 1 + rand(3);
+				}
+				if (changes < changeLimit && rand(4) == 0 && player.eyes.type == Eyes.HUMAN && transformations.EyesChangeColor(["blue"]).isPossible()) {
+					transformations.EyesChangeColor(["blue"]).applyEffect(false);
+					outputText("[pg]You shiver as cold wind passes over your face. Something’s changed in your vision, and though you’re not sure what, you press on regardless. After going out and checking your reflection in a puddle, you discover your pupil color has changed to a blue as cold as ice. <b>You now have cold blue eyes.\n</b>");
+					changes++;
+				}
+				if (rand(3) == 0 && changes < changeLimit && player.ears.type != Ears.GLACIAL_TROLL) {
+					outputText("[pg]");
+					transformations.EarsGlacialTroll.applyEffect();
+					changes++;
+				}
+				if (rand(3) == 0 && changes < changeLimit && player.faceType != Face.GLACIAL_TROLL && player.ears.type == Ears.GLACIAL_TROLL) {
+					outputText("[pg]");
+					transformations.FaceGlacialTroll.applyEffect();
+					changes++;
+				}
+				if (rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.GLACIAL_TROLL) {
+					outputText("[pg]");
+					transformations.ArmsGlacialTroll.applyEffect();
+					changes++;
+				}
+				if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GLACIAL_TROLL && player.arms.type == Arms.GLACIAL_TROLL) {
+					outputText("[pg]");
+					transformations.LowerBodyGlacialTroll.applyEffect();
+					changes++;
+				}
+				if (rand(3) == 0 && changes < changeLimit && !player.hasCoatOfType(Skin.FUR)) {
+					if (!player.hasCoatOfType(Skin.FUR)) {
+						outputText("[pg]");
+						transformations.SkinPlain.applyEffect();
+					}
+					outputText("[pg]Your [skin.type] begins to tingle, then itch. ");
+					transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["blue", "white"]}).applyEffect();
+					changes++;
+				}
+				if (rand(3) == 0 && changes < changeLimit && player.tailType != Tail.GLACIAL_TROLL && player.hasCock()) {
+					outputText("[pg]");
+					transformations.TailGlacialTroll.applyEffect();
+					changes++;
+				}
+				if (changes < changeLimit && rand(3) == 0) outputText(player.modFem(55, 3));
+			}
+		}
 		player.refillHunger(20);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 	}
@@ -17152,4 +17405,4 @@ public final class Mutations extends MutationsHelper {
 		player.herbXP(HE);
     }
 }
-}
+}

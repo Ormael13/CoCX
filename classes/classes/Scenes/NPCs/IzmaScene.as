@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
@@ -1620,7 +1621,7 @@ private function followerIzmaMountsPC(lastHalf:Boolean = false):void {
 private function izmaPreg():void {
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) return;
 	//PREGGO CHANCES
-	if (flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 1 && !pregnancy.isPregnant && rand(100) < (10 + Math.round(player.cumQ() / 100))) {
+	if (flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 1 && !pregnancy.isPregnant && (rand(100) < (10 + Math.round(player.cumQ() / 100)) || player.hasPerk(PerkLib.PilgrimsBounty))) {
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_IZMA);
 		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Izma is pregnant!</b>");
 	}
@@ -2322,12 +2323,14 @@ public function pcPopsOutASharkTot(womb:int = 0):void {
 		if(rand(100) <= 59) {
 			outputText("grey");
 			type = 0;
-			flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS]++;
+			if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] += 2;
+			else flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS]++;
 		}
 		else {
 			outputText("black-striped orange");
 			type = 1;
-			flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS]++;
+			if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] += 2;
+			else flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS]++;
 		}
 		outputText(" skin, it's obvious she's a baby ");
 		if(type == 0) outputText("shark-girl");

@@ -972,6 +972,7 @@ import classes.Scenes.Combat.CombatAbilities;
 				var ar:int = game.player.weapon.effectPower(IELib.ArmorReduction);
 				armorMod -= ar;
 				var ap:int = game.player.weapon.effectPower(IELib.ArmorPenetration);
+				if (game.player.isSpearTypeWeapon() && game.player.hasPerk(PerkLib.SpearAffinity)) ap = 100;
 				armorMod *= (100 - ap) / 100;
 			}
 			if (game.player.hasPerk(PerkLib.LungingAttacks)) armorMod *= 0.5;
@@ -3063,6 +3064,11 @@ import classes.Scenes.Combat.CombatAbilities;
 				}
 			}
 			if (hasStatusEffect(StatusEffects.BerzerkingSiegweird)) lustDelta *= 0.5;
+			if (player.isGoblinoid() && player.perkv1(IMutationsLib.GoblinOvariesIM) >= 3 && hasCock()) {
+				var lustMDM:Number = 1.25;
+				if (player.perkv1(IMutationsLib.GoblinOvariesIM) >= 4) lustMDM += 0.25;
+				lustDelta *= lustMDM;
+			}
 			applyTease(lustDelta, display);
 		}
 
@@ -3269,9 +3275,9 @@ import classes.Scenes.Combat.CombatAbilities;
 			if (this.mana > maxOverMana()) this.mana = maxMana();
 			//health, soulforce and mana regeneration for monsters
 			if (((hasPerk(PerkLib.Regeneration) || hasPerk(PerkLib.LizanRegeneration) || perkv1(IMutationsLib.LizanMarrowIM) >= 1 || perkv1(IMutationsLib.DraconicHeartIM) >= 3 || perkv1(IMutationsLib.FerasBirthrightIM) >= 1 || hasPerk(PerkLib.EnemyPlantType) || hasPerk(PerkLib.FleshBodyApprenticeStage)
-			|| hasPerk(PerkLib.MonsterRegeneration) || hasPerk(PerkLib.HydraRegeneration) || hasPerk(PerkLib.Lifeline) || hasPerk(PerkLib.ImprovedLifeline) || hasPerk(PerkLib.GreaterLifeline) || hasPerk(PerkLib.EpicLifeline) || hasPerk(PerkLib.IcyFlesh) || hasPerk(PerkLib.HclassHeavenTribulationSurvivor)
-			|| hasPerk(PerkLib.GclassHeavenTribulationSurvivor) || hasPerk(PerkLib.FclassHeavenTribulationSurvivor) || hasPerk(PerkLib.FFclassHeavenTribulationSurvivor) || hasPerk(PerkLib.EclassHeavenTribulationSurvivor) || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2)
-			|| hasPerk(PerkLib.EnemyTrueAngel) || hasPerk(PerkLib.EnemyTrueDemon)) && this.HP < maxOverHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxOverHP()) && (this.HP > minHP()))) {
+			|| hasPerk(PerkLib.MonsterRegeneration) || hasPerk(PerkLib.HydraRegeneration) || hasPerk(PerkLib.TrollRegeneration) || hasPerk(PerkLib.Lifeline) || hasPerk(PerkLib.ImprovedLifeline) || hasPerk(PerkLib.GreaterLifeline) || hasPerk(PerkLib.EpicLifeline) || hasPerk(PerkLib.IcyFlesh)
+			|| hasPerk(PerkLib.HclassHeavenTribulationSurvivor) || hasPerk(PerkLib.GclassHeavenTribulationSurvivor) || hasPerk(PerkLib.FclassHeavenTribulationSurvivor) || hasPerk(PerkLib.FFclassHeavenTribulationSurvivor) || hasPerk(PerkLib.EclassHeavenTribulationSurvivor) || hasStatusEffect(StatusEffects.MonsterRegen)
+			|| hasStatusEffect(StatusEffects.MonsterRegen2) || hasPerk(PerkLib.EnemyTrueAngel) || hasPerk(PerkLib.EnemyTrueDemon)) && this.HP < maxOverHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxOverHP()) && (this.HP > minHP()))) {
 				var healingPercent:Number = 0;
 				var temp2:Number = 0;
 				var temp3:Number = 0;
@@ -3301,6 +3307,7 @@ import classes.Scenes.Combat.CombatAbilities;
 					healingPercent += 2;
 				}
 				if (hasPerk(PerkLib.HydraRegeneration) && !hasStatusEffect(StatusEffects.HydraRegenerationDisabled) && !hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) healingPercent += 1 * perkv1(PerkLib.HydraRegeneration);
+				if (hasPerk(PerkLib.TrollRegeneration) && !hasStatusEffect(StatusEffects.TrollRegenerationDisabled) && !hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) healingPercent += 6;
 				if (hasPerk(PerkLib.IcyFlesh)) healingPercent += 1;
 				if (hasPerk(PerkLib.FleshBodyApprenticeStage)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.FleshBodyWarriorStage)) healingPercent += 0.5;
@@ -4058,8 +4065,18 @@ import classes.Scenes.Combat.CombatAbilities;
 				addStatusValue(StatusEffects.HydraRegenerationDisabled,1,-1);
 				//Heal wounds
 				if (statusEffectv1(StatusEffects.HydraRegenerationDisabled) <= 0) {
-					if (this is Hydra) outputText("[Themonster] sighs in relief as " + pronoun3 + " wounds resume regenerating!\n\n");
+					outputText("[Themonster] sighs in relief as " + pronoun3 + " wounds resume regenerating!\n\n");
 					removeStatusEffect(StatusEffects.HydraRegenerationDisabled);
+				}
+			}
+			//Regen Inhibitor Troll
+			if (hasStatusEffect(StatusEffects.TrollRegenerationDisabled)) {
+				//Countdown to heal
+				addStatusValue(StatusEffects.TrollRegenerationDisabled,1,-1);
+				//Heal wounds
+				if (statusEffectv1(StatusEffects.TrollRegenerationDisabled) <= 0) {
+					outputText("[Themonster] sighs in relief as " + pronoun3 + " wounds resume regenerating!\n\n");
+					removeStatusEffect(StatusEffects.TrollRegenerationDisabled);
 				}
 			}
 			//Recovery Inhibitor (Petrify)

@@ -27,12 +27,14 @@ package classes.Items.Armors
 		}
 
 		override public function afterEquip(doOutput:Boolean):void {
-			var oldHPratio:Number = game.player.hp100/100;
-			game.flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = 0;
-			game.player.buff("Ayo Armor").remove();
-			game.player.buff("Ayo Armor").addStats( {"str.mult":-0.18, "spe.mult":-0.60} );
-			game.player.HP = oldHPratio*game.player.maxHP();
-			EngineCore.statScreenRefresh();
+			if (!game.isLoadingSave) {
+				var oldHPratio:Number = game.player.hp100/100;
+				game.flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = 0;
+				game.player.buff("Ayo Armor").remove();
+				game.player.buff("Ayo Armor").addStats( {"str.mult":-0.18, "spe.mult":-0.60} );
+				game.player.HP = oldHPratio*game.player.maxHP();
+				EngineCore.statScreenRefresh();
+			}
 			super.afterEquip(doOutput);
 		}
 		

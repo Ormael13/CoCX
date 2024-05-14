@@ -881,6 +881,18 @@ public class LowerBody extends SaveableBodyPart {
 		appearanceDesc: "your legs are covered in a bell bottom like fuzzy mass"
 	});
 
+	public static const TROLL:int = 85;
+	EnumValue.add(Types, TROLL, "TROLL", {
+		name: "troll",
+		appearanceDesc: "Two troll legs grow down from your [hips], covered in soft, green fur, ending in four-toed troll feet."
+	});
+
+	public static const GLACIAL_TROLL:int = 86;
+	EnumValue.add(Types, GLACIAL_TROLL, "GLACIAL_TROLL", {
+		name: "glacial troll",
+		appearanceDesc: "Two glacial troll legs grow down from your [hips], covered in soft, white fur, ending in four-toed glacial troll feet."
+	});
+
 	override public function set type(value:int):void {
 		super.type = value;
 		// Reset leg count

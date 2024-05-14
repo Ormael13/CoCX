@@ -1046,6 +1046,16 @@ public class PlayerInfo extends BaseContent {
 			else if (flags[kFLAGS.PRISCILLA_LVL_UP] < 1) outsideCampNpcsStats += "<b>Priscilla lvl:</b> 32\n";
 			else outsideCampNpcsStats += getNPCLevel("Priscilla", 32, 0, 11, 6, flags[kFLAGS.PRISCILLA_LVL_UP]);
 		}
+		if (flags[kFLAGS.TAMANI_LVL_UP] == 15) outsideCampNpcsStats += "<b>Tamani lvl:</b> 98 (current max lvl she can reach)\n";
+		else if (flags[kFLAGS.TAMANI_LVL_UP] < 1) outsideCampNpcsStats += "<b>Tamani lvl:</b> 8\n";
+		else outsideCampNpcsStats += getNPCLevel("Tamani", 8, 0, 15, 6, flags[kFLAGS.TAMANI_LVL_UP]);
+		if (flags[kFLAGS.TAMANI_DAUGHTERS_LVL_UP] < 1) outsideCampNpcsStats += "<b>Tamani's daughters lvl:</b> " + Math.round(8 + flags[kFLAGS.TAMANI_DAUGHTERS_LVL_UP]) + "\n";
+		if (flags[kFLAGS.MINO_SONS_LVL_UP] < 1) {
+			if (flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] < 20) outsideCampNpcsStats += "<b>Minotaur Gang lvl:</b> ";
+			else outsideCampNpcsStats += "<b>Minotaur Tribe lvl:</b> ";
+			if (flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] >= 3) outsideCampNpcsStats += "" + Math.round(16 + flags[kFLAGS.MINO_SONS_LVL_UP] + flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3) + "\n";
+			else outsideCampNpcsStats += "16\n";
+		}
 		if (outsideCampNpcsStats != "")
 			outputText("\n<b><u>Outside camp NPC's Stats</u></b>\n" + outsideCampNpcsStats);
 		// End Outside camp NPC's Stats
@@ -1348,6 +1358,9 @@ public class PlayerInfo extends BaseContent {
 
 		if (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] > 0)
 			childStats += "<b>Children With Tamani:</b> " + flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] + " (after all forms of natural selection)\n";
+
+		if (flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] > 0)	
+			childStats += "<b>Minotaur Gang/Tribe size:</b> "+flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE]+" (after all forms of natural selection)";
 
         if ((DriderTown.TyrantiaFemaleKids + DriderTown.TyrantiaMaleKids) > 0) {
 			childStats += "<b>Drider Children With Tyrantia (total):</b> " + (DriderTown.TyrantiaFemaleKids + DriderTown.TyrantiaMaleKids) + "\n";
@@ -2155,9 +2168,9 @@ public class PlayerInfo extends BaseContent {
 	
 	public function superPerkBuyMenu(page:int = 1):void {
 		clearOutput();
-		outputText("If you meet requirements and have enough points you can pick one or more super perks.\n");
-		if (player.superPerkPoints > 0) outputText("You have "+numberOfThings(player.superPerkPoints,"super perk point","super perk points")+".\n\n");
-		if (player.perkPoints > 0) outputText("You have "+numberOfThings(player.perkPoints,"perk point","perk points")+".\n\n");
+		outputText("If you meet requirements and have enough points you can pick one or more super perks.\n\n");
+		outputText("<b>Unused super perk points:</b> "+player.superPerkPoints+"\n");
+		outputText("<b>Unused perk points:</b> "+player.perkPoints+"\n\n");
 		hideMenus();
 		mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
 		menu();
@@ -2224,6 +2237,7 @@ public class PlayerInfo extends BaseContent {
 			else addButtonDisabled(10, "Re: Convert", "You need at least 1 super perk point to convert it.");
 			if (player.perkPoints > 2) addButton(11, "Convert", superPerkConvertMenu);
 			else addButtonDisabled(11, "Convert", "You need at least 3 perk points to convert them.");
+			addButton(12, "Previous", superPerkBuyMenu, page + 5);
 			addButton(13, "Next", superPerkBuyMenu, page + 1);
 			addButton(14, "Back", playerMenu);
 		}
@@ -2523,7 +2537,7 @@ public class PlayerInfo extends BaseContent {
 				else addButtonDisabled(3, "M(at)BL", "You do not have enough super perk points to obtain this perk.");
 			}
 			addButton(12, "Previous", superPerkBuyMenu, page - 1);
-			//12 -> page + 1 button
+			addButton(13, "Next", superPerkBuyMenu, page - 5);
 			addButton(14, "Back", playerMenu);
 		}
 	}
@@ -2536,8 +2550,8 @@ public class PlayerInfo extends BaseContent {
 	}
 	private function superPerkReverseConvertMenu():void {
 		clearOutput();
-		outputText("You sacrifice one super perk point and recieve two perk points.");
-		player.perkPoints += 2;
+		outputText("You sacrifice one super perk point and recieve three perk points.");
+		player.perkPoints += 3;
 		player.superPerkPoints--;
 		doNext(superPerkBuyMenu);
 	}

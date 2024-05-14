@@ -127,7 +127,7 @@ public class TeaseSkill extends AbstractGeneral {
 			if (rand(100) < critChance) {
 				crit = true;
 				lustDmg *= 1.75;
-				if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.05;
+				if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.05;
 			}
 
 			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 20 && !monster.hasPerk(PerkLib.Resolute)) {
@@ -210,7 +210,7 @@ public class TeaseSkill extends AbstractGeneral {
 			if (rand(100) < critChance) {
 				crit = true;
 				lustDmg *= 1.75;
-				if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.05;
+				if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.05;
 			}
 
             if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 20 && !monster.hasPerk(PerkLib.Resolute)) {

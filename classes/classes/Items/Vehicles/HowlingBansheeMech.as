@@ -32,17 +32,23 @@ package classes.Items.Vehicles
 			var boost:Number = 1;
 			if (game.player.hasKeyItem("HB Armor Plating") >= 0) {
 				var value:Number = game.player.keyItemvX("HB Armor Plating", 1);
-				if (value == 1) boost += 0.25;
-				if (value == 2) boost += 0.25;
-				if (value == 3) boost += 0.25;
-				if (value == 4) boost += 0.25;
+				boost += 0.25;
+				if (value >= 2) boost += 0.25;
+				if (value >= 3) boost += 0.25;
+				if (value >= 4) boost += 0.25;
+				if (value >= 5) boost += 0.25;
+				if (value >= 6) boost += 0.25;
+				if (value >= 7) boost += 0.25;
 			}
 			if (game.player.hasKeyItem("HB Leather Insulation") >= 0) {
 				value = game.player.keyItemvX("HB Leather Insulation", 1);
-				if (value == 1) boost += 0.25;
-				if (value == 2) boost += 0.25;
-				if (value == 3) boost += 0.25;
-				if (value == 4) boost += 0.25;
+				boost += 0.25;
+				if (value >= 2) boost += 0.25;
+				if (value >= 3) boost += 0.25;
+				if (value >= 4) boost += 0.25;
+				if (value >= 5) boost += 0.25;
+				if (value >= 6) boost += 0.25;
+				if (value >= 7) boost += 0.25;
 			}
 			return boost;
 		}

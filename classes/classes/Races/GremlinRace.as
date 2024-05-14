@@ -63,6 +63,7 @@ public class GremlinRace extends Race {
 		
 		addBloodline(PerkLib.GoblinsDescendant, PerkLib.BloodlineGoblin);
 		addMutation(IMutationsLib.NaturalPunchingBagIM);
+		addMutation(IMutationsLib.GoblinOvariesIM);
 		addMutation(IMutationsLib.BlackHeartIM);
 		
 		buildTier(15, "gremlin")

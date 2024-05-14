@@ -1186,5 +1186,41 @@ public class FaceTransformations extends MutationsHelper {
 				return player.faceType === Face.DEMON;
 			}
 	);
+
+	public const FaceTroll: Transformation = new SimpleTransformation("Troll Face",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.FaceHuman, doOutput);
+				desc += "You feel tremendous pressure in your jaws and skull. Slight pain and extreme discomfort run through you as you feel tusks sprout from your jaw past your lips. Your nose also becomes more pronounced. <b>You now have troll tusks!</b>";
+
+				if (doOutput) outputText(desc);
+				player.faceType = Face.TROLL;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.TROLL));
+			},
+			// is present
+			function (): Boolean {
+				return player.faceType === Face.TROLL;
+			}
+	);
+
+	public const FaceGlacialTroll: Transformation = new SimpleTransformation("Glacial Troll Face",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.FaceHuman, doOutput);
+				desc += "You feel tremendous pressure in your jaws and skull. Slight pain and extreme discomfort run through you as you feel tusks sprout from your jaw past your lips. Your nose also becomes more pronounced. <b>You now have glacial troll tusks!</b>";
+
+				if (doOutput) outputText(desc);
+				player.faceType = Face.GLACIAL_TROLL;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.GLACIAL_TROLL));
+			},
+			// is present
+			function (): Boolean {
+				return player.faceType === Face.GLACIAL_TROLL;
+			}
+	);
 }
 }

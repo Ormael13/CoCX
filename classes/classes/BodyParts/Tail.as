@@ -514,6 +514,18 @@ public class Tail extends SaveableBodyPart {
 		name:"moth abdomen",
 		appearanceDesc: "You have a moth abdomen"
 	});
+	public static const TROLL: int = 62;
+	EnumValue.add(Types, TROLL, "TROLL", {
+		name:"troll",
+		appearanceDesc: "Your long, green silky troll tail extends out from just above your [butt]. The fur is luxurious, especially in the tuft of hair at the tip of your tail.",
+		isLong: true
+	});
+	public static const GLACIAL_TROLL: int = 63;
+	EnumValue.add(Types, GLACIAL_TROLL, "GLACIAL_TROLL", {
+		name:"glacial troll",
+		appearanceDesc: "Your long, white silky troll tail extends out from just above your [butt]. The fur is luxurious, especially in the tuft of hair at the tip of your tail.",
+		isLong: true
+	});
 
 	override public function set type(value:int):void {
 		var old:int = type;

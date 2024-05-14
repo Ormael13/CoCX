@@ -5,6 +5,7 @@ package classes.Scenes.Areas.Bog
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.SceneLib;
 
 public class PhoukaScene extends BaseContent implements TimeAwareInterface {
@@ -255,18 +256,13 @@ public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 			}
 			flags[kFLAGS.PREGNANCY_CORRUPTION]++; //Faerie or phouka babies become more corrupted, no effect if the player is not pregnant or on other types of babies
 			consumables.P_WHSKY.phoukaWhiskeyAddStatus(player);
-			if (player.tou < 30) {
+			if (player.touStat.core.value < 30) {
 				outputText("\n\nYou quickly end up drunk and begin a rambling story about your adventures.  The phooka is a good listener, though he asks for lots of detail whenever you bring up sex or potential sex of any kind.  You realize you're in real trouble, turned on and watching the phouka stroking his cock, which is still hard despite the alcohol he's been downing.  He notices your interest and says <i>\"Now that you're relaxed, let's go for the main course.  I'll make sure you'll remember it even once you're sober.\"</i>");
-
 				menu();
 				phoukaSexAddStandardMenuChoices();
 			}
-			if (player.tou < 70) {
-				outputText("  It looks like the phouka is holding his liquor about as well as you are.");
-			}
-			else {
-				outputText("  It seems you can handle your liquor better than the phouka.");
-			}
+			else if (player.touStat.core.value < 70) outputText("  It looks like the phouka is holding his liquor about as well as you are.");
+			else outputText("  It seems you can handle your liquor better than the phouka.");
 			outputText("  Soon both of you start to share stories about your adventures in Mareth.");
 			phoukaDrinkTalk(false);
 		}
@@ -484,7 +480,8 @@ public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 				player.fertility -= 18; //At low fertility the PC just gained up to 3 fertility due to standard post-pregnancy code. So -18 is really more like -10.
 				if (player.fertility < 5) player.fertility = 5;
 				fatigue(75);
-				flags[kFLAGS.BIRTHS_PHOUKA]++;
+				if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) flags[kFLAGS.BIRTHS_PHOUKA] += 2;
+				else flags[kFLAGS.BIRTHS_PHOUKA]++;
 				player.orgasm();
 			}
 			else if (flags[kFLAGS.PREGNANCY_CORRUPTION] > 0) {
@@ -492,12 +489,14 @@ public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 				player.fertility -= 8; //At low fertility the PC just gained up to 3 fertility due to standard post-pregnancy code. So - 8 is really more like -5.
 				if (player.fertility < 5) player.fertility = 5;
 				fatigue(50);
-				flags[kFLAGS.BIRTHS_PHOUKA]++;
+				if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) flags[kFLAGS.BIRTHS_PHOUKA] += 2;
+				else flags[kFLAGS.BIRTHS_PHOUKA]++;
 			}
 			else {
 				outputText("Your belly begins to deflate and a stream of sweet smelling sugary water rushes from your vagina.  You lay on the ground and wait, hoping this birth will be relatively painless.  You only have to give one little push and you feel a tiny shape slide gently down your birth canal.  Before you're ready for it you expel a little faerie onto the ground between your legs.\n\nThe full grown faerie looks up at you and smiles.  She shakes her little pink faerie wings out until they're dry, then does a little circuit around you, looking you over.  She zips up to your face and gives you a kiss on the cheek before backing away.\n\nThe faerie girl starts to fly higher and higher, waving to you as she goes.  Finally she turns and zips off towards the forest to meet her sisters.");
 				fatigue(5);
-				flags[kFLAGS.BIRTHS_FAERIE]++;
+				if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) flags[kFLAGS.BIRTHS_FAERIE] += 2;
+				else flags[kFLAGS.BIRTHS_FAERIE]++;
 			}
 		}
 

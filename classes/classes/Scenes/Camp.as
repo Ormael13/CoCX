@@ -748,7 +748,8 @@ public class Camp extends NPCAwareContent{
 			SceneLib.graydaScene.graydaMainBathingByForce();
 			return;
 		}
-		if (flags[kFLAGS.THE_TRENCH_ENTERED] > 14 && flags[kFLAGS.THE_TRENCH_ENTERED] < 16 && rand(5) == 0 && (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3 || player.hasStatusEffect(StatusEffects.CampRathazul) || player.hasStatusEffect(StatusEffects.PureCampJojo) || followerKiha())) {//(flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) || 
+		if (flags[kFLAGS.THE_TRENCH_ENTERED] > 14 && flags[kFLAGS.THE_TRENCH_ENTERED] < 16 && rand(5) == 0 && !player.hasStatusEffect(StatusEffects.GraydaRandomnCampEvents) && (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3 || player.hasStatusEffect(StatusEffects.CampRathazul) || player.hasStatusEffect(StatusEffects.PureCampJojo) || followerKiha())) {//(flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) || 
+			player.createStatusEffect(StatusEffects.GraydaRandomnCampEvents, 0, 0, 0, 0);
 			SceneLib.graydaScene.graydaRandomnCampEvents();
 			return;
 		}
@@ -2186,11 +2187,11 @@ public class Camp extends NPCAwareContent{
 		//addButtonDisabled(6, "Garden", "Local Committee of Alraunes took over this place for re-nationalization.");
 		if (SceneLib.garden.canAccessGarden()) addButton(6, "Garden", SceneLib.garden.accessGarden).hint("Manage your garden of medicinal plants.");
 		else addButtonDisabled(6, "Garden", "Req. to have Herb bag of any sort.");
-		addButton(7, "Herbalism", SceneLib.garden.herbalismMenu).hint("Use ingrediants to craft poultrice and battle medicines.").disableIf(isNightTime,"It's too dark to do any gardening!").disableIf(!player.hasStatusEffect(StatusEffects.CampRathazul),"Would you kindly find Rathazul first?");
+		addButton(7, "Herbalism", SceneLib.garden.herbalismMenu).hint("Use ingrediants to craft poultrice and battle medicines.").disableIf((isNightTime && !player.isNightCreature()),"It's too dark to do any gardening!").disableIf(!player.hasStatusEffect(StatusEffects.CampRathazul),"Would you kindly find Rathazul first?");
 		addButton(9, "Quest Loot", SceneLib.adventureGuild.questItemsBag).hint("Manage your bag with quest items.").disableIf(!AdventurerGuild.playerInGuild, "Join the Adventure Guild for a quest bag!");
 		addButton(10, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
 		addButton(11, "Recall", sceneHunter.recallScenes).hint("Recall some of the unique events happened during your adventure.");
-		if (SceneLib.exploration.counters.explore >= 1) addButton(12, "Dummy", dummyTraining).hint("Train your mastery level on this dummy.").disableIf(isNightTime,"It's too dark for that!");
+		if (SceneLib.exploration.counters.explore >= 1) addButton(12, "Dummy", dummyTraining).hint("Train your mastery level on this dummy.").disableIf((isNightTime && !player.isNightCreature()),"It's too dark for that!");
 		addButton(13, "Ascension", promptAscend).hint("Perform an ascension? This will restart your adventures. The game depending on your choice would also get harder. If you have Sky Poison Pearl could carry over some items to new adventure.").disableIf(flags[kFLAGS.LETHICE_DEFEATED] <= 0, "Don't you have a job to finish first? Like... to defeat someone, maybe Lethice?");
 		addButton(14, "Back", playerMenu);
 	}
@@ -4337,6 +4338,7 @@ public class Camp extends NPCAwareContent{
 			|| flags[kFLAGS.HIDDEN_CAVE_FOUND] > 0
 			|| flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 0
 			|| flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] > 0
+			|| flags[kFLAGS.DISCOVERED_TWILIGHT_GROVE_DUNGEON] > 0
 			|| flags[kFLAGS.LUMI_MET] > 0
 			|| flags[kFLAGS.ANZU_PALACE_UNLOCKED] > 0;
 	}
@@ -5314,4 +5316,3 @@ public function rebirthFromBadEnd():void {
 
 }
 }
-

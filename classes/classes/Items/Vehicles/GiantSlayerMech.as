@@ -42,11 +42,15 @@ public class GiantSlayerMech extends Vehicles
 					if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) EHP += 0.25;
 					if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) EHP += 0.5;
 					if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) EHP += 0.75;
+					if (game.player.hasKeyItem("Upgraded Armor plating 4.0") >= 0) EHP += 1;
+					if (game.player.hasKeyItem("Upgraded Armor plating 5.0") >= 0) EHP += 1.25;
+					if (game.player.hasKeyItem("Upgraded Armor plating 6.0") >= 0) EHP += 1.5;
 					if (game.player.hasKeyItem("Upgraded Leather Insulation 1.0") >= 0) EHP += 0.25;
 					if (game.player.hasKeyItem("Upgraded Leather Insulation 2.0") >= 0) EHP += 0.5;
 					if (game.player.hasKeyItem("Upgraded Leather Insulation 3.0") >= 0) EHP += 0.75;
 					game.player.HP = EHP * game.player.maxHP();
 				}
+				outputText("As you turn the mech on the welcoming voice of your AI booms in. \"<i>Welcome back aboard operator [name]. All functions are nominal.</i>\"");
 			}
 			super.afterEquip(doOutput);
 		}
@@ -57,6 +61,9 @@ public class GiantSlayerMech extends Vehicles
 				if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) RHP += 0.25;
 				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) RHP += 0.5;
 				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) RHP += 0.75;
+				if (game.player.hasKeyItem("Upgraded Armor plating 4.0") >= 0) RHP += 1;
+				if (game.player.hasKeyItem("Upgraded Armor plating 5.0") >= 0) RHP += 1.25;
+				if (game.player.hasKeyItem("Upgraded Armor plating 6.0") >= 0) RHP += 1.5;
 				if (game.player.hasKeyItem("Upgraded Leather Insulation 1.0") >= 0) RHP += 0.25;
 				if (game.player.hasKeyItem("Upgraded Leather Insulation 2.0") >= 0) RHP += 0.5;
 				if (game.player.hasKeyItem("Upgraded Leather Insulation 3.0") >= 0) RHP += 0.75;

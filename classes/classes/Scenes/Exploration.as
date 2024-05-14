@@ -11,7 +11,7 @@ import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.DeepSea.Kraken;
 import classes.Scenes.Areas.Forest.AlrauneMaiden;
-import classes.Scenes.Areas.Forest.WapsHuntress;
+import classes.Scenes.Areas.Forest.WaspHuntress;
 import classes.Scenes.Areas.Forest.WaspAssassin;
 import classes.Scenes.Areas.Forest.WaspGirl;
 import classes.Scenes.Areas.Ocean.Scylla;
@@ -1448,7 +1448,7 @@ public class Exploration extends BaseContent implements SaveableState
                     outputText("Out of the corner of your eye you spot her\n\n");
                 }
 				outputText("<b>A Wasp Huntress...</b>");
-				startCombat(new WapsHuntress());//lvl 48
+				startCombat(new WaspHuntress());//lvl 48
 				return;
 			}
 		}

@@ -98,6 +98,14 @@ public class VolcanicCrag extends BaseContent
 				kind  : 'item',
 				call: findDrakeHeart
 			}, {
+				name: "findemberflower",
+				label : "Ember Flower",
+				kind  : 'item',
+				when: function():Boolean {
+					return player.isAlraune();
+				},
+				call: findEmberFlower
+			}, {
 				name: "truefiregolem",
 				label : "True Fire Golems",
 				kind : 'monster',
@@ -208,6 +216,12 @@ public class VolcanicCrag extends BaseContent
 			inventory.takeItem(consumables.DRAKHRT, explorer.done);
 		}
 
+		private function findEmberFlower():void {
+			clearOutput();
+			outputText("You stumble upon a strange red flower, which seems to grow in the crag heedless of the unbearable heat. You feel oddly drawn towards the plant, deciding to pick it up. ");
+			inventory.takeItem(consumables.EMBER_F, explorer.done);
+		}
+
 		private function fireGolemEncounter():void {
 			clearOutput();
 			outputText("As you take a stroll, from nearby cracks emerge group of golems. Looks like you have encountered some true fire golems! You ready your [weapon] for a fight!");
@@ -216,11 +230,12 @@ public class VolcanicCrag extends BaseContent
 		}
 
 		public function VolcanicCragConditions():void {
-			if (!player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) player.createStatusEffect(StatusEffects.ConstantHeatConditions,0,0,0,0);
+			if (!player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) player.createStatusEffect(StatusEffects.ConstantHeatConditions,2,0,0,0);
 		}
 
 		public function ConstantHeatConditionsTick():void {
-			var HPD:Number = 0.05;
+			var HPD:Number = 0.025;
+			HPD *= player.statusEffectv1(StatusEffects.ConstantHeatConditions);
 			if (player.hasPerk(PerkLib.ColdAffinity)) HPD *= 2;
 			HPD *= player.maxHP();
 			HPD = Math.round(HPD);

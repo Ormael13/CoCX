@@ -334,7 +334,7 @@ private function breedayaneweneedallthefoxes():void
 		trace("Ayane got PREGNANT!");
 		endEncounter();
 	}
-	else if (rand(100) < Math.sqrt(player.cumQ())) {
+	else if (rand(100) < Math.sqrt(player.cumQ()) || player.hasPerk(PerkLib.PilgrimsBounty)) {
 		trace("Ayane got random chance PREGNANT!");
 		if (debug) outputText("\n\n<b>DEBUG: Ayane chance pregcheck returned good.</b>");
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_AYANE); //Will always impregnate unless contraceptives are in use

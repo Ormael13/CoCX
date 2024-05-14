@@ -59,7 +59,7 @@ public class ChargeArmorSpell extends AbstractWhiteSpell {
 	private function armorTypeMultiplier():Number {
 		var a12b:Number = 1;
 		if (player.armorPerk == "Medium") a12b *= 2;
-		if (player.armorPerk == "Heavy" || player.armorName == "Drider-weave Armor") a12b *= 3;
+		if (player.isInHeavyArmor()) a12b *= 3;
 		if (player.armorPerk == "Light Ayo") a12b *= 4;
 		if (player.armorPerk == "Heavy Ayo") a12b *= 5;
 		if (player.armorPerk == "Ultra Heavy Ayo") a12b *= 7.5;

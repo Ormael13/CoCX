@@ -40,6 +40,11 @@ public class MinotaurMobScene extends BaseContent implements TimeAwareInterface 
 				trace("MINO KID GROWN");
 				flags[kFLAGS.MINOTAUR_SONS_GROW_COUNTDOWN] = 30;
 			}
+			//Lower sons population by 1 every fourth day once population gets high
+			if (flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] > 10 && model.time.hours > 23 && model.time.days % 4 == 0) {
+				if (flags[kFLAGS.MINO_SONS_LVL_UP] > 0) flags[kFLAGS.MINO_SONS_LVL_UP]--;
+				flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE]--;
+			}
 			return false;
 		}
 
@@ -623,10 +628,18 @@ internal function victoryMinotaurGang():void {
 	else dynStats("lus", 20, "scale", false);
 	dynStats("lus", 1, "scale", false);
 	outputText("Your body is burning up, buzzing with growing lust from the obscenity going on a few feet away from you.  What do you do?");
+	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2 && flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] >= 3) {
+		if (flags[kFLAGS.MINO_SONS_DEFEATS_COUNTER] >= 1) flags[kFLAGS.MINO_SONS_DEFEATS_COUNTER]++;
+		else flags[kFLAGS.MINO_SONS_DEFEATS_COUNTER] = 1;
+		//level up
+		if (flags[kFLAGS.MINO_SONS_LVL_UP] < 10 && flags[kFLAGS.MINO_SONS_DEFEATS_COUNTER] >= flags[kFLAGS.MINO_SONS_LVL_UP] + 1) {
+			flags[kFLAGS.MINO_SONS_DEFEATS_COUNTER] = 0;
+			++flags[kFLAGS.MINO_SONS_LVL_UP];
+		}
+	}
 	victorySexMenu();
 }
 public function victorySexMenu():void {
-
 	menu();
 	addButton(0, "Gangbang", victoryAllThePenetrationsMinotaurGangBang);
 	addButtonIfTrue(1, "Tit-Fuck", victoryMinotaurGangTitFuck,

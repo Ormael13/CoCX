@@ -121,6 +121,7 @@ public class CombatUI extends BaseCombatContent {
 					else btnMelee.show("M.Bolt", combat.magic.spellMagicBolt, "Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.").icon("A_Melee");
 				}
 			}
+			else if (player.hasStatusEffect(StatusEffects.Gallop)) btnMelee.disable("No way you could hit enemy with melee attacks while galloping. Unless you stop for a moment or two.");
 			else {
 				if (monster.isFlying()) {
 					if (player.isFlying() || player.haveThrowableMeleeWeapon() || player.isWhipTypeWeapon() || player.isRibbonTypeWeapon() || ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.StaffChanneling) && flags[kFLAGS.STAFF_CHANNELING_MODE])) {
@@ -175,8 +176,9 @@ public class CombatUI extends BaseCombatContent {
 				if (combat.isEnemyInvisible) btnRanged.disable("You cannot use shoot an opponent you cannot see or target.");
 		}
 		if (player.isFlying() && (!Wings.Types[player.wings.type].canFly && Arms.Types[player.arms.type].canFly)){btnRanged.disable("It would be rather difficult to aim while flapping your arms."); }
+		if (player.hasStatusEffect(StatusEffects.Gallop) && !player.hasPerk(PerkLib.CentaurHunterStyleMovingShot)){btnRanged.disable("It would be rather difficult to aim while galloping."); }
 		if (player.isInGoblinMech()) {
-			if (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) {
+			if (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0 || player.hasKeyItem("Machine Gun MK4") >= 0 || player.hasKeyItem("Machine Gun MK5") >= 0 || player.hasKeyItem("Machine Gun MK6") >= 0) {
 				if (player.isFirearmTypeWeapon()) {
 					if (player.isUsingGoblinMechFriendlyFirearms()) btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon. <b>AMMO LEFT: "+player.ammo+"</b>").icon("A_Ranged");
 					else btnRanged.disable("Your firearms are not compatibile with the current piloted mech.");
@@ -267,6 +269,8 @@ public class CombatUI extends BaseCombatContent {
 			doCompanionTurn(2);
 		else if (isCompanionTurn(3))
 			doCompanionTurn(3);
+		else if (isMechAITurn())
+			doMechAITurn();
 		//PC: is busy with something
 		else if (isPlayerBound()) {
 			mainMenuWhenBound();
@@ -614,6 +618,24 @@ public class CombatUI extends BaseCombatContent {
 				menu();
 				addButton(0, "Next", combatMenu, false);
 			}
+		}
+	}
+	
+	public function isMechAITurn():Boolean {
+		return player.isInGoblinMech() && (player.hasKeyItem("Improved Artificial Intelligence") >= 0 || player.hasKeyItem("Improved Artificial Intelligence MK2") >= 0 || player.hasKeyItem("Improved Artificial Intelligence MK3") >= 0 || player.hasKeyItem("Improved Artificial Intelligence MK4") >= 0)
+				&& (player.hasKeyItem("Auto turret") >= 0 || player.hasKeyItem("Auto turret MK2") >= 0 || player.hasKeyItem("Auto turret MK3") >= 0 || player.hasKeyItem("Auto turret MK4") >= 0 || player.hasKeyItem("Auto turret MK5") >= 0 || player.hasKeyItem("Auto turret MK6") >= 0)
+				&& flags[kFLAGS.IN_COMBAT_PLAYER_GOBLIN_MECH_AI_ATTACKED] != 1;
+	}
+	
+	public function doMechAITurn():void {
+		combat.shootMechWeaponByAI();
+		if (player.hasKeyItem("Improved Artificial Intelligence MK2") >= 0 || player.hasKeyItem("Improved Artificial Intelligence MK3") >= 0 || player.hasKeyItem("Improved Artificial Intelligence MK4") >= 0) combat.pspecials.goblinMechAIUseRadomlyItWeaponFunctions();
+		if (player.hasKeyItem("Improved Artificial Intelligence MK4") >= 0) combat.pspecials.goblinMechAIUseRadomlyItWeaponFunctions();
+		//set flag that mech ai shooted
+		flags[kFLAGS.IN_COMBAT_PLAYER_GOBLIN_MECH_AI_ATTACKED] = 1;
+		if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
+			menu();
+			addButton(0, "Next", combatMenu, false);
 		}
 	}
 

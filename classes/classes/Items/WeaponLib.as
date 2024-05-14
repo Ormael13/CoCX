@@ -448,7 +448,7 @@ public final class WeaponLib extends ItemConstants
 				WT_EXOTIC, WSZ_MASSIVE)
 				.withTags(W_THROWN)
 				.withEffect(IELib.ScaleAttack_StrXL, 250) as Weapon;
-		public const GGRAVEA:Weapon = new Weapon("GGravea", "GlacialGraveaxe", "Glacial Graveaxe", "a Glacial Graveaxe", "cleave", 160, 160, "The titanic greataxe you found in the glacial rift, most of the weapon seems to have been carved from bedrock, with the head being made of solid, dense, ice from the heart of a glacier. The ice is light, razor sharp, and appears to never melt. The stone’s slightly discolored, as if carvings had once adorned its surface…However, such decoration seems to have been lost to time.", WT_AXE, WSZ_MASSIVE)
+		public const GGRAVEA:Weapon = new Weapon("GGravea", "GlacialGraveaxe", "Glacial Graveaxe", "a Glacial Graveaxe", "cleave", 160, 160, "The titanic greataxe you found in the tundra, most of the weapon seems to have been carved from bedrock, with the head being made of solid, dense, ice from the heart of a glacier. The ice is light, razor sharp, and appears to never melt. The stone’s slightly discolored, as if carvings had once adorned its surface…However, such decoration seems to have been lost to time.", WT_AXE, WSZ_MASSIVE)
 				.withTag(W_LGWRATH)
 				.withEffect(IELib.ScaleAttack_StrXL, 800) as Weapon;
 		public const GUANDAO:Weapon = new Weapon(
@@ -572,6 +572,11 @@ public final class WeaponLib extends ItemConstants
 				"This greatsword is half invention and half weapon. Instead of a sharp straight blade, the weapon’s sides are a set of metal teeth that constantly move in order to properly saw through flesh and more solid matter, creating grievous wounds. Very good for cutting down trees too.",
 				WT_EXOTIC, WSZ_LARGE)
 				.withEffect(IELib.Bleed, 100) as Weapon;
+		public const MACSPEA:Weapon = new Weapon(
+				"Macspea","Mach.spear","Machine Spear","a Machine Spear","piercing stab",19,2720,
+				"This spear is half invention and half weapon. Instead of a standard run of the mill spearhead, the weapon tip is a massive screw that spins on itself continually to burrow into the opponent’s flesh. Any decisive hit you will land with this thing will possibly be fatal.",
+				WT_EXOTIC, WSZ_LARGE)
+				.withEffect(IELib.ArmorPenetration, 100) as Weapon;
 		public const MASAMUN:Weapon = new Weapon(
 				"masamune","Masamune","masamune katana","a masamune katana","slash",112,8960,
 				"This blessed katana is made in shining steel and heavily decorated with silver and blue sapphires. When used by a pure-hearted knight, the divine will within guides each strike, making it much deadlier.",
@@ -921,7 +926,7 @@ public final class WeaponLib extends ItemConstants
 				"This set of catclaw gloves was tempered using Etna's own venom and reinforced using some of her tail bone spikes, a proof of her eternal love to you. Its also enchanted to reinforce natural attacks.",
 				WT_GAUNTLET, WSZ_MEDIUM)
 				.withEffect(IELib.Bleed, 10) as Weapon;
-		public const VGRAVEH:Weapon = new Weapon("VGraveh", "VolcanicGravehammer", "Volcanic Gravehammer", "a Volcanic Gravehammer", "smash", 160, 160, "The titanic greathammer you found in the volcanic crag. This weapon seems to have been hewn from perpetually molten bedrock from deep within a volcano. How it remains this way is unknown to you, but you wonder if it was enchanted to be as such, or if it's just a natural property of the materials it's been crafted from.", WT_MACE_HAMMER, WSZ_MASSIVE)
+		public const VGRAVEH:Weapon = new Weapon("VGraveh", "VolcanicGravehammer", "Volcanic Gravehammer", "a Volcanic Gravehammer", "smash", 160, 160, "The titanic greathammer you found in the ashlands. This weapon seems to have been hewn from perpetually molten bedrock from deep within a volcano. How it remains this way is unknown to you, but you wonder if it was enchanted to be as such, or if it's just a natural property of the materials it's been crafted from.", WT_MACE_HAMMER, WSZ_MASSIVE)
 				.withTag(W_LGWRATH)
 				.withEffect(IELib.ScaleAttack_StrXL, 800) as Weapon;
 		public const W_STAFF:Weapon = new Weapon(

@@ -1356,11 +1356,30 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					}
 					player.buff("EasterBunnyBalls").setStat("minlust", 0.1 * player.ballSize).withText("Easter Bunny Balls");
 				}
-				//Armor daily event
+				if (player.hasStatusEffect(StatusEffects.GraydaRandomnCampEvents)) player.removeStatusEffect(StatusEffects.GraydaRandomnCampEvents);
+				if (player.hasStatusEffect(StatusEffects.ZenjiArian)) {
+					if (player.statusEffectv1(StatusEffects.ZenjiArian) <= 0) player.removeStatusEffect(StatusEffects.ZenjiArian);
+					else player.addStatusValue(StatusEffects.ZenjiArian, 1, -1);
+				}
+				//Equipment daily events
 				//Scandalous succubus armor and other corruption updates
 				if ((player.armor == armors.SCANSC || player.countMiscJewelry(miscjewelries.DMAGETO) > 0) && player.cor < 100) {
 					outputText("\nCorruption seethes from your defiled equipment into you.\n");
 					player.cor += 5;
+				}
+				if (player.weaponRange == weaponsrange.SAGITTB) {
+					outputText("\nPussy… Cunt… Vagina… FUCK… you can only think about pussies! You wish you had their velvety folds and wet lubricated walls wrapping around your dick.\n");
+					outputText("\nYou begin drooling mindlessly as your penis slide out of its sheath inches by delicious inches, the very visible purplish veins pumping corruption along your length. Cum sloshes impatiently in your heavy balls as a thick blob of horse precum drips from your flared tip and splashes loudly onto the ground beneath as the curse of Sagittarius erodes your will to resist the urge to plunge your penis in and ravage the nearest wet hole.\n");
+					if (player.statusEffectv1(StatusEffects.TookSagittariusBanefulGreatBow) > 0 && player.cor < 70) player.cor += 2;
+					if (!player.statStore.hasBuff('Sagittarius Focus')) {
+						if (player.statusEffectv1(StatusEffects.TookSagittariusBanefulGreatBow) < 10) player.addStatusValue(StatusEffects.TookSagittariusBanefulGreatBow,1,1);
+						player.buff("Sagittarius Curse").remove();
+						var curseInt:Number = 0.1 * player.statusEffectv1(StatusEffects.TookSagittariusBanefulGreatBow);
+						if (curseInt <= 0) curseInt = 0.01;
+						curseInt *= player.inte;
+						player.buff("Sagittarius Curse").addStats( {"int":-curseInt, "sens":Math.round(Math.sqrt(curseInt))} );
+					}
+					else player.buff("Sagittarius Focus").remove();
 				}
 				//Reset clone creation tracker
 				if (camp.gcc(true) && camp.gcc() == 0) player.removeStatusEffect(StatusEffects.PCClone);
@@ -1592,7 +1611,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Hydra Regeneration and Hydra acid breath perk
 			needNext ||= player.gainOrLosePerk(PerkLib.HydraRegeneration, player.lowerBody == LowerBody.HYDRA, "", "You accidentally cut yourself but to your stupor the wound does not close as fast as it should. Guess you are no longer a hydra enough to benefit from superior regeneration.");
 			needNext ||= player.gainOrLosePerk(PerkLib.HydraAcidBreath, player.lowerBody == LowerBody.HYDRA, "", "As your lead hydra head vanishes so do your ability to belch acid.");
-
+			//Troll Regeneration
+			needNext ||= player.gainOrLosePerk(PerkLib.TrollRegeneration, player.isAnyRaceCached(Races.TROLL, Races.GLACIAL_TROLL), "", "You accidentally cut yourself but to your stupor the wound does not close as fast as it should. I appears your lack of troll blood is no longer enough to benefit from superior regeneration.");
 			if (!player.hasStatusEffect(StatusEffects.Overheat) && (player.isAnyRaceCached(Races.SALAMANDER, Races.KITSHOO, Races.HELLCAT) || player.hasStatusEffect(StatusEffects.HinezumiCoat))) {
 				//Argument 1 is weither pc is in heat stage or not 1 means active
 				//Argument 2 is how many day left before player enter heats again typicaly 3;
@@ -1738,6 +1758,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			needNext ||= player.gainOrLosePerk(PerkLib.Lustzerker, player.isAnyRaceCached(Races.SALAMANDER, Races.PHOENIX, Races.KITSHOO) || player.hasMutation(IMutationsLib.SalamanderAdrenalGlandsIM), "You start to feel a weird, slightly unpleasant feeling inside your body. Like many tiny flames coursing through your veins, making you ponder what is happening with your body. Remembering about salamanders' natural talent for entering a berserk-like state, you guess that should be it.", "All of a sudden, something changes inside your body. You think about it for a long time until it dawns on you. You can't feel that fire in your veins anymore, meaning for now, no more lustzerking.", player.perkv4(PerkLib.Lustzerker) == 0);
 			//Jungle’s Wanderer
 			needNext ||= player.gainOrLosePerk(PerkLib.JunglesWanderer, player.isRaceCached(Races.REDPANDA), "Your nimble body has adapted to moving through jungles and forests, evading enemy attacks with ease and making yourself harder to catch.", "You notice that you aren't as adept at manuevering through the jungle anymore.");
+			//Troll passives / perks
+			needNext ||= player.gainOrLosePerk(PerkLib.PheromoneCloud, player.isAnyRaceCached(Races.TROLL, Races.GLACIAL_TROLL) && player.hasVagina(), "You take a deep breath as your heart beats. You reflexively clench your legs at the thought of finding a man to slake your desires. The air around you feels dense as you notice a pheromone cloud is growing around you to attract another male.", "Your breathing gets a little easier as your heart rate slows slightly. You don't feel a need to find another male as the pheromone cloud around you dissipates.");
+			needNext ||= player.gainOrLosePerk(PerkLib.SpearAffinity, player.isAnyRaceCached(Races.TROLL, Races.GLACIAL_TROLL), "As your thoughts coalesce together, you can feel your hands itching for a proper spear to wield. You feel invigorated and ready to use it with deadly force as needed.", "Your fingers twitch and your take a moment to look at your hands, you don't feel the same knack as you used to for holding a spear.");
+			needNext ||= player.gainOrLosePerk(PerkLib.TrollResistance, player.isAnyRaceCached(Races.TROLL, Races.GLACIAL_TROLL), "You reflexively scratch your coat of fur, feeling the luxurious softness beneath your fingers. You feel a sense of safety, as if you were impenetrable to outside forces. Maybe not invicible, but magic should be a little less effective on you.", "You scratch you arm as you can no longer feel that same protective aura around yourself from your fur. You feel less protected from magical forces now.");
 
 			if (player.hasKeyItem("Gleipnir Collar") >= 0) {
 				//Freezing Breath
@@ -1783,12 +1807,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.FreezingBreathYeti, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if ((player.isRaceCached(Races.MELKIE) || player.isRaceCached(Races.FROSTWYRM)) && !player.hasPerk(PerkLib.ColdAffinity)) {
+			if ((player.isRaceCached(Races.MELKIE) || player.isRaceCached(Races.FROSTWYRM) || player.isRaceCached(Races.GLACIAL_TROLL)) && !player.hasPerk(PerkLib.ColdAffinity)) {
 				outputText("\nYou suddenly no longer feel the cold so you guess you finally got acclimated to the icy winds of the glacial rift. You feel at one with the cold. So well that you actually developed icy power of your own.\n\n(<b>Gained Perks: Cold Affinity</b>)\n");
 				player.createPerk(PerkLib.ColdAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if (!player.isRaceCached(Races.YETI) && !player.isRaceCached(Races.YUKIONNA) && !player.isRaceCached(Races.MELKIE) && !player.isRaceCached(Races.FROSTWYRM) && !player.perkv1(IMutationsLib.WhaleFatIM) >= 1 && player.hasPerk(PerkLib.ColdAffinity)) {
+			else if (!player.isRaceCached(Races.YETI) && !player.isRaceCached(Races.YUKIONNA) && !player.isRaceCached(Races.MELKIE) && !player.isRaceCached(Races.FROSTWYRM) && !player.isRaceCached(Races.GLACIAL_TROLL) && !player.perkv1(IMutationsLib.WhaleFatIM) >= 1 && !player.hasPerk(PerkLib.SnowLily) && player.hasPerk(PerkLib.ColdAffinity)) {
 				outputText("\nYou suddenly feel a chill in the air. You guess you somehow no longer resist the cold.\n\n<b>(Lost Perks: Cold Affinity");
 				player.removePerk(PerkLib.ColdAffinity);
 				if (player.hasPerk(PerkLib.FreezingBreathYeti)){
@@ -1809,7 +1833,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Blood Affinity
 			needNext ||= player.gainOrLosePerk(PerkLib.BloodAffinity, player.isAnyRaceCached(Races.VAMPIRE, Races.WERESPIDER, Races.DRACULA), "Your ability to hone the power of the red, flowing essence heightens. Hemophilia is a delightful chance for you to revel in the hemorrhage of freshly spilt blood.", "The sight of blood no longer fuels you with the same rousing sensations you once had. Any affinity you carried for the crimson fluid is now lost.");
 			//Dark Affinity
-			needNext ||= player.gainOrLosePerk(PerkLib.DarknessAffinity, player.isAnyRaceCached(Races.VAMPIRE, Races.APOPHIS, Races.ANUBIS, Races.DRACULA), "You are at home while shrouded in darkness, seeing clearly within the shadows as if it were broad daylight.", "The inky black darkness grows hostile toward you once more as your affinity for it is lost.");
+			needNext ||= player.gainOrLosePerk(PerkLib.DarknessAffinity, player.isAnyRaceCached(Races.VAMPIRE, Races.APOPHIS, Races.ANUBIS, Races.DRACULA) || player.hasPerk(PerkLib.Nightshade), "You are at home while shrouded in darkness, seeing clearly within the shadows as if it were broad daylight.", "The inky black darkness grows hostile toward you once more as your affinity for it is lost.");
 			//Compelling Aria
 			needNext ||= player.gainOrLosePerk(PerkLib.HarpySong, player.isAnyRaceCached(Races.SIREN, Races.HARPY, Races.PHOENIX, Races.THUNDERBIRD) || player.hasMutation(IMutationsLib.HarpyHollowBonesIM), "Your voice sound like magicaly entrancing music to your ears now, it would seem you have gained the infamous magicaly compeling voices common to harpies.", "Your voice no longer carries the magical power it used to and thus you are no longer able to use your compelling aria.");
 			needNext ||= player.gainOrLosePerk(PerkLib.MelkieSong, player.tongue.type == Tongue.MELKIE || player.hasMutation(IMutationsLib.MelkieLungIM), "Your words are notes, your sentence a melody. Your voice is like music to your ears and you realise it is because your body became closer to that of a Melkie adapting even your tongue and voice. Well you could always go sit on a rock and sing in case some sailor came by.", "Your voice no longer carries the magical power it used to and thus you are no longer able to use your compelling aria.")
@@ -1849,7 +1873,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			//Fire Affinity
-			needNext ||= player.gainOrLosePerk(PerkLib.FireAffinity, player.isAnyRaceCached(Races.SALAMANDER, Races.PHOENIX, Races.HELLCAT, Races.FIRESNAILS, Races.KITSHOO, Races.CERBERUS) || player.isRaceCached(Races.MOUSE, 2), "You suddenly feels your body temperature rising to ridiculus level. You pant for several minutes until you're finally at ease with your bodily heat. You doubt any more heat is going to make you more uncomfortable then this as you quietly soak in the soothing warmth your body naturally produce. It's like your body is made out of living fire.", "You suddenly feel chilly as your bodily temperature drop down to human level. You lost your natural warmth reverting to that of a standard human.");
+			needNext ||= player.gainOrLosePerk(PerkLib.FireAffinity, player.isAnyRaceCached(Races.SALAMANDER, Races.PHOENIX, Races.HELLCAT, Races.FIRESNAILS, Races.KITSHOO, Races.CERBERUS) || player.isRaceCached(Races.MOUSE, 2) || player.hasPerk(PerkLib.Cinderbloom), "You suddenly feels your body temperature rising to ridiculus level. You pant for several minutes until you're finally at ease with your bodily heat. You doubt any more heat is going to make you more uncomfortable then this as you quietly soak in the soothing warmth your body naturally produce. It's like your body is made out of living fire.", "You suddenly feel chilly as your bodily temperature drop down to human level. You lost your natural warmth reverting to that of a standard human.");
 			//Lightning Affinity
 			if ((player.isRaceCached(Races.SEA_DRAGON)) && !player.hasPerk(PerkLib.LightningAffinity)) {
 				outputText("\nYou suddenly feel a rush of electricity run across your skin as your biolight goes crazy! It would seem you gained the ability to generate and control electricity not unlike an electric eel or more specificaly a sea dragon\n");
@@ -2043,6 +2067,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
+			//Equine Strength
+			needNext ||= player.gainOrLosePerk(PerkLib.EquineStrength, player.isAnyRaceCached(Races.HORSE, Races.CENTAUR), "You are enough of a horse-mroph or centaur and have gained your special abilities!", "You are no longer enough of a horse-mroph or centaur and have lost your special abilities!");
 			//Titan Might
 			needNext ||= player.gainOrLosePerk(PerkLib.TitanicSize,(player.tallness >= 80 && (player.isRaceCached(Races.SCYLLA, 2) || player.isAnyRaceCached(Races.HYDRA, Races.FROSTWYRM, Races.SANDWORM))), "Whoa, you've grown so big its a sheer miracle you don't damage the landscape while moving. That said, your size now contributes to your strength as well.",
 					(player.tallness < 80) ? "You sadly are no longer able to benefit from your size as much as you did before. Probably because you have shrunk to a smaller size." : "You sadly are no longer able to benefit from your size as much as you did before. Probably because you have transformed again.");
@@ -2131,36 +2157,45 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.BouncyBody);
 				needNext = true;
 			}
-			if (player.vehiclesName == "Goblin Mech Alpha" && (player.isRaceCached(Races.ELF) || player.tallness > 48 || player.tailType != Tail.NONE || player.hasPhysicalWings())) { //Elf OR Taller than 4 ft or having wings/tail
-				if (player.isRaceCached(Races.ELF)) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
+			if (player.vehiclesName == "Goblin Mech Alpha" && (player.isAnyRaceCached(Races.ELF, Races.WOODELF) || player.tallness > 48 || player.tailType != Tail.NONE || player.hasPhysicalWings())) { //Elf OR Taller than 4 ft or having wings/tail
+				if (player.isAnyRaceCached(Races.ELF, Races.WOODELF)) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
 				else outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
 				if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) player.HP /= 1.2;
 				if (player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) player.HP /= 1.35;
 				if (player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) player.HP /= 1.5;
+				if (player.hasKeyItem("Upgraded Armor plating 4.0") >= 0) player.HP /= 1.7;
+				if (player.hasKeyItem("Upgraded Armor plating 5.0") >= 0) player.HP /= 1.9;
+				if (player.hasKeyItem("Upgraded Armor plating 6.0") >= 0) player.HP /= 2.1;
 				player.HP = Math.round(player.HP);
 				player.setVehicle(VehiclesLib.NOTHING);
 				inventory.takeItem(vehicles.GOBMALP, null);
 				needNext = true;
 			}
-			if (player.vehiclesName == "Goblin Mech Prime" && (player.isRaceCached(Races.ELF) || player.tallness > 48 || player.tailType != Tail.NONE || player.hasPhysicalWings())) { //Elf OR Taller than 4 ft or having wings/tail
-				if (player.isRaceCached(Races.ELF)) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
+			if (player.vehiclesName == "Goblin Mech Prime" && (player.isAnyRaceCached(Races.ELF, Races.WOODELF) || player.tallness > 48 || player.tailType != Tail.NONE || player.hasPhysicalWings())) { //Elf OR Taller than 4 ft or having wings/tail
+				if (player.isAnyRaceCached(Races.ELF, Races.WOODELF)) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
 				else outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
 				if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) player.HP /= 1.4;
 				if (player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) player.HP /= 1.7;
 				if (player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) player.HP /= 2;
+				if (player.hasKeyItem("Upgraded Armor plating 4.0") >= 0) player.HP /= 2.4;
+				if (player.hasKeyItem("Upgraded Armor plating 5.0") >= 0) player.HP /= 2.8;
+				if (player.hasKeyItem("Upgraded Armor plating 6.0") >= 0) player.HP /= 3.2;
 				player.HP = Math.round(player.HP);
 				player.setVehicle(VehiclesLib.NOTHING);
 				inventory.takeItem(vehicles.GOBMPRI, null);
 				needNext = true;
 			}
-			if (player.vehiclesName == "Giant Slayer Mech" && (player.isRaceCached(Races.ELF) || player.isRaceCached(Races.WOODELF) || player.tallness > 66 || player.hasPhysicalWings())) { //Elf OR Taller than 5'5" ft or having large wings
-				if (player.isRaceCached(Races.ELF) || player.isRaceCached(Races.WOODELF)) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
+			if (player.vehiclesName == "Giant Slayer Mech" && (player.isAnyRaceCached(Races.ELF, Races.WOODELF) || player.tallness > 66 || player.hasPhysicalWings())) { //Elf OR Taller than 5'5" ft or having large wings
+				if (player.isAnyRaceCached(Races.ELF, Races.WOODELF)) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
 				else outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
 				if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0 || player.hasKeyItem("Upgraded Leather Insulation 1.0") >= 0) {
 					var RHP:Number = 1;
 					if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) RHP += 0.25;
 					if (player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) RHP += 0.5;
 					if (player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) RHP += 0.75;
+					if (player.hasKeyItem("Upgraded Armor plating 4.0") >= 0) RHP += 1;
+					if (player.hasKeyItem("Upgraded Armor plating 5.0") >= 0) RHP += 1.25;
+					if (player.hasKeyItem("Upgraded Armor plating 6.0") >= 0) RHP += 1.5;
 					if (player.hasKeyItem("Upgraded Leather Insulation 1.0") >= 0) RHP += 0.25;
 					if (player.hasKeyItem("Upgraded Leather Insulation 2.0") >= 0) RHP += 0.5;
 					if (player.hasKeyItem("Upgraded Leather Insulation 3.0") >= 0) RHP += 0.75;
@@ -2283,7 +2318,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.statStore.removeBuffs("Pregomania");
 				outputText("\nNo longer pregnant, you feel a void in your belly as the need to be impregnated again claw at your mind.\n");
 				player.statStore.addBuffObject({"lib.mult":0.50}, "Impregnate me!!!",{text:"You strongly desire to be impregnated."});
-
+			}
+			if(player.isPregnant() && player.hasMutation(IMutationsLib.GoblinOvariesIM) && !player.statStore.hasBuff("PregGoblinoid")){
+				var libMulti:Number = player.lib;
+				libMulti *= (0.1 * player.perkv1(IMutationsLib.GoblinOvariesIM));
+				libMulti = Math.round(libMulti);
+				player.statStore.addBuffObject({"lib":libMulti}, "PregGoblinoid",{text:""});
+			}
+			if(!player.isPregnant() && player.statStore.hasBuff("PregGoblinoid")){
+				player.statStore.removeBuffs("PregGoblinoid");
 			}
 			if(SophieFollowerScene.HarpyKids >= 21 && !player.hasPerk(PerkLib.HarpyQueen)){
 				outputText("\nOverflowing with motherly pride you count your many grown daughters. There's more than twenty of them roosting all around your camp now." +
@@ -2344,6 +2387,19 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					CoC.instance.transformations.WingsNightmare.applyEffect(false);
 				}
 				CoC.instance.transformations.EyesChangeColor(["red"]).applyEffect(false);
+				needNext = true;
+			}
+			//Sagittarius Aura of Dominance
+			if (player.cor >= 50 && player.weaponRange == weaponsrange.SAGITTB && !player.hasPerk(PerkLib.SagittariusAuraOfDominance)) {
+				outputText("The air around you seems to change. You feel in control… dominant… The bitch all around the world exists to worship that amazing cock of yours and it would be only fitting for them to willingly spread their legs to you so that you can breed them. With this aura of raw dominance and strength, what breedable female could ever refuse you?");
+				if (player.statusEffectv3(StatusEffects.Kelt) >= 5) outputText(" You recall that centaur Kelt had something similar going on about him.");
+				outputText(" <b>Gained Sagittarius Aura of Dominance.</b>\n");
+				player.createPerk(PerkLib.SagittariusAuraOfDominance, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if ((player.cor < 50 || player.weaponRange != weaponsrange.SAGITTB) && player.hasPerk(PerkLib.SagittariusAuraOfDominance)) {
+				outputText("You feel relief as Sagittarius curse releases some of its hold over you. That accursed aura that used to turn normal women into sluts in heat is gone.\n");
+				player.removePerk(PerkLib.SagittariusAuraOfDominance);
 				needNext = true;
 			}
 			//Fixing wings
@@ -2737,6 +2793,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMP_TOME);
 				if (!camp.IsSleeping && !player.isRaceCached(Races.IMP, 3) && rand(3) < 2) {
 					CoC.instance.mutations.impTFgradual(player);
+					needNext = true;
+				}
+			}
+			if (player.weaponRange == weaponsrange.SAGITTB) {
+				if (!camp.IsSleeping && player.racialScore(Races.CENTAUR) < 18 && rand(3) < 2) {
+					CoC.instance.mutations.sagittariusBowChanges(player);
 					needNext = true;
 				}
 			}

@@ -367,7 +367,7 @@ public function visitAriansHouse(back:Boolean = false):void {
 		else
 			outputText(images.showImage("arianmale-tent"));
 		outputText("You approach the enchanted tent and slip easily inside the doors to the luxurious interior.  ");
-		if ((flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) && rand(100) < 15) {
+		if ((flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) && rand(100) < 10 && !player.hasStatusEffect(StatusEffects.ZenjiArian)) {
 			outputText("As you approach Arian’s tent and enter you overhear the sounds of a bed squeaking coming from [arian eir] room. You pause for a moment, is Arian jerking off?\n\n");
 			outputText("No, it’s way too noisy and a little too violent for the small lizan. As you get closer to eavesdrop you can hear faint growling… it sounds like Zenji. You never would’ve expected this from Zenji, but apparently he’s managed to subdue Arian. Given the sounds of the moaning, Arian is enjoying [arian emself] perhaps a little too much.\n\n");
 			outputText("\"<i>Ah… Z-Zenji…</i>\" Arian mutters through pleasured groans.\n\n");
@@ -384,6 +384,7 @@ public function visitAriansHouse(back:Boolean = false):void {
 			outputText("After several more spanks [arian eir] behind is left red from the heat as [arian ey] kneels on the couch, [arian eir] ass was pounded too hard from both you and Zenji for [arian em] to be able to sit properly for quite some time now.\n\n");
 			outputText("You ask if [arian ey]’s learned [arian eir] lesson yet. Arian seems even more flustered before giving you a sheepish nod.\n\n");
 			outputText("You decide to leave him for now, he’ll need some time to recover from the entire ordeal.\n\n");
+			player.createStatusEffect(StatusEffects.ZenjiArian, 4, 0, 0, 0);
 			doNext(camp.campLoversMenu);
 			return;
 		}
@@ -616,10 +617,15 @@ private function arianHomeMenu(back:Boolean = false):void {
 		if(arianFollower()) addButton(5,"Appearance",arianAppearance);
 		addButton(6, "Cursed Item", removeCursedItem)
 				.hint("Ask Arian to remove your cursed item. Costs 500 gems. ")
-				// .disableIf(arianHealth() < 75, "Arian is too weak")
-				.disableIf(player.gems < 500, "Ask Arian to remove your cursed item. Costs 500 gems (Can't afford). ")
+				.disableIf(arianHealth() < 75, "Arian is too weak")
+				.disableIf(player.gems < 500, "Ask Arian to remove your cursed item. Costs 500 gems (Can't afford).")
 				.disableIf(player.equippedKnownCursedItems().length == 0, "Arian can remove cursed items, but you're not wearing any.")
-				.disableIf(flags[kFLAGS.ARIAN_S_DIALOGUE] < 3, "???", "???")
+				.disableIf(flags[kFLAGS.ARIAN_S_DIALOGUE] < 3, "???", "???");
+		if(player.weaponRange == weaponsrange.SAGITTB) addButton(7, "Cursed Bow", removeCursedItem2)
+				.hint("Ask Arian to remove your cursed bow. Costs 500 gems. ")
+				.disableIf(arianHealth() < 75, "Arian is too weak")
+				.disableIf(player.gems < 500, "Ask Arian to remove your cursed bow. Costs 500 gems (Can't afford).")
+				.disableIf(flags[kFLAGS.ARIAN_S_DIALOGUE] < 3, "???", "???");
 		if(model.time.hours >= 17 && arianFollower()) addButton(8,"Sleep With",sleepWithArian,true);
 		if(flags[kFLAGS.SLEEP_WITH] == "Arian") addButton(8,"NoSleepWith",dontSleepWithArian);
 		if(!arianFollower()) addButton(14,"Back",telAdre.telAdreMenu);
@@ -627,6 +633,16 @@ private function arianHomeMenu(back:Boolean = false):void {
 	}
 }
 
+private function removeCursedItem2():void {
+	clearOutput();
+	outputText("As Arian proceed with the purification ritual you struggle in pain at first as you feel the cursed weapon in your hand resist the unbinding before release washes over you as your grip opens dropping the malevolent item on the ground. ");
+	outputText("Arian wrap the item in blessed cloth in order to seal its malice before handing you the neutralized cursed item back. Sure you can equip it again anytime but now you know the risks.\n\n");
+	player.gems -= 500;
+	player.removeStatusEffect(StatusEffects.TookSagittariusBanefulGreatBow);
+	player.createStatusEffect(StatusEffects.TookSagittariusBanefulGreatBow,1,0,0,0);
+	player.unequipWeaponRange(false,true);
+	inventory.takeItem(weaponsrange.SAGITTB, arianHomeMenu);
+}
 private function removeCursedItem():void {
 	clearOutput();
 	var item:ItemType = player.equippedKnownCursedItems()[0];

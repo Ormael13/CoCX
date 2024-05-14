@@ -28,12 +28,20 @@ import classes.display.SpriteDb;
 				teased = true;
 				if(rand(5) > 0) {
 					outputText("The biggest lifts his loincloth, giving you a perfect view of his veiny hardness.  Pre-cum visibly bubbles from his flared tip, splattering wetly on the rocks and filling the air with his bestial musk.  He says, \"<i>See how much I need you?</i>\"\n");
-					damage = 7 + player.lib/20;
+					if (flags[kFLAGS.MINO_SONS_LVL_UP] > 8) damage = 19 + player.lib;
+					else if (flags[kFLAGS.MINO_SONS_LVL_UP] > 6) damage = 16 + player.lib/5;
+					else if (flags[kFLAGS.MINO_SONS_LVL_UP] > 4) damage = 13 + player.lib/10;
+					else if (flags[kFLAGS.MINO_SONS_LVL_UP] > 2) damage = 10 + player.lib/15;
+					else damage = 7 + player.lib/20;
 				}
 				//crit)
 				else {
 					outputText("The largest bull in the crowd flaps his cum-soaked loincloth up and wraps a massive, muscled hand around his incredible erection.  Shaking it back and forth, he flicks his bubbling pre-cum in your direction, letting it spatter noisily against the rocks around you.  A few droplets even land on your skin, fogging the air with minotaur pheromones.\n");
-					damage = 13 + player.lib/20;
+					if (flags[kFLAGS.MINO_SONS_LVL_UP] > 8) damage = 7 + player.lib/10;
+					else if (flags[kFLAGS.MINO_SONS_LVL_UP] > 6) damage = 6 + player.lib/15;
+					else if (flags[kFLAGS.MINO_SONS_LVL_UP] > 4) damage = 5 + player.lib/20;
+					else if (flags[kFLAGS.MINO_SONS_LVL_UP] > 2) damage = 4 + player.lib/25;
+					else damage = 3 + player.lib/30;
 				}
 			}
 			//(Middle Taur pre-cum tease)
@@ -41,17 +49,29 @@ import classes.display.SpriteDb;
 				teased = true;
 				if(rand(5) > 0) {
 					outputText("\"<i>Hey, slut, look at this!</i>\" taunts one of the beast-men.  He shakes his hips lewdly, spinning his thick horse-cock in wide circles and sending his potent pre flying through the air.  Droplets rain down around you, filling the air with even more of that delicious smell.\n");
-					damage = 3 + player.lib/30;
+					if (flags[kFLAGS.MINO_SONS_LVL_UP] > 8) damage = 7 + player.lib/10;
+					else if (flags[kFLAGS.MINO_SONS_LVL_UP] > 6) damage = 6 + player.lib/15;
+					else if (flags[kFLAGS.MINO_SONS_LVL_UP] > 4) damage = 5 + player.lib/20;
+					else if (flags[kFLAGS.MINO_SONS_LVL_UP] > 2) damage = 4 + player.lib/25;
+					else damage = 3 + player.lib/30;
 				}
 				else {
 					outputText("\"<i>Mom, you may as well spread your thighs now, I got a treat for ya!</i>\" announces a well-built minotaur.  He shifts his coverings and pumps on his swollen shaft, tugging hard enough over the iron-hard erection to blast out huge blobs of pre-seed in your direction.  ");
 					if(player.spe/5 + rand(20) > 20) {
 						outputText("You avoid most of them, the blobs splattering against the mountain and still getting a little on you.  Regardless, the air stinks of their heavy spunk.");
-						damage = 6 + player.lib/20;
+						if (flags[kFLAGS.MINO_SONS_LVL_UP] > 8) damage = 18 + player.lib;
+						else if (flags[kFLAGS.MINO_SONS_LVL_UP] > 6) damage = 15 + player.lib/5;
+						else if (flags[kFLAGS.MINO_SONS_LVL_UP] > 4) damage = 12 + player.lib/10;
+						else if (flags[kFLAGS.MINO_SONS_LVL_UP] > 2) damage = 9 + player.lib/15;
+						else damage = 6 + player.lib/20;
 					}
 					else {
 						outputText("You try to avoid them, but one catches you in the face, a little getting into your mouth.  You swallow it reflexively and salivate some more, your eyes darting to look at the stained rocks around you.  Are you really considering licking it up from the ground?");
-						damage = 15 + player.lib/20;
+						if (flags[kFLAGS.MINO_SONS_LVL_UP] > 8) damage = 35 + player.lib;
+						else if (flags[kFLAGS.MINO_SONS_LVL_UP] > 6) damage = 30 + player.lib/5;
+						else if (flags[kFLAGS.MINO_SONS_LVL_UP] > 4) damage = 25 + player.lib/10;
+						else if (flags[kFLAGS.MINO_SONS_LVL_UP] > 2) damage = 20 + player.lib/15;
+						else damage = 15 + player.lib/20;
 					}
 				}
 				outputText("\n");
@@ -59,7 +79,11 @@ import classes.display.SpriteDb;
 			//(Minitaur pre-cum tease)
 			if(!teased || rand(3) == 0) {
 				outputText("The smallest of the beastmen, the minitaur, moans and begs, \"<i>Please Mom, can we please fuck you?  I... I need it so bad.</i>\"  He raises the edge of his loincloth to show exactly what he's talking about.  His member is limp but leaking.  What really catches your eyes sits behind that drizzling shaft - a pair of balls looking swollen and pent up beyond belief.  A sticky web of his leavings hangs between his genitals and his loincloth, showing you just how much he's been leaking at the thought of fucking you.  Fanning the sopping garment, he inadvertently blows a wave of his pheromones your way.\n");
-				damage = 9 + player.lib/20;
+				if (flags[kFLAGS.MINO_SONS_LVL_UP] > 8) damage = 21 + player.lib;
+				else if (flags[kFLAGS.MINO_SONS_LVL_UP] > 6) damage = 18 + player.lib/5;
+				else if (flags[kFLAGS.MINO_SONS_LVL_UP] > 4) damage = 15 + player.lib/10;
+				else if (flags[kFLAGS.MINO_SONS_LVL_UP] > 2) damage = 12 + player.lib/15;
+				else damage = 9 + player.lib/20;
 			}
 			player.takeLustDamage(damage, true);
 			damage = player.lust - oldLust;
@@ -88,7 +112,7 @@ import classes.display.SpriteDb;
 				outputText(" in need.");
 				if(player.minotaurNeed()) {
 					outputText("  You need a fix so bad!");
-					player.takeLustDamage(5, true);
+					player.takeLustDamage((5*flags[kFLAGS.MINO_SONS_LVL_UP]), true);
 				}
 				else {
 					outputText("  You can understand firsthand just how potent and addictive that fluid is...");
@@ -104,15 +128,15 @@ import classes.display.SpriteDb;
 		private function minotaurGangGropeAttack():void {
 			game.spriteSelect(SpriteDb.s_minotaurSons);
 			outputText("Strong hands come from behind and slide under your equipment to squeeze your " + chestDesc() + ".  The brutish fingers immediately locate and pinch at your " + nippleDescript(0) + "s, the sensitive flesh on your chest lighting up with pain and pleasure.  You arch your back in surprise, utterly stunned by the violation of your body.  After a moment you regain your senses and twist away, but the damage is already done.  You're breathing a bit quicker now");
-			if(player.lust >= 80) outputText(", and your pussy is absolutely soaking wet");
+			if(player.lust >= Math.round(player.maxLust()*0.8)) outputText(", and your pussy is absolutely soaking wet");
 			outputText(".");
-			player.takeLustDamage((5 + player.effectiveSensitivity()/10), true);
+			player.takeLustDamage(((5 + player.effectiveSensitivity()*flags[kFLAGS.MINO_SONS_LVL_UP])/10), true);
 		}
 		//Gang Grope
 		private function minotaurGangGangGropeAttack():void {
 			game.spriteSelect(SpriteDb.s_minotaurSons);
 			outputText("Before you can react, hands reach out from multiple angles and latch onto your body.  One pair squeezes at your " + Appearance.buttDescription(player) + ", the strong grip massaging your cheeks with loving touches.  Another set of hands are sliding along your tummy, reaching down for, but not quite touching, the juicy delta below.  Palms encircle your [chest] and caress them, gently squeezing in spite of the brutish hands holding you.  You wriggle and squirm in the collective grip of the many minotaurs for a few moments, growing more and more turned on by the treatment.  At last, you shake out of their hold and stand free, panting hard from exertion and desire.");
-			player.takeLustDamage((15 + player.effectiveSensitivity()/10), true);
+			player.takeLustDamage(((15 + player.effectiveSensitivity()*flags[kFLAGS.MINO_SONS_LVL_UP])/10), true);
 		}
 		//Waste  a turn
 		private function minotaurGangWaste():void {
@@ -193,6 +217,9 @@ import classes.display.SpriteDb;
 
 		public function MinotaurMob()
 		{
+			var mod0:int = flags[kFLAGS.MINO_SONS_LVL_UP];
+			var mod1:int = (flags[kFLAGS.MINO_SONS_LVL_UP] + flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3);
+			var mod2:int = ((flags[kFLAGS.MINO_SONS_LVL_UP]*6) + flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3);
 			this.a = "the ";
 			if (flags[kFLAGS.ETNA_FOLLOWER] == 3) this.short = "300 jealous minotaurs Ex-es";
 			else if (game.flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] < 20) this.short = "minotaur gang";
@@ -224,30 +251,32 @@ import classes.display.SpriteDb;
 			this.hairColor = randomChoice("black","brown");
 			this.hairLength = 3;
 			this.faceType = Face.COW_MINOTAUR;
-			initStrTouSpeInte(80, 110, 30, 20);
-			initWisLibSensCor(20, 100, 15, 35);
 			this.weaponName = "fists";
 			this.weaponVerb="punches";
-			this.weaponAttack = 36;
 			this.armorName = "thick fur";
-			this.armorDef = 30;
-			this.armorMDef = 5;
 			var bonusHP:Number = 600;
 			var lustVuln:Number = 0.45;
 			if (flags[kFLAGS.ETNA_FOLLOWER] == 3) {
+				initStrTouSpeInte(80, 110, 30, 20);
+				initWisLibSensCor(20, 100, 15, 35);
+				this.weaponAttack = 36;
+				this.armorDef = 30;
+				this.armorMDef = 5;
 				lustVuln -= 0.4;
 				this.bonusLust = 145;
 				this.level = 30;
 				this.createPerk(PerkLib.Enemy300Type, 0, 0, 0, 0);
 			}
 			else {
-				bonusHP += 50 * (game.flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3);
-				if((game.flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3) * 2 > 13) lustVuln = .3;
-				else lustVuln -= (game.flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3) * 0.02;
-				this.bonusLust = 105 * Math.round((game.flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3)/2);
-				var level:int = 16 + Math.round((game.flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3)/2);
-				if(level > 29) level = 29;
-				this.level = level;
+				initStrTouSpeInte(80 + mod0*20, 110 + mod0*15, 30 + mod0*10, 20 + mod0);
+				initWisLibSensCor(20 + mod0, 100 + mod0*50, 15 + mod0*10, 35);
+				this.weaponAttack = 36 + mod0*20;
+				this.armorDef = 30 + mod0*7;
+				this.armorMDef = 5 + mod0*2;
+				bonusHP += 50 * mod2;
+				lustVuln = .3;
+				this.bonusLust = 131 + (mod0*60) + mod2;
+				this.level = 16 + mod2;
 			}
 			this.bonusHP = bonusHP;
 			this.lust = 30;
@@ -259,6 +288,11 @@ import classes.display.SpriteDb;
 			if (flags[kFLAGS.MINOTAUR_SONS_GROW_COUNTDOWN] > 20 || flags[kFLAGS.ETNA_FOLLOWER] == 3) this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
 			else this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINO_SONS_LVL_UP] >= 2) this.createPerk(PerkLib.JobBeastWarrior, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINO_SONS_LVL_UP] >= 4) this.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINO_SONS_LVL_UP] >= 6) this.createPerk(PerkLib.JobBeastlord, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINO_SONS_LVL_UP] >= 8) this.createPerk(PerkLib.EpicStrength, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINO_SONS_LVL_UP] >= 10) this.createPerk(PerkLib.EpicLibido, 0, 0, 0, 0);
 			checkMonster();
 		}
 	}

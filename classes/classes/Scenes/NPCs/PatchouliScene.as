@@ -448,7 +448,7 @@ public class PatchouliScene extends NPCAwareContent {
 		addButton(0, "Girl On Girl", patchouleGirlOnGirl)
 			.disableIf(!player.hasVagina(), "Req. a vagina!");
 		addButton(1, "TakeVaginal", patchouleTakeVaginal)
-			.disableIf(!flags[kFLAGS.PATCHOULI_COCK], "She doesn't have a cock!")
+			.disableIf(flags[kFLAGS.PATCHOULI_COCK] <= 2, "She doesn't have a cock!")
 			.disableIf(!player.hasVagina(), "Req. a vagina!");
 		addButton(2, "Vaginal", patchouleVaginal)
 			.disableIf(!player.hasCock(), "Req. a cock!");

@@ -3579,9 +3579,18 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
             outputText(" coos, giggles and nuzzles into your neck, clearly happy to be here in the real world at last.");
 
             outputText("\n\n\"<i>I'll tend to the little one, you can just rest for a while longer,</i>\" Ember offers, taking the cute little dragon up in [ember eir] arms.  You sigh and nod your head gratefully, then lay back down to get some more rest.\n");
-            if (roll < 40) flags[kFLAGS.EMBER_CHILDREN_MALES]++;
-            else if (roll < 80) flags[kFLAGS.EMBER_CHILDREN_FEMALES]++;
-            else flags[kFLAGS.EMBER_CHILDREN_HERMS]++;
+            if (roll < 40) {
+				if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) flags[kFLAGS.EMBER_CHILDREN_MALES] += 2;
+				else flags[kFLAGS.EMBER_CHILDREN_MALES]++;
+			}
+            else if (roll < 80) {
+				if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) flags[kFLAGS.EMBER_CHILDREN_FEMALES] += 2;
+				else flags[kFLAGS.EMBER_CHILDREN_FEMALES]++;
+			}
+            else {
+				if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) flags[kFLAGS.EMBER_CHILDREN_HERMS] += 2;
+				else flags[kFLAGS.EMBER_CHILDREN_HERMS]++;
+			}
         }
         //PC Lays Egg
         else {
@@ -3634,7 +3643,8 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
             outputText(", anyway.  The dragon ");
             if (flags[kFLAGS.EMBER_ROUNDFACE] > 0) outputText("blushes and then ");
             outputText("scurries away, even as you pull yourself upright and get ready to go about your business.\n");
-            flags[kFLAGS.EMBER_EGGS]++;
+            if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) flags[kFLAGS.EMBER_EGGS] += 2;
+			else flags[kFLAGS.EMBER_EGGS]++;
         }
         player.createStatusEffect(StatusEffects.EmberNapping, 5, 0, 0, 0);
     }
