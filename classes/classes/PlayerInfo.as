@@ -2237,6 +2237,7 @@ public class PlayerInfo extends BaseContent {
 			else addButtonDisabled(10, "Re: Convert", "You need at least 1 super perk point to convert it.");
 			if (player.perkPoints > 2) addButton(11, "Convert", superPerkConvertMenu);
 			else addButtonDisabled(11, "Convert", "You need at least 3 perk points to convert them.");
+			addButton(12, "Previous", superPerkBuyMenu, page + 5);
 			addButton(13, "Next", superPerkBuyMenu, page + 1);
 			addButton(14, "Back", playerMenu);
 		}
@@ -2536,7 +2537,7 @@ public class PlayerInfo extends BaseContent {
 				else addButtonDisabled(3, "M(at)BL", "You do not have enough super perk points to obtain this perk.");
 			}
 			addButton(12, "Previous", superPerkBuyMenu, page - 1);
-			//12 -> page + 1 button
+			addButton(13, "Next", superPerkBuyMenu, page - 5);
 			addButton(14, "Back", playerMenu);
 		}
 	}
@@ -2549,8 +2550,8 @@ public class PlayerInfo extends BaseContent {
 	}
 	private function superPerkReverseConvertMenu():void {
 		clearOutput();
-		outputText("You sacrifice one super perk point and recieve two perk points.");
-		player.perkPoints += 2;
+		outputText("You sacrifice one super perk point and recieve three perk points.");
+		player.perkPoints += 3;
 		player.superPerkPoints--;
 		doNext(superPerkBuyMenu);
 	}

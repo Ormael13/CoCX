@@ -99,6 +99,7 @@ public class Changelog extends BaseContent
 			outputText("-New consumable (by Liadri): Black Lily. Obtained from Rafflesia. Effects: When used by alraune/lilaraune would grant Nightshade perk and Darkness Affinity.\n");
 			outputText("-New consumable (by Liadri): Snow Flower. Obtained from Snow Lily or founded in tundra/glacial rift. Effects: When used by alraune/lilaraune would grant Snow Lily perk and Cold Affinity.\n");
 			outputText("-New consumable (by Liadri): Ember Flower. Obtained from Cinderbloom or founded in ashlands/vulcanic crag. Effects: When used by alraune/lilaraune would grant Cinderbloom perk and Fife Affinity.\n");
+			outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
 			outputText("-New P. Special: Feint Bash. Usable by Troll/Glacial Troll with Troll/Glacial Troll face. Cost 25 fatigue and can stun for 3 turns. Have 5 turns cooldown after use.\n");
 			outputText("-New P. Special: Savage Claws. Usable by Glacial Troll with Glacial Troll arms. Cost 100 fatigue.\n");
 			outputText("-New P. Special: Gallop. Can be only used when having legs ending in hooves (not cloven hooves). Effects: Run at high speed across the battlefield evading melee combat but not ranged attack, does not disable P.Special but prevents the use of the regular melee attack action. While galloping all P.Special abilities are 50% stronger due to momentum. Galloping costs fatigue every round.\n");
@@ -119,7 +120,6 @@ public class Changelog extends BaseContent
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-\n");
-			outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
 			//outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment for odd one mist beings.\n");
 			//outputText("-New TF item (by Shigure): Moth's Dust. Buyable in Moga Hen shop. Using this item will turn PC into moth. Moth bonuses at 10 pts in racial score (scalable): -30% to Tou multi, +150% to Spe multi, +70% to Wis multi, +30% to Lib multi, +70 to sensitivity.\n");//Dropped by Corrupted Troll enemies.
 			//outputText("-New Special names: Solaria (salamander), Drake (hydra). Each of them will start with matching bloodline perk to match their ancestor race.\n");//, Veseshe (elf)
@@ -149,10 +149,10 @@ public class Changelog extends BaseContent
 			outputText("-New flying sword: Moonlight Quartet - combined from two Moonlight Duo sword sets. Cost 320 spirit stones. Base atk is 32. It's classified as Small flying sword (set of 4). Increase chance of bleed effect by 15%.\n");
 			outputText("-Costs of combine or seperate flying swords was adjusted to be more related to their cost.\n");
 			outputText("-Added option to remove cursed items to healer horse in JttE inn. She would charge pc for those services the same as Arian (500 gems).\n");
-			outputText("-Zenji + Arian scene when visting Arian proc chance lowered (15% > 10%) and won't trigger more then once each 4-5 days.\n");
+			outputText("-Zenji + Arian scene when visting Arian proc chance lowered (15% > 10%) and won't trigger more then once each 4-5 days. Grayda related camp events can happen only once a day.\n");
 			outputText("-Ovaries and Testicles internal mutations would require to have either vagina or cock to give benefits.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Human Supremacy (Improved) and (Superior) perks increase human score by 1 more point.\n");
+			outputText("-Re: Convert option at super perk menu would give 50% more perk points (so their exchange from super to normal perks won't be giving penatly - praise the Morgan for complai... argumenting it well enough why it need to change)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -177,7 +177,7 @@ public class Changelog extends BaseContent
 			outputText("Endless Rage draining 10x too much wrath per turn, Berzerker/Lustzerker still req. to be activated after they been activated as part of Asura Form activation, dormant state of wereraces 'blessings' increasing race score and not lowering it, Hinezumi Buring Blood IM accesable by Bunny race, returning from teleportation circle at 4th floor of river dungeon sending PC to ");
 			outputText("3rd floor teleportation circle room, perk allowing to always run away from enemy/ies been ignored in dungeons, unarmed/feral giving mastery gains for small weapons, 2 of 4 SF to Elemental Energy conversion options having wrong check for usable SF, using Fiery Band for calling Kiha to help fight... Kiha, Ceraph after update still not able to win using her super cool lust beam attack, ");
 			outputText("Pilgrim's Bounty perk setting cumQ as if max lust was 100, Raphael rape scene treating all PC cocks as tentalce cocks, Condensed Power and Titanic Strength perks desc/effects been misaligned/incorectly calculated, HB Mech Dragon's Breath Flamer & Scatter Laser upgrade(s) after instaling each weapon, HB Ayo Armor have it stored SF reset on loading save, Vapula not longer will make Joy ");
-			outputText("join any threesome scenes, Patchouli sex scenes will now know when she gained cock she could use, Pure JoJo anal sex sex scene cock parser going postal\n\n");
+			outputText("join any threesome scenes, Patchouli sex scenes will now know when she gained cock she could use, Pure JoJo anal sex sex scene cock parser going postal, trapped satyr sex scenes not giving sex XP or triger any related effects\n\n");
 			/*ostatni punkt changelogu
 			outputText("(Part 2/2) <b>Version 0.9a:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -237,8 +237,10 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -266,6 +268,7 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

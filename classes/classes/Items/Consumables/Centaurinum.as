@@ -232,7 +232,7 @@ public class Centaurinum extends Consumable {
 			}
 		}
 		//Mare-gina
-		if (player.hasVagina() && player.vaginaType() != VaginaClass.EQUINE && !sagittariusBow && changes < changeLimit && rand(3) == 0) {
+		if (player.hasVagina() && player.vaginaType() != VaginaClass.EQUINE && changes < changeLimit && rand(3) == 0) {
 			CoC.instance.transformations.VaginaHorse().applyEffect();
 		}
 		//classic horse-taur version

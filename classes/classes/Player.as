@@ -7158,7 +7158,10 @@ use namespace CoC;
 				if (hasPerk(IMutationsLib.HellhoundFireBallsIM)) {
 					addPerkValue(IMutationsLib.HellhoundFireBallsIM, 2, 1);
 				}
-				if (weaponRange == game.weaponsrange.SAGITTB && !statStore.hasBuff('Sagittarius Focus')) statStore.addBuffObject({"wis.mult":(0.01 * Math.round(lib/2)),"int.mult":(0.01 * Math.round(lib/2))}, "Sagittarius Focus",{text:"The immense relief you felt after plunging your aching horse cock in a wet hole grants you improved focus!"});
+				if (weaponRange == game.weaponsrange.SAGITTB && !statStore.hasBuff('Sagittarius Focus')) {
+					if (statStore.hasBuff('Sagittarius Curse')) buff("Sagittarius Curse").remove();
+					statStore.addBuffObject({"wis.mult":(0.01 * Math.round(lib/2)),"int.mult":(0.01 * Math.round(lib/2))}, "Sagittarius Focus",{text:"The immense relief you felt after plunging your aching horse cock in a wet hole grants you improved focus!"});
+				}
 			}
             if (SceneLib.exgartuan.boobsPresent()) SceneLib.exgartuan.boobsSleep(4 + rand(4)); //consider her touched, lol
 		}
