@@ -151,13 +151,14 @@ public class EngineCore {
             if (CoC.instance.player.HP >= maxOverHP())
                 outputText("Your HP maxes out at " + maxOverHP() + ".\n");
             else
-                outputText("You gain <b><font color=\"#008000\">" + Utils.formatNumber(int(changeNum)) + "</font></b> HP.\n");
+                outputText("You gain <b>[font-heal]" + Utils.formatNumber(int(changeNum)) + "[/font]</b> HP.\n");
         }
         else {
             if (CoC.instance.player.HP <= minHP())
-                outputText("You take <b><font color=\"#800000\">" + Utils.formatNumber(int(changeNum * -1)) + "</font></b> damage, dropping your HP to "+minHP()+".\n");
+                outputText("You take <b>[font-damage]" + Utils.formatNumber(int(changeNum * -1)) + "[/font]</b>" +
+                        " damage, dropping your HP to "+minHP()+".\n");
             else
-                outputText("You take <b><font color=\"#800000\">" + Utils.formatNumber(int(changeNum * -1)) + "</font></b> damage.\n");
+                outputText("You take <b>[font-damage]" + Utils.formatNumber(int(changeNum * -1)) + "[/font]</b> damage.\n");
         }
     }
 
@@ -760,7 +761,7 @@ public class EngineCore {
             if (CoC.instance.achievements[achievement] <= 0) {
                 CoC.instance.achievements[achievement] = 1;
                 if (nl && display) outputText("\n");
-                if (display) outputText("<b><font color=\"#000080\">Achievement unlocked: " + title + "</font></b>");
+                if (display) outputText("<b>[font-miss]Achievement unlocked: " + title + "[/font]</b>");
                 if (nl2 && display) outputText("\n");
                 CoC.instance.saves.savePermObject(false); //Only save if the achievement hasn't been previously awarded.
             }
