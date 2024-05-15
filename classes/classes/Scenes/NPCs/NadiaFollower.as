@@ -962,4 +962,4 @@ private function BelisaNadiaTalk():void {
 	endEncounter();
 }
 	}
-}
+}
