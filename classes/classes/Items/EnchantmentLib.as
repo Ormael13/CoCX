@@ -5,7 +5,6 @@ import classes.Items.Dynamic.Effects.SimpleEnchantmentType;
 import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 import classes.Items.Dynamic.Effects.SimpleRaceEnchantmentType;
 import classes.Items.Dynamic.Effects.StatEnchantmentType;
-import classes.Player;
 import classes.Races;
 
 public class EnchantmentLib extends ItemConstants {
@@ -31,8 +30,7 @@ public class EnchantmentLib extends ItemConstants {
 	 * 	valuePerPower: 100, // optional, default 0
 	 * 	valueX: 1.2, // optional, default 1
 	 * 	valueXPerPower: 0.1, // optional, default 0
-	 * 	onEquip: function(player:Player, enchantment:Enchantment, item:ItemType):void { ... }, // optional, default null
-	 * 	onUnequip: function(player:Player, enchantment:Enchantment, item:ItemType):void { ... }, // optional, default null
+	 * 	onAdd: function(item:ItemType, power:Number, enchantment:Enchantment):void { ... }, // optional, default null
 	 * });
 	 *
 	 * extra params for mkRacials:
@@ -165,9 +163,6 @@ public class EnchantmentLib extends ItemConstants {
 		valuePerPower: 50,
 		onAdd: function(item:ItemType, power:Number):void {
 			item.withEffect(IELib.MinFem, power);
-		},
-		onEquip: function (player:Player):void {
-			player.fixFemininity();
 		}
 	});
 	public static const MaxFem:EnchantmentType            = mk(17, "MaxFem", {
@@ -185,9 +180,6 @@ public class EnchantmentLib extends ItemConstants {
 		valuePerPower: 50,
 		onAdd: function(item:ItemType, power:Number):void {
 			item.withEffect(IELib.MaxFem, -power);
-		},
-		onEquip: function (player:Player):void {
-			player.fixFemininity();
 		}
 	});
 	public static const Androgyny:EnchantmentType         = mk(18, "Androgyny", {
@@ -206,9 +198,6 @@ public class EnchantmentLib extends ItemConstants {
 		onAdd: function(item:ItemType, power:Number):void {
 			item.withEffect(IELib.MaxFem, -power);
 			item.withEffect(IELib.MinFem, power);
-		},
-		onEquip: function (player:Player):void {
-			player.fixFemininity();
 		}
 	});
 	public static const BonusXp:EnchantmentType    = mk(19, "BonusXp", {
@@ -457,8 +446,6 @@ public class EnchantmentLib extends ItemConstants {
 				valueOr(params.valuePerPower, 0),
 				valueOr(params.valueX, 1),
 				valueOr(params.valueXPerPower, 0),
-				valueOr(params.onEquip, null),
-				valueOr(params.onUnEquip, null),
 				valueOr(params.onAdd, null)
 		);
 		if ('chance' in params) enchantmentType.setSpawnChance(params.chance);
@@ -485,8 +472,7 @@ public class EnchantmentLib extends ItemConstants {
 				valueOr(params.valuePerPower, 0),
 				valueOr(params.valueX, 1),
 				valueOr(params.valueXPerPower, 0),
-				valueOr(params.onEquip, null),
-				valueOr(params.onUnEquip, null)
+				valueOr(params.onAdd, null)
 		);
 		if ('chance' in params) enchantmentType.setSpawnChance(params.chance);
 		if ('categories' in params) enchantmentType.setItemCategories(params.categories.slice());

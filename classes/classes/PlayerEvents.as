@@ -18,6 +18,7 @@ import classes.GlobalFlags.*;
 import classes.IMutations.IMutationsLib;
 import classes.Items.*;
 import classes.Items.Dynamic.Effects.RaceTfEnchantmentType;
+import classes.Items.Effects.RaceTfItemEffect;
 import classes.Races.UnicornRace;
 import classes.Scenes.Camp.CampScenes;
 import classes.Scenes.Camp.Garden;
@@ -1439,7 +1440,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					case ElementalRace.ELEMENT_IGNIS: 	dao = Soulforce.daos[0];
 														break;
 					case ElementalRace.ELEMENT_UNDINE: 	dao = Soulforce.daos[7];
-														break;	
+														break;
 				}
 				if (dao && player.statusEffectv2(dao[1]) < SceneLib.soulforce.highestLayerOfDaoComprehension()) {
 					SceneLib.soulforce.daoContemplationsEffect(dao[1], dao[0], false, true);
@@ -1547,7 +1548,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			// RaceTf itemeffect
 			var eff:StatusEffectClass = player.statusEffectByType(StatusEffects.ItemEffectRaceTf);
 			if (eff) {
-				if (RaceTfEnchantmentType.advance(eff)) {
+				if (RaceTfItemEffect.advance(player, eff)) {
 					needNext = true;
 				}
 			}

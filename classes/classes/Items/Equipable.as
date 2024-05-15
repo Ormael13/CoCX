@@ -57,7 +57,7 @@ public class Equipable extends Useable {
 	 */
 	protected var _playerPerks:Array;
 	
-	public function get name():String {
+	public override function get name():String {
 		return _name;
 	}
 	
@@ -242,6 +242,9 @@ public class Equipable extends Useable {
 	 * @param doOutput
 	 */
 	public function afterEquip(doOutput:Boolean):void {
+		for each (var ie:ItemEffect in effectsFlagged(IEF_ONEQUIP)) {
+			ie.onEquip(game.player, this);
+		}
 		if (_buffs) {
 			// don't write into savefile
 			if (_buffsStack) {
@@ -250,7 +253,6 @@ public class Equipable extends Useable {
 				game.player.buff(tagForBuffs).setStats(_buffs).withText(name).withOptions({save:false});
 			}
 		}
-		
 		if (!game.isLoadingSave) {
 			if (_playerPerks) {
 				for each (var perk:Array in _playerPerks) {
@@ -282,6 +284,9 @@ public class Equipable extends Useable {
 	 * @param doOutput
 	 */
 	public function afterUnequip(doOutput:Boolean):void {
+		for each (var ie:ItemEffect in effectsFlagged(IEF_ONEQUIP)) {
+			ie.onEquip(game.player, this);
+		}
 		if (_buffs) {
 			if (game.player.countSameEquippedItems(this) == 0 || !_buffsStack) {
 				game.player.buff(tagForBuffs).remove();

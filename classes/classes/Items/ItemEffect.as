@@ -1,5 +1,6 @@
 package classes.Items {
 import classes.ItemType;
+import classes.Player;
 
 public class ItemEffect {
 	public var type:ItemEffectType;
@@ -42,6 +43,12 @@ public class ItemEffect {
 	 */
 	public function description(item:ItemType):String {
 		return type.description(this, item);
+	}
+	public function onEquip(player:Player, item:Equipable):void {
+		type.onEquip(player, item, this)
+	}
+	public function onUnequip(player:Player, item:Equipable):void {
+		type.onUnequip(player, item, this)
 	}
 }
 }

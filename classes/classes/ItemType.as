@@ -67,14 +67,32 @@ public class ItemType extends ItemConstants
 			"RussOil": dynamicItemId("SkinOil", {color: "russet"}),
 			"Tan Oil": dynamicItemId("SkinOil", {color: "tan"}),
 			// Old weapons
+			"Claymor":  dynamicItemId("DynamicWeapon",
+					{t: "claymore", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []}),
 			"Dagger ": dynamicItemId("DynamicWeapon",
 					{t: "dagger", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []}),
+			"Halberd": dynamicItemId("DynamicWeapon",
+					{t: "halberd", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []}),
+			"Kama": dynamicItemId("DynamicWeapon",
+					{t: "kama", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []}),
 			"Katana ": dynamicItemId("DynamicWeapon",
 					{t: "katana", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []}),
 			"Mace   ": dynamicItemId("DynamicWeapon",
 					{t: "mace", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []}),
+			"Nodachi": dynamicItemId("DynamicWeapon",
+					{t: "nodachi", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []}),
+			"Ribbon ": dynamicItemId("DynamicWeapon",
+					{t: "ribbon", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []}),
+			"Scimitr": dynamicItemId("DynamicWeapon",
+					{t: "scimitar", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []}),
 			"Uchigatana ": dynamicItemId("DynamicWeapon",
-					{t: "uchigatana", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []})
+					{t: "uchigatana", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []}),
+			"Warhamr": dynamicItemId("DynamicWeapon",
+					{t: "warhammer", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []}),
+			"Whip   ": dynamicItemId("DynamicWeapon",
+					{t: "whip", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []}),
+			"Zwnder ": dynamicItemId("DynamicWeapon",
+					{t: "zweihander", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []})
 		};
 
 		public static function dynamicItemId(templateId:String, parameters:Object):String {
@@ -214,6 +232,9 @@ public class ItemType extends ItemConstants
 		}
 		public function get longNameBase():String {
 			return longName.replace(/^(the|a|an)\s+/i,'');
+		}
+		public function get name():String {
+			return longName;
 		}
 
 		/**

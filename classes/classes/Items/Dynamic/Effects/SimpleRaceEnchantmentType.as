@@ -67,10 +67,8 @@ public class SimpleRaceEnchantmentType extends SimpleEnchantmentType {
 			valueAddPerPower:int,
 			valueMulBase:Number,
 			valueMulPerPower:Number,
-			onEquipFn:Function = null,
-			onUnequipFn:Function = null,
 			onAddFn:Function = null) {
-		super(id, name,  curse, prefix, suffix, shortSuffix, descPattern, hasDescription, rarity, minLevel, minPower, maxPower, valueAddBase, valueAddPerPower, valueMulBase, valueMulPerPower, onEquipFn, onUnequipFn, onAddFn);
+		super(id, name,  curse, prefix, suffix, shortSuffix, descPattern, hasDescription, rarity, minLevel, minPower, maxPower, valueAddBase, valueAddPerPower, valueMulBase, valueMulPerPower, onAddFn);
 		this.allowedRaces     = allowedRaces;
 	}
 }

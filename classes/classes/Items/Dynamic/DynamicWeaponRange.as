@@ -75,6 +75,8 @@ public class DynamicWeaponRange extends WeaponRange implements IDynamicItem {
 		var perk:Array          = (subtype.perk || []).slice();
 		var tags:Array          = subtype.tags || [];
 		var attack:Number       = subtype.attack;
+		var itemEffects:Array   = subtype.effects || [];
+		var qitemEffects:Array  = subtype.qeffects || [];
 		if (parsedParams.error) {
 			trace("[ERROR] Failed to parse " + id + " with error " + parsedParams.error);
 			name      = "ERROR " + name;
@@ -97,7 +99,7 @@ public class DynamicWeaponRange extends WeaponRange implements IDynamicItem {
 				perk.join(", ")
 		);
 
-		DynamicItems.postConstruct(this, tags, buffs);
+		DynamicItems.postConstruct(this, tags, buffs, itemEffects, qitemEffects, quality);
 	}
 
 	override public function effectDescriptionParts():Array {
