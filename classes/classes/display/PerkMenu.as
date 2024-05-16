@@ -1406,7 +1406,7 @@ public class PerkMenu extends BaseContent {
 			if (cond.fn(player)) {
 				if (onlyMissing) continue;
 				color=('default');
-			} else color=darkTheme()?'penatly-d':'penalty-l';
+			} else color=('penalty');
 			if (cond.text is String){
 				reqs.push("[font-"+color+"]"+cond.text+"[/font]");
 			}
@@ -1442,8 +1442,8 @@ public class PerkMenu extends BaseContent {
 
 			var color:String;
 			if (pclass) color=("default"); // has perk
-			else if (ptype.available(player)) color=darkTheme()?'perkcan-d':'perkcan-l'; // can take on next lvl
-			else color=darkTheme()?'perkcant-d':'perkcant-l'; // requirements not met
+			else if (ptype.available(player)) color=('perkcan'); // can take on next lvl
+			else color=('perkcant'); // requirements not met
 
 			outputText("[font-"+color +"]<b>"+ptype.name()+"</b>[/font]: ");
 			outputText(pclass?ptype.desc(pclass):ptype.longDesc);
