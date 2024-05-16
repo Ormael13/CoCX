@@ -1405,13 +1405,13 @@ public class PerkMenu extends BaseContent {
 		for each (var cond:Object in ptype.requirements) {
 			if (cond.fn(player)) {
 				if (onlyMissing) continue;
-				color=('default');
-			} else color=darkTheme()?'penatly-d':'penalty-l';
+				color=(darkTheme()?'#ffffff':'#000000');
+			} else color=darkTheme()?'#ff4444':'#aa2222';
 			if (cond.text is String){
-				reqs.push("[font-"+color+"]"+cond.text+"[/font]");
+				reqs.push("<font color='"+color+"'>"+cond.text+"</font>");
 			}
 			else {
-				reqs.push("[font-"+color+"]"+cond.text(player)+"[/font]");
+				reqs.push("<font color='"+color+"'>"+cond.text(player)+"</font>");
 			}
 		}
 		if (reqs.length == 0) return "";
@@ -1441,11 +1441,11 @@ public class PerkMenu extends BaseContent {
 			var pclass:PerkClass = player.getPerk(ptype)
 
 			var color:String;
-			if (pclass) color=("default"); // has perk
-			else if (ptype.available(player)) color=darkTheme()?'perkcan-d':'perkcan-l'; // can take on next lvl
-			else color=darkTheme()?'perkcant-d':'perkcant-l'; // requirements not met
+			if (pclass) color=(darkTheme()?'#ffffff':'#000000'); // has perk
+			else if (ptype.available(player)) color=darkTheme()?'#44cc44':'#228822'; // can take on next lvl
+			else color=darkTheme()?'#ffcc44':'#aa8822'; // requirements not met
 
-			outputText("[font-"+color +"]<b>"+ptype.name()+"</b>[/font]: ");
+			outputText("<font color='" +color +"'><b>"+ptype.name()+"</b></font>: ");
 			outputText(pclass?ptype.desc(pclass):ptype.longDesc);
 			if (!pclass && ptype.requirements.length>0) {
 				outputText("<ul><li>"+formatPerkRequirements(ptype)+"</li></ul>");

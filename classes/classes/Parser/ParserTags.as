@@ -86,12 +86,6 @@ public class ParserTags {
         "font-poison"           : function ():* { return '<font color="'+"#00C80e"+'">'; },
         "font-true"             : function ():* { return '<font color="'+"#404040"+'">'; },
         "font-lust"             : function ():* { return '<font color="'+"#ff00ff"+'">'; },
-        "font-penalty-d"        : function ():* { return '<font color="'+"#ff4444"+'">'; },  //darkmode choice
-        "font-penalty-l"        : function ():* { return '<font color="'+"#aa2222"+'">'; },  //lightmode choice
-        "font-perkcan-l"        : function ():* { return '<font color="'+"#228822"+'">'; },
-        "font-perkcan-d"        : function ():* { return '<font color="'+"#44cc44"+'">'; },
-        "font-perkcant-l"       : function ():* { return '<font color="'+"#aa8822"+'">'; },
-        "font-perkcant-d"       : function ():* { return '<font color="'+"#ffcc44"+'">'; },
         "font-default"          : function ():* { return '<font>'; },
         "/font"                 : function ():* { return '</font>'; },
         "flowercolor"           : function ():* { return CoC.instance.player.featherColor; },
