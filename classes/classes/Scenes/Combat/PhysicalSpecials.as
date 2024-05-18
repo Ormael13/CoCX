@@ -1247,12 +1247,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.weapon == weapons.ANGSTD1 || player.weapon == weapons.ANGSTD) SAMulti += 2;
 		if (player.hasPerk(PerkLib.DeadlySneaker)) SAMulti += 2;
 		if (player.hasPerk(PerkLib.Slayer)) SAMulti += 3;
+		if (combat.flyingSwordForRangeSneakAttack()) SAMulti += 1;
 		if (monster.hasStatusEffect(StatusEffects.InvisibleOrStealth)) SAMulti *= 2;
 		damage += combat.meleeDamageNoLagSingle();
 		if (damage < 10) damage = 10;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		//if (player.hasStatusEffect(StatusEffects.Gallop)) damage *= 1.5;
 		if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 1) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.EquineMuscleIM)));
+        if (player.weaponFlyingSwordsName != "nothing") damage = combat.flyingSwordAttackModifier(damage);
 		damage *= SAMulti;
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1276,13 +1278,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage *= 2;
 		}
 		if (crit) {
-			outputText("<b>Critical! </b>");
+			outputText("<b>Critical!</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
 		}
 		if (!crit && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
 			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 70) player.addStatusValue(StatusEffects.Rage, 1, 10);
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
+		if (player.weaponFlyingSwordsName != "nothing") outputText(" At the same time " + player.weaponFlyingSwordsName+" impales your target" + (monster.plural?"s":"") + ".");
 		if (flags[kFLAGS.ENVENOMED_MELEE_ATTACK] == 1 && (player.weapon.isSmall() || player.isFeralCombat())
 		){
 			if (player.tailVenom >= player.VenomWebCost()) {
@@ -1302,7 +1305,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 						else if (player.level < 30) damage1B += 70 + (player.level - 20) * 1;
 						else damage1B += 80;
 						damage1B *= 0.2;
-						damage1B *= damage1Bc
+						damage1B *= damage1Bc;
 						if (player.armor == armors.ELFDRES && player.isElf()) damage1B *= 2;
 						if (player.armor == armors.FMDRESS && player.isWoodElf()) damage1B *= 2;
 						monster.teased(monster.lustVuln * damage1B);
@@ -1485,6 +1488,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//if (player.weaponRange == weaponsrange.Sakuno M2) SAMulti += 8;
 		//if (player.hasPerk(PerkLib.DeadlySneaker)) SAMulti += 2;
 		if (combat.calculateRangeDamageMultiplier() > 1) SAMulti += (combat.calculateRangeDamageMultiplier() - 1);
+		if (combat.flyingSwordForRangeSneakAttack()) SAMulti += 1;
 		if (monster.hasStatusEffect(StatusEffects.InvisibleOrStealth)) SAMulti *= 2;
 		if (player.weaponRangePerk == "Bow") damage += combat.rangeDamageNoLagSingle(0);
 		else damage += combat.firearmsDamageNoLagSingle();
@@ -1512,6 +1516,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		//if (player.hasStatusEffect(StatusEffects.Gallop)) damage *= 1.5;
 		if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 1) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.EquineMuscleIM)));
+        if (combat.flyingSwordForRangeSneakAttack()) damage = combat.flyingSwordAttackModifier(damage);
 		damage *= SAMulti;
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1532,7 +1537,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var ignoreDR:Boolean = (player.hasPerk(PerkLib.DeadlyAim) && player.weaponRangePerk == "Bow");
 		doDamage(damage, true, true, ignoreDR);
 		outputText(" ");
-		if (crit) outputText("<b>Critical! </b>");
+		if (crit) outputText("<b>Critical!</b>");
+		if (combat.flyingSwordForRangeSneakAttack()) outputText(" At the same time " + player.weaponFlyingSwordsName+" impales your target" + (monster.plural?"s":"") + ".");
 		outputText("\n\n");
 		combat.checkAchievementDamage(damage);
 		combat.WrathGenerationPerHit2(5);

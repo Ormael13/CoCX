@@ -16387,6 +16387,11 @@ public function flyingWithSoulforceCost():Number {
     return fwsc;
 }
 
+public function flyingSwordForRangeSneakAttack():Boolean {
+	if (player.weaponFlyingSwords == weaponsflyingswords.MOONLGT || player.weaponFlyingSwords == weaponsflyingswords.MOONLGT2 || player.weaponFlyingSwords == weaponsflyingswords.MOONLGT3) return true;
+	else return false;
+}
+
 public function rangeMasteryEXPgained(crit:Boolean = false):Number {
     var rangeMasteryEXPgains:Number = 1;
     if (player.hasPerk(PerkLib.RangeWeaponsMastery)) rangeMasteryEXPgains += 2;
@@ -16739,4 +16744,4 @@ private function touSpeStrScale(stat:int):Number {
         return player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater) || explorer.areaTags.water;
     }
 }
-}
+}
