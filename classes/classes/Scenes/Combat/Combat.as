@@ -7291,6 +7291,9 @@ public class Combat extends BaseContent {
         if (player.weapon == weapons.SCECOMM) elementalamplification += 0.5;
 		if (player.weaponRange == weaponsrange.E_TOME_) elementalamplification += 0.5;
         if (player.shield == shields.Y_U_PAN) elementalamplification += 0.25;
+		if (player.hasPerk(PerkLib.CommandingTone)) elementalamplification += 0.1;
+		if (player.hasPerk(PerkLib.DiaphragmControl)) elementalamplification += 0.1;
+		if (player.hasPerk(PerkLib.VocalTactician)) elementalamplification += 0.15;
         if (flags[kFLAGS.WILL_O_THE_WISP] == 2) {
             elementalamplification += 0.1;
             if (player.hasPerk(PerkLib.WispLieutenant)) elementalamplification += 0.2;
@@ -15983,6 +15986,9 @@ public function sendSkeletonToFight():void {
     if (player.hasPerk(PerkLib.BoneSoul)) dmgamp += 0.1;
     if (player.hasPerk(PerkLib.SkeletonLord)) dmgamp += 0.1;
     if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
+	if (player.hasPerk(PerkLib.CommandingTone)) dmgamp += 0.1;
+	if (player.hasPerk(PerkLib.DiaphragmControl)) dmgamp += 0.1;
+	if (player.hasPerk(PerkLib.VocalTactician)) dmgamp += 0.15;
     if (flags[kFLAGS.WILL_O_THE_WISP] == 2) {
         dmgamp += 0.1;
         if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;
@@ -16042,6 +16048,9 @@ public function skeletonSmash():void {
     if (player.hasPerk(PerkLib.BoneSoul)) dmgamp += 0.1;
     if (player.hasPerk(PerkLib.SkeletonLord)) dmgamp += 0.1;
     if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
+	if (player.hasPerk(PerkLib.CommandingTone)) dmgamp += 0.1;
+	if (player.hasPerk(PerkLib.DiaphragmControl)) dmgamp += 0.1;
+	if (player.hasPerk(PerkLib.VocalTactician)) dmgamp += 0.15;
     if (flags[kFLAGS.WILL_O_THE_WISP] == 2) {
         dmgamp += 0.1;
         if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;

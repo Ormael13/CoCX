@@ -842,6 +842,7 @@ public class CombatUI extends BaseCombatContent {
 		if (actFunction == null) CoC_Settings.error("Illegal companion " + num + ": " + companionName);
 		actFunction();
 		if (player.hasPerk(PerkLib.MotivationSu)) actFunction();
+		if (player.hasPerk(PerkLib.MotivationSu) && player.hasPerk(PerkLib.VocalTactician)) actFunction();
 		if (clearAndNext) {
 			menu();
 			addButton(0, "Next", combatMenu, false);

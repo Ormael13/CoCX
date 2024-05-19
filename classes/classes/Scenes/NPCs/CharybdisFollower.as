@@ -315,7 +315,7 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 		menu();
 		addButton(1, "JamSesh", charyJamOut);
 		addButtonIfTrue(2, "Instruments", charyInstruments, "Req. 30%+ affection", CharyAffectionMeter >= 30);
-		//addButtonIfTrue(3, "Vocals", CharyVocalTraining, "Req. 50%+ affection", CharyAffectionMeter >= 50);
+		addButtonIfTrue(3, "Vocals", CharyVocalTraining, "Req. 50%+ affection (and have less then 15 trainings)", CharyAffectionMeter >= 50 && CharyVocalTrained < 15);
 		//if (CharyAffectionMeter >= 60) addButton(4, "Sail", CharySail);
 		addButton(14, "Back", charyBeachMeetings2);
 	}
@@ -342,7 +342,7 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 		menu();
 		addButton(1, "Drums", charyDrums).hint("Percussion Training (train str+)");
 		addButton(2, "Guitar", charyGuitar).hint("String Training (train spe+)");
-		addButton(3, "Trumpet", charyTrumpet).hint(" (train tou+)");
+		addButton(3, "Trumpet", charyTrumpet).hint("Trumpet Training (train tou+)");
 	}
 	public function charyDrums():void {
 		outputText("<i>\"Oh, the drums? Good choice. It’s a great workout for your arms…But if you really know what you’re doing, it’s your wrists that gain the most.\"</i>\n\n");
@@ -370,8 +370,23 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 		clearOutput();
 		outputText("Charybdis smiles as you raise the subject. <i>\"The voice is a wonderful thing, so vibrant, and changing. Every voice is unique, and…\"</i> He trails off, a tinge of red coming to his cheeks. <i>\"Sorry, you don’t want me to blather on, I’d bore ya.\"</i> You fire back that no, you’d be interested in learning. Hearing this, his smile comes back, and he hugs you with three tendrils, quickly backing off.\n\n");
 		outputText("<i>\"You mean that?\"</i> He brings one hand to his chin. <i>\"Not sure how much use it’d be for you, champ.\"</i> He puffs out his chest, pride brimming in his voice. <i>\"But if you want, I can teach you how to use your voice to the fullest.\"</i>\n\n");
-		outputText("You spend a few minutes warming your voice up. Chary seems to insist on doing these before every session. You get into a few simple tunes after, and despite yourself, you find the session rather calming. An hour passes, and you can feel your lungs burning slightly, not unlike after a light run.\n\n"); 
-		outputText("You tell Charybdis that you need to leave for now, and he nods simply. <i>\"Then I'll see you again soon, hopefully. Keep a tune in your heart, [name]!\"</i>\n\n");
+		outputText("You start with some breathing exercises, "+((player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3)?"not unlike the ones you’ve done with Jojo, ":"")+"before starting to hum different notes, up and down. Charybdis notes your range, and flips through a folder, filled with different pieces of music.\n\n"); 
+		outputText("To your surprise, the piece he picks out fits your voice perfectly, and you don’t need to strain to hit any of the notes. After a few plays through, you find yourself singing without needing the music, and Charybdis grins, nodding in approval.\n\n"); 
+		outputText("After an hour, you gently place the sheet of music back into Charybdis’s hands before excusing yourself.\n\n"); 
+		outputText("<i>\"Of course,\"</i> he says simply. <i>\"Come back soon. I’d love to hear your voice more often.\"</i>\n\n");
+		if (CharyVocalTrained == 4) {
+			outputText("<b>Gained 'Commanding Tone' Perk: Minion and Follower Damage increased by 10%</b>\n\n");
+			player.createPerk(PerkLib.CommandingTone,0,0,0,0);
+		}
+		if (CharyVocalTrained == 9) {
+			outputText("<b>Gained 'Diaphragm control' perk: Minion and Follower Damage increased by an additional 10%, and followers will act more often</b>\n\n");
+			player.createPerk(PerkLib.DiaphragmControl,0,0,0,0);
+		}
+		if (CharyVocalTrained == 14) {
+			outputText("<b>Gained 'Vocal Tactician' perk: Minion and Follower Damage increased by another 15%. Followers will act even more frequently</b>\n\n");
+			player.createPerk(PerkLib.VocalTactician,0,0,0,0);
+		}
+		if (CharyVocalTrained < 15) CharyVocalTrained += 1;
 		endEncounter(60);
 	}/*
 public function CharySail():void {

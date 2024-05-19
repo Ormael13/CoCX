@@ -33,14 +33,35 @@ import classes.StatusEffects.VampireThirstEffect;
 			}
 			if (player.hasPerk(PerkLib.MotivationSu)) IEoA *= 1.5;
 			IEoA += 1;
+			if (player.hasPerk(PerkLib.CommandingTone)) IEoA += 0.1;
+			if (player.hasPerk(PerkLib.DiaphragmControl)) IEoA += 0.1;
+			if (player.hasPerk(PerkLib.VocalTactician)) IEoA += 0.15;
+			if (pointsToHouseMareth() >= 3) IEoA *= 1.2;
 			//ITEMS EFFEC TS? MISC ACC / RINGS / NECK / HEAD ACC, WEAPON?
 			return IEoA;
 		}
-
+		
+		private function pointsToHouseMareth():Number {
+			var points:Number = 0;
+			if (player.hasPerk(PerkLib.Motivation)) points += 1;
+			if (player.hasPerk(PerkLib.MotivationEx)) points += 2;
+			if (player.hasPerk(PerkLib.DiaphragmControl)) points += 1;
+			if (player.hasPerk(PerkLib.VocalTactician)) points += 2;
+			return points;
+		}
+		private function downTo01Idle():Boolean {
+			if (pointsToHouseMareth() >= 2) return true;
+			else return false;
+		}
+		private function downTo20Idle():Boolean {
+			if (pointsToHouseMareth() >= 1) return true;
+			else return false;
+		}
+		
 		public function neisaCombatActions():void {
 			if (player.statusEffectv4(StatusEffects.CombatFollowerNeisa) > 0) {
 				var choice1:Number = rand(20);
-				if (player.hasPerk(PerkLib.MotivationEx)) {
+				if (downTo01Idle()) {
 					if (rand(100) == 0) neisaCombatActions0();
 					else {
 						if (choice1 < 5) neisaCombatActions1();
@@ -49,7 +70,7 @@ import classes.StatusEffects.VampireThirstEffect;
 						if (choice1 >= 15) neisaCombatActions4();
 					}
 				}
-				else if (player.hasPerk(PerkLib.Motivation)) {
+				else if (downTo20Idle()) {
 					if (choice1 < 4) neisaCombatActions0();
 					if (choice1 >= 4 && choice1 < 11) neisaCombatActions1();
 					if (choice1 >= 11 && choice1 < 16) neisaCombatActions2();
@@ -172,7 +193,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public function etnaCombatActions():void {
 			if (player.statusEffectv4(StatusEffects.CombatFollowerEtna) > 0) {
 				var choice3:Number = rand(20);
-				if (player.hasPerk(PerkLib.MotivationEx)) {
+				if (downTo01Idle()) {
 					if (rand(100) == 0) etnaCombatActions0();
 					else {
 						if (choice3 < 7) etnaCombatActions1();
@@ -180,7 +201,7 @@ import classes.StatusEffects.VampireThirstEffect;
 						if (choice3 >= 15) etnaCombatActions3();
 					}
 				}
-				else if (player.hasPerk(PerkLib.Motivation)) {
+				else if (downTo20Idle()) {
 					if (choice3 < 4) etnaCombatActions0();
 					if (choice3 >= 4 && choice3 < 10) etnaCombatActions1();
 					if (choice3 >= 10 && choice3 < 16) etnaCombatActions2();
@@ -232,7 +253,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public function auroraCombatActions():void {
 			if (player.statusEffectv4(StatusEffects.CombatFollowerAurora) > 0) {
 				var choice4:Number = rand(20);
-				if (player.hasPerk(PerkLib.MotivationEx)) {
+				if (downTo01Idle()) {
 					if (rand(100) == 0) auroraCombatActions0();
 					else {
 						if (choice4 < 5) auroraCombatActions1();
@@ -241,7 +262,7 @@ import classes.StatusEffects.VampireThirstEffect;
 						if (choice4 >= 15) auroraCombatActions4();
 					}
 				}
-				else if (player.hasPerk(PerkLib.Motivation)) {
+				else if (downTo20Idle()) {
 					if (choice4 < 4) auroraCombatActions0();
 					if (choice4 >= 4 && choice4 < 11) auroraCombatActions1();
 					if (choice4 >= 11 && choice4 < 15) auroraCombatActions2();
@@ -396,7 +417,7 @@ import classes.StatusEffects.VampireThirstEffect;
 			clearOutput();
 			if (player.statusEffectv4(StatusEffects.CombatFollowerAyane) > 0) {
 				var choice5:Number = rand(20);
-				if (player.hasPerk(PerkLib.MotivationEx)) {
+				if (downTo01Idle()) {
 					if (rand(100) == 0) ayaneCombatActions0();
 					else {
 						if (choice5 < 7) {
@@ -416,7 +437,7 @@ import classes.StatusEffects.VampireThirstEffect;
 						if (choice5 >= 15) ayaneCombatActions3();
 					}
 				}
-				else if (player.hasPerk(PerkLib.Motivation)) {
+				else if (downTo20Idle()) {
 					if (choice5 < 4) ayaneCombatActions0();
 					if (choice5 >= 4 && choice5 < 10) {
 						if (player.HP < player.maxOverHP()) ayaneCombatActions1();
@@ -570,7 +591,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public function alvinaCombatActions():void {
 			if (player.statusEffectv4(StatusEffects.CombatFollowerAlvina) > 0) {
 				var choice8:Number = rand(20);
-				if (player.hasPerk(PerkLib.MotivationEx)) {
+				if (downTo01Idle()) {
 					if (rand(100) == 0) alvinaCombatActions0();
 					else {
 						if (choice8 < 9) alvinaCombatActions1();
@@ -580,7 +601,7 @@ import classes.StatusEffects.VampireThirstEffect;
 						if (choice8 == 19) alvinaCombatActions5();
 					}
 				}
-				else if (player.hasPerk(PerkLib.Motivation)) {
+				else if (downTo20Idle()) {
 					if (choice8 < 4) alvinaCombatActions0();
 					if (choice8 >= 4 && choice8 < 11) alvinaCombatActions1();
 					if (choice8 >= 11 && choice8 < 14) alvinaCombatActions2();
@@ -680,7 +701,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public function mitziCombatActions():void {
 			if (player.statusEffectv4(StatusEffects.CombatFollowerMitzi) > 0) {
 				var choice9:Number = rand(20);
-				if (player.hasPerk(PerkLib.MotivationEx)) {
+				if (downTo01Idle()) {
 					if (rand(100) == 0) mitziCombatActions0();
 					else {
 						if (choice9 < 9) mitziCombatActions1();
@@ -689,7 +710,7 @@ import classes.StatusEffects.VampireThirstEffect;
 						if (choice9 >= 17) mitziCombatActions4();
 					}
 				}
-				else if (player.hasPerk(PerkLib.Motivation)) {
+				else if (downTo20Idle()) {
 					if (choice9 < 4) mitziCombatActions0();
 					if (choice9 >= 4 && choice9 < 12) mitziCombatActions1();
 					if (choice9 >= 12 && choice9 < 15) mitziCombatActions2();
@@ -752,7 +773,7 @@ import classes.StatusEffects.VampireThirstEffect;
 				if (player.HP < player.maxHP() * .5) excelliaCombatActions5();
 				else {
 					var choice10:Number = rand(20);
-					if (player.hasPerk(PerkLib.MotivationEx)) {
+					if (downTo01Idle()) {
 						if (rand(100) == 0) excelliaCombatActions0();
 						else {
 							if (choice10 < 9) excelliaCombatActions1();
@@ -761,7 +782,7 @@ import classes.StatusEffects.VampireThirstEffect;
 							if (choice10 >= 17) excelliaCombatActions4();
 						}
 					}
-					else if (player.hasPerk(PerkLib.Motivation)) {
+					else if (downTo20Idle()) {
 						if (choice10 < 4) excelliaCombatActions0();
 						if (choice10 >= 4 && choice10 < 12) excelliaCombatActions1();
 						if (choice10 >= 12 && choice10 < 15) excelliaCombatActions2();
@@ -835,7 +856,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public function amilyCombatActions():void {
 			if (player.statusEffectv4(StatusEffects.CombatFollowerAmily) > 0) {
 				var choice11:Number = rand(20);
-				if (player.hasPerk(PerkLib.MotivationEx)) {
+				if (downTo01Idle()) {
 					if (rand(100) == 0) amilyCombatActions0();
 					else {
 						if (choice11 < 9) amilyCombatActions1();
@@ -844,7 +865,7 @@ import classes.StatusEffects.VampireThirstEffect;
 						if (choice11 >= 17) amilyCombatActions4();
 					}
 				}
-				else if (player.hasPerk(PerkLib.Motivation)) {
+				else if (downTo20Idle()) {
 					if (choice11 < 4) amilyCombatActions0();
 					if (choice11 >= 4 && choice11 < 12) amilyCombatActions1();
 					if (choice11 >= 12 && choice11 < 15) amilyCombatActions2();
@@ -933,7 +954,7 @@ import classes.StatusEffects.VampireThirstEffect;
 				if ((player.HP < player.maxHP() * 0.35) && player.statusEffectv3(StatusEffects.CombatFollowerZenji) < 4 && rand(10) > 1) zenjiCombatActions5();
 				else {
 					var choice13:Number = rand(20);
-					if (player.hasPerk(PerkLib.MotivationEx)) {
+					if (downTo01Idle()) {
 						if (rand(100) == 0) zenjiCombatActions0();
 						else {
 							if (choice13 < 8) zenjiCombatActions1();
@@ -951,7 +972,7 @@ import classes.StatusEffects.VampireThirstEffect;
 							if (choice13 >= 18) zenjiCombatActions4();
 						}
 					}
-					else if (player.hasPerk(PerkLib.Motivation)) {
+					else if (downTo20Idle()) {
 						if (choice13 < 4) zenjiCombatActions0();
 						if (choice13 >= 4 && choice13 < 10) zenjiCombatActions1();
 						if (choice13 >= 10 && choice13 < 16) zenjiCombatActions2();
@@ -1073,7 +1094,7 @@ import classes.StatusEffects.VampireThirstEffect;
 				if (monster.hasStatusEffect(StatusEffects.PouncedByCompanion)) tyrantiaCombatActions1();
 				else {
 					var choice1:Number = rand(20);
-					if (player.hasPerk(PerkLib.MotivationEx)) {
+					if (downTo01Idle()) {
 						if (rand(100) == 0) tyrantiaCombatActions0();
 						else {
 							if (choice1 < 5) tyrantiaCombatActions1();
@@ -1082,7 +1103,7 @@ import classes.StatusEffects.VampireThirstEffect;
 							if (choice1 >= 15) tyrantiaCombatActions4();
 						}
 					}
-					else if (player.hasPerk(PerkLib.Motivation)) {
+					else if (downTo20Idle()) {
 						if (choice1 < 4) tyrantiaCombatActions0();
 						if (choice1 >= 4 && choice1 < 11) tyrantiaCombatActions1();
 						if (choice1 >= 11 && choice1 < 16) tyrantiaCombatActions2();
@@ -1183,7 +1204,7 @@ import classes.StatusEffects.VampireThirstEffect;
 						if (choice11 >= 17) kihaCombatActions4();
 					}
 				}
-				else if (player.hasPerk(PerkLib.Motivation)) {
+				else if (downTo20Idle()) {
 					if (choice11 < 4) kihaCombatActions0();
 					if (choice11 >= 4 && choice11 < 12) kihaCombatActions1();
 					if (choice11 >= 12 && choice11 < 15) kihaCombatActions2();
@@ -1257,7 +1278,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public function midokaCombatActions():void {
 			if (player.statusEffectv4(StatusEffects.CombatFollowerMidoka) > 0) {
 				var choice11:Number = rand(20);
-				if (player.hasPerk(PerkLib.MotivationEx)) {
+				if (downTo01Idle()) {
 					if (rand(100) == 0) midokaCombatActions0();
 					else {
 						if (choice11 < 9) midokaCombatActions1();
@@ -1266,7 +1287,7 @@ import classes.StatusEffects.VampireThirstEffect;
 						if (choice11 >= 17) midokaCombatActions4();
 					}
 				}
-				else if (player.hasPerk(PerkLib.Motivation)) {
+				else if (downTo20Idle()) {
 					if (choice11 < 4) midokaCombatActions0();
 					if (choice11 >= 4 && choice11 < 12) midokaCombatActions1();
 					if (choice11 >= 12 && choice11 < 15) midokaCombatActions2();
