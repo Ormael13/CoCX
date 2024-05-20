@@ -67,11 +67,14 @@ public class Weapon extends Equipable
 			var baseAttack:Number = this.baseAttack;
 			if (!CoC.instance || !CoC.instance.player) return baseAttack;
 			var player:Player = CoC.instance.player;
-			
 			var baseAttackBonus:Number = 0;
 			var scale:Number = 1; // scale factor
 			var multiplier:Number = 100; // %
 			var bonus:Number = 0;
+			var playerCor:Number = player.cor;
+			if (player.hasPerk(PerkLib.MentalBastion) && player.cor < 50) playerCor = (100 - player.cor);
+			var playerPurity:Number = (100 - player.cor);
+			if (player.hasPerk(PerkLib.MentalBastion) && player.cor > 50) playerPurity = player.cor;
 			// result = (attack + baseAttackBonuss) * scale * (multiplier/100) + bonus
 			
 			var stat:Number;
@@ -81,11 +84,11 @@ public class Weapon extends Equipable
 					// Base attack bonuses //
 					//---------------------//
 					case IELib.AttackBonus_Cor: {
-						baseAttackBonus += ie.power * player.cor;
+						baseAttackBonus += ie.power * playerCor;
 						break;
 					}
 					case IELib.AttackBonus_Purity: {
-						baseAttackBonus += ie.power * (100 - player.cor);
+						baseAttackBonus += ie.power * playerPurity;
 						break;
 					}
 					case IELib.AttackBonus_Fem: {

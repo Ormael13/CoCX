@@ -10461,12 +10461,16 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
             player.takeLustDamage((player.statusEffectv1(StatusEffects.DemonSeed) + int(player.effectiveSensitivity() / 30) + int(player.lib / 30) + int(player.cor / 30)), true);
         }
         if (player.inHeat && player.vaginas.length > 0 && monster.cockTotal() > 0) {
-            player.takeLustDamage((rand(player.lib / 5) + 3 + rand(5)), true);
+			var HeatLustDot:Number = (rand(player.lib / 5) + 3 + rand(5));
+			if (TyrantiaFollower.TyrantiaTrainingSessions >= 35) HeatLustDot *= 0.5;
+            player.takeLustDamage(HeatLustDot, true);
             outputText("Your " + vaginaDescript(0) + " clenches with an instinctual desire to be touched and filled.  ");
             outputText("If you don't end this quickly you'll give in to your heat.\n\n");
         }
         if (player.inRut && player.cockTotal() > 0 && monster.hasVagina()) {
-            player.takeLustDamage((rand(player.lib / 5) + 3 + rand(5)), true);
+            var RutLustDot:Number = (rand(player.lib / 5) + 3 + rand(5));
+			if (TyrantiaFollower.TyrantiaTrainingSessions >= 35) RutLustDot *= 0.5;
+            player.takeLustDamage(RutLustDot, true);
             if (player.cockTotal() > 1) outputText("Each of y");
             else outputText("Y");
             if (monster.plural) outputText("our [cocks] dribbles pre-cum as you think about plowing [themonster] right here and now, fucking [monster his] [monster cunt]s until they're totally fertilized and pregnant.\n\n");
@@ -16218,6 +16222,8 @@ public function oniRampagePowerMulti():Number {
 public function tyrantStagePowerMulti():Number {
     var tyrantStagePowerMulti:Number = 1.5;
     if (TyrantiaFollower.TyrantiaTrainingSessions >= 10) tyrantStagePowerMulti += 0.2;
+    if (TyrantiaFollower.TyrantiaTrainingSessions >= 35 && (player.inHeat || player.inRut)) tyrantStagePowerMulti += 0.2;
+    if (TyrantiaFollower.TyrantiaTrainingSessions >= 40) tyrantStagePowerMulti *= 2;
     return tyrantStagePowerMulti;
 }
 

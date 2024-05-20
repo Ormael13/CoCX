@@ -872,6 +872,8 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.KnowsTyrantState)) {
 			var boost:Number = 50;
 			if (TyrantiaFollower.TyrantiaTrainingSessions >= 10) boost += 20;
+			if (TyrantiaFollower.TyrantiaTrainingSessions >= 35 && (player.inHeat || player.inRut)) boost += 20;
+			if (TyrantiaFollower.TyrantiaTrainingSessions >= 40) boost *= 2;
 			if (player.hasStatusEffect(StatusEffects.TyrantState)) {
 				bd = buttons.add("TyrantState(Off)", deactivaterTyrantState).hint("Deactivate Tyrant State.");
 			} else {

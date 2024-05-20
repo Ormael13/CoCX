@@ -843,6 +843,7 @@ public class CombatUI extends BaseCombatContent {
 		actFunction();
 		if (player.hasPerk(PerkLib.MotivationSu)) actFunction();
 		if (player.hasPerk(PerkLib.MotivationSu) && player.hasPerk(PerkLib.VocalTactician)) actFunction();
+		if (player.hasPerk(PerkLib.DrillSergeant)) actFunction();
 		if (clearAndNext) {
 			menu();
 			addButton(0, "Next", combatMenu, false);

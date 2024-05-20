@@ -4045,6 +4045,10 @@ public class PerkLib
 				"Minion and Follower Damage increased by an additional 10%, and followers will act more often.");
 		public static const VocalTactician:PerkType = mk("Vocal Tactician", "Vocal Tactician",
 				"Minion and Follower Damage increased by another 15%. Followers will act even more frequently.");
+		public static const DrillSergeant:PerkType = mk("Drill Sergeant", "Drill Sergeant",
+				"Your voice and bearing now commands respect, even among the surliest of recruits. Your followers will attack an additional time per round, and are guaranteed to attack.");
+		public static const MentalBastion:PerkType = mk("Mental Bastion", "Mental Bastion",
+				"The effects of Tyrant State are doubled: While active, you take 30% less damage from magic. You count as either pure or corrupt (whichever is better) for equipment. (Pure for the Beautiful weapons etc, corrupt for corrupt weapons)");
 		public static const Aelfwine:PerkType = mk("Aelfwine", "Aelfwine",
 				"When drinking alcohol double libido but halve intelligence while drunk.");
 		public static const AffinityGnome:PerkType = mk("Affinity (Gnome)", "Affinity (Gnome)",

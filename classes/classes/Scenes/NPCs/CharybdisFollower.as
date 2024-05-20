@@ -315,7 +315,7 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 		menu();
 		addButton(1, "JamSesh", charyJamOut);
 		addButtonIfTrue(2, "Instruments", charyInstruments, "Req. 30%+ affection", CharyAffectionMeter >= 30);
-		addButtonIfTrue(3, "Vocals", charyVocalTraining, "Req. 50%+ affection (and have less then 15 trainings)", CharyAffectionMeter >= 50 && CharyVocalTrained < 15);
+		addButtonIfTrue(3, "Vocals", charyVocalTraining, "Req. 50%+ affection (and have less then 20 trainings)", CharyAffectionMeter >= 50 && CharyVocalTrained < 20);
 		addButtonIfTrue(4, "Sail", charySail, "Req. 30%+ affection", CharyAffectionMeter >= 60);
 		addButton(14, "Back", charyBeachMeetings2);
 	}
@@ -387,7 +387,11 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 			outputText("<b>Gained 'Vocal Tactician' perk: Minion and Follower Damage increased by another 15%. Followers will act even more frequently</b>\n\n");
 			player.createPerk(PerkLib.VocalTactician,0,0,0,0);
 		}
-		if (CharyVocalTrained < 15) CharyVocalTrained += 1;
+		if (CharyVocalTrained == 19) {
+			outputText("<b>Gained 'Drill Sergeant' perk: Your voice and bearing now commands respect, even among the surliest of recruits. Your followers will attack an additional time per round, and are guaranteed to attack</b>\n\n");
+			player.createPerk(PerkLib.DrillSergeant,0,0,0,0);
+		}
+		if (CharyVocalTrained < 20) CharyVocalTrained += 1;
 		endEncounter(60);
 	}
 	
