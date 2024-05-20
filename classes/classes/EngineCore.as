@@ -761,7 +761,7 @@ public class EngineCore {
             if (CoC.instance.achievements[achievement] <= 0) {
                 CoC.instance.achievements[achievement] = 1;
                 if (nl && display) outputText("\n");
-                if (display) outputText("<b>[font-miss]Achievement unlocked: " + title + "[/font]</b>");
+                if (display) outputText("<b>[font-blue]Achievement unlocked: " + title + "[/font]</b>");
                 if (nl2 && display) outputText("\n");
                 CoC.instance.saves.savePermObject(false); //Only save if the achievement hasn't been previously awarded.
             }

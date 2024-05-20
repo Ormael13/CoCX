@@ -109,21 +109,21 @@ public function loadSaveDisplay(saveFile:Object, slotName:String):String
 			holding += " | Difficulty - ";
 			if (saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] != undefined) { //Handles undefined
 				if (saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] == 0 || saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] == null) {
-					if (saveFile.data.flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) holding += "[font-heal]Easy[/font]";
+					if (saveFile.data.flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) holding += "[font-green]Easy[/font]";
 					else holding += "[font-olive]Normal[/font]";
 				}
 				if (saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] == 1)
-					holding += "[font-damage]Hard[/font]";
+					holding += "[font-dred]Hard[/font]";
 				if (saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] == 2)
 					holding += "[font-red]Nightmare[/font]";
 				if (saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] == 3)
-					holding += "[font-critical]EXTREME[/font]";
+					holding += "[font-lred]EXTREME[/font]";
 				if (saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] >= 4)
 					holding += "[font-pink]XIANXIA[/font]";
 			}
 			else {
 				if (saveFile.data.flags[kFLAGS.EASY_MODE_ENABLE_FLAG] != undefined) { //Workaround to display Easy if difficulty is set to easy.
-					if (saveFile.data.flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) holding += "[font-heal]Easy[/font]";
+					if (saveFile.data.flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) holding += "[font-green]Easy[/font]";
 					else holding += "[font-olive]Normal[/font]";
 				}
 				else holding += "[font-olive]Normal[/font]";

@@ -77,7 +77,7 @@ public class EventParser {
                 "Get rekt, noob!",
                 "OOF."];
             if (clear) EngineCore.clearOutput();
-            EngineCore.outputText("\n\n[font-damage]");
+            EngineCore.outputText("\n\n[font-dred]");
             EngineCore.outputText("<b>" + textChoices[Utils.rand(EngineCore.silly() ? textChoices.length : 4)] + "</b>");
             EngineCore.outputText("[/font]");
             //Delete save on hardcore.

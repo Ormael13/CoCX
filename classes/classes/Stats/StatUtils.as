@@ -108,12 +108,12 @@ public class StatUtils {
 					continue;
 				}
 				if (isPositiveStat) {
-					if (value > 0) text += '[font-heal]';
-					else text += '[font-damage]';
+					if (value > 0) text += '[font-green]';
+					else text += '[font-dred]';
 				}
 				if (!isPositiveStat) {
-					if (value > 0) text += '[font-damage]';
-					else text += '[font-heal]';
+					if (value > 0) text += '[font-dred]';
+					else text += '[font-green]';
 				}
 				text += '<b>' + buff.text + ':</b> ';
 				if (asPercent) {
@@ -130,19 +130,19 @@ public class StatUtils {
 				}
 				text += '\n';
 				text += "[/font]";
-				//if (!isPositiveStat) text += '[font-damage]'
-				//if (isPositiveStat) text = "[font-heal]"+text+"[/font]";
+				//if (!isPositiveStat) text += '[font-dred]'
+				//if (isPositiveStat) text = "[font-green]"+text+"[/font]";
 			}
 		}
 		if (PerkBuff != 0)
 		{
 			if (isPositiveStat) {
-				if (PerkBuff > 0) text += '[font-heal]';
-				else text += '[font-damage]';
+				if (PerkBuff > 0) text += '[font-green]';
+				else text += '[font-dred]';
 			}
 			if (!isPositiveStat) {
-				if (PerkBuff > 0) text += '[font-damage]';
-				else text += '[font-heal]';
+				if (PerkBuff > 0) text += '[font-dred]';
+				else text += '[font-green]';
 			}
 			text += "<b>Perk:</b> ";
 			if (asPercent) {

@@ -911,10 +911,10 @@ public class PerkMenu extends BaseContent {
 				mutationCount = player.maxTotalMutationsInSlot(bodyPart);
 				outputText(IMutationPerkType.Slots[bodyPart].name + " mutations obtained: ");
 				if (mCount > mutationCount){
-					outputText("[font-damage]");
+					outputText("[font-dred]");
 				}
 				else{
-					outputText("[font-heal]");
+					outputText("[font-green]");
 				}
 				outputText( mCount +"[/font] of " + (mutationCount > mPerkarray.length ? mPerkarray.length : mutationCount) + ". Max:(");
 				if (flags[kFLAGS.MUTATIONS_SPOILERS]){

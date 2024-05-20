@@ -3398,20 +3398,20 @@ public class Camp extends NPCAwareContent{
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) outputText("Training Mode\n");
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] < 2) outputText("Relax Mode\n");
 		}
-		if (player.hasStatusEffect(StatusEffects.ChiChiOff)) outputText("\nChi Chi: [font-damage]<b>Disabled</b>[/font]");
-		if (player.hasStatusEffect(StatusEffects.DivaOff)) outputText("\nDiva: [font-damage]<b>Disabled</b>[/font]");
-		if (player.hasStatusEffect(StatusEffects.ElectraOff)) outputText("\nElectra: [font-damage]<b>Disabled</b>[/font]");
-		if (player.hasStatusEffect(StatusEffects.EtnaOff)) outputText("\nEtna: [font-damage]<b>Disabled</b>[/font]");
-		if (player.hasStatusEffect(StatusEffects.LunaOff)) outputText("\nLuna: [font-damage]<b>Disabled</b>[/font]");
-		if (player.hasStatusEffect(StatusEffects.NadiaOff)) outputText("\nNadia: [font-damage]<b>Disabled</b>[/font]");
-		if (player.hasStatusEffect(StatusEffects.TedOff)) outputText("\nDragon Boi: [font-damage]<b>Disabled</b>[/font]");
-		if (player.hasStatusEffect(StatusEffects.SophieOff)) outputText("\nSophie: [font-damage]<b>Disabled</b>[/font]");
-		if (player.hasStatusEffect(StatusEffects.HeliaOff)) outputText("\nHelia: [font-damage]<b>Disabled</b>[/font]");
-		if (player.hasStatusEffect(StatusEffects.KonstantinOff)) outputText("\nKonstantin: [font-damage]<b>Disabled</b>[/font]");
-		if (player.hasStatusEffect(StatusEffects.SpoodersOff)) outputText("\nSpooders: [font-damage]<b>Disabled</b>[/font]");
-		if (player.hasStatusEffect(StatusEffects.ShouldraOff)) outputText("\nShouldra: [font-damage]<b>Disabled</b>[/font]");
-		if (player.hasStatusEffect(StatusEffects.CalluOff)) outputText("\nCallu (Otter girl): [font-damage]<b>Disabled</b>[/font]");
-		if (player.hasStatusEffect(StatusEffects.VenusOff)) outputText("\nVenus (Gigantic Turtle): [font-damage]<b>Disabled</b>[/font]");
+		if (player.hasStatusEffect(StatusEffects.ChiChiOff)) outputText("\nChi Chi: [font-dred]<b>Disabled</b>[/font]");
+		if (player.hasStatusEffect(StatusEffects.DivaOff)) outputText("\nDiva: [font-dred]<b>Disabled</b>[/font]");
+		if (player.hasStatusEffect(StatusEffects.ElectraOff)) outputText("\nElectra: [font-dred]<b>Disabled</b>[/font]");
+		if (player.hasStatusEffect(StatusEffects.EtnaOff)) outputText("\nEtna: [font-dred]<b>Disabled</b>[/font]");
+		if (player.hasStatusEffect(StatusEffects.LunaOff)) outputText("\nLuna: [font-dred]<b>Disabled</b>[/font]");
+		if (player.hasStatusEffect(StatusEffects.NadiaOff)) outputText("\nNadia: [font-dred]<b>Disabled</b>[/font]");
+		if (player.hasStatusEffect(StatusEffects.TedOff)) outputText("\nDragon Boi: [font-dred]<b>Disabled</b>[/font]");
+		if (player.hasStatusEffect(StatusEffects.SophieOff)) outputText("\nSophie: [font-dred]<b>Disabled</b>[/font]");
+		if (player.hasStatusEffect(StatusEffects.HeliaOff)) outputText("\nHelia: [font-dred]<b>Disabled</b>[/font]");
+		if (player.hasStatusEffect(StatusEffects.KonstantinOff)) outputText("\nKonstantin: [font-dred]<b>Disabled</b>[/font]");
+		if (player.hasStatusEffect(StatusEffects.SpoodersOff)) outputText("\nSpooders: [font-dred]<b>Disabled</b>[/font]");
+		if (player.hasStatusEffect(StatusEffects.ShouldraOff)) outputText("\nShouldra: [font-dred]<b>Disabled</b>[/font]");
+		if (player.hasStatusEffect(StatusEffects.CalluOff)) outputText("\nCallu (Otter girl): [font-dred]<b>Disabled</b>[/font]");
+		if (player.hasStatusEffect(StatusEffects.VenusOff)) outputText("\nVenus (Gigantic Turtle): [font-dred]<b>Disabled</b>[/font]");
 	}
 	private function SparrableNPCsMenu():void {
 		clearOutput();

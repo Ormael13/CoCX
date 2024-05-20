@@ -85,10 +85,10 @@ public class PlayerInfo extends BaseContent {
 			bodyStats += "<b>Satiety:</b> " + Math.floor(player.hunger) + " / " + player.maxHunger() + " (";
 			if (player.hunger <= 0) bodyStats += "[font-critical]Dying[/font]";
 			if (player.hunger > 0 && player.hunger < 10) bodyStats += "[font-red]Starving[/font]";
-			if (player.hunger >= 10 && player.hunger < 25) bodyStats += "[font-damage]Very hungry[/font]";
+			if (player.hunger >= 10 && player.hunger < 25) bodyStats += "[font-dred]Very hungry[/font]";
 			if (player.hunger >= 25 && player.hunger < 50) bodyStats += "Hungry";
 			if (player.hunger >= 50 && player.hunger < 75) bodyStats += "Not hungry";
-			if (player.hunger >= 75 && player.hunger < 90) bodyStats += "[font-heal]Satiated[/font]";
+			if (player.hunger >= 75 && player.hunger < 90) bodyStats += "[font-olive]Satiated[/font]";
 			if (player.hunger >= 90 && player.hunger < 100) bodyStats += "[font-green]Full[/font]";
 			if (player.hunger >= 100) bodyStats += "[font-blue]Very full[/font]";
 			bodyStats += ")\n";
@@ -743,9 +743,9 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.CHI_CHI_AFFECTION] > 0) {
 			interpersonStats += "<b>Chi Chi Affection:</b> " + Math.round(flags[kFLAGS.CHI_CHI_AFFECTION]) + "%\n";
 			if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 6) interpersonStats += "<b>Chi Chi status:</b> Wife\n";
-			if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 5) interpersonStats += "<b>Chi Chi status:</b> [font-damage]Taken Away by Chon Lao[/font]\n";
+			if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 5) interpersonStats += "<b>Chi Chi status:</b> [font-dred]Taken Away by Chon Lao[/font]\n";
 			if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 3) interpersonStats += "<b>Chi Chi status:</b> Lover\n";
-			if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 2) interpersonStats += "<b>Chi Chi status:</b> [font-damage]Dead[/font]\n";
+			if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 2) interpersonStats += "<b>Chi Chi status:</b> [font-dred]Dead[/font]\n";
 			if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 2) interpersonStats += "<b>Chi Chi status:</b> Apprentice\n";
 			//...fuck this.
 			if (flags[kFLAGS.CHI_CHI_FOLLOWER] >= 3) {
@@ -948,8 +948,9 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] != 0) {
             if (SceneLib.urta.urtaLove()) {
 				if (flags[kFLAGS.URTA_QUEST_STATUS] == 0) interpersonStats += "<b>Urta Status:</b> Lover\n";
-				else if (flags[kFLAGS.URTA_QUEST_STATUS] == 1) interpersonStats += "<b>Urta Status:</b> [font-heal]Lover+[/font]\n";
-				else if (flags[kFLAGS.URTA_QUEST_STATUS] == -1) interpersonStats += "<b>Urta Status:</b> [font-damage]Gone[/font]\n";
+				else if (flags[kFLAGS.URTA_QUEST_STATUS] == 1) interpersonStats += "<b>Urta Status:</b>" +
+						" [font-green]Lover+[/font]\n";
+				else if (flags[kFLAGS.URTA_QUEST_STATUS] == -1) interpersonStats += "<b>Urta Status:</b> [font-dred]Gone[/font]\n";
 			}
 			else if (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] == -1)
 				interpersonStats += "<b>Urta Status:</b> Ashamed\n";
