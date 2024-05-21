@@ -163,7 +163,7 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Diaphragm control. Gained by having 10 Vocal Training sessions with Charybdis. Effects: Minion and Follower Damage increased by an additional 10%, and followers will act more often.\n");
 			outputText("-New event perk: Vocal Tactician. Gained by having 15 Vocal Training sessions with Charybdis. Effects: Minion and Follower Damage increased by another 15%. Followers will act even more frequently.\n");
 			outputText("-Motivation (Su) perk have added in desc potential synergy with other perk to allow henchman attack 3 times per turn.\n");
-			outputText("-After clearing Deep Cave (Zetaz dungeon) can meet at Beach are Charybris - male scylla. He have various interactions and could even train pc stats (str/spe/tou) up to their limits or give vocal trainings to give some eprks that would help with commanding minions/henchmen.\n");
+			outputText("-After clearing Deep Cave (Zetaz dungeon) can meet at Beach are Charybris - male scylla. He have various interactions and could even train pc stats (str/spe/tou) up to their limits or give vocal trainings to give some perks that would help with commanding minions/henchmen.\n");
 			outputText("-Tyrantia traiing cap now is increased (30 > 40).\n");
 			outputText("-Constant Buildup - If you are in Rut or Heat, halve the lust DoT you take from it, and deal an additional 20% physical damage while under the effects. (35 training sessions)\n");
 			outputText("-New event perk: Mental Bastion. Gained by having 40 training sessions with Tyrantia. Effects: The effects of Tyrant State are doubled: While active, you take 30% less damage from magic. You count as either pure or corrupt (whichever is better) for equipment. (Pure for the Beautiful weapons etc, corrupt for corrupt weapons)\n");
@@ -178,15 +178,15 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed bugs: Dracula/lina PC unable to find get ghoul if they not learned this as normal Vampire, unable to buy manual for 1st atk: f. swords, Arigean Princess PC not been fully immune to TF-ing like other perm races, Weresharks not having their stats changing according to moon phase or boosted during use of Crinos Shape, Phoenix TF adding mutagen penatly instead of stat curse, ");
 			outputText("Endless Rage draining 10x too much wrath per turn, Berzerker/Lustzerker still req. to be activated after they been activated as part of Asura Form activation, dormant state of wereraces 'blessings' increasing race score and not lowering it, Hinezumi Buring Blood IM accesable by Bunny race, returning from teleportation circle at 4th floor of river dungeon sending PC to ");
 			outputText("3rd floor teleportation circle room, perk allowing to always run away from enemy/ies been ignored in dungeons, unarmed/feral giving mastery gains for small weapons, 2 of 4 SF to Elemental Energy conversion options having wrong check for usable SF, using Fiery Band for calling Kiha to help fight... Kiha, Ceraph after update still not able to win using her super cool lust beam attack, ");

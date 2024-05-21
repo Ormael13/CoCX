@@ -352,7 +352,6 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 	}
 	public function charyGuitar():void {
 		outputText("<i>\"Ah, there’s nothing in the world quite like a well-tuned violin, or the thrum of a cello.” Charybdis shakes himself. “Let’s start with something more…natural.\"</i>\n\n");
-		outputText("and a brass tube with a funnel at the end. <i>\"if ya want.\"</i>\n\n");
 		if (player.hasClaws()) outputText("<i>\"No need for a guitar pick for you.\"</i> He chuckles. <i>\"You’ve got a nice set of them already.\"</i>\n\n");
 		outputText("Charybdis pulls out a guitar, old and worn, and gently places it into your hands. <i>\"I’ve had that old thing since before I left the cave.\"</i> He gives you a smile. <i>\"Let’s see what we can do.\"</i>\n\n");
 		outputText("For an hour, he teaches you the basics of the guitar, from chord progressions to basic runs. When you excuse yourself, you pass the guitar back, thanking him for his time.\n\n");
