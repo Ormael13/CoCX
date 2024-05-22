@@ -315,8 +315,8 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 		menu();
 		addButton(1, "JamSesh", charyJamOut);
 		addButtonIfTrue(2, "Instruments", charyInstruments, "Req. 30%+ affection", CharyAffectionMeter >= 30);
-		//addButtonIfTrue(3, "Vocals", CharyVocalTraining, "Req. 50%+ affection", CharyAffectionMeter >= 50);
-		//if (CharyAffectionMeter >= 60) addButton(4, "Sail", CharySail);
+		addButtonIfTrue(3, "Vocals", charyVocalTraining, "Req. 50%+ affection (and have less then 20 trainings)", CharyAffectionMeter >= 50 && CharyVocalTrained < 20);
+		addButtonIfTrue(4, "Sail", charySail, "Req. 30%+ affection", CharyAffectionMeter >= 60);
 		addButton(14, "Back", charyBeachMeetings2);
 	}
 
@@ -342,7 +342,7 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 		menu();
 		addButton(1, "Drums", charyDrums).hint("Percussion Training (train str+)");
 		addButton(2, "Guitar", charyGuitar).hint("String Training (train spe+)");
-		addButton(3, "Trumpet", charyTrumpet).hint(" (train tou+)");
+		addButton(3, "Trumpet", charyTrumpet).hint("Trumpet Training (train tou+)");
 	}
 	public function charyDrums():void {
 		outputText("<i>\"Oh, the drums? Good choice. It’s a great workout for your arms…But if you really know what you’re doing, it’s your wrists that gain the most.\"</i>\n\n");
@@ -352,7 +352,6 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 	}
 	public function charyGuitar():void {
 		outputText("<i>\"Ah, there’s nothing in the world quite like a well-tuned violin, or the thrum of a cello.” Charybdis shakes himself. “Let’s start with something more…natural.\"</i>\n\n");
-		outputText("and a brass tube with a funnel at the end. <i>\"if ya want.\"</i>\n\n");
 		if (player.hasClaws()) outputText("<i>\"No need for a guitar pick for you.\"</i> He chuckles. <i>\"You’ve got a nice set of them already.\"</i>\n\n");
 		outputText("Charybdis pulls out a guitar, old and worn, and gently places it into your hands. <i>\"I’ve had that old thing since before I left the cave.\"</i> He gives you a smile. <i>\"Let’s see what we can do.\"</i>\n\n");
 		outputText("For an hour, he teaches you the basics of the guitar, from chord progressions to basic runs. When you excuse yourself, you pass the guitar back, thanking him for his time.\n\n");
@@ -366,75 +365,108 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 		player.trainStat("tou", 5, player.trainStatCap("tou",100));
 		endEncounter(60);
 	}
-	public function CharyVocalTraining():void {
+	
+	public function charyVocalTraining():void {
 		clearOutput();
 		outputText("Charybdis smiles as you raise the subject. <i>\"The voice is a wonderful thing, so vibrant, and changing. Every voice is unique, and…\"</i> He trails off, a tinge of red coming to his cheeks. <i>\"Sorry, you don’t want me to blather on, I’d bore ya.\"</i> You fire back that no, you’d be interested in learning. Hearing this, his smile comes back, and he hugs you with three tendrils, quickly backing off.\n\n");
 		outputText("<i>\"You mean that?\"</i> He brings one hand to his chin. <i>\"Not sure how much use it’d be for you, champ.\"</i> He puffs out his chest, pride brimming in his voice. <i>\"But if you want, I can teach you how to use your voice to the fullest.\"</i>\n\n");
-		outputText("You spend a few minutes warming your voice up. Chary seems to insist on doing these before every session. You get into a few simple tunes after, and despite yourself, you find the session rather calming. An hour passes, and you can feel your lungs burning slightly, not unlike after a light run.\n\n"); 
-		outputText("You tell Charybdis that you need to leave for now, and he nods simply. <i>\"Then I'll see you again soon, hopefully. Keep a tune in your heart, [name]!\"</i>\n\n");
+		outputText("You start with some breathing exercises, "+((player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3)?"not unlike the ones you’ve done with Jojo, ":"")+"before starting to hum different notes, up and down. Charybdis notes your range, and flips through a folder, filled with different pieces of music.\n\n"); 
+		outputText("To your surprise, the piece he picks out fits your voice perfectly, and you don’t need to strain to hit any of the notes. After a few plays through, you find yourself singing without needing the music, and Charybdis grins, nodding in approval.\n\n"); 
+		outputText("After an hour, you gently place the sheet of music back into Charybdis’s hands before excusing yourself.\n\n"); 
+		outputText("<i>\"Of course,\"</i> he says simply. <i>\"Come back soon. I’d love to hear your voice more often.\"</i>\n\n");
+		if (CharyVocalTrained == 4) {
+			outputText("<b>Gained 'Commanding Tone' Perk: Minion and Follower Damage increased by 10%</b>\n\n");
+			player.createPerk(PerkLib.CommandingTone,0,0,0,0);
+		}
+		if (CharyVocalTrained == 9) {
+			outputText("<b>Gained 'Diaphragm control' perk: Minion and Follower Damage increased by an additional 10%, and followers will act more often</b>\n\n");
+			player.createPerk(PerkLib.DiaphragmControl,0,0,0,0);
+		}
+		if (CharyVocalTrained == 14) {
+			outputText("<b>Gained 'Vocal Tactician' perk: Minion and Follower Damage increased by another 15%. Followers will act even more frequently</b>\n\n");
+			player.createPerk(PerkLib.VocalTactician,0,0,0,0);
+		}
+		if (CharyVocalTrained == 19) {
+			outputText("<b>Gained 'Drill Sergeant' perk: Your voice and bearing now commands respect, even among the surliest of recruits. Your followers will attack an additional time per round, and are guaranteed to attack</b>\n\n");
+			player.createPerk(PerkLib.DrillSergeant,0,0,0,0);
+		}
+		if (CharyVocalTrained < 20) CharyVocalTrained += 1;
 		endEncounter(60);
-	}/*
-public function CharySail():void {
+	}
+	
+	public function charySail():void {
 		clearOutput();
-		outputText("Charybdis smiles as you bring up his boat. <i>\"I’m kinda glad you brought it up. I’ve wanted to take you on my craft for a while now\".</i> The boat itself is large enough to comfortably house five people on the deck, with a clearly marked ladder to a lower deck inside. There are a variety of heavy fishing rods stored underneath the railings, and he hoists a canvas sail, clearly experienced in its use. He casts off, the salty air running through your [hair] as the boat picks up speed. After a few minutes, he pulls down the sail, turning to you and nodding respectfully. <i>\"So, what do you feel like doing, [name]?\"</i>\n\n");
-CharyAffectionMeter(5);
-menu();
-addButton(1, "Fish", CharyFish );
-addButton(2, "Swim", CharySwimBoat);
-addButton(3, "Meal", CharySushi);
-addButton(4, "Shore", CharyBeachMeetings);
-}
-public function CharyFish():void {
+		outputText("Charybdis smiles as you bring up his boat. <i>\"I’m kinda glad you brought it up. I’ve wanted to take you on my craft for a while now.\"</i> The boat itself is large enough to comfortably house five people on the deck, with a clearly marked ladder to a lower deck inside. There are a variety of heavy fishing rods stored underneath the railings, and he hoists a canvas sail, clearly experienced in its use. He casts off, the salty air running through your [hair] as the boat picks up speed. After a few minutes, he pulls down the sail, turning to you and nodding respectfully. <i>\"So, what do you feel like doing, [name]?\"</i>\n\n");
+		charyAffection(5);
+		menu();
+		addButton(1, "Fish", charyFish);
+		addButton(2, "Swim", charySwimBoat);
+		addButton(3, "Meal", charySushi);
+		addButton(4, "Shore", charyBeachMeetings);
+	}
+	public function charyFish():void {
 		clearOutput();
-		outputText("He nods, pulling the rods out. He hands you one, then brings five out, leaning back in his odd-looking chair and using tentacles and hands to string bait and set out line. He leans back, humming, and looking out over the water contentedly. After an hour or so on the water, you’ve caught a few sizable fish, and he’s caught...Only a few more than you, despite his many rods in the water. You pat him on the shoulder, telling him that you should be heading back to camp. \n\n"); 
-		outputText("“What?” He says in surprise. “But we just got out here!” \n\n");
-		outputText("Despite his protests, he packs his rods away, bringing you back to shore. 
-“One of these days, you need to just take one for yourself, champ. If ya need a break, come back sometime. We’ll do lunch”. 
-(You get 2-5 fish) \n\n");		
-endEncounter(60);
-}
+		outputText("He nods, pulling the rods out. He hands you one, then brings five out, leaning back in his odd-looking chair and using tentacles and hands to string bait and set out line. He leans back, humming, and looking out over the water contentedly. After an hour or so on the water, you’ve caught a few sizable fish, and he’s caught...Only a few more than you, despite his many rods in the water. You pat him on the shoulder, telling him that you should be heading back to camp.\n\n");
+		outputText("<i>\"What?\"</i> He says in surprise. <i>\"But we just got out here!\"</i>\n\n");
+		outputText("Despite his protests, he packs his rods away, bringing you back to shore.\n\n");
+		outputText("<i>\"One of these days, you need to just take one for yourself, champ. If ya need a break, come back sometime. We’ll do lunch.\"</i>\n\n");
+		advanceMinutes(60);
+		inventory.takeItem(consumables.FREFISH, charyFish2);
+	}
+	public function charyFish2():void {
+		if (rand(2) == 0) inventory.takeItem(consumables.FREFISH, charyFish3);
+		else inventory.takeItem(consumables.FREFISH, endEncounter);
+	}
+	public function charyFish3():void {
+		if (rand(2) == 0) inventory.takeItem(consumables.FREFISH, charyFish4);
+		else inventory.takeItem(consumables.FREFISH, endEncounter);
+	}
+	public function charyFish4():void {
+		if (rand(2) == 0) inventory.takeItem(consumables.FREFISH, charyFish5);
+		else inventory.takeItem(consumables.FREFISH, endEncounter);
+	}
+	public function charyFish5():void {
+		inventory.takeItem(consumables.FREFISH, endEncounter);
+	}
+	
+	public function charySwimBoat():void {
+		clearOutput();
+		outputText("He looks at you once, before giving you a maniacal grin. With a loud <i>\"Whoop!\"</i> He wraps his tendrils around your arms before bodily lobbing you over the side of the boat. He tosses a heavy looking scrap of iron the other way before jumping in after you, splashing down in the salty water and spraying your face just as you surface.\n\n");
+		outputText("The two of you laugh, playing in the ocean’s spray. He constantly cracks jokes, splashes you playfully with his tentacles, and an hour passes quickly underneath the sun. You eventually climb back onto the boat, realizing what time it is, and reluctantly tell him that you need to go. ");
+		outputText("<i>\"No worries, champ.\"</i> He replies. <i>\"Just come back sometime, eh? It’s nice to talk to someone who isn’t a demon.\"</i> He brings the boat back to shore, and waves as you leave.\n\n");
+		endEncounter(60);
+	}
 
-public function CharySwimBoat():void {
+	public function charySushi():void {
 		clearOutput();
-		outputText("He looks at you once, before giving you a maniacal grin. With a loud “Whoop!” He wraps his tendrils around your arms before bodily lobbing you over the side of the boat. He tosses a heavy looking scrap of iron the other way before jumping in after you, splashing down in the salty water and spraying your face just as you surface. \n\n"); 
-		outputText("The two of you laugh, playing in the ocean’s spray. He constantly cracks jokes, splashes you playfully with his tentacles, and an hour passes quickly underneath the sun. You eventually climb back onto the boat, realizing what time it is, and reluctantly tell him that you need to go. 
-“No worries, champ.” He replies. “Just come back sometime, eh? It’s nice to talk to someone who isn’t a demon.” He brings the boat back to shore, and waves as you leave. \n\n");
-endEncounter(60);
-}
-
-public function CharySushi():void {
+		outputText("<i>\"You sure you want my cooking?\"</i> He jokes, but his eyes gleam with amusement. <i>\"Aight. You’re pretty busy, so I’ll make it a quick prep.\"</i> He goes back above, and guts a large tuna, fresh from the live net, his many knives working in concert to make quick work of the fish. He grabs a bucket from below his metal range, pulling what looks like...Rice? He makes the rice into small patties, draping the Tuna over them. Less than ten minutes from gutting the fish, he offers you a small wooden plate.\n\n");
+		outputText("The tuna and rice are arranged into a rough flower, with a pile of green goop at the center. <i>\"Wasabi,\"</i> he explains. <i>\"It’s a bit spicy. Goes well with the Tuna.\"</i> He serves a plate for himself, sitting down on the side of his bed.\n\n");
+		outputText("You feel a little dubious, raw fish and all, but he grins, putting a tentacle on your shoulder. <i>\"[name], it’s perfectly safe when it’s fresh like this. Besides, wasabi’s good for getting rid of bugs. Trust me, I’ve been eating this stuff for years.\"</i>\n\n");
+		menu();
+		addButton(1, "Try", charyEat);
+		addButton(2, "NoThx", charyBeALittleBitch);
+	}
+	public function charyEat():void {
 		clearOutput();
-		outputText("“You sure you want my cooking?” He jokes, but his eyes gleam with amusement. “Aight. You’re pretty busy, so I’ll make it a quick prep.” He goes back above, and guts a large tuna, fresh from the live net, his many knives working in concert to make quick work of the fish. He grabs a bucket from below his metal range, pulling what looks like...Rice? He makes the rice into small patties, draping the Tuna over them. Less than ten minutes from gutting the fish, he offers you a small wooden plate.  \n\n"); 
-		outputText("The tuna and rice are arranged into a rough flower, with a pile of green goop at the center. 
-“Wasabi”, he explains. “It’s a bit spicy. Goes well with the Tuna.” He serves a plate for himself, sitting down on the side of his bed.  \n\n");
-		outputText("You feel a little dubious, raw fish and all, but he grins, putting a tentacle on your shoulder. “[name], it’s perfectly safe when it’s fresh like this. Besides, wasabi’s good for getting rid of bugs. Trust me, I’ve been eating this stuff for years.”  \n\n");
-
-menu();
-addButton (1, "Try", CharyEat);
-addButton (2, "NoThx", CharyBeALittleBitch);
-}
-
-public function CharyEat():void {
-		clearOutput();
-		outputText("The food itself is surprisingly good. The raw fish has a completely different taste and texture than its cooked counterpart, and the plain rice makes a good counterbalance to the fishy taste. The Wasabi, while a bit spicy, adds flavor to the otherwise relatively plain fare.  \n\n"); 
+		outputText("The food itself is surprisingly good. The raw fish has a completely different taste and texture than its cooked counterpart, and the plain rice makes a good counterbalance to the fishy taste. The Wasabi, while a bit spicy, adds flavor to the otherwise relatively plain fare.\n\n");
 		outputText("Charybdis digs in, and before long, both you and the Scylla have eaten your fill.\n\n");
-		outputText("“Thanks.” You reply that you should be the one saying that, and he laughs a little. “Nah. The demons may have fucked up the farming on the surface, but the fish are as plentiful as ever. Food isn’t a problem for me. Time spent in good company is worth way more to me than the fish you just ate.” He pats you on the shoulder. “I’ll bring us back to shore. You probably need to get back to your duties, right?”  You nod, and he gives you a wide smile. “Then just relax ‘til then. I’ll get us back in no time.”  \n\n");
-		outputText("You sit, relaxed by your full stomach, and the gentle rolling of the waves…Your eyes close… \n\n");
-		outputText("“We’re back!” You sit upright, suddenly awake. Charybdis comes down the stairs, and seeing you, he holds back a laugh. “Yeah, the open water does that to me sometimes. Anyways, we’ve arrived at the cove.” You thank Charybdis, and he waves you off. “Go on, champ. Kill some demons for me, eh?”  \n\n");
-		outputText("You leave the boat, and head back to camp, the rolling of the waves echoing in your head. \n\n");
-		CharyAffectionMeter (10)
-endEncounter(60);
-}
-
-public function CharyBeALittleBitch():void {
+		outputText("<i>\"Thanks.\"</i> You reply that you should be the one saying that, and he laughs a little. <i>\"Nah. The demons may have fucked up the farming on the surface, but the fish are as plentiful as ever. Food isn’t a problem for me. Time spent in good company is worth way more to me than the fish you just ate.\"</i> He pats you on the shoulder. <i>\"I’ll bring us back to shore. You probably need to get back to your duties, right?\"</i> You nod, and he gives you a wide smile. <i>\"Then just relax ‘til then. I’ll get us back in no time.\"</i>\n\n");
+		outputText("You sit, relaxed by your full stomach, and the gentle rolling of the waves…Your eyes close…\n\n");
+		outputText("<i>\"We’re back!\"</i> You sit upright, suddenly awake. Charybdis comes down the stairs, and seeing you, he holds back a laugh. <i>\"Yeah, the open water does that to me sometimes. Anyways, we’ve arrived at the cove.\"</i> You thank Charybdis, and he waves you off. <i>\"Go on, champ. Kill some demons for me, eh?\"</i>\n\n");
+		outputText("You leave the boat, and head back to camp, the rolling of the waves echoing in your head.\n\n");
+		player.refillHunger(50);
+		charyAffection(10);
+		endEncounter(60);
+	}
+	public function charyBeALittleBitch():void {
 		clearOutput();
-		outputText("You wave your hand, the concept of raw fish a little off-putting to you. He shrugs, but you can tell he’s disappointed \n\n");
+		outputText("You wave your hand, the concept of raw fish a little off-putting to you. He shrugs, but you can tell he’s disappointed.\n\n");
 		outputText("He brings you back to shore, waving you goodbye. You head back to camp, but you feel like Charybdis will be a little less enthusiastic next time.\n\n");
-		CharyAffectionMeter (-5)
-endEncounter(60);
-}
-
-public function CharySex():void {
+		charyAffection(-5);
+		endEncounter(60);
+	}
+/*
+public function charySex():void {
 		clearOutput();
 		outputText("You give Chary a warm look, and step in, wrapping your arms around the stocky octopus. The Scylla’s eyes light up, a warm smile crossing his face as his tendrils wrap gently around you, teasing your (genitals if any) and (Butt description here). <i>\"Well, what’s your pleasure?\"</i>\n\n");
 menu();

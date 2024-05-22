@@ -278,6 +278,13 @@ public class SkinTransformations extends MutationsHelper {
 				}
 		)
 	}
+	public function SkinScalesGradual(coverage:int = Skin.COVERAGE_COMPLETE, options:* = null):Transformation {
+		var tfs:Array = [];
+		for (var c:int = Skin.COVERAGE_LOW; c <= coverage; c++) {
+			tfs.push(SkinScales(c, deepCopy(options)));
+		}
+		return new GradualTransformation("SkinScalesGradualTo"+coverage, tfs);
+	}
 
 	public function SkinDragonScales(coverage: int = Skin.COVERAGE_COMPLETE, options: * = null): Transformation {
 		return new SimpleTransformation("Dragon Scales Skin",

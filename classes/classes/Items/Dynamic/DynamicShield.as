@@ -76,6 +76,8 @@ public class DynamicShield extends Shield implements IDynamicItem {
 		var perk:Array          = (subtype.perk || []).slice();
 		var tags:Array          = subtype.tags || [];
 		var block:Number        = subtype.block;
+		var itemEffects:Array   = subtype.effects || [];
+		var qitemEffects:Array  = subtype.qeffects || [];
 		if (parsedParams.error) {
 			trace("[ERROR] Failed to parse " + id + " with error " + parsedParams.error);
 			name      = "ERROR " + name;
@@ -97,7 +99,7 @@ public class DynamicShield extends Shield implements IDynamicItem {
 				perk.join(", ")
 		);
 		
-		DynamicItems.postConstruct(this, tags, buffs);
+		DynamicItems.postConstruct(this, tags, buffs, itemEffects, qitemEffects, quality);
 	}
 	
 	override public function effectDescriptionParts():Array {

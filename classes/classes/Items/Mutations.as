@@ -2955,6 +2955,30 @@ public final class Mutations extends MutationsHelper {
         var temp:Number = 0;
 		var temp2:Number = 0;
 		var temp3:Number = 0;
+		//Chance of horse cock growth if not any yet
+		if (!player.hasCock() && changes < changeLimit && rand(3) == 0) {
+			transformations.CockHorse(0, 10 + rand(7), 2 + rand(10) / 10).applyEffect();
+			player.addCurse("sen", 5, 1);
+			player.MutagenBonus("lib", 4);
+			changes++;
+		}
+		//Chance of ball growth if not 3" yet
+		if (rand(2) == 0 && changes < changeLimit && player.ballSize <= 3 && player.horseCocks() > 0) {
+			if (player.balls == 0) {
+				outputText("\n\nA nauseating pressure forms just under the base of your maleness.  With agonizing pain the flesh bulges and distends, pushing out a rounded lump of flesh that you recognize as a testicle!  A moment later relief overwhelms you as the second drops into your newly formed sack.");
+				transformations.BallsDuo.applyEffect(false);
+				dynStats("lus", 5, "scale", false);
+				player.MutagenBonus("lib", 2);
+			}
+			else {
+				player.ballSize++;
+				if (player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " + Appearance.ballsDescription(false, true, player) + " have grown larger than a human's.");
+				if (player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your [sack].  Walking becomes difficult as you discover your " + Appearance.ballsDescription(false, true, player) + " have enlarged again.");
+				dynStats("lus", 3, "scale", false);
+				player.MutagenBonus("lib", 1);
+			}
+			changes++;
+		}
 		if ((player.gender == 1 || player.gender == 3) && rand(3) == 0 && changes < changeLimit) {
 			//If cocks that aren't horsified!
 			if ((player.horseCocks() + player.demonCocks()) < player.cockTotal()) {
@@ -3029,47 +3053,6 @@ public final class Mutations extends MutationsHelper {
 				dynStats("lus", 10, "scale", false);
 				player.MutagenBonus("lib", 1);
 			}
-			//Chance of ball growth if not 3" yet
-			if (rand(2) == 0 && changes < changeLimit && player.ballSize <= 3 && player.horseCocks() > 0) {
-				if (player.balls == 0) {
-					outputText("\n\nA nauseating pressure forms just under the base of your maleness.  With agonizing pain the flesh bulges and distends, pushing out a rounded lump of flesh that you recognize as a testicle!  A moment later relief overwhelms you as the second drops into your newly formed sack.");
-					CoC.instance.transformations.BallsDuo.applyEffect(false);
-					dynStats("lus", 5, "scale", false);
-					player.MutagenBonus("lib", 2);
-				}
-				else {
-					player.ballSize++;
-					if (player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " + Appearance.ballsDescription(false, true, player) + " have grown larger than a human's.");
-					if (player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your [sack].  Walking becomes difficult as you discover your " + Appearance.ballsDescription(false, true, player) + " have enlarged again.");
-					dynStats("lus", 3, "scale", false);
-					player.MutagenBonus("lib", 1);
-				}
-				changes++;
-			}
-		}
-		//Chance of horse cock growth if not any yet
-		if (!player.hasCock() && changes < changeLimit && rand(3) == 0) {
-			transformations.CockHorse(0, 10 + rand(7), 2 + rand(10) / 10);
-			player.addCurse("sen", 5, 1);
-			player.MutagenBonus("lib", 4);
-			changes++;
-		}
-		//Chance of ball growth if not 3" yet
-		if (rand(2) == 0 && changes < changeLimit && player.ballSize <= 3 && player.horseCocks() > 0) {
-			if (player.balls == 0) {
-				outputText("\n\nA nauseating pressure forms just under the base of your maleness.  With agonizing pain the flesh bulges and distends, pushing out a rounded lump of flesh that you recognize as a testicle!  A moment later relief overwhelms you as the second drops into your newly formed sack.");
-				transformations.BallsDuo.applyEffect(false);
-				dynStats("lus", 5, "scale", false);
-				player.MutagenBonus("lib", 2);
-			}
-			else {
-				player.ballSize++;
-				if (player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " + Appearance.ballsDescription(false, true, player) + " have grown larger than a human's.");
-				if (player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your [sack].  Walking becomes difficult as you discover your " + Appearance.ballsDescription(false, true, player) + " have enlarged again.");
-				dynStats("lus", 3, "scale", false);
-				player.MutagenBonus("lib", 1);
-			}
-			changes++;
 		}
 		if (changes < changeLimit) sagittariusBowTFchanges.centaurTFEffects(true);
 		if (!player.inRut) player.goIntoRut(true);

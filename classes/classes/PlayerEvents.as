@@ -18,6 +18,7 @@ import classes.GlobalFlags.*;
 import classes.IMutations.IMutationsLib;
 import classes.Items.*;
 import classes.Items.Dynamic.Effects.RaceTfEnchantmentType;
+import classes.Items.Effects.RaceTfItemEffect;
 import classes.Races.UnicornRace;
 import classes.Scenes.Camp.CampScenes;
 import classes.Scenes.Camp.Garden;
@@ -1439,7 +1440,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					case ElementalRace.ELEMENT_IGNIS: 	dao = Soulforce.daos[0];
 														break;
 					case ElementalRace.ELEMENT_UNDINE: 	dao = Soulforce.daos[7];
-														break;	
+														break;
 				}
 				if (dao && player.statusEffectv2(dao[1]) < SceneLib.soulforce.highestLayerOfDaoComprehension()) {
 					SceneLib.soulforce.daoContemplationsEffect(dao[1], dao[0], false, true);
@@ -1547,7 +1548,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			// RaceTf itemeffect
 			var eff:StatusEffectClass = player.statusEffectByType(StatusEffects.ItemEffectRaceTf);
 			if (eff) {
-				if (RaceTfEnchantmentType.advance(eff)) {
+				if (RaceTfItemEffect.advance(player, eff)) {
 					needNext = true;
 				}
 			}
@@ -2788,7 +2789,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-			if (player.shieldName == "Tome of Imp" || player.shieldName == "cursed Tome of Imp") {
+			if ((player.shieldName == "Tome of Imp" || player.shieldName == "cursed Tome of Imp") && !player.blockingBodyTransformations()) {
 				camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMP_TOME);
 				if (!player.hasStatusEffect(StatusEffects.SlowTFingItems1) && !player.isRaceCached(Races.IMP, 3) && rand(3) < 2) {
 					player.createStatusEffect(StatusEffects.SlowTFingItems1, 5, 0, 0, 0);
@@ -2800,7 +2801,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					else player.addStatusValue(StatusEffects.SlowTFingItems1, 1, -1);
 				}
 			}
-			if (player.weaponRange == weaponsrange.SAGITTB) {
+			if (player.weaponRange == weaponsrange.SAGITTB && !player.blockingBodyTransformations()) {
 				if (!player.hasStatusEffect(StatusEffects.SlowTFingItems2) && player.racialScore(Races.CENTAUR) < 18 && rand(3) < 2) {
 					player.createStatusEffect(StatusEffects.SlowTFingItems2, 5, 0, 0, 0);
 					CoC.instance.mutations.sagittariusBowChanges(player);

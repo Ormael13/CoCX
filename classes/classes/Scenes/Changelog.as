@@ -153,6 +153,21 @@ public class Changelog extends BaseContent
 			outputText("-Ovaries and Testicles internal mutations would require to have either vagina or cock to give benefits.\n");
 			outputText("-Human Supremacy (Improved) and (Superior) perks increase human score by 1 more point.\n");
 			outputText("-Re: Convert option at super perk menu would give 50% more perk points (so their exchange from super to normal perks won't be giving penatly - praise the Morgan for complai... argumenting it well enough why it need to change)\n");
+			outputText("-Imps Tome gradual TF effect will trigger evben at night but not longer each hour. Instead it will be at least 6 hours between each gradual tf scene triggered by tome.\n");
+			outputText("-More weapons can get random enchantments: claymore, halberd, kama, nodachi, ribbon, scimitar, warhammer, whip, zweihander. (aimozg)\n");
+			outputText("-Quality affects weapon effects such as stun, bleed, and bonus tease damage. (aimozg)\n");
+			outputText("-Race tf added as item effect (can be added to non-random items now) (aimozg)\n");
+			outputText("-Cursed TF enchantment for races: Lizard, Wolf (aimozg)\n");
+			outputText("-When using sneak attack and having equipped any flying sword(s) for melee sneak attack and any of Moonlight flying sword(s) for range sneak attack they would be part of the attack too. Moonlight flying sword(s) would also increase dmg multiplier of sneak attack by 1.\n");
+			outputText("-New event perk: Commanding Tone. Gained by having 5 Vocal Training sessions with Charybdis. Effects: Minion and Follower Damage increased by 10%.\n");
+			outputText("-New event perk: Diaphragm control. Gained by having 10 Vocal Training sessions with Charybdis. Effects: Minion and Follower Damage increased by an additional 10%, and followers will act more often.\n");
+			outputText("-New event perk: Vocal Tactician. Gained by having 15 Vocal Training sessions with Charybdis. Effects: Minion and Follower Damage increased by another 15%. Followers will act even more frequently.\n");
+			outputText("-Motivation (Su) perk have added in desc potential synergy with other perk to allow henchman attack 3 times per turn.\n");
+			outputText("-After clearing Deep Cave (Zetaz dungeon) can meet at Beach are Charybris - male scylla. He have various interactions and could even train pc stats (str/spe/tou) up to their limits or give vocal trainings to give some perks that would help with commanding minions/henchmen.\n");
+			outputText("-Tyrantia traiing cap now is increased (30 > 40).\n");
+			outputText("-Constant Buildup - If you are in Rut or Heat, halve the lust DoT you take from it, and deal an additional 20% physical damage while under the effects. (35 training sessions)\n");
+			outputText("-New event perk: Mental Bastion. Gained by having 40 training sessions with Tyrantia. Effects: The effects of Tyrant State are doubled: While active, you take 30% less damage from magic. You count as either pure or corrupt (whichever is better) for equipment. (Pure for the Beautiful weapons etc, corrupt for corrupt weapons)\n");
+			outputText("-New event perk: Drill Sergeant. Gained by having 20 Vocal Training sessions with Charybdis. Effects: Your voice and bearing now commands respect, even among the surliest of recruits. Your followers will attack an additional time per round, and are guaranteed to attack.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -172,7 +187,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
-			outputText("-\n");
 			outputText("-Fixed bugs: Dracula/lina PC unable to find get ghoul if they not learned this as normal Vampire, unable to buy manual for 1st atk: f. swords, Arigean Princess PC not been fully immune to TF-ing like other perm races, Weresharks not having their stats changing according to moon phase or boosted during use of Crinos Shape, Phoenix TF adding mutagen penatly instead of stat curse, ");
 			outputText("Endless Rage draining 10x too much wrath per turn, Berzerker/Lustzerker still req. to be activated after they been activated as part of Asura Form activation, dormant state of wereraces 'blessings' increasing race score and not lowering it, Hinezumi Buring Blood IM accesable by Bunny race, returning from teleportation circle at 4th floor of river dungeon sending PC to ");
 			outputText("3rd floor teleportation circle room, perk allowing to always run away from enemy/ies been ignored in dungeons, unarmed/feral giving mastery gains for small weapons, 2 of 4 SF to Elemental Energy conversion options having wrong check for usable SF, using Fiery Band for calling Kiha to help fight... Kiha, Ceraph after update still not able to win using her super cool lust beam attack, ");

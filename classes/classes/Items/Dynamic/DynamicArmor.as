@@ -79,6 +79,8 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 		var qdef:Number          = numberOr(subtype.qdef, 0);
 		var bulge:Boolean        = subtype.bulge;
 		var undergarment:Boolean = valueOr(subtype.undergarment,true);
+		var itemEffects:Array    = subtype.effects || [];
+		var qitemEffects:Array   = subtype.qeffects || [];
 		if (parsedParams.error) {
 			trace("[ERROR] Failed to parse " + id + " with error " + parsedParams.error);
 			name      = "ERROR " + name;
@@ -104,7 +106,7 @@ public class DynamicArmor extends Armor implements IDynamicItem {
 				undergarment
 		);
 		
-		DynamicItems.postConstruct(this, tags, buffs);
+		DynamicItems.postConstruct(this, tags, buffs, itemEffects, qitemEffects, quality);
 	}
 	
 	override public function effectDescriptionParts():Array {

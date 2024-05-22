@@ -7291,6 +7291,9 @@ public class Combat extends BaseContent {
         if (player.weapon == weapons.SCECOMM) elementalamplification += 0.5;
 		if (player.weaponRange == weaponsrange.E_TOME_) elementalamplification += 0.5;
         if (player.shield == shields.Y_U_PAN) elementalamplification += 0.25;
+		if (player.hasPerk(PerkLib.CommandingTone)) elementalamplification += 0.1;
+		if (player.hasPerk(PerkLib.DiaphragmControl)) elementalamplification += 0.1;
+		if (player.hasPerk(PerkLib.VocalTactician)) elementalamplification += 0.15;
         if (flags[kFLAGS.WILL_O_THE_WISP] == 2) {
             elementalamplification += 0.1;
             if (player.hasPerk(PerkLib.WispLieutenant)) elementalamplification += 0.2;
@@ -10458,12 +10461,16 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
             player.takeLustDamage((player.statusEffectv1(StatusEffects.DemonSeed) + int(player.effectiveSensitivity() / 30) + int(player.lib / 30) + int(player.cor / 30)), true);
         }
         if (player.inHeat && player.vaginas.length > 0 && monster.cockTotal() > 0) {
-            player.takeLustDamage((rand(player.lib / 5) + 3 + rand(5)), true);
+			var HeatLustDot:Number = (rand(player.lib / 5) + 3 + rand(5));
+			if (TyrantiaFollower.TyrantiaTrainingSessions >= 35) HeatLustDot *= 0.5;
+            player.takeLustDamage(HeatLustDot, true);
             outputText("Your " + vaginaDescript(0) + " clenches with an instinctual desire to be touched and filled.  ");
             outputText("If you don't end this quickly you'll give in to your heat.\n\n");
         }
         if (player.inRut && player.cockTotal() > 0 && monster.hasVagina()) {
-            player.takeLustDamage((rand(player.lib / 5) + 3 + rand(5)), true);
+            var RutLustDot:Number = (rand(player.lib / 5) + 3 + rand(5));
+			if (TyrantiaFollower.TyrantiaTrainingSessions >= 35) RutLustDot *= 0.5;
+            player.takeLustDamage(RutLustDot, true);
             if (player.cockTotal() > 1) outputText("Each of y");
             else outputText("Y");
             if (monster.plural) outputText("our [cocks] dribbles pre-cum as you think about plowing [themonster] right here and now, fucking [monster his] [monster cunt]s until they're totally fertilized and pregnant.\n\n");
@@ -15983,6 +15990,9 @@ public function sendSkeletonToFight():void {
     if (player.hasPerk(PerkLib.BoneSoul)) dmgamp += 0.1;
     if (player.hasPerk(PerkLib.SkeletonLord)) dmgamp += 0.1;
     if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
+	if (player.hasPerk(PerkLib.CommandingTone)) dmgamp += 0.1;
+	if (player.hasPerk(PerkLib.DiaphragmControl)) dmgamp += 0.1;
+	if (player.hasPerk(PerkLib.VocalTactician)) dmgamp += 0.15;
     if (flags[kFLAGS.WILL_O_THE_WISP] == 2) {
         dmgamp += 0.1;
         if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;
@@ -16042,6 +16052,9 @@ public function skeletonSmash():void {
     if (player.hasPerk(PerkLib.BoneSoul)) dmgamp += 0.1;
     if (player.hasPerk(PerkLib.SkeletonLord)) dmgamp += 0.1;
     if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
+	if (player.hasPerk(PerkLib.CommandingTone)) dmgamp += 0.1;
+	if (player.hasPerk(PerkLib.DiaphragmControl)) dmgamp += 0.1;
+	if (player.hasPerk(PerkLib.VocalTactician)) dmgamp += 0.15;
     if (flags[kFLAGS.WILL_O_THE_WISP] == 2) {
         dmgamp += 0.1;
         if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;
@@ -16209,6 +16222,8 @@ public function oniRampagePowerMulti():Number {
 public function tyrantStagePowerMulti():Number {
     var tyrantStagePowerMulti:Number = 1.5;
     if (TyrantiaFollower.TyrantiaTrainingSessions >= 10) tyrantStagePowerMulti += 0.2;
+    if (TyrantiaFollower.TyrantiaTrainingSessions >= 35 && (player.inHeat || player.inRut)) tyrantStagePowerMulti += 0.2;
+    if (TyrantiaFollower.TyrantiaTrainingSessions >= 40) tyrantStagePowerMulti *= 2;
     return tyrantStagePowerMulti;
 }
 
@@ -16385,6 +16400,11 @@ public function flyingWithSoulforceCost():Number {
     var fwsc:Number = 500;
     if (player.perkv1(PerkLib.Dantain) > 2) fwsc -= 100;
     return fwsc;
+}
+
+public function flyingSwordForRangeSneakAttack():Boolean {
+	if (player.weaponFlyingSwords == weaponsflyingswords.MOONLGT || player.weaponFlyingSwords == weaponsflyingswords.MOONLGT2 || player.weaponFlyingSwords == weaponsflyingswords.MOONLGT3) return true;
+	else return false;
 }
 
 public function rangeMasteryEXPgained(crit:Boolean = false):Number {
@@ -16740,4 +16760,3 @@ private function touSpeStrScale(stat:int):Number {
     }
 }
 }
-

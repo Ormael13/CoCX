@@ -1437,7 +1437,7 @@ use namespace CoC;
 					(hasPerk(PerkLib.DragonRegalBreath)) || (tailType == Tail.GARGOYLE_2) || (faceType == Face.WOLF) || (Face.Types[faceType].bite) || (isRaceCached(Races.COUATL)) || (hasAGoreAttack()));
 		}
 
-		public function allEquipment():/*ItemType*/Array {
+		public function allEquipment():/*Equipable*/Array {
 			var result:Array = [];
 			for each (var slot:int in ItemConstants.EquipmentSlotIds) {
 				if (_equipment[slot] && !_equipment[slot].isNothing) result.push(_equipment[slot]);
@@ -1446,7 +1446,8 @@ use namespace CoC;
 		}
 
 		/**
-		 * Silently turns equipped item into newItem
+		 * Silently turns equipped item into newItem.
+		 * All callbacks - beforeUnequip, afterUnequip, beforeEquip, and afterEquip - are still invoked.
 		 * @return true if item was successfully replaced, false if it there is no such equipment.
 		 */
 		public function replaceEquipment(item:Equipable, newItem:Equipable):Boolean {
@@ -1455,59 +1456,6 @@ use namespace CoC;
 				internalEquipItem(slot, newItem as Equipable, false, true);
 			}
 			return false;
-		}
-		
-		public function hasEnchantment(type:EnchantmentType):Boolean {
-			for each (var itype:ItemType in allEquipment()) {
-				if (itype.hasEnchantment(type)) return true;
-			}
-			return false;
-		}
-		
-		/**
-		 * @param aggregate "sum"|"max"|"min".
-		 */
-		public function enchantmentPower(type:EnchantmentType, aggregate:String="sum"):Number {
-			var power:Number = 0;
-			for each (var itype:ItemType in allEquipment()) {
-				var ipower:Number = itype.enchantmentPower(type);
-				if (aggregate === "sum") {
-					power += ipower
-				} else if (aggregate === "max") {
-					power = Math.max(power, ipower);
-				} else if (aggregate === "min") {
-					power = Math.min(power, ipower);
-				}
-			}
-			return power;
-		}
-		
-		public function findEnchantment(type:EnchantmentType):Enchantment {
-			for each (var itype:ItemType in allEquipment()) {
-				var e:Enchantment = itype.enchantmentOfType(type);
-				if (e) return e;
-			}
-			return null;
-		}
-		
-		/**
-		 * @return {Array} pair [Enchantment,ItemType]
-		 */
-		public function findEnchantmentAndItem(type:EnchantmentType):Array {
-			for each (var itype:ItemType in allEquipment()) {
-				var e:Enchantment = itype.enchantmentOfType(type);
-				if (e) return [e, itype];
-			}
-			return null;
-		}
-		
-		public function allEnchantments(type:EnchantmentType):/*Enchantment*/Array {
-			var result:/*Enchantment*/Array = [];
-			for each (var itype:ItemType in allEquipment()) {
-				var e:Enchantment = itype.enchantmentOfType(type);
-				if (e) result.push(e);
-			}
-			return result;
 		}
 		
 		public function hasItemEffect(type: ItemEffectType):Boolean {
@@ -3420,6 +3368,7 @@ use namespace CoC;
 			if (weapon == game.weapons.NEXUS) {
 				mult -= 20;
 			}
+			if (hasStatusEffect(StatusEffects.TyrantState) && TyrantiaFollower.TyrantiaTrainingSessions >= 40) mult -= 30;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_MAGIC_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_MAGIC_R) mult -= necklaceEffectMagnitude;
 			if (jewelry1.hasBuff('res_magic') && jewelry2.hasBuff('res_magic') && jewelry3.hasBuff('res_magic') && jewelry4.hasBuff('res_magic') && headjewelryEffectId == HeadJewelryLib.MODIFIER_MAGIC_R && necklaceEffectId == NecklaceLib.MODIFIER_MAGIC_R) mult -= 6;

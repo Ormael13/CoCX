@@ -37,18 +37,15 @@ public class Shield extends Equipable
 		
 		public function get perk():String { return _perk; }
 		
-		override public function get description():String {
-			var desc:String = _description;
-			//Type
-			desc += "\n\nType: Shield";
-            if (perk != "") desc += " (" + perk + ")";
-			//Block Rating
-			desc += "\nBlock: " + String(block);
-			//Value
-			desc += "\nBase value: " + String(value);
-			return desc;
+		override public function effectDescriptionParts():Array {
+			var list:Array = super.effectDescriptionParts();
+			// Type
+			list.push([10,"Type: Shield"]);
+			// Attack
+			var block:Number = this.block;
+			list.push([20, "Block: " + block ]);
+			return list;
 		}
-		
 		
 		override public function canEquip(doOutput:Boolean):Boolean {
 			if (game.player.weaponRangePerk == "Dual Firearms" || game.player.weaponRangePerk == "Dual 2H Firearms") {
