@@ -19,13 +19,13 @@ public class Achievements extends BaseContent
 			//Set text.
 			if (!silent) outputText("<li><b>" + title + ":</b> ");
 			if (achievements[achievement] > 0) {
-				if (!silent) outputText("<font color=\"#008000\">Unlocked</font> - " + descUnlocked);
+				if (!silent) outputText("[font-green]Unlocked[/font] - " + descUnlocked);
 				achievementsTotalCurrentlyUnlocked++;
 				achievementsEarned++;
 			}
-			else if (!silent) outputText("<font color=\"#800000\">Locked</font> - " + descLocked);
+			else if (!silent) outputText("[font-dred]Locked[/font] - " + descLocked);
 			if (isShadow) {
-				if (!silent) outputText(" - <font color=\"#660066\">Shadow Achievement</font>");
+				if (!silent) outputText(" - [font-dark]Shadow Achievement[/font]");
 				achievementsTotalCurrentlyUnlocked++;
 				achievementsShadowEarned++;
 			}

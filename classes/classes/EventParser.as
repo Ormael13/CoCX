@@ -77,9 +77,9 @@ public class EventParser {
                 "Get rekt, noob!",
                 "OOF."];
             if (clear) EngineCore.clearOutput();
-            EngineCore.outputText("\n\n<font color=\"#800000\">");
+            EngineCore.outputText("\n\n[font-dred]");
             EngineCore.outputText("<b>" + textChoices[Utils.rand(EngineCore.silly() ? textChoices.length : 4)] + "</b>");
-            EngineCore.outputText("</font>");
+            EngineCore.outputText("[/font]");
             //Delete save on hardcore.
             if (CoC.instance.flags[kFLAGS.HARDCORE_MODE] > 0) {
                 EngineCore.outputText("\n\n<b>Your save file has been deleted as you are on Hardcore Mode!</b>");

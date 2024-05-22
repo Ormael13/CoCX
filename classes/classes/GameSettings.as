@@ -70,34 +70,34 @@ public class GameSettings extends BaseContent {
 
 		clearOutput();
 		displayHeader("Gameplay Settings");
-		if (flags[kFLAGS.HARDCORE_MODE] > 0) outputText("<font color=\"#ff0000\">Hardcore mode is enabled. Cheats are disabled.</font>\n\n");
-		if (debug) outputText("Debug Mode: <font color=\"#008000\"><b>ON</b></font>\n Items will not be consumed by use, fleeing always succeeds, and bad-ends can be ignored.");
-		else outputText("Debug Mode: <font color=\"#800000\"><b>OFF</b></font>\n Items consumption will occur as normal.");
+		if (flags[kFLAGS.HARDCORE_MODE] > 0) outputText("[font-red]Hardcore mode is enabled. Cheats are disabled.[/font]\n\n");
+		if (debug) outputText("Debug Mode: [font-green]<b>ON</b>[/font]\n Items will not be consumed by use, fleeing always succeeds, and bad-ends can be ignored.");
+		else outputText("Debug Mode: [font-dred]<b>OFF</b>[/font]\n Items consumption will occur as normal.");
 		outputText("\n\n");
 		if (flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
-			outputText("Silly Mode: <font color=\"#008000\"><b>ON</b></font>\n Crazy, nonsensical, and possibly hilarious things may occur.");
+			outputText("Silly Mode: [font-green]<b>ON</b>[/font]\n Crazy, nonsensical, and possibly hilarious things may occur.");
 		else
-			outputText("Silly Mode: <font color=\"#800000\"><b>OFF</b></font>\n You're an incorrigable stick-in-the-mud with no sense of humor.");
+			outputText("Silly Mode: [font-dred]<b>OFF</b>[/font]\n You're an incorrigable stick-in-the-mud with no sense of humor.");
 		outputText("\n\n");
 		if (flags[kFLAGS.LOW_STANDARDS_FOR_ALL]) {
-			outputText("Low standards Mode: <font color=\"#008000\"><b>ON</b></font>\n NPCs ignore body type preferences.");
+			outputText("Low standards Mode: [font-green]<b>ON</b>[/font]\n NPCs ignore body type preferences.");
 			outputText("\n (Not gender preferences though. You still need the right hole.)");
 		}
 		else
-			outputText("Low standards Mode: <font color=\"#800000\"><b>OFF</b></font>\n NPCs have body-type preferences.");
+			outputText("Low standards Mode: [font-dred]<b>OFF</b>[/font]\n NPCs have body-type preferences.");
 		outputText("\n\n");
 		if (flags[kFLAGS.HYPER_HAPPY]) {
-			outputText("Hyper Happy Mode: <font color=\"#008000\"><b>ON</b></font>\n Only reducto and humus shrink endowments.");
+			outputText("Hyper Happy Mode: [font-green]<b>ON</b>[/font]\n Only reducto and humus shrink endowments.");
 			outputText("\n Incubus draft doesn't affect breasts, and succubi milk doesn't affect cocks.")
 		}
 		else
-			outputText("Hyper Happy Mode: <font color=\"#800000\"><b>OFF</b></font>\n Male enhancement potions shrink female endowments, and vice versa.");
+			outputText("Hyper Happy Mode: [font-dred]<b>OFF</b>[/font]\n Male enhancement potions shrink female endowments, and vice versa.");
 		outputText("\n\n");
 		if (flags[kFLAGS.AUTO_LEVEL] >= 1) {
-			outputText("Automatic Leveling: <font color=\"#008000\"><b>ON</b></font>\n Leveling up is done automatically once you accumulate enough experience.");
+			outputText("Automatic Leveling: [font-green]<b>ON</b>[/font]\n Leveling up is done automatically once you accumulate enough experience.");
 		}
 		else
-			outputText("Automatic Leveling: <font color=\"#800000\"><b>OFF</b></font>\n Leveling up is done manually.");
+			outputText("Automatic Leveling: [font-dred]<b>OFF</b>[/font]\n Leveling up is done manually.");
 		outputText("\n\n");
 		
 		outputText("<b><u>SAVE-RELATED FLAGS</u></b>\n");
@@ -105,42 +105,44 @@ public class GameSettings extends BaseContent {
 
 		outputText("\n\n");
 		if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) {
-			outputText("Difficulty: <font color=\"#808000\"><b>Normal</b></font>\n No opponent(s) stats modifiers. You can resume from bad-ends with penalties. No penatlies for too high wrath.");
+			outputText("Difficulty: [font-olive]<b>Normal</b>[/font]\n No opponent(s) stats modifiers. You can resume from bad-ends with penalties. No penatlies for too high wrath.");
 		}
 		else if (flags[kFLAGS.GAME_DIFFICULTY] == 1) {
-			outputText("Difficulty: <b><font color=\"#800000\">Hard</font></b>\n Opponent(s) take 2x less HP/Lust dmg, deal 20% more damage and gives ~20% more EXP. No penatlies for too high wrath. Bad-ends can ruin your game.");
+			outputText("Difficulty: <b>[font-dred]Hard[/font]</b>\n Opponent(s) take 2x less HP/Lust dmg, deal 20% more damage and gives ~20% more EXP. No penatlies for too high wrath. Bad-ends can ruin your game.");
 		}
 		else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) {
-			outputText("Difficulty: <b><font color=\"#C00000\">Nightmare</font></b>\n Opponent(s) take 5x less HP/Lust dmg, deal 50% more damage and gives ~50% more EXP.");
+			outputText("Difficulty: <b>[font-red]Nightmare[/font]</b>\n Opponent(s) take 5x less HP/Lust dmg, deal 50% more damage and gives ~50% more EXP.");
 		}
 		else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) {
-			outputText("Difficulty: <b><font color=\"#FF0000\">Extreme</font></b>\n Opponent(s) take 10x less HP/Lust dmg, deal more 100% damage and gives ~100% more EXP.");
+			outputText("Difficulty: <b>[font-lred]Extreme[/font]</b>\n Opponent(s) take 10x less HP/Lust dmg," +
+					" deal more 100% damage and gives ~100% more EXP.");
 		}
 		else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) {
-			outputText("Difficulty: <b><font color=\"#FF0000\">Xianxia MC</font></b>\n Opponent(s) take 25x less HP/Lust dmg, deal more 250% damage and gives ~150% more EXP.");
+			outputText("Difficulty: <b>[font-pink]Xianxia MC[/font]</b>\n Opponent(s) take 25x less HP/Lust dmg, deal" +
+					" more 250% damage and gives ~150% more EXP.");
 		}
 		outputText("\n\n");
 		if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) {
-			outputText("Easy Mode: <font color=\"#008000\"><b>ON</b></font>\n Bad-ends can be ignored and combat is so super easy that even CoC Vanilla and CoC2 devs can breeze it with one hand ^^ (dmg monsters deal is 10x lower, no scaling of some of their combat stats and no penalty for level difference)");
+			outputText("Easy Mode: [font-green]<b>ON</b>[/font]\n Bad-ends can be ignored and combat is so super easy that even CoC Vanilla and CoC2 devs can breeze it with one hand ^^ (dmg monsters deal is 10x lower, no scaling of some of their combat stats and no penalty for level difference)");
 		}
 		else {
-			outputText("Easy Mode: <font color=\"#800000\"><b>OFF</b></font>\n Bad-ends can ruin your game and combat is back to what it should be.");
+			outputText("Easy Mode: [font-dred]<b>OFF</b>[/font]\n Bad-ends can ruin your game and combat is back to what it should be.");
 		}
 		outputText("\n\n");
 		if (daysPerYear_temp == 0) {
-			outputText("Timescale: <font color=\"#008000\"><b>REAL</b></font>\n In-game date (used for holiday events) uses real date from your computer.");
-			if (flags[kFLAGS.DAYS_PER_YEAR] > 0) outputText("\n<font color=\"#800000\"><b>WARNING: your current in-game date will be erased after you exit this menu.</b></font>");
+			outputText("Timescale: [font-green]<b>REAL</b>[/font]\n In-game date (used for holiday events) uses real date from your computer.");
+			if (flags[kFLAGS.DAYS_PER_YEAR] > 0) outputText("\n[font-dred]<b>WARNING: your current in-game date will be erased after you exit this menu.</b>[/font]");
 		} else {
-			outputText("Timescale: <font color=\"#000080\"><b>DAYS ("+daysPerYear_temp+" in-game days per year)</b></font>\n In-game date is calculated from the days spent in Mareth.");
+			outputText("Timescale: [font-blue]<b>DAYS ("+daysPerYear_temp+" in-game days per year)</b>[/font]\n In-game date is calculated from the days spent in Mareth.");
 		}
 		outputText("\nDay of the month event requirements (e.g. exact days of Easter/Thanksgiving) <b>" + (daysPerYear_temp == 0 || daysPerYear_temp == 365 ? "ARE" : "are NOT") + "</b> taken into account with the selected option.");
 
 		outputText("\n\n");
 		if (flags[kFLAGS.WATERSPORTS_ENABLED] >= 1) {
-			outputText("Watersports: <font color=\"#008000\"><b>Enabled</b></font>\n Watersports scenes are enabled. (You kinky person)");
+			outputText("Watersports: [font-green]<b>Enabled</b>[/font]\n Watersports scenes are enabled. (You kinky person)");
 		}
 		else
-			outputText("Watersports: <font color=\"#800000\"><b>Disabled</b></font>\n Watersports scenes are disabled.");
+			outputText("Watersports: [font-dred]<b>Disabled</b>[/font]\n Watersports scenes are disabled.");
 		outputText("\n\n");
 		menu();
 		addButton(0, "Toggle Debug", toggleDebug).hint("Turn on debug mode. Debug mode is intended for testing purposes but can be thought of as a cheat mode.  Items are infinite and combat is easy to escape from.  Weirdness and bugs are to be expected.");
@@ -152,8 +154,11 @@ public class GameSettings extends BaseContent {
 			addButton(5, "Difficulty", difficultySelectionMenu).hint("Adjust the game difficulty to make it easier or harder.");
 			if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) addButton(6, "Easy Mode", toggleFlag, kFLAGS.EASY_MODE_ENABLE_FLAG, settingsScreenGameSettings).hint("Toggles easy mode.  Enemy damage is 10% of normal and bad-ends can be ignored.");
 			else addButtonDisabled(6, "Easy Mode", "Diffulty setting is too high to allow toggle easy mode.");
-			addButton(7, "Enable Surv", enableSurvivalPrompt).hint("Enable Survival mode. This will enable hunger. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off!</font>");
-			addButton(8, "Enable Real", enableRealisticPrompt).hint("Enable Realistic mode. This will make the game a bit realistic. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off! Do not turn this on if you have hyper endowments.</font>");
+			addButton(7, "Enable Surv", enableSurvivalPrompt).hint("Enable Survival mode. This will enable hunger." +
+					" \n\n<b>[font-lred]Note: This is permanent and cannot be turned off![/font]</b>");
+			addButton(8, "Enable Real", enableRealisticPrompt).hint("Enable Realistic mode. This will make the game" +
+					" a bit realistic. \n\n<b>[font-lred]Note: This is permanent and cannot be turned off!" +
+					" Do not turn this on if you have hyper endowments.[/font]</b>");
 			addButton(9, "Fetishes", fetishSubMenu).hint("Toggle some of the weird fetishes such as watersports and worms.");
 			addButton(10, "Timescale", timescaleCycle).hint("Change the way how time and date work in the game.");
 		}
@@ -548,60 +553,63 @@ public class GameSettings extends BaseContent {
 		clearOutput();
 		displayHeader("Gameplay Settings");
 		if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 0) {
-			outputText("Secondary Stats Modifier: <font color=\"#808000\"><b>Normal</b></font>\n No opponent secondary stats modifiers.");
+			outputText("Secondary Stats Modifier: [font-olive]<b>Normal</b>[/font]\n No opponent secondary stats modifiers.");
 		}
 		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) {
-			outputText("Secondary Stats Modifier: <b><font color=\"#800000\">Hard</font></b>\n Opponent has 10x (bosses) and 5x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			outputText("Secondary Stats Modifier: <b>[font-dred]Hard[/font]</b>\n Opponent has 10x (bosses) and 5x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
 		}
 		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) {
-			outputText("Secondary Stats Modifier: <b><font color=\"#C00000\">Nightmare</font></b>\n Opponent has 40x (bosses) and 10x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			outputText("Secondary Stats Modifier: <b>[font-red]Nightmare[/font]</b>\n Opponent has 40x (bosses)" +
+					" and 10x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
 		}
 		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) {
-			outputText("Secondary Stats Modifier: <b><font color=\"#FF0000\">Extreme</font></b>\n Opponent has 200x (bosses) and 25x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			outputText("Secondary Stats Modifier: <b>[font-lred]Extreme[/font]</b>\n Opponent has 200x (bosses)" +
+					" and 25x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
 		}
 		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] >= 4) {
-			outputText("Secondary Stats Modifier: <b><font color=\"#FF0000\">Xianxia</font></b>\n Opponent has 1600x (bosses) and 100x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			outputText("Secondary Stats Modifier: <b>[font-pink]Xianxia[/font]</b>\n Opponent has 1600x (bosses)" +
+					" and 100x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
 		}
 		outputText("\n\n");
 		if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 0) {
-			outputText("Elite/Champion/Boss HP bonus: <font color=\"#808000\"><b>Normal</b></font>\n No HP modifiers.\n");
+			outputText("Elite/Champion/Boss HP bonus: [font-olive]<b>Normal</b>[/font]\n No HP modifiers.\n");
 		}
 		else if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 1) {
-			outputText("Elite/Champion/Boss HP bonus: <b><font color=\"#800000\">Fantasy</font></b>\n 1.25x / 2.5x / 5x HP modifiers.");
+			outputText("Elite/Champion/Boss HP bonus: <b>[font-dred]Fantasy[/font]</b>\n 1.25x / 2.5x / 5x HP modifiers.");
 		}
 		else if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] >= 2) {
-			outputText("Elite/Champion/Boss HP bonus: <b><font color=\"#C00000\">Infernium</font></b>\n 2.5x / 5x / 10x HP modifiers.");
+			outputText("Elite/Champion/Boss HP bonus: <b>[font-red]Infernium[/font]</b>\n 2.5x / 5x / 10x HP modifiers.");
 		}
 		outputText("\n\n");
 		if (flags[kFLAGS.STRENGTH_SCALING] >= 1) {
-			outputText("Strength Scaling: <font color=\"#008000\"><b>New</b></font>\n Values are less random and a bit higher on average than in old scaling.");
+			outputText("Strength Scaling: [font-green]<b>New</b>[/font]\n Values are less random and a bit higher on average than in old scaling.");
 		}
 		else
-			outputText("Strength Scaling: <font color=\"#800000\"><b>Old</b></font>\n Values are more random and a bit lower on average than in new scaling.");
+			outputText("Strength Scaling: [font-dred]<b>Old</b>[/font]\n Values are more random and a bit lower on average than in new scaling.");
 		outputText("\n\n");
 		if (flags[kFLAGS.SPEED_SCALING] >= 1) {
-			outputText("Speed Scaling: <font color=\"#008000\"><b>New</b></font>\n Values are less random and a bit higher on average than in old scaling.");
+			outputText("Speed Scaling: [font-green]<b>New</b>[/font]\n Values are less random and a bit higher on average than in old scaling.");
 		}
 		else
-			outputText("Speed Scaling: <font color=\"#800000\"><b>Old</b></font>\n Values are more random and a bit lower on average than in new scaling.");
+			outputText("Speed Scaling: [font-dred]<b>Old</b>[/font]\n Values are more random and a bit lower on average than in new scaling.");
 		outputText("\n\n");
 		if (flags[kFLAGS.WISDOM_SCALING] >= 1) {
-			outputText("Wisdom Scaling: <font color=\"#008000\"><b>New</b></font>\n Values are less random and a bit higher on average than in old scaling.");
+			outputText("Wisdom Scaling: [font-green]<b>New</b>[/font]\n Values are less random and a bit higher on average than in old scaling.");
 		}
 		else
-			outputText("Wisdom Scaling: <font color=\"#800000\"><b>Old</b></font>\n Values are more random and a bit lower on average than in new scaling.");
+			outputText("Wisdom Scaling: [font-dred]<b>Old</b>[/font]\n Values are more random and a bit lower on average than in new scaling.");
 		outputText("\n\n");
 		if (flags[kFLAGS.INTELLIGENCE_SCALING] >= 1) {
-			outputText("Intelligence Scaling: <font color=\"#008000\"><b>New</b></font>\n Values are less random and a bit higher on average than in old scaling.");
+			outputText("Intelligence Scaling: [font-green]<b>New</b>[/font]\n Values are less random and a bit higher on average than in old scaling.");
 		}
 		else
-			outputText("Intelligence Scaling: <font color=\"#800000\"><b>Old</b></font>\n Values are more random and a bit lower on average than in new scaling.");
+			outputText("Intelligence Scaling: [font-dred]<b>Old</b>[/font]\n Values are more random and a bit lower on average than in new scaling.");
 		outputText("\n\n");
 		if (flags[kFLAGS.ITS_EVERY_DAY]) {
-			outputText("Eternal Holiday Mode: <font color=\"#008000\"><b>ON</b></font>\n All holiday events like Eastern/X-mas and etc. can happen at any day of the year.");
+			outputText("Eternal Holiday Mode: [font-green]<b>ON</b>[/font]\n All holiday events like Eastern/X-mas and etc. can happen at any day of the year.");
 		}
 		else
-			outputText("Eternal Holiday Mode: <font color=\"#800000\"><b>OFF</b></font>\n All holiday events happen only during their respective holiday times.");
+			outputText("Eternal Holiday Mode: [font-dred]<b>OFF</b>[/font]\n All holiday events happen only during their respective holiday times.");
 		outputText("\n\n");
 		menu();
 
@@ -645,13 +653,13 @@ public class GameSettings extends BaseContent {
 
 		function fastLvlSettings():void{
 			if (flags[kFLAGS.LVL_UP_FAST] == 2) {
-				outputText("Instant Leveling: <font color=\"#008000\"><b>ON, Direct Jump</b></font>\nInstantly levels you up to the highest possible given your xp.");
+				outputText("Instant Leveling: [font-green]<b>ON, Direct Jump</b>[/font]\nInstantly levels you up to the highest possible given your xp.");
 			}
 			else if (flags[kFLAGS.LVL_UP_FAST] == 1){
-				outputText("Instant Leveling: <font color=\"#000080\"><b>ON, Manual Increase</b></font>\nIncrease XP by specific amounts.");
+				outputText("Instant Leveling: [font-blue]<b>ON, Manual Increase</b>[/font]\nIncrease XP by specific amounts.");
 			}
 			else {
-				outputText("Instant Leveling: <font color=\"#800000\"><b>OFF</b></font>\nIndividual leveling up, i.e. One level click at a time.");
+				outputText("Instant Leveling: [font-dred]<b>OFF</b>[/font]\nIndividual leveling up, i.e. One level click at a time.");
 			}
 			outputText("\nThis setting has three modes: Default(Levelling up one at a time), Direct(Auto-calculates your highest and sets accordingly), and Manual(You are given the option to increase levels in increments.)");
 			outputText("Works in conjunction with Auto-Leveling.");
@@ -660,20 +668,20 @@ public class GameSettings extends BaseContent {
 
 		function mutationsSpoilersSetting():void {
 			if (flags[kFLAGS.MUTATIONS_SPOILERS] >= 1){
-				outputText("Mutation Assist: <font color=\"#008000\"><b>ON</b></font>\nAll mutations are known, and hints to acquire them are provided.");
+				outputText("Mutation Assist: [font-green]<b>ON</b>[/font]\nAll mutations are known, and hints to acquire them are provided.");
 			}
 			else {
-				outputText("Mutation Assist: <font color=\"#800000\"><b>OFF</b></font>\nFor players that want to discover the mutations by themselves.");
+				outputText("Mutation Assist: [font-dred]<b>OFF</b>[/font]\nFor players that want to discover the mutations by themselves.");
 			}
 			outputText("\n\n");
 		}
 
 		function simpPerkSetting():void{
 			if (flags[kFLAGS.NEWPERKSDISPLAY] >= 1){
-				outputText("Perks Display: <font color=\"#008000\"><b>Enabled</b></font>\nPerks are collapsed to their highest tier. Use this for faster perks menu loading, and less clutter.");
+				outputText("Perks Display: [font-green]<b>Enabled</b>[/font]\nPerks are collapsed to their highest tier. Use this for faster perks menu loading, and less clutter.");
 			}
 			else {
-				outputText("Perks Display: <font color=\"#800000\"><b>Disabled</b></font>\nPerks display uses old method of displaying all perks. Use this for getting all perk information, but higher loading lag and a whole menu of perks.");
+				outputText("Perks Display: [font-dred]<b>Disabled</b>[/font]\nPerks display uses old method of displaying all perks. Use this for getting all perk information, but higher loading lag and a whole menu of perks.");
 			}
 			outputText("\n\n");
 		}
@@ -886,37 +894,37 @@ public class GameSettings extends BaseContent {
 		outputText("\n\n");
 
 		outputText("Char Viewer: ");
-		if (flags[kFLAGS.CHARVIEWER_ENABLED] == 1) outputText("<font color=\"#008000\"><b>ON</b></font>\n Player visualiser is available under \\[Appearance\\].");
-		else outputText("<font color=\"#800000\"><b>OFF</b></font>\n Player visualiser is disabled.");
+		if (flags[kFLAGS.CHARVIEWER_ENABLED] == 1) outputText("[font-green]<b>ON</b>[/font]\n Player visualiser is available under \\[Appearance\\].");
+		else outputText("[font-dred]<b>OFF</b>[/font]\n Player visualiser is disabled.");
 		outputText("\nChar View Style: ");
 		switch (flags[kFLAGS.CHARVIEW_STYLE]) {
 			case 0:
-				outputText("<font color=\"#000080\"><b>ALWAYS</b></font>\n Viewer is shown on the left, always visible");
+				outputText("[font-blue]<b>ALWAYS</b>[/font]\n Viewer is shown on the left, always visible");
 				break;
 			case 1:
-				outputText("<font color=\"#800000\"><b>OLD</b></font>\n Viewer is shown on the left");
+				outputText("[font-dred]<b>OLD</b>[/font]\n Viewer is shown on the left");
 				break;
 			case 2:
-				outputText("<font color=\"#008000\"><b>NEW</b></font>\n Viewer is inline with text");
+				outputText("[font-green]<b>NEW</b>[/font]\n Viewer is inline with text");
 				break;
 		}
 		outputText("\nChar View Armor: ");
 		if (flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN])
-            outputText("<font color=\"#800000\"><b>OFF</b></font>\n Armor is hidden - enjoy your naked look!");
+            outputText("[font-dred]<b>OFF</b>[/font]\n Armor is hidden - enjoy your naked look!");
 		else
-            outputText("<font color=\"#008000\"><b>ON</b></font>\n Armor is shown (some body parts may be hidden or displayed wrongly)");
+            outputText("[font-green]<b>ON</b>[/font]\n Armor is shown (some body parts may be hidden or displayed wrongly)");
 		
         outputText("\n\n");
 		if (flags[kFLAGS.IMAGEPACK_OFF] == 0) {
-			outputText("Image Pack: <font color=\"#008000\"><b>ON</b></font>\n Image pack is enabled.");
+			outputText("Image Pack: [font-green]<b>ON</b>[/font]\n Image pack is enabled.");
 		}
 		else
-			outputText("Image Pack: <font color=\"#800000\"><b>OFF</b></font>\n Image pack is disabled.");
+			outputText("Image Pack: [font-dred]<b>OFF</b>[/font]\n Image pack is disabled.");
 
 		outputText("\n\n");
 
 		if (flags[kFLAGS.SHOW_SPRITES_FLAG] == 0) {
-			outputText("Sprites: <font color=\"#008000\"><b>ON</b></font>\n You like to look at pretty pictures.");
+			outputText("Sprites: [font-green]<b>ON</b>[/font]\n You like to look at pretty pictures.");
 			outputText("\n\n");
 			if (flags[kFLAGS.SPRITE_STYLE] == 0)
 				outputText("Sprite Type: <b>New</b>\n 16-bit sprites will be used.");
@@ -924,7 +932,7 @@ public class GameSettings extends BaseContent {
 				outputText("Sprite Type: <b>Old</b>\n 8-bit sprites will be used.");
 		}
 		else {
-			outputText("Sprites: <font color=\"#800000\"><b>OFF</b></font>\n There are only words. Nothing else.");
+			outputText("Sprites: [font-dred]<b>OFF</b>[/font]\n There are only words. Nothing else.");
 			outputText("\n\n\n");
 		}
 

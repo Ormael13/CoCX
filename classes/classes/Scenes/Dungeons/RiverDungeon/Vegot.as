@@ -37,7 +37,7 @@ use namespace CoC;
 				temp1 += Math.round(dmg0 * 0.1);
 				if (HP + temp1 > maxOverHP()) temp1 -= (this.maxOverHP() - HP);
 				HP += temp1;
-				outputText(" <b>(<font color=\"#008000\">+" + temp1 + "</font>)</b>");
+				outputText(" <b>([font-heal]+" + temp1 + "[/font])</b>");
 			}
 		}
 		

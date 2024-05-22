@@ -35,7 +35,7 @@ public class Alvina extends Monster
 			var nosferatu:Number = this.inte;
 			nosferatu += this.wis;
 			nosferatu *= 20;
-			outputText("Alvina chants and her shadow surges toward you, grabbing at your own. You feel your energy being drained as her shadow retreats back to her, Alvina laughs as she steals your vitality. <b>(<font color=\"#800000\">" + nosferatu + "</font>)</b>");
+			outputText("Alvina chants and her shadow surges toward you, grabbing at your own. You feel your energy being drained as her shadow retreats back to her, Alvina laughs as she steals your vitality. <b>([font-damage]" + nosferatu + "[/font])</b>");
 			this.HP += nosferatu;
 			player.HP -= nosferatu;
 			statScreenRefresh();

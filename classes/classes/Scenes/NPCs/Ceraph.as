@@ -179,8 +179,8 @@ public class Ceraph extends Monster
 				if (damage > 200) {
 					outputText(capitalA + short + " <b>mutilates</b> you with " + pronoun3 + " powerful " + weaponVerb + "! ");
 				}
-				if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-				else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>");
+				if (damage > 0) outputText("<b>([font-damage]" + damage + "[/font])</b>");
+				else outputText("<b>([font-miss]" + damage + "[/font])</b>");
 			}
 			EngineCore.statScreenRefresh();
 			outputText("\n");
@@ -214,8 +214,8 @@ public class Ceraph extends Monster
 				if (damage > 200) {
 					outputText(capitalA + short + " <b>mutilates</b> you with " + pronoun3 + " powerful " + weaponVerb + "! ");
 				}
-				if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-				else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>");
+				if (damage > 0) outputText("<b>([font-damage]" + damage + "[/font])</b>");
+				else outputText("<b>([font-miss]" + damage + "[/font])</b>");
 			}
 			EngineCore.statScreenRefresh();
 			outputText("\n");

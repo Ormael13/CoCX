@@ -82,7 +82,7 @@ public class Harpy extends Monster
 			if (damage <= 0) {
 				outputText("The harpy dives at you with her foot-talons, but you deflect the attack, grasp onto her leg, and swing her through the air, tossing her away from you before she has a chance to right herself.");
 			} else {
-				outputText("The harpy surges forward, bringing her razor-sharp claws down on you, tearing at all the exposed flesh she can reach! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+				outputText("The harpy surges forward, bringing her razor-sharp claws down on you, tearing at all the exposed flesh she can reach! <b>([font-damage]" + damage + "[/font])</b>");
 			}
 		}
 

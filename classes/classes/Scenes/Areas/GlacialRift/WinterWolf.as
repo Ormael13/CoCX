@@ -46,7 +46,7 @@ public class WinterWolf extends Monster
 				damage += 30 + Math.round(rand((str + weaponAttack) / 2));
 				player.takeIceDamage(damage);
 				dmgtaken += damage;
-				outputText(" (<b><font color=\"#800000\">" + damage + "</font></b>)");
+				outputText(" (<b>[font-damage]" + damage + "[/font]</b>)");
 			}
 			else {
 				outputText(" The coldness effects intensify as your movement slowing down even more.");
@@ -63,7 +63,7 @@ public class WinterWolf extends Monster
 				damage += 30 + Math.round(rand((str + weaponAttack) / 2));
 				player.takeIceDamage(damage);
 				dmgtaken += damage;
-				outputText(" (<b><font color=\"#800000\">" + damage + "</font></b>)");
+				outputText(" (<b>[font-damage]" + damage + "[/font]</b>)");
 			}
 		}
 

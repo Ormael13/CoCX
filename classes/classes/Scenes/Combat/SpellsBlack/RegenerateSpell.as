@@ -65,7 +65,7 @@ public class RegenerateSpell extends AbstractBlackSpell {
 			}
 			var hpChange2:Number = calcHeal();
 			if (display) {
-				outputText("<b>Regenerate healing power spreading in your body. (<font color=\"#008000\">+" + hpChange2 + "</font>)</b>\n\n");
+				outputText("<b>Regenerate healing power spreading in your body. ([font-heal]+" + hpChange2 + "[/font])</b>\n\n");
 			}
 			HPChange(hpChange2, false);
 		}
