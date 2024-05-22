@@ -1464,6 +1464,51 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.hasPerk(PerkLib.MummyLord)) player.addPerkValue(PerkLib.MummyLord,2,-1);
 				else player.addPerkValue(PerkLib.MummyLordDormant,2,-1);
 			}
+			//Heaven Tribulations
+			if (player.hasStatusEffect(StatusEffects.TribulationCountdown)) {
+				if (player.statusEffectv1(StatusEffects.TribulationCountdown) <= 1 && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) {
+					player.removeStatusEffect(StatusEffects.TribulationCountdown);
+					campScenes.HclassHTintro();
+					needNext = true;
+				}
+				else if (player.statusEffectv1(StatusEffects.TribulationCountdown) <= 1 && !player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) {
+					player.removeStatusEffect(StatusEffects.TribulationCountdown);
+					campScenes.GclassHTintro();
+					needNext = true;
+				}
+				else if (player.statusEffectv1(StatusEffects.TribulationCountdown) <= 1 && !player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) {
+					player.removeStatusEffect(StatusEffects.TribulationCountdown);
+					campScenes.FclassHTintro();
+					needNext = true;
+				}
+				else if (player.statusEffectv1(StatusEffects.TribulationCountdown) <= 1 && !player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) {
+					player.removeStatusEffect(StatusEffects.TribulationCountdown);
+					campScenes.FFclassHTintro();
+					needNext = true;
+				}
+				else player.addStatusValue(StatusEffects.TribulationCountdown, 1, -1);
+			}
+			if (!Holidays.isHalloween() && ZenjiScenes.isLover() && player.statusEffectv4(StatusEffects.ZenjiZList) == 2 && rand(5) < 2) {
+				SceneLib.zenjiScene.loverZenjiHalloweenEventEnding();//needNext = true;
+			}
+			if (SceneLib.mountain.minotaurScene.minoCumUpdate()) {
+				needNext = true;
+			}
+			else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 2 && CoC.instance.model.time.hours % 13 == 0 && flags[kFLAGS.MINOCUM_WARNING_COOLDOWN] == 0) { //Repeated warnings!
+				if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2)
+					outputText("\n<b>You shiver, feeling a little cold. Maybe you ought to get some more minotaur cum? You just don't feel right without that pleasant buzz in the back of your mind.</b>\n");
+				else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3)
+					outputText("\n<b>The steady fire of lust within you burns hot, making you shiver and grab at your head. You're STILL in withdrawal after having gone so long without a dose of minotaur love.  You just know you're going to be horny and achy until you get some.</b>\n");
+				needNext = true;
+			}
+			if (flags[kFLAGS.DICK_EGG_INCUBATION] > 0) {
+				flags[kFLAGS.DICK_EGG_INCUBATION]--;
+				trace("DICK BIRTH TIMER: " + flags[kFLAGS.DICK_EGG_INCUBATION]);
+				if (flags[kFLAGS.DICK_EGG_INCUBATION] == 1) {
+					SceneLib.masturbation.birthBeeEggsOutYourWang();
+					needNext = true;
+				}
+			}
 			if (CoC.instance.model.time.hours == 6) {
 				//Getting chrismas tree
 				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 2) {
@@ -1493,52 +1538,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						SophieFollowerScene.HarpyEggHatching = false;
 						SophieFollowerScene.HarpyEggReady = true;
 					}
-				}
-			}
-			//Heaven Tribulations
-			if (player.hasStatusEffect(StatusEffects.TribulationCountdown)) {
-				if (player.statusEffectv1(StatusEffects.TribulationCountdown) <= 1 && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) {
-					player.removeStatusEffect(StatusEffects.TribulationCountdown);
-					campScenes.HclassHTintro();
-					needNext = true;
-				}
-				else if (player.statusEffectv1(StatusEffects.TribulationCountdown) <= 1 && !player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) {
-					player.removeStatusEffect(StatusEffects.TribulationCountdown);
-					campScenes.GclassHTintro();
-					needNext = true;
-				}
-				else if (player.statusEffectv1(StatusEffects.TribulationCountdown) <= 1 && !player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) {
-					player.removeStatusEffect(StatusEffects.TribulationCountdown);
-					campScenes.FclassHTintro();
-					needNext = true;
-				}
-				else if (player.statusEffectv1(StatusEffects.TribulationCountdown) <= 1 && !player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) {
-					player.removeStatusEffect(StatusEffects.TribulationCountdown);
-					campScenes.FFclassHTintro();
-					needNext = true;
-				}
-				else player.addStatusValue(StatusEffects.TribulationCountdown, 1, -1);
-			}
-			if (!Holidays.isHalloween() && ZenjiScenes.isLover() && player.statusEffectv4(StatusEffects.ZenjiZList) == 2 && rand(5) < 2) {
-				SceneLib.zenjiScene.loverZenjiHalloweenEventEnding();
-				needNext = true;
-			}
-			if (SceneLib.mountain.minotaurScene.minoCumUpdate()) {
-				needNext = true;
-			}
-			else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 2 && CoC.instance.model.time.hours % 13 == 0 && flags[kFLAGS.MINOCUM_WARNING_COOLDOWN] == 0) { //Repeated warnings!
-				if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2)
-					outputText("\n<b>You shiver, feeling a little cold. Maybe you ought to get some more minotaur cum? You just don't feel right without that pleasant buzz in the back of your mind.</b>\n");
-				else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3)
-					outputText("\n<b>The steady fire of lust within you burns hot, making you shiver and grab at your head. You're STILL in withdrawal after having gone so long without a dose of minotaur love.  You just know you're going to be horny and achy until you get some.</b>\n");
-				needNext = true;
-			}
-			if (flags[kFLAGS.DICK_EGG_INCUBATION] > 0) {
-				flags[kFLAGS.DICK_EGG_INCUBATION]--;
-				trace("DICK BIRTH TIMER: " + flags[kFLAGS.DICK_EGG_INCUBATION]);
-				if (flags[kFLAGS.DICK_EGG_INCUBATION] == 1) {
-					SceneLib.masturbation.birthBeeEggsOutYourWang();
-					needNext = true;
 				}
 			}
 			return needNext;
