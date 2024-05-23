@@ -1488,9 +1488,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				else player.addStatusValue(StatusEffects.TribulationCountdown, 1, -1);
 			}
-			if (!Holidays.isHalloween() && ZenjiScenes.isLover() && player.statusEffectv4(StatusEffects.ZenjiZList) == 2 && rand(5) < 2) {
-				SceneLib.zenjiScene.loverZenjiHalloweenEventEnding();//needNext = true;
-			}
 			if (SceneLib.mountain.minotaurScene.minoCumUpdate()) {
 				needNext = true;
 			}

@@ -1164,6 +1164,7 @@ public class PerkMenu extends BaseContent {
 		
 		var desc:String = Parser.recursiveParser(pc.perkDesc);
 		var reqs:String = player.hasPerk(perk) ? "" : formatPerkRequirements(perk, true);
+		reqs = Parser.recursiveParser(reqs);
 		if (reqs) reqs = "\n" + reqs;
 		if (player.hasPerk(perk)) {
 			btn.disable();

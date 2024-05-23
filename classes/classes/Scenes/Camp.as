@@ -384,6 +384,11 @@ public class Camp extends NPCAwareContent{
 			SceneLib.zenjiScene.loverZenjiHalloweenEvent();
 			return;
 		}
+		if (!Holidays.isHalloween() && ZenjiScenes.isLover() && player.statusEffectv4(StatusEffects.ZenjiZList) == 2 && rand(5) < 2) {
+			hideMenus();
+			SceneLib.zenjiScene.loverZenjiHalloweenEventEnding();
+			return;
+		}
 		if (SceneLib.helScene.followerHel() && !player.hasStatusEffect(StatusEffects.HeliaOff)) {
 			if (Holidays.isHeliaBirthday() && flags[kFLAGS.HEL_FOLLOWER_LEVEL] >= 2 && date.fullYear > flags[kFLAGS.HELIA_BIRTHDAY_LAST_YEAR]) {
 				hideMenus();

@@ -2,6 +2,7 @@
  * Coded by aimozg on 01.06.2018.
  */
 package classes.Stats {
+import classes.Parser.Parser;
 import classes.internals.Utils;
 
 public class StatUtils {
@@ -108,12 +109,12 @@ public class StatUtils {
 					continue;
 				}
 				if (isPositiveStat) {
-					if (value > 0) text += '[font-green]';
-					else text += '[font-dred]';
+					if (value > 0) text += "[font-green]";
+					else text += "[font-dred]";
 				}
 				if (!isPositiveStat) {
-					if (value > 0) text += '[font-dred]';
-					else text += '[font-green]';
+					if (value > 0) text += "[font-dred]";
+					else text += "[font-green]";
 				}
 				text += '<b>' + buff.text + ':</b> ';
 				if (asPercent) {
@@ -137,12 +138,12 @@ public class StatUtils {
 		if (PerkBuff != 0)
 		{
 			if (isPositiveStat) {
-				if (PerkBuff > 0) text += '[font-green]';
-				else text += '[font-dred]';
+				if (PerkBuff > 0) text += "[font-green]";
+				else text += "[font-dred]";
 			}
 			if (!isPositiveStat) {
-				if (PerkBuff > 0) text += '[font-dred]';
-				else text += '[font-green]';
+				if (PerkBuff > 0) text += "[font-dred]";
+				else text += "[font-green]";
 			}
 			text += "<b>Perk:</b> ";
 			if (asPercent) {
@@ -153,6 +154,7 @@ public class StatUtils {
 			text += "[/font]";
 		}
 		if (hasHidden) text += '<b>Unknown Sources:</b> ±??';
+		text = Parser.recursiveParser(text);
 		return text;
 	}
 
