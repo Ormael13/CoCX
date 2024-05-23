@@ -68,7 +68,7 @@ public class ParserTags {
         //Non-Combat Colors
         "font-lred"             : function ():* { return '<font color="'+"#d00000"+'">'; },
         "font-red"              : function ():* { return '<font color="'+"#b00000"+'">'; },
-        "font-dkred"            : function ():* { return '<font color="'+"#900000"+'">'; },
+        "font-dred"             : function ():* { return '<font color="'+"#900000"+'">'; },
         "font-green"            : function ():* { return '<font color="'+"#00a000"+'">'; },
         "font-olive"            : function ():* { return '<font color="'+"#808000"+'">'; },
         "font-blue"             : function ():* { return '<font color="'+"#0000ff"+'">'; },
