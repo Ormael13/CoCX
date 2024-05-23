@@ -337,13 +337,13 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 			outputText("You pull out demon skull from your bag. Charybdis takes it wordlessly, handing over the gems in exchange.\n\n");
 			player.destroyItems(useables.DEMSKLL, 1, true);
 			CharyGivenSkulls += 1;
-			if (CharySeenSkulls2) player.gems += 50;
-			else player.gems += 30;
+			if (CharySeenSkulls2) player.gems += 100;
+			else player.gems += 60;
 			if (CharyGivenSkulls >= 10 && CharySeenSkulls2 == false) {
 				outputText("As you pass over the skulls, he sighs. <i>\"Okay, I have a bit of a confession to make. I don’t really want to use these for decoration. Frankly, I find it abhorrent.\"</i>\n\n");
 				outputText("You ask him what he wants with them, then. He isn’t making an instrument out of them, is he?\n\n");
 				outputText("<i>\"Ew. No. I don’t want my music sullied with the likes of them.\"</i> Charybdis seems a little nauseated by the thought. <i>\"No…The truth is, I don’t want the skulls for anything, they’re just…proof of kill.\"</i> He rolls his shoulders. <i>\"While I kill the bastards if I have to, it takes a special kind of crazy to go out hunting the damned things.\"</i> ");
-				outputText("He gives you a wink. <i>\"Crazy I like, but that’s beside the point.\"</i> He takes a deep breath. <i>\"I make quite a lot of gems performing, so I…Want to pay it forward, so to speak. Motivating those who can to kill them? That I can do.\"</i> He grins, putting a hand on your shoulder. <i>\"I’ll give you 50 from now on. Just keep giving them hell, [name].\"</i>\n\n");
+				outputText("He gives you a wink. <i>\"Crazy I like, but that’s beside the point.\"</i> He takes a deep breath. <i>\"I make quite a lot of gems performing, so I…Want to pay it forward, so to speak. Motivating those who can to kill them? That I can do.\"</i> He grins, putting a hand on your shoulder. <i>\"I’ll give you 100 from now on. Just keep giving them hell, [name].\"</i>\n\n");
 				CharySeenSkulls2 = true;
 				charyAffection(10);
 			}

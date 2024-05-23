@@ -169,6 +169,11 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Mental Bastion. Gained by having 40 training sessions with Tyrantia. Effects: The effects of Tyrant State are doubled: While active, you take 30% less damage from magic. You count as either pure or corrupt (whichever is better) for equipment. (Pure for the Beautiful weapons etc, corrupt for corrupt weapons)\n");
 			outputText("-New event perk: Drill Sergeant. Gained by having 20 Vocal Training sessions with Charybdis. Effects: Your voice and bearing now commands respect, even among the surliest of recruits. Your followers will attack an additional time per round, and are guaranteed to attack.\n");
 			outputText("-Color code updates. (GatoGrande) (making all the damage/heal/etc. numbers colors not use diff codes and for some cases making better fitting color choices for higher readability)\n");
+			outputText("-Fix for Zenji post-halloween. (GatoGrande)\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -187,11 +192,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
