@@ -65,6 +65,9 @@ public class IMutationsLib
 		public static const EyeOfTheTigerIM:IMutationPerkType = new EyeOfTheTigerMutation();
 		public static const FerasBirthrightIM:IMutationPerkType = new FerasBirthrightMutation();
 		public static const FeyArcaneBloodstreamIM:IMutationPerkType = new FeyArcaneBloodstreamMutation();
+		public static const FiendishBallsIM:IMutationPerkType = new FiendishBallsMutation();
+		public static const FiendishMetabolismIM:IMutationPerkType = new FiendishMetabolismMutation();
+		public static const FiendishOvariesIM:IMutationPerkType = new FiendishOvariesMutation();
 		public static const FloralOvariesIM:IMutationPerkType = new FloralOvariesMutation();
 		public static const FrozenHeartIM:IMutationPerkType = new FrozenHeartMutation();
 		public static const GazerEyesIM:IMutationPerkType = new GazerEyesMutation();

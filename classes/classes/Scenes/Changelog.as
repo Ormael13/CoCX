@@ -170,11 +170,11 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Drill Sergeant. Gained by having 20 Vocal Training sessions with Charybdis. Effects: Your voice and bearing now commands respect, even among the surliest of recruits. Your followers will attack an additional time per round, and are guaranteed to attack.\n");
 			outputText("-Color code updates. (GatoGrande) (making all the damage/heal/etc. numbers colors not use diff codes and for some cases making better fitting color choices for higher readability)\n");
 			outputText("-Fix for Zenji post-halloween. (GatoGrande)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Bad End form overuse Cerulean Potion form Giacomo was changed into way to gain Souless perk and become true demon PC. It comes with few negative side effects but would they stop you a TRUE DEMON, RIGHT?\n");
+			outputText("-New mutation perk: Fiendish Metabolism. Req. having free metabolism mutation slot, demon race. Effects: You may no longer gain nourishment from anything short of cum, milk and girl juice. If you have the demonic hunger perk, gain a stacking bonus of 10% to tease damage up to 50%.\n");
+			outputText("-New mutation perk: Fiendish Balls. Req. having free metabolism mutation slot, demon race. Effects: Increase Virility by 40%.\n");
+			outputText("-New mutation perk: Fiendish Ovaries. Req. having free metabolism mutation slot, demon race. Effects: Increase Fertility by 40%.\n");
+			outputText("-New tier for demon race score bonuses - Elder Succubus/Incubus (29+ pts): +100 spe multi, +110 int multi, +275 lib multi, +50 sens, +150% max mana multi, -50% max wrath multi, +150% max lust multi\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

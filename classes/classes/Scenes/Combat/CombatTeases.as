@@ -3,6 +3,7 @@ import classes.*;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.*;
+import classes.IMutations.IMutationsLib;
 import classes.Items.*;
 import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 import classes.Scenes.Dungeons.D3.*;
@@ -57,6 +58,12 @@ public class CombatTeases extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemConstants.A_REVEALING)) tBLD *= (1 + ((10 + rand(11)) / 100));
 		if (player.weapon == weapons.HELLCAL) damagemultiplier *= (1 + (0.01 * player.cor));
 		if (player.weapon == weapons.ELYSIUM) damagemultiplier *= (1 + (0.01 * (100 - player.cor)));
+		if (player.perkv1(IMutationsLib.FiendishMetabolismIM) >= 1 && player.hasPerk(PerkLib.DemonEnergyThirst) && player.perkv1(PerkLib.DemonEnergyThirst) > 0) {
+			var maxTeasePowerCurrent:Number = player.perkv1(PerkLib.DemonEnergyThirst);
+			var maxTeasePowerCap:Number = 5 * player.perkv1(IMutationsLib.FiendishMetabolismIM);
+			if (maxTeasePowerCurrent > maxTeasePowerCap) maxTeasePowerCurrent = maxTeasePowerCap;
+			damagemultiplier += (0.1 * maxTeasePowerCurrent);
+		}
 		tBLD *= damagemultiplier;
 
 		if (player.hasPerk(PerkLib.ChiReflowLust)) tBLD *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
