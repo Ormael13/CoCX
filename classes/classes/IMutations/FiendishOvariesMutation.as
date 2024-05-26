@@ -19,8 +19,17 @@ public class FiendishOvariesMutation extends IMutationPerkType
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
-            if (pTier == 1){
-                descS += "Increases fertility rating by 40";
+            if (pTier >= 1){
+                descS += "Increases fertility rating by "+((pTier*2)+2)+"0%";
+            }
+            if (pTier >= 2){
+                descS += ", all born children from your womb will either be born as imps or greatly corrupted";
+            }
+            if (pTier >= 3){
+                descS += ", while pregnant with imps tease is "+((pTier-2)*25)+"% stronger";
+            }
+            if (pTier >= 4){
+                descS += ". May benefit from pregomania when pregnant with imps";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -65,7 +74,7 @@ public class FiendishOvariesMutation extends IMutationPerkType
 
         public function FiendishOvariesMutation() 
 		{
-			super(mName + " IM", mName, SLOT_OVARIES, 1);
+			super(mName + " IM", mName, SLOT_OVARIES, 4);
         }
 
     }

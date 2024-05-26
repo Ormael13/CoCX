@@ -19,7 +19,10 @@ public class FiendishBallsMutation extends IMutationPerkType
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
-            if (pTier == 1){
+            if (pTier >= 1){
+                descS += "Increases virility rating by "+((pTier*2)+2)+"0%";
+            }
+            if (pTier == 2){
                 descS += "Increases virility rating by 40";
             }
             if (descS != "")descS += ".";

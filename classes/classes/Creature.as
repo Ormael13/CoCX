@@ -2723,7 +2723,7 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.MagicalVirility))
 				percent += 0.05 + (perkv1(PerkLib.MagicalVirility) * 0.01);
 			if (perkv1(IMutationsLib.FiendishBallsIM) >= 1)
-				percent += 0.4;
+				percent += (((perkv1(IMutationsLib.FiendishBallsIM)*2)+2)*0.1);
 			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 1 && game.player.racialScore(Races.HUMAN) > 17)
 				percent += (0.05 * perkv1(IMutationsLib.HumanTesticlesIM));
 			//Messy Orgasms?
@@ -3601,7 +3601,7 @@ public class Creature extends Utils
 			if (perkv1(IMutationsLib.GoblinOvariesIM) >= 1)
 				counter += (10 * perkv1(IMutationsLib.GoblinOvariesIM));
 			if (perkv1(IMutationsLib.FiendishOvariesIM) >= 1)
-				counter += 40;
+				counter += (((perkv1(IMutationsLib.FiendishOvariesIM)*2)+2)*10);
 			if (perkv1(IMutationsLib.HumanOvariesIM) >= 1 && game.player.racialScore(Races.HUMAN) > 17)
 				counter += (15 * perkv1(IMutationsLib.HumanOvariesIM));
 			counter += perkv2(PerkLib.ElvenBounty);

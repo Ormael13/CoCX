@@ -1567,15 +1567,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			needNext ||= player.gainOrLosePerk(PerkLib.SoulEater, player.hasPerk(PerkLib.Soulless) || player.hasPerk(PerkLib.Phylactery), "You begin to hunger after those demonic soul crystals, Lethicite. Perhaps you can find some to consume? You acquired the demons ability to consume Lethicite for power!", "Due to your miraculous soul recovery you have lost the ability to consume souls!");
 			//Demonic energy thirst
 			if (player.hasStatusEffect(StatusEffects.DemonEnergyThirstFeed)) {
-				var mfFM:Number = 1;
-				if (player.perkv1(IMutationsLib.FiendishMetabolismIM) >= 4) mfFM *= 2;
-				if (player.hunger < player.maxHunger()) player.refillHunger((10 * mfFM), false, true);
-				EngineCore.HPChange(((100 + (player.tou*2)) * mfFM), true);
-				EngineCore.ManaChange(((100 + (player.inte*2)) * mfFM));
-				EngineCore.changeFatigue(-((100 + (player.spe*2)) * mfFM));
-				outputText("You feel energised and empowered by the energy drained out of the cum of your recent fuck. What a meal!");
-				player.removeStatusEffect(StatusEffects.DemonEnergyThirstFeed);
-				player.addPerkValue(PerkLib.DemonEnergyThirst, 1, 1);
+				player.addStatusValue(StatusEffects.DemonEnergyThirstFeed, 1, -1);
+				if (player.statusEffectv1(StatusEffects.DemonEnergyThirstFeed) <= 0) player.removeStatusEffect(StatusEffects.DemonEnergyThirstFeed);
 			}
 			//DarkCharm
 			needNext ||= player.gainOrLosePerk(PerkLib.DarkCharm, player.isAnyRaceCached(Races.DEMON, Races.IMP, Races.DRACULA) || player.hasMutation(IMutationsLib.BlackHeartIM), "You feel a strange sensation in your body. With you looking like a demon, you have unlocked the potential to use demonic charm attacks!", "With some of your demon-like traits gone, so does your ability to use charm attacks.", player.perkv4(PerkLib.DarkCharm) == 0);
@@ -2307,12 +2300,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			needNext ||= player.losePerk(PerkLib.Venomancy, !player.isRaceCached(Races.APOPHIS) && player.cor < 89, "Your mystical powers over poison and toxins have waned.");
 
 			//Pregomania
-			if(player.isPregnant() && (player.isHarpy() || player.isGoblinoid() || player.isAlraune() || player.isSandWorm()) && !player.statStore.hasBuff("Pregomania")){
+			if(player.isPregnant() && (player.isHarpy() || player.isGoblinoid() || player.isAlraune() || player.isSandWorm() || (player.perkv1(IMutationsLib.FiendishOvariesIM) >= 4 && (player.pregnancyType == PregnancyStore.PREGNANCY_IMP || player.pregnancy2Type == PregnancyStore.PREGNANCY_IMP))) && !player.statStore.hasBuff("Pregomania")){
 				player.statStore.removeBuffs("Impregnate me!!!");
 				player.statStore.addBuffObject({"tou.mult":0.20,"lib.mult":0.20}, "Pregomania",{text:"Your motherly instincs gives you increased resiliance and resolve."});
 				outputText("\nYou pat your belly in motherly delight instinctively knowing that you have been impregnated. Your body seldom radiates motherly wellbeing making you hardyer in order to protect your beloved children to be.\n");
 			}
-			if(!player.isPregnant() && (player.isHarpy() || player.isGoblinoid() || player.isAlraune() || player.isSandWorm()) && player.statStore.hasBuff("Pregomania")){
+			if(!player.isPregnant() && (player.isHarpy() || player.isGoblinoid() || player.isAlraune() || player.isSandWorm() || (player.perkv1(IMutationsLib.FiendishOvariesIM) >= 4 && (player.pregnancyType == PregnancyStore.PREGNANCY_IMP || player.pregnancy2Type == PregnancyStore.PREGNANCY_IMP))) && player.statStore.hasBuff("Pregomania")){
 				player.statStore.removeBuffs("Pregomania");
 				outputText("\nNo longer pregnant, you feel a void in your belly as the need to be impregnated again claw at your mind.\n");
 				player.statStore.addBuffObject({"lib.mult":0.50}, "Impregnate me!!!",{text:"You strongly desire to be impregnated."});

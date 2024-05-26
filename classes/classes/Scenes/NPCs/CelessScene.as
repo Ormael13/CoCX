@@ -2,6 +2,7 @@ package classes.Scenes.NPCs {
 import classes.CoC;
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.ItemType;
 import classes.PerkLib;
 import classes.PregnancyStore;
@@ -95,7 +96,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	}
 
 	public function get isCorrupt():Boolean {
-		return _corruption > 50;
+		return _corruption > 50 || player.perkv1(IMutationsLib.FiendishOvariesIM) >= 2;
 	}
 
 	public function get isAdult():Boolean {

@@ -58,11 +58,14 @@ public class CombatTeases extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemConstants.A_REVEALING)) tBLD *= (1 + ((10 + rand(11)) / 100));
 		if (player.weapon == weapons.HELLCAL) damagemultiplier *= (1 + (0.01 * player.cor));
 		if (player.weapon == weapons.ELYSIUM) damagemultiplier *= (1 + (0.01 * (100 - player.cor)));
-		if (player.perkv1(IMutationsLib.FiendishMetabolismIM) >= 1 && player.hasPerk(PerkLib.DemonEnergyThirst) && player.perkv1(PerkLib.DemonEnergyThirst) > 0) {
-			var maxTeasePowerCurrent:Number = player.perkv1(PerkLib.DemonEnergyThirst);
-			var maxTeasePowerCap:Number = 5 * player.perkv1(IMutationsLib.FiendishMetabolismIM);
-			if (maxTeasePowerCurrent > maxTeasePowerCap) maxTeasePowerCurrent = maxTeasePowerCap;
-			damagemultiplier += (0.1 * maxTeasePowerCurrent);
+		if (player.hasStatusEffect(StatusEffects.DemonEnergyThirstFeed)) {
+			var inotcareanymore:Number = 0.05;
+			if (player.hasPerk(PerkLib.DemonEnergyThirst)) inotcareanymore *= 2;
+			damagemultiplier += (inotcareanymore * player.statusEffectv1(StatusEffects.DemonEnergyThirstFeed));
+		}
+		if (player.perkv1(IMutationsLib.FiendishOvariesIM) >= 3 && (player.pregnancyType == PregnancyStore.PREGNANCY_IMP || player.pregnancy2Type == PregnancyStore.PREGNANCY_IMP)) {
+			if (player.perkv1(IMutationsLib.FiendishOvariesIM) >= 4) damagemultiplier += 0.5;
+			else damagemultiplier += 0.25;
 		}
 		tBLD *= damagemultiplier;
 

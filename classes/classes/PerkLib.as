@@ -3760,7 +3760,8 @@ public class PerkLib
 				"Kills off hunger. (hunger meter wouldn't decay with time)");
 		public static const DeathPriest:PerkType = mk("Death Priest", "Death Priest",
 				"Add 100% of wisdom as a modifier to hit points and intelligence.");
-		public static const DemonEnergyThirst:DemonEnergyThirstPerk = new DemonEnergyThirstPerk();
+		public static const DemonEnergyThirst:PerkType = mk("Demonic hunger", "Demonic hunger",
+				"You can metabolise sex into energy and can feed from your partners orgasms.");
 		public static const Diapause:PerkType = mk("Diapause", "Diapause",
 				"Pregnancies will not progress when fluid intake is scarce, and will progress much faster when it isn't.");
 		public static const DisplacerMilkAddict:PerkType = mk("Displacer Milk Addict", "Displacer Milk Addict",

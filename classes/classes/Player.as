@@ -7045,7 +7045,23 @@ use namespace CoC;
 				slimeFeed();
 				if (isGargoyle() && hasPerk(PerkLib.GargoyleCorrupted)) refillGargoyleHunger(30);
 				if (isRace(Races.JIANGSHI) && hasPerk(PerkLib.EnergyDependent)) EnergyDependentRestore();
-				if (hasPerk(PerkLib.DemonEnergyThirst)) createStatusEffect(StatusEffects.DemonEnergyThirstFeed, 0, 0, 0, 0);
+				if (hasPerk(PerkLib.DemonEnergyThirst)) {
+					var mfFM:Number = 1;
+					if (perkv1(IMutationsLib.FiendishMetabolismIM) >= 4) mfFM *= 2;
+					if (hunger < maxHunger()) refillHunger((10 * mfFM), false, true);
+					EngineCore.HPChange(((100 + (tou*2)) * mfFM), true);
+					EngineCore.ManaChange(((100 + (inte*2)) * mfFM));
+					EngineCore.changeFatigue(-((100 + (spe*2)) * mfFM));
+					outputText("You feel energised and empowered by the energy drained out of the fluid of your recent fuck. What a meal!");
+					addPerkValue(PerkLib.DemonEnergyThirst, 1, 1);
+				}
+				if (perkv1(IMutationsLib.FiendishMetabolismIM) >= 1) {
+					var mTPCur:Number = statusEffectv1(StatusEffects.DemonEnergyThirstFeed);
+					var mTPCap:Number = 5 * perkv1(IMutationsLib.FiendishMetabolismIM);
+					if (mTPCur > mTPCap) mTPCur = mTPCap;
+					if (hasStatusEffect(StatusEffects.DemonEnergyThirstFeed) && statusEffectv1(StatusEffects.DemonEnergyThirstFeed) < mTPCur) addStatusValue(StatusEffects.DemonEnergyThirstFeed, 1, 1);
+					else createStatusEffect(StatusEffects.DemonEnergyThirstFeed, 1, 0, 0, 0);
+				}
 				if (hasPerk(PerkLib.KitsuneEnergyThirst)) createStatusEffect(StatusEffects.KitsuneEnergyThirstFeed, 0, 0, 0, 0);
 				switch (fluidtype)
 				{
