@@ -50,7 +50,7 @@ public class DemonRace extends Race {
 				.faceType(NOT(Face.VAMPIRE), 0, -10)
 				.tongueType(Tongue.DEMONIC, +1)
 				.earType(ANY(Ears.ELFIN, Ears.ELVEN), +1)
-				.eyeType(Eyes.DEMON, +1)
+				.eyeType(ANY(Eyes.DEMON, Eyes.DEVIL), +1)
 				.eyeColor(ANY(DemonEyeColors), +1)
 				.armType(Arms.DEMON, +1)
 				.legType(ANY(LowerBody.DEMONIC_HIGH_HEELS, LowerBody.DEMONIC_GRACEFUL_FEET, LowerBody.DEMONIC_CLAWS), +1)

@@ -175,9 +175,12 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Fiendish Balls. Req. having free metabolism mutation slot, demon race. Effects: Increase Virility by 40%.\n");
 			outputText("-New mutation perk: Fiendish Ovaries. Req. having free metabolism mutation slot, demon race. Effects: Increase Fertility by 40%.\n");
 			outputText("-New tier for demon race score bonuses - Elder Succubus/Incubus (29+ pts): +100 spe multi, +110 int multi, +275 lib multi, +50 sens, +150% max mana multi, -50% max wrath multi, +150% max lust multi\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New mutation perk: Fiendish Metabolism (Primitive). Req. Fiendish Metabolism and lvl 30+. Effects: You may no longer gain nourishment from anything short of cum, milk and girl juice. If you have the demonic hunger perk, gain a stacking bonus of 10% to tease damage up to 100%. ");
+			outputText("You may gain Fiendish metabolism bonus even without demonic hunger but gain half of the bonus. Gain immunity to all fluid negative effects and allows you to feed from sexual fluids.\n");
+			outputText("-New mutation perk: Fiendish Metabolism (Evolved). Req. Fiendish Metabolism (Primitive) and lvl 60+. Effects: You may no longer gain nourishment from anything short of cum, milk and girl juice. If you have the demonic hunger perk, gain a stacking bonus of 10% to tease damage up to 150%. You may gain Fiendish metabolism bonus even without demonic hunger but gain half of the bonus. ");
+			outputText("Gain immunity to all fluid negative effects and allow you to feed from sexual fluids. Satisfying your crave for sex also raises your spell power for an amount equivalent to the tease damage bonus granted by this mutation.\n");
+			outputText("-New mutation perk: Fiendish Metabolism (Final Form). Req. Fiendish Metabolism (Evolved) and lvl 90+. Effects: You may no longer gain nourishment from anything short of cum, milk and girl juice. If you have the demonic hunger perk, gain a stacking bonus of 10% to tease damage up to 200%. You may gain Fiendish metabolism bonus even without demonic hunger but gain half of the bonus. ");
+			outputText("Gain immunity to all fluid negative effects and allow you to feed from sexual fluids. Satisfying your crave for sex also raises your spell power for an amount equivalent to the tease damage bonus granted by this mutation. Double all recovery from demonic hunger.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -258,8 +261,20 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -286,6 +301,12 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

@@ -227,6 +227,12 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.armor == armors.DWARMOR) mod += 0.3;
 		if (player.hasAetherTwinsTierWeapon()) mod += 0.2;
 		if (player.hasAetherTwinsTierShield()) mod += 0.5;
+		if (player.perkv1(IMutationsLib.FiendishMetabolismIM) >= 3 && player.hasPerk(PerkLib.DemonEnergyThirst) && player.perkv1(PerkLib.DemonEnergyThirst) > 0) {
+			var mTPCur:Number = player.perkv1(PerkLib.DemonEnergyThirst);
+			var mTPCap:Number = 5 * player.perkv1(IMutationsLib.FiendishMetabolismIM);
+			if (mTPCur > mTPCap) mTPCur = mTPCap;
+			mod += (0.1 * mTPCur);
+		}
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
         if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
 		// hope it doesn't lag too much

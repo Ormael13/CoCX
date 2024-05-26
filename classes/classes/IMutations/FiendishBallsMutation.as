@@ -57,6 +57,9 @@ public class FiendishBallsMutation extends IMutationPerkType
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
             if (pTier == 1) pBuffs['lib.mult'] = 0.05;
+            if (pTier == 2) pBuffs['lib.mult'] = 0.1;
+			if (pTier == 3) pBuffs['lib.mult'] = 0.15;
+			if (pTier == 4) pBuffs['lib.mult'] = 0.2;
             return pBuffs;
         }
 

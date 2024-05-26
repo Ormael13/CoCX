@@ -99,9 +99,7 @@ public class CombatTeases extends BaseCombatContent {
 		var lustMult:Number = 1;
 		var multiplier:Number = 0.02;
 		if (player.hasPerk(PerkLib.JobSeducer)) multiplier += 0.01;
-
 		lustMult += (multiplier * player.teaseLevel);
-
 		return lustMult;
 	}
 

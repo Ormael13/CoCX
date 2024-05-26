@@ -1563,14 +1563,16 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			player.updateRacialCache();
 			//Demonic hunger perk
-			needNext ||= player.gainOrLosePerk(PerkLib.DemonEnergyThirst, player.isAnyRaceCached(Races.DEMON, Races.IMP, Races.DEVIL, Races.DRACULA) || player.hasPerk(PerkLib.Phylactery), "You begin fantasising about pussies and cocks, foaming at the idea of fucking or getting fucked. It would look like you aquired the demons hunger for sex and can now feed from the orgasms of your partners.", "Your mind clears up as becoming less of a demon you also lost the demonic hunger only sex could sate.");
+			needNext ||= player.gainOrLosePerk(PerkLib.DemonEnergyThirst, player.isAnyRaceCached(Races.DEMON, Races.IMP, Races.DEVIL, Races.DRACULA) || player.hasPerk(PerkLib.Phylactery) || player.fiendishMetabolismNFER(), "You begin fantasising about pussies and cocks, foaming at the idea of fucking or getting fucked. It would look like you aquired the demons hunger for sex and can now feed from the orgasms of your partners.", "Your mind clears up as becoming less of a demon you also lost the demonic hunger only sex could sate.");
 			needNext ||= player.gainOrLosePerk(PerkLib.SoulEater, player.hasPerk(PerkLib.Soulless) || player.hasPerk(PerkLib.Phylactery), "You begin to hunger after those demonic soul crystals, Lethicite. Perhaps you can find some to consume? You acquired the demons ability to consume Lethicite for power!", "Due to your miraculous soul recovery you have lost the ability to consume souls!");
 			//Demonic energy thirst
 			if (player.hasStatusEffect(StatusEffects.DemonEnergyThirstFeed)) {
-				if (player.hunger < player.maxHunger()) player.refillHunger(10, false, true);
-				EngineCore.HPChange(100 + (player.tou*2), true);
-				EngineCore.ManaChange(100 + (player.inte*2));
-				EngineCore.changeFatigue(-(100 + (player.spe*2)));
+				var mfFM:Number = 1;
+				if (player.perkv1(IMutationsLib.FiendishMetabolismIM) >= 4) mfFM *= 2;
+				if (player.hunger < player.maxHunger()) player.refillHunger((10 * mfFM), false, true);
+				EngineCore.HPChange(((100 + (player.tou*2)) * mfFM), true);
+				EngineCore.ManaChange(((100 + (player.inte*2)) * mfFM));
+				EngineCore.changeFatigue(-((100 + (player.spe*2)) * mfFM));
 				outputText("You feel energised and empowered by the energy drained out of the cum of your recent fuck. What a meal!");
 				player.removeStatusEffect(StatusEffects.DemonEnergyThirstFeed);
 				player.addPerkValue(PerkLib.DemonEnergyThirst, 1, 1);

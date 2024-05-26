@@ -20,7 +20,7 @@ public function minoVictoryRapeChoices():void {
 	}
 	else {
 		sceneHunter.print("Check failed: Cerberus race.");
-		if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1 || player.hasPerk(PerkLib.LactaBovineImmunity) || player.hasPerk(PerkLib.ManticoreCumAddict))
+		if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1 || player.hasPerk(PerkLib.LactaBovineImmunity) || player.hasPerk(PerkLib.ManticoreCumAddict) || player.fiendishMetabolismNFER())
 			outputText("Smiling down at your vanquished foe, you feel a familiar hunger growing within you.  What do you do?");
 		outputText("You smile in satisfaction as [themonster]" + (monster.lust >= monster.maxOverLust() ? " drops down on all fours and begins masturbating feverishly.  " : " collapses, unable to continue fighting."));
 		if (player.lust >= 33 && player.gender > 0)
@@ -54,7 +54,7 @@ public function minoVictoryRapeChoices():void {
 		addButtonIfTrue(4, "UrethraFuck", minoUrethralPen,
 			"Requires a dick thinner than 4 inches, but longer than 2 feet.", urethral);
 		addButtonIfTrue(5, "MinoMutual", minoMutual, cockNotFitsMsg, cockFits, "Fuck his ass with a lot of gentle foreplay.", "Minotaur Mutual");
-		if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1 || player.hasPerk(PerkLib.MinotaurCumAddict) || player.hasPerk(PerkLib.LactaBovineImmunity) || player.hasPerk(PerkLib.ManticoreCumAddict))
+		if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1 || player.hasPerk(PerkLib.MinotaurCumAddict) || player.hasPerk(PerkLib.LactaBovineImmunity) || player.hasPerk(PerkLib.ManticoreCumAddict) || player.fiendishMetabolismNFER())
 			addButton(6, "CumAddict", addictRouter).hint("Cum addiction options!");
 		else
 			addButtonDisabled(6, "???", "Req. being more <i>familiar</i> with minotaur cum. Maybe you could lose to the minotaurs a couple of times and let them stuff you properly with their spunk?");
@@ -806,7 +806,7 @@ public function minoCumUpdate():Boolean {
 			outputText("\n<b>A steady fire of lust slowly grows within you as you shiver and grab at your head.  You're in withdrawal after having gone so long without a dose of minotaur love.  You just know you're going to be horny and achy until you get some.</b>\n");
 		}
 		//UBER ADDICTION MESSAGE
-		if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 100 && !player.hasPerk(PerkLib.MinotaurCumResistance) && !player.hasPerk(PerkLib.ManticoreCumAddict)) {
+		if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 100 && !player.hasPerk(PerkLib.MinotaurCumResistance) && !player.hasPerk(PerkLib.ManticoreCumAddict) && !player.fiendishMetabolismNFER()) {
 			if(player.hasPerk(PerkLib.MinotaurCumAddict)) {}
 			else {
 				player.createPerk(PerkLib.MinotaurCumAddict,0,0,0,0);
