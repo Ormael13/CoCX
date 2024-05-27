@@ -55,8 +55,13 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Centaur hunter style: Meteor Shot. Gained by training with Kelt as Centaur and reaching 80+ in bow skill. Effects: As a centaur, Power shot has a chance to stun based on your strength modifier.\n");
 			outputText("-New event perk: Centaur hunter style: Meteor Shower. Gained by training with Kelt as Centaur and reaching 100+ in bow skill. Effects: As a centaur, Power shot unleash 4 arrows instead of one each dealing 60% of power shot damage.\n");
 			outputText("-New event perk: Sagittarius Aura of Dominance. Gained by having 50+ corruption while using Sagittarius Baneful Great Bow. Effects: Sagittarius cursed weapon corrupts the very air around you driving females horny for your dick. Deals 100% more tease damage to female opponents and causes them to take periodic tease damage per round.\n");
+			outputText("-New event perk: Commanding Tone. Gained by having 5 Vocal Training sessions with Charybdis. Effects: Minion and Follower Damage increased by 10%.\n");
+			outputText("-New event perk: Diaphragm control. Gained by having 10 Vocal Training sessions with Charybdis. Effects: Minion and Follower Damage increased by an additional 10%, and followers will act more often.\n");
+			outputText("-New event perk: Mental Bastion. Gained by having 40 training sessions with Tyrantia. Effects: The effects of Tyrant State are doubled: While active, you take 30% less damage from magic. You count as either pure or corrupt (whichever is better) for equipment. (Pure for the Beautiful weapons etc, corrupt for corrupt weapons)\n");
 			outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP / Lust effect of 10% magnitude.\n");
 			outputText("-New mutation perk: Equine Muscle. Req. having free musculature mutation slot, one of races: horse-morph, centuar, unicorn, bicorn, alicorn, nightmare. Effects: +25% to all Physical Ability damage. Gallop cost 10% less fatigue.\n");
+			outputText("-New mutation perk: Fiendish Metabolism. Req. having free metabolism mutation slot, demon race. Effects: You may no longer gain nourishment from anything short of cum, milk and girl juice. If you have the demonic hunger perk, gain a stacking bonus of 10% to tease damage up to 50%.\n");
+			outputText("-New mutation perk: Fiendish Ovaries. Req. having free metabolism mutation slot, demon race. Effects: Increase Fertility by 40%.\n");
 			outputText("-New mutation perk: Goblin Ovaries. Req. having free ovaries mutation slot, one of goblinoid races. Effects: Increase fertility rating by 10, While pregnant increase total libido by 10%. Double the number of kids you birth.\n");
 			outputText("-New mutation perk: Equine Muscle (Primitive). Req. Equine Muscle and lvl 30+. Effects: +50% to all Physical Ability damage. Gallop cost 20% less fatigue. Physical ability consumes 5% less fatigue.\n");
 			outputText("-New mutation perk: Goblin Ovaries (Primitive). Req. Goblin Ovaries and lvl 30+. Effects: Increase fertility rating by 20, While pregnant increase total libido by 20%. Double the number of kids you birth. Increase physical damage done while pregnant by 30%.\n");
@@ -159,21 +164,16 @@ public class Changelog extends BaseContent
 			outputText("-Race tf added as item effect (can be added to non-random items now) (aimozg)\n");
 			outputText("-Cursed TF enchantment for races: Lizard, Wolf (aimozg)\n");
 			outputText("-When using sneak attack and having equipped any flying sword(s) for melee sneak attack and any of Moonlight flying sword(s) for range sneak attack they would be part of the attack too. Moonlight flying sword(s) would also increase dmg multiplier of sneak attack by 1.\n");
-			outputText("-New event perk: Commanding Tone. Gained by having 5 Vocal Training sessions with Charybdis. Effects: Minion and Follower Damage increased by 10%.\n");
-			outputText("-New event perk: Diaphragm control. Gained by having 10 Vocal Training sessions with Charybdis. Effects: Minion and Follower Damage increased by an additional 10%, and followers will act more often.\n");
 			outputText("-New event perk: Vocal Tactician. Gained by having 15 Vocal Training sessions with Charybdis. Effects: Minion and Follower Damage increased by another 15%. Followers will act even more frequently.\n");
 			outputText("-Motivation (Su) perk have added in desc potential synergy with other perk to allow henchman attack 3 times per turn.\n");
 			outputText("-After clearing Deep Cave (Zetaz dungeon) can meet at Beach are Charybris - male scylla. He have various interactions and could even train pc stats (str/spe/tou) up to their limits or give vocal trainings to give some perks that would help with commanding minions/henchmen. Can only bring demon skulls to him to get some gems for them.\n");
 			outputText("-Tyrantia traiing cap now is increased (30 > 40).\n");
 			outputText("-Constant Buildup - If you are in Rut or Heat, halve the lust DoT you take from it, and deal an additional 20% physical damage while under the effects. (35 training sessions)\n");
-			outputText("-New event perk: Mental Bastion. Gained by having 40 training sessions with Tyrantia. Effects: The effects of Tyrant State are doubled: While active, you take 30% less damage from magic. You count as either pure or corrupt (whichever is better) for equipment. (Pure for the Beautiful weapons etc, corrupt for corrupt weapons)\n");
 			outputText("-New event perk: Drill Sergeant. Gained by having 20 Vocal Training sessions with Charybdis. Effects: Your voice and bearing now commands respect, even among the surliest of recruits. Your followers will attack an additional time per round, and are guaranteed to attack.\n");
 			outputText("-Color code updates. (GatoGrande) (making all the damage/heal/etc. numbers colors not use diff codes and for some cases making better fitting color choices for higher readability)\n");
 			outputText("-Fix for Zenji post-halloween. (GatoGrande)\n");
 			outputText("-Bad End form overuse Cerulean Potion form Giacomo was changed into way to gain Souless perk and become true demon PC. It comes with few negative side effects but would they stop you a TRUE DEMON, RIGHT?\n");
-			outputText("-New mutation perk: Fiendish Metabolism. Req. having free metabolism mutation slot, demon race. Effects: You may no longer gain nourishment from anything short of cum, milk and girl juice. If you have the demonic hunger perk, gain a stacking bonus of 10% to tease damage up to 50%.\n");
 			outputText("-New mutation perk: Fiendish Balls. Req. having free metabolism mutation slot, demon race. Effects: Increase Virility by 40%.\n");
-			outputText("-New mutation perk: Fiendish Ovaries. Req. having free metabolism mutation slot, demon race. Effects: Increase Fertility by 40%.\n");
 			outputText("-New tier for demon race score bonuses - Elder Succubus/Incubus (29+ pts): +100 spe multi, +110 int multi, +275 lib multi, +50 sens, +150% max mana multi, -50% max wrath multi, +150% max lust multi\n");
 			outputText("-New mutation perk: Fiendish Metabolism (Primitive). Req. Fiendish Metabolism and lvl 30+. Effects: You may no longer gain nourishment from anything short of cum, milk and girl juice. If you have the demonic hunger perk, gain a stacking bonus of 10% to tease damage up to 100%. ");
 			outputText("You may gain Fiendish metabolism bonus even without demonic hunger but gain half of the bonus. Gain immunity to all fluid negative effects and allows you to feed from sexual fluids.\n");
@@ -185,6 +185,11 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Fiendish Ovaries (Primitive). Req. Fiendish Ovaries and lvl 30+. Effects: Increase Fertility by 60%, all born children from your womb will either be born as imps or greatly corrupted.\n");
 			outputText("-New mutation perk: Fiendish Ovaries (Evolved). Req. Fiendish Ovaries (Primitive) and lvl 60+. Effects: Increase Fertility by 80%, all born children from your womb will either be born as imps or greatly corrupted, while pregnant with imps tease is 25% stronger.\n");
 			outputText("-New mutation perk: Fiendish Ovaries (Final Form). Req. Fiendish Ovaries (Evolved) and lvl 90+. Effects: ncrease Fertility by 100%, all born children from your womb will either be born as imps or greatly corrupted, while pregnant with imps tease is 50% stronger. May benefit from pregomania when pregnant with imps.\n");
+			outputText("-Fix zenji village, code var change for cocksock type, patches broken arms issue. (Jtecx)\n");
+			outputText("-True Demon type enemies would have now their base HP halved, their regeneration doubled (after adding all the regenerations sources), increased base m.res by 30 on top of current magic resistance values.\n");
+			outputText("-Souless perk will grant pc reduction of max HP base by half (like true demon enemies), add 1% innate HP regen and double final % regeneration part, magic resistance increased by 30 pts and add overmaxHP effect same as enemy demons benefits (1% overmax HP per each PC level)\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -195,11 +200,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

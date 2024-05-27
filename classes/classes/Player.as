@@ -3372,6 +3372,7 @@ use namespace CoC;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_MAGIC_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_MAGIC_R) mult -= necklaceEffectMagnitude;
 			if (jewelry1.hasBuff('res_magic') && jewelry2.hasBuff('res_magic') && jewelry3.hasBuff('res_magic') && jewelry4.hasBuff('res_magic') && headjewelryEffectId == HeadJewelryLib.MODIFIER_MAGIC_R && necklaceEffectId == NecklaceLib.MODIFIER_MAGIC_R) mult -= 6;
+			if (hasPerk(PerkLib.Soulless)) mult -= 30;
 			//Defend = 35-95% reduction
 			if (hasStatusEffect(StatusEffects.Defend)) {
 				if (hasPerk(PerkLib.DefenceStance) && tou >= 80) {
@@ -7240,6 +7241,7 @@ use namespace CoC;
 				if (Forgefather.refinement == 4) max *= (1.5);
 			}
 			if (hasPerk(PerkLib.ElementalBondFlesh) && statusEffectv1(StatusEffects.SummonedElementals) >= 2) max += maxHP_ElementalBondFleshMulti() * statusEffectv1(StatusEffects.SummonedElementals);
+			if (hasPerk(PerkLib.Soulless)) max = Math.round(max*0.5);
 			return max;
 		}
 		protected override function maxLust_base():Number {

@@ -335,6 +335,7 @@ import classes.Scenes.Combat.CombatAbilities;
 				if (hasPerk(PerkLib.EnemyChampionType)) temp *= (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING]*2.5);
 				if (hasPerk(PerkLib.EnemyBossType)) temp *= (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING]*5);
 			}
+			if (hasPerk(PerkLib.EnemyTrueDemon)) temp *= 0.5;
 			temp *= stats_multi_based_on_misc();
 			if (this.level < 9) {
 				if (hasPerk(PerkLib.EnemyForBeginnersType)) temp *= 0.1;
@@ -3354,6 +3355,7 @@ import classes.Scenes.Combat.CombatAbilities;
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 5) temp3 += 0.5;
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 6) temp3 += 0.6;
 				if (temp3 > 0) healingPercent *= temp3;
+				if (hasPerk(PerkLib.EnemyTrueDemon)) healingPercent *= 2;
 				temp2 = Math.round(maxHP() * healingPercent / 100);
 				if (hasPerk(PerkLib.Lifeline)) temp2 += (45 * (1 + newGamePlusMod()));
 				if (hasPerk(PerkLib.ImprovedLifeline)) temp2 += (60 * (1 + newGamePlusMod()));
@@ -4502,6 +4504,7 @@ import classes.Scenes.Combat.CombatAbilities;
 					armorMDef += (12 * (1 + newGamePlusMod()));
 				}*/
 			}
+			if (hasPerk(PerkLib.EnemyTrueDemon)) armorMDef += 30;
 			armorDef += ((int)(1 + armorDef / 10)) * 3 * newGamePlusMod();
 			armorMDef += ((int)(1 + armorMDef / 10)) * 3 * newGamePlusMod();
 			if (hasPerk(PerkLib.EpicStrength)) this.strStat.core.value += Math.round(this.strStat.core.value * 0.35);

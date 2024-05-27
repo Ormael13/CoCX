@@ -11708,6 +11708,10 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         if (player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) maxPercentRegen += 0.5;
         if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) maxPercentRegen += 0.5;
         if (player.hasKeyItem("M.G.S. bracer") >= 0) maxPercentRegen += 2;
+		if (player.hasPerk(PerkLib.Soulless)) {
+			maxPercentRegen += 1;
+			maxPercentRegen *= 2;
+		}
         if ((player.internalChimeraRating() >= 1 && player.hunger < 1 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.internalChimeraRating() >= 1 && flags[kFLAGS.HUNGER_ENABLED] <= 0)) maxPercentRegen -= (0.5 * player.internalChimeraRating());
         if (maxPercentRegen > maximumRegeneration()) maxPercentRegen = maximumRegeneration();
 		return maxPercentRegen;
@@ -11779,6 +11783,10 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         if (player.weapon == weapons.BCLAWS && player.isRaceCached(Races.YUKIONNA)) maxRegen += 1;
         if (combat && player.headJewelry == headjewelries.CUNDKIN && player.HP < 1) maxRegen += 1;
         if (player.hasKeyItem("M.G.S. bracer") >= 0) maxRegen += 2;
+		if (player.hasPerk(PerkLib.Soulless)) {
+			maxRegen += 1;
+			maxRegen *= 2;
+		}
         return maxRegen;
     }
 
