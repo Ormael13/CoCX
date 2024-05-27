@@ -673,10 +673,10 @@ private function browseDemSocksSon():void {
 	bd.add("Cockring",curry(cockSockType, 10));
 	submenu(bd, gretasGarments, 0, false);
 
-	function cockSockType(type:int):void{
+	function cockSockType(cocksock_type:int):void{
 		var cost:int = 0;
 		clearOutput();
-		switch (type) {
+		switch (cocksock_type) {
 			case 0:
 				outputText("You spy a thick, woolen sock sitting on a counter and take it up to Greta.  \"<i>Ah, yes.  That's our basic sock.  Warm and cozy, great for those chilly nights.  That one's a mere 10 gems.  A steal, of course.</i>\"");
 				cost = 10;
@@ -722,18 +722,18 @@ private function browseDemSocksSon():void {
 				cost = 100;
 				break;
 		}
-		prePurchase(type, cost);
+		prePurchase(cocksock_type, cost);
 	}
 
-	function prePurchase(type:int, cost:int):void{
+	function prePurchase(cocksock_type:int, cost:int):void{
 		menu();
-		if (player.gems >= cost) addButton(0, "Buy it!", pickACockForSock, type, cost);
+		if (player.gems >= cost) addButton(0, "Buy it!", pickACockForSock, cocksock_type, cost);
 		else addButtonDisabled(0, "Buy It!", "You can't afford it!");
 		addButton(4,"Back",browseDemSocksSon);
 
 	}
 
-	function pickACockForSock(type:int, cost:int):void {
+	function pickACockForSock(cocksock_type:int, cost:int):void {
 		//Buy Cock-sock
 		clearOutput();
 		outputText("You take the cock-sock over to the counter where Greta sits, knitting even more garments and place down the gems required.  \"<i>Aha, good choice, honey!</i>\" the succubus says, snatching up the money and stashing it away.  \"<i>Now let's get that bad boy fitted on you.</i>\"");
@@ -741,20 +741,20 @@ private function browseDemSocksSon():void {
 		//[If PC only has one cock, jump immediately to Putting It On, else:
 		if(player.cockTotal() == 1) {
 			menu();
-			addButton(0,"Next",lastchance2backout,type, cost);
+			addButton(0,"Next",lastchance2backout,cocksock_type, cost);
 		}
 		else {
 			outputText("\n\nWhich cock would you like to put it on?");
 			var button:int = 0;
 			menu();
 			while(button < player.cockTotal()) {
-				if(player.cocks[button].sock == "") addButton(button,String(button+1),lastchance2backout, type, cost, button);
+				if(player.cocks[button].sock == "") addButton(button,String(button+1),lastchance2backout, cocksock_type, cost, button);
 				button++;
 			}
 		}
 	}
 
-	function lastchance2backout(type:int, cost:int, cockChosen:int = 0):void{
+	function lastchance2backout(cocksock_type:int, cost:int, cockChosen:int = 0):void{
 		flags[kFLAGS.SOCKS_BOUGHT]++;
 		//Putting it On - First Time
 		if(flags[kFLAGS.SOCKS_BOUGHT] == 1) {
@@ -770,13 +770,13 @@ private function browseDemSocksSon():void {
 			outputText("\n\nWell?  Do you want this cock-sock attached to your penis semi-permanently?");
 		}
 		menu();
-		addButton(0,"Yes",cockSockInstall, type, cost, cockChosen);
+		addButton(0,"Yes",cockSockInstall, cocksock_type, cost, cockChosen);
 		addButton(1,"No",noCockSock);
 	}
 
-	function cockSockInstall(type:int, cost:int, cockChosen:int = 0):void{
+	function cockSockInstall(cocksock_type:int, cost:int, cockChosen:int = 0):void{
 		var conflict:Boolean = false;
-		if(cockSocksVariant[type] == "viridian") {
+		if(cockSocksVariant[cocksock_type] == "viridian") {
 			if(!player.hasPerk(PerkLib.LustyRegeneration)) {
 				player.createPerk(PerkLib.LustyRegeneration,0,0,0,0);
 			}
@@ -784,7 +784,7 @@ private function browseDemSocksSon():void {
 				conflict = true;
 			}
 		}
-		if(cockSocksVariant[type] == "cockring") {
+		if(cockSocksVariant[cocksock_type] == "cockring") {
 			if(!player.hasPerk(PerkLib.PentUp)) player.createPerk(PerkLib.PentUp,10,0,0,0);
 			else player.addPerkValue(PerkLib.PentUp,1,5);
 			player.buff("PentUp").setStat("minlustx", player.perkv1(PerkLib.PentUp)*0.01).withText("Pent up");
@@ -792,7 +792,7 @@ private function browseDemSocksSon():void {
 		outputText("You nod to the busty succubus and strip off your [armor], revealing your naked body.  Greta's eyes light up as she looks over your body with barely-contained lust.  Finally her eyes settle onto your " + cockDescript(cockChosen) + ", and she licks her lips.  ");
 		player.gems -= cost;
 		if (!conflict) { // There's no conflict. DO IT!!!
-			player.cocks[cockChosen].sock = cockSocksVariant[type];
+			player.cocks[cockChosen].sock = cockSocksVariant[cocksock_type];
 			statScreenRefresh();
 			outputText("With one hand she lifts your limp cock up, giving it a pleasant little stroke.");
 			outputText("\n\nHer other hand approaches, her thumb, fore- and middle-fingers holding the sock open as she slips it over your " + player.cockHead(cockChosen) + ".  She pulls it snugly into place and then gives your penis a little kiss.  The second her lips make contact with your flesh, a chill runs across your body, followed by a flood of warmth.");
@@ -1063,7 +1063,7 @@ private function abuseHisAss():void {
 	outputText("  \"<i>O-OI!</i>\"  The tiger man shouts out, his head turning to try to see behind him.  With a grin on your lips you grip the hilt of [oneCock] and slap its length over the tiger's rump.  You can see the tint to the tiger man's cheek as he hears and feels your dick smacking his exposed ass.  Pre-cum drips down [oneCock] as you line yourself up, jamming it between the tiger's lovely mounds. He gives a surprised shout as your cockhead presses to his tiny, puckered hole.");
 
 	//Cocksize check
-	//[[If smallest cock is over 16 inches)
+	//(If smallest cock is over 16 inches)
 	if(player.smallestCockLength() >= 16) {
 		outputText("\n\nYour lips part to let out a grunt of frustration.  Your cockhead is unable to break through the tiger man's tight resistance.  His struggles start to die down as [eachCock] continues to drool over his muscled rear.");
 		if(player.cockTotal() == 1) outputText("  You squeeze your [cocks] between his warm ass cheeks, stroking yourself with his exposed bottom.  The tiger whimpers meekly under you.");

@@ -52,11 +52,17 @@ public class ElderStoreHut extends TrollVillageAbstractContent{
 
         function foodStoreTroll(item:ItemType):void{
             clearOutput();
-            player.gems -= 6;
-            outputText("You ask for a " + item.longName +" as you fork over 6 gems to the troll.\n" +
-                    "\n" +
-                    "\"<i>¡Muchas gracias!\"</i> he replies as he gives you " + item.longName + "\n");
-            inventory.takeItem(item, TheElderSnacks);
+            if (player.gems >= 6){
+                player.gems -= 6;
+                outputText("You ask for a " + item.longName +" as you fork over 6 gems to the troll.\n" +
+                        "\n" +
+                        "\"<i>¡Muchas gracias!\"</i> he replies as he gives you " + item.longName + "\n");
+                inventory.takeItem(item, TheElderSnacks);
+            }
+            else{
+                outputText("You don't have enough gems to buy this.");
+                doNext(TheElderSnacks);
+            }
         }
 
     }
@@ -135,10 +141,16 @@ public class ElderStoreHut extends TrollVillageAbstractContent{
             doNext(TheElderWeapons);
         }
         function buyIt(item2:Weapon, cost:int):void{
-            player.gems -= cost;
-            outputText("You fork over the gems to her and take the " + item2.name +" from the barrel.");
-            outputText("\"Have a nice day.\"");
-            inventory.takeItem(item2, TheElderWeapons);
+            if (player.gems >= cost){
+                player.gems -= cost;
+                outputText("You fork over the gems to her and take the " + item2.name +" from the barrel.");
+                outputText("\"Have a nice day.\"");
+                inventory.takeItem(item2, TheElderWeapons);
+            }
+            else {
+                outputText("You don't have enough gems to buy this.");
+                doNext(TheElderWeapons);
+            }
         }
     }
 
@@ -189,10 +201,17 @@ public class ElderStoreHut extends TrollVillageAbstractContent{
             doNext(TheElderArmours);
         }
         function buyIt(item2:*, cost:int):void{
-            player.gems -= cost;
-            outputText("You fork over the gems to her and take the " + item2.name +" from the barrel.");
-            outputText("\"Have a nice day.\"");
-            inventory.takeItem(item2, TheElderArmours);
+            if (player.gems >= cost){
+                player.gems -= cost;
+                outputText("You fork over the gems to her and take the " + item2.name +" from the barrel.");
+                outputText("\"Have a nice day.\"");
+                inventory.takeItem(item2, TheElderArmours);
+            }
+            else{
+                outputText("You don't have enough gems to buy this.");
+                doNext(TheElderArmours);
+            }
+
         }
     }
 }

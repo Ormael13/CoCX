@@ -585,15 +585,17 @@ public class Arms extends SaveableBodyPart {
 		}
 	}
 
+	/*
 	override protected function loadFromOldSave(savedata:Object):void {
 		type = intOr(savedata.arms, HUMAN);
-		armCount = intOr(savedata.armCount,2);
+		//armCount = intOr(savedata.armCount,2);
 	}
 
 	override protected function saveToOldSave(savedata:Object):void {
 		savedata.arms = type;
 		savedata.armCount = armCount;
 	}
+	 */
 
 	public static function getAppearanceDescription(creature: *):String {
 		const id: int = creature.arms.type;
