@@ -878,6 +878,7 @@ public class Creature extends Utils
 			}
 			if (perkv1(IMutationsLib.LizanMarrowIM) >= 4) maxOver2 += 0.1;
 			if (perkv1(IMutationsLib.FerasBirthrightIM) >= 4) maxOver2 += 0.2;
+			if (hasPerk(PerkLib.Soulless)) maxOver2 += (0.01 * level);
 			maxOver *= maxOver2;//~270%
 			maxOver = Math.round(maxOver);
 			return Math.min(54999999,maxOver);
@@ -2784,6 +2785,8 @@ public class Creature extends Utils
 				if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 4) quantity *= 3;
 				else quantity *= 2.5;
 			}
+			if (perkv1(IMutationsLib.FiendishBallsIM) >= 2)
+				quantity *= (1 + (0.25 * perkv1(IMutationsLib.FiendishBallsIM)));
 			if (hasPerk(PerkLib.MaraesGiftStud))
 				quantity += 350;
 			if (hasPerk(PerkLib.FerasBoonAlpha))

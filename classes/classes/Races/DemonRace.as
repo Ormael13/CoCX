@@ -69,6 +69,7 @@ public class DemonRace extends Race {
 						}, +1)
 				.hornTypeAndCount(Horns.DEMON, GREATER_THAN(4), +4)
 				.corruption(AT_LEAST(50), +1)
+				.corruption(AT_LEAST(75), +1)
 				.corruption(AT_LEAST(100), +1)
 				.hasPerk(PerkLib.DemonicLethicite, +1)
 				.hasPerk(PerkLib.Soulless, +4);
@@ -116,6 +117,20 @@ public class DemonRace extends Race {
 					"maxmana_mult": +1.5,
 					"maxwrath_mult": -0.5,
 					"maxlust_mult": +1.5
+				})
+				.end();
+		
+		buildTier(38, "arch succubus/incubus")
+				.namesMaleFemaleTaur("arch incubus","arch succubus","arch incubi-taur","arch succubi-taur")
+				.requirePerk(PerkLib.Soulless)
+				.buffs({
+					"spe.mult": +2.00,
+					"int.mult": +2.50,
+					"lib.mult": +3.20,
+					"sens": +00,
+					"maxmana_mult": +1.8,
+					"maxwrath_mult": -0.55,
+					"maxlust_mult": +1.8
 				})
 				.end();
 	}

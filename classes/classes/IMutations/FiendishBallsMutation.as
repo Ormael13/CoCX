@@ -22,8 +22,8 @@ public class FiendishBallsMutation extends IMutationPerkType
             if (pTier >= 1){
                 descS += "Increases virility rating by "+((pTier*2)+2)+"0%";
             }
-            if (pTier == 2){
-                descS += "Increases virility rating by 40";
+            if (pTier >= 2){
+                descS += ". Increase cum production by "+((pTier+1)*25)+"%";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -68,7 +68,7 @@ public class FiendishBallsMutation extends IMutationPerkType
 
         public function FiendishBallsMutation() 
 		{
-			super(mName + " IM", mName, SLOT_TESTICLES, 1);
+			super(mName + " IM", mName, SLOT_TESTICLES, 2);
         }
 
     }

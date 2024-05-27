@@ -148,7 +148,6 @@ public class CombatTeases extends BaseCombatContent {
 				else critTChance += 2 * Math.round((player.sens - 25) / 5);
 			}
 		}
-
 		return critTChance;
 	}
 
@@ -169,7 +168,6 @@ public class CombatTeases extends BaseCombatContent {
         if (player.hasPerk(PerkLib.ChiReflowLust)) lustDmg *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
 		if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
 		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
-
 		return lustDmg;
 	}
 
