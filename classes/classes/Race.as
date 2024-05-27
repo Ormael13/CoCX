@@ -272,7 +272,7 @@ public class Race {
 				s += "[font-default]";
 			}
 			score += rscore;
-			s += rr.name;
+			s += rr.getName();
 			if (rr.varyingScore() && !pass) {
 				// do not display (+X) for requirements that have varying values and
 				// didn't pass, because value could be incorrect
