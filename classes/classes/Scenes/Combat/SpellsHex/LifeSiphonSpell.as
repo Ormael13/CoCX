@@ -43,7 +43,7 @@ public class LifeSiphonSpell extends AbstractHexSpell {
 		 }else {
 			player.addStatusValue(StatusEffects.LifeSiphon, 1, -1);
 			if (display) {
-				outputText("<b>[Themonster] health is being funneled to you through your life siphon hex. (<font color=\"#008000\">+" + player.statusEffectv2(StatusEffects.LifeSiphon) + "</font>)</b>\n\n");
+				outputText("<b>[Themonster] health is being funneled to you through your life siphon hex. ([font-heal]+" + player.statusEffectv2(StatusEffects.LifeSiphon) + "[/font])</b>\n\n");
 			}
 			HPChange(player.statusEffectv2(StatusEffects.LifeSiphon), false);
 			monster.HP -= player.statusEffectv2(StatusEffects.LifeSiphon);

@@ -105,7 +105,7 @@ use namespace CoC;
 					if (damage < player.maxHP() * 0.35) {
 						damage = player.maxHP() * 0.35;
 						player.HP -= damage;
-						outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+						outputText("<b>([font-damage]" + damage + "[/font])</b>");
 					}
 					else damage = player.takePhysDamage(damage, true);
 				}

@@ -5,7 +5,7 @@ package classes.Items.Armors
 {
 	import classes.Items.Armor;
 	import classes.Items.ArmorLib;
-import classes.PerkLib;
+	import classes.PerkLib;
 	import classes.Player;
 
 	public class SluttySwimwear extends Armor {

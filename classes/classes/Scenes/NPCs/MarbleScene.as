@@ -261,7 +261,7 @@ public function timeChangeLarge():Boolean {
         return true;
     }
     //Become permanently addicted (occurs when the player goes to sleep with addiction 100, before it is reduced by the standard 1):
-    if (player.statusEffectv3(StatusEffects.Marble) > 0 && player.statusEffectv2(StatusEffects.Marble) >= 100 && !player.hasPerk(PerkLib.MarblesMilk) && !player.hasPerk(PerkLib.MarbleResistant) && model.time.hours == 6) {
+    if (player.statusEffectv3(StatusEffects.Marble) > 0 && player.statusEffectv2(StatusEffects.Marble) >= 100 && !player.hasPerk(PerkLib.MarblesMilk) && !player.hasPerk(PerkLib.MarbleResistant) && !player.fiendishMetabolismNFER() && model.time.hours == 6) {
         marbleSprite();
         outputText("\nYou wake up feeling like something has changed. With slightly chilling clarity, you realize that you have finally become completely and utterly dependent on Marble's milk; you must drink her milk every day, or you will die. There is nothing that can be done to change that at this point. You hurry over to the farm; you have to drink Marble's milk, NOW.\n\n");
         outputText("You find Marble in her room. When you come in she looks up at you and smiles deeply. \"<i>What happened?</i>\" she asks, \"<i>Something about you feels so wonderful and right.</i>\" You explain to her that you've finally become entirely dependent on her milk.\n");

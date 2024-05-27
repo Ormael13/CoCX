@@ -123,7 +123,7 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 5) temp *= 3;
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 10) temp *= 3;
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 15) temp *= 3;
-			outputText("She pops the small pill into her mouth and swallows. <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
+			outputText("She pops the small pill into her mouth and swallows. <b>([font-heal]+" + temp + "[/font])</b>.");
 			addHP(temp);
 		}
 		public function usingARC():void {
@@ -225,7 +225,7 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.DIANA_LVL_UP] < 2) outputText("Horse-morph");
 			else if (flags[kFLAGS.DIANA_LVL_UP] >= 2 && flags[kFLAGS.DIANA_LVL_UP] < 8) outputText("Unicorn");
 			else outputText("Diana");
-			outputText(" cries out, planting her staff. She inhales deeply, and begins chanting. A green pulse eminates from her staff, which wraps around her, closing her injuries almost instantly.  <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
+			outputText(" cries out, planting her staff. She inhales deeply, and begins chanting. A green pulse eminates from her staff, which wraps around her, closing her injuries almost instantly.  <b>([font-heal]+" + temp + "[/font])</b>.");
 			addHP(temp);
 			mana -= spellCostHeal();
 			createStatusEffect(StatusEffects.AbilityCooldown1, 2, 0, 0, 0);

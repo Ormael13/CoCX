@@ -21,7 +21,7 @@ package classes.Scenes.Camp
 				var LUSTFULL:Number = (125 * player.statusEffectv3(StatusEffects.HeavenTribulationCR));
 				var body_choice:Array = ["head", "arm", "[leg]", "[face]"];//, "[wings]", "[tail]"
 				LUSTFULL = Math.round(LUSTFULL * player.lustPercent() * 0.01);
-				outputText("It hits you directly in your "+randomChoice(body_choice)+". <b>(<font color=\"#800000\">" + THUNDER + "</font>)(<font color=\"#ff00ff\">" + LUSTFULL + "</font>)</b>");
+				outputText("It hits you directly in your "+randomChoice(body_choice)+". <b>([font-damage]" + THUNDER + "[/font])([font-lust]" + LUSTFULL + "[/font])</b>");
 				player.HP -= THUNDER;//200-600-1,400-3,000-6,200-12,600-25,400-52,000
 				player.lust += LUSTFULL;
 				player.addStatusValue(StatusEffects.HeavenTribulationCR,2,ThDa);

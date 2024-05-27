@@ -3,6 +3,7 @@ import classes.*;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.*;
+import classes.IMutations.IMutationsLib;
 import classes.Items.*;
 import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 import classes.Scenes.Dungeons.D3.*;
@@ -57,6 +58,15 @@ public class CombatTeases extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemConstants.A_REVEALING)) tBLD *= (1 + ((10 + rand(11)) / 100));
 		if (player.weapon == weapons.HELLCAL) damagemultiplier *= (1 + (0.01 * player.cor));
 		if (player.weapon == weapons.ELYSIUM) damagemultiplier *= (1 + (0.01 * (100 - player.cor)));
+		if (player.hasStatusEffect(StatusEffects.DemonEnergyThirstFeed)) {
+			var inotcareanymore:Number = 0.05;
+			if (player.hasPerk(PerkLib.DemonEnergyThirst)) inotcareanymore *= 2;
+			damagemultiplier += (inotcareanymore * player.statusEffectv1(StatusEffects.DemonEnergyThirstFeed));
+		}
+		if (player.perkv1(IMutationsLib.FiendishOvariesIM) >= 3 && (player.pregnancyType == PregnancyStore.PREGNANCY_IMP || player.pregnancy2Type == PregnancyStore.PREGNANCY_IMP)) {
+			if (player.perkv1(IMutationsLib.FiendishOvariesIM) >= 4) damagemultiplier += 0.5;
+			else damagemultiplier += 0.25;
+		}
 		tBLD *= damagemultiplier;
 
 		if (player.hasPerk(PerkLib.ChiReflowLust)) tBLD *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
@@ -92,9 +102,7 @@ public class CombatTeases extends BaseCombatContent {
 		var lustMult:Number = 1;
 		var multiplier:Number = 0.02;
 		if (player.hasPerk(PerkLib.JobSeducer)) multiplier += 0.01;
-
 		lustMult += (multiplier * player.teaseLevel);
-
 		return lustMult;
 	}
 

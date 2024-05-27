@@ -3631,7 +3631,7 @@ public final class Mutations extends MutationsHelper {
             if (player.hasPerk(PerkLib.MarblesMilk)) outputText("You gulp down the bottle's contents; it's no substitute for the real thing, but it's a nice pick me up.[pg]");
             else {
                 //[player is no longer addicted]
-                if (player.hasPerk(PerkLib.MarbleResistant)) outputText("You gulp down the bottle's contents; you're careful not to get too attached to the taste.[pg]");
+                if (player.hasPerk(PerkLib.MarbleResistant) || player.fiendishMetabolismNFER()) outputText("You gulp down the bottle's contents; you're careful not to get too attached to the taste.[pg]");
                 //[player is addicted]
                 else outputText("You gulp down the bottle's contents; you really needed that.[pg]");
             }
@@ -12613,13 +12613,14 @@ public final class Mutations extends MutationsHelper {
             transformations.TongueDemonic.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
-		//Demon eyes
-		if (player.faceType == Face.DEMON && (transformations.EyesDemon.isPossible() || transformations.EyesDemonColors.isPossible()) && changes < changeLimit && rand(3) == 0) {
+		//Demon/Devil eyes
+		if (player.faceType == Face.DEMON && (transformations.EyesDemon.isPossible() || transformations.EyesDevil.isPossible() || transformations.EyesDemonColors.isPossible()) && changes < changeLimit && rand(3) == 0) {
 			if (transformations.EyesDemonColors.isPossible()) {
 				transformations.EyesDemonColors.applyEffect();
 			}
-			if (transformations.EyesDemon.isPossible()) {
-				transformations.EyesDemon.applyEffect();
+			if (transformations.EyesDemon.isPossible() || transformations.EyesDevil.isPossible()) {
+				if (rand(2) == 0) transformations.EyesDemon.applyEffect();
+				else transformations.EyesDevil.applyEffect();
 			}
 			changes++;
 		}

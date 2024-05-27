@@ -53,7 +53,7 @@ public class EAspectWaterSkill extends AbstractMagicSpecial {
     override public function doEffect(display:Boolean = true):void {
         var amountToHeal:Number = Math.round(calcDamage(monster));
 
-        if (display) outputText("Your elemental encases your body within a bubble of curative spring water, slowly closing your wounds. The bubbles pop leaving you wet, but on the way to full recovery. <b>([font-heal]+" + numberFormat(amountToHeal) + "</font>)</b>");
+        if (display) outputText("Your elemental encases your body within a bubble of curative spring water, slowly closing your wounds. The bubbles pop leaving you wet, but on the way to full recovery. <b>([font-heal]+" + numberFormat(amountToHeal) + "[/font])</b>");
 		HPChange(amountToHeal,false);
 		if (display) outputText("\n\n");        
     }

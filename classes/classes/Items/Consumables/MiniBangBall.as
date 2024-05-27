@@ -34,7 +34,7 @@ package classes.Items.Consumables
 			else { //Not dodged
 				var damage:Number = 120 + Utils.rand(41);
 				if (game.monster.hasPerk(PerkLib.EnemyGroupType) || game.monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 5;
-				outputText(game.monster.capitalA + game.monster.short + " is hit with the mini bangball!  It breaks apart as it lacerates " + game.monster.pronoun2 + ". <b>([font-damage]" + damage + "</font>)</b>");
+				outputText(game.monster.capitalA + game.monster.short + " is hit with the mini bangball!  It breaks apart as it lacerates " + game.monster.pronoun2 + ". <b>([font-damage]" + damage + "[/font])</b>");
 				game.monster.HP -= damage;
 				if (game.monster.HP < game.monster.minHP()) game.monster.HP = game.monster.minHP() - 1;
 			}

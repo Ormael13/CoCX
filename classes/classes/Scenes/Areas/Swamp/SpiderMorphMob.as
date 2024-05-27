@@ -35,8 +35,8 @@ public class SpiderMorphMob extends Monster
 					outputText(capitalA + short + " <b>mutilate");
 					outputText("</b> you with " + pronoun3 + " powerful " + weaponVerb + "! ");
 				}
-				if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-				else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>");
+				if (damage > 0) outputText("<b>([font-damage]" + damage + "[/font])</b>");
+				else outputText("<b>([font-miss]" + damage + "[/font])</b>");
 				if(damage > 0) {
 					if(lustVuln > 0 && player.armorName == "barely-decent bondage straps") {
 						if(!plural) outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed.");

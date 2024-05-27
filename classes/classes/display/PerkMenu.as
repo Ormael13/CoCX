@@ -911,12 +911,12 @@ public class PerkMenu extends BaseContent {
 				mutationCount = player.maxTotalMutationsInSlot(bodyPart);
 				outputText(IMutationPerkType.Slots[bodyPart].name + " mutations obtained: ");
 				if (mCount > mutationCount){
-					outputText("<font color=\"#800000\">");
+					outputText("[font-dred]");
 				}
 				else{
-					outputText("<font color=\"#008000\">");
+					outputText("[font-green]");
 				}
-				outputText( mCount +"</font> of " + (mutationCount > mPerkarray.length ? mPerkarray.length : mutationCount) + ". Max:(");
+				outputText( mCount +"[/font] of " + (mutationCount > mPerkarray.length ? mPerkarray.length : mutationCount) + ". Max:(");
 				if (flags[kFLAGS.MUTATIONS_SPOILERS]){
 					outputText(mPerkarray.length + ")\n");
 				}
@@ -1164,6 +1164,7 @@ public class PerkMenu extends BaseContent {
 		
 		var desc:String = Parser.recursiveParser(pc.perkDesc);
 		var reqs:String = player.hasPerk(perk) ? "" : formatPerkRequirements(perk, true);
+		reqs = Parser.recursiveParser(reqs);
 		if (reqs) reqs = "\n" + reqs;
 		if (player.hasPerk(perk)) {
 			btn.disable();
@@ -1405,13 +1406,13 @@ public class PerkMenu extends BaseContent {
 		for each (var cond:Object in ptype.requirements) {
 			if (cond.fn(player)) {
 				if (onlyMissing) continue;
-				color=(darkTheme()?'#ffffff':'#000000');
-			} else color=darkTheme()?'#ff4444':'#aa2222';
+				color=('default');
+			} else color=('penalty');
 			if (cond.text is String){
-				reqs.push("<font color='"+color+"'>"+cond.text+"</font>");
+				reqs.push("[font-"+color+"]"+cond.text+"[/font]");
 			}
 			else {
-				reqs.push("<font color='"+color+"'>"+cond.text(player)+"</font>");
+				reqs.push("[font-"+color+"]"+cond.text(player)+"[/font]");
 			}
 		}
 		if (reqs.length == 0) return "";
@@ -1441,11 +1442,11 @@ public class PerkMenu extends BaseContent {
 			var pclass:PerkClass = player.getPerk(ptype)
 
 			var color:String;
-			if (pclass) color=(darkTheme()?'#ffffff':'#000000'); // has perk
-			else if (ptype.available(player)) color=darkTheme()?'#44cc44':'#228822'; // can take on next lvl
-			else color=darkTheme()?'#ffcc44':'#aa8822'; // requirements not met
+			if (pclass) color=("default"); // has perk
+			else if (ptype.available(player)) color=('perkcan'); // can take on next lvl
+			else color=('perkcant'); // requirements not met
 
-			outputText("<font color='" +color +"'><b>"+ptype.name()+"</b></font>: ");
+			outputText("[font-"+color +"]<b>"+ptype.name()+"</b>[/font]: ");
 			outputText(pclass?ptype.desc(pclass):ptype.longDesc);
 			if (!pclass && ptype.requirements.length>0) {
 				outputText("<ul><li>"+formatPerkRequirements(ptype)+"</li></ul>");

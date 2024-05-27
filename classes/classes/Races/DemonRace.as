@@ -50,7 +50,7 @@ public class DemonRace extends Race {
 				.faceType(NOT(Face.VAMPIRE), 0, -10)
 				.tongueType(Tongue.DEMONIC, +1)
 				.earType(ANY(Ears.ELFIN, Ears.ELVEN), +1)
-				.eyeType(Eyes.DEMON, +1)
+				.eyeType(ANY(Eyes.DEMON, Eyes.DEVIL), +1)
 				.eyeColor(ANY(DemonEyeColors), +1)
 				.armType(Arms.DEMON, +1)
 				.legType(ANY(LowerBody.DEMONIC_HIGH_HEELS, LowerBody.DEMONIC_GRACEFUL_FEET, LowerBody.DEMONIC_CLAWS), +1)
@@ -61,6 +61,7 @@ public class DemonRace extends Race {
 				.plainSkinOfAdj(NOT("slippery"), +1)
 				.skinColor1(ANY(DemonSkinColors), +1)
 				.skinColor2(ANY(DemonSkin2Colors), +1)
+				.skinBasePattern(Skin.PATTERN_DEMONIC_PLEASURE_RUNE, +1)
 				.cockOrVaginaOfType(CockTypesEnum.DEMON, VaginaClass.DEMONIC, +1)
 				.customRequirement("",'vagina and D+ tits or 12\"+ long cock',
 						function (body:BodyData):Boolean {
@@ -73,6 +74,9 @@ public class DemonRace extends Race {
 				.hasPerk(PerkLib.Soulless, +4);
 		
 		addMutation(IMutationsLib.BlackHeartIM);
+		addMutation(IMutationsLib.FiendishMetabolismIM);
+		addMutation(IMutationsLib.FiendishBallsIM);
+		addMutation(IMutationsLib.FiendishOvariesIM);
 		
 		buildTier(15, "succubi-kin/incubi-kin")
 				.namesMaleFemaleTaur("incubi-kin", "succubi-kin", "incubi-kintaur", "succubi-kintaur")
@@ -98,6 +102,20 @@ public class DemonRace extends Race {
 					"maxmana_mult": +1.2,
 					"maxwrath_mult": -0.45,
 					"maxlust_mult": +1.2
+				})
+				.end();
+		
+		buildTier(29, "elder succubus/incubus")
+				.namesMaleFemaleTaur("elder incubus","elder succubus","elder incubi-taur","elder succubi-taur")
+				.requirePerk(PerkLib.Soulless)
+				.buffs({
+					"spe.mult": +1.00,
+					"int.mult": +1.10,
+					"lib.mult": +2.75,
+					"sens": +50,
+					"maxmana_mult": +1.5,
+					"maxwrath_mult": -0.5,
+					"maxlust_mult": +1.5
 				})
 				.end();
 	}

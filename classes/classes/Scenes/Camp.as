@@ -384,6 +384,11 @@ public class Camp extends NPCAwareContent{
 			SceneLib.zenjiScene.loverZenjiHalloweenEvent();
 			return;
 		}
+		if (!Holidays.isHalloween() && ZenjiScenes.isLover() && player.statusEffectv4(StatusEffects.ZenjiZList) == 2 && rand(5) < 2) {
+			hideMenus();
+			SceneLib.zenjiScene.loverZenjiHalloweenEventEnding();
+			return;
+		}
 		if (SceneLib.helScene.followerHel() && !player.hasStatusEffect(StatusEffects.HeliaOff)) {
 			if (Holidays.isHeliaBirthday() && flags[kFLAGS.HEL_FOLLOWER_LEVEL] >= 2 && date.fullYear > flags[kFLAGS.HELIA_BIRTHDAY_LAST_YEAR]) {
 				hideMenus();
@@ -2192,7 +2197,8 @@ public class Camp extends NPCAwareContent{
 		addButton(10, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
 		addButton(11, "Recall", sceneHunter.recallScenes).hint("Recall some of the unique events happened during your adventure.");
 		if (SceneLib.exploration.counters.explore >= 1) addButton(12, "Dummy", dummyTraining).hint("Train your mastery level on this dummy.").disableIf((isNightTime && !player.isNightCreature()),"It's too dark for that!");
-		addButton(13, "Ascension", promptAscend).hint("Perform an ascension? This will restart your adventures. The game depending on your choice would also get harder. If you have Sky Poison Pearl could carry over some items to new adventure.").disableIf(flags[kFLAGS.LETHICE_DEFEATED] <= 0, "Don't you have a job to finish first? Like... to defeat someone, maybe Lethice?");
+		if (player.hasPerk(PerkLib.Soulless)) addButtonDisabled(13, "Dark Ascension", "Out of Order! Come back later..."); 
+		else addButton(13, "Ascension", promptAscend).hint("Perform an ascension? This will restart your adventures. The game depending on your choice would also get harder. If you have Sky Poison Pearl could carry over some items to new adventure.").disableIf(flags[kFLAGS.LETHICE_DEFEATED] <= 0, "Don't you have a job to finish first? Like... to defeat someone, maybe Lethice?");
 		addButton(14, "Back", playerMenu);
 	}
 
@@ -3398,20 +3404,20 @@ public class Camp extends NPCAwareContent{
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) outputText("Training Mode\n");
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] < 2) outputText("Relax Mode\n");
 		}
-		if (player.hasStatusEffect(StatusEffects.ChiChiOff)) outputText("\nChi Chi: <font color=\"#800000\"><b>Disabled</b></font>");
-		if (player.hasStatusEffect(StatusEffects.DivaOff)) outputText("\nDiva: <font color=\"#800000\"><b>Disabled</b></font>");
-		if (player.hasStatusEffect(StatusEffects.ElectraOff)) outputText("\nElectra: <font color=\"#800000\"><b>Disabled</b></font>");
-		if (player.hasStatusEffect(StatusEffects.EtnaOff)) outputText("\nEtna: <font color=\"#800000\"><b>Disabled</b></font>");
-		if (player.hasStatusEffect(StatusEffects.LunaOff)) outputText("\nLuna: <font color=\"#800000\"><b>Disabled</b></font>");
-		if (player.hasStatusEffect(StatusEffects.NadiaOff)) outputText("\nNadia: <font color=\"#800000\"><b>Disabled</b></font>");
-		if (player.hasStatusEffect(StatusEffects.TedOff)) outputText("\nDragon Boi: <font color=\"#800000\"><b>Disabled</b></font>");
-		if (player.hasStatusEffect(StatusEffects.SophieOff)) outputText("\nSophie: <font color=\"#800000\"><b>Disabled</b></font>");
-		if (player.hasStatusEffect(StatusEffects.HeliaOff)) outputText("\nHelia: <font color=\"#800000\"><b>Disabled</b></font>");
-		if (player.hasStatusEffect(StatusEffects.KonstantinOff)) outputText("\nKonstantin: <font color=\"#800000\"><b>Disabled</b></font>");
-		if (player.hasStatusEffect(StatusEffects.SpoodersOff)) outputText("\nSpooders: <font color=\"#800000\"><b>Disabled</b></font>");
-		if (player.hasStatusEffect(StatusEffects.ShouldraOff)) outputText("\nShouldra: <font color=\"#800000\"><b>Disabled</b></font>");
-		if (player.hasStatusEffect(StatusEffects.CalluOff)) outputText("\nCallu (Otter girl): <font color=\"#800000\"><b>Disabled</b></font>");
-		if (player.hasStatusEffect(StatusEffects.VenusOff)) outputText("\nVenus (Gigantic Turtle): <font color=\"#800000\"><b>Disabled</b></font>");
+		if (player.hasStatusEffect(StatusEffects.ChiChiOff)) outputText("\nChi Chi: [font-dred]<b>Disabled</b>[/font]");
+		if (player.hasStatusEffect(StatusEffects.DivaOff)) outputText("\nDiva: [font-dred]<b>Disabled</b>[/font]");
+		if (player.hasStatusEffect(StatusEffects.ElectraOff)) outputText("\nElectra: [font-dred]<b>Disabled</b>[/font]");
+		if (player.hasStatusEffect(StatusEffects.EtnaOff)) outputText("\nEtna: [font-dred]<b>Disabled</b>[/font]");
+		if (player.hasStatusEffect(StatusEffects.LunaOff)) outputText("\nLuna: [font-dred]<b>Disabled</b>[/font]");
+		if (player.hasStatusEffect(StatusEffects.NadiaOff)) outputText("\nNadia: [font-dred]<b>Disabled</b>[/font]");
+		if (player.hasStatusEffect(StatusEffects.TedOff)) outputText("\nDragon Boi: [font-dred]<b>Disabled</b>[/font]");
+		if (player.hasStatusEffect(StatusEffects.SophieOff)) outputText("\nSophie: [font-dred]<b>Disabled</b>[/font]");
+		if (player.hasStatusEffect(StatusEffects.HeliaOff)) outputText("\nHelia: [font-dred]<b>Disabled</b>[/font]");
+		if (player.hasStatusEffect(StatusEffects.KonstantinOff)) outputText("\nKonstantin: [font-dred]<b>Disabled</b>[/font]");
+		if (player.hasStatusEffect(StatusEffects.SpoodersOff)) outputText("\nSpooders: [font-dred]<b>Disabled</b>[/font]");
+		if (player.hasStatusEffect(StatusEffects.ShouldraOff)) outputText("\nShouldra: [font-dred]<b>Disabled</b>[/font]");
+		if (player.hasStatusEffect(StatusEffects.CalluOff)) outputText("\nCallu (Otter girl): [font-dred]<b>Disabled</b>[/font]");
+		if (player.hasStatusEffect(StatusEffects.VenusOff)) outputText("\nVenus (Gigantic Turtle): [font-dred]<b>Disabled</b>[/font]");
 	}
 	private function SparrableNPCsMenu():void {
 		clearOutput();

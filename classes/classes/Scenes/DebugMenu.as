@@ -232,9 +232,9 @@ public class DebugMenu extends BaseContent
 				if (tf.isPossible()) outputText("</u>");
 				outputText(" / "+tf.name);
 				if (tf is Transformation && (tf as Transformation).isPresent()) {
-					outputText(" <font color='#008000'>present</font>");
+					outputText(" [font-green]present[/font]");
 				} else if (!tf.isPossible()) {
-					outputText(" <font color='#800000'>impossible</font>");
+					outputText(" [font-red]impossible[/font]");
 				}
 			}
 			outputText("\n\n");

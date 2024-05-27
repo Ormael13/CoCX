@@ -1,5 +1,6 @@
 package classes.Parser {
 import classes.Appearance;
+import classes.BaseContent;
 import classes.CoC;
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
@@ -64,12 +65,23 @@ public class ParserTags {
         "finger"                : function ():* { return CoC.instance.player.finger(); },
         "feet"                  : function ():* { return CoC.instance.player.feet(); },
         "foot"                  : function ():* { return CoC.instance.player.foot(); },
-        "font-red"              : function ():* { return '<font color="'+"#a00000"+'">'; },
+        //Non-Combat Colors
+        "font-lred"             : function ():* { return '<font color="'+"#d00000"+'">'; },
+        "font-red"              : function ():* { return '<font color="'+"#b00000"+'">'; },
+        "font-dred"             : function ():* { return '<font color="'+"#900000"+'">'; },
         "font-green"            : function ():* { return '<font color="'+"#00a000"+'">'; },
+        "font-olive"            : function ():* { return '<font color="'+"#808000"+'">'; },
         "font-blue"             : function ():* { return '<font color="'+"#0000ff"+'">'; },
         "font-lblue"            : function ():* { return '<font color="'+"#00a0ff"+'">'; },
         "font-yellow"           : function ():* { return '<font color="'+"#aa8822"+'">'; },
         "font-pink"             : function ():* { return '<font color="'+"#a000a0"+'">'; },
+        "font-true"             : function ():* { return '<font color="'+"#404040"+'">'; },
+        "font-penalty"          : function ():* { return CoC.instance.mainViewManager.darkThemeImpl()?'<font color="'+"#ff4444"+'">':'<font color="'+"#aa2222"+'">'; },
+        "font-perkcan"          : function ():* { return CoC.instance.mainViewManager.darkThemeImpl()?'<font color="'+"#44cc44"+'">':'<font color="'+"#228822"+'">'; },
+        "font-perkcant"         : function ():* { return CoC.instance.mainViewManager.darkThemeImpl()?'<font color="'+"#ffcc44"+'">':'<font color="'+"#aa8822"+'">'; },
+        "font-default"          : function ():* { return '<font>'; },
+        //Combat Colors
+        "font-critical"         : function ():* { return '<font color="'+"#c00000"+'">'; },
         "font-damage"           : function ():* { return '<font color="'+"#800000"+'">'; },
         "font-miss"             : function ():* { return '<font color="'+"#000080"+'">'; },
         "font-heal"             : function ():* { return '<font color="'+"#008000"+'">'; },
@@ -82,9 +94,7 @@ public class ParserTags {
         "font-earth"            : function ():* { return '<font color="'+"#673b00"+'">'; },
         "font-acid"           	: function ():* { return '<font color="'+"#00C80e"+'">'; },
         "font-poison"           : function ():* { return '<font color="'+"#00C80e"+'">'; },
-        "font-true"             : function ():* { return '<font color="'+"#404040"+'">'; },
         "font-lust"             : function ():* { return '<font color="'+"#ff00ff"+'">'; },
-        "font-default"          : function ():* { return '<font>'; },
         "/font"                 : function ():* { return '</font>'; },
         "flowercolor"           : function ():* { return CoC.instance.player.featherColor; },
         "fullchest"             : function ():* { return CoC.instance.player.allChestDesc(); },

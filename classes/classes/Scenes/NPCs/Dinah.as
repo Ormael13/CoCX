@@ -192,7 +192,7 @@ import classes.internals.*;
 		public function castHealDinah():void {
 			outputText("Dinah focuses on her body and her desire to end pain, trying to draw on her arousal without enhancing it.");
 			var temp:int = int((inte / (2 + rand(3))) * (maxHP() / 50));
-			outputText("She flushes with success as her wounds begin to knit! <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
+			outputText("She flushes with success as her wounds begin to knit! <b>([font-heal]+" + temp + "[/font])</b>.");
 			addHP(temp);
 			mana -= spellCostHeal();
 			flags[kFLAGS.DINAH_SPELLS_CASTED]++;

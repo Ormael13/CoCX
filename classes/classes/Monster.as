@@ -1820,7 +1820,7 @@ import classes.Scenes.Combat.CombatAbilities;
 				if (flags[kFLAGS.ENEMY_CRITICAL] > 0) outputText("<b>Critical hit! </b>");
 				SceneLib.combat.CommasForDigits(damage);
 			}
-			else outputText("<b>([font-miss]" + damage + "</font>)</b>");
+			else outputText("<b>([font-miss]" + damage + "[/font])</b>");
 		}
 
 		/**
@@ -3109,7 +3109,7 @@ import classes.Scenes.Combat.CombatAbilities;
 			lustDelta *= SceneLib.combat.doDamageReduction();
 			lustDelta = Math.round(lustDelta);
 			lust += lustDelta;
-			if (display) SceneLib.combat.CommasForDigits(lustDelta, true);//outputText(" <b>([font-lust]" + Utils.formatNumber(lustDelta) + "</font>)</b>");
+			if (display) SceneLib.combat.CommasForDigits(lustDelta, true);//outputText(" <b>([font-lust]" + Utils.formatNumber(lustDelta) + "[/font])</b>");
 			if (player.armor == armors.ELFDRES && player.isElf() && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0 && lustDelta >= 1) {
 				if (display) outputText(" You cool down a little bit ");
 				player.takeLustDamage(Math.round(-(player.maxLust() * 0.01)), display, true);
@@ -3364,7 +3364,7 @@ import classes.Scenes.Combat.CombatAbilities;
 				if (temp2 > 0) {
 					temp2 = Math.round(temp2);
 					if (this is ChiChi && (flags[kFLAGS.CHI_CHI_SAM_TRAINING] < 2 || hasStatusEffect(StatusEffects.MonsterRegen))) {
-						outputText("To your surprise, Chi Chi’s wounds start closing! <b>([font-heal]+" + temp2 + "</font>)</b>.\n\n");
+						outputText("To your surprise, Chi Chi’s wounds start closing! <b>([font-heal]+" + temp2 + "[/font])</b>.\n\n");
 					}
 					else {
 						outputText("Due to natural regeneration " + short + " recover");

@@ -17,6 +17,8 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 	public static var CharyMet:Boolean;
 	public static var CharySpar:Boolean;
 	public static var CharySeenSkulls:Boolean;
+	public static var CharySeenSkulls2:Boolean;
+	public static var CharyGivenSkulls:int;
 	public static var CharyAnalEnabled:Boolean;
 	public static var CharyJammed:int;
 	public static var CharyVocalTrained:int;
@@ -38,6 +40,8 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 		CharyMet = false;
 		CharySpar = false;
 		CharySeenSkulls = false;
+		CharySeenSkulls2 = false;
+		CharyGivenSkulls = 0;
 		CharyAnalEnabled = false;
 		CharyJammed = 0;
 		CharyAtCamp = false;
@@ -56,6 +60,8 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 			"CharyMet":CharyMet,
 			"CharySpar":CharySpar,
 			"CharySeenSkulls":CharySeenSkulls,
+			"CharySeenSkulls2":CharySeenSkulls2,
+			"CharyGivenSkulls":CharyGivenSkulls,
 			"CharyAnalEnabled":CharyAnalEnabled,
 			"CharyJammed":CharyJammed,
 			"CharyVocalTrained":CharyVocalTrained,
@@ -76,6 +82,8 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 			CharyMet = o["CharyMet"];
 			CharySpar = valueOr(o["CharySpar"], false);
 			CharySeenSkulls = o["CharySeenSkulls"];
+			CharySeenSkulls2 = valueOr(o["CharySeenSkulls2"], false);
+			CharyGivenSkulls = valueOr(o["CharyGivenSkulls"], 0);
 			CharyAnalEnabled = o["CharyAnalEnabled"];
 			CharyJammed = o["CharyJammed"];
 			CharyVocalTrained = o["CharyVocalTrained"];
@@ -248,8 +256,8 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 		addButton(2, "Hang", charyHang);
 		addButton(3, "Spar", charySpar);
 		/*addButton(4, "Music", charyMusic);
-		addButton(5, "Sex", charySex);
-		if (CharySeenSkulls == true) addButton(6, "Skulls", charyGiveSkulls);*/
+		addButton(5, "Sex", charySex);*/
+		if (CharySeenSkulls) addButton(6, "Skulls", charyGiveSkulls);
 		addButton(14, "Leave", explorer.done);
 	}
 	
@@ -260,7 +268,7 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 		addButton(0, "RedEyes", charyTalkEyes);
 		addButton(1, "Him", charyTalkHim);
 		addButton(2, "Scylla", charyTalkRace);
-		//demons
+		addButton(3, "Demons", charyTalkDemons);
 		//addButton(4, "Towns", charyTalkTowns);
 		//if (CharyAffectionMeter > 79 && CharyLandShipQuestState == 2) addButton(5, "CampJoin", charyJoinCamp);
 		addButton(14, "Back", charyBeachMeetings2);
@@ -279,15 +287,28 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 		if (CharyAffectionMeter >= 40) {
 			outputText("<i>\"...Okay, I guess I can tell ya.\"</i> He looks down at his lute. <i>\"My mom and sisters wanted to trade me to another tribe. They decided that since they had too many people, and another male, they’d lump me in with some girls I’d never met, toss me out of the cave, and that I’d shack up with them, give them tons of babies, and never leave the cave.\"</i> You look at him oddly, and he throws his hands up into the air.\n\n");
 			outputText("<i>\"Well, that’s what happens, when the tribe’s run by women who need their fix, and…\"</i> He stops, looking at you. <i>\""+(player.gender == 2?"I didn’t mean you. You’re cool, [name]. I just…":"")+"Not that it matters anymore, eh?\"</i>\n\n");
-			outputText("You tell him that he doesn’t need to continue if he doesn’t want to, and that you’re not like them. He smiles, putting a hand on your shoulder. \"No, you certainly aren’t.\"\n\n");
+			outputText("You tell him that he doesn’t need to continue if he doesn’t want to, and that you’re not like them. He smiles, putting a hand on your shoulder. <i>\"No, you certainly aren’t.\"</i>\n\n");
 		}
 		charyAffection(5);
 		doNext(charyTalk);
 	}
 	public function charyTalkRace():void {
 		clearOutput();
-		outputText("<i>\"Wanted to know about my race, eh?\"</i> He shrugs his shoulders. <i>\"Well, take a seat if’n ya want. We’re an odd race, we are. Mostly female...Well...Almost entirely female. We live in the caves, well below the waves, and we don’t need no soap to make laves\"</i>. The last few lines are sung, and he rolls his eyes at the bad rhyme. <i>\"The Anemone girls can be nice. They live around us sometimes. Now, the Orcas…\"</i> he gives you a wink. <i>\"Well, we usually don’t get along well with ‘em. Honestly, I’ve never understood why, myself. The ones I’ve met were quite nice...If a little gluttonous.\"</i>\n\n"); 
+		outputText("<i>\"Wanted to know about my race, eh?\"</i> He shrugs his shoulders. <i>\"Well, take a seat if’n ya want. We’re an odd race, we are. Mostly female...Well...Almost entirely female. We live in the caves, well below the waves, and we don’t need no soap to make laves.\"</i> The last few lines are sung, and he rolls his eyes at the bad rhyme. <i>\"The Anemone girls can be nice. They live around us sometimes. Now, the Orcas…\"</i> he gives you a wink. <i>\"Well, we usually don’t get along well with ‘em. Honestly, I’ve never understood why, myself. The ones I’ve met were quite nice...If a little gluttonous.\"</i>\n\n"); 
 		charyAffection(5);
+		doNext(charyTalk);
+	}
+	public function charyTalkDemons():void {
+		clearOutput();
+		outputText("<i>\"Nasty buggers, those,\"</i> he murmurs, stringing his lute. <i>\"Didn’t really see many of em before I came to the surface, but now…\"</i> His face darkens. <i>\"I’ve seen what they do, what they enjoy, and…\"</i> His tentacles grab at the sand, and his face darkens. <i>\"If I see any around my boat, they die. Vile things.\"</i> He rubs his chin thoughtfully. <i>\"You think I should keep a few of the skulls, maybe decorate the cove? Maybe that’d keep em out.\"</i>\n\n"); 
+		charyAffection(5);
+		menu();
+		addButton(1, "Yes", charyTalkDemonsYes);
+		addButton(3, "No", charyTalk);
+	}
+	public function charyTalkDemonsYes():void {
+		outputText("You nod, and Charybdis gives you a thoughtful look. <i>\"Well, alright. Bring me some, and I’ll pay ya for ‘em.\"</i>");
+		CharySeenSkulls = true;
 		doNext(charyTalk);
 	}
 	public function charyTalkTowns():void {
@@ -308,6 +329,31 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 		}	
 	}
 	
+	public function charyGiveSkulls():void {
+		clearOutput();
+		outputText("You tell Chary that you brought him some skulls, and he nods in appreciation.\n\n");
+		outputText("<i>\"Aight, let’s see ‘em then.\"</i>\n\n");
+		if (player.hasItem(useables.DEMSKLL, 1, true)) {
+			outputText("You pull out demon skull from your bag. Charybdis takes it wordlessly, handing over the gems in exchange.\n\n");
+			player.destroyItems(useables.DEMSKLL, 1, true);
+			CharyGivenSkulls += 1;
+			if (CharySeenSkulls2) player.gems += 100;
+			else player.gems += 60;
+			if (CharyGivenSkulls >= 10 && CharySeenSkulls2 == false) {
+				outputText("As you pass over the skulls, he sighs. <i>\"Okay, I have a bit of a confession to make. I don’t really want to use these for decoration. Frankly, I find it abhorrent.\"</i>\n\n");
+				outputText("You ask him what he wants with them, then. He isn’t making an instrument out of them, is he?\n\n");
+				outputText("<i>\"Ew. No. I don’t want my music sullied with the likes of them.\"</i> Charybdis seems a little nauseated by the thought. <i>\"No…The truth is, I don’t want the skulls for anything, they’re just…proof of kill.\"</i> He rolls his shoulders. <i>\"While I kill the bastards if I have to, it takes a special kind of crazy to go out hunting the damned things.\"</i> ");
+				outputText("He gives you a wink. <i>\"Crazy I like, but that’s beside the point.\"</i> He takes a deep breath. <i>\"I make quite a lot of gems performing, so I…Want to pay it forward, so to speak. Motivating those who can to kill them? That I can do.\"</i> He grins, putting a hand on your shoulder. <i>\"I’ll give you 100 from now on. Just keep giving them hell, [name].\"</i>\n\n");
+				CharySeenSkulls2 = true;
+				charyAffection(10);
+			}
+		}
+		else {
+			outputText("You look into your bag, but don’t find any skulls. You could’ve sworn you had some. Charybdis laughs a little, but stops quickly to preserve your pride.\n\n");
+			outputText("<i>\"It’s okay, [name]. Take your time.\"</i>\n\n");
+		}
+		doNext(charyTalk);
+	}
 
 	public function charyHang():void {
 		clearOutput();
