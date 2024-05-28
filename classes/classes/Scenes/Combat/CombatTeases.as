@@ -67,6 +67,14 @@ public class CombatTeases extends BaseCombatContent {
 			if (player.perkv1(IMutationsLib.FiendishOvariesIM) >= 4) damagemultiplier += 0.5;
 			else damagemultiplier += 0.25;
 		}
+		if (player.perkv1(IMutationsLib.FiendishBallsIM) >= 3 && monster.hasVagina() && player.hasCock()) {
+			var power1:Number = 0;
+			var powerC:Number = 0.25;
+			if (player.perkv1(IMutationsLib.FiendishBallsIM) >= 4) powerC += 0.25;
+			power1 = player.cumCapacity()*0.001;
+			if (power1 > powerC) power1 = powerC;
+			damagemultiplier += power1;
+		}
 		tBLD *= damagemultiplier;
 
 		if (player.hasPerk(PerkLib.ChiReflowLust)) tBLD *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
@@ -1093,9 +1101,6 @@ public class CombatTeases extends BaseCombatContent {
 				options.damage += 6;
 				options.chance += 3;
 				break;
-			default:
-				outputText("You shimmy and shake sensually. (An error occurred.)");
-				break;
 			case 37:
 				if (display) outputText("You purse your lips coyly, narrowing your eyes mischievously and beckoning to [themonster] with a burning come-hither glare.  Sauntering forward, you pop your hip to the side and strike a coquettish pose, running " + ((player.tailCount > 1) ? "one of your tails" : "your tail") + " up and down [monster his] body sensually.");
 				options.chance += 18;
@@ -1316,6 +1321,9 @@ public class CombatTeases extends BaseCombatContent {
 				if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
 				options.chance += 9;
 				options.damage += 9;
+				break;
+			default:
+				outputText("You shimmy and shake sensually. (An error occurred.)");
 				break;
 		}
 

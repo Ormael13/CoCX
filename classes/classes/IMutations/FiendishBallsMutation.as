@@ -25,6 +25,12 @@ public class FiendishBallsMutation extends IMutationPerkType
             if (pTier >= 2){
                 descS += ". Increase cum production by "+((pTier+1)*25)+"%";
             }
+            if (pTier >= 3){
+                descS += ", gain a bonus to tease against females based on your cum production up to "+((pTier-2)*25)+"%";
+            }
+            if (pTier >= 4){
+                descS += ". All attacks involving your penis are 300% stronger";
+            }
             if (descS != "")descS += ".";
             return descS;
         }
@@ -68,7 +74,7 @@ public class FiendishBallsMutation extends IMutationPerkType
 
         public function FiendishBallsMutation() 
 		{
-			super(mName + " IM", mName, SLOT_TESTICLES, 2);
+			super(mName + " IM", mName, SLOT_TESTICLES, 4);
         }
 
     }

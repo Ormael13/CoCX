@@ -1,6 +1,7 @@
 package classes.Scenes.Combat.General {
 import classes.PerkLib;
 import classes.Monster;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.Combat.Combat;
 import classes.Scenes.Combat.AbstractGeneral;
 import classes.StatusEffects;
@@ -116,7 +117,8 @@ public class TeaseSkill extends AbstractGeneral {
 
 		if (rand(100) <= baseChance + rand(teaseOpt.bonusChance)) {
 			var lustDmg:Number = calcLustDamage(monster);
-			var damageMod:Number = teaseOpt.damage + rand(teaseOpt.bonusDamage)
+			var damageMod:Number = teaseOpt.damage + rand(teaseOpt.bonusDamage);
+			if (player.perkv1(IMutationsLib.FiendishBallsIM) >= 4 && (selectedTease == 3 || selectedTease == 10 || selectedTease == 11 || selectedTease == 23 || selectedTease == 33 || selectedTease == 35)) lustDmg *= 4;
 			lustDmg *= 1 + (1 * damageMod/20);
 
 			//Determine if critical tease!
@@ -200,7 +202,8 @@ public class TeaseSkill extends AbstractGeneral {
         if (rand(100) <= baseChance + rand(teaseOpt.bonusChance)) {
             var lustDmg:Number = calcLustDamage(monster);
             var damageMod:Number = teaseOpt.damage + rand(teaseOpt.bonusDamage)
-            lustDmg *= 1 + (1 * damageMod/20);
+            lustDmg *= 1 + (1 * damageMod / 20);
+			if (player.perkv1(IMutationsLib.FiendishBallsIM) >= 4) 
 
             //Determine if critical tease!
 			var crit:Boolean = false;
