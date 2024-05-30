@@ -961,6 +961,15 @@ import classes.Scenes.Combat.CombatAbilities;
 			}
 			return dRBOD;
 		}
+		
+		public function lustVulnCap():Number {
+			var lVC:Number = 1;
+			if (game.player.hasPerk(PerkLib.CorruptTheBody)) lVC += 1;
+			if (game.player.hasPerk(PerkLib.CorruptTheHeart)) lVC += 1;
+			if (game.player.hasPerk(PerkLib.CorruptTheMind)) lVC += 1;
+			if (game.player.hasPerk(PerkLib.CorruptTheSoul)) lVC += 996;
+			return lVC;
+		}
 
 		public override function damagePercent():Number {
 			var mult:Number = 100;

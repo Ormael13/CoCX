@@ -383,6 +383,18 @@ public class PerkLib
 		public static const ImprovedArousingAura:PerkType = mk("Improved Arousing Aura", "Improved Arousing Aura",
 				"Double the effect from arousing aura.",
 				"You've chosen the 'Improved Arousing Aura' perk. Double the effect from arousing aura.");
+		public static const CorruptTheBody:PerkType = mk("Corrupt the body", "Corrupt the body",
+				"Lust vulnerability debuff can now stack beyond 0 up to -100%.",
+				"You've chosen the 'Corrupt the body' perk. Lust vulnerability debuff can now stack beyond 0 up to -100%.");
+		public static const CorruptTheHeart:PerkType = mk("Corrupt the heart", "Corrupt the heart",
+				"Lust vulnerability debuff can now stack beyond 0 up to -200%.",
+				"You've chosen the 'Corrupt the heart' perk. Lust vulnerability debuff can now stack beyond 0 up to -200%.");
+		public static const CorruptTheMind:PerkType = mk("Corrupt the mind", "Corrupt the mind",
+				"Lust vulnerability debuff can now stack beyond 0 up to -300%.",
+				"You've chosen the 'Corrupt the mind' perk. Lust vulnerability debuff can now stack beyond 0 up to -300%.");
+		public static const CorruptTheSoul:PerkType = mk("Corrupt the soul", "Corrupt the soul",
+				"Lust vulnerability debuff can now stack beyond 0 up to infinity. (well technicaly not infinity but only Spilly Stonewall PC maybe could reach that 'inifity')",
+				"You've chosen the 'Corrupt the soul' perk. Lust vulnerability debuff can now stack beyond 0 up to infinity.");
 		//public static const BloodSacrifice:PerkType = mk("Blood Sacrifice", "Blood Sacrifice",
 				//"You are currently sacrificing blood to empower your spells.",
 				//"You are currently sacrificing blood to empower your spells.");
@@ -6886,6 +6898,8 @@ public class PerkLib
                     .requireLevel(6);
             ArcaneLash.requirePerk(JobEromancer)
 					.requireLevel(6);
+            ArcaneLash.requirePerk(JobEromancer)
+					.requireLevel(6);
             EromancyBeginner.requirePerk(JobEromancer)
 					.requireLib(45)
                     .requireInt(45)
@@ -6980,6 +6994,8 @@ public class PerkLib
             ArouseTheAudience.requirePerk(JobCourtesan)
                     .requireLib(75)
                     .requireLevel(18);
+            CorruptTheBody.requirePerk(JobEromancer)
+					.requireLevel(18);
             //Tier 4 Libido Perks
             AdvancedSelfControl.requireLib(150)
                     .requireInt(100)
@@ -7015,6 +7031,8 @@ public class PerkLib
             GreaterGiftOfLust.requirePerks(GiftOfLust, EromancyExpert)
 					.requireLevel(36)
                     .requireLib(150);
+            CorruptTheHeart.requirePerk(JobEromancer)
+					.requireLevel(36);
             //Tier 7 Libido Perks
         	HalfStepToPeerlessSelfControl.requireLib(240)
                     .requireInt(160)
@@ -7050,6 +7068,8 @@ public class PerkLib
             UnlockArdor3rdStage.requirePerk(UnlockArdor2ndStage)
                     .requireLib(230)
                     .requireLevel(60);
+            CorruptTheMind.requirePerk(CorruptTheHeart)
+					.requireLevel(60);
             //Tier 11 Libido Perks
             Sadomasochism.requirePerk(UnbreakableBind)
                     .requireLevel(66);
@@ -7072,6 +7092,8 @@ public class PerkLib
                     .requireInt(280)
                     .requirePerk(EpicSelfControl)
                     .requireLevel(78);
+            CorruptTheSoul.requirePerk(CorruptTheMind)
+					.requireLevel(78);
             //Tier 14 Libido Perks
             LegendarySelfControl.requireLib(450)
                     .requireInt(300)

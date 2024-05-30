@@ -904,6 +904,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				crit = true;
 				lustDmg *= 1.75;
 				if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.05;
+				if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
 			}
 			if (player.hasKeyItem("Lustnade Launcher") >= 0) {
 				outputText("Mech AI ready the Lustnade launcher and shoot. The exploding container covers the entire area in pink mist, massively arousing everyone in the vicinity.");
@@ -1423,7 +1424,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 							monster.teased(lustDmg);
 							if (monster.lustVuln > 0 && !player.enemiesImmuneToLustResistanceDebuff()) {
 								monster.lustVuln += 0.01;
-								if (monster.lustVuln > 1) monster.lustVuln = 1;
+								if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
 							}
 							player.tailVenom -= player.VenomWebCost();
 							flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
@@ -3270,7 +3271,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 			if (monster.lustVuln > 0 && !player.enemiesImmuneToLustResistanceDebuff()) {
 				monster.lustVuln += 0.05;
-				if (monster.lustVuln > 1) monster.lustVuln = 1;
+				if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
 			}
 		}
 		else {
@@ -4673,7 +4674,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 					if (monster.lustVuln > 0 && !player.enemiesImmuneToLustResistanceDebuff()) {
 						monster.lustVuln += 0.05;
-						if (monster.lustVuln > 1) monster.lustVuln = 1;
+						if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
 					}
 				}
 			}
@@ -6437,7 +6438,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					monster.teased(lustDmg*Omnishot);
 					if (monster.lustVuln > 0 && !player.enemiesImmuneToLustResistanceDebuff()) {
 						monster.lustVuln += 0.01;
-						if (monster.lustVuln > 1) monster.lustVuln = 1;
+						if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
 					}
 					player.tailVenom -= player.VenomWebCost();
 					if (player.hasPerk(PerkLib.ToxineMaster)) monster.statStore.addBuffObject({tou:-5*Omnishot}, "Poison",{text:"Poison"});

@@ -14,7 +14,7 @@ import classes.Races;
 public class KitsuneParathyroidGlandMutation extends IMutationPerkType
     {
         override public function get mName():String {
-            return "Kitsune Parathyroid Gland";
+            return "Kitsune Parathyroid Glands";
         }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {

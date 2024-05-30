@@ -19,15 +19,22 @@ public class HumanVersatilityMutation extends IMutationPerkType
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
-            if (pTier == 1){
-                descS = "Mastery gains increased by 1 point or in case of multiplier +1 to multiplier.";
+            if (pTier >= 1){
+                descS += "Mastery gains increased by 1 point or in case of multiplier +1 to multiplier";
+            }
+            if (pTier >= 2){
+                descS += "Mastery gains increased by "+pTier+" points or in case of multiplier +"+pTier+" to multiplier";
             }
             if (pTier == 2){
-                descS = "Mastery gains increased by 2 point or in case of multiplier +2 to multiplier. Decrease a bit needed exp to lvl up weapon/lifeskill masteries.";
+                descS += ". Decrease a bit needed exp to lvl up weapon/lifeskill masteries";
             }
-            if (pTier == 3){
-                descS = "Mastery gains increased by 3 point or in case of multiplier +3 to multiplier. Decrease needed exp to lvl up weapon/lifeskill masteries and have 20% chance to gain 3x more XP for Mastery.";
+            if (pTier >= 3){
+                descS += ". Decrease needed exp to lvl up weapon/lifeskill masteries and have "+((pTier*2)-4)+"0% chance to gain "+pTier+"x more XP for Mastery";
             }
+            if (pTier == 4){
+                descS += ". 50% chance to gain 2 levels instead of 1 when leveling weapon/lifeskill mastery.";
+            }
+            if (descS != "")descS += ".";
             if (pTier >= 1) descS += " (req. 18+ human score to have all effects active)";
             return descS;
         }
@@ -80,12 +87,20 @@ public class HumanVersatilityMutation extends IMutationPerkType
 				pBuffs['wis.mult'] = 0.20;
 				pBuffs['lib.mult'] = 0.20;
 			}
+            if (pTier == 4) {
+				pBuffs['str.mult'] = 0.20;
+				pBuffs['tou.mult'] = 0.20;
+				pBuffs['spe.mult'] = 0.20;
+				pBuffs['int.mult'] = 0.40;
+				pBuffs['wis.mult'] = 0.40;
+				pBuffs['lib.mult'] = 0.40;
+			}
             return pBuffs;
         }
 
         public function HumanVersatilityMutation() 
 		{
-			super(mName + " IM", mName, SLOT_ADAPTATIONS, 3);
+			super(mName + " IM", mName, SLOT_ADAPTATIONS, 4);
         }
 
     }

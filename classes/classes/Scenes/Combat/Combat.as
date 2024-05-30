@@ -3247,6 +3247,7 @@ public class Combat extends BaseContent {
 					combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 					if (player.hasPerk(PerkLib.VerdantLeech)) {
 						if (monster.lustVuln != 0 && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.01;
+						if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
 						HPChange(Math.round(player.maxHP() * 0.05), false);
 					}
 					if (monster.hasStatusEffect(StatusEffects.Rosethorn) && monster.statusEffectv1(StatusEffects.Rosethorn) < 6) monster.addStatusValue(StatusEffects.Rosethorn, 1, 1);
@@ -3381,7 +3382,7 @@ public class Combat extends BaseContent {
                         monster.teased(lustDmg);
                         if (monster.lustVuln > 0 && !player.enemiesImmuneToLustResistanceDebuff()) {
                             monster.lustVuln += 0.01;
-                            if (monster.lustVuln > 1) monster.lustVuln = 1;
+                            if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
                         }
                         player.tailVenom -= player.VenomWebCost();
 						if (player.hasPerk(PerkLib.ToxineMaster)) monster.statStore.addBuffObject({tou:-5}, "Poison",{text:"Poison"});
@@ -5030,7 +5031,7 @@ public class Combat extends BaseContent {
                             monster.teased(lustDmg);
                             if (monster.lustVuln > 0 && !player.enemiesImmuneToLustResistanceDebuff()) {
                                 monster.lustVuln += 0.01;
-                                if (monster.lustVuln > 1) monster.lustVuln = 1;
+                                if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
                             }
                         }
                         player.tailVenom -= player.VenomWebCost();
@@ -6057,7 +6058,8 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.MeleeWeaponsMasteryEx)) masteryXPCrit *= 2;
         var masteryXPNatural:Number = baseMasteryXP * (hit - crit);
         var meleeMasteryEXPgains:Number = masteryXPCrit + masteryXPNatural;
-		if (player.hasMutation(IMutationsLib.HumanVersatilityIM) && player.perkv1(IMutationsLib.HumanVersatilityIM) >= 3 && rand(5) == 0) meleeMasteryEXPgains *= 3;
+		if (player.hasMutation(IMutationsLib.HumanVersatilityIM) && player.perkv1(IMutationsLib.HumanVersatilityIM) == 3 && rand(5) == 0) meleeMasteryEXPgains *= 3;
+		if (player.hasMutation(IMutationsLib.HumanVersatilityIM) && player.perkv1(IMutationsLib.HumanVersatilityIM) == 4 && rand(5) < 2) meleeMasteryEXPgains *= 4;
         if (player.isGauntletWeapon()) gauntletXP(meleeMasteryEXPgains);
         if (player.isSwordTypeWeapon()) swordXP(meleeMasteryEXPgains);
         if (player.isAxeTypeWeapon()) axeXP(meleeMasteryEXPgains);
@@ -6093,7 +6095,8 @@ public class Combat extends BaseContent {
 		var masteryXPCrit:Number = baseMasteryXP * crit * 2;
         var masteryXPNatural:Number = baseMasteryXP * (hit - crit);
         var meleeMasteryEXPgains:Number = masteryXPCrit + masteryXPNatural;
-		if (player.hasMutation(IMutationsLib.HumanVersatilityIM) && player.perkv1(IMutationsLib.HumanVersatilityIM) >= 3 && rand(5) == 0) meleeMasteryEXPgains *= 3;
+		if (player.hasMutation(IMutationsLib.HumanVersatilityIM) && player.perkv1(IMutationsLib.HumanVersatilityIM) == 3 && rand(5) == 0) meleeMasteryEXPgains *= 3;
+		if (player.hasMutation(IMutationsLib.HumanVersatilityIM) && player.perkv1(IMutationsLib.HumanVersatilityIM) == 4 && rand(5) < 2) meleeMasteryEXPgains *= 4;
 		unarmedCombatXP(meleeMasteryEXPgains);
 	}
 
@@ -6653,7 +6656,7 @@ public class Combat extends BaseContent {
                                     monster.teased(lustDmg);
                                     if (monster.lustVuln > 0 && !player.enemiesImmuneToLustResistanceDebuff()) {
                                         monster.lustVuln += 0.01;
-                                        if (monster.lustVuln > 1) monster.lustVuln = 1;
+                                        if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
                                     }
                                     player.tailVenom -= player.VenomWebCost();
                                     flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
@@ -9784,6 +9787,7 @@ public class Combat extends BaseContent {
         if (player.isRaceCached(Races.APOPHIS) && monster.lustVuln > 0 && !player.enemiesImmuneToLustResistanceDebuff() && !flags[kFLAGS.DISABLE_AURAS]) {
             outputText("Your unholy aura seeps into [themonster], slowly and insidiously eroding its resiliance to your unholy charms.\n\n");
             monster.lustVuln += 0.10;
+			if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
         }
         //Arousing Aura
         if (player.hasPerk(PerkLib.ArousingAura) && monster.lustVuln > 0 && player.cor >= 70 && !flags[kFLAGS.DISABLE_AURAS]) {
@@ -9803,7 +9807,7 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.ImprovedArousingAura)) lustAADmg *= 2;
             lustAADmg = teases.teaseAuraLustDamageBonus(monster, lustAADmg);
             lustAADmg *= monster.lustVuln;
-			if (player.hasPerk(PerkLib.ImprovedArousingAura)) lustAADmg = combat.fixPercentLust(lustAADmg, true, 0.4);
+			if (player.hasPerk(PerkLib.ImprovedArousingAura)) lustAADmg = combat.fixPercentLust(lustAADmg);
             else lustAADmg = combat.fixPercentLust(lustAADmg);
             monster.teased(Math.round(lustAADmg), false);
             outputText("\n\n");
@@ -9959,7 +9963,7 @@ public class Combat extends BaseContent {
             outputText("\n\n");
 			if (player.hasPerk(PerkLib.Nightshade) && monster.lustVuln > 0 && !player.enemiesImmuneToLustResistanceDebuff()) {
 				monster.lustVuln += 0.05;
-				if (monster.lustVuln > 1) monster.lustVuln = 1;
+				if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
 			}
             if (player.hasPerk(PerkLib.EromancyMaster)) teaseXP(1 + bonusExpAfterSuccesfullTease());
         }
@@ -11579,6 +11583,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 		else combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		if (player.hasPerk(PerkLib.VerdantLeech)) {
 			if (monster.lustVuln != 0 && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.025;
+			if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
 			HPChange(Math.round(player.maxHP() * 0.01), false);
 		}
 	}
@@ -12785,7 +12790,8 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
             if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 6) bMXPMulti += 5;
 			teaseEXPgogo *= bMXPMulti;
         }
-		if (player.hasMutation(IMutationsLib.HumanVersatilityIM) && player.perkv1(IMutationsLib.HumanVersatilityIM) >= 3 && rand(5) == 0) teaseEXPgogo *= 3;
+		if (player.hasMutation(IMutationsLib.HumanVersatilityIM) && player.perkv1(IMutationsLib.HumanVersatilityIM) == 3 && rand(5) == 0) teaseEXPgogo *= 3;
+		if (player.hasMutation(IMutationsLib.HumanVersatilityIM) && player.perkv1(IMutationsLib.HumanVersatilityIM) == 4 && rand(5) < 2) teaseEXPgogo *= 4;
         player.SexXP(teaseEXPgogo);
     }
 
@@ -13519,6 +13525,7 @@ public function StraddleTease():void {
         randomcrit = true;
         straddleDamage *= 1.75;
         if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.05;
+		if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
     }
     straddleDamage = (straddleDamage) * monster.lustVuln;
     if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) straddleDamage *= 2;
@@ -13679,8 +13686,8 @@ public function randomTeaseMindflayerCriticalOverload(straddleDamage:Number, ran
     straddleDamage *= multiplier;
     straddleDamage += scalingBonusIntelligence() * 2;
     monster.teased(straddleDamage, false);
-    
-    if (monster.lustVuln != 0) monster.lustVuln += 0.05;
+    if (monster.lustVuln != 0 && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.05;
+	if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
     if (randomcrit) outputText(" <b>Critical!</b>");
 }
 
@@ -13740,7 +13747,6 @@ public function randomTeaseJabberwocky(straddleDamage:Number, randomcrit:Boolean
     if (player.hasPerk(PerkLib.RacialParagon)) multiplier += RacialParagonAbilityBoost() - 1;
     if (player.hasPerk(PerkLib.NaturalArsenal)) multiplier += 1;
     dam4Ba *= multiplier;
-
     monster.statStore.addBuffObject({tou:-(dam4Ba*2)}, "Poison",{text:"Poison"});
     if (monster.hasStatusEffect(StatusEffects.JabberwockyVenom)) {
         monster.addStatusValue(StatusEffects.JabberwockyVenom, 3, dam4Ba);
@@ -13750,7 +13756,8 @@ public function randomTeaseJabberwocky(straddleDamage:Number, randomcrit:Boolean
     straddleDamage *= 2;
     monster.teased(straddleDamage, false);
     if (randomcrit) outputText(" <b>Critical!</b>");
-    if (monster.lustVuln != 0) monster.lustVuln += 0.05;
+    if (monster.lustVuln != 0 && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.05;
+	if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
 }
 
 public function randomTeaseRaiju(straddleDamage:Number, randomcrit:Boolean):void {
@@ -13763,13 +13770,13 @@ public function randomTeaseRaiju(straddleDamage:Number, randomcrit:Boolean):void
     outputText(" pulse");
     if (monster.hasCock() && monster.hasVagina()) outputText("s");
     outputText(" with your current at the rhythm of [themonster] owns heartbeat.");
-
-    var multiplier:Number = 1;
+	var multiplier:Number = 1;
     if (player.hasPerk(PerkLib.RacialParagon)) multiplier += RacialParagonAbilityBoost() - 1;
     straddleDamage *= multiplier;
     monster.teased(straddleDamage, false);
     if (randomcrit) outputText(" <b>Critical!</b>");
-    if (monster.lustVuln != 0) monster.lustVuln += 0.05;
+    if (monster.lustVuln != 0 && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.05;
+	if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
 }
 
 public function randomTeaseHarpy(straddleDamage:Number, randomcrit:Boolean):void {
@@ -13780,13 +13787,13 @@ public function randomTeaseHarpy(straddleDamage:Number, randomcrit:Boolean):void
             "[monster His] pre drooling [monster cockshort] twitches and strains between your plush cheeks making them slicker. " +
             "You giggle planting a few more kisses around [monster his] mouth and neck as you push [monster him] closer to the edge. " +
             "Your opponent finally fights back, forcing you to release [monster his] dick from between your cheeks. You push off, getting back into a fighting stance, almost laughing as you see [monster him] arousal.");
-    
-    var multiplier:Number = 1;
+	var multiplier:Number = 1;
     if (player.hasPerk(PerkLib.RacialParagon)) multiplier += RacialParagonAbilityBoost() - 1;
     straddleDamage *= multiplier;
     monster.teased(straddleDamage, false);
     if (randomcrit) outputText(" <b>Critical!</b>");
-    if (monster.lustVuln != 0) monster.lustVuln += 0.05;
+    if (monster.lustVuln != 0 && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.05;
+	if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
 }
 
 public function randomTeaseKitsune(straddleDamage:Number, randomcrit:Boolean):void {
@@ -13870,12 +13877,12 @@ public function randomTeaseLustStrike(straddleDamage:Number, randomcrit:Boolean)
     if (monster.hasCock() && monster.hasVagina()) outputText("s");
     outputText(" with your demonic powers at the rhythm of [themonster]'s heartbeat. " +
             "The unholy transformation, even if temporary, arouses [themonster] to no end.");
-
     straddleDamage += scalingBonusIntelligence() * 2;
     straddleDamage = Math.round(straddleDamage);
     monster.teased(straddleDamage, false);
     if (randomcrit) outputText(" <b>Critical!</b>");
-    if (monster.lustVuln != 0) monster.lustVuln += 0.05;
+    if (monster.lustVuln != 0 && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.05;
+	if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
 }
 
 public function randomTeaseAnemone(straddleDamage:Number, randomcrit:Boolean):void {
@@ -14124,6 +14131,7 @@ public function ScyllaTease():void {
                 crit = true;
                 damage *= 1.75;
                 if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.05;
+				if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
             }
             if (player.hasPerk(PerkLib.KrakenBlackDress)) damage *= 2;
             monster.teased(Math.round(monster.lustVuln * damage));
@@ -14279,6 +14287,7 @@ public function SwallowTease():void {
                 crit = true;
                 damage *= 1.75;
                 if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.05;
+				if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
             }
             monster.teased(Math.round(monster.lustVuln * damage));
             if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 20) {
@@ -14433,6 +14442,7 @@ public function WebTease():void {
                 crit = true;
                 damage *= 1.75;
                 if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.05;
+				if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
             }
             monster.teased(Math.round(monster.lustVuln * damage), false);
             outputText(" Your unwilling toy makes an involuntary moan letting you know that your touch hit the mark.");
@@ -14542,6 +14552,7 @@ public function GooTease():void {
                 crit = true;
                 damage *= 1.75;
                 if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.05;
+				if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
             }
             monster.teased(Math.round(monster.lustVuln * damage));
             if (crit) outputText(" <b>Critical!</b>");
@@ -14657,6 +14668,7 @@ public function ManticoreFeed():void {
             crit = true;
             damage *= 1.75;
             if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.05;
+			if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
         }
         monster.teased(Math.round(monster.lustVuln * damage), false);
         if (crit) outputText(" <b>Critical!</b>");
@@ -14723,6 +14735,7 @@ public function displacerFeedContinue():void {
             crit = true;
             damage *= 1.75;
             if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.05;
+			if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
         }
         monster.teased(Math.round(monster.lustVuln * damage), false);
         if (crit) outputText(" <b>Critical!</b>");
@@ -14790,6 +14803,7 @@ public function SlimeRapeFeed():void {
             crit = true;
             damage *= 1.75;
             if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.05;
+			if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
         }
         monster.teased(Math.round(monster.lustVuln * damage), false);
         if (crit) outputText(" <b>Critical!</b>");
@@ -16435,7 +16449,8 @@ public function rangeMasteryEXPgained(crit:Boolean = false):Number {
         rangeMasteryEXPgains *= 2;
         if (player.hasPerk(PerkLib.RangeWeaponsMasteryEx)) rangeMasteryEXPgains *= 2;
     }
-	if (player.hasMutation(IMutationsLib.HumanVersatilityIM) && player.perkv1(IMutationsLib.HumanVersatilityIM) >= 3 && rand(5) == 0) rangeMasteryEXPgains *= 3;
+	if (player.hasMutation(IMutationsLib.HumanVersatilityIM) && player.perkv1(IMutationsLib.HumanVersatilityIM) == 3 && rand(5) == 0) rangeMasteryEXPgains *= 3;
+	if (player.hasMutation(IMutationsLib.HumanVersatilityIM) && player.perkv1(IMutationsLib.HumanVersatilityIM) == 4 && rand(5) < 2) rangeMasteryEXPgains *= 4;
     return rangeMasteryEXPgains;
 }
 
@@ -16739,7 +16754,7 @@ private function touSpeStrScale(stat:int):Number {
         return damage;
     }
 
-    public function fixPercentLust(damage:Number, ignoreDiff:Boolean = true, effectivness:Number = 0.2):Number {
+    public function fixPercentLust(damage:Number, ignoreDiff:Boolean = true):Number {
         var plaLvl:Number = player.level + playerLevelAdjustment();
         var monLvl:Number = monster.level + monsterLevelAdjustment();
 
@@ -16749,11 +16764,11 @@ private function touSpeStrScale(stat:int):Number {
          * at 10 levels below, then unbounded past that
          */
         if (plaLvl <= monLvl) {
-            if (damage > (monster.maxLust() * effectivness)) damage = monster.maxLust() * effectivness; //Bound damage to 20% of health
+            if (damage > (monster.maxLust() * 0.2)) damage = monster.maxLust() * 0.2; //Bound damage to 20% of health
         } else {
             var lvlDifference:int = plaLvl - monLvl;
             if (lvlDifference < 10) {
-                var boundedDamage:Number = monster.maxLust() * (effectivness + ((effectivness * 1.5) * (lvlDifference / 10)));
+                var boundedDamage:Number = monster.maxLust() * (0.2 + (0.3 * (lvlDifference / 10)));
                 if (damage > boundedDamage) damage = boundedDamage;
             }
         }

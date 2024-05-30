@@ -88,6 +88,7 @@ public class GoblinLustBombSkill extends AbstractGeneral {
             crit = true;
             lustDmg *= 1.75;
             if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !player.enemiesImmuneToLustResistanceDebuff()) monster.lustVuln += 0.05;
+			if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
         }
 
         if (player.hasKeyItem("Lustnade Launcher") >= 0) {

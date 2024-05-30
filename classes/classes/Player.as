@@ -4408,7 +4408,7 @@ use namespace CoC;
 			if (hasMutation(IMutationsLib.HumanSmartsIM)) internalHumanCounter += perkv1(IMutationsLib.HumanSmartsIM);//3
 			if (hasMutation(IMutationsLib.HumanTesticlesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanTesticlesIM);//4
 			if (hasMutation(IMutationsLib.HumanThyroidGlandIM)) internalHumanCounter += perkv1(IMutationsLib.HumanThyroidGlandIM);//3
-			if (hasMutation(IMutationsLib.HumanVersatilityIM)) internalHumanCounter += perkv1(IMutationsLib.HumanVersatilityIM);//3
+			if (hasMutation(IMutationsLib.HumanVersatilityIM)) internalHumanCounter += perkv1(IMutationsLib.HumanVersatilityIM);//4
 			End("Player","racialScore");
 			return internalHumanCounter;
 		}
@@ -6531,7 +6531,9 @@ use namespace CoC;
 				// Did we level up?
 				if (level < maxCombatLevel(melee) && experience >= xpToLevel) {
 					levelUp = true;
-					outputText("\n<b>" + desc + " leveled up to " + (++level) + "!</b>\n");
+					if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) == 4 && rand(2) == 0) level += 2;
+					else level += 1;
+					outputText("\n<b>" + desc + " leveled up to " + level + "!</b>\n");
 					game.mainView.notificationView.popupIconText(
 							"CombatMastery"+masteryObj.combat,
 							"CombatMastery"+masteryObj.combat,
@@ -6726,7 +6728,8 @@ use namespace CoC;
 			while (miningLevel < maxMiningLevel()) {
 				var toNextLevel:Number = MiningExpToLevelUp();
 				if (miningXP > toNextLevel) {
-					miningLevel++;
+					if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) == 4 && rand(2) == 0) miningLevel += 2;
+					else miningLevel++;
 					outputText("\n\n<b>Mining skill leveled up to " + miningLevel + "!</b>");
 					game.mainView.notificationView.popupIconText(
 							"mineXP","mineXP",
@@ -6773,7 +6776,8 @@ use namespace CoC;
 			while (farmingLevel < maxFarmingLevel()) {
 				var toNextLevel:Number = FarmExpToLevelUp();
 				if (farmingXP > toNextLevel) {
-					farmingLevel++;
+					if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) == 4 && rand(2) == 0) farmingLevel += 2;
+					else farmingLevel++;
 					outputText("\n\n<b>Farming skill leveled up to " + farmingLevel + "!</b>");
 					game.mainView.notificationView.popupIconText(
 							"farmXP","farmXP",
@@ -6838,7 +6842,8 @@ use namespace CoC;
 			while (herbalismLevel < maxHerbalismLevel()) {
 				var toNextLevel:Number = HerbExpToLevelUp();
 				if (herbalismXP > toNextLevel) {
-					herbalismLevel++;
+					if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) == 4 && rand(2) == 0) herbalismLevel += 2;
+					else herbalismLevel++;
 					outputText("\n\n<b>Herbalism skill leveled up to " + herbalismLevel + "!</b>");
 					game.mainView.notificationView.popupIconText(
 							"herbXP","herbXP",
@@ -6916,8 +6921,9 @@ use namespace CoC;
 			//Level dat shit up!
 			if (teaseLevel < maxTeaseLevel()) {
 				if (teaseXP >= teaseExpToLevelUp()) {
-					outputText("\n<b>Tease skill leveled up to " + (teaseLevel + 1) + "!</b>");
-					teaseLevel++;
+					if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) == 4 && rand(2) == 0) teaseLevel += 2;
+					else teaseLevel++;
+					outputText("\n<b>Tease skill leveled up to " + teaseLevel + "!</b>");
 					teaseXP = 0;
 					game.mainView.notificationView.popupIconText("TeaseXP", "TeaseXP","Tease skill level up!");
 				} else {

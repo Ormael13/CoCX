@@ -13,7 +13,7 @@ import classes.Races;
 public class HumanParathyroidGlandMutation extends IMutationPerkType
     {
         override public function get mName():String {
-            return "Human Parathyroid Gland";
+            return "Human Parathyroid Glands";
         }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
@@ -69,6 +69,10 @@ public class HumanParathyroidGlandMutation extends IMutationPerkType
 				if (pTier == 3) {
 					pBuffs['spe.mult'] = 0.6;
 					pBuffs['int.mult'] = 0.9;
+				}
+				if (pTier == 4) {
+					pBuffs['spe.mult'] = 1.2;
+					pBuffs['int.mult'] = 1.8;
 				}
 			}
             return pBuffs;
