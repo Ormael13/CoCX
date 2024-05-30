@@ -380,6 +380,9 @@ public class PerkLib
 		public static const DualWield2HFirearms:PerkType = mk("Dual Wield (2H Firearms)", "Dual Wield (2H Firearms)",
 				"Allows you to wield two firearms (2H ones) more effectively. (damage and accuracy penalties decreased by 40% and 20%)",
 				"You've chosen the 'Dual Wield (Firearms)' perk, training the skill of using two firearms (2H ones). (damage and accuracy penalties decreased by 40% and 20%)");
+		public static const ImprovedArousingAura:PerkType = mk("Improved Arousing Aura", "Improved Arousing Aura",
+				"Double the effect from arousing aura.",
+				"You've chosen the 'Improved Arousing Aura' perk. Double the effect from arousing aura.");
 		//public static const BloodSacrifice:PerkType = mk("Blood Sacrifice", "Blood Sacrifice",
 				//"You are currently sacrificing blood to empower your spells.",
 				//"You are currently sacrificing blood to empower your spells.");
@@ -7180,9 +7183,10 @@ public class PerkLib
                     .requirePerk(CorruptedLibido)
                     .requireLevel(6);
             //Tier 2
-            /*if (requireMinLevel(12))
-			{
-			if (requirePerk(JobSeducer)
+            ImprovedArousingAura.requireCor(35)
+                    .requirePerk(ArousingAura)
+                    .requireLevel(12);
+            /*if (requirePerk(JobSeducer)
 			.requireMinCor(50)) {
 			_add(new PerkClass(PerkLib				job:corrupter czy jakoś tak - daje efekt iż wszyscy reaguja jakby pc miał 10/15/20/25 mniej corruption, nie wiem czy jeszcze jakiś efekt dodać
 			}

@@ -607,6 +607,7 @@ public function breakingInYourMare2():void {
 	else player.createKeyItem("Radiant shard", 1,0,0,0);
 	outputText("\n\n<b>Before fully settling in your camp as if remembering something Nadia pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	flags[kFLAGS.NADIA_FOLLOWER] = 6;
+	explorer.stopExploring();
 	doNext(playerMenu);
 }
 

@@ -121,9 +121,9 @@ public class WhiteFacedOneBirthrightMutation extends IMutationPerkType
                 pBuffs['wis.mult'] = 0.2;
             }
             else if (pTier == 4){
-                pBuffs['str.mult'] = 0.15;
                 pBuffs['spe.mult'] = 0.15;
-                pBuffs['tou.mult'] = 0.42;
+                pBuffs['tou.mult'] = 0.15;
+                pBuffs['wis.mult'] = 0.42;
             }
             return pBuffs;
         }

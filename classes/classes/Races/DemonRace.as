@@ -127,7 +127,7 @@ public class DemonRace extends Race {
 					"spe.mult": +2.00,
 					"int.mult": +2.50,
 					"lib.mult": +3.20,
-					"sens": +00,
+					"sens": +200,
 					"maxmana_mult": +1.8,
 					"maxwrath_mult": -0.55,
 					"maxlust_mult": +1.8

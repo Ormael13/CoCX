@@ -9800,9 +9800,11 @@ public class Combat extends BaseContent {
                 else outputText("The effects of your aura are quite pronounced on [themonster] as [monster he] begin to shake and steal glances at your body. ");
             }
             var lustAADmg:Number = (scalingBonusLibido() * 0.5);
+			if (player.hasPerk(PerkLib.ImprovedArousingAura)) lustAADmg *= 2;
             lustAADmg = teases.teaseAuraLustDamageBonus(monster, lustAADmg);
             lustAADmg *= monster.lustVuln;
-            lustAADmg = combat.fixPercentLust(lustAADmg);
+			if (player.hasPerk(PerkLib.ImprovedArousingAura)) lustAADmg = combat.fixPercentLust(lustAADmg, true, 0.4);
+            else lustAADmg = combat.fixPercentLust(lustAADmg);
             monster.teased(Math.round(lustAADmg), false);
             outputText("\n\n");
             if (player.hasPerk(PerkLib.EromancyMaster)) teaseXP(1 + bonusExpAfterSuccesfullTease());
@@ -16737,7 +16739,7 @@ private function touSpeStrScale(stat:int):Number {
         return damage;
     }
 
-    public function fixPercentLust(damage:Number, ignoreDiff:Boolean = true):Number {
+    public function fixPercentLust(damage:Number, ignoreDiff:Boolean = true, effectivness:Number = 0.2):Number {
         var plaLvl:Number = player.level + playerLevelAdjustment();
         var monLvl:Number = monster.level + monsterLevelAdjustment();
 
@@ -16747,11 +16749,11 @@ private function touSpeStrScale(stat:int):Number {
          * at 10 levels below, then unbounded past that
          */
         if (plaLvl <= monLvl) {
-            if (damage > (monster.maxLust() * 0.2)) damage = monster.maxLust() * 0.2; //Bound damage to 20% of health
+            if (damage > (monster.maxLust() * effectivness)) damage = monster.maxLust() * effectivness; //Bound damage to 20% of health
         } else {
             var lvlDifference:int = plaLvl - monLvl;
             if (lvlDifference < 10) {
-                var boundedDamage:Number = monster.maxLust() * (0.2 + (0.3 * (lvlDifference / 10)));
+                var boundedDamage:Number = monster.maxLust() * (effectivness + ((effectivness * 1.5) * (lvlDifference / 10)));
                 if (damage > boundedDamage) damage = boundedDamage;
             }
         }
