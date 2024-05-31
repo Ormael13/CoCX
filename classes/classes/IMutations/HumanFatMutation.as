@@ -59,6 +59,7 @@ public class HumanFatMutation extends IMutationPerkType
             if (pTier == 1) pBuffs['tou.mult'] = 0.15;
             if (pTier == 2) pBuffs['tou.mult'] = 0.45;
             if (pTier == 3) pBuffs['tou.mult'] = 0.9;
+            if (pTier == 4) pBuffs['tou.mult'] = 1.8;
             return pBuffs;
         }
 

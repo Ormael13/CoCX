@@ -901,7 +901,10 @@ public class RiverDungeon extends DungeonAbstractContent
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Small Bats fly out as you walk by above your head hangs some large stalactites. It would be most unfortunate if one of these was to randomly fall down and run you through.");
 			dungeons.setDungeonButtonsRD(roomA05, null, null, null);
-			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 1) addButtonIfTrue(11, "Down", roomB01, "You still need to find enough (two piles) of treasure to pay back shield maiden for help to get into this dungeon. Maybe search again whole floor carefully?", flags[kFLAGS.NEISA_FOLLOWER] >= 3);
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 1) {
+				if (flags[kFLAGS.NEISA_FOLLOWER] >= 3) addButton(11, "Down", roomB01);
+				else addButtonDisabled(11, "Down", "You still need to find enough (two piles) of treasure to pay back shield maiden for help to get into this dungeon. Maybe search again whole floor carefully?");
+			}
 			else addButtonDisabled(11, "Down", "You still need to beat the guardians of this floor to descend into lower strata of the dungeon.");
 		}
 		public function roomA07():void {

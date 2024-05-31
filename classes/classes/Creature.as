@@ -458,21 +458,25 @@ public class Creature extends Utils
 				case "str":
 					var str:Number = 1;
 					if (game.player.perkv1(IMutationsLib.HumanBonesIM) >= 3) str += 0.2;
+					if (game.player.perkv1(IMutationsLib.HumanBonesIM) >= 4) str += 0.1;
 					cap *= str;
 					break;
 				case "tou":
 					var tou:Number = 1;
 					if (game.player.perkv1(IMutationsLib.HumanBonesIM) >= 3) tou += 0.2;
+					if (game.player.perkv1(IMutationsLib.HumanBonesIM) >= 4) tou += 0.1;
 					cap *= tou;
 					break;
 				case "spe":
 					var spe:Number = 1;
 					if (game.player.perkv1(IMutationsLib.HumanBloodstreamIM) >= 3) spe += 0.2;
+					if (game.player.perkv1(IMutationsLib.HumanBloodstreamIM) >= 4) spe += 0.1;
 					cap *= spe;
 					break;
 				case "int":
 					var inte:Number = 1;
 					if (game.player.perkv1(IMutationsLib.HumanSmartsIM) >= 3) inte += 0.2;
+					if (game.player.perkv1(IMutationsLib.HumanSmartsIM) >= 4) inte += 0.1;
 					cap *= inte;
 					break;
 				case "wis":
@@ -480,11 +484,13 @@ public class Creature extends Utils
 					//cap += host.perkv1(PerkLib.SoulTempering);
 					var wis:Number = 1;
 					if (game.player.perkv1(IMutationsLib.HumanSmartsIM) >= 3) wis += 0.2;
+					if (game.player.perkv1(IMutationsLib.HumanSmartsIM) >= 4) wis += 0.1;
 					cap *= wis;
 					break;
 				case "lib":
 					var lib:Number = 1;
 					if (game.player.perkv1(IMutationsLib.HumanBloodstreamIM) >= 3) lib += 0.2;
+					if (game.player.perkv1(IMutationsLib.HumanBloodstreamIM) >= 4) lib += 0.1;
 					cap *= lib;
 					break;
 			}
@@ -878,6 +884,7 @@ public class Creature extends Utils
 			}
 			if (perkv1(IMutationsLib.LizanMarrowIM) >= 4) maxOver2 += 0.1;
 			if (perkv1(IMutationsLib.FerasBirthrightIM) >= 4) maxOver2 += 0.2;
+			if (perkv1(IMutationsLib.HumanBonesIM) >= 4) maxOver2 += 0.1;
 			if (hasPerk(PerkLib.Soulless)) maxOver2 += (0.01 * level);
 			maxOver *= maxOver2;//~270%
 			maxOver = Math.round(maxOver);

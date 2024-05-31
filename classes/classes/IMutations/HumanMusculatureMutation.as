@@ -28,6 +28,9 @@ public class HumanMusculatureMutation extends IMutationPerkType
             if (pTier == 3){
                 descS = "Your musculature increased again your natural strength and tone limit. Boost Warrior's Rage effect (+1 per 10 pts of core stat value) and duration by 5 turns. (+45%/+15% of max core Str/Spe as phantom Str/Spe)";
             }
+            if (pTier == 4){
+                descS = "Your musculature increased again your natural strength and tone limit, +10% to max overfatigue. Boost Warrior's Rage effect (+1 per 10 pts of core stat value) and duration by 5 turns. (+45%/+15% of max core Str/Spe as phantom Str/Spe)";
+            }
             if (pTier >= 1) descS += " (req. 18+ human score to have all effects active)";
             return descS;
         }
@@ -59,6 +62,7 @@ public class HumanMusculatureMutation extends IMutationPerkType
             if (pTier == 1) pBuffs['str.mult'] = 0.15;
             if (pTier == 2) pBuffs['str.mult'] = 0.45;
             if (pTier == 3) pBuffs['str.mult'] = 0.9;
+            if (pTier == 4) pBuffs['str.mult'] = 1.8;
             return pBuffs;
         }
 

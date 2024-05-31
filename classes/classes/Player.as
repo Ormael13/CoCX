@@ -2559,6 +2559,7 @@ use namespace CoC;
 			var hBC:Number = 1;
 			if (perkv1(IMutationsLib.HumanBonesIM) >= 2 && racialScore(Races.HUMAN) > 17) hBC += 0.5;
 			if (perkv1(IMutationsLib.HumanBonesIM) >= 3 && racialScore(Races.HUMAN) > 17) hBC += 0.5;
+			if (perkv1(IMutationsLib.HumanBonesIM) >= 4 && racialScore(Races.HUMAN) > 17) hBC += 0.5;
 			return hBC;
 		}
 

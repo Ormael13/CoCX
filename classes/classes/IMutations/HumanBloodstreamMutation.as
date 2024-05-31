@@ -24,10 +24,13 @@ public class HumanBloodstreamMutation extends IMutationPerkType
                 descS += "5.";
             }
             if (pTier == 2){
-                descS += "10. Increase a bit fatigue recovery and wrath generation.";
+                descS += "10. Increase a bit fatigue recovery (+5) and wrath generation (+2).";
             }
             if (pTier == 3){
-                descS += "10, maximum trainable Spe/Libs by 20%. Increase a bit fatigue recovery and wrath generation.";
+                descS += "10, maximum trainable Spe/Lib by 20%. Increase a bit fatigue recovery (+10) and wrath generation (+4).";
+            }
+            if (pTier == 4){
+                descS += "20, maximum trainable Spe/Lib by 30%. Increase fatigue recovery (+15), wrath generation (+6) and +2 to fatigue recovery/wrath gains multiplier. +5% to max overfatigue/overwrath.";
             }
             if (pTier >= 1) descS += " (req. 18+ human score to have all effects active)";
             return descS;
@@ -69,12 +72,16 @@ public class HumanBloodstreamMutation extends IMutationPerkType
 				pBuffs['spe.mult'] = 0.4;
 				pBuffs['lib.mult'] = 0.4;
 			}
+            if (pTier == 4) {
+				pBuffs['spe.mult'] = 0.8;
+				pBuffs['lib.mult'] = 0.8;
+			}
             return pBuffs;
         }
 
         public function HumanBloodstreamMutation() 
 		{
-			super(mName + " IM", mName, SLOT_BLOODSTREAM, 3);
+			super(mName + " IM", mName, SLOT_BLOODSTREAM, 4);
 		}
 		
 	}

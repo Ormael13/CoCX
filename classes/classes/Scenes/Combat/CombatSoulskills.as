@@ -125,8 +125,9 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.SoulTyrant)) modssp += 2;
 			if (player.hasPerk(PerkLib.SoulKing)) modssp += 2;
 			if (player.hasPerk(PerkLib.SoulEmperor)) modssp += 2;
-			//if (player.hasPerk(PerkLib.SoulAncestor)) modssm += 2;
+			//if (player.hasPerk(PerkLib.SoulAncestor)) modssp += 2;
 		}
+		if (player.perkv1(IMutationsLib.HumanBonesIM) >= 4 && player.racialScore(Races.HUMAN) > 17) modssp += 1;
 		if (modsspb > 1) modssp *= modsspb;
 		modssp = Math.round(modssp * 100) / 100;
 		return modssp;
@@ -164,6 +165,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (player.tailCount >= 3) wfb *= 2;
 			modssm += wfb;
 		}
+		if (player.perkv1(IMutationsLib.HumanSmartsIM) >= 4 && player.racialScore(Races.HUMAN) > 17) modssm += 1;
 		if (player.shieldName == "spirit focus") modssm += .25;
 		if (player.armor == armors.DEATHPO) modssm += .5;
 		if (player.armor == armors.DEATHPGA) modssm += 2;
