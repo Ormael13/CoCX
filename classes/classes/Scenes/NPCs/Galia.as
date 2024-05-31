@@ -171,6 +171,7 @@ import classes.internals.*;
 			this.plural = false;
 			this.drop = NO_DROP;
 			if (flags[kFLAGS.GALIA_LVL_UP] < 8) this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			if (flags[kFLAGS.GALIA_AFFECTION] >= 2) this.createPerk(PerkLib.Sentience, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyFeralType, 0, 0, 0, 0);
 			if (flags[kFLAGS.GALIA_LVL_UP] >= 8) {
 				this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);

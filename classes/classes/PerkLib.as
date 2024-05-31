@@ -395,6 +395,18 @@ public class PerkLib
 		public static const CorruptTheSoul:PerkType = mk("Corrupt the soul", "Corrupt the soul",
 				"Lust vulnerability debuff can now stack beyond 0 up to infinity. (well technicaly not infinity but only Spilly Stonewall PC maybe could reach that 'inifity')",
 				"You've chosen the 'Corrupt the soul' perk. Lust vulnerability debuff can now stack beyond 0 up to infinity.");
+		public static const ImprovedGrapple:PerkType = mk("Improved Grapple", "Improved Grapple",
+				"Do two action per straddle or grappling turn. Increase straddle damage by 20%.",
+				"You've chosen the 'Improved Grapple' perk. Do two action per straddle or grappling turn. Increase straddle damage by 20%.");
+		public static const GreaterGrapple:PerkType = mk("Greater Grapple", "Greater Grapple",
+				"Attack three action per straddle or grappling turn. Increase straddle damage by another 20%.",
+				"You've chosen the 'Greater Grapple' perk. Attack three action per straddle or grappling turn. Increase straddle damage by another 20%.");
+		public static const DevouringAura:PerkType = mk("Devouring Aura", "Devouring Aura",
+				"Your arousing aura now also erodes your victim lust resistance by 1% per round and may even inflict negative resistance. This ability does not affect mindless opponents.",
+				"You've chosen the 'Devouring Aura' perk. Your arousing aura now also erodes your victim lust resistance by 1% per round and may even inflict negative resistance. This ability does not affect mindless opponents.");
+		public static const DamnationAura:PerkType = mk("Damnation Aura", "Damnation Aura",
+				"Double the effect of Devouring Aura.",
+				"You've chosen the 'Damnation Aura' perk. Double the effect of Devouring Aura.");
 		//public static const BloodSacrifice:PerkType = mk("Blood Sacrifice", "Blood Sacrifice",
 				//"You are currently sacrificing blood to empower your spells.",
 				//"You are currently sacrificing blood to empower your spells.");
@@ -7010,6 +7022,8 @@ public class PerkLib
 			StraddleImproved.requirePerk(Straddle)
 					.requireLib(150)
 					.requireLevel(24);
+			ImprovedGrapple.requireLib(150)
+					.requireLevel(24);
             //Tier 5 Libido Perks
             HalfStepToSuperiorSelfControl.requireLib(180)
                     .requireInt(120)
@@ -7043,6 +7057,9 @@ public class PerkLib
                     .requireInt(180)
                     .requirePerk(HalfStepToPeerlessSelfControl)
                     .requireLevel(48);
+			GreaterGrapple.requirePerk(ImprovedGrapple)
+					.requireLib(250)
+					.requireLevel(48);
             //Tier 9 Libido Perks
 			PrestigeJobBard.requirePrestigeJobSlot()
 					.requirePerks(JobEromancer, JobCourtesan)
@@ -7184,20 +7201,17 @@ public class PerkLib
             //------------
             // CORRUPTION
             //------------
-            //Slot 7 - Corrupted Libido - lust raises 10% slower.
+            //Tier 0 Corruption Perks
             CorruptedLibido.requireCor(10);
             CorruptedLibido.defaultValue1 = 20;
-            //Slot 7 - Seduction (Must have seduced Jojo)
+            //Seduction (Must have seduced Jojo)
             Seduction.requireCor(15);
-            //Slot 7 - Nymphomania
             Nymphomania.requireCor(15)
                     .requirePerk(CorruptedLibido);
-            //Slot 7 - UNFINISHED :3
             Acclimation.requireCor(15)
                     .requirePerk(CorruptedLibido)
                     .requireMinLust(20);
-			//
-            //Tier 1 Corruption Perks - acclimation over-rides
+			//Tier 1 Corruption Perks
             Sadist.requireCor(20)
                     .requirePerk(CorruptedLibido)
                     .requireLevel(6);
@@ -7214,7 +7228,13 @@ public class PerkLib
 			}
 			}*/
             //Tier 3
+            DevouringAura.requireCor(50)
+                    .requirePerk(ImprovedArousingAura)
+                    .requireLevel(18);
             //Tier 4
+            DamnationAura.requireCor(60)
+                    .requirePerk(DevouringAura)
+                    .requireLevel(24);
             //------------
             // SOULFORCE
             //------------

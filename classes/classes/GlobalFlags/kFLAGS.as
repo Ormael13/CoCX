@@ -2778,7 +2778,7 @@ public static const PABLO_USED_YOUR_ASS:int                                   		
 public static const PABLO_FREAKED_OUT_OVER_WORMS:int                                = 2769;
 public static const WEREWOLF_PACK_PITY_SYSTEM:int                                   = 2770;
 public static const IN_COMBAT_PLAYER_USED_SHARK_BITE:int                            = 2771;
-public static const UNKNOWN_FLAG_NUMBER_02773:int                                   = 2773;
+public static const IN_COMBAT_BETTER_GRAPPLE:int                                    = 2773;
 public static const UNKNOWN_FLAG_NUMBER_02774:int                                   = 2774;
 public static const UNKNOWN_FLAG_NUMBER_02775:int                                   = 2775;
 public static const UNKNOWN_FLAG_NUMBER_02776:int                                   = 2776;

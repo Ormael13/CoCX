@@ -781,6 +781,7 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.FirstAttackSkeletons)) flags[kFLAGS.IN_COMBAT_PLAYER_SKELETONS_ATTACKED] = 0;
 			if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] = 0;
 			if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) flags[kFLAGS.IN_COMBAT_PLAYER_USED_SHARK_BITE] = 0;
+			if (player.hasPerk(PerkLib.ImprovedGrapple)) flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] = 0;
 			if (player.armor == armors.BMARMOR) dynStats("lus", -(Math.round(player.maxLust() * 0.05)));
 			if (player.hasStatusEffect(StatusEffects.TyrantState)) dynStats("lus", (Math.round(player.maxLust() * 0.05)));
 			if (player.hasStatusEffect(StatusEffects.VampThirstStacksHPMana)) player.removeStatusEffect(StatusEffects.VampThirstStacksHPMana);
@@ -9786,7 +9787,7 @@ public class Combat extends BaseContent {
         //Apophis Unholy Aura
         if (player.isRaceCached(Races.APOPHIS) && monster.lustVuln > 0 && !player.enemiesImmuneToLustResistanceDebuff() && !flags[kFLAGS.DISABLE_AURAS]) {
             outputText("Your unholy aura seeps into [themonster], slowly and insidiously eroding its resiliance to your unholy charms.\n\n");
-            monster.lustVuln += 0.10;
+            monster.lustVuln += 0.1;
 			if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
         }
         //Arousing Aura
@@ -9807,10 +9808,14 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.ImprovedArousingAura)) lustAADmg *= 2;
             lustAADmg = teases.teaseAuraLustDamageBonus(monster, lustAADmg);
             lustAADmg *= monster.lustVuln;
-			if (player.hasPerk(PerkLib.ImprovedArousingAura)) lustAADmg = combat.fixPercentLust(lustAADmg);
-            else lustAADmg = combat.fixPercentLust(lustAADmg);
+			lustAADmg = combat.fixPercentLust(lustAADmg);
             monster.teased(Math.round(lustAADmg), false);
             outputText("\n\n");
+			if (monster.lustVuln > 0 && !player.enemiesImmuneToLustResistanceDebuff() && player.hasPerk(PerkLib.DevouringAura) && ((monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyFeralType)) && !monster.hasPerk(PerkLib.Sentience))) {
+                if (player.hasPerk(PerkLib.DamnationAura)) monster.lustVuln += 0.02;
+				else monster.lustVuln += 0.01;
+                if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
+            }
             if (player.hasPerk(PerkLib.EromancyMaster)) teaseXP(1 + bonusExpAfterSuccesfullTease());
         }
         //Sagittarius Aura of Dominance
@@ -13509,12 +13514,30 @@ public function Straddle():void {
         enemyAIImpl();
 }
 
+public function postStrandleExtraActionsCheck():void {
+	if (player.hasPerk(PerkLib.ImprovedGrapple) && flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] == 0) {
+		flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] = 1;
+		combatMenu(false);
+	}
+	else {
+		if (player.hasPerk(PerkLib.GreaterGrapple) && flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] == 1) {
+			flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] = 2;
+			combatMenu(false);
+		}
+		else enemyAIImpl();
+	}
+}
+
 //private var straddleDamage:Number
 //private var randomcrit:Boolean;
 public function StraddleTease():void {
     clearOutput();
     var straddleDamage:Number = combat.teases.teaseBaseLustDamage();
     if (player.perkv1(IMutationsLib.ManticoreMetabolismIM) >= 3 && player.tail.type == Tail.MANTICORE_PUSSYTAIL) straddleDamage *= 2;
+	if (player.hasPerk(PerkLib.ImprovedGrapple)) {
+		if (player.hasPerk(PerkLib.GreaterGrapple)) straddleDamage *= 1.4;
+		else straddleDamage *= 1.2;
+	}
     straddleDamage = combat.teases.fueledByDesireDamageBonus(straddleDamage);
     //Determine if critical tease!
     var randomcrit:Boolean = false;
@@ -13596,7 +13619,7 @@ public function StraddleTease():void {
             outputText("Your opponent finally manages to struggle free of your grapple!\n\n");
         }
     }
-    enemyAIImpl();
+	postStrandleExtraActionsCheck();
 }
 
 public function randomTeaseKiss(straddleDamage:Number, randomcrit:Boolean):void {
@@ -13987,7 +14010,7 @@ public function Guillotine():void {
         return;
     }
     outputText("\n\n");
-    enemyAIImpl();
+    postStrandleExtraActionsCheck();
 }
 
 public function ScyllaSqueeze():void {
@@ -14047,7 +14070,7 @@ public function ScyllaSqueeze():void {
         return;
     }
     outputText("\n\n");
-    enemyAIImpl();
+    postStrandleExtraActionsCheck();
 }
 
 public function ScyllaTease():void {
@@ -14150,7 +14173,7 @@ public function ScyllaTease():void {
             return;
         }
     }
-    enemyAI();
+    postStrandleExtraActionsCheck();
 }
 
 public function ScyllaLeggoMyEggo():void {
@@ -14309,7 +14332,7 @@ public function SwallowTease():void {
             return;
         }
     }
-    enemyAI();
+    enemyAIImpl();
 }
 
 public function SwallowLeggoMyEggo():void {
@@ -14350,7 +14373,7 @@ public function WhipStrangulate():void {
 		return;
 	}
 	outputText("\n\n");
-	enemyAIImpl();
+	postStrandleExtraActionsCheck();
 }
 
 public function WhipLeggoMyEggo():void {
@@ -14461,7 +14484,7 @@ public function WebTease():void {
             return;
         }
     }
-    enemyAI();
+    postStrandleExtraActionsCheck();
 }
 
 public function GooTease():void {
@@ -14570,7 +14593,7 @@ public function GooTease():void {
             return;
         }
     }
-    enemyAI();
+    postStrandleExtraActionsCheck();
 }
 
 public function GooLeggoMyEggo():void {
@@ -14624,7 +14647,7 @@ public function spiderBiteAttack():void {
     WrathGenerationPerHit2(5);
     player.tailVenom -= player.VenomWebCost() * 5;
     flags[kFLAGS.VENOM_TIMES_USED] += 1;
-    enemyAIImpl();
+    postStrandleExtraActionsCheck();
 }
 
 public function ManticoreFeed():void {
@@ -14692,7 +14715,7 @@ public function ManticoreFeed():void {
         doNext(endLustVictory);
         return;
     }
-    enemyAI();
+    postStrandleExtraActionsCheck();
 }
 
 public function displacerFeedContinue():void {
@@ -14760,7 +14783,7 @@ public function displacerFeedContinue():void {
         doNext(endLustVictory);
         return;
     }
-    enemyAI();
+    postStrandleExtraActionsCheck();
 }
 
 public function SlimeRapeFeed():void {
@@ -14898,7 +14921,7 @@ public function VampiricBite():void {
             outputText("\n\nYour opponent finally manages to struggle free of your grapple!\n\n");
         }
     }
-    enemyAIImpl();
+	postStrandleExtraActionsCheck();
 }
 
 public function VampireLeggoMyEggo():void {
@@ -14960,7 +14983,7 @@ public function clawsRend():void {
         return;
     }
     outputText("\n\n");
-    enemyAIImpl();
+    postStrandleExtraActionsCheck();
 }
 
 public function displacerCombatFeed():void {
@@ -15000,7 +15023,7 @@ public function HypnosisHeal():void {
     if (!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell, 0, 0, 0, 0);
     monster.removeStatusEffect(StatusEffects.HypnosisNaga);
     spellPerkUnlock();
-    enemyAIImpl();
+    postStrandleExtraActionsCheck();
 }
 
 public function HypnosisDarknessShard():void {
@@ -15017,7 +15040,7 @@ public function HypnosisDarknessShard():void {
     if (!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell, 0, 0, 0, 0);
     monster.removeStatusEffect(StatusEffects.HypnosisNaga);
     spellPerkUnlock();
-    enemyAIImpl();
+    postStrandleExtraActionsCheck();
 }
 
 public function HypnosisDuskWave():void {
@@ -15034,7 +15057,7 @@ public function HypnosisDuskWave():void {
     if (!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell, 0, 0, 0, 0);
     monster.removeStatusEffect(StatusEffects.HypnosisNaga);
     spellPerkUnlock();
-    enemyAIImpl();
+    postStrandleExtraActionsCheck();
 }
 
 public function HypnosisAttack():void {
@@ -15053,7 +15076,7 @@ public function HypnosisCoil():void {
         outputText("You maintain the trance, smiling as you prolong the mesmerising dance, moving your hips from side to side and displaying your assets. [Themonster] is lost in your gaze, and unable to act.");
         monster.createStatusEffect(StatusEffects.Constricted, Duuuration, 0, 0, 0);
     }
-    enemyAIImpl();
+    postStrandleExtraActionsCheck();
 }
 
 public function HypnosisMaintain():void {
@@ -15069,7 +15092,7 @@ public function HypnosisMaintain():void {
     outputText("You maintain the trance, smiling as you prolong the mesmerising dance, moving your hips from side to side and displaying your assets. [Themonster] is lost in your gaze, and unable to act. ");
     monster.teased(lustDmg);
     outputText("\n\n");
-    enemyAIImpl();
+    postStrandleExtraActionsCheck();
 }
 
 //Bear hug
@@ -15093,7 +15116,7 @@ public function bearHug():void {
         return;
     }
     outputText("\n\n");
-    enemyAIImpl();
+    postStrandleExtraActionsCheck();
 }
 
 public function BearLeggoMyEggo():void {

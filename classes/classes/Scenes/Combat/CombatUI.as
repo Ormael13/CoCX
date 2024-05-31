@@ -206,6 +206,23 @@ public class CombatUI extends BaseCombatContent {
 				}
 			}
 		}
+		function vampireBiteDuringGrappleBreakHypnosis(Position:int):void {
+			if (player.perkv1(IMutationsLib.HollowFangsIM) >= 2) {
+				addButton(Position, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. Break hypnosis! \n\nFatigue Cost: " + physicalCost(20) + "");
+				if (player.fatigueLeft() <= combat.physicalCost(20)) {
+					button(Position).disable("You are too tired to bite " + monster.a + " [monster name].");
+				}
+			}
+		}
+		function vampireBiteDuringGrappleV(Position:int):void {
+			if (player.faceType == Face.VAMPIRE || player.perkv1(IMutationsLib.HollowFangsIM) >= 1) {
+				addButton(Position, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
+				if (player.fatigueLeft() <= combat.physicalCost(20)) {
+					button(Position).disable("You are too tired to bite " + monster.a + " [monster name].");
+				}
+			}
+			else addButtonDisabled(Position, "Bite", "If only you had fangs.");
+		}
 
 		// Submenu - Physical Specials
 		if (player.isFlying()) combat.pspecials.buildMenuForFlying(physpButtons);
@@ -307,12 +324,7 @@ public class CombatUI extends BaseCombatContent {
 			menu();
 			addButton(0, "Squeeze", SceneLib.desert.nagaScene.nagaSqueeze).hint("Squeeze some HP out of your opponent! Break hypnosis! \n\nFatigue Cost: " + physicalCost(20) + "");
 			addButton(1, "Tease", SceneLib.desert.nagaScene.nagaTease).hint("Deals lesser lust damage. Does not break hypnosis.");
-			if (player.perkv1(IMutationsLib.HollowFangsIM) >= 2) {
-				addButton(3, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. Break hypnosis! \n\nFatigue Cost: " + physicalCost(20) + "");
-				if (player.fatigueLeft() <= combat.physicalCost(20)) {
-					button(3).disable("You are too tired to bite " + monster.a + " [monster name].");
-				}
-			}
+			vampireBiteDuringGrappleBreakHypnosis(3);
 			addButton(4, "Maintain", combat.HypnosisMaintain);
 		}
 		//Naga grapple
@@ -360,12 +372,7 @@ public class CombatUI extends BaseCombatContent {
 		} else if (monster.hasStatusEffect(StatusEffects.Straddle)) {
 			menu();
 			addButton(0, "Tease", combat.StraddleTease).hint("Use a powerful teasing attack");
-			if (player.perkv1(IMutationsLib.HollowFangsIM) >= 2) {
-				addButton(1, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. Break hypnosis! \n\nFatigue Cost: " + physicalCost(20) + "");
-				if (player.fatigueLeft() <= combat.physicalCost(20)) {
-					button(1).disable("You are too tired to bite " + monster.a + " [monster name].");
-				}
-			}
+			vampireBiteDuringGrappleBreakHypnosis(3);
 			addButton(4, "Release", combat.straddleLeggoMyEggo).hint("Release your opponent.");
 		} else if (monster.hasStatusEffect(StatusEffects.ManticorePlug)) {
 			menu();
@@ -428,23 +435,11 @@ public class CombatUI extends BaseCombatContent {
 			addButton(4, "Release", combat.GooLeggoMyEggo).hint("Release your opponent.");
 		} else if (monster.hasStatusEffect(StatusEffects.EmbraceVampire)) {
 			menu();
-			if (player.faceType == Face.VAMPIRE || player.perkv1(IMutationsLib.HollowFangsIM) >= 1) {
-				addButton(0, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
-				if (player.fatigueLeft() <= combat.physicalCost(20)) {
-					button(0).disable("You are too tired to bite " + monster.a + " [monster name].");
-				}
-			}
-			else addButtonDisabled(0, "Bite", "If only you had fangs.");
+			vampireBiteDuringGrappleV(0);
 			addButton(4, "Release", combat.VampireLeggoMyEggo);
 		} else if (monster.hasStatusEffect(StatusEffects.TelekineticGrab)) {
 			menu();
-			if (player.faceType == Face.VAMPIRE || player.perkv1(IMutationsLib.HollowFangsIM) >= 1) {
-				addButton(0, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
-				if (player.fatigueLeft() <= combat.physicalCost(20)) {
-					button(0).disable("You are too tired to bite " + monster.a + " [monster name].");
-				}
-			}
-			else addButtonDisabled(0, "Bite", "If only you had fangs.");
+			vampireBiteDuringGrappleV(0);
 			CombatAbilities.Tease.createButton(monster).applyTo(btnTease);
 			btnTease.hint("Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.");
 			//addButton(4, "Release", combat.VampireLeggoMyEggo);
@@ -493,12 +488,7 @@ public class CombatUI extends BaseCombatContent {
 		} else if (monster.hasStatusEffect(StatusEffects.GrabBear)) {
 			menu();
 			addButton(0, "Hug", combat.bearHug).hint("Crush your opponent with a bear hug. \n\nFatigue Cost: " + physicalCost(30) + "");
-			if (player.perkv1(IMutationsLib.HollowFangsIM) >= 2) {
-				addButton(3, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
-				if (player.fatigueLeft() <= combat.physicalCost(20)) {
-					button(3).disable("You are too tired to bite " + monster.a + " [monster name].");
-				}
-			}
+			vampireBiteDuringGrapple(3);
 			addButton(4, "Release", combat.BearLeggoMyEggo);
 		}
 		else playerBusy = false;

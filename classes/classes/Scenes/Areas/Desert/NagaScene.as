@@ -1011,7 +1011,7 @@ public function nagaSqueeze():void {
 	}
 	outputText("\n\n");
 	if (monster.hasStatusEffect(StatusEffects.HypnosisNaga)) monster.removeStatusEffect(StatusEffects.HypnosisNaga);
-    SceneLib.combat.enemyAIImpl();
+	SceneLib.combat.postStrandleExtraActionsCheck();
 }
 //Tease
 public function nagaTease():void {
@@ -1113,7 +1113,7 @@ public function nagaTease():void {
         doNext(SceneLib.combat.endLustVictory);
         return;
     }
-    SceneLib.combat.enemyAIImpl();
+    SceneLib.combat.postStrandleExtraActionsCheck();
 }
 
 public function nagaLeggoMyEggo():void {
