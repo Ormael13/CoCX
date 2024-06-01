@@ -846,8 +846,8 @@ public class PerkLib
 						"]",
 				"You've chosen the 'Catch the blade' perk, giving you a chance to deflect blows with your fists. (Speed-based).");
 		public static const ChallengingShout:PerkType = mk("Challenging shout", "Challenging shout",
-				"You can now use the ability Warrior Shout! (+20% of max/overmax wrath)",
-				"You've chosen the 'Challenging shout' perk, gaining access to use Warrior Shout special. (+20% of max/overmax wrath)");
+				"You can now use the ability Warrior Shout! (gain 20% of max/overmax wrath)",
+				"You've chosen the 'Challenging shout' perk, gaining access to use Warrior Shout special. (gain 20% of max/overmax wrath)");
 		public static const Channeling:PerkType = mk("Channeling", "Channeling",
 				"[if (player.inte>=60)" +
 						"Increases base spell strength by 20% and base mana pool by 90." +

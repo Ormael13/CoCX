@@ -11724,6 +11724,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 			maxPercentRegen *= 2;
 		}
         if ((player.internalChimeraRating() >= 1 && player.hunger < 1 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.internalChimeraRating() >= 1 && flags[kFLAGS.HUNGER_ENABLED] <= 0)) maxPercentRegen -= (0.5 * player.internalChimeraRating());
+		if (player.perkv1(IMutationsLib.HumanFatIM) >= 4 && ((player.internalChimeraRating() >= 2 && player.hunger < 1 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.internalChimeraRating() >= 2 && flags[kFLAGS.HUNGER_ENABLED] <= 0))) maxPercentRegen += 2;
         if (maxPercentRegen > maximumRegeneration()) maxPercentRegen = maximumRegeneration();
 		return maxPercentRegen;
     }
@@ -16634,6 +16635,7 @@ public function ghostToughness():Number {
     if (player.perkv1(IMutationsLib.DraconicBonesIM) >= 3) ghostTouMulti += 0.1;
     if (player.perkv1(IMutationsLib.HumanFatIM) >= 2 && player.racialScore(Races.HUMAN) > 17) ghostTouMulti += 0.15;
     if (player.perkv1(IMutationsLib.HumanFatIM) >= 3 && player.racialScore(Races.HUMAN) > 17) ghostTouMulti += 0.3;
+    if (player.perkv1(IMutationsLib.HumanFatIM) >= 4 && player.racialScore(Races.HUMAN) > 17) ghostTouMulti += 0.45;
     ghostTou *= ghostTouMulti;
     ghostTou = Math.round(ghostTou);
     return ghostTou;
