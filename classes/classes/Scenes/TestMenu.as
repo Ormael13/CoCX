@@ -1745,7 +1745,7 @@ public class TestMenu extends BaseContent
 			//addButton(8, "", ).hint("Add 1 .");
 			//addButton(9, "", ).hint("Add 1 .");
 			addButton(10, "SBMan", AddSoulBlastManual).hint("Add 1 Soul Blast manual.");
-			//addButton(11, "", ).hint("Add 1 .");
+			addButton(11, "E.Ichor", AddEIchor).hint("Add 1 E.Ichor.");
 			addButton(12, "-2-", NonEquipmentMenu, page + 1);
 			addButton(13, "-3-", NonEquipmentMenu, page + 2);
 			addButton(14, "Back", SoulforceCheats);
@@ -2200,6 +2200,10 @@ public class TestMenu extends BaseContent
 	public function AddSoulBlastManual():void {
 		outputText("\n\n<b>(Gained 1 Soul Blast Manual!)</b>\n\n");
 		inventory.takeItem(consumables.SOBLMAN, curry(NonEquipmentMenu, 1));
+	}
+	public function AddEIchor():void {
+		outputText("\n\n<b>(Gained 1 E.Ichor!)</b>\n\n");
+		inventory.takeItem(useables.E_ICHOR, curry(NonEquipmentMenu, 1));
 	}
 	public function AddDisplacerFruit():void {
 		outputText("\n\n<b>(Gained 1 Displacer Fruit!)</b>\n\n");

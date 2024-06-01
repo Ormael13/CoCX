@@ -377,36 +377,6 @@ public class PerkLib
 				"You had something of a reputation back in Ingnam. If someone was feeling lonely, anxious, or sore (in whichever way), they knew who to call. +10% max lust, +5 to anal/vaginal capacity.",
 				"You've chosen the 'Tension Tamer' perk. +10% max lust, +5 to anal/vaginal capacity.")
 				.withBuffs({'maxlust_mult':+0.1});
-		public static const DualWield2HFirearms:PerkType = mk("Dual Wield (2H Firearms)", "Dual Wield (2H Firearms)",
-				"Allows you to wield two firearms (2H ones) more effectively. (damage and accuracy penalties decreased by 40% and 20%)",
-				"You've chosen the 'Dual Wield (Firearms)' perk, training the skill of using two firearms (2H ones). (damage and accuracy penalties decreased by 40% and 20%)");
-		public static const ImprovedArousingAura:PerkType = mk("Improved Arousing Aura", "Improved Arousing Aura",
-				"Double the effect from arousing aura.",
-				"You've chosen the 'Improved Arousing Aura' perk. Double the effect from arousing aura.");
-		public static const CorruptTheBody:PerkType = mk("Corrupt the body", "Corrupt the body",
-				"Lust vulnerability debuff can now stack beyond 0 up to -100%.",
-				"You've chosen the 'Corrupt the body' perk. Lust vulnerability debuff can now stack beyond 0 up to -100%.");
-		public static const CorruptTheHeart:PerkType = mk("Corrupt the heart", "Corrupt the heart",
-				"Lust vulnerability debuff can now stack beyond 0 up to -200%.",
-				"You've chosen the 'Corrupt the heart' perk. Lust vulnerability debuff can now stack beyond 0 up to -200%.");
-		public static const CorruptTheMind:PerkType = mk("Corrupt the mind", "Corrupt the mind",
-				"Lust vulnerability debuff can now stack beyond 0 up to -300%.",
-				"You've chosen the 'Corrupt the mind' perk. Lust vulnerability debuff can now stack beyond 0 up to -300%.");
-		public static const CorruptTheSoul:PerkType = mk("Corrupt the soul", "Corrupt the soul",
-				"Lust vulnerability debuff can now stack beyond 0 up to infinity. (well technicaly not infinity but only Spilly Stonewall PC maybe could reach that 'inifity')",
-				"You've chosen the 'Corrupt the soul' perk. Lust vulnerability debuff can now stack beyond 0 up to infinity.");
-		public static const ImprovedGrapple:PerkType = mk("Improved Grapple", "Improved Grapple",
-				"Do two action per straddle or grappling turn. Increase straddle damage by 20%.",
-				"You've chosen the 'Improved Grapple' perk. Do two action per straddle or grappling turn. Increase straddle damage by 20%.");
-		public static const GreaterGrapple:PerkType = mk("Greater Grapple", "Greater Grapple",
-				"Attack three action per straddle or grappling turn. Increase straddle damage by another 20%.",
-				"You've chosen the 'Greater Grapple' perk. Attack three action per straddle or grappling turn. Increase straddle damage by another 20%.");
-		public static const DevouringAura:PerkType = mk("Devouring Aura", "Devouring Aura",
-				"Your arousing aura now also erodes your victim lust resistance by 1% per round and may even inflict negative resistance. This ability does not affect mindless opponents.",
-				"You've chosen the 'Devouring Aura' perk. Your arousing aura now also erodes your victim lust resistance by 1% per round and may even inflict negative resistance. This ability does not affect mindless opponents.");
-		public static const DamnationAura:PerkType = mk("Damnation Aura", "Damnation Aura",
-				"Double the effect of Devouring Aura.",
-				"You've chosen the 'Damnation Aura' perk. Double the effect of Devouring Aura.");
 		//public static const BloodSacrifice:PerkType = mk("Blood Sacrifice", "Blood Sacrifice",
 				//"You are currently sacrificing blood to empower your spells.",
 				//"You are currently sacrificing blood to empower your spells.");
@@ -476,6 +446,36 @@ public class PerkLib
 		public static const Atavism:PerkType = mk("Atavism", "Atavism",
 				"Unlocks the ability to temporarily turn into a feral beast of pure instinct while in battle.",
 				"You've chosen the 'Atavism' perk. Unlocks the ability to temporarily turn into a feral beast of pure instinct while in battle.");
+		public static const DualWield2HFirearms:PerkType = mk("Dual Wield (2H Firearms)", "Dual Wield (2H Firearms)",
+				"Allows you to wield two firearms (2H ones) more effectively. (damage and accuracy penalties decreased by 40% and 20%)",
+				"You've chosen the 'Dual Wield (Firearms)' perk, training the skill of using two firearms (2H ones). (damage and accuracy penalties decreased by 40% and 20%)");
+		public static const ImprovedArousingAura:PerkType = mk("Improved Arousing Aura", "Improved Arousing Aura",
+				"Double the effect from arousing aura.",
+				"You've chosen the 'Improved Arousing Aura' perk. Double the effect from arousing aura.");
+		public static const CorruptTheBody:PerkType = mk("Corrupt the body", "Corrupt the body",
+				"Lust vulnerability debuff can now stack beyond 0 up to -100%.",
+				"You've chosen the 'Corrupt the body' perk. Lust vulnerability debuff can now stack beyond 0 up to -100%.");
+		public static const CorruptTheHeart:PerkType = mk("Corrupt the heart", "Corrupt the heart",
+				"Lust vulnerability debuff can now stack beyond 0 up to -200%.",
+				"You've chosen the 'Corrupt the heart' perk. Lust vulnerability debuff can now stack beyond 0 up to -200%.");
+		public static const CorruptTheMind:PerkType = mk("Corrupt the mind", "Corrupt the mind",
+				"Lust vulnerability debuff can now stack beyond 0 up to -300%.",
+				"You've chosen the 'Corrupt the mind' perk. Lust vulnerability debuff can now stack beyond 0 up to -300%.");
+		public static const CorruptTheSoul:PerkType = mk("Corrupt the soul", "Corrupt the soul",
+				"Lust vulnerability debuff can now stack beyond 0 up to infinity. (well technicaly not infinity but only Spilly Stonewall PC maybe could reach that 'inifity')",
+				"You've chosen the 'Corrupt the soul' perk. Lust vulnerability debuff can now stack beyond 0 up to infinity.");
+		public static const ImprovedGrapple:PerkType = mk("Improved Grapple", "Improved Grapple",
+				"Do two action per straddle or grappling turn. Increase straddle damage by 20%.",
+				"You've chosen the 'Improved Grapple' perk. Do two action per straddle or grappling turn. Increase straddle damage by 20%.");
+		public static const GreaterGrapple:PerkType = mk("Greater Grapple", "Greater Grapple",
+				"Attack three action per straddle or grappling turn. Increase straddle damage by another 20%.",
+				"You've chosen the 'Greater Grapple' perk. Attack three action per straddle or grappling turn. Increase straddle damage by another 20%.");
+		public static const DevouringAura:PerkType = mk("Devouring Aura", "Devouring Aura",
+				"Your arousing aura now also erodes your victim lust resistance by 1% per round and may even inflict negative resistance. This ability does not affect mindless opponents.",
+				"You've chosen the 'Devouring Aura' perk. Your arousing aura now also erodes your victim lust resistance by 1% per round and may even inflict negative resistance. This ability does not affect mindless opponents.");
+		public static const DamnationAura:PerkType = mk("Damnation Aura", "Damnation Aura",
+				"Double the effect of Devouring Aura.",
+				"You've chosen the 'Damnation Aura' perk. Double the effect of Devouring Aura.");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -3607,6 +3607,7 @@ public class PerkLib
 
 		// Other super perks
 		public static const SPSurvivalTrainingX:SurvivalTrainingXPerk = new SurvivalTrainingXPerk();
+		//public static const IcyHotX:SurvivalTrainingXPerk = new SurvivalTrainingXPerk();
 		public static const SuperPerk3:PerkType = mk("Super Perk 3", "Super Perk 3",
 				".");
 		public static const SuperPerk2:PerkType = mk("Super Perk 2", "Super Perk 2",

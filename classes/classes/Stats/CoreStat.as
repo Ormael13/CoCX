@@ -23,6 +23,7 @@ public class CoreStat extends RawStat{
 				if (host.perkv1(IMutationsLib.HumanBonesIM) >= 1) base += 5;
 				if (host.perkv1(IMutationsLib.HumanBonesIM) >= 2) base += 5;
 				if (host.perkv1(IMutationsLib.HumanBonesIM) >= 4) base += 10;
+				if (host.perkv1(IMutationsLib.HumanMusculatureIM) >= 4) base += 5;
 				if (host is Player && JourneyToTheEast.EvelynnCoreLimitBreakerCounter > 0) base += JourneyToTheEast.EvelynnCoreLimitBreakerCounter;
 				var str:Number = 1;
 				if (host.hasPerk(PerkLib.AsuraStrength)) str += 0.1;

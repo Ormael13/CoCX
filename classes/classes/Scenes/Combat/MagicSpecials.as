@@ -3384,10 +3384,17 @@ public class MagicSpecials extends BaseCombatContent {
 			tempSpe += Math.round(player.speStat.core.value * 0.2);
 		}
 		if (player.perkv1(IMutationsLib.HumanMusculatureIM) >= 3 && player.racialScore(Races.HUMAN) > 17) {
-			tempStr += Math.round(player.strStat.core.value * 0.1);
-			tempTou += Math.round(player.touStat.core.value * 0.1);
-			tempSpe += Math.round(player.speStat.core.value * 0.1);
-			warriorsrageDuration += 6;
+			if (player.perkv1(IMutationsLib.HumanMusculatureIM) >= 4) {
+				tempStr += Math.round(player.strStat.core.value * 0.25);
+				tempTou += Math.round(player.touStat.core.value * 0.25);
+				tempSpe += Math.round(player.speStat.core.value * 0.25);
+			}
+			else {
+				tempStr += Math.round(player.strStat.core.value * 0.1);
+				tempTou += Math.round(player.touStat.core.value * 0.1);
+				tempSpe += Math.round(player.speStat.core.value * 0.1);
+			}
+			warriorsrageDuration += 5;
 		}
 		if (player.hasPerk(PerkLib.AsuraToughness)) {
 			tempStr += Math.round(player.strStat.core.value * 0.1);
