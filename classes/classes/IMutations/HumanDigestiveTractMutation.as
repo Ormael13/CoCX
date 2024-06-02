@@ -2,35 +2,28 @@
  * Original code by aimozg on 27.01.14.
  * Extended for Mutations by Jtecx on 14.03.22.
  */
-package classes.IMutations
+package classes.IMutations 
 {
-import classes.BodyParts.Face;
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Player;
 import classes.Races;
 
-public class VenomGlandsMutation extends IMutationPerkType
+public class HumanDigestiveTractMutation extends IMutationPerkType
     {
         override public function get mName():String {
-            return "Venom Glands";
+            return "Human Digestive Tract";
         }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier == 1){
-                descS = "You now possess venom glands, and your teeth now can inject the venom when you bite";
+                descS = "Your digestive tract improved allowing to slowly detoxification of poisons (2x shorter poison effect duration, -1% of lust per turn). Increase limit when PC gain weight from eating too much by 10";
             }
             if (pTier == 2){
-                descS = "You now possess venom glands with increased venom capacity, and your teeth now can inject the venom when you bite (+5% poison resistance)";
-            }
-            if (pTier == 3){
-                descS = "You now possess venom glands with increased venom capacity, and your teeth now can inject the venom when you bite (+15% poison resistance)";
-            }
-            if (pTier == 4){
-                descS = "You now possess venom glands with greatly increased venom capacity, and your teeth now can inject the venom when you bite (+30% poison resistance)";
+                descS = "Your ability to suck substances like blood have developed halfway. (+5 max stack of Vampire Thirst, +2% more healed from Vampire Bite)";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -43,11 +36,10 @@ public class VenomGlandsMutation extends IMutationPerkType
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
-                    this.requireMouthMutationSlot()
+                    this.requireBonesAndMarrowMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.facePart.isAny(Face.SNAKE_FANGS, Face.SPIDER_FANGS);
-                    }, "Spider or Snake fangs")
-                    .requireAnyRace(Races.SPIDER, Races.APOPHIS, Races.NAGA, Races.GORGON, Races.VOUIVRE, Races.COUATL, Races.HYDRA, Races.ATLACH_NACHA);
+                        return player.racialScore(Races.HUMAN) > 16;
+                    }, "Human race (17+)");
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -68,9 +60,11 @@ public class VenomGlandsMutation extends IMutationPerkType
             return pBuffs;
         }
 
-        public function VenomGlandsMutation() {
-            super(mName + " IM", mName, SLOT_MOUTH, 4);
-        }
+        public function HumanDigestiveTractMutation() 
+		{
+			super(mName + " IM", mName, SLOT_MOUTH, 1);
+		}
+		
+	}
 
-    }
 }

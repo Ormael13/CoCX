@@ -7,10 +7,13 @@ package classes.Scenes.Dungeons.EbonLabyrinth
 import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
+import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.Combat.SpellsWhite.BlindSpell;
+
+import coc.view.CoCButton;
 
 use namespace CoC;
 
@@ -19,7 +22,35 @@ use namespace CoC;
 		private var _biteCounter:int = 0;
 		private var _sonicScreamCooldown:int = 0;
 
-		override public function postPlayerAbility(ability:CombatAbility, display:Boolean = true):void {
+		override public function postPlayerBusyBtnSpecial(btnSpecial1:CoCButton, btnSpecial2:CoCButton):void{
+			if (player.hasStatusEffect(StatusEffects.MonsterInvisible)) {
+				if (player.hasStatusEffect(StatusEffects.KnowsBlind) && ((!player.hasPerk(PerkLib.BloodMage) && player.mana >= 30) || (player.hasStatusEffect(StatusEffects.BloodMage) && ((player.HP + 30) > (player.minHP() + 30))))) {
+					btnSpecial1.show("Blind", dispellDarkness);
+				}
+			}
+		}
+		
+		public function dispellDarkness():void {
+			clearOutput();
+			outputText("You glare at point near you.  A bright flash erupts there!\n");
+			outputText("The light counters the smothering darkness, breaking the spell and bringing light back the area. [Themonster], who was about to viciously attack you from behind, swiftly backs out of range and flies off.\n\n");
+			outputText("\"<i>Umph you broke free… No matter, your defeat is but a matter of time.</i>\"\n");
+			createStatusEffect(StatusEffects.Blind, Math.min(2 + player.inte / 20, 10), 0, 0, 0);
+			player.removeStatusEffect(StatusEffects.MonsterInvisible);
+			if (!hasStatusEffect(StatusEffects.AbilityCooldown1) || statusEffectv1(StatusEffects.AbilityCooldown1) < 3) {
+				removeStatusEffect(StatusEffects.AbilityCooldown1);
+				createStatusEffect(StatusEffects.AbilityCooldown1, 3, 0, 0, 0);
+			}
+			EngineCore.doNext(SceneLib.combat.combatMenu);
+			if (game.player.hasStatusEffect(StatusEffects.BloodMage)) game.player.HP -= 30;
+			else game.player.mana -= 30;
+			flags[kFLAGS.SPELLS_CAST]++;
+			SceneLib.combat.spellPerkUnlock();
+			EngineCore.statScreenRefresh();
+            SceneLib.combat.enemyAIImpl();
+		}
+
+		/*override public function postPlayerAbility(ability:CombatAbility, display:Boolean = true):void {
 			if (ability is BlindSpell && hasStatusEffect(StatusEffects.Blind)) {
 				if (display) {
 					outputText("The light counters the smothering darkness, breaking the spell and bringing light back the area." + 
@@ -27,14 +58,13 @@ use namespace CoC;
 					outputText("\"<i>Umph you broke free… No matter, your defeat is but a matter of time.</i>\"\n");
 				}
 				player.removeStatusEffect(StatusEffects.MonsterInvisible);
-
 				//When forcibly removed, Darkness cannot be reapplied for 3 turns
 				if (!hasStatusEffect(StatusEffects.AbilityCooldown1) || statusEffectv1(StatusEffects.AbilityCooldown1) < 3) {
 					removeStatusEffect(StatusEffects.AbilityCooldown1);
 					createStatusEffect(StatusEffects.AbilityCooldown1, 3, 0, 0, 0);
 				}
 			}
-		}
+		}*/
 		
 		private function draculinaEmbrace():void {
 			if (!player.getEvasionRoll()) {

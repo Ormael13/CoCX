@@ -783,6 +783,7 @@ public class Combat extends BaseContent {
 			if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) flags[kFLAGS.IN_COMBAT_PLAYER_USED_SHARK_BITE] = 0;
 			if (player.hasPerk(PerkLib.ImprovedGrapple)) flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] = 0;
 			if (player.armor == armors.BMARMOR) dynStats("lus", -(Math.round(player.maxLust() * 0.05)));
+			if (player.perkv1(IMutationsLib.HumanDigestiveTractIM) >= 4) dynStats("lus", -(Math.round(player.maxLust() * 0.01)));
 			if (player.hasStatusEffect(StatusEffects.TyrantState)) dynStats("lus", (Math.round(player.maxLust() * 0.05)));
 			if (player.hasStatusEffect(StatusEffects.VampThirstStacksHPMana)) player.removeStatusEffect(StatusEffects.VampThirstStacksHPMana);
 			if (player.hasStatusEffect(StatusEffects.TyrantState) && TyrantiaFollower.TyrantiaTrainingSessions >= 30) {
@@ -10581,7 +10582,8 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         }
         //Acid DoT
         if (player.hasStatusEffect(StatusEffects.AcidDoT)) {
-            player.addStatusValue(StatusEffects.AcidDoT, 1, -1);
+			if (player.perkv1(IMutationsLib.HumanDigestiveTractIM) >= 1) player.addStatusValue(StatusEffects.AcidDoT, 1, -2);
+            else player.addStatusValue(StatusEffects.AcidDoT, 1, -1);
             //Heal wounds
             if (player.statusEffectv1(StatusEffects.AcidDoT) <= 0 || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 outputText("Acid wounds left by [themonster] finally close ups.\n\n");
@@ -11724,8 +11726,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 			maxPercentRegen *= 2;
 		}
         if ((player.internalChimeraRating() >= 1 && player.hunger < 1 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.internalChimeraRating() >= 1 && flags[kFLAGS.HUNGER_ENABLED] <= 0)) maxPercentRegen -= (0.5 * player.internalChimeraRating());
-		if (player.perkv1(IMutationsLib.HumanFatIM) >= 4 && ((player.internalChimeraRating() >= 2 && player.hunger < 1 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.internalChimeraRating() >= 2 && flags[kFLAGS.HUNGER_ENABLED] <= 0))) maxPercentRegen += 2;
-        if (maxPercentRegen > maximumRegeneration()) maxPercentRegen = maximumRegeneration();
+		if (maxPercentRegen > maximumRegeneration()) maxPercentRegen = maximumRegeneration();
 		return maxPercentRegen;
     }
 

@@ -4743,7 +4743,10 @@ public function wakeFromBadEnd():void {
 	inDungeon = false;
 	inRoomedDungeon = false;
 	inRoomedDungeonResume = null;
-    CoC.instance.inCombat = false;
+	if (CoC.instance.inCombat) {
+		CoC.instance.player.clearStatuses(false);
+		CoC.instance.inCombat = false;
+	}
 	player.removeStatusEffect(StatusEffects.RiverDungeonA);
 	if (player.hasStatusEffect(StatusEffects.RivereDungeonIB)) player.removeStatusEffect(StatusEffects.RivereDungeonIB);
 	if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
@@ -4786,7 +4789,10 @@ public function rebirthFromBadEnd():void {
 	inDungeon = false;
 	inRoomedDungeon = false;
 	inRoomedDungeonResume = null;
-    CoC.instance.inCombat = false;
+    if (CoC.instance.inCombat) {
+		CoC.instance.player.clearStatuses(false);
+		CoC.instance.inCombat = false;
+	}
 	player.removeStatusEffect(StatusEffects.RiverDungeonA);
 	if (player.hasStatusEffect(StatusEffects.RivereDungeonIB)) player.removeStatusEffect(StatusEffects.RivereDungeonIB);
 	if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);

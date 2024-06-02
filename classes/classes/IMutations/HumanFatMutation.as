@@ -32,7 +32,7 @@ public class HumanFatMutation extends IMutationPerkType
                 descS += "15% DR), natural resistance to damage (+15 armor/m.res), increase max Hunger cap by 50 (if PC have Hunger bar active) (+45% of max core Tou as phantom Tou)";
             }
             if (pTier == 4){
-                descS += "40% DR), natural resistance to damage (+40 armor/m.res), maximum base/core Tou by 10, +10% to max overfatigue, negate up to 2 points of internal chimera score, increase max Hunger cap by 150 and limit when PC gain weight from eating too much by 10 (if PC have Hunger bar active) (+90% of max core Tou as phantom Tou)";
+                descS += "40% DR), natural resistance to damage (+40 armor/m.res), maximum base/core Tou by 10, +10% to max overfatigue, negate up to 3 points of internal chimera score, increase max Hunger cap by 150 (if PC have Hunger bar active) (+90% of max core Tou as phantom Tou)";
             }
             if (pTier >= 1) descS += " (req. 18+ human score to have all effects active)";
             return descS;

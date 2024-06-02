@@ -81,6 +81,7 @@ public class IMutationsLib
 		public static const HumanAdrenalGlandsIM:IMutationPerkType = new HumanAdrenalGlandsMutation();
 		public static const HumanBloodstreamIM:IMutationPerkType = new HumanBloodstreamMutation();
 		public static const HumanBonesIM:IMutationPerkType = new HumanBonesMutation();
+		public static const HumanDigestiveTractIM:IMutationPerkType = new HumanDigestiveTractMutation();
 		public static const HumanEyesIM:IMutationPerkType = new HumanEyesMutation();
 		public static const HumanFatIM:IMutationPerkType = new HumanFatMutation();
 		public static const HumanMusculatureIM:IMutationPerkType = new HumanMusculatureMutation();
