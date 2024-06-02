@@ -80,6 +80,7 @@ public class HumanRace extends Race {
 		addMutation(IMutationsLib.HumanDigestiveTractIM);
 		addMutation(IMutationsLib.HumanEyesIM);
 		addMutation(IMutationsLib.HumanFatIM);
+		addMutation(IMutationsLib.HumanMetabolismIM);
 		addMutation(IMutationsLib.HumanMusculatureIM);
 		addMutation(IMutationsLib.HumanOvariesIM);
 		addMutation(IMutationsLib.HumanParathyroidGlandIM);

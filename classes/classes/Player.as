@@ -4412,9 +4412,10 @@ use namespace CoC;
 			if (hasMutation(IMutationsLib.HumanAdrenalGlandsIM)) internalHumanCounter += perkv1(IMutationsLib.HumanAdrenalGlandsIM);//4
 			if (hasMutation(IMutationsLib.HumanBloodstreamIM)) internalHumanCounter += perkv1(IMutationsLib.HumanBloodstreamIM);//4
 			if (hasMutation(IMutationsLib.HumanBonesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanBonesIM);//4
+			if (hasMutation(IMutationsLib.HumanDigestiveTractIM)) internalHumanCounter += perkv1(IMutationsLib.HumanDigestiveTractIM);//2
 			if (hasMutation(IMutationsLib.HumanEyesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanEyesIM);//4
 			if (hasMutation(IMutationsLib.HumanFatIM)) internalHumanCounter += perkv1(IMutationsLib.HumanFatIM);//4
-			if (hasMutation(IMutationsLib.HumanDigestiveTractIM)) internalHumanCounter += perkv1(IMutationsLib.HumanDigestiveTractIM);//1
+			if (hasMutation(IMutationsLib.HumanMetabolismIM)) internalHumanCounter += perkv1(IMutationsLib.HumanMetabolismIM);//2
 			if (hasMutation(IMutationsLib.HumanMusculatureIM)) internalHumanCounter += perkv1(IMutationsLib.HumanMusculatureIM);//4
 			if (hasMutation(IMutationsLib.HumanOvariesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanOvariesIM);//4
 			if (hasMutation(IMutationsLib.HumanParathyroidGlandIM)) internalHumanCounter += perkv1(IMutationsLib.HumanParathyroidGlandIM);//3
@@ -4862,6 +4863,7 @@ use namespace CoC;
 				if (perkv1(IMutationsLib.HumanDigestiveTractIM) >= 1) overeatingLimit += 10;
 				if (perkv1(IMutationsLib.HumanDigestiveTractIM) >= 2) overeatingLimit += 15;
 				if (perkv1(IMutationsLib.HumanDigestiveTractIM) >= 3) overeatingLimit += 20;
+				if (perkv1(IMutationsLib.HumanMetabolismIM) >= 1) amnt = Math.round(amnt * postConsumptionMlt());
 				hunger += amnt;
 				if (hunger > maxHunger() + overeatingLimit) {
 					weightChange = Math.ceil((hunger - (maxHunger() + overeatingLimit)) / overeatingLimit); //rounded UP to int
@@ -4916,6 +4918,13 @@ use namespace CoC;
 			if (hunger < 0) hunger = 0;
 			if (hunger < oldHunger) CoC.instance.mainView.statsView.showStatDown('hunger');
 			dynStats("lus", 0, "scale", false);
+		}
+
+		public function postConsumptionMlt():Number {
+			var pCM:Number = 1;
+			if (perkv1(IMutationsLib.HumanDigestiveTractIM) >= 1) pCM += 0.1;
+			if (perkv1(IMutationsLib.HumanDigestiveTractIM) >= 2) pCM += 0.2;
+			return pCM;
 		}
 
 		public function get corruptionTolerance():int {

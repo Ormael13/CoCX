@@ -41,7 +41,7 @@ import classes.StatusEffects;
 			}
 			else outputText("You worry it'll make it harder to resist the attentions of a demon.");
 			player.addCurse("sens", 10,2);
-			dynStats("lus", 5, "scale", false);
+			dynStats("lus", Math.round(5*player.postConsumptionMlt()), "scale", false);
 			player.refillHunger(5);
 			
 			return false;

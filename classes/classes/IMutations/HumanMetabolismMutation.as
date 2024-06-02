@@ -10,26 +10,21 @@ import classes.Creature;
 import classes.Player;
 import classes.Races;
 
-public class HumanDigestiveTractMutation extends IMutationPerkType
+public class HumanMetabolismMutation extends IMutationPerkType
     {
         override public function get mName():String {
-            return "Human Digestive Tract";
+            return "Human Metabolism";
         }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
-			var perChg1:int = 1;
-			var perChg2:int = 10;
-			if (pTier >= 2) {
-				perChg1 += 2;
-				perChg2 += 15;
-			}
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
-                descS += "Your digestive tract improved allowing to better murishment from all the ingested substances (+"+perChg1+"0%). Increase limit when PC gain weight from eating too much by "+perChg2+"";
+                descS += "Your metabolism changes allowing to slowly detoxification of poisons ("+pTier+"0% chance to instantly remove some of toxic substance from body, -"+pTier+"% of lust per turn";
             }
-            if (pTier == 3){
-                descS += "Your digestive tract improved allowing to slowly detoxification of poisons (2x shorter poison effect duration, -1% of lust per turn).";
+			if (pTier == 1) descS += ")";
+            if (pTier >= 2){
+                descS += ", 2x shorter elemental dot effects duration)";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -59,16 +54,16 @@ public class HumanDigestiveTractMutation extends IMutationPerkType
         //Mutations Buffs
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
-            if (pTier == 1) pBuffs['tou.mult'] = 0.05;
-            if (pTier == 2) pBuffs['tou.mult'] = 0.15;
-            if (pTier == 3) pBuffs['tou.mult'] = 0.3;
-            if (pTier == 4) pBuffs['tou.mult'] = 0.6;
+            if (pTier == 1) pBuffs['lib.mult'] = 0.05;
+            if (pTier == 2) pBuffs['lib.mult'] = 0.15;
+            if (pTier == 3) pBuffs['lib.mult'] = 0.3;
+            if (pTier == 4) pBuffs['lib.mult'] = 0.6;
             return pBuffs;
         }
 
-        public function HumanDigestiveTractMutation() 
+        public function HumanMetabolismMutation() 
 		{
-			super(mName + " IM", mName, SLOT_MOUTH, 2);
+			super(mName + " IM", mName, SLOT_METABOLISM, 2);
 		}
 		
 	}

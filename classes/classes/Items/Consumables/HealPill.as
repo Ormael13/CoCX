@@ -24,9 +24,9 @@ import classes.PerkLib;
 			outputText("You pop the small pill into your mouth and swallow. ");
 			
 			if (player.HP < player.maxOverHP()) {
-				if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) EngineCore.HPChange(Math.round((50 + player.tou) * 2), true);
-				else if ((player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 2) || player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) EngineCore.HPChange(Math.round((50 + player.tou) * 1.5), true);
-				else EngineCore.HPChange(50 + player.tou, true);
+				if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) EngineCore.HPChange(Math.round((50 + player.tou) * 2 * player.postConsumptionMlt()), true);
+				else if ((player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 2) || player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) EngineCore.HPChange(Math.round((50 + player.tou) * 1.5 * player.postConsumptionMlt()), true);
+				else EngineCore.HPChange((50 + player.tou)*player.postConsumptionMlt(), true);
 				outputText("Some of your wounds are healed. ");
 			}
 			else
@@ -45,7 +45,7 @@ import classes.PerkLib;
 			
 			if (rand > 90) {
 				outputText("You shudder as a small orgasm passes through you. When you recover you actually feel more aroused.");
-				dynStats("lus", 5, "scale", false);
+				dynStats("lus", Math.round(5*player.postConsumptionMlt()), "scale", false);
 			}
 			
 			return false;

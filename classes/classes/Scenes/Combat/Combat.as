@@ -783,7 +783,7 @@ public class Combat extends BaseContent {
 			if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) flags[kFLAGS.IN_COMBAT_PLAYER_USED_SHARK_BITE] = 0;
 			if (player.hasPerk(PerkLib.ImprovedGrapple)) flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] = 0;
 			if (player.armor == armors.BMARMOR) dynStats("lus", -(Math.round(player.maxLust() * 0.05)));
-			if (player.perkv1(IMutationsLib.HumanDigestiveTractIM) >= 4) dynStats("lus", -(Math.round(player.maxLust() * 0.01)));
+			if (player.perkv1(IMutationsLib.HumanMetabolismIM) >= 1) dynStats("lus", -(Math.round(player.maxLust() * 0.01 * player.perkv1(IMutationsLib.HumanMetabolismIM))));
 			if (player.hasStatusEffect(StatusEffects.TyrantState)) dynStats("lus", (Math.round(player.maxLust() * 0.05)));
 			if (player.hasStatusEffect(StatusEffects.VampThirstStacksHPMana)) player.removeStatusEffect(StatusEffects.VampThirstStacksHPMana);
 			if (player.hasStatusEffect(StatusEffects.TyrantState) && TyrantiaFollower.TyrantiaTrainingSessions >= 30) {
@@ -9681,7 +9681,8 @@ public class Combat extends BaseContent {
 			outputText("<b>The mummies swarm you, punching and kicking you from all sides with unhinged strength. ([font-damage]" + mummyservants + "[/font])</b>\n\n");
         }
         if (player.hasStatusEffect(StatusEffects.BurnDoT)) {
-            player.addStatusValue(StatusEffects.BurnDoT, 1, -1);
+            if (player.perkv1(IMutationsLib.HumanMetabolismIM) >= 2) player.addStatusValue(StatusEffects.BurnDoT, 1, -2);
+            else player.addStatusValue(StatusEffects.BurnDoT, 1, -1);
             if (player.statusEffectv1(StatusEffects.BurnDoT) <= 0 || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 player.removeStatusEffect(StatusEffects.BurnDoT);
                 outputText("<b>You sigh with relief; fire has stopped searing your wounds.</b>\n\n");
@@ -10430,8 +10431,8 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         //Harpy lip gloss
         if (player.hasCock() && player.hasStatusEffect(StatusEffects.Luststick) && (monster.short == "harpy" || monster.short == "Sophie")) {
             //Chance to cleanse!
-            if ((player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) || player.hasPerk(PerkLib.KingOfTheJungle)) {
-                outputText("You manage to cleanse the harpy lip-gloss from your system with your knowledge of medicine!\n\n");
+            if (rand(100) >= purgeFromBody()) {
+                outputText("You manage to cleanse the harpy lip-gloss from your system with your "+(player.perkv1(IMutationsLib.HumanMetabolismIM) >= 1 ? "body's detoxification abilities":"knowledge of medicine")+"!\n\n");
                 player.removeStatusEffect(StatusEffects.Luststick);
                 player.minLustXStat.removeBuff("Luststick");
             } else if (rand(5) == 0) {
@@ -10489,8 +10490,8 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         }
         if (player.hasStatusEffect(StatusEffects.NagaVenom)) {
             //Chance to cleanse!
-            if ((player.hasPerk(PerkLib.Medicine) && rand(100) <= 14)  || player.hasPerk(PerkLib.KingOfTheJungle)) {
-                outputText("Using your knowledge of medicine, you manage to cleanse [themonster] venom from your system.\n\n");
+            if (rand(100) >= purgeFromBody()) {
+                outputText("Using your "+(player.perkv1(IMutationsLib.HumanMetabolismIM) >= 1 ? "body's detoxification abilities":"knowledge of medicine")+", you manage to cleanse [themonster] venom from your system.\n\n");
                 player.removeStatusEffect(StatusEffects.NagaVenom);
             } else if (player.spe > 3) {
                 player.addStatusValue(StatusEffects.NagaVenom, 1, 2);
@@ -10501,8 +10502,8 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         }
         if (player.hasStatusEffect(StatusEffects.MedusaVenom)) {
             //Chance to cleanse!
-            if ((player.hasPerk(PerkLib.Medicine) && rand(100) <= 14)  || player.hasPerk(PerkLib.KingOfTheJungle)) {
-                outputText("Using your knowledge of medicine, you manage to cleanse [themonster] venom from your system.\n\n");
+            if (rand(100) >= purgeFromBody()) {
+                outputText("Using your "+(player.perkv1(IMutationsLib.HumanMetabolismIM) >= 1 ? "body's detoxification abilities":"knowledge of medicine")+", you manage to cleanse [themonster] venom from your system.\n\n");
                 player.statStore.removeBuffs("Poison");
                 player.removeStatusEffect(StatusEffects.MedusaVenom);
             } else if (player.str <= 5 && player.tou <= 5 && player.spe <= 5 && player.inte <= 5) player.takePhysDamage(5);
@@ -10517,8 +10518,9 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         //Temporary heat
         if (player.hasStatusEffect(StatusEffects.TemporaryHeat)) {
             //Chance to cleanse!
-			if ((player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) || player.hasPerk(PerkLib.KingOfTheJungle)) {
-                outputText("With your knowledge of medicine, you manage to cleanse the heat and rut drug from your system.\n\n");
+			if (rand(100) >= purgeFromBody()) {
+                if ((player.hasPerk(PerkLib.Medicine) || player.hasPerk(PerkLib.KingOfTheJungle))) outputText("With your knowledge of medicine, you manage to cleanse the heat and rut drug from your system.\n\n");
+				else outputText("Your body itself managed to cleanse the heat and rut drug from your system.\n\n");
                 player.removeStatusEffect(StatusEffects.TemporaryHeat);
             } else {
                 player.takeLustDamage((player.lib / 12 + 5 + rand(5)) * player.statusEffectv2(StatusEffects.TemporaryHeat), true);
@@ -10536,8 +10538,8 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         //Poison
         if (player.hasStatusEffect(StatusEffects.Poison)) {
             //Chance to cleanse!
-            if ((player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) || player.hasPerk(PerkLib.KingOfTheJungle)) {
-                outputText("You manage to cleanse the poison from your system with your knowledge of medicine!\n\n");
+            if (rand(100) >= purgeFromBody()) {
+                outputText("You manage to cleanse the poison from your system with your "+(player.perkv1(IMutationsLib.HumanMetabolismIM) >= 1 ? "body's detoxification abilities":"knowledge of medicine")+"!\n\n");
                 player.removeStatusEffect(StatusEffects.Poison);
             } else {
                 outputText("The poison continues to work on your body, wracking you with pain!\n\n");
@@ -10552,8 +10554,8 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         }
         // Drider incubus venom
         if (player.hasStatusEffect(StatusEffects.DriderIncubusVenom)) {
-            if ((player.hasPerk(PerkLib.Medicine) && rand(100) <= 41) || player.hasPerk(PerkLib.KingOfTheJungle)) {
-                outputText("You negate the effects of the drider incubus’ venom with your knowledge of medicine!\n\n");
+            if (rand(100) >= purgeFromBody()) {
+                outputText("You negate the effects of the drider incubus’ venom with your "+(player.perkv1(IMutationsLib.HumanMetabolismIM) >= 1 ? "body's detoxification abilities":"knowledge of medicine")+"!\n\n");
                 player.statStore.removeBuffs("Poison");
                 player.removeStatusEffect(StatusEffects.DriderIncubusVenom);
                 CoC.instance.mainView.statsView.showStatUp('str');
@@ -10582,7 +10584,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         }
         //Acid DoT
         if (player.hasStatusEffect(StatusEffects.AcidDoT)) {
-			if (player.perkv1(IMutationsLib.HumanDigestiveTractIM) >= 1) player.addStatusValue(StatusEffects.AcidDoT, 1, -2);
+			if (player.perkv1(IMutationsLib.HumanMetabolismIM) >= 2) player.addStatusValue(StatusEffects.AcidDoT, 1, -2);
             else player.addStatusValue(StatusEffects.AcidDoT, 1, -1);
             //Heal wounds
             if (player.statusEffectv1(StatusEffects.AcidDoT) <= 0 || player.hasPerk(PerkLib.KingOfTheJungle)) {
@@ -10592,7 +10594,8 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         }
         //Frostburn DoT
         if (player.hasStatusEffect(StatusEffects.FrostburnDoT)) {
-            player.addStatusValue(StatusEffects.FrostburnDoT, 1, -1);
+            if (player.perkv1(IMutationsLib.HumanMetabolismIM) >= 2) player.addStatusValue(StatusEffects.FrostburnDoT, 1, -2);
+            else player.addStatusValue(StatusEffects.FrostburnDoT, 1, -1);
             //Heal wounds
             if (player.statusEffectv1(StatusEffects.FrostburnDoT) <= 0 || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 outputText("Frostburn wounds left by [themonster] finally close ups.\n\n");
@@ -11555,6 +11558,15 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 		if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
     }
+	
+	private function purgeFromBody():Number {
+		var purgeSuccess:Number = 100;
+		if (player.hasPerk(PerkLib.Medicine)) purgeSuccess -= 15;
+		if (player.hasPerk(PerkLib.KingOfTheJungle)) purgeSuccess -= 100;
+		if (player.perkv1(IMutationsLib.HumanMetabolismIM) >= 1) purgeSuccess -= (10 * player.perkv1(IMutationsLib.HumanMetabolismIM));
+		if (purgeSuccess < 0) purgeSuccess = 0;
+		return purgeSuccess;
+	}
 	
 	private function repeatArcaneVenom(dmg:Number, subtype:Number, poisonele:Number):void {
 		var randomCritAV:Boolean = false;

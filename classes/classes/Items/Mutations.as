@@ -156,8 +156,8 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         clearOutput();
         outputText("As you eat the soup you shiver as your bodily temperature drop. Not only that but the last thing on your mind right now is sex as you feel yourself freezing from the inside. The cold crisis eventually passes but you remain relatively less libidinous afterward.");
-        if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) dynStats("lib", -4, "lus", -20);
-        else dynStats("lus", -10, "scale", false);
+        if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) dynStats("lib", -4, "lus", -(20*player.postConsumptionMlt()));
+        else dynStats("lus", -(10*player.postConsumptionMlt()), "scale", false);
         player.addCurse("lib", 2, 1);
         player.refillHunger(15);
     }
@@ -235,8 +235,8 @@ public final class Mutations extends MutationsHelper {
     public function smallangrypill(player:Player):void {
         clearOutput();
         outputText("You pop the small pill into your mouth and swallow. You feel bit more angry now. So would you kindly go and kill something now?[pg](Gained wrath: " + ((player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) ? "40" : "20") + ")");
-        if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) player.wrath += 40;
-        else player.wrath += 20;
+        if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) player.wrath += (40*player.postConsumptionMlt());
+        else player.wrath += (20*player.postConsumptionMlt());
         if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
         statScreenRefresh();
     }
@@ -244,8 +244,8 @@ public final class Mutations extends MutationsHelper {
     public function mediumangrypill(player:Player):void {
         clearOutput();
         outputText("You pop the medium pill into your mouth and swallow. You feel bit more angry now. So would you kindly go and kill something now?[pg](Gained wrath: " + ((player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) ? "120" : "60") + ")");
-        if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) player.wrath += 120;
-        else player.wrath += 60;
+        if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) player.wrath += (120*player.postConsumptionMlt());
+        else player.wrath += (60*player.postConsumptionMlt());
         if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
         statScreenRefresh();
     }
@@ -253,8 +253,8 @@ public final class Mutations extends MutationsHelper {
     public function bigangrypill(player:Player):void {
         clearOutput();
         outputText("You pop the big pill into your mouth and swallow. You feel bit more angry now. So would you kindly go and kill something now?[pg](Gained wrath: " + ((player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) ? "360" : "180") + ")");
-        if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) player.wrath += 360;
-        else player.wrath += 180;
+        if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) player.wrath += (360*player.postConsumptionMlt());
+        else player.wrath += (180*player.postConsumptionMlt());
         if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
         statScreenRefresh();
     }
@@ -264,9 +264,9 @@ public final class Mutations extends MutationsHelper {
         var rand:int = Math.random() * 100;
         outputText("You pop the medium pill into your mouth and swallow. ");
         if (player.HP < player.maxOverHP()) {
-            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) HPChange(Math.round((50 + player.tou) * 6), true);
-            else if ((player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 2) || player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) HPChange(Math.round((50 + player.tou) * 4.5), true);
-            else HPChange((50 + player.tou) * 3, true);
+            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) HPChange(Math.round((50 + player.tou) * 6 * player.postConsumptionMlt()), true);
+            else if ((player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 2) || player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) HPChange(Math.round((50 + player.tou) * 4.5 * player.postConsumptionMlt()), true);
+            else HPChange(((50 + player.tou) * 3 * player.postConsumptionMlt()), true);
             outputText("Some of your wounds are healed. ");
         } else outputText("You feel an odd sensation. ");
         if (rand < 70) {
@@ -279,7 +279,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (rand > 90) {
             outputText("You shudder as a small orgasm passes through you. When you recover you actually feel more aroused.");
-            dynStats("lus", 15, "scale", false);
+            dynStats("lus", (15*player.postConsumptionMlt()), "scale", false);
         }
         statScreenRefresh();
     }
@@ -287,9 +287,9 @@ public final class Mutations extends MutationsHelper {
         var rand:int = Math.random() * 100;
         outputText("You pop the big pill into your mouth and swallow. ");
         if (player.HP < player.maxOverHP()) {
-            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) HPChange(Math.round((50 + player.tou) * 18), true);
-            else if ((player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 2) || player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) HPChange(Math.round((50 + player.tou) * 13.5), true);
-            else HPChange((50 + player.tou) * 9, true);
+            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) HPChange(Math.round((50 + player.tou) * 18 * player.postConsumptionMlt()), true);
+            else if ((player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 2) || player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) HPChange(Math.round((50 + player.tou) * 13.5 * player.postConsumptionMlt()), true);
+            else HPChange(((50 + player.tou) * 9 * player.postConsumptionMlt()), true);
             outputText("Some of your wounds are healed. ");
         } else outputText("You feel an odd sensation. ");
         if (rand < 70) {
@@ -302,7 +302,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (rand > 90) {
             outputText("You shudder as a small orgasm passes through you. When you recover you actually feel more aroused.");
-            dynStats("lus", 45, "scale", false);
+            dynStats("lus", (45*player.postConsumptionMlt()), "scale", false);
         }
         statScreenRefresh();
     }
@@ -312,7 +312,7 @@ public final class Mutations extends MutationsHelper {
         outputText("You pull the cork off the gift from the mysterious stranger.  The scent of alluring mint fills your nose once again.  You bring the head of the bottle to your lips and tip it back, the creamy white fluid hits your tongue and slips down your throat.  The liquid is surprisingly refreshing, the creamy mint flavor clings to your tongue and mouth, and makes your breath feel cool as you exhale over your lips.  You can feel the liquid drip down to your stomach and fill you with a pleasant warmth and holiday cheer.[pg]");
         //Recovers health and fatigue, adds five to max health, and one to libido.*/
         HPChange(EngineCore.maxHP(), true);
-        fatigue(-100);
+        fatigue(-Math.round(100*player.postConsumptionMlt()));
         statScreenRefresh();
     }
 
@@ -935,7 +935,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.hasStatusEffect(StatusEffects.KnowsCleave)) {
             outputText("When you open the tome, it turns out you already know this special.  Having a hunch you read whole tome and when it disappears into thin air you feel it does restored some of your fatigue.");
-            EngineCore.changeFatigue(-25);
+            EngineCore.changeFatigue(-Math.round(25*player.postConsumptionMlt()));
         }
     }
 
@@ -1212,7 +1212,7 @@ public final class Mutations extends MutationsHelper {
         //(Healing – if hurt and uber-addicted (hasperk))
         if (player.HP < player.maxOverHP() && player.hasPerk(PerkLib.MinotaurCumAddict)) {
             outputText("[pg]The fire of your arousal consumes your body, leaving vitality in its wake.  You feel much better!");
-            HPChange(int(player.maxHP() / 4), false);
+            HPChange(int((player.maxHP() / 4)*player.postConsumptionMlt()), false);
         }
         //Uber-addicted status!
         if (player.hasPerk(PerkLib.MinotaurCumAddict) && flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] <= 0 && !purified) {
@@ -1650,8 +1650,8 @@ public final class Mutations extends MutationsHelper {
         //If no changes yay
         if (changes == 0) {
             outputText("[pg]Inhuman vitality spreads through your body, invigorating you!\n");
-            HPChange(20, true);
-            dynStats("lus", 3, "scale", false);
+            HPChange(Math.round(20*player.postConsumptionMlt()), true);
+            dynStats("lus", Math.round(3*player.postConsumptionMlt()), "scale", false);
         }
         player.refillHunger(15);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -1973,8 +1973,8 @@ public final class Mutations extends MutationsHelper {
         //If no changes yay
         if (changes == 0) {
             outputText("[pg]Inhuman vitality spreads through your body, invigorating you!\n");
-            HPChange(20, true);
-            dynStats("lus", 3, "scale", false);
+            HPChange(Math.round(20*player.postConsumptionMlt()), true);
+            dynStats("lus", Math.round(3*player.postConsumptionMlt()), "scale", false);
         }
         player.refillHunger(15);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -2501,8 +2501,8 @@ public final class Mutations extends MutationsHelper {
         //If no changes yay
         if (changes == 0) {
             outputText("[pg]Inhuman vitality spreads through your body, invigorating you!\n");
-            HPChange(20, true);
-            dynStats("lus", 3, "scale", false);
+            HPChange(Math.round(20*player.postConsumptionMlt()), true);
+            dynStats("lus", Math.round(3*player.postConsumptionMlt()), "scale", false);
         }
         player.refillHunger(15);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -2602,8 +2602,8 @@ public final class Mutations extends MutationsHelper {
 				changes++;
             }
             outputText("[pg]Inhuman vitality spreads through your body, invigorating you!\n");
-            HPChange(30 + player.tou / 3, true);
-            dynStats("lus", 3, "cor", 1);
+            HPChange(Math.round((30 + player.tou / 3)*player.postConsumptionMlt()), true);
+            dynStats("lus", Math.round(3*player.postConsumptionMlt()), "cor", 1);
             //Shrinkage!
             if (rand(2) == 0 && player.tallness > 42 && changes < changeLimit) {
                 outputText("[pg]Your skin crawls, making you close your eyes and shiver.  When you open them again the world seems... different.  After a bit of investigation, you realize you've become shorter!\n");
@@ -2633,8 +2633,8 @@ public final class Mutations extends MutationsHelper {
         } else {
             outputText("The food tastes... corrupt, for lack of a better word.\n");
             player.refillHunger(20);
-            HPChange(20 + player.tou / 3, true);
-            dynStats("lus", 3, "cor", 1);
+            HPChange(Math.round((20 + player.tou / 3)*player.postConsumptionMlt()), true);
+            dynStats("lus", Math.round(3*player.postConsumptionMlt()), "cor", 1);
         }
         //Red skin!
         if (rand(30) == 0 && changes < changeLimit && player.skinColor != "red") {
@@ -3647,9 +3647,9 @@ public final class Mutations extends MutationsHelper {
             outputText("You no longer feel the symptoms of withdrawal.[pg]");
         }
         //Heals the player 70-100 health
-        HPChange((70 + rand(31) * (1 + player.newGamePlusMod())), true);
+        HPChange((70 + rand(31) * (1 + player.newGamePlusMod()) * player.postConsumptionMlt()), true);
         //Restores a portion of fatigue (once implemented)
-        EngineCore.changeFatigue(-25);
+        EngineCore.changeFatigue(-Math.round(25*player.postConsumptionMlt()));
         //If the player is addicted, this item negates the withdrawal effects for a few hours (suggest 6), there will need to be a check here to make sure the withdrawal effect doesn't reactivate while the player is under the effect of 'Marble's Milk'.
         if (player.hasStatusEffect(StatusEffects.BottledMilk)) {
             player.addStatusValue(StatusEffects.BottledMilk, 1, (6 + rand(6)));
@@ -4019,7 +4019,7 @@ public final class Mutations extends MutationsHelper {
         if (fuck) outputText("red");
         else outputText("pink");
         outputText(" potion, and its unnatural warmth immediately flows to your groin.");
-        dynStats("lus", (30 + rand(player.lib / 10)), "scale", false);
+        dynStats("lus", Math.round((30 + rand(player.lib / 10))*player.postConsumptionMlt()), "scale", false);
         //Heat/Rut for those that can have them if "fuck draft"
         if (fuck) {
             var choices:Array = [];
@@ -4046,7 +4046,7 @@ public final class Mutations extends MutationsHelper {
                     break;
                 default:
                     outputText("\n\nTrying to hold back your arousal, you don't notice anything else... Perhaps the fluid hasn't affected you too much this time. But it feels even better, isn't it?"); //MOAR
-                    dynStats("lus", 30, "scale", true); //MOAR
+                    dynStats("lus", Math.round(30*player.postConsumptionMlt()), "scale", true); //MOAR
                     break;
             }
         }
@@ -4115,7 +4115,7 @@ public final class Mutations extends MutationsHelper {
         outputText("Whoa it was definitely tasting just as bad as it smelled but hey it's not like your drinking this disgusting concoction for fun right? Or maybe you are?");
 		DrunkenPowerEmpowerIfPossible();
 		AelfwineEmpowerIfPossible();
-        dynStats("lus", 15, "scale", false);
+        dynStats("lus", Math.round(15*player.postConsumptionMlt()), "scale", false);
         dynStats("cor", 2);
         //Stronger
         if (player.str > 50 && rand(3) == 0 && changes < changeLimit) {
@@ -4331,7 +4331,7 @@ public final class Mutations extends MutationsHelper {
         //STAT CHANGES
 		DrunkenPowerEmpowerIfPossible();
 		AelfwineEmpowerIfPossible();
-        dynStats("lus", 15, "scale", false);
+        dynStats("lus", Math.round(15*player.postConsumptionMlt()), "scale", false);
         //Stronger
         if (player.str > 50 && rand(3) == 0 && changes < changeLimit) {
             player.addCurse("str", 1, 1);
@@ -6186,8 +6186,8 @@ public final class Mutations extends MutationsHelper {
         //FAILSAFE CHANGE
         if (changes == 0) {
             outputText("[pg]Inhuman vitality spreads through your body, invigorating you!\n");
-            HPChange(50, true);
-            dynStats("lus", 3, "scale", false);
+            HPChange(50*player.postConsumptionMlt(), true);
+            dynStats("lus", Math.round(3*player.postConsumptionMlt()), "scale", false);
         }
         player.refillHunger(20);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -6448,8 +6448,8 @@ public final class Mutations extends MutationsHelper {
         //FAILSAFE CHANGE
         if (changes == 0) {
             outputText("[pg]Inhuman vitality spreads through your body, invigorating you!\n");
-            HPChange(50, true);
-            dynStats("lus", 3, "scale", false);
+            HPChange(50*player.postConsumptionMlt(), true);
+            dynStats("lus", Math.round(3*player.postConsumptionMlt()), "scale", false);
         }
         player.refillHunger(20);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -6733,8 +6733,8 @@ public final class Mutations extends MutationsHelper {
         //FAILSAFE CHANGE
         if (changes == 0) {
             outputText("[pg]Inhuman vitality spreads through your body, invigorating you!\n");
-            HPChange(50, true);
-            dynStats("lus", 3, "scale", false);
+            HPChange(50*player.postConsumptionMlt(), true);
+            dynStats("lus", Math.round(3*player.postConsumptionMlt()), "scale", false);
         }
         player.refillHunger(20);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -6993,8 +6993,8 @@ public final class Mutations extends MutationsHelper {
         //FAILSAFE CHANGE
         if (changes == 0) {
             outputText("[pg]Inhuman vitality spreads through your body, invigorating you!\n");
-            HPChange(50, true);
-            dynStats("lus", 3, "scale", false);
+            HPChange(50*player.postConsumptionMlt(), true);
+            dynStats("lus", Math.round(3*player.postConsumptionMlt()), "scale", false);
         }
         player.refillHunger(20);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -7250,8 +7250,8 @@ public final class Mutations extends MutationsHelper {
         //FAILSAFE CHANGE
         if (changes == 0) {
             outputText("[pg]Inhuman vitality spreads through your body, invigorating you!\n");
-            HPChange(50, true);
-            dynStats("lus", 3, "scale", false);
+            HPChange(50*player.postConsumptionMlt(), true);
+            dynStats("lus", Math.round(3*player.postConsumptionMlt()), "scale", false);
         }
         player.refillHunger(20);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -7442,8 +7442,8 @@ public final class Mutations extends MutationsHelper {
         //FAILSAFE CHANGE
         if (changes == 0) {
             outputText("[pg]Inhuman vitality spreads through your body, invigorating you!\n");
-            HPChange(100, true);
-            dynStats("lus", 5, "scale", false);
+            HPChange(100*player.postConsumptionMlt(), true);
+            dynStats("lus", Math.round(5*player.postConsumptionMlt()), "scale", false);
         }
         player.refillHunger(10);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -7640,8 +7640,8 @@ public final class Mutations extends MutationsHelper {
         //FAILSAFE CHANGE
         if (changes == 0) {
             outputText("[pg]Inhuman vitality spreads through your body, invigorating you!\n");
-            HPChange(100, true);
-            dynStats("lus", 5, "scale", false);
+            HPChange((100*player.postConsumptionMlt()), true);
+            dynStats("lus", Math.round(5*player.postConsumptionMlt()), "scale", false);
         }
         player.refillHunger(10);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -7917,8 +7917,8 @@ public final class Mutations extends MutationsHelper {
         //FAILSAFE CHANGE
         if (changes == 0) {
             outputText("[pg]Inhuman vitality spreads through your body, invigorating you!\n");
-            HPChange(100, true);
-            dynStats("lus", 5, "scale", false);
+            HPChange((100*player.postConsumptionMlt()), true);
+            dynStats("lus", Math.round(5*player.postConsumptionMlt()), "scale", false);
         }
         player.refillHunger(20);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -9000,7 +9000,7 @@ public final class Mutations extends MutationsHelper {
 
         if (changes == 0) {
             outputText("[pg]It did not seem to have any effects, but you do feel better rested.");
-            fatigue(-40);
+            fatigue(-Math.round(40*player.postConsumptionMlt()));
         }
         player.refillHunger(20);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -9223,7 +9223,7 @@ public final class Mutations extends MutationsHelper {
 
         if (changes == 0) {
             outputText("[pg]The sweet silk energizes you, leaving you feeling refreshed.");
-            fatigue(-33);
+            fatigue(-Math.round(33*player.postConsumptionMlt()));
         }
         player.refillHunger(5);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -9292,8 +9292,8 @@ public final class Mutations extends MutationsHelper {
         //HP restore for bros!
         if (player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) {
             outputText("You crack open the can and guzzle it in a hurry.  Goddamn, this shit is the best.  As you crush the can against your forehead, you wonder if you can find a six-pack of it somewhere?[pg]");
-            fatigue(-33);
-            HPChange(100, true);
+            fatigue(-Math.round(33*player.postConsumptionMlt()));
+            HPChange(100*player.postConsumptionMlt(), true);
             player.refillHunger(30);
             return;
         }
@@ -9373,7 +9373,7 @@ public final class Mutations extends MutationsHelper {
         }
 		DrunkenPowerEmpowerIfPossible();
 		AelfwineEmpowerIfPossible();
-        dynStats("str", 35, "tou", 35, "lib", 5, "lus", 40);
+        dynStats("str", 35, "tou", 35, "lib", 5, "lus", Math.round(40*player.postConsumptionMlt()));
         player.addCurse("int", 1, 1);
         player.refillHunger(30);
     }
@@ -9550,7 +9550,7 @@ public final class Mutations extends MutationsHelper {
         //Effect Script 8: 100% chance of healing
         if (changes == 0) {
             outputText("You feel strangely refreshed, as if you just gobbled down a bottle of sunshine.  A smile graces your lips as vitality fills you.  ");
-            HPChange(player.level * 5 + 10, true);
+            HPChange(((player.level * 5 + 10)*player.postConsumptionMlt()), true);
             changes++;
         }
         //Incorporeality Perk Text:  You seem to have inherited some of the spiritual powers of the residents of the afterlife!  While you wouldn't consider doing it for long due to its instability, you can temporarily become incorporeal for the sake of taking over enemies and giving them a taste of ghostly libido.
@@ -10615,8 +10615,8 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         clearOutput();
         outputText("You swallow down the bottle of Isabella's milk.");
-        if (player.fatigue > 0) outputText("  You feel much less tired! (-33 fatigue)");
-        fatigue(-33);
+        if (player.fatigue > 0) outputText("  You feel much less tired! (-"+(Math.round(33*player.postConsumptionMlt()))+" fatigue)");
+        fatigue(-Math.round(33*player.postConsumptionMlt()));
 		if (player.perkv1(IMutationsLib.DisplacerMetabolismIM) >= 1) player.displacerFeedFromBottle();
         player.refillHunger(20);
     }
@@ -10625,11 +10625,11 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         clearOutput();
         outputText("You swallow down the bottle of Excellia's milk.");
-        if (player.fatigue > 0) outputText("  You feel much less tired! (-50 fatigue)");
+        if (player.fatigue > 0) outputText("  You feel much less tired! (-"+(Math.round(50*player.postConsumptionMlt()))+" fatigue)");
         outputText("[pg]Inhuman vitality spreads through your body, invigorating you! ");
-        HPChange((((player.level * 5) + 10) * (1 + player.newGamePlusMod())), true);
-        dynStats("lus", 5, "scale", false);
-        fatigue(-50);
+        HPChange((((player.level * 5) + 10) * (1 + player.newGamePlusMod()) * player.postConsumptionMlt()), true);
+        dynStats("lus", Math.round(5*player.postConsumptionMlt()), "scale", false);
+        fatigue(-Math.round(50*player.postConsumptionMlt()));
 		if (player.perkv1(IMutationsLib.DisplacerMetabolismIM) >= 1) player.displacerFeedFromBottle();
         player.refillHunger(25);
     }
@@ -10832,7 +10832,7 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]Suddenly, you are there, at a demonic camp, and you spy the forms of an incubus and a succubus, their bodies locked together at the hips and slowly undulating, even in sleep.  You carefully prance around their slumbering forms and find their supplies.  With the utmost care, you put your razor-sharp teeth to work, and slowly, meticulously rip through their packs - not with the intention of theft, but with mischief.  You make sure to leave small holes in the bottom of each, and after making sure your stealth remains unbroken, you urinate on their hooves.");
             outputText("[pg]They don't even notice, so lost in the subconscious copulation as they are.  Satisfied at your petty tricks, you scurry off into the night, a red blur amidst the foliage.");
             changes++;
-            fatigue(-Math.round(player.fatigue * 0.05));
+            fatigue(-Math.round(player.fatigue * 0.05 * player.postConsumptionMlt()));
         }
 
         //fox cocks!
@@ -10993,7 +10993,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (changes == 0) {
             outputText("[pg]Well that didn't do much, but you do feel a little refreshed!");
-            fatigue(-50);
+            fatigue(-Math.round(50*player.postConsumptionMlt()));
         }
         player.refillHunger(15);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -11032,7 +11032,7 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]Suddenly, you are there, at a demonic camp, and you spy the forms of an incubus and a succubus, their bodies locked together at the hips and slowly undulating, even in sleep.  You carefully prance around their slumbering forms and find their supplies.  With the utmost care, you put your razor-sharp teeth to work, and slowly, meticulously rip through their packs - not with the intention of theft, but with mischief.  You make sure to leave small holes in the bottom of each, and after making sure your stealth remains unbroken, you urinate on their hooves.");
             outputText("[pg]They don't even notice, so lost in the subconscious copulation as they are.  Satisfied at your petty tricks, you scurry off into the night, a red blur amidst the foliage.");
             changes++;
-            fatigue(-Math.round(player.fatigue * 0.05));
+            fatigue(-Math.round(player.fatigue * 0.05 * player.postConsumptionMlt()));
         }
 		if (player.blockingBodyTransformations()) changeLimit = 0;
         if (!InCollection(player.hairColor, FoxRace.FoxHairColors) && changes < changeLimit && rand(3) == 0) {
@@ -11188,7 +11188,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (changes == 0) {
             outputText("[pg]Well that didn't do much, but you do feel a little refreshed!");
-            fatigue(-50);
+            fatigue(-Math.round(50*player.postConsumptionMlt()));
         }
         player.refillHunger(15);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -11426,8 +11426,8 @@ public final class Mutations extends MutationsHelper {
         //FAILSAFE CHANGE
         if (changes == 0) {
             outputText("[pg]Inhuman vitality spreads through your body, invigorating you!\n");
-            HPChange(100, true);
-            dynStats("lus", 5, "scale", false);
+            HPChange((100*player.postConsumptionMlt()), true);
+            dynStats("lus", Math.round(5*player.postConsumptionMlt()), "scale", false);
         }
         player.refillHunger(10);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -11444,7 +11444,7 @@ public final class Mutations extends MutationsHelper {
         MutagenBonus("lib", 2);
         //Health/HP(Large increase; always occurs):
         outputText("[pg]You feel suddenly invigorated by the potent beverage, like you could take on a whole horde of barbarians or giants and come out victorious! ");
-        HPChange(Math.round(player.maxHP() * .25), true);
+        HPChange(Math.round(player.maxHP() * .25 * player.postConsumptionMlt()), true);
         if (rand(3) == 0) {
             outputText("[pg]The alcohol fills your limbs with vigor, making you feel like you could take on the world with just your fists!");
             if (silly()) outputText("  Maybe you should run around shirtless, drink, and fight!  Saxton Hale would be proud.");
@@ -11478,7 +11478,7 @@ public final class Mutations extends MutationsHelper {
         //Health/HP(Large increase; always occurs):
         outputText("[pg]You feel suddenly invigorated by the potent beverage, like you could take on a whole horde of barbarians or giants and come out victorious!");
         HPChange(Math.round(player.maxOverHP()), false);
-        dynStats("lus=", 50 + rand(16));
+        dynStats("lus=", Math.round((50 + rand(16))*player.postConsumptionMlt()));
         if (rand(3) == 0) {
             outputText("[pg]The alcohol fills your limbs with vigor, making you feel like you could take on the world with just your fists!");
             if (silly()) outputText("  Maybe you should run around shirtless, drink, and fight!  Saxton Hale would be proud.");
@@ -11506,7 +11506,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("You unwrap the food before eating the piece of meat Zenji gave to you. The meat is well done, presumably to make sure that it’s not contaminated, despite this it’s not as chewy as you thought it would be. It has a pleasant savory taste and you finish the delectable morsel rather quickly.  ");
 		//Health/HP(Large increase; always occurs):
-        HPChange(Math.round(player.maxHP() * .25), true);
+        HPChange(Math.round(player.maxHP() * (.25*player.postConsumptionMlt())), true);
         player.refillHunger(45);
     }
 
@@ -11515,8 +11515,8 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("You gulp the bottle's contents, and its sweet taste immediately invigorates you, making you feel calm and concentrated");
         //-60 fatigue, -2 libido, -20 lust]
-        fatigue(-(Math.round(player.maxOverFatigue() * 0.05) + 180));
-        dynStats("lus", -(Math.round(player.maxLust() * 0.05) + 90), "cor", -2);
+        fatigue(-(Math.round(((player.maxOverFatigue() * 0.05) + 180)*player.postConsumptionMlt())));
+        dynStats("lus", -(Math.round(((player.maxLust() * 0.05) + 90)*player.postConsumptionMlt())), "cor", -2);
         player.addCurse("lib", 2, 1);
 		if (player.perkv1(IMutationsLib.DisplacerMetabolismIM) >= 1) player.displacerFeedFromBottle();
         player.refillHunger(40);
@@ -11527,10 +11527,10 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("The water is cool and sweet to the taste, and every swallow makes you feel calmer, cleaner, and refreshed.  You drink until your thirst is quenched, feeling purer in both mind and body. ");
         //-30 fatigue, -2 libido, -10 lust]
-        fatigue(-(Math.round(player.maxOverFatigue() * 0.02) + 40));
-        dynStats("lus", -(Math.round(player.maxLust() * 0.06) + 100), "cor", (-4 - rand(3)));
+        fatigue(-(Math.round(((player.maxOverFatigue() * 0.02) + 40)*player.postConsumptionMlt())));
+        dynStats("lus", -(Math.round(((player.maxLust() * 0.06) + 100)*player.postConsumptionMlt())), "cor", (-4 - rand(3)));
         player.addCurse("lib", 2, 1);
-        HPChange(100 + (10 * player.level) + rand(10 * player.level), true);
+        HPChange(((100 + (10 * player.level) + rand(10 * player.level))*player.postConsumptionMlt()), true);
         player.refillHunger(30);
         if (player.cor > 50) dynStats("cor", -2);
         if (player.cor > 75) dynStats("cor", -2);
@@ -11572,7 +11572,7 @@ public final class Mutations extends MutationsHelper {
             }
             outputText("[pg]A sudden surge of energy fills your being and you feel like you could blast anything to atoms with a single breath, like the mighty dragons of legends.");
         }
-        fatigue(-20);
+        fatigue(-Math.round(20*player.postConsumptionMlt()));
         player.refillHunger(50);
     }
 
@@ -11887,7 +11887,7 @@ public final class Mutations extends MutationsHelper {
         if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) dynStats("cor", 0.5);
         if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) dynStats("cor", -0.1);
         dynStats("cor", 0.1);
-        HPChange(Math.round(player.maxHP() * .25), true);
+        HPChange(Math.round(player.maxHP() * .25 * player.postConsumptionMlt()), true);
         player.refillHunger(30);
     }
 
@@ -11895,10 +11895,10 @@ public final class Mutations extends MutationsHelper {
     public function behemothCum(player:Player):void {
         clearOutput();
         outputText("You uncork the bottle and drink the behemoth cum; it tastes great and by the time you've finished drinking, you feel a bit stronger. ");
-        dynStats("lus", 5 + (player.cor / 5), "scale", false);
+        dynStats("lus", Math.round((5 + (player.cor / 5))*player.postConsumptionMlt()), "scale", false);
         MutagenBonus("str", 1);
         MutagenBonus("tou", 1);
-        HPChange(Math.round(player.maxHP() * .25), true);
+        HPChange(Math.round(player.maxHP() * .25 * player.postConsumptionMlt()), true);
         player.slimeFeed();
         player.refillHunger(25);
     }
@@ -11907,9 +11907,9 @@ public final class Mutations extends MutationsHelper {
     public function urtaCum(player:Player):void {
         clearOutput();
         outputText("You uncork the bottle and drink the vulpine cum; it tastes great. Urta definitely produces good-tasting cum!");
-        dynStats("lus", 5 + (player.cor / 5), "scale", false);
+        dynStats("lus", Math.round((5 + (player.cor / 5))*player.postConsumptionMlt()), "scale", false);
         player.addCurse("sen", 1, 1);
-        HPChange(Math.round(player.maxHP() * .25), true);
+        HPChange(Math.round(player.maxHP() * .25 * player.postConsumptionMlt()), true);
         player.slimeFeed();
         player.refillHunger(25);
     }
@@ -11924,7 +11924,7 @@ public final class Mutations extends MutationsHelper {
             else outputText("You produce the fresh fish from your bag. Instead of eating slowly it and savor the taste as you normally would, you take a large bite out of it.  In no time your salty meal is gone, your stomach giving an appreciative gurgle.  ");
         }
         //Increase HP by quite a bit!)
-        HPChange(Math.round(player.maxHP() * .2), true);
+        HPChange(Math.round(player.maxHP() * .2 * player.postConsumptionMlt()), true);
         player.refillHunger(30);
     }
 
@@ -12183,8 +12183,8 @@ public final class Mutations extends MutationsHelper {
     public function purityPeach(player:Player):void {
         clearOutput();
         outputText("You bite into the sweet, juicy peach, feeling a sensation of energy sweeping through your limbs and your mind.  You feel revitalized, refreshed, and somehow cleansed.  ");
-        fatigue(-(Math.round(player.maxOverFatigue() * 0.01)+10));
-        HPChange(Math.round(player.maxHP() * 0.20), true);
+        fatigue(-(Math.round(((player.maxOverFatigue() * 0.01)+10)*player.postConsumptionMlt())));
+        HPChange(Math.round(player.maxHP() * 0.2 * player.postConsumptionMlt()), true);
         player.refillHunger(20);
     }
 
@@ -12353,12 +12353,12 @@ public final class Mutations extends MutationsHelper {
         //fatigue damage (only if face change was not triggered)
         else if (rand(2) == 0 && changes < changeLimit && (player.faceType != Face.RACCOON_MASK && player.faceType != Face.RACCOON)) {
             outputText("[pg]You suddenly feel tired and your eyelids are quite heavy.  Checking your reflection, you can see small dark rings have begun to form under your eyes.");
-            fatigue(10);
+            fatigue(Math.round(10*player.postConsumptionMlt()));
             changes++;
         }
         if (changes == 0) {
             outputText("[pg]Yawning, you figure you could really use a nap.");
-            fatigue(5);
+            fatigue(Math.round(5*player.postConsumptionMlt()));
         }
         player.refillHunger(30);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -12882,7 +12882,7 @@ public final class Mutations extends MutationsHelper {
         if (changes == 0) {
             outputText("[pg]Your eyes widen.  With the consumption of the fruit, you feel much more energetic.  You’re wide awake now!");
             changes++;
-            fatigue(-10);
+            fatigue(-(10*player.postConsumptionMlt()));
         }
         player.refillHunger(20);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -15500,7 +15500,7 @@ public final class Mutations extends MutationsHelper {
 
     public function frothyBeer(player:Player):void {
         outputText("Feeling parched, you twist the metal cap from the clear green bottle and chug it down. ");
-        dynStats("lus", 15, "scale", false);
+        dynStats("lus", Math.round(15*player.postConsumptionMlt()), "scale", false);
         player.refillHunger(10, false);
         if (!player.hasStatusEffect(StatusEffects.Drunk)) {
             player.createStatusEffect(StatusEffects.Drunk, 2, 1, 1, 0);
@@ -15882,7 +15882,7 @@ public final class Mutations extends MutationsHelper {
         //clear screen
         clearOutput();
         outputText("Sometimes you question your choices in life. Right now, for instance, your choice is to drink up the saliva of some fiery snail, thing. The first thing of note to happen is that your body begins to heat up. Whatever this thing is doing to you, it's clearly raising your arousal.");
-        dynStats("lus", 10, "scale", false);
+        dynStats("lus", Math.round(10*player.postConsumptionMlt()), "scale", false);
         //Speed down
 
         //Toughness up
@@ -17217,8 +17217,8 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("You eat the trail mix. You got energy boost from it!");
         player.refillHunger(30);
-        fatigue(-20);
-        HPChange(Math.round(player.maxHP() * 0.1), true);
+        fatigue(-(20*player.postConsumptionMlt()));
+        HPChange(Math.round(player.maxHP() * 0.1 * player.postConsumptionMlt()), true);
     }
 
     public function stomiidaeFillet(player:Player):void {
@@ -17249,7 +17249,7 @@ public final class Mutations extends MutationsHelper {
 		else {
 			outputText("Quickly scarfing down the metal, you find it has a pleasant, sweet flavor that invigorates your body. You feel like not even a building falling on you would scratch your armor.");
 			player.refillHunger(80);
-			HPChange(Math.round(player.maxHP() * 0.2), true);
+			HPChange(Math.round(player.maxHP() * 0.2 * player.postConsumptionMlt()), true);
 			if (player.buff("SoftIronIgnotPhysicalDefenseBuff").isPresent()) player.buff("SoftIronIgnotPhysicalDefenseBuff").remove();
 			player.buff("SoftIronIgnotPhysicalDefenseBuff").forHours(24);
 		}
@@ -17265,7 +17265,7 @@ public final class Mutations extends MutationsHelper {
 		else {
 			outputText("You take several bites out of the bar before it’s completely gone, a soothing cold feeling lingers in your mouth, and throat before it slowly spreads to the rest of your body. It could just be a trick of the light, but your natural armor looks shinier than ever.");
 			player.refillHunger(100);
-			HPChange(Math.round(player.maxHP() * 0.4), true);
+			HPChange(Math.round(player.maxHP() * 0.4 * player.postConsumptionMlt()), true);
 			if (player.buff("LightBronzeBarMagicDefenseAndPoisonResistanceBuff").isPresent()) player.buff("LightBronzeBarMagicDefenseAndPoisonResistanceBuff").remove();
 			player.buff("LightBronzeBarMagicDefenseAndPoisonResistanceBuff").forHours(24);
 		}
@@ -17281,8 +17281,8 @@ public final class Mutations extends MutationsHelper {
 		else {
 			outputText("You take a small bite and discover it’s quite bitter at first, but it’s following aftertaste is a blast of flavor that fills your body and mind with heavenly bliss. It could just be a trick of the light, but your natural armor looks darker with a blinding gloss.");
 			player.refillHunger(120);
-			HPChange(Math.round(player.maxHP() * 0.6), true);
-			dynStats("lus", -Math.round(player.maxLust() * 0.6));
+			HPChange(Math.round(player.maxHP() * 0.6 * player.postConsumptionMlt()), true);
+			dynStats("lus", -Math.round(player.maxLust() * 0.6 * player.postConsumptionMlt()));
 			if (player.buff("EbonbloomAlloyIngotPhysicalAndMagicDefenseBuff").isPresent()) player.buff("EbonbloomAlloyIngotPhysicalAndMagicDefenseBuff").remove();
 			player.buff("EbonbloomAlloyIngotPhysicalAndMagicDefenseBuff").forHours(24);
 		}
@@ -17308,7 +17308,7 @@ public final class Mutations extends MutationsHelper {
         var power:Number = 1;
         power += (player.maxHP()*0.25)+(power*0.01*player.maxHP());
         if (player.hasPerk(PerkLib.NaturalHerbalism)) power *= 2;
-        HPChange(power,false);
+        HPChange(Math.round(power*player.postConsumptionMlt()),false);
         player.refillHunger(15);
         var HE:Number = 5 + player.level;
 		HE *= player.HerbalismMulti();
@@ -17318,7 +17318,7 @@ public final class Mutations extends MutationsHelper {
     public function MoonGrass(player:Player):void {
         clearOutput();
         var power:Number = 20;
-        fatigue(-power);
+        fatigue(-Math.round(power*player.postConsumptionMlt()));
         outputText("You eat up the grass, feeling rejuvenated with newfound magical energy and stamina.");
         player.refillHunger(15);
         var HE:Number = 5 + player.level;
@@ -17367,7 +17367,7 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         outputText("You drink the nectar and almost right away regret it as liquid lust rushes through you.");
         player.refillHunger(15);
-        dynStats("lus", (30 + rand(player.lib / 10)), "scale", false);
+        dynStats("lus", Math.round((30 + rand(player.lib / 10))*player.postConsumptionMlt()), "scale", false);
         //ORGAZMO
         if (player.lust >= player.maxOverLust() && !CoC.instance.inCombat) {
             outputText("[pg]The arousal from the nectar overwhelms your senses and causes you to spontaneously orgasm.");
