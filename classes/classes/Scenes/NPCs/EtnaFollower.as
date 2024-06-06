@@ -192,13 +192,18 @@ public function etnaRapesPlayer2():void
 			outputText(" simply does not seem to inflate. Considering the fact she can rape an entire party of minotaurs dry you imagine she could drink a pool worth of it and still be thirsty! Though the happy expression on her face tells you she is having an excellent meal. ");
 		}
 		outputText("After an hour of this terrible treatment, you black out.\n\n");
-		outputText("You wake up, your groin feeling as though it had been set on fire. After a few hours, the pain fades and you're able to stand again. Checking on your crotch you realize your balls are churning abnormally fast. The manticore’s venom clearly increased your cum productivity. For some weird reason, the manticore didn't steal any of your gems.");
-		if (player.cumQ() < 500) player.cumMultiplier += 6;
-		if (player.cumQ() < 2000) player.cumMultiplier += 4;
-		if (player.cumQ() < 10000) player.cumMultiplier += 2;
+		outputText("You wake up, your groin feeling as though it had been set on fire. After a few hours, the pain fades and you're able to stand again. Checking on your crotch you realize your balls are churning abnormally fast. ");
+		if (player.cumQ() < 11000) {
+			outputText("<b>The manticore’s venom clearly increased your cum productivity.</b> ");
+			if (player.cumQ() < 500) player.cumMultiplier += 6;
+			if (player.cumQ() < 2000) player.cumMultiplier += 4;
+			if (player.cumQ() < 10000) player.cumMultiplier += 2;
+			if (player.cumQ() < 11000) player.cumMultiplier += 1;
+		}
 		if (player.cor < 75) dynStats("cor", 25);
 		if (player.hasStatusEffect(StatusEffects.WildManticore)) player.removeStatusEffect(StatusEffects.WildManticore);
-		player.sexReward("vaginalFluids","Dick");
+		player.sexReward("vaginalFluids", "Dick");
+		outputText("For some weird reason, the manticore didn't steal any of your gems.");
 		cleanupAfterCombatTFEvent();
 	}
 	//Females

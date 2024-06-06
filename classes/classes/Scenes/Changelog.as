@@ -210,13 +210,13 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Human Musculature (Final Form). Req. Human Musculature (Evolved) and lvl 90+. Effects: Your musculature increased again your natural strength and tone limit. Increases maximum base/core Str by 10, +10% to max overfatigue. Boost Warrior's Rage effect (+1 per 4 pts of core stat value) and duration by 5 turns. (+90%/+45% of max core Str/Spe as phantom Str/Spe)\n");
 			outputText("-New mutation perk: Human Fat (Final Form). Req. Human Fat (Evolved) and lvl 90+. Effects: Your fat tissue increased again your natural toughness and thickness limit. Increases maximum base/core Tou by 10, +10% to max overfatigue, negate up to 3 points of internal chimera score. ");
 			outputText("Increased damage reduction against physical damage (+40% DR) & increase natural resistance to damage (+40 armor/m.res), increase max Hunger cap by 150 (if PC have Hunger bar active) (+90% of max core Tou as phantom Tou)\n");
-			outputText("-New mutation perk: Human Digestive Tract. Req. having free mouth mutation slot, human race (17+). Effect: Your digestive tract improved allowing to better murishment from all the ingested substances (+10%). Increase limit when PC gain weight from eating too much by 10.\n");
+			outputText("-New mutation perk: Human Digestive Tract. Req. having free mouth mutation slot, human race (17+). Effect: Your digestive tract improved allowing to get better nurishment from all the ingested substances (+10%). Increase limit when PC gain weight from eating too much by 10.\n");
 			outputText("-New mutation perk: Human Metabolism. Req. having free metabolism mutation slot, human race (17+). Effect: Your metabolism changes allowing to slowly detoxification of poisons (10% chance to instantly remove some of toxic substance from body, -1% of lust per turn)\n");
-			outputText("-New mutation perk: Human Digestive Tract (Primitive). Req. Human Digestive Tract and lvl 30+. Effects: Your digestive tract improved allowing to better murishment from all the ingested substances (+30%). Increase limit when PC gain weight from eating too much by 25.\n");
+			outputText("-New mutation perk: Human Digestive Tract (Primitive). Req. Human Digestive Tract and lvl 30+. Effects: Your digestive tract improved allowing to get better nurishment from all the ingested substances (+30%). Increase limit when PC gain weight from eating too much by 25.\n");
 			outputText("-New mutation perk: Human Metabolism (Primitive). Req. Human Metabolism and lvl 30+. Effects: Your metabolism changes allowing to slowly detoxification of poisons (20% chance to instantly remove some of toxic substance from body, -2% of lust per turn, 2x shorter elemental dot effects duration)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New necklace (by Ormael): Skull Necklace - buyable at Felix in Journey to the East inn. Cost 50 spirit stones. +5%/-5% regeneration (undead / others)\n");
+			outputText("-New head jewelery/accesory/misc (by Ormael): Skull Crown - buyable at Felix in Journey to the East inn. Cost 40 spirit stones. +4%/-4% regeneration (undead / others)\n");
+			outputText("-Etna venom effect on increasing cum multiplier have been slight increase to reach 10% more then visits at kitsune mansion residue magic. It would also show bolded part of scene text when the effect of venom trigger.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
