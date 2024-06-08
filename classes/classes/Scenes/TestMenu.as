@@ -1743,7 +1743,7 @@ public class TestMenu extends BaseContent
 			addButton(6, "D.Fruit", AddDisplacerFruit).hint("Add 1 Displacer Fruit.");
 			addButton(7, "AbyssalSTooth", AddAbyssalSharkTooth).hint("Add 1 Abyssal Shark Tooth.");
 			//addButton(8, "", ).hint("Add 1 .");
-			//addButton(9, "", ).hint("Add 1 .");
+			addButton(9, "Lethicite", AddLethicite).hint("Add 1 (medium coooked) Lethicite.");
 			addButton(10, "SBMan", AddSoulBlastManual).hint("Add 1 Soul Blast manual.");
 			addButton(11, "E.Ichor", AddEIchor).hint("Add 1 E.Ichor.");
 			addButton(12, "-2-", NonEquipmentMenu, page + 1);
@@ -2204,6 +2204,10 @@ public class TestMenu extends BaseContent
 	public function AddEIchor():void {
 		outputText("\n\n<b>(Gained 1 E.Ichor!)</b>\n\n");
 		inventory.takeItem(useables.E_ICHOR, curry(NonEquipmentMenu, 1));
+	}
+	public function AddLethicite():void {
+		outputText("\n\n<b>(Gained 1 (medium coooked) Lethicite!)</b>\n\n");
+		inventory.takeItem(consumables.LETHITE, curry(NonEquipmentMenu, 1));
 	}
 	public function AddDisplacerFruit():void {
 		outputText("\n\n<b>(Gained 1 Displacer Fruit!)</b>\n\n");
