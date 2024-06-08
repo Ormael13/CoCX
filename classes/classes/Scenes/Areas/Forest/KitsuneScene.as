@@ -651,19 +651,19 @@ public class KitsuneScene extends BaseContent
 			outputText("\n\nWhen you awaken the next morning, the sisters, the hot springs, and the mansion are nowhere to be found.  You are lying naked in the wilderness, your possessions sitting in a neat little pile a short distance away, and your memories of the previous night are little more than a hazy fever dream");
 			if (tentacles) outputText(" - at the very least, your groin seems to be back to its usual configuration");
 			outputText(".  You sit up, but fall back almost immediately, groaning as the full weight of your hangover hits you like a ton of bricks.  It takes a long time before you can muster up the willpower to gather your things and head back to camp, but as you set out, you swear you could hear the sound of ghostly laughter echoing through the trees.\n\n");
-			if (player.cumQ() < 10000 || (!player.hasCock() && player.lactationQ() < 10000)) {
+			if (player.cumQ() < 15000 || (!player.hasCock() && player.lactationQ() < 15000)) {
 				outputText("<b>Due to the residual effects of the sisters' magic, your ");
 				if (dick) {
 					outputText("cum ");
-					if (player.cumQ() < 500) player.cumMultiplier += 3;
-					if (player.cumQ() < 2000) player.cumMultiplier += 2;
-					if (player.cumQ() < 10000) player.cumMultiplier += 1;
+					if (player.cumQ() < 750) player.cumMultiplier += 3;
+					if (player.cumQ() < 3000) player.cumMultiplier += 2;
+					if (player.cumQ() < 15000) player.cumMultiplier += 1;
 				}
 				else {
 					outputText("milk ");
-					if (player.lactationQ() < 500) player.boostLactation(3);
-					if (player.lactationQ() < 2000) player.boostLactation(2);
-					if (player.lactationQ() < 10000) player.boostLactation(1);
+					if (player.lactationQ() < 750) player.boostLactation(3);
+					if (player.lactationQ() < 3000) player.boostLactation(2);
+					if (player.lactationQ() < 15000) player.boostLactation(1);
 				}
 				outputText("production has been enhanced.</b>");
 			}

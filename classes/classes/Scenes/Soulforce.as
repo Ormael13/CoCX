@@ -912,5 +912,14 @@ public class Soulforce extends BaseContent
 	public function analLover():void {
 		SceneLib.helScene.helSexualAmbush();
 	}
+	
+	//Demon Energy Managment
+	
+	public function accessDemonicEnergyMenu():void {
+		clearOutput();
+		outputText("<b>Demonic Energy:</b> "+player.demonicenergy+" / "+player.maxDemonicEnergy()+"\n");
+		menu();
+		addButton(14, "Back", playerMenu);
+	}
 }
 }

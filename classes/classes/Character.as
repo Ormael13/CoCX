@@ -697,6 +697,12 @@ import classes.Scenes.NPCs.Forgefather;
 			return max1;
 		}
 
+		public override function maxDemonicEnergy():Number {
+			var max:Number = 50;
+			max += level * 10;
+			return max;
+		}
+
 		public override function maxWrath():Number
 		{
 			var max:Number = maxWrathBaseStat.value;

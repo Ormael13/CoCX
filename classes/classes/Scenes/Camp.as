@@ -1090,6 +1090,7 @@ public class Camp extends NPCAwareContent{
 			else if (player.hasPerk(PerkLib.Soulless)) addButtonDisabled(10, "Metamorph", "Your current soul state prevents you from using Metamorph. (If you could somehow fix it you would gain access to metamorph menu again)");
 			else addButton(10, "Metamorph", SceneLib.metamorph.openMetamorph).hint("Use your soulforce to mold your body.");
 		}
+		else if (player.hasPerk(PerkLib.Soulless)) addButton(10, "Demonic Energy", soulforce.accessDemonicEnergyMenu).hint("You can use harvested souls and lethicite to improve your magic and body.");
 		SceneLib.masturbation.masturButton(11);
 		addButton(12, "Wait", doWaitMenu).hint("Wait for one to twelve hours. Or until the night comes.");
 		if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(12, "Rest", restMenu).hint("Rest for one to twelve hours. Or until fully healed / night comes.");

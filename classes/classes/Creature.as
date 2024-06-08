@@ -590,6 +590,7 @@ public class Creature extends Utils
 		public var fatigue:Number = 0;
 		public var mana:Number = 0;
 		public var soulforce:Number = 0;
+		public var demonicenergy:Number = 0;
 
 		//Combat Stats
 		public var HP:Number = 0;
@@ -989,6 +990,9 @@ public class Creature extends Utils
 			return 0;
 		}
 		public function maxOverMana():Number {
+			return 0;
+		}
+		public function maxDemonicEnergy():Number {
 			return 0;
 		}
 		/**
@@ -1772,7 +1776,7 @@ public class Creature extends Utils
 				// Allow weaponAttack to be negative as a penalty to strength-calculated damage
 				// Same with armorDef, bonusHP, additionalXP
 				"weaponValue", "armorValue",
-				"lust", "fatigue", "soulforce", "mana", "wrath",
+				"lust", "fatigue", "soulforce", "mana", "wrath", "demonicenergy",
 				"level", "gems",
 				"tailCount", "tailVenom", "tailRecharge", "horns.type",
 				"HP", "XP"
@@ -4850,4 +4854,4 @@ public class Creature extends Utils
 			//Do nothing
 		}
 	}
-}
+}

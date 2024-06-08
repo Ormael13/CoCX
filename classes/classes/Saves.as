@@ -835,6 +835,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.mana = player.mana;
 		saveFile.data.soulforce = player.soulforce;
 		saveFile.data.wrath = player.wrath;
+		saveFile.data.demonicenergy = player.demonicenergy;
 		//Combat STATS
 		saveFile.data.HP = player.HP;
 		saveFile.data.lust = player.lust;
@@ -1789,6 +1790,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.mana = saveFile.data.mana;
 		player.soulforce = saveFile.data.soulforce;
 		player.wrath = saveFile.data.wrath;
+		player.demonicenergy = saveFile.data.demonicenergy;
 
 		//Combat STATS
 		player.HP = saveFile.data.HP;
@@ -2478,6 +2480,8 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		if (saveFile.data.wrath == undefined) player.wrath = 0;
 		//Set mana
 		if (saveFile.data.mana == undefined) player.mana = 50;
+		//Set demonic energy
+		if (saveFile.data.demonicenergy == undefined) player.demonicenergy = 0;
 
 		//player.cocks = saveFile.data.cocks;
 		player.ass.analLooseness = saveFile.data.ass.analLooseness;

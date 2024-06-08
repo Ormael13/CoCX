@@ -193,12 +193,12 @@ public function etnaRapesPlayer2():void
 		}
 		outputText("After an hour of this terrible treatment, you black out.\n\n");
 		outputText("You wake up, your groin feeling as though it had been set on fire. After a few hours, the pain fades and you're able to stand again. Checking on your crotch you realize your balls are churning abnormally fast. ");
-		if (player.cumQ() < 11000) {
+		if (player.cumQ() < 15000) {
 			outputText("<b>The manticore’s venom clearly increased your cum productivity.</b> ");
 			if (player.cumQ() < 500) player.cumMultiplier += 6;
 			if (player.cumQ() < 2000) player.cumMultiplier += 4;
 			if (player.cumQ() < 10000) player.cumMultiplier += 2;
-			if (player.cumQ() < 11000) player.cumMultiplier += 1;
+			if (player.cumQ() < 15000) player.cumMultiplier += 1;
 		}
 		if (player.cor < 75) dynStats("cor", 25);
 		if (player.hasStatusEffect(StatusEffects.WildManticore)) player.removeStatusEffect(StatusEffects.WildManticore);
