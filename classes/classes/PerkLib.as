@@ -4260,6 +4260,8 @@ public class PerkLib
 				"The absence of a soul allows you to completely go astray of the morality compass, increasing your libido and corruption beyond normal.").withBuffs({'lib.mult':0.75});
 		public static const SpearAffinity:PerkType = mk("Spear Affinity", "Spear Affinity",
 				"Spears deal increased damage equal to 15% of your strenght, speed, wisdom and now have 100% armor penetration.");
+		public static const StrengthenBody:StrengthenBodyPerk = new StrengthenBodyPerk();
+		public static const StrengthenMagic:FlyingSwordPathPerk = new FlyingSwordPathPerk();
 		public static const SweepDefenses:PerkType = mk("Sweep Defenses", "Sweep Defenses",
 				"Critical tease also weakens your opponent's resistance to lust by 5%.");
 		public static const TransformationImmunity:PerkType = mk("Construct Transformation immunity", "Construct Transformation Immunity",

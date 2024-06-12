@@ -9807,6 +9807,7 @@ public class Combat extends BaseContent {
             }
             var lustAADmg:Number = (scalingBonusLibido() * 0.5);
 			if (player.hasPerk(PerkLib.ImprovedArousingAura)) lustAADmg *= 2;
+			if (player.hasPerk(PerkLib.DamnationAura)) lustAADmg *= 2;
             lustAADmg = teases.teaseAuraLustDamageBonus(monster, lustAADmg);
             lustAADmg *= monster.lustVuln;
 			lustAADmg = combat.fixPercentLust(lustAADmg);

@@ -919,7 +919,84 @@ public class Soulforce extends BaseContent
 		clearOutput();
 		outputText("<b>Demonic Energy:</b> "+player.demonicenergy+" / "+player.maxDemonicEnergy()+"\n");
 		menu();
+		addButtonIfTrue(0, "StrengthenBody", demonicEnergyStrengthenBody, "You don’t have enough demonic energy to improve this ability.", (player.demonicenergy >= (25 + (player.perkv1(PerkLib.StrengthenBody) * 5))), "Consume the stored energy of souls to raise your strength, toughness and speed by 5% permanently. This change persists through time.");
+		addButtonIfTrue(1, "StrengthenMagic", demonicEnergyStrengthenMagic, "You don’t have enough demonic energy to improve this ability.", (player.demonicenergy >= (25 + (player.perkv1(PerkLib.StrengthenMagic) * 5))), "Consume the stored energy of souls to raise your intelligence, wisdom and libido by 5% permanently. This change persists through time.");
+		addButton(2, "Corrupt Element", demonicEnergyCorruptElement).hint("Reinforce your attunement over an element of an element by consuming demonic energy.");
 		addButton(14, "Back", playerMenu);
+	}
+	public function demonicEnergyCorruptElement():void {
+		clearOutput();
+		outputText("You may consume the stored energy of souls to empower your mastery over an element. Which element would you like to improve?\n");
+		menu();
+		if (player.demonicenergy < 200) {
+			addButtonDisabled(0, "Fire", "You don’t have enough demonic energy to improve this ability.");
+			addButtonDisabled(1, "Ice", "You don’t have enough demonic energy to improve this ability.");
+			addButtonDisabled(2, "Lightning", "You don’t have enough demonic energy to improve this ability.");
+			addButtonDisabled(3, "Darkness", "You don’t have enough demonic energy to improve this ability.");
+			addButtonDisabled(4, "Poison", "You don’t have enough demonic energy to improve this ability.");
+			addButtonDisabled(5, "Wind", "You don’t have enough demonic energy to improve this ability.");
+			addButtonDisabled(6, "Blood", "You don’t have enough demonic energy to improve this ability.");
+			addButtonDisabled(7, "Water", "You don’t have enough demonic energy to improve this ability.");
+			addButtonDisabled(8, "Earth", "You don’t have enough demonic energy to improve this ability.");
+			addButtonDisabled(9, "Acid", "You don’t have enough demonic energy to improve this ability.");
+		}
+		else {
+			addButtonIfTrue(0, "Fire", curry(demonicEnergyCorruptElementImprove, "Fire"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfFire) < 9);
+			addButtonIfTrue(1, "Ice", curry(demonicEnergyCorruptElementImprove, "Ice"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfIce) < 9);
+			addButtonIfTrue(2, "Lightning", curry(demonicEnergyCorruptElementImprove, "Lightning"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfLightning) < 9);
+			addButtonIfTrue(3, "Darkness", curry(demonicEnergyCorruptElementImprove, "Darkness"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfDarkness) < 9);
+			addButtonIfTrue(4, "Poison", curry(demonicEnergyCorruptElementImprove, "Poison"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfPoison) < 9);
+			addButtonIfTrue(5, "Wind", curry(demonicEnergyCorruptElementImprove, "Wind"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfWind) < 9);
+			addButtonIfTrue(6, "Blood", curry(demonicEnergyCorruptElementImprove, "Blood"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfBlood) < 9);
+			addButtonIfTrue(7, "Water", curry(demonicEnergyCorruptElementImprove, "Water"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfWater) < 9);
+			addButtonIfTrue(8, "Earth", curry(demonicEnergyCorruptElementImprove, "Earth"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfEarth) < 9);
+			addButtonIfTrue(9, "Acid", curry(demonicEnergyCorruptElementImprove, "Acid"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfAcid) < 9);
+		}
+		addButton(14, "Back", accessDemonicEnergyMenu);
+	}
+	public function demonicEnergyStrengthenBody():void {
+		clearOutput();
+		outputText("You consume some of your demonic energy permanently improving your physique!");
+		player.demonicenergy -= (25 + (player.perkv1(PerkLib.StrengthenBody) * 5));
+		if (player.hasPerk(PerkLib.StrengthenBody)) player.addPerkValue(PerkLib.StrengthenBody, 1, 1);
+		else player.createPerk(PerkLib.StrengthenBody, 1, 0, 0, 0);
+		doNext(demonicEnergyCorruptElement);
+	}
+	public function demonicEnergyStrengthenMagic():void {
+		clearOutput();
+		outputText("You consume some of your demonic energy permanently improving your magic!");
+		player.demonicenergy -= (25 + (player.perkv1(PerkLib.StrengthenMagic) * 5));
+		if (player.hasPerk(PerkLib.StrengthenMagic)) player.addPerkValue(PerkLib.StrengthenMagic, 1, 1);
+		else player.createPerk(PerkLib.StrengthenMagic, 1, 0, 0, 0);
+		doNext(demonicEnergyCorruptElement);
+	}
+	public function demonicEnergyCorruptElementImprove(daoType:String = ""):void {
+		clearOutput();
+		outputText("Your mastery over " + daoType+" has improved by 10%!");
+		player.demonicenergy -= 200;
+		switch (flags[kFLAGS.BLOOD_PUPPY_SUMMONS]) {
+            case "Fire": player.addStatusValue(StatusEffects.DaoOfFire, 1, 1);
+                    break;
+            case "Ice": player.addStatusValue(StatusEffects.DaoOfIce, 1, 1);
+                    break;
+            case "Lightning": player.addStatusValue(StatusEffects.DaoOfLightning, 1, 1);
+                    break;
+            case "Darkness": player.addStatusValue(StatusEffects.DaoOfDarkness, 1, 1);
+                    break;
+            case "Poison": player.addStatusValue(StatusEffects.DaoOfPoison, 1, 1);
+                    break;
+            case "Wind": player.addStatusValue(StatusEffects.DaoOfWind, 1, 1);
+                    break;
+            case "Blood": player.addStatusValue(StatusEffects.DaoOfBlood, 1, 1);
+                    break;
+            case "Water": player.addStatusValue(StatusEffects.DaoOfWater, 1, 1);
+                    break;
+            case "Earth": player.addStatusValue(StatusEffects.DaoOfEarth, 1, 1);
+                    break;
+            case "Acid": player.addStatusValue(StatusEffects.DaoOfAcid, 1, 1);
+                    break;
+        }
+		doNext(demonicEnergyCorruptElement);
 	}
 }
 }

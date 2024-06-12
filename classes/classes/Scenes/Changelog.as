@@ -217,11 +217,11 @@ public class Changelog extends BaseContent
 			outputText("-New necklace (by Ormael): Skull Necklace - buyable at Felix in Journey to the East inn. Cost 50 spirit stones. +5%/-5% regeneration (undead / others)\n");
 			outputText("-New head jewelery/accesory/misc (by Ormael): Skull Crown - buyable at Felix in Journey to the East inn. Cost 40 spirit stones. +4%/-4% regeneration (undead / others)\n");
 			outputText("-Etna venom effect and kitsune residue magic on increasing cum multiplier have been increase to reach 50% more then before (from cap of 10k to 15k). It would also show bolded part of scene text when the effect of venom trigger.\n");
-			outputText("-Soulforce resource is replaced by different one for PC that have Soulless perk: Demonic Energy. It caps at 50 + 10*level.\n");// Can be used for different bonuses. DE can be gained from eating lethicite type item.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Soulforce resource is replaced by different one for PC that have Soulless perk: Demonic Energy. It caps at 50 + 10*level. Can be used for different bonuses. DE can be gained from eating lethicite type item.\n");
+			outputText("-Horse face sprite (by Liadri) implementation. (Lord Shadeogorath)\n");
+			outputText("-Spending 200 demonic energy true demon PC can rise one of elemental dao mastery by 1 layer.\n");
+			outputText("-New event perk: Strengthen body. Gained / Upgraded by spending Demonic Energy (25 base rank and increase by 5 pts per each new rank). Effects: Consume the stored energy of souls to raise your strength, toughness and speed by 5% permanently. This change persists through time.\n");
+			outputText("-New event perk: Strengthen magic. Gained / Upgraded by spending Demonic Energy (25 base rank and increase by 5 pts per each new rank). Effects: Consume the stored energy of souls to raise your intelligence, wisdom and libido by 5% permanently. This change persists through time.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

@@ -5739,6 +5739,14 @@ use namespace CoC;
 				statStore.replaceBuffObject({'str.mult':(Math.round(power))}, 'Absolute Strength', { text: 'Absolute Strength' });
 			}
 			if (!hasPerk(PerkLib.AbsoluteStrength) && statStore.hasBuff('Absolute Strength')) statStore.removeBuffs('Absolute Strength');
+			if (hasPerk(PerkLib.StrengthenBody)) {
+				var sbp:Number = perkv1(PerkLib.StrengthenBody);
+				statStore.replaceBuffObject({'str.mult':(0.05 * sbp),'spe.mult':(0.05 * sbp),'tou.mult':(0.05 * sbp)}, 'Strengthen body', { text: 'Strengthen body' });
+			}
+			if (hasPerk(PerkLib.StrengthenMagic)) {
+				var smp:Number = perkv1(PerkLib.StrengthenMagic);
+				statStore.replaceBuffObject({'int.mult':(0.05 * smp),'wis.mult':(0.05 * smp),'lib.mult':(0.05 * smp)}, 'Strengthen magic', { text: 'Strengthen magic' });
+			}
 			if (statStore.hasBuff('Sagittarius Focus')) statStore.replaceBuffObject({"wis.mult":(0.01 * Math.round(lib/2)),"int.mult":(0.01 * Math.round(lib/2))}, 'Sagittarius Focus', { text: 'Sagittarius Focus' });
 			var buffs:Object = calcRacialBuffs(true);
 			statStore.removeBuffs("Racials");
