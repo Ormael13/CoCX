@@ -1111,6 +1111,7 @@
         <cell rect="631,110,29,32" name="face/fairySmile" dx="91" dy="38"/>
         <cell rect="661,110,29,32" name="face/tusk" dx="91" dy="38"/>
         <cell rect="691,110,29,32" name="antennae/mindbreakerMale" dx="90" dy="50"/>
+		<cell rect="751,110,29,32" name="face/horse" dx="89" dy="37"/>
         <cell rect="1,150,29,32" name="eyes/human" dx="90" dy="37"/>
         <cell rect="31,150,29,32" name="eyes/devil" dx="90" dy="37"/>
         <cell rect="61,150,29,32" name="eyes/cat" dx="90" dy="37"/>
@@ -3315,7 +3316,7 @@
 					<show part="antennae/mindbreakerMale"/>
 				</if>
             </case>
-            <case values="Face.HORSE,Face.FOX,Face.PIG,Face.BOAR,Face.RHINO,Face.ECHIDNA"><!--TODO -->
+            <case values="Face.FOX,Face.PIG,Face.BOAR,Face.RHINO,Face.ECHIDNA"><!--TODO -->
                 <show part="face/fur"/>
             </case>
             <case values="Face.KANGAROO,Face.MOUSE,Face.DEER">
@@ -3346,6 +3347,9 @@
 			<case values="Face.RACCOON,Face.FERRET">
                 <show part="face/racoon"/>
             </case>
+			<case values="Face.HORSE">
+				<show part="face/horse"/>
+			</case>
             <case values="Face.SALAMANDER_FANGS,Face.SHARPTEETH,Face.VAMPIRE,Face.YETI_FANGS,Face.ONI_TEETH,Face.DRAGON_FANGS,Face.WEASEL,Face.DEVIL_FANGS,Face.ANIMAL_TOOTHS,Face.WOLF_FANGS,Face.FOX_FANGS,Face.SNAKE_FANGS,Face.CAT_CANINES,Face.MANTICORE,Face.IMP">
                 <show part="face/human_fang"/>
                 <if test="eyes.type= Eyes.CENTIPEDE">
