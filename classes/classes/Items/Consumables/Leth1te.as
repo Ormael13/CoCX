@@ -7,12 +7,12 @@ import classes.Items.Consumable;
 import classes.Scenes.SceneLib;
 
 //Checks if the perk is present before use. Algo gives a prompt because why not.
-public class Lethite extends Consumable {
+public class Leth1te extends Consumable {
 
-    public function Lethite() {
+    public function Leth1te() {
         var descr:String;
-        descr = "A chunk of lesser lethicite. It's rare as lethicite is only produced when a mortal becomes a demon and cums their souls out. A demon's favourite treat."
-        super("Lethite", "Lesser Lethicite", "a chunk of lesser lethicite", 1000, descr );
+        descr = "A chunk of averange lethicite. It's rare as lethicite is only produced when a mortal becomes a demon and cums their souls out. A demon's favourite treat."
+        super("Leth1te", "Averange Lethicite", "a chunk of averange lethicite", 2000, descr );
     }
 
     override public function useItem():Boolean {
@@ -31,12 +31,12 @@ public class Lethite extends Consumable {
         clearOutput();
         outputText("You grab the crystal and gulp it down, smiling contently as you feel it dissolve into your core and suffuse your body with raw power.");
 		if (player.hasPerk(PerkLib.Soulless)) {
-			player.demonicenergy += 50;
+			player.demonicenergy += 100;
 			if (player.demonicenergy > player.maxDemonicEnergy()) player.demonicenergy = player.maxDemonicEnergy();
 		}
 		else {
-			player.buff("Soul Eater").addStat("int.mult",0.01);
-			player.buff("Soul Eater").addStat("lib.mult",0.01);
+			player.buff("Soul Eater").addStat("int.mult",0.02);
+			player.buff("Soul Eater").addStat("lib.mult",0.02);
 		}
         SceneLib.inventory.itemGoNext();
     }

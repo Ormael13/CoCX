@@ -46,7 +46,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 
 	public static function canMeetUnicorn():Boolean {
 		return (
-				CoC.instance.player.level >= 25
+				CoC.instance.player.level >= 20
 				&& !CoC.instance.player.isPregnant()
 				&& !instance.armorFound
 				&& (instance._age == 0 || instance._age < -1)

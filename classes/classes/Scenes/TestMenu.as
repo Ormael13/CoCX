@@ -1743,7 +1743,7 @@ public class TestMenu extends BaseContent
 			addButton(6, "D.Fruit", AddDisplacerFruit).hint("Add 1 Displacer Fruit.");
 			addButton(7, "AbyssalSTooth", AddAbyssalSharkTooth).hint("Add 1 Abyssal Shark Tooth.");
 			//addButton(8, "", ).hint("Add 1 .");
-			addButton(9, "Lethicite", AddLethicite).hint("Add 1 (medium coooked) Lethicite.");
+			addButton(9, "Lethicite", AddLethicite);
 			addButton(10, "SBMan", AddSoulBlastManual).hint("Add 1 Soul Blast manual.");
 			addButton(11, "E.Ichor", AddEIchor).hint("Add 1 E.Ichor.");
 			addButton(12, "-2-", NonEquipmentMenu, page + 1);
@@ -1784,6 +1784,13 @@ public class TestMenu extends BaseContent
 			addButton(13, "-2-", NonEquipmentMenu, page - 1);
 			addButton(14, "Back", SoulforceCheats);
 		}
+	}
+	
+	public function AddLethicite():void {
+		menu();
+		addButton(0, "Lethicite1", AddLethicite1).hint("Add 1 (light coooked) Lethicite.");
+		addButton(0, "Lethicite2", AddLethicite2).hint("Add 1 (medium coooked) Lethicite.");
+		addButton(14, "Back", NonEquipmentMenu);
 	}
 
 	private function addConsumable(consumable: Consumable): void {
@@ -2205,9 +2212,13 @@ public class TestMenu extends BaseContent
 		outputText("\n\n<b>(Gained 1 E.Ichor!)</b>\n\n");
 		inventory.takeItem(useables.E_ICHOR, curry(NonEquipmentMenu, 1));
 	}
-	public function AddLethicite():void {
+	public function AddLethicite1():void {
+		outputText("\n\n<b>(Gained 1 (light coooked) Lethicite!)</b>\n\n");
+		inventory.takeItem(consumables.LETHITE, AddLethicite);
+	}
+	public function AddLethicite2():void {
 		outputText("\n\n<b>(Gained 1 (medium coooked) Lethicite!)</b>\n\n");
-		inventory.takeItem(consumables.LETHITE, curry(NonEquipmentMenu, 1));
+		inventory.takeItem(consumables.LETH1TE, AddLethicite);
 	}
 	public function AddDisplacerFruit():void {
 		outputText("\n\n<b>(Gained 1 Displacer Fruit!)</b>\n\n");

@@ -217,13 +217,13 @@ public class Changelog extends BaseContent
 			outputText("-New necklace (by Ormael): Skull Necklace - buyable at Felix in Journey to the East inn. Cost 50 spirit stones. +5%/-5% regeneration (undead / others)\n");
 			outputText("-New head jewelery/accesory/misc (by Ormael): Skull Crown - buyable at Felix in Journey to the East inn. Cost 40 spirit stones. +4%/-4% regeneration (undead / others)\n");
 			outputText("-Etna venom effect and kitsune residue magic on increasing cum multiplier have been increase to reach 50% more then before (from cap of 10k to 15k). It would also show bolded part of scene text when the effect of venom trigger.\n");
-			outputText("-Soulforce resource is replaced by different one for PC that have Soulless perk: Demonic Energy. It caps at 50 + 10*level. Can be used for different bonuses. DE can be gained from eating lethicite type item.\n");
+			outputText("-Soulforce resource is replaced by different one for PC that have Soulless perk: Demonic Energy. It caps at 50 + 10*level. Can be used for different bonuses. DE can be gained from eating lethicite type item. Lethicite item was renamed to Lesser Lethicite\n");
 			outputText("-Horse face sprite (by Liadri) implementation. (Lord Shadeogorath)\n");
 			outputText("-Spending 200 demonic energy true demon PC can rise one of elemental dao mastery by 1 layer.\n");
 			outputText("-New event perk: Strengthen body. Gained / Upgraded by spending Demonic Energy (25 base rank and increase by 5 pts per each new rank). Effects: Consume the stored energy of souls to raise your strength, toughness and speed by 5% permanently. This change persists through time.\n");
 			outputText("-New event perk: Strengthen magic. Gained / Upgraded by spending Demonic Energy (25 base rank and increase by 5 pts per each new rank). Effects: Consume the stored energy of souls to raise your intelligence, wisdom and libido by 5% permanently. This change persists through time.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-NPC's that can make legendary items have lower min. lvl req. to find them (25 > 20)\n");
+			outputText("-New consumable (by Liadri): Averange Lethicite. Dropped from some of true demon enemies. Consuming it by PC with Soulless perk will give up to 100 demonic energy.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -232,15 +232,15 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");//New mutation perk: Human Parathyroid Glands (Final Form). Req. Human Parathyroid Glands (Evolved) and lvl 90+. Effects: Increases self healing by 40 * level HP in combat and twice more out of combat. 8 * level HP Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
