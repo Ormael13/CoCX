@@ -1096,7 +1096,7 @@ package classes.Scenes {
 				const partsInUse: Boolean = (index==-1? genMem.transformation().isPresent() : genMem.transformation(index).isPresent());
 				const cost:Number=(genMem.cost is Function? genMem.cost() : genMem.cost);
 				const enoughSF: Boolean = player.soulforce >= cost;
-				const enoughMana: Boolean = player.maxMana()/10 >= player.mana
+				const enoughMana: Boolean = Math.round(player.maxMana() / 10) >= player.mana;
 
 				if (unlocked && !partsInUse && (enoughSF || enoughMana)) addButton(currentButton++, buttonStr, doMetamorph, title, genMem, index).hint("Cost: " + cost + " SF" + (genMem.info ? "\n\n" + genMem.info : "") + " OR " + (player.maxMana()/10) + " mana");
 				else if (unlocked && partsInUse) addButtonDisabled(currentButton++, buttonStr, (!genMem.hint? "You already have this, the metamorphosis would have no effect!":genMem.hint));
@@ -1124,7 +1124,7 @@ package classes.Scenes {
 			menu();
 
 			var genSFCost:int = (genMem.cost is Function? genMem.cost() : genMem.cost);
-			var genManaCost:int = player.maxMana()/10
+			var genManaCost:int = Math.round(player.maxMana() / 10);
 			outputText("How would you like to pay?");
 			if (player.soulforce >= genSFCost){
 				addButton(1,"SF", mmPayment, 1, genSFCost);
@@ -1132,11 +1132,11 @@ package classes.Scenes {
 			else{
 				addButtonDisabled(1,"SF", "You don't have enough SF for this! You need " + genSFCost + " SF!")
 			}
-			if (player.mana >= genManaCost){
+			if (player.mana >= genManaCost && player.hasPerk(PerkLib.Soulless)){
 				addButton(3,"Mana", mmPayment, 2, genManaCost);
 			}
 			else{
-				addButtonDisabled(3,"Mana", "You don't have enough Mana for this! You need " + genManaCost + "Mana!")
+				addButtonDisabled(3,"Mana", "You don't have enough Mana for this! You need " + genManaCost + "Mana! OR you aren't a True Demon!")
 			}
 			addButton(14,"Back", accessMetamorphMenu);
 			function mmPayment(costType: int, costVal: int):void{
