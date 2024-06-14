@@ -641,6 +641,10 @@ public function mainCampMenu():void {
 	//1 - Talk
 	addButton(2, "Spar", nadiaSparsWithPC).hint("Ask Nadia for a mock battle.")
 		.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "You need a good sparring ring for that.");
+	if (sceneHunter.mockFights)
+		addButton(3, "Mock Fight", mockFightDiana)
+				.hint("Spice things up a little - make her fight for her pussy!")
+				.disableIf(player.isGenderless(), "Not for genderless!");
 	//3 - ??
 	if (player.lust > 33) addButton(4, "Sex", mainSexMenu);
 	else addButtonDisabled(4, "Sex", "Req. 33+ lust");
@@ -661,10 +665,6 @@ public function mainCampMenu():void {
 	addButton(8, "Uncurse", uncurseItemsMenu).disableIf(player.equippedKnownCursedItems().length == 0 && player.carriedKnownCursedItems().length == 0, "You don't have any cursed items");
 	if (player.weaponRange == weaponsrange.SAGITTB) addButton(9, "Uncurse", uncurseItemsMenu2);
 	if (BelisaFollower.BelisaQuestOn && !BelisaFollower.BelisaQuestComp) addButton(13, "ToothacheQ", BelisaNadiaTalk);
-	if (sceneHunter.mockFights)
-		addButton(9, "Mock Fight", mockFightDiana)
-				.hint("Spice things up a little - make her fight for her pussy!")
-				.disableIf(player.isGenderless(), "Not for genderless!");
 	addButton(14, "Back", camp.campLoversMenu);
 }
 
