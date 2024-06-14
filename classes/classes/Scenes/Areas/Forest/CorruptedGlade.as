@@ -399,11 +399,11 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
         menu();
         var button:int = 0;
         if (player.hasPerk(PerkLib.DragonFireBreath) || player.hasPerk(PerkLib.FireLord) || player.hasPerk(PerkLib.Hellfire)) {
-            if (player.fatigue > player.maxFatigue() - 50) addButtonDisabled(button++, "Fire Breath", "You are too tired to destroy the foul glade this way.");
+            if (player.fatigue > player.maxOverFatigue() - 50) addButtonDisabled(button++, "Fire Breath", "You are too tired to destroy the foul glade this way.");
             else addButton(button++, "Fire Breath", destroyTheCorruptedGlades, 0);
         }
         if ((player.hasPerk(PerkLib.EnlightenedNinetails) || player.hasPerk(PerkLib.CorruptedNinetails)) && player.tailType == Tail.FOX && player.tailCount >= 7) {
-            if (player.fatigue > player.maxFatigue() - 20) addButtonDisabled(button++, "Fox Fire", "You are too tired to destroy the foul glade this way.");
+            if (player.fatigue > player.maxOverFatigue() - 20) addButtonDisabled(button++, "Fox Fire", "You are too tired to destroy the foul glade this way.");
             else addButton(button++, "Fox Fire", destroyTheCorruptedGlades, 1);
         }
         if (player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
@@ -411,14 +411,14 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
             else addButton(button++, "Whitefire", destroyTheCorruptedGlades, 2);
         }
         if (player.hasKeyItem("Carpenter's Toolbox") >= 0 || player.weapon == weapons.L__AXE) {
-            if (player.fatigue > player.maxFatigue() - 40) addButtonDisabled(button++, "Axe", "You are too tired to destroy the foul glade this way.");
+            if (player.fatigue > player.maxOverFatigue() - 40) addButtonDisabled(button++, "Axe", "You are too tired to destroy the foul glade this way.");
             else addButton(button++, "Axe", destroyTheCorruptedGlades, 3);
         }
         if (player.weaponVerb == "stab" || player.weaponVerb == "slash" || player.weaponVerb == "cleave" || player.weaponVerb == "keen cut" || player.isPartiallyStaffTypeWeapon()) {
-            if (player.fatigue > player.maxFatigue() - 30) addButtonDisabled(button++, "Weapon", "You are too tired to destroy the foul glade this way.");
+            if (player.fatigue > player.maxOverFatigue() - 30) addButtonDisabled(button++, "Weapon", "You are too tired to destroy the foul glade this way.");
             else addButton(button++, "Weapon", destroyTheCorruptedGlades, 4);
         }
-        if (player.fatigue > player.maxFatigue() - 50) addButtonDisabled(button++, "Your Hands", "You are too tired to destroy the foul glade this way.");
+        if (player.fatigue > player.maxOverFatigue() - 50) addButtonDisabled(button++, "Your Hands", "You are too tired to destroy the foul glade this way.");
         else addButton(button++, "Your Hands", destroyTheCorruptedGlades, 5);
         addButton(14, "Never mind", explorer.done);
     }

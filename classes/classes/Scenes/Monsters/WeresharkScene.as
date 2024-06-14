@@ -83,7 +83,8 @@ public function lostToWereshark():void {
 			outputText("His erection is pulsating within you as he picks up the tempo eagerly to catch his release. Unable to take it any longer, your thoughts swimming in the lack of air, you clench down fervently."+(player.hasCock()?" With a heavy moan, your erection thrums as it grinds against his abs before you cum, shooting several ropes of your seed into the open water.":"")+" ");
 			outputText("You clench your ass tighter on his member as the height of your orgasm rocks through you. He heaves a low growl as his chest heaves, brushing up against you as he cums, forcing you to take in wave after wave of his warm seed, contrasting the cool ocean.\n\n");
 		}
-		tfIntoWereshark();
+		if (!player.blockingBodyTransformations())
+			tfIntoWereshark();
 		outputText("Spent, he slowly loosens his grasp on you, allowing you to float back to the surface. Not without giving you a final, mocking lick across your face, he swims away, leaving you to float back to shore.\n\n");
 	}
 	cleanupAfterCombat();

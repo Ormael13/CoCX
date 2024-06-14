@@ -440,10 +440,27 @@ package classes.GlobalFlags
 		public static const GENERAL_BEYOND_GODS_AND_MORTALS:int			= 393;
 		public static const GENERAL_DAWN_CHASING_AWAY_THE_NIGHT:int		= 394;
 		public static const HOLIDAY_YEAR_OF_THE_GOAT:int				= 395;
-		public static const UNKNOWN_ACHIEVEMENT_396:int					= 396;
-		public static const UNKNOWN_ACHIEVEMENT_397:int					= 397;
-		public static const UNKNOWN_ACHIEVEMENT_398:int					= 398;
-		public static const UNKNOWN_ACHIEVEMENT_399:int					= 399;
+		public static const DUNGEON_DUNGEON_SEEKER_4TH_LAYER:int		= 396;
+		public static const DUNGEON_DUNGEON_SEEKER_5TH_LAYER:int		= 397;
+		public static const DUNGEON_DUNGEON_SEEKER_6TH_LAYER:int		= 398;
+		public static const DUNGEON_WE_NEED_TO_GO_DEEPER:int			= 399;
+		public static const LEVEL_MID_TIER_GOD_ESS_2:int				= 400;
+		public static const REALISTIC_CHAMPION_NEEDS_FOOD_5:int			= 401;
+		public static const REALISTIC_FEAST_FOR_GLUTTONS:int			= 402;
+		public static const GENERAL_VIGILANTE:int						= 403;
+		public static const GENERAL_VIGILANTE_2_KILL_HARDER:int			= 404;
+		public static const GENERAL_VIGILANTE_3_IM_BACK:int				= 405;
+		public static const FASHION_HAMMER_TIME:int						= 406;
+		public static const UNKNOWN_ACHIEVEMENT_407:int					= 407;
+		public static const UNKNOWN_ACHIEVEMENT_408:int					= 408;
+		public static const UNKNOWN_ACHIEVEMENT_409:int					= 409;
+		public static const UNKNOWN_ACHIEVEMENT_410:int					= 410;
+		public static const UNKNOWN_ACHIEVEMENT_411:int					= 411;
+		public static const UNKNOWN_ACHIEVEMENT_412:int					= 412;
+		public static const UNKNOWN_ACHIEVEMENT_413:int					= 413;
+		public static const UNKNOWN_ACHIEVEMENT_414:int					= 414;
+		public static const UNKNOWN_ACHIEVEMENT_415:int					= 415;
+		public static const UNKNOWN_ACHIEVEMENT_416:int					= 416;
 		
 	}
 }

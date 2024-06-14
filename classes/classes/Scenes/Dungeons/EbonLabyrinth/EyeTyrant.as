@@ -26,25 +26,26 @@ use namespace CoC;
 		
 		private function eyeTyrantOmnicast():void {
 			outputText("The gazer suddenly fixates you with all of its eye unleashing a barrage of rays at you! ");
-			eyeTyrantOmnicastD();
-			eyeTyrantOmnicastD();
-			eyeTyrantOmnicastD();
-			eyeTyrantOmnicastD();
-			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
-			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
-			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
-			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
-			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
-			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
-			outputText("\n\n");
-		}
-		private function eyeTyrantOmnicastD():void {
+
 			var damage:Number = eBaseIntelligenceDamage() * 0.25;
+			var hit:int = 4;
 			damage += eBaseWisdomDamage() * 0.25;
 			damage = Math.round(damage);
-			damage = player.takeMagicDamage(damage, true);
+			if(player.hasStatusEffect(StatusEffects.Stunned)){
+				hit = 10;
+			}
+			else{
+				for(var i:int = 0;i<6;i++){
+					if (!player.getEvasionRoll() || rand(2) == 0){
+						hit+=1;
+					}
+				}
+			}
+
+			damage = player.takeDamage(damage,4,true, hit);
+
+			outputText("\n\n");
 		}
-		
 		override protected function performCombatAction():void
 		{
 			if (!hasStatusEffect(StatusEffects.AbilityCooldown1)) eyeTyrantDominationGaze();

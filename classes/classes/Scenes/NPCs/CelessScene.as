@@ -2,6 +2,7 @@ package classes.Scenes.NPCs {
 import classes.CoC;
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.ItemType;
 import classes.PerkLib;
 import classes.PregnancyStore;
@@ -45,7 +46,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 
 	public static function canMeetUnicorn():Boolean {
 		return (
-				CoC.instance.player.level >= 45
+				CoC.instance.player.level >= 20
 				&& !CoC.instance.player.isPregnant()
 				&& !instance.armorFound
 				&& (instance._age == 0 || instance._age < -1)
@@ -95,7 +96,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	}
 
 	public function get isCorrupt():Boolean {
-		return _corruption > 50;
+		return _corruption > 50 || player.perkv1(IMutationsLib.FiendishOvariesIM) >= 2;
 	}
 
 	public function get isAdult():Boolean {
@@ -381,6 +382,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			[CoC.instance.weapons.OTETSU, CoC.instance.weapons.POCDEST, CoC.instance.weapons.DOCDEST],
 			[CoC.instance.weapons.BFTHSWORD, CoC.instance.weapons.ARMAGED, CoC.instance.weapons.CHAOSEA],
 			[CoC.instance.weapons.A_WAND, CoC.instance.weapons.OCCULUS, CoC.instance.weapons.ECLIPSE],
+			[CoC.instance.weapons.PFLUTTE, CoC.instance.weapons.ELYSIUM, CoC.instance.weapons.HELLCAL],
 			[CoC.instance.weaponsrange.BOWLONG, CoC.instance.weaponsrange.ARTEMIS, CoC.instance.weaponsrange.WILDHUN],
 			[CoC.instance.weaponsrange.SHUNHAR, CoC.instance.weaponsrange.KSLHARP, CoC.instance.weaponsrange.LEVHARP],
 			[CoC.instance.weaponsrange.SIXSHOT, CoC.instance.weaponsrange.GOODSAM, CoC.instance.weaponsrange.BADOMEN],
@@ -863,6 +865,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		"Satisfied with it, you then proceed to put the thing in your mouth proper. " + _name + " moans as her horse dong throbs in appreciation for the attention you’re giving it. "+
 		"You suck on her cock until she finally orgasms, the sweet cum flooding your throat.\n\n"+
 		"Weirdly enough, you feel something change in you as the corrupted cum reaches your stomach.");
+		player.sexReward("cum","Lips", false);
 		doHeatOrRut();
 		endEncounter();
 	}
@@ -883,6 +886,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		if (player.hasVirginVagina()) outputText("Checking on your privates, you’re not surprised to discover you did, indeed, keep your virginity in spite of the crazy ride the young centauress gave you. "+
 		"By now you already figured this is a common thing among unicorns.");
 		outputText("You feel something change in you as the corrupted cum reaches your womb.");
+		player.sexReward("cum", "Vaginal");
 		doHeatOrRut();
 		endEncounter();
 	}
@@ -937,6 +941,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		"In the end, you manage to outlast her. With a scream, you orgasm, a handful of seconds after she does. You flood her thirsty cunt with your cum, making her moan in delight.\n"+
 		"As expected, nothing spills out of her pussy, even after both of you lay down in the grass to rest.\n\n" +
 		"You snuggle for a time with "+ _name +" then head back to your daily routine. ");
+		player.sexReward("vaginalFluids","Dick");
 		doHeatOrRut();
 		endEncounter();
 	}

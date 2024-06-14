@@ -12,7 +12,7 @@ public class MeteorShowerSpell extends AbstractWhiteSpell{
 			"Call down a rain of meteors on your opponents, stunning them for 1 round and dealing area damage. Hits 12 times.\n<b>Req. 1 turn channeling. Cooldown: 12 turns.</b>",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
-			[TAG_DAMAGING,TAG_FIRE,TAG_AOE]
+			[TAG_DAMAGING,TAG_FIRE,TAG_AOE, TAG_TIER3]
 		);
 		baseManaCost = 1250;
 	}
@@ -75,7 +75,8 @@ public class MeteorShowerSpell extends AbstractWhiteSpell{
 	public function meteorShowerHit(display: Boolean = true):void {
 		player.removeStatusEffect(StatusEffects.ChanneledAttack);
 		player.removeStatusEffect(StatusEffects.ChanneledAttackType);
-		if (player.hasPerk(PerkLib.RagingInfernoSu) && player.hasStatusEffect(StatusEffects.CounterRagingInferno)) player.addStatusValue(StatusEffects.CounterRagingInferno, 3, -1);
+		if ((player.hasPerk(PerkLib.RagingInfernoSu) || player.hasPerk(PerkLib.RagingInfernoMastered)) && player.hasStatusEffect(StatusEffects.CounterRagingInferno)) player.addStatusValue(StatusEffects.CounterRagingInferno, 3, -1);
+		calcDamage(monster, true, true);
 		if (display) {
 			outputText("You call out to the celestial vault, knocking some rocks out of orbit and into a crash course towards your opponents.\n\n");
 			outputText("[monster A] [monster name] takes ")
@@ -83,7 +84,7 @@ public class MeteorShowerSpell extends AbstractWhiteSpell{
 		var meteor:Number = 12;
 		var totalDamage:Number = 0;
 		while (meteor-->0){
-			var damage:Number = calcDamage(monster, true, true);
+			var damage:Number = calcDamage(monster, true, false);
 			totalDamage += critAndRepeatDamage(false, damage, DamageType.FIRE, true);
 		}
 		if (display) {
@@ -101,7 +102,7 @@ public class MeteorShowerSpell extends AbstractWhiteSpell{
 		}
 		player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
 		player.createStatusEffect(StatusEffects.ChanneledAttackType, 6, 0, 0, 0);
-		if (player.hasPerk(PerkLib.RagingInfernoSu)) player.addStatusValue(StatusEffects.CounterRagingInferno, 3, 1);
+		if (player.hasPerk(PerkLib.RagingInfernoSu) || player.hasPerk(PerkLib.RagingInfernoMastered)) player.addStatusValue(StatusEffects.CounterRagingInferno, 3, 1);
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {

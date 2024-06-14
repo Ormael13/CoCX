@@ -29,7 +29,7 @@ public class AegisSpell extends AbstractDivineSpell {
 		return player.hasStatusEffect(StatusEffects.Aegis);
 	}
 	
-	public function calcDuration():int {
+	override public function calcDuration():int {
 		var AegisDuration:int = 6;
 		AegisDuration += combat.magic.perkRelatedDurationBoosting();
 		return AegisDuration;

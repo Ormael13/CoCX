@@ -13,38 +13,24 @@ import classes.BodyParts.Tail;
 
     public class KitsuneThyroidGlandMutation extends IMutationPerkType
     {
-        private static const mName:String = "Kitsune Thyroid Gland";
+        override public function get mName():String {
+            return "Kitsune Thyroid Gland";
+        }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
-                descS += "50% reduced mana costs of FoxFire";
+                descS += "Illusion and Terror cooldown reduced by 3 turns";
             }
             if (pTier >= 2){
-                descS += ", FoxFire +50% damage (fire and lust)";
+                descS += ", 50% reduced costs for Illusion and Terror";
             }
             if (pTier >= 3){
-                descS += ", +20% Evasion to Illusion, +50 speed debuff to Terror target, +SF/Mana regen (Star Sphere rank x3/2 respectively), increase Star Sphere Max to 20";
+                descS += ", speed debuff from Terror increased to 70, evasion boost from Illusion increased by 30%";//add some more effects to both specials
             }
             if (descS != "")descS += ".";
             return descS;
-        }
-
-        //Name. Need it say more?
-        override public function name(params:PerkClass=null):String {
-            var sufval:String;
-            switch (currentTier(this, player)) {
-                case 2:
-                    sufval = "(Primitive)";
-                    break;
-                case 3:
-                    sufval = "(Evolved)";
-                    break;
-                default:
-                    sufval = "";
-            }
-            return mName + sufval;
         }
 
         //Mutation Requirements

@@ -1,0 +1,44 @@
+<application xmlns="http://ns.adobe.com/air/application/30.0">
+  <id>classes.CoC</id>
+  <filename>Corruption of Champion X</filename>
+  <name>Corruption of Champion X</name>
+  <versionNumber>0.0.0</versionNumber>
+  <initialWindow>
+    <content>CoC-Mobile-Release.swf</content>
+    <visible>true</visible>
+    <autoOrients>true</autoOrients>
+    <fullScreen>true</fullScreen>
+  </initialWindow>
+  <icon>
+    <image29x29>devTools/icons/icon_29.png</image29x29>
+    <image57x57>devTools/icons/icon_57.png</image57x57>
+    <image72x72>devTools/icons/icon_72.png</image72x72>
+    <image144x144>devTools/icons/icon_144.png</image144x144>
+    <image512x512>devTools/icons/icon_512.png</image512x512>
+  </icon>
+  <android>
+    <manifestAdditions>&lt;manifest android:installLocation=&quot;auto&quot;&gt;
+                &lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;
+                &lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;/&gt;
+                &lt;!--&lt;uses-permission android:name=&quot;android.permission.READ_PHONE_STATE&quot;/&gt;--&gt;
+                &lt;!--&lt;uses-permission android:name=&quot;android.permission.VIBRATE&quot;/&gt;--&gt;
+                &lt;!--&lt;uses-permission android:name=&quot;android.permission.ACCESS_FINE_LOCATION&quot;/&gt;--&gt;
+                &lt;!--&lt;uses-permission android:name=&quot;android.permission.DISABLE_KEYGUARD&quot;/&gt;--&gt;
+                &lt;!--&lt;uses-permission android:name=&quot;android.permission.WAKE_LOCK&quot;/&gt;--&gt;
+                &lt;!--&lt;uses-permission android:name=&quot;android.permission.CAMERA&quot;/&gt;--&gt;
+                &lt;!--&lt;uses-permission android:name=&quot;android.permission.RECORD_AUDIO&quot;/&gt;--&gt;
+                &lt;!--&lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot;/&gt;--&gt;
+                &lt;!--&lt;uses-permission android:name=&quot;android.permission.ACCESS_WIFI_STATE&quot;/&gt;--&gt;
+
+                &lt;!--&lt;uses-feature android:required=&quot;true&quot; android:name=&quot;android.hardware.touchscreen.multitouch&quot;/&gt;--&gt;
+                &lt;!--&lt;application android:enabled=&quot;true&quot;&gt;
+                    &lt;activity android:excludeFromRecents=&quot;false&quot;&gt;
+                        &lt;intent-filter&gt;
+                            &lt;action android:name=&quot;android.intent.action.MAIN&quot;/&gt;
+                            &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot;/&gt;
+                        &lt;/intent-filter&gt;
+                    &lt;/activity&gt;
+                &lt;/application&gt;--&gt;
+            &lt;/manifest&gt;</manifestAdditions>
+  </android>
+</application>

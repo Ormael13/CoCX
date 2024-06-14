@@ -10,7 +10,7 @@ import classes.internals.*;
 	 * ...
 	 * @author ...
 	 */
-	public class Gnoll extends Monster 
+	public class Gnoll extends Monster
 	{
 
 		//Gnoll Description
@@ -19,13 +19,6 @@ import classes.internals.*;
 			var attack:Number = rand(6);
 			//return to combat menu when finished
 			doNext(EventParser.playerMenu);
-			//Blind dodge change
-			if(player.getEvasionRoll()) {
-				if(player.spe - spe < 8) outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!\n");
-				else if(player.spe - spe >= 8 && player.spe-spe < 20) outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!\n");
-				else if(player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".\n");
-			}
-			else {
 				//Determine damage - str modified by enemy toughness!
 				damage = int((str + weaponAttack) - Math.random()*(player.tou) - player.armorDef);
 				if(damage <= 0) {
@@ -70,7 +63,6 @@ import classes.internals.*;
 					player.takePhysDamage(damage, true);
 				}
 				EngineCore.statScreenRefresh();
-			}
 		}
 		
 		private function gnollTease():void {
@@ -199,7 +191,6 @@ import classes.internals.*;
 			this.weaponName = "twisted club";
 			this.weaponVerb="smash";
 			this.weaponAttack = 11;
-			this.weaponPerk = "";
 			this.weaponValue = 25;
 			this.armorName = "skin";
 			this.armorDef = 7;

@@ -43,7 +43,7 @@ public class ImpOverlord extends Imp
 			//Blind
 			else if (spellChooser == 1 && fatigue <= (maxFatigue() - spellCostBlind)) {
 				outputText("The imp glares at you and points at you! A bright flash erupts before you!  ");
-				if ((!player.perkv1(IMutationsLib.GorgonEyesIM) >= 1 && rand(player.inte / 5) <= 4) && !player.hasPerk(PerkLib.BlindImmunity)) {
+				if ((!player.perkv1(IMutationsLib.GorgonEyesIM) >= 1 && rand(player.inte / 5) <= 4) && !player.isImmuneToBlind()) {
 					outputText("<b>You are blinded!</b>");
 					player.createStatusEffect(StatusEffects.Blind, 1 + rand(3), 0, 0, 0);
 				}
@@ -85,7 +85,7 @@ public class ImpOverlord extends Imp
 			else if (spellChooser == 4 && fatigue <= (maxFatigue() - spellCostHeal)) {
 				outputText("He focuses on his body and his desire to end pain, trying to draw on his arousal without enhancing it.");
 				var temp:int = int((inte / (2 + rand(3))) * (maxHP() / 50));
-				outputText("He flushes with success as his wounds begin to knit! <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
+				outputText("He flushes with success as his wounds begin to knit! <b>([font-heal]+" + temp + "[/font])</b>.");
 				addHP(temp);
 				fatigue += spellCostHeal;
 			}
@@ -172,7 +172,7 @@ public class ImpOverlord extends Imp
 				outputText("The imp manages to slash you with his scimitar and his deadly claws!");
 				var damage:int = rand(100) + (str * 1.5) + weaponAttack;
 				if (damage < 30) damage = 30; //Min-cap damage.
-				if (damage >= 50) {
+				if (damage >= 50 && !player.immuneToBleed()) {
 					outputText("You let out a cry in pain and you swear you could see your wounds bleeding. ");
 					player.createStatusEffect(StatusEffects.IzmaBleed, 2, 0, 0, 0);
 				}

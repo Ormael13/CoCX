@@ -86,43 +86,83 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	spriteSelect(null);
 	outputText(images.showImage("location-bazaar"));
 	//Make sure flags to allow entrance is set.
-	if(flags[kFLAGS.BAZAAR_ENTERED] == 0) flags[kFLAGS.BAZAAR_ENTERED] = 1;
-	outputText("You breeze past the crimson guard and enter the interior of the Bizarre Bazaar.  The ground is hard-packed, trampled as if walked over by hundreds of hooves, paws, and feet.  A massive bonfire rages in the center of the clearing, crackling and popping as it consumes its fuel gluttonously.  Surrounding the blazing behemoth are tiny, wheeled food-carts with vendors hawking everything from sausage to something called a 'marshmallow'.  Huge wagons ring the clearing, many set up to display exotic wares or services.  You can see everything from dancing centaurs to demons browsing the wares, but it seems an uneasy truce of sorts reigns here.  Then again, maybe the demons have just not had the chance to openly attack this place yet.");
-	outputText("\n\nOne of the wagons proudly proclaims itself to be \"Greta's Garments,\" though both 'G's are emphasized with cute, stylized devil horns, and the 'S' is shaped in the form of a spaded, demonic tail.  Obviously it must some kind of clothing shop.");
-	roxanne.RoxanneAppearance();
-	benoit.setBenoitShop();
-	fapArena.fapAppearance();
-	blackCock.blackCockDescription();
-	//Set menu. The top row is always available.
+	if (flags[kFLAGS.BAZAAR_ENTERED] == 0) flags[kFLAGS.BAZAAR_ENTERED] = 1;
+	if (flags[kFLAGS.THE_TRENCH_ENTERED] == 13) eventLiquidDiamond();
+	else {
+		outputText("You breeze past the crimson guard and enter the interior of the Bizarre Bazaar.  The ground is hard-packed, trampled as if walked over by hundreds of hooves, paws, and feet.  A massive bonfire rages in the center of the clearing, crackling and popping as it consumes its fuel gluttonously.  Surrounding the blazing behemoth are tiny, wheeled food-carts with vendors hawking everything from sausage to something called a 'marshmallow'.  Huge wagons ring the clearing, many set up to display exotic wares or services.  You can see everything from dancing centaurs to demons browsing the wares, but it seems an uneasy truce of sorts reigns here.  Then again, maybe the demons have just not had the chance to openly attack this place yet.");
+		outputText("\n\nOne of the wagons proudly proclaims itself to be \"Greta's Garments,\" though both 'G's are emphasized with cute, stylized devil horns, and the 'S' is shaped in the form of a spaded, demonic tail.  Obviously it must some kind of clothing shop.");
+		roxanne.RoxanneAppearance();
+		benoit.setBenoitShop();
+		fapArena.fapAppearance();
+		blackCock.blackCockDescription();
+		menu();//Set menu. The top row is always available.
+		addButton(0, "Shops", shopMenu);
+		addButton(1, (flags[kFLAGS.FAP_ARENA_RULES_EXPLAINED] > 0 ? "Fap Arena" : "Tent"), fapArena.fapArenaGOOOO);
+		addButton(2, "Food Tent", blackCock.enterTheBlackCock).hint("The incredible smell seems to come from that tent.", "The Black Cock");
+	//	addButton(4, "Back Alley", investigateBackAlley).hint("That back alley looks suspicious. Do you dare investigate?");
+		//Cinnabar
+		if (model.time.hours >= 15 && model.time.hours <= 20) addButton(5, (flags[kFLAGS.CINNABAR_NUMBER_ENCOUNTERS] > 0 ? "Cinnabar" : "Rat"), cinnabar.cinnabarAppearance(false));
+		//Griping Demons
+		if(flags[kFLAGS.BAZAAR_DEMONS_CONVERSATION] == 0 && rand(4) == 0 && demons) {
+			overHearDemonsAboutSyrena();
+			return;
+		}
+		if((flags[kFLAGS.BAZAAR_DEMONS_CONVERSATION] == 1 || flags[kFLAGS.BAZAAR_DEMONS_CONVERSATION] == 2) && demons && rand(10) == 0) {
+			//[Repeat Variant]
+			outputText("\n\n<b>The familiar sounds of the two griping demons can be heard nearby.  Do you listen in again?</b>");
+			addButton(6, "GripingDemons", overHearDemonsAboutSyrena).hint("Overhear the conversation of the two griping demons.", "Griping Demons");
+		}
+		//Lilium
+		if (lilium.LiliumText(false) != null) {
+			addButton(7, (flags[kFLAGS.TIMES_FUCKED_LILIUM] > 0 ? "Lilium" : "Demon"), lilium.LiliumText(false));
+		}
+		//Roxanne
+		addButton(8, (flags[kFLAGS.ROXANNE_MET] > 0 ? "Roxanne" : "Lizans"), (flags[kFLAGS.ROXANNE_MET] > 0 ? roxanne.RoxanneChooseApproachOrRepeat : roxanne.Roxanne1stApproach));
+		//Bimbo Niamh
+		if (flags[kFLAGS.NIAMH_STATUS] == 2 && flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] == -1) {
+			outputText("\n\nThe sounds of voices raised in song and girlish laughter makes it obvious where Niamh is holding a perpetual party.");
+			addButton(9, "Niamh", SceneLib.telAdre.niamh.bazaarNiamh);
+		}
+		addButton(14, "Leave", camp.returnToCampUseOneHour);
+	}
+}
+
+private function eventLiquidDiamond():void {
+	outputText("A man seems to be standing on a series of crates in front of a small crowd, holding what looks like a large glass bottle with some sort of sparkly liquid. Is this the ‘Liquid Diamond’ Grayda mentioned? It could be worth an investigation.\n\n");
+	outputText("\"<i>That’s right folks, a potion of eternal youth! Guaranteed to put you back in your prime for the low, low cost of 5000 gems!</i>\" At that mention, the crowd seems to disperse. Leaving only you and the man.\n\n");
+	outputText("\"<i>You there! Are you interested in buying this miracle drink?</i>\"\n\n");
+	outputText("It seems this con artist isn’t very convincing, but you need that bottle regardless of the snake oil salesman’s intentions, so you’ll play along for now. And you give the sleazy man "+(silly() ? "who is obviously voiced by Danny Devito ":"")+"a nice smile and \"<i>yes sir!</i>\"\n\n");
+	outputText("The odd man hops down from the stack of crates, several of his features showing severe taint. \"<i>Excellent! Why don’t you take a sample sniff.</i>\" The man quickly uncorks the bottle before putting it underneath your nose as he tries to hold back a gag from the presumably foul smell.\n\n");
+	outputText("Or at least that’s what you think he’s smelling, but to you, it smells like cherry trees baked into a nice citrus cake. Your daydreaming is interrupted however by another onset of itching assaults your eyes.\n\n");
+	outputText("\"<i>It could be yours! For only 7000 gems.</i>\"\n\n");
+	outputText("7000 gems? That’s 2000 more than he originally offered!\n\n");
+	outputText("\"<i>It’s very obvious this is something you want, and you react uniquely to it, so it’s 7000 gems or nothing.</i>\"\n\n");
+	outputText("Well, it seems like you have a choice to make here; you could either pay him the required amount or tell him you don’t have that many gems on you. However he doesn’t look particularly strong, and you could easily overpower him and flee the scene with the bottle, but you feel like this may come to bite you back later.\n\n");
 	menu();
-	addButton(0, "Shops", shopMenu);
-	addButton(1, (flags[kFLAGS.FAP_ARENA_RULES_EXPLAINED] > 0 ? "Fap Arena" : "Tent"), fapArena.fapArenaGOOOO);
-	addButton(2, "Food Tent", blackCock.enterTheBlackCock).hint("The incredible smell seems to come from that tent.", "The Black Cock");
-//	addButton(4, "Back Alley", investigateBackAlley).hint("That back alley looks suspicious. Do you dare investigate?");
-	//Cinnabar
-	if (model.time.hours >= 15 && model.time.hours <= 20) addButton(5, (flags[kFLAGS.CINNABAR_NUMBER_ENCOUNTERS] > 0 ? "Cinnabar" : "Rat"), cinnabar.cinnabarAppearance(false));
-	//Griping Demons
-	if(flags[kFLAGS.BAZAAR_DEMONS_CONVERSATION] == 0 && rand(4) == 0 && demons) {
-		overHearDemonsAboutSyrena();
-		return;
-	}
-	if((flags[kFLAGS.BAZAAR_DEMONS_CONVERSATION] == 1 || flags[kFLAGS.BAZAAR_DEMONS_CONVERSATION] == 2) && demons && rand(10) == 0) {
-		//[Repeat Variant]
-		outputText("\n\n<b>The familiar sounds of the two griping demons can be heard nearby.  Do you listen in again?</b>");
-		addButton(6, "GripingDemons", overHearDemonsAboutSyrena).hint("Overhear the conversation of the two griping demons.", "Griping Demons");
-	}
-	//Lilium
-	if (lilium.LiliumText(false) != null) {
-		addButton(7, (flags[kFLAGS.TIMES_FUCKED_LILIUM] > 0 ? "Lilium" : "Demon"), lilium.LiliumText(false));
-	}
-	//Roxanne
-	addButton(8, (flags[kFLAGS.ROXANNE_MET] > 0 ? "Roxanne" : "Lizans"), (flags[kFLAGS.ROXANNE_MET] > 0 ? roxanne.RoxanneChooseApproachOrRepeat : roxanne.Roxanne1stApproach));
-	//Bimbo Niamh
-	if (flags[kFLAGS.NIAMH_STATUS] == 2 && flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] == -1) {
-		outputText("\n\nThe sounds of voices raised in song and girlish laughter makes it obvious where Niamh is holding a perpetual party.");
-        addButton(9, "Niamh", SceneLib.telAdre.niamh.bazaarNiamh);
-    }
-	addButton(14,"Leave",camp.returnToCampUseOneHour);
+	addButtonIfTrue(1, "Pay", eventLiquidDiamondPay, "You need 7,000 gems!", player.gems >= 7000);
+	addButton(2, "Don’t Pay", eventLiquidDiamondDontPay);
+	addButton(3, "Steal", eventLiquidDiamondSteal);
+}
+private function eventLiquidDiamondPay():void {
+	outputText("You begrudgingly hand over the required amount of gems, which the man swiftly takes while handing you the bottle quickly muttering something about no refunds before scampering off somewhere else. Hopefully, you never see the scalper again.\n\n");
+	outputText("<b>(Obtained ‘Liquid Diamond’ key item)</b>\n\n");
+	player.gems -= 7000;
+	player.createKeyItem("Liquid Diamond", 0, 0, 0, 0);
+	flags[kFLAGS.THE_TRENCH_ENTERED] = 14;
+	doNext(enterTheBazaarAndMenu);
+}
+private function eventLiquidDiamondDontPay():void {
+	outputText("You tell him that you currently don’t have the right amount of gems for purchase.\n\n");
+	outputText("\"<i>Shame. Come back when you can pay.</i>\"\n\n");
+	flags[kFLAGS.THE_TRENCH_ENTERED] = 13.5;
+	doNext(enterTheBazaarAndMenu);
+}
+private function eventLiquidDiamondSteal():void {
+	outputText("Dropping the friendly act. You viscously growl as you slam your fist into his stomach, and snag the bottle from his now loose hand before turning tail and running as he cries out. Luckily for you it seems no one paid attention to the scene or they simply don’t care, allowing you to get away without incident. You can’t help but feel a little bad about the whole ordeal, but it got you what you desperately needed, and to be fair he was a con artist.\n\n");
+	outputText("<b>(Obtained ‘Liquid Diamond’ key item)</b>\n\n");
+	player.createKeyItem("Liquid Diamond", 0, 0, 0, 0);
+	flags[kFLAGS.THE_TRENCH_ENTERED] = 14;
+	doNext(enterTheBazaarAndMenu);
 }
 
 private function shopMenu():void {
@@ -633,10 +673,10 @@ private function browseDemSocksSon():void {
 	bd.add("Cockring",curry(cockSockType, 10));
 	submenu(bd, gretasGarments, 0, false);
 
-	function cockSockType(type:int):void{
+	function cockSockType(cocksock_type:int):void{
 		var cost:int = 0;
 		clearOutput();
-		switch (type) {
+		switch (cocksock_type) {
 			case 0:
 				outputText("You spy a thick, woolen sock sitting on a counter and take it up to Greta.  \"<i>Ah, yes.  That's our basic sock.  Warm and cozy, great for those chilly nights.  That one's a mere 10 gems.  A steal, of course.</i>\"");
 				cost = 10;
@@ -682,18 +722,18 @@ private function browseDemSocksSon():void {
 				cost = 100;
 				break;
 		}
-		prePurchase(type, cost);
+		prePurchase(cocksock_type, cost);
 	}
 
-	function prePurchase(type:int, cost:int):void{
+	function prePurchase(cocksock_type:int, cost:int):void{
 		menu();
-		if (player.gems >= cost) addButton(0, "Buy it!", pickACockForSock, type, cost);
+		if (player.gems >= cost) addButton(0, "Buy it!", pickACockForSock, cocksock_type, cost);
 		else addButtonDisabled(0, "Buy It!", "You can't afford it!");
 		addButton(4,"Back",browseDemSocksSon);
 
 	}
 
-	function pickACockForSock(type:int, cost:int):void {
+	function pickACockForSock(cocksock_type:int, cost:int):void {
 		//Buy Cock-sock
 		clearOutput();
 		outputText("You take the cock-sock over to the counter where Greta sits, knitting even more garments and place down the gems required.  \"<i>Aha, good choice, honey!</i>\" the succubus says, snatching up the money and stashing it away.  \"<i>Now let's get that bad boy fitted on you.</i>\"");
@@ -701,20 +741,20 @@ private function browseDemSocksSon():void {
 		//[If PC only has one cock, jump immediately to Putting It On, else:
 		if(player.cockTotal() == 1) {
 			menu();
-			addButton(0,"Next",lastchance2backout,type, cost);
+			addButton(0,"Next",lastchance2backout,cocksock_type, cost);
 		}
 		else {
 			outputText("\n\nWhich cock would you like to put it on?");
 			var button:int = 0;
 			menu();
 			while(button < player.cockTotal()) {
-				if(player.cocks[button].sock == "") addButton(button,String(button+1),lastchance2backout, type, cost, button);
+				if(player.cocks[button].sock == "") addButton(button,String(button+1),lastchance2backout, cocksock_type, cost, button);
 				button++;
 			}
 		}
 	}
 
-	function lastchance2backout(type:int, cost:int, cockChosen:int = 0):void{
+	function lastchance2backout(cocksock_type:int, cost:int, cockChosen:int = 0):void{
 		flags[kFLAGS.SOCKS_BOUGHT]++;
 		//Putting it On - First Time
 		if(flags[kFLAGS.SOCKS_BOUGHT] == 1) {
@@ -730,13 +770,13 @@ private function browseDemSocksSon():void {
 			outputText("\n\nWell?  Do you want this cock-sock attached to your penis semi-permanently?");
 		}
 		menu();
-		addButton(0,"Yes",cockSockInstall, type, cost, cockChosen);
+		addButton(0,"Yes",cockSockInstall, cocksock_type, cost, cockChosen);
 		addButton(1,"No",noCockSock);
 	}
 
-	function cockSockInstall(type:int, cost:int, cockChosen:int = 0):void{
+	function cockSockInstall(cocksock_type:int, cost:int, cockChosen:int = 0):void{
 		var conflict:Boolean = false;
-		if(cockSocksVariant[type] == "viridian") {
+		if(cockSocksVariant[cocksock_type] == "viridian") {
 			if(!player.hasPerk(PerkLib.LustyRegeneration)) {
 				player.createPerk(PerkLib.LustyRegeneration,0,0,0,0);
 			}
@@ -744,7 +784,7 @@ private function browseDemSocksSon():void {
 				conflict = true;
 			}
 		}
-		if(cockSocksVariant[type] == "cockring") {
+		if(cockSocksVariant[cocksock_type] == "cockring") {
 			if(!player.hasPerk(PerkLib.PentUp)) player.createPerk(PerkLib.PentUp,10,0,0,0);
 			else player.addPerkValue(PerkLib.PentUp,1,5);
 			player.buff("PentUp").setStat("minlustx", player.perkv1(PerkLib.PentUp)*0.01).withText("Pent up");
@@ -752,7 +792,7 @@ private function browseDemSocksSon():void {
 		outputText("You nod to the busty succubus and strip off your [armor], revealing your naked body.  Greta's eyes light up as she looks over your body with barely-contained lust.  Finally her eyes settle onto your " + cockDescript(cockChosen) + ", and she licks her lips.  ");
 		player.gems -= cost;
 		if (!conflict) { // There's no conflict. DO IT!!!
-			player.cocks[cockChosen].sock = cockSocksVariant[type];
+			player.cocks[cockChosen].sock = cockSocksVariant[cocksock_type];
 			statScreenRefresh();
 			outputText("With one hand she lifts your limp cock up, giving it a pleasant little stroke.");
 			outputText("\n\nHer other hand approaches, her thumb, fore- and middle-fingers holding the sock open as she slips it over your " + player.cockHead(cockChosen) + ".  She pulls it snugly into place and then gives your penis a little kiss.  The second her lips make contact with your flesh, a chill runs across your body, followed by a flood of warmth.");
@@ -1023,7 +1063,7 @@ private function abuseHisAss():void {
 	outputText("  \"<i>O-OI!</i>\"  The tiger man shouts out, his head turning to try to see behind him.  With a grin on your lips you grip the hilt of [oneCock] and slap its length over the tiger's rump.  You can see the tint to the tiger man's cheek as he hears and feels your dick smacking his exposed ass.  Pre-cum drips down [oneCock] as you line yourself up, jamming it between the tiger's lovely mounds. He gives a surprised shout as your cockhead presses to his tiny, puckered hole.");
 
 	//Cocksize check
-	//[[If smallest cock is over 16 inches)
+	//(If smallest cock is over 16 inches)
 	if(player.smallestCockLength() >= 16) {
 		outputText("\n\nYour lips part to let out a grunt of frustration.  Your cockhead is unable to break through the tiger man's tight resistance.  His struggles start to die down as [eachCock] continues to drool over his muscled rear.");
 		if(player.cockTotal() == 1) outputText("  You squeeze your [cocks] between his warm ass cheeks, stroking yourself with his exposed bottom.  The tiger whimpers meekly under you.");

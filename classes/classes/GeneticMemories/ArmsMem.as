@@ -549,6 +549,17 @@ import classes.CoC;
             }
         });
 
+        public static const SATYR:int = _partid++;
+        EnumValue.add(Memories, SATYR, "SATYR", {
+            id: "Satyr Arms",
+            name: "Satyr Arms",
+            cost: 100,
+            title: "Satyr",
+            transformation: function(): Transformation {
+                return CoC.instance.transformations.ArmsSatyr;
+            }
+        });
+
         public static const SEA_DRAGON:int = _partid++;
         EnumValue.add(Memories, SEA_DRAGON, "SEA_DRAGON", {
             id: "SeaDragon Arms",
@@ -710,9 +721,75 @@ import classes.CoC;
             cost: 100,
             title: "Arigean",
             transformation: function(): Transformation {
-                return CoC.instance.transformations.ArmsAbyssalShark;
+                return CoC.instance.transformations.ArmsArigean;
             }
         });
+
+		public static const DEMON:int = _partid++;
+		EnumValue.add(Memories, DEMON, "DEMON", {
+			id: "Demon Arms",
+			name: "Demon Claws (Arms)",
+			cost: 100,
+			title: "Demon",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsDemon;
+			}
+		});
+
+		public static const DEER:int = _partid++;
+		EnumValue.add(Memories, DEER, "DEER", {
+			id: "Deer Arms",
+			name: "Deer Arms",
+			cost: 100,
+			title: "Deer",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsDeer;
+			}
+		});
+
+		public static const REINDEER:int = _partid++;
+		EnumValue.add(Memories, REINDEER, "REINDEER", {
+			id: "Reindeer Arms",
+			name: "Reindeer Arms",
+			cost: 200,
+			title: "Reindeer",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsReindeer;
+			}
+		});
+
+		public static const MOTH:int = _partid++;
+		EnumValue.add(Memories, MOTH, "MOTH", {
+			id: "Moth Arms",
+			name: "Moth Arms",
+			cost: 100,
+			title: "Moth",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsMoth;
+			}
+		});
+
+		public static const TROLL:int = _partid++;
+		EnumValue.add(Memories, TROLL, "TROLL", {
+			id: "Troll Arms",
+			name: "Troll Arms",
+			cost: 100,
+			title: "Troll",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsTroll;
+			}
+		});
+
+		public static const GLACIAL_TROLL:int = _partid++;
+		EnumValue.add(Memories, GLACIAL_TROLL, "GLACIAL_TROLL", {
+			id: "G.Troll Arms",
+			name: "G.Troll Arms",
+			cost: 100,
+			title: "G.Troll",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsGlacialTroll;
+			}
+		});
 
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];

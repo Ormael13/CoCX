@@ -43,7 +43,7 @@ public class GoblinShaman extends Goblin
 			//Blind
 			else if (spellChooser == 1 && mana >= spellCostBlind) {
 				outputText("The goblin glares at you and points at you! A bright flash erupts before you!  ");
-				if ((!player.perkv1(IMutationsLib.GorgonEyesIM) >= 1 && rand(player.inte / 5) <= 4) && !player.hasPerk(PerkLib.BlindImmunity)) {
+				if ((!player.perkv1(IMutationsLib.GorgonEyesIM) >= 1 && rand(player.inte / 5) <= 4) && !player.isImmuneToBlind()) {
 					outputText("<b>You are blinded!</b>");
 					player.createStatusEffect(StatusEffects.Blind, 1 + rand(3), 0, 0, 0);
 				}
@@ -68,10 +68,7 @@ public class GoblinShaman extends Goblin
 					damage *= 1.5;
 					outputText("It's super effective! ");
 				}
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) damage *= 1.2;
-				else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) damage *= 1.5;
-				else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) damage *= 2;
-				else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) damage *= 3.5;
+				
 				damage = Math.round(damage);
 				player.takeFireDamage(damage, true);
 				mana -= spellCostWhitefire;
@@ -87,7 +84,7 @@ public class GoblinShaman extends Goblin
 			else if (spellChooser == 4 && mana >= spellCostHeal) {
 				outputText("She focuses on her body and her desire to end pain, trying to draw on her arousal without enhancing it.");
 				var temp:int = int(10 + (inte/2) + rand(inte/3)) * spellMultiplier();
-				outputText("She flushes with success as her wounds begin to knit! <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
+				outputText("She flushes with success as her wounds begin to knit! <b>([font-heal]+" + temp + "[/font])</b>.");
 				addHP(temp);
 				mana -= spellCostHeal;
 			}
@@ -162,14 +159,21 @@ public class GoblinShaman extends Goblin
 					add(consumables.GOB_ALE,5).
 					add(weapons.W_STAFF,1).
 					add(undergarments.FURLOIN,1).
-					add(jewelries.MYSTRNG, 1).
+					add(jewelries.MYSTRNG,1).
 					add(jewelries.LIFERNG,1).
+					add(consumables.GINSENG,1).
 					addMany(1,consumables.L_DRAFT,
 							consumables.PINKDYE,
 							consumables.BLUEDYE,
 							consumables.ORANGDY,
 							consumables.GREEN_D,
-							consumables.PURPDYE);
+							consumables.PURPDYE).
+					addMany(3,consumables.HEALHERB,
+							consumables.MOONGRASS,
+							consumables.SNAKEBANE,
+							consumables.IRONWEED,
+							consumables.BLADEFERN,
+							consumables.RAUNENECT);
 			this.abilities = [
 				{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON]},
 				{ call: goblinDrugAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[TAG_FLUID]},

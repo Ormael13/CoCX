@@ -52,7 +52,7 @@ public function fixed():Boolean {
 
 public function ExcelliaPathChoice():void {
 	clearOutput();
-	if (followerShouldra()) {
+	if (followerShouldra() && !player.hasStatusEffect(StatusEffects.ShouldraOff)) {
 		outputText("When you arrive back at camp you notice the cow-queen Excellia sitting patiently by your bedroll, seemingly waiting for your return. Approaching carefully, she gently opens her eyes and reveals to you that Shouldra is still driving the Queen.\n\n");
 		outputText("\"<i>Hey, champ! Good to see ya again! ...Does this mean you managed to defeat Lethice?</i>\"\n\n");
 		outputText("She stands up, bringing herself to her full height. She must be over seven feet tall, you realise as she pulls you into a soft, squishy embrace. Her tail gently caresses your butt, and she lets out a moo of happiness. Pulling away, she looks at you.\n\n");
@@ -733,7 +733,7 @@ public function totalExcelliaChildren():int {
 	return flags[kFLAGS.EXCELLIA_FEMALE_KIDS] + flags[kFLAGS.EXCELLIA_MALE_KIDS] + flags[kFLAGS.EXCELLIA_FEMALE_COW_KIDS] + flags[kFLAGS.EXCELLIA_MALE_COW_KIDS]
 }
 private function excelliaPreg():void {
-	if (!pregnancy.isPregnant) {// && rand(100) < (10 + Math.round(player.cumQ() / 100))
+	if (!pregnancy.isPregnant && (rand(100) < (10 + Math.round(player.cumQ() / 100)) || player.hasPerk(PerkLib.PilgrimsBounty))) {
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_EXCELLIA);
 		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Excellia is pregnant!</b>");
 	}

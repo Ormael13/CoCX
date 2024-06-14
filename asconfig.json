@@ -1,0 +1,33 @@
+{
+	"compilerOptions": {
+		"output": "bin-debug/CoC.swf",
+		"source-path": [
+			"classes"
+		],
+		"define": [
+			{
+				"name": "CONFIG::STANDALONE",
+				"value": true
+			},
+			{
+				"name": "CONFIG::AIR",
+				"value": false
+			},
+			{
+				"name": "CONFIG::debug",
+				"value": true
+			}
+		],
+		"library-path": [
+			"lib/bin"
+		],
+		"static-link-runtime-shared-libraries": true,
+		"use-network": false
+	},
+	"files": [
+		"classes/classes/CoC.as"
+	],
+
+	"copySourcePathAssets": true,
+	"additionalOptions": "-locale en_US"
+}

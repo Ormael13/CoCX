@@ -25,7 +25,7 @@ package classes.Scenes.Areas.Forest
 			outputText("The nightmare moans in pleasure as her massive equine cock begins to pulse with an unholy purple light.\n\n");
 			outputText("\"<i>Oooooh....Ahhhh yessss, cuming I’m cuuuuming! Go on and watch, bathe in my depravity!!!</i>\"\n\n");
 			outputText("She lifts her forelegs as her cock shoots a deluge of cum at you, her tainted fluids soaking in your skin.\n\n");
-			dynStats("cor", 50, "lust", (player.lib + this.lust) * 2, "scale", false);
+			dynStats("cor", 50, "lust", (player.lib + this.lust) * 3, "scale", false);
 			this.lust = 0;
 		}
 		public function usingHeal():void {
@@ -38,7 +38,7 @@ package classes.Scenes.Areas.Forest
 				else {
 					outputText("The nightmare laughs gleefully as her spell reaches completion, all of her wounds closing as her body basks in unholy healing magic.\n\n");
 					outputText("\"<i>It does not matter how much you wound me. These are useless before my almighty healing powers.</i>\"\n\n");
-					this.HP = this.maxHP();
+					this.HP = this.maxOverHP();
 				}
 			}
 			else {
@@ -68,7 +68,7 @@ package classes.Scenes.Areas.Forest
 					break;
 			}
 			var teaseD:Number = 0;
-			teaseD += this.lib * 0.1;
+			teaseD += this.lib * 0.2;
 			player.dynStats("lust", teaseD, "scale", false);
 		}
 		public function usingTouchOfCorruption():void {
@@ -98,7 +98,7 @@ package classes.Scenes.Areas.Forest
 			}
 			else {
 				outputText("Her hand slides on your skin leaving a tingling sensation of pleasure as the area she touched glows with tainted magic forcing a moan out you.");
-				player.dynStats("cor", 5, "lib", 10, "sens", 10, "lust", (player.maxLust() * 0.05), "scale", false);
+				player.dynStats("cor", 5, "lib", 10, "sens", 10, "lust", (player.maxLust() * 0.1), "scale", false);
 				player.buff("AuraOfDamnation").addStat("lib", 10).withText("Aura Of Damnation").combatPermanent();
 			}
 		}
@@ -159,8 +159,8 @@ package classes.Scenes.Areas.Forest
 			this.skin.growFur({color:"tawny"});
 			this.hairColor = "brown";
 			this.hairLength = 5;
-			initStrTouSpeInte(20, 125, 120, 20);
-			initWisLibSensCor(20, 125, 75, 100);
+			initStrTouSpeInte(30, 130, 140, 20);
+			initWisLibSensCor(20, 160, 90, 100);
 			this.weaponName = "fists";
 			this.weaponVerb="punch";
 			this.weaponAttack = 1;
@@ -168,10 +168,10 @@ package classes.Scenes.Areas.Forest
 			this.armorDef = 4;
 			this.armorMDef = 20;
 			this.bonusHP = 1000;
-			this.bonusLust = 220;
+			this.bonusLust = 280;
 			this.lust = 20;
 			this.lustVuln = .85;
-			this.level = 20;
+			this.level = 30;
 			this.gems = 8 + rand(11);
 			this.drop = NO_DROP;
 			this.ears.type = Ears.HORSE;
@@ -179,6 +179,8 @@ package classes.Scenes.Areas.Forest
 			this.tailType = Tail.HORSE;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			checkMonster();
 		}
 	}

@@ -8,6 +8,8 @@ import classes.IMutations.*;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
+import coc.view.CoCButton;
+
 public class Izumi extends Monster
 	{
 		// Set trace outout for this classes' content.
@@ -136,6 +138,17 @@ public class Izumi extends Monster
 			if (flags[kFLAGS.IZUMI_LVL_UP] >= 8) this.createPerk(PerkLib.MythicalStrength, 0, 0, 0, 0);
 			if (flags[kFLAGS.IZUMI_LVL_UP] >= 9) IMutationsLib.OniMusculatureIM.acquireMutation(this, "none");
 			checkMonster();
+		}
+
+		override public function changeBtnWhenBound(btnStruggle:CoCButton, btnBoundWait:CoCButton):void{
+			if (player.hasStatusEffect(StatusEffects.Titsmother)) {
+				btnStruggle.call(titSmotherStruggle);
+				btnBoundWait.call(titSmotherWait);
+			}
+			else if (player.hasStatusEffect(StatusEffects.Chokeslam)) {
+				btnStruggle.call(chokeSlamStruggle);
+				btnBoundWait.call(chokeSlamWait);
+			}
 		}
 
 		// Override won/lost calls
@@ -363,7 +376,7 @@ public class Izumi extends Monster
 			outputText(" in the face.  " + oniname() + " drops you, staggering back in surprise.  \"Ow!\"  She actually yelps, covering her face with her hands.\n\n");
 
 			outputText("You drop to the ground and roll away, expecting some form of retribution.  " + oniname() + " glares at you from behind her hand for a moment, then snickers.  Slowly, she drops back into her fighting stance and gestures for your bout to continue.");
-			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+			outputText("<b>([font-damage]" + damage + "[/font])</b>");
 			cleanupChokeslam();
 			
 			this.HP -= damage;
@@ -503,7 +516,7 @@ public class Izumi extends Monster
 			cleanupTitsmother();
 			var damage:Number = (15 + rand(player.str));
 			this.HP -= damage;
-			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+			outputText("<b>([font-damage]" + damage + "[/font])</b>");
 		}
 		
 		// Wait handler for titsmother attack

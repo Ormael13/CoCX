@@ -41,7 +41,7 @@ import classes.internals.WeightedDrop;
 				outputText(" avoid his charge, jumping just in time to avoid his hands, and then his feet. He's unable to stop himself in time and collides head first with a boulder slightly smaller than his head. ");
 				var giantDmg:Number = 30 + rand(30);
 				HP -= giantDmg;
-				outputText("Young giant takes <b><font color=\"#800000\">" + giantDmg + "</font></b> damage from his impact.  ");
+				outputText("Young giant takes <b>[font-damage]" + giantDmg + "[/font]</b> damage from his impact.  ");
 				outputText("<b>Young giant is stunned!</b>");
 				createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 			}
@@ -178,7 +178,15 @@ import classes.internals.WeightedDrop;
 			player.takePhysDamage(damage, true);
 			outputText("\n\n");
 		}
-		
+
+		override public function midAttackSeal():Boolean{
+			if (player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+				youngGiantBoulderHit(0);
+				return false;
+			}
+			else return true;
+		}
+
 		override protected function performCombatAction():void
 		{
 			var chooser:Number = 0;

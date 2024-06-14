@@ -24,7 +24,7 @@ public class Scylla extends Monster
 		public function scyllaInkSpray():void {
 			clearOutput();
 			outputText("" + this.capitalA + this.short + " stretches all her tentacles apart revealing a huge gaping pussy at the center which spray a cloud of ink all around you impairing your vision. ");
-			if (!player.hasPerk(PerkLib.BlindImmunity)) player.createStatusEffect(StatusEffects.Blind, 2, 0, 0, 0);
+			if (!player.isImmuneToBlind()) player.createStatusEffect(StatusEffects.Blind, 2, 0, 0, 0);
 		}
 		
 		public function scyllaTentacleSlap():void {
@@ -117,6 +117,7 @@ public class Scylla extends Monster
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.WaterNature, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

@@ -642,28 +642,28 @@ public class KitsuneScene extends BaseContent
 		private function outro(tentacles:Boolean = false, dick:Boolean = true):void {
 			clearOutput();
 			fatigue(15);
-			if (player.fatigue > player.maxFatigue() * 0.8) {
+			if (player.fatigue > player.maxOverFatigue() * 0.8) {
 				mansionBadEnd();
 				return;
 			}
-			if (player.fatigue > player.maxFatigue() * 0.5)
+			if (player.fatigue > player.maxOverFatigue() * 0.5)
 				outputText("\n\nYour dreams are haunted by visions of yourself wandering through the halls of an impressive manor, searching desperately for a way out.  No matter where you turn, the twisting hallways all seem to turn back on each other.  You are trapped, forever doomed to wander the halls of this manor, being toyed with at the whims of your three beautiful mistresses.");
 			outputText("\n\nWhen you awaken the next morning, the sisters, the hot springs, and the mansion are nowhere to be found.  You are lying naked in the wilderness, your possessions sitting in a neat little pile a short distance away, and your memories of the previous night are little more than a hazy fever dream");
 			if (tentacles) outputText(" - at the very least, your groin seems to be back to its usual configuration");
 			outputText(".  You sit up, but fall back almost immediately, groaning as the full weight of your hangover hits you like a ton of bricks.  It takes a long time before you can muster up the willpower to gather your things and head back to camp, but as you set out, you swear you could hear the sound of ghostly laughter echoing through the trees.\n\n");
-			if (player.cumQ() < 10000 || (!player.hasCock() && player.lactationQ() < 10000)) {
+			if (player.cumQ() < 15000 || (!player.hasCock() && player.lactationQ() < 15000)) {
 				outputText("<b>Due to the residual effects of the sisters' magic, your ");
 				if (dick) {
 					outputText("cum ");
-					if (player.cumQ() < 500) player.cumMultiplier += 3;
-					if (player.cumQ() < 2000) player.cumMultiplier += 2;
-					if (player.cumQ() < 10000) player.cumMultiplier += 1;
+					if (player.cumQ() < 750) player.cumMultiplier += 3;
+					if (player.cumQ() < 3000) player.cumMultiplier += 2;
+					if (player.cumQ() < 15000) player.cumMultiplier += 1;
 				}
 				else {
 					outputText("milk ");
-					if (player.lactationQ() < 500) player.boostLactation(3);
-					if (player.lactationQ() < 2000) player.boostLactation(2);
-					if (player.lactationQ() < 10000) player.boostLactation(1);
+					if (player.lactationQ() < 750) player.boostLactation(3);
+					if (player.lactationQ() < 3000) player.boostLactation(2);
+					if (player.lactationQ() < 15000) player.boostLactation(1);
 				}
 				outputText("production has been enhanced.</b>");
 			}
@@ -1114,11 +1114,11 @@ public class KitsuneScene extends BaseContent
 			addButtonIfTrue(4, "Tentacles...", kitsunesGetBonedBy3PlusTentacles, "Req. at least three 30-inch tentacle cocks", player.countCocksWithType(CockTypesEnum.TENTACLE, 30, -1, "length") >= 3);
 			//unique
 			if (monster.hairColor == "blonde") {
-				addButtonIfTrue(5, "FuckDraft", fuckDraftBlond, "Req. Fuck Draft", player.hasItem(consumables.F_DRAFT),
+				addButtonIfTrue(5, "FuckDraft", fuckDraftBlond, "Req. Fuck Draft and a cock", player.hasItem(consumables.F_DRAFT) && player.hasCock(),
 					"Feed her a bottle of FuckDraft and copulate with her like animals.");
-				addButtonIfTrue(6, "Lactaid", lactaidDoseAKitSune, "Req. Lactaid", player.hasItem(consumables.LACTAID),
+				addButtonIfTrue(6, "Lactaid", lactaidDoseAKitSune, "Req. Lactaid and a cock", player.hasItem(consumables.LACTAID) && player.hasCock(),
 					"Nourish her some Lactaid and play with her tits.");
-				addButtonIfTrue(7, "Ovi Elixir", doseAKitsuneWithOviElixirs, "Req. Ovi Elixir", player.hasItem(consumables.OVIELIX),
+				addButtonIfTrue(7, "Ovi Elixir", doseAKitsuneWithOviElixirs, "Req. Ovi Elixir and a cock", player.hasItem(consumables.OVIELIX) && player.hasCock(),
 					"Give her Oviposition Elixir and have some fum.");
 			}
 			if (monster.hairColor == "black") {
@@ -2209,7 +2209,7 @@ public class KitsuneScene extends BaseContent
 			}
 			flags[kFLAGS.KITSUNE_SHRINE_VISIT]++;
 			var SphereMastery:Number = 10;
-			if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 3) SphereMastery += 10;
+			if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3) SphereMastery += 10;
 			//[Read Books] [Meditate] [Steal Statue] - [Leave]
 			menu();
 			addButton(0, "Read Books", readKitsuneBooks);

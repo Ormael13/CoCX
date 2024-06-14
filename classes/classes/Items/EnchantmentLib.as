@@ -1,9 +1,10 @@
 package classes.Items {
+import classes.ItemType;
 import classes.Items.Dynamic.Effects.RaceTfEnchantmentType;
 import classes.Items.Dynamic.Effects.SimpleEnchantmentType;
+import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 import classes.Items.Dynamic.Effects.SimpleRaceEnchantmentType;
 import classes.Items.Dynamic.Effects.StatEnchantmentType;
-import classes.Player;
 import classes.Races;
 
 public class EnchantmentLib extends ItemConstants {
@@ -29,8 +30,7 @@ public class EnchantmentLib extends ItemConstants {
 	 * 	valuePerPower: 100, // optional, default 0
 	 * 	valueX: 1.2, // optional, default 1
 	 * 	valueXPerPower: 0.1, // optional, default 0
-	 * 	onEquip: function(player:Player, enchantment:Enchantment, item:ItemType):void { ... }, // optional, default null
-	 * 	onUnequip: function(player:Player, enchantment:Enchantment, item:ItemType):void { ... }, // optional, default null
+	 * 	onAdd: function(item:ItemType, power:Number, enchantment:Enchantment):void { ... }, // optional, default null
 	 * });
 	 *
 	 * extra params for mkRacials:
@@ -149,10 +149,11 @@ public class EnchantmentLib extends ItemConstants {
 			.setItemCategories(CATEGORIES_WEARABLE)
 			.setSpawnChance(SPAWN_COMMON);
 	public static const MinFem:EnchantmentType            = mk(16, "MinFem", {
-		prefix: "Femininie ",
+		prefix: "Feminine ",
 		suffix: " of Femininity",
 		shortSuffix: "Fem",
 		description: "Min. femininity {power;+d}",
+		hide: true, // description through ItemEffects
 		minLevel: 1,
 		categories: CATEGORIES_WEARABLE,
 		chance: SPAWN_UNCOMMON,
@@ -160,8 +161,8 @@ public class EnchantmentLib extends ItemConstants {
 		maxPower: 10,
 		value: 0,
 		valuePerPower: 50,
-		onEquip: function (player:Player):void {
-			player.fixFemininity();
+		onAdd: function(item:ItemType, power:Number):void {
+			item.withEffect(IELib.MinFem, power);
 		}
 	});
 	public static const MaxFem:EnchantmentType            = mk(17, "MaxFem", {
@@ -169,6 +170,7 @@ public class EnchantmentLib extends ItemConstants {
 		suffix: " of Masculinity",
 		shortSuffix: "Mas",
 		description: "Max. femininity {0-power;+d}",
+		hide: true, // description through ItemEffects
 		minLevel: 1,
 		categories: CATEGORIES_WEARABLE,
 		chance: SPAWN_UNCOMMON,
@@ -176,8 +178,8 @@ public class EnchantmentLib extends ItemConstants {
 		maxPower: 10,
 		value: 0,
 		valuePerPower: 50,
-		onEquip: function (player:Player):void {
-			player.fixFemininity();
+		onAdd: function(item:ItemType, power:Number):void {
+			item.withEffect(IELib.MaxFem, -power);
 		}
 	});
 	public static const Androgyny:EnchantmentType         = mk(18, "Androgyny", {
@@ -185,6 +187,7 @@ public class EnchantmentLib extends ItemConstants {
 		suffix: " of Androgyny",
 		shortSuffix: "AG",
 		description: "Min. femininity {power;+d}, max. femininity {0-power;+d}",
+		hide: true, // description through ItemEffects
 		minLevel: 1,
 		categories: CATEGORIES_WEARABLE,
 		chance: SPAWN_UNCOMMON,
@@ -192,8 +195,9 @@ public class EnchantmentLib extends ItemConstants {
 		maxPower: 10,
 		value: 0,
 		valuePerPower: 75,
-		onEquip: function (player:Player):void {
-			player.fixFemininity();
+		onAdd: function(item:ItemType, power:Number):void {
+			item.withEffect(IELib.MaxFem, -power);
+			item.withEffect(IELib.MinFem, power);
 		}
 	});
 	public static const BonusXp:EnchantmentType    = mk(19, "BonusXp", {
@@ -201,22 +205,30 @@ public class EnchantmentLib extends ItemConstants {
 		suffix: " of Sages",
 		shortSuffix: "XP",
 		description: "XP gain {power*5;+d}%",
+		hide: true, // description through ItemEffects
 		minLevel: 1,
 		chance: SPAWN_RARE,
 		minPower: 1,
 		maxPower: 3,
 		valueX: 1.0,
-		valueXPerPower: 0.5
+		valueXPerPower: 0.5,
+		onAdd: function(item:ItemType, power:Number): void {
+			item.withEffect(IELib.BonusXp, power*5)
+		}
 	});
 	public static const TfImmunity:EnchantmentType = mk(20, "TfImmunity", {
 		prefix: "Immutable ",
 		suffix: " of Immutability",
 		shortSuffix: "Im",
 		description: "Transformation immunity",
+		hide: true, // description through ItemEffects
 		minLevel: 20,
 		chance: SPAWN_VERY_RARE,
 		value: 10000,
-		categories: CATEGORIES_WEARABLE
+		categories: CATEGORIES_WEARABLE,
+		onAdd: function(item:ItemType, power:Number): void {
+			item.withEffect(IELib.TfImmunity, 0)
+		}
 	});
 	/**
 	 * TF player into race.
@@ -231,36 +243,48 @@ public class EnchantmentLib extends ItemConstants {
 		suffix: " of {race.name;C}",
 		shortSuffix: "RAt",
 		description: "+{power*5}% Attack per {race.name} racial tier.",
+		hide: true, // description through ItemEffects
 		minLevel: 1,
 		chance: SPAWN_COMMON,
 		minPower: 1,
 		maxPower: 5,
 		valuePerPower: 100,
-		categories: CATEGORIES_WEAPONS
+		categories: CATEGORIES_WEAPONS,
+		onAdd: function(item:ItemType, power:Number, enchantment:Enchantment): void {
+			item.withEffect(IELib.AttackMult_RaceTier, power*5, (enchantment as SimpleRaceEnchantment).race)
+		}
 	});
 	public static const RaceDefenseBonus:SimpleRaceEnchantmentType = mkRacial(23, "RaceDefenseBonus", {
 		prefix: "{race.name;C} ",
 		suffix: " of {race.name;C}",
 		shortSuffix: "RDf",
 		description: "+{power*5}% Defense per {race.name} racial tier.",
+		hide: true, // description through ItemEffects
 		minLevel: 1,
 		chance: SPAWN_COMMON,
 		minPower: 1,
 		maxPower: 5,
 		valuePerPower: 100,
-		categories: [CATEGORY_ARMOR, CATEGORY_SHIELD]
+		categories: [CATEGORY_ARMOR, CATEGORY_SHIELD],
+		onAdd: function(item:ItemType, power:Number, enchantment:Enchantment): void {
+			item.withEffect(IELib.DefenseMult_RaceTier, power*5, (enchantment as SimpleRaceEnchantment).race)
+		}
 	});
 	public static const RaceSpellPowerBonus:SimpleRaceEnchantmentType = mkRacial(24, "RaceSpellPowerBonus", {
 		prefix: "{race.name;C} ",
 		suffix: " of {race.name;C}",
 		shortSuffix: "RSp",
 		description: "+{power*2}% Spellpower per {race.name} racial tier.",
+		hide: true, // description through ItemEffects
 		minLevel: 1,
 		chance: SPAWN_COMMON,
 		minPower: 1,
 		maxPower: 5,
 		valuePerPower: 100,
-		categories: CATEGORIES_JEWELRY
+		categories: CATEGORIES_JEWELRY,
+		onAdd: function(item:ItemType, power:Number, enchantment:Enchantment): void {
+			item.withEffect(IELib.Spellpower_RaceTier, power*2, (enchantment as SimpleRaceEnchantment).race)
+		}
 	});
 	public static const ResistFire:EnchantmentType           = new StatEnchantmentType(25, "ResistFire",
 			false, "res_fire",
@@ -319,24 +343,32 @@ public class EnchantmentLib extends ItemConstants {
 		suffix: " of {race.name;C}",
 		shortSuffix: "RSp",
 		description: "Increase Spellpower by {power*100}%. Effect doubled for {race.name} race",
+		hide: true,
 		minLevel: 1,
 		chance: 1,
 		minPower: 1,
 		maxPower: 2,
 		valuePerPower: 200,
-		categories: [CATEGORY_SHIELD]
+		categories: [CATEGORY_SHIELD],
+		onAdd: function(item:ItemType, power:Number, enchantment:Enchantment): void {
+			item.withEffect(IELib.Spellpower_RaceX2, power*100, (enchantment as SimpleRaceEnchantment).race)
+		}
 	});
 	public static const RaceTeasePowerDoubled:SimpleRaceEnchantmentType = EnchantmentLib.mkRacial(34, "RaceTeasePowerDoubled", {
 		prefix: "",
 		suffix: " of {race.name;C}",
-		shortSuffix: "RSp",
+		shortSuffix: "RTp",
 		description: "Increase Tease potency by {power*200}%. Effect doubled for {race.name} race",
+		hide: true,
 		minLevel: 1,
 		chance: 1,
 		minPower: 1,
 		maxPower: 2,
 		valuePerPower: 200,
-		categories: [CATEGORY_SHIELD]
+		categories: [CATEGORY_SHIELD],
+		onAdd: function(item:ItemType, power:Number, enchantment:Enchantment): void {
+			item.withEffect(IELib.Tease_RaceX2, power*200, (enchantment as SimpleRaceEnchantment).race)
+		}
 	});
 	
 	public static function decode(o:Array):Enchantment {
@@ -405,6 +437,7 @@ public class EnchantmentLib extends ItemConstants {
 				valueOr(params.suffix, ""),
 				valueOr(params.shortSuffix, ""),
 				valueOrThrow(params.description, "Missing description"),
+				valueOr(params.hide, false),
 				valueOr(params.rarity, RARITY_MAGICAL),
 				valueOr(params.minLevel, 0),
 				valueOr(params.minPower, 1),
@@ -413,8 +446,7 @@ public class EnchantmentLib extends ItemConstants {
 				valueOr(params.valuePerPower, 0),
 				valueOr(params.valueX, 1),
 				valueOr(params.valueXPerPower, 0),
-				valueOr(params.onEquip, null),
-				valueOr(params.onUnEquip, null)
+				valueOr(params.onAdd, null)
 		);
 		if ('chance' in params) enchantmentType.setSpawnChance(params.chance);
 		if ('categories' in params) enchantmentType.setItemCategories(params.categories.slice());
@@ -430,6 +462,7 @@ public class EnchantmentLib extends ItemConstants {
 				valueOr(params.suffix, ""),
 				valueOr(params.shortSuffix, ""),
 				valueOrThrow(params.description, "Missing description"),
+				valueOr(params.hide, false),
 				valueOr(params.rarity, RARITY_MAGICAL),
 				valueOr(params.races, Races.RacesForRandomEnchantments),
 				valueOr(params.minLevel, 0),
@@ -439,8 +472,7 @@ public class EnchantmentLib extends ItemConstants {
 				valueOr(params.valuePerPower, 0),
 				valueOr(params.valueX, 1),
 				valueOr(params.valueXPerPower, 0),
-				valueOr(params.onEquip, null),
-				valueOr(params.onUnEquip, null)
+				valueOr(params.onAdd, null)
 		);
 		if ('chance' in params) enchantmentType.setSpawnChance(params.chance);
 		if ('categories' in params) enchantmentType.setItemCategories(params.categories.slice());

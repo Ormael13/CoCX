@@ -4,6 +4,7 @@
  */
 package classes.Items.Weapons
 {
+import classes.CoC;
 import classes.ItemType;
 import classes.StatusEffects;
 import classes.GlobalFlags.kFLAGS;
@@ -15,7 +16,12 @@ import classes.Scenes.NPCs.AetherTwinsFollowers;
 		
 		public function AetherD()
 		{
-			super("AetherD", "AetherD", "Aether (Dex)", "an Aether (Dex)", "punch", 0, 0, "Aether - dexter part of mysterious sentient weapons pair rumored to be forged by the god of blacksmiths.", "", "Gauntlet");
+			super("AetherD", "AetherD", "Aether (Dex)", "an Aether (Dex)", "punch", 0, 0, "Aether - dexter part of mysterious sentient weapons pair rumored to be forged by the god of blacksmiths.", WT_GAUNTLET, WSZ_MEDIUM);
+		}
+		
+		override public function isDual():Boolean {
+			if (game.player.hasAetherTwinsTierS2()) return true;
+			return false;
 		}
 		
 		override public function get description():String {
@@ -43,6 +49,11 @@ import classes.Scenes.NPCs.AetherTwinsFollowers;
 			return (0 + boost);
 		}
 		
+		override public function get size():int {
+			if (game.player.hasAetherTwinsTierS2()) return WSZ_SMALL;
+			return WSZ_MEDIUM;
+		}
+		
 		override public function useText():void {
 			outputText("\n\n\"<i>Well alright then, [name]!</i>\" Aether (Dex) says excitedly, \"<i>Let's go!</i>\"\n\n");
 		}
@@ -62,6 +73,7 @@ import classes.Scenes.NPCs.AetherTwinsFollowers;
 		}
 		
 		override public function beforeUnequip(doOutput:Boolean):ItemType {
+			super.beforeUnequip(doOutput);
 			return WeaponLib.FISTS;
 		}
 	}

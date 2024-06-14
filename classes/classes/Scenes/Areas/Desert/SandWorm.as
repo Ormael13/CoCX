@@ -8,6 +8,8 @@ import classes.Scenes.Combat.Combat;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
+import coc.view.CoCButton;
+
 public class SandWorm extends Monster
 	{
 
@@ -21,8 +23,10 @@ public class SandWorm extends Monster
 				dmg1 += eBaseIntelligenceDamage() * 0.2;
 				dmg1 = Math.round(dmg1);
 				dmg1 = player.takeAcidDamage(dmg1, true);
-				if (player.hasStatusEffect(StatusEffects.AcidDoT)) player.addStatusValue(StatusEffects.AcidDoT, 1, 1);
-				else player.createStatusEffect(StatusEffects.AcidDoT, 5, 10, 0, 0);
+				if (!player.immuneToAcid()) {
+					if (player.hasStatusEffect(StatusEffects.AcidDoT)) player.addStatusValue(StatusEffects.AcidDoT, 1, 1);
+					else player.createStatusEffect(StatusEffects.AcidDoT, 5, 10, 0, 0);
+				}
 			}
 		}
 
@@ -36,8 +40,10 @@ public class SandWorm extends Monster
 				dmg1 += eBaseIntelligenceDamage() * 0.2;
 				dmg1 = Math.round(dmg1);
 				dmg1 = player.takeAcidDamage(dmg1, true);
-				if (player.hasStatusEffect(StatusEffects.AcidDoT)) player.addStatusValue(StatusEffects.AcidDoT, 2, 1);
-				else player.createStatusEffect(StatusEffects.AcidDoT, 5, 10, 0, 0);
+				if (!player.immuneToAcid()) {
+					if (player.hasStatusEffect(StatusEffects.AcidDoT)) player.addStatusValue(StatusEffects.AcidDoT, 2, 1);
+					else player.createStatusEffect(StatusEffects.AcidDoT, 5, 10, 0, 0);
+				}
 			}
 		}
 
@@ -128,6 +134,13 @@ public class SandWorm extends Monster
 				}
 			}
 			player.addStatusValue(StatusEffects.MonsterDig, 1, -1);
+		}
+
+		override public function changeBtnWhenBound(btnStruggle:CoCButton, btnBoundWait:CoCButton):void{
+			if (player.hasStatusEffect(StatusEffects.Devoured)) {
+				btnStruggle.call(sandWormDevourStruggle);
+				btnBoundWait.call(sandWormDevourWait);
+			}
 		}
 
 		override protected function performCombatAction():void

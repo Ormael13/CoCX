@@ -12,7 +12,9 @@ import classes.Races;
 
 public class HumanMusculatureMutation extends IMutationPerkType
     {
-        private static const mName:String = "Human Musculature";
+        override public function get mName():String {
+            return "Human Musculature";
+        }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -26,23 +28,11 @@ public class HumanMusculatureMutation extends IMutationPerkType
             if (pTier == 3){
                 descS = "Your musculature increased again your natural strength and tone limit. Boost Warrior's Rage effect (+1 per 10 pts of core stat value) and duration by 5 turns. (+45%/+15% of max core Str/Spe as phantom Str/Spe)";
             }
-            return descS;
-        }
-
-        //Name. Need it say more?
-        override public function name(params:PerkClass=null):String {
-            var sufval:String;
-            switch (currentTier(this, player)){
-                case 2:
-                    sufval = "(Primitive)";
-                    break;
-                case 3:
-                    sufval = "(Evolved)";
-                    break;
-                default:
-                    sufval = "";
+            if (pTier == 4){
+                descS = "Your musculature increased again your natural strength and tone limit. Increases maximum base/core Str, +10% to max overfatigue. Boost Warrior's Rage effect (+1 per 4 pts of core stat value) and duration by 5 turns. (+90%/+45% of max core Str/Spe as phantom Str/Spe)";
             }
-            return mName + sufval;
+            if (pTier >= 1) descS += " (req. 18+ human score to have all effects active)";
+            return descS;
         }
 
         //Mutation Requirements
@@ -72,12 +62,13 @@ public class HumanMusculatureMutation extends IMutationPerkType
             if (pTier == 1) pBuffs['str.mult'] = 0.15;
             if (pTier == 2) pBuffs['str.mult'] = 0.45;
             if (pTier == 3) pBuffs['str.mult'] = 0.9;
+            if (pTier == 4) pBuffs['str.mult'] = 1.8;
             return pBuffs;
         }
 
         public function HumanMusculatureMutation() 
 		{
-			super(mName + " IM", mName, SLOT_MUSCLE, 3);
+			super(mName + " IM", mName, SLOT_MUSCLE, 4);
         }
         
     }

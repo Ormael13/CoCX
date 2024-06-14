@@ -13,7 +13,9 @@ import classes.Races;
 
 public class VenomGlandsMutation extends IMutationPerkType
     {
-        private static const mName:String = "Venom Glands";
+        override public function get mName():String {
+            return "Venom Glands";
+        }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -32,25 +34,6 @@ public class VenomGlandsMutation extends IMutationPerkType
             }
             if (descS != "")descS += ".";
             return descS;
-        }
-
-        //Name. Need it say more?
-        override public function name(params:PerkClass=null):String {
-            var sufval:String;
-            switch (currentTier(this, player)){
-                case 2:
-                    sufval = "(Primitive)";
-                    break;
-                case 3:
-                    sufval = "(Evolved)";
-                    break;
-                case 4:
-                    sufval = "(Final Form)";
-                    break;
-                default:
-                    sufval = "";
-            }
-            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -79,9 +62,9 @@ public class VenomGlandsMutation extends IMutationPerkType
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
             if (pTier == 1) pBuffs['tou.mult'] = 0.05;
-            else if (pTier == 2) pBuffs['tou.mult'] = 0.15;
-            else if (pTier == 3) pBuffs['tou.mult'] = 0.3;
-            else if (pTier == 4) pBuffs['tou.mult'] = 0.6;
+            if (pTier == 2) pBuffs['tou.mult'] = 0.15;
+            if (pTier == 3) pBuffs['tou.mult'] = 0.3;
+            if (pTier == 4) pBuffs['tou.mult'] = 0.6;
             return pBuffs;
         }
 

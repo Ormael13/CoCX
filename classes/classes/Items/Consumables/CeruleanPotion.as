@@ -2,6 +2,7 @@ package classes.Items.Consumables
 {
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumable;
+import classes.PerkLib;
 import classes.StatusEffects;
 
 /**
@@ -20,27 +21,29 @@ import classes.StatusEffects;
 		{
 			clearOutput();
 			player.slimeFeed();
-			//Repeat genderless encounters
-			if (player.gender == 0 && flags[kFLAGS.CERULEAN_POTION_NEUTER_ATTEMPTED] > 0) {
-				outputText("You take another sip of the Cerulean Potion.  You find it soothing and become very excited about the possibility of another visit from the succubus.");
-			}
-			else if (player.gender == 3 && flags[kFLAGS.SCYLLA_CATS_RECALL_TRACKER] > 0) {
-				outputText("With anticipation, you chug down another bottle of the Cerulean Potion. A warm sensation radiates out from your stomach as you feel the potion course through your body.");
-			}
-			//All else
+			if (player.hasPerk(PerkLib.Soulless)) outputText("The liquid tastes rather bland and goes down easily. You do not notice any real effects. Did the merchant con you? Or maybe it not works for true demons?");
 			else {
-				outputText("The liquid tastes rather bland and goes down easily. ");
-				//Special repeat texts
-				if (player.hasStatusEffect(StatusEffects.RepeatSuccubi)) outputText("You look forwards to tonight's encounter.");
-				//First timer huh?
-				else outputText("You do not notice any real effects.  Did the merchant con you?");
+				//Repeat genderless encounters
+				if (player.gender == 0 && flags[kFLAGS.CERULEAN_POTION_NEUTER_ATTEMPTED] > 0) {
+					outputText("You take another sip of the Cerulean Potion.  You find it soothing and become very excited about the possibility of another visit from the succubus.");
+				}
+				else if (player.gender == 3 && flags[kFLAGS.SCYLLA_CATS_RECALL_TRACKER] > 0) {
+					outputText("With anticipation, you chug down another bottle of the Cerulean Potion. A warm sensation radiates out from your stomach as you feel the potion course through your body.");
+				}
+				//All else
+				else {
+					outputText("The liquid tastes rather bland and goes down easily. ");
+					//Special repeat texts
+					if (player.hasStatusEffect(StatusEffects.RepeatSuccubi)) outputText("You look forwards to tonight's encounter.");
+					//First timer huh?
+					else outputText("You do not notice any real effects.  Did the merchant con you?");
+				}
+				if (player.hasStatusEffect(StatusEffects.SuccubiNight)) {
+					if (player.statusEffectv1(StatusEffects.SuccubiNight) < 3) player.addStatusValue(StatusEffects.SuccubiNight,1,1);
+				}
+				else player.createStatusEffect(StatusEffects.SuccubiNight, 1, 0, 0, 0);
 			}
-			if (player.hasStatusEffect(StatusEffects.SuccubiNight)) {
-				if (player.statusEffectv1(StatusEffects.SuccubiNight) < 3) player.addStatusValue(StatusEffects.SuccubiNight,1,1);
-			}
-			else player.createStatusEffect(StatusEffects.SuccubiNight, 1, 0, 0, 0);
 			player.refillHunger(20);
-			
 			return false;
 		}
 	}

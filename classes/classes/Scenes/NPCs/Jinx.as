@@ -8,6 +8,7 @@ import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Combat.CombatAbilities;
 
 use namespace CoC;
 	
@@ -15,9 +16,9 @@ use namespace CoC;
 	{
 		private function jinxBaseAttack():void {
 			outputText("Ayotech maniac casually fires "+this.weaponRangeName+" at you with high skill. ");
-			if (player.hasStatusEffect(StatusEffects.WindWall)) {
+			if (CombatAbilities.EAspectAir.isActive()) {
 				outputText("That is then stopped by wind wall.");
-				player.addStatusValue(StatusEffects.WindWall,2,-1);
+				CombatAbilities.EAspectAir.advance(true);
 			}
 			else {
 				jinxBaseAttackDamage();
@@ -36,9 +37,11 @@ use namespace CoC;
 			if (EngineCore.silly()) this.weaponRangeName = "Fishbones";
 			else this.weaponRangeName = "ayotech canon";
 			outputText("Ayotech maniac casually fires "+this.weaponRangeName+" at you with high skill. ");
-			if (player.hasStatusEffect(StatusEffects.WindWall)) {
+			if (CombatAbilities.EAspectAir.isActive()) {
 				outputText("Still your wind wall manages to stops it.");
-				player.addStatusValue(StatusEffects.WindWall,2,-3);
+				CombatAbilities.EAspectAir.advance(true);
+				CombatAbilities.EAspectAir.advance(true);
+				CombatAbilities.EAspectAir.advance(true);
 			}
 			else {
 				var damage:Number = 0;

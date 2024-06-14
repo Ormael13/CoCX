@@ -109,7 +109,7 @@ public function mitziCamp():void {
 	outputText("You ask the goblin how she likes living in your camp. She hums in thought while she looks around.\n\n");
 	outputText("\"<i>Well I can't deny that it's actually pretty comfortable here.</i>\"\n\n");
 	if (player.hasStatusEffect(StatusEffects.CampRathazul) || EvangelineFollower.EvangelineFollowerStage >= 1) outputText("\"<i>Gotta admit those alchemists really know their stuff. I wonder if they can help me with a few potions I wanted to whip up…</i>\"\n\n");
-	if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) outputText("\"<i>You have a bear of a hunk over there. The way he works that hammer and anvil. Those rippling muscles… Mmm… He could be helpful indeed…</i>\"\n\n");
+	if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2 && !player.hasStatusEffect(StatusEffects.KonstantinOff)) outputText("\"<i>You have a bear of a hunk over there. The way he works that hammer and anvil. Those rippling muscles… Mmm… He could be helpful indeed…</i>\"\n\n");
 	if (isabellaFollower()) {
 		outputText("\"<i>I don't really see cow-girls too often but Isabella seems different somehow… Her milk's pretty tasty too. Maybe she'll let me have some more later.</i>\"\n\n");
 		outputText("She giggles to herself.\n\n");
@@ -330,7 +330,7 @@ public function mitziSexEatenOut():void {
 }
 
 private function mitziPreg():void {
-	if (!pregnancy.isPregnant && rand(100) < (10 + Math.round(player.cumQ() / 100))) {
+	if (!pregnancy.isPregnant && (rand(100) < (10 + Math.round(player.cumQ() / 100)) || player.hasPerk(PerkLib.PilgrimsBounty))) {
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_MITZI);
 		player.createStatusEffect(StatusEffects.MitziPregnant, 0, 0, 0, 0);
 		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Mitzi is pregnant!</b>");

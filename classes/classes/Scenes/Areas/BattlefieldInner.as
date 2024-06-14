@@ -123,7 +123,7 @@ public class BattlefieldInner extends BaseContent
 		if (rand(2) == 0) {
 			outputText("While exploring the battlefield you find the remains of some metal scraps. At first you think you won't find anything useful there but a metal plate draws your attention, it could be useful later. You put the item in your backpack and head back to camp.\n\n");
 			outputText("<b>You found a metal plate.</b>");
-			flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES]++;
+			CampStatsAndResources.MetalPieces++;
 			doNext(camp.returnToCampUseOneHour);
 		} else {
 			outputText("You spot something on the ground among various items remains. Taking a closer look, it's ");

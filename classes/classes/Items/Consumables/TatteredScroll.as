@@ -3,7 +3,6 @@
  */
 package classes.Items.Consumables {
 import classes.Items.Consumable;
-import classes.Items.ItemTags;
 import classes.display.SpriteDb;
 
 public class TatteredScroll extends Consumable {
@@ -11,7 +10,7 @@ public class TatteredScroll extends Consumable {
 
 	public function TatteredScroll() {
 		super("TScroll","TScroll", "a tattered scroll", ITEM_VALUE, "This tattered scroll is written in strange symbols, yet you have the feeling that if you tried to, you could decipher it.");
-		withTag(ItemTags.U_TF);
+		withTag(U_TF);
 	}
 
 

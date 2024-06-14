@@ -30,6 +30,8 @@ public class RedPandaRace extends Race{
         /*Vagina*/		"Human",
         /*Perks*/		"Human"];
 
+	public static const RedPandaHairColors:/*String*/Array = ["white", "auburn", "red", "russet"];
+	
 	public function RedPandaRace(id:int) {
 		super("Red Panda", id, []);//RaceBody);
 	}
@@ -41,18 +43,23 @@ public class RedPandaRace extends Race{
 				.earType(Ears.RED_PANDA, +1)
 				.tailType(Tail.RED_PANDA, +1)
 				.armType(Arms.RED_PANDA, +1)
-				.legType(LowerBody.RED_PANDA, +1);
-		addScoresAfter(2)
+				.legType(LowerBody.RED_PANDA, +1)
+				.hairColor1(ANY(RedPandaHairColors), +1)
 				.skinCoatPattern(Skin.PATTERN_RED_PANDA_UNDERBODY, +1)
-				.skinCoatType(Skin.FUR, +1);
+				.customRequirement("",'russet & black fur',
+						function (body:BodyData):Boolean {
+							return body.player.furColor1 == "russet" && body.player.furColor2 == "black"
+						}, +1)
+				.skinCoatType(Skin.FUR, +1)
+				.height(GREATER_THAN(72), +2);
 		
-		buildTier(8, "red panda")
+		buildTier(10, "red panda")
 				.namesMaleFemaleMorphTaur("red-panda-boy","red-panda-girl",
 						"red-panda-morph","red-panda-taur")
 				.buffs({
-					"str.mult": +0.15,
-					"spe.mult": +0.75,
-					"int.mult": +0.30
+					"str.mult": +0.20,
+					"spe.mult": +0.80,
+					"wis.mult": +0.50
 				})
 				.end()
 	}

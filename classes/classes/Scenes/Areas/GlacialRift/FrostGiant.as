@@ -11,7 +11,15 @@ import classes.internals.WeightedDrop;
 
 public class FrostGiant extends Monster
 	{
-		
+
+		override public function midAttackSeal():Boolean{
+			if (player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+				giantBoulderHit(0);
+				return false;
+			}
+			else return true;
+		}
+
 		override public function interceptPlayerAbility(ability:CombatAbility):Boolean {
 			if (player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 				if (ability is AbstractSpell) {
@@ -52,7 +60,7 @@ public class FrostGiant extends Monster
 				outputText(" avoid his charge, jumping just in time to avoid his hands, and then his feet. He's unable to stop himself in time and collides head first with a boulder slightly smaller than his head. ");
 				var giantDmg:Number = 100 + rand(80);
 				HP -= giantDmg;
-				outputText("The giant takes <b><font color=\"#800000\">" + giantDmg + "</font></b> damage from his impact.  ");
+				outputText("The giant takes <b>[font-damage]" + giantDmg + "[/font]</b> damage from his impact.  ");
 				outputText("<b>The giant is stunned!</b>");
 				createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 			}

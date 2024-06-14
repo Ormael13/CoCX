@@ -11,6 +11,7 @@ import classes.Scenes.SceneLib;
 	 * @author Kitteh6660
 	 */
 	public class CabinProgress extends BaseContent {
+	public static var CampResc:CampStatsAndResources = new CampStatsAndResources();
 
 		public function CabinProgress() {
 
@@ -31,7 +32,7 @@ import classes.Scenes.SceneLib;
 				SceneLib.dungeons.cabin.enterCabin();
 				return;
 			}
-			if (player.fatigue <= player.maxFatigue() - gatherWoodsORquarrySiteMineCost())
+			if (player.fatigue <= player.maxOverFatigue() - gatherWoodsORquarrySiteMineCost())
 			{
 				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 1) startWork();
 				else if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 2) startLayout();
@@ -97,7 +98,7 @@ import classes.Scenes.SceneLib;
 
 		public function canGatherWoods():Boolean {
 			return (player.weapon == weapons.L__AXE || player.weapon == weapons.DL_AXE_ || player.weapon == weapons.MACGRSW || player.weapon == weapons.TMACGRSW || player.weapon == weapons.RIPPER1 || player.weapon == weapons.TRIPPER1 || player.weapon == weapons.RIPPER2 || player.weapon == weapons.TRIPPER2
-			|| player.hasKeyItem("Carpenter's Toolbox") >= 0 || player.isInGoblinMech()) && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < SceneLib.campUpgrades.checkMaterialsCapWood() && player.statusEffectv1(StatusEffects.ResourceNode1) < 5;
+			|| player.hasKeyItem("Carpenter's Toolbox") >= 0 || player.isInGoblinMech()) && CampStatsAndResources.WoodResc < SceneLib.campUpgrades.checkMaterialsCapWood() && player.statusEffectv1(StatusEffects.ResourceNode1) < 5;
 		}
 		//STAGE 4 - Gather woods, explore forest to encounter.
 		public function gatherWoods():void {
@@ -110,7 +111,7 @@ import classes.Scenes.SceneLib;
 				player.addStatusValue(StatusEffects.ResourceNode1, 1, 1);
 			}
 			menu();
-			if (player.fatigue > player.maxFatigue() - gatherWoodsORquarrySiteMineCost()) {
+			if (player.fatigue > player.maxOverFatigue() - gatherWoodsORquarrySiteMineCost()) {
 				outputText("<b>You are too tired to consider cutting down the trees. Perhaps some rest will suffice?</b>");
 				endEncounter();
 				return;
@@ -258,7 +259,7 @@ import classes.Scenes.SceneLib;
 			return fatigueAmount;
 		}
 		private function quarrySiteMine(nightExploration:Boolean = false):void {
-			if (player.fatigue > player.maxFatigue() - gatherWoodsORquarrySiteMineCost()) {
+			if (player.fatigue > player.maxOverFatigue() - gatherWoodsORquarrySiteMineCost()) {
 				outputText("\n\n<b>You are too tired to consider mining. Perhaps some rest will suffice?</b>");
 				endEncounter();
 				return;
@@ -310,7 +311,7 @@ import classes.Scenes.SceneLib;
 					inventory.takeItem(itype, curry(explorer.done,120));
 				}
 				else {
-					outputText(" After attempt to mine ore vein you ended with unusable piece.");
+					outputText(" After attempting to mine an Ore Vein, you ended up with unusable pieces.");
 					endEncounter(120);
 				}
 			}
@@ -359,20 +360,20 @@ import classes.Scenes.SceneLib;
 		}
 
 		public function incrementWoodSupply(amount:int):void {
-			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += amount;
-			outputText("<b>(+" + amount + " wood"+(amount>1?"s":"")+"! "+flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES]+"/"+SceneLib.campUpgrades.checkMaterialsCapWood()+" total!");
-			if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= SceneLib.campUpgrades.checkMaterialsCapWood()) {
-				flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = SceneLib.campUpgrades.checkMaterialsCapWood();
+			CampStatsAndResources.WoodResc += amount;
+			outputText("<b>(+" + amount + " wood! "+CampStatsAndResources.WoodResc+"/"+SceneLib.campUpgrades.checkMaterialsCapWood()+" total!");
+			if (CampStatsAndResources.WoodResc >= SceneLib.campUpgrades.checkMaterialsCapWood()) {
+				CampStatsAndResources.WoodResc = SceneLib.campUpgrades.checkMaterialsCapWood();
 				outputText(" Your wood capacity is full.")
 			}
 			outputText(")</b>");
 		}
 
 		public function incrementStoneSupply(amount:int):void {
-			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += amount;
-			outputText("<b>(+" + amount + " stone"+(amount>1?"s":"")+"! "+flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES]+"/"+SceneLib.campUpgrades.checkMaterialsCapStones()+" total!");
-			if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= SceneLib.campUpgrades.checkMaterialsCapStones()) {
-				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = SceneLib.campUpgrades.checkMaterialsCapStones();
+			CampStatsAndResources.StonesResc += amount;
+			outputText("<b>(+" + amount + " stone"+(amount>1?"s":"")+"! "+CampStatsAndResources.StonesResc+"/"+SceneLib.campUpgrades.checkMaterialsCapStones()+" total!");
+			if (CampStatsAndResources.StonesResc >= SceneLib.campUpgrades.checkMaterialsCapStones()) {
+				CampStatsAndResources.StonesResc = SceneLib.campUpgrades.checkMaterialsCapStones();
 				outputText(" Your stone capacity is full.")
 			}
 			outputText(")</b>");
@@ -399,7 +400,7 @@ import classes.Scenes.SceneLib;
 			SceneLib.camp.campUpgrades.checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
-				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 50)
+				if (CampStatsAndResources.NailsResc >= 100 && CampStatsAndResources.WoodResc >= 50)
 				{
 					doYesNo(doCabinWork1, noThanks2);
 				}
@@ -418,13 +419,13 @@ import classes.Scenes.SceneLib;
 
 		private function doCabinWork1():void {
 			clearOutput();
-			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 100;
-			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 50;
+			CampStatsAndResources.NailsResc -= 100;
+			CampStatsAndResources.WoodResc -= 50;
 			outputText("Today is the day you'll actually work on building your own cabin! You clear a space and set up some rocks. You take the book from your toolbox and open it. You turn pages until you come across an instruction on how to construct frame. \n\n");
 			//if (CoC.instance.amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1) outputText("\"<i>PLACEHOLDER</i>\" Amily asks. \n\n");
 			outputText("You start to construct a wooden frame according to the instructions. Using your hammer and nails, you put the wood frame together and put it up. You then add temporary supports to ensure it doesn't fall down. You make two more frames of the same shape. Lastly, you construct one more frame, this time the frame is designed to have door and window.\n\n");
 			if (player.hasStatusEffect(StatusEffects.CampRathazul)) outputText("\"<i>My, my. What are you building?</i>\" Rathazul asks. \n\n");
-			if (player.hasStatusEffect(StatusEffects.PureCampJojo)) outputText("\"<i>You're building something?</i>\" Jojo asks. \n\n");
+			if (player.hasStatusEffect(StatusEffects.PureCampJojo)) outputText("\"<i>You're building something?</i>\" Jo"+(flags[kFLAGS.JOJO_BIMBO_STATE] == 3 ? "y":"jo")+" asks. \n\n");
 			if (camp.marbleFollower()) outputText("\"<i>Sweetie, you're building a cabin? That's nice,</i>\" Marble says. \n\n");
 			if (camp.companionsCount() > 0) outputText("You announce that yes, you're building a cabin.\n\n");
 			outputText("You nail the frames together and finally you secure the frame to the foundation.\n\n");
@@ -447,7 +448,7 @@ import classes.Scenes.SceneLib;
 			SceneLib.camp.campUpgrades.checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
-				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 125)
+				if (CampStatsAndResources.NailsResc >= 200 && CampStatsAndResources.WoodResc >= 125)
 				{
 					doYesNo(doCabinWork2, noThanks2);
 				}
@@ -466,8 +467,8 @@ import classes.Scenes.SceneLib;
 
 		private function doCabinWork2():void {
 			clearOutput();
-			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 200;
-			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 125;
+			CampStatsAndResources.NailsResc -= 200;
+			CampStatsAndResources.WoodResc -= 125;
 			outputText("You walk back to your cabin construction site and resume working. You take out the book and flip pages until you come across instructions on how to finish walls and roof. \n\n");
 			outputText("Segment by segment, you nail more wood on one side of the cabin. You move on to the next until the frame is covered. There is a hole where the window and door will be. You then climb up the ladder you have constructed from previous session. You then nail down the wood on roof frame. \n\n");
 			outputText("Several hours flew by as you've managed to complete the walls and roof. Finally, you apply paint on the roof and walls to ensure that it's waterproof and protected from the elements. \n\n");
@@ -484,7 +485,7 @@ import classes.Scenes.SceneLib;
 			SceneLib.camp.campUpgrades.checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
-				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 50)
+				if (CampStatsAndResources.NailsResc >= 100 && CampStatsAndResources.WoodResc >= 50)
 				{
 					doYesNo(doCabinWork3, noThanks2);
 				}
@@ -503,8 +504,8 @@ import classes.Scenes.SceneLib;
 
 		private function doCabinWork3():void {
 			clearOutput();
-			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 100;
-			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 50;
+			CampStatsAndResources.NailsResc -= 100;
+			CampStatsAndResources.WoodResc -= 50;
 			outputText("You walk back to your cabin construction site and resume working. You take out the book and flip pages until you come across instructions on how to construct a door.\n\n");
 			outputText("Following the instructions, you construct a wooden door that comes complete with a window. You frame the doorway and install the door into place.\n\n");
 			outputText("Next, you flip the book pages until you come across instructions on how to construct a window with functional shutters. You measure and cut the wood into the correct sizes before you nail it together into a frame. Next, you construct two shutters and install the shutters into window frame. Finally, you install the window into place.\n\n");
@@ -521,7 +522,7 @@ import classes.Scenes.SceneLib;
 			SceneLib.camp.campUpgrades.checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
-				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 50)
+				if (CampStatsAndResources.NailsResc >= 200 && CampStatsAndResources.WoodResc >= 50)
 				{
 					doYesNo(doCabinWork4, noThanks2);
 				}
@@ -540,8 +541,8 @@ import classes.Scenes.SceneLib;
 
 		private function doCabinWork4():void {
 			clearOutput();
-			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 200;
-			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 50;
+			CampStatsAndResources.NailsResc -= 200;
+			CampStatsAndResources.WoodResc -= 50;
 			outputText("You walk back to your cabin construction site and resume working. You take out the book and flip pages until you come across instructions on how to install wooden flooring.\n\n");
 			outputText("Following the instructions, you lay some wood on the ground and measure the gap between each wood to be consistent.\n\n");
 			outputText("Next, you lay the wood and nail them in place. This takes time and effort but by the time you've finished putting the flooring into place, your cabin has wooden flooring ready to be polished. You spend the next few hours painting and polishing your floor.\n\n");

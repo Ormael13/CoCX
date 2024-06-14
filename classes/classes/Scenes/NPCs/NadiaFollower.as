@@ -520,7 +520,7 @@ public function breakingInYourMare():void {
 	clearOutput();
 	if (!player.hasCock()) {
 		outputText("You take the mixture, groaning as you suddenly feel a sizeable cock growing between your legs.\n\n");
-		transformations.CockHorse(0, 10 + rand(7), 2 + rand(10) / 10);
+		transformations.CockHorse(0, 10 + rand(7), 2 + rand(10) / 10).applyEffect(false);
 	}
 	outputText("Nadia, in a fit of excitement, suddenly climbs onto her knees and hands before turning around and presenting her rear for you to fuck, moving her tail out of the way of her virgin sex and her equally virgin arsehole, her whole body trembling in excitement.\n\n");
 	outputText("\"<i>Thank you!</i>\" Nadia says, her voice full of happiness, as she shakes her behind temptingly. \"<i>I’ll be a good mare to you, but please fuck me!! I really can’t take it anymore, I just need your cock in me now!!</i>\" her voice desperate.\n\n");
@@ -628,6 +628,7 @@ public function breakingInYourMare2():void {
 	else player.createKeyItem("Radiant shard", 1,0,0,0);
 	outputText("\n\n<b>Before fully settling in your camp as if remembering something Nadia pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	flags[kFLAGS.NADIA_FOLLOWER] = 6;
+	explorer.stopExploring();
 	doNext(playerMenu);
 }
 
@@ -657,9 +658,8 @@ public function mainCampMenu():void {
 		addButtonDisabled(6, "C.C.(Base)", "You don't have any curses to cure. (non-multiplier)");
 		addButtonDisabled(7, "C.C.(Mult)", "You don't have any curses to cure. (multiplier)");
 	}
-	addButton(8, "Uncurse", uncurseItemsMenu)
-			.disableIf(player.equippedKnownCursedItems().length == 0 && player.carriedKnownCursedItems().length == 0, "You don't have any cursed items");
-
+	addButton(8, "Uncurse", uncurseItemsMenu).disableIf(player.equippedKnownCursedItems().length == 0 && player.carriedKnownCursedItems().length == 0, "You don't have any cursed items");
+	if (player.weaponRange == weaponsrange.SAGITTB) addButton(9, "Uncurse", uncurseItemsMenu2);
 	if (BelisaFollower.BelisaQuestOn && !BelisaFollower.BelisaQuestComp) addButton(13, "ToothacheQ", BelisaNadiaTalk);
 	if (sceneHunter.mockFights)
 		addButton(9, "Mock Fight", mockFightDiana)
@@ -669,48 +669,59 @@ public function mainCampMenu():void {
 }
 
 public function mockFightDiana():void {
-	mocking = true;
-	nadiaSparsWithPC();
+    mocking = true;
+    nadiaSparsWithPC();
 }
 
-		public function uncurseCost(item:IDynamicItem, equipped:Boolean):int {
-			var cost:int = 250 * (1 + item.rarity);
-			if (equipped) cost *= 2;
-			return cost;
-		}
-		public function uncurseItemsMenu():void {
-			clearOutput();
-			outputText("Uncurse which item?");
-			var buttons:ButtonDataList = new ButtonDataList();
-			var cost:int;
-			for each (var slot:ItemSlotClass in player.carriedKnownCursedItems()) {
-				cost = uncurseCost(slot.itype as IDynamicItem, false);
-				buttons.add(slot.itype.shortName, curry(uncurseItem, slot))
-						.hint("Lift the curse from "+slot.itype.longName+" ("+cost+" gems)")
-						.disableIf(player.gems < cost, "Not enough gems ("+cost+")")
-			}
-			for each (var item:ItemType in player.equippedKnownCursedItems()) {
-				cost = uncurseCost(item as IDynamicItem, true);
-				buttons.add(item.shortName, curry(uncurseEquippedItem,item))
-						.hint("Lift the curse from "+item.longName+" ("+cost+" gems)")
-						.disableIf(player.gems < cost, "Not enough gems ("+cost+")")
-			}
-			submenu(buttons, mainCampMenu, 0, false);
-		}
-		public function uncurseItem(slot:ItemSlotClass):void {
-			clearOutput();
-			var newItem:ItemType = (slot.itype as IDynamicItem).uncursedCopy();
-			outputText("The curse is lifted from "+slot.itype.longName);
-			slot.setItemAndQty(newItem, slot.quantity);
-			doNext(mainCampMenu);
-		}
-		public function uncurseEquippedItem(item:ItemType):void {
-			clearOutput();
-			var newItem:ItemType = (item as IDynamicItem).uncursedCopy();
-			player.replaceEquipment(item as Equipable, newItem as Equipable);
-			outputText("The curse is lifted from "+newItem.longName+". You can unequip it now.");
-			doNext(mainCampMenu);
-		}
+private function uncurseItemsMenu2():void {
+	clearOutput();
+	outputText("As Nadia proceed with the purification ritual you struggle in pain at first as you feel the cursed weapon in your hand resist the unbinding before release washes over you as your grip opens dropping the malevolent item on the ground. ");
+	outputText("Nadia wrap the item in blessed cloth in order to seal its malice before handing you the neutralized cursed item back. Sure you can equip it again anytime but now you know the risks.\n\n");
+	player.removeStatusEffect(StatusEffects.TookSagittariusBanefulGreatBow);
+	player.createStatusEffect(StatusEffects.TookSagittariusBanefulGreatBow,1,0,0,0);
+	if (player.statStore.hasBuff('Sagittarius Curse')) player.buff("Sagittarius Curse").remove();
+	if (player.statStore.hasBuff('Sagittarius Focus')) player.buff("Sagittarius Focus").remove();
+	player.unequipWeaponRange(false,true);
+	inventory.takeItem(weaponsrange.SAGITTB, mainCampMenu);
+}
+public function uncurseCost(item:IDynamicItem, equipped:Boolean):int {
+	var cost:int = 250 * (1 + item.rarity);
+	if (equipped) cost *= 2;
+	return cost;
+}
+public function uncurseItemsMenu():void {
+	clearOutput();
+	outputText("Uncurse which item?");
+	var buttons:ButtonDataList = new ButtonDataList();
+	var cost:int;
+	for each (var slot:ItemSlotClass in player.carriedKnownCursedItems()) {
+		cost = uncurseCost(slot.itype as IDynamicItem, false);
+		buttons.add(slot.itype.shortName, curry(uncurseItem, slot))
+				.hint("Lift the curse from "+slot.itype.longName+" ("+cost+" gems)")
+				.disableIf(player.gems < cost, "Not enough gems ("+cost+")")
+	}
+	for each (var item:ItemType in player.equippedKnownCursedItems()) {
+		cost = uncurseCost(item as IDynamicItem, true);
+		buttons.add(item.shortName, curry(uncurseEquippedItem,item))
+				.hint("Lift the curse from "+item.longName+" ("+cost+" gems)")
+				.disableIf(player.gems < cost, "Not enough gems ("+cost+")")
+	}
+	submenu(buttons, mainCampMenu, 0, false);
+}
+public function uncurseItem(slot:ItemSlotClass):void {
+	clearOutput();
+	var newItem:ItemType = (slot.itype as IDynamicItem).uncursedCopy();
+	outputText("The curse is lifted from "+slot.itype.longName);
+	slot.setItemAndQty(newItem, slot.quantity);
+	doNext(mainCampMenu);
+}
+public function uncurseEquippedItem(item:ItemType):void {
+	clearOutput();
+	var newItem:ItemType = (item as IDynamicItem).uncursedCopy();
+	player.replaceEquipment(item as Equipable, newItem as Equipable);
+	outputText("The curse is lifted from "+newItem.longName+". You can unequip it now.");
+	doNext(mainCampMenu);
+}
 
 public function nadiaAppearance():void {
 	clearOutput();
@@ -761,33 +772,34 @@ public function HealingScene():void {
 
 public function CuringCurseScene1():void {	//value related curses removal
 	clearOutput();
-	flags[kFLAGS.NADIA_CURE_COOLDOWN] = 12;
+	flags[kFLAGS.NADIA_CURE_COOLDOWN] = 2;
 	outputText("You ask Nadia if she could remove the curses ailing you. \"<i>Curses are a bit harder, but I can do that. I need access to your whole body though.</i>\" You remove your clothing, and when you look back, she's looking up and down your body. Nadia gives you a reassuring smile, spreading her arms wide as if for a hug. You raise one eyebrow, but comply, allowing her to hold you against her wonderful body.\n\n");
 	outputText("She then starts to move her hands across your body, rubbing sensually against your [skin], making you gasp as you feel a strong tingling feeling from her fingertips, washing away your curses.\n\n");
 	outputText("Nadia gives you a wicked little smile, rubbing her chest against yours. Her magic flares, causing more of the strange, shocking sensation as her soft mounds move against your [skin], your gasps soon turning into moans as her fingers move from your hips to your groin, sparks of pleasure shooting up your spine as she caresses your " + (player.hasCock() ? "" : "wo") + "manhood.\n\n");
 	outputText("The sparks of magic intensify, becoming almost painful. You grimace, but she hushes you, soft touch on your body countering the pain. Soon enough, it's all over. Nadia lets go, stepping back. Your curses have lessened, although now you feel rather aroused.\n\n");
 	dynStats("lus", 50, "scale", false);
 	for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
-		player.removeCurse(stat, 10,1);
-		player.removeCurse(stat, 10,2);
-		player.removeCurse(stat, 10,3);
+		player.removeCurse(stat, 20,1);
+		player.removeCurse(stat, 20,2);
+		player.removeCurse(stat, 20,3);
 	}
 	doNext(mainCampMenu);
 	advanceMinutes(15);
 }
 public function CuringCurseScene2():void {	//bonus multi related curses removal
 	clearOutput();
-	flags[kFLAGS.NADIA_CURE_COOLDOWN] = 12;
+	flags[kFLAGS.NADIA_CURE_COOLDOWN] = 2;
 	outputText("You ask Nadia if she could cure your curses, and she nods. Nadia gestures you to come into her arms, which you do, allowing her to hold you against her wonderful body.\n\n");
 	outputText("She then starts to move her hands across your body, rubbing sensually against your [skin], making you gasp as you feel a strong tingling feeling from her fingertips, washing away your curses.\n\n");
 	outputText("Nadia starts to rub her chest against yours, causing more of the strange, shocking sensation as her soft mounds move against your [skin], your gasps soon turning into moans as her fingers move from your hips to your groin, sparks of pleasure shooting up your spine as she caresses your " + (player.hasCock() ? "" : "wo") + "manhood.\n\n");
 	outputText("The sparks of magic intensify, becoming almost painful. You grimace, but she hushes you, soft touch on your body countering the pain. Soon enough, it's all over. Nadia lets go, stepping back. Your curses have lessened, although now you feel rather aroused.\n\n");
+	dynStats("lus", 50, "scale", false);
 	for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
 		if (stat != "sens")
 		{
-			player.removeCurse(stat+".mult", 0.10,1);
-			player.removeCurse(stat+".mult", 0.10,2);
-			player.removeCurse(stat+".mult", 0.10,3);
+			player.removeCurse(stat+".mult", 0.20,1);
+			player.removeCurse(stat+".mult", 0.20,2);
+			player.removeCurse(stat+".mult", 0.20,3);
 		}
 	}
 	doNext(mainCampMenu);

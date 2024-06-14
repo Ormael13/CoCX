@@ -66,7 +66,7 @@ public class Crafting extends BaseContent implements SaveableState
 		// State
 
 		public static var BagSlot01:Number;
-		public static var BagSlot01Cap:Number;//Cooper Ore
+		public static var BagSlot01Cap:Number;//Copper Ore
 		public static var BagSlot02:Number;
 		public static var BagSlot02Cap:Number;//Tin Ore
 		public static var BagSlot03:Number;
@@ -517,7 +517,7 @@ public class Crafting extends BaseContent implements SaveableState
 public function accessCraftingMaterialsBag():void {
 	clearOutput();
 	outputText("Would you like to put some crafting materials into the bag, and if so, with ones?\n\n");
-	if (BagSlot01Cap > 0) outputText("<b>Cooper Ore:</b> "+BagSlot01+" / "+BagSlot01Cap+"\n");
+	if (BagSlot01Cap > 0) outputText("<b>Copper Ore:</b> "+BagSlot01+" / "+BagSlot01Cap+"\n");
 	if (BagSlot02Cap > 0) outputText("<b>Tin Ore:</b> "+BagSlot02+" / "+BagSlot02Cap+"\n");
 	if (BagSlot03Cap > 0) outputText("<b>Bronze Bar:</b> "+BagSlot03+" / "+BagSlot03Cap+"\n");
 	if (BagSlot04Cap > 0) outputText("<b>Iron Ore:</b> "+BagSlot04+" / "+BagSlot04Cap+"\n");
@@ -526,7 +526,7 @@ public function accessCraftingMaterialsBag():void {
 	if (BagSlot07Cap > 0) outputText("<b>Moonstone:</b> "+BagSlot07+" / "+BagSlot07Cap+"\n");
 	//if (BagSlot08Cap > 0) outputText("<b>Skymetal:</b> "+BagSlot08+" / "+BagSlot08Cap+"\n");
 	menu();
-	//Cooper Ore
+	//Copper Ore
 	if (BagSlot01 < BagSlot01Cap) {
 		if (player.hasItem(useables.COP_ORE, 1)) addButton(0, "CopperOre", craftingMaterialsCopperOre1UP);
 		else addButtonDisabled(0, "CopperOre", "You don't have any copper ore to store.");
@@ -717,23 +717,23 @@ private function craftingMaterialsMoonstone1Down():void {
 			outputText("<b>Item:</b> " + item.longName + "\n\n");
 			outputText("<b><u>Items Needed:</u></b>\n");
 			if (item1 != null) {
-				if (player.hasItem(item1, item1Quantity)) outputText("<font color=\"#008000\">" + player.itemCount(item1) + " / " + item1Quantity + " " + item1.longName + "</font>");
-				else outputText("<font color=\"#800000\">" + player.itemCount(item1) + " / " + item1Quantity + " " + item1.longName + "</font>");
+				if (player.hasItem(item1, item1Quantity)) outputText("[font-green]" + player.itemCount(item1) + " / " + item1Quantity + " " + item1.longName + "[/font]");
+				else outputText("[font-dred]" + player.itemCount(item1) + " / " + item1Quantity + " " + item1.longName + "[/font]");
 				outputText("\n");
 			}
 			if (item2 != null) {
-				if (player.hasItem(item2, item2Quantity)) outputText("<font color=\"#008000\">" + player.itemCount(item2) + " / " + item2Quantity + " " + item2.longName + "</font>");
-				else outputText("<font color=\"#800000\">" + player.itemCount(item2) + " / " + item2Quantity + " " + item2.longName + "</font>");
+				if (player.hasItem(item2, item2Quantity)) outputText("[font-green]" + player.itemCount(item2) + " / " + item2Quantity + " " + item2.longName + "[/font]");
+				else outputText("[font-dred]" + player.itemCount(item2) + " / " + item2Quantity + " " + item2.longName + "[/font]");
 				outputText("\n");
 			}
 			if (item3 != null) {
-				if (player.hasItem(item3, item3Quantity)) outputText("<font color=\"#008000\">" + player.itemCount(item3) + " / " + item3Quantity + " " + item3.longName + "</font>");
-				else outputText("<font color=\"#800000\">" + player.itemCount(item3) + " / " + item3Quantity + " " + item3.longName + "</font>");
+				if (player.hasItem(item3, item3Quantity)) outputText("[font-green]" + player.itemCount(item3) + " / " + item3Quantity + " " + item3.longName + "[/font]");
+				else outputText("[font-dred]" + player.itemCount(item3) + " / " + item3Quantity + " " + item3.longName + "[/font]");
 				outputText("\n");
 			}
 			if (item4 != null) {
-				if (player.hasItem(item4, item4Quantity)) outputText("<font color=\"#008000\">" + player.itemCount(item4) + " / " + item4Quantity + " " + item4.longName + "</font>");
-				else outputText("<font color=\"#800000\">" + player.itemCount(item4) + " / " + item4Quantity + " " + item4.longName + "</font>");
+				if (player.hasItem(item4, item4Quantity)) outputText("[font-green]" + player.itemCount(item4) + " / " + item4Quantity + " " + item4.longName + "[/font]");
+				else outputText("[font-dred]" + player.itemCount(item4) + " / " + item4Quantity + " " + item4.longName + "[/font]");
 				outputText("\n");
 			}
 			outputText("\n");
@@ -1262,7 +1262,6 @@ private function craftingMaterialsMoonstone1Down():void {
 			clearOutput();
 
 			// if we're returning from crafting and used last pigment
-			if (int(pigmentStock[selectedPigment]) <= 0) selectedPigment = "";
 			var dyeFnd:int = player.itemCount(useables.DYE_FOUNDATION);
 			var oilFnd:int = player.itemCount(useables.OIL_FOUNDATION);
 			var dropFnd:int = player.itemCount(useables.DROP_FOUNDATION);
@@ -1314,6 +1313,7 @@ private function craftingMaterialsMoonstone1Down():void {
 			outputText("You pour the pigment into foundation and stir it with a spoon. The viscous mixture quickly turns "+selectedPigment+". You stir it for one more minute to get a uniform coloring, and then cork the vial.\n");
 			player.destroyItems(useables.DYE_FOUNDATION, 1, true);
 			inventory.takeItem(itemTemplates.createHairDye(selectedPigment, 1), dyeCraftingMenu);
+			selectedPigment = "";
 		}
 		private function craftSkinDye():void {
 			clearOutput();
@@ -1321,6 +1321,7 @@ private function craftingMaterialsMoonstone1Down():void {
 			outputText("You pour the pigment into foundation and stir it with a spoon. The viscous mixture quickly turns "+selectedPigment+". You stir it for one more minute to get a uniform coloring, and then cork the bottle.\n");
 			player.destroyItems(useables.OIL_FOUNDATION, 1, true);
 			inventory.takeItem(itemTemplates.createSkinOil(selectedPigment), dyeCraftingMenu);
+			selectedPigment = "";
 		}
 		private function craftEyeDye():void {
 			clearOutput();
@@ -1328,6 +1329,7 @@ private function craftingMaterialsMoonstone1Down():void {
 			outputText("You pour the pigment into foundation and stir it with a spoon. The mixture quickly turns "+selectedPigment+". You stir it for one more minute to get a uniform coloring, and then cork the vial.\n");
 			player.destroyItems(useables.DROP_FOUNDATION, 1, true);
 			inventory.takeItem(itemTemplates.createEyeDye(selectedPigment), dyeCraftingMenu);
+			selectedPigment = "";
 		}
 	}
 }

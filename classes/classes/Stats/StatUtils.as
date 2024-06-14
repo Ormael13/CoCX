@@ -2,6 +2,7 @@
  * Coded by aimozg on 01.06.2018.
  */
 package classes.Stats {
+import classes.Parser.Parser;
 import classes.internals.Utils;
 
 public class StatUtils {
@@ -108,12 +109,12 @@ public class StatUtils {
 					continue;
 				}
 				if (isPositiveStat) {
-					if (value > 0) text += '<font color="#008000">';
-					else text += '<font color="#800000">';
+					if (value > 0) text += "[font-green]";
+					else text += "[font-dred]";
 				}
 				if (!isPositiveStat) {
-					if (value > 0) text += '<font color="#800000">';
-					else text += '<font color="#008000">';
+					if (value > 0) text += "[font-dred]";
+					else text += "[font-green]";
 				}
 				text += '<b>' + buff.text + ':</b> ';
 				if (asPercent) {
@@ -129,20 +130,20 @@ public class StatUtils {
 					}[buff.rate])+')'
 				}
 				text += '\n';
-				text += "</font>";
-				//if (!isPositiveStat) text += '<font color="#800000">'
-				//if (isPositiveStat) text = "<font color=\"#008000\">"+text+"</font>";
+				text += "[/font]";
+				//if (!isPositiveStat) text += '[font-dred]'
+				//if (isPositiveStat) text = "[font-green]"+text+"[/font]";
 			}
 		}
 		if (PerkBuff != 0)
 		{
 			if (isPositiveStat) {
-				if (PerkBuff > 0) text += '<font color="#008000">';
-				else text += '<font color="#800000">';
+				if (PerkBuff > 0) text += "[font-green]";
+				else text += "[font-dred]";
 			}
 			if (!isPositiveStat) {
-				if (PerkBuff > 0) text += '<font color="#800000">';
-				else text += '<font color="#008000">';
+				if (PerkBuff > 0) text += "[font-dred]";
+				else text += "[font-green]";
 			}
 			text += "<b>Perk:</b> ";
 			if (asPercent) {
@@ -150,9 +151,10 @@ public class StatUtils {
 			} else {
 				text += (PerkBuff >= 0 ? '+' : '') + Utils.floor(PerkBuff, 1);
 			}
-			text += "</font>";
+			text += "[/font]";
 		}
 		if (hasHidden) text += '<b>Unknown Sources:</b> ±??';
+		text = Parser.recursiveParser(text);
 		return text;
 	}
 

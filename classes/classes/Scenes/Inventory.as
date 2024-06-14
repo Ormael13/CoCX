@@ -70,8 +70,15 @@ use namespace CoC;
 		
 		public function pearlStorageSize():int {
 			if (player.hasKeyItem("Sky Poison Pearl") < 0) return 0;
-			var x:int = 1 + Math.floor(player.level/6);
-			x *= 14;
+			var x:int = 14;
+			var y:Number = 0;
+			if (player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX)) y += (6 * player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX));
+			if (player.level >= (6 - y)) x += 14;
+			if (player.level >= (12 - y)) x += 14;
+			if (player.level >= (18 - y)) x += 14;
+			if (player.level >= (24 - y)) x += 14;//129
+			if (player.level >= (30 - y)) x += 14;//78 + 87 (165)
+			if (player.level >= (36 - y)) x += 14;//96 + 105 (201)
 			return Math.min(98, x);
 		}
 
@@ -134,7 +141,7 @@ use namespace CoC;
 			outputText("<b>Weapon (Range):</b> " + mkLink(player.weaponRange.name, player.weaponRange.id) + " (Attack: " + player.weaponRangeAttack + ")");
 			if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow") outputText(" (Bow/Crosbow-type weapon)");
 			if (player.weaponRangePerk == "Throwing") outputText(" (Throwing weapon-type weapon)");
-			if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Dual 2H Firearms") outputText(" (Firearms-type weapon)");
+			if (player.isFirearmTypeWeapon()) outputText(" (Firearms-type weapon)");
 			outputText("\n");
 			outputText("<b>Shield:</b> " + mkLink(player.shield.name, player.shield.id) + " (Block Rating: " + player.shieldBlock + ")");
 			if (player.shieldPerk == "Large") outputText(" (Large)");
@@ -249,7 +256,7 @@ use namespace CoC;
 				return;
 			}
 			if (CoC.instance.inCombat) SceneLib.combat.combatMenu(false);
-			playerMenu();
+			else playerMenu();
 		}
 		
 		public function showItemTooltipLinkHandler(itemid:String):void {
@@ -871,7 +878,7 @@ use namespace CoC;
 				temp = (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < SceneLib.camp.campMake.maxReusableGolemCoresBagSize() ? flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]:-1);
 				if (temp >= 0) {
 					flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]++;
-					outputText("You place " + itype.longName + " in your quest materials pouch, giving you "+ (temp+1) +" of them.");
+					outputText("You place " + itype.longName + " in your Golem Core bag, giving you "+ (temp+1) +" of them.");
 					itemGoNext();
 					return;
 				}

@@ -542,9 +542,40 @@ package classes.GeneticMemories {
           title: "Arigean Legs",
           transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyArigean}});
 
+      public static const DEMONIC_GRACEFUL_FEET: int = _partid++;
+      EnumValue.add(Memories, DEMONIC_GRACEFUL_FEET, "DEMONIC_GRACEFUL_FEET", {
+          id: "Demon Graceful Feet Lower Body",name: "Demonic Graceful Feet",
+          cost: 100,
+          title: "Dem. G. Feet",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyDemonGracefulFeet}});
 
+      public static const CLOVEN_HOOFED_2: int = _partid++;
+      EnumValue.add(Memories, CLOVEN_HOOFED_2, "CLOVEN_HOOFED_2", {
+          id: "Reindeer Lower Body",name: "Reindeer Legs",
+          cost: 200,
+          title: "Reindeer Legs",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyReindeerToggle(true)}});
 
+      public static const MOTH: int = _partid++;
+      EnumValue.add(Memories, MOTH, "MOTH", {
+          id: "Moth Lower Body",name: "Moth Legs",
+          cost: 100,
+          title: "Moth Legs",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyMoth}});
 
+      public static const TROLL: int = _partid++;
+      EnumValue.add(Memories, TROLL, "TROLL", {
+          id: "Troll Lower Body",name: "Troll Legs",
+          cost: 100,
+          title: "Troll Legs",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyTroll}});
+
+      public static const GLACIAL_TROLL: int = _partid++;
+      EnumValue.add(Memories, GLACIAL_TROLL, "GLACIAL_TROLL", {
+          id: "G.Troll Lower Body",name: "G.Troll Legs",
+          cost: 100,
+          title: "G.Troll Legs",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyGlacialTroll}});
 
       public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];

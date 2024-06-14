@@ -8,6 +8,7 @@ import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
 import classes.VaginaClass;
+import classes.internals.race.RaceUtils;
 
 public class WeresharkRace extends Race {
     public static const WeresharkScaleColors:/*String*/Array = ["rough gray","dark gray","iridescent gray","ashen grayish-blue","gray"];
@@ -60,12 +61,16 @@ public class WeresharkRace extends Race {
 				.corruption(AT_LEAST(20), +1)
 				.corruption(AT_LEAST(50), +1)
 				.corruption(AT_LEAST(80), +1)
+				.hasPerk(PerkLib.SelachimorphanthropyDormant, +1)
 				.hasPerk(PerkLib.Selachimorphanthropy, +2, -11);
 		
+		addBloodline(PerkLib.WeresharksDescendant,PerkLib.BloodlineWereshark);
 		addMutation(IMutationsLib.FerasBirthrightIM);
 		addMutation(IMutationsLib.SharkOlfactorySystemIM);
 		
 		buildTier(12, "wereshark")
+				.require("Selachimorphanthropy or Dormant Selachimorphanthropy perk", 
+					RaceUtils.hasAnyPerkFn([PerkLib.Selachimorphanthropy, PerkLib.SelachimorphanthropyDormant]))
 				.buffs({
 					"str.mult": +0.90,
 					"tou.mult": +0.50,

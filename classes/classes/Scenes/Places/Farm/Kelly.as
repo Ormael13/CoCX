@@ -1576,7 +1576,7 @@ private function kellyPreggers():void {
 	var x:int = Math.round(player.cumQ() / 20);
 	if (x > 80) x = 80;
 	if (flags[kFLAGS.KELLY_HEAT_TIME] > 0) x += 15;
-	if (x <= 80) {
+	if (x <= 80 || player.hasPerk(PerkLib.PilgrimsBounty)) {
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_CENTAUR - 84);
 		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Kelly is pregnant!</b>");
 		trace("Kelly knocked up.");

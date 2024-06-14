@@ -55,7 +55,7 @@ use namespace CoC;
 			damage = Math.round(damage);
 			player.takePhysDamage(damage, true);
 			createStatusEffect(StatusEffects.AbilityCooldown1, 4, 0, 0, 0);
-			outputText("Aurora flaps her huge bat wings at you trying to knock you down. You’re thrown to the ground. <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+			outputText("Aurora flaps her huge bat wings at you trying to knock you down. You’re thrown to the ground. <b>([font-damage]" + damage + "[/font])</b>");
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
 			if (!player.hasPerk(PerkLib.Resolute)) player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 			if (player.hasPerk(PerkLib.Resolute)) outputText(" You’re thankfully to resilient to be stunned by such attacks and remain standing.");

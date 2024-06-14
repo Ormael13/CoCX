@@ -12,7 +12,9 @@ import classes.Races;
 
 public class LizanMarrowMutation extends IMutationPerkType
     {
-        private static const mName:String = "Lizan Marrow";
+        override public function get mName():String {
+            return "Lizan Marrow";
+        }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -24,26 +26,13 @@ public class LizanMarrowMutation extends IMutationPerkType
                 descS = "Regenerates 1% of HP per round in combat and 2% of HP per hour. Additionaly your limit for innate self-regeneration rate increased.";
             }
             if (pTier == 3){
-                descS = "Regenerates 1.5% of HP per round in combat and 3% of HP per hour. Additionaly your limit for innate self-regeneration rate increased. When below 25% of max HP regeneration provided by Lizan regeneration doubles. You can't lose by HP until your health drops into the negatives more than 5% of max HP.";
+                descS = "Regenerates 1.5% of HP per round in combat and 3% of HP per hour. Additionaly your limit for innate self-regeneration rate increased. When below 25% of max HP regeneration provided by Lizan regeneration is 2x. You can't lose by HP until your health drops into the negatives more than 5% of max HP.";
+            }
+            if (pTier == 4){
+                descS = "Regenerates 2% of HP per round in combat and 4% of HP per hour. Additionaly your limit for innate self-regeneration rate increased. When below 60%/20% of max HP regeneration provided by Lizan regeneration is 2x/3x. Could slowly recover lost bodyparts (~0.5/1% per combat round/hour). You can't lose by HP until your health drops into the negatives more than 10% of max HP, +10% OverMax HP.";
             }
             if (descS != "")descS += ".";
             return descS;
-        }
-
-        //Name. Need it say more?
-        override public function name(params:PerkClass=null):String {
-            var sufval:String;
-            switch (currentTier(this, player)){
-                case 2:
-                    sufval = "(Primitive)";
-                    break;
-                case 3:
-                    sufval = "(Evolved)";
-                    break;
-                default:
-                    sufval = "";
-            }
-            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -54,7 +43,8 @@ public class LizanMarrowMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireBonesAndMarrowMutationSlot()
-                    .requirePerk(PerkLib.LizanRegeneration).requireRace(Races.LIZARD);
+                    .requirePerk(PerkLib.LizanRegeneration)
+					.requireRace(Races.LIZARD);
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -68,11 +58,23 @@ public class LizanMarrowMutation extends IMutationPerkType
         //Mutations Buffs
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
+			if (pTier == 1){
+                pBuffs['tou.mult'] = 0.01;
+            }
+            else if (pTier == 2){
+                pBuffs['tou.mult'] = 0.03;
+            }
+            else if (pTier == 3){
+                pBuffs['tou.mult'] = 0.07;
+            }
+            else if (pTier == 4){
+                pBuffs['tou.mult'] = 0.15;
+            }
             return pBuffs;
         }
 
         public function LizanMarrowMutation() {
-            super(mName + " IM", mName, SLOT_BONE, 3);
+            super(mName + " IM", mName, SLOT_BONE, 4);
         }
 
     }

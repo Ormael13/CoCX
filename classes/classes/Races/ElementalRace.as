@@ -15,7 +15,22 @@ public class ElementalRace extends Race {
 	override public function setup():void {
 		
 		addScores().hasPerk(PerkLib.ElementalBody, +5)
-				.givePerkV2(PerkLib.ElementalBody);
+				.customRequirement("","Elemental Body (Lesser or higher rank)",
+						function (body:BodyData):Boolean {
+							return body.player.perkv2(PerkLib.ElementalBody) > 0
+						}, +5)
+				.customRequirement("","Elemental Body (Adept or higher rank)",
+						function (body:BodyData):Boolean {
+							return body.player.perkv2(PerkLib.ElementalBody) > 1
+						}, +5)
+				.customRequirement("","Elemental Body (Greater or higher rank)",
+						function (body:BodyData):Boolean {
+							return body.player.perkv2(PerkLib.ElementalBody) > 2
+						}, +5)
+				.customRequirement("","Elemental Body (Primordial)",// or higher rank
+						function (body:BodyData):Boolean {
+							return body.player.perkv2(PerkLib.ElementalBody) > 3
+						}, +5);
 		
 		buildTier(6, "lesser elemental")
 				.customNamingFunction(nameFn)
@@ -79,100 +94,100 @@ public class ElementalRace extends Race {
 	
 	public static const BuffsDb:Object = {
 		11: { // SYLPH_1
-			"spe.mult": +1.00,
-			"int.mult": +0.75,
-			"wis.mult": +0.50
-		},
-		12: { // SYLPH_2
-			"spe.mult": +1.25,
-			"int.mult": +1.00,
-			"wis.mult": +0.75
-		},
-		13: { // SYLPH_3
-			"spe.mult": +1.50,
-			"int.mult": +1.25,
+			"spe.mult": +2.00,
+			"int.mult": +1.50,
 			"wis.mult": +1.00
 		},
+		12: { // SYLPH_2
+			"spe.mult": +2.50,
+			"int.mult": +2.00,
+			"wis.mult": +1.50
+		},
+		13: { // SYLPH_3
+			"spe.mult": +3.00,
+			"int.mult": +2.50,
+			"wis.mult": +2.00
+		},
 		14: { // SYLPH_4
-			"spe.mult": +1.75,
-			"int.mult": +1.50,
-			"wis.mult": +1.25
+			"spe.mult": +3.50,
+			"int.mult": +3.00,
+			"wis.mult": +2.50
 		},
 		21: { // GNOME_1
-			"tou.mult": +1.00,
-			"wis.mult": +0.75,
-			"str.mult": +0.50,
-			"def": +10,
-			"mdef": +10
-		},
-		22: { // GNOME_2
-			"tou.mult": +1.25,
-			"wis.mult": +1.00,
-			"str.mult": +0.75,
+			"tou.mult": +2.00,
+			"wis.mult": +1.50,
+			"str.mult": +1.00,
 			"def": +20,
 			"mdef": +20
 		},
-		23: { // GNOME_3
-			"tou.mult": +1.50,
-			"wis.mult": +1.25,
-			"str.mult": +1.00,
-			"def": +30,
-			"mdef": +30
-		},
-		24: { // GNOME_4
-			"tou.mult": +1.75,
-			"wis.mult": +1.50,
-			"str.mult": +1.25,
+		22: { // GNOME_2
+			"tou.mult": +2.50,
+			"wis.mult": +2.00,
+			"str.mult": +1.50,
 			"def": +40,
 			"mdef": +40
 		},
+		23: { // GNOME_3
+			"tou.mult": +3.00,
+			"wis.mult": +2.50,
+			"str.mult": +2.00,
+			"def": +60,
+			"mdef": +60
+		},
+		24: { // GNOME_4
+			"tou.mult": +3.50,
+			"wis.mult": +3.00,
+			"str.mult": +2.50,
+			"def": +80,
+			"mdef": +80
+		},
 		31: { // IGNIS_1
-			"spe.mult": +1.00,
-			"str.mult": +0.75,
-			"wis.mult": +0.50
-		},
-		32: { // IGNIS_2
-			"spe.mult": +1.25,
-			"str.mult": +1.00,
-			"wis.mult": +0.75
-		},
-		33: { // IGNIS_3
-			"spe.mult": +1.50,
-			"str.mult": +1.25,
+			"spe.mult": +2.00,
+			"str.mult": +1.50,
 			"wis.mult": +1.00
 		},
+		32: { // IGNIS_2
+			"spe.mult": +2.50,
+			"str.mult": +2.00,
+			"wis.mult": +1.50
+		},
+		33: { // IGNIS_3
+			"spe.mult": +3.00,
+			"str.mult": +2.50,
+			"wis.mult": +2.00
+		},
 		34: { // IGNIS_4
-			"spe.mult": +1.75,
-			"str.mult": +1.50,
-			"wis.mult": +1.25
+			"spe.mult": +3.50,
+			"str.mult": +3.00,
+			"wis.mult": +2.50
 		},
 		41: { // UNDINE_1
-			"wis.mult": +1.00,
-			"str.mult": +0.75,
-			"tou.mult": +0.50,
-			"def": +5,
-			"mdef": +5
-		},
-		42: { // UNDINE_2
-			"wis.mult": +1.25,
-			"str.mult": +1.00,
-			"tou.mult": +0.75,
+			"wis.mult": +2.00,
+			"str.mult": +1.50,
+			"tou.mult": +1.00,
 			"def": +10,
 			"mdef": +10
 		},
-		43: { // UNDINE_3
-			"wis.mult": +1.50,
-			"str.mult": +1.25,
-			"tou.mult": +1.00,
-			"def": +15,
-			"mdef": +15
-		},
-		44: { // UNDINE_4
-			"wis.mult": +1.75,
-			"str.mult": +1.50,
-			"tou.mult": +1.25,
+		42: { // UNDINE_2
+			"wis.mult": +2.50,
+			"str.mult": +2.00,
+			"tou.mult": +1.50,
 			"def": +20,
 			"mdef": +20
+		},
+		43: { // UNDINE_3
+			"wis.mult": +3.00,
+			"str.mult": +2.50,
+			"tou.mult": +2.00,
+			"def": +30,
+			"mdef": +30
+		},
+		44: { // UNDINE_4
+			"wis.mult": +3.50,
+			"str.mult": +3.00,
+			"tou.mult": +2.50,
+			"def": +40,
+			"mdef": +40
 		}
 	};
 	

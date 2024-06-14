@@ -5,6 +5,7 @@ import classes.BodyParts.Ears;
 import classes.BreastRowClass;
 import classes.Cock;
 import classes.Monster;
+import classes.PerkLib;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.Combat.SpellsWhite.WhitefireSpell;
 import classes.Scenes.SceneLib;
@@ -39,19 +40,24 @@ import classes.VaginaClass;
 			}
 		}
 		
-		public function mirrorTease(damage:Number, successful:Boolean):void
+		override public function handleTease(lustDelta:Number, successful:Boolean, display:Boolean = true):Boolean
 		{
 			clearOutput();
-			outputText("You move your hands seductively over your body, and - you stop. The doppelganger stops too, staring at you with wicked coyness, " + player.mf("his", "her") +" hands frozen on " + player.mf("his", "her") +" form exactly where yours are. Glaring back, you begin your slow, lustful motions again, as your reflection does the exact same thing. It’s a lust off!");
-			if (damage > 0 && successful) {
-				outputText("\n\nYou determinedly display and twist your carnality to what you know are its best advantages, ignoring what the doppelganger is doing- you’re extremely familiar with it, after all. After a few slow seconds crawl past a blush settles upon your reflection’s face, and "+ player.mf("he", "she") +" hands falter and stop being able to follow yours as "+ player.mf("he", "she") +" stares at what you’re doing.");
-				outputText("\n\n\"<i>It’s- it’s been so long,</i>\" " + player.mf("he", "she") +" groans, managing to break away to stare into your smirking, smouldering eyes with lust-filled rage. \"<i>But I’ll have that, I’ll have everything soon enough!</i>\"");
-				this.applyTease(damage);
+			if (display) outputText("You move your hands seductively over your body, and - you stop. The doppelganger stops too, staring at you with wicked coyness, " + player.mf("his", "her") +" hands frozen on " + player.mf("his", "her") +" form exactly where yours are. Glaring back, you begin your slow, lustful motions again, as your reflection does the exact same thing. It’s a lust off!");
+			if (lustDelta > 0 && successful) {
+				if (display) {
+					outputText("\n\nYou determinedly display and twist your carnality to what you know are its best advantages, ignoring what the doppelganger is doing- you’re extremely familiar with it, after all. After a few slow seconds crawl past a blush settles upon your reflection’s face, and "+ player.mf("he", "she") +" hands falter and stop being able to follow yours as "+ player.mf("he", "she") +" stares at what you’re doing.");
+					outputText("\n\n\"<i>It’s- it’s been so long,</i>\" " + player.mf("he", "she") +" groans, managing to break away to stare into your smirking, smouldering eyes with lust-filled rage. \"<i>But I’ll have that, I’ll have everything soon enough!</i>\"");
+				}
+				return true;
 			}
 			else {
-				outputText("You keep moving and displaying your body as best you can, but an overwhelming amount of self-awareness creeps in as your doppelganger mockingly copies you. Is that really what you look like when you do this? It looks so cheap, so clumsy, so desperate. As a blush climbs onto your face you feel a vague sense of vertigo as control of the situation shifts- you copy the doppelganger as "+ player.mf("he", "she") +" cruelly continues to slide "+ player.mf("his", "her") +" hands over "+ player.mf("his", "her") +" body exaggeratedly.");
-				outputText("\n\n\"<i>What’s the matter, [name]?</i>\" " + player.mf("he", "she") +" breathes, staring lustfully into your eyes as " + player.mf("he", "she") +" sinks both hands into " + player.mf("his", "her") +" crotch and bends forward, forcing you close to " + player.mf("his", "her") +" face. \"<i>Never tried it in front of a mirror? You were missing out on the nasty little tramp you are.</i>\"");
-				player.takeLustDamage(damage + (rand(7) - 3), true);
+				if (display) {
+					outputText("You keep moving and displaying your body as best you can, but an overwhelming amount of self-awareness creeps in as your doppelganger mockingly copies you. Is that really what you look like when you do this? It looks so cheap, so clumsy, so desperate. As a blush climbs onto your face you feel a vague sense of vertigo as control of the situation shifts- you copy the doppelganger as "+ player.mf("he", "she") +" cruelly continues to slide "+ player.mf("his", "her") +" hands over "+ player.mf("his", "her") +" body exaggeratedly.");
+					outputText("\n\n\"<i>What’s the matter, [name]?</i>\" " + player.mf("he", "she") +" breathes, staring lustfully into your eyes as " + player.mf("he", "she") +" sinks both hands into " + player.mf("his", "her") +" crotch and bends forward, forcing you close to " + player.mf("his", "her") +" face. \"<i>Never tried it in front of a mirror? You were missing out on the nasty little tramp you are.</i>\"");
+				}
+				player.takeLustDamage(lustDelta + (rand(7) - 3), true);
+				return false;
 			}
 		}
 		
@@ -73,7 +79,7 @@ import classes.VaginaClass;
 				doNext(SceneLib.combat.endHpLoss);
 				return;
 			}
-			if (player.lust >= player.maxOverLust())
+			if (player.lust >= player.maxOverLust() && !SceneLib.combat.tyrantiaTrainingExtension())
 			{
 				doNext(SceneLib.combat.endLustLoss);
 				return;
@@ -122,7 +128,27 @@ import classes.VaginaClass;
 			}
 			if (!monsterIsStunned()) _roundCount++;
 		}
-		
+
+		override public function preMeleeDmg(damage:Number):Number{
+			if (!monsterIsStunned()) {
+				if (damage > 0) {
+					damage = SceneLib.combat.itemsBonusDamageDamage(damage);
+					damage = SceneLib.combat.statusEffectBonusDamage(damage);
+					if (player.hasPerk(PerkLib.GoblinoidBlood)) {
+						if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
+						if (player.hasKeyItem("Powboy") >= 0) damage *= 1.15;
+						if (player.hasKeyItem("M.G.S. bracer") >= 0) damage *= 1.2;
+					}
+				}
+				mirrorAttack(damage);
+			}
+			// Stunning the doppleganger should now "buy" you another round.
+			if (hasStatusEffect(StatusEffects.MirroredAttack)) {//Doppelganger parry!
+				damage = 0;
+				removeStatusEffect(StatusEffects.MirroredAttack);
+			}
+			return damage;
+		}
 		override public function defeated(hpVictory:Boolean):void
 		{
 			SceneLib.d3.doppleganger.punchYourselfInTheBalls();
@@ -166,36 +192,19 @@ import classes.VaginaClass;
 		{
 			outputText("Your doppleganger similarly opts to take a momentary break from the ebb and flow of combat.");
 		}
-		
-		override public function doAI():void
-		{
-			if (monsterIsStunned()) {
-				outputText("Your duplicate is too stunned, buying you another round!");
-				return;
-			}
-			if (hasStatusEffect(StatusEffects.ConstrictedWhip) || hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce) || hasStatusEffect(StatusEffects.GrabBear) || hasStatusEffect(StatusEffects.CancerGrab) || hasStatusEffect(StatusEffects.ManticorePlug)) {
-				if (!handleConstricted()) return;
-			}
-			if (hasStatusEffect(StatusEffects.OrcaPlay)) {
-				return;
-			}
-			if (hasStatusEffect(StatusEffects.Straddle)) {
-				return;
-			}
-			if (hasStatusEffect(StatusEffects.Dig)) {
-				outputText("\n\nYour opponent is still looking for you as you remain quietly hiding underground, away from view.");
-				addStatusValue(StatusEffects.Dig, 1, -1);
-				return;
-			}
-			if (hasStatusEffect(StatusEffects.OrcaHasWackedFinish)) {
-				outputText("\n\nYour opponent is still stunned from the powerful blow of your tail.");
-				createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
-				return;
-			}
+
+		// Doppelganger has no attack, skip the attack and countdown
+		override public function playerAttackedCheck():Boolean{
 			outputText("\n\nYour duplicate chuckles in the face of your attacks.");
 			addTalkShit();
+			return true;
 		}
-		
+
+		override protected function handleStun():Boolean{
+			outputText("Your duplicate is too stunned, buying you another round!");
+			return false;
+		}
+
 		public function Doppleganger()
 		{
 			this.a = "the ";

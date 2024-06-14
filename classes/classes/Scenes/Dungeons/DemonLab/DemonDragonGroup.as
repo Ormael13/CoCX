@@ -57,7 +57,7 @@ public class DemonDragonGroup extends Monster {
         this.lustVuln = 0.44;
         this.level = 60;
         this.gems = rand(50) + 75;
-        this.drop = new WeightedDrop().add(useables.D_SCALE, 5).add(consumables.LETHITE, 2).add(jewelries.POWRRNG, 1);
+        this.drop = new WeightedDrop().add(useables.D_SCALE, 5).add(consumables.LETHITE, 3).add(consumables.LETH1TE, 2).add(jewelries.POWRRNG, 1);
         this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
         this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
         this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
@@ -114,6 +114,11 @@ public class DemonDragonGroup extends Monster {
             outputText("\nAs the four dragon women impale you, spearheads stuck in your flesh, the larger male roars, swinging his giant sword down towards your shoulder. ");
             player.takePhysDamage(eBaseDamage() * 3);
         }
+    }
+
+    override public function midAttackSeal():Boolean{
+        meleeResponse();
+        return true;
     }
 
     override protected function performCombatAction():void {

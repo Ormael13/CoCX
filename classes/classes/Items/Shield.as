@@ -37,18 +37,15 @@ public class Shield extends Equipable
 		
 		public function get perk():String { return _perk; }
 		
-		override public function get description():String {
-			var desc:String = _description;
-			//Type
-			desc += "\n\nType: Shield";
-            if (perk != "") desc += " (" + perk + ")";
-			//Block Rating
-			desc += "\nBlock: " + String(block);
-			//Value
-			desc += "\nBase value: " + String(value);
-			return desc;
+		override public function effectDescriptionParts():Array {
+			var list:Array = super.effectDescriptionParts();
+			// Type
+			list.push([10,"Type: Shield"]);
+			// Attack
+			var block:Number = this.block;
+			list.push([20, "Block: " + block ]);
+			return list;
 		}
-		
 		
 		override public function canEquip(doOutput:Boolean):Boolean {
 			if (game.player.weaponRangePerk == "Dual Firearms" || game.player.weaponRangePerk == "Dual 2H Firearms") {
@@ -59,8 +56,8 @@ public class Shield extends Equipable
 				if (doOutput) outputText("Your current range weapon requires two hands. Unequip your current range weapon or switch to one-handed before equipping this shield. ");
 				return false;
 			}
-			else if ((game.player.weaponSpecials("Large") && !game.player.hasPerk(PerkLib.GigantGrip)) || (game.player.weaponSpecials("Massive") && !game.player.hasPerk(PerkLib.TitanGrip))
-					|| game.player.weaponSpecials("Dual Small") || game.player.weaponSpecials("Dual") || game.player.weaponSpecials("Dual Large") || game.player.weaponSpecials("Dual Massive") || game.player.weaponName == "Daisho") {
+			else if ((game.player.weapon.isSingleLarge() && !game.player.hasPerk(PerkLib.GigantGrip)) || (game.player.weapon.isSingleMassive() && !game.player.hasPerk(PerkLib.TitanGrip))
+					|| game.player.weapon.isDual() || game.player.weaponName == "Daisho") {
 				if (doOutput) outputText("Your current melee weapon requires two hands. Unequip your current melee weapon or switch to one-handed before equipping this shield. ");
 				return false;
 			}
@@ -78,17 +75,19 @@ public class Shield extends Equipable
 		override public function afterEquip(doOutput:Boolean):void {
 			if (!game.isLoadingSave) {
 				if ((perk == "Massive" && game.player.weapon != WeaponLib.FISTS && !game.player.hasPerk(PerkLib.GigantGrip))
-						|| (game.player.weaponSpecials("Large") && !game.player.hasPerk(PerkLib.GigantGrip))
-						|| (game.player.weaponSpecials("Massive") && !game.player.hasPerk(PerkLib.TitanGrip))
-						|| game.player.weaponSpecials("Dual Small")
-						|| game.player.weaponSpecials("Dual")
-						|| game.player.weaponSpecials("Dual Large")
-						|| game.player.weaponSpecials("Dual Massive")) {
+						|| (game.player.weapon.isSingleLarge() && !game.player.hasPerk(PerkLib.GigantGrip))
+						|| (game.player.weapon.isSingleMassive() && !game.player.hasPerk(PerkLib.TitanGrip))
+						|| game.player.weapon.isDual()) {
 					SceneLib.inventory.unequipWeapon();
 				}
 				if (game.player.weaponRangePerk == "Dual Firearms" || game.player.weaponRangePerk == "2H Firearm" || game.player.weaponRangePerk == "Dual 2H Firearms") SceneLib.inventory.unequipWeaponRange();
 			}
 			super.afterEquip(doOutput);
+		}
+		
+		override public function getItemText(textid:String):String {
+			if (textid == "legendary_fail") return "You try to equip the legendary shield, but to your disappointment the item simply refuses to stay in your hands. It seems you still lack the right to wield this item.";
+			return super.getItemText(textid);
 		}
 	}
 }

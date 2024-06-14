@@ -15,7 +15,6 @@ import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Consumable;
-import classes.Items.ItemTags;
 import classes.PerkLib;
 import classes.StatusEffects;
 import classes.VaginaClass;
@@ -23,7 +22,7 @@ import classes.VaginaClass;
 public class MinotaurBlood extends Consumable {
 	public function MinotaurBlood() {
 		super("MinoBlo","MinoBlo", "a vial of Minotaur blood", 6, "You've got a scratched up looking vial full of bright red minotaur blood.  Any time you move it around it seems to froth up, as if eager to escape.")
-		withTag(ItemTags.U_TF);
+		withTag(U_TF);
 		refineableInto(
 				AlchemyLib.DEFAULT_SUBSTANCES_DROP_TABLE,
 				AlchemyLib.DEFAULT_ESSENCE_DROP_TABLE(AlchemyLib.AE_COW)
@@ -224,7 +223,15 @@ public class MinotaurBlood extends Consumable {
 		}
 		//Morph dick to horsediiiiick
 		if (player.cocks.length > 0 && rand(2) == 0 && changes < changeLimit) {
-			if (horseDickTF()) changes++;
+			var selectedCockValue:int = player.findFirstCockNotInType([CockTypesEnum.HORSE]);
+			if (selectedCockValue != -1) {
+				CoC.instance.transformations.CockHorse(selectedCockValue).applyEffect();
+				player.growCock(selectedCockValue, 4);
+				dynStats("lus", 35, "scale", false);
+				player.addCurse("spe", 4,1);
+				player.MutagenBonus("lib", 5);
+				changes++;
+			}
 		}
 
 		//Males go into rut
@@ -256,10 +263,10 @@ public class MinotaurBlood extends Consumable {
 			changes++;
 		}
 		//+hooves
-		if (player.lowerBody != LowerBody.HOOFED && player.lowerBody != LowerBody.GARGOYLE) {
+		if (player.lowerBody != LowerBody.CLOVEN_HOOFED && player.lowerBody != LowerBody.GARGOYLE) {
 			if (changes < changeLimit && rand(3) == 0) {
 				outputText("\n\n");
-				CoC.instance.transformations.LowerBodyHoofed(2).applyEffect();
+				CoC.instance.transformations.LowerBodyClovenHoofed(2).applyEffect();
 				player.MutagenBonus("spe", 1);
 				changes++;
 			}
@@ -372,26 +379,11 @@ public class MinotaurBlood extends Consumable {
 				outputText("Your balls feel as if they've grown heavier with the weight of more sperm.\n");
 				player.hoursSinceCum += 200;
 			}
-			EngineCore.HPChange(50, true);
-			dynStats("lus", 50, "scale", false);
+			EngineCore.HPChange(50*player.postConsumptionMlt(), true);
+			dynStats("lus", Math.round(50*player.postConsumptionMlt()), "scale", false);
 		}
 		player.refillHunger(25);
 		return false;
-	}
-
-	//returns true when something has changed, false otherwise
-	public function horseDickTF():Boolean {
-		var selectedCockValue:int = player.findFirstCockNotInType([CockTypesEnum.HORSE]);
-
-		if (selectedCockValue != -1) {
-			CoC.instance.transformations.CockHorse(selectedCockValue).applyEffect();
-			player.growCock(selectedCockValue, 4);
-			dynStats("lus", 35, "scale", false);
-			player.addCurse("spe", 4,1);
-			player.MutagenBonus("lib", 5);
-			return true;
-		}
-		else return false;
 	}
 }
 }

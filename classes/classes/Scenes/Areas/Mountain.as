@@ -655,7 +655,7 @@ public class Mountain extends BaseContent
 			}, {
 				name:"hike",
 				label : "Hike",
-				kind  : 'hike',
+				kind  : 'walk',
 				chance:0.2,
 				call:hike
 			}, {
@@ -761,7 +761,7 @@ public class Mountain extends BaseContent
 				minotaurScene.minoAddictionBadEndEncounter();
 			} else {
 				spriteSelect(SpriteDb.s_minotaur);
-				if (!player.hasStatusEffect(StatusEffects.TF2) && player.level <= 1 && player.str <= 40) {
+				if (!player.hasStatusEffect(StatusEffects.TF2) && player.str <= 40) {
 					if (silly()) {
 						//(Ideally, this should occur the first time the player would normally get an auto-rape encounter with the minotaur. The idea is to give a breather encounter to serve as a warning of how dangerous the mountain is)
 						clearOutput();

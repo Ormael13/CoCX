@@ -6,6 +6,7 @@ package classes.Scenes
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.*;
 import classes.Items.FlyingSwords;
 import classes.Scenes.Areas.Desert.NagaScene;
 import classes.Scenes.Areas.Forest.TamainsDaughtersScene;
@@ -41,7 +42,7 @@ public class Soulforce extends BaseContent
 		//if (player.hasPerk(PerkLib.)) dailySoulforceUsesLimit++;//heart cultivator path
 		//if (player.hasPerk(PerkLib.)) dailySoulforceUsesLimit++;//dodawać kolejne co 3 level-e
 		outputText("<b>Cultivation level:</b> " + flags[kFLAGS.SOUL_CULTIVATION] + "\n");
-		outputText("<b>Additional Soulforce from training:</b> " + flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] + " % / "+Soulforce.cultivationBonusMaxSF_maxPossible+" %\n");
+		outputText("<b>Additional Soulforce from training:</b> " + flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] + " % / "+Soulforce.cultivationBonusMaxSF_maxPossible+" % (Equip Soul Training equipment and meditate with it to increase this %)\n");
 		if (player.hasPerk(PerkLib.Dantain)) {
 			if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor) && player.perkv1(PerkLib.Dantain) == 0) player.addPerkValue(PerkLib.Dantain, 1, 1);
 			if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor) && player.perkv1(PerkLib.Dantain) == 1) player.addPerkValue(PerkLib.Dantain, 1, 1);
@@ -81,9 +82,9 @@ public class Soulforce extends BaseContent
 		}
 		//addButton(5, "Upgrade", UpgradeItems).hint("."); //ulepszanie itemów
 		if (player.hasPerk(PerkLib.FlyingSwordPath)) addButton(6, "Imprinting", ImprintingSF).hint("Imprint your SF to combine or seperate sets of flying swords.");
-		else addButtonDisabled(6, "???", "Req. Flying Sword Path.");
+		else addButtonDisabled(6, "???", "Req. Flying Sword Path perk.");
 		if (player.hasPerk(PerkLib.SoulSense)) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounters."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
-		else addButtonDisabled(7, "???", "Req. Soul Sense.");
+		else addButtonDisabled(7, "???", "Req. Soul Sense perk.");
 		//button 8 - ?
 		if (player.hasPerk(PerkLib.Metamorph)) {
 			if (player.blockingBodyTransformations()) addButtonDisabled(10, "Metamorph", "Your current body state prevents you from using Metamorph. (Either cure it or ascend to gain access to metamorph menu again)");
@@ -164,9 +165,9 @@ public class Soulforce extends BaseContent
 			/*12*/[0, "Early Soul Scholar", "E.S.Sc.", 100, PerkLib.SoulScholar],
 			[1, "Middle Soul Scholar", "M.S.Sc."],
 			[1, "Late Soul Scholar", "L.S.Sc."],
-			/*15*/[0, "Early Soul Scholar", "E.S.Gm.", 120, PerkLib.SoulGrandmaster],
-			[1, "Middle Soul Scholar", "M.S.Gm."],
-			[1, "Late Soul Scholar", "L.S.Gm."],
+			/*15*/[0, "Early Soul Grandmaster", "E.S.Gm.", 120, PerkLib.SoulGrandmaster],
+			[1, "Middle Soul Grandmaster", "M.S.Gm."],
+			[1, "Late Soul Grandmaster", "L.S.Gm."],
 			/*18*/[2, "Tribulation (G)", "Trib. (G)", 140],
 			[1, "Middle Soul Elder", "M.S.El."],
 			[1, "Late Soul Elder", "L.S.El."],
@@ -275,6 +276,7 @@ public class Soulforce extends BaseContent
 			addButton(i, stages[i][0], daoistSubPathChosen, stages[i][1], stages[i][2])
 				.disableIf(!player.hasItem(stages[i][2]), "Requires " + (stages[i][2] as ItemType).longName)
 				.disableIf(!player.hasPerk(stages[i][3]), "Requires perk: " + (stages[i][3] as PerkType).name())
+				.disableIf(i != 0 && !player.hasPerk(stages[i - 1][1]), "You need to have achieved the previous stage first.")
 				.disableIf(player.hasPerk(stages[i][1]), "You have already reached this stage.");
 		addButton(14, "Back", SubPaths);
 	}
@@ -328,6 +330,7 @@ public class Soulforce extends BaseContent
 					"Requires 1 bottle of " + (stages[i][2] as ItemType).longName
 					+ " and 1 vial of " + useables.BTSOLUTION.longName)
 				.disableIf(!player.hasPerk(stages[i][3]), "Requires perk: " + (stages[i][3] as PerkType).name())
+				.disableIf(i != 0 && !player.hasPerk(stages[i - 1][1]), "You need to have achieved the previous stage first.")
 				.disableIf(player.hasPerk(stages[i][1]), "You have already reached this stage.");
 		addButton(14, "Back", SubPaths);
 	}
@@ -406,8 +409,8 @@ public class Soulforce extends BaseContent
 		addButton(14, "Back", accessSoulforceMenu);
 	}
 
-	public function daoContemplationsEffect(statusEffect:StatusEffectType, daoname:String, clone:Boolean = false):void {
-		if (!clone) {
+	public function daoContemplationsEffect(statusEffect:StatusEffectType, daoname:String, clone:Boolean = false, elementalBody:Boolean = false):void {
+		if (!clone && !elementalBody) {
 			clearOutput();
 			outputText("You find a flat, comfortable rock to sit down on and contemplate.  Minute after minute you feel immersed into elements that surrounds you.  How they flow around you, how they change on their own and how they interact with each other.  All this while trying to understand, despite being insignificant while the great dao manifests around you.\n\n");
 		}
@@ -417,10 +420,10 @@ public class Soulforce extends BaseContent
 			dao = rand(6);
 			switch(daoname){
 				case "Fire":
-					if (player.hasPerk(PerkLib.FireAffinity)) dao += 1 + rand(3);
+					if (player.hasAnyPerk(PerkLib.FireAffinity, PerkLib.AffinityIgnis)) dao += 1 + rand(3);
 					break;
 				case "Ice":
-					if (player.hasPerk(PerkLib.ColdAffinity)) dao += 1 + rand(3);
+					if (player.hasAnyPerk(PerkLib.ColdAffinity, PerkLib.ColdMastery)) dao += 1 + rand(3);
 					break;
 				case "Lightning":
 					if (player.hasPerk(PerkLib.LightningAffinity)) dao += 1 + rand(3);
@@ -428,11 +431,30 @@ public class Soulforce extends BaseContent
 				case "Darkness":
 					if (player.hasPerk(PerkLib.DarknessAffinity)) dao += 1 + rand(3);
 					break;
+				case "Poison":
+					if (player.hasPerk(PerkLib.PoisonAffinity)) dao += 1 + rand(3);
+					break;
+				case "Wind":
+					if (player.hasAnyPerk(PerkLib.WindAffinity, PerkLib.AffinitySylph)) dao += 1 + rand(3);
+					break;
+				case "Blood":
+					if (player.hasAnyPerk(PerkLib.BloodAffinity, PerkLib.BloodMastery, PerkLib.WayOfTheBlood)) dao += 1 + rand(3);
+					break;
+				case "Water":
+					if (player.hasAnyPerk(PerkLib.WaterAffinity, PerkLib.AffinityUndine)) dao += 1 + rand(3);
+					break;
+				case "Earth":
+					if (player.hasAnyPerk(PerkLib.EarthAffinity, PerkLib.AffinityGnome)) dao += 1 + rand(3);
+					break;
+				case "Acid":
+					if (player.hasPerk(PerkLib.AcidAffinity)) dao += 1 + rand(3);
+					break;
+				
 			}
 		}
 		//uzycie w kontemplacji niebianskich skarbow zwiazanych z danym zywiolem daje bonusowe punkty
 		if (dao > 0) {
-			if (!clone) outputText("After the session ends you managed to progress in Dao of "+daoname+".");
+			if (!clone && !elementalBody) outputText("After the session ends you managed to progress in Dao of "+daoname+".");
 			if (player.hasStatusEffect(statusEffect)) {
 				player.addStatusValue(statusEffect, 1, dao);
 				var thres:Array = [20, 40, 60, 100, 140, 180, 220, 260, 300];
@@ -450,7 +472,7 @@ public class Soulforce extends BaseContent
 			} else player.createStatusEffect(statusEffect, dao, 0, 0, 0);
 		}
 		else outputText("After the session ends, you did not manage to progress in your comprehension.\n\n");
-		if (!clone) doNext(camp.returnToCampUseEightHours);
+		if (!clone && !elementalBody) doNext(camp.returnToCampUseEightHours);
 	}
 
 	public function highestLayerOfDaoComprehension():Number {
@@ -731,27 +753,43 @@ public class Soulforce extends BaseContent
 		outputText("");
 		menu();
 		var btn:int = 0;
-		if (player.itemCount(weaponsflyingswords.W_HALFM) > 1) addButton(btn++, "W.HalfM2", ImprintingSFCombine, weaponsflyingswords.W_HALFM, weaponsflyingswords.W_HALFM2).disableIf(player.soulforce < 100, "Req. 100 soulforce.");
-		if (player.itemCount(weaponsflyingswords.W_HALFM2) > 0) addButton(btn++, "W.HalfM", ImprintingSFSeparate1, weaponsflyingswords.W_HALFM2, weaponsflyingswords.W_HALFM).disableIf(player.soulforce < 100, "Req. 100 soulforce.");
-		if (player.itemCount(weaponsflyingswords.B_HALFM) > 1) addButton(btn++, "B.HalfM2", ImprintingSFCombine, weaponsflyingswords.B_HALFM, weaponsflyingswords.B_HALFM2).disableIf(player.soulforce < 100, "Req. 100 soulforce.");
-		if (player.itemCount(weaponsflyingswords.B_HALFM2) > 0) addButton(btn++, "B.HalfM", ImprintingSFSeparate1, weaponsflyingswords.B_HALFM2, weaponsflyingswords.B_HALFM).disableIf(player.soulforce < 100, "Req. 100 soulforce.");
-		if (player.itemCount(weaponsflyingswords.S_HALFM) > 1) addButton(btn++, "S.HalfM2", ImprintingSFCombine, weaponsflyingswords.S_HALFM, weaponsflyingswords.S_HALFM2).disableIf(player.soulforce < 100, "Req. 100 soulforce.");
-		if (player.itemCount(weaponsflyingswords.S_HALFM2) > 0) addButton(btn++, "S.HalfM", ImprintingSFSeparate1, weaponsflyingswords.S_HALFM2, weaponsflyingswords.S_HALFM).disableIf(player.soulforce < 100, "Req. 100 soulforce.");
-		if (player.itemCount(weaponsflyingswords.E_HALFM) > 1) addButton(btn++, "E.HalfM2", ImprintingSFCombine, weaponsflyingswords.E_HALFM, weaponsflyingswords.E_HALFM2).disableIf(player.soulforce < 100, "Req. 100 soulforce.");
-		if (player.itemCount(weaponsflyingswords.E_HALFM2) > 0) addButton(btn++, "E.HalfM", ImprintingSFSeparate1, weaponsflyingswords.E_HALFM2, weaponsflyingswords.E_HALFM).disableIf(player.soulforce < 100, "Req. 100 soulforce.");
+		if (player.itemCount(weaponsflyingswords.W_HALFM) > 1) addButton(btn++, "W.HalfM2", ImprintingSFCombine, weaponsflyingswords.W_HALFM, weaponsflyingswords.W_HALFM2, 120).disableIf(player.soulforce < 120, "Req. 120 soulforce.");
+		if (player.itemCount(weaponsflyingswords.W_HALFM2) > 0) addButton(btn++, "W.HalfM", ImprintingSFSeparate1, weaponsflyingswords.W_HALFM2, weaponsflyingswords.W_HALFM, 120).disableIf(player.soulforce < 120, "Req. 120 soulforce.");
+		if (player.itemCount(weaponsflyingswords.B_HALFM) > 1) addButton(btn++, "B.HalfM2", ImprintingSFCombine, weaponsflyingswords.B_HALFM, weaponsflyingswords.B_HALFM2, 120).disableIf(player.soulforce < 120, "Req. 120 soulforce.");
+		if (player.itemCount(weaponsflyingswords.B_HALFM2) > 0) addButton(btn++, "B.HalfM", ImprintingSFSeparate1, weaponsflyingswords.B_HALFM2, weaponsflyingswords.B_HALFM, 120).disableIf(player.soulforce < 120, "Req. 120 soulforce.");
+		if (player.itemCount(weaponsflyingswords.S_HALFM) > 1) addButton(btn++, "S.HalfM2", ImprintingSFCombine, weaponsflyingswords.S_HALFM, weaponsflyingswords.S_HALFM2, 120).disableIf(player.soulforce < 120, "Req. 120 soulforce.");
+		if (player.itemCount(weaponsflyingswords.S_HALFM2) > 0) addButton(btn++, "S.HalfM", ImprintingSFSeparate1, weaponsflyingswords.S_HALFM2, weaponsflyingswords.S_HALFM, 120).disableIf(player.soulforce < 120, "Req. 120 soulforce.");
+		if (player.itemCount(weaponsflyingswords.E_HALFM) > 1) addButton(btn++, "E.HalfM2", ImprintingSFCombine, weaponsflyingswords.E_HALFM, weaponsflyingswords.E_HALFM2, 120).disableIf(player.soulforce < 120, "Req. 120 soulforce.");
+		if (player.itemCount(weaponsflyingswords.E_HALFM2) > 0) addButton(btn++, "E.HalfM", ImprintingSFSeparate1, weaponsflyingswords.E_HALFM2, weaponsflyingswords.E_HALFM, 120).disableIf(player.soulforce < 120, "Req. 120 soulforce.");
+		if (player.itemCount(weaponsflyingswords.MOONLGT) > 1) addButton(btn++, "MoonLgt2", ImprintingSFCombine, weaponsflyingswords.MOONLGT, weaponsflyingswords.MOONLGT2, 160).disableIf(player.soulforce < 160, "Req. 160 soulforce.");
+		if (player.itemCount(weaponsflyingswords.MOONLGT2) > 0) addButton(btn++, "W.MoonLgt", ImprintingSFSeparate1, weaponsflyingswords.MOONLGT2, weaponsflyingswords.MOONLGT, 160).disableIf(player.soulforce < 160, "Req. 160 soulforce.");
+		if (player.itemCount(weaponsflyingswords.W_HALFM2) > 1) addButton(btn++, "W.HalfM4", ImprintingSFCombine, weaponsflyingswords.W_HALFM2, weaponsflyingswords.W_HALFM3, 240).disableIf(player.soulforce < 240, "Req. 240 soulforce.");
+		if (player.itemCount(weaponsflyingswords.W_HALFM3) > 0) addButton(btn++, "W.HalfM2", ImprintingSFSeparate1, weaponsflyingswords.W_HALFM3, weaponsflyingswords.W_HALFM2, 240).disableIf(player.soulforce < 240, "Req. 240 soulforce.");
+		if (player.itemCount(weaponsflyingswords.B_HALFM2) > 1) addButton(btn++, "B.HalfM4", ImprintingSFCombine, weaponsflyingswords.B_HALFM2, weaponsflyingswords.B_HALFM3, 240).disableIf(player.soulforce < 240, "Req. 240 soulforce.");
+		if (player.itemCount(weaponsflyingswords.B_HALFM3) > 0) addButton(btn++, "B.HalfM2", ImprintingSFSeparate1, weaponsflyingswords.B_HALFM3, weaponsflyingswords.B_HALFM2, 240).disableIf(player.soulforce < 240, "Req. 240 soulforce.");
+		if (player.itemCount(weaponsflyingswords.S_HALFM2) > 1) addButton(btn++, "S.HalfM4", ImprintingSFCombine, weaponsflyingswords.S_HALFM2, weaponsflyingswords.S_HALFM3, 240).disableIf(player.soulforce < 240, "Req. 240 soulforce.");
+		if (player.itemCount(weaponsflyingswords.S_HALFM3) > 0) addButton(btn++, "S.HalfM2", ImprintingSFSeparate1, weaponsflyingswords.S_HALFM3, weaponsflyingswords.S_HALFM2, 240).disableIf(player.soulforce < 240, "Req. 240 soulforce.");
+		if (player.itemCount(weaponsflyingswords.E_HALFM2) > 1) addButton(btn++, "E.HalfM4", ImprintingSFCombine, weaponsflyingswords.E_HALFM2, weaponsflyingswords.E_HALFM3, 240).disableIf(player.soulforce < 240, "Req. 240 soulforce.");
+		if (player.itemCount(weaponsflyingswords.E_HALFM3) > 0) addButton(btn++, "E.HalfM2", ImprintingSFSeparate1, weaponsflyingswords.E_HALFM3, weaponsflyingswords.E_HALFM2, 240).disableIf(player.soulforce < 240, "Req. 240 soulforce.");
+		if (player.itemCount(weaponsflyingswords.A_HALFM) > 1) addButton(btn++, "A.HalfM2", ImprintingSFCombine, weaponsflyingswords.A_HALFM, weaponsflyingswords.A_HALFM2, 300).disableIf(player.soulforce < 300, "Req. 300 soulforce.");
+		if (player.itemCount(weaponsflyingswords.A_HALFM2) > 0) addButton(btn++, "A.HalfM", ImprintingSFSeparate1, weaponsflyingswords.A_HALFM2, weaponsflyingswords.A_HALFM, 300).disableIf(player.soulforce < 300, "Req. 300 soulforce.");
+		if (player.itemCount(weaponsflyingswords.O_HALFM) > 1) addButton(btn++, "O.HalfM2", ImprintingSFCombine, weaponsflyingswords.O_HALFM, weaponsflyingswords.O_HALFM2, 300).disableIf(player.soulforce < 300, "Req. 300 soulforce.");
+		if (player.itemCount(weaponsflyingswords.O_HALFM2) > 0) addButton(btn++, "O.HalfM", ImprintingSFSeparate1, weaponsflyingswords.O_HALFM2, weaponsflyingswords.O_HALFM, 300).disableIf(player.soulforce < 300, "Req. 300 soulforce.");
+		if (player.itemCount(weaponsflyingswords.MOONLGT2) > 1) addButton(btn++, "MoonLgt4", ImprintingSFCombine, weaponsflyingswords.MOONLGT2, weaponsflyingswords.MOONLGT3, 320).disableIf(player.soulforce < 320, "Req. 320 soulforce.");
+		if (player.itemCount(weaponsflyingswords.MOONLGT3) > 0) addButton(btn++, "MoonLgt2", ImprintingSFSeparate1, weaponsflyingswords.MOONLGT3, weaponsflyingswords.MOONLGT2, 320).disableIf(player.soulforce < 320, "Req. 320 soulforce.");
 		addButton(14, "Back", accessSoulforceMenu);
 	}
-	public function ImprintingSFCombine(flyingsword1: FlyingSwords, flyingsword2: FlyingSwords):void {
+	public function ImprintingSFCombine(flyingsword1: FlyingSwords, flyingsword2: FlyingSwords, soulforceCost: Number):void {
 		clearOutput();
 		outputText("Combining.\n\n");
-		player.soulforce -= 100;
+		player.soulforce -= soulforceCost;
 		player.destroyItems(flyingsword1, 2);
 		inventory.takeItem(flyingsword2, ImprintingSF);
 	}
-	public function ImprintingSFSeparate1(flyingsword1: FlyingSwords, flyingsword2: FlyingSwords):void {
+	public function ImprintingSFSeparate1(flyingsword1: FlyingSwords, flyingsword2: FlyingSwords, soulforceCost: Number):void {
 		clearOutput();
 		outputText("Separating.\n\n");
-		player.soulforce -= 100;
+		player.soulforce -= soulforceCost;
 		player.destroyItems(flyingsword1, 1);
 		inventory.takeItem(flyingsword2, curry(ImprintingSFSeparate1a, flyingsword2));
 	}
@@ -779,14 +817,6 @@ public class Soulforce extends BaseContent
 		//button 11
 		addButton(13, "???", theUnknown).hint("Draw into your soulforce for soulsensing.");
 		addButton(14, "Back", accessSoulforceMenu);
-	}
-
-	private function soulforceForDaughters():int {
-		return 10 * (8 + (Math.floor(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 20)));
-	}
-
-	private function soulforceForSons():int {
-		return 10 * (26 + Math.round((flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3)/2));
 	}
 
 	public function theUnknown(page:int = 1):void {
@@ -881,6 +911,92 @@ public class Soulforce extends BaseContent
 	}
 	public function analLover():void {
 		SceneLib.helScene.helSexualAmbush();
+	}
+	
+	//Demon Energy Managment
+	
+	public function accessDemonicEnergyMenu():void {
+		clearOutput();
+		outputText("<b>Demonic Energy:</b> "+player.demonicenergy+" / "+player.maxDemonicEnergy()+"\n");
+		menu();
+		addButtonIfTrue(0, "StrengthenBody", demonicEnergyStrengthenBody, "You don’t have enough demonic energy to improve this ability.", (player.demonicenergy >= (25 + (player.perkv1(PerkLib.StrengthenBody) * 5))), "Consume the stored energy of souls to raise your strength, toughness and speed by 5% permanently. This change persists through time.");
+		addButtonIfTrue(1, "StrengthenMagic", demonicEnergyStrengthenMagic, "You don’t have enough demonic energy to improve this ability.", (player.demonicenergy >= (25 + (player.perkv1(PerkLib.StrengthenMagic) * 5))), "Consume the stored energy of souls to raise your intelligence, wisdom and libido by 5% permanently. This change persists through time.");
+		addButton(2, "Corrupt Element", demonicEnergyCorruptElement).hint("Reinforce your attunement over an element of an element by consuming demonic energy.");
+		addButton(14, "Back", playerMenu);
+	}
+	public function demonicEnergyCorruptElement():void {
+		clearOutput();
+		outputText("You may consume the stored energy of souls to empower your mastery over an element. Which element would you like to improve?\n");
+		menu();
+		if (player.demonicenergy < 200) {
+			addButtonDisabled(0, "Fire", "You don’t have enough demonic energy to improve this ability.");
+			addButtonDisabled(1, "Ice", "You don’t have enough demonic energy to improve this ability.");
+			addButtonDisabled(2, "Lightning", "You don’t have enough demonic energy to improve this ability.");
+			addButtonDisabled(3, "Darkness", "You don’t have enough demonic energy to improve this ability.");
+			addButtonDisabled(4, "Poison", "You don’t have enough demonic energy to improve this ability.");
+			addButtonDisabled(5, "Wind", "You don’t have enough demonic energy to improve this ability.");
+			addButtonDisabled(6, "Blood", "You don’t have enough demonic energy to improve this ability.");
+			addButtonDisabled(7, "Water", "You don’t have enough demonic energy to improve this ability.");
+			addButtonDisabled(8, "Earth", "You don’t have enough demonic energy to improve this ability.");
+			addButtonDisabled(9, "Acid", "You don’t have enough demonic energy to improve this ability.");
+		}
+		else {
+			addButtonIfTrue(0, "Fire", curry(demonicEnergyCorruptElementImprove, "Fire"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfFire) < 9);
+			addButtonIfTrue(1, "Ice", curry(demonicEnergyCorruptElementImprove, "Ice"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfIce) < 9);
+			addButtonIfTrue(2, "Lightning", curry(demonicEnergyCorruptElementImprove, "Lightning"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfLightning) < 9);
+			addButtonIfTrue(3, "Darkness", curry(demonicEnergyCorruptElementImprove, "Darkness"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfDarkness) < 9);
+			addButtonIfTrue(4, "Poison", curry(demonicEnergyCorruptElementImprove, "Poison"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfPoison) < 9);
+			addButtonIfTrue(5, "Wind", curry(demonicEnergyCorruptElementImprove, "Wind"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfWind) < 9);
+			addButtonIfTrue(6, "Blood", curry(demonicEnergyCorruptElementImprove, "Blood"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfBlood) < 9);
+			addButtonIfTrue(7, "Water", curry(demonicEnergyCorruptElementImprove, "Water"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfWater) < 9);
+			addButtonIfTrue(8, "Earth", curry(demonicEnergyCorruptElementImprove, "Earth"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfEarth) < 9);
+			addButtonIfTrue(9, "Acid", curry(demonicEnergyCorruptElementImprove, "Acid"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfAcid) < 9);
+		}
+		addButton(14, "Back", accessDemonicEnergyMenu);
+	}
+	public function demonicEnergyStrengthenBody():void {
+		clearOutput();
+		outputText("You consume some of your demonic energy permanently improving your physique!");
+		player.demonicenergy -= (25 + (player.perkv1(PerkLib.StrengthenBody) * 5));
+		if (player.hasPerk(PerkLib.StrengthenBody)) player.addPerkValue(PerkLib.StrengthenBody, 1, 1);
+		else player.createPerk(PerkLib.StrengthenBody, 1, 0, 0, 0);
+		doNext(demonicEnergyCorruptElement);
+	}
+	public function demonicEnergyStrengthenMagic():void {
+		clearOutput();
+		outputText("You consume some of your demonic energy permanently improving your magic!");
+		player.demonicenergy -= (25 + (player.perkv1(PerkLib.StrengthenMagic) * 5));
+		if (player.hasPerk(PerkLib.StrengthenMagic)) player.addPerkValue(PerkLib.StrengthenMagic, 1, 1);
+		else player.createPerk(PerkLib.StrengthenMagic, 1, 0, 0, 0);
+		doNext(demonicEnergyCorruptElement);
+	}
+	public function demonicEnergyCorruptElementImprove(daoType:String = ""):void {
+		clearOutput();
+		outputText("Your mastery over " + daoType+" has improved by 10%!");
+		player.demonicenergy -= 200;
+		switch (flags[kFLAGS.BLOOD_PUPPY_SUMMONS]) {
+            case "Fire": player.addStatusValue(StatusEffects.DaoOfFire, 1, 1);
+                    break;
+            case "Ice": player.addStatusValue(StatusEffects.DaoOfIce, 1, 1);
+                    break;
+            case "Lightning": player.addStatusValue(StatusEffects.DaoOfLightning, 1, 1);
+                    break;
+            case "Darkness": player.addStatusValue(StatusEffects.DaoOfDarkness, 1, 1);
+                    break;
+            case "Poison": player.addStatusValue(StatusEffects.DaoOfPoison, 1, 1);
+                    break;
+            case "Wind": player.addStatusValue(StatusEffects.DaoOfWind, 1, 1);
+                    break;
+            case "Blood": player.addStatusValue(StatusEffects.DaoOfBlood, 1, 1);
+                    break;
+            case "Water": player.addStatusValue(StatusEffects.DaoOfWater, 1, 1);
+                    break;
+            case "Earth": player.addStatusValue(StatusEffects.DaoOfEarth, 1, 1);
+                    break;
+            case "Acid": player.addStatusValue(StatusEffects.DaoOfAcid, 1, 1);
+                    break;
+        }
+		doNext(demonicEnergyCorruptElement);
 	}
 }
 }

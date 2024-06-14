@@ -14,6 +14,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Dungeons.RiverDungeon;
 import classes.Scenes.SceneLib;
 import classes.internals.SaveableState;
+import classes.Scenes.API.MultiBuy;
 
 public class JourneyToTheEast extends HeXinDaoAbstractContent implements SaveableState
 	{
@@ -21,8 +22,12 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 
 		public static var AhriStatsToPerksConvertCounter:Number;
 		public static var AhriTavernTalks:Boolean;
+		public static var AhriStatsToSuperPerksConvertCounter:Number;
 		public static var EvelynnPerksToStatsConvertCounter:Number;
 		public static var EvelynnTavernTalks:Boolean;
+		public static var EvelynnCoreLimitBreakerCounter:Number;
+		public static var DianaTavernTalks1:Boolean;
+		public static var DianaTavernTalks2:Boolean;
 
 		public function stateObjectName():String {
 			return "JourneyToTheEast";
@@ -31,16 +36,24 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 		public function resetState():void {
 			AhriStatsToPerksConvertCounter = 0;
 			AhriTavernTalks = false;
+			AhriStatsToSuperPerksConvertCounter = 0;
 			EvelynnPerksToStatsConvertCounter = 0;
 			EvelynnTavernTalks = false;
+			EvelynnCoreLimitBreakerCounter = 0;
+			DianaTavernTalks1 = false;
+			DianaTavernTalks2 = false;
 		}
 
 		public function saveToObject():Object {
 			return {
 				"AhriStatsToPerksConvertCounter": AhriStatsToPerksConvertCounter,
 				"AhriTavernTalks": AhriTavernTalks,
+				"AhriStatsToSuperPerksConvertCounter": AhriStatsToSuperPerksConvertCounter,
 				"EvelynnPerksToStatsConvertCounter": EvelynnPerksToStatsConvertCounter,
-				"EvelynnTavernTalks": EvelynnTavernTalks
+				"EvelynnTavernTalks": EvelynnTavernTalks,
+				"EvelynnCoreLimitBreakerCounter": EvelynnCoreLimitBreakerCounter,
+				"DianaTavernTalks1": DianaTavernTalks1,
+				"DianaTavernTalks2": DianaTavernTalks2
 			};
 		}
 
@@ -48,8 +61,12 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 			if (o) {
 				AhriStatsToPerksConvertCounter = o["AhriStatsToPerksConvertCounter"];
 				AhriTavernTalks = o["AhriTavernTalks"];
+				AhriStatsToSuperPerksConvertCounter = valueOr(o["AhriStatsToSuperPerksConvertCounter"], 0);
 				EvelynnPerksToStatsConvertCounter = valueOr(o["EvelynnPerksToStatsConvertCounter"], 0);
 				EvelynnTavernTalks = valueOr(o["EvelynnTavernTalks"], false);
+				EvelynnCoreLimitBreakerCounter = valueOr(o["EvelynnCoreLimitBreakerCounter"], 0);
+				DianaTavernTalks1 = valueOr(o["DianaTavernTalks1"], false);
+				DianaTavernTalks2 = valueOr(o["DianaTavernTalks2"], false);
 			} else {
 				// loading from old save
 				resetState();
@@ -88,7 +105,8 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 3) addButton(10, "Neisa", NeisabutPCgotKOd);
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 4 || flags[kFLAGS.NEISA_FOLLOWER] == 5) addButton(10, "Neisa", meetingNeisaPostDungeonExploration).hint("Neisa is sitting at a table enjoying one of the local drinks.");
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 6) addButton(10, "Neisa", meetingNeisaPostDungeonExploration2).hint("Neisa is sitting at a table enjoying one of the local drinks.");
-			addButtonDisabled(11, "???", "You see a horse woman sitting at a table on your left.");//Diana
+			if (DianaTavernTalks1) addButton(11, "Healer", dianaAtJttEMain).hint("You see a horse woman healer sitting at a table on your left.");
+			else addButton(11, "???", dianaAtJttEMain).hint("You see a horse woman sitting at a table on your left.");
 			addButton(14, "Leave", heXinDao.riverislandVillageStuff);
 		}
 
@@ -100,35 +118,32 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 			else outputText("morning");
 			outputText(" " + player.mf("mister", "miss") + ", what can I get you?</i>\"\n\n");
 			menu();
-			addButton(0, "ManUp B", buyDrink, consumables.MANUP_B, 1).hint("1 spirit stone");
-			addButton(1, "Gob.Ale", buyDrink, consumables.GOB_ALE, 1).hint("1 spirit stone");
-			addButton(2, "OrcMead", buyDrink, consumables.ORCMEAD, 1).hint("1 spirit stone");
-			addButton(3, "OniSake", buyDrink, consumables.ONISAKE, 1).hint("1 spirit stone");
-			addButton(5, "Fiery S", buyDrink, consumables.FIERYS_, 1).hint("1 spirit stone");
-			addButton(6, "SalamFW", buyDrink, consumables.SALAMFW, 1).hint("1 spirit stone");
-			addButton(7, "NoceLiq", buyDrink, consumables.NOCELIQ, 2).hint("2 spirit stones");
-			addButton(8, "Asumaki", buyDrink, consumables.ASKIRIN, 1).hint("2 spirit stones");
-			addButton(12, "BimboL", buyDrink, consumables.BIMBOLQ, 100).hint("100 spirit stones");
-			addButton(13, "BroBrew", buyDrink, consumables.BROBREW, 100).hint("100 spirit stones");
+			addButton(0, "ManUp B", confirmBuyDrink, consumables.MANUP_B, 1).hint("1 spirit stone");
+			addButton(1, "Gob.Ale", confirmBuyDrink, consumables.GOB_ALE, 1).hint("1 spirit stone");
+			addButton(2, "OrcMead", confirmBuyDrink, consumables.ORCMEAD, 1).hint("1 spirit stone");
+			addButton(3, "OniSake", confirmBuyDrink, consumables.ONISAKE, 1).hint("1 spirit stone");
+			addButton(5, "Fiery S", confirmBuyDrink, consumables.FIERYS_, 1).hint("1 spirit stone");
+			addButton(6, "SalamFW", confirmBuyDrink, consumables.SALAMFW, 1).hint("1 spirit stone");
+			addButton(7, "NoceLiq", confirmBuyDrink, consumables.NOCELIQ, 2).hint("2 spirit stones");
+			addButton(8, "Asumaki", confirmBuyDrink, consumables.ASKIRIN, 2).hint("2 spirit stones");
+			addButton(12, "BimboL", confirmBuyDrink, consumables.BIMBOLQ, 100).hint("100 spirit stones");
+			addButton(13, "BroBrew", confirmBuyDrink, consumables.BROBREW, 100).hint("100 spirit stones");
 			addButton(14, "Back", notThirsty);
 		}
+		private function confirmBuyDrink(itype:ItemType, price:int):void {
+			var descString:String = "You ask for " + itype.longName + ".\n\n";
+			var onBuyString:String = "\n\nThe barman hands over the drink you ordered.\n\n";
+
+			var priceRate:Number = itype.value / price;
+
+			MultiBuy.confirmBuyMulti(drinkAlcohol, "The barman", priceRate, itype, descString, onBuyString, true);
+		}
+
 		//drink list (to be expanded) some generic nonTF beers
 		private function notThirsty():void {
 			clearOutput();
 			outputText("In the end you realise you are not thirsty after all and wave a goodbye before leaving.\n\n");
 			doNext(enteringInn,false);
-		}
-		private function buyDrink(drink:ItemType, amount:int):void{
-			var cost:int = amount;
-			if(flags[kFLAGS.SPIRIT_STONES] < cost){
-				outputText("\n\nThe barman shakes his head, indicating you need " + String(cost - flags[kFLAGS.SPIRIT_STONES]) + " more spirit stones to purchase this drink.");
-				doNext(drinkAlcohol);
-				return;
-			}
-			flags[kFLAGS.SPIRIT_STONES] -= cost;
-			statScreenRefresh();
-			outputText("\n\nThe barman hands over the drink you ordered. ");
-			inventory.takeItem(drink, drinkAlcohol);
 		}
 
 		private function shadyPerson(second:Boolean = true):void {
@@ -140,6 +155,8 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 			outputText("\"<i>Welcome to 'Felix's Corner' traveler. Do you wanna buy something?</i>\" asks the cat head ending it with a short purr. \"<i>We have wares if you have the spirit stones.</i>\"\n\n");
 			outputText("After that the other head stops looking around, baring its teeth at you. \"<i>If you not interested in buying anything, then get lost... we don't have all day.</i>\"\n\n");
 			menu();
+			addButton(5, necklaces.SKULLNE.shortName, itemBuy, necklaces.SKULLNE).hint("50 spirit stones");
+			addButton(6, headjewelries.SKULLCR.shortName, itemBuy, headjewelries.SKULLCR).hint("40 spirit stones");
 			addButton(7, necklaces.NECRONE.shortName, itemBuy, necklaces.NECRONE).hint("120 spirit stones");
 			addButton(8, weapons.NECROWA.shortName, itemBuy, weapons.NECROWA).hint("128 spirit stones");
 			addButton(9, shields.NECROSH.shortName, itemBuy, shields.NECROSH).hint("100 spirit stones");
@@ -188,7 +205,6 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 		}
 		private function workHoursMadam():Boolean {
 			return (model.time.hours >= 7 && model.time.hours <= 9) || (model.time.hours >= 18 && model.time.hours <= 22);
-
 		}
 		private function visitMadam():void {
 			clearOutput();
@@ -196,7 +212,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 			else {
 				outputText("You see a person covered wholy by the loose robe. For a moment it looks like it not noticed your presence next to it.\n\n");
 				outputText("\"<i>Greeting potential customer. You can call me Madam,</i>\" clearly female voice with undeniable subtle charm interrupts the silence. \"<i>You came to our table seeking my services? I am not able to provide much... aside from something i call... 'conversion'.</i>\"\n\n");
-				outputText("Conversion? Seeing your puzzle expression she continues, \"<i>I would take a bit of your grown potential to exchange it for increased ability to develop mystical abilities. But...</i>\" she make a gesture with one of her hands showing briefly her hand with five outstretched fingers \"<i>...I shall only do this five times. No more and no less than five.</i>\"\n\n");
+				outputText("Conversion? Seeing your puzzle expression she continues, \"<i>I would take a bit of your grown potential to exchange it for increased ability to develop mystical abilities. But...</i>\" she make a gesture with one of her hands showing briefly her hand with five outstretched fingers \"<i>...I shall only do this ten times. No more and no less than ten.</i>\"\n\n");
 				outputText("Just like that? Without any string attatched?\n\n");
 				outputText("\"<i>Of course there would be additional price. Ten spirit stones.</i>\" She pause before asking \"<i>So, dear customer, would you like me to perform this conversion on you?</i>\"\n\n");
 				AhriTavernTalks = true;
@@ -215,8 +231,8 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 				outputText("\"<i>Seems your grown potential isn't sufficient.</i>\" Madam shakes her head, \"<i>Come see me again when it would increase.</i>\"\n\n");
 				doNext(visitMadam);
 			}
-			else if (AhriStatsToPerksConvertCounter > 4 && AhriTavernTalks > 0) {
-				outputText("\"<i>It's unfotunate but I can't help you anymore,</i>\" Madam rise her hand to show five fingers, \"<i>My service can be repeated maximum five times and you, dear customer, have reached this limit.</i>\"\n\n");
+			else if (AhriStatsToPerksConvertCounter > 9 && AhriTavernTalks > 0) {
+				outputText("\"<i>It's unfotunate but I can't help you anymore,</i>\" Madam rise her hand to show five fingers, \"<i>My service can be repeated maximum ten times and you, dear customer, have reached this limit.</i>\"\n\n");
 				doNext(visitMadam);
 			}
 			else {
@@ -226,6 +242,11 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 				outputText("When you wake up, you groan, stretching your limbs. You're filled with a vaguely empty feeling in your muscles, but your brain feels...expanded, somehow. You snap awake, realizing that you're still in the inn. Looking around, there is nobody else in the room, with the door left wide open, almost like madam wanted to say 'return on your own'. Slightly unsatisfied, you return to the drinking hall.\n\n");
 				if (AhriStatsToPerksConvertCounter > 0) AhriStatsToPerksConvertCounter += 1;
 				else AhriStatsToPerksConvertCounter = 1;
+				if (AhriStatsToSuperPerksConvertCounter > 0) {
+					AhriStatsToSuperPerksConvertCounter -= 1;
+					player.superPerkPoints += 1;
+				}
+				else AhriStatsToSuperPerksConvertCounter = 1;
 				flags[kFLAGS.SPIRIT_STONES] -= 10;
 				player.statPoints -= 5;
 				player.perkPoints += 1;
@@ -235,7 +256,6 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 		}
 		private function workHoursTemptress():Boolean {
 			return (model.time.hours >= 8 && model.time.hours <= 9) || (model.time.hours >= 18 && model.time.hours <= 23);
-
 		}
 		private function visitTemptress():void {
 			clearOutput();//Temptress - female displacer devil npc for perk points to stat points conversion outputText("\"<i></i>\"\n\n");
@@ -243,9 +263,9 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 			else {
 				outputText("You see a person covered entirely by a loose robe. She looks around until she finally notices you staring at her.\n\n");
 				outputText("A sultry voice, feminine and sizzling, interrupts the silence. \"<i>Hello, customer. I'm Temptress,</i>\" She smiles slightly, beckoning to you with one hand. \"<i>You came to this table seeking my services? I can provide you with 'change'.</i>\"\n\n");
-				outputText("Change? Seeing your puzzle expression she continues, \"<i>I would take a bit of your ability to develop mystical abilities to exchange it for increased grown potential. But...</i>\" she make a gesture with one of her hands showing briefly her hand with five outstretched fingers ending with long, sharp finger claws \"<i>...I would only do this five times.</i>\"\n\n");
+				outputText("Change? Seeing your puzzle expression she continues, \"<i>I would take a bit of your ability to develop mystical abilities to exchange it for increased grown potential. But...</i>\" she make a gesture with one of her hands showing briefly her hand with five outstretched fingers ending with long, sharp finger claws \"<i>...I would only do this ten times.</i>\"\n\n");
 				outputText("Just like that? Without any strings attatched?\n\n");
-				outputText("\"<i>Of course there would be additional price for myu services. Ten spirit stones.</i>\" She pauses before asking \"<i>So are you here to be mesmerized or not?</i>\"\n\n");
+				outputText("\"<i>Of course there would be additional price for my services. Ten spirit stones.</i>\" She pauses before asking \"<i>So are you here to be mesmerized or not?</i>\"\n\n");
 				EvelynnTavernTalks = true;
 			}
 			menu();
@@ -262,8 +282,8 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 				outputText("\"<i>Seems your ability to develop your abilities is lacking.</i>\" Temptress sounds... disappointed, \"<i>Come see me again when it increases.</i>\"\n\n");
 				doNext(visitTemptress);
 			}
-			else if (EvelynnPerksToStatsConvertCounter > 4 && EvelynnTavernTalks > 0) {
-				outputText("\"<i>Ahh I did told you didn't I?</i>\" Temptress says with a sad voice, \"<i>My services can be repeated only five times and you used them all.</i>\"\n\n");
+			else if (EvelynnPerksToStatsConvertCounter > 9 && EvelynnTavernTalks > 0) {
+				outputText("\"<i>Ahh I did told you didn't I?</i>\" Temptress says with a sad voice, \"<i>My services can be repeated only ten times and you used them all.</i>\"\n\n");
 				doNext(visitTemptress);
 			}
 			else {
@@ -273,12 +293,90 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 				outputText("When you wake up, your head feels tighter, and yet at the same time your body feels looser, ready to improve. Looking around there is nobody beside you in the room, the door wide open. Looks like after doing her part, Temptress already left. Slightly unsatisfied you return to the drinking hall.\n\n");
 				if (EvelynnPerksToStatsConvertCounter > 0) EvelynnPerksToStatsConvertCounter += 1;
 				else EvelynnPerksToStatsConvertCounter = 1;
+				if (EvelynnCoreLimitBreakerCounter > 0) EvelynnCoreLimitBreakerCounter += 1;
+				else EvelynnCoreLimitBreakerCounter = 1;
 				flags[kFLAGS.SPIRIT_STONES] -= 10;
 				player.statPoints += 5;
 				player.perkPoints -= 1;
 				doNext(enteringInn,false);
 				advanceMinutes(30);
 			}
+		}
+
+		public function dianaAtJttEMain():void {
+			clearOutput();//\"<i></i>\"
+			if (DianaTavernTalks1) outputText("\"<i>You came again.</i>\" Her eyes alight with anticipation. \"<i>Do you need any healing or curing?</i>\"");
+			else {
+				outputText("\"<i>Greetings, I am a healer. Anyone that has any health problems or issues can come to me and I will lend aid.</i>\" Her eyes dart to her sides before returning to you, \"<i>With an appropriate price, of course.</i>\" The Horse-morph pauses, \"<i>So. Do you need any healing or curing ailments?</i>\"");
+				DianaTavernTalks1 = true;
+			}
+			menu();
+			if (player.HP < player.maxOverHP()) addButtonIfTrue(0, "Healing", dianaAtJttEMainHeal, "You need to have 50 gems.", player.gems >= 50);
+			else addButtonDisabled(0, "Healing", "You're fully healed already.");
+			if ((player.statStore.hasBuff("Weakened") || player.statStore.hasBuff("Drained") || player.statStore.hasBuff("Damaged")) && flags[kFLAGS.DIANA_CURE_COOLDOWN] <= 0) {
+				addButtonIfTrue(1, "C.C.(Base)", dianaAtJttEMainCurses1, "You need to have 150 gems.", player.gems >= 150, "Cure curses that affect stats non-multiplier bonuses.");
+				addButtonIfTrue(2, "C.C.(Mult)", dianaAtJttEMainCurses2, "You need to have 150 gems.", player.gems >= 150, "Cure curses that affect stats multiplier bonsues.");
+			}
+			else if (flags[kFLAGS.DIANA_CURE_COOLDOWN] > 0) {
+				addButtonDisabled(1, "C.C.(Base)", "Healer is not yet ready to cure your curses again.");
+				addButtonDisabled(2, "C.C.(Mult)", "Healer is not yet ready to cure your curses again.");
+			}
+			else {
+				addButtonDisabled(1, "C.C.(Base)", "You don't have any curses to cure. (non-multiplier)");
+				addButtonDisabled(2, "C.C.(Mult)", "You don't have any curses to cure. (multiplier)");
+			}
+			addButton(3, "Uncurse", SceneLib.dianaScene.dianaAtJttECursedItemsRemoval1)
+				.hint("Ask horse healer to remove your cursed item. Costs 500 gems. ")
+				.disableIf(player.gems < 500, "Ask horse healer to remove your cursed item. Costs 500 gems (Can't afford).")
+				.disableIf(player.equippedKnownCursedItems().length == 0 && player.carriedKnownCursedItems().length == 0, "You don't have any cursed items");
+			if (player.weaponRange == weaponsrange.SAGITTB) addButton(4, "Uncurse", SceneLib.dianaScene.dianaAtJttECursedItemsRemoval2);
+			addButton(14, "Back", curry(enteringInn,false));
+		}
+		public function dianaAtJttEMainHeal():void {
+			clearOutput();
+			player.gems -= 50;
+			outputText("You ask if she could tend to your injuries, to which she perks up, rubbing her hands together with grinning eyes, \"<i>Of course I can!</i>\"\n\n");
+			outputText("The horse-morph stands up, walking around you as she stops at your back before moving her hands across your [skin], making you gasp as you feel a strong tingling sensation from her fingertips. Sparks of magic dance across your [skin] as her potent magic washes away your pains and injuries.\n\n");
+			outputText("The sparks intensify, becoming almost painful, causing you to grimace, but she quickly hushes you as the sound touch from her on your body soothes the pain. Then, it's all over as Nadia lets go, taking a step back. Your wounds have sealed, and injuries fade as if they never existed.\n\n");
+			if (player.hasStatusEffect(StatusEffects.CombatWounds)) {
+				if (player.statusEffectv1(StatusEffects.CombatWounds) > 0.2) player.addStatusValue(StatusEffects.CombatWounds, 1, -0.2);
+				else player.removeStatusEffect(StatusEffects.CombatWounds);
+			}
+			HPChange(player.maxOverHP() * 0.25, true);
+			EngineCore.changeFatigue( -(Math.round(player.maxFatigue() * 0.125)));
+			doNext(dianaAtJttEMain);
+			advanceMinutes(15);
+		}
+		public function dianaAtJttEMainCurses1():void {
+			clearOutput();
+			player.gems -= 150;
+			flags[kFLAGS.DIANA_CURE_COOLDOWN] = 8;
+			outputText("You ask if she can cure your curses, to which she nods. The horse-morph stands up and walks around you, stopping at your back. She begins to move her hands across your body, rubbing your [skin], forcing a small gasp as you feel a strong tingling sensation from her fingertips as it washes away your curses.\n\n");
+			outputText("The sparks of magic intensify, to an almost painful state. Your grimace, but she quickly hushes you, her soft touch of your body soothing the pain. Then, it's over. She steps back as your curses have lessened.\n\n");
+			for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
+				player.removeCurse(stat, 5,1);
+				player.removeCurse(stat, 5,2);
+				player.removeCurse(stat, 5,3);
+			}
+			doNext(dianaAtJttEMain);
+			advanceMinutes(15);
+		}
+		public function dianaAtJttEMainCurses2():void {
+			clearOutput();
+			player.gems -= 150;
+			flags[kFLAGS.DIANA_CURE_COOLDOWN] = 8;
+			outputText("You ask if she can cure your curses, to which she nods. The horse-morph stands up and walks around you, stopping at your back. She begins to move her hands across your body, rubbing your [skin], forcing a small gasp as you feel a strong tingling sensation from her fingertips as it washes away your curses.\n\n");
+			outputText("The sparks of magic intensify, to an almost painful state. Your grimace, but she quickly hushes you, her soft touch of your body soothing the pain. Then, it's over. She steps back as your curses have lessened.\n\n");
+			for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
+				if (stat != "sens")
+				{
+					player.removeCurse(stat+".mult", 0.05,1);
+					player.removeCurse(stat+".mult", 0.05,2);
+					player.removeCurse(stat+".mult", 0.05,3);
+				}
+			}
+			doNext(dianaAtJttEMain);
+			advanceMinutes(30);
 		}
 
 		public function NeisabutPCgotKOd():void {

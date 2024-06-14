@@ -28,9 +28,9 @@ public class Holli extends Monster
 //attack noun: lash
 		
 		
-		override public function postPlayerAbility(ability:CombatAbility):void {
+		override public function postPlayerAbility(ability:CombatAbility, display:Boolean = true):void {
 			if (ability.hasTag(CombatAbility.TAG_DAMAGING) && ability.hasTag(CombatAbility.TAG_FIRE)) {
-				if(!hasStatusEffect(StatusEffects.HolliBurning)) lightHolliOnFireMagically();
+				if(!hasStatusEffect(StatusEffects.HolliBurning)) lightHolliOnFireMagically(display);
 			}
 		}
 		
@@ -101,11 +101,11 @@ public class Holli extends Monster
 		}
 
 //if player uses whitefire/firebreath successfully, suppress these, go to 'Fire Lit' EOR events, and output additional line after the attack:
-		public function lightHolliOnFireMagically():void
+		public function lightHolliOnFireMagically(display:Boolean = true):void
 		{
 			if (hasStatusEffect(StatusEffects.JojoIsAssisting)) {
 				if (!hasStatusEffect(StatusEffects.HolliBurning)) {
-					outputText("The magical fire effectively ignites a wide swath of Jojo's tinder, and the demon howls in rage.  Seeing this, Jojo drops the burning torch he carries and turns back toward the forest to fetch more tinder.\n\n");
+					if (display) outputText("The magical fire effectively ignites a wide swath of Jojo's tinder, and the demon howls in rage.  Seeing this, Jojo drops the burning torch he carries and turns back toward the forest to fetch more tinder.\n\n");
 					createStatusEffect(StatusEffects.HolliBurning, 0, 0, 0, 0);
 				}
 			}
@@ -225,13 +225,13 @@ public class Holli extends Monster
 		}
 
 
-		override public function teased(lustDelta:Number, isNotSilent:Boolean = true):void
+		override public function teased(lustDelta:Number, isNotSilent:Boolean = true, display:Boolean = true):void
 		{
 			if (hasStatusEffect(StatusEffects.HolliBurning)) {
 				outputText("Holli doesn't even seem to notice, so concerned is she with defeating you before the mounting bonfire causes her any more pain.");
 				lustDelta = 0;
 			}
-			applyTease(lustDelta);
+			applyTease(lustDelta, display);
 		}
 
 		public function Holli()

@@ -16,6 +16,7 @@ public class SeaAnemone extends Monster
 	{
 		private static const STAT_DOWN_FLAT:int = 4;
 		private static const STAT_DOWN_MULT:int = 4;
+		private var cuteCheck:Boolean = true;
 	
 		override public function eAttack():void
 		{
@@ -28,7 +29,29 @@ public class SeaAnemone extends Monster
 			applyVenom(rand(STAT_DOWN_FLAT + STAT_DOWN_MULT*player.newGamePlusMod() + player.effectiveSensitivity() / 20) + 1);
 			return 1;
 		}
+		override public function preMeleeDmg(damage:Number):Number{
+			//hit successful:
+			//special event, block (no more than 10-20% of turns, also fails if PC has >75 corruption):
+			cuteCheck = true;
+			if (rand(10) <= 1) {
+				outputText("Seeing your [weapon] raised, the anemone looks down at the water, angles her eyes up at you, and puts out a trembling lip.  ");
+				if (player.cor < 75) {
+					outputText("You stare into her hangdog expression and lose most of the killing intensity you had summoned up for your attack, stopping a few feet short of hitting her.\n");
+					//damage = 0;
+					//Kick back to main if no damage occured!
+					// so cute! skip remaining attacks
+					cuteCheck = false;
 
+				} else outputText("Though you lose a bit of steam to the display, the drive for dominance still motivates you to follow through on your swing.");
+			}
+			return damage;
+		}
+		override public function postMeleeDmgSkip(attackInstance:int):Boolean{
+			if(attackInstance==1)
+				return cuteCheck;
+			else
+				return true;
+		}
 		//Apply the effects of AnemoneVenom()
 		public function applyVenom(amt:Number = 1):void
 		{
@@ -93,6 +116,7 @@ public class SeaAnemone extends Monster
 			this.level = 50;
 			this.gems = rand(50) + 70;
 			this.drop = new WeightedDrop(consumables.DRYTENT, 1);
+			this.createPerk(PerkLib.WaterNature, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

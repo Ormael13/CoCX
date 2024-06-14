@@ -13,6 +13,8 @@ import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.internals.WeightedDrop;
 
+import coc.view.CoCButton;
+
 public class Incels extends Monster {
 
     public function Incels() {
@@ -43,7 +45,7 @@ public class Incels extends Monster {
         this.lustVuln = 1;
         this.level = 52;
         this.gems = rand(50) + 75;
-        this.drop = new WeightedDrop().add(useables.D_SCALE, 5).add(consumables.LETHITE, 2).add(jewelries.POWRRNG, 1);
+        this.drop = new WeightedDrop().add(useables.D_SCALE, 5).add(consumables.LETHITE, 3).add(consumables.LETH1TE, 2).add(jewelries.POWRRNG, 1);
         this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
         this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
         this.createPerk(PerkLib.ToughHide, 0, 0, 0, 0);
@@ -65,6 +67,14 @@ public class Incels extends Monster {
     }
     private function restoreLustTick():void {
         damageMult = damageMultBase + (Math.round(lust/1000) * 0.01);
+    }
+
+    override public function changeBtnWhenBound(btnStruggle:CoCButton, btnBoundWait:CoCButton):void{
+        if (player.hasStatusEffect(StatusEffects.Pounced)) {
+            outputText("You are buried under the incels’ writhing mass, and they’re still trying to tear you apart!");
+            btnStruggle.call(RipStruggle);
+            btnBoundWait.call(RipWait);
+        }
     }
 
     override public function defeated(hpVictory:Boolean):void {
@@ -97,6 +107,7 @@ public class Incels extends Monster {
 
     // idk if there's a better implementation, but let's keep it simple for now?
     public var dsTurnCounter:int = 0;
+	private var grappleCooldown:Number;
 
     // In doAI to avoid stun checks.
     public function DraftSupportCheck():void {
@@ -128,7 +139,7 @@ public class Incels extends Monster {
     }
 
     public function RipStruggle():void {
-        if (rand(player.str) > (this.str / 10) * (1 + player.getStatusValue(StatusEffects.Pounced, 1)) || player.hasPerk(PerkLib.FluidBody)) RipBreakOut();
+        if (rand(player.str) > (this.str / 10) * (1 + player.getStatusValue(StatusEffects.Pounced, 1)) || (player.hasStatusEffect(StatusEffects.Pounced) && player.statusEffectv1(StatusEffects.Pounced) < 1) || player.hasPerk(PerkLib.FluidBody)) RipBreakOut();
         else RipCont();
         SceneLib.combat.enemyAIImpl();
     }
@@ -150,11 +161,13 @@ public class Incels extends Monster {
         player.removeStatusEffect(StatusEffects.Pounced);
         outputText("You manage to get your elbow into the mouth of one particularly tenacious creature, and it recoils, headbutting another by accident. The two begin fighting, and the flailing starts a miniature brawl between the Sexless freaks. You feel the weight on you lessening, and you heave, sending two more of the creatures tumbling. You scramble, pulling yourself out, but as you do, the creatures refocus on you, almost immediately.");
         takePhysDamage(eBaseDamage());
+		grappleCooldown = 2;
     }
 
     override protected function performCombatAction():void {
 		restoreLustTick();
-        if (!player.hasStatusEffect(StatusEffects.Pounced) && rand(2) == 0) RipAndTearUntilYourDone();
+        if (grappleCooldown > 0) --grappleCooldown;
+		if (grappleCooldown == 0 && !player.hasStatusEffect(StatusEffects.Pounced) && rand(2) == 0) RipAndTearUntilYourDone();
         else IncelRush();
     }
 }

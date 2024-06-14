@@ -22,7 +22,7 @@ public class ThunderstormSpell extends AbstractDivineSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~"+calcDamage(target, false, false)+" lightning damage for "+numberOfThings(calcDuration(),"round");
+		return "~"+numberFormat(calcDamage(target, false, false))+" lightning damage for "+numberOfThings(calcDuration(),"round");
 	}
 	
 	override public function isActive():Boolean {
@@ -36,7 +36,7 @@ public class ThunderstormSpell extends AbstractDivineSpell {
 		return super.usabilityCheck();
 	}
 	
-	public function calcDuration():int {
+	override public function calcDuration():int {
 		return 30;
 	}
 	
@@ -45,7 +45,7 @@ public class ThunderstormSpell extends AbstractDivineSpell {
 		if (display) {
 			outputText("<b>A bolt of divine lightning falls from the sky and strikes [themonster]</b>. ");
 		}
-		monster.takeLightningDamage(player.statusEffectv1(StatusEffects.Thunderstorm), display);
+		doLightningDamage(player.statusEffectv1(StatusEffects.Thunderstorm), true, display);
 		if (display) {
 			outputText("\n\n");
 		}
@@ -67,20 +67,11 @@ public class ThunderstormSpell extends AbstractDivineSpell {
 			outputText("You call upon the anger of the gods to smite your foe and they gladly answer with thunder. Lightning begins to strike down upon your opponent"+(monster.plural ? "s":"")+" with perfect precision.");
 		}
 		var damage:Number = calcDamage(monster, true, true);
-		//Determine if critical hit!
-		var crit:Boolean = false;
-		var critChance:int = 5;
-		critChance += combatMagicalCritical();
-		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-		if (rand(100) < critChance) {
-			crit = true;
-			damage *= 1.75;
-		}
+		
 		player.createStatusEffect(StatusEffects.Thunderstorm, damage, calcDuration(), 0, 0);
-		doLightingDamage(damage, true, display);
-		if (crit && display) {
-			outputText("<b>Critical Hit!</b>");
-		}
+		damage = critAndRepeatDamage(display, damage, DamageType.LIGHTNING);
+		checkAchievementDamage(damage);
+		combat.heroBaneProc(damage);
 	}
 }
 }

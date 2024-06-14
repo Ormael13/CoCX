@@ -30,8 +30,10 @@ public class Charybdis extends Monster
 			while (hibD-->0) daggers();
 			statScreenRefresh();
 			outputText(" They reappear in his hands, and you look down at the floor. The daggers that had hit you are gone.\n");
-			if (player.hasStatusEffect(StatusEffects.IzmaBleed)) player.addStatusValue(StatusEffects.IzmaBleed, 1, 1);
-            else player.createStatusEffect(StatusEffects.IzmaBleed, 3, 0, 0, 0);
+			if (!player.immuneToBleed()) {
+				if (player.hasStatusEffect(StatusEffects.IzmaBleed)) player.addStatusValue(StatusEffects.IzmaBleed, 1, 1);
+				else player.createStatusEffect(StatusEffects.IzmaBleed, 3, 0, 0, 0);
+			}
 		}
 		private function daggers():void {
 			var damage:Number = weaponAttack;
@@ -66,7 +68,7 @@ public class Charybdis extends Monster
 		private function charybdisRejuvenationRhythm():void {
 			outputText("The instruments at his gills sound out, a brassy sound in time with the beleaguered Scylla’s heartbeat. You notice his wounds begin to close. ");
 			var temp:Number = Math.round(maxHP() * 0.15);
-			outputText("<b>(<font color=\"#008000\">+" + temp + "</font>)</b>");
+			outputText("<b>([font-heal]+" + temp + "[/font])</b>");
 			addHP(temp);
 			var hpChange2:int = inte;
 			createStatusEffect(StatusEffects.MonsterRegen2, 8, hpChange2, 0, 0);
@@ -126,7 +128,7 @@ public class Charybdis extends Monster
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.scyllaScene.oceanScyllaLoss();
+			SceneLib.charybdisScene.charyLoss();
 		}
 		
 		override public function get long():String

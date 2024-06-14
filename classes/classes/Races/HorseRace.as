@@ -1,6 +1,7 @@
 package classes.Races {
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
+import classes.IMutations.IMutationsLib;
 import classes.Race;
 import classes.VaginaClass;
 
@@ -46,7 +47,9 @@ public class HorseRace extends Race {
 				.vaginaType(VaginaClass.EQUINE, +1)
 				.skinCoatType(Skin.FUR, +1)
 				.armType(Arms.HUMAN, +1)
-				.isNotTaur(0,-7);
+				.isNotTaur(0, -7);
+		
+		addMutation(IMutationsLib.EquineMuscleIM, +1);
 		
 		buildTier(7, "equine-morph")
 				.buffs({

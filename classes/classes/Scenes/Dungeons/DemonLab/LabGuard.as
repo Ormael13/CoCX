@@ -10,6 +10,7 @@ import classes.Monster;
 import classes.PerkLib;
 import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.SceneLib;
+import classes.StatusEffects;
 import classes.VaginaClass;
 import classes.internals.WeightedDrop;
 
@@ -150,6 +151,19 @@ public class LabGuard extends Monster {
             if (rand(2) == 0)  eOneAttack(true);
             else player.takeLustDamage(10 + (player.lib / 20) + (player.cor / 20) + rand(10), true);
         }
+    }
+
+    override public function preMeleeDmg(damage:Number):Number{
+        //Lab Guard tanking
+        if (shieldWall && !hasStatusEffect(StatusEffects.Stunned)) {
+            eOneAttack(true);
+            if (player.HP <= player.minHP()) {
+                doNext(SceneLib.combat.endHpLoss);
+                return damage;
+            }
+            damage /= 2;
+        }
+        return damage;
     }
 
     override protected function performCombatAction():void {

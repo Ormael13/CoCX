@@ -12,7 +12,9 @@ import classes.Races;
 
 public class HumanTesticlesMutation extends IMutationPerkType
     {
-        private static const mName:String = "Human Testicles";
+        override public function get mName():String {
+            return "Human Testicles";
+        }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -30,26 +32,8 @@ public class HumanTesticlesMutation extends IMutationPerkType
                 descS += "Increases virility rating by 60, +20% to lust resistance, increase cum production by ~100%, +10% to max overlust, negative effects of libido are reduced by 5%, +200 to max lust and allow to use Cum Cannon once per fight";
             }
             if (descS != "")descS += ".";
+            if (pTier >= 1) descS += " (req. 18+ human score to have all effects active)";
             return descS;
-        }
-
-        //Name. Need it say more?
-        override public function name(params:PerkClass=null):String {
-            var sufval:String;
-            switch (currentTier(this, player)){
-                case 2:
-                    sufval = "(Primitive)";
-                    break;
-                case 3:
-                    sufval = "(Evolved)";
-                    break;
-                case 4:
-                    sufval = "(Final Form)";
-                    break;
-                default:
-                    sufval = "";
-            }
-            return mName + sufval;
         }
 
         //Mutation Requirements

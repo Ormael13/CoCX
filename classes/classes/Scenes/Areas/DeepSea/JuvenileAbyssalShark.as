@@ -70,9 +70,11 @@ public class JuvenileAbyssalShark extends Monster
 			var damage:Number = 0;
 			damage += (eBaseDamage() * 2);
 			player.takePhysDamage(damage, true);
-			if (player.hasStatusEffect(StatusEffects.CombatWounds)) player.addStatusValue(StatusEffects.CombatWounds, 1, 0.01);
-			if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
-			else player.createStatusEffect(StatusEffects.Hemorrhage,SceneLib.combat.debuffsOrDoTDuration(3),0.1,0,0);
+			if (player.hasStatusEffect(StatusEffects.CombatWounds) && player.statusEffectv1(StatusEffects.CombatWounds) < 0.99) player.addStatusValue(StatusEffects.CombatWounds, 1, 0.01);
+			if (!player.immuneToBleed()) {
+				if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
+				else player.createStatusEffect(StatusEffects.Hemorrhage, SceneLib.combat.debuffsOrDoTDuration(3), 0.1, 0, 0);
+			}
 		}
 		
 		override protected function performCombatAction():void
@@ -150,6 +152,7 @@ public class JuvenileAbyssalShark extends Monster
 			this.createPerk(PerkLib.SoulPersonage, 0, 0, 0, 0);
 			this.createPerk(PerkLib.SoulWarrior, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DaoistApprenticeStage, 0, 0, 0, 0);
+			this.createPerk(PerkLib.WaterNature, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

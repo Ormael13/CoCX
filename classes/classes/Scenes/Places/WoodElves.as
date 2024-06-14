@@ -996,8 +996,11 @@ public class WoodElves extends BaseContent implements SaveableState {
 			return player.statusEffectv1(StatusEffects.Kelt);
 		}
 		private function bowSkill2(diff:Number):Number {
-			player.addStatusValue(StatusEffects.Kindra,1,diff);
-			if (player.statusEffectv1(StatusEffects.Kindra) >= 150) player.changeStatusValue(StatusEffects.Kindra,1,150);
+			if (player.statusEffectv1(StatusEffects.Kindra) < 75) {
+				var gain:Number = diff;
+				if (player.statusEffectv1(StatusEffects.Kindra) + diff > 75) gain = (75 - player.statusEffectv1(StatusEffects.Kindra));
+				player.addStatusValue(StatusEffects.Kindra,1,gain);
+			}
 			return player.statusEffectv1(StatusEffects.Kindra);
 		}
 

@@ -14,6 +14,8 @@ import classes.BodyParts.Tail;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
+import coc.view.CoCButton;
+
 use namespace CoC;
 
 	public class TwinBosses extends Monster
@@ -56,7 +58,7 @@ use namespace CoC;
 		public function onisunetwinCastsComet():void {
 			soulforce -= 162;
 			outputText("He raises a hand, focusing with intensity.  From above comes a crystalline meteor, which you barely manage to dodge.  The crystal shatters upon contact with the ground, sending a shower of splinters that you cannot avoid. ");
-			if (player.armorName == "Drider-weave Armor" || player.armorPerk == "Heavy" || player.armorPerk == "Light Ayo" || player.armorPerk == "Heavy Ayo" || player.armorPerk == "Ultra Heavy Ayo") outputText("Thankfully, your armor manages to absorb most of the impact. ");
+			if (player.isInHeavyArmor() || player.isInAyoArmor()) outputText("Thankfully, your armor manages to absorb most of the impact. ");
 			var damage:Number = 0;
 			damage += inteligencescalingbonus();
 			damage *= onisunetwinsoulskillMod();
@@ -160,7 +162,12 @@ use namespace CoC;
 				}
 			}
 		}
-		
+
+		override public function postPlayerBusyBtnSpecial(btnSpecial1:CoCButton, btnSpecial2:CoCButton):void{
+			if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.companionsInPCParty()) btnSpecial1.show("Dish Helper", SceneLib.dungeons.riverdungeon.dishHelperTB);
+			else btnSpecial1.showDisabled("Dish Helper", "You don't have anyone to take care of other twin!");
+		}
+
 		private function twinSwitchWithOtherOne():void {
 			clearOutput();
 			outputText(this.short + " stops his actions defeated.");
@@ -179,7 +186,7 @@ use namespace CoC;
 				removeStatusEffect(StatusEffects.JabberwockyVenom);
 				buff("Poison").remove();
 			}
-			SceneLib.combat.combatRoundOver();
+			doNext(SceneLib.combat.combatMenu, false);
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
@@ -188,7 +195,10 @@ use namespace CoC;
 				player.removeStatusEffect(StatusEffects.MinoKing);
 				SceneLib.dungeons.riverdungeon.defeatTwinBosses();
 			}
-			else twinSwitchWithOtherOne();
+			else {
+				if (hpVictory && !player.hasStatusEffect(StatusEffects.MinoKing)) SceneLib.combat.disableEachHelperIfTheyCauseSoftLock();
+				twinSwitchWithOtherOne();
+			}
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void

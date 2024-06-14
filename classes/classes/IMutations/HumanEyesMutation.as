@@ -12,7 +12,9 @@ import classes.Races;
 
 public class HumanEyesMutation extends IMutationPerkType
     {
-        private static const mName:String = "Human Eyes";
+        override public function get mName():String {
+            return "Human Eyes";
+        }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -33,28 +35,10 @@ public class HumanEyesMutation extends IMutationPerkType
 				descS += "30 lvl's. 5% less penalty to acc per each next attack during multiattack.";
             }
             if (pTier == 4){
-				descS += "60 lvl's. 10% less penalty to acc per each next attack during multiattack.";
+				descS += "60 lvl's. 10% less penalty to acc per each next attack during multiattack. You could also see in darkness - Dar Vision.";
             }
+            if (pTier >= 1) descS += " (req. 18+ human score to have all effects active)";
             return descS;
-        }
-
-        //Name. Need it say more?
-        override public function name(params:PerkClass=null):String {
-            var sufval:String;
-            switch (currentTier(this, player)){
-                case 2:
-                    sufval = "(Primitive)";
-                    break;
-                case 3:
-                    sufval = "(Evolved)";
-                    break;
-                case 4:
-                    sufval = "(Final Form)";
-                    break;
-                default:
-                    sufval = "";
-            }
-            return mName + sufval;
         }
 
         //Mutation Requirements

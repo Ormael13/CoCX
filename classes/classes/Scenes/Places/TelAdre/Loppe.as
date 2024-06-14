@@ -2,6 +2,8 @@ package classes.Scenes.Places.TelAdre {
 import classes.BodyParts.Tongue;
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
+import classes.PerkLib;
 import classes.PregnancyStore;
 import classes.Saves;
 import classes.Scenes.NPCs.NPCAwareContent;
@@ -2338,7 +2340,7 @@ public function loppeKnockupAttempt(isplayer:Boolean = false):void {
 	} else {
 		if (pregnancy.isPregnant || !canGetPreg) return;
 		if (flags[kFLAGS.LOPPE_FERTILE] > 0) {
-			if (rand(5) == 0 || player.cumQ() > rand(1000) || player.virilityQ() >= 0.5) {
+			if (rand(5) == 0 || player.cumQ() > rand(1000) || player.virilityQ() >= 0.5 || player.hasPerk(PerkLib.PilgrimsBounty)) {
 				pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_LOPPE);
 				if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Loppe is pregnant!</b>");
 			}
@@ -2571,7 +2573,8 @@ public function pcGivesBirthToLoppeKits(womb:int = 0):void {
 		outputText("To your surprise, Loppe herself opens the door, wearing a cheeky grin, a loincloth, and nothing else.  “<i>Surprised, [name]?  I took note of how long it took for you to give birth the first time, so I knew you’d give birth soon.  Aw, aren’t they just beautiful little things?  Come here, my darlings...</i>”  She croons, gently reaching out and plucking each child from her position in your arms, smiling dotingly at them as they snuggle up against her breasts.  She looks up at you, one ear swivelling to roughly point inside the door.  “<i>Do you want to come in, see them settled in, [name]?</i>”  She asks.[pg]");
 		outputText("You nod and follow Loppe into the house, and from there to the empty room that has since been converted into a nursery. <b>(Need to add description)</b>  Your "+flags[kFLAGS.LOPPE_KIDS]+" older daughters are already busy playing, despite the early hour of the day, and they look up with childish amazement as you enter, hop-crawling over in a manner that reminds you of real bunnies getting around to get a good look at their new playmates.  They need little instructions to be gentle, and are soon happily playing simple games while their youngest siblings watch on, already absorbing things.  Loppe beams at you with pride, clearly very proud of herself for being responsible for creating such youngsters.  You kiss her lips, whereupon she sneaks a groping caress of your [ass], and politely excuse yourself; you have demons to fight, after all.[pg]");
 	}
-	flags[kFLAGS.LOPPE_KIDS] += 2;
+	if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) flags[kFLAGS.LOPPE_KIDS] += 4;
+    else flags[kFLAGS.LOPPE_KIDS] += 2;
 	player.cuntChange(60,true,true,false, womb);
 	player.boostLactation(.01);
 	//Boost capacity

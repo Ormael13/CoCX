@@ -13,7 +13,9 @@ import classes.Races;
 
 public class HellHoundFireBallsMutation extends IMutationPerkType
     {
-        private static const mName:String = "Hellhound Fire Balls";
+        override public function get mName():String {
+            return "Hellhound Fire Balls";
+        }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -38,25 +40,6 @@ public class HellHoundFireBallsMutation extends IMutationPerkType
             return descS;
         }
 
-        //Name. Need it say more?
-        override public function name(params:PerkClass=null):String {
-            var sufval:String;
-            switch (currentTier(this, player)){
-                case 2:
-                    sufval = "(Primitive)";
-                    break;
-                case 3:
-                    sufval = "(Evolved)";
-                    break;
-                case 4:
-                    sufval = "(Final Form)";
-                    break;
-                default:
-                    sufval = "";
-            }
-            return mName + sufval;
-        }
-
         override public function evolveText():String {
             var descS:String = "\nYour balls begin to suddenly feel heavier… warmer. You begin pumping your two penis absentmindedly thinking of all the bitches you recently broke on your twin shaft as the heat rushes all the way to your pair of erect members. You cum a humongous load of smoking warm cum, way to warm for normal seeds. It looks like your balls are progressively continuing their evolution to be more hellhound-like as your seed takes on burning hot property just like that of a hellhound.";
             return descS;
@@ -70,11 +53,13 @@ public class HellHoundFireBallsMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireBallsMutationSlot()
-                    .requireRace(Races.CERBERUS);
+                    .requirePerk(PerkLib.Hellfire)
+					.requireCustomFunction(function (player:Player):Boolean {
+                        return player.isRace(Races.CERBERUS) || player.racialScore(Races.DOG) >= 8;
+                    }, "Cerberus race or Dog-morph (8+) with Hellfire perk");
                 }
                 else{
                     var pLvl:int = pTier * 30;
-
                     this.requireLevel(pLvl)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.perkv2(IMutationsLib.HellhoundFireBallsIM) >= pLvl

@@ -183,11 +183,23 @@ use namespace CoC;
 						call  : SceneLib.werewolfFemaleScene.introWerewolfFemale,
 						chance: 0.50
 					}, {
+						name  : "healingherb",
+						label : "HealingHerb",
+						kind : 'item',
+						call  : findHealingherb,
+						chance: 0.20
+					}, {
+						name  : "snakebane",
+						label : "Snakebane",
+						kind : 'item',
+						call  : findSnakebaneflower,
+						chance: 0.20
+					}, {
 						name  : "ginseng",
 						label : "Ginseng",
 						kind : 'item',
 						call  : findGinseng,
-						chance: 0.20
+						chance: 0.10
 					}, {
 						name  : "truffle",
 						label : "Truffle",
@@ -258,7 +270,7 @@ use namespace CoC;
 						unique: true,
 						call  : SceneLib.konstantin.meetKonstantinAtForest,
 						when  : function():Boolean {
-							return (flags[kFLAGS.KONSTANTIN_FOLLOWER] < 2);
+							return (flags[kFLAGS.KONSTANTIN_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.KonstantinOff));
 						},
 						chance: forestChance4
 					}, {
@@ -784,6 +796,13 @@ use namespace CoC;
 				call: SceneLib.dungeons.deepcave.enterDungeon,
 				when: SceneLib.dungeons.canFindDeepCave
 			}, {
+				name: "dungeon",
+				label : "Twilight Grove",
+				kind  : 'event',
+				unique: true,
+				call: SceneLib.dungeons.twilightgrove.enterDungeon,
+				when: function ():Boolean { return (flags[kFLAGS.DISCOVERED_TWILIGHT_GROVE_DUNGEON] < 1); }
+			}, {
 				name  : "walk",
 				call  : deepwoodsWalkFn,
 				kind:'walk',
@@ -796,11 +815,23 @@ use namespace CoC;
 				call  : SceneLib.werewolfFemaleScene.introWerewolfFemale,
 				chance: 0.50
 			}, {
+				name  : "healingherb",
+				label : "HealingHerb",
+				kind : 'item',
+				call  : findHealingherb,
+				chance: 0.20
+			}, {
+				name  : "snakebane",
+				label : "Snakebane",
+				kind : 'item',
+				call  : findSnakebaneflower,
+				chance: 0.20
+			}, {
 				name  : "ginseng",
 				label : "Ginseng",
 				kind : 'item',
 				call  : findGinseng,
-				chance: 0.20
+				chance: 0.10
 			}, {
 				name  : "truffle",
 				label : "Truffle",
@@ -860,6 +891,14 @@ use namespace CoC;
 				player.takePhysDamage(10);
 			}
 			endEncounter();
+		}
+		public function findHealingherb():void {
+			outputText("You spot something unusual. Taking a closer look, it's definitely a healing herb.");
+			inventory.takeItem(consumables.HEALHERB, explorer.done);
+		}
+		public function findSnakebaneflower():void {
+			outputText("You spot something unusual. Taking a closer look, it's definitely a snakebane flower.");
+			inventory.takeItem(consumables.SNAKEBANE, explorer.done);
 		}
 		public function findGinseng():void {
 			outputText("You spot something unusual. Taking a closer look, it's definitely a ginseng.");

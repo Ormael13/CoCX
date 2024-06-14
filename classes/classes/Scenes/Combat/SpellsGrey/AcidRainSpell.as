@@ -11,7 +11,7 @@ public class AcidRainSpell extends AbstractGreySpell {
 			"This spell causes a radical change in your surroundings. You can call forth an Acid Rain that will strike enemies in a wide area.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
-			[TAG_DAMAGING, TAG_ACID, TAG_AOE]
+			[TAG_DAMAGING, TAG_ACID, TAG_AOE, TAG_TIER2]
 		);
 		baseManaCost = 500;
 	}

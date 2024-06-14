@@ -281,6 +281,8 @@ public class SceneLib {
 
     public static var abyssalsharkScene:AbyssalSharkScene = new AbyssalSharkScene();
 
+    public static var ghoulishVampireServant:GhoulishVampireServant = new GhoulishVampireServant();
+
     public static var trollVillage:TrollVillage = new TrollVillage();
 
     public static var bazaar:Bazaar = new Bazaar();

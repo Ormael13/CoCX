@@ -31,10 +31,12 @@ public class OmnibusOverseer extends Monster
 			outputText("The demoness blinks her eyes closed and knits her eyebrows in concentration.  The red orbs open wide and she smiles, licking her lips.   The air around her grows warmer, and muskier, as if her presence has saturated it with lust.");
 			if (hasStatusEffect(StatusEffects.LustAura)) {
 				outputText("  Your eyes cross with unexpected feelings as the taste of desire in the air worms its way into you.  The intense aura quickly subsides, but it's already done its job.");
-				player.takeLustDamage((8 + int(player.lib / 20 + player.cor / 25)), true);
+				player.takeLustDamage((eBaseLibidoDamage() / 20 + int(player.lib / 20 + player.cor / 25)), true);
 			}
 			else {
 				createStatusEffect(StatusEffects.LustAura, 0, 0, 0, 0);
+				outputText("\nIf you don't do something, you'll quickly succumb!");
+				clearTempResolute(false);
 			}
 		}
 		
@@ -54,16 +56,51 @@ public class OmnibusOverseer extends Monster
 					outputText("The milk splashes into your [armor], soaking you effectively.  ");
 					if (player.cocks.length > 0) {
 						outputText("Your [cock] gets hard as the milk lubricates and stimulates it.  ");
-						player.takeLustDamage(5, true);
+						player.takeLustDamage(eBaseLibidoDamage() / 50, true);
 					}
 					if (player.vaginas.length > 0) {
 						outputText("You rub your thighs together as the milk slides between your pussy lips, stimulating you far more than it should.  ");
-						player.takeLustDamage(5, true);
+						player.takeLustDamage(eBaseLibidoDamage() / 50, true);
 					}
 				}
-				player.takeLustDamage(7 + player.effectiveSensitivity() / 20, true);
 				if (player.biggestLactation() > 1) outputText("Milk dribbles from your [allbreasts] in sympathy.");
+				player.takeLustDamage(eBaseLibidoDamage() / 30 + player.effectiveSensitivity() / 20, true);
+
 			}
+		}
+
+		override protected function handleStun():Boolean {
+			if (hasStatusEffect(StatusEffects.LustAura)) {
+				outputText("The Overseer's concentration shatters, dispelling the lust aura!\n\n");
+				removeStatusEffect(StatusEffects.LustAura);
+			}
+
+			return super.handleStun();
+		}
+
+		override protected function handleFear():Boolean {
+			if (hasStatusEffect(StatusEffects.LustAura)) {
+				outputText("The Overseer's concentration shatters, dispelling the lust aura!\n\n");
+				removeStatusEffect(StatusEffects.LustAura);
+			}
+
+			return super.handleFear();
+		}
+
+		override protected function handleConfusion():Boolean {
+			if (hasStatusEffect(StatusEffects.LustAura)) {
+				outputText("The Overseer's concentration shatters, dispelling the lust aura!\n\n");
+				removeStatusEffect(StatusEffects.LustAura);
+			}
+
+			return super.handleConfusion();
+		}
+
+		override public function displaySpecialStatuses():Array {
+			var statusArray:Array = super.displaySpecialStatuses();
+			trace("Check Called: " + hasStatusEffect(StatusEffects.LustAura));
+			if (hasStatusEffect(StatusEffects.LustAura)) statusArray.push("Lust Aura");
+			return statusArray;
 		}
 		
 		public function OmnibusOverseer()
@@ -94,7 +131,6 @@ public class OmnibusOverseer extends Monster
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
 			this.weaponAttack = 15;
-			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "demonic skin";
 			this.armorDef = 22;

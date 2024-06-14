@@ -194,6 +194,11 @@ import coc.xxc.StoryContext;
 			SceneLib.combat.cleanupAfterCombatImpl(nextFunc,ThisIsNotATFScene);
 		}
 
+		protected function recoveryOfResources():void
+		{
+			SceneLib.combat.recoveryOfResourcesImpl();
+		}
+
 		protected function enemyAI():void
 		{
 			SceneLib.combat.enemyAIImpl();
@@ -564,9 +569,9 @@ import coc.xxc.StoryContext;
 			return player.MutagenBonus(statName,bonus, applyEffect);
 		}
 
-		protected function AlchemyBonus(statName: String, bonus: Number):void
+		protected function alchemyBonus(statName: String, bonus: Number):void
 		{
-			return player.AlchemyBonus(statName,bonus);
+			return player.alchemyBonus(statName,bonus);
 		}
 
 		protected function KnowledgeBonus(statName: String, bonus: Number):void

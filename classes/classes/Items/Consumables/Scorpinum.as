@@ -7,12 +7,11 @@ import classes.BodyParts.Tail;
 import classes.CoC;
 import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Consumable;
-import classes.Items.ItemTags;
 
 public class Scorpinum extends Consumable {
 	public function Scorpinum() {
 		super("Scorico", "Scorpinum", "a vial of Scorpinum", 6, "This is a long flared vial with a small label that reads, \"<i>Scorpinum</i>\".  It is likely this potion is tied to scorpions in some way.");
-		withTag(ItemTags.U_TF);
+		withTag(U_TF);
 		refineableInto(
 				AlchemyLib.DEFAULT_SUBSTANCES_DROP_TABLE,
 				AlchemyLib.DEFAULT_ESSENCE_DROP_TABLE(AlchemyLib.AE_SCORPION)

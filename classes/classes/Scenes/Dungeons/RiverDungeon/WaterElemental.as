@@ -194,7 +194,7 @@ public class WaterElemental extends Monster
 			this.weaponVerb = "smash";
 			this.armorName = "water skin";
 			this.createPerk(PerkLib.EnemyElementalType, 0, 0, 0, 0);
-			this.createPerk(PerkLib.IceNature, 0, 0, 0, 0);
+			this.createPerk(PerkLib.WaterNature, 0, 0, 0, 0);
 			this.createPerk(PerkLib.MonsterRegeneration, 2, 0, 0, 0);
 			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
 				this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);

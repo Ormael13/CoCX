@@ -120,7 +120,7 @@ public class SkinTransformations extends MutationsHelper {
 				}
 				const color: String = randomChoice("white", "sable");
 				var adj: String = "milky";
-				if(color == "sable") adj = "ashen"
+				if (color == "sable") adj = "ashen";
 				desc += "[pg]You feel lightheaded all of a sudden. You bring your hands up to clutch your head only to find the color slowly fading from your skin or rather it’s losing its opacity altogether. You examine your body and see that you’ve become almost entirely transparent, adding to your ethereal appearance. <b>You now have transparent "+adj+" "+color+" skin.</b>";
 
 				if (doOutput) outputText(desc);
@@ -277,6 +277,13 @@ public class SkinTransformations extends MutationsHelper {
 					return player.hasCoatOfType(Skin.SCALES) && InCollection(player.scaleColor, options.colors) && player.skin.coverage == coverage;
 				}
 		)
+	}
+	public function SkinScalesGradual(coverage:int = Skin.COVERAGE_COMPLETE, options:* = null):Transformation {
+		var tfs:Array = [];
+		for (var c:int = Skin.COVERAGE_LOW; c <= coverage; c++) {
+			tfs.push(SkinScales(c, deepCopy(options)));
+		}
+		return new GradualTransformation("SkinScalesGradualTo"+coverage, tfs);
 	}
 
 	public function SkinDragonScales(coverage: int = Skin.COVERAGE_COMPLETE, options: * = null): Transformation {

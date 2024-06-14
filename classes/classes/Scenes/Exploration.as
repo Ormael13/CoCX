@@ -11,7 +11,7 @@ import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.DeepSea.Kraken;
 import classes.Scenes.Areas.Forest.AlrauneMaiden;
-import classes.Scenes.Areas.Forest.WapsHuntress;
+import classes.Scenes.Areas.Forest.WaspHuntress;
 import classes.Scenes.Areas.Forest.WaspAssassin;
 import classes.Scenes.Areas.Forest.WaspGirl;
 import classes.Scenes.Areas.Ocean.Scylla;
@@ -482,8 +482,8 @@ public class Exploration extends BaseContent implements SaveableState
 			btnExploreCaves().applyTo(button(12));
 			
 			addButton(4, "Next", explorePageII);
-			if (debug) addButton(9, "Debug", exploreDebug.doExploreDebug);
-			else addButton(9, "Menu Style", toggleMenuStyle).hint("Switch to new menu style");
+			addButton(9, "Menu Style", toggleMenuStyle).hint("Switch to new menu style");
+			if (debug) addButton(13, "Debug", exploreDebug.doExploreDebug);
 			
 			addButton(14, "Back", playerMenu);
 		}
@@ -788,13 +788,13 @@ public class Exploration extends BaseContent implements SaveableState
 				SceneLib.impScene.impPackEncounter2();
 			}
 			else if (gobimpChooser >= 20 && gobimpChooser < 30) {
-				if (rand(10) == 0) SceneLib.angelScene.angeloidGroupEncounter();
+				if (rand(10) == 0 && flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 0) SceneLib.angelScene.angeloidGroupEncounter();
 				else SceneLib.impScene.impPackEncounter();
 			}
 			else if (gobimpChooser >= 30) {
 				if (flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_WARRIOR] >= 1) SceneLib.goblinScene.goblinWarriorsEncounter();
 				else {
-					if (rand(10) == 0) SceneLib.angelScene.angeloidGroupEncounter();
+					if (rand(10) == 0 && flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 0) SceneLib.angelScene.angeloidGroupEncounter();
 					else SceneLib.impScene.impPackEncounter();
 				}
 			}
@@ -903,6 +903,9 @@ public class Exploration extends BaseContent implements SaveableState
 			if (flags[kFLAGS.GALIA_LVL_UP] > 0 && flags[kFLAGS.GALIA_LVL_UP] < 0.5) return 2;
 			return 1;
 		}
+		private function angelicFraction():Boolean {
+            return flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 0;
+        }
 		
 		private var _explorationEncounters:GroupEncounter = null;
 		private var _commonEncounters:GroupEncounter = null;
@@ -930,7 +933,7 @@ public class Exploration extends BaseContent implements SaveableState
 						when: fn.ifLevelMin(12),
 						call: angelEncounterHigh
 					}
-			);
+			).withCondition(angelicFraction);
 			
 			_commonEncounters = Encounters.group("common",
 					{
@@ -1181,6 +1184,15 @@ public class Exploration extends BaseContent implements SaveableState
 						call  : SceneLib.helScene.helSexualAmbush,
 						when  : SceneLib.helScene.helSexualAmbushCondition
 					}, {
+						name  : "VS",
+						kind  : "npc",
+						unique: true,
+						night : true,
+						when  : function ():Boolean {
+							return (player.racialScore(Races.VAMPIRE) >= 20 || player.racialScore(Races.DRACULA) >= 22) && player.hasStatusEffect(StatusEffects.Familiar) && player.statusEffectv3(StatusEffects.Familiar) == 0;
+						},
+						call  : creatingTheServant
+					}, {
 						name  : "NPC (New)",
 						kind  : "npc",
 						unique: true,
@@ -1202,7 +1214,7 @@ public class Exploration extends BaseContent implements SaveableState
 						kind  : "place",
 						unique: true,
 						when  : function ():Boolean {
-							return !player.hasStatusEffect(StatusEffects.TelAdre);
+							return (!player.hasStatusEffect(StatusEffects.TelAdre) || player.statusEffectv1(StatusEffects.TelAdre) < 1);
 						},
 						call  : SceneLib.telAdre.discoverTelAdre
 					}, {
@@ -1360,7 +1372,6 @@ public class Exploration extends BaseContent implements SaveableState
 				*/
 		}
 		
-		
 		private function discoverHXD():void {
 			clearOutput();
 			outputText("Against your better judgment, curiosity gets the better of you, and you find yourself walking into a strange area.");
@@ -1376,10 +1387,31 @@ public class Exploration extends BaseContent implements SaveableState
 			explorer.stopExploring();
 			doNext(camp.returnToCampUseTwoHours);
 		}
+		
+		private function creatingTheServant():void {
+			clearOutput();
+			outputText("While traveling the world, a sudden thirst overtakes you. And here you thought you had your fill of blood recently!");
+			outputText("\n\nDesperate for a quick drink, you listen for a heartbeat and fly straight to the nearest one spotting a vague form drudging through the wilderness. Seeing red with hunger, you wrap your wings around the humanoid and bite straight into her neck. As you slowly regain your sanity, a closer look reveals your victim for what it was.");
+			outputText("\n\nThis peachy vulnerable skin, normal face and round ears. These five toed clawless feet and 5 fingered hands. The absence of a tail or wings. No matter how you look at it, that's a damn human you just drank from, one of your own kind!.. At least… former kind, Hardly anything remotely human about you anymore. You check and confirm that at least she wasn't a virgin, or it would have made you feel even worse!");
+			if (player.cor >= 50) outputText("\n\nThat human ain't going to survive much longer, you're about to throw the body into a ditch when a sinister idea comes to your mind suggested by your instinct. You first bite your palm then begin to forcefully feed her your blood to her.");
+			else outputText("\n\nWell, fuck… by the look of her, she's going to die any minute now from all that blood loss! A small nagging thought appears in the back of your mind. Diva did mention vampire blood being infectious right? What if you simply turned that human into a vampire? It would solve all of your problems! Without hesitating, you cut your hand and begin to force feed your blood to the human in your arms attempting for a last ditch save before you formally become a murderer!");
+			outputText("\n\nThe reaction is instantaneous as her body begins to shake and convulse. Her body starts by taking on a more voluptuous, womanly figure like the original vampire transformation, but the following changes confuse you. What's going on? You watch as the girl's nails deform into sharp claws, her teeth sharpening into vicious needles as your corrupted blood taint her eyes red with hunger. Her ears do become pointed not unlike those of a vampire but her form is anything but. ");
+			outputText("To complete this, her tongue suddenly elongates to ridiculous length and becomes quite dexterous as it licks your palm obscenely, trying to catch any remaining drop of blood before your regeneration kicks in. Instinctively you already know something went hell of wrong with her transformation and it might have to do with something in your blood or maybe some other factor.");
+			outputText("\n\nThe crouching ghoul before you, because what else could this fiendish looking damaged soul of an undead be, licks your hand amorously like a well trained dog. Feeling a little awkward at your new pet you pause thinking about what to do with it now. To your surprise though the soul broken undead speaks up intelligently with a refined voice that does not exactly match its behavior and feral look.");
+			outputText("\n\n\"<i>"+player.mf("Master","Mistress")+" I await your order…please tell me your will.</i>\"");
+			outputText("\n\nWell, the thing turns out to be quite obedient and well behaved. Perhaps with some clothing you could even make it pass for a maid or a butler. You tell your new pet to head to your camp asap once there you will think what to do with her.");
+			outputText("\n\n\"<i>As the good "+player.mf("master","mistress")+" command!</i>\"");
+			outputText("\n\nThe ghoul leap into the shadows how it will find your camp you don't know but somehow the blood tells you it will.");
+			if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) outputText(" You ponder in amusement how your maid is going to react to this new servant sharing her chore and turf. Luna is in for a funny surprise you guess.");
+			flags[kFLAGS.GHOULISH_VAMPIRE_SERVANT_NAME] = "Helia";
+			player.addStatusValue(StatusEffects.Familiar, 3, 1);
+			explorer.stopExploring();
+			doNext(camp.returnToCampUseTwoHours);
+		}
 //Temporaly place of finding enemies for lvl between 31 and 49
 		public function tryDiscoverLL():void {
 			clearOutput();
-			if (rand(4) == 0) {
+			if (rand(4) == 0 && flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 0) {
                 if (silly()) {
                     outputText("You're walking in the woods\n\n");
                     outputText("There's no one around\n\n");
@@ -1416,7 +1448,7 @@ public class Exploration extends BaseContent implements SaveableState
                     outputText("Out of the corner of your eye you spot her\n\n");
                 }
 				outputText("<b>A Wasp Huntress...</b>");
-				startCombat(new WapsHuntress());//lvl 48
+				startCombat(new WaspHuntress());//lvl 48
 				return;
 			}
 		}

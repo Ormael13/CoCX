@@ -178,7 +178,7 @@ use namespace CoC;
 			if (Forgefather.materialsExplained != 1) endEncounter();
 			else {
 				clearOutput();
-				if (player.fatigue > player.maxFatigue() - 50) {
+				if (player.fatigue > player.maxOverFatigue() - 50) {
 					outputText("\n\n<b>You are too tired to consider mining. Perhaps some rest will suffice?</b>");
 					endEncounter();
 					return;
@@ -200,7 +200,7 @@ use namespace CoC;
 					player.mineXP(player.MiningMulti() * 2);
 				}
 				else {
-					outputText("After attempt to mine Topaz you ended with unusable piece.");
+					outputText("After attempting to mine Topaz, you ended up with unusable pieces.");
 					endEncounter(120);
 				}
 			}

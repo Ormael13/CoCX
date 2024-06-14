@@ -45,8 +45,8 @@ use namespace CoC;
                 this.bonusHP = 960 + 960*mod;
                 this.bonusLust = 332 + 22*mod;
                 this.level = 62 + 5*mod;
-                this.additionalXP = int(500 * Math.exp(0.3*mod));
-                this.gems = int((60 + rand(30)) * Math.exp(0.3 * mod));
+				this.gems = mod > 20 ? 0 : Math.floor((60 + rand(30)) * Math.exp(0.3*mod));
+				this.additionalXP = mod > 20 ? 0 : Math.floor(500 * Math.exp(0.3*mod));
 				this.createPerk(PerkLib.OverMaxHP, (62 + 5*mod), 0, 0, 0);
             }
 			else {
@@ -81,7 +81,6 @@ use namespace CoC;
 			this.hairLength = 13;
 			this.weaponName = "whip";
 			this.weaponVerb="whipping";
-			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "demonic skin";
 			this.lust = 30;

@@ -148,7 +148,7 @@ public class Evangeline1 extends Monster
 		
 		public function BlindSpell():void {
 			outputText("Evangeline glare at you and point at you.  A bright flash erupts before you!\n");
-			if ((player.perkv1(IMutationsLib.GorgonEyesIM) == 0 && rand(100) > 20) && !player.hasPerk(PerkLib.BlindImmunity)) {
+			if ((player.perkv1(IMutationsLib.GorgonEyesIM) == 0 && rand(100) > 20) && !player.isImmuneToBlind()) {
 				player.createStatusEffect(StatusEffects.Blind,2,0,0,0);
 			}
 			else if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 1) {
@@ -212,7 +212,7 @@ public class Evangeline1 extends Monster
 			temp *= SpellMod();
 			temp /= 3;
 			temp = Math.round(temp);
-			outputText("Evangeline flushes with success as her wounds begin to knit! <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
+			outputText("Evangeline flushes with success as her wounds begin to knit! <b>([font-heal]+" + temp + "[/font])</b>.");
 			addHP(temp);
 			mana -= spellCostHeal();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED]++;

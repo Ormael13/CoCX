@@ -5,7 +5,6 @@
 package classes.Items.Armors
 {
 import classes.Items.Armor;
-import classes.Items.ItemTags;
 import classes.PerkLib;
 import classes.Player;
 import classes.StatusEffects;
@@ -20,14 +19,10 @@ import classes.StatusEffects;
 				'teasedmg': +15
 			});
 			withPerk(PerkLib.TamamoNoMaeCursedKimono,0,0,0,0);
-			withTag(ItemTags.A_REVEALING);
+			withTag(A_REVEALING);
+			withTag(I_LEGENDARY);
 		}
 		
-		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.level >= 54) return super.canEquip(doOutput);
-			if (doOutput) outputText("You try and wear the legendary armor but to your disapointment the item simply refuse to stay on your body. It would seem you yet lack the power and right to wield this item.");
-			return false;
-		}
 		override public function get def():Number{
 			var mod:int = game.player.cor/20;
 			return 5 + mod;

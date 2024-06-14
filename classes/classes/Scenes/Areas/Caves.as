@@ -279,7 +279,7 @@ use namespace CoC;
 		private function cavesSiteMine():void {
 			if (Forgefather.materialsExplained != 1) endEncounter();
 			else {
-				if (player.fatigue > player.maxFatigue() - 50) {
+				if (player.fatigue > player.maxOverFatigue() - 50) {
 					outputText("\n\n<b>You are too tired to consider mining. Perhaps some rest will suffice?</b>");
 					endEncounter();
 					return;
@@ -301,7 +301,7 @@ use namespace CoC;
 					player.mineXP(player.MiningMulti() * 2);
 				}
 				else {
-					outputText("After attempt to mine Amethysts you ended with unusable piece.");
+					outputText("After attempting to mine Amethysts, you ended up with only unusable pieces.");
 					endEncounter(120);
 				}
 			}

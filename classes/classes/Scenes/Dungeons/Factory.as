@@ -107,6 +107,19 @@ use namespace CoC;
 			player.createKeyItem("Supervisor's Key", 0, 0, 0, 0);
 			doNext(roomForemanOffice);
 		}
+		private function readTheLetter():void {
+			clearOutput();
+			outputText("As you root through the desk, you find some…oddly organised letters. You begin to read them, curious about what the demons could be up to. One in particular sticks out.\n\n");
+			outputText("<i>Dear Grevia:</i>\n\n");
+			outputText("<i>I have come to understand that you’ve been promoted. I am pleasantly surprised by this. You’ve come a long way from when we knew each other. As you know, you oversee operation Deluge, or the push to corrupt that holdout bitch ‘Goddess’ Marae.</i>\n\n");
+			outputText("<i>All the same, you and I both know how much of a waste it is to be using uncorrupted humans for this operation. Such things are rarities, and as you well know, just about any demon can produce the corrupted fluids needed for your operation. Humans need to be processed and changed extensively for such uses.</i>\n\n");
+			outputText("<i>You also know, or at least suspect, how extensive my own operations are, and how important they are to our queen’s current objectives.</i>\n\n");
+			outputText("<i>Infighting would be pointless, and only serve to benefit our enemies. I propose a…mutually beneficial exchange. Any humans you find, or otherwise obtain, you give to me. In exchange, I provide you with three fully functional fluid-cows. You know how effective my people are at…modifications. They’ll be more effective than your current supply.</i>\n\n");
+			outputText("<i>To sweeten the deal further, you know I have the queen’s ear. Your dedication to working together, for the benefit of all, will be noted. In a world where Queen Lethice needs to carefully watch most of her overseers, a trustworthy one is worth her weight in gems…And you know what kinds of benefits the queen’s favour can provide.</i>\n\n");
+			outputText("<i>Time is of the essence, you know how impatient our kind can be.\nTalk to you soon, my friend.</i>\n\n");
+			outputText("<i>-A</i>");
+			doNext(roomForemanOffice);
+		}
 
 		private function takeGroPlus():void {
 			flags[kFLAGS.FACTORY_TAKEN_GROPLUS]++;
@@ -1807,9 +1820,10 @@ use namespace CoC;
 			}
 			else {
 				if (player.hasKeyItem("Supervisor's Key") < 0) {
-					addButton(0, "Desk", takeSupervisorKey).hint("Check the desk for something.");
+					addButton(1, "Key", takeSupervisorKey).hint("Check the desk for something.");
 				}
 			}
+			if (flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] > 0) addButton(0, "Desk", readTheLetter).hint("Check the desk.");
 		}
 
 		public function roomControlRoom():void {

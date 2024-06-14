@@ -4,7 +4,8 @@ import classes.BodyData;
 public class RacialRequirement {
 	
 	public var group:String;
-	public var name:String;
+	private var _name:String;
+	private var _nameFn:Function;
 	/**
 	 * `(bodyData) => boolean`
 	 */
@@ -23,19 +24,45 @@ public class RacialRequirement {
 	 */
 	public function RacialRequirement(
 			group: String,
-			name: String,
+			name: */*String|Function*/,
 			check: Function,
 			score: int,
 			failScore: int,
 			minScore: int
 	) {
 		this.group = group;
-		this.name = name;
+		if (typeof(name) === "function") {
+			this._nameFn = name;
+		} else {
+			this._name = name;
+		}
 		this.checkFn = check;
 		this._score = score;
 		this.failScore = failScore;
 		this.minScore = minScore;
 	}
+
+	public function getName():String {
+		if (_nameFn != null) return _nameFn();
+		if (_name != null) return _name;
+		return "";
+	}
+	public function setNameStr(name:String):RacialRequirement {
+		this._nameFn = null;
+		this._name = name;
+		return this;
+	}
+	public function withNameFn(nameFn:Function):RacialRequirement {
+		return new RacialRequirement(
+			group,
+			nameFn,
+			checkFn,
+			_score,
+			failScore,
+			minScore
+		);
+	}
+
 	public function passScore(body:BodyData): int {
 		return _score;
 	}
@@ -52,13 +79,13 @@ public class RacialRequirement {
 	}
 	public function describe(body: BodyData):String {
 		var score:int = this.passScore(body);
-		return name+" ("+(score>0?"+"+score:score)+")";
+		return getName()+" ("+(score>0?"+"+score:score)+")";
 	}
 	
 	public function withCondition(conditionFn:Function, conditionName:String):RacialRequirement {
 		return new RacialRequirement(
 				group,
-				conditionName+" "+name,
+				conditionName+" "+getName(),
 				function(body:BodyData):Boolean {
 					return conditionFn(body) && checkFn(body);
 				},
@@ -78,15 +105,21 @@ public class RacialRequirement {
 			req1:RacialRequirement,
 			...rest:/*RacialRequirement*/Array
 	): RacialRequirement {
-		var names:/*String*/Array = [req1.name];
+		var nameFns:/*Function*/Array = [req1.getName];
 		var checkfns:/*Function*/Array = [req1.checkFn];
 		for each(var i:RacialRequirement in rest) {
-			names.push(i.name);
+			nameFns.push(i.getName);
 			checkfns.push(i.checkFn);
 		}
 		return new RacialRequirement(
 				group,
-				names.join(nameSeparator),
+				function():String {
+					const names:Array = new Array(nameFns.length);
+					for (var i:int = 0; i < nameFns.length; i++) {
+						names[i] = nameFns[i]();
+					}
+					return names.join(nameSeparator);
+				},
 				function(body:BodyData):Boolean {
 					for each (var fn:Function in checkfns) {
 						if (!fn(body)) return false;

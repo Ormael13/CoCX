@@ -10,7 +10,9 @@ import classes.Creature;
 
     public class NekomataThyroidGlandMutation extends IMutationPerkType
     {
-        private static const mName:String = "Nekomata Thyroid Gland";
+        override public function get mName():String {
+            return "Nekomata Thyroid Gland";
+        }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -26,22 +28,6 @@ import classes.Creature;
             }
             if (descS != "")descS += ".";
             return descS;
-        }
-
-        //Name. Need it say more?
-        override public function name(params:PerkClass=null):String {
-            var sufval:String;
-            switch (currentTier(this, player)){
-                case 2:
-                    sufval = "(Primitive)";
-                    break;
-                case 3:
-                    sufval = "(Evolved)";
-                    break;
-                default:
-                    sufval = "";
-            }
-            return mName + sufval;
         }
 
         //Mutation Requirements

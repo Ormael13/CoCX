@@ -684,6 +684,26 @@ public class Face extends SaveableBodyPart {
 		appearanceDesc: "Your face is human in shape and structure except for the insides of your mouth which seem to be a light blue instead of the traditional pink, most likely caused by your blue blood.",
 		humanShaped: true
 	});
+	public static const DEMON: int = 64;
+	EnumValue.add(Types, DEMON, "DEMON", {
+		name: "demon",
+		appearanceDesc: "Your face is human in shape and structure albeith far too sexy to belong to one. With a face that hot, who would refuse you? Hidden behind your sensual lips is a pair of small fangs which betrays your fiendish nature.",
+		bite: true
+	});
+	public static const TROLL: int = 65;
+	EnumValue.add(Types, TROLL, "TROLL", {
+		name: "troll",
+		appearanceDesc: "Your have a face as that of a troll, covered in soft, green fur and a duo of tusks from your upper jaw that splits out from your mouth.",
+		bite: true,
+		humanShaped: true
+	});
+	public static const GLACIAL_TROLL: int = 66;
+	EnumValue.add(Types, GLACIAL_TROLL, "GLACIAL_TROLL", {
+		name: "g.troll",
+		appearanceDesc: "Your have a face as that of a glacial troll, covered in soft, white fur and a duo of tusks from your upper jaw that splits out from your mouth.",
+		bite: true,
+		humanShaped: true
+	});
 
 	public function Face(creature:Creature) {
 		super(creature,"facePart",[]);

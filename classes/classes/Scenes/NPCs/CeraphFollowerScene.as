@@ -2080,5 +2080,52 @@ public class CeraphFollowerScene extends NPCAwareContent
 			dynStats("sen", 4, "lus=", 100, "scale", false);
 			endEncounter();
 		}
+		/*Ceraph Initiating the Dom's Domain
+public function CeraphTakesLab():void {
+		clearOutput();
+		outputText("You feel the fetish binding your demonic slave to you vibrate. Apparently, Ceraph is coming to your camp of her own volition. You take a few steps away from your camp, and you see your demonic slave flying towards you. Apparently, she’s been flying for some time, and as she lands, she staggers over to you, prostrating herself. \n\n"); 
+		outputText("“[Master], I know that I am your slave, and I am very sorry for disturbing you.” She begins. Even for her, this is more submissive than usual. “I will please you however you wish, in apology for this intrusion.” \n\n");
+		outputText("You tell her to get to the point, and she looks up from the ground, her breasts smooshing into the dirt.  \n\n");
+		outputText("“I know that you destroyed Lethice’s operation at the labs. None of her people will dare to go near that place.” You’re not sure where she’s going with this, but you’re a little concerned.  \n\n");
+		outputText("“That place wasn’t just a lab for those horrible shape-changing efforts. With a little effort on your slave’s part, I could easily set up shop there. My own harem has outgrown the little place I have, and the labs are free for the taking.” She gives you a pout. “Your slave doesn’t ask for much, [master], and it will guarantee that no other bitches get to use the place.” \n\n");
+		outputText("You consider it. On the one hand, who knows what Ceraph can do with the kind of stuff left at the lab?  \n\n");
+		outputText("On the other hand, knowing where she is at all times could be of benefit…and she could probably give you something in return, as well. Having your own slave to watch the place could also prove useful. \n\n");
+		outputText(" \n\n");
+		outputText(" \n\n");
+menu();
+addButton (1, "Yes", DomInitYes);
+addButton (2, "No", DomInitNo);
+addButton (3, "Never", FuckOffCeraph);
+}
+public function DomInitYes():void {
+		clearOutput();
+		outputText("You tell Ceraph that she’s welcome to the place…But that she’d better destroy the biolabs, and make sure that no other demons can use the place. Ceraph gives you a lascivious grin, slowly rising from her prone position. \n\n"); 
+		outputText("“Of course, [master], I won’t let anyone take what is rightfully mine.” She turns around, presenting you with her dripping pussy, her cerulean skin smooth. “Or yours.” She adds with a wink. “Before I leave…Can this obedient slut have a reward for her…hard…work?”  \n\n");
+menu();
+			addButton(0, "Sex", ceraphSexMenu).disableIf(player.lust < 33, "You aren't turned on enough for sex.");
+			addButton(1, "Roleplay", followerCeraphRoleplay).disableIf(player.lust < 33, "You aren't turned on enough for sex.");
+			addButton(5, "Partswap", giveFollowerBodyBits);
+			if (flags[kFLAGS.PC_FETISH] < 3) addButton(6, "GetFetish", CeraphHandsOutNewFetishesLikePervCandy);
+			if (flags[kFLAGS.PC_FETISH] > 0) addButton(7, "RemoveFetish", unfetishifyYourselfWithFollowerCeraph);
+			addButton(8, flags[kFLAGS.CERAPH_HIDING_DICK] ? "Go Herm" : "Go Female", cawkTawgle);
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_CERAPH] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(10, "Farm Work", helpWithFarm);
+			addButton(14, "Leave", camp.campSlavesMenu);
+}
+public function DomInitNo():void {
+		clearOutput();
+		outputText("You tell Ceraph that the area’s not going to be used again, not if you have any say in the matter. \n\n"); 
+		outputText("“Lethice’s goons will return, [master], if you don’t have someone watching over the place.” Ceraph scowls, getting to her knees. “As you command…However much I disagree with it.” \n\n");
+endEncounter(15);
+}
+public function FuckOffCeraph():void {
+		clearOutput();
+		outputText("You give Ceraph a deadly glare. You tell her that you’d sooner destroy the place with your bare hands, than let anyone use it again. You remind Ceraph that you killed the demons running that lab…and that one more dead Omnibus really doesn’t mean much, at this point. \n\n"); 
+		outputText("Ceraph audibly gulps, no trace of arousal in her eyes. “Understood, [master]”. She slowly returns to her feet, keeping her head bowed. “Then I shall be off, unless you require something else from me.” You nod, and she beats a hasty retreat. \n\n");
+		
+endEncounter(15);
+}
+
+
+		*/ 
 	}
 }

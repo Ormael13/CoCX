@@ -28,7 +28,7 @@ public function oceanScyllaWin():void {
 	if (player.canSwimUnderwater()) {
 		outputText("You could take advantage of her and punish her for trying to impose herself on you. Do you rape her?\n\n");
 		menu();
-		addButton(14, "No", oceanScyllaWin2);
+		addButton(14, "Leave", oceanScyllaWin2);
 		if (player.lust >= 33 && player.gender > 0) {
 			addButton(0, "Fuck Her", oceanScyllaWin3);
 			SceneLib.uniqueSexScene.pcUSSPreChecksV2(oceanScyllaWin);

@@ -207,6 +207,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const PEAFOWL:int = _partid++;
+		EnumValue.add(Memories, PEAFOWL, "PEAFOWL", {
+			id: "Peafowl Hair",
+			name: "Peafowl Feather Hair",
+			cost: 100,
+			title: "Peafowl",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.HairPeafowlFeather;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

@@ -155,17 +155,6 @@ public class ProjectNightwalker extends Monster {
         }
     }
 
-    public function handlePlayerSpell(spell:String = ""):void {
-        if (spell == "whitefire" && player.hasStatusEffect(StatusEffects.Blind)) {
-            player.removeStatusEffect(StatusEffects.Blind);
-            outputText("The room lights back as the flame dispels the shadow.");
-        }
-        if (spell == "blind" && this.hasStatusEffect(StatusEffects.Blind)) {
-            outputText("[Themonster] recoils in pain as the bright light strikes her like a hammer, temporarily pinning her to the ground and stunning her.");
-            this.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
-        }
-    }
-
     public override function isFlying():Boolean {
         return !hasStatusEffect(StatusEffects.Stunned);
     }
@@ -217,7 +206,7 @@ public class ProjectNightwalker extends Monster {
         this.lustVuln = 0.8;
         this.level = 60;
         this.gems = rand(50) + 75;
-        this.drop = new WeightedDrop().add(consumables.REDVIAL, 5).add(jewelries.POWRRNG, 1);
+        this.drop = new WeightedDrop().add(consumables.VAMPBLD, 5).add(jewelries.POWRRNG, 1);
         this.createStatusEffect(StatusEffects.Flying, 50, 0, 0, 0);
         this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
         this.createPerk(PerkLib.LegendarySpeed, 0, 0, 0, 0);

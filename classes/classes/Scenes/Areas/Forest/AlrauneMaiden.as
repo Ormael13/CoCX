@@ -6,15 +6,34 @@ package classes.Scenes.Areas.Forest
 {
 import classes.*;
 import classes.Scenes.Holidays;
-import classes.internals.ChainedDrop;
+import classes.Scenes.SceneLib;
+import classes.internals.WeightedDrop;
 
 public class AlrauneMaiden extends Alraune
 	{
+		override public function defeated(hpVictory:Boolean):void
+		{
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) cleanupAfterCombat();
+			else SceneLib.forest.alrauneScene.alrauneDeepwoodsWon();
+		}
+
+		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
+		{
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) cleanupAfterCombat();
+			else SceneLib.forest.alrauneScene.alrauneDeepwoodsLost();
+		}
 		
 		public function AlrauneMaiden()
 		{
 			super();
-			if (Holidays.isHalloween()) {
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
+				this.a = "a ";
+				this.short = "mist alraune maiden";
+				this.long = "You are fighting against a Mist Alraune Maiden, an intelligent plant with the torso of a woman and the lower body of a giant flower. Whole her body cover faint vein-like lines. She seems really keen on raping you.";
+				this.bodyColor = "light green";
+				this.hairColor = "dark green";
+			}
+			else if (Holidays.isHalloween()) {
 				this.a = "";
 				this.short = "Jack-O-Raune";
 				this.long = "You are fighting against an Jack-O-Raune, an intelligent plant with the torso of a woman and the lower body of a giant pumpkin with snaking tentacle vines. She seems really keen on raping you.";
@@ -28,19 +47,45 @@ public class AlrauneMaiden extends Alraune
 				this.bodyColor = "light green";
 				this.hairColor = "dark green";
 			}
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
+				initStrTouSpeInte(17, 350, 17, 130);
+				initWisLibSensCor(130, 220, 90, 0);
+				this.armorDef = 115;
+				this.armorMDef = 23;
+				this.bonusHP = 700;
+				this.bonusLust = 376;
+				this.level = 66;
+				this.drop = new WeightedDrop().
+				add(useables.PCSHARD,10).
+				add(consumables.RAUNENECT,4).
+				addMany(1,consumables.MARAFRU,
+						consumables.HEALHERB,
+						consumables.MOONGRASS,
+						consumables.SNAKEBANE,
+						consumables.IRONWEED,
+						consumables.BLADEFERN);
+			}
+			else {
+				initStrTouSpeInte(15, 300, 15, 120);
+				initWisLibSensCor(120, 200, 75, 0);
+				this.armorDef = 100;
+				this.armorMDef = 20;
+				this.bonusHP = 500;
+				this.bonusLust = 329;
+				this.level = 54;
+				this.drop = new WeightedDrop().
+				add(consumables.RAUNENECT,7).
+				addMany(1,consumables.MARAFRU,
+						consumables.HEALHERB,
+						consumables.HEALHERB,
+						consumables.HEALHERB,
+						consumables.MOONGRASS,
+						consumables.SNAKEBANE,
+						consumables.IRONWEED,
+						consumables.BLADEFERN);
+			}
 			this.imageName = "alraune";
-			initStrTouSpeInte(15, 300, 15, 120);
-			initWisLibSensCor(120, 200, 75, 0);
-			this.armorDef = 100;
-			this.armorMDef = 20;
-			this.bonusHP = 500;
-			this.bonusLust = 329;
-			this.level = 54;
 			this.gems = rand(35) + 25;
-			this.drop = new ChainedDrop().add(consumables.MARAFRU, 1 / 6);
-				//	.add(consumables.W__BOOK, 1 / 4)
-				//	.add(consumables.BEEHONY, 1 / 2)
-				//	.elseDrop(useables.B_CHITN);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);

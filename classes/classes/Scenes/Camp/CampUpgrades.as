@@ -136,9 +136,9 @@ public class CampUpgrades extends BaseContent {
     }
 
     public function checkMaterials():void {
-        outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/" + checkMaterialsCapNails() + "\n");
-        outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/" + checkMaterialsCapWood() + "\n");
-        outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/" + checkMaterialsCapStones() + "\n");
+        outputText("Nails: " + CampStatsAndResources.NailsResc + "/" + checkMaterialsCapNails() + "\n");
+        outputText("Wood: " + CampStatsAndResources.WoodResc + "/" + checkMaterialsCapWood() + "\n");
+        outputText("Stone: " + CampStatsAndResources.StonesResc + "/" + checkMaterialsCapStones() + "\n");
     }
 	
 	public function checkMaterialsCapNails():Number {
@@ -167,15 +167,15 @@ public class CampUpgrades extends BaseContent {
             helperArray[helperArray.length] = "A group of your ant children";
             helpers.count++;
         }
-        if (SceneLib.marbleScene.marbleFollower()) {
+        if (SceneLib.marbleScene.marbleFollower() && !isNightTime) {
             helperArray[helperArray.length] = "Marble";
             helpers.count++;
         }
-        if (SceneLib.helFollower.followerHel() && !player.hasStatusEffect(StatusEffects.HeliaOff)) {
+        if (SceneLib.helFollower.followerHel() && !isNightTime && !player.hasStatusEffect(StatusEffects.HeliaOff)) {
             helperArray[helperArray.length] = "Helia";
             helpers.count++;
         }
-        if (SceneLib.kihaFollower.followerKiha()) {
+        if (SceneLib.kihaFollower.followerKiha() && !isNightTime) {
             helperArray[helperArray.length] = "Kiha";
             helpers.count++;
         }
@@ -251,7 +251,7 @@ public class CampUpgrades extends BaseContent {
     //Materials Storages Upgrade
     public function materialgatheringstorageupgrade():void {
         clearOutput();
-        if (player.fatigue <= player.maxFatigue() - usedFatigue(150, true)) {
+        if (player.fatigue <= player.maxOverFatigue() - usedFatigue(150, true)) {
             if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 1) neednailsbox();
             else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 2) startWoodStorage();
             else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 3) startStoneStorage();
@@ -269,7 +269,7 @@ public class CampUpgrades extends BaseContent {
     public function startWoodStorage():void {
         outputText("Do you start work on building wood storage? (Cost: 250 nails, 250 wood and 100 stones.)\n");
         checkMaterials();
-        if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 250 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 250 && flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 100) {
+        if (CampStatsAndResources.NailsResc >= 250 && CampStatsAndResources.WoodResc >= 250 && CampStatsAndResources.StonesResc >= 100) {
             doYesNo(doWoodStorageWork, noThanks);
         } else {
             errorNotEnough();
@@ -278,9 +278,9 @@ public class CampUpgrades extends BaseContent {
     }
 
     private function doWoodStorageWork():void {
-        flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 250;
-        flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 250;
-        flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 100;
+        CampStatsAndResources.NailsResc -= 250;
+        CampStatsAndResources.WoodResc -= 250;
+        CampStatsAndResources.StonesResc -= 100;
         clearOutput();
         outputText("You pull out \"Carpenter's Guide\" and flip pages until you come across instructions on how to build storage for woods. You spend few minutes looking at the instructions.");
         flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] += 1;
@@ -291,7 +291,7 @@ public class CampUpgrades extends BaseContent {
     public function startStoneStorage():void {
         outputText("Do you start work on building stone storage? (Cost: 350 nails, 400 wood and 200 stones.)\n");
         checkMaterials();
-        if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 350 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 400 && flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 200) {
+        if (CampStatsAndResources.NailsResc >= 350 && CampStatsAndResources.WoodResc >= 400 && CampStatsAndResources.StonesResc >= 200) {
             doYesNo(doStoneStorageWork, noThanks);
         } else {
             errorNotEnough();
@@ -300,22 +300,22 @@ public class CampUpgrades extends BaseContent {
     }
 
     private function doStoneStorageWork():void {
-        flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 350;
-        flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 400;
-        flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 200;
+        CampStatsAndResources.NailsResc -= 350;
+        CampStatsAndResources.WoodResc -= 400;
+        CampStatsAndResources.StonesResc -= 200;
         clearOutput();
         outputText("You pull out \"Carpenter's Guide\" and flip pages until you come across instructions on how to build storage for stones. You spend few minutes looking at the instructions.");
         flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] += 1;
         outputText("\n\nYou take the wood, saw it and then cut into planks. Like before you put four long and thick wood posts as base, then you connect them with nails. Next you cut few posts into short fragments and impale at the edges. Inside of prepared frame you put few large wood logs that you fix in place with a few short wood desks and stones. Rest of the stones fill the space inside due to need in future support weight of stones stored above. After that prelast part of building is to put all most of remaining wood planks on prepared base and nail them in place. Final thing to do is use remain wood and nails to make protective barrier around the whole storage.");
         buildWithHelpers(150, true);
-        outputText("\n\nNow you can store safetly larger amount of stones!");
+        outputText("\n\nNow you can safely store a larger amount of stones!");
         flushOutputTextToGUI();
     }
 
     //Warehouse + Granary Upgrade
     public function warehousegranary():void {
         clearOutput();
-        if (player.fatigue <= player.maxFatigue() - usedFatigue(250, true)) {
+        if (player.fatigue <= player.maxOverFatigue() - usedFatigue(250, true)) {
             if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 0) start1stWarehouse1();
             else if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 1) startWarehouse2();
             else if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2) startGranary1();
@@ -331,7 +331,7 @@ public class CampUpgrades extends BaseContent {
     public function start1stWarehouse1():void {
         outputText("Do you start work on building warehouse frame and walls? (Cost: 200 nails, 100 wood and 40 stones.)\n");
         checkMaterials();
-        if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100 && flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 40) {
+        if (CampStatsAndResources.NailsResc >= 200 && CampStatsAndResources.WoodResc >= 100 && CampStatsAndResources.StonesResc >= 40) {
             doYesNo(doWarehouse1Work, noThanks);
         } else {
             errorNotEnough();
@@ -348,9 +348,9 @@ public class CampUpgrades extends BaseContent {
     }
 
     private function doWarehouse1Work():void {
-        flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 200;
-        flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 100;
-        flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 40;
+        CampStatsAndResources.NailsResc -= 200;
+        CampStatsAndResources.WoodResc -= 100;
+        CampStatsAndResources.StonesResc -= 40;
         flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] += 1;
         clearOutput();
         printLazyWriting("warehouse");
@@ -360,7 +360,7 @@ public class CampUpgrades extends BaseContent {
     public function startWarehouse2():void {
         outputText("Do you start work on building warehouse roof and floor? (Cost: 400 nails, 300 wood and 140 stones.)\n");
         checkMaterials();
-        if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 400 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 300 && flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 140) {
+        if (CampStatsAndResources.NailsResc >= 400 && CampStatsAndResources.WoodResc >= 300 && CampStatsAndResources.StonesResc >= 140) {
             doYesNo(doWarehouse2Work, noThanks);
         } else {
             errorNotEnough();
@@ -374,9 +374,9 @@ public class CampUpgrades extends BaseContent {
     }
 
     private function doWarehouse2Work():void {
-        flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 400;
-        flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 300;
-        flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 140;
+        CampStatsAndResources.NailsResc -= 400;
+        CampStatsAndResources.WoodResc -= 300;
+        CampStatsAndResources.StonesResc -= 140;
         flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] += 1;
         clearOutput();
         printLazyWriting2("warehouse");
@@ -388,7 +388,7 @@ public class CampUpgrades extends BaseContent {
     public function startGranary1():void {
         outputText("Do you start work on building granary frame and walls? (Cost: 200 nails, 125 wood and 30 stones.)\n");
         checkMaterials();
-        if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 125 && flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 30) {
+        if (CampStatsAndResources.NailsResc >= 200 && CampStatsAndResources.WoodResc >= 125 && CampStatsAndResources.StonesResc >= 30) {
             doYesNo(doGranary1Work, noThanks);
         } else {
             errorNotEnough();
@@ -397,9 +397,9 @@ public class CampUpgrades extends BaseContent {
     }
 
     private function doGranary1Work():void {
-        flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 200;
-        flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 125;
-        flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 30;
+        CampStatsAndResources.NailsResc -= 200;
+        CampStatsAndResources.WoodResc -= 125;
+        CampStatsAndResources.StonesResc -= 30;
         flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] += 1;
         clearOutput();
         printLazyWriting("granary");
@@ -409,7 +409,7 @@ public class CampUpgrades extends BaseContent {
     public function startGranary2():void {
         outputText("Do you start work on building granary roof and floor? (Cost: 300 nails, 225 wood and 105 stones.)\n");
         checkMaterials();
-        if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 300 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 225 && flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 105) {
+        if (CampStatsAndResources.NailsResc >= 300 && CampStatsAndResources.WoodResc >= 225 && CampStatsAndResources.StonesResc >= 105) {
             doYesNo(doGranary2Work, noThanks);
         } else {
             errorNotEnough();
@@ -418,9 +418,9 @@ public class CampUpgrades extends BaseContent {
     }
 
     private function doGranary2Work():void {
-        flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 300;
-        flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 225;
-        flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 105;
+        CampStatsAndResources.NailsResc -= 300;
+        CampStatsAndResources.WoodResc -= 225;
+        CampStatsAndResources.StonesResc -= 105;
         flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] += 1;
         clearOutput();
         printLazyWriting2("granary");
@@ -432,7 +432,7 @@ public class CampUpgrades extends BaseContent {
     public function start2ndWarehouse1():void {
         outputText("Do you start work on building warehouse frame and walls? (Cost: 250 nails, 150 wood and 40 stones.)\n");
         checkMaterials();
-        if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 250 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 150 && flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 40) {
+        if (CampStatsAndResources.NailsResc >= 250 && CampStatsAndResources.WoodResc >= 150 && CampStatsAndResources.StonesResc >= 40) {
             doYesNo(doWarehouse1Work, noThanks);
         } else {
             errorNotEnough();
@@ -444,8 +444,8 @@ public class CampUpgrades extends BaseContent {
     public function kitsuneshrine():void {
         clearOutput();
         if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] < 1) findSpotForShrine();
-        else if (player.fatigue <= player.maxFatigue() - usedFatigue(300) && flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 1) buildStructure();
-        else if (player.fatigue <= player.maxFatigue() - usedFatigue(200) && flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 2) buildAltar();
+        else if (player.fatigue <= player.maxOverFatigue() - usedFatigue(300) && flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 1) buildStructure();
+        else if (player.fatigue <= player.maxOverFatigue() - usedFatigue(200) && flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 2) buildAltar();
         else {
             outputText("You are too exhausted to work on constructing shrine!");
             doNext(playerMenu);
@@ -461,7 +461,7 @@ public class CampUpgrades extends BaseContent {
     public function buildStructure():void {
         outputText("Do you start work on building the structure? (Cost: 500 wood, 200 nails, 100 stones.)\n");
         checkMaterials();
-        if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 500 && flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 100) {
+        if (CampStatsAndResources.NailsResc >= 200 && CampStatsAndResources.WoodResc >= 500 && CampStatsAndResources.StonesResc >= 100) {
             doYesNo(doBuildStructure, noThanks);
         } else {
             errorNotEnough();
@@ -470,9 +470,9 @@ public class CampUpgrades extends BaseContent {
     }
 
     private function doBuildStructure():void {
-        flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 200;
-        flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 500;
-        flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 100;
+        CampStatsAndResources.NailsResc -= 200;
+        CampStatsAndResources.WoodResc -= 500;
+        CampStatsAndResources.StonesResc -= 100;
         clearOutput();
         outputText("You proceed to build the structure of the shrine. You lose track of time as you work at building Taoth a proper place of prayer. ");
         flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] += 1;
@@ -483,7 +483,7 @@ public class CampUpgrades extends BaseContent {
     public function buildAltar():void {
         outputText("Do you start work on building the structure? (Cost: 200 wood and 100 nails)\n");
         checkMaterials();
-        if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 200) {
+        if (CampStatsAndResources.NailsResc >= 100 && CampStatsAndResources.WoodResc >= 200) {
             doYesNo(doBuildAltar, noThanks);
         } else {
             errorNotEnough();
@@ -492,8 +492,8 @@ public class CampUpgrades extends BaseContent {
     }
 
     private function doBuildAltar():void {
-        flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 100;
-        flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 200;
+        CampStatsAndResources.NailsResc -= 100;
+        CampStatsAndResources.WoodResc -= 200;
         clearOutput();
         outputText("You build an altar for your shrine. ");
         flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] += 1;
@@ -511,7 +511,7 @@ public class CampUpgrades extends BaseContent {
     //Hot Spring Upgrade
     public function hotspring():void {
         clearOutput();
-        if (player.fatigue <= player.maxFatigue() - usedFatigue(100, true)) {
+        if (player.fatigue <= player.maxOverFatigue() - usedFatigue(100, true)) {
             if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 2) digApool();
             else if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 3) addAWoodenWalls();
         } else {
@@ -523,7 +523,7 @@ public class CampUpgrades extends BaseContent {
     public function digApool():void {
         outputText("Do you start work on digging the pool? (Cost: 500 stones.)\n");
         checkMaterials();
-        if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 500) {
+        if (CampStatsAndResources.StonesResc >= 500) {
             doYesNo(doDigAPoolWork, noThanks);
         } else {
             errorNotEnough();
@@ -532,7 +532,7 @@ public class CampUpgrades extends BaseContent {
     }
 
     private function doDigAPoolWork():void {
-        flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 500;
+        CampStatsAndResources.StonesResc -= 500;
         clearOutput();
         outputText("You proceed to dig a proper pool and line it and the border with rocks.");
         flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] += 1;
@@ -545,7 +545,7 @@ public class CampUpgrades extends BaseContent {
     public function addAWoodenWalls():void {
         outputText("Do you start work on addine wooden walls? (Cost: 500 wood.)\n");
         checkMaterials();
-        if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 500) {
+        if (CampStatsAndResources.WoodResc >= 500) {
             doYesNo(doAddAWoodenWallsWork, noThanks);
         } else {
             errorNotEnough();
@@ -554,7 +554,7 @@ public class CampUpgrades extends BaseContent {
     }
 
     private function doAddAWoodenWallsWork():void {
-        flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 500;
+        CampStatsAndResources.WoodResc -= 500;
         clearOutput();
         outputText("You start building some cover, so you can actually enjoy bathing without having to worry about potential voyeurs.");
         flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] += 1;
@@ -564,10 +564,10 @@ public class CampUpgrades extends BaseContent {
     //Sparring Ring Upgrade
     public function sparringRing():void {
         clearOutput();
-        if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 1 && player.fatigue <= player.maxFatigue() - usedFatigue(50, true)) buildSmallRing();
-        else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 2 && player.fatigue <= player.maxFatigue() - usedFatigue(150, true)) buildLargeRing();
-        else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 3 && player.fatigue <= player.maxFatigue() - usedFatigue(450, true)) buildMassiveRing();
-        else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 4 && player.fatigue <= player.maxFatigue() - usedFatigue(1350, true)) buildRingWoodFloor();
+        if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 1 && player.fatigue <= player.maxOverFatigue() - usedFatigue(50, true)) buildSmallRing();
+        else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 2 && player.fatigue <= player.maxOverFatigue() - usedFatigue(150, true)) buildLargeRing();
+        else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 3 && player.fatigue <= player.maxOverFatigue() - usedFatigue(450, true)) buildMassiveRing();
+        else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 4 && player.fatigue <= player.maxOverFatigue() - usedFatigue(1350, true)) buildRingWoodFloor();
         else {
             outputText("You are too exhausted to work on sparring ring!");
             doNext(playerMenu);
@@ -577,7 +577,7 @@ public class CampUpgrades extends BaseContent {
     public function buildSmallRing():void {
         outputText("Do you start work on making sparring ring? (Cost: 50 wood.)\n");
         checkMaterials();
-        if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 50) {
+        if (CampStatsAndResources.WoodResc >= 50) {
             doYesNo(doBuildSmallRing, noThanks);
         } else {
             errorNotEnough();
@@ -586,7 +586,7 @@ public class CampUpgrades extends BaseContent {
     }
 
     private function doBuildSmallRing():void {
-        flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 50;
+        CampStatsAndResources.WoodResc -= 50;
         clearOutput();
         outputText("You consider the many people who reside in the camp and realise you could spar with them if you had a ring for it. You proceed to get a rope and some wooden sticks, then build a small provisory ring for your daily sparring matches.");
         flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] += 1;
@@ -598,7 +598,7 @@ public class CampUpgrades extends BaseContent {
     public function buildLargeRing():void {
         outputText("Do you start work on expanding sparring ring? (Cost: 150 wood.)\n");
         checkMaterials();
-        if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 150) {
+        if (CampStatsAndResources.WoodResc >= 150) {
             doYesNo(doBuildLargeRing, noThanks);
         } else {
             errorNotEnough();
@@ -607,7 +607,7 @@ public class CampUpgrades extends BaseContent {
     }
 
     private function doBuildLargeRing():void {
-        flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 150;
+        CampStatsAndResources.WoodResc -= 150;
         clearOutput();
         outputText("Looking at your sparing ring seems a bit small for your and your camp members use, so you decide to make it larger. Getting more ropes than last time and many wooden sticks, you start to work on making sparing place bigger and better prepared to handle larger groups of fighters using it at once. And not forgetting about make the training dummy better and more durable.");
         flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] += 1;
@@ -619,7 +619,7 @@ public class CampUpgrades extends BaseContent {
     public function buildMassiveRing():void {
         outputText("Do you start work on expanding your sparring ring again? (Cost: 450 wood.)\n");
         checkMaterials();
-        if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 450) {
+        if (CampStatsAndResources.WoodResc >= 450) {
             doYesNo(doBuildMassiveRing, noThanks);
         } else {
             errorNotEnough();
@@ -628,7 +628,7 @@ public class CampUpgrades extends BaseContent {
     }
 
     private function doBuildMassiveRing():void {
-        flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 450;
+        CampStatsAndResources.WoodResc -= 450;
         clearOutput();
         outputText("That large sparing ring looks for some reason... too small for your settlement needs. Letting out a barely heard sigh you proceed to go fetch many wooden stick and lots of ropes. Now it will be no longer called merely large ring. With even more durable looking training dummies and small stand on one of the sides it will serve it purpose on much grander scale.");
         flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] += 1;
@@ -640,7 +640,7 @@ public class CampUpgrades extends BaseContent {
     public function buildRingWoodFloor():void {
         outputText("Do you start work on adding wood floor to your sparring ring? (Cost: 1200 wood.)\n");
         checkMaterials();
-        if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 1200) {
+        if (CampStatsAndResources.WoodResc >= 1200) {
             doYesNo(doBuildRingWoodFloor, noThanks);
         } else {
             errorNotEnough();
@@ -649,7 +649,7 @@ public class CampUpgrades extends BaseContent {
     }
 
     private function doBuildRingWoodFloor():void {
-        flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 1200;
+        CampStatsAndResources.WoodResc -= 1200;
         clearOutput();
         outputText("Your massive sparing ring looks pretty fine but you feel it still lacking... floor, that is. Without proper wood floor it only allow fight comfortably only when weeather is good. Letting out a barely heard sigh you proceed to go fetch many wooden planks. While you work on cover whole area with wood you also turn attention to lonely dummy. Maybe it would be mroe use if there will be more of them.");
         flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] += 1;
@@ -661,7 +661,7 @@ public class CampUpgrades extends BaseContent {
     //Arcane Circle Upgrade
     public function arcaneCircle():void {
         clearOutput();
-        if (player.fatigue <= player.maxFatigue() - 50) {
+        if (player.fatigue <= player.maxOverFatigue() - 50) {
             if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] < 1)
                 buildArcaneCircle(1);
             else if (player.statusEffectv1(StatusEffects.ArcaneCircle) > (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] - 1))
@@ -682,7 +682,7 @@ public class CampUpgrades extends BaseContent {
         var manaCost:int = 100 * newTier;
         outputText("Do you start work on making the " + NUMBER_WORDS_POSITIONAL[newTier] + " arcane circle? (Cost: " + stoneCost + " stones, " + hpCost + " HP and " + manaCost + " mana.)\n");
         checkMaterials();
-        if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= stoneCost && player.HP >= hpCost && player.mana >= manaCost) {
+        if (CampStatsAndResources.StonesResc >= stoneCost && player.HP >= hpCost && player.mana >= manaCost) {
             doYesNo(curry(doBuildArcaneCircle, newTier), noThanks);
         } else {
             errorNotEnough();
@@ -700,7 +700,7 @@ public class CampUpgrades extends BaseContent {
             outputText("You decide to upgrade your circle in order to contain a stronger being should the binding ritual fail. You draw the " + NUMBER_WORDS_POSITIONAL[newTier] + " larger circle, inscribing additional protections and wards. As you finish, you look them over, checking for any imperfections in the writing. Satisfied. you nod at the result."
                 + "\n\n<b>You can now perform the rituals to release more of your minions powers!</b>");
         flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] = newTier;
-        flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 4 * newTier;
+        CampStatsAndResources.StonesResc -= 4 * newTier;
         useFatigue(50);
         HPChange(-75 * newTier, true);
         useMana(100 * newTier);
@@ -710,7 +710,7 @@ public class CampUpgrades extends BaseContent {
     //Arcane Circle Elemental Energy Conduits Upgrade
     public function arcaneCircleUpgrade():void {
         clearOutput();
-        if (player.fatigue <= player.maxFatigue() - 50) {
+        if (player.fatigue <= player.maxOverFatigue() - 50) {
             if (!player.hasStatusEffect(StatusEffects.ElementalEnergyConduits) || player.statusEffectv3(StatusEffects.ElementalEnergyConduits) < 10) {
                 var currentTier:int = !player.hasStatusEffect(StatusEffects.ElementalEnergyConduits) ? 0
                     : player.statusEffectv3(StatusEffects.ElementalEnergyConduits) / 2;
@@ -735,7 +735,7 @@ public class CampUpgrades extends BaseContent {
         var manaCost:int = 150 + currentTier * 50;
         outputText("Do you start " + (upgrade ? "expanding your " : "making the ") + NUMBER_WORDS_POSITIONAL[currentTier + 1] + " elemental energy conduit? (Cost: " + stoneShardCost + " stones, " + stoneShardCost + " Elemental Shards and " + manaCost + " mana.)\n");
         checkMaterials();
-        if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= stoneShardCost && player.hasItem(useables.ELSHARD, stoneShardCost) && player.mana >= manaCost)
+        if (CampStatsAndResources.StonesResc >= stoneShardCost && player.hasItem(useables.ELSHARD, stoneShardCost) && player.mana >= manaCost)
             doYesNo(curry(upgrade ? doUpgradeElementalEnergyConduit : doBuildElementalEnergyConduit, currentTier), noThanks);
         else {
             errorNotEnough();
@@ -758,7 +758,7 @@ public class CampUpgrades extends BaseContent {
             player.addStatusValue(StatusEffects.ElementalEnergyConduits, 3, 1);
             outputText("\n\n<b>Your arcane circles can store now more elemental energy! (+" + capacityIncrease + ")</b>");
         }
-        flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= stoneShardCost;
+        CampStatsAndResources.StonesResc -= stoneShardCost;
         useFatigue(50);
         useMana(manaCost);
         player.destroyItems(useables.ELSHARD, stoneShardCost);
@@ -777,7 +777,7 @@ public class CampUpgrades extends BaseContent {
         player.addStatusValue(StatusEffects.ElementalEnergyConduits, 2, capacityIncrease);
         player.addStatusValue(StatusEffects.ElementalEnergyConduits, 3, 1);
         outputText("\n\n<b>Your arcane circles can store now more elemental energy! (+" + capacityIncrease + ")</b>");
-        flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= stoneShardCost;
+        CampStatsAndResources.StonesResc -= stoneShardCost;
         useFatigue(50);
         useMana(manaCost);
         player.destroyItems(useables.ELSHARD, stoneShardCost);
@@ -787,7 +787,7 @@ public class CampUpgrades extends BaseContent {
     //Magic Ward Upgrade
     public function magicWard():void {
         clearOutput();
-        if (player.fatigue <= player.maxFatigue() - 200 && flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 1) setUpMagicWard();
+        if (player.fatigue <= player.maxOverFatigue() - 200 && flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 1) setUpMagicWard();
         else {
             outputText("You are too exhausted to work on magic ward!");
             doNext(playerMenu);
@@ -797,7 +797,7 @@ public class CampUpgrades extends BaseContent {
     public function setUpMagicWard():void {
         outputText("You’re confident that with the warding tome as reference, you could build a ward to help keep your camp safe from lesser threats, possibly even demons.  Shall you construct the ward? (Cost: 30 stones.)\n");
         checkMaterials();
-        if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 30) {
+        if (CampStatsAndResources.StonesResc >= 30) {
             doYesNo(setUpMagicWard2, noThanks);
         } else {
             errorNotEnough();
@@ -806,7 +806,7 @@ public class CampUpgrades extends BaseContent {
     }
 
     private function setUpMagicWard2():void {
-        flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 30;
+        CampStatsAndResources.StonesResc -= 30;
         clearOutput();
         outputText("You flip through the tome, and begin to sketch copies of the required glyphs in the dirt.  Yes, this is definitely possible.  You have something ");
         if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) outputText("Tel’Adre doesn’t;");
@@ -825,10 +825,10 @@ public class CampUpgrades extends BaseContent {
     //Dam Upgrade
     public function dam():void {
         clearOutput();
-        if (flags[kFLAGS.CAMP_UPGRADES_DAM] < 1 && player.fatigue <= player.maxFatigue() - usedFatigue(200, true)) buildUpMinorWoodDam();
-        else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 1 && player.fatigue <= player.maxFatigue() - usedFatigue(400, true)) buildUpWoodDam();
-        else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 2 && player.fatigue <= player.maxFatigue() - usedFatigue(600, true)) buildUpMajorWoodDam();
-        //else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 3 && player.fatigue <= player.maxFatigue() - usedFatigue(800, true)) buildUpMinorStoneDam();
+        if (flags[kFLAGS.CAMP_UPGRADES_DAM] < 1 && player.fatigue <= player.maxOverFatigue() - usedFatigue(200, true)) buildUpMinorWoodDam();
+        else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 1 && player.fatigue <= player.maxOverFatigue() - usedFatigue(400, true)) buildUpWoodDam();
+        else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 2 && player.fatigue <= player.maxOverFatigue() - usedFatigue(600, true)) buildUpMajorWoodDam();
+        //else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 3 && player.fatigue <= player.maxOverFatigue() - usedFatigue(800, true)) buildUpMinorStoneDam();
         else {
             outputText("You are too exhausted to work on dam!");
             doNext(playerMenu);
@@ -838,7 +838,7 @@ public class CampUpgrades extends BaseContent {
     public function buildUpMinorWoodDam():void {
         outputText("Do you start work on building small wood dam? (Cost: 200 nails, 300 wood.)\n");
         checkMaterials();
-        if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 300) {
+        if (CampStatsAndResources.NailsResc >= 200 && CampStatsAndResources.WoodResc >= 300) {
             doYesNo(buildUpMinorWoodDam2, noThanks);
         } else {
             errorNotEnough();
@@ -847,8 +847,8 @@ public class CampUpgrades extends BaseContent {
     }
 
     private function buildUpMinorWoodDam2():void {
-        flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 200;
-        flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 300;
+        CampStatsAndResources.NailsResc -= 200;
+        CampStatsAndResources.WoodResc -= 300;
         clearOutput();
         outputText("You get down to work building the dam plank by plank. At first, it proves to be a challenge, given the running water. But you eventually manage to build the structure in full your dam allowing to increase the stream size.");
         flags[kFLAGS.CAMP_UPGRADES_DAM] = 1;
@@ -858,7 +858,7 @@ public class CampUpgrades extends BaseContent {
     public function buildUpWoodDam():void {
         outputText("Do you start work on upgrading your small wood dam? (Cost: 250 nails, 375 wood.)\n");
         checkMaterials();
-        if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 250 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 375)
+        if (CampStatsAndResources.NailsResc >= 250 && CampStatsAndResources.WoodResc >= 375)
         {
             doYesNo(buildUpWoodDam2, noThanks);
         }
@@ -870,8 +870,8 @@ public class CampUpgrades extends BaseContent {
     }
 	
     private function buildUpWoodDam2():void {
-        flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 250;
-        flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 375;
+        CampStatsAndResources.NailsResc -= 250;
+        CampStatsAndResources.WoodResc -= 375;
         clearOutput();
         outputText("You get down to work expanding the dam plank by plank starting from sides. At first, it goes slowly, but you eventualy speed up, to slow down again near end of the work. New taller and wider dam starts to accumulative water to form something between stream and miniature narrow shaped lake.");
         flags[kFLAGS.CAMP_UPGRADES_DAM] = 2;
@@ -881,7 +881,7 @@ public class CampUpgrades extends BaseContent {
     public function buildUpMajorWoodDam():void {
         outputText("Do you start work on upgrading your wood dam? (Cost: 300 nails, 450 wood.)\n");
         checkMaterials();
-        if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 300 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 450)
+        if (CampStatsAndResources.NailsResc >= 300 && CampStatsAndResources.WoodResc >= 450)
         {
             doYesNo(buildUpMajorWoodDam2, noThanks);
         }
@@ -892,8 +892,8 @@ public class CampUpgrades extends BaseContent {
         }
     }
     private function buildUpMajorWoodDam2():void {
-        flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 300;
-        flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 450;
+        CampStatsAndResources.NailsResc -= 300;
+        CampStatsAndResources.WoodResc -= 450;
         clearOutput();
         outputText("You get down to work on expanding the dam for the second time like the last time putting planks on the sides first. It progress slowly until you put last ones on the top of dam. Tired but satisfied with your work you look how previous widened stream due to higher water accumulation turn into proper miniature yet very narrow mini lake.");
         flags[kFLAGS.CAMP_UPGRADES_DAM] = 3;
@@ -903,7 +903,7 @@ public class CampUpgrades extends BaseContent {
     //Fishery Upgrade
     public function fishery():void {
         clearOutput();
-        if (player.fatigue <= player.maxFatigue() - usedFatigue(200, true)) {
+        if (player.fatigue <= player.maxOverFatigue() - usedFatigue(200, true)) {
             if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] < 1) {
                 buildUpFishery1();
                 return;
@@ -925,7 +925,7 @@ public class CampUpgrades extends BaseContent {
     public function buildUpFishery1():void {
         outputText("Do you start work on building fishery? (Cost: 200 nails, 300 wood.)\n");
         checkMaterials();
-        if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 300) {
+        if (CampStatsAndResources.NailsResc >= 200 && CampStatsAndResources.WoodResc >= 300) {
             doYesNo(buildUpFishery1Yes, noThanks);
         } else {
             errorNotEnough();
@@ -934,8 +934,8 @@ public class CampUpgrades extends BaseContent {
     }
 
     private function buildUpFishery1Yes():void {
-        flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 200;
-        flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 300;
+        CampStatsAndResources.NailsResc -= 200;
+        CampStatsAndResources.WoodResc -= 300;
         clearOutput();
         outputText("You spend some time building your fishery. At the end of it, you look at the result with pride. Time to have someone on fishing duty.");
         flags[kFLAGS.CAMP_UPGRADES_FISHERY] = 1;
@@ -946,7 +946,7 @@ public class CampUpgrades extends BaseContent {
     public function buildUpFishery2():void {
         outputText("Do you start work on building fishery? (Cost: 300 nails, 450 wood.)\n");
         checkMaterials();
-        if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 300 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 450) {
+        if (CampStatsAndResources.NailsResc >= 300 && CampStatsAndResources.WoodResc >= 450) {
             doYesNo(buildUpFishery2Yes, noThanks);
         } else {
             errorNotEnough();
@@ -955,8 +955,8 @@ public class CampUpgrades extends BaseContent {
     }
 
     private function buildUpFishery2Yes():void {
-        flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 300;
-        flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 450;
+        CampStatsAndResources.NailsResc -= 300;
+        CampStatsAndResources.WoodResc -= 450;
         clearOutput();
         outputText("You spend some time building your fishery. At the end of it, you look at the result with pride. Now you can have two people on fishing duty.");
         flags[kFLAGS.CAMP_UPGRADES_FISHERY] = 2;

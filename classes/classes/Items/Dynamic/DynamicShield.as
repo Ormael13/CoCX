@@ -7,8 +7,11 @@ import classes.Items.EnchantmentLib;
 import classes.Items.EnchantmentType;
 import classes.Items.Equipable;
 import classes.Items.IDynamicItem;
+import classes.Items.IELib;
+import classes.Items.ItemEffect;
 import classes.Items.Shield;
 import classes.Items.WeaponRange;
+import classes.Race;
 
 public class DynamicShield extends Shield implements IDynamicItem {
 	public var _subtypeId:String;
@@ -71,8 +74,10 @@ public class DynamicShield extends Shield implements IDynamicItem {
 		var value:Number        = parsedParams.value;
 		var buffs:Object        = parsedParams.buffs;
 		var perk:Array          = (subtype.perk || []).slice();
-		var tags:Object         = subtype.tags || {};
+		var tags:Array          = subtype.tags || [];
 		var block:Number        = subtype.block;
+		var itemEffects:Array   = subtype.effects || [];
+		var qitemEffects:Array  = subtype.qeffects || [];
 		if (parsedParams.error) {
 			trace("[ERROR] Failed to parse " + id + " with error " + parsedParams.error);
 			name      = "ERROR " + name;
@@ -94,7 +99,7 @@ public class DynamicShield extends Shield implements IDynamicItem {
 				perk.join(", ")
 		);
 		
-		DynamicItems.postConstruct(this, tags, buffs);
+		DynamicItems.postConstruct(this, tags, buffs, itemEffects, qitemEffects, quality);
 	}
 	
 	override public function effectDescriptionParts():Array {
@@ -152,9 +157,9 @@ public class DynamicShield extends Shield implements IDynamicItem {
 	
 	override public function get block():Number {
 		var block:Number = super.block;
-		var e:SimpleRaceEnchantment = enchantmentOfType(EnchantmentLib.RaceAttackBonus) as SimpleRaceEnchantment;
-		if (e) {
-			block *= 1 + 0.05 * e.power * game.player.racialTier(e.race);
+		var ie:ItemEffect = findEffect(IELib.DefenseMult_RaceTier);
+		if (ie) {
+			block *= 1 + ie.power * game.player.racialTier(ie.value1 as Race) / 100;
 		}
 		return block;
 	}

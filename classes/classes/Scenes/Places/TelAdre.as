@@ -1,8 +1,9 @@
-﻿package classes.Scenes.Places {
+package classes.Scenes.Places {
 import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.MerchantMenu;
+import classes.Scenes.Camp.CampStatsAndResources;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Places.TelAdre.*;
 import classes.Scenes.SceneLib;
@@ -747,8 +748,8 @@ public function carpentryShopInside():void {
 public function carpentryShopBuyNails():void {
 	clearOutput();
 	if (player.hasKeyItem("Carpenter's Toolbox") >= 0) {
-		outputText("You ask him if he has nails for sale. He replies \"<i>Certainly! I've got nails. Your toolbox can hold up to "+(flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2 ? "seven":"two")+" hundred and fifty nails. I'll be selling nails at a price of two gems per nail.</i>\" \n\n");
-		outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapNails() + "");
+		outputText("You ask him if he has nails for sale. He replies \"<i>Certainly! I've got nails. I'll be selling nails at a price of two gems per nail.</i>\" \n\n");
+		outputText("Nails: " + CampStatsAndResources.NailsResc + "/" + SceneLib.campUpgrades.checkMaterialsCapNails() + "");
 		menu();
 		addButton(0, "Buy 10", carpentryShopBuyNailsAmount, 10);
 		addButton(1, "Buy 25", carpentryShopBuyNailsAmount, 25);
@@ -780,13 +781,13 @@ private function carpentryShopBuyNailsYes():void {
 		player.gems -= (nails * 2);
 		flags[kFLAGS.ACHIEVEMENT_PROGRESS_HAMMER_TIME] += nails;
 		if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_HAMMER_TIME] >= 300) awardAchievement("Hammer Time", kACHIEVEMENTS.GENERAL_HAMMER_TIME);
-		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += nails;
+		CampStatsAndResources.NailsResc += nails;
 		outputText("You hand over " + (nails * 2) + " gems. \"<i>Done,</i>\" he says as he hands over bundle of " + nails +" nails to you.\n\n");
-		if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > SceneLib.campUpgrades.checkMaterialsCapNails()) {
+		if (CampStatsAndResources.NailsResc > SceneLib.campUpgrades.checkMaterialsCapNails()) {
 			outputText("Unfortunately, your toolbox can't hold anymore nails. You notify him and he refunds you the gems.\n\n");
-			player.gems += ((flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] - SceneLib.campUpgrades.checkMaterialsCapNails()) * 2);
-			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = SceneLib.campUpgrades.checkMaterialsCapNails();
-			outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapNails() + "");
+			player.gems += ((CampStatsAndResources.NailsResc - SceneLib.campUpgrades.checkMaterialsCapNails()) * 2);
+			CampStatsAndResources.NailsResc = SceneLib.campUpgrades.checkMaterialsCapNails();
+			outputText("Nails: " + CampStatsAndResources.NailsResc + "/" + SceneLib.campUpgrades.checkMaterialsCapNails() + "");
 		}
 	}
 	else outputText("\"<i>I'm sorry, my friend. You do not have enough gems.</i>\"");
@@ -798,7 +799,7 @@ private function carpentryShopBuyNailsYes():void {
 public function carpentryShopBuyWood():void {
 	clearOutput();
 	outputText("You ask him if he has wood for sale. He replies \"<i>Certainly! I've got extra supply of wood. I'll be selling wood at a price of 5 gems per wood plank.</i>\" \n\n");
-	outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapWood() + "");
+	outputText("Wood: " + CampStatsAndResources.WoodResc + "/" + SceneLib.campUpgrades.checkMaterialsCapWood() + "");
 	menu();
 	addButton(0, "Buy 10", carpentryShopBuyWoodAmount, 10);
 	addButton(1, "Buy 25", carpentryShopBuyWoodAmount, 25);
@@ -825,13 +826,13 @@ private function carpentryShopBuyWoodYes():void {
 		player.gems -= (wood * 5);
 		flags[kFLAGS.ACHIEVEMENT_PROGRESS_IM_NO_LUMBERJACK] += wood;
 		if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_IM_NO_LUMBERJACK] >= 100) awardAchievement("I'm No Lumberjack", kACHIEVEMENTS.GENERAL_IM_NO_LUMBERJACK);
-		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += wood;
+		CampStatsAndResources.WoodResc += wood;
 		outputText("You hand over " + (wood * 5) + " gems. \"<i>I'll have the caravan deliver the wood to your camp as soon as you leave my shop,</i>\" he says.\n\n");
-		if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > SceneLib.campUpgrades.checkMaterialsCapWood()) {
+		if (CampStatsAndResources.WoodResc > SceneLib.campUpgrades.checkMaterialsCapWood()) {
 			outputText("Unfortunately, your wood supply seem to be full. You inform him. He refunds you the gems.\n\n");
-			player.gems += ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - SceneLib.campUpgrades.checkMaterialsCapWood()) * 5);
-			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - SceneLib.campUpgrades.checkMaterialsCapWood());
-			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapWood() + "");
+			player.gems += ((CampStatsAndResources.WoodResc - SceneLib.campUpgrades.checkMaterialsCapWood()) * 5);
+			CampStatsAndResources.WoodResc -= (CampStatsAndResources.WoodResc - SceneLib.campUpgrades.checkMaterialsCapWood());
+			outputText("Wood: " + CampStatsAndResources.WoodResc + "/" + SceneLib.campUpgrades.checkMaterialsCapWood() + "");
 		}
 	}
 	else outputText("\"<i>I'm sorry, my friend. You do not have enough gems.</i>\"");
@@ -843,7 +844,7 @@ private function carpentryShopBuyWoodYes():void {
 public function carpentryShopBuyStone():void {
 	clearOutput();
 	outputText("You ask him if he has stones for sale. He replies \"<i>Certainly! I've got extra supply of stones. I'll be selling stones at a price of 10 gems per stone.</i>\" \n\n");
-	outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapStones() + "");
+	outputText("Stone: " + CampStatsAndResources.StonesResc + "/" + SceneLib.campUpgrades.checkMaterialsCapStones() + "");
 	menu();
 	addButton(0, "Buy 10", carpentryShopBuyStoneAmount, 10);
 	addButton(1, "Buy 25", carpentryShopBuyStoneAmount, 25);
@@ -870,13 +871,13 @@ private function carpentryShopBuyStoneYes():void {
 		player.gems -= (stone * 10);
 		flags[kFLAGS.ACHIEVEMENT_PROGRESS_YABBA_DABBA_DOO] += stone;
 		if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_YABBA_DABBA_DOO] >= 100) awardAchievement("Yabba Dabba Doo", kACHIEVEMENTS.GENERAL_YABBA_DABBA_DOO);
-		flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stone;
+		CampStatsAndResources.StonesResc += stone;
 		outputText("You hand over " + (stone * 10) + " gems. \"<i>I'll have the caravan deliver the stones to your camp as soon as you leave my shop,</i>\" he says.\n\n");
-		if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > SceneLib.campUpgrades.checkMaterialsCapStones()) {
+		if (CampStatsAndResources.StonesResc > SceneLib.campUpgrades.checkMaterialsCapStones()) {
 			outputText("Unfortunately, your stone supply seem to be full. You inform him. He refunds you the gems.\n\n");
-			player.gems += ((flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] - SceneLib.campUpgrades.checkMaterialsCapStones()) * 10);
-			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] - SceneLib.campUpgrades.checkMaterialsCapStones());
-			outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapStones() + "");
+			player.gems += ((CampStatsAndResources.StonesResc - SceneLib.campUpgrades.checkMaterialsCapStones()) * 10);
+			CampStatsAndResources.StonesResc -= (CampStatsAndResources.StonesResc - SceneLib.campUpgrades.checkMaterialsCapStones());
+			outputText("Stone: " + CampStatsAndResources.StonesResc + "/" + SceneLib.campUpgrades.checkMaterialsCapStones() + "");
 		}
 	}
 	else outputText("\"<i>I'm sorry, my friend. You do not have enough gems.</i>\"");
@@ -888,38 +889,38 @@ private function carpentryShopBuyStoneYes():void {
 public function carpentryShopSellNails():void {
 	clearOutput();
 	outputText("You ask him if he's willing to buy nails from you. He says, \"<i>Certainly! I'll be buying nails at a rate of one gem per nail.</i>\" \n\n");
-	outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapNails() + "");
+	outputText("Nails: " + CampStatsAndResources.NailsResc + "/" + SceneLib.campUpgrades.checkMaterialsCapNails() + "");
 	menu();
-	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 1) addButton(0, "Sell 1", carpentryShopSellNailsAmount, 1);
-	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 5) addButton(1, "Sell 5", carpentryShopSellNailsAmount, 5);
-	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 10) addButton(2, "Sell 10", carpentryShopSellNailsAmount, 10);
-	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 25) addButton(3, "Sell 25", carpentryShopSellNailsAmount, 25);
-	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 50) addButton(4, "Sell 50", carpentryShopSellNailsAmount, 50);
-	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100) addButton(5, "Sell 100", carpentryShopSellNailsAmount, 100);
-	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200) addButton(6, "Sell 200", carpentryShopSellNailsAmount, 200);
-	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 300) addButton(7, "Sell 300", carpentryShopSellNailsAmount, 300);
-	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 0) addButton(8, "Sell All", carpentryShopSellNailsAmount, flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES]);
+	if (CampStatsAndResources.NailsResc >= 1) addButton(0, "Sell 1", carpentryShopSellNailsAmount, 1);
+	if (CampStatsAndResources.NailsResc >= 5) addButton(1, "Sell 5", carpentryShopSellNailsAmount, 5);
+	if (CampStatsAndResources.NailsResc >= 10) addButton(2, "Sell 10", carpentryShopSellNailsAmount, 10);
+	if (CampStatsAndResources.NailsResc >= 25) addButton(3, "Sell 25", carpentryShopSellNailsAmount, 25);
+	if (CampStatsAndResources.NailsResc >= 50) addButton(4, "Sell 50", carpentryShopSellNailsAmount, 50);
+	if (CampStatsAndResources.NailsResc >= 100) addButton(5, "Sell 100", carpentryShopSellNailsAmount, 100);
+	if (CampStatsAndResources.NailsResc >= 200) addButton(6, "Sell 200", carpentryShopSellNailsAmount, 200);
+	if (CampStatsAndResources.NailsResc >= 300) addButton(7, "Sell 300", carpentryShopSellNailsAmount, 300);
+	if (CampStatsAndResources.NailsResc > 0) addButton(8, "Sell All", carpentryShopSellNailsAmount, CampStatsAndResources.NailsResc);
 	addButton(14, "Back", carpentryShopInside);
 }
 
 private function carpentryShopSellNailsAmount(amount:int):void {
 	nails = amount;
 	clearOutput();
-	outputText("You're willing to offer " + num2Text(amount) + " " + (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] == 1 ? "piece" : "pieces") + " of nails. He replies \"<i>I'll buy that for " + amount + " gems.</i>\" \n\nDo you sell the nails?");
+	outputText("You're willing to offer " + num2Text(amount) + " " + (CampStatsAndResources.NailsResc == 1 ? "piece" : "pieces") + " of nails. He replies \"<i>I'll buy that for " + amount + " gems.</i>\" \n\nDo you sell the nails?");
 	doYesNo(carpentryShopSellNailsYes, carpentryShopSellNails);
 }
 
 private function carpentryShopSellNailsYes():void {
 	clearOutput();
-	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= nails)
+	if (CampStatsAndResources.NailsResc >= nails)
 	{
 		var nailses:Number = nails;
 		if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) nailses *= 2;
 		player.gems += nailses;
-		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= nails;
-		outputText("You sign the permission form for " + num2Text(nails) + " " + (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] ? "piece" : "pieces") + " of nails to be taken from your camp. \"<i>Deal. Here are " + nails + " gems,</i>\" he says.\n\n");
+		CampStatsAndResources.NailsResc -= nails;
+		outputText("You sign the permission form for " + num2Text(nails) + " " + (CampStatsAndResources.NailsResc ? "piece" : "pieces") + " of nails to be taken from your camp. \"<i>Deal. Here are " + nails + " gems,</i>\" he says.\n\n");
 		if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your nail"+(nails>1?"s":"")+" for more than normal.\n\n");
-		outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapNails() + "");
+		outputText("Nails: " + CampStatsAndResources.NailsResc + "/" + SceneLib.campUpgrades.checkMaterialsCapNails() + "");
 	}
 	else outputText("\"<i>I'm sorry, my friend. You do not have enough nails.</i>\"");
 	statScreenRefresh();
@@ -930,30 +931,30 @@ private function carpentryShopSellNailsYes():void {
 public function carpentryShopSellWood():void {
 	clearOutput();
 	outputText("You ask him if he's willing to buy wood from you. He says, \"<i>Certainly! I'll be buying wood at a rate of two gems per piece.</i>\" \n\n");
-	outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapWood() + "");
+	outputText("Wood: " + CampStatsAndResources.WoodResc + "/" + SceneLib.campUpgrades.checkMaterialsCapWood() + "");
 	menu();
-	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 1) addButton(0, "Sell 1", carpentryShopSellWoodAmount, 1);
-	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 5) addButton(1, "Sell 5", carpentryShopSellWoodAmount, 5);
-	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 10) addButton(2, "Sell 10", carpentryShopSellWoodAmount, 10);
-	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 25) addButton(3, "Sell 25", carpentryShopSellWoodAmount, 25);
-	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 50) addButton(4, "Sell 50", carpentryShopSellWoodAmount, 50);
-	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100) addButton(5, "Sell 100", carpentryShopSellWoodAmount, 100);
-	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 200) addButton(6, "Sell 200", carpentryShopSellWoodAmount, 200);
-	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 300) addButton(7, "Sell 300", carpentryShopSellWoodAmount, 300);
-	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 0) addButton(8, "Sell All", carpentryShopSellWoodAmount, flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES]);
+	if (CampStatsAndResources.WoodResc >= 1) addButton(0, "Sell 1", carpentryShopSellWoodAmount, 1);
+	if (CampStatsAndResources.WoodResc >= 5) addButton(1, "Sell 5", carpentryShopSellWoodAmount, 5);
+	if (CampStatsAndResources.WoodResc >= 10) addButton(2, "Sell 10", carpentryShopSellWoodAmount, 10);
+	if (CampStatsAndResources.WoodResc >= 25) addButton(3, "Sell 25", carpentryShopSellWoodAmount, 25);
+	if (CampStatsAndResources.WoodResc >= 50) addButton(4, "Sell 50", carpentryShopSellWoodAmount, 50);
+	if (CampStatsAndResources.WoodResc >= 100) addButton(5, "Sell 100", carpentryShopSellWoodAmount, 100);
+	if (CampStatsAndResources.WoodResc >= 200) addButton(6, "Sell 200", carpentryShopSellWoodAmount, 200);
+	if (CampStatsAndResources.WoodResc >= 300) addButton(7, "Sell 300", carpentryShopSellWoodAmount, 300);
+	if (CampStatsAndResources.WoodResc > 0) addButton(8, "Sell All", carpentryShopSellWoodAmount, CampStatsAndResources.WoodResc);
 	addButton(14, "Back", carpentryShopInside);
 }
 
 private function carpentryShopSellWoodAmount(amount:int):void {
 	wood = amount;
 	clearOutput();
-	outputText("You're willing to offer " + num2Text(amount) + " " + (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] == 1 ? "piece" : "pieces") + " of wood. He replies \"<i>I'll buy that for " + (amount * 2) + " gems.</i>\" \n\nDo you sell the wood?");
+	outputText("You're willing to offer " + num2Text(amount) + " " + (CampStatsAndResources.WoodResc == 1 ? "piece" : "pieces") + " of wood. He replies \"<i>I'll buy that for " + (amount * 2) + " gems.</i>\" \n\nDo you sell the wood?");
 	doYesNo(carpentryShopSellWoodYes, carpentryShopSellWood);
 }
 
 private function carpentryShopSellWoodYes():void {
 	clearOutput();
-	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= wood)
+	if (CampStatsAndResources.WoodResc >= wood)
 	{
 		var woodes:Number = wood;
 		var woodes2:Number = 2;
@@ -961,10 +962,10 @@ private function carpentryShopSellWoodYes():void {
 		if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) woodes2 *= 2;
 		if (woodes2 > 5) woodes2 = 5;
 		player.gems += (woodes * woodes2);
-		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= wood;
-		outputText("You sign the permission form for " + num2Text(wood) + " " + (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] == 1 ? "piece" : "pieces") + " of wood to be unloaded from your camp. \"<i>Deal. Here are " + (wood * 2) + " gems,</i>\" he says.\n\n");
+		CampStatsAndResources.WoodResc -= wood;
+		outputText("You sign the permission form for " + num2Text(wood) + " " + (CampStatsAndResources.WoodResc == 1 ? "piece" : "pieces") + " of wood to be unloaded from your camp. \"<i>Deal. Here are " + (wood * 2) + " gems,</i>\" he says.\n\n");
 		if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your wood for more than normal.\n\n");
-		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapWood() + "");
+		outputText("Wood: " + CampStatsAndResources.WoodResc + "/" + SceneLib.campUpgrades.checkMaterialsCapWood() + "");
 	}
 	else outputText("\"<i>I'm sorry, my friend. You do not have enough wood.</i>\"");
 	statScreenRefresh();
@@ -975,30 +976,30 @@ private function carpentryShopSellWoodYes():void {
 public function carpentryShopSellStone():void {
 	clearOutput();
 	outputText("You ask him if he's willing to buy stones from you. He says, \"<i>Certainly! I'll be buying stones at a rate of four gems per piece.</i>\" \n\n");
-	outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapStones() + "");
+	outputText("Stone: " + CampStatsAndResources.StonesResc + "/" + SceneLib.campUpgrades.checkMaterialsCapStones() + "");
 	menu();
-	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 1) addButton(0, "Sell 1", carpentryShopSellStoneAmount, 1);
-	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 5) addButton(1, "Sell 5", carpentryShopSellStoneAmount, 5);
-	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 10) addButton(2, "Sell 10", carpentryShopSellStoneAmount, 10);
-	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 25) addButton(3, "Sell 25", carpentryShopSellStoneAmount, 25);
-	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 50) addButton(4, "Sell 50", carpentryShopSellStoneAmount, 50);
-	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 100) addButton(5, "Sell 100", carpentryShopSellStoneAmount, 100);
-	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 200) addButton(6, "Sell 200", carpentryShopSellStoneAmount, 200);
-	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 300) addButton(7, "Sell 300", carpentryShopSellStoneAmount, 300);
-	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 0) addButton(8, "Sell All", carpentryShopSellStoneAmount, flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES]);
+	if (CampStatsAndResources.StonesResc >= 1) addButton(0, "Sell 1", carpentryShopSellStoneAmount, 1);
+	if (CampStatsAndResources.StonesResc >= 5) addButton(1, "Sell 5", carpentryShopSellStoneAmount, 5);
+	if (CampStatsAndResources.StonesResc >= 10) addButton(2, "Sell 10", carpentryShopSellStoneAmount, 10);
+	if (CampStatsAndResources.StonesResc >= 25) addButton(3, "Sell 25", carpentryShopSellStoneAmount, 25);
+	if (CampStatsAndResources.StonesResc >= 50) addButton(4, "Sell 50", carpentryShopSellStoneAmount, 50);
+	if (CampStatsAndResources.StonesResc >= 100) addButton(5, "Sell 100", carpentryShopSellStoneAmount, 100);
+	if (CampStatsAndResources.StonesResc >= 200) addButton(6, "Sell 200", carpentryShopSellStoneAmount, 200);
+	if (CampStatsAndResources.StonesResc >= 300) addButton(7, "Sell 300", carpentryShopSellStoneAmount, 300);
+	if (CampStatsAndResources.StonesResc > 0) addButton(8, "Sell All", carpentryShopSellStoneAmount, CampStatsAndResources.StonesResc);
 	addButton(14, "Back", carpentryShopInside);
 }
 
 private function carpentryShopSellStoneAmount(amount:int):void {
 	stone = amount;
 	clearOutput();
-	outputText("You're willing to offer " + num2Text(amount) + " " + (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] == 1 ? "piece" : "pieces") + " of stone. He replies \"<i>I'll buy that for " + (amount * 4) + " gems.</i>\" \n\nDo you sell the stones?");
+	outputText("You're willing to offer " + num2Text(amount) + " " + (CampStatsAndResources.StonesResc == 1 ? "piece" : "pieces") + " of stone. He replies \"<i>I'll buy that for " + (amount * 4) + " gems.</i>\" \n\nDo you sell the stones?");
 	doYesNo(carpentryShopSellStoneYes, carpentryShopSellStone);
 }
 
 private function carpentryShopSellStoneYes():void {
 	clearOutput();
-	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= stone)
+	if (CampStatsAndResources.StonesResc >= stone)
 	{
 		var stones:Number = stone;
 		var stones2:Number = 4;
@@ -1006,10 +1007,10 @@ private function carpentryShopSellStoneYes():void {
 		if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) stones2 *= 2;
 		if (stones2 > 10) stones2 = 10;
 		player.gems += (stones * stones2);
-		flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= stone;
-		outputText("You sign the permission form for " + num2Text(stone) + " " + (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] == 1 ? "piece" : "pieces") + " of stones to be unloaded from your camp. \"<i>Deal. Here are " + (stone * 4) + " gems,</i>\" he says.\n\n");
+		CampStatsAndResources.StonesResc -= stone;
+		outputText("You sign the permission form for " + num2Text(stone) + " " + (CampStatsAndResources.StonesResc == 1 ? "piece" : "pieces") + " of stones to be unloaded from your camp. \"<i>Deal. Here are " + (stone * 4) + " gems,</i>\" he says.\n\n");
 		if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your stone"+(stone>1?"s":"")+" for more than normal.\n\n");
-		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapStones() + "");
+		outputText("Stone: " + CampStatsAndResources.StonesResc + "/" + SceneLib.campUpgrades.checkMaterialsCapStones() + "");
 	}
 	else outputText("\"<i>I'm sorry, my friend. You do not have enough stones.</i>\"");
 	statScreenRefresh();
@@ -1133,10 +1134,10 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(9, "C.G Hat", "You already bought item from Kaiba today.");
 		}
 		else {
-			addButton(3, "R.DeadeyeAim", buyItem, jewelries.RINGDEA).hint("Ring of deadeye aim - Remove range accuracy penalty when flying and increase range accuracy by 20%.");
-			addButton(4, "R.Ambidexty", buyItem, jewelries.RNGAMBI).hint("Ring of Ambidexty - Remove melee accuracy penalty when flying and increase melee accuracy by 15%.");
+			addButton(3, "R.DeadeyeAim", buyItem, jewelries.RINGDEA).hint("Ring of deadeye aim - Removes ranged accuracy penalty when flying, and increases range accuracy by 20%.");
+			addButton(4, "R.Ambidexty", buyItem, jewelries.RNGAMBI).hint("Ring of Ambidexterity - Removes melee accuracy penalty when flying, and increases melee accuracy by 15%.");
 			addButton(5, "E.R.Armor", buyItem, armors.ERA).hint("Elven Ranger Armor - +50% to Bow and spear damage, Agile, Revealing, Slutty seduction +10.");
-			addButton(6, "I.Q.Gown", buyItem, armors.IQG).hint("Ice queen gown - A rare dress wich may only be in Kaiba inventory for a moment buy it while you can!");
+			addButton(6, "I.Q.Gown", buyItem, armors.IQG).hint("Ice Queen Gown - A rare dress wich may only be in Kaiba's inventory for a moment. Buy it while you can!");
 			addButton(7, "VladimirReg", buyItem, armors.VLAR).hint("Vladimir Regalia - These burgundy clothes fit for a noble seems to naturaly befit the style of what could be a vampire.");
 			addButton(8, "Asterius", buyItem, weapons.ASTERIUS).hint("Asterius Rage - A pair of mighty but clearly evil magical axes rumored to be the artefact of the fallen war deity Asterius.");
 			addButton(9, "C.G Hat", buyItem, headjewelries.COWHAT).hint("Cow Girl Hat - This hat was retrieved from an offworld gunslinger who became a cow. As such aside from its powerful enchantment that increase firearms potency it also raise milk production by 25%.");
@@ -1168,7 +1169,7 @@ public function kaibaShopMainMenu2():void {
 			addButton(5, "Hodr's bow", buyItem, weaponsrange.BOWHODR).hint("Hodr's bow - Bow that would apply blindess status or deal increased damage to blinded targets.");
 			addButton(6, "Avelynn", buyItem, weaponsrange.AVELYNN).hint("Avelynn - Crossbow that will shoot two additional bolts each time.");
 			addButton(7, "Oni enchanted drinking gourd", buyItem, miscjewelries.ONI_GOURD).hint("Oni enchanted drinking gourd - A magical drinking gourd beloved by onis. Suposedly it greatly increases its users attack power but also grants an endless supply of fresh drinks!");
-			addButton(8, "Storm Ruler", buyItem, weapons.S_RULER).hint("Storm Ruler - It's large sized weapon belonging to mace/hammer type with 10% chance to trigger stun effect. It deal lightning type of damage and 50% more damage to huge or larger enemies. Additionally have Body's Cultivator (20%).");
+			addButton(8, "Storm Ruler", buyItem, weapons.S_RULER).hint("Storm Ruler - A large sword that is wielded like a hammer. Naturally deals lightning-type damage, and inflicts 50% more damage to huge or larger enemies. Also increases physical soulskill damage by 20%.");
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
 		addButton(11, "-1-", kaibaShopMainMenuPage1);
@@ -1214,6 +1215,7 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(3, "NekoBottom", "You already bought item from Kaiba today.");
 			addButtonDisabled(4, "F.Cloak", "You already bought item from Kaiba today.");
 			addButtonDisabled(5, "F.M.Dress", "You already bought item from Kaiba today.");
+			addButtonDisabled(6, "Pan Flute", "You already bought item from Kaiba today.");
 		}
 		else {
 			addButton(0, "Cat Gloves", buyItem, weapons.CATGLOV).hint("Black Cat Gloves - Not quite a weapon as much as they are black gloves with open fingers to let the tips out. These were made and custom enchanted for a cat girl adventurer. This is a temporary sale.");
@@ -1222,6 +1224,7 @@ public function kaibaShopMainMenu2():void {
 			addButton(3, "NekoBottom", buyItem, undergarments.BN_SKIRT).hint("Black Neko Leather Bottom - A skirt made of leather black as night. Makes one slimmer than it appears, increasing evasion. Stronger at night. This is a temporary sale.");
 			addButton(4, "F.Cloak", buyItem, armors.FCLOAK).hint("Francesca's Black Cloak - A cloak rumored to have been worn by the black cat adventurer Francesca the heavenly black tiger. Not exactly a strong armor per say, its true ability is to conceal its owner body's true location through a mix of glamor and illusion spell improving the users evasiveness by leaps and bound. Francesca was a famous sword mage and as thus the cloak greatly reinforces spells casted through the medium of a weapon. This is a temporary sale.");
 			addButton(5, "F.M.Dress", buyItem, armors.FMDRESS).hint("Forest Mage Dress - The wearer of this dress desire and pleasure is no longer vexed by the limitations of mortal flesh allowing one to keep control over their lust long enough to claim victory by diluting their own lust within the ambiant natural world for a time. So long as a Green Magic spell was cast within the 5 previous rounds the user of this dress effectively is able to maintain their focus and mind entirely to the task at hand at the cost of potentialy turning into a lecherous sex maniac due to all the dilluted lust merging back with the user at the end of combat. There is a small chance for this to backfire instead causing the ambiant flora to turn on and rape the wearer of the dress. This is a temporary sale.");
+			addButton(6, "Pan Flute", buyItem, weapons.PFLUTTE).hint("Pan Flute - Small mace/hammer type weapon granting bonuses: +50% spellpower, +100% performance power.");
 
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
@@ -1612,7 +1615,7 @@ private function gymMenu():void {
 private function buyGymLifeTimeMembership():void {
 	clearOutput();
 	//[Buy LifeTime Membership]
-	if (silly()) outputText("You tell \"<i>Shut up and take my gems!</i>\" as you pull out your gem-pouch. \n\n"); //Shut up and take my gems!
+	if (silly()) outputText("\"<i>Shut up and take my gems!</i>\" you shout as you pull out your gem-pouch. \n\n"); //Shut up and take my gems!
 	outputText("You fish into your pouches and pull out 500 gems, dumping them into the centaur's hands.  Her eyes widen as she turns and trots towards a counter in the back.  She leans over as she counts, giving you a generous view down her low-cut top at the cleavage she barely bothers to conceal.");
 	if(player.hasCock()) {
 		outputText("  It brings a flush to your face that has nothing to do with exercise."); // no you won't...
@@ -1628,7 +1631,7 @@ private function buyGymLifeTimeMembership():void {
 private function weightLifting():void {
 	clearOutput();
 	//Too tired?  Fuck off.
-	if(player.fatigue > player.maxFatigue() - 25) {
+	if(player.fatigue > player.maxOverFatigue() - 25) {
 		outputText("<b>There's no way you could exercise right now - you're exhausted!</b>  ");
 		if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) outputText("It'd be better to save your money and come back after you've rested.");
 		doNext(telAdreMenu);
@@ -1662,14 +1665,14 @@ private function weightLifting():void {
 	player.trainStat("tou",1,player.trainStatCap("tou",75));
 	//Body changes here
 	//Muscleness boost!
-	outputText(player.modTone(85,5+rand(5)));
+	outputText(player.modTone(player.maxToneCap(),5+rand(5)));
 	outputText("\n\nDo you want to hit the showers before you leave the gym??");
 	if(flags[kFLAGS.BROOKE_MET] == 1) {
 		menu();
 		if (flags[kFLAGS.SEX_MACHINE_STATUS] >= 0) {
 			addButton(0,"«Machine»",sexMachine.exploreShowers);
 			addButton(1,"Showers",brooke.repeatChooseShower);
-			addButton(4, "Leave", stopGoingBackEveryHourGymCheck);
+			addButton(2,"Again", stopGoingBackEveryHourGymCheck).hint("Train again without leaving gym.");
 		} else doYesNo(brooke.repeatChooseShower,stopGoingBackEveryHourGymCheck);
 	}
 	else doYesNo(sexMachine.exploreShowers,stopGoingBackEveryHourGymCheck);
@@ -1678,7 +1681,7 @@ private function weightLifting():void {
 private function goJogging():void {
 	clearOutput();
 	//Too tired?  Fuck off.
-	if(player.fatigue > player.maxFatigue() - 30) {
+	if(player.fatigue > player.maxOverFatigue() - 30) {
 		outputText("<b>There's no way you could exercise right now - you're exhausted!</b>  ");
 		if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) outputText("It'd be better to save your money and come back after you've rested.");
 		doNext(telAdreMenu);
@@ -1759,7 +1762,7 @@ private function goJogging():void {
 		if (flags[kFLAGS.SEX_MACHINE_STATUS] >= 0) {
 			addButton(0,"''Showers''",sexMachine.exploreShowers);
 			addButton(1,"Showers",brooke.repeatChooseShower);
-			addButton(4, "Leave", stopGoingBackEveryHourGymCheck);
+			addButton(2,"Again", stopGoingBackEveryHourGymCheck).hint("Train again without leaving gym.");
 		} else doYesNo(brooke.repeatChooseShower,stopGoingBackEveryHourGymCheck);
 	}
 	else doYesNo(sexMachine.exploreShowers,stopGoingBackEveryHourGymCheck);

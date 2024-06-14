@@ -561,7 +561,7 @@ use namespace CoC;
 			addButtonIfTrue(0, "Anal", kiriSexAnal, "Requires a dick with area smaller than 60.",
 				player.cockThatFits(60) >= 0, "Put your cock into Kiri's ass!");
 			addButtonIfTrue(1, "Get Licked", kiriSexGetLicked, "Req. a vagina.",
-				player.hasVagina(), "Have Kiri lick your [pussy]");
+				player.hasVagina(), "Have Kiri lick your pussy");
 			addButton(4, "Back", kiriInteraction);
 		}
 

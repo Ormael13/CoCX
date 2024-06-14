@@ -29,6 +29,7 @@ import classes.Scenes.SceneLib;
 		public var demonsPack:DemonPackBeachScene = new DemonPackBeachScene();
 		public var pinchoushop:PinchousWaterwearAndTools = new PinchousWaterwearAndTools();
 		public var gooGirlScene:GooGirlScene = new GooGirlScene();
+		public var arigeanOmnibusAbominationScene:ArigeanOmnibusAbominationScene = new ArigeanOmnibusAbominationScene();
 
 		public const areaLevel:int = 25;
 		public function isDiscovered():Boolean {
@@ -227,6 +228,19 @@ import classes.Scenes.SceneLib;
 				},
 				chance: 1
 			}, {
+				name: "arigeanOmnibusAbomination",
+				label : "Arigean Omnibus",
+				kind  : 'monster',
+				unique: true,
+				when: function ():Boolean {
+					return flags[kFLAGS.THE_TRENCH_ENTERED] == 9;
+				},
+				call: function ():void {
+					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
+					arigeanOmnibusAbominationScene.arigeanOmnibusAbominationEncounter();
+				},
+				chance: 1
+			}, {
 				name: "demonProjects",
 				label : "DemLab Subject",
 				kind  : 'monster',
@@ -308,7 +322,7 @@ import classes.Scenes.SceneLib;
 			if (Forgefather.materialsExplained != true) NothingHappened();
 			else {
 				clearOutput();
-				if (player.fatigue > player.maxFatigue() - 50) {
+				if (player.fatigue > player.maxOverFatigue() - 50) {
 					outputText("\n\n<b>You are too tired to consider mining. Perhaps some rest will suffice?</b>");
 					endEncounter();
 					return;
@@ -330,7 +344,7 @@ import classes.Scenes.SceneLib;
 					player.mineXP(player.MiningMulti() * 2);
 				}
 				else {
-					outputText("After attempt to mine Emeralds you ended with unusable piece.");
+					outputText("After attempting to mine Emeralds, you ended with only unusable pieces.");
 					endEncounter(120);
 				}
 			}

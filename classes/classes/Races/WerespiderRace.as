@@ -35,7 +35,7 @@ public class WerespiderRace extends Race {
 
 	public function WerespiderRace(id:int) {
 		super("Werespider", id, []);//RaceBody);
-		//disabled = true;
+		disabled = true;
 	}
 	
 	public override function setup():void {
@@ -48,9 +48,12 @@ public class WerespiderRace extends Race {
 				.legType(LowerBody.CHITINOUS_SPIDER_LEGS, +1)//smth like taur but not so long lower body but more like two pairs of legs starting next to each other
 				.tailType(Tail.SPIDER_ADBOMEN, +1)
 				.noWings(+4)
+				.hasPerk(PerkLib.AraneathropyDormant, +1)
 				.hasPerk(PerkLib.Araneathropy, +2, -11);
 		
 		//addMutation(IMutationsLib.AnanasaBirthrightIM);
+		addMutation(IMutationsLib.HollowFangsIM);
+		addMutation(IMutationsLib.VampiricBloodstreamIM);
 		
 		buildTier(12, "werespider")
 				.buffs({

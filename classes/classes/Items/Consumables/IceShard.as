@@ -19,8 +19,8 @@ package classes.Items.Consumables
 			outputText("You give the icicle a tentative lick, careful not to stick your tongue to it. It tastes refreshing, like cool, clear glacier water.  The ice readily dissolves against the heat of your mouth as you continue to lick away at it.  Before long, the icicle has dwindled into a sliver small enough to pop into your mouth.  As the pinprick of ice melts you slide your chilled tongue around your mouth, savoring the crisp feeling.\n\n");
 			if (rand(2) == 0 && (player.str < 75 || player.tou < 75)) {
 				outputText("The rush of cold tenses your muscles and fortifies your body, making you feel hardier than ever.  ");
-				if (player.str < 75) player.AlchemyBonus("str", 5);
-				if (player.tou < 75) player.AlchemyBonus("tou", 5);
+				if (player.str < 75) player.alchemyBonus("str", 5);
+				if (player.tou < 75) player.alchemyBonus("tou", 5);
 			}
 			if (rand(2) == 0 && (player.spe > 25)) {
 				outputText("You feel a chill spread through you; when it passes, you feel more slothful and sluggish.  ");

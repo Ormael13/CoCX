@@ -15,11 +15,13 @@ import classes.Items.Alchemy.AlchemyLib;
 import classes.Races.GargoyleRace;
 import classes.Races.ImpRace;
 import classes.Scenes.*;
+import classes.Scenes.Camp.CampStatsAndResources;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
 import classes.Stats.Buff;
 import classes.Stats.PrimaryStat;
+import classes.Stats.BuffableStat;
 
 use namespace CoC;
 
@@ -37,10 +39,12 @@ public class SaveUpdater extends NPCAwareContent {
 			SceneLib.dungeons.checkSandCaveClear(),
 			SceneLib.dungeons.checkPhoenixTowerClear(),
 			SceneLib.dungeons.checkBeeHiveClear(),
+			SceneLib.dungeons.checkTwilightGroveClear(),
 			SceneLib.dungeons.checkHiddenCaveHiddenStageClear(),
 			SceneLib.dungeons.checkRiverDungeon1stFloorClear(),
 			SceneLib.dungeons.checkRiverDungeon2ndFloorClear(),
 			SceneLib.dungeons.checkRiverDungeon3rdFloorClear(),
+			SceneLib.dungeons.checkRiverDungeon4thFloorClear(),
 			SceneLib.dungeons.checkDenOfDesireClear(),
 			SceneLib.dungeons.checkEbonLabyrinthClear(),
 		];
@@ -49,6 +53,7 @@ public class SaveUpdater extends NPCAwareContent {
 			if (dung) ++dungeonsCleared;
 		//Kill count
 		var totalKillCount:int = 0;
+		if (flags[kFLAGS.THIEFS_KILLED] > 0) totalKillCount += flags[kFLAGS.THIEFS_KILLED];
 		if (flags[kFLAGS.IMPS_KILLED] > 0) totalKillCount += flags[kFLAGS.IMPS_KILLED];
 		if (flags[kFLAGS.GOBLINS_KILLED] > 0) totalKillCount += flags[kFLAGS.GOBLINS_KILLED];
 		if (flags[kFLAGS.HELLHOUNDS_KILLED] > 0) totalKillCount += flags[kFLAGS.HELLHOUNDS_KILLED];
@@ -166,8 +171,9 @@ public class SaveUpdater extends NPCAwareContent {
 			["Are you a god?", kACHIEVEMENTS.LEVEL_ARE_YOU_A_GOD, player.level >= 100],
 			["Newb God(ess)", kACHIEVEMENTS.LEVEL_NEWB_GOD_ESS, player.level >= 120],
 			["Lowest-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS, player.level >= 150],
-			//["Low-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS, player.level >= ?180?],
+			["Lesser God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS_2, player.level >= 180],
 			//["-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS, player.level >= ?210?],
+			//["-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS, player.level >= ?240?],
 			//Population
 			["My First Companion", kACHIEVEMENTS.POPULATION_FIRST, camp.getCampPopulation() >= 2],
 			["Hamlet", kACHIEVEMENTS.POPULATION_HAMLET, camp.getCampPopulation() >= 5],
@@ -208,9 +214,13 @@ public class SaveUpdater extends NPCAwareContent {
 			["Fall of the Phoenix", kACHIEVEMENTS.DUNGEON_PHOENIX_FALL, SceneLib.dungeons.checkPhoenixTowerClear()],
 			["Extremely Chaste Delver", kACHIEVEMENTS.DUNGEON_EXTREMELY_CHASTE_DELVER, SceneLib.dungeons.checkPhoenixTowerClear() && flags[kFLAGS.TIMES_ORGASMED] <= 0],
 			["Victory, Sweet like honey", kACHIEVEMENTS.DUNGEON_VICTORY_SWEET_LIKE_HONEY, SceneLib.dungeons.checkBeeHiveClear()],
+			//["Victory, Sweet like honey", kACHIEVEMENTS.DUNGEON_VICTORY_SWEET_LIKE_HONEY, SceneLib.dungeons.checkTwilightGroveClear()],
 			["Tiger stalking the Dragon", kACHIEVEMENTS.DUNGEON_TIGER_STALKING_THE_DRAGON, SceneLib.dungeons.checkHiddenCaveHiddenStageClear()],
 			["Mirror Flower, Water Moon", kACHIEVEMENTS.DUNGEON_MIRROR_FLOWER_WATER_MOON, SceneLib.dungeons.checkRiverDungeon1stFloorClear()],
 			["Dungeon Seeker (1st layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_1ST_LAYER, SceneLib.dungeons.checkRiverDungeon1stFloorClear()],
+			["Dungeon Seeker (2nd layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_2ND_LAYER, SceneLib.dungeons.checkRiverDungeon2ndFloorClear()],
+			["Dungeon Seeker (3rd layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_3RD_LAYER, SceneLib.dungeons.checkRiverDungeon3rdFloorClear()],
+			["Dungeon Seeker (4th layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_4TH_LAYER, SceneLib.dungeons.checkRiverDungeon4thFloorClear()],
 			["Slain the Heroslayer", kACHIEVEMENTS.DUNGEON_SLAIN_THE_HEROSLAYER, SceneLib.dungeons.checkDenOfDesireClear()],
 			//bee hive clear
 			["Delver", kACHIEVEMENTS.DUNGEON_DELVER, dungeonsCleared >= 1],
@@ -218,9 +228,6 @@ public class SaveUpdater extends NPCAwareContent {
 			["Delver Expert", kACHIEVEMENTS.DUNGEON_DELVER_MASTER, dungeonsCleared >= 4],
 			["Delver Master", kACHIEVEMENTS.DUNGEON_DELVER_EXPERT, dungeonsCleared >= 8],
 			["Delver Grand Master", kACHIEVEMENTS.DUNGEON_DELVER_GRAND_MASTER, dungeonsCleared >= 16],//obecnie max 10
-
-			["Dungeon Seeker (2nd layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_2ND_LAYER, SceneLib.dungeons.checkRiverDungeon2ndFloorClear()],
-			["Dungeon Seeker (3rd layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_3RD_LAYER, SceneLib.dungeons.checkRiverDungeon3rdFloorClear()],
 
 			//Fashion
 			["Wannabe Wizard", kACHIEVEMENTS.FASHION_WANNABE_WIZARD, player.armor == armors.W_ROBES && player.weapon == weapons.W_STAFF],
@@ -246,6 +253,7 @@ public class SaveUpdater extends NPCAwareContent {
 			["Throne of Strength", kACHIEVEMENTS.FASHION_THRONE_OF_STRENGTH, player.headJewelry == headjewelries.CROWSTR && player.necklace == necklaces.NECKSTR && player.countRings(jewelries.RINGSTR) > 0],
 			["Throne of Toughness", kACHIEVEMENTS.FASHION_THRONE_OF_TOUGHNESS, player.headJewelry == headjewelries.CROWTOU && player.necklace == necklaces.NECKTOU && player.countRings(jewelries.RINGTOU) > 0],
 			["Throne of Wisdom", kACHIEVEMENTS.FASHION_THRONE_OF_WISDOM, player.headJewelry == headjewelries.CROWWIS && player.necklace == necklaces.NECKWIS && player.countRings(jewelries.RINGWIS) > 0],
+			["Hammer Time!!!", kACHIEVEMENTS.FASHION_HAMMER_TIME, player.weapon.isMusicInstrument()],
 			["Suit Up!", kACHIEVEMENTS.FASHION_SUIT_UP, player.isInGoblinMech() || player.isInNonGoblinMech()],
 			["Rollin' Rollin'", kACHIEVEMENTS.FASHION_ROLLIN_ROLLIN, player.vehicles == vehicles.GOBMPRI],
 			["Asura's Wrath", kACHIEVEMENTS.FASHION_ASURAS_WRATH, player.vehicles == vehicles.GS_MECH],
@@ -277,6 +285,7 @@ public class SaveUpdater extends NPCAwareContent {
 			["You not gonna eat those ribs?", kACHIEVEMENTS.REALISTIC_YOU_NOT_GONNA_EAT_THOSE_RIBS, player.maxHunger() > 250],
 			["Dinner for Four", kACHIEVEMENTS.REALISTIC_DINNER_FOR_FOUR, player.maxHunger() > 500],
 			["Dinner for Obelix", kACHIEVEMENTS.REALISTIC_DINNER_FOR_OBELIX, player.maxHunger() > 1000],
+			["Feast for Gluttons", kACHIEVEMENTS.REALISTIC_FEAST_FOR_GLUTTONS, player.maxHunger() > 2500],
 			//Holiday
 			["The Lovable Snowman", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_III, flags[kFLAGS.NIEVE_STAGE] == 5],
 			//General
@@ -297,6 +306,9 @@ public class SaveUpdater extends NPCAwareContent {
 			["Killing the bull by the horns", kACHIEVEMENTS.GENERAL_KILLING_THE_BULL_BY_THE_HORNS, flags[kFLAGS.MINOTAURS_KILLED] >= 10],
 			["Killing the bull by the horns 2: Kill Harder", kACHIEVEMENTS.GENERAL_KILLING_THE_BULL_BY_THE_HORNS_2_KILL_HARDER, flags[kFLAGS.MINOTAURS_KILLED] >= 50],
 			["Killing the bull by the horns 3: I'm Back", kACHIEVEMENTS.GENERAL_KILLING_THE_BULL_BY_THE_HORNS_3_IM_BACK, flags[kFLAGS.MINOTAURS_KILLED] >= 250],
+			["Vigilante", kACHIEVEMENTS.GENERAL_VIGILANTE, flags[kFLAGS.THIEFS_KILLED] >= 10],
+			["Vigilante 2: Kill Harder", kACHIEVEMENTS.GENERAL_VIGILANTE_2_KILL_HARDER, flags[kFLAGS.THIEFS_KILLED] >= 50],
+			["Vigilante 3: I'm Back", kACHIEVEMENTS.GENERAL_VIGILANTE_3_IM_BACK, flags[kFLAGS.THIEFS_KILLED] >= 250],
 
 			["Body Count: Monty Python and the Holy Grail", kACHIEVEMENTS.GENERAL_BODY_COUNT_MPATHG, totalKillCount >= 47],
 			["Body Count: Deadpool", kACHIEVEMENTS.GENERAL_BODY_COUNT_DEADPOOL, totalKillCount >= 80],
@@ -2508,31 +2520,124 @@ public class SaveUpdater extends NPCAwareContent {
 					if (player.hairColor != "pink") player.hairColor = "pink";
 				}
 				if (player.hasPerk(PerkLib.BlessingOfTheAncestorTree) && player.hairColor != "golden blonde") player.hairColor = "golden blonde";
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.15;
-			}/*
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.15) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.16;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.14;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.16) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.17;
+				if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) transformations.SkinPatternBeeStripes.applyEffect();
+				var libStat:BuffableStat = player.statStore.findBuffableStat("lib");
+				var currentWeakness:Number = libStat.valueOfBuff("Weakened");
+				if (currentWeakness > 0) libStat.removeBuff("Weakened");
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.16;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.17) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.18;
+				if (player.statStore.hasBuff('Feeding Euphoria')) player.buff("Feeding Euphoria").remove();
+				if (player.statStore.hasBuff('Milking Euphoria')) player.buff("Milking Euphoria").remove();
+				outputText("\n\nMysteriously your Feeding Euphoria and/or Milking Euphoria you may have seem to have disappeared... you'll need to feed again to get them!");
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.17;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.18) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.19;
+				outputText("\n\nBeautiful items meant to be gathered not chosen one per game.");
+				if (player.hasStatusEffect(StatusEffects.BlessedItemAtTheLake)) player.addStatusValue(StatusEffects.BlessedItemAtTheLake, 1 , 1);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.18;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.19) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.20;
+				outputText("\n\nPerks are no longer needed for ranged multi attacks");
+				refundPerk(PerkLib.Multishot);
+				refundPerk(PerkLib.WildQuiver);
+				refundPerk(PerkLib.Manyshot);
+				refundPerk(PerkLib.WeaponRangeTripleStrike);
+				refundPerk(PerkLib.WeaponRangeDoubleStrike);
+				refundPerk(PerkLib.MasterGunslinger);
+				refundPerk(PerkLib.ExpertGunslinger);
+				refundPerk(PerkLib.AmateurGunslinger);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.19;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.20) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.21;
+				outputText("\n\nFixing Kindra's training skills...");
+				if (player.statusEffectv1(StatusEffects.Kindra) >= 140 && player.hasStatusEffect(StatusEffects.KnowsSidewinder)) {
+					flags[kFLAGS.KINDRA_ADV_ARCHERY] = 6;
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.20;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.30) {
+				outputText("\n\nMoved camp resources and stats to dedicated class");
+				CampStatsAndResources.EnergyCoreResc = flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES];
+				CampStatsAndResources.MetalPieces = flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES];
+				CampStatsAndResources.MechanismResc = flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES];
+				CampStatsAndResources.StonesResc = flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES];
+				CampStatsAndResources.WoodResc = flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES];
+				CampStatsAndResources.NailsResc = flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES];
+				flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] = 0;
+				flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] = 0;
+				flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] = 0;
+				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 0;
+				flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 0;
+				flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 0;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.30;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.32) {
+				outputText("\n\nMerged Autocast perks into new Enchanter perk");
+				refundPerk(PerkLib.Battlemage);
+				refundPerk(PerkLib.Spellsword);
+				refundPerk(PerkLib.Spellbow);
+				refundPerk(PerkLib.Battleflash);
+				refundPerk(PerkLib.Spellarmor);
+				refundPerk(PerkLib.Battleshield);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.32;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.36) {
+				outputText("\n\nMadam/Tempress minor reorganizations");
+				if (JourneyToTheEast.AhriStatsToPerksConvertCounter > 0) {
+					if (JourneyToTheEast.AhriStatsToPerksConvertCounter == 1 || JourneyToTheEast.AhriStatsToPerksConvertCounter == 3 || JourneyToTheEast.AhriStatsToPerksConvertCounter == 5) JourneyToTheEast.AhriStatsToSuperPerksConvertCounter += 1;
+					if (JourneyToTheEast.AhriStatsToPerksConvertCounter > 1) {
+						if (JourneyToTheEast.AhriStatsToPerksConvertCounter > 3) player.superPerkPoints += 2;
+						else player.superPerkPoints += 1;
+					}
+				}
+				if (JourneyToTheEast.EvelynnPerksToStatsConvertCounter > 0) JourneyToTheEast.EvelynnCoreLimitBreakerCounter += JourneyToTheEast.EvelynnPerksToStatsConvertCounter;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.36;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.40) {
+				if (flags[kFLAGS.THE_TRENCH_ENTERED] >= 1 && player.tailType != Tail.ARIGEAN_RED && player.tailType != Tail.ARIGEAN_YELLOW) {
+					flags[kFLAGS.THE_TRENCH_ENTERED] = 0;
+					player.removePerk(PerkLib.MiracleMetal);
+					player.tailType = Tail.NONE;
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.40;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.42) {
+				outputText("\n\nArigeans likes their eyes like their tails...in matching colors ;)");
+				if (player.tailType == Tail.ARIGEAN_RED) player.eyes.colour = "red";
+				if (player.tailType == Tail.ARIGEAN_YELLOW) player.eyes.colour = "yellow";
+				if (player.tailType == Tail.ARIGEAN_PRINCESS) player.eyes.colour = "blue";
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.42;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.45) {
+				outputText("\n\nFlying swords tree no longer will ask for perk points.");
+				refundPerk(PerkLib.FlyingSwordPath);
+				refundPerk(PerkLib.SoaringBlades);
+				refundPerk(PerkLib.FirstAttackFlyingSword);
+				refundPerk(PerkLib.KillingIntent);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.45;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.47) {
+				outputText("\n\nSometimes Dracula/lina must go back to basic about making Ghoul Servants.");
+				if (player.racialScore(Races.DRACULA) >= 22 && !player.hasStatusEffect(StatusEffects.Familiar)) player.createStatusEffect(StatusEffects.Familiar, 0, 0, 0, 0);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.47;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.48) {
+				outputText("\n\nPrincesses from the North been displeased with newest princess been too easily transformable and gave her First's blessing ;p");
+				if (player.tailType == Tail.ARIGEAN_PRINCESS && !player.hasPerk(PerkLib.TransformationImmunity2)) player.createPerk(PerkLib.TransformationImmunity2, 8, 0, 0, 0);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.48;
+			}/*
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.50) {
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.50;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.60) {
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.60;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.63) {
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.63;
 			}*/
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);

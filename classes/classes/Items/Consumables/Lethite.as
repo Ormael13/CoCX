@@ -11,13 +11,13 @@ public class Lethite extends Consumable {
 
     public function Lethite() {
         var descr:String;
-        descr = "A chunk of lethicite. It's rare as lethicite is only produced when a mortal becomes a demon and cums their souls out. A demon's favourite treat."
-        super("Lethite", "Lethicite", "a chunk of lethicite", 1000, descr );
+        descr = "A chunk of lesser lethicite. It's rare as lethicite is only produced when a mortal becomes a demon and cums their souls out. A demon's favourite treat."
+        super("Lethite", "Lesser Lethicite", "a chunk of lesser lethicite", 1000, descr );
     }
 
     override public function useItem():Boolean {
         clearOutput();
-        if (!player.hasPerk(PerkLib.SoulEater)) {
+        if (!player.hasPerk(PerkLib.SoulEater) && !player.hasPerk(PerkLib.Soulless)) {
             outputText("You examine the pinkish-purple crystal. It must be lethicite. You know that the demons like to consume them but you're sure there might be a use for it.");
             SceneLib.inventory.returnItemToInventory(this);
         }
@@ -30,8 +30,14 @@ public class Lethite extends Consumable {
     public function eatIt():void {
         clearOutput();
         outputText("You grab the crystal and gulp it down, smiling contently as you feel it dissolve into your core and suffuse your body with raw power.");
-        player.buff("Soul Eater").addStat("int.mult",0.01);
-        player.buff("Soul Eater").addStat("lib.mult",0.01);
+		if (player.hasPerk(PerkLib.Soulless)) {
+			player.demonicenergy += 50;
+			if (player.demonicenergy > player.maxDemonicEnergy()) player.demonicenergy = player.maxDemonicEnergy();
+		}
+		else {
+			player.buff("Soul Eater").addStat("int.mult",0.01);
+			player.buff("Soul Eater").addStat("lib.mult",0.01);
+		}
         SceneLib.inventory.itemGoNext();
     }
 }

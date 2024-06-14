@@ -36,7 +36,7 @@ public class ImpWarlord extends Imp
 				outputText("The imp manages to slash you with his sword and his deadly claws!");
 				var damage:int = rand(50) + str + weaponAttack;
 				if (damage < 20) damage = 20; //Min-cap damage.
-				if (damage >= 50) {
+				if (damage >= 50 && !player.immuneToBleed()) {
 					outputText("You let out a cry in pain and you swear you could see your wounds bleeding. ");
 					player.createStatusEffect(StatusEffects.IzmaBleed, 2, 0, 0, 0);
 				}
@@ -86,7 +86,7 @@ public class ImpWarlord extends Imp
 			createBreastRow(0);
 			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
-			this.tallness = rand(14) + 40;
+			this.tallness = rand(13) + 37;
 			this.hips.type = Hips.RATING_BOYISH;
 			this.butt.type = Butt.RATING_TIGHT;
 			this.lowerBody = LowerBody.HOOFED;

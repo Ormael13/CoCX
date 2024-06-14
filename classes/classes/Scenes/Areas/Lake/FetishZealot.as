@@ -208,9 +208,8 @@ public class FetishZealot extends Monster
 			this.lust = 25;
 			this.lustVuln = 0.75;
 			this.drop = new WeightedDrop().add(armors.C_CLOTH,1)
-					.add(consumables.L_DRAFT,4)
-					.add(weapons.L_DAGGR,1)
-					.add(null,4);
+					.add(consumables.L_DRAFT,2)
+					.add(weapons.L_DAGGR,1);
 			this.special1 = zealotSpecial1;
 			this.special2 = zealotSpecial2;
 			checkMonster();

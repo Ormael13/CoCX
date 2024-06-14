@@ -144,7 +144,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 	}
 
 	private function BelisaHolyBands():Boolean {
-		if (HolyBand1 > 0 || HolyBand2 > 0 || HolyBand3Cap > 0 || HolyBand4 > 0 || HolyBand5 > 0 || HolyBand6 > 0 || HolyBand7 > 0) return true;
+		if (HolyBand1Cap > 0 || HolyBand2Cap > 0 || HolyBand3Cap > 0 || HolyBand4Cap > 0 || HolyBand5Cap > 0 || HolyBand6Cap > 0 || HolyBand7Cap > 0) return true;
 		return false;
 	}
 
@@ -851,14 +851,24 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		return BHBMCap;
 	}
 	private function BelisaHolyBandsManagment():void {
+		clearOutput();
+		outputText("<b>Holy Bands Managment Menu</b>\n\n");
+		outputText("Current equipped Holy Bands / Max limit: "+BelisaHolyBandsManagmentCurrent()+"/"+BelisaHolyBandsManagmentCap()+"\n\n");
+		outputText("Crimson Holy Band (Equipped/Bought/Limit): "+HolyBand1+"/"+HolyBand1Cap+"/3\n");
+		outputText("Pink Holy Band (Equipped/Bought/Limit): "+HolyBand2+"/"+HolyBand2Cap+"/3\n");
+		outputText("Yellow Holy Band (Equipped/Bought/Limit): "+HolyBand3+"/"+HolyBand3Cap+"/3\n");
+		outputText("Turqouise Holy Band (Equipped/Bought/Limit): "+HolyBand4+"/"+HolyBand4Cap+"/1\n");
+		outputText("Crossed Holy Band (Equipped/Bought/Limit): "+HolyBand5+"/"+HolyBand5Cap+"/1\n");
+		outputText("Brown and Beige Holy Band (Equipped/Bought/Limit): "+HolyBand6+"/"+HolyBand6Cap+"/1\n");
+		outputText("Royal Blue Holy Band (Equipped/Bought/Limit): "+HolyBand7+"/"+HolyBand7Cap+"/2\n");
 		menu();
 		if (BelisaHolyBandsManagmentCurrent() < BelisaHolyBandsManagmentCap()) {
 			if (HolyBand1 < 3 && HolyBand1Cap > 0 && HolyBand1 < HolyBand1Cap) addButton(0, "Crimson", BelisaHolyBandsManagmentCrimsonAdd).hint("Put on one Crimson Holy Band.");
 			if (HolyBand2 < 3 && HolyBand2Cap > 0 && HolyBand2 < HolyBand2Cap) addButton(2, "Pink", BelisaHolyBandsManagmentPinkAdd).hint("Put on one Pink Holy Band.");
 			if (HolyBand3 < 3 && HolyBand3Cap > 0 && HolyBand3 < HolyBand3Cap) addButton(5, "Yellow", BelisaHolyBandsManagmentYellowAdd).hint("Put on one Yellow Holy Band.");
-			if (HolyBand4 == 0 && HolyBand4Cap == 0) addButton(7, "Turqouise", BelisaHolyBandsManagmentTurqouiseAdd).hint("Put on Turqouise Holy Band.");
-			if (HolyBand5 == 0 && HolyBand5Cap == 0) addButton(10, "Crossed", BelisaHolyBandsManagmentCrossedAdd).hint("Put on Crossed Holy Band.");
-			if (HolyBand6 == 0 && HolyBand6Cap == 0) addButton(12, "Royal Blue", BelisaHolyBandsManagmentBrownAndBeigeAdd).hint("Put on Brown and Beige Holy Band.");
+			if (HolyBand4 == 0 && HolyBand4Cap > 0) addButton(7, "Turqouise", BelisaHolyBandsManagmentTurqouiseAdd).hint("Put on Turqouise Holy Band.");
+			if (HolyBand5 == 0 && HolyBand5Cap > 0) addButton(10, "Crossed", BelisaHolyBandsManagmentCrossedAdd).hint("Put on Crossed Holy Band.");
+			if (HolyBand6 == 0 && HolyBand6Cap > 0) addButton(12, "Brown and Beige", BelisaHolyBandsManagmentBrownAndBeigeAdd).hint("Put on Brown and Beige Holy Band.");
 			if (HolyBand7 < 2 && HolyBand7Cap > 0 && HolyBand7 < HolyBand7Cap) addButton(4, "Royal Blue", BelisaHolyBandsManagmentRoyalBlueAdd).hint("Put on one Royal Blue Holy Band.");
 		}
 		else {
@@ -867,7 +877,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 			addButtonDisabled(5, "Yellow", "You can't put any more Holy Bands on your arms.");
 			addButtonDisabled(7, "Turqouise", "You can't put any more Holy Bands on your arms.");
 			addButtonDisabled(10, "Crossed", "You can't put any more Holy Bands on your arms.");
-			addButtonDisabled(12, "Royal Blue", "You can't put any more Holy Bands on your arms.");
+			addButtonDisabled(12, "Brown and Beige", "You can't put any more Holy Bands on your arms.");
 			addButtonDisabled(4, "Royal Blue", "You can't put any more Holy Bands on your arms.");
 		}
 		if (HolyBand1 > 0) addButton(1, "Crimson", BelisaHolyBandsManagmentCrimsonRemove).hint("Take off one Crimson Holy Band.");
@@ -875,7 +885,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		if (HolyBand3 > 0) addButton(6, "Yellow", BelisaHolyBandsManagmentYellowRemove).hint("Take off one Yellow Holy Band.");
 		if (HolyBand4 > 0) addButton(8, "Turqouise", BelisaHolyBandsManagmentTurqouiseRemove).hint("Take off Turqouise Holy Band.");
 		if (HolyBand5 > 0) addButton(11, "Crossed", BelisaHolyBandsManagmentCrossedRemove).hint("Take off Crossed Holy Band.");
-		if (HolyBand6 > 0) addButton(13, "Royal Blue", BelisaHolyBandsManagmentBrownAndBeigeRemove).hint("Take off Brown and Beige Holy Band.");
+		if (HolyBand6 > 0) addButton(13, "Brown and Beige", BelisaHolyBandsManagmentBrownAndBeigeRemove).hint("Take off Brown and Beige Holy Band.");
 		if (HolyBand7 > 0) addButton(9, "Royal Blue", BelisaHolyBandsManagmentRoyalBlueRemove).hint("Take off one Royal Blue Holy Band.");
 		if (BelisaInCamp) addButton(14, "Back", BelisaMainCampMenu);
 		else addButton(14, "Never mind", Encounterback);
@@ -1473,7 +1483,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		outputText("You wake up in the hammock, with Belisa’s face close to yours. She’s clearly awake, but she’s stock still, watching your eyes. You blink, asking Belisa if she was watching you sleep. This gets a blush, but she seems to be getting used to having you close to her. <i>\"Well…I couldn’t exactly do much else. You were asleep, and…You’re sleeping on a few of my legs.\"</i>\n\n");
 		outputText("Now that you’re awake, you realize that, while your hips aren’t mashed together anymore, your body still rests on three of her chitin-covered spider legs. You reach out, tickling the end of one, which gets an involuntary giggle from Belisa.\n\n");
 		outputText("<i>\"H-hey, stop that, I’m ticklish!\"</i> You give her a grin, then realize that you’ve been napping for quite some time. Gently, you remove yourself from Belisa’s cot, freeing your Drider lover. She twitches, trying to get some feeling back into her legs.\n\n");
-		outputText("<i>\"I’m guessing you have to go now?\"</i> You give her a nod. You tell her that you have work you need to do. Belisa, still naked, body glistening with sweat and your combined love juices, looks you in the eyes, biting her lip. <i>\"Look…I know you’re capable…But stay safe.\"</i> Belisa notices you looking at her, and she sighs, covering her C-cups with one arm. \"You may be capable, powerful and all that…But…You’re still one person. Just…Come back to me.\"\n\n");
+		outputText("<i>\"I’m guessing you have to go now?\"</i> You give her a nod. You tell her that you have work you need to do. Belisa, still naked, body glistening with sweat and your combined love juices, looks you in the eyes, biting her lip. <i>\"Look…I know you’re capable…But stay safe.\"</i> Belisa notices you looking at her, and she sighs, covering her C-cups with one arm. <i>\"You may be capable, powerful and all that…But…You’re still one person. Just…Come back to me.\"</i>\n\n");
 		outputText("You give Belisa a chaste kiss on the cheek, and as you get dressed, you tell Belisa that you’ll always return. No demon’s going to get the best of you. She shakes her head, but doesn’t say anything. You dress and come back, ruffling her long, black hair roughly. <i>\"Headpats for luck!\"</i> You yell, stopping just short of giving Belisa a noogie.\n\n");
 		outputText("<i>\"H-hey!\"</i> She yells, and you laugh, tossing the door open and leaving back to camp. Belisa sticks her head out the door, then looks down, realizing she’s naked…and she almost joined you outside. <i>\"Eep!\"</i> She slams the door shut, and you head back to camp.\n\n");
 		if (!recalling) {

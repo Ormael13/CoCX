@@ -315,6 +315,8 @@ public class SpriteDb {
 	public static function get s_darkgoogirlsprite(): Class {
 		return is8bit ? s_darkgoogirlsprite_8bit : s_darkgoogirlsprite_16bit;
 	}
+	[Embed(source="../../../res/sprites/Grayda_Sprite.png")]
+	public static var s_grayda:Class;
 	[Embed(source="../../../res/sprites/green slime.png")]
 	public static var s_green_slime_16bit:Class;
 	[Embed(source="../../../res/sprites8bit/slime-old.png")]

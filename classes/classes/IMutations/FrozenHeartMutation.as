@@ -11,39 +11,24 @@ import classes.Races;
 
 public class FrozenHeartMutation extends IMutationPerkType
     {
-        private static const mName:String = "Frozen Heart";
+        override public function get mName():String {
+            return "Frozen Heart";
+        }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
-                descS += "Allow you to retain the ability Ice barrage and hungering cold at all times";
+                descS += "Allow you to retain the abilities Ice Barrage and Hungering Cold at all times and increase their damage by " + 10 * pTier + "%";
             }
             if (pTier >= 3){
-                descS += ", hungering cold lasts for 3 additional turn(s) and recharge 3 turn(s) faster. Gain an extra modifier from your intelligence to health. (Increase original value by 50%).";
+                descS += ", Hungering Cold lasts for 3 additional turns and recharges 3 turns faster. Gain an extra modifier from your intelligence to health. (Increases original value by 50%)";
             }
             else if (pTier >= 2){
-                descS += "hungering cold last for 1 additional turn and recharge 1 turn faster";
+                descS += ". Hungering Cold lasts for an additional turn and recharges 1 turn faster";
             }
-            if (pTier >= 1) descS += "and increase their damage by " + 10 * pTier + "%";
             if (descS != "")descS += ".";
             return descS;
-        }
-
-        //Name. Need it say more?
-        override public function name(params:PerkClass=null):String {
-            var sufval:String;
-            switch (currentTier(this, player)){
-                case 2:
-                    sufval = "(Primitive)";
-                    break;
-                case 3:
-                    sufval = "(Evolved)";
-                    break;
-                default:
-                    sufval = "";
-            }
-            return mName + sufval;
         }
 
         //Mutation Requirements

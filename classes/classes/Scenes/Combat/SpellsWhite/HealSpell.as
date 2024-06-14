@@ -8,7 +8,7 @@ public class HealSpell extends AbstractWhiteSpell {
 	public function HealSpell() {
 		super(
 			"Heal",
-			"Heal will attempt to use white magic to instnatly close your wounds and restore your body.",
+			"Heal will attempt to use white magic to instantly close your wounds and restore your body.",
 			TARGET_SELF,
 			TIMING_INSTANT,
 			[TAG_HEALING]
@@ -59,7 +59,7 @@ public class HealSpell extends AbstractWhiteSpell {
 			if (player.statusEffectv1(StatusEffects.CombatWounds) > 0.03) player.addStatusValue(StatusEffects.CombatWounds, 1, -0.03);
 			else player.removeStatusEffect(StatusEffects.CombatWounds);
 		}
-		outputText("<b>(<font color=\"#008000\">+" + heal + "</font>)</b>.");
+		outputText("<b>([font-heal]+" + heal + "[/font])</b>.");
 		if (crit) outputText(" <b>*Critical Heal!*</b>");
 		HPChange(heal,false);
 	}

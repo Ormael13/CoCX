@@ -5,13 +5,14 @@ package classes.Items.Armors
 {
 	import classes.Items.Armor;
 	import classes.StatusEffects;
-	
+		
 	public class DeathPrinceGoldenArmor extends Armor
 	{
 		
 		public function DeathPrinceGoldenArmor() 
 		{
 			super("DeathPGA","DeathPrinceGoldenArmor","Death Prince Golden Armor","a Death Prince Golden Armor",20,40,19200,"A set of golden armor worn by Anubi lords, both a symbol of status and power. These armors are generally granted to an anubis who has acquired a sizable amount of slaves. (empowers Anubi ability by 50%, +200% Magic Soulskill power, grants 5% regeneration when soulforce is above half)","Medium")
+			withTag(I_LEGENDARY);
 		}
 		
 		override public function afterEquip(doOutput:Boolean):void {
@@ -37,13 +38,6 @@ package classes.Items.Armors
 			mod += game.player.cor/5;
 			return 20 + mod;
 		}
-		
-		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.level >= 54) return super.canEquip(doOutput);
-			if (doOutput) outputText("You try and wear the legendary armor but to your disapointment the item simply refuse to stay on your body. It would seem you yet lack the power and right to wield this item.");
-			return false;
-		}
-		
 	}
 
 }

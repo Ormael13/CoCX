@@ -12,7 +12,9 @@ import classes.Races;
 
 public class HumanSmartsMutation extends IMutationPerkType
     {
-        private static const mName:String = "Human Smarts";
+        override public function get mName():String {
+            return "Human Smarts";
+        }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -27,23 +29,11 @@ public class HumanSmartsMutation extends IMutationPerkType
             if (pTier == 3){
                 descS += "10, maximum trainable Int/Wis by 20%. Gain soulforce recovery equal to 1% of your total soulforce and mana recovery increased by 0,5% of max mana. Allow to use options requiring to have technical knowledge.";
             }
-            return descS;
-        }
-
-        //Name. Need it say more?
-        override public function name(params:PerkClass=null):String {
-            var sufval:String;
-            switch (currentTier(this, player)){
-                case 2:
-                    sufval = "(Primitive)";
-                    break;
-                case 3:
-                    sufval = "(Evolved)";
-                    break;
-                default:
-                    sufval = "";
+            if (pTier == 4){
+                descS += "20, maximum trainable Int/Wis by 30%. Gain soulforce recovery equal to 2% of your total soulforce and mana recovery increased by 1% of max mana, +5% to max overmana/oversoulforce. Increase m.soulskill power by 100%. Allow to use options requiring to have technical knowledge.";
             }
-            return mName + sufval;
+            if (pTier >= 1) descS += " (req. 18+ human score to have all effects active)";
+            return descS;
         }
 
         //Mutation Requirements
@@ -87,7 +77,7 @@ public class HumanSmartsMutation extends IMutationPerkType
 
         public function HumanSmartsMutation() 
 		{
-			super(mName + " IM", mName, SLOT_NERVSYS, 3);
+			super(mName + " IM", mName, SLOT_NERVSYS, 4);
 		}
 		
 	}

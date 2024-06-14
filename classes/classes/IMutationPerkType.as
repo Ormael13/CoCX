@@ -124,7 +124,9 @@ public class IMutationPerkType extends PerkType
 			var tempObj:Object = buffsForTier(pTier, player);
 			var res:String = "";
 			for (var key:String in tempObj)
+				if(res != "") res += ", ";
 				res += StatUtils.explainBuff(key, tempObj[key]);
+			if(res != "") res = "\nBuffs: " + res;
 			return res;
 		}
 
@@ -245,6 +247,28 @@ public class IMutationPerkType extends PerkType
 					{text:this.name(), save:false}
 			);
 			//trace("Perk Buffs Updated.");
+		}
+		//Name. Need it say more?
+		override public function name(params:PerkClass=null):String {
+			var sufval:String;
+			switch (currentTier(this, player)){
+				case 2:
+					sufval = "(Primitive)";
+					break;
+				case 3:
+					sufval = "(Evolved)";
+					break;
+				case 4:
+					sufval = "(Final Form)";
+					break;
+				default:
+					sufval = "";
+			}
+			return this.mName + sufval;
+		}
+
+		public function get mName():String {
+			return "";
 		}
 	}
 }

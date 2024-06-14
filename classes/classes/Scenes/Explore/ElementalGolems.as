@@ -29,7 +29,7 @@ public class ElementalGolems extends AbstractGargoyle
 		private function dirtKick():void
 		{
 			outputText("The animated sculpture brings its right foot around, dragging it through the gardens at a high enough speed to tear a half score of bushes out by the root. A cloud of shrubbery and dirt washes over you!");
-			if (rand(2) == 0 && !player.hasStatusEffect(StatusEffects.Blind) && !player.hasPerk(PerkLib.BlindImmunity)) {
+			if (rand(2) == 0 && !player.hasStatusEffect(StatusEffects.Blind) && !player.isImmuneToBlind()) {
 				player.createStatusEffect(StatusEffects.Blind, 2, 0, 0, 0);
 				outputText(" <b>You are blinded!</b>");
 			}
@@ -110,9 +110,9 @@ public class ElementalGolems extends AbstractGargoyle
 				if (!monsterIsStunned()) {
 					outputText("You feel your magical energy being forcefully drawn out of you, coming out as a bluish aura that rushes straight into the Gargoyle waiting mouth. She take it in like a breath of fresh air, looking healthier as she feasts on your magic. The gargoyle licks her lips like she just had an excellent meal.");
 					var devour:Number = 0;
-					if (player.fatigue + 250 > player.maxFatigue()) {
-						devour += player.maxFatigue() - player.fatigue;
-						player.fatigue = player.maxFatigue();
+					if (player.fatigue + 250 > player.maxOverFatigue()) {
+						devour += player.maxOverFatigue() - player.fatigue;
+						player.fatigue = player.maxOverFatigue();
 					}
 					else {
 						devour += 250;
@@ -314,7 +314,7 @@ public class ElementalGolems extends AbstractGargoyle
 				this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			}
 			this.a = "the ";
-			this.lustVuln = 0;
+			this.lustVuln = 0.01;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);

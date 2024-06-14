@@ -39,7 +39,15 @@ public class ChainLightningSpell extends AbstractWhiteSpell {
 	}
 	
 	override public function calcCooldown():int {
-		return spellWhiteCooldown();
+		var calcC:int = 0;
+		calcC += spellWhiteCooldown();
+		if (player.weaponRange == weaponsrange.RW_TOME && player.level < 18) {
+			if (player.level < 6) calcC -= 1;
+			if (player.level < 12) calcC -= 1;
+			calcC -= 1;
+			if (calcC < 0) calcC = 0;
+		}
+		return calcC;
 	}
 	
 	/**

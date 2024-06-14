@@ -21,6 +21,7 @@ public class DungeonEngine extends DungeonAbstractContent {
     public var ebonlabyrinth:EbonLabyrinth = new EbonLabyrinth;
     public var beehive:BeeHive = new BeeHive;
     public var demonLab:DemonLab = new DemonLab();
+    public var twilightgrove:TwilightGrove = new TwilightGrove();
 
     public var map:DungeonMaps = new DungeonMaps;
 
@@ -210,7 +211,42 @@ public class DungeonEngine extends DungeonAbstractContent {
 			case DUNGEON_RIVER_FLOOR_04_ROOM_24: return riverdungeon.roomD24;
 			case DUNGEON_RIVER_FLOOR_04_ROOM_25: return riverdungeon.roomD25;
             //River Dungeon 5th floor
-			//case DUNGEON_RIVER_FLOOR_05_ROOM_01: return riverdungeon.roomE01;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_01: return riverdungeon.roomE01;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_02: return riverdungeon.roomE02;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_03: return riverdungeon.roomE03;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_04: return riverdungeon.roomE04;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_05: return riverdungeon.roomE05;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_06: return riverdungeon.roomE06;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_07: return riverdungeon.roomE07;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_08: return riverdungeon.roomE08;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_09: return riverdungeon.roomE09;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_10: return riverdungeon.roomE10;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_11: return riverdungeon.roomE11;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_12: return riverdungeon.roomE12;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_13: return riverdungeon.roomE13;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_14: return riverdungeon.roomE14;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_15: return riverdungeon.roomE15;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_16: return riverdungeon.roomE16;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_17: return riverdungeon.roomE17;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_18: return riverdungeon.roomE18;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_19: return riverdungeon.roomE19;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_20: return riverdungeon.roomE20;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_21: return riverdungeon.roomE21;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_22: return riverdungeon.roomE22;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_23: return riverdungeon.roomE23;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_24: return riverdungeon.roomE24;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_25: return riverdungeon.roomE25;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_26: return riverdungeon.roomE26;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_27: return riverdungeon.roomE27;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_28: return riverdungeon.roomE28;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_29: return riverdungeon.roomE29;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_30: return riverdungeon.roomE30;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_31: return riverdungeon.roomE31;
+			case DUNGEON_RIVER_FLOOR_05_ROOM_32: return riverdungeon.roomE32;
+            //River Dungeon 6th floor
+			//case DUNGEON_RIVER_FLOOR_06_ROOM_01: return riverdungeon.roomF01;
+			//case DUNGEON_RIVER_FLOOR_06_ROOM_02: return riverdungeon.roomF02;
+			//case DUNGEON_RIVER_FLOOR_06_ROOM_03: return riverdungeon.roomF03;
             //Den of Desire
             case DUNGEON_DEN_OF_DESIRE_ENTRANCE:            return denofdesire.roomEntrance;
             case DUNGEON_DEN_OF_DESIRE_GREAT_HALL_AREA:     return denofdesire.roomGreatHallArea;
@@ -254,6 +290,13 @@ public class DungeonEngine extends DungeonAbstractContent {
             case DUNGEON_LAB_NIGHTWALKER_1: return demonLab.NightwalkerLab1;
             case DUNGEON_LAB_NIGHTWALKER_2: return demonLab.NightwalkerLab2;
             case DUNGEON_LAB_PANIC_ROOM: 	return demonLab.Ballroom3;
+			//Twilight Grove
+			case DUNGEON_TWILIGHT_GROVE_1: return twilightgrove.room1TG;
+			//case DUNGEON_TWILIGHT_GROVE_2: return riverdungeon.roomE02;
+			//case DUNGEON_TWILIGHT_GROVE_3: return riverdungeon.roomE03;
+			//case DUNGEON_TWILIGHT_GROVE_4: return riverdungeon.roomE04;
+			//case DUNGEON_TWILIGHT_GROVE_5: return riverdungeon.roomE05;
+			//case DUNGEON_TWILIGHT_GROVE_6: return riverdungeon.roomE06;
             //error
             default: throw new Error("Illegal dungeon location!")
         }
@@ -293,6 +336,9 @@ public class DungeonEngine extends DungeonAbstractContent {
     public function checkBeeHiveClear():Boolean {
         return (flags[kFLAGS.TIFA_FOLLOWER] > 5);
     }
+    public function checkTwilightGroveClear():Boolean {
+        return (flags[kFLAGS.TWILIGHT_GROVE_PURIFICATION] > 1);
+    }
     public function checkRiverDungeon1stFloorClear():Boolean {
         return (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 1);//1 - pokonanie 1 golema, 2 pokonanie obu golemów
     }
@@ -308,7 +354,7 @@ public class DungeonEngine extends DungeonAbstractContent {
 
     //returns the room required for clearing
     public function clearRoomEL():int {
-        return 301;
+        return 351;
     }
     //returns the room required for the next award
     public function nextAwardEL():int {
@@ -317,7 +363,7 @@ public class DungeonEngine extends DungeonAbstractContent {
         else return (int(flags[kFLAGS.EBON_LABYRINTH] / 150) + 1) * 150;
     }
     public function checkEbonLabyrinthClear():Boolean {
-        //Now the dungeon contains different bosses up to floor 300. Let's give people a hint?
+        //Now the dungeon contains different bosses up to floor 350. Let's give people a hint?
         return (flags[kFLAGS.EBON_LABYRINTH_RECORD] >= clearRoomEL());
         //return (flags[kFLAGS.EBON_LABYRINTH] > 1);//exploracja 50 pokoi bez porażki
     }

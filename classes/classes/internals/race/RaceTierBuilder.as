@@ -275,7 +275,7 @@ public class RaceTierBuilder {
 				operatorObject.operatorFn
 		);
 		requirements.push(new RaceTierRequirement(
-				operatorObject.name,
+				operatorObject.nameFn(),
 				checkFn
 		));
 	}

@@ -4,7 +4,10 @@ import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.Scenes.SceneLib;
+import classes.GlobalFlags.kFLAGS;
 import classes.internals.*;
+
+import coc.view.CoCButton;
 
 public class Grayda extends Monster
 	{
@@ -16,7 +19,7 @@ public class Grayda extends Monster
 			damage += eBaseStrengthDamage();
 			damage *= 2;
 			player.takePhysDamage(damage, true);
-			if (rand(4) == 0) {
+			if (rand(4) == 0 && !player.immuneToBleed()) {
 				if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
 				else player.createStatusEffect(StatusEffects.Hemorrhage, SceneLib.combat.debuffsOrDoTDuration(3), 0.05, 0, 0);
 			}
@@ -86,7 +89,12 @@ public class Grayda extends Monster
 			player.removeStatusEffect(StatusEffects.Terrorize);
 			SceneLib.combat.enemyAIImpl();
 		}
-		
+		override public function changeBtnWhenBound(btnStruggle:CoCButton, btnBoundWait:CoCButton):void{
+			if (player.hasStatusEffect(StatusEffects.Terrorize)) {
+				btnStruggle.call(graydaTerrorizeStruggle);
+				btnBoundWait.call(graydaTerrorizeWait);
+			}
+		}
 		override protected function performCombatAction():void
 		{
 			var choice:Number = rand(5);
@@ -99,11 +107,13 @@ public class Grayda extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.graydaScene.graydaEncounterLoss();
+			if (flags[kFLAGS.THE_TRENCH_ENTERED] == 7) SceneLib.graydaScene.graydaEncounterLoss2();
+			else SceneLib.graydaScene.graydaEncounterLoss();
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.graydaScene.graydaEncounterWin();
+			if (flags[kFLAGS.THE_TRENCH_ENTERED] == 7) SceneLib.graydaScene.graydaEncounterWin2();
+			else SceneLib.graydaScene.graydaEncounterWin();
 		}
 		
 		public function Grayda() 
@@ -111,7 +121,8 @@ public class Grayda extends Monster
 			this.a = "the ";
 			this.short = "arigean countess";
 			//this.imageName = "sharkgirl";
-			this.long = "Your enemy is an Arigean Countess, an elusive being that lurks in depths of the ocean’s waters. A patch of particularly dense dark yellow fog clings around your opponent, Her glowing yellow eyes stare at you with a look of indifference and she holds her staff with seasoned confidence. Judging from the initial attack you would have to guess she’s well practiced in magic.";
+			if (flags[kFLAGS.THE_TRENCH_ENTERED] == 7) this.long = "Your enemy is Grayda, a 6’3 Arigean Countess. And although this is just a friendly spar, she is not to be underestimated in the slightest.";
+			else this.long = "Your enemy is an Arigean Countess, an elusive being that lurks in depths of the ocean’s waters. A patch of particularly dense dark yellow fog clings around your opponent, Her glowing yellow eyes stare at you with a look of indifference and she holds her staff with seasoned confidence. Judging from the initial attack you would have to guess she’s well practiced in magic.";
 			// this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 15, 0, 0, 0);
@@ -126,7 +137,7 @@ public class Grayda extends Monster
 			this.hairColor = "white";
 			this.hairLength = 16;
 			initStrTouSpeInte(230, 190, 210, 290);
-			initWisLibSensCor(290, 106, 75, 40);
+			initWisLibSensCor(290, 106, 75, 45);
 			this.weaponName = "staff";
 			this.weaponVerb="bite";
 			this.weaponAttack = 35;
@@ -140,9 +151,12 @@ public class Grayda extends Monster
 			this.level = 70;
 			this.gems = rand(30) + 25;
 			this.drop = new WeightedDrop()
-					.add(consumables.BAGOCA1,1)
-					.add(consumables.SHARK_T,1)
-					.add(consumables.ASTOOTH,3);
+					.add(consumables.SFILLET,1)
+					.add(consumables.C_STEAK,1)
+					.add(consumables.C_JERKY,1)
+					.add(consumables.SIINGOT,3)
+					.add(consumables.L_B_BAR,3)
+					.add(consumables.EAINGOT,3);
 			//this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			checkMonster();
 		}

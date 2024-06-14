@@ -8,6 +8,8 @@ import classes.Scenes.SceneLib;
 import classes.internals.*;
 import classes.display.SpriteDb;
 
+import coc.view.CoCButton;
+
 public class SandTrap extends Monster
 	{
 		//Wait:
@@ -74,6 +76,18 @@ public class SandTrap extends Monster
 				if(player.canFly()) outputText("  You try to wrench yourself free by flapping your wings, but it is hopeless.  You are well and truly snared.");
 				trapLevel(-1);
 				if(!hasStatusEffect(StatusEffects.Climbed)) createStatusEffect(StatusEffects.Climbed,0,0,0,0);
+			}
+		}
+
+		override public function postPlayerBusyBtnSpecial(btnSpecial1:CoCButton, btnSpecial2:CoCButton):void{
+			btnSpecial1.show("Climb", SceneLib.combat.wait2, "Climb the sand to move away from the sand trap.");
+		}
+
+		override public function preAttack():void{
+			if (hasStatusEffect(StatusEffects.Level)){
+				// remove firstAttack flag since player cant get them anyway and urta is never going to meet this shit
+				outputText("It's all or nothing!  With a bellowing cry you charge down the treacherous slope and smite the sandtrap as hard as you can!  ");
+				trapLevel(-4);
 			}
 		}
 

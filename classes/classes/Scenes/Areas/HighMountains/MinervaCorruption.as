@@ -2,6 +2,7 @@
 package classes.Scenes.Areas.HighMountains {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.SceneLib;
 
 public class MinervaCorruption extends BaseContent {
@@ -1027,7 +1028,7 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
             + "\n"
             + "She continues to lick her vile cum off your face with her long demonic tongue, even being polite enough to lick the cum that dripped your chest. You give her a few kisses whenever her mouth is close enough to yours and when the Sharpy is finally done, the two of you dive into a sloppy make-out. The taste & smell of salty cum plaguing both your mouths and you two just love it.  You pull away from each other and you look into your corrupted fucker’s crimson eyes. She makes the remark “<i>If you ever want another facial, I’ll be more than happy to help a cum-dumpster like you.</i>“ she rubs your cheek and sends you on your way.");
         player.sexReward("cum", "Lips", false);
-        cumAddiction(1);
+        if (!player.fiendishMetabolismNFER()) cumAddiction(1);
         doNext(camp.returnToCampUseOneHour);
     }
 
@@ -1235,7 +1236,7 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
     public function corruptLoss():void {
         clearOutput();
         //WRONG routing, needs a SEPARATE bad-end.
-        if (cumAddiction() >= 5) {
+        if (cumAddiction() >= 5 && !player.fiendishMetabolismNFER()) {
             badEndConsecutive();
             return;
         }
@@ -1251,7 +1252,7 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
         if (player.isMale()) outputText("“<i>hehehe, sorry to be so rough on you, this is what happens when you lose to such a strong, sexy, virile herm such as myself. Perhaps next time you will fight harder and not end up sucking down a fat load like one of my harpy bitches.</i>“\n"
             + "\n");
         else getDPShared();
-        cumAddiction(1);
+        if (!player.fiendishMetabolismNFER()) cumAddiction(1);
         if (cumAddiction() <= 2) outputText("Shuddering, you let out a groan as you sit there in your drug addled state, the potent addiction of siren cum seeping into your body, instilling a thirst for Minerva’s musky creamy cum.");
         else if (cumAddiction() <= 4) outputText("Letting out a groan you lick your lips, slowly playing with yourself as you think about the flavor, the thick creamy goodness of all that siren sperm filling your gut, even after such a filling, you could go for a bit more, just to let it roll over your tongue and slide down your throat again. A part of you warns you, warning you that it's dangerous to lose against such a dangerous opponent so much.");
         else outputText("Panting and groaning you lick your lips, swallowing and rolling back as you stroke yourself, the sweet drugged filled embrace of the addicted siren seed filling you utterly, the grinding need at the back of your mind calming with sweet relief as you relish the sensations your recent filling brings you. Even after just being filled you want more, you can't help but think of your next hit from Minerva’s dicks. Deep in your mind a part of you screams at you, telling you that you can't risk another loss, who knows what will happen if you let yourself get even more addicted to Minerva.");
@@ -1417,8 +1418,9 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
         minervaScene.minervaSprite();
         player.cuntChange(40, true, false, true, womb);
         outputText("<b>You're birthing Minerva's siren kid! No scene written for you, sorry.</b>");
-        ++flags[kFLAGS.MINERVA_CHILDREN];
-        ++flags[kFLAGS.TIMES_BIRTHED_SHARPIES];
+        if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) flags[kFLAGS.MINERVA_CHILDREN] += 2;
+		else flags[kFLAGS.MINERVA_CHILDREN]++;
+		flags[kFLAGS.TIMES_BIRTHED_SHARPIES]++;
         if (flags[kFLAGS.MINERVA_CHILDREN] <= 4) sceneHunter.print("But some other scenes surely can change...");
     }
 

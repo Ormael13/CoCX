@@ -5,6 +5,7 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects.Combat.AmilyVenomDebuff;
+import classes.Scenes.Combat.CombatAbilities;
 
 /**
 	 * ...
@@ -13,6 +14,19 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 	public class Amily extends Monster 
 	{
 
+		override public function preAttackSeal():Boolean{
+			if(hasStatusEffect(StatusEffects.Concentration)) {
+				clearOutput();
+				outputText("[monster name] easily glides around your attack thanks to [monster his] complete concentration on your movements.\n\n");
+				// replacetext is empty so it used default string anyway and the check is false so it leads to enemyAI() in the end of the attack()
+				// if (!sceneimpl) enemyAI();
+				// if (sceneimpl) SceneLib.combat.enemyAIImpl();
+				// return false to skip attack() its little confusing since original this line is true
+				return false;
+			}
+			// of course swap this around too
+			else return true;
+		}
 		override protected function performCombatAction():void
 		{
 			if(!hasStatusEffect(StatusEffects.Concentration) && rand(4) == 0) amilyConcentration();
@@ -118,9 +132,9 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 		//-Poison Dart: Deals speed and str damage to the PC. (Not constant)
 		private function amilyDartGo():void
 		{
-			if (player.hasStatusEffect(StatusEffects.WindWall)) {
+			if (CombatAbilities.EAspectAir.isActive()) {
 				outputText(capitalA + short + " attack from her dartgun stops at wind wall weakening it slightly.\n");
-				player.addStatusValue(StatusEffects.WindWall,2,-1);
+				CombatAbilities.EAspectAir.advance(true);
 				return;
 			}
 			//Dodged
@@ -144,15 +158,15 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 
 		//(if PC uses tease/seduce after this)
 		//Deals big lust increase, despite her resistance.
-		override public function teased(lustDelta:Number, isNotSilent:Boolean = true):void
+		override public function teased(lustDelta:Number, isNotSilent:Boolean = true, display:Boolean = true):void
 		{
 			if(hasStatusEffect(StatusEffects.Concentration)) {
 				outputText("Amily flushes hotly; her concentration only makes her pay more attention to your parts!");
 				lustDelta += 25+lustDelta;
 				removeStatusEffect(StatusEffects.Concentration);
-				applyTease(lustDelta);
+				applyTease(lustDelta, display);
 			} else {
-				super.teased(lustDelta);
+				super.teased(lustDelta, isNotSilent, display);
 			}
 		}
 

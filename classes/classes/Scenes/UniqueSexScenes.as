@@ -161,6 +161,7 @@ public class UniqueSexScenes extends BaseContent
 		}
 
 		private var activeBtns:int = 0;
+		private var returnscene:Function;
         public function get sceneMenu():ButtonDataList {
 			var menuItems:Array = [];
 			var sceneList:Array = [USSTailpeg(),
@@ -211,19 +212,20 @@ public class UniqueSexScenes extends BaseContent
         }
 
 		public function pcUSSPreChecksV2(backFunc:Function, btnPos:int = 13):void {
+			returnscene = (backFunc == null) ? camp.returnToCampUseOneHour : backFunc;
+			if(returnscene == camp.returnToCampUseOneHour) trace("Missing return scene for USSMenu. Will continue, but will go back to camp after.");
 			if (RaijuOverLust()) {
 				if (player.isGenderless()) raijuVoltTransfer();
 				else RaijuRapeSupercharged();
 				//supercharged check - forcecalls the scene if needed
-			} else addButton(btnPos, "U.Sex Scenes", openUSSmenu, backFunc)
+			} else addButton(btnPos, "U.Sex Scenes", openUSSmenu)
 				.disableIf(player.hasPerk(PerkLib.ElementalBody), "You can't use unique sex scenes while being an elemental.");
 		}
 
 		//Use above for special cases.
-		public function openUSSmenu(backFunc:Function = null):void{
+		public function openUSSmenu():void{
 			var menuItems:ButtonDataList = sceneMenu;
-			if (backFunc == null) backFunc = camp.returnToCampUseOneHour;
-			submenu(menuItems, backFunc, 0, false);
+			submenu(menuItems, returnscene, 0, false);
         }
 
 		public function ScenePostProc(sList:Array):Array{
@@ -797,6 +799,7 @@ public class UniqueSexScenes extends BaseContent
 				outputText("You grind your erect [cock] against the demon’s vagina, smearing her lips with your abundant pre as you prepare for penetration. The demon is fully aware that you plan on taking energy rather than giving it, so she tries to fight back. Her struggles are futile, seeing as you not only already hold her hands but also possess inhuman strength, far more than enough to keep the demon slut restrained. With your erection aligned, you drive yourself to penetrate the demoness.\n\n");
 				outputText("You moan in delight as you begin to rape the "+(monster.hasCock()?"omnibus":"succubus")+"’ cunt, viciously harvesting her energy with each thrust. Realizing what you’re doing, she wails in terror, your [cock] bloating up as her life force begins to flow. She struggles, trying to wrench her hands from yours, but the unfortunate demoness is already being drained. You clamp down, keeping her hands pinned to the ground under your grip, your weight firmly keeping the weakened slut down. Her walls clamp down as she tries to get her legs underneath her to push you off, but she’s too late. ");
 				outputText("Her legs fall limp, tears begin to form on the defeated demoness’s face as you piston in and out of her hole. Unable to endure the draining sex for long, the demoness cries out weakly, drenching the ground underneath you with her pussy juices. Your energy sensitive eyes can see her blue life force fading, the force flowing to her pussy, then into your [cock].\n\n");
+				sharedEnd();
 			}
 			function vagF():void {
 				outputText("With your victim properly pinned, you begin to grind your puffed pussy lips against her own drawing extra energy and pleasure from the labial contact. The demon panics as you begin to drain the life force from her, she cries out, trying to wrench her soaked lips away from yours. Despite her desperation, your cold, dead grip is far too strong, and you bear down, pressing your pussy lips into hers, grinding your clit on her cunt.\n\n");

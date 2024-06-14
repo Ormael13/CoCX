@@ -35,7 +35,7 @@ public class Alvina extends Monster
 			var nosferatu:Number = this.inte;
 			nosferatu += this.wis;
 			nosferatu *= 20;
-			outputText("Alvina chants and her shadow surges toward you, grabbing at your own. You feel your energy being drained as her shadow retreats back to her, Alvina laughs as she steals your vitality. <b>(<font color=\"#800000\">" + nosferatu + "</font>)</b>");
+			outputText("Alvina chants and her shadow surges toward you, grabbing at your own. You feel your energy being drained as her shadow retreats back to her, Alvina laughs as she steals your vitality. <b>([font-damage]" + nosferatu + "[/font])</b>");
 			this.HP += nosferatu;
 			player.HP -= nosferatu;
 			statScreenRefresh();
@@ -56,6 +56,7 @@ public class Alvina extends Monster
 				outputText("Alvina starts incanting a spell. While nothing visible happens, you feel a chill in the air.");
 				PolarMidnightSequance++;
 				createStatusEffect(StatusEffects.Uber, 0, 0,0,0);
+				clearTempResolute(false);
 			}
 			else {
 				if (PolarMidnightSequance == 1) {
@@ -65,7 +66,7 @@ public class Alvina extends Monster
 					outputText("The room gets darker as lights are snuffed out, and it gets colder by the second. ");
 					if (flags[kFLAGS.GAME_DIFFICULTY] >= 2){
 						outputText("Alvina snaps her fingers and large spear-like shards of ice form all around you before raining from all directions. You are impaled from all sides by spears, your blood dripping on the floor. This is, however, only the first phase of this terrifying spell. ");
-						player.createStatusEffect(StatusEffects.IzmaBleed, 3, 0, 0, 0);
+						if (!player.immuneToBleed()) player.createStatusEffect(StatusEffects.IzmaBleed, 3, 0, 0, 0);
 					}
 					outputText("You barely have time to scream as the air around you freezes solid. You are encased in a thick layer of black ice! ");
 					player.takeIceDamage(damage, true);//, true
@@ -94,8 +95,10 @@ public class Alvina extends Monster
 			outputText("Alvina weaves her scythe above her head tracing complicated arcane signs, as a purple flame surges under you, searing your flesh. ");
 			//outputText(". (" + damage + ")");
 			player.takeFireDamage(damage, true);//, true
-			if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.addStatusValue(StatusEffects.BurnDoT, 1, 1);
-			else player.createStatusEffect(StatusEffects.BurnDoT,SceneLib.combat.debuffsOrDoTDuration(5),0.05,0,0);
+			if (!player.immuneToBurn()) {
+				if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.addStatusValue(StatusEffects.BurnDoT, 1, 1);
+				else player.createStatusEffect(StatusEffects.BurnDoT,SceneLib.combat.debuffsOrDoTDuration(5),0.05,0,0);
+			}
 			statScreenRefresh();
 			outputText("\n");
 		}
@@ -105,6 +108,7 @@ public class Alvina extends Monster
 				outputText("Alvina weaves her scythe above her head tracing complicated arcane signs.");
 				MeteorStormSequence++;
 				createStatusEffect(StatusEffects.Uber, 0, 0,0,0);
+				clearTempResolute(false);
 			} else {
 				var damage:Number = 0;
 				damage += eBaseIntelligenceDamage() * 10;
@@ -147,6 +151,7 @@ public class Alvina extends Monster
 				outputText("\"<i>Most demons steal souls through sex. I have a more academic approach to it. Do not worry, you will still writhe in pleasure and reach orgasm as I tear it out of your chest!</i>\"\n\n");
 				outputText("You see a set of dark tendrils of black magic surging around her body, like grasping claws, ready to bury themselves in you. You need to stop that incantation before she strikes you with it!\n\n");
 				SoulTearInitiated = true;
+				clearTempResolute(false);
 			}
 		}
 
@@ -172,8 +177,10 @@ public class Alvina extends Monster
 			if (hasStatusEffect(StatusEffects.Maleficium)) damage *= 2;
 			outputText("Large crystalline shards of ice form in a fan around Alvina. She waves her scythe in an arc launching them in a barrage at you. You are impaled several times over, your wounds bleeding grievously. ");
 			player.takeIceDamage(damage, true);
-			if (player.hasStatusEffect(StatusEffects.IzmaBleed)) player.addStatusValue(StatusEffects.IzmaBleed,1,1);
-			else player.createStatusEffect(StatusEffects.IzmaBleed,SceneLib.combat.debuffsOrDoTDuration(5),0,0,0);
+			if (!player.immuneToBleed()) {
+				if (player.hasStatusEffect(StatusEffects.IzmaBleed)) player.addStatusValue(StatusEffects.IzmaBleed,1,1);
+				else player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(5), 0, 0, 0);
+			}
 			statScreenRefresh();
 			outputText("\n");
 		}
@@ -188,7 +195,7 @@ public class Alvina extends Monster
 			outputText("all pointing in your direction. There's so many of them you don't believe you'd be able to dodge everything, if you could dodge at all!\n\n");
 			outputText("\"<i>Let's see if this is your limit [name]. Will you be found wanting?</i>\"\n\n");
 			outputText("Alvina snaps her finger again and all the blades suddenly converge in your direction!\n\n");
-			if (player.hasStatusEffect(StatusEffects.EverywhereAndNowhere)) {
+			if (player.hasStatusEffect(StatusEffects.EverywhereAndNowhere) || player.hasStatusEffect(StatusEffects.ShadowTeleport)) {
 				outputText("Little does she know that you have the ability to completely remove yourself from existence if only for a brief moment thanks to "
 						+ "being everywhere and nowhere at the same time, a living paradox"
 						+ ". You are barely conscious of the blades colliding together at your previous position with a deafening crash as you appear a few yards away!\n\n");
@@ -361,21 +368,21 @@ public class Alvina extends Monster
 			if (flags[kFLAGS.GAME_DIFFICULTY] >= 2 || SceneLib.alvinaFollower.FightForAlvina) {
 				this.long = "Alvina is a goat-like succubus. She is obviously an accomplished spellcaster.  She holds a pair of burning scythes in both hands, her spellbook levitating around her. The aura of black magic emanating from her is almost smothering you. She has taken on a way more intimidating form, reaching 11 feet tall with ease. Her black wings stretch from one side of the room to the other while the very ground she walks catches on fire as if unable to support her energy pressure.";
 				this.tallness = 11*12;
-				initStrTouSpeInte(750, 910, 780, 960);
-				initWisLibSensCor(960, 750, 230, 100);
-				this.weaponAttack = 750;
-				this.armorDef = 100;
-				this.armorMDef = 100;
+				initStrTouSpeInte(800, 930, 840, 1160);
+				initWisLibSensCor(900, 800, 240, 100);
+				this.weaponAttack = 800;
+				this.armorDef = 120;
+				this.armorMDef = 120;
 				if (SceneLib.alvinaFollower.DefeatedAlvinaFirstStage){
-					this.bonusHP = 4000000;
+					this.bonusHP = 4250000;
 					alvinaMaleficium();
 				}
 				else {
-					this.bonusHP = 400000;
+					this.bonusHP = 425000;
 				}
-				this.bonusMana = 30000;
-				this.bonusLust = 1180;
-				this.level = 185;
+				this.bonusMana = 32000;
+				this.bonusLust = 1310;
+				this.level = 205;
 			} else {
 				this.long = "Alvina is a goat-like succubus. While she is barely taller than 4 and a half feet, she is obviously an accomplished spellcaster.  From the way she holds her scythe in one hand and her spellbook in the other you also expect her to be very strong,  despite the fact that she wears glasses. A powerful aura of black magic emanates from her.";
 				this.tallness = 4*12+6;

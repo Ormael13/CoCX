@@ -7,6 +7,7 @@ package classes.Scenes.Camp
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.SceneLib;
 
@@ -98,7 +99,7 @@ public function HaveABoysBath():void {
 	if (player.hasStatusEffect(StatusEffects.CampRathazul)) outputText("You're almost glad you don’t see any part of Rathazul’s body below the hips. Though, you’re not particularly interested anyway.\n\n");
 	if (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] < 1 && flags[kFLAGS.ARIAN_COCK_SIZE] > 0) outputText("Arian doesn’t seem to hate the water. He's likely cold blooded and is probably enjoying it.\n\n");
 	if (flags[kFLAGS.IZMA_BROFIED] == 1) outputText("Since Izmael is a true guy now, he was allowed to bathe with the boys.\n\n");
-	if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) outputText("Sitting near you, Konstantin relaxes and stretches his limbs. His large and thick build dwarf those from the other guys. While chit-chatting, he friendly puts one arm around you, and with the other he shamelessly washes his gigantic manhood, earning no few stares and some blushes from the other boys.\n\n");
+	if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2 && !player.hasStatusEffect(StatusEffects.KonstantinOff)) outputText("Sitting near you, Konstantin relaxes and stretches his limbs. His large and thick build dwarf those from the other guys. While chit-chatting, he friendly puts one arm around you, and with the other he shamelessly washes his gigantic manhood, earning no few stares and some blushes from the other boys.\n\n");
     if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3) {
 		outputText("Siegweird is at the edge of the hotspring, he's stripped down to his padded leather pants and only has his feet in the bubbling water");
 		if (camp.maleNpcsHotBathCount() > 1) outputText(", he seems extremely nervous around all the other people");
@@ -167,6 +168,7 @@ public function PeepingTom3():void {
 	if (flags[kFLAGS.NADIA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.NadiaOff)) outputText("Nadia is resting next to a set of medicinal and aromatic oils she regularly spray in the bath.\n\n");
 	//if (flags[kFLAGS.MICHIKO_FOLLOWER] >= 1) Michiko
 	if (flags[kFLAGS.MITZI_RECRUITED] >= 4) outputText("Your resident goblin Mitzi saunters over, looking excited. She strips what little clothing she wears then climbs into the warm waters. Her large tits help her stay afloat as she lays back and relaxes, letting out a sigh of relief.\n\n");
+	if (flags[kFLAGS.THE_TRENCH_ENTERED] > 14) outputText("You can see Grayda staying close to you. However, she seems to be fighting the urge to fall asleep in the comfort of the warm water.\n\n");
 	if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) outputText("Excellia comes over to enjoy the soothing waters. She climbs in, letting out a content [exc moo] as she lays back letting the warm waters wash over her.\n\n");
 	if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) outputText("Luna is enjoying a break relaxing for once as she is not on duty" + (flags[kFLAGS.LUNA_FOLLOWER] > 6 ? ", though for a few split second you imagined her doing doggy paddle in the water" : "") + ".\n\n");
 	if (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] > 0 && flags[kFLAGS.ARIAN_COCK_SIZE] == 0) outputText("Arian while formerly a male seems to get along with the other girls.\n\n");
@@ -541,8 +543,8 @@ public function EclassHTsurvived():void {
 
 public function goblinsBirthScene(womb:int = 0):void {
 	daughtersCount += 1 + rand(5);
-	outputText("\n");
-	outputText("A sudden gush of fluids erupts from your vagina - your water just broke. You moan in pleasure as you feel wriggling and squirming inside your belly, muscle contractions forcing it downwards.\n\n");
+	if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) daughtersCount *= 2;
+	outputText("\nA sudden gush of fluids erupts from your vagina - your water just broke. You moan in pleasure as you feel wriggling and squirming inside your belly, muscle contractions forcing it downwards.\n\n");
 	outputText("The pleasure only increase as your delivery continues... Arousal spikes through you as the contractions intensify, and as you feel something begin to pass you have a tiny orgasm. Yet this is only the beginning, and the contractions spike again, pushing you to orgasm as your daughter keeps moving forward. It repeats, over and over, nearly a dozen times she causes you to orgasm... this is even better then getting fucked! ");
 	if (daughtersCount > 1) outputText("Each new baby you pop is a new orgasm and by the end of it your tongue is panting out from pleasure. ");
 	outputText("After an eternity of procreation and pleasure, you sense your ordeal is over and look for your newborn daughter"+(daughtersCount > 1 ? "s":"")+". ");
@@ -646,10 +648,10 @@ public function PCGoblinDaughtersBuilingWorkshopSpareParts():void {
 	if (player.statusEffectv3(StatusEffects.PCDaughtersWorkshopSpareParts) > 0) outputText(", "+player.statusEffectv3(StatusEffects.PCDaughtersWorkshopSpareParts)+" mechanism");
 	if (player.statusEffectv4(StatusEffects.PCDaughtersWorkshopSpareParts) > 0) outputText(", "+player.statusEffectv4(StatusEffects.PCDaughtersWorkshopSpareParts)+" energy core");
 	outputText("</b>");
-	flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += player.statusEffectv1(StatusEffects.PCDaughtersWorkshopSpareParts);
-	flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += player.statusEffectv2(StatusEffects.PCDaughtersWorkshopSpareParts);
-	flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] += player.statusEffectv3(StatusEffects.PCDaughtersWorkshopSpareParts);
-	flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] += player.statusEffectv4(StatusEffects.PCDaughtersWorkshopSpareParts);
+	CampStatsAndResources.NailsResc += player.statusEffectv1(StatusEffects.PCDaughtersWorkshopSpareParts);
+	CampStatsAndResources.MetalPieces += player.statusEffectv2(StatusEffects.PCDaughtersWorkshopSpareParts);
+	CampStatsAndResources.MechanismResc += player.statusEffectv3(StatusEffects.PCDaughtersWorkshopSpareParts);
+	CampStatsAndResources.EnergyCoreResc += player.statusEffectv4(StatusEffects.PCDaughtersWorkshopSpareParts);
 	player.removeStatusEffect(StatusEffects.PCDaughtersWorkshopSpareParts);
 	doNext(playerMenu);
 	advanceMinutes(5);

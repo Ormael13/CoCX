@@ -70,14 +70,17 @@ public class HumanRace extends Race {
 						}, +1)
 				.hasPerk(PerkLib.HumanSupremacyInitial, +2)
 				.hasPerk(PerkLib.HumanSupremacyBasic, +2)
-				.hasPerk(PerkLib.HumanSupremacyImproved, +2)
-				.hasPerk(PerkLib.HumanSupremacySuperior, +3);
+				.hasPerk(PerkLib.HumanSupremacyImproved, +3)
+				.hasPerk(PerkLib.HumanSupremacySuperior, +4)
+				.hasPerk(PerkLib.AlteredAnima, -10);
 		
 		addMutation(IMutationsLib.HumanAdrenalGlandsIM);
 		addMutation(IMutationsLib.HumanBloodstreamIM);
 		addMutation(IMutationsLib.HumanBonesIM);
+		addMutation(IMutationsLib.HumanDigestiveTractIM);
 		addMutation(IMutationsLib.HumanEyesIM);
 		addMutation(IMutationsLib.HumanFatIM);
+		addMutation(IMutationsLib.HumanMetabolismIM);
 		addMutation(IMutationsLib.HumanMusculatureIM);
 		addMutation(IMutationsLib.HumanOvariesIM);
 		addMutation(IMutationsLib.HumanParathyroidGlandIM);
@@ -184,10 +187,12 @@ class HumanRaceTier extends RaceTier {
 	):String {
 		var s:Array = [];
 		if (!withExtraBonuses) return "";
-		if (!body) return "Bonus EXP gains";
-		var boost:Number = HumanRace.xpBoost(body.player, body.player.racialScore(Races.HUMAN));
-		if (boost <= 0) return "";
-		s.push("+" + boost + " bonus EXP gains");
+		if (body) {
+			var boost:Number = HumanRace.xpBoost(body.player, body.player.racialScore(Races.HUMAN));
+			s.push("+" + boost + " bonus EXP gains");
+		} else {
+			s.push("Additional EXP gains");
+		}
 		var buffs:Object = this.buffs(body);
 		for (var key:String in buffs) {
 			s.push(StatUtils.explainBuff(key,buffs[key]));

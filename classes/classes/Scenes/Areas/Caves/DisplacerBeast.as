@@ -32,7 +32,11 @@ use namespace CoC;
 			damage = Math.round(damage);
 			player.takePhysDamage(damage, true);
 		}
-		
+
+		override public function preMeleeMissed():void{
+			outputText("The displacer beast teleports, dodging your attack.\n");
+		}
+
 		override public function defeated(hpVictory:Boolean):void
 		{
 			SceneLib.displacerbeastScene.displacerBeastVictory();
@@ -64,8 +68,8 @@ use namespace CoC;
                 this.bonusHP = 100 + 50*mod;
                 this.bonusLust = 240 + 34*mod;
                 this.level = 60 + 5*mod;
-                this.gems = int((120 + rand(60)) * Math.exp(0.3*mod));
-                this.additionalXP = int(800 * Math.exp(0.3*mod));
+				this.gems = mod > 20 ? 0 : Math.floor((120 + rand(60)) * Math.exp(0.3*mod));
+				this.additionalXP = mod > 20 ? 0 : Math.floor(800 * Math.exp(0.3*mod));
 			}
 			else {
 				initStrTouSpeInte(152, 152, 210, 76);

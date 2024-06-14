@@ -26,9 +26,11 @@ public class GuardianGolems extends Monster
 		
 		override protected function performCombatAction():void
 		{
-			var choice:Number = rand(3);
-			if (choice < 2) eAttack();
-			if (choice == 2) backhand();
+			if ((this.lust100 >= 85 && rand(2) == 0) || this.lust100 < 85) {
+				var choice:Number = rand(3);
+				if (choice < 2) eAttack();
+				if (choice == 2) backhand();
+			}
 		}
 		
 	//	override public function defeated(hpVictory:Boolean):void
@@ -48,7 +50,7 @@ public class GuardianGolems extends Monster
 			this.imageName = "guardian golems";
 			this.long = "You're currently fighting guardian golems. They're all around six feet tall without any sexual characteristics, their stone body covered in cracks and using bare stone fists to smash enemies.";
 			this.plural = true;
-			this.lustVuln = 0;
+			this.lustVuln = 0.01;
 			this.createBreastRow(0, 1);
 			initGenderless();
 			initStrTouSpeInte(20, 25, 20, 10);

@@ -47,7 +47,13 @@ public function visitZeMagesTower():void {
 			for (var i:int = 5; i <= 8; ++i)
 				button(i).disable("Not enough gems (240)!");
 		}
+		if (player.gems >= 100) {
+			addButton(10, "R.B.Tome", buyRestrainedTome, 100, weaponsrange.RB_TOME).hint("Buy Restrained Black Tome.");
+			addButton(12, "R.W.Tome", buyRestrainedTome, 100, weaponsrange.RW_TOME).hint("Buy Restrained White Tome.");
+		}
+		if (player.gems >= 200) addButton(11, "R.G.Tome", buyRestrainedTome, 200, weaponsrange.RG_TOME).hint("Buy Restrained Grey Tome.");
 	}
+	//13 or 9? - diamond staff ^^
 	flags[kFLAGS.TIMES_BEEN_TO_LIBRARY]++;
 	addButton(14,"Back",telAdre.telAdreMenu);
 }
@@ -57,6 +63,13 @@ private function buyStarterStaff(type:ItemType):void {
 	player.gems -= 240;
 	statScreenRefresh();
 	outputText("You pay 240 gems and Quinn hands over the chosen basic elemental staff to you.");
+	inventory.takeItem(type, telAdre.telAdreMenu);
+}
+private function buyRestrainedTome(cost:Number, type:ItemType):void {
+	clearOutput();
+	player.gems -= cost;
+	statScreenRefresh();
+	outputText("You pay "+cost+" gems and Quinn hands over the chosen restrained tome to you.");
 	inventory.takeItem(type, telAdre.telAdreMenu);
 }
 
@@ -159,17 +172,21 @@ private function studyInTA():void {
 				[25, StatusEffects.KnowsDarknessShard],
 				[30, StatusEffects.KnowsCharge],
 				[30, StatusEffects.KnowsArouse],
-				[35, StatusEffects.KnowsChargeA],
+				[35, StatusEffects.KnowsChargeR],
 				[35, StatusEffects.KnowsRegenerate],
-				[40, StatusEffects.KnowsHeal],
+				[40, StatusEffects.KnowsChargeA],
 				[40, StatusEffects.KnowsMight],
-				[45, StatusEffects.KnowsBlind],
+				[45, StatusEffects.KnowsHeal],
 				[45, StatusEffects.KnowsBlink],
-				[50, StatusEffects.KnowsPyreBurst],
+				[50, StatusEffects.KnowsBlind],
 				[50, StatusEffects.KnowsArcticGale],
-				[55, StatusEffects.KnowsChainLighting],
+				[55, StatusEffects.KnowsPyreBurst],
 				[55, StatusEffects.KnowsDuskWave],
-				[60, StatusEffects.KnowsBlizzard],
+				[60, StatusEffects.KnowsChainLighting],
+				[60, StatusEffects.KnowsWaveOfEcstasy],
+				[65, StatusEffects.KnowsBlizzard],
+				[70, StatusEffects.KnowsMentalShield],
+				[75, StatusEffects.KnowsCure],
 			];
 			for each (var spell:Array in spells) {
 				if (player.inte >= spell[0] && !player.hasStatusEffect(spell[1])) {

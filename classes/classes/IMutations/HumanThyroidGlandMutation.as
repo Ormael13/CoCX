@@ -12,38 +12,25 @@ import classes.Races;
 
 public class HumanThyroidGlandMutation extends IMutationPerkType
     {
-        private static const mName:String = "Human Thyroid Gland";
+        override public function get mName():String {
+            return "Human Thyroid Gland";
+        }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
-            if (pTier == 1){
-                descS += "Regenerates 2% of max HP/hour and 1% of max HP/round";
+            if (pTier >= 1){
+                descS += "Regenerates "+(pTier*2)+"% of max HP/hour and "+pTier+"% of max HP/round";
             }
-            if (pTier == 2){
-                descS += "Regenerates 4% of max HP/hour and 2% of max HP/round";
+            if (pTier >= 3){
+                descS += ". Gain soulforce recovery equal to "+(pTier-2)+"% of your total soulforce and mana recovery increased by "+((pTier-2)*0.5)+"% of max mana";
             }
-            if (pTier == 3){
-                descS += "Regenerates 6% of max HP/hour and 3% of max HP/round. Gain soulforce recovery equal to 1% of your total soulforce and mana recovery increased by 0,5% of max mana";
+            if (pTier >= 4){
+                descS += "";
             }
             if (descS != "")descS += ".";
+            if (pTier >= 1) descS += " (req. 18+ human score to have all effects active)";
             return descS;
-        }
-
-        //Name. Need it say more?
-        override public function name(params:PerkClass=null):String {
-            var sufval:String;
-            switch (currentTier(this, player)) {
-                case 2:
-                    sufval = "(Primitive)";
-                    break;
-                case 3:
-                    sufval = "(Evolved)";
-                    break;
-                default:
-                    sufval = "";
-            }
-            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -82,6 +69,11 @@ public class HumanThyroidGlandMutation extends IMutationPerkType
 					pBuffs['spe.mult'] = 0.5;
 					pBuffs['wis.mult'] = 0.9;
 					pBuffs['int.mult'] = 0.7;
+				}
+				if (pTier == 4){
+					pBuffs['spe.mult'] = 1.0;
+					pBuffs['wis.mult'] = 1.8;
+					pBuffs['int.mult'] = 1.4;
 				}
 			}
             return pBuffs;

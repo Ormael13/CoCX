@@ -37,14 +37,17 @@ public class ImpLord extends Imp
 			player.takeFireDamage(damage, true);
 			player.takeLustDamage(20 + player.cor / 10, true);
 		}
-		
+
+		override protected function outputPlayerDodged(dodge:int):void{
+			outputText("The demonic creature slashes a clawed hand towards your stomach, but you handily avoid it.");
+		}
+
 		//Heavy Attack
 		protected function impLordHeavyEncounter():void
 		{
 			var damage:int = int((str + weaponAttack + 20) - rand(player.tou) - player.armorDef);
 			outputText("The demonic creature slashes a clawed hand towards your stomach,");
-			if (player.getEvasionRoll()) outputText(" but you handily avoid it.");
-			else if (damage <= 0) outputText(" but the attack proves ineffectual.");
+			if (damage <= 0) outputText(" but the attack proves ineffectual.");
 			else {
 				outputText("leaving a large gash. The attack leaves you slightly stunned, but you recover. ");
 				player.takePhysDamage(damage, true);
@@ -130,7 +133,7 @@ public class ImpLord extends Imp
 			this.pronoun3 = "his";
 			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
-			this.tallness = rand(14) + 40;
+			this.tallness = rand(12) + 34;
 			this.hips.type = Hips.RATING_BOYISH;
 			this.butt.type = Butt.RATING_TIGHT;
 			this.lowerBody = LowerBody.HOOFED;

@@ -6,6 +6,8 @@ import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.Scenes.Areas.Desert.Naga;
 import classes.Scenes.SceneLib;
+import classes.Scenes.Combat.CombatAbility;
+import classes.Scenes.Combat.General.TeaseSkill;
 
 public class Sirius extends Naga
 	{
@@ -27,7 +29,7 @@ public class Sirius extends Naga
 			if (damage<=0) {
 				super.outputAttack(damage);
 			} else {
-				outputText("You misjudge his pattern and wind up getting slashed by a series of swipes from his sharpened nails.  He distances himself from you in order to avoid retaliation and glares at you with his piercing yellow eyes, a hint of a smile on his face. <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+				outputText("You misjudge his pattern and wind up getting slashed by a series of swipes from his sharpened nails.  He distances himself from you in order to avoid retaliation and glares at you with his piercing yellow eyes, a hint of a smile on his face. <b>([font-damage]" + damage + "[/font])</b>");
 			}
 		}
 
@@ -64,7 +66,7 @@ public class Sirius extends Naga
 		{
 			outputText("Hissing loudly, Sirius suddenly curls his lips and spits at your eyes!  ");
 //{Hit:
-			if ((spe / 20 + rand(20) + 1 > player.spe / 20 + 10) && !player.hasPerk(PerkLib.BlindImmunity)) {
+			if ((spe / 20 + rand(20) + 1 > player.spe / 20 + 10) && !player.isImmuneToBlind()) {
 				outputText("The vile spray hits your eyes and you scream in pain, clawing fiercely at your burning, watering, weeping eyes.  <b>You can't see!  It'll be much harder to fight in this state, but at the same time, his hypnosis won't be so effective...</b>");
 				player.createStatusEffect(StatusEffects.Blind, 3, 0, 0, 0);
 			}
@@ -83,6 +85,14 @@ public class Sirius extends Naga
 			outputText("The snake-man moves too quickly for you to evade and he sinks long fangs into your flesh, leaving a wound that burns with horrific pain. ");
 			var damage:Number = 40 + rand(20);
 			damage = player.takePoisonDamage(damage, true);
+		}
+
+		override public function interceptPlayerAbility(ability:CombatAbility):Boolean {
+			if (ability is TeaseSkill) {
+				outputText("He is too focused on your eyes to pay any attention to your teasing, <b>looks like you'll have to beat him up.</b>\n\n");
+				return true;
+			}
+			return false;
 		}
 
 		override public function defeated(hpVictory:Boolean):void

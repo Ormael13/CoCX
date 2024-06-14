@@ -18,8 +18,18 @@ import flash.utils.setTimeout;
 
 public class EngineCore {
     private static var funcLookups:Dictionary = null;
-
+    private static var allStats:Array = ["str", "tou", "spe", "inte", "wis", "lib", "sens", "cor", "HP", "lust", "wrath", "fatigue", "mana", "soulforce", "hunger"];
+    private static var allStatsOld:Array = [];
     public function EngineCore() {
+        GenerateCodeBits();
+    }
+    private static function _oldStatNameFor(statName:String):String {
+        return 'old' + statName.charAt(0).toUpperCase() + statName.substr(1);
+    }
+    private static function GenerateCodeBits():void {
+        for each(var statstr:String in allStats) {
+            allStatsOld.push(_oldStatNameFor(statstr))
+        }
     }
 
     public static function maxHP():Number {
@@ -65,6 +75,10 @@ public class EngineCore {
 
     public static function maxOverMana():Number {
         return CoC.instance.player.maxOverMana();
+    }
+
+    public static function maxVenom():Number {
+        return CoC.instance.player.maxVenom();
     }
 
     public static function silly():Boolean {
@@ -137,13 +151,14 @@ public class EngineCore {
             if (CoC.instance.player.HP >= maxOverHP())
                 outputText("Your HP maxes out at " + maxOverHP() + ".\n");
             else
-                outputText("You gain <b><font color=\"#008000\">" + int(changeNum) + "</font></b> HP.\n");
+                outputText("You gain <b>[font-heal]" + Utils.formatNumber(int(changeNum)) + "[/font]</b> HP.\n");
         }
         else {
             if (CoC.instance.player.HP <= minHP())
-                outputText("You take <b><font color=\"#800000\">" + int(changeNum * -1) + "</font></b> damage, dropping your HP to "+minHP()+".\n");
+                outputText("You take <b>[font-damage]" + Utils.formatNumber(int(changeNum * -1)) + "[/font]</b>" +
+                        " damage, dropping your HP to "+minHP()+".\n");
             else
-                outputText("You take <b><font color=\"#800000\">" + int(changeNum * -1) + "</font></b> damage.\n");
+                outputText("You take <b>[font-damage]" + Utils.formatNumber(int(changeNum * -1)) + "[/font]</b> damage.\n");
         }
     }
 
@@ -191,6 +206,21 @@ public class EngineCore {
         CoC.instance.player.dynStats("lust", 0, "scale", false) //Workaround to showing the arrow.
         statScreenRefresh();
         return CoC.instance.player.wrath - before;
+    }
+
+    public static function VenomWebChange(changeNum:Number):Number {
+        var before:Number = CoC.instance.player.tailVenom;
+        if (changeNum == 0) return 0;
+        if (changeNum > 0) {
+            if (CoC.instance.player.tailVenom + int(changeNum) > maxVenom()) CoC.instance.player.tailVenom = maxVenom();
+            else CoC.instance.player.tailVenom += changeNum;
+        } else {
+            if (CoC.instance.player.tailVenom + changeNum <= 0) CoC.instance.player.tailVenom = 0;
+            else CoC.instance.player.tailVenom += changeNum;
+        }
+        CoC.instance.player.dynStats("lust", 0, "scale", false) //Workaround to showing the arrow.
+        statScreenRefresh();
+        return CoC.instance.player.tailVenom - before;
     }
 
     public static function clone(source:Object):* {
@@ -424,7 +454,9 @@ public class EngineCore {
         if (func == null) {
             CoC_Settings.error("createCallBackFunction(null," + arg + ")");
         }
-        if (arg == -9000 || arg == null) {
+        var somagicnumber:Number = -9000;
+        
+        if (arg == somagicnumber || arg == null) {
             return function ():* {
                 if (CoC_Settings.haltOnErrors)
                     logFunctionInfo(func, arg);
@@ -432,7 +464,7 @@ public class EngineCore {
             };
         }
         else {
-            if (arg2 == -9000 || arg2 == null) {
+            if (arg2 == somagicnumber || arg2 == null) {
                 return function ():* {
                     if (CoC_Settings.haltOnErrors)
                         logFunctionInfo(func, arg);
@@ -440,7 +472,7 @@ public class EngineCore {
                 };
             }
             else {
-                if (arg3 == -9000 || arg3 == null) {
+                if (arg3 == somagicnumber || arg3 == null) {
                     return function ():* {
                         if (CoC_Settings.haltOnErrors)
                             logFunctionInfo(func, arg, arg2);
@@ -694,21 +726,10 @@ public class EngineCore {
     public static function hideUpDown():void {
         CoC.instance.mainView.statsView.hideUpDown();
         //Clear storage values so up/down arrows can be properly displayed
-        CoC.instance.oldStats.oldStr = 0;
-        CoC.instance.oldStats.oldTou = 0;
-        CoC.instance.oldStats.oldSpe = 0;
-        CoC.instance.oldStats.oldInte = 0;
-        CoC.instance.oldStats.oldWis = 0;
-        CoC.instance.oldStats.oldLib = 0;
-        CoC.instance.oldStats.oldSens = 0;
-        CoC.instance.oldStats.oldCor = 0;
-        CoC.instance.oldStats.oldHP = 0;
-        CoC.instance.oldStats.oldLust = 0;
-        CoC.instance.oldStats.oldWrath = 0;
-        CoC.instance.oldStats.oldFatigue = 0;
-        CoC.instance.oldStats.oldMana = 0;
-        CoC.instance.oldStats.oldSoulforce = 0;
-        CoC.instance.oldStats.oldHunger = 0;
+
+        for each (var stat:String in allStatsOld) {
+            CoC.instance.oldStats[stat] = 0;
+        }
     }
 
     public static function fatigue(mod:Number, type:Number = 0):void {
@@ -740,7 +761,7 @@ public class EngineCore {
             if (CoC.instance.achievements[achievement] <= 0) {
                 CoC.instance.achievements[achievement] = 1;
                 if (nl && display) outputText("\n");
-                if (display) outputText("<b><font color=\"#000080\">Achievement unlocked: " + title + "</font></b>");
+                if (display) outputText("<b>[font-blue]Achievement unlocked: " + title + "[/font]</b>");
                 if (nl2 && display) outputText("\n");
                 CoC.instance.saves.savePermObject(false); //Only save if the achievement hasn't been previously awarded.
             }
@@ -773,26 +794,12 @@ public class EngineCore {
     public static function showUpDown():void { //Moved from StatsView.
         Utils.Begin("engineCore", "showUpDown");
 
-        function _oldStatNameFor(statName:String):String {
-            return 'old' + statName.charAt(0).toUpperCase() + statName.substr(1);
-        }
-
-        var statName:String,
-                oldStatName:String,
-                allStats:Array;
-
-//	CoC.instance.mainView.statsView.upDownsContainer.visible = true;
-
-        allStats = ["str", "tou", "spe", "inte", "wis", "lib", "sens", "cor", "HP", "lust", "wrath", "fatigue", "mana", "soulforce", "hunger"];
-
-        for each(statName in allStats) {
-            oldStatName = _oldStatNameFor(statName);
-
-            if (CoC.instance.player[statName] > CoC.instance.oldStats[oldStatName]) {
-                CoC.instance.mainView.statsView.showStatUp(statName);
+        for(var i:Number = 0; i< allStats.length; i++) {
+            if (CoC.instance.player[allStats[i]] > CoC.instance.oldStats[allStatsOld[i]]) {
+                CoC.instance.mainView.statsView.showStatUp(allStats[i]);
             }
-            if (CoC.instance.player[statName] < CoC.instance.oldStats[oldStatName]) {
-                CoC.instance.mainView.statsView.showStatDown(statName);
+            if (CoC.instance.player[allStats[i]] < CoC.instance.oldStats[allStatsOld[i]]) {
+                CoC.instance.mainView.statsView.showStatDown(allStats[i]);
             }
         }
         Utils.End("engineCore", "showUpDown");

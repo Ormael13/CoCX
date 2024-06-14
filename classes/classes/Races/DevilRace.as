@@ -41,7 +41,7 @@ public class DevilRace extends Race {
 	
 	public override function setup():void {
 		addScores()
-				.legType(LowerBody.HOOFED, +1)
+				.legType(LowerBody.CLOVEN_HOOFED, +1)
 				.tailType(ANY(Tail.GOAT, Tail.DEMONIC), +1)
 				.wingType(ANY(Wings.BAT_LIKE_TINY, Wings.BAT_LIKE_LARGE, Wings.DEVILFEATHER), +4)
 				.armType(Arms.DEVIL, +1)

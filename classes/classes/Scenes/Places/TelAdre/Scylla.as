@@ -771,7 +771,7 @@ private function scyllaPtVShare():void {
 			"You're not addicted to the minotaur cum.");
 	//Now, this MAY HAVE BEEN a spoiler... if other mentions had been properly hidden.
 	addButton(1, "Milk", scyllaPtVMilk)
-		.disableIf((!player.hasPerk(PerkLib.MarblesMilk) && !player.statusEffectv3(StatusEffects.Marble) == 0) || player.hasPerk(PerkLib.MarbleResistant),
+		.disableIf((!player.hasPerk(PerkLib.MarblesMilk) && !player.statusEffectv3(StatusEffects.Marble) == 0) || player.hasPerk(PerkLib.MarbleResistant) || player.fiendishMetabolismNFER(),
 			"Req. to be addicted to the lacta bovine milk.");
 	addButton(2, "Sex", scyllaPtVSex)
 		.disableIf(player.lib < 85 && player.minLust() < 20,

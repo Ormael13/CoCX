@@ -27,7 +27,7 @@ import classes.Scenes.Areas.Forest.WaspGirl;
 		{
 			var choice:Number = rand(5);
 			if (choice == 0) waspStingAttack();
-			if (choice == 1) waspSpearAttack();
+			if (choice == 1) waspBarrageOfDarts();
 			if (choice == 2) waspBottleThrow();
 			if (choice >= 3) eAttack();
 		}

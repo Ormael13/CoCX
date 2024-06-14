@@ -12,11 +12,13 @@ import classes.Races;
 
 public class ElvishPeripheralNervSysMutation extends IMutationPerkType
     {
-        private static const mName:String = "Elvish Peripheral NervSys";
+        override public function get mName():String {
+            return "Elvish Peripheral NervSys";
+        }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             pTier = (pTier == -1)? currentTier(this, player): pTier;
-            var perChg:int = 5 * pTier
+            var perChg:int = 5 * pTier;
             var descS:String = "";
             if (pTier >= 1) descS += "Your Elvish Peripheral NervSys is giving you +" + perChg +"% of max core Spe as phantom Spe and allows you to keep Elven Sense even without elf arms/legs";
             /*
@@ -31,25 +33,6 @@ public class ElvishPeripheralNervSysMutation extends IMutationPerkType
             }
             if (descS != "")descS += ".";
             return descS;
-        }
-
-        //Name. Need it say more?
-        override public function name(params:PerkClass=null):String {
-            var sufval:String;
-            switch (currentTier(this, player)){
-                case 2:
-                    sufval = "(Primitive)";
-                    break;
-                case 3:
-                    sufval = "(Evolved)";
-                    break;
-                case 4:
-                    sufval = "(Final Form)";
-                    break;
-                default:
-                    sufval = "";
-            }
-            return mName + sufval;
         }
 
         override public function evolveText():String {
@@ -82,7 +65,7 @@ public class ElvishPeripheralNervSysMutation extends IMutationPerkType
             var pBuffs:Object = {};
             if (pTier == 2) pBuffs['spe.mult'] = 0.05;
             if (pTier == 3) pBuffs['spe.mult'] = 0.1;
-            if (pTier == 3) pBuffs['spe.mult'] = 0.2;
+            if (pTier == 4) pBuffs['spe.mult'] = 0.2;
             return pBuffs;
         }
 

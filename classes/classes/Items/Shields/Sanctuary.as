@@ -16,6 +16,7 @@ import classes.PerkLib;
 					"Shining in snow-white ivory with a silver trim, this legendary shield is said to heal and protect a knight of pure heart. Embellishments carved on the ivory cover most of its surface.",
 					"Large");
 			withPerk(PerkLib.Sanctuary, 1, 0, 0, 0);
+			withTag(I_LEGENDARY);
 		}
 		
 		override public function get block():Number {
@@ -43,12 +44,6 @@ import classes.PerkLib;
 			}
 			block += Math.round((100 - game.player.cor) / 5);
 			return (2 + block);
-		}
-		
-		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.level >= 54) return super.canEquip(doOutput);
-			if (doOutput) outputText("You try and wield the legendary shield but to your disapointment the item simply refuse to stay put in your hands. It would seem you yet lack the power and right to wield this item.");
-			return false;
 		}
 	}
 }

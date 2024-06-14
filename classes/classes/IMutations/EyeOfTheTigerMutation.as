@@ -11,7 +11,9 @@ import classes.Races;
 
 public class EyeOfTheTigerMutation extends IMutationPerkType
     {
-        private static const mName:String = "Eye Of The Tiger";
+        override public function get mName():String {
+            return "Eye Of The Tiger";
+        }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -19,7 +21,7 @@ public class EyeOfTheTigerMutation extends IMutationPerkType
             if (pTier >= 1){
                 descS = "Increase precision of all attacks by 5%";
             }
-           if (pTier >= 2){
+			if (pTier >= 2){
                 descS += " and increase critical chance with natural weapons and weapons by 5%. Increase Rake and Claw attack damage by 50%.";
             }
              if (pTier == 1){
@@ -32,25 +34,6 @@ public class EyeOfTheTigerMutation extends IMutationPerkType
                 descS += " Critical strikes from claw attacks inflict bleed damage. Increase Natural weapon critical damage by 50%.";
             }
             return descS;
-        }
-
-        //Name. Need it say more?
-        override public function name(params:PerkClass=null):String {
-            var sufval:String;
-            switch (currentTier(this, player)){
-                case 2:
-                    sufval = "(Primitive)";
-                    break;
-                case 3:
-                    sufval = "(Evolved)";
-                    break;
-                case 4:
-                    sufval = "(Final Form)";
-                    break;
-                default:
-                    sufval = "";
-            }
-            return mName + sufval;
         }
 
         //Mutation Requirements

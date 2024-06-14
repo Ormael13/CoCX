@@ -35,8 +35,7 @@ public class FairyRace extends Race {
 
 	public function FairyRace(id:int) {
 		super("Fairy", id, RaceBody);
-		chimeraTier = 0;
-		grandChimeraTier = 0;
+		mutationThreshold = 9;
 	}
 	
 	public override function setup():void {
@@ -56,8 +55,7 @@ public class FairyRace extends Race {
 						function (body:BodyData):Boolean {
 							return body.player.skinType == Skin.PLAIN && body.skinBaseAdj == "flawless"
 						}, +1)
-				.hasPerk(PerkLib.TransformationImmunity2, +5);
-		addScoresAfter(1)
+				.hasPerk(PerkLib.TransformationImmunity2, +5)
 				.skinPlainOnly(+1)
 				.noCock(+1);
 		
@@ -65,11 +63,11 @@ public class FairyRace extends Race {
 		
 		buildTier(15, "Half fairy")
 				.buffs({
-					"str.mult": -0.20,
-					"tou.mult": -0.10,
-					"spe.mult": +2.40,
-					"int.mult": +2.40,
-					"wis.mult": +1.00,
+					"str.mult": -0.10,
+					"tou.mult": -0.05,
+					"spe.mult": +0.80,
+					"int.mult": +0.80,
+					"wis.mult": +0.60,
 					"sens": +10
 				})
 				.end();

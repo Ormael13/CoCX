@@ -138,12 +138,14 @@ public class Race {
 				if (outputText != null) outputText("Chimerical Body: Semi-Improved Stage", bonus);
 				score += bonus;
 			}
-			if (body.player.hasPerk(PerkLib.ChimericalBodySemiImprovedStageEx) || body.player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStageEx)) {
+			if (body.player.hasPerk(PerkLib.ChimericalBodySemiImprovedStageEx) || body.player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStageEx)
+				 || body.player.hasPerk(PerkLib.ChimericalBodySemiEpicStageEx)) {
 				bonus = score >= mutationThreshold && maxStage >= 1 ? +1 : 0;
 				if (outputText != null) {
 					var s1text:String = "";
-					if (body.player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStageEx)) s1text = "Superior";
-					else s1text = "Improved";
+					if (body.player.hasPerk(PerkLib.ChimericalBodySemiEpicStageEx)) s1text = "Epic";
+					else if (body.player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStageEx)) s1text = "Superior";
+					else s1text = "Improved"
 					outputText("Chimerical Body: Semi-"+s1text+" (Ex) Stage", bonus);
 				}
 				score += bonus;
@@ -153,14 +155,24 @@ public class Race {
 				if (outputText != null) outputText("Chimerical Body: Semi-Superior Stage", bonus);
 				score += bonus;
 			}
-			if (body.player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStageEx)) {
+			if (body.player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStageEx) || body.player.hasPerk(PerkLib.ChimericalBodySemiEpicStageEx)) {
 				bonus = score >= mutationThreshold && maxStage >= 2 ? +1 : 0;
-				if (outputText != null) outputText("Chimerical Body: Semi-Superior (Ex) Stage", bonus);
+				if (outputText != null) {
+					var s2text:String = "";
+					if (body.player.hasPerk(PerkLib.ChimericalBodySemiEpicStageEx)) s2text = "Epic";
+					else s2text = "Superior"
+					outputText("Chimerical Body: Semi-"+s2text+" (Ex) Stage", bonus);
+				}
 				score += bonus;
 			}
 			if (body.player.hasPerk(PerkLib.ChimericalBodySemiEpicStage)) {
 				bonus = score >= mutationThreshold && maxStage >= 3 ? +1 : 0;
 				if (outputText != null) outputText("Chimerical Body: Semi-Epic Stage", bonus);
+				score += bonus;
+			}
+			if (body.player.hasPerk(PerkLib.ChimericalBodySemiEpicStageEx)) {
+				bonus = score >= mutationThreshold && maxStage >= 3 ? +1 : 0;
+				if (outputText != null) outputText("Chimerical Body: Semi-Epic (Ex) Stage", bonus);
 				score += bonus;
 			}
 		}
@@ -260,7 +272,7 @@ public class Race {
 				s += "[font-default]";
 			}
 			score += rscore;
-			s += rr.name;
+			s += rr.getName();
 			if (rr.varyingScore() && !pass) {
 				// do not display (+X) for requirements that have varying values and
 				// didn't pass, because value could be incorrect

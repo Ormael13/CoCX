@@ -309,7 +309,8 @@ public class LowerBody extends SaveableBodyPart {
 		name: "cloven-hoofed",
 		legsPrefixes: ["pig-like", "cloven-hoofed", "", ""],
 		appearanceDesc: "{legCount} digitigrade legs form below your [hips], ending in cloven hooves.",
-		canTaur: true
+		canTaur: true,
+		fur: true
 	});
 
 	//public static const :int = 22;not used anywhere legs number likely ^^
@@ -503,6 +504,7 @@ public class LowerBody extends SaveableBodyPart {
 	EnumValue.add(Types, GRYPHON, "GRYPHON", {
 		name: "gryphon",
 		appearanceDesc: "You have strong thighs perfect for launching you into the air ending in furred, feline legs, covered with a coat of soft, [fur color2] fur. Your have digitigrade feet, lion-like, with soft, pink soles and paw pads, with feline toes ending in sharp, retractile claws.",
+		canPounce: true,
 		canTaur: true,
 		fur: true
 	});
@@ -856,6 +858,39 @@ public class LowerBody extends SaveableBodyPart {
 	EnumValue.add(Types, ARMORED_LEGS, "ARMORED_LEGS", {
 		name: "arigean",
 		appearanceDesc: "Your legs are human in shape and form but are covered in a protective natural, black metal armor half way up your thighs, a series of complex plates seem to rest at your joints allowing for movement with black, fragile skin underneath."
+	});
+
+	public static const DEMONIC_GRACEFUL_FEET:int = 82;
+	EnumValue.add(Types, DEMONIC_GRACEFUL_FEET, "DEMONIC_GRACEFUL_FEET", {
+		name: "demonic graceful feet",
+		feet: "demonic graceful feet",
+		appearanceDesc: "Your {legCount} perfect lissom legs end in delicate, clawed feet allowing you to move with supernatural grace."
+	});
+
+	public static const CLOVEN_HOOFED_2:int = 83;//button 0 on 2nd page of metamorph
+	EnumValue.add(Types, CLOVEN_HOOFED_2, "CLOVEN_HOOFED_2", {
+		name: "reindeer",
+		legsPrefixes: ["deer-like", "cloven-hoofed", "", ""],
+		appearanceDesc: "{legCount} digitigrade legs covered with thick [fur color] fur form below your [hips], ending in cloven hooves.",
+		canTaur: true,
+		fur: true
+	});
+	public static const MOTH:int = 84;
+	EnumValue.add(Types, MOTH, "MOTH", {
+		name: "moth",
+		appearanceDesc: "your legs are covered in a bell bottom like fuzzy mass"
+	});
+
+	public static const TROLL:int = 85;
+	EnumValue.add(Types, TROLL, "TROLL", {
+		name: "troll",
+		appearanceDesc: "Two troll legs grow down from your [hips], covered in soft, green fur, ending in four-toed troll feet."
+	});
+
+	public static const GLACIAL_TROLL:int = 86;
+	EnumValue.add(Types, GLACIAL_TROLL, "GLACIAL_TROLL", {
+		name: "glacial troll",
+		appearanceDesc: "Two glacial troll legs grow down from your [hips], covered in soft, white fur, ending in four-toed glacial troll feet."
 	});
 
 	override public function set type(value:int):void {

@@ -12,7 +12,9 @@ import classes.Races;
 
 public class HumanBonesMutation extends IMutationPerkType
     {
-        private static const mName:String = "Human Bones";
+        override public function get mName():String {
+            return "Human Bones";
+        }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -25,25 +27,13 @@ public class HumanBonesMutation extends IMutationPerkType
                 descS += "10. Increase effects of body cultivation by 50%.";
             }
             if (pTier == 3){
-                descS += "10, maximum trainable Int/Wis by 20%. Increase effects of body cultivation by 50%. ";
+                descS += "10, maximum trainable Str/Tou by 20%. Increase effects of body cultivation by 100%.";
             }
+            if (pTier == 4){
+                descS += "20, maximum trainable Str/Tou by 30%. Increase effects of body cultivation by 150%. Increase p.soulskill power by 100% and +10% to max overhp.";
+            }
+            if (pTier >= 1) descS += " (req. 18+ human score to have all effects active)";
             return descS;
-        }
-
-        //Name. Need it say more?
-        override public function name(params:PerkClass=null):String {
-            var sufval:String;
-            switch (currentTier(this, player)){
-                case 2:
-                    sufval = "(Primitive)";
-                    break;
-                case 3:
-                    sufval = "(Evolved)";
-                    break;
-                default:
-                    sufval = "";
-            }
-            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -82,12 +72,16 @@ public class HumanBonesMutation extends IMutationPerkType
 				pBuffs['str.mult'] = 0.4;
 				pBuffs['tou.mult'] = 0.4;
 			}
+            if (pTier == 4) {
+				pBuffs['str.mult'] = 0.8;
+				pBuffs['tou.mult'] = 0.8;
+			}
             return pBuffs;
         }
 
         public function HumanBonesMutation() 
 		{
-			super(mName + " IM", mName, SLOT_BONE, 3);
+			super(mName + " IM", mName, SLOT_BONE, 4);
 		}
 		
 	}

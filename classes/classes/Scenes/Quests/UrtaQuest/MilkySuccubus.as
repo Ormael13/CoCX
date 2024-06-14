@@ -80,12 +80,12 @@ use namespace CoC;
 		}
 
 
-		override public function teased(lustDelta:Number, isNotSilent:Boolean = true):void
+		override public function teased(lustDelta:Number, isNotSilent:Boolean = true, display:Boolean = true):void
 		{
 			outputText(capitalA + short + " smiles, rubbing her hands across herself as she watches your display.  She does not seem greatly affected by your show - at least in the sense of increasing arousal.  She does seem oddly more... vital, as if she drew strength from the very display you put on.");
 			this.statStore.addBuff("str", 5, "DispelablePowerUP",{});
 			addHP(50);
-			applyTease(lustDelta);
+			applyTease(lustDelta, display);
 		}
 
 		public function MilkySuccubus()
@@ -112,7 +112,6 @@ use namespace CoC;
 			this.weaponName = "whip";
 			this.weaponVerb="whipping";
 			this.weaponAttack = 34;
-			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "demonic skin";
 			this.armorDef = 22;

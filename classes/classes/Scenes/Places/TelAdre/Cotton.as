@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.Places.TelAdre {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
@@ -42,7 +43,7 @@ private function pregCottonChance(bonusMult:Number = 1):void {
 	//Okay, we have a chance!  Run the numbers!
 	//Herbs off?  Good chances!
 	if (flags[kFLAGS.COTTON_HERBS_OFF] > 0) {
-		if (rand(5) == 0 || player.cumQ() > rand(1000) || player.virilityQ() >= 0.5) {
+		if (rand(5) == 0 || player.cumQ() > rand(1000) || player.virilityQ() >= 0.5 || player.hasPerk(PerkLib.PilgrimsBounty)) {
 			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_COTTON);
 			if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Cotton is pregnant!</b>");
 		}
@@ -51,13 +52,13 @@ private function pregCottonChance(bonusMult:Number = 1):void {
 	else {
 		//First kid is lucky!
 		if (flags[kFLAGS.COTTON_KID_COUNT] == 0) {
-			if (rand(5) == 0 || player.cumQ() * player.virilityQ() >= rand(1000)) {
+			if (rand(5) == 0 || player.cumQ() * player.virilityQ() >= rand(1000) || player.hasPerk(PerkLib.PilgrimsBounty)) {
 				pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_COTTON);
 				if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Cotton is pregnant!</b>");
 			}
 		}
 		//NOT FIRST KID - LESS LUCKY!
-		else if (player.cumQ() * player.virilityQ() >= rand(1000)) {
+		else if (player.cumQ() * player.virilityQ() >= rand(1000) || player.hasPerk(PerkLib.PilgrimsBounty)) {
 			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_COTTON);
 			if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Cotton is pregnant!</b>");
 		}
@@ -212,7 +213,7 @@ private function acceptYoga():void {
 	spriteSelect(SpriteDb.s_cotton);
 	clearOutput();
 	outputText(images.showImage("cotton-yoga"));
-	if(player.fatigue > player.maxFatigue() - 20) {
+	if(player.fatigue > player.maxOverFatigue() - 20) {
 		outputText("You're way too tired to do any yoga right now.");
 		doNext(telAdre.telAdreMenu);
 		return;
@@ -1306,6 +1307,7 @@ public function goTellCottonShesAMomDad():void {
 //Birthing*
 public function birthingCottonsKids():void {
 	var kid:int = rand(3) + 1; //1,2,3
+	if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) kid *= 2; 
 	function kidSel(male:String, fem:String, herm:String = ""):String {
 		return kid == 1 ? male : kid == 2 || !herm ? fem : herm;
 	}

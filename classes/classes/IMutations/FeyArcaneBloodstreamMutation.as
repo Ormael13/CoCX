@@ -11,7 +11,9 @@ import classes.Races;
 
 public class FeyArcaneBloodstreamMutation extends IMutationPerkType
     {
-        private static const mName:String = "Fey Arcane Bloodstream";
+        override public function get mName():String {
+            return "Fey Arcane Bloodstream";
+        }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -26,29 +28,10 @@ public class FeyArcaneBloodstreamMutation extends IMutationPerkType
                 descS += ", and increase said damage by 50%";
             }
             if (pTier >= 4){
-                descS += ". When using an ability with random effects the spell now attempts to activate each effect twice";
+                descS += ". When using an ability with random effects, the impact of the effects are doubled";
             }
             if (descS != "")descS += ".";
             return descS;
-        }
-
-        //Name. Need it say more?
-        override public function name(params:PerkClass=null):String {
-            var sufval:String;
-            switch (currentTier(this, player)){
-                case 2:
-                    sufval = "(Primitive)";
-                    break;
-                case 3:
-                    sufval = "(Evolved)";
-                    break;
-                case 4:
-                    sufval = "(Final Form)";
-                    break;
-                default:
-                    sufval = "";
-            }
-            return mName + sufval;
         }
 
         override public function evolveText():String {
@@ -81,6 +64,7 @@ public class FeyArcaneBloodstreamMutation extends IMutationPerkType
             if (pTier == 1) pBuffs['int.mult'] = 0.05;
             if (pTier == 2) pBuffs['int.mult'] = 0.15;
             if (pTier == 3) pBuffs['int.mult'] = 0.35;
+            if (pTier == 4) pBuffs['int.mult'] = 0.75;
             return pBuffs;
         }
 

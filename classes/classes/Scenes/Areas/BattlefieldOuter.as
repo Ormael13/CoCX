@@ -12,6 +12,7 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Battlefield.*;
+import classes.Scenes.Camp.CampStatsAndResources;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
@@ -78,7 +79,7 @@ public class BattlefieldOuter extends BaseContent
 			kind  : 'npc',
 			unique: true,
 			when: function ():Boolean {
-				return player.level >= 45 && TyrantiaFollower.TyrantiaFollowerStage < 4 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame && !player.hasStatusEffect(StatusEffects.SpoodersOff)
+				return TyrantiaFollower.TyrantiaFollowerStage < 4 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame && !player.hasStatusEffect(StatusEffects.SpoodersOff)
 			},
 			chance: battlefieldOuterChance,
 			call: tyrantiaEncounterFn
@@ -252,8 +253,8 @@ public class BattlefieldOuter extends BaseContent
 		var mpa:Number = 3 + rand(3);
 		outputText("While exploring the battlefield you find the remains of some metal scraps. At first you think you won't find anything useful there but a metal plates draws your attention, it could be useful later. You put the item in your backpack and head back to camp.\n\n");
 		outputText("<b>You found "+mpa+" metal plates.</b>");
-		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += mpa;
-		outputText("<b>(Metal plates: "+flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES]+"/200 total)</b>");//"+SceneLib.campUpgrades.checkMaterialsCapStones()+"
+		CampStatsAndResources.MetalPieces += mpa;
+		outputText("<b>(Metal plates: "+CampStatsAndResources.MetalPieces+"/200 total)</b>");//"+SceneLib.campUpgrades.checkMaterialsCapStones()+"
 		endEncounter();
 	}
 

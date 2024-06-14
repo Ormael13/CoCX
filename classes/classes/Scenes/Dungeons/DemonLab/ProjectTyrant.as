@@ -9,6 +9,8 @@ import classes.BodyParts.Horns;
 import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
+import coc.view.CoCButton;
+
 public class ProjectTyrant extends Monster {
 
     public function ProjectTyrant() {
@@ -34,7 +36,7 @@ public class ProjectTyrant extends Monster {
         this.lust = 50;
         this.level = 60;
         this.gems = rand(550) + 175;
-        this.drop = new WeightedDrop().add(useables.T_SSILK, 5).add(consumables.LETHITE, 2).add(jewelries.POWRRNG, 1);
+        this.drop = new WeightedDrop().add(useables.T_SSILK, 5).add(consumables.LETHITE, 3).add(consumables.LETH1TE, 2).add(jewelries.POWRRNG, 1);
         this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
         this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
         this.createPerk(PerkLib.ToughHide, 0, 0, 0, 0);
@@ -128,9 +130,19 @@ public class ProjectTyrant extends Monster {
             dmg1 += eBaseIntelligenceDamage() * 0.2;
             dmg1 = Math.round(dmg1);
             player.takeAcidDamage(dmg1, true);
-            if (player.hasStatusEffect(StatusEffects.AcidDoT)) player.addStatusValue(StatusEffects.AcidDoT, 1, 1);
-            else player.createStatusEffect(StatusEffects.AcidDoT, 3, 10, 0, 0);
+            if (!player.immuneToAcid()) {
+                if (player.hasStatusEffect(StatusEffects.AcidDoT)) player.addStatusValue(StatusEffects.AcidDoT, 1, 1);
+                else player.createStatusEffect(StatusEffects.AcidDoT, 3, 10, 0, 0);
+            }
             player.buff("Goop Web").addStats({"spe": -25}).withText("Goop Web").combatPermanent();
+        }
+    }
+
+    override public function changeBtnWhenBound(btnStruggle:CoCButton, btnBoundWait:CoCButton):void{
+        if (player.hasStatusEffect(StatusEffects.Pounced)) {
+            outputText("You are pinned underneath the Drider-beast’s weight, and it begins to crush you!");
+            btnStruggle.call(TackleGrappleStruggle);
+            btnBoundWait.call(TackleGrappleWait);
         }
     }
 

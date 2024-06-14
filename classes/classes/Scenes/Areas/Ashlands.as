@@ -11,6 +11,7 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Ashlands.*;
+import classes.Scenes.Areas.Lake.SwordInStone;
 import classes.Scenes.Areas.Forest.AlrauneScene;
 import classes.Scenes.Areas.HighMountains.PhoenixScene;
 import classes.Scenes.NPCs.Forgefather;
@@ -23,6 +24,7 @@ public class Ashlands extends BaseContent
 	public var phoenixScene:PhoenixScene = new PhoenixScene();
 	public var alrauneScene:AlrauneScene = new AlrauneScene();
 	public var hellcatScene:HellCatScene = new HellCatScene();
+	public var swordInStone:SwordInStone = new SwordInStone();
 
 	public function Ashlands() {
 		onGameInit(init);
@@ -51,6 +53,16 @@ public class Ashlands extends BaseContent
 			unique: true,
 			when: SceneLib.volcanicCrag.canDiscover,
 			call: discoverCrags
+		},{
+			name: "tombstone",
+			label : "Tombstone",
+			kind  : 'event',
+			chance: 0.5,
+			unique: true,
+			when: function():Boolean {
+				return !player.hasStatusEffect(StatusEffects.TookVolcanicGravehammer) && !player.hasStatusEffect(StatusEffects.VolcanicGravehammerNever);
+			},
+			call: swordInStone.findVolcanicGravehammer
 		}, {
 			name: "phoenix",
 			label : "Quasi-Phoenix",
@@ -193,7 +205,7 @@ public class Ashlands extends BaseContent
 		if (Forgefather.materialsExplained != 1) endEncounter();
 		else {
 			clearOutput();
-			if (player.fatigue > player.maxFatigue() - 50) {
+			if (player.fatigue > player.maxOverFatigue() - 50) {
 				outputText("\n\n<b>You are too tired to consider mining. Perhaps some rest will suffice?</b>");
 				endEncounter();
 				return;
@@ -214,7 +226,7 @@ public class Ashlands extends BaseContent
 				player.mineXP(player.MiningMulti() * 2);
 			}
 			else {
-				outputText("After attempt to mine Rubies you ended with unusable piece.");
+				outputText("After attempting to mine Rubies, you ended up with only unusable pieces.");
 				endEncounter(120);
 			}
 		}

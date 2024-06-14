@@ -1,0 +1,141 @@
+# This workflow will build a Java project with Ant
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-ant
+
+name: ActionScript 3 CI
+
+# Github workflows do not support actionscript directly.
+# However the build uses ant, which is usually used to build java projects.
+# The ant task (mxmlc) provided by the flex SDK (ant/lib/flexTasks.jar) is used to build the project.
+permissions:
+  contents: write
+
+on:
+  #Pushes/changes to CoC.as should trigger this. Which should basically only consist of version updates, and maybe the rare settings change.
+  push:
+    paths:
+      - 'classes/classes/CoC.as'
+  #Manual trigger run. Only works once this is in the main branch.
+  workflow_dispatch:
+  #Scheduled run. Only works once this is in the main branch.
+  schedule:
+    - cron: "0 22 * * *"
+
+env:
+  # tell the build file where to find the flex SDK
+  FLEX_HOME: "C:/ApacheFlexSDK"
+  # this is to trick the flash player into thinking it is running on a desktop
+  DISPLAY: ":1"
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Cache FlexSDK Install
+        uses: actions/cache@v4
+        with:
+          key: apache-stuff
+          path: |
+            C:/ApacheFlexSDK
+        id: "cacheme"
+
+        #handle cache failed
+      - if: ${{ steps.cacheme.outputs.cache-hit != 'true' }}
+        name: Install Flex SDK
+        uses: joshtynjala/setup-apache-flex-action@v2
+        with:
+          flex-version: "4.16.1"
+          air-version: "33.1.1.345"
+          accept-air-license: true
+
+      # this is where the build happens. A separate build is started for every entry in the matrix element
+      - name: Build
+        run: ant allCI
+
+      - name: Save Debug SWF
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-swf
+          path: target/CoC-debug.swf
+
+      - name: Save Release SWF
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-swf
+          path: target/CoC-release.swf
+
+      - name: Save Android armv7 Beta APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: CoC-Mobile-Beta-32bit
+          path: target/CoC-Mobile-Beta-32bit.apk
+
+      - name: Save Android armv8 Beta APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: CoC-Mobile-Beta-64bit
+          path: target/CoC-Mobile-Beta-64bit.apk
+
+      - name: Save Android armv7 Release APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: CoC-Mobile-Release-32bit
+          path: target/CoC-Mobile-Release-32bit.apk
+
+      - name: Save Android armv8 Release APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: CoC-Mobile-Release-64bit
+          path: target/CoC-Mobile-Release-64bit.apk
+
+      # discord notifier to tell us if build succeeded or failed, and the link to download the artifacts.
+      - name: Discord notification to channel
+        uses: sarisia/actions-status-discord@v1
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+        continue-on-error: true
+
+#      - name: Release step
+#        uses: softprops/action-gh-release@v1
+#        if: startsWith(github.ref, 'refs/tags/')
+#        with:
+#          generate_release_notes: true
+#          files: |
+#            target/CoC-Mobile-Beta-32bit.apk
+#            target/CoC-Mobile-Beta-64bit.apk
+#            target/CoC-Mobile-Release-32bit.apk
+#            target/CoC-Mobile-Release-64bit.apk
+#            target/CoC-release.swf
+#            target/CoC-debug.swf
+#
+#        #cleanup only keep last 5 true releases
+#      - name: cleanup older true releases
+#        uses: dev-drprasad/delete-older-releases@v0.3.2
+#        if: startsWith(github.ref, 'refs/tags/')
+#        with:
+#          keep_latest: 5
+#          delete_tag_pattern: ^(?!.*-beta$).*$
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#
+#        #cleanup only keep last 5 beta releases
+#      - name: cleanup older beta releases
+#        uses: dev-drprasad/delete-older-releases@v0.3.2
+#        if: startsWith(github.ref, 'refs/tags/')
+#        with:
+#          keep_latest: 5
+#          delete_tag_pattern: .*-beta$
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

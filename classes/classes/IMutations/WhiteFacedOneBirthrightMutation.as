@@ -12,7 +12,9 @@ import classes.Races;
 
 public class WhiteFacedOneBirthrightMutation extends IMutationPerkType
 	{
-		private static const mName:String = "White-Faced One Birthright";
+        override public function get mName():String {
+            return "White-Faced One Birthright";
+        }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -80,25 +82,6 @@ public class WhiteFacedOneBirthrightMutation extends IMutationPerkType
             return descS;
         }
 
-        //Name. Need it say more?
-        override public function name(params:PerkClass=null):String {
-            var sufval:String;
-            switch (currentTier(this, player)){
-                case 2:
-                    sufval = "(Primitive)";
-                    break;
-                case 3:
-                    sufval = "(Evolved)";
-                    break;
-                case 4:
-                    sufval = "(Final Form)";
-                    break;
-                default:
-                    sufval = "";
-            }
-            return mName + sufval;
-        }
-
         //Mutation Requirements
         override public function pReqs(pCheck:int = -1):void{
             try{
@@ -138,9 +121,9 @@ public class WhiteFacedOneBirthrightMutation extends IMutationPerkType
                 pBuffs['wis.mult'] = 0.2;
             }
             else if (pTier == 4){
-                pBuffs['str.mult'] = 0.15;
                 pBuffs['spe.mult'] = 0.15;
-                pBuffs['tou.mult'] = 0.42;
+                pBuffs['tou.mult'] = 0.15;
+                pBuffs['wis.mult'] = 0.42;
             }
             return pBuffs;
         }

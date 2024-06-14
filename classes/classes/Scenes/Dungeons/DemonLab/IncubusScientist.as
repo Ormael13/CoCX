@@ -110,6 +110,14 @@ public class IncubusScientist extends Monster {
         createPerk(PerkLib.GreaterEvade, 0, 0, 0, 0);
     }
 
+    override public function midAttackSeal():Boolean{
+        if (ShieldHits > 0) {
+            ShieldsHitMelee();
+            return false;
+        }
+        return true;
+    }
+
     override public function defeated(hpVictory:Boolean):void {
         if (DungeonAbstractContent.dungeonLoc == DungeonAbstractContent.DUNGEON_LAB_ENTRANCE) SceneLib.dungeons.demonLab.AfterFirstFight();
         else cleanupAfterCombat();

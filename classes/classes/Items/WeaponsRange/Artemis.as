@@ -1,7 +1,7 @@
 package classes.Items.WeaponsRange 
 {
 	import classes.Items.WeaponRange;
-	import classes.Player;
+		import classes.Player;
 	
 	/**
 	 * ...
@@ -16,6 +16,7 @@ package classes.Items.WeaponsRange
 					"The white sandalwood of this blessed bow seems to draw light in. The radiant arrows fired with this holy weapon strike true as if guided by divine hands.",
 					"Bow"
 			);
+			withTag(I_LEGENDARY);
 		}
 		override public function get attack():Number{
 			var boost:int = 0;
@@ -30,12 +31,6 @@ package classes.Items.WeaponsRange
 			}
 			boost += Math.round((100 - game.player.cor) / scal);
 			return (27 + boost);
-		}
-		
-		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.level >= 54) return super.canEquip(doOutput);
-			if(doOutput) outputText("You try and wield the legendary bow but to your disapointment the item simply refuse to stay in your hands. It would seem you yet lack the power and right to wield this item.");
-			return false;
 		}
 		
 	}

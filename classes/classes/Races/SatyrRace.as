@@ -1,9 +1,14 @@
 package classes.Races {
+import classes.BodyData;
 import classes.BodyParts.*;
+import classes.IMutations.IMutationsLib;
 import classes.CockTypesEnum;
 import classes.Race;
+import classes.VaginaClass;
 
 public class SatyrRace extends Race {
+    public static const SatyrHairColors:/*String*/Array = ["red", "mahogany", "brown"];
+    public static const SatyrFurColors:/*String*/Array = ["red", "mahogany", "brown"];
     public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
         /*Arms*/		"Human",
@@ -38,18 +43,48 @@ public class SatyrRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				.legType(LowerBody.HOOFED, +1)
-				.tailType(Tail.GOAT, +1)
-				.earType(Ears.ELFIN, +1);
-		addScoresAfter(3)
+				.hornType(ANY(Horns.GOAT, Horns.GOATQUAD), +1)
+				.eyeType(Eyes.GOAT, +1)
+				.eyeColor("golden", +1)
+				.skinPlainOnly(+1)
 				.faceType(Face.HUMAN, +1)
-				.hasCockOfType(CockTypesEnum.HUMAN, +1)
-				.ballSize(AT_LEAST(3), +1);
+				.hairType(Hair.NORMAL, +1)
+				.hairColor1(ANY(SatyrHairColors), +1)
+				.furColor01(ANY(SatyrFurColors), +1)
+				.earType(Ears.ELFIN, +1)
+				.tongueType(Tongue.ELF, +1)
+				.armType(Arms.SATYR, +1)
+				.tailType(Tail.GOAT, +1)
+				.legType(LowerBody.CLOVEN_HOOFED, +1)
+				.customRequirement("", "High Masculinity Satyr",
+						function (body:BodyData):Boolean {
+							return (body.player.femininity < 50 && body.player.hasCock())
+						}, +1)
+				.customRequirement("", "High Feminity Faun",
+						function (body:BodyData):Boolean {
+							return (body.player.femininity > 50 && body.player.hasVagina())
+						}, +1)
+				.cockOrVaginaOfType(CockTypesEnum.HUMAN,VaginaClass.HUMAN, +1);
 		
-		buildTier(4,"satyr")
+		addMutation(IMutationsLib.MelkieLungIM);
+		
+		buildTier(12,"satyr")
+				.namesMaleFemale("satyr", "faun")
 				.buffs({
-					"str.mult": +0.05,
-					"spe.mult": +0.05
+					"str.mult": +0.50,
+					"tou.mult": +0.40,
+					"lib.mult": +1.50,
+					"sens": +60
+				})
+				.end();
+		
+		buildTier(18,"elder satyr")
+				.namesMaleFemale("elder satyr", "elder faun")
+				.buffs({
+					"str.mult": +0.85,
+					"tou.mult": +0.70,
+					"lib.mult": +1.75,
+					"sens": +60
 				})
 				.end();
 	}

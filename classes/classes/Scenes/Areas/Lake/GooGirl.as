@@ -17,10 +17,11 @@ public class GooGirl extends Monster
 		 */
 		
 		
-		override public function postPlayerAbility(ability:CombatAbility):void {
+		override public function postPlayerAbility(ability:CombatAbility, display:Boolean = true):void {
 			//[Using fire attacks on the goo]
 			if (ability.hasTag(CombatAbility.TAG_DAMAGING) && ability.hasTag(CombatAbility.TAG_FIRE)) {
-				outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + bodyColor + " skin has lost some of its shimmer.");
+				if (display) outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture." + 
+					" When the fire passes, she seems a bit smaller and her slimy " + bodyColor + " skin has lost some of its shimmer.");
 				if(!hasPerk(PerkLib.Acid)) createPerk(PerkLib.Acid,0,0,0,0);
 			}
 		}
@@ -125,7 +126,7 @@ public class GooGirl extends Monster
 			}
 		}
 
-		override public function teased(lustDelta:Number, isNotSilent:Boolean = true):void
+		override public function teased(lustDelta:Number, isNotSilent:Boolean = true, display:Boolean = true):void
 		{
 			if (lust <= maxLust() * 0.99) {
 				if (lustDelta <= 0) outputText("\nThe goo-girl looks confused by your actions, as if she's trying to understand what you're doing.");
@@ -133,7 +134,7 @@ public class GooGirl extends Monster
 				else outputText("\nThe girl begins to understand your intent. She opens and closes her mouth, as if panting, while she works slimy fingers between her thighs and across her jiggling nipples.");
 			}
 			else outputText("\nIt appears the goo-girl has gotten lost in her mimicry, squeezing her breasts and jilling her shiny " + bodyColor + " clit, her desire to investigate you forgotten.");
-			applyTease(lustDelta);
+			applyTease(lustDelta, display);
 		}
 
 		public function GooGirl(noInit:Boolean = false)

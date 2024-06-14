@@ -73,7 +73,7 @@ public class MinotaurKingScenes extends BaseContent
 
         private function recruitExcellia():void {
 			clearOutput();
-			if (SceneLib.shouldraFollower.followerShouldra()) {
+			if (SceneLib.shouldraFollower.followerShouldra() && !player.hasStatusEffect(StatusEffects.ShouldraOff)) {
 				outputText("You ask your ghostly partner to take care of the cow slut and help her find her way to the camp. This place will become a huge mess soon.");
 				outputText("\n\n<i>\"But... I wanted to watch your fight with Lettice! Maybe you'll even got a chance to... ah, never mind.\"</i>");
 				outputText("\n\nShouldra clearly doesn't want to leave you, but you insist - someone has to show the way to the poor cowgirl. And you obviously can't do it right now.\n\n");

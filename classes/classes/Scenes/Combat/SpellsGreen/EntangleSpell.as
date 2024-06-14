@@ -10,7 +10,7 @@ public class EntangleSpell extends AbstractGreenSpell {
 			"Entangle your opponent with vines. Does not hinder other elven spellcasting.",
 			TARGET_ENEMY,
 			TIMING_LASTING,
-			[TAG_LUSTDMG]);
+			[TAG_DEBUFF, TAG_TIER2]);
 		baseManaCost = 100;
 	}
 	
@@ -19,15 +19,7 @@ public class EntangleSpell extends AbstractGreenSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~"+calcDamage(target, false, false)+" lust poison damage for "+numberOfThings(calcDuration(),"round");
-	}
-	
-	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
-		var baseDamage:Number = (combat.teases.teaseBaseLustDamage() * 3 * spellModGreen());
-		if (player.hasPerk(PerkLib.VegetalAffinity)) baseDamage *= 1.5;
-		if (player.hasPerk(PerkLib.GreenMagic)) baseDamage *= 2;
-		if (player.hasStatusEffect(StatusEffects.GreenCovenant)) baseDamage *= 2;
-		return adjustLustDamage(baseDamage, monster, CAT_SPELL_GREEN, randomize);
+		return "Constricts the enemy with vines";
 	}
 	
 	override public function calcCooldown():int {
@@ -49,7 +41,7 @@ public class EntangleSpell extends AbstractGreenSpell {
 		return player.statusEffectv1(StatusEffects.Entangled) > 0;
 	}
 	
-	public function calcDuration():int {
+	override public function calcDuration():int {
 		var dura:Number = 6;
 		if (player.hasPerk(PerkLib.GreenMagic)) dura *= 2;
 		return dura;

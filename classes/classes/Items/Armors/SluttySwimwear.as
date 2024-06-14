@@ -5,8 +5,7 @@ package classes.Items.Armors
 {
 	import classes.Items.Armor;
 	import classes.Items.ArmorLib;
-import classes.Items.ItemTags;
-import classes.PerkLib;
+	import classes.PerkLib;
 	import classes.Player;
 
 	public class SluttySwimwear extends Armor {
@@ -14,8 +13,8 @@ import classes.PerkLib;
 		public function SluttySwimwear() {
 			super("S.Swmwr", "S.Swmwr", "slutty swimwear", "a skimpy black bikini", 0, 0, 40, "An impossibly skimpy black bikini. You feel dirty just looking at it... and a little aroused, actually.", "Light", true, false);
 			withBuffs({'teasedmg':6});
-			withTag(ItemTags.A_REVEALING);
-			withTag(ItemTags.A_AGILE);
+			withTag(A_REVEALING);
+			withTag(A_AGILE);
 		}
 		
 		override public function equipText():void {

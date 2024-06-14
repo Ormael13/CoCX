@@ -7,6 +7,7 @@ package classes.Scenes.Camp
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.Scenes.Combat.CombatAbilities;
 
 public class CampMakeWinions extends BaseContent
 	{
@@ -163,11 +164,11 @@ public class CampMakeWinions extends BaseContent
 			clearOutput();
 			outputText("What helper would you like to make?\n\n");
 			outputText("<b>Stored golem cores for future reuse when making new golems:</b> " + flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] + " / " + maxReusableGolemCoresBagSize() + "\n");
-			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory) || player.hasPerk(PerkLib.EpicGolemMaker)) outputText("<b>Energy Cores:</b> " + flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] + "\n");
-			outputText("<b>Stones:</b> " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "\n");
+			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory) || player.hasPerk(PerkLib.EpicGolemMaker)) outputText("<b>Energy Cores:</b> " + CampStatsAndResources.EnergyCoreResc + "\n");
+			outputText("<b>Stones:</b> " + CampStatsAndResources.StonesResc + "\n");
 			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) {
-				outputText("<b>Metal Pieces:</b> " + flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] + "\n");
-				outputText("<b>Mechanisms:</b> " + flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] + "\n");
+				outputText("<b>Metal Pieces:</b> " + CampStatsAndResources.MetalPieces + "\n");
+				outputText("<b>Mechanisms:</b> " + CampStatsAndResources.MechanismResc + "\n");
 			}
 			if (player.hasPerk(PerkLib.JobGolemancer)) outputText("\n<b>Temporal Golems Bag:</b> " + flags[kFLAGS.TEMPORAL_GOLEMS_BAG] + " / " + maxTemporalGolemsBagSize() + " golems\n");
 			if (player.hasPerk(PerkLib.MasterGolemMaker)) outputText("<b>Stone Golems Bag:</b> " + flags[kFLAGS.PERMANENT_GOLEMS_BAG] + " / " + maxPermanentStoneGolemsBagSize() + " golems\n");
@@ -300,7 +301,7 @@ public class CampMakeWinions extends BaseContent
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
-			else if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] < 10) {
+			else if (CampStatsAndResources.StonesResc < 10) {
 				outputText("You lack high quality stones to use as the body for your new golem.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
@@ -313,7 +314,7 @@ public class CampMakeWinions extends BaseContent
 			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 0) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]--;
 			else player.destroyItems(useables.GOLCORE, 1);
 			if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0 && player.hasItem(useables.ELSHARD, 1)) player.destroyItems(useables.ELSHARD, 1);
-			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 10;
+			CampStatsAndResources.StonesResc -= 10;
 			useMana(permanentStoneGolemMakingCost());
 			statScreenRefresh();
 			outputText("You draw a seal in the ground around the pile of high quality stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
@@ -334,7 +335,7 @@ public class CampMakeWinions extends BaseContent
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
-			else if (flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 1) {
+			else if (CampStatsAndResources.EnergyCoreResc < 1) {
 				outputText("You don't have an energy core. No power, no golem.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
@@ -344,7 +345,7 @@ public class CampMakeWinions extends BaseContent
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
-			else if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] < 50) {
+			else if (CampStatsAndResources.StonesResc < 50) {
 				outputText("You lack high quality stones to use as body for your new golem.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
@@ -356,9 +357,9 @@ public class CampMakeWinions extends BaseContent
 			}
 			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 3) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] -= 3;
 			else player.destroyItems(useables.GOLCORE, 3);
-			flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] -= 1;
+			CampStatsAndResources.EnergyCoreResc -= 1;
 			if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0 && player.hasItem(useables.ELSHARD, 1)) player.destroyItems(useables.ELSHARD, 1);
-			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 50;
+			CampStatsAndResources.StonesResc -= 50;
 			useMana(permanentImprovedStoneGolemMakingCost());
 			statScreenRefresh();
 			outputText("You draw a seal in the ground around the pile of high quality stones, which were arranged in the form of a gigantic four armed shape. Once done you put the energy core in the upper section of the torso and golem cores in a pile at the golem's future chest in a triangle formation. You stand back and begin to seep your mana toward the laying stones. ");
@@ -380,7 +381,7 @@ public class CampMakeWinions extends BaseContent
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
-			else if (flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 2) {
+			else if (CampStatsAndResources.EnergyCoreResc < 2) {
 				outputText("You lack energy cores.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
@@ -390,12 +391,12 @@ public class CampMakeWinions extends BaseContent
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
-			else if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] < 10) {
+			else if (CampStatsAndResources.MetalPieces < 10) {
 				outputText("You don't have enough metal to make a new golem.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
-			else if (flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] < 4) {
+			else if (CampStatsAndResources.MechanismResc < 4) {
 				outputText("You lack mechanisms for your new golem body.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
@@ -407,10 +408,10 @@ public class CampMakeWinions extends BaseContent
 			}
 			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 0) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]--;
 			else player.destroyItems(useables.GOLCORE, 1);
-			flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] -= 2;
+			CampStatsAndResources.EnergyCoreResc -= 2;
 			if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0 && player.hasItem(useables.ELSHARD, 1)) player.destroyItems(useables.ELSHARD, 1);
-			flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 10;
-			flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] -= 4;
+			CampStatsAndResources.MetalPieces -= 10;
+			CampStatsAndResources.MechanismResc -= 4;
 			useMana(permanentSteelGolemMakingCost());
 			statScreenRefresh();
 			outputText("You draw a seal in the ground, and inside, you delicately place a golem core, wrapping it in metal pieces. Mechanisms branch out, forming a rough torso, and you attach golem cores throughout the frame, ending with humanoid arms and legs, wrapped in solid metal. You stand back, examining your handiwork for a moment, before splaying your fingers out over it. You pull mana through your body, tendrils of power lancing into the now clattering metal frame.");
@@ -432,7 +433,7 @@ public class CampMakeWinions extends BaseContent
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
-			else if (flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 6) {
+			else if (CampStatsAndResources.EnergyCoreResc < 6) {
 				outputText("Your new creation will need power, and you don't have enough cores for it!");
 				doNext(accessMakeWinionsMainMenu);
 				return;
@@ -442,12 +443,12 @@ public class CampMakeWinions extends BaseContent
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
-			else if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] < 50) {
+			else if (CampStatsAndResources.MetalPieces < 50) {
 				outputText("Your metal reserves are low. You'll need to find some more before you can make more golems.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
-			else if (flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] < 12) {
+			else if (CampStatsAndResources.MechanismResc < 12) {
 				outputText("You lack the mechanisms for your new golem.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
@@ -459,10 +460,10 @@ public class CampMakeWinions extends BaseContent
 			}
 			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 3) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] -= 3;
 			else player.destroyItems(useables.GOLCORE, 3);
-			flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] -= 6;
+			CampStatsAndResources.EnergyCoreResc -= 6;
 			if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0 && player.hasItem(useables.ELSHARD, 1)) player.destroyItems(useables.ELSHARD, 1);
-			flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 50;
-			flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] -= 12;
+			CampStatsAndResources.MetalPieces -= 50;
+			CampStatsAndResources.MechanismResc -= 12;
 			useMana(permanentSteelGolemMakingCost());
 			statScreenRefresh();
 			outputText("You draw a seal in the ground around the body of your future servant. All parts are put in precise place be it mechanisms or each energy cores hidden beneath metal plates. Once done you put golem cores at the golem's future chest in a triangle formation and cover them with last two metal plates. You stand back and begin to seep your mana toward the laying parts as it begin to connect ");
@@ -506,8 +507,8 @@ public class CampMakeWinions extends BaseContent
 			}
 			if (player.hasStatusEffect(StatusEffects.GolemUpgrades1)) var impMC:Number = player.statusEffectv2(StatusEffects.GolemUpgrades1);
 			outputText("You takes out the 'Golems, Animations and You' manual from your bag and opening it at index. Which one upgrade should you apply to your golems?\n\n");
-			outputText("<b>Stones:</b> " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "\n");
-			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) outputText("<b>Metal Pieces:</b> " + flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] + "\n");
+			outputText("<b>Stones:</b> " + CampStatsAndResources.StonesResc + "\n");
+			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) outputText("<b>Metal Pieces:</b> " + CampStatsAndResources.MetalPieces + "\n");
 			outputText("\n<u>Index of upgrades:</u>\n");
 			outputText("\n-Multi Attacks (Rank: "+(player.hasStatusEffect(StatusEffects.GolemUpgrades1)?""+player.statusEffectv1(StatusEffects.GolemUpgrades1)+"":"0")+") (Passive)");
 			outputText("\n-Improved Mana Circuit (Rank: "+(player.hasStatusEffect(StatusEffects.GolemUpgrades1)?""+impMC+"":"0")+") (-"+(player.hasStatusEffect(StatusEffects.GolemUpgrades1)?""+impMC*15+"":"0")+"% req. mana for activation, +"+(player.hasStatusEffect(StatusEffects.GolemUpgrades1)?""+impMC*25+"":"0")+"% base dmg) (Passive)");
@@ -732,12 +733,12 @@ public class CampMakeWinions extends BaseContent
 			outputText("You sit down by the golem and begin extracting the core from the big chunk that remains of its chest. ");
 			if (rand(4) == 0 || player.hasPerk(PerkLib.JobGolemancer) || player.isTechSavvyPC()) {
 				outputText("At first the core resist but after a few tries you successfully manage to harvest the golem core. Not one to waste spare material you gather the remaining stone. (+2 stones)");
-				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += 2;
+				CampStatsAndResources.StonesResc += 2;
 				doNext(takeCore);
 			}
 			else {
 				outputText("Sadly despite your best efforts the core is damaged during the extraction and rendered useless. Not one to waste spare material you gather the remaining stone. (+5 stones)");
-				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += 5;
+				CampStatsAndResources.StonesResc += 5;
 				doNext(cleanupAfterCombat);
 			}
 		}
@@ -747,12 +748,12 @@ public class CampMakeWinions extends BaseContent
 			player.addStatusValue(StatusEffects.GolemScavenge, 1, -1);
 			if (rand(4) == 0 || player.statusEffectv1(StatusEffects.GolemScavenge) == 0 || player.hasPerk(PerkLib.JobGolemancer) || player.isTechSavvyPC()) {
 				outputText("At first the core resist but after a few tries you successfully manage to harvest the golem core. Not one to waste spare material you gather the remaining stone. (+2 stones)");
-				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += 2;
+				CampStatsAndResources.StonesResc += 2;
 				doNext(takeCore);
 			}
 			else {
 				outputText("Sadly despite your best efforts the core is damaged during the extraction and rendered useless. Not one to waste spare material you gather the remaining stone. (+5 stones)");
-				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += 5;
+				CampStatsAndResources.StonesResc += 5;
 				if (player.hasStatusEffect(StatusEffects.GolemScavenge)) doNext(golemScavenge4);
 				else doNext(cleanupAfterCombat);
 			}
@@ -1456,7 +1457,7 @@ public class CampMakeWinions extends BaseContent
 			if (rankUpElementalManaCost()*elemLvl > player.mana){
 				addButtonDisabled(0, btnName,"You don't have enough Mana within you. Try again when you have "+ rankUpElementalManaCost()*elemLvl +" stored up!");
 			}
-			else if(player.maxFatigue() <= (player.fatigue + rankUpElementalFatigueCost()*elemLvl)){
+			else if(player.maxOverFatigue() <= (player.fatigue + rankUpElementalFatigueCost()*elemLvl)){
 				addButtonDisabled(0, btnName,"You are too tired to attempt this. Try again when you have more energy!");
 			}
 			else{
@@ -1526,9 +1527,9 @@ public class CampMakeWinions extends BaseContent
 				else addButtonDisabled(10, "1K", "You not have enough (10,000) SF for conversion.");
 				if (player.soulforce >= 20000) addButton(11, "2K", soulforceConversionGo, 2000).hint("Convert 20,000 SF into 2,000 EE");
 				else addButtonDisabled(11, "2K", "You not have enough (20,000) SF for conversion.");
-				if (player.soulforce >= 10000) addButton(12, "5K", soulforceConversionGo, 5000).hint("Convert 50,000 SF into 5,000 EE");
+				if (player.soulforce >= 50000) addButton(12, "5K", soulforceConversionGo, 5000).hint("Convert 50,000 SF into 5,000 EE");
 				else addButtonDisabled(12, "5K", "You not have enough (50,000) SF for conversion.");
-				if (player.soulforce >= 20000) addButton(13, "10K", soulforceConversionGo, 10000).hint("Convert 100,000 SF into 10,000 EE");
+				if (player.soulforce >= 100000) addButton(13, "10K", soulforceConversionGo, 10000).hint("Convert 100,000 SF into 10,000 EE");
 				else addButtonDisabled(13, "10K", "You not have enough (100,000) SF for conversion.");
 			}
 			addButton(14, "Back", accessSummonElementalsMainMenu);
@@ -1633,7 +1634,7 @@ public class CampMakeWinions extends BaseContent
 			outputText("-When attacking, it has an increased critical damage multiplied from 150% to 175%.\n");
 			outputText("-When attacking, it will ignore enemy damage reduction.\n");
 			outputText("-When attacking, it will deal Wind type damage.\n");
-			outputText("-M. Special: Creates a Wind Wall that deflects incoming projectiles for few turns. Duration depends on elemental rank.\n");
+			outputText("-M. Special: " + CombatAbilities.EAspectAir.description + "\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeEarth():void {
@@ -1641,14 +1642,14 @@ public class CampMakeWinions extends BaseContent
 			outputText("<b>Earth Elemental</b>\n\n");
 			outputText("-When attacking, it has an increased damage by 100%.\n");
 			outputText("-When attacking, it will deal Earth type damage.\n");
-			outputText("-M. Special: Creates an Earth armor around PC, increasing armor and magic resistance for a few turns. Duration depends on elemental rank.\n");
+			outputText("-M. Special: " + CombatAbilities.EAspectEarth.description + "\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeFire():void {
 			clearOutput();
 			outputText("<b>Fire Elemental</b>\n\n");
 			outputText("-When attacking, it will deal Fire type damage.\n");
-			outputText("-M. Special: Stronger version of fire attributed attack.\n");
+			outputText("-M. Special: " + CombatAbilities.EAspectFire.description + "\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeWater():void {
@@ -1656,7 +1657,7 @@ public class CampMakeWinions extends BaseContent
 			outputText("<b>Water Elemental</b>\n\n");
 			outputText("-When attacking, it has an increased critical damage chance by 10%.\n");
 			outputText("-When attacking, it will deal Water type damage.\n");
-			outputText("-M. Special: Heals PC.\n");
+			outputText("-M. Special: " + CombatAbilities.EAspectWater.description + "\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeEther():void {
@@ -1665,14 +1666,14 @@ public class CampMakeWinions extends BaseContent
 			outputText("-When attacking, it has an increased critical damage chance by 10%.\n");
 			outputText("-When attacking, it has an increased critical damage multiplied from 150% to 200%.\n");
 			outputText("-When attacking, it will ignore enemy damage reduction.\n");
-			outputText("-M. Special: Deals increased damage as a bonus to enemy if enemy is weak to any of the four major elements.\n");
+			outputText("-M. Special: " + CombatAbilities.EAspectEther.description + "\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeWood():void {
 			clearOutput();
 			outputText("<b>Wood Elemental</b>\n\n");
 			outputText("-When attacking, it has an increased damage by 100%.\n");
-			outputText("-M. Special: PC (Minor) Healing and small increase to armor / magic resistance for a few turns. Duration depends on elemental rank.\n");
+			outputText("-M. Special: " + CombatAbilities.EAspectWood.description + "\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeMetal():void {
@@ -1681,49 +1682,49 @@ public class CampMakeWinions extends BaseContent
 			outputText("-When attacking, it has an increased critical damage chance by 10%.\n");
 			outputText("-When attacking, it has an increased critical damage multiplied from 150% to 175%.\n");
 			outputText("-When attacking, it has an increased damage by 30%.\n");
-			outputText("-M. Special: Increases PC unarmed damage for a few turns. Duration depends on elemental rank.\n");
+			outputText("-M. Special: " + CombatAbilities.EAspectMetal.description + "\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeIce():void {
 			clearOutput();
 			outputText("<b>Ice Elemental</b>\n\n");
 			outputText("-When attacking, it will deal Ice type damage.\n");
-			outputText("-M. Special: Stronger version of ice attributed attack.\n");
+			outputText("-M. Special: " + CombatAbilities.EAspectIce.description + "\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeLightning():void {
 			clearOutput();
 			outputText("<b>Lightning Elemental</b>\n\n");
 			outputText("-When attacking, it will deal Lightning type damage.\n");
-			outputText("-M. Special: Stronger version of lightning attributed attack.\n");
+			outputText("-M. Special: " + CombatAbilities.EAspectLightning.description + "\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeDarkness():void {
 			clearOutput();
 			outputText("<b>Darkness Elemental</b>\n\n");
 			outputText("-When attacking, it will deal Darkness type damage.\n");
-			outputText("-M. Special: Stronger version of darkness attributed attack.\n");
+			outputText("-M. Special: " + CombatAbilities.EAspectDarkness.description + "\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomePoison():void {
 			clearOutput();
 			outputText("<b>Poison Elemental</b>\n\n");
 			outputText("-When attacking, it will deal Poison type damage.\n");
-			outputText("-M. Special: Stronger version of poison attributed attack.\n");
+			outputText("-M. Special: " + CombatAbilities.EAspectPoison.description + "\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomePurity():void {
 			clearOutput();
 			outputText("<b>Purity Elemental</b>\n\n");
 			outputText("-When attacking, it will deal increased damage based on enemy corruption. The higher the corruption the higher bonus to damage. (60%-300%)\n");
-			outputText("-M. Special: Stronger version of purity attributed attack.\n");
+			outputText("-M. Special: " + CombatAbilities.EAspectPurity.description + "\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeCorruption():void {
 			clearOutput();
 			outputText("<b>Corruption Elemental</b>\n\n");
 			outputText("-When attacking, it will deal increased damage based on enemy corruption. The lower the corruption the higher bonus to damage. (60%-300%)\n");
-			outputText("-M. Special: Stronger version of corruption attributed attack.\n");
+			outputText("-M. Special: " + CombatAbilities.EAspectCorruption.description + "\n");
 			doNext(evocationTome);
 		}
 		private function evocationTome4():void {
@@ -1754,7 +1755,7 @@ public class CampMakeWinions extends BaseContent
 			clearOutput();
 			outputText("If you don't have enough mana (100+) and fatigue (50+) it will be impossible to summon any elementals.\n\n");
 			menu();
-			if (player.mana >= 100 && (player.fatigue + 50 <= player.maxFatigue())) {
+			if (player.mana >= 100 && (player.fatigue + 50 <= player.maxOverFatigue())) {
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsAir) < 1) addButton(0, "Air", summonElementalAir);
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsEarth) < 1) addButton(1, "Earth", summonElementalEarth);
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsFire) < 1) addButton(2, "Fire", summonElementalFire);
@@ -1782,7 +1783,7 @@ public class CampMakeWinions extends BaseContent
 			clearOutput();
 			outputText("If you don't have matching item, two elemental shards and enough fatigue (200+) it will be impossible to summon any epic elementals.\n\n");
 			menu();
-			if (player.hasItem(useables.ELSHARD, 2) && (player.fatigue + 200 <= player.maxFatigue())) {
+			if (player.hasItem(useables.ELSHARD, 2) && (player.fatigue + 200 <= player.maxOverFatigue())) {
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsAirE) < 1) addButton(0, "Air", summonElementalAirEpic);
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsEarthE) < 1) addButton(1, "Earth", summonElementalEarthEpic);
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsFireE) < 1) addButton(2, "Fire", summonElementalFireEpic);

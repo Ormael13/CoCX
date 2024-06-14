@@ -9,6 +9,7 @@ import classes.*;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
+import classes.Scenes.Areas.Lake.SwordInStone;
 import classes.Scenes.Areas.Forest.AlrauneScene;
 import classes.Scenes.Areas.Tundra.*;
 import classes.Scenes.NPCs.Forgefather;
@@ -20,6 +21,7 @@ use namespace CoC;
 	{
 		public var valkyrieScene:ValkyrieScene = new ValkyrieScene();
 		public var alrauneScene:AlrauneScene = new AlrauneScene();
+		public var swordInStone:SwordInStone = new SwordInStone();
 
 		public const areaLevel:int = 35;
 		public function isDiscovered():Boolean {
@@ -47,6 +49,16 @@ use namespace CoC;
 				chance: Encounters.ALWAYS,
 				call: SceneLib.glacialRift.discover
 			},{
+				name: "tombstone",
+				label : "Tombstone",
+				kind  : 'event',
+				chance: 0.5,
+				unique: true,
+				when: function():Boolean {
+					return !player.hasStatusEffect(StatusEffects.TookGlacialGraveaxe) && !player.hasStatusEffect(StatusEffects.GlacialGraveaxeNever);
+				},
+				call: swordInStone.findGlacialGraveaxe
+			},{
 				// choice[choice.length] = 0; //Valkyrie (lvl 44)
 				name: "valkyrie",
 				label : "Valkyrie",
@@ -60,7 +72,7 @@ use namespace CoC;
 			}, */{
 				// choice[choice.length] = 2; //Young Frost Giant (lvl 47)
 				name: "frostgiant",
-				label : "Young Frost gigant",
+				label : "Young Frost Giant",
 				kind : 'monster',
 				night : false,
 				call: frostGiantEncounter
@@ -188,7 +200,7 @@ use namespace CoC;
 			if (Forgefather.materialsExplained != 1) endEncounter();
 			else {
 				clearOutput();
-				if (player.fatigue > player.maxFatigue() - 50) {
+				if (player.fatigue > player.maxOverFatigue() - 50) {
 					outputText("\n\n<b>You are too tired to consider mining. Perhaps some rest will suffice?</b>");
 					endEncounter();
 					return;
@@ -215,7 +227,7 @@ use namespace CoC;
 					player.mineXP(player.MiningMulti() * 2);
 				}
 				else {
-					outputText("After attempt to mine Sapphires you ended with unusable piece.");
+					outputText("After attempting to mine Sapphires, you ended with only unusable pieces.");
 					endEncounter(120);
 				}
 			}

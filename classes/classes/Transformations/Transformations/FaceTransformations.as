@@ -1169,5 +1169,58 @@ public class FaceTransformations extends MutationsHelper {
 				return player.faceType === Face.ARIGEAN;
 			}
 	);
+
+	public const FaceDemon: Transformation = new SimpleTransformation("Demon Face",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "You gasp in pleasure as your face suddenly begins to change the flesh and bones reshaping themselves like so much clay. In your mouth you feel your canines grow slightly longer, taking on a sharp appearance like those of a beast. Perhaps not as long as you thought they would end up as, but clearly they will make your smile all the more fiendish. Curious to see the change in full you head to the stream and take a look at yourself gasping at the sight. Hello " + player.mf("handsome","gorgeous")+" new me! Your face is so hot it's gonna take everyone great effort to resist falling for you. <b>With your brand new demonic face, who could ever say no to you?</b>";
+
+				if (doOutput) outputText(desc);
+				player.faceType = Face.DEMON;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.DEMON));
+			},
+			// is present
+			function (): Boolean {
+				return player.faceType === Face.DEMON;
+			}
+	);
+
+	public const FaceTroll: Transformation = new SimpleTransformation("Troll Face",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.FaceHuman, doOutput);
+				desc += "You feel tremendous pressure in your jaws and skull. Slight pain and extreme discomfort run through you as you feel tusks sprout from your jaw past your lips. Your nose also becomes more pronounced. <b>You now have troll tusks!</b>";
+
+				if (doOutput) outputText(desc);
+				player.faceType = Face.TROLL;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.TROLL));
+			},
+			// is present
+			function (): Boolean {
+				return player.faceType === Face.TROLL;
+			}
+	);
+
+	public const FaceGlacialTroll: Transformation = new SimpleTransformation("Glacial Troll Face",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.FaceHuman, doOutput);
+				desc += "You feel tremendous pressure in your jaws and skull. Slight pain and extreme discomfort run through you as you feel tusks sprout from your jaw past your lips. Your nose also becomes more pronounced. <b>You now have glacial troll tusks!</b>";
+
+				if (doOutput) outputText(desc);
+				player.faceType = Face.GLACIAL_TROLL;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.GLACIAL_TROLL));
+			},
+			// is present
+			function (): Boolean {
+				return player.faceType === Face.GLACIAL_TROLL;
+			}
+	);
 }
 }

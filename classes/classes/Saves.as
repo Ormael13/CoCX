@@ -109,24 +109,24 @@ public function loadSaveDisplay(saveFile:Object, slotName:String):String
 			holding += " | Difficulty - ";
 			if (saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] != undefined) { //Handles undefined
 				if (saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] == 0 || saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] == null) {
-					if (saveFile.data.flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) holding += "<font color=\"#008000\">Easy</font>";
-					else holding += "<font color=\"#808000\">Normal</font>";
+					if (saveFile.data.flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) holding += "[font-green]Easy[/font]";
+					else holding += "[font-olive]Normal[/font]";
 				}
 				if (saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] == 1)
-					holding += "<font color=\"#800000\">Hard</font>";
+					holding += "[font-dred]Hard[/font]";
 				if (saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] == 2)
-					holding += "<font color=\"#C00000\">Nightmare</font>";
+					holding += "[font-red]Nightmare[/font]";
 				if (saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] == 3)
-					holding += "<font color=\"#FF0000\">EXTREME</font>";
+					holding += "[font-lred]EXTREME[/font]";
 				if (saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] >= 4)
-					holding += "<font color=\"#FF0000\">XIANXIA</font>";
+					holding += "[font-pink]XIANXIA[/font]";
 			}
 			else {
 				if (saveFile.data.flags[kFLAGS.EASY_MODE_ENABLE_FLAG] != undefined) { //Workaround to display Easy if difficulty is set to easy.
-					if (saveFile.data.flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) holding += "<font color=\"#008000\">Easy</font>";
-					else holding += "<font color=\"#808000\">Normal</font>";
+					if (saveFile.data.flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) holding += "[font-green]Easy[/font]";
+					else holding += "[font-olive]Normal[/font]";
 				}
-				else holding += "<font color=\"#808000\">Normal</font>";
+				else holding += "[font-olive]Normal[/font]";
 			}
 		}
 		else {
@@ -371,7 +371,7 @@ public function saveLoad(e:MouseEvent = null):void
 	outputText("In Windows Vista/7 (Chrome): <pre>Users/{username}/AppData/Local/Google/Chrome/User Data/Default/Pepper Data/Shockwave Flash/WritableRoot/#SharedObjects/{GIBBERISH}/</pre>\n\n");
 	outputText("Inside that folder it will saved in a folder corresponding to where it was played from.  If you saved the CoC.swf to your HDD, then it will be in a folder called localhost.  If you played from my website, it will be in fenoxo.com.  The save files will be labelled CoC_1.sol, CoC_2.sol, CoC_3.sol, etc.</i>\n\n");
 	outputText("<b>Why do my saves disappear all the time?</b>\n<i>There are numerous things that will wipe out flash local shared files.  If your browser or player is set to delete flash cookies or data, that will do it.  CCleaner will also remove them.  CoC or its updates will never remove your savegames - if they disappear something else is wiping them out.</i>\n\n");
-	outputText("<b>When I play from my HDD I have one set of saves, and when I play off your site I have a different set of saves.  Why?</b>\n<i>Flash stores saved data relative to where it was accessed from.  Playing from your HDD will store things in a different location than fenoxo.com or FurAffinity.</i>\n");
+	outputText("<b>When I play from my HDD I have one set of saves, and when I play off your site I have a different set of saves.  Why?</b>\n<i>Flash stores saved data relative to where it was accessed from.</i>\n");
 	outputText("<i>If you want to be absolutely sure you don't lose a character, copy the .sol file for that slot out and back it up! <b>For more information, google flash shared objects.</b></i>\n\n");
 	outputText("<b>Why does the Save File and Load File option not work?</b>\n");
 	outputText("<i>Save File and Load File are limited by the security settings imposed upon CoC by Flash. These options will only work if you have downloaded the game from the website, and are running it from your HDD. Additionally, they can only correctly save files to and load files from the directory where you have the game saved.</i>");
@@ -748,7 +748,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 	}
 	if (flags[kFLAGS.HARDCORE_MODE] > 0)
 	{
-		saveFile.data.notes = "<font color=\"#ff0000\">HARDCORE MODE</font>";
+		saveFile.data.notes = "[font-red]HARDCORE MODE[/font]";
 	}
 	var processingError:Boolean = false;
 	var dataError:Error;
@@ -835,6 +835,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.mana = player.mana;
 		saveFile.data.soulforce = player.soulforce;
 		saveFile.data.wrath = player.wrath;
+		saveFile.data.demonicenergy = player.demonicenergy;
 		//Combat STATS
 		saveFile.data.HP = player.HP;
 		saveFile.data.lust = player.lust;
@@ -923,6 +924,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.beardLength = player.beardLength;
 		saveFile.data.eyeType = player.eyes.type;
 		saveFile.data.eyeColor = player.eyes.colour;
+		saveFile.data.skinColor3 = player.skinColor3;
 		saveFile.data.beardStyle = player.beardStyle;
 		saveFile.data.tongueType = player.tongue.type;
 		saveFile.data.earType = player.ears.type;
@@ -936,6 +938,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		}
 		player.facePart.saveToSaveData(saveFile.data);
 		//player.underBody.saveToSaveData(saveFile.data);
+		player.arms.saveToSaveData(saveFile.data);
 		player.lowerBodyPart.saveToSaveData(saveFile.data);
 		player.skin.saveToSaveData(saveFile.data);
 		player.tail.saveToSaveData(saveFile.data);
@@ -1611,14 +1614,14 @@ public function onFileLoaded(evt:Event):void
 	catch (error:Error)
 	{
 		clearOutput();
-		outputText("<b>!</b> Save file not found, check that it is in the same directory as the CoC.swf file.\n\nLoad from file is not available when playing directly from a website like furaffinity or fenoxo.com.");
+		outputText("<b>!</b> Save file not found, check that it is in the same directory as the CoC.swf file.");
 	}
 }
 
 public function ioErrorHandler(e:IOErrorEvent):void
 {
 	clearOutput();
-	outputText("<b>!</b> Save file not found, check that it is in the same directory as the CoC_" + ver + ".swf file.\r\rLoad from file is not available when playing directly from a website like furaffinity or fenoxo.com.");
+	outputText("<b>!</b> Save file not found, check that it is in the same directory as the CoC_" + ver + ".swf file.");
 	doNext(returnToSaveMenu);
 }
 
@@ -1787,6 +1790,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.mana = saveFile.data.mana;
 		player.soulforce = saveFile.data.soulforce;
 		player.wrath = saveFile.data.wrath;
+		player.demonicenergy = saveFile.data.demonicenergy;
 
 		//Combat STATS
 		player.HP = saveFile.data.HP;
@@ -1922,6 +1926,10 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			CoC.instance.transformations.EyesChangeColor(["brown"]).applyEffect(false);
 		else
 			CoC.instance.transformations.EyesChangeColor([saveFile.data.eyeColor]).applyEffect(false);
+		if (saveFile.data.skinColor3 == undefined)
+			player.skinColor3 = "black";
+		else
+			player.skinColor3 = saveFile.data.skinColor3;
 		//BEARS
 		if (saveFile.data.beardLength == undefined)
 			player.beardLength = 0;
@@ -1958,6 +1966,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		else
 			player.gills.type = saveFile.data.gills ? Gills.ANEMONE : Gills.NONE;
 		player.hairLength = saveFile.data.hairLength;
+		player.arms.loadFromSaveData(data);
 		player.lowerBodyPart.loadFromSaveData(data);
 		player.wings.loadFromSaveData(data);
 		player.skin.loadFromSaveData(data);
@@ -1976,7 +1985,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				player.chitinColor       = stringOr(data.chitinColor, player.chitinColor);
 				player.scaleColor        = stringOr(data.scalesColor, player.scaleColor);
 			}
-			
+
 		} else {
 			for (i = 0; i < player.bodyMaterials.length; i++) {
 				if (data.bodyMaterials[i]) {
@@ -1984,10 +1993,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				}
 			}
 		}
-		if (saveFile.data.armType == undefined)
-			player.arms.type = Arms.HUMAN;
-		else
-			player.arms.type = saveFile.data.armType;
 		if (saveFile.data.tongueType == undefined)
 			player.tongue.type = Tongue.HUMAN;
 		else
@@ -2475,6 +2480,8 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		if (saveFile.data.wrath == undefined) player.wrath = 0;
 		//Set mana
 		if (saveFile.data.mana == undefined) player.mana = 50;
+		//Set demonic energy
+		if (saveFile.data.demonicenergy == undefined) player.demonicenergy = 0;
 
 		//player.cocks = saveFile.data.cocks;
 		player.ass.analLooseness = saveFile.data.ass.analLooseness;
@@ -2819,15 +2826,12 @@ public function unFuckSave():void
 
 	// Fix duplicate elven bounty perks
 	if (player.hasPerk(PerkLib.ElvenBounty)) {
-		//CLear duplicates
-		while(player.perkDuplicated(PerkLib.ElvenBounty)) player.removePerk(PerkLib.ElvenBounty);
 		//Fix fudged preggers value
 		if (player.perkv1(PerkLib.ElvenBounty) == 15) {
 			player.setPerkValue(PerkLib.ElvenBounty,1,0);
 			player.addPerkValue(PerkLib.ElvenBounty,2,15);
 		}
 	}
-	while (player.perkDuplicated(PerkLib.NinetailsKitsuneOfBalance)) player.removePerk(PerkLib.NinetailsKitsuneOfBalance);
 
 	if (player.hasStatusEffect(StatusEffects.KnockedBack))
 	{

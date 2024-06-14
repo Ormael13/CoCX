@@ -5,6 +5,7 @@ import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
 import classes.VaginaClass;
+import classes.internals.race.RaceUtils;
 
 public class WerewolfRace extends Race {
     public static const RaceBody:/*String*/Array = [
@@ -55,13 +56,16 @@ public class WerewolfRace extends Race {
 				.corruption(AT_LEAST(20), +1)
 				.corruption(AT_LEAST(50), +1)
 				.corruption(AT_LEAST(80), +1)
+				.hasPerk(PerkLib.LycanthropyDormant, +1)
 				.hasPerk(PerkLib.Lycanthropy, +2, -11);
 		
+		addBloodline(PerkLib.WerewolfsDescendant,PerkLib.BloodlineWerewolf);
 		addMutation(IMutationsLib.FerasBirthrightIM);
 		addMutation(IMutationsLib.AlphaHowlIM);
 		
 		buildTier(12, "werewolf")
-                .requirePerk(PerkLib.Lycanthropy)
+				.require("Lycanthropy or Dormant Lycanthropy perk", 
+					RaceUtils.hasAnyPerkFn([PerkLib.Lycanthropy, PerkLib.LycanthropyDormant]))
 				.buffs({
 					"str.mult": +1.00,
 					"tou.mult": +0.60,

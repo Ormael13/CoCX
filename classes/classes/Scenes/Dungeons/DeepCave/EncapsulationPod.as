@@ -131,7 +131,6 @@ import classes.internals.*;
 					else outputText("thickening your fluid-filled prison with nutrients.");
 				}
 				//[NEXT – CHOOSE APPRORIATE]
-				doNext(SceneLib.dungeons.deepcave.loseToThisShitPartII);
 				return;
 			}
 			//Set flags for rounds
@@ -140,7 +139,16 @@ import classes.internals.*;
 			}
 			else addStatusValue(StatusEffects.Round,1,1);
 		}
-		
+
+		// True strike for countdown boss
+		override public function playerAttackedCheck():Boolean{
+			return false;
+		}
+
+		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void{
+			SceneLib.dungeons.deepcave.loseToThisShitPartII();
+		}
+
 		override protected function performCombatAction():void
 		{
 			encapsulationPodAI();

@@ -19,6 +19,7 @@ import classes.Items.ArmorLib;
 import classes.Items.ConsumableLib;
 import classes.Items.DynamicItems;
 import classes.Items.HeadJewelryLib;
+import classes.Items.IELib;
 import classes.Items.ItemConstants;
 import classes.Items.JewelryLib;
 import classes.Items.NecklaceLib;
@@ -27,6 +28,7 @@ import classes.Items.UndergarmentLib;
 import classes.Items.UseableLib;
 import classes.Items.WeaponLib;
 import classes.Items.WeaponRangeLib;
+import classes.Items.Weapons.HuntsmansCane;
 import classes.Races.HumanRace;
 import classes.Scenes.Areas.DeepSea.JuvenileAbyssalShark;
 import classes.Scenes.Areas.Forest.Alraune;
@@ -35,6 +37,7 @@ import classes.Scenes.Areas.Ocean.UnderwaterSharkGirlsPack;
 import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
 import classes.Scenes.Camp.TrainingDummy;
 import classes.Scenes.Combat.CombatAbility;
+import classes.Scenes.Combat.CombatUI;
 import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.Dungeons.EbonLabyrinth.Hydra;
@@ -49,7 +52,10 @@ import classes.internals.RandomDrop;
 import classes.internals.Utils;
 import classes.internals.WeightedDrop;
 
+import coc.view.CoCButton;
+
 import flash.utils.getQualifiedClassName;
+import classes.Scenes.Combat.CombatAbilities;
 
 /**
 	 * ...
@@ -74,6 +80,7 @@ import flash.utils.getQualifiedClassName;
 			if (clear) EngineCore.clearOutputTextOnly();
 			EngineCore.outputText(text);
 		}
+
 		protected final function cleanupAfterCombat():void
 		{
 			SceneLib.combat.cleanupAfterCombatImpl();
@@ -105,7 +112,7 @@ import flash.utils.getQualifiedClassName;
 		protected function get useables():UseableLib{
 			return game.useables;
 		}
-		protected function get weapons():WeaponLib{
+		protected function get weapons():WeaponLib {
 			return game.weapons;
 		}
 		protected function get weaponsrange():WeaponRangeLib{
@@ -114,10 +121,11 @@ import flash.utils.getQualifiedClassName;
 		protected function get shields():ShieldLib{
 			return game.shields;
 		}
+
 		protected function get armors():ArmorLib{
 			return game.armors;
 		}
-		protected function get headjewelries():HeadJewelryLib{
+		protected function get headjewelries():HeadJewelryLib {
 			return game.headjewelries;
 		}
 		protected function get necklaces():NecklaceLib{
@@ -175,6 +183,9 @@ import flash.utils.getQualifiedClassName;
 		public var special2:Function = null;
 		public var special3:Function = null;
 
+		//Amount of turns an enemy may gain a temporary resolute perk coming out of stun
+		public var resoluteBuffDuration:int = 2;
+
 		/**
 		 * Monster ability descriptors.
 		 * Structure:
@@ -192,14 +203,14 @@ import flash.utils.getQualifiedClassName;
 		 * 	{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE }
 		 * 	{ call: special1, type: ABILITY_PHYSICAL, range: RANGE_MELEE }
 		 * 	{ call: special2, type: ABILITY_PHYSICAL, range: RANGE_MELEE }
-		 * 	{ call: special3, type: ABILITY_PHYSICAL, range: RANGE_MELEE }
+		 *    { call: special3, type: ABILITY_PHYSICAL, range: RANGE_MELEE }
 		 * ]
 		 */
 		public var abilities:/*Object*/Array = [];
 
 		//he
 		public var pronoun1:String = "";
-		public function get Pronoun1():String{
+		public function get Pronoun1():String {
 			if (pronoun1=="") return "";
 			return pronoun1.substr(0,1).toUpperCase()+pronoun1.substr(1);
 		}
@@ -223,6 +234,7 @@ import flash.utils.getQualifiedClassName;
 			_drop = value;
 			initedDrop = true;
 		}
+
 		// No Ceraph fetish drop
 		public var noFetishDrop:Boolean = false;
 		// Chance (0..1) to drop generated random item
@@ -244,7 +256,7 @@ import flash.utils.getQualifiedClassName;
 		 * Called after monster was affected by player's ability.
 		 * @param ability
 		 */
-		public function postPlayerAbility(ability:CombatAbility):void {
+		public function postPlayerAbility(ability:CombatAbility, display:Boolean = true):void {
 			// default - do nothing
 		}
 
@@ -319,10 +331,11 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.EnemyLargeGroupType)) temp *= 10;
 			if (hasPerk(PerkLib.Enemy300Type)) temp *= 15;
 			if ((hasPerk(PerkLib.EnemyEliteType) || hasPerk(PerkLib.EnemyChampionType) || hasPerk(PerkLib.EnemyBossType)) && flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] > 0) {
-				if (hasPerk(PerkLib.EnemyEliteType)) temp *= (flags[kFLAGS.GAME_DIFFICULTY]*1.25);
-				if (hasPerk(PerkLib.EnemyChampionType)) temp *= (flags[kFLAGS.GAME_DIFFICULTY]*2.5);
-				if (hasPerk(PerkLib.EnemyBossType)) temp *= (flags[kFLAGS.GAME_DIFFICULTY]*5);
+				if (hasPerk(PerkLib.EnemyEliteType)) temp *= (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING]* 1.25);
+				if (hasPerk(PerkLib.EnemyChampionType)) temp *= (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING]*2.5);
+				if (hasPerk(PerkLib.EnemyBossType)) temp *= (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING]*5);
 			}
+			if (hasPerk(PerkLib.EnemyTrueDemon)) temp *= 0.5;
 			temp *= stats_multi_based_on_misc();
 			if (this.level < 9) {
 				if (hasPerk(PerkLib.EnemyForBeginnersType)) temp *= 0.1;
@@ -374,6 +387,7 @@ import flash.utils.getQualifiedClassName;
 				if (bonus > limit) bonus = limit;
 				maxOver2 += (maxHP() * 0.01 * bonus);
 			}
+			if (perkv1(IMutationsLib.LizanMarrowIM) >= 4) maxOver2 += 0.1;
 			if (perkv1(IMutationsLib.FerasBirthrightIM) >= 4) maxOver2 += 0.2;
 			maxOver *= maxOver2;//~290%
 			if (hasStatusEffect(StatusEffects.CorpseExplosion)) maxOver *= (1 - (0.2 * statusEffectv1(StatusEffects.CorpseExplosion)));
@@ -399,8 +413,10 @@ import flash.utils.getQualifiedClassName;
 				min -= (2400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}//nastepny diehard to 10% i 3000
 			if (perkv1(IMutationsLib.LizanMarrowIM) >= 3) min -= maxHP() * 0.05;
+			if (perkv1(IMutationsLib.LizanMarrowIM) >= 4) min -= maxHP() * 0.05;
 			if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 1) min -= maxHP() * 0.01;
 			if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 2) min -= maxHP() * 0.02;
+			if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 4) min -= maxHP() * 0.05;
 			if (hasPerk(PerkLib.Ferocity)) min -= maxHP() * 0.07;
 			if (hasPerk(PerkLib.Rage)) min -= maxHP() * 0.05;
 			if (hasPerk(PerkLib.TooAngryToDie)) min -= this.maxWrath();
@@ -604,6 +620,17 @@ import flash.utils.getQualifiedClassName;
 			temp = Math.round(temp);
 			return temp;
 		}
+		public override function maxOverFatigue():Number {
+			var max1:Number = maxSoulforce();
+			var max2:Number = 1;
+			if (hasPerk(PerkLib.HiddenJobSwordImmortal)) max2 += 0.05;
+			if (hasPerk(PerkLib.SwordIntentAura)) max2 += 0.05;
+			if (hasPerk(PerkLib.SwordImmortalFirstForm)) max2 += 0.05;
+			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
+			max1 *= max2;//~125%
+			max1 = Math.round(max1);
+			return max1;
+		}
 
 		public override function maxSoulforce():Number {
 			//Base soulforce
@@ -687,8 +714,11 @@ import flash.utils.getQualifiedClassName;
 		public override function maxOverSoulforce():Number {
 			var max1:Number = maxSoulforce();
 			var max2:Number = 1;
+			if (hasPerk(PerkLib.HiddenJobSwordImmortal)) max2 += 0.05;
+			if (hasPerk(PerkLib.SwordIntentAura)) max2 += 0.05;
+			if (hasPerk(PerkLib.SwordImmortalFirstForm)) max2 += 0.05;
 			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
-			max1 *= max2;//~110%
+			max1 *= max2;//~125%
 			max1 = Math.round(max1);
 			return max1;
 		}
@@ -780,10 +810,13 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.AsuraStrength)) temp2 += 0.1;
 			if (hasPerk(PerkLib.ICastAsuraFist)) temp2 += 0.1;
 			if (hasPerk(PerkLib.LikeAnAsuraBoss)) temp2 += 0.1;
-			//
 			if (hasPerk(PerkLib.AsuraToughness)) temp2 += 0.1;
+			if (hasPerk(PerkLib.ItsZerkingTime)) temp2 += 0.1;
 			//
 			if (hasPerk(PerkLib.AsuraSpeed)) temp2 += 0.1;
+			if (hasPerk(PerkLib.HiddenJobSwordImmortal)) temp2 += 0.05;
+			if (hasPerk(PerkLib.SwordIntentAura)) temp2 += 0.05;
+			if (hasPerk(PerkLib.SwordImmortalFirstForm)) temp2 += 0.05;
 			if (hasPerk(PerkLib.MunchkinAtWork)) temp2 += 0.1;
 			temp1 *= temp2;
 			temp1 = Math.round(temp1);
@@ -886,12 +919,6 @@ import flash.utils.getQualifiedClassName;
 				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 2;
 				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 3;
 				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp *= 5;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp *= 1.2;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp *= 1.4;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) temp *= 1.6;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 4) temp *= 1.8;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 5) temp *= 2;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 6) temp *= 2.2;//dla gier powyżej obecnego ostatniego NG+ posiadającego nowe perki dla graczy
 			}
 			else {
 				if (hasPerk(PerkLib.EnemyBossType)) {
@@ -907,12 +934,6 @@ import flash.utils.getQualifiedClassName;
 					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp *= 100;
 					
 				}
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp *= 2;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp *= 3;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) temp *= 4;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 4) temp *= 5;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 5) temp *= 6;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 6) temp *= 7;//dla gier powyżej obecnego ostatniego NG+ posiadającego nowe perki dla graczy
 			}
 			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) temp = 1;
 			return temp;
@@ -927,18 +948,27 @@ import flash.utils.getQualifiedClassName;
 		public function damageReductionBasedOnDifficulty():Number {
 			var dRBOD:Number = 1;
 			if (hasPerk(PerkLib.EnemyForBeginnersType)) {
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) dRBOD *= 1.05;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) dRBOD *= 1.125;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) dRBOD *= 1.25;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) dRBOD *= 1.5;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) dRBOD *= 1.1;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) dRBOD *= 1.25;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) dRBOD *= 1.5;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) dRBOD *= 2;
 			}
 			else {
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) dRBOD *= 1.5;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) dRBOD *= 2.5;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) dRBOD *= 5;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) dRBOD *= 12.5;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) dRBOD *= 2;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) dRBOD *= 5;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) dRBOD *= 10;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) dRBOD *= 25;
 			}
 			return dRBOD;
+		}
+		
+		public function lustVulnCap():Number {
+			var lVC:Number = 1;
+			if (game.player.hasPerk(PerkLib.CorruptTheBody)) lVC += 1;
+			if (game.player.hasPerk(PerkLib.CorruptTheHeart)) lVC += 1;
+			if (game.player.hasPerk(PerkLib.CorruptTheMind)) lVC += 1;
+			if (game.player.hasPerk(PerkLib.CorruptTheSoul)) lVC += 996;
+			return lVC;
 		}
 
 		public override function damagePercent():Number {
@@ -948,19 +978,12 @@ import flash.utils.getQualifiedClassName;
 			//Modify armor rating based on melee weapons
 			if ((game.player.weaponName.indexOf("staff") != -1 && game.player.hasPerk(PerkLib.StaffChanneling) )) {
 				armorMod = 0;
-			} else if (game.player.weapon.hasSpecial(ItemConstants.WP_AP10)) {
-				if (armorMod < 100) armorMod -= 10;
-				else armorMod *= 0.9;
-			} else if (game.player.weapon.hasSpecial(ItemConstants.WP_AP30)) {
-				armorMod *= 0.7;
-			} else if (game.player.weapon.hasSpecial(ItemConstants.WP_AP40)) {
-				armorMod *= 0.6;
-			} else if (game.player.weapon.hasSpecial(ItemConstants.WP_AP45)) {
-				armorMod *= 0.45;
-			} else if (game.player.weapon.hasSpecial(ItemConstants.WP_AP60)) {
-				armorMod *= 0.4;
-			} else if (game.player.weapon.hasSpecial(ItemConstants.WP_AP100)) {
-				armorMod = 0;
+			} else {
+				var ar:int = game.player.weapon.effectPower(IELib.ArmorReduction);
+				armorMod -= ar;
+				var ap:int = game.player.weapon.effectPower(IELib.ArmorPenetration);
+				if (game.player.isSpearTypeWeapon() && game.player.hasPerk(PerkLib.SpearAffinity)) ap = 100;
+				armorMod *= (100 - ap) / 100;
 			}
 			if (game.player.hasPerk(PerkLib.LungingAttacks)) armorMod *= 0.5;
 			if (armorMod < 0) armorMod = 0;
@@ -1024,7 +1047,7 @@ import flash.utils.getQualifiedClassName;
 			if (statusEffectv1(StatusEffects.OniRampage) > 0) {
 				multShared += 20;
 			}
-			if (statusEffectv1(StatusEffects.EarthStance) > 0) {
+			if (CombatAbilities.EarthStance.isActive()) {
 				multShared += 30;
 			}
 			//Misc
@@ -1039,19 +1062,55 @@ import flash.utils.getQualifiedClassName;
 			//--BASE--
 			mult -= armorMMod;
 			mult -= resMagicStat.value;
+			mult -= damagePercentShared();
 			//--PERKS--
 			//--STATUS AFFECTS--
 			if (statusEffectv1(StatusEffects.OniRampage) > 0) {
 				mult -= 20;
 			}
-			//Caps damage reduction at 100%.
-			if (mult < 0) mult = 0;
+			//Caps damage reduction at 80/99%.
+			//if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) cap down to max 99%
+			if (mult < capForDmgReduction()) mult = capForDmgReduction();
 			return mult;
+		}
+
+		/**
+		* Look into perks and special effects and @return summery extra chance to avoid attack granted by them.
+		*/
+		override public function getEvasionChance():Number {
+			var chance:Number = 0;
+
+			if (hasStatusEffect(StatusEffects.HurricaneDance)) chance += 25;
+
+			chance += super.getEvasionChance();
+			if (hasStatusEffect(StatusEffects.GreenCovenant) || canAutoHit()) chance = 0;
+			return chance;
+		}
+
+		override public function canAutoHit():Boolean {
+			return hasPerk(PerkLib.NoDodges);
+		}
+
+		override public function calcSpeedDodge(attackSpeed:int):int {
+			if (canAutoHit()) return 0;
+			return super.calcSpeedDodge(attackSpeed);
+		}
+
+		override public function getEvasionReason(considerBlindSpeed:Boolean = true, attackSpeed:int = int.MIN_VALUE, hitModifier:int = 0, dodgeArray:Array = null):String {
+			var evasionReason:String;
+
+			if (canAutoHit()) return null;
+
+			if (hasStatusEffect(StatusEffects.HurricaneDance)) dodgeArray.push([25, EVASION_HURRICANE_DANCE]);
+
+			if (!evasionReason) evasionReason = super.getEvasionReason(considerBlindSpeed, attackSpeed, hitModifier, dodgeArray);
+
+			return evasionReason;
 		}
 
 		public function canMonsterBleed():Boolean
 		{
-			return !hasPerk(PerkLib.EnemyConstructType) || !hasPerk(PerkLib.EnemyPlantType) || !hasPerk(PerkLib.EnemyGooType) || !hasPerk(PerkLib.EnemyGhostType) || !hasPerk(PerkLib.EnemyUndeadType);
+			return !hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.EnemyPlantType) && !hasPerk(PerkLib.EnemyGooType) && !hasPerk(PerkLib.EnemyGhostType) && !hasPerk(PerkLib.EnemyUndeadType);
 		}
 
 		/**
@@ -1126,84 +1185,47 @@ import flash.utils.getQualifiedClassName;
 		}
 
 		public function eBaseStrengthDamage():Number {
-			var damage:Number = 0;
-			damage += str;
-			if (str >= 21) damage += (str - 20);
-			if (str >= 41) damage += (str - 40);
-			if (str >= 61) damage += (str - 60);
-			if (str >= 81) damage += (str - 80);
-			if (str >= 101) damage += tieredBonus(str, 50, 100);
-			if (str < 10) damage = 10;
-			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
-			if (hasStatusEffect(StatusEffects.Provoke)) damage *= statusEffectv2(StatusEffects.Provoke);
-			//monster exclusive perks bonus
-			damage *= eBaseMultis();
-			damage = Math.round(damage);
-			return damage;
+			return eBasePhysModifier(eBaseStatDamage(str));
 		}
 
 		public function eBaseToughnessDamage():Number {
-			var damage:Number = 0;
-			damage += tou;
-			if (tou >= 21) damage += (tou - 20);
-			if (tou >= 41) damage += (tou - 40);
-			if (tou >= 61) damage += (tou - 60);
-			if (tou >= 81) damage += (tou - 80);
-			if (tou >= 101) damage += tieredBonus(tou, 50, 100);
-			if (tou < 10) damage = 10;
-			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
-			if (hasStatusEffect(StatusEffects.Provoke)) damage *= statusEffectv2(StatusEffects.Provoke);
-			//monster exclusive perks bonus
-			damage *= eBaseMultis();
-			damage = Math.round(damage);
-			return damage;
+			return eBasePhysModifier(eBaseStatDamage(tou));
 		}
 
 		public function eBaseSpeedDamage():Number {
-			var damage:Number = 0;
-			damage += spe;
-			if (spe >= 21) damage += (spe - 20);
-			if (spe >= 41) damage += (spe - 40);
-			if (spe >= 61) damage += (spe - 60);
-			if (spe >= 81) damage += (spe - 80);
-			if (spe >= 101) damage += tieredBonus(spe, 50, 100);
-			if (spe < 10) damage = 10;
-			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
-			if (hasStatusEffect(StatusEffects.Provoke)) damage *= statusEffectv2(StatusEffects.Provoke);
-			//monster exclusive perks bonus
-			damage *= eBaseMultis();
-			damage = Math.round(damage);
-			return damage;
+			return eBasePhysModifier(eBaseStatDamage(spe));
 		}
 
 		public function eBaseIntelligenceDamage():Number {
-			var damage:Number = 0;
-			damage += inte;
-			if (inte >= 21) damage += (inte - 20);
-			if (inte >= 41) damage += (inte - 40);
-			if (inte >= 61) damage += (inte - 60);
-			if (inte >= 81) damage += (inte - 80);
-			if (inte >= 101) damage += tieredBonus(inte, 50, 100);
-			if (inte < 10) damage = 10;
+			return eBaseStatDamage(inte);
+		}
+
+		public function eBaseWisdomDamage():Number {
+			return eBaseStatDamage(wis);
+		}
+
+		public function eBaseLibidoDamage():Number {
+			return eBaseStatDamage(lib);
+		}
+
+		private function eBaseStatDamage(stat:Number):Number {
+			var damage:Number = stat;
+			if (stat >= 21) damage += (stat - 20);
+			if (stat >= 41) damage += (stat - 40);
+			if (stat >= 61) damage += (stat - 60);
+			if (stat >= 81) damage += (stat - 80);
+			if (stat >= 101) damage += tieredBonus(stat, 50, 100);
+			if (stat < 10) damage = 10;
 			//monster exclusive perks bonus
 			damage *= eBaseMultis();
 			damage = Math.round(damage);
 			return damage;
 		}
 
-		public function eBaseWisdomDamage():Number {
-			var damage:Number = 0;
-			damage += wis;
-			if (wis >= 21) damage += (wis - 20);
-			if (wis >= 41) damage += (wis - 40);
-			if (wis >= 61) damage += (wis - 60);
-			if (wis >= 81) damage += (wis - 80);
-			if (wis >= 101) damage += tieredBonus(wis, 50, 100);
-			if (wis < 10) damage = 10;
-			//monster exclusive perks bonus
-			damage *= eBaseMultis();
-			damage = Math.round(damage);
-			return damage;
+		private function eBasePhysModifier(damage:Number):Number {
+			if (hasStatusEffect(StatusEffects.PunishingKick)) damage *= 0.5;
+			if (hasStatusEffect(StatusEffects.Provoke)) damage *= statusEffectv2(StatusEffects.Provoke);
+			return Math.round(damage);
 		}
 
 		private function inteligencescalingbonusMonster(stat:int):Number{
@@ -1311,10 +1333,10 @@ import flash.utils.getQualifiedClassName;
 		protected function baseXP():Number
 		{
 			var baseMonXP:Number = this.level * 5;
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) baseMonXP += this.level * 0.5;
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 2) baseMonXP += this.level * 1.5;
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 3) baseMonXP += this.level * 3;
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 4) baseMonXP += this.level * 5;
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) baseMonXP += this.level;
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 2) baseMonXP += this.level * 2.5;
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 3) baseMonXP += this.level * 5;
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 4) baseMonXP += this.level * 7.5;
 			if (this.level < 7) baseMonXP += (this.level * 5) + rand(this.level * 5);
 			else baseMonXP += rand(this.level * 5);
 			return baseMonXP;
@@ -1693,24 +1715,29 @@ import flash.utils.getQualifiedClassName;
 		 */
 		public function eOneAttack(display:Boolean = false):int
 		{
+			var damage:Number = 0;
 			//Determine damage - str modified by enemy toughness!
 			if (hasStatusEffect(StatusEffects.FlameBlade)) {
 				var damageFlameBlade:int = calcFireDamage();
-				if (damageFlameBlade > 0) player.takeFireDamage(damageFlameBlade);
+				if (damageFlameBlade > 0) damage = player.takeFireDamage(damageFlameBlade, display);
 			}
-			if (hasStatusEffect(StatusEffects.ElectrifyWeapon)) {
+			else if (hasStatusEffect(StatusEffects.ElectrifyWeapon)) {
 				var damageElectrifyWeapon:int = calcLightningDamage();
-				if (damageElectrifyWeapon > 0) player.takeLightningDamage(damageElectrifyWeapon);
+				if (damageElectrifyWeapon > 0) damage = player.takeLightningDamage(damageElectrifyWeapon, display);
 			}
 			else {
-				var damage:int = calcDamage();
+				damage = calcDamage();
 				if (damage > 0) damage = player.takePhysDamage(damage, display);
 			}
 			return damage;
 		}
 
 		/**
-		 * return true if we land a hit
+		 * <ul>
+		 * <li>Please call super method to continue player evade check and shit if you override unless you really know wtf you are doing</li>
+		 * <li>See Diva for example</li>
+		 * <li>return true if we land a hit</li>
+		 * </ul>
 		 */
 		protected function attackSucceeded():Boolean
 		{
@@ -1722,7 +1749,9 @@ import flash.utils.getQualifiedClassName;
 			if (hasStatusEffect(StatusEffects.Blind)) {
 				attack &&= handleBlind();
 			}
-			attack &&= !playerDodged();
+
+			// Remaining function wouldn't be called if one of them return true
+			attack &&= !playerAttackedCheck();
 
 			return attack;
 		}
@@ -1743,13 +1772,11 @@ import flash.utils.getQualifiedClassName;
 			var attacks:int = statusEffectv1(StatusEffects.Attacks);
 			if (attacks == 0) attacks = 1;
 			while (attacks>0){
-				if (attackSucceeded()){
 				    var damage:int = eOneAttack();
 					outputAttack(damage);
 					postAttack(damage);
 					EngineCore.statScreenRefresh();
 					outputText("\n");
-				}
 				if (statusEffectv1(StatusEffects.Attacks) >= 0) {
 					addStatusValue(StatusEffects.Attacks, 1, -1);
 				}
@@ -1803,7 +1830,7 @@ import flash.utils.getQualifiedClassName;
 				if (flags[kFLAGS.ENEMY_CRITICAL] > 0) outputText("<b>Critical hit! </b>");
 				SceneLib.combat.CommasForDigits(damage);
 			}
-			else outputText("<b>([font-miss]" + damage + "</font>)</b>");
+			else outputText("<b>([font-miss]" + damage + "[/font])</b>");
 		}
 
 		/**
@@ -1825,26 +1852,85 @@ import flash.utils.getQualifiedClassName;
 		}
 
 		/**
+		 * @return Return true if the original tease damage should be applied
+		 */
+		public function handleTease(damage:Number, successful:Boolean, display:Boolean = true):Boolean
+		{
+			return true;
+		}
+
+		/**
 		 * print something about how we miss the player
 		 */
 		protected function outputPlayerDodged(dodge:int):void
 		{
 			if (dodge==1) outputText("You narrowly avoid [themonster]'s " + weaponVerb + "!\n");
 			else if (dodge==2) outputText("You dodge [themonster]'s " + weaponVerb + " with superior quickness!\n");
-			else {
-				outputText("You deftly avoid " + a + short);
-				if (plural) outputText("'");
-				else outputText("'s");
-				outputText(" slow " + weaponVerb + ".\n");
+			// Reason output goes here (EVADE/MISDIRECTION/FLEXIBILITY/whatever)
+			switch(dodge){
+				case 3:
+					outputText("Using your skills at evading attacks, you anticipate and sidestep [themonster]'");
+					if (!plural) outputText("s");
+					outputText(" attack.\n");
+					break;
+				case 4:
+					outputText("Using Raphael's teachings, you anticipate and sidestep [themonster]' attacks.\n");
+					break;
+				case 5:
+					outputText("With your incredible flexibility, you squeeze out of the way of [themonster]");
+					if (plural) outputText("' attacks.\n");
+					else outputText("'s attack.\n");
+					break;
+				case 6:
+					outputText("Using your superior combat skills you manage to avoid attack completely.\n");
+					break;
+				default:
+					outputText("You deftly avoid " + a + short);
+					if (plural) outputText("'");
+					else outputText("'s");
+					outputText(" slow " + weaponVerb + ".\n");
+
 			}
 		}
 
-		private function playerDodged():Boolean
+		/**
+		 * Series of checks when player received attacks (PreDodge,Evade,Parry,Block)
+		 * If you want to override any of these function to add special effects, please call super method at some point to start evade check and shit
+		 * Aiko overriding playerParry and playerBlock function is one of the example
+		 * @return True if enemy attack nullified
+		 */
+		public function playerAttackedCheck():Boolean{
+			// Comment indicate future support
+			// Unconditional Intercept/Retaliate Effect
+			if(playerPreDodged()){
+				// Retaliate Effect
+				return true;
+			}
+			else if(playerDodged()){
+				player.evadeRetaliate();
+				return true;
+			}
+			else if(playerParry()){
+				// Parry Retaliate Effect
+				return true;
+			}
+			else if(playerBlock()){
+				// Block Retaliate Effect
+				return true;
+			}
+			return false;
+		}
+
+		/**
+		 * Mirror Image or Non-player parrying or other check before evasion Goes Here
+		 * Migrated Mirror Image and Zenji follower parry
+		 * @return True if enemy attack avoided
+		 */
+		public function playerPreDodged():Boolean
 		{
 			//Check if player has shadow clones or similar gimmick
-			if (player.hasStatusEffect(StatusEffects.MirrorImage) && !hasPerk(PerkLib.TrueSeeing)) {
-			}
-			if (player.hasStatusEffect(StatusEffects.MirrorImage) && rand(1+player.statusEffectv1(StatusEffects.MirrorImage)) != 1){
+			// True seeing should crack through Mirror Image
+			if (player.hasStatusEffect(StatusEffects.MirrorImage) && !hasPerk(PerkLib.TrueSeeing) && rand(1+player.statusEffectv1(StatusEffects.MirrorImage)) != 1){
 				outputText("Unable to determine the real one from the fake");
 				if (player.statusEffectv1(StatusEffects.MirrorImage) >= 2)outputText("s");
 				outputText(", your opponent");
@@ -1860,84 +1946,106 @@ import flash.utils.getQualifiedClassName;
 					outputText(" Your last illusion now destroyed, you will now have to be cautious of your opponent attacks.");
 				}
 				return true;
-			} else {
-				//Determine if dodged!
-				var dodge:int = player.speedDodge(this);
-				if (dodge>0) {
-					outputPlayerDodged(dodge);
-					if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
+			}
+			//Zenji parry enemy attack
+			else if (player.hasStatusEffect(StatusEffects.CombatFollowerZenji)) {
+				var parryChance:Number = 25;
+				if (player.statusEffectv4(StatusEffects.CombatFollowerZenji) > 1) parryChance += 15;
+				if (rand(100) > parryChance) {
+					outputText("[Themonster] goes in for a strike, but Zenji is able to intervene, blocking any opening they have on you, leaving you safe behind him.\n\n");
+					outputText("\"<i>You’re gonna have ta try harda dan dat!</i>\" Zenji shouts.");
 					return true;
 				}
-				var evasionResult:String = player.getEvasionReason(false); // use separate function for speed dodge for expanded dodge description
-				//Determine if evaded
-				if (evasionResult == EVASION_EVADE) {
-					outputText("Using your skills at evading attacks, you anticipate and sidestep [themonster]'");
-					if (!plural) outputText("s");
-					outputText(" attack.\n");
+			}
+			return false;
+		}
+
+		/**
+		 * Evasion goes here
+		 * @return True if enemy attack evaded
+		 */
+		public function playerDodged():Boolean
+		{
+			//Determine if dodged!
+			var dodge:int = player.speedDodge(this);
+			if (dodge>0 && dodge<3) {
+				outputPlayerDodged(dodge);
+				if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
+				return true;
+			}
+			var evasionResult:String = player.getEvasionReason(false); // use separate function for speed dodge for expanded dodge description
+			//Determine if evaded
+			switch(evasionResult){
+				case EVASION_EVADE:
+					outputPlayerDodged(3);
 					if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
 					return true;
-				}
-				//("Misdirection"
-				if (evasionResult == EVASION_MISDIRECTION) {
-					outputText("Using Raphael's teachings, you anticipate and sidestep [themonster]' attacks.\n");
+					// break;
+				case EVASION_MISDIRECTION:
+					outputPlayerDodged(4);
 					if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
 					return true;
-				}
-				//Determine if cat'ed
-				if (evasionResult == EVASION_FLEXIBILITY) {
-					outputText("With your incredible flexibility, you squeeze out of the way of [themonster]");
-					if (plural) outputText("' attacks.\n");
-					else outputText("'s attack.\n");
+					// break;
+				case EVASION_FLEXIBILITY:
+					outputPlayerDodged(5);
 					if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
 					return true;
-				}
-				if (evasionResult != null) { // Failsafe fur unhandled
-					outputText("Using your superior combat skills you manage to avoid attack completely.\n");
-					if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
-					return true;
-				}
-				//Zenji parry enemy attack
-				if (player.hasStatusEffect(StatusEffects.CombatFollowerZenji)) {
-					var parryChance:Number = 25;
-					if (player.statusEffectv4(StatusEffects.CombatFollowerZenji) > 1) parryChance += 15;
-					if (rand(100) > parryChance) {
-						outputText("[Themonster] goes in for a strike, but Zenji is able to intervene, blocking any opening they have on you, leaving you safe behind him.\n\n");
-						outputText("\"<i>You’re gonna have ta try harda dan dat!</i>\" Zenji shouts.");
+					// break;
+				default:
+					if(evasionResult!=null){
+						outputPlayerDodged(6);
+						// These are not resolvedReason at all these are just extra dodge chance from perks and shit
+						if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
 						return true;
 					}
-				}
-
-				//Parry with weapon
-				if (combatParry()) {
-					outputText("You manage to block [themonster]");
-					if (plural) outputText("' attacks ");
-					else outputText("'s attack ");
-					outputText("with your [weapon].\n");
-					if (game.player.hasPerk(PerkLib.TwinRiposte) && (game.player.weaponSpecials("Dual") || game.player.weaponSpecials("Dual Large")) && game.player.wrath >= 2) {
-						player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
-						SceneLib.combat.basemeleeattacks();
-					}
-					if (game.player.hasPerk(PerkLib.Backlash) && game.player.isFistOrFistWeapon()) {
-						player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
-						outputText("As you block the blow you exploit the opening in your opponent’s guard to deliver a vicious kick.");
-						SceneLib.combat.basemeleeattacks();
-					}
-					if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
-					return true;
-				}
-				//Block with shield
-				if (combatBlock(true)) {
-					outputText("You block [themonster]'s " + weaponVerb + " with your [shield]! ");
-					if (game.player.hasPerk(PerkLib.ShieldCombat) && game.player.fatigue >= 20) {
-						player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
-						SceneLib.combat.pspecials.shieldBash();
-					}
-					SceneLib.combat.ShieldsStatusProcs();
-					if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
-					return true;
-				}
-				return false;
 			}
+			return false;
+		}
+
+		/**
+		 * Player Parry Checks
+		 * @return True if enemy attack parried
+		 */
+		public function playerParry():Boolean{
+			//Parry with weapon
+			if (combatParry()) {
+				outputText("You manage to block [themonster]");
+				if (plural) outputText("' attacks ");
+				else outputText("'s attack ");
+				outputText("with your [weapon].\n");
+					if (game.player.hasPerk(PerkLib.TwinRiposte) && (game.player.weapon.isDualMedium() || game.player.weapon.isDualLarge()) && game.player.wrath >= 2) {
+					player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
+					SceneLib.combat.basemeleeattacks();
+				}
+				if (game.player.hasPerk(PerkLib.Backlash) && game.player.isFistOrFistWeapon()) {
+					player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
+					outputText("As you block the blow you exploit the opening in your opponent’s guard to deliver a vicious kick.");
+					SceneLib.combat.basemeleeattacks();
+				}
+				if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
+				return true;
+			}
+			return false;
+		}
+
+		/**
+		 * Player Block Checks
+		 * @return True if enemy attack blocked
+		 */
+		public function playerBlock():Boolean
+		{
+			//Block with shield
+			if (combatBlock(true)) {
+				outputText("You block [themonster]'s " + weaponVerb + " with your [shield]! ");
+				if (game.player.hasPerk(PerkLib.ShieldCombat) && game.player.fatigue >= 20) {
+					player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
+					SceneLib.combat.pspecials.shieldBash();
+				}
+				SceneLib.combat.ShieldsStatusProcs();
+				if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
+				return true;
+			}
+			return false;
 		}
 
 		public function monsterIsStunned():Boolean {
@@ -1968,6 +2076,7 @@ import flash.utils.getQualifiedClassName;
 				StatusEffects.GrabBear,
 				StatusEffects.CancerGrab,
 				StatusEffects.MysticWeb,
+				StatusEffects.TelekineticGrab,
 				StatusEffects.Entangled,
 				StatusEffects.Swallowed,
 			]
@@ -1975,6 +2084,66 @@ import flash.utils.getQualifiedClassName;
 			return false;
 		}
 
+		public function monsterIsBleeding():Boolean {
+			var effects:Array = [
+				StatusEffects.KamaitachiBleed,
+				StatusEffects.Hemorrhage,
+				StatusEffects.SharkBiteBleed,
+				StatusEffects.IzmaBleed,
+				StatusEffects.CouatlHurricane,
+				StatusEffects.GoreBleed,
+				StatusEffects.Hemorrhage2,
+				StatusEffects.Briarthorn,
+			]
+			for each (var effect:StatusEffectType in effects) if (hasStatusEffect(effect)) return true;
+			return false;
+		}
+
+		public function monsterIsPoisoned():Boolean {
+			return hasStatusEffect(StatusEffects.PoisonDoT) || hasStatusEffect(StatusEffects.PoisonDoTH);
+		}
+
+		public function monsterIsLustPoisoned():Boolean {
+			var effects:Array = [
+				StatusEffects.LustDoT,
+				StatusEffects.LustDoTH,
+				StatusEffects.LustStick
+			]
+			for each (var effect:StatusEffectType in effects) if (hasStatusEffect(effect)) return true;
+			return false;
+		}
+
+		public function monsterIsBurned():Boolean {
+			var effects:Array = [
+				StatusEffects.BurnDoT,
+				StatusEffects.FirePunchBurnDoT,
+				StatusEffects.ImmolationDoT
+			]
+			for each (var effect:StatusEffectType in effects) if (hasStatusEffect(effect)) return true;
+			return false;
+		}
+
+		public function monsterIsFrostbiten():Boolean {
+			var effects:Array = [
+				StatusEffects.FrostburnDoT
+			]
+			for each (var effect:StatusEffectType in effects) if (hasStatusEffect(effect)) return true;
+			return false;
+		}
+
+		public function monsterIsAcidBurned():Boolean {
+			var effects:Array = [
+				StatusEffects.AcidDoT,
+				StatusEffects.SandWormAcid,
+				StatusEffects.AntAcid
+			]
+			for each (var effect:StatusEffectType in effects) if (hasStatusEffect(effect)) return true;
+			return false;
+		}
+
+		/**
+		 * Stop overrding this shit go to performCombatAbility()
+		 */
 		public function doAI():void
 		{
 			if (hasStatusEffect(StatusEffects.AbilityCooldown1) ) {
@@ -2009,6 +2178,18 @@ import flash.utils.getQualifiedClassName;
 					addStatusValue(StatusEffects.AbilityCooldown4,1,-1);
 				}
 			}
+			if (hasTempResolute()) {
+				var currentDuration:int = getPerkValue(PerkLib.Resolute, 4);
+				var decayResolute:int = getPerkValue(PerkLib.Resolute, 3);
+				//Only start to decay temp resolute duration once the enemy can actually move again
+				if (decayResolute == 1) {
+					if (currentDuration <= 0) {
+						clearTempResolute();
+					} else {
+						setPerkValue(PerkLib.Resolute, 4, currentDuration - 1);
+					}
+				}
+			}
 			if (hasStatusEffect(StatusEffects.Lustzerking)) {
 				this.wrath += 5;
 				if (statusEffectv1(StatusEffects.Lustzerking) > 1) addStatusValue(StatusEffects.Lustzerking, 1, -1);
@@ -2041,19 +2222,23 @@ import flash.utils.getQualifiedClassName;
 			}
 			if (hasStatusEffect(StatusEffects.OrcaPlay)) {
 				interruptAbility();
+				if(!handleStatusEffects(StatusEffects.OrcaPlay))
 				return;
 			}
 			if (hasStatusEffect(StatusEffects.Straddle)) {
 				interruptAbility();
+				if(!handleStatusEffects(StatusEffects.Straddle))
 				return;
 			}
 			if (hasStatusEffect(StatusEffects.Provoke)) {
 				interruptAbility();
-				addStatusValue(StatusEffects.Provoke, 1, -1);
-				if (!hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.EnemyFleshConstructType)) {
-					if (statusEffectv1(StatusEffects.Provoke) <= 0) armorDef += statusEffectv3(StatusEffects.Provoke);
-					eAttack();
-					return;
+				if(!handleStatusEffects(StatusEffects.Provoke)){
+					addStatusValue(StatusEffects.Provoke, 1, -1);
+					if (!hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.EnemyFleshConstructType)) {
+						if (statusEffectv1(StatusEffects.Provoke) <= 0) armorDef += statusEffectv3(StatusEffects.Provoke);
+						eAttack();
+						return;
+					}
 				}
 			}
 			if (hasStatusEffect(StatusEffects.Dig)) {
@@ -2063,11 +2248,19 @@ import flash.utils.getQualifiedClassName;
 			}
 			if (hasStatusEffect(StatusEffects.OrcaHasWackedFinish)) {
 				interruptAbility();
-				outputText("\n\nYour opponent is still stunned from the powerful blow of your tail.");
-				createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
-				return;
+				if(!handleStatusEffects(StatusEffects.OrcaHasWackedFinish)){
+					outputText("\n\nYour opponent is still stunned from the powerful blow of your tail.");
+					createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+					return;
+				}
 			}
+
+			//Only start temp resolute decay once monster is no longer incapacitated
+			if (hasTempResolute() && getPerkValue(PerkLib.Resolute, 3) == 2) setPerkValue(PerkLib.Resolute, 3, 1);
+
+			if(attackSucceeded())
 			performCombatAction();
+
 		}
 
 		/**
@@ -2088,6 +2281,17 @@ import flash.utils.getQualifiedClassName;
 					removeStatusEffect(StatusEffects.MysticWeb);
 				}
 				addStatusValue(StatusEffects.MysticWeb, 1, -1);
+				if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
+				return false;
+			}
+			if (hasStatusEffect(StatusEffects.TelekineticGrab)) {
+				EngineCore.outputText("[Themonster] struggle to get free from your telekinetic grasp!");
+				if (statusEffectv1(StatusEffects.TelekineticGrab) <= 0) {
+					EngineCore.outputText("[Themonster] struggle to get free and manage to free from your telekinetic grasp.");
+					if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
+					removeStatusEffect(StatusEffects.TelekineticGrab);
+				}
+				addStatusValue(StatusEffects.TelekineticGrab, 1, -1);
 				if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
 				return false;
 			}
@@ -2290,10 +2494,14 @@ import flash.utils.getQualifiedClassName;
 		protected function handleStun():Boolean
 		{
 			interruptAbility();
-			if (statusEffectv1(StatusEffects.Stunned) <= 0) removeStatusEffect(StatusEffects.Stunned);
+			if (statusEffectv1(StatusEffects.Stunned) <= 0) {
+				handleStunEnd(StatusEffects.Stunned);
+			}
 			else addStatusValue(StatusEffects.Stunned, 1, -1);
 			if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.Stunned,1,-5);
-			if (statusEffectv1(StatusEffects.StunnedTornado) <= 0) removeStatusEffect(StatusEffects.StunnedTornado);
+			if (statusEffectv1(StatusEffects.StunnedTornado) <= 0) {
+				handleStunEnd(StatusEffects.StunnedTornado);
+			}
 			else {
 				EngineCore.outputText("[Themonster] is still caught in the tornado.");
 				addStatusValue(StatusEffects.StunnedTornado, 1, -1);
@@ -2306,11 +2514,11 @@ import flash.utils.getQualifiedClassName;
 			if (hasStatusEffect(StatusEffects.Fascinated)) {
 				if (plural) EngineCore.outputText("Your opponents stares emptily in the space in front of [monster him] a dreamy expression on [monster his] face, totally entranced. A brief moment later [monster he] realises [monster he]'s been doing nothing for the past few seconds and snaps out of it.");
 				else EngineCore.outputText("Your opponent stares emptily in the space in front of [monster him] a dreamy expression on [monster his] face, totally entranced. A brief moment later [monster he] realises [monster he]'s been doing nothing for the past few seconds and snaps out of it.");
-				removeStatusEffect(StatusEffects.Fascinated);
+				handleStunEnd(StatusEffects.Fascinated);
 			}
 			else if (hasStatusEffect(StatusEffects.FrozenSolid)) {
 				if (plural) EngineCore.outputText("Your foes are too busy trying to break out of their icy prison to fight back.");
-				else EngineCore.outputText("Your foe is too busy trying to break out of his icy prison to fight back.");
+				else EngineCore.outputText("Your foe is too busy trying to break out of its icy prison to fight back.");
 			}
 			else if (hasStatusEffect(StatusEffects.Sleep)) {
 				if (plural) EngineCore.outputText("Your foes are fast asleep.");
@@ -2321,7 +2529,7 @@ import flash.utils.getQualifiedClassName;
 				else EngineCore.outputText("Your foe is still looking for you, swearing in annoyance.");
 			}
 			else if (hasStatusEffect(StatusEffects.Polymorphed)) EngineCore.outputText("[Themonster] is fighting against the curse.");
-			else if (hasStatusEffect(StatusEffects.MonsterAttacksDisabled)) EngineCore.outputText("[Themonster] try to hit you but is unable to reach you!");
+			else if (hasStatusEffect(StatusEffects.MonsterAttacksDisabled)) EngineCore.outputText("[Themonster] tries to hit you, but is unable to reach you!");
 			else {
 				if (plural) EngineCore.outputText("Your foes are too dazed from your last hit to strike back!");
 				else {
@@ -2333,6 +2541,32 @@ import flash.utils.getQualifiedClassName;
 				}
 			}
 			return false;
+		}
+
+		public function handleStunEnd(effect:StatusEffectType):void {
+			if (hasStatusEffect(effect) && canGainTempStunImmunity()) {
+				createPerk(PerkLib.Resolute, 0, 0, 2, resoluteBuffDuration);
+				outputText("<b>[Themonster] is now temporarily resistant to being stunned!</b>\n\n");
+			}
+			removeStatusEffect(effect);
+		}
+
+		public function canGainTempStunImmunity():Boolean {
+			return (hasPerk(PerkLib.EnemyBossType) || hasPerk(PerkLib.EnemyChampionType) || hasPerk(PerkLib.EnemyEliteType)) && !hasPerk(PerkLib.Resolute);
+		}
+
+		public function clearTempResolute(display:Boolean = true):void {
+			if (hasTempResolute()) {
+				removePerk(PerkLib.Resolute);
+				if (display) outputText("<b>[Themonster] is no longer resistant to being stunned!</b>\n\n");
+			}
+		}
+
+		/**
+		 * Temp Resolute duration will only start to degrade once it's v3 value is set to 1
+		 */
+		public function hasTempResolute():Boolean {
+			return hasPerk(PerkLib.Resolute) && (getPerkValue(PerkLib.Resolute, 3) == 1 || getPerkValue(PerkLib.Resolute, 3) == 2);
 		}
 
 		/**
@@ -2356,6 +2590,377 @@ import flash.utils.getQualifiedClassName;
 				outputText(".");
 			}
 			else outputText(""+customText+"");
+		}
+
+		/**
+		 * <p>attack() override series - Part 1</p>
+		 * <p>==================================</p>
+		 * <p>player melee attack nullifying (stun/fear/seal/whatever) abilities/functions goes here</p>
+		 * <p>override in each monster subclasses</p>
+		 * <p>==================================</p>
+		 * <p>Combat.enemyAI() will be called and cancel the rest of the attack checks if return false</p>
+		 * <p>Default: return true (attack passed)</p>
+		 */
+		public function preAttackSeal():Boolean{
+			return true;
+		}
+
+		/**
+		 * <p>attack() override series - Part 2</p>
+		 * <p>==================================</p>
+		 * <p>Executed after preAttackSeal()</p>
+		 * <p>==================================</p>
+		 * <p>Used for output flavor text when start melee/attacking, namely sandtrap, alruine</p>
+		 * <p>Or implement gimmicks during this timing whatever</p>
+		 * <p>==================================</p>
+		 * <p>Default: Nothing (duh)</p>
+		 */
+		public function preAttack():void{
+		}
+
+		/**
+		 * <p>attack() override series - Part 3</p>
+		 * <p>==================================</p>
+		 * <p>Executed after preAttackSeal(), preAttack()</p>
+		 * <p>Used to skip round after blind check (Basilisk)</p>
+		 * <p>Or do whatever shit you want just remember to pass true</p>
+		 * <p>Put round-skipping retaliate/counter attack gimmick here</p>
+		 * <p>==================================</p>
+		 * <p>current round will be skipped without running enemyAI() if return false</p>
+		 * <p>Default: true (player attack passes)</p>
+		 */
+		public function midAttackSkip():Boolean{
+			return true;
+		}
+
+		/**
+		 * <p>attack() override series - Part 4</p>
+		 * <p>==================================</p>
+		 * <p>Executed after preAttackSeal(), preAttack(), midAttackSkip()</p>
+		 * <p>==================================</p>
+		 * <p>used to execute gimmick that has the option to interrupt player attack</p>
+		 * <p>Or do whatever shit you want just remember to pass true</p>
+		 * <p>will perform HP check after this function so put normal retaliate/counter attack gimmick here</p>
+		 * <p>==================================</p>
+		 * <p>skip player attack and call enemyAI() if return false</p>
+		 * <p>Default: true (player attack passes) </p>
+		 */
+		public function midAttackSeal():Boolean{
+			return	true;
+		}
+
+		/**
+		 * <p>attack() override series - Part 5</p>
+		 * <p>==================================</p>
+		 * <p>Executed after preAttackSeal(), preAttack(), midAttackSkip(), midAttackSeal()</p>
+		 * <p>==================================</p>
+		 * <p>used to execute gimmick after player missed</p>
+		 * <p>Or just to output some monster dodging flavor text like why this function is implement for</p>
+		 * <p>==================================</p>
+		 * <p>Default: Default monster flavor text with HuntsmansCane variant </p>
+		 */
+		public function midDodge():void{
+			if (player.weapon is HuntsmansCane && rand(2) == 0) {
+				if (rand(2) == 0) outputText("You slice through the air with your cane, completely missing your enemy.");
+				else outputText("You lunge at your enemy with the cane.  It glows with a golden light but fails to actually hit anything.");
+			}
+			if (!SceneLib.combat.MSGControll) {
+				if (spe - player.spe < 8) outputText("[Themonster] narrowly avoids your attack!");
+				if (spe - player.spe >= 8 && spe - player.spe < 20) outputText("[Themonster] dodges your attack with superior speed!");
+				if (spe - player.spe >= 20) outputText("[Themonster] deftly avoids your attack.");
+			}
+		}
+
+		/**
+		 * <p>attack() override series - Part 6</p>
+		 * <p>==================================</p>
+		 * <p>Executed after preAttackSeal(), preAttack(), midAttackSkip(), midAttackSeal(), midDodge()</p>
+		 * <p>==================================</p>
+		 * <p>used to execute blocking gimmick when player can land a hit on monster</p>
+		 * <p>==================================</p>
+		 * <p>Block player attack and run enemyAI() if return false</p>
+		 * <p>Default: true (player attack passes)</p>
+		 */
+		public function postDodge():Boolean{
+			return true;
+		}
+
+		/**
+		 * <p>meleeDamageAcc() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called right when melee damage began to calculate</li>
+		 *     <li>It is used to alter individual melee damage after feral attacks</li>
+		 *     <li>PS: Should there be also overrides for feral attack as well?</li>
+		 *     <li>return Number: Current Instance of melee damage changed</li>
+		 * </ul>
+		 * @damage: Current Instance of Melee Damage
+		 */
+		public function preMeleeDmg(damage:Number):Number{
+			return damage;
+		}
+
+		/**
+		 * <p>meleeDamageAcc() Override Series - Part 2</p>
+		 * <ul>
+		 *     <li>Called after preMeleeDmg() and each individual melee damage was dealt</li>
+		 * </ul>
+		 */
+		public function postMeleeDmg():void{
+
+		}
+
+		/**
+		 * <p>meleeDamageAcc() Override Series - Part 3</p>
+		 * <ul>
+		 *     <li>Called after preMeleeDmg(), postMeleeDmg() and each individual melee damage was dealt</li>
+		 *     <li>Used to implement mechanic related to after individual melee attack</li>
+		 *     <li>return false to skip the remaining normal attacks</li>
+		 *     <li>PS: By exiting meleeDamageAcc() Thanks!</li>
+		 *     <li>Default: return true (next attack will be attempted based on remaining multi-hit)</li>
+		 * </ul>
+		 *
+		 * @attackInstance 1=first attack, 2=second, etc
+		 */
+		public function postMeleeDmgSkip(attackInstance:int):Boolean{
+			return true;
+		}
+
+		/**
+		 * <p>meleeDamageAcc() Override Series - Part 4</p>
+		 * <ul>
+		 *     <li>Called if failed to pass meleeacc check (Attack Missed)</li>
+		 *     <li>Used to run outputText() for flavor</li>
+		 *     <li>or you can put mechanic involved player missing normal melee attacks</li>
+		 * </ul>
+		 */
+		public function preMeleeMissed():void{
+			outputText("You swing your [weapon] ferociously, confident that you can strike a crushing blow. In your confidence, you focus too much on force, and not where your swing is headed. You miss, your enemy barely needing to move to evade your blow.\n");
+     	}
+
+		/**
+		 * <p>CombatUI.mainMenu() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called after passing playerBusy check</li>
+		 *     <li>Used to modify button in the bottom left corner</li>
+		 * </ul>
+		 */
+		public function postPlayerBusyBtnSpecial(btnSpecial1:CoCButton,btnSpecial2:CoCButton):void{
+
+		}
+
+		/**
+     	 * <p>CombatUI.mainMenuWhenBound() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called after passing playerWhenBound() check</li>
+		 *     <li>thus you need to add the array for playerWhenBound() check for new bind abilities</li>
+		 *     <li>PS: can we migrate mainMenuWhenBound() into CombatUI()??? it is only called by it anyway</li>
+		 *     <li>It is used for monster that possess player binding ability, used it if you want to alter buttons callback through .call(function)</li>
+		 * </ul>
+		 */
+		public function changeBtnWhenBound(btnStruggle:CoCButton,btnBoundWait:CoCButton):void{
+		}
+
+		/**
+		 * <p>Combat.doDamage() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called right before monster HP getting deducted</li>
+		 *     <li>Used to alter final damage to the monster</li>
+		 *     <li>return 0 to skip the rest of the doDamage() cuz no damage</li>
+		 *     <li>Default: original damage number</li>
+		 * </ul>
+		 */
+		public function doDamageBefore(damage:Number):Number{
+			return damage;
+		}
+
+		/**
+		 * <p>Combat.doMagicDamage() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called right before monster HP getting deducted</li>
+		 *     <li>Used to alter final damage to the monster</li>
+		 *     <li>return 0 to skip the rest of the doMagicDamage() cuz no damage</li>
+		 *     <li>Default: original damage number</li>
+		 * </ul>
+		 */
+		public function doMagicDamageBefore(damage:Number):Number{
+			return damage;
+		}
+
+		/**
+		 * <p>Combat.doFireDamage() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called right before monster HP getting deducted</li>
+		 *     <li>Used to alter final damage to the monster</li>
+		 *     <li>return 0 to skip the rest of the doFireDamage() cuz no damage</li>
+		 *     <li>Default: original damage number</li>
+		 * </ul>
+		 */
+		public function doFireDamageBefore(damage:Number):Number{
+			return damage;
+		}
+
+		/**
+		 * <p>Combat.doIceDamage() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called right before monster HP getting deducted</li>
+		 *     <li>Used to alter final damage to the monster</li>
+		 *     <li>return 0 to skip the rest of the doIceDamage() cuz no damage</li>
+		 *     <li>Default: original damage number</li>
+		 * </ul>
+		 */
+		public function doIceDamageBefore(damage:Number):Number{
+			return damage;
+		}
+
+		/**
+		 * <p>Combat.doLightningDamage() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called right before monster HP getting deducted</li>
+		 *     <li>Used to alter final damage to the monster</li>
+		 *     <li>return 0 to skip the rest of the doLightningDamage() cuz no damage</li>
+		 *     <li>Default: original damage number</li>
+		 * </ul>
+		 */
+		public function doLightningDamageBefore(damage:Number):Number{
+			return damage;
+		}
+
+		/**
+		 * <p>Combat.doDarknessDamage() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called right before monster HP getting deducted</li>
+		 *     <li>Used to alter final damage to the monster</li>
+		 *     <li>return 0 to skip the rest of the doDarknessDamage() cuz no damage</li>
+		 *     <li>Default: original damage number</li>
+		 * </ul>
+		 */
+		public function doDarknessDamageBefore(damage:Number):Number{
+			return damage;
+		}
+
+		/**
+		 * <p>Combat.doPoisonDamage() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called right before monster HP getting deducted</li>
+		 *     <li>Used to alter final damage to the monster</li>
+		 *     <li>return 0 to skip the rest of the doPoisonDamage() cuz no damage</li>
+		 *     <li>Default: original damage number</li>
+		 * </ul>
+		 */
+		public function doPoisonDamageBefore(damage:Number):Number{
+			return damage;
+		}
+
+		/**
+		 * <p>Combat.doWindDamage() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called right before monster HP getting deducted</li>
+		 *     <li>Used to alter final damage to the monster</li>
+		 *     <li>return 0 to skip the rest of the doWindDamage() cuz no damage</li>
+		 *     <li>Default: original damage number</li>
+		 * </ul>
+		 */
+		public function doWindDamageBefore(damage:Number):Number{
+			return damage;
+		}
+
+		/**
+		 * <p>Combat.doWaterDamage() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called right before monster HP getting deducted</li>
+		 *     <li>Used to alter final damage to the monster</li>
+		 *     <li>return 0 to skip the rest of the doWaterDamage() cuz no damage</li>
+		 *     <li>Default: original damage number</li>
+		 * </ul>
+		 */
+		public function doWaterDamageBefore(damage:Number):Number{
+			return damage;
+		}
+
+		/**
+		 * <p>Combat.doEarthDamage() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called right before monster HP getting deducted</li>
+		 *     <li>Used to alter final damage to the monster</li>
+		 *     <li>return 0 to skip the rest of the doEarthDamage() cuz no damage</li>
+		 *     <li>Default: original damage number</li>
+		 * </ul>
+		 */
+		public function doEarthDamageBefore(damage:Number):Number{
+			return damage;
+		}
+
+		/**
+		 * <p>Combat.doAcidDamage() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called right before monster HP getting deducted</li>
+		 *     <li>Used to alter final damage to the monster</li>
+		 *     <li>return 0 to skip the rest of the doAcidDamage() cuz no damage</li>
+		 *     <li>Default: original damage number</li>
+		 * </ul>
+		 */
+		public function doAcidDamageBefore(damage:Number):Number{
+			return damage;
+		}
+
+		/**
+		 * <p>Combat.doTrueDamage() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called right before monster HP getting deducted</li>
+		 *     <li>Used to alter final damage to the monster</li>
+		 *     <li>return 0 to skip the rest of the doTrueDamage() cuz no damage</li>
+		 *     <li>Default: original damage number</li>
+		 * </ul>
+		 */
+		public function doTrueDamageBefore(damage:Number):Number{
+			return damage;
+		}
+
+		/**
+		 * <p>Combat.doAI() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called right before monster HP getting deducted</li>
+		 *     <li>Used to handle status effect that cancel doAI()</li>
+		 *     <li>Currently handle OrcaPlay/Straddle/Provoke/OrcaHasWackedFinish</li>
+		 *     <li>PS: Please update line above if you add another custom disable doAI statusEffects for some reason</li>
+		 *     <li>return true to handle Status Effects (doAI() continue)</li>
+		 *     <li>Default: false (doAI() interrupted)</li>
+		 * </ul>
+		 */
+		public function handleStatusEffects(statusEffect:StatusEffectType):Boolean{
+			return false;
+		}
+
+		/**
+		 * <p>CombatUI.doCompanionTurn() Override Series - Part 1</p>
+		 * <ul>
+		 *     <li>Called at the beginning of the doCompanionTurn()</li>
+		 *     <li>return false to skip companion action</li>
+		 *     <li>Default: true (Function executed as usual)</li>
+		 * </ul>
+		 */
+		public function preCompanionSeal(companionName:String):Boolean{
+			return true;
+		}
+
+		/**
+		 * <p>CombatUI.doCompanionTurn() Override Series - Part 2</p>
+		 * <ul>
+		 *     <li>Called at the end of the doCompanionTurn()</li>
+		 *     <li>used to perform monster gimmick</li>
+		 * </ul>
+		 */
+		public function postCompanionAction():void{
+
+		}
+
+		/**
+		 * Returns a list of statuses unique to the monster that are currently affected by
+		 * To be overwritten by child monster classes
+		 * @return statues (Array) - List of String repreenting each unique status the monster is currently under
+		 */
+		public function displaySpecialStatuses():Array {
+			return [];
 		}
 
 		/**
@@ -2448,8 +3053,10 @@ import flash.utils.getQualifiedClassName;
 		/**
 		 * Display tease reaction message. Then call applyTease() to increase lust.
 		 * @param lustDelta value to be added to lust (already modified by lustVuln etc)
+		 * @param isNotSilent (Boolean) - Choose whether the default monster tease reaction text should be printed
+		 * @param display (Boolean) - Choose whether the tease damage number should be displayed
 		 */
-		public function teased(lustDelta:Number, isNotSilent:Boolean = true):void
+		public function teased(lustDelta:Number, isNotSilent:Boolean = true, display:Boolean = true):void
 		{
 			if(isNotSilent)
 			{
@@ -2467,7 +3074,12 @@ import flash.utils.getQualifiedClassName;
 				}
 			}
 			if (hasStatusEffect(StatusEffects.BerzerkingSiegweird)) lustDelta *= 0.5;
-			applyTease(lustDelta);
+			if (player.isGoblinoid() && player.perkv1(IMutationsLib.GoblinOvariesIM) >= 3 && hasCock()) {
+				var lustMDM:Number = 1.25;
+				if (player.perkv1(IMutationsLib.GoblinOvariesIM) >= 4) lustMDM += 0.25;
+				lustDelta *= lustMDM;
+			}
+			applyTease(lustDelta, display);
 		}
 
 		protected function outputDefaultTeaseReaction(lustDelta:Number):void
@@ -2502,14 +3114,15 @@ import flash.utils.getQualifiedClassName;
 			}
 		}
 
-		protected function applyTease(lustDelta:Number):void{
+		protected function applyTease(lustDelta:Number, display:Boolean = true):void{
 			if (damageReductionBasedOnDifficulty() > 1) lustDelta *= (1 / damageReductionBasedOnDifficulty());
+			lustDelta *= SceneLib.combat.doDamageReduction();
 			lustDelta = Math.round(lustDelta);
 			lust += lustDelta;
-			outputText(" <b>([font-lust]" + lustDelta + "</font>)</b>");
-			if (player.armor == armors.ELFDRES && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0 && lustDelta >= 1) {
-				outputText(" You cool down a little bit ");
-				player.takeLustDamage(Math.round(-lustDelta)/20);
+			if (display) SceneLib.combat.CommasForDigits(lustDelta, true);//outputText(" <b>([font-lust]" + Utils.formatNumber(lustDelta) + "[/font])</b>");
+			if (player.armor == armors.ELFDRES && player.isElf() && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0 && lustDelta >= 1) {
+				if (display) outputText(" You cool down a little bit ");
+				player.takeLustDamage(Math.round(-(player.maxLust() * 0.01)), display, true);
 			}
 		}
 
@@ -2601,7 +3214,7 @@ import flash.utils.getQualifiedClassName;
 			result +=".\n\n";
 			// COMBAT AND OTHER STATS
 			result += Hehas + "str=" + this.strStat.core.value + ", tou=" + this.touStat.core.value + ", spe=" + this.speStat.core.value +", inte=" + this.intStat.core.value +", wis=" + this.wisStat.core.value +", lib=" + this.libStat.core.value + ", sens=" + sens + ", cor=" + cor + ".\n";
-			result += Pronoun1 + " can " + weaponVerb + " you with  " + weaponPerk + " " + weaponName+" (attack " + weaponAttack + ", value " + weaponValue+").\n";
+			result += Pronoun1 + " can " + weaponVerb + " you with  " + weaponName+" (attack " + weaponAttack + ", value " + weaponValue+").\n";
 			result += Pronoun1 + " is guarded with " + armorPerk + " " + armorName+" (phys defense " + armorDef + ", mag defense " + armorMDef + ", value " + armorValue+").\n";
 			result += Hehas + HP + "/" + maxHP() + " HP, " + lust + "/" + maxLust() + " lust, " + fatigue + "/" + maxFatigue() + " fatigue, " + wrath + "/" + maxWrath() + " wrath, " + soulforce + "/" + maxSoulforce() + " soulforce, " + mana + "/" + maxMana() + " mana. ";
 			result += Pronoun3 + " bonus HP=" + bonusHP + ", bonus lust=" + bonusLust + ", bonus wrath=" + bonusWrath + ", bonus mana=" + bonusMana + ", bonus soulforce=" + bonusSoulforce + ", and lust vulnerability=" + lustVuln + ".\n"
@@ -2666,12 +3279,15 @@ import flash.utils.getQualifiedClassName;
 
 		public function combatRoundUpdate():void
 		{
-
-			//regeneration perks for monsters
+			//Adjusting current HP/SF/Mana if it's for whatever reason beyond overMax cap
+			if (this.HP > maxOverHP()) this.HP = maxOverHP();
+			if (this.soulforce > maxOverSoulforce()) this.soulforce = maxOverSoulforce();
+			if (this.mana > maxOverMana()) this.mana = maxMana();
+			//health, soulforce and mana regeneration for monsters
 			if (((hasPerk(PerkLib.Regeneration) || hasPerk(PerkLib.LizanRegeneration) || perkv1(IMutationsLib.LizanMarrowIM) >= 1 || perkv1(IMutationsLib.DraconicHeartIM) >= 3 || perkv1(IMutationsLib.FerasBirthrightIM) >= 1 || hasPerk(PerkLib.EnemyPlantType) || hasPerk(PerkLib.FleshBodyApprenticeStage)
-			|| hasPerk(PerkLib.MonsterRegeneration) || hasPerk(PerkLib.HydraRegeneration) || hasPerk(PerkLib.Lifeline) || hasPerk(PerkLib.ImprovedLifeline) || hasPerk(PerkLib.GreaterLifeline) || hasPerk(PerkLib.EpicLifeline) || hasPerk(PerkLib.IcyFlesh) || hasPerk(PerkLib.HclassHeavenTribulationSurvivor)
-			|| hasPerk(PerkLib.GclassHeavenTribulationSurvivor) || hasPerk(PerkLib.FclassHeavenTribulationSurvivor) || hasPerk(PerkLib.FFclassHeavenTribulationSurvivor) || hasPerk(PerkLib.EclassHeavenTribulationSurvivor) || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2)
-			|| hasPerk(PerkLib.EnemyTrueAngel) || hasPerk(PerkLib.EnemyTrueDemon)) && this.HP < maxOverHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxOverHP()) && (this.HP > minHP()))) {
+			|| hasPerk(PerkLib.MonsterRegeneration) || hasPerk(PerkLib.HydraRegeneration) || hasPerk(PerkLib.TrollRegeneration) || hasPerk(PerkLib.Lifeline) || hasPerk(PerkLib.ImprovedLifeline) || hasPerk(PerkLib.GreaterLifeline) || hasPerk(PerkLib.EpicLifeline) || hasPerk(PerkLib.IcyFlesh)
+			|| hasPerk(PerkLib.HclassHeavenTribulationSurvivor) || hasPerk(PerkLib.GclassHeavenTribulationSurvivor) || hasPerk(PerkLib.FclassHeavenTribulationSurvivor) || hasPerk(PerkLib.FFclassHeavenTribulationSurvivor) || hasPerk(PerkLib.EclassHeavenTribulationSurvivor) || hasStatusEffect(StatusEffects.MonsterRegen)
+			|| hasStatusEffect(StatusEffects.MonsterRegen2) || hasPerk(PerkLib.EnemyTrueAngel) || hasPerk(PerkLib.EnemyTrueDemon)) && this.HP < maxOverHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxOverHP()) && (this.HP > minHP()))) {
 				var healingPercent:Number = 0;
 				var temp2:Number = 0;
 				var temp3:Number = 0;
@@ -2680,11 +3296,11 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.VladimirRegalia) && !isNightTime()) healingPercent -= 5;
 				if (hasPerk(PerkLib.VladimirRegalia) && isNightTime()) healingPercent += 5;
 				if (hasPerk(PerkLib.LizanRegeneration) && !hasStatusEffect(StatusEffects.RegenInhibitor) && !hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) healingPercent += 1.5;
-				if (perkv1(IMutationsLib.LizanMarrowIM) >= 1 && !hasStatusEffect(StatusEffects.RegenInhibitor) && !hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) healingPercent += 0.5;
-				if (perkv1(IMutationsLib.LizanMarrowIM) >= 2 && !hasStatusEffect(StatusEffects.RegenInhibitor) && !hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) healingPercent += 1;
-				if (perkv1(IMutationsLib.LizanMarrowIM) >= 3 && !hasStatusEffect(StatusEffects.RegenInhibitor) && !hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) {
-					healingPercent += 1.5;
-					if (this.HP < (this.maxHP() * 0.25)) healingPercent += 4.5;
+				if (perkv1(IMutationsLib.LizanMarrowIM) >= 1 && !hasStatusEffect(StatusEffects.RegenInhibitor) && !hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) healingPercent += 0.5 * perkv1(IMutationsLib.LizanMarrowIM);
+				if (perkv1(IMutationsLib.LizanMarrowIM) == 3 && !hasStatusEffect(StatusEffects.RegenInhibitor) && !hasStatusEffect(StatusEffects.RegenInhibitorPetrify) && this.HP < (this.maxHP() * 0.25)) healingPercent += 1.5;
+				if (perkv1(IMutationsLib.LizanMarrowIM) == 4 && !hasStatusEffect(StatusEffects.RegenInhibitor) && !hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) {
+					if (this.HP < (this.maxHP() * 0.6)) healingPercent += 2;
+					if (this.HP < (this.maxHP() * 0.2)) healingPercent += 2;
 				}
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 3) healingPercent += 1;
 				if (perkv1(IMutationsLib.FerasBirthrightIM) >= 1 && !hasStatusEffect(StatusEffects.WereraceRegenerationDisabled) && !hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) {
@@ -2701,6 +3317,7 @@ import flash.utils.getQualifiedClassName;
 					healingPercent += 2;
 				}
 				if (hasPerk(PerkLib.HydraRegeneration) && !hasStatusEffect(StatusEffects.HydraRegenerationDisabled) && !hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) healingPercent += 1 * perkv1(PerkLib.HydraRegeneration);
+				if (hasPerk(PerkLib.TrollRegeneration) && !hasStatusEffect(StatusEffects.TrollRegenerationDisabled) && !hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) healingPercent += 6;
 				if (hasPerk(PerkLib.IcyFlesh)) healingPercent += 1;
 				if (hasPerk(PerkLib.FleshBodyApprenticeStage)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.FleshBodyWarriorStage)) healingPercent += 0.5;
@@ -2732,21 +3349,22 @@ import flash.utils.getQualifiedClassName;
 					healingPercent += 20;
 					if (perkv1(IMutationsLib.FerasBirthrightIM) >= 4) healingPercent += 10;
 				}
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp3 += 0.55;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp3 += 0.25;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp3 += 0.15;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) temp3 += 0.08;
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp3 += 0.3;
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp3 += 0.2;
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp3 += 0.12;
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp3 += 0.05;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp3 += 0.6;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp3 += 0.47;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) temp3 += 0.4;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 4) temp3 += 0.36;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 5) temp3 += 0.34;
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 6) temp3 += 0.32;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp3 += 0.05;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp3 += 0.15;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp3 += 0.25;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) temp3 += 0.55;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp3 += 0.05;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp3 += 0.12;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp3 += 0.2;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp3 += 0.3;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp3 += 0.1;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp3 += 0.2;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) temp3 += 0.3;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 4) temp3 += 0.4;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 5) temp3 += 0.5;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 6) temp3 += 0.6;
 				if (temp3 > 0) healingPercent *= temp3;
+				if (hasPerk(PerkLib.EnemyTrueDemon)) healingPercent *= 2;
 				temp2 = Math.round(maxHP() * healingPercent / 100);
 				if (hasPerk(PerkLib.Lifeline)) temp2 += (45 * (1 + newGamePlusMod()));
 				if (hasPerk(PerkLib.ImprovedLifeline)) temp2 += (60 * (1 + newGamePlusMod()));
@@ -2757,7 +3375,7 @@ import flash.utils.getQualifiedClassName;
 				if (temp2 > 0) {
 					temp2 = Math.round(temp2);
 					if (this is ChiChi && (flags[kFLAGS.CHI_CHI_SAM_TRAINING] < 2 || hasStatusEffect(StatusEffects.MonsterRegen))) {
-						outputText("To your surprise, Chi Chi’s wounds start closing! <b>([font-heal]+" + temp2 + "</font>)</b>.\n\n");
+						outputText("To your surprise, Chi Chi’s wounds start closing! <b>([font-heal]+" + temp2 + "[/font])</b>.\n\n");
 					}
 					else {
 						outputText("Due to natural regeneration " + short + " recover");
@@ -2770,7 +3388,6 @@ import flash.utils.getQualifiedClassName;
 					addHP(temp2);
 				}
 			}
-			//soulforce and mana regeneration for monsters
 			if (hasPerk(PerkLib.JobSoulCultivator) && this.soulforce < maxOverSoulforce()) {
 				var soulforceRecovery:Number = 0;
 				var soulforceRecoveryMulti:Number = 1;
@@ -2833,7 +3450,6 @@ import flash.utils.getQualifiedClassName;
 				if (hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) manaRecovery = 0;
 				addMana(manaRecovery);
 			}
-
 			if(hasStatusEffect(StatusEffects.MilkyUrta)) {
 				SceneLib.urtaQuest.milkyUrtaTic();
 			}
@@ -2907,7 +3523,7 @@ import flash.utils.getQualifiedClassName;
 				if(statusEffectv1(StatusEffects.FrozenSolid) <= 0) {
 					outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " no longer encased in the ice prison!</b>\n\n");
 					statStore.removeBuffs("FrozenSolid");
-					removeStatusEffect(StatusEffects.FrozenSolid);
+					handleStunEnd(StatusEffects.FrozenSolid);
 				}
 				else outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " currently encased in the ice prison!</b>\n\n");
 			}
@@ -2916,7 +3532,7 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.Polymorphed,1,-5);
 				if(statusEffectv1(StatusEffects.Polymorphed) <= 0) {
 					outputText("<b>[Themonster] has freed " + pronoun2 + "self from the curse!</b>\n\n");
-					removeStatusEffect(StatusEffects.Polymorphed);
+					handleStunEnd(StatusEffects.Polymorphed);
 				}
 				else outputText("<b>[Themonster] is fighting against the curse.</b>\n\n");
 			}
@@ -2925,7 +3541,7 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.Sleep,1,-5);
 				if(statusEffectv1(StatusEffects.Sleep) <= 0) {
 					outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " no longer asleep!</b>\n\n");
-					removeStatusEffect(StatusEffects.Sleep);
+					handleStunEnd(StatusEffects.Sleep);
 				}
 				else outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " currently asleep!</b>\n\n");
 			}
@@ -2940,7 +3556,7 @@ import flash.utils.getQualifiedClassName;
 				else addStatusValue(StatusEffects.InvisibleOrStealth,1,-1);
 				if(statusEffectv1(StatusEffects.InvisibleOrStealth) <= 0) {
 					outputText("<b>" + capitalA + short + (plural ? " have" : " has") + " found you!</b>\n\n");
-					removeStatusEffect(StatusEffects.InvisibleOrStealth);
+					handleStunEnd(StatusEffects.InvisibleOrStealth);
 				}
 				else outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " looking for you!</b>\n\n");
 			}
@@ -2958,7 +3574,7 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.HypnosisNaga,1,-5);
 				if(statusEffectv1(StatusEffects.HypnosisNaga) <= 0) {
 					outputText("<b>You try to prolong the trance but [themonster] finally snaps out.</b>\n\n");
-					removeStatusEffect(StatusEffects.HypnosisNaga);
+					handleStunEnd(StatusEffects.HypnosisNaga);
 				}
 				else outputText("<b>[Themonster] is lost in your gaze unable to act.</b>\n\n");
 			}
@@ -2986,7 +3602,7 @@ import flash.utils.getQualifiedClassName;
 					player.removeStatusEffect(StatusEffects.Blind);
 				}
 				else {
-					if((statusEffectv1(StatusEffects.Sandstorm) == 0 || statusEffectv1(StatusEffects.Sandstorm) % 4 == 0) && !player.hasPerk(PerkLib.BlindImmunity)) {
+					if((statusEffectv1(StatusEffects.Sandstorm) == 0 || statusEffectv1(StatusEffects.Sandstorm) % 4 == 0) && !player.isImmuneToBlind()) {
 						player.createStatusEffect(StatusEffects.Blind,0,0,0,0);
 						outputText("<b>The sand is in your eyes!  You're blinded this turn!</b>\n\n");
 					}
@@ -3019,20 +3635,36 @@ import flash.utils.getQualifiedClassName;
 				addStatusValue(StatusEffects.Hypermode,1,-1);
 			}
 			if(hasStatusEffect(StatusEffects.CouatlHurricane)) {
-				//Deal severe true damage each round
-				var store14:Number = (player.inte + player.spe) * 2;
-				createStatusEffect(StatusEffects.CouatlHurricane, (player.spe*5)+(player.inte*5), 1, 0, 0);
-				store14 = Math.round(store14);
-				if (statusEffectv2(StatusEffects.CouatlHurricane) > 0) store14 *= statusEffectv2(StatusEffects.CouatlHurricane);
-				store14 += statusEffectv1(StatusEffects.CouatlHurricane); //Stacks on itself growing ever stronger
-				store14 += maxHP()*0.02;
-				store14 = SceneLib.combat.doDamage(store14);
-				if(plural) outputText("[Themonster] is violently struck by the ever intensifying windstorm. ");
-				else outputText("[Themonster] are violently struck by the ever intensifying windstorm. ");
-				SceneLib.combat.CommasForDigits(store14);
-				outputText("[pg]");
-				temp = rand(4);
-				if(temp == 3) createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0); outputText("<b>A random flying object caught in the hurricane rams into your opponent, stunning it!</b>\n\n");
+				//Countdown to heal
+				if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.CouatlHurricane, 1, -2);
+				else addStatusValue(StatusEffects.CouatlHurricane, 1, -1);
+				//Heal wounds
+				if (statusEffectv1(StatusEffects.CouatlHurricane) <= 0) {
+					outputText("The wounds you left on [themonster] stop bleeding so profusely.\n\n");
+					removeStatusEffect(StatusEffects.CouatlHurricane);
+				}
+				else {
+					//Deal severe true damage each round
+					var store14:Number = (player.inte + player.spe) * 2;
+					var couatlExtraDmg:Number = (player.spe*5)+(player.inte*5);
+					if (statusEffectv2(StatusEffects.CouatlHurricane) > 0) store14 += couatlExtraDmg; //If reapplied, temporarily increase damage
+					store14 += maxHP()*0.02;
+					store14 = SceneLib.combat.fixPercentDamage(store14, false);
+					store14 = SceneLib.combat.doDamage(store14);
+					if(plural) outputText("[Themonster] is violently struck by the ever intensifying windstorm. ");
+					else outputText("[Themonster] are violently struck by the ever intensifying windstorm. ");
+					SceneLib.combat.CommasForDigits(store14);
+					outputText("[pg]");
+					if(rand(4) == 3 && !hasPerk(PerkLib.Resolute)) {
+						createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+						outputText("<b>A random flying object caught in the hurricane rams into your opponent, stunning it!</b>");
+					}
+					if (statusEffectv2(StatusEffects.CouatlHurricane) > 0) {
+						changeStatusValue(StatusEffects.CouatlHurricane, 2, 0);
+						outputText("\nThe hurricane winds returned to their regular intensity.");
+					}
+					outputText("\n\n");
+				}
 			}
 			if(hasStatusEffect(StatusEffects.IzmaBleed)) {
 				//Countdown to heal
@@ -3048,12 +3680,11 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var procentvalue:Number = (4 + rand(7));
-					var procentvalue1:Number = SceneLib.combat.BleedDamageBoost();
 					if (statusEffectv2(StatusEffects.IzmaBleed) > 0) procentvalue += statusEffectv2(StatusEffects.IzmaBleed);
-					procentvalue *= procentvalue1;
 					procentvalue = Math.round(procentvalue);
 					var store:Number = maxHP() * (procentvalue) / 100;
-					store = boundInt(1, store, maxHP()*.05);
+					store *= SceneLib.combat.BleedDamageBoost();
+					store = SceneLib.combat.fixPercentDamage(store);
 					store = SceneLib.combat.doDamage(store);
 					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your weapon left behind. ");
 					else outputText("[Themonster] bleeds profusely from the jagged wounds your weapon left behind. ");
@@ -3073,10 +3704,9 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var store3:Number = SceneLib.combat.CalcBaseDamageUnarmed()/2;
-					var store3a:Number = SceneLib.combat.BleedDamageBoost(true);
-					store3 *= store3a;
-					store3 = boundInt(1, store3, maxHP()*.05);
+					store3 *= SceneLib.combat.BleedDamageBoost(true);
 					if (statusEffectv2(StatusEffects.SharkBiteBleed) > 0) store3 *= statusEffectv2(StatusEffects.SharkBiteBleed);
+					store3 = SceneLib.combat.fixPercentDamage(store3, false);
 					store3 = SceneLib.combat.doDamage(store3);
 					if(plural) outputText("[Themonster] bleed profusely from the jagged wounds your bite left behind. ");
 					else outputText("[Themonster] bleeds profusely from the jagged wounds your bite left behind. ");
@@ -3088,19 +3718,20 @@ import flash.utils.getQualifiedClassName;
 				//This wounds never heals unless by magic
 				//Deal damage if still wounded.
 				var store13:Number = SceneLib.combat.CalcBaseDamageUnarmed()/2;
-				var store13a:Number = SceneLib.combat.BleedDamageBoost();
-				if (player.hasPerk(PerkLib.RacialParagon)) store13a += .5;
-				if (player.hasPerk(PerkLib.Apex)) store13a += .5;
-				if (player.hasPerk(PerkLib.AlphaAndOmega)) store13a += .5;
-				store13 *= store13a;
+				store13 *= SceneLib.combat.BleedDamageBoost(true);
 				store13 = Math.round(store13);
-				if (statusEffectv2(StatusEffects.KamaitachiBleed) > 0) store13 *= statusEffectv2(StatusEffects.KamaitachiBleed);
-				store13 += statusEffectv1(StatusEffects.KamaitachiBleed); //Kamaitachi bleed stacks on itself growing ever stronger
+				
+				//Gain 20% per stack for regular Kamaitachi and 40% for Greater Kamaitachi
+				var kamMultiplier:Number = 0.2 * player.racialTierCached(Races.KAMAITACHI);
+				store13 *= 1 + (kamMultiplier * statusEffectv1(StatusEffects.KamaitachiBleed)); //Kamaitachi bleed stacks on itself growing ever stronger
 				store13 = SceneLib.combat.doDamage(store13);
 				if(plural) outputText("[Themonster] bleed profusely from the deep wounds your scythes left behind. ");
 				else outputText("[Themonster] bleeds profusely from the deep wounds your scythes left behind. ");
 				SceneLib.combat.CommasForDigits(store13);
 				outputText("[pg]");
+				//Decay Kamaitachi stacks for each turn the effect is not applied
+				if (statusEffectv4(StatusEffects.KamaitachiBleed) == 0 && statusEffectv1(StatusEffects.KamaitachiBleed) > 1) addStatusValue(StatusEffects.KamaitachiBleed, 1, -1);
+				changeStatusValue(StatusEffects.KamaitachiBleed, 4, 0);
 			}
 			if(hasStatusEffect(StatusEffects.GoreBleed)) {
 				//Countdown to heal
@@ -3117,18 +3748,8 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var store5:Number = SceneLib.combat.CalcBaseDamageUnarmed()/2;
-					var store5a:Number = 1;
-					if (player.hasPerk(PerkLib.ThirstForBlood)) store5a += .25;
-					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store5a += .2;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) store5a += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) store5a += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) store5a += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) store5a += .25;
-					if (player.hasPerk(PerkLib.RacialParagon)) store5a += .5;
-					if (player.hasPerk(PerkLib.Apex)) store5a += .5;
-					if (player.hasPerk(PerkLib.AlphaAndOmega)) store5a += .5;
-					store5 *= store5a;
-					store5 = boundInt(1, store5, maxHP()*.05);
+					store5 *= SceneLib.combat.BleedDamageBoost();
+					store5 = SceneLib.combat.fixPercentDamage(store5, false);
 					store5 = SceneLib.combat.doDamage(store5);
 					if (plural) outputText("[Themonster] bleed profusely from the jagged ");
 					else outputText("[Themonster] bleeds profusely from the jagged ")
@@ -3147,67 +3768,13 @@ import flash.utils.getQualifiedClassName;
 					removeStatusEffect(StatusEffects.Hemorrhage);
 				}
 				else {
-					var hemorrhage1:Number = 0;
-					hemorrhage1 += maxHP() * statusEffectv2(StatusEffects.Hemorrhage);
-					if (player.hasPerk(PerkLib.ThirstForBlood)) hemorrhage1 += .25;
-					if (player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage1 *= 1.2;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) hemorrhage1 += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) hemorrhage1 += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) hemorrhage1 += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) hemorrhage1 += .25;
-					hemorrhage1 = boundInt(1, hemorrhage1, maxHP()*.05);
+					var hemorrhage1:Number = maxHP() * statusEffectv2(StatusEffects.Hemorrhage)
+					hemorrhage1 *= SceneLib.combat.BleedDamageBoost();
+					hemorrhage1 = SceneLib.combat.fixPercentDamage(hemorrhage1);
 					hemorrhage1 = SceneLib.combat.doDamage(hemorrhage1);
 					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your attack left behind. ");
 					else outputText("[Themonster] bleeds profusely from the jagged wounds your attack left behind. ");
 					SceneLib.combat.CommasForDigits(hemorrhage1);
-					outputText("[pg]");
-				}
-			}
-			if (hasStatusEffect(StatusEffects.HemorrhageArmor)) {
-				if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.HemorrhageArmor, 1, -2);
-				else addStatusValue(StatusEffects.HemorrhageArmor, 1, -1);
-				if (statusEffectv1(StatusEffects.HemorrhageArmor) <= 0) {
-					outputText("The wounds your armor left on [themonster] stop bleeding so profusely.\n\n");
-					removeStatusEffect(StatusEffects.HemorrhageArmor);
-				}
-				else {
-					var hemorrhage2:Number = 0;
-					hemorrhage2 += maxHP() * statusEffectv2(StatusEffects.HemorrhageArmor);
-					if (player.hasPerk(PerkLib.ThirstForBlood)) hemorrhage2 += .25;
-					if (player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage2 *= 1.2;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) hemorrhage2 += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) hemorrhage2 += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) hemorrhage2 += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) hemorrhage2 += .25;
-					hemorrhage2 = boundInt(1, hemorrhage2, maxHP()*.05);
-					hemorrhage2 = SceneLib.combat.doDamage(hemorrhage2);
-					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds that resulted from contact with your armor. ");
-					else outputText("[Themonster] bleeds profusely from the jagged wounds that resulted from contact with your armor. ");
-					SceneLib.combat.CommasForDigits(hemorrhage2);
-					outputText("[pg]");
-				}
-			}
-			if (hasStatusEffect(StatusEffects.HemorrhageShield)) {
-				if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.HemorrhageShield, 1, -2);
-				else addStatusValue(StatusEffects.HemorrhageShield, 1, -1);
-				if (statusEffectv1(StatusEffects.HemorrhageShield) <= 0) {
-					outputText("The wounds your shield left on [themonster] stop bleeding so profusely.\n\n");
-					removeStatusEffect(StatusEffects.HemorrhageShield);
-				}
-				else {
-					var hemorrhage3:Number = 0;
-					hemorrhage3 += maxHP() * statusEffectv2(StatusEffects.HemorrhageShield);
-					if (player.hasPerk(PerkLib.ThirstForBlood)) hemorrhage3 += .25;
-					if (player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage1 *= 1.2;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) hemorrhage3 += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) hemorrhage3 += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) hemorrhage3 += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) hemorrhage3 += .25;
-					hemorrhage3 = boundInt(1, hemorrhage3, maxHP()*.05);
-					hemorrhage3 = SceneLib.combat.doDamage(hemorrhage3);
-					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your shield left behind. ");
-					else outputText("[Themonster] bleeds profusely from the jagged wounds your shield left behind. ");
-					SceneLib.combat.CommasForDigits(hemorrhage3);
 					outputText("[pg]");
 				}
 			}
@@ -3219,12 +3786,11 @@ import flash.utils.getQualifiedClassName;
 					removeStatusEffect(StatusEffects.Hemorrhage2);
 				}
 				else {
-					var hemorrhage4:Number = 0;
-					hemorrhage4 += maxHP() * statusEffectv2(StatusEffects.Hemorrhage2);
-					hemorrhage4 = boundInt(1, hemorrhage4, maxHP()*.05);
+					var hemorrhage4:Number = maxHP() * statusEffectv2(StatusEffects.Hemorrhage2);
+					hemorrhage4 = SceneLib.combat.fixPercentDamage(hemorrhage4);
 					hemorrhage4 = SceneLib.combat.doDamage(hemorrhage4);
-					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your companion attack left behind. ");
-					else outputText("[Themonster] bleeds profusely from the jagged wounds your companion attack left behind. ");
+					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your companion's attack left behind. ");
+					else outputText("[Themonster] bleeds profusely from the jagged wounds your companion's attack left behind. ");
 					SceneLib.combat.CommasForDigits(hemorrhage4);
 					outputText("[pg]");
 				}
@@ -3236,9 +3802,10 @@ import flash.utils.getQualifiedClassName;
 				game.player.addStatusValue(StatusEffects.BloodField, 1, -1);
 				if (game.player.statusEffectv1(StatusEffects.BloodField) <= 0) game.player.removeStatusEffect(StatusEffects.BloodField);
 				if (!game.player.hasStatusEffect(StatusEffects.MonsterDig) && !isFlying()) {
-					var bloodfield:Number = statusEffectv2(StatusEffects.Hemorrhage);
+					var bloodfield:Number = statusEffectv2(StatusEffects.BloodField);
 					if (plural) bloodfield *= 5;
 					if (hasPerk(PerkLib.EnemyLargeGroupType)) bloodfield *= 5;
+					bloodfield = SceneLib.combat.fixPercentDamage(bloodfield);
 					bloodfield = SceneLib.combat.doDamage(bloodfield);
 					EngineCore.HPChange(bloodfield, false);
 				}
@@ -3269,12 +3836,11 @@ import flash.utils.getQualifiedClassName;
 			}
 			if(hasStatusEffect(StatusEffects.Briarthorn)) {
 				var store16:Number = (player.str + player.spe) * 2;
-				var store16a:Number = SceneLib.combat.BleedDamageBoost();
-				store16 *= store16a;
+				store16 *= SceneLib.combat.BleedDamageBoost();
 				store16 += maxHP()*0.05;
-				store16 = boundInt(1, store16, maxHP()*.05);
+				store16 = SceneLib.combat.fixPercentDamage(store16);
 				store16 = SceneLib.combat.doDamage(store16);
-				if(plural) outputText("[Themonster] bleeds profusely from the deep wounds your vine thorns left behind. ");
+				if(plural) outputText("[Themonster] bleed profusely from the deep wounds your vine thorns left behind. ");
 				else outputText("[Themonster] bleeds profusely from the deep wounds your vine thorns left behind. ");
 				SceneLib.combat.CommasForDigits(store16);
 				outputText("[pg]");
@@ -3285,11 +3851,10 @@ import flash.utils.getQualifiedClassName;
 					outputText("<b>Bleeding cause by deep wounds your rose thorns left behind stopped!</b>[pg]");
 				} else {
 					var store17:Number = (player.str + player.spe);
-					var store17a:Number = SceneLib.combat.BleedDamageBoost() *
-							statusEffectv1(StatusEffects.Rosethorn)*0.1;
-					store17 *= store17a;
+					store17 *= SceneLib.combat.BleedDamageBoost();
+					store17 *= statusEffectv1(StatusEffects.Rosethorn) * 0.1;
 					store17 += maxHP()*0.01;
-					store17 = boundInt(1, store17, maxHP()*.05);
+					store17 = SceneLib.combat.fixPercentDamage(store17);
 					store17 = SceneLib.combat.doDamage(store17);
 					if(plural) outputText("[Themonster] bleed profusely from the deep wounds your rose thorns left behind. ");
 					else outputText("[Themonster] bleeds profusely from the deep wounds your rose thorns left behind. ");
@@ -3344,7 +3909,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasStatusEffect(StatusEffects.Swallowed)) {
 				if (rand(3)) {
 					outputText("The many fleshy tentacles lining your inner walls slither around [themonster], seeking out and caressing [monster his] vulnerable endowments as you insidiously try to draw [monster him] closer to cumming.\n\n");
-					if (!lustVuln <= 0) teased(SceneLib.combat.calculateBasicTeaseDamage(9 + rand(7)));
+					if (!lustVuln <= 0) teased(SceneLib.combat.teases.teaseBaseLustDamage() * lustVuln);
 				}
 				if (!hasStatusEffect(StatusEffects.SandWormAcid))
 					createStatusEffect(StatusEffects.SandWormAcid, 1, 0, 0, 0);
@@ -3361,32 +3926,34 @@ import flash.utils.getQualifiedClassName;
 				if(flags[kFLAGS.PC_FETISH] >= 2) player.dynStats("lus", 3);
 			}
 			if(this is SecretarialSuccubus || this is MilkySuccubus) {
-				if(player.lust < (player.maxLust() * 0.45)) outputText("There is something in the air around your opponent that makes you feel warm.\n\n");
-				else if(player.lust < (player.maxLust() * 0.70)) outputText("You aren't sure why but you have difficulty keeping your eyes off your opponent's lewd form.\n\n");
-				else if(player.lust < (player.maxLust() * 0.90)) outputText("You blush when you catch yourself staring at your foe's rack, watching it wobble with every step she takes.\n\n");
-				else outputText("You have trouble keeping your greedy hands away from your groin.  It would be so easy to just lay down and masturbate to the sight of your curvy enemy.  The succubus looks at you with a sexy, knowing expression.\n\n");
-				player.takeLustDamage(1+rand(8), true);
+				if(player.lust < (player.maxLust() * 0.45)) outputText("There is something in the air around your opponent that makes you feel warm. ");
+				else if(player.lust < (player.maxLust() * 0.70)) outputText("You aren't sure why but you have difficulty keeping your eyes off your opponent's lewd form. ");
+				else if(player.lust < (player.maxLust() * 0.90)) outputText("You blush when you catch yourself staring at your foe's rack, watching it wobble with every step she takes. ");
+				else outputText("You have trouble keeping your greedy hands away from your groin.  It would be so easy to just lay down and masturbate to the sight of your curvy enemy.  The succubus looks at you with a sexy, knowing expression. ");
+				player.takeLustDamage((eBaseLibidoDamage() / 40) + rand(8), true);
+				outputText("\n\n");
 			}
 			//[LUST GAINED PER ROUND] - Omnibus
 			if(hasStatusEffect(StatusEffects.LustAura)) {
 				if (this is OmnibusOverseer || this is HeroslayerOmnibus) {
-					if(player.lust < (player.maxLust() * 0.33)) outputText("Your groin tingles warmly.  The demon's aura is starting to get to you.\n\n");
-					if(player.lust >= (player.maxLust() * 0.33) && player.lust < (player.maxLust() * 0.66)) outputText("You blush as the demon's aura seeps into you, arousing you more and more.\n\n");
+					if(player.lust < (player.maxLust() * 0.33)) outputText("Your groin tingles warmly.  The demon's aura is starting to get to you. ");
+					if(player.lust >= (player.maxLust() * 0.33) && player.lust < (player.maxLust() * 0.66)) outputText("You blush as the demon's aura seeps into you, arousing you more and more. ");
 					if(player.lust >= (player.maxLust() * 0.66)) {
 						outputText("You flush bright red with desire as the lust in the air worms its way inside you.  ");
 						temp = rand(4);
-						if(temp == 0) outputText("You have a hard time not dropping to your knees to service her right now.\n\n");
-						if(temp == 2) outputText("The urge to bury your face in her breasts and suckle her pink nipples nearly overwhelms you.\n\n");
-						if(temp == 1) outputText("You swoon and lick your lips, tasting the scent of the demon's pussy in the air.\n\n");
-						if(temp == 3) outputText("She winks at you and licks her lips, and you can't help but imagine her tongue sliding all over your body.  You regain composure moments before throwing yourself at her.  That was close.\n\n");
+						if(temp == 0) outputText("You have a hard time not dropping to your knees to service her right now. ");
+						if(temp == 2) outputText("The urge to bury your face in her breasts and suckle her pink nipples nearly overwhelms you. ");
+						if(temp == 1) outputText("You swoon and lick your lips, tasting the scent of the demon's pussy in the air. ");
+						if(temp == 3) outputText("She winks at you and licks her lips, and you can't help but imagine her tongue sliding all over your body.  You regain composure moments before throwing yourself at her.  That was close. ");
 					}
 				}
 				if (this is Alraune || this is Marae) {
-					if(player.lust < (player.maxLust() * 0.33)) outputText("The pollen in the air gradually increase your arousal.\n\n");
-					if(player.lust >= (player.maxLust() * 0.33) && player.lust < (player.maxLust() * 0.66)) outputText("The pollen in the air is getting to you.\n\n");
-					if(player.lust >= (player.maxLust() * 0.66)) outputText("You flush bright red with desire as the lust in the air worms its way inside you.\n\n");
+					if(player.lust < (player.maxLust() * 0.33)) outputText("The pollen in the air gradually increase your arousal. ");
+					if(player.lust >= (player.maxLust() * 0.33) && player.lust < (player.maxLust() * 0.66)) outputText("The pollen in the air is getting to you. ");
+					if(player.lust >= (player.maxLust() * 0.66)) outputText("You flush bright red with desire as the lust in the air worms its way inside you. ");
 				}
-				player.takeLustDamage((3 + int(player.lib/20 + player.cor/25)), true);
+				player.takeLustDamage(((eBaseLibidoDamage() / 40) + int(player.lib/20 + player.cor/25)), true);
+				outputText("\n\n");
 			}
 			//immolation DoT
 			if (hasStatusEffect(StatusEffects.ImmolationDoT)) {
@@ -3430,6 +3997,26 @@ import flash.utils.getQualifiedClassName;
 					outputText("\n\n");
 				}
 			}
+			//Fire Punch Burn DoT
+			if (hasStatusEffect(StatusEffects.FirePunchBurnDoT)) {
+				//Countdown to heal
+				addStatusValue(StatusEffects.FirePunchBurnDoT,1,-1);
+				//Heal wounds
+				if(statusEffectv1(StatusEffects.FirePunchBurnDoT) <= 0) {
+					outputText("Flames left by Fire Punch on [themonster] finally stop burning.\n\n");
+					removeStatusEffect(StatusEffects.FirePunchBurnDoT);
+				}
+				//Deal damage if still wounded.
+				else {
+					var store6:Number = (player.spe + player.inte) * SceneLib.combat.soulskillMod() * 0.5;
+					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store6 *= 1.2;
+					store6 = Math.round(store6 * SceneLib.combat.fireDamageBoostedByDao());
+					if(plural) outputText("[Themonster] burn from lingering Fire Punch after-effect. ");
+					else outputText("[Themonster] burns from lingering Fire Punch after-effect. ");
+					store6 = SceneLib.combat.doFireDamage(store6, true, true);
+					outputText("\n\n");
+				}
+			}
 			//Formic Acid DoT
 			if (hasStatusEffect(StatusEffects.AntAcid)) {
 				//Countdown to heal
@@ -3469,49 +4056,7 @@ import flash.utils.getQualifiedClassName;
 					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store18 *= 1.2;
 					store18 = SceneLib.combat.fixPercentDamage(store18);
 					store18 = SceneLib.combat.doAcidDamage(store18, true, true);
-					if (!lustVuln <= 0) teased(SceneLib.combat.calculateBasicTeaseDamage(9 + rand(3)));
-					outputText("\n\n");
-				}
-			}
-			//Burn DoT
-			if (hasStatusEffect(StatusEffects.BurnDoT2)) {
-				//Countdown to heal
-				addStatusValue(StatusEffects.BurnDoT2,1,-1);
-				//Heal wounds
-				if(statusEffectv1(StatusEffects.BurnDoT2) <= 0) {
-					outputText("Flames left by Burn on [themonster] finally stop burning.\n\n");
-					removeStatusEffect(StatusEffects.BurnDoT2);
-				}
-				//Deal damage if still wounded.
-				else {
-					var store8:Number = (player.str + player.spe + player.tou) * 2.5;
-					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store8 *= 1.2;
-					store8 = Math.round(store8 * SceneLib.combat.fireDamageBoostedByDao());
-					store8 += maxHP() * statusEffectv2(StatusEffects.BurnDoT2);
-					store8 = SceneLib.combat.fixPercentDamage(store8);
-					if(plural) outputText("[Themonster] burn from lingering Burn after-effect. ");
-					else outputText("[Themonster] burns from lingering Burn after-effect. ");
-					store8 = SceneLib.combat.doFireDamage(store8, true, true);
-					outputText("\n\n");
-				}
-			}
-			//Fire Punch Burn DoT
-			if (hasStatusEffect(StatusEffects.FirePunchBurnDoT)) {
-				//Countdown to heal
-				addStatusValue(StatusEffects.FirePunchBurnDoT,1,-1);
-				//Heal wounds
-				if(statusEffectv1(StatusEffects.FirePunchBurnDoT) <= 0) {
-					outputText("Flames left by Fire Punch on [themonster] finally stop burning.\n\n");
-					removeStatusEffect(StatusEffects.FirePunchBurnDoT);
-				}
-				//Deal damage if still wounded.
-				else {
-					var store6:Number = (player.spe + player.inte) * SceneLib.combat.soulskillMod() * 0.5;
-					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store6 *= 1.2;
-					store6 = Math.round(store6 * SceneLib.combat.fireDamageBoostedByDao());
-					if(plural) outputText("[Themonster] burn from lingering Fire Punch after-effect. ");
-					else outputText("[Themonster] burns from lingering Fire Punch after-effect. ");
-					store6 = SceneLib.combat.doFireDamage(store6, true, true);
+					if (!lustVuln <= 0) teased(SceneLib.combat.teases.teaseBaseLustDamage()  * lustVuln);
 					outputText("\n\n");
 				}
 			}
@@ -3531,8 +4076,18 @@ import flash.utils.getQualifiedClassName;
 				addStatusValue(StatusEffects.HydraRegenerationDisabled,1,-1);
 				//Heal wounds
 				if (statusEffectv1(StatusEffects.HydraRegenerationDisabled) <= 0) {
-					if (this is Hydra) outputText("[Themonster] sighs in relief as " + pronoun3 + " wounds resume regenerating!\n\n");
+					outputText("[Themonster] sighs in relief as " + pronoun3 + " wounds resume regenerating!\n\n");
 					removeStatusEffect(StatusEffects.HydraRegenerationDisabled);
+				}
+			}
+			//Regen Inhibitor Troll
+			if (hasStatusEffect(StatusEffects.TrollRegenerationDisabled)) {
+				//Countdown to heal
+				addStatusValue(StatusEffects.TrollRegenerationDisabled,1,-1);
+				//Heal wounds
+				if (statusEffectv1(StatusEffects.TrollRegenerationDisabled) <= 0) {
+					outputText("[Themonster] sighs in relief as " + pronoun3 + " wounds resume regenerating!\n\n");
+					removeStatusEffect(StatusEffects.TrollRegenerationDisabled);
 				}
 			}
 			//Recovery Inhibitor (Petrify)
@@ -3550,7 +4105,7 @@ import flash.utils.getQualifiedClassName;
 					if (statusEffectv1(StatusEffects.FrostburnDoT) > 1) addStatusValue(StatusEffects.FrostburnDoT, 1, -1);
 					//Heal wounds
 					if (statusEffectv1(StatusEffects.FrostburnDoT) <= 0) {
-						outputText("Wound left by frostburn on [themonster] finally close ups.\n\n");
+						outputText("The lingering frostburn on [themonster] finally fades away.\n\n");
 						removeStatusEffect(StatusEffects.FrostburnDoT);
 					}
 					//Deal damage if still wounded.
@@ -3560,8 +4115,8 @@ import flash.utils.getQualifiedClassName;
 						store12 = Math.round(store12 * SceneLib.combat.iceDamageBoostedByDao());
 						store12 += maxHP() * statusEffectv2(StatusEffects.FrostburnDoT);
 						store12 = SceneLib.combat.fixPercentDamage(store12);
-						if(plural) outputText("[Themonster] are hurt by lingering Frostburn after-effect. ");
-						else outputText("[Themonster] is hurt by lingering Frostburn after-effect. ");
+						if(plural) outputText("[Themonster] are hurt by the lingering frostburn. ");
+						else outputText("[Themonster] is hurt by the lingering frostburn. ");
 						store12 = SceneLib.combat.doIceDamage(store12, true, true);
 						outputText("\n\n");
 					}
@@ -3682,6 +4237,90 @@ import flash.utils.getQualifiedClassName;
 					}
 				}
 			}
+			//Lust Dot (Sing / Perform)
+			if (hasStatusEffect(StatusEffects.LustDoTSP)) {
+				//Countdown to heal
+				addStatusValue(StatusEffects.LustDoTSP,1,-1);
+				if (statusEffectv4(StatusEffects.LustDoTSP) == 0) {
+					if (statusEffectv1(StatusEffects.LustDoTSP) > 1) addStatusValue(StatusEffects.LustDoTSP, 1, -1);
+					//Heal wounds
+					if (statusEffectv1(StatusEffects.LustDoTSP) <= 0) {
+						outputText("Lingering lust-induncing after-effect on [themonster] finally ends.\n\n");
+						removeStatusEffect(StatusEffects.LustDoTSP);
+					}
+					//Deal damage if still wounded.
+					else {
+						var lustDmg3:Number = SceneLib.combat.teases.teaseBaseLustDamage();
+						if (game.player.hasPerk(PerkLib.KingOfTheJungle)) lustDmg3 *= 1.2;
+						lustDmg3 = Math.round(lustDmg3);
+						if(plural) outputText("[Themonster] are both confused and aroused by your musical performance! ");
+						else outputText("[Themonster] is both confused and aroused by your musical performance! ");
+						teased(lustDmg3, false);
+						outputText("\n\n");
+						if (rand(10) == 0 && hasPerk(PerkLib.Resolute)) createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+					}
+				}
+			}
+			//Venom damage calculation
+			var venomLustDmg:Number = 0;
+			var damage1B:Number = 0;
+			//Snake Venom
+        	if (hasStatusEffect(StatusEffects.NagaVenom)) {
+				statStore.addBuffObject({str:-statusEffectv1(StatusEffects.NagaVenom), spe:-statusEffectv1(StatusEffects.NagaVenom)}, "Poison",{text:"Poison"});
+				if (statusEffectv3(StatusEffects.NagaVenom) >= 1) venomLustDmg += statusEffectv3(StatusEffects.NagaVenom);
+			}
+			//Apophis Venom
+        	if (hasStatusEffect(StatusEffects.ApophisVenom)) {
+				damage1B = SceneLib.combat.teases.teaseBaseLustDamage();
+				if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
+					damage1B *= 2;
+				}
+				venomLustDmg += damage1B;
+				SceneLib.combat.teaseXP(1 + SceneLib.combat.bonusExpAfterSuccesfullTease());
+				statStore.addBuffObject({str:-statusEffectv1(StatusEffects.ApophisVenom)*2, spe:-statusEffectv1(StatusEffects.ApophisVenom)*2, tou:-statusEffectv1(StatusEffects.ApophisVenom)*2}, "Poison",{text:"Poison"});
+				if (statusEffectv3(StatusEffects.ApophisVenom) >= 1) venomLustDmg += statusEffectv3(StatusEffects.ApophisVenom);
+			}
+			//Bee Venom
+        	if (hasStatusEffect(StatusEffects.BeeVenom)) {
+				damage1B = SceneLib.combat.teases.teaseBaseLustDamage();
+				if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
+					damage1B *= 2;
+				}
+				venomLustDmg += damage1B;
+				SceneLib.combat.teaseXP(1 + SceneLib.combat.bonusExpAfterSuccesfullTease());
+				if (lustVuln != 0) lustVuln += 0.05;
+				statStore.addBuffObject({tou:-statusEffectv1(StatusEffects.ManticoreVenom)*2}, "Poison",{text:"Poison"});
+
+				if (statusEffectv3(StatusEffects.BeeVenom) >= 1) venomLustDmg += statusEffectv3(StatusEffects.BeeVenom);
+			}
+			//Jabberwocky Poison Breath
+        	if (hasStatusEffect(StatusEffects.JabberwockyVenom)) {
+				 damage1B = SceneLib.combat.teases.teaseBaseLustDamage();
+				if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
+					damage1B *= 2;
+				}
+				venomLustDmg += damage1B;
+				SceneLib.combat.teaseXP(1 + SceneLib.combat.bonusExpAfterSuccesfullTease());
+				if (lustVuln != 0) lustVuln += 0.05;
+				statStore.addBuffObject({tou:-statusEffectv1(StatusEffects.JabberwockyVenom)*2}, "Poison",{text:"Poison"});
+				if (statusEffectv3(StatusEffects.JabberwockyVenom) >= 1) venomLustDmg += statusEffectv3(StatusEffects.JabberwockyVenom);
+			}
+			//Manticore Venom
+       		if (hasStatusEffect(StatusEffects.ManticoreVenom)) {
+				damage1B = SceneLib.combat.teases.teaseBaseLustDamage();
+				if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
+					damage1B *= 2;
+				}
+				venomLustDmg += damage1B;
+				SceneLib.combat.teaseXP(1 + SceneLib.combat.bonusExpAfterSuccesfullTease());
+				statStore.addBuffObject({tou:-statusEffectv1(StatusEffects.ManticoreVenom)*2}, "Poison",{text:"Poison"});
+				if (statusEffectv3(StatusEffects.ManticoreVenom) >= 1) venomLustDmg += statusEffectv3(StatusEffects.ManticoreVenom);
+			}
+			if (venomLustDmg > 0 && lustVuln != 0) {
+				outputText("[Themonster] is aroused from the poison coursing through them ");
+				teased(venomLustDmg * lustVuln, false, true);
+				outputText("\n\n");
+			}
 			if (hasStatusEffect(StatusEffects.Maleficium)) {
 				if (statusEffectv1(StatusEffects.Maleficium) <= 0) {
 					removeStatusEffect(StatusEffects.Maleficium);
@@ -3711,6 +4350,14 @@ import flash.utils.getQualifiedClassName;
 			if (hasStatusEffect(StatusEffects.EnemyLoweredDamageH)) {
 				if (statusEffectv1(StatusEffects.EnemyLoweredDamageH) <= 0) removeStatusEffect(StatusEffects.EnemyLoweredDamageH);
 				else addStatusValue(StatusEffects.EnemyLoweredDamageH,1,-1);
+			}
+			//lowered physical defense
+			if (hasStatusEffect(StatusEffects.DefPDebuff)) {
+				if (statusEffectv1(StatusEffects.DefPDebuff) <= 0) {
+					armorDef += statusEffectv2(StatusEffects.DefPDebuff);
+					removeStatusEffect(StatusEffects.DefPDebuff);
+				}
+				else addStatusValue(StatusEffects.DefPDebuff,1,-1);
 			}
 		}
 
@@ -3866,6 +4513,7 @@ import flash.utils.getQualifiedClassName;
 					armorMDef += (12 * (1 + newGamePlusMod()));
 				}*/
 			}
+			if (hasPerk(PerkLib.EnemyTrueDemon)) armorMDef += 30;
 			armorDef += ((int)(1 + armorDef / 10)) * 3 * newGamePlusMod();
 			armorMDef += ((int)(1 + armorMDef / 10)) * 3 * newGamePlusMod();
 			if (hasPerk(PerkLib.EpicStrength)) this.strStat.core.value += Math.round(this.strStat.core.value * 0.35);

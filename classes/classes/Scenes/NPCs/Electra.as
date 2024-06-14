@@ -68,7 +68,7 @@ use namespace CoC;
 				outputText(" You are slashed for ");
 				player.takePhysDamage(damage, true);
 				player.takeLustDamage(damageLust, true);
-				outputText(" damage. The lingering electricity on her claws leaves you aroused. <b>(<font color=\"#ff00ff\">" + damageLust + "</font>)</b> lust damage.");
+				outputText(" damage. The lingering electricity on her claws leaves you aroused. <b>([font-lust]" + damageLust + "[/font])</b> lust damage.");
 			}
 		}
 		
@@ -112,7 +112,7 @@ use namespace CoC;
 			player.takeLustDamage(damageLust, true);
 			outputText(" gleefully fingers herself while looking at you with a half crazed look.\n\n");
 			outputText("\"<i>Do you know... How frustrating it is to be dependant on someone else to achieve release? Ohhhh soon you will find out!</i>\"\n\n");
-			outputText("The display left you aroused but likely she's preparing something. <b>(<font color=\"#ff00ff\">" + damageLust + "</font>)</b> lust damage.\n\n");
+			outputText("The display left you aroused but likely she's preparing something. <b>([font-lust]" + damageLust + "[/font])</b> lust damage.\n\n");
 			lust += maxLust() * 0.2;
 			createStatusEffect(StatusEffects.RaijuUltReady,0,0,0,0);
 		}
@@ -134,7 +134,7 @@ use namespace CoC;
 				}
 				damageLust = Math.round(damageLust);
 				player.takeLustDamage(damageLust, true);
-				outputText(" You are zapped clean but instead of feeling pain, you feel intense electric pleasure coursing through your body as the Raiju shares some of her unbridled arousal. <b>(<font color=\"#ff00ff\">" + damageLust + "</font>)</b> lust damage.");
+				outputText(" You are zapped clean but instead of feeling pain, you feel intense electric pleasure coursing through your body as the Raiju shares some of her unbridled arousal. <b>([font-lust]" + damageLust + "[/font])</b> lust damage.");
 			}
 			lust -= lust * 0.2;
 			if (lust < 0) lust = 0;
@@ -283,6 +283,7 @@ use namespace CoC;
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.LightningNature, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
+			if (!player.hasStatusEffect(StatusEffects.RiverDungeonA)) this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
 			if (flags[kFLAGS.ELECTRA_LVL_UP] > 1 || flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] > 1) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			if (flags[kFLAGS.ELECTRA_LVL_UP] >= 2) {
 				this.createPerk(PerkLib.BasicSelfControl, 0, 0, 0, 0);

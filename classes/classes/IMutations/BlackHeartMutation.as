@@ -12,38 +12,21 @@ import classes.Races;
 
 public class BlackHeartMutation extends IMutationPerkType
     {
-        private static const mName:String = "Black Heart";
+        override public function get mName():String {
+            return "Black Heart";
+        }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
-            if (pTier >= 1){
-                descS += "Increased Lust strike power, Empower Fascinate";
-            }
-            if (pTier >= 2){
-                descS += ", Adds extra Lust damage to Lust strike scaling with Wisdom (Wis/10). Lowers Fascinate Cooldown by 1";
-            }
-            if (pTier >= 3){
-                descS += ", Adds extra Lust damage to Lust strike, scaling with Sensitivity (Sensitivity/10). Facinate Stun lasts 2 turns";
-            }
+            if (pTier >= 1) descS += "Increased Lust strike power, empower Fascinate";
+            if (pTier >= 2) descS += ", adds extra Lust damage to Lust strike scaling with Wisdom (Wis/10). Lowers Fascinate Cooldown by ";
+            if (pTier == 2 || pTier == 3) descS += "1";
+			if (pTier >= 4) descS += "2";
+            if (pTier >= 3) descS += ", adds extra Lust damage to Lust strike, scaling with Sensitivity (Sensitivity/10). Facinate Stun lasts 2 turns";
+            if (pTier >= 4) descS += ", count your lust for twice as high when using Lust strike and it's now benefit from all effects that pertain to the tease action";
             if (descS != "")descS += ".";
             return descS;
-        }
-
-        //Name. Need it say more?
-        override public function name(params:PerkClass=null):String {
-            var sufval:String;
-            switch (currentTier(this, player)){
-                case 2:
-                    sufval = "(Primitive)";
-                    break;
-                case 3:
-                    sufval = "(Evolved)";
-                    break;
-                default:
-                    sufval = "";
-            }
-            return mName + sufval;
         }
 
         override public function evolveText():String {
@@ -61,7 +44,7 @@ public class BlackHeartMutation extends IMutationPerkType
                 if (pTier == 0){
                     this.requireHeartMutationSlot()
                     .requirePerk(PerkLib.DarkCharm).requireCor(100)
-                    .requireAnyRace(Races.DEMON, Races.IMP);
+                    .requireAnyRace(Races.DEMON, Races.IMP, Races.GREMLIN, Races.DRACULA);
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -78,11 +61,12 @@ public class BlackHeartMutation extends IMutationPerkType
             if (pTier == 1) pBuffs['lib.mult'] = 0.05;
             else if (pTier == 2) pBuffs['lib.mult'] = 0.15;
             else if (pTier == 3) pBuffs['lib.mult'] = 0.3;
+            else if (pTier == 4) pBuffs['lib.mult'] = 0.9;
             return pBuffs;
         }
 
         public function BlackHeartMutation() {
-            super(mName + " IM", mName, SLOT_HEART, 3);
+            super(mName + " IM", mName, SLOT_HEART, 4);
         }
 
         

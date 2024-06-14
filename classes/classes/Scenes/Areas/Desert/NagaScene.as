@@ -892,7 +892,7 @@ public function nagaRapeChoice2():void {
 public function nagaPlayerConstrict():void {
 	flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 	clearOutput();
-	if(player.fatigue + combat.physicalCost(10) > player.maxFatigue()) {
+	if(player.fatigue + combat.physicalCost(10) > player.maxOverFatigue()) {
 		outputText("You just don't have the energy to wrap yourself so tightly around someone right now...");
 		//Gone		menuLoc = 1;
 		menu();
@@ -976,9 +976,9 @@ public function nagaPlayerConstrict():void {
     SceneLib.combat.enemyAIImpl();
 }
 
-public function naggaSqueeze():void {
+public function nagaSqueeze():void {
 	clearOutput();
-	if (player.fatigue + combat.physicalCost(20) > player.maxFatigue()) {
+	if (player.fatigue + combat.physicalCost(20) > player.maxOverFatigue()) {
 		outputText("You are too tired to squeeze " + monster.a + " [monster name].");
 		addButton(0, "Next", SceneLib.combat.combatMenu, false);
 		return;
@@ -1011,10 +1011,10 @@ public function naggaSqueeze():void {
 	}
 	outputText("\n\n");
 	if (monster.hasStatusEffect(StatusEffects.HypnosisNaga)) monster.removeStatusEffect(StatusEffects.HypnosisNaga);
-    SceneLib.combat.enemyAIImpl();
+	SceneLib.combat.postStrandleExtraActionsCheck();
 }
 //Tease
-public function naggaTease():void {
+public function nagaTease():void {
 	clearOutput();
 	//(if poisoned)
 	if (monster.hasStatusEffect(StatusEffects.NagaVenom) || monster.gender == 0 || monster.lustVuln == 0) {
@@ -1024,10 +1024,6 @@ public function naggaTease():void {
         enemyAI();
         return;
 	}
-	SceneLib.combat.wrathregeneration1();
-    SceneLib.combat.fatigueRecovery1();
-	SceneLib.combat.manaregeneration1();
-	SceneLib.combat.soulforceregeneration1();
 	var damage:Number;
     var chance:Number = 70;
     var bimbo:Boolean = false;
@@ -1063,36 +1059,7 @@ public function naggaTease():void {
     //==============================
     //Determine basic damage.
     //==============================
-    damage = 6 + rand(3);
-    if (player.hasPerk(PerkLib.SensualLover)) {
-        damage += 2;
-    }
-    if (player.hasPerk(PerkLib.Seduction)) damage += 5;
-    //+ slutty armor bonus
-    damage += player.teaseDmgStat.value;
-    //10% for bimbo shits
-    if (bimbo || bro || futa) {
-        damage += 5;
-    }
-    if (player.hasPerk(PerkLib.FlawlessBody)) damage += 10;
-    damage += player.level;
-    damage += player.teaseLevel;
-    damage += rand(7);
-    //partial skins bonuses
-    switch (player.coatType()) {
-        case Skin.FUR:
-            damage += (1 + player.newGamePlusMod());
-            break;
-        case Skin.SCALES:
-            damage += (2 * (1 + player.newGamePlusMod()));
-            break;
-        case Skin.CHITIN:
-            damage += (3 * (1 + player.newGamePlusMod()));
-            break;
-        case Skin.BARK:
-            damage += (4 * (1 + player.newGamePlusMod()));
-            break;
-    }
+    damage = combat.teases.teaseBaseLustDamage();
     chance += 2;
     //Specific cases for slimes and demons, as the normal ones would make no sense
     if (monster.short == "demons") {
@@ -1115,33 +1082,23 @@ public function naggaTease():void {
     }
     //Land the hit!
     if (rand(100) <= chance) {
-        //NERF TEASE DAMAGE
-        damage *= .9;
 		var damagemultiplier:Number = 1;
-        if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();
-        if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
-		if (player.hasPerk(PerkLib.SuperSensual) && chance > 100) damagemultiplier += (0.01 * (chance - 100));
-		if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
-		if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
 		if (player.hasPerk(PerkLib.UnbreakableBind)) damagemultiplier += 1;
 		if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (2 - player.statusEffectv1(StatusEffects.ControlFreak));
-		if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
 		damage *= damagemultiplier;
+        if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
+
         //Determine if critical tease!
         var crit:Boolean = false;
         var critChance:int = 5;
-        if (player.hasPerk(PerkLib.CriticalPerformance)) {
-            if (player.lib <= 100) critChance += player.lib / 5;
-            if (player.lib > 100) critChance += 20;
-        }
+        critChance += combat.teases.combatTeaseCritical();
+        if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
         if (rand(100) < critChance) {
             crit = true;
             damage *= 1.75;
         }
 		if (monster.hasStatusEffect(StatusEffects.HypnosisNaga)) damage *= 0.5;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-        if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
-        if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
 		monster.teased(Math.round(monster.lustVuln * damage));
         if (crit) outputText(" <b>Critical!</b>");
         SceneLib.combat.teaseXP(1 + SceneLib.combat.bonusExpAfterSuccesfullTease());
@@ -1156,7 +1113,7 @@ public function naggaTease():void {
         doNext(SceneLib.combat.endLustVictory);
         return;
     }
-    SceneLib.combat.enemyAIImpl();
+    SceneLib.combat.postStrandleExtraActionsCheck();
 }
 
 public function nagaLeggoMyEggo():void {

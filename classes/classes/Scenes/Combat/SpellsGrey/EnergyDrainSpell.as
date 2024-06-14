@@ -30,7 +30,7 @@ public class EnergyDrainSpell extends AbstractGreySpell {
 		return calcC;
 	}
 	
-	public function calcDuration():int {
+	override public function calcDuration():int {
 		return 7;
 	}
 	

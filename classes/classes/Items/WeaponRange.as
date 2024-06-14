@@ -5,8 +5,12 @@
 package classes.Items
 {
 
+import classes.CoC;
 import classes.PerkLib;
+import classes.Player;
+import classes.Race;
 import classes.Scenes.SceneLib;
+import classes.Items.ItemConstants;
 
 import coc.view.IconLib;
 
@@ -37,28 +41,54 @@ public class WeaponRange extends Equipable
 		
 		public function get verb():String { return _verb; }
 		
-		public function get attack():Number { return _attack; }
+		public function get attack():Number {
+			if (!CoC.instance || !CoC.instance.player) return _attack;
+			var player:Player = CoC.instance.player;
+			
+			var baseAttackBonuss:Number = 0;
+			var multiplier:Number = 100;
+			var bonus:Number = 0;
+			
+			for each (var ie:ItemEffect in effectsFlagged(IEF_ATTACK)) {
+				switch (ie.type) {
+					//------------------------//
+					// Multiplicative bonuses //
+					//------------------------//
+					case IELib.AttackMult_RaceTier: {
+						multiplier += ie.power * player.racialTier(ie.value1 as Race);
+						break;
+					}
+					//------------------//
+					// Additive bonuses //
+					//------------------//
+					case IELib.AttackBonus_RaceTier: {
+						bonus += ie.power * player.racialTier(ie.value1 as Race)
+						break;
+					}
+				}
+			}
+			
+			var attack:Number = (_attack + baseAttackBonuss) * multiplier / 100 + bonus;
+			
+			return attack;
+		}
 		
 		public function get perk():String { return _perk; }
 		
-		override public function get description():String {
-			var desc:String = _description;
-			//Type
-			desc += "\n\nType: Range Weapon ";
-			if (perk == "Bow") desc += "(Bow)";
-			else if (perk == "Crossbow") desc += "(Crossbow)";
-			else if (perk == "Pistol") desc += "(Pistol)";
-			else if (perk == "Rifle") desc += "(Rifle)";
-			else if (perk == "2H Firearm") desc += "(2H Firearm)";
-			else if (perk == "Dual Firearms") desc += "(Dual Firearms)";
-			else if (perk == "Dual 2H Firearms") desc += "(Dual 2H Firearms)";
-			else if (perk == "Throwing") desc += "(Throwing)";
-			else if (perk == "Tome") desc += "(Tome)";
-			//Attack
-			desc += "\nRange Attack: " + String(attack);
-			//Value
-			desc += "\nBase value: " + String(value);
-			return desc;
+		public function hasSpecial(_special:String):Boolean {
+			return perk.split(", ").indexOf(_special) >= 0;
+		}
+		
+		override public function effectDescriptionParts():Array {
+			var list:Array = super.effectDescriptionParts();
+			// Type
+			list.push([10,"Type: Range Weapon"]);
+			if (perk != "") {
+				list.push([15, "Weapon Class: " + perk]);
+			}
+			// Attack
+			list.push([20,"Attack: "+attack]);
+			return list;
 		}
 		
 		override public function canEquip(doOutput:Boolean):Boolean {
@@ -79,6 +109,20 @@ public class WeaponRange extends Equipable
 				SceneLib.inventory.unequipShield();
 			}
 			return super.beforeEquip(doOutput);
+		}
+		override public function getItemText(textid:String):String {
+			if (textid == "legendary_fail") {
+				var itemType:String = _perk;
+				if ([ItemConstants.WT_PISTOL, ItemConstants.WT_RIFLE, ItemConstants.WT_2H_FIREARM, ItemConstants.WT_DUAL_FIREARMS, ItemConstants.WT_DUAL_2H_FIREARMS].indexOf(_perk) > -1) {
+					itemType = "firearm";
+				} else if (_perk == ItemConstants.WT_THROWING || !itemType) {
+					itemType = "weapon";
+				}
+				
+				return "You try to equip the legendary " + itemType.toLowerCase() +
+						", but to your disappointment the item simply refuses to stay in your hands. It seems you still lack the right to wield this item.";
+			}
+			return super.getItemText(textid);
 		}
 	}
 }

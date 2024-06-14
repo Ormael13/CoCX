@@ -33,6 +33,20 @@ public class DynamicItems extends ItemConstants {
 		[5, RARITY_RARE]
 	];
 	
+	public static const RARITY_CHANCES_MINOR_LOW:Array = [
+		// weights sum to 100 so chances are in %
+		[40, RARITY_COMMON],
+		[40, RARITY_MAGICAL],
+		[20, RARITY_RARE]
+	];
+	
+	public static const RARITY_CHANCES_MINOR_HIGH:Array = [
+		// weights sum to 100 so chances are in %
+		[20, RARITY_COMMON],
+		[30, RARITY_MAGICAL],
+		[50, RARITY_RARE]
+	];
+	
 	/**
 	 * Weighted random table for quality rolls at specific NG+ level
 	 */
@@ -335,7 +349,10 @@ public class DynamicItems extends ItemConstants {
 		for each (e in effects) {
 			if (e.identified) {
 				if (!e.type.hideDescription(e)) {
-					effectDesc.push([80+i,"Effect: "+e.description]);
+					var description:String = e.description;
+					if (description) {
+						effectDesc.push([80 + i, "Effect: " + description]);
+					}
 				}
 				value += e.valueAdd;
 				valueMul *= e.valueMul;
@@ -426,11 +443,29 @@ public class DynamicItems extends ItemConstants {
 		};
 	}
 	
-	public static function postConstruct(item:Equipable, tags:Object, buffs:Object):void {
+	/**
+	 * Finish initialization of a DynamicItem by assigning its tags, buffs, itemeffects, and invoking enchantments' onAdd() callbacks.
+	 */
+	public static function postConstruct(item:Equipable, tags:Array, buffs:Object, itemEffects:Array, qitemEffects:Array, quality:Number):void {
 		item.stackSize = 1;
 		item.pearlStackSize = 1;
-		item.withTags(tags);
+		item.withTagsV(tags);
 		item.withBuffs(buffs);
+		for each (var iedef:Array in itemEffects) {
+			var type:ItemEffectType = iedef[0] as ItemEffectType;
+			var power:Number = iedef[1] as Number;
+			var value1:* = iedef[2];
+			var value2:* = iedef[3];
+			var value3:* = iedef[4];
+			var value4:* = iedef[5];
+			for each (var qiedef:Array in qitemEffects) {
+				if (qiedef[0] == type && qiedef[2] == value1 && qiedef[3] == value2 && qiedef[4] == value3 && qiedef[5] == value4) {
+					power += qiedef[1]*quality;
+					break;
+				}
+			}
+			item.withEffect(type, power, value1, value2, value3, value4);
+		}
 		for each (var enchantment:Enchantment in item.getEnchantments()) {
 			if (enchantment.identified) {
 				enchantment.type.onAdd(enchantment, item);

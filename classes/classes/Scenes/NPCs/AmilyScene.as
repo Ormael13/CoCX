@@ -7,7 +7,9 @@ import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.Areas.Forest.CorruptedGlade;
+import classes.Scenes.Camp.CampStatsAndResources;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 import classes.lists.BreastCup;
@@ -178,12 +180,12 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 		public function nailsEncounter():void {
 			var extractedNail:int = 5 + rand(player.inte / 5) + rand(player.str / 10) + rand(player.tou / 10) + rand(player.spe / 20) + 5;
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_SCAVENGER] += extractedNail;
-			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += extractedNail;
+			CampStatsAndResources.NailsResc += extractedNail;
 			clearOutput();
 			outputText("While exploring the town, you can't seem to find anything interesting until something shiny catches your eye. There are exposed nails in a house wreckage! You take your hammer out of your toolbox and you spend time extracting "+extractedNail+" nails. Some of them are bent but others are in incredibly good condition. You could use these for construction.");
 			outputText("\n\nNails: ");
-			if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > SceneLib.campUpgrades.checkMaterialsCapNails()) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = SceneLib.campUpgrades.checkMaterialsCapNails();
-			outputText(flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES]+"/" + SceneLib.campUpgrades.checkMaterialsCapNails() + "");
+			if (CampStatsAndResources.NailsResc > SceneLib.campUpgrades.checkMaterialsCapNails()) CampStatsAndResources.NailsResc = SceneLib.campUpgrades.checkMaterialsCapNails();
+			outputText(CampStatsAndResources.NailsResc+"/" + SceneLib.campUpgrades.checkMaterialsCapNails() + "");
 			endEncounter();
 		}
 
@@ -192,7 +194,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			flags[kFLAGS.AMILY_VILLAGE_EXPLORED]++;
 			clearOutput();
 			//40% chance of ghost-girl
-			if ((flags[kFLAGS.SHOULDRA_MAIDEN_COUNTDOWN] == 0 && rackCount() >= 2 && rand(10) <= 4) && !followerShouldra() && flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != .5) {
+			if ((flags[kFLAGS.SHOULDRA_MAIDEN_COUNTDOWN] == 0 && rackCount() >= 2 && rand(10) <= 4) && !followerShouldra() && !player.hasStatusEffect(StatusEffects.ShouldraOff) && flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != .5) {
 				shouldraScene.shouldraGreeting();
 				return;
 			}
@@ -2419,7 +2421,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] != 0) return;
 
 			//25% + gradually increasing cumQ bonus
-			if (rand(4) == 0 || player.cumQ() > rand(1000)) {
+			if (rand(4) == 0 || player.cumQ() > rand(1000) || player.hasPerk(PerkLib.PilgrimsBounty)) {
 				pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_MOUSE - 182); //Amily completes her pregnancies much faster than a regular player
 				if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Amily is pregnant!</b>");
 			}
@@ -2577,7 +2579,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 					addButton(8, "Date", dateNightFirstTime)
 						.hint("Take Amily on a date to Tel'Adre?")
 						.disableIf(SceneLib.urtaQuest.urtaBusy(), "Urta is busy right now.")
-						.disableIf(flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] >= 5 || urtaLove(),
+						.disableIf((flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] < 5 && !urtaLove()),
 							"You don't know Urta close enough to introduce your mouse girlfriend to her.");
 				}
 				//if (AbandonedTownRebuilt.InTown = false) {
@@ -4963,7 +4965,8 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 		//Player gives Birth (quest version):
 		public function pcBirthsAmilysKidsQuestVersion(womb:int = 0):void {
 			amilySprite();
-			flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]++;
+			if (player.hasMutation(IMutationsLib.GoblinOvariesIM)) flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] += 2;
+			else flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]++;
 			//In camp version:
 			if(flags[kFLAGS.AMILY_FOLLOWER] == 1) {
 				playerBirthsWifAmilyMiceInCamp();

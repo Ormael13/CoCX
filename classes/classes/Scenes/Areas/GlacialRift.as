@@ -16,6 +16,7 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.GlacialRift.*;
+import classes.Scenes.Camp.CampStatsAndResources;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.NPCs.Valeria;
 import classes.Scenes.SceneLib;
@@ -205,6 +206,14 @@ use namespace CoC;
 				chance: 0.33,
 				call: encounterItem
 			}, {
+				name: "findsnowflower",
+				label : "Snow Flower",
+				kind  : 'item',
+				when: function():Boolean {
+					return player.isAlraune();
+				},
+				call: findSnowFlower
+			}, {
 				//Ornate Chest or cache of gems/pile of stones
 				name: "chest",
 				label : "Chest",
@@ -285,8 +294,8 @@ use namespace CoC;
 						} else outputText("Kiha");
 						outputText(" assist you into bringing as many as possible back to camp. ");
 					}
-					if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + stonesHarvested < SceneLib.campUpgrades.checkMaterialsCapStones()) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stonesHarvested;
-					else flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = SceneLib.campUpgrades.checkMaterialsCapStones();
+					if (CampStatsAndResources.StonesResc + stonesHarvested < SceneLib.campUpgrades.checkMaterialsCapStones()) CampStatsAndResources.StonesResc += stonesHarvested;
+					else CampStatsAndResources.StonesResc = SceneLib.campUpgrades.checkMaterialsCapStones();
 				} else {
 					var gemsFound2:int = 40 + rand(160);
 					outputText("As you wander the rift your foot hits something burrowed under the snow. It is a treasure chest and it looks packed to the brim.\n\n Inside was " + String(gemsFound) + " gems! ");
@@ -296,13 +305,15 @@ use namespace CoC;
 			}
 			endEncounter();
 		}
+
+		private function findSnowFlower():void {
+			clearOutput();
+			outputText("You stumble upon a strange white flower, which seems to grow in the rift heedless of the cold. You feel oddly drawn towards the plant, deciding to pick it up. ");
+			inventory.takeItem(consumables.SNOWFLO, explorer.done);
+		}
 		
 		public function encounterItem():void {
-			clearOutput();/*
-					if (rand(2) == 0) {
-						SceneLib.ariaScene.MelkieEncounter();
-					}
-					else {*/
+			clearOutput();
 			var itemChooser:Number = rand(2);
 			if (itemChooser == 0) {
 				outputText("As you cross one of the floating ice sheets that make up the bulk of the rift, your eyes are drawn to a bright glint amidst the white backdrop.  As you eagerly approach the gleam, you discover a single tiny spire of ice, jutting from the surrounding snow.  You pluck it gently from the ground, give it a quick glance over and, satisfied that it won’t try and kill you, drop it in your bag. ");
@@ -311,7 +322,6 @@ use namespace CoC;
 				outputText("As you make your way across the icy wastes, you notice a small corked ivory horns half-buried under the snow, filled with a thick sweet-looking liquor. You stop and dig it up, sniffing curiously at the liquid. The scent reminds you of the honey secreted by the bee-girls of Mareth, though with hints of alcohol and... something else. You place the horns of mead in your bag and continue on your way. ");
 				inventory.takeItem(consumables.GODMEAD, explorer.done);
 			}
-			//}
 		}
 		
 		public function encounterValeria():void {
@@ -379,11 +389,12 @@ use namespace CoC;
 		public function GlacialRiftConditions():void {
 			if (!player.headJewelry == headjewelries.SKIGOGG) player.createStatusEffect(StatusEffects.Snowstorms,0,0,0,0);
 			if (player.countMiscJewelry(miscjewelries.SNOWBOA) == 0) player.createStatusEffect(StatusEffects.Snow,0,0,0,0);
-			if (!player.hasPerk(PerkLib.ColdAffinity)) player.createStatusEffect(StatusEffects.SubZeroConditions,0,0,0,0);
+			if (!player.hasPerk(PerkLib.ColdAffinity)) player.createStatusEffect(StatusEffects.SubZeroConditions,2,0,0,0);
 		}
 
 		public function SubZeroConditionsTick():void {
-			var HPD:Number = 0.05;
+			var HPD:Number = 0.025;
+			HPD *= player.statusEffectv1(StatusEffects.SubZeroConditions);
 			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) HPD *= 2;
 			HPD *= player.maxHP();
 			HPD = Math.round(HPD);

@@ -6,6 +6,8 @@ package classes
 import classes.Items.Enchantment;
 import classes.Items.EnchantmentType;
 import classes.Items.ItemConstants;
+import classes.Items.ItemEffect;
+import classes.Items.ItemEffectType;
 import classes.Items.ItemTypeNothing;
 import classes.internals.Utils;
 
@@ -65,14 +67,32 @@ public class ItemType extends ItemConstants
 			"RussOil": dynamicItemId("SkinOil", {color: "russet"}),
 			"Tan Oil": dynamicItemId("SkinOil", {color: "tan"}),
 			// Old weapons
+			"Claymor":  dynamicItemId("DynamicWeapon",
+					{t: "claymore", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []}),
 			"Dagger ": dynamicItemId("DynamicWeapon",
 					{t: "dagger", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []}),
+			"Halberd": dynamicItemId("DynamicWeapon",
+					{t: "halberd", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []}),
+			"Kama": dynamicItemId("DynamicWeapon",
+					{t: "kama", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []}),
 			"Katana ": dynamicItemId("DynamicWeapon",
 					{t: "katana", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []}),
 			"Mace   ": dynamicItemId("DynamicWeapon",
 					{t: "mace", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []}),
+			"Nodachi": dynamicItemId("DynamicWeapon",
+					{t: "nodachi", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []}),
+			"Ribbon ": dynamicItemId("DynamicWeapon",
+					{t: "ribbon", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []}),
+			"Scimitr": dynamicItemId("DynamicWeapon",
+					{t: "scimitar", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []}),
 			"Uchigatana ": dynamicItemId("DynamicWeapon",
-					{t: "uchigatana", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []})
+					{t: "uchigatana", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []}),
+			"Warhamr": dynamicItemId("DynamicWeapon",
+					{t: "warhammer", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []}),
+			"Whip   ": dynamicItemId("DynamicWeapon",
+					{t: "whip", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []}),
+			"Zwnder ": dynamicItemId("DynamicWeapon",
+					{t: "zweihander", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []})
 		};
 
 		public static function dynamicItemId(templateId:String, parameters:Object):String {
@@ -164,6 +184,13 @@ public class ItemType extends ItemConstants
 			return JSON.parse(_id.substr(i+1));
 		}
 		
+		public var itemEffects:/*ItemEffect*/Array = [];
+		/**
+		 * Index = item effect flag IEF_XXXX
+		 * Value = array of item effects that have this flag
+		 * */
+		protected var _effectsFlagged:/*Array*/Array = [];
+		
 		public function getEnchantments():/*Enchantment*/Array {
 			return [];
 		}
@@ -205,6 +232,9 @@ public class ItemType extends ItemConstants
 		}
 		public function get longNameBase():String {
 			return longName.replace(/^(the|a|an)\s+/i,'');
+		}
+		public function get name():String {
+			return longName;
 		}
 
 		/**
@@ -272,23 +302,28 @@ public class ItemType extends ItemConstants
 		 * Add tag to this item type. Use only when registering new item type!
 		 * @return this
 		 */
-		public function withTag(tag:String, ...values):ItemType {
-			if (values.length == 0) {
-				this._tags[tag] = 1;
-			} else if (values.length == 1) {
-				this._tags[tag] = values[0];
-			} else {
-				this._tags[tag] = values;
-			}
+		public function withTag(tag:String):ItemType {
+			this._tags[tag] = 1;
 			return this;
 		}
 		
 		/**
-		 * @param tags a tagName:tagValue mapping
+		 * Add multiple tags to this item type. Use only when registering new item type!
+		 * @param tags array of tags
 		 * @return this
 		 */
-		public function withTags(tags:Object):ItemType {
-			Utils.extend(_tags, tags);
+		public function withTags(...tags:/*String*/Array):ItemType {
+			for each (var tag:String in tags) this._tags[tag] = 1;
+			return this;
+		}
+		
+		/**
+		 * Add multiple tags to this item type. Use only when registering new item type!
+		 * @param tags array of tags
+		 * @return this
+		 */
+		public function withTagsV(tags:/*String*/Array):ItemType {
+			for each (var tag:String in tags) this._tags[tag] = 1;
 			return this;
 		}
 
@@ -308,9 +343,65 @@ public class ItemType extends ItemConstants
 			return false;
 		}
 		
-		public function tagValue(tag:String, defaultValue:* = null):* {
-			if (!(tag in _tags)) return defaultValue;
-			return _tags[tag];
+		/**
+		 * Called when item effect is added during the construction.
+		 */
+		protected function addEffect(ie:ItemEffect):void {
+			itemEffects.push(ie);
+			if (ie.type.flags) {
+				// flag goes 1, 2, 4, 8, 16, ..., (1<<31)
+				for (var flag:int = 1; flag <= ItemEffectLastFlag && flag > 0; flag <<= 1) {
+					if ((ie.type.flags & flag) != 0) {
+						(_effectsFlagged[flag] ||= []).push(ie);
+					}
+				}
+			}
+		}
+		/**
+		 * Add property to this item type. Use only when registering new item type!
+		 * @param type IELib.XXXX
+		 */
+		public function withEffect(type:ItemEffectType, power:Number, value1:* = undefined, value2:* = undefined, value3:* = undefined, value4:* = undefined):ItemType {
+			addEffect(new ItemEffect(type, power, value1, value2, value3, value4));
+			return this;
+		}
+		
+		/**
+		 * List of all effect that have flag set
+		 * @param flag ItemConstants.IEF_XXXX
+		 * @return
+		 */
+		public function effectsFlagged(flag:int):/*ItemEffect*/Array {
+			return _effectsFlagged[flag] || [];
+		}
+		public function findEffect(type:ItemEffectType):ItemEffect {
+			for each (var ie:ItemEffect in itemEffects) {
+				if (ie.type == type) return ie;
+			}
+			return null;
+		}
+		public function hasEffect(type:ItemEffectType):Boolean {
+			return !!findEffect(type);
+		}
+		public function effectPower(type:ItemEffectType, defaultPower:Number=0):Number {
+			var ie:ItemEffect = findEffect(type);
+			return ie ? ie.power : defaultPower;
+		}
+		public function effectValue1(type:ItemEffectType, defaultValue:*):* {
+			var ie:ItemEffect = findEffect(type);
+			return ie ? ie.value1 : defaultValue;
+		}
+		public function effectValue2(type:ItemEffectType, defaultValue:*):* {
+			var ie:ItemEffect = findEffect(type);
+			return ie ? ie.value2 : defaultValue;
+		}
+		public function effectValue3(type:ItemEffectType, defaultValue:*):* {
+			var ie:ItemEffect = findEffect(type);
+			return ie ? ie.value3 : defaultValue;
+		}
+		public function effectValue4(type:ItemEffectType, defaultValue:*):* {
+			var ie:ItemEffect = findEffect(type);
+			return ie ? ie.value4 : defaultValue;
 		}
 
 		public function toString():String

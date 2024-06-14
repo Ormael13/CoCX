@@ -103,7 +103,7 @@ public function holliCampMenu(output:Boolean = true):void {
 			if(flags[kFLAGS.HOLLI_FRUIT_EXPLAINED] > 0) outputText("  A very small, strange part of you actually feels proud to have made something like that with the tree-woman.");
 		}
 	}
-	sceneHunter.print("\nTo make her submissive, make her guard the camp. To reset it, get humiliated by Seraph.");
+	sceneHunter.print("\nTo make her submissive, make her guard the camp. To reset it, get humiliated by her when asking to stop guarding.");
 	menu();
 	addButton(0, "FuckHolli", flags[kFLAGS.HOLLI_SUBMISSIVE] == 0 ? fuckHolliInZeFlowerPuss : holliGetsDickDommed)
 		.disableIf(player.lust < 33, "Not aroused enough!")

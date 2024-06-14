@@ -26,15 +26,19 @@ public class WinterWolf extends Monster
 			outputText("The wolf lunge, biting viciously at your leg.");
 			var dmgtaken:Number = 0;
 			var damage:Number = 0;
-			if(!player.hasStatusEffect(StatusEffects.Frostbite)) {
+			if(!player.hasStatusEffect(StatusEffects.FrostburnDoT)) {
 				outputText(" You feel the cold enter your body and shake you to the very core weakening your resolve just as much as slowing down your movement.");
 				if(player.str > 7) {
 					player.addCurse("str", 6,2);
 					showStatDown( 'str' );
-					player.createStatusEffect(StatusEffects.Frostbite,6,0,0,0);
+					if (!player.immuneToFrostBurn()) {
+						player.createStatusEffect(StatusEffects.FrostburnDoT,6,0,0,0);
+					}
 				}
 				else {
-					player.createStatusEffect(StatusEffects.Frostbite,0,0,0,0);
+					if (!player.immuneToFrostBurn()) {
+						player.createStatusEffect(StatusEffects.FrostburnDoT,0,0,0,0);
+					}
 					damage += 30 + Math.round(rand((str + weaponAttack) / 2));
 					player.takeIceDamage(damage);
 					dmgtaken += damage;
@@ -42,14 +46,14 @@ public class WinterWolf extends Monster
 				damage += 30 + Math.round(rand((str + weaponAttack) / 2));
 				player.takeIceDamage(damage);
 				dmgtaken += damage;
-				outputText(" (<b><font color=\"#800000\">" + damage + "</font></b>)");
+				outputText(" (<b>[font-damage]" + damage + "[/font]</b>)");
 			}
 			else {
 				outputText(" The coldness effects intensify as your movement slowing down even more.");
 				if(player.str > 6) {
 					player.addCurse("str", 5,2);
 					showStatDown( 'str' );
-					player.addStatusValue(StatusEffects.Frostbite,1,5);
+					player.addStatusValue(StatusEffects.FrostburnDoT,1,5);
 				}
 				else {
 					damage += 30 + Math.round(rand((str + weaponAttack) / 2));
@@ -59,7 +63,7 @@ public class WinterWolf extends Monster
 				damage += 30 + Math.round(rand((str + weaponAttack) / 2));
 				player.takeIceDamage(damage);
 				dmgtaken += damage;
-				outputText(" (<b><font color=\"#800000\">" + damage + "</font></b>)");
+				outputText(" (<b>[font-damage]" + damage + "[/font]</b>)");
 			}
 		}
 

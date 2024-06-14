@@ -12,7 +12,9 @@ import classes.Races;
 
 public class HumanBloodstreamMutation extends IMutationPerkType
     {
-        private static const mName:String = "Human Bloodstream";
+        override public function get mName():String {
+            return "Human Bloodstream";
+        }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -22,28 +24,16 @@ public class HumanBloodstreamMutation extends IMutationPerkType
                 descS += "5.";
             }
             if (pTier == 2){
-                descS += "10. Increase a bit fatigue recovery and wrath generation.";
+                descS += "10. Increase a bit fatigue recovery (+5) and wrath generation (+2).";
             }
             if (pTier == 3){
-                descS += "10, maximum trainable Spe/Libs by 20%. Increase a bit fatigue recovery and wrath generation.";
+                descS += "10, maximum trainable Spe/Lib by 20%. Increase a bit fatigue recovery (+10) and wrath generation (+4).";
             }
+            if (pTier == 4){
+                descS += "20, maximum trainable Spe/Lib by 30%. Increase fatigue recovery (+15), wrath generation (+6) and +2 to fatigue recovery/wrath gains multiplier. +5% to max overfatigue/overwrath.";
+            }
+            if (pTier >= 1) descS += " (req. 18+ human score to have all effects active)";
             return descS;
-        }
-
-        //Name. Need it say more?
-        override public function name(params:PerkClass=null):String {
-            var sufval:String;
-            switch (currentTier(this, player)){
-                case 2:
-                    sufval = "(Primitive)";
-                    break;
-                case 3:
-                    sufval = "(Evolved)";
-                    break;
-                default:
-                    sufval = "";
-            }
-            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -82,12 +72,16 @@ public class HumanBloodstreamMutation extends IMutationPerkType
 				pBuffs['spe.mult'] = 0.4;
 				pBuffs['lib.mult'] = 0.4;
 			}
+            if (pTier == 4) {
+				pBuffs['spe.mult'] = 0.8;
+				pBuffs['lib.mult'] = 0.8;
+			}
             return pBuffs;
         }
 
         public function HumanBloodstreamMutation() 
 		{
-			super(mName + " IM", mName, SLOT_BLOODSTREAM, 3);
+			super(mName + " IM", mName, SLOT_BLOODSTREAM, 4);
 		}
 		
 	}

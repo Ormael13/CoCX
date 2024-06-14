@@ -192,13 +192,18 @@ public function etnaRapesPlayer2():void
 			outputText(" simply does not seem to inflate. Considering the fact she can rape an entire party of minotaurs dry you imagine she could drink a pool worth of it and still be thirsty! Though the happy expression on her face tells you she is having an excellent meal. ");
 		}
 		outputText("After an hour of this terrible treatment, you black out.\n\n");
-		outputText("You wake up, your groin feeling as though it had been set on fire. After a few hours, the pain fades and you're able to stand again. Checking on your crotch you realize your balls are churning abnormally fast. The manticore’s venom clearly increased your cum productivity. For some weird reason, the manticore didn't steal any of your gems.");
-		if (player.cumQ() < 500) player.cumMultiplier += 6;
-		if (player.cumQ() < 2000) player.cumMultiplier += 4;
-		if (player.cumQ() < 10000) player.cumMultiplier += 2;
+		outputText("You wake up, your groin feeling as though it had been set on fire. After a few hours, the pain fades and you're able to stand again. Checking on your crotch you realize your balls are churning abnormally fast. ");
+		if (player.cumQ() < 15000) {
+			outputText("<b>The manticore’s venom clearly increased your cum productivity.</b> ");
+			if (player.cumQ() < 500) player.cumMultiplier += 6;
+			if (player.cumQ() < 2000) player.cumMultiplier += 4;
+			if (player.cumQ() < 10000) player.cumMultiplier += 2;
+			if (player.cumQ() < 15000) player.cumMultiplier += 1;
+		}
 		if (player.cor < 75) dynStats("cor", 25);
 		if (player.hasStatusEffect(StatusEffects.WildManticore)) player.removeStatusEffect(StatusEffects.WildManticore);
-		player.sexReward("vaginalFluids","Dick");
+		player.sexReward("vaginalFluids", "Dick");
+		outputText("For some weird reason, the manticore didn't steal any of your gems.");
 		cleanupAfterCombatTFEvent();
 	}
 	//Females
@@ -268,7 +273,7 @@ public function etnaRapeIntro():void
 	menu();
 	addButton(0, "Yes (M)", etnaRapeYesM).disableIf(!player.hasCock(), "Req. a cock!");
 	addButton(1, "Yes (F)", etnaRapeYesF).disableIf(!player.hasVagina(), "Req. a vagina!");
-	addButton(2, "Fill her up!", EtnaFillHerUp).disableIf(!player.isAlraune(), "Req. to be an alraune.");
+	addButton(2, "Fill her up!", EtnaFillHerUp).disableIf(!player.isAlraune(), "Req. to have alraune lower body.");
 	addButton(4, "No", etnaRapeNo);
 }
 
@@ -904,7 +909,7 @@ public function etnaSexMenu():void
 	addButton(2, "KittyTitFuck", etnaKittyTitFuck).disableIf(!player.hasCock(), "Req. a cock!");
 	addButton(3, "Pussy Opera", etnaPussyOpera).disableIf(!player.hasCock(), "Req. a cock!");
 	addButton(4, "Share a Drink", etnaShareDrink).disableIf(player.tailType != Tail.MANTICORE_PUSSYTAIL, "Req. to have a manticore pussytail.");
-	addButton(5, "Fill her up", EtnaFillHerUp).disableIf(!player.isAlraune(), "Req. to be an alraune.");
+	addButton(5, "Fill her up", EtnaFillHerUp).disableIf(!player.isAlraune(), "Req. to have alraune lower body.");
 	addButton(6, "TailExplor", tailExploration)
 		.hint("Play with her tail using your goo body!", "Tail Exploration")
 		.disableIf(!player.isGoo(), "Req. goo body.");
@@ -1142,7 +1147,7 @@ private function etnaJumpsPCinCamp():void {
 	addButton(2, "KittyTitFuck", etnaKittyTitFuck).disableIf(!player.hasCock(), "Req. a cock!");
 	addButton(3, "Pussy Opera", etnaPussyOpera).disableIf(!player.hasCock(), "Req. a cock!");
 	addButton(6, "Share a Drink", etnaShareDrink).disableIf(player.tailType != Tail.MANTICORE_PUSSYTAIL, "Req. to have a manticore pussytail.");
-	addButton(7, "Fill her up", EtnaFillHerUp).disableIf(!player.isAlraune(), "Req. to be an alraune.");
+	addButton(7, "Fill her up", EtnaFillHerUp).disableIf(!player.isAlraune(), "Req. to have alraune lower body.");
 	addButton(8, "TailExplor", tailExploration)
 			.hint("Play with her tail using your goo body!", "Tail Exploration")
 			.disableIf(!player.isGoo(), "Req. goo body.");
@@ -1167,7 +1172,7 @@ private function etnaAfterInfidelity():void {
 
 public function etnaKnockupAttempt():void {
 	if (pregnancy.isPregnant || !EtnaFertile || EtnaDaughterScene.EtnaDaughterAge > 0) return;
-	if (rand(8) == 0 || player.cumQ() > rand(3000) || player.virilityQ() >= 0.7) {
+	if (rand(8) == 0 || player.cumQ() > rand(3000) || player.virilityQ() >= 0.7 || player.hasPerk(PerkLib.PilgrimsBounty)) {
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_ETNA);
 		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Etna is pregnant!</b>");
 	}

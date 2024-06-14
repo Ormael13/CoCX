@@ -288,6 +288,10 @@ public class RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_SKIN_COLOR1, color, score, failScore, customName);
 		return this;
 	}
+	public function skinColor2(color:*, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_SKIN_COLOR2, color, score, failScore, customName);
+		return this;
+	}
 	public function skinCoatTypeAndColors(type:*, color:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addRequirement(
 				RacialRequirement.joinAnd(
@@ -329,7 +333,9 @@ public class RaceScoreBuilder {
 		var oo:Object = RaceUtils.parseOperatorObject(adj, null);
 		return customRequirement(
 				"skin",
-				oo.name+" plain skin",
+				function (): String {
+					return oo.nameFn()+" plain skin";
+				},
 				function(body:BodyData):Boolean {
 					return body.player.hasPlainSkinOnly() && oo.operatorFn(body.skinBaseAdj);
 				},
@@ -341,7 +347,7 @@ public class RaceScoreBuilder {
 		var oo:Object = RaceUtils.parseOperatorObject(color, BodyData.defaultPhraseFn(" plain skin",null));
 		return customRequirement(
 				"skin",
-				oo.name,
+				oo.nameFn,
 				function(body:BodyData):Boolean {
 					return body.player.hasPlainSkinOnly() && oo.operatorFn(body.skinColor1);
 				},
@@ -363,13 +369,17 @@ public class RaceScoreBuilder {
 				slotRequirement(BodyData.SLOT_TAIL_COUNT, count, score, failScore, false),
 				slotRequirement(BodyData.SLOT_TAIL_TYPE, type, score, failScore, false)
 		);
-		if (count is Number) {
-			if (count > 1) req.name += " tails";
-			else req.name += " tail";
-		} else {
-			req.name += " tail(s)"
-		}
-		addRequirement(req, customName);
+		const nameFn:Function = function():String {
+			var suffix:String = "";
+			if (count is Number) {
+				if (count > 1) suffix = " tails";
+				else suffix = " tail";
+			} else {
+				suffix = " tail(s)"
+			}
+			return req.getName() + suffix;
+		};
+		addRequirement(req.withNameFn(nameFn), customName);
 		return this;
 	}
 	public function tongueType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
@@ -570,17 +580,6 @@ public class RaceScoreBuilder {
 				failScore
 				);
 	}
-	public function givePerkV2(perk:PerkType, score:int=0,failScore:int=0, customName:String = ""):RaceScoreBuilder {
-		return customScoreRequirement(
-				"perk",
-				customName || (perk.name()+" perk"),
-				RaceUtils.hasPerkFn(perk),
-				function(body:BodyData):int {
-					return score + body.player.perkv2(perk);
-				},
-				failScore
-				);
-	}
 	public function hasAllPerks(perks:/*PerkType*/Array, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
 		addRequirement(new RacialRequirement(
 				"perk",
@@ -617,7 +616,7 @@ public class RaceScoreBuilder {
 	 */
 	public function customRequirement(
 			group:String,
-			name:String,
+			name:*/*String|Function*/,
 			checkFn:Function,
 			score: int,
 			failScore:int=0
@@ -661,7 +660,7 @@ public class RaceScoreBuilder {
 	
 	protected function addRequirement(requirement:RacialRequirement,
 									  customName:String=""):void {
-		if (customName != "") requirement.name = customName;
+		if (customName != "") requirement.setNameStr(customName);
 		race.requirements.push(requirement);
 	}
 	
@@ -679,7 +678,7 @@ public class RaceScoreBuilder {
 				type, "["+race.name+" "+ slotName+"] ");
 		addRequirement(new RacialRequirement(
 				slotName,
-				customName || req.name,
+				customName || req.nameFn,
 				req.check,
 				score,
 				failScore,
@@ -718,7 +717,9 @@ public class RaceScoreBuilder {
 		var oo:Object = RaceUtils.parseOperatorObject(value,BodyData.defaultPhraseFn("",nameFn),"["+race.name+" "+pattern+"]");
 		addRequirement(new RacialRequirement(
 				group,
-				customName || pattern.replace(/\$value/g,oo.name),
+				customName || function (): String {
+					return pattern.replace(/\$value/g,oo.nameFn())
+				},
 				RaceUtils.composeOpArg(argumentFn, oo.operatorFn),
 				score,
 				failScore,
@@ -741,7 +742,7 @@ public class RaceScoreBuilder {
 		);
 		return new RacialRequirement(
 				slotName,
-				operatorObject.name,
+				operatorObject.nameFn,
 				RaceUtils.composeOpArg(argumentFn, operatorObject.operatorFn),
 				score,
 				failScore,
@@ -762,7 +763,7 @@ public class RaceScoreBuilder {
 				errorContext
 		);
 		return {
-			name: operatorObject.name,
+			nameFn: operatorObject.nameFn,
 			check: RaceUtils.composeOpArg(argumentFn, operatorObject.operatorFn)
 		}
 	}

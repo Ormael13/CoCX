@@ -38,9 +38,8 @@ public class CowRace extends Race {
 		addScores()
 				.earType(Ears.COW, +1)
 				.tailType(Tail.COW, +1)
-				.legType(LowerBody.HOOFED, +1)
+				.legType(LowerBody.CLOVEN_HOOFED, +1)
 				.hornType(Horns.COW_MINOTAUR, +1)
-				.skinCoatType(Skin.FUR, +1)
 				.customRequirement("","milk production > 500",
 						function (body:BodyData):Boolean {
 							return body.player.lactationQ() > 500
@@ -51,8 +50,7 @@ public class CowRace extends Race {
 							return body.player.lactationQ() > 1000
 						}, +1)
 				.faceType(ANY(Face.HUMAN, Face.COW_MINOTAUR), +1)
-				.armType(Arms.HUMAN, +1)
-				.skinPlainOnly(+1)
+				.skinPlainOnly(+2)
 				.biggestTitSize(GREATER_THAN(4), +1)
 				.height(AT_LEAST(73), +1)
 				.corruption(AT_LEAST(20), +1)

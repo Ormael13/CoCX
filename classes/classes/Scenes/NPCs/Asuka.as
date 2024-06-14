@@ -38,10 +38,12 @@ public class Asuka extends Monster
 			else {
 				outputText(capitalA + short + "'s tail catches you as you try to dodge.  Your [armor] sizzles, and you leap back with a yelp as she gives you a light burning. ");
 				player.takeFireDamage(damage, true);
-				if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.addStatusValue(StatusEffects.BurnDoT, 1, 1);
-				else {
-					player.createStatusEffect(StatusEffects.BurnDoT,SceneLib.combat.debuffsOrDoTDuration(3),0.05,0,0);
-					outputText(" Reeling in pain you begin to burn.");
+				if (!player.immuneToBurn()) {
+					if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.addStatusValue(StatusEffects.BurnDoT, 1, 1);
+					else {
+						player.createStatusEffect(StatusEffects.BurnDoT,SceneLib.combat.debuffsOrDoTDuration(3),0.05,0,0);
+						outputText(" Reeling in pain you begin to burn.");
+					}
 				}
 			}
 		}

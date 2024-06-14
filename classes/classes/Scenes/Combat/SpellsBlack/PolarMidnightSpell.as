@@ -13,7 +13,7 @@ public class PolarMidnightSpell extends AbstractBlackSpell {
 			"\n<b>Req. 1 turn channeling. Cooldown: 12 turns</b>",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
-			[TAG_DAMAGING, TAG_ICE, TAG_AOE]
+			[TAG_DAMAGING, TAG_ICE, TAG_AOE, TAG_TIER3]
 		);
 		baseManaCost = 1250;
 	}
@@ -66,16 +66,16 @@ public class PolarMidnightSpell extends AbstractBlackSpell {
 	public function polarMidnightHit(display:Boolean = true):void {
 		player.removeStatusEffect(StatusEffects.ChanneledAttack);
 		player.removeStatusEffect(StatusEffects.ChanneledAttackType);
-		if (player.hasPerk(PerkLib.GlacialStormSu) && player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, -1);
+		if ((player.hasPerk(PerkLib.GlacialStormSu) || player.hasPerk(PerkLib.GlacialStormMastered)) && player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, -1);
 		if (display) {
 			outputText("You drain the heat out of the air around your foe, causing its temperature to plummet far below its freezing point in an instant, effectively flash freezing your enemy for \n");
 		}
 		var damage:Number = calcDamage(monster, true, true);
 		damage = critAndRepeatDamage(display, damage, DamageType.ICE);
-		if (display) {
-			outputText("\n\n[Monster A] [monster name] is encased in a thick layer of ice.\n\n");
+		if (!monster.hasPerk(PerkLib.Resolute)) {
+			if (display) outputText("\n\n[Monster A] [monster name] is encased in a thick layer of ice.\n\n");
+			monster.createStatusEffect(StatusEffects.FrozenSolid, 5, 0, 0, 0);
 		}
-		monster.createStatusEffect(StatusEffects.FrozenSolid, 5, 0, 0, 0);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 	}
@@ -86,7 +86,7 @@ public class PolarMidnightSpell extends AbstractBlackSpell {
 		}
 		player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
 		player.createStatusEffect(StatusEffects.ChanneledAttackType, 5, 0, 0, 0);
-		if (player.hasPerk(PerkLib.GlacialStormSu)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, 1);
+		if (player.hasPerk(PerkLib.GlacialStormSu) || player.hasPerk(PerkLib.GlacialStormMastered)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, 1);
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {

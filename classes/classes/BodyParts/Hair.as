@@ -204,6 +204,14 @@ public class Hair extends BodyPart {
 		appearanceDesc: "Your {hairInfo} hair looks human at a first glance, but are, in fact, fine tendrils of flesh imitating human hairs, after all this body of yours is but a fleshy tongue mimicking human shape."
 	});
 
+	public static const PEAFOWL:int = 23;
+	EnumValue.add(Types, PEAFOWL, "PEAFOWL", {
+		name:"p.feather",
+		shortDesc: "peafowl feather-{hair}",
+		appearanceDesc: "Your {hairInfo} is made completely out of feathers rather than actual strands. A beautiful crest adorns your head with small feathers that stick straight up, like a Mohawk.",
+		ignoresStyle: true
+	});
+
 	// Additional modifiers for hair descriptions
 	public static var Styles:/*EnumValue*/Array = [];
 

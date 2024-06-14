@@ -12,7 +12,9 @@ import classes.Races;
 
 public class HumanParathyroidGlandMutation extends IMutationPerkType
     {
-        private static const mName:String = "Human Parathyroid Gland";
+        override public function get mName():String {
+            return "Human Parathyroid Gland";
+        }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -27,23 +29,8 @@ public class HumanParathyroidGlandMutation extends IMutationPerkType
             if (pTier >= 3){
                 descS += " Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.";
             }
+            if (pTier >= 1) descS += " (req. 18+ human score to have all effects active)";
             return descS;
-        }
-
-        //Name. Need it say more?
-        override public function name(params:PerkClass=null):String {
-            var sufval:String;
-            switch (currentTier(this, player)){
-                case 2:
-                    sufval = "(Primitive)";
-                    break;
-                case 3:
-                    sufval = "(Evolved)";
-                    break;
-                default:
-                    sufval = "";
-            }
-            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -82,6 +69,10 @@ public class HumanParathyroidGlandMutation extends IMutationPerkType
 				if (pTier == 3) {
 					pBuffs['spe.mult'] = 0.6;
 					pBuffs['int.mult'] = 0.9;
+				}
+				if (pTier == 4) {
+					pBuffs['spe.mult'] = 1.2;
+					pBuffs['int.mult'] = 1.8;
 				}
 			}
             return pBuffs;

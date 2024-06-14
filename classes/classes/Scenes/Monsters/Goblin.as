@@ -3,6 +3,7 @@
 import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
+import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Forest.Tamani;
 import classes.Scenes.Areas.Forest.TamanisDaughters;
 import classes.Scenes.SceneLib;
@@ -15,9 +16,11 @@ public class Goblin extends Monster
 			if (this is GoblinShaman) multiplier += 0.4;
 			if (this is GoblinWarrior) multiplier += 0.5;
 			if (this is Priscilla) multiplier += 1;
+			if (this is Tamani) multiplier += (1 + flags[kFLAGS.TAMANI_LVL_UP]);
+			if (this is TamanisDaughters) multiplier += (1 + flags[kFLAGS.TAMANI_DAUGHTERS_LVL_UP]);
 			multiplier += player.newGamePlusMod() * 0.5;
 			var color:String;
-			if(this is Tamani || this is TamanisDaughters) color = randomChoice("red", "green", "blue", "white", "black");
+			if (this is Tamani || this is TamanisDaughters) color = randomChoice("red", "green", "blue", "white", "black");
 			else color = randomChoice("red", "green");
 			//Throw offensive potions at the player
 			if(color != "blue") {
@@ -102,6 +105,8 @@ public class Goblin extends Monster
 			if (this is GoblinWarrior) lustDmg *= 1.6;
 			if (this is GoblinShaman) lustDmg *= 1.6;
 			if (this is Priscilla) lustDmg *= 2;
+			if (this is Tamani) lustDmg += (1 + flags[kFLAGS.TAMANI_LVL_UP]);
+			if (this is TamanisDaughters) lustDmg += (1 + flags[kFLAGS.TAMANI_DAUGHTERS_LVL_UP]);
 			player.takeLustDamage(lustDmg, true);
 			outputText("  The display distracts you long enough to prevent you from taking advantage of her awkward pose, leaving you more than a little flushed.\n\n");
 		}
@@ -163,7 +168,12 @@ public class Goblin extends Monster
 							consumables.PINKDYE,
 							consumables.BLUEDYE,
 							consumables.ORANGDY,
-							consumables.PURPDYE);
+							consumables.PURPDYE,
+							consumables.HEALHERB,
+							consumables.MOONGRASS,
+							consumables.SNAKEBANE,
+							consumables.IRONWEED,
+							consumables.BLADEFERN);
 			this.abilities = [
 				{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
 				{ call: goblinDrugAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[TAG_FLUID]},

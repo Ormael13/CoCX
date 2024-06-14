@@ -11,6 +11,8 @@ import classes.StatusEffects;
 import classes.internals.WeightedDrop;
 import classes.EngineCore;
 
+import coc.view.CoCButton;
+
 public class MinotaurKing extends Monster
 	{
 		public function MinotaurKing()
@@ -104,7 +106,7 @@ public class MinotaurKing extends Monster
 				}
 				if (hpVictory && !player.hasStatusEffect(StatusEffects.MinoKing)) {
 					hpRestore();
-					if (flags[kFLAGS.WILL_O_THE_WISP] == 0) flags[kFLAGS.WILL_O_THE_WISP] = 1;
+					SceneLib.combat.disableEachHelperIfTheyCauseSoftLock();
 					doNext(SceneLib.combat.combatMenu, false);
 					return;
 				}
@@ -292,6 +294,11 @@ public class MinotaurKing extends Monster
 				outputText("It only takes the muscled "+(player.hasStatusEffect(StatusEffects.SoulArena)?"champion":"monarch")+" a moment to recover from the stun. It looks like he’s too much of a juggernaught to be stopped by those kinds of hits. ");
 				return true;
 			}
+		}
+
+		override public function postPlayerBusyBtnSpecial(btnSpecial1:CoCButton, btnSpecial2:CoCButton):void{
+			if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.companionsInPCParty()) btnSpecial1.show("Dish Helper", SceneLib.hexindao.dishHelper);
+			else btnSpecial1.showDisabled("Dish Helper", "You don't have anyone to take care of "+(player.hasStatusEffect(StatusEffects.SoulArena)?"cow maid":"Excellia")+"!");
 		}
 	}
 }

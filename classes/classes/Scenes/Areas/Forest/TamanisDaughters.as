@@ -41,10 +41,10 @@ public class TamanisDaughters extends Goblin
 				outputText("A high-pitched yet familiar voice calls out, \"<i><b>So this is where you skanks ran off to---wait a second.  Are you trying to poach Tamani's man!?</b></i>\"\n\n");
 				outputText("You can see Tamani lurking around the rear of the goblin pack, visibly berating her daughters.  On one hand it sounds like she might help you, but knowing goblins, she'll probably forget about her anger and help them subdue you for more cum...\n\n");
 				//(+5 mob strength)
-				strStat.core.value += 5;
+				strStat.core.value += (5 * (1 + flags[kFLAGS.TAMANI_LVL_UP]));
 				//(+5 mob toughness)
-				touStat.core.value += 5;
-				HP += 10;
+				touStat.core.value += (5 * (1 + flags[kFLAGS.TAMANI_LVL_UP]));
+				HP += (10 * (1 + flags[kFLAGS.TAMANI_LVL_UP]));
 				//(-20 mob lust)
 				lust -= 20;
 				//append combat desc
@@ -54,29 +54,14 @@ public class TamanisDaughters extends Goblin
 
 		override protected function performCombatAction():void
 		{
-			var select:int = 1;
-			//mid-round madness!
 			midRoundMadness();
 			tamaniShowsUp();
-
-			if (special1 != null) select++;
-			if (special2 != null) select++;
-			if (special3 != null) select++;
-			switch (rand(select)) {
-				case 0:
-					createStatusEffect(StatusEffects.Attacks, int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 20), 0, 0, 0); //Tamani's Daughters get multiattacks!
-					if (statusEffectv1(StatusEffects.Attacks) > 20) addStatusValue(StatusEffects.Attacks, 1, -(statusEffectv1(StatusEffects.Attacks) - 20));
-					eAttack();
-					break;
-				case 1:
-					special1();
-					break;
-				case 2:
-					special2();
-					break;
-				default:
-					special3();
-					break;
+			var choice:Number = rand(4);
+			if (choice == 0) special2();
+			if (choice == 1) special1();
+			if (choice >= 2) {
+				createStatusEffect(StatusEffects.Attacks, int((flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 20) + (flags[kFLAGS.TAMANI_DAUGHTERS_LVL_UP] / 2)), 0, 0, 0); //Tamani's Daughters get multiattacks!
+				eAttack();
 			}
 		}
 
@@ -98,6 +83,8 @@ public class TamanisDaughters extends Goblin
 		public function TamanisDaughters()
 		{
 			super(true);
+			var mod1:int = (flags[kFLAGS.TAMANI_DAUGHTERS_LVL_UP] + flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS]);
+			var mod2:int = ((flags[kFLAGS.TAMANI_DAUGHTERS_LVL_UP]*6) + flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS]);
 			this.a = "the group of ";
 			this.short = "Tamani's daughters";
 			this.imageName = "tamanisdaughters";
@@ -118,22 +105,19 @@ public class TamanisDaughters extends Goblin
 			this.bodyColor = "greenish gray";
 			this.hairColor = "pink";
 			this.hairLength = 16;
-			initStrTouSpeInte(55, 30, 45, 50);
-			initWisLibSensCor(50, 70, 70, 50);
+			initStrTouSpeInte(55+mod1*4, 30+mod1*2, 45+mod1*3, 50+mod1*5);
+			initWisLibSensCor(50+mod1*5, 70+mod1*30, 70+mod1*10, 50);
 			this.weaponName = "fists";
 			this.weaponVerb="tiny punch";
-			this.weaponAttack = 5;
+			this.weaponAttack = 5 + mod1;
 			this.armorName = "leather straps";
-			this.armorDef = 5;
-			this.armorMDef = 1;
-			this.bonusHP = 50 + (int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 2) * 15);
-			if (bonusHP > 3350) bonusHP = 3350;
-			this.bonusLust = 148 + (int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 2) * 10);
-			if (bonusLust > 2048) bonusLust = 2048;
+			this.armorDef = 5 + (mod1*5);
+			this.armorMDef = 1 + mod1;
+			this.bonusHP = (50 * (1 + mod2));
+			this.bonusLust = 148 + (mod1 * 46) + mod2;
 			this.lust = 30;
 			this.lustVuln = .65;
-			this.level = 8 + (Math.floor(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 20));
-			if (level > 30) level = 30;
+			this.level = 8 + mod2;
 			this.gems = rand(15) + 5;
 			this.drop = new WeightedDrop().
 					add(consumables.GOB_ALE,5).
@@ -146,6 +130,11 @@ public class TamanisDaughters extends Goblin
 			this.special2 = goblinTeaseAttack;
 			if (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] > 20) this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
 			else this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			if (flags[kFLAGS.TAMANI_DAUGHTERS_LVL_UP] >= 2) this.createPerk(PerkLib.JobSeducer, 0, 0, 0, 0);
+			if (flags[kFLAGS.TAMANI_DAUGHTERS_LVL_UP] >= 4) this.createPerk(PerkLib.JobCourtesan, 0, 0, 0, 0);
+			if (flags[kFLAGS.TAMANI_DAUGHTERS_LVL_UP] >= 6) this.createPerk(PerkLib.JobEromancer, 0, 0, 0, 0);
+			if (flags[kFLAGS.TAMANI_DAUGHTERS_LVL_UP] >= 8) this.createPerk(PerkLib.EpicLibido, 0, 0, 0, 0);
+			if (flags[kFLAGS.TAMANI_DAUGHTERS_LVL_UP] >= 10) this.createPerk(PerkLib.EpicToughness, 0, 0, 0, 0);
 			checkMonster();
 		}
 

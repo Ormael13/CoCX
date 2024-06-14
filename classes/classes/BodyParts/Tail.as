@@ -488,6 +488,44 @@ public class Tail extends SaveableBodyPart {
 		//tailSlam: true,
 		isLong: true
 	});
+	public static const ARIGEAN_RED: int = 58;
+	EnumValue.add(Types, ARIGEAN_RED, "ARIGEAN_RED", {
+		name:"arigean (R)",
+		appearanceDesc: "Your duo of slack Symbiotes sprout from the end of your tailbone with an additional skeletal tail bearing red highlights, each seems to sport a large set of teeth, and are covered in black armor-like skin with glowing red markings. You feel everything they feel and are able to communicate with ease.",
+		//tailSlam: true,
+		isLong: true
+	});
+	public static const ARIGEAN_YELLOW: int = 59;
+	EnumValue.add(Types, ARIGEAN_YELLOW, "ARIGEAN_YELLOW", {
+		name:"arigean (Y)",
+		appearanceDesc: "Your duo of black, Beautiful Symbiotes sprout from the end of your tailbone with an additional skeletal bearing yellow highlights, each sports a lovely, large set of lethal teeth to bite through foes, and are covered in reliable black armor-like skin with glowing yellow markings. You're able to coordinate with them as if they were just extra limbs.",
+		//tailSlam: true,
+		isLong: true
+	});
+	public static const ARIGEAN_PRINCESS: int = 60;
+	EnumValue.add(Types, ARIGEAN_PRINCESS, "ARIGEAN_PRINCESS", {
+		name:"a. princess",
+		appearanceDesc: "Your large, glorious tail-like mouth is attached to you at the end of your tailbone, you can’t help but giggle at the thought of a foe being crushed by the large teeth found in your lipless extra mouth, your able to easily and comfortably rest upon its strong natural armor-like hide. You silently exhale a blue haze through its teeth every few seconds.",
+		//tailSlam: true,
+		isLong: true
+	});
+	public static const MOTH_ABDOMEN: int = 61;
+	EnumValue.add(Types, MOTH_ABDOMEN, "MOTH_ABDOMEN", {
+		name:"moth abdomen",
+		appearanceDesc: "You have a moth abdomen"
+	});
+	public static const TROLL: int = 62;
+	EnumValue.add(Types, TROLL, "TROLL", {
+		name:"troll",
+		appearanceDesc: "Your long, green silky troll tail extends out from just above your [butt]. The fur is luxurious, especially in the tuft of hair at the tip of your tail.",
+		isLong: true
+	});
+	public static const GLACIAL_TROLL: int = 63;
+	EnumValue.add(Types, GLACIAL_TROLL, "GLACIAL_TROLL", {
+		name:"glacial troll",
+		appearanceDesc: "Your long, white silky troll tail extends out from just above your [butt]. The fur is luxurious, especially in the tuft of hair at the tip of your tail.",
+		isLong: true
+	});
 
 	override public function set type(value:int):void {
 		var old:int = type;

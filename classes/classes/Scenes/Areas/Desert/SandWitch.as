@@ -86,14 +86,14 @@ public class SandWitch extends Monster
 					consumables.TSCROLL,
 					consumables.OVIELIX,
 					consumables.LACTAID,
-					consumables.LABOVA_,
+					consumables.LABOVA_).
+					addMany(2,
 					consumables.W__BOOK,
 					consumables.B__BOOK,
 					consumables.RMANUSC,
 					consumables.CRIMS_J,
 					weapons.WDAGGER,
-					weapons.A_WAND,
-					null);
+					weapons.A_WAND);
 			this.abilities = [
 				{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[]},
 				{call: lustMagicAttack, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[]},
