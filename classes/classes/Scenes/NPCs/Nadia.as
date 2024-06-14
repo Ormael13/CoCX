@@ -297,13 +297,7 @@ package classes.Scenes.NPCs
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (flags[kFLAGS.NADIA_FOLLOWER] >= 6)
-                SceneLib.nadiaScene.wonOverNadiaSpar();
-            else if (flags[kFLAGS.NADIA_FOLLOWER] == 5 && (player.hasCock() || !player.blockingBodyTransformations()))
-                SceneLib.nadiaScene.beMyStallionRepeat();
-			else if (flags[kFLAGS.NADIA_FOLLOWER] < 3 && flags[kFLAGS.NADIA_LVL_UP] >= 8 && (player.hasCock() || !player.blockingBodyTransformations()))
-				SceneLib.nadiaScene.beMyStallion();
-			else SceneLib.nadiaScene.wonOverNadia();
+			SceneLib.nadiaScene.defeatedFork();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
