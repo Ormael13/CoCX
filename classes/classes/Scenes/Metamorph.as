@@ -1096,10 +1096,11 @@ package classes.Scenes {
 				const partsInUse: Boolean = (index==-1? genMem.transformation().isPresent() : genMem.transformation(index).isPresent());
 				const cost:Number=(genMem.cost is Function? genMem.cost() : genMem.cost);
 				const enoughSF: Boolean = player.soulforce >= cost;
+				const enoughMana: Boolean = player.maxMana()/10 >= player.mana
 
-				if (unlocked && !partsInUse && enoughSF) addButton(currentButton++, buttonStr, doMetamorph, title, genMem, index).hint("Cost: " + cost + " SF" + (genMem.info ? "\n\n" + genMem.info : ""));
+				if (unlocked && !partsInUse && (enoughSF || enoughMana)) addButton(currentButton++, buttonStr, doMetamorph, title, genMem, index).hint("Cost: " + cost + " SF" + (genMem.info ? "\n\n" + genMem.info : "") + " OR " + (player.maxMana()/10) + " mana");
 				else if (unlocked && partsInUse) addButtonDisabled(currentButton++, buttonStr, (!genMem.hint? "You already have this, the metamorphosis would have no effect!":genMem.hint));
-				else if (unlocked && !partsInUse && !enoughSF) addButtonDisabled(currentButton++, buttonStr, "Cost: " + cost + " SF (You don't have enough Soulforce for this metamorphosis!)");
+				else if (unlocked && !partsInUse && (!enoughSF || !enoughMana)) addButtonDisabled(currentButton++, buttonStr, "Cost: " + cost + " SF (You don't have enough Soulforce for this metamorphosis!)"+ " OR " + (player.maxMana()/10) + " mana");
 				else if (!unlocked)	addButtonDisabled(currentButton++, buttonStr, "You haven't unlocked this metamorphosis yet!" + (genMem.lockedInfo ? "\n\n" + genMem.lockedInfo : ""));
 			}
 
@@ -1120,13 +1121,45 @@ package classes.Scenes {
 		private function doMetamorph (title: String, genMem: *, index:int = -1): void {
 			clearOutput();
 			outputText(title);
-			if (index != -1)
-				genMem.transformation(index).applyEffect();
-			else
-				genMem.transformation().applyEffect();
-			player.soulforce -= (genMem.cost is Function? genMem.cost() : genMem.cost);
-			CoC.instance.mainViewManager.updateCharviewIfNeeded();
-			doNext(accessMetamorphMenu);
+			menu();
+
+			var genSFCost:int = (genMem.cost is Function? genMem.cost() : genMem.cost);
+			var genManaCost:int = player.maxMana()/10
+			outputText("How would you like to pay?");
+			if (player.soulforce >= genSFCost){
+				addButton(1,"SF", mmPayment, 1, genSFCost);
+			}
+			else{
+				addButtonDisabled(1,"SF", "You don't have enough SF for this! You need " + genSFCost + " SF!")
+			}
+			if (player.mana >= genManaCost){
+				addButton(3,"Mana", mmPayment, 2, genManaCost);
+			}
+			else{
+				addButtonDisabled(3,"Mana", "You don't have enough Mana for this! You need " + genManaCost + "Mana!")
+			}
+			addButton(14,"Back", accessMetamorphMenu);
+			function mmPayment(costType: int, costVal: int):void{
+				if (costType == 1){
+					player.soulforce -= costVal
+				}
+				else{
+					player.mana -= costVal
+				}
+				executeMM();
+			}
+
+			function executeMM():void{
+				clearOutput();
+				outputText(title);
+				if (index != -1)
+					genMem.transformation(index).applyEffect();
+				else
+					genMem.transformation().applyEffect();
+
+				CoC.instance.mainViewManager.updateCharviewIfNeeded();
+				doNext(accessMetamorphMenu);
+			}
 		}
 
 		private function openPaginatedSkinMenu (title: String, currentPage: int): void {
