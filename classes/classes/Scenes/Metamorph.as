@@ -764,6 +764,7 @@ package classes.Scenes {
 			}
 
 			if (player.hasPerk(PerkLib.JobSoulCultivator)) addButton(14, "Back", SceneLib.soulforce.accessSoulforceMenu);
+			else if (player.hasPerk(PerkLib.Soulless)) addButton(14, "Back", SceneLib.soulforce.accessDemonicEnergyMenu);
 			else addButton(14, "Back", playerMenu);
 		}
 

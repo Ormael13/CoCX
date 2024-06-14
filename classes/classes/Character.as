@@ -700,6 +700,8 @@ import classes.Scenes.NPCs.Forgefather;
 		public override function maxDemonicEnergy():Number {
 			var max:Number = 50;
 			max += level * 10;
+			if (hasPerk(PerkLib.DarkAscensionBottomlessHunger)) max *= (1 + (0.05 * perkv1(PerkLib.DarkAscensionBottomlessHunger)));
+			max = Math.round(max);
 			return max;
 		}
 

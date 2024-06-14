@@ -174,6 +174,11 @@ public class PerkLib
 				"Allows you to retain up to 90 chosen unlocked metamorphic options.");
 
 		//End of deprecated Ascension Perks
+
+		// Dark Ascension perks
+		public static const DarkAscensionBottomlessHunger:DarkAscensionBottomlessHungerPerk = new DarkAscensionBottomlessHungerPerk();
+		public static const DarkAscensionEfficientSoulConsumption:DarkAscensionEfficientSoulConsumptionPerk = new DarkAscensionEfficientSoulConsumptionPerk();
+		
 		// Bloodline perks
 		public static const DragonsDescendant:PerkType = mk("Dragon's descendant", "Dragon's descendant",
 				"You are a descendant of your ancestor, who was the child of a human and a Dragon. (+2 to dragon score)");
@@ -4099,7 +4104,7 @@ public class PerkLib
 		public static const ArigeanKnowledge:PerkType = mk("Arigean Knowledge", "Arigean Knowledge",
 				"The knowledge of your Arigean ancestors rests in your mind. Gain immunity to mental debuffs and intelligence min is increased to 90.");
 		public static const AscensionMenuChoiceMaybe:PerkType = mk("AscensionMenuChoiceMaybe", "AscensionMenuChoiceMaybe",
-				"You shouldn't be here to see that description so *puts on black sunglasses and prepare erase devide* please look at the red light.");
+				"You shouldn't be here to see that description so *puts on black sunglasses and prepare erase device* please look at the red light.");
 		public static const AuraOfCorruption:PerkType = mk("Aura of Corruption", "Aura of Corruption",
 				"You radiate corruption, tainting everything near you with uncontrollable lust.");
 		public static const AuraOfPurity:PerkType = mk("Aura of Purity", "Aura of Purity",

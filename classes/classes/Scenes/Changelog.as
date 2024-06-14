@@ -37,10 +37,17 @@ public class Changelog extends BaseContent
 			outputText("-New tier 1 misc lvl-up perk: Atavism. Req. Job: Feral Champion perk. Effect: Unlocks the ability to temporarily turn into a feral beast of pure instinct while in battle. Could end it before combat end but will get 6 turn cooldown before been to turn into feral beast again. ");
 			outputText("(Drops intelligence to 1, silence self (no spellcasting), increase critical rate by 35%, increase Strength and Speed modifier by 100% (of core+trained stat value) and raise dodge by 10% while fighting with feral combat. It obviously lock you into feral combat for the duration too.)\n");
 			outputText("-New tier 2 misc lvl-up perk: Wound focus. Req. Job: Feral Champion perk and at least one bleeding ability. Effect: Any bleeding you cause gains a 20% periodic damage increase.\n");
+			outputText("-New tier 2 corruption lvl-up perk: Improved Arousing Aura. Req. Arousing Aura perk and 35+ corruption. Effect: Double the effect from arousing aura.\n");
 			outputText("-New tier 3 misc lvl-up perk: Natural recovery. Req. Tough Hide perk and 60+ tou. Effect: Gain 2% health regeneration so long as you are wearing no armor (or armor with Revealing tag), shield or melee weapon.\n");
 			outputText("-New tier 3 misc lvl-up perk: Deep wounds. Req. Wound focus perk and 50+ str. Effect: Natural claw attacks have a 20% chance to cause bleeding for 6 rounds.\n");
 			outputText("-New tier 3 misc lvl-up perk: Mageslaying beast. Req. Tough Hide perk and 60+ tou. Effect: Gain spell resistance based on core speed so long as you are naked up to 40%.\n");
+			outputText("-New tier 3 libido lvl-up perk: Corrupt the body. Req. Job: Eromancer perk. Effect: Lust vulnerability debuff can now stack beyond 0 up to -100%.\n");
+			outputText("-New tier 3 corruption lvl-up perk: Devouring Aura. Req. Improved Arousing Aura perk and 50+ corruption. Effect: Your arousing aura now also erodes your victim lust resistance by 1% per round and may even inflict negative resistance. This ability does not affect mindless opponents.\n");
 			outputText("-New tier 4 wisdom lvl-up perk: Dual Wield (2H Firearms). Req. Dual Wield (Firearms) and Amateur Gunslinger perks; 50+ wis, 40+ int and 30+ spe. Effect: Allows you to wield two firearms (2H ones) more effectively. (damage and accuracy penalties decreased by 40% and 20%)\n");
+			outputText("-New tier 4 corruption lvl-up perk: Damnation Aura. Req. Devouring Aura perk and 60+ corruption. Effect: Double the effect of Devouring Aura.\n");
+			outputText("-New tier 6 libido lvl-up perk: Corrupt the heart. Req. Corrupt the body perk. Effect: Lust vulnerability debuff can now stack beyond 0 up to -200%.\n");
+			outputText("-New tier 10 libido lvl-up perk: Corrupt the mind. Req. Corrupt the heart perk. Effect: Lust vulnerability debuff can now stack beyond 0 up to -300%.\n");
+			outputText("-New tier 13 libido lvl-up perk: Corrupt the soul. Req. Corrupt the mind perk. Effect: Lust vulnerability debuff can now stack beyond 0 up to infinity. (well technicaly not infinity but only Spilly Stonewall PC maybe could reach that 'inifity')\n");
 			outputText("-New event perk: Nightshade. Gained by using Black Lily. Effects: Raise min corruption by 20% permanently +50% tease damage. Pollen now erodes lust resistance by 5% per round. Your alraune abilities are now considered Dark Elements and your vine attack delivers extra dark damage.\n");
 			outputText("-New event perk: Snow Lily. Gained by using Snow Flower. Effects: Your alraune abilities are now considered to be Cold Elements effect and your vine attack delivers extra cold damage.\n");
 			outputText("-New event perk: Cinderbloom. Gained by using Ember Flower. Effects: Your alraune abilities are now considered to be Fire Elements effect and your vine attack delivers extra fire damage.\n");
@@ -192,17 +199,10 @@ public class Changelog extends BaseContent
 			outputText("-True Demon type enemies would have now their base HP halved, their regeneration doubled (after adding all the regenerations sources), increased base m.res by 30 on top of current magic resistance values.\n");
 			outputText("-Souless perk will grant pc reduction of max HP base by half (like true demon enemies), add 1% innate HP regen and double final % regeneration part, magic resistance increased by 30 pts and add overmaxHP effect same as enemy demons benefits (1% overmax HP per each PC level)\n");
 			outputText("-Dynamically display the name of a racial requirement. (PhillipDaisySeventh)\n");
-			outputText("-New tier 2 corruption lvl-up perk: Improved Arousing Aura. Req. Arousing Aura perk and 35+ corruption. Effect: Double the effect from arousing aura.\n");
-			outputText("-New tier 3 libido lvl-up perk: Corrupt the body. Req. Job: Eromancer perk. Effect: Lust vulnerability debuff can now stack beyond 0 up to -100%.\n");
-			outputText("-New tier 6 libido lvl-up perk: Corrupt the heart. Req. Corrupt the body perk. Effect: Lust vulnerability debuff can now stack beyond 0 up to -200%.\n");
-			outputText("-New tier 10 libido lvl-up perk: Corrupt the mind. Req. Corrupt the heart perk. Effect: Lust vulnerability debuff can now stack beyond 0 up to -300%.\n");
-			outputText("-New tier 13 libido lvl-up perk: Corrupt the soul. Req. Corrupt the mind perk. Effect: Lust vulnerability debuff can now stack beyond 0 up to infinity. (well technicaly not infinity but only Spilly Stonewall PC maybe could reach that 'inifity')\n");
 			outputText("-Monsters lust vulnerability debuff would now stops at reaching 100% (or 0% enemy lust resistance). To go beyond that would req. one of Corrupt the ... perkline.\n");
 			outputText("-New mutation perk: Human Versatility (Final Form). Req. Human Versatility (Evolved) and lvl 90+. Effects: Mastery gains increased by 4 points or in case of multiplier +4 to multiplier. Decrease needed exp to lvl up weapon/lifeskill masteries and have 40% chance to gain 4x more XP for Mastery. 50% chance to gain 2 levels instead of 1 when leveling weapon/lifeskill mastery.\n");
 			outputText("-New tier 4 libido lvl-up perk: Improved Grapple. Req. 150+ lib. Effect: Do two action per straddle or grappling turn. Increase straddle damage by 20%.\n");
 			outputText("-New tier 8 libido lvl-up perk: Greater Grapple. Req. Improved Grapple perk and 250+ lib. Effect: Attack three action per straddle or grappling turn. Increase straddle damage by another 20%.\n");
-			outputText("-New tier 3 corruption lvl-up perk: Devouring Aura. Req. Improved Arousing Aura perk and 50+ corruption. Effect: Your arousing aura now also erodes your victim lust resistance by 1% per round and may even inflict negative resistance. This ability does not affect mindless opponents.\n");
-			outputText("-New tier 4 corruption lvl-up perk: Damnation Aura. Req. Devouring Aura perk and 60+ corruption. Effect: Double the effect of Devouring Aura.\n");
 			outputText("-New mutation perk: Human Bloodstream (Final Form). Req. Human Bloodstream (Evolved) and lvl 90+. Effects: Increases maximum base/core Spe/Lib by 20, maximum trainable Spe/Lib by 30%. Increase fatigue recovery (+15), wrath generation (+6) and +2 to fatigue recovery/wrath gains multiplier. +5% to max overfatigue/overwrath.\n");
 			outputText("-New mutation perk: Human Bones (Final Form). Req. Human Bones (Evolved) and lvl 90+. Effects: Increases maximum base/core Str/Tou by 20, maximum trainable Str/Tou by 30%. Increase effects of body cultivation by 150%. Increase p.soulskill power by 100% and +10% to max overhp.\n");
 			outputText("-New mutation perk: Human Smarts (Final Form). Req. Human Smarts (Evolved) and lvl 90+. Effects: Increases maximum base/core Int/Wis by 20, maximum trainable Int/Wis cap by 30%. Gain soulforce recovery equal to 2% of your total soulforce and mana recovery increased by 1% of max mana, +5% to max overmana/oversoulforce. Increase m.soulskill power by 100%. Allow to use options requiring to have technical knowledge.\n");
@@ -217,7 +217,7 @@ public class Changelog extends BaseContent
 			outputText("-New necklace (by Ormael): Skull Necklace - buyable at Felix in Journey to the East inn. Cost 50 spirit stones. +5%/-5% regeneration (undead / others)\n");
 			outputText("-New head jewelery/accesory/misc (by Ormael): Skull Crown - buyable at Felix in Journey to the East inn. Cost 40 spirit stones. +4%/-4% regeneration (undead / others)\n");
 			outputText("-Etna venom effect and kitsune residue magic on increasing cum multiplier have been increase to reach 50% more then before (from cap of 10k to 15k). It would also show bolded part of scene text when the effect of venom trigger.\n");
-			outputText("-Soulforce resource is replaced by different one for PC that have Soulless perk: Demonic Energy. It caps at 50 + 10*level. Can be used for different bonuses. DE can be gained from eating lethicite type item. Lethicite item was renamed to Lesser Lethicite\n");
+			outputText("-Soulforce resource is replaced by different one for PC that have Soulless perk: Demonic Energy. It caps at 50 + 10*level. Can be used for different bonuses. DE can be gained from eating lethicite type item. Lethicite item was renamed to Lesser Lethicite.\n");
 			outputText("-Horse face sprite (by Liadri) implementation. (Lord Shadeogorath)\n");
 			outputText("-Spending 200 demonic energy true demon PC can rise one of elemental dao mastery by 1 layer.\n");
 			outputText("-New event perk: Strengthen body. Gained / Upgraded by spending Demonic Energy (25 base rank and increase by 5 pts per each new rank). Effects: Consume the stored energy of souls to raise your strength, toughness and speed by 5% permanently. This change persists through time.\n");
@@ -226,6 +226,11 @@ public class Changelog extends BaseContent
 			outputText("-New consumable (by Liadri): Averange Lethicite. Dropped from some of true demon enemies. Consuming it by PC with Soulless perk will give up to 100 demonic energy.\n");
 			outputText("-Manacost for MM added as alt cost. (Jtecx) (Only for True Demon PC's)\n");
 			outputText("-Added mockfights to Nadia. (Svalkash)\n");
+			outputText("-New Dark Ascension perk: Bottomless hunger. Raise max demonic energy capacity by 5%. Max Rank: 20.\n");
+			outputText("-New Dark Ascension perk: Efficient Soul Consumption. Decrease the cost of upgrading yourself through demonic energy by 5%. Max Rank: 19.\n");
+			outputText("-PC with Soulless perk no longer can use normal ascension instead using variant dark ascension. It have it own choice of perks to buy and some of the options that normal ascension have.\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -246,11 +251,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed bugs: Dracula/lina PC unable to find get ghoul if they not learned this as normal Vampire, unable to buy manual for 1st atk: f. swords, Arigean Princess PC not been fully immune to TF-ing like other perm races, Weresharks not having their stats changing according to moon phase or boosted during use of Crinos Shape, Phoenix TF adding mutagen penatly instead of stat curse, ");
 			outputText("Endless Rage draining 10x too much wrath per turn, Berzerker/Lustzerker still req. to be activated after they been activated as part of Asura Form activation, dormant state of wereraces 'blessings' increasing race score and not lowering it, Hinezumi Buring Blood IM accesable by Bunny race, returning from teleportation circle at 4th floor of river dungeon sending PC to ");
 			outputText("3rd floor teleportation circle room, perk allowing to always run away from enemy/ies been ignored in dungeons, unarmed/feral giving mastery gains for small weapons, 2 of 4 SF to Elemental Energy conversion options having wrong check for usable SF, using Fiery Band for calling Kiha to help fight... Kiha, Ceraph after update still not able to win using her super cool lust beam attack, ");

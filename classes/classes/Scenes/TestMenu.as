@@ -1789,7 +1789,7 @@ public class TestMenu extends BaseContent
 	public function AddLethicite():void {
 		menu();
 		addButton(0, "Lethicite1", AddLethicite1).hint("Add 1 (light coooked) Lethicite.");
-		addButton(0, "Lethicite2", AddLethicite2).hint("Add 1 (medium coooked) Lethicite.");
+		addButton(1, "Lethicite2", AddLethicite2).hint("Add 1 (medium coooked) Lethicite.");
 		addButton(14, "Back", NonEquipmentMenu);
 	}
 

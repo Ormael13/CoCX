@@ -919,8 +919,8 @@ public class Soulforce extends BaseContent
 		clearOutput();
 		outputText("<b>Demonic Energy:</b> "+player.demonicenergy+" / "+player.maxDemonicEnergy()+"\n");
 		menu();
-		addButtonIfTrue(0, "StrengthenBody", demonicEnergyStrengthenBody, "You don’t have enough demonic energy to improve this ability.", (player.demonicenergy >= (25 + (player.perkv1(PerkLib.StrengthenBody) * 5))), "Consume the stored energy of souls to raise your strength, toughness and speed by 5% permanently. This change persists through time.");
-		addButtonIfTrue(1, "StrengthenMagic", demonicEnergyStrengthenMagic, "You don’t have enough demonic energy to improve this ability.", (player.demonicenergy >= (25 + (player.perkv1(PerkLib.StrengthenMagic) * 5))), "Consume the stored energy of souls to raise your intelligence, wisdom and libido by 5% permanently. This change persists through time.");
+		addButtonIfTrue(0, "StrengthenBody", demonicEnergyStrengthenBody, "You don’t have enough demonic energy to improve this ability.", player.demonicenergy >= deCost((25 + (player.perkv1(PerkLib.StrengthenBody) * 5))), "Consume the stored energy of souls to raise your strength, toughness and speed by 5% permanently. This change persists through time.");
+		addButtonIfTrue(1, "StrengthenMagic", demonicEnergyStrengthenMagic, "You don’t have enough demonic energy to improve this ability.", player.demonicenergy >= deCost((25 + (player.perkv1(PerkLib.StrengthenMagic) * 5))), "Consume the stored energy of souls to raise your intelligence, wisdom and libido by 5% permanently. This change persists through time.");
 		addButton(2, "Corrupt Element", demonicEnergyCorruptElement).hint("Reinforce your attunement over an element of an element by consuming demonic energy.");
 		if (player.hasPerk(PerkLib.Metamorph)) {
 			if (player.blockingBodyTransformations()) addButtonDisabled(10, "Metamorph", "Your current body state prevents you from using Metamorph. (Either cure it or ascend to gain access to metamorph menu again)");
@@ -933,7 +933,7 @@ public class Soulforce extends BaseContent
 		clearOutput();
 		outputText("You may consume the stored energy of souls to empower your mastery over an element. Which element would you like to improve?\n");
 		menu();
-		if (player.demonicenergy < 200) {
+		if (player.demonicenergy < deCost(200)) {
 			addButtonDisabled(0, "Fire", "You don’t have enough demonic energy to improve this ability.");
 			addButtonDisabled(1, "Ice", "You don’t have enough demonic energy to improve this ability.");
 			addButtonDisabled(2, "Lightning", "You don’t have enough demonic energy to improve this ability.");
@@ -962,7 +962,7 @@ public class Soulforce extends BaseContent
 	public function demonicEnergyStrengthenBody():void {
 		clearOutput();
 		outputText("You consume some of your demonic energy permanently improving your physique!");
-		player.demonicenergy -= (25 + (player.perkv1(PerkLib.StrengthenBody) * 5));
+		player.demonicenergy -= deCost((25 + (player.perkv1(PerkLib.StrengthenBody) * 5)));
 		if (player.hasPerk(PerkLib.StrengthenBody)) player.addPerkValue(PerkLib.StrengthenBody, 1, 1);
 		else player.createPerk(PerkLib.StrengthenBody, 1, 0, 0, 0);
 		doNext(demonicEnergyCorruptElement);
@@ -970,7 +970,7 @@ public class Soulforce extends BaseContent
 	public function demonicEnergyStrengthenMagic():void {
 		clearOutput();
 		outputText("You consume some of your demonic energy permanently improving your magic!");
-		player.demonicenergy -= (25 + (player.perkv1(PerkLib.StrengthenMagic) * 5));
+		player.demonicenergy -= deCost((25 + (player.perkv1(PerkLib.StrengthenMagic) * 5)));
 		if (player.hasPerk(PerkLib.StrengthenMagic)) player.addPerkValue(PerkLib.StrengthenMagic, 1, 1);
 		else player.createPerk(PerkLib.StrengthenMagic, 1, 0, 0, 0);
 		doNext(demonicEnergyCorruptElement);
@@ -978,7 +978,7 @@ public class Soulforce extends BaseContent
 	public function demonicEnergyCorruptElementImprove(daoType:String = ""):void {
 		clearOutput();
 		outputText("Your mastery over " + daoType+" has improved by 10%!");
-		player.demonicenergy -= 200;
+		player.demonicenergy -= deCost(200);
 		switch (flags[kFLAGS.BLOOD_PUPPY_SUMMONS]) {
             case "Fire": player.addStatusValue(StatusEffects.DaoOfFire, 1, 1);
                     break;
@@ -1003,5 +1003,14 @@ public class Soulforce extends BaseContent
         }
 		doNext(demonicEnergyCorruptElement);
 	}
+	
+	private function deCost(mod:Number):Number {
+        var costPercent:Number = 100;
+        if (player.hasPerk(PerkLib.DarkAscensionEfficientSoulConsumption)) costPercent -= (5*player.perkv1(PerkLib.DarkAscensionEfficientSoulConsumption));
+        if (costPercent < 5) costPercent = 5;
+        mod *= costPercent / 100;
+		mod = Math.round(mod);
+        return mod;
+    }
 }
 }

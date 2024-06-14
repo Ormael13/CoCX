@@ -2194,7 +2194,7 @@ public class Camp extends NPCAwareContent{
 		addButton(10, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
 		addButton(11, "Recall", sceneHunter.recallScenes).hint("Recall some of the unique events happened during your adventure.");
 		if (SceneLib.exploration.counters.explore >= 1) addButton(12, "Dummy", dummyTraining).hint("Train your mastery level on this dummy.").disableIf((isNightTime && !player.isNightCreature()),"It's too dark for that!");
-		if (player.hasPerk(PerkLib.Soulless)) addButtonDisabled(13, "Dark Ascension", "Out of Order! Come back later..."); 
+		if (player.hasPerk(PerkLib.Soulless)) addButton(13, "Dark Ascension", promptDarkAscend).hint("Perform an ascension? This will restart your adventures. The game depending on your choice would also get harder.").disableIf(flags[kFLAGS.LETHICE_DEFEATED] <= 0, "Don't you have a job to finish first? Like... to defeat someone, maybe Lethice?");
 		else addButton(13, "Ascension", promptAscend).hint("Perform an ascension? This will restart your adventures. The game depending on your choice would also get harder. If you have Sky Poison Pearl could carry over some items to new adventure.").disableIf(flags[kFLAGS.LETHICE_DEFEATED] <= 0, "Don't you have a job to finish first? Like... to defeat someone, maybe Lethice?");
 		addButton(14, "Back", playerMenu);
 	}
@@ -5047,6 +5047,18 @@ public function rebirthFromBadEnd():void {
 		outputText("\n\n<b>Proceed?</b>");
 		doYesNo(ascendForReal, campActions);
 	}
+	private function promptDarkAscend():void {
+		clearOutput();
+		outputText("This is it, you have done everything possible in this time and existence. There is nothing left to conquer, no more soul to break, yet you yearn for more… you will always yearn for more!\n\n");
+		outputText("You know Lethice had research on portals but these idiots never fathomed the alternate solution… time travel. Of course casting such a spell will cost you most of your powers as a demon, even some of your memories will fade, but the souls you have consumed and acquired are likely never to be lost.\n\n");
+		outputText("Will you achieve transcendence and begin your quest anew?\n\n");
+		doYesNo(darkAscendForReal, promptDarkAscendNo);
+	}
+	private function promptDarkAscendNo():void {
+		clearOutput();
+		outputText("Maybe later there are still things to do in this time and place. Once you get bored of them you can simply consider this option again.\n\n");
+		doNext(campActions);
+	}
 
 	private function ascendForReal():void {
 		//Check performance!
@@ -5066,6 +5078,20 @@ public function rebirthFromBadEnd():void {
 		if (marbleFollower()) outputText("\n\n\"<i>Sweetie, I'm going to miss you. See you in the next playthrough,</i>\" Marble says, tears leaking from her eyes.");
 		outputText("\n\nThe world around you slowly fades to black and stars dot the endless void. <b>You have ascended.</b>");
 		doNext(CoC.instance.charCreation.ascensionMenuChoice);
+	}
+	private function darkAscendForReal():void {
+		//Check performance!
+		var performancePoints:int = 0;
+		//Sum up ascension perk points!
+		performancePoints += possibleToGainAscensionPoints();
+		player.ascensionPerkPoints += performancePoints;
+		player.knockUpForce(); //Clear pregnancy
+		player.knockUpForce(0, 0, 1); //Clear pregnancy
+		player.buttKnockUpForce(); //Clear Butt preggos.
+		//Scene GO!
+		clearOutput();
+		outputText("It's time for you to dark ascend.");
+		doNext(CoC.instance.charCreation.darkAscensionMenuChoice);
 	}
 
 	public function possibleToGainAscensionPoints():Number {

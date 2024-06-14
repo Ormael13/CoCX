@@ -62,6 +62,8 @@ import classes.Scenes.Combat.CombatAbility;
 		public const MAX_FERTILITY_LEVEL:int = 10;
 		public const MAX_MILK_FAUCET_LEVEL:int = 25;
 		public const MAX_CUM_HOSE_LEVEL:int = 25;
+		public const MAX_BOTTOMLESS_HUNGER_LEVEL:int = 20;
+		public const MAX_EFFICIENT_SOUL_CONSUMPTION_LEVEL:int = 19;
 
 		private var specialCharacters:CharSpecial = new CharSpecial();
 		private var customPlayerProfile:Function;
@@ -1509,8 +1511,10 @@ import classes.Scenes.Combat.CombatAbility;
 			menu();
 			if (!player.hasPerk(PerkLib.PastLifeAlchemist)) addButton(0, "Alchemy", confirmHistory1, PerkLib.HistoryAlchemist);
 			else addButtonDisabled(0, "Alchemy", "You already have this History as one of your Past Lives!");
-			if (!player.hasPerk(PerkLib.PastLifeCultivator)) addButton(1, "Cultivator", confirmHistory1, PerkLib.HistoryCultivator);
-			else addButtonDisabled(1, "Cultivator", "You already have this History as one of your Past Lives!");
+			if (!player.hasPerk(PerkLib.Soulless)) {
+				if (!player.hasPerk(PerkLib.PastLifeCultivator)) addButton(1, "Cultivator", confirmHistory1, PerkLib.HistoryCultivator);
+				else addButtonDisabled(1, "Cultivator", "You already have this History as one of your Past Lives!");
+			}
 			if (!player.hasPerk(PerkLib.PastLifeFeral)) addButton(2, "Feral", confirmHistory1, PerkLib.HistoryFeral);
 			else addButtonDisabled(2, "Feral", "You already have this History as one of your Past Lives!");
 			if (!player.hasPerk(PerkLib.PastLifeFighter)) addButton(3, "Fighting", confirmHistory1, PerkLib.HistoryFighter);
@@ -1712,6 +1716,20 @@ import classes.Scenes.Combat.CombatAbility;
 			doNext(playerMenu);
 		}
 
+		private function arrivalPartZero():void {
+			statScreenRefresh();
+			clearOutput();
+			hideUpDown();
+			showStats();
+			dynStats("lus", 25, "scale", false);
+			dynStats("cor", 2);
+			model.time.hours = 18;
+			outputText("You open a gate to your past self connecting with your previous time double aiming for Ingnam a while back before your departure sadly your powers were lacking and you instead come to next to the portal looking at a familiar imp flying away through the sky. Your body looks human yet it is effectively empty and soulless, no amount of playing with time could change that. Guess it’s time to start your quest anew.\n\n");
+			outputText("You look around, surveying the hellish landscape as you plot your next move.  The portal is a few yards away, nestled between a formation of rocks.  It does not seem to exude the arousing influence it had on the other side.  The ground and sky are both tinted different shades of red, though the earth beneath your feet feels as normal as any other lifeless patch of dirt.   You settle on the idea of making a camp here and fortifying this side of the portal.  No demons will ravage your beloved hometown on your watch.\n\nIt does not take long to set up your tent and a few simple traps.  You'll need to explore and gather more supplies to fortify it any further.  Perhaps you will even manage to track down the demons who have been abducting the other champions!");
+			awardAchievement("Newcomer", kACHIEVEMENTS.STORY_NEWCOMER, true, true);
+			doNext(playerMenu);
+		}
+
 		//-----------------
 		//-- GAME MODES
 		//-----------------
@@ -1873,7 +1891,7 @@ import classes.Scenes.Combat.CombatAbility;
 			else player.setUnderBottom(undergarments.C_LOIN, false);
 			if (player.biggestTitSize() >= 2) player.setUnderTop(undergarments.C_BRA, false);
 			else player.setUnderTop(undergarments.C_SHIRT, false);
-			if (player.hasPerk(PerkLib.HistoryCultivator) || player.hasPerk(PerkLib.PastLifeCultivator)) {
+			if ((player.hasPerk(PerkLib.HistoryCultivator) || player.hasPerk(PerkLib.PastLifeCultivator)) && !player.hasPerk(PerkLib.Soulless)) {
 				player.createKeyItem("Cultivation Manual: Duality", 0, 0, 0, 0);
 				player.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
 				player.perkPoints += 1;
@@ -1946,10 +1964,12 @@ import classes.Scenes.Combat.CombatAbility;
 			outputText("Would you like to play through the " + (1 * (1 + player.newGamePlusMod())) + "-day"+(player.newGamePlusMod() > 0 ? "s":"")+" prologue in Ingnam or just skip?");
 			player.updateRacialAndPerkBuffs();
 			player.HP = player.maxOverHP();
-			//doYesNo(goToIngnam, arrival);
 			menu();
-			addButton(0, "Ingnam", goToIngnam);
-			addButton(1, "Skip Ingnam", arrival);
+			if (player.hasPerk(PerkLib.Soulless)) addButton(1, "Skip Time", arrivalPartZero);
+			else {
+				addButton(0, "Ingnam", goToIngnam);
+				addButton(1, "Skip Ingnam", arrival);
+			}
 		}
 
 		public function goToIngnam():void {
@@ -1996,10 +2016,19 @@ import classes.Scenes.Combat.CombatAbility;
 			if (player.ascensionPerkPoints >= 50) addButton(3, "Maybe?", ascensionMenuChoiceMaybe).hint("Ascend without increasing difficulty.");
 			else addButtonDisabled(3, "Maybe?", "50 ascension points required.");
 		}
+		public function darkAscensionMenuChoice():void {
+			outputText("\n\nWould you like to ascend without increasing the New Game+ cycle (difficulty) or not?");
+			if (player.perkv4(PerkLib.Soulless) < 1) player.addPerkValue(PerkLib.Soulless, 4, 1);
+			menu();
+			addButton(1, "Yes", darkAscensionMenu).hint("Ascend with increased difficulty.");
+			if (player.ascensionPerkPoints >= 50) addButton(3, "Maybe?", ascensionMenuChoiceMaybe).hint("Ascend without increasing difficulty.");
+			else addButtonDisabled(3, "Maybe?", "50 ascension points required.");
+		}
 		public function ascensionMenuChoiceMaybe():void {
 			player.ascensionPerkPoints -= 50;
 			player.createPerk(PerkLib.AscensionMenuChoiceMaybe, 0, 0, 0, 0);
-			ascensionMenu();
+			if (player.hasPerk(PerkLib.Soulless)) darkAscensionMenu();
+			else ascensionMenu();
 		}
 		public function ascensionMenu():void {
 			hideStats();
@@ -2037,6 +2066,39 @@ import classes.Scenes.Combat.CombatAbility;
 			addButton(10, "Rename", renamePrompt).hint("Change your name at no charge.");
 			if (!migration) addButton(14, "Reincarnate", reincarnatePrompt).hint("Reincarnate and start an entirely new adventure.");
 			else addButton(14, "Return", returnFromUpdateAscension).hint("Go back to your camp after updating your Ascension perks. (Only available during updates that refund points like this)");
+		}
+		public function darkAscensionMenu():void {
+			hideStats();
+			clearOutput();
+			hideMenus();
+			mainView.nameBox.visible = false;
+			EngineCore.displayHeader("Dark Ascension");
+			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
+			outputText("\n\n(When you're done, select " + (migration ? "Return" : "Reincarnate") + ".)");
+			menu();
+			var limitReached:String = "Limit Reached";
+			addButton(2, "BottomlessHunger", darkAscensionPerkSelection, PerkLib.DarkAscensionBottomlessHunger, MAX_BOTTOMLESS_HUNGER_LEVEL, null, PerkLib.DarkAscensionBottomlessHunger.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.DarkAscensionBottomlessHunger) + " / " + MAX_BOTTOMLESS_HUNGER_LEVEL)
+                    .disableIf(player.perkv1(PerkLib.DarkAscensionBottomlessHunger) >= MAX_BOTTOMLESS_HUNGER_LEVEL, limitReached);
+			addButton(3, "Eff.SoulCons", darkAscensionPerkSelection, PerkLib.DarkAscensionEfficientSoulConsumption, MAX_EFFICIENT_SOUL_CONSUMPTION_LEVEL, null, PerkLib.DarkAscensionEfficientSoulConsumption.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.DarkAscensionEfficientSoulConsumption) + " / " + MAX_EFFICIENT_SOUL_CONSUMPTION_LEVEL)
+                    .disableIf(player.perkv1(PerkLib.DarkAscensionEfficientSoulConsumption) >= MAX_EFFICIENT_SOUL_CONSUMPTION_LEVEL, limitReached);
+			genMemPatch();
+			if (player.hasStatusEffect(StatusEffects.TranscendentalGeneticMemory)) {
+				var permMemtext:String = "You have permed <b>"+player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory)+"/"+player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)+"</b> from TranscendentalGeneticMemory tier "+player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX);
+				if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) < player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) {
+					addButton(6, "Perm Met.", ascensionMetamorphPermMenu).hint("Spend Ascension Perk Points to make certain Metamorphs permanent.\n"+permMemtext, "Permanent Metamorphs");
+				} else {
+					addButtonDisabled(6, "Perm Met.", "Spend Ascension Perk Points to make certain Metamorphs permanent.\n\n<b>You already bought the maximum amount of Permanent Metamorphs allowed by your stage of Transcedental Genetic Memory!</b>\n"+permMemtext);
+				}
+			} else addButtonDisabled(6, "Perm Met.", "Spend Ascension Perk Points to make certain Metamorphs permanent.\n\n<b>In order to be able to select Metamorphs to make permanent, you need to buy Transcendental Genetic Memory from Rare Perks 2 first!</b>");
+			if (player.ascensionPerkPoints >= 5) addButton(7, "Past Life", historyTopastlife).hint("Spend Ascension Points to change current possessed History perk into Past Life perk (5 points).", "Perk Selection");
+			else addButtonDisabled(7, "Past Life", "You don't have enough Ascension Perk Points to use this option.");
+			if (player.hasPerk(PerkLib.AscensionCruelChimerasThesis) && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) {
+				if (player.ascensionPerkPoints >= 10) addButton(8, "Bloodline", bloodlineACQ).hint("Spend Ascension Points to change current possessed Descendant perk into Bloodline perk (10 points).", "Perk Selection");
+				else addButtonDisabled(8, "Bloodline", "You don't have enough Ascension Perk Points to use this option.");
+			}
+			else addButtonDisabled(8, "???", "You don't have Ascended enough times or/and have required ascension perk to use this option.");
+			addButton(10, "Rename", renamePrompt).hint("Change your name at no charge.");
+			addButton(14, "Time Travel", timeTravelPrompt).hint("Time Travel and start an entirely new adventure.");
 		}
 		private function genMemPatch():void{	//Cause for some fuckall rason the status gets wiped on ascending.
 			if (player.hasStatusEffect(StatusEffects.TranscendentalGeneticMemory))
@@ -2211,6 +2273,46 @@ import classes.Scenes.Combat.CombatAbility;
 			if (player.hasPerk(perk)) player.addPerkValue(perk, 1, 1);
 			else player.createPerk(perk, 1, 0, 0, 0);
 			ascensionPerkSelection2(perk, maxRank);
+		}
+		private function darkAscensionPerkSelection(perk:* = null, maxRank:int = 10):void {
+			clearOutput();
+			maxRank = Math.min( maxRankValue(), maxRank );
+			outputText("Perk Effect: " + perk.longDesc);
+			outputText("\nCurrent level: " + player.perkv1(perk) + " / " + maxRank + "");
+			if (player.perkv1(perk) >= maxRank) outputText(" <b>(Maximum)</b>");
+			var cost:int = player.perkv1(perk) + 1;
+			if (cost > 5) {
+				if (cost > 15) {
+					if (cost > 30) cost = 15;
+					else cost = Math.round((cost + 15) / 3);
+				}
+				else {
+					cost = Math.round((cost + 5) / 2);
+				}
+			}
+			if (player.perkv1(perk) < maxRank) outputText("\nCost for next level: " + cost);
+			else outputText("\nCost for next level: <b>N/A</b>");
+			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
+			menu();
+			if (player.ascensionPerkPoints >= cost && player.perkv1(perk) < maxRank) addButton(0, "Add 1 level", addDarkAscensionPerk, perk, maxRank);
+			if (player.ascensionPerkPoints >= cost && player.perkv1(perk) == maxRank) addButtonDisabled(0, "Add 1 level", "You've reached max rank for this perk at current tier of ascension. To unlock higher ranks you need to Ascend again.");
+			addButton(4, "Back", ascensionPerkMenu2);
+		}
+		private function addDarkAscensionPerk(perk:* = null, maxRank:int = 10):void {
+			var cost:int = player.perkv1(perk) + 1;
+			if (cost > 5) {
+				if (cost > 15) {
+					if (cost > 30) cost = 15;
+					else cost = Math.round((cost + 15) / 3);
+				}
+				else {
+					cost = Math.round((cost + 5) / 2);
+				}
+			}
+			player.ascensionPerkPoints -= cost;
+			if (player.hasPerk(perk)) player.addPerkValue(perk, 1, 1);
+			else player.createPerk(perk, 1, 0, 0, 0);
+			darkAscensionPerkSelection(perk, maxRank);
 		}
 
 		private function rarePerks1():void {
@@ -3371,6 +3473,14 @@ import classes.Scenes.Combat.CombatAbility;
 			else addButton(1, "Yes", reincarnate001).hint("Reincarnate");
 			addButton(3, "No", ascensionMenu).hint("Go Back");
 		}
+		private function timeTravelPrompt():void {
+			clearOutput();
+			outputText("Would you like to time travel and start again?");
+			menu();
+			if (player.hasPerk(PerkLib.AscensionMenuChoiceMaybe)) addButton(1, "Yes", reincarnate002).hint("Reincarnate");
+			else addButton(1, "Yes", reincarnate001).hint("Reincarnate");
+			addButton(3, "No", ascensionMenu).hint("Go Back");
+		}
 		private function reincarnate001():void {
 			flags[kFLAGS.NEW_GAME_PLUS_LEVEL]++;
 			reincarnate();
@@ -3425,10 +3535,12 @@ import classes.Scenes.Combat.CombatAbility;
 			clearOutput();
 			mainView.nameBox.visible = false;
 			mainView.hideComboBox();
-			outputText("Everything fades to white and finally... black. You can feel yourself being whisked back to reality as you slowly awaken in your room. You survey your surroundings and recognize almost immediately; you are in your room inside the inn in Ingnam! You get up and look around. ");
-			if (player.hasKeyItem("Sky Poison Pearl") >= 0) {
-				outputText("\n\nYou soon notice a circular green imprint at the palm of your left hand. When you try to figure out its meaning something clicks in your mind. It's a strange artifact that fused with your body that allows the storing of a multitude of objects. ...An artifact that fused with your body? You are unable to recall when th... Wait a second there are a few almost fully faded memory fragments of you being somewhere underwater, ");
-				outputText("fearlessly facing some huge monster with tentacles for legs... Doing your uttermost effort to survive and win.. no other memories.. not even the slightest of fragments appear in your mind. Resigned, you try to concentrate on remembering how to use this thing, but those memories are still too blurred out to make sense of. Maybe with time you'll remember all about this... 'thing'.")
+			if (!player.hasPerk(PerkLib.Soulless)) {
+				outputText("Everything fades to white and finally... black. You can feel yourself being whisked back to reality as you slowly awaken in your room. You survey your surroundings and recognize almost immediately; you are in your room inside the inn in Ingnam! You get up and look around. ");
+				if (player.hasKeyItem("Sky Poison Pearl") >= 0) {
+					outputText("\n\nYou soon notice a circular green imprint at the palm of your left hand. When you try to figure out its meaning something clicks in your mind. It's a strange artifact that fused with your body that allows the storing of a multitude of objects. ...An artifact that fused with your body? You are unable to recall when th... Wait a second there are a few almost fully faded memory fragments of you being somewhere underwater, ");
+					outputText("fearlessly facing some huge monster with tentacles for legs... Doing your uttermost effort to survive and win.. no other memories.. not even the slightest of fragments appear in your mind. Resigned, you try to concentrate on remembering how to use this thing, but those memories are still too blurred out to make sense of. Maybe with time you'll remember all about this... 'thing'.")
+				}
 			}
 			player.breastRows = [];
 			player.cocks = [];
