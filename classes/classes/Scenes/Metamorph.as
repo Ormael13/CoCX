@@ -1096,12 +1096,12 @@ package classes.Scenes {
 				const unlocked: Boolean = GeneticMemoryStorage[genMem.id] && (genMem.taurVariant ? GeneticMemoryStorage["Taur Lower Body"] : true);
 				const partsInUse: Boolean = (index==-1? genMem.transformation().isPresent() : genMem.transformation(index).isPresent());
 				const cost:Number=(genMem.cost is Function? genMem.cost() : genMem.cost);
-				const enoughSF: Boolean = player.soulforce >= cost;
-				const enoughMana: Boolean = Math.round(player.maxMana() / 10) >= player.mana;
+				var enoughSF: Boolean = player.soulforce >= cost;
+				var enoughMana: Boolean = player.mana / player.maxMana() >= 0.1;
 
 				if (unlocked && !partsInUse && (enoughSF || enoughMana)) addButton(currentButton++, buttonStr, doMetamorph, title, genMem, index).hint("Cost: " + cost + " SF" + (genMem.info ? "\n\n" + genMem.info : "") + " OR " + (player.maxMana()/10) + " mana");
 				else if (unlocked && partsInUse) addButtonDisabled(currentButton++, buttonStr, (!genMem.hint? "You already have this, the metamorphosis would have no effect!":genMem.hint));
-				else if (unlocked && !partsInUse && (!enoughSF || !enoughMana)) addButtonDisabled(currentButton++, buttonStr, "Cost: " + cost + " SF (You don't have enough Soulforce for this metamorphosis!)"+ " OR " + (player.maxMana()/10) + " mana");
+				else if (unlocked && !partsInUse && !enoughSF && !enoughMana) addButtonDisabled(currentButton++, buttonStr, "Cost: " + cost + " SF (You don't have enough Soulforce for this metamorphosis!)"+ " OR " + (player.maxMana()/10) + " mana");
 				else if (!unlocked)	addButtonDisabled(currentButton++, buttonStr, "You haven't unlocked this metamorphosis yet!" + (genMem.lockedInfo ? "\n\n" + genMem.lockedInfo : ""));
 			}
 
@@ -1137,7 +1137,7 @@ package classes.Scenes {
 				addButton(3,"Mana", mmPayment, 2, genManaCost);
 			}
 			else{
-				addButtonDisabled(3,"Mana", "You don't have enough Mana for this! You need " + genManaCost + "Mana! OR you aren't a True Demon!")
+				addButtonDisabled(3,"Mana", "You don't have enough Mana for this! You need " + genManaCost + " Mana, OR you aren't a True Demon!")
 			}
 			addButton(14,"Back", accessMetamorphMenu);
 			function mmPayment(costType: int, costVal: int):void{
