@@ -2081,6 +2081,8 @@ import classes.Scenes.Combat.CombatAbility;
                     .disableIf(player.perkv1(PerkLib.DarkAscensionBottomlessHunger) >= MAX_BOTTOMLESS_HUNGER_LEVEL, limitReached);
 			addButton(3, "Eff.SoulCons", darkAscensionPerkSelection, PerkLib.DarkAscensionEfficientSoulConsumption, MAX_EFFICIENT_SOUL_CONSUMPTION_LEVEL, null, PerkLib.DarkAscensionEfficientSoulConsumption.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.DarkAscensionEfficientSoulConsumption) + " / " + MAX_EFFICIENT_SOUL_CONSUMPTION_LEVEL)
                     .disableIf(player.perkv1(PerkLib.DarkAscensionEfficientSoulConsumption) >= MAX_EFFICIENT_SOUL_CONSUMPTION_LEVEL, limitReached);
+			addButton(4, "Perm Spells", acensionPermSpellMenu).hint("Spend Ascension Perk Points to make certain spells permanent (10 points)", "Spell Selection");
+			addButton(5, "Perm Perks", ascensionPermeryMenu).hint("Spend Ascension Perk Points to make certain perks permanent (5/10 points).", "Perk Selection");
 			genMemPatch();
 			if (player.hasStatusEffect(StatusEffects.TranscendentalGeneticMemory)) {
 				var permMemtext:String = "You have permed <b>"+player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory)+"/"+player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)+"</b> from TranscendentalGeneticMemory tier "+player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX);
@@ -2938,12 +2940,12 @@ import classes.Scenes.Combat.CombatAbility;
 				if (player.hasStatusEffect(StatusEffects.KnowsPolarMidnight) && player.statusEffectv4(StatusEffects.KnowsPolarMidnight) != 9000) addButton(0, "Polar Midnight", permanentizeSpell, StatusEffects.KnowsPolarMidnight, 1);
 				else if (player.hasStatusEffect(StatusEffects.KnowsPolarMidnight) && player.statusEffectv4(StatusEffects.KnowsPolarMidnight) == 9000) addButtonDisabled(0, "Polar Midnight", "Polar Midnight spell is already permanent.");
 				else addButtonDisabled(0, "???", "You haven't learnt this spell yet!");
-
 				if (player.hasStatusEffect(StatusEffects.KnowsMeteorShower) && player.statusEffectv4(StatusEffects.KnowsMeteorShower) != 9000) addButton(1, "Meteor Shower", permanentizeSpell, StatusEffects.KnowsMeteorShower, 1);
 				else if (player.hasStatusEffect(StatusEffects.KnowsMeteorShower) && player.statusEffectv4(StatusEffects.KnowsMeteorShower) == 9000) addButtonDisabled(1, "Meteor Shower", "Meteor Shower spell is already permanent.");
 				else addButtonDisabled(1, "???", "You haven't learnt this spell yet!");
 			}
-			addButton(14, "Back", ascensionMenu);
+			if (player.hasPerk(PerkLib.Soulless)) addButton(14, "Back", darkAscensionMenu);
+			else addButton(14, "Back", ascensionMenu);
 		}
 
 		private function ascensionPermeryMenu(page:int = 1):void {
@@ -3070,7 +3072,8 @@ import classes.Scenes.Combat.CombatAbility;
 				else if (player.hasPerk(PerkLib.SensualLover) && player.perkv4(PerkLib.SensualLover) > 0) addButtonDisabled(12, "SensualLover", "Sensual Lover perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(12, "SensualLover", "Sensual Lover");
 			}
-			addButton(14, "Back", ascensionMenu);
+			if (player.hasPerk(PerkLib.Soulless)) addButton(14, "Back", darkAscensionMenu);
+			else addButton(14, "Back", ascensionMenu);
 		}
 
 		private function permanentizeSpell(statusEffect:StatusEffectType, returnPage:int = 1):void {
