@@ -14,7 +14,7 @@ package classes.Perks
 		override public function desc(params:PerkClass = null):String
 		{
 			if (!player || !params) return _desc;
-			return "(Rank: " + params.value1 + "/" + CoC.instance.charCreation.MAX_INNERPOWER_LEVEL + ") Decrease the cost of upgrading yourself through demonic energy by " + params.value1 * 5 + "%.";
+			return "(Rank: " + params.value1 + "/" + CoC.instance.charCreation.MAX_BOTTOMLESS_HUNGER_LEVEL + ") Decrease the cost of upgrading yourself through demonic energy by " + params.value1 * 5 + "%.";
 		}
 		
 		public function DarkAscensionBottomlessHungerPerk() 

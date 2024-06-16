@@ -14,7 +14,7 @@ package classes.Perks
 		override public function desc(params:PerkClass = null):String
 		{
 			if (!player || !params) return _desc;
-			return "(Rank: " + params.value1 + "/" + CoC.instance.charCreation.MAX_INNERPOWER_LEVEL + ") Raise max demonic energy capacity by " + params.value1 * 5 + "%.";
+			return "(Rank: " + params.value1 + "/" + CoC.instance.charCreation.MAX_EFFICIENT_SOUL_CONSUMPTION_LEVEL + ") Raise max demonic energy capacity by " + params.value1 * 5 + "%.";
 		}
 		
 		public function DarkAscensionEfficientSoulConsumptionPerk() 

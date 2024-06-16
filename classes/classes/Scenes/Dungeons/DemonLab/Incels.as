@@ -45,7 +45,7 @@ public class Incels extends Monster {
         this.lustVuln = 1;
         this.level = 52;
         this.gems = rand(50) + 75;
-        this.drop = new WeightedDrop().add(useables.D_SCALE, 5).add(consumables.LETHITE, 3).add(consumables.LETH1TE, 2).add(jewelries.POWRRNG, 1);
+        this.drop = new WeightedDrop().add(useables.D_SCALE, 5).add(consumables.LETH1TE, 3).add(consumables.LETH2TE, 2).add(jewelries.POWRRNG, 1);
         this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
         this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
         this.createPerk(PerkLib.ToughHide, 0, 0, 0, 0);

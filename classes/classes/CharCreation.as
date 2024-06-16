@@ -64,6 +64,7 @@ import classes.Scenes.Combat.CombatAbility;
 		public const MAX_CUM_HOSE_LEVEL:int = 25;
 		public const MAX_BOTTOMLESS_HUNGER_LEVEL:int = 20;
 		public const MAX_EFFICIENT_SOUL_CONSUMPTION_LEVEL:int = 19;
+		public const MAX_THE_DARK_SOUL:int = 10;
 
 		private var specialCharacters:CharSpecial = new CharSpecial();
 		private var customPlayerProfile:Function;
@@ -2077,6 +2078,8 @@ import classes.Scenes.Combat.CombatAbility;
 			outputText("\n\n(When you're done, select " + (migration ? "Return" : "Reincarnate") + ".)");
 			menu();
 			var limitReached:String = "Limit Reached";
+			addButton(1, "The Dark Soul", darkAscensionPerkSelection2, PerkLib.DarkAscensionTheDarkSoul, MAX_THE_DARK_SOUL, null, PerkLib.DarkAscensionTheDarkSoul.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.DarkAscensionTheDarkSoul) + " / " + MAX_THE_DARK_SOUL)
+                    .disableIf(player.perkv1(PerkLib.DarkAscensionTheDarkSoul) >= MAX_THE_DARK_SOUL, limitReached);
 			addButton(2, "BottomlessHunger", darkAscensionPerkSelection, PerkLib.DarkAscensionBottomlessHunger, MAX_BOTTOMLESS_HUNGER_LEVEL, null, PerkLib.DarkAscensionBottomlessHunger.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.DarkAscensionBottomlessHunger) + " / " + MAX_BOTTOMLESS_HUNGER_LEVEL)
                     .disableIf(player.perkv1(PerkLib.DarkAscensionBottomlessHunger) >= MAX_BOTTOMLESS_HUNGER_LEVEL, limitReached);
 			addButton(3, "Eff.SoulCons", darkAscensionPerkSelection, PerkLib.DarkAscensionEfficientSoulConsumption, MAX_EFFICIENT_SOUL_CONSUMPTION_LEVEL, null, PerkLib.DarkAscensionEfficientSoulConsumption.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.DarkAscensionEfficientSoulConsumption) + " / " + MAX_EFFICIENT_SOUL_CONSUMPTION_LEVEL)
@@ -2195,6 +2198,15 @@ import classes.Scenes.Combat.CombatAbility;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 9) maxV += 5;
 			return maxV;
 		}
+		private function maxRankValue1():Number {
+			var maxV:Number = 0;
+			if (!player.hasPerk(PerkLib.AscensionMenuChoiceMaybe)) maxV += 2;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) maxV += 2;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) maxV += 2;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) maxV += 2;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4) maxV += 2;
+			return maxV;
+		}
 
 		private function ascensionPerkSelection(perk:* = null, maxRank:int = 10):void {
 			clearOutput();
@@ -2297,7 +2309,7 @@ import classes.Scenes.Combat.CombatAbility;
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
 			menu();
 			if (player.ascensionPerkPoints >= cost && player.perkv1(perk) < maxRank) addButton(0, "Add 1 level", addDarkAscensionPerk, perk, maxRank);
-			if (player.ascensionPerkPoints >= cost && player.perkv1(perk) == maxRank) addButtonDisabled(0, "Add 1 level", "You've reached max rank for this perk at current tier of ascension. To unlock higher ranks you need to Ascend again.");
+			if (player.ascensionPerkPoints >= cost && player.perkv1(perk) == maxRank) addButtonDisabled(0, "Add 1 level", "You've reached max rank for this perk at current tier of dark ascension. To unlock higher ranks you need to Ascend again.");
 			addButton(4, "Back", ascensionPerkMenu2);
 		}
 		private function addDarkAscensionPerk(perk:* = null, maxRank:int = 10):void {
@@ -2315,6 +2327,46 @@ import classes.Scenes.Combat.CombatAbility;
 			if (player.hasPerk(perk)) player.addPerkValue(perk, 1, 1);
 			else player.createPerk(perk, 1, 0, 0, 0);
 			darkAscensionPerkSelection(perk, maxRank);
+		}
+		private function darkAscensionPerkSelection2(perk:* = null, maxRank:int = 10):void {
+			clearOutput();
+			maxRank = Math.min( maxRankValue1(), maxRank );
+			outputText("Perk Effect: " + perk.longDesc);
+			outputText("\nCurrent level: " + player.perkv1(perk) + " / " + maxRank + "");
+			if (player.perkv1(perk) >= maxRank) outputText(" <b>(Maximum)</b>");
+			var cost:int = player.perkv1(perk) + 1;
+			if (cost > 5) {
+				if (cost > 15) {
+					if (cost > 30) cost = 15;
+					else cost = Math.round((cost + 15) / 3);
+				}
+				else {
+					cost = Math.round((cost + 5) / 2);
+				}
+			}
+			if (player.perkv1(perk) < maxRank) outputText("\nCost for next level: " + cost);
+			else outputText("\nCost for next level: <b>N/A</b>");
+			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
+			menu();
+			if (player.ascensionPerkPoints >= cost && player.perkv1(perk) < maxRank) addButton(0, "Add 1 level", addDarkAscensionPerk2, perk, maxRank);
+			if (player.ascensionPerkPoints >= cost && player.perkv1(perk) == maxRank) addButtonDisabled(0, "Add 1 level", "You've reached max rank for this perk at current tier of dark ascension. To unlock higher ranks you need to Ascend again.");
+			addButton(4, "Back", ascensionPerkMenu2);
+		}
+		private function addDarkAscensionPerk2(perk:* = null, maxRank:int = 10):void {
+			var cost:int = player.perkv1(perk) + 1;
+			if (cost > 5) {
+				if (cost > 15) {
+					if (cost > 30) cost = 15;
+					else cost = Math.round((cost + 15) / 3);
+				}
+				else {
+					cost = Math.round((cost + 5) / 2);
+				}
+			}
+			player.ascensionPerkPoints -= cost;
+			if (player.hasPerk(perk)) player.addPerkValue(perk, 1, 1);
+			else player.createPerk(perk, 1, 0, 0, 0);
+			darkAscensionPerkSelection2(perk, maxRank);
 		}
 
 		private function rarePerks1():void {

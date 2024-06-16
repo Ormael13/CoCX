@@ -178,6 +178,7 @@ public class PerkLib
 		// Dark Ascension perks
 		public static const DarkAscensionBottomlessHunger:DarkAscensionBottomlessHungerPerk = new DarkAscensionBottomlessHungerPerk();
 		public static const DarkAscensionEfficientSoulConsumption:DarkAscensionEfficientSoulConsumptionPerk = new DarkAscensionEfficientSoulConsumptionPerk();
+		public static const DarkAscensionTheDarkSoul:DarkAscensionTheDarkSoulPerk = new DarkAscensionTheDarkSoulPerk();
 		
 		// Bloodline perks
 		public static const DragonsDescendant:PerkType = mk("Dragon's descendant", "Dragon's descendant",

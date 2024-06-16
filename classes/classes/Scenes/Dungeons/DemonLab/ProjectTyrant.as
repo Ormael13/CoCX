@@ -36,7 +36,7 @@ public class ProjectTyrant extends Monster {
         this.lust = 50;
         this.level = 60;
         this.gems = rand(550) + 175;
-        this.drop = new WeightedDrop().add(useables.T_SSILK, 5).add(consumables.LETHITE, 3).add(consumables.LETH1TE, 2).add(jewelries.POWRRNG, 1);
+        this.drop = new WeightedDrop().add(useables.T_SSILK, 5).add(consumables.LETH1TE, 3).add(consumables.LETH2TE, 2).add(jewelries.POWRRNG, 1);
         this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
         this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
         this.createPerk(PerkLib.ToughHide, 0, 0, 0, 0);

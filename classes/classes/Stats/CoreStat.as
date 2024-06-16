@@ -16,6 +16,7 @@ public class CoreStat extends RawStat{
 		var base:Number = 100;
 		base += 2 * host.perkv1(PerkLib.AscensionTranshumanism);
 		if (host.hasPerk(PerkLib.MunchkinAtBioLab)) base += 10;
+		if (host.hasPerk(PerkLib.DarkAscensionTheDarkSoul)) base += 10 * host.perkv1(PerkLib.DarkAscensionTheDarkSoul);
 		switch (statName) {
 			case 'str.core':
 				base += 16 * host.perkv1(PerkLib.AscensionTranshumanismStr);

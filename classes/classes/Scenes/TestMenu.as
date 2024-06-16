@@ -1790,6 +1790,7 @@ public class TestMenu extends BaseContent
 		menu();
 		addButton(0, "Lethicite1", AddLethicite1).hint("Add 1 (light coooked) Lethicite.");
 		addButton(1, "Lethicite2", AddLethicite2).hint("Add 1 (medium coooked) Lethicite.");
+		addButton(2, "Lethicite3", AddLethicite3).hint("Add 1 (heavy coooked) Lethicite.");
 		addButton(14, "Back", NonEquipmentMenu);
 	}
 
@@ -2219,6 +2220,10 @@ public class TestMenu extends BaseContent
 	public function AddLethicite2():void {
 		outputText("\n\n<b>(Gained 1 (medium coooked) Lethicite!)</b>\n\n");
 		inventory.takeItem(consumables.LETH1TE, AddLethicite);
+	}
+	public function AddLethicite3():void {
+		outputText("\n\n<b>(Gained 1 (heavy coooked) Lethicite!)</b>\n\n");
+		inventory.takeItem(consumables.LETH2TE, AddLethicite);
 	}
 	public function AddDisplacerFruit():void {
 		outputText("\n\n<b>(Gained 1 Displacer Fruit!)</b>\n\n");
