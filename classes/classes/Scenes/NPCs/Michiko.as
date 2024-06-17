@@ -145,7 +145,7 @@ public function campMichikoTalkMM():void {
 }
 public function campMichikoTalkRegion():void {
 	menu();
-	outputText("You would like to know more about the various area of mareth.\n\n");
+	outputText("You would like to know more about the various area of Mareth.\n\n");
 	outputText("\"<i>Sure [name], which one you want to know about?</i>\"\n\n");
 	addButton(0, "Wasteland", campMichikoTalkRegionWasteland);
 	addButton(1, "Forest", campMichikoTalkRegionForest);

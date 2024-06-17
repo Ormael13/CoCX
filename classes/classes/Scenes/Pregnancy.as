@@ -3055,7 +3055,7 @@ public class Pregnancy extends NPCAwareContent {
                     SophieFollowerScene.HarpyKids += 1;
                     player.knockUpForce(0, 0, 1); //Clear Pregnancy
                 }
-                outputText("\nAs the dawn rises over mareth your egg begins shaking of its own volition. What you have been waiting for so long is finally happening. As your child kicks the egg cover open revealing her bird leg." +
+                outputText("\nAs the dawn rises over Mareth your egg begins shaking of its own volition. What you have been waiting for so long is finally happening. As your child kicks the egg cover open revealing her bird leg." +
                         "\n\nWith tender care you help remove the egg shards so that she can move out without hurting herself." +
                         " Harpies are no regular birds, it's the mother's duty to help her child leave the egg harmlessly seeing as the border could leave harmful cuts on the chick." +
                         " Satisfied that your daughter successfully got out of the egg you cradle her in your wings and keep her warm while her duvet dries up." +

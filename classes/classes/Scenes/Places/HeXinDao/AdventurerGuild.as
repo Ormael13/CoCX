@@ -775,7 +775,7 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 		public function BoardkeeperYangTalkRequests():void {
 			clearOutput();
 			outputText("Ok, you are a member now, how do you take on a job?\n\n");
-			outputText("\"<i>First and foremost you come to me or any other board on mareth if you can find one. Then you choose a difficulty and I set you on a corresponding request.</i>\"\n\n");
+			outputText("\"<i>First and foremost you come to me or any other board on Mareth if you can find one. Then you choose a difficulty and I set you on a corresponding request.</i>\"\n\n");
 			outputText("Difficulty? You thought you could pick on the highest request right away.\n\n");
 			outputText("\"<i>No such thing " + player.mf("Mr.", "Mrs.") + " Hero. The guild has strict ruling to prevent people throwing their lives away on job they can’t handle. We have a difficulty system based on skill and rank. You cannot take on a request way above your ranking until you have qualified for it. The rank are determined by copper, bronze, silver, gold and platinum plates.</i>\"\n\n");
 			doNext(BoardkeeperYangTalk);

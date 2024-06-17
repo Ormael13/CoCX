@@ -1128,7 +1128,7 @@ public function mishapsLunaChiChi():void {
 		doNext(playerMenu);
 	}
 	public function amilyInteraction():void {
-		outputText("You spot both Amily and Chi Chi chatting to the side of the camp. They seem to be exchanging information about the various hostile denizens of mareth as well as survival tricks.");
+		outputText("You spot both Amily and Chi Chi chatting to the side of the camp. They seem to be exchanging information about the various hostile denizens of Mareth as well as survival tricks.");
 		amilyInteractionHappened = true;
 		doNext(playerMenu);
 	}

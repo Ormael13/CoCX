@@ -2452,7 +2452,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\n\n<b>You laugh heartily at your unblemish pure form as you realise you are an ");
 				if (player.wings.type == Wings.FEATHERED_ALICORN) outputText("alicorn");
 				else outputText("unicorn");
-				outputText(" now. Mighty magical power start to swell in the horn on your forehead, cleansing whats left of any corruption you may have, and you will gladly use them to fight off the corruption that plagues mareth.</b>\n");
+				outputText(" now. Mighty magical power start to swell in the horn on your forehead, cleansing whats left of any corruption you may have, and you will gladly use them to fight off the corruption that plagues Mareth.</b>\n");
 				if (player.hasPerk(PerkLib.AvatorOfCorruption)) player.removePerk(PerkLib.AvatorOfCorruption);
 				player.createPerk(PerkLib.AvatorOfPurity, 0, 0, 0, 0);
 				player.createPerk(PerkLib.AuraOfPurity, 0, 0, 0, 0);

@@ -54,7 +54,7 @@ public class Mountain extends BaseContent
 		public function discoverHills():void {
 			SceneLib.exploration.counters.hills = 1;
 			clearOutput();
-			outputText("As you walk the large open wasteland of mareth you begin to notice an elevation in the ground. Far in the distance you can see a mountain chain but from where you stand is a hillside. Well you got tired of the monotony of the flat land anyway maybe going up will yield new interesting discoveries.\n\n<b>You found the Hills!</b>");
+			outputText("As you walk the large open wasteland of Mareth you begin to notice an elevation in the ground. Far in the distance you can see a mountain chain but from where you stand is a hillside. Well you got tired of the monotony of the flat land anyway maybe going up will yield new interesting discoveries.\n\n<b>You found the Hills!</b>");
 			endEncounter();
 		}
 		

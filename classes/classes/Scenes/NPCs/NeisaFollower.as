@@ -137,7 +137,7 @@ public function neisaAppearance():void {
 	clearOutput();
 	outputText("Neisa is a seven feet tall human or at least outwardly looks like one. Her black hair is short and straight and her green eyes always watchful. She could pass for a beautiful woman back home although in Mareth pretty faces are far from uncommon thanks to the whole demonic corruption problem turning every person into sexy temptresses or manly perfection.\n\n");
 	outputText("Neisa’s arms are well muscled despite their womanly shape to use a shield and any melee weapon, you suspect she does a rigorous training between jobs. Her legs are those of an adventurer who is used to walking for a long periods of time. She got a well shaped waistline with a girly ass that fits just fine in her armor.\n\n");
-	outputText("Similar to most of the impressive gravity defying sizes visible on most women on mareth she sports an I-cup set of breasts.\n\n");
+	outputText("Similar to most of the impressive gravity defying sizes visible on most women on Mareth she sports an I-cup set of breasts.\n\n");
 	outputText("You have yet to see what she hides under her semi skimpy armor but you suspect she got a pussy and no cock, making her a true female.");
 	menu();
 	addButton(14, "Back", neisaCampMenu);
