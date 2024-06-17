@@ -231,7 +231,7 @@ public class Changelog extends BaseContent
 			outputText("-PC with Soulless perk no longer can use normal ascension instead using variant dark ascension. It have it own choice of perks to buy and some of the options that normal ascension have.\n");
 			outputText("-New consumable (by Liadri): Greater Lethicite. Drops from true demon enemies. Consuming it by PC with Soulless perk will give up to 250 demonic energy.\n");
 			outputText("-New Dark Ascension perk: The Dark Soul. You have acquired permanent power from the many souls you consumed in your previous timelines. Raise core stats cap by 10 per rank. Max Rank: 10.\n");
-			outputText("-\n");
+			outputText("-Fix some item effects not working. (aimozg)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -247,15 +247,15 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");//New mutation perk: Human Parathyroid Glands (Final Form). Req. Human Parathyroid Glands (Evolved) and lvl 90+. Effects: Increases self healing by 40 * level HP in combat and twice more out of combat. 8 * level HP Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

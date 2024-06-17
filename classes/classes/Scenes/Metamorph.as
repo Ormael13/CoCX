@@ -763,7 +763,7 @@ package classes.Scenes {
 				else addButtonDisabled (13, "Next Page");
 			}
 
-			if (player.hasPerk(PerkLib.JobSoulCultivator)) addButton(14, "Back", SceneLib.soulforce.accessSoulforceMenu);
+			if (player.hasPerk(PerkLib.JobSoulCultivator) && !player.hasPerk(PerkLib.Soulless)) addButton(14, "Back", SceneLib.soulforce.accessSoulforceMenu);
 			else if (player.hasPerk(PerkLib.Soulless)) addButton(14, "Back", SceneLib.soulforce.accessDemonicEnergyMenu);
 			else addButton(14, "Back", playerMenu);
 		}
