@@ -18,8 +18,10 @@ public class DescriptionFnItemEffect extends ItemEffectType {
 	 */
 	public function DescriptionFnItemEffect(name:String, descFn:Function, priority:int, onEquipFn:Function, onUnequipFn:Function) {
 		super(name);
-		this.priority = priority
-		this.descFn = descFn
+		this.priority = priority;
+		this.descFn = descFn;
+		this.onEquipFn = onEquipFn;
+		this.onUnequipFn = onUnequipFn;
 	}
 	
 	override public function description(prop:ItemEffect, item:ItemType):String {

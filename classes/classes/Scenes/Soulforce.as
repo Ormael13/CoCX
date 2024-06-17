@@ -919,8 +919,8 @@ public class Soulforce extends BaseContent
 		clearOutput();
 		outputText("<b>Demonic Energy:</b> "+player.demonicenergy+" / "+player.maxDemonicEnergy()+"\n");
 		menu();
-		addButtonIfTrue(0, "StrengthenBody", demonicEnergyStrengthenBody, "You don’t have enough demonic energy to improve this ability.", player.demonicenergy >= deCost((25 + (player.perkv1(PerkLib.StrengthenBody) * 5))), "Consume the stored energy of souls to raise your strength, toughness and speed by 5% permanently. This change persists through time.");
-		addButtonIfTrue(1, "StrengthenMagic", demonicEnergyStrengthenMagic, "You don’t have enough demonic energy to improve this ability.", player.demonicenergy >= deCost((25 + (player.perkv1(PerkLib.StrengthenMagic) * 5))), "Consume the stored energy of souls to raise your intelligence, wisdom and libido by 5% permanently. This change persists through time.");
+		addButtonIfTrue(0, "StrengthenBody", demonicEnergyStrengthenBody, "You don’t have enough demonic energy to improve this ability. (Req. "+deCost((25 + (player.perkv1(PerkLib.StrengthenBody) * 5)))+")", player.demonicenergy >= deCost((25 + (player.perkv1(PerkLib.StrengthenBody) * 5))), "Consume the stored energy of souls to raise your strength, toughness and speed by 5% permanently. This change persists through time. Cost: " + deCost((25 + (player.perkv1(PerkLib.StrengthenBody) * 5))));
+		addButtonIfTrue(1, "StrengthenMagic", demonicEnergyStrengthenMagic, "You don’t have enough demonic energy to improve this ability. (Req. "+deCost((25 + (player.perkv1(PerkLib.StrengthenMagic) * 5)))+")", player.demonicenergy >= deCost((25 + (player.perkv1(PerkLib.StrengthenMagic) * 5))), "Consume the stored energy of souls to raise your intelligence, wisdom and libido by 5% permanently. This change persists through time. Cost: " + deCost((25 + (player.perkv1(PerkLib.StrengthenMagic) * 5))));
 		addButton(2, "Corrupt Element", demonicEnergyCorruptElement).hint("Reinforce your attunement over an element of an element by consuming demonic energy.");
 		if (player.hasPerk(PerkLib.Metamorph)) {
 			if (player.blockingBodyTransformations()) addButtonDisabled(10, "Metamorph", "Your current body state prevents you from using Metamorph. (Either cure it or ascend to gain access to metamorph menu again)");
@@ -934,16 +934,16 @@ public class Soulforce extends BaseContent
 		outputText("You may consume the stored energy of souls to empower your mastery over an element. Which element would you like to improve?\n");
 		menu();
 		if (player.demonicenergy < deCost(200)) {
-			addButtonDisabled(0, "Fire", "You don’t have enough demonic energy to improve this ability.");
-			addButtonDisabled(1, "Ice", "You don’t have enough demonic energy to improve this ability.");
-			addButtonDisabled(2, "Lightning", "You don’t have enough demonic energy to improve this ability.");
-			addButtonDisabled(3, "Darkness", "You don’t have enough demonic energy to improve this ability.");
-			addButtonDisabled(4, "Poison", "You don’t have enough demonic energy to improve this ability.");
-			addButtonDisabled(5, "Wind", "You don’t have enough demonic energy to improve this ability.");
-			addButtonDisabled(6, "Blood", "You don’t have enough demonic energy to improve this ability.");
-			addButtonDisabled(7, "Water", "You don’t have enough demonic energy to improve this ability.");
-			addButtonDisabled(8, "Earth", "You don’t have enough demonic energy to improve this ability.");
-			addButtonDisabled(9, "Acid", "You don’t have enough demonic energy to improve this ability.");
+			addButtonDisabled(0, "Fire", "You don’t have enough demonic energy to improve this ability. (Req. "+deCost(200)+")");
+			addButtonDisabled(1, "Ice", "You don’t have enough demonic energy to improve this ability. (Req. "+deCost(200)+")");
+			addButtonDisabled(2, "Lightning", "You don’t have enough demonic energy to improve this ability. (Req. "+deCost(200)+")");
+			addButtonDisabled(3, "Darkness", "You don’t have enough demonic energy to improve this ability. (Req. "+deCost(200)+")");
+			addButtonDisabled(4, "Poison", "You don’t have enough demonic energy to improve this ability. (Req. "+deCost(200)+")");
+			addButtonDisabled(5, "Wind", "You don’t have enough demonic energy to improve this ability. (Req. "+deCost(200)+")");
+			addButtonDisabled(6, "Blood", "You don’t have enough demonic energy to improve this ability. (Req. "+deCost(200)+")");
+			addButtonDisabled(7, "Water", "You don’t have enough demonic energy to improve this ability. (Req. "+deCost(200)+")");
+			addButtonDisabled(8, "Earth", "You don’t have enough demonic energy to improve this ability. (Req. "+deCost(200)+")");
+			addButtonDisabled(9, "Acid", "You don’t have enough demonic energy to improve this ability. (Req. "+deCost(200)+")");
 		}
 		else {
 			addButtonIfTrue(0, "Fire", curry(demonicEnergyCorruptElementImprove, "Fire"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfFire) < 9);
@@ -965,7 +965,7 @@ public class Soulforce extends BaseContent
 		player.demonicenergy -= deCost((25 + (player.perkv1(PerkLib.StrengthenBody) * 5)));
 		if (player.hasPerk(PerkLib.StrengthenBody)) player.addPerkValue(PerkLib.StrengthenBody, 1, 1);
 		else player.createPerk(PerkLib.StrengthenBody, 1, 0, 0, 0);
-		doNext(demonicEnergyCorruptElement);
+		doNext(accessDemonicEnergyMenu);
 	}
 	public function demonicEnergyStrengthenMagic():void {
 		clearOutput();
@@ -973,7 +973,7 @@ public class Soulforce extends BaseContent
 		player.demonicenergy -= deCost((25 + (player.perkv1(PerkLib.StrengthenMagic) * 5)));
 		if (player.hasPerk(PerkLib.StrengthenMagic)) player.addPerkValue(PerkLib.StrengthenMagic, 1, 1);
 		else player.createPerk(PerkLib.StrengthenMagic, 1, 0, 0, 0);
-		doNext(demonicEnergyCorruptElement);
+		doNext(accessDemonicEnergyMenu);
 	}
 	public function demonicEnergyCorruptElementImprove(daoType:String = ""):void {
 		clearOutput();
