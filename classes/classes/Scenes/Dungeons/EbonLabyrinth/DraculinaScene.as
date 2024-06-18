@@ -184,6 +184,7 @@ public class DraculinaScene extends BaseContent {
         outputText("\n<b>Gained Perk: Soulless!</b> "+PerkLib.Soulless.desc());
         player.createPerk(PerkLib.Soulless, 0, 0, 0, 0);
 		player.createPerk(PerkLib.Undeath, 0, 0, 0, 0);
+		player.createPerk(PerkLib.SoulDrinker, 0, 0, 0, 0);
         player.createPerk(PerkLib.TransformationImmunity2,8,0,0,0);
 		outputText("\n<b>Gained Perk: Transformation Immunity</b>\n\n");
 		if (combat.inCombat) cleanupAfterCombatTFEvent();

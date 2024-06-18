@@ -14942,6 +14942,11 @@ public function VampiricBite():void {
         return;
     }
     outputText("\n\n");
+	if (player.hasPerk(PerkLib.SoulDrinker)) {
+		player.addPerkValue(PerkLib.SoulDrinker, 1, 1);
+		var sdp:Number = player.perkv1(PerkLib.SoulDrinker);
+		player.statStore.replaceBuffObject({'str.mult':(0.01 * sdp),'spe.mult':(0.01 * sdp),'tou.mult':(0.01 * sdp),'int.mult':(0.01 * sdp),'wis.mult':(0.01 * sdp),'lib.mult':(0.01 * sdp)}, 'Soul Drinker', { text: 'Soul Drinker' });
+	}
     if (monster.hasStatusEffect(StatusEffects.HypnosisNaga)) monster.removeStatusEffect(StatusEffects.HypnosisNaga);
     if (player.hasStatusEffect(StatusEffects.StraddleRoundLeft)) {
         player.addStatusValue(StatusEffects.StraddleRoundLeft, 1, -1);
