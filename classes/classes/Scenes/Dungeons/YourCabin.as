@@ -18,7 +18,6 @@ public class YourCabin extends DungeonAbstractContent
 			clearOutput();
 			outputText("<b><u>Your Cabin</u></b>\n");
 			outputText("You are in your cabin.  Behind you is a door leading back to your camp.  Next to the door is a window to let the sunlight in. \n\n");
-			
 			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0)
 			{
 				outputText("Your bed is located at one of the corners. It's constructed with wood frame and a mattress is laid on the frame. It's covered in sheet. A pillow leans against the headboard.  ");
@@ -77,7 +76,6 @@ public class YourCabin extends DungeonAbstractContent
 				outputText("\n\n");
 			}
 			outputText("What would you like to do?");
-
 			dungeons.setDungeonButtons(null, null, null, null);
 			//Build menu
 			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BOOKSHELF] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DESK] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DESKCHAIR] > 0) addButton(0, "Study", menuStudy);
@@ -122,67 +120,73 @@ public class YourCabin extends DungeonAbstractContent
 			clearOutput();
 			outputText("What would you like to study?");
 			menu();
-			if (player.hasKeyItem("Izma's Book - Combat Manual") >= 0) addButton(0, "C.Manual", studyCombatManual);
-			if (player.hasKeyItem("Izma's Book - Etiquette Guide") >= 0) addButton(1, "E.Guide", studyEtiquetteGuide);
-			if (player.hasKeyItem("Izma's Book - Porn") >= 0) addButton(2, "Porn", studyPorn);
+			if (player.hasKeyItem("Izma's Book - Porn") >= 0) addButton(1, "Porn", studyPorn).hint("Libido++");
+			if (player.hasKeyItem("Izma's Book - Etiquette Guide") >= 0) addButton(2, "E.Guide", studyEtiquetteGuide).hint("Libido--");
+			if (player.hasKeyItem("Izma's Book - Combat Manual") >= 0) {
+				addButton(3, "C.Manual(T)", studyCombatManualToughness).hint("Toughness++");
+				addButton(6, "C.Manual(I)", studyCombatManualIntelligence).hint("Intelligence++");
+				addButton(7, "C.Manual(Sp)", studyCombatManualSpeed).hint("Speed++");
+				addButton(8, "C.Manual(St)", studyCombatManualStrength).hint("Strength++");
+			}
 			addButton(14, "Back", enterCabin);
 		}
-		
-		private function studyCombatManual():void {
-			clearOutput();
-			outputText("You take the book titled 'Combat Manual' from the bookshelf and sit down on the chair while you lay the book on the desk.  You open the book and study its content.\n\n");
-			//(One of the following random effects happens)
-			var choice:Number = rand(4);
-			if(choice == 0) {
-				outputText("You learn a few new guarding stances that seem rather promising.");
-				//(+2 Toughness)
-				dynStats("tou", 2);
-				player.KnowledgeBonus("tou",2);
-			}
-			else if(choice == 1) {
-				outputText("After a quick skim you reach the end of the book. You don't learn any new fighting moves, but the refresher on the overall mechanics and flow of combat and strategy helped.");
-				//(+2 Intelligence)
-				dynStats("int", 2);
-				player.KnowledgeBonus("int",2);
-			}
-			else if(choice == 2) {
-				outputText("You learn a few new fast striking stances that seem decent.");
-				//(+2 Speed)
-				dynStats("spe", 2);
-				player.KnowledgeBonus("spe",2);
-			}
-			else if(choice == 3) {
-				outputText("Your read-through of the manual has given you insight into how to put more of your weight behind your strikes without leaving yourself open.  Very useful.");
-				//(+2 Strength)
-				dynStats("str", 2);
-				player.KnowledgeBonus("str",2);
-			}
-			outputText("\n\nFinished learning what you can from the old rag, you close the book and put it back on your bookshelf.");
-			doNext(camp.returnToCampUseOneHour);
-		}
-		
-		private function studyEtiquetteGuide():void {
-			clearOutput();
-			outputText("You take the book titled 'Etiquette Guide' from the bookshelf and sit down on the chair while you lay the book on the desk.  You open the book and study its content.\n\n");
-				
-			outputText("You peruse the strange book in an attempt to refine your manners, though you're almost offended by the stereotypes depicted within.  Still, the book has some good ideas on how to maintain chastity and decorum in the face of lewd advances.\n\n");
-			//(-2 Libido, -2 Corruption)
-			dynStats("lib", -2, "cor", -2);
-			
-			outputText("After reading through the frilly book, you carefully put the book back on your bookshelf.");
-			doNext(camp.returnToCampUseOneHour);
-		}
-		
 		private function studyPorn():void {
 			clearOutput();
 			outputText("You take the book that's clearly labelled as porn from your bookshelf.  You look around to make sure you have complete privacy.\n\n");
-	
 			outputText("You wet your lips as you flick through the pages of the book and admire the rather... detailed illustrations inside.  A bee-girl getting gangbanged by imps, a minotaur getting sucked off by a pair of goblins... the artist certainly has a dirty mind.  As you flip the pages you notice the air around you heating up a bit; you attribute this to weather until you finish and close the book.\n\n");
 			//(+2! Libido and lust gain)
 			dynStats("lib", 2, "lus", (20+player.lib/10));
 			player.KnowledgeBonus("lib",2);
 			outputText("Your mind is already filled with sexual desires.  You put the pornographic book back in your bookshelf.");
-			
+			doNext(camp.returnToCampUseOneHour);
+		}
+		private function studyEtiquetteGuide():void {
+			clearOutput();
+			outputText("You take the book titled 'Etiquette Guide' from the bookshelf and sit down on the chair while you lay the book on the desk.  You open the book and study its content.\n\n");
+			outputText("You peruse the strange book in an attempt to refine your manners, though you're almost offended by the stereotypes depicted within.  Still, the book has some good ideas on how to maintain chastity and decorum in the face of lewd advances.\n\n");
+			//(-2 Libido, -2 Corruption)
+			dynStats("lib", -2, "cor", -2);
+			outputText("After reading through the frilly book, you carefully put the book back on your bookshelf.");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		private function studyCombatManualToughness():void {
+			clearOutput();
+			outputText("You take the book titled 'Combat Manual' from the bookshelf and sit down on the chair while you lay the book on the desk.  You open the book and study its content.\n\n");
+			outputText("You learn a few new guarding stances that seem rather promising.");
+			//(+2 Toughness)
+			dynStats("tou", 2);
+			player.KnowledgeBonus("tou",2);
+			outputText("\n\nFinished learning what you can from the old rag, you close the book and put it back on your bookshelf.");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		private function studyCombatManualIntelligence():void {
+			clearOutput();
+			outputText("You take the book titled 'Combat Manual' from the bookshelf and sit down on the chair while you lay the book on the desk.  You open the book and study its content.\n\n");
+			outputText("After a quick skim you reach the end of the book. You don't learn any new fighting moves, but the refresher on the overall mechanics and flow of combat and strategy helped.");
+			//(+2 Intelligence)
+			dynStats("int", 2);
+			player.KnowledgeBonus("int",2);
+			outputText("\n\nFinished learning what you can from the old rag, you close the book and put it back on your bookshelf.");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		private function studyCombatManualSpeed():void {
+			clearOutput();
+			outputText("You take the book titled 'Combat Manual' from the bookshelf and sit down on the chair while you lay the book on the desk.  You open the book and study its content.\n\n");
+			outputText("You learn a few new fast striking stances that seem decent.");
+			//(+2 Speed)
+			dynStats("spe", 2);
+			player.KnowledgeBonus("spe",2);
+			outputText("\n\nFinished learning what you can from the old rag, you close the book and put it back on your bookshelf.");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		private function studyCombatManualStrength():void {
+			clearOutput();
+			outputText("You take the book titled 'Combat Manual' from the bookshelf and sit down on the chair while you lay the book on the desk.  You open the book and study its content.\n\n");
+			outputText("Your read-through of the manual has given you insight into how to put more of your weight behind your strikes without leaving yourself open.  Very useful.");
+			//(+2 Strength)
+			dynStats("str", 2);
+			player.KnowledgeBonus("str",2);
+			outputText("\n\nFinished learning what you can from the old rag, you close the book and put it back on your bookshelf.");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
