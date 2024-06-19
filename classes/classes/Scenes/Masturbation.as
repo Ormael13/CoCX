@@ -367,6 +367,7 @@ public class Masturbation extends BaseContent {
                 if (!player.isNaga()) sceneHunter.print("Check failed: Naga.");
 				if (player.isNaga() && rand(2) == 0) SceneLib.exgartuan.exgartuanNagaStoleMyMasturbation();
                 else SceneLib.exgartuan.exgartuanMasturbation_dick();
+				return;
             } else sceneHunter.print("Check failed: Exgartuan.");
 			if (SceneLib.exgartuan.boobsAwake()) {
 				flags[kFLAGS.TIMES_MASTURBATED]++;
