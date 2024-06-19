@@ -2629,6 +2629,10 @@ public class SaveUpdater extends NPCAwareContent {
 				outputText("\n\nPrincesses from the North been displeased with newest princess been too easily transformable and gave her First's blessing ;p");
 				if (player.tailType == Tail.ARIGEAN_PRINCESS && !player.hasPerk(PerkLib.TransformationImmunity2)) player.createPerk(PerkLib.TransformationImmunity2, 8, 0, 0, 0);
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.48;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.49) {
+				if (player.racialScore(Races.DRACULA) >= 22 && !player.hasPerk(PerkLib.SoulDrinker)) player.createPerk(PerkLib.SoulDrinker, 0, 0, 0, 0);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.49;
 			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.50) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.50;
