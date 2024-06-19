@@ -1099,7 +1099,7 @@ package classes.Scenes {
 				var enoughSF: Boolean = player.soulforce >= cost;
 				var enoughMana: Boolean = player.mana / player.maxMana() >= 0.1;
 
-				if (unlocked && !partsInUse && (enoughSF || enoughMana)) addButton(currentButton++, buttonStr, doMetamorph, title, genMem, index).hint("Cost: " + cost + " SF" + (genMem.info ? "\n\n" + genMem.info : "") + " OR " + (player.maxMana()/10) + " mana (for true True Demons)");
+				if (unlocked && !partsInUse && (enoughSF || enoughMana)) addButton(currentButton++, buttonStr, doMetamorph, title, genMem, index).hint("Cost: " + cost + " SF" + (genMem.info ? "\n\n" + genMem.info : "") + " OR " + (player.maxMana()/10) + " mana (for True Demons)");
 				else if (unlocked && partsInUse) addButtonDisabled(currentButton++, buttonStr, (!genMem.hint? "You already have this, the metamorphosis would have no effect!":genMem.hint));
 				else if (unlocked && !partsInUse && !enoughSF && !enoughMana) addButtonDisabled(currentButton++, buttonStr, "Cost: " + cost + " SF (You don't have enough Soulforce for this metamorphosis!)"+ " OR " + (player.maxMana()/10) + " mana");
 				else if (!unlocked)	addButtonDisabled(currentButton++, buttonStr, "You haven't unlocked this metamorphosis yet!" + (genMem.lockedInfo ? "\n\n" + genMem.lockedInfo : ""));
@@ -1131,7 +1131,7 @@ package classes.Scenes {
 				addButton(0,"SF", mmPayment, 1, genSFCost)
 						.disableIf(player.soulforce < genSFCost, "SF", "You don't have enough SF for this! You need " + genSFCost + " SF!");
 				addButton(1,"Mana", mmPayment, 2, genManaCost)
-						.disableIf(player.mana < genManaCost, "SF", "You don't have enough Mana for this! You need " + genManaCost + " Mana!");
+						.disableIf(player.mana < genManaCost, "Mana", "You don't have enough Mana for this! You need " + genManaCost + " Mana!");
 				addButton(14,"Back", accessMetamorphMenu);
 			} else mmPayment(1, genSFCost);
 
