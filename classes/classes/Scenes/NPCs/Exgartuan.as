@@ -48,6 +48,9 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
 --Random lust increases when time passes, combined with more growth.
 */
 
+		// All timeChange called first, then timeChangeLarge
+		var boredTalked_dick:Boolean = false, boredTalked_boobs:Boolean = false;
+
 		public function Exgartuan() {
 			EventParser.timeAwareClassAdd(this);
 		}
@@ -73,6 +76,7 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
                 player.addStatusValue(StatusEffects.Exgartuan, 2, -1);
                 if (player.statusEffectv2(StatusEffects.Exgartuan) == 0) {
                     exgartuanBored_dick();
+					boredTalked_dick = true;
                     needNext = true;
                 } else if (dickAwake()) {
                     period = 768 / player.statusEffectv2(StatusEffects.Exgartuan);
@@ -93,6 +97,7 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
                 player.addStatusValue(StatusEffects.Exgartuan, 3, -1);
                 if (player.statusEffectv3(StatusEffects.Exgartuan) == 0) {
                     exgartuanBored_boobs();
+					boredTalked_boobs = true;
                     needNext = true;
                 } else if (boobsAwake()) {
                     period = 384 / player.statusEffectv3(StatusEffects.Exgartuan);
@@ -116,8 +121,10 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
 			return needNext;
 		}
 
-        //Potential bug: before, there was checkedExgartuan variable, set to 1 in tcLarge and reset in tc. I removed it.
 		public function timeChangeLarge():Boolean {
+			boredTalked_dick = false;
+			boredTalked_boobs = false;
+
 			if (model.time.hours == 4 && rand(3) == 0) {
 				if (dickAwake() && player.hoursSinceCum >= 24 && rand(3) == 0) {
 					exgartuanSleepSurprise();
