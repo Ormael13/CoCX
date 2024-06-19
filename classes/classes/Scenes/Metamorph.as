@@ -1123,17 +1123,8 @@ package classes.Scenes {
 			var genSFCost:int = (genMem.cost is Function? genMem.cost() : genMem.cost);
 			var genManaCost:int = Math.round(player.maxMana() / 10);
 
-			if (player.hasPerk(PerkLib.Soulless)) {
-				clearOutput();
-				outputText(title);
-				menu();
-				outputText("How would you like to pay?");
-				addButton(0,"SF", mmPayment, 1, genSFCost)
-						.disableIf(player.soulforce < genSFCost, "SF", "You don't have enough SF for this! You need " + genSFCost + " SF!");
-				addButton(1,"Mana", mmPayment, 2, genManaCost)
-						.disableIf(player.mana < genManaCost, "Mana", "You don't have enough Mana for this! You need " + genManaCost + " Mana!");
-				addButton(14,"Back", accessMetamorphMenu);
-			} else mmPayment(1, genSFCost);
+			if (player.hasPerk(PerkLib.Soulless)) mmPayment(2, genManaCost);
+			else mmPayment(1, genSFCost);
 
 			function mmPayment(costType: int, costVal: int):void{
 				if (costType == 1){
