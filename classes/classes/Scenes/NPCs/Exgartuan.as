@@ -49,7 +49,7 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
 */
 
 		// All timeChange called first, then timeChangeLarge
-		var boredTalked_dick:Boolean = false, boredTalked_boobs:Boolean = false;
+		private var boredTalked_dick:Boolean = false, boredTalked_boobs:Boolean = false;
 
 		public function Exgartuan() {
 			EventParser.timeAwareClassAdd(this);
@@ -74,7 +74,7 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
             }
             if (dickPresent()) {
                 player.addStatusValue(StatusEffects.Exgartuan, 2, -1);
-                if (player.statusEffectv2(StatusEffects.Exgartuan) == 0) {
+                if (player.statusEffectv2(StatusEffects.Exgartuan) == 0 && !boredTalked_dick) {
                     exgartuanBored_dick();
 					boredTalked_dick = true;
                     needNext = true;
@@ -95,7 +95,7 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
             }
             if (boobsPresent()) {
                 player.addStatusValue(StatusEffects.Exgartuan, 3, -1);
-                if (player.statusEffectv3(StatusEffects.Exgartuan) == 0) {
+                if (player.statusEffectv3(StatusEffects.Exgartuan) == 0 && !boredTalked_boobs) {
                     exgartuanBored_boobs();
 					boredTalked_boobs = true;
                     needNext = true;
