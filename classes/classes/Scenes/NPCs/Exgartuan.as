@@ -48,8 +48,6 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
 --Random lust increases when time passes, combined with more growth.
 */
 
-		// All timeChange called first, then timeChangeLarge
-		private var boredTalked_dick:Boolean = false, boredTalked_boobs:Boolean = false;
 
 		public function Exgartuan() {
 			EventParser.timeAwareClassAdd(this);
@@ -74,13 +72,12 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
             }
             if (dickPresent()) {
                 player.addStatusValue(StatusEffects.Exgartuan, 2, -1);
-                if (player.statusEffectv2(StatusEffects.Exgartuan) == 0 && !boredTalked_dick) {
+                if (player.statusEffectv2(StatusEffects.Exgartuan) == 0) {
                     exgartuanBored_dick();
-					boredTalked_dick = true;
                     needNext = true;
                 } else if (dickAwake()) {
                     period = 768 / player.statusEffectv2(StatusEffects.Exgartuan);
-                    if (period < 4) period = 4;
+                    if (period < 8) period = 8;
                     if (player.hasStatusEffect(StatusEffects.Infested)) {
                         exgartuanWormCure();
                         needNext = true;
@@ -95,13 +92,12 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
             }
             if (boobsPresent()) {
                 player.addStatusValue(StatusEffects.Exgartuan, 3, -1);
-                if (player.statusEffectv3(StatusEffects.Exgartuan) == 0 && !boredTalked_boobs) {
+                if (player.statusEffectv3(StatusEffects.Exgartuan) == 0) {
                     exgartuanBored_boobs();
-					boredTalked_boobs = true;
                     needNext = true;
                 } else if (boobsAwake()) {
                     period = 384 / player.statusEffectv3(StatusEffects.Exgartuan);
-                    if (period < 2) period = 2;
+                    if (period < 4) period = 4;
                     if (rand(period) == 0) {
                         switch(rand(3)) {
                             case 0:
@@ -122,9 +118,6 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
 		}
 
 		public function timeChangeLarge():Boolean {
-			boredTalked_dick = false;
-			boredTalked_boobs = false;
-
 			if (model.time.hours == 4 && rand(3) == 0) {
 				if (dickAwake() && player.hoursSinceCum >= 24 && rand(3) == 0) {
 					exgartuanSleepSurprise();
