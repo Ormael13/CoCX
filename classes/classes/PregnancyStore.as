@@ -2,6 +2,49 @@ package classes
 {
 public class PregnancyStore extends Object
 	{
+		public static function getIncubation(pregType:int):int {
+			switch(pregType) {
+				case PREGNANCY_IMP: return INCUBATION_IMP;
+				case PREGNANCY_MINOTAUR: return INCUBATION_MINOTAUR;
+				case PREGNANCY_COCKATRICE: return INCUBATION_COCKATRICE;
+				case PREGNANCY_MOUSE: return INCUBATION_MOUSE;
+				case PREGNANCY_OVIELIXIR_EGGS: return INCUBATION_OVIELIXIR_EGGS;
+				case PREGNANCY_HELL_HOUND: return INCUBATION_HELL_HOUND;
+				case PREGNANCY_CENTAUR: return INCUBATION_CENTAUR;
+				case PREGNANCY_MARBLE: return INCUBATION_MARBLE;
+				case PREGNANCY_BUNNY: return INCUBATION_BUNNY_EGGS;
+				case PREGNANCY_ANEMONE: return INCUBATION_ANEMONE;
+				case PREGNANCY_AMILY: return INCUBATION_MOUSE;
+				case PREGNANCY_IZMA: return INCUBATION_IZMA;
+				case PREGNANCY_SPIDER: return INCUBATION_SPIDER;
+				case PREGNANCY_BASILISK: return INCUBATION_BASILISK;
+				case PREGNANCY_DRIDER_EGGS: return INCUBATION_DRIDER;
+				case PREGNANCY_GOO_GIRL: return INCUBATION_GOO_GIRL;
+				case PREGNANCY_EMBER: return INCUBATION_EMBER;
+				case PREGNANCY_BENOIT: return INCUBATION_BASILISK;
+				case PREGNANCY_SATYR: return INCUBATION_SATYR;
+				case PREGNANCY_COTTON: return INCUBATION_COTTON;
+				case PREGNANCY_URTA: return INCUBATION_URTA;
+				case PREGNANCY_SAND_WITCH: return INCUBATION_SAND_WITCH;
+				case PREGNANCY_FROG_GIRL: return INCUBATION_FROG_GIRL;
+				case PREGNANCY_FAERIE: return INCUBATION_FAERIE;
+				case PREGNANCY_BEE_EGGS: return INCUBATION_BEE;
+				case PREGNANCY_SANDTRAP_FERTILE: return INCUBATION_SANDTRAP;
+				case PREGNANCY_SANDTRAP: return INCUBATION_SANDTRAP;
+				case PREGNANCY_JOJO: return INCUBATION_MOUSE;
+				case PREGNANCY_KELT: return INCUBATION_CENTAUR;
+				case PREGNANCY_MINERVA: return INCUBATION_MINERVA;
+				case PREGNANCY_BEHEMOTH: return INCUBATION_BEHEMOTH;
+				case PREGNANCY_QUASI_PHOENIX: return INCUBATION_QUASI_PHOENIX;
+				case PREGNANCY_ALRAUNE: return INCUBATION_ALRAUNE;
+				case PREGNANCY_CELESS: return INCUBATION_CELESS;
+				case PREGNANCY_GOBLIN: return INCUBATION_GOBLIN;
+				case PREGNANCY_ZENJI: return INCUBATION_ZENJI;
+				case PREGNANCY_LOPPE: return INCUBATION_LOPPE;
+				default: return -1;
+			}
+		}
+
 		//Pregancy types. Both butt and normal. Each type represents the father of this baby.
 		public static const PREGNANCY_IMP:int                   =   1;
 		public static const PREGNANCY_MINOTAUR:int              =   2;
@@ -41,7 +84,6 @@ public class PregnancyStore extends Object
 		public static const PREGNANCY_MINERVA:int				=  34;
 		public static const PREGNANCY_BEHEMOTH:int				=  35;
 		public static const PREGNANCY_QUASI_PHOENIX:int			=  36;
-		public static const PREGNANCY_ANDY:int                  =  37; //This is functionally the same as Satyr but less corrupt. 10% chance of fauns, if ever implemented.
 		public static const PREGNANCY_ALRAUNE:int				=  38;
 		public static const PREGNANCY_CELESS:int				=  39;
 		public static const PREGNANCY_GOBLIN:int				=  40;
@@ -52,22 +94,6 @@ public class PregnancyStore extends Object
 		public static const PREGNANCY_HARPY_EGGS:int        	=  45; //All Harpy eggs
 		public static const PREGNANCY_HARPY_HATCHING:int        =  46;
 		public static const PREGNANCY_LOPPE:int                 =  47;
-
-		public static const PREG_NOT_PREGANT:int                =   0; //The PREG_* consts are returned by the size function
-		public static const PREG_NO_SIGNS_UNKNOWN:int           =   1; //NPC has conceived but doesn’t know she’s pregnant, no visible signs
-		public static const PREG_NO_SIGNS_KNOWN:int             =   2; //NPC is in the first trimester, knows she’s pregnant
-		public static const PREG_START_BULGE:int                =   3; //NPC is in the first trimester, belly is just starting to bulge
-		public static const PREG_SWOLLEN:int                    =   4; //NPC is in the second trimester, belly is small but definitely swollen
-		public static const PREG_SIZEABLE:int                   =   5; //NPC is in the second trimester, belly is now sizable
-		public static const PREG_BLATANT:int                    =   6; //NPC is in the third trimester, belly is blatantly bulging
-		public static const PREG_FULL_TERM:int                  =   7; //NPC is in the third trimester, belly is big as it will get for a normal pregnancy
-		public static const PREG_OVERDUE:int                    =   8; //NPC is overdue. Usually means a centaur baby, twins or some similar condition. Effectively looks 10 months pregnant
-		public static const PREG_VERY_OVERDUE:int               =   9; //NPC is very overdue. Probably triplets or more. Effectively looks 11 months pregnant
-//Old Value, replaced in Saves.unFuckSave()		public static const PREGNANCY_BUTT_BEE:int              =   2;
-//Old Value, replaced in Saves.unFuckSave()		public static const PREGNANCY_BUTT_DRIDER:int           =   3;
-//Old Value, replaced in Saves.unFuckSave()		public static const PREGNANCY_BUTT_SANDTRAP_FERTILE:int =   4;
-//Old Value, replaced in Saves.unFuckSave()		public static const PREGNANCY_BUTT_SANDTRAP:int         =   5; //Sandtrap did not have fertilized eggs
-		//TODO: clear this shit!
 
 		public static const INCUBATION_IMP:int                  = 432; //Time for standard imps. Imp lords, Ceraph, Lilium and the imp horde cause slightly faster pregnancies
 		public static const INCUBATION_MINOTAUR:int             = 432;
@@ -182,10 +208,12 @@ public class PregnancyStore extends Object
 		
 		public function knockUpForce(newPregType:int = 0, newPregIncubation:int = 0, ignoreGargoyle:Boolean = false):void
 		{
+			newPregIncubation = CoC.instance.gameSettings.sceneHunter_inst.shortPregTimer(newPregIncubation);
 			if (CoC.instance.player.isGargoyle() && newPregType == PREGNANCY_PLAYER && !ignoreGargoyle) return; //gargoyles can't impreg
 			if (_pregnancyTypeFlag == 0 || _pregnancyIncubationFlag == 0) return; //Check that these variables were provided by the containing class
 			if (newPregType != 0) newPregType = (CoC.instance.flags[_pregnancyTypeFlag] & PREG_NOTICE_MASK) + newPregType;
 				//If a pregnancy 'continues' an existing pregnancy then do not change the value for last noticed stage
+			if (CoC.instance.gameSettings.sceneHunter_inst.shortPreg)
 			CoC.instance.flags[_pregnancyTypeFlag] = newPregType;
 			CoC.instance.flags[_pregnancyIncubationFlag] = (newPregType == 0 ? 0 : newPregIncubation); //Won't allow incubation time without pregnancy type
 		}
@@ -197,6 +225,7 @@ public class PregnancyStore extends Object
 		
 		public function buttKnockUpForce(newPregType:int = 0, newPregIncubation:int = 0):void
 		{
+			newPregIncubation = CoC.instance.gameSettings.sceneHunter_inst.shortPregTimer(newPregIncubation);
 			if (CoC.instance.player.isGargoyle()) return;
 			if (_buttPregnancyTypeFlag == 0 || _buttPregnancyIncubationFlag == 0) return; //Check that these variables were provided by the containing class
 			if (newPregType != 0) newPregType = (CoC.instance.flags[_buttPregnancyTypeFlag] & PREG_NOTICE_MASK) + newPregType;
@@ -231,7 +260,9 @@ public class PregnancyStore extends Object
 				pregEventVector = _pregnancyEventValue[i];
 				if (pregEventVector[0] == pregType) {
 					for (var j:int = 1; j < pregEventVector.length; j++) { //Skip element zero, the pregnancy type
-						if (incubationValue > pregEventVector[j]) return j; //Will always find a value that is < incubationValue as last value is -1
+						if (incubationValue > CoC.instance.gameSettings.sceneHunter_inst.shortPreg ?
+								Math.round(pregEventVector[j]/pregEventVector[1] * CoC.instance.gameSettings.sceneHunter_inst.shortPregTimer(pregEventVector[1])) // 1 usually stores zero-hour stuff
+								: pregEventVector[j]) return j; //Will always find a value that is < incubationValue as last value is -1
 					}
 				}
 			}
@@ -244,12 +275,15 @@ public class PregnancyStore extends Object
 			var pregType:int = buttType;
 			if (pregType == 0) return 0; //Not pregnant
 			var incubationValue:int = buttIncubation;
+			var shortIncub:int = CoC.instance.gameSettings.sceneHunter_inst.shortPregTimer(incubationValue); // will shorten if SP is enabled
 			var pregEventVector:Vector.<int> = null;
 			for (var i:int = 0; i < _buttPregnancyEventValue.length; i++) {
 				pregEventVector = _buttPregnancyEventValue[i];
 				if (pregEventVector[0] == pregType) {
 					for (var j:int = 1; j < pregEventVector.length; j++) { //Skip element zero, the pregnancy type
-						if (incubationValue > pregEventVector[j]) return j; //Will always find a value that is < incubationValue as last value is -1
+						if (incubationValue > CoC.instance.gameSettings.sceneHunter_inst.shortPreg ?
+								Math.round(pregEventVector[j]/pregEventVector[1] * CoC.instance.gameSettings.sceneHunter_inst.shortPregTimer(pregEventVector[1])) // 1 usually stores zero-hour stuff
+								: pregEventVector[j]) return j; //Will always find a value that is < incubationValue as last value is -1
 					}
 				}
 			}
@@ -277,12 +311,6 @@ public class PregnancyStore extends Object
 			CoC.instance.flags[_buttPregnancyTypeFlag] = (CoC.instance.flags[_buttPregnancyTypeFlag] & PREG_TYPE_MASK) + (currentStage * 65536);
 				//Strip off the old noticed value by ANDing with PREG_TYPE_MASK
 			return currentStage;
-		}
-
-		public function get size():int {
-			//This function exists to provide consistency across different NPC's pregnancies. This is most useful when trying to write descriptions of different belly sizes
-			//in threesomes, where the author might not be familiar with how the different pregnancy events relate to belly size.
-			return PREG_NOT_PREGANT;
 		}
 	}
 }

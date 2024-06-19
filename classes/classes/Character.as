@@ -187,6 +187,7 @@ import classes.Scenes.NPCs.Forgefather;
 		//The player doesn't need to be told of the last event triggered, so the code here is quite a bit simpler than that in PregnancyStore
 		public function knockUpForce(type:int = 0, incubation:int = 0, womb:int = 0):void
 		{
+			incubation = CoC.instance.gameSettings.sceneHunter_inst.shortPregTimer(incubation);
 			if (womb == 0) {
 				_pregnancyType = type;
 				_pregnancyIncubation = (type == 0 ? 0 : incubation); //Won't allow incubation time without pregnancy type
@@ -222,6 +223,7 @@ import classes.Scenes.NPCs.Forgefather;
 		//The more complex buttKnockUp function used by the player is defined in Character.as
 		public function buttKnockUpForce(type:int = 0, incubation:int = 0):void
 		{
+			incubation = CoC.instance.gameSettings.sceneHunter_inst.shortPregTimer(incubation);
 			_buttPregnancyType = type;
 			_buttPregnancyIncubation = (type == 0 ? 0 : incubation); //Won't allow incubation time without pregnancy type
 		}

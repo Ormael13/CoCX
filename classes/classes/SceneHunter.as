@@ -76,7 +76,19 @@ public class SceneHunter extends BaseContent {
             outputText("\nNo extra information is printed, you'll have to find new race-specific scenes yourself.");
         }
 
-        addButton(5, "Other", toggle, kFLAGS.SCENEHUNTER_OTHER);
+        addButton(5, "ShortPreg", toggleShortPreg);
+        outputText("\n\n<b>Short Preg:</b> ");
+        if (flags[kFLAGS.SCENEHUNTER_SHORT_PREG]) {
+            outputText("<b>[font-green]ENABLED[/font]</b>");
+            outputText("\nPregnancies (both your and NPC) progress much faster, up to 48 hours.");
+            outputText("\n<i>For all of you preggo-lovers: you don't have to wait for months if you want to give birth to another imp.</i>");
+        } else {
+            outputText("<b>[font-dred]DISABLED[/font]</b>");
+            outputText("\nPregnancy timers are unchanged.");
+            outputText("\n<i>Careful here: if you toggle this with a save loaded, it will also speed up your current pregnancy, if any is present.</i>");
+        }
+
+        addButton(6, "Other", toggle, kFLAGS.SCENEHUNTER_OTHER);
         outputText("\n\n<b>Other changes:</b> ");
         if (flags[kFLAGS.SCENEHUNTER_OTHER])
             outputText("<b>[font-green]ENABLED[/font]</b>");
@@ -112,7 +124,7 @@ public class SceneHunter extends BaseContent {
 
         outputText("\n\n<b><u>SAVE-RELATED FLAGS</u></b>\n");
         outputText("The following flags are applied to the save - you <b>must</b> be <i>in a game session</i> (e.g. load your save, hit \"Main Menu\", change them. If you load a save, they will be set to the saved values.");
-        addButton(6, "Polygamy", togglePolygamy)
+        addButton(9, "Polygamy", togglePolygamy)
             .disableIf(!player, "Requires a loaded save. Set to 0 at the start of the game.");
         outputText("\n\n<b>Polygamy:</b> ");
         if (polygamy) {
@@ -553,6 +565,42 @@ public class SceneHunter extends BaseContent {
             flags[kFLAGS.SCENEHUNTER_POLYGAMY] ^= POLYGAMY_ENABLED;
             settingsPage();
         }
+    }
+
+    //--------------------------------------------------------------------------------------------------
+    // Short Preg
+    //--------------------------------------------------------------------------------------------------
+
+    public function get shortPreg():Boolean {
+        return flags[kFLAGS.SCENEHUNTER_SHORT_PREG];
+    }
+
+    // returns shortened value if the flag is enabled, unchanged otherwise
+    public function shortPregTimer(oldTimer:Number):int {
+        if (!shortPreg || oldTimer < 24) return oldTimer;
+        var num:Number;
+        if      (oldTimer <= 96 ) num =       oldTimer        / 8;
+        else if (oldTimer <= 240) num = 12 + (oldTimer - 96)  / 24;
+        else if (oldTimer <= 480) num = 18 + (oldTimer - 240) / 40;
+        else                      num = 24 + (oldTimer - 480) / 70;
+        return Math.round(num);
+    }
+
+    private function toggleShortPreg():void {
+        flags[kFLAGS.SCENEHUNTER_SHORT_PREG] = !flags[kFLAGS.SCENEHUNTER_SHORT_PREG];
+        if (shortPreg && player) {
+            player.knockUpForce(player.pregnancyType, player.pregnancyIncubation, 0);
+            player.knockUpForce(player.pregnancy2Type, player.pregnancy2Incubation, 1);
+            player.buttKnockUpForce(player.buttPregnancyType, player.buttPregnancyIncubation);
+        }
+        settingsPage();
+    }
+
+    public function adjustPregEventTimer(oldTimer:Number, pregType:int):int {
+        if (!shortPreg) return oldTimer;
+        var oldIncub:int = PregnancyStore.getIncubation(pregType);
+        if (oldIncub < 0) return shortPregTimer(oldTimer); // can't find => at least fix it to the new scale
+        else return Math.round(oldTimer/oldIncub * shortPregTimer(oldIncub)); // found => linear
     }
 
     //--------------------------------------------------------------------------------------------------
