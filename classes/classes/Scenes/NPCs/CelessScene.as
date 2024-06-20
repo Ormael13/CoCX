@@ -486,7 +486,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				"The woman has silvery white hair flowing around her perfect visage; and her sizable E cup would make most women back in Ingnam green with envy, then again, most things even somewhat female here in Mareth would cause the same reaction. "+
 				"The comparison to a human, however, ends there. "+
 				"Below her waist is the large lower-body of an immaculate white horse. "+
-				"Her ears are covered with silvery white fur and while at first you mistook her for just a centaur warrior, the spear-like spiraling horns on her forehead warns you that there might be more to her.\n\n"+
+				"Her ears are covered with silvery white fur and while at first you mistook her for just a centaur warrior, the spear-like spiraling horn on her forehead warns you that there might be more to her.\n\n"+
 				"<i>\"Just leave and I won’t have to attack you. I swear on my honor that I won’t give chase should you leave peacefully. This is for your own good.\"</i>");
 				if (playerIsVirgin()) {
 					outputText("She suddenly sniffs something in the air and her expression changes to one of baffled disbelief.\n\n"+

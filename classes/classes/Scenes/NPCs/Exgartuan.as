@@ -48,6 +48,7 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
 --Random lust increases when time passes, combined with more growth.
 */
 
+
 		public function Exgartuan() {
 			EventParser.timeAwareClassAdd(this);
 		}
@@ -76,7 +77,7 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
                     needNext = true;
                 } else if (dickAwake()) {
                     period = 768 / player.statusEffectv2(StatusEffects.Exgartuan);
-                    if (period < 4) period = 4;
+                    if (period < 8) period = 8;
                     if (player.hasStatusEffect(StatusEffects.Infested)) {
                         exgartuanWormCure();
                         needNext = true;
@@ -96,7 +97,7 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
                     needNext = true;
                 } else if (boobsAwake()) {
                     period = 384 / player.statusEffectv3(StatusEffects.Exgartuan);
-                    if (period < 2) period = 2;
+                    if (period < 4) period = 4;
                     if (rand(period) == 0) {
                         switch(rand(3)) {
                             case 0:
@@ -116,7 +117,6 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
 			return needNext;
 		}
 
-        //Potential bug: before, there was checkedExgartuan variable, set to 1 in tcLarge and reset in tc. I removed it.
 		public function timeChangeLarge():Boolean {
 			if (model.time.hours == 4 && rand(3) == 0) {
 				if (dickAwake() && player.hoursSinceCum >= 24 && rand(3) == 0) {

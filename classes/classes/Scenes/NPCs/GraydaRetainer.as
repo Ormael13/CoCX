@@ -169,7 +169,7 @@ private	function graydaMainTalkHer():void {
 private	function graydaMainTalkOutsiders():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_grayda);
-	outputText("You ask Grayda what she thinks of the other races of mareth.\n\n");
+	outputText("You ask Grayda what she thinks of the other races of Mareth.\n\n");
 	outputText("\"<i>Outsiders? With all due respect Princess I don't trust them, they seem quick to turn on each other, however, the demons are a more serious threat for the moment. I would also be wary of any Mindbreakers you come across my princess, they seem to have some ulterior motive which could prove detrimental if left unchecked.</i>\"\n\n");
 	outputText("She takes a moment to look around the camp before continuing. \"<i>Although, most of the folk you’ve gathered around here seem quite pleasant, and trade between one of the nearby towns could help this place grow quite nicely.</i>\"\n\n");
 	graydaAffection(2.5);

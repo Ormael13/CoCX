@@ -460,6 +460,7 @@ import classes.Scenes.Combat.CombatAbility;
                     kFLAGS.WATERSPORTS_ENABLED,
 				    kFLAGS.SILLY_MODE_ENABLE_FLAG,
                     kFLAGS.SCENEHUNTER_PRINT_CHECKS,
+					kFLAGS.SCENEHUNTER_SHORT_PREG,
                     kFLAGS.SCENEHUNTER_OTHER,
                     kFLAGS.SCENEHUNTER_DICK_SELECT,
 					kFLAGS.SCENEHUNTER_LOSS_SELECT,

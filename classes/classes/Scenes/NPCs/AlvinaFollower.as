@@ -549,7 +549,7 @@ public function alvinaThirdEncounterTakeHer():void
 		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
 		clearOutput();
 		outputText("You tell Alvina you brought a small gift for her, a small box of chocolate. She looks at you puzzled then smile a few seconds later. \n\n");
-		outputText("\"<i>Well how kind, romance in mareth is kind of dead. I'm surprised someone here still use the old ways to courtship well unless you had different motives?</i>\"\n\n");
+		outputText("\"<i>Well how kind, romance in Mareth is kind of dead. I'm surprised someone here still use the old ways to courtship well unless you had different motives?</i>\"\n\n");
 		outputText("No of course not, you really just felt like giving her a gift.\n\n");
 		outputText("\"<i>Really… well I greatly appreciate it, no one else would have gone through such lengths to UGHH...</i>\"\n\n");
 		outputText("She suddenly drop from her chair to the ground a hand on her chest as if trying to hold blood from a fatal wound. You're about to help her out, maybe try some basic medical skills of yours but she get back up on her own.\n\n");
@@ -1867,7 +1867,7 @@ public function postMarriageSleep():void {
 		else if (player.cocks[x].cockLength < 10) remarkSmallCock();
 		else remarkAverageCock();
 
-		outputText("Blushing in excitement she gently guides you into her lap spreading her hooved legs appart to offer you access to her innermost precious place, her hands open so to catch and hold yours. Somehow this passionate, innocent pose of hers arouse you more than all the trice damned demons of mareth have, whereas their seduction is perverted and crude Alvina pure genuine and nurtured love for you makes her every gesture radiate with a cute and heartwarming factor unique to hers. "+
+		outputText("Blushing in excitement she gently guides you into her lap spreading her hooved legs appart to offer you access to her innermost precious place, her hands open so to catch and hold yours. Somehow this passionate, innocent pose of hers arouse you more than all the trice damned demons of Mareth have, whereas their seduction is perverted and crude Alvina pure genuine and nurtured love for you makes her every gesture radiate with a cute and heartwarming factor unique to hers. "+
 				"This isn't just about raw sex, this is about a conversation between you and her and sensual carresses and kisses are the word of love you two exchange. You place your hands into the palm of her open paws and align your "+player.cockDescript(x)+" with the entryway to Alvina sacred garden trusting past the gate for a taste of her heaven. You are not disappointed, since Alvina was formerly a succubus; her vagina is capable of amazing feats of motion control; she uses it to massage your cock slowly, letting you savor the pleasure for as long as possible. " +
 				"All the while you two seek each other's mouth moving together to reach new pleasurable heights. As a demon Alvina only knew to take and never give in return her transformation actually led her to rediscover the pleasure of giving and receiving freely and through each pleasant ministration she dots your penis she gets to feel some of the pleasure back. You mean in genuine untarnished happiness as you passionately slide your penis down her canal seeking out all her sweet spots. You can't help but think your penis feels at home into her hole " +
 				"and feel a little apologetic about all the other hole you've tried out before hers.\n\n");//cant check for penile virginity

@@ -64,30 +64,30 @@ public class Pregnancy extends NPCAwareContent {
                 }
                 //Cotton Pregnancy! - 350 days long
                 if (womb["type"] == PregnancyStore.PREGNANCY_COTTON) {
-                    if (womb["incubation"] == 320) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(320, womb["type"])) {
                         EngineCore.outputText("\n<b>You realize your belly has gotten bigger. Maybe you should cut back on all the strange food.  Though you do have odd cravings for oats and grain.</b>\n");
                         displayedUpdate = true;
-                    } else if (womb["incubation"] == 280) {
+                    } else if (womb["incubation"] == sceneHunter.adjustPregEventTimer(280, womb["type"])) {
                         EngineCore.outputText("\n<b>Your belly is getting more noticeably distended. You are probably pregnant. The strong hankerings for oats and grains give you a very obvious clue as to who the 'father' might be.</b>\n");
                         displayedUpdate = true;
-                    } else if (womb["incubation"] == 225) {
+                    } else if (womb["incubation"] == sceneHunter.adjustPregEventTimer(225, womb["type"])) {
                         EngineCore.outputText("\n<b>The unmistakable bulge of pregnancy is visible in your tummy.  You stroke the orb and wonder with a half-grin if you'll have a daughter who takes after her 'daddy'.</b>\n");
                         displayedUpdate = true;
-                    } else if (womb["incubation"] == 165) {
+                    } else if (womb["incubation"] == sceneHunter.adjustPregEventTimer(165, womb["type"])) {
                         EngineCore.outputText("\n<b>The sudden impact of a tiny kick from inside your womb startles you.  Moments later it happens again, making you gasp.  The baby inside you really must be equine in nature; she's already got quite a wicked kick on her.</b>\n");
                         displayedUpdate = true;
-                    } else if (womb["incubation"] == 105) {
+                    } else if (womb["incubation"] == sceneHunter.adjustPregEventTimer(105, womb["type"])) {
                         EngineCore.outputText("\n<b>You're already as big as any pregnant woman back home. Considering that what you're carrying is technically a foal, you wonder just how much bigger you're going to get...</b>\n");
                         displayedUpdate = true;
-                    } else if (womb["incubation"] == 80) {
+                    } else if (womb["incubation"] == sceneHunter.adjustPregEventTimer(80, womb["type"])) {
                         EngineCore.outputText("\n<b>Your swollen stomach would bring queries about the possibility of twins back in Ingnam.  However, you can only feel one strong heart beating away inside your stretched midriff.  Cotton's foal is definitely growing up healthy...\n\nYou're glad, but a little worried about giving birth.</b>\n");
                         displayedUpdate = true;
-                    } else if (womb["incubation"] == 50) {
+                    } else if (womb["incubation"] == sceneHunter.adjustPregEventTimer(50, womb["type"])) {
                         EngineCore.outputText("\n<b>Your belly is painfully distended and swollen; you feel like you're going to burst before you get much bigger.  You find yourself pacing around restlessly in the night, like the expectant mares back in the village.  You're anxious to finally give birth, as much to get this heavy baby out of you as to finally be able to cuddle your child.</b>\n");
                         displayedUpdate = true;
                     }
                     //Tits
-                    if (womb["incubation"] == 32 || womb["incubation"] == 64 || womb["incubation"] == 85 || womb["incubation"] == 150) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(32, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(64, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(85, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(150, womb["type"])) {
                         displayedUpdate = true;
                         //Increase lactation!
                         if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() >= 1 && player.biggestLactation() < 2) {
@@ -117,15 +117,15 @@ public class Pregnancy extends NPCAwareContent {
                 }
                 //Imp Pregnancy!
                 if (womb["type"] == PregnancyStore.PREGNANCY_IMP) {
-                    if (womb["incubation"] == 336) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(336, womb["type"])) {
                         EngineCore.outputText("\n<b>You realize your belly has gotten slightly larger.  Maybe you need to cut back on the strange food.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 280) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(280, womb["type"])) {
                         EngineCore.outputText("\n<b>Your belly is getting more noticeably distended.   You are probably pregnant.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 216) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(216, womb["type"])) {
                         EngineCore.outputText("\n<b>The unmistakable bulge of pregnancy is visible in your tummy.  ");
                         if (player.cor < 40) EngineCore.outputText("You are distressed by your unwanted pregnancy, and your inability to force this thing out of you.</b>");
                         if (player.cor >= 40 && player.cor < 75) EngineCore.outputText("Considering the size of the creatures you've fucked, you hope it doesn't hurt when it comes out.</b>");
@@ -134,15 +134,15 @@ public class Pregnancy extends NPCAwareContent {
                         EngineCore.outputText("\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 180) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(180, womb["type"])) {
                         EngineCore.outputText("\n<b>The sudden impact of a kick from inside your womb startles you.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 120) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(120, womb["type"])) {
                         EngineCore.outputText("\n<b>Your ever-growing belly makes your pregnancy obvious for those around you.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 72) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(72, womb["type"])) {
                         EngineCore.outputText("\n<b>Your belly is painfully distended, ");
                         if (player.cor < 40) EngineCore.outputText("making it difficult to function.</b>");
                         if (player.cor >= 40 && player.cor < 75) EngineCore.outputText("and you wonder how much longer you have to wait.</b>");
@@ -151,7 +151,7 @@ public class Pregnancy extends NPCAwareContent {
                         player.dynStats("spe", -3, "lib", 1, "sen", 1, "lus", 4);
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 48) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(48, womb["type"])) {
                         EngineCore.outputText("\n<b>You rub your hands over your bulging belly, lost in the sensations of motherhood.  ");
                         if (player.cor < 40) EngineCore.outputText("Afterwards you feel somewhat disgusted with yourself.</b>\n");
                         if (player.cor >= 40 && player.cor < 75) EngineCore.outputText("You estimate you'll give birth in the next few days.</b>\n");
@@ -161,15 +161,15 @@ public class Pregnancy extends NPCAwareContent {
                 }
                 //Minotaur Pregnancy!
                 if (womb["type"] == PregnancyStore.PREGNANCY_MINOTAUR) {
-                    if (womb["incubation"] == 336) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(336, womb["type"])) {
                         EngineCore.outputText("\n<b>You realize your belly has gotten slightly larger.  Maybe you need to cut back on the strange food.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 280) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(280, womb["type"])) {
                         EngineCore.outputText("\n<b>Your belly is getting more noticeably distended and squirming around.  You are probably pregnant.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 216) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(216, womb["type"])) {
                         EngineCore.outputText("\n<b>The unmistakable bulge of pregnancy is visible in your tummy.  It's feeling heavier by the moment.  ");
                         if (player.cor < 40) EngineCore.outputText("You are distressed by your unwanted pregnancy, and your inability to force this thing out of you.</b>");
                         if (player.cor >= 40 && player.cor < 75) EngineCore.outputText("Considering the size of the creatures you've fucked, you hope it doesn't hurt when it comes out.</b>");
@@ -178,15 +178,15 @@ public class Pregnancy extends NPCAwareContent {
                         EngineCore.outputText("\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 180) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(180, womb["type"])) {
                         EngineCore.outputText("\n<b>The sudden impact of a kick from inside your distended womb startles you.  Moments later it happens again, making you gasp and stagger.  Whatever is growing inside you is strong.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 120) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(120, womb["type"])) {
                         EngineCore.outputText("\n<b>Your ever-growing belly makes your pregnancy obvious for those around you.  It's already as big as the belly of any pregnant woman back home.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 72) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(72, womb["type"])) {
                         EngineCore.outputText("\n<b>Your belly is painfully distended and overswollen with the offspring of some huge beast, ");
                         if (player.cor < 40) EngineCore.outputText("making it difficult to function.</b>");
                         if (player.cor >= 40 && player.cor < 75) EngineCore.outputText("and you wonder how much longer you have to wait.</b>");
@@ -195,14 +195,14 @@ public class Pregnancy extends NPCAwareContent {
                         player.dynStats("spe", -3, "lib", 1, "sen", 1, "lus", 4);
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 48) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(48, womb["type"])) {
                         displayedUpdate = true;
                         EngineCore.outputText("\n<b>You rub your hands over your bulging belly, lost in the sensations of motherhood.  Whatever beast is inside your overstretched womb seems to appreciate the attention, and stops its incessant squirming.  ");
                         if (player.cor < 40) EngineCore.outputText("Afterwards you feel somewhat disgusted with yourself.</b>\n");
                         if (player.cor >= 40 && player.cor < 75) EngineCore.outputText("You estimate you'll give birth in the next few days.</b>\n");
                         if (player.cor >= 75) EngineCore.outputText("You find yourself daydreaming about birthing some huge monstrous beast, and raising it to fuck your wet pussy over and over.</b>\n");
                     }
-                    if (womb["incubation"] == 32 || womb["incubation"] == 64 || womb["incubation"] == 85 || womb["incubation"] == 150) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(32, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(64, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(85, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(150, womb["type"])) {
                         displayedUpdate = true;
                         //Increase lactation!
                         if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() >= 1 && player.biggestLactation() < 2) {
@@ -232,38 +232,38 @@ public class Pregnancy extends NPCAwareContent {
                 }
                 //Centaur Pregnancy!
                 if (womb["type"] == PregnancyStore.PREGNANCY_CENTAUR || womb["type"] == PregnancyStore.PREGNANCY_KELT) {
-                    if (womb["incubation"] == 350) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(350, womb["type"])) {
                         EngineCore.outputText("\n<b>You realize your belly has gotten bigger. Maybe you should cut back on all the strange food.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 280) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(280, womb["type"])) {
                         EngineCore.outputText("\n<b>Your belly is getting more noticeably distended. You are probably pregnant.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 216) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(216, womb["type"])) {
                         EngineCore.outputText("\n<b>The unmistakable bulge of pregnancy is visible in your tummy.  Somehow, you don't feel worried. Only content.</b>\n");
                         player.dynStats("spe", -1, "lib", 1, "sen", 1, "lus", 2);
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 180) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(180, womb["type"])) {
                         EngineCore.outputText("\n<b>The pregnancy is moving much faster than you expected. It's already as big as the belly of any pregnant woman back home.  However, a feeling of warm satisfaction fills you.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 120) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(120, womb["type"])) {
                         EngineCore.outputText("\n<b>Your belly is painfully distended and overswollen with the offspring of some huge beast, making it difficult to function.</b>\n");
                         player.dynStats("spe", -1, "lib", .5, "sen", .5, "lus", 4);
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 72) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(72, womb["type"])) {
                         EngineCore.outputText("\n<b>Your stomach is easily the size of a beach ball, and still growing ever further. Strangely, you don't feel hindered. In fact, you feel like running...</b>\n");
                         player.dynStats("spe", -1, "lib", 1, "sen", 1, "lus", 4);
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 48) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(48, womb["type"])) {
                         EngineCore.outputText("\n<b>It seems impossible for your pregnant belly to grow any larger, but you are at your happiest yet, satisfied that somehow, you are fulfilling your role. It feels right to be pregnant, and you can't wait to get knocked up again afterwards.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 32 || womb["incubation"] == 64 || womb["incubation"] == 85 || womb["incubation"] == 150) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(32, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(64, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(85, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(150, womb["type"])) {
                         displayedUpdate = true;
                         //Increase lactation!
                         if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() >= 1 && player.biggestLactation() < 2) {
@@ -293,34 +293,34 @@ public class Pregnancy extends NPCAwareContent {
                 }
                 //Goblin Pregnancy!
                 if (womb["type"] == PregnancyStore.PREGNANCY_GOBLIN) {
-                    if (womb["incubation"] == 150) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(150, womb["type"])) {
                         EngineCore.outputText("\n<b>You realize your belly has gotten bigger. Maybe you should cut back on all the strange food.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 125) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(125, womb["type"])) {
                         EngineCore.outputText("\n<b>Your belly is getting more noticeably distended. You are probably pregnant which for you, is great news.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 100) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(100, womb["type"])) {
                         EngineCore.outputText("\n<b>The unmistakable bulge of pregnancy is visible in your tummy. You stroke the orb and wonder with a half-grin how much your daughter will take after you.</b>\n");
                         player.dynStats("spe", -1, "lib", 1, "sen", 1, "lus", 2);
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 75) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(75, womb["type"])) {
                         EngineCore.outputText("\n<b>The sudden impact of a tiny kick from inside your womb startles you. Moments later it happens again, making you gasp. The baby inside you really must be quite agitated.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 50) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(50, womb["type"])) {
                         EngineCore.outputText("\n<b>You're already as big as any pregnant woman back home. Well...for a goblin that is because you are quite smaller than a human to begin with.</b>\n");
                         player.dynStats("spe", -1, "lib", .5, "sen", .5, "lus", 4);
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 25) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(25, womb["type"])) {
                         EngineCore.outputText("\n<b>It seems impossible for your pregnant belly to grow any larger, but you are at your happiest yet, satisfied that somehow, you are fulfilling your role. It feels so right to be pregnant, and you can't wait to get knocked up again afterwards.</b>\n");
                         player.dynStats("spe", -1, "lib", 1, "sen", 1, "lus", 4);
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 12 || womb["incubation"] == 24 || womb["incubation"] == 36 || womb["incubation"] == 48) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(12, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(24, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(36, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(48, womb["type"])) {
                         displayedUpdate = true;
                         //Increase lactation!
                         if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() >= 1 && player.biggestLactation() < 2) {
@@ -349,7 +349,7 @@ public class Pregnancy extends NPCAwareContent {
                     }
                 }
                 if (womb["type"] == PregnancyStore.PREGNANCY_CELESS) {
-                    if (womb["incubation"] == 696) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(696, womb["type"])) {
                         EngineCore.outputText("\n<b>Since that day in the forest, your stomach has remained somewhat the same. You thought it would have turned back to normal by now. ");
                         if (player.hasPerk(PerkLib.UnicornBlessing)) EngineCore.outputText("Seems like she did actually manage to impregnate you without taking your virginity, doesn’t it?");
                         if (player.hasPerk(PerkLib.BicornBlessing)) {
@@ -359,32 +359,32 @@ public class Pregnancy extends NPCAwareContent {
                         EngineCore.outputText("</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 480) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(480, womb["type"])) {
                         EngineCore.outputText("\n<b>Your belly has gotten bigger again and the constant craving for cereals and vegetables gives you quite the idea of who might be the cause.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 240) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(240, womb["type"])) {
                         EngineCore.outputText("\n<b>You feel small, but powerful, kicks every now and then. Your daughter clearly has quite the strong legs, it seems. You don’t know how you can tell it’s a girl, it just feels right. Moreover, you’re fairly certain she is going to be a herm like her sire.</b>\n");
                         displayedUpdate = true;
                     }
                 }
                 //Bunny tf preggoz
                 if (womb["type"] == PregnancyStore.PREGNANCY_BUNNY || womb["type"] == PregnancyStore.PREGNANCY_LOPPE) {
-                    if (womb["incubation"] == 800) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(800, womb["type"])) {
                         EngineCore.outputText("\nYour womb gurgles strangely.\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 785) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(785, womb["type"])) {
                         //outputText("\n<b>An unexpected change occurs, no doubt brought on by the bunny's eggs inside you!</b>");
                         CoC.instance.mutations.neonPinkEgg(true, player);
                         EngineCore.outputText("\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 776) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(776, womb["type"])) {
                         EngineCore.outputText("\nYour womb feels full and bloated.\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 765) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(765, womb["type"])) {
                         //outputText("\n<b>An unexpected change occurs, no doubt brought on by the bunny's eggs inside you!</b>");
                         CoC.instance.mutations.neonPinkEgg(true, player);
                         EngineCore.outputText("\n");
@@ -396,16 +396,16 @@ public class Pregnancy extends NPCAwareContent {
                         player.knockUpForce(0, 0, womb["womb"]); //Clear Pregnancy
                     }
                     //BREAK - REAL PREGNANCY BELOW THIS:
-                    if (womb["incubation"] == 198) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(198, womb["type"])) {
                         EngineCore.outputText("\n<b>You realize your belly has gotten slightly larger.  " +
                                 (womb["type"] == PregnancyStore.PREGNANCY_LOPPE ? "" : "Maybe there's some truth to what the bunny-girl said.") + "</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 178) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(178, womb["type"])) {
                         EngineCore.outputText("\n<b>Your belly is getting more noticeably distended.   You are probably pregnant.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 156) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(156, womb["type"])) {
                         EngineCore.outputText("\n<b>The unmistakable bulge of pregnancy is visible in your tummy.  ");
                         if (womb["type"] != PregnancyStore.PREGNANCY_LOPPE) {
                             if (player.cor < 40) EngineCore.outputText("You are distressed by your unwanted pregnancy, and your inability to force this thing out of you.</b>");
@@ -416,15 +416,15 @@ public class Pregnancy extends NPCAwareContent {
                         EngineCore.outputText("\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 140) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(140, womb["type"])) {
                         EngineCore.outputText("\n<b>The sudden impact of a kick from inside your womb startles you, and it's immediately followed by a second on the other side.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 120) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(120, womb["type"])) {
                         EngineCore.outputText("\n<b>Your ever-growing belly makes your pregnancy obvious for those around you.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 72) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(72, womb["type"])) {
                         EngineCore.outputText("\n<b>Your belly is painfully distended, ");
                         if (player.cor < 40) EngineCore.outputText("making it difficult to function.</b>");
                         if (player.cor >= 40 && player.cor < 75) EngineCore.outputText("and you wonder how much longer you have to wait.</b>");
@@ -433,7 +433,7 @@ public class Pregnancy extends NPCAwareContent {
                         player.dynStats("spe", -3, "lib", 1, "sen", 1, "lus", 4);
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 48) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(48, womb["type"])) {
                         EngineCore.outputText("\n<b>You rub your hands over your bulging belly, lost in the sensations of motherhood.  ");
                         if (womb["type"] != PregnancyStore.PREGNANCY_LOPPE) {
                             if (player.cor < 40) EngineCore.outputText("Afterwards you feel somewhat disgusted with yourself.</b>\n");
@@ -446,15 +446,15 @@ public class Pregnancy extends NPCAwareContent {
                 }
                 //Marblz Pregnancy!
                 if (womb["type"] == PregnancyStore.PREGNANCY_MARBLE) {
-                    if (womb["incubation"] == 336) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(336, womb["type"])) {
                         EngineCore.outputText("\n<b>You realize your belly has gotten slightly larger.  Maybe you need to cut back on the strange food.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 280) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(280, womb["type"])) {
                         EngineCore.outputText("\n<b>Your belly is getting more noticeably distended and squirming around.  You are probably pregnant.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 216) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(216, womb["type"])) {
                         EngineCore.outputText("\n<b>The unmistakable bulge of pregnancy is visible in your tummy.  It's feeling heavier by the moment.  ");
                         if (player.cor < 40) EngineCore.outputText("You are distressed by your unwanted pregnancy, and your inability to force this thing out of you.</b>");
                         if (player.cor >= 40 && player.cor < 75) EngineCore.outputText("Considering the size of the creatures you've fucked, you hope it doesn't hurt when it comes out.</b>");
@@ -463,15 +463,15 @@ public class Pregnancy extends NPCAwareContent {
                         EngineCore.outputText("\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 180) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(180, womb["type"])) {
                         EngineCore.outputText("\n<b>The sudden impact of a kick from inside your distended womb startles you.  Moments later it happens again, making you gasp and stagger.  Whatever is growing inside you is strong.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 120) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(120, womb["type"])) {
                         EngineCore.outputText("\n<b>Your ever-growing belly makes your pregnancy obvious for those around you.  It's already as big as the belly of any pregnant woman back home.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 72) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(72, womb["type"])) {
                         EngineCore.outputText("\n<b>Your belly is distended and overswollen with your offspring, ");
                         if (player.cor < 40) EngineCore.outputText("making it difficult to function.</b>");
                         if (player.cor >= 40 && player.cor < 75) EngineCore.outputText("and you wonder how much longer you have to wait.</b>");
@@ -480,11 +480,11 @@ public class Pregnancy extends NPCAwareContent {
                         player.dynStats("spe", -3, "lib", 1, "sen", 1, "lus", 4);
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 48) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(48, womb["type"])) {
                         EngineCore.outputText("\n<b>You rub your hands over your bulging belly, lost in the sensations of motherhood.  Whatever child is inside your overstretched womb seems to appreciate the attention, and stops its incessant squirming.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 32 || womb["incubation"] == 150) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(32, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(150, womb["type"])) {
                         //Increase lactation!
                         if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() >= 1 && player.biggestLactation() < 2) {
                             EngineCore.outputText("\nYour breasts feel swollen with all the extra milk they're accumulating.  You wonder just what kind of creature they're getting ready to feed.\n");
@@ -511,7 +511,7 @@ public class Pregnancy extends NPCAwareContent {
                         }
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 85) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(85, womb["type"])) {
                         //A small scene for very late in the pregnancy, its breast growth for the little cowgirl.  This scene should be a few days before birth, so the milk doesn't stop before the cowgirl is born.
                         EngineCore.outputText("\n<b>Your belly has become heavily pregnant; at the same time, ");
                         //If (PC has flat breasts)
@@ -539,14 +539,14 @@ public class Pregnancy extends NPCAwareContent {
                 }
                 //Jojo Pregnancy!
                 if (womb["type"] == PregnancyStore.PREGNANCY_MOUSE || womb["type"] == PregnancyStore.PREGNANCY_JOJO) {
-                    if (womb["incubation"] == 336) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(336, womb["type"])) {
                         EngineCore.outputText("\n<b>You realize your belly has gotten slightly larger.  Maybe you need to cut back on the strange food.</b>\n");
                         if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3) { //Bimbo Jojo, stage 1
                             EngineCore.outputText("\nJoy notices you examining your belly and strolls over, playfully poking it with her finger. \"<i>Somebody's getting chubby; maybe you and I need to have a little more fun-fun to help you work off those calories, hmm?" + joyScene.joyHasCockText(" Or maybe I'm just feeding you too much...") + "</i>\" She teases" + joyScene.joyHasCockText(", patting her " + joyScene.joyCockDescript()) + ".\n");
                         }
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 280) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(280, womb["type"])) {
                         EngineCore.outputText("\n<b>Your belly is getting more noticeably distended and squirming around.  You are probably pregnant.</b>\n");
                         if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && womb["type"] == PregnancyStore.PREGNANCY_JOJO) { //Bimbo Jojo, stage 2
                             EngineCore.outputText("\nA pair of arms suddenly wrap themselves around you, stroking your belly. \"<i>Like, don't worry, [name]; I love you even if you are getting fat. Actually... this little pot belly of yours is, like, kinda sexy, y'know?</i>\" Joy declares.\n");
@@ -554,7 +554,7 @@ public class Pregnancy extends NPCAwareContent {
                         }
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 216) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(216, womb["type"])) {
                         if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && womb["type"] == PregnancyStore.PREGNANCY_JOJO) { //Bimbo Jojo, stage 3
                             EngineCore.outputText("\n<b>You have no doubt that you're pregnant now,</b> and from your recent urges to eat cheese and nuts, as well as the lusty thoughts that roam your head, you can already imagine who the father is...\n");
                             EngineCore.outputText("\nJoy shakes her head. \"<i>Wow, you just keep getting, like, fatter and fatter, don't you, [name]? S'funny, though... I never thought of myself as, like, a chubby chaser before, but that belly of yours really gets me, y'know, hot 'n' bothered.</i>\" She comments.\n");
@@ -579,7 +579,7 @@ public class Pregnancy extends NPCAwareContent {
                         player.dynStats("spe", -1, "lib", 1, "sen", 1, "lus", 2);
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 180) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(180, womb["type"])) {
                         if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && womb["type"] == PregnancyStore.PREGNANCY_JOJO) { //Bimbo Jojo, stage 4
                             EngineCore.outputText("\nIf there was ever any doubt you were carrying only one child before, it has long been forgotten. <b>Your belly is bigger than any woman's back in your village, and the children within are seemingly restless! They kick you all the time; it is clear they inherited Joy's energy, but it's starting to get bothersome.</b> You sigh as you take a seat to rest a bit as the babies inside you kick.\n");
                             EngineCore.outputText("\nThis would, of course, be less tiresome if you didn't have to lug around a third mouse as well... A smooch on your belly signals Joy's arrival into the scene.\n");
@@ -596,7 +596,7 @@ public class Pregnancy extends NPCAwareContent {
                         }
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 120) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(120, womb["type"])) {
                         if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && womb["type"] == PregnancyStore.PREGNANCY_JOJO) { //Bimbo Jojo, stage 5
                             EngineCore.outputText("\nYou're mildly annoyed at your squirming tummy, it seems your children have taken a liking to scurrying about inside you. The other mildly annoying thing, is Joy's attachment to your huge pregnant belly. It would seem that the bimbo mouse is as eager to see the children as the children inside you are eager to come out and play.\n");
                             EngineCore.outputText("\n\"<i>Like, [name], when are the babies gonna come out and play? I wanna hold my cute little squeakies already!</i>\" Joy pouts, stamping her foot in irritation at the wait for you to give birth.\n");
@@ -616,7 +616,7 @@ public class Pregnancy extends NPCAwareContent {
                         }
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 72) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(72, womb["type"])) {
                         EngineCore.outputText("\n<b>Your belly is painfully distended and overswollen with wriggling offspring, ");
                         if (player.cor < 40) EngineCore.outputText("making it difficult to function.</b>");
                         if (player.cor >= 40 && player.cor < 75) EngineCore.outputText("and you wonder how much longer you have to wait.</b>");
@@ -625,13 +625,13 @@ public class Pregnancy extends NPCAwareContent {
                         player.dynStats("spe", -3, "lib", 1, "sen", 1, "lus", 4);
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 48) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(48, womb["type"])) {
                         EngineCore.outputText("\n<b>You rub your hands over your bulging belly, lost in the sensations of motherhood.  Whatever is inside your overstretched womb seems to appreciate the attention and stops its incessant squirming.  ");
                         if (player.cor < 40) EngineCore.outputText("Afterwards you feel somewhat disgusted with yourself.</b>\n");
                         if (player.cor >= 40 && player.cor < 75) EngineCore.outputText("You estimate you'll give birth in the next few days.</b>\n");
                         if (player.cor >= 75) EngineCore.outputText("You find yourself daydreaming about birthing hundreds of little babies, and lounging around while they nurse non-stop on your increasingly sensitive breasts.</b>\n");
                     }
-                    if (womb["incubation"] == 32 || womb["incubation"] == 64 || womb["incubation"] == 85 || womb["incubation"] == 150) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(32, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(64, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(85, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(150, womb["type"])) {
                         //Increase lactation!
                         if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() >= 1 && player.biggestLactation() < 2) {
                             EngineCore.outputText("\nYour breasts feel swollen with all the extra milk they're accumulating.  You wonder just what kind of creature they're getting ready to feed.\n");
@@ -660,15 +660,15 @@ public class Pregnancy extends NPCAwareContent {
                 }
                 //Amily Pregnancy!
                 if (womb["type"] == PregnancyStore.PREGNANCY_AMILY) {
-                    if (womb["incubation"] == 336) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(336, womb["type"])) {
                         EngineCore.outputText("\n<b>You wake up feeling bloated, and your belly is actually looking a little puffy. At the same time, though, you have the oddest cravings... you could really go for some mixed nuts. And maybe a little cheese, too.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 280) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(280, womb["type"])) {
                         EngineCore.outputText("\n<b>Your belly is getting more noticeably distended and squirming around.  You are probably pregnant.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 216) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(216, womb["type"])) {
                         EngineCore.outputText("\n<b>There is no question you're pregnant; your belly is already as big as that of any pregnant woman back home.");
                         if (flags[kFLAGS.AMILY_FOLLOWER] == 1) EngineCore.outputText("  Amily smiles at you reassuringly. \"<i>We do have litters, dear, this is normal.</i>\"");
                         EngineCore.outputText("</b>");
@@ -676,23 +676,23 @@ public class Pregnancy extends NPCAwareContent {
                         player.dynStats("spe", -1, "lib", 1, "sen", 1, "lus", 2);
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 180) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(180, womb["type"])) {
                         EngineCore.outputText("\n<b>The sudden impact of a tiny kick from inside your distended womb startles you.  Moments later it happens again, making you gasp.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 120) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(120, womb["type"])) {
                         EngineCore.outputText("\n<b>You feel (and look) hugely pregnant, now, but you feel content. You know the, ah, 'father' of these children loves you, and they will love you in turn.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 72) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(72, womb["type"])) {
                         EngineCore.outputText("\n<b>You jolt from the sensation of squirming inside your swollen stomach. Fortunately, it dies down quickly, but you know for a fact that you felt more than one baby kicking inside you.</b>\n");
                         player.dynStats("spe", -3, "lib", 1, "sen", 1, "lus", 4);
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 48) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(48, womb["type"])) {
                         EngineCore.outputText("\n<b>The children kick and squirm frequently. Your bladder, stomach and lungs all feel very squished. You're glad that they'll be coming out of you soon.</b>\n");
                     }
-                    if (womb["incubation"] == 32 || womb["incubation"] == 64 || womb["incubation"] == 85 || womb["incubation"] == 150) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(32, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(64, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(85, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(150, womb["type"])) {
                         //Increase lactation!
                         if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() >= 1 && player.biggestLactation() < 2) {
                             EngineCore.outputText("\nYour breasts feel swollen with all the extra milk they're accumulating.\n");
@@ -721,16 +721,16 @@ public class Pregnancy extends NPCAwareContent {
                 }
                 //Shark Pregnancy!
                 if (womb["type"] == PregnancyStore.PREGNANCY_IZMA) {
-                    if (womb["incubation"] == 275) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(275, womb["type"])) {
                         if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) EngineCore.outputText("\n<b>You wake up feeling kind of nauseous.  Izma insists that you stay in bed and won't hear a word otherwise, tending to you in your sickened state.  When you finally feel better, she helps you up.  \"<i>You know, [name]... I think you might be pregnant.</i>\" Izma says, sounding very pleased at the idea. You have to admit, you do seem to have gained some weight...</b>\n");
                         else EngineCore.outputText("\n<b>You wake up feeling bloated, and your belly is actually looking a little puffy. At the same time, though, you have the oddest cravings... you could really go for some fish.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 250) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(250, womb["type"])) {
                         EngineCore.outputText("\n<b>Your belly is getting more noticeably distended and squirming around.  You are probably pregnant.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 216) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(216, womb["type"])) {
                         if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) EngineCore.outputText("\n<b>Your stomach is undeniably swollen now, and you feel thirsty all the time. Izma is always there to bring you water, even anticipating your thirst before you recognize it yourself. She smiles all the time now, and seems to be very pleased with herself.");
                         else EngineCore.outputText("\n<b>There is no question you're pregnant; your belly is getting bigger and for some reason, you feel thirsty ALL the time.");
                         EngineCore.outputText("</b>");
@@ -738,23 +738,23 @@ public class Pregnancy extends NPCAwareContent {
                         player.dynStats("spe", -1, "lib", 1, "sen", 1, "lus", 2);
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 180) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(180, womb["type"])) {
                         if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) EngineCore.outputText("\n<b>There is no denying your pregnancy, and Izma is head-over-heels with your 'beautifully bountiful new body', as she puts it. She is forever finding an excuse to touch your bulging stomach, and does her best to coax you to rest against her. However, when you do sit against her, she invariably starts getting hard underneath you.</b>\n");
                         else EngineCore.outputText("\n<b>There is no denying your pregnancy.  Your belly bulges and occasionally squirms as your growing offspring shifts position.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 120) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(120, womb["type"])) {
                         if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) EngineCore.outputText("\n<b>Your stomach is swollen and gravid; you can feel the baby inside you kicking and wriggling. Izma is always on hand now, it seems, and she won't dream of you fetching your own food or picking up anything you've dropped. She's always dropping hints about how you should try going around naked for comfort's sake. While you are unwilling to do so, you find yourself dreaming about sinking into cool, clean water, and take many baths and swims. Whatever is inside you always seems to like it; they get so much more active when you're in the water.</b>\n");
                         else EngineCore.outputText("\n<b>Your stomach is swollen and gravid; you can feel the baby inside you kicking and wriggling.  You find yourself dreaming about sinking into cool, clean water, and take many baths and swims. Whatever is inside you always seems to like it; they get so much more active when you're in the water.</b>\n");
                         player.dynStats("spe", -2, "lib", 1, "sen", 1, "lus", 4);
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 72) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(72, womb["type"])) {
                         if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) EngineCore.outputText("\n<b>You dream of the water, of a life under the waves, where it's cool and wet and you are free. You spend as much time in the river as possible now, the baby inside you kicking and squirming impatiently, eager to be free of the confines of your womb and have much greater depths to swim and play in. Izma makes no secret of her pleasure and informs you that you should deliver soon.</b>\n");
                         else EngineCore.outputText("\n<b>You dream of the water, of a life under the waves, where it's cool and wet and you are free. You spend as much time in the river as possible now, the baby inside you kicking and squirming impatiently, eager to be free of the confines of your womb and have much greater depths to swim and play in.  The time for delivery will probably come soon.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 32 || womb["incubation"] == 64 || womb["incubation"] == 85 || womb["incubation"] == 150) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(32, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(64, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(85, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(150, womb["type"])) {
                         //Increase lactation!
                         if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() >= 1 && player.biggestLactation() < 2) {
                             EngineCore.outputText("\nYour breasts feel swollen with all the extra milk they're accumulating.\n");
@@ -788,25 +788,25 @@ public class Pregnancy extends NPCAwareContent {
                 }
                 //SPOIDAH Pregnancy!
                 if (womb["type"] == PregnancyStore.PREGNANCY_SPIDER || womb["type"] == PregnancyStore.PREGNANCY_DRIDER_EGGS) {
-                    if (womb["incubation"] == 399) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(399, womb["type"])) {
                         EngineCore.outputText("\n<b>After your session with the spider, you feel much... fuller.  There is no outward change on your body as far as you can see but your womb feels slightly tingly whenever you move.  Hopefully it's nothing to be alarmed about.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 275) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(275, womb["type"])) {
                         EngineCore.outputText("\n<b>Your belly grumbles as if empty, even though you ate not long ago.  Perhaps with all the exercise you're getting you just need to eat a little bit more.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 250) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(250, womb["type"])) {
                         EngineCore.outputText("\n<b>Your belly looks a little pudgy");
                         if (player.thickness > 60 && player.tone < 40) EngineCore.outputText(" even for you");
                         EngineCore.outputText(", maybe you should cut back on all the food you've been consuming lately?</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 216) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(216, womb["type"])) {
                         EngineCore.outputText("\n<b>Your belly is definitely getting bigger, and no matter what you do, you can't seem to stop yourself from eating at the merest twinge of hunger.  The only explanation you can come up with is that you've gotten pregnant during your travels.  Hopefully it won't inconvenience your adventuring.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 180) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(180, womb["type"])) {
                         EngineCore.outputText("\n<b>A hot flush works its way through you, and visions of aroused ");
                         if (womb["type"] == PregnancyStore.PREGNANCY_SPIDER) EngineCore.outputText("spider-morphs ");
                         else EngineCore.outputText("driders ");
@@ -814,17 +814,17 @@ public class Pregnancy extends NPCAwareContent {
                         player.dynStats("lib", 1, "sen", 1, "lus", 20);
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 120) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(120, womb["type"])) {
                         EngineCore.outputText("\n<b>Your belly has gotten nice and big, perhaps as big as you remember the bellies of the pregnant women back home being.  The elders always did insist on everyone doing their part to keep the population high enough to sustain the loss of a champion every year.  You give yourself a little hug, getting a surge of happiness from your hormone-addled body.  Pregnancy sure is great!</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 72) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(72, womb["type"])) {
                         EngineCore.outputText("\n<b>The huge size of your pregnant belly constantly impedes your movement, but the constant squirming and shaking of your unborn offspring makes you pretty sure you won't have to carry them much longer.  A sense of motherly pride wells up in your breast - you just know you'll have such wonderful babies.");
                         if (player.cor < 50) EngineCore.outputText("  You shudder and shake your head, wondering why you're thinking such unusual things.");
                         EngineCore.outputText("</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 32 || womb["incubation"] == 64 || womb["incubation"] == 85 || womb["incubation"] == 150) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(32, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(64, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(85, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(150, womb["type"])) {
                         //Increase lactation!
                         if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() >= 1 && player.biggestLactation() < 2) {
                             EngineCore.outputText("\nYour breasts feel swollen with all the extra milk they're accumulating.\n");
@@ -858,13 +858,13 @@ public class Pregnancy extends NPCAwareContent {
                 }
                 //Goo Pregnancy!
                 if (womb["type"] == PregnancyStore.PREGNANCY_GOO_GIRL) {
-                    if (womb["incubation"] == 72) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(72, womb["type"])) {
                         EngineCore.outputText("\n<b>The huge size of your pregnant belly constantly impedes your movement, but the constant squirming and shaking of your slime-packed belly is reassuring in its own way.  You can't wait to see how it feels to have the slime flowing and gushing through your lips, stroking you intimately as you birth new life into this world.");
                         if (player.cor < 50) EngineCore.outputText("  You shudder and shake your head, wondering why you're thinking such unusual things.");
                         EngineCore.outputText("</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 32 || womb["incubation"] == 64 || womb["incubation"] == 82 || womb["incubation"] == 16) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(32, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(64, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(82, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(16, womb["type"])) {
                         //Increase lactation!
                         if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() >= 1 && player.biggestLactation() < 2) {
                             EngineCore.outputText("\nYour breasts feel swollen with all the extra milk they're accumulating.\n");
@@ -899,9 +899,9 @@ public class Pregnancy extends NPCAwareContent {
                 if (womb["type"] == PregnancyStore.PREGNANCY_EMBER) {
                     //Pregnancy notes: Egg Laying
                     if (flags[kFLAGS.EMBER_OVIPOSITION] > 0) {
-                        if (womb["incubation"] == 330) pregText = "Your belly has swollen, becoming larger - proof that Ember's seed did its work.  The dragon seems to be constantly checking you out, as if looking for the signs of weight gain.";
-                        if (womb["incubation"] == 250) pregText = "Your belly grows ever bigger, making your pregnancy noticeable; your belly also feels somewhat solid.  Ember casts pleased glances in your direction, whenever " + emberScene.emberMF("he", "she") + " thinks you're not looking.";
-                        if (womb["incubation"] == 170) {
+                        if (womb["incubation"] == sceneHunter.adjustPregEventTimer(330, womb["type"])) pregText = "Your belly has swollen, becoming larger - proof that Ember's seed did its work.  The dragon seems to be constantly checking you out, as if looking for the signs of weight gain.";
+                        if (womb["incubation"] == sceneHunter.adjustPregEventTimer(250, womb["type"])) pregText = "Your belly grows ever bigger, making your pregnancy noticeable; your belly also feels somewhat solid.  Ember casts pleased glances in your direction, whenever " + emberScene.emberMF("he", "she") + " thinks you're not looking.";
+                        if (womb["incubation"] == sceneHunter.adjustPregEventTimer(170, womb["type"])) {
                             pregText = "You've grown a lot.  Anyone is able to tell that you're pregnant with a single glance; and by the shape, you have no doubt that there's an egg in your womb; a big one.";
                             //(If Corruption < 40)
                             if (player.cor < 40) pregText += "  Part of you didn't really want to get knocked up, but it's for a good cause.  Besides, Ember looks very cute, trying to hide " + emberScene.emberMF("his", "her") + " happiness whenever " + emberScene.emberMF("he", "she") + " glances at your belly...";
@@ -910,9 +910,9 @@ public class Pregnancy extends NPCAwareContent {
                             //(If Corruption >= 75)
                             else pregText += "  You think dreamily about the wild sex that helped conceive this little one.  Ember is such a great fuck.  Really, you're doing this world a favor by bringing more of Ember's offspring into it.";
                         }
-                        if (womb["incubation"] == 120) pregText = "Though you're sure that this is the time when a regular baby would start moving about, your own belly simply sits there, heavy and full.  You'd be worried if you didn't remember that Ember hatched from an egg.  Sometimes; a delightful, refreshing, chill spreads from your belly throughout your body; making you feel invigorated, ready for anything.";
-                        if (womb["incubation"] == 90) pregText = "You've somehow grown even larger, the egg's outline appearing through your tummy.  By now, you're quite bothered with how difficult it's getting to move.  Ember constantly shadows you around the camp, making sure you're all right, although if you ever question " + emberScene.emberMF("him", "her") + " " + emberScene.emberMF("he", "she") + "'ll just say you're both going in the same direction.";
-                        if (womb["incubation"] == 60) {
+                        if (womb["incubation"] == sceneHunter.adjustPregEventTimer(120, womb["type"])) pregText = "Though you're sure that this is the time when a regular baby would start moving about, your own belly simply sits there, heavy and full.  You'd be worried if you didn't remember that Ember hatched from an egg.  Sometimes; a delightful, refreshing, chill spreads from your belly throughout your body; making you feel invigorated, ready for anything.";
+                        if (womb["incubation"] == sceneHunter.adjustPregEventTimer(90, womb["type"])) pregText = "You've somehow grown even larger, the egg's outline appearing through your tummy.  By now, you're quite bothered with how difficult it's getting to move.  Ember constantly shadows you around the camp, making sure you're all right, although if you ever question " + emberScene.emberMF("him", "her") + " " + emberScene.emberMF("he", "she") + "'ll just say you're both going in the same direction.";
+                        if (womb["incubation"] == sceneHunter.adjustPregEventTimer(60, womb["type"])) {
                             pregText = "The egg inside your belly seems to grow heavier each day that passes.  ";
                             //(If Corruption < 40)
                             if (player.cor < 40) pregText += "It's quite a burden that you're carrying.  Still, it's a worthwhile sacrifice to make in order to restore Ember's race.";
@@ -921,7 +921,7 @@ public class Pregnancy extends NPCAwareContent {
                             //If Corruption >= 75)
                             else pregText += "You're eager to give birth, just so you can get impregnated again.  Particularly because that means more wild sex with Ember.";
                         }
-                        if (womb["incubation"] == 30) {
+                        if (womb["incubation"] == sceneHunter.adjustPregEventTimer(30, womb["type"])) {
                             pregText = "You rub your hands over your ripe belly, lost in the sensations of motherhood.  ";
                             player.dynStats("sen", 5, "lus", (5 + player.sens / 20));
                             //If Corruption < 40
@@ -940,9 +940,9 @@ public class Pregnancy extends NPCAwareContent {
                     }
                     //Pregnancy Notes: Live Birth
                     else {
-                        if (womb["incubation"] == 330) pregText = "Your belly is a bit swollen - either you're eating too much or Ember's seed really did the job.";
-                        if (womb["incubation"] == 250) pregText = "Your belly grows ever bigger, making your pregnancy noticeable.  Ember shoots you quick looks, trying to hide " + emberScene.emberMF("his", "her") + " smirk of success every time " + emberScene.emberMF("he", "she") + " does.  You smirk right back at " + emberScene.emberMF("him", "her") + ", and occasionally make a subtle show of your gravid form, just to see " + emberScene.emberMF("him", "her") + " get turned on by the sight.";
-                        if (womb["incubation"] == 170) {
+                        if (womb["incubation"] == sceneHunter.adjustPregEventTimer(330, womb["type"])) pregText = "Your belly is a bit swollen - either you're eating too much or Ember's seed really did the job.";
+                        if (womb["incubation"] == sceneHunter.adjustPregEventTimer(250, womb["type"])) pregText = "Your belly grows ever bigger, making your pregnancy noticeable.  Ember shoots you quick looks, trying to hide " + emberScene.emberMF("his", "her") + " smirk of success every time " + emberScene.emberMF("he", "she") + " does.  You smirk right back at " + emberScene.emberMF("him", "her") + ", and occasionally make a subtle show of your gravid form, just to see " + emberScene.emberMF("him", "her") + " get turned on by the sight.";
+                        if (womb["incubation"] == sceneHunter.adjustPregEventTimer(170, womb["type"])) {
                             pregText = "You've grown a lot, anyone is able to tell that you're pregnant with a single glance.  ";
                             //If Corruption < 40
                             if (player.cor < 40) pregText += "Part of you didn't really want to get knocked up.  However, Ember's look of satisfaction whenever " + emberScene.emberMF("he", "she") + " gazes your way is rewarding despite that.  Plus, it is for a good cause.  You smirk in satisfaction - with a couple of dragons at your beck and call, things will look very different indeed.";
@@ -950,7 +950,7 @@ public class Pregnancy extends NPCAwareContent {
                             else if (player.cor < 75) pregText += "You grin, savoring the strange, erotic sensations from the life inside your burgeoning womb and the promise of motherhood.  Mmm, if it feels this good, maybe you should \"<i>encourage</i>\" Ember to get you pregnant again.";
                             else pregText += "You think dreamily about the wild sex that helped conceive this little one.  Ember is such a great fuck. Really, you're doing this world a favor by bringing more of Ember's offspring into it.";
                         }
-                        if (womb["incubation"] == 120) {
+                        if (womb["incubation"] == sceneHunter.adjustPregEventTimer(120, womb["type"])) {
                             pregText = "Every once in awhile, you feel a kick from inside your bulging belly.  Right now, it's really kicking up a storm, and so you decide to sit down and take it easy.  You keep rubbing your belly, hoping to calm your child down and make it stop battering your innards.";
                             pregText += "\n\nEmber approaches you, and casually asks, \"<i>So... is it kicking already?</i>\"";
                             pregText += "\n\nYou admit that it is, stroking your stomach.  Casually, you ask if Ember would maybe like to touch your belly, wondering if " + emberScene.emberMF("he", "she") + " will be able to bring " + emberScene.emberMF("him", "her") + "self to do it.";
@@ -959,7 +959,7 @@ public class Pregnancy extends NPCAwareContent {
                             pregText += ".  You just smile encouragingly at the dragon " + emberScene.emberMF("-boy", "herm") + " and lean back slightly, sticking out your gravid midriff in open encouragement to its " + emberScene.emberMF("father", "mother") + " to try and connect with " + emberScene.emberMF("his", "her") + " unborn child.";
                             pregText += "\n\nEmber sets a clawed hand on your belly, careful not to hurt you with " + emberScene.emberMF("his", "her") + " claws.  Slowly " + emberScene.emberMF("he", "she") + " rubs your belly, until " + emberScene.emberMF("he", "she") + " feels a small kick and smiles in glee.  You smile at the look of joy on " + emberScene.emberMF("his", "her") + " face, even as " + emberScene.emberMF("he", "she") + " realizes what " + emberScene.emberMF("he", "she") + "'s doing and embarrassedly mumbles an excuse and walks away.";
                         }
-                        if (womb["incubation"] == 90) {
+                        if (womb["incubation"] == sceneHunter.adjustPregEventTimer(90, womb["type"])) {
                             pregText = "You stop for a moment and sit down on a nearby rock.  Your belly feels much heavier than usual, and just walking about has become a chore.  Ember takes notice of your tiredness and quickly closes the distance between you two.  \"<i>[name], are you feeling all right?</i>\"";
                             pregText += "\n\nYou tell " + emberScene.emberMF("him", "her") + " that you are, just worn out.  It's not easy carrying " + emberScene.emberMF("his", "her") + " child, after all.";
                             pregText += "\n\nEmber sighs in relief.  \"<i>Good, is there anything I can do for you?</i>\"";
@@ -977,13 +977,13 @@ public class Pregnancy extends NPCAwareContent {
                             if (flags[kFLAGS.EMBER_ROUNDFACE] > 0) pregText += "Ember blushes.  ";
                             pregText += "\"<i>O-of course I'll do my part.  If you don't need me for anything, I'll be going then.</i>\" " + emberScene.emberMF("He", "She") + " turns on " + emberScene.emberMF("his", "her") + " heels and walks away.  You watch " + emberScene.emberMF("him", "her") + " go, pat yourself on the stomach, then painstakingly hoist yourself back upright and go on your way.";
                         }
-                        if (womb["incubation"] == 60) {
+                        if (womb["incubation"] == sceneHunter.adjustPregEventTimer(60, womb["type"])) {
                             pregText = "Besides being so huge you'd probably be asked if you were having twins back in Ingnam, your belly has grown stupidly heavy, ";
                             if (player.cor <= 33) pregText += "making you wonder more than ever if it really was a good idea to get pregnant with a dragon.  True, Ember looks ready to burst with pride at your fruitful bounty, but you feel ready to just plain burst yourself.";
                             else if (player.cor <= 66) pregText += "and you wonder how much longer you have to wait.  Despite being a bit bothersome, you're pleased your child is growing into a healthy, hopefully sexy, dragon; like its father.";
                             else pregText += "and you're eager to give birth, so you can get impregnated again.  Particularly because that means more rowdy fucking from Ember.";
                         }
-                        if (womb["incubation"] == 30) {
+                        if (womb["incubation"] == sceneHunter.adjustPregEventTimer(30, womb["type"])) {
                             pregText = "You rub your hands over your gloriously full, ripe belly, lost in the sensations of motherhood.  ";
                             if (player.cor <= 33) pregText += "Despite your initial reluctance, you've come to find a very real pleasure in being pregnant.  You hope Ember will want to have more children in the future.";
                             else if (player.cor <= 66) pregText += "You smile, knowing you'll meet your child in the next few days.  A part of you is almost sad that you'll be empty, but you can always entice Ember into getting you pregnant again.";
@@ -998,33 +998,33 @@ public class Pregnancy extends NPCAwareContent {
                 //Pregnancy 4 Satyrs
                 if (womb["type"] == PregnancyStore.PREGNANCY_SATYR) {
                     //Stage 1:
-                    if (womb["incubation"] == 150) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(150, womb["type"])) {
                         EngineCore.outputText("\n<b>You find that you're feeling quite sluggish these days; you just don't have as much energy as you used to.  You're also putting on weight.</b>\n");
                         displayedUpdate = true;
                     }
                     //Stage 2:
-                    if (womb["incubation"] == 125) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(125, womb["type"])) {
                         EngineCore.outputText("\n<b>Your belly is getting bigger and bigger.  Maybe your recent urges are to blame for this development?</b>\n");
                         displayedUpdate = true;
                     }
                     //Stage 3:
-                    if (womb["incubation"] == 100) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(100, womb["type"])) {
                         EngineCore.outputText("\n<b>You can feel the strangest fluttering sensations in your distended belly; it must be a pregnancy.  You should eat more and drink plenty of wine so your baby can grow properly.  Wait, wine...?</b>\n");
                         displayedUpdate = true;
                     }
                     //Stage 4:
-                    if (womb["incubation"] == 75) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(75, womb["type"])) {
                         EngineCore.outputText("\n<b>Sometimes you feel a bump in your pregnant belly.  You wonder if it's your baby complaining about your moving about.</b>\n");
                         displayedUpdate = true;
                     }
                     //Stage 5:
-                    if (womb["incubation"] == 50) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(50, womb["type"])) {
                         EngineCore.outputText("\n<b>With your bloating gut, you are loathe to exert yourself in any meaningful manner; you feel horny and hungry all the time...</b>\n");
                         displayedUpdate = true;
                         //temp min lust up +5
                     }
                     //Stage 6:
-                    if (womb["incubation"] == 30) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(30, womb["type"])) {
                         EngineCore.outputText("\n<b>The baby you're carrying constantly kicks your belly in demand for food and wine, and you feel sluggish and horny.  You can't wait to birth this little one so you can finally rest for a while.</b>\n");
                         displayedUpdate = true;
                         //temp min lust up addl +5
@@ -1032,31 +1032,31 @@ public class Pregnancy extends NPCAwareContent {
                 }
                 //BASILISK Pregnancy!
                 if (womb["type"] == PregnancyStore.PREGNANCY_BASILISK || womb["type"] == PregnancyStore.PREGNANCY_BENOIT) {
-                    if (womb["incubation"] == 185) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(185, womb["type"])) {
                         EngineCore.outputText("\n<b>Your belly grumbles as if empty, even though you ate not long ago.  Perhaps with all the exercise you're getting you just need to eat a little bit more.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 160) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(160, womb["type"])) {
                         EngineCore.outputText("\n<b>Your belly looks a little pudgy");
                         if (player.thickness > 60 && player.tone < 40) EngineCore.outputText(" even for you");
                         EngineCore.outputText(", maybe you should cut back on all the food you've been consuming lately?</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 140) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(140, womb["type"])) {
                         EngineCore.outputText("\n<b>Your belly is definitely getting bigger, and no matter what you do, you can't seem to stop yourself from eating at the merest twinge of hunger.  The only explanation you can come up with is that you've gotten pregnant during your travels.  Hopefully it won't inconvenience your adventuring.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 110) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(110, womb["type"])) {
                         EngineCore.outputText("\n<b>Your belly has gotten nice and big, perhaps as big as you remember the bellies of the pregnant women back home being.  The elders always did insist on everyone doing their part to keep the population high enough to sustain the loss of a champion every year.  You give yourself a little hug, getting a surge of happiness from your hormone-addled body.  Pregnancy sure is great!</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 72) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(72, womb["type"])) {
                         EngineCore.outputText("\n<b>The huge size of your pregnant belly constantly impedes your movement, but the constant squirming and shaking of your unborn offspring makes you pretty sure you won't have to carry them much longer.  A sense of motherly pride wells up in your breast - you just know you'll have such wonderful babies.");
                         if (player.cor < 50) EngineCore.outputText("  You shudder and shake your head, wondering why you're thinking such unusual things.");
                         EngineCore.outputText("</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 32 || womb["incubation"] == 64 || womb["incubation"] == 85 || womb["incubation"] == 150) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(32, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(64, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(85, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(150, womb["type"])) {
                         //Increase lactation!
                         if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() >= 1 && player.biggestLactation() < 2) {
                             EngineCore.outputText("\nYour breasts feel swollen with all the extra milk they're accumulating.\n");
@@ -1090,16 +1090,16 @@ public class Pregnancy extends NPCAwareContent {
                 }
                 //Anemone Pregnancy
                 if (womb["type"] == PregnancyStore.PREGNANCY_ANEMONE) {
-                    if (womb["incubation"] == 240) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(240, womb["type"])) {
                         EngineCore.outputText("\n<b>You feel something shifting and moving inside you.  You start to think you might be pregnant.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 210) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(210, womb["type"])) {
                         EngineCore.outputText("\n<b>The fluttering of sensation inside you is getting stronger and more frequent.  At times it even feels as if the inner lining of your womb is tingling.</b>\n");
                         player.dynStats("lus", (5 + player.lib / 20), "scale", false);
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 185) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(185, womb["type"])) {
                         EngineCore.outputText("\n<b>The unmistakable bulge of pregnancy is visible in your tummy.  ");
                         if (player.cor < 40) EngineCore.outputText("You are distressed by your unwanted pregnancy, and your inability to force this thing out of you.</b>");
                         if (player.cor >= 40 && player.cor < 75) EngineCore.outputText("Considering the possible fathers, you hope it isn't that big.</b>");
@@ -1108,18 +1108,18 @@ public class Pregnancy extends NPCAwareContent {
                         EngineCore.outputText("\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 154) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(154, womb["type"])) {
                         EngineCore.outputText("\n<b>The sudden impact of a strong movement from inside your womb startles you.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 120) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(120, womb["type"])) {
                         EngineCore.outputText("\n<b>Your larger, squirming belly makes your pregnancy obvious for those around you");
                         if (player.hasVagina()) EngineCore.outputText(" and keeps your " + vaginaDescript(womb["womb"]) + " aroused from the constant tingling in your womb");
                         EngineCore.outputText(".</b>\n");
                         player.dynStats("lus", (10 + player.lib / 20), "scale", false);
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 72) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(72, womb["type"])) {
                         EngineCore.outputText("\n<b>Your belly is noticeably distended, ");
                         if (player.cor < 40) EngineCore.outputText("and constantly shifts and wriggles.  What manner of beast are you bringing into the world?</b>");
                         if (player.cor >= 40 && player.cor < 75) EngineCore.outputText("and you wonder how much longer you have to wait.</b>");
@@ -1128,7 +1128,7 @@ public class Pregnancy extends NPCAwareContent {
                         player.dynStats("spe", -3, "lib", 1, "sen", 1, "lus", (5 + player.lib / 20));
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 48) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(48, womb["type"])) {
                         EngineCore.outputText("\n<b>You rub your hands over your bulging belly, lost in the sensations of motherhood.  ");
                         if (player.cor < 40) EngineCore.outputText("Afterwards you feel somewhat disgusted with yourself, but horny.</b>\n");
                         if (player.cor >= 40 && player.cor < 75) EngineCore.outputText("You estimate you'll give birth in the next few days.  You hope the birth is as erotically charged as the pregnancy has been.</b>\n");
@@ -1139,15 +1139,15 @@ public class Pregnancy extends NPCAwareContent {
                 }
                 //Hellhound Pregnancy!
                 if (womb["type"] == PregnancyStore.PREGNANCY_HELL_HOUND) {
-                    if (womb["incubation"] == 290) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(290, womb["type"])) {
                         EngineCore.outputText("\n<b>You realize your belly has gotten slightly larger.  Maybe you need to cut back on the strange food.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 240) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(240, womb["type"])) {
                         EngineCore.outputText("\n<b>Your belly is getting more noticeably distended and squirming around.  You are probably pregnant.</b>\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 216) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(216, womb["type"])) {
                         EngineCore.outputText("\n<b>The unmistakable bulge of pregnancy is visible in your tummy.  It's feeling heavier by the moment.  ");
                         if (player.cor < 40) EngineCore.outputText("You are distressed by your unwanted pregnancy, and your inability to force this thing out of you.</b>");
                         if (player.cor >= 40 && player.cor < 75) EngineCore.outputText("Considering the size of the creatures you've fucked, you hope it doesn't hurt when it comes out.</b>");
@@ -1156,23 +1156,23 @@ public class Pregnancy extends NPCAwareContent {
                         player.dynStats("spe", -1, "lib", 1, "sen", 1, "lus", 2);
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 180) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(180, womb["type"])) {
                         EngineCore.outputText("\n<b>There is a strange heat within your belly, it makes you a little tired.</b>\n");
                         player.dynStats("tou", -1);
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 120) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(120, womb["type"])) {
                         EngineCore.outputText("\n<b>Your ever-growing belly makes your pregnancy obvious for those around you.  With each day you can feel the heat within you growing.</b>\n");
                         displayedUpdate = true;
                         player.dynStats("tou", -1);
                     }
-                    if (womb["incubation"] == 72) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(72, womb["type"])) {
                         EngineCore.outputText("\n<b>The heat within doesn't drain you as much as it used to, instead giving you an odd strength.</b>");
                         EngineCore.outputText("\n");
                         player.dynStats("str", 1, "tou", 1);
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 48) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(48, womb["type"])) {
                         EngineCore.outputText("\n<b>You can feel two large lumps pushing against your womb together ");
                         if (player.cor < 40) EngineCore.outputText("making it difficult to function.</b>");
                         if (player.cor >= 40 && player.cor < 75) EngineCore.outputText("and you wonder how much longer you have to wait.</b>");
@@ -1181,7 +1181,7 @@ public class Pregnancy extends NPCAwareContent {
                         player.dynStats("spe", -2, "lib", 1, "sen", 1, "lus", 4);
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 32 || womb["incubation"] == 64 || womb["incubation"] == 85 || womb["incubation"] == 150) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(32, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(64, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(85, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(150, womb["type"])) {
                         //Increase lactation!
                         if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() >= 1 && player.biggestLactation() < 2) {
                             EngineCore.outputText("\nYour breasts feel swollen with all the extra milk they're accumulating.  You wonder just what kind of creature they're getting ready to feed.\n");
@@ -1210,7 +1210,7 @@ public class Pregnancy extends NPCAwareContent {
                 }
                 //Frog Eggs
                 else if (womb["type"] == PregnancyStore.PREGNANCY_FROG_GIRL) {
-                    if (womb["incubation"] == 8) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(8, womb["type"])) {
                         //Egg Maturing
                         if (player.hasVagina()) {
                             EngineCore.outputText("\nYour gut churns, and with a squelching noise, a torrent of transparent slime gushes from your "+player.vaginaDescript(womb["womb"])+".  You immediately fall to your knees, landing wetly amidst the slime.  The world around briefly flashes with unbelievable colors, and you hear someone giggling.\n\nAfter a moment, you realize that it’s you.");
@@ -1231,23 +1231,23 @@ public class Pregnancy extends NPCAwareContent {
                 }
                 //Minerva Pregnancy
                 else if (womb["type"] == PregnancyStore.PREGNANCY_MINERVA) {
-                    if (womb["incubation"] == 216) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(216, womb["type"])) {
                         EngineCore.outputText("<b>You realize your belly has gotten slightly larger.  Maybe you need to cut back on the strange food.</b>");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 144) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(144, womb["type"])) {
                         EngineCore.outputText("<b>Your distended belly shows obvious signs of pregnancy.</b>");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 72) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(72, womb["type"])) {
                         EngineCore.outputText("<b>Your belly is getting larger.  You feel like you're housing a twin.</b>");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 24) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(24, womb["type"])) {
                         EngineCore.outputText("<b>Your belly is as big as it can get.  You have a feeling that you'll give birth to a twin soon.</b>");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 144 || womb["incubation"] == 72 || womb["incubation"] == 85 || womb["incubation"] == 150) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(144, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(72, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(85, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(150, womb["type"])) {
                         //Increase lactation!
                         if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() >= 1 && player.biggestLactation() < 2) {
                             EngineCore.outputText("\nYour breasts feel swollen with all the extra milk they're accumulating.  You wonder just what kind of creature they're getting ready to feed.\n");
@@ -1276,17 +1276,17 @@ public class Pregnancy extends NPCAwareContent {
                 }
                 //Alraune Pregnancy
                 else if (womb["type"] == PregnancyStore.PREGNANCY_ALRAUNE) {
-                    if (womb["incubation"] == 120) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(120, womb["type"])) {
                         if (player.isAlraune()) EngineCore.outputText("<b>You suddenly feel a change in the pitcher below your feet. It feels heavier than before.</b>");
                         else EngineCore.outputText("<b>Your belly increase in size as something not unlike pollen or nectar slowly drip out of your pussy.</b>");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 80) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(80, womb["type"])) {
                         if (player.isAlraune()) EngineCore.outputText("<b>A delicious feeling of fullness originate from the bottom of your pitcher as you begin daydreaming about children.</b>");
                         else EngineCore.outputText("<b>Some fluids not unlike pollen or nectar flow out of your vagina and you can’t help but pat your inflating belly with motherly delight. Whatever is in there is growing nicely.</b>");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 40) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(40, womb["type"])) {
                         if (player.isAlraune()) EngineCore.outputText("<b>Somehow due to the weight and delicious feeling in your pitcher you are certain you are pregnant with seeds. A soothing warmth fills you as you smile in delight of your motherhood.</b>");
                         else EngineCore.outputText("<b>Some fluids not unlike pollen or nectar flow out of your vagina and you can’t help but pat your inflating belly with motherly delight. Whatever is in there is growing nicely. Something tells you you will be giving birth soon.</b>");
                         displayedUpdate = true;
@@ -1294,18 +1294,18 @@ public class Pregnancy extends NPCAwareContent {
                 }
                 //Zenji Pregnancy
                 else if (womb["type"] == PregnancyStore.PREGNANCY_ZENJI) {
-                    if (womb["incubation"] == 700) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(700, womb["type"])) {
                         EngineCore.outputText("As you are resting at your camp, you suddenly feel a pair of fuzzy hands grasp at your shoulders. Zenji leans down and gives you a small sniff.\n\n");
                         EngineCore.outputText("\"<i>Ahaha! [name]! You're pregnant! I'm so glad we've made it dis far.</i>\" He says, caressing your face tenderly as he moves in front of you. \"<i>I need ya to know someting… I don’t tink we’ll be able to have more dan two children, it’s a bit complicated [name], but I don’t tink I am able ta give you anyting more, I’m sorry… Still, having a family wit ya is more dan anyting I could ask for.</i>\"\n\n");
                         EngineCore.outputText("You look down at your stomach and upon careful examination you realize that you are, in fact, pregnant. You smile at him and tell him you’re more than happy to have children with him.\n\n");
                         EngineCore.outputText("Zenji blushes softly, \"<i>It is a pleasure, [name], I will protect our family until de very end.</i>\" He says, hugging you gently as his tail wraps around you.");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 480) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(480, womb["type"])) {
                         EngineCore.outputText("<b>You can feel gentle kicking within your stomach. Reflexively you turn you gaze toward Zenji and he gives you a heartwarming smile in response.</b>");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 240) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(240, womb["type"])) {
                         EngineCore.outputText("Your balance shifts as the time for pregnancy draws closer. Zenji quickly rushes to your side, \"<i>Everyting okay, [name]?</i>\"\n\n");
                         EngineCore.outputText("You nod, stating that you’re not quite ready to give birth yet.\n\n");
                         EngineCore.outputText("Zenji holds you close to him, wrapping you within his strong arms, \"<i>I’ll be ready for you, [name]... We’re in dis togetha.</i>\"\n\n");
@@ -1314,23 +1314,23 @@ public class Pregnancy extends NPCAwareContent {
                 }
                 //Behemoth Pregnancy
                 else if (womb["type"] == PregnancyStore.PREGNANCY_BEHEMOTH) {
-                    if (womb["incubation"] == 1152) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(1152, womb["type"])) {
                         EngineCore.outputText("<b>You realize your belly has gotten slightly larger.  Maybe you need to cut back on the strange food.  However, you have a feel that it's going to be a very long pregnancy.</b>");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 864) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(864, womb["type"])) {
                         EngineCore.outputText("<b>Your distended belly shows obvious signs of pregnancy.</b>");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 576) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(576, womb["type"])) {
                         EngineCore.outputText("<b>Your belly is getting larger.</b>");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 288) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(288, womb["type"])) {
                         EngineCore.outputText("<b>Your belly is as big as it can get.  You have a feeling that you'll give birth to a behemoth soon.</b>");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] == 1024 || womb["incubation"] == 768 || womb["incubation"] == 512 || womb["incubation"] == 256) {
+                    if (womb["incubation"] == sceneHunter.adjustPregEventTimer(1024, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(768, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(512, womb["type"]) || womb["incubation"] == sceneHunter.adjustPregEventTimer(256, womb["type"])) {
                         //Increase lactation!
                         if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() >= 1 && player.biggestLactation() < 2) {
                             EngineCore.outputText("\nYour breasts feel swollen with all the extra milk they're accumulating.  You wonder just what kind of creature they're getting ready to feed.\n");
@@ -2806,7 +2806,7 @@ public class Pregnancy extends NPCAwareContent {
         //IF INCUBATION IS ANAL
         if(player.buttPregnancyIncubation > 1) {
             if (player.buttPregnancyType == PregnancyStore.PREGNANCY_FROG_GIRL) {
-                if(player.buttPregnancyIncubation == 8) {
+                if(player.buttPregnancyIncubation == sceneHunter.adjustPregEventTimer(8, player.buttPregnancyType)) {
                     //Egg Maturing
                     EngineCore.outputText("\nYour gut churns, and with a squelching noise, a torrent of transparent slime gushes from your ass.  You immediately fall to your knees, landing wetly amidst the slime.  The world around briefly flashes with unbelievable colors, and you hear someone giggling.\n\nAfter a moment, you realize that it’s you.");
                     //pussy:
@@ -2825,33 +2825,33 @@ public class Pregnancy extends NPCAwareContent {
             //Pregnancy 4 Satyrs
             if (player.buttPregnancyType == PregnancyStore.PREGNANCY_SATYR) {
                 //Stage 1:
-                if(player.buttPregnancyIncubation == 150) {
+                if(player.buttPregnancyIncubation == sceneHunter.adjustPregEventTimer(150, player.buttPregnancyType)) {
                     EngineCore.outputText("\n<b>You find that you're feeling quite sluggish these days; you just don't have as much energy as you used to.  You're also putting on weight.</b>\n");
                     displayedUpdate = true;
                 }
                 //Stage 2:
-                if(player.buttPregnancyIncubation == 125) {
+                if(player.buttPregnancyIncubation == sceneHunter.adjustPregEventTimer(125, player.buttPregnancyType)) {
                     EngineCore.outputText("\n<b>Your belly is getting bigger and bigger.  Maybe your recent urges are to blame for this development?</b>\n");
                     displayedUpdate = true;
                 }
                 //Stage 3:
-                if(player.buttPregnancyIncubation == 100) {
+                if(player.buttPregnancyIncubation == sceneHunter.adjustPregEventTimer(100, player.buttPregnancyType)) {
                     EngineCore.outputText("\n<b>You can feel the strangest fluttering sensations in your distended belly; it must be a pregnancy.  You should eat more and drink plenty of wine so your baby can grow properly.  Wait, wine...?</b>\n");
                     displayedUpdate = true;
                 }
                 //Stage 4:
-                if(player.buttPregnancyIncubation == 75) {
+                if(player.buttPregnancyIncubation == sceneHunter.adjustPregEventTimer(75, player.buttPregnancyType)) {
                     EngineCore.outputText("\n<b>Sometimes you feel a bump in your pregnant belly.  You wonder if it's your baby complaining about your moving about.</b>\n");
                     displayedUpdate = true;
                 }
                 //Stage 5:
-                if(player.buttPregnancyIncubation == 50) {
+                if(player.buttPregnancyIncubation == sceneHunter.adjustPregEventTimer(50, player.buttPregnancyType)) {
                     EngineCore.outputText("\n<b>With your bloating gut, you are loathe to exert yourself in any meaningful manner; you feel horny and hungry all the time...</b>\n");
                     displayedUpdate = true;
                     //temp min lust up +5
                 }
                 //Stage 6:
-                if(player.buttPregnancyIncubation == 30) {
+                if(player.buttPregnancyIncubation == sceneHunter.adjustPregEventTimer(30, player.buttPregnancyType)) {
                     EngineCore.outputText("\n<b>The baby you're carrying constantly kicks your belly in demand for food and wine, and you feel sluggish and horny.  You can't wait to birth this little one so you can finally rest for a while.</b>\n");
                     displayedUpdate = true;
                     //temp min lust up addl +5
@@ -2859,20 +2859,20 @@ public class Pregnancy extends NPCAwareContent {
             }
             //DRIDAH BUTT Pregnancy!
             if (player.buttPregnancyType == PregnancyStore.PREGNANCY_DRIDER_EGGS) {
-                if(player.buttPregnancyIncubation == 199) {
+                if(player.buttPregnancyIncubation == sceneHunter.adjustPregEventTimer(199, player.buttPregnancyType)) {
                     EngineCore.outputText("\n<b>After your session with the drider, you feel so nice and... full.  There is no outward change on your body, aside from the egg-packed bulge of your belly, but your [asshole] tingles slightly and leaks green goop from time to time. Hopefully it's nothing to be alarmed about.</b>\n");
                     displayedUpdate = true;
                 }
-                if(player.buttPregnancyIncubation == 180) {
+                if(player.buttPregnancyIncubation == sceneHunter.adjustPregEventTimer(180, player.buttPregnancyType)) {
                     EngineCore.outputText("\n<b>A hot flush works its way through you, and visions of aroused driders quickly come to dominate your thoughts.  You start playing with a nipple while you lose yourself in the fantasy, imagining being tied up in webs and packed completely full of eggs, stuffing your belly completely with burgeoning spheres of love.  You shake free of the fantasy and notice your hands rubbing over your slightly bloated belly.  Perhaps it wouldn't be so bad?</b>\n");
                     player.dynStats("lib", 1, "sen", 1, "lus", 20);
                     displayedUpdate = true;
                 }
-                if(player.buttPregnancyIncubation == 120) {
+                if(player.buttPregnancyIncubation == sceneHunter.adjustPregEventTimer(120, player.buttPregnancyType)) {
                     EngineCore.outputText("\n<b>Your belly is bulging from the size of the eggs growing inside you and gurgling just about any time you walk.  Green goo runs down your [legs] frequently, drooling out of your pregnant asshole.</b>\n");
                     displayedUpdate = true;
                 }
-                if(player.buttPregnancyIncubation == 72) {
+                if(player.buttPregnancyIncubation == sceneHunter.adjustPregEventTimer(72, player.buttPregnancyType)) {
                     EngineCore.outputText("\n<b>The huge size of your pregnant belly constantly impedes your movement, but the constant squirming and shaking of your unborn offspring makes you pretty sure you won't have to carry them much longer.");
                     EngineCore.outputText("</b>\n");
                     displayedUpdate = true;
@@ -2880,11 +2880,11 @@ public class Pregnancy extends NPCAwareContent {
             }
             //Bee Egg's in butt pregnancy
             if (player.buttPregnancyType == PregnancyStore.PREGNANCY_BEE_EGGS) {
-                if(player.buttPregnancyIncubation == 36) {
+                if(player.buttPregnancyIncubation == sceneHunter.adjustPregEventTimer(36, player.buttPregnancyType)) {
                     EngineCore.outputText("<b>\nYou feel bloated, your bowels shifting uncomfortably from time to time.</b>\n");
                     displayedUpdate = true;
                 }
-                if(player.buttPregnancyIncubation == 20) {
+                if(player.buttPregnancyIncubation == sceneHunter.adjustPregEventTimer(20, player.buttPregnancyType)) {
                     EngineCore.outputText("<b>\nA honey-scented fluid drips from your rectum.</b>  At first it worries you, but as the smell fills the air around you, you realize anything with such a beautiful scent must be good.  ");
                     if(player.cockTotal() > 0) EngineCore.outputText("The aroma seems to permeate your very being, slowly congregating in your ");
                     if(player.cockTotal() == 1) {
@@ -2903,7 +2903,7 @@ public class Pregnancy extends NPCAwareContent {
             }
             //Sand Tarps in butt pregnancy
             if (player.buttPregnancyType == PregnancyStore.PREGNANCY_SANDTRAP || player.buttPregnancyType == PregnancyStore.PREGNANCY_SANDTRAP_FERTILE) {
-                if(player.buttPregnancyIncubation == 36) {
+                if(player.buttPregnancyIncubation == sceneHunter.adjustPregEventTimer(36, player.buttPregnancyType)) {
                     //(Eggs take 2-3 days to lay)
                     EngineCore.outputText("<b>\nYour bowels make a strange gurgling noise and shift uneasily.  You feel ");
                     if(player.buttPregnancyType == PregnancyStore.PREGNANCY_SANDTRAP_FERTILE) EngineCore.outputText(" bloated and full; the sensation isn't entirely unpleasant.");
@@ -2914,7 +2914,7 @@ public class Pregnancy extends NPCAwareContent {
                     EngineCore.outputText("</b>\n");
                     displayedUpdate = true;
                 }
-                if(player.buttPregnancyIncubation == 20) {
+                if(player.buttPregnancyIncubation == sceneHunter.adjustPregEventTimer(20, player.buttPregnancyType)) {
                     //end eggpreg here if unfertilized
                     EngineCore.outputText("\nSomething oily drips from your sphincter, staining the ground.  You suppose you should feel worried about this, but the overriding emotion which simmers in your gut is one of sensual, yielding calm.  The pressure in your bowels which has been building over the last few days feels right somehow, and the fact that your back passage is dribbling lubricant makes you incredibly, perversely hot.  As you stand there and savor the wet, soothing sensation a fantasy pushes itself into your mind, one of being on your hands and knees and letting any number of beings use your ass, of being bred over and over by beautiful, irrepressible insect creatures.  With some effort you suppress these alien urges and carry on, trying to ignore the oil which occasionally beads out of your [asshole] and stains your [armor].\n");
                     player.dynStats("int", -.5, "lus", 500);
@@ -2923,25 +2923,25 @@ public class Pregnancy extends NPCAwareContent {
             }
             //Bunny TF buttpreggoz
             if (player.buttPregnancyType == PregnancyStore.PREGNANCY_BUNNY) {
-                if(player.buttPregnancyIncubation == 800) {
+                if(player.buttPregnancyIncubation == sceneHunter.adjustPregEventTimer(800, player.buttPregnancyType)) {
                     EngineCore.outputText("\nYour gut gurgles strangely.\n");
                     displayedUpdate = true;
                 }
-                if(player.buttPregnancyIncubation == 785) {
+                if(player.buttPregnancyIncubation == sceneHunter.adjustPregEventTimer(785, player.buttPregnancyType)) {
                     CoC.instance.mutations.neonPinkEgg(true,player);
                     EngineCore.outputText("\n");
                     displayedUpdate = true;
                 }
-                if(player.buttPregnancyIncubation == 776) {
+                if(player.buttPregnancyIncubation == sceneHunter.adjustPregEventTimer(776, player.buttPregnancyType)) {
                     EngineCore.outputText("\nYour gut feels full and bloated.\n");
                     displayedUpdate = true;
                 }
-                if(player.buttPregnancyIncubation == 765) {
+                if(player.buttPregnancyIncubation == sceneHunter.adjustPregEventTimer(765, player.buttPregnancyType)) {
                     CoC.instance.mutations.neonPinkEgg(true,player);
                     EngineCore.outputText("\n");
                     displayedUpdate = true;
                 }
-                if(player.buttPregnancyIncubation == 745) {
+                if(player.buttPregnancyIncubation == sceneHunter.adjustPregEventTimer(745, player.buttPregnancyType)) {
                     EngineCore.outputText("\n<b>After dealing with the discomfort and bodily changes for the past day or so, you finally get the feeling that the eggs in your ass have dissolved.</b>\n");
                     displayedUpdate = true;
                     player.buttKnockUpForce(); //Clear Butt Pregnancy
@@ -2949,7 +2949,7 @@ public class Pregnancy extends NPCAwareContent {
             }
         }
         //Give birf if its time... to ANAL EGGS
-        if (player.buttPregnancyIncubation == 1) {
+        if (player.buttPregnancyIncubation == sceneHunter.adjustPregEventTimer(1, player.buttPregnancyType)) {
             if (player.buttPregnancyType == PregnancyStore.PREGNANCY_FROG_GIRL) {
                 SceneLib.bog.frogGirlScene.birthFrogEggsAnal();
                 displayedUpdate = true;
@@ -3055,7 +3055,7 @@ public class Pregnancy extends NPCAwareContent {
                     SophieFollowerScene.HarpyKids += 1;
                     player.knockUpForce(0, 0, 1); //Clear Pregnancy
                 }
-                outputText("\nAs the dawn rises over mareth your egg begins shaking of its own volition. What you have been waiting for so long is finally happening. As your child kicks the egg cover open revealing her bird leg." +
+                outputText("\nAs the dawn rises over Mareth your egg begins shaking of its own volition. What you have been waiting for so long is finally happening. As your child kicks the egg cover open revealing her bird leg." +
                         "\n\nWith tender care you help remove the egg shards so that she can move out without hurting herself." +
                         " Harpies are no regular birds, it's the mother's duty to help her child leave the egg harmlessly seeing as the border could leave harmful cuts on the chick." +
                         " Satisfied that your daughter successfully got out of the egg you cradle her in your wings and keep her warm while her duvet dries up." +

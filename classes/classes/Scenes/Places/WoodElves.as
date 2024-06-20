@@ -440,7 +440,7 @@ public class WoodElves extends BaseContent implements SaveableState {
 			clearOutput();
 			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("You ask about the Grove." +
-					"\n\n\"<i>It’s been our home for years, of course,</i>\" says Elenwen. \"<i>Well truth be told its one of the few remaining if not the last wood elf community across mareth since our species is mostly extinct due to our ahem... reproduction issues.</i>\"" +
+					"\n\n\"<i>It’s been our home for years, of course,</i>\" says Elenwen. \"<i>Well truth be told its one of the few remaining if not the last wood elf community across Mareth since our species is mostly extinct due to our ahem... reproduction issues.</i>\"" +
 					"\n\nMerisiel adds, \"<i>It’s a beautiful place, even after the corruption, I think. Nature thrives here; the plants and animals are healthy and free, and we live mostly in peace, aside from catching an adventurer every so often to replenish our numbers.</i>\"\n\n" +
 					"Like they did with you, you add." +
 					"\n\nThe three girls look a little guilty for a minute and nod. Alyssa says \"<i>We really did love you though. I… I still love you, and I wish you would stay with us. It’s not so bad here, is it?</i>\"\n\n" +

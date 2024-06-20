@@ -136,7 +136,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				outputText(". Her ashen hair, partially concealed beneath her white hairband, perfectly completes her look, and is always carefully brushed after a full moon or other... accident, as formality demands.\n\n" +
 						"As a human, Luna’s body is average-sized, with modest but shapely C cup breasts and refreshingly normal proportions, after seeing so many distorted, oversexual forms in this world. Her thighs are modest, but plump up very pleasingly above her long white stockings when you manage to glimpse them under her dress. She wears a pair of tidy black shoes on her small feet; how she keeps them so perfectly shiny and unscuffed out here in the rocky campsite is a mystery. However, on the night of a full moon, she becomes a seven-foot tall wolf-morph with firm DD breasts, washboard abs, wide hips and a taut, shapely ass beneath her muscular waist, and thighs you're sure could crack walnuts. The paws at the ends of her muscular arms and legs are large and padded, with claws as big as a bear's, but her ears and tail are delightfully fuzzy. You're too polite, or perhaps afraid, to ask her to keep her stockings on during her transformation to see what her feet would look like bursting out of the ends of them, but you can and do imagine it.\n\n");
 			}
-			doNext(camp.returnToCampUseOneHour);
+			doNext(mainLunaMenu);
 		}
 
 		public function talkMenuLuna():void {

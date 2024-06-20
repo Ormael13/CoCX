@@ -1066,7 +1066,7 @@ public class Forgefather extends NPCAwareContent implements SaveableState	{
 						" in the water, you shudder with a chill as the crystal clear magical water begins to" +
 						" circulate in your " + player.skin.desc + ", your stony heart within going from greyish to white as holy" +
 						" power washes over and cleanses you of any impurity. You sigh in absolute relief, your mind" +
-						" clearer than it ever has been since you came to mareth as you fully embrace purity within" +
+						" clearer than it ever has been since you came to Mareth as you fully embrace purity within" +
 						" your being. Blue runes have also appeared on your body empowering your already mighty" +
 						"\n\n");
 				if (player.hasItem(consumables.P_PEARL)){

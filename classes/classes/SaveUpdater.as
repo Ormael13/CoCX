@@ -2112,7 +2112,7 @@ public class SaveUpdater extends NPCAwareContent {
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.033) {
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02358] = 0; //reclaiming soulforce flag
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00773] = 1; //reclaiming essy flag
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02973] = 1; //reclaiming no gore flag (wasn't used)
+				flags[kFLAGS.SCENEHUNTER_SHORT_PREG] = 1; //reclaiming no gore flag (wasn't used)
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.033;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.034) {
@@ -2633,7 +2633,12 @@ public class SaveUpdater extends NPCAwareContent {
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.49) {
 				if (player.racialScore(Races.DRACULA) >= 22 && !player.hasPerk(PerkLib.SoulDrinker)) player.createPerk(PerkLib.SoulDrinker, 0, 0, 0, 0);
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.49;
-			}/*
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.50) {
+				outputText("\n\nNew SH feature: ShortPreg for all preggo lovers. If you don't wanna wait for months for your character to give birth to another imp/goblin/mouse, just turn it on and everything will happen in up to 4 days. Yes, even Celess :P");
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.50;
+			}
+			/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.50) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.50;
 			}

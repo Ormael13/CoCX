@@ -615,6 +615,8 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Magical Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillMagicalMod()) + "%\n";
 		combatStats += "<b>Soulskill Cost:</b> " + Math.round(100 * combat.soulskillCost() * combat.soulskillcostmulti()) + "%\n";
 		combatStats += "\n";
+		combatStats += "<b>Tease Damage buff:</b> +" +  player.teaseDmgStat.value + "\n";
+		combatStats += "\n";
 		combatStats += "<b>Unarmed:</b> +" + combat.unarmedAttack() + "\n";
 		combatStats += "<b>Venom/Web:</b> " + Math.floor(player.tailVenom) + " / " + player.maxVenom() + "\n";
 		combatStats += "<b>Venom/Web Recharge:</b> +" + combat.venomCombatRecharge2() + " / turn, +" + Math.round(combat.venomCombatRecharge2() * 0.1) + " / 5 minutes\n";
