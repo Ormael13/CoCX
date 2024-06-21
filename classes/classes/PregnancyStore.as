@@ -213,7 +213,6 @@ public class PregnancyStore extends Object
 			if (_pregnancyTypeFlag == 0 || _pregnancyIncubationFlag == 0) return; //Check that these variables were provided by the containing class
 			if (newPregType != 0) newPregType = (CoC.instance.flags[_pregnancyTypeFlag] & PREG_NOTICE_MASK) + newPregType;
 				//If a pregnancy 'continues' an existing pregnancy then do not change the value for last noticed stage
-			if (CoC.instance.gameSettings.sceneHunter_inst.shortPreg)
 			CoC.instance.flags[_pregnancyTypeFlag] = newPregType;
 			CoC.instance.flags[_pregnancyIncubationFlag] = (newPregType == 0 ? 0 : newPregIncubation); //Won't allow incubation time without pregnancy type
 		}

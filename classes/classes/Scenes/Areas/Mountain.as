@@ -268,7 +268,7 @@ public class Mountain extends BaseContent
 				name: "mimic",
 				label : "Mimic",
 				kind : 'monster',
-				chance:0.25,
+				chance:0.1,
 				when: fn.ifLevelMin(3),
 				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
 			}, {
@@ -484,7 +484,7 @@ public class Mountain extends BaseContent
 				name: "mimic",
 				label : "Mimic",
 				kind : 'monster',
-				chance:0.25,
+				chance:0.1,
 				when: fn.ifLevelMin(3),
 				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
 			}, {
@@ -662,7 +662,7 @@ public class Mountain extends BaseContent
 				name: "mimic",
 				label : "Mimic",
 				kind : 'monster',
-				chance:0.25,
+				chance:0.1,
 				when: fn.ifLevelMin(3),
 				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
 			}, {
