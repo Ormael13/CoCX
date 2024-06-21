@@ -2639,8 +2639,8 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.50;
 			}
 			/*
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.50) {
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.50;
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.51) {
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.51;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.60) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.60;
