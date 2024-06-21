@@ -535,7 +535,7 @@ use namespace CoC;
 						when: fn.ifLevelMin(3),
 						// TODO @aimozg use area tags instead
 						call: curry(SceneLib.mimicScene.mimicTentacleStart, 3),
-						chance: 0.25
+						chance: 0.1
 					}, {
 						name  : "succubus",
 						label : "Ivory Succubus",
