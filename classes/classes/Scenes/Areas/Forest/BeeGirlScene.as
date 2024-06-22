@@ -472,8 +472,8 @@ public class BeeGirlScene extends BaseContent
 
 		private function beeEncounterWithExgartuan():void {
 			outputText(", bending into a smile as she sees you approach.  Standing, she welcomes you in, her wings giving a small buzz as her arms spread open for a welcoming embrace.\n\n");
+			outputText("Your [cock] wriggles free of your [armor], as you keep walking forward.  A bodiless voice yells, \"<i>Honeypot, honeypot, ME LOOOOVE HONEYPOOOOOT!</i>\"\n\n");
 			if (rand(2) == 0) {
-				outputText("Your [cock] wriggles free of your [armor], as you keep walking forward.  A bodiless voice yells, \"<i>Honeypot, honeypot, ME LOOOOVE HONEYPOOOOOT!</i>\"\n\n");
 				outputText("The bee-girl's eyes widen at the sight, shocked by your over-endowed form being dragged towards her as if there were a magnet in your [cock].  She presses herself against the flower's petals, terrified and afraid to put up any meaningful resistance.  The nagging voice pipes up, \"<i>So are we gonna rape her or what, [name]?  I need some honeyyy!</i>\"\n\n");
 				outputText("She seems too surprised to resist.  Will you go along with Exgartuan and rape her?");
                 doYesNo(SceneLib.exgartuan.exgartuanBeeRape, explorer.done);

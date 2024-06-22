@@ -2029,9 +2029,9 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.fertility = saveFile.data.fertility;
 
 		//Preggo stuff
-		player.knockUpForce(saveFile.data.pregnancyType, saveFile.data.pregnancyIncubation);
-		player.knockUpForce(saveFile.data.pregnancy2Type, saveFile.data.pregnancy2Incubation, 1);
-		player.buttKnockUpForce(saveFile.data.buttPregnancyType, saveFile.data.buttPregnancyIncubation);
+		player.knockUpForce(saveFile.data.pregnancyType, saveFile.data.pregnancyIncubation, 0,  1);
+		player.knockUpForce(saveFile.data.pregnancy2Type, saveFile.data.pregnancy2Incubation, 1, 1);
+		player.buttKnockUpForce(saveFile.data.buttPregnancyType, saveFile.data.buttPregnancyIncubation, 1);
 
 		var hasViridianCockSock:Boolean = false;
 

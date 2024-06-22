@@ -577,12 +577,13 @@ public class SceneHunter extends BaseContent {
 
     // returns shortened value if the flag is enabled, unchanged otherwise
     public function shortPregTimer(oldTimer:Number):int {
-        if (!shortPreg || oldTimer < 24) return oldTimer;
+        if (!shortPreg || oldTimer < 2) return oldTimer;
         var num:Number;
         if      (oldTimer <= 96 ) num =       oldTimer        / 8;
         else if (oldTimer <= 240) num = 12 + (oldTimer - 96)  / 24;
         else if (oldTimer <= 480) num = 18 + (oldTimer - 240) / 40;
         else                      num = 24 + (oldTimer - 480) / 70;
+        if (num < 1) num = 1; // avoid issues
         return Math.round(num);
     }
 
@@ -597,10 +598,12 @@ public class SceneHunter extends BaseContent {
     }
 
     public function adjustPregEventTimer(oldTimer:Number, pregType:int):int {
-        if (!shortPreg) return oldTimer;
+        if (!shortPreg || oldTimer < 2) return oldTimer;
         var oldIncub:int = PregnancyStore.getIncubation(pregType);
         if (oldIncub < 0) return shortPregTimer(oldTimer); // can't find => at least fix it to the new scale
-        else return Math.round(oldTimer/oldIncub * shortPregTimer(oldIncub)); // found => linear
+        var newTimer:Number = Math.round(oldTimer/oldIncub * shortPregTimer(oldIncub));
+        if (newTimer <= 0) return 1;
+        return newTimer;
     }
 
     //--------------------------------------------------------------------------------------------------
