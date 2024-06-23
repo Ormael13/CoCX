@@ -397,6 +397,24 @@ public class UniqueSexScenes extends BaseContent
 			return (!monster.hasPerk(PerkLib.Enemy300Type) && !monster.hasPerk(PerkLib.EnemyConstructType) && !monster.hasPerk(PerkLib.EnemyElementalType) && !monster.hasPerk(PerkLib.EnemyFleshConstructType) && !monster.hasPerk(PerkLib.EnemyGhostType) && !monster.hasPerk(PerkLib.EnemyGooType) &&
 			!monster.hasPerk(PerkLib.EnemyLargeGroupType) && !monster.hasPerk(PerkLib.EnemyPlantType) && !monster.hasPerk(PerkLib.EnemyTrueAngel) && !monster.hasPerk(PerkLib.EnemyTrueDemon) && !monster.hasPerk(PerkLib.EnemyUndeadType) && !monster.hasPerk(PerkLib.UniqueNPC));
 		}
+        private function USSTrueDemonSuccubusFeast():Array{
+            var btnSet:Array = ["Succubus Feast"];
+            if (player.hasVagina() && monster.hasCock() && player.isRace(Races.DEMON, 1, false) && !monster.hasPerk(PerkLib.UniqueNPC) && player.hasPerk(PerkLib.DemonEnergyThirst)) btnSet.push(trueDemonSuccubusFeast, "");
+            else {
+				if (!AnubiMummyCurseNotWrongEnemyType()) btnSet.push(false, "Req. enemy to be male with soul. (No constructs/elementals)");
+				else btnSet.push(false, "You need to be a female true demon in order to even use this scene.");
+			}
+            return btnSet;
+        }
+        private function USSTrueDemonIncubusFeast():Array{
+            var btnSet:Array = ["Incubus Feast"];
+            if (player.hasCock() && monster.hasVagina() && (player.isRace(Races.DEMON, 1, false) || player.isRace(Races.IMP, 3, false)) && !monster.hasPerk(PerkLib.UniqueNPC) && player.hasPerk(PerkLib.DemonEnergyThirst)) btnSet.push(trueDemonIncubusFeast, "");
+            else {
+				if (!AnubiMummyCurseNotWrongEnemyType()) btnSet.push(false, "Req. enemy to be female with soul. (No constructs/elementals)");
+				else btnSet.push(false, "You need to be a male true demon in order to even use this scene.");
+			}
+            return btnSet;
+        }
 
 		public function RaijuRapeSupercharged():void {
 			clearOutput();
@@ -864,6 +882,34 @@ public class UniqueSexScenes extends BaseContent
 			if (player.hasCock()) player.sexReward("no", "Dick");
 			else player.sexReward("no","Vaginal");
 			cleanupAfterCombat();
+		}
+
+		public function trueDemonSuccubusFeast():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+			menu();
+			addButton(1, "Cum", trueDemonSuccubusFeastCum);
+			addButton(3, "Nope", trueDemonSuccubusFeastNope);
+		}
+		public function trueDemonSuccubusFeastCum():void {
+			
+		}
+		public function trueDemonSuccubusFeastNope():void {
+			
+		}
+
+		public function trueDemonIncubusFeast():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+			menu();
+			addButton(1, "Cum", trueDemonIncubusFeastCum);
+			addButton(3, "Nope", trueDemonIncubusFeastNope);
+		}
+		public function trueDemonIncubusFeastCum():void {
+			
+		}
+		public function trueDemonIncubusFeastNope():void {
+			
 		}
 }
 }

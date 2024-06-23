@@ -26,7 +26,7 @@ public final class HeadJewelryLib extends ItemConstants
 		public static const MODIFIER_LUST_R:int = 			HEADEFF_LUST_R;
 		public static const MODIFIER_PHYS_R:int = 			HEADEFF_PHYS_R;
 		
-		public static const DEFAULT_VALUE:Number = 6;//base cost 200 gems, each effect increase cost by 2x
+		public static const DEFAULT_VALUE:Number = 6;//base cost 100 gems, each effect increase cost by 2x
 		
 		public static const NOTHING:Nothing = new Nothing();
 		
@@ -66,7 +66,8 @@ public final class HeadJewelryLib extends ItemConstants
 		public const CROWWIS:HeadJewelry = new HeadJewelry("CrowWis", "CrownOfWisdom", "Crown of Wisdom", "a Crown of Wisdom", 0, 0, 3200, "A simple crown to boost Wisdom.",HJT_CROWN).withBuffs({"wis.mult":+0.20}) as HeadJewelry;
 		public const EZEKIELC:HeadJewelry = new HeadJewelry("EzekielC", "EzekielCrown", "Ezekiel's Crown", "an Ezekiel's Crown", 0, 0, 400, "A crown rumored to be blessed by the Ezekiel himself. Is that real one or just another fake crown merchant sold you? (-4 to internal chimerical disposition)",HJT_CROWN);
 		public const JIANGCT:HeadJewelry = new HeadJewelry("JiangCT", "JiangshiCurseTag", "Jiangshi Curse Tag", "a Jiangshi Curse Tag", 0, 0, 400, "This item controls and alter your bodily function.", HJT_HELMET);
-		public const SKULLCR:HeadJewelry = new HeadJewelry("SkullsCr", "SkullsCrown", "Skulls Crown", "a Skull Crown", 0, 0, 400, "A crown made of skulls with strong aura of death surrounding it. Rumored to be blessed by the god of death have amazing effect for any undead being that would wear it. (+4%/-4% HP regeneration (undead / others))",HJT_CROWN);
+		public const SKULLCR:HeadJewelry = new HeadJewelry("SkullsCr", "SkullsCrown", "Skulls Crown", "a Skull Crown", 0, 0, 400, "A crown made of skulls with strong aura of death surrounding it. Rumored to be blessed by the god of death have amazing effect for any undead being that would wear it. (+4%/-4% HP regeneration (undead / others))", HJT_CROWN);
+		public const GHORNAM:GoldenHornOrnament = new GoldenHornOrnament();
 		
 		public function HeadJewelryLib()
 		{

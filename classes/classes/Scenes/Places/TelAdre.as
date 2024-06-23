@@ -1125,6 +1125,7 @@ public function kaibaShopMainMenu2():void {
 	menu();
 	if (flags[kFLAGS.KAIBA_SHELFS] == 0) {
 		if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) {
+			addButtonDisabled(2, "G.H.Ornament", "You already bought item from Kaiba today.");
 			addButtonDisabled(3, "R.DeadeyeAim", "You already bought item from Kaiba today.");
 			addButtonDisabled(4, "R.Ambidexty", "You already bought item from Kaiba today.");
 			addButtonDisabled(5, "E.R.Armor", "You already bought item from Kaiba today.");
@@ -1134,6 +1135,7 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(9, "C.G Hat", "You already bought item from Kaiba today.");
 		}
 		else {
+			addButton(2, "G.H.Ornament", buyItem, headjewelries.GHORNAM).hint("Golden horn ornament - +25% to tease / black magic damage while worn on demon horns.");
 			addButton(3, "R.DeadeyeAim", buyItem, jewelries.RINGDEA).hint("Ring of deadeye aim - Removes ranged accuracy penalty when flying, and increases range accuracy by 20%.");
 			addButton(4, "R.Ambidexty", buyItem, jewelries.RNGAMBI).hint("Ring of Ambidexterity - Removes melee accuracy penalty when flying, and increases melee accuracy by 15%.");
 			addButton(5, "E.R.Armor", buyItem, armors.ERA).hint("Elven Ranger Armor - +50% to Bow and spear damage, Agile, Revealing, Slutty seduction +10.");

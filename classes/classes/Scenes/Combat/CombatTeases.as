@@ -1,5 +1,6 @@
 package classes.Scenes.Combat {
 import classes.*;
+import classes.BodyParts.Horns;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.*;
@@ -51,6 +52,7 @@ public class CombatTeases extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.SuperSensual)) damagemultiplier += 0.50;
 		if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
 		if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
+		if (player.headJewelry == headjewelries.GHORNAM && player.horns.type == Horns.DEMON) damagemultiplier += 0.25;
 		if (player.armor == armors.ELFDRES && player.isElf()) damagemultiplier += 1;
 		if (player.armor == armors.FMDRESS && player.isWoodElf()) damagemultiplier += 1;
 		if (player.hasStatusEffect(StatusEffects.TeasePotion)) damagemultiplier += 0.05;

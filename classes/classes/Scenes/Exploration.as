@@ -803,19 +803,19 @@ public class Exploration extends BaseContent implements SaveableState
 				else SceneLib.impScene.impPackEncounter2();
 			}
 		}
-		private function angelEncounterLow():void {
+		private function angeloidEncounterLow():void {
 			clearOutput();
 			outputText("A low-ranked angeloid wings out of the sky and attacks!");
 			player.createStatusEffect(StatusEffects.AngelsChooser, 1, 0, 0, 0);
 			startCombat(new Angeloid());
 		}
-		private function angelEncounterMid():void {
+		private function angeloidEncounterMid():void {
 			clearOutput();
 			outputText("A mid-ranked angeloid wings out of the sky and attacks!");
 			player.createStatusEffect(StatusEffects.AngelsChooser, 2, 0, 0, 0);
 			startCombat(new Angeloid());
 		}
-		private function angelEncounterHigh():void {
+		private function angeloidEncounterHigh():void {
 			clearOutput();
 			outputText("A high-ranked angeloid wings out of the sky and attacks!");
 			player.createStatusEffect(StatusEffects.AngelsChooser, 3, 0, 0, 0);
@@ -919,19 +919,19 @@ public class Exploration extends BaseContent implements SaveableState
 						name: "angel1",
 						label: "Angeloid I",
 						kind: "monster",
-						call: angelEncounterLow
+						call: angeloidEncounterLow
 					}, {
 						name: "angel2",
 						label: "Angeloid II",
 						kind: "monster",
 						when: fn.ifLevelMin(6),
-						call: angelEncounterMid
+						call: angeloidEncounterMid
 					} , {
 						name: "angel3",
 						label: "Angeloid III",
 						kind: "monster",
 						when: fn.ifLevelMin(12),
-						call: angelEncounterHigh
+						call: angeloidEncounterHigh
 					}
 			).withCondition(angelicFraction);
 			
