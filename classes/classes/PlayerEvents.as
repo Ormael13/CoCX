@@ -780,7 +780,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				else player.addStatusValue(StatusEffects.Airweed, 1, -1);
 			}
-
+			if (player.hasKeyItem("Dimensional Pocket") <= 0 && player.hasPerk(PerkLib.Soulless)) {
+				if (player.hasKeyItem("Sky Poison Pearl") >= 0) {
+					outputText("\nWhen you became a demon, that damn item, the sky poison pearl or whatever it’s called, simply stopped working and expelled all of your stored items onto the ground! In annoyance at your storage space being dysfunctional you worked a minor enchantment you now call the Dimensional Pocket. This will serve as your method of storage now.");
+					player.removeKeyItem("Sky Poison Pearl");
+				}
+				else outputText("\nIt downed unto you that you have an item storage issue. Just how the heck could a demon as powerful as you ever have such a thing as a storage issue! To remedy that you worked a minor enchantment you now call the Dimensional Pocket. This will serve as your method of storage now. Better yet whatever item you put inside are safe from the passage of time!");
+				player.createKeyItem("Dimensional Pocket", 0, 0, 0, 0);
+				needNext = true;
+			}
 			if (player.hasStatusEffect(StatusEffects.LustStickApplied)) { //Lust stick!
 				player.addStatusValue(StatusEffects.LustStickApplied, 1, -1); //Decrement!
 				if (player.statusEffectv1(StatusEffects.LustStickApplied) <= 0) {

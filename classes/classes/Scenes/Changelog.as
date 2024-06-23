@@ -237,6 +237,11 @@ public class Changelog extends BaseContent
 			outputText("-Metamoph would use eityher Mana (PC with Soulless  perk) or SF (all other PC's). (Jtecx/Svalkash)\n");
 			outputText("-New SH feature for preggo lovers - now you can speed up all game pregnancies without drinking tons of Ovi Elixirs! Event timer scaling included. (Svalkash)\n");
 			outputText("-Fixed repeating Exgartuan sleep-talking. Typos: 'mareth'->'Mareth'. Mimic made less annoying. (Svalkash)\n");
+			outputText("-PC with Soulless perk would loose access to Sky Poison Pearl and will soon enough make replacment storage item called Dimensional Pocket.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -256,11 +261,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New mutation perk: Human Parathyroid Glands (Final Form). Req. Human Parathyroid Glands (Evolved) and lvl 90+. Effects: Increases self healing by 40 * level HP in combat and twice more out of combat. 8 * level HP Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk

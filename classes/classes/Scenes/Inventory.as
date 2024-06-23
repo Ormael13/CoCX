@@ -229,12 +229,14 @@ use namespace CoC;
             if (!CoC.instance.inCombat) {
                 addButton(10, "Unequip/Misc", manageEquipmentmiscitemsMenu);
 				if (player.hasKeyItem("Bag of Cosmos") >= 0) {
-					if (player.hasPerk(PerkLib.Soulless)) addButtonDisabled(11, "Bag of Cosmos", "Without soul nor SF you can'y open Bag of Cosmos.");
+					if (player.hasPerk(PerkLib.Soulless)) addButtonDisabled(11, "Bag of Cosmos", "Without soul nor SF you can't open Bag of Cosmos.");
 					else addButton(11, "Bag of Cosmos", BagOfCosmosMenuv2);
 				}
 				if (player.hasKeyItem("Sky Poison Pearl") >= 0) {
-					if (player.hasPerk(PerkLib.Soulless)) addButtonDisabled(12, "Sky P. Pearl", "Without soul nor SF you can't open Sky Poison Pearl.");
-					else addButton(12, "Sky P. Pearl", SkyPoisonPearlMenuv2);
+					addButton(12, "Sky P. Pearl", SkyPoisonPearlMenuv2);
+				}
+				if (player.hasKeyItem("Dimensional Pocket") >= 0) {
+					addButton(12, "Dimensional P.", DimensionalPocketMenuv2);
 				}
 			}
 			//Button for alchemical items during combat
@@ -410,6 +412,10 @@ use namespace CoC;
 
 		public function SkyPoisonPearlMenuv2():void{
 			transferMenu(pearlStorage, 0, pearlStorageSize(), inventoryMenu, "S. P. Pearl");
+		}
+
+		public function DimensionalPocketMenuv2():void{
+			transferMenu(pearlStorage, 0, pearlStorageSize(), inventoryMenu, "DimensionalP.");
 		}
 
 		public function transferMenu(
