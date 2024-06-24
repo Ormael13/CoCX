@@ -236,7 +236,7 @@ public class Changelog extends BaseContent
 			outputText("-When studing Combat Manual in cabin can choose which stat it would rise.\n");
 			outputText("-Metamoph would use eityher Mana (PC with Soulless  perk) or SF (all other PC's). (Jtecx/Svalkash)\n");
 			outputText("-New SH feature for preggo lovers - now you can speed up all game pregnancies without drinking tons of Ovi Elixirs! Event timer scaling included. (Svalkash)\n");
-			outputText("-Fixed repeating Exgartuan sleep-talking. Typos: 'mareth'->'Mareth'. Mimic made less annoying. (Svalkash)\n");
+			outputText("-Fixed repeating Exgartuan sleep-talking. Typos: 'mareth'->'Mareth'. Mimic made less annoying. SH: Ivory Succubus. (Svalkash)\n");
 			outputText("-PC with Soulless perk would loose access to Sky Poison Pearl and will soon enough make replacment storage item called Dimensional Pocket.\n");
 			outputText("-One of Prestige Job: Necromancer req. was modified. Instead of req. Daoist: Apprentice Stage can also gain this job by having perks Soulless and Job: Sorcerer.\n");
 			outputText("-New head jewelery (by Liadri): Golden horn ornament - buyable at Kaiba shop in Tel'Adre or dropped from true demon enemies. Cost 400 gems. +25% to tease/black magic damage while worn. (req. to have demon horns)\n");
@@ -262,17 +262,17 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//New mutation perk: Human Parathyroid Glands (Final Form). Req. Human Parathyroid Glands (Evolved) and lvl 90+. Effects: Increases self healing by 40 * level HP in combat and twice more out of combat. 8 * level HP Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.
+			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
-			outputText("-\n");
-			outputText("-\n");//New mutation perk: Human Parathyroid Glands (Final Form). Req. Human Parathyroid Glands (Evolved) and lvl 90+. Effects: Increases self healing by 40 * level HP in combat and twice more out of combat. 8 * level HP Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
