@@ -424,6 +424,7 @@ public class SceneHunter extends BaseContent {
         //init when enabled
         if (lossSelect) {
             outputText(msg);
+            outputText("\n\n");
             menu();
         }
         //select choices or add buttons
