@@ -68,25 +68,25 @@ public class IvorySuccubusScene extends BaseContent
     public function loseToSuccubus(fromBattle:Boolean = true):void {
         clearOutput();
         if (fromBattle) outputText("Too badly " + (player.HP <= 0 ? "beaten" : "aroused") + " by the succubus, you give in and let the succubus do whatever she wants to you.\n\n");
-        if (player.hasCock()) {
+        dynStats("cor", 3);
+        player.addCurse("lib", 2, 2);
+        sceneHunter.selectGender(dickF, vagF);
+
+        function dickF():void {
             outputText("She saunters toward you, swaying her hips the whole way. When she gets within your reach she kisses you instantly, shoving her tongue into your mouth as far as it can go. At the same time, she wraps a leg around you and hooks it behind you, grabbing your stiff cock and guiding it to her nethers.");
             outputText("\n\nHer insides and warm and wet already, squeezing around you and twisting eagerly. The succubus moans into your mouth as she caresses your body with her hands. She expertly lowers both of you from standing to the ground, with her staying on top of you. She switches to bouncing on your cock, taking it as far as she can. Her powerful legs bounce at a pace few human women could match. She coaxes you to shoot inside her quite easily, and the feeling of this ejaculation is so powerful you feel like you could die of pleasure right there. The succubus moans erotically as she accepts your seed inside her, and leans over to kiss you on the forehead as if to wish you good night.");
             outputText("\n\nStrangely, the kiss is the last thing you remember, and you awaken on the cold ground, feeling completely exhausted. It feels like she took part of your soul with her...but it felt so good.");
             player.sexReward("vaginalFluids", "Dick");
+            explorer.stopExploring();
+            cleanupAfterCombat();
         }
-        else {
+        function vagF():void {
             outputText("She saunters toward you, swaying her hips the whole way. When she gets within your reach, she caresses your cheeks and pulls your face in close to hers, sliding her tongue deep into your mouth. You " + (player.lib + player.cor < 80 ? "reluctantly" : "eagerly") + " engage in the kiss, dueling her tongue with your own, trying to pin it down. She expertly laps your tongue and crushes it against the floor of your mouth. She swings one leg up to your head to scissor against your pubic region, and grinds against it hard despite there being nothing there. She flits her gaze down, then back up to yours, her eyes filled with lust regardless. She makes out with you longer, going on to lick all around your lips. All the way she pushes against you hard enough to let you feel her pubic bone crushing against yours, along with her considerable wetness.");
             outputText("\n\nWhen it's finally over she leaves you wordlessly. Suddenly on the ground there's a bottle that wasn't there before. You pick it up and examine it. It's a viscous white fluid labeled '<i>Incubus Draft</i>'.");
             player.dynStats("lus", 50, "scale", false);
+            explorer.stopExploring();
             inventory.takeItem(consumables.INCUBID, cleanupAfterCombat); //it's Incubus Draft
         }
-        dynStats("cor", 3);
-        player.addCurse("lib", 2, 2);
-        explorer.stopExploring();
-        if (fromBattle)
-            cleanupAfterCombat();
-        else
-            doNext(camp.returnToCampUseTwoHours);
     }
 
     public function tryToFlee():void {
