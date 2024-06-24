@@ -106,7 +106,7 @@ private function plantsForMe():void {
 		outputText(".  You moan, and this only seems to encourage her, as she takes your nipples between thumb and forefinger, twisting and turning them this way and that.  She giggles at how your moans seem to fluctuate by coincidence, continuing to tease them");
 		if(player.bRows() > 1) outputText(", steadily working over the multitude of fleshy mounds on your body");
 		outputText(".");
-		if(player.hasFuckableNipples()) outputText("  Her fingers play with your nipples and press gently to tease at them.  She seems quite surprised as they sink in with minimal effort.  A grin spreads over her face as she begins to steadily thrust those digits in and out of your nipples, fingers swirling about the interiors all the while.");
+		if(player.hasFuckableNipples()) outputText("  Her fingers play with your nipples and press them gently.  She seems quite surprised as they sink in with minimal effort.  A grin spreads over her face as she begins to steadily thrust those digits in and out of your nipples, fingers swirling about the interiors all the while.");
 		outputText("  \"<i>You certainly have a lovely pair, but they could always be better, don't you think?</i>\"");
 		//[Yes] [No]
 		menu();

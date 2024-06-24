@@ -135,6 +135,7 @@ public function dickPresent():Boolean {
     return player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv1(StatusEffects.Exgartuan) & 1;
 }
 public function boobsPresent():Boolean {
+	var num:int = player.statusEffectv1(StatusEffects.Exgartuan);
     return player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv1(StatusEffects.Exgartuan) & 2;
 }
 public function anyPresent():Boolean {
@@ -157,6 +158,7 @@ public function infestDick():void {
 }
 public function infestBoobs():void {
     if (!player.hasStatusEffect(StatusEffects.Exgartuan)) player.createStatusEffect(StatusEffects.Exgartuan, 2, 0, 0, 0);
+	else player.addStatusValue(StatusEffects.Exgartuan, 1, 2);
 }
 
 public function leaveDick():void {

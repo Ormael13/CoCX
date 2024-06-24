@@ -23,9 +23,9 @@ public class Pregnancy extends NPCAwareContent {
         if(player.pregnancyType == 0 && player.pregnancy2Type == 0 && player.buttPregnancyType == 0) {
             return false;
         }
-        if (player.pregnancyIncubation < 2) player.knockUpForce(player.pregnancyType, 1);
-        if (player.pregnancy2Incubation < 2) player.knockUpForce(player.pregnancy2Type, 1, 1);
-        if (player.buttPregnancyIncubation < 2) player.buttKnockUpForce(player.buttPregnancyType, 1);
+        if (player.pregnancyIncubation < 2) player.knockUpForce(player.pregnancyType, 1, 0, 1);
+        if (player.pregnancy2Incubation < 2) player.knockUpForce(player.pregnancy2Type, 1, 1, 1);
+        if (player.buttPregnancyIncubation < 2) player.buttKnockUpForce(player.buttPregnancyType, 1, 1);
         //Cancel Heat
         if(player.inHeat) {
             EngineCore.outputText("\nYou calm down a bit and realize you no longer fantasize about getting fucked constantly.  It seems your heat has ended.\n");
