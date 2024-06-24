@@ -10,6 +10,7 @@ import classes.PerkLib;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
+import classes.internals.WeightedDrop;
 
 import coc.view.CoCButton;
 
@@ -48,6 +49,7 @@ import coc.view.CoCButton;
 			this.level = 70;
 			this.lustVuln = 0;
 			this.drop = NO_DROP;
+			drop = new WeightedDrop(consumables.LETH3TE, 1);
 			this.createPerk(PerkLib.ArchersStaminaI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);

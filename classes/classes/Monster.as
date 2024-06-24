@@ -3244,6 +3244,13 @@ import classes.Scenes.Combat.CombatAbilities;
 			if (!game.plotFight && rand(200) == 0 && !hasPerk(PerkLib.NoItemsGained) && player.level >= 7) return consumables.BROBREW;
 			if (!game.plotFight && rand(200) == 0 && !hasPerk(PerkLib.NoItemsGained) && player.level >= 7) return consumables.BIMBOLQ;
 			if (!game.plotFight && rand(1000) == 0 && !hasPerk(PerkLib.NoItemsGained) && player.level >= 7) return consumables.RAINDYE;
+			if (game.player.hasStatusEffect(StatusEffects.Lethicite)) {
+				if (game.player.statusEffectv1(StatusEffects.Lethicite) == 3) return consumables.LETH3TE;
+				else if (game.player.statusEffectv1(StatusEffects.Lethicite) == 2) return consumables.LETH2TE;
+				else if (game.player.statusEffectv1(StatusEffects.Lethicite) == 1) return consumables.LETH1TE;
+				else return consumables.LETHITE;
+				game.player.removeStatusEffect(StatusEffects.Lethicite);
+			}
 			//Chance of eggs if Easter!
 			if (!game.plotFight && rand(6) == 0 && !hasPerk(PerkLib.NoItemsGained) && SceneLib.holidays.isEaster()) {
 				return randomChoice(

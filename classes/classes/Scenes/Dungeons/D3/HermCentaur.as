@@ -7,6 +7,7 @@ import classes.CockTypesEnum;
 import classes.Monster;
 import classes.PerkLib;
 import classes.Scenes.SceneLib;
+import classes.internals.WeightedDrop;
 
 /**
 	 * ...
@@ -52,6 +53,7 @@ import classes.Scenes.SceneLib;
 			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.OverMaxHP, 71, 0, 0, 0);//v1 = enemy lvl
 			this.drop = NO_DROP;
+			drop = new WeightedDrop(consumables.LETH3TE, 1);
 			this.checkMonster();
 		}
 		
