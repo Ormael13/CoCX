@@ -187,7 +187,7 @@ public class StatPillCrafting extends AbstractPillCraftingContent {
 		craftingMenu();
 	}
 	private function selectResidue(residue:int):void {
-		if (furnaceResidue) crafting.addSubstance(furnaceResidue);
+		if (furnaceResidue) crafting.addResidue(furnaceResidue);
 		furnaceResidue = residue;
 		craftingMenu();
 	}

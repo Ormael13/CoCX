@@ -85,8 +85,8 @@ use namespace CoC;
 				}
 				else {
 					outputText("Chi Chi’s palms fill with a massive sphere of red energy which suddenly explodes in a devastating beam of concentrated soul force. You see the devastating torrent a mere fraction of a second before it hits you. Your defences are shattered, utterly unable to stop it as the energy overwhelms you. The blast barely leaves you intact.");
-					player.takePhysDamage(5000000);
-					player.takeMagicDamage(5000000);
+					player.takePhysDamage(500000000);
+					player.takeMagicDamage(500000000);
 				}
 			}
 		}

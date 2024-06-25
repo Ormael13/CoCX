@@ -402,7 +402,7 @@ public class UniqueSexScenes extends BaseContent
 		}
         private function USSTrueDemonSuccubusFeast():Array{
             var btnSet:Array = ["Succubus Feast"];
-            if (player.hasVagina() && monster.hasCock() && player.isRace(Races.DEMON, 1, false) && SuccubusIncubusFeastNotWrongEnemyType() && player.hasPerk(PerkLib.DemonEnergyThirst)) btnSet.push(trueDemonSuccubusFeast, "");
+            if (player.hasVagina() && player.vaginaType() == VaginaClass.DEMONIC && monster.hasCock() && SuccubusIncubusFeastNotWrongEnemyType()) btnSet.push(trueDemonSuccubusFeast, "");
             else {
 				if (!SuccubusIncubusFeastNotWrongEnemyType()) btnSet.push(false, "Req. enemy to be male with soul. (No constructs/elementals)");
 				else btnSet.push(false, "You need to be a female true demon in order to even use this scene.");
@@ -411,7 +411,7 @@ public class UniqueSexScenes extends BaseContent
         }
         private function USSTrueDemonIncubusFeast():Array{
             var btnSet:Array = ["Incubus Feast"];
-            if (player.hasCock() && monster.hasVagina() && (player.isRace(Races.DEMON, 1, false) || player.isRace(Races.IMP, 3, false)) && SuccubusIncubusFeastNotWrongEnemyType() && player.hasPerk(PerkLib.DemonEnergyThirst)) btnSet.push(trueDemonIncubusFeast, "");
+            if (player.hasCock() && player.demonCocks() > 0 && monster.hasVagina() && SuccubusIncubusFeastNotWrongEnemyType()) btnSet.push(trueDemonIncubusFeast, "");
             else {
 				if (!SuccubusIncubusFeastNotWrongEnemyType()) btnSet.push(false, "Req. enemy to be female with soul. (No constructs/elementals)");
 				else btnSet.push(false, "You need to be a male true demon in order to even use this scene.");
@@ -913,29 +913,22 @@ public class UniqueSexScenes extends BaseContent
 			outputText("\"<i>It’s time for your toy to shoot it all out… Every. Last. Drop… Just for you.</i>\"\n\n");
 			outputText("[monster He] begins roaring a gut wrenching orgasm as [monster his] cock finally is freed from your curse, cum rushing through [monster his] urethra and right into your thirsty cunt. You moan in rapture as the cum floods your walls, rushing past your cervix to fill your demonic womb, making you balloon up with the sheer volume of seed. Doesn't matter if you birth a litter of imps after this, the meal was worth it. You reach orgasm again several times from the consecutive powerful cum shot on your clit. ");
 			outputText("[monster He] hips has begun instinctively trusting into you as well in order to unload the cum faster, albeit it improves your own pleasure. As [monster he] finally runs out of cum  your semen pregnant belly begins to shrink as you drink up and absorb the food into your body, your skin gaining in luster, vitality and power from the healthy consumption of cum. You would be ready for a round two but the passed out body of your partner hints that it clearly won't be with [monster him].");
-			if (SuccubusIncubusFeastNotWrongEnemyTypeForLethicite()) {
-				outputText(" You stand up and collect the small purple shard of lethicite left at the now soulless body of your partner pocketing it up for later.");
-				if (monster.level < 25) player.createStatusEffect(StatusEffects.Lethicite, 0, 0, 0, 0);
-				else if (monster.level < 50) player.createStatusEffect(StatusEffects.Lethicite, 1, 0, 0, 0);
-				else if (monster.level < 75) player.createStatusEffect(StatusEffects.Lethicite, 2, 0, 0, 0);
-				else player.createStatusEffect(StatusEffects.Lethicite, 3, 0, 0, 0);
-			}
+			if (SuccubusIncubusFeastNotWrongEnemyTypeForLethicite() && player.hasPerk(PerkLib.Soulless)) outputText(" You stand up and collect the small purple shard of lethicite left at the now soulless body of your partner pocketing it up for later.");
 			outputText("\n\nSatisfied nonetheless and feeling great from the cum shot in your lower mouth you head back to camp.\n\n");
-			dynStats("str", 10);
-			player.trainStat("str",1,player.trainStatCap("str",100));
-			dynStats("tou", 10);
-			player.trainStat("tou",1,player.trainStatCap("tou",100));
-			dynStats("spe", 10);
-			player.trainStat("spe",1,player.trainStatCap("spe",100));
-			dynStats("lib", 10);
-			player.trainStat("lib",1,player.trainStatCap("lib",100));
 			player.sexReward("cum","Vaginal");
-			cleanupAfterCombat();
+			if (SuccubusIncubusFeastNotWrongEnemyTypeForLethicite() && player.hasPerk(PerkLib.Soulless)) {
+				if (monster.level < 25) inventory.takeItem(consumables.LETHITE, cleanupAfterCombat);
+				else if (monster.level < 50) inventory.takeItem(consumables.LETH1TE, cleanupAfterCombat);
+				else if (monster.level < 75) inventory.takeItem(consumables.LETH2TE, cleanupAfterCombat);
+				else inventory.takeItem(consumables.LETH3TE, cleanupAfterCombat);
+			}
+			else cleanupAfterCombat();
 		}
 		public function trueDemonSuccubusFeastNope():void {
 			outputText("You wave a finger from left to right in front of your opponent glazed eyes in negation.\n\n");
 			outputText("\"<i>Naaaah I'm not hungry enough and you don't deserve the bliss. I'll let it rest"+(monster.hasBalls()?" in your balls":"")+" for a few days still, If you're lucky some other demon will have mercy on you and release the seal. Who knows though, It might want to have fun first.</i>\"\n\n");
 			outputText("You lift up unplugging from the swollen cock and leave the still twitching body of -opponent name- on the ground behind you to the mercy of someone else as you head back to camp thoroughly satisfied.\n\n");
+			player.sexReward("no");
 			cleanupAfterCombat();
 		}
 		private function isntATentacleBeast():Boolean{
