@@ -7098,7 +7098,7 @@ use namespace CoC;
 					EngineCore.HPChange(((100 + (tou*2)) * mfFM), true);
 					EngineCore.ManaChange(((100 + (inte*2)) * mfFM));
 					EngineCore.changeFatigue(-((100 + (spe*2)) * mfFM));
-					outputText("You feel energised and empowered by the energy drained out of the fluid of your recent fuck. What a meal!");
+					outputText("You feel energised and empowered by the energy drained out of the fluid of your recent fuck. What a meal!\n\n");
 					addPerkValue(PerkLib.DemonEnergyThirst, 1, 1);
 				}
 				if (perkv1(IMutationsLib.FiendishMetabolismIM) >= 1) {

@@ -957,7 +957,7 @@ public class SceneHunter extends BaseContent {
             addButton(2, "AmilyRape-2", SceneLib.amilyScene.stalkingZeAmiliez2);
         if (flags[kFLAGS.AMILY_CORRUPTION] >= 3 && player.gender > 0)
             addButton(3, "AmilyRape-3", SceneLib.amilyScene.stalkingZeAmiliez3);
-        if (flags[kFLAGS.AMILY_CORRUPTION] >= 4 && player.gender > 0)
+        if (flags[kFLAGS.AMILY_FOLLOWER] == 2 && player.gender > 0)
             addButton(4, "AmilyRape-4", SceneLib.amilyScene.rapeCorruptAmily4Meeting);
         if (camp.vapulaSlave())
             addButton(5, "VapulaRape", SceneLib.owca.rapeZeVapula);

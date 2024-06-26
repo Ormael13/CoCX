@@ -6519,6 +6519,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				endEncounter();
 				return;
 			}
+			if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 			outputText("You enter the ruined village hoping to find your corrupted mouse cumbucket. It doesn't take long until you spot her; she's stroking her pussy and blowing a wood carved dildo, practicing like you told her to.\n\n");
 
 			outputText("As soon as she realizes you're there, she drops the dildo and rushes towards you; kneeling submissively in front of you, she nuzzles your crotch and asks, \"<i>[Master], did you come to feed me?</i>\"\n\n");
