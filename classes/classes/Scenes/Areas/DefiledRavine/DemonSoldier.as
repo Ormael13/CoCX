@@ -350,7 +350,7 @@ public class DemonSoldier extends Monster {
         this.randomDropParams = {
             rarity: DynamicItems.RARITY_CHANCES_LESSER
         };
-        this.drop = new WeightedDrop(consumables.LETHITE, 2).add(consumables.LETH1TE, 1);
+        this.drop = new WeightedDrop(consumables.LETH1TE, 2).add(consumables.LETH2TE, 1);
         if (this.demonGender == DEMON_GENDER_CUNTBOY || this.demonGender == DEMON_GENDER_MALE)
             (this.drop as WeightedDrop).add(consumables.INCUBID, 6).add(consumables.BROBREW, 2);
         if (this.demonGender == DEMON_GENDER_SHEMALE || this.demonGender == DEMON_GENDER_FEMALE)

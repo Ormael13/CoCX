@@ -8,6 +8,8 @@ import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Areas.Forest.TentacleBeast;
+import classes.Scenes.Areas.Forest.TentacleBeastRaging;
 import classes.Scenes.Areas.Mountain.HellHound;
 import classes.Scenes.Areas.Mountain.InfestedHellhound;
 import classes.Scenes.Areas.Mountain.Minotaur;
@@ -179,7 +181,8 @@ public class UniqueSexScenes extends BaseContent
 				USSTentRape(),
 				USSLiveDildo(),
 				USSJiangshiDrn(),
-				USSAnubiMummyCurse()];
+				USSAnubiMummyCurse(),
+				USSTrueDemonSuccubusFeast()];
 
 			var bd:ButtonDataList = new ButtonDataList();
 			//menuItems.push();
@@ -396,6 +399,27 @@ public class UniqueSexScenes extends BaseContent
 		private function AnubiMummyCurseNotWrongEnemyType():Boolean{
 			return (!monster.hasPerk(PerkLib.Enemy300Type) && !monster.hasPerk(PerkLib.EnemyConstructType) && !monster.hasPerk(PerkLib.EnemyElementalType) && !monster.hasPerk(PerkLib.EnemyFleshConstructType) && !monster.hasPerk(PerkLib.EnemyGhostType) && !monster.hasPerk(PerkLib.EnemyGooType) &&
 			!monster.hasPerk(PerkLib.EnemyLargeGroupType) && !monster.hasPerk(PerkLib.EnemyPlantType) && !monster.hasPerk(PerkLib.EnemyTrueAngel) && !monster.hasPerk(PerkLib.EnemyTrueDemon) && !monster.hasPerk(PerkLib.EnemyUndeadType) && !monster.hasPerk(PerkLib.UniqueNPC));
+		}
+        private function USSTrueDemonSuccubusFeast():Array{
+            var btnSet:Array = ["Succubus Feast"];
+            if (player.hasVagina() && player.vaginaType() == VaginaClass.DEMONIC && monster.hasCock() && SuccubusIncubusFeastNotWrongEnemyType()) btnSet.push(trueDemonSuccubusFeast, "");
+            else {
+				if (!SuccubusIncubusFeastNotWrongEnemyType()) btnSet.push(false, "Req. enemy to be male with soul. (No constructs/elementals)");
+				else btnSet.push(false, "You need to be a female true demon in order to even use this scene.");
+			}
+            return btnSet;
+        }
+        private function USSTrueDemonIncubusFeast():Array{
+            var btnSet:Array = ["Incubus Feast"];
+            if (player.hasCock() && player.demonCocks() > 0 && monster.hasVagina() && SuccubusIncubusFeastNotWrongEnemyType()) btnSet.push(trueDemonIncubusFeast, "");
+            else {
+				if (!SuccubusIncubusFeastNotWrongEnemyType()) btnSet.push(false, "Req. enemy to be female with soul. (No constructs/elementals)");
+				else btnSet.push(false, "You need to be a male true demon in order to even use this scene.");
+			}
+            return btnSet;
+        }
+		private function SuccubusIncubusFeastNotWrongEnemyType():Boolean{
+			return (!monster.hasPerk(PerkLib.Enemy300Type) && !monster.hasPerk(PerkLib.EnemyConstructType) && !monster.hasPerk(PerkLib.EnemyElementalType) && !monster.hasPerk(PerkLib.EnemyFleshConstructType) && !monster.hasPerk(PerkLib.EnemyGhostType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType));
 		}
 
 		public function RaijuRapeSupercharged():void {
@@ -864,6 +888,88 @@ public class UniqueSexScenes extends BaseContent
 			if (player.hasCock()) player.sexReward("no", "Dick");
 			else player.sexReward("no","Vaginal");
 			cleanupAfterCombat();
+		}
+
+		public function trueDemonSuccubusFeast():void {
+			clearOutput();
+			outputText("You lick your lips as you eye [themonster] " + monster.cockDescriptShort() + " with interest. You can already dream about how it will feel in your sinful pussy. First thing first, you grab your opponent by the chin and lift it so he can look straight into your eyes.\n\n");
+			outputText("\"<i>We are about to have a lot of fun, you and I. I'm positively starved… just as this little guy down here is starved for attention.</i>\"\n\n");
+			outputText("Nothing escaped your sharpened sense indeed as you caught a glance of your victim’s hardening member. You gently caress the length, your expert fingers tracing the veins up to the crown with deliberate slowness which causes his hardening cock to begin to throb impatiently. A " + monster.cockDescriptShort() + " like this one deserves to be teased. You take hold of [themonster] dick and begin to lick the tip using your fiendish tongue to coax pleasure out of your new toy. ");
+			outputText("You work up your tongue over the rod with a practiced ease, enticing out every moan that escapes the lips of your prey. Soon, you feel [monster his] orgasm coming and deny [monster him] just short of it in order to improve the quality of the final result. [monster He] begins trusting within your palm in an attempt to fuck [monster his] way to orgasm but you put your nail right on [monster his] urethra sealing it with unholy magic.\n\n");
+			outputText("\"<i>No no no you don't get to cum before I do. Tell me, how does it feel in there… already on the verge of exploding? It must be terrible… so close to climax yet denied the release… don't you worry pet you will blow better then you have ever blown before by the time I'm done. Until then, your pleasure and orgasm is mine to control.</i>\"\n\n");
+			outputText("This said, the cock alone won't do... Much like a fruit that has to ripen, you desire more, a sweeter climax that you must cultivate. You caress [monster his] balls ardently, working out the pattern of a cursed mark onto them. [monster He] groans with need as you infuse them directly with your fiendish magic, [monster his] orbs swelling outward, inflating with a growing pool of fresh, churning cum that gurgles softly inside, filled with over twice the virility from before. You, moan aroused beyond measure by the lewd and sadistic torture you have your pet endure, wetting your tight pussy with a splash of succubi juice. ");
+			outputText("[monster He] tries to shove you off, but once a succubus is in this position there's no escaping it. In order to pass the message that you won't be denied, you inflict [monster his] genital with just the right amount of torment to stop any further form of resistance. Satisfied with the result you lick your lips with barely contained hunger as you lend an ear to the slow but constant accumulation of cum within [themonster] now blighted gonads.\n\n");
+			outputText("Ready to move on, you spread your legs open and straddle [themonster] tortured cock, delighting in the plastered expression of bliss and mixed suffering on [monster his] face as you insert inches after inches of the tormented penis within the fiendish folds of your pussy. Fuuuuck yea! This is just the right size to fill your hungry walls with. Still more than anything else you're getting off from the poor chaps' torments.\n\n");
+			outputText("<i>You need them to scream for you… you live for their moans… more… it’s not enough… it’s never enough.</i>\n\n");
+			outputText("Having now hilted yourself entirely, you begin to grind yourself up and down [monster his] tool, savoring the precum occasionally shooting out of the tightly sealed cock. [monster He] eyes have rolled back in [monster his] skull already from the accumulating cum"+(monster.hasBalls()?" in his ball, you can taste the change as each of your movements ripen the cum imprisoned within the orbs":"")+". Finally about to reach your own orgasm you cry out in delight impaling yourself on the tortured cock and drench [monster his] crotch with your tainted juices.\n\n");
+			outputText("<i>Has your poor toy lost every sense of his mind from his leaking cock? Should you let them cum…? Or leave them begging… Decisions, decisions…</i>\n\n");
+			if (isntATentacleBeast()) outputText("You caress [themonster] cheek gently with your hand and consider the option giggling as you begin already feeling pleasure again from the uncontrollable throbbing erection in your cunt.\n\n");
+			menu();
+			addButton(1, "Cum", trueDemonSuccubusFeastCum);
+			addButton(3, "Nope", trueDemonSuccubusFeastNope);
+		}
+		public function trueDemonSuccubusFeastCum():void {
+			outputText("Hungry for [monster his] seed you lick [themonster] neck sensually and whisper to [monster his] ears as you clamp down your vice like cunt around [monster his] penis.\n\n");
+			outputText("\"<i>It’s time for your toy to shoot it all out… Every. Last. Drop… Just for you.</i>\"\n\n");
+			outputText("[monster He] begins roaring a gut wrenching orgasm as [monster his] cock finally is freed from your curse, cum rushing through [monster his] urethra and right into your thirsty cunt. You moan in rapture as the cum floods your walls, rushing past your cervix to fill your demonic womb, making you balloon up with the sheer volume of seed. Doesn't matter if you birth a litter of imps after this, the meal was worth it. You reach orgasm again several times from the consecutive powerful cum shot on your clit. ");
+			outputText("[monster He] hips has begun instinctively trusting into you as well in order to unload the cum faster, albeit it improves your own pleasure. As [monster he] finally runs out of cum  your semen pregnant belly begins to shrink as you drink up and absorb the food into your body, your skin gaining in luster, vitality and power from the healthy consumption of cum. You would be ready for a round two but the passed out body of your partner hints that it clearly won't be with [monster him].");
+			if (SuccubusIncubusFeastNotWrongEnemyTypeForLethicite() && player.hasPerk(PerkLib.Soulless)) outputText(" You stand up and collect the small purple shard of lethicite left at the now soulless body of your partner pocketing it up for later.");
+			outputText("\n\nSatisfied nonetheless and feeling great from the cum shot in your lower mouth you head back to camp.\n\n");
+			player.sexReward("cum","Vaginal");
+			if (SuccubusIncubusFeastNotWrongEnemyTypeForLethicite() && player.hasPerk(PerkLib.Soulless)) {
+				if (monster.level < 25) inventory.takeItem(consumables.LETHITE, cleanupAfterCombat);
+				else if (monster.level < 50) inventory.takeItem(consumables.LETH1TE, cleanupAfterCombat);
+				else if (monster.level < 75) inventory.takeItem(consumables.LETH2TE, cleanupAfterCombat);
+				else inventory.takeItem(consumables.LETH3TE, cleanupAfterCombat);
+			}
+			else cleanupAfterCombat();
+		}
+		public function trueDemonSuccubusFeastNope():void {
+			outputText("You wave a finger from left to right in front of your opponent glazed eyes in negation.\n\n");
+			outputText("\"<i>Naaaah I'm not hungry enough and you don't deserve the bliss. I'll let it rest"+(monster.hasBalls()?" in your balls":"")+" for a few days still, If you're lucky some other demon will have mercy on you and release the seal. Who knows though, It might want to have fun first.</i>\"\n\n");
+			outputText("You lift up unplugging from the swollen cock and leave the still twitching body of -opponent name- on the ground behind you to the mercy of someone else as you head back to camp thoroughly satisfied.\n\n");
+			player.sexReward("no");
+			cleanupAfterCombat();
+		}
+		private function isntATentacleBeast():Boolean{
+			if (monster is TentacleBeast || monster is TentacleBeastRaging) return false;
+			else return true;
+		}
+		private function SuccubusIncubusFeastNotWrongEnemyTypeForLethicite():Boolean{
+			return (!monster.hasPerk(PerkLib.Enemy300Type) && !monster.hasPerk(PerkLib.EnemyConstructType) && !monster.hasPerk(PerkLib.EnemyElementalType) && !monster.hasPerk(PerkLib.EnemyFleshConstructType) && !monster.hasPerk(PerkLib.EnemyGhostType) &&
+			!monster.hasPerk(PerkLib.EnemyLargeGroupType) && !monster.hasPerk(PerkLib.EnemyTrueDemon) && !monster.hasPerk(PerkLib.EnemyUndeadType) && !monster.hasPerk(PerkLib.UniqueNPC));
+		}
+
+		public function trueDemonIncubusFeast():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+			outputText("\"<i></i>\"\n\n");
+			outputText("\"<i></i>\"\n\n");
+			outputText("\"<i></i>\"\n\n");
+			outputText("\"<i></i>\"\n\n");
+			outputText("\"<i></i>\"\n\n");
+			outputText("\"<i></i>\"\n\n");
+			outputText("\"<i></i>\"\n\n");
+			outputText("\"<i></i>\"\n\n");
+			outputText("\"<i></i>\"\n\n");
+			menu();
+			addButton(1, "Cum", trueDemonIncubusFeastCum);
+			addButton(3, "Nope", trueDemonIncubusFeastNope);
+		}
+		public function trueDemonIncubusFeastCum():void {
+			outputText("\"<i></i>\"\n\n");
+			outputText("\"<i></i>\"\n\n");
+			outputText("\"<i></i>\"\n\n");
+			outputText("\"<i></i>\"\n\n");
+			outputText("\"<i></i>\"\n\n");
+			outputText("\"<i></i>\"\n\n");
+			outputText("\"<i></i>\"\n\n");
+			outputText("\"<i></i>\"\n\n");
+			outputText("\"<i></i>\"\n\n");
+			
+		}
+		public function trueDemonIncubusFeastNope():void {
+			
 		}
 }
 }

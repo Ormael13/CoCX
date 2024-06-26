@@ -2,6 +2,7 @@
  * Coded by aimozg on 30.05.2017.
  */
 package classes.Scenes.Combat {
+import classes.BodyParts.Horns;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.*;
@@ -410,6 +411,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.PrestigeJobArchpriest)) mod -= .4;
 		if (player.hasPerk(PerkLib.PrestigeJobWarlock)) mod += .2;
 		if (player.countMiscJewelry(miscjewelries.DMAGETO) > 0) mod += 0.25;
+		if (player.headJewelry == headjewelries.GHORNAM && player.horns.type == Horns.DEMON) mod += 0.25;
 		if (player.weaponRange == weaponsrange.RB_TOME && player.level < 18) {
 			if (player.level < 6) mod += 1;
 			if (player.level < 12) mod += 1;
