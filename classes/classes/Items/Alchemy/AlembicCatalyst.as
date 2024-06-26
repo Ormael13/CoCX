@@ -1,5 +1,6 @@
 package classes.Items.Alchemy {
 import classes.Items.Useable;
+import classes.Scenes.SceneLib;
 
 public class AlembicCatalyst extends Useable {
 	public var reagentType:int;
@@ -68,7 +69,8 @@ public class AlembicCatalyst extends Useable {
 		outputText(description);
 		outputText("You examine the magical crystal.");
 		outputText("\n\n");
-		outputText("<i>This item is used in 'Crafting - Extract' menu.</b>");
+		outputText("<i>This item is used in 'Crafting - Extract' menu.</i>");
+		SceneLib.inventory.returnItemToInventory(this);
 		return false;
 	}
 }
