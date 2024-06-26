@@ -6869,7 +6869,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//(if PC is genderless)
 			if(player.gender == 0 ) {
 				outputText("You think about going into the ruined village, but playing with Amily is not going to be possible if you don't have the parts for it... You return to your camp.");
-				endEncounter();1
+				endEncounter();
 				return;
 			}
 			amilySprite();
