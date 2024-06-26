@@ -6174,6 +6174,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			amilySprite();
 			if (!recalling) flags[kFLAGS.AMILY_CORRUPTION]++;
 			clearOutput();
+			if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 			//[Raping Amily]
 			outputText("You wait for a while, idly looking at the mixture you made for Amily, until a groan draws your attention towards the bound mouse.\n\n");
 
@@ -6748,6 +6749,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 		//Only happens if the PC has the Potent Mixture and is >= 25 Corruption.
 		public function stalkingZeAmiliez():void {
 			clearOutput();
+			if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 			outputText("You step into the ruined village and set out to look for Amily.\n\n");
 
 			//(If PC's intellingence >= 50 and speed >= 65)
@@ -6807,6 +6809,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//(else)
 			else {
 				amilySprite();
+				if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 				outputText("You step into the ruined village and set out to look for Amily.\n\n");
 
 				outputText("It doesn't take long before you locate her and you immediately see how she's changed after the first dose of her special medicine.\n\n");
@@ -6866,10 +6869,11 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//(if PC is genderless)
 			if(player.gender == 0 ) {
 				outputText("You think about going into the ruined village, but playing with Amily is not going to be possible if you don't have the parts for it... You return to your camp.");
-				endEncounter();
+				endEncounter();1
 				return;
 			}
 			amilySprite();
+			if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 			outputText("You step into the ruined village and set out to look for Amily.\n\n");
 
 			outputText("You barely have to search, as Amily finds you herself. Her figure has changed very dramatically since the first time you two met, she has developed a perfect hourglass figure; with generous breasts, a full butt and wide flanks. She just looks at you with hungry, lusty eyes, panting and drooling a bit.\n\n");
