@@ -3974,6 +3974,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				else if (flags[kFLAGS.AMILY_CUP_SIZE] >= BreastCup.C) {
 					outputText("\n\n\"<i>So...  when is this supposed to start - yeek</i>!\" She suddenly squeaks in shock as she realizes her shirt is growing damp.  She hastily pulls her top open, grabbing at her dripping breasts.  \"<i>I, I just gotta go take care of this.</i>\" She explains, blushing and then scampering away.");
 				}
+				doNext(playerMenu);
 			}
 			else { //Already lactating
 				if (flags[kFLAGS.AMILY_FOLLOWER] == 1) { //Pure
@@ -3982,9 +3983,9 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				if (flags[kFLAGS.AMILY_FOLLOWER] == 2) { //Corrupt
 					outputText("\n\nQuickly she pulls her breasts out of her top; she doesn't want to make a mess on herself.  Beads of milk begin to form at the tip of her " + amilyNipples() + ", soon giving way to a steady trickle of fluid.  \"<i>More milk for my[Master], hmm?</i>\" She teases you.  \"<i>I'm going to go and take care of this...  unless you want to help me now?</i>\" She trills, seductively.");
 				}
+				doYesNo(takeChargeAmilyMouseMilk, amilyFollowerEncounter);
 			}
 			flags[kFLAGS.AMILY_LACTATION_RATE]++;
-			doYesNo(takeChargeAmilyMouseMilk, amilyFollowerEncounter);
 		}
 
 		private function amilyHips():String {
