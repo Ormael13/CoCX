@@ -1472,7 +1472,7 @@ public class PlayerInfo extends BaseContent {
         }
 
 
-		if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) {
+		if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor) || player.hasPerk(PerkLib.Soulless)) {
 			if (player.hasStatusEffect(StatusEffects.DaoOfFire)) {
 				masteryStats += "<b>Major Dao of Fire:</b>  ";
 				if (player.statusEffectv2(StatusEffects.DaoOfFire) == 9) masteryStats += "9th layer (+150% dmg, +60% resistance)";

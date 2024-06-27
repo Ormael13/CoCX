@@ -404,8 +404,9 @@ public class UniqueSexScenes extends BaseContent
             var btnSet:Array = ["Succubus Feast"];
             if (player.hasVagina() && player.vaginaType() == VaginaClass.DEMONIC && monster.hasCock() && SuccubusIncubusFeastNotWrongEnemyType()) btnSet.push(trueDemonSuccubusFeast, "");
             else {
-				if (!SuccubusIncubusFeastNotWrongEnemyType()) btnSet.push(false, "Req. enemy to be male with soul. (No constructs/elementals)");
-				else btnSet.push(false, "You need to be a female true demon in order to even use this scene.");
+				if (!SuccubusIncubusFeastNotWrongEnemyType()) btnSet.push(false, "Req. enemy to have soul. (No constructs/elementals)");
+				else if (!monster.hasCock()) btnSet.push(false, "Req. enemy to have cock.");
+				else btnSet.push(false, "Req. to have demonic vagina.");
 			}
             return btnSet;
         }
@@ -413,8 +414,9 @@ public class UniqueSexScenes extends BaseContent
             var btnSet:Array = ["Incubus Feast"];
             if (player.hasCock() && player.demonCocks() > 0 && monster.hasVagina() && SuccubusIncubusFeastNotWrongEnemyType()) btnSet.push(trueDemonIncubusFeast, "");
             else {
-				if (!SuccubusIncubusFeastNotWrongEnemyType()) btnSet.push(false, "Req. enemy to be female with soul. (No constructs/elementals)");
-				else btnSet.push(false, "You need to be a male true demon in order to even use this scene.");
+				if (!SuccubusIncubusFeastNotWrongEnemyType()) btnSet.push(false, "Req. enemy to have soul. (No constructs/elementals)");
+				else if (!monster.hasVagina()) btnSet.push(false, "Req. enemy to have pussy.");
+				else btnSet.push(false, "Req. to have demonic cock.");
 			}
             return btnSet;
         }

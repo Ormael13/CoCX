@@ -247,12 +247,12 @@ public class Changelog extends BaseContent
 			outputText("-Misdirection and Rapier Training perks can be permed on ascension/dark ascension.\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//one of two new unique sex scenes: Succubus Feast & Incubus Feast.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
