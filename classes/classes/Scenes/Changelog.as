@@ -245,7 +245,8 @@ public class Changelog extends BaseContent
 			outputText("-Fix: When crafting pills changing or picking the same residue cause currently added residue to vanish instead of been returned. (aimozg)\n");
 			outputText("-Fixing weirdness on feral combat ingoring all handless PC's (or was it maidenless ones...). Now even they can have rizz.\n");
 			outputText("-Misdirection and Rapier Training perks can be permed on ascension/dark ascension.\n");
-			outputText("-\n");
+			outputText("-Fixed: catalysts being consumed by inspection, fond issues in physical specials, typos. (Svalkash)\n");
+			outputText("-Nerfed LaBova (NPC) milk blast scaling. (Svalkash)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -253,7 +254,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//one of two new unique sex scenes: Succubus Feast & Incubus Feast.
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

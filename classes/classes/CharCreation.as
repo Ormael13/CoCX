@@ -3099,7 +3099,7 @@ import classes.Scenes.Combat.CombatAbility;
 				if (player.hasPerk(PerkLib.MaraesGiftProfractory) && player.perkv4(PerkLib.MaraesGiftProfractory) < 1) addButton(3, "MaraesGiftP.", permanentizePerk3, PerkLib.MaraesGiftProfractory);
 				else if (player.hasPerk(PerkLib.MaraesGiftProfractory) && player.perkv4(PerkLib.MaraesGiftProfractory) > 0) addButtonDisabled(3, "MaraesGiftP.", "Maraes Gift Profractory perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(3, "MaraesGiftP.", "Maraes Gift Profractory");
-				//addButton(4, "Next", ascensionPermeryMenu, page + 1);
+				addButton(4, "Next", ascensionPermeryMenu, page + 1);
 				if (player.hasPerk(PerkLib.MaraesGiftStud) && player.perkv4(PerkLib.MaraesGiftStud) < 1) addButton(5, "MaraesGiftS.", permanentizePerk3, PerkLib.MaraesGiftStud);
 				else if (player.hasPerk(PerkLib.MaraesGiftStud) && player.perkv4(PerkLib.MaraesGiftStud) > 0) addButtonDisabled(5, "MaraesGiftS.", "Maraes Gift Stud perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(5, "MaraesGiftS.", "Maraes Gift Stud");
