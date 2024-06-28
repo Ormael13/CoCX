@@ -3974,6 +3974,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				else if (flags[kFLAGS.AMILY_CUP_SIZE] >= BreastCup.C) {
 					outputText("\n\n\"<i>So...  when is this supposed to start - yeek</i>!\" She suddenly squeaks in shock as she realizes her shirt is growing damp.  She hastily pulls her top open, grabbing at her dripping breasts.  \"<i>I, I just gotta go take care of this.</i>\" She explains, blushing and then scampering away.");
 				}
+				doNext(playerMenu);
 			}
 			else { //Already lactating
 				if (flags[kFLAGS.AMILY_FOLLOWER] == 1) { //Pure
@@ -3982,9 +3983,9 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				if (flags[kFLAGS.AMILY_FOLLOWER] == 2) { //Corrupt
 					outputText("\n\nQuickly she pulls her breasts out of her top; she doesn't want to make a mess on herself.  Beads of milk begin to form at the tip of her " + amilyNipples() + ", soon giving way to a steady trickle of fluid.  \"<i>More milk for my[Master], hmm?</i>\" She teases you.  \"<i>I'm going to go and take care of this...  unless you want to help me now?</i>\" She trills, seductively.");
 				}
+				doYesNo(takeChargeAmilyMouseMilk, amilyFollowerEncounter);
 			}
 			flags[kFLAGS.AMILY_LACTATION_RATE]++;
-			doYesNo(takeChargeAmilyMouseMilk, amilyFollowerEncounter);
 		}
 
 		private function amilyHips():String {
@@ -6174,6 +6175,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			amilySprite();
 			if (!recalling) flags[kFLAGS.AMILY_CORRUPTION]++;
 			clearOutput();
+			if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 			//[Raping Amily]
 			outputText("You wait for a while, idly looking at the mixture you made for Amily, until a groan draws your attention towards the bound mouse.\n\n");
 
@@ -6518,6 +6520,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				endEncounter();
 				return;
 			}
+			if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 			outputText("You enter the ruined village hoping to find your corrupted mouse cumbucket. It doesn't take long until you spot her; she's stroking her pussy and blowing a wood carved dildo, practicing like you told her to.\n\n");
 
 			outputText("As soon as she realizes you're there, she drops the dildo and rushes towards you; kneeling submissively in front of you, she nuzzles your crotch and asks, \"<i>[Master], did you come to feed me?</i>\"\n\n");
@@ -6748,6 +6751,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 		//Only happens if the PC has the Potent Mixture and is >= 25 Corruption.
 		public function stalkingZeAmiliez():void {
 			clearOutput();
+			if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 			outputText("You step into the ruined village and set out to look for Amily.\n\n");
 
 			//(If PC's intellingence >= 50 and speed >= 65)
@@ -6807,6 +6811,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//(else)
 			else {
 				amilySprite();
+				if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 				outputText("You step into the ruined village and set out to look for Amily.\n\n");
 
 				outputText("It doesn't take long before you locate her and you immediately see how she's changed after the first dose of her special medicine.\n\n");
@@ -6870,6 +6875,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				return;
 			}
 			amilySprite();
+			if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 			outputText("You step into the ruined village and set out to look for Amily.\n\n");
 
 			outputText("You barely have to search, as Amily finds you herself. Her figure has changed very dramatically since the first time you two met, she has developed a perfect hourglass figure; with generous breasts, a full butt and wide flanks. She just looks at you with hungry, lusty eyes, panting and drooling a bit.\n\n");

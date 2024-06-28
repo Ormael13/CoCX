@@ -1744,7 +1744,7 @@ use namespace CoC;
 			}
             sceneHunter.print("Failed check: Alraune/Liliraune race");
 			sceneHunter.selectLossMenu([
-					[0, "getRapedAsAGirl", getRapedAsAGirl, "Req. a vagina", player.hasVagina()],
+					[0, "Vaginal", getRapedAsAGirl, "Req. a vagina", player.hasVagina()],
 					[1, "Anal", loseToImpLord, "Req. a cock", player.hasCock()]
 				],
 				"The imp is going to use his gigantic dick anyway, but you probably can provide a hint <i>where</i> he can put it.\n\n"

@@ -1741,7 +1741,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				EngineCore.ManaChange(100 + (player.inte*2));
 				EngineCore.changeFatigue(-(100 + (player.spe*2)));
 				EngineCore.SoulforceChange(500 + (player.wis*2));
-				outputText("You feel energised and empowered by the life force drained out of the fluids of your recent blind date. What a meal!");
+				outputText("You feel energised and empowered by the life force drained out of the fluids of your recent blind date. What a meal!\n\n");
 				player.removeStatusEffect(StatusEffects.KitsuneEnergyThirstFeed);
 			}
 			//Hydra heads

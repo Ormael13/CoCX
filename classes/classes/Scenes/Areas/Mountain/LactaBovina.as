@@ -38,7 +38,7 @@ import classes.internals.*;
 			outputText("The cow girl grabs her breast with both hand and press causing her nubs to shoot a pair of massive streams of milk straight at you! ");
 			var dmg2:Number = player.lib + rand(player.lib) + this.lib + this.sens;
 			player.takeLustDamage(dmg2, true);
-			player.takePhysDamage((dmg2 * 10), true);
+			player.takePhysDamage((dmg2 * 2), true);
 			player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 		}
 		

@@ -82,12 +82,12 @@ public class SandWitch extends Monster
 			this.lust = 30;
 			this.level = 7;
 			this.gems = rand(15) + 5;
-			this.drop = new WeightedDrop().addMany(1,
+			this.drop = new WeightedDrop().addMany(2,
 					consumables.TSCROLL,
 					consumables.OVIELIX,
 					consumables.LACTAID,
 					consumables.LABOVA_).
-					addMany(2,
+					addMany(1,
 					consumables.W__BOOK,
 					consumables.B__BOOK,
 					consumables.RMANUSC,

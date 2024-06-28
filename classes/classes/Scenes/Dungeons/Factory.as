@@ -342,7 +342,7 @@ use namespace CoC;
 				}
 				outputText("\n\n\"<i>Much better,</i>\" the demon coos, licking her lips as your ");
 			}
-			sceneHunter.selectGender(dickF, vagF, null, hermF);
+			sceneHunter.selectGender(player.isHerm() ? null : dickF, vagF, null, hermF);
 
 			//========================================================
 			function dickF():void {
@@ -402,7 +402,7 @@ use namespace CoC;
 			function vagF():void {
 				outputText(vaginaDescript(0) + " grows wet and ready, practically juicing itself as the demoness' hand caresses your inner thigh.  She teases, \"<i>Oh my! You're so wet and ready and I haven't even touched your moist little cum-receptacle.  You're a slut, aren't you?  Who else would be so turned on by the idea of cumming until all your humanity drips out?</i>\"\n\n");
 				outputText("The words make you blush hard, shaming you and stoking the growing fire between your [legs].  You know two things for certain: she's right and you're more turned on that ever.  You don't resist as the demoness easily lifts you up, setting you down on a table with your [legs] spread.  \"<i>There,</i>\" she comments, \"<i>now your juicy snatch is on display, just like you've always wanted.</i>\"\n\n");
-				outputText("She effortlessly swings her lissomelegs onto the table as she pulls herself up, mounting you as a man might.  You can feel waves of heat rolling off her sex, bathing your own slit in her warmth.  ");
+				outputText("She effortlessly swings her lissome legs onto the table as she pulls herself up, mounting you as a man might.  You can feel waves of heat rolling off her sex, bathing your own slit in her warmth.  ");
 				if(player.clitLength >= 2) outputText("Your " + clitDescript() + " pushes free, nuzzling against her hairless cunt and slipping inside, as if drawn in by its desire.  She openly moans, and begins rocking on top of you.  You gasp in delight as she rides your " + clitDescript() + ", fucking and grinding against it.  ");
 				else outputText("She lowers herself down, rubbing smooth hairless netherlips over you, smearing you with her fragrant demon-honey.  You feel her clit grinding on your own, drawing out gasps of delight from both of your mouths as she relentlessly scissors against you.  ");
 				outputText("In no time flat you feel your climax building.  Your " + vaginaDescript(0) + " quivers and grows wetter in anticipation.  Tugging on your aching " + nippleDescript(0) + "s and aching for release, you squirm under your demonic mistress, smashing your " + vaginaDescript(0) + " against her in a lewd attempt to find your orgasm.  It does not happen, and you moan in disappointment as the pleasure continues to build, oblivious to your desire for orgasm.\n\n");

@@ -33,8 +33,8 @@ public function lactaBovinaVictoryRapeChoices():void {
 	menu();
 	addButtonIfTrue(1, "Lick it!", lactaBovinaVictoryLickIt, "Req. to have pussy.", player.hasVagina());
 	addButtonIfTrue(2, "Sitting Boobjob", lactaBovinaVictorySittingBoobjob,
-		"Req. to have a cock and be no taller than the cow.",
-		player.hasCock() && player.tallness <= monster.tallness);
+		"Req. to have a cock.",
+		player.hasCock());
 	addButton(10, "Convert Elf", SceneLib.woodElves.CaptureCowgirl).hint("Take the milky slut to the Sacred Tree to become a new sister!").disableIf(!player.isWoodElf(), "Wood elves only!");
 	addButton(14, "Leave", lactaBovinaVictoryLeave);
 }

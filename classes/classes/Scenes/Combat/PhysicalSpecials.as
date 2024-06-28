@@ -2256,7 +2256,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage = Math.round(damage);
 		if (damage < 1) damage = 1;
 		doDamage(damage);
-		outputText("<b>([font-damage]" + damage + "[font])</b>");
+		outputText("<b>([font-damage]" + damage + "[/font])</b>");
 		if (player.perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 3) player.lust -= 200;
 		else player.lust -= 100;
 		if (monster.lustVuln > 0) {
@@ -2301,7 +2301,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.perkv1(IMutationsLib.FiendishBallsIM) >= 4) damage *= 4;
 		damage = Math.round(damage);
 		doDamage(damage);
-		outputText("<b>([font-damage]" + damage + "[font])</b>");
+		outputText("<b>([font-damage]" + damage + "[/font])</b>");
 		if (player.perkv1(IMutationsLib.MinotaurTesticlesIM) >= 3) player.lust -= 200;
 		else player.lust -= 100;
 		if (monster.lustVuln > 0) {
@@ -2371,7 +2371,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		slamDmg *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		slamDmg = Math.round(slamDmg);
 		doDamage(slamDmg);
-		outputText("<b>([font-damage]" + slamDmg + "[font])</b>");
+		outputText("<b>([font-damage]" + slamDmg + "[/font])</b>");
 		if (!monster.hasPerk(PerkLib.Resolute) && rand(10) == 0) {
 			if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 			else monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
@@ -3275,7 +3275,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 		}
 		else {
-			outputText("<b>([font-miss]Miss![font])</b>");
+			outputText("<b>([font-miss]Miss![/font])</b>");
 		}
 		flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]--;
 		combat.bonusExpAfterSuccesfullTease();
@@ -3383,7 +3383,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		damage = Math.round(damage);
 		doDamage(damage);
-		outputText("You slash your adversary with your sharp stone claws, dealing <b>[font-damage]" + damage + "[font]</b> damage!");
+		outputText("You slash your adversary with your sharp stone claws, dealing <b>[font-damage]" + damage + "[/font]</b> damage!");
 		if (crit) {
 			outputText(" <b>*Critical Hit!*</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -3394,7 +3394,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.PhantomStrike)) {
 			doDamage(damage);
-			outputText(" (<b>[font-damage]" + damage + "[font]</b>)");
+			outputText(" (<b>[font-damage]" + damage + "[/font]</b>)");
 			damage *= 2;
 		}
 		checkAchievementDamage(damage);
@@ -3460,7 +3460,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		damage = Math.round(damage);
 		doDamage(damage);
-		outputText("You punch your adversary with your stone fist, dealing <b>[font-damage]" + damage + "[font]</b> damage!");
+		outputText("You punch your adversary with your stone fist, dealing <b>[font-damage]" + damage + "[/font]</b> damage!");
 		if (!monster.hasPerk(PerkLib.Resolute)) {
 			outputText(" [Themonster] recoil under the blow!");
 			monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
@@ -3475,7 +3475,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.PhantomStrike)) {
 			doDamage(damage);
-			outputText(" (<b>[font-damage]" + damage + "[font]</b>)");
+			outputText(" (<b>[font-damage]" + damage + "[/font]</b>)");
 			damage *= 2;
 		}
 		checkAchievementDamage(damage);
@@ -3537,7 +3537,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		doDamage(damage);
 		if (!monster.hasStatusEffect(StatusEffects.TailSlamWhip)) monster.createStatusEffect(StatusEffects.TailSlamWhip,monster.armorDef,5,0,0);
 		//monster.armorDef == 0;
-		outputText("You slam your mace-like tail on your foe, dealing <b>[font-damage]" + damage + "[font]</b> damage!");
+		outputText("You slam your mace-like tail on your foe, dealing <b>[font-damage]" + damage + "[/font]</b> damage!");
 		if (!monster.hasPerk(PerkLib.Resolute)) {
 			outputText(" The attack is so devastating your target is stunned by the crushing blow!");
 			monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
@@ -3552,7 +3552,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.PhantomStrike)) {
 			doDamage(damage);
-			outputText(" (<b>[font-damage]" + damage + "[font]</b>)");
+			outputText(" (<b>[font-damage]" + damage + "[/font]</b>)");
 			damage *= 2;
 		}
 		checkAchievementDamage(damage);
@@ -3613,7 +3613,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage = Math.round(damage);
 		doDamage(damage);
 		var multikulti:String = (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) ? "s" : "";
-		outputText("You swipe the field with your axe-bladed tail, slicing your foe" + multikulti + ", dealing <b>[font-damage]" + damage + "[font]</b> damage!");
+		outputText("You swipe the field with your axe-bladed tail, slicing your foe" + multikulti + ", dealing <b>[font-damage]" + damage + "[/font]</b> damage!");
 		if (!monster.isImmuneToBleed()) {
 			outputText(" The attack leaves your target" + multikulti + " bleeding from deep wounds!");
 			if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) monster.createStatusEffect(StatusEffects.SharkBiteBleed, 2, 5, 0, 0);
@@ -3629,7 +3629,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.PhantomStrike)) {
 			doDamage(damage);
-			outputText(" (<b>[font-damage]" + damage + "[font]</b>)");
+			outputText(" (<b>[font-damage]" + damage + "[/font]</b>)");
 			damage *= 2;
 		}
 		checkAchievementDamage(damage);
@@ -3684,7 +3684,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		damage = Math.round(damage);
 		doDamage(damage);
-		outputText("You buffet your foe with your massive wings, dealing <b>[font-damage]" + damage + "[font]</b> damage!");
+		outputText("You buffet your foe with your massive wings, dealing <b>[font-damage]" + damage + "[/font]</b> damage!");
 		if (crit) {
 			outputText(" <b>*Critical Hit!*</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -3695,7 +3695,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.PhantomStrike)) {
 			doDamage(damage);
-			outputText(" (<b>[font-damage]" + damage + "[font]</b>)");
+			outputText(" (<b>[font-damage]" + damage + "[/font]</b>)");
 			damage *= 2;
 		}
 		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
@@ -3750,7 +3750,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.PhantomStrike)) {
 			doDamage(damage);
-			outputText(" (<b>[font-damage]" + damage + "[font]</b>)");
+			outputText(" (<b>[font-damage]" + damage + "[/font]</b>)");
 			damage *= 2;
 		}
 		if (!monster.hasPerk(PerkLib.Resolute)) {
@@ -4376,10 +4376,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		damage = Math.round(damage);
 		doDamage(damage);
-		outputText("You slam [themonster] with your full strength, crushing it under your weight. [Themonster] tries to recover but is stunned and grievously wounded by your assault. (<b>[font-damage]" + damage + "[font]</b>)");
+		outputText("You slam [themonster] with your full strength, crushing it under your weight. [Themonster] tries to recover but is stunned and grievously wounded by your assault. (<b>[font-damage]" + damage + "[/font]</b>)");
 		if (player.hasPerk(PerkLib.PhantomStrike)) {
 			doDamage(damage);
-			outputText(" (<b>[font-damage]" + damage + "[font]</b>)");
+			outputText(" (<b>[font-damage]" + damage + "[/font]</b>)");
 			damage *= 2;
 		}
 		if (crit) {
@@ -4476,7 +4476,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				doDamage(damage);
 				damage *= 2;
 			}
-			outputText("You growl menacingly, and fold your wings, as you dive into [themonster] clawing at [monster him] body and leaving deep bleeding wounds dealing <b>[font-damage]" + damage + "[font]</b> damage!. You’re now grappling with your target ready to tear it to shreds.");
+			outputText("You growl menacingly, and fold your wings, as you dive into [themonster] clawing at [monster him] body and leaving deep bleeding wounds dealing <b>[font-damage]" + damage + "[/font]</b> damage!. You’re now grappling with your target ready to tear it to shreds.");
 			if (crit) {
 			outputText(" <b>*Critical Hit!*</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -4908,7 +4908,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		doDamage(damage);
-		outputText("Your scythes swiftly sweeps against [themonster], dealing <b>[font-damage]" + damage + "[font]</b> damage!");
+		outputText("Your scythes swiftly sweeps against [themonster], dealing <b>[font-damage]" + damage + "[/font]</b> damage!");
 		if (crit) {
 			outputText(" <b>*Critical Hit!*</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -4919,7 +4919,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.PhantomStrike)) {
 			doDamage(damage);
-			outputText(" (<b>[font-damage]" + damage + "[font]</b>)");
+			outputText(" (<b>[font-damage]" + damage + "[/font]</b>)");
 			damage *= 2;
 		}
 		outputText("\n");
@@ -5465,7 +5465,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Do all damage
 		damage = Math.round(damage);
 		doDamage(damage);
-		outputText("<b>([font-damage]" + damage + "[font])</b>"); //Damage
+		outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
 		var dBd1c:Number = 1;
 		if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dBd1c *= 2;
 		monster.teased(Math.round(monster.lustVuln * lustdamage * dBd1c), false);
@@ -5763,7 +5763,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else
 				combat.CommasForDigits(totalDamage);
 		}
-		else outputText("<b>([font-miss]" + 0 + "[font])</b>");
+		else outputText("<b>([font-miss]" + 0 + "[/font])</b>");
 		if (monster.hasStatusEffect(StatusEffects.SharkBiteBleed)) outputText(" [Themonster] bleeds profusely from the many bloody bite marks you leave behind.");
 		outputText("\n\n");
 		combat.WrathGenerationPerHit2(5);
@@ -6071,7 +6071,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var chance:int = Math.floor(monster.statusEffectv1(StatusEffects.TimesBashed) + 1);
 		if (chance > 10) chance = 10;
 		doDamage(damage);
-		outputText("Your [shield] slams against [themonster], dealing <b>[font-damage]" + damage + "[font]</b> damage! ");
+		outputText("Your [shield] slams against [themonster], dealing <b>[font-damage]" + damage + "[/font]</b> damage! ");
 		if (!monster.hasStatusEffect(StatusEffects.Stunned) && rand(chance) == 0) {
 			outputText("<b>Your impact also manages to stun [themonster]!</b> ");
 			if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
