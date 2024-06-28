@@ -384,7 +384,7 @@ public class Frosty extends TelAdreAbstractContent {
         frostyPoints(-1);
         dynStats("lus", 33, "scale", false);
         player.sexReward("vaginalFluids", "Lips", false);
-        doNext(camp.returnToCampUseOneHour);
+        doNext(telAdre.telAdreMenu);
     }
 
     private function analWithACupcakeSloot():void {
