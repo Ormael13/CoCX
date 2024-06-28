@@ -979,26 +979,46 @@ public class Soulforce extends BaseContent
 		clearOutput();
 		outputText("Your mastery over " + daoType+" has improved by 10%!");
 		player.demonicenergy -= deCost(200);
-		switch (flags[kFLAGS.BLOOD_PUPPY_SUMMONS]) {
-            case "Fire": player.addStatusValue(StatusEffects.DaoOfFire, 1, 1);
+		switch (daoType) {
+            case "Fire":
+				if (player.hasStatusEffect(StatusEffects.DaoOfFire)) player.addStatusValue(StatusEffects.DaoOfFire, 1, 1);
+				else player.createStatusEffect(StatusEffects.DaoOfFire,0,0,0,0);
                     break;
-            case "Ice": player.addStatusValue(StatusEffects.DaoOfIce, 1, 1);
+            case "Ice":
+				if (player.hasStatusEffect(StatusEffects.DaoOfIce)) player.addStatusValue(StatusEffects.DaoOfIce, 1, 1);
+				else player.createStatusEffect(StatusEffects.DaoOfIce,0,0,0,0);
                     break;
-            case "Lightning": player.addStatusValue(StatusEffects.DaoOfLightning, 1, 1);
+            case "Lightning":
+				if (player.hasStatusEffect(StatusEffects.DaoOfLightning)) player.addStatusValue(StatusEffects.DaoOfLightning, 1, 1);
+				else player.createStatusEffect(StatusEffects.DaoOfLightning,0,0,0,0);
                     break;
-            case "Darkness": player.addStatusValue(StatusEffects.DaoOfDarkness, 1, 1);
+            case "Darkness":
+				if (player.hasStatusEffect(StatusEffects.DaoOfDarkness)) player.addStatusValue(StatusEffects.DaoOfDarkness, 1, 1);
+				else player.createStatusEffect(StatusEffects.DaoOfDarkness,0,0,0,0);
                     break;
-            case "Poison": player.addStatusValue(StatusEffects.DaoOfPoison, 1, 1);
+            case "Poison":
+				if (player.hasStatusEffect(StatusEffects.DaoOfPoison)) player.addStatusValue(StatusEffects.DaoOfPoison, 1, 1);
+				else player.createStatusEffect(StatusEffects.DaoOfPoison,0,0,0,0);
                     break;
-            case "Wind": player.addStatusValue(StatusEffects.DaoOfWind, 1, 1);
+            case "Wind":
+				if (player.hasStatusEffect(StatusEffects.DaoOfWind)) player.addStatusValue(StatusEffects.DaoOfWind, 1, 1);
+				else player.createStatusEffect(StatusEffects.DaoOfWind,0,0,0,0);
                     break;
-            case "Blood": player.addStatusValue(StatusEffects.DaoOfBlood, 1, 1);
+            case "Blood":
+				if (player.hasStatusEffect(StatusEffects.DaoOfBlood)) player.addStatusValue(StatusEffects.DaoOfBlood, 1, 1);
+				else player.createStatusEffect(StatusEffects.DaoOfBlood,0,0,0,0);
                     break;
-            case "Water": player.addStatusValue(StatusEffects.DaoOfWater, 1, 1);
+            case "Water":
+				if (player.hasStatusEffect(StatusEffects.DaoOfWater)) player.addStatusValue(StatusEffects.DaoOfWater, 1, 1);
+				else player.createStatusEffect(StatusEffects.DaoOfWater,0,0,0,0);
                     break;
-            case "Earth": player.addStatusValue(StatusEffects.DaoOfEarth, 1, 1);
+            case "Earth":
+				if (player.hasStatusEffect(StatusEffects.DaoOfEarth)) player.addStatusValue(StatusEffects.DaoOfEarth, 1, 1);
+				else player.createStatusEffect(StatusEffects.DaoOfEarth,0,0,0,0);
                     break;
-            case "Acid": player.addStatusValue(StatusEffects.DaoOfAcid, 1, 1);
+            case "Acid":
+				if (player.hasStatusEffect(StatusEffects.DaoOfAcid)) player.addStatusValue(StatusEffects.DaoOfAcid, 1, 1);
+				else player.createStatusEffect(StatusEffects.DaoOfAcid,0,0,0,0);
                     break;
         }
 		doNext(demonicEnergyCorruptElement);
