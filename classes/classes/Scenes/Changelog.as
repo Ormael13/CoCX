@@ -249,7 +249,7 @@ public class Changelog extends BaseContent
 			outputText("-Nerfed LaBova (NPC) milk blast scaling. (Svalkash)\n");
 			outputText("-PC with demonic cock could access new unique sex scene (by MrDumbass): Incubus Feast. If PC have soulless perk and enemy is not group having intact soul scene will have additional bonus of harvesting lethicite from that enemy.\n");
 			outputText("-Gigant's Grip perk req. changed from req. only Weapon Mastery to req. either Weapon Mastery or Job: Gunslinger. Also added more info on this perk about it relation to dual wielding range weapons.\n");
-			outputText("-\n");
+			outputText("-Sand Worm lower body allow to make tail slam + stinger stab during feral combat combo. Bugfixing sand worms not generating venom needed for their special.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

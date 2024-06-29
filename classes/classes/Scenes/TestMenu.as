@@ -1270,9 +1270,15 @@ public class TestMenu extends BaseContent
 		menu();
 		if (player.level < CoC.instance.levelCap) addButton(0, "Add 1 LvL", addsubLvl, "Lvl", 1).hint("Add 1 Level (with stat and perk points).");
 		if (player.level < CoC.instance.levelCap - 9) addButton(1, "Add 10 LvL's", addsubLvl, "Lvl", 10).hint("Add 10 Levels (with stat and perk points).");
-		if (player.level > 0) addButton(2, "Sub 1 LvL", addsubLvl, "DLvl", 1).hint("Substract 1 Level (keeping stat and perk points).");
-		if (player.level > 9) addButton(3, "Sub 10 LvL's", addsubLvl, "DLvl", 10).hint("Substract 10 Levels (keeping stat and perk points).");
-		if (player.negativeLevel > 0) addButton(4, "-1 Neg LvL (" + player.negativeLevel + ")", function _():void{ player.negativeLevel -= 1; LevelDeLevel(); }).hint("Recover 1 negative level.");
+		if (player.level < CoC.instance.levelCap - 19) addButton(2, "Add 20 LvL's", addsubLvl, "Lvl", 20).hint("Add 20 Levels (with stat and perk points).");
+		if (player.level < CoC.instance.levelCap - 49) addButton(3, "Add 50 LvL's", addsubLvl, "Lvl", 50).hint("Add 50 Levels (with stat and perk points).");
+		if (player.level < CoC.instance.levelCap - 99) addButton(4, "Add 100 LvL's", addsubLvl, "Lvl", 100).hint("Add 100 Levels (with stat and perk points).");
+		if (player.level > 0) addButton(5, "Sub 1 LvL", addsubLvl, "DLvl", 1).hint("Substract 1 Level (keeping stat and perk points).");
+		if (player.level > 9) addButton(6, "Sub 10 LvL's", addsubLvl, "DLvl", 10).hint("Substract 10 Levels (keeping stat and perk points).");
+		if (player.level > 19) addButton(7, "Sub 20 LvL's", addsubLvl, "DLvl", 20).hint("Substract 20 Levels (keeping stat and perk points).");
+		if (player.level > 49) addButton(8, "Sub 50 LvL's", addsubLvl, "DLvl", 50).hint("Substract 50 Levels (keeping stat and perk points).");
+		if (player.level > 99) addButton(9, "Sub 100 LvL's", addsubLvl, "DLvl", 100).hint("Substract 100 Levels (keeping stat and perk points).");
+		if (player.negativeLevel > 0) addButton(10, "-1 Neg LvL (" + player.negativeLevel + ")", function _():void{ player.negativeLevel -= 1; LevelDeLevel(); }).hint("Recover 1 negative level.");
 		addButton(14, "Back", SoulforceCheats);
 	}
 	public function BodyStateMenu():void {

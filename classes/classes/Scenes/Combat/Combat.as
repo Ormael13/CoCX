@@ -5326,6 +5326,21 @@ public class Combat extends BaseContent {
                     }
                     outputText("\n");
                     break;
+                case LowerBody.SANDWORM:
+                    TailDamageMultiplier = 4;
+                    outputText("You hit your opponent with a slam of your mighty tail.")
+                    ExtraNaturalWeaponAttack(TailDamageMultiplier);
+					outputText("Then you strike at blinding speed, impaling your opponent twice with your spike and injecting your venom in the process");
+					ExtraNaturalWeaponAttack(0.5);
+                    monster.statStore.addBuffObject({str: -4}, "Sandworm Sting", {text: "Sandworm Sting"});
+					if (!monster.hasStatusEffect(StatusEffects.LustDoT))
+						monster.createStatusEffect(StatusEffects.LustDoT, 3, 0.01, 0, 0);
+					else {
+						monster.addStatusValue(StatusEffects.LustDoT, 1, 2);
+						monster.addStatusValue(StatusEffects.LustDoT, 2, 0.02);
+					}
+                    outputText(".\n");
+                    break;
                 default:
                     switch(player.tail.type){
                         case Tail.MANTICORE_PUSSYTAIL:
@@ -12260,10 +12275,13 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 			if (player.tailType == Tail.SCORPION) venomCRecharge += 3;
 			if (player.tailType == Tail.MANTICORE_PUSSYTAIL) venomCRecharge += 4;
 			if (player.lowerBody == LowerBody.HYDRA) venomCRecharge += 4;
+			if (player.lowerBody == LowerBody.SANDWORM) venomCRecharge += 12;
 			if (player.lowerBody == LowerBody.ATLACH_NACHA) venomCRecharge *= 2;
 			if (player.hasPerk(PerkLib.AxillaryVenomGlands)) venomCRecharge *= 2;
-			if (player.hasKeyItem("Sky Poison Pearl") >= 0) venomCRecharge += 3;
-			if (player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX)) venomCRecharge += (3 * player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX));
+			if (player.hasKeyItem("Sky Poison Pearl") >= 0) {
+				venomCRecharge += 3;
+				if (player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX)) venomCRecharge += (3 * player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX));
+			}
 			venomCRecharge = Math.round(venomCRecharge);
 		}
 		return venomCRecharge;

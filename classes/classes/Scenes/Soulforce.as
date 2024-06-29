@@ -927,7 +927,20 @@ public class Soulforce extends BaseContent
 			else addButton(10, "Metamorph", SceneLib.metamorph.openMetamorph).hint("Use your mana to mold your body.");
 		}
 		else addButtonDisabled(10, "???", "Req. Metamorph.");
+		addButton(13, "Re:Soul", accessDemonicEnergyMenuReSoul);
 		addButton(14, "Back", playerMenu);
+	}
+	public function accessDemonicEnergyMenuReSoul():void {
+		clearOutput();
+		outputText("Only NOW for LIMITED TIME you can have your SOUL BACK. For LOW price of 2100de you can have it BACK. What you waiting for? Get YOUR OWN SOUL now before it's gone...\n");
+		menu();
+		addButtonIfTrue(1, "Yes", accessDemonicEnergyMenuReSoulYes, "You not have enough demonic energy (2,100)", player.demonicenergy >= 2100);
+		addButton(3, "Yes?", accessDemonicEnergyMenu);
+	}
+	public function accessDemonicEnergyMenuReSoulYes():void {
+		player.demonicenergy -= 2100;
+		player.removePerk(PerkLib.Soulless);
+		doNext(playerMenu);
 	}
 	public function demonicEnergyCorruptElement():void {
 		clearOutput();
