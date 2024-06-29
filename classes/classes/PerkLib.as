@@ -1489,11 +1489,11 @@ public class PerkLib
 				"Using your knowledge of alchemy and enhancement, you found a way to fuse two of the same item together, further enhacing transformative effects +2% alchemy/mutagen boost.",
 				"You've chosen the 'Fusion' perk, number of possible effects of transformatives +2% alchemy/mutagen boost.");
 		public static const GigantGrip:PerkType = mk("Gigant's Grip", "Gigant's Grip",
-				"Gain an ability to wield large weapons and massive shields in one hand. (+10% melee physical attacks multiplier)",
-				"You've chosen the 'Gigant's Grip' perk, gaining an ability to wield large weapons and massive shields in one hand. (+10% melee physical attacks multiplier)").withBuffs({'str.mult':0.5});
+				"Gain an ability to wield large (melee or range) weapons and massive shields in one hand. (+10% melee physical attacks multiplier)",
+				"You've chosen the 'Gigant's Grip' perk, gaining an ability to wield large (melee or range) weapons and massive shields in one hand. (+10% melee physical attacks multiplier)").withBuffs({'str.mult':0.5});
 		public static const GigantGripEx:PerkType = mk("Gigant's Grip (Ex)", "Gigant's Grip (Ex)",
-				"Allows you to apply all perks boosting Large weapon performance (increased atk and etc.) to Massive weapons. (+15% melee physical attacks multiplier)",
-				"You've chosen the 'Gigant's Grip (Ex)' perk, allowing you to apply all perks boosting Large weapon performance (increased atk and etc.) to Massive weapons. (+15% melee physical attacks multiplier)").withBuffs({'str.mult':0.5,'tou.mult':0.5});
+				"Allows you to apply all perks boosting Large melee weapon performance (increased atk and etc.) to Massive weapons. (+15% melee physical attacks multiplier)",
+				"You've chosen the 'Gigant's Grip (Ex)' perk, allowing you to apply all perks boosting Large melee weapon performance (increased atk and etc.) to Massive weapons. (+15% melee physical attacks multiplier)").withBuffs({'str.mult':0.5,'tou.mult':0.5});
 		public static const GigantGripSu:PerkType = mk("Gigant's Grip (Su)", "Gigant's Grip (Su)",
 				"Gain an ability to wield two massive weapons as long you have four arms. (+20% melee physical attacks multiplier)",
 				"You've chosen the 'Gigant's Grip (Su)' perk, gaining an ability to wield two massive weapons as long you have four arms. (+20% melee physical attacks multiplier)").withBuffs({'str.mult':0.5,'tou.mult':0.5,'spe.mult':0.5});
@@ -5017,7 +5017,7 @@ public class PerkLib
                     .requireStr(60)
                     .requirePerk(FuriousStrikes);
             GigantGrip.requireLevel(18)
-                    .requirePerk(WeaponMastery)
+                    .requireAnyPerk(WeaponMastery, JobGunslinger)
                     .requireStr(100);
             HiddenMomentum.requireLevel(18)
                     .requirePerk(JobSwordsman)

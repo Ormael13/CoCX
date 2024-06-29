@@ -240,20 +240,20 @@ public class Changelog extends BaseContent
 			outputText("-PC with Soulless perk would loose access to Sky Poison Pearl and will soon enough make replacment storage item called Dimensional Pocket.\n");
 			outputText("-One of Prestige Job: Necromancer req. was modified. Instead of req. Daoist: Apprentice Stage can also gain this job by having perks Soulless and Job: Sorcerer.\n");
 			outputText("-New head jewelery (by Liadri): Golden horn ornament - buyable at Kaiba shop in Tel'Adre or dropped from true demon enemies. Cost 400 gems. +25% to tease/black magic damage while worn. (req. to have demon horns)\n");
-			outputText("-PC with succubus vagina could access new unique sex scene: Succubus Feast. If PC have soulless perk and enemy is not group having intact soul scene will have additional bonus of harvesting lethicite from that enemy.\n");
+			outputText("-PC with demonic vagina could access new unique sex scene: Succubus Feast. If PC have soulless perk and enemy is not group having intact soul scene will have additional bonus of harvesting lethicite from that enemy.\n");
 			outputText("-New consumable (by Liadri): Grand Lethicite. Drops from true demon enemies of from unique sex scene for true demon (when defeating generic enemy with intact soul). Consuming it by PC with Soulless perk will give up to 750 demonic energy.\n");
 			outputText("-Fix: When crafting pills changing or picking the same residue cause currently added residue to vanish instead of been returned. (aimozg)\n");
 			outputText("-Fixing weirdness on feral combat ingoring all handless PC's (or was it maidenless ones...). Now even they can have rizz.\n");
 			outputText("-Misdirection and Rapier Training perks can be permed on ascension/dark ascension.\n");
 			outputText("-Fixed: catalysts being consumed by inspection, fond issues in physical specials, typos. (Svalkash)\n");
 			outputText("-Nerfed LaBova (NPC) milk blast scaling. (Svalkash)\n");
+			outputText("-PC with demonic cock could access new unique sex scene (by MrDumbass): Incubus Feast. If PC have soulless perk and enemy is not group having intact soul scene will have additional bonus of harvesting lethicite from that enemy.\n");
+			outputText("-Gigant's Grip perk req. changed from req. only Weapon Mastery to req. either Weapon Mastery or Job: Gunslinger. Also added more info on this perk about it relation to dual wielding range weapons.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//one of two new unique sex scenes: Succubus Feast & Incubus Feast.
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

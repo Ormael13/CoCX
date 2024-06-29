@@ -2311,7 +2311,7 @@ import classes.Scenes.Combat.CombatAbility;
 			menu();
 			if (player.ascensionPerkPoints >= cost && player.perkv1(perk) < maxRank) addButton(0, "Add 1 level", addDarkAscensionPerk, perk, maxRank);
 			if (player.ascensionPerkPoints >= cost && player.perkv1(perk) == maxRank) addButtonDisabled(0, "Add 1 level", "You've reached max rank for this perk at current tier of dark ascension. To unlock higher ranks you need to Ascend again.");
-			addButton(4, "Back", ascensionPerkMenu2);
+			addButton(4, "Back", darkAscensionMenu);
 		}
 		private function addDarkAscensionPerk(perk:* = null, maxRank:int = 10):void {
 			var cost:int = player.perkv1(perk) + 1;
@@ -2351,7 +2351,7 @@ import classes.Scenes.Combat.CombatAbility;
 			menu();
 			if (player.ascensionPerkPoints >= cost && player.perkv1(perk) < maxRank) addButton(0, "Add 1 level", addDarkAscensionPerk2, perk, maxRank);
 			if (player.ascensionPerkPoints >= cost && player.perkv1(perk) == maxRank) addButtonDisabled(0, "Add 1 level", "You've reached max rank for this perk at current tier of dark ascension. To unlock higher ranks you need to Ascend again.");
-			addButton(4, "Back", ascensionPerkMenu2);
+			addButton(4, "Back", darkAscensionMenu);
 		}
 		private function addDarkAscensionPerk2(perk:* = null, maxRank:int = 10):void {
 			var cost:int = player.perkv1(perk) + 1;

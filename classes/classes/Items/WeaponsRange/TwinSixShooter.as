@@ -17,7 +17,7 @@ package classes.Items.WeaponsRange
 		
 		override public function canEquip(doOutput:Boolean):Boolean {
 			if (game.player.hasPerk(PerkLib.DualWield) || game.player.hasPerk(PerkLib.AntyDexterity)) return super.canEquip(doOutput);
-			if (doOutput) outputText("You aren't skilled enough to handle this pair of firearms!  ");
+			if (doOutput) outputText("You aren't skilled enough to handle this pair of firearms! (req. Dual Wield/Anty-Dexternity)  ");
 			return false;
 		}
 	}

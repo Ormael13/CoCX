@@ -20,7 +20,7 @@ package classes.Items.WeaponsRange
 				return super.canEquip(doOutput);
 			}
 			if (!game.player.hasPerk(PerkLib.GigantGrip) && !game.player.hasPerk(PerkLib.AntyDexterity)) {
-				if (doOutput) outputText("You aren't skilled enough to handle this pair of firearms!  ");
+				if (doOutput) outputText("You aren't skilled enough to handle this pair of firearms! (req. Gigant's Grip/Anty-Dexternity)  ");
 				return false;
 			}
 			if (doOutput) outputText("You aren't skilled in handling large firearms with one hand yet to effectively use those rifles. Unless you want to hurt yourself instead of your enemies when trying to use them...  ");

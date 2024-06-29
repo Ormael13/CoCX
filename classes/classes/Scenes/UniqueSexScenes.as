@@ -182,7 +182,8 @@ public class UniqueSexScenes extends BaseContent
 				USSLiveDildo(),
 				USSJiangshiDrn(),
 				USSAnubiMummyCurse(),
-				USSTrueDemonSuccubusFeast()];
+				USSTrueDemonSuccubusFeast(),
+				USSTrueDemonIncubusFeast()];
 
 			var bd:ButtonDataList = new ButtonDataList();
 			//menuItems.push();
@@ -914,7 +915,7 @@ public class UniqueSexScenes extends BaseContent
 			outputText("Hungry for [monster his] seed you lick [themonster] neck sensually and whisper to [monster his] ears as you clamp down your vice like cunt around [monster his] penis.\n\n");
 			outputText("\"<i>It’s time for your toy to shoot it all out… Every. Last. Drop… Just for you.</i>\"\n\n");
 			outputText("[monster He] begins roaring a gut wrenching orgasm as [monster his] cock finally is freed from your curse, cum rushing through [monster his] urethra and right into your thirsty cunt. You moan in rapture as the cum floods your walls, rushing past your cervix to fill your demonic womb, making you balloon up with the sheer volume of seed. Doesn't matter if you birth a litter of imps after this, the meal was worth it. You reach orgasm again several times from the consecutive powerful cum shot on your clit. ");
-			outputText("[monster His] hips has begun instinctively trusting into you as well in order to unload the cum faster, albeit it improves your own pleasure. As [monster he] finally runs out of cum  your semen pregnant belly begins to shrink as you drink up and absorb the food into your body, your skin gaining in luster, vitality and power from the healthy consumption of cum. You would be ready for a round two but the passed out body of your partner hints that it clearly won't be with [monster him].");
+			outputText("[monster His] hips has begun instinctively trusting into you as well in order to unload the cum faster, albeit it improves your own pleasure. As [monster he] finally runs out of cum your semen pregnant belly begins to shrink as you drink up and absorb the food into your body, your skin gaining in luster, vitality and power from the healthy consumption of cum. You would be ready for a round two but the passed out body of your partner hints that it clearly won't be with [monster him].");
 			if (SuccubusIncubusFeastNotWrongEnemyTypeForLethicite() && player.hasPerk(PerkLib.Soulless)) outputText(" You stand up and collect the small purple shard of lethicite left at the now soulless body of your partner pocketing it up for later.");
 			outputText("\n\nSatisfied nonetheless and feeling great from the cum shot in your lower mouth you head back to camp.\n\n");
 			player.sexReward("cum","Vaginal");
@@ -937,41 +938,53 @@ public class UniqueSexScenes extends BaseContent
 			if (monster is TentacleBeast || monster is TentacleBeastRaging) return false;
 			else return true;
 		}
-		private function SuccubusIncubusFeastNotWrongEnemyTypeForLethicite():Boolean{
-			return (!monster.hasPerk(PerkLib.Enemy300Type) && !monster.hasPerk(PerkLib.EnemyConstructType) && !monster.hasPerk(PerkLib.EnemyElementalType) && !monster.hasPerk(PerkLib.EnemyFleshConstructType) && !monster.hasPerk(PerkLib.EnemyGhostType) &&
-			!monster.hasPerk(PerkLib.EnemyLargeGroupType) && !monster.hasPerk(PerkLib.EnemyTrueDemon) && !monster.hasPerk(PerkLib.EnemyUndeadType) && !monster.hasPerk(PerkLib.UniqueNPC));
-		}
 
 		public function trueDemonIncubusFeast():void {
 			clearOutput();
-			outputText("\"<i></i>\"\n\n");
-			outputText("\"<i></i>\"\n\n");
-			outputText("\"<i></i>\"\n\n");
-			outputText("\"<i></i>\"\n\n");
-			outputText("\"<i></i>\"\n\n");
-			outputText("\"<i></i>\"\n\n");
-			outputText("\"<i></i>\"\n\n");
-			outputText("\"<i></i>\"\n\n");
-			outputText("\"<i></i>\"\n\n");
-			outputText("\"<i></i>\"\n\n");
+			outputText("You lick your lips as you eye [themonster] " + monster.vaginaDescript() + " with interest. You can already imagine how it will feel around your infernal shaft. First things first: You grab your fallen foe by the chin and lift it so she can look straight into your eyes.\n\n");
+			outputText("\"<i>You know you’re going to have a bit of fun with your new toy; hopefully [monster he] will make it worth your while…</i>\"\n\n");
+			outputText("You can already smell how horny, never mind see how wet, you've made your new prey, and you're as ready to fill that hole with your mast just as she is to take it. One finger slides in without warning, drawing a gasp of shock from her as she reflexively leans into you, and with a few strokes, you prod further into her, ");
+			outputText("probing for a reaction until she croons a throaty moan as you find her trigger. A pulse of demonic magic sets every nerve within her slit alight as she starts trying to hump your hand. You pull out before she can get off and place your finger not far from her nose.\n\n");
+			outputText("\"<i>Is your slut trying to cum before you do? Perhaps some reprimand is in order... A curse of denial, no cumming for a week? No, that'd be too easy. You will let this slut know who's in charge here.</i>\"\n\n");
+			outputText("\"<i>To push your motive, you drag your finger slowly across [monster he]'s mouth, letting your toy relish in the feeling of submitting to you as [monster he] looks you in the eyes desperately, salivating over your hand, cleaning it off like a good slut.</i>\"\n\n");
+			outputText("With that done, you stroke along her slit, getting a whimper of need before your claw draws a simple seal above her pubes, using your demonic power and her own girlcum to ink it out. The symbol turns black as you draw before glowing fuschia as you finish, and she squeaks, eyes rolling back in her head as the pleasure you've already given her begins to echo inside her - without letting up.\n\n");
+			outputText("A seal to force the pleasure to linger, without fading in time; to build upon itself with every new stroke and lovely tease; to block the release from being possible without your say-so. A lovely little way to drive someone mad with Lust, and she's getting to enjoy it from your hands. You lean in to kiss her, your demonic tongue wrapping around hers as you make out with her.\n\n");
+			outputText("While she's busy dueling your tonsils and losing, you spread your new toy's legs wide and rest your shaft upon her fuckhole, the crown of your cocktip resting against her clit. You then pull back, press against her folds, and slide in, inch by inch, until you're hilted in her, drawing a gurgle of delighted desperation from your cocksleeve.\n\n");
+			outputText("\"<i>You need them to scream for you, to beg for your body… you live for their moans, their desperation… more… it’s not enough… it’s never enough.</i>\"\n\n");
+			outputText("The whimpering wench you've impaled on your tool is grinding desperately against you, and while she's clearly trying to get off, she's not leaving you out in the cold. Still, you have your own ways of getting pleasure and, after pinning her hips down with your grasp, you start to ram into her, and she <i>squeals</i> in pleasure and frustration you can <i>taste</i>. Back and forth, in and out, the crown pulling past her cunt-lips before you slam back in all the way; her fuckhole is already trying to milk you of your seed, even with her body physically incapable of getting off.\n\n");
+			outputText("Grinning, you decide to give the slut what she wants and slam deep, growling and snarling as you stuff her body with demonic seed. Her voice starts to gag and choke as she feels it, eyes rolling back <i>completely</i> as her brain tries to process what's happening to her while not breaking down from the blockade in her twat. The unholy cream you fill her with starts to leak out, thicker than chowder and pearly-black from your demonic nature. Her whimpers start to reach a pitch that her throat shouldn't be able to make.\n\n");
+			outputText("<i>Has your poor toy lost every sense of her mind from the cock you've stuffed them with? Should you let them cum… or leave them begging? Decisions, decisions…</i>\n\n");
+			if (isntATentacleBeast()) outputText("You stroke [themonster] chin with your hand and consider while her body, shivering and twitching, sends jolts of pleasure into you, your throbbing cock absorbing all of her frustrated delight.\n\n");
 			menu();
 			addButton(1, "Cum", trueDemonIncubusFeastCum);
 			addButton(3, "Nope", trueDemonIncubusFeastNope);
 		}
 		public function trueDemonIncubusFeastCum():void {
-			outputText("\"<i></i>\"\n\n");
-			outputText("\"<i></i>\"\n\n");
-			outputText("\"<i></i>\"\n\n");
-			outputText("\"<i></i>\"\n\n");
-			outputText("\"<i></i>\"\n\n");
-			outputText("\"<i></i>\"\n\n");
-			outputText("\"<i></i>\"\n\n");
-			outputText("\"<i></i>\"\n\n");
-			outputText("\"<i></i>\"\n\n");
-			
+			outputText("Yes...perhaps she's suffered enough. After all, she did get you off, and quite beautifully. Leaning in, you kiss your cumdumpster's nose, slowly pulling your cock out to tease her, eliciting a despairing whine from her.\n\n");
+			outputText("<i>She thinks you're done with her, and she's so sad. You can't <b>wait</b> to surprise her.</i>\n\n");
+			outputText("You <i>slam</i> back into her cumhole and let your seal break. She begins to gasp, staccato cries of bliss - and when she cums, the <i>scream</i> of joy, of ecstacy, of sheer <i>relief</i> is almost painful to your own ears. Even then, the pleasure of her muff massaging your cock, hotter and tighter than ever before, drawing a second orgasm from you, is worth it - and so is the third one, which hits right in the middle of your second. Her hips thrash against yours; every breath she takes is a massive, heaving gasp; and her tits bounce and jostle as if you were brutally fucking her, despite you being hilted tightly in her honeypot.\n\n");
+			outputText("As her body finally starts to run out of steam and her orgasm starts to die down, you pull out and finish your third orgasm by dumping your demon-cum all over her body - her belly, tits, face, chest, and shoulders, drowning her in unholy seed.");
+			if (SuccubusIncubusFeastNotWrongEnemyTypeForLethicite() && player.hasPerk(PerkLib.Soulless)) outputText(" Letting her body warp into a new succubus, you take the small purple shard of lethicite that she left between her legs, pocketing it for later.\n\n");
+			outputText("\n\nShe probably won't even be conscious for a day or so...which means it's time to find your next new plaything.\n\n");
+			player.sexReward("girlcum","Dick");
+			if (SuccubusIncubusFeastNotWrongEnemyTypeForLethicite() && player.hasPerk(PerkLib.Soulless)) {
+				if (monster.level < 25) inventory.takeItem(consumables.LETHITE, cleanupAfterCombat);
+				else if (monster.level < 50) inventory.takeItem(consumables.LETH1TE, cleanupAfterCombat);
+				else if (monster.level < 75) inventory.takeItem(consumables.LETH2TE, cleanupAfterCombat);
+				else inventory.takeItem(consumables.LETH3TE, cleanupAfterCombat);
+			}
+			else cleanupAfterCombat();
 		}
 		public function trueDemonIncubusFeastNope():void {
-			
+			outputText("You chuckle as you decide against letting her enjoy herself.\n\n");
+			outputText("\"<i>Your little slut tried to get off before you, and now... they won't get to cum at all. Sneering, you can't help but chuckle a bit. Surely another demon could release the seal... or not. Good luck finding a merciful demon to help.</i>\"\n\n");
+			outputText("You then slide out of the abused hole, stand up, and walk away, and leave the still-twitching body of [themonster] behind. You head back to camp, thoroughly satisfied with your latest conquest.\n\n");
+			player.sexReward("no");
+			cleanupAfterCombat();
+		}
+		private function SuccubusIncubusFeastNotWrongEnemyTypeForLethicite():Boolean{
+			return (!monster.hasPerk(PerkLib.Enemy300Type) && !monster.hasPerk(PerkLib.EnemyConstructType) && !monster.hasPerk(PerkLib.EnemyElementalType) && !monster.hasPerk(PerkLib.EnemyFleshConstructType) && !monster.hasPerk(PerkLib.EnemyGhostType) &&
+			!monster.hasPerk(PerkLib.EnemyLargeGroupType) && !monster.hasPerk(PerkLib.EnemyTrueDemon) && !monster.hasPerk(PerkLib.EnemyUndeadType) && !monster.hasPerk(PerkLib.UniqueNPC));
 		}
 }
 }
