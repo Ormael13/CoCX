@@ -703,7 +703,7 @@ public final class ConsumableLib extends AlchemyLib
 								GoblinRace.GoblinRareSkinColors
 						)
 				);
-		public const GRE_BER: Consumable = mk("Gre.Beer", "Gre.Beer", "a flagon of potent gremlin beer", 6, "This disgusting brew is made from the combination of goblin ale and Imp food. It smells of old engine oil and rust, let’s hope it does not taste like that as well.", m.gremlinBeer, ItemConstants.U_TF)
+		public const GRE_BER: Consumable = mk("Gre.Beer", "Gre.Beer", "a flagon of potent gremlin beer", 6, "This disgusting brew is made from the combination of goblin ale and incubi draft. It smells of old engine oil and rust, let’s hope it does not taste like that as well.", m.gremlinBeer, ItemConstants.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
 						DEFAULT_ESSENCE_DROP_TABLE(AE_GREMLIN),
@@ -1253,4 +1253,4 @@ public final class ConsumableLib extends AlchemyLib
 		{
 		}
 	}
-}
+}

@@ -152,7 +152,17 @@ public class Hair extends BodyPart {
 	EnumValue.add(Types, CRAZY, "CRAZY", {
 		name:"crazy",
 		shortDesc: "crazy {hair}",
-		appearanceDesc: "Your wild {hairInfo} is positively crazy, with spiked tips pointing outwards to your sides.",
+		appearanceDescFunc: function(creature: *): String {
+			var desc: String = "Your wild {hairInfo} is positively crazy. They are permanently stuck in a messed up spiky shape";
+
+			if (creature.headjewelryName == "Machinist Goggles" || creature.headjewelryName == "Scanner goggles" || creature.headjewelryName == "S.A Tech Goggles") {
+				desc += ". On top of them is your pair of trusty "+creature.headjewelryName+". You never remove them, even for sex";
+			}
+
+			desc += "."
+
+			return desc;
+		},
 		ignoresStyle: true
 	});
 

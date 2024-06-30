@@ -164,8 +164,8 @@ public class RaceScoreBuilder {
 		)
 		return this;
 	}
-	public function noHorns(score:int):RaceScoreBuilder {
-		return hornType(Horns.NONE, score);
+	public function noHorns(score:int, failScore:int=0):RaceScoreBuilder {
+		return hornType(Horns.NONE, score, failScore);
 	}
 	public function legType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_LEG_TYPE, type, score, failScore, customName);
@@ -359,8 +359,8 @@ public class RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_TAIL_TYPE, type, score, failScore, customName);
 		return this;
 	}
-	public function noTail(score:int):RaceScoreBuilder {
-		return tailType(Tail.NONE, score);
+	public function noTail(score:int, failScore:int=0):RaceScoreBuilder {
+		return tailType(Tail.NONE, score, failScore);
 	}
 	public function tailTypeAndCount(type:*, count:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		var req:RacialRequirement = RacialRequirement.joinAnd(

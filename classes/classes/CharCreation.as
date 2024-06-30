@@ -3132,6 +3132,9 @@ import classes.Scenes.Combat.CombatAbility;
 				if (player.hasPerk(PerkLib.SensualLover) && player.perkv4(PerkLib.SensualLover) < 1) addButton(1, "SensualLover", permanentizePerk4, PerkLib.SensualLover);
 				else if (player.hasPerk(PerkLib.SensualLover) && player.perkv4(PerkLib.SensualLover) > 0) addButtonDisabled(1, "SensualLover", "Sensual Lover perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(1, "SensualLover", "Sensual Lover");
+				if (player.hasPerk(PerkLib.TechOverdrive) && player.perkv4(PerkLib.TechOverdrive) < 1) addButton(2, "TechOverdrive", permanentizePerk4, PerkLib.TechOverdrive);
+				else if (player.hasPerk(PerkLib.TechOverdrive) && player.perkv4(PerkLib.TechOverdrive) > 0) addButtonDisabled(2, "TechOverdrive", "Tech Overdrive perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(2, "TechOverdrive", "Tech Overdrive");
 				//3
 				//addButton(4, "Next", ascensionPermeryMenu, page + 1);
 				//5

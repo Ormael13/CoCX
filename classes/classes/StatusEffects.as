@@ -1117,6 +1117,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const SubZeroConditions:StatusEffectType         = mkCombat("Sub zero conditions");
 		public static const TailWhip:StatusEffectType                  = mkCombat("Tail Whip");
 		public static const TearsOfDenial:StatusEffectType             = mkCombat("Tears of Denial");
+		public static const TechOverdrive:StatusEffectType             = mkCombat("Tech Overdrive");
 		public static const TemporaryHeat:StatusEffectType             = mkCombat("Temporary Heat");
 		public static const TentacleBind:StatusEffectType              = mkCombat("TentacleBind");
 		public static const ThroatPunch:StatusEffectType               = mkCombat("Throat Punch");
@@ -1313,6 +1314,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CooldownLustnadeLauncher:StatusEffectType      		= mkCombat("Cooldown Lustnade Launcher");
 		public static const CooldownKick:StatusEffectType                		= mkCombat("Cooldown Kick");
 		public static const CooldownKnowledgeOverload:StatusEffectType          = mkCombat("Cooldown Knowledge overload");
+		public static const CooldownMalfunction:StatusEffectType           		= mkCombat("Cooldown Malfunction");
 		public static const CooldownManaBarrage:StatusEffectType       	 		= mkCombat("Cooldown Mana Barrage");
 		public static const CooldownManaShot:StatusEffectType       	 		= mkCombat("Cooldown Mana Shot");
 		public static const CooldownMilkBlast:StatusEffectType           		= mkCombat("Cooldown Milk Blast");
@@ -1421,4 +1423,4 @@ import classes.StatusEffects.VampireThirstEffect;
 			return new StatusEffectType(id,CombatStatusEffect,1);
 		}
 	}
-}
+}

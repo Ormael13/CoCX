@@ -3960,6 +3960,8 @@ public class PerkLib
 		public static const Lustzerker:PerkType = mk("Lustzerker", "Lustzerker",
 				"Lustserking increases attack and physical defenses resistance but reduces lust resistance.")
 				.withBuffs({'maxwrath_base':+500});
+		public static const TechOverdrive:PerkType = mk("Tech Overdrive", "Tech Overdrive",
+				"Empower your technological equipment, causing it to deal increased damage but weaken your defences as a result.");
 		public static const MagmaSlimeCore:PerkType = mk("Magma Slime Core", "Magma Slime Core",
 				"Grants more control over your slimy body, allowing you to go twice as long without fluids.");
 		public static const ManticoreCumAddict:PerkType = mk("Manticore Cum Addict", "Manticore Cum Addict",

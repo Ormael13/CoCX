@@ -593,7 +593,7 @@ public class Face extends SaveableBodyPart {
 	public static const CRAZY: int = 54;
 	EnumValue.add(Types, CRAZY, "CRAZY", {
 		name: "crazy",
-		appearanceDesc: "Although your mouth is quite human-looking, your have a near constant toothy smile makes you look quite unhinged, and your canines are slightly longer and pointier than human ones.",
+		appearanceDesc: "Your mouth is human all right though your near constant crazy toothy smile isn't exactly helping to make you look sane.",
 		humanShaped: true
 	});
 	public static const SMUG: int = 55;

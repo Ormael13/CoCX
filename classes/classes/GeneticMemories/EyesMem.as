@@ -481,6 +481,17 @@ package classes.GeneticMemories {
 				return CoC.instance.transformations.EyesDemon;
 			}
 		});
+
+		public static const GREMLIN:int = _partid++;
+		EnumValue.add(Memories, GREMLIN, "GREMLIN", {
+			id: "Gremlin Eyes",
+			name: "Gremlin Eyes",
+			cost: 100,
+			title: "Gremlin",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesGremlin;
+			}
+		});
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

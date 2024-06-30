@@ -7098,6 +7098,7 @@ public class Combat extends BaseContent {
         if (player.armor == armors.GTECHC_) damage *= 1.5;
 		if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
 		if (player.lowerGarment == undergarments.T_PANTY) damage *= 1.05;
+        if (player.hasStatusEffect(StatusEffects.TechOverdrive)) damage *= 1.2;
         return damage;
     }
 
@@ -10707,6 +10708,12 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 				if (!player.hasPerk(PerkLib.EndlessRage) && player.statusEffectv3(StatusEffects.Lustzerking) == 1) player.addStatusValue(StatusEffects.Lustzerking, 1, 1);
 			}
         }
+        if (player.hasStatusEffect(StatusEffects.TechOverdrive)) {
+            if (player.statusEffectv1(StatusEffects.TechOverdrive) <= 0) {
+                player.removeStatusEffect(StatusEffects.TechOverdrive);
+                outputText("<b>Tech Overdrive effect wore off!</b>\n\n");
+            } else player.addStatusValue(StatusEffects.TechOverdrive, 1, -1);
+        }
         if (player.hasStatusEffect(StatusEffects.OniRampage)) {
             if (player.statusEffectv1(StatusEffects.OniRampage) <= 0) {
                 player.removeStatusEffect(StatusEffects.OniRampage);
@@ -11371,6 +11378,14 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
                 player.removeStatusEffect(StatusEffects.CooldownTelekineticGrab);
             } else {
                 player.addStatusValue(StatusEffects.CooldownTelekineticGrab, 1, -1);
+            }
+        }
+        //Malfunction
+        if (player.hasStatusEffect(StatusEffects.CooldownMalfunction)) {
+            if (player.statusEffectv1(StatusEffects.CooldownMalfunction) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownMalfunction);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownMalfunction, 1, -1);
             }
         }
         //Tazer

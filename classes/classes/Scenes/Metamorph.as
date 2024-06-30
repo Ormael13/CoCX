@@ -1564,6 +1564,7 @@ package classes.Scenes {
 				case "Goat": 			CoC.instance.transformations.EyesGoat.applyEffect();			break;
 				case "Goblin":			CoC.instance.transformations.EyesGoblinColors.applyEffect();	break;
 				case "Gorgon": 			CoC.instance.transformations.EyesGorgon.applyEffect();			break;
+				case "Gremlin":			CoC.instance.transformations.EyesGremlinColors.applyEffect();	break;
 				case "Gryphon": 		CoC.instance.transformations.EyesGryphon.applyEffect();			break;
 				case "Hinezumi": 		CoC.instance.transformations.EyesHinezumi.applyEffect();		break;
 				case "Human": 			CoC.instance.transformations.EyesHuman.applyEffect();			break;

@@ -244,17 +244,17 @@ public class Changelog extends BaseContent
 			outputText("-New consumable (by Liadri): Grand Lethicite. Drops from true demon enemies of from unique sex scene for true demon (when defeating generic enemy with intact soul). Consuming it by PC with Soulless perk will give up to 750 demonic energy.\n");
 			outputText("-Fix: When crafting pills changing or picking the same residue cause currently added residue to vanish instead of been returned. (aimozg)\n");
 			outputText("-Fixing weirdness on feral combat ingoring all handless PC's (or was it maidenless ones...). Now even they can have rizz.\n");
-			outputText("-Misdirection and Rapier Training perks can be permed on ascension/dark ascension.\n");
+			outputText("-Misdirection, Rapier Training and Tech Overdrive perks can be permed on ascension/dark ascension.\n");
 			outputText("-Fixed: catalysts being consumed by inspection, fond issues in physical specials, typos. (Svalkash)\n");
 			outputText("-Nerfed LaBova (NPC) milk blast scaling. (Svalkash)\n");
 			outputText("-PC with demonic cock could access new unique sex scene (by MrDumbass): Incubus Feast. If PC have soulless perk and enemy is not group having intact soul scene will have additional bonus of harvesting lethicite from that enemy.\n");
 			outputText("-Gigant's Grip perk req. changed from req. only Weapon Mastery to req. either Weapon Mastery or Job: Gunslinger. Also added more info on this perk about it relation to dual wielding range weapons.\n");
 			outputText("-Sand Worm lower body allow to make tail slam + stinger stab during feral combat combo. Bugfixing sand worms not generating venom needed for their special.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Small changes to make sure Francesca's Black Cloak will not remove on unequip Misdirection from raphael training (whenever it was permed or not yet).\n");
+			outputText("-Gremlin race score calculations slight update and bonuses changes to all tiers. First one renamed to gremlin-kin, 2nd into gremlin and added 3rd arch gremlin. 2nd (24+) and 3rd (36+) tier req. now soulless perk and their bonuses are as follow: -50% to str multi, +100%/+160% to spe multi, +180%/+250% to int multi, +150%/+200% to lib multi, +30 min lust, +20 Sens\n");
+			outputText("-New event perk: Tech Overdrive. Gained by been gremlin-kin. Effects: Empower your technological equipment, causing it to deal increased damage but weaken your defences as a result.\n");
+			outputText("-New M. Special: Tech Overdrive. Usable by having Tech Overdrive perk. Cost 40 mana. Increase by 20(+20per ng tier) atk of melee or range tech wepaons, add 20% to mech onboard weapons dmg, lower physical def by 50%. It would last for 10 turns.\n");
+			outputText("-New M. Special: Malfunction. Usable by been gremlin-kin. Cost 40 mana and can stun for 6 turns. Have 10 turns cooldown after use. Overload a magitech or construction, causing damage and immobilising it for a while. Does not work on living things or sentient constructs.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -286,7 +286,7 @@ public class Changelog extends BaseContent
 			outputText("3rd floor teleportation circle room, perk allowing to always run away from enemy/ies been ignored in dungeons, unarmed/feral giving mastery gains for small weapons, 2 of 4 SF to Elemental Energy conversion options having wrong check for usable SF, using Fiery Band for calling Kiha to help fight... Kiha, Ceraph after update still not able to win using her super cool lust beam attack, ");
 			outputText("Pilgrim's Bounty perk setting cumQ as if max lust was 100, Raphael rape scene treating all PC cocks as tentalce cocks, Condensed Power and Titanic Strength perks desc/effects been misaligned/incorectly calculated, HB Mech Dragon's Breath Flamer & Scatter Laser upgrade(s) after instaling each weapon, HB Ayo Armor have it stored SF reset on loading save, Vapula not longer will make Joy ");
 			outputText("join any threesome scenes, Patchouli sex scenes will now know when she gained cock she could use, Pure JoJo anal sex sex scene cock parser going postal, trapped satyr sex scenes not giving sex XP or triger any related effects, Cum Cannon checking for cow not mino race, White-Faced One Birthright (Final Form) stat multi bonuses, Nadia recruitment endcounter bug msg, ");
-			outputText("one of Raphael scenes using variant for tentacle cocks that can go all way throu without having such cock(s), unable to gain plasma dmg from using fire buff on lightning weapon and vice versa, unable to use Blind during Draculina fight, rescue from bad end not clearing lingering status effects\n\n");
+			outputText("one of Raphael scenes using variant for tentacle cocks that can go all way throu without having such cock(s), unable to gain plasma dmg from using fire buff on lightning weapon and vice versa, unable to use Blind during Draculina fight, rescue from bad end not clearing lingering status effects, Centaurium tf effect checking for wrong elf-like ears type\n\n");
 			/*ostatni punkt changelogu
 			outputText("(Part 2/2) <b>Version 0.9a:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
