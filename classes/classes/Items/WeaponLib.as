@@ -571,12 +571,14 @@ public final class WeaponLib extends ItemConstants
 				"Macgrsw","Mach.greatsword","Machine Greatsword","a Machine Greatsword","slash",19,2720,
 				"This greatsword is half invention and half weapon. Instead of a sharp straight blade, the weapon’s sides are a set of metal teeth that constantly move in order to properly saw through flesh and more solid matter, creating grievous wounds. Very good for cutting down trees too.",
 				WT_EXOTIC, WSZ_LARGE)
-				.withEffect(IELib.Bleed, 100) as Weapon;
+				.withEffect(IELib.Bleed, 100)
+				.withTags(W_HTECHWEAPON)  as Weapon;
 		public const MACSPEA:Weapon = new Weapon(
 				"Macspea","Mach.spear","Machine Spear","a Machine Spear","piercing stab",19,2720,
 				"This spear is half invention and half weapon. Instead of a standard run of the mill spearhead, the weapon tip is a massive screw that spins on itself continually to burrow into the opponent’s flesh. Any decisive hit you will land with this thing will possibly be fatal.",
 				WT_EXOTIC, WSZ_LARGE)
-				.withEffect(IELib.ArmorPenetration, 100) as Weapon;
+				.withEffect(IELib.ArmorPenetration, 100)
+				.withTags(W_HTECHWEAPON)  as Weapon;
 		public const MASAMUN:Weapon = new Weapon(
 				"masamune","Masamune","masamune katana","a masamune katana","slash",112,8960,
 				"This blessed katana is made in shining steel and heavily decorated with silver and blue sapphires. When used by a pure-hearted knight, the divine will within guides each strike, making it much deadlier.",
@@ -711,12 +713,14 @@ public final class WeaponLib extends ItemConstants
 				"Ripper1","Ripper1.0","Ripper 1.0","a Ripper 1.0","slash",24,8260,
 				"Similar to the machine Greatsword, this weapon is highly mechanical. Instead of a sharp straight blade, the weapon’s sides are a set of sharp metal teeth that constantly move in order to properly saw through flesh and more solid matter, creating grievous wounds. Very good for cutting down trees too.",
 				WT_EXOTIC, WSZ_LARGE)
-				.withEffect(IELib.Bleed, 100) as Weapon;
+				.withEffect(IELib.Bleed, 100)
+				.withTags(W_HTECHWEAPON)  as Weapon;
 		public const RIPPER2:Weapon = new Weapon(
 				"Ripper2","Ripper2.0","Ripper 2.0","a Ripper 2.0","slash",29,17360,
 				"Similar to the machine Greatsword, this weapon is highly mechanical. Instead of a sharp straight blade, the weapon’s sides are a set of sharp metal teeth that constantly move in order to properly saw through flesh and more solid matter, creating grievous wounds. The blades movement is so fast it creates heat along the length and thanks to a small system set, the saw is constantly aflame. Aside of cutting fleshy things in half, it is very good for taking down trees.",
 				WT_EXOTIC, WSZ_LARGE)
-				.withEffect(IELib.Bleed, 100) as Weapon;
+				.withEffect(IELib.Bleed, 100)
+				.withTags(W_HTECHWEAPON)  as Weapon;
 		public const RRAPIER:Weapon = new Weapon(
 				"RRapier", "RRapier", "vulpine rapier", "Raphael's vulpine rapier", "slash", 8, 640,
 				"He's bound it with his red sash around the length like a ribbon, as though he has now gifted it to you.  Perhaps it is his way of congratulating you.",
@@ -846,7 +850,8 @@ public final class WeaponLib extends ItemConstants
 				"TMacgrsw","T.Mach.greatsword","Twin Machine Greatswords","a Twin Machine Greatswords","slash",19,5440,
 				"This twin greatswords are half invention and half weapon. Instead of a sharp straight blade, the weapon’s sides are a set of metal teeth that constantly move in order to properly saw through flesh and more solid matter, creating grievous wounds. Very good for cutting down trees too.",
 				WT_EXOTIC, WSZ_LARGE, true)
-				.withEffect(IELib.Bleed, 100) as Weapon;
+				.withEffect(IELib.Bleed, 100)
+				.withTags(W_HTECHWEAPON)  as Weapon;
 		public const TODAGGER:Weapon = new Weapon(
 				"ToDagger","T.Dagger","topaz dagger","a topaz dagger","stab",3,240,
 				"This dagger is made of eversteel and richly decorated with yellow topazes and copper engravings. The magic within this shining blade will oversaturate the metal with electricity when charged with magic.",
@@ -869,12 +874,14 @@ public final class WeaponLib extends ItemConstants
 				"TRipper1","T.Ripper1.0","Twin Ripper 1.0","a Twin Ripper 1.0","slash",24,16520,
 				"Similar to the machine Greatsword, those weapons are highly mechanical. Instead of a sharp straight blade, the weapon’s sides are a set of sharp metal teeth that constantly move in order to properly saw through flesh and more solid matter, creating grievous wounds. Very good for cutting down trees too.",
 				WT_EXOTIC, WSZ_LARGE, true)
-				.withEffect(IELib.Bleed, 100) as Weapon;
+				.withEffect(IELib.Bleed, 100)
+				.withTags(W_HTECHWEAPON)  as Weapon;
 		public const TRIPPER2:Weapon = new Weapon(
 				"TRipper2","T.Ripper2.0","Twin Ripper 2.0","a Twin Ripper 2.0","slash",29,34720,
 				"Similar to the machine Greatsword, those weapons are highly mechanical. Instead of a sharp straight blade, the weapon’s sides are a set of sharp metal teeth that constantly move in order to properly saw through flesh and more solid matter, creating grievous wounds. The blades movement is so fast it creates heat along the length and thanks to a small system set, the saws are constantly aflame. Aside of cutting fleshy things in half, it is very good for taking down trees.",
 				WT_EXOTIC, WSZ_LARGE, true)
-				.withEffect(IELib.Bleed, 100) as Weapon;
+				.withEffect(IELib.Bleed, 100)
+				.withTags(W_HTECHWEAPON) as Weapon;
 		public const TRSTSWO:Weapon = new Weapon(
 				"TrStSwo","TruestrikeSword", "Truestrike sword", "a Truestrike sword", "slash", 5, 400,
 				"Lia will write desc of it...soon.",

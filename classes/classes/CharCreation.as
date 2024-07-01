@@ -2311,7 +2311,7 @@ import classes.Scenes.Combat.CombatAbility;
 			menu();
 			if (player.ascensionPerkPoints >= cost && player.perkv1(perk) < maxRank) addButton(0, "Add 1 level", addDarkAscensionPerk, perk, maxRank);
 			if (player.ascensionPerkPoints >= cost && player.perkv1(perk) == maxRank) addButtonDisabled(0, "Add 1 level", "You've reached max rank for this perk at current tier of dark ascension. To unlock higher ranks you need to Ascend again.");
-			addButton(4, "Back", ascensionPerkMenu2);
+			addButton(4, "Back", darkAscensionMenu);
 		}
 		private function addDarkAscensionPerk(perk:* = null, maxRank:int = 10):void {
 			var cost:int = player.perkv1(perk) + 1;
@@ -2351,7 +2351,7 @@ import classes.Scenes.Combat.CombatAbility;
 			menu();
 			if (player.ascensionPerkPoints >= cost && player.perkv1(perk) < maxRank) addButton(0, "Add 1 level", addDarkAscensionPerk2, perk, maxRank);
 			if (player.ascensionPerkPoints >= cost && player.perkv1(perk) == maxRank) addButtonDisabled(0, "Add 1 level", "You've reached max rank for this perk at current tier of dark ascension. To unlock higher ranks you need to Ascend again.");
-			addButton(4, "Back", ascensionPerkMenu2);
+			addButton(4, "Back", darkAscensionMenu);
 		}
 		private function addDarkAscensionPerk2(perk:* = null, maxRank:int = 10):void {
 			var cost:int = player.perkv1(perk) + 1;
@@ -3099,7 +3099,7 @@ import classes.Scenes.Combat.CombatAbility;
 				if (player.hasPerk(PerkLib.MaraesGiftProfractory) && player.perkv4(PerkLib.MaraesGiftProfractory) < 1) addButton(3, "MaraesGiftP.", permanentizePerk3, PerkLib.MaraesGiftProfractory);
 				else if (player.hasPerk(PerkLib.MaraesGiftProfractory) && player.perkv4(PerkLib.MaraesGiftProfractory) > 0) addButtonDisabled(3, "MaraesGiftP.", "Maraes Gift Profractory perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(3, "MaraesGiftP.", "Maraes Gift Profractory");
-				//addButton(4, "Next", ascensionPermeryMenu, page + 1);
+				addButton(4, "Next", ascensionPermeryMenu, page + 1);
 				if (player.hasPerk(PerkLib.MaraesGiftStud) && player.perkv4(PerkLib.MaraesGiftStud) < 1) addButton(5, "MaraesGiftS.", permanentizePerk3, PerkLib.MaraesGiftStud);
 				else if (player.hasPerk(PerkLib.MaraesGiftStud) && player.perkv4(PerkLib.MaraesGiftStud) > 0) addButtonDisabled(5, "MaraesGiftS.", "Maraes Gift Stud perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(5, "MaraesGiftS.", "Maraes Gift Stud");
@@ -3132,6 +3132,9 @@ import classes.Scenes.Combat.CombatAbility;
 				if (player.hasPerk(PerkLib.SensualLover) && player.perkv4(PerkLib.SensualLover) < 1) addButton(1, "SensualLover", permanentizePerk4, PerkLib.SensualLover);
 				else if (player.hasPerk(PerkLib.SensualLover) && player.perkv4(PerkLib.SensualLover) > 0) addButtonDisabled(1, "SensualLover", "Sensual Lover perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(1, "SensualLover", "Sensual Lover");
+				if (player.hasPerk(PerkLib.TechOverdrive) && player.perkv4(PerkLib.TechOverdrive) < 1) addButton(2, "TechOverdrive", permanentizePerk4, PerkLib.TechOverdrive);
+				else if (player.hasPerk(PerkLib.TechOverdrive) && player.perkv4(PerkLib.TechOverdrive) > 0) addButtonDisabled(2, "TechOverdrive", "Tech Overdrive perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(2, "TechOverdrive", "Tech Overdrive");
 				//3
 				//addButton(4, "Next", ascensionPermeryMenu, page + 1);
 				//5

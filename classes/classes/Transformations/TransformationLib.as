@@ -460,6 +460,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const EyesArigean: Transformation		= eyes.EyesArigean.registerTf(AS_EYES, AE_ARIGEAN);
     public const EyesDemon: Transformation			= eyes.EyesDemon.registerTf(AS_EYES, AE_DEMON);
     public const EyesMoth: Transformation           = eyes.EyesMoth.registerTf(AS_EYES, AE_MOTH);
+    public const EyesGremlin: Transformation        = eyes.EyesGremlin.registerTf(AS_EYES, AE_GREMLIN);
 //=================================
 //                                =
 //   EYE COLORS                   =
@@ -473,6 +474,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const EyesOniColors: Transformation	 			= eyes.EyesOniColors;
 	public const EyesPlantColors: Transformation 			= eyes.EyesPlantColors;
 	public const EyesGoblinColors: Transformation 			= eyes.EyesGoblinColors;
+	public const EyesGremlinColors: Transformation 			= eyes.EyesGremlinColors;
 	public const EyesRaijuColors: Transformation 			= eyes.EyesRaijuColors;
 	public const EyesKirinColors: Transformation 			= eyes.EyesKirinColors;
 	public const EyesKamaitachiColors: Transformation 		= eyes.EyesKamaitachiColors;

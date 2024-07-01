@@ -3,6 +3,7 @@ import classes.BodyParts.*;
 import classes.GeneticMemories.EyesMem;
 import classes.Items.MutationsHelper;
 import classes.Races.GoblinRace;
+import classes.Races.GremlinRace;
 import classes.Scenes.Metamorph;
 import classes.Transformations.*;
 
@@ -791,8 +792,6 @@ public class EyesTransformations extends MutationsHelper {
 			function (doOutput: Boolean): void {
 				var desc: String = "";
 
-				//TransformationUtils.applyTFIfNotPresent(transformations.EyesChangeColor(["green"]), false);
-
 				desc += "your eyes suddenly feel strange as the world gets blurry on you, eventually your vision returns but the world seems more vivid, you rush over to the lake and you are shocked to see your eyes look like they belong on some sort of bug. <b>Your eyes are now like a moth’s eyes</b>";
 				player.eyes.type = Eyes.MOTH;
 
@@ -801,6 +800,22 @@ public class EyesTransformations extends MutationsHelper {
 			// is present
 			function (): Boolean {
 				return player.eyes.type === Eyes.MOTH;
+			}
+	);
+	public const EyesGremlin: Transformation = new SimpleTransformation("Gremlin Eyes",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "Aw gosh, you feel tired as hell, it’s like you spent the better part of yesterday night working on some stupid project. Truth is with those darkened eyelids of yours you might just have. That said, perhaps you should think of it less like a sign of fatigue and more like a sign of demonic nature because you easily imagine these on the faces of small fiends or possessed people too. <b>Seems like you have darkened eyelids now.</b>";
+				player.eyes.type = Eyes.GREMLIN;
+
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.GREMLIN));
+			},
+			// is present
+			function (): Boolean {
+				return player.eyes.type === Eyes.GREMLIN;
 			}
 	);
 
@@ -855,6 +870,17 @@ public class EyesTransformations extends MutationsHelper {
 			// is present
 			function (): Boolean {
 				return InCollection(player.eyes.colour, GoblinRace.GoblinEyeColors);
+			}
+	);
+
+	public const EyesGremlinColors: Transformation = new SimpleTransformation("Gremlin Eye Colors",
+			// apply effect
+			function (doOutput: Boolean): void {
+				transformations.EyesChangeColor(GremlinRace.GremlinEyeColors).applyEffect(doOutput);
+			},
+			// is present
+			function (): Boolean {
+				return InCollection(player.eyes.colour, GremlinRace.GremlinEyeColors);
 			}
 	);
 

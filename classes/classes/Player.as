@@ -896,6 +896,7 @@ use namespace CoC;
 					armorDef += 1;
 				}
 			}
+			if (hasStatusEffect(StatusEffects.TechOverdrive)) armorDef *= 0.5;
 			armorDef = Math.round(armorDef);
 			return armorDef;
 		}
@@ -1163,6 +1164,7 @@ use namespace CoC;
 		public function hasDarkVision():Boolean { return (Eyes.Types[eyes.type].Darkvision || (hasPerk(IMutationsLib.HumanEyesIM) && perkv1(IMutationsLib.HumanEyesIM) >= 4)); }
 		public function isHavingEnhancedHearing():Boolean { return (ears.type == Ears.ELVEN); }
 		public function isTechSavvyPC():Boolean { return (isGoblinoid() || (hasPerk(IMutationsLib.HumanSmartsIM) && perkv1(IMutationsLib.HumanSmartsIM) >= 2) || isRace(Races.WEREFOX)); }
+		public function isTechWeapons():Boolean { return (weapon.isTechWeapon()); }
 		//Weapons for Whirlwind
 		public function isWeaponForWhirlwind():Boolean
 		{
@@ -1648,6 +1650,7 @@ use namespace CoC;
 				}
 				attack += zerkersboost;
 			}
+			if (hasStatusEffect(StatusEffects.TechOverdrive) && (isTechWeapons() || isInGoblinMech() || isInNonGoblinMech())) attack += (20 + (20 * newGamePlusMod));
 			if (isGargoyle() && Forgefather.material == "ebony")
 			{
 				if (Forgefather.refinement == 0) attack *= (1.15);
@@ -1753,7 +1756,7 @@ use namespace CoC;
 			return weaponRange.verb;
 		}
 		override public function get weaponRangeAttack():Number {
-			//var newGamePlusMod:int = this.newGamePlusMod()+1;
+			var newGamePlusMod:int = this.newGamePlusMod()+1;
 			var rangeattack:Number = weaponRange.attack;
 			if (hasPerk(PerkLib.PracticedShot) && str >= 60 && (weaponRangePerk == "Bow" || weaponRangePerk == "Crossbow" || weaponRangePerk == "Throwing")) {
 				if (hasPerk(PerkLib.EagleEye)) rangeattack *= 2;
@@ -1790,7 +1793,8 @@ use namespace CoC;
 			if(hasStatusEffect(StatusEffects.Berzerking)) rangeattack += (30 + (15 * newGamePlusMod));
 			if(hasStatusEffect(StatusEffects.Lustzerking)) rangeattack += (30 + (15 * newGamePlusMod));
 			if(hasPerk(PerkLib.)) rangeattack += Math.round(statusEffectv1(StatusEffects.ChargeWeapon));
-		*/	if (hasStatusEffect(StatusEffects.ChargeRWeapon) && !isUsingTome()) {
+		*/	if (hasStatusEffect(StatusEffects.TechOverdrive) && (isFirearmTypeWeapon() || isInGoblinMech() || isInNonGoblinMech())) rangeattack += (20 + (20 * newGamePlusMod));
+			if (hasStatusEffect(StatusEffects.ChargeRWeapon) && !isUsingTome()) {
 				rangeattack += Math.round(statusEffectv1(StatusEffects.ChargeRWeapon));
 			}
 			rangeattack = Math.round(rangeattack);
@@ -5496,6 +5500,7 @@ use namespace CoC;
 				min += jewelryEffectMagnitude4;
 			}*/
 			//Others
+			if (racialScore(Races.GREMLIN) >= 15) min += 30;
 			if (this.hasStatusEffect(StatusEffects.TookSagittariusBanefulGreatBow) && this.statusEffectv2(StatusEffects.TookSagittariusBanefulGreatBow) > 0) {
 				min += (minCap * 0.1 * this.statusEffectv1(StatusEffects.TookSagittariusBanefulGreatBow));
 				if (min > Math.round(minCap * 0.99)) min = Math.round(minCap * 0.99);
@@ -5860,6 +5865,9 @@ use namespace CoC;
 			}
 			if(hasStatusEffect(StatusEffects.Lustzerking)) {
 				removeStatusEffect(StatusEffects.Lustzerking);
+			}
+			if (hasStatusEffect(StatusEffects.TechOverdrive)) {
+				removeStatusEffect(StatusEffects.TechOverdrive);
 			}
 			if(hasStatusEffect(StatusEffects.TooAngryTooDie)) {
 				removeStatusEffect(StatusEffects.TooAngryTooDie);

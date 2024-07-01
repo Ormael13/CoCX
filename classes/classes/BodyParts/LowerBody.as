@@ -838,6 +838,7 @@ public class LowerBody extends SaveableBodyPart {
 		feet: "coils",
 		foot: "coiled tail",
 		tail: true,
+		tailSlam: true,
 		chitin: true,
 		isNaga: true
 	});

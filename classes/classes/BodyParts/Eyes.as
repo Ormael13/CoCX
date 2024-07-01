@@ -213,7 +213,7 @@ public class Eyes extends BodyPart {
 	public static const GREMLIN: int = 34;
 	EnumValue.add(Types, GREMLIN, "GREMLIN", {
 		name:"gremlin",
-		appearanceDesc: "Your [eyecolor] eyes looks human enough though your eyelids are dark, just as if you very tired althought it's more likely traces of your demonic corruption."
+		appearanceDesc: "Your [eyecolor] eyes looks human enough though your eyelids are dark as if very tired or more likely by traces of demonic corruption."
 	});
 	public static const WEASEL: int = 35;
 	EnumValue.add(Types, WEASEL, "WEASEL", {

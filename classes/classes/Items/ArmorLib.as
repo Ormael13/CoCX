@@ -125,14 +125,7 @@ public final class ArmorLib extends ItemConstants
 				.withBuffs({'spellcost': -0.15}) as Armor;
 		public const EWROBE_:Armor = new Armor("EWRobe","E.W. Robe","ebonweave robe","an ebonweave robe",2,10,600,"This robe is ebonweave, created using refined ebonbloom petals. This robe is as comfortable as cloth yet more protective than chainmail. The cloth has a mystic aura, helpful when working magic.","Light")
 				.withBuffs({'spellcost': -0.30}) as Armor;
-		public const FCLOAK:Armor = new Armor("F.Cloak","F.Cloak","black cloak","Francesca's Black Cloak",12,12,6000,"A cloak rumored to have been worn by the black cat adventurer Francesca the heavenly black tiger. Not exactly a strong armor per say, its true ability is to conceal its owner body's true location through a mix of glamor and illusion spell improving the users evasiveness by leaps and bound. Francesca was a famous sword mage and as thus the cloak greatly reinforces spells casted through the medium of a weapon.","Light")
-				.withBuffs({
-					'spellcost': -0.40,
-					'evade': 2
-				})
-				.withPerk(PerkLib.Misdirection)
-				.withTag(A_AGILE)
-				.withTag(A_REVEALING) as Armor;
+		public const FCLOAK:FrancescaBlackCloak = new FrancescaBlackCloak();
 		public const FCLOTHS:Armor =  new Armor("FCloths","Fur Clothes","Fur Clothes","fur clothes",1,0,40,"Generic brown fur clothing that trolls wear. It’s made to be form fitting and suit anyone of reasonable size or shape.\n","Light", false, false)
 				.withBuffs({'teasedmg': 10}) as Armor;
 		public const FMDRESS:Armor = new Armor("FMageDress","Forest Mage Dress","Forest Mage Dress","a Forest Mage Dress",0,0,800,"The wearer of this dress desire and pleasure is no longer vexed by the limitations of mortal flesh allowing one to keep control over their lust long enough to claim victory by diluting their own lust within the ambiant natural world for a time. So long as a Green Magic spell was cast within the 5 previous rounds the user of this dress effectively is able to maintain their focus and mind entirely to the task at hand at the cost of potentialy turning into a lecherous sex maniac due to all the dilluted lust merging back with the user at the end of combat. There is a small chance for this to backfire instead causing the ambiant flora to turn on and rape the wearer of the dress.","Light")

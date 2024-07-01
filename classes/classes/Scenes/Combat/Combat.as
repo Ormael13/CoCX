@@ -5326,6 +5326,21 @@ public class Combat extends BaseContent {
                     }
                     outputText("\n");
                     break;
+                case LowerBody.SANDWORM:
+                    TailDamageMultiplier = 4;
+                    outputText("You hit your opponent with a slam of your mighty tail.")
+                    ExtraNaturalWeaponAttack(TailDamageMultiplier);
+					outputText("Then you strike at blinding speed, impaling your opponent twice with your spike and injecting your venom in the process");
+					ExtraNaturalWeaponAttack(0.5);
+                    monster.statStore.addBuffObject({str: -4}, "Sandworm Sting", {text: "Sandworm Sting"});
+					if (!monster.hasStatusEffect(StatusEffects.LustDoT))
+						monster.createStatusEffect(StatusEffects.LustDoT, 3, 0.01, 0, 0);
+					else {
+						monster.addStatusValue(StatusEffects.LustDoT, 1, 2);
+						monster.addStatusValue(StatusEffects.LustDoT, 2, 0.02);
+					}
+                    outputText(".\n");
+                    break;
                 default:
                     switch(player.tail.type){
                         case Tail.MANTICORE_PUSSYTAIL:
@@ -7083,6 +7098,7 @@ public class Combat extends BaseContent {
         if (player.armor == armors.GTECHC_) damage *= 1.5;
 		if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
 		if (player.lowerGarment == undergarments.T_PANTY) damage *= 1.05;
+        if (player.hasStatusEffect(StatusEffects.TechOverdrive)) damage *= 1.2;
         return damage;
     }
 
@@ -10692,6 +10708,12 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 				if (!player.hasPerk(PerkLib.EndlessRage) && player.statusEffectv3(StatusEffects.Lustzerking) == 1) player.addStatusValue(StatusEffects.Lustzerking, 1, 1);
 			}
         }
+        if (player.hasStatusEffect(StatusEffects.TechOverdrive)) {
+            if (player.statusEffectv1(StatusEffects.TechOverdrive) <= 0) {
+                player.removeStatusEffect(StatusEffects.TechOverdrive);
+                outputText("<b>Tech Overdrive effect wore off!</b>\n\n");
+            } else player.addStatusValue(StatusEffects.TechOverdrive, 1, -1);
+        }
         if (player.hasStatusEffect(StatusEffects.OniRampage)) {
             if (player.statusEffectv1(StatusEffects.OniRampage) <= 0) {
                 player.removeStatusEffect(StatusEffects.OniRampage);
@@ -11356,6 +11378,14 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
                 player.removeStatusEffect(StatusEffects.CooldownTelekineticGrab);
             } else {
                 player.addStatusValue(StatusEffects.CooldownTelekineticGrab, 1, -1);
+            }
+        }
+        //Malfunction
+        if (player.hasStatusEffect(StatusEffects.CooldownMalfunction)) {
+            if (player.statusEffectv1(StatusEffects.CooldownMalfunction) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownMalfunction);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownMalfunction, 1, -1);
             }
         }
         //Tazer
@@ -12260,10 +12290,13 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 			if (player.tailType == Tail.SCORPION) venomCRecharge += 3;
 			if (player.tailType == Tail.MANTICORE_PUSSYTAIL) venomCRecharge += 4;
 			if (player.lowerBody == LowerBody.HYDRA) venomCRecharge += 4;
+			if (player.lowerBody == LowerBody.SANDWORM) venomCRecharge += 12;
 			if (player.lowerBody == LowerBody.ATLACH_NACHA) venomCRecharge *= 2;
 			if (player.hasPerk(PerkLib.AxillaryVenomGlands)) venomCRecharge *= 2;
-			if (player.hasKeyItem("Sky Poison Pearl") >= 0) venomCRecharge += 3;
-			if (player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX)) venomCRecharge += (3 * player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX));
+			if (player.hasKeyItem("Sky Poison Pearl") >= 0) {
+				venomCRecharge += 3;
+				if (player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX)) venomCRecharge += (3 * player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX));
+			}
 			venomCRecharge = Math.round(venomCRecharge);
 		}
 		return venomCRecharge;

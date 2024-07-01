@@ -274,7 +274,7 @@ public class Centaurinum extends Consumable {
 			changes++;
 		}
 		//Ears
-		if (player.ears.type != Ears.HORSE && player.ears.type != Ears.HUMAN && player.ears.type != Ears.ELFIN && player.tailType == Tail.HORSE && player.tailType != Tail.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+		if (player.ears.type != Ears.HORSE && player.ears.type != Ears.HUMAN && player.ears.type != Ears.ELVEN && player.tailType == Tail.HORSE && player.tailType != Tail.GARGOYLE && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
 			if (rand(3) == 0) CoC.instance.transformations.EarsHuman.applyEffect();
 			else {

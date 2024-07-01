@@ -927,7 +927,20 @@ public class Soulforce extends BaseContent
 			else addButton(10, "Metamorph", SceneLib.metamorph.openMetamorph).hint("Use your mana to mold your body.");
 		}
 		else addButtonDisabled(10, "???", "Req. Metamorph.");
+		addButton(13, "Re:Soul", accessDemonicEnergyMenuReSoul);
 		addButton(14, "Back", playerMenu);
+	}
+	public function accessDemonicEnergyMenuReSoul():void {
+		clearOutput();
+		outputText("Only NOW for LIMITED TIME you can have your SOUL BACK. For LOW price of 2100de you can have it BACK. What you waiting for? Get YOUR OWN SOUL now before it's gone...\n");
+		menu();
+		addButtonIfTrue(1, "Yes", accessDemonicEnergyMenuReSoulYes, "You not have enough demonic energy (2,100)", player.demonicenergy >= 2100);
+		addButton(3, "Yes?", accessDemonicEnergyMenu);
+	}
+	public function accessDemonicEnergyMenuReSoulYes():void {
+		player.demonicenergy -= 2100;
+		player.removePerk(PerkLib.Soulless);
+		doNext(playerMenu);
 	}
 	public function demonicEnergyCorruptElement():void {
 		clearOutput();
@@ -946,16 +959,16 @@ public class Soulforce extends BaseContent
 			addButtonDisabled(9, "Acid", "You don’t have enough demonic energy to improve this ability. (Req. "+deCost(200)+")");
 		}
 		else {
-			addButtonIfTrue(0, "Fire", curry(demonicEnergyCorruptElementImprove, "Fire"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfFire) < 9);
-			addButtonIfTrue(1, "Ice", curry(demonicEnergyCorruptElementImprove, "Ice"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfIce) < 9);
-			addButtonIfTrue(2, "Lightning", curry(demonicEnergyCorruptElementImprove, "Lightning"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfLightning) < 9);
-			addButtonIfTrue(3, "Darkness", curry(demonicEnergyCorruptElementImprove, "Darkness"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfDarkness) < 9);
-			addButtonIfTrue(4, "Poison", curry(demonicEnergyCorruptElementImprove, "Poison"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfPoison) < 9);
-			addButtonIfTrue(5, "Wind", curry(demonicEnergyCorruptElementImprove, "Wind"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfWind) < 9);
-			addButtonIfTrue(6, "Blood", curry(demonicEnergyCorruptElementImprove, "Blood"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfBlood) < 9);
-			addButtonIfTrue(7, "Water", curry(demonicEnergyCorruptElementImprove, "Water"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfWater) < 9);
-			addButtonIfTrue(8, "Earth", curry(demonicEnergyCorruptElementImprove, "Earth"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfEarth) < 9);
-			addButtonIfTrue(9, "Acid", curry(demonicEnergyCorruptElementImprove, "Acid"), "You can't improve this ability any further.", player.hasStatusEffect(StatusEffects.DaoOfAcid) < 9);
+			addButtonIfTrue(0, "Fire", curry(demonicEnergyCorruptElementImprove, "Fire"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfFire) < 9);
+			addButtonIfTrue(1, "Ice", curry(demonicEnergyCorruptElementImprove, "Ice"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfIce) < 9);
+			addButtonIfTrue(2, "Lightning", curry(demonicEnergyCorruptElementImprove, "Lightning"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfLightning) < 9);
+			addButtonIfTrue(3, "Darkness", curry(demonicEnergyCorruptElementImprove, "Darkness"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfDarkness) < 9);
+			addButtonIfTrue(4, "Poison", curry(demonicEnergyCorruptElementImprove, "Poison"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfPoison) < 9);
+			addButtonIfTrue(5, "Wind", curry(demonicEnergyCorruptElementImprove, "Wind"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfWind) < 9);
+			addButtonIfTrue(6, "Blood", curry(demonicEnergyCorruptElementImprove, "Blood"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfBlood) < 9);
+			addButtonIfTrue(7, "Water", curry(demonicEnergyCorruptElementImprove, "Water"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfWater) < 9);
+			addButtonIfTrue(8, "Earth", curry(demonicEnergyCorruptElementImprove, "Earth"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfEarth) < 9);
+			addButtonIfTrue(9, "Acid", curry(demonicEnergyCorruptElementImprove, "Acid"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfAcid) < 9);
 		}
 		addButton(14, "Back", accessDemonicEnergyMenu);
 	}
@@ -981,44 +994,44 @@ public class Soulforce extends BaseContent
 		player.demonicenergy -= deCost(200);
 		switch (daoType) {
             case "Fire":
-				if (player.hasStatusEffect(StatusEffects.DaoOfFire)) player.addStatusValue(StatusEffects.DaoOfFire, 1, 1);
-				else player.createStatusEffect(StatusEffects.DaoOfFire,0,0,0,0);
+				if (player.hasStatusEffect(StatusEffects.DaoOfFire)) player.addStatusValue(StatusEffects.DaoOfFire, 2, 1);
+				else player.createStatusEffect(StatusEffects.DaoOfFire,0,1,0,0);
                     break;
             case "Ice":
-				if (player.hasStatusEffect(StatusEffects.DaoOfIce)) player.addStatusValue(StatusEffects.DaoOfIce, 1, 1);
-				else player.createStatusEffect(StatusEffects.DaoOfIce,0,0,0,0);
+				if (player.hasStatusEffect(StatusEffects.DaoOfIce)) player.addStatusValue(StatusEffects.DaoOfIce, 2, 1);
+				else player.createStatusEffect(StatusEffects.DaoOfIce,0,1,0,0);
                     break;
             case "Lightning":
-				if (player.hasStatusEffect(StatusEffects.DaoOfLightning)) player.addStatusValue(StatusEffects.DaoOfLightning, 1, 1);
-				else player.createStatusEffect(StatusEffects.DaoOfLightning,0,0,0,0);
+				if (player.hasStatusEffect(StatusEffects.DaoOfLightning)) player.addStatusValue(StatusEffects.DaoOfLightning, 2, 1);
+				else player.createStatusEffect(StatusEffects.DaoOfLightning,0,1,0,0);
                     break;
             case "Darkness":
-				if (player.hasStatusEffect(StatusEffects.DaoOfDarkness)) player.addStatusValue(StatusEffects.DaoOfDarkness, 1, 1);
-				else player.createStatusEffect(StatusEffects.DaoOfDarkness,0,0,0,0);
+				if (player.hasStatusEffect(StatusEffects.DaoOfDarkness)) player.addStatusValue(StatusEffects.DaoOfDarkness, 2, 1);
+				else player.createStatusEffect(StatusEffects.DaoOfDarkness,0,1,0,0);
                     break;
             case "Poison":
-				if (player.hasStatusEffect(StatusEffects.DaoOfPoison)) player.addStatusValue(StatusEffects.DaoOfPoison, 1, 1);
-				else player.createStatusEffect(StatusEffects.DaoOfPoison,0,0,0,0);
+				if (player.hasStatusEffect(StatusEffects.DaoOfPoison)) player.addStatusValue(StatusEffects.DaoOfPoison, 2, 1);
+				else player.createStatusEffect(StatusEffects.DaoOfPoison,0,1,0,0);
                     break;
             case "Wind":
-				if (player.hasStatusEffect(StatusEffects.DaoOfWind)) player.addStatusValue(StatusEffects.DaoOfWind, 1, 1);
-				else player.createStatusEffect(StatusEffects.DaoOfWind,0,0,0,0);
+				if (player.hasStatusEffect(StatusEffects.DaoOfWind)) player.addStatusValue(StatusEffects.DaoOfWind, 2, 1);
+				else player.createStatusEffect(StatusEffects.DaoOfWind,0,1,0,0);
                     break;
             case "Blood":
-				if (player.hasStatusEffect(StatusEffects.DaoOfBlood)) player.addStatusValue(StatusEffects.DaoOfBlood, 1, 1);
-				else player.createStatusEffect(StatusEffects.DaoOfBlood,0,0,0,0);
+				if (player.hasStatusEffect(StatusEffects.DaoOfBlood)) player.addStatusValue(StatusEffects.DaoOfBlood, 2, 1);
+				else player.createStatusEffect(StatusEffects.DaoOfBlood,0,1,0,0);
                     break;
             case "Water":
-				if (player.hasStatusEffect(StatusEffects.DaoOfWater)) player.addStatusValue(StatusEffects.DaoOfWater, 1, 1);
-				else player.createStatusEffect(StatusEffects.DaoOfWater,0,0,0,0);
+				if (player.hasStatusEffect(StatusEffects.DaoOfWater)) player.addStatusValue(StatusEffects.DaoOfWater, 2, 1);
+				else player.createStatusEffect(StatusEffects.DaoOfWater,0,1,0,0);
                     break;
             case "Earth":
-				if (player.hasStatusEffect(StatusEffects.DaoOfEarth)) player.addStatusValue(StatusEffects.DaoOfEarth, 1, 1);
-				else player.createStatusEffect(StatusEffects.DaoOfEarth,0,0,0,0);
+				if (player.hasStatusEffect(StatusEffects.DaoOfEarth)) player.addStatusValue(StatusEffects.DaoOfEarth, 2, 1);
+				else player.createStatusEffect(StatusEffects.DaoOfEarth,0,1,0,0);
                     break;
             case "Acid":
-				if (player.hasStatusEffect(StatusEffects.DaoOfAcid)) player.addStatusValue(StatusEffects.DaoOfAcid, 1, 1);
-				else player.createStatusEffect(StatusEffects.DaoOfAcid,0,0,0,0);
+				if (player.hasStatusEffect(StatusEffects.DaoOfAcid)) player.addStatusValue(StatusEffects.DaoOfAcid, 2, 1);
+				else player.createStatusEffect(StatusEffects.DaoOfAcid,0,1,0,0);
                     break;
         }
 		doNext(demonicEnergyCorruptElement);

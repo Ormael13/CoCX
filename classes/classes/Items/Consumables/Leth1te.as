@@ -31,8 +31,10 @@ public class Leth1te extends Consumable {
         clearOutput();
         outputText("You grab the crystal and gulp it down, smiling contently as you feel it dissolve into your core and suffuse your body with raw power.");
 		if (player.hasPerk(PerkLib.Soulless)) {
-			player.demonicenergy += 100;
-			if (player.demonicenergy > player.maxDemonicEnergy()) player.demonicenergy = player.maxDemonicEnergy();
+			var gains:Number = 100;
+			if (player.demonicenergy + gains > player.maxDemonicEnergy()) gains = player.maxDemonicEnergy() - player.demonicenergy;
+			player.demonicenergy += gains;
+			outputText(" (+"+gains+" DE)");
 		}
 		else {
 			player.buff("Soul Eater").addStat("int.mult",0.02);

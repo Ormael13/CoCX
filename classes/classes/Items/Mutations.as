@@ -4111,13 +4111,16 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
-        clearOutput();
-        outputText("Whoa it was definitely tasting just as bad as it smelled but hey it's not like your drinking this disgusting concoction for fun right? Or maybe you are?");
+        //Temporary storage
+		var temp:Number = 0;
+		var temp2:Number = 0;
+		clearOutput();
+        outputText("Whoa it was definitely tasting just as bad as it smelled but hey it's not like you're drinking this disgusting concoction for fun right? Or maybe you are?");
 		DrunkenPowerEmpowerIfPossible();
 		AelfwineEmpowerIfPossible();
         dynStats("lus", Math.round(15*player.postConsumptionMlt()), "scale", false);
         dynStats("cor", 2);
-        //Stronger
+        //Less strong
         if (player.str > 50 && rand(3) == 0 && changes < changeLimit) {
             player.addCurse("str", 1, 1);
             if (player.str > 70) player.addCurse("str", 1, 1);
@@ -4196,6 +4199,51 @@ public final class Mutations extends MutationsHelper {
             changes++;
             outputText("[pg]You feel strange.  Fertile... somehow.  You don't know how else to think of it, but you're ready to be a mother.");
         }
+		//Shrink boobages till they are normal
+		if (rand(2) == 0 && changes < changeLimit && player.breastRows.length > 0) {
+			//Single row
+			if (player.breastRows.length == 1) {
+				//Shrink if bigger than B cups
+				if (player.breastRows[0].breastRating > 1) {
+					temp = 1;
+					player.breastRows[0].breastRating--;
+					//Shrink again if huuuuge
+					if (player.breastRows[0].breastRating > 8) {
+						temp++;
+						player.breastRows[0].breastRating--;
+					}
+					//Talk about shrinkage
+					outputText("\n\nTo your surprise you feel like your relative view increased. That's when you realise your breast has deflated sightly. Measuring them you conclude they are now " + player.breastCup(0) + "s.");
+					changes++;
+				}
+			}
+			//multiple
+			else {
+				//temp2 = amount changed
+				//temp3 = counter
+				temp = 0;
+				temp2 = 0;
+				temp3 = 0;
+				if (player.biggestTitSize() >= 1) outputText("\n");
+				while (temp3 < player.breastRows.length) {
+					if (player.breastRows[temp3].breastRating >= 1) {
+						player.breastRows[temp3].breastRating--;
+						temp2++;
+						outputText("\n");
+						//If this isn't the first change...
+						if (temp2 > 1) outputText("...and y");
+						else outputText("Y");
+						outputText("our " + player.breastDescript(temp3) + " shrink, dropping to " + player.breastCup(temp3) + "s.");
+					}
+					temp3++;
+				}
+				outputText("\n\nTo your surprise you feel like your relative view increased. That's when you realise your breast has deflated sightly. Measuring them you conclude they are now " + player.breastCup(0) + "s.");
+				if (temp2 > 0) changes++;
+			}
+		}
+		if (player.cor < 50) dynStats("cor", 1);
+        else if (player.cor < 75) dynStats("cor", .5);
+        else dynStats("cor", .25);
         //GENERAL APPEARANCE STUFF BELOW
         //ADDING GOBLINOID BLOOD IF PC QUALIFY
         if ((player.isGoblinoid()) && !player.hasPerk(PerkLib.GoblinoidBlood)) {
@@ -4229,6 +4277,12 @@ public final class Mutations extends MutationsHelper {
             changes++;
             player.antennae.type = Antennae.NONE;
         }
+        //Revert rear body to normal
+        if (player.rearBody.type != RearBody.NONE && changes < changeLimit && rand(3) == 0) {
+            outputText("[pg]");
+            transformations.RearBodyNone.applyEffect();
+            changes++;
+        }
         //Fix Legs!
         if (player.lowerBody != LowerBody.HUMAN) {
             outputText("[pg]");
@@ -4236,8 +4290,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Eye colors
-        if (player.eyes.type == Eyes.HUMAN && transformations.EyesGoblinColors.isPossible() && changes < changeLimit && rand(3) == 0) {
-            transformations.EyesGoblinColors.applyEffect();
+        if (player.eyes.type == Eyes.HUMAN && transformations.EyesGremlinColors.isPossible() && changes < changeLimit && rand(3) == 0) {
+            transformations.EyesGremlinColors.applyEffect();
             changes++;
         }
         //Remove odd eyes
@@ -4248,8 +4302,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Add gremlin eyes
         if (changes < changeLimit && rand(5) == 0 && player.eyes.type == Eyes.HUMAN) {
-            player.eyes.type = Eyes.GREMLIN;
-            outputText("Aw gosh, you feel tired as hell, it’s like you spent the better part of yesterday night working on some stupid project. Truth is with those darkened eyelids of yours you might just have. That said, perhaps you should think of it less like a sign of fatigue and more like a sign of demonic nature because you easily imagine these on the faces of small fiends or possessed people too. <b>Seems like you have darkened eyelids now.</b>");
+            outputText("[pg]");
+            transformations.EyesGremlin.applyEffect();
             changes++;
         }
         //Omg Crazy hairs

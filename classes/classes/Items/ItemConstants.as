@@ -255,6 +255,7 @@ public class ItemConstants extends Utils {
 	public static const W_THROWN:String         = "Thrown";
 	public static const W_TETSUBO:String        = "Tetsubo";
 	public static const W_MUSICINSTR:String     = "MusicalInstrument";
+	public static const W_HTECHWEAPON:String    = "High Tech Weapon";
 	public static const W_LGWRATH:String        = "LGWrath";
 	public static const W_MGWRATH:String        = "MGWrath";
 	public static const W_RAPIER:String         = "Rapier"; // Gets bonus from Raphael training

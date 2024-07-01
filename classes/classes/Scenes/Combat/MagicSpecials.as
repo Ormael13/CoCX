@@ -887,6 +887,22 @@ public class MagicSpecials extends BaseCombatContent {
 				}
 			}
 		}
+		if (player.hasPerk(PerkLib.TechOverdrive)) {
+			bd = buttons.add("Tech Overdrive", techOverdrive).hint("Empower your technological equipment, causing it to deal increased damage but weaken your defences as a result.");
+			bd.requireMana(spellCost(40));
+			if (player.hasStatusEffect(StatusEffects.TechOverdrive)) {
+				bd.disable("You're already pretty activated Tech Overdrive!");
+			}
+		}
+		if (player.racialScore(Races.GREMLIN) >= 15) {
+			bd = buttons.add("Malfunction", malfunction).hint("Overload a magitech or construction, causing damage and immobilising it for a while. Does not work on living things or sentient constructs.");
+			bd.requireMana(spellCost(40));
+			if (player.hasStatusEffect(StatusEffects.CooldownMalfunction)) {
+				bd.disable("You need more time before you can use Malfunction again.");
+			} else if (!monster.hasPerk(PerkLib.EnemyConstructType) && !monster.hasPerk(PerkLib.EnemyFleshConstructType) && !monster.hasPerk(PerkLib.Sentience)) {
+				bd.disable("Only work on nonsentient constructs and technology.");
+			}
+		}
 		if (player.hasPerk(PerkLib.Whispered)) {
 			bd = buttons.add("Whisper", superWhisperAttack).hint("Whisper and induce fear in your opponent. \n");
 			bd.requireFatigue(spellCost(10));
@@ -3288,6 +3304,23 @@ public class MagicSpecials extends BaseCombatContent {
 		player.HP -= Math.round(player.maxOverHP() * berzerkerandlustzerkerHPdrain());
 		if (!player.hasPerk(PerkLib.EndlessRage) && player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.ItsZerkingTime)) player.addStatusValue(StatusEffects.Lustzerking, 1, -2);
 		player.addStatusValue(StatusEffects.Lustzerking, 2, 1);
+		enemyAI();
+	}
+
+	public function techOverdrive():void {
+		clearOutput();
+		useMana(40);
+		outputText("You enter overdrive mode, your defenses weakening as you redirect the power to your weaponry.");
+		player.createStatusEffect(StatusEffects.TechOverdrive,10,0,0,0);
+		enemyAI();
+	}
+
+	public function malfunction():void {
+		clearOutput();
+		useMana(40);
+		outputText("You overcharge [themonster], causing it to temporarily be paralyzed.");
+		player.createStatusEffect(StatusEffects.CooldownMalfunction,10,0,0,0);
+		monster.createStatusEffect(StatusEffects.Stunned,6,0,0,0);
 		enemyAI();
 	}
 

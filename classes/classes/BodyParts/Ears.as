@@ -241,7 +241,7 @@ public class Ears extends BodyPart {
 	EnumValue.add(Types, GREMLIN, "GREMLIN", {
 		name: "gremlin",
 		appearanceDescFunc: function(creature: *): String {
-			var desc: String = "A pair of sideways leaning furry ears stick out from the side of your head, they flick toward every slight sound. They don’t belong to any known animal but like anything demonic related, it helps improve your devilish charm." + (EngineCore.silly() ? " With ears like that, anyone would be hard-pressed to resist the urge to headpat you." : "");
+			var desc: String = "Your [hair] is parted by two sideways leaning furry ears that flick toward every slight sound. They don’t belong to any known animal but like anything demonic related help improve your devilish charm." + (EngineCore.silly() ? " With ears like that anyone would be hard pressed to resist the urge to headpat you." : "");
 
 			return desc;
 		}
