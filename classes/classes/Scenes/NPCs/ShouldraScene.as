@@ -539,7 +539,6 @@ private function genderlessGhostBuster(win:Boolean):void {
 
 private function penisSexMerged():void {
 	spriteSelect(SpriteDb.s_ghostGirl2);
-	var x:Number = player.biggestCockIndex();
 	clearOutput();
 	if(player.hasStatusEffect(StatusEffects.Infested)) {
 		dewormYourGhost();

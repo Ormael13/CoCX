@@ -759,7 +759,7 @@ use namespace CoC;
 					[1, "Vagfuck", curry(otherF, true), "Req. a vagina.", player.hasVagina()],
 					[2, "Assfuck", curry(otherF, false)]
 				],
-				"[Themonster] wins. This isn't as bad as it sounds though: [moster he] is definitely not going to kill you. Maybe you'll even get off, while [moster he] fucks you? Let's do this!\n\n"
+				"[Themonster] wins. This isn't as bad as it sounds though: [monster he] is definitely not going to kill you. Maybe you'll even get off, while [monster he] fucks you? Let's do this!\n\n"
 			);
 			//Nipplefuck city
 			function nippleF():void {
