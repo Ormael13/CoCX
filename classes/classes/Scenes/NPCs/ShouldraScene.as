@@ -770,7 +770,7 @@ internal function loseToShouldra():void {
 				"Req. a vagina.", player.hasVagina(),
 				"This may sound boding, but at least she'll know what she's dealing with."],
 			[6, "Exgart-Tits", curry(ginaBoobgartuanShouldra, false),
-				"Req. a vagina and Xenora (prev. Exgartuan) in breasts.", player.hasCock() && SceneLib.exgartuan.boobsPresent(),
+				"Req. a vagina and Xenora (prev. Exgartuan) in breasts. Without SH:UniHerms, also the lack of cock", player.hasVagina() && (sceneHunter.uniHerms || !player.hasCock()) && SceneLib.exgartuan.boobsPresent(),
 				"Shouldra might be not surprised by your forms, but you know who CAN surprise her!"],
 			[2, "Herm-Style", curry(ghostGinaSexings, false),
 				"You're not a herm.", player.isHerm(),
