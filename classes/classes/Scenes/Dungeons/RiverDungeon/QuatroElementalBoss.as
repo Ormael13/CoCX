@@ -355,7 +355,7 @@ public class QuatroElementalBoss extends Monster
 			this.armorDef = 10;
 			this.armorMDef = 60;
 			this.bonusHP = 875;
-			this.lustVuln = 0;
+			this.lustVuln = 0.01;
 			this.drop = new ChainedDrop()
 					.add(useables.EL_CORE, 1);
 			this.level = 18;

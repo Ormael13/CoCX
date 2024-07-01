@@ -201,7 +201,7 @@ public class AirElemental extends Monster
 			}
 			this.a = "the ";
 			this.plural = false;
-			this.lustVuln = 0;
+			this.lustVuln = 0.01;
 			this.createBreastRow(0, 1);
 			initGenderless();
 			this.weaponName = "fists";

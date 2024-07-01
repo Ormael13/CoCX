@@ -259,30 +259,29 @@ public class PregnancyStore extends Object
 				pregEventVector = _pregnancyEventValue[i];
 				if (pregEventVector[0] == pregType) {
 					for (var j:int = 1; j < pregEventVector.length; j++) { //Skip element zero, the pregnancy type
-						if (incubationValue > CoC.instance.gameSettings.sceneHunter_inst.shortPreg ?
+						if (incubationValue > (CoC.instance.gameSettings.sceneHunter_inst.shortPreg ?
 								Math.round(pregEventVector[j]/pregEventVector[1] * CoC.instance.gameSettings.sceneHunter_inst.shortPregTimer(pregEventVector[1])) // 1 usually stores zero-hour stuff
-								: pregEventVector[j]) return j; //Will always find a value that is < incubationValue as last value is -1
+								: pregEventVector[j])) return j; //Will always find a value that is < incubationValue as last value is -1
 					}
 				}
 			}
 			return 1; //If there are no pregnancy events for this type of pregnancy then return 1
 		}
-		
+
 		//The same event system as for vaginal pregnacies, but for butts
 		public function get buttEvent():int
 		{
 			var pregType:int = buttType;
 			if (pregType == 0) return 0; //Not pregnant
 			var incubationValue:int = buttIncubation;
-			var shortIncub:int = CoC.instance.gameSettings.sceneHunter_inst.shortPregTimer(incubationValue); // will shorten if SP is enabled
 			var pregEventVector:Vector.<int> = null;
 			for (var i:int = 0; i < _buttPregnancyEventValue.length; i++) {
 				pregEventVector = _buttPregnancyEventValue[i];
 				if (pregEventVector[0] == pregType) {
 					for (var j:int = 1; j < pregEventVector.length; j++) { //Skip element zero, the pregnancy type
-						if (incubationValue > CoC.instance.gameSettings.sceneHunter_inst.shortPreg ?
+						if (incubationValue > (CoC.instance.gameSettings.sceneHunter_inst.shortPreg ?
 								Math.round(pregEventVector[j]/pregEventVector[1] * CoC.instance.gameSettings.sceneHunter_inst.shortPregTimer(pregEventVector[1])) // 1 usually stores zero-hour stuff
-								: pregEventVector[j]) return j; //Will always find a value that is < incubationValue as last value is -1
+								: pregEventVector[j])) return j; //Will always find a value that is < incubationValue as last value is -1
 					}
 				}
 			}

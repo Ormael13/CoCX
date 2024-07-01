@@ -152,7 +152,7 @@ use namespace CoC;
 			this.weaponName = "claws";
 			this.weaponVerb = "slash";
 			this.armorName = "fur";
-			this.lustVuln = 0;
+			this.lustVuln = 0.01;
 			this.lowerBody = LowerBody.HYDRA;
 			this.faceType = Face.ANIMAL_TOOTHS;
 			this.wings.type = Wings.BAT_LIKE_LARGE_2;

@@ -139,7 +139,7 @@ import classes.internals.*;
 			this.bonusLust = 58;
 			this.bonusWrath = 50;
 			this.bonusSoulforce = 100;
-			this.lustVuln = 0;
+			this.lustVuln = 0.01;
 			this.lust = 30;
 			this.level = 18;
 			this.gems = rand(15) + 10;

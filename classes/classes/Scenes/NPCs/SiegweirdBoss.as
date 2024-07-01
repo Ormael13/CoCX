@@ -196,7 +196,7 @@ import classes.Scenes.SceneLib;
 			this.armorDef = 700;
 			this.armorMDef = 700;
 			this.bonusHP = 7000;
-			this.lustVuln = 0;
+			this.lustVuln = 0.01;
 			this.level = 90;
 			this.gems = rand(300) + 700;
 			this.drop = NO_DROP;

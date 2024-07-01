@@ -59,7 +59,7 @@ package classes.Scenes.Camp
 			this.plural = false;
 			initStrTouSpeInte(10, 300, 10, 10);
 			initWisLibSensCor(10, 10, 10, 50);
-			this.lustVuln = 0;
+			this.lustVuln = 0.01;
 			this.tallness = 144;
 			this.createBreastRow(0, 1);
 			initGenderless();

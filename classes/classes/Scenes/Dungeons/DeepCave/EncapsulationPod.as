@@ -233,7 +233,7 @@ import classes.internals.*;
 			this.armorMDef = 1;
 			this.bonusHP = 1500;
 			this.lust = 10;
-			this.lustVuln = 0;
+			this.lustVuln = 0.01;
 			this.level = 38;
 			this.gems = 1;
 			this.additionalXP = 210;

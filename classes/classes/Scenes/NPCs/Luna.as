@@ -131,7 +131,7 @@ package classes.Scenes.NPCs
 			this.weaponVerb="paw-slash";
 			this.armorName = "fur";
 			this.lust = 10;
-			this.lustVuln = 0;
+			this.lustVuln = 0.01;
 			this.gems = 5 + rand(5);
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.MonsterRegeneration, 5, 0, 0, 0);

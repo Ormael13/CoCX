@@ -151,7 +151,7 @@ public class IceElemental extends Monster
 			}
 			this.a = "the ";
 			this.plural = false;
-			this.lustVuln = 0;
+			this.lustVuln = 0.01;
 			this.drop = new WeightedDrop()
 					.add(useables.ELSHARD, 3)
 					.add(useables.LELSHARD, 1);

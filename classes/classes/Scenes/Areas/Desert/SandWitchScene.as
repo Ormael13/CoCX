@@ -597,7 +597,6 @@ public function sexMenu():void {
 	outputText("Even as you rip her sand-colored robes from her body, her eyes hold power and defiance. Her chest holds four large, perfectly rounded breasts, each leaking milk upon the sands. Each has a nipple approximately two inches long, enough to suck if you wanted to.");
     outputText("\nYour attention wanders down to the damp sand underneath her legs, and her musky scent hits your nose. Which do you go after?");
 
-    outputText("\n\n<b>SceneHunter: Taur scenes reworked too - more options with UniHerms!</b>");
     //menu
     //because corrupt scenes are REALLY rough here. 2/3 is fair IMO
     var lowCor:Boolean = player.cor < 66 + player.corruptionTolerance;

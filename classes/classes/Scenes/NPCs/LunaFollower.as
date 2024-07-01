@@ -945,7 +945,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 		}
 
 		public function sexMenuDoggyTreats():void {
-			spriteSelect(SpriteDb.s_luna_maid);
+			spriteSelect(SpriteDb.s_Luna_Mooning);
 			clearOutput();
 			outputText("You walk straight up to Luna and, gently but firmly, place your hands on her shoulders to turn her around and push her down into a kneeling position, telling her that what you want isn't your cute maid Luna, but your horny, wet bitch Luna. She gasps in surprise, and then, in a voice more delighted than any you've heard from her in quite some time she replies " +
 					"\"<i>Oh, yes, <b>yes</b> [Master], please!</i>\"\n\n" +
