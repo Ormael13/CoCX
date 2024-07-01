@@ -59,6 +59,10 @@ public class GremlinRace extends Race {
 				.height(LESS_THAN(48), +2)
 				.hasVagina(+1)
 				.biggestTitSize(GREATER_THAN(BreastCup.A), 0, +1)
+				.customRequirement("",'A cup tits or flat',
+						function (body:BodyData):Boolean {
+							return body.biggestTitSize <= 1
+						}, +1)
 				.femininity(GREATER_THAN(70), +1)
 				.corruption(AT_LEAST(30), +2)
 				.hasPerk(PerkLib.GoblinoidBlood, +1)

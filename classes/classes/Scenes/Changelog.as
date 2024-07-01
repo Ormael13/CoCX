@@ -255,7 +255,7 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Tech Overdrive. Gained by been gremlin-kin. Effects: Empower your technological equipment, causing it to deal increased damage but weaken your defences as a result.\n");
 			outputText("-New M. Special: Tech Overdrive. Usable by having Tech Overdrive perk. Cost 40 mana. Increase by 20(+20per ng tier) atk of melee or range tech wepaons, add 20% to mech onboard weapons dmg, lower physical def by 50%. It would last for 10 turns.\n");
 			outputText("-New M. Special: Malfunction. Usable by been gremlin-kin. Cost 40 mana and can stun for 6 turns. Have 10 turns cooldown after use. Overload a magitech or construction, causing damage and immobilising it for a while. Does not work on living things or sentient constructs.\n");
-			outputText("-\n");
+			outputText("-Lust immunity fix & preg fix. (Svalkash)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
