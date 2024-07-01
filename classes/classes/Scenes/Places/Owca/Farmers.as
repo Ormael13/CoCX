@@ -61,7 +61,7 @@ public class Farmers extends Monster
 			this.armorMDef = 1;
 			this.bonusHP = 300;
 			this.bonusLust = 94;
-			this.lustVuln = 0;
+			this.lustVuln = 0.01;
 			this.level = 24;
 			this.gems = rand(50)+100;
 			this.horns.type = Horns.DEMON;

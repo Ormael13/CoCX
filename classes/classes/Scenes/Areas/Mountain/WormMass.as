@@ -119,7 +119,7 @@ public class WormMass extends Monster
 			this.armorMDef = 2;
 			this.bonusLust = 171;
 			this.lust = 30;
-			this.lustVuln = 0;
+			this.lustVuln = 0.01;
 			this.level = 21;
 			this.gems = 0;
 			this.special1 = wormAttack;

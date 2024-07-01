@@ -112,7 +112,7 @@ public class Mimic extends Monster {
 			this.armorMDef = 75;
         }
         this.lust = 10;
-        this.lustVuln = 0;
+        this.lustVuln = 0.01;
 		this.bonusLust = 96;
         this.level = 6;
         this.gems = rand(20) + 21;

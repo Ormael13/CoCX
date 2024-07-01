@@ -84,7 +84,7 @@ import classes.Scenes.NPCs.*;
 			this.weaponVerb="paw-slash";
 			this.armorName = "fur";
 			this.lust = 10;
-			this.lustVuln = .50;
+			this.lustVuln = 0.01;
 			this.gems = 5 + rand(5);
 			this.drop = new WeightedDrop().
 					add(null,1).
