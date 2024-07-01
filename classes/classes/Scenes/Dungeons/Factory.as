@@ -980,8 +980,6 @@ use namespace CoC;
 		private function doFightOmnibus():void {
 			clearOutput();
 			outputText("You strike a combat pose and prepare your [weapon].  She smiles and saunters around the desk, letting something bulbous and fleshy drop free from between her nether-lips.  You watch in shock as it hardens into a dick, growing right from where her clit should be.\n\nShe taunts, \"<i>Like what you see cow?  I'll be sure to visit you in the pens.</i>'\" \n\nAn unseen force closes the glass door to the north, preventing you from running away!");
-			flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] = 1;
-			startCombat(new OmnibusOverseer(), true);
 			spriteSelect(SpriteDb.s_factory_omnibus);
 		}
 
@@ -999,6 +997,7 @@ use namespace CoC;
 
 		//Choose your poison
 		public function winAgainstOmnibus():void {
+			flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] = 1;
 			clearOutput();
 			if(monster.lust >= monster.maxOverLust()) {
 				outputText("The omnibus trembles where she stands, her proud demonic dick twitching and pulsating as her desires totally overwhelm her.  The tainted nodules covering the purplish hermaphrodite's member ripple and swell from the base towards the tip, culminating with an explosive eruption of sticky, white demon-seed.  She moans with shame and pleasure, pumping larger and larger volumes of cum onto her office's floor.  She drops to her knees, too exhausted and ashamed by her premature orgasm to continue fighting.\n\n");
