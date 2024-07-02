@@ -169,7 +169,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
 		statScreenRefresh();
         hideUpDown();
         spriteSelect(null);
-		outputText("\n\nYou are facing a cat-morph. She would looks quite averange if not for black stripes on purple fur. Without any sound she points behind her and then vanishing.");
+		outputText("\n\nYou are facing a cat-morph. She would looks quite average if not for black stripes on purple fur. Without any sound she points behind her and then vanishing.");
         menu();
 		addButton(0, "50", navigateToRoomEL050).hint("Skip 50 rooms but beware of the boss at the end of this detour.");
 		addButtonIfTrue(1, "100", navigateToRoomEL100, "You not even beaten 2 bosses yet.", flags[kFLAGS.EBON_LABYRINTH_RECORD] >= 100, "Skip 100 rooms but beware of the boss at the end of this detour.");

@@ -367,7 +367,7 @@ import classes.internals.*;
 			if (flags[kFLAGS.DINAH_LVL_UP] < 1) {
 				this.a = "the ";
 				this.short = "cat";
-				this.long = "You are fighting a cat-morph. She would looks quite averange if not for black stripes on purple fur.";
+				this.long = "You are fighting a cat-morph. She would looks quite average if not for black stripes on purple fur.";
 				this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_NORMAL);
 				this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 				this.tallness = 5*12+10;
