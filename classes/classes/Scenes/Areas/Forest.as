@@ -119,8 +119,8 @@ use namespace CoC;
 		private function init():void {
             const fn:FnHelpers = Encounters.fn;
 			_forestOutskirtsEncounter = Encounters.group("outskirtsforest",
-					SceneLib.exploration.commonEncounters.withChanceFactor(0.1),
-					SceneLib.exploration.angelEncounters.wrap(fn.ifLevelMin(5), [0.05]),
+					SceneLib.exploration.commonEncounters.withChanceFactor(0.025),
+					SceneLib.exploration.angelEncounters.wrap(fn.ifLevelMin(5), [0.0125]),
 					{
 						//Helia monogamy fucks
 						name  : "helcommon",
@@ -294,7 +294,7 @@ use namespace CoC;
 						call: SceneLib.exploration.demonLabProjectEncounters
 					});
 			_forestInnerEncounter = Encounters.group("forest",
-					SceneLib.exploration.commonEncounters.withChanceFactor(0.1),
+					SceneLib.exploration.commonEncounters.withChanceFactor(0.025),
 					{
 						//Helia monogamy fucks
 						name  : "helcommon",

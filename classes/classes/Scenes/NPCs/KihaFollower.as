@@ -1812,12 +1812,12 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("[pg]Between her gropable butt-cheeks, Kiha has a single tight asshole, right where it belongs.");
         if (pregnancy.isPregnant) {
             outputText("[pg]");
-            if (pregnancy.incubation > 288) outputText("<b>Her belly appears to be a bit swollen.</b>");
-            else if (pregnancy.incubation > 240 && pregnancy.incubation <= 288) outputText("<b>Her belly is comparable to being six months into pregnant.</b>");
-            else if (pregnancy.incubation > 192 && pregnancy.incubation <= 240) outputText("<b>Her belly is comparable to being eight months into pregnancy.</b>");
-            else if (pregnancy.incubation > 144 && pregnancy.incubation <= 192) outputText("<b>Her belly is comparable to being nine months into pregnancy. It wouldn't take very long until she eventually lays a clutch of eggs.</b>");
-            else if (pregnancy.incubation > 72 && pregnancy.incubation <= 144) outputText("<b>Her belly is even bigger than the average belly size at end of a typical human pregnancy.</b>");
-            else if (pregnancy.incubation <= 72) outputText("<b>It's impossible to not notice her pregnancy. The size of her belly has taken its toll on her. She is about to lay a clutch of eggs soon.</b>");
+            if (pregnancy.incubation > sceneHunter.adjustPregEventTimerNum(288, PregnancyStore.INCUBATION_KIHA)) outputText("<b>Her belly appears to be a bit swollen.</b>");
+            else if (pregnancy.incubation > sceneHunter.adjustPregEventTimerNum(240, PregnancyStore.INCUBATION_KIHA) && pregnancy.incubation <= sceneHunter.adjustPregEventTimerNum(288, PregnancyStore.INCUBATION_KIHA)) outputText("<b>Her belly is comparable to being six months into pregnant.</b>");
+            else if (pregnancy.incubation > sceneHunter.adjustPregEventTimerNum(192, PregnancyStore.INCUBATION_KIHA) && pregnancy.incubation <= sceneHunter.adjustPregEventTimerNum(240, PregnancyStore.INCUBATION_KIHA)) outputText("<b>Her belly is comparable to being eight months into pregnancy.</b>");
+            else if (pregnancy.incubation > sceneHunter.adjustPregEventTimerNum(144, PregnancyStore.INCUBATION_KIHA) && pregnancy.incubation <= sceneHunter.adjustPregEventTimerNum(192, PregnancyStore.INCUBATION_KIHA)) outputText("<b>Her belly is comparable to being nine months into pregnancy. It wouldn't take very long until she eventually lays a clutch of eggs.</b>");
+            else if (pregnancy.incubation > sceneHunter.adjustPregEventTimerNum(72, PregnancyStore.INCUBATION_KIHA) && pregnancy.incubation <= sceneHunter.adjustPregEventTimerNum(144, PregnancyStore.INCUBATION_KIHA)) outputText("<b>Her belly is even bigger than the average belly size at end of a typical human pregnancy.</b>");
+            else if (pregnancy.incubation <= sceneHunter.adjustPregEventTimerNum(72, PregnancyStore.INCUBATION_KIHA)) outputText("<b>It's impossible to not notice her pregnancy. The size of her belly has taken its toll on her. She is about to lay a clutch of eggs soon.</b>");
         }
         doNext(kihaScene.encounterKiha);
     }

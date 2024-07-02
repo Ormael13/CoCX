@@ -981,6 +981,7 @@ use namespace CoC;
 			clearOutput();
 			outputText("You strike a combat pose and prepare your [weapon].  She smiles and saunters around the desk, letting something bulbous and fleshy drop free from between her nether-lips.  You watch in shock as it hardens into a dick, growing right from where her clit should be.\n\nShe taunts, \"<i>Like what you see cow?  I'll be sure to visit you in the pens.</i>'\" \n\nAn unseen force closes the glass door to the north, preventing you from running away!");
 			spriteSelect(SpriteDb.s_factory_omnibus);
+			startCombat(new OmnibusOverseer(), true);
 		}
 
 		private function acceptOmnibus():void {

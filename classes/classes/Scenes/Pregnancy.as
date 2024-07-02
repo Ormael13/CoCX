@@ -390,7 +390,7 @@ public class Pregnancy extends NPCAwareContent {
                         EngineCore.outputText("\n");
                         displayedUpdate = true;
                     }
-                    if (womb["incubation"] <= 745 && womb["incubation"] > 400) {
+                    if (womb["incubation"] <= sceneHunter.adjustPregEventTimer(745, womb["type"]) && womb["incubation"] > sceneHunter.adjustPregEventTimer(400, womb["type"])) {
                         EngineCore.outputText("\n<b>After dealing with the discomfort and bodily changes for the past day or so, you finally get the feeling that the eggs in your womb have dissolved.</b>\n");
                         displayedUpdate = true;
                         player.knockUpForce(0, 0, womb["womb"]); //Clear Pregnancy

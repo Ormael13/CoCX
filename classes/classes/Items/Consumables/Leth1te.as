@@ -11,8 +11,8 @@ public class Leth1te extends Consumable {
 
     public function Leth1te() {
         var descr:String;
-        descr = "A chunk of averange lethicite. It's rare as lethicite is only produced when a mortal becomes a demon and cums their souls out. A demon's favourite treat."
-        super("Leth1te", "Averange Lethicite", "a chunk of averange lethicite", 2000, descr );
+        descr = "A chunk of average lethicite. It's rare as lethicite is only produced when a mortal becomes a demon and cums their souls out. A demon's favourite treat."
+        super("Leth1te", "average Lethicite", "a chunk of average lethicite", 2000, descr );
     }
 
     override public function useItem():Boolean {

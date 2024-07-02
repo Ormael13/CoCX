@@ -582,7 +582,7 @@ private function drinkUrtasBoozeLetHer():void {
 	if(player.hasVagina()) outputText("waiting womb");
 	else outputText("abused asshole");
 	outputText(".");
-	if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < 250) outputText("  Whatever's growing inside you is probably bathing in the stuff now.");
+	if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < sceneHunter.adjustPregEventTimer(250, player.pregnancyType)) outputText("  Whatever's growing inside you is probably bathing in the stuff now.");
 	else if(player.hasVagina()) outputText("  You briefly wonder if she's capable of knocking you up, and what the baby would look like.");
 	else outputText("  Your backside fills with warmth as her spunk seeps deep inside you.");
 	outputText("  Another blast fills you to capacity, and you're mortified by the sensation of your body being shifted by your growing belly.\n\n");
@@ -592,7 +592,7 @@ private function drinkUrtasBoozeLetHer():void {
 		if(player.cockTotal() > 1) outputText("Each of y");
 		else outputText("Y");
 		outputText("our [cocks] squirts hard, unloading a batch of sticky jism under your ");
-		if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < 100) outputText("pregnancy swollen ");
+		if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < sceneHunter.adjustPregEventTimer(100, player.pregnancyType)) outputText("pregnancy swollen ");
 		outputText("belly, making you squish with each brutal thrust of your oversized lover's rod.");
 	}
 	else {
@@ -4039,14 +4039,14 @@ private function fillMeUpPleaseUrta():void {
 	outputText("\n\nStill, that doesn't seem to concern the vixen as she continues to cream your twat further, stuffing you so full that your belly button pops out");
 	if(player.biggestTitSize() >= 4) outputText(" and your [chest] rest heavily upon your cum-stuffed form");
 	outputText(".");
-	if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < 150) outputText("  You may have been pregnant before, but you're beyond pregnant now... with cum AND child.");
+	if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < sceneHunter.adjustPregEventTimer(150, player.pregnancyType)) outputText("  You may have been pregnant before, but you're beyond pregnant now... with cum AND child.");
 	//{Goo:
 	if(player.isGoo()) outputText("  Successive eruptions make you bigger, but your flexible cunt soon grows so bloated that the onrushing injections mostly squirt back out, painting Urta, the bed, and your [legs] white with cum.");
 	else outputText("  Successive eruptions do little to bloat you further - your body is stretched to capacity, so the onrushing injections only squirt back out through your entrance, painting Urta, the bed, and your [legs] white with cum.");
 	outputText("\n\nYour pussy, spent after cumming so long, gives up and goes slack, vacantly allowing fluid to flow in and out.  You're equally exhausted by the ordeal and your heavy womb.  Swaying to the side, you lose your balance and slide off, coming to rest next to the still-spurting fox.  She's pumping her tool hard, spraying semen into the air to rain down over both of you.  The fox revels in it, wildly moaning and thrashing, smearing it into her skin and yours.");
 	outputText("\n\nEven after she finishes painting the walls and ceiling white, Urta flops her drooling member onto your ass and allows it to thoroughly cream your crack.  She rubs it all over your butt, squeezing and kneading your backside as she comes down.  After a while, you roll over and return the favor, massaging the fox with her own orgasmic goo.  You're both white messes, but thoroughly, delectably sated.");
 	outputText("\n\nYou snuggle with the vixen a while, simply enjoying the comfort while your [vagina] drains.  It doesn't completely empty, but your belly-button does pop back in.  You'll probably look ");
-	if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < 150) outputText("even more ");
+	if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < sceneHunter.adjustPregEventTimer(150, player.pregnancyType)) outputText("even more ");
 	outputText("pregnant for a while, at least until you can pass all that filling!  She plants a salty kiss on your lips ");
 	if(urtaLove()) outputText("and nuzzles against your cheek, just holding you for a few moments, lover to lover.");
 	else outputText("and sheepishly pulls back.");
@@ -4431,7 +4431,7 @@ internal function slurpFawkesCocksForFunAndInflation():void {
 
 	outputText("\n\nYou survey your new condition, finding your stretched belly modeled more towards a nine-month pregnancy");
 
-	if(player.pregnancyIncubation < 100 && player.pregnancyIncubation > 0) outputText(" than it already was");
+	if(player.pregnancyIncubation < sceneHunter.adjustPregEventTimer(100, player.pregnancyType) && player.pregnancyIncubation > 0) outputText(" than it already was");
 	outputText(".  You slide your way back into your seat with some difficulty, fighting the wriggling, bouncing mass that is your stomach over the now shrinking room between the seat and table.  By now, some of the patrons have realized what has happened, pointing, whispering, rubbing their stomachs, and pulling their hands away from each other to symbolize your new... asset.");
 
 	outputText("\n\nYou lift your equipment up off of your belly, making your breaths come a little fuller, but simultaneously showing off your cum-laden orb.  You glance at Urta, who blushes.  \"<i>Oh, honey!  I'm so sorry!  I just hadn't... I mean I never expected...</i>\"");

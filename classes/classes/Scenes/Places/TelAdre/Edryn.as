@@ -705,7 +705,7 @@ private function pregdrynOffer(cs:Boolean = true):void {
 		return;
 	}
 	//VERY Pregnant Offer
-	if (pregnancy.incubation < 250) {
+	if (pregnancy.incubation < sceneHunter.adjustPregEventTimerNum(250, PregnancyStore.INCUBATION_CENTAUR + 80)) {
 		outputText("Edryn struggles to move, practically waddling thanks to her swollen, pregnant belly.  As usual, the glistening black lips of her sex are on display, and with the hormones pouring through her, she's leaking a steady trail of slime.  The scent coming off her is unreal!  It's like it's reaching right into your brain and cranking the 'fuck' dial up to maximum.  ");
 		if(player.cockTotal() > 1) outputText("All of your [cocks] fill in seconds, growing rock hard and actually aching with their need.  ");
 		else if(player.cockTotal() == 1) outputText("Your [cock] fills in seconds, growing rock hard and actually aching with need.  ");

@@ -1378,7 +1378,7 @@ public function sophieFenCraftedSex(morning:Boolean = false):void {
 		clearOutput();
 		sophieSprite();
 		outputText("You hastily remove your armor and lie back on your blankets, beckoning Sophie forward with your hand.  The slutty, sex-hungry bimbo prances up on her tiptoes, supporting herself with flapping wings as her flared hips roll hypnotically, ever closer.  In no time, she's straddling your supine form; dripping sex positioned a foot above.  The moisture her puffy, aroused cleft exudes patters off your ");
-		if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < 150) outputText("pregnant ");
+		if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < sceneHunter.adjustPregEventTimer(150, player.pregnancyType)) outputText("pregnant ");
 		outputText("midsection from time to time, hot droplets that shimmer with the proof of Sophie's ever-burning arousal for dick.  Above, her titanic cleavage casts a gloriously large shadow across you.  Each of the heaving globes is capped with a jutting nipple.  Her areolae look nearly as hard as your [cocks], and you lick your lips at the sight of them.");
 
 		outputText("\n\nPointing down at your " + cockDescript(x) + ", you wave Sophie onward.  The feathery slut complies immediately, slapping herself down onto your crotch with a wet 'SPLAT' loud enough to be heard from anywhere in camp.  You weren't angled right to penetrate her, either.  Instead, her plush pussy-lips parted to either side, and the juicy slit begins a long grind-fest, pressing her clitty down hard on your now lubed shaft, the hard bud dragging up and down with sensuous strokes.  Sophie coos, \"<i>Ooohh, I've like, wanted this forever, [name].  Why can't we do this more?</i>\"");

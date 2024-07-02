@@ -68,7 +68,7 @@ package classes.Items.Consumables
 					}
 				}
 			}
-			if (!changeOccurred && game.player.pregnancyIncubation > 20 && game.player.pregnancyType != PregnancyStore.PREGNANCY_BUNNY) { //If no changes, speed up pregnancy.
+			if (!changeOccurred && game.player.pregnancyIncubation > CoC.instance.gameSettings.sceneHunter_inst.adjustPregEventTimer(20, player.pregnancyType) && game.player.pregnancyType != PregnancyStore.PREGNANCY_BUNNY) { //If no changes, speed up pregnancy.
 				outputText("\n\nYou gasp as your pregnancy suddenly leaps forwards, your belly bulging outward a few inches as it gets closer to time for birthing.");
 				var newIncubation:int = game.player.pregnancyIncubation - int(game.player.pregnancyIncubation * 0.3 + 10);
 				if (newIncubation < 2) newIncubation = 2;

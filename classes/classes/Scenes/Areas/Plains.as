@@ -50,8 +50,8 @@ use namespace CoC;
 		private function init():void {
 			const fn:FnHelpers = Encounters.fn;
 			explorationEncounter = Encounters.group(/*SceneLib.commonEncounters,*/
-					SceneLib.exploration.commonEncounters.withChanceFactor(0.1),
-					SceneLib.exploration.angelEncounters.withChanceFactor(0.05),
+					SceneLib.exploration.commonEncounters.withChanceFactor(0.025),
+					SceneLib.exploration.angelEncounters.withChanceFactor(0.0125),
 			{
 				//Helia monogamy fucks
 				name  : "helcommon",

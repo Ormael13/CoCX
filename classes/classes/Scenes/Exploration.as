@@ -428,10 +428,10 @@ public class Exploration extends BaseContent implements SaveableState
 					.hint("Explore to find weaker new enemies.")
 					.disableIf(player.level < 51,"Req. lvl 51+");
 			addButton(7, "HL Explore", tryDiscoverHL)
-					.hint("Explore to find below averange new enemies.")
+					.hint("Explore to find below average new enemies.")
 					.disableIf(player.level < 70,"Req. lvl 70+");
 			addButton(8, "XHL Explore", tryDiscoverXHL)
-					.hint("Explore to find bit above averange new enemies.")
+					.hint("Explore to find bit above average new enemies.")
 					.disableIf(player.level < 95,"Req. lvl 95+");
 			addButton(9, "XXHL Explore", tryDiscoverXXHL)
 					.hint("Explore to find strong new enemies.")
@@ -560,9 +560,9 @@ public class Exploration extends BaseContent implements SaveableState
 			else addButtonDisabled(0, "LL Explore", "Req. lvl 31+");
 			if (player.level >= 51) addButton(1, "ML Explore", tryDiscoverML).hint("Explore to find weaker new enemies.");
 			else addButtonDisabled(1, "ML Explore", "Req. lvl 51+");
-			if (player.level >= 70) addButton(2, "HL Explore", tryDiscoverHL).hint("Explore to find below averange new enemies.");
+			if (player.level >= 70) addButton(2, "HL Explore", tryDiscoverHL).hint("Explore to find below average new enemies.");
 			else addButtonDisabled(2, "HL Explore", "Req. lvl 70+");
-			if (player.level >= 95) addButton(3, "XHL Explore", tryDiscoverXHL).hint("Explore to find bit above averange new enemies.");
+			if (player.level >= 95) addButton(3, "XHL Explore", tryDiscoverXHL).hint("Explore to find bit above average new enemies.");
 			else addButtonDisabled(3, "XHL Explore", "Req. lvl 95+");
 			if (player.level >= 125) addButton(4, "XXHL Explore", tryDiscoverXXHL).hint("Explore to find strong new enemies.");
 			else addButtonDisabled(4, "XXHL Explore", "Req. lvl 125+");

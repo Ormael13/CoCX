@@ -628,7 +628,7 @@ public class Camp extends NPCAwareContent{
             return;
         }
 		//Cotton preg freakout
-		if (((player.pregnancyIncubation <= 280 && player.pregnancyType == PregnancyStore.PREGNANCY_COTTON)||(player.pregnancy2Incubation <= 280 && player.pregnancy2Type == PregnancyStore.PREGNANCY_COTTON)) &&
+		if (((player.pregnancyIncubation <= sceneHunter.adjustPregEventTimer(280, player.pregnancyType) && player.pregnancyType == PregnancyStore.PREGNANCY_COTTON)||(player.pregnancy2Incubation <= sceneHunter.adjustPregEventTimer(280, player.pregnancy2Type) && player.pregnancy2Type == PregnancyStore.PREGNANCY_COTTON)) &&
 				flags[kFLAGS.COTTON_KNOCKED_UP_PC_AND_TALK_HAPPENED] == 0 && (model.time.hours == 6 || model.time.hours == 7)) {
 			SceneLib.telAdre.cotton.goTellCottonShesAMomDad();
 			hideMenus();

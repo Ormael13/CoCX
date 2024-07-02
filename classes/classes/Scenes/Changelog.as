@@ -223,7 +223,7 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Strengthen body. Gained / Upgraded by spending Demonic Energy (25 base rank and increase by 5 pts per each new rank). Effects: Consume the stored energy of souls to raise your strength, toughness and speed by 5% permanently. This change persists through time.\n");
 			outputText("-New event perk: Strengthen magic. Gained / Upgraded by spending Demonic Energy (25 base rank and increase by 5 pts per each new rank). Effects: Consume the stored energy of souls to raise your intelligence, wisdom and libido by 5% permanently. This change persists through time.\n");
 			outputText("-NPC's that can make legendary items have lower min. lvl req. to find them (25 > 20)\n");
-			outputText("-New consumable (by Liadri): Averange Lethicite. Drops from true demon enemies. Consuming it by PC with Soulless perk will give up to 100 demonic energy.\n");
+			outputText("-New consumable (by Liadri): average Lethicite. Drops from true demon enemies. Consuming it by PC with Soulless perk will give up to 100 demonic energy.\n");
 			outputText("-Manacost for MM added as alt cost. (Jtecx) (Only for True Demon PC's)\n");
 			outputText("-Added mockfights to Nadia. (Svalkash)\n");
 			outputText("-New Dark Ascension perk: Bottomless hunger. Raise max demonic energy capacity by 5% per rank. Max Rank: 20.\n");
@@ -2713,7 +2713,7 @@ public class Changelog extends BaseContent
 			outputText("-New updates to Yuu and Yeti TF. (by Liadri)\n");
 			outputText("-Fix Alvina combat moves she will no longuer randomly one shot players witheout prejudice but will still require a very powerful character to defeat. (Liadri)\n");
 			outputText("-Moved all interactions with Marae after first meeting from using Boat in Places to using Marae Island also located in Places (and it will unlock after first time meeting Marae obviously).\n");
-			outputText("-A bit higher req. to get ninetail kitunse stage of race bonuses and 2 tiers above this stage. Also way kitsune score is calculated is changed to allow to get few more points on averange.\n");
+			outputText("-A bit higher req. to get ninetail kitunse stage of race bonuses and 2 tiers above this stage. Also way kitsune score is calculated is changed to allow to get few more points on average.\n");
 			outputText("-Sand Witches chest with La Bova and Lactacid now hold two items more items and it properly get slowly refilled with each passing day just as text ingame suggest.\n");
 			outputText("-Moga Hen decided to buy more oddities i mean... valuable items from PC. Like Purple Crystal Shards. I mean since PC still not found use for them so then why not sell them to Moga and get sweet spirit stones instead?\n");
 			outputText("-Meeting Izma or otter girl was changed from each 8th/20th explore to each 6th/15th exploration of the Lake.\n");
@@ -3614,7 +3614,7 @@ public class Changelog extends BaseContent
 			outputText("-New consumable item: an Arcane Regen Concotion. Costs 720 gems and currently only drops from white mare/unicorn/alicorn founded in Lake, Battlefield or Plains. It restore 7200 mana.\n");
 			outputText("-New TF item: Storm Seed. Evangeline can make it using Magic Seed (enh. at Lumi Golden Seed), Topaz jewel and 10 gems, final cost of created item is 20 gems. Using this item will turn PC into thunderbird. Thunderbird bonus at 12 pts in racial score (scalable): -20 to max Tou, +100 to max Spe, +100 to max Lib.\n");
 			outputText("-New body part - tail: Thunderbird Tail. Req. Harpy Arms\n");
-			outputText("-Rearranged a bit Setting menu in Main menu and added two new setting: Wisdom Scaling and Intelligence Scaling. It would give choice between using old/orginal scaling for any attack using wis or int scaling or to use new one scaling (it's less randomn and on averange giving a bit higher numbers).\n");
+			outputText("-Rearranged a bit Setting menu in Main menu and added two new setting: Wisdom Scaling and Intelligence Scaling. It would give choice between using old/orginal scaling for any attack using wis or int scaling or to use new one scaling (it's less randomn and on average giving a bit higher numbers).\n");
 			outputText("-Izumi (oni from high mountains) can now lvl-up too. She would do it regardless of setting in camp about enabling training of camp npc's so be aware that with time she can became much tougher enemy to beat. Her curent limit is reaching lvl 90.\n");
 			outputText("-Orgasmic Lightning Strike special and Electrified desires can be also used by PC with 12+ in thunderbird score. Default power of OLS was reduced to 20% and having lust over 20% of max will add 10% per 1% of lust until 90% lust when it get fixated on 700% bonus to dmg. (those numbers are related to new lowered power so using old 100% as base OLS dmg starts at 20% and at 90% of pc lust reaching 160%)\n");
 			outputText("-Having manticore tailpussy and cock will now proc bad end. Some edits and qc changes to Etna content + adding cum production increasing to pussy opera sex scene and titfuck scene (this one get additional part about manticore stabbing pc with spike to justify cum production boost).\n");
@@ -4371,8 +4371,8 @@ public class Changelog extends BaseContent
 			outputText("-New range weapon (by Liadri): Kraken Slayer Harpoons - obtainable by giving Sea Huntress Harpoons to Pure Celess to purify. Atk inc to 40 and last 10 pts scale with purity.\n");
 			outputText("-New range weapon (by Liadri): Leviathan Harpoons - obtainable by giving Sea Huntress Harpoons to Corrupted Celess to corrupt. Atk inc to 40 and last 10 pts scale with purity.\n");
 			outputText("-New shield (by Liadri): Sanctuary - obtainable form encounter in forest/deepword with guardian adter picking option to take shield instead of become mother for Celess. Block chance 20, no other properties.\n");
-			outputText("-New shield (by Liadri): Sanctuary - obtainable by giving Sanctuary to Pure Celess to purify. Block chance fully scaling on purity and adding regeneration effect also scaling on purity (on averange it's ~1%).\n");
-			outputText("-New shield (by Liadri): Dark Aegis - obtainable by giving Sanctuary to Corrupted Celess to corrupt. Block chance fully scaling on corruption and adding regeneration effect also scaling on corruption (on averange it's ~1%).\n");
+			outputText("-New shield (by Liadri): Sanctuary - obtainable by giving Sanctuary to Pure Celess to purify. Block chance fully scaling on purity and adding regeneration effect also scaling on purity (on average it's ~1%).\n");
+			outputText("-New shield (by Liadri): Dark Aegis - obtainable by giving Sanctuary to Corrupted Celess to corrupt. Block chance fully scaling on corruption and adding regeneration effect also scaling on corruption (on average it's ~1%).\n");
 			outputText("-New melee weapon (by Liadri): V. Blade - obtainable by winning against Jabberwocky by taking it HP down to 0. 28 atk, and with each attack have 1% chance to trigger penta damage.\n");
 			outputText("-New melee weapon (by Coalsack): Zweihander - buyable in Benoit shop at 100% affection. 31 atk (below 105 str atk drops to 20), costs 2000 gems, 30% chance to stun enemy for 3 rounds, large type weapon.\n");
 			outputText("-New melee weapon (by Coalsack): Francisca throwing axe - buyable at He'Xin'Dao shop with melee weapons. 25 atk, costs 2000 gems, increase dmg to flying enemies by 50%, can be used to attack flying enemies when PC itself not flying, large type weapon.\n");
