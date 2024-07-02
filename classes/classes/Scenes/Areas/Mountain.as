@@ -103,8 +103,8 @@ public class Mountain extends BaseContent
 		private function init():void {
             const fn:FnHelpers    = Encounters.fn;
 			_hillsEncounter       = Encounters.group("hills",
-					SceneLib.exploration.commonEncounters.withChanceFactor(0.1),
-					SceneLib.exploration.angelEncounters.wrap(fn.ifLevelMin(5), [0.05]),
+					SceneLib.exploration.commonEncounters.withChanceFactor(0.025),
+					SceneLib.exploration.angelEncounters.wrap(fn.ifLevelMin(5), [0.0125]),
 			{
 				//Helia monogamy fucks
 				name  : "helcommon",
@@ -282,7 +282,7 @@ public class Mountain extends BaseContent
 				call: SceneLib.exploration.demonLabProjectEncounters
 			});
 			_lowmountainEncounter = Encounters.group("low mountains",
-					SceneLib.exploration.commonEncounters.withChanceFactor(0.1), {
+					SceneLib.exploration.commonEncounters.withChanceFactor(0.025), {
 				//Helia monogamy fucks
 				name  : "helcommon",
 				label : "Helia",
