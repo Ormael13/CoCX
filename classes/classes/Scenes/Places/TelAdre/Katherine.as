@@ -5991,7 +5991,7 @@ private function drunkFuck():void {
 	if (player.hasCock())
 		outputText("The constant battering overcomes you and " + (player.cocks.length > 1 ? "your cocks start" : "your cock starts") + " to spray, coating the door " + (player.cumQ() > 1000 ? "and then the floor " : "") + "with your sticky semen");
 	else if (player.hasVagina())
-		outputText("All that thrusting " + (player.isPregnant() && player.pregnancyIncubation < 100 ? "along with the bouncing of your huge belly " : "") + "overcomes you and the walls of your pussy " + (dPen ? "and ass " : "") + "clamp down on Kath’s spear");
+		outputText("All that thrusting " + (player.isPregnant() && player.pregnancyIncubation < sceneHunter.adjustPregEventTimer(100, player.pregnancyType) ? "along with the bouncing of your huge belly " : "") + "overcomes you and the walls of your pussy " + (dPen ? "and ass " : "") + "clamp down on Kath’s spear");
 	else outputText("All the nerves in your rectum start to fire and your sphincter spasms furiously, trying to expel the invader");
 
 	outputText(".\n\nKath laughs like a madwoman and starts to hammer you even harder.  You feel her swollen knot" + (dPen ? "s" : "") + " fighting against your spasming passage" + (dPen ? "s, trying to force their" : ", trying to force its") + " way inside.  Katherine lets out a yowl and pulls back with all her strength.  Her knot" + (dPen ? "s, already near their final size, smash through your defenses, your muscles unable to hold them" : ", already near its final size, smashes through your defenses, your muscles unable to hold it") + " at bay.  At last Kath stops moving.  She must be enjoying the feeling as your ");

@@ -705,10 +705,10 @@ public class MinervaPurification extends BaseContent
 			menu();
 			if (minervaScene.pregnancy.isPregnant) {
 				outputText("\n\n");
-				if (minervaScene.pregnancy.incubation >= 216) outputText("<b>Her belly appears to be a bit swollen.</b>");
-				else if (minervaScene.pregnancy.incubation >= 144 && minervaScene.pregnancy.incubation < 216) outputText("<b>Her belly shows obvious signs of pregnancy.</b>");
-				else if (minervaScene.pregnancy.incubation >= 72 && minervaScene.pregnancy.incubation < 144) outputText("<b>Her gravid belly has gotten bigger.</b>");
-				else if (minervaScene.pregnancy.incubation < 72) outputText("<b>It's impossible to not notice her pregnancy. She is about to give birth soon.</b>");
+				if (minervaScene.pregnancy.incubation >= sceneHunter.adjustPregEventTimerNum(216, PregnancyStore.INCUBATION_MINERVA)) outputText("<b>Her belly appears to be a bit swollen.</b>");
+				else if (minervaScene.pregnancy.incubation >= sceneHunter.adjustPregEventTimerNum(144, PregnancyStore.INCUBATION_MINERVA) && minervaScene.pregnancy.incubation < sceneHunter.adjustPregEventTimerNum(216, PregnancyStore.INCUBATION_MINERVA)) outputText("<b>Her belly shows obvious signs of pregnancy.</b>");
+				else if (minervaScene.pregnancy.incubation >= sceneHunter.adjustPregEventTimerNum(72, PregnancyStore.INCUBATION_MINERVA) && minervaScene.pregnancy.incubation < sceneHunter.adjustPregEventTimerNum(144, PregnancyStore.INCUBATION_MINERVA)) outputText("<b>Her gravid belly has gotten bigger.</b>");
+				else if (minervaScene.pregnancy.incubation < sceneHunter.adjustPregEventTimerNum(72, PregnancyStore.INCUBATION_MINERVA)) outputText("<b>It's impossible to not notice her pregnancy. She is about to give birth soon.</b>");
 			}
 			doNext(pureMinervaMenu);
 		}
@@ -1477,13 +1477,13 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 		//------------------
 		public function checkPregnancy():void {
 			if (minervaScene.pregnancy.isPregnant && ((player.pregnancyType != PregnancyStore.PREGNANCY_MINERVA && player.pregnancy2Type != PregnancyStore.PREGNANCY_MINERVA) || rand(3) > 0)) {
-				if (minervaScene.pregnancy.incubation >= 168) pregnancyStage1(flags[kFLAGS.MINERVA_CHILDREN] > 0);
-				else if (minervaScene.pregnancy.incubation >= 144) pregnancyStage2(flags[kFLAGS.MINERVA_CHILDREN] > 0);
-				else if (minervaScene.pregnancy.incubation >= 72) pregnancyStage3(flags[kFLAGS.MINERVA_CHILDREN] > 0);
+				if (minervaScene.pregnancy.incubation >= sceneHunter.adjustPregEventTimerNum(168, PregnancyStore.INCUBATION_MINERVA)) pregnancyStage1(flags[kFLAGS.MINERVA_CHILDREN] > 0);
+				else if (minervaScene.pregnancy.incubation >= sceneHunter.adjustPregEventTimerNum(144, PregnancyStore.INCUBATION_MINERVA)) pregnancyStage2(flags[kFLAGS.MINERVA_CHILDREN] > 0);
+				else if (minervaScene.pregnancy.incubation >= sceneHunter.adjustPregEventTimerNum(72, PregnancyStore.INCUBATION_MINERVA)) pregnancyStage3(flags[kFLAGS.MINERVA_CHILDREN] > 0);
 				else pregnancyStage4(flags[kFLAGS.MINERVA_CHILDREN] > 0);
 			}
 			else {
-				if (player.pregnancyIncubation >= 108) pregnancyPlayerStage1();
+				if (player.pregnancyIncubation >= sceneHunter.adjustPregEventTimer(108, player.pregnancyType)) pregnancyPlayerStage1();
 				else pregnancyPlayerStage2();
 			}
 		}

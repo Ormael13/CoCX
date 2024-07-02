@@ -559,7 +559,7 @@ public class PlayerAppearance extends BaseContent {
 				pregnancyDesc += "<b>";
 				//Compute size
 				temp = player.statusEffectv3(StatusEffects.Eggs) + player.statusEffectv2(StatusEffects.Eggs) * 10;
-				if(womb["incubation"] <= 50 && womb["incubation"] > 20) {
+				if(womb["incubation"] <= sceneHunter.adjustPregEventTimer(50, womb["type"]) && womb["incubation"] > sceneHunter.adjustPregEventTimer(20, womb["type"])) {
 					pregnancyDesc += "Your swollen pregnant belly is as large as a ";
 					if(temp < 10)
 						pregnancyDesc += "basketball.";
@@ -568,7 +568,7 @@ public class PlayerAppearance extends BaseContent {
 					if(temp >= 20)
 						pregnancyDesc += "beach ball.";
 				}
-				if(womb["incubation"] <= 20) {
+				if(womb["incubation"] <= sceneHunter.adjustPregEventTimer(20, womb["type"])) {
 					pregnancyDesc += "Your swollen pregnant belly is as large as a ";
 					if(temp < 10)
 						pregnancyDesc += "watermelon.";
@@ -581,13 +581,13 @@ public class PlayerAppearance extends BaseContent {
 			}
 			//Satur preggos - only shows if bigger than regular pregnancy or not pregnancy
 			else if (player.buttPregnancyType == PregnancyStore.PREGNANCY_SATYR && (!player.isPregnant() || player.buttPregnancyIncubation < womb["incubation"])) {
-				if(player.buttPregnancyIncubation < 125 && player.buttPregnancyIncubation >= 75) {
+				if(player.buttPregnancyIncubation <  sceneHunter.adjustPregEventTimer(128, player.buttPregnancyType) && player.buttPregnancyIncubation >= sceneHunter.adjustPregEventTimer(75, player.buttPregnancyType)) {
 					pregnancyDesc += "<b>You've got the beginnings of a small pot-belly.</b>";
 				}
-				else if(player.buttPregnancyIncubation >= 50) {
+				else if(player.buttPregnancyIncubation >= sceneHunter.adjustPregEventTimer(50, player.buttPregnancyType)) {
 					pregnancyDesc += "<b>The unmistakable bulge of pregnancy is visible in your tummy, yet it feels odd inside you - wrong somehow.</b>";
 				}
-				else if(player.buttPregnancyIncubation >= 30) {
+				else if(player.buttPregnancyIncubation >= sceneHunter.adjustPregEventTimer(30, player.buttPregnancyType)) {
 					pregnancyDesc += "<b>Your stomach is painfully distended by your pregnancy, making it difficult to walk normally.</b>";
 				} else { //Surely Benoit and Cotton deserve their place in this list
 					if (womb["type"] == PregnancyStore.PREGNANCY_MARBLE)
@@ -597,28 +597,28 @@ public class PlayerAppearance extends BaseContent {
 					else pregnancyDesc += "<b>Your belly protrudes unnaturally far forward, bulging with the unclean spawn of some monster or beast.</b>";
 				}
 			} else if (player.isButtPregnant()) {
-				if(player.buttPregnancyIncubation <= 8 && player.buttPregnancyType == PregnancyStore.PREGNANCY_FROG_GIRL)
+				if(player.buttPregnancyIncubation <= sceneHunter.adjustPregEventTimer(8, player.buttPregnancyType) && player.buttPregnancyType == PregnancyStore.PREGNANCY_FROG_GIRL)
 					pregnancyDesc += "<b>Your stomach is so full of frog eggs that you look about to birth at any moment, your belly wobbling and shaking with every step you take, packed with frog ovum.</b>";
 				else if (player.buttPregnancyType != PregnancyStore.PREGNANCY_GOO_STUFFED) pregnancyDesc += "<b>You're stuffed so full with eggs that your belly looks obscenely distended, huge and weighted with the gargantuan eggs crowding your gut. They make your gait a waddle and your gravid tummy wobble obscenely.</b>";
 			}
 			//URTA PREG
 			else if ((womb["type"] == PregnancyStore.PREGNANCY_URTA)) {
-				if (womb["incubation"] <= 432 && womb["incubation"] > 360) {
+				if (womb["incubation"] <= sceneHunter.adjustPregEventTimer(432, womb["type"]) && womb["incubation"] > sceneHunter.adjustPregEventTimer(360, womb["type"])) {
 					pregnancyDesc += "<b>Your belly is larger than it used to be.</b>\n";
 				}
-				else if (womb["incubation"] > 288) {
+				else if (womb["incubation"] > sceneHunter.adjustPregEventTimer(288, womb["type"])) {
 					pregnancyDesc += "<b>Your belly is more noticeably distended. You're pretty sure it's Urta's.</b>";
 				}
-				else if (womb["incubation"] > 216) {
+				else if (womb["incubation"] > sceneHunter.adjustPregEventTimer(216, womb["type"])) {
 					pregnancyDesc += "<b>The unmistakable bulge of pregnancy is visible in your tummy, and the baby within is kicking nowadays.</b>";
 				}
-				else if (womb["incubation"] > 144) {
+				else if (womb["incubation"] > sceneHunter.adjustPregEventTimer(144, womb["type"])) {
 					pregnancyDesc += "<b>Your belly is large and very obviously pregnant to anyone who looks at you. It's gotten heavy enough to be a pain to carry around all the time.</b>";
 				}
-				else if (womb["incubation"] > 72) {
+				else if (womb["incubation"] > sceneHunter.adjustPregEventTimer(72, womb["type"])) {
 					pregnancyDesc += "<b>It would be impossible to conceal your growing pregnancy from anyone who glanced your way. It's large and round, frequently moving.</b>";
 				}
-				else if (womb["incubation"] > 48) {
+				else if (womb["incubation"] > sceneHunter.adjustPregEventTimer(48, womb["type"])) {
 					pregnancyDesc += "<b>Your stomach is painfully distended by your pregnancy, making it difficult to walk normally.</b>";
 				}
 				else {
@@ -626,9 +626,9 @@ public class PlayerAppearance extends BaseContent {
 				}
 			} else if (womb["type"] == PregnancyStore.PREGNANCY_FAERIE) { //Belly size remains constant throughout the pregnancy
 				pregnancyDesc += "<b>Your belly remains swollen like a watermelon. ";
-				if (womb["incubation"] <= 100)
+				if (womb["incubation"] <= sceneHunter.adjustPregEventTimer(100, womb["type"]))
 					pregnancyDesc += "It's full of liquid, though unlike a normal pregnancy the passenger you’re carrying is tiny.</b>";
-				else if (womb["incubation"] <= 140)
+				else if (womb["incubation"] <= sceneHunter.adjustPregEventTimer(140, womb["type"]))
 					pregnancyDesc += "It feels like it’s full of thick syrup or jelly.</b>";
 				else pregnancyDesc += "It still feels like there’s a solid ball inside your womb.</b>";
 			} else if (womb["type"] == PregnancyStore.PREGNANCY_HARPY_HATCHING) {
@@ -636,22 +636,22 @@ public class PlayerAppearance extends BaseContent {
 				if (7 - SophieFollowerScene.HarpyEggDay > 0)  pregnancyDesc += "in " + (7 - SophieFollowerScene.HarpyEggDay) + " days.";
 				else pregnancyDesc += "tomorrow.";
 			} else {
-				if (womb["incubation"] <= 336 && womb["incubation"] > 280) {
+				if (womb["incubation"] <= sceneHunter.adjustPregEventTimer(336, womb["type"]) && womb["incubation"] > sceneHunter.adjustPregEventTimer(280, womb["type"])) {
 					pregnancyDesc += "<b>Your belly is larger than it used to be.</b>";
 				}
-				else if(womb["incubation"] > 216) {
+				else if(womb["incubation"] > sceneHunter.adjustPregEventTimer(216, womb["type"])) {
 					pregnancyDesc += "<b>Your belly is more noticeably distended. You are probably pregnant.</b>";
 				}
-				else if(womb["incubation"] > 180) {
+				else if(womb["incubation"] > sceneHunter.adjustPregEventTimer(180, womb["type"])) {
 					pregnancyDesc += "<b>The unmistakable bulge of pregnancy is visible in your tummy.</b>";
 				}
-				else if(womb["incubation"] > 120) {
+				else if(womb["incubation"] > sceneHunter.adjustPregEventTimer(120, womb["type"])) {
 					pregnancyDesc += "<b>Your belly is very obviously pregnant to anyone who looks at you.</b>";
 				}
-				else if(womb["incubation"] > 72) {
+				else if(womb["incubation"] > sceneHunter.adjustPregEventTimer(72, womb["type"])) {
 					pregnancyDesc += "<b>It would be impossible to conceal your growing pregnancy from anyone who glanced your way.</b>";
 				}
-				else if(womb["incubation"] > 48) {
+				else if(womb["incubation"] > sceneHunter.adjustPregEventTimer(48, womb["type"])) {
 					pregnancyDesc += "<b>Your stomach is painfully distended by your pregnancy, making it difficult to walk normally.</b>";
 				}
 				else { //Surely Benoit and Cotton deserve their place in this list

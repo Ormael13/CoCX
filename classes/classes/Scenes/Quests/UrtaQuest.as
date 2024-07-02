@@ -894,7 +894,7 @@ private function putUrtasWangInPCsCunt(truth:Boolean):void {
 	outputText("pulsing interior.  The sight is exciting in the extreme, immediately sending your heartbeat through the roof.  Your tremendous horse-cock is immediately stiffened by your ardor, along with your coal-black nipples, and your armor-plated skirt begins to rise, as if by magic.");
 	outputText("\n\n" + player2.short + " giggles at the tenting garment, playfully reaching under to caress the sensitive bottom of your swelling bulge.  Fresh length quickly surges out of your sheath in response, popping your tip past the hem in a second to hang there, pulsing, stiff, and slowly winking your urethra at your lover's face.  Your nipples grow so hard that they're almost painful, and they scrape against the interior of your leather breastplate irritatingly.  Struggling with the straps, you do your best to undo the offending armor, but it just... won't... come... free!   Damnit!");
 	outputText("\n\nYou twist around and grab at the straps holding your gear together with hands shaking so hard they fumble off of them more often than not.  " + player2.short + " laughs again at your mistake, gently cupping your smooth nutsack in " + player2.mf("his","her") + " hand.  Your mammoth balls are so large that they hang partway off " + player2.mf("his","her") + " palm on either side, but " + player2.mf("he","she") + " doesn't seem to mind.  In fact, " + player2.mf("he","she") + " begins to roll them back and forth luxuriously.  Your tip flares slightly as it releases a slippery deposit onto ");
-	if(player2.pregnancyIncubation > 0 && player.pregnancyIncubation < 150) outputText("the curve of " + player2.mf("his","her") + " pregnant belly");
+	if(player2.pregnancyIncubation > 0 && player.pregnancyIncubation < sceneHunter.adjustPregEventTimer(150, player.buttPregnancyType)) outputText("the curve of " + player2.mf("his","her") + " pregnant belly");
 	else if(player2.tone >= 65) outputText("" + player2.mf("his","her") + " toned abdomen");
 	else if(player2.tone < 30) outputText("" + player2.mf("his","her") + " soft, forgiving middle");
 	else outputText("" + player2.mf("his","her") + " belly");
@@ -946,9 +946,9 @@ private function putUrtasWangInPCsCunt(truth:Boolean):void {
 	outputText("\n\nMoaning, " + player2.mf("he","she") + " looks over " + player2.mf("his","her") + " shoulder and whispers, \"<i>Do it!  I can-can't take much more!</i>\"");
 	outputText("\n\nYou oblige your lover's request (as if you had any other option) and hammer your oozing dick deep into " + player2.short + "'s puffy vagina so hard that your tip butts up against " + player2.mf("his","her") + " cervix, bowing it in towards " + player2.mf("his","her") + " unprotected womb.  " + player2.mf("He","She") + " squeezes down like a vice, wringing your cock with juicy, slippery walls.  You moan with " + player2.mf("him","her") + ", balls tensing, lifting slightly in your sack as they ready your juicy load.  Climactic bliss erupts from within and your flare nearly doubles in size, locking itself in the honeyed heaven it so loves to nestle itself into.  Bubbling heat builds inside until you feel as if your body is about to light aflame, and then, in a dizzying rush, you release the first sticky deposit into your lover's womb.  " + player2.mf("He","She") + " moans, wiggling happily as some slips into " + player2.mf("his","her") + " womb, while the rest begins to flood every nook and cranny of " + player2.mf("his","her") + " violated tunnel.");
 	outputText("\n\nAgain and again, you fire sticky white loads deep into " + player2.short + "'s body, anchored tightly by the flaring horse-cock you used to hate, but have come to accept with " + player2.short + "'s help.  " + player2.mf("He","She") + " taught you that you could be loved, and as you thoroughly seed " + player2.mf("his","her") + " womb a teardrop of moisture beads at the corner of your eye.  " + player2.mf("He","She") + " loves you, cock and all, and there's nothing you'd rather be doing than spending the night with " + player2.mf("him","her") + ".  " + player2.mf("His","Her") + " belly rounds slightly");
-	if(player2.pregnancyIncubation > 0 && player2.pregnancyIncubation < 150) outputText(" (more than it already is)");
+	if(player2.pregnancyIncubation > 0 && player2.pregnancyIncubation < sceneHunter.adjustPregEventTimer(150, player.buttPregnancyType)) outputText(" (more than it already is)");
 	outputText(" from your prodigious deposit.  The illusion of knocking " + player2.mf("him","her") + " up takes hold of you, and your orgasm redoubles, fresh waves of horse-cum pouring out of you unceasingly.  " + player2.short + " moans, rubbing " + player2.mf("him","her") + " taut");
-	if(player2.pregnancyIncubation > 0 && player2.pregnancyIncubation < 150) outputText(" pregnant");
+	if(player2.pregnancyIncubation > 0 && player2.pregnancyIncubation < sceneHunter.adjustPregEventTimer(150, player.buttPregnancyType)) outputText(" pregnant");
 	outputText(" dome, until at last you finally spend the last of your spunk.");
 	//Hermaphrodite cums!
 	if (player2.hasCock()) {
@@ -2481,7 +2481,7 @@ private function preggedUrtaWithGodChildEpilogue():void {
 private function getKnockedUpWithGodChild():void {
 	clearOutput();
 	outputText("Smiling coyly, you remove your [armor] and crawl into your bed, beckoning for the lust-crazed fox to follow.  You trust her, and you're more than willing to let her put a nice little bun in your");
-	if (player.isPregnant() && player.pregnancyIncubation < 150) outputText(" already filled");
+	if (player.isPregnant() && player.pregnancyIncubation < sceneHunter.adjustPregEventTimer(150, player.pregnancyType)) outputText(" already filled");
 	outputText(" oven.  Her green eyes bulge obscenely at the sight of your naked flesh, locked tight to every curve of your shape.  The vixen takes one shuffling step after another.  It's clear from her crazed panting and trembling fingertips that she's trying to keep herself from jumping you with limited success.  She's like an addict eyeing a cornucopia stuffed with her favorite drugs, knowing that she must take it slow but helpless against her desire to gluttonously gorge.");
 	outputText("\n\nYou toss a little fuel on the fire by spreading your legs");
 	if(player.hasBalls()) outputText(" and lifting your balls");
@@ -2492,7 +2492,7 @@ private function getKnockedUpWithGodChild():void {
 	outputText("\n\nThe rutting prick-vixen thrusts so hard that the momentum carries her closer, and in her almost drunken haste, she tumbles head over heels.  With a ");
 	if(player.wetness() >= 4) outputText("wet ");
 	outputText("squish, she lands nose-deep in your vagina, immediately licking at it and tickling you with her smooth, slippery tongue.  \"<i>Mmmmm,</i>\" she purrs as she suckles your [clit].  Inching upward, the dripping wet fox-girl licks higher and higher, her tongue smearing across the " + player.skinFurScales() + " that covers your ");
-	if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < 150) outputText("rounded ");
+	if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < sceneHunter.adjustPregEventTimer(150, player.buttPregnancyType)) outputText("rounded ");
 	outputText("belly.  Urta's rigid onyx nipples tickle your [legs] as they drag upward, each immensely erect and engorged, just a little pebbly in texture.  She reaches your [chest], kissing up the ");
 	if(player.biggestTitSize() > 1) outputText("soft curve");
 	else outputText("flat muscles");
@@ -2588,9 +2588,9 @@ private function getKnockedUpWithGodChild():void {
 private function getKnockedUpUrtaEpilogue():void {
 	clearOutput();
 	outputText("When you wake, you're ");
-	if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < 150) outputText("much more ");
+	if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < sceneHunter.adjustPregEventTimer(150, player.buttPregnancyType)) outputText("much more ");
 	outputText("pregnant ");
-	if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < 150) outputText("than before");
+	if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < sceneHunter.adjustPregEventTimer(150, player.buttPregnancyType)) outputText("than before");
 	else outputText("- very pregnant");
 	outputText(".  Whatever Urta just put inside you, it's developing fast.  Fast enough to give you a wobbling gait and a straining midriff.  You give the snoring fox a prod.  Her only reaction is to swat at your finger with her fluffy tail and roll over snoring, so this time, you jab her hard, in the butt-cheek.  She yelps, sitting upright immediately.");
 	outputText("\n\n\"<i>What was that for - oooh gods...  did I - are you...  We need to get you to the Covenant!</i>\" she stutters on her way to a decision.  You nod - you've no idea what this thing is going to do to your body before it comes out, but having a magically gifted organization tending to your welfare will be a start.  You'll just have to hope the demons don't make a move on the portal in your absence.");
@@ -2614,7 +2614,7 @@ private function getKnockedUpByUrtaEpilogueII():void {
 	outputText("\n\nThe ball unfolds itself, one spindly leg at a time, each covered in a short layer of fuzz.  The limbs seem too tiny, too frail, even for a creature new to this world.  A hand disengages itself from the rest of the mass, stringing the clear birthing fluids behind it, revealing an equally frail-looking arm.  You can see its head now, fox-like, with a long vulpine muzzle and large, luminous eyes.  The newborn rises on its newly revealed limbs and stretches, standing almost five feet tall when fully unfolded.");
 	outputText("\n\n<i>I live.</i>");
 	outputText("\n\nThe voice isn't spoken aloud but inside you, inside your head.  A glance to Urta reveals that she heard it too.  The creature - Taoth, you correct yourself, cocks its head toward Urta, giving your thigh a familiar pat.");
-	if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < 150) outputText("  Somehow, you're still just as pregnant with something as you were before.");
+	if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < sceneHunter.adjustPregEventTimer(150, player.buttPregnancyType)) outputText("  Somehow, you're still just as pregnant with something as you were before.");
 	outputText("  You're filled with vigor at the touch, the stress of the birth fading immediately.  Even your poor, tortured vagina tingles, the pain fading.  You can feel the pregnant gape receding, as if the birth never happened.");
 	outputText("\n\n<i>Thank you, Urta-father.</i>  The mental voice speaks again, unmatched by the newborn's vocal cords.  It approaches Urta confidently, with long, loping steps, seeming... almost unnatural in the way that the limbs seem to sway and dance.  Just a few steps away from Urta, a moment of panic surges through you - what if he hurts her?!  You start to rise, to interpose yourself between them, but Urta puts a reassuring hand to your chest, flicking her emerald eyes towards you, begging you not to interfere.  You lay back down, reluctantly");
 	if(player.cor >= 66) outputText(", what do you care, anyway?");

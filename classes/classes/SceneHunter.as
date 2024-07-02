@@ -599,8 +599,11 @@ public class SceneHunter extends BaseContent {
     }
 
     public function adjustPregEventTimer(oldTimer:Number, pregType:int):int {
+        return adjustPregEventTimerNum(oldTimer, PregnancyStore.getIncubation(pregType));
+    }
+
+    public function adjustPregEventTimerNum(oldTimer:Number, oldIncub:int):int {
         if (!shortPreg || oldTimer < 2) return oldTimer;
-        var oldIncub:int = PregnancyStore.getIncubation(pregType);
         if (oldIncub < 0) return shortPregTimer(oldTimer); // can't find => at least fix it to the new scale
         var newTimer:Number = Math.round(oldTimer/oldIncub * shortPregTimer(oldIncub));
         if (newTimer <= 0) return 1;

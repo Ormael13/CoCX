@@ -401,14 +401,13 @@ public class CombatTeases extends BaseCombatContent {
 		if (player.hasVisiblePregnancy()) {
 			choices[choices.length] = 13;
 			if (player.biggestLactation() >= 1) choices[choices.length] = 13;
-			if ((player.pregnancyIncubation <= 180) || (player.pregnancy2Incubation <= 180)) choices[choices.length] = 13;
-			if ((player.pregnancyIncubation <= 120) || (player.pregnancy2Incubation <= 120)) choices[choices.length] = 13;
-			if ((player.pregnancyIncubation <= 100) || (player.pregnancy2Incubation <= 100)) choices[choices.length] = 13;
-			if ((player.pregnancyIncubation <= 50)  || (player.pregnancy2Incubation <= 50))  choices[choices.length] = 13;
-			if ((player.pregnancyIncubation <= 24)  || (player.pregnancy2Incubation <= 24))  choices[choices.length] = 13;
-			if ((player.pregnancyIncubation <= 24)  || (player.pregnancy2Incubation <= 24))  choices[choices.length] = 13;
-			if ((player.pregnancyIncubation <= 24)  || (player.pregnancy2Incubation <= 24))  choices[choices.length] = 13;
-			if ((player.pregnancyIncubation <= 24)  || (player.pregnancy2Incubation <= 24))  choices[choices.length] = 13;
+			if ((player.pregnancyIncubation <= sceneHunter.adjustPregEventTimer(180, player.pregnancyType)) || (player.pregnancy2Incubation <= sceneHunter.adjustPregEventTimer(180, player.pregnancy2Type))) choices[choices.length] = 13;
+			if ((player.pregnancyIncubation <= sceneHunter.adjustPregEventTimer(120, player.pregnancyType)) || (player.pregnancy2Incubation <= sceneHunter.adjustPregEventTimer(120, player.pregnancy2Type))) choices[choices.length] = 13;
+			if ((player.pregnancyIncubation <= sceneHunter.adjustPregEventTimer(100, player.pregnancyType)) || (player.pregnancy2Incubation <= sceneHunter.adjustPregEventTimer(100, player.pregnancy2Type))) choices[choices.length] = 13;
+			if ((player.pregnancyIncubation <= sceneHunter.adjustPregEventTimer(50, player.pregnancyType))  || (player.pregnancy2Incubation <= sceneHunter.adjustPregEventTimer(50, player.pregnancy2Type)))  choices[choices.length] = 13;
+			if ((player.pregnancyIncubation <= sceneHunter.adjustPregEventTimer(24, player.pregnancyType))  || (player.pregnancy2Incubation <= sceneHunter.adjustPregEventTimer(24, player.pregnancy2Type))) {
+				for (var pi:int = 1; pi < 4; ++pi) choices[choices.length] = 13;
+			}
 		}
 		//14 Brood Mother
 		if (monster.hasCock() && player.hasVagina() && player.hasPerk(PerkLib.BroodMother) && (!player.isPregnant() || player.hasNonVisiblePregnancy())) {
@@ -918,11 +917,11 @@ public class CombatTeases extends BaseCombatContent {
 					options.chance += 6;
 					options.damage += 12;
 				}
-				if ((player.pregnancyIncubation < 100) || (player.pregnancy2Incubation < 100)) {
+				if ((player.pregnancyIncubation < sceneHunter.adjustPregEventTimer(100, player.pregnancyType)) || (player.pregnancy2Incubation < sceneHunter.adjustPregEventTimer(100, player.pregnancy2Type))) {
 					options.chance += 3;
 					options.damage += 6;
 				}
-				if ((player.pregnancyIncubation < 50) || (player.pregnancy2Incubation < 50)) {
+				if ((player.pregnancyIncubation < sceneHunter.adjustPregEventTimer(50, player.pregnancyType)) || (player.pregnancy2Incubation < sceneHunter.adjustPregEventTimer(50, player.pregnancy2Type))) {
 					options.chance += 3;
 					options.damage += 6;
 				}

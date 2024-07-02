@@ -972,7 +972,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
                 endEncounter();
                 return;
             }
-            if (player.pregnancyIncubation < 200 && (player.pregnancyType != PregnancyStore.PREGNANCY_EMBER || player.pregnancy2Type != PregnancyStore.PREGNANCY_EMBER) && flags[kFLAGS.EMBER_BITCHES_ABOUT_PREGNANT_PC] == 0) {
+            if (player.pregnancyIncubation < sceneHunter.adjustPregEventTimer(200, player.pregnancyType) && (player.pregnancyType != PregnancyStore.PREGNANCY_EMBER || player.pregnancy2Type != PregnancyStore.PREGNANCY_EMBER) && flags[kFLAGS.EMBER_BITCHES_ABOUT_PREGNANT_PC] == 0) {
                 manEmberBitchesAboutPCPregnancy();
                 endEncounter();
                 return;

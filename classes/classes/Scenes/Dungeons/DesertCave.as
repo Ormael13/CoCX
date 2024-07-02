@@ -4089,12 +4089,12 @@ public class DesertCave extends DungeonAbstractContent
 		48 == bulges with unclean spawn..blahblahblah*/
 		public function sandPregUpdate(womb:Object):Boolean {
 			//1:
-			if(womb["incubation"] == 336) {
+			if(womb["incubation"] == sceneHunter.adjustPregEventTimer(336, womb["type"])) {
 				outputText("\nYour breasts have felt unusually heavy recently, and a strange pulsing sensation occasionally emanates from them.  Your appetite is a little off; you could really go for some milk...\n");
 				return true;
 			}
 			//2:
-			if(womb["incubation"] == 280) {
+			if(womb["incubation"] == sceneHunter.adjustPregEventTimer(280, womb["type"])) {
 				outputText("\nYou've been having strange dreams recently, about seeds growing before your eyes into beautiful flowers; what's really weird is the sense of pride and maternal contentment that seeing them bloom makes you feel.  Your breasts are definitely heavier than normal, and sometimes you wake up to find them damp; are you ");
 				if(player.biggestLactation() < 1) outputText("starting to lactate");
 				else outputText("lactating more");
@@ -4111,7 +4111,7 @@ public class DesertCave extends DungeonAbstractContent
 				return true;
 			}
 			//3:
-			if(womb["incubation"] == 216) {
+			if(womb["incubation"] == sceneHunter.adjustPregEventTimer(216, womb["type"])) {
 				outputText("\nYour breasts have definitely grown bigger, and they occasionally trickle milk.  More importantly than that, your stomach is bulging out in a small but unquestionable pot-belly.  You're definitely pregnant.\n");
 				i = player.bRows();
 				while(i > 0) {
@@ -4125,7 +4125,7 @@ public class DesertCave extends DungeonAbstractContent
 				return true;
 			}
 			//4:
-			if(womb["incubation"] == 180) {
+			if(womb["incubation"] == sceneHunter.adjustPregEventTimer(180, womb["type"])) {
 				outputText("\nYour belly continues to grow, the hormones triggering your milk's production to kick it up a notch.  Your breasts are so heavy and sensitive, aching to be used to feed life-giving milk to something.\n");
 				while(player.biggestLactation() < 2) {
 					player.boostLactation(.5);
@@ -4133,7 +4133,7 @@ public class DesertCave extends DungeonAbstractContent
 				return true;
 			}
 			//5:
-			if(womb["incubation"] == 120) {
+			if(womb["incubation"] == sceneHunter.adjustPregEventTimer(120, womb["type"])) {
 				outputText("\nYou sometimes catch yourself humming to your unborn child, stroking your belly like a contented mother.  At other times, you catch yourself proudly stroking your swollen breasts, admiring the way it makes the milk spurt and flow.");
 				while(player.biggestLactation() < 3) {
 					player.boostLactation(.5);
@@ -4141,7 +4141,7 @@ public class DesertCave extends DungeonAbstractContent
 				return true;
 			}
 			//6:
-			if(womb["incubation"] == 72) {
+			if(womb["incubation"] == sceneHunter.adjustPregEventTimer(72, womb["type"])) {
 				outputText("\nMilk dribbles constantly out of your nipples now, in many ways being harder to deal with than the ever-increasing swell of your midriff.  The scent of milk hangs in the air around you constantly, giving you a craving to suckle almost as bad as your breasts' need to be suckled from.\n");
 				while(player.biggestLactation() < 4.5) {
 					player.boostLactation(.5);
@@ -4149,7 +4149,7 @@ public class DesertCave extends DungeonAbstractContent
 				return true;
 			}
 			//7:
-			if(womb["incubation"] == 48) {
+			if(womb["incubation"] == sceneHunter.adjustPregEventTimer(48, womb["type"])) {
 				outputText("\nYour stomach hangs out, heavy and round as any full-term mother's back in Ingnam, your breasts feeling almost as taut and swollen, as if jealous of the life nearly grown inside your womb.  At morning, you find yourself milking your breasts until the cascading fluid ends up glazing your engorged stomach in a beautiful liquid white sheen, not that it seems to make much difference to your production.  You can only hope whatever's growing inside you will be hungry enough to keep up with all the food you'll have for it...");
 				while(player.biggestLactation() < 5.5) {
 					player.boostLactation(.5);

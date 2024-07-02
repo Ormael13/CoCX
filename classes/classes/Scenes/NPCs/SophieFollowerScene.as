@@ -909,7 +909,7 @@ public function sophieSmallDongTeases():void {
 		if(flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] > 0) outputText("golden");
 		else outputText("pink");
 		outputText("-haired mistress looks down at you graciously as she inexorably slides closer, and you find the intense anticipation is almost a pleasure all its own.  Then, her feverishly-warm delta contacts your sweating cock-skin, the sweet sensation of her juicy snatch against you too much to endure.  Your dainty cock dilates as wide as its diminutive girth will allow, and as you meet Sophie's knowing smile, you moan and release, spraying sperm against her plump clit and ");
-		if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < 150) outputText("pregnant ");
+		if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < sceneHunter.adjustPregEventTimer(150, player.pregnancyType)) outputText("pregnant ");
 		else if(player.tone >= 70) outputText("toned ");
 		outputText("belly, most of it deflecting around and over her moist lips in a spray of syrupy white.");
 	
@@ -925,7 +925,7 @@ public function sophieSmallDongTeases():void {
 	//{High Sensitivity}
 	else {
 		outputText("\n\nWithout warning, a wave of pleasure races through your midsection, culminating in an explosion of excitement.  A single drop of white drips from your tip, before the muscular contractions racing through your form hit their peak and launch a fat glob of cum right onto your [chest], the next arcing high enough to hit your face.  Sophie shifts position mid cum-gasm, planting her plush, excited labia around your small cock and feverishly grinding back and forth, jilling her clit against your spasming urethra as it distends with each load of jism.  The heated pressure pushes your cock down, and the remaining spurts all deposit themselves across your belly in messy spurts");
-		if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < 150) outputText(", rolling off the pregnant dome you call your tummy");
+		if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < sceneHunter.adjustPregEventTimer(150, player.pregnancyType)) outputText(", rolling off the pregnant dome you call your tummy");
 		outputText(".");
 		if(player.cumQ() >= 500) outputText("  You cum for what seems like hours, emptying your [balls] onto yourself, every drop of wasted seed a testament to your pussy-whipped status.");
 		if(player.cumQ() >= 1000) outputText("  A puddle of jizz forms around you before long, mixing with the drippings from her pussy as she rides you into your own soaked bedding.");

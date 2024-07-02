@@ -2950,7 +2950,7 @@ public function marblePoopsBaybees():void {
 public function marbleNightSleepFlavor():Boolean {
 	marbleSprite();
 	//If player is marble-preggo, she builds nursery
-	if (flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] == 0 && ((player.pregnancyType == PregnancyStore.PREGNANCY_MARBLE && player.pregnancyIncubation <= 128) || (player.pregnancyType == PregnancyStore.PREGNANCY_MARBLE && player.pregnancyIncubation <= 128))) {
+	if (flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] == 0 && ((player.pregnancyType == PregnancyStore.PREGNANCY_MARBLE && player.pregnancyIncubation <= sceneHunter.adjustPregEventTimer(128, player.pregnancyType)) || (player.pregnancy2Type == PregnancyStore.PREGNANCY_MARBLE && player.pregnancy2Incubation <= sceneHunter.adjustPregEventTimer(128, player.pregnancy2Type)))) {
 		outputText("<b>Citing your pregnant belly, Marble informs you she'll be getting to work on building a nursery for your coming cow-child soon.</b>\n\n");
 		flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION]++;
 	}
@@ -3055,12 +3055,12 @@ public function marbleNightSleepFlavor():Boolean {
 }
 
 private function pcPregWithMarblesKids():Boolean {
-	return (player.pregnancyType == PregnancyStore.PREGNANCY_MARBLE && player.pregnancyIncubation <= 280) ||
-            (player.pregnancy2Type == PregnancyStore.PREGNANCY_MARBLE && player.pregnancy2Incubation <= 280);
+	return (player.pregnancyType == PregnancyStore.PREGNANCY_MARBLE && player.pregnancyIncubation <= sceneHunter.adjustPregEventTimer(280, player.pregnancyType)) ||
+            (player.pregnancy2Type == PregnancyStore.PREGNANCY_MARBLE && player.pregnancy2Incubation <= sceneHunter.adjustPregEventTimer(280, player.pregnancy2Type));
 
 }
 private function marblePregWithPCKids():Boolean {
-	return pregnancy.type == PregnancyStore.PREGNANCY_PLAYER && pregnancy.incubation <= 280;
+	return pregnancy.type == PregnancyStore.PREGNANCY_PLAYER && pregnancy.incubation <= sceneHunter.adjustPregEventTimerNum(280, PregnancyStore.INCUBATION_KIHA);
 }
 
 private function marbleCuddlin():void {
