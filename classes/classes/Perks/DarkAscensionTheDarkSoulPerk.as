@@ -22,6 +22,10 @@ package classes.Perks
 			super("Dark Ascension: The Dark Soul", "Dark Ascension: The Dark Soul", "", "You have acquired permanent power from the many souls you consumed in your previous timelines. Raise core stats cap by 10.");
 		}
 		
+		override public function keepOnAscension(respec:Boolean = false):Boolean
+		{
+			return true;
+		}
 	}
 
 }

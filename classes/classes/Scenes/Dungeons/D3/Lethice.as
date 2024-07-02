@@ -366,13 +366,13 @@ public class Lethice extends Monster
 			else{
 				return false;
 			}
-		}
+		}/*
 		override public function combatRoundUpdate():void{
 			if(_fightPhase!=2){
 				furubeYuraYuraYatsukaNoTsurugiIkaishinshoMakora();
 			}
 			super.combatRoundUpdate();
-		}
+		}*/
 		private function adaptionDeflect(damage:Number, font:String, dict:String="physical", damageType:Number=0):Number {
 			if(_fightPhase!=2){
 				if(companionCheck){

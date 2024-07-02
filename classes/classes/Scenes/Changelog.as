@@ -256,7 +256,7 @@ public class Changelog extends BaseContent
 			outputText("-New M. Special: Tech Overdrive. Usable by having Tech Overdrive perk. Cost 40 mana. Increase by 20(+20per ng tier) atk of melee or range tech wepaons, add 20% to mech onboard weapons dmg, lower physical def by 50%. It would last for 10 turns.\n");
 			outputText("-New M. Special: Malfunction. Usable by been gremlin-kin. Cost 40 mana and can stun for 6 turns. Have 10 turns cooldown after use. Overload a magitech or construction, causing damage and immobilising it for a while. Does not work on living things or sentient constructs.\n");
 			outputText("-Lust immunity fix & preg fix. (Svalkash)\n");
-			outputText("-\n");
+			outputText("-Lowered the chance of common (imp-gob-goleems) encountered in Forest, Mountain and Plains to 1/4 of the previous value. Averange typo fixed. (Svalkash)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -286,7 +286,8 @@ public class Changelog extends BaseContent
 			outputText("3rd floor teleportation circle room, perk allowing to always run away from enemy/ies been ignored in dungeons, unarmed/feral giving mastery gains for small weapons, 2 of 4 SF to Elemental Energy conversion options having wrong check for usable SF, using Fiery Band for calling Kiha to help fight... Kiha, Ceraph after update still not able to win using her super cool lust beam attack, ");
 			outputText("Pilgrim's Bounty perk setting cumQ as if max lust was 100, Raphael rape scene treating all PC cocks as tentalce cocks, Condensed Power and Titanic Strength perks desc/effects been misaligned/incorectly calculated, HB Mech Dragon's Breath Flamer & Scatter Laser upgrade(s) after instaling each weapon, HB Ayo Armor have it stored SF reset on loading save, Vapula not longer will make Joy ");
 			outputText("join any threesome scenes, Patchouli sex scenes will now know when she gained cock she could use, Pure JoJo anal sex sex scene cock parser going postal, trapped satyr sex scenes not giving sex XP or triger any related effects, Cum Cannon checking for cow not mino race, White-Faced One Birthright (Final Form) stat multi bonuses, Nadia recruitment endcounter bug msg, ");
-			outputText("one of Raphael scenes using variant for tentacle cocks that can go all way throu without having such cock(s), unable to gain plasma dmg from using fire buff on lightning weapon and vice versa, unable to use Blind during Draculina fight, rescue from bad end not clearing lingering status effects, Centaurium tf effect checking for wrong elf-like ears type\n\n");
+			outputText("one of Raphael scenes using variant for tentacle cocks that can go all way throu without having such cock(s), unable to gain plasma dmg from using fire buff on lightning weapon and vice versa, unable to use Blind during Draculina fight, rescue from bad end not clearing lingering status effects, Centaurium tf effect checking for wrong elf-like ears type, ");
+			outputText("Ascension: Transhumanism (Sen) perk not adding sensitivity\n\n");
 			/*ostatni punkt changelogu
 			outputText("(Part 2/2) <b>Version 0.9a:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");

@@ -5669,6 +5669,9 @@ use namespace CoC;
 			if (hasPerk(PerkLib.AscensionOneRaceToRuleThemAllX)) {
 				buffAll += 2 * perkv1(PerkLib.AscensionOneRaceToRuleThemAllX) * level;
 			}
+			if (hasPerk(PerkLib.AscensionTranshumanismSen)) {
+				currentSen += 16 * perkv1(PerkLib.AscensionTranshumanismSen);
+			}
 			StatUtils.mergeBuffObjects(buffs, {
 				"str.mult": (buffStr+buffAll)/100,
 				"tou.mult": (buffTou+buffAll)/100,

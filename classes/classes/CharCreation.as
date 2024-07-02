@@ -2079,12 +2079,10 @@ import classes.Scenes.Combat.CombatAbility;
 			outputText("\n\n(When you're done, select " + (migration ? "Return" : "Reincarnate") + ".)");
 			menu();
 			var limitReached:String = "Limit Reached";
-			addButton(1, "The Dark Soul", darkAscensionPerkSelection2, PerkLib.DarkAscensionTheDarkSoul, MAX_THE_DARK_SOUL, null, PerkLib.DarkAscensionTheDarkSoul.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.DarkAscensionTheDarkSoul) + " / " + MAX_THE_DARK_SOUL)
-                    .disableIf(player.perkv1(PerkLib.DarkAscensionTheDarkSoul) >= MAX_THE_DARK_SOUL, limitReached);
-			addButton(2, "BottomlessHunger", darkAscensionPerkSelection, PerkLib.DarkAscensionBottomlessHunger, MAX_BOTTOMLESS_HUNGER_LEVEL, null, PerkLib.DarkAscensionBottomlessHunger.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.DarkAscensionBottomlessHunger) + " / " + MAX_BOTTOMLESS_HUNGER_LEVEL)
-                    .disableIf(player.perkv1(PerkLib.DarkAscensionBottomlessHunger) >= MAX_BOTTOMLESS_HUNGER_LEVEL, limitReached);
-			addButton(3, "Eff.SoulCons", darkAscensionPerkSelection, PerkLib.DarkAscensionEfficientSoulConsumption, MAX_EFFICIENT_SOUL_CONSUMPTION_LEVEL, null, PerkLib.DarkAscensionEfficientSoulConsumption.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.DarkAscensionEfficientSoulConsumption) + " / " + MAX_EFFICIENT_SOUL_CONSUMPTION_LEVEL)
-                    .disableIf(player.perkv1(PerkLib.DarkAscensionEfficientSoulConsumption) >= MAX_EFFICIENT_SOUL_CONSUMPTION_LEVEL, limitReached);
+			addButton(0, "Perk Select(1)", ascensionPerkMenu).hint("Spend Ascension Perk Points on special perks!", "Perk Selection");
+			addButton(1, "Perk Select(2)", ascensionPerkMenu2).hint("Spend Ascension Perk Points on special perks!", "Perk Selection");
+			//2
+			addButton(3, "Rare Perks(2)", rarePerks2).hint("Spend Ascension Points on rare special perks!", "Perk Selection");
 			addButton(4, "Perm Spells", acensionPermSpellMenu).hint("Spend Ascension Perk Points to make certain spells permanent (10 points)", "Spell Selection");
 			addButton(5, "Perm Perks", ascensionPermeryMenu).hint("Spend Ascension Perk Points to make certain perks permanent (5/10 points).", "Perk Selection");
 			genMemPatch();
@@ -2104,6 +2102,7 @@ import classes.Scenes.Combat.CombatAbility;
 			}
 			else addButtonDisabled(8, "???", "You don't have Ascended enough times or/and have required ascension perk to use this option.");
 			addButton(10, "Rename", renamePrompt).hint("Change your name at no charge.");
+			addButton(13, "Rare Perks(S)", darkAscensionSpecificPerkSelection).hint("Spend Ascension Points on rare special perks for soulless!", "Perk Selection");
 			addButton(14, "Time Travel", timeTravelPrompt).hint("Time Travel and start an entirely new adventure.");
 		}
 		private function genMemPatch():void{	//Cause for some fuckall rason the status gets wiped on ascending.
@@ -2129,8 +2128,11 @@ import classes.Scenes.Combat.CombatAbility;
 				.disableIf(player.perkv1(PerkLib.AscensionBloodlust) >= MAX_BLOODLUST_LEVEL, limitReached);
 			addButton(2, "Mysticality", ascensionPerkSelection, PerkLib.AscensionMysticality, MAX_MYSTICALITY_LEVEL, null, PerkLib.AscensionMysticality.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionMysticality) + " / " + MAX_MYSTICALITY_LEVEL)
 				.disableIf(player.perkv1(PerkLib.AscensionMysticality) >= MAX_MYSTICALITY_LEVEL, limitReached);
-			addButton(3, "S.Enlight.", ascensionPerkSelection, PerkLib.AscensionSpiritualEnlightenment, MAX_SPIRITUALENLIGHTENMENT_LEVEL, null, PerkLib.AscensionSpiritualEnlightenment.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionSpiritualEnlightenment) + " / " + MAX_SPIRITUALENLIGHTENMENT_LEVEL)
-				.disableIf(player.perkv1(PerkLib.AscensionSpiritualEnlightenment) >= MAX_SPIRITUALENLIGHTENMENT_LEVEL, limitReached);
+			if (player.hasPerk(PerkLib.Soulless)) addButtonDisabled(3, "S.Enlight.", "Without soul you can't buy or improve this ascension perk.");
+			else {
+				addButton(3, "S.Enlight.", ascensionPerkSelection, PerkLib.AscensionSpiritualEnlightenment, MAX_SPIRITUALENLIGHTENMENT_LEVEL, null, PerkLib.AscensionSpiritualEnlightenment.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionSpiritualEnlightenment) + " / " + MAX_SPIRITUALENLIGHTENMENT_LEVEL)
+					.disableIf(player.perkv1(PerkLib.AscensionSpiritualEnlightenment) >= MAX_SPIRITUALENLIGHTENMENT_LEVEL, limitReached);
+			}
 			addButton(4, "Tolerance", ascensionPerkSelection, PerkLib.AscensionTolerance, MAX_TOLERANCE_LEVEL, null, PerkLib.AscensionTolerance.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTolerance) + " / " + MAX_TOLERANCE_LEVEL)
 				.disableIf(player.perkv1(PerkLib.AscensionTolerance) >= MAX_TOLERANCE_LEVEL, limitReached);
 			addButton(5, "Fertility", ascensionPerkSelection, PerkLib.AscensionFertility, MAX_FERTILITY_LEVEL, null, PerkLib.AscensionFertility.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFertility) + " / " + MAX_FERTILITY_LEVEL)
@@ -2147,7 +2149,8 @@ import classes.Scenes.Combat.CombatAbility;
 				.disableIf(player.perkv1(PerkLib.AscensionFortune) >= maxRank, limitReached);
 			addButton(11, "Moral Shifter", ascensionPerkSelection, PerkLib.AscensionMoralShifter, MAX_MORALSHIFTER_LEVEL, null, PerkLib.AscensionMoralShifter.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionMoralShifter) + " / " + MAX_MORALSHIFTER_LEVEL)
 				.disableIf(player.perkv1(PerkLib.AscensionMoralShifter) >= MAX_MORALSHIFTER_LEVEL, limitReached);
-			addButton(14, "Back", ascensionMenu);
+			if (player.hasPerk(PerkLib.Soulless)) addButton(14, "Back", darkAscensionMenu);
+			else addButton(14, "Back", ascensionMenu);
 		}
 		private function ascensionPerkMenu2():void {
 			clearOutput();
@@ -2163,8 +2166,11 @@ import classes.Scenes.Combat.CombatAbility;
                     .disableIf(player.perkv1(PerkLib.AscensionHardiness) >= MAX_HARDINESS_LEVEL, limitReached);
 			addButton(3, "Soul Purity", ascensionPerkSelection2, PerkLib.AscensionSoulPurity, MAX_SOULPURITY_LEVEL, null, PerkLib.AscensionSoulPurity.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionSoulPurity) + " / " + MAX_SOULPURITY_LEVEL)
                     .disableIf(player.perkv1(PerkLib.AscensionSoulPurity) >= MAX_SOULPURITY_LEVEL, limitReached);
-			addButton(4, "Inner Power", ascensionPerkSelection2, PerkLib.AscensionInnerPower, MAX_INNERPOWER_LEVEL, null, PerkLib.AscensionInnerPower.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionInnerPower) + " / " + MAX_INNERPOWER_LEVEL)
-                    .disableIf(player.perkv1(PerkLib.AscensionInnerPower) >= MAX_INNERPOWER_LEVEL, limitReached);
+			if (player.hasPerk(PerkLib.Soulless)) addButtonDisabled(4, "Inner Power", "Without soul you can't buy or improve this ascension perk.");
+			else {
+				addButton(4, "Inner Power", ascensionPerkSelection2, PerkLib.AscensionInnerPower, MAX_INNERPOWER_LEVEL, null, PerkLib.AscensionInnerPower.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionInnerPower) + " / " + MAX_INNERPOWER_LEVEL)
+						.disableIf(player.perkv1(PerkLib.AscensionInnerPower) >= MAX_INNERPOWER_LEVEL, limitReached);
+			}
 			addButton(5, "Fury", ascensionPerkSelection2, PerkLib.AscensionFury, MAX_FURY_LEVEL, null, PerkLib.AscensionFury.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFury) + " / " + MAX_FURY_LEVEL)
                     .disableIf(player.perkv1(PerkLib.AscensionFury) >= MAX_FURY_LEVEL, limitReached);
 			addButton(6, "Transhuman.", ascensionPerkSelection2, PerkLib.AscensionTranshumanism, MAX_TRANSHUMANISM_LEVEL, null, PerkLib.AscensionTranshumanism.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanism) + " / " + MAX_TRANSHUMANISM_LEVEL)
@@ -2183,7 +2189,8 @@ import classes.Scenes.Combat.CombatAbility;
 				.disableIf(player.perkv1(PerkLib.AscensionTranshumanismLib) >= MAX_TRANSHUMANISM_LIB_LEVEL, limitReached);
 			addButton(13, "T-Human.SE", ascensionPerkSelection2, PerkLib.AscensionTranshumanismSen, MAX_TRANSHUMANISM_SEN_LEVEL, null, PerkLib.AscensionTranshumanismSen.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismSen) + " / " + MAX_TRANSHUMANISM_SEN_LEVEL)
 				.disableIf(player.perkv1(PerkLib.AscensionTranshumanismSen) >= MAX_TRANSHUMANISM_SEN_LEVEL, limitReached);
-			addButton(14, "Back", ascensionMenu);
+			if (player.hasPerk(PerkLib.Soulless)) addButton(14, "Back", darkAscensionMenu);
+			else addButton(14, "Back", ascensionMenu);
 		}
 		private function maxRankValue():Number {
 			var maxV:Number = 0;
@@ -2289,6 +2296,23 @@ import classes.Scenes.Combat.CombatAbility;
 			else player.createPerk(perk, 1, 0, 0, 0);
 			ascensionPerkSelection2(perk, maxRank);
 		}
+
+		private function darkAscensionSpecificPerkSelection(page:int = 1):void {
+			clearOutput();
+			outputText("For the price of ten points, you can make certain spells permanent and they will carry over in future ascensions. In addition, they can be used even if you don't have access to the specifc category spells yet.");
+			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
+			menu();
+			var limitReached:String = "Limit Reached";
+			if (page == 1) {
+				addButton(0, "The Dark Soul", darkAscensionPerkSelection2, PerkLib.DarkAscensionTheDarkSoul, MAX_THE_DARK_SOUL, null, PerkLib.DarkAscensionTheDarkSoul.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.DarkAscensionTheDarkSoul) + " / " + MAX_THE_DARK_SOUL)
+						.disableIf(player.perkv1(PerkLib.DarkAscensionTheDarkSoul) >= MAX_THE_DARK_SOUL, limitReached);
+				addButton(1, "BottomlessHunger", darkAscensionPerkSelection, PerkLib.DarkAscensionBottomlessHunger, MAX_BOTTOMLESS_HUNGER_LEVEL, null, PerkLib.DarkAscensionBottomlessHunger.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.DarkAscensionBottomlessHunger) + " / " + MAX_BOTTOMLESS_HUNGER_LEVEL)
+						.disableIf(player.perkv1(PerkLib.DarkAscensionBottomlessHunger) >= MAX_BOTTOMLESS_HUNGER_LEVEL, limitReached);
+				addButton(2, "Eff.SoulCons", darkAscensionPerkSelection, PerkLib.DarkAscensionEfficientSoulConsumption, MAX_EFFICIENT_SOUL_CONSUMPTION_LEVEL, null, PerkLib.DarkAscensionEfficientSoulConsumption.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.DarkAscensionEfficientSoulConsumption) + " / " + MAX_EFFICIENT_SOUL_CONSUMPTION_LEVEL)
+						.disableIf(player.perkv1(PerkLib.DarkAscensionEfficientSoulConsumption) >= MAX_EFFICIENT_SOUL_CONSUMPTION_LEVEL, limitReached);
+			}
+			addButton(14, "Back", darkAscensionMenu);
+		}
 		private function darkAscensionPerkSelection(perk:* = null, maxRank:int = 10):void {
 			clearOutput();
 			maxRank = Math.min( maxRankValue(), maxRank );
@@ -2311,7 +2335,7 @@ import classes.Scenes.Combat.CombatAbility;
 			menu();
 			if (player.ascensionPerkPoints >= cost && player.perkv1(perk) < maxRank) addButton(0, "Add 1 level", addDarkAscensionPerk, perk, maxRank);
 			if (player.ascensionPerkPoints >= cost && player.perkv1(perk) == maxRank) addButtonDisabled(0, "Add 1 level", "You've reached max rank for this perk at current tier of dark ascension. To unlock higher ranks you need to Ascend again.");
-			addButton(4, "Back", darkAscensionMenu);
+			addButton(4, "Back", darkAscensionSpecificPerkSelection);
 		}
 		private function addDarkAscensionPerk(perk:* = null, maxRank:int = 10):void {
 			var cost:int = player.perkv1(perk) + 1;
@@ -2351,7 +2375,7 @@ import classes.Scenes.Combat.CombatAbility;
 			menu();
 			if (player.ascensionPerkPoints >= cost && player.perkv1(perk) < maxRank) addButton(0, "Add 1 level", addDarkAscensionPerk2, perk, maxRank);
 			if (player.ascensionPerkPoints >= cost && player.perkv1(perk) == maxRank) addButtonDisabled(0, "Add 1 level", "You've reached max rank for this perk at current tier of dark ascension. To unlock higher ranks you need to Ascend again.");
-			addButton(4, "Back", darkAscensionMenu);
+			addButton(4, "Back", darkAscensionSpecificPerkSelection);
 		}
 		private function addDarkAscensionPerk2(perk:* = null, maxRank:int = 10):void {
 			var cost:int = player.perkv1(perk) + 1;
@@ -2636,50 +2660,53 @@ import classes.Scenes.Combat.CombatAbility;
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && !player.hasPerk(PerkLib.AscensionUnlockedPotential4thStage)) addButtonDisabled(btn, "U.Potent4th", "You need to buy Unlocked Potential (3rd Stage) perk first.");
 			else addButtonDisabled(btn, "U.Potent4th", "You need ascend more times to buy this perk.");
 			btn++;
-			if (player.ascensionPerkPoints >= 21 && !player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX)) addButton(btn, "SPPearlMst1", perkSkyPoisonPearlMasteryStage1).hint("Perk allowing you to have increased venom recharge, max venom, poison resistance, amount of carried over spirit stones and unlock next sections of sky poison pearl 6 levels earlier.\n\nCost: 21 points");
-			else if (player.ascensionPerkPoints < 21 && !player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX)) addButtonDisabled(btn, "SPPearlMst1", "You do not have enough ascension perk points!");
-			else addButtonDisabled(btn, "SPPearlMst1", "You already bought Sky Poison Pearl Mastery 1 perk.");
-			btn++;
-			if (player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX) && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 0) {
-				if (player.ascensionPerkPoints >= 57 && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) == 1) addButton(btn, "SPPearlMst2", perkSkyPoisonPearlMasteryStage2).hint("Perk allowing you to have increased venom recharge, max venom, poison resistance, amount of carried over spirit stones and unlock next sections of sky poison pearl 12 levels earlier.\n\nCost: 57 points");
-				else if (player.ascensionPerkPoints < 57) addButtonDisabled(btn, "SPPearlMst2", "You do not have enough ascension perk points!");
-				else if (player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 1) addButtonDisabled(btn, "SPPearlMst2", "You already bought Sky Poison Pearl Mastery 2 perk.");
+			if (!player.hasPerk(PerkLib.Soulless)) {
+				if (player.ascensionPerkPoints >= 21 && !player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX)) addButton(btn, "SPPearlMst1", perkSkyPoisonPearlMasteryStage1).hint("Perk allowing you to have increased venom recharge, max venom, poison resistance, amount of carried over spirit stones and unlock next sections of sky poison pearl 6 levels earlier.\n\nCost: 21 points");
+				else if (player.ascensionPerkPoints < 21 && !player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX)) addButtonDisabled(btn, "SPPearlMst1", "You do not have enough ascension perk points!");
+				else addButtonDisabled(btn, "SPPearlMst1", "You already bought Sky Poison Pearl Mastery 1 perk.");
+				btn++;
+				if (player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX) && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 0) {
+					if (player.ascensionPerkPoints >= 57 && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) == 1) addButton(btn, "SPPearlMst2", perkSkyPoisonPearlMasteryStage2).hint("Perk allowing you to have increased venom recharge, max venom, poison resistance, amount of carried over spirit stones and unlock next sections of sky poison pearl 12 levels earlier.\n\nCost: 57 points");
+					else if (player.ascensionPerkPoints < 57) addButtonDisabled(btn, "SPPearlMst2", "You do not have enough ascension perk points!");
+					else if (player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 1) addButtonDisabled(btn, "SPPearlMst2", "You already bought Sky Poison Pearl Mastery 2 perk.");
+				}
+				else addButtonDisabled(btn, "SPPearlMst2", "You need to buy Sky Poison Pearl Mastery 1 perk first.");
+				btn++;
+				if (player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX) && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 1) {
+					if (player.ascensionPerkPoints >= 93 && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) == 2) addButton(btn, "SPPearlMst3", perkSkyPoisonPearlMasteryStage3).hint("Perk allowing you to have increased venom recharge, max venom, poison resistance, amount of carried over spirit stones and unlock next sections of sky poison pearl 18 levels earlier.\n\nCost: 93 points");
+					else if (player.ascensionPerkPoints < 93) addButtonDisabled(btn, "SPPearlMst3", "You do not have enough ascension perk points!");
+					else if (player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 2) addButtonDisabled(btn, "SPPearlMst3", "You already bought Sky Poison Pearl Mastery 3 perk.");
+				}
+				else addButtonDisabled(btn, "SPPearlMst3", "You need to buy Sky Poison Pearl Mastery 2 perk first.");
+				btn++;
+				if (player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX) && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 2) {
+					if (player.ascensionPerkPoints >= 129 && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) == 3) addButton(btn, "SPPearlMst4", perkSkyPoisonPearlMasteryStage4).hint("Perk allowing you to have increased venom recharge, max venom, poison resistance, amount of carried over spirit stones and unlock next sections of sky poison pearl 24 levels earlier.\n\nCost: 129 points");
+					else if (player.ascensionPerkPoints < 129) addButtonDisabled(btn, "SPPearlMst4", "You do not have enough ascension perk points!");
+					else if (player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 3) addButtonDisabled(btn, "SPPearlMst4", "You already bought Sky Poison Pearl Mastery 4 perk.");
+				}
+				else addButtonDisabled(btn, "SPPearlMst4", "You need to buy Sky Poison Pearl Mastery 3 perk first.");
+				btn++;
+				if (player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX) && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 3) {
+					if (player.ascensionPerkPoints >= 165 && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) == 4) addButton(btn, "SPPearlMst5", perkSkyPoisonPearlMasteryStage5).hint("Perk allowing you to have increased venom recharge, max venom, poison resistance, amount of carried over spirit stones and unlock next sections of sky poison pearl 30 levels earlier.\n\nCost: 129 points");
+					else if (player.ascensionPerkPoints < 165) addButtonDisabled(btn, "SPPearlMst5", "You do not have enough ascension perk points!");
+					else if (player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 4) addButtonDisabled(btn, "SPPearlMst5", "You already bought Sky Poison Pearl Mastery 5 perk.");
+				}
+				else addButtonDisabled(btn, "SPPearlMst5", "You need to buy Sky Poison Pearl Mastery 4 perk first.");
+				btn++;
+				if (player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX) && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 4) {
+					if (player.ascensionPerkPoints >= 201 && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) == 5) addButton(btn, "SPPearlMst6", perkSkyPoisonPearlMasteryStage6).hint("Perk allowing you to have increased venom recharge, max venom, poison resistance, amount of carried over spirit stones and unlock next sections of sky poison pearl 36 levels earlier.\n\nCost: 129 points");
+					else if (player.ascensionPerkPoints < 201) addButtonDisabled(btn, "SPPearlMst6", "You do not have enough ascension perk points!");
+					else if (player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 5) addButtonDisabled(btn, "SPPearlMst5", "You already bought Sky Poison Pearl Mastery 6 perk.");
+				}
+				else addButtonDisabled(btn, "SPPearlMst6", "You need to buy Sky Poison Pearl Mastery 5 perk first.");
+				btn++;
 			}
-			else addButtonDisabled(btn, "SPPearlMst2", "You need to buy Sky Poison Pearl Mastery 1 perk first.");
-			btn++;
-			if (player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX) && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 1) {
-				if (player.ascensionPerkPoints >= 93 && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) == 2) addButton(btn, "SPPearlMst3", perkSkyPoisonPearlMasteryStage3).hint("Perk allowing you to have increased venom recharge, max venom, poison resistance, amount of carried over spirit stones and unlock next sections of sky poison pearl 18 levels earlier.\n\nCost: 93 points");
-				else if (player.ascensionPerkPoints < 93) addButtonDisabled(btn, "SPPearlMst3", "You do not have enough ascension perk points!");
-				else if (player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 2) addButtonDisabled(btn, "SPPearlMst3", "You already bought Sky Poison Pearl Mastery 3 perk.");
-			}
-			else addButtonDisabled(btn, "SPPearlMst3", "You need to buy Sky Poison Pearl Mastery 2 perk first.");
-			btn++;
-			if (player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX) && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 2) {
-				if (player.ascensionPerkPoints >= 129 && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) == 3) addButton(btn, "SPPearlMst4", perkSkyPoisonPearlMasteryStage4).hint("Perk allowing you to have increased venom recharge, max venom, poison resistance, amount of carried over spirit stones and unlock next sections of sky poison pearl 24 levels earlier.\n\nCost: 129 points");
-				else if (player.ascensionPerkPoints < 129) addButtonDisabled(btn, "SPPearlMst4", "You do not have enough ascension perk points!");
-				else if (player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 3) addButtonDisabled(btn, "SPPearlMst4", "You already bought Sky Poison Pearl Mastery 4 perk.");
-			}
-			else addButtonDisabled(btn, "SPPearlMst4", "You need to buy Sky Poison Pearl Mastery 3 perk first.");
-			btn++;
-			if (player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX) && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 3) {
-				if (player.ascensionPerkPoints >= 165 && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) == 4) addButton(btn, "SPPearlMst5", perkSkyPoisonPearlMasteryStage5).hint("Perk allowing you to have increased venom recharge, max venom, poison resistance, amount of carried over spirit stones and unlock next sections of sky poison pearl 30 levels earlier.\n\nCost: 129 points");
-				else if (player.ascensionPerkPoints < 165) addButtonDisabled(btn, "SPPearlMst5", "You do not have enough ascension perk points!");
-				else if (player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 4) addButtonDisabled(btn, "SPPearlMst5", "You already bought Sky Poison Pearl Mastery 5 perk.");
-			}
-			else addButtonDisabled(btn, "SPPearlMst5", "You need to buy Sky Poison Pearl Mastery 4 perk first.");
-			btn++;
-			if (player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX) && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 4) {
-				if (player.ascensionPerkPoints >= 201 && player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) == 5) addButton(btn, "SPPearlMst6", perkSkyPoisonPearlMasteryStage6).hint("Perk allowing you to have increased venom recharge, max venom, poison resistance, amount of carried over spirit stones and unlock next sections of sky poison pearl 36 levels earlier.\n\nCost: 129 points");
-				else if (player.ascensionPerkPoints < 201) addButtonDisabled(btn, "SPPearlMst6", "You do not have enough ascension perk points!");
-				else if (player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX) > 5) addButtonDisabled(btn, "SPPearlMst5", "You already bought Sky Poison Pearl Mastery 6 perk.");
-			}
-			else addButtonDisabled(btn, "SPPearlMst6", "You need to buy Sky Poison Pearl Mastery 5 perk first.");
-			btn++;
 		//	if (player.ascensionPerkPoints >= 10 && !player.hasPerk(PerkLib.AscensionHybridTheory)) addButton(btn, "HybridTheory", perkHybridTheory).hint("Perk allowing you to receive race bonuses for one point less. (still req. min 3 race points to work).\n\nCost: 10 points");
 		//	else if (player.ascensionPerkPoints < 10) addButtonDisabled(btn, "HybridTheory", "You do not have enough ascension perk points!");
 		//	else addButtonDisabled(btn, "HybridTheory", "You already bought this perk.");
 		//	btn++;
-			addButton(14, "Back", ascensionMenu);
+			if (player.hasPerk(PerkLib.Soulless)) addButton(14, "Back", darkAscensionMenu);
+			else addButton(14, "Back", ascensionMenu);
 		}
 
 		private function perkMetamorphAscCheck(btn:int):void{
