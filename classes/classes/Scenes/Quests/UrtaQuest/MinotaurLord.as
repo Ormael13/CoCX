@@ -23,7 +23,7 @@ use namespace CoC;
 			if (HP < 300 && statusEffectv1(StatusEffects.MinoMilk) < 4 && flags[kFLAGS.URTA_QUEST_STATUS] == 0.75) minotaurDrankMalk();
 			else if (rand(4) == 0 && player.weaponName != "fists") minotaurDisarm();
 			else if (!hasStatusEffect(StatusEffects.Timer)) minotaurLordEntangle();
-			else if (hasStatusEffect(StatusEffects.MinotaurEntangled)) minotaurCumPress();
+			else if (player.hasStatusEffect(StatusEffects.MinotaurEntangled)) minotaurCumPress();
 			else {
 				if (rand(2) == 0) minotaurPrecumTease();
 				else eAttack();
@@ -91,7 +91,7 @@ use namespace CoC;
 				outputText("You try to avoid it, but you're too slow, and the chain slaps into your hip, painfully bruising you with the strength of the blow, even through your armor.  The inertia carries the back half of the whip around you, and in a second, the chain has you all wrapped up with your arms pinned to your sides and your movement restricted.");
 				if (flags[kFLAGS.URTA_QUEST_STATUS] == 0.75) outputText("\n\n\"<i>Hahaha!  Good boy, Fido!  Leash that bitch up!</i>\"  The succubus laughs with glee.");
 				outputText("\n\n<b>You're tangled up in the minotaur lord's chain, and at his mercy, unless you can break free!</b>");
-				createStatusEffect(StatusEffects.MinotaurEntangled, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.MinotaurEntangled, 0, 0, 0, 0);
 			}
 		}
 
@@ -117,7 +117,7 @@ use namespace CoC;
 				}
 				outputText("You want another taste...");
 			}
-			removeStatusEffect(StatusEffects.MinotaurEntangled);
+			player.removeStatusEffect(StatusEffects.MinotaurEntangled);
 		}
 
 		private function minotaurPrecumTease():void
