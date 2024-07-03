@@ -66,11 +66,7 @@ public class YvonneArmorShop extends Shop {
         spriteSelect(SpriteDb.s_yvonne);
         clearOutput();
         //X = cock that fits!
-        var x:Number = player.cockThatFits(75);
-        if (x < 0) {
-            x = 0;
-        }
-        display("fuckYvonneInZeBlacksmith",{x:x});
+        display("fuckYvonneInZeBlacksmith");
         player.orgasm();
         dynStats("sen", -1);
         flags[kFLAGS.YVONNE_FUCK_COUNTER]++;

@@ -76,17 +76,8 @@ public class VictoriaTailorShop extends Shop {
     //[Flirt]
     private function flirtWithVictoria(itype:ItemType, priceOverride:int = -1, keyItem:String = "", priceRate:Number = 1, useStones:Boolean = false, currentQuantity:int = 1):void {
         clearOutput();
-        var x:Number = player.cockThatFits(70);
-        if (x < 0) {
-            x = player.smallestCockIndex();
-        }
-        display("flirtWithVictoria/intro",{x:x});
-        if (x < 0) {
-            display("flirtWithVictoria/tooSmall",{x:x});
-            doYesNo(curry(debit, itype, itype, priceOverride, keyItem, priceRate, useStones, currentQuantity), inside);
-            return;
-        }
-        display("flirtWithVictoria/scene",{x:x});
+        display("flirtWithVictoria/intro");
+        display("flirtWithVictoria/scene");
         player.orgasm();
         dynStats("sen", -1);
         doNext(camp.returnToCampUseOneHour);
