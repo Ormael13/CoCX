@@ -622,7 +622,7 @@ public class PlayerAppearance extends BaseContent {
 					pregnancyDesc += "<b>Your stomach is painfully distended by your pregnancy, making it difficult to walk normally.</b>";
 				}
 				else {
-					pregnancyDesc += "<b>Your belly protrudes unnaturally far forward, bulging with the Urta's Kits.</b>";
+					pregnancyDesc += "<b>Your belly protrudes unnaturally far forward, bulging with the Urta's Kids.</b>";
 				}
 			} else if (womb["type"] == PregnancyStore.PREGNANCY_FAERIE) { //Belly size remains constant throughout the pregnancy
 				pregnancyDesc += "<b>Your belly remains swollen like a watermelon. ";

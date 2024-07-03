@@ -796,7 +796,7 @@ private function pregdrynOffer(cs:Boolean = true):void {
 	}
 	//(PC TOO SMALL)
 	else {
-		outputText("Edryn giggles, \"<i>When did you get this small?  I've seen ponies with bigger kits!</i>\" but her hand continues to stroke you.  You squirm in her grasp, about ready to burst.  The pregnant centaur teases, \"<i>Dear, I don't think I'd notice something that small if you stuck it inside me.</i>\"\n\n");
+		outputText("Edryn giggles, \"<i>When did you get this small?  I've seen ponies with bigger kids!</i>\" but her hand continues to stroke you.  You squirm in her grasp, about ready to burst.  The pregnant centaur teases, \"<i>Dear, I don't think I'd notice something that small if you stuck it inside me.</i>\"\n\n");
 
 		outputText("She laughs at the expression on your face and continues, \"<i>Oh don't be like that.  The truth is the truth.  You're still the father of my child.  Why don't we go back to my room?  You can eat me out till the centaur pheromones overpower your little dick and make it squirt, okay?</i>\"\n\n");
 
