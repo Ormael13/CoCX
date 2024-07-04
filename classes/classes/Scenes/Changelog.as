@@ -257,7 +257,7 @@ public class Changelog extends BaseContent
 			outputText("-New M. Special: Malfunction. Usable by been gremlin-kin. Cost 40 mana and can stun for 6 turns. Have 10 turns cooldown after use. Overload a magitech or construction, causing damage and immobilising it for a while. Does not work on living things or sentient constructs.\n");
 			outputText("-Lust immunity fix & preg fix. (Svalkash)\n");
 			outputText("-Lowered the chance of common (imp-gob-goleems) encountered in Forest, Mountain and Plains to 1/4 of the previous value. Averange typo fixed. (Svalkash)\n");
-			outputText("-\n");
+			outputText("-Fixed: Kitsune tail tangle not working as intended, kits->kids, kid a goblin scene being hard to get. (Svalkash)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
