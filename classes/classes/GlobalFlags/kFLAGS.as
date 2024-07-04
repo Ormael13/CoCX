@@ -5,7 +5,7 @@ package classes.GlobalFlags
 {
 	public class kFLAGS
 	{
-public static const UNKNOWN_FLAG_NUMBER_00000:int                                   =    0;
+public static const KID_A_GOBLIN_NIGHT_HAPPENED:int                                 =    0;
 public static const MARBLE_PREGNANCY_INCUBATION:int                                 =    1; // Marble Pregnancy Incubation
 public static const MARBLE_PREGNANCY_TYPE:int                                       =    2; // Marble Pregnancy Type" Description="1 = cowgirl
 public static const MARBLE_LUST:int                                                 =    3; // Marble Lust
