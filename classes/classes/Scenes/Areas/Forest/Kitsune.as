@@ -19,7 +19,7 @@ public class Kitsune extends Monster
 		{
 			outputText("The kitsune closes in on you with a mischievous glint in her eyes.  You raise your guard, keeping your eyes trained on her to ensure that she doesn't try to pull anything.  Suddenly, you feel something coiling around your [leg], and let out a yelp as you are suddenly lifted into the air, entangled in the kitsune's tails!");
 			outputText("\n\nYour limbs are bound tightly while coils of delightfully soft fur caress you on all sides.  You can do little besides struggle against your furry bonds as the constant writhing of her tails sends shudders flying up and down your spine.");
-			createStatusEffect(StatusEffects.PCTailTangle, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.KitsuneTailTangle, 0, 0, 0, 0);
 			player.takeLustDamage(10 + player.effectiveSensitivity() / 8, true);
 		}
 
@@ -30,16 +30,16 @@ public class Kitsune extends Monster
 			//Struggle:
 			outputText("You struggle against the kitsune's tails with all your might, desperately trying to free yourself before she has her way with you.");
 			//Success
-			if ((rand(20) + player.str / 20 + statusEffectv1(StatusEffects.PCTailTangle) >= 12) || player.hasPerk(PerkLib.FluidBody)) {
+			if ((rand(20) + player.str / 20 + player.statusEffectv1(StatusEffects.KitsuneTailTangle) >= 12) || player.hasPerk(PerkLib.FluidBody)) {
 				outputText("  Summoning up reserves of strength you didn't know you had, you wrench yourself free of her tails, pushing her away.\n\n");
-				removeStatusEffect(StatusEffects.PCTailTangle);
+				player.removeStatusEffect(StatusEffects.KitsuneTailTangle);
 			}
 			//Failure - +5-10 LUST
 			else {
 				outputText("  Despite your valiant efforts, your wriggling only serves to get you deeper entangled in the fluffy tails, eliciting an amused giggle from the kitsune.");
 				outputText("\n\nShe licks her lips, running her hands along you wherever she can find exposed flesh.  Her fingertips leave small trails of dazzling blue that make you flush with lust - you must escape her grasp soon or else you will be like putty in her hands!");
 				player.takeLustDamage(5 + player.effectiveSensitivity() / 10, true);
-				addStatusValue(StatusEffects.PCTailTangle, 1, 3);
+				player.addStatusValue(StatusEffects.KitsuneTailTangle, 1, 3);
 			}
 		}
 
@@ -182,7 +182,7 @@ public class Kitsune extends Monster
 			var moves:Array = [foxFireAttack, foxFireAttack, kitSuneTeases, kitSuneTeases];
 			if (!player.hasStatusEffect(StatusEffects.Sealed)) moves.push(kitsuneSealAttack);
 			if (!player.hasStatusEffect(StatusEffects.Sealed)) moves.push(kitsuneSealAttack);
-			if (!hasStatusEffect(StatusEffects.PCTailTangle)) moves.push(kitsuneEntwine);
+			if (!player.hasStatusEffect(StatusEffects.KitsuneTailTangle)) moves.push(kitsuneEntwine);
 			if (!hasStatusEffect(StatusEffects.Illusion)) moves.push(illusionKitsuneAttack);
 			moves[rand(moves.length)]();
 		}

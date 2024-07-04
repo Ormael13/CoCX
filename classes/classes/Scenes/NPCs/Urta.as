@@ -3314,7 +3314,7 @@ private function urtaDiscussesEdrynRomance():void {
 			//(If Edryn has had at least one baby:
 			if(flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0) {
 				if(flags[kFLAGS.URTA_QUEST_STATUS] == 1) {
-					if(urtaPregs.urtaKids() == 0) outputText("  \"<i>...I still can't believe that you actually get her pregnant, though.  It's just not fair that Edryn's got little hooves running around, and after everything I went through, I don't have kits of my own... yet.</i>\" She gives you a slightly predatory smile along with the last word.");
+					if(urtaPregs.urtaKids() == 0) outputText("  \"<i>...I still can't believe that you actually get her pregnant, though.  It's just not fair that Edryn's got little hooves running around, and after everything I went through, I don't have kids of my own... yet.</i>\" She gives you a slightly predatory smile along with the last word.");
 					else outputText("  \"<i>...I still can't believe that you actually got her pregnant, though.  I guess I'll have to keep you busy in the sack if we're going to keep up, huh?</i>\" She gives you a slightly predatory smile along with the last word.");
 				}
 				else outputText("  \"<i>...I still can't believe that you actually got her pregnant, though. It's just not fair that Edryn's got little hooves running around, and you and I can't have any.</i>\"  Urta sighs.");

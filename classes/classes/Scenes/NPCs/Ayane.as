@@ -97,7 +97,7 @@ public class Ayane extends Kitsune {
         }
         if (!player.hasStatusEffect(StatusEffects.Sealed))
             moves.push(kitsuneSealAttack);
-        if (!hasStatusEffect(StatusEffects.PCTailTangle)) moves.push(kitsuneEntwine);
+        if (!player.hasStatusEffect(StatusEffects.KitsuneTailTangle)) moves.push(kitsuneEntwine);
         if (!hasStatusEffect(StatusEffects.Illusion)) moves.push(illusion);
         if (player.hasStatusEffect(StatusEffects.ChargeWeapon) || player.hasStatusEffect(StatusEffects.ChargeArmor) || player.statStore.hasBuff("Might") || player.statStore.hasBuff("Blink")) moves.push(dispel);
         moves[rand(moves.length)]();

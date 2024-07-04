@@ -174,12 +174,6 @@
                 You take the clothes from her and give them a look over.
                 Setting them on the counter, you tell her that they're quite nice, but if she's interested you might have something that could fit her quite nicely as well in the back.
             </text>
-            <text name="tooSmall">
-                Victoria smirks and answers, "<i>I measured your inseam, and what you're packing in there won't fit anywhere in a girl like me.
-                Maybe some other time, <output>player.mf("studmuffin", "sweet thing")</output>.  Did you actually want to buy something?</i>"
-
-                Do you still want to buy something?
-            </text>
             <text name="scene">
                 It takes her a moment to realize just what it is you're suggesting before her face splits into a wide grin.  "<i>That right?  Well now, you can't say things like that without backin' 'em up, can you?"</i>  she says with a low chuckle, pressing her curvy body into you.  <i>"What do you say I close the shop up quick, and you can show me just 'ow nicely you can fit, mm?</i>"
 
@@ -189,17 +183,17 @@
                         <else> your face.</else>
                     </elseif>
                 </if>
-                <i>"Now then,  let's see what you've got!"</i>  With practiced ease she works the bottom of your [armor] off, revealing [eachCock].  <i>"Well, well. Looks like I was right about you from the start,"</i> she says, licking her lips again.  <i>"Just a taste first, I think..."</i> Sticking her tongue out once more, she gives your rapidly stiffening dick a long, slow lick from the base up to the tip.  She closes her mouth just around your <output>cockDescript(x)</output>, giving it a few rapid licks before pulling off with a pop.
+                <i>"Now then,  let's see what you've got!"</i>  With practiced ease she works the bottom of your [armor] off, revealing [eachCock].  <i>"Well, well. Looks like I was right about you from the start,"</i> she says, licking her lips again.  <i>"Just a taste first, I think..."</i> Sticking her tongue out once more, she gives your rapidly stiffening dick a long, slow lick from the base up to the tip.  She closes her mouth just around your [cock], giving it a few rapid licks before pulling off with a pop.
 
                 <i>"Oh yes,  I think you'll do rather nicely.  In fact, I think I'm going to give you a special treat."</i>  Smirking up at you, the busty dog-girl unbuttons her top just beneath her ample chest.  Before you can puzzle out what it is she's doing, she takes your [cock] and stuffs it into the hole and up through her cleavage
-                <if test="player.cocks[x].cockLength ge 5"> until the tip is poking out the top</if>.
-                <if test="player.cocks[x].cockThickness ge 3">
+                <if test="player.cocks[0].cockLength ge 5"> until the tip is poking out the top</if>.
+                <if test="player.cocks[0].cockThickness ge 3">
                      Her face scrunches up uncomfortably for a moment, your girth straining the seams of her shirt.  With a series of loud pops, her buttons all go flying in different directions, letting her ample, creamy flesh bounce free with a bountiful jiggle.  <i>"Bloody hell, that was my favorite top..."</i> she whines for a moment before squeezing her chest back together with her hands.
                     <else>She presses her arms inward to increase the pressure on your cock even further, and gives you another wide smile.  <i>"Ready for this, love?"</i></else>
                 </if>
 
                 She begins to slowly move her disproportionately massive chest up and down your cock,
-                <if test="player.cocks[x].cockLength gt 5">
+                <if test="player.cocks[0].cockLength gt 5">
                     making sure to give the <output>player.cockHead(x)</output> a quick suck every time it breaches her mounds.
                     <else>
                         pressing her mouth down into her ample cleavage so as to give your hidden tip a quick lick every time it draws near.
@@ -210,7 +204,7 @@
 
                 Vicky continues her marshmallowy assault for what feels like hours, slowing down every time you give even the slightest indication that you're about to cum.  <i>"You might hate me for this now, love, but trust me.  It'll feel so much better once you finally do cum."</i>  She may be right, but it's agony to get so close to orgasm only to back away, and then draw close once more.  She's practically driving you crazy with lust with her tantalizingly slow tit-fuck.  As you feel your cum nearly boiling away in your [balls], only to have her back away once again, something inside of you snaps.
 
-                You wrench your dick free of the confines of her pillowy mounds, and grab her around her plush middle.  She gives a surprised yelp as you nearly throw her against the counter and lift her butt up into the air.  <i>"Ooooh, someone's excited!"</i>  she nearly cheers, looking over her shoulder and wagging her plush rear up at you as her tail swishes back and forth, showing that she's nearly as consumed with lust as you are.  Flipping her long skirt up over her back, you violently pull her panties aside before you force your <output>cockDescript(x)</output> deep within her gushing folds.
+                You wrench your dick free of the confines of her pillowy mounds, and grab her around her plush middle.  She gives a surprised yelp as you nearly throw her against the counter and lift her butt up into the air.  <i>"Ooooh, someone's excited!"</i>  she nearly cheers, looking over her shoulder and wagging her plush rear up at you as her tail swishes back and forth, showing that she's nearly as consumed with lust as you are.  Flipping her long skirt up over her back, you violently pull her panties aside before you force your [cock] deep within her gushing folds.
 
                 She squeals in surprise and pleasure as she's penetrated, thrusting her ample hips back at you as you begin to pound into her.  Her ass jiggles violently with every thrust, sending ripples through her creamy flesh.  You grip her around her soft middle as you slam against her hips, barely noticing every squeak she makes as her thick thighs are pounded into the side of the counter.  <i>"Ah!  Oh, Marae, that feels incredible!"</i>  she nearly screams as her monocle finally loses its grip on her face and goes flying, thankfully landing safely on a pile of scrap cloth.  If you were more sound of mind, you'd probably have dreaded the cost of repairing the broken eyepiece.
 
@@ -282,9 +276,9 @@
             A fuzzy, calloused hand grabs you by the scuff of the neck, lifts you off the ground and pushes you against the wall, slamming you into it forcefully enough that some weapons hanging nearby rattle dangerously.  A hot puff of breath hits your cheek, Yvonne's wet, canine nose bumping against your ear as she pants in your face.  She closes, and you feel her bare, sweat-soaked breasts sliding up and down your back, holding you up as firmly as her iron grip.  Yvonne's long, smooth tongue licks you from collarbone to chin, lapping up the sweat that's already starting to bead, the heat of the simmering forge-fires and your companion's well-warmed, powerful frame long since getting to you.
 
             A distinctly feminine scent wafts up to your nostrils, intermingled with the blacksmith's own pungent body-odor, strong enough to make your head swim.  Yvonne's free hand begins removing your [armor], the blacksmith's confident motions suggesting she's had plenty of experience at this.  The aroma of the super-stacked bitch's estrus increases to the point where it nearly overpowers her salty sweat-smell, her nipples pressing hard into your back.  [EachCock] grows hard from the forceful attention, pinned between the wall and your belly.  Finished with your gear, Yvonne nips your neck and says, "<i>Nice package,
-            <if test="player.cockArea(x) lt 20"> runt
-            <elseif test="player.cockArea(x) lt 40"><output> player.mf("boy", "girl")</output>
-                <elseif test="player.cockArea(x) lt 60">big <output>player.mf("boy", "girl")</output>
+            <if test="player.cockArea(0) lt 20"> runt
+            <elseif test="player.cockArea(0) lt 40"><output> player.mf("boy", "girl")</output>
+                <elseif test="player.cockArea(0) lt 60">big <output>player.mf("boy", "girl")</output>
                     <else> <output>player.mf("stud", "breeder")</output></else>
                 </elseif></elseif></if>
             .</i>"
@@ -293,18 +287,18 @@
 
             Yvonne is on the ground on all fours.  Her tail is sticking nearly straight up, waving back and forth excitedly as she presents her curvy rump to you.  Surprisingly, her ass is much less muscular than her upper body, with a pair of pillowy buttcheeks that nearly conceal her soaked cunny from view.  You aren't sure if it's lubricant from her arousal, or sweat from working the forge all day, but Yvonne's thighs are absolutely drenched with moisture; a veritable slip n' slide of wetness that beckons you to bury your bone in the canine's feminine entrance.  She glances back over her shoulder, a submissive glint in her eyes as she begs, "<i>Come on, be my alpha.  This bitch needs a hot, wet fuck.  Do it!</i>"  What an odd dichotomy - one moment she's throwing you around, the next, begging to be mounted.  For all her power, it seems Yvonne still wants to be taken as a meek bitch.
 
-            You sidle up to the larger woman and begin aligning [oneCock] with her mammoth buns, the sweltering, pheromone-laced stink pouring from her body making it difficult not to fall on top of her and rut.  Her huge tits are squished against the floor, squeezing out obscenely to either side of the blacksmith's lithe, muscular torso.  When you push inside, her slick wet cunt squeezes your <output>cockDescript(x)</output> powerfully but affectionately.  Her potent vaginal muscles work your <output>cockDescript(x)</output> over, tightly embracing your turgid dickflesh as you begin to fuck her properly, plowing her sweat and love-juice soaked folds even while you struggle to reach up for her incredible breasts.
+            You sidle up to the larger woman and begin aligning [oneCock] with her mammoth buns, the sweltering, pheromone-laced stink pouring from her body making it difficult not to fall on top of her and rut.  Her huge tits are squished against the floor, squeezing out obscenely to either side of the blacksmith's lithe, muscular torso.  When you push inside, her slick wet cunt squeezes your [cock] powerfully but affectionately.  Her potent vaginal muscles work your [cock] over, tightly embracing your turgid dickflesh as you begin to fuck her properly, plowing her sweat and love-juice soaked folds even while you struggle to reach up for her incredible breasts.
 
-            You get a handhold on the soft chest-flesh and begin to massage at what you can find, releasing appreciative moans from your partner.  Unfortunately, her furiously-wagging tail bludgeons you across the nose over and over, and you're forced to block it with one arm so that you can ream her snatch unimpeded by the woman's canine instincts.  She growls, but doesn't stop you.  You can see the muscles in her arms quivering, shaking, struggling to maintain her posture in spite of the overwhelming pleasure your <output>cockDescript(x)</output> is inflicting upon her poor womanhood.
+            You get a handhold on the soft chest-flesh and begin to massage at what you can find, releasing appreciative moans from your partner.  Unfortunately, her furiously-wagging tail bludgeons you across the nose over and over, and you're forced to block it with one arm so that you can ream her snatch unimpeded by the woman's canine instincts.  She growls, but doesn't stop you.  You can see the muscles in her arms quivering, shaking, struggling to maintain her posture in spite of the overwhelming pleasure your [cock] is inflicting upon her poor womanhood.
 
             A shiver runs through the dog-morph's entire body, culminating in a cock-wringing contraction that ripples through her cunt, milking you with her slippery twat.  It works, and you lean over her prostrate form as you bottom out inside her, her sweat-matted fur smearing your face with her scent as you cum.
-            <if test="player.hasKnot(x)">
-                Your knot fills, locking you inside her, securely blocking any escape for the jizz you're now filling her depths with.  Yvonne sighs dreamily, "<i>Just right...</i>" while spunk slides into her birth canal to infiltrate her womb.[if (cumQuantity > 500) "  The pearly goop spatters into her womb with egg-inseminating force, filling her beyond her wildest expectations."][if (cumQuantity > 1000) "  The blacksmith cries out in pain and pleasure, her belly rounding with your liquid, taking on a more pregnant, stuffed-silly look."][if (cumQuantity > 2000) "  Thanks to your knot, not a single drop escapes, and soon Yvonne's belly is as fat as her tits, cum-bloated in the extreme, a sloshing auburn tub packed with ivory sperm."]
+            <if test="player.hasKnot(0)">
+                Your knot fills, locking you inside her, securely blocking any escape for the jizz you're now filling her depths with.  Yvonne sighs dreamily, "<i>Just right...</i>" while spunk slides into her birth canal to infiltrate her womb.[if (cumQuantity > 500)   The pearly goop spatters into her womb with egg-inseminating force, filling her beyond her wildest expectations.][if (cumQuantity > 1000)   The blacksmith cries out in pain and pleasure, her belly rounding with your liquid, taking on a more pregnant, stuffed-silly look.][if (cumQuantity > 2000)   Thanks to your knot, not a single drop escapes, and soon Yvonne's belly is as fat as her tits, cum-bloated in the extreme, a sloshing auburn tub packed with ivory sperm.]
                 <else>
                     Your jizz bubbles out to fill her depths, the spunk surging through her as it moves towards her womb.  Yvone sighs dreamily, "<i>Ahhhh...</i>" while you empty your [balls] inside her unprotected womanhood.[if (cumQuantity > 500) "  The pearly goop spatters into her uterus with egg-inseminating force, filling the bitch beyond her wildest expectations."][if (cumQuantity > 1000)   The blacksmith cries out in pain and pleasure, her belly rounding with your liquid, looking positively pregnant.  Her twat begins to dribble sperm, creampied beyond belief.][if (cumQuantity > 2000) "  Unfortunately, as your virility makes itself known, Yvonne's body hits its limit, and jets of ivory spooge squirt from all sides of her cunny, dribbling into a pearly puddle on the floor."]
                 </else>
             </if>
-             With a thoroughly cream-stuffed twat beneath you, you <if test="player.hasKnot(x)">pop<else>pull</else></if> out, accompanied by a exhalation of female pleasure.
+             With a thoroughly cream-stuffed twat beneath you, you <if test="player.hasKnot(0)">pop<else>pull</else></if> out, accompanied by a exhalation of female pleasure.
 
             Yvonne staggers up on her footpaws, groaning the whole time, a trail of white dribbling on the floor behind her.  Her tail wags happily, and she grabs you, pulling you into her sweaty bosom as she affectionately squeezes your [butt].  You aren't released until you feel dizzy, half-suffocated by her preponderance of breast-tissues and potent pheromones.
 

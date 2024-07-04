@@ -43,7 +43,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
         return flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100;
     }
     private function gladeChance():Number {
-        return (100 - 0.75*(flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]||0))/100;
+        return (100 - 0.75*(flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]||0))/200;
     }
     public var encounter:GroupEncounter = Encounters.group({
         name: "satyr",

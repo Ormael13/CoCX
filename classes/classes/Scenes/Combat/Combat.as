@@ -692,12 +692,11 @@ public class Combat extends BaseContent {
             StatusEffects.DragonsNom,
             StatusEffects.Devoured,
             StatusEffects.Terrorize,
-                //Monster statuses
             StatusEffects.QueenBind,
-            StatusEffects.PCTailTangle,
+            StatusEffects.KitsuneTailTangle,
             StatusEffects.MinotaurEntangled,
         ];
-        if (monster.hasStatusEffect(StatusEffects.MinotaurEntangled)) outputText("\n<b>You're bound up in the minotaur lord's chains!  All you can do is try to struggle free!</b>");
+        if (player.hasStatusEffect(StatusEffects.MinotaurEntangled)) outputText("\n<b>You're bound up in the minotaur lord's chains!  All you can do is try to struggle free!</b>");
         if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) outputText("\n<b>You're trapped in the giant's hand!  All you can do is try to struggle free!</b>");
         if (player.hasStatusEffect(StatusEffects.Tentagrappled)) outputText("\n<b>The demoness's tentacles are constricting your limbs!</b>");
         if (player.hasStatusEffect(StatusEffects.Straddle) && monster is ProjectNightwalker) (monster as ProjectNightwalker).faceSittingDescript();
@@ -2224,10 +2223,10 @@ public class Combat extends BaseContent {
     internal function wait():void {
         var skipMonsterAction:Boolean = false; // If false, enemyAI() will be called. If true, combatRoundOver()
         flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 1;
-        if (monster.hasStatusEffect(StatusEffects.PCTailTangle)) {
+        if (player.hasStatusEffect(StatusEffects.KitsuneTailTangle)) {
             (monster as Kitsune).kitsuneWait();
             skipMonsterAction = true;
-        } else if (monster.hasStatusEffect(StatusEffects.MinotaurEntangled)) {
+        } else if (player.hasStatusEffect(StatusEffects.MinotaurEntangled)) {
             clearOutput();
             outputText("You sigh and relax in the chains, eying the well-endowed minotaur as you await whatever rough treatment he desires to give.  His musky, utterly male scent wafts your way on the wind, and you feel droplets of your lust dripping down your thighs.  You lick your lips as you watch the pre-cum drip from his balls, eager to get down there and worship them.  Why did you ever try to struggle against this fate?\n\n");
             player.takeLustDamage(30 + rand(5), true);
@@ -2244,7 +2243,7 @@ public class Combat extends BaseContent {
             var damage:int = 80 + rand(40);
             player.takePhysDamage(damage, true);
             skipMonsterAction = true;
-        } else if (monster.hasStatusEffect(StatusEffects.QueenBind)) {
+        } else if (player.hasStatusEffect(StatusEffects.QueenBind)) {
             (monster as HarpyQueen).ropeStruggles(true);
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.MagnarPinned)) {
@@ -2395,11 +2394,11 @@ public class Combat extends BaseContent {
 
     internal function struggle():void {
         var skipMonsterAction:Boolean = false; // If false, enemyAI() will be called. If true, combatRoundOver()
-        if (monster.hasStatusEffect(StatusEffects.MinotaurEntangled)) {
+        if (player.hasStatusEffect(StatusEffects.MinotaurEntangled)) {
             clearOutput();
             if ((player.str / 9 + rand(20) + 1 >= 15) || player.hasPerk(PerkLib.FluidBody)) {
                 outputText("Utilizing every ounce of your strength and cunning, you squirm wildly, shrugging through weak spots in the chain's grip to free yourself!  Success!\n\n");
-                monster.removeStatusEffect(StatusEffects.MinotaurEntangled);
+                player.removeStatusEffect(StatusEffects.MinotaurEntangled);
                 if (flags[kFLAGS.URTA_QUEST_STATUS] == 0.75) outputText("\"<i>No!  You fool!  You let her get away!  Hurry up and finish her up!  I need my serving!</i>\"  The succubus spits out angrily.\n\n");
                 skipMonsterAction = true;
             }
@@ -2407,13 +2406,13 @@ public class Combat extends BaseContent {
             else {
                 outputText("You wiggle and struggle with all your might, but the chains remain stubbornly tight, binding you in place.  Damnit!  You can't lose like this!\n\n");
             }
-        } else if (monster.hasStatusEffect(StatusEffects.PCTailTangle)) {
+        } else if (player.hasStatusEffect(StatusEffects.KitsuneTailTangle)) {
             (monster as Kitsune).kitsuneStruggle();
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.HolliConstrict)) {
             (monster as Holli).struggleOutOfHolli();
             skipMonsterAction = true;
-        } else if (monster.hasStatusEffect(StatusEffects.QueenBind)) {
+        } else if (player.hasStatusEffect(StatusEffects.QueenBind)) {
             (monster as HarpyQueen).ropeStruggles();
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.SiegweirdGrapple)) (monster as SiegweirdBoss).siegweirdStruggle(); //no skipping?

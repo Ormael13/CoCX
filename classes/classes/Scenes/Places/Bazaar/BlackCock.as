@@ -1386,8 +1386,6 @@ import classes.lists.Gender;
 		public function satyrTFs():void {
 			var changes:int = 0;
 			var changeLimit:int = 3 + player.additionalTransformationChances;
-			var satyr_hair:Array = ["red", "mahogany", "brown"];
-			var satyr_fur:Array = ["red", "mahogany", "brown"];
 			//Stats and genital changes
 			if (rand(2) == 0) {
 				outputText("\n\nHeat floods your loins as thoughts of tight round asses and dripping pussies flood your mind.");

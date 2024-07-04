@@ -19,7 +19,7 @@ public class Masturbation extends BaseContent {
 		}
 
 		public function masturButton(pos:int):CoCButton {
-			if (inDungeon || inRoomedDungeon || explorer.isActive) return addButton(pos, "Masturbate", masturbateGo)
+			if (inDungeon && DungeonAbstractContent.dungeonLoc != DungeonAbstractContent.DUNGEON_CABIN || inRoomedDungeon || explorer.isActive) return addButton(pos, "Masturbate", masturbateGo)
 				.hint("Attempt to masturbate in order to relieve your lust buildup.")
 				.disableIf(player.lust < 33, "You're not horny enough to masturbate.");
 			else if (canMeditate() && player.lust < 33) return addButton(pos, "Meditate", meditate)
@@ -468,8 +468,7 @@ public class Masturbation extends BaseContent {
 			||       MASTURBATION CORE    ||
 			\\*****************************/
 			if (player.hasCock()) sceneHunter.print("For dicks, there WILL be checks for nipplecunts.");
-			sceneHunter.print("I'll explain the math. If you have nipplecunts, AND have one more big dick... magic will happen.")
-			sceneHunter.selectGender(curry(sceneHunter.selectSingleMulti, singleF, player.cockTotal() > 2 ? moreF : twoF), vagF);
+			sceneHunter.selectGender(player.cockTotal() == 1 ? singleF : player.cockTotal() == 2 ? twoF : moreF, vagF); // not worth singleMulti
 
 			//Cock masturbation!
 			function singleF():void {

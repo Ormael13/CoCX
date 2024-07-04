@@ -3916,13 +3916,13 @@ import classes.Scenes.Combat.CombatAbilities;
 					createStatusEffect(StatusEffects.SandWormAcid, 1, 0, 0, 0);
 				addStatusValue(StatusEffects.SandWormAcid, 1, 1);
 			}
-			if(hasStatusEffect(StatusEffects.PCTailTangle)) {
+			if(player.hasStatusEffect(StatusEffects.KitsuneTailTangle)) {
 				//when Entwined
 				outputText("You are bound tightly in the kitsune's tails.  <b>The only thing you can do is try to struggle free!</b>\n\n");
 				outputText("Stimulated by the coils of fur, you find yourself growing more and more aroused...\n\n");
 				player.takeLustDamage(5+player.effectiveSensitivity()/10, true);
 			}
-			if(hasStatusEffect(StatusEffects.QueenBind)) {
+			if(player.hasStatusEffect(StatusEffects.QueenBind)) {
 				outputText("You're utterly restrained by the Harpy Queen's magical ropes!\n\n");
 				if(flags[kFLAGS.PC_FETISH] >= 2) player.dynStats("lus", 3);
 			}

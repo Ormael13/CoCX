@@ -2372,7 +2372,7 @@ private function contraceptionOff():void {
 private function contraceptionOn():void {
 	clearOutput();
 	outputText("You sadly tell Loppe that you think it’s not a good idea for her to be running around with her fertility restored now.  She needs to put her contraception back on.[pg]");
-	outputText("The laquine looks disappointed, but concedes the wisdom of your words.  She closes her eyes and reluctantly starts chanting, causing a dull light to flare from her womb, cock and pussy.  This promptly dies away and she shakes her head as she opens her eyes.  “<i>Done.  " + (pregnancy.isPregnant? "It wont affect the kits I'm currently carrying, but will be effective when they pop out or if we have a tumble.  ":"")+
+	outputText("The laquine looks disappointed, but concedes the wisdom of your words.  She closes her eyes and reluctantly starts chanting, causing a dull light to flare from her womb, cock and pussy.  This promptly dies away and she shakes her head as she opens her eyes.  “<i>Done.  " + (pregnancy.isPregnant? "It wont affect the kids I'm currently carrying, but will be effective when they pop out or if we have a tumble.  ":"")+
 			"So, what else do you want, [name]?</i>”[pg]");
 	flags[kFLAGS.LOPPE_FERTILE] = 0;
 	loppeMenu();
@@ -2381,7 +2381,7 @@ private function contraceptionOn():void {
 private function contraceptionNope():void {
 	clearOutput();
 	outputText("You tell Loppe that, if she’s willing, you’d like to have children with her.[pg]");
-	outputText("The laquine looks startled, but then her expression falls. “<i>[name]?  I’m sorry if you wanted more kids, but, I’m afraid I have to say I have as many as I can manage. We all love having them all hopping around, but, well, so many laquine kits area lot to handle even for us.  Maybe after they’re big enough to move out... or if you ever move in...</i>”  She trails off, licking her lips as she gives you a sultry look.");
+	outputText("The laquine looks startled, but then her expression falls. “<i>[name]?  I’m sorry if you wanted more kids, but, I’m afraid I have to say I have as many as I can manage. We all love having them all hopping around, but, well, so many laquine kids area lot to handle even for us.  Maybe after they’re big enough to move out... or if you ever move in...</i>”  She trails off, licking her lips as she gives you a sultry look.");
 	flags[kFLAGS.LOPPE_FERTILE] = 0;
 	loppeMenu();
 }
@@ -2469,7 +2469,7 @@ public function loppePreggoApproached():void {
 			loppePregMenu();
 			break;
 		case 7:
-		case 8: outputText("Loppe looks at you and gives you a lazy but cute smile as you approach her on the bench.  Her belly is looking positively gravid and your bunny-girl has such a serene, almost sleepy expression she might just doze off where she sits on the padded bench. You can see the occasional bulge or ripple as your kits kick in her womb, rather to be expected of bunny kits, growing strong and healthy.  Damp spots have grown on her t-shirt from her budding milk supply, though she seems oblivious to it as of yet.  \"<i>Hey there, [name], nice seeing you around here.  So... do you maybe feel up to a nice snooze with me or a cuddle? This kits are taking so much out of me that I barely feel like doing anything lately.</i>\" she says with a lazy grin. “<i>Why don’t we continue this at my place, I could use some company.</i>” You smile and happily agree, to which Loppe seems overjoyed. She quickly goes to clocks out before rejoining you as the two of you leave the gym and make your way to her home.\n\nLoppe, clearly exhausted from the relatively short journey, immediately drops her full weight on her bed. She lays there, arms out, and lets loose a long sigh. “<i>So, where were we?</i>”");
+		case 8: outputText("Loppe looks at you and gives you a lazy but cute smile as you approach her on the bench.  Her belly is looking positively gravid and your bunny-girl has such a serene, almost sleepy expression she might just doze off where she sits on the padded bench. You can see the occasional bulge or ripple as your kids kick in her womb, rather to be expected of bunny kids, growing strong and healthy.  Damp spots have grown on her t-shirt from her budding milk supply, though she seems oblivious to it as of yet.  \"<i>Hey there, [name], nice seeing you around here.  So... do you maybe feel up to a nice snooze with me or a cuddle? This kids are taking so much out of me that I barely feel like doing anything lately.</i>\" she says with a lazy grin. “<i>Why don’t we continue this at my place, I could use some company.</i>” You smile and happily agree, to which Loppe seems overjoyed. She quickly goes to clocks out before rejoining you as the two of you leave the gym and make your way to her home.\n\nLoppe, clearly exhausted from the relatively short journey, immediately drops her full weight on her bed. She lays there, arms out, and lets loose a long sigh. “<i>So, where were we?</i>”");
 			loppePregMenu();
 			break;
 		case 9:
@@ -2480,7 +2480,7 @@ public function loppePreggoApproached():void {
 }
 
 private function loppePreggoSnuggle():void {
-	clearOutput();	//Basic idea is Loppe and PC go back to Loppes house and snuggle on the bed with some belly rubs (for whoever is pregnant), if Loppe and PC preg at same time with Loppe kits, do some mutual belly rubs, and fall alseep together for an hour
+	clearOutput();	//Basic idea is Loppe and PC go back to Loppes house and snuggle on the bed with some belly rubs (for whoever is pregnant), if Loppe and PC preg at same time with Loppe kids, do some mutual belly rubs, and fall alseep together for an hour
 	outputText("You look over Loppe as she is splayed open on her bed. Her kimono is draped over her very pregnant stomach, leaving barely anything left to cover her massive equine member. You approach her bed and lay down next to her. She turns to face you, and the two of you lay there for a while, staring into each other’s eyes.");
 	if (player.tallness >= 74) {
 		outputText("You say nothing as you reach out and pull her small body on top of you, shoving her face in your [fullchest]. Loppe is surprised and even makes a small peep, but shows little resistance. Soon, she wraps her arms around you and rubs her face on you. The two of you close your eyes and start cuddling. You feel relaxed, reminded of the feeling of cuddling a child. Slowly, you begin to unwrap your arms from her and reach down. You caress her baby bump, feeling the smoothness of her olive skin.[pg]");
@@ -2524,7 +2524,7 @@ private function snuggleEndLewd():void {
 private function loppePreggoMassage():void {
 	clearOutput();
 	outputText("SCENE NEEDS WRITING[pg]");
-	outputText("Give Loppe a nice massage to ease the tensions from those hyper kits she's lugging around[pg]");
+	outputText("Give Loppe a nice massage to ease the tensions from those hyper kids she's lugging around[pg]");
 	endEncounter();
 }
 
@@ -2559,7 +2559,7 @@ public function pcGivesBirthToLoppeKits(womb:int = 0):void {
 			(kidType == 1 ?"Only one of them has their “father’s” horse-tail, with the other having a bunny tail instead" :
 			"Both of them actually have rabbit’s tails rather than the horse tail that Loppe herself has")) +
 			".  A closer look confirms that, just like “daddy”, they’re both herms, though you promptly find yourself more concerned with feeding your little monsters as they grab hungrily onto your [nipples] with their little hands and start suckling nosily. You smile at your daughters and hold them close, then allow yourself to drift back to sleep - you’ll take care of them in the morning...[pg]");
-	outputText("When dawn comes, the two laquine kits are curled happily into your [chest], fast asleep and clutching onto you and each other for comfort.  Gently you lift them off of you and place them together on your bedding - at once they curl back together, snuggling as close to each other as possible, and you can’t resist a small grin as you wonder if that closeness will linger into their teens - and if they’ll want to “share” the same boyfriend or girlfriend as a result.  You quietly grab a quick breakfast and some clean clothes, through which the two laquines sleep soundly.  Then, fed and dressed, you carefully pick them up and head off towards the city in the desert; you can’t keep them yourself, so they’ll have to stay with Loppe where it’s safe.[pg]");
+	outputText("When dawn comes, the two laquine kids are curled happily into your [chest], fast asleep and clutching onto you and each other for comfort.  Gently you lift them off of you and place them together on your bedding - at once they curl back together, snuggling as close to each other as possible, and you can’t resist a small grin as you wonder if that closeness will linger into their teens - and if they’ll want to “share” the same boyfriend or girlfriend as a result.  You quietly grab a quick breakfast and some clean clothes, through which the two laquines sleep soundly.  Then, fed and dressed, you carefully pick them up and head off towards the city in the desert; you can’t keep them yourself, so they’ll have to stay with Loppe where it’s safe.[pg]");
 	outputText("The babies are good and sleep all through the long trek to Tel’Adre, only starting to stir and babble meaningless noises to each other and to you after you make your way through the gate, the surprised guardsman seeming very astonished at the sight of a lone "+player.mf("man","woman")+" wandering in out of the wasteland with two babes in her arms.  You quickly make your way to Loppe’s home, and knock insistently at the door.[pg]");
 	if (pcFirstLoppeKits){
 		outputText("It’s Uma who opens the door with a yawn, wearing a bathrobe that just manages to cover her nipples while still baring most of her breasts" +

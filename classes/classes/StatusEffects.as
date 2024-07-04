@@ -845,7 +845,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const MonsterVPT:StatusEffectType 			= mk("Monster Violet Pupil Transformation");
 		public static const MysticWeb:StatusEffectType  			= mk("MysticWeb");
 		public static const NoLoot:StatusEffectType             	= mk("No Loot");
-		public static const PCTailTangle:StatusEffectType       	= mk("PCTailTangle");
+		public static const KitsuneTailTangle:StatusEffectType       	= mk("KitsuneTailTangle");
 		public static const PeachLootLoss:StatusEffectType      	= mk("Peach Loot Loss");
 		// @aimozg i don't know and do not fucking care if these two should be merged
 		public static const PhyllaFight:StatusEffectType        	= mk("PhyllaFight");
@@ -1423,4 +1423,4 @@ import classes.StatusEffects.VampireThirstEffect;
 			return new StatusEffectType(id,CombatStatusEffect,1);
 		}
 	}
-}
+}
