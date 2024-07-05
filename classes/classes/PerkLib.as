@@ -7060,7 +7060,7 @@ public class PerkLib
             GreaterGiftOfLust.requirePerks(GiftOfLust, EromancyExpert)
 					.requireLevel(36)
                     .requireLib(150);
-            CorruptTheHeart.requirePerk(JobEromancer)
+            CorruptTheHeart.requirePerk(CorruptTheBody)
 					.requireLevel(36);
             //Tier 7 Libido Perks
         	HalfStepToPeerlessSelfControl.requireLib(240)
