@@ -9828,7 +9828,7 @@ public class Combat extends BaseContent {
 			lustAADmg = combat.fixPercentLust(lustAADmg);
             monster.teased(Math.round(lustAADmg), false);
             outputText("\n\n");
-			if (monster.lustVuln > 0 && !player.enemiesImmuneToLustResistanceDebuff() && player.hasPerk(PerkLib.DevouringAura) && !((monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyFeralType)) && !monster.hasPerk(PerkLib.Sentience))) {
+			if (monster.lustVuln > 0 && !player.enemiesImmuneToLustResistanceDebuff() && !player.enemiesThatAreMindless() && player.hasPerk(PerkLib.DevouringAura)) {
                 if (player.hasPerk(PerkLib.DamnationAura)) monster.lustVuln += 0.02;
 				else monster.lustVuln += 0.01;
                 if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();

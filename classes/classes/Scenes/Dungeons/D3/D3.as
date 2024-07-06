@@ -568,24 +568,13 @@ import classes.room;
 			if (flags[kFLAGS.D3_JEAN_CLAUDE_DEFEATED] == 0)
 			{
 				outputText("You find yourself back in the small booth, with the locked door leading out into the Magpie Hall. Just like the one on the opposite side, there is a darkened screen here through which you can see hundreds of basilisks milling down below, sorting through the vast amount of junk and eggs they have collected from the mountainside. They don’t seem to have taken any extra precautions following your narrow escape of them- the gantry remains free of any guards, and the door on the other side looks open.");
-				
 				menu();
-				
 				addButton(0, "Go!", jeanClaude.gogoFuckTheseBasilisksNorth);
 				addButton(1, "Stronghold", move, "tunnel2");
-				
 				return true;
 			}
-			
 			outputText("You are back in the northern end of the Magpie Hall. Without the bustle of activity below it is a gapingly empty and quiet place, the only sound the murmur of activity from elsewhere. There is a vast amount of collected junk below but it would take, well, an army of basilisks to sort through it to find anything worthwhile. You could check out the massive pile of eggs, though.");
-			
-			if (eggsAvailable() >= 0)
-			{
-				addButton(2, "Eggs", goToEggPile);
-			}
-			if (flags[kFLAGS.D3_DEMONIC_SCYTHE] == 0) addButton(3, "Scythe", takeScythe);
-			if (flags[kFLAGS.D3_GOBLIN_MECH_PRIME] == 0) addButton(4, "Mech", takeMech);
-			
+			if (eggsAvailable() >= 0 || flags[kFLAGS.D3_DEMONIC_SCYTHE] == 0 || flags[kFLAGS.D3_GOBLIN_MECH_PRIME] == 0) addButton(2, "Eggs", goToEggPile);
 			return false;
 		}
 		

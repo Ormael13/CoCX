@@ -2716,6 +2716,9 @@ use namespace CoC;
 		public function enemiesImmuneToLustResistanceDebuff():Boolean {
 			return (CoC.instance.monster.hasPerk(PerkLib.EnemyTrueAngel) || flags[kFLAGS.ZENJI_PROGRESS] == -1);
 		}
+		public function enemiesThatAreMindless():Boolean {
+			return ((CoC.instance.monster.hasPerk(PerkLib.EnemyConstructType) && !CoC.instance.monster.hasPerk(PerkLib.Sentience)) || CoC.instance.monster.hasPerk(PerkLib.EnemyFeralType));
+		}
 
 		public function jewelryAttackModifier():Number {
 			var attackMod:Number = 1;
