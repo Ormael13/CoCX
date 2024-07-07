@@ -16670,8 +16670,8 @@ private function ghostRealStrengthCompanion():Number {
 public function ghostSpeed():Number {
     var ghostSpe:Number = player.speStat.core.value;
     var ghostSpeMulti:Number = 0;
-    if (player.perkv1(IMutationsLib.DraconicLungIM) >= 2) ghostSpeMulti += 0.05;
-    if (player.perkv1(IMutationsLib.DraconicLungIM) >= 3) ghostSpeMulti += 0.1;
+    if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) ghostSpeMulti += 0.05;
+    if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) ghostSpeMulti += 0.1;
     if (player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 1) ghostSpeMulti += 0.05;
     if (player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 2) ghostSpeMulti += 0.1;
     if (player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) ghostSpeMulti += 0.15;

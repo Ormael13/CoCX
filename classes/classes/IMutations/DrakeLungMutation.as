@@ -20,13 +20,13 @@ public class DrakeLungMutation extends IMutationPerkType
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
-                descS = "Increases the power of dragon breath attack. (+300% to dragon breath damage that race is using)";
+                descS = "Allows you to use breath attacks more often. (All dragon breaths usable once per combat)";
             }
             if (pTier >= 2){
-                descS = "Further increases increases dragon breath attack power. (+600% to dragon breath damage that race is using)";
+                descS = "Increases threefold the power of dragon breath attacks. (+300% to dragon breaths damage, +5% of max core Spe as phantom Spe)";
             }
             if (pTier >= 3){
-                descS = "Allows to use breath attack more often with increase to its power. (+900% to dragon breath damage that race is using AND breath usable once per combat)";
+                descS = "Increases dragon breath attacks power and allows you to combine all 4 basic breath types more often. (+900% to dragon breaths damage, +20% of max core Spe as phantom Spe)";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -41,7 +41,7 @@ public class DrakeLungMutation extends IMutationPerkType
                 if (pTier == 0){
                     this.requireLungsMutationSlot()
                     .requireAnyPerk(PerkLib.DragonFireBreath, PerkLib.DragonIceBreath, PerkLib.DragonLightningBreath, PerkLib.DragonDarknessBreath, PerkLib.DragonPoisonBreath, PerkLib.DragonWaterBreath, PerkLib.DragonEarthBreath, PerkLib.DragonRegalBreath, PerkLib.DragonFaerieBreath)
-                    .requireAnyRace(Races.FROSTWYRM, Races.JABBERWOCKY, Races.VOUIVRE, Races.YGGDRASIL, Races.SEA_DRAGON, Races.FAERIEDRAGON, Races.DRAGONNE);
+                    .requireAnyRace(Races.DRAGON, Races.FROSTWYRM, Races.JABBERWOCKY, Races.VOUIVRE, Races.YGGDRASIL, Races.SEA_DRAGON, Races.FAERIEDRAGON, Races.DRAGONNE);
                 }
                 else{
                     var pLvl:int = pTier * 30;

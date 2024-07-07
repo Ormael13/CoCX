@@ -100,7 +100,7 @@ import classes.Scenes.SceneLib;
 			this.lustVuln = .35;
 			this.gems = rand(10) + 25;
 			this.drop = NO_DROP;
-			IMutationsLib.DraconicLungIM.acquireMutation(this, "none", 1);
+			IMutationsLib.DrakeLungsIM.acquireMutation(this, "none", 1);
 			IMutationsLib.OniMusculatureIM.acquireMutation(this, "none", 1);
 			IMutationsLib.PigBoarFatIM.acquireMutation(this, "none", 1);
 			IMutationsLib.OrcAdrenalGlandsIM.acquireMutation(this, "none", 1);
@@ -134,7 +134,7 @@ import classes.Scenes.SceneLib;
 				this.createPerk(PerkLib.GreaterDiehard, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 7) {
-				IMutationsLib.DraconicLungIM.acquireMutation(this, "none");
+				IMutationsLib.DrakeLungsIM.acquireMutation(this, "none");
 				IMutationsLib.LizanMarrowIM.acquireMutation(this, "none");
 				this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
 			}
@@ -152,20 +152,19 @@ import classes.Scenes.SceneLib;
 				this.createPerk(PerkLib.EpicStrength, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 11) {
-				IMutationsLib.DraconicLungIM.acquireMutation(this, "none");
+				IMutationsLib.DrakeLungsIM.acquireMutation(this, "none");
 				IMutationsLib.OniMusculatureIM.acquireMutation(this, "none");
 				IMutationsLib.OrcAdrenalGlandsIM.acquireMutation(this, "none");
 				IMutationsLib.PigBoarFatIM.acquireMutation(this, "none");
 			}
 			/*
-			updateDynamicPerkBuffs(IMutationsLib.DraconicLungIM, DraconicLungMutation, this);
+			updateDynamicPerkBuffs(IMutationsLib.DrakeLungIM, DrakeLungMutation, this);
 			updateDynamicPerkBuffs(IMutationsLib.OniMusculatureIM, OniMusculatureMutation, this);
 			updateDynamicPerkBuffs(IMutationsLib.PigBoarFatIM, PigBoarFatMutation, this);
 			updateDynamicPerkBuffs(IMutationsLib.OrcAdrenalGlandsIM, OrcAdrenalGlandsMutation, this);
 			updateDynamicPerkBuffs(IMutationsLib.LizanMarrowIM, LizanMarrowMutation, this);
 			updateDynamicPerkBuffs(IMutationsLib.CatLikeNimblenessIM, CatLikeNimblenessMutation, this);
 			updateDynamicPerkBuffs(IMutationsLib.GorgonEyesIM, GorgonEyesMutation, this);
-			updateDynamicPerkBuffs(IMutationsLib.DraconicLungIM, DraconicLungMutation, this);
 			updateDynamicPerkBuffs(IMutationsLib.LactaBovinaOvariesIM, LactaBovinaOvariesMutation, this);
 			*/
 			checkMonster();//make her lvl 3 starting with internal mutation for: cat, dragon, gorgon, lacta bovina, lizard, oni, orc, pig/boar - plus job: guardian perk

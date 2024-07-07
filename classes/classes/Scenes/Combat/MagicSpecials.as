@@ -527,7 +527,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.DragonFireBreath)) {
 			bd = buttons.add("Dragon(Fire)", dragonfireBreath);
-			if (player.perkv1(IMutationsLib.DraconicLungIM) >= 1 || player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) {
+			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) {
 				bd.hint("Unleash fire from your mouth. This can only be done once per fight. \n", "Dragon Fire Breath");
 			} else {
 				bd.hint("Unleash fire from your mouth. This can only be done once a day. \n", "Dragon Fire Breath");
@@ -540,7 +540,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.DragonIceBreath)) {
 			bd = buttons.add("Dragon(Ice)", dragoniceBreath);
-			if (player.perkv1(IMutationsLib.DraconicLungIM) >= 1 || player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) {
+			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) {
 				bd.hint("Unleash ice from your mouth. This can only be done once per fight. \n", "Dragon Ice Breath");
 			} else {
 				bd.hint("Unleash ice from your mouth. This can only be done once a day. \n", "Dragon Ice Breath");
@@ -553,7 +553,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.DragonLightningBreath)) {
 			bd = buttons.add("Dragon(Light)", dragonlightningBreath);
-			if (player.perkv1(IMutationsLib.DraconicLungIM) >= 1 || player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) {
+			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) {
 				bd.hint("Unleash lightning from your mouth. This can only be done once per fight. \n", "Dragon Lightning Breath");
 			} else {
 				bd.hint("Unleash lightning from your mouth. This can only be done once a day. \n", "Dragon Lightning Breath");
@@ -566,7 +566,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.DragonDarknessBreath)) {
 			bd = buttons.add("Dragon(Dark)", dragondarknessBreath);
-			if (player.perkv1(IMutationsLib.DraconicLungIM) >= 1 || player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) {
+			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) {
 				bd.hint("Unleash darkness from your mouth. This can only be done once per fight. \n", "Dragon Darkness Breath");
 			} else {
 				bd.hint("Unleash darkness from your mouth. This can only be done once a day. \n", "Dragon Darkness Breath");
@@ -579,7 +579,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.DragonPoisonBreath)) {
 			bd = buttons.add("Dragon(Poison)", dragonpoisonBreath);
-			if (player.perkv1(IMutationsLib.DraconicLungIM) >= 1 || player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) {
+			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) {
 				bd.hint("Unleash poison from your mouth. This can only be done once per fight. \n", "Dragon Poison Breath");
 			} else {
 				bd.hint("Unleash poison from your mouth. This can only be done once a day. \n", "Dragon Poison Breath");
@@ -592,7 +592,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.DragonWaterBreath)) {
 			bd = buttons.add("Dragon(Water)", dragonWaterBreath);
-			if (player.perkv1(IMutationsLib.DraconicLungIM) >= 1 || player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) {
+			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) {
 				bd.hint("Unleash water from your mouth. This can only be done once per fight. Massively increase lightning damage taken by the target. \n", "Dragon Water Breath");
 			} else {
 				bd.hint("Unleash water from your mouth. This can only be done once a day. Massively increase lightning damage taken by the target. \n", "Dragon Water Breath");
@@ -605,7 +605,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.DragonFaerieBreath)) {
 			bd = buttons.add("Dragon(Faerie)", dragonFaerieBreath);
-			if (player.perkv1(IMutationsLib.DraconicLungIM) >= 1 || player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) {
+			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) {
 				bd.hint("Breathe purple flames which deal damage and may randomly afflict the target with a status. This can only be done once per fight. \n", "Dragon Faerie Breath");
 			} else {
 				bd.hint("Breathe purple flames which deal damage and may randomly afflict the target with a status. This can only be done once a day. \n", "Dragon Faerie Breath");
@@ -618,7 +618,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.DragonRegalBreath)) {
 			bd = buttons.add("Dragon(Royal)", dragonRoyalBreath);
-			if (player.perkv1(IMutationsLib.DraconicLungIM) >= 1 || player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) {
+			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) {
 				bd.hint("Unleash a roar so powerful it creates a shockwave damaging and stunning enemies. Confuse the opponent and bleed them as well. This can only be done once per fight. \n", "Dragon Royal Breath");
 			} else {
 				bd.hint("Unleash a roar so powerful it creates a shockwave damaging and stunning enemies. Confuse the opponent and bleed them as well. This can only be done once a day. \n", "Dragon Royal Breath");
@@ -629,9 +629,9 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
 			} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
-		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 3 || (player.isRaceCached(Races.DRAGON, 2) && player.perkv1(IMutationsLib.DraconicLungIM) >= 1)) {
+		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) {
 			bd = buttons.add("TrueDragonBreath", trueDragonBreath);
-			if (player.perkv1(IMutationsLib.DraconicLungIM) >= 3) {
+			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) {
 				bd.hint("Unleash all four elements fused together from your mouth. This can only be done once per fight. \n", "True Dragon Breath");
 			} else {
 				bd.hint("Unleash all four elements fused together from your mouth. This can only be done once a day. \n", "True Dragon Breath");
@@ -639,7 +639,7 @@ public class MagicSpecials extends BaseCombatContent {
 			bd.requireFatigue(spellCost(200));
 			//Not Ready Yet:
 			if(player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) {
-				if (player.perkv1(IMutationsLib.DraconicLungIM) >= 3) bd.disable("Your throat is incredibly sore and hoarse. You aren’t sure you can talk let alone try that attack for a while.");
+				if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) bd.disable("Your throat is incredibly sore and hoarse. You aren’t sure you can talk let alone try that attack for a while.");
 				else bd.disable("Your throat is incredibly sore and hoarse. You aren’t sure you can talk let alone try that attack for more than a day.");
 			} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
@@ -2184,11 +2184,8 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 2) damult += 3;
-		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 3) damult += 6;
-		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) damult += 3;
 		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) damult += 3;
-		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 3;
+		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 6;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
@@ -2279,11 +2276,8 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 2) damult += 3;
-		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 3) damult += 6;
-		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) damult += 3;
 		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) damult += 3;
-		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 3;
+		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 6;
 		if (combat.wearingWinterScarf()) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
@@ -2345,11 +2339,8 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 2) damult += 3;
-		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 3) damult += 6;
-		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) damult += 3;
 		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) damult += 3;
-		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 3;
+		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 6;
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
@@ -2411,11 +2402,8 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 2) damult += 3;
-		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 3) damult += 6;
-		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) damult += 3;
 		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) damult += 3;
-		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 3;
+		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 6;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
@@ -2476,11 +2464,8 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 2) damult += 3;
-		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 3) damult += 6;
-		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) damult += 3;
 		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) damult += 3;
-		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 3;
+		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 6;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
@@ -2549,11 +2534,8 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 2) damult += 3;
-		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 3) damult += 6;
-		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) damult += 3;
 		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) damult += 3;
-		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 3;
+		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 6;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
@@ -2614,11 +2596,8 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 2) damult += 3;
-		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 3) damult += 6;
-		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) damult += 3;
 		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) damult += 3;
-		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 3;
+		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 6;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
@@ -2722,11 +2701,8 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 2) damult += 3;
-		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 3) damult += 6;
-		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) damult += 3;
 		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) damult += 3;
-		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 3;
+		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 6;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
@@ -2784,11 +2760,8 @@ public class MagicSpecials extends BaseCombatContent {
 				player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 				damage *= 3;
 			}
-			if (player.perkv1(IMutationsLib.DraconicLungIM) >= 2) damult += 3;
-			if (player.perkv1(IMutationsLib.DraconicLungIM) >= 3) damult += 6;
-			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) damult += 3;
 			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) damult += 3;
-			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 3;
+			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 6;
 			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 1.25;
@@ -7176,4 +7149,4 @@ public class MagicSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 }
-}
+}

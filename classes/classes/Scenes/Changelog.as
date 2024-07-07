@@ -258,7 +258,7 @@ public class Changelog extends BaseContent
 			outputText("-Lust immunity fix & preg fix. (Svalkash)\n");
 			outputText("-Lowered the chance of common (imp-gob-goleems) encountered in Forest, Mountain and Plains to 1/4 of the previous value. Averange typo fixed. (Svalkash)\n");
 			outputText("-Fixed: Kitsune tail tangle not working as intended, kits->kids, kid a goblin scene being hard to get. (Svalkash)\n");
-			outputText("-\n");
+			outputText("-Dragon race IM was changed from Draconic Lungs to Drake Lungs.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

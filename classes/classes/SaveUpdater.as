@@ -2641,6 +2641,10 @@ public class SaveUpdater extends NPCAwareContent {
 			/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.51) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.51;
+				if (player.hasMutation(IMutationsLib.DraconicBonesIM) || player.hasMutation(IMutationsLib.DraconicHeartIM) || player.hasMutation(IMutationsLib.DraconicLungIM)) {
+					outputText("\n\nDragon race now would share all three internal mutations with their other familiy members like yggdrasil dragon. Draconic mutations shall be used at later date for true dragon (perm) race.");
+					
+				}
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.60) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.60;

@@ -62,7 +62,7 @@ public class DraconicLungMutation extends IMutationPerkType
         }
 
         public function DraconicLungMutation() {
-            super(mName + " IM", mName, SLOT_LUNGS, 3);
+            super(mName + " IM", mName, SLOT_NONE, 1);//super(mName + " IM", mName, SLOT_LUNGS, 3);
         }
 
     }

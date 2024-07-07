@@ -91,7 +91,7 @@ public class DragonRace extends Race {
 		addBloodline(PerkLib.DragonsDescendant, PerkLib.BloodlineDragon);
 		addMutation(IMutationsLib.DraconicBonesIM);
 		addMutation(IMutationsLib.DraconicHeartIM);
-		addMutation(IMutationsLib.DraconicLungIM);
+		addMutation(IMutationsLib.DrakeLungsIM);
 		
 		buildTier(16, "dragon")
 				.namesMaleFemaleMorphTaur("dragon-man","dragon-girl",
