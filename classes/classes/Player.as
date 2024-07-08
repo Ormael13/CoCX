@@ -3163,10 +3163,10 @@ use namespace CoC;
 				}
 				dynStats("lus", (2 * (1 + game.player.newGamePlusMod())));
 			}
-			if (perkv1(IMutationsLib.DraconicBonesIM) >= 2) {
+			if (perkv1(IMutationsLib.DrakeBonesIM) >= 2) {
 				mult -= 5;
 			}
-			if (perkv1(IMutationsLib.DraconicBonesIM) >= 3) {
+			if (perkv1(IMutationsLib.DrakeBonesIM) >= 3) {
 				mult -= 5;
 			}
 			if (perkv1(IMutationsLib.WhaleFatIM) >= 1) {
@@ -3340,10 +3340,10 @@ use namespace CoC;
 			if (hasPerk(PerkLib.TrollResistance)) {
 				mult -= 15;
 			}
-			if (perkv1(IMutationsLib.DraconicBonesIM) >= 2) {
+			if (perkv1(IMutationsLib.DrakeBonesIM) >= 2) {
 				mult -= 5;
 			}
-			if (perkv1(IMutationsLib.DraconicBonesIM) >= 3) {
+			if (perkv1(IMutationsLib.DrakeBonesIM) >= 3) {
 				mult -= 5;
 			}
 			if (perkv1(IMutationsLib.MelkieLungIM) >= 1) {

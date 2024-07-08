@@ -68,8 +68,8 @@ public class FaerieDragonRace extends Race {
 		
 		addBloodline(PerkLib.DragonsDescendant,PerkLib.BloodlineDragon);
 		addMutation(IMutationsLib.FeyArcaneBloodstreamIM);
-		addMutation(IMutationsLib.DraconicBonesIM);
-		addMutation(IMutationsLib.DraconicHeartIM);
+		addMutation(IMutationsLib.DrakeBonesIM);
+		addMutation(IMutationsLib.DrakeHeartIM);
 		addMutation(IMutationsLib.DrakeLungsIM);
 		
 		buildTier(15, "faerie dragon")

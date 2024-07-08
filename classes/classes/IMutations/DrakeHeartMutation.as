@@ -9,10 +9,10 @@ import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Races;
 
-public class DraconicHeartMutation extends IMutationPerkType
+public class DrakeHeartMutation extends IMutationPerkType
     {
         override public function get mName():String {
-            return "Draconic Heart";
+            return "Drake Heart";
         }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
@@ -59,8 +59,8 @@ public class DraconicHeartMutation extends IMutationPerkType
             return pBuffs;
         }
 
-        public function DraconicHeartMutation() {
-            super(mName + " IM", mName, SLOT_NONE, 1);//super(mName + " IM", mName, SLOT_HEART, 3);
+        public function DrakeHeartMutation() {
+            super(mName + " IM", mName, SLOT_HEART, 3);
         }
 
     }

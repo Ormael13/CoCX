@@ -69,7 +69,7 @@ public class KirinRace extends Race {
 
 		addMutation(IMutationsLib.HeartOfTheStormIM, +1);
 		addMutation(IMutationsLib.RaijuCathodeIM, +1);
-		addMutation(IMutationsLib.DraconicBonesIM, +1);
+		addMutation(IMutationsLib.DrakeBonesIM, +1);
 		
 		buildTier(23, "Kirin")
 				.requireLegType(LowerBody.KIRIN)

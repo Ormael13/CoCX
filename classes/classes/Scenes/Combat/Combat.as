@@ -6979,9 +6979,9 @@ public class Combat extends BaseContent {
         if (player.lowerBody == LowerBody.CAT || player.lowerBody == LowerBody.LION) unarmed += 6 * (1 + player.newGamePlusMod());
         if (player.lowerBody == LowerBody.CANCER) unarmed += 12 * (1 + player.newGamePlusMod());
         if (player.tailType == Tail.HINEZUMI) unarmed += 4 * (1 + player.newGamePlusMod());
-        if (player.perkv1(IMutationsLib.DraconicBonesIM) >= 1) unarmed += 10 * (1 + player.newGamePlusMod());
-        if (player.perkv1(IMutationsLib.DraconicBonesIM) >= 2) unarmed += 10 * (1 + player.newGamePlusMod());
-        if (player.perkv1(IMutationsLib.DraconicBonesIM) >= 3) unarmed += 20 * (1 + player.newGamePlusMod());
+        if (player.perkv1(IMutationsLib.DrakeBonesIM) >= 1) unarmed += 10 * (1 + player.newGamePlusMod());
+        if (player.perkv1(IMutationsLib.DrakeBonesIM) >= 2) unarmed += 10 * (1 + player.newGamePlusMod());
+        if (player.perkv1(IMutationsLib.DrakeBonesIM) >= 3) unarmed += 20 * (1 + player.newGamePlusMod());
         if (player.hasKeyItem("Rocket Boots") >= 0) unarmed += 2;
         if (player.hasKeyItem("Nitro Boots") >= 0) unarmed += 4;
         if (player.hasPerk(PerkLib.Brawn)) unarmedMulti += .05;
@@ -6990,7 +6990,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.EpicBrawn)) unarmedMulti += .2;
         if (player.hasPerk(PerkLib.LegendaryBrawn)) unarmedMulti += .25;
         if (player.hasPerk(PerkLib.MythicalBrawn)) unarmedMulti += .3;
-        if (player.perkv1(IMutationsLib.DraconicBonesIM) >= 3) unarmedMulti += .5;
+        if (player.perkv1(IMutationsLib.DrakeBonesIM) >= 3) unarmedMulti += .5;
         unarmed *= unarmedMulti;
         unarmed = Math.round(unarmed);
         return unarmed;
@@ -11735,7 +11735,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 			if (player.HP < (player.maxHP() * 0.6)) maxPercentRegen += 2;
 			if (player.HP < (player.maxHP() * 0.2)) maxPercentRegen += 2;
 		}
-		if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) maxPercentRegen += 1;
+		if (player.perkv1(IMutationsLib.DrakeHeartIM) >= 3) maxPercentRegen += 1;
         if (player.perkv1(IMutationsLib.EclipticMindIM) >= 3) maxPercentRegen += 1.5;
         if (player.perkv1(IMutationsLib.FerasBirthrightIM) >= 1 && !player.hasStatusEffect(StatusEffects.WereraceRegenerationDisabled)) {
 			var hbr:Number = 0.5;
@@ -11802,7 +11802,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 			if (player.HP < (player.maxHP() * 0.6)) maxRegen += 2;
 			if (player.HP < (player.maxHP() * 0.2)) maxRegen += 2;
 		}
-		if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) maxRegen += 1;
+		if (player.perkv1(IMutationsLib.DrakeHeartIM) >= 3) maxRegen += 1;
         if (player.perkv1(IMutationsLib.FerasBirthrightIM) >= 1 && !player.hasStatusEffect(StatusEffects.WereraceRegenerationDisabled)) {
 			var hbr:Number = 0.5;
 			var mp:Number = 2;
@@ -11883,9 +11883,9 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         if (player.hasPerk(PerkLib.CorruptedNinetails)) fatiguecombatrecovery += 1;
         if (player.hasPerk(PerkLib.EnlightenedKitsune)) fatiguecombatrecovery += 1;
         if (player.hasPerk(PerkLib.CorruptedKitsune)) fatiguecombatrecovery += 1;
-        if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 1) fatiguecombatrecovery += 1;
-        if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 2) fatiguecombatrecovery += 1;
-        if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) fatiguecombatrecovery += 1;
+        if (player.perkv1(IMutationsLib.DrakeHeartIM) >= 1) fatiguecombatrecovery += 1;
+        if (player.perkv1(IMutationsLib.DrakeHeartIM) >= 2) fatiguecombatrecovery += 1;
+        if (player.perkv1(IMutationsLib.DrakeHeartIM) >= 3) fatiguecombatrecovery += 1;
 		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3) fatiguecombatrecovery += 5;
 		if (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) fatiguecombatrecovery += 10;
 		if (player.perkv1(IMutationsLib.HumanBloodstreamIM) >= 2 && player.racialScore(Races.HUMAN) > 17) fatiguecombatrecovery += 5;
@@ -11975,9 +11975,9 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         if (player.hasPerk(PerkLib.SoulKing)) soulforceregen += 10;
         if (player.hasPerk(PerkLib.SoulEmperor)) soulforceregen += 10;
         if (player.hasPerk(PerkLib.SoulAncestor)) soulforceregen += 12;
-        if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 1) soulforceregen += 4;
-        if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 2) soulforceregen += 4;
-        if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) soulforceregen += 4;
+        if (player.perkv1(IMutationsLib.DrakeHeartIM) >= 1) soulforceregen += 4;
+        if (player.perkv1(IMutationsLib.DrakeHeartIM) >= 2) soulforceregen += 4;
+        if (player.perkv1(IMutationsLib.DrakeHeartIM) >= 3) soulforceregen += 4;
 		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 2) soulforceregen += 40;
         if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3 && player.hasPerk(PerkLib.StarSphereMastery)) soulforceregen += (player.perkv1(PerkLib.StarSphereMastery) * 4);
         if (player.perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 1) {
@@ -12067,9 +12067,9 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         if (player.hasPerk(PerkLib.StrongestElementalBond)) manaregen += 14;
         if (player.hasPerk(PerkLib.StrongestElementalBondEx)) manaregen += 16;
         if (player.hasPerk(PerkLib.StrongestElementalBondSu)) manaregen += 18;
-        if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 1) manaregen += 5;
-        if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 2) manaregen += 5;
-        if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) manaregen += 5;
+        if (player.perkv1(IMutationsLib.DrakeHeartIM) >= 1) manaregen += 5;
+        if (player.perkv1(IMutationsLib.DrakeHeartIM) >= 2) manaregen += 5;
+        if (player.perkv1(IMutationsLib.DrakeHeartIM) >= 3) manaregen += 5;
         if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 1) manaregen += 5;
         if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 2) manaregen += 10;
         if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) manaregen += 15;
@@ -12178,9 +12178,9 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         if (player.hasPerk(PerkLib.PrimalFuryIV)) wrathregen += 2;
         if (player.hasPerk(PerkLib.PrimalFuryV)) wrathregen += 2;
         if (player.hasPerk(PerkLib.PrimalFuryVI)) wrathregen += 2;
-        if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 1) wrathregen += 1;
-        if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 2) wrathregen += 1;
-        if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) wrathregen += 1;
+        if (player.perkv1(IMutationsLib.DrakeHeartIM) >= 1) wrathregen += 1;
+        if (player.perkv1(IMutationsLib.DrakeHeartIM) >= 2) wrathregen += 1;
+        if (player.perkv1(IMutationsLib.DrakeHeartIM) >= 3) wrathregen += 1;
         if (player.perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 3) wrathregen += 4;
         if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) wrathregen += 4;
 		if (player.perkv1(IMutationsLib.HumanBloodstreamIM) >= 2 && player.racialScore(Races.HUMAN) > 17) wrathregen += 2;
@@ -16603,8 +16603,8 @@ public function ghostStrength():Number {
     if (player.hasPerk(PerkLib.EpicBrawn)) ghostStrMulti2 += .25;
     if (player.hasPerk(PerkLib.LegendaryBrawn)) ghostStrMulti2 += .3;
     if (player.hasPerk(PerkLib.MythicalBrawn)) ghostStrMulti2 += .35;
-    if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 2) ghostStrMulti += 0.05;
-    if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) ghostStrMulti += 0.1;
+    if (player.perkv1(IMutationsLib.DrakeHeartIM) >= 2) ghostStrMulti += 0.05;
+    if (player.perkv1(IMutationsLib.DrakeHeartIM) >= 3) ghostStrMulti += 0.1;
     if (player.perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 1) ghostStrMulti += 0.05;
     if (player.perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 2) ghostStrMulti += 0.1;
     if (player.perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 3) ghostStrMulti += 0.15;
@@ -16692,8 +16692,8 @@ private function ghostRealSpeed():Number {
 public function ghostToughness():Number {
     var ghostTou:Number = player.touStat.core.value;
     var ghostTouMulti:Number = 0;
-    if (player.perkv1(IMutationsLib.DraconicBonesIM) >= 2) ghostTouMulti += 0.05;
-    if (player.perkv1(IMutationsLib.DraconicBonesIM) >= 3) ghostTouMulti += 0.1;
+    if (player.perkv1(IMutationsLib.DrakeBonesIM) >= 2) ghostTouMulti += 0.05;
+    if (player.perkv1(IMutationsLib.DrakeBonesIM) >= 3) ghostTouMulti += 0.1;
     if (player.perkv1(IMutationsLib.HumanFatIM) >= 2 && player.racialScore(Races.HUMAN) > 17) ghostTouMulti += 0.15;
     if (player.perkv1(IMutationsLib.HumanFatIM) >= 3 && player.racialScore(Races.HUMAN) > 17) ghostTouMulti += 0.3;
     if (player.perkv1(IMutationsLib.HumanFatIM) >= 4 && player.racialScore(Races.HUMAN) > 17) ghostTouMulti += 0.45;

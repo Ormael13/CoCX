@@ -124,19 +124,8 @@ public class TestMenu extends BaseContent
 		bd.add("BelisaTest", belisatest3, "Belisa Trigger").disableIf(BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3);
 		bd.add("Test dynamic stat", TestDynamicStats, "Test Dynamic stats.");
 		bd.add("Neko Items", giveNekoItems, "All new neko items from Nekobake Inn doc");
-		bd.add("Dragon IM fixing", FaeDragTest4, "Until save update will do the thing.");
 		bd.add("DantianPhylactery", dantianPhylacteryTest, "Getting or loosing Dantian Phylactery.");
 		submenu(bd, SoulforceCheats, 0, false);
-	}
-
-	private function FaeDragTest4():void{
-		clearOutput();
-		if (player.hasMutation(IMutationsLib.DraconicLungIM)) {
-			player.createPerk(IMutationsLib.DrakeLungsIM, player.perkv1(IMutationsLib.DraconicLungIM), 0, 0, 0);
-			player.removePerk(IMutationsLib.DraconicLungIM);
-		}
-		outputText("Dragon IM updated.");
-		doNext(SoulforceCheats);
 	}
 
 	private function FaeDragTest2():void{

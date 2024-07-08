@@ -64,8 +64,8 @@ public class YgddrasilRace extends Race {
 				.tailType(Tail.YGGDRASIL, +1)
 				.hasPerk(PerkLib.DragonPoisonBreath, +1);
 		
-		addMutation(IMutationsLib.DraconicBonesIM);
-		addMutation(IMutationsLib.DraconicHeartIM);
+		addMutation(IMutationsLib.DrakeBonesIM);
+		addMutation(IMutationsLib.DrakeHeartIM);
 		addMutation(IMutationsLib.DrakeLungsIM);
 		
 		buildTier(12, "ygddrasil")

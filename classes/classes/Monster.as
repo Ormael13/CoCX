@@ -3285,7 +3285,7 @@ import classes.Scenes.Combat.CombatAbilities;
 			if (this.soulforce > maxOverSoulforce()) this.soulforce = maxOverSoulforce();
 			if (this.mana > maxOverMana()) this.mana = maxMana();
 			//health, soulforce and mana regeneration for monsters
-			if (((hasPerk(PerkLib.Regeneration) || hasPerk(PerkLib.LizanRegeneration) || perkv1(IMutationsLib.LizanMarrowIM) >= 1 || perkv1(IMutationsLib.DraconicHeartIM) >= 3 || perkv1(IMutationsLib.FerasBirthrightIM) >= 1 || hasPerk(PerkLib.EnemyPlantType) || hasPerk(PerkLib.FleshBodyApprenticeStage)
+			if (((hasPerk(PerkLib.Regeneration) || hasPerk(PerkLib.LizanRegeneration) || perkv1(IMutationsLib.LizanMarrowIM) >= 1 || perkv1(IMutationsLib.DrakeHeartIM) >= 3 || perkv1(IMutationsLib.FerasBirthrightIM) >= 1 || hasPerk(PerkLib.EnemyPlantType) || hasPerk(PerkLib.FleshBodyApprenticeStage)
 			|| hasPerk(PerkLib.MonsterRegeneration) || hasPerk(PerkLib.HydraRegeneration) || hasPerk(PerkLib.TrollRegeneration) || hasPerk(PerkLib.Lifeline) || hasPerk(PerkLib.ImprovedLifeline) || hasPerk(PerkLib.GreaterLifeline) || hasPerk(PerkLib.EpicLifeline) || hasPerk(PerkLib.IcyFlesh)
 			|| hasPerk(PerkLib.HclassHeavenTribulationSurvivor) || hasPerk(PerkLib.GclassHeavenTribulationSurvivor) || hasPerk(PerkLib.FclassHeavenTribulationSurvivor) || hasPerk(PerkLib.FFclassHeavenTribulationSurvivor) || hasPerk(PerkLib.EclassHeavenTribulationSurvivor) || hasStatusEffect(StatusEffects.MonsterRegen)
 			|| hasStatusEffect(StatusEffects.MonsterRegen2) || hasPerk(PerkLib.EnemyTrueAngel) || hasPerk(PerkLib.EnemyTrueDemon)) && this.HP < maxOverHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxOverHP()) && (this.HP > minHP()))) {
@@ -3303,7 +3303,7 @@ import classes.Scenes.Combat.CombatAbilities;
 					if (this.HP < (this.maxHP() * 0.6)) healingPercent += 2;
 					if (this.HP < (this.maxHP() * 0.2)) healingPercent += 2;
 				}
-				if (perkv1(IMutationsLib.DraconicHeartIM) >= 3) healingPercent += 1;
+				if (perkv1(IMutationsLib.DrakeHeartIM) >= 3) healingPercent += 1;
 				if (perkv1(IMutationsLib.FerasBirthrightIM) >= 1 && !hasStatusEffect(StatusEffects.WereraceRegenerationDisabled) && !hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) {
 					var br:Number = 0.5;
 					var mp:Number = 2;
@@ -3410,9 +3410,9 @@ import classes.Scenes.Combat.CombatAbilities;
 				if (hasPerk(PerkLib.DaoistWarriorStage)) soulforceRecovery += Math.round(maxSoulforce() * 0.005);
 				if (hasPerk(PerkLib.DaoistElderStage)) soulforceRecovery += Math.round(maxSoulforce() * 0.005);
 				if (hasPerk(PerkLib.DaoistOverlordStage)) soulforceRecovery += Math.round(maxSoulforce() * 0.005);
-				if (perkv1(IMutationsLib.DraconicHeartIM) >= 1) soulforceRecovery += 4;
-				if (perkv1(IMutationsLib.DraconicHeartIM) >= 2) soulforceRecovery += 4;
-				if (perkv1(IMutationsLib.DraconicHeartIM) >= 3) soulforceRecovery += 4;
+				if (perkv1(IMutationsLib.DrakeHeartIM) >= 1) soulforceRecovery += 4;
+				if (perkv1(IMutationsLib.DrakeHeartIM) >= 2) soulforceRecovery += 4;
+				if (perkv1(IMutationsLib.DrakeHeartIM) >= 3) soulforceRecovery += 4;
 				if (perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 1) soulforceRecovery += Math.round(maxSoulforce() * 0.0025 * this.tailCount);
 				if (perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 2) soulforceRecovery += Math.round(maxSoulforce() * 0.0025 * this.tailCount);
 				if (perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 3) soulforceRecovery += Math.round(maxSoulforce() * 0.0025 * this.tailCount);
@@ -3430,9 +3430,9 @@ import classes.Scenes.Combat.CombatAbilities;
 				if (hasPerk(PerkLib.ArcaneRegenerationEpic)) manaRecovery += 30;
 				if (hasPerk(PerkLib.ArcaneRegenerationLegendary)) manaRecovery += 40;
 				if (hasPerk(PerkLib.ArcaneRegenerationMythical)) manaRecovery += 50;
-				if (perkv1(IMutationsLib.DraconicHeartIM) >= 1) manaRecovery += 5;
-				if (perkv1(IMutationsLib.DraconicHeartIM) >= 2) manaRecovery += 5;
-				if (perkv1(IMutationsLib.DraconicHeartIM) >= 3) manaRecovery += 5;
+				if (perkv1(IMutationsLib.DrakeHeartIM) >= 1) manaRecovery += 5;
+				if (perkv1(IMutationsLib.DrakeHeartIM) >= 2) manaRecovery += 5;
+				if (perkv1(IMutationsLib.DrakeHeartIM) >= 3) manaRecovery += 5;
 				if (hasPerk(PerkLib.GreyMageApprentice)) manaRecoveryMulti += 0.25;
 				if (hasPerk(PerkLib.GreyMage)) manaRecoveryMulti += 0.5;
 				if (hasPerk(PerkLib.GreyArchmage)) manaRecoveryMulti += 0.75;
@@ -4570,3 +4570,4 @@ import classes.Scenes.Combat.CombatAbilities;
 		}
 	}
 }
+

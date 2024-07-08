@@ -258,9 +258,9 @@ public class Changelog extends BaseContent
 			outputText("-Lust immunity fix & preg fix. (Svalkash)\n");
 			outputText("-Lowered the chance of common (imp-gob-goleems) encountered in Forest, Mountain and Plains to 1/4 of the previous value. Averange typo fixed. (Svalkash)\n");
 			outputText("-Fixed: Kitsune tail tangle not working as intended, kits->kids, kid a goblin scene being hard to get. (Svalkash)\n");
-			outputText("-Dragon race IM was changed from Draconic Lungs to Drake Lungs.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Dragon race IM was changed from Draconic Bones/Heart/Lungs to Drake Bones/Heart/Lungs.\n");
+			outputText("-New mutation perks: Drake Bones/Heart/Lungs - they have same amount of tiers and effects as Draconic Bones/Heart/Lungs. Req. to get them are the same too. In cases when internal mutation wasn't accesable to race without changing partialy into different dragon-like race checks was fixed.\n");
+			outputText("-When needed in race scores IM checks for Draconic IM's was replaced by checks for Drake IM checks.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -352,8 +352,10 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -383,6 +385,7 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -650,7 +653,7 @@ public class Changelog extends BaseContent
 			outputText("-Added Ability to make permanent certain spells between ascensions. Currently available for Polar Midnight and Meteor Shower Tier 3 Spells.\n");
 			outputText("-Increased damage for Arouse and Wave Of Ecstasy by using scalingbounsintelligence(). Adding proper formatting to tease damage display.\n");
 			outputText("-Attacking Blood Spells now have the chance to inflict bleed. Blood Chains can now no longer stun resolute enemies.\n");
-			outputText("-Damage bounding for periodic damage/lust effects is currently calculated using the following: If the monster is equal or higher level, the DoT damage is limited to a max of 20%. If the monster is up to 9 levels below the player, tha max damage increases up to 50%, and any greater gap is unbounded Kamaitachi Bleed now has an inital damage value +20%/+40% (depending on racial tier) ");
+			outputText("-Damage bounding for periodic damage/lust effects is currently calculated using the following: If the monster is equal or higher level, the DoT damage is limited to a max of 20%. If the monster is up to 9 levels below the player, that max damage increases up to 50%, and any greater gap is unbounded Kamaitachi Bleed now has an inital damage value +20%/+40% (depending on racial tier) ");
 			outputText("per stack of bleed with no ceiling. Normal attacks add 1 stack and the 'Wind Scythe' special adds 3. Each turn in which the bleed is not applied reduces the stacks by 1 (min. of 1 stack)\n");
 			outputText("-General code cleanup for bleed DoT effects. Added number formatting to the tease damage display.\n");
 			outputText("-Lethice now cannot adapt/deflect DoT and companions (since some sources such as auras cannot be turned off in battle) Lethice reflection damage now uses proper damage functions, so that player defenses are properly taken into accountLethice's 'hplossimmune' adaption now takes the correct HP value into account. ");
@@ -2919,7 +2922,7 @@ public class Changelog extends BaseContent
 			outputText("-After reaching 100 score on his view of PC it open option to invite him to camp as Follower. And it would lock this option so even lowering this value to 0% will still give only option to bring him as follower. Opposite is possible too: reaching 100 and lock him in Lover path.\n");
 			outputText("-When in camp as follower Zenji have following interaction options: Appearance, Training, Spar, Talk, Sex and dealing with corrupted glades.\n");
 			outputText("-When in camp as follower Zenji have following interaction options: Appearance, Talk, Give Item and dealing with corrupted glades.\n");
-			outputText("-HYallowen event that can be proc with Lover Zenji (one chance to do it so not waste it). Possible reward is 10% magic resistance effect until hallowen ends.\n");
+			outputText("-Hallowen event that can be proc with Lover Zenji (one chance to do it so not waste it). Possible reward is 10% magic resistance effect until hallowen ends.\n");
 			outputText("-Artemis and Wild Hunt accuracy penalty was removed and max atk value rised from 25 to 60. Cost of both bows rised due to that by 1000 gems.\n");
 			outputText("-Both Enlighted and Corrupted perks will be permable at the same time during ascension to prevent cases when one of them been permed was causing errors in getting all needed perks for 9 tail of balance perk. That would also mean PC must spend 10 not 5 asc points since it's perming 2 perks at once.\n");
 			outputText("-Limit on some of ascension perks was rised by 5 (meaning one more new game need to be played to reach new cap).\n");

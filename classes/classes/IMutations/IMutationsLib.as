@@ -44,6 +44,8 @@ public class IMutationsLib
 		public static const HellcatParathyroidGlandsIM:IMutationPerkType = new HellcatParathyroidGlandMutation();
 		public static const HengeyokaiBirthrightIM:IMutationPerkType = new HengeyokaiBirthrightMutation();
 		public static const AnanasaBirthrightIM:IMutationPerkType = new AnanasaBirthrightMutation();
+		public static const DraconicBonesIM:IMutationPerkType = new DraconicBonesMutation();
+		public static const DraconicHeartIM:IMutationPerkType = new DraconicHeartMutation();
 		public static const DraconicLungIM:IMutationPerkType = new DraconicLungMutation();
 		//Mutations start here.
 		public static const AlphaHowlIM:IMutationPerkType = new AlphaHowlMutation();
@@ -55,8 +57,8 @@ public class IMutationsLib
 		public static const CaveWyrmLungsIM:IMutationPerkType = new CaveWyrmLungsMutation();
 		public static const DiamondHeartIM:IMutationPerkType = new DiamondHeartMutation();
 		public static const DisplacerMetabolismIM:IMutationPerkType = new DisplacerMetabolismMutation();
-		public static const DraconicBonesIM:IMutationPerkType = new DraconicBonesMutation();
-		public static const DraconicHeartIM:IMutationPerkType = new DraconicHeartMutation();
+		public static const DrakeBonesIM:IMutationPerkType = new DrakeBonesMutation();
+		public static const DrakeHeartIM:IMutationPerkType = new DrakeHeartMutation();
 		public static const DrakeLungsIM:IMutationPerkType = new DrakeLungMutation();
 		public static const EasterBunnyEggBagIM:IMutationPerkType = new EasterBunnyEggBagMutation();
 		public static const EclipticMindIM:IMutationPerkType = new EclipticMindMutation();

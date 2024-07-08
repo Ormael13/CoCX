@@ -2638,14 +2638,27 @@ public class SaveUpdater extends NPCAwareContent {
 				outputText("\n\nNew SH feature: ShortPreg for all preggo lovers. If you don't wanna wait for months for your character to give birth to another imp/goblin/mouse, just turn it on and everything will happen in up to 4 days. Yes, even Celess :P");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.50;
 			}
-			/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.51) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.51;
 				if (player.hasMutation(IMutationsLib.DraconicBonesIM) || player.hasMutation(IMutationsLib.DraconicHeartIM) || player.hasMutation(IMutationsLib.DraconicLungIM)) {
 					outputText("\n\nDragon race now would share all three internal mutations with their other familiy members like yggdrasil dragon. Draconic mutations shall be used at later date for true dragon (perm) race.");
-					
+					if (player.hasMutation(IMutationsLib.DraconicBonesIM)) {
+						player.createPerk(IMutationsLib.DrakeBonesIM, player.perkv1(IMutationsLib.DraconicBonesIM), 0, 0, 0);
+						player.removePerk(IMutationsLib.DraconicBonesIM);
+					}
+					if (player.hasMutation(IMutationsLib.DraconicHeartIM)) {
+						player.createPerk(IMutationsLib.DrakeHeartIM, player.perkv1(IMutationsLib.DraconicHeartIM), 0, 0, 0);
+						player.removePerk(IMutationsLib.DraconicHeartIM);
+					}
+					if (player.hasMutation(IMutationsLib.DraconicLungIM)) {
+						if (player.hasMutation(IMutationsLib.DrakeLungsIM)) {
+							if (player.perkv1(IMutationsLib.DraconicLungIM) > player.perkv1(IMutationsLib.DrakeLungsIM)) player.addPerkValue(IMutationsLib.DrakeLungsIM, 1, (player.perkv1(IMutationsLib.DraconicLungIM) - player.perkv1(IMutationsLib.DrakeLungsIM)));
+						}
+						else player.createPerk(IMutationsLib.DrakeLungsIM, player.perkv1(IMutationsLib.DraconicLungIM), 0, 0, 0);
+						player.removePerk(IMutationsLib.DraconicLungIM);
+					}
 				}
-			}
+			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.60) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.60;
 			}

@@ -13,10 +13,10 @@ import classes.Creature;
 import classes.Player;
 import classes.Races;
 
-public class DraconicBonesMutation extends IMutationPerkType
+public class DrakeBonesMutation extends IMutationPerkType
     {
         override public function get mName():String {
-            return "Draconic Bones";
+            return "Drake Bones";
         }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
@@ -44,13 +44,13 @@ public class DraconicBonesMutation extends IMutationPerkType
                 if (pTier == 0){
                     this.requireBonesAndMarrowMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return (player.arms.type == Arms.DRACONIC || player.arms.type == Arms.FROSTWYRM || player.arms.type == Arms.PLANT || player.arms.type == Arms.PLANT2 || player.arms.type == Arms.SEA_DRAGON || player.arms.type == Arms.FEY_DRACONIC);
+                        return (player.arms.type == Arms.DRACONIC || player.arms.type == Arms.FROSTWYRM || player.arms.type == Arms.PLANT || player.arms.type == Arms.PLANT2 || player.arms.type == Arms.SEA_DRAGON || player.arms.type == Arms.FEY_DRACONIC || player.arms.type == Arms.LIZARD);
                     }, "Dragon race or its variants arms")
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return (LowerBody.hasDraconicLegs(player));
+                        return (LowerBody.hasDraconicLegs(player) || player.lowerBody == LowerBody.KIRIN);
                     }, "Dragon race or its variants legs")
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return (Tail.hasDraconicTail(player) || LowerBody.hasDraconicLegs(player) && LowerBody.hasTail(player));
+                        return (Tail.hasDraconicTail(player) || (LowerBody.hasDraconicLegs(player) && LowerBody.hasTail(player)) || player.tailType == Tail.KIRIN);
                     }, "Dragon race or its variants tail")
                     .requireAnyRace(Races.DRAGON, Races.JABBERWOCKY, Races.FROSTWYRM, Races.YGGDRASIL, Races.SEA_DRAGON, Races.FAERIEDRAGON, Races.KIRIN);
                 }
@@ -72,8 +72,8 @@ public class DraconicBonesMutation extends IMutationPerkType
             return pBuffs;
         }
 
-        public function DraconicBonesMutation() {
-            super(mName + " IM", mName, SLOT_NONE, 1);//super(mName + " IM", mName, SLOT_BONE, 3);
+        public function DrakeBonesMutation() {
+            super(mName + " IM", mName, SLOT_BONE, 3);
         }
 
     }
