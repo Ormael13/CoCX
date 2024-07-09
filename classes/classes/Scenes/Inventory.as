@@ -69,7 +69,7 @@ use namespace CoC;
 		}
 		
 		public function pearlStorageSize():int {
-			if (player.hasKeyItem("Sky Poison Pearl") < 0) return 0;
+			if (player.hasKeyItem("Sky Poison Pearl") < 0 && player.hasKeyItem("Dimensional Pocket") < 0) return 0;
 			var x:int = 14;
 			var y:Number = 0;
 			if (player.hasPerk(PerkLib.AscensionSkyPoisonPearlMasteryStageX)) y += (6 * player.perkv1(PerkLib.AscensionSkyPoisonPearlMasteryStageX));
