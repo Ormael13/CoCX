@@ -3816,6 +3816,8 @@ public class PerkLib
 				"Allows access to a jabberwocky poisonous lust breath attack.");
 		public static const DragonPoisonBreath:PerkType = mk("Dragon poison breath", "Dragon poison breath",
 				"Allows access to a dragon poisonous breath attack.");
+		public static const DragonPoisonousSapBreath:PerkType = mk("Dragon poisonous sap breath", "Dragon poisonous sap breath",
+				"Allows access to a dragon poisonous sap breath attack.");
 		public static const DragonRegalBreath:PerkType = mk("Dragon regal breath", "Dragon regal breath",
 				"Allows access to a dragonne regal breath attack.");
 		public static const DragonWaterBreath:PerkType = mk("Dragon water breath", "Dragon water breath",
@@ -3961,7 +3963,7 @@ public class PerkLib
 				"Lustserking increases attack and physical defenses resistance but reduces lust resistance.")
 				.withBuffs({'maxwrath_base':+500});
 		public static const TechOverdrive:PerkType = mk("Tech Overdrive", "Tech Overdrive",
-				"Empower your technological equipment, causing it to deal increased damage but weaken your defences as a result.");
+				"Empower your technological equipment, causing it to deal increased damage but weaken your defenses as a result.");
 		public static const MagmaSlimeCore:PerkType = mk("Magma Slime Core", "Magma Slime Core",
 				"Grants more control over your slimy body, allowing you to go twice as long without fluids.");
 		public static const ManticoreCumAddict:PerkType = mk("Manticore Cum Addict", "Manticore Cum Addict",

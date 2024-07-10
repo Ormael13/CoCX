@@ -252,15 +252,16 @@ public class Changelog extends BaseContent
 			outputText("-Sand Worm lower body allow to make tail slam + stinger stab during feral combat combo. Bugfixing sand worms not generating venom needed for their special.\n");
 			outputText("-Small changes to make sure Francesca's Black Cloak will not remove on unequip Misdirection from raphael training (whenever it was permed or not yet).\n");
 			outputText("-Gremlin race score calculations slight update and bonuses changes to all tiers. First one renamed to gremlin-kin, 2nd into gremlin and added 3rd arch gremlin. 2nd (24+) and 3rd (36+) tier req. now soulless perk and their bonuses are as follow: -50% to str multi, +100%/+160% to spe multi, +180%/+250% to int multi, +150%/+200% to lib multi, +30 min lust, +20 Sens\n");
-			outputText("-New event perk: Tech Overdrive. Gained by been gremlin-kin. Effects: Empower your technological equipment, causing it to deal increased damage but weaken your defences as a result.\n");
+			outputText("-New event perk: Tech Overdrive. Gained by been gremlin-kin. Effects: Empower your technological equipment, causing it to deal increased damage but weaken your defenses as a result.\n");
 			outputText("-New M. Special: Tech Overdrive. Usable by having Tech Overdrive perk. Cost 40 mana. Increase by 20(+20per ng tier) atk of melee or range tech wepaons, add 20% to mech onboard weapons dmg, lower physical def by 50%. It would last for 10 turns.\n");
-			outputText("-New M. Special: Malfunction. Usable by been gremlin-kin. Cost 40 mana and can stun for 6 turns. Have 10 turns cooldown after use. Overload a magitech or construction, causing damage and immobilising it for a while. Does not work on living things or sentient constructs.\n");
+			outputText("-New M. Special: Malfunction. Usable by been gremlin-kin. Cost 40 mana and can stun for 6 turns. Have 10 turns cooldown after use. Overload a magitech or construction, causing damage and immobilizing it for a while. Does not work on living things or sentient constructs.\n");
 			outputText("-Lust immunity fix & preg fix. (Svalkash)\n");
 			outputText("-Lowered the chance of common (imp-gob-goleems) encountered in Forest, Mountain and Plains to 1/4 of the previous value. Averange typo fixed. (Svalkash)\n");
 			outputText("-Fixed: Kitsune tail tangle not working as intended, kits->kids, kid a goblin scene being hard to get. (Svalkash)\n");
 			outputText("-Dragon race IM was changed from Draconic Bones/Heart/Lungs to Drake Bones/Heart/Lungs.\n");
 			outputText("-New mutation perks: Drake Bones/Heart/Lungs - they have same amount of tiers and effects as Draconic Bones/Heart/Lungs. Req. to get them are the same too. In cases when internal mutation wasn't accesable to race without changing partialy into different dragon-like race checks was fixed.\n");
 			outputText("-When needed in race scores IM checks for Draconic IM's was replaced by checks for Drake IM checks.\n");
+			outputText("-Yggdrasil dragon breath changed from poison breath to poisonous sap breath (deal poison+water+earth) damage.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -275,18 +276,17 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//New mutation perk: Human Parathyroid Glands (Final Form). Req. Human Parathyroid Glands (Evolved) and lvl 90+. Effects: Increases self healing by 40 * level HP in combat and twice more out of combat. 8 * level HP Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.
 			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
-			outputText("-\n");
-			outputText("-\n");//New mutation perk: Human Parathyroid Glands (Final Form). Req. Human Parathyroid Glands (Evolved) and lvl 90+. Effects: Increases self healing by 40 * level HP in combat and twice more out of combat. 8 * level HP Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

@@ -2658,6 +2658,13 @@ public class SaveUpdater extends NPCAwareContent {
 						player.removePerk(IMutationsLib.DraconicLungIM);
 					}
 				}
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.52) {
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.52;
+				if (player.hasPerk(PerkLib.DragonPoisonBreath)) {
+					player.createPerk(PerkLib.DragonPoisonousSapBreath, 0, 0, 0, player.perkv4(PerkLib.DragonPoisonBreath));
+					player.removePerk(PerkLib.DragonPoisonBreath);
+				}
 			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.60) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.60;

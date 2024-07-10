@@ -1093,6 +1093,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.hasStatusEffect(StatusEffects.DragonPoisonBreathCooldown) && !player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) player.removeStatusEffect(StatusEffects.DragonPoisonBreathCooldown);
 				if (player.hasStatusEffect(StatusEffects.DragonWaterBreathCooldown) && !player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) player.removeStatusEffect(StatusEffects.DragonWaterBreathCooldown);
 				if (player.hasStatusEffect(StatusEffects.DragonFaerieBreathCooldown) && !player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) player.removeStatusEffect(StatusEffects.DragonFaerieBreathCooldown);
+				if (player.hasStatusEffect(StatusEffects.DragonPoisonousSapBreathCooldown) && !player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) player.removeStatusEffect(StatusEffects.DragonPoisonousSapBreathCooldown);
 				if (player.hasStatusEffect(StatusEffects.DragonRoyalBreathCooldown) && !player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) player.removeStatusEffect(StatusEffects.DragonRoyalBreathCooldown);
 				//Reset once a day cooldowns
 				player.resetCooldowns(true);

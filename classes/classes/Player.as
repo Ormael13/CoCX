@@ -5951,6 +5951,9 @@ use namespace CoC;
 			if(hasStatusEffect(StatusEffects.DragonFaerieBreathCooldown) && perkv1(IMutationsLib.DrakeLungsIM) >= 1) {
 				removeStatusEffect(StatusEffects.DragonFaerieBreathCooldown);
 			}
+			if(hasStatusEffect(StatusEffects.DragonPoisonousSapBreathCooldown) && perkv1(IMutationsLib.DrakeLungsIM) >= 1) {
+				removeStatusEffect(StatusEffects.DragonPoisonousSapBreathCooldown);
+			}
 			if(hasStatusEffect(StatusEffects.DragonRoyalBreathCooldown) && perkv1(IMutationsLib.DrakeLungsIM) >= 1) {
 				removeStatusEffect(StatusEffects.DragonRoyalBreathCooldown);
 			}

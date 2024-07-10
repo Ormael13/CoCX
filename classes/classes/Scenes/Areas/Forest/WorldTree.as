@@ -329,10 +329,10 @@ public class WorldTree extends BaseContent
 				CoC.instance.transformations.EarsLizard.applyEffect(false);
 				changes++;
 			}
-			if (changes < changeLimit && player.isRaceCached(Races.YGGDRASIL) && !player.hasPerk(PerkLib.DragonPoisonBreath)) {
+			if (changes < changeLimit && player.isRaceCached(Races.YGGDRASIL) && !player.hasPerk(PerkLib.DragonPoisonousSapBreath)) {
 				outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... ");
 				outputText("with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.\n\nIt seems song has awaked some kind of power within you... your throat and chest feel very... strange and you can't put a finger what this feeling exactly is, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon poison breath!</b>)");
-				player.createPerk(PerkLib.DragonPoisonBreath, 0, 0, 0, 0);
+				player.createPerk(PerkLib.DragonPoisonousSapBreath, 0, 0, 0, 0);
 				changes++;
 			}
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
