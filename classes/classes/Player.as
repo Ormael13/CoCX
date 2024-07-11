@@ -4434,6 +4434,24 @@ use namespace CoC;
 			End("Player","racialScore");
 			return internalHumanCounter;
 		}
+		public function howManyDifferentHumanIMYouGot():Number {
+			var hMDHIMYG:Number = 0;
+			if (hasMutation(IMutationsLib.HumanAdrenalGlandsIM)) hMDHIMYG += 1;
+			if (hasMutation(IMutationsLib.HumanBloodstreamIM)) hMDHIMYG += 1;
+			if (hasMutation(IMutationsLib.HumanBonesIM)) hMDHIMYG += 1;
+			if (hasMutation(IMutationsLib.HumanDigestiveTractIM)) hMDHIMYG += 1;
+			if (hasMutation(IMutationsLib.HumanEyesIM)) hMDHIMYG += 1;
+			if (hasMutation(IMutationsLib.HumanFatIM)) hMDHIMYG += 1;
+			if (hasMutation(IMutationsLib.HumanMetabolismIM)) hMDHIMYG += 1;
+			if (hasMutation(IMutationsLib.HumanMusculatureIM)) hMDHIMYG += 1;
+			if (hasMutation(IMutationsLib.HumanOvariesIM)) hMDHIMYG += 1;
+			if (hasMutation(IMutationsLib.HumanParathyroidGlandIM)) hMDHIMYG += 1;
+			if (hasMutation(IMutationsLib.HumanSmartsIM)) hMDHIMYG += 1;
+			if (hasMutation(IMutationsLib.HumanTesticlesIM)) hMDHIMYG += 1;
+			if (hasMutation(IMutationsLib.HumanThyroidGlandIM)) hMDHIMYG += 1;
+			if (hasMutation(IMutationsLib.HumanVersatilityIM)) hMDHIMYG += 1;
+			return hMDHIMYG;
+		}
 
 		public function increaseFromBloodlinePerks():Number {
 			var incFBP:Number = 2;

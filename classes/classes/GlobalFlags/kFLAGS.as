@@ -2949,7 +2949,7 @@ public static const UNKNOWN_FLAG_NUMBER_02940:int                               
 public static const UNKNOWN_FLAG_NUMBER_02941:int                                   = 2941;
 public static const UNKNOWN_FLAG_NUMBER_02942:int                                   = 2942;
 public static const UNKNOWN_FLAG_NUMBER_02943:int                                   = 2943;
-public static const UNKNOWN_FLAG_NUMBER_02944:int                                   = 2944;
+public static const HUMAN_BLOODLINE:int                                   			= 2944;
 public static const STATBAR_ANIMATIONS:int                                          = 2945; // 0: animate bar, 1: disable
 public static const BUTTON_ICONS_DISABLED:int                                       = 2946;
 public static const COMBAT_TEASE_HEALING:int                                        = 2947;
@@ -3018,4 +3018,4 @@ public static const GLOBAL_FLAGS_ARRAY:Array = [
 	BUTTON_ICONS_DISABLED,STATBAR_ANIMATIONS
 ];
 	}
-}
+}

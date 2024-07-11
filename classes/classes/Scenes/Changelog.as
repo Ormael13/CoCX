@@ -262,7 +262,7 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perks: Drake Bones/Heart/Lungs - they have same amount of tiers and effects as Draconic Bones/Heart/Lungs. Req. to get them are the same too. In cases when internal mutation wasn't accesable to race without changing partialy into different dragon-like race checks was fixed.\n");
 			outputText("-When needed in race scores IM checks for Draconic IM's was replaced by checks for Drake IM checks.\n");
 			outputText("-Yggdrasil dragon breath changed from poison breath to poisonous sap breath (deal poison+water+earth) damage.\n");
-			outputText("-\n");
+			outputText("-Added Descendant and Bloodline perks for Human (3 stages) race.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

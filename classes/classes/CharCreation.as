@@ -480,7 +480,8 @@ import classes.Scenes.Combat.CombatAbility;
 					kFLAGS.HP_STATBAR_PERCENTAGE,
 					kFLAGS.LUST_STATBAR_PERCENTAGE,
 					kFLAGS.WRATH_STATBAR_PERCENTAGE,
-					kFLAGS.ANGELIC_FRACTION_TOGGLE]) {
+					kFLAGS.ANGELIC_FRACTION_TOGGLE,
+					kFLAGS.HUMAN_BLOODLINE]) {
 					    newFlags[flag] = flags[flag];
 				}
 			}
@@ -1379,10 +1380,10 @@ import classes.Scenes.Combat.CombatAbility;
 		//-- BLOODLINE PERKS
 		//-----------------
 		public function chooseBloodlineorNot():void {
-			if (player.hasPerk(PerkLib.AscensionCruelChimerasThesis) && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) chooseBloodline();
+			if (player.hasPerk(PerkLib.AscensionCruelChimerasThesis) && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) chooseBloodline1();
 			else chooseHistory();
 		}
-		public function chooseBloodline():void {
+		public function chooseBloodline1():void {
 			clearOutput();
 			outputText("There is a possibility that you were descended from non-human blood.  Was one of your ancestors non-human, and if so, what were they?");
 			menu();
@@ -1406,10 +1407,11 @@ import classes.Scenes.Combat.CombatAbility;
 			else addButtonDisabled(8, "Vampire", "You already have this bloodline!");
 			if (!player.hasPerk(PerkLib.BloodlineMelkie)) addButton(9, "Melkie", confirmBloodline1, PerkLib.MelkiesDescendant).hint("(+2 to melkie score)");
 			else addButtonDisabled(9, "Melkie", "You already have this bloodline!");
-			addButton(13, "-2-", chooseBloodline1);
+			addButton(12, "-2-", chooseBloodline2);
+			addButton(13, "-3-", chooseBloodline3);
 			addButton(14, "None", noBloodlineAtAllCuzYouAscendedTooManyTimesAlready).hint("You either cannot add a new unstable bloodline, or you have a stable bloodline. (It mean you only will get some bonus perk points for start instead of new bloodline.)");
 		}
-		public function chooseBloodline1():void {
+		public function chooseBloodline2():void {
 			menu();
 			if (!player.hasPerk(PerkLib.BloodlineHydra)) addButton(0, "Hydra", confirmBloodline2, PerkLib.HydrasDescendant).hint("(+2 to hydra score)");
 			else addButtonDisabled(0, "Hydra", "You already have this bloodline!");
@@ -1421,7 +1423,35 @@ import classes.Scenes.Combat.CombatAbility;
 			else addButtonDisabled(3, "Wereshark", "You already have this bloodline!");
 			if (!player.hasPerk(PerkLib.BloodlineRatatoskr)) addButton(4, "Ratatoskr", confirmBloodline2, PerkLib.RatatoskrsDescendant).hint("(+2 to ratatoskr score)");
 			else addButtonDisabled(4, "Ratatoskr", "You already have this bloodline!");
-			addButton(13, "-1-", chooseBloodline);
+			addButton(12, "-1-", chooseBloodline1);
+			addButton(13, "-3-", chooseBloodline3);
+			addButton(14, "None", noBloodlineAtAllCuzYouAscendedTooManyTimesAlready).hint("You either cannot add a new unstable bloodline, or you have a stable bloodline. (It mean you only will get some bonus perk points for start instead of new bloodline.)");
+		}
+		public function chooseBloodline3():void {
+			menu();
+			if (!player.hasPerk(PerkLib.CommonHumanBloodline) && !player.hasPerk(PerkLib.NobleHumanBloodline) && !player.hasPerk(PerkLib.RoyalHumanBloodline)) {
+				if (flags[kFLAGS.HUMAN_BLOODLINE] == 1) addButton(0, "CommonH", confirmBloodline3, PerkLib.CommonHumansDescendant).hint("(+2 to human score)");
+				else addButtonDisabled(0, "CommonH", "You not meet req. for this bloodline: 10+ human score and 4+ different human internal mutations.");
+			}
+			else {
+				if (!player.hasPerk(PerkLib.CommonHumanBloodline)) addButtonDisabled(0, "CommonH", "You already have this bloodline!");
+				else addButtonDisabled(0, "CommonH", "You already have higher stage of human bloodline!");
+			}
+			if (!player.hasPerk(PerkLib.NobleHumanBloodline) && !player.hasPerk(PerkLib.RoyalHumanBloodline)) {
+				if (flags[kFLAGS.HUMAN_BLOODLINE] == 2) addButton(1, "NobleH", confirmBloodline3, PerkLib.NobleHumansDescendant).hint("(+4 to human score)");
+				else addButtonDisabled(1, "NobleH", "You not meet req. for this bloodline: 20+ human score and 8+ different human internal mutations.");
+			}
+			else {
+				if (!player.hasPerk(PerkLib.NobleHumanBloodline)) addButtonDisabled(1, "NobleH", "You already have this bloodline!");
+				else addButtonDisabled(1, "NobleH", "You already have higher stage of human bloodline!");
+			}
+			if (!player.hasPerk(PerkLib.RoyalHumanBloodline)) {
+				if (flags[kFLAGS.HUMAN_BLOODLINE] == 3) addButton(2, "RoyalH", confirmBloodline3, PerkLib.RoyalHumansDescendant).hint("(+6 to human score)");
+				else addButtonDisabled(2, "RoyalH", "You not meet req. for this bloodline: 40+ human score and 12+ different human internal mutations.");
+			}
+			else addButtonDisabled(2, "RoyalH", "You already have this bloodline!");
+			addButton(12, "-1-", chooseBloodline1);
+			addButton(13, "-2-", chooseBloodline2);
 			addButton(14, "None", noBloodlineAtAllCuzYouAscendedTooManyTimesAlready).hint("You either cannot add a new unstable bloodline, or you have a stable bloodline. (It mean you only will get some bonus perk points for start instead of new bloodline.)");
 		}
 
@@ -1463,7 +1493,7 @@ import classes.Scenes.Combat.CombatAbility;
 			}
 			menu();
 			addButton(0, "Yes", setBloodline, choice);
-			addButton(1, "No", chooseBloodline);
+			addButton(1, "No", chooseBloodline1);
 		}
 
 		private function confirmBloodline2(choice:PerkType):void {
@@ -1489,7 +1519,27 @@ import classes.Scenes.Combat.CombatAbility;
 			}
 			menu();
 			addButton(0, "Yes", setBloodline, choice);
-			addButton(1, "No", chooseBloodline1);
+			addButton(1, "No", chooseBloodline2);
+		}
+
+		private function confirmBloodline3(choice:PerkType):void {
+			clearOutput();
+			switch (choice) {
+				case PerkLib.CommonHumansDescendant:
+					outputText("Your ancestor was a common human?");
+					break;
+				case PerkLib.NobleHumansDescendant:
+					outputText("Your ancestor was a noble human?");
+					break;
+				case PerkLib.RoyalHumansDescendant:
+					outputText("Your ancestor was a royal human?");
+					break;
+				default:
+					outputText("Your ancestor was a common human?");
+			}
+			menu();
+			addButton(0, "Yes", setBloodline, choice);
+			addButton(1, "No", chooseBloodline3);
 		}
 
 		private function setBloodline(choice:PerkType):void {
@@ -3639,12 +3689,13 @@ import classes.Scenes.Combat.CombatAbility;
 			player.unequipMiscJewelry2(false, true);
 			player.unequipWeaponFlyingSwords(false, true);
 			player.createKeyItem("Ascension", 0, 0, 0, 0);
+			if (player.humanScore() >= 10 && player.howManyDifferentHumanIMYouGot() >= 4 && flags[kFLAGS.HUMAN_BLOODLINE] == 0) flags[kFLAGS.HUMAN_BLOODLINE] = 1;
+			if (player.humanScore() >= 20 && player.howManyDifferentHumanIMYouGot() >= 8 && flags[kFLAGS.HUMAN_BLOODLINE] == 1) flags[kFLAGS.HUMAN_BLOODLINE] = 2;
+			if (player.humanScore() >= 40 && player.howManyDifferentHumanIMYouGot() >= 12 && flags[kFLAGS.HUMAN_BLOODLINE] == 2) flags[kFLAGS.HUMAN_BLOODLINE] = 3;
 			customPlayerProfile = null;
 			newGameGo();
 			removePerksThatShouldntBeFuckingPermanent();
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0.5){
-				flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = 0
-			}
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0.5) flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = 0;
 			player.removeKeyItem("Ascension");
 			clearOutput();
 			mainView.nameBox.visible = false;
@@ -3721,8 +3772,8 @@ import classes.Scenes.Combat.CombatAbility;
 			return perk.ptype.keepOnAscension(respec) || (perk.value4 > 0);
 		}
 
-		private function isSpecialKeyItem(keyName:* = null):Boolean {//tylko sky poinson pearl zostawić tutaj (only leave sky, poison, pearl here)
-			return (keyName == "Ascension" || keyName == "Sky Poison Pearl" || keyName == "Nieve's Tear");
+		private function isSpecialKeyItem(keyName:* = null):Boolean {//tylko sky poison pearl zostawić tutaj (only leave sky, poison, pearl here)
+			return (keyName == "Ascension" || keyName == "Sky Poison Pearl" || keyName == "Dimensional Pocket" || keyName == "Nieve's Tear");
 		}
 
 		private function isSpecialStatus(statusEffects:StatusEffectClass, statusEffect:* = null):Boolean {
