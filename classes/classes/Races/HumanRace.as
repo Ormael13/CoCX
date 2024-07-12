@@ -144,6 +144,7 @@ public class HumanRace extends Race {
 		if (body.player.hasPerk(PerkLib.CommonHumanBloodline) || body.player.hasPerk(PerkLib.CommonHumansDescendant)) icsp -= 0.1;
 		if (body.player.hasPerk(PerkLib.NobleHumanBloodline) || body.player.hasPerk(PerkLib.NobleHumansDescendant)) icsp -= 0.2;
 		if (body.player.hasPerk(PerkLib.RoyalHumanBloodline) || body.player.hasPerk(PerkLib.RoyalHumansDescendant)) icsp -= 0.3;
+		if (body.player.hasPerk(PerkLib.PrimarchBloodline) || body.player.hasPerk(PerkLib.PrimarchsDescendant)) icsp -= 0.4;
 		var ics:Number = (Math.round(body.player.internalChimeraScore() * icsp) - body.player.internalHumanScore());
 		if (ics < 0) ics = 0;
 		if (ics > 0) {
