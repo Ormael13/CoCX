@@ -253,6 +253,10 @@ public class PerkLib
 				"You are a descendant of your ancestor, who was the child of a royal human. (+6 to human score)");
 		public static const RoyalHumanBloodline:PerkType = mk("Bloodline: Royal human", "Bloodline: Royal human",
 				"Your Royal human bloodline appears strongly within you. (+6 to human score)", null, true);
+		public static const PrimarchsDescendant:PerkType = mk("Primarch's descendant", "Primarch's descendant",
+				"You are a descendant of your ancestor, who was the child of a primarch. (+10 to human score)");
+		public static const PrimarchBloodline:PerkType = mk("Bloodline: Primarch", "Bloodline: Primarch",
+				"Your Primarch bloodline appears strongly within you. (+10 to human score)", null, true);
 	//	public static const sDescendant:PerkType = mk("Race's descendant", "Race's descendant",
 	//			"You are a descendant of your ancestor, who was the child of a human and a (Race). (+2 to  score)");
 	//	public static const Bloodline:PerkType = mk("Bloodline: Demon", "Bloodline: Demon",
@@ -8278,4 +8282,4 @@ public class PerkLib
         }
 	}
 }
-}
+}

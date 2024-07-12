@@ -1429,7 +1429,7 @@ import classes.Scenes.Combat.CombatAbility;
 		}
 		public function chooseBloodline3():void {
 			menu();
-			if (!player.hasPerk(PerkLib.CommonHumanBloodline) && !player.hasPerk(PerkLib.NobleHumanBloodline) && !player.hasPerk(PerkLib.RoyalHumanBloodline)) {
+			if (!player.hasPerk(PerkLib.CommonHumanBloodline) && !player.hasPerk(PerkLib.NobleHumanBloodline) && !player.hasPerk(PerkLib.RoyalHumanBloodline) && !player.hasPerk(PerkLib.PrimarchBloodline)) {
 				if (flags[kFLAGS.HUMAN_BLOODLINE] == 1) addButton(0, "CommonH", confirmBloodline3, PerkLib.CommonHumansDescendant).hint("(+2 to human score)");
 				else addButtonDisabled(0, "CommonH", "You not meet req. for this bloodline: 10+ human score and 4+ different human internal mutations.");
 			}
@@ -1437,7 +1437,7 @@ import classes.Scenes.Combat.CombatAbility;
 				if (!player.hasPerk(PerkLib.CommonHumanBloodline)) addButtonDisabled(0, "CommonH", "You already have this bloodline!");
 				else addButtonDisabled(0, "CommonH", "You already have higher stage of human bloodline!");
 			}
-			if (!player.hasPerk(PerkLib.NobleHumanBloodline) && !player.hasPerk(PerkLib.RoyalHumanBloodline)) {
+			if (!player.hasPerk(PerkLib.NobleHumanBloodline) && !player.hasPerk(PerkLib.RoyalHumanBloodline) && !player.hasPerk(PerkLib.PrimarchBloodline)) {
 				if (flags[kFLAGS.HUMAN_BLOODLINE] == 2) addButton(1, "NobleH", confirmBloodline3, PerkLib.NobleHumansDescendant).hint("(+4 to human score)");
 				else addButtonDisabled(1, "NobleH", "You not meet req. for this bloodline: 20+ human score and 8+ different human internal mutations.");
 			}
@@ -1445,11 +1445,19 @@ import classes.Scenes.Combat.CombatAbility;
 				if (!player.hasPerk(PerkLib.NobleHumanBloodline)) addButtonDisabled(1, "NobleH", "You already have this bloodline!");
 				else addButtonDisabled(1, "NobleH", "You already have higher stage of human bloodline!");
 			}
-			if (!player.hasPerk(PerkLib.RoyalHumanBloodline)) {
+			if (!player.hasPerk(PerkLib.RoyalHumanBloodline) && !player.hasPerk(PerkLib.PrimarchBloodline)) {
 				if (flags[kFLAGS.HUMAN_BLOODLINE] == 3) addButton(2, "RoyalH", confirmBloodline3, PerkLib.RoyalHumansDescendant).hint("(+6 to human score)");
 				else addButtonDisabled(2, "RoyalH", "You not meet req. for this bloodline: 40+ human score and 12+ different human internal mutations.");
 			}
-			else addButtonDisabled(2, "RoyalH", "You already have this bloodline!");
+			else {
+				if (!player.hasPerk(PerkLib.RoyalHumanBloodline)) addButtonDisabled(2, "RoyalH", "You already have this bloodline!");
+				else addButtonDisabled(2, "RoyalH", "You already have higher stage of human bloodline!");
+			}
+			if (!player.hasPerk(PerkLib.PrimarchBloodline)) {
+				if (flags[kFLAGS.HUMAN_BLOODLINE] == 4) addButton(3, "PrimarchB", confirmBloodline3, PerkLib.PrimarchsDescendant).hint("(+10 to human score)");
+				else addButtonDisabled(3, "PrimarchB", "You not meet req. for this bloodline: 50+ human score and 14+ different human internal mutations.");
+			}
+			else addButtonDisabled(3, "PrimarchB", "You already have this bloodline!");
 			addButton(12, "-1-", chooseBloodline1);
 			addButton(13, "-2-", chooseBloodline2);
 			addButton(14, "None", noBloodlineAtAllCuzYouAscendedTooManyTimesAlready).hint("You either cannot add a new unstable bloodline, or you have a stable bloodline. (It mean you only will get some bonus perk points for start instead of new bloodline.)");
@@ -3692,6 +3700,7 @@ import classes.Scenes.Combat.CombatAbility;
 			if (player.humanScore() >= 10 && player.howManyDifferentHumanIMYouGot() >= 4 && flags[kFLAGS.HUMAN_BLOODLINE] == 0) flags[kFLAGS.HUMAN_BLOODLINE] = 1;
 			if (player.humanScore() >= 20 && player.howManyDifferentHumanIMYouGot() >= 8 && flags[kFLAGS.HUMAN_BLOODLINE] == 1) flags[kFLAGS.HUMAN_BLOODLINE] = 2;
 			if (player.humanScore() >= 40 && player.howManyDifferentHumanIMYouGot() >= 12 && flags[kFLAGS.HUMAN_BLOODLINE] == 2) flags[kFLAGS.HUMAN_BLOODLINE] = 3;
+			if (player.humanScore() >= 50 && player.howManyDifferentHumanIMYouGot() >= 14 && flags[kFLAGS.HUMAN_BLOODLINE] == 3) flags[kFLAGS.HUMAN_BLOODLINE] = 4;//>= 77 - >= 14
 			customPlayerProfile = null;
 			newGameGo();
 			removePerksThatShouldntBeFuckingPermanent();

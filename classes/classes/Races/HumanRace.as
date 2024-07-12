@@ -87,8 +87,13 @@ public class HumanRace extends Race {
 							return (body.player.hasPerk(PerkLib.RoyalHumanBloodline)
 									|| body.player.hasPerk(PerkLib.RoyalHumansDescendant))
 						}, +6)
+				.customRequirement("", "Bloodline: Primarch OR Primarch's descendant",
+						function (body:BodyData):Boolean {
+							return (body.player.hasPerk(PerkLib.PrimarchBloodline)
+									|| body.player.hasPerk(PerkLib.PrimarchsDescendant))
+						}, +10)
 				.hasPerk(PerkLib.AlteredAnima, -10)
-				.hasPerk(PerkLib.Soulless, -10);
+				.hasPerk(PerkLib.Soulless, -20);
 		
 		addMutation(IMutationsLib.HumanAdrenalGlandsIM);
 		addMutation(IMutationsLib.HumanBloodstreamIM);
