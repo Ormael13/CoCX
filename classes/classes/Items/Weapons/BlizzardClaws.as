@@ -14,7 +14,7 @@ import classes.Items.Weapon;
 		
 		public function BlizzardClaws()
 		{
-			super("BClaws", "BlizzardClaws", "blizzard claws", "a pair of blizzard claws", "clawing punch", 0, 4000, "This pair of claws are made of pure ice. Instead of keeping warm the they cools and chills the body of whoever wears it, which might even prove lethal to someone not resilient to its insidious power. Yuki Onna being creatures of the cold they actually regenerate instead thanks to this effect.", WT_GAUNTLET, WSZ_MEDIUM);
+			super("BClaws", "BlizzardClaws", "blizzard claws", "a pair of blizzard claws", "clawing punch", 0, 4000, "This pair of claws are made of pure ice. Instead of keeping warm the they cools and chills the body of whoever wears it, which might even prove lethal to someone not resilient to its insidious power. Yuki Onna being creatures of the cold they actually regenerate instead thanks to this effect.", WT_GAUNTLET, WSZ_MEDIUM, true);
 			withTags(W_ICE_TYPE);
 			withEffect(IELib.Bleed, 10);
 		}

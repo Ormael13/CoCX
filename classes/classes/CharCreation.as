@@ -1542,6 +1542,9 @@ import classes.Scenes.Combat.CombatAbility;
 				case PerkLib.RoyalHumansDescendant:
 					outputText("Your ancestor was a royal human?");
 					break;
+				case PerkLib.PrimarchsDescendant:
+					outputText("Your ancestor was a Primarch?");
+					break;
 				default:
 					outputText("Your ancestor was a common human?");
 			}
@@ -3055,6 +3058,26 @@ import classes.Scenes.Combat.CombatAbility;
 			else if (player.hasPerk(PerkLib.RatatoskrsDescendant)) {
 				player.removePerk(PerkLib.RatatoskrsDescendant);
 				player.createPerk(PerkLib.BloodlineRatatoskr,0,0,0,1);
+				bloodlineACQ2();
+			}
+			else if (player.hasPerk(PerkLib.CommonHumansDescendant)) {
+				player.removePerk(PerkLib.CommonHumansDescendant);
+				player.createPerk(PerkLib.CommonHumanBloodline,0,0,0,1);
+				bloodlineACQ2();
+			}
+			else if (player.hasPerk(PerkLib.NobleHumansDescendant)) {
+				player.removePerk(PerkLib.NobleHumansDescendant);
+				player.createPerk(PerkLib.NobleHumanBloodline,0,0,0,1);
+				bloodlineACQ2();
+			}
+			else if (player.hasPerk(PerkLib.RoyalHumansDescendant)) {
+				player.removePerk(PerkLib.RoyalHumansDescendant);
+				player.createPerk(PerkLib.RoyalHumanBloodline,0,0,0,1);
+				bloodlineACQ2();
+			}
+			else if (player.hasPerk(PerkLib.PrimarchsDescendant)) {
+				player.removePerk(PerkLib.PrimarchsDescendant);
+				player.createPerk(PerkLib.PrimarchBloodline,0,0,0,1);
 				bloodlineACQ2();
 			}
 			else {
