@@ -272,6 +272,7 @@ public final class ConsumableLib extends AlchemyLib
 		public const E3PEARL:ElementalPearl = new ElementalPearl(3);
 		public const E5PEARL:ElementalPearl = new ElementalPearl(5);
 		public const E7PEARL:ElementalPearl = new ElementalPearl(7);
+		public const DEMONME: Consumable = mk("DemonMe", "DemonizeMe", "a bottle of Demonize Me", 300, "The oil-like dark blue substance within the bottle seems ordinary enough, as normal as unholy fluids can get.", m.demonizeme);
 		
 		//NON-TRANSFORMATIVE ITEMS
 		public const AGILI_E: Consumable = mk("Agil.E.", "Agility E.", "an agility elixir", 6, "This greenish elixir is supposed to increase the user’s natural swiftness and agility.", m.agilityElixir);

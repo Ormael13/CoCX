@@ -150,11 +150,18 @@ use namespace CoC;
                 else outputText(" As interesting as the theory is, you already have mastered the practical applications");
                 outputText(".  The final few chapters...  After a quick skim, you believe that with enough stone and some time, you could set up a ward around your camp.");
                 if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) outputText("  Sort of like Tel’Adre’s defences in miniature.");
-
                 player.createKeyItem("Warding Tome", 0, 0, 0, 0);
                 flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] = 1;
 			}
             doNext(roomPremiumStorage);
+		}
+		private function takeDemonizeMe():void {
+			clearOutput();
+			outputText("A violet crystalline bottle looking too artistic to be an ordinary draft, standing ominously within the hidden compartment.\n\n");
+			outputText("The simple, crooked label catches your eye.\n\n");
+			outputText("\"<i>Demonize Me</i>\"\n\n");
+			flags[kFLAGS.FACTORY_TAKEN_DEMONIZE_ME] = 1;
+			inventory.takeItem(consumables.DEMONME, roomPremiumStorage);
 		}
 
 		private function drinkCoffee():void {
@@ -1875,6 +1882,7 @@ use namespace CoC;
 				addButton(1, "GroPlus", takeGroPlus);
 			}
 			if(flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] < 1) addButton(2, "Search", takeWardTome);
+			if(flags[kFLAGS.FACTORY_TAKEN_DEMONIZE_ME] < 1) addButton(3, "Potion", takeDemonizeMe);
 		}
 
 		public function roomBathroom():void {

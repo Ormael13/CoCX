@@ -5165,6 +5165,10 @@ public function rebirthFromBadEnd():void {
 		if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) >= 2) performancePointsPredictionQuests++;
 		if (player.statusEffectv2(StatusEffects.AdventureGuildQuests4) >= 2) performancePointsPredictionQuests++;
 		if (flags[kFLAGS.GALIA_LVL_UP] >= 0.5) performancePointsPredictionQuests += 5;
+		if (player.statusEffectv1(StatusEffects.AlvinaTraining2) > 3 || player.statusEffectv1(StatusEffects.SiegweirdTraining2) > 2) {
+			if (player.statusEffectv1(StatusEffects.AlvinaTraining2) > 3) performancePointsPredictionQuests += 5;
+			if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) > 2) performancePointsPredictionQuests += 5;
+		}
 		return performancePointsPredictionQuests;
 	}
 	public function possibleToGainAscensionPointsCampStructures():Number {
