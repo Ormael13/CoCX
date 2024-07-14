@@ -1511,7 +1511,7 @@ public class Changelog extends BaseContent
 			outputText("-Raise Tel Adre Minimum lust to 60.\n");
 			outputText("-Staves are now large weapon\n");
 			outputText("-Update to Couatl sprite and score\n");
-			outputText("-Makes wound poison availlable to Jiangshi Wound Poison no longuer prerequisite Poisoning. Hydra heads now properly deliver poison on feral strikes.\n");
+			outputText("-Makes wound poison availlable to Jiangshi Wound Poison no longer prerequisite Poisoning. Hydra heads now properly deliver poison on feral strikes.\n");
 			outputText("-Improve Elven Eye slightly. Barrage now can deliver poison and does so with great effectiveness when fighting groups!\n");
 			outputText("-Elemental Damage type now use special font color\n");
 			outputText("-After beating enemy werewolf as PC werewolf it's possible (not 100% chance) to 'recruit' said enemy werewolf into pack member (req. Alpha Howl) as long there pack not reached maximum size (5* tier of Alpha Howl mutation).\n");
@@ -2715,7 +2715,7 @@ public class Changelog extends BaseContent
 			outputText("-Fix health bar beyond 100 000 not showing properly. (Liadri)\n");
 			outputText("-New body parts for cyclop/gazer. (by Liadri)\n");
 			outputText("-New updates to Yuu and Yeti TF. (by Liadri)\n");
-			outputText("-Fix Alvina combat moves she will no longuer randomly one shot players witheout prejudice but will still require a very powerful character to defeat. (Liadri)\n");
+			outputText("-Fix Alvina combat moves she will no longer randomly one shot players witheout prejudice but will still require a very powerful character to defeat. (Liadri)\n");
 			outputText("-Moved all interactions with Marae after first meeting from using Boat in Places to using Marae Island also located in Places (and it will unlock after first time meeting Marae obviously).\n");
 			outputText("-A bit higher req. to get ninetail kitunse stage of race bonuses and 2 tiers above this stage. Also way kitsune score is calculated is changed to allow to get few more points on average.\n");
 			outputText("-Sand Witches chest with La Bova and Lactacid now hold two items more items and it properly get slowly refilled with each passing day just as text ingame suggest.\n");
