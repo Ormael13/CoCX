@@ -5737,6 +5737,8 @@ use namespace CoC;
 			if ((!hasPerk(PerkLib.AvatorOfPurity) || !isRaceCached(Races.UNICORN,2)) && statStore.hasBuff('Avatar Of Purity')) statStore.removeBuffs('Avatar Of Purity');
 			if (hasPerk(PerkLib.StrengthOfStone)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(tou/2))}, 'Strength of stone', { text: 'Strength of stone' });
 			if (!hasPerk(PerkLib.StrengthOfStone) && statStore.hasBuff('Strength of stone')) statStore.removeBuffs('Strength of stone');
+			if (hasPerk(PerkLib.CovenantOfTheSpirits)) statStore.replaceBuffObject({'spe.mult':(0.01 * Math.round(inte/2))}, 'Covenant of the spirits', { text: 'Covenant of the spirits' });
+			if (!hasPerk(PerkLib.CovenantOfTheSpirits) && statStore.hasBuff('Covenant of the spirits')) statStore.removeBuffs('Covenant of the spirits');
 			if (hasPerk(PerkLib.PsionicEmpowerment)) statStore.replaceBuffObject({'int.mult':(0.01 * Mindbreaker.MindBreakerFullConvert)}, 'Psionic Empowerment', { text: 'Psionic Empowerment' });
 			if (isGoblinoid() && hasMutation(IMutationsLib.GoblinOvariesIM) && perkv1(IMutationsLib.GoblinOvariesIM) >= 4) statStore.replaceBuffObject({'lib.mult':(totalFertility()*0.01)}, 'Goblin Ovaries bonus', { text: 'Goblin Ovaries bonus' });
 			if (isGoblinoid() && hasMutation(IMutationsLib.GoblinOvariesIM) && perkv1(IMutationsLib.GoblinOvariesIM) >= 4 && statStore.hasBuff("Goblin Ovaries bonus")) statStore.removeBuffs('Goblin Ovaries bonus');

@@ -265,9 +265,10 @@ public class Changelog extends BaseContent
 			outputText("-Added Descendant and Bloodline perks for Human (4 stages) race.\n");
 			outputText("-Steel Storm would affect all dual gauntlet/claw type weapons too.\n");
 			outputText("-Lethice Staff spellpower bonus doubled.\n");
-			outputText("-Finishing Alvina/Siegweird storyline (up to gain spell reward) would each grants 5 ascension perk points and will be under quest section fo calculation.\n");
+			outputText("-Finishing Alvina/Siegweird storyline (up to gain spell reward) would each grants 5 ascension perk points and will be under quest section of calculation.\n");
 			outputText("-New consumable (by Ormael / all text written by Reverse Time Traveler): Demonize Me. Obtained from hidden compartment in Factory. Effects: Forcefully turn person using into true demon. (giving Soulless perk and Lethicite consumable)\n");
-			outputText("-\n");
+			outputText("-New event perk: Covenant of the spirits. Gained by having naming ceremony at Wood Elfs village. Effects: Your shared soul with the sacred tree halves your soulforce but doubles your mana and fatigue. ");
+			outputText("This connection greatly weakens your ability to control fire but reinforces your mastery over earth, wind and water. Furthermore your natural attunement and improved magical circulation allows you to add half of your intelligence to your speed score.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -283,15 +284,15 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");//New mutation perk: Human Parathyroid Glands (Final Form). Req. Human Parathyroid Glands (Evolved) and lvl 90+. Effects: Increases self healing by 40 * level HP in combat and twice more out of combat. 8 * level HP Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
