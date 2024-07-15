@@ -5715,7 +5715,7 @@ use namespace CoC;
 			if ((effectiveTallness>60 || !hasPerk(PerkLib.CondensedPower)) && statStore.hasBuff('Condensed Power')) statStore.removeBuffs('Condensed Power');
 			if ((effectiveTallness>60 || !hasPerk(PerkLib.SmallCaster)) && statStore.hasBuff('Small Caster')) statStore.removeBuffs('Small Caster');
 			if (statStore.hasBuff('Small frame')) statStore.removeBuffs('Small frame');
-			if (hasPerk(PerkLib.HarpyQueen) && (isRaceCached(Races.HARPY, 1) || isRaceCached(Races.PHOENIX, 1) || isRaceCached(Races.THUNDERBIRD, 1))) statStore.addBuffObject({"tou.mult":SophieFollowerScene.HarpyKids,"spe.mult":SophieFollowerScene.HarpyKids,"lib.mult":SophieFollowerScene.HarpyKids}, "Harpy Queen",{text:"Your motherly love for and from your many harpy childrens grants you incredible strength."});
+			if (hasPerk(PerkLib.HarpyQueen) && (isRaceCached(Races.HARPY, 1) || isRaceCached(Races.PHOENIX, 1) || isRaceCached(Races.THUNDERBIRD, 1))) statStore.replaceBuffObject({"tou.mult":SophieFollowerScene.HarpyKids,"spe.mult":SophieFollowerScene.HarpyKids,"lib.mult":SophieFollowerScene.HarpyKids}, "Harpy Queen",{text:"Your motherly love for and from your many harpy childrens grants you incredible strength."});
 			if (!isRaceCached(Races.HARPY, 1) && !isRaceCached(Races.PHOENIX, 1) && !isRaceCached(Races.THUNDERBIRD, 1)) statStore.removeBuffs('Harpy Queen');
 			//if (hasPerk(PerkLib.TitanicStrength)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(tallness/2))}, 'Titanic Strength', { text: 'Titanic Strength' });
 			//if (!hasPerk(PerkLib.TitanicStrength) && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');

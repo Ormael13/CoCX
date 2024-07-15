@@ -269,6 +269,8 @@ public class Changelog extends BaseContent
 			outputText("-New consumable (by Ormael / all text written by Reverse Time Traveler): Demonize Me. Obtained from hidden compartment in Factory. Effects: Forcefully turn person using into true demon. (giving Soulless perk and Lethicite consumable)\n");
 			outputText("-New event perk: Covenant of the spirits. Gained by having naming ceremony at Wood Elfs village. Effects: Your shared soul with the sacred tree halves your soulforce but doubles your mana and fatigue. ");
 			outputText("This connection greatly weakens your ability to control fire but reinforces your mastery over earth, wind and water. Furthermore your natural attunement and improved magical circulation allows you to add half of your intelligence to your speed score.\n");
+			outputText("-Dao of Elements now count toward asc point gains. Stats have added new subsection of predictions fo ascension perk points labeled Masteries (weapon + elemental masteries) and subsection for only Elemental masteries.\n");
+			outputText("-New event perk: Harpy Queen. Gained by giving birth to 20+ harpies. Effects: As a harpy or harpy subtype increase toughness speed and libido based on the ammount of harpy children you gave birth to.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -281,8 +283,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//New mutation perk: Human Parathyroid Glands (Final Form). Req. Human Parathyroid Glands (Evolved) and lvl 90+. Effects: Increases self healing by 40 * level HP in combat and twice more out of combat. 8 * level HP Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -294,7 +294,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
 			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//New mutation perk: Human Parathyroid Glands (Final Form). Req. Human Parathyroid Glands (Evolved) and lvl 90+. Effects: Increases self healing by 40 * level HP in combat and twice more out of combat. 8 * level HP Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Dracula/lina PC unable to find get ghoul if they not learned this as normal Vampire, unable to buy manual for 1st atk: f. swords, Arigean Princess PC not been fully immune to TF-ing like other perm races, Weresharks not having their stats changing according to moon phase or boosted during use of Crinos Shape, Phoenix TF adding mutagen penatly instead of stat curse, ");
