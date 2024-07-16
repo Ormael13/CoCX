@@ -18,6 +18,8 @@ import classes.Scenes.Monsters.Manticore;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
+import coc.view.ButtonData;
+
 import coc.view.ButtonDataList;
 
 public class PatchouliScene extends NPCAwareContent {
@@ -143,7 +145,7 @@ public class PatchouliScene extends NPCAwareContent {
 			outputText("What you care about is punishing that cock of his and getting your revenge. You spit on his cat cock and lube it properly before aligning your cunt with it. Patchouli screeches when you forcefully impale yourself on his dick and begin to pump for his boy milk. His barbs caress your walls in just the perfect way.\n\n");
 			outputText("\"<i>Please.. not so rough, my cock hurts!</i>\"\n\n");
 			outputText("He could at least pretend he likes it, you’re already are very kind, granting him the right to even get raped in the first place instead of straight out killing him. Soon, you find yourself on the verge of orgasm. Patchouli finally loses control of his cat cock as it twitches, filling you with kitty jizz and causing your orgasm shortly after.\n\n");
-			outputText("You keep milking the prankster for a few hours until he is passed out. Then bring him back to your camp and tie him to a tree\n\n");
+			outputText("You keep milking the prankster for a few hours until he is passed out. Then bring him back to your camp and tie him to a tree");
 			if (camp.getCampPopulation() >= 2)
 				outputText(", leaving one of your friends to watch over him at all time");
 			outputText(".\n\n");
@@ -382,7 +384,7 @@ public class PatchouliScene extends NPCAwareContent {
 			}
 			outputText(". However the color of her fur is clearly unnatural. Striped black on a background of purple, Patchoulie’s fur clearly does not belong on any normal cat. Her hair which used to be of the same messed up color as her fur are now divided between strands of platinum " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + " and purple, like someone whose head would feature on a deck of cards. ");
 			outputText("Her fur is hardly the only thing ‘unnatural’ about her as she almosts smile constantly, not just once in a while, with the most unsettlingly lewd grin she can muster. Patchoulie’s latest joy of late is to make you as emotionally uncomfortable and guilty as she can before sex. She’s currently laid back on a tree branch, her green cat eyes observing you with interest, her tail twitching every now and then with the infinite patience of someone up to no good.\n\n");
-			outputText("\"<i>Nya, having a good view [name]? Feel free to admire me all you like I reaaaaally love being looked at. Especially when it's by you. Oh, you are such an irredeemable pervert.</i>\"\n\n");
+			outputText("\"<i>Nya, having a good view [name]? Feel free to admire me all you like, I reaaaaally love being looked at. Especially when it's by you. Oh, you are such an irredeemable pervert.</i>\"\n\n");
 			outputText("Gosh the worst is she’s bloody right. You indeed have been having short glances at her " + Appearance.breastCup(flags[kFLAGS.PATCHOULI_CUP_SIZE]) + " breasts and constantly dripping pussy");
 			if (flags[kFLAGS.PATCHOULI_COCK] > 0) {
 				outputText(", what of her " + flags[kFLAGS.PATCHOULI_COCK] + " inch " + flags[kFLAGS.PATCHOULI_COCK_TYPE] + " cock");
@@ -570,15 +572,17 @@ public class PatchouliScene extends NPCAwareContent {
 	private function patchouleGiveItem():void {
 		var buttons:ButtonDataList = new ButtonDataList();
 
-		function itemButton(item:ItemType, disable:Boolean = false):void {
-			buttons.add(item.shortName, curry(giveItem, item)).disableIf(!player.hasItem(item) || disable)
+		function itemButton(item:ItemType):ButtonData {
+			return buttons.add(item.shortName, curry(giveItem, item)).disableIf(!player.hasItem(item), "You don't have any!");
 		}
 
-		itemButton(consumables.P_DRAFT, flags[kFLAGS.PATCHOULI_COCK] >= 20);
-		itemButton(consumables.W_FRUIT);
-		itemButton(consumables.P_S_MLK, flags[kFLAGS.PATCHOULI_CUP_SIZE] >= 29);
-		itemButton(consumables.PINKEGG, flags[kFLAGS.PATCHOULI_COCK] <= 0);
-		itemButton(consumables.REDUCTO, (flags[kFLAGS.PATCHOULI_CUP_SIZE] <= 5 || flags[kFLAGS.PATCHOULI_COCK] <= 6));
+		itemButton(consumables.P_DRAFT).disableIf(flags[kFLAGS.PATCHOULI_COCK] >= 20, "Her cock is too big!");
+		itemButton(consumables.W_FRUIT).hint("Makes her cock feline")
+				.disableIf(flags[kFLAGS.PATCHOULI_COCK] <= 0, "She doesn't have a cock")
+				.disableIf(flags[kFLAGS.PATCHOULI_COCK_TYPE] == "feline", "Her cock is already feline.");
+		itemButton(consumables.P_S_MLK);
+		itemButton(consumables.PINKEGG).hint("Removes the cock").disableIf(flags[kFLAGS.PATCHOULI_COCK] <= 0);
+		itemButton(consumables.REDUCTO).disableIf(flags[kFLAGS.PATCHOULI_CUP_SIZE] <= 5 || flags[kFLAGS.PATCHOULI_COCK] <= 6, "Nothing to shrink");
 		buttons.add("Hair Dye", giveHairDye);
 		submenu(buttons, patchouleMainCampMenu);
 

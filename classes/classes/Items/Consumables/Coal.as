@@ -17,10 +17,11 @@ package classes.Items.Consumables
 		override public function useItem():Boolean
 		{
 			var changes:Number = 0;
+			var skipHeat:Boolean = player.hasCock() && !player.inRut && rand(2);
 			clearOutput();
 			outputText("You handle the coal rocks experimentally and they crumble to dust in your hands!  You cough as you breathe in the cloud, sputtering and wheezing.  After a minute of terrible coughing, you recover and realize there's no remaining trace of the rocks, not even a sooty stain on your hands!");
 			//Try to go into intense heat
-			if(player.goIntoHeat(true, 2)) {
+			if (!skipHeat && player.goIntoHeat(true, 2)) {
 				changes++;
 			}
 			//Males go into rut

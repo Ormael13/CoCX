@@ -413,7 +413,7 @@ public class Appearance extends Utils
 		public static function cockDescription(cockType:CockTypesEnum, length:Number, girth:Number, lust:int = 50, cumQ:Number = 10, isPierced:Boolean = false, hasSock:Boolean = false, isGooey:Boolean = false, isGhastly:Boolean = false): String {
 			if (rand(2) == 0) {
 				if(cockType == CockTypesEnum.HUMAN) return cockAdjective(cockType, length, girth, lust, cumQ, isPierced, hasSock, isGooey, isGhastly) + " " + cockNoun(cockType);
-				else return cockAdjective(cockType, length, girth, lust, cumQ, isPierced, hasSock, isGooey, isGhastly) + ", " + cockNoun(cockType);
+				else return cockAdjective(cockType, length, girth, lust, cumQ, isPierced, hasSock, isGooey, isGhastly) + " " + cockNoun(cockType);
 			}
 			return cockNoun(cockType);
 		}
