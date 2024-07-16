@@ -1440,7 +1440,7 @@ private function tenderTakeItUpTheAssFromUrta():void {
 			outputText("  Urta winks and guides ");
 			if(cocks > 1) outputText("one of ");
 			outputText("your [cocks] between her tits");
-			if(player.cocks[0].cockLength >= 20 && player.cocks[0].cockLength <= 28) outputText(", even taking time to lick and suck on the head");
+			if(player.cocks[0].cockLength >= 20) outputText(", even taking time to lick and suck on the head");
 			outputText(".");
 			outputText("  She begins giving you a slow tit-fuck, trying to encourage you to pick up the pace and start riding her.  It does the trick as your " + hipDescript() + " start rocking on their own in reaction to her efforts.  She licks harder, and you reward her by lifting yourself up and sliding back down.  Her massive girth squeezes a squirt of pre-cum from your prostate with every few strokes, splattering it on her muzzle.");
 		}

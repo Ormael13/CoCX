@@ -832,6 +832,7 @@ public class SceneHunter extends BaseContent {
     }
 
     private function recallScenes_scylla():void {
+        menu();
         if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 1)
             addButton(0, "Round 1", SceneLib.telAdre.scylla.helpScylla);
         if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 2)

@@ -143,7 +143,7 @@ public class PatchouliScene extends NPCAwareContent {
 			outputText("What you care about is punishing that cock of his and getting your revenge. You spit on his cat cock and lube it properly before aligning your cunt with it. Patchouli screeches when you forcefully impale yourself on his dick and begin to pump for his boy milk. His barbs caress your walls in just the perfect way.\n\n");
 			outputText("\"<i>Please.. not so rough, my cock hurts!</i>\"\n\n");
 			outputText("He could at least pretend he likes it, you’re already are very kind, granting him the right to even get raped in the first place instead of straight out killing him. Soon, you find yourself on the verge of orgasm. Patchouli finally loses control of his cat cock as it twitches, filling you with kitty jizz and causing your orgasm shortly after.\n\n");
-			outputText("You keep milking the prankster for a few hours until he is passed out. Then bring him back to your camp and tie him to a tree\n\n");
+			outputText("You keep milking the prankster for a few hours until he is passed out. Then bring him back to your camp and tie him to a tree");
 			if (camp.getCampPopulation() >= 2)
 				outputText(", leaving one of your friends to watch over him at all time");
 			outputText(".\n\n");
