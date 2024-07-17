@@ -67,8 +67,8 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Mental Bastion. Gained by having 40 training sessions with Tyrantia. Effects: The effects of Tyrant State are doubled: While active, you take 30% less damage from magic. You count as either pure or corrupt (whichever is better) for equipment. (Pure for the Beautiful weapons etc, corrupt for corrupt weapons)\n");
 			outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP / Lust effect of 10% magnitude.\n");
 			outputText("-New mutation perk: Equine Muscle. Req. having free musculature mutation slot, one of races: horse-morph, centuar, unicorn, bicorn, alicorn, nightmare. Effects: +25% to all Physical Ability damage. Gallop cost 10% less fatigue.\n");
-			outputText("-New mutation perk: Fiendish Balls. Req. having free metabolism mutation slot, demon race. Effects: Increase Virility by 40%.\n");
-			outputText("-New mutation perk: Fiendish Metabolism. Req. having free metabolism mutation slot, demon race. Effects: You may no longer gain nourishment from anything short of cum, milk and girl juice. If you have the demonic hunger perk, gain a stacking bonus of 10% to tease damage up to 50%.\n");
+			outputText("-New mutation perk: Fiendish Balls. Req. having free metabolism mutation slot, demon or imp race. Effects: Increase Virility by 40%.\n");
+			outputText("-New mutation perk: Fiendish Metabolism. Req. having free metabolism mutation slot, demon or imp race. Effects: You may no longer gain nourishment from anything short of cum, milk and girl juice. If you have the demonic hunger perk, gain a stacking bonus of 10% to tease damage up to 50%.\n");
 			outputText("-New mutation perk: Fiendish Ovaries. Req. having free metabolism mutation slot, demon race. Effects: Increase Fertility by 40%.\n");
 			outputText("-New mutation perk: Goblin Ovaries. Req. having free ovaries mutation slot, one of goblinoid races. Effects: Increase fertility rating by 10, While pregnant increase total libido by 10%. Double the number of kids you birth.\n");
 			outputText("-New mutation perk: Equine Muscle (Primitive). Req. Equine Muscle and lvl 30+. Effects: +50% to all Physical Ability damage. Gallop cost 20% less fatigue. Physical ability consumes 5% less fatigue.\n");
@@ -290,16 +290,16 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New mutation perk: Human Parathyroid Glands (Final Form). Req. Human Parathyroid Glands (Evolved) and lvl 90+. Effects: Increases self healing by 40 * level HP in combat and twice more out of combat. 8 * level HP Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.
 			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
