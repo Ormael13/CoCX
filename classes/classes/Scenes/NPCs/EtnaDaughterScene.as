@@ -65,16 +65,16 @@ public class EtnaDaughterScene extends NPCAwareContent implements TimeAwareInter
 	}
 
 	public function etnaDaughterFollower():Boolean {
-	return EtnaDaughterAge > 0;
-}
+		return EtnaDaughterAge > 0;
+	}
 
-public static function incestEnabled():Boolean {
-	return CoC_Settings.debugBuild; //load incest only for "debug" builds to avoid it popping up on the forum... maybe we should try the full ver too?
-}
+	public static function incestEnabled():Boolean {
+		return CoC_Settings.debugBuild; //load incest only for "debug" builds to avoid it popping up on the forum... maybe we should try the full ver too?
+	}
 
-private function championRef():String {
-	return player.mf("Daddy","Mom");
-}
+	private function championRef():String {
+		return player.mf("Daddy","Mom");
+	}
 
 //[NEXT]
 public function nameEtnaDaughter():void {

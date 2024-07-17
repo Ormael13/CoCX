@@ -5116,6 +5116,8 @@ public function rebirthFromBadEnd():void {
 		performancePointsPrediction += possibleToGainAscensionPointsQuests();
 		//Camp structures
 		performancePointsPrediction += possibleToGainAscensionPointsCampStructures();
+		//Masteries
+		performancePointsPrediction += possibleToGainAscensionPointsMasteries();
 		//Children
 		performancePointsPrediction += possibleToGainAscensionPointsChildren();
 		//Various Level trackers
@@ -5130,7 +5132,6 @@ public function rebirthFromBadEnd():void {
 			performancePointsPrediction += 25;
 		}
 		else performancePointsPrediction += player.teaseLevel;
-        performancePointsPrediction += getTotalWeaponMasteryLevels();
 		performancePointsPrediction = Math.round(performancePointsPrediction);
 		return performancePointsPrediction;
 	}
@@ -5199,6 +5200,27 @@ public function rebirthFromBadEnd():void {
 		childPerformance += ((DriderTown.BelisaKids / 4) + (DriderTown.LilyKidsPC / 4) + ((DriderTown.TyrantiaFemaleKids + DriderTown.TyrantiaMaleKids) / 4) + SceneLib.ayaneFollower.ayaneChildren() + flags[kFLAGS.LOPPE_KIDS]);
 		performancePointsPredictionChildren += Math.sqrt(childPerformance);
 		return performancePointsPredictionChildren;
+	}
+
+	public function possibleToGainAscensionPointsDaoOfElements():Number {
+		var pTGAPDoE:Number = 0;
+		if (player.hasStatusEffect(StatusEffects.DaoOfFire)) pTGAPDoE += player.statusEffectv2(StatusEffects.DaoOfFire);
+		if (player.hasStatusEffect(StatusEffects.DaoOfIce)) pTGAPDoE += player.statusEffectv2(StatusEffects.DaoOfIce);
+		if (player.hasStatusEffect(StatusEffects.DaoOfLightning)) pTGAPDoE += player.statusEffectv2(StatusEffects.DaoOfLightning);
+		if (player.hasStatusEffect(StatusEffects.DaoOfDarkness)) pTGAPDoE += player.statusEffectv2(StatusEffects.DaoOfDarkness);
+		if (player.hasStatusEffect(StatusEffects.DaoOfPoison)) pTGAPDoE += player.statusEffectv2(StatusEffects.DaoOfPoison);
+		if (player.hasStatusEffect(StatusEffects.DaoOfWind)) pTGAPDoE += player.statusEffectv2(StatusEffects.DaoOfWind);
+		if (player.hasStatusEffect(StatusEffects.DaoOfBlood)) pTGAPDoE += player.statusEffectv2(StatusEffects.DaoOfBlood);
+		if (player.hasStatusEffect(StatusEffects.DaoOfWater)) pTGAPDoE += player.statusEffectv2(StatusEffects.DaoOfWater);
+		if (player.hasStatusEffect(StatusEffects.DaoOfEarth)) pTGAPDoE += player.statusEffectv2(StatusEffects.DaoOfEarth);
+        if (player.hasStatusEffect(StatusEffects.DaoOfAcid)) pTGAPDoE += player.statusEffectv2(StatusEffects.DaoOfAcid);
+		return pTGAPDoE;
+	}
+	public function possibleToGainAscensionPointsMasteries():Number {
+		var pTGAPM:Number = 0;
+		pTGAPM += possibleToGainAscensionPointsDaoOfElements();
+		pTGAPM += getTotalWeaponMasteryLevels();
+		return pTGAPM;
 	}
 
     public static function getTotalWeaponMasteryLevels():Number{

@@ -2,6 +2,7 @@ package classes {
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Dungeons.D3.IncubusMechanicScenes;
 import classes.Scenes.Dungeons.DemonLab;
+import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.JojoScene;
@@ -715,6 +716,9 @@ public class SceneHunter extends BaseContent {
         if (flags[kFLAGS.TIMES_EGGED_IN_EXGARTUAN] > 0 && player.hasCock())
             addButton(6, "EggExgartuan", SceneLib.masturbation.eggExgartuan)
                 .hint("Your small egg-fight with your dick-demon.");
+        // Turkey holiday encounter
+        if (flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] > 0) addButton(7, "Turkey-1", SceneLib.holidays.datTurkeyRumpMeeting)
+                .hint("The weird turkey encounter");
 
         addButton(8, "Places", recallScenes_places);
         addButton(9, "Dungeons", recallScenes_dungeons);
@@ -832,6 +836,7 @@ public class SceneHunter extends BaseContent {
     }
 
     private function recallScenes_scylla():void {
+        menu();
         if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 1)
             addButton(0, "Round 1", SceneLib.telAdre.scylla.helpScylla);
         if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 2)

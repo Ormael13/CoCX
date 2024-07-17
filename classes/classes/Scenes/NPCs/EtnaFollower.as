@@ -967,7 +967,7 @@ public function etnaPussyOpera2():void
 	if (player.cumQ() < 2000) player.cumMultiplier += 4;
 	if (player.cumQ() < 10000) player.cumMultiplier += 2;
 	player.sexReward("vaginalFluids","Dick");
-	etnaKnockupAttempt();
+	if (!pregnancy.isPregnant && EtnaFertile && !followerEtnaKid()) etnaKnockupAttempt();
 	if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] < 3) flags[kFLAGS.ETNA_TALKED_ABOUT_HER] = 3;
 }
 
@@ -1171,7 +1171,6 @@ private function etnaAfterInfidelity():void {
 }
 
 public function etnaKnockupAttempt():void {
-	if (pregnancy.isPregnant || !EtnaFertile || EtnaDaughterScene.EtnaDaughterAge > 0) return;
 	if (rand(8) == 0 || player.cumQ() > rand(3000) || player.virilityQ() >= 0.7 || player.hasPerk(PerkLib.PilgrimsBounty)) {
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_ETNA);
 		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Etna is pregnant!</b>");

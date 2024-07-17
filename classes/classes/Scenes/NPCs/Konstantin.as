@@ -1131,7 +1131,7 @@ public class Konstantin extends NPCAwareContent
 			clearOutput();
 			var x:int = player.cockThatFits(50, "length");
 			outputText("Lying on bed next of the bear-morph, the arousal running wild through your loins makes its presence painfully obvious as your [cock] arises at full length. Seems like having his large furred body rubbing against yours naked is too much. While still locked in the furred embrace, a familiar feeling deep down your balls appears, you rock hard erection bubbles pre in excitement. Konstantin notices that, and after giving it some tentative strokes with one of his huge hands, he offers:\n\n");
-			outputText("\"<i>You’re quite pent up, " + player.mf("boy", "girl") + ". Or is I’m too much to handle?</i>\" he light-heartedly jokes, his hand still rubbing your cock.\n\n");
+			outputText("\"<i>You’re quite pent up, " + player.mf("boy", "girl") + ". Or am I too much to handle?</i>\" he light-heartedly jokes, his hand still rubbing your cock.\n\n");
 			outputText("Your only answer is an overstimulated gasp.\n\n");
 			outputText("\"<i>Then we’ll have to fix that.</i>\" he says with a toothy smile. \"<i>Besides, ");
 			if (player.cocks[x].cockLength >= 12) outputText("it’s hard to look at this monster without having the desire of choke on it");

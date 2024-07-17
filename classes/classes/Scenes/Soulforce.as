@@ -420,7 +420,7 @@ public class Soulforce extends BaseContent
 			dao = rand(6);
 			switch(daoname){
 				case "Fire":
-					if (player.hasAnyPerk(PerkLib.FireAffinity, PerkLib.AffinityIgnis)) dao += 1 + rand(3);
+					if (player.hasAnyPerk(PerkLib.FireAffinity, PerkLib.AffinityIgnis) && !player.hasPerk(PerkLib.CovenantOfTheSpirits)) dao += 1 + rand(3);
 					break;
 				case "Ice":
 					if (player.hasAnyPerk(PerkLib.ColdAffinity, PerkLib.ColdMastery)) dao += 1 + rand(3);
@@ -435,16 +435,25 @@ public class Soulforce extends BaseContent
 					if (player.hasPerk(PerkLib.PoisonAffinity)) dao += 1 + rand(3);
 					break;
 				case "Wind":
-					if (player.hasAnyPerk(PerkLib.WindAffinity, PerkLib.AffinitySylph)) dao += 1 + rand(3);
+					if (player.hasAnyPerk(PerkLib.WindAffinity, PerkLib.AffinitySylph)) {
+						dao += 1 + rand(3);
+						if (player.hasPerk(PerkLib.CovenantOfTheSpirits)) dao += 1 + rand(9);
+					}
 					break;
 				case "Blood":
 					if (player.hasAnyPerk(PerkLib.BloodAffinity, PerkLib.BloodMastery, PerkLib.WayOfTheBlood)) dao += 1 + rand(3);
 					break;
 				case "Water":
-					if (player.hasAnyPerk(PerkLib.WaterAffinity, PerkLib.AffinityUndine)) dao += 1 + rand(3);
+					if (player.hasAnyPerk(PerkLib.WaterAffinity, PerkLib.AffinityUndine)) {
+						dao += 1 + rand(3);
+						if (player.hasPerk(PerkLib.CovenantOfTheSpirits)) dao += 1 + rand(9);
+					}
 					break;
 				case "Earth":
-					if (player.hasAnyPerk(PerkLib.EarthAffinity, PerkLib.AffinityGnome)) dao += 1 + rand(3);
+					if (player.hasAnyPerk(PerkLib.EarthAffinity, PerkLib.AffinityGnome)) {
+						dao += 1 + rand(3);
+						if (player.hasPerk(PerkLib.CovenantOfTheSpirits)) dao += 1 + rand(9);
+					}
 					break;
 				case "Acid":
 					if (player.hasPerk(PerkLib.AcidAffinity)) dao += 1 + rand(3);

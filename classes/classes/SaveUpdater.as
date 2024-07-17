@@ -2665,7 +2665,20 @@ public class SaveUpdater extends NPCAwareContent {
 					player.createPerk(PerkLib.DragonPoisonousSapBreath, 0, 0, 0, player.perkv4(PerkLib.DragonPoisonBreath));
 					player.removePerk(PerkLib.DragonPoisonBreath);
 				}
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.53) {
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.53;
+				if (player.hasPerk(PerkLib.BlessingOfTheAncestorTree) && !player.hasPerk(PerkLib.CovenantOfTheSpirits)) {
+					outputText("\n\nOnly today promotion for Wood Elfs. TWO perks in price of ONE!!!");
+					player.createPerk(PerkLib.CovenantOfTheSpirits, 0, 0, 0, 0);
+				}
 			}/*
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.54) {
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.54;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.55) {
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.55;
+			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.60) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.60;
 			}

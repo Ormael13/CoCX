@@ -56,10 +56,9 @@ public function greetHeckel():void {
 //First time Sex
 private function heckelTraining():void {
 	clearOutput();
-	var dom:Function = null;
 	//Rejection
 	//Tone not high enough or fat too high
-	if(player.tone < 60) {
+	if(!flags[kFLAGS.LOW_STANDARDS_FOR_ALL] && player.tone < 60) {
 		outputText("You tell Heckel that you're looking for a training partner, and she makes no attempt to hide her gaze as she looks you up and down.  When she's finished, she shakes her head and picks up her pace on the track.  \"<i>I don't think so, [name].  Maybe if you spend some more time around here, you'll find your own way into the swing of things.  From what I'm seeing, there's no way you can handle what I've got.</i>\"\n\n");
 
 		outputText("You open your mouth to reply, but the hyena has already started another lap.  Deciding it isn't worth it, you turn away indignantly.");
