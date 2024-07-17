@@ -466,7 +466,7 @@ public class Soulforce extends BaseContent
 			if (!clone && !elementalBody) outputText("After the session ends you managed to progress in Dao of "+daoname+".");
 			if (player.hasStatusEffect(statusEffect)) {
 				player.addStatusValue(statusEffect, 1, dao);
-				var thres:Array = [20, 40, 60, 100, 140, 180, 220, 260, 300];
+				var thres:Array = [20, 40, 60, 100, 140, 180, 220, 260, 300, 400, 500, 600];
 				var curLevel:int = player.statusEffectv2(statusEffect);
 				if (curLevel < thres.length) {
 					if (player.statusEffectv1(statusEffect) >= thres[curLevel]) {
@@ -485,8 +485,8 @@ public class Soulforce extends BaseContent
 	}
 
 	public function highestLayerOfDaoComprehension():Number {
-		var hLrODC:Number = 1;
-		hLrODC += (player.perkv2(PerkLib.JobSoulCultivator) - 4);
+		var hLrODC:Number = 3;
+		hLrODC += (player.perkv2(PerkLib.JobSoulCultivator) - 3);
 		return hLrODC;
 	}
 
@@ -968,16 +968,16 @@ public class Soulforce extends BaseContent
 			addButtonDisabled(9, "Acid", "You don’t have enough demonic energy to improve this ability. (Req. "+deCost(200)+")");
 		}
 		else {
-			addButtonIfTrue(0, "Fire", curry(demonicEnergyCorruptElementImprove, "Fire"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfFire) < 9);
-			addButtonIfTrue(1, "Ice", curry(demonicEnergyCorruptElementImprove, "Ice"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfIce) < 9);
-			addButtonIfTrue(2, "Lightning", curry(demonicEnergyCorruptElementImprove, "Lightning"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfLightning) < 9);
-			addButtonIfTrue(3, "Darkness", curry(demonicEnergyCorruptElementImprove, "Darkness"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfDarkness) < 9);
-			addButtonIfTrue(4, "Poison", curry(demonicEnergyCorruptElementImprove, "Poison"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfPoison) < 9);
-			addButtonIfTrue(5, "Wind", curry(demonicEnergyCorruptElementImprove, "Wind"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfWind) < 9);
-			addButtonIfTrue(6, "Blood", curry(demonicEnergyCorruptElementImprove, "Blood"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfBlood) < 9);
-			addButtonIfTrue(7, "Water", curry(demonicEnergyCorruptElementImprove, "Water"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfWater) < 9);
-			addButtonIfTrue(8, "Earth", curry(demonicEnergyCorruptElementImprove, "Earth"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfEarth) < 9);
-			addButtonIfTrue(9, "Acid", curry(demonicEnergyCorruptElementImprove, "Acid"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfAcid) < 9);
+			addButtonIfTrue(0, "Fire", curry(demonicEnergyCorruptElementImprove, "Fire"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfFire) < 12);
+			addButtonIfTrue(1, "Ice", curry(demonicEnergyCorruptElementImprove, "Ice"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfIce) < 12);
+			addButtonIfTrue(2, "Lightning", curry(demonicEnergyCorruptElementImprove, "Lightning"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfLightning) < 12);
+			addButtonIfTrue(3, "Darkness", curry(demonicEnergyCorruptElementImprove, "Darkness"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfDarkness) < 12);
+			addButtonIfTrue(4, "Poison", curry(demonicEnergyCorruptElementImprove, "Poison"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfPoison) < 12);
+			addButtonIfTrue(5, "Wind", curry(demonicEnergyCorruptElementImprove, "Wind"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfWind) < 12);
+			addButtonIfTrue(6, "Blood", curry(demonicEnergyCorruptElementImprove, "Blood"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfBlood) < 12);
+			addButtonIfTrue(7, "Water", curry(demonicEnergyCorruptElementImprove, "Water"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfWater) < 12);
+			addButtonIfTrue(8, "Earth", curry(demonicEnergyCorruptElementImprove, "Earth"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfEarth) < 12);
+			addButtonIfTrue(9, "Acid", curry(demonicEnergyCorruptElementImprove, "Acid"), "You can't improve this ability any further.", player.statusEffectv2(StatusEffects.DaoOfAcid) < 12);
 		}
 		addButton(14, "Back", accessDemonicEnergyMenu);
 	}
