@@ -50,8 +50,8 @@ public class FiendishBallsMutation extends IMutationPerkType
                         return player.femininity <= 5;
                     }, "5- feminity")
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.racialScore(Races.DEMON) > 14;
-                    }, "Demon race (15+)");
+                        return (player.racialScore(Races.DEMON) > 14 || player.racialScore(Races.IMP) > 8);
+                    }, "Demon race (15+) or Imp Race (9+)");
                 }
                 else{
                     var pLvl:int = pTier * 30;

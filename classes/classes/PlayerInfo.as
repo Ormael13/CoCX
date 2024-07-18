@@ -1476,7 +1476,10 @@ public class PlayerInfo extends BaseContent {
 		if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor) || player.hasPerk(PerkLib.Soulless)) {
 			if (player.hasStatusEffect(StatusEffects.DaoOfFire)) {
 				masteryStats += "<b>Major Dao of Fire:</b>  ";
-				if (player.statusEffectv2(StatusEffects.DaoOfFire) == 9) masteryStats += "9th layer (+150% dmg, +60% resistance)";
+				if (player.statusEffectv2(StatusEffects.DaoOfFire) == 12) masteryStats += "12th layer (+300% dmg, +90% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfFire) == 11) masteryStats += "11th layer (+250% dmg, +80% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfFire) == 10) masteryStats += "10th layer (+200% dmg, +70% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfFire) == 9) masteryStats += "9th layer (+150% dmg, +60% resistance)";
 				else if (player.statusEffectv2(StatusEffects.DaoOfFire) == 8) masteryStats += "8th layer (+130% dmg, +50% resistance)";
 				else if (player.statusEffectv2(StatusEffects.DaoOfFire) == 7) masteryStats += "7th layer (+110% dmg, +40% resistance)";
 				else if (player.statusEffectv2(StatusEffects.DaoOfFire) == 6) masteryStats += "6th layer (+90% dmg, +30% resistance)";
@@ -1490,7 +1493,10 @@ public class PlayerInfo extends BaseContent {
 			}
 			if (player.hasStatusEffect(StatusEffects.DaoOfIce)) {
 				masteryStats += "<b>Major Dao of Ice:</b>  ";
-				if (player.statusEffectv2(StatusEffects.DaoOfIce) == 9) masteryStats += "9th layer (+150% dmg, +60% resistance)";
+				if (player.statusEffectv2(StatusEffects.DaoOfIce) == 12) masteryStats += "12th layer (+300% dmg, +90% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfIce) == 11) masteryStats += "11th layer (+250% dmg, +80% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfIce) == 10) masteryStats += "10th layer (+200% dmg, +70% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfIce) == 9) masteryStats += "9th layer (+150% dmg, +60% resistance)";
 				else if (player.statusEffectv2(StatusEffects.DaoOfIce) == 8) masteryStats += "8th layer (+130% dmg, +50% resistance)";
 				else if (player.statusEffectv2(StatusEffects.DaoOfIce) == 7) masteryStats += "7th layer (+110% dmg, +40% resistance)";
 				else if (player.statusEffectv2(StatusEffects.DaoOfIce) == 6) masteryStats += "6th layer (+90% dmg, +30% resistance)";
@@ -1504,7 +1510,10 @@ public class PlayerInfo extends BaseContent {
 			}
 			if (player.hasStatusEffect(StatusEffects.DaoOfLightning)) {
 				masteryStats += "<b>Major Dao of Lightning:</b>  ";
-				if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 9) masteryStats += "9th layer (+150% dmg, +60% resistance)";
+				if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 12) masteryStats += "12th layer (+300% dmg, +90% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 11) masteryStats += "11th layer (+250% dmg, +80% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 10) masteryStats += "10th layer (+200% dmg, +70% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 9) masteryStats += "9th layer (+150% dmg, +60% resistance)";
 				else if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 8) masteryStats += "8th layer (+130% dmg, +50% resistance)";
 				else if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 7) masteryStats += "7th layer (+110% dmg, +40% resistance)";
 				else if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 6) masteryStats += "6th layer (+90% dmg, +30% resistance)";
@@ -1518,7 +1527,10 @@ public class PlayerInfo extends BaseContent {
 			}
 			if (player.hasStatusEffect(StatusEffects.DaoOfDarkness)) {
 				masteryStats += "<b>Major Dao of Darkness:</b>  ";
-				if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 9) masteryStats += "9th layer (+150% dmg, +60% resistance)";
+				if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 12) masteryStats += "12th layer (+300% dmg, +90% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 11) masteryStats += "11th layer (+250% dmg, +80% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 10) masteryStats += "10th layer (+200% dmg, +70% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 9) masteryStats += "9th layer (+150% dmg, +60% resistance)";
 				else if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 8) masteryStats += "8th layer (+130% dmg, +50% resistance)";
 				else if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 7) masteryStats += "7th layer (+110% dmg, +40% resistance)";
 				else if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 6) masteryStats += "6th layer (+90% dmg, +30% resistance)";
@@ -1532,7 +1544,10 @@ public class PlayerInfo extends BaseContent {
 			}
 			if (player.hasStatusEffect(StatusEffects.DaoOfPoison)) {
 				masteryStats += "<b>Major Dao of Poison:</b>  ";
-				if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 9) masteryStats += "9th layer (+150% dmg, +60% resistance)";
+				if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 12) masteryStats += "12th layer (+300% dmg, +90% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 11) masteryStats += "11th layer (+250% dmg, +80% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 10) masteryStats += "10th layer (+200% dmg, +70% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 9) masteryStats += "9th layer (+150% dmg, +60% resistance)";
 				else if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 8) masteryStats += "8th layer (+130% dmg, +50% resistance)";
 				else if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 7) masteryStats += "7th layer (+110% dmg, +40% resistance)";
 				else if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 6) masteryStats += "6th layer (+90% dmg, +30% resistance)";
@@ -1546,7 +1561,10 @@ public class PlayerInfo extends BaseContent {
 			}
 			if (player.hasStatusEffect(StatusEffects.DaoOfWind)) {
 				masteryStats += "<b>Minor Dao of Wind:</b>  ";
-				if (player.statusEffectv2(StatusEffects.DaoOfWind) == 9) masteryStats += "9th layer (+150% dmg, +60% resistance)";
+				if (player.statusEffectv2(StatusEffects.DaoOfWind) == 12) masteryStats += "12th layer (+300% dmg, +90% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfWind) == 11) masteryStats += "11th layer (+250% dmg, +80% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfWind) == 10) masteryStats += "10th layer (+200% dmg, +70% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfWind) == 9) masteryStats += "9th layer (+150% dmg, +60% resistance)";
 				else if (player.statusEffectv2(StatusEffects.DaoOfWind) == 8) masteryStats += "8th layer (+130% dmg, +50% resistance)";
 				else if (player.statusEffectv2(StatusEffects.DaoOfWind) == 7) masteryStats += "7th layer (+110% dmg, +40% resistance)";
 				else if (player.statusEffectv2(StatusEffects.DaoOfWind) == 6) masteryStats += "6th layer (+90% dmg, +30% resistance)";
@@ -1560,7 +1578,10 @@ public class PlayerInfo extends BaseContent {
 			}
 			if (player.hasStatusEffect(StatusEffects.DaoOfBlood)) {
 				masteryStats += "<b>Minor Dao of Blood:</b>  ";
-				if (player.statusEffectv2(StatusEffects.DaoOfBlood) == 9) masteryStats += "9th layer (+150% dmg)";//, +60% resistance
+				if (player.statusEffectv2(StatusEffects.DaoOfBlood) == 12) masteryStats += "12th layer (+300% dmg)";//, +90% resistance
+				else if (player.statusEffectv2(StatusEffects.DaoOfBlood) == 11) masteryStats += "11th layer (+250% dmg)";//, +80% resistance
+				else if (player.statusEffectv2(StatusEffects.DaoOfBlood) == 10) masteryStats += "10th layer (+200% dmg)";//, +70% resistance
+				else if (player.statusEffectv2(StatusEffects.DaoOfBlood) == 9) masteryStats += "9th layer (+150% dmg)";//, +60% resistance
 				else if (player.statusEffectv2(StatusEffects.DaoOfBlood) == 8) masteryStats += "8th layer (+130% dmg)";//, +50% resistance
 				else if (player.statusEffectv2(StatusEffects.DaoOfBlood) == 7) masteryStats += "7th layer (+110% dmg)";//, +40% resistance
 				else if (player.statusEffectv2(StatusEffects.DaoOfBlood) == 6) masteryStats += "6th layer (+90% dmg)";//, +30% resistance
@@ -1574,7 +1595,10 @@ public class PlayerInfo extends BaseContent {
 			}
 			if (player.hasStatusEffect(StatusEffects.DaoOfWater)) {
 				masteryStats += "<b>Minor Dao of Water:</b>  ";
-				if (player.statusEffectv2(StatusEffects.DaoOfWater) == 9) masteryStats += "9th layer (+150% dmg, +60% resistance)";
+				if (player.statusEffectv2(StatusEffects.DaoOfWater) == 12) masteryStats += "12th layer (+300% dmg, +90% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfWater) == 11) masteryStats += "11th layer (+250% dmg, +80% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfWater) == 10) masteryStats += "10th layer (+200% dmg, +70% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfWater) == 9) masteryStats += "9th layer (+150% dmg, +60% resistance)";
 				else if (player.statusEffectv2(StatusEffects.DaoOfWater) == 8) masteryStats += "8th layer (+130% dmg, +50% resistance)";
 				else if (player.statusEffectv2(StatusEffects.DaoOfWater) == 7) masteryStats += "7th layer (+110% dmg, +40% resistance)";
 				else if (player.statusEffectv2(StatusEffects.DaoOfWater) == 6) masteryStats += "6th layer (+90% dmg, +30% resistance)";
@@ -1588,7 +1612,10 @@ public class PlayerInfo extends BaseContent {
 			}
 			if (player.hasStatusEffect(StatusEffects.DaoOfEarth)) {
 				masteryStats += "<b>Minor Dao of Earth:</b>  ";
-				if (player.statusEffectv2(StatusEffects.DaoOfEarth) == 9) masteryStats += "9th layer (+150% dmg, +60% resistance)";
+				if (player.statusEffectv2(StatusEffects.DaoOfEarth) == 12) masteryStats += "12th layer (+300% dmg, +90% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfEarth) == 11) masteryStats += "11th layer (+250% dmg, +80% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfEarth) == 10) masteryStats += "10th layer (+200% dmg, +70% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfEarth) == 9) masteryStats += "9th layer (+150% dmg, +60% resistance)";
 				else if (player.statusEffectv2(StatusEffects.DaoOfEarth) == 8) masteryStats += "8th layer (+130% dmg, +50% resistance)";
 				else if (player.statusEffectv2(StatusEffects.DaoOfEarth) == 7) masteryStats += "7th layer (+110% dmg, +40% resistance)";
 				else if (player.statusEffectv2(StatusEffects.DaoOfEarth) == 6) masteryStats += "6th layer (+90% dmg, +30% resistance)";
@@ -1602,7 +1629,10 @@ public class PlayerInfo extends BaseContent {
 			}
 			if (player.hasStatusEffect(StatusEffects.DaoOfAcid)) {
 				masteryStats += "<b>Minor Dao of Acid:</b>  ";
-				if (player.statusEffectv2(StatusEffects.DaoOfAcid) == 9) masteryStats += "9th layer (+150% dmg, +60% resistance)";
+				if (player.statusEffectv2(StatusEffects.DaoOfAcid) == 12) masteryStats += "12th layer (+300% dmg, +90% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfAcid) == 11) masteryStats += "11th layer (+250% dmg, +80% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfAcid) == 10) masteryStats += "10th layer (+200% dmg, +70% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfAcid) == 9) masteryStats += "9th layer (+150% dmg, +60% resistance)";
 				else if (player.statusEffectv2(StatusEffects.DaoOfAcid) == 8) masteryStats += "8th layer (+130% dmg, +50% resistance)";
 				else if (player.statusEffectv2(StatusEffects.DaoOfAcid) == 7) masteryStats += "7th layer (+110% dmg, +40% resistance)";
 				else if (player.statusEffectv2(StatusEffects.DaoOfAcid) == 6) masteryStats += "6th layer (+90% dmg, +30% resistance)";

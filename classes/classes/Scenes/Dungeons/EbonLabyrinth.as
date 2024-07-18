@@ -179,6 +179,13 @@ public class EbonLabyrinth extends DungeonAbstractContent {
 		addButtonIfTrue(5, "300", navigateToRoomEL300, "You not even beaten 6 bosses yet.", flags[kFLAGS.EBON_LABYRINTH_RECORD] >= 300, "Skip 300 rooms but beware of the boss at the end of this detour.");
 		addButtonIfTrue(6, "350", navigateToRoomEL350, "You not even beaten 7 bosses yet.", flags[kFLAGS.EBON_LABYRINTH_RECORD] >= 350, "Skip 350 rooms but beware of the boss at the end of this detour.");
 	}
+	
+	public function returnFromDraculinaRoom():void {
+		clearOutput();
+		outputText("You not open boss room door and return to previous room.");
+		room -= 1;
+		doNext(playerMenu);
+	}
 
     //Player menu. Doesn't start any encounters.
     //Can print stuff is called with 'true' and new direction.

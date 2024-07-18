@@ -522,6 +522,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const KnowsSoulBlast:StatusEffectType                 = mk("Knows Soul Blast");
 		public static const KnowsStalagmite:StatusEffectType                = mk("Knows Stalagmite");
 		public static const KnowsStormOfSisterhood:StatusEffectType         = mk("Knows Storm of Sisterhood");
+		public static const KnowsSunrise:StatusEffectType                   = mk("Knows Sunrise");
 		public static const KnowsTearsOfDenial:StatusEffectType             = mk("Knows Tears of Denial");
 		public static const KnowsThunderstorm:StatusEffectType              = mk("Knows Thunderstorm");
 		public static const KnowsTripleThrust:StatusEffectType              = mk("Knows Triple Thrust");

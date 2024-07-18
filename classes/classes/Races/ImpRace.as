@@ -107,6 +107,8 @@ public class ImpRace extends Race {
 				.hasPerk(PerkLib.Soulless, +4);
 
 		addMutation(IMutationsLib.BlackHeartIM);
+		addMutation(IMutationsLib.FiendishMetabolismIM);
+		addMutation(IMutationsLib.FiendishBallsIM);
 
 		buildTier(9, "imp")
 				.buffs({

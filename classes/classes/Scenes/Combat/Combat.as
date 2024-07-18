@@ -16281,6 +16281,9 @@ public function acidDamageBoostedByDao():Number {
     return boostAc;
 }
 public function daoModifier(daoLevel:Number):Number {
+    if (daoLevel == 12) return 3.0;
+    if (daoLevel == 11) return 2.5;
+    if (daoLevel == 10) return 2.0;
     if (daoLevel == 9) return 1.5;
     if (daoLevel == 8) return 1.3;
     if (daoLevel == 7) return 1.1;

@@ -20,6 +20,7 @@ import classes.Scenes.Dungeons.D3.Doppleganger;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.LivingStatue;
 import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
+import classes.Scenes.Dungeons.EbonLabyrinth.Draculina;
 import classes.Scenes.NPCs.Holli;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.Places.Mindbreaker;
@@ -3689,7 +3690,8 @@ public class MagicSpecials extends BaseCombatContent {
 		tempSpe = temp1;
 		mainView.statsView.showStatUp('spe');
 		player.buff("FoxflamePelt").addStats({spe:tempSpe}).withText("Foxflame Pelt").combatPermanent();
-		player.HP = oldHPratio*player.maxHP();
+		player.HP = oldHPratio * player.maxHP();
+		if (monster is Draculina && player.hasStatusEffect(StatusEffects.MonsterInvisible)) player.removeStatusEffect(StatusEffects.MonsterInvisible);
 		statScreenRefresh();
 		enemyAI();
 	}

@@ -1195,9 +1195,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				//Full moon
 				flags[kFLAGS.LUNA_MOON_CYCLE]++;
 				if (flags[kFLAGS.LUNA_MOON_CYCLE] > 8) flags[kFLAGS.LUNA_MOON_CYCLE] = 1;
-				if (player.hasPerk(PerkLib.Lycanthropy) || player.hasPerk(PerkLib.Vulpesthropy)) {
+				if (player.hasPerk(PerkLib.Lycanthropy) || player.hasPerk(PerkLib.Vulpesthropy) || player.hasPerk(PerkLib.Selachimorphanthropy)) {
 					var ngMult:Number = (player.newGamePlusMod() + 1);
 					var changeV:Number = 0;
+					var textA:String = "";
+					if (player.hasPerk(PerkLib.Lycanthropy)) textA = "lupine";
+					if (player.hasPerk(PerkLib.Vulpesthropy)) textA = "vulpine";
+					if (player.hasPerk(PerkLib.Selachimorphanthropy)) textA = "selachii";
 					switch (flags[kFLAGS.LUNA_MOON_CYCLE]) {
 						case 1:
 							changeV = 30;
@@ -1233,7 +1237,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						case 8:
 							changeV = 40;
 							outputText("<b>\nYou are at the peak of your strength, it's a full moon tonight and you feel yourself burning with maddening desire as you go ");
-							outputText("into " + player.mf("rut your cock hardening and dripping precum at the prospect of impregnating a bitch womb full of your " + (player.hasPerk(PerkLib.Lycanthropy)?"lupine":"vulpine") + " seeds", "heat your womb aching for the fresh semen of a virile male.") + "</b>\n.");
+							outputText("into " + player.mf("rut your cock hardening and dripping precum at the prospect of impregnating a bitch womb full of your " + textA + " seeds", "heat your womb aching for the fresh semen of a virile male.") + "</b>\n.");
 							if (player.hasCock() || (player.gender == 3 && rand(2) == 0)) player.goIntoRut(false);
 							else if (player.hasVagina()) player.goIntoHeat(false);
 							break;

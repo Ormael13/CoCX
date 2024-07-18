@@ -42,7 +42,7 @@ public class FiendishMetabolismMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireMetabolismMutationSlot()
-                    .requireRace(Races.DEMON);
+                    .requireAnyRace(Races.DEMON, Races.IMP);
                 }
                 else{
                     var pLvl:int = pTier * 30;
