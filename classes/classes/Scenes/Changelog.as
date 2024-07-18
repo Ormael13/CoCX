@@ -273,7 +273,7 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Harpy Queen. Gained by giving birth to 20+ harpies. Effects: As a harpy or harpy subtype increase toughness speed and libido based on the ammount of harpy children you gave birth to.\n");
 			outputText("-Minor fixes: Coal can randomly send you to heat OR rut, Low standard check for heckel, fixed helia corruption tolerance (Svalkash)\n");
 			outputText("-Each Dao of Element can now reach 12th layer. bonuses for reaching each of three new layers is 10% more resistance and 50% more damage.\n");
-			outputText("-\n");
+			outputText("-Added option to back form boos room in Ebon Labyrinth if it contain Draculina boss. That choice will only appear if the PC does not meet all requirements to avoid an instant bad end and therefore not have any way to deal with her most annoying (by majority consensus) ability.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
