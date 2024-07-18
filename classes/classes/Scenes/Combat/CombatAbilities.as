@@ -287,6 +287,7 @@ public class CombatAbilities {
 	public static const ElementIce:CreateElementSkill								= new CreateElementSkill("Ice", 2);
 	public static const ElementLightning:CreateElementSkill							= new CreateElementSkill("Lightning", 2);
 	public static const ElementDarkness:CreateElementSkill							= new CreateElementSkill("Darkness", 2);
+	public static const Sunrise:SunriseSkill										= new SunriseSkill();
 	public static const SoulDrain:SoulDrainSkill									= new SoulDrainSkill();
 	public static const Trance:TranceSkill											= new TranceSkill();
 	public static const VioletPupilTransformation:VioletPupilTransformationSkill	= new VioletPupilTransformationSkill();
@@ -338,6 +339,7 @@ public class CombatAbilities {
 		ElementIce,
 		ElementLightning,
 		ElementWater,
+		Sunrise,
 		SoulDrain,
 		Trance,
 		VioletPupilTransformation,

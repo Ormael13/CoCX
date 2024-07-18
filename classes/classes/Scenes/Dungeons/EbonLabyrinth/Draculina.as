@@ -25,14 +25,25 @@ use namespace CoC;
 		override public function postPlayerBusyBtnSpecial(btnSpecial1:CoCButton, btnSpecial2:CoCButton):void{
 			if (player.hasStatusEffect(StatusEffects.MonsterInvisible)) {
 				if (player.hasStatusEffect(StatusEffects.KnowsBlind) && ((!player.hasPerk(PerkLib.BloodMage) && player.mana >= 30) || (player.hasStatusEffect(StatusEffects.BloodMage) && ((player.HP + 30) > (player.minHP() + 30))))) {
-					btnSpecial1.show("Blind", dispellDarkness);
+					btnSpecial1.show("Blind", dispellDarkness1);
+				}
+				if (player.hasStatusEffect(StatusEffects.KnowsSunrise) && ((!player.hasStatusEffect(StatusEffects.BloodCultivator) && player.soulforce >= 400) || (player.hasStatusEffect(StatusEffects.BloodCultivator) && ((player.HP + 400) > (player.minHP() + 400))))) {
+					btnSpecial2.show("Sunrise", dispellDarkness2);
 				}
 			}
 		}
 		
-		public function dispellDarkness():void {
+		public function dispellDarkness1():void {
 			clearOutput();
 			outputText("You glare at point near you.  A bright flash erupts there!\n");
+			dispellDarkness(1);
+		}
+		public function dispellDarkness2():void {
+			clearOutput();
+			outputText("You point finger at spot near you.  A miniature sun appears there!\n");
+			dispellDarkness(2);
+		}
+		public function dispellDarkness(choice:Number):void {
 			outputText("The light counters the smothering darkness, breaking the spell and bringing light back the area. [Themonster], who was about to viciously attack you from behind, swiftly backs out of range and flies off.\n\n");
 			outputText("\"<i>Umph you broke free… No matter, your defeat is but a matter of time.</i>\"\n");
 			createStatusEffect(StatusEffects.Blind, Math.min(2 + player.inte / 20, 10), 0, 0, 0);
@@ -42,10 +53,16 @@ use namespace CoC;
 				createStatusEffect(StatusEffects.AbilityCooldown1, 3, 0, 0, 0);
 			}
 			EngineCore.doNext(SceneLib.combat.combatMenu);
-			if (game.player.hasStatusEffect(StatusEffects.BloodMage)) game.player.HP -= 30;
-			else game.player.mana -= 30;
-			flags[kFLAGS.SPELLS_CAST]++;
-			SceneLib.combat.spellPerkUnlock();
+			if (choice == 1) {
+				if (game.player.hasStatusEffect(StatusEffects.BloodMage)) game.player.HP -= 30;
+				else game.player.mana -= 30;
+				flags[kFLAGS.SPELLS_CAST]++;
+				SceneLib.combat.spellPerkUnlock();
+			}
+			if (choice == 2) {
+				if (game.player.hasStatusEffect(StatusEffects.BloodCultivator)) game.player.HP -= 400;
+				else game.player.soulforce -= 400;
+			}
 			EngineCore.statScreenRefresh();
             SceneLib.combat.enemyAIImpl();
 		}
@@ -157,6 +174,9 @@ use namespace CoC;
 			if (!hasStatusEffect(StatusEffects.AbilityCooldown1)) {
 				player.removeStatusEffect(StatusEffects.MonsterInvisible);
 				draculinaPerfectDark();
+			}
+			if (player.statStore.hasBuff("FoxflamePelt")) {
+				player.removeStatusEffect(StatusEffects.MonsterInvisible);
 			}
 			if (player.hasStatusEffect(StatusEffects.NagaBind)) {
 				draculinaBite();

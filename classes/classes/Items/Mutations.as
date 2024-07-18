@@ -791,6 +791,25 @@ public final class Mutations extends MutationsHelper {
             outputText("You should be more careful next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
         }
     }
+	
+    public function sunrisemanual(player:Player):void {
+        clearOutput();
+        if (player.hasPerk(PerkLib.SoulWarrior)) {
+            if (!player.hasStatusEffect(StatusEffects.KnowsSunrise)) {
+                outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Sunrise.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new soul skill: Sunrise.</b>");
+                player.createStatusEffect(StatusEffects.KnowsSunrise, 0, 0, 0, 0);
+                return;
+            }
+            if (player.hasStatusEffect(StatusEffects.KnowsSunrise)) {
+                outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+                EngineCore.SoulforceChange(100);
+            }
+        } else {
+            outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
+            outputText("You should be more careful next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+        }
+    }
 
     public function soulblastmanual(player:Player):void {
         clearOutput();

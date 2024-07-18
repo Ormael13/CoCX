@@ -20,11 +20,15 @@ import classes.EventParser;
 public class DraculinaScene extends BaseContent {
     public function DraculinaScene() {}
     
-    public function encounter():void {
-        if (player.wis >= 150 && (player.hasStatusEffect(StatusEffects.KnowsBlind))) encounterYes();
+    private function allTheTricksForDarkness():Boolean {
+		if (player.hasStatusEffect(StatusEffects.KnowsBlind) || player.hasStatusEffect(StatusEffects.KnowsSunrise) || (player.tailType == Tail.KITSHOO && player.tailCount >= 6)) return true;
+		else return false;
+	}
+	public function encounter():void {
+        if (player.wis >= 150 && allTheTricksForDarkness()) encounterYes();
 		else {
 			clearOutput();
-			outputText("<b>"+(player.wis < 150 ? "This area look suspicious your senses are duller then a sword that's not been sharpened for two centuries, should you get ambushed here who's to tell what may happen to you It might be smarter to turn back now while you still can and train your wits. ":"")+(player.hasStatusEffect(StatusEffects.KnowsBlind) ? "":"The room ahead is rather dark. Without any source of magical light you might be in great danger. ")+"Do you proceed anyway?</b>");
+			outputText("<b>"+(player.wis < 150 ? "This area look suspicious your senses are duller then a sword that's not been sharpened for two centuries, should you get ambushed here who's to tell what may happen to you It might be smarter to turn back now while you still can and train your wits. ":"")+(allTheTricksForDarkness() ? "":"The room ahead is rather dark. Without any source of magical light you might be in great danger. ")+"Do you proceed anyway?</b>");
 			menu();
 			addButton(1, "No", encounterNo);
 			addButton(3, "Yes", encounterYes);

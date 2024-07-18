@@ -274,8 +274,8 @@ public class Changelog extends BaseContent
 			outputText("-Minor fixes: Coal can randomly send you to heat OR rut, Low standard check for heckel, fixed helia corruption tolerance (Svalkash)\n");
 			outputText("-Each Dao of Element can now reach 12th layer. bonuses for reaching each of three new layers is 10% more resistance and 50% more damage.\n");
 			outputText("-Added option to back form boos room in Ebon Labyrinth if it contain Draculina boss. That choice will only appear if the PC does not meet all requirements to avoid an instant bad end and therefore not have any way to deal with her most annoying (by majority consensus) ability.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New magical soulskill: Sunrise. Req. buying manual from Qi shop for 100 spirit stones. Create miniature sun and throw it at enemy. Base cost: 400 soulforce.\n");
+			outputText("-During Draculina boss fight been able to use Sunrise soulskill or use foxflame pelt would help to counter her Darkness move (like spell Blind can do already).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -309,7 +309,7 @@ public class Changelog extends BaseContent
 			outputText("Pilgrim's Bounty perk setting cumQ as if max lust was 100, Raphael rape scene treating all PC cocks as tentalce cocks, Condensed Power and Titanic Strength perks desc/effects been misaligned/incorectly calculated, HB Mech Dragon's Breath Flamer & Scatter Laser upgrade(s) after instaling each weapon, HB Ayo Armor have it stored SF reset on loading save, Vapula not longer will make Joy ");
 			outputText("join any threesome scenes, Patchouli sex scenes will now know when she gained cock she could use, Pure JoJo anal sex sex scene cock parser going postal, trapped satyr sex scenes not giving sex XP or triger any related effects, Cum Cannon checking for cow not mino race, White-Faced One Birthright (Final Form) stat multi bonuses, Nadia recruitment endcounter bug msg, ");
 			outputText("one of Raphael scenes using variant for tentacle cocks that can go all way throu without having such cock(s), unable to gain plasma dmg from using fire buff on lightning weapon and vice versa, unable to use Blind during Draculina fight, rescue from bad end not clearing lingering status effects, Centaurium tf effect checking for wrong elf-like ears type, ");
-			outputText("Ascension: Transhumanism (Sen) perk not adding sensitivity\n\n");
+			outputText("Ascension: Transhumanism (Sen) perk not adding sensitivity, Selachimorphanthropy bonuses not changing with moon phases\n\n");
 			/*ostatni punkt changelogu
 			outputText("(Part 2/2) <b>Version 0.9a:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
