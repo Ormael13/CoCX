@@ -3442,6 +3442,184 @@ public class Combat extends BaseContent {
         }
     }
 
+	public function checkForElementalEnchantmentAndDoDamage(damage:Number, canUseFist:Boolean = true, canUseWhip:Boolean = true, crit:Boolean = false, IsFeralCombat:Boolean = false):void{
+		if (isFireTypeWeapon()) {
+			if (player.flameBladeActive()) damage += scalingBonusLibido() * 0.2;
+			if (player.weapon == weapons.VGRAVEH) damage *= 1.25;
+			damage = Math.round(damage * fireDamageBoostedByDao());
+			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
+			doFireDamage(damage, true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			if (player.weapon == weapons.VGRAVEH && player.hasStatusEffect(StatusEffects.ChargeWeapon) && crit && rand(10) == 0) {
+				if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,1);
+				else monster.createStatusEffect(StatusEffects.BurnDoT, 4, 0.02, 0, 0);
+				outputText(" [weapon] left lingering Burn at [themonster].");
+			}
+			if (player.weapon == weapons.TIDAR) (player.weapon as Tidarion).afterStrike();
+        }
+        else if (isIceTypeWeapon()) {
+			if (player.weapon == weapons.GGRAVEA) damage *= 1.25;
+            damage = Math.round(damage * iceDamageBoostedByDao());
+			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
+            doIceDamage(damage, true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			if (player.weapon == weapons.GGRAVEA && player.hasStatusEffect(StatusEffects.ChargeWeapon) && crit && rand(10) == 0) {
+				if (monster.hasStatusEffect(StatusEffects.FrostburnDoT)) monster.addStatusValue(StatusEffects.FrostburnDoT,1,1);
+				else monster.createStatusEffect(StatusEffects.FrostburnDoT, 4, 0.02, 0, 0);
+				outputText(" [weapon] left lingering Frostburn at [themonster].");
+			}
+        }
+        else if (isLightningTypeWeapon()) {
+            damage = Math.round(damage * lightningDamageBoostedByDao());
+			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
+            doLightningDamage(damage, true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+        }
+        else if (isDarknessTypeWeapon()) {
+            damage = Math.round(damage * darknessDamageBoostedByDao());
+			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
+            doDarknessDamage(damage, true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+        }
+        else if (isPlasmaTypeWeapon()) {
+			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
+            doPlasmaDamage(damage, true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+        }
+        else if (isUnarmedCombatButDealFireDamage()) {
+            damage = Math.round(damage * fireDamageBoostedByDao());
+			doFireDamage(damage, true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln);
+			doFireDamage(damage, true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln);
+			if (player.playerHasFourArms()) {
+				doFireDamage(damage, true, true);
+				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+				doFireDamage(damage, true, true);
+				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			}
+        }
+		else if (isUnarmedCombatButDealIceDamage()) {
+			damage = Math.round(damage * iceDamageBoostedByDao());
+            doIceDamage(damage, true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln);
+            doIceDamage(damage, true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln);
+			if (player.playerHasFourArms()) {
+				doIceDamage(damage, true, true);
+				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+				doIceDamage(damage, true, true);
+				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			}
+		}
+        else if (player.hasStatusEffect(StatusEffects.ChargeWeapon) && !player.isUnarmedCombat()) {
+			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
+			doPhysicalDamage(damage, true, true);
+            doMagicDamage(Math.round(damage * 0.2), true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+		}
+        else if (player.weapon == weapons.MGSWORD) {
+			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
+			doMagicDamage(damage, true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+		}
+        else if (player.weapon == weapons.MCLAWS) {
+			doMagicDamage(damage, true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+            doMagicDamage(damage, true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+		}
+        else if (player.weapon == weapons.PHALLUS || player.weapon == weapons.PHALUSS) {
+            if (player.statusEffectv1(StatusEffects.ThePhalluspear1) == 1) {
+				monster.teased(Math.round(monster.lustVuln * damage * 0.05));
+				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			}
+            else {
+                doPhysicalDamage(Math.round(damage * 0.75), true, true);
+                monster.teased(Math.round(monster.lustVuln * damage * 0.0125));
+				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+            }
+        }
+		else if (player.isUnarmedCombat() || IsFeralCombat) {
+			doPhysicalDamage(damage, true, true);
+			if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln);
+			doPhysicalDamage(damage, true, true);
+			if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln);
+			if (player.playerHasFourArms()) {
+				doPhysicalDamage(damage, true, true);
+				if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
+				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+				doPhysicalDamage(damage, true, true);
+				if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
+				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			}
+		}
+        else {
+			if (player.weapon == weapons.ARI_SPR) {
+				var bonus:Number = 1;
+				if (player.mana100 < 100) bonus += 0.4;
+				else if (player.mana100 < 70) bonus += 0.8;
+				else if (player.mana100 < 40) bonus += 1.2;
+				else bonus += 1.6;
+			}
+            doPhysicalDamage(damage, true, true);
+			if (player.weapon == weapons.VGRAVEH) doFireDamage(Math.round(damage * fireDamageBoostedByDao() * 0.25), true, true);
+			if (player.weapon == weapons.GGRAVEA) doIceDamage(Math.round(damage * iceDamageBoostedByDao() * 0.25), true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			if (player.weapon == weapons.DAISHO) {
+				doPhysicalDamage(Math.round(damage * 0.5), true, true);
+				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage * 0.5);
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) {
+			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
+			doLightningDamage(Math.round(damage * 0.3), true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+		}
+		if (player.weapon == weapons.PRURUMI && player.spe >= 150) {
+			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
+			doPhysicalDamage(damage, true, true);
+			if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightningDamage(Math.round(damage * 0.3), true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			if (player.spe >= 225) {
+				doPhysicalDamage(damage, true, true);
+				if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightningDamage(Math.round(damage * 0.3), true, true);
+				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			}
+			if (player.spe >= 300) {
+				doPhysicalDamage(damage, true, true);
+				if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightningDamage(Math.round(damage * 0.3), true, true);
+				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.FalseWeapon)) {
+			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
+			if (player.weapon == weapons.PHALLUS) {
+				doPhysicalDamage((damage * 2), true, true);
+				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			}
+			else {
+				doPhysicalDamage(Math.round(damage * 0.2), true, true);
+				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage * 0.1);
+			}
+		}
+		if (player.weapon == weapons.PRURUMI && player.spe >= 150) {
+			if (player.spe >= 300) damage *= 4;
+			else if (player.spe >= 225) damage *= 3;
+			else damage *= 2;
+		}
+        JabbingStyleIncrement();
+        if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) damage += Math.round(damage * 0.3);
+	}
+
     public function archerySkillDamageMod(damage:Number):Number {
         if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
             if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
@@ -6148,10 +6326,6 @@ public class Combat extends BaseContent {
         var critChance:Number = calculateCrit();
         var critDamage:Number = calculateCritDamage();
         var hitCounter:int = 0;
-        var fireDamage:Number = fireDamageBoostedByDao();
-        var iceDamage:Number = iceDamageBoostedByDao();
-        var lightningDamage:Number = lightningDamageBoostedByDao();
-        var darkDamage:Number = darknessDamageBoostedByDao();
         if (player.weapon is Tidarion) meleeDamageNoLag = 0; //recalc damage for current mana.. okay, get it, multi-attackers-fuckers!
 
 
@@ -6281,179 +6455,7 @@ public class Combat extends BaseContent {
                         else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
                     }
                     //Damage is delivered HERE
-                    if (isFireTypeWeapon()) {
-						if (player.weapon == weapons.VGRAVEH) damage *= 1.25;
-                        damage = Math.round(damage * fireDamage);
-						if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
-						doFireDamage(damage, true, true);
-						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-						if (player.weapon == weapons.VGRAVEH && player.hasStatusEffect(StatusEffects.ChargeWeapon) && crit && rand(10) == 0) {
-							if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,1);
-							else monster.createStatusEffect(StatusEffects.BurnDoT, 4, 0.02, 0, 0);
-							outputText(" [weapon] left lingering Burn at [themonster].");
-						}
-                    }
-                    else if (isIceTypeWeapon()) {
-						if (player.weapon == weapons.GGRAVEA) damage *= 1.25;
-                        damage = Math.round(damage * iceDamage);
-						if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
-                        doIceDamage(damage, true, true);
-						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-						if (player.weapon == weapons.GGRAVEA && player.hasStatusEffect(StatusEffects.ChargeWeapon) && crit && rand(10) == 0) {
-							if (monster.hasStatusEffect(StatusEffects.FrostburnDoT)) monster.addStatusValue(StatusEffects.FrostburnDoT,1,1);
-							else monster.createStatusEffect(StatusEffects.FrostburnDoT, 4, 0.02, 0, 0);
-							outputText(" [weapon] left lingering Frostburn at [themonster].");
-						}
-                    }
-                    else if (isLightningTypeWeapon()) {
-                        damage = Math.round(damage * lightningDamage);
-						if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
-                        doLightningDamage(damage, true, true);
-						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-                    }
-                    else if (isDarknessTypeWeapon()) {
-                        damage = Math.round(damage * darkDamage);
-						if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
-                        doDarknessDamage(damage, true, true);
-						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-                    }
-                    else if (isPlasmaTypeWeapon()) {
-						if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
-                        doPlasmaDamage(damage, true, true);
-						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-                    }
-                    else if (isUnarmedCombatButDealFireDamage()) {
-                        damage = Math.round(damage * fireDamage);
-						doFireDamage(damage, true, true);
-						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-						if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln);
-						doFireDamage(damage, true, true);
-						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-						if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln);
-						if (player.playerHasFourArms()) {
-							doFireDamage(damage, true, true);
-							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-							doFireDamage(damage, true, true);
-							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-						}
-                    }
-					else if (isUnarmedCombatButDealIceDamage()) {
-						damage = Math.round(damage * iceDamage);
-                        doIceDamage(damage, true, true);
-						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-						if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln);
-                        doIceDamage(damage, true, true);
-						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-						if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln);
-						if (player.playerHasFourArms()) {
-							doIceDamage(damage, true, true);
-							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-							doIceDamage(damage, true, true);
-							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-						}
-					}
-                    else if (player.hasStatusEffect(StatusEffects.ChargeWeapon) && !player.isUnarmedCombat()) {
-						if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
-						doPhysicalDamage(damage, true, true);
-                        doMagicDamage(Math.round(damage * 0.2), true, true);
-						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-					}
-                    else if (player.weapon == weapons.MGSWORD) {
-						if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
-						doMagicDamage(damage, true, true);
-						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-					}
-                    else if (player.weapon == weapons.MCLAWS) {
-						doMagicDamage(damage, true, true);
-						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-                        doMagicDamage(damage, true, true);
-						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-					}
-                    else if (player.weapon == weapons.PHALLUS || player.weapon == weapons.PHALUSS) {
-                        if (player.statusEffectv1(StatusEffects.ThePhalluspear1) == 1) {
-							monster.teased(Math.round(monster.lustVuln * damage * 0.05));
-							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-						}
-                        else {
-                            doPhysicalDamage(Math.round(damage * 0.75), true, true);
-                            monster.teased(Math.round(monster.lustVuln * damage * 0.0125));
-							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-                        }
-                    }
-					else if (player.isUnarmedCombat() || IsFeralCombat) {
-						doPhysicalDamage(damage, true, true);
-						if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
-						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-						if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln);
-						doPhysicalDamage(damage, true, true);
-						if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
-						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-						if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln);
-						if (player.playerHasFourArms()) {
-							doPhysicalDamage(damage, true, true);
-							if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
-							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-							doPhysicalDamage(damage, true, true);
-							if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
-							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-						}
-					}
-                    else {
-						if (player.weapon == weapons.ARI_SPR) {
-							var bonus:Number = 1;
-							if (player.mana100 < 100) bonus += 0.4;
-							else if (player.mana100 < 70) bonus += 0.8;
-							else if (player.mana100 < 40) bonus += 1.2;
-							else bonus += 1.6;
-						}
-                        doPhysicalDamage(damage, true, true);
-						if (player.weapon == weapons.VGRAVEH) doFireDamage(Math.round(damage * fireDamage * 0.25), true, true);
-						if (player.weapon == weapons.GGRAVEA) doIceDamage(Math.round(damage * iceDamage * 0.25), true, true);
-						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-                        if (player.weapon == weapons.DAISHO) {
-							doPhysicalDamage(Math.round(damage * 0.5), true, true);
-							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage * 0.5);
-						}
-                    }
-                    if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) {
-						if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
-						doLightningDamage(Math.round(damage * 0.3), true, true);
-						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-					}
-                    if (player.weapon == weapons.PRURUMI && player.spe >= 150) {
-						if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
-                        doPhysicalDamage(damage, true, true);
-                        if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightningDamage(Math.round(damage * 0.3), true, true);
-						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-                        if (player.spe >= 225) {
-                            doPhysicalDamage(damage, true, true);
-                            if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightningDamage(Math.round(damage * 0.3), true, true);
-							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-                        }
-                        if (player.spe >= 300) {
-                            doPhysicalDamage(damage, true, true);
-                            if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightningDamage(Math.round(damage * 0.3), true, true);
-							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-                        }
-                    }
-                    if (player.hasStatusEffect(StatusEffects.FalseWeapon)) {
-						if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
-                        if (player.weapon == weapons.PHALLUS) {
-							doPhysicalDamage((damage * 2), true, true);
-							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-						}
-                        else {
-							doPhysicalDamage(Math.round(damage * 0.2), true, true);
-							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage * 0.1);
-						}
-                    }
-                    if (player.weapon == weapons.PRURUMI && player.spe >= 150) {
-                        if (player.spe >= 300) damage *= 4;
-                        else if (player.spe >= 225) damage *= 3;
-                        else damage *= 2;
-                    }
-                    JabbingStyleIncrement();
-                    if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) damage += Math.round(damage * 0.3);
+					checkForElementalEnchantmentAndDoDamage(damage, true, true, crit, IsFeralCombat);
                 }
                 if (player.hasPerk(PerkLib.BrutalBlows) && player.str > 75 && damage > 0) {
                     if (monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage [themonster]'s defenses!");

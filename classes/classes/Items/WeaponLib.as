@@ -366,7 +366,7 @@ public final class WeaponLib extends ItemConstants
 				"Those whips once belonged to Lethice who was defeated at your hands. It gives off flames when you crack those whips.",
 				WT_WHIP, WSZ_MEDIUM, true)
 				.withBuffs({'teasedmg': 50})
-				.withTags(W_WHIPPING) as Weapon;
+				.withTags(W_WHIPPING, W_FIRE_TYPE) as Weapon;
 		public const DOCDEST:Weapon = new Weapon(
 				"DOCDest", "DOCDestroyer", "Defiled Oni Chieftain Destroyer", "a Defiled Oni Chieftain Destroyer", "smash", 160, 16800,
 				"This unrealistically large two handed mace was clearly made for some legendary oni chieftain to wield. Even bigger than the standard oni tetsubo this thing could topple buildings. You likely will need some absurd strength just to lift it.",
@@ -547,7 +547,7 @@ public final class WeaponLib extends ItemConstants
 				"This whip once belonged to Lethice who was defeated at your hands. It gives off flames when you crack this whip.",
 				WT_WHIP, WSZ_MEDIUM)
 				.withBuffs({'teasedmg': 50})
-				.withTags(W_WHIPPING) as Weapon;
+				.withTags(W_WHIPPING, W_FIRE_TYPE) as Weapon;
 		public const LANCE  :Weapon = new Weapon(
 				"Lance", "Lance", "deadly lance", "a deadly lance", "piercing stab", 12, 480,
 				"A long wooden shaft with a pointed metal head, used as a weapon by knights and cavalry soldiers in charging.  This would ignore most armors.  Req. 100+ speed to unleash full attack power.",

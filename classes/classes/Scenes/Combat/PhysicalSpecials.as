@@ -926,46 +926,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 	}
 
-	public function checkForElementalEnchantmentAndDoDamage(damage:Number, canUseFist:Boolean = true, canUseWhip:Boolean = true):void{
-		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.DL_WHIP || player.weapon == weapons.TIDAR) {
-			damage = Math.round(damage * combat.fireDamageBoostedByDao());
-			doFireDamage(damage, true, true);
-			if (player.weapon == weapons.TIDAR) (player.weapon as Tidarion).afterStrike();
-		}
-		else if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
-			damage = Math.round(damage * combat.fireDamageBoostedByDao());
-			doFireDamage(damage, true, true);
-		}
-		if (combat.isFireTypeWeapon()) {
-			if (player.flameBladeActive()) damage += scalingBonusLibido() * 0.20;
-			if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
-				if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
-				damage = Math.round(damage * 1.1);
-			}
-			damage = Math.round(damage * combat.fireDamageBoostedByDao());
-			doFireDamage(damage, true, true);
-		}
-		else if (combat.isIceTypeWeapon()) {
-			damage = Math.round(damage * combat.iceDamageBoostedByDao());
-			doIceDamage(damage, true, true);
-		}
-		else if (combat.isLightningTypeWeapon()) {
-			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
-			doLightningDamage(damage, true, true);
-		}
-		else if (combat.isDarknessTypeWeapon()) {
-			damage = Math.round(damage * combat.darknessDamageBoostedByDao());
-			doDarknessDamage(damage, true, true);
-		}
-		else if (player.weapon == weapons.MGSWORD) doMagicDamage(damage, true, true);
-		else if (player.weapon == weapons.MCLAWS) doMagicDamage(damage, true, true);
-		else {
-			damage = Math.round(damage);
-			doDamage(damage, true, true);
-			if (player.weapon == weapons.DAISHO) doDamage(Math.round(damage * 0.5), true, true);
-		}
-	}
-
 	private function shieldbashcostly():Number {
 		var BCW:Number = 15;
 		if (player.shieldPerk == "Large") BCW += 15;
@@ -1034,8 +994,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * combat.impaleMultiplier());
 			else damage *= 1.75 + buffMultiplier;
 		}
-		checkForElementalEnchantmentAndDoDamage(damage);
-		if (player.hasPerk(PerkLib.TwinThunder) && player.isDualWieldMelee()) checkForElementalEnchantmentAndDoDamage(damage);
+		combat.checkForElementalEnchantmentAndDoDamage(damage);
+		if (player.hasPerk(PerkLib.TwinThunder) && player.isDualWieldMelee()) combat.checkForElementalEnchantmentAndDoDamage(damage);
 		outputText(" damage. ");
 		if (crit) {
 			outputText("<b>Critical! </b>");
@@ -1111,7 +1071,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//if (player.hasPerk(PerkLib.TwinThunder) && ) shotsCount *= 2;
 		if (player.weaponRangeName == "Avelynn") shotsCount *= 3;
 		if (player.isRaceCached(Races.CENTAUR) && player.hasPerk(PerkLib.CentaurHunterStyleMeteorShower)) shotsCount *= 4;
-		while (shotsCount-->0) doDamage(damage, true, true, ignoreDR);
+		while (shotsCount-->0) {
+			if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow") combat.doArcheryDamage(damage, 0);
+			if (player.weaponRangePerk == "Throwing") combat.doArcheryDamage(damage, 1);
+		}
 		outputText(" damage. ");
 		if (crit) {
 			outputText("<b>Critical! </b>");
@@ -1198,7 +1161,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.spe >= 300) doDamage(damage, true, true);
 			combat.WrathGenerationPerHit2(5);
 		}
-		checkForElementalEnchantmentAndDoDamage(damage, false, false);
+		combat.checkForElementalEnchantmentAndDoDamage(damage, false, false);
 		if (crit) {
 			outputText(" <b>Critical!</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -1273,9 +1236,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else damage *= (critMulti + buffMultiplier);
 		}
 		damage = Math.round(damage);
-		doDamage(damage, true, true);
+		combat.checkForElementalEnchantmentAndDoDamage(damage);
 		if (player.hasPerk(PerkLib.PhantomStrike)) {
-			doDamage(damage, true, true);
+			combat.checkForElementalEnchantmentAndDoDamage(damage);
 			damage *= 2;
 		}
 		if (crit) {
@@ -1626,13 +1589,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= critMulti;
 		}
-		checkForElementalEnchantmentAndDoDamage(damage);
-		if (player.hasPerk(PerkLib.PhantomStrike)) {
-			doDamage(damage, true, true);
+		combat.checkForElementalEnchantmentAndDoDamage(damage);
+		if (player.weapon == weapons.D_LANCE) {
+			combat.checkForElementalEnchantmentAndDoDamage(damage);
 			damage *= 2;
 		}
-		if (player.weapon == weapons.D_LANCE) {
-			doDamage(damage, true, true);
+		if (player.hasPerk(PerkLib.PhantomStrike)) {
+			combat.checkForElementalEnchantmentAndDoDamage(damage);
+			if (player.weapon == weapons.D_LANCE) combat.checkForElementalEnchantmentAndDoDamage(damage);
 			damage *= 2;
 		}
 		if (crit) {
@@ -1646,8 +1610,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 			} else {
 				outputText("Not satisfied with your weapon alone you also impale your target on your horns, delivering massive damage.");
 			}
-			doDamage(damage/2, true, true);
-			if (player.horns.type == Horns.KIRIN) doLightningDamage(damage/2, true, true)
+			doDamage(damage / 2, true, true);
+			if (player.hasPerk(PerkLib.PhantomStrike)) doDamage(damage / 2, true, true);
+			if (player.horns.type == Horns.KIRIN) {
+				doLightningDamage(damage / 2, true, true);
+				if (player.hasPerk(PerkLib.PhantomStrike)) doLightningDamage(damage / 2, true, true);
+			}
 			if (crit) {
 				outputText("<b>Critical!</b>");
 			}
@@ -1771,7 +1739,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//final touches
 		damage = Math.round(damage);
 		outputText("Your [weapon] hits few of [themonster], dealing ");
-		checkForElementalEnchantmentAndDoDamage(damage);
+		combat.checkForElementalEnchantmentAndDoDamage(damage);
 		outputText(" damage! ");
 		if (crit) {
 			outputText(" <b>*Critical Hit!*</b>");
@@ -1852,7 +1820,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//final touches
 		damage = Math.round(damage);
 		outputText("Your [weapon] whipped few of [themonster], dealing ");
-		checkForElementalEnchantmentAndDoDamage(damage);
+		combat.checkForElementalEnchantmentAndDoDamage(damage);
 		outputText(" damage! ");
 		if (crit) {
 			outputText(" <b>*Critical Hit!*</b>");
@@ -6991,4 +6959,4 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function PhysicalSpecials() {
 	}
 }
-}
+}
