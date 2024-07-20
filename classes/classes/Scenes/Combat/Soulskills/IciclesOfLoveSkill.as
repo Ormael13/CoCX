@@ -53,11 +53,9 @@ public class IciclesOfLoveSkill extends AbstractSoulSkill implements SaveableSta
 	override protected function usabilityCheck():String {
         var uc:String =  super.usabilityCheck();
         if (uc) return uc;
-
         if (player.lust < 50) {
 			return "Your current lust is too low.";
 		}
-
         return "";
     }  
 
@@ -69,7 +67,6 @@ public class IciclesOfLoveSkill extends AbstractSoulSkill implements SaveableSta
 	override public function get description():String {
 		var desc:String = super.description;
 		var currentLevel:int = player.statusEffectv1(knownCondition);
-
 		switch (currentLevel) {
 			case 1: desc += "\nRank: Rankless";
 					break;
@@ -80,7 +77,6 @@ public class IciclesOfLoveSkill extends AbstractSoulSkill implements SaveableSta
 			case 4: desc += "Highly effective against groups.\nRank: High Rank";
 					break;
 		}
-
 		return desc;
 	}
 
@@ -88,7 +84,6 @@ public class IciclesOfLoveSkill extends AbstractSoulSkill implements SaveableSta
         var result:Array = super.presentTags();
         var currentLevel:int = player.statusEffectv1(knownCondition);
         if (currentLevel > 1) result.push(TAG_AOE);
-
         return result;
     }
 
@@ -103,7 +98,6 @@ public class IciclesOfLoveSkill extends AbstractSoulSkill implements SaveableSta
 
 	private function calcLustRestore():Number {
 		var restoreAmount:Number = 0;
-
 		var restoreMult:Number = 0;
 		switch (player.statusEffectv1(knownCondition)) {
 			case 1: restoreMult = 0.1;
@@ -116,20 +110,16 @@ public class IciclesOfLoveSkill extends AbstractSoulSkill implements SaveableSta
 					break;
 		}
 		restoreAmount += Math.round(player.lust * restoreMult);
-		
 		return restoreAmount;
 	}
 
 	public function calcDamage(monster:Monster, baseDamage: Number):Number {
 		var currentLevel:int = player.statusEffectv1(knownCondition);
 		var damage:Number = baseDamage * (5 * currentLevel);
-
 		if (currentLevel > 1) {
-			damage += scalingBonusWisdom() * 0.5;
-
-			damage *= soulskillMagicalMod();
+			damage += scalingBonusWisdom() * (currentLevel - 1);
+			damage *= soulskillMagicalMod() * (currentLevel - 1);
 		}
-		
 		//group enemies bonus
 		if (monster && monster.plural) {
 			if (currentLevel > 2) {
@@ -138,7 +128,6 @@ public class IciclesOfLoveSkill extends AbstractSoulSkill implements SaveableSta
 				damage *= 2;
 			}
 		}
-
 		damage *= combat.iceDamageBoostedByDao();
 		return Math.round(damage);
 	}
@@ -146,9 +135,7 @@ public class IciclesOfLoveSkill extends AbstractSoulSkill implements SaveableSta
     override public function doEffect(display:Boolean = true):void {
 		var lustRestore:Number = calcLustRestore();
 		player.lust -= lustRestore;
-
 		var damage:Number = calcDamage(monster, lustRestore);
-
 		if (display) {
 			outputText("You start concentrate on the lust flowing in your body, your veins while imaging a joy of sharing icicles of love with enemy. Shortly after that lust starts to gather around your hands getting colder and colder till it envelop your hands in icicles.\n\n");
     		outputText("And with almost orgasmic joy, you sends a wave of ice shards toward [themonster] while mumbling about 'sharing the icicles of love'. ");
@@ -163,14 +150,11 @@ public class IciclesOfLoveSkill extends AbstractSoulSkill implements SaveableSta
 		var nextLevelUp:int = (currentLevel > 1)? 10: 5;
 		var maxLevel:int = 4;
 		if (currentLevel <= 0 || currentLevel >= maxLevel) return;
-
 		if (increment && uses < nextLevelUp) uses++;
-
 		if (isFinite(nextLevelUp)) {
             notificationView.popupProgressBar2(skillIcon,skillIcon,
                     name + " Mastery", (uses-1)/nextLevelUp, uses/nextLevelUp);
         }
-
 		if (currentLevel == 1 && uses >= nextLevelUp && player.hasPerk(PerkLib.SoulApprentice)) {
 			if (display) {
 				outputText("Your skill at using the \"" + name + "\" soulskill has progressed!\n");
@@ -179,7 +163,6 @@ public class IciclesOfLoveSkill extends AbstractSoulSkill implements SaveableSta
 			player.changeStatusValue(knownCondition, 1, 2);
 			uses = 0;
 		}
-
 		if (currentLevel == 2 && uses >= nextLevelUp && player.hasPerk(PerkLib.SoulWarrior)) {
 			if (display) {
 				outputText("Your skill at using the \"" + name + "\" soulskill has progressed!\n");
@@ -188,7 +171,6 @@ public class IciclesOfLoveSkill extends AbstractSoulSkill implements SaveableSta
 			player.changeStatusValue(knownCondition, 1, 3);
 			uses = 0;
 		}
-
 		if (currentLevel == 3 && uses >= nextLevelUp && player.hasPerk(PerkLib.SoulScholar)) {
 			if (display) {
 				outputText("Your skill at using the \"" + name + "\" soulskill has progressed!\n");

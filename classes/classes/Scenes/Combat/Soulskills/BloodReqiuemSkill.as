@@ -36,7 +36,7 @@ public class BloodReqiuemSkill extends AbstractBloodSoulSkill {
 	}
 
 	public function calcDamage(monster:Monster):Number {
-		var damage:Number = scalingBonusWisdom() * spellModBlood() * 2;
+		var damage:Number = scalingBonusWisdom() * spellModBlood() * 6;
 		var damageFloor:Number = 10;
 
 		if (damage < damageFloor) damage = damageFloor;

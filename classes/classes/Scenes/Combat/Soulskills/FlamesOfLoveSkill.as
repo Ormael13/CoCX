@@ -52,11 +52,9 @@ public class FlamesOfLoveSkill extends AbstractSoulSkill implements SaveableStat
 	override protected function usabilityCheck():String {
         var uc:String =  super.usabilityCheck();
         if (uc) return uc;
-
         if (player.lust < 50) {
 			return "Your current lust is too low.";
 		}
-
         return "";
     }
 
@@ -68,7 +66,6 @@ public class FlamesOfLoveSkill extends AbstractSoulSkill implements SaveableStat
 	override public function get description():String {
 		var desc:String = super.description;
 		var currentLevel:int = player.statusEffectv1(knownCondition);
-
 		switch (currentLevel) {
 			case 1: desc += "\nRank: Rankless";
 					break;
@@ -79,7 +76,6 @@ public class FlamesOfLoveSkill extends AbstractSoulSkill implements SaveableStat
 			case 4: desc += "Highly effective against groups.\nRank: High Rank";
 					break;
 		}
-
 		return desc;
 	} 
 
@@ -87,7 +83,6 @@ public class FlamesOfLoveSkill extends AbstractSoulSkill implements SaveableStat
         var result:Array = super.presentTags();
         var currentLevel:int = player.statusEffectv1(knownCondition);
         if (currentLevel > 1) result.push(TAG_AOE);
-
         return result;
     }
 
@@ -102,7 +97,6 @@ public class FlamesOfLoveSkill extends AbstractSoulSkill implements SaveableStat
 
 	private function calcLustRestore():Number {
 		var restoreAmount:Number = 0;
-
 		var restoreMult:Number = 0;
 		switch (player.statusEffectv1(knownCondition)) {
 			case 1: restoreMult = 0.1;
@@ -115,20 +109,16 @@ public class FlamesOfLoveSkill extends AbstractSoulSkill implements SaveableStat
 					break;
 		}
 		restoreAmount += Math.round(player.lust * restoreMult);
-
 		return restoreAmount;
 	}
 
 	public function calcDamage(monster:Monster, baseDamage: Number):Number {
 		var currentLevel:int = player.statusEffectv1(knownCondition);
 		var damage:Number = baseDamage * (5 * currentLevel);
-
 		if (currentLevel > 1) {
-			damage += scalingBonusWisdom() * 0.5;
-
-			damage *= soulskillMagicalMod();
+			damage += scalingBonusWisdom() * (currentLevel - 1);
+			damage *= soulskillMagicalMod() * (currentLevel - 1);
 		}
-		
 		//group enemies bonus
 		if (monster && monster.plural) {
 			if (currentLevel > 2) {
@@ -137,7 +127,6 @@ public class FlamesOfLoveSkill extends AbstractSoulSkill implements SaveableStat
 				damage *= 2;
 			}
 		}
-
 		damage *= combat.fireDamageBoostedByDao();
 		return Math.round(damage);
 	}
@@ -145,9 +134,7 @@ public class FlamesOfLoveSkill extends AbstractSoulSkill implements SaveableStat
     override public function doEffect(display:Boolean = true):void {
 		var lustRestore:Number = calcLustRestore();
 		player.lust -= lustRestore;
-
 		var damage:Number = calcDamage(monster, lustRestore);
-
 		if (display) {
 			outputText("You concentrate on the lust flowing in your body, your veins heating up rapidly. With every beat of your heart, the heat rises, the heat in your groin transfering to the palm of your hands. \n\n");
 			outputText("With almost orgasmic joy, you send a wave of flames toward [themonster]. ");
@@ -162,14 +149,11 @@ public class FlamesOfLoveSkill extends AbstractSoulSkill implements SaveableStat
 		var nextLevelUp:int = (currentLevel > 1)? 10: 5;
 		var maxLevel:int = 4;
 		if (currentLevel <= 0 || currentLevel >= maxLevel) return;
-
 		if (increment && uses < nextLevelUp) uses++;
-
 		if (isFinite(nextLevelUp)) {
             notificationView.popupProgressBar2(skillIcon,skillIcon,
                     name + " Mastery", (uses-1)/nextLevelUp, uses/nextLevelUp);
         }
-
 		if (currentLevel == 1 && uses >= nextLevelUp && player.hasPerk(PerkLib.SoulApprentice)) {
 			if (display) {
 				outputText("Your skill at using the \"" + name + "\" soulskill has progressed!\n");
@@ -178,7 +162,6 @@ public class FlamesOfLoveSkill extends AbstractSoulSkill implements SaveableStat
 			player.changeStatusValue(knownCondition, 1, 2);
 			uses = 0;
 		}
-
 		if (currentLevel == 2 && uses >= nextLevelUp && player.hasPerk(PerkLib.SoulWarrior)) {
 			if (display) {
 				outputText("Your skill at using the \"" + name + "\" soulskill has progressed!\n");
@@ -187,7 +170,6 @@ public class FlamesOfLoveSkill extends AbstractSoulSkill implements SaveableStat
 			player.changeStatusValue(knownCondition, 1, 3);
 			uses = 0;
 		}
-
 		if (currentLevel == 3 && uses >= nextLevelUp && player.hasPerk(PerkLib.SoulScholar)) {
 			if (display) {
 				outputText("Your skill at using the \"" + name + "\" soulskill has progressed!\n");

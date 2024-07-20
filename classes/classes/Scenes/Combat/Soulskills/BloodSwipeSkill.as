@@ -36,7 +36,7 @@ public class BloodSwipeSkill extends AbstractBloodSoulSkill {
 	}
 
 	public function calcDamage(monster:Monster):Number {
-		var damage:Number = scalingBonusWisdom() * spellModBlood();
+		var damage:Number = scalingBonusWisdom() * spellModBlood() * 6;
 		var damageFloor:Number = 10;
 
 		if (sfInfusion) {

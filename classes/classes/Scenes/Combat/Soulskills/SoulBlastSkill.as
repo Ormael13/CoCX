@@ -34,9 +34,9 @@ public class SoulBlastSkill extends AbstractSoulSkill {
     }
 
 	public function calcDamage(monster:Monster):Number {
-		var damage:Number = scalingBonusStrength() * 3;
-		damage += scalingBonusIntelligence() * 3;
-		damage += scalingBonusWisdom() * 3;
+		var damage:Number = scalingBonusStrength() * 6;
+		damage += scalingBonusIntelligence() * 6;
+		damage += scalingBonusWisdom() * 6;
 		if (damage < 10) damage = 10;
 		
 		//soulskill mod effect

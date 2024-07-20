@@ -51,13 +51,14 @@ public class PunishingKickSkill extends AbstractSoulSkill {
 		var damage:Number = 0;
 		damage += combat.meleeUnarmedDamageNoLagSingle();
 		damage += player.wis;
-		damage += scalingBonusWisdom();
+		damage += scalingBonusWisdom() * 6;
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
 			if (player.isRaceCached(Races.MOUSE, 2) && player.countRings(jewelries.INMORNG)) damage *= 2.2;
 			else damage *= 2;
 			damage = combat.fireTypeDamageBonusLarge(damage);
 		}
-		
+		//soulskill mod effect
+		damage *= soulskillPhysicalMod();
 		//other bonuses
 		if (monster) {
 			if (player.hasPerk(PerkLib.PerfectStrike) && monster.monsterIsStunned()) damage *= 1.5;
@@ -73,7 +74,6 @@ public class PunishingKickSkill extends AbstractSoulSkill {
 
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 			damage = combat.fireTypeDamageBonus(damage);
-			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
 			damage *= 1.1;
 		}
 
@@ -88,15 +88,7 @@ public class PunishingKickSkill extends AbstractSoulSkill {
 		}
 		monster.createStatusEffect(StatusEffects.PunishingKick, calcDuration(), 0, 0, 0);
 		if (display) outputText("You lash out with a devastating kick, knocking your opponent back and disorienting it. [Themonster] is knocked off balance by the ferocious blow! ");
-		doDamage(damage, true, display);
-		if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-		if (player.hasPerk(PerkLib.FlurryOfBlows)) {
-			doDamage(damage, true, display);
-			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-			doDamage(damage, true, display);
-			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-			damage *= 3;
-		}
+		combat.checkForElementalEnchantmentAndDoDamage(damage, true, true, crit, false, 1);
 		if (crit && display) outputText(" <b>*Critical Hit!*</b>");
 		endTurnBySpecialHit(damage, display);
 		

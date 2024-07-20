@@ -62,7 +62,6 @@ public class KillingIntentSkill extends AbstractSoulSkill {
 		//other bonuses
 		if (player.hasPerk(PerkLib.Heroism) && (monster && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType)))) damage *= 2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
-
 		return Math.round(damage);
 	}
 
@@ -75,15 +74,12 @@ public class KillingIntentSkill extends AbstractSoulSkill {
 			if (display) outputText("Bloodlust does not matter to a statue!\n\n");
 			return;
 		}
-
 		if (silly()) 
 			if (display) outputText("You narrow your eyes at this foolish upstart. \"<i>Junior, you dare!</i>\" Your power of your soul flares from your body, seeking to strike them down. ");
 		else {
 			if (display) outputText("You set your focus on [themonster], sending your desire to kill them through your soulforce. ");
 		}
-
 		var damage:Number = calcDamage(monster);
-
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -93,18 +89,13 @@ public class KillingIntentSkill extends AbstractSoulSkill {
 			crit = true;
 			damage *= 1.75;
 		}
-		
-		
 		if (display) outputText("Your intent slams into [themonster], sending them reeling from your bloodlust! ");
 		doTrueDamage(damage, true, display);
-		
 		if (crit && display) outputText(" <b>*Critical Hit!*</b>");
-
 		if (rand(5) == 0 && monster.level <= player.level) {
 			monster.createStatusEffect(StatusEffects.Fear,1,0,0,0);
 			if (display) outputText(" [Themonster] is left cowed from your mental attack!");
 		}
-
 		checkAchievementDamage(damage);
 		if (display) outputText("\n\n");
 		if (!player.hasStatusEffect(StatusEffects.BloodCultivator) && flags[kFLAGS.IN_COMBAT_PLAYER_ANUBI_HEART_LEECH] == 0) anubiHeartLeeching(damage);

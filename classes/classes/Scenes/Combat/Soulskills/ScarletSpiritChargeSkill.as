@@ -45,9 +45,7 @@ public class ScarletSpiritChargeSkill extends AbstractBloodSoulSkill {
 
     override public function doEffect(display:Boolean = true):void {
 		var tempStrTouSpe:Number = 0;
-		if (display) outputText("You focus the power of your blood and soul, allowing the scarlet energy fill your being." + 
-			" Your [skin] begins to glow as the power within you coalesces, whirling within you with the force of a tsunami.\n");
-
+		if (display) outputText("You focus the power of your blood and soul, allowing the scarlet energy fill your being. Your [skin] begins to glow as the power within you coalesces, whirling within you with the force of a tsunami.\n");
 		var ScarletSpiritChargeBoost:Number = 10;
 		ScarletSpiritChargeBoost += player.wisStat.core.value;
 		ScarletSpiritChargeBoost *= spellModBlood();
