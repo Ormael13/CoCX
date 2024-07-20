@@ -163,12 +163,14 @@ public class PerkMenu extends BaseContent {
 				case 1: outputText("flying (by wings)"); break;
 				case 2: outputText("flying (on flying sword)"); break;
 				case 3: outputText("flying (using soulforce)"); break;
+				case 3: outputText("flying (using foxflame pelt)"); break;
 			}
 			outputText("</b>");
 			if (autoFlyingFlag != 0) addButton(0, "On Ground", autoFlyingType,0);
 			if (player.canFly() && autoFlyingFlag != 1) addButton(1, "By Wings", autoFlyingType,1);
 			if (player.hasPerk(PerkLib.FlyingSwordPath) && autoFlyingFlag != 2) addButton(2, "By FlyingSw", autoFlyingType,2);
 			if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor) && autoFlyingFlag != 3) addButton(3, "By SF", autoFlyingType,3);
+			if (player.statStore.hasBuff("FoxflamePelt") && player.tailCount >= 9 && autoFlyingFlag != 4) addButton(4, "By FFP", autoFlyingType,4);
 		}
 		if (player.hasCombatAura()) {
 			outputText("\n\nYou can suppress your auras. This way, they won't damage/arouse enemies.");

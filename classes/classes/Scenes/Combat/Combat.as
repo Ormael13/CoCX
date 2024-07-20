@@ -286,6 +286,10 @@ public class Combat extends BaseContent {
                 outputText("You surround your body with soulforce, taking to the sky with a brilliant aura"+(player.weaponFlyingSwordsName != "nothing"?" as "+player.weaponFlyingSwordsName+" hovers near you. Your flying weapon is ready to be used at any time":"")+".");
                 player.createStatusEffect(StatusEffects.Flying, 1, 2, 0, 0);
             }
+            else if (flags[kFLAGS.AUTO_FLIGHT] == 4 && player.soulforce >= Math.round(25 * soulskillCost() * soulskillcostmulti()) && player.mana >= spellCost(50 * combat.mspecials.kitsuneskill2Cost())) {
+                outputText("You surround your body with fox flame, taking to the sky leaving behind a trail of fire"+(player.weaponFlyingSwordsName != "nothing"?" as "+player.weaponFlyingSwordsName+" hovers near you. Your flying weapon is ready to be used at any time":"")+".");
+                player.createStatusEffect(StatusEffects.Flying, 1, 4, 0, 0);
+            }
             if (player.hasPerk(PerkLib.Resolute) < 0) {
                 player.createStatusEffect(StatusEffects.FlyingNoStun, 0, 0, 0, 0);
                 player.createPerk(PerkLib.Resolute, 0, 0, 0, 0);
@@ -294,7 +298,7 @@ public class Combat extends BaseContent {
             outputText("\n\n");
         }
         if (player.hasPerk(PerkLib.AffinitySylph) && !player.hasStatusEffect(StatusEffects.InsideSmallSpace) && !player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
-            player.createStatusEffect(StatusEffects.Flying, 1, 3, 0, 0);
+            player.createStatusEffect(StatusEffects.Flying, 1, 10, 0, 0);
             if (player.hasPerk(PerkLib.Resolute) < 0) {
                 player.createStatusEffect(StatusEffects.FlyingNoStun, 0, 0, 0, 0);
                 player.createPerk(PerkLib.Resolute, 0, 0, 0, 0);
@@ -882,10 +886,13 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) buttons.add("Take Flight", takeFlightNoWings)
                 .hint("Use your own soulforce to take flight into the air. \n\nSoulforce cost per turn: "+flyingWithSoulforceCost()+" \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.")
                 .disableIf(player.hasStatusEffect(StatusEffects.FlyingDisabled), "You're being prevented from taking flight!");
+			if (player.statStore.hasBuff("FoxflamePelt") && player.tailCount >= 9) buttons.add("Take Flight", takeFlightFoxflamePelt)
+                .hint("Use your own foxflame pelt to take flight into the air. \n\nSoulforce cost per turn: "+Math.round(25 * soulskillCost() * soulskillcostmulti())+"\nMana cost per turn: "+spellCost(50 * combat.mspecials.kitsuneskill2Cost())+" \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.")
+                .disableIf(player.hasStatusEffect(StatusEffects.FlyingDisabled), "You're being prevented from taking flight!");
         }
 		if (player.isFlying()) {
 			if (player.statusEffectv2(StatusEffects.Flying) == 1) buttons.add("Land", landAfterUsingFlyingSword);
-			if (player.statusEffectv2(StatusEffects.Flying) == 2) buttons.add("Land", landAfterUsingSoulforce);
+			if (player.statusEffectv2(StatusEffects.Flying) == 2 || player.statusEffectv2(StatusEffects.Flying) == 3) buttons.add("Land", landAfterUsingSoulforce);
             buttons.add("Great Dive", greatDive)
             .hint("Make a Great Dive to deal TONS of damage!")
             .disableIf(isEnemyInvisible, "You cannot use offensive skills against an opponent you cannot see or target.");
@@ -9325,9 +9332,11 @@ public class Combat extends BaseContent {
         if (player.statStore.hasBuff("CrinosShape")) player.wrath -= mspecials.crinosshapeCost();
         if (player.statStore.hasBuff("AsuraForm")) player.wrath -= asuraformCost();
 		if (player.statStore.hasBuff("FoxflamePelt")) {
-			var soulforcecost:int = 50 * soulskillCost() * soulskillcostmulti();
+			var someN:Number = 50;
+			if (player.tailCount >= 9) someN *= 0.5;
+			var soulforcecost:int = someN * soulskillCost() * soulskillcostmulti();
 			player.soulforce -= soulforcecost;
-			useMana((100 * combat.mspecials.kitsuneskill2Cost()), Combat.USEMANA_MAGIC_NOBM);
+			useMana((someN * 2 * combat.mspecials.kitsuneskill2Cost()), Combat.USEMANA_MAGIC_NOBM);
 		}
 		if (player.statStore.hasBuff("SwordIntentAura")) {
 			var soulforcecost2:int = 10 * soulskillCost() * soulskillcostmulti();
@@ -10875,7 +10884,9 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         }
         //Foxflame Pelt
         if (player.statStore.hasBuff("FoxflamePelt")) {
-            if ((player.soulforce < 50 * soulskillCost() * soulskillcostmulti()) || (player.mana < spellCost(100 * combat.mspecials.kitsuneskill2Cost()))) {
+			var someN:Number = 50;
+			if (player.tailCount >= 9) someN *= 0.5;
+            if ((player.soulforce < someN * soulskillCost() * soulskillcostmulti()) || (player.mana < spellCost(someN * 2 * combat.mspecials.kitsuneskill2Cost()))) {
                 player.statStore.removeBuffs("FoxflamePelt");
                 outputText("<b>The flow of power through you suddenly stops, as you no longer able to sustain it.  Your Foxflame Pelt slowly extinguish, leaving you in your normal form.</b>\n\n");
             }
@@ -10962,6 +10973,16 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 					outputText("<b>You realise that your SoulForce can't sustain your flight any longer. You land lightly, sighing as the drain on your Soul stops. </b>\n\n");
 				}
 				else player.soulforce -= flyingWithSoulforceCost();
+			}
+			if (player.statusEffectv2(StatusEffects.Flying) == 3) {
+				if (player.soulforce < (25 * soulskillCost() * soulskillcostmulti()) || player.mana < spellCost(50 * combat.mspecials.kitsuneskill2Cost())) {
+					player.removeStatusEffect(StatusEffects.Flying);
+					outputText("<b>You realise that your can't sustain your flight any longer. You land lightly, sighing as the drain on your soulforce and mana stops. </b>\n\n");
+				}
+				else {
+					player.soulforce -= (25 * soulskillCost() * soulskillcostmulti());
+					player.mana -= spellCost(50 * combat.mspecials.kitsuneskill2Cost());
+				}
 			}
             if (player.statusEffectv1(StatusEffects.Flying) >= 0) outputText("<b>You keep out of reach, flying circles in the air around your opponent.</b>\n\n");
             else {
@@ -15712,6 +15733,12 @@ public function takeFlightNoWings():void {
     clearOutput();
     outputText("You surround your body with soulforce, taking off into the air"+(player.weaponFlyingSwordsName != "nothing"?" as "+player.weaponFlyingSwordsName+" hover near you ready to be used at moment notice":"")+".\n\n");
     player.createStatusEffect(StatusEffects.Flying, 1, 2, 0, 0);
+    takeFlight();
+}
+public function takeFlightFoxflamePelt():void {
+    clearOutput();
+    outputText("You surround your body with fox flame, taking off into the air leaving behind a trail of fire"+(player.weaponFlyingSwordsName != "nothing"?" as "+player.weaponFlyingSwordsName+" hover near you ready to be used at moment notice":"")+".\n\n");
+    player.createStatusEffect(StatusEffects.Flying, 1, 3, 0, 0);
     takeFlight();
 }
 public function takeFlight():void {

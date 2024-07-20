@@ -255,8 +255,14 @@ public class MagicSpecials extends BaseCombatContent {
 					buttons.add("Return", extinguishFoxflamePelt).hint("Release foxflames.");
 				} else {
 					bd = buttons.add("Foxflame Pelt", lightupFoxflamePelt, "Coat yourself with foxflame pelt. (It would drain soulforce and mana until deactivated)\n");
-					bd.requireSoulforce(50 * soulskillCost() * soulskillcostmulti());
-					bd.requireMana(spellCost(100 * kitsuneskill2Cost()));
+					if (player.tailCount >= 9) {
+						bd.requireSoulforce(25 * soulskillCost() * soulskillcostmulti());
+						bd.requireMana(spellCost(50 * kitsuneskill2Cost()));
+					}
+					else {
+						bd.requireSoulforce(50 * soulskillCost() * soulskillcostmulti());
+						bd.requireMana(spellCost(100 * kitsuneskill2Cost()));
+					}
 				}
 			}
 			if ((player.tailType == Tail.NEKOMATA_FORKED_1_3 || player.tailType == Tail.NEKOMATA_FORKED_2_3 || (player.tailType == Tail.CAT && player.tailCount == 2))) {//player.hasPerk(MutationsLib.NekomataThyroidGland) ||
@@ -3675,16 +3681,18 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		var soulforcecost:int = 50 * soulskillCost() * soulskillcostmulti();
+		if (player.tailCount >= 9) soulforcecost *= 0.5;
 		player.soulforce -= soulforcecost;
 		lightupFoxflamePelt2();
 	}
 	public function lightupFoxflamePelt2():void {
-		useMana((100 * kitsuneskill2Cost()), Combat.USEMANA_MAGIC_NOBM);
+		if (player.tailCount >= 9) useMana((50 * kitsuneskill2Cost()), Combat.USEMANA_MAGIC_NOBM);
+		else useMana((100 * kitsuneskill2Cost()), Combat.USEMANA_MAGIC_NOBM);
 		outputText("Holding out your palm, you conjure fox flame that dances across your fingertips.  Then is spread all over your arm to rest of your body!\n\n");
 		var temp1:Number = 0;
 		var tempSpe:Number;
-		temp1 += player.speStat.core.value * 0.1;
-		if (player.tailCount >= 7) temp1 += player.speStat.core.value * 0.1 * (player.tailCount - 6);
+		temp1 += player.speStat.core.value * 0.1 * (player.tailCount - 5);
+		if (player.tailCount >= 9) temp1 *= 2;
 		temp1 = Math.round(temp1);
 		var oldHPratio:Number = player.hp100/100;
 		tempSpe = temp1;

@@ -2168,8 +2168,8 @@ public class PerkLib
 				"Increases health recovery by (6 * level) out of combat and by (3 * level) in combat (using defend option will double it).",
 				"You've chosen the 'Lifeline' perk, increasing your health recovery.");
 		public static const LiftOff:PerkType = mk("Lift Off", "Lift Off",
-				"Allows you to start combat already flying.",
-				"You've chosen the 'Lift Off' perk, allowing you to start combat already flying.");
+				"Allows you to start combat already flying. (as long PC have any options to fly)",
+				"You've chosen the 'Lift Off' perk, allowing you to start combat already flying. (as long PC have any options to fly)");
 		public static const LightningReload:PerkType = mk("Lightning Reload", "Lightning Reload",
 				"Allows you to reload in middle of shooting as long PC have enough fatigue for that without ending turn and decrease reload fatigue cost by 50%.",
 				"You've chosen the 'Lightning Reload' perk, lowering even more time needed to reload with ammo range weapons like pistols and decrease reload fatigue cost by 50%.")

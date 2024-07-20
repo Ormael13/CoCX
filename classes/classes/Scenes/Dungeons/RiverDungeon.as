@@ -2095,8 +2095,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE3();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
+			outputText("The ceiling in this room has cracked, and occasional droplets of moisture fall from the floor above. The droplets freeze when they hit the floor, adding to the forming of icicles. Each time a droplet lands, the icy spike grows, ever so slightly. A few icy spikes have reached the ceiling, water pressure within slowly building.\n\n");
+			outputText("A few hives have survived in this room, clustered around the scant warmth provided by the cracks. Two trees, covered in small white flowers, stand near the middle of the room, providing the small hives with their only source of nectar.\n\n");
 			dungeons.setDungeonButtonsRD(roomE10, roomE20, null, roomE15);
 		}
 		public function roomE15():void {
@@ -2105,8 +2105,7 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE3();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
+			outputText("Your breath freezes over as you enter the room, sending a visible puff of frozen air into the room with each breath you take. A row of saplings, covered in frost, line each side of the room. You hear a faint, uneven buzzing from a few of the trees. With a few seconds of effort, you can tell that the hives have been built among the roots. There’s a small amount of honey, frozen solid, dripping from a few points on the ceiling…But you can tell that those hives have been long dead.\n\n");
 			dungeons.setDungeonButtonsRD(null, null, roomE14, roomE16);
 		}
 		public function roomE16():void {
@@ -2115,8 +2114,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE3();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
+			outputText("The ceiling in this room has cracked, and occasional droplets of moisture fall from the floor above. The droplets freeze when they hit the floor, adding to the forming of icicles. Each time a droplet lands, the icy spike grows, ever so slightly. A few icy spikes have reached the ceiling, water pressure within slowly building.\n\n");
+			outputText("A few hives have survived in this room, clustered around the scant warmth provided by the cracks. Two trees, covered in small white flowers, stand near the middle of the room, providing the small hives with their only source of nectar.\n\n");
 			dungeons.setDungeonButtonsRD(roomE11, roomE21, roomE15, null);
 		}
 		public function roomE17():void {
@@ -2125,8 +2124,7 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE2();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
+			outputText("This room is…odd. The floor is made from an almost alien, sticky stone with a thin layer of waxy crust that peels away when you step on it. The honey that flows from the walls collects on the floor. As you step into the room, you feel a sudden vibration under your feet, and the floor erupts in the middle of the room. It sends shards of the odd stone around the room, along with sickly sweet scent. As you watch, honey flows across the floor, dousing the flame.\n\n");
 			dungeons.setDungeonButtonsRD(roomE12, roomE23, null, roomE18);
 		}
 		public function roomE18():void {
@@ -2135,8 +2133,7 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE2();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
+			outputText("In this room, a single, charred tree stands, its blackened branches spreading from the centre to the four corners of the room. Honey flows like water, from the combs on the walls, down the branches, to the trunk itself. Where the honey flows, the tree seems to have been less harmed, and flowers grow on the branches.\n\n");
 			dungeons.setDungeonButtonsRD(null, null, roomE17, roomE19);
 		}
 		public function roomE19():void {
@@ -2145,8 +2142,7 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE2();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
+			outputText("This room is…odd. The floor is made from an almost alien, sticky stone with a thin layer of waxy crust that peels away when you step on it. The honey that flows from the walls collects on the floor. As you step into the room, you feel a sudden vibration under your feet, and the floor erupts in the middle of the room. It sends shards of the odd stone around the room, along with sickly sweet scent. As you watch, honey flows across the floor, dousing the flame.\n\n");
 			dungeons.setDungeonButtonsRD(roomE13, roomE24, roomE18, null);
 		}
 		public function roomE20():void {
@@ -2206,8 +2202,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE3();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
+			outputText("The ceiling in this room has cracked, and occasional droplets of moisture fall from the floor above. The droplets freeze when they hit the floor, adding to the forming of icicles. Each time a droplet lands, the icy spike grows, ever so slightly. A few icy spikes have reached the ceiling, water pressure within slowly building.\n\n");
+			outputText("A few hives have survived in this room, clustered around the scant warmth provided by the cracks. Two trees, covered in small white flowers, stand near the middle of the room, providing the small hives with their only source of nectar.\n\n");
 			dungeons.setDungeonButtonsRD(roomE20, roomE28, null, null);
 		}
 		public function roomE26():void {
@@ -2227,8 +2223,7 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE2();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
+			outputText("Your breath freezes over as you enter the room, sending a visible puff of frozen air into the room with each breath you take. A row of saplings, covered in frost, line each side of the room. You hear a faint, uneven buzzing from a few of the trees. With a few seconds of effort, you can tell that the hives have been built among the roots. There’s a small amount of honey, frozen solid, dripping from a few points on the ceiling…But you can tell that those hives have been long dead.\n\n");
 			dungeons.setDungeonButtonsRD(roomE24, roomE32, null, null);
 		}
 		public function roomE28():void {
@@ -2237,8 +2232,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE3();//3rd slab for boss summon
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
+			outputText("The ceiling in this room has cracked, and occasional droplets of moisture fall from the floor above. The droplets freeze when they hit the floor, adding to the forming of icicles. Each time a droplet lands, the icy spike grows, ever so slightly. A few icy spikes have reached the ceiling, water pressure within slowly building.\n\n");
+			outputText("A few hives have survived in this room, clustered around the scant warmth provided by the cracks. Two trees, covered in small white flowers, stand near the middle of the room, providing the small hives with their only source of nectar.\n\n");
 			dungeons.setDungeonButtonsRD(roomE25, null, null, roomE29);
 		}
 		public function roomE29():void {
@@ -2247,8 +2242,7 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE3();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
+			outputText("Your breath freezes over as you enter the room, sending a visible puff of frozen air into the room with each breath you take. A row of saplings, covered in frost, line each side of the room. You hear a faint, uneven buzzing from a few of the trees. With a few seconds of effort, you can tell that the hives have been built among the roots. There’s a small amount of honey, frozen solid, dripping from a few points on the ceiling…But you can tell that those hives have been long dead.\n\n");
 			dungeons.setDungeonButtonsRD(null, null, roomE28, null);
 		}
 		public function roomE30():void {
@@ -2268,8 +2262,7 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE2();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
+			outputText("In this room, a single, charred tree stands, its blackened branches spreading from the centre to the four corners of the room. Honey flows like water, from the combs on the walls, down the branches, to the trunk itself. Where the honey flows, the tree seems to have been less harmed, and flowers grow on the branches.\n\n");
 			dungeons.setDungeonButtonsRD(null, null, null, roomE32);
 		}
 		public function roomE32():void {
@@ -2278,8 +2271,7 @@ public class RiverDungeon extends DungeonAbstractContent
 			encountersRuletteE2();//2nd slab for boss summon
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.\n\n");
+			outputText("This room is…odd. The floor is made from an almost alien, sticky stone with a thin layer of waxy crust that peels away when you step on it. The honey that flows from the walls collects on the floor. As you step into the room, you feel a sudden vibration under your feet, and the floor erupts in the middle of the room. It sends shards of the odd stone around the room, along with sickly sweet scent. As you watch, honey flows across the floor, dousing the flame.\n\n");
 			dungeons.setDungeonButtonsRD(roomE27, null, roomE31, null);
 		}
 		/*
