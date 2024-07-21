@@ -45,12 +45,12 @@ public class Exploration extends BaseContent implements SaveableState
 		public var counters:Object = {
 			explore: 0,
 			
+			lake: 0,
+			boat: 0,
+			
 			forestOuter: 0,
 			forestInner: 0,
 			deepwoods: 0,
-			
-			lake: 0,
-			boat: 0,
 			
 			desertOuter: 0,
 			desertInner: 0,
@@ -336,16 +336,15 @@ public class Exploration extends BaseContent implements SaveableState
 			menu();
 			var bd:ButtonDataList = new ButtonDataList();
 			// Row 1
-			bd.append(btnExploreForestOutskirts());
-			bd.append(btnExploreForestInner());
-			bd.append(btnExploreDeepwoods());
+			bd.append(btnExploreLake());
+			bd.append(btnExploreLakeBoat());
+			bd.add("");//bd.add("Shore").hint("TBA"); //Discovered when exploring using Lake Boat.
 			bd.add("");
 			bd.add("");
 			// Row 2
-			bd.append(btnExploreLake());
-			bd.append(btnExploreLakeBoat());
-			//bd.add("Shore").hint("TBA"); //Discovered when exploring using Lake Boat.
-			bd.add("");
+			bd.append(btnExploreForestOutskirts());
+			bd.append(btnExploreForestInner());
+			bd.append(btnExploreDeepwoods());
 			bd.add("");
 			bd.add("");
 			// Row 3
@@ -409,6 +408,18 @@ public class Exploration extends BaseContent implements SaveableState
 			bd.append(btnExploreVolcanicCragOuter());
 			bd.add("");
 			bd.add("");
+			// Row 13
+			//bd.add("");
+			//bd.append(btnExploreAshlands());//underdark entrance
+			//bd.append(btnExploreVolcanicCragOuter());
+			//bd.add("");
+			//bd.add("");
+			// Row 14
+			//bd.add("");
+			//bd.append(btnExploreAshlands());//cliffs
+			//bd.append(btnExploreVolcanicCragOuter());
+			//bd.add("");
+			//bd.add("");
 			
 			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(5, "",	//Wuxia related area - ?latająca wyspa?
 			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(9, "",	//Wuxia related area - ?latająca wyspa?
@@ -1226,19 +1237,19 @@ public class Exploration extends BaseContent implements SaveableState
 						},
 						call  : SceneLib.bazaar.findBazaar
 					}, {
-						name  : "Forest",
-						kind  : "place",
-						unique: true,
-						chance: Encounters.ALWAYS,
-						when  : SceneLib.forest.canDiscoverOuter,
-						call  : SceneLib.forest.discoverOuter
-					}, {
 						name  : "Lake",
 						kind  : "place",
 						unique: true,
 						chance: Encounters.ALWAYS,
 						when  : SceneLib.lake.canDiscover,
 						call  : SceneLib.lake.discover
+					}, {
+						name  : "Forest",
+						kind  : "place",
+						unique: true,
+						chance: Encounters.ALWAYS,
+						when  : SceneLib.forest.canDiscoverOuter,
+						call  : SceneLib.forest.discoverOuter
 					}, {
 						name  : "Desert",
 						kind  : "place",

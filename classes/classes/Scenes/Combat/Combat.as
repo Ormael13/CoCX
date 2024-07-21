@@ -6130,8 +6130,13 @@ public class Combat extends BaseContent {
 	}
 	public function firearmsDamageNoLagSingle():Number {
 		var damage:Number = 0;
-		damage += player.weaponRangeAttack * 2;
-		damage += player.speStat.core.value + player.intStat.core.value + player.wisStat.core.value;
+		damage += player.weaponRangeAttack * 10;
+		damage += player.wis * 0.75;
+		damage += scalingBonusWisdom() * 0.15;
+		damage += player.inte * 0.5;
+		damage += scalingBonusIntelligence() * 0.1;
+		damage += player.spe * 0.25;
+		damage += scalingBonusSpeed() * 0.05;
         if (player.hasPerk(PerkLib.JobGunslinger)) {
 			damage += player.wis * 1.5;
             damage += scalingBonusWisdom() * 0.3;
@@ -6141,8 +6146,8 @@ public class Combat extends BaseContent {
 			damage += scalingBonusSpeed() * 0.1;
 		}
         if (player.hasPerk(PerkLib.ChurchOfTheGun)) {
-			damage += player.wis * 2;
-            damage += scalingBonusWisdom() * 0.6;
+			damage += player.wis * 2.5;
+            damage += scalingBonusWisdom() * 0.5;
 		}
         if (player.hasPerk(PerkLib.AlchemicalCartridge)) {
 			damage += player.inte * 1.5;
@@ -9429,7 +9434,8 @@ public class Combat extends BaseContent {
         if (hpVictory) {
             outputText("You defeat [themonster].\n");
         } else {
-            outputText("You smile as [themonster] collapses and begins masturbating feverishly.");
+            if (monster.hasPerk(PerkLib.EnemyConstructType) && !monster.hasPerk(PerkLib.Sentience)) outputText("You smile, as [themonster] collapses and begins shaking violently, as the energy which was animating it, start seeping out, disrupted by your teasing.");
+			else outputText("You smile as [themonster] collapses and begins masturbating feverishly.");
         }
         cleanupAfterCombat();
     }

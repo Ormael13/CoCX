@@ -143,7 +143,14 @@ public class Creature extends Utils
 		//Clothing/Armor
 		private var _armorName:String = "";
 		private var _armorDef:Number = 0;
+		private var _armorDefSlashing:Number = 0;
+		private var _armorDefPiercing:Number = 0;
+		private var _armorDefBludgeoning:Number = 0;
 		private var _armorMDef:Number = 0;
+		private var _armorMDefFire:Number = 0;
+		private var _armorMDefIce:Number = 0;
+		private var _armorMDefLightning:Number = 0;
+		private var _armorMDefDarkness:Number = 0;
 		private var _armorPerk:String = "";
 		private var _armorValue:Number = 0;
 		public function get armorName():String { return _armorName; }
@@ -158,7 +165,14 @@ public class Creature extends Utils
 		public function set armorValue(value:Number):void { _armorValue = value; }
 		public function set armorName(value:String):void { _armorName = value; }
 		public function set armorDef(value:Number):void { _armorDef = value; }
+		public function set armorDefSlashing(value:Number):void { _armorDefSlashing = value; }
+		public function set armorDefPiercing(value:Number):void { _armorDefPiercing = value; }
+		public function set armorDefBludgeoning(value:Number):void { _armorDefBludgeoning = value; }
 		public function set armorMDef(value:Number):void { _armorMDef = value; }
+		public function set armorMDefFire(value:Number):void { _armorMDefFire = value; }
+		public function set armorMDefIce(value:Number):void { _armorMDefIce = value; }
+		public function set armorMDefLightning(value:Number):void { _armorMDefLightning = value; }
+		public function set armorMDefDarkness(value:Number):void { _armorMDefDarkness = value; }
 		public function set armorPerk(value:String):void { _armorPerk = value; }
 		//Misc Jewelry
 		private var _miscjewelryName:String = "";

@@ -191,7 +191,7 @@ public class Weapon extends Equipable
 		
 		public function get size():int { return _size; }
 		
-		public function isDual():Boolean { return _dual; }
+		public function isDual():Boolean { return _dual || (type == WT_FISTS || type == WT_GAUNTLET); }
 
 		public function isSmall():Boolean { return size == WSZ_SMALL; }
 		public function isMedium():Boolean { return size == WSZ_MEDIUM; }
@@ -258,7 +258,7 @@ public class Weapon extends Equipable
 			if (isDual()) {
 				// all dual req. DW
 				noShieldAllowed = true;
-				if (!game.player.hasPerk(PerkLib.DualWield)) {
+				if (!game.player.hasPerk(PerkLib.DualWield) && type != WT_FISTS && type != WT_GAUNTLET) {
 					if (doOutput) outputText(getItemText("dual_fail"));
 					return false;
 				}
