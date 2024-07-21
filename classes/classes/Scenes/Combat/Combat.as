@@ -3450,7 +3450,7 @@ public class Combat extends BaseContent {
     }
 
 	public function checkForElementalEnchantmentAndDoDamage(damage:Number, canUseFist:Boolean = true, canUseWhip:Boolean = true, crit:Boolean = false, IsFeralCombat:Boolean = false, INeedOnlyOneFistOrKick:Number = 0):void{
-		if (isFireTypeWeapon()) {
+		if (isFireTypeWeapon() && !isPlasmaTypeWeapon()) {
 			if (player.flameBladeActive()) damage += scalingBonusLibido() * 0.2;
 			if (player.weapon == weapons.VGRAVEH) damage *= 1.25;
 			damage = Math.round(damage * fireDamageBoostedByDao());
@@ -3476,7 +3476,7 @@ public class Combat extends BaseContent {
 				outputText(" [weapon] left lingering Frostburn at [themonster].");
 			}
         }
-        else if (isLightningTypeWeapon()) {
+        else if (isLightningTypeWeapon() && !isPlasmaTypeWeapon()) {
             damage = Math.round(damage * lightningDamageBoostedByDao());
 			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
             doLightningDamage(damage, true, true);
@@ -7199,7 +7199,7 @@ public class Combat extends BaseContent {
     public function isFireTypeWeapon():Boolean {
         return ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.TRCLAYM || player.weapon == weapons.RDAGGER || player.weapon == weapons.VGRAVEH) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "ruby"))
                 || player.weapon.hasTag(ItemConstants.W_FIRE_TYPE)
-                || (player.hasStatusEffect(StatusEffects.FlameBlade) && !player.hasStatusEffect(StatusEffects.ElectrifyWeapon));
+                || player.hasStatusEffect(StatusEffects.FlameBlade);
     }
     public function isIceTypeWeapon():Boolean {
         return ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.TSCLAYM || player.weapon == weapons.SDAGGER || player.weapon == weapons.GGRAVEA) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "sapphire"))
@@ -7208,14 +7208,13 @@ public class Combat extends BaseContent {
     public function isLightningTypeWeapon():Boolean {
         return ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TTCLAYM || player.weapon == weapons.TODAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "topaz"))
                 || player.weapon.hasTag(ItemConstants.W_LIGHTNING_TYPE)
-                || (player.hasStatusEffect(StatusEffects.ElectrifyWeapon) && !player.hasStatusEffect(StatusEffects.FlameBlade));
+                || player.hasStatusEffect(StatusEffects.ElectrifyWeapon);
     }
     public function isDarknessTypeWeapon():Boolean {
         return ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.TACLAYM || player.weapon == weapons.ADAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "amethyst"));
     }
     public function isPlasmaTypeWeapon():Boolean {
-        return ((((player.weapon == weapons.RCLAYMO || player.weapon == weapons.TRCLAYM || player.weapon == weapons.RDAGGER || player.weapon == weapons.VGRAVEH) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "ruby")) || player.weapon.hasTag(ItemConstants.W_FIRE_TYPE) || player.hasStatusEffect(StatusEffects.FlameBlade))
-			&& (((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TTCLAYM || player.weapon == weapons.TODAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "topaz")) || player.weapon.hasTag(ItemConstants.W_LIGHTNING_TYPE) || player.hasStatusEffect(StatusEffects.ElectrifyWeapon)));
+        return (isFireTypeWeapon() && isLightningTypeWeapon());
     }
 	
 	public function isUnarmedCombatButDealFireDamage():Boolean {

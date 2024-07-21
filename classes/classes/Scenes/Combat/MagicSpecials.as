@@ -140,7 +140,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd = buttons.add("Lust storm", Luststorm).hint("Supercharge the air with your lusty electricity to unleash a thunderstorm.");
 				if (player.hasStatusEffect(StatusEffects.lustStorm)) bd.disable("<b>You already unleashed a thunderstorm on the battlefield</b>\n\n");
 			}
-			if (player.isRaceCached(Races.KIRIN)) {
+			if (player.isRaceCached(Races.KIRIN) && (player.isMaceHammerTypeWeapon() || player.isDuelingTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isDaggerTypeWeapon() || player.isScytheTypeWeapon())) {
 				//Electrify Weapon
 				bd = buttons.add("Electrify Weapon", ElectrifyWeapon).hint("Coat your weapon with a sheet of lusty electricity.");
 				if (player.hasStatusEffect(StatusEffects.ElectrifyWeapon)) {
