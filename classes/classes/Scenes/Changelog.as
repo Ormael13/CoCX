@@ -278,9 +278,13 @@ public class Changelog extends BaseContent
 			outputText("-During Draculina boss fight been able to use Sunrise soulskill or use foxflame pelt would help to counter her Darkness move (like spell Blind can do already).\n");
 			outputText("-Foxflame Pelt special effect minor change when having 9 cinder tails: cost of use or maintain is halved, speed boost is doubled, can fly (similar to using only SF and would cost SF and Mana per turn needed to sustain foxflame pelt).\n");
 			outputText("-Minor adjustion of soulskill damage calculations.\n");
-			outputText("-Default firearms dmg caluclation from weapon atk increased (2x > 10x) and scaling off wis/int/spe (instead of core values to use scaling functions).\n");
+			outputText("-Default firearms dmg calculation from weapon atk increased (2x > 10x) and scaling off wis/int/spe (instead of core values to use scaling functions).\n");
 			outputText("-Changed order of discovered areas with Lake been first founded then Forest (O).\n");
 			outputText("-Fixes a quality of life issue where pressing down the mouse button and then moving the mouse off of a button before releasing the mouse button still clicks/activates the button. (Edward Darksong)\n");
+			outputText("-New mutation perk: Mighty Lower Half. Req. having free adaoptation mutation slot, one of races: Kangaro, Bunny, Frog, Horse Morph, Centaur(The original centaur not the other ones), Cow, Minotaur. Effects: Make Kick permanent no matter your leg type, Increase unarmed strike damage by 5 and grapple effect by 20%.\n");
+			outputText("-New mutation perk: Mighty Lower Half (Primitive). Req. Mighty Lower Half and lvl 30+. Effects: Make Kick permanent no matter your leg type, Increase unarmed strike damage by 10 and grapple effect by 40%. Kick is 50% stronger.\n");
+			outputText("-New mutation perk: Mighty Lower Half (Evolved). Req. Mighty Lower Half (Primitive) and lvl 60+. Effects: Make Kick permanent no matter your leg type, Increase unarmed strike damage by 15 and grapple effect by 60%. Kick is 100% stronger. Kick stun lasts 1 round longer.\n");
+			outputText("-New mutation perk: Mighty Lower Half (Final Form). Req. Mighty Lower Half (Evolved) and lvl 90+. Effects: Make Kick permanent no matter your leg type, Increase unarmed strike damage by 20 and grapple effect by 80%. Kick is 150% stronger. Kick stun lasts 1 round longer. Straddle and Grapples duration is extended by 1 additional round.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -296,17 +300,13 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
 			outputText("-\n");
 			outputText("-\n");//New mutation perk: Human Parathyroid Glands (Final Form). Req. Human Parathyroid Glands (Evolved) and lvl 90+. Effects: Increases self healing by 40 * level HP in combat and twice more out of combat. 8 * level HP Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.
 			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
+			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Dracula/lina PC unable to find get ghoul if they not learned this as normal Vampire, unable to buy manual for 1st atk: f. swords, Arigean Princess PC not been fully immune to TF-ing like other perm races, Weresharks not having their stats changing according to moon phase or boosted during use of Crinos Shape, Phoenix TF adding mutagen penatly instead of stat curse, ");
@@ -315,7 +315,7 @@ public class Changelog extends BaseContent
 			outputText("Pilgrim's Bounty perk setting cumQ as if max lust was 100, Raphael rape scene treating all PC cocks as tentalce cocks, Condensed Power and Titanic Strength perks desc/effects been misaligned/incorectly calculated, HB Mech Dragon's Breath Flamer & Scatter Laser upgrade(s) after instaling each weapon, HB Ayo Armor have it stored SF reset on loading save, Vapula not longer will make Joy ");
 			outputText("join any threesome scenes, Patchouli sex scenes will now know when she gained cock she could use, Pure JoJo anal sex sex scene cock parser going postal, trapped satyr sex scenes not giving sex XP or triger any related effects, Cum Cannon checking for cow not mino race, White-Faced One Birthright (Final Form) stat multi bonuses, Nadia recruitment endcounter bug msg, ");
 			outputText("one of Raphael scenes using variant for tentacle cocks that can go all way throu without having such cock(s), unable to gain plasma dmg from using fire buff on lightning weapon and vice versa, unable to use Blind during Draculina fight, rescue from bad end not clearing lingering status effects, Centaurium tf effect checking for wrong elf-like ears type, ");
-			outputText("Ascension: Transhumanism (Sen) perk not adding sensitivity, Selachimorphanthropy bonuses not changing with moon phases, inconsistencies for damage type dealt in melee/range base attacks and specials, flame blade bonus dmg from libido, combining fire and lightning damage on melee weapons, lust defeat text for constructs not using it own variant\n\n");
+			outputText("Ascension: Transhumanism (Sen) perk not adding sensitivity, Selachimorphanthropy bonuses not changing with moon phases, inconsistencies for damage type dealt in melee/range base attacks and specials, flame blade bonus dmg from libido, combining fire and lightning damage on melee weapons, lust defeat text for non sentient constructs not using it own variant\n\n");
 			/*ostatni punkt changelogu
 			outputText("(Part 2/2) <b>Version 0.9a:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");

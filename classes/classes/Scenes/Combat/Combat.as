@@ -13657,7 +13657,8 @@ public function Straddle():void {
         if(checkConcentration("[monster name] recovers just in time to get out of your reach as you attempt to straddle [monster him].")) return; //Amily concentration
         //WRAP IT UPPP
         monster.createStatusEffect(StatusEffects.Straddle, 0, 0, 0, 0);
-        player.createStatusEffect(StatusEffects.StraddleRoundLeft, 2 + rand(3), 0, 0, 0);
+        if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 4) player.createStatusEffect(StatusEffects.StraddleRoundLeft, 3 + rand(3), 0, 0, 0);
+		else player.createStatusEffect(StatusEffects.StraddleRoundLeft, 2 + rand(3), 0, 0, 0);
         if (player.isAlraune()) {
             outputText("You giggle and take hold of your dazed opponent with your vines before gently pulling [monster him] into your nectar bath, straddling him with your pistil as you get into mating position.");
             if (!player.hasStatusEffect(StatusEffects.AlrauneEntangle)) player.createStatusEffect(StatusEffects.AlrauneEntangle, 0, 0, 0, 0);
@@ -14212,6 +14213,7 @@ public function ScyllaSqueeze():void {
     if (player.hasPerk(PerkLib.UnbreakableBind)) damage *= 2;
 	if (player.perkv1(IMutationsLib.ScyllaInkGlandsIM) >= 2 && player.isKraken()) damage *= player.perkv1(IMutationsLib.ScyllaInkGlandsIM);
     if (player.hasStatusEffect(StatusEffects.ControlFreak)) damage *= player.statusEffectv1(StatusEffects.ControlFreak);
+	if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 1) damage *= (1 + (0.2 * player.perkv1(IMutationsLib.MightyLowerHalfIM)));
     //Squeeze -
     outputText("You start squeezing your");
     if (monster.plural) {
@@ -15242,7 +15244,8 @@ public function HypnosisCoil():void {
     outputText("You maintain eye contact with the target, insidiously coiling your tail around it. ");
     if (rand(4) == 0) {
         outputText("It's only when you are fully wrapped around your victim that [themonster] snaps out of it.");
-        monster.createStatusEffect(StatusEffects.Constricted, 1 + rand(4), 0, 0, 0);
+        if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 4) monster.createStatusEffect(StatusEffects.Constricted, 2 + rand(4), 0, 0, 0);
+		else monster.createStatusEffect(StatusEffects.Constricted, 1 + rand(4), 0, 0, 0);
         monster.removeStatusEffect(StatusEffects.HypnosisNaga);
     } else {
         var Duuuration:Number = monster.statusEffectv1(StatusEffects.HypnosisNaga);

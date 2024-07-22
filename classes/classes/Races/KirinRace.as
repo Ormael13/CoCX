@@ -67,9 +67,9 @@ public class KirinRace extends Race {
 				.eyeType(Eyes.DRACONIC,+1)
 				.faceType(ANY(Face.HUMAN, Face.HORSE), +1);
 
-		addMutation(IMutationsLib.HeartOfTheStormIM, +1);
-		addMutation(IMutationsLib.RaijuCathodeIM, +1);
-		addMutation(IMutationsLib.DrakeBonesIM, +1);
+		addMutation(IMutationsLib.HeartOfTheStormIM);
+		addMutation(IMutationsLib.RaijuCathodeIM);
+		addMutation(IMutationsLib.DrakeBonesIM);
 		
 		buildTier(23, "Kirin")
 				.requireLegType(LowerBody.KIRIN)

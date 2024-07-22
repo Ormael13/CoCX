@@ -4,6 +4,7 @@ import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
@@ -934,7 +935,8 @@ public function nagaPlayerConstrict():void {
 			else {
 				outputText("You quickly dig your way up and underneath your opponent and, as you break out of the ground, launch yourself at [themonster] and wrap yourself around [monster him]. You squeeze [monster him] tightly and hear [monster him] cry out in pain.");
 			}
-			monster.createStatusEffect(StatusEffects.Constricted, 1 + rand(4), 0, 0, 0);
+			if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 4) monster.createStatusEffect(StatusEffects.Constricted, 2 + rand(4),0,0,0);
+			else monster.createStatusEffect(StatusEffects.Constricted, 1 + rand(4), 0, 0, 0);
 		}
 		//Failure
 		else {
@@ -957,7 +959,8 @@ public function nagaPlayerConstrict():void {
 			else {
 				outputText("You launch yourself at [themonster] and wrap yourself around [monster him]. You squeeze [monster him] tightly and hear [monster him] cry out in pain.");
 			}
-			monster.createStatusEffect(StatusEffects.Constricted, 1 + rand(4), 0, 0, 0);
+			if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 4) monster.createStatusEffect(StatusEffects.Constricted, 2 + rand(4), 0, 0, 0);
+			else monster.createStatusEffect(StatusEffects.Constricted, 1 + rand(4), 0, 0, 0);
 		}
 		//Failure
 		else {
@@ -997,6 +1000,7 @@ public function nagaSqueeze():void {
 	if (player.hasPerk(PerkLib.UnbreakableBind)) damage *= 2;
 	if (player.hasStatusEffect(StatusEffects.ControlFreak)) damage *= player.statusEffectv1(StatusEffects.ControlFreak);
 	if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
+	if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 1) damage *= (1 + (0.2 * player.perkv1(IMutationsLib.MightyLowerHalfIM)));
 	damage = damage+damageBonus;
 	SceneLib.combat.doDamage(damage, true, true);
 	fatigue(20, USEFATG_PHYSICAL);

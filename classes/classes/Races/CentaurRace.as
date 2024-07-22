@@ -61,7 +61,8 @@ public class CentaurRace extends Race {
 				.cockOrVaginaOfType(CockTypesEnum.HORSE, VaginaClass.EQUINE, +1);
 		
 		addMutation(IMutationsLib.TwinHeartIM, +2);
-		addMutation(IMutationsLib.EquineMuscleIM, +1);
+		addMutation(IMutationsLib.EquineMuscleIM);
+		addMutation(IMutationsLib.MightyLowerHalfIM);
 		
 		buildTier(8, "lesser centaur")
 				.buffs({
