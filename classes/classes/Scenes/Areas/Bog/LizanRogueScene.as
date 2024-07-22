@@ -88,30 +88,35 @@ public class LizanRogueScene extends BaseContent
 		
 		public function winAgainstLizan():void {
 			clearOutput();
-			if (player.corAdjustedDown > 30) {
-				outputText("The lizan raises his hands in defeat and you celebrate with a victory dance. ");
-				if (player.lust >= 33) {
-					outputText("You wonder what you should do to the lizan.");
-					if (player.hasCock()) addButton(0, "Use Dick", rapeLizanInTheAss).hint("Anally penetrate him with your " + player.multiCockDescriptLight() + ".");
-					if (player.hasVagina()) addButton(1, "Use Pussy", rapeLizanWithPussy).hint("Get on top of the lizan and stuff his cock into your [pussy].");
-					LustyMaidensArmor.addTitfuckButton(2);
-					addButton(14, "Leave", cleanupAfterCombat);
-					SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstLizan);
-				}
-				else {
-					outputText("You're not aroused enough to rape him, so you rummage through his bag for something valuable.");
-					cleanupAfterCombat();
-				}
-			}
+			if (player.corAdjustedDown > 66) sexMenuRough();
 			else {
 				outputText("The lizan raises his hands in defeat, and you celebrate with a victory dance. ");
 				if (player.lust >= 33) {
 					outputText("<b>You could have sex with him if you like to.</b> ");
 					addButton(0, "Sex", haveSexWithLizan).hint("Have some fun with the oh-so-sexy lizan.");
+					addButton(1, "Rough", sexMenuRough).hint("Rape him roughly.");
 					addButton(14, "Leave", leaveLizanAfterCombat);
 					SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstLizan);
 				}
 				else leaveLizanAfterCombat();
+			}
+		}
+
+		public function sexMenuRough():void {
+			clearOutput();
+			menu();
+			if (player.lust >= 33) {
+				outputText("The lizan raises his hands in defeat and you celebrate with a victory dance. ");
+				outputText("You wonder what you should do to the lizan.");
+				if (player.hasCock()) addButton(0, "Use Dick", rapeLizanInTheAss).hint("Anally penetrate him with your " + player.multiCockDescriptLight() + ".");
+				if (player.hasVagina()) addButton(1, "Use Pussy", rapeLizanWithPussy).hint("Get on top of the lizan and stuff his cock into your [pussy].");
+				LustyMaidensArmor.addTitfuckButton(2);
+				addButton(14, "Leave", cleanupAfterCombat);
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(sexMenuRough);
+			}
+			else {
+				outputText("You're not aroused enough to rape him, so you rummage through his bag for something valuable.");
+				cleanupAfterCombat();
 			}
 		}
 		

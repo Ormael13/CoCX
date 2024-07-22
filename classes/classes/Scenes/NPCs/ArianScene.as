@@ -1509,11 +1509,11 @@ private function arianSexMenu(output:Boolean = true):void {
 	//(Display Options)
 	sceneHunter.print("His anal XP increases, and has 3 stages, affecting both Anal-Pitch and DP scenes. Try yourself!");
 	menu();
-	addButton(0,"Anal - Pitch",giveArianAnal).disableIf(player.cockThatFits(arianCapacity) < 0,
+	addButton(0,"Anal Pitch",giveArianAnal).disableIf(player.cockThatFits(arianCapacity) < 0,
 		"Req. a cock fitting "+arianCapacity+" area!");
 	addButton(1,"Get Blown",getBlownByArian).disableIf(!player.hasCock(), "Req. a cock!");
 	if(flags[kFLAGS.ARIAN_COCK_SIZE] > 0) {
-		addButton(5,"Anal - Catch",getButtWreckedByArian);
+		addButton(5,"Anal Catch",getButtWreckedByArian);
 		addButton(6,"Blow " + arianMF("Him","Her"),suckAriansDick);
 		addButton(7,"Get Fucked",getPenetratedByArianAndHisHitlerMustache).disableIf(!player.hasVagina(), "Req. a vagina!");
 		addButton(8, "Docking", arianDocking).disableIf(player.cockThatFits(30) < 0 || flags[kFLAGS.ARIAN_COCK_SIZE] >= 3,

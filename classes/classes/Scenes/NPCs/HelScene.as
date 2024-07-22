@@ -222,6 +222,7 @@ internal function loseToSalamander():void {
 
 		outputText("She collapses atop you, panting heavily.  \"<i>That.  Was.  Awesome,</i>\" she laughs, reaching up to give your nipple a pinch as she nestles her head on you.  Your cock begins to deflate inside her as trickles of spooge spill out around your girth, but she doesn't seem intent on leaving any time soon, and you have to admit, the warmth of her against you is more than nice.  The salamander gives you one last grin and withdraws her tail from your lips.  A moment later, she slides it under your head like a pillow, and closes her eyes, exhausted.  Soon, you, too, fall into a peaceful sleep.\n\n");
 		player.sexReward("vaginalFluids","Dick");
+		sharedEnd();
 	}
 	//Player Loss – Rape – Female
 	//else if(player.hasVagina()) {
@@ -247,6 +248,7 @@ internal function loseToSalamander():void {
 		outputText("Before your mind has settled, your new friend has collapsed on top of you, resting her cheek on your " + chestDesc() + ".  Her breath is ragged, not unlike yours, and her eyelids seem suddenly heavy.  Smiling, she slowly withdraws her cum-soaked tail from your " + vaginaDescript(0) + " and slips it under your head like a pillow, soft and warm, if not a little moist.  Seeing as she doesn't seem intent on going anywhere, you, too, close your eyes and drift off to a peaceful sleep.");
 		player.sexReward("no", "Vaginal");
 		player.sexReward("vaginalFluids","Lips");
+		sharedEnd();
 	}
 	//Player Loss – Rape – Genderless & Male >helFollower.helCapacity() cockarea
 	//else {
@@ -273,13 +275,17 @@ internal function loseToSalamander():void {
 		outputText("Before your mind has settled, your new friend has collapsed on top of you, resting her cheek on your " + chestDesc() + ".  Her breath is ragged, not unlike yours, and her eyelids seem suddenly heavy.  Smiling, she slowly withdraws her tail from your " + assholeDescript() + " and slips it under your head like a pillow, soft and warm, if not a little moist.  Seeing as she doesn't seem intent on going anywhere, you, too, close your eyes and drift off to a peaceful sleep.");
 		player.sexReward("vaginalFluids","Lips");
 		player.sexReward("Default","Anal",true,false);
+		sharedEnd();
 	}
-	dynStats("sen", 1);
-	flags[kFLAGS.HEL_FUCK_COUNTER]++;
-	flags[kFLAGS.HEL_AFFECTION]++;
-	//Bump up follower tracking affection too
-	helFollower.helAffection(5);
-	cleanupAfterCombat();
+
+	function sharedEnd():void {
+		dynStats("sen", 1);
+		flags[kFLAGS.HEL_FUCK_COUNTER]++;
+		flags[kFLAGS.HEL_AFFECTION]++;
+		//Bump up follower tracking affection too
+		helFollower.helAffection(5);
+		cleanupAfterCombat();
+	}
 }
 
 
