@@ -177,7 +177,7 @@ public final class WeaponLib extends ItemConstants
 		public const BFGAUNT:Weapon = new Weapon(
 				"BFGaunt", "B.F.Gauntlets", "big fucking gauntlets", "a big fucking gauntlets", "smash", 0, 1600,
 				"Big Fucking Gauntlets - the best solution for a tiny e-pen complex at this side of the Mareth!  This huge gauntlets signed by mysterious 'Vi' requires 150 strength to fully unleash it power.\nIncreases unarmed damage by 2x.\nIncreases stun chance by 40.",
-				WT_GAUNTLET, WSZ_LARGE, true)
+				WT_GAUNTLET, WSZ_LARGE)
 				.withEffect(IELib.Stun, 40)
 				.withTags(W_LGWRATH) as Weapon;
 		public const BFTHSWORD:Weapon = new Weapon("BFTHSword", "BFTHSword", "big fucking two-handed sword", "a big fucking two-handed sword", "slash", 100, 4000, "Big Fucking Two-Handed Sword - if the best solution for a tiny e-pen complex at this side of the Mareth not work take this one! This 2H 4 meters long sword requires 250 strength to fully unleash it power.", WT_SWORD, WSZ_MASSIVE)
@@ -199,7 +199,7 @@ public final class WeaponLib extends ItemConstants
 		public const CATGLOV:Weapon = new Weapon(
 				"CatGlove", "CatGlove", "black cat glove", "a pair of black cat gloves", "punch", 0, 480,
 				"Not quite a weapon as much as they are black gloves with open fingers to let the tips out. These were made and custom enchanted for a cat girl adventurer. While worn by someone with cat pawed hands in feral stance, allow to perform two more claw attacks per turn. Feral Attack also counts as a light weapon for the purpose of sneak attacks.",
-				WT_GAUNTLET, WSZ_SMALL, true);
+				WT_GAUNTLET, WSZ_SMALL);
 		public const CHAOSEA:Weapon = new Weapon(
 				"Chaosea", "Chaoseater", "Chaoseater", "a Chaoseater", "slash", 410, 65600,
 				"It's incredibly large blade with jagged edges on both sides along with the skulls engraved within the middle of the blade. Requires 500 strength to fully unleash it power.",
@@ -210,7 +210,7 @@ public final class WeaponLib extends ItemConstants
 		public const CLAWS  :Weapon = new Weapon(
 				"Claws","Claws","gauntlet with claws","a gauntlet with claws","rend",0,100,
 				"Those metal gauntlets have tips of the fingers shaped like sharp natural claws.  Though they lacks the damaging potential of other weapons, they have a chance to leave bleeding wounds.",
-				WT_GAUNTLET, WSZ_SMALL, true)
+				WT_GAUNTLET, WSZ_SMALL)
 				.withEffect(IELib.Bleed, 10) as Weapon;
 		public const CLAYMOR:Weapon = findCommonDynamicWeapon("claymore");
 		//przerobić na high grade wrath weapon?
@@ -366,7 +366,7 @@ public final class WeaponLib extends ItemConstants
 				"Those whips once belonged to Lethice who was defeated at your hands. It gives off flames when you crack those whips.",
 				WT_WHIP, WSZ_MEDIUM, true)
 				.withBuffs({'teasedmg': 50})
-				.withTags(W_WHIPPING) as Weapon;
+				.withTags(W_WHIPPING, W_FIRE_TYPE) as Weapon;
 		public const DOCDEST:Weapon = new Weapon(
 				"DOCDest", "DOCDestroyer", "Defiled Oni Chieftain Destroyer", "a Defiled Oni Chieftain Destroyer", "smash", 160, 16800,
 				"This unrealistically large two handed mace was clearly made for some legendary oni chieftain to wield. Even bigger than the standard oni tetsubo this thing could topple buildings. You likely will need some absurd strength just to lift it.",
@@ -466,7 +466,7 @@ public final class WeaponLib extends ItemConstants
 		public const H_GAUNT:Weapon = new Weapon(
 				"H.Gaunt", "H.Gaunt", "hooked gauntlets", "a set of hooked gauntlets", "clawing punch", 0, 400,
 				"These metal gauntlets are covered in nasty looking hooks that are sure to tear at your foes flesh and cause them harm.",
-				WT_GAUNTLET, WSZ_MEDIUM, true)
+				WT_GAUNTLET, WSZ_MEDIUM)
 				.withEffect(IELib.Bleed, 25) as Weapon;
 		public const HALBERD:Weapon = findCommonDynamicWeapon("halberd");
 		public const HELRAIS:Weapon = new Weapon(
@@ -508,7 +508,7 @@ public final class WeaponLib extends ItemConstants
 		public const KARMTOU:Weapon = new Weapon(
 				"KarmTou", "KarmicTouch", "karmic gloves", "a pair of karmic gloves", "punch", 0, 400,
 				"A pair of gauntlets, ordinary at first glance save by its immaculate appearance in shining metal and snow-white cloth.Their touch brings waste into the wicked flesh, punishing them in the form of blows more painful then should be.",
-				WT_GAUNTLET, WSZ_MEDIUM, true)
+				WT_GAUNTLET, WSZ_MEDIUM)
 				.withBuffs({ 'psoulskillpower': +1.5 })
 				.withTags(I_LEGENDARY, W_PURE_TYPE)
 				.withEffect(IELib.Stun, 50) as Weapon;
@@ -525,7 +525,7 @@ public final class WeaponLib extends ItemConstants
 		public const L_CLAWS:Weapon = new Weapon(
 				"L.Claws","LustyClaws","gauntlet with an aphrodisiac-coated claws","a gauntlet with an aphrodisiac-coated claws","rend",0,200,
 				"Those metal gauntlets have tips of the fingers shaped like natural claws.  They seems to have been enchanted to always be covered in a light aphrodisiac to arouse anything cut with it.",
-				WT_GAUNTLET, WSZ_MEDIUM, true)
+				WT_GAUNTLET, WSZ_MEDIUM)
 				.withEffect(IELib.Bleed, 10) as Weapon;
 		public const L_DAGGR:Weapon = new Weapon(
 				"L.Daggr","L.Daggr","lust-enchanted dagger","an aphrodisiac-coated dagger","stab",3,240,
@@ -547,7 +547,7 @@ public final class WeaponLib extends ItemConstants
 				"This whip once belonged to Lethice who was defeated at your hands. It gives off flames when you crack this whip.",
 				WT_WHIP, WSZ_MEDIUM)
 				.withBuffs({'teasedmg': 50})
-				.withTags(W_WHIPPING) as Weapon;
+				.withTags(W_WHIPPING, W_FIRE_TYPE) as Weapon;
 		public const LANCE  :Weapon = new Weapon(
 				"Lance", "Lance", "deadly lance", "a deadly lance", "piercing stab", 12, 480,
 				"A long wooden shaft with a pointed metal head, used as a weapon by knights and cavalry soldiers in charging.  This would ignore most armors.  Req. 100+ speed to unleash full attack power.",
@@ -589,14 +589,14 @@ public final class WeaponLib extends ItemConstants
 		public const MASTGLO:Weapon = new Weapon(
 				"MastGlo", "MasterGloves", "Master Gloves", "a Master Gloves", "punch", 0, 400,
 				"These gloves belonged to Chi Chi. They seem to naturally strengthen the soulforce techniques of the user.",
-				WT_GAUNTLET, WSZ_MEDIUM, true)
+				WT_GAUNTLET, WSZ_MEDIUM)
 				.withBuffs({
 					'psoulskillpower': +0.4
 				}) as Weapon;
 		public const MCLAWS:Weapon = new Weapon(
 				"MClaws", "MoonlightClaws", "moonlight claws", "a pair of moonlight claws", "clawing punch", 25, 4000,
 				"This pair of claws is imbued with magic, which shall be unleashed as a wave of moonlight. The magic within this will grant greated boon when charged with magic.",
-				WT_GAUNTLET, WSZ_MEDIUM, true)
+				WT_GAUNTLET, WSZ_MEDIUM)
 				.withEffect(IELib.Bleed, 25)
 				.withEffect(IELib.ScaleAttack_Str, 50) as Weapon;
 		public const MGSWORD:Weapon = new Weapon(
@@ -743,7 +743,7 @@ public final class WeaponLib extends ItemConstants
 		public const S_GAUNT:Weapon = new Weapon(
 				"S.Gaunt","S.Gauntlet","spiked gauntlet","a spiked gauntlet","spiked punch",0,200,
 				"Those metal gauntlets has the knuckles tipped with metal spikes.  Though it lacks the damaging potential of other weapons, the sheer pain of its wounds has a chance of stunning your opponent.",
-				WT_GAUNTLET, WSZ_MEDIUM, true)
+				WT_GAUNTLET, WSZ_MEDIUM)
 				.withEffect(IELib.Stun, 10) as Weapon;
 		public const S_RULER:Weapon = new Weapon(
 				"S.Ruler", "S.Ruler", "Storm Ruler", "a Storm Ruler", "smash", 15, 4800,
@@ -931,7 +931,7 @@ public final class WeaponLib extends ItemConstants
 		public const VENCLAW:Weapon = new Weapon(
 				"VenClaw","Venoclaw","Venoclaw","a Venoclaw","rend",0,400,
 				"This set of catclaw gloves was tempered using Etna's own venom and reinforced using some of her tail bone spikes, a proof of her eternal love to you. Its also enchanted to reinforce natural attacks.",
-				WT_GAUNTLET, WSZ_MEDIUM, true)
+				WT_GAUNTLET, WSZ_MEDIUM)
 				.withEffect(IELib.Bleed, 10) as Weapon;
 		public const VGRAVEH:Weapon = new Weapon("VGraveh", "VolcanicGravehammer", "Volcanic Gravehammer", "a Volcanic Gravehammer", "smash", 160, 160, "The titanic greathammer you found in the ashlands. This weapon seems to have been hewn from perpetually molten bedrock from deep within a volcano. How it remains this way is unknown to you, but you wonder if it was enchanted to be as such, or if it's just a natural property of the materials it's been crafted from.", WT_MACE_HAMMER, WSZ_MASSIVE)
 				.withTag(W_LGWRATH)
@@ -977,7 +977,7 @@ public final class WeaponLib extends ItemConstants
 				.withPerk(PerkLib.StrifeWarden)
 				.withEffect(IELib.ScaleAttack_Str, 100) as Weapon;
 		public const YAMARG :Weapon = new Weapon(
-				"YamaRG", "YamaRajaGrasp", "Yama-Raja gloves", "a pair of Yama-Raja gloves", "punch", 0, 1600, "These black gloves are made in black leather and an ebony alloy. Their corrupt touch seeks to destroy the pure and innocent. As such, it will seek the weak points of its victims when striking.", WT_GAUNTLET, WSZ_MEDIUM, true)
+				"YamaRG", "YamaRajaGrasp", "Yama-Raja gloves", "a pair of Yama-Raja gloves", "punch", 0, 1600, "These black gloves are made in black leather and an ebony alloy. Their corrupt touch seeks to destroy the pure and innocent. As such, it will seek the weak points of its victims when striking.", WT_GAUNTLET, WSZ_MEDIUM)
 				.withBuffs({ 'psoulskillpower': +1.5 })
 				.withTags(I_LEGENDARY, W_CORRUPT_TYPE) as Weapon;
 		public const ZWNDER :Weapon = findCommonDynamicWeapon("zweihander");

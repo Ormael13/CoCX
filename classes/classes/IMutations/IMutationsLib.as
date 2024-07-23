@@ -57,6 +57,7 @@ public class IMutationsLib
 		public static const CaveWyrmLungsIM:IMutationPerkType = new CaveWyrmLungsMutation();
 		public static const DiamondHeartIM:IMutationPerkType = new DiamondHeartMutation();
 		public static const DisplacerMetabolismIM:IMutationPerkType = new DisplacerMetabolismMutation();
+		public static const DrakeBloodIM:IMutationPerkType = new DrakeBloodMutation();
 		public static const DrakeBonesIM:IMutationPerkType = new DrakeBonesMutation();
 		public static const DrakeHeartIM:IMutationPerkType = new DrakeHeartMutation();
 		public static const DrakeLungsIM:IMutationPerkType = new DrakeLungMutation();
@@ -94,6 +95,7 @@ public class IMutationsLib
 		public static const HumanTesticlesIM:IMutationPerkType = new HumanTesticlesMutation();
 		public static const HumanThyroidGlandIM:IMutationPerkType = new HumanThyroidGlandMutation();
 		public static const HumanVersatilityIM:IMutationPerkType = new HumanVersatilityMutation();
+		public static const HydraBloodIM:IMutationPerkType = new HydraBloodMutation();
 		public static const KitsuneParathyroidGlandsIM:IMutationPerkType = new KitsuneParathyroidGlandMutation();
 		public static const KitsuneThyroidGlandIM:IMutationPerkType = new KitsuneThyroidGlandMutation();
 		public static const LactaBovinaOvariesIM:IMutationPerkType = new LactaBovinaOvariesMutation();
@@ -101,6 +103,7 @@ public class IMutationsLib
 		public static const ManticoreMetabolismIM:IMutationPerkType = new ManticoreMetabolismMutation();
 		public static const MantislikeAgilityIM:IMutationPerkType = new MantislikeAgilityMutation();
 		public static const MelkieLungIM:IMutationPerkType = new MelkieLungMutation();
+		public static const MightyLowerHalfIM:IMutationPerkType = new MightyLowerHalfMutation();
 		public static const MinotaurTesticlesIM:IMutationPerkType = new MinotaurTesticlesMutation();
 		public static const NaturalPunchingBagIM:IMutationPerkType = new NaturalPunchingBagMutation();
 		public static const NukiNutsIM:IMutationPerkType = new NukiNutsMutation();
@@ -146,3 +149,4 @@ public class IMutationsLib
 
 	}
 }
+

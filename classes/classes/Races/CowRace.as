@@ -60,6 +60,7 @@ public class CowRace extends Race {
 		
 		addBloodline(PerkLib.MinotaursDescendant, PerkLib.BloodlineMinotaur);
 		addMutation(IMutationsLib.LactaBovinaOvariesIM);
+		addMutation(IMutationsLib.MightyLowerHalfIM);
 		
 		buildTier(10, "cow-morph")
 				.namesMaleFemale("cow-morph", "cow-girl")

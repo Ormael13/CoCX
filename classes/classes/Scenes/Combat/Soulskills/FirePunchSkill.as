@@ -52,11 +52,13 @@ public class FirePunchSkill extends AbstractSoulSkill {
 			damage += scalingBonusStrength();
 		}
 		damage += player.wis;
-		damage += scalingBonusWisdom();
+		damage += scalingBonusWisdom() * 2;
 		if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
 			if (player.isRaceCached(Races.MOUSE, 2) && player.countRings(jewelries.INMORNG)) damage *= 2.2;
 			else damage *= 2;
 		}
+		//soulskill mod effect
+		damage *= soulskillPhysicalMod();
 		//other bonuses
 		if (player.hasPerk(PerkLib.PerfectStrike) && monster && monster.monsterIsStunned()) damage *= 1.5;
 		if (player.hasPerk(PerkLib.Heroism) && monster && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
@@ -68,7 +70,6 @@ public class FirePunchSkill extends AbstractSoulSkill {
 
     override public function doEffect(display:Boolean = true):void {
 		var damage:Number = calcDamage(monster);
-
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		critChance += combat.combatPhysicalCritical();
@@ -80,31 +81,7 @@ public class FirePunchSkill extends AbstractSoulSkill {
 		}
 		monster.createStatusEffect(StatusEffects.FirePunchBurnDoT,16,0,0,0);
 		if (display) outputText("Setting your fist ablaze, you rush at [themonster] and scorch [monster him] with your searing flames. ");
-		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
-			damage += Math.round(damage * 0.1);
-			doFireDamage(damage, true, display);
-			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-			if (player.hasPerk(PerkLib.FlurryOfBlows)) {
-				doFireDamage(damage, true, display);
-				if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-				doFireDamage(damage, true, display);
-				if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-				damage *= 3;
-			}
-			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
-			damage = Math.round(damage * 1.1);
-		}
-		else {
-			doFireDamage(damage, true, display);
-			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-			if (player.hasPerk(PerkLib.FlurryOfBlows)) {
-				doFireDamage(damage, true, display);
-				if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-				doFireDamage(damage, true, display);
-				if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-				damage *= 3;
-			}
-		}
+		combat.checkForElementalEnchantmentAndDoDamage(damage, true, true, crit, false, 3);
 		if (crit && display) outputText(" <b>*Critical Hit!*</b>");
 		endTurnBySpecialHit(damage, display);
     }

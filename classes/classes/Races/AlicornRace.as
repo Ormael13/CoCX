@@ -104,8 +104,8 @@ public class AlicornRace extends Race {
 				.hasPerk(PerkLib.AvatorOfCorruption, +1);
 		
 		addMutation(IMutationsLib.TwinHeartIM, +2);
-		addMutation(IMutationsLib.EclipticMindIM, +1);
-		addMutation(IMutationsLib.EquineMuscleIM, +1);
+		addMutation(IMutationsLib.EclipticMindIM);
+		addMutation(IMutationsLib.EquineMuscleIM);
 		
 		buildTier(8, "Half Alicorn/Nightmare")
 				.customNamingFunction(Utils.curry(nameFn,1))

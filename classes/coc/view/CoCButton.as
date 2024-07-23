@@ -132,7 +132,7 @@ public class CoCButton extends Block {
 
 		this.addEventListener(MouseEvent.ROLL_OVER, this.hover);
 		this.addEventListener(MouseEvent.ROLL_OUT, this.dim);
-		this.addEventListener(MouseEvent.CLICK, this.click);
+		this.addEventListener(MouseEvent.MOUSE_UP, this.click);
 		this.resize();
 	}
 	private function iconElement():BitmapDataSprite {

@@ -140,7 +140,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd = buttons.add("Lust storm", Luststorm).hint("Supercharge the air with your lusty electricity to unleash a thunderstorm.");
 				if (player.hasStatusEffect(StatusEffects.lustStorm)) bd.disable("<b>You already unleashed a thunderstorm on the battlefield</b>\n\n");
 			}
-			if (player.isRaceCached(Races.KIRIN)) {
+			if (player.isRaceCached(Races.KIRIN) && (player.isMaceHammerTypeWeapon() || player.isDuelingTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isDaggerTypeWeapon() || player.isScytheTypeWeapon())) {
 				//Electrify Weapon
 				bd = buttons.add("Electrify Weapon", ElectrifyWeapon).hint("Coat your weapon with a sheet of lusty electricity.");
 				if (player.hasStatusEffect(StatusEffects.ElectrifyWeapon)) {
@@ -171,7 +171,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if ((player.tailType == Tail.FOX && player.tailCount >= 2 && player.tailCount < 7) || (player.tailType == Tail.KITSHOO && player.tailCount >= 2)) {
 				bd = buttons.add("Fox Fire", basicFoxFire, "Unleash fox flame at your opponent for high damage. \n");
 				if (!player.statStore.hasBuff("FoxflamePelt")) {
-					bd.requireSoulforce(30 * soulskillCost() * soulskillcostmulti());
+					bd.requireSoulforce(Math.round(30 * soulskillCost() * soulskillcostmulti()));
 					bd.requireMana(spellCost(60 * kitsuneskillCost()));
 				}
 				if (player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
@@ -180,7 +180,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.tailType == Tail.FOX && player.tailCount >= 7) {
 				bd = buttons.add("F.FoxFire", fusedFoxFire, "Unleash fused ethereal blue and corrupted purple flame at your opponent for high damage. \n");
-				bd.requireSoulforce(100 * soulskillCost() * soulskillcostmulti());
+				bd.requireSoulforce(Math.round(100 * soulskillCost() * soulskillcostmulti()));
 				bd.requireMana(spellCost(200 * kitsuneskillCost()));
 				if (player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
 					bd.disable("You cannot focus to use this ability while you're having so much difficult breathing.");
@@ -189,7 +189,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.CorruptedKitsune) && player.tailType == Tail.FOX && player.tailCount >= 7) {
 				// Corrupt Fox Fire
 				bd = buttons.add("C.FoxFire", corruptedFoxFire, "Unleash a corrupted purple flame at your opponent for high damage. Less effective against corrupted enemies. \n");
-				bd.requireSoulforce(40 * soulskillCost() * soulskillcostmulti());
+				bd.requireSoulforce(Math.round(40 * soulskillCost() * soulskillcostmulti()));
 				bd.requireMana(spellCost(80 * kitsuneskillCost()));
 				if (player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
 					bd.disable("You cannot focus to use this ability while you're having so much difficult breathing.");
@@ -201,15 +201,15 @@ public class MagicSpecials extends BaseCombatContent {
 				if (player.hasPerk(PerkLib.NaturalInstincts)) terror -= 1;
 				if (player.tailCount == 9 && player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1) {
 					bd.toolTipText += "\nWould go into cooldown after use for: " + (terror - 4) + " rounds\n";
-					bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
+					bd.requireSoulforce(Math.round(20 * soulskillCost() * soulskillcostmulti()));
 					bd.requireFatigue(200 * kitsuneskill2Cost());
 				} else if (player.tailCount == 9 || player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1) {
 					bd.toolTipText += "\nWould go into cooldown after use for: " + (terror - 2) + " rounds\n";
-					bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
+					bd.requireSoulforce(Math.round(20 * soulskillCost() * soulskillcostmulti()));
 					bd.requireFatigue(100 * kitsuneskill2Cost());
 				} else {
 					bd.toolTipText += "\nWould go into cooldown after use for: " + terror + " rounds\n";
-					bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
+					bd.requireSoulforce(Math.round(20 * soulskillCost() * soulskillcostmulti()));
 					bd.requireFatigue(50 * kitsuneskill2Cost());
 				}
 				if (player.hasStatusEffect(StatusEffects.CooldownTerror)) {
@@ -221,7 +221,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.EnlightenedKitsune) && player.tailType == Tail.FOX && player.tailCount >= 7) {
 				// Pure Fox Fire
 				bd = buttons.add("P.FoxFire", pureFoxFire, "Unleash an ethereal blue flame at your opponent for high damage. More effective against corrupted enemies. \n");
-				bd.requireSoulforce(40 * soulskillCost() * soulskillcostmulti());
+				bd.requireSoulforce(Math.round(40 * soulskillCost() * soulskillcostmulti()));
 				bd.requireMana(spellCost(80 * kitsuneskillCost()));
 				if (player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
 					bd.disable("You cannot focus to use this ability while you're having so much difficult breathing.");
@@ -233,15 +233,15 @@ public class MagicSpecials extends BaseCombatContent {
 				if (player.hasPerk(PerkLib.NaturalInstincts)) illusion -= 1;
 				if (player.tailType == 13 && player.tailCount == 9 && player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1) {
 					bd.toolTipText += "\nWould go into cooldown after use for: " + (illusion - 4) + " rounds\n";
-					bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
+					bd.requireSoulforce(Math.round(20 * soulskillCost() * soulskillcostmulti()));
 					bd.requireFatigue(200 * kitsuneskill2Cost());
 				} else if ((player.tailType == 13 && player.tailCount == 9) || player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1) {
 					bd.toolTipText += "\nWould go into cooldown after use for: " + (illusion - 2) + " rounds\n";
-					bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
+					bd.requireSoulforce(Math.round(20 * soulskillCost() * soulskillcostmulti()));
 					bd.requireFatigue(100 * kitsuneskill2Cost());
 				} else {
 					bd.toolTipText += "\nWould go into cooldown after use for: " + illusion + " rounds\n";
-					bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
+					bd.requireSoulforce(Math.round(20 * soulskillCost() * soulskillcostmulti()));
 					bd.requireFatigue(50 * kitsuneskill2Cost());
 				}
 				if (player.hasStatusEffect(StatusEffects.CooldownIllusion)) {
@@ -255,21 +255,27 @@ public class MagicSpecials extends BaseCombatContent {
 					buttons.add("Return", extinguishFoxflamePelt).hint("Release foxflames.");
 				} else {
 					bd = buttons.add("Foxflame Pelt", lightupFoxflamePelt, "Coat yourself with foxflame pelt. (It would drain soulforce and mana until deactivated)\n");
-					bd.requireSoulforce(50 * soulskillCost() * soulskillcostmulti());
-					bd.requireMana(spellCost(100 * kitsuneskill2Cost()));
+					if (player.tailCount >= 9) {
+						bd.requireSoulforce(Math.round(25 * soulskillCost() * soulskillcostmulti()));
+						bd.requireMana(spellCost(50 * kitsuneskill2Cost()));
+					}
+					else {
+						bd.requireSoulforce(Math.round(50 * soulskillCost() * soulskillcostmulti()));
+						bd.requireMana(spellCost(100 * kitsuneskill2Cost()));
+					}
 				}
 			}
 			if ((player.tailType == Tail.NEKOMATA_FORKED_1_3 || player.tailType == Tail.NEKOMATA_FORKED_2_3 || (player.tailType == Tail.CAT && player.tailCount == 2))) {//player.hasPerk(MutationsLib.NekomataThyroidGland) ||
 				bd = buttons.add("GhostFire", nekomataGhostFire).hint("Unleash a ghost flame at your opponent for high damage. It's unstoped by barriers that stops magic spells or attacks. \n");
 				/*if (player.tailType == 8 && player.tailCount == 2 && player.hasPerk(PerkLib.)) {
-                    bd.requireSoulforce(150 * soulskillCost() * soulskillcostmulti());
+                    bd.requireSoulforce(Math.round(150 * soulskillCost() * soulskillcostmulti()));
                     bd.requireMana(spellCost(120));
                 } else */
 				if (player.tailType == 8 && player.tailCount == 2) {// || player.hasPerk(PerkLib.)
-					bd.requireSoulforce(100 * soulskillCost() * soulskillcostmulti());
+					bd.requireSoulforce(Math.round(100 * soulskillCost() * soulskillcostmulti()));
 					bd.requireMana(spellCost(80));
 				} else {
-					bd.requireSoulforce(50 * soulskillCost() * soulskillcostmulti());
+					bd.requireSoulforce(Math.round(50 * soulskillCost() * soulskillcostmulti()));
 					bd.requireMana(spellCost(40));
 				}
 				if (player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
@@ -3675,16 +3681,18 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		var soulforcecost:int = 50 * soulskillCost() * soulskillcostmulti();
+		if (player.tailCount >= 9) soulforcecost *= 0.5;
 		player.soulforce -= soulforcecost;
 		lightupFoxflamePelt2();
 	}
 	public function lightupFoxflamePelt2():void {
-		useMana((100 * kitsuneskill2Cost()), Combat.USEMANA_MAGIC_NOBM);
+		if (player.tailCount >= 9) useMana((50 * kitsuneskill2Cost()), Combat.USEMANA_MAGIC_NOBM);
+		else useMana((100 * kitsuneskill2Cost()), Combat.USEMANA_MAGIC_NOBM);
 		outputText("Holding out your palm, you conjure fox flame that dances across your fingertips.  Then is spread all over your arm to rest of your body!\n\n");
 		var temp1:Number = 0;
 		var tempSpe:Number;
-		temp1 += player.speStat.core.value * 0.1;
-		if (player.tailCount >= 7) temp1 += player.speStat.core.value * 0.1 * (player.tailCount - 6);
+		temp1 += player.speStat.core.value * 0.1 * (player.tailCount - 5);
+		if (player.tailCount >= 9) temp1 *= 2;
 		temp1 = Math.round(temp1);
 		var oldHPratio:Number = player.hp100/100;
 		tempSpe = temp1;

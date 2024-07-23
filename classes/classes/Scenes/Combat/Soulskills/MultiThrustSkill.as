@@ -56,10 +56,9 @@ public class MultiThrustSkill extends AbstractSoulSkill {
 	}
 
 	private function multiThrustDSingle(monster: Monster, casting:Boolean = true):Number {
-		var damage:Number = 0;
+		var damage:Number = scalingBonusWisdom() * 2;
 		damage += combat.meleeDamageNoLagSingle();
 		damage *= 1.75;
-
 		if (casting) {
 			//All special weapon effects like...fire/ice
 			if (player.weapon == weapons.TIDAR) (player.weapon as Tidarion).afterStrike();
@@ -71,10 +70,8 @@ public class MultiThrustSkill extends AbstractSoulSkill {
 				damage *= 1.1;
 			}
 		}
-
 		//soulskill mod effect
 		damage *= soulskillPhysicalMod();
-
 		//other bonuses
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		if (monster && monster.hasStatusEffect(StatusEffects.FrozenSolid)) damage *= 2;
@@ -88,11 +85,9 @@ public class MultiThrustSkill extends AbstractSoulSkill {
 			multiTrustDNLag += multiThrustDSingle(monster);
 			damage += multiThrustDSingle(monster);
 		}
-
 		var d2:Number = 0.9;
 		d2 += (rand(21) * 0.01);
 		damage *= d2;
-
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		if (player.isSwordTypeWeapon()) critChance += 10;
@@ -107,44 +102,7 @@ public class MultiThrustSkill extends AbstractSoulSkill {
 			else damage *= (1.75 + buffMultiplier);
 		}
 		if (display) outputText(" ");
-		if (combat.isFireTypeWeapon()) {
-			if (player.flameBladeActive()) damage += scalingBonusLibido() * 0.20;
-			damage = Math.round(damage * combat.fireDamageBoostedByDao());
-			doFireDamage(damage, true, display);
-			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-		}
-		else if (combat.isIceTypeWeapon()) {
-			damage = Math.round(damage * combat.iceDamageBoostedByDao());
-			doIceDamage(damage, true, display);
-			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-		}
-		else if (combat.isLightningTypeWeapon()) {
-			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
-			doLightningDamage(damage, true, display);
-			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-		}
-		else if (combat.isDarknessTypeWeapon()) {
-			damage = Math.round(damage * combat.darknessDamageBoostedByDao());
-			doDarknessDamage(damage, true, display);
-			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-		}
-		else if (player.weapon == weapons.MGSWORD) {
-			doMagicDamage(damage, true, display);
-			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-		}
-		else if (player.weapon == weapons.MCLAWS) {
-			doMagicDamage(damage, true, display);
-			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-		}
-		else {
-			doDamage(damage, true, display);
-			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-			if (player.weapon == weapons.DAISHO) {
-				doDamage(Math.round(damage * 0.5), true, display);
-				if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage * 0.5);
-			}
-		}
-
+		combat.checkForElementalEnchantmentAndDoDamage(damage);
 		if (crit) {
 			if (display) outputText(" <b>*Critical Hit!*</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -153,12 +111,10 @@ public class MultiThrustSkill extends AbstractSoulSkill {
 			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 70) player.addStatusValue(StatusEffects.Rage, 1, 10);
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
-
 		checkAchievementDamage(damage);
 		combat.WrathGenerationPerHit2(5);
 		if (player.hasStatusEffect(StatusEffects.HeroBane)) flags[kFLAGS.HERO_BANE_DAMAGE_BANK] += damage;
 		if (player.hasStatusEffect(StatusEffects.EruptingRiposte)) flags[kFLAGS.ERUPTING_RIPOSTE_DAMAGE_BANK] += monster.tou + monster.inte + monster.wis;
-
 	}
 
     override public function doEffect(display:Boolean = true):void {

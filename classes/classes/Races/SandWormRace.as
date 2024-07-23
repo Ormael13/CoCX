@@ -56,7 +56,7 @@ public class SandWormRace extends Race {
 				.hornType(Horns.NONE, +1)
 				.legType(LowerBody.SANDWORM, +9)
 
-		addMutation(IMutationsLib.TrachealSystemIM, +1);
+		addMutation(IMutationsLib.TrachealSystemIM);
 		addMutation(IMutationsLib.TwinHeartIM, +2);
 
 		buildTier(23, "sand worm")

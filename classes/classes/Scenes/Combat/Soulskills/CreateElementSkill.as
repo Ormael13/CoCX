@@ -82,18 +82,14 @@ public class CreateElementSkill extends AbstractSoulSkill {
 	}
 
 	public function calcDamage(monster:Monster):Number {
-		var damage:Number = scalingBonusWisdom();
+		var damage:Number = scalingBonusWisdom() * 2;
 		if (damage < 10) damage = 10;
-
 		//soulskill mod effect
 		damage *= combat.soulskillMagicalMod();
-
 		//other bonuses
 		if (player.hasPerk(PerkLib.Heroism) && (monster && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType)))) damage *= 2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
-
 		return Math.round(damage);
-
 	}
 
     override public function doEffect(display:Boolean = true):void {
@@ -101,9 +97,7 @@ public class CreateElementSkill extends AbstractSoulSkill {
 			"bright blue energy covering the tip. You draw a simple rune in the air, the energy from your finger dissipating into it. A moment later, the rune swells, energy forming into a small ball of "
 		 	+ element.toLowerCase() +". You motion, sending the ball flying toward [themonster].  ");
 		if (monsterDodgeSkill("ball", display)) return;
-
 		var damage:Number = calcDamage(monster);
-
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		critChance += combatMagicalCritical();

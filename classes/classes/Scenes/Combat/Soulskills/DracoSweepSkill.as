@@ -31,7 +31,7 @@ public class DracoSweepSkill extends AbstractSoulSkill {
 	}
 
 	public function calcDamage(monster:Monster):Number {
-		var damage:Number = 0;
+		var damage:Number = scalingBonusWisdom() * 2;
 		damage += combat.meleeDamageNoLagSingle();
 		damage *= 1.75;
 		//All special weapon effects like...fire/ice
@@ -47,7 +47,6 @@ public class DracoSweepSkill extends AbstractSoulSkill {
 			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
 			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
 		}
-		
 		//soulskill mod effect
 		damage *= soulskillPhysicalMod();
 		//group enemies bonus
@@ -56,22 +55,18 @@ public class DracoSweepSkill extends AbstractSoulSkill {
 		if (player.armor.name == "some taur paladin armor" || player.armor.name == "some taur blackguard armor") damage *= 2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		return Math.round(damage);
-
 	}
 
     override public function doEffect(display:Boolean = true):void {
 		if (display) outputText("You ready your [weapon] and prepare to sweep it towards [themonster].  ");
 		if (monsterDodgeSkill("attack", display)) return;
-
 		var damage:Number = calcDamage(monster);
-
 		if (player.weapon == weapons.TIDAR) (player.weapon as Tidarion).afterStrike();
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 			damage = combat.fireTypeDamageBonus(damage);
 			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
 			damage *= 1.1;
 		}
-
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		if (player.isSwordTypeWeapon()) critChance += 10;
@@ -85,54 +80,9 @@ public class DracoSweepSkill extends AbstractSoulSkill {
 			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * combat.impaleMultiplier());
 			else damage *= (1.75 + buffMultiplier);
 		}
-
 		if (display) outputText("Your [weapon] sweeps against [themonster], dealing ");
-		if (((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) || player.flameBladeActive()) {
-			if (player.flameBladeActive()) damage += scalingBonusLibido() * 0.20;
-			damage = Math.round(damage * combat.fireDamageBoostedByDao());
-			doFireDamage(damage, true, display);
-			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-		}
-		else if (combat.isIceTypeWeapon()) {
-			damage = Math.round(damage * combat.iceDamageBoostedByDao());
-			doIceDamage(damage, true, display);
-			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-		}
-		else if (combat.isLightningTypeWeapon()) {
-			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
-			doLightningDamage(damage, true, display);
-			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-		}
-		else if (combat.isDarknessTypeWeapon()) {
-			damage = Math.round(damage * combat.darknessDamageBoostedByDao());
-			doDarknessDamage(damage, true, display);
-			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-		}
-		else if (player.weapon == weapons.MGSWORD) {
-			doMagicDamage(damage, true, display);
-			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-		}
-		else if (player.weapon == weapons.MCLAWS) {
-			doMagicDamage(damage, true, display);
-			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-		}
-		else {
-			doDamage(damage, true, display);
-			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-			if (player.weapon == weapons.DAISHO) {
-				doDamage(Math.round(damage * 0.5), true, display);
-				if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage * 0.5);
-			}
-			if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) {
-				doDamage(damage, true, display);
-				if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-				doDamage(damage, true, display);
-				if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-				damage *= 3;
-			}
-		}
+		combat.checkForElementalEnchantmentAndDoDamage(damage);
 		if (display) outputText(" damage! ");
-		
 		if (crit) {
 			if (display) outputText(" <b>*Critical Hit!*</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -142,8 +92,6 @@ public class DracoSweepSkill extends AbstractSoulSkill {
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		endTurnBySpecialHit(damage);
-
-
     }
 }
 }

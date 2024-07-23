@@ -7,6 +7,11 @@ import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.NPCs.SophieFollowerScene;
 import classes.internals.Utils;
 
+import coc.view.CoCButton;
+import coc.view.Block;
+import coc.view.MainView;
+
+
 public class PlayerAppearance extends BaseContent {
 
 
@@ -1027,7 +1032,344 @@ public class PlayerAppearance extends BaseContent {
 	/**
 	 * @param sortBy 0: name, 1: score
 	 */
+	
+	public var new_ui:Boolean = true;
+	public function set_ui_version(bool:Boolean, auto_run:Boolean = false):void{
+		new_ui=bool
+		if (auto_run){RacialScores()}
+	}
 	public function RacialScores(clickedRace:Race = null, sortBy:int=0):void {
+		if (new_ui){
+			RacialScores_new(clickedRace,sortBy)
+		}else{
+			RacialScores_old(clickedRace,sortBy)
+		}
+	}
+	private function race_clicked_display(race:Race = null,sortby:int=0):void{
+		clearOutput();
+		var body:BodyData = player.bodyData();
+		var rscore:int     = player.racialScoreCached(race);
+		var rtier:RaceTier = race.getTier(body, rscore);
+		outputText("<b>")
+		if (rtier) {
+				outputText("[font-lblue]");
+			} else if (rscore > 0) {
+				outputText("[font-green]");
+			} else {
+				outputText("[font-default]");
+			}
+		
+		outputText(Utils.capitalizeFirstLetter(rtier?rtier.nameFor(body):race.name)+"[/font]</b> racial scores (and bonuses to stats if applicable):\n");
+		outputText("Details legend: [font-lblue]active tier[/font], [font-green]passed check[/font], failed check, [font-red]score penalty[/font].\n");
+		//outputText("\n\n")
+		
+		outputText("\n");
+		outputText(race.printDetails(body));
+		//scrollPos = Math.max(0, 6+i);
+		if (debug && race.debugFormNames().length > 0) {
+			outputText("Transform into");
+			for each (var tfname:String in race.debugFormNames()) {
+				outputText(" ");
+				printLink(tfname, "tf,"+race.id+","+tfname);
+			}
+		}
+		menu();
+		addButton(0, "Back", curry(RacialScores,race,sortby));
+		addButton(1, "Exit", playerMenu);
+	}
+	
+	private function RacialScores_new(clickedRace:Race = null, sortBy:int=0):void {
+		var body:BodyData = player.bodyData();
+		var btn:CoCButton;
+
+		//For saving state across sessions and "time".
+		sortBy = flags[kFLAGS.RACESORT_SETTING];
+
+		clearOutput();
+		outputText("<b>Current racial scores (and bonuses to stats if applicable):</b>\n");
+		outputText("Sort by: ");
+		if (sortBy == 0) {
+			outputText('<b>name</b>, ');
+			printLink("score", "sort,1");
+		} else {
+			printLink('name',"sort,0");
+			outputText(', <b>score</b>');
+		}
+		outputText(". ");
+		outputText("Click on a race to view details.\n");
+		outputText("List legend: [font-lblue]active race[/font], [font-green]positive score[/font], zero score.\n");
+		
+		player.updateRacialCache();
+		var list:/*Race*/Array = Races.AllRacesByName;
+		var scrollPos:int = 0;
+		if (sortBy == 1) {
+			list = sortedBy(list, function (a:Race):int {
+				return player.racialScoreCached(a);
+			}, true);
+		}
+		
+		//race_blue_color= #009FFF
+		//race_green_color= #009F00
+		var contentBlock:Block = new Block({
+			layoutConfig: {
+				type: "flow",
+				direction: "column"
+			}
+		});
+		var groupgrid:Block=new Block({
+			layoutConfig: {
+				type: "grid",
+				setWidth: true,
+				columns: [160],
+				gap: 2
+			},
+			width: MainView.TEXTZONE_W - 16
+		});
+		
+		function dummy():void{}
+		
+		function local_button(text:String="Label",text_color:String="black",hint:String="",corner_text:String=""):CoCButton
+		{
+			var tColor:String="#010101"
+			if (text_color=="blue") {
+				//outputText("[font-lblue]");
+				tColor="#009FFF"
+			} else if (text_color=="green") {
+				//outputText("[font-green]");
+				tColor="#009F00"
+			}
+			
+			
+			var local_button:CoCButton=new CoCButton({square:true})
+						.show(text,dummy)
+						//.disableIf(race==clickedRace)
+						.hint(hint)
+						.disableIf(true)
+						.color(tColor)
+						.cornerLabel(corner_text)
+		groupgrid.addElement(local_button);
+		return local_button;
+		}
+		
+		for (var i:int = 0; i<list.length; i++) {
+			var race:Race = list[i];
+			// skip "old" races
+			if (race.requirements.length == 0 || race.tiers.length == 0) continue;
+			
+			if (!new_ui){outputText("\n");}
+			var rscore:int     = player.racialScoreCached(race);
+			var rtier:RaceTier = race.getTier(body, rscore);
+			var tColor:String="#010101"
+			if (rtier) {
+				tColor="#009FFF"
+			} else if (rscore > 0) {
+				tColor="#009F00"
+			}
+			var s:String=" "
+			if (rtier) {
+				if (rtier.hasBuffs()) {
+					s = rtier.describeBuffs(body);
+					if (!s) {s = " "}
+				}
+			}
+			
+			
+			groupgrid.addElement(new CoCButton({square:true})
+						.show(race.name, curry(race_clicked_display, race,sortBy))
+						//.disableIf(race==clickedRace)
+						.hint(s)
+						.color(tColor)
+						.cornerLabel(""+rscore));
+				
+			if (race == clickedRace) {
+
+			}
+		}
+		
+		
+		mainView.linkHandler = function(event:String):void {
+			var parts:Array = event.split(",");
+			switch (parts[0]) {
+				case "race":
+					var clickedRace2:Race = Race.byId(parseInt(parts[1]));
+					if (clickedRace2 == clickedRace) clickedRace2 = null;
+					RacialScores(clickedRace2, sortBy);
+					break;
+				case "sort":
+					flags[kFLAGS.RACESORT_SETTING] = parseInt(parts[1]);
+					RacialScores(clickedRace, parseInt(parts[1]));
+					break;
+				case "tf":
+					clearOutput();
+					Race.byId(parseInt(parts[1])).takeForm(player, parts[2]);
+					mainViewManager.updateCharviewIfNeeded();
+					doNext(RacialScores, clickedRace, sortBy);
+					break;
+			}
+		}
+		var score:Number;
+		var scoreH:Number;
+		//CHIMERA
+		if (new_ui){
+			local_button("CHIMERA",player.chimeraScore()>0?"green":"black", "",player.chimeraScore());
+		}else {
+		outputText("\nCHIMERA: " + player.chimeraScore());
+		}
+		//GRAND CHIMERA
+		if (new_ui){
+			local_button("GRAND CHIMERA",player.grandchimeraScore()>0?"green":"black", "",player.grandchimeraScore());
+		}else {
+		outputText("\nGRAND CHIMERA: " + player.grandchimeraScore());
+		}
+		//INTERNAL CHIMERICAL DISPOSITION
+		score = player.internalChimeraScore();
+		if (new_ui){
+			if (score>0) {
+			local_button("INTERNAL CHIMERICAL DISPOSITION", player.hasPerk(PerkLib.RacialParagon)?"green":"blue"
+			,player.hasPerk(PerkLib.RacialParagon)?"- no buffs because of the Racial Paragon perk":" ("+player.internalChimeraRating()+") "+score+"\n(+" + (5 * score) + "% to Str racial multi / Tou / Spe / Int / Wis / Lib"
+			,score);
+			}
+		}else {
+		if (score >= 1) {
+			outputText("\n");
+			outputText(player.hasPerk(PerkLib.RacialParagon) ? "[font-green]" : "[font-lblue]");
+			outputText("INTERNAL CHIMERICAL DISPOSITION: (" + player.internalChimeraRating() + ") " + score);
+            if (player.hasPerk(PerkLib.RacialParagon)) outputText(" - no buffs because of the Racial Paragon perk");
+            else outputText(" (+" + (5 * score) + "% to Str racial multi / Tou / Spe / Int / Wis / Lib");
+			outputText("[/font]");
+        } else {
+			outputText("\nINTERNAL CHIMERICAL DISPOSITION: 0");
+		}
+		}
+		
+		scoreH = player.internalHumanScore();
+		if (new_ui){
+			local_button("INTERNAL HUMAN DISPOSITION", scoreH>0?(player.hasPerk(PerkLib.RacialParagon)?"green":"blue"):"black", 
+			"", 
+			scoreH);
+		}else {
+		if (scoreH >= 1) {
+			outputText("\n");
+			outputText(player.hasPerk(PerkLib.RacialParagon) ? "[font-green]" : "[font-lblue]");
+			outputText("INTERNAL HUMAN DISPOSITION: " + player.internalHumanScore());
+            //if (player.hasPerk(PerkLib.RacialParagon)) outputText(" - no buffs because of the Racial Paragon perk");
+            //else outputText(" (+" + (5 * score) + "% to Str racial multi / Tou / Spe / Int / Wis / Lib");
+			outputText("[/font]")
+        } else {
+			outputText("\nINTERNAL HUMAN DISPOSITION: 0");
+		}
+		}
+		
+		// Other body part-related buffs that contribute to the "Racial" buff object in Player.calcRacialBuffs
+		outputText("\n");
+		
+		var factor:Number = 0;
+		if (player.hasCoatOfType(Skin.CHITIN)) factor += 2;
+		else if (player.hasCoatOfType(Skin.SCALES)) factor += 1;
+		if (player.hasPerk(PerkLib.ThickSkin)) factor += 1;
+		score = player.perkv1(IMutationsLib.MantislikeAgilityIM);
+		var bonus:Number = 0;
+		if (score >= 3) {
+			bonus = 30*factor;
+		} else if (score >= 2) {
+			bonus += 15*factor;
+		} else if (score >= 1) {
+			bonus += 5*factor;
+		}
+		if (bonus > 0) {
+			if (new_ui){
+			local_button("Mantislike Agility","blue", "+"+bonus+"% Speed","");
+		}else {outputText("\n[font-lblue]Mantislike Agility[/font]: +"+bonus+"% Speed.");}
+		}
+		if (player.hasPerk(PerkLib.Flexibility) && player.isAnyRaceCached(Races.CatlikeRaces)) {
+			if (new_ui){
+			local_button("Cat-like race + Flexibility","blue", "+10% Speed","");
+		}else {outputText("\n[font-lblue]Cat-like race + Flexibility[/font]: +10% Speed.");}
+		}
+		if (player.isNaga()) {
+			if (player.lowerBody == LowerBody.FROSTWYRM) {
+				if (new_ui){
+					local_button("Frost wyrm lower body","blue", "+20% Strength, +10% Toughness.","");
+				}else {outputText("\n[font-lblue]Frost wyrm lower body[/font]: +20% Strength, +10% Toughness.");}
+			} else {
+				if (new_ui){
+					local_button("Naga lower body","blue", "+15% Strength, +15% Toughness.","");
+				}else {outputText("\n[font-lblue]Naga lower body[/font]: +15% Strength, +15% Toughness.");}
+			}
+		}
+		
+		if (player.isTaur()) {
+			if (new_ui){
+					local_button("Taur lower body","blue", "+20% Speed.","");
+				}else {outputText("\n[font-lblue]Taur lower body[/font]: +20% Speed.")}
+		}
+		
+		if (player.isDrider()) {
+			if (player.lowerBody == LowerBody.CANCER) {
+				if (new_ui){
+					local_button("Cancer lower body","blue", "+15% Strength, +5% Speed, +10% Toughness.","");
+				}else {outputText("\n[font-lblue]Cancer lower body[/font]: +15% Strength, +5% Speed, +10% Toughness.");}
+			} else {
+				if (new_ui){
+					local_button("Drider lower body","blue", "+15% Toughness, +15% Speed.","");
+				}else {outputText("\n[font-lblue]Drider lower body[/font]: +15% Toughness, +15% Speed.");}
+			}
+		}
+		if (player.isScylla()) {
+			if (new_ui){
+					local_button("Scylla lower body","blue", "+30% Strength.","");
+				}else {outputText("\n[font-lblue]Scylla lower body[/font]: +30% Strength.")}
+		}
+		if (player.isKraken()) {
+			if (new_ui){
+					local_button("Kraken lower body","blue", "+60% Strength, +15 Sensitivity.","");
+				}else {outputText("\n[font-lblue]Kraken lower body[/font]: +60% Strength, +15 Sensitivity");}
+		}
+		if (player.lowerBody == LowerBody.CENTIPEDE) {
+			outputText("\n[font-lblue]Centipede lower body[/font]: +15% Strength, +5% Toughness, +10% Speed.")
+		}
+		if (player.isAlraune()) {
+			if (new_ui){
+					local_button("Alraune lower body","blue", "+15% Toughness, +15% Libido.","");
+				}else {outputText("\n[font-lblue]Alraune lower body[/font]: +15% Toughness, +15% Libido.")}
+		}
+		if (player.hasPerk(PerkLib.RacialParagon)) {
+			if (new_ui){
+					local_button("Racial Paragon","blue", "+"+player.level+"% to core stats.","");
+				}else {outputText("\n[font-lblue]Racial Paragon[/font]: +"+player.level+"% to core stats.")}
+		}
+		if (player.hasPerk(PerkLib.Apex)) {
+			if (new_ui){
+					local_button("Apex","blue", "+"+(2*player.level)+"% to core stats.","");
+				}else {outputText("\n[font-lblue]Apex[/font]: +"+(2*player.level)+"% to core stats.")}
+		}
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) {
+			if (new_ui){
+					local_button("Alpha And Omega","blue", "+"+(2*player.level)+"% to core stats.","");
+				}else {outputText("\n[font-lblue]Alpha And Omega[/font]: +"+(2*player.level)+"% to core stats.")}
+		}
+		if (player.hasPerk(PerkLib.AscensionOneRaceToRuleThemAllX)) {
+			if (new_ui){
+					local_button("One Race To Rule Them All","blue", "(Ascension)\n+"+(2*player.perkv1(PerkLib.AscensionOneRaceToRuleThemAllX)*player.level)+"% to core stats.","");
+				}else {outputText("\n[font-lblue]Ascension: One Race To Rule Them All[/font]: +"+(2*player.perkv1(PerkLib.AscensionOneRaceToRuleThemAllX)*player.level)+"% to core stats.");}
+		}
+		
+		groupgrid.addBitmapDataSprite({}, {colspan: Math.max(1, 6)});
+		groupgrid.width = MainView.TEXTZONE_W - MainView.VSCROLLBAR_W;
+		groupgrid.doLayout();
+		contentBlock.addElement(groupgrid);
+		contentBlock.width = MainView.TEXTZONE_W - MainView.VSCROLLBAR_W;
+		flushOutputTextToGUI();
+		mainView.setCustomElement(contentBlock, true, false, true);
+		contentBlock.doLayout();
+		menu();
+		
+		if (scrollPos) mainView.scrollBar.value = scrollPos;
+		addButton(1, "Exit", playerMenu);
+		addButton(14, "Old UI",curry(set_ui_version,false,true))
+	}
+
+	private function RacialScores_old(clickedRace:Race = null, sortBy:int=0):void {
 		var body:BodyData = player.bodyData();
 
 		//For saving state across sessions and "time".
@@ -1218,8 +1560,9 @@ public class PlayerAppearance extends BaseContent {
 		menu();
 		if (scrollPos) mainView.mainText.scrollV = scrollPos;
 		addButton(0, "Next", playerMenu);
+		addButton(14, "New UI",curry(set_ui_version,true,true))
 	}
-
+	
 	public function GenderForcedSetting():void {
 		clearOutput();
 		outputText("This menu allows you to choose if the game will treat your character as a female or a male. Using the automatic option will let the game orginal system do the work instead of setting your sex in one or another way.");

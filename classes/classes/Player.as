@@ -3340,6 +3340,9 @@ use namespace CoC;
 			if (hasPerk(PerkLib.TrollResistance)) {
 				mult -= 15;
 			}
+			if (perkv1(IMutationsLib.DrakeBloodIM) >= 2) {
+				mult -= (5 * (perkv1(IMutationsLib.DrakeBloodIM) - 1));
+			}
 			if (perkv1(IMutationsLib.DrakeBonesIM) >= 2) {
 				mult -= 5;
 			}
@@ -7800,4 +7803,4 @@ use namespace CoC;
 		}
 		
 	}
-}
+}

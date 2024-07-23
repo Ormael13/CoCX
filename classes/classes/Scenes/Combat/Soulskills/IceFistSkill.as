@@ -51,7 +51,9 @@ public class IceFistSkill extends AbstractSoulSkill {
 			damage += scalingBonusStrength();
 		}
 		damage += player.wis;
-		damage += scalingBonusWisdom();
+		damage += scalingBonusWisdom() * 2;
+		//soulskill mod effect
+		damage *= soulskillPhysicalMod();
 		//other bonuses
 		if (player.hasPerk(PerkLib.PerfectStrike) && monster && monster.monsterIsStunned()) damage *= 1.5;
 		if (player.hasPerk(PerkLib.Heroism) && monster && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
@@ -63,7 +65,6 @@ public class IceFistSkill extends AbstractSoulSkill {
 
     override public function doEffect(display:Boolean = true):void {
 		var damage:Number = calcDamage(monster);
-
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		critChance += combat.combatPhysicalCritical();
@@ -75,17 +76,7 @@ public class IceFistSkill extends AbstractSoulSkill {
 		}
 		monster.buff("FrozenSolid").addStats({spe:-20}).withText("Frozen Solid").combatTemporary(1);
 		if (display) outputText("The air around your fist seems to lose all heat as you dash at [themonster]. You place your palm on [monster him], [monster his] body suddenly is frozen solid, encased in a thick block of ice! ");
-		damage = Math.round(damage * combat.iceDamageBoostedByDao());
-		doIceDamage(damage, true, display);
-		if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-		if (player.hasPerk(PerkLib.FlurryOfBlows)) {
-			doIceDamage(damage, true, display);
-			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-			doIceDamage(damage, true, display);
-			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-			damage *= 3;
-		}
-
+		combat.checkForElementalEnchantmentAndDoDamage(damage, true, true, crit, false, 4);
 		if (crit && display) outputText(" <b>*Critical Hit!*</b>");
 		//stun
 		if (monster.hasPerk(PerkLib.Resolute)) {

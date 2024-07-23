@@ -72,6 +72,7 @@ public class ApophisRace extends Race {
 				.hasPerk(PerkLib.Venomancy, +1);
 		
 		addMutation(IMutationsLib.VenomGlandsIM);
+		addMutation(IMutationsLib.MightyLowerHalfIM);
 		
 		buildTier(20, "apophis")
 				.buffs({

@@ -46,13 +46,8 @@ private function followMinotaurIntoBackroom():void {
 		outputText("You follow the burly chef through the door, winding through the familiar ovens.  By the time you reach his work area, you're both covered in a fine sheen of sweat and you find yourself responding to the minotaur musk unconsciously.  The strange chef turns to ask, \"<i>You have special ingredients now, yes?</i>\"");
 		//[Yes] [Lie – No/Not Yet]
 		menu();
-		if (player.hasItem(consumables.BEEHONY) && player.hasItem(consumables.L_DRAFT)) {
-			addButton(0, "Yes", handOverIngredientsItBeBakingTimeYo);
-			addButton(1, "Lie - No", nopeAintGotNoneODemSpeculIngredimathings);
-		} else {
-			addButtonDisabled(0, "Yes", "Req. Lust Draft and Honey.");
-			addButton(1, "No", nopeAintGotNoneODemSpeculIngredimathings);
-		}
+		addButton(0, "Yes", handOverIngredientsItBeBakingTimeYo).disableIf(!(player.hasItem(consumables.BEEHONY) && player.hasItem(consumables.L_DRAFT)), "Req. Lust Draft and Honey.");
+		addButton(1, "No", nopeAintGotNoneODemSpeculIngredimathings);
 	}
 }
 

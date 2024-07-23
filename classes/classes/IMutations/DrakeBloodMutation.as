@@ -2,35 +2,26 @@
  * Original code by aimozg on 27.01.14.
  * Extended for Mutations by Jtecx on 14.03.22.
  */
-package classes.IMutations 
+package classes.IMutations
 {
+import classes.BodyParts.Tail;
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Player;
 import classes.Races;
 
-public class HumanDigestiveTractMutation extends IMutationPerkType
+public class DrakeBloodMutation extends IMutationPerkType
     {
         override public function get mName():String {
-            return "Human Digestive Tract";
+            return "Drake Blood";
         }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
-			var perChg1:int = 1;
-			var perChg2:int = 10;
-			if (pTier >= 2) {
-				perChg1 += 2;
-				perChg2 += 15;
-			}
             pTier = (pTier == -1)? currentTier(this, player): pTier;
-            if (pTier >= 1){
-                descS += "Your digestive tract improved allowing to better murishment from all the ingested substances (+"+perChg1+"0%). Increase limit when PC gain weight from eating too much by "+perChg2+"";
-            }
-            if (pTier == 3){
-                descS += "Your digestive tract improved allowing to slowly detoxification of poisons (2x shorter poison effect duration, -1% of lust per turn).";
-            }
+            if (pTier >= 1) descS += "Dragon strong vitality grants mana, soulforce and health regeneration " + pTier + "%";
+			if (pTier >= 2) descS += ". You take 5% less damage from magical attack";
             if (descS != "")descS += ".";
             return descS;
         }
@@ -42,10 +33,8 @@ public class HumanDigestiveTractMutation extends IMutationPerkType
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
-                    this.requireMouthMutationSlot()
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.racialScore(Races.HUMAN) > 16;
-                    }, "Human race (17+)");
+                    this.requireBloodsteamMutationSlot()
+                    .requireAnyRace(Races.FROSTWYRM, Races.JABBERWOCKY, Races.SEA_DRAGON);
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -61,16 +50,15 @@ public class HumanDigestiveTractMutation extends IMutationPerkType
             var pBuffs:Object = {};
             if (pTier == 1) pBuffs['tou.mult'] = 0.05;
             if (pTier == 2) pBuffs['tou.mult'] = 0.15;
-            if (pTier == 3) pBuffs['tou.mult'] = 0.3;
-            if (pTier == 4) pBuffs['tou.mult'] = 0.6;
+            if (pTier == 3) pBuffs['tou.mult'] = 0.35;
+            if (pTier == 4) pBuffs['tou.mult'] = 0.75;
             return pBuffs;
         }
 
-        public function HumanDigestiveTractMutation() 
+        public function DrakeBloodMutation() 
 		{
-			super(mName + " IM", mName, SLOT_MOUTH, 2);
-		}
-		
-	}
-
+			super(mName + " IM", mName, SLOT_BLOODSTREAM, 2);
+        }
+        
+    }
 }

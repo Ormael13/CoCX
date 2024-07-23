@@ -47,31 +47,23 @@ public class CometSkill extends AbstractSoulSkill {
 	public function calcDamage(monster:Monster):Number {
 		var damage:Number = scalingBonusWisdom() * 6;
 		if (damage < 10) damage = 10;
-
 		//soulskill mod effect
 		damage *= soulskillMagicalMod();
-
 		//group enemies bonus
 		if (monster && monster.plural) damage *= 5;
-
 		//other bonuses
 		if (player.hasPerk(PerkLib.Heroism) && (monster && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType)))) damage *= 2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
-
 		return Math.round(damage);
-
 	}
 
     override public function doEffect(display:Boolean = true):void {
-
 		if (display) {
 			outputText("You focus for a moment, projecting a fragment of your soulforce above you.  A moment later, a prismatic comet crashes down on your opponents [themonster].  ");
 			if (monster.plural) outputText("Shattering into thousands of fragments that shower anything and everything around you.  ");
 		}
 		if (monsterDodgeSkill("comet fragments", display)) return;
-
 		var damage:Number = calcDamage(monster);
-
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -81,7 +73,6 @@ public class CometSkill extends AbstractSoulSkill {
 			crit = true;
 			damage *= 1.75;
 		}
-
 		//final touches
 		if (display) outputText("Comet fragments hits [themonster], dealing ");
 		doMagicDamage(damage, true, display);

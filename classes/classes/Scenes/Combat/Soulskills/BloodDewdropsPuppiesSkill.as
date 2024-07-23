@@ -30,27 +30,21 @@ public class BloodDewdropsPuppiesSkill extends AbstractBloodSoulSkill {
 	}
 
 	public function calcDamage(monster:Monster):Number {
-		var damage:Number = scalingBonusWisdom() * spellModBlood() * 0.125;
+		var damage:Number = scalingBonusWisdom() * spellModBlood() * 6.75;
 		var damageFloor:Number = 10;
-
 		damage *= bloodPuppiesDamageBonusMod();
 		damage *= soulskillPhysicalMod();
-
 		if (damage < damageFloor) damage = damageFloor;
 		if (monster && monster.plural) damage *= 10;
 		if (player.hasPerk(PerkLib.BloodAffinity)) damage *= 2;
 		if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
 		damage *= combat.bloodDamageBoostedByDao();
-
 		return Math.round(damage);
-
 	}
 
     override public function doEffect(display:Boolean = true):void {
 		if (display) outputText("Giving command to your blood puppies, they start focusing the power of blood. Within an instant, many red dewdrops shoot from one of their front paws each, flying toward [themonster]! ");
-
 		var damage:Number = calcDamage(monster);
-
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -60,7 +54,6 @@ public class BloodDewdropsPuppiesSkill extends AbstractBloodSoulSkill {
 			crit = true;
 			damage *= ((bloodPuppiesDamageBonusMod() / 2) + 1.25);
 		}
-
 		doDamage(damage, true, display);
 		if (crit && display) outputText(" <b>*Critical Hit!*</b>");
 		doDamage(damage, true, display);
@@ -69,7 +62,6 @@ public class BloodDewdropsPuppiesSkill extends AbstractBloodSoulSkill {
 		if (crit && display) outputText(" <b>*Critical Hit!*</b>");
 		doDamage(damage, true, display);
 		if (crit && display) outputText(" <b>*Critical Hit!*</b>");
-		
 		if (flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] = 1;
 		endTurnByBloodSkillUse(damage, display, false);
     }

@@ -54,7 +54,7 @@ public class CleansingPalmSkill extends AbstractSoulSkill {
 	}
 
 	public function calcDamage(monster:Monster):Number {
-		var damage:Number = int(10 + (player.wis / 3 + rand(player.wis / 2)));
+		var damage:Number = scalingBonusWisdom() * 2;
 		damage += combat.meleeUnarmedDamageNoLagSingle();
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
 			if (player.isRaceCached(Races.MOUSE, 2) && player.countRings(jewelries.INMORNG)) damage *= 2.2;
@@ -63,7 +63,6 @@ public class CleansingPalmSkill extends AbstractSoulSkill {
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 			damage = combat.fireTypeDamageBonus(damage);
-			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
 			damage *= 1.1;
 		}
 		damage *= soulskillMod();
@@ -105,7 +104,6 @@ public class CleansingPalmSkill extends AbstractSoulSkill {
 				outputText(" back a few feet.\n\n");
 				if (silly() && calcCorruptionMulti(monster) >= 1.75) outputText("It's super effective!  ");
 			}
-			
 			//Determine if critical hit!
 			var crit:Boolean = false;
 			var critChance:int = 5;
@@ -115,21 +113,10 @@ public class CleansingPalmSkill extends AbstractSoulSkill {
 				crit = true;
 				damage *= 1.75;
 			}
-			
 			if (display) {
 				outputText("[Themonster] takes ");
 			}
-
-			doMagicDamage(damage, true, display);
-			if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-			if (player.hasPerk(PerkLib.FlurryOfBlows)) {
-				doMagicDamage(damage, true, display);
-				if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-				doMagicDamage(damage, true, display);
-				if (player.statStore.hasBuff("FoxflamePelt")) combat.layerFoxflamePeltOnThis(damage);
-				damage *= 3;
-			}
-
+			combat.checkForElementalEnchantmentAndDoDamage(damage, true, true, crit, false, 2);
 			if (display) {
 				if (crit) 
 					outputText(" <b>*Critical Hit!*</b>");

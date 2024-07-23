@@ -46,6 +46,8 @@ public class KangarooRace extends Race {
 				.skinCoatType(Skin.FUR, +1)
 				.hasCockOfType(CockTypesEnum.KANGAROO, +1);
 		
+		addMutation(IMutationsLib.MightyLowerHalfIM);
+		
 		buildTier(4, "kangaroo-morph")
 				.buffs({
 					"tou.mult": +0.05,

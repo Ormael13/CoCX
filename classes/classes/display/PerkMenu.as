@@ -163,12 +163,14 @@ public class PerkMenu extends BaseContent {
 				case 1: outputText("flying (by wings)"); break;
 				case 2: outputText("flying (on flying sword)"); break;
 				case 3: outputText("flying (using soulforce)"); break;
+				case 3: outputText("flying (using foxflame pelt)"); break;
 			}
 			outputText("</b>");
 			if (autoFlyingFlag != 0) addButton(0, "On Ground", autoFlyingType,0);
 			if (player.canFly() && autoFlyingFlag != 1) addButton(1, "By Wings", autoFlyingType,1);
 			if (player.hasPerk(PerkLib.FlyingSwordPath) && autoFlyingFlag != 2) addButton(2, "By FlyingSw", autoFlyingType,2);
 			if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor) && autoFlyingFlag != 3) addButton(3, "By SF", autoFlyingType,3);
+			if (player.statStore.hasBuff("FoxflamePelt") && player.tailCount >= 9 && autoFlyingFlag != 4) addButton(4, "By FFP", autoFlyingType,4);
 		}
 		if (player.hasCombatAura()) {
 			outputText("\n\nYou can suppress your auras. This way, they won't damage/arouse enemies.");
@@ -431,6 +433,11 @@ public class PerkMenu extends BaseContent {
 				+ "\nVenom effect added: <b>" + (flags[kFLAGS.ENVENOMED_BOLTS] ? "Yes" : "No") + "</b>");
 			bd.add("Venom", curry(toggleFlagRanged, kFLAGS.ENVENOMED_BOLTS))
 				.disableIf(!canVenomAttacks(), "You need a source of poison for this.");
+		}
+		if (player.hasPerk(PerkLib.PhantomArrow)) {
+			outputText("\n\nBy expending mana on each shot you create a copy of each of your arrows made of pure mana that replicate the trajectories of previous shots. Phantom arrows can trigger arrow storm. (Works only with bows and crosbows)"
+				+ "\nPhantom Arrow effect added: <b>" + (flags[kFLAGS.PHANTOM_ARROWS] > 0 ? "Yes" : "No") + "</b>");
+			bd.add("Arouse", curry(toggleFlagRanged, kFLAGS.PHANTOM_ARROWS));
 		}
 		submenu(bd, CoC.instance.inCombat ? curry(combat.combatMenu, false) : displayPerks, 0, false);
 	}
