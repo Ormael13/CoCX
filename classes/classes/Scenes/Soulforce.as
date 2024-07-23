@@ -903,7 +903,11 @@ public class Soulforce extends BaseContent
 		SceneLib.etnaScene.repeatEnc();
 	}
 	public function lightningRod():void {
-		SceneLib.electraScene.repeatMountainEnc();
+		if (flags[kFLAGS.ELECTRA_AFFECTION] == 100) {
+			if (flags[kFLAGS.ELECTRA_FOLLOWER] == 1) SceneLib.electraScene.ElectraRecruitingAgain();
+			else SceneLib.electraScene.ElectraRecruiting();
+		}
+		else SceneLib.electraScene.repeatMountainEnc();
 	}
 	public function theySeeHimTrollinTheyHatin():void {
 		if (flags[kFLAGS.ZENJI_PROGRESS] >= 4) {

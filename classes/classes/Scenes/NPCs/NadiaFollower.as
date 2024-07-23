@@ -584,7 +584,7 @@ public function breakingInYourMare():void {
 		outputText("\"<i>I’m just... I’m just so happy,</i>\" Nadia says, trying to blink away the tears, \"<i>I feared this was another dream, but the pain feels so real, and just happy I’m able to be joined with you like this, I’m happy that you’ve taken both my first times at once and I’ll treasure this pain forever.</i>\"\n\n");
 		outputText("Smiling at Nadia’s cute and sweet words, you start to pull your cocks out slowly, realizing you should probably make this more special for Nadia, and make it more tender and loving. As your cocks slip out, Nadia makes cute but slightly pained moaning noises, obviously still tender from having her virginities taken. Once your cocks are nearly out you thrust back in, as hard but gentle as possible, earning a happy moan from Nadia as your cocks sink back into her.\n\n");
 		outputText("\"<i>You’re being so gentle...</i>\" Nadia moans, looking back at you, her eyes full of her love for you.\n\n");
-		outputText("The least you can do is let her get used to it. You Resume your slow thrusts into her, helping her holes grow accustomed to your girth.\n\n");
+		outputText("The least you can do is let her get used to it. You resume your slow thrusts into her, helping her holes grow accustomed to your girth.\n\n");
 		outputText("\"<i>Thank you, it feels really good...</i>\" Nadia moans again, her body shuddering as you gently fuck her, \"<i>You really are my perfect stallion.</i>\"\n\n");
 		outputText("You wait for her lead before speeding up, smiling at your cute mare.\n\n");
 		outputText("\"<i>Go... go faster. I'm ready, I want more of you... I need more,</i>\" Nadia moans, smiling back at you.\n\n");

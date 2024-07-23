@@ -656,8 +656,8 @@ private function banishmentGargoyleRitual():void {
 	
 	outputText("\n\nStill panting and gasping from your ordeal, you notice " + flags[kFLAGS.GAR_NAME] + " looming over you, smiling.  You could be a dick for all that pain she caused you, or thank her for helping you.");
 	if (SceneLib.exgartuan.dickPresent()) SceneLib.exgartuan.leaveDick();
-    else if (SceneLib.exgartuan.boobsPresent()) SceneLib.exgartuan.leaveBoobs();
-	else player.removeStatusEffect(StatusEffects.Infested);
+	if (SceneLib.exgartuan.boobsPresent()) SceneLib.exgartuan.leaveBoobs();
+	if (player.hasStatusEffect(StatusEffects.Infested)) player.removeStatusEffect(StatusEffects.Infested);
 	player.buff("Infested").remove();
 	player.takePhysDamage(Math.round(player.maxHP()/3));
 	fatigue(10);
@@ -824,8 +824,8 @@ private function banishPervRitual():void {
 	outputText("\n\nEventually, though, you know you need to get back to camp.  You try to tell " + flags[kFLAGS.GAR_NAME] + ", but to your surprise, she's fast asleep, snoring softly.  With a grin, you untangle yourself from her embrace and find something to cover her with before giving her another kiss and making your way home.");
 	//(Return PC to camp, advance time 1 hour)
 	if (SceneLib.exgartuan.dickPresent()) SceneLib.exgartuan.leaveDick();
-    else if (SceneLib.exgartuan.boobsPresent()) SceneLib.exgartuan.leaveBoobs();
-	else player.removeStatusEffect(StatusEffects.Infested);
+	if (SceneLib.exgartuan.boobsPresent()) SceneLib.exgartuan.leaveBoobs();
+	if (player.hasStatusEffect(StatusEffects.Infested)) player.removeStatusEffect(StatusEffects.Infested);
 	player.buff("Infested").remove();
 	player.takePhysDamage(Math.round(player.maxHP()/3));
 	fatigue(10);

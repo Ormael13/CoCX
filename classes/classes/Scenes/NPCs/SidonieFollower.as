@@ -329,11 +329,11 @@ public class SidonieFollower extends NPCAwareContent
 				dynStats("lus", 33, "scale", false);
 			}
 			else {
-				outputText("You walk casually near the horse-morph place, and manage to see that she has interrupted her daily routine. Judging about how she has her shirt unbuttoned and folded over her shoulder, having only a white, sleeveless piece covering her ample bosom.\n\n");
-				outputText("As she enters her tent, Sidonie catches you and waves you over, undisturbed by having his upper body almost exposed to you. Probably the time living on the plains made her lose a bit of her inhibitions. A bit awkwardly, you return the greeting and go to her side. Here, she invites to your home, telling you that she relaxes on her place for a bit.\n\n");
+				outputText("You walk casually near the horse-morph place, and manage to see that she interrupted her daily routine. Judging about how she has her shirt unbuttoned and folded over her shoulder, having only a white, sleeveless piece covering her ample bosom.\n\n");
+				outputText("As she enters her tent, Sidonie catches you and waves you over, undisturbed by having her upper body almost exposed to you. Probably the time living on the plains made her lose a bit of her inhibitions. A bit awkwardly, you return the greeting and go to her side. Here, she invites to your home, telling you that she relaxes on her place for a bit.\n\n");
 				outputText("When you come in, the first thing that catches your attention is how tidy is the place. No sight of sawdust, or any kind of dirt. Her furniture is clear and looks as it were brand new. The entire places has an aromatic fragrance.\n\n");
 				outputText("\"<i>It’s nice to have you here, hon.</i>\" Sidonie says, distracting you a bit from the contemplation of her place. \"<i>Being a Champion and all has to be tiring job, and knowing that even with that, you take you time to spend it with your friends always makes me happy.</i>\"\n\n");
-				outputText("Well, it’s not like you would reach far without your friends help. And even if you did, you would be awfully lonely.\n\n");
+				outputText("Well, it’s not like you would reach far without your friends' help. And even if you did, you would be awfully lonely.\n\n");
 				outputText("\"<i>Aw, that’s very kind of you. Look, sweetheart. I’m gonna get changed, so you rest a bit here.</i>\" she says pointing at a couch near where you area. \"<i>Wait for me, and once I’m done, I’ll bring some mead for us to drink.</i>\"\n\n");
 				outputText("Sounds good, you tell her. With that, she goes to the other side of, as you notice now, her very large tent. A bit later, she returns with said drinks, and, to your surprise, with a much simpler attire than before. Covering her chest is a similar piece, but, instead of her usual denim pants, she’s now using a white set of shorts that do little to hide her enormous bulge.\n\n");
 				outputText("\"<i>Here, [name], have some.</i>\" Sidonie says, passing you a glass filled with honey-scented mead. \"<i>So, Champion, how are things going with you crusade for our homeland?</i>\"\n\n");
@@ -493,7 +493,7 @@ public class SidonieFollower extends NPCAwareContent
 			outputText("Aware of the heat on your own loins, but not wanting to leave Sidonie’s delicious cock unattended, you suggest her that you can enjoy more your intimate time if your pleased each other.\n\n");
 			outputText("\"<i>So, you want some mutual mouth-on-cock action?</i>\" she answers with a light-hearted laugh. \"<i>Good enough for me. Let’s see how much the ");
 			if (player.tallness < 85) outputText("little ");
-			outputText("[race] can produce!</i>\"\n\n");
+			outputText("[boy] can produce!</i>\"\n\n");
 			outputText("With an embarrassed smile, you ");
 			if (player.cumQ() > 1500) outputText("assure her that she’ll get surprised");
 			else if (player.cumQ() > 200) outputText("tell her while not a cum cascade, you produce quite enough");
