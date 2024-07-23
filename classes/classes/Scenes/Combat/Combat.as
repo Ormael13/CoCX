@@ -11862,6 +11862,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 			if (player.HP < (player.maxHP() * 0.2)) maxPercentRegen += 2;
 		}
 		if (player.perkv1(IMutationsLib.DrakeHeartIM) >= 3) maxPercentRegen += 1;
+		if (player.perkv1(IMutationsLib.DrakeBloodIM) >= 1) maxPercentRegen += player.perkv1(IMutationsLib.DrakeBloodIM);
         if (player.perkv1(IMutationsLib.EclipticMindIM) >= 3) maxPercentRegen += 1.5;
         if (player.perkv1(IMutationsLib.FerasBirthrightIM) >= 1 && !player.hasStatusEffect(StatusEffects.WereraceRegenerationDisabled)) {
 			var hbr:Number = 0.5;
@@ -11880,7 +11881,10 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 2 && player.racialScore(Races.HUMAN) > 17) maxPercentRegen += 1;
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) maxPercentRegen += 1;
 		if (player.hasStatusEffect(StatusEffects.PostfluidIntakeRegeneration)) maxPercentRegen += 1 * (player.perkv1(IMutationsLib.SlimeMetabolismIM)-2);
-        if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxPercentRegen += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
+        if ((player.hasPerk(PerkLib.HydraRegeneration) || player.perkv1(IMutationsLib.HydraBloodIM) >= 1) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) {
+			if (player.hasPerk(PerkLib.HydraRegeneration)) maxPercentRegen += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
+			if (player.perkv1(IMutationsLib.HydraBloodIM) >= 1) maxPercentRegen += 1 * player.perkv1(IMutationsLib.HydraBloodIM);
+		}
 		if (player.hasPerk(PerkLib.TrollRegeneration) && !player.hasStatusEffect(StatusEffects.TrollRegenerationDisabled)) maxPercentRegen += 6;
         if (player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 1;
         if (player.hasPerk(PerkLib.FleshBodyApprenticeStage)) maxPercentRegen += 0.5 * player.humanBodyCultivators();
@@ -11929,6 +11933,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 			if (player.HP < (player.maxHP() * 0.2)) maxRegen += 2;
 		}
 		if (player.perkv1(IMutationsLib.DrakeHeartIM) >= 3) maxRegen += 1;
+		if (player.perkv1(IMutationsLib.DrakeBloodIM) >= 1) maxRegen += player.perkv1(IMutationsLib.DrakeBloodIM);
         if (player.perkv1(IMutationsLib.FerasBirthrightIM) >= 1 && !player.hasStatusEffect(StatusEffects.WereraceRegenerationDisabled)) {
 			var hbr:Number = 0.5;
 			var mp:Number = 2;
@@ -11946,7 +11951,10 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 2 && player.racialScore(Races.HUMAN) > 17) maxRegen += 1;
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) maxRegen += 1;
 		if (player.hasStatusEffect(StatusEffects.PostfluidIntakeRegeneration)) maxRegen += 1 * (player.perkv1(IMutationsLib.SlimeMetabolismIM)-2);
-        if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxRegen += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
+        if ((player.hasPerk(PerkLib.HydraRegeneration) || player.perkv1(IMutationsLib.HydraBloodIM) >= 1) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) {
+			if (player.hasPerk(PerkLib.HydraRegeneration)) maxRegen += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
+			if (player.perkv1(IMutationsLib.HydraBloodIM) >= 1) maxRegen += 1 * player.perkv1(IMutationsLib.HydraBloodIM);
+		}
 		if (player.hasPerk(PerkLib.TrollRegeneration) && !player.hasStatusEffect(StatusEffects.TrollRegenerationDisabled)) maxRegen += 6;
         if (isNearWater() && (player.hasPerk(PerkLib.AquaticAffinity) || player.hasPerk(PerkLib.AffinityUndine)) && player.necklaceName == "Magic coral and pearl necklace") maxRegen += 1;
         //if (player.hasStatusEffect(StatusEffects.GnomeHomeBuff) && player.statusEffectv1(StatusEffects.GnomeHomeBuff) == 1) maxRegen += 15;
@@ -12104,6 +12112,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         if (player.perkv1(IMutationsLib.DrakeHeartIM) >= 1) soulforceregen += 4;
         if (player.perkv1(IMutationsLib.DrakeHeartIM) >= 2) soulforceregen += 4;
         if (player.perkv1(IMutationsLib.DrakeHeartIM) >= 3) soulforceregen += 4;
+		if (player.perkv1(IMutationsLib.DrakeBloodIM) >= 1) soulforceregen += Math.round(player.maxSoulforce() * 0.01 * player.perkv1(IMutationsLib.DrakeBloodIM));
 		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 2) soulforceregen += 40;
         if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3 && player.hasPerk(PerkLib.StarSphereMastery)) soulforceregen += (player.perkv1(PerkLib.StarSphereMastery) * 4);
         if (player.perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 1) {
@@ -12196,6 +12205,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         if (player.perkv1(IMutationsLib.DrakeHeartIM) >= 1) manaregen += 5;
         if (player.perkv1(IMutationsLib.DrakeHeartIM) >= 2) manaregen += 5;
         if (player.perkv1(IMutationsLib.DrakeHeartIM) >= 3) manaregen += 5;
+		if (player.perkv1(IMutationsLib.DrakeBloodIM) >= 1) manaregen += Math.round(player.maxMana() * 0.01 * player.perkv1(IMutationsLib.DrakeBloodIM));
         if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 1) manaregen += 5;
         if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 2) manaregen += 10;
         if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) manaregen += 15;

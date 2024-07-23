@@ -74,6 +74,7 @@ public class HydraRace extends Race {
 		
 		addBloodline(PerkLib.HydrasDescendant, PerkLib.BloodlineHydra);
 		addMutation(IMutationsLib.VenomGlandsIM);
+		addMutation(IMutationsLib.HydraBloodIM);
 		
 		buildTier(14, "hydra")
 				.buffs({

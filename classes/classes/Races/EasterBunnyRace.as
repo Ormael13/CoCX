@@ -56,6 +56,7 @@ public class EasterBunnyRace extends Race {
 						}, +1);
 		
 		addMutation(IMutationsLib.EasterBunnyEggBagIM);
+		addMutation(IMutationsLib.MightyLowerHalfIM);
 		
 		buildTier(12, "easter bunny")
 				.namesMaleFemale("easter bunny-boy", "easter bunny-girl")
@@ -76,6 +77,17 @@ public class EasterBunnyRace extends Race {
 					"tou.mult": -0.10,
 					"spe.mult": +1.05,
 					"lib.mult": +1.50
+				})
+				.end();
+		
+		buildTier(20, "true easter laquine")
+				.namesMaleFemale("true easter laquine-boy", "true easter laquine-girl")
+				.requirePreviousTier()
+				.buffs({
+					"str.mult": -0.20,
+					"tou.mult": -0.10,
+					"spe.mult": +1.30,
+					"lib.mult": +2.00
 				})
 				.end();
 	}

@@ -57,6 +57,7 @@ public class IMutationsLib
 		public static const CaveWyrmLungsIM:IMutationPerkType = new CaveWyrmLungsMutation();
 		public static const DiamondHeartIM:IMutationPerkType = new DiamondHeartMutation();
 		public static const DisplacerMetabolismIM:IMutationPerkType = new DisplacerMetabolismMutation();
+		public static const DrakeBloodIM:IMutationPerkType = new DrakeBloodMutation();
 		public static const DrakeBonesIM:IMutationPerkType = new DrakeBonesMutation();
 		public static const DrakeHeartIM:IMutationPerkType = new DrakeHeartMutation();
 		public static const DrakeLungsIM:IMutationPerkType = new DrakeLungMutation();
@@ -94,6 +95,7 @@ public class IMutationsLib
 		public static const HumanTesticlesIM:IMutationPerkType = new HumanTesticlesMutation();
 		public static const HumanThyroidGlandIM:IMutationPerkType = new HumanThyroidGlandMutation();
 		public static const HumanVersatilityIM:IMutationPerkType = new HumanVersatilityMutation();
+		public static const HydraBloodIM:IMutationPerkType = new HydraBloodMutation();
 		public static const KitsuneParathyroidGlandsIM:IMutationPerkType = new KitsuneParathyroidGlandMutation();
 		public static const KitsuneThyroidGlandIM:IMutationPerkType = new KitsuneThyroidGlandMutation();
 		public static const LactaBovinaOvariesIM:IMutationPerkType = new LactaBovinaOvariesMutation();

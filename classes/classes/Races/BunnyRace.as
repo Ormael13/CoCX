@@ -65,6 +65,15 @@ public class BunnyRace extends Race {
 					"lib.mult": +0.90
 				})
 				.end();
+		
+		buildTier(13, "laquine")
+				.namesMaleFemale("laquine-boy","laquine-girl")
+				.buffs({
+					"tou.mult": -0.10,
+					"spe.mult": +1.00,
+					"lib.mult": +1.05
+				})
+				.end();
 	}
 }
 }

@@ -4,33 +4,24 @@
  */
 package classes.IMutations
 {
+import classes.BodyParts.Tail;
 import classes.PerkClass;
 import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
+import classes.Player;
 import classes.Races;
 
-public class MightyLowerHalfMutation extends IMutationPerkType
+public class HydraBloodMutation extends IMutationPerkType
     {
         override public function get mName():String {
-            return "Mighty Lower Half";
+            return "Hydra Blood";
         }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
-            if (pTier >= 1){
-                descS += "Make Kick permanent no matter your leg type. Increase unarmed strike damage by " + 5 * pTier + " and grapple effect by " + 2 * pTier + "0%";
-            }
-            if (pTier >= 2){
-                descS += ". Kick is " + ((5 * pTier) - 5) + "0% stronger";
-            }
-            if (pTier >= 3){
-                descS += ". Kick stun lasts 1 round longer";
-            }
-            if (pTier >= 4){
-                descS += ". Straddle and Grapples duration is extended by 1 additional round";
-            }
+            if (pTier >= 1) descS += "Improve existing Regeneration by "+pTier+"% negated by fire damage";
             if (descS != "")descS += ".";
             return descS;
         }
@@ -42,8 +33,9 @@ public class MightyLowerHalfMutation extends IMutationPerkType
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
-                    this.requireAdaptationsMutationSlot()
-                    .requireAnyRace(Races.KANGAROO, Races.BUNNY, Races.EASTERBUNNY, Races.HORSE, Races.CENTAUR, Races.COW, Races.MINOTAUR, Races.SCYLLA, Races.NAGA, Races.GORGON, Races.COUATL, Races.VOUIVRE, Races.APOPHIS, Races.FROSTWYRM, Races.JABBERWOCKY);
+                    this.requireBloodsteamMutationSlot()
+                    .requirePerk(PerkLib.HydraRegeneration)
+                    .requireRace(Races.HYDRA);
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -57,16 +49,17 @@ public class MightyLowerHalfMutation extends IMutationPerkType
         //Mutations Buffs
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
-            if (pTier == 1) pBuffs['spe.mult'] = 0.05;
-            if (pTier == 2) pBuffs['spe.mult'] = 0.1;
-            if (pTier == 3) pBuffs['spe.mult'] = 0.15;
-            if (pTier == 4) pBuffs['spe.mult'] = 0.2;
+            if (pTier == 1) pBuffs['tou.mult'] = 0.05;
+            if (pTier == 2) pBuffs['tou.mult'] = 0.1;
+            if (pTier == 3) pBuffs['tou.mult'] = 0.15;
+            if (pTier == 4) pBuffs['tou.mult'] = 0.2;
             return pBuffs;
         }
 
-        public function MightyLowerHalfMutation() 
+        public function HydraBloodMutation() 
 		{
-			super(mName + " IM", mName, SLOT_ADAPTATIONS, 4);
+			super(mName + " IM", mName, SLOT_BLOODSTREAM, 1);
         }
+        
     }
 }
