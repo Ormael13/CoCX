@@ -43,7 +43,7 @@ public class MightyLowerHalfMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireAdaptationsMutationSlot()
-                    .requireAnyRace(Races.KANGAROO, Races.BUNNY, Races.HORSE, Races.CENTAUR, Races.COW, Races.MINOTAUR, Races.SCYLLA, Races.NAGA, Races.GORGON, Races.COUATL, Races.VOUIVRE, Races.APOPHIS);
+                    .requireAnyRace(Races.KANGAROO, Races.BUNNY, Races.HORSE, Races.CENTAUR, Races.COW, Races.MINOTAUR, Races.SCYLLA, Races.NAGA, Races.GORGON, Races.COUATL, Races.VOUIVRE, Races.APOPHIS, Races.FROSTWYRM, Races.JABBERWOCKY);
                 }
                 else{
                     var pLvl:int = pTier * 30;
