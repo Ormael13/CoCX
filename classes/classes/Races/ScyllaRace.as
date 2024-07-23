@@ -81,6 +81,7 @@ public class ScyllaRace extends Race {
 				.noWings(+2);
 		
 		addMutation(IMutationsLib.ScyllaInkGlandsIM);
+		addMutation(IMutationsLib.MightyLowerHalfIM);
 		
 		buildTier(7, "scylla")
 				.buffs({

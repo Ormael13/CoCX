@@ -20,16 +20,16 @@ public class MightyLowerHalfMutation extends IMutationPerkType
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
-                descS += "Increases Evasion and allows you to keep Flexibility even without cat arms/legs/tail";
+                descS += "Make Kick permanent no matter your leg type. Increase unarmed strike damage by " + 5 * pTier + " and grapple effect by " + 2 * pTier + "0%";
             }
             if (pTier >= 2){
-                descS += "";
+                descS += ". Kick is " + ((5 * pTier) - 5) + "0% stronger";
             }
             if (pTier >= 3){
-                descS += "";
+                descS += ". Kick stun lasts 1 round longer";
             }
             if (pTier >= 4){
-                descS += ", giving you 10% of max core Spe as phantom Spe";
+                descS += ". Straddle and Grapples duration is extended by 1 additional round";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -43,7 +43,7 @@ public class MightyLowerHalfMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireAdaptationsMutationSlot()
-                    .requireAnyRace(Races.KANGAROO, Races.BUNNY, Races.HORSE, Races.CENTAUR, Races.COW, Races.MINOTAUR, Races.NAGA, Races.GORGON, Races.COUATL, Races.VOUIVRE, Races.APOPHIS);
+                    .requireAnyRace(Races.KANGAROO, Races.BUNNY, Races.HORSE, Races.CENTAUR, Races.COW, Races.MINOTAUR, Races.SCYLLA, Races.NAGA, Races.GORGON, Races.COUATL, Races.VOUIVRE, Races.APOPHIS);
                 }
                 else{
                     var pLvl:int = pTier * 30;
