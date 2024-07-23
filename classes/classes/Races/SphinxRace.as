@@ -75,7 +75,7 @@ public class SphinxRace extends Race {
 				.hasPerk(PerkLib.Flexibility, +1);
 		
 		addMutation(IMutationsLib.TwinHeartIM, +2);
-		addMutation(IMutationsLib.CatLikeNimblenessIM, +1);
+		addMutation(IMutationsLib.CatLikeNimblenessIM);
 		addMutation(IMutationsLib.EyeOfTheTigerIM);
 		
 		buildTier(14, "sphinx")

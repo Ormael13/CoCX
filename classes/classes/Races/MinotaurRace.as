@@ -66,6 +66,7 @@ public class MinotaurRace extends Race {
 		
 		addBloodline(PerkLib.MinotaursDescendant, PerkLib.BloodlineMinotaur);
 		addMutation(IMutationsLib.MinotaurTesticlesIM);
+		addMutation(IMutationsLib.MightyLowerHalfIM);
 		
 		buildTier(10, "bull-morph")
 				.namesMaleFemale("bull-boy","bull-morph")

@@ -59,6 +59,7 @@ public class NagaRace extends Race {
 						}, 0, -1000);
 		
 		addMutation(IMutationsLib.VenomGlandsIM);
+		addMutation(IMutationsLib.MightyLowerHalfIM);
 		
 		buildTier(8, "naga")
 				.buffs({

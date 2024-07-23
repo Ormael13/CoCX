@@ -73,6 +73,7 @@ public class VouivreRace extends Race {
 		
 		addMutation(IMutationsLib.VenomGlandsIM);
 		addMutation(IMutationsLib.DrakeLungsIM);
+		addMutation(IMutationsLib.MightyLowerHalfIM);
 		
 		buildTier(11, "lesser vouivre")
 				.buffs({

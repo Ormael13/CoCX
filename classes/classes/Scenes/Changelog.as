@@ -45,7 +45,9 @@ public class Changelog extends BaseContent
 			outputText("-New tier 3 corruption lvl-up perk: Devouring Aura. Req. Improved Arousing Aura perk and 50+ corruption. Effect: Your arousing aura now also erodes your victim lust resistance by 1% per round and may even inflict negative resistance. This ability does not affect mindless opponents.\n");
 			outputText("-New tier 4 wisdom lvl-up perk: Dual Wield (2H Firearms). Req. Dual Wield (Firearms) and Amateur Gunslinger perks; 50+ wis, 40+ int and 30+ spe. Effect: Allows you to wield two firearms (2H ones) more effectively. (damage and accuracy penalties decreased by 40% and 20%)\n");
 			outputText("-New tier 4 corruption lvl-up perk: Damnation Aura. Req. Devouring Aura perk and 60+ corruption. Effect: Double the effect of Devouring Aura.\n");
+			outputText("-New tier 4 libido lvl-up perk: Improved Grapple. Req. 150+ lib. Effect: Do two action per straddle or grappling turn. Increase straddle damage by 20%.\n");
 			outputText("-New tier 6 libido lvl-up perk: Corrupt the heart. Req. Corrupt the body perk. Effect: Lust vulnerability debuff can now stack beyond 0 up to -200%.\n");
+			outputText("-New tier 8 libido lvl-up perk: Greater Grapple. Req. Improved Grapple perk and 250+ lib. Effect: Attack three action per straddle or grappling turn. Increase straddle damage by another 20%.\n");
 			outputText("-New tier 10 libido lvl-up perk: Corrupt the mind. Req. Corrupt the heart perk. Effect: Lust vulnerability debuff can now stack beyond 0 up to -300%.\n");
 			outputText("-New tier 13 libido lvl-up perk: Corrupt the soul. Req. Corrupt the mind perk. Effect: Lust vulnerability debuff can now stack beyond 0 up to infinity. (well technicaly not infinity but only Spilly Stonewall PC maybe could reach that 'inifity')\n");
 			outputText("-New event perk: Nightshade. Gained by using Black Lily. Effects: Raise min corruption by 20% permanently +50% tease damage. Pollen now erodes lust resistance by 5% per round. Your alraune abilities are now considered Dark Elements and your vine attack delivers extra dark damage.\n");
@@ -201,8 +203,6 @@ public class Changelog extends BaseContent
 			outputText("-Dynamically display the name of a racial requirement. (PhillipDaisySeventh)\n");
 			outputText("-Monsters lust vulnerability debuff would now stops at reaching 100% (or 0% enemy lust resistance). To go beyond that would req. one of Corrupt the ... perkline.\n");
 			outputText("-New mutation perk: Human Versatility (Final Form). Req. Human Versatility (Evolved) and lvl 90+. Effects: Mastery gains increased by 4 points or in case of multiplier +4 to multiplier. Decrease needed exp to lvl up weapon/lifeskill masteries and have 40% chance to gain 4x more XP for Mastery. 50% chance to gain 2 levels instead of 1 when leveling weapon/lifeskill mastery.\n");
-			outputText("-New tier 4 libido lvl-up perk: Improved Grapple. Req. 150+ lib. Effect: Do two action per straddle or grappling turn. Increase straddle damage by 20%.\n");
-			outputText("-New tier 8 libido lvl-up perk: Greater Grapple. Req. Improved Grapple perk and 250+ lib. Effect: Attack three action per straddle or grappling turn. Increase straddle damage by another 20%.\n");
 			outputText("-New mutation perk: Human Bloodstream (Final Form). Req. Human Bloodstream (Evolved) and lvl 90+. Effects: Increases maximum base/core Spe/Lib by 20, maximum trainable Spe/Lib by 30%. Increase fatigue recovery (+15), wrath generation (+6) and +2 to fatigue recovery/wrath gains multiplier. +5% to max overfatigue/overwrath.\n");
 			outputText("-New mutation perk: Human Bones (Final Form). Req. Human Bones (Evolved) and lvl 90+. Effects: Increases maximum base/core Str/Tou by 20, maximum trainable Str/Tou by 30%. Increase effects of body cultivation by 150%. Increase p.soulskill power by 100% and +10% to max overhp.\n");
 			outputText("-New mutation perk: Human Smarts (Final Form). Req. Human Smarts (Evolved) and lvl 90+. Effects: Increases maximum base/core Int/Wis by 20, maximum trainable Int/Wis cap by 30%. Gain soulforce recovery equal to 2% of your total soulforce and mana recovery increased by 1% of max mana, +5% to max overmana/oversoulforce. Increase m.soulskill power by 100%. Allow to use options requiring to have technical knowledge.\n");
@@ -278,9 +278,13 @@ public class Changelog extends BaseContent
 			outputText("-During Draculina boss fight been able to use Sunrise soulskill or use foxflame pelt would help to counter her Darkness move (like spell Blind can do already).\n");
 			outputText("-Foxflame Pelt special effect minor change when having 9 cinder tails: cost of use or maintain is halved, speed boost is doubled, can fly (similar to using only SF and would cost SF and Mana per turn needed to sustain foxflame pelt).\n");
 			outputText("-Minor adjustion of soulskill damage calculations.\n");
-			outputText("-Default firearms dmg caluclation from weapon atk increased (2x > 10x) and scaling off wis/int/spe (instead of core values to use scaling functions).\n");
+			outputText("-Default firearms dmg calculation from weapon atk increased (2x > 10x) and scaling off wis/int/spe (instead of core values to use scaling functions).\n");
 			outputText("-Changed order of discovered areas with Lake been first founded then Forest (O).\n");
 			outputText("-Fixes a quality of life issue where pressing down the mouse button and then moving the mouse off of a button before releasing the mouse button still clicks/activates the button. (Edward Darksong)\n");
+			outputText("-New mutation perk: Mighty Lower Half. Req. having free adaoptation mutation slot, one of races: Kangaro, Bunny, Frog, Horse Morph, Centaur(The original centaur not the other ones), Cow, Minotaur, Naga, Gorgon, Couatl, Vouivre, Apophis. Effects: Make Kick permanent no matter your leg type, Increase unarmed strike damage by 5 and grapple effect by 20%.\n");
+			outputText("-New mutation perk: Mighty Lower Half (Primitive). Req. Mighty Lower Half and lvl 30+. Effects: Make Kick permanent no matter your leg type, Increase unarmed strike damage by 10 and grapple effect by 40%. Kick is 50% stronger.\n");
+			outputText("-New mutation perk: Mighty Lower Half (Evolved). Req. Mighty Lower Half (Primitive) and lvl 60+. Effects: Make Kick permanent no matter your leg type, Increase unarmed strike damage by 15 and grapple effect by 60%. Kick is 100% stronger. Kick stun lasts 1 round longer.\n");
+			outputText("-New mutation perk: Mighty Lower Half (Final Form). Req. Mighty Lower Half (Evolved) and lvl 90+. Effects: Make Kick permanent no matter your leg type, Increase unarmed strike damage by 20 and grapple effect by 80%. Kick is 150% stronger. Kick stun lasts 1 round longer. Straddle and Grapples duration is extended by 1 additional round.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -296,16 +300,27 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
 			outputText("-\n");
 			outputText("-\n");//New mutation perk: Human Parathyroid Glands (Final Form). Req. Human Parathyroid Glands (Evolved) and lvl 90+. Effects: Increases self healing by 40 * level HP in combat and twice more out of combat. 8 * level HP Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.
 			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Svalkash)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -315,7 +330,7 @@ public class Changelog extends BaseContent
 			outputText("Pilgrim's Bounty perk setting cumQ as if max lust was 100, Raphael rape scene treating all PC cocks as tentalce cocks, Condensed Power and Titanic Strength perks desc/effects been misaligned/incorectly calculated, HB Mech Dragon's Breath Flamer & Scatter Laser upgrade(s) after instaling each weapon, HB Ayo Armor have it stored SF reset on loading save, Vapula not longer will make Joy ");
 			outputText("join any threesome scenes, Patchouli sex scenes will now know when she gained cock she could use, Pure JoJo anal sex sex scene cock parser going postal, trapped satyr sex scenes not giving sex XP or triger any related effects, Cum Cannon checking for cow not mino race, White-Faced One Birthright (Final Form) stat multi bonuses, Nadia recruitment endcounter bug msg, ");
 			outputText("one of Raphael scenes using variant for tentacle cocks that can go all way throu without having such cock(s), unable to gain plasma dmg from using fire buff on lightning weapon and vice versa, unable to use Blind during Draculina fight, rescue from bad end not clearing lingering status effects, Centaurium tf effect checking for wrong elf-like ears type, ");
-			outputText("Ascension: Transhumanism (Sen) perk not adding sensitivity, Selachimorphanthropy bonuses not changing with moon phases, inconsistencies for damage type dealt in melee/range base attacks and specials, flame blade bonus dmg from libido, combining fire and lightning damage on melee weapons, lust defeat text for constructs not using it own variant\n\n");
+			outputText("Ascension: Transhumanism (Sen) perk not adding sensitivity, Selachimorphanthropy bonuses not changing with moon phases, inconsistencies for damage type dealt in melee/range base attacks and specials, flame blade bonus dmg from libido, combining fire and lightning damage on melee weapons, lust defeat text for non sentient constructs not using it own variant\n\n");
 			/*ostatni punkt changelogu
 			outputText("(Part 2/2) <b>Version 0.9a:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -370,20 +385,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -414,9 +417,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

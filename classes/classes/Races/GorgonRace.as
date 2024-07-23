@@ -61,6 +61,7 @@ public class GorgonRace extends Race {
 		
 		addMutation(IMutationsLib.VenomGlandsIM);
 		addMutation(IMutationsLib.GorgonEyesIM);
+		addMutation(IMutationsLib.MightyLowerHalfIM);
 		
 		buildTier(11, "gorgon")
 				.buffs({

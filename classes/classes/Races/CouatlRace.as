@@ -65,6 +65,7 @@ public class CouatlRace extends Race {
 		
 		addMutation(IMutationsLib.VenomGlandsIM);
 		addMutation(IMutationsLib.HeartOfTheStormIM);
+		addMutation(IMutationsLib.MightyLowerHalfIM);
 		
 		buildTier(11, "couatl")
 				.buffs({

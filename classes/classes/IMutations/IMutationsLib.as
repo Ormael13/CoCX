@@ -101,6 +101,7 @@ public class IMutationsLib
 		public static const ManticoreMetabolismIM:IMutationPerkType = new ManticoreMetabolismMutation();
 		public static const MantislikeAgilityIM:IMutationPerkType = new MantislikeAgilityMutation();
 		public static const MelkieLungIM:IMutationPerkType = new MelkieLungMutation();
+		public static const MightyLowerHalfIM:IMutationPerkType = new MightyLowerHalfMutation();
 		public static const MinotaurTesticlesIM:IMutationPerkType = new MinotaurTesticlesMutation();
 		public static const NaturalPunchingBagIM:IMutationPerkType = new NaturalPunchingBagMutation();
 		public static const NukiNutsIM:IMutationPerkType = new NukiNutsMutation();
@@ -146,3 +147,4 @@ public class IMutationsLib
 
 	}
 }
+
