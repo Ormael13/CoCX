@@ -4984,6 +4984,11 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
             //Hair
+            if (player.hairType != Hair.NORMAL && rand(3) == 0 && changes < changeLimit) {
+                outputText("\n\n");
+                transformations.HairHuman.applyEffect();
+                changes++;
+            }
             if (type != 2 && player.hairColor != "silver" && rand(3) == 0 && changes < changeLimit) {
                 changes++;
                 outputText("[pg]You feel a tingling in your scalp and reach up to your head to investigate. To your surprise, your hair color has changed into a silvery color, just like that of a shark girl!");
