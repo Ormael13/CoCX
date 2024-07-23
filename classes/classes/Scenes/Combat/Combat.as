@@ -2874,6 +2874,7 @@ public class Combat extends BaseContent {
         if (flags[kFLAGS.ELEMENTAL_ARROWS] >= 1 && flags[kFLAGS.ELEMENTAL_ARROWS] <= 8) onearrowcost += 3;
         if (flags[kFLAGS.CUPID_ARROWS] == 1) onearrowcost += 1;
         if (flags[kFLAGS.ENVENOMED_BOLTS] == 1) onearrowcost += 1;
+        if (flags[kFLAGS.PHANTOM_ARROWS] == 1) onearrowcost *= 2;
 		//cost increase (likely temporal until i make more rework on this)  //player.masteryArcheryLevel - maybe use that?
         if (player.level >= 48) onearrowcost *= 5;
         else onearrowcost *= Math.floor(player.level/12)+1;
@@ -3412,6 +3413,7 @@ public class Combat extends BaseContent {
 				}
 				else outputText("  You do not have enough venom to apply on the " + ammoWord + " tip!\n");
 			}
+			phantomArrowsEffect(damage, ammoWord);
             if (player.weaponRangeName == "Hodr's bow" && !monster.hasStatusEffect(StatusEffects.Blind)) monster.createStatusEffect(StatusEffects.Blind, 1, 0, 0, 0);
             if (!MSGControll) outputText("\n");
             if (flags[kFLAGS.ARROWS_SHOT] >= 1) EngineCore.awardAchievement("Arrow to the Knee", kACHIEVEMENTS.COMBAT_ARROW_TO_THE_KNEE);
@@ -3442,10 +3444,14 @@ public class Combat extends BaseContent {
             return;
         }
         MSGControll = true;
-        if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2) {
-            flags[kFLAGS.MULTIPLE_ARROWS_STYLE]--;
-            flags[kFLAGS.ARROWS_ACCURACY] += arrowsAccuracyPenalty();
-            multiArrowsStrike(type);
+        if (player.hasPerk(PerkLib.ArrowStorm) && rand(2) == 0) {
+			outputText("Your " + ammoWord + " continue past its target flying into a U-turn before piercing it again!\n");
+			multiArrowsStrike(type);
+		}
+		else if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2) {
+			flags[kFLAGS.MULTIPLE_ARROWS_STYLE]--;
+			flags[kFLAGS.ARROWS_ACCURACY] += arrowsAccuracyPenalty();
+			multiArrowsStrike(type);
         }
     }
 
@@ -3719,7 +3725,7 @@ public class Combat extends BaseContent {
     }
 
     public function doArcheryDamage(damage:Number, type:Number = 0):void {
-        var ignoreDR:Boolean = ((player.hasPerk(PerkLib.DeadlyAim) && type == 0) || (player.hasPerk(PerkLib.Penetrator) && type == 1));
+        var ignoreDR:Boolean = ((player.hasPerk(PerkLib.DeadlyAim) && (type == 0 || type == 2)) || (player.hasPerk(PerkLib.Penetrator) && type == 1));
         if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) {
 			doFireDamage(damage, true, true, ignoreDR);
 		}
@@ -3743,6 +3749,9 @@ public class Combat extends BaseContent {
 		}
         else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 8) {
 			doAcidDamage(damage, true, true, ignoreDR);
+		}
+		else if (type == 2) {
+			doMagicDamage(damage, true, true, ignoreDR);
 		}
         else {
 			doPhysicalDamage(damage, true, true, ignoreDR);
@@ -3811,6 +3820,17 @@ public class Combat extends BaseContent {
                 monster.teased(lustArrowDmg, false, true);
                 if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
             }
+        }
+    }
+
+    public function phantomArrowsEffect(damage:Number, ammoWord:String = ""):void {
+        if (flags[kFLAGS.PHANTOM_ARROWS] == 1 && player.mana >= 5) {
+			EngineCore.ManaChange(-5);
+            doArcheryDamage(damage, 2);
+			if (player.hasPerk(PerkLib.ArrowStorm) && rand(2) == 0) {
+				outputText("Your " + ammoWord + " continue past its target flying into a U-turn before piercing it again!\n");
+				doArcheryDamage(damage, 2);
+			}
         }
     }
 

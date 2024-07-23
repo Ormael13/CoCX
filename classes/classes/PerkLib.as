@@ -498,6 +498,12 @@ public class PerkLib
 		public static const DamnationAura:PerkType = mk("Damnation Aura", "Damnation Aura",
 				"Double the effect of Devouring Aura.",
 				"You've chosen the 'Damnation Aura' perk. Double the effect of Devouring Aura.");
+		public static const ArrowStorm:PerkType = mk("Arrow Storm", "Arrow Storm",
+				"After striking a target each shot has a chance to pierce through and do a U-Turn to pierce the target again.",
+				"You've chosen the 'Arrow Storm' perk. After striking a target each shot has a chance to pierce through and do a U-Turn to pierce the target again.");
+		public static const PhantomArrow:PerkType = mk("Phantom Arrow", "Phantom Arrow",
+				"By expending mana on each shot you create a copy of each of your arrows made of pure mana that replicate the trajectories of previous shots. Phantom arrows can trigger arrow storm.",
+				"You've chosen the 'Phantom Arrow' perk. By expending mana on each shot you create a copy of each of your arrows made of pure mana that replicate the trajectories of previous shots. Phantom arrows can trigger arrow storm.");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -505,12 +511,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk.");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk.");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk.");
@@ -5820,6 +5820,8 @@ public class PerkLib
                     .requirePerk(EpicSpeed)
                     .requireLevel(66);
 			//Tier 12 Speed Perks
+            ArrowStorm.requireLevel(72)
+                    .requirePerk(Cupid);
             TwinRiposte.requireLevel(72)
                     .requirePerks(Parry, BladeBarrier);
 			/*		PrestigeJobSoulArcher.requirePrestigeJobSlot()
@@ -5829,6 +5831,8 @@ public class PerkLib
 					 .requireLevel(72);
                     */
             //Tier 13 Speed Perks
+            PhantomArrow.requireLevel(78)
+                    .requirePerk(ArrowStorm);
 			//Tier 14 Speed Perks
 			//Tier 15 Speed Perks
             UnlockEndurance4thStage.requirePerk(UnlockEndurance3rdStage)
@@ -8283,4 +8287,4 @@ public class PerkLib
         }
 	}
 }
-}
+}

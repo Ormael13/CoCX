@@ -434,6 +434,11 @@ public class PerkMenu extends BaseContent {
 			bd.add("Venom", curry(toggleFlagRanged, kFLAGS.ENVENOMED_BOLTS))
 				.disableIf(!canVenomAttacks(), "You need a source of poison for this.");
 		}
+		if (player.hasPerk(PerkLib.PhantomArrow)) {
+			outputText("\n\nBy expending mana on each shot you create a copy of each of your arrows made of pure mana that replicate the trajectories of previous shots. Phantom arrows can trigger arrow storm. (Works only with bows and crosbows)"
+				+ "\nPhantom Arrow effect added: <b>" + (flags[kFLAGS.PHANTOM_ARROWS] > 0 ? "Yes" : "No") + "</b>");
+			bd.add("Arouse", curry(toggleFlagRanged, kFLAGS.PHANTOM_ARROWS));
+		}
 		submenu(bd, CoC.instance.inCombat ? curry(combat.combatMenu, false) : displayPerks, 0, false);
 	}
 
