@@ -8110,17 +8110,27 @@ public final class Mutations extends MutationsHelper {
             }
     */
 
-    public function neonPinkEgg(pregnantChange:Boolean, player:Player):void {
-        var changes:Number = 0;
+    public function neonPinkEgg(pregnantChange:Boolean, type:Number, player:Player):void {
+        //'type' refers to the variety of seed.
+        //0 == bunny
+        //1 == laquine
+		var changes:Number = 0;
         var changeLimit:Number = 1;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
-        //If this is a pregnancy change, only 1 change per proc.
+        //Temporary storage
+		var temp:Number        = 0;
+		var temp2:Number       = 0;
+		var temp3:Number       = 0;
+		//If this is a pregnancy change, only 1 change per proc.
         if (pregnantChange) changeLimit = 1;
         else clearOutput();
         //If not pregnancy, mention eating it.
-        if (!pregnantChange) outputText("You eat the neon pink egg, and to your delight it tastes sweet, like candy.  In seconds you've gobbled down the entire thing, and you lick your fingers clean before you realize you ate the shell – and it still tasted like candy.");
+        if (!pregnantChange) {
+			if (type  == 0) outputText("You eat the neon pink egg, and to your delight it tastes sweet, like candy.  In seconds you've gobbled down the entire thing, and you lick your fingers clean before you realize you ate the shell – and it still tasted like candy.");
+			else outputText("You eat the carrot. As expected of a carrot it's tender and juicy, quite delicious actually. Just as you finish the vegetable your body is overcome by changes.");
+		}
         //If pregnancy, warning!
         if (pregnantChange) {
             outputText("\n<b>Your egg-stuffed ");
@@ -8134,6 +8144,21 @@ public final class Mutations extends MutationsHelper {
             outputText(" oddly, and you have a hunch that something's about to change</b>.");
         }
         //STATS CHANGURYUUUUU
+		//STRENGTH
+		if (changes < changeLimit && rand(2) == 0 && type == 1 &&  player.MutagenBonus("str", 1)) {
+			//Maxxed
+			if (type == 0 && player.str >= 70) {
+				outputText("\n\nYou feel strong enough to single-handedly pull a fully-loaded wagon.");
+			}
+			if ((type == 1 || type == 2) && player.str >= 60) {
+				outputText("\n\nYou feel strong enough to single-handedly pull a fully-loaded wagon.");
+			}
+			//NOT MAXXED
+			else {
+				outputText("\n\nYour muscles clench and surge, making you feel as strong as a horse.");
+				changes++;
+			}
+		}
         //Boost speed (max 80!)
         if (changes < changeLimit && rand(3) == 0 && MutagenBonus("spe", 2)) {
             if (player.spe < 30) outputText("[pg]Tingles run through your muscles, and your next few movements seem unexpectedly fast.  The egg somehow made you faster!");
@@ -8268,6 +8293,9 @@ public final class Mutations extends MutationsHelper {
             player.createPerk(PerkLib.BunnyEggs, 0, 0, 0, 0);
             changes++;
         }
+		if (type == 1 && player.hasVagina() && player.vaginaType() != VaginaClass.EQUINE && changes < changeLimit && rand(3) == 0) {
+			transformations.VaginaHorse().applyEffect();
+		}
         //Shrink Balls if pc IS NOT an Easter Bunny yet
         if (player.hasBalls() && player.ballSize > 5 && rand(3) == 0 && changes < changeLimit && !player.hasPerk(PerkLib.EasterBunnyBalls)) {
             if (player.ballSize < 10) {
@@ -8283,13 +8311,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Get rid of extra balls
-        if (player.balls > 2 && changes < changeLimit && !player.hasPerk(PerkLib.EasterBunnyBalls) && rand(3) == 0) {
+        if (player.balls > 2 && changes < changeLimit && (!player.hasPerk(PerkLib.EasterBunnyBalls) || type == 0) && rand(3) == 0) {
             changes++;
             outputText("[pg]There's a tightening in your [sack] that only gets higher and higher until you're doubled over and wheezing.  When it passes, you reach down and discover that <b>two of your testicles are gone.</b>");
             player.balls -= 2;
         }
         //Make PC an Easter bunny
-        if (!player.hasPerk(PerkLib.EasterBunnyBalls) && player.hasCock() && player.balls <= 4 && rand(3) == 0) {
+        if (!player.hasPerk(PerkLib.EasterBunnyBalls) && type == 0 && player.hasCock() && player.balls <= 4 && rand(3) == 0) {
             outputText("[pg]You gasp as ");
             if (player.balls >= 2) outputText("something fundamental change in your balls. ");
             if (player.balls == 0) {
@@ -8306,6 +8334,102 @@ public final class Mutations extends MutationsHelper {
             player.ballSize = 1;
             flags[kFLAGS.EASTER_BUNNY_EGGS_STORED] += 2;
         }
+		//MALENESS.
+		if ((player.gender == 1 || player.gender == 3) && rand(1.5) == 0 && type == 1 && changes < changeLimit) {
+			//If cocks that aren't horsified!
+			if ((player.horseCocks() + player.demonCocks()) < player.cockTotal()) {
+				temp = player.findFirstCockNotInType([CockTypesEnum.HORSE,CockTypesEnum.DEMON]);
+				CoC.instance.transformations.CockHorse(temp).applyEffect();
+				temp2 = player.growCock(temp, rand(4) + 4);
+
+				dynStats("lus", 35, "scale", false);
+				player.addCurse("sen", 4, 1);
+				player.MutagenBonus("lib", 5);
+				//Make cock thicker if not thick already!
+				if (player.cocks[temp].cockThickness <= 2) player.thickenCock(temp, 1);
+				changes++;
+			}
+			//Players cocks are all horse-type - increase size!
+			else {
+				//single cock
+				if (player.cocks.length == 1) {
+					temp2 = player.growCock(0, rand(3) + 1);
+					temp  = 0;
+					dynStats("lus", 10, "scale", false);
+					player.addCurse("sen", 1, 1);
+				}
+				//Multicock
+				else {
+					//Find smallest cock
+					//Temp2 = smallness size
+					//temp = current smallest
+					temp3 = player.cocks.length;
+					temp  = 0;
+					while (temp3 > 0) {
+						temp3--;
+						//If current cock is smaller than saved, switch values.
+						if (player.cocks[temp].cockLength > player.cocks[temp3].cockLength) {
+							temp2 = player.cocks[temp3].cockLength;
+							temp  = temp3;
+						}
+					}
+					//Grow smallest cock!
+					//temp2 changes to growth amount
+					temp2 = player.growCock(temp, rand(4) + 1);
+					dynStats("lus", 10, "scale", false);
+					player.addCurse("sen", 1, 1);
+				}
+				outputText("\n\n");
+				if (temp2 > 2) outputText("Your " + player.cockDescript(temp) + " tightens painfully, inches of taut horse-flesh pouring out from your sheath as it grows longer.  Thick animal-pre forms at the flared tip, drawn out from the pleasure of the change.");
+				if (temp2 > 1 && temp2 <= 2) outputText("Aching pressure builds within your sheath, suddenly releasing as an inch or more of extra dick flesh spills out.  A dollop of pre beads on the head of your enlarged " + player.cockDescript(temp) + " from the pleasure of the growth.");
+				if (temp2 <= 1) outputText("A slight pressure builds and releases as your " + player.cockDescript(temp) + " pushes a bit further out of your sheath.");
+				changes++;
+			}
+			//Chance of thickness + daydream
+			if (rand(2) == 0 && changes < changeLimit && player.horseCocks() > 0) {
+				temp3 = 0;
+				temp2 = player.cocks.length;
+				while (temp2 > 0) {
+					temp2--;
+					if (player.cocks[temp2].cockThickness <= player.cocks[temp3].cockThickness) {
+						temp3 = temp2;
+					}
+				}
+				temp = temp3;
+				player.thickenCock(temp, .5);
+				outputText("\n\nYour " + Appearance.cockNoun(CockTypesEnum.HORSE) + " thickens inside its sheath, growing larger and fatter as your veins thicken, becoming more noticeable.  It feels right");
+				if (player.cor + player.lib < 60) outputText(" to have such a splendid tool.  You idly daydream about cunts and pussies, your " + Appearance.cockNoun(CockTypesEnum.HORSE) + " plowing them relentlessly, stuffing them pregnant with cum");
+				if (player.cor + player.lib >= 60 && player.cor + player.lib < 100) outputText(" to be this way... You breath the powerful animalistic scent and fantasize about fucking centaurs night and day until their bellies slosh with your cum");
+				if (player.cor + player.lib >= 100 && player.cor + player.lib <= 175) outputText(" to be a rutting stud.  You ache to find a mare or centaur to breed with.  Longing to spend your evenings plunging a " + Appearance.cockNoun(CockTypesEnum.HORSE) + " deep into their musky passages, dumping load after load of your thick animal-cum into them.  You'd be happy just fucking horsecunts morning, noon, and night.  Maybe somewhere there is a farm needing a breeder..");
+				if (player.cor + player.lib > 175) outputText(" to whinny loudly like a rutting stallion.  Your " + Appearance.cockNoun(CockTypesEnum.HORSE) + " is perfect for fucking centaurs and mares.  You imagine the feel of plowing an equine pussy deeply, bottoming out and unloading sticky jets of horse-jizz into its fertile womb.  Your hand strokes your horsecock of its own accord, musky pre dripping from the flared tip with each stroke.  Your mind wanders to the thought of you with a harem of pregnant centaurs.");
+				outputText(".");
+				if (player.cor < 30) outputText("  You shudder in revulsion at the strange thoughts and vow to control yourself better.");
+				if (player.cor >= 30 && player.cor < 60) outputText("  You wonder why you thought such odd things, but they have a certain appeal.");
+				if (player.cor >= 60 && player.cor < 90) outputText("  You relish your twisted fantasies, hoping to dream of them again.");
+				if (player.cor >= 90) outputText("  You flush hotly and give a twisted smile, resolving to find a fitting subject to rape and relive your fantasies.");
+				dynStats("lus", 10, "scale", false);
+				player.MutagenBonus("lib", 1);
+			}
+			//Chance of ball growth if not 3" yet
+			if (rand(2) == 0 && changes < changeLimit && player.ballSize <= 3 && player.horseCocks() > 0) {
+				if (player.balls == 0) {
+					player.balls    = 2;
+					player.ballSize = 1;
+					outputText("\n\nA nauseating pressure forms just under the base of your maleness.  With agonizing pain the flesh bulges and distends, pushing out a rounded lump of flesh that you recognize as a testicle!  A moment later relief overwhelms you as the second drops into your newly formed sack.");
+					dynStats("lus", 5, "scale", false);
+					player.MutagenBonus("lib", 2);
+					Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
+				}
+				else {
+					player.ballSize++;
+					if (player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " + Appearance.ballsDescription(false, true, player) + " have grown larger than a human's.");
+					if (player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your " + Appearance.sackDescript(player) + ".  Walking becomes difficult as you discover your " + Appearance.ballsDescription(false, true, player) + " have enlarged again.");
+					dynStats("lus", 3, "scale", false);
+					player.MutagenBonus("lib", 1);
+				}
+				changes++;
+			}
+		}
         //Boost cum production
         if ((player.hasBalls() || player.hasCock()) && player.cumQ() < 3000 && rand(3) == 0 && changeLimit > 1) {
             changes++;

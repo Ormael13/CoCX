@@ -40,8 +40,8 @@ public class BunnyRace extends Race {
 	
 	public override function setup():void {
 		addScores()
-				.faceType(Face.BUNNY, +1)
-				.earType(Ears.BUNNY, +1, -1000)
+				.faceType(ANY(Face.BUNNY, Face.BUCKTEETH), +1)
+				.earType(Ears.BUNNY, +1, -10)
 				.eyeType(Eyes.HUMAN, +1)
 				.armType(Arms.HUMAN, +1)
 				.legType(LowerBody.BUNNY, +1)
@@ -50,13 +50,12 @@ public class BunnyRace extends Race {
 				.noAntennae(+1)
 				.noWings(+1)
 				.height(LESS_THAN(72), +1)
-				.noBalls(0, -1)
 				.hasCockOfType(CockTypesEnum.HORSE, 0, -10)
 				.vaginaType(VaginaClass.EQUINE, 0, -10)
-				.customRequirement("","No easter bunny balls",
+				.customRequirement("","No Easter bunny balls",
 						function (body:BodyData): Boolean {
-							return !(body.player.hasPerk(PerkLib.EasterBunnyBalls) && body.hasBalls)
-						}, 0, -1000);
+							return body.player.hasPerk(PerkLib.EasterBunnyBalls) && body.hasBalls
+						}, 0, -10);
 		
 		addMutation(IMutationsLib.MightyLowerHalfIM);
 		

@@ -109,6 +109,7 @@ private function displayIngredients():void {
 	outputText("Fox Berry - 5 gems.\n");
 	outputText("Ringtail Fig - 5 gems.\n");
 	outputText("Mouse Cocoa - 10 gems.\n");
+	outputText("Flared Carrot - 10 gems.\n");
 	outputText("Red River Root - 14 gems.\n");
 	outputText("Ferret Fruit - 20 gems.\n");
 }
@@ -117,11 +118,12 @@ public function ingredientsMenu():void {
 	clearOutput();
 	displayIngredients();
 	menu();
-	addButton(0,"Fox Berry",buyFoxBerry);
-	addButton(1,"Ringtail Fig",buyFig);
-	addButton(2,"Mouse Cocoa", buyCocoa);
-	addButton(3,"R.Rvr Root",buyRoot);
-	addButton(4,"Ferret Fruit",buyFerretFruit);
+	addButton(1,"Fox Berry",buyFoxBerry);
+	addButton(2,"Ringtail Fig",buyFig);
+	addButton(3,"Mouse Cocoa", buyCocoa);
+	addButton(6,"Flared Carrot", buyFlaredCarrot);
+	addButton(7,"R.Rvr Root",buyRoot);
+	addButton(8,"Ferret Fruit",buyFerretFruit);
 	addButton(14,"Back",checkBakeryMenu);
 }
 
@@ -147,6 +149,7 @@ private function talkToBaker():void {
 	addButton(6,"Ringtail Fig",talkAFig);
 	addButton(7,"Mouse Cocoa", talkAboutMouseCocoa);
 	addButton(8,"R.Rvr Root",talkAboutRoot);
+	addButton(9,"Flared Carrot",talkAboutFlaredCarrot);
 	addButton(14,"Never mind", talkBakeryMenu);
 }
 
@@ -245,6 +248,16 @@ private function talkAboutRoot():void {
 	flags[kFLAGS.MINO_CHEF_TALKED_RED_RIVER_ROOT]++;
 }
 
+//[Bakery - Talk - Baker - Flared Carrot]
+private function talkAboutFlaredCarrot():void {
+	clearOutput();
+	outputText("\"<i>Those are favorite of the bunnies they order it in everything, meal, deserts you name it. The centaurs and equines also have a big crave for those too. We have a farm that produce these on a regular basis heck it must be the one vegetable that sells the most in the entire city. Ten gems for one handful, now.</i>\"");
+	//[Yes][No]
+	menu();
+	addButton(0,"Yes",buyFlaredCarrot);
+	addButton(1,"No",talkToBaker);
+}
+
 //[Bakery - Talk - Baker - Mouse Cocoa]
 private function talkAboutMouseCocoa():void {
 	clearOutput();
@@ -267,6 +280,20 @@ private function buyCocoa():void {
 	player.gems -= 10;
 	statScreenRefresh();
 	inventory.takeItem(consumables.MOUSECO, ingredientsMenu);
+}
+
+private function buyFlaredCarrot():void {
+	clearOutput();
+	if(player.gems < 10) {
+		outputText("You can't afford one of those!");
+		menu();
+		addButton(0,"Next",ingredientsMenu);
+		return;
+	}
+	outputText("You pay ten gems for some flared carrot.  ");
+	player.gems -= 10;
+	statScreenRefresh();
+	inventory.takeItem(consumables.FCARROT, ingredientsMenu);
 }
 
 private function buyFerretFruit():void {

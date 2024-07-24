@@ -148,7 +148,7 @@ public class AbstractEquinum extends Consumable {
 		} else player.removeStatusEffect(StatusEffects.TFWarning);
 		//Stat changes first
 		//STRENGTH
-		if (rand(2) == 0 && player.MutagenBonus("str", 1)) {
+		if (changes < changeLimit && rand(2) == 0 && player.MutagenBonus("str", 1)) {
 			//Maxxed
 			if (type == 0 && player.str >= 70) {
 				outputText("\n\nYou feel strong enough to single-handedly pull a fully-loaded wagon.");
@@ -163,7 +163,7 @@ public class AbstractEquinum extends Consumable {
 			}
 		}
 		//TOUGHNESS
-		if (rand(2) == 0) {
+		if (changes < changeLimit && rand(2) == 0) {
 			//MAXXED ALREADY
 			if (type == 0 && player.tou >= 85) {
 				outputText("\n\nYour body is as tough and solid as a ");
@@ -185,7 +185,7 @@ public class AbstractEquinum extends Consumable {
 			}
 		}
 		//INTELLECT
-		if (type == 0 && rand(3) == 0) {
+		if (type == 0 && changes < changeLimit && rand(3) == 0) {
 			if (player.inte <= 5) {
 				outputText("\n\nYou let out a throaty \"Neiiiigh\" as your animalistic instincts take over.");
 			}
@@ -215,7 +215,7 @@ public class AbstractEquinum extends Consumable {
 				changes++;
 			}
 		}
-		if ((type == 1 || type == 2) && rand(3) == 0 && player.MutagenBonus("int", 1)) {
+		if ((type == 1 || type == 2) && changes < changeLimit && rand(3) == 0 && player.MutagenBonus("int", 1)) {
 			outputText("\n\nAs you finish drinking the potion you suddenly feel more cunning and by far way smarter.");
 			changes++;
 		}

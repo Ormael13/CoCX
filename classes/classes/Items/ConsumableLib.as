@@ -146,7 +146,7 @@ public final class ConsumableLib extends AlchemyLib
 		public const L_WHTEG: Consumable = mk("L.WhtEg", "L.WhtEg", "a large white egg", 6, "This is an oblong egg, not much different from an ostrich egg in appearance.  Something tells you it's more than just food.", curry(m.whiteEgg, true));
 		//Others
 		public const DRGNEGG: Consumable = mk("DrgnEgg", "DrgnEgg", "an unfertilized dragon egg", 6, "A large, solid egg, easily the size of your clenched fist.  Its shell color is reddish-white, with blue splotches.", m.eatEmberEgg);
-		public const NPNKEGG: Consumable = mk("NPnkEgg", "NPnkEgg", "a neon pink egg", 6, "This is an oblong egg with an unnatural neon pink coloration.  It tingles in your hand with odd energies that make you feel as if you could jump straight into the sky.", curry(m.neonPinkEgg, false));
+		public const NPNKEGG: Consumable = mk("NPnkEgg", "NPnkEgg", "a neon pink egg", 6, "This is an oblong egg with an unnatural neon pink coloration.  It tingles in your hand with odd energies that make you feel as if you could jump straight into the sky.", curry(m.neonPinkEgg, false, 0));
 		public const SNOWFLO: Consumable = mk("SnowFlo", "SnowFlower", "a Snow Flower", 6, "This beautiful flower grows even in the frozen wastes of the Glacial Rift, defying the arctic cold.", m.alrauneSnowFlower);
 		public const EMBER_F: Consumable = mk("Ember.F", "EmberFlower", "a Ember Flower", 6, "This beautiful flower grows even in the ash of the Volcanic Crag, defying the heat.", m.alrauneEmberFlower);
 		public const BLACK_L: Consumable = mk("Black.L", "BlackLily", "a Black Lily", 6, "You obtained this rather peculiar flower from Rafflesia, and despite its corrupted origins, it probably has the best smell ever.", m.alrauneBlackLily);
@@ -608,6 +608,7 @@ public final class ConsumableLib extends AlchemyLib
 						DEFAULT_SUBSTANCES_DROP_TABLE,
 						MULTIRACE_ESSENCE_DROP_TABLE(AE_HINEZUMI, AE_MOUSE)
 				);
+		public const FCARROT: Consumable = mk("FCarrot", "FlaredCarrot", "a Flared Carrot", 6, "A staple food loved both by bunny and horse morph. May have transformative properties when eaten raw.", curry(m.neonPinkEgg, false, 1));
 		public const FOXBERY: Consumable = mk("FoxBery", "Fox Berry", "a fox berry", 6, "This large orange berry is heavy in your hands.  It may have gotten its name from its bright orange coloration.  You're certain it is no mere fruit.", curry(m.foxTF, false), ItemConstants.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
@@ -1254,4 +1255,4 @@ public final class ConsumableLib extends AlchemyLib
 		{
 		}
 	}
-}
+}

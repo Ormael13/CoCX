@@ -3942,6 +3942,8 @@ public class PerkLib
 				"You can metabolise sex into life force and can feed from your partners orgasms.");
 		public static const KnowledgeIsPower:PerkType = mk("Knowledge is power", "Knowledge is power",
 				"You become more powerful the more you know about Mareth. Increase spell and physical damage by a percentage based on how much of the codex was read.");
+		public static const LaquineMight:PerkType = mk("Laquine Might", "Laquine Might",
+				"Add 75% of your libido to your strength stat.");
 		public static const LifeLeech:PerkType = mk("Life leech", "Life leech",
 				"Your unarmed strike steals vital energy from your victims, dealing 5% extra damage and restoring 1% mana, health, fatigue and soulforce per hit.");
 		public static const LionHeart:PerkType = mk("Lion Heart", "Lion Heart",

@@ -5728,6 +5728,8 @@ use namespace CoC;
 			if (!hasPerk(PerkLib.LionHeart) && statStore.hasBuff('Lion Heart')) statStore.removeBuffs('Lion Heart');
 			if (hasPerk(PerkLib.EquineStrength)) statStore.replaceBuffObject({'str.mult':Math.round((speStat.mult.value+libStat.mult.value)/4)}, 'Equine Strength', { text: 'Equine Strength' });
 			if (!hasPerk(PerkLib.EquineStrength) && statStore.hasBuff('Equine Strength')) statStore.removeBuffs('Equine Strength');
+			if (hasPerk(PerkLib.LaquineMight)) statStore.replaceBuffObject({'str.mult':Math.round(libStat.mult.value*0.75)}, 'Laquine Might', { text: 'Laquine Might' });
+			if (!hasPerk(PerkLib.LaquineMight) && statStore.hasBuff('Laquine Might')) statStore.removeBuffs('Laquine Might');
 			if (hasPerk(PerkLib.WisdomoftheAges)) statStore.replaceBuffObject({'str.mult':Math.round(((intStat.mult.value/2)+(wisStat.mult.value/2))),'tou.mult':Math.round(((intStat.mult.value/2)+(wisStat.mult.value/2)))}, 'Wisdom of the Ages', { text: 'Wisdom of the Ages' });
 			if (!hasPerk(PerkLib.WisdomoftheAges) && statStore.hasBuff('Wisdom of the Ages')) statStore.removeBuffs('Wisdom of the Ages');
 			if (hasPerk(PerkLib.DeathPriest)) statStore.replaceBuffObject({'int.mult':Math.round(wisStat.mult.value)}, 'Death Priest', { text: 'Death Priest' });

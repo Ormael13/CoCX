@@ -376,7 +376,7 @@ public class Pregnancy extends NPCAwareContent {
                     }
                     if (womb["incubation"] == sceneHunter.adjustPregEventTimer(785, womb["type"])) {
                         //outputText("\n<b>An unexpected change occurs, no doubt brought on by the bunny's eggs inside you!</b>");
-                        CoC.instance.mutations.neonPinkEgg(true, player);
+                        CoC.instance.mutations.neonPinkEgg(true, 0, player);
                         EngineCore.outputText("\n");
                         displayedUpdate = true;
                     }
@@ -386,7 +386,7 @@ public class Pregnancy extends NPCAwareContent {
                     }
                     if (womb["incubation"] == sceneHunter.adjustPregEventTimer(765, womb["type"])) {
                         //outputText("\n<b>An unexpected change occurs, no doubt brought on by the bunny's eggs inside you!</b>");
-                        CoC.instance.mutations.neonPinkEgg(true, player);
+                        CoC.instance.mutations.neonPinkEgg(true, 0, player);
                         EngineCore.outputText("\n");
                         displayedUpdate = true;
                     }
@@ -2928,7 +2928,7 @@ public class Pregnancy extends NPCAwareContent {
                     displayedUpdate = true;
                 }
                 if(player.buttPregnancyIncubation == sceneHunter.adjustPregEventTimer(785, player.buttPregnancyType)) {
-                    CoC.instance.mutations.neonPinkEgg(true,player);
+                    CoC.instance.mutations.neonPinkEgg(true,0,player);
                     EngineCore.outputText("\n");
                     displayedUpdate = true;
                 }
@@ -2937,7 +2937,7 @@ public class Pregnancy extends NPCAwareContent {
                     displayedUpdate = true;
                 }
                 if(player.buttPregnancyIncubation == sceneHunter.adjustPregEventTimer(765, player.buttPregnancyType)) {
-                    CoC.instance.mutations.neonPinkEgg(true,player);
+                    CoC.instance.mutations.neonPinkEgg(true,0,player);
                     EngineCore.outputText("\n");
                     displayedUpdate = true;
                 }

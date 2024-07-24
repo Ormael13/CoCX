@@ -295,9 +295,9 @@ public class Changelog extends BaseContent
 			outputText("-Bunny race get new racial bonuses tier - Greater Bunny (13+): -10% to tou multi, +100% to spe multi, +105% to lib multi\n");
 			outputText("-Eastern Bunny get new racial bonuses tier - Greater Easter Bunny (20+): -20% to str multi, -10% to tou multi, +130% to spe multi, +200% to lib multi\n");
 			outputText("-Ascension: Trancendental Genetic Memory perk can attain 2 more ranks for even more slots to perm metamorph options.\n");
-			outputText("-New race - Laquine / Elder Laquine (12+/20+): +80/150% to str multi, -10/20% to tou multi, +80/120% to spe multi, -20/50% to wis multi, +100/200% to lib multi, +50/100 sens\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New TF item (by Liadri): Flared Carrot. Buyable in Tel'Adre Bakery. Using this item will turn PC into laquine. Laquine / Elder Laquine racial bonuses (12+/20+): +80/150% to str multi, -10/20% to tou multi, +80/120% to spe multi, -20/50% to wis multi, +100/200% to lib multi, +50/100 sens\n");
+			outputText("-New event perk: Laquine Might. Gained by been laquine. Effects: Add 75% of your libido to your strength stat.\n");
+			outputText("-Equine Strength perk can be gained by Laquine PC.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

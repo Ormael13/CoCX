@@ -2075,7 +2075,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			//Equine Strength
-			needNext ||= player.gainOrLosePerk(PerkLib.EquineStrength, player.isAnyRaceCached(Races.HORSE, Races.CENTAUR), "You are enough of a horse-mroph or centaur and have gained your special abilities!", "You are no longer enough of a horse-mroph or centaur and have lost your special abilities!");
+			needNext ||= player.gainOrLosePerk(PerkLib.EquineStrength, player.isAnyRaceCached(Races.HORSE, Races.CENTAUR, Races.LAQUINE), "You are enough of a horse-morph or centaur and have gained your special abilities!", "You are no longer enough of a horse-morph or centaur and have lost your special abilities!");
+			//Laquine Might
+			needNext ||= player.gainOrLosePerk(PerkLib.LaquineMight, player.isRaceCached(Races.LAQUINE), "Woa maybe you’ve eaten too many raw carrots you feel your body ripple with power. It might also be you turning into a full Laquine doing this.", "As your body becomes less Laquine like you feel your energy is down both in libido and strength.");
 			//Titan Might
 			needNext ||= player.gainOrLosePerk(PerkLib.TitanicSize,(player.tallness >= 80 && (player.isRaceCached(Races.SCYLLA, 2) || player.isAnyRaceCached(Races.HYDRA, Races.FROSTWYRM, Races.SANDWORM))), "Whoa, you've grown so big its a sheer miracle you don't damage the landscape while moving. That said, your size now contributes to your strength as well.",
 					(player.tallness < 80) ? "You sadly are no longer able to benefit from your size as much as you did before. Probably because you have shrunk to a smaller size." : "You sadly are no longer able to benefit from your size as much as you did before. Probably because you have transformed again.");
