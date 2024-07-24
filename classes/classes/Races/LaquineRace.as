@@ -7,7 +7,7 @@ import classes.PerkLib;
 import classes.Race;
 import classes.VaginaClass;
 
-public class BunnyRace extends Race {
+public class LaquineRace extends Race {
     public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
         /*Arms*/		"Human",
@@ -33,8 +33,8 @@ public class BunnyRace extends Race {
         /*Vagina*/		"Human",
         /*Perks*/		"Human"];
 
-    public function BunnyRace(id:int) {
-		super("Bunny", id, []);//RaceBody);
+    public function LaquineRace(id:int) {
+		super("Laquine", id, []);//RaceBody);
         //tfRace = RaceMem.appendEnumVal("Bunny", CoC.instance.transformations.FullBunny);
 	}
 	
@@ -46,36 +46,44 @@ public class BunnyRace extends Race {
 				.armType(Arms.HUMAN, +1)
 				.legType(LowerBody.BUNNY, +1)
 				.skinCoatType(Skin.FUR, +2)
-				.tailType(Tail.RABBIT, +1)
+				.tailType(ANY(Tail.RABBIT, Tail.HORSE), +1)
 				.noAntennae(+1)
 				.noWings(+1)
-				.height(LESS_THAN(72), +1)
-				.noBalls(0, -1)
-				.hasCockOfType(CockTypesEnum.HORSE, 0, -10)
-				.vaginaType(VaginaClass.EQUINE, 0, -10)
+				.tone(AT_LEAST(80), +1)
+				.tone(AT_LEAST(100), +1)
+				.tone(AT_LEAST(120), +1)
+				.hasBalls(+1)
+				.hasCockOfType(CockTypesEnum.HORSE, +1)
+				.vaginaType(VaginaClass.EQUINE, +1)
 				.customRequirement("","No easter bunny balls",
 						function (body:BodyData): Boolean {
 							return !(body.player.hasPerk(PerkLib.EasterBunnyBalls) && body.hasBalls)
 						}, 0, -1000);
 		
+		addMutation(IMutationsLib.EquineMuscleIM);
 		addMutation(IMutationsLib.MightyLowerHalfIM);
 		
-		buildTier(10, "bunny")
-				.namesMaleFemale("bunny-boy","bunny-girl")
+		buildTier(12, "laquine")
+				.namesMaleFemale("laquine-boy","laquine-girl")
 				.buffs({
-					"str.mult": -0.20,
+					"str.mult": +0.80,
 					"tou.mult": -0.10,
-					"spe.mult": +0.90,
-					"lib.mult": +0.90
+					"spe.mult": +0.80,
+					"wis.mult": -0.20,
+					"lib.mult": +1.00,
+					"sens": +50
 				})
 				.end();
 		
-		buildTier(13, "greater bunny")
-				.namesMaleFemale("greater bunny-boy","greater bunny-girl")
+		buildTier(20, "elder laquine")
+				.namesMaleFemale("elder laquine-boy","elder laquine-girl")
 				.buffs({
-					"tou.mult": -0.10,
-					"spe.mult": +1.00,
-					"lib.mult": +1.05
+					"str.mult": +1.50,
+					"tou.mult": -0.20,
+					"spe.mult": +1.20,
+					"wis.mult": -0.50,
+					"lib.mult": +2.00,
+					"sens": +100
 				})
 				.end();
 	}

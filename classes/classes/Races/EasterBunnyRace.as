@@ -6,6 +6,8 @@ import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
+import classes.VaginaClass;
+
 public class EasterBunnyRace extends Race {
     public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
@@ -50,6 +52,8 @@ public class EasterBunnyRace extends Race {
 				.noWings(+1)
 				.height(LESS_THAN(72), +1)
 				.hasCockOfType(CockTypesEnum.HUMAN, +1)
+				.hasCockOfType(CockTypesEnum.HORSE, 0, -10)
+				.vaginaType(VaginaClass.EQUINE, 0, -10)
 				.customRequirement("","Easter bunny balls",
 						function (body:BodyData): Boolean {
 							return body.player.hasPerk(PerkLib.EasterBunnyBalls) && body.hasBalls
@@ -80,8 +84,8 @@ public class EasterBunnyRace extends Race {
 				})
 				.end();
 		
-		buildTier(20, "true easter laquine")
-				.namesMaleFemale("true easter laquine-boy", "true easter laquine-girl")
+		buildTier(20, "greater easter bunny")
+				.namesMaleFemale("greater easter bunny-boy", "greater easter bunny-girl")
 				.requirePreviousTier()
 				.buffs({
 					"str.mult": -0.20,

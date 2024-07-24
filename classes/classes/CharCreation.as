@@ -2777,7 +2777,7 @@ import classes.Scenes.Combat.CombatAbility;
 				}
 				else{
 					addButton(btn, "Nat.MetaMph", curry(perkRPConfirm, 1, PerkLib.AscensionNaturalMetamorph, 30, 2))
-						.hint("Gain free perks Genetic Memory, Metamorph, MetamorphEx at the start of the game\n\n"
+						.hint("Gain free perks: Genetic Memory, Metamorph, MetamorphEx at the start of the game\n\n"
 							+ "Cost: 30 points.");
 				}
 			}
@@ -2801,8 +2801,8 @@ import classes.Scenes.Combat.CombatAbility;
 					else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < tier){
 						addButtonDisabled(btn, "Gen. Memory", "You have not ascended enough times yet.");
 					}
-					else if (tier > 8){
-						addButtonDisabled(btn, "Gen. Memory", "You have acquired the highest tier available.");
+					else if (tier > 10){
+						addButtonDisabled(btn, "Gen. Memory", "You have acquired the highest tier available.");//150/~550 (add new asc perk to 2x then 3x and 4x amount of slots - each 2 ascennsions)
 					}
 					else {
 						if (tier == 1){
