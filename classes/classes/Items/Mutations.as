@@ -8266,10 +8266,16 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.blockingBodyTransformations()) changeLimit = 0;
         //Shrink
-        if (rand(3) == 0 && player.tallness > 72) {
+        if (rand(3) == 0 && player.tallness > 60 && changes < changeLimit && type == 0) {
             changes++;
             outputText("[pg]Your skin crawls, making you close your eyes and shiver.  When you open them again the world seems... different.  After a bit of investigation, you realize you've become shorter!\n");
             player.tallness -= (1 + rand(5));
+        }
+		//Taller
+		if (rand(3) == 0 && player.basetallness < 96 && changes < changeLimit && type == 1) {
+            outputText("[pg]You suddenly realise the ground is farther down then you remember it to be… did you just grew taller?");
+            player.tallness += (1 + rand(5));
+            changes++;
         }
         //De-wettification of cunt (down to 3?)!
         if (player.wetness() > 3 && changes < changeLimit && rand(3) == 0) {

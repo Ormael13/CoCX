@@ -53,12 +53,10 @@ public class LaquineRace extends Race {
 				.tone(AT_LEAST(100), +1)
 				.tone(AT_LEAST(120), +1)
 				.hasBalls(+1)
+				.height(GREATER_THAN(84), +1)
 				.hasCockOfType(CockTypesEnum.HORSE, +1)
 				.vaginaType(VaginaClass.EQUINE, +1)
-				.customRequirement("","No Easter bunny balls",
-						function (body:BodyData): Boolean {
-							return body.player.hasPerk(PerkLib.EasterBunnyBalls) && body.hasBalls
-						}, 0, -10);
+				.hasPerk(PerkLib.EasterBunnyBalls, 0, -10);
 		
 		addMutation(IMutationsLib.EquineMuscleIM);
 		addMutation(IMutationsLib.MightyLowerHalfIM);
