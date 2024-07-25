@@ -52,7 +52,10 @@ public class BunnyRace extends Race {
 				.height(LESS_THAN(72), +1)
 				.hasCockOfType(CockTypesEnum.HORSE, 0, -10)
 				.vaginaType(VaginaClass.EQUINE, 0, -10)
-				.hasPerk(PerkLib.EasterBunnyBalls, 0, -10);
+				.customRequirement("","No easter bunny balls",
+						function (body:BodyData): Boolean {
+							return !body.player.hasPerk(PerkLib.EasterBunnyBalls)
+						}, 0, -10);
 		
 		addMutation(IMutationsLib.MightyLowerHalfIM);
 		
