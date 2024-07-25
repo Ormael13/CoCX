@@ -10,7 +10,7 @@ import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Races;
 
-public class MightyLowerHalfMutation extends IMutationPerkType
+public class MightyLegsMutation extends IMutationPerkType
     {
         override public function get mName():String {
             return "Mighty Lower Half";
@@ -20,7 +20,7 @@ public class MightyLowerHalfMutation extends IMutationPerkType
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
-                descS += "Tentacle and tail attack deals " + 25 * pTier + "% more damage. Increase unarmed strike damage by " + 5 * pTier + " and grapple effect by " + 2 * pTier + "0%";
+                descS += "Make Kick permanent no matter your leg type. Increase unarmed strike damage by " + 5 * pTier + " and grapple effect by " + 2 * pTier + "0%";
             }
             if (pTier >= 2){
                 descS += ". Kick is " + ((5 * pTier) - 5) + "0% stronger";
@@ -29,7 +29,7 @@ public class MightyLowerHalfMutation extends IMutationPerkType
                 descS += ". Kick stun lasts 1 round longer";
             }
             if (pTier >= 4){
-                descS += ". Straddle and Grapples duration is extended by 1 additional round";
+                descS += ". Grapples duration is extended by 1 additional round";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -43,7 +43,7 @@ public class MightyLowerHalfMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireAdaptationsMutationSlot()
-                    .requireAnyRace(Races.SCYLLA, Races.NAGA, Races.GORGON, Races.COUATL, Races.VOUIVRE, Races.APOPHIS, Races.FROSTWYRM);
+                    .requireAnyRace(Races.KANGAROO, Races.BUNNY, Races.EASTERBUNNY, Races.LAQUINE, Races.HORSE, Races.CENTAUR, Races.COW, Races.MINOTAUR, Races.JABBERWOCKY);
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -64,7 +64,7 @@ public class MightyLowerHalfMutation extends IMutationPerkType
             return pBuffs;
         }
 
-        public function MightyLowerHalfMutation() 
+        public function MightyLegsMutation() 
 		{
 			super(mName + " IM", mName, SLOT_ADAPTATIONS, 4);
         }

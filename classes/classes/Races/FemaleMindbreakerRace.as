@@ -2,6 +2,7 @@ package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
+import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
 import classes.VaginaClass;
@@ -62,6 +63,8 @@ public class FemaleMindbreakerRace extends Race{
 				.skinBaseAdj("slippery", +1)
 				.hasPerk(PerkLib.Insanity, +1)
 				.givePerkV1(PerkLib.MindbreakerBrain1toX);
+		
+		addMutation(IMutationsLib.MightyLowerHalfIM, +3);
 		
 		buildTier(20,"mindbreaker")
 				.buffs({

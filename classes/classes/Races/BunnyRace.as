@@ -63,7 +63,7 @@ public class BunnyRace extends Race {
 							return !body.player.hasPerk(PerkLib.EasterBunnyBalls)
 						}, 0, -10);
 		
-		addMutation(IMutationsLib.MightyLowerHalfIM);
+		addMutation(IMutationsLib.MightyLegsIM);
 		
 		buildTier(10, "bunny")
 				.namesMaleFemale("bunny-boy","bunny-girl")

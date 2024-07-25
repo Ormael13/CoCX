@@ -13687,7 +13687,7 @@ public function Straddle():void {
         if(checkConcentration("[monster name] recovers just in time to get out of your reach as you attempt to straddle [monster him].")) return; //Amily concentration
         //WRAP IT UPPP
         monster.createStatusEffect(StatusEffects.Straddle, 0, 0, 0, 0);
-        if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 4) player.createStatusEffect(StatusEffects.StraddleRoundLeft, 3 + rand(3), 0, 0, 0);
+        if (player.perkv1(IMutationsLib.MightyLegsIM) >= 4) player.createStatusEffect(StatusEffects.StraddleRoundLeft, 3 + rand(3), 0, 0, 0);
 		else player.createStatusEffect(StatusEffects.StraddleRoundLeft, 2 + rand(3), 0, 0, 0);
         if (player.isAlraune()) {
             outputText("You giggle and take hold of your dazed opponent with your vines before gently pulling [monster him] into your nectar bath, straddling him with your pistil as you get into mating position.");

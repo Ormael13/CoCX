@@ -216,7 +216,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 						if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 					}
 					//Kick
-					if (player.isTaur() || player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.KIRIN || player.lowerBody == LowerBody.BUNNY || player.lowerBody == LowerBody.KANGAROO || player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 1) {
+					if (player.isTaur() || player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.KIRIN || player.lowerBody == LowerBody.BUNNY || player.lowerBody == LowerBody.KANGAROO || player.perkv1(IMutationsLib.MightyLegsIM) >= 1) {
 						bd = buttons.add("Kick", kick).hint("Attempt to kick an enemy using your powerful lower body.");
 						if (player.hasStatusEffect(StatusEffects.CooldownKick)) {
 							bd.disable("<b>You need more time before you can perform Kick again.</b>\n\n");
@@ -4083,7 +4083,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//WRAP IT UPPP
 		if (40 + rand(player.spe) > monster.spe) {
 			outputText("You growl menacingly, dropping on all four" + (player.tail.type != Tail.NONE ? " and flicking your tail" : "") + ", as you pounce on [themonster] clawing at [monster he] body and leaving deep bleeding wounds.");
-			if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 4) monster.createStatusEffect(StatusEffects.Pounce, 5 + rand(2),0,0,0);
+			if (player.perkv1(IMutationsLib.MightyLegsIM) >= 4) monster.createStatusEffect(StatusEffects.Pounce, 5 + rand(2),0,0,0);
 			else monster.createStatusEffect(StatusEffects.Pounce, 4 + rand(2),0,0,0);
 		}
 		//Failure
@@ -4460,7 +4460,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			combat.WrathGenerationPerHit2(5);
 			combat.heroBaneProc(damage);
 			combat.EruptingRiposte();
-			if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 4) monster.createStatusEffect(StatusEffects.Pounce, 5 + rand(2),0,0,0);
+			if (player.perkv1(IMutationsLib.MightyLegsIM) >= 4) monster.createStatusEffect(StatusEffects.Pounce, 5 + rand(2),0,0,0);
 			else monster.createStatusEffect(StatusEffects.Pounce, 4 + rand(2), 0, 0, 0);
 			player.removeStatusEffect(StatusEffects.Flying);
 			if (player.hasStatusEffect(StatusEffects.FlyingNoStun)) {
@@ -5861,7 +5861,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else if (player.lowerBody == LowerBody.KANGAROO) damage += 50;
 		if (player.isTaur()) damage += 10;
 		//other bonuses
-		if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 1) damage += (5 * player.perkv1(IMutationsLib.MightyLowerHalfIM));
+		if (player.perkv1(IMutationsLib.MightyLegsIM) >= 1) damage += (5 * player.perkv1(IMutationsLib.MightyLegsIM));
 		//Damage post processing!
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
@@ -5872,13 +5872,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else damage *= 1.5;
 		}
 		if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 1) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.EquineMuscleIM)));
-		if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 2) damage *= (1 + (0.5 * (player.perkv1(IMutationsLib.MightyLowerHalfIM) - 1)));
+		if (player.perkv1(IMutationsLib.MightyLegsIM) >= 2) damage *= (1 + (0.5 * (player.perkv1(IMutationsLib.MightyLegsIM) - 1)));
 		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		//(None yet!)
 		damage = Math.round(damage);
 		var stunDura:Number = 1;
 		if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) stunDura += 1;
-		if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 3) stunDura += 1;
+		if (player.perkv1(IMutationsLib.MightyLegsIM) >= 3) stunDura += 1;
 		else monster.createStatusEffect(StatusEffects.Stunned, stunDura, 0, 0, 0);
 		//BLOCKED
 		if (damage <= 0) {

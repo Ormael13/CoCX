@@ -63,7 +63,7 @@ public class EasterBunnyRace extends Race {
 				.hasPerk(PerkLib.EasterBunnyBalls, +1);
 		
 		addMutation(IMutationsLib.EasterBunnyEggBagIM);
-		addMutation(IMutationsLib.MightyLowerHalfIM);
+		addMutation(IMutationsLib.MightyLegsIM);
 		
 		buildTier(12, "easter bunny")
 				.namesMaleFemale("easter bunny-boy", "easter bunny-girl")

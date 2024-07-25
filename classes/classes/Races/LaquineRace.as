@@ -62,7 +62,7 @@ public class LaquineRace extends Race {
 						}, 0, -10);
 		
 		addMutation(IMutationsLib.EquineMuscleIM);
-		addMutation(IMutationsLib.MightyLowerHalfIM);
+		addMutation(IMutationsLib.MightyLegsIM);
 		
 		buildTier(12, "laquine")
 				.namesMaleFemale("laquine-boy","laquine-girl")

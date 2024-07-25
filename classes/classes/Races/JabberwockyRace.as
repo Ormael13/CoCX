@@ -74,7 +74,7 @@ public class JabberwockyRace extends Race {
 		addMutation(IMutationsLib.DrakeBonesIM);
 		addMutation(IMutationsLib.DrakeHeartIM);
 		addMutation(IMutationsLib.DrakeLungsIM);
-		addMutation(IMutationsLib.MightyLowerHalfIM);
+		addMutation(IMutationsLib.MightyLegsIM);
 		
 		buildTier(10, "lesser jabberwocky")
 				.namesTauric("lesser jabberwocky", "lesser jabberwocky-taur")
