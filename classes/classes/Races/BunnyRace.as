@@ -50,8 +50,14 @@ public class BunnyRace extends Race {
 				.noAntennae(+1)
 				.noWings(+1)
 				.height(LESS_THAN(72), +1)
-				.hasCockOfType(CockTypesEnum.HORSE, 0, -10)
-				.vaginaType(VaginaClass.EQUINE, 0, -10)
+				.customRequirement("","No horse cock",
+						function (body:BodyData): Boolean {
+							return body.player.horseCocks() < 1
+						}, 0, -10)
+				.customRequirement("","No equine vagina",
+						function (body:BodyData): Boolean {
+							return !body.player.vaginaType() != VaginaClass.EQUINE
+						}, 0, -10)
 				.customRequirement("","No easter bunny balls",
 						function (body:BodyData): Boolean {
 							return !body.player.hasPerk(PerkLib.EasterBunnyBalls)
