@@ -13687,7 +13687,10 @@ public function Straddle():void {
         if(checkConcentration("[monster name] recovers just in time to get out of your reach as you attempt to straddle [monster him].")) return; //Amily concentration
         //WRAP IT UPPP
         monster.createStatusEffect(StatusEffects.Straddle, 0, 0, 0, 0);
-        if (player.perkv1(IMutationsLib.MightyLegsIM) >= 4) player.createStatusEffect(StatusEffects.StraddleRoundLeft, 3 + rand(3), 0, 0, 0);
+        if (player.perkv1(IMutationsLib.MightyLegsIM) >= 4 || player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 4) {
+			if (player.perkv1(IMutationsLib.MightyLegsIM) >= 4 && player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 4) player.createStatusEffect(StatusEffects.StraddleRoundLeft, 4 + rand(3), 0, 0, 0);
+			else player.createStatusEffect(StatusEffects.StraddleRoundLeft, 3 + rand(3), 0, 0, 0);
+		}
 		else player.createStatusEffect(StatusEffects.StraddleRoundLeft, 2 + rand(3), 0, 0, 0);
         if (player.isAlraune()) {
             outputText("You giggle and take hold of your dazed opponent with your vines before gently pulling [monster him] into your nectar bath, straddling him with your pistil as you get into mating position.");
@@ -14231,6 +14234,7 @@ public function ScyllaSqueeze():void {
         fatigue(50, USEFATG_PHYSICAL);
     } else fatigue(20, USEFATG_PHYSICAL);
     var damage:int = monster.maxHP() * (.10 + rand(15) / 100) * 1.5;
+	if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 2) damage += scalingBonusStrength() * 0.5 * (player.perkv1(IMutationsLib.MightyLowerHalfIM) - 1);
     if (player.isKraken()) {
         damage *= player.effectiveTallness / 25;
         damage += player.str;
@@ -14243,7 +14247,7 @@ public function ScyllaSqueeze():void {
     if (player.hasPerk(PerkLib.UnbreakableBind)) damage *= 2;
 	if (player.perkv1(IMutationsLib.ScyllaInkGlandsIM) >= 2 && player.isKraken()) damage *= player.perkv1(IMutationsLib.ScyllaInkGlandsIM);
     if (player.hasStatusEffect(StatusEffects.ControlFreak)) damage *= player.statusEffectv1(StatusEffects.ControlFreak);
-	if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 1) damage *= (1 + (0.2 * player.perkv1(IMutationsLib.MightyLowerHalfIM)));
+	if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 1) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.MightyLowerHalfIM)));
     //Squeeze -
     outputText("You start squeezing your");
     if (monster.plural) {

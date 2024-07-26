@@ -2052,6 +2052,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else outputText("  Twirling like a top, you bat your opponents with your tail"+kitshoo+".");
 			var damage:Number = 0;
 			damage += combat.meleeUnarmedDamageNoLagSingle();
+			if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 2) damage += combat.scalingBonusStrength() * 0.5 * (player.perkv1(IMutationsLib.MightyLowerHalfIM) - 1);
 			damage = calcInfernoMod(damage, true);
 			if (player.statStore.hasBuff("FoxflamePelt")) {
 				var foxfiremulti:Number = 1;
@@ -2151,8 +2152,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			outputText(" reel ");
 			if (!monster.hasPerk(PerkLib.Resolute)) {
 				outputText("dazed by the sheer strength of the hit. ");
-				if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
-				else monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
+				var stunDura:Number = 2;
+				if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) stunDura += 1;
+				if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 3) stunDura += 1;
+				else monster.createStatusEffect(StatusEffects.Stunned, stunDura, 0, 0, 0);
 			}
 			else outputText("back in pain but hold steady despite the impact.");
 		}
@@ -2176,15 +2179,19 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText(" <b>[Themonster] is blinded!</b>");
 		var ispray:Number = 2;
 		if (player.perkv1(IMutationsLib.ScyllaInkGlandsIM) >= 2) ispray += 2;
+		var stunDura:Number = ispray;
 		if (player.hasPerk(PerkLib.KrakenBlackDress)) {
 			monster.createStatusEffect(StatusEffects.InkBlind, (ispray * 1.5), 0, 0, 0);
-			if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) monster.createStatusEffect(StatusEffects.Stunned, ((ispray * 1.5) + 1), 0, 0, 0);
-			else monster.createStatusEffect(StatusEffects.Stunned, (ispray * 1.5), 0, 0, 0);
+			stunDura *= 1.5;
+			if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) stunDura += 1;
+			if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 3) stunDura += 1;
+			else monster.createStatusEffect(StatusEffects.Stunned, stunDura, 0, 0, 0);
 		}
 		else {
 			monster.createStatusEffect(StatusEffects.InkBlind, ispray, 0, 0, 0);
-			if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) monster.createStatusEffect(StatusEffects.Stunned, (ispray + 1), 0, 0, 0);
-			else monster.createStatusEffect(StatusEffects.Stunned, ispray, 0, 0, 0);
+			if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) stunDura += 1;
+			if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 3) stunDura += 1;
+			else monster.createStatusEffect(StatusEffects.Stunned, stunDura, 0, 0, 0);
 		}
 		if (monster.lustVuln > 0) {
 			var lustDmg:Number = 2 + player.teaseLevel + rand(5);
@@ -2236,8 +2243,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			monster.teased(Math.round(monster.lustVuln * MilkLustDmg));
 		}
 		if (!monster.hasPerk(PerkLib.Resolute)) {
-			if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
-			else monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+			var stunDura:Number = 1;
+			if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) stunDura += 1;
+			if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 3) stunDura += 1;
+			else monster.createStatusEffect(StatusEffects.Stunned, stunDura, 0, 0, 0);
 		}
 		outputText("\n\n");
 		combat.WrathGenerationPerHit2(5);
@@ -2281,8 +2290,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			monster.teased(Math.round(monster.lustVuln * CumLustDmg));
 		}
 		if (!monster.hasPerk(PerkLib.Resolute)) {
-			if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
-			else monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+			var stunDura:Number = 1;
+			if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) stunDura += 1;
+			if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 3) stunDura += 1;
+			else monster.createStatusEffect(StatusEffects.Stunned, stunDura, 0, 0, 0);
 		}
 		outputText("\n\n");
 		combat.WrathGenerationPerHit2(5);
@@ -2341,8 +2352,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		doDamage(slamDmg);
 		outputText("<b>([font-damage]" + slamDmg + "[/font])</b>");
 		if (!monster.hasPerk(PerkLib.Resolute) && rand(10) == 0) {
-			if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
-			else monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+			var stunDura:Number = 1;
+			if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) stunDura += 1;
+			if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 3) stunDura += 1;
+			else monster.createStatusEffect(StatusEffects.Stunned, stunDura, 0, 0, 0);
 		}
 		if (flags[kFLAGS.HUNGER_ENABLED] >= 1) {
 			outputText(" The landing from your impressive charge and tackle deals some recoil damage, leaving you a bit winded. ");
@@ -3722,8 +3735,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage *= 2;
 		}
 		if (!monster.hasPerk(PerkLib.Resolute)) {
-			if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) monster.createStatusEffect(StatusEffects.Stunned, 4, 0, 0, 0);
-			else monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
+			var stunDura:Number = 3;
+			if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) stunDura += 1;
+			if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 3) stunDura += 1;
+			else monster.createStatusEffect(StatusEffects.Stunned, stunDura, 0, 0, 0);
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
@@ -3777,8 +3792,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			monster.statStore.addBuffObject({spe:-45*Multiplier}, "Web",{text:"Web"});
 			if(player.perkv1(IMutationsLib.ArachnidBookLungIM) >= 3){
 				if(rand(100) > 50) {
-					if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
-					else monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+					var stunDura:Number = 2;
+					if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) stunDura += 1;
+					if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 3) stunDura += 1;
+					else monster.createStatusEffect(StatusEffects.Stunned, stunDura, 0, 0, 0);
 				}
 			}
 		}
@@ -3932,8 +3949,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			lustDmgF = Math.round(lustDmgF);
 			monster.teased(lustDmgF);
 			if (!monster.hasPerk(PerkLib.Resolute)) {
-				if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) monster.createStatusEffect(StatusEffects.Stunned,7,0,0,0);
-				else monster.createStatusEffect(StatusEffects.Stunned,6,0,0,0);
+				var stunDura:Number = 6;
+				if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) stunDura += 1;
+				if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 3) stunDura += 1;
+				else monster.createStatusEffect(StatusEffects.Stunned, stunDura, 0, 0, 0);
 			}
 			player.removeStatusEffect(StatusEffects.ChanneledAttack);
 			player.removeStatusEffect(StatusEffects.ChanneledAttackType);
@@ -4083,7 +4102,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//WRAP IT UPPP
 		if (40 + rand(player.spe) > monster.spe) {
 			outputText("You growl menacingly, dropping on all four" + (player.tail.type != Tail.NONE ? " and flicking your tail" : "") + ", as you pounce on [themonster] clawing at [monster he] body and leaving deep bleeding wounds.");
-			if (player.perkv1(IMutationsLib.MightyLegsIM) >= 4) monster.createStatusEffect(StatusEffects.Pounce, 5 + rand(2),0,0,0);
+			if (player.perkv1(IMutationsLib.MightyLegsIM) >= 4 || player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 4) {
+				if (player.perkv1(IMutationsLib.MightyLegsIM) >= 4 && player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 4) monster.createStatusEffect(StatusEffects.Pounce, 6 + rand(2),0,0,0);
+				else monster.createStatusEffect(StatusEffects.Pounce, 5 + rand(2),0,0,0);
+			}
 			else monster.createStatusEffect(StatusEffects.Pounce, 4 + rand(2),0,0,0);
 		}
 		//Failure
@@ -4365,8 +4387,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
-		if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) monster.createStatusEffect(StatusEffects.Stunned, 4, 0, 0, 0);
-		else monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
+		var stunDura:Number = 3;
+		if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) stunDura += 1;
+		if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 3) stunDura += 1;
+		else monster.createStatusEffect(StatusEffects.Stunned, stunDura, 0, 0, 0);
 		outputText("\n\n");
 		enemyAI();
 	}
@@ -4460,7 +4484,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			combat.WrathGenerationPerHit2(5);
 			combat.heroBaneProc(damage);
 			combat.EruptingRiposte();
-			if (player.perkv1(IMutationsLib.MightyLegsIM) >= 4) monster.createStatusEffect(StatusEffects.Pounce, 5 + rand(2),0,0,0);
+			if (player.perkv1(IMutationsLib.MightyLegsIM) >= 4 || player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 4) {
+				if (player.perkv1(IMutationsLib.MightyLegsIM) >= 4 && player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 4) monster.createStatusEffect(StatusEffects.Pounce, 6 + rand(2), 0, 0, 0);
+				else monster.createStatusEffect(StatusEffects.Pounce, 5 + rand(2), 0, 0, 0);
+			}
 			else monster.createStatusEffect(StatusEffects.Pounce, 4 + rand(2), 0, 0, 0);
 			player.removeStatusEffect(StatusEffects.Flying);
 			if (player.hasStatusEffect(StatusEffects.FlyingNoStun)) {
@@ -5117,14 +5144,17 @@ public class PhysicalSpecials extends BaseCombatContent {
 				monster.removeStatusEffect(StatusEffects.GoreBleed);
 				monster.createStatusEffect(StatusEffects.GoreBleed,16,0,0,0);
 			}
+			var stunDura:Number = 3;
 			if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
-				if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) monster.createStatusEffect(StatusEffects.Stunned, 4, 0, 0, 0);
-				else monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
+				if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) stunDura += 1;
+				if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 3) stunDura += 1;
+				else monster.createStatusEffect(StatusEffects.Stunned, stunDura, 0, 0, 0);
 			}
 			else {
 				monster.removeStatusEffect(StatusEffects.Stunned);
-				if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) monster.createStatusEffect(StatusEffects.Stunned, 4, 0, 0, 0);
-				else monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
+				if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) stunDura += 1;
+				if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 3) stunDura += 1;
+				else monster.createStatusEffect(StatusEffects.Stunned, stunDura, 0, 0, 0);
 			}
 			//normal
 			if (rand(4) > 0) {
@@ -5943,14 +5973,17 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage *= 2;
 		}
 		outputText("You successfully bash your opponent with your tusks");
+		var stunDura:Number = 3;
 		if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
 			outputText(", briefly disorienting "+(monster.plural?"them":"it")+"");
-			if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) monster.createStatusEffect(StatusEffects.Stunned,4,0,0,0);
-			else monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
+			if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) stunDura += 1;
+			if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 3) stunDura += 1;
+			else monster.createStatusEffect(StatusEffects.Stunned, stunDura, 0, 0, 0);
 		} else {
 			monster.removeStatusEffect(StatusEffects.Stunned);
-			if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) monster.createStatusEffect(StatusEffects.Stunned,4,0,0,0);
-			else monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
+			if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) stunDura += 1;
+			if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 3) stunDura += 1;
+			else monster.createStatusEffect(StatusEffects.Stunned, stunDura, 0, 0, 0);
 		}
 		outputText(". ");
 		checkAchievementDamage(damage);

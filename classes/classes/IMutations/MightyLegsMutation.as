@@ -13,7 +13,7 @@ import classes.Races;
 public class MightyLegsMutation extends IMutationPerkType
     {
         override public function get mName():String {
-            return "Mighty Lower Half";
+            return "Mighty Legs";
         }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
@@ -29,7 +29,7 @@ public class MightyLegsMutation extends IMutationPerkType
                 descS += ". Kick stun lasts 1 round longer";
             }
             if (pTier >= 4){
-                descS += ". Grapples duration is extended by 1 additional round";
+                descS += ". Straddle and grapples duration is extended by 1 additional round";
             }
             if (descS != "")descS += ".";
             return descS;
