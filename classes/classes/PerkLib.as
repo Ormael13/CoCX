@@ -4347,6 +4347,9 @@ public class PerkLib
 		public static const JobRanger:PerkType = mk("Job: Ranger", "Job ( Basic ): Ranger",
 				"You've trained in ranged combat.",
 				"You chose 'Job ( Basic ): Ranger' perk, training yourself to become a(n) Ranger.").withBuffs({'spe.mult':0.05,'maxfatigue_base':5});
+		public static const JobRogue:PerkType = mk("Job: Rogue", "Job ( Basic ): Rogue",
+				"You've trained in how to strike at your opponent's vital points and use various deadly tricks.",
+				"You chose 'Job ( Basic ): Rogue' perk, training yourself to become a(n) Rogue.").withBuffs({'spe.mult':0.05});
 		public static const JobSeducer:PerkType = mk("Job: Seducer", "Job ( Basic ): Seducer",
 				"You've trained the art of seduction.",
 				"You chose 'Job ( Basic ): Seducer' perk, training yourself to become a(n) Seducer.").withBuffs({'lib.mult':0.05,'maxlust_base':+30});
@@ -4356,12 +4359,13 @@ public class PerkLib
 		public static const JobSoulCultivator:PerkType = mk("Job: Soul Cultivator", "Job ( Basic ): Soul Cultivator",
 				"You've cultivated powers of your soul.",
 				"You chose 'Job ( Basic ): Soul Cultivator' perk, starting the journey of the soul cultivation path!").withBuffs({'wis.mult':0.05, 'maxsf_base': +50});
+		public static const JobTinker:PerkType = mk("Job: Tinker", "Job ( Basic ): Tinker",
+				"You may craft and fix minor contraption into semi reliable state when asked how you did it you simply answer that it just works!",
+				"You chose 'Job ( Basic ): Tinker' perk, training yourself to become a(n) Tinker.").withBuffs({'wis.mult':0.05});
 		public static const JobWarrior:PerkType = mk("Job: Warrior", "Job ( Basic ): Warrior",
 				"You've trained in melee combat.",
 				"You chose 'Job ( Basic ): Warrior' perk, training yourself to become a(n) Warrior.").withBuffs({'str.mult':0.05,'maxwrath_base':+50});
-		public static const JobRogue:PerkType = mk("Job: Rogue", "Job ( Basic ): Rogue",
-				"You've trained in how to strike at your opponent's vital points and use various deadly tricks.",
-				"You chose 'Job ( Basic ): Rogue' perk, training yourself to become a(n) Rogue.").withBuffs({'spe.mult':0.05});
+		//unused anymore
 		public static const JobSoulArcher:PerkType = mk("Job: Soul Archer", "Job ( Basic ): Soul Archer",
 				"You've trained in art of combining soulforce and arrows.",
 				"You chose 'Job ( Basic ): Soul Archer' perk, training yourself to become a Soul Archer.").withBuffs({'spe.mult':0.60,'wis.mult':0.20});
@@ -4705,6 +4709,7 @@ public class PerkLib
 			JobSorcerer,
 			/* JobSoulArcher, - removed */
 			JobSoulCultivator,
+			JobTinker,
 			JobWarrior
 		];
 		public static const ADVANCED_JOBS:/*PerkType*/Array = [
@@ -6432,6 +6437,7 @@ public class PerkLib
             //------------
             // WISDOM
             //------------
+            JobTinker.requireWis(10);
             JobElementalConjurer.requireAdvancedJobSlot()
 					.requirePerk(JobLeader)
                     .requireWis(10);
@@ -8289,4 +8295,4 @@ public class PerkLib
         }
 	}
 }
-}
+}

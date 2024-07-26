@@ -232,7 +232,7 @@ public class PlayerInfo extends BaseContent {
 		miscStats += "<b>Marble:</b> " + Forgefather.marble + "/" + Forgefather.matCap + "\n";
 		miscStats += "<b>Sandstone:</b> " + Forgefather.sandstone + "/" + Forgefather.matCap + "\n";
 
-		miscStats += "<b>Basic Jobs:</b> " + player.currentBasicJobs() + " / 10 (8 Jobs + All-Rounder Job and Soul Cultivator)\n";
+		miscStats += "<b>Basic Jobs:</b> " + player.currentBasicJobs() + " / 11 (9 Jobs + All-Rounder Job and Soul Cultivator)\n";
 		miscStats += "<b>Advanced Jobs:</b> " + player.currentAdvancedJobs() + " / " + player.maxAdvancedJobs() + "\n";
 		miscStats += "<b>Hidden Jobs:</b> " + player.currentHiddenJobs() + " / " + player.maxHiddenJobs() + "\n";
 		miscStats += "<b>Prestige Jobs:</b> " + player.currentPrestigeJobs() + " / " + player.maxPrestigeJobs() + "\n";
@@ -2529,10 +2529,10 @@ public class PlayerInfo extends BaseContent {
 				if (player.level >= 90) {
 					if (player.hasPerk(PerkLib.DeityJobMunchkin)) addButtonDisabled(0, "DJ:M", "You already have this perk.");
 					else {
-						if (player.str >= 150 && player.tou >= 150 && player.spe >= 150 && player.inte >= 150 && player.wis >= 150 && player.lib >= 150 && player.sens >= 100 && player.currentBasicJobs() >= 8 && player.currentAdvancedJobs() >= 6 && player.currentPrestigeJobs() >= 2 && player.currentHiddenJobs() >= 1) {
+						if (player.str >= 150 && player.tou >= 150 && player.spe >= 150 && player.inte >= 150 && player.wis >= 150 && player.lib >= 150 && player.sens >= 100 && player.currentBasicJobs() >= 9 && player.currentAdvancedJobs() >= 6 && player.currentPrestigeJobs() >= 2 && player.currentHiddenJobs() >= 1) {
 							addButton(0, "DJ:M", perkDeityJobMunchkin).hint("Choose the 'Deity Job: Munchkin' super munchkin perk. You're Munchkin, an ultimate being that possess a god-like body and powers. (+20% max HP/Lust/Wrath, +10% max SF/Mana/Fatigue, increase limit of negative HP equal to all stats (aside of corruption) added up)");
 						}
-						else addButtonDisabled(0, "DJ:M", "You do not have one/all of them yet: 150+ in str/tou/spe/inte/wis/lib, 100+ in sens, 8 basic jobs, 6 advanced jobs, 2 prestige jobs, 1 hidden job.");
+						else addButtonDisabled(0, "DJ:M", "You do not have one/all of them yet: 150+ in str/tou/spe/inte/wis/lib, 100+ in sens, 9 basic jobs, 6 advanced jobs, 2 prestige jobs, 1 hidden job.");
 					}
 				}
 				else addButtonDisabled(0, "DJ:M", "You need to reach level 90 first.");

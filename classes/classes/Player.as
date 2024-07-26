@@ -4551,6 +4551,8 @@ use namespace CoC;
 				basicJobs++;
 			if (hasPerk(PerkLib.JobSorcerer))
 				basicJobs++;
+			if (hasPerk(PerkLib.JobTinker))
+				basicJobs++;
 			if (hasPerk(PerkLib.JobWarrior))
 				basicJobs++;
 			return basicJobs;
@@ -7805,4 +7807,4 @@ use namespace CoC;
 		}
 		
 	}
-}
+}

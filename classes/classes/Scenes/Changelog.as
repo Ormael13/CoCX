@@ -302,7 +302,7 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Mighty Legs (Primitive). Req. Mighty Legs and lvl 30+. Effects: Make Kick permanent no matter your leg type, Increase unarmed strike damage by 10 and grapple effect by 40%. Kick is 50% stronger.\n");
 			outputText("-New mutation perk: Mighty Legs (Evolved). Req. Mighty Legs (Primitive) and lvl 60+. Effects: Make Kick permanent no matter your leg type, Increase unarmed strike damage by 15 and grapple effect by 60%. Kick is 100% stronger. Kick stun lasts 1 round longer.\n");
 			outputText("-New mutation perk: Mighty Legs (Final Form). Req. Mighty Legs (Evolved) and lvl 90+. Effects: Make Kick permanent no matter your leg type, Increase unarmed strike damage by 20 and grapple effect by 80%. Kick is 150% stronger. Kick stun lasts 1 round longer. Straddle and Grapples duration is extended by 1 additional round.\n");
-			outputText("-\n");
+			outputText("-New tier 0 wisdom lvl-up perk: (Basic) Job: Tinker. Req. 10+ wisdom. Effect: Increase damage of consumable items / technologic weapons by 5%.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

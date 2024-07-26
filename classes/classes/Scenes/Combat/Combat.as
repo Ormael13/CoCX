@@ -2064,6 +2064,7 @@ public class Combat extends BaseContent {
 				damage += scalingBonusIntelligence() * hydraulicsMulti;
 			}
 			damage *= 1.3;
+			damage = tinkerDamageBonus(damage);
 			damage = goblinDamageBonus(damage);
 			if (player.vehicles == vehicles.GOBMPRI) damage *= 1.5;
 			if (player.vehicles == vehicles.GS_MECH) damage *= 1.25;
@@ -4358,7 +4359,8 @@ public class Combat extends BaseContent {
             if (player.hasKeyItem("Gun Scope with Aim tech") >= 0) damage *= 1.4;
             if (player.hasKeyItem("Gun Scope with Aimbot") >= 0) damage *= 1.6;
             if (player.isInGoblinMech()) {
-                damage = goblinDamageBonus(damage);
+                damage = tinkerDamageBonus(damage);
+				damage = goblinDamageBonus(damage);
                 if (player.hasKeyItem("Repeater Gun") >= 0) {
                     if (player.vehicles == vehicles.GOBMPRI) {
                         damage *= 1.45;
@@ -4684,8 +4686,9 @@ public class Combat extends BaseContent {
         if (player.hasKeyItem("Gun Scope") >= 0) damage *= 1.2;
         if (player.hasKeyItem("Gun Scope with Aim tech") >= 0) damage *= 1.4;
         if (player.hasKeyItem("Gun Scope with Aimbot") >= 0) damage *= 1.6;
-        damage = goblinDamageBonus(damage);
-	if (player.hasKeyItem("Repeater Gun") >= 0) {
+        damage = tinkerDamageBonus(damage);
+		damage = goblinDamageBonus(damage);
+		if (player.hasKeyItem("Repeater Gun") >= 0) {
             if (player.vehicles == vehicles.GOBMPRI) {
                 damage *= 1.45;
                 if (damage < 70) damage = 70;
@@ -5033,7 +5036,8 @@ public class Combat extends BaseContent {
             damage *= 2;
         }
         if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 5;
-        damage = goblinDamageBonus(damage);
+        damage = tinkerDamageBonus(damage);
+		damage = goblinDamageBonus(damage);
         if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
         if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
         damage = damage * monster.lustVuln;
@@ -6191,6 +6195,7 @@ public class Combat extends BaseContent {
 		if (player.isDualWieldRanged()) damage *= firearmsDualWieldDamagePenalty();
         damage = rangeAttackModifier(damage);
         damage = archerySkillDamageMod(damage);
+		damage = tinkerDamageBonus(damage);
         damage *= player.jewelryRangeModifier();
 		damage *= firearmsForce();
 		return damage;
@@ -7212,6 +7217,13 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.TechOverdrive)) damage *= 1.2;
         return damage;
     }
+	
+	public function tinkerDamageBonus(damage:Number):Number {
+		var tinkering:Number = 1;
+		if (player.hasPerk(PerkLib.JobTinker)) tinkering += 0.05;
+		damage *= tinkering;
+		return damage;
+	}
 
     public function isPureWeapon():Boolean {
         return player.weapon.hasTag(ItemConstants.W_PURE_TYPE)

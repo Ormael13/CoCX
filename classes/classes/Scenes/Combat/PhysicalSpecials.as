@@ -891,6 +891,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasKeyItem("Lustnade Launcher") >= 0) {
 				lustDmg = combat.teases.teaseAuraLustDamageBonus(monster, lustDmg);
 			}
+			lustDmg = combat.tinkerDamageBonus(lustDmg);
 			lustDmg = combat.goblinDamageBonus(lustDmg);
 			if (monster.plural) lustDmg *= 5;
 			lustDmg *= monster.lustVuln;
@@ -6597,6 +6598,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var damage:Number;
 		damage = scalingBonusIntelligence() * spellModWhite() * 8;
 		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 8;
+		damage = combat.tinkerDamageBonus(damage);
 		damage = combat.goblinDamageBonus(damage);
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -6640,6 +6642,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var damage:Number;
 		damage = scalingBonusIntelligence() * spellModWhite() * 8;
 		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 8;
+		damage = combat.tinkerDamageBonus(damage);
 		damage = combat.goblinDamageBonus(damage);
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -6680,6 +6683,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//High damage to goes.
 			damage = calcVoltageMod(damage, true);
 			if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
+			damage = combat.tinkerDamageBonus(damage);
 			damage = combat.goblinDamageBonus(damage);
 			damage *= 0.5;
 			if (half) damage *= 0.5;
@@ -6719,6 +6723,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasKeyItem("Omni Missile") >= 0) damage *= 10;
 			else damage *= 5;
 		}
+		damage = combat.tinkerDamageBonus(damage);
 		damage = combat.goblinDamageBonus(damage);
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -6783,6 +6788,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage = scalingBonusIntelligence() * spellModBlack() * 8;
 		damage = calcEclypseMod(damage, true);
 		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 8;
+		damage = combat.tinkerDamageBonus(damage);
 		damage = combat.goblinDamageBonus(damage);
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -6817,10 +6823,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.CooldownRaijinBlaster,8,0,0,0);
 		var damage:Number;
 		damage = scalingBonusIntelligence() * spellModWhite() * 8;
-
 		damage = calcVoltageMod(damage, true);
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
 		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 8;
+		damage = combat.tinkerDamageBonus(damage);
 		damage = combat.goblinDamageBonus(damage);
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -6868,6 +6874,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var damage:Number;
 		damage = scalingBonusIntelligence() * spellModBlack() * 8;
 		damage = calcGlacialMod(damage, true);
+		damage = combat.tinkerDamageBonus(damage);
 		damage = combat.goblinDamageBonus(damage);
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -6906,6 +6913,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage = scalingBonusIntelligence() * spellModWhite() * 8;
 
 		damage = calcInfernoMod(damage, true);
+		damage = combat.tinkerDamageBonus(damage);
 		damage = combat.goblinDamageBonus(damage);
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -6959,6 +6967,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.isInHeavyArmor() || player.isInAyoArmor()) hydraulicsMulti *= 0.5;
 			damage += scalingBonusIntelligence() * hydraulicsMulti;
 		}
+		damage = combat.tinkerDamageBonus(damage);
 		damage = combat.goblinDamageBonus(damage);
 		//Determine if critical hit!
 		var crit:Boolean = false;

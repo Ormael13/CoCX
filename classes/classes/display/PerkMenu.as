@@ -1249,6 +1249,7 @@ public class PerkMenu extends BaseContent {
 			["Sed", PerkLib.JobSeducer],
 			["Sor", PerkLib.JobSorcerer],
 			["Cul", PerkLib.JobSoulCultivator],
+			["Tin", PerkLib.JobTinker],
 			["Wrr", PerkLib.JobWarrior]
 		];
 		var advancedJobs:Array = [

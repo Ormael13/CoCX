@@ -8,6 +8,7 @@ package classes.Items.Consumables
 	import classes.PerkLib;
 	//import classes.Monster;
 	import classes.internals.Utils;
+	import classes.Scenes.SceneLib;
 
 	public final class MiniBangBall extends Consumable {
 		
@@ -33,6 +34,7 @@ package classes.Items.Consumables
 			}
 			else { //Not dodged
 				var damage:Number = 120 + Utils.rand(41);
+				damage = SceneLib.combat.tinkerDamageBonus(damage);
 				if (game.monster.hasPerk(PerkLib.EnemyGroupType) || game.monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 5;
 				outputText(game.monster.capitalA + game.monster.short + " is hit with the mini bangball!  It breaks apart as it lacerates " + game.monster.pronoun2 + ". <b>([font-damage]" + damage + "[/font])</b>");
 				game.monster.HP -= damage;

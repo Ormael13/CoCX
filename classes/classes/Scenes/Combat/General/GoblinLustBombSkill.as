@@ -68,6 +68,7 @@ public class GoblinLustBombSkill extends AbstractGeneral {
         }
 
         lustDmg = combat.goblinDamageBonus(lustDmg);
+        lustDmg = combat.tinkerDamageBonus(lustDmg);
         if (monster && monster.plural) lustDmg *= 5;
         if (monster) lustDmg *= monster.lustVuln;
         return lustDmg;
