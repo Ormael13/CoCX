@@ -4540,6 +4540,8 @@ use namespace CoC;
 				basicJobs++;
 			if (hasPerk(PerkLib.JobBeastWarrior))
 				basicJobs++;
+			if (hasPerk(PerkLib.JobEsper))
+				basicJobs++;
 			if (hasPerk(PerkLib.JobGuardian))
 				basicJobs++;
 			if (hasPerk(PerkLib.JobLeader))
@@ -4551,6 +4553,8 @@ use namespace CoC;
 			if (hasPerk(PerkLib.JobSeducer))
 				basicJobs++;
 			if (hasPerk(PerkLib.JobSorcerer))
+				basicJobs++;
+			if (hasPerk(PerkLib.JobTamer))
 				basicJobs++;
 			if (hasPerk(PerkLib.JobTinker))
 				basicJobs++;

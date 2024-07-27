@@ -386,6 +386,18 @@ public class PerkLib
 				"You're the life of the party, particularly the types of parties that happen in Mareth. +10% max lust, +5 to anal/vaginal capacity.",
 				"You've chosen the 'Party Boy/Girl' perk. +10% max lust, +5 to anal/vaginal capacity.")
 				.withBuffs({'maxlust_mult':+0.1});
+		public static const PowerAttack:PerkType = mk("Power Attack", "Power Attack",
+				"Enable Power Attack p. special. Add ~20% of base stat scaling value to melee damage. (+5% melee physical attacks multiplier)",
+				"You've chosen the 'Power Attack' perk. Enable Power Attack p. special. Add ~20% of base stat scaling value to melee damage. (+5% melee physical attacks multiplier)");
+		public static const PowerAttackEx:PerkType = mk("Power Attack (Ex)", "Power Attack (Ex)",
+				"Power Attack p. special damage increased by ~2x. Add ~30% of base stat scaling value to melee damage & power attack multi factor. (+15% melee physical attacks multiplier)",
+				"You've chosen the 'Power Attack (Ex)' perk. Power Attack p. special damage increased by ~2x. Add ~30% of base stat scaling value to melee damage & power attack multi factor. (+15% melee physical attacks multiplier)");
+		public static const PowerAttackSu:PerkType = mk("Power Attack (Su)", "Power Attack (Su)",
+				"The effectiveness of 'Power Attack' is increased fourfold, and now uses overwrath for calculating bonuses (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).",
+				"You've chosen the 'Power Attack (Su)' perk. Power Attack's effectiveness is increased fourfold, and now uses overwrath instead of wrath for calculations (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).");
+		public static const PowerShotSu:PerkType = mk("Power Shot (Su)", "Power Shot (Su)",
+				"The effectiveness of 'Power Shot' is increased fourfold, and now uses overwrath for calculating bonuses (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).",
+				"You've chosen the 'Power Shot (Su)' perk. Power Shot's effectiveness is increased fourfold, and now uses overwrath instead of wrath for calculations (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).");
 		public static const SmallArmy:PerkType = mk("Small Army", "Small Army",
 				"Nobody said that you had to save Mareth on your own. The more the merrier--and the easier you can sleep at night. (+10% minions/pets damage)",
 				"You've chosen the 'Small Army' perk. (+10% minions/pets damage)");
@@ -414,12 +426,6 @@ public class PerkLib
 		public static const Alliance:PerkType = mk("Alliance", "Alliance",
 				". (+10% minions/pets damage)",
 				"You've chosen the 'Alliance' perk. (+10% minions/pets damage)");
-		public static const PowerAttack:PerkType = mk("Power Attack", "Power Attack",
-				"Enable Power Attack p. special. Add ~20% of base stat scaling value to melee damage. (+5% melee physical attacks multiplier)",
-				"You've chosen the 'Power Attack' perk. Enable Power Attack p. special. Add ~20% of base stat scaling value to melee damage. (+5% melee physical attacks multiplier)");
-		public static const PowerAttackEx:PerkType = mk("Power Attack (Ex)", "Power Attack (Ex)",
-				"Power Attack p. special damage increased by ~2x. Add ~30% of base stat scaling value to melee damage & power attack multi factor. (+15% melee physical attacks multiplier)",
-				"You've chosen the 'Power Attack (Ex)' perk. Power Attack p. special damage increased by ~2x. Add ~30% of base stat scaling value to melee damage & power attack multi factor. (+15% melee physical attacks multiplier)");
 		public static const TwinThunder:PerkType = mk("Twin Thunder", "Twin Thunder",
 				"When using more than one weapon at once power attack/strike now delivers as many hits as used weapons.",
 				"You've chosen the 'Twin Thunder' perk. When using more than one weapon at once power attack/strike now delivers as many hits as used weapons.");
@@ -432,12 +438,6 @@ public class PerkLib
 		public static const GreaterMetabolization:PerkType = mk("Greater Metabolization", "Greater Metabolization",
 				"Increase the duration of lingering nourishment effects by another 100% of base duration. And slows hunger progression even further if any(note does not raise racial scores).",
 				"You've chosen the 'Greater Metabolization' perk. Increase the duration of lingering nourishment effects by another 100% of base duration. And slows hunger progression even further if any(note does not raise racial scores).");
-		public static const PowerAttackSu:PerkType = mk("Power Attack (Su)", "Power Attack (Su)",
-				"The effectiveness of 'Power Attack' is increased fourfold, and now uses overwrath for calculating bonuses (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).",
-				"You've chosen the 'Power Attack (Su)' perk. Power Attack's effectiveness is increased fourfold, and now uses overwrath instead of wrath for calculations (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).");
-		public static const PowerShotSu:PerkType = mk("Power Shot (Su)", "Power Shot (Su)",
-				"The effectiveness of 'Power Shot' is increased fourfold, and now uses overwrath for calculating bonuses (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).",
-				"You've chosen the 'Power Shot (Su)' perk. Power Shot's effectiveness is increased fourfold, and now uses overwrath instead of wrath for calculations (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).");
 		public static const Penetrator:PerkType = mk("Penetrator", "Penetrator",
 				"Thrown weapons and firearms (+ mech weapons) ignore damage reductions piercing right through your opponent armor weak points (ignore enemy dmg red). (+5% range physical attacks multiplier)",
 				"You've chosen the 'Penetrator' perk. Thrown weapons and firearms (+ mech weapons) ignore damage reductions piercing right through your opponent armor weak points (ignore enemy dmg red). (+5% range physical attacks multiplier)");
@@ -4338,6 +4338,9 @@ public class PerkLib
 		public static const JobBeastWarrior:PerkType = mk("Job: Beast Warrior", "Job ( Basic ): Beast Warrior",
 				"You've trained to use of your own body and natural weapons to their limits in fights.",
 				"You chose 'Job ( Basic ): Beast Warrior' perk, training yourself in the art of feral combat.").withBuffs({'str.mult':0.05,'tou.mult':0.05,'spe.mult':0.05, "int.mult":-0.05, "wis.mult":-0.05,'maxwrath_base':+100});
+		public static const JobEsper:PerkType = mk("Job: Esper", "Job ( Basic ): Esper",
+				"You've trained in using your metnal powers in combat.",
+				"You chose 'Job ( Basic ): Esper' perk, training yourself to become a(n) Esper.").withBuffs({'int.mult':0.15,'wis.mult':0.15,'str.mult':-0.05,'tou.mult':-0.05,'spe.mult':-0.05,'sens':40});
 		public static const JobGuardian:PerkType = mk("Job: Guardian", "Job ( Basic ): Guardian",
 				"You've trained in defensive combat.",
 				"You chose 'Job ( Basic ): Guardian' perk, training yourself to become a(n) Guardian.").withBuffs({'tou.mult':0.05});
@@ -4359,9 +4362,12 @@ public class PerkLib
 		public static const JobSoulCultivator:PerkType = mk("Job: Soul Cultivator", "Job ( Basic ): Soul Cultivator",
 				"You've cultivated powers of your soul.",
 				"You chose 'Job ( Basic ): Soul Cultivator' perk, starting the journey of the soul cultivation path!").withBuffs({'wis.mult':0.05, 'maxsf_base': +50});
+		public static const JobTamer:PerkType = mk("Job: Tamer", "Job ( Basic ): Tamer",
+				"You've trained the art of taming.",
+				"You chose 'Job ( Basic ): Tamer' perk, training yourself to become a(n) Tamer.").withBuffs({'wis.mult':0.10,'lib.mult':-0.05});
 		public static const JobTinker:PerkType = mk("Job: Tinker", "Job ( Basic ): Tinker",
 				"You may craft and fix minor contraption into semi reliable state when asked how you did it you simply answer that it just works!",
-				"You chose 'Job ( Basic ): Tinker' perk, training yourself to become a(n) Tinker.").withBuffs({'wis.mult':0.05});
+				"You chose 'Job ( Basic ): Tinker' perk, training yourself to become a(n) Tinker.").withBuffs({'int.mult':0.05,'wis.mult':0.05,'tou.mult':-0.05});
 		public static const JobWarrior:PerkType = mk("Job: Warrior", "Job ( Basic ): Warrior",
 				"You've trained in melee combat.",
 				"You chose 'Job ( Basic ): Warrior' perk, training yourself to become a(n) Warrior.").withBuffs({'str.mult':0.05,'maxwrath_base':+50});
@@ -4700,10 +4706,8 @@ public class PerkLib
 	
 		public static const BASIC_JOBS:/*PerkType*/Array    = [
 			JobAllRounder,
-			/* JobArcaneArcher, - removed */
-			/* JobArcher, - removed */
-			/* JobBarbarian, - removed */
 			JobBeastWarrior,
+			JobEsper,
 			JobGuardian,
 			JobLeader,
 			JobRanger,
@@ -4712,6 +4716,7 @@ public class PerkLib
 			JobSorcerer,
 			/* JobSoulArcher, - removed */
 			JobSoulCultivator,
+			JobTamer,
 			JobTinker,
 			JobWarrior
 		];
@@ -6441,7 +6446,7 @@ public class PerkLib
             //------------
             // WISDOM
             //------------
-            JobTinker.requireWis(10);
+            JobTamer.requireWis(10);
             JobElementalConjurer.requireAdvancedJobSlot()
 					.requirePerk(JobLeader)
                     .requireWis(10);
@@ -7196,6 +7201,7 @@ public class PerkLib
             EyesOfTheHunterNovice.requireSen(25);
             Desensitization.requireSen(10);
 			//.requireMinSens(25);
+            JobEsper.requireSen(10);
             //Tier 1 Sensitivity Perks
             EyesOfTheHunterAdept.requireSen(50)
                     .requirePerk(EyesOfTheHunterNovice)
@@ -7430,6 +7436,8 @@ public class PerkLib
 			Metabolization.requireCustomFunction(function (player:Player):Boolean {
                         return player.isAnyRaceCached(Races.SLIME, Races.DARKSLIME, Races.MAGMASLIME, Races.MANTICORE, Races.DISPLACERBEAST, Races.VAMPIRE, Races.DRACULA) || CoC.instance.flags[kFLAGS.HUNGER_ENABLED] > 0;
                     }, "Slime, Manticore, Displacer beast, Vampire, Dracula race or hunger enabled.");
+            JobTinker.requireInt(10)
+					.requireWis(10);
             //Tier 1
 			ChimericalBodyInitialStage.requireLevel(6)
 					.requireNotThosePerks(ChimericalBodySemiImprovedStageEx, ChimericalBodySemiSuperiorStageEx, ChimericalBodySemiEpicStageEx)
@@ -7795,14 +7803,14 @@ public class PerkLib
                         return player.internalChimeraScore() >= 12;
                     }, "Twelve of any race internal mutations");
 			JobAllRounder.requireLevel(24)
-                    .requirePerks(JobBeastWarrior, JobGuardian, JobLeader, JobRanger, JobRogue, JobSeducer, JobSorcerer, JobWarrior)
+                    .requirePerks(JobBeastWarrior, JobEsper, JobGuardian, JobLeader, JobRanger, JobRogue, JobSeducer, JobSorcerer, JobTamer, JobTinker, JobWarrior)
                     .requireStr(75)
                     .requireTou(75)
                     .requireSpe(75)
                     .requireInt(75)
                     .requireWis(75)
                     .requireLib(75)
-					.requireSen(50);
+					.requireSen(75);
             Tornado.requireLevel(24)
                     .requireStr(75)
                     .requireTou(75)

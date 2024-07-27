@@ -762,7 +762,7 @@ public final class WeaponLib extends ItemConstants
 		public const SCARBLD:Weapon = new ScarredBlade();
 		public const SCECOMM:Weapon = new Weapon(
 				"SceComm", "SceptreOfCom", "Sceptre of Command", "a Sceptre of Command", "smack", 4, 600,
-				"This enchanted scepter empowers the abilities and control of summoners over their minions.",
+				"This enchanted scepter empowers the abilities and control of summoners and tamers over their minions.",
 				WT_WAND, WSZ_MEDIUM);
 		public const SCIMITR:Weapon = findCommonDynamicWeapon("scimitar");
 		public const SCLAYMO:Weapon = new Weapon(
