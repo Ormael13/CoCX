@@ -504,6 +504,9 @@ public class PerkLib
 		public static const PhantomArrow:PerkType = mk("Phantom Arrow", "Phantom Arrow",
 				"By expending mana on each shot you create a copy of each of your arrows made of pure mana that replicate the trajectories of previous shots. Phantom arrows can trigger arrow storm.",
 				"You've chosen the 'Phantom Arrow' perk. By expending mana on each shot you create a copy of each of your arrows made of pure mana that replicate the trajectories of previous shots. Phantom arrows can trigger arrow storm.");
+		public static const ConductionSoulforceCharge:PerkType = mk("Conduction Soulforce Charge", "Conduction Soulforce Charge",
+				"As long you have sufficient amount of soulforce, expend them to keep Ayo Armor active instead of using internal storage.",
+				"You've chosen the 'Conduction Soulforce Charge' perk. As long you have sufficient amount of soulforce, expend them to keep Ayo Armor active instead of using internal storage.");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -511,9 +514,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk.");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk.");
@@ -736,7 +736,7 @@ public class PerkLib
 				"Increase venom/web recharge speed based by 100% at cost of 1% of max HP lost per tick. If reached max venom/web cap it will no longer cause HP decay. (if hunger mode is active will instead drain hunger 2x faster)",
 				"You've chosen the 'Axillary Venom Glands' perk. Increase venom/web recharge speed based by 100% at cost of 1% of max HP lost per tick. If reached max venom/web cap it will no longer cause HP decay. (if hunger mode is active will instead drain hunger 2x faster)");
 		public static const AyoArmorProficiency:PerkType = mk("Ayo Armor Proficiency", "Ayo Armor Proficiency",
-				"Wearing Ayo Armor's grants 10% damage reduction.",
+				"Wearing Ayo Armor's grants damage reduction. (unpowered - 10%)(powered - 20%)",
 				"You've chosen the 'Ayo Armor Proficiency' perk.  Due to your specialization in wearing ayo armor, you gain a little bit of damage reduction.");
 		public static const Backbreaker:PerkType = mk("Backbreaker", "Backbreaker",
 				"Hammer or mace deals 50% more damage to stunned enemies.",
@@ -4381,6 +4381,9 @@ public class PerkLib
 
 
 		// Advanced Jobs
+		public static const JobArtificier:PerkType = mk("Job: Artificier", "Job ( Advanced ): Artificier",
+				"You've disassembled and assembled enough gadgets to be able to tackle more technologically complex objects.",
+				"You chose 'Job ( Advanced ): Artificier' perk, training yourself to become a(n) Artificier.").withBuffs({'wis.mult':0.15});
 		public static const JobBrawler:PerkType = mk("Job: Brawler", "Job ( Advanced ): Brawler",
 				"You've trained in unarmed combat.",
 				"You chose 'Job ( Advanced ): Brawler' perk, training yourself to become a(n) Brawler.").withBuffs({'str.mult':0.10});
@@ -4713,6 +4716,7 @@ public class PerkLib
 			JobWarrior
 		];
 		public static const ADVANCED_JOBS:/*PerkType*/Array = [
+			JobArtificier,
 			JobBeastlord,
 			JobBrawler,
 			JobCourtesan,
@@ -5381,7 +5385,7 @@ public class PerkLib
                     .requirePerk(HeavyArmorProficiency)
                     .requireLevel(18);
             AyoArmorProficiency.requireTou(100)
-					.requirePerk(HeavyArmorProficiency)
+					.requirePerks(HeavyArmorProficiency, JobArtificier)
                     .requireLevel(18);
             HalfStepToAdvancedEndurance.requireTou(120)
                     .requireStr(80)
@@ -6568,6 +6572,10 @@ public class PerkLib
                     .requireInt(30)
                     .requireSpe(25)
                     .requireLevel(12);
+            JobArtificier.requireLevel(12)
+                    .requireAdvancedJobSlot()
+					.requirePerk(JobTinker)
+                    .requireWis(75);
             //Tier 3 Wisdom perks
             ElementalContractRank4.requirePerk(ElementalContractRank3)
                     .requireWis(100)
@@ -6656,6 +6664,9 @@ public class PerkLib
                     .requireInt(65)
                     .requireSpe(60)
                     .requireLevel(24);
+            ConductionSoulforceCharge.requireLevel(24)
+                    .requirePerk(JobArtificier)
+                    .requireWis(125);
 			//Tier 5 Wisdom perks
             UnlockSpirit2ndStage.requirePerk(UnlockSpirit)
                     .requireWis(125)

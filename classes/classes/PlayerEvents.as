@@ -345,14 +345,21 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			//Ayo Armors SF drain
-			if (player.isInAyoArmor() && flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > 0) {
-				if (player.armor == armors.LAYOARM) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 60;
-				if (player.armor == armors.HAYOARM) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 120;
-				if (player.armor == armors.UHAYOARM) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 240;
-				if (player.armor == armors.HBARMOR) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 180;
-				if (player.vehicles == vehicles.HB_MECH) {
-					/*if (upgrade 1) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= ?40?;
-					else */flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 60;
+			if (player.isInAyoArmor() && player.buff("Ayo Armor").isPresent()) {
+				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > 0) {
+					var drainAmt:Number = 0;
+					if (player.armor == armors.LAYOARM) drainAmt += 60;
+					if (player.armor == armors.HAYOARM) drainAmt += 120;
+					if (player.armor == armors.UHAYOARM) drainAmt += 240;
+					if (player.armor == armors.HBARMOR) {
+						drainAmt += 180;
+						if (player.vehicles == vehicles.HB_MECH) {
+							/*if (upgrade 1) drainAmt += ?40?;
+							else */drainAmt += 60;
+						}
+					}
+					if (player.hasPerk(PerkLib.ConductionSoulforceCharge) && player.soulforce >= drainAmt) EngineCore.SoulforceChange(-drainAmt);
+					else flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= drainAmt;
 				}
 				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] <= 0) {
 					var oldHPratio:Number = player.hp100/100;

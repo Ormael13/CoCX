@@ -3208,7 +3208,8 @@ use namespace CoC;
 				mult -= 10;
 			}
 			if (hasPerk(PerkLib.AyoArmorProficiency) && tou >= 100 && isInAyoArmor()) {
-				mult -= 10;
+				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > 0) mult -= 20;
+				else mult -= 10;
 			}
 			if (hasPerk(PerkLib.HeavyArmorProficiency) && tou >= 75 && isInHeavyArmor()) {
 				mult -= 10;

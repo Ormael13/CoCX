@@ -7221,6 +7221,7 @@ public class Combat extends BaseContent {
 	public function tinkerDamageBonus(damage:Number):Number {
 		var tinkering:Number = 1;
 		if (player.hasPerk(PerkLib.JobTinker)) tinkering += 0.05;
+		if (player.hasPerk(PerkLib.JobArtificier)) tinkering += 0.15;
 		damage *= tinkering;
 		return damage;
 	}
@@ -17041,4 +17042,4 @@ private function touSpeStrScale(stat:int):Number {
         return player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater) || explorer.areaTags.water;
     }
 }
-}
+}
