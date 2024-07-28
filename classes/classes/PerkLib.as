@@ -4339,7 +4339,7 @@ public class PerkLib
 				"You've trained to use of your own body and natural weapons to their limits in fights.",
 				"You chose 'Job ( Basic ): Beast Warrior' perk, training yourself in the art of feral combat.").withBuffs({'str.mult':0.05,'tou.mult':0.05,'spe.mult':0.05, "int.mult":-0.05, "wis.mult":-0.05,'maxwrath_base':+100});
 		public static const JobEsper:PerkType = mk("Job: Esper", "Job ( Basic ): Esper",
-				"You've trained in using your metnal powers in combat.",
+				"You've trained in using your mental powers in combat.",
 				"You chose 'Job ( Basic ): Esper' perk, training yourself to become a(n) Esper.").withBuffs({'int.mult':0.15,'wis.mult':0.15,'str.mult':-0.05,'tou.mult':-0.05,'spe.mult':-0.05,'sens':40});
 		public static const JobGuardian:PerkType = mk("Job: Guardian", "Job ( Basic ): Guardian",
 				"You've trained in defensive combat.",

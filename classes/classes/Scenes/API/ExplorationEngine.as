@@ -768,6 +768,7 @@ public class ExplorationEngine extends BaseContent {
 		if (player.hasPerk(PerkLib.EyesOfTheHunterGrandMaster)) n += 1;
 		if (player.hasPerk(PerkLib.EyesOfTheHunterEx)) n += 1;
 		if (player.hasPerk(PerkLib.EyesOfTheHunterSu)) n += 1;
+		if (player.hasPerk(PerkLib.JobEsper)) n += 1;
 
 		lastAreaLevel = areaLevel;
 		lastTimesExplored = timesExplored;

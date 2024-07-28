@@ -22,18 +22,23 @@ public class CampMakeWinions extends BaseContent
 		//
 		//-------------
 
-		public var tamedMonstrer01:String = "";
+		public var tameMonster01:String = "";
+		private function playerWisdomCheck():Number {
+			var pWc:Number = player.wis;
+			return pWc;
+		}
 		public function accessTamedWinionsMainMenu():void {
 			clearOutput();
 			outputText("Check on your tamed monsters.\n\n");
 			outputText("<b>Tamed Monster No1:</b> ");
-			if (tamedMonstrer01 == "") outputText("None");
-			else outputText(tamedMonstrer01+" (Atk: "+player.statusEffectv1(StatusEffects.TamedMonster01)+", Str: "+player.statusEffectv2(StatusEffects.TamedMonster01)+", Tou: "+player.statusEffectv3(StatusEffects.TamedMonster01)+")");
+			if (player.hasStatusEffect(StatusEffects.TamedMonster01)) outputText(tameMonster01+" (Atk: "+player.statusEffectv1(StatusEffects.TamedMonster01)+", Str: "+player.statusEffectv2(StatusEffects.TamedMonster01)+", Tou: "+player.statusEffectv3(StatusEffects.TamedMonster01)+")");
+			else outputText("None");
 			menu();
 			addButtonIfTrue(0, "No1", curry(tamingAttemptRelease, 1, true), "You not have tamend monster No1", player.hasStatusEffect(StatusEffects.TamedMonster01), "Release Monster No1");
 			addButton(14, "Back", camp.campWinionsArmySim);
 		}
 		public function tamingAttempt():void {
+			clearOutput();
 			if (player.hasStatusEffect(StatusEffects.TamedMonster01)) {
 				menu();
 				addButton(1, "Release", tamingAttemptRelease, 1);
@@ -41,23 +46,23 @@ public class CampMakeWinions extends BaseContent
 			}
 			else {
 				outputText("With [themonster] weakened, you deftly approach in attempt to tame it to your side. Avoiding any chance at being harmed, you put your skills to the test, using every trick and item available to subdue [monster him] in order to have a much more manageable companion. ");
-				if (player.wis > monster.wis) {
+				if (playerWisdomCheck() > monster.wis) {
 					outputText("Fortunately, after some effort, you manage to successfully claim a new ally, at least for now.");
-					if (Monster is TentacleBeastRaging) {
-						player.createStatusEffect(StatusEffects.TamedMonster01, monster.weaponAttack, monster.str, monster.tou, 0);
-						tamedMonstrer01 = "raging tentacle beast";
+					if (monster is TentacleBeastRaging) {
+						player.createStatusEffect(StatusEffects.TamedMonster01, monster.weaponAttack, monster.strStat.core.value, monster.touStat.core.value, 0);
+						tameMonster01 = "raging tentacle beast";
 					}
-					if (Monster is FeralImps && flags[kFLAGS.FERAL_EXTRAS] == 1) {
-						player.createStatusEffect(StatusEffects.TamedMonster01, monster.weaponAttack, monster.str, monster.tou, 1);
-						tamedMonstrer01 = "feral imp";
+					if (monster is FeralImps && flags[kFLAGS.FERAL_EXTRAS] == 1) {
+						player.createStatusEffect(StatusEffects.TamedMonster01, monster.weaponAttack, monster.strStat.core.value, monster.touStat.core.value, 1);
+						tameMonster01 = "feral imp";
 					}
-					if (Monster is FeralImps && flags[kFLAGS.FERAL_EXTRAS] == 2) {
-						player.createStatusEffect(StatusEffects.TamedMonster01, monster.weaponAttack, monster.str, monster.tou, 2);
-						tamedMonstrer01 = "feral imp lord";
+					if (monster is FeralImps && flags[kFLAGS.FERAL_EXTRAS] == 2) {
+						player.createStatusEffect(StatusEffects.TamedMonster01, monster.weaponAttack, monster.strStat.core.value, monster.touStat.core.value, 2);
+						tameMonster01 = "feral imp lord";
 					}
-					if (Monster is FeralImps && flags[kFLAGS.FERAL_EXTRAS] == 3) {
-						player.createStatusEffect(StatusEffects.TamedMonster01, monster.weaponAttack, monster.str, monster.tou, 3);
-						tamedMonstrer01 = "feral imp warlord";
+					if (monster is FeralImps && flags[kFLAGS.FERAL_EXTRAS] == 3) {
+						player.createStatusEffect(StatusEffects.TamedMonster01, monster.weaponAttack, monster.strStat.core.value, monster.touStat.core.value, 3);
+						tameMonster01 = "feral imp warlord";
 					}
 				}
 				else {
@@ -67,7 +72,7 @@ public class CampMakeWinions extends BaseContent
 			}
 		}
 		public function tamingAttemptRelease(tameMon:Number, inCamp:Boolean = false):void {
-			outputText("You decide to set ");
+			outputText("\n\nYou decide to set ");
 			if (tameMon == 1) {
 				var tame01:Number = player.statusEffectv4(StatusEffects.TamedMonster01);
 				switch (tame01) {
@@ -88,7 +93,7 @@ public class CampMakeWinions extends BaseContent
 						break;
 				}
 				player.removeStatusEffect(StatusEffects.TamedMonster01);
-				tamedMonstrer01 = "";
+				tameMonster01 = "";
 			}
 			outputText(" free, unleashing your friend back into Mareth.");
 			if (inCamp) doNext(accessTamedWinionsMainMenu);

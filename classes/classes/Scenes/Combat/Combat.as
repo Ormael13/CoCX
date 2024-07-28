@@ -13200,7 +13200,7 @@ public function tamedMonster01Attack():void {
 	else dmg01 *= (5.5 + (weapon01 * 0.01));
 	dmg01 *= dmgamp_tamed_monsters();
 	dmg01 = Math.round(dmg01 * comfoll.increasedEfficiencyOfAttacks());
-    outputText("Your tamed "+SceneLib.campMakeWinions.tamedMonstrer01+" attacks [themonster]. ");
+    outputText("Your tamed "+SceneLib.campMakeWinions.tameMonster01+" attacks [themonster]. ");
 	doDamage(dmg01, true, true);
 	outputText("\n\n");
     enemyAIImpl();
@@ -17098,4 +17098,4 @@ private function touSpeStrScale(stat:int):Number {
         return player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater) || explorer.areaTags.water;
     }
 }
-}
+}
