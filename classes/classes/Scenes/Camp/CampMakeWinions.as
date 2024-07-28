@@ -26,19 +26,23 @@ public class CampMakeWinions extends BaseContent
 		public var tameMonster01FlightCapable:Boolean = false;
 		public var tameMonster02:String = "";
 		public var tameMonster02FlightCapable:Boolean = false;
+		public var tameMonster03:String = "";
+		public var tameMonster03FlightCapable:Boolean = false;
 		private function playerAlreadyHaveAnyTamedMonster():Boolean {
-			if (player.hasStatusEffect(StatusEffects.TamedMonster01) || player.hasStatusEffect(StatusEffects.TamedMonster02)) return true;
+			if (player.hasStatusEffect(StatusEffects.TamedMonster01) || player.hasStatusEffect(StatusEffects.TamedMonster02) || player.hasStatusEffect(StatusEffects.TamedMonster03)) return true;
 			else return false;
 		}
 		private function currentTamedMonstersCount():Number {
 			var cTMC:Number = 0;
 			if (player.hasStatusEffect(StatusEffects.TamedMonster01)) cTMC += 1;
 			if (player.hasStatusEffect(StatusEffects.TamedMonster02)) cTMC += 1;
+			if (player.hasStatusEffect(StatusEffects.TamedMonster03)) cTMC += 1;
 			return cTMC;
 		}
 		private function currentTamingCap():Number {
 			var cTC:Number = 1;
 			if (player.hasPerk(PerkLib.Beast02)) cTC += 1;
+			if (player.hasPerk(PerkLib.ThreeTimesATame)) cTC += 1;
 			return cTC;
 		}
 		private function playerWisdomCheck():Number {
@@ -60,6 +64,12 @@ public class CampMakeWinions extends BaseContent
 				else outputText("None");
 				addButtonIfTrue(1, "No2", curry(tamingAttemptRelease, 2, true), "You not have tamend monster No2", player.hasStatusEffect(StatusEffects.TamedMonster02), "Release Monster No2");
 			}
+			if (player.hasPerk(PerkLib.ThreeTimesATame)) {
+				outputText("\n<b>Tamed Monster No3:</b> ");
+				if (player.hasStatusEffect(StatusEffects.TamedMonster03)) outputText(tameMonster03+"\n(Atk: "+player.statusEffectv1(StatusEffects.TamedMonster03)+", Str: "+player.statusEffectv2(StatusEffects.TamedMonster03)+", Tou: "+player.statusEffectv3(StatusEffects.TamedMonster03)+", Can Fly: "+(tameMonster03FlightCapable?"Yes":"No")+")");
+				else outputText("None");
+				addButtonIfTrue(2, "No3", curry(tamingAttemptRelease, 3, true), "You not have tamend monster No3", player.hasStatusEffect(StatusEffects.TamedMonster03), "Release Monster No3");
+			}
 			addButton(14, "Back", camp.campWinionsArmySim);
 		}
 		public function tamingAttempt():void {
@@ -70,6 +80,7 @@ public class CampMakeWinions extends BaseContent
 				addButtonIfTrue(1, "Tame", tamingAttemptYes, "Taming this monster would exceed limit of monsters you can currently control. If you want tame it release other tamed monster first.", (currentTamedMonstersCount() < currentTamingCap()));
 				addButtonIfTrue(2, "Release 01", curry(tamingAttemptRelease, 1), "You not have any tamed monster No1.", player.hasStatusEffect(StatusEffects.TamedMonster01), "Release Monster No1.");
 				if (player.hasPerk(PerkLib.Beast02)) addButtonIfTrue(3, "Release 02", curry(tamingAttemptRelease, 2), "You not have any tamed monster No2.", player.hasStatusEffect(StatusEffects.TamedMonster02), "Release Monster No2.");
+				if (player.hasPerk(PerkLib.ThreeTimesATame)) addButtonIfTrue(4, "Release 03", curry(tamingAttemptRelease, 3), "You not have any tamed monster No3.", player.hasStatusEffect(StatusEffects.TamedMonster03), "Release Monster No3.");
 			}
 			else tamingAttemptYes();
 		}
@@ -90,6 +101,12 @@ public class CampMakeWinions extends BaseContent
 					player.createStatusEffect(StatusEffects.TamedMonster02, monster.weaponAttack, monster.strStat.core.value, monster.touStat.core.value, 0);
 					onlyOneTamingAtTime = true;
 				}
+				if (!player.hasStatusEffect(StatusEffects.TamedMonster03) && !onlyOneTamingAtTime) {
+					tameMonster03 = monster.short;
+					if (monster.flyer == true) tameMonster03FlightCapable = true;
+					player.createStatusEffect(StatusEffects.TamedMonster03, monster.weaponAttack, monster.strStat.core.value, monster.touStat.core.value, 0);
+					onlyOneTamingAtTime = true;
+				}
 			}
 			else outputText("Yet, despite your efforts, [themonster] refuses to back down and scampers off before you can establish any rapport.");
 			cleanupAfterCombat();
@@ -100,12 +117,20 @@ public class CampMakeWinions extends BaseContent
 			if (tameMon == 1) {
 				outputText(""+tameMonster01+"");
 				player.removeStatusEffect(StatusEffects.TamedMonster01);
+				if (tameMonster01FlightCapable) tameMonster01FlightCapable = false;
 				tameMonster01 = "";
 			}
 			if (tameMon == 2) {
 				outputText(""+tameMonster02+"");
 				player.removeStatusEffect(StatusEffects.TamedMonster02);
+				if (tameMonster02FlightCapable) tameMonster02FlightCapable = false;
 				tameMonster02 = "";
+			}
+			if (tameMon == 3) {
+				outputText(""+tameMonster03+"");
+				player.removeStatusEffect(StatusEffects.TamedMonster03);
+				if (tameMonster03FlightCapable) tameMonster03FlightCapable = false;
+				tameMonster03 = "";
 			}
 			outputText(" free, unleashing your friend back into Mareth.");
 			if (inCamp) doNext(accessTamedWinionsMainMenu);

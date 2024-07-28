@@ -243,22 +243,21 @@ internal function defeatASatyr():void {
 	if(monster.lust >= monster.maxOverLust()) outputText("The satyr collapses to its caprine knees, bleating in dismay as it paws frantically at its huge cock, oblivious to everything in its need to get off.  Already, pre-cum is fountaining from the goat-man's shaft, his jerking motions smearing the pungent sexual fluid across the crown.");
 	//HP Victory
 	else outputText("Beaten and dazed, the satyr collapses to its caprine knees, shaking his head in a futile attempt to recover himself from the brutal trouncing you've just given him.  The combination of the blows and his previous drunken state mean he's quite incapable of getting back, however.");
-	if (player.lust < 33) {
-		outputText("You're not aroused enough to rape him.")
-		cleanupAfterCombat();
-		return;
+	if (player.lust < 33) outputText("You're not aroused enough to rape him.");
+	else {
+		outputText("\n\nYou wonder if you should give the satyr some sort of payback for attempting to rape you... do you take advantage of the helpless goat-man?");
+		//[Male][Female][Leave]
+		menu();
+		addButtonIfTrue(0, "FuckHisButt", malesTakeAdvantageOfSatyrs,
+			"Req. a cock with area smaller than " + monster.analCapacity(),
+			player.cockThatFits(monster.analCapacity()) >= 0);
+		addButtonIfTrue(1, "Ride Face", femaleTakesAdvantageOfSatyr,
+			"Req. a vagina", player.hasVagina());
+		LustyMaidensArmor.addTitfuckButton(2);
+		SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatASatyr);
 	}
-	outputText("\n\nYou wonder if you should give the satyr some sort of payback for attempting to rape you... do you take advantage of the helpless goat-man?");
-	//[Male][Female][Leave]
-	menu();
-	addButtonIfTrue(0, "FuckHisButt", malesTakeAdvantageOfSatyrs,
-		"Req. a cock with area smaller than " + monster.analCapacity(),
-		player.cockThatFits(monster.analCapacity()) >= 0);
-	addButtonIfTrue(1, "Ride Face", femaleTakesAdvantageOfSatyr,
-		"Req. a vagina", player.hasVagina());
-	LustyMaidensArmor.addTitfuckButton(2);
+	addButtonIfTrue(12, "Tame It", SceneLib.camp.campMake.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
 	addButton(14, "Leave", cleanupAfterCombat);
-	SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatASatyr);
 }
 
 //Female (Z)

@@ -513,6 +513,9 @@ public class PerkLib
 		public static const BeastKnowledge:PerkType = mk("Beast Knowledge", "Beast Knowledge",
 				"During tame monster check player wisdom is treated as if it was 2x higher.",
 				"You've chosen the 'Beast Knowledge' perk. During tame monster check player wisdom is treated as if it was 2x higher.");
+		public static const ThreeTimesATame:PerkType = mk("Three times a tame", "Three times a tame",
+				"Now you can control 3 monsters at the same time.",
+				"You've chosen the 'Three times a tame' perk. Now you can control 3 monsters at the same time.");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -520,9 +523,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const ThreeTimesATame:PerkType = mk("Three times a tame", "Three times a tame",
-				"Now you can control 3 monsters at the same time.",
-				"You've chosen the 'Three times a tame' perk. Now you can control 3 monsters at the same time.");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk.");
@@ -6484,7 +6484,8 @@ public class PerkLib
 					.requireInt(20)
                     .requireSpe(15);
             //Tier 1 Wisdom perks
-            Beast02.requirePerk(JobTamer)
+            Beast02.requireLevel(6)
+                    .requirePerk(JobTamer)
                     .requireWis(50);
             InsightfulResourcesI.requireLevel(6)
                     .requireWis(50)
@@ -6534,6 +6535,9 @@ public class PerkLib
                     .requireSpe(15)
                     .requireLevel(6);
             //Tier 2 Wisdom perks
+            ThreeTimesATame.requireLevel(12)
+                    .requirePerk(Beast02)
+                    .requireWis(75);
             InsightfulResourcesIV.requireLevel(12)
                     .requirePerk(InsightfulResourcesIII)
                     .requireWis(110)

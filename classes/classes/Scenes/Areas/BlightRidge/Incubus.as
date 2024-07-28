@@ -141,6 +141,7 @@ use namespace CoC;
 			this.imageName = "incubus";
 			this.long = "The demon before you is clad only in cut-off denim overalls.  There is a large hole ripped in the crotch, allowing the demon's foot-long member to hang free.  His skin is light purple and perfect, face rugged and handsome, topped with a simple black ponytail and two large horns that sprout from his forehead like twisted tree-trunks.  He not seems to be using any weapon aside of his own claws.";
 			// this.plural = false;
+			this.flyer = true;
 			this.createCock(12,1.75,CockTypesEnum.DEMON);
 			this.balls = 2;
 			this.ballSize = 2;

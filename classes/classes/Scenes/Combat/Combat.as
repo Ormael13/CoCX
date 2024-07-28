@@ -1271,7 +1271,16 @@ public class Combat extends BaseContent {
 	}
 	public function tamedMonstersMenu():void {
 		menu();
-		addButtonIfTrue(0, "No1", tamedMonster01Attack, "You not have tamed monster No1.", player.hasStatusEffect(StatusEffects.TamedMonster01), "Use tamed monster No1.");
+		if (player.hasStatusEffect(StatusEffects.TamedMonster01)) addButtonIfTrue(0, "No1", curry(tamedMonsterAttack, 1, SceneLib.campMakeWinions.tameMonster01), "Your tamed moster can't attack flying enemy.", (monster.isFlying() && SceneLib.campMakeWinions.tameMonster01FlightCapable == false), "Use tamed monster No1.");
+		else addButtonDisabled(0, "No1", "You not have tamed monster No1.");
+		if (player.hasPerk(PerkLib.Beast02)) {
+			if (player.hasStatusEffect(StatusEffects.TamedMonster02)) addButtonIfTrue(1, "No2", curry(tamedMonsterAttack, 2, SceneLib.campMakeWinions.tameMonster02), "Your tamed moster can't attack flying enemy.", (monster.isFlying() && SceneLib.campMakeWinions.tameMonster02FlightCapable == false), "Use tamed monster No2.");
+			else addButtonDisabled(1, "No2", "You not have tamed monster No1.");
+		}
+		if (player.hasPerk(PerkLib.ThreeTimesATame)) {
+			if (player.hasStatusEffect(StatusEffects.TamedMonster03)) addButtonIfTrue(2, "No3", curry(tamedMonsterAttack, 3, SceneLib.campMakeWinions.tameMonster03), "Your tamed moster can't attack flying enemy.", (monster.isFlying() && SceneLib.campMakeWinions.tameMonster03FlightCapable == false), "Use tamed monster No3.");
+			else addButtonDisabled(2, "No3", "You not have tamed monster No1.");
+		}
 		addButton(14, "Back", combat.combatMenu, false);
 	}
 	public function dmgamp_tamed_monsters():Number {
@@ -13189,19 +13198,31 @@ public function combatIsOver(goToPlayerMenu:Boolean = true):Boolean {
     return false;
 }
 
-public function tamedMonster01Attack():void {
+public function tamedMonsterAttack(no:Number, mon:String):void {
     clearOutput();
-	var weapon01:Number = player.statusEffectv1(StatusEffects.TamedMonster01);
-	var dmg01:Number = scalingBonusStrengthTamedMonster(1);
-	if (weapon01 < 51) dmg01 *= (1 + (weapon01 * 0.03));
-	else if (weapon01 >= 51 && weapon01 < 101) dmg01 *= (2.5 + ((weapon01 - 50) * 0.025));
-	else if (weapon01 >= 101 && weapon01 < 151) dmg01 *= (3.75 + ((weapon01 - 100) * 0.02));
-	else if (weapon01 >= 151 && weapon01 < 201) dmg01 *= (4.75 + ((weapon01 - 150) * 0.015));
-	else dmg01 *= (5.5 + (weapon01 * 0.01));
-	dmg01 *= dmgamp_tamed_monsters();
-	dmg01 = Math.round(dmg01 * comfoll.increasedEfficiencyOfAttacks());
-    outputText("Your tamed "+SceneLib.campMakeWinions.tameMonster01+" attacks [themonster]. ");
-	doDamage(dmg01, true, true);
+	var weapon:Number = 0;
+	var dmg:Number = 0;
+	if (no == 1) {
+		weapon += player.statusEffectv1(StatusEffects.TamedMonster01);
+		dmg += scalingBonusStrengthTamedMonster(1);
+	}
+	if (no == 2) {
+		weapon += player.statusEffectv1(StatusEffects.TamedMonster02);
+		dmg += scalingBonusStrengthTamedMonster(2);
+	}
+	if (no == 3) {
+		weapon += player.statusEffectv1(StatusEffects.TamedMonster03);
+		dmg += scalingBonusStrengthTamedMonster(3);
+	}
+	if (weapon < 51) dmg *= (1 + (weapon * 0.03));
+	else if (weapon >= 51 && weapon < 101) dmg *= (2.5 + ((weapon - 50) * 0.025));
+	else if (weapon >= 101 && weapon < 151) dmg *= (3.75 + ((weapon - 100) * 0.02));
+	else if (weapon >= 151 && weapon < 201) dmg *= (4.75 + ((weapon - 150) * 0.015));
+	else dmg *= (5.5 + (weapon * 0.01));
+	dmg *= dmgamp_tamed_monsters();
+	dmg = Math.round(dmg * comfoll.increasedEfficiencyOfAttacks());
+    outputText("Your tamed "+mon+" attacks [themonster]. ");
+	doDamage(dmg, true, true);
 	outputText("\n\n");
     enemyAIImpl();
 }
@@ -16880,6 +16901,8 @@ private function ghostRealStrengthCompanion():Number {
 private function ghostRealStrengthTamedMonster(no:Number):Number {
 	var ghostRealStrTamedMonster:Number = 0;
 	if (no == 1) ghostRealStrTamedMonster += player.statusEffectv2(StatusEffects.TamedMonster01);
+	if (no == 2) ghostRealStrTamedMonster += player.statusEffectv2(StatusEffects.TamedMonster02);
+	if (no == 3) ghostRealStrTamedMonster += player.statusEffectv2(StatusEffects.TamedMonster03);
 	return ghostRealStrTamedMonster;
 }
 
