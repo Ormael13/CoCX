@@ -267,6 +267,7 @@ public class FeralImps extends Monster
 				this.ballSize = 1;
 			}
 			createBreastRow(0);
+			this.flyer = true;
 			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.hips.type = Hips.RATING_BOYISH;

@@ -23,81 +23,93 @@ public class CampMakeWinions extends BaseContent
 		//-------------
 
 		public var tameMonster01:String = "";
+		public var tameMonster01FlightCapable:Boolean = false;
+		public var tameMonster02:String = "";
+		public var tameMonster02FlightCapable:Boolean = false;
+		private function playerAlreadyHaveAnyTamedMonster():Boolean {
+			if (player.hasStatusEffect(StatusEffects.TamedMonster01) || player.hasStatusEffect(StatusEffects.TamedMonster02)) return true;
+			else return false;
+		}
+		private function currentTamedMonstersCount():Number {
+			var cTMC:Number = 0;
+			if (player.hasStatusEffect(StatusEffects.TamedMonster01)) cTMC += 1;
+			if (player.hasStatusEffect(StatusEffects.TamedMonster02)) cTMC += 1;
+			return cTMC;
+		}
+		private function currentTamingCap():Number {
+			var cTC:Number = 1;
+			if (player.hasPerk(PerkLib.Beast02)) cTC += 1;
+			return cTC;
+		}
 		private function playerWisdomCheck():Number {
 			var pWc:Number = player.wis;
+			if (player.hasPerk(PerkLib.BeastKnowledge)) pWc += player.wis;
 			return pWc;
 		}
 		public function accessTamedWinionsMainMenu():void {
 			clearOutput();
 			outputText("Check on your tamed monsters.\n\n");
 			outputText("<b>Tamed Monster No1:</b> ");
-			if (player.hasStatusEffect(StatusEffects.TamedMonster01)) outputText(tameMonster01+" (Atk: "+player.statusEffectv1(StatusEffects.TamedMonster01)+", Str: "+player.statusEffectv2(StatusEffects.TamedMonster01)+", Tou: "+player.statusEffectv3(StatusEffects.TamedMonster01)+")");
+			if (player.hasStatusEffect(StatusEffects.TamedMonster01)) outputText(tameMonster01+"\n(Atk: "+player.statusEffectv1(StatusEffects.TamedMonster01)+", Str: "+player.statusEffectv2(StatusEffects.TamedMonster01)+", Tou: "+player.statusEffectv3(StatusEffects.TamedMonster01)+", Can Fly: "+(tameMonster01FlightCapable?"Yes":"No")+")");
 			else outputText("None");
 			menu();
 			addButtonIfTrue(0, "No1", curry(tamingAttemptRelease, 1, true), "You not have tamend monster No1", player.hasStatusEffect(StatusEffects.TamedMonster01), "Release Monster No1");
+			if (player.hasPerk(PerkLib.Beast02)) {
+				outputText("\n<b>Tamed Monster No2:</b> ");
+				if (player.hasStatusEffect(StatusEffects.TamedMonster02)) outputText(tameMonster02+"\n(Atk: "+player.statusEffectv1(StatusEffects.TamedMonster02)+", Str: "+player.statusEffectv2(StatusEffects.TamedMonster02)+", Tou: "+player.statusEffectv3(StatusEffects.TamedMonster02)+", Can Fly: "+(tameMonster02FlightCapable?"Yes":"No")+")");
+				else outputText("None");
+				addButtonIfTrue(1, "No2", curry(tamingAttemptRelease, 2, true), "You not have tamend monster No2", player.hasStatusEffect(StatusEffects.TamedMonster02), "Release Monster No2");
+			}
 			addButton(14, "Back", camp.campWinionsArmySim);
 		}
 		public function tamingAttempt():void {
 			clearOutput();
-			if (player.hasStatusEffect(StatusEffects.TamedMonster01)) {
+			if (playerAlreadyHaveAnyTamedMonster()) {
 				menu();
-				addButton(1, "Release", tamingAttemptRelease, 1);
-				addButton(3, "Don't Tame", cleanupAfterCombat);
+				addButton(0, "Don't Tame", cleanupAfterCombat);
+				addButtonIfTrue(1, "Tame", tamingAttemptYes, "Taming this monster would exceed limit of monsters you can currently control. If you want tame it release other tamed monster first.", (currentTamedMonstersCount() < currentTamingCap()));
+				addButtonIfTrue(2, "Release 01", curry(tamingAttemptRelease, 1), "You not have any tamed monster No1.", player.hasStatusEffect(StatusEffects.TamedMonster01), "Release Monster No1.");
+				if (player.hasPerk(PerkLib.Beast02)) addButtonIfTrue(3, "Release 02", curry(tamingAttemptRelease, 2), "You not have any tamed monster No2.", player.hasStatusEffect(StatusEffects.TamedMonster02), "Release Monster No2.");
 			}
-			else {
-				outputText("With [themonster] weakened, you deftly approach in attempt to tame it to your side. Avoiding any chance at being harmed, you put your skills to the test, using every trick and item available to subdue [monster him] in order to have a much more manageable companion. ");
-				if (playerWisdomCheck() > monster.wis) {
-					outputText("Fortunately, after some effort, you manage to successfully claim a new ally, at least for now.");
-					if (monster is TentacleBeastRaging) {
-						player.createStatusEffect(StatusEffects.TamedMonster01, monster.weaponAttack, monster.strStat.core.value, monster.touStat.core.value, 0);
-						tameMonster01 = "raging tentacle beast";
-					}
-					if (monster is FeralImps && flags[kFLAGS.FERAL_EXTRAS] == 1) {
-						player.createStatusEffect(StatusEffects.TamedMonster01, monster.weaponAttack, monster.strStat.core.value, monster.touStat.core.value, 1);
-						tameMonster01 = "feral imp";
-					}
-					if (monster is FeralImps && flags[kFLAGS.FERAL_EXTRAS] == 2) {
-						player.createStatusEffect(StatusEffects.TamedMonster01, monster.weaponAttack, monster.strStat.core.value, monster.touStat.core.value, 2);
-						tameMonster01 = "feral imp lord";
-					}
-					if (monster is FeralImps && flags[kFLAGS.FERAL_EXTRAS] == 3) {
-						player.createStatusEffect(StatusEffects.TamedMonster01, monster.weaponAttack, monster.strStat.core.value, monster.touStat.core.value, 3);
-						tameMonster01 = "feral imp warlord";
-					}
+			else tamingAttemptYes();
+		}
+		public function tamingAttemptYes():void {
+			outputText("With [themonster] weakened, you deftly approach in attempt to tame it to your side. Avoiding any chance at being harmed, you put your skills to the test, using every trick and item available to subdue [monster him] in order to have a much more manageable companion. ");
+			if (playerWisdomCheck() > monster.wis) {
+				outputText("Fortunately, after some effort, you manage to successfully claim a new ally, at least for now.");
+				var onlyOneTamingAtTime:Boolean = false;
+				if (!player.hasStatusEffect(StatusEffects.TamedMonster01)) {
+					tameMonster01 = monster.short;
+					if (monster.flyer == true) tameMonster01FlightCapable = true;
+					player.createStatusEffect(StatusEffects.TamedMonster01, monster.weaponAttack, monster.strStat.core.value, monster.touStat.core.value, 0);
+					onlyOneTamingAtTime = true;
 				}
-				else {
-					outputText("Yet, despite your efforts, [themonster] refuses to back down and scampers off before you can establish any rapport.");
+				if (!player.hasStatusEffect(StatusEffects.TamedMonster02) && !onlyOneTamingAtTime) {
+					tameMonster02 = monster.short;
+					if (monster.flyer == true) tameMonster02FlightCapable = true;
+					player.createStatusEffect(StatusEffects.TamedMonster02, monster.weaponAttack, monster.strStat.core.value, monster.touStat.core.value, 0);
+					onlyOneTamingAtTime = true;
 				}
-				cleanupAfterCombat();
 			}
+			else outputText("Yet, despite your efforts, [themonster] refuses to back down and scampers off before you can establish any rapport.");
+			cleanupAfterCombat();
 		}
 		public function tamingAttemptRelease(tameMon:Number, inCamp:Boolean = false):void {
 			outputText("\n\nYou decide to set ");
+			var tame:Number = 0;
 			if (tameMon == 1) {
-				var tame01:Number = player.statusEffectv4(StatusEffects.TamedMonster01);
-				switch (tame01) {
-					case 0:
-						outputText("raging tentacle beast");
-						break;
-					case 1:
-						outputText("feral imp");
-						break;
-					case 2:
-						outputText("feral imp lord");
-						break;
-					case 3:
-						outputText("feral imp warlord");
-						break;
-					case 4:
-						outputText("");
-						break;
-				}
+				outputText(""+tameMonster01+"");
 				player.removeStatusEffect(StatusEffects.TamedMonster01);
 				tameMonster01 = "";
 			}
+			if (tameMon == 2) {
+				outputText(""+tameMonster02+"");
+				player.removeStatusEffect(StatusEffects.TamedMonster02);
+				tameMonster02 = "";
+			}
 			outputText(" free, unleashing your friend back into Mareth.");
 			if (inCamp) doNext(accessTamedWinionsMainMenu);
-			else doNext(tamingAttempt);
+			else doNext(tamingAttemptYes);
 		}
 
 		//-----------
@@ -2724,3 +2736,4 @@ public class CampMakeWinions extends BaseContent
 		}
 	}
 }
+

@@ -173,6 +173,8 @@ import classes.Scenes.Combat.CombatAbilities;
 
 		//Is a creature a 'plural' encounter - mob, etc.
 		public var plural:Boolean = false;
+		public var flyer:Boolean = false;
+		public var range:Boolean = false;
 		public var imageName:String = "";
 
 		//Lust vulnerability

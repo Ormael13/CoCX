@@ -13,19 +13,18 @@
 public function defeatGS():void {
 	clearOutput();
 	outputText("You smile in satisfaction as the [monster name] collapses, unable to continue fighting.");
+	menu();
 	if (player.lust < 33 || player.gender == 0) {
 		if (player.hasStatusEffect(StatusEffects.Feeder)) {
 			outputText("\n\nYour nipples ache with the desire to forcibly breastfeed the gelatinous beast.  Do you?");
-			doYesNo(rapeOozeWithMilk, cleanupAfterCombat);
+			addButton(1, "Rape", rapeOozeWithMilk);
 		}
 		else {
 			if (player.lust < 33) outputText("\n\nYou're not horny enough to rape it.");
 			else outputText("You can't think of anything to do with it.");
-			cleanupAfterCombat();
 		}
 	}
 	else {
-		menu();
 		if (player.hasStatusEffect(StatusEffects.Feeder)) {
 			outputText("\n\nYou're horny enough to try and rape it, though you'd rather see how much milk you can squirt into it.  What do you do?");
 			addButton(1,"B.Feed",rapeOozeWithMilk);
@@ -59,9 +58,10 @@ public function defeatGS():void {
 			if (player.hasVagina())
 				addButtonDisabled(4, "F.Rape", "You're too pure to take this filth in your pussy!\n<b>Enable 'Other' in SceneHunter settings to override.</b>");
 		}
-		addButton(14, "Leave", cleanupAfterCombat);
 		SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatGS);
 	}
+	addButtonIfTrue(10, "Tame It", SceneLib.camp.campMake.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
+	addButton(14, "Leave", cleanupAfterCombat);
 }
 
 private function serviceLowCorruption():void {

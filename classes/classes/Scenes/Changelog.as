@@ -52,6 +52,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 12 speed lvl-up perk: Arrow Storm. Req. Cupid perk. Effect: After striking a target each shot has a chance to pierce through and do a U-Turn to pierce the target again.\n");
 			outputText("-New tier 13 libido lvl-up perk: Corrupt the soul. Req. Corrupt the mind perk. Effect: Lust vulnerability debuff can now stack beyond 0 up to infinity. (well technicaly not infinity but only Spilly Stonewall PC maybe could reach that 'inifity')\n");
 			outputText("-New tier 13 speed lvl-up perk: Phantom Arrow. Req. Arrow Storm perk. Effect: By expending mana on each shot you create a copy of each of your arrows made of pure mana that replicate the trajectories of previous shots. Phantom arrows can trigger arrow storm.\n");
+			outputText("-New Dark Ascension perk: Bottomless hunger. Raise max demonic energy capacity by 5% per rank. Max Rank: 20.\n");
 			outputText("-New event perk: Nightshade. Gained by using Black Lily. Effects: Raise min corruption by 20% permanently +50% tease damage. Pollen now erodes lust resistance by 5% per round. Your alraune abilities are now considered Dark Elements and your vine attack delivers extra dark damage.\n");
 			outputText("-New event perk: Snow Lily. Gained by using Snow Flower. Effects: Your alraune abilities are now considered to be Cold Elements effect and your vine attack delivers extra cold damage.\n");
 			outputText("-New event perk: Cinderbloom. Gained by using Ember Flower. Effects: Your alraune abilities are now considered to be Fire Elements effect and your vine attack delivers extra fire damage.\n");
@@ -238,7 +239,6 @@ public class Changelog extends BaseContent
 			outputText("-New consumable (by Liadri): average Lethicite. Drops from true demon enemies. Consuming it by PC with Soulless perk will give up to 100 demonic energy.\n");
 			outputText("-Manacost for MM added as alt cost. (Jtecx) (Only for True Demon PC's)\n");
 			outputText("-Added mockfights to Nadia. (Svalkash)\n");
-			outputText("-New Dark Ascension perk: Bottomless hunger. Raise max demonic energy capacity by 5% per rank. Max Rank: 20.\n");
 			outputText("-New Dark Ascension perk: Efficient Soul Consumption. Decrease the cost of upgrading yourself through demonic energy by 5% per rank. Max Rank: 19.\n");
 			outputText("-PC with Soulless perk no longer can use normal ascension instead using variant dark ascension. It have it own choice of perks to buy and some of the options that normal ascension have.\n");
 			outputText("-New consumable (by Liadri): Greater Lethicite. Drops from true demon enemies. Consuming it by PC with Soulless perk will give up to 250 demonic energy.\n");
@@ -311,6 +311,8 @@ public class Changelog extends BaseContent
 			outputText("-Job: All-Rounder req. for sensitivity was increased from 50 to 75 like other stats.\n");
 			outputText("-New type of minions: tamed monsters. Req. Tamer Job and they can be at any time released to be replaced by different one monster. At start only feral enemeis can be tamed and to succeed player must defeat them in combat and then have higher wisdom to successfully tame them. Some perks/items can increase their damage. They would also benefit from effectivness bonus that is applied to any henchman.\n");
 			outputText("-Sceptre of Command and Yogi Uh Panel items effect will affect tamed monsters too.\n");
+			outputText("-New tier 0 wisdom lvl-up perk: Beast Knowledge. Req. Job: Tamer and 25+ wisdom. Effect: During tame monster check player wisdom is treated as if it was 2x higher.\n");
+			outputText("-New tier 1 wisdom lvl-up perk: Beast 02. Req. Job: Tamer and 50+ wisdom. Effect: You can have 2 tamed monsters.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -319,9 +321,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//New tier 7 wisdom lvl-up perk: Kaiju No8. Req. Job: Tamer and 50+ wisdom. Effect: To your team of monsters joins 8th kaiju.
 			outputText("-\n");//New mutation perk: Human Parathyroid Glands (Final Form). Req. Human Parathyroid Glands (Evolved) and lvl 90+. Effects: Increases self healing by 40 * level HP in combat and twice more out of combat. 8 * level HP Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.
 			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.

@@ -103,16 +103,14 @@ public class HellHoundScene extends BaseContent
 				addButtonIfTrue(1, "Fuck", hellHoundPropahRape, "Req. a vagina and NOT naga lower body.", player.hasVagina() && !player.isNaga());
 				addButtonIfTrue(2, "TakeBothIn", takeBothIn, "Req. to be a liliraune.", player.isLiliraune());
 				addButtonIfTrue(3, "Dominate", rapeCerberusStyle, "Req. to be a Cerberus.", player.isRaceCached(Races.CERBERUS));
-				addButton(14, "Leave", cleanupAfterCombat);
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(curry(hellHoundPostFightOptions, hpVictory)); //CALLED AT THE END
 			}
 			else {
-				if (hpVictory)
-					outputText("You're not aroused enough to rape your enemy.'.");
-				else
-					outputText("You turn away, not really turned on enough to be interested in such an offer.");
-				addButton(14, "Leave", cleanupAfterCombat);
+				if (hpVictory) outputText("You're not aroused enough to rape your enemy.'.");
+				else outputText("You turn away, not really turned on enough to be interested in such an offer.");
 			}
+			addButtonIfTrue(11, "Tame It", SceneLib.camp.campMake.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
+			addButton(14, "Leave", cleanupAfterCombat);
 		}
 
 		public function hellHoundGetsRaped():void

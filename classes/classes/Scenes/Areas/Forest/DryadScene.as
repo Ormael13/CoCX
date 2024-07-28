@@ -3,8 +3,10 @@
  * Ported from UEE to CoCX by Svalkash.
  */
 package classes.Scenes.Areas.Forest {
+import classes.*;
 import classes.BaseContent;
 import classes.display.SpriteDb;
+import classes.Scenes.SceneLib;
 
 public class DryadScene extends BaseContent {
 
@@ -17,16 +19,15 @@ public class DryadScene extends BaseContent {
     public function winagainstdryad():void {
         clearOutput();
         outputText("The dryad creaks like old wood as she collapses to the ground, too [if (monster.HP <= 0)injured|aroused] to continue fighting. ");
+        menu();
         if (player.hasCock() && player.lust >= 33) {
             outputText("\n\nWhile gazing on her prone figure carnal desire wells up inside you.   Do you have your way with her? ");
-            menu();
             addButtonIfTrue(0, "Fuck Her", fuckHer, "Req. a cock.", player.hasCock());
             addButtonIfTrue(1, "Make Lick", makeLick, "Req. a vagina.", player.hasVagina());
-            addButton(4, "Leave", cleanupAfterCombat);
-        } else {
-			outputText("You're not aroused enough to rape her!")
-            cleanupAfterCombat();
         }
+		else outputText("You're not aroused enough to rape her!");
+        addButtonIfTrue(3, "Tame It", SceneLib.camp.campMake.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
+		addButton(4, "Leave", cleanupAfterCombat);
     }
 
     //What the fucking placeholder it is?
