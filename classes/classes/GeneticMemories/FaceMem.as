@@ -113,7 +113,7 @@ package classes.GeneticMemories {
 			id: "Buck Teeth",
 			name: "Buck Teeth",
 			cost: 100,
-			title: "Buck Teeth",
+			title: "Bunny Face",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.FaceBunny;
 			}

@@ -345,14 +345,21 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			//Ayo Armors SF drain
-			if (player.isInAyoArmor() && flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > 0) {
-				if (player.armor == armors.LAYOARM) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 60;
-				if (player.armor == armors.HAYOARM) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 120;
-				if (player.armor == armors.UHAYOARM) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 240;
-				if (player.armor == armors.HBARMOR) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 180;
-				if (player.vehicles == vehicles.HB_MECH) {
-					/*if (upgrade 1) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= ?40?;
-					else */flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 60;
+			if (player.isInAyoArmor() && player.buff("Ayo Armor").isPresent()) {
+				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > 0) {
+					var drainAmt:Number = 0;
+					if (player.armor == armors.LAYOARM) drainAmt += 60;
+					if (player.armor == armors.HAYOARM) drainAmt += 120;
+					if (player.armor == armors.UHAYOARM) drainAmt += 240;
+					if (player.armor == armors.HBARMOR) {
+						drainAmt += 180;
+						if (player.vehicles == vehicles.HB_MECH) {
+							/*if (upgrade 1) drainAmt += ?40?;
+							else */drainAmt += 60;
+						}
+					}
+					if (player.hasPerk(PerkLib.ConductionSoulforceCharge) && player.soulforce >= drainAmt) EngineCore.SoulforceChange(-drainAmt);
+					else flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= drainAmt;
 				}
 				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] <= 0) {
 					var oldHPratio:Number = player.hp100/100;
@@ -2075,7 +2082,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			//Equine Strength
-			needNext ||= player.gainOrLosePerk(PerkLib.EquineStrength, player.isAnyRaceCached(Races.HORSE, Races.CENTAUR), "You are enough of a horse-mroph or centaur and have gained your special abilities!", "You are no longer enough of a horse-mroph or centaur and have lost your special abilities!");
+			needNext ||= player.gainOrLosePerk(PerkLib.EquineStrength, player.isAnyRaceCached(Races.HORSE, Races.CENTAUR, Races.LAQUINE), "You are enough of a horse-morph or centaur and have gained your special abilities!", "You are no longer enough of a horse-morph or centaur and have lost your special abilities!");
+			//Laquine Might
+			needNext ||= player.gainOrLosePerk(PerkLib.LaquineMight, player.isRaceCached(Races.LAQUINE), "Woa maybe you’ve eaten too many raw carrots you feel your body ripple with power. It might also be you turning into a full Laquine doing this.", "As your body becomes less Laquine like you feel your energy is down both in libido and strength.");
 			//Titan Might
 			needNext ||= player.gainOrLosePerk(PerkLib.TitanicSize,(player.tallness >= 80 && (player.isRaceCached(Races.SCYLLA, 2) || player.isAnyRaceCached(Races.HYDRA, Races.FROSTWYRM, Races.SANDWORM))), "Whoa, you've grown so big its a sheer miracle you don't damage the landscape while moving. That said, your size now contributes to your strength as well.",
 					(player.tallness < 80) ? "You sadly are no longer able to benefit from your size as much as you did before. Probably because you have shrunk to a smaller size." : "You sadly are no longer able to benefit from your size as much as you did before. Probably because you have transformed again.");

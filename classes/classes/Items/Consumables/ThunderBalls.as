@@ -33,6 +33,7 @@ package classes.Items.Consumables
 			}
 			else { //Not dodged
 				var damage:Number = 1440 + Utils.rand(721);
+				damage = SceneLib.combat.tinkerDamageBonus(damage);
 				if (game.player.level >= 6) {
 					if (game.player.level >= 24) {
 						if (game.player.level >= 42) damage *= 4;

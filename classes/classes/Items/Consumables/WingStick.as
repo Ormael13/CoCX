@@ -6,6 +6,7 @@ package classes.Items.Consumables
 	import classes.Items.Consumable;
 	import classes.Player;
 	import classes.internals.Utils;
+	import classes.Scenes.SceneLib;
 
 	public final class WingStick extends Consumable {
 		
@@ -29,6 +30,7 @@ package classes.Items.Consumables
 			}
 			else { //Not dodged
 				var damage:Number = 40 + Utils.rand(61) + (game.player.str * 2);
+				damage = SceneLib.combat.tinkerDamageBonus(damage);
 				outputText(game.monster.capitalA + game.monster.short + " is hit with the wingstick!  It breaks apart as it lacerates " + game.monster.pronoun2 + ". <b>([font-damage]" + damage + "[/font])</b>");
 				game.monster.HP -= damage;
 				if (game.monster.HP < 0) game.monster.HP = 0;

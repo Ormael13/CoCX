@@ -939,6 +939,7 @@ public class Combat extends BaseContent {
             bd = buttons.add("Elem.Asp", buttonFunc, "Use the once-per-battle elemental aspects of your basic elementals.", "Elemental Aspects");
         }
 		if (player.shieldName == "Ancient Conduit") bd = buttons.add("A.Conduit", AncientConduitMenu);
+		if (player.hasPerk(PerkLib.JobTamer)) bd = buttons.add("Tamed Monster(s)", tamedMonstersMenu);
 		if (player.hasPerk(PerkLib.PrestigeJobNecromancer) && player.perkv2(PerkLib.PrestigeJobNecromancer) > 0) {
 			bd = buttons.add("S.S. to F.", sendSkeletonToFight).hint("Send Skeleton to fight - Order your Skeletons to beat the crap out of your foe.");
 			if (monster.isFlying() && (!player.hasPerk(PerkLib.GreaterHarvest) || (player.perkv1(PerkLib.GreaterHarvest) == 0 && player.perkv2(PerkLib.GreaterHarvest) == 0))) {
@@ -1267,6 +1268,20 @@ public class Combat extends BaseContent {
 			addButton(9, "-1-", AncientConduitMenu, page - 1);
 			addButton(14, "Back", combat.combatMenu, false);
 		}
+	}
+	public function tamedMonstersMenu():void {
+		menu();
+		addButtonIfTrue(0, "No1", tamedMonster01Attack, "You not have tamed monster No1.", player.hasStatusEffect(StatusEffects.TamedMonster01), "Use tamed monster No1.");
+		addButton(14, "Back", combat.combatMenu, false);
+	}
+	public function dmgamp_tamed_monsters():Number {
+		var dmgamp:Number = 0;
+		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
+		if (player.shield == shields.Y_U_PAN) dmgamp += 0.25;
+		if (player.hasPerk(PerkLib.CommandingTone)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.DiaphragmControl)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.VocalTactician)) dmgamp += 0.15;
+		return dmgamp;
 	}
 	
     public function calcHerbalismPower():Number{
@@ -2064,6 +2079,7 @@ public class Combat extends BaseContent {
 				damage += scalingBonusIntelligence() * hydraulicsMulti;
 			}
 			damage *= 1.3;
+			damage = tinkerDamageBonus(damage);
 			damage = goblinDamageBonus(damage);
 			if (player.vehicles == vehicles.GOBMPRI) damage *= 1.5;
 			if (player.vehicles == vehicles.GS_MECH) damage *= 1.25;
@@ -3057,9 +3073,10 @@ public class Combat extends BaseContent {
             multiArrowsStrike(0);
         }
         else if (player.isThrownTypeWeapon()){
-            if (player.hasPerk(PerkLib.Telekinesis)) {
+            if (player.hasPerk(PerkLib.Telekinesis) || player.hasPerk(PerkLib.JobEsper)) {
                 outputText("Weapons begins to float around you as you draw several projectiles from your arsenal using your powers.\n\n");
                 TelekinesisThrow();
+				if (player.hasPerk(PerkLib.Telekinesis) && player.hasPerk(PerkLib.JobEsper)) TelekinesisThrow();
                 outputText(" Adding to the initial attack, you begin grab additional [weaponrange] before taking aim.\n\n");
             }
             throwWeapon();
@@ -3944,9 +3961,15 @@ public class Combat extends BaseContent {
 		else {
 			damage += ghostStrength();
 			damage += scalingBonusStrength() * 0.4;
-			if (player.hasPerk(PerkLib.Telekinesis)){
-				damage += player.inte;
-				damage += scalingBonusIntelligence() * 0.4;
+			if (player.hasPerk(PerkLib.Telekinesis) || player.hasPerk(PerkLib.JobEsper)){
+				if (player.hasPerk(PerkLib.Telekinesis) && player.hasPerk(PerkLib.JobEsper)) {
+					damage += player.inte * 2;
+					damage += scalingBonusIntelligence() * 0.4;
+				}
+				else {
+					damage += player.inte;
+					damage += scalingBonusIntelligence() * 0.8;
+				}
 			}
 			if (damage < 20) damage = 20;
 			if (player.hasPerk(PerkLib.DeadlyThrow)) damage += player.spe;
@@ -4358,7 +4381,8 @@ public class Combat extends BaseContent {
             if (player.hasKeyItem("Gun Scope with Aim tech") >= 0) damage *= 1.4;
             if (player.hasKeyItem("Gun Scope with Aimbot") >= 0) damage *= 1.6;
             if (player.isInGoblinMech()) {
-                damage = goblinDamageBonus(damage);
+                damage = tinkerDamageBonus(damage);
+				damage = goblinDamageBonus(damage);
                 if (player.hasKeyItem("Repeater Gun") >= 0) {
                     if (player.vehicles == vehicles.GOBMPRI) {
                         damage *= 1.45;
@@ -4684,8 +4708,9 @@ public class Combat extends BaseContent {
         if (player.hasKeyItem("Gun Scope") >= 0) damage *= 1.2;
         if (player.hasKeyItem("Gun Scope with Aim tech") >= 0) damage *= 1.4;
         if (player.hasKeyItem("Gun Scope with Aimbot") >= 0) damage *= 1.6;
-        damage = goblinDamageBonus(damage);
-	if (player.hasKeyItem("Repeater Gun") >= 0) {
+        damage = tinkerDamageBonus(damage);
+		damage = goblinDamageBonus(damage);
+		if (player.hasKeyItem("Repeater Gun") >= 0) {
             if (player.vehicles == vehicles.GOBMPRI) {
                 damage *= 1.45;
                 if (damage < 70) damage = 70;
@@ -5033,7 +5058,8 @@ public class Combat extends BaseContent {
             damage *= 2;
         }
         if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 5;
-        damage = goblinDamageBonus(damage);
+        damage = tinkerDamageBonus(damage);
+		damage = goblinDamageBonus(damage);
         if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
         if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
         damage = damage * monster.lustVuln;
@@ -6129,9 +6155,15 @@ public class Combat extends BaseContent {
             damage += scalingBonusStrength() * 0.4;
 			damage += player.spe;
 			damage += scalingBonusSpeed() * 0.2;
-            if (player.hasPerk(PerkLib.Telekinesis)){
-                damage += player.inte;
-                damage += scalingBonusIntelligence() * 0.4;
+            if (player.hasPerk(PerkLib.Telekinesis) || player.hasPerk(PerkLib.JobEsper)){
+                if (player.hasPerk(PerkLib.Telekinesis) && player.hasPerk(PerkLib.JobEsper)) {
+					damage += player.inte * 2;
+					damage += scalingBonusIntelligence() * 0.4;
+				}
+				else {
+					damage += player.inte;
+					damage += scalingBonusIntelligence() * 0.8;
+				}
             }
             if (player.hasPerk(PerkLib.DeadlyThrow)) damage += player.spe;
             if (damage < 20) damage = 20;
@@ -6191,6 +6223,7 @@ public class Combat extends BaseContent {
 		if (player.isDualWieldRanged()) damage *= firearmsDualWieldDamagePenalty();
         damage = rangeAttackModifier(damage);
         damage = archerySkillDamageMod(damage);
+		damage = tinkerDamageBonus(damage);
         damage *= player.jewelryRangeModifier();
 		damage *= firearmsForce();
 		return damage;
@@ -7212,6 +7245,14 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.TechOverdrive)) damage *= 1.2;
         return damage;
     }
+	
+	public function tinkerDamageBonus(damage:Number):Number {
+		var tinkering:Number = 1;
+		if (player.hasPerk(PerkLib.JobTinker)) tinkering += 0.05;
+		if (player.hasPerk(PerkLib.JobArtificier)) tinkering += 0.15;
+		damage *= tinkering;
+		return damage;
+	}
 
     public function isPureWeapon():Boolean {
         return player.weapon.hasTag(ItemConstants.W_PURE_TYPE)
@@ -13148,6 +13189,23 @@ public function combatIsOver(goToPlayerMenu:Boolean = true):Boolean {
     return false;
 }
 
+public function tamedMonster01Attack():void {
+    clearOutput();
+	var weapon01:Number = player.statusEffectv1(StatusEffects.TamedMonster01);
+	var dmg01:Number = scalingBonusStrengthTamedMonster(1);
+	if (weapon01 < 51) dmg01 *= (1 + (weapon01 * 0.03));
+	else if (weapon01 >= 51 && weapon01 < 101) dmg01 *= (2.5 + ((weapon01 - 50) * 0.025));
+	else if (weapon01 >= 101 && weapon01 < 151) dmg01 *= (3.75 + ((weapon01 - 100) * 0.02));
+	else if (weapon01 >= 151 && weapon01 < 201) dmg01 *= (4.75 + ((weapon01 - 150) * 0.015));
+	else dmg01 *= (5.5 + (weapon01 * 0.01));
+	dmg01 *= dmgamp_tamed_monsters();
+	dmg01 = Math.round(dmg01 * comfoll.increasedEfficiencyOfAttacks());
+    outputText("Your tamed "+SceneLib.campMakeWinions.tamedMonstrer01+" attacks [themonster]. ");
+	doDamage(dmg01, true, true);
+	outputText("\n\n");
+    enemyAIImpl();
+}
+
 public function OrcaJuggle():void {
     clearOutput();
     if (player.statusEffectv1(StatusEffects.OrcaCanJuggleStill) == 2 && !player.perkv1(IMutationsLib.WhaleFatIM) >= 3) {
@@ -13687,7 +13745,10 @@ public function Straddle():void {
         if(checkConcentration("[monster name] recovers just in time to get out of your reach as you attempt to straddle [monster him].")) return; //Amily concentration
         //WRAP IT UPPP
         monster.createStatusEffect(StatusEffects.Straddle, 0, 0, 0, 0);
-        if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 4) player.createStatusEffect(StatusEffects.StraddleRoundLeft, 3 + rand(3), 0, 0, 0);
+        if (player.perkv1(IMutationsLib.MightyLegsIM) >= 4 || player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 4) {
+			if (player.perkv1(IMutationsLib.MightyLegsIM) >= 4 && player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 4) player.createStatusEffect(StatusEffects.StraddleRoundLeft, 4 + rand(3), 0, 0, 0);
+			else player.createStatusEffect(StatusEffects.StraddleRoundLeft, 3 + rand(3), 0, 0, 0);
+		}
 		else player.createStatusEffect(StatusEffects.StraddleRoundLeft, 2 + rand(3), 0, 0, 0);
         if (player.isAlraune()) {
             outputText("You giggle and take hold of your dazed opponent with your vines before gently pulling [monster him] into your nectar bath, straddling him with your pistil as you get into mating position.");
@@ -14231,6 +14292,7 @@ public function ScyllaSqueeze():void {
         fatigue(50, USEFATG_PHYSICAL);
     } else fatigue(20, USEFATG_PHYSICAL);
     var damage:int = monster.maxHP() * (.10 + rand(15) / 100) * 1.5;
+	if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 2) damage += scalingBonusStrength() * 0.5 * (player.perkv1(IMutationsLib.MightyLowerHalfIM) - 1);
     if (player.isKraken()) {
         damage *= player.effectiveTallness / 25;
         damage += player.str;
@@ -14243,7 +14305,7 @@ public function ScyllaSqueeze():void {
     if (player.hasPerk(PerkLib.UnbreakableBind)) damage *= 2;
 	if (player.perkv1(IMutationsLib.ScyllaInkGlandsIM) >= 2 && player.isKraken()) damage *= player.perkv1(IMutationsLib.ScyllaInkGlandsIM);
     if (player.hasStatusEffect(StatusEffects.ControlFreak)) damage *= player.statusEffectv1(StatusEffects.ControlFreak);
-	if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 1) damage *= (1 + (0.2 * player.perkv1(IMutationsLib.MightyLowerHalfIM)));
+	if (player.perkv1(IMutationsLib.MightyLowerHalfIM) >= 1) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.MightyLowerHalfIM)));
     //Squeeze -
     outputText("You start squeezing your");
     if (monster.plural) {
@@ -16815,6 +16877,12 @@ private function ghostRealStrengthCompanion():Number {
     return ghostRealStrCompanion;
 }
 
+private function ghostRealStrengthTamedMonster(no:Number):Number {
+	var ghostRealStrTamedMonster:Number = 0;
+	if (no == 1) ghostRealStrTamedMonster += player.statusEffectv2(StatusEffects.TamedMonster01);
+	return ghostRealStrTamedMonster;
+}
+
 public function ghostSpeed():Number {
     var ghostSpe:Number = player.speStat.core.value;
     var ghostSpeMulti:Number = 0;
@@ -16934,6 +17002,11 @@ private function touSpeStrScale(stat:int):Number {
         else return inteWisLibScale(ghostRealStrengthCompanion(), randomize);
     }
 
+    public function scalingBonusStrengthTamedMonster(no:Number, randomize:Boolean = true):Number {
+        if (flags[kFLAGS.STRENGTH_SCALING] == 1) return touSpeStrScale(ghostRealStrengthTamedMonster(no));
+        else return inteWisLibScale(ghostRealStrengthTamedMonster(no), randomize);
+    }
+
     public function scalingBonusToughness(randomize:Boolean = true):Number {
         return inteWisLibScale(ghostRealToughness(), randomize);
     }
@@ -17025,4 +17098,4 @@ private function touSpeStrScale(stat:int):Number {
         return player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater) || explorer.areaTags.water;
     }
 }
-}
+}

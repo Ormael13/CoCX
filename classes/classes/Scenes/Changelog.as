@@ -49,7 +49,9 @@ public class Changelog extends BaseContent
 			outputText("-New tier 6 libido lvl-up perk: Corrupt the heart. Req. Corrupt the body perk. Effect: Lust vulnerability debuff can now stack beyond 0 up to -200%.\n");
 			outputText("-New tier 8 libido lvl-up perk: Greater Grapple. Req. Improved Grapple perk and 250+ lib. Effect: Attack three action per straddle or grappling turn. Increase straddle damage by another 20%.\n");
 			outputText("-New tier 10 libido lvl-up perk: Corrupt the mind. Req. Corrupt the heart perk. Effect: Lust vulnerability debuff can now stack beyond 0 up to -300%.\n");
+			outputText("-New tier 12 speed lvl-up perk: Arrow Storm. Req. Cupid perk. Effect: After striking a target each shot has a chance to pierce through and do a U-Turn to pierce the target again.\n");
 			outputText("-New tier 13 libido lvl-up perk: Corrupt the soul. Req. Corrupt the mind perk. Effect: Lust vulnerability debuff can now stack beyond 0 up to infinity. (well technicaly not infinity but only Spilly Stonewall PC maybe could reach that 'inifity')\n");
+			outputText("-New tier 13 speed lvl-up perk: Phantom Arrow. Req. Arrow Storm perk. Effect: By expending mana on each shot you create a copy of each of your arrows made of pure mana that replicate the trajectories of previous shots. Phantom arrows can trigger arrow storm.\n");
 			outputText("-New event perk: Nightshade. Gained by using Black Lily. Effects: Raise min corruption by 20% permanently +50% tease damage. Pollen now erodes lust resistance by 5% per round. Your alraune abilities are now considered Dark Elements and your vine attack delivers extra dark damage.\n");
 			outputText("-New event perk: Snow Lily. Gained by using Snow Flower. Effects: Your alraune abilities are now considered to be Cold Elements effect and your vine attack delivers extra cold damage.\n");
 			outputText("-New event perk: Cinderbloom. Gained by using Ember Flower. Effects: Your alraune abilities are now considered to be Fire Elements effect and your vine attack delivers extra fire damage.\n");
@@ -67,30 +69,39 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Commanding Tone. Gained by having 5 Vocal Training sessions with Charybdis. Effects: Minion and Follower Damage increased by 10%.\n");
 			outputText("-New event perk: Diaphragm control. Gained by having 10 Vocal Training sessions with Charybdis. Effects: Minion and Follower Damage increased by an additional 10%, and followers will act more often.\n");
 			outputText("-New event perk: Mental Bastion. Gained by having 40 training sessions with Tyrantia. Effects: The effects of Tyrant State are doubled: While active, you take 30% less damage from magic. You count as either pure or corrupt (whichever is better) for equipment. (Pure for the Beautiful weapons etc, corrupt for corrupt weapons)\n");
+			outputText("-New event perk: Vocal Tactician. Gained by having 15 Vocal Training sessions with Charybdis. Effects: Minion and Follower Damage increased by another 15%. Followers will act even more frequently.\n");
 			outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP / Lust effect of 10% magnitude.\n");
 			outputText("-New mutation perk: Equine Muscle. Req. having free musculature mutation slot, one of races: horse-morph, centuar, unicorn, bicorn, alicorn, nightmare. Effects: +25% to all Physical Ability damage. Gallop cost 10% less fatigue.\n");
 			outputText("-New mutation perk: Fiendish Balls. Req. having free metabolism mutation slot, demon or imp race. Effects: Increase Virility by 40%.\n");
 			outputText("-New mutation perk: Fiendish Metabolism. Req. having free metabolism mutation slot, demon or imp race. Effects: You may no longer gain nourishment from anything short of cum, milk and girl juice. If you have the demonic hunger perk, gain a stacking bonus of 10% to tease damage up to 50%.\n");
 			outputText("-New mutation perk: Fiendish Ovaries. Req. having free metabolism mutation slot, demon race. Effects: Increase Fertility by 40%.\n");
 			outputText("-New mutation perk: Goblin Ovaries. Req. having free ovaries mutation slot, one of goblinoid races. Effects: Increase fertility rating by 10, While pregnant increase total libido by 10%. Double the number of kids you birth.\n");
+			outputText("-New mutation perk: Mighty Legs. Req. having free adaptation mutation slot, one of races: Kangaro, Bunny, Easter Bunny, Laquine, Horse Morph, Centaur(The original centaur not the other ones), Cow, Minotaur, Jabberwocky. Effects: Make Kick permanent no matter your leg type, Increase unarmed strike damage by 5 and grapple effect by 20%.\n");
+			outputText("-New mutation perk: Mighty Lower Half. Req. having free adaptation mutation slot, one of races: Scylla, Naga, Gorgon, Couatl, Vouivre, Apophis, Frostwyrm, Mindbreaker. Effects: Tentacle and tail attack deals 25% more damage. Increase unarmed strike damage by 5 and grapple effect by 20%.\n");
 			outputText("-New mutation perk: Equine Muscle (Primitive). Req. Equine Muscle and lvl 30+. Effects: +50% to all Physical Ability damage. Gallop cost 20% less fatigue. Physical ability consumes 5% less fatigue.\n");
 			outputText("-New mutation perk: Fiendish Balls (Primitive). Req. Fiendish Balls and lvl 30+. Effects: Increase Virility by 60%, Increase cum production by 50%.\n");
 			outputText("-New mutation perk: Fiendish Metabolism (Primitive). Req. Fiendish Metabolism and lvl 30+. Effects: You may no longer gain nourishment from anything short of cum, milk and girl juice. If you have the demonic hunger perk, gain a stacking bonus of 10% to tease damage up to 100%. ");
 			outputText("You may gain Fiendish metabolism bonus even without demonic hunger but gain half of the bonus. Gain immunity to all fluid negative effects and allows you to feed from sexual fluids.\n");
 			outputText("-New mutation perk: Fiendish Ovaries (Primitive). Req. Fiendish Ovaries and lvl 30+. Effects: Increase Fertility by 60%, all born children from your womb will either be born as imps or greatly corrupted.\n");
 			outputText("-New mutation perk: Goblin Ovaries (Primitive). Req. Goblin Ovaries and lvl 30+. Effects: Increase fertility rating by 20, While pregnant increase total libido by 20%. Double the number of kids you birth. Increase physical damage done while pregnant by 30%.\n");
+			outputText("-New mutation perk: Mighty Legs (Primitive). Req. Mighty Legs and lvl 30+. Effects: Make Kick permanent no matter your leg type, Increase unarmed strike damage by 10 and grapple effect by 40%. Kick is 50% stronger.\n");
+			outputText("-New mutation perk: Mighty Lower Half (Primitive). Req. Mighty Lower Half and lvl 30+. Effects: Tentacle and tail attack deals 50% more damage. Increase unarmed strike damage by 10 and grapple effect by 40%. Grapple damage gains 50% more bonus from your strength.\n");
 			outputText("-New mutation perk: Equine Muscle (Evolved). Req. Equine Muscle (Primitive) and lvl 60+. Effects: +75% to all Physical Ability damage. Gallop cost 30% less fatigue. Physical ability consumes 10% less fatigues. Physical ability that stuns do so for one extra round.\n");
 			outputText("-New mutation perk: Fiendish Balls (Evolved). Req. Fiendish Balls (Primitive) and lvl 60+. Effects: Increase Virility by 80%, Increase cum production by 75%, gain a bonus to tease against females based on your cum production up to 25%.\n");
 			outputText("-New mutation perk: Fiendish Metabolism (Evolved). Req. Fiendish Metabolism (Primitive) and lvl 60+. Effects: You may no longer gain nourishment from anything short of cum, milk and girl juice. If you have the demonic hunger perk, gain a stacking bonus of 10% to tease damage up to 150%. You may gain Fiendish metabolism bonus even without demonic hunger but gain half of the bonus. ");
 			outputText("Gain immunity to all fluid negative effects and allow you to feed from sexual fluids. Satisfying your crave for sex also raises your spell power for an amount equivalent to the tease damage bonus granted by this mutation.\n");
 			outputText("-New mutation perk: Fiendish Ovaries (Evolved). Req. Fiendish Ovaries (Primitive) and lvl 60+. Effects: Increase Fertility by 80%, all born children from your womb will either be born as imps or greatly corrupted, while pregnant with imps tease is 25% stronger.\n");
 			outputText("-New mutation perk: Goblin Ovaries (Evolved). Req. Goblin Ovaries (Primitive) and lvl 60+. Effects: Increase fertility rating by 30, While pregnant increase total libido by 30%. Double the number of kids you birth. Increase physical damage done while pregnant by 40%. Lust damage against male opponents increased by 25%.\n");
+			outputText("-New mutation perk: Mighty Legs (Evolved). Req. Mighty Legs (Primitive) and lvl 60+. Effects: Make Kick permanent no matter your leg type, Increase unarmed strike damage by 15 and grapple effect by 60%. Kick is 100% stronger. Kick stun lasts 1 round longer.\n");
+			outputText("-New mutation perk: Mighty Lower Half (Evolved). Req. Mighty Lower Half (Primitive) and lvl 60+. Effects: Tentacle and tail attack deals 75% more damage. Increase unarmed strike damage by 15 and grapple effect by 60%. Grapple damage gains 100% more bonus from your strength. Racial physical ability stun lasts 1 round longer.\n");
 			outputText("-New mutation perk: Equine Muscle (Final Form). Req. Equine Muscle (Evolved) and lvl 90+. Effects: +100% to all Physical Ability damage. Gallop cost 40% less fatigue. Physical ability consumes 15% less fatigues. Physical ability that stuns do so for one extra round. Galloping gains +10% evasion. Double the momentum bonus from Galloping.\n");
 			outputText("-New mutation perk: Fiendish Balls (Final Form). Req. Fiendish Balls (Evolved) and lvl 90+. Effects: Increase Virility by 100%, Increase cum production by 100%, gain a bonus to tease against females based on your cum production up to 50%. All attacks involving your penis are 300% stronger.\n");
 			outputText("-New mutation perk: Fiendish Metabolism (Final Form). Req. Fiendish Metabolism (Evolved) and lvl 90+. Effects: You may no longer gain nourishment from anything short of cum, milk and girl juice. If you have the demonic hunger perk, gain a stacking bonus of 10% to tease damage up to 200%. You may gain Fiendish metabolism bonus even without demonic hunger but gain half of the bonus. ");
 			outputText("Gain immunity to all fluid negative effects and allow you to feed from sexual fluids. Satisfying your crave for sex also raises your spell power for an amount equivalent to the tease damage bonus granted by this mutation. Double all recovery from demonic hunger.\n");
 			outputText("-New mutation perk: Fiendish Ovaries (Final Form). Req. Fiendish Ovaries (Evolved) and lvl 90+. Effects: ncrease Fertility by 100%, all born children from your womb will either be born as imps or greatly corrupted, while pregnant with imps tease is 50% stronger. May benefit from pregomania when pregnant with imps.\n");
 			outputText("-New mutation perk: Goblin Ovaries (Final Form). Req. Goblin Ovaries (Evolved) and lvl 90+. Effects: Increase fertility rating by 40, While pregnant increase total libido by 40%. Double the number of kids you birth. Increase physical damage done while pregnant by 50%. Lust damage against male opponents increased by 50%. Add your fertility score as a bonus to libido.\n");
+			outputText("-New mutation perk: Mighty Legs (Final Form). Req. Mighty Legs (Evolved) and lvl 90+. Effects: Make Kick permanent no matter your leg type, Increase unarmed strike damage by 20 and grapple effect by 80%. Kick is 150% stronger. Kick stun lasts 1 round longer. Straddle and Grapples duration is extended by 1 additional round.\n");
+			outputText("-New mutation perk: Mighty Lower Half (Final Form). Req. Mighty Lower Half (Evolved) and lvl 90+. Effects: Tentacle and tail attack deals 100% more damage. Increase unarmed strike damage by 20 and grapple effect by 80%. Grapple damage gains 150% more bonus from your strength. Racial physical ability stun lasts 1 round longer. Straddle and Grapples duration is extended by 1 additional round.\n");
 			outputText("-New key Item (by Liadri): Upgraded Armor plating 4.0 - req. Upgraded Armor plating 3.0 - +20 armor/magic resistance to the mech. +80% Health.\n");
 			outputText("-New key Item (by Liadri): Upgraded Armor plating 5.0 - req. Upgraded Armor plating 4.0 - +25 armor/magic resistance to the mech. +100% Health.\n");
 			outputText("-New key Item (by Liadri): Upgraded Armor plating 6.0 - req. Upgraded Armor plating 5.0 - +30 armor/magic resistance to the mech. +120% Health.\n");
@@ -121,6 +132,8 @@ public class Changelog extends BaseContent
 			outputText("-New key Item (by Liadri): Improved Ammo Chemistry MK5 - req. Improved Ammo Chemistry MK4 - Add five extra attacks to the mech ranged weapon. Ammo now has an incendiary property dealing doubled damage as fire. Ammo now has a caustic property dealing tripled damage as acid.\n");
 			outputText("-New key Item (by Liadri): Improved Ammo Chemistry MK6 - req. Improved Ammo Chemistry MK5 - Add six extra attacks to the mech ranged weapon. Ammo now has an incendiary property dealing doubled damage as fire. Ammo now has a caustic property dealing tripled damage as acid.\n");
 			outputText("-New range weapon (by Liadri): Sagittarius Baneful Great Bow - obtained by finding it at Plains. 260 atk, costing 13000 gems, no accuracy penalty, is low-grade wrath weapon, can't be unequiped normal way and would require visting NPC that can help uncurse items. Similary to Tome of Imps would gradualy change PC into male/herm centuar.\n");
+			outputText("-New necklace (by Ormael): Skull Necklace - buyable at Felix in Journey to the East inn. Cost 50 spirit stones. +5%/-5% regeneration (undead / others)\n");
+			outputText("-New head jewelery/accesory/misc (by Ormael): Skull Crown - buyable at Felix in Journey to the East inn. Cost 40 spirit stones. +4%/-4% regeneration (undead / others)\n");
 			outputText("-New flying sword: Moonlight Duo - combined from two Moonlight swords. Cost 160 spirit stones. Base atk is 16. It's classified as Small flying sword (set of 2). Increase chance of bleed effect by 15%. \n");
 			outputText("-New flying sword: Moonlight Quartet - combined from two Moonlight Duo sword sets. Cost 320 spirit stones. Base atk is 32. It's classified as Small flying sword (set of 4). Increase chance of bleed effect by 15%.\n");
 			outputText("-New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies. Using this item will turn PC into troll. Troll bonuses at 10 pts in racial score (scalable): +30% to Str multi, +30% to Tou multi, +20% to Spr multi, +20% to Int multi, +60% to Wis multi, +20 to max tone cap, +50 to max satiety.\n");
@@ -132,6 +145,8 @@ public class Changelog extends BaseContent
 			outputText("-New P. Special: Feint Bash. Usable by Troll/Glacial Troll with Troll/Glacial Troll face. Cost 25 fatigue and can stun for 3 turns. Have 5 turns cooldown after use.\n");
 			outputText("-New P. Special: Savage Claws. Usable by Glacial Troll with Glacial Troll arms. Cost 100 fatigue.\n");
 			outputText("-New P. Special: Gallop. Can be only used when having legs ending in hooves (not cloven hooves). Effects: Run at high speed across the battlefield evading melee combat but not ranged attack, does not disable P.Special but prevents the use of the regular melee attack action. While galloping all P.Special abilities are 50% stronger due to momentum. Galloping costs fatigue every round.\n");
+			outputText("-New M. Special: Tech Overdrive. Usable by having Tech Overdrive perk. Cost 40 mana. Increase by 20(+20per ng tier) atk of melee or range tech wepaons, add 20% to mech onboard weapons dmg, lower physical def by 50%. It would last for 10 turns.\n");
+			outputText("-New M. Special: Malfunction. Usable by been gremlin-kin. Cost 40 mana and can stun for 6 turns. Have 10 turns cooldown after use. Overload a magitech or construction, causing damage and immobilizing it for a while. Does not work on living things or sentient constructs.\n");
 			outputText("-Centaur race score calculations was slight changed and can have now additionaly 3rd / 4th tier of race bonuses - Elder Centaur / True Centaur: +100 / +140 Strength +80 / +100 Toughness +175 / +185 Speed +80 / +100 Libido +75 Sens +350 / +500 Hp\n");
 			outputText("-Natural Instincts & Tough Hide perks req. of Job: Beast Warrior changed to req. perk Job: Feral Champion. Natural arsenal effect increased from +50% to +100%. Feral Armor req. for tou stat lowered from 60 to 50.\n");
 			outputText("-Venomous Adipose Tissue & Venomous Diet perks have additional req. of having perk Job: Feral Champion.\n");
@@ -186,7 +201,6 @@ public class Changelog extends BaseContent
 			//outputText("-New HB Mech upgrade options: Armor Plating (+armor), Leather Insulation (+magic resistance), Agility (+base melee atk dmg), Dragon's Breath Flamer (fire dmg special), Scatter Laser (lightning dmg special), Rapid Reload (+base ranged atk dmg), Internal Systems (increase mech SF capacity and lower it consumption during high activity)\n");
 			//outputText(", Camouflage Mode (allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials), Invisibility Mode (the same as Camouflage Mode but can last until PC run out of SF to keep it active or deactivate it manualy / upgrade to decrease SF consumption)");
 			outputText("-New melee weapon (by Liadri): Machine Spear - craftable at goblin workshop (3 metal pieces, 200 nails, 1 energy core, 2 mechanisms and BP). Cost 2720 gems, have 19 atk, have 100% armor penetration and increases critical damage by +25%\n");
-			outputText("-New event perk: Vocal Tactician. Gained by having 15 Vocal Training sessions with Charybdis. Effects: Minion and Follower Damage increased by another 15%. Followers will act even more frequently.\n");
 			outputText("-Motivation (Su) perk have added in desc potential synergy with other perk to allow henchman attack 3 times per turn.\n");
 			outputText("-After clearing Deep Cave (Zetaz dungeon) can meet at Beach are Charybris - male scylla. He have various interactions and could even train pc stats (str/spe/tou) up to their limits or give vocal trainings to give some perks that would help with commanding minions/henchmen. Can only bring demon skulls to him to get some gems for them.\n");
 			outputText("-Tyrantia traiing cap now is increased (30 > 40).\n");
@@ -214,8 +228,6 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Human Metabolism. Req. having free metabolism mutation slot, human race (17+). Effect: Your metabolism changes allowing to slowly detoxification of poisons (10% chance to instantly remove some of toxic substance from body, -1% of lust per turn)\n");
 			outputText("-New mutation perk: Human Digestive Tract (Primitive). Req. Human Digestive Tract and lvl 30+. Effects: Your digestive tract improved allowing to get better nurishment from all the ingested substances (+30%). Increase limit when PC gain weight from eating too much by 25.\n");
 			outputText("-New mutation perk: Human Metabolism (Primitive). Req. Human Metabolism and lvl 30+. Effects: Your metabolism changes allowing to slowly detoxification of poisons (20% chance to instantly remove some of toxic substance from body, -2% of lust per turn, 2x shorter elemental dot effects duration)\n");
-			outputText("-New necklace (by Ormael): Skull Necklace - buyable at Felix in Journey to the East inn. Cost 50 spirit stones. +5%/-5% regeneration (undead / others)\n");
-			outputText("-New head jewelery/accesory/misc (by Ormael): Skull Crown - buyable at Felix in Journey to the East inn. Cost 40 spirit stones. +4%/-4% regeneration (undead / others)\n");
 			outputText("-Etna venom effect and kitsune residue magic on increasing cum multiplier have been increase to reach 50% more then before (from cap of 10k to 15k). It would also show bolded part of scene text when the effect of venom trigger.\n");
 			outputText("-Soulforce resource is replaced by different one for PC that have Soulless perk: Demonic Energy. It caps at 50 + 10*level. Can be used for different bonuses. DE can be gained from eating lethicite type item. Lethicite item was renamed to Lesser Lethicite.\n");
 			outputText("-Horse face sprite (by Liadri) implementation. (Lord Shadeogorath)\n");
@@ -253,8 +265,6 @@ public class Changelog extends BaseContent
 			outputText("-Small changes to make sure Francesca's Black Cloak will not remove on unequip Misdirection from raphael training (whenever it was permed or not yet).\n");
 			outputText("-Gremlin race score calculations slight update and bonuses changes to all tiers. First one renamed to gremlin-kin, 2nd into gremlin and added 3rd arch gremlin. 2nd (24+) and 3rd (36+) tier req. now soulless perk and their bonuses are as follow: -50% to str multi, +100%/+160% to spe multi, +180%/+250% to int multi, +150%/+200% to lib multi, +30 min lust, +20 Sens\n");
 			outputText("-New event perk: Tech Overdrive. Gained by been gremlin-kin. Effects: Empower your technological equipment, causing it to deal increased damage but weaken your defenses as a result.\n");
-			outputText("-New M. Special: Tech Overdrive. Usable by having Tech Overdrive perk. Cost 40 mana. Increase by 20(+20per ng tier) atk of melee or range tech wepaons, add 20% to mech onboard weapons dmg, lower physical def by 50%. It would last for 10 turns.\n");
-			outputText("-New M. Special: Malfunction. Usable by been gremlin-kin. Cost 40 mana and can stun for 6 turns. Have 10 turns cooldown after use. Overload a magitech or construction, causing damage and immobilizing it for a while. Does not work on living things or sentient constructs.\n");
 			outputText("-Lust immunity fix & preg fix. (Svalkash)\n");
 			outputText("-Lowered the chance of common (imp-gob-goleems) encountered in Forest, Mountain and Plains to 1/4 of the previous value. Averange typo fixed. (Svalkash)\n");
 			outputText("-Fixed: Kitsune tail tangle not working as intended, kits->kids, kid a goblin scene being hard to get. (Svalkash)\n");
@@ -281,29 +291,26 @@ public class Changelog extends BaseContent
 			outputText("-Default firearms dmg calculation from weapon atk increased (2x > 10x) and scaling off wis/int/spe (instead of core values to use scaling functions).\n");
 			outputText("-Changed order of discovered areas with Lake been first founded then Forest (O).\n");
 			outputText("-Fixes a quality of life issue where pressing down the mouse button and then moving the mouse off of a button before releasing the mouse button still clicks/activates the button. (Edward Darksong)\n");
-			outputText("-New mutation perk: Mighty Lower Half. Req. having free adaptation mutation slot, one of races: Kangaro, Bunny, Easter Bunny, Frog, Horse Morph, Centaur(The original centaur not the other ones), Cow, Minotaur, Scylla, Naga, Gorgon, Couatl, Vouivre, Apophis, Frostwyrm, Jabberwocky. Effects: Make Kick permanent no matter your leg type, Increase unarmed strike damage by 5 and grapple effect by 20%.\n");
-			outputText("-New mutation perk: Mighty Lower Half (Primitive). Req. Mighty Lower Half and lvl 30+. Effects: Make Kick permanent no matter your leg type, Increase unarmed strike damage by 10 and grapple effect by 40%. Kick is 50% stronger.\n");
-			outputText("-New mutation perk: Mighty Lower Half (Evolved). Req. Mighty Lower Half (Primitive) and lvl 60+. Effects: Make Kick permanent no matter your leg type, Increase unarmed strike damage by 15 and grapple effect by 60%. Kick is 100% stronger. Kick stun lasts 1 round longer.\n");
-			outputText("-New mutation perk: Mighty Lower Half (Final Form). Req. Mighty Lower Half (Evolved) and lvl 90+. Effects: Make Kick permanent no matter your leg type, Increase unarmed strike damage by 20 and grapple effect by 80%. Kick is 150% stronger. Kick stun lasts 1 round longer. Straddle and Grapples duration is extended by 1 additional round.\n");
-			outputText("-New tier 12 speed lvl-up perk: Arrow Storm. Req. Cupid perk. Effect: After striking a target each shot has a chance to pierce through and do a U-Turn to pierce the target again.\n");
-			outputText("-New tier 13 speed lvl-up perk: Phantom Arrow. Req. Arrow Storm perk. Effect: By expending mana on each shot you create a copy of each of your arrows made of pure mana that replicate the trajectories of previous shots. Phantom arrows can trigger arrow storm.\n");
 			outputText("-Fixed Hel loss scenes being broken. Fixed lizan rogue win corruption check being too low for rape. Fixed Electra not asking for recruitment when accessed from SoulSense menu. Minor typo/grammar fixes. (Svalkash)\n");
 			outputText("-Adds a newer race menu UI using buttons in place of text links for all the races, along side a button to switch from new UI to old UI and back. Hovering over a race displays any bonuses you are currently getting from that race, if any. And clicking on a race will switch to another 'screen' displaying all the race's requirements, stats and stuff like in the old UI. (Edward Darksong)\n");
 			outputText("-New mutation perk: Hydra Blood. Req. having free bloodstream mutation slot, Hydra race and Hydra Regeneration perk. Effects: Improve existing Regeneration by 1% negated by fire damage.\n");
 			outputText("-New mutation perk: Drake Blood. Req. having free bloodstream mutation slot, Frost Wyrm, Sea Dragon and Jabberwocky race. Effects: Dragon strong vitality grants mana, soulforce and health regeneration 1%.\n");
 			outputText("-New mutation perk: Drake Blood (Primitive). Req. Drake Blood and lvl 30+. Effects: Dragon strong vitality grants mana soulforce and health regeneration 2%. You take 5% less damage from magical attack.\n");
-			outputText("-Bunny race get new racial bonuses tier - Laquine (13+): -10% to tou multi, +100% to spe multi, +105% to lib multi\n");
-			outputText("-Eastern Bunny get new racial bonuses tier - True Easter Laquine (20+): -20% to str multi, -10% to tou multi, +130% to spe multi, +200% to lib multi\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Bunny race get new racial bonuses tier - Greater Bunny (13+): -10% to tou multi, +100% to spe multi, +105% to lib multi\n");
+			outputText("-Eastern Bunny get new racial bonuses tier - Greater Easter Bunny (20+): -20% to str multi, -10% to tou multi, +130% to spe multi, +200% to lib multi\n");
+			outputText("-Ascension: Trancendental Genetic Memory perk can attain 2 more ranks for even more slots to perm metamorph options.\n");
+			outputText("-New TF item (by Liadri): Flared Carrot. Buyable in Tel'Adre Bakery. Using this item will turn PC into laquine. Laquine / Elder Laquine racial bonuses (12+/20+): +80/150% to str multi, -10/20% to tou multi, +80/120% to spe multi, -20/50% to wis multi, +100/200% to lib multi, +50/100 sens\n");
+			outputText("-New event perk: Laquine Might. Gained by been laquine. Effects: Add 75% of your libido to your strength stat.\n");
+			outputText("-Equine Strength perk can be gained by Laquine PC.\n");
+			outputText("-New tier 0 misc lvl-up perk: (Basic) Job: Tinker. Req. 10+ wisdom and 10+ intelligence. Effect: Increase damage of consumable items / technologic weapons by 5%.\n");
+			outputText("-New tier 2 wisdom lvl-up perk: (Advanced) Job: Artificier. Req. Job: Tinker perk, free advanced job slot and 75+ wisdom. Effect: Increase damage of consumable items / technologic weapons by 15%.\n");
+			outputText("-Ayo Armor Proficiency perk have additional req. of Job: Artificer perk and it desc was slight changed to account for damage reduction depending on whenever armor is powered up or not (10% when unpowered and 20% when powered).\n");
+			outputText("-New tier 4 wisdom lvl-up perk: Conduction Soulforce Charge. Req. Job: Artificier perk and 125+ wisdom. Effect: As long you have sufficient amount of soulforce, expend them to keep Ayo Armor active instead of using internal storage.\n");
+			outputText("-New tier 0 wisdom lvl-up perk: (Basic) Job: Tamer. Req. 10+ wisdom. Effect: Allow to tame 1 beast with feral level of intelligence.\n");
+			outputText("-New tier 0 sensitivity lvl-up perk: (Basic) Job: Esper. Req. 10+ sensitivity. Effect: The same effects as perk Telekinesis (You have the power to wield and throw objects with your mind alone. Gain a bonus to damage based on inteligence when using thrown weapons.)\n");
+			outputText("-Job: All-Rounder req. for sensitivity was increased form 50 to 75 like other stats.\n");
+			outputText("-New type of minions: tamed monsters. Req. Tamer Job and they can be at any time released to be replaced by different one monster. At start only feral enemeis can be tamed and to succeed player must defeat them in combat and then have higher wisdom to successfully tame them. Some perks/items can increase their damage. They would also benefit from effectivness bonus that is applied to any henchman.\n");
+			outputText("-Sceptre of Command and Yogi Uh Panel items effect will affect tamed monsters too.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -321,7 +328,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Lord Shadeogorath) (Furrin Gok) (khovel) (Chibizs) (Svalkash) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Edward Darksong)
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Dracula/lina PC unable to find get ghoul if they not learned this as normal Vampire, unable to buy manual for 1st atk: f. swords, Arigean Princess PC not been fully immune to TF-ing like other perm races, Weresharks not having their stats changing according to moon phase or boosted during use of Crinos Shape, Phoenix TF adding mutagen penatly instead of stat curse, ");
@@ -385,8 +391,21 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -417,10 +436,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

@@ -55,7 +55,7 @@ public final class ShieldLib extends ItemConstants
 		public const SPIH_SH:SpikedHeavyShield = new SpikedHeavyShield();
 		public const SPIL_SH:Shield = new Shield("SpiL Sh", "SpikeLShield", "spiked light shield", "a spiked light shield", 10, 750, "An average-sized shield with spikes.");
 		public const SPIM_SH:SpikedMassiveShield = new SpikedMassiveShield();
-		public const Y_U_PAN:Shield = new Shield("Y.U.Pan", "Y.U.Panel", "Yogi Uh Panel", "an Yogi Uh Panel", 0, 200, "This strange shield helps Summoners and Golemancers store their pets inside an extra dimensional space when out of battle. The shield can then release them through a system of Calling Cards. Apparently it was a widely used tool for summoner battles back in the days which they called duels.");
+		public const Y_U_PAN:Shield = new Shield("Y.U.Pan", "Y.U.Panel", "Yogi Uh Panel", "an Yogi Uh Panel", 0, 200, "This strange shield helps Summoners, Tamers and Golemancers store their pets inside an extra dimensional space when out of battle. The shield can then release them through a system of Calling Cards. Apparently it was a widely used tool for summoner battles back in the days which they called duels.");
 		
 		/*private static function mk(id:String,shortName:String,name:String,longName:String,effectId:Number,effectMagnitude:Number,value:Number,description:String,type:String,perk:String=""):Jewelry {
 			return new Shield(id,shortName,name,longName,effectId,effectMagnitude,value,description,type,perk);

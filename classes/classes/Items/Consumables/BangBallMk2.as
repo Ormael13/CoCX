@@ -8,6 +8,7 @@ package classes.Items.Consumables
 	import classes.PerkLib;
 	//import classes.Monster;
 	import classes.internals.Utils;
+	import classes.Scenes.SceneLib;
 
 	public final class BangBallMk2 extends Consumable {
 		
@@ -33,6 +34,7 @@ package classes.Items.Consumables
 			}
 			else { //Not dodged
 				var damage:Number = 640 + Utils.rand(321);
+				damage = SceneLib.combat.tinkerDamageBonus(damage);
 				if (game.player.level >= 6) {
 					if (game.player.level >= 24) damage *= 3;
 					else damage *= 2;

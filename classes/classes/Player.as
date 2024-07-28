@@ -3208,7 +3208,8 @@ use namespace CoC;
 				mult -= 10;
 			}
 			if (hasPerk(PerkLib.AyoArmorProficiency) && tou >= 100 && isInAyoArmor()) {
-				mult -= 10;
+				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > 0) mult -= 20;
+				else mult -= 10;
 			}
 			if (hasPerk(PerkLib.HeavyArmorProficiency) && tou >= 75 && isInHeavyArmor()) {
 				mult -= 10;
@@ -4539,6 +4540,8 @@ use namespace CoC;
 				basicJobs++;
 			if (hasPerk(PerkLib.JobBeastWarrior))
 				basicJobs++;
+			if (hasPerk(PerkLib.JobEsper))
+				basicJobs++;
 			if (hasPerk(PerkLib.JobGuardian))
 				basicJobs++;
 			if (hasPerk(PerkLib.JobLeader))
@@ -4550,6 +4553,10 @@ use namespace CoC;
 			if (hasPerk(PerkLib.JobSeducer))
 				basicJobs++;
 			if (hasPerk(PerkLib.JobSorcerer))
+				basicJobs++;
+			if (hasPerk(PerkLib.JobTamer))
+				basicJobs++;
+			if (hasPerk(PerkLib.JobTinker))
 				basicJobs++;
 			if (hasPerk(PerkLib.JobWarrior))
 				basicJobs++;
@@ -5728,6 +5735,8 @@ use namespace CoC;
 			if (!hasPerk(PerkLib.LionHeart) && statStore.hasBuff('Lion Heart')) statStore.removeBuffs('Lion Heart');
 			if (hasPerk(PerkLib.EquineStrength)) statStore.replaceBuffObject({'str.mult':Math.round((speStat.mult.value+libStat.mult.value)/4)}, 'Equine Strength', { text: 'Equine Strength' });
 			if (!hasPerk(PerkLib.EquineStrength) && statStore.hasBuff('Equine Strength')) statStore.removeBuffs('Equine Strength');
+			if (hasPerk(PerkLib.LaquineMight)) statStore.replaceBuffObject({'str.mult':Math.round(libStat.mult.value*0.75)}, 'Laquine Might', { text: 'Laquine Might' });
+			if (!hasPerk(PerkLib.LaquineMight) && statStore.hasBuff('Laquine Might')) statStore.removeBuffs('Laquine Might');
 			if (hasPerk(PerkLib.WisdomoftheAges)) statStore.replaceBuffObject({'str.mult':Math.round(((intStat.mult.value/2)+(wisStat.mult.value/2))),'tou.mult':Math.round(((intStat.mult.value/2)+(wisStat.mult.value/2)))}, 'Wisdom of the Ages', { text: 'Wisdom of the Ages' });
 			if (!hasPerk(PerkLib.WisdomoftheAges) && statStore.hasBuff('Wisdom of the Ages')) statStore.removeBuffs('Wisdom of the Ages');
 			if (hasPerk(PerkLib.DeathPriest)) statStore.replaceBuffObject({'int.mult':Math.round(wisStat.mult.value)}, 'Death Priest', { text: 'Death Priest' });
@@ -7803,4 +7812,4 @@ use namespace CoC;
 		}
 		
 	}
-}
+}

@@ -50,7 +50,7 @@ public class HorseRace extends Race {
 				.isNotTaur(0, -7);
 		
 		addMutation(IMutationsLib.EquineMuscleIM);
-		addMutation(IMutationsLib.MightyLowerHalfIM);
+		addMutation(IMutationsLib.MightyLegsIM);
 		
 		buildTier(7, "equine-morph")
 				.buffs({

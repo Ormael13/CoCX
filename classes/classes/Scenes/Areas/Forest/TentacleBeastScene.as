@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.Areas.Forest{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class TentacleBeastScene extends BaseContent{
@@ -121,8 +122,8 @@ private function startTentacleBeastCombat():void {
 		outputText("  Perhaps you could use it to sate yourself?");
 		addButtonIfTrue(0, "Dick Rape", dickRape, "Req. a dick", player.hasCock());
 		addButtonIfTrue(1, "MilkTentacle", milkTent, "Req. a vagina", player.hasVagina());
-		addButtonIfTrue(2, "Brutal Fuck", brutalFuck, "Req. a vagina and high corruption",
-			player.hasVagina() && player.cor >= 66 - player.corruptionTolerance);
+		addButtonIfTrue(2, "Brutal Fuck", brutalFuck, "Req. a vagina and high corruption", player.hasVagina() && player.cor >= 66 - player.corruptionTolerance);
+		addButtonIfTrue(3, "Tame It", tameTentacleBeast, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
 		addButton(4, "Leave", cleanupAfterCombat);
 	}
 
@@ -859,6 +860,7 @@ private function tentacularGenderGooTimes():void {
 public function choiceofaction():void {
 	menu();
 	addButton(0, "Kill It", killTentacleBeast);
+	addButtonIfTrue(3, "Tame It", tameTentacleBeast, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
 	addButton(4, "Leave", cleanupAfterCombat);
 }
 private function killTentacleBeast():void {
@@ -866,6 +868,10 @@ private function killTentacleBeast():void {
 	outputText("\nYou put the misshapen creature out of its misery and carve out a tentacle as proof of your deed.\n");
 	if (player.cor < 25) dynStats("cor", -0.5);
 	inventory.takeItem(useables.SEVTENT, cleanupAfterCombat);
+}
+private function tameTentacleBeast():void {
+	clearOutput();
+	SceneLib.camp.campMake.tamingAttempt();
 }
 
 //Special scene for Ebon Labyrinth.

@@ -62,7 +62,7 @@ public class CentaurRace extends Race {
 		
 		addMutation(IMutationsLib.TwinHeartIM, +2);
 		addMutation(IMutationsLib.EquineMuscleIM);
-		addMutation(IMutationsLib.MightyLowerHalfIM);
+		addMutation(IMutationsLib.MightyLegsIM);
 		
 		buildTier(8, "lesser centaur")
 				.buffs({

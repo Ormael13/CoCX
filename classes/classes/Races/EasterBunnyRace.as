@@ -6,6 +6,8 @@ import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
+import classes.VaginaClass;
+
 public class EasterBunnyRace extends Race {
     public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
@@ -40,7 +42,7 @@ public class EasterBunnyRace extends Race {
 		
 		addScores()
 				.faceType(ANY(Face.BUNNY,Face.BUCKTEETH), +1)
-				.earType(Ears.BUNNY, +1, -1000)
+				.earType(Ears.BUNNY, +1, -10)
 				.legType(LowerBody.BUNNY, +1)
 				.skinCoatType(Skin.FUR, +1)
 				.tailType(Tail.RABBIT, +1)
@@ -50,13 +52,18 @@ public class EasterBunnyRace extends Race {
 				.noWings(+1)
 				.height(LESS_THAN(72), +1)
 				.hasCockOfType(CockTypesEnum.HUMAN, +1)
-				.customRequirement("","Easter bunny balls",
+				.customRequirement("","No horse cock",
 						function (body:BodyData): Boolean {
-							return body.player.hasPerk(PerkLib.EasterBunnyBalls) && body.hasBalls
-						}, +1);
+							return body.player.horseCocks() < 1
+						}, 0, -10)
+				.customRequirement("","No equine vagina",
+						function (body:BodyData): Boolean {
+							return !body.player.vaginaType() != VaginaClass.EQUINE
+						}, 0, -10)
+				.hasPerk(PerkLib.EasterBunnyBalls, +1);
 		
 		addMutation(IMutationsLib.EasterBunnyEggBagIM);
-		addMutation(IMutationsLib.MightyLowerHalfIM);
+		addMutation(IMutationsLib.MightyLegsIM);
 		
 		buildTier(12, "easter bunny")
 				.namesMaleFemale("easter bunny-boy", "easter bunny-girl")
@@ -80,8 +87,8 @@ public class EasterBunnyRace extends Race {
 				})
 				.end();
 		
-		buildTier(20, "true easter laquine")
-				.namesMaleFemale("true easter laquine-boy", "true easter laquine-girl")
+		buildTier(20, "greater easter bunny")
+				.namesMaleFemale("greater easter bunny-boy", "greater easter bunny-girl")
 				.requirePreviousTier()
 				.buffs({
 					"str.mult": -0.20,
