@@ -516,6 +516,12 @@ public class PerkLib
 		public static const ThreeTimesATame:PerkType = mk("Three times a tame", "Three times a tame",
 				"Now you can control 3 monsters at the same time.",
 				"You've chosen the 'Three times a tame' perk. Now you can control 3 monsters at the same time.");
+		public static const FourthTamerOfTheApocalypse:PerkType = mk("Fourth Tamer of the Apocalypse", "Fourth Tamer of the Apocalypse",
+				"Now you can assemble 4 horsema... monsters team.",
+				"You've chosen the 'Fourth Tamer of the Apocalypse' perk. Now you can assemble 4 horsema... monsters team.");
+		public static const WorkingTogether:PerkType = mk("Working Together", "Working Together",
+				"Cooperating your tamed monsters would empower the one attacking. (+1x to dmg multi of attacking monster per tamed monster after 1st)",
+				"You've chosen the 'Working Together' perk. Cooperating your tamed monsters would empower the one attacking. (+1x to dmg multi of attacking monster per tamed monster after 1st)");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -523,6 +529,12 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
+		public static const EmpoweredTaming:PerkType = mk("Empowered Taming", "Empowered Taming",
+				"During taming monster it wisdom is treated as if it was 80% lower.",
+				"You've chosen the 'Empowered Taming' perk. During taming monster it wisdom is treated as if it was 80% lower.");
+		public static const StrongerTamedMosters:PerkType = mk("Stronger Tamed Mosters", "Stronger Tamed Mosters",
+				".",
+				"You've chosen the 'Stronger Tamed Mosters' perk. .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk.");
@@ -6487,6 +6499,9 @@ public class PerkLib
             Beast02.requireLevel(6)
                     .requirePerk(JobTamer)
                     .requireWis(50);
+            WorkingTogether.requireLevel(6)
+                    .requirePerk(Beast02)
+                    .requireWis(55);
             InsightfulResourcesI.requireLevel(6)
                     .requireWis(50)
                     .requirePerk(JobSoulCultivator);
@@ -6538,6 +6553,9 @@ public class PerkLib
             ThreeTimesATame.requireLevel(12)
                     .requirePerk(Beast02)
                     .requireWis(75);
+//            StrongerTamedMosters.requireLevel(12)
+//                    .requirePerk(ThreeTimesATame)
+//                    .requireWis(80);
             InsightfulResourcesIV.requireLevel(12)
                     .requirePerk(InsightfulResourcesIII)
                     .requireWis(110)
@@ -6605,6 +6623,9 @@ public class PerkLib
 					.requirePerk(JobTinker)
                     .requireWis(75);
             //Tier 3 Wisdom perks
+            FourthTamerOfTheApocalypse.requireLevel(18)
+                    .requirePerk(ThreeTimesATame)
+                    .requireWis(100);
             ElementalContractRank4.requirePerk(ElementalContractRank3)
                     .requireWis(100)
                     .requireLevel(18);
@@ -6642,6 +6663,9 @@ public class PerkLib
                     .requireSpe(30)
                     .requireLevel(18);
             //Tier 4 Wisdom perks
+//            EmpoweredTaming.requireLevel(24)
+//                    .requirePerk(Beast02)
+//                    .requireWis(130);
 //            ComboMaster.requirePerk(Combo)
 //                    .requireWis(125)
 //                    .requireSpe(100)

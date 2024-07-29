@@ -23,13 +23,11 @@ package classes.Scenes.Areas.GlacialRift
 			menu();
 			if (player.lust >= 33) {
 				addButtonIfTrue(0, "RideHisCock", rideWinterWolfsCock, "", player.hasVagina());
-				addButton(14, "Leave", cleanupAfterCombat);
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstWinterWolf);
 			}
-			else {
-				outputText("You aren't aroused enough to fuck him.");
-				cleanupAfterCombat();
-			}
+			else outputText("You aren't aroused enough to fuck him.");
+			addButtonIfTrue(12, "Tame It", SceneLib.camp.campMake.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
+			addButton(14, "Leave", cleanupAfterCombat);
 		}
 		
 		private function getFuckedByWinterWolfDoggyStyle():void {

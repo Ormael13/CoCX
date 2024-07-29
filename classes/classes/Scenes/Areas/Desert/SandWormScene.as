@@ -4,6 +4,7 @@ import classes.*;
 import classes.BodyParts.Skin;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
+import classes.Scenes.SceneLib;
 
 public class SandWormScene extends BaseContent
 {
@@ -114,7 +115,9 @@ public class SandWormScene extends BaseContent
 	public function beatSandWorm():void {
 		clearOutput();
 		outputText("Too "+(monster.HP <= monster.minHP() ? "wounded":"aroused") + " to keep on fighting, the sand worm digs underground, escaping the battleground. [if (silly)Geeze you hate it when low budget actors flee the battlefield before you rape them!][pg]");
-		cleanupAfterCombat();
+		menu();
+		addButtonIfTrue(3, "Tame It", SceneLib.camp.campMake.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
+		addButton(4, "Leave", cleanupAfterCombat);
 	}
 
 }

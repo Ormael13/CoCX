@@ -28,6 +28,8 @@ public class CampMakeWinions extends BaseContent
 		public var tameMonster02FlightCapable:Boolean = false;
 		public var tameMonster03:String = "";
 		public var tameMonster03FlightCapable:Boolean = false;
+		public var tameMonster04:String = "";
+		public var tameMonster04FlightCapable:Boolean = false;
 		private function playerAlreadyHaveAnyTamedMonster():Boolean {
 			if (player.hasStatusEffect(StatusEffects.TamedMonster01) || player.hasStatusEffect(StatusEffects.TamedMonster02) || player.hasStatusEffect(StatusEffects.TamedMonster03)) return true;
 			else return false;
@@ -43,12 +45,22 @@ public class CampMakeWinions extends BaseContent
 			var cTC:Number = 1;
 			if (player.hasPerk(PerkLib.Beast02)) cTC += 1;
 			if (player.hasPerk(PerkLib.ThreeTimesATame)) cTC += 1;
+			if (player.hasPerk(PerkLib.FourthTamerOfTheApocalypse)) cTC += 1;
 			return cTC;
 		}
 		private function playerWisdomCheck():Number {
 			var pWc:Number = player.wis;
 			if (player.hasPerk(PerkLib.BeastKnowledge)) pWc += player.wis;
 			return pWc;
+		}
+		private function monsterWisdomCheck():Number {
+			var mWc:Number = monster.wis;
+			var mWc1:Number = 1;
+			if (!monster.hasPerk(PerkLib.EnemyFeralType) && !monster.hasPerk(PerkLib.EnemyTrueDemon)) mWc1 *= 10;
+			//if (player.hasPerk(PerkLib.EmpoweredTaming)) mWc1 *= 0.2;
+			if (mWc1 < 1) mWc1 = 1;
+			mWc *= mWc1;
+			return mWc;
 		}
 		public function accessTamedWinionsMainMenu():void {
 			clearOutput();
@@ -70,6 +82,12 @@ public class CampMakeWinions extends BaseContent
 				else outputText("None");
 				addButtonIfTrue(2, "No3", curry(tamingAttemptRelease, 3, true), "You not have tamend monster No3", player.hasStatusEffect(StatusEffects.TamedMonster03), "Release Monster No3");
 			}
+			if (player.hasPerk(PerkLib.FourthTamerOfTheApocalypse)) {
+				outputText("\n<b>Tamed Monster No4:</b> ");
+				if (player.hasStatusEffect(StatusEffects.TamedMonster04)) outputText(tameMonster04+"\n(Atk: "+player.statusEffectv1(StatusEffects.TamedMonster04)+", Str: "+player.statusEffectv2(StatusEffects.TamedMonster04)+", Tou: "+player.statusEffectv3(StatusEffects.TamedMonster04)+", Can Fly: "+(tameMonster04FlightCapable?"Yes":"No")+")");
+				else outputText("None");
+				addButtonIfTrue(3, "No4", curry(tamingAttemptRelease, 4, true), "You not have tamend monster No4", player.hasStatusEffect(StatusEffects.TamedMonster04), "Release Monster No4");
+			}
 			addButton(14, "Back", camp.campWinionsArmySim);
 		}
 		public function tamingAttempt():void {
@@ -81,12 +99,13 @@ public class CampMakeWinions extends BaseContent
 				addButtonIfTrue(2, "Release 01", curry(tamingAttemptRelease, 1), "You not have any tamed monster No1.", player.hasStatusEffect(StatusEffects.TamedMonster01), "Release Monster No1.");
 				if (player.hasPerk(PerkLib.Beast02)) addButtonIfTrue(3, "Release 02", curry(tamingAttemptRelease, 2), "You not have any tamed monster No2.", player.hasStatusEffect(StatusEffects.TamedMonster02), "Release Monster No2.");
 				if (player.hasPerk(PerkLib.ThreeTimesATame)) addButtonIfTrue(4, "Release 03", curry(tamingAttemptRelease, 3), "You not have any tamed monster No3.", player.hasStatusEffect(StatusEffects.TamedMonster03), "Release Monster No3.");
+				if (player.hasPerk(PerkLib.FourthTamerOfTheApocalypse)) addButtonIfTrue(5, "Release 04", curry(tamingAttemptRelease, 4), "You not have any tamed monster No4.", player.hasStatusEffect(StatusEffects.TamedMonster04), "Release Monster No4.");
 			}
 			else tamingAttemptYes();
 		}
 		public function tamingAttemptYes():void {
 			outputText("With [themonster] weakened, you deftly approach in attempt to tame it to your side. Avoiding any chance at being harmed, you put your skills to the test, using every trick and item available to subdue [monster him] in order to have a much more manageable companion. ");
-			if (playerWisdomCheck() > monster.wis) {
+			if (playerWisdomCheck() > monsterWisdomCheck()) {
 				outputText("Fortunately, after some effort, you manage to successfully claim a new ally, at least for now.");
 				var onlyOneTamingAtTime:Boolean = false;
 				if (!player.hasStatusEffect(StatusEffects.TamedMonster01)) {
@@ -139,28 +158,31 @@ public class CampMakeWinions extends BaseContent
 
 		public function tamedMonstersMenu():void {
 			menu();
-			var mons:String = "";
 			if (player.hasStatusEffect(StatusEffects.TamedMonster01)) {
-				mons = tameMonster01;
-				if (monster.isFlying() || monster.flyer) addButtonIfTrue(0, "No1", curry(tamedMonsterAttack, 1, mons), "Your tamed monster can't attack flying enemy.", !tameMonster01FlightCapable, "Use tamed monster No1.");
-				else addButton(0, "No1", curry(tamedMonsterAttack, 1, mons)).hint("Use tamed monster No1.");
+				if (monster.isFlying() || monster.flyer) addButtonIfTrue(0, "No1", curry(tamedMonsterAttack, 1), "Your tamed monster can't attack flying enemy.", !tameMonster01FlightCapable, "Use tamed monster No1.");
+				else addButton(0, "No1", curry(tamedMonsterAttack, 1)).hint("Use tamed monster No1.");
 			}
 			else addButtonDisabled(0, "No1", "You not have tamed monster No1.");
 			if (player.hasPerk(PerkLib.Beast02)) {
 				if (player.hasStatusEffect(StatusEffects.TamedMonster02)) {
-					mons = tameMonster02;
-					if (monster.isFlying() || monster.flyer) addButtonIfTrue(1, "No2", curry(tamedMonsterAttack, 2, mons), "Your tamed monster can't attack flying enemy.", !tameMonster02FlightCapable, "Use tamed monster No2.");
-					else addButton(1, "No2", curry(tamedMonsterAttack, 2, mons)).hint("Use tamed monster No2.");
+					if (monster.isFlying() || monster.flyer) addButtonIfTrue(1, "No2", curry(tamedMonsterAttack, 2), "Your tamed monster can't attack flying enemy.", !tameMonster02FlightCapable, "Use tamed monster No2.");
+					else addButton(1, "No2", curry(tamedMonsterAttack, 2)).hint("Use tamed monster No2.");
 				}
 				else addButtonDisabled(1, "No2", "You not have tamed monster No2.");
 			}
 			if (player.hasPerk(PerkLib.ThreeTimesATame)) {
 				if (player.hasStatusEffect(StatusEffects.TamedMonster03)) {
-					mons = tameMonster03;
-					if (monster.isFlying() || monster.flyer) addButtonIfTrue(2, "No3", curry(tamedMonsterAttack, 3, mons), "Your tamed monster can't attack flying enemy.", !tameMonster03FlightCapable, "Use tamed monster No3.");
-					else addButton(2, "No3", curry(tamedMonsterAttack, 3, mons)).hint("Use tamed monster No3.");
+					if (monster.isFlying() || monster.flyer) addButtonIfTrue(2, "No3", curry(tamedMonsterAttack, 3), "Your tamed monster can't attack flying enemy.", !tameMonster03FlightCapable, "Use tamed monster No3.");
+					else addButton(2, "No3", curry(tamedMonsterAttack, 3)).hint("Use tamed monster No3.");
 				}
 				else addButtonDisabled(2, "No3", "You not have tamed monster No3.");
+			}
+			if (player.hasPerk(PerkLib.FourthTamerOfTheApocalypse)) {
+				if (player.hasStatusEffect(StatusEffects.TamedMonster04)) {
+					if (monster.isFlying() || monster.flyer) addButtonIfTrue(3, "No4", curry(tamedMonsterAttack, 4), "Your tamed monster can't attack flying enemy.", !tameMonster04FlightCapable, "Use tamed monster No4.");
+					else addButton(3, "No4", curry(tamedMonsterAttack, 4)).hint("Use tamed monster No4.");
+				}
+				else addButtonDisabled(3, "No4", "You not have tamed monster No4.");
 			}
 			addButton(14, "Back", SceneLib.combat.combatMenu, false);
 		}
@@ -173,7 +195,7 @@ public class CampMakeWinions extends BaseContent
 			if (player.hasPerk(PerkLib.VocalTactician)) dmgamp += 0.15;
 			return dmgamp;
 		}
-		public function tamedMonsterAttack(no:Number, mon:String = ""):void {
+		public function tamedMonsterAttack(no:Number):void {
 			clearOutput();
 			var weapon:Number = 0;
 			var dmg:Number = 0;
@@ -189,14 +211,24 @@ public class CampMakeWinions extends BaseContent
 				weapon += player.statusEffectv1(StatusEffects.TamedMonster03);
 				dmg += SceneLib.combat.scalingBonusStrengthTamedMonster(3);
 			}
+			if (no == 4) {
+				weapon += player.statusEffectv1(StatusEffects.TamedMonster04);
+				dmg += SceneLib.combat.scalingBonusStrengthTamedMonster(4);
+			}
 			if (weapon < 51) dmg *= (1 + (weapon * 0.03));
 			else if (weapon >= 51 && weapon < 101) dmg *= (2.5 + ((weapon - 50) * 0.025));
 			else if (weapon >= 101 && weapon < 151) dmg *= (3.75 + ((weapon - 100) * 0.02));
 			else if (weapon >= 151 && weapon < 201) dmg *= (4.75 + ((weapon - 150) * 0.015));
 			else dmg *= (5.5 + (weapon * 0.01));
 			dmg *= dmgamp_tamed_monsters();
+			if (player.hasPerk(PerkLib.WorkingTogether) && currentTamedMonstersCount() > 1) dmg *= currentTamedMonstersCount();
 			dmg = Math.round(dmg * SceneLib.combat.comfoll.increasedEfficiencyOfAttacks());
-			outputText("Your tamed "+mon+" attacks [themonster]. ");
+			outputText("Your tamed ");
+			if (no == 1) outputText("" + tameMonster01 + "");
+			if (no == 2) outputText("" + tameMonster02 + "");
+			if (no == 3) outputText("" + tameMonster03 + "");
+			if (no == 4) outputText("" + tameMonster04 + "");
+			outputText(" attacks [themonster]. ");
 			SceneLib.combat.doDamage(dmg, true, true);
 			outputText("\n\n");
 			SceneLib.combat.enemyAIImpl();
@@ -2826,4 +2858,3 @@ public class CampMakeWinions extends BaseContent
 		}
 	}
 }
-
