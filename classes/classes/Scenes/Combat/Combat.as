@@ -939,7 +939,7 @@ public class Combat extends BaseContent {
             bd = buttons.add("Elem.Asp", buttonFunc, "Use the once-per-battle elemental aspects of your basic elementals.", "Elemental Aspects");
         }
 		if (player.shieldName == "Ancient Conduit") bd = buttons.add("A.Conduit", AncientConduitMenu);
-		if (player.hasPerk(PerkLib.JobTamer)) bd = buttons.add("Tamed Monster(s)", tamedMonstersMenu);
+		if (player.hasPerk(PerkLib.JobTamer)) bd = buttons.add("Tamed Monster(s)", SceneLib.campMakeWinions.tamedMonstersMenu);
 		if (player.hasPerk(PerkLib.PrestigeJobNecromancer) && player.perkv2(PerkLib.PrestigeJobNecromancer) > 0) {
 			bd = buttons.add("S.S. to F.", sendSkeletonToFight).hint("Send Skeleton to fight - Order your Skeletons to beat the crap out of your foe.");
 			if (monster.isFlying() && (!player.hasPerk(PerkLib.GreaterHarvest) || (player.perkv1(PerkLib.GreaterHarvest) == 0 && player.perkv2(PerkLib.GreaterHarvest) == 0))) {
@@ -1268,29 +1268,6 @@ public class Combat extends BaseContent {
 			addButton(9, "-1-", AncientConduitMenu, page - 1);
 			addButton(14, "Back", combat.combatMenu, false);
 		}
-	}
-	public function tamedMonstersMenu():void {
-		menu();
-		if (player.hasStatusEffect(StatusEffects.TamedMonster01)) addButtonIfTrue(0, "No1", curry(tamedMonsterAttack, 1, SceneLib.campMakeWinions.tameMonster01), "Your tamed moster can't attack flying enemy.", (monster.isFlying() && SceneLib.campMakeWinions.tameMonster01FlightCapable == false), "Use tamed monster No1.");
-		else addButtonDisabled(0, "No1", "You not have tamed monster No1.");
-		if (player.hasPerk(PerkLib.Beast02)) {
-			if (player.hasStatusEffect(StatusEffects.TamedMonster02)) addButtonIfTrue(1, "No2", curry(tamedMonsterAttack, 2, SceneLib.campMakeWinions.tameMonster02), "Your tamed moster can't attack flying enemy.", (monster.isFlying() && SceneLib.campMakeWinions.tameMonster02FlightCapable == false), "Use tamed monster No2.");
-			else addButtonDisabled(1, "No2", "You not have tamed monster No1.");
-		}
-		if (player.hasPerk(PerkLib.ThreeTimesATame)) {
-			if (player.hasStatusEffect(StatusEffects.TamedMonster03)) addButtonIfTrue(2, "No3", curry(tamedMonsterAttack, 3, SceneLib.campMakeWinions.tameMonster03), "Your tamed moster can't attack flying enemy.", (monster.isFlying() && SceneLib.campMakeWinions.tameMonster03FlightCapable == false), "Use tamed monster No3.");
-			else addButtonDisabled(2, "No3", "You not have tamed monster No1.");
-		}
-		addButton(14, "Back", combat.combatMenu, false);
-	}
-	public function dmgamp_tamed_monsters():Number {
-		var dmgamp:Number = 0;
-		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
-		if (player.shield == shields.Y_U_PAN) dmgamp += 0.25;
-		if (player.hasPerk(PerkLib.CommandingTone)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.DiaphragmControl)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.VocalTactician)) dmgamp += 0.15;
-		return dmgamp;
 	}
 	
     public function calcHerbalismPower():Number{
@@ -13196,35 +13173,6 @@ public function combatIsOver(goToPlayerMenu:Boolean = true):Boolean {
     }
     if (goToPlayerMenu) doNext(playerMenu); //This takes us back to the combatMenu and a new combat round
     return false;
-}
-
-public function tamedMonsterAttack(no:Number, mon:String):void {
-    clearOutput();
-	var weapon:Number = 0;
-	var dmg:Number = 0;
-	if (no == 1) {
-		weapon += player.statusEffectv1(StatusEffects.TamedMonster01);
-		dmg += scalingBonusStrengthTamedMonster(1);
-	}
-	if (no == 2) {
-		weapon += player.statusEffectv1(StatusEffects.TamedMonster02);
-		dmg += scalingBonusStrengthTamedMonster(2);
-	}
-	if (no == 3) {
-		weapon += player.statusEffectv1(StatusEffects.TamedMonster03);
-		dmg += scalingBonusStrengthTamedMonster(3);
-	}
-	if (weapon < 51) dmg *= (1 + (weapon * 0.03));
-	else if (weapon >= 51 && weapon < 101) dmg *= (2.5 + ((weapon - 50) * 0.025));
-	else if (weapon >= 101 && weapon < 151) dmg *= (3.75 + ((weapon - 100) * 0.02));
-	else if (weapon >= 151 && weapon < 201) dmg *= (4.75 + ((weapon - 150) * 0.015));
-	else dmg *= (5.5 + (weapon * 0.01));
-	dmg *= dmgamp_tamed_monsters();
-	dmg = Math.round(dmg * comfoll.increasedEfficiencyOfAttacks());
-    outputText("Your tamed "+mon+" attacks [themonster]. ");
-	doDamage(dmg, true, true);
-	outputText("\n\n");
-    enemyAIImpl();
 }
 
 public function OrcaJuggle():void {

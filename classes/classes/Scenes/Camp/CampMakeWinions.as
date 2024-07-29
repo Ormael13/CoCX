@@ -137,6 +137,71 @@ public class CampMakeWinions extends BaseContent
 			else doNext(tamingAttemptYes);
 		}
 
+		public function tamedMonstersMenu():void {
+			menu();
+			var mons:String = "";
+			if (player.hasStatusEffect(StatusEffects.TamedMonster01)) {
+				mons = tameMonster01;
+				if (monster.isFlying() || monster.flyer) addButtonIfTrue(0, "No1", curry(tamedMonsterAttack, 1, mons), "Your tamed monster can't attack flying enemy.", !tameMonster01FlightCapable, "Use tamed monster No1.");
+				else addButton(0, "No1", curry(tamedMonsterAttack, 1, mons)).hint("Use tamed monster No1.");
+			}
+			else addButtonDisabled(0, "No1", "You not have tamed monster No1.");
+			if (player.hasPerk(PerkLib.Beast02)) {
+				if (player.hasStatusEffect(StatusEffects.TamedMonster02)) {
+					mons = tameMonster02;
+					if (monster.isFlying() || monster.flyer) addButtonIfTrue(1, "No2", curry(tamedMonsterAttack, 2, mons), "Your tamed monster can't attack flying enemy.", !tameMonster02FlightCapable, "Use tamed monster No2.");
+					else addButton(1, "No2", curry(tamedMonsterAttack, 2, mons)).hint("Use tamed monster No2.");
+				}
+				else addButtonDisabled(1, "No2", "You not have tamed monster No2.");
+			}
+			if (player.hasPerk(PerkLib.ThreeTimesATame)) {
+				if (player.hasStatusEffect(StatusEffects.TamedMonster03)) {
+					mons = tameMonster03;
+					if (monster.isFlying() || monster.flyer) addButtonIfTrue(2, "No3", curry(tamedMonsterAttack, 3, mons), "Your tamed monster can't attack flying enemy.", !tameMonster03FlightCapable, "Use tamed monster No3.");
+					else addButton(2, "No3", curry(tamedMonsterAttack, 3, mons)).hint("Use tamed monster No3.");
+				}
+				else addButtonDisabled(2, "No3", "You not have tamed monster No3.");
+			}
+			addButton(14, "Back", SceneLib.combat.combatMenu, false);
+		}
+		public function dmgamp_tamed_monsters():Number {
+			var dmgamp:Number = 0;
+			if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
+			if (player.shield == shields.Y_U_PAN) dmgamp += 0.25;
+			if (player.hasPerk(PerkLib.CommandingTone)) dmgamp += 0.1;
+			if (player.hasPerk(PerkLib.DiaphragmControl)) dmgamp += 0.1;
+			if (player.hasPerk(PerkLib.VocalTactician)) dmgamp += 0.15;
+			return dmgamp;
+		}
+		public function tamedMonsterAttack(no:Number, mon:String = ""):void {
+			clearOutput();
+			var weapon:Number = 0;
+			var dmg:Number = 0;
+			if (no == 1) {
+				weapon += player.statusEffectv1(StatusEffects.TamedMonster01);
+				dmg += SceneLib.combat.scalingBonusStrengthTamedMonster(1);
+			}
+			if (no == 2) {
+				weapon += player.statusEffectv1(StatusEffects.TamedMonster02);
+				dmg += SceneLib.combat.scalingBonusStrengthTamedMonster(2);
+			}
+			if (no == 3) {
+				weapon += player.statusEffectv1(StatusEffects.TamedMonster03);
+				dmg += SceneLib.combat.scalingBonusStrengthTamedMonster(3);
+			}
+			if (weapon < 51) dmg *= (1 + (weapon * 0.03));
+			else if (weapon >= 51 && weapon < 101) dmg *= (2.5 + ((weapon - 50) * 0.025));
+			else if (weapon >= 101 && weapon < 151) dmg *= (3.75 + ((weapon - 100) * 0.02));
+			else if (weapon >= 151 && weapon < 201) dmg *= (4.75 + ((weapon - 150) * 0.015));
+			else dmg *= (5.5 + (weapon * 0.01));
+			dmg *= dmgamp_tamed_monsters();
+			dmg = Math.round(dmg * SceneLib.combat.comfoll.increasedEfficiencyOfAttacks());
+			outputText("Your tamed "+mon+" attacks [themonster]. ");
+			SceneLib.combat.doDamage(dmg, true, true);
+			outputText("\n\n");
+			SceneLib.combat.enemyAIImpl();
+		}
+
 		//-----------
 		//
 		//  GOLEMS

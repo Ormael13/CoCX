@@ -290,7 +290,6 @@ public class Changelog extends BaseContent
 			outputText("-Minor adjustion of soulskill damage calculations.\n");
 			outputText("-Default firearms dmg calculation from weapon atk increased (2x > 10x) and scaling off wis/int/spe (instead of core values to use scaling functions).\n");
 			outputText("-Changed order of discovered areas with Lake been first founded then Forest (O).\n");
-			outputText("-Fixes a quality of life issue where pressing down the mouse button and then moving the mouse off of a button before releasing the mouse button still clicks/activates the button. (Edward Darksong)\n");
 			outputText("-Fixed Hel loss scenes being broken. Fixed lizan rogue win corruption check being too low for rape. Fixed Electra not asking for recruitment when accessed from SoulSense menu. Minor typo/grammar fixes. (Svalkash)\n");
 			outputText("-Adds a newer race menu UI using buttons in place of text links for all the races, along side a button to switch from new UI to old UI and back. Hovering over a race displays any bonuses you are currently getting from that race, if any. And clicking on a race will switch to another 'screen' displaying all the race's requirements, stats and stuff like in the old UI. (Edward Darksong)\n");
 			outputText("-New mutation perk: Hydra Blood. Req. having free bloodstream mutation slot, Hydra race and Hydra Regeneration perk. Effects: Improve existing Regeneration by 1% negated by fire damage.\n");
@@ -313,7 +312,16 @@ public class Changelog extends BaseContent
 			outputText("-Sceptre of Command and Yogi Uh Panel items effect will affect tamed monsters too.\n");
 			outputText("-New tier 0 wisdom lvl-up perk: Beast Knowledge. Req. Job: Tamer perk and 25+ wisdom. Effect: During tame monster check player wisdom is treated as if it was 2x higher.\n");
 			outputText("-New tier 1 wisdom lvl-up perk: Beast 02. Req. Job: Tamer perk and 50+ wisdom. Effect: You can have 2 tamed monsters.\n");
-			outputText("-New tier 2 wisdom lvl-up perk: Three times a tame. Req. Beast 02 perk and 75+ wisdom. Effect: You can have 2 tamed monsters.\n");
+			outputText("-New tier 2 wisdom lvl-up perk: Three times a tame. Req. Beast 02 perk and 75+ wisdom. Effect: Now you can control 3 monsters at the same time.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -336,14 +344,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Lord Shadeogorath) (Furrin Gok) (khovel) (Chibizs) (Svalkash) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Edward Darksong)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -421,8 +421,16 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -458,6 +466,10 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
