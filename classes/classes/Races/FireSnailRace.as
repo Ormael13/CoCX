@@ -54,6 +54,8 @@ public class FireSnailRace extends Race {
 				.eyeType(Eyes.FIRE_SNAIL, +1)
 				.faceType(Face.FIRE_SNAIL, +1);
 		
+		addMutation(IMutationsLib.BlazingHeartIM);
+		
 		buildTier(15, "fire snail")
 				.buffs({
 					"str.mult": +0.70,

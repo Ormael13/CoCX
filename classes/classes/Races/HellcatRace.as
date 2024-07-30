@@ -56,6 +56,7 @@ public class HellcatRace extends Race{
 		
 		addMutation(IMutationsLib.CatLikeNimblenessIM);
 		addMutation(IMutationsLib.EyeOfTheTigerIM);
+		addMutation(IMutationsLib.BlazingHeartIM);
 		
 		buildTier(10, "hellcat")
 				.buffs({

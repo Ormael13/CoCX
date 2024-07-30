@@ -8922,7 +8922,7 @@ public class Combat extends BaseContent {
                 damage *= (0.05* player.cumQ())
             }
         }
-        // if (player.hasMutation(IMutationsLib.HellhoundFireBallsIM) && player.perkv1(IMutationsLib.HellhoundFireBallsIM) >= 2) damage *= (0.05* player.cumQ());
+        if (player.hasMutation(IMutationsLib.BlazingHeartIM)) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.BlazingHeartIM)));
         // if (player.hasMutation(IMutationsLib.HellhoundFireBallsIM) && player.perkv1(IMutationsLib.HellhoundFireBallsIM) >= 3) damage *= (0.05* player.cumQ());
         if (monster.HP - damage <= monster.minHP()) {
             /* No monsters use this perk, so it's been removed for now

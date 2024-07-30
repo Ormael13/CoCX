@@ -3463,6 +3463,9 @@ use namespace CoC;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_FIRE_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_FIRE_R) mult -= necklaceEffectMagnitude;
 			if (jewelry1.hasBuff('res_fire') && jewelry2.hasBuff('res_fire') && jewelry3.hasBuff('res_fire') && jewelry4.hasBuff('res_fire') && headjewelryEffectId == HeadJewelryLib.MODIFIER_FIRE_R && necklaceEffectId == NecklaceLib.MODIFIER_FIRE_R) mult -= 15;
+			if (perkv1(IMutationsLib.BlazingHeartIM) >= 1) {
+				mult -= 40;
+			}
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
@@ -3524,6 +3527,9 @@ use namespace CoC;
 			if (rearBody.type == RearBody.YETI_FUR) mult -= 20;
 			if (perkv1(IMutationsLib.WhaleFatIM) >= 3) {
 				mult -= 20;
+			}
+			if (perkv1(IMutationsLib.BlazingHeartIM) >= 1) {
+				mult += 40;
 			}
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
@@ -5743,6 +5749,8 @@ use namespace CoC;
 			if (!hasPerk(PerkLib.DeathPriest) && statStore.hasBuff('Death Priest')) statStore.removeBuffs('Death Priest');
 			if (hasPerk(PerkLib.LustingWarrior) && hasStatusEffect(StatusEffects.Overheat)) statStore.replaceBuffObject({'str.mult':Math.round(libStat.mult.value)}, 'Lusting Warrior', { text: 'Lusting Warrior' });
 			if (!hasPerk(PerkLib.LustingWarrior) && statStore.hasBuff('Lusting Warrior')) statStore.removeBuffs('Lusting Warrior');
+			if (hasMutation(IMutationsLib.BlazingHeartIM) && perkv1(IMutationsLib.BlazingHeartIM) >= 2 && (hasStatusEffect(StatusEffects.Heat) || hasStatusEffect(StatusEffects.Rut))) statStore.replaceBuffObject({'str.mult':Math.round(libStat.mult.value/10)}, 'Blazing Heart', { text: 'Blazing Heart' });
+			if (hasMutation(IMutationsLib.BlazingHeartIM) && perkv1(IMutationsLib.BlazingHeartIM) >= 2 && !hasStatusEffect(StatusEffects.Heat) && !hasStatusEffect(StatusEffects.Rut) && statStore.hasBuff('Blazing Heart')) statStore.removeBuffs('Blazing Heart');
 			if (hasPerk(PerkLib.AvatorOfCorruption) && isRaceCached(Races.UNICORN,2)) statStore.replaceBuffObject({'lib.mult':Math.round(intStat.mult.value/2)}, 'Avatar Of Corruption', { text: 'Avatar Of Corruption' });
 			if ((!hasPerk(PerkLib.AvatorOfCorruption) || !isRaceCached(Races.UNICORN,2)) && statStore.hasBuff('Avatar Of Corruption')) statStore.removeBuffs('Avatar Of Corruption');
 			if (hasPerk(PerkLib.AvatorOfPurity) && isRaceCached(Races.UNICORN,2)) statStore.replaceBuffObject({'wis.mult':Math.round(intStat.mult.value/2)}, 'Avatar Of Purity', { text: 'Avatar Of Purity' });

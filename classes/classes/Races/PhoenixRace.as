@@ -60,6 +60,7 @@ public class PhoenixRace extends Race {
 		addBloodline(PerkLib.SalamandersDescendant, PerkLib.BloodlineSalamander);
 		addMutation(IMutationsLib.HarpyHollowBonesIM);
 		addMutation(IMutationsLib.SalamanderAdrenalGlandsIM);
+		addMutation(IMutationsLib.BlazingHeartIM);
 		
 		buildTier(10, "phoenix")
 				.namesTauric("phoenix", "phoenix-taur")
