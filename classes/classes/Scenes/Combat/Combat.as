@@ -16851,6 +16851,7 @@ private function ghostRealStrengthTamedMonster(no:Number):Number {
 	if (no == 1) ghostRealStrTamedMonster += player.statusEffectv2(StatusEffects.TamedMonster01);
 	if (no == 2) ghostRealStrTamedMonster += player.statusEffectv2(StatusEffects.TamedMonster02);
 	if (no == 3) ghostRealStrTamedMonster += player.statusEffectv2(StatusEffects.TamedMonster03);
+	if (no == 4) ghostRealStrTamedMonster += player.statusEffectv2(StatusEffects.TamedMonster04);
 	return ghostRealStrTamedMonster;
 }
 

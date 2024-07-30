@@ -244,6 +244,7 @@ public final class Mutations extends MutationsHelper {
 			outputText("Clueless.. and in distress.\n\n");
 		}
 		else {
+			player.skin.setBaseOnly({type:Skin.PLAIN, color1:"blue", pattern: Skin.PATTERN_DEMONIC_PLEASURE_RUNE});
 			if (!InCollection(player.skinColor1, DemonRace.DemonSkinColors) && !InCollection(player.skinColor2, DemonRace.DemonSkin2Colors)) {
 				var choice1:String = randomChoice(DemonRace.DemonSkinColors);
                 var choice2:String = randomChoice(DemonRace.DemonSkin2Colors);
@@ -292,7 +293,6 @@ public final class Mutations extends MutationsHelper {
 				}
 			}
 			player.legCount = 2;
-			player.skin.setBaseOnly({type:Skin.PLAIN, color1:"blue", pattern: Skin.PATTERN_DEMONIC_PLEASURE_RUNE});
 			transformations.TailDemonic.applyEffect(false);
 			transformations.HairHuman.applyEffect(false);
 			transformations.FaceDemon.applyEffect(false);
@@ -17688,4 +17688,4 @@ public final class Mutations extends MutationsHelper {
 		player.herbXP(HE);
     }
 }
-}
+}
