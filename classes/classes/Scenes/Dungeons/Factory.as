@@ -2,15 +2,11 @@
 package classes.Scenes.Dungeons
 {
 import classes.*;
-import classes.BodyParts.Antennae;
-import classes.BodyParts.Ears;
-import classes.BodyParts.Face;
-import classes.BodyParts.Horns;
-import classes.BodyParts.LowerBody;
-import classes.BodyParts.Tail;
+import classes.BodyParts.*;
 import classes.GeneticMemories.BallsMem;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
+import classes.Races.DemonRace;
 import classes.Scenes.Dungeons.Factory.*;
 import classes.Scenes.Metamorph;
 import classes.display.SpriteDb;
@@ -381,7 +377,7 @@ use namespace CoC;
 					else outputText("new");
 					outputText(" demon-cock for a few more orgasms.");
 					player.sexReward("vaginalFluids", "Dick");
-					doNext(doBadEndDemon, 1);
+					doNext(goDemonSharedEnd);
 				}
 				function singleF():void {
 					outputText(multiCockDescriptLight() + " pulsates, straining for just a touch of the succubus' hand.  She paces around you, giggling and toying with you as your " + multiCockDescript() + " seems to follow her, twitching and thickening anytime she takes a step closer.\n\n");
@@ -403,7 +399,7 @@ use namespace CoC;
 					else outputText("new");
 					outputText(" demon-cock for a few more orgasms.");
 					player.sexReward("vaginalFluids", "Dick");
-					doNext(doBadEndDemon, 1);
+					doNext(goDemonSharedEnd);
 				}
 			}
 			function vagF():void {
@@ -426,7 +422,7 @@ use namespace CoC;
 				outputText("The succubus interrupts your delight by recovering far faster than you, rolling up to a standing position and watching something between your legs.  You prop yourself up on your elbows to see what the fuss is about.  Between your legs something curious is happening – a trickle of pinkish fluid is still escaping your nethers, rolling towards a rapidly expanding pool, along with every other drop of the pink goop.  Before your very eyes the pool grows until every drop of pink fluid has collected together, and it grows upwards, solidifying into a sparkling crystalline shape.\n\n");
 				outputText("Before you can react, she grasps the newly-formed lethicite and noisily begins eating it, her eyes glowing with newfound power.  Watching her makes you more than a little jealous and angry with yourself.  You should've taken the lethicite and gained its power!  No use fretting about it, you can still fuck this succubus for a few hours before you go out in search of your own victims...\n\n");
 				player.sexReward("vaginalFluids", "Vaginal");
-				doNext(doBadEndDemon, 2);
+				doNext(goDemonSharedEnd);
 			}
 			function hermF():void {
 				//Buh.  Zombie fen need brains.
@@ -452,7 +448,7 @@ use namespace CoC;
 				outputText(" demon-cock for a few more orgasms.");
 				outputText("  Before you get into that, you spy a small piece of pink crystal on the floor between your legs.  You snatch it and devour it before the succubus has a chance and eat it, turning part of your soul into new-found demonic strength before you return to a long night of sex...");
 				player.sexReward("vaginalFluids", "Dick");
-				doNext(doBadEndDemon, 3);
+				doNext(goDemonSharedEnd);
 			}
 		}
 
@@ -1644,12 +1640,44 @@ use namespace CoC;
 			EventParser.gameOver();
 		}
 
-		private function doBadEndDemon(usedGender:int):void {
+		private function goDemonSharedEnd():void {
 			clearOutput();
-			if (usedGender == 1) outputText("As a demon, you rapidly moved up the ranks, eventually taking command of the factory and its inhabitants.  The previous commander was reduced to a willing cock-sleeve, ever-eager to obey your slightest order.  By the time the next year has come around, you've managed to earn the coveted honor of collecting the next champion.");
-			else if (usedGender == 2) outputText("Now a full-fledged demon, you leave the factory, setting off on your own.  Over the next year you capture many foolish mortals, and even convince more than a few of them to give up their souls.  With your rapid gain in power, it's easy to rise in the demonic ranks, and in no time flat your power far exceeds that of the succubus that 'turned' you.  You live in luxury, surrounded by a harem of slaves, waiting in your camp for the next victim to step through...");
-			else outputText("As a demon, you rapidly moved up the ranks, eventually taking command of the factory and its inhabitants.  The previous commander was reduced to a willing cock-sleeve, ever-eager to obey your slightest order.  By the time the next year has come around, you've managed to earn the coveted honor of collecting the next champion. It should be quite satisfying...");
-			EventParser.gameOver();
+			player.skin.setBaseOnly({type:Skin.PLAIN, color1:"blue", pattern: Skin.PATTERN_DEMONIC_PLEASURE_RUNE});
+			if (!InCollection(player.skinColor1, DemonRace.DemonSkinColors) && !InCollection(player.skinColor2, DemonRace.DemonSkin2Colors)) {
+				var choice1:String = randomChoice(DemonRace.DemonSkinColors);
+                var choice2:String = randomChoice(DemonRace.DemonSkin2Colors);
+                player.skinColor1 = choice1;
+                player.skinColor2 = choice2;
+			}
+			if (player.hasCock()) player.lowerBody = LowerBody.DEMONIC_CLAWS;
+			else {
+				if (rand(2) == 0) player.lowerBody = LowerBody.DEMONIC_CLAWS;
+				else {
+					if (rand(2) == 0) player.lowerBody = LowerBody.DEMONIC_HIGH_HEELS;
+					else player.lowerBody = LowerBody.DEMONIC_GRACEFUL_FEET;
+				}
+			}
+			player.legCount = 2;
+			transformations.TailDemonic.applyEffect(false);
+			transformations.HairHuman.applyEffect(false);
+			transformations.FaceDemon.applyEffect(false);
+			transformations.EyesDemon.applyEffect(false);
+			transformations.ArmsDemon.applyEffect(false);
+			transformations.TongueDemonic.applyEffect(false);
+			transformations.EarsElfin.applyEffect(false);
+			transformations.HornsDemonic.applyEffect(false);
+			transformations.AntennaeNone.applyEffect(false);
+			transformations.GillsNone.applyEffect(false);
+			transformations.WingsDemonicLarge.applyEffect(false);
+			transformations.RearBodyNone.applyEffect(false);
+			if (player.hasCock()) transformations.CockDemon().applyEffect(false);
+			if (player.hasVagina()) transformations.VaginaDemonic().applyEffect(false);
+			outputText("\n<b>Gained Perk: Soulless!</b> "+PerkLib.Soulless.desc());
+			player.createPerk(PerkLib.Soulless, 0, 0, 0, 0);
+			if (player.level < 25) inventory.takeItem(consumables.LETHITE, playerMenu);
+			else if (player.level < 50) inventory.takeItem(consumables.LETH1TE, playerMenu);
+			else if (player.level < 75) inventory.takeItem(consumables.LETH2TE, playerMenu);
+			else inventory.takeItem(consumables.LETH3TE, playerMenu);
 		}
 
 		//ROOMS
@@ -1689,7 +1717,10 @@ use namespace CoC;
 					outputText("She exclaims, \"<i>Omigawsh!  You're the champion!  Your, like, soul is still there and everything!  But, you're like, completely corrupt an' stuff!  Ya know what'd be fun?  I could fuck you 'til you cum so hard your soul melts out an' you turn into a demon.  Wouldn't that be great?</i>\"\n\n");
 					outputText("The secretarial demoness pulls out a file and fiddles with her nails, murmuring, \"<i>I guess if you don't wanna, we could just hook you up in the factory.  What's it gonna be?</i>\"");
 					camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_SUCCUBUS);
-					simpleChoices("Fight", doFightSuccubus, "Go Demon", goDemon, "Hook Up", talkSuccubusYes, "", null, "", null);
+					menu();
+					addButton(1, "Fight", doFightSuccubus);
+					addButtonIfTrue(2, "Go Demon", goDemon, "You already got no soul!!!", !player.hasPerk(PerkLib.Soulless), "THIS WILL TURN YOU INTO TRUE DEMON!!! ARE YOU SURE ABOUT THAT???");
+					addButton(3, "Hook Up", talkSuccubusYes);
 					return;
 				}
 				sceneHunter.print("Check failed: high corruption & demon-morph.");
@@ -1947,3 +1978,4 @@ use namespace CoC;
 		}
 	}
 }
+

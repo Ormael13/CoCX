@@ -507,6 +507,21 @@ public class PerkLib
 		public static const ConductionSoulforceCharge:PerkType = mk("Conduction Soulforce Charge", "Conduction Soulforce Charge",
 				"As long you have sufficient amount of soulforce, expend them to keep Ayo Armor active instead of using internal storage.",
 				"You've chosen the 'Conduction Soulforce Charge' perk. As long you have sufficient amount of soulforce, expend them to keep Ayo Armor active instead of using internal storage.");
+		public static const Beast02:PerkType = mk("Beast 02", "Beast 02",
+				"You can have 2 tamed monsters.",
+				"You've chosen the 'Beast 02' perk. You can have 2 tamed monsters.");
+		public static const BeastKnowledge:PerkType = mk("Beast Knowledge", "Beast Knowledge",
+				"During tame monster check player wisdom is treated as if it was 2x higher.",
+				"You've chosen the 'Beast Knowledge' perk. During tame monster check player wisdom is treated as if it was 2x higher.");
+		public static const ThreeTimesATame:PerkType = mk("Three times a tame", "Three times a tame",
+				"Now you can control 3 monsters at the same time.",
+				"You've chosen the 'Three times a tame' perk. Now you can control 3 monsters at the same time.");
+		public static const FourthTamerOfTheApocalypse:PerkType = mk("Fourth Tamer of the Apocalypse", "Fourth Tamer of the Apocalypse",
+				"Now you can assemble 4 horsema... monsters team.",
+				"You've chosen the 'Fourth Tamer of the Apocalypse' perk. Now you can assemble 4 horsema... monsters team.");
+		public static const WorkingTogether:PerkType = mk("Working Together", "Working Together",
+				"Cooperating your tamed monsters would empower the one attacking. (+1x to dmg multi of attacking monster per tamed monster after 1st)",
+				"You've chosen the 'Working Together' perk. Cooperating your tamed monsters would empower the one attacking. (+1x to dmg multi of attacking monster per tamed monster after 1st)");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -514,6 +529,18 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
+		public static const EmpoweredTaming:PerkType = mk("Empowered Taming", "Empowered Taming",
+				"During taming monster it wisdom is treated as if it was 80% lower.",
+				"You've chosen the 'Empowered Taming' perk. During taming monster it wisdom is treated as if it was 80% lower.");
+		public static const StrongerTamedMosters:PerkType = mk("Stronger Tamed Mosters", "Stronger Tamed Mosters",
+				".",
+				"You've chosen the 'Stronger Tamed Mosters' perk. .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk.");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk.");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk.");
@@ -1425,7 +1452,7 @@ public class PerkLib
 				"You to deal 10% damage and have a 5% higher critical chance against Giant, Large Groups, Elemental, Ghost, Plant, Fire/Ice/Lightning/Darkness Vulnerability type enemies (req. 75+ sensitivity). +1 exploration reveal.",
 				"You've chosen the 'Eyes of the Hunter (Expert)' perk, allowing you to deal 10% damage and have a 5% higher critical chance against Giant, Large Groups, Elemental, Ghost, Plant, Fire/Ice/Lightning/Darkness Vulnerability type enemies. +1 exploration reveal.");
 		public static const EyesOfTheHunterGrandMaster:PerkType = mk("Eyes of the Hunter (Grand Master)", "Eyes of the Hunter (Grand Master)",
-				"You to deal 10% damage and have a 5% higher critical chance against God, Boss type enemies (req. 100+ sensitivity). +1 exploration reveal.",
+				"You deal 10% more damage and have a 5% higher critical chance against God, Boss type enemies (req. 100+ sensitivity). +1 exploration reveal.",
 				"You've chosen the 'Eyes of the Hunter (Grand Master)' perk, allowing you to deal 10% damage and have a 5% higher critical chance against God, Boss type enemies. +1 exploration reveal.");
 		public static const EyesOfTheHunterMaster:PerkType = mk("Eyes of the Hunter (Master)", "Eyes of the Hunter (Master)",
 				"You to deal 10% damage and have a 5% higher critical chance against Colossal, Flesh Construct, God, Boss, Fire/Ice/Lightning/Darkness Nature type enemies (req. 100+ sensitivity). +1 exploration reveal.",
@@ -1858,8 +1885,8 @@ public class PerkLib
 				"Allows you to cast hex magic spells as long corruption is 80+, locks out access to white spells and deal 20% more dmg when using black or hex magic to attack pure enemies.",
 				"You've chosen the 'Hex Knowledge' perk. Allows you to cast hex magic spells as long corruption is 80+, locks out access to white spells and deal 20% more dmg when using black or hex magic to attack pure enemies.");
 		public static const HiddenDualMomentum:PerkType = mk("Hidden Dual Momentum", "Hidden Dual Momentum",
-				"You've trained in using your speed to enhance power of your dual large weapons swings.",
-				"You've chosen the 'Hidden Dual Momentum' perk, allowing you to use your speed to enhance power of your attacks with dual large weapons.");
+				"You've trained in using your speed to enhance the power of your dual large weapons swings.",
+				"You've chosen the 'Hidden Dual Momentum' perk, allowing you to use your speed to enhance the power of your attacks with dual large weapons.");
 		public static const HiddenMomentum:PerkType = mk("Hidden Momentum", "Hidden Momentum",
 				"You've trained in using your speed to enhance power of your single large weapons swings.",
 				"You've chosen the 'Hidden Momentum' perk, allowing you to use your speed to enhance power of your attacks with single large weapons.");
@@ -2041,7 +2068,7 @@ public class PerkLib
 				"You've chosen the 'Insightful Resources VI' perk, granting +5 extra maximum soulforce for each point of wisdom.")
 				.withBuffs({'maxsf_perwis':+5});
 		public static const IntermediateAllRounderEducation:PerkType = mk("Intermediate All-Rounder Education", "All-Rounder Education ( Intermediate )",
-				"Limit of advanced job you can learn is increased by 3.",
+				"Limit of advanced jobs you can learn is increased by 3.",
 				"You've chosen the 'All-Rounder Education ( Intermediate )' perk, expanding the amount of advanced jobs you can learn. (+3)");
 		public static const IronFistsI:PerkType = mk("Iron Fists I", "Iron Fists I",
 				"Hardens your fists to increase attack rating by 10. (+5% melee physical attacks multiplier)",
@@ -2514,8 +2541,8 @@ public class PerkLib
 				"Raises minimum lust by up to 15%.",
 				"You've chosen the 'Nymphomania' perk.  Due to the incredible amount of corruption you've been exposed to, you've begun to live in a state of minor constant arousal.  Your minimum lust will be increased by 15%.").withBuffs({'minlustx':0.15});
 		public static const OffensiveStaffChanneling:PerkType = mk("Offensive Staff Channeling", "Offensive Staff Channeling",
-				"Allows you to cast splited offensive spell without increased mana cost when using staff (3 parts at 70% power) or partial staff (2 parts at 80% power) as focus. (If you already can multicast spells, the perk will make your ability slightly stronger when using a staff.)",
-				"You've chosen the 'Offensive Staff Channeling' perk. Allows you to cast splited offensive spell without increased mana cost when using staff (3 parts at 70% power) or partial staff (2 parts at 80% power) as focus. (Effect will not activate if you already have ways to multicast spells at reduced power)");
+				"Allows you to cast split offensive spells without increased mana cost when using staff (3 parts at 70% power) or partial staff (2 parts at 80% power) as focus. (If you already can multicast spells, the perk will make your ability slightly stronger when using a staff.)",
+				"You've chosen the 'Offensive Staff Channeling' perk. Allows you to cast split offensive spells without increased mana cost when using staff (3 parts at 70% power) or partial staff (2 parts at 80% power) as focus. (Effect will not activate if you already have ways to multicast spells at reduced power)");
 		public static const OrthodoxDuelist:PerkType = mk("Orthodox duelist", "Orthodox duelist",
 				"Wielding a dueling sword with no off hand, increases critical damage by 20% and the chance to parry blows by 10% based on speed.",
 				"You've chosen the 'Orthodox duelist' perk. Wielding a dueling sword with no off hand, increases critical damage by 20% and the chance to parry blows by 10% based on speed.");
@@ -3754,7 +3781,7 @@ public class PerkLib
 		public static const BeeOvipositor:PerkType = mk("Bee Ovipositor", "Bee Ovipositor",
 				"Allows you to lay eggs through a special organ on your insect abdomen, though you need at least 10 eggs to lay.");
 		public static const BicornBlessing:PerkType = mk("Bicorn Blessing", "Bicorn Blessing",
-				"Your are blessed with the unholy power of a bicorn and while above 80 corruption your black magic is increased by 20% and lust resistance by 10%.");
+				"You are blessed with the unholy power of a bicorn and while above 80 corruption your black magic is increased by 20% and lust resistance by 10%.");
 		public static const BigHandAndFeet:PerkType = mk("Big hand and feet", "Big hand and feet",
 				"Increase strength modifier on unarmed attack by 100%.");
 		public static const BimboBody:PerkType = mk("Bimbo Body", "Bimbo Body",
@@ -4339,7 +4366,7 @@ public class PerkLib
 				"You've trained to use of your own body and natural weapons to their limits in fights.",
 				"You chose 'Job ( Basic ): Beast Warrior' perk, training yourself in the art of feral combat.").withBuffs({'str.mult':0.05,'tou.mult':0.05,'spe.mult':0.05, "int.mult":-0.05, "wis.mult":-0.05,'maxwrath_base':+100});
 		public static const JobEsper:PerkType = mk("Job: Esper", "Job ( Basic ): Esper",
-				"You've trained in using your metnal powers in combat.",
+				"You've trained in using your mental powers in combat.",
 				"You chose 'Job ( Basic ): Esper' perk, training yourself to become a(n) Esper.").withBuffs({'int.mult':0.15,'wis.mult':0.15,'str.mult':-0.05,'tou.mult':-0.05,'spe.mult':-0.05,'sens':40});
 		public static const JobGuardian:PerkType = mk("Job: Guardian", "Job ( Basic ): Guardian",
 				"You've trained in defensive combat.",
@@ -4489,14 +4516,14 @@ public class PerkLib
 				"You chose 'Job ( Prestige ): Warlock' perk, training yourself to become a(n) Warlock.").withBuffs({'int.mult':0.75,'lib.mult':0.45});
 
 		// Hidden/Deity Jobs perks
-		public static const HiddenJobAsura:PerkType = mk("Hidden Job: Asura", "Job ( Hiden ): Asura",
-				"You've trained in Way of Asura. Being that reached mastery of unleashing wrath to great effect. (+10% of OverMax Wrath)");
+		public static const HiddenJobAsura:PerkType = mk("Hidden Job: Asura", "Job ( Hidden ): Asura",
+				"You've trained in Way of Asura. Beings that reached mastery of unleashing wrath to great effect. (+10% of OverMax Wrath)");
 		public static const AbsoluteStrength:PerkType = mk("Absolute Strength", "Absolute Strength",
 				"Increase strength based on current amount of wrath as long wrath is above 50% (1:2 ratio). Also wrath outside of combat will not decay and even with correct perks can slowly raise. (+10% of OverMax Wrath)");
 		public static const AsuraStrength:PerkType = mk("Asura Strength", "Asura Strength",
 				"Gain Asura Strength. Asura Form increase to physical might raise to 120%/60%/40% of core str/tou/spe and generate one additional pair of semi-transparent arms. (+10% of OverMax Wrath/Base STR Cap, +0,5% Wrath generated)");
 		public static const ICastAsuraFist:PerkType = mk("I Cast (Asura) Fist", "I Cast (Asura) Fist",
-				"Safe treshold for magic/m.specials is calculated based on overmax wrath not max wrath, +50% of base max wrath. (+10% of OverMax Wrath)")
+				"Safe threshold for magic/m.specials is calculated based on overmax wrath not max wrath, +50% of base max wrath. (+10% of OverMax Wrath)")
 				.withBuffs({'maxwrath_mult':+0.5});
 		public static const LikeAnAsuraBoss:PerkType = mk("Like A-sura Boss", "Like A-sura Boss",
 				"Adds to toggle starting in Asura Form at combat start, increase to physical might raise to 180%/90%/60% of core str/tou/spe and generate two additional pairs of semi-transparent arms. (+10% of OverMax Wrath)");
@@ -4504,10 +4531,10 @@ public class PerkLib
 				"Gain Asura Toughness. If you can use Warrior's Rage if would have increased boost and even could activate it with Asura Form for no additonal cost. (+10% of OverMax Wrath/Base TOU Cap, +0,5% Wrath generated)");
 		public static const ItsZerkingTime:PerkType = mk("It's Zerking Time!!!", "It's Zerking Time!!!",
 				"If you can use Berzerker or Lustzerker they would be activated with Asura Form for no additional cost (with Prestige Job: Berserker will be activated G2). Asura Form increase to physical might raise to 240%/120%/80% of core str/tou/spe and generate five pairs of semi-transparent arms. (+10% of OverMax Wrath)");
-		public static const HiddenJobBloodDemon:PerkType = mk("Hidden Job: Blood Demon", "Job ( Hiden ): Blood Demon",
+		public static const HiddenJobBloodDemon:PerkType = mk("Hidden Job: Blood Demon", "Job ( Hidden ): Blood Demon",
 				"You've trained in the Art of Blood Demons. Beings that reached mastery of using their own or others blood to great effect. (+10% of OverMax HP, -5% blood spells/soulskills cost, +10% blood spells/soulskills power)");
 		public static const WayOfTheBlood:PerkType = mk("Way of the Blood", "Way of the Blood",
-				"Blood speels and soulskills gain additional effects that would get better as you progress in this job. (+10% of OverMax HP, -5% blood spells/soulskills cost, +15% blood spells/soulskills power)");
+				"Blood spells and soulskills gain additional effects that would get better as you progress in this job. (+10% of OverMax HP, -5% blood spells/soulskills cost, +15% blood spells/soulskills power)");
 		public static const BloodDemonToughness:PerkType = mk("Blood Demon Toughness", "Blood Demon Toughness",
 				"Gain Blood Demon Toughness. When below 0 HP it would negate any negative effect of other perks that would cause negative HP regen. (+10% of OverMax HP/Base TOU Cap, -5% blood spells/soulskills cost, +20% blood spells/soulskills power, +0,5% HP regen)");
 		public static const MyBloodForBloodPuppies:PerkType = mk("My Blood for Blood Puppies", "My Blood for Blood Puppies",
@@ -6447,6 +6474,8 @@ public class PerkLib
             // WISDOM
             //------------
             JobTamer.requireWis(10);
+            BeastKnowledge.requirePerk(JobTamer)
+                    .requireWis(25);
             JobElementalConjurer.requireAdvancedJobSlot()
 					.requirePerk(JobLeader)
                     .requireWis(10);
@@ -6467,6 +6496,12 @@ public class PerkLib
 					.requireInt(20)
                     .requireSpe(15);
             //Tier 1 Wisdom perks
+            Beast02.requireLevel(6)
+                    .requirePerk(JobTamer)
+                    .requireWis(50);
+            WorkingTogether.requireLevel(6)
+                    .requirePerk(Beast02)
+                    .requireWis(55);
             InsightfulResourcesI.requireLevel(6)
                     .requireWis(50)
                     .requirePerk(JobSoulCultivator);
@@ -6515,6 +6550,12 @@ public class PerkLib
                     .requireSpe(15)
                     .requireLevel(6);
             //Tier 2 Wisdom perks
+            ThreeTimesATame.requireLevel(12)
+                    .requirePerk(Beast02)
+                    .requireWis(75);
+//            StrongerTamedMosters.requireLevel(12)
+//                    .requirePerk(ThreeTimesATame)
+//                    .requireWis(80);
             InsightfulResourcesIV.requireLevel(12)
                     .requirePerk(InsightfulResourcesIII)
                     .requireWis(110)
@@ -6582,6 +6623,9 @@ public class PerkLib
 					.requirePerk(JobTinker)
                     .requireWis(75);
             //Tier 3 Wisdom perks
+            FourthTamerOfTheApocalypse.requireLevel(18)
+                    .requirePerk(ThreeTimesATame)
+                    .requireWis(100);
             ElementalContractRank4.requirePerk(ElementalContractRank3)
                     .requireWis(100)
                     .requireLevel(18);
@@ -6619,6 +6663,9 @@ public class PerkLib
                     .requireSpe(30)
                     .requireLevel(18);
             //Tier 4 Wisdom perks
+//            EmpoweredTaming.requireLevel(24)
+//                    .requirePerk(Beast02)
+//                    .requireWis(130);
 //            ComboMaster.requirePerk(Combo)
 //                    .requireWis(125)
 //                    .requireSpe(100)

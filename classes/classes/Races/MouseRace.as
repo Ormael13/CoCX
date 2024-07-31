@@ -60,6 +60,7 @@ public class MouseRace extends Race {
 				.height(LESS_THAN(52), +1);
 		
 		addMutation(IMutationsLib.HinezumiBurningBloodIM);
+		addMutation(IMutationsLib.BlazingHeartIM);
 		
 		buildTier(8, "mouse-morph")
 				.namesMaleFemaleMorphTaur("mouse-boy","mouse-girl","mouse-morph","mouse-taur")

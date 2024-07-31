@@ -35,9 +35,9 @@ public class HarpyScene extends BaseContent
 			//(Enemy defeated by lust)
 			else outputText("The harpy can't contain her lust anymore and crumples to the ground before you, on her knees with her plush, heavy ass resting on her feet. She coos pathetically, with one hand between her legs furiously fingering herself, and the other pressed against your crotch, a needy look in her eyes.");
 			//Rape options
+			menu();
 			if (player.lust >= 33) {
 				outputText("  What do you do to her?");
-				menu();
 				addButtonIfTrue(0, "Anal", winAndRapeHarpyAnally, "Req. a dick with area smaller than " + monster.analCapacity(), player.cockThatFits(monster.analCapacity()) >= 0, "Put your cock to a good use and take the harpy from behind.");
 				addButtonIfTrue(1, "Pussy", victoryHarpyGetsHerPussyRaped, "Req. a dick with area smaller than " + monster.vaginalCapacity(), player.cockThatFits(monster.vaginalCapacity()) >= 0, "That harpy's pussy looks inviting...");
 				addButton(2, "Oral", WinOnHarpyAndOralRape);
@@ -50,14 +50,12 @@ public class HarpyScene extends BaseContent
 					addButtonDisabled(4, "Clit Fuck", "Req. a vagina");
 				}
 				addButtonIfTrue(5, "Lay Eggs", spoidahsLegEggsInHarpeis, "Req. spider ovipositor and snake/spider fangs", player.canOvipositSpider() && (player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS), "Use your ovipositor to lay the eggs into harpy.");
-				addButton(14, "Leave", cleanupAfterCombat);
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(harpyVictoryuuuuu);
 			}
 			//Not horny?  Iz over
-			else {
-				outputText("You're not aroused enough to rape the poor birb.")
-				cleanupAfterCombat();
-			}
+			else outputText("You're not aroused enough to rape the poor birb.");
+			addButtonIfTrue(12, "Tame It", SceneLib.camp.campMake.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
+			addButton(14, "Leave", cleanupAfterCombat);
 		}
 
 		public function harpyLossU():void

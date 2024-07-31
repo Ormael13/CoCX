@@ -939,7 +939,7 @@ public class Combat extends BaseContent {
             bd = buttons.add("Elem.Asp", buttonFunc, "Use the once-per-battle elemental aspects of your basic elementals.", "Elemental Aspects");
         }
 		if (player.shieldName == "Ancient Conduit") bd = buttons.add("A.Conduit", AncientConduitMenu);
-		if (player.hasPerk(PerkLib.JobTamer)) bd = buttons.add("Tamed Monster(s)", tamedMonstersMenu);
+		if (player.hasPerk(PerkLib.JobTamer)) bd = buttons.add("Tamed Monster(s)", SceneLib.campMakeWinions.tamedMonstersMenu);
 		if (player.hasPerk(PerkLib.PrestigeJobNecromancer) && player.perkv2(PerkLib.PrestigeJobNecromancer) > 0) {
 			bd = buttons.add("S.S. to F.", sendSkeletonToFight).hint("Send Skeleton to fight - Order your Skeletons to beat the crap out of your foe.");
 			if (monster.isFlying() && (!player.hasPerk(PerkLib.GreaterHarvest) || (player.perkv1(PerkLib.GreaterHarvest) == 0 && player.perkv2(PerkLib.GreaterHarvest) == 0))) {
@@ -1268,20 +1268,6 @@ public class Combat extends BaseContent {
 			addButton(9, "-1-", AncientConduitMenu, page - 1);
 			addButton(14, "Back", combat.combatMenu, false);
 		}
-	}
-	public function tamedMonstersMenu():void {
-		menu();
-		addButtonIfTrue(0, "No1", tamedMonster01Attack, "You not have tamed monster No1.", player.hasStatusEffect(StatusEffects.TamedMonster01), "Use tamed monster No1.");
-		addButton(14, "Back", combat.combatMenu, false);
-	}
-	public function dmgamp_tamed_monsters():Number {
-		var dmgamp:Number = 0;
-		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
-		if (player.shield == shields.Y_U_PAN) dmgamp += 0.25;
-		if (player.hasPerk(PerkLib.CommandingTone)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.DiaphragmControl)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.VocalTactician)) dmgamp += 0.15;
-		return dmgamp;
 	}
 	
     public function calcHerbalismPower():Number{
@@ -8936,7 +8922,7 @@ public class Combat extends BaseContent {
                 damage *= (0.05* player.cumQ())
             }
         }
-        // if (player.hasMutation(IMutationsLib.HellhoundFireBallsIM) && player.perkv1(IMutationsLib.HellhoundFireBallsIM) >= 2) damage *= (0.05* player.cumQ());
+        if (player.hasMutation(IMutationsLib.BlazingHeartIM)) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.BlazingHeartIM)));
         // if (player.hasMutation(IMutationsLib.HellhoundFireBallsIM) && player.perkv1(IMutationsLib.HellhoundFireBallsIM) >= 3) damage *= (0.05* player.cumQ());
         if (monster.HP - damage <= monster.minHP()) {
             /* No monsters use this perk, so it's been removed for now
@@ -13189,23 +13175,6 @@ public function combatIsOver(goToPlayerMenu:Boolean = true):Boolean {
     return false;
 }
 
-public function tamedMonster01Attack():void {
-    clearOutput();
-	var weapon01:Number = player.statusEffectv1(StatusEffects.TamedMonster01);
-	var dmg01:Number = scalingBonusStrengthTamedMonster(1);
-	if (weapon01 < 51) dmg01 *= (1 + (weapon01 * 0.03));
-	else if (weapon01 >= 51 && weapon01 < 101) dmg01 *= (2.5 + ((weapon01 - 50) * 0.025));
-	else if (weapon01 >= 101 && weapon01 < 151) dmg01 *= (3.75 + ((weapon01 - 100) * 0.02));
-	else if (weapon01 >= 151 && weapon01 < 201) dmg01 *= (4.75 + ((weapon01 - 150) * 0.015));
-	else dmg01 *= (5.5 + (weapon01 * 0.01));
-	dmg01 *= dmgamp_tamed_monsters();
-	dmg01 = Math.round(dmg01 * comfoll.increasedEfficiencyOfAttacks());
-    outputText("Your tamed "+SceneLib.campMakeWinions.tamedMonstrer01+" attacks [themonster]. ");
-	doDamage(dmg01, true, true);
-	outputText("\n\n");
-    enemyAIImpl();
-}
-
 public function OrcaJuggle():void {
     clearOutput();
     if (player.statusEffectv1(StatusEffects.OrcaCanJuggleStill) == 2 && !player.perkv1(IMutationsLib.WhaleFatIM) >= 3) {
@@ -16880,6 +16849,9 @@ private function ghostRealStrengthCompanion():Number {
 private function ghostRealStrengthTamedMonster(no:Number):Number {
 	var ghostRealStrTamedMonster:Number = 0;
 	if (no == 1) ghostRealStrTamedMonster += player.statusEffectv2(StatusEffects.TamedMonster01);
+	if (no == 2) ghostRealStrTamedMonster += player.statusEffectv2(StatusEffects.TamedMonster02);
+	if (no == 3) ghostRealStrTamedMonster += player.statusEffectv2(StatusEffects.TamedMonster03);
+	if (no == 4) ghostRealStrTamedMonster += player.statusEffectv2(StatusEffects.TamedMonster04);
 	return ghostRealStrTamedMonster;
 }
 
@@ -17098,4 +17070,4 @@ private function touSpeStrScale(stat:int):Number {
         return player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater) || explorer.areaTags.water;
     }
 }
-}
+}

@@ -244,6 +244,7 @@ public final class Mutations extends MutationsHelper {
 			outputText("Clueless.. and in distress.\n\n");
 		}
 		else {
+			player.skin.setBaseOnly({type:Skin.PLAIN, color1:"blue", pattern: Skin.PATTERN_DEMONIC_PLEASURE_RUNE});
 			if (!InCollection(player.skinColor1, DemonRace.DemonSkinColors) && !InCollection(player.skinColor2, DemonRace.DemonSkin2Colors)) {
 				var choice1:String = randomChoice(DemonRace.DemonSkinColors);
                 var choice2:String = randomChoice(DemonRace.DemonSkin2Colors);
@@ -292,7 +293,6 @@ public final class Mutations extends MutationsHelper {
 				}
 			}
 			player.legCount = 2;
-			player.skin.setBaseOnly({type:Skin.PLAIN, color1:"blue", pattern: Skin.PATTERN_DEMONIC_PLEASURE_RUNE});
 			transformations.TailDemonic.applyEffect(false);
 			transformations.HairHuman.applyEffect(false);
 			transformations.FaceDemon.applyEffect(false);
@@ -14014,7 +14014,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Change one prick to a vine-like tentacle cock.
-        if ((type == 2 || type == 1) && rand(3) == 0 && player.cocks.length > 0) {
+        if ((type == 2 || type == 1) && rand(3) == 0 && player.cocks.length > 0 && changes < changeLimit) {
             if (player.tentacleCocks() < player.cockTotal()) {
                 if (player.cocks.length == 1) { //Single cawks
                     transformations.CockScylla().applyEffect();
@@ -14026,7 +14026,7 @@ public final class Mutations extends MutationsHelper {
             }
         }
         //Grow cock(s) longer
-        if ((type == 2 || type == 1) && rand(3) == 0 && player.cocks.length > 0) {
+        if ((type == 2 || type == 1) && rand(3) == 0 && player.cocks.length > 0 && changes < changeLimit) {
             //single cock
             if (player.cocks.length == 1) {
                 temp2 = player.growCock(0, rand(4) + 3);
@@ -14077,7 +14077,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Skin part 2
-        if (player.hasPlainSkinOnly() && player.skinType != Skin.AQUA_RUBBER_LIKE && changes < changeLimit && rand(4) == 0) {
+        if (player.hasPlainSkinOnly() && player.skinType != Skin.AQUA_RUBBER_LIKE && changes < changeLimit && rand(3) == 0) {
             outputText("You suddenly start sweating abundantly.  ");
             outputText("As much as you try to dry your skin using a cloth it remains slimy and slippery to the touch as if constantly wet! Your skin is now slippery like the one of a sea creature!");
             outputText("[pg]Meanwhile your body is hit by a quake of sensation as your body shift into something more fitting for underwater swimming, your flesh becoming rubbery like the flesh of octopus and squid. <b>You now have rubber like skin same as a scylla or a kraken.</b>");
@@ -14085,14 +14085,14 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //SkinColor
-        if (player.skinColor != "ghostly white" && player.skinType == Skin.AQUA_RUBBER_LIKE && changes < changeLimit && rand(4) == 0) {
+        if (player.skinColor != "ghostly white" && player.skinType == Skin.AQUA_RUBBER_LIKE && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.RearBodyKraken.applyEffect();
             changes++;
         }
 
         //Face
-        if (player.faceType != Face.HUMAN && changes < changeLimit && rand(4) == 0) {
+        if (player.faceType != Face.HUMAN && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.FaceHuman.applyEffect();
             changes++;
@@ -14113,7 +14113,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         //Eyes Color
-        if (transformations.EyesKrakenColors.isPossible() || transformations.EyesKraken.isPossible()) {
+        if ((transformations.EyesKrakenColors.isPossible() || transformations.EyesKraken.isPossible()) && changes < changeLimit) {
             if (transformations.EyesKrakenColors.isPossible()) {
                 outputText("[pg]");
                 transformations.EyesKrakenColors.applyEffect();
@@ -17688,4 +17688,4 @@ public final class Mutations extends MutationsHelper {
 		player.herbXP(HE);
     }
 }
-}
+}

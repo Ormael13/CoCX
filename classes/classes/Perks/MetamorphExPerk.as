@@ -18,8 +18,8 @@ package classes.Perks
 		public function MetamorphExPerk()
 		{
 			super("Metamorph (Ex)", "Metamorph (Ex)",
-				"Mold your own body even further than before using genetic memory and soulforce. (cock types, ball count, pussie types, breast rows count)",
-				"You've chosen the 'Metamorph (Ex)' perk, giving you a more options to mold your own body. (cock types, ball count, pussie types, breast rows count)");
+				"Mold your own body even further than before using genetic memory and soulforce. (cock types, ball count, pussy types, breast rows count)",
+				"You've chosen the 'Metamorph (Ex)' perk, giving you a more options to mold your own body. (cock types, ball count, pussy types, breast rows count)");
 		}
 	}
 }

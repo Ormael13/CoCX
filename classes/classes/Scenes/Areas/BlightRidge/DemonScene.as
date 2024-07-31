@@ -50,7 +50,8 @@ import classes.Scenes.SceneLib;
 			clearOutput();
 			menu();
 			outputText("You smile in satisfaction as the incubus collapses, unable to continue fighting.");
-			if (monster.HP < 1) addButton (12, "Kill Him", killDemon);
+			if (monster.HP < 1) addButton (5, "Kill Him", killDemon);
+			addButtonIfTrue(6, "Tame It", SceneLib.camp.campMake.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
 			addButton (14, "Leave", cleanupAfterCombat);
 			if (player.lust >= 33) {
 				outputText("\nNow would be the perfect opportunity to taste the fruits of his sex-ready form...[pg]Do you fuck him?");
@@ -198,6 +199,7 @@ import classes.Scenes.SceneLib;
 			menu();
 			outputText("You smile in satisfaction as the omnibus collapses, unable to continue fighting.");
 			if (monster.HP < 1) addButton (5, "Kill Her", killDemon);
+			addButtonIfTrue(6, "Tame It", SceneLib.camp.campMake.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
 			addButton (14, "Leave", cleanupAfterCombat);
 			if (player.lust>=33 && player.gender > 0) {
 				outputText("\nNow would be the perfect opportunity to taste the fruits of her sex-ready form...[pg]Do you fuck her?");
@@ -374,6 +376,7 @@ import classes.Scenes.SceneLib;
 			menu();
 			outputText("You smile in satisfaction as the succubus collapses, unable to continue fighting.");
 			if (monster.HP < 1) addButton (5, "Kill Her", killDemon);
+			addButtonIfTrue(6, "Tame It", SceneLib.camp.campMake.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
 			addButton (14, "Leave", cleanupAfterCombat);
 			if (player.lust>=33) {
 				outputText("\nNow would be the perfect opportunity to taste the fruits of her sex-ready form...[pg]Do you fuck her?");

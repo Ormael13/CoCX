@@ -52,6 +52,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 12 speed lvl-up perk: Arrow Storm. Req. Cupid perk. Effect: After striking a target each shot has a chance to pierce through and do a U-Turn to pierce the target again.\n");
 			outputText("-New tier 13 libido lvl-up perk: Corrupt the soul. Req. Corrupt the mind perk. Effect: Lust vulnerability debuff can now stack beyond 0 up to infinity. (well technicaly not infinity but only Spilly Stonewall PC maybe could reach that 'inifity')\n");
 			outputText("-New tier 13 speed lvl-up perk: Phantom Arrow. Req. Arrow Storm perk. Effect: By expending mana on each shot you create a copy of each of your arrows made of pure mana that replicate the trajectories of previous shots. Phantom arrows can trigger arrow storm.\n");
+			outputText("-New Dark Ascension perk: Bottomless hunger. Raise max demonic energy capacity by 5% per rank. Max Rank: 20.\n");
 			outputText("-New event perk: Nightshade. Gained by using Black Lily. Effects: Raise min corruption by 20% permanently +50% tease damage. Pollen now erodes lust resistance by 5% per round. Your alraune abilities are now considered Dark Elements and your vine attack delivers extra dark damage.\n");
 			outputText("-New event perk: Snow Lily. Gained by using Snow Flower. Effects: Your alraune abilities are now considered to be Cold Elements effect and your vine attack delivers extra cold damage.\n");
 			outputText("-New event perk: Cinderbloom. Gained by using Ember Flower. Effects: Your alraune abilities are now considered to be Fire Elements effect and your vine attack delivers extra fire damage.\n");
@@ -71,7 +72,7 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Mental Bastion. Gained by having 40 training sessions with Tyrantia. Effects: The effects of Tyrant State are doubled: While active, you take 30% less damage from magic. You count as either pure or corrupt (whichever is better) for equipment. (Pure for the Beautiful weapons etc, corrupt for corrupt weapons)\n");
 			outputText("-New event perk: Vocal Tactician. Gained by having 15 Vocal Training sessions with Charybdis. Effects: Minion and Follower Damage increased by another 15%. Followers will act even more frequently.\n");
 			outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP / Lust effect of 10% magnitude.\n");
-			outputText("-New mutation perk: Equine Muscle. Req. having free musculature mutation slot, one of races: horse-morph, centuar, unicorn, bicorn, alicorn, nightmare. Effects: +25% to all Physical Ability damage. Gallop cost 10% less fatigue.\n");
+			outputText("-New mutation perk: Equine Muscle. Req. having free musculature mutation slot, one of races: horse-morph, centuar, unicorn, bicorn, alicorn, nightmare, laquine. Effects: +25% to all Physical Ability damage. Gallop cost 10% less fatigue.\n");
 			outputText("-New mutation perk: Fiendish Balls. Req. having free metabolism mutation slot, demon or imp race. Effects: Increase Virility by 40%.\n");
 			outputText("-New mutation perk: Fiendish Metabolism. Req. having free metabolism mutation slot, demon or imp race. Effects: You may no longer gain nourishment from anything short of cum, milk and girl juice. If you have the demonic hunger perk, gain a stacking bonus of 10% to tease damage up to 50%.\n");
 			outputText("-New mutation perk: Fiendish Ovaries. Req. having free metabolism mutation slot, demon race. Effects: Increase Fertility by 40%.\n");
@@ -160,7 +161,7 @@ public class Changelog extends BaseContent
 			outputText("-Having sex when equipped with Sagittarius Baneful Great Bow proc the Sagittarius Focus bonus until next night. Effect: PC adds 50% of his libido to wisdom and intelligence until next night.\n");
 			outputText("-Pilgrim's Bounty perk effect changed from having cum volume calculated as been always at max lust to give 100% chance to make npc's pregnant after sex with pc. In some cases when npc only get fertile post some event/quest it will only trigger when the npc is fertile (no kids with urta, marble or hel right of the bat).\n");
 			outputText("-Job: Gunslinger perk would now add low stat scaling from wis, int, spe instead of doubling the damage. Church of the gun, Alchemical cartridge and Saint of Zariman perks stat scaling improved.\n");
-			outputText("-Amateur Gunslinger, Expert Gunslinger and Master Gunslinger perks effects changed form simply from granting extra firearm attack per turn to: Increase damage (+100%/+100%/+100%) base. (+5%/+10%/+15% firearms attacks multiplier bonus). Amateur Gunslinger would also increase accuracy of firearms attacks by 10%. ");
+			outputText("-Amateur Gunslinger, Expert Gunslinger and Master Gunslinger perks effects changed from simply from granting extra firearm attack per turn to: Increase damage (+100%/+100%/+100%) base. (+5%/+10%/+15% firearms attacks multiplier bonus). Amateur Gunslinger would also increase accuracy of firearms attacks by 10%. ");
 			outputText("Expert Gunslinger decrease dmg penalty from using non 2H dual firearms by 30%, Master Gunslinger decrease dmg penalty from using 2H dual firearms by 50%.\n");
 			outputText("-All gunslinger perks was adjusted to req. wis, int and spe instead of ocassional req. tou instead one of those three stats. That is to match stats from which firearms dmg scaling.\n");
 			outputText("-Explosive cartridge perk increase dmg done to large enemies or group of enemies (+100% > +200%). Named Bullet deal much more dmg to bosses (+50% > +200%).\n");
@@ -208,7 +209,7 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Drill Sergeant. Gained by having 20 Vocal Training sessions with Charybdis. Effects: Your voice and bearing now commands respect, even among the surliest of recruits. Your followers will attack an additional time per round, and are guaranteed to attack.\n");
 			outputText("-Color code updates. (GatoGrande) (making all the damage/heal/etc. numbers colors not use diff codes and for some cases making better fitting color choices for higher readability)\n");
 			outputText("-Fix for Zenji post-halloween. (GatoGrande)\n");
-			outputText("-Bad End form overuse Cerulean Potion form Giacomo was changed into way to gain Souless perk and become true demon PC. It comes with few negative side effects but would they stop you a TRUE DEMON, RIGHT?\n");
+			outputText("-Bad End from overuse Cerulean Potion from Giacomo was changed into way to gain Souless perk and become true demon PC. It comes with few negative side effects but would they stop you a TRUE DEMON, RIGHT?\n");
 			outputText("-New tier for demon race score bonuses - Elder Succubus/Incubus & Arch Succubus/Incubus (29+ pts / 38+ pts): +100/+200 spe multi, +110/+250 int multi, +275/+320 lib multi, +50/+200 sens, +150%/+180% max mana multi, -50%/-55% max wrath multi, +150%/+180% max lust multi\n");
 			outputText("-Added devil eyes to count for demon score (demon tf would be able to grant devil eyes too)\n");
 			outputText("-Fix zenji village, code var change for cocksock type, patches broken arms issue. (Jtecx)\n");
@@ -238,7 +239,6 @@ public class Changelog extends BaseContent
 			outputText("-New consumable (by Liadri): average Lethicite. Drops from true demon enemies. Consuming it by PC with Soulless perk will give up to 100 demonic energy.\n");
 			outputText("-Manacost for MM added as alt cost. (Jtecx) (Only for True Demon PC's)\n");
 			outputText("-Added mockfights to Nadia. (Svalkash)\n");
-			outputText("-New Dark Ascension perk: Bottomless hunger. Raise max demonic energy capacity by 5% per rank. Max Rank: 20.\n");
 			outputText("-New Dark Ascension perk: Efficient Soul Consumption. Decrease the cost of upgrading yourself through demonic energy by 5% per rank. Max Rank: 19.\n");
 			outputText("-PC with Soulless perk no longer can use normal ascension instead using variant dark ascension. It have it own choice of perks to buy and some of the options that normal ascension have.\n");
 			outputText("-New consumable (by Liadri): Greater Lethicite. Drops from true demon enemies. Consuming it by PC with Soulless perk will give up to 250 demonic energy.\n");
@@ -283,14 +283,13 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Harpy Queen. Gained by giving birth to 20+ harpies. Effects: As a harpy or harpy subtype increase toughness speed and libido based on the ammount of harpy children you gave birth to.\n");
 			outputText("-Minor fixes: Coal can randomly send you to heat OR rut, Low standard check for heckel, fixed helia corruption tolerance (Svalkash)\n");
 			outputText("-Each Dao of Element can now reach 12th layer. bonuses for reaching each of three new layers is 10% more resistance and 50% more damage.\n");
-			outputText("-Added option to back form boos room in Ebon Labyrinth if it contain Draculina boss. That choice will only appear if the PC does not meet all requirements to avoid an instant bad end and therefore not have any way to deal with her most annoying (by majority consensus) ability.\n");
+			outputText("-Added option to back from boos room in Ebon Labyrinth if it contain Draculina boss. That choice will only appear if the PC does not meet all requirements to avoid an instant bad end and therefore not have any way to deal with her most annoying (by majority consensus) ability.\n");
 			outputText("-New magical soulskill: Sunrise. Req. buying manual from Qi shop for 100 spirit stones. Create miniature sun and throw it at enemy. Base cost: 400 soulforce.\n");
 			outputText("-During Draculina boss fight been able to use Sunrise soulskill or use foxflame pelt would help to counter her Darkness move (like spell Blind can do already).\n");
 			outputText("-Foxflame Pelt special effect minor change when having 9 cinder tails: cost of use or maintain is halved, speed boost is doubled, can fly (similar to using only SF and would cost SF and Mana per turn needed to sustain foxflame pelt).\n");
 			outputText("-Minor adjustion of soulskill damage calculations.\n");
 			outputText("-Default firearms dmg calculation from weapon atk increased (2x > 10x) and scaling off wis/int/spe (instead of core values to use scaling functions).\n");
 			outputText("-Changed order of discovered areas with Lake been first founded then Forest (O).\n");
-			outputText("-Fixes a quality of life issue where pressing down the mouse button and then moving the mouse off of a button before releasing the mouse button still clicks/activates the button. (Edward Darksong)\n");
 			outputText("-Fixed Hel loss scenes being broken. Fixed lizan rogue win corruption check being too low for rape. Fixed Electra not asking for recruitment when accessed from SoulSense menu. Minor typo/grammar fixes. (Svalkash)\n");
 			outputText("-Adds a newer race menu UI using buttons in place of text links for all the races, along side a button to switch from new UI to old UI and back. Hovering over a race displays any bonuses you are currently getting from that race, if any. And clicking on a race will switch to another 'screen' displaying all the race's requirements, stats and stuff like in the old UI. (Edward Darksong)\n");
 			outputText("-New mutation perk: Hydra Blood. Req. having free bloodstream mutation slot, Hydra race and Hydra Regeneration perk. Effects: Improve existing Regeneration by 1% negated by fire damage.\n");
@@ -307,10 +306,19 @@ public class Changelog extends BaseContent
 			outputText("-Ayo Armor Proficiency perk have additional req. of Job: Artificer perk and it desc was slight changed to account for damage reduction depending on whenever armor is powered up or not (10% when unpowered and 20% when powered).\n");
 			outputText("-New tier 4 wisdom lvl-up perk: Conduction Soulforce Charge. Req. Job: Artificier perk and 125+ wisdom. Effect: As long you have sufficient amount of soulforce, expend them to keep Ayo Armor active instead of using internal storage.\n");
 			outputText("-New tier 0 wisdom lvl-up perk: (Basic) Job: Tamer. Req. 10+ wisdom. Effect: Allow to tame 1 beast with feral level of intelligence.\n");
-			outputText("-New tier 0 sensitivity lvl-up perk: (Basic) Job: Esper. Req. 10+ sensitivity. Effect: The same effects as perk Telekinesis (You have the power to wield and throw objects with your mind alone. Gain a bonus to damage based on inteligence when using thrown weapons.)\n");
-			outputText("-Job: All-Rounder req. for sensitivity was increased form 50 to 75 like other stats.\n");
-			outputText("-New type of minions: tamed monsters. Req. Tamer Job and they can be at any time released to be replaced by different one monster. At start only feral enemeis can be tamed and to succeed player must defeat them in combat and then have higher wisdom to successfully tame them. Some perks/items can increase their damage. They would also benefit from effectivness bonus that is applied to any henchman.\n");
+			outputText("-New tier 0 sensitivity lvl-up perk: (Basic) Job: Esper. Req. 10+ sensitivity. Effect: The same effects as perk Telekinesis (You have the power to wield and throw objects with your mind alone. Gain a bonus to damage based on inteligence when using thrown weapons.) (+1 exploration reveal)\n");
+			outputText("-Job: All-Rounder req. for sensitivity was increased from 50 to 75 like other stats.\n");
+			outputText("-New type of minions: tamed monsters. Req. Tamer Job and they can be at any time released to be replaced by different one monster. To succeed player must defeat them in combat and then have higher wisdom to successfully tame them (non feral/true demon tamable enemies are treated as if they had 10x higher wis). Some perks/items can increase their damage. They would also benefit from effectivness bonus that is applied to any henchman.\n");
 			outputText("-Sceptre of Command and Yogi Uh Panel items effect will affect tamed monsters too.\n");
+			outputText("-New tier 0 wisdom lvl-up perk: Beast Knowledge. Req. Job: Tamer perk and 25+ wisdom. Effect: During taming monster check player wisdom is treated as if it was 2x higher.\n");
+			outputText("-New tier 1 wisdom lvl-up perk: Beast 02. Req. Job: Tamer perk and 50+ wisdom. Effect: You can have 2 tamed monsters.\n");
+			outputText("-New tier 2 wisdom lvl-up perk: Three times a tame. Req. Beast 02 perk and 75+ wisdom. Effect: Now you can control 3 monsters at the same time.\n");
+			outputText("-New tier 3 wisdom lvl-up perk: Fourth Tamer of the Apocalypse. Req. Three times a tame perk and 100+ wisdom. Effect: Now you can assemble 4 horsema... monsters team.\n");
+			outputText("-New tier 1 wisdom lvl-up perk: Working Together. Req. Beast 02 perk and 55+ wisdom. Effect: Cooperating your tamed monsters would empower the one attacking. (+1x to dmg multi of attacking monster per tamed monster after 1st)\n");
+			outputText("-Rathazul would now be giving offer to recruit him to camp each day in case of rejecting on previous day.\n");
+			outputText("-'Go Demon' option in Factory changed to be no longer bad end. As the scene describe PC turns into True Dmeon. But we all know now that is not game over... right? So along other existing methods it will be ANOTHER way to go true demon PC mode. Naturaly if PC is already soulless when meeting succubus he can't take her 'Go Demon' offer.\n");
+			outputText("-New mutation perk: Blazing Heart. Req. having free heart mutation slot, Hinezumi, Salamander, Phoenix, Hellcat and Fire Snail race. Effects: Gain permanant weakness to cold and fire resistance. Increase fire damage by 25%.\n");
+			outputText("-New mutation perk: Blazing Heart (Primitive). Req. Blazing Heart and lvl 30+. Effects: Gain permanant weakness to cold and fire resistance. Increase fire damage by 50%. Heat and Rut also grants you a bonus equal to 10% of the libido bonus to strength.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -322,6 +330,27 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//New tier 4 wisdom lvl-up perk: ???. Req. Fourth Tamer of the Apocalypse perk and 125+ wisdom. Effect: 5th slot
+			outputText("-\n");//New tier ? wisdom lvl-up perk: Apes Together Strong. Req. ??? perk and ???+ wisdom. Effect: allow exchange single monsters variants > group monsters variants
+			outputText("-\n");//New tier 2 wisdom lvl-up perk: They Fight, They Protect. Req. Three times a tame perk and 80+ wisdom. Effect: meat shield option ^^
+			outputText("-\n");//New tier 3 wisdom lvl-up perk: Stronger Tamed Mosters. Req. Fourth Tamer of the Apocalypse perk and 105+ wisdom. Effect: bigger meat shields, bigger claws, bigger muscles \o/ bigger everything???
+			outputText("-\n");//New tier 4 wisdom lvl-up perk: Empowered Taming. Req. ??? perk and 130+ wisdom. Effect: During taming monster it wisdom is treated as if it was 80% lower.
+			outputText("-\n");//New tier 7 wisdom lvl-up perk: Kaiju No8. Req. Job: Tamer and 50+ wisdom. Effect: To your team of monsters joins 8th kaiju.
 			outputText("-\n");//New mutation perk: Human Parathyroid Glands (Final Form). Req. Human Parathyroid Glands (Evolved) and lvl 90+. Effects: Increases self healing by 40 * level HP in combat and twice more out of combat. 8 * level HP Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.
 			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
@@ -330,13 +359,21 @@ public class Changelog extends BaseContent
 			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Lord Shadeogorath) (Furrin Gok) (khovel) (Chibizs) (Svalkash) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Edward Darksong)
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Fixed bugs: Dracula/lina PC unable to find get ghoul if they not learned this as normal Vampire, unable to buy manual for 1st atk: f. swords, Arigean Princess PC not been fully immune to TF-ing like other perm races, Weresharks not having their stats changing according to moon phase or boosted during use of Crinos Shape, Phoenix TF adding mutagen penatly instead of stat curse, ");
 			outputText("Endless Rage draining 10x too much wrath per turn, Berzerker/Lustzerker still req. to be activated after they been activated as part of Asura Form activation, dormant state of wereraces 'blessings' increasing race score and not lowering it, Hinezumi Buring Blood IM accesable by Bunny race, returning from teleportation circle at 4th floor of river dungeon sending PC to ");
 			outputText("3rd floor teleportation circle room, perk allowing to always run away from enemy/ies been ignored in dungeons, unarmed/feral giving mastery gains for small weapons, 2 of 4 SF to Elemental Energy conversion options having wrong check for usable SF, using Fiery Band for calling Kiha to help fight... Kiha, Ceraph after update still not able to win using her super cool lust beam attack, ");
 			outputText("Pilgrim's Bounty perk setting cumQ as if max lust was 100, Raphael rape scene treating all PC cocks as tentalce cocks, Condensed Power and Titanic Strength perks desc/effects been misaligned/incorectly calculated, HB Mech Dragon's Breath Flamer & Scatter Laser upgrade(s) after instaling each weapon, HB Ayo Armor have it stored SF reset on loading save, Vapula not longer will make Joy ");
 			outputText("join any threesome scenes, Patchouli sex scenes will now know when she gained cock she could use, Pure JoJo anal sex sex scene cock parser going postal, trapped satyr sex scenes not giving sex XP or triger any related effects, Cum Cannon checking for cow not mino race, White-Faced One Birthright (Final Form) stat multi bonuses, Nadia recruitment endcounter bug msg, ");
 			outputText("one of Raphael scenes using variant for tentacle cocks that can go all way throu without having such cock(s), unable to gain plasma dmg from using fire buff on lightning weapon and vice versa, unable to use Blind during Draculina fight, rescue from bad end not clearing lingering status effects, Centaurium tf effect checking for wrong elf-like ears type, ");
-			outputText("Ascension: Transhumanism (Sen) perk not adding sensitivity, Selachimorphanthropy bonuses not changing with moon phases, inconsistencies for damage type dealt in melee/range base attacks and specials, flame blade bonus dmg from libido, combining fire and lightning damage on melee weapons, lust defeat text for non sentient constructs not using it own variant\n\n");
+			outputText("Ascension: Transhumanism (Sen) perk not adding sensitivity, Selachimorphanthropy bonuses not changing with moon phases, inconsistencies for damage type dealt in melee/range base attacks and specials, flame blade bonus dmg from libido, combining fire and lightning damage on melee weapons, lust defeat text for non sentient constructs not using it own variant, ");
+			outputText("Abyssal Ink and Displacer Beast post fight scenes bypassing perm races transformation immunity\n\n");
 			/*ostatni punkt changelogu
 			outputText("(Part 2/2) <b>Version 0.9a:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");

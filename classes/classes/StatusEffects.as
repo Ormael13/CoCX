@@ -684,6 +684,9 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Tamani:StatusEffectType                         = mk("Tamani");//Used only for compatibility with old save files, otherwise no longer in use
 		public static const TamaniFemaleEncounter:StatusEffectType          = mk("Tamani Female Encounter");//Used only for compatibility with old save files, otherwise no longer in use
 		public static const TamedMonster01:StatusEffectType                 = mk("TamedMonster01");
+		public static const TamedMonster02:StatusEffectType                 = mk("TamedMonster02");
+		public static const TamedMonster03:StatusEffectType                 = mk("TamedMonster03");
+		public static const TamedMonster04:StatusEffectType                 = mk("TamedMonster04");
 		public static const TelAdre:StatusEffectType                        = mk("Tel'Adre");
 		public static const TelAdreTripxi:StatusEffectType                  = mk("Tel'Adre Tripxi");
 		public static const TelAdreTripxiGuns1:StatusEffectType             = mk("Tel'Adre Tripxi Guns 1");

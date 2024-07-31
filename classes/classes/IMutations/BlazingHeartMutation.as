@@ -11,27 +11,21 @@ import classes.Creature;
 import classes.Player;
 import classes.Races;
 
-public class EquineMuscleMutation extends IMutationPerkType
-	{
-		override public function get mName():String {
-            return "Equine Muscle";
+public class BlazingHeartMutation extends IMutationPerkType
+    {
+        override public function get mName():String {
+            return "Black Heart";
         }
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
-			if (pTier >= 1){
-				descS += "+"+(pTier*25)+"% to all Physical Ability damage. Gallop cost "+pTier+"0% less fatigue";
-			}
-            if (pTier >= 2){
-                descS += ". Physical ability consumes "+((pTier-1)*5)+"% less fatigue";
-            }
-            if (pTier >= 3){
-                descS += ". Physical ability that stuns do so for one extra round";
-            }
-            if (pTier >= 4){
-                descS += ". While Galloping gains +10% evasion against ranged attack";
-            }
+            if (pTier >= 1) descS += "Gain permanent weakness to cold and fire resistance. Increase fire damage by "+(25*pTier)+"%";
+            if (pTier >= 2) descS += ". Heat and Rut also grants you a bonus equal to ";
+            if (pTier == 2 || pTier == 3) descS += "1";
+			if (pTier >= 4) descS += "2";
+            if (pTier >= 2) descS += "0% of the libido bonus to strength";
+            if (pTier >= 4) descS += ", count your lust for twice as high when using Lust strike and it's now benefit from all effects that pertain to the tease action";
             if (descS != "")descS += ".";
             return descS;
         }
@@ -43,10 +37,10 @@ public class EquineMuscleMutation extends IMutationPerkType
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
-                    this.requireMusclesMutationSlot()
+                    this.requireHeartMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.isAnyRaceCached(Races.HORSE, Races.CENTAUR, Races.UNICORN, Races.ALICORN, Races.LAQUINE);
-                    }, "Horse/Centaur/Unicorn/Bicorn/Alicorn/Nightmare/Laquine race");
+                        return player.isRace(Races.FIRESNAILS) || player.isRace(Races.HELLCAT) || player.isRace(Races.PHOENIX) || player.isRace(Races.SALAMANDER) || player.isRace(Races.MOUSE,2);
+                    }, "fire snail, hellcat, phoenix, salamander or hinezumi race");
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -60,18 +54,18 @@ public class EquineMuscleMutation extends IMutationPerkType
         //Mutations Buffs
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
-            if (pTier == 1) pBuffs['str.mult'] = 0.05;
-            if (pTier == 2) pBuffs['str.mult'] = 0.15;
-            if (pTier == 3) pBuffs['str.mult'] = 0.35;
-            if (pTier == 4) pBuffs['str.mult'] = 0.75;
+            if (pTier == 1) pBuffs['lib.mult'] = 0.05;
+            else if (pTier == 2) pBuffs['lib.mult'] = 0.15;
+            else if (pTier == 3) pBuffs['lib.mult'] = 0.3;
+            else if (pTier == 4) pBuffs['lib.mult'] = 0.9;
             return pBuffs;
         }
 
-        public function EquineMuscleMutation() 
+        public function BlazingHeartMutation() 
 		{
-			super(mName + " IM", mName, SLOT_MUSCLE, 4);
-		}
-		
-	}
+			super(mName + " IM", mName, SLOT_HEART, 2);
+        }
 
+        
+    }
 }

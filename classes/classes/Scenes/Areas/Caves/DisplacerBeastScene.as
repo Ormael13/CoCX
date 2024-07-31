@@ -16,7 +16,7 @@ public class DisplacerBeastScene extends BaseContent {
 
     public function displacerBeastEncounter():void {
         clearOutput();
-        if (player.hasPerk(PerkLib.Feeder)) {
+        if (player.hasPerk(PerkLib.Feeder) && !player.blockingBodyTransformations()) {
             displacerBeastMilkfeeding();
             return;
         }
@@ -51,15 +51,17 @@ public class DisplacerBeastScene extends BaseContent {
     public function displacerBeastDefeat():void {
         clearOutput();
         outputText("As you fall defeated by the octopi-cat woman. Her expression change from aggressive to delighted as she strips your gear away. You expect your crotch to get played with but to your surprise, she goes for your [breasts] applying her tentacles on them like a pair of suction cups. You gasp in surprise as something not unlike needles somehow enter your nipples doing god knows what inside of your chest which inflate to ");
-        if (player.breastRows[0].breastRating < 5) {
-            if (player.breastRows.length == 0) {
-                player.createBreastRow(5);
-                transformations.UnlockBreasts();
-            }
-            else player.growTits(2, 1, true, 3);
-        }
-        else player.growTits(2, 1, false, 3);
-        if (player.breastRows[0].lactationMultiplier < 1) player.breastRows[0].lactationMultiplier = 1.25;
+        if (!player.blockingBodyTransformations()) {
+			if (player.breastRows[0].breastRating < 5) {
+				if (player.breastRows.length == 0) {
+					player.createBreastRow(5);
+					transformations.UnlockBreasts();
+				}
+				else player.growTits(2, 1, true, 3);
+			}
+			else player.growTits(2, 1, false, 3);
+			if (player.breastRows[0].lactationMultiplier < 1) player.breastRows[0].lactationMultiplier = 1.25;
+		}
         outputText(player.breastCup(0) + " cup! You feel sudden dribbles of milk begin to flow out of your overgrown breasts as the tentacles begin to suckle on them and you moan in surprise at this violation!\n\n");
         outputText("The four-armed catgirl seems to be enjoying herself, mewling as she forcefully sucks your" + (player.breastRows[0].lactationMultiplier == 1.25 ?" newly flowing":"") + " milk out! The feeling in your chest eventually becomes too much for you and you");
         if (player.hasCock()) {
@@ -67,7 +69,7 @@ public class DisplacerBeastScene extends BaseContent {
             else outputText(" cum");
         }
         if (player.hasVagina()) outputText(" squirt");
-        outputText(" in accordance with your breastgasm.\n\nThankfully the beast finally unplugs her tentacles from your tortured breasts, licking her lips in delight and done with her meal, teleports away from your view. You lay there still lost in the feeling of your heaving chest as you lose consciousness.\n\n");
+        outputText(" in accordance with your breastgasm.\n\nThankfully the beast finally unplugs her tentacles from your tortured breasts, licking her lips in delight and done with her meal, teleports away from your view."+(player.blockingBodyTransformations()?"":" You lay there still lost in the feeling of your heaving chest as you lose consciousness.")+"\n\n");
         
         player.sexReward("no", "Nipples");
         if (inDungeon) //EL check
