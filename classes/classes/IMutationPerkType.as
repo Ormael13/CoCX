@@ -54,7 +54,7 @@ public class IMutationPerkType extends PerkType
 			[SLOT_NERVSYS, {name: "NervSys"}],
 			[SLOT_THYROID, {name: "Thyroid Gland"}],
 			[SLOT_PARATHYROID, {name: "Parathyroid Gland"}],
-			[SLOT_ADAPTATIONS, {name: "Adaptations"}],
+			[SLOT_ADAPTATIONS, {name: "Adaptations"}]
 		]);
 		public static const SlotList:/*String*/Array = [
 			SLOT_HEART,
@@ -72,7 +72,7 @@ public class IMutationPerkType extends PerkType
 			SLOT_NERVSYS,
 			SLOT_THYROID,
 			SLOT_PARATHYROID,
-			SLOT_ADAPTATIONS,
+			SLOT_ADAPTATIONS
 		];
 		
 		/**
@@ -85,8 +85,16 @@ public class IMutationPerkType extends PerkType
 		private var _slot:String;
 		private var _pBuffs:Object;
 		private var _trueVariant:Boolean;
+		//public var imvalid:Array;
 
 		public function IMutationPerkType(id:String, name:String, slot:String, maxLvl:int, trueVariant:Boolean = false) {
+			//GDI probably pre-initialization issue again
+//			if (imvalid.indexOf(id) < 0) {
+//				outputText(id + " is conflicting with an earlier applied version. Please report this, and ask the Devs to check the latest added IMutation.")
+//				id += "_errorIM"
+//			} else {
+//				imvalid.append(id)
+//			}
 			super(id, name, name, name, false);
 			this._maxLvl = maxLvl;
 			this._slot = slot;

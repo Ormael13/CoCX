@@ -298,13 +298,6 @@ public function saveScreen():void
 	mainView.nameBox.text = "";
 	mainView.nameBox.maxChars = 54;
 	mainView.nameBox.visible = true;
-	/*
-	//removing extra mutations from save
-	for each(var mutation:PerkType in IMutationsLib.mutationsArray("")){
-		if (player.perkv1(mutation) == 0) player.removePerk(mutation);
-	}
-	player.removePerk(IMutationsLib.MutationsTemplateIM);
-	 */
 
 	// var test; // Disabling this variable because it seems to be unused.
 	if (flags[kFLAGS.HARDCORE_MODE] > 0)
@@ -1039,13 +1032,6 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 			saveFile.data.breastRows[i].fuckable = player.breastRows[i].fuckable;
 			saveFile.data.breastRows[i].fullness = player.breastRows[i].fullness;
 		}
-		/*
-		//removing extra mutations from save
-		for each(var mutation:PerkType in IMutationsLib.mutationsArray("")){
-			if (player.perkv1(mutation) == 0) player.removePerk(mutation);
-		}
-		player.removePerk(IMutationsLib.MutationsTemplateIM);
-		*/
 
 		//Set Perk Array
 		//Populate Perk Array
