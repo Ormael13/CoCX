@@ -317,8 +317,8 @@ public class Changelog extends BaseContent
 			outputText("-New tier 1 wisdom lvl-up perk: Working Together. Req. Beast 02 perk and 55+ wisdom. Effect: Cooperating your tamed monsters would empower the one attacking. (+1x to dmg multi of attacking monster per tamed monster after 1st)\n");
 			outputText("-Rathazul would now be giving offer to recruit him to camp each day in case of rejecting on previous day.\n");
 			outputText("-'Go Demon' option in Factory changed to be no longer bad end. As the scene describe PC turns into True Dmeon. But we all know now that is not game over... right? So along other existing methods it will be ANOTHER way to go true demon PC mode. Naturaly if PC is already soulless when meeting succubus he can't take her 'Go Demon' offer.\n");
-			outputText("-New mutation perk: Blazing Heart. Req. having free heart mutation slot, Hinezumi, Salamander, Phoenix, Hellcat and Fire Snail race. Effects: Gain permanant weakness to cold and fire resistance. Increase fire damage by 25%.\n");
-			outputText("-New mutation perk: Blazing Heart (Primitive). Req. Blazing Heart and lvl 30+. Effects: Gain permanant weakness to cold and fire resistance. Increase fire damage by 50%. Heat and Rut also grants you a bonus equal to 10% of the libido bonus to strength.\n");
+			outputText("-New mutation perk: Blazing Heart. Req. having free heart mutation slot, Hinezumi, Salamander, Phoenix, Hellcat and Fire Snail race. Effects: Gain permanent weakness to cold and fire resistance. Increase fire damage by 25%.\n");
+			outputText("-New mutation perk: Blazing Heart (Primitive). Req. Blazing Heart and lvl 30+. Effects: Gain permanent weakness to cold and fire resistance. Increase fire damage by 50%. Heat and Rut also grants you a bonus equal to 10% of the libido bonus to strength.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
