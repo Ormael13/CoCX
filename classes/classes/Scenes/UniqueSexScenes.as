@@ -440,8 +440,8 @@ public class UniqueSexScenes extends BaseContent
 					outputText("You trot toward your opponent your");
 					if ((player.horseCocks() >= 1) || (player.kirinCocks() >= 1)) outputText(" bestial equine");
 					outputText(" shaft dripping plasma on the ground as your dreamily think of the of the hole you're about to plow." +
-							" This terrifying and arousing sight is enought to cause your victim to a last ditch effort to try and slowly crawl away from you on all four but soon enought the looming shadow of your throbbing [cock] is already looming over [monster his] exposed ass, dripping plasma on [monster name] back." +
-							" No longuer able to wait you plunge your ");
+							" This terrifying and arousing sight is enough to cause your victim to a last ditch effort to try and slowly crawl away from you on all four but soon enough the looming shadow of your throbbing [cock] is already looming over [monster his] exposed ass, dripping plasma on [monster name] back." +
+							" No longer able to wait you plunge your ");
 					if (player.cocks[0].cockLength >= 15) outputText("massive ");
 					if ((player.horseCocks() >= 1) || (player.kirinCocks() >= 1)) outputText("horse");
 					outputText("cock into [monster his] exposed "+monster.assholeOrPussy()+" clenching your teeth and foaming at the mouth in pleasure");
@@ -450,7 +450,7 @@ public class UniqueSexScenes extends BaseContent
 						if ((player.horseCocks() >= 1) || (player.kirinCocks() >= 1)) outputText(" equine");
 						outputText(" dick into your the your victims warm passage, [monster his] belly deforming to the shape of your enormous shaft");
 					}
-						outputText(". Now fully sheated into your newest plug thrusting with wanton abandon as your charge quickly builds up within you. In a moment, you quickly begin unloading surge after surge of electricity into them." +
+						outputText(". Now fully sheathed into your newest plug thrusting with wanton abandon as your charge quickly builds up within you. In a moment, you quickly begin unloading surge after surge of electricity into them." +
 							" The air crackles around you with latent, lustful shocks. You can't help but ");
 							if ((player.horseCocks() >= 1) || (player.kirinCocks() >= 1)) outputText("whinny");
 							else outputText("growl");
@@ -573,7 +573,7 @@ public class UniqueSexScenes extends BaseContent
 
 		public function alrauneGetPollinatedScene():void {
 			clearOutput();
-			outputText("With your foe on the ground beneath you, you can’t help but think you’ve finally found a stamen to fertilise yourself with! Without waiting any longer, you proceed to grab him with your vines and pull him toward your waiting flower. He violently struggles to escape as you pull him ever closer to your flower, all the while you giggle at his desperate attempts to get away. All good things must come to an end however, and, entertaining as it is, you want him pollinating you now! You release a massive cloud of your aphrodisiac pollen toward him,  letting him inhale your scent.  He doesn’t struggle much any more as his stamen betrays him, going erect in seconds, ");
+			outputText("With your foe on the ground beneath you, you can’t help but think you’ve finally found a stamen to fertilise yourself with! Without waiting any longer, you proceed to grab him with your vines and pull him toward your waiting flower. He violently struggles to escape as you pull him ever closer to your flower, all the while you giggle at his desperate attempts to get away. All good things must come to an end however, and, entertaining as it is, you want him pollinating you now! You release a massive cloud of your aphrodisiac pollen toward him,  letting him inhale your scent.  He doesn't struggle much any more as his stamen betrays him, going erect in seconds, ");
 			outputText("drooling precum at the mere thought of getting a shot at your lovely pussy, something you will be more than happy to let him do. Looking at you with half lidded eyes, he lets you take control entirely. You finally reel him into your nectar bath and kiss him, lubing up his stamen with your nectar. He makes a cute moan as you prepare him for the next step, drooling with delight at the idea of getting what you want.\n\n");
 			outputText("Unable to wait any longer, you pull him to you, impaling your nectar drenched hole on his cock. You begin to slide yourself up and down, making lewd wet noises as you forcefully milk your former opponent's stamen. Pollination feels so wonderful! You fawn over him, moving into your drugged victim’s open arms and before long it’s hard to figure which of you is the most addicted, as you kiss him with the passion of a longtime lover. You break the sloppy kiss, your mouths still linked by a strand of saliva, as your mate finally bottoms out and fills your flower with his seed.\n\n");
 			outputText("Highly satisfied, you deposit him back on the ground with little ceremony, half conscious from the massive drugged induced orgasm your pollen claimed from him. You can’t help but hope it took, daydreaming of your children to come as you seal your vagina shut to prevent the load from escaping.");
@@ -935,8 +935,7 @@ public class UniqueSexScenes extends BaseContent
 			cleanupAfterCombat();
 		}
 		private function isntATentacleBeast():Boolean{
-			if (monster is TentacleBeast || monster is TentacleBeastRaging) return false;
-			else return true;
+			return !(monster is TentacleBeast || monster is TentacleBeastRaging);
 		}
 
 		public function trueDemonIncubusFeast():void {
