@@ -97,7 +97,7 @@ public class Clara extends Monster
 			if(HP < 50 && rand(2) == 0) {
 				notMurbleEnjoysTheLacticAcid();
 			}
-			else if(player.hasStatusEffect(StatusEffects.Blind))
+			else if(player.hasStatusEffect(StatusEffects.Blind) && !player.hasPerk(PerkLib.SixthSense))
 			{
 				claraGropesBlindPCs();
 			}

@@ -504,7 +504,8 @@ public class Arms extends SaveableBodyPart {
 	public static const ARMORED_FOREARMS:int = 64;
 	EnumValue.add(Types, ARMORED_FOREARMS, "ARMORED_FOREARMS", {
 		name:"arigean",
-		appearanceDesc: "Your arms are identical to those of a human, However your forearms seem to be covered in fragments of a black, glossy metal acting as natural bracers."
+		appearanceDesc: "Your arms are identical to those of a human, However your forearms seem to be covered in fragments of a black, glossy metal acting as natural bracers.",
+		claw: true
 	});
 
 	public static const DEMON:int = 65;

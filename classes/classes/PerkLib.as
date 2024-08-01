@@ -522,6 +522,9 @@ public class PerkLib
 		public static const WorkingTogether:PerkType = mk("Working Together", "Working Together",
 				"Cooperating your tamed monsters would empower the one attacking. (+1x to dmg multi of attacking monster per tamed monster after 1st)",
 				"You've chosen the 'Working Together' perk. Cooperating your tamed monsters would empower the one attacking. (+1x to dmg multi of attacking monster per tamed monster after 1st)");
+		public static const SixthSense:PerkType = mk("Sixth Sense", "Sixth Sense",
+				"You are not affected by blind and other confusing effects.",
+				"You've chosen the 'Sixth Sense' perk. You are not affected by blind and other confusing effects.");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -535,9 +538,6 @@ public class PerkLib
 		public static const StrongerTamedMosters:PerkType = mk("Stronger Tamed Mosters", "Stronger Tamed Mosters",
 				".",
 				"You've chosen the 'Stronger Tamed Mosters' perk. .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk.");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk.");
@@ -7250,6 +7250,9 @@ public class PerkLib
 			//.requireMinSens(25);
             JobEsper.requireSen(10);
             //Tier 1 Sensitivity Perks
+            SixthSense.requireSen(25)
+                    .requirePerk(JobEsper)
+                    .requireLevel(6);
             EyesOfTheHunterAdept.requireSen(50)
                     .requirePerk(EyesOfTheHunterNovice)
                     .requireLevel(6);
@@ -8361,4 +8364,4 @@ public class PerkLib
         }
 	}
 }
-}
+}

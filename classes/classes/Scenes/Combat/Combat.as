@@ -657,7 +657,7 @@ public class Combat extends BaseContent {
         return player.hasStatusEffect(StatusEffects.MonsterInvisible) && (player.hasStatusEffect(StatusEffects.MonsterDig) || !player.hasPerk(PerkLib.TrueSeeing));
     }
     public function get isEnemyInvisibleButNotUnderground():Boolean {
-        return player.hasStatusEffect(StatusEffects.MonsterInvisible) && !player.hasStatusEffect(StatusEffects.MonsterDig) && !player.hasPerk(PerkLib.TrueSeeing);
+        return player.hasStatusEffect(StatusEffects.MonsterInvisible) && !player.hasStatusEffect(StatusEffects.MonsterDig) && !player.hasPerk(PerkLib.TrueSeeing) && !player.hasPerk(PerkLib.SixthSense);
     }
 
     public function isPlayerSilenced():Boolean {
@@ -5291,7 +5291,6 @@ public class Combat extends BaseContent {
                         if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) sharedVenomMulti *= 2;
                         if (player.armor == armors.ELFDRES && player.isElf()) sharedVenomMulti *= 2;
                         if (player.armor == armors.FMDRESS && player.isWoodElf()) sharedVenomMulti *= 2;
-
                         outputText(" and inject your venom into the wound!");
                         if (player.lowerBody == LowerBody.ATLACH_NACHA){
                             outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness and arousal.");
@@ -5305,9 +5304,7 @@ public class Combat extends BaseContent {
                             else if (player.level < 30) damage3B += 70 + (player.level - 20) * 1;
                             else damage3B += 80;
                             damage3B *= 0.2;
-
                             damage3Ba *= sharedVenomMulti;
-
                             damage3B *= damage3Ba;
                             poisonScaling *= damage3Ba;
                             damage3B *= 1 + (poisonScaling / 10);
@@ -5347,7 +5344,6 @@ public class Combat extends BaseContent {
                 default:
             }
             outputText(".");
-
             if (pLibHellFireCoat) ExtraNaturalWeaponAttack(biteMultiplier, "fire");
             else if (pFoxFlamePelt) ExtraNaturalWeaponAttack(biteMultiplier, "foxflame");
             else ExtraNaturalWeaponAttack(biteMultiplier);
@@ -5386,6 +5382,11 @@ public class Combat extends BaseContent {
                     flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                 }
             }
+			if (player.hasATailBiteAttack()) {
+				outputText("You bite your foe, sinking your tail"+(player.tailType == Tail.ARIGEAN_PRINCESS)+" teeth in [themonster] rending flesh. ");
+				if (player.tailType != Tail.ARIGEAN_PRINCESS) ExtraNaturalWeaponAttack(1);
+				ExtraNaturalWeaponAttack(1);
+			}
         }
         //DOING EXTRA CLAW ATTACKS
         if (player.haveNaturalClaws()) {

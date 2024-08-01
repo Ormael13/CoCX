@@ -83,7 +83,7 @@ public class Ayane extends Kitsune {
 
     override protected function performCombatAction():void {
         //Ayane periodically appears and disappears around the player. At random at the start of the round Ayane may be hidden or visible. If she’s hidden all attack but tease will fail
-        if (rand(2) == 0) {
+        if (rand(2) == 0 && !player.hasPerk(PerkLib.SixthSense)) {
             this.createStatusEffect(StatusEffects.MonsterInvisible, 0, 0, 0, 0);
             outputText("No matter how much you try you can’t see the kitsune in the direct vicinity. She doesn’t keep you waiting for long, however, and strikes you from stealth.\n\n");
         } else this.removeStatusEffect(StatusEffects.MonsterInvisible);
