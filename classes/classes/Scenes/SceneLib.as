@@ -299,6 +299,8 @@ public class SceneLib {
 
     public static var ruinedTown:RuinedTownRebuilt = new RuinedTownRebuilt();
 
+    public static var demonicLair:DemonLair = new DemonLair();
+
     public static var dungeons:DungeonEngine = new DungeonEngine();
 
     public static var ingnam:Ingnam = new Ingnam();

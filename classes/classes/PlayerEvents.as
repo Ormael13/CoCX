@@ -1403,6 +1403,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					}
 					else player.buff("Sagittarius Focus").remove();
 				}
+				if (player.hasStatusEffect(StatusEffects.MeetXuviel) && player.statusEffectv2(StatusEffects.MeetXuviel) > 0) player.addStatusValue(StatusEffects.MeetXuviel, 2, -1);
 				//Reset clone creation tracker
 				if (camp.gcc(true) && camp.gcc() == 0) player.removeStatusEffect(StatusEffects.PCClone);
 			}
