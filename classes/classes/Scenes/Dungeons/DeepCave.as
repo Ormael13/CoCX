@@ -199,11 +199,9 @@ use namespace CoC;
 			startCombat(new EncapsulationPod(),true);
 		}
 		public function encapsulationVictory():void {
-			if(monster.HP <= 0) {
-				flags[kFLAGS.ZETAZ_FUNGUS_ROOM_DEFEATED]++;
-				clearOutput();
-				outputText("The pod's wall bursts under your onslaught.  The strength goes out of the tentacles holding you at once, giving them all the power of a limp noodle.  The spongy surface of the pod gives out, and the 'petals' split apart, falling down to the ground with a heavy 'thwack'.  You stand there, exulting in your freedom.  You've won!\n\nThe rapier you approached originally still lies there, and you claim your prize.");
-			}
+			flags[kFLAGS.ZETAZ_FUNGUS_ROOM_DEFEATED]++;
+			clearOutput();
+			outputText("The pod's wall bursts under your "+(monster.HP <= 0 ? "":"lustfull ")+"onslaught.  The strength goes out of the tentacles holding you at once, giving them all the power of a limp noodle.  The spongy surface of the pod gives out, and the 'petals' split apart, falling down to the ground with a heavy 'thwack'.  You stand there, exulting in your freedom.  You've won!\n\nThe rapier you approached originally still lies there, and you claim your prize.");
 			cleanupAfterCombat();
 		}
 

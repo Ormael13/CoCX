@@ -561,6 +561,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const MeanToNaga:StatusEffectType                     = mk("MeanToNaga");
 		public static const Meditated:StatusEffectType                      = mk("Meditated"); // DEPRECATED
 		public static const MeetWanderer:StatusEffectType                   = mk("meet wanderer");
+		public static const MeetXuviel:StatusEffectType                   	= mk("meet xuviel");
 		public static const MergedPerksCount:StatusEffectType               = mk("MergedPerksCount");
 		public static const MetRathazul:StatusEffectType                    = mk("metRathazul");
 		public static const MetWorms:StatusEffectType                       = mk("metWorms");

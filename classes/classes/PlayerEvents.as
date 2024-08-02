@@ -1571,16 +1571,19 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			//Armor unequip zone
-			if (player.armor == armors.CTPALAD && !player.isTaur())
-			{
+			if (player.armor == armors.CTPALAD && !player.isTaur()) {
 				outputText("Due to your current body shape you are no longer able to wear the centaur armor and thus you drop the over encumbering equipment back into your inventory");
 				SceneLib.inventory.takeItem(player.unequipArmor(false, true), playerMenu);
 				needNext = true;
 			}
-			if (player.armor == armors.KBDRESS && !player.isScylla())
-			{
+			if (player.armor == armors.KBDRESS && !player.isScylla()) {
 				outputText("Due to your current body shape you are no longer able to wear the Kraken black dress and thus you put the over item back into your inventory");
 				SceneLib.inventory.takeItem(player.unequipArmor(false, true), playerMenu);
+				needNext = true;
+			}
+			if (player.necklace == necklaces.SILCNEC && player.hasCock()) {
+				outputText("As the last vestige of your pussy disappears the silver necklace begins to heat up before turning to dust." + (player.hasStatusEffect(StatusEffects.MeetXuviel)?" It would seem you are free of Xuviel’s cursed necklace, which in itself is a good thing.":"") + "");
+				player.unequipNecklace(false);
 				needNext = true;
 			}
 			player.updateRacialCache();

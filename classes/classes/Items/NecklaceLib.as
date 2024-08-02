@@ -64,6 +64,7 @@ public final class NecklaceLib extends ItemConstants
 		public const CATBELL:Necklace = new Necklace("CatBell", "CatBell", "Collar with bell", "a leather collar with cat bell", 0, 0, 1200, "Aside from being extra cute on you this necklace not only raises natural evasion but also allows a cat type wearer to deliver tease damage when dodging attacks. A must have when in heat.  \n\nType: Jewelry (Necklace) \nBase value: 1,200","Necklace").withBuffs({'evade':2}) as Necklace;
 		public const LEAFAMU:Necklace = new Necklace("LeafAmu", "LeafAmulet", "Leaf Amulet", "a Leaf Amulet", 0, 0, 4500, "This beautiful necklace improves its wearer natural evasiveness and affinity for white magic by 10%. It is more powerful when used by elves.  \n\nType: Jewelry (Necklace) \nBase value: 4,500", "Necklace");
 		public const SKULLNE:Necklace = new Necklace("SkullNe", "SkullNecklace", "Skull Necklace", "a Skull Necklace", 0, 0, 500, "A necklace made of skulls with strong aura of death surrounding it. Rumored to be blessed by the god of death have amazing effect for any undead being that would wear it. \n\nType: Jewelry (Necklace) \nBase value: 500 \nSpecial: +5%/-5% HP regeneration (undead / others)","Necklace");
+		public const SILCNEC:SilverCrossNecklace = new SilverCrossNecklace();
 
 		public function NecklaceLib()
 		{

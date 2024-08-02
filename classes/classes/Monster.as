@@ -3013,12 +3013,21 @@ import classes.Scenes.Combat.CombatAbilities;
 			}
 			game.inCombat = false;
             game.player.clearStatuses(false);
-            var temp:Number = rand(10) + 1;
-			if(temp > player.gems) temp = player.gems;
-			outputText("\n\nYou'll probably wake up in six hours or so, missing " + temp + " gems.");
-			player.gems -= temp;
-			SceneLib.explorationEngine.stopExploring();
-			EngineCore.doNext(SceneLib.camp.returnToCampUseSixHours);
+			if (!player.hasCock() && !player.hasStatusEffect(StatusEffects.MeetXuviel) && player.necklace != necklaces.SILCNEC) {
+				outputText("\n\nYou'll probably wake up in six hours or so. Strangely, you discover a necklace you don’t recall putting on before around your neck. It is a simple chain with a silver cross.");
+				player.createStatusEffect(StatusEffects.MeetXuviel, 0, 0, 0, 0);
+				SceneLib.explorationEngine.stopExploring();
+				SceneLib.inventory.takeItem(player.unequipNecklace(), SceneLib.camp.returnToCampUseSixHours);
+				player.setNecklace(necklaces.SILCNEC);
+			}
+			else {
+				var temp:Number = rand(10) + 1;
+				if(temp > player.gems) temp = player.gems;
+				outputText("\n\nYou'll probably wake up in six hours or so, missing " + temp + " gems.");
+				player.gems -= temp;
+				SceneLib.explorationEngine.stopExploring();
+				EngineCore.doNext(SceneLib.camp.returnToCampUseSixHours);
+			}
 		}
 
 		/**

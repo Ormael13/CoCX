@@ -203,6 +203,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			if (player.hasCock() && player.hasVagina()) addButton(5, "Dual Belt", pitchDualStimulationBelt);
 			if (player.hasCock() && player.hasVagina()) addButton(6, "AN Onahole", pitchAllNaturalOnahole);
 			addButton(7, "Condom", pitchCondom);
+			addButton(10, "S.C.N.", pitchSilverCrossNecklace).hint("Silver cross necklace");
 			addButton(14, "Back", giacomoEncounter);
 			statScreenRefresh();
 		}
@@ -344,6 +345,30 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			{
 				player.gems -= 10;
 				inventory.takeItem(useables.CONDOM, eroticaMenu);
+			}
+		}
+		
+		public function pitchSilverCrossNecklace():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			outputText("The trader smiles wide as you look at the strange jewelry on his table.\n\n");
+			outputText("\"<i>Oh this? This necklace is magical. Tell me friend, do you believe in eternal love? This necklace can lead you to it, all for the modest sum of 400 gems.</i>\"\n\n");
+			outputText("This sounds AND looks like a scam but do you buy it anyway?");
+			doYesNo(buySilverCrossNecklace, eroticaMenu);
+		}
+		
+		public function buySilverCrossNecklace():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			if (player.gems < 400)
+			{
+				clearOutput();
+				outputText("\n\nGiacomo sighs, indicating you need " + String(400 - player.gems) + " more gems to purchase this item.");
+				doNext(eroticaMenu);
+			}
+			else
+			{
+				player.gems -= 400;
+				inventory.takeItem(necklaces.SILCNEC, eroticaMenu);
 			}
 		}
 		
