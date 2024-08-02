@@ -27,6 +27,7 @@ public class BallsTransformations extends MutationsHelper {
 				desc += "[pg]Your scrotum slowly shrinks, eventually disappearing entirely!  <b>You've lost your balls!</b>";
 
 				if (doOutput) outputText(desc);
+				if (!player.hasStatusEffect(StatusEffects.Uniball)) player.createStatusEffect(StatusEffects.Uniball, 0, 0, 0, 0);
 				player.balls = 0;
 				player.ballSize = 1;
 			},

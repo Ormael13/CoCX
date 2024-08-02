@@ -5383,7 +5383,7 @@ public class Combat extends BaseContent {
                 }
             }
 			if (player.hasATailBiteAttack()) {
-				outputText("You bite your foe, sinking your tail"+(player.tailType == Tail.ARIGEAN_PRINCESS)+" teeth in [themonster] rending flesh. ");
+				outputText("You bite your foe, sinking your tail"+(player.tailType == Tail.ARIGEAN_PRINCESS?"s":"")+" teeth in [themonster] rending flesh. ");
 				if (player.tailType != Tail.ARIGEAN_PRINCESS) ExtraNaturalWeaponAttack(1);
 				ExtraNaturalWeaponAttack(1);
 			}
@@ -5608,7 +5608,6 @@ public class Combat extends BaseContent {
         //TAIL SLAPPING FOR THE KILL
         if (player.hasATailSlapAttack()) {
             var TailDamageMultiplier:Number = 1;
-
             switch(player.lowerBody){
                 case LowerBody.NAGA:
                 case LowerBody.FROSTWYRM:
@@ -5641,14 +5640,12 @@ public class Combat extends BaseContent {
                         case Tail.MANTICORE_PUSSYTAIL:
                             outputText("You hiss and raise your tail. You strike at blinding speed, impaling your opponent twice with your spike");
                             var pVenomWebCost:Number = player.VenomWebCost();
-
                             if (player.tailVenom >= pVenomWebCost) {
                                 outputText(" and injecting your venom in the process");
                                 //TailVenomArea
                                 var lustdamage:Number = 35 + rand(player.lib / 10);
                                 var lustDmg2:Number = 1;
                                 var pLibImprovedVenomGlandSu:Boolean = player.hasPerk(PerkLib.ImprovedVenomGlandSu);
-
                                 if (player.level < 10) lustdamage += 20 + (player.level * 3);
                                 else if (player.level < 20) lustdamage += 50 + (player.level - 10) * 2;
                                 else if (player.level < 30) lustdamage += 70 + (player.level - 20) * 1;
@@ -5773,7 +5770,16 @@ public class Combat extends BaseContent {
                             }
                             outputText("\n");
                             break;
-                        default:
+						case Tail.ARIGEAN_GREEN:
+                        case Tail.ARIGEAN_YELLOW:
+						case Tail.ARIGEAN_RED:
+                        case Tail.ARIGEAN_PRINCESS:
+                        	outputText("You hit your opponent with a slam of your symbiote tail"+(player.tailType == Tail.ARIGEAN_PRINCESS?"s":"")+".")
+							if (player.tailType != Tail.ARIGEAN_PRINCESS) ExtraNaturalWeaponAttack(TailDamageMultiplier);
+							ExtraNaturalWeaponAttack(TailDamageMultiplier);
+							outputText("\n");
+                            break;
+						default:
                             outputText("You hit your opponent with a slam of your mighty tail.")
                             if (pLibHellFireCoat) {
                                 ExtraNaturalWeaponAttack(TailDamageMultiplier, "fire");

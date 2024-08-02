@@ -321,8 +321,8 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Blazing Heart (Primitive). Req. Blazing Heart and lvl 30+. Effects: Gain permanent weakness to cold and fire resistance. Increase fire damage by 50%. Heat and Rut also grants you a bonus equal to 10% of the libido bonus to strength.\n");
 			outputText("-Spelling fixes. (Jtecx)\n");
 			outputText("-New tier 1 sensitivity lvl-up perk: Sixth Sense. Req. Job: Esper perk and 25+ sensitivity. Effect: You are not affected by blind and other confusing effects.\n");
-			outputText("-Arigean arms and tails would count as natural weapons. Tails would do bite attack(s).\n");
-			outputText("-\n");
+			outputText("-Arigean arms and tails would count as natural weapons. Tails would do bite and slam attack(s).\n");
+			outputText("-Remove Balls option in metamorph would remove trap/uniball effect too.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

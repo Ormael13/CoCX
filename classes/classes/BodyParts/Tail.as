@@ -486,6 +486,7 @@ public class Tail extends SaveableBodyPart {
 	EnumValue.add(Types, ARIGEAN_GREEN, "ARIGEAN_GREEN", {
 		name:"arigean (G)",
 		appearanceDesc: "A duo of black, parasitic-like organisms seem to sprout from the end of your tailbone with an additional skeletal tail sporting green highlights, each seems to sport a large set of teeth, and are covered in black armor-like skin with glowing green markings. You seem to feel everything they feel.",
+		tailSlam: true,
 		bite: true,
 		isLong: true
 	});
@@ -493,6 +494,7 @@ public class Tail extends SaveableBodyPart {
 	EnumValue.add(Types, ARIGEAN_RED, "ARIGEAN_RED", {
 		name:"arigean (R)",
 		appearanceDesc: "Your duo of slack Symbiotes sprout from the end of your tailbone with an additional skeletal tail bearing red highlights, each seems to sport a large set of teeth, and are covered in black armor-like skin with glowing red markings. You feel everything they feel and are able to communicate with ease.",
+		tailSlam: true,
 		bite: true,
 		isLong: true
 	});
@@ -500,6 +502,7 @@ public class Tail extends SaveableBodyPart {
 	EnumValue.add(Types, ARIGEAN_YELLOW, "ARIGEAN_YELLOW", {
 		name:"arigean (Y)",
 		appearanceDesc: "Your duo of black, Beautiful Symbiotes sprout from the end of your tailbone with an additional skeletal bearing yellow highlights, each sports a lovely, large set of lethal teeth to bite through foes, and are covered in reliable black armor-like skin with glowing yellow markings. You're able to coordinate with them as if they were just extra limbs.",
+		tailSlam: true,
 		bite: true,
 		isLong: true
 	});
@@ -507,6 +510,7 @@ public class Tail extends SaveableBodyPart {
 	EnumValue.add(Types, ARIGEAN_PRINCESS, "ARIGEAN_PRINCESS", {
 		name:"a. princess",
 		appearanceDesc: "Your large, glorious tail-like mouth is attached to you at the end of your tailbone, you can’t help but giggle at the thought of a foe being crushed by the large teeth found in your lipless extra mouth, your able to easily and comfortably rest upon its strong natural armor-like hide. You silently exhale a blue haze through its teeth every few seconds.",
+		tailSlam: true,
 		bite: true,
 		isLong: true
 	});
