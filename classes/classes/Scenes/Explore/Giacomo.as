@@ -29,6 +29,7 @@ import classes.BodyParts.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.MerchantMenu;
 import classes.Scenes.Camp.Garden;
+import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Crafting;
 import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
@@ -1329,7 +1330,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			function hermF():void {
 				//Bad End-Cerulean Succubus Futa/herm
 				//[Conditions: Corruption >50. Drink 10 Cerulean potions over the course of 20 Days. (Other stipulations as required that prevent interference with other events-to be determined)]
-				if(flags[kFLAGS.CERULEAN_POTION_BAD_END_FUTA_COUNTER] > 10 && player.cor > 50) {
+				if(flags[kFLAGS.CERULEAN_POTION_BAD_END_FUTA_COUNTER] > 10 && player.cor > 50 && !player.hasPerk(PerkLib.Soulless)) {
 					outputText("\nAs the Succubus mounts you, an uncontrollable urge takes over your mind and body. Without any thought, you quickly thrust one of her nipples in your mouth and begin suckling wildly like a newborn child. The Succubus cries in shock and pleasure as you begin feeding from her and quickly begins her ritualistic milking of your dong. The warm milk passes into your mouth and down your throat, where it settles peacefully in your stomach. The sensation of fulfillment from her tits is only eclipsed by the massive load of semen you feel cramping your prostate.");
 					//[ (Herm-Dickgirl variant only)
 					if(player.hasBalls()) outputText("  Even your nuts are unbearably sore.");
@@ -1369,6 +1370,17 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 					if (player.hasVagina()) transformations.VaginaDemonic().applyEffect(false);
 					outputText("\n<b>Gained Perk: Soulless!</b> "+PerkLib.Soulless.desc());
 					player.createPerk(PerkLib.Soulless, 0, 0, 0, 0);
+					if (player.hasStatusEffect(StatusEffects.PureCampJojo)) {
+						player.removeStatusEffect(StatusEffects.JojoNightWatch);
+						player.removeStatusEffect(StatusEffects.PureCampJojo);
+						JojoScene.monk = 1;
+					}
+					if (flags[kFLAGS.AMILY_FOLLOWER] == 1) {
+						flags[kFLAGS.AMILY_FOLLOWER] = 0;
+						flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] = 1;
+						flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
+					}
+					if (flags[kFLAGS.KIHA_FOLLOWER] > 0) flags[kFLAGS.KIHA_CORRUPTION_BITCH] == 1;
 					sharedEnd();
 				}
 				else {
@@ -1395,3 +1407,4 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 	}
 }
+

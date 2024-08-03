@@ -5,7 +5,10 @@
 package classes.Scenes.Places 
 {
 import classes.*;
+import classes.BodyParts.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Races.DemonRace;
+import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
 import classes.display.SpriteDb;
@@ -180,12 +183,20 @@ public class DemonLair extends BaseContent
 			outputText("He's so right about it. No matter how much you try to deny it, you desire his touch and the tormenting pleasures he offers. Even now, you can’t help but admire his perfect body, fantasizing him toying with you personally. Yet some fear of what might happen holds you from completely giving in and becoming fully his.\n\n");
 			dynStats("cor", 5);
 			questProgressScenes06();
+			if (player.cor >= 100) {
+				player.addStatusValue(StatusEffects.MeetXuviel, 1, 1);
+				player.addStatusValue(StatusEffects.MeetXuviel, 2, 7);
+			}
 			endEncounter();
 		}
 		public function questProgressScenes08():void {
 			outputText("No, he’s wrong! You will keep defying him for as long as it takes until he sets you free!\n\n");
 			dynStats("cor", -5);
 			questProgressScenes06();
+			if (player.cor >= 100) {
+				player.addStatusValue(StatusEffects.MeetXuviel, 1, 1);
+				player.addStatusValue(StatusEffects.MeetXuviel, 2, 7);
+			}
 			endEncounter();
 		}
 		public function questProgressScenes09():void {
@@ -219,18 +230,92 @@ public class DemonLair extends BaseContent
 			outputText(""+(camp.slavesCount() > 0?"You even started collecting some slaves of your own, you kinky slut. Perhaps you are secretly a sadomasochist? Or maybe you envy my control so much you wanted pets of your own. Don't you worry once you're fully mine I will spoil you rotten with as many sex slaves as you want. ":"")+"This is the true you, the naughty girl unrestrained by morality that wishes only for her own pleasure and fun.</i>\"\n\n");
 			outputText("You beg him to stop and let you leave, but it's too late now. The moment his cock enters your [pussy] again, pleasure locks you in place as your body betrays you, Xuviel’s now proving he’s the true master of this territory. Like a key to a lock, Xuviel unholy cock fits your cunt and unlocks every hidden pleasure your brain could ever dream to process. How foolish you were to challenge a demon on his own battlefield, let alone this one!\n\n");
 			outputText("\"<i>So you finally understand, [name], you were never truly free from me, it’s the reverse: you desire my touch and even more than anything, my cum to the point that the necklace is no longer necessary to keep you pliant. Well, allow me to properly reward you for your blind devotion to your beloved master.</i>\"\n\n");
-			outputText("\"<i></i>\"\n\n");
-			outputText("\"<i></i>\"\n\n");
-			outputText("\"<i></i>\"\n\n");
-			outputText("\"<i></i>\"\n\n");
+			outputText("He's right… you definitely desire him, it just took your mind a long time to reach the conclusion your body had already accepted. There is a very thin barrier between love and hate. Normally people take it the other way around, but after a while you end up not only desiring the pleasure he gives you, but also his own! Each trust of his fat, awe inspiring member teaches your flesh just that. Xuviel laughs as his cock unloads a massive amount of corrupted cum right into your pussy, ");
+			outputText("sending you straight to your climax as your blasphemous cunt devours every drop of it, absorbing it into your being. You feel something drip between your legs as your mind goes blank. Something breaks within you as you feel your juice flow from the multiple consecutive orgasm Xuviel’s unholy sperm provides you, your entire body spasming like a sexual organ as corruption soaks your entire being. You don’t know how it happened but when you finally come to your senses you take notice of something on the perfectly polished ground.\n\n");
+			if (player.hasCock()) player.lowerBody = LowerBody.DEMONIC_CLAWS;
+			else {
+				if (rand(2) == 0) player.lowerBody = LowerBody.DEMONIC_CLAWS;
+				else {
+					if (rand(2) == 0) player.lowerBody = LowerBody.DEMONIC_HIGH_HEELS;
+					else player.lowerBody = LowerBody.DEMONIC_GRACEFUL_FEET;
+				}
+			}
+			player.legCount = 2;
+			if (player.biggestTitSize() <= 28) {
+				var how:Number = 28 - player.biggestTitSize();
+				player.growTits(how, 1, false, 3);
+			}
+			player.skin.setBaseOnly({type:Skin.PLAIN, color1:"blue", pattern: Skin.PATTERN_DEMONIC_PLEASURE_RUNE});
+			if (!InCollection(player.skinColor1, DemonRace.DemonSkinColors) && !InCollection(player.skinColor2, DemonRace.DemonSkin2Colors)) {
+				var choice1:String = randomChoice(DemonRace.DemonSkinColors);
+                var choice2:String = randomChoice(DemonRace.DemonSkin2Colors);
+                player.skinColor1 = choice1;
+                player.skinColor2 = choice2;
+			}
+			if (rand(2) == 0) player.skinColor1 = "pink";
+			transformations.TailDemonic.applyEffect(false);
+			transformations.HairHuman.applyEffect(false);
+			transformations.FaceDemon.applyEffect(false);
+			transformations.EyesDemon.applyEffect(false);
+			transformations.ArmsDemon.applyEffect(false);
+			transformations.TongueDemonic.applyEffect(false);
+			transformations.EarsElfin.applyEffect(false);
+			transformations.HornsDemonic.applyEffect(false);
+			transformations.AntennaeNone.applyEffect(false);
+			transformations.GillsNone.applyEffect(false);
+			transformations.WingsDemonicLarge.applyEffect(false);
+			transformations.RearBodyNone.applyEffect(false);
+			if (player.hasCock()) player.killCocks( -1);
+			if (player.hasBalls()) {
+                player.balls = 0;
+                player.ballSize = 1;
+			}
+			if (player.hasVagina()) transformations.VaginaDemonic().applyEffect(false);
+			if (!player.hasPerk(PerkLib.Soulless)) player.createPerk(PerkLib.Soulless, 0, 0, 0, 0);
+			outputText("A breathtakingly beautiful woman with "+player.skinColor1+" skin stares back at you. She has a jaw-dropping face crowned by "+player.hairColor+" hair. She dons a pair of supple " + player.breastCup(0) + " sized breasts, which hypnotically seems to draw your stare down. Her body seems shaped in every way to tempt men yet what stands out is the horns, graceful bat-shaped wings and that long sinuous spaded tail of hers. Her eyes are slit like those of a fiend, staring back at you in troubled confusion. It takes you a full minute to realize this woman is actually you as you eye down what's drooling from your pussy.\n\n");
+			outputText("In a puddle of black fluids is a fairly sizeable purple gem that you proceed to pick up. A strange hunger takes hold of you and you swiftly gulp down the gem before a feeling of raw power courses through you. An understanding reaches your mind. You are [name], Champion of Ingnam, but you are also a succubus. Come to think of it… why are you even championing those idiots? They literally sent you through the portal to be enslaved and turned into a cum pump. The elders and the village should burn. ");
+			outputText("You realize that while your goals have diametrically changed, you are still you. You don’t exactly care for Ingnam anymore, what you care about now is to grow stronger, satisfy your deprived desire and own as many things as possible. Not to mention that you seem to have gained an insatiable desire for power that only the acquisition of more of those crystals can fulfill. You look back at Xuviel and ponder an important question.\n\n");
+			outputText("<i>Where can I find more of these…</i>\n\n");
+			outputText("He looks at you pensively then shrugs.\n\n");
+			outputText("\"<i>Obviously, only people still yielding a soul can offer you lethicite. If you’re really this eager to obtain more, you should seek out the demon queen Lethice. She has the bulk of it stored in her castle. That said no one has the guts to put her off the throne, perhaps it’s time some more ambitious demons took control</i>\"\n\n");
+			outputText("You resolve to make this so-called lethicite your own. That said, you ponder your relationship to Xuviel now. You're fully free from the necklace’s influence and can think clearly now. Well as clearly as any demon would. He's the one who fixed you… made you see this wicked world for what it is. This handsome demon freed you from your ignorance and made you like this. Some part of you desires to stay with him, you're his and he's yours, however you need to put on a proper facade so you can retain as much autonomy as possible. ");
+			outputText("After all, you want the demon to keep up on the game and never assume that he owns you completely so that you can get as many advantages from him as possible. Perhaps he could assist you in your quest? That’s without mentioning satisfying your urges, of course. Xuviel considers you for a moment, then laughs.\n\n");
+			outputText("\"<i>Ah, indeed, you make a fine succubus, [name], already looking for your own profit in this arrangement, however, you will swiftly go hungry without a man to feed from. Perhaps you should consider becoming my wife in full or at least make an alliance with me. I will offer you as much sex as your depraved heart desires, in exchange, I merely request you formally join my harem. I have many favors and gifts I’m willing to give you should you freely give yourself to me.</i>\"\n\n");
+			outputText("Now that’s an interesting deal. Hunting for food in the wild yields little interest to you, and indeed, having full access to Xuviel’s many resources and delicious dick could prove a profitable relationship.\n\n");
+			if (player.hasStatusEffect(StatusEffects.PureCampJojo)) {
+				player.removeStatusEffect(StatusEffects.JojoNightWatch);
+				player.removeStatusEffect(StatusEffects.PureCampJojo);
+				JojoScene.monk = 1;
+			}
+			if (flags[kFLAGS.AMILY_FOLLOWER] == 1) {
+				flags[kFLAGS.AMILY_FOLLOWER] = 0;
+				flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] = 1;
+				flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
+			}
+			if (flags[kFLAGS.KIHA_FOLLOWER] > 0) flags[kFLAGS.KIHA_CORRUPTION_BITCH] == 1;
+			player.addStatusValue(StatusEffects.MeetXuviel, 1, 1);
 			endEncounter();
 		}
 		
 		public function demonLairMainMenu():void {
 			clearOutput();
+			outputText("You go home to Xuviel’s lair"+(player.isNaked()?"":", undressing and seductively dropping your clothes at the entrance, you won’t need those hindrances here")+". The master of the place is by his usual self, busy enjoying one of his many wives. He’s quick however to acknowledge your presence as another succubus is dutifully worshiping his cock.\n\n");
+			outputText("\"<i>Well how nice of you to come home, [name], how are your travels? Please, put yourself at ease and have a seat.</i>\"\n\n");
+			outputText("You don’t wait for him to repeat himself and go lay next to him, licking your lips as you see the succubus miss a small dollop of his cum.");
+			if (player.statusEffectv1(StatusEffects.MeetXuviel) == 4) {
+				outputText(" Since you accepted his deal and became one of his wives, Lord Xuviel was kind enough to prepare a ninth cushion just for you, so you can sit closer to him and enjoy the intoxicating scent of his cock at your leisure.");
+				player.addStatusValue(StatusEffects.MeetXuviel, 1, 1);
+			}
+			outputText("\n\n\"<i>So… [name], what did you come home for? Got bored of your insipid slaves?</i>\"\n\n");
+			menu();
+			addButton(14, "Only visiting", explorer.done);
+		}
+		
+		private function demonLairTalkMainMenu():void {
+			clearOutput();
 			outputText("\"<i></i>\"\n\n");
 			menu();
-			addButton(14, "Leave", explorer.done);
+			addButton(14, "Back", demonLairMainMenu);
 		}
 	}
 }

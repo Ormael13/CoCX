@@ -4380,6 +4380,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] > 0) places++;
 		if (flags[kFLAGS.YU_SHOP] == 2) places++;
 		if (flags[kFLAGS.THE_TRENCH_ENTERED] > 0) places++;
+		if (player.hasStatusEffect(StatusEffects.MeetXuviel) && player.statusEffectv1(StatusEffects.MeetXuviel) >= 4) places++;
 		if (player.hasStatusEffect(StatusEffects.ResourceNode1)) {
 			if (player.statusEffectv1(StatusEffects.ResourceNode1) >= 5) places++;
 			if (player.statusEffectv2(StatusEffects.ResourceNode1) >= 5) places++;
@@ -4423,7 +4424,7 @@ public class Camp extends NPCAwareContent{
 				.disableIf(flags[kFLAGS.THE_TRENCH_ENTERED] <= 0, "Only for Arigeans.", null, "???");
 		bd.add("Lumi's Lab", SceneLib.lumi.lumiEncounter)
 				.hint("Visit Lumi's laboratory.")
-				.disableIf(flags[kFLAGS.LUMI_MET] <= 0, "Explore the realm", null, "???");
+				.disableIf(flags[kFLAGS.LUMI_MET] <= 0, "Explore the realm.", null, "???");
 		bd.add("Town Ruins", SceneLib.amilyScene.exploreVillageRuin)
 				.hint("Visit the village ruins. \n\nRecommended level: 12")
 				.disableIf(!flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE], "Search the lake.", null, "???");
@@ -4439,7 +4440,7 @@ public class Camp extends NPCAwareContent{
 				.disableIf(!player.hasStatusEffect(StatusEffects.HairdresserMeeting), "Search the mountains.", null, "???");
 		bd.add("Eldritch Caves", SceneLib.mindbreaker.CaveLayout)
 				.hint("Visit the mindbreaker lair.")
-				.disableIf(Mindbreaker.MindBreakerQuest != Mindbreaker.QUEST_STAGE_ISMB,"???", null,"???");
+				.disableIf(Mindbreaker.MindBreakerQuest != Mindbreaker.QUEST_STAGE_ISMB,"Gotta be outta ya MIND to go there.", null,"???");
 		bd.add("Temple", SceneLib.templeofdivine.repeatvisitintro)
 				.hint("Visit the temple in the high mountains where Sapphire resides.")
 				.disableIf(!flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE], "Search the high mountains.", null, "???");
@@ -4453,13 +4454,13 @@ public class Camp extends NPCAwareContent{
 		// Row 4 - places/NPCs 11-15
 		bd.add("Elven grove", SceneLib.woodElves.GroveLayout)
 				.hint("Visit the elven grove where the wood elves spend their somewhat idylic lives.")
-				.disableIf(WoodElves.WoodElvesQuest < 5, "Search the forest", null, "???");
+				.disableIf(WoodElves.WoodElvesQuest < 5, "Search the forest.", null, "???");
 		bd.add("Shrine", SceneLib.kitsuneScene.kitsuneShrine)
 				.hint("Visit the kitsune shrine in the deepwoods.")
-				.disableIf(!flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED], "Search the deepwoods", null, "???");
+				.disableIf(!flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED], "Search the deepwoods.", null, "???");
 		bd.add("Great Tree", SceneLib.aikoScene.encounterAiko)
 				.hint("Visit the Great Tree in the Deep Woods where Aiko lives.")
-				.disableIf(flags[kFLAGS.AIKO_TIMES_MET] <= 3, "???", null, "???");
+				.disableIf(flags[kFLAGS.AIKO_TIMES_MET] <= 3, "Great Tree in big big wood ^^", null, "???");
 		bd.add("Dilapid.Shrine", SceneLib.dilapidatedShrine.repeatvisitshrineintro)
 				.hint("Visit the dilapidated shrine where the echoses of the golden age of gods still lingers.")
 				.disableIf(flags[kFLAGS.DILAPIDATED_SHRINE_UNLOCKED] <= 1, "Search the battlefield. (After hearing an npc mention this place)", null, "???");
@@ -4469,12 +4470,15 @@ public class Camp extends NPCAwareContent{
 		// Row 5 - places/NPCs 16-20
 		bd.add("Anzu's Palace", SceneLib.dungeons.anzupalace.enterDungeon)
 				.hint("Visit the palace in the Glacial Rift where Anzu the avian deity resides.")
-				.disableIf(flags[kFLAGS.ANZU_PALACE_UNLOCKED] <= 0, "???", null, "???");
+				.disableIf(flags[kFLAGS.ANZU_PALACE_UNLOCKED] <= 0, "Definetly not Elza winter palace ;)", null, "???");
 		bd.add("Cathedral", SceneLib.gargoyle.gargoyleRouter)
 				.hint(flags[kFLAGS.GAR_NAME] == 0
 						? "Visit the ruined cathedral you've recently discovered."
 						: "Visit the ruined cathedral where " + flags[kFLAGS.GAR_NAME] + " resides.")
-				.disableIf(!flags[kFLAGS.FOUND_CATHEDRAL], "Explore the realm", null, "???");
+				.disableIf(!flags[kFLAGS.FOUND_CATHEDRAL], "Explore the realm.", null, "???");//player.hasStatusEffect(StatusEffects.MeetXuviel)
+		bd.add("Demon lair", SceneLib.demonicLair.demonLairMainMenu)
+				.hint("Visit the Xuviel’s lair.")
+				.disableIf(player.statusEffectv1(StatusEffects.MeetXuviel) < 4, "Only for Xuviel’s 9th Wife.", null, "???");
 		bd.add("Woodcutting", camp.cabinProgress.gatherWoods)
 				.hint("You need to explore Forest more to unlock this place.")
 				.disableIf(player.statusEffectv1(StatusEffects.ResourceNode1) < 5, "You need to explore Forest more to unlock this place.", null, "???")
@@ -4483,7 +4487,6 @@ public class Camp extends NPCAwareContent{
 				.hint("You can mine here to get stones, gems and maybe even some ores. <b>(Daylight)</b>")
 				.disableIf(player.statusEffectv2(StatusEffects.ResourceNode1) < 5, "You need to explore Mountains more to unlock this place.", null, "???")
 				.disableIf(!player.hasStatusEffect(StatusEffects.ResourceNode1), "Search the mountains.", null, "???");
-		bd.add("");
 		// Row 6 - separator between places and dungeons
 		if (debug) {
 			bd.add("Ingnam", SceneLib.ingnam.returnToIngnam)
