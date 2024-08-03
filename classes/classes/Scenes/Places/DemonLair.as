@@ -18,9 +18,12 @@ public class DemonLair extends BaseContent
 		public function questProgressScenes():void {
 			clearOutput();
 			if (player.statusEffectv1(StatusEffects.MeetXuviel) == 3) {
-				outputText("\"<i></i>\"\n\n");
-				outputText("\"<i></i>\"\n\n");
-				outputText("\"<i></i>\"\n\n");
+				outputText("You feel the pull of Xuviel’s necklace again and head to him. Your pussy drooling knowingly in anticipation, despite your terror. You can’t help but think about what abuses the fiend will subject you to this time.\n\n");
+				outputText("You’re back in the throne room. Seems the demon lord didn’t feel like having you join him in his bedroom this time. Xuviel grins as he sees you enter the room, his harem chuckling at your approach.\n\n");
+				outputText("\"<i>It’s a pleasure to see you, [name]. The girls were actually talking about your latest performance, most impressive.</i>\"\n\n");
+				outputText("You ponder whether he's talking about how you handled marae and the factory or about what you did to his… actually, you’re very keen on forgetting that. Xuviel teases you further.\n\n");
+				outputText("\"<i>Still too weak-willed to get rid of my necklace? I must say I’m amazed, [name], you really are the best. Both at cocksucking and heroing about.</i>\"\n\n");
+				questProgressScenes09();
 			}
 			if (player.statusEffectv1(StatusEffects.MeetXuviel) == 2) {
 				outputText("Instead of going to your destination you feel Xuviel forcefully pulling you again toward his lair, your pussy instinctively drooling in anticipation despite your terror. You can’t help but worry about what the fiend will do to you this time.\n\n");
@@ -74,6 +77,7 @@ public class DemonLair extends BaseContent
 				}
 				player.addStatusValue(StatusEffects.MeetXuviel, 1, 1);
 				player.addStatusValue(StatusEffects.MeetXuviel, 2, 7);
+				endEncounter();
 			}
 			if (player.statusEffectv1(StatusEffects.MeetXuviel) == 0) {
 				outputText("You feel a strange pull compelling you to walk in a specific direction. You walk into an increasingly sinister area until you reach what looks like a cave at first glance. Something stronger than your own will compels you to walk inside, and so you do. Torches lining the walls cast light on your passage until you reach a silver ornamented door which opens before you, only to close again once you are in. ");
@@ -93,10 +97,7 @@ public class DemonLair extends BaseContent
 				outputText("\"<i>O...of course not milord.</i>\"\n\n");
 				outputText("You growl in frustration, unable to attack the demon head-on. What sorcery is this? Xuviel gives you an amused smile before adding:\n\n");
 				questProgressScenes01();
-				player.addStatusValue(StatusEffects.MeetXuviel, 1, 1);
-				player.addStatusValue(StatusEffects.MeetXuviel, 2, 7);
 			}
-			endEncounter();
 		}
 		public function questProgressScenes01():void {
 			outputText("\"<i>Besides… I love it when they struggle, it makes bending them all the more fun. Tell me, [name], are you the kind that bends… or breaks?</i>\"\n\n");
@@ -125,6 +126,9 @@ public class DemonLair extends BaseContent
 			dynStats("cor", 20);
 			dynStats("lib", 20);
 			dynStats("sens", 20);
+			player.addStatusValue(StatusEffects.MeetXuviel, 1, 1);
+			player.addStatusValue(StatusEffects.MeetXuviel, 2, 7);
+			endEncounter();
 		}
 		public function questProgressScenes04():void {
 			outputText("You will die or lose your sanity long before he gets you to do anything perverse.\n\n");
@@ -133,6 +137,9 @@ public class DemonLair extends BaseContent
 			dynStats("cor", 5);
 			dynStats("lib", 5);
 			dynStats("sens", 5);
+			player.addStatusValue(StatusEffects.MeetXuviel, 1, 1);
+			player.addStatusValue(StatusEffects.MeetXuviel, 2, 7);
+			endEncounter();
 		}
 		public function questProgressScenes05():void {
 			outputText("\"<i>Am I right to assume you are secretly enjoying this, [name]?</i>\"\n\n");
@@ -173,11 +180,50 @@ public class DemonLair extends BaseContent
 			outputText("He's so right about it. No matter how much you try to deny it, you desire his touch and the tormenting pleasures he offers. Even now, you can’t help but admire his perfect body, fantasizing him toying with you personally. Yet some fear of what might happen holds you from completely giving in and becoming fully his.\n\n");
 			dynStats("cor", 5);
 			questProgressScenes06();
+			endEncounter();
 		}
 		public function questProgressScenes08():void {
 			outputText("No, he’s wrong! You will keep defying him for as long as it takes until he sets you free!\n\n");
 			dynStats("cor", -5);
 			questProgressScenes06();
+			endEncounter();
+		}
+		public function questProgressScenes09():void {
+			outputText("He lifts a glass of wine to you and this only angers you more. How dare he mock you, you’re going to make him pay for that! The moment the necklace's control weakens you’re going to give him nightmares for weeks. It’s only as your rage reaches its peak that you finally realize. The pull of the necklace is gone! Perhaps it’s time for revenge but then again if he defeats you he might fix your necklace and you may never get such a chance to strike back at him again. ");
+			outputText("Heck the necklace weakening now might just be a trick from him in order for you to let your guard down and do something foolish. Do you use this opportunity to flee or attack him?\n\n");
+			menu();
+			addButton(1, "Assault", questProgressScenes11);
+			addButton(3, "Run", questProgressScenes10);
+		}
+		public function questProgressScenes10():void {
+			outputText("Striking him down in your current state of mind and body is downright foolishness. There's no telling how it might end! No, you ought to run while you can and get this necklace off by any means necessary!\n\n");
+			outputText("As you run for the exit, you hear Xuviel’s mocking voice behind you.\n\n");
+			outputText("\"<i>Run.. yes run however long you want [name], inevitably you will come back here of your own volition! You belong to me body and soul, you just don't know it yet.</i>\"\n\n");
+			endEncounter();
+		}
+		public function questProgressScenes11():void {
+			outputText("You smirk at Xuviel, dash at him, grab him, and then pull him off his chair. You growl. For every minute he raped you, you’re going to punish him, for every shame he inflicted upon you, you’re going to shame him, an eye for an eye. You forcefully pull him to the ground, but the demon is still smirking. Gosh, you’re going to erase that awful smile right away. With rage, you yell at him what you think of his attitude!\n\n");
+			outputText("<i>You will not be controlled by this asshole. You will not be his bitch forever! You are nobody’s slave, let alone his! Now, you will show him what happens when one stoops so slow as to attempt to dominate their entire mind.</i>\n\n");
+			outputText("You fiercely grab his cock with your hand and shove it between your breasts. The thought of raping Xuviel back for all the shit he inflicted upon you has you in complete euphoria as you proceed to lick his dick with a vengeful smile. Damn it feels so good to finally be in control, but with that said, his cocky expression still hasn’t disappeared, which enrages you further. You proceed to suck on his delicious tool, wrapping your breasts around the base and pumping in an attempt to force a moan or a wince from him but the demon just keeps smirking. ");
+			outputText("Oh really? Now he thinks you will just sit there and lick him? Well you got other plans for him! While the taste of his precum and the sensory feeling in your mouth is delightful, it’s with your lower mouth that you want to devour him whole. You pull his demonic cock out of your devilish mouth and proceed to spread your vaginal lips open with two fingers, displaying your dripping pussy for him so he knows exactly what you’re going to do.\n\n");
+			outputText("<i>You’re going to wipe that disgusting fucking smile off his face!</i>\n\n");
+			outputText("Ah! Even his harem is watching now and they stare as you rape their master, which only makes you all the more hornier. You slowly slide down on his cock allowing yourself to sigh in delight as inch after inch of his tool fills your hungry pussy, you can even taste his precum with your vaginal walls and hell, this guy’s cum tastes good! Unable to hold yourself any longer, you begin to slowly slide along his length, torturing both his cock and your pussy with the slowest pace you can muster. Xuviel smirks at you and finally gives you the first reply since you started assaulting his dick.\n\n");
+			outputText("\"<i>Yes yes, embrace your hatred, [name]!</i>\"\n\n");
+			outputText("You’re going to show you hate him with every fiber of your body! You begin to accelerate the pace, forcing dollop after dollop of his delicious corrupted precum right into your pussy. You moan in delight as you finally see the signs of his own impending climax, his frustrating smile slowly fading from his face. You’re going to erase it… fuck him until all that's left is a gaping mouth moaning for pleasure! ");
+			outputText("You and Xuviel begin moaning in unison as you do your damnedest to pull him to his climax! After a while, his cock finally begins to ripple with the telltale sign of his impending orgasm as you ready for your own. Xuviel however, despite your incoming victory, keeps sneering at you.\n\n");
+			outputText("\"<i>Not bad, girl… that said, I’d advise you to look down between your legs…</i>\"\n\n");
+			outputText("Something feels wrong, and you look down in horror to see a mysterious liquid dripping out of your pussy. It's a puddle of black fluids that’s unlike anything you've ever seen before, and you can feel its corruption seeping into your body. That’s when the realization that you have been doing exactly as the demon wanted hits you.\n\n");
+			outputText("That’s not… It’s impossible, right?\n\n");
+			outputText("You try to crawl away from him but your pleasure- legs are unable to bring you farther than a meter before Xuviel grabs you from behind.\n\n");
+			outputText("\"<i>You wanted me to cum, [name], so let’s not stop when I’m so close to it, shall we? I wanted to see how long it would take you to willingly seek out my dick with your cunt. After all so long as you were pure and resolute there is no way you would willingly impale yourself on my dick right? The truth is your soul is now dyed so black with corruption that you can't see the difference between friends and foe… don't you worry I've been watching all the stuff you've been doing. ");
+			outputText(""+(camp.slavesCount() > 0?"You even started collecting some slaves of your own, you kinky slut. Perhaps you are secretly a sadomasochist? Or maybe you envy my control so much you wanted pets of your own. Don't you worry once you're fully mine I will spoil you rotten with as many sex slaves as you want. ":"")+"This is the true you, the naughty girl unrestrained by morality that wishes only for her own pleasure and fun.</i>\"\n\n");
+			outputText("You beg him to stop and let you leave, but it's too late now. The moment his cock enters your [pussy] again, pleasure locks you in place as your body betrays you, Xuviel’s now proving he’s the true master of this territory. Like a key to a lock, Xuviel unholy cock fits your cunt and unlocks every hidden pleasure your brain could ever dream to process. How foolish you were to challenge a demon on his own battlefield, let alone this one!\n\n");
+			outputText("\"<i>So you finally understand, [name], you were never truly free from me, it’s the reverse: you desire my touch and even more than anything, my cum to the point that the necklace is no longer necessary to keep you pliant. Well, allow me to properly reward you for your blind devotion to your beloved master.</i>\"\n\n");
+			outputText("\"<i></i>\"\n\n");
+			outputText("\"<i></i>\"\n\n");
+			outputText("\"<i></i>\"\n\n");
+			outputText("\"<i></i>\"\n\n");
+			endEncounter();
 		}
 		
 		public function demonLairMainMenu():void {
