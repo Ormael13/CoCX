@@ -41,7 +41,7 @@ public class DemonLair extends BaseContent
 			}
 			if (player.statusEffectv1(StatusEffects.MeetXuviel) == 1) {
 				outputText("Instead of going to your destination, an unknown force pushes you in a different direction. You know where you are going the moment you see the silver door again, your pussy instinctively drooling in anticipation, despite your terror.\n\n");
-				outputText("This time you walk to what looks to be a dining room. Xuviel is casually sitting by the table eating what seems to be "+(((player.itemCount(consumables.LETHITE)+player.itemCount(consumables.LETH1TE)+player.itemCount(consumables.LETH2TE)+player.itemCount(consumables.LETH3TE))>0)?"lethicites":"purple crystals")+"(if seen lethicite before) (Else) (end of cut) and he greets you the moment you arrive.\n\n");
+				outputText("This time you walk to what looks to be a dining room. Xuviel is casually sitting by the table eating what seems to be "+(((player.itemCount(consumables.LETHITE)+player.itemCount(consumables.LETH1TE)+player.itemCount(consumables.LETH2TE)+player.itemCount(consumables.LETH3TE))>0)?"lethicites":"purple crystals")+" and he greets you the moment you arrive.\n\n");
 				outputText("\"<i>Oh, [name], how wonderful of you to join my table tonight. Please, have a seat.</i>\"\n\n");
 				outputText("You mention to your host that you didn’t join him, he forced you to come over.\n\n");
 				outputText("\"<i>Oh the intent means little, all that matters is that you are here.</i>\"\n\n");
@@ -308,10 +308,53 @@ public class DemonLair extends BaseContent
 			}
 			outputText("\n\n\"<i>So… [name], what did you come home for? Got bored of your insipid slaves?</i>\"\n\n");
 			menu();
+			addButton(0, "Talk", demonLairTalkMainMenu);
 			addButton(14, "Only visiting", explorer.done);
 		}
 		
 		private function demonLairTalkMainMenu():void {
+			clearOutput();
+			outputText("You actually came over to have a chat. Xuviel shrugs, the succubus sucking his dick continuing her job diligently.\n\n");
+			outputText("\"<i>Go on then [name], what is on your mind?</i>\"\n\n");
+			menu();
+			addButton(0, "Him", demonLairTalkHim);
+			addButton(1, "Harem", demonLairTalkHarem);
+			addButton(2, "His position", demonLairTalkHisPosition);
+			addButton(14, "Back", demonLairMainMenu);
+		}
+		private function demonLairTalkHim():void {
+			clearOutput();
+			outputText("You ask Xuviel if he can chat for a little about himself. Mind you it’s easier to fuck someone you properly know. Xuviel shrugs.\n\n");
+			outputText("\"<i>Truthfully, I was born and raised here on Mareth. I was a lord even before demonhood became a thing. That said once I discovered I had eternity ahead of me, collecting money and treasure didn’t appear as interesting. I needed to find some new pastimes and it’s when I began collecting women of exception such as yourself. I developed a particular fondness for the people of Ingnam after one of the more… daring champions managed to grab my attention, so I decided to take on the hobby of collecting nine of the most perfect women I could find. You girls are quite the breed.</i>\"\n\n");
+			outputText("Umph so to him you are a conquest, nothing more? A new purebred horse to add to his collections?\n\n");
+			outputText("\"<i>Oh but I said nothing of the sort. No my lovely demoness, by all means, I consider every member of my harem my wife with all the details and needs it entails. Meredith, for example, requests a new set of gifts every month and has quite the weird taste in slaves, so I tend to be forced to buy her new toys every now and then while Octavia only want's a new magical trinket once in a while, the kind that distort and mess someone’s body… who knows what she even does with those. You could say I’m the ideal sugar daddy without the age factor.</i>\"\n\n");
+			if (player.statusEffectv1(StatusEffects.MeetXuviel) == 5) {
+				outputText("Slaves eh… now that's interesting. You could indeed use some.\n\n");
+				player.addStatusValue(StatusEffects.MeetXuviel, 1, 1);
+			}
+			doNext(demonLairTalkMainMenu);
+			advanceMinutes(5);
+		}
+		private function demonLairTalkHarem():void {
+			clearOutput();
+			outputText("So what’s his deal with collecting wives, can’t he be satisfied with you alone? Your tear-drop breasts, your cock hungry asshole, your thirsty pussy willing to devour anything, and your mouth that only asks for a chance to suck him for his delicious cream to which you are addicted? Aren’t all of these enough for him?\n\n");
+			outputText("Xuviel sighs and answers right as his cock fills the succubus’s mouth with a thick load of his corrupted cum. \"<i>How to put this… I’m not the kind of man to stop after the first. No, I would rather have every woman in creation take a turn to sleeve my cock with their needy cunt but the fact is I can’t. Heck nine wives is a good number so I think I will stop there before I begin to forget or mess up your names.</i>\"\n\n");
+			outputText("Well, that’s thoughtful of him and it limits the competitions though you still wish deep inside that cock was yours alone.\n\n");
+			doNext(demonLairTalkMainMenu);
+			advanceMinutes(5);
+		}
+		private function demonLairTalkHisPosition():void {
+			clearOutput();
+			outputText("Honestly what position does Xuviel even hold in the demon society to begin with?\n\n");
+			outputText("\"<i>Well, while I did wish I was king, I’m only what could be referred to as a duke. The demonic nobility has many greater demons in its ranks. Most rise to power or fall. I recall that one of my fellow nobles was defeated by a permanent curse before being sealed inside the deepwoods. That said he never had my patience or cunning. Another I know is too busy playing with his kennel to manage politics and the last one just wants to play slave maker… like absolutely zero ambition in that omnibus.</i>\"\n\n");
+			outputText("Well, you sure did dream for a time to be a princess back in Ingnam but those were childhood dreams. Marrying into wealth and nobility was something you would’ve thought out of your league back then.\n\n");
+			outputText("Xuviel goes on. \"<i>The queen however… She rules only because no one has the guts to make an open move against her and has grown fat and lazy over her throne. Lethice hasn’t made a single attempt to conquer in decades. I suggest she is long overdue for replacement. You know… should you manage to actually put those talents of yours to use and accomplish what many of those idiots call the impossible, namely defeat Lethice, I could move in and become king instead, in which case I would make you both queen of my harem and queen of all demons.</i>\"\n\n");
+			outputText("Now this sounds like a very tantalizing perspective. You absolutely love the idea of ruling over Mareth and mostly being on top of all your rivals when it comes to him. All you need to do now is steal the throne from Lethice.\n\n");
+			doNext(demonLairTalkMainMenu);
+			advanceMinutes(5);
+		}
+		
+		private function demonLairSexMainMenu():void {
 			clearOutput();
 			outputText("\"<i></i>\"\n\n");
 			menu();
