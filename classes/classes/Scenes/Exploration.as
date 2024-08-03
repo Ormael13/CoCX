@@ -582,6 +582,7 @@ public class Exploration extends BaseContent implements SaveableState
 			if (player.hasStatusEffect(StatusEffects.MeetXuviel)) {
 				if (player.statusEffectv1(StatusEffects.MeetXuviel) == 0) addButton(11, "X-Canndies", SceneLib.demonicLair.questProgressScenes).hint("Uncle X have candies for naughty girl like you.");
 				if (player.statusEffectv1(StatusEffects.MeetXuviel) == 1 && player.statusEffectv2(StatusEffects.MeetXuviel) == 0) addButton(11, "X-Eel", SceneLib.demonicLair.questProgressScenes).hint("Uncle X have eel for naughty girl like you.");
+				if (player.statusEffectv1(StatusEffects.MeetXuviel) == 2 && player.statusEffectv2(StatusEffects.MeetXuviel) == 0) addButton(11, "X-Cummies", SceneLib.demonicLair.questProgressScenes).hint("Uncle X have cummies for naughty girl like you.");
 			}
 			if (silly()) addButton(12, "42", tryRNGod).hint("Explore to find the answer for your prayers. Or maybe you really not wanna find it fearing answer will not be happy with you?");
 			else addButtonDisabled(12, "???", "Only in Silly Mode...");

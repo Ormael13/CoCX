@@ -19,19 +19,19 @@ public class DemonLair extends BaseContent
 			clearOutput();
 			if (player.statusEffectv1(StatusEffects.MeetXuviel) == 3) {
 				outputText("\"<i></i>\"\n\n");
+				outputText("\"<i></i>\"\n\n");
+				outputText("\"<i></i>\"\n\n");
 			}
 			if (player.statusEffectv1(StatusEffects.MeetXuviel) == 2) {
 				outputText("Instead of going to your destination you feel Xuviel forcefully pulling you again toward his lair, your pussy instinctively drooling in anticipation despite your terror. You can’t help but worry about what the fiend will do to you this time.\n\n");
 				outputText("The silver gate opens for you yet again as you head for a different room. This seems to be Xuviel’s master chamber, decorated with red drapes and a large bed fit for 4 people if need be. The demon in question is currently sitting on a chair in a nightgown holding what seems to be a glass of wine. Upon your entry, he soon acknowledges your presence.\n\n");
 				outputText("\"<i>Good evening [name]. I have been waiting for you.</i>\"\n\n");
 				outputText("Xuviel motions for you to move toward the bed, and naturally, your body obeys him like a puppet.\n\n");
-				outputText("\"<i></i>\"\n\n");
-				outputText("\"<i></i>\"\n\n");
-				outputText("\"<i></i>\"\n\n");
-				outputText("\"<i></i>\"\n\n");
-				outputText("\"<i></i>\"\n\n");
-				outputText("\"<i></i>\"\n\n");
-				outputText("\"<i></i>\"\n\n");
+				outputText("\"<i>You know, [name], I see and witness your everyday challenges. It does not suit a woman of your quality to simply live in the waste like this. No, not in the least… Yet I can see it in your eyes, despite all I could offer you, you hate me, you despise me. If I gave you free rein and a weapon right now you would definitely go for my throat. Oh I do love those defiant eyes of yours.</i>\"\n\n");
+				outputText("Of course you do. This asshole is playing you like a marionette and forces you to do as he pleases. Why wouldn’t you hate him!?\n\n");
+				outputText("\"<i>Still, the truth is if you wanted to be free of me you would have done so a long while ago. Oh, I can see it in your eyes, you did consider the option, yet never sought freedom. Do you know why that is? I sure do. Curiosity, you are curious about what will happen, all while denying what your mind and body have truly come to desire, which is the delights and pleasure that only I can provide. Perhaps even you get off from said abuse… a small tinge of masochism?</i>\"\n\n");
+				outputText("He gently brings the cup your chin, staring you straight in the eyes with an amused expression.\n\n");
+				questProgressScenes05();
 			}
 			if (player.statusEffectv1(StatusEffects.MeetXuviel) == 1) {
 				outputText("Instead of going to your destination, an unknown force pushes you in a different direction. You know where you are going the moment you see the silver door again, your pussy instinctively drooling in anticipation, despite your terror.\n\n");
@@ -53,7 +53,12 @@ public class DemonLair extends BaseContent
 				outputText("Your eyes cross as your tormented pussy finally gushes a torrent of mixed fluid on the ground. Something's not right, instead of staying like this your belly begins to shrink. To your surprise, you go back to your original shape. Where did the thing go?! Xuviel doesn’t seem as worried as you are.\n\n");
 				outputText("\"<i>You absorbed it, of course, corruption and all. This creature was made out of raw corruption via alchemy, you may think of it as a gift from me.</i>\"\n\n");
 				outputText("Your body indeed seemed to have soaked in corruption as your form changes, becoming more voluptuous as a response.\n\n");
-				//Apply cosmetic effect and text from kitsune tight and succubus breast if pc is below standards
+				if (player.butt.type < 9) player.butt.type = 9;
+				if (player.hips.type < 12) player.hips.type = 12;
+				if (player.biggestTitSize() <= 20) {
+					var how:Number = 20 - player.biggestTitSize();
+					player.growTits(how, 1, false, 3);
+				}
 				outputText("You watch yourself in disbelief and Xuviel chuckles at what's happening to you.\"\n\n");
 				outputText("\"<i>You may go, I will call you back later.</i>\"\n\n");
 				outputText("On this, he snaps his fingers as you lose consciousness. When you wake up, you are back in your camp. Whatever Xuviel is doing to you, it’s getting worse. Something tells you this will end poorly but at the same time, you’re almost anxious about what he will do to you next.\n\n");
@@ -128,6 +133,51 @@ public class DemonLair extends BaseContent
 			dynStats("cor", 5);
 			dynStats("lib", 5);
 			dynStats("sens", 5);
+		}
+		public function questProgressScenes05():void {
+			outputText("\"<i>Am I right to assume you are secretly enjoying this, [name]?</i>\"\n\n");
+			menu();
+			addButton(1, "He's right", questProgressScenes07);
+			addButton(3, "No way!", questProgressScenes08);
+		}
+		public function questProgressScenes06():void {
+			outputText("Xuviel nods at your reply.\n\n");
+			outputText("\"<i>Yes… I figured you would say that. It’s all right, I will assist you in discovering the real you. The one that desires to give yourself, body and soul, to me"+(player.statusEffectv4(StatusEffects.MeetXuviel) > 0 ? "":". To this end, I had yet another mixture prepared just for you")+".</i>\"\n\n");
+			if (player.statusEffectv4(StatusEffects.MeetXuviel) == 0) {
+				outputText("Xuviel smiles as he retrieves a potion from a nearby cabinet and pours some of the liquid in a cup, offering it to you.\n\n");
+				outputText("\"<i>Drink your fill, [name].</i>\"\n\n");
+				outputText("Your hands are swift to betray you as you reach for the cup, pouring it into your mouth. As much as you'd like to prevent it, you are forced yet again, to drink one of Xuviel’s sinister concoctions. Your body is feeling incredibly hot now, your skin sensitive and aching for his caress. ");
+			}
+			outputText("Xuviel’s hands slide on your skin, making you shiver in delight as your body undresses on its own. He removes his own clothes, revealing his girthy 15 inch tool. The moment your hands grab your breasts and squeeze his member between them, you know what's going to happen. Your mouth acts on its own, taking his tip in as you slide his delicious member between your [breasts]. Something feels weird in your mouth, are you feeling pleasure from your tongue? The sensation is captivating, ");
+			outputText("drowning your thoughts in a pool of ecstasy… Indeed, each time he thrust his cock in your mouth, you can feel it as if it were a second vagina, with your tongue as a second way larger clit. Your nerves are set aflame with pleasure. It seems like your mouth has turned into a sexual organ of its own! The more you please him, the more you are pleasured, and before long you’re too lost in it to even realize the necklace isn't forcing your body anymore licking and sucking Xuviel’s amazing cock all of your own volition.\n\n");
+			outputText("\"<i>Mmmm, you sure are wonderfully skilled with that mouth of yours, [name], bet you’re enjoying yourself too.</i>\"\n\n");
+			outputText("Your pussy is drooling all over the ground as your clit-like tongue wraps around his member in an attempt to maximize your pleasure.\n\n");
+			outputText("\"<i>Ah, good girl… Here's your reward, try not to spill a drop.</i>\"\n\n");
+			outputText("Thrusting further into you, his balls pressing against the underside of your chin, Xuviel floods your mouth and throat with his cum, making you almost choke on it. The excess drool from your mouth drops right onto your breast as you fall, spread eagle on the floor, reaching an oral orgasm which causes your pussy to quiver and gush. You can’t help but swallow what's in your mouth as the excess is slowly absorbed into your skin. "+(player.statusEffectv4(StatusEffects.MeetXuviel) > 0 ? "":"Wait absorbed? "));
+			outputText("You can "+(player.statusEffectv4(StatusEffects.MeetXuviel) > 0 ? "":"indeed ")+"taste his cum with your every pore as your lustrous breasts absorb it all inside, your skin seemingly gaining in healthiness as you feel your latent hunger being sated and your energy refilled. "+(player.statusEffectv4(StatusEffects.MeetXuviel) > 0 ? "":"Wow, this is getting ridiculous! How much of a freak did you become to the point of being satisfied and nourished by cum?! ")+"");
+			outputText("Xuviel "+(player.statusEffectv4(StatusEffects.MeetXuviel) > 0 ? "":"doesn’t care for your inner battle and ")+"dismisses you, sending you back to camp.\n\n");
+			outputText("It is not too late to stop now, those effects are likely temporary, but you’re afraid… and more than slightly excited by what may happen if you let him use you much longer.\n\n");
+			if (player.statusEffectv4(StatusEffects.MeetXuviel) == 0) player.addStatusValue(StatusEffects.MeetXuviel, 4, 1);
+			if (player.statusEffectv3(StatusEffects.MeetXuviel) > 1) {
+				dynStats("cor", 5);
+				dynStats("lib", 5);
+				dynStats("sens", 5);
+			}
+			else {
+				dynStats("cor", 10);
+				dynStats("lib", 10);
+				dynStats("sens", 10);
+			}
+		}
+		public function questProgressScenes07():void {
+			outputText("He's so right about it. No matter how much you try to deny it, you desire his touch and the tormenting pleasures he offers. Even now, you can’t help but admire his perfect body, fantasizing him toying with you personally. Yet some fear of what might happen holds you from completely giving in and becoming fully his.\n\n");
+			dynStats("cor", 5);
+			questProgressScenes06();
+		}
+		public function questProgressScenes08():void {
+			outputText("No, he’s wrong! You will keep defying him for as long as it takes until he sets you free!\n\n");
+			dynStats("cor", -5);
+			questProgressScenes06();
 		}
 		
 		public function demonLairMainMenu():void {
