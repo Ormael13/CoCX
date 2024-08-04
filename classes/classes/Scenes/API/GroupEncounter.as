@@ -67,6 +67,18 @@ public class GroupEncounter implements Encounter {
 		if (e is GroupEncounter) return (e as GroupEncounter).pickEncounterOrNull(filter);
 		return e;
 	}
+	
+	public function findByName(name:String):SimpleEncounter {
+		for each (var encounter:Encounter in components) {
+			var se:SimpleEncounter = encounter as SimpleEncounter;
+			if (se && se.encounterName() == name) return se;
+			if (encounter is GroupEncounter) {
+				se = (encounter as GroupEncounter).findByName(name);
+				if (se) return se;
+			}
+		}
+		return null;
+	}
 
 	public function encounterChance():Number {
 		var sum:Number = 0;

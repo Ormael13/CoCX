@@ -167,7 +167,7 @@ public class Camp extends NPCAwareContent{
 		if (player.slotName != "VOID" && mainView.getButtonText(0) != "Game Over" && flags[kFLAGS.HARDCORE_MODE] > 0) {
 			trace("Autosaving to slot: " + player.slotName);
 
-			CoC.instance.saves.saveGame(player.slotName);
+			CoC.instance.saves.saveGameToSharedObject(player.slotName);
 		}
 		if (Metamorph.TriggerUpdate) {
 			Metamorph.update();
@@ -753,7 +753,7 @@ public class Camp extends NPCAwareContent{
 			SceneLib.graydaScene.graydaMainBathingByForce();
 			return;
 		}
-		if (flags[kFLAGS.THE_TRENCH_ENTERED] > 14 && flags[kFLAGS.THE_TRENCH_ENTERED] < 16 && rand(5) == 0 && !player.hasStatusEffect(StatusEffects.GraydaRandomnCampEvents) && (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3 || player.hasStatusEffect(StatusEffects.CampRathazul) || player.hasStatusEffect(StatusEffects.PureCampJojo) || followerKiha())) {//(flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) || 
+		if (flags[kFLAGS.THE_TRENCH_ENTERED] > 14 && flags[kFLAGS.THE_TRENCH_ENTERED] < 16 && rand(5) == 0 && !player.hasStatusEffect(StatusEffects.GraydaRandomnCampEvents) && (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3 || player.hasStatusEffect(StatusEffects.CampRathazul) || player.hasStatusEffect(StatusEffects.PureCampJojo) || followerKiha())) {//(flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) ||
 			player.createStatusEffect(StatusEffects.GraydaRandomnCampEvents, 0, 0, 0, 0);
 			SceneLib.graydaScene.graydaRandomnCampEvents();
 			return;
@@ -3979,7 +3979,7 @@ public class Camp extends NPCAwareContent{
 			//Autosave stuff
 			if (player.slotName != "VOID" && player.autoSave && mainView.getButtonText(0) != "Game Over") {
 				trace("Autosaving to slot: " + player.slotName);
-				CoC.instance.saves.saveGame(player.slotName);
+				CoC.instance.saves.saveGameToSharedObject(player.slotName);
 			}
 			//Clear screen
 			if (clrScreen) clearOutput();

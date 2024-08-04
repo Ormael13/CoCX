@@ -24,6 +24,8 @@ import classes.internals.Jsonable;
 import classes.internals.SaveableState;
 import classes.lists.BreastCup;
 
+import coc.view.ButtonDataList;
+
 import flash.events.Event;
 import flash.events.IOErrorEvent;
 import flash.events.MouseEvent;
@@ -43,6 +45,7 @@ CONFIG::AIR
 }
 
 public class Saves extends BaseContent {
+	public static const SLOT_COUNT:int = 36;
 
 	private static const SAVE_FILE_CURRENT_INTEGER_FORMAT_VERSION:int		= 816;
 		//Didn't want to include something like this, but an integer is safer than depending on the text version number from the CoC class.
@@ -61,6 +64,9 @@ public class Saves extends BaseContent {
 	private static var _saveableStates:Object = {};
 
     public function Saves(gameStateDirectGet:Function, gameStateDirectSet:Function) {
+	    for (var i:int = 0; i < SLOT_COUNT; i++) {
+		    saveFileNames.push(saveFilePrefix+String(i+1)); // generate names "CoC_1", "CoC_2", ...
+	    }
 		gameStateGet = gameStateDirectGet; //This is so that the save game functions (and nothing else) get direct access to the gameState variable
 		gameStateSet = gameStateDirectSet;
 	}
@@ -77,7 +83,8 @@ public var airFile:File;
 public var file:FileReference;
 public var loader:URLLoader;
 
-public var saveFileNames:Array = ["CoC_1", "CoC_2", "CoC_3", "CoC_4", "CoC_5", "CoC_6", "CoC_7", "CoC_8", "CoC_9", "CoC_10", "CoC_11", "CoC_12", "CoC_13", "CoC_14"];
+	public var saveFilePrefix:String = "CoC_";
+	public var saveFileNames:/*String*/Array = [];
 public var versionProperties:Object = { "legacy" : 100, "0.8.3f7" : 124, "0.8.3f8" : 125, "0.8.4.3":119, "latest" : 119 };
 public var savedGameDir:String = "data/com.fenoxo.coc";
 
@@ -145,25 +152,26 @@ public function loadSaveDisplay(saveFile:Object, slotName:String):String
 	}
 }
 
+private function loadSaveFromSlotNumber(slot:int):void {
+	trace("Loading save with name", saveFileNames[slot], "at index", slot);
+	loadGameFromSharedObject(saveFileNames[slot]);
+}
+
 CONFIG::AIR
 {
 
-	private function selectLoadButton(gameObject:Object, slot:String):void {
-		//trace("Loading save with name ", fileList[fileCount].url, " at index ", i);
+public function loadScreenAIR():void
+{
+	function loadFromAIRFile(url:String,gameObject:Object):void {
+		trace("Loading save with name ", url);
 		clearOutput();
-		loadGameObject(gameObject, slot);
-		outputText("Slot " + slot + " Loaded!");
+		loadGameObject(gameObject);
+		outputText("Save " + url + " Loaded!");
 		statScreenRefresh();
 		doNext(playerMenu);
 	}
-
-public function loadScreenAIR():void
-{
 	var airSaveDir:File = File.documentsDirectory.resolvePath(savedGameDir);
-	var fileList:Array = new Array();
-	var maxSlots:int = saveFileNames.length;
-	var slots:Array = new Array(maxSlots);
-	var gameObjects:Array = new Array(maxSlots);
+	var fileList:Array = [];
 
 	try
 	{
@@ -174,56 +182,35 @@ public function loadScreenAIR():void
 	{
 		clearOutput();
 		outputText("Error reading save directory: " + airSaveDir.url + " (" + error.message + ")");
+		doNext(returnToSaveMenu);
 		return;
 	}
 	clearOutput();
 	outputText("<b><u>Slot: Sex,  Game Days Played</u></b>\r");
 
+	var bdl:ButtonDataList = new ButtonDataList();
 	var i:uint = 0;
-	for (var fileCount:uint = 0; fileCount < fileList.length; fileCount++)
+	for (var fc:uint = 0; fc < fileList.length; fc++)
 	{
-		// We can only handle maxSlots at this time
-		if (i >= maxSlots)
-			break;
-
 		// Only check files expected to be save files
 		var pattern:RegExp = /\.coc$/i;
-		if (!pattern.test(fileList[fileCount].url))
+		if (!pattern.test(fileList[fc].url))
 			continue;
 
-		gameObjects[i] = getGameObjectFromFile(fileList[fileCount]);
-		outputText(loadSaveDisplay(gameObjects[i], String(i+1)));
+		var gameObject:Object = getGameObjectFromFile(fileList[fc]);
+		outputText(loadSaveDisplay(gameObject, String(i+1)));
 
-		if (gameObjects[i].data.exists)
+		if (gameObject.data.exists)
 		{
-			//trace("Creating function with indice = ", i);
-			(function(i:int):void		// messy hack to work around closures. See: http://en.wikipedia.org/wiki/Immediately-invoked_function_expression
-			{
-				slots[i] = function() : void 		// Anonymous functions FTW
-				{
-					trace("Loading save with name ", fileList[fileCount].url, " at index ", i);
-					clearOutput();
-					loadGameObject(gameObjects[i]);
-					outputText("Slot " + String(i+1) + " Loaded!");
-					statScreenRefresh();
-					doNext(playerMenu);
-				}
-			})(i);
+			bdl.add("Slot "+(i+1), curry(loadFromAIRFile,fileList[i].url,gameObject))
 		}
 		else
 		{
-			slots[i] = null;		// You have to set the parameter to 0 to disable the button
+			bdl.add("Slot "+(i+1), null)
 		}
 		i++;
 	}
-	menu();
-	var s:int = 0;
-	while (s < 14) {
-		//if (slots[s] != null) addButton(s, "Slot " + (s + 1), slots[s]);
-		if (slots[s] != null) addButton(s, "Slot " + (s + 1), selectLoadButton, gameObjects[s], "CoC_" + String(s+1));
-		s++;
-	}
-	addButton(14, "Back", returnToSaveMenu);
+	submenu(bdl, returnToSaveMenu, 0, false);
 }
 
 public function getGameObjectFromFile(aFile:File):Object
@@ -247,13 +234,13 @@ public function getGameObjectFromFile(aFile:File):Object
 
 }
 
-public function loadScreen():void
+public function loadFromSlotScreen():void
 {
-	var slots:Array = new Array(saveFileNames.length);
 
 	clearOutput();
 	outputText("<b><u>Slot: Sex,  Game Days Played</u></b>\r");
 
+	var bdl:ButtonDataList = new ButtonDataList();
 	for (var i:int = 0; i < saveFileNames.length; i += 1)
 	{
 		var test:Object = SharedObject.getLocal(saveFileNames[i], "/");
@@ -261,37 +248,22 @@ public function loadScreen():void
 		if (test.data.exists/* && test.data.flags[2066] == undefined*/)
 		{
 			//trace("Creating function with indice = ", i);
-			(function(i:int):void		// messy hack to work around closures. See: http://en.wikipedia.org/wiki/Immediately-invoked_function_expression
-			{
-				slots[i] = function() : void 		// Anonymous functions FTW
-				{
-					trace("Loading save with name", saveFileNames[i], "at index", i);
-					if (loadGame(saveFileNames[i])) {
-						doNext(playerMenu);
-						showStats();
-						statScreenRefresh();
-						clearOutput();
-						outputText("Slot " + i + " Loaded!");
-					}
-				}
-			})(i);
+			bdl.add("Slot "+(i+1), curry(loadSaveFromSlotNumber,i));
 		}
 		else
 		{
-			slots[i] = null;		// You have to set the parameter to 0 to disable the button
+			bdl.add("Slot "+(i+1), null);
 		}
 	}
-	menu();
-	var s:int = 0;
-	while (s < 14) {
-		if (slots[s] != 0) addButton(s, "Slot " + (s+1), slots[s]);
-		s++;
-	}
-	addButton(14, "Back", returnToSaveMenu);
+	submenu(bdl, returnToSaveMenu, 0, false);
 }
 
-public function saveScreen():void
+public function saveToSlotScreen():void
 {
+	function saveToSlot(slot:int):void {
+		trace("Saving game with name", saveFileNames[slot], "at index", slot);
+		saveGameToSharedObject(saveFileNames[slot], true);
+	}
 	mainView.nameBox.x = mainView.mainText.x;
 	mainView.nameBox.y = 620;
 	mainView.nameBox.width = 550;
@@ -302,7 +274,7 @@ public function saveScreen():void
 	// var test; // Disabling this variable because it seems to be unused.
 	if (flags[kFLAGS.HARDCORE_MODE] > 0)
 	{
-		saveGame(flags[kFLAGS.HARDCORE_SLOT]);
+		saveGameToSharedObject(flags[kFLAGS.HARDCORE_SLOT]);
 		clearOutput();
 		outputText("You may not create copies of Hardcore save files! Your current progress has been saved.");
 		doNext(playerMenu);
@@ -314,22 +286,13 @@ public function saveScreen():void
 		outputText("<b>Last saved or loaded from: " + player.slotName + "</b>\r\r");
 	outputText("<b><u>Slot: Sex,  Game Days Played</u></b>\r");
 
-	var saveFuncs:Array = [];
 
-
+	var bdl:ButtonDataList = new ButtonDataList();
 	for (var i:int = 0; i < saveFileNames.length; i += 1)
 	{
 		var test:Object = SharedObject.getLocal(saveFileNames[i], "/");
 		outputText(loadSaveDisplay(test, String(i + 1)));
-		trace("Creating function with indice = ", i);
-		(function(i:int) : void		// messy hack to work around closures. See: http://en.wikipedia.org/wiki/Immediately-invoked_function_expression
-		{
-			saveFuncs[i] = function() : void 		// Anonymous functions FTW
-			{
-				trace("Saving game with name", saveFileNames[i], "at index", i);
-				saveGame(saveFileNames[i], true);
-			}
-		})(i);
+		bdl.add("Slot "+(i+1),curry(saveToSlot,i));
 
 	}
 
@@ -338,13 +301,7 @@ public function saveScreen():void
 		outputText("\r\r");
 
 	outputText("<b>Leave the notes box blank if you don't wish to change notes.\r<u>NOTES:</u></b>");
-	menu();
-	var s:int = 0;
-	while (s < 14) {
-		addButton(s, "Slot " + (s+1), saveFuncs[s]);
-		s++;
-	}
-	addButton(14, "Back", returnToSaveMenu);
+	submenu(bdl, returnToSaveMenu, 0, false);
 }
 
 public function saveLoad(e:MouseEvent = null):void
@@ -369,9 +326,9 @@ public function saveLoad(e:MouseEvent = null):void
 	outputText("<b>Why does the Save File and Load File option not work?</b>\n");
 	outputText("<i>Save File and Load File are limited by the security settings imposed upon CoC by Flash. These options will only work if you have downloaded the game from the website, and are running it from your HDD. Additionally, they can only correctly save files to and load files from the directory where you have the game saved.</i>");
 	menu();
-	addButton(1, "Load", loadScreen);
+	addButton(1, "Load", loadFromSlotScreen);
 	addButton(2, "Delete", deleteScreen);
-	addButton(6, "Load File", openSave);
+	addButton(6, "Load File", onLoadFromFileClick);
 
 	if (EventParser.badEnded) {
 		addButton(14, "Back", EventParser.gameOver, true);
@@ -386,15 +343,15 @@ public function saveLoad(e:MouseEvent = null):void
 		return;
 	}
 	if (gameStateGet() == 3) {
-		addButton(0, "Save", saveScreen);
-		addButton(5, "Save to File", saveToFile);
+		addButton(0, "Save", saveToSlotScreen);
+		addButton(5, "Save to File", onSaveToFileClick);
 		addButton(3, "AutoSave: " + autoSaveSuffix, autosaveToggle);
 		addButton(14, "Back", CoC.instance.mainMenu.mainMenu);
 	}
 	else
 	{
-		addButton(0, "Save", saveScreen);
-		addButton(5, "Save to File", saveToFile);
+		addButton(0, "Save", saveToSlotScreen);
+		addButton(5, "Save to File", onSaveToFileClick);
 		addButton(3, "AutoSave: " + autoSaveSuffix, autosaveToggle);
 		addButton(14, "Back", playerMenu);
 	}
@@ -403,7 +360,7 @@ public function saveLoad(e:MouseEvent = null):void
 	}
 }
 
-private function saveToFile():void {
+private function onSaveToFileClick():void {
 	saveGameObject(null, true);
 }
 
@@ -491,10 +448,10 @@ public function confirmOverwrite(slot:String):void {
 	outputText("You are about to overwrite the following save slot: " + slot + ".");
 	outputText("\n\n<i>If you choose to overwrite a save file from the original CoC, it will no longer be playable on the original version. I recommend you use slots 10-14 for saving on the mod.</i>");
 	outputText("\n\n<b>ARE YOU SURE?</b>");
-	doYesNo(createCallBackFunction(saveGame, slot), saveScreen);
+	doYesNo(createCallBackFunction(saveGameToSharedObject, slot), saveToSlotScreen);
 }
 
-public function saveGame(slot:String, bringPrompt:Boolean = false):void
+public function saveGameToSharedObject(slot:String, bringPrompt:Boolean = false):void
 {
 	var saveFile:* = SharedObject.getLocal(slot, "/");
 	if (player.slotName != slot && saveFile.data.exists && bringPrompt) {
@@ -505,7 +462,7 @@ public function saveGame(slot:String, bringPrompt:Boolean = false):void
 	saveGameObject(slot, false);
 }
 
-public function loadGame(slot:String):void
+public function loadGameFromSharedObject(slot:String):void
 {
 	var saveFile:* = SharedObject.getLocal(slot, "/");
 
@@ -547,7 +504,7 @@ public function loadGame(slot:String):void
 		{
 			outputText("Would you like to load the backup version of this slot?");
 			menu();
-			addButton(0, "Yes", loadGame, (slot + "_backup"));
+			addButton(0, "Yes", loadGameFromSharedObject, (slot + "_backup"));
 			addButton(1, "No", saveLoad);
 		}
 		else
@@ -1545,7 +1502,7 @@ public function restore(slotName:String):void
 	doNext(playerMenu);
 }
 
-public function openSave():void
+public function onLoadFromFileClick():void
 {
 
 	// Block when running the chaos monkey

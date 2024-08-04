@@ -156,6 +156,10 @@ public class ExplorationEntry {
 	public function unlink():void {
 		nextNodes = [];
 	}
+	public function unlinkOne(e:ExplorationEntry):void {
+		var i:int = nextNodes.indexOf(e);
+		if (i >= 0) nextNodes.splice(i, 1);
+	}
 	public function link(e:ExplorationEntry):void {
 		nextNodes.push(e);
 	}
