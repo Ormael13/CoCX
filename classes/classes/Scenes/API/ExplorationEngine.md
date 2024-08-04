@@ -85,6 +85,17 @@ explorer.prepareArea(groupEncounter);
 ```
 This code generates random encounters and places them on roads.
 
+After `prepareArea` you can edit the 'roads':
+```as
+if (explorer.roadLength(0) > 5) { // check road length
+  explorer.removeLast(0); // remove last entry
+}
+if (explorer.entryAt(2, 1).encounter.encounterName() == "beegirl") { // check encounter at road 2 pos 1
+  explorer.setEncounterAt(2, 1, "trip"); // replace
+}
+```
+Indices are 0-based: road numbers are 0..4, and road poitions are 0..6. 
+
 ### 2. Customization
 
 Exploration engine has many properties that could be overriden, if needed:

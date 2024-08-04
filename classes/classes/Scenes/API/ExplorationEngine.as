@@ -175,6 +175,9 @@ public class ExplorationEngine extends BaseContent {
 		onEncounter  = null;
 		soulSenseCheck = defaultSoulseSenseCheck;
 	}
+	public function entryAt(roadNo:int, roadPos:int):ExplorationEntry {
+		return roads[roadNo][roadPos];
+	}
 	public function markEncounterDone():void {
 		if (initialized && currentEntry != null) {
 			trace("markEncounterDone", currentEntry.encounterName);
@@ -580,7 +583,9 @@ public class ExplorationEngine extends BaseContent {
 			// Road not picked
 			for (i = 0; i < NROADS; i++) {
 				var b:CoCButton = (NROADS <= 3) ? button(i * 5) : button(i);
-				b.show("Path " + (i + 1), curry(selectRoadAndExploreNext, i))
+				if (roads[i][0] && roads[i][0].encounter) {
+					b.show("Path " + (i + 1), curry(selectRoadAndExploreNext, i))
+				}
 			}
 		}
 		if(canSoulSense && player.hasPerk(PerkLib.SoulSense)) {
@@ -647,7 +652,24 @@ public class ExplorationEngine extends BaseContent {
 		if (leave && !finished && !isAtEnd) leave.applyTo(button(13));
 		button(14).show("Back", showUI).icon("Back");
 	}
-
+	public function generateAt(roadNo:int, roadPos:int):void {
+		generate(roads[roadNo][roadPos], 1);
+	}
+	public function setEncounterObjectAt(roadNo:int, roadPos:int, encounter:SimpleEncounter):void {
+		roads[roadNo][roadPos].setupForEncounter(encounter);
+	}
+	
+	/**
+	 * Find the encounter with specific name in the source and put in on the map.
+	 * Call after prepareArea().
+	 * @param roadNo Road number 0..4
+	 * @param roadPos Position on road 0..6
+	 * @param encounterName
+	 */
+	public function setEncounterAt(roadNo:int, roadPos:int, encounterName:String):void {
+		var e:SimpleEncounter = source.findByName(encounterName);
+		if (e) setEncounterObjectAt(roadNo, roadPos, e);
+	}
 	/**
 	 *
 	 * @param entry
@@ -851,6 +873,22 @@ public class ExplorationEngine extends BaseContent {
 		entry.setupForEncounter(encounter);
 		roads[roadIndex][roadPos - 1].link(entry);
 		return entry;
+	}
+	
+	/**
+	 * Remove last entry from road
+	 * @param roadIndex 0..4
+	 */
+	public function removeLast(roadIndex:int):void {
+		var rl:int = roadLength(roadIndex);
+		if (rl > 0) {
+			var entry:ExplorationEntry = roads[roadIndex][rl-1];
+			entry.setEmpty();
+			startPos.unlinkOne(entry);
+			for each(var e2:ExplorationEntry in flatList) {
+				e2.unlinkOne(entry);
+			}
+		}
 	}
 }
 }
