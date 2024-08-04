@@ -46,6 +46,10 @@ public class MainMenu extends BaseContent {
 		//Sets game state to 3, used for determining back functionality of save/load menu.
         CoC.instance.resetGameState();
         clearOutput();
+
+		//IMutations Same ID emergency reporting.
+		IMutationPerkType.runValidIMutates;
+
 		//outputText("<img src=\"logo\" id=\"coc-logo\" height=\"300\" width=\"400\" />\n");
         outputText("<b>Corruption of Champions (" + CoC.instance.ver + ")</b>");
         if (CoC_Settings.debugBuild)

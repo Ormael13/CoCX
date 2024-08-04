@@ -6,6 +6,7 @@ import classes.GlobalFlags.*;
 import classes.Scenes.Places.Ingnam.*;
 import classes.Scenes.SceneLib;
 import classes.Scenes.Soulforce;
+import classes.IMutationPerkType;
 
 import coc.view.MainView;
 

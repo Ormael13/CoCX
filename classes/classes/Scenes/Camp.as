@@ -790,7 +790,6 @@ public class Camp extends NPCAwareContent{
 		outputText(images.showImage("camping"));
 		//Isabella upgrades camp level!
 
-
 		if (isabellaFollower()) {
 			outputText("Your campsite got a lot more comfortable once Isabella moved in.  Carpets cover up much of the barren ground, simple awnings tied to the rocks provide shade, and hand-made wooden furniture provides comfortable places to sit and sleep.  ");
 		}
