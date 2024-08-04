@@ -30,7 +30,7 @@ public class Ingnam extends BaseContent
 			{
 				trace("Autosaving to slot: " + player.slotName);
 
-			CoC.instance.saves.saveGame(player.slotName);
+			CoC.instance.saves.saveGameToSharedObject(player.slotName);
             }
 			//Banished to Mareth.
 			if (model.time.days >= 0 && flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] <= 0) {

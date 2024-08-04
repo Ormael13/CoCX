@@ -1928,7 +1928,7 @@ import classes.Scenes.Combat.CombatAbility;
 			player.startingRace = player.race();
 			if (flags[kFLAGS.HARDCORE_MODE] > 0) {
 				trace("Hardcore save file " + flags[kFLAGS.HARDCORE_SLOT] + " created.");
-                CoC.instance.saves.saveGame(flags[kFLAGS.HARDCORE_SLOT])
+                CoC.instance.saves.saveGameToSharedObject(flags[kFLAGS.HARDCORE_SLOT])
             }
 			CoC.instance.saves.loadPermObject();
 			flags[kFLAGS.MOD_SAVE_VERSION] = CoC.instance.modSaveVersion;
@@ -2604,7 +2604,7 @@ import classes.Scenes.Combat.CombatAbility;
 				addButtonDisabled(btn, "ORTRTA Rank "+ tier.toString(),"You do not have enough points.");
 			}
 			else {
-				addButton(btn, "ORTRTA Rank" + tier.toString(), perkRPConfirm, tier, PerkLib.AscensionOneRaceToRuleThemAllX, pCost, 
+				addButton(btn, "ORTRTA Rank" + tier.toString(), perkRPConfirm, tier, PerkLib.AscensionOneRaceToRuleThemAllX, pCost,
 					"Acquire One Race To Rule Them All Rank " + tier.toString() + ".\n\nIncreases the number of stat points earned per level, and racial skill power.\n"
 					+ "Cost: " + tier * pCost);
 			}
@@ -2622,7 +2622,7 @@ import classes.Scenes.Combat.CombatAbility;
 				addButtonDisabled(btn, "HBirthright R "+ tier.toString(),"You do not have enough points.");
 			}
 			else {
-				addButton(btn, "HBirthright R " + tier.toString(), perkRPConfirm, tier, PerkLib.AscensionHerosBirthrightRankX, pCost, 
+				addButton(btn, "HBirthright R " + tier.toString(), perkRPConfirm, tier, PerkLib.AscensionHerosBirthrightRankX, pCost,
 					"Acquire Hero's Birthright Rank " + tier.toString() + ".\n\nReduces the level needed to equip legendary items by 9.\n"
 					+ "Cost: " + tier * pCost);
 			}

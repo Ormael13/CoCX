@@ -43,7 +43,7 @@ internal class ControlBindings {
                     function ():void {
                         if (CoC.instance.mainView.menuButtonIsVisible(MainView.MENU_DATA) && CoC.instance.player.str > 0) {
                             CoC.instance.mainView.nameBox.text = "";
-                            CoC.instance.saves.saveGame("CoC_1");
+                            CoC.instance.saves.saveGameToSharedObject("CoC_1");
                             EngineCore.clearOutput();
                             EngineCore.outputText("Game saved to slot 1!");
                             EngineCore.doNext(EventParser.playerMenu);
@@ -56,7 +56,7 @@ internal class ControlBindings {
                     function ():void {
                         if (CoC.instance.mainView.menuButtonIsVisible(MainView.MENU_DATA) && CoC.instance.player.str > 0) {
                             CoC.instance.mainView.nameBox.text = "";
-                            CoC.instance.saves.saveGame("CoC_2");
+                            CoC.instance.saves.saveGameToSharedObject("CoC_2");
                             EngineCore.clearOutput();
                             EngineCore.outputText("Game saved to slot 2!");
                             EngineCore.doNext(EventParser.playerMenu);
@@ -69,7 +69,7 @@ internal class ControlBindings {
                     function ():void {
                         if (CoC.instance.mainView.menuButtonIsVisible(MainView.MENU_DATA) && CoC.instance.player.str > 0) {
                             CoC.instance.mainView.nameBox.text = "";
-                            CoC.instance.saves.saveGame("CoC_3");
+                            CoC.instance.saves.saveGameToSharedObject("CoC_3");
                             EngineCore.clearOutput();
                             EngineCore.outputText("Game saved to slot 3!");
                             EngineCore.doNext(EventParser.playerMenu);
@@ -82,7 +82,7 @@ internal class ControlBindings {
                     function ():void {
                         if (CoC.instance.mainView.menuButtonIsVisible(MainView.MENU_DATA) && CoC.instance.player.str > 0) {
                             CoC.instance.mainView.nameBox.text = "";
-                            CoC.instance.saves.saveGame("CoC_4");
+                            CoC.instance.saves.saveGameToSharedObject("CoC_4");
                             EngineCore.clearOutput();
                             EngineCore.outputText("Game saved to slot 4!");
                             EngineCore.doNext(EventParser.playerMenu);
@@ -95,7 +95,7 @@ internal class ControlBindings {
                     function ():void {
                         if (CoC.instance.mainView.menuButtonIsVisible(MainView.MENU_DATA) && CoC.instance.player.str > 0) {
                             CoC.instance.mainView.nameBox.text = "";
-                            CoC.instance.saves.saveGame("CoC_5");
+                            CoC.instance.saves.saveGameToSharedObject("CoC_5");
                             EngineCore.clearOutput();
                             EngineCore.outputText("Game saved to slot 5!");
                             EngineCore.doNext(EventParser.playerMenu);
@@ -109,7 +109,7 @@ internal class ControlBindings {
                         if (CoC.instance.mainView.menuButtonIsVisible(MainView.MENU_DATA)) {
                             var saveFile:* = SharedObject.getLocal("CoC_1", "/");
                             if (saveFile.data.exists) {
-                                if (CoC.instance.saves.loadGame("CoC_1")) {
+                                if (CoC.instance.saves.loadGameFromSharedObject("CoC_1")) {
                                     EngineCore.showStats();
                                     EngineCore.statScreenRefresh();
                                     EngineCore.clearOutput();
@@ -127,7 +127,7 @@ internal class ControlBindings {
                         if (CoC.instance.mainView.menuButtonIsVisible(MainView.MENU_DATA)) {
                             var saveFile:* = SharedObject.getLocal("CoC_2", "/");
                             if (saveFile.data.exists) {
-                                if (CoC.instance.saves.loadGame("CoC_2")) {
+                                if (CoC.instance.saves.loadGameFromSharedObject("CoC_2")) {
                                     EngineCore.showStats();
                                     EngineCore.statScreenRefresh();
                                     EngineCore.clearOutput();
@@ -145,7 +145,7 @@ internal class ControlBindings {
                         if (CoC.instance.mainView.menuButtonIsVisible(MainView.MENU_DATA)) {
                             var saveFile:* = SharedObject.getLocal("CoC_3", "/");
                             if (saveFile.data.exists) {
-                                if (CoC.instance.saves.loadGame("CoC_3")) {
+                                if (CoC.instance.saves.loadGameFromSharedObject("CoC_3")) {
                                     EngineCore.showStats();
                                     EngineCore.statScreenRefresh();
                                     EngineCore.clearOutput();
@@ -163,7 +163,7 @@ internal class ControlBindings {
                         if (CoC.instance.mainView.menuButtonIsVisible(MainView.MENU_DATA)) {
                             var saveFile:* = SharedObject.getLocal("CoC_4", "/");
                             if (saveFile.data.exists) {
-                                if (CoC.instance.saves.loadGame("CoC_4")) {
+                                if (CoC.instance.saves.loadGameFromSharedObject("CoC_4")) {
                                     EngineCore.showStats();
                                     EngineCore.statScreenRefresh();
                                     EngineCore.clearOutput();
@@ -181,7 +181,7 @@ internal class ControlBindings {
                         if (CoC.instance.mainView.menuButtonIsVisible(MainView.MENU_DATA)) {
                             var saveFile:* = SharedObject.getLocal("CoC_5", "/");
                             if (saveFile.data.exists) {
-                                if (CoC.instance.saves.loadGame("CoC_5")) {
+                                if (CoC.instance.saves.loadGameFromSharedObject("CoC_5")) {
                                     EngineCore.showStats();
                                     EngineCore.statScreenRefresh();
                                     EngineCore.clearOutput();
