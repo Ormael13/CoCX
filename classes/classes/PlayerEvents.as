@@ -240,6 +240,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.hasPerk(PerkLib.Lusty)) dynStats("lus", player.libStat.totalCore * 0.005, "scale", false); //Double lust rise if lusty.
 			}
 			if (player.perkv1(IMutationsLib.HumanMetabolismIM) >= 1) dynStats("lus", -(Math.round(player.maxLust() * 0.01 * player.perkv1(IMutationsLib.HumanMetabolismIM))));
+			if (player.perkv1(IMutationsLib.HumanMetabolismIM) >= 3) EngineCore.changeFatigue( -(Math.round(player.maxFatigue() * 0.01)));
+			if (player.perkv1(IMutationsLib.HumanDigestiveTractIM) >= 3) dynStats("lus", -(Math.round(player.maxLust() * 0.01)));
 			//Jewelry effect
 			if (player.jewelryEffectId == JewelryLib.CORRUPTION) {
 				if (player.cor < 80) dynStats("cor", (player.jewelryEffectMagnitude/10));

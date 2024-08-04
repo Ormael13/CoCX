@@ -72,6 +72,7 @@ public class HumanRace extends Race {
 				.hasPerk(PerkLib.HumanSupremacyBasic, +2)
 				.hasPerk(PerkLib.HumanSupremacyImproved, +3)
 				.hasPerk(PerkLib.HumanSupremacySuperior, +4)
+				.hasPerk(PerkLib.HumanSupremacyPeerless, +4)
 				.customRequirement("", "Bloodline: Common human OR Common human's descendant",
 						function (body:BodyData):Boolean {
 							return (body.player.hasPerk(PerkLib.CommonHumanBloodline)

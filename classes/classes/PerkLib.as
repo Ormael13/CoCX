@@ -371,6 +371,9 @@ public class PerkLib
 		public static const HumanSupremacyInitial:PerkType = mk("Human Supremacy (Initial)", "Human Supremacy (Initial)",
 				"Delay by 5 points appearing effect of negative HP regeneration. (+2 to human score)",
 				"You've chosen the 'Human Supremacy (Initial)' perk. Delay by 5 points appearing effect of negative HP regeneration. (+2 to human score)");
+		public static const HumanSupremacyPeerless:PerkType = mk("Human Supremacy (Peerless)", "Human Supremacy (Peerless)",
+				"Delay by 15 points appearing effect of negative HP regeneration. (+5 to human score)",
+				"You've chosen the 'Human Supremacy (Peerless)' perk. Delay by 15 points appearing effect of negative HP regeneration. (+5 to human score)");
 		public static const HumanSupremacySuperior:PerkType = mk("Human Supremacy (Superior)", "Human Supremacy (Superior)",
 				"Delay by 15 points appearing effect of negative HP regeneration. (+4 to human score)",
 				"You've chosen the 'Human Supremacy (Superior)' perk. Delay by 15 points appearing effect of negative HP regeneration. (+4 to human score)");
@@ -525,6 +528,9 @@ public class PerkLib
 		public static const SixthSense:PerkType = mk("Sixth Sense", "Sixth Sense",
 				"You are not affected by blind and other confusing effects.",
 				"You've chosen the 'Sixth Sense' perk. You are not affected by blind and other confusing effects.");
+		public static const EmpoweredTaming:PerkType = mk("Empowered Taming", "Empowered Taming",
+				"During taming monster it wisdom is treated as if it was 80% lower.",
+				"You've chosen the 'Empowered Taming' perk. During taming monster it wisdom is treated as if it was 80% lower.");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -532,9 +538,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const EmpoweredTaming:PerkType = mk("Empowered Taming", "Empowered Taming",
-				"During taming monster it wisdom is treated as if it was 80% lower.",
-				"You've chosen the 'Empowered Taming' perk. During taming monster it wisdom is treated as if it was 80% lower.");
 		public static const StrongerTamedMosters:PerkType = mk("Stronger Tamed Mosters", "Stronger Tamed Mosters",
 				".",
 				"You've chosen the 'Stronger Tamed Mosters' perk. .");
@@ -4846,7 +4849,7 @@ public class PerkLib
 			[GrabbingStyle, GrabbingMaster, GrabbingGrandmaster],
 			[GreyMageApprentice, GreyMage, GreyArchmage, GrandGreyArchmage, GrandGreyArchmage2ndCircle],
 			[HistoryBuff, GuerrillaTactics, StrengthInNumbers, General, SmallArmy, Fellowship],
-			[HumanSupremacyInitial, HumanSupremacyBasic, HumanSupremacyImproved, HumanSupremacyAdvanced, HumanSupremacySuperior],//, CheetahVI
+			[HumanSupremacyInitial, HumanSupremacyBasic, HumanSupremacyImproved, HumanSupremacyAdvanced, HumanSupremacySuperior, HumanSupremacyPeerless],
 			[InhumanDesireI, InhumanDesireII, InhumanDesireIII, InhumanDesireIV, InhumanDesireV, InhumanDesireVI],
 			[InsightfulResourcesI, InsightfulResourcesII, InsightfulResourcesIII, InsightfulResourcesIV,
 				InsightfulResourcesV, InsightfulResourcesVI],
@@ -6663,9 +6666,9 @@ public class PerkLib
                     .requireSpe(30)
                     .requireLevel(18);
             //Tier 4 Wisdom perks
-//            EmpoweredTaming.requireLevel(24)
-//                    .requirePerk(Beast02)
-//                    .requireWis(130);
+            EmpoweredTaming.requireLevel(24)
+                    .requirePerk(FourthTamerOfTheApocalypse)
+                    .requireWis(130);
 //            ComboMaster.requirePerk(Combo)
 //                    .requireWis(125)
 //                    .requireSpe(100)
@@ -8158,6 +8161,11 @@ public class PerkLib
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 72;
                     }, "Seventy two of any race internal mutations");
+            HumanSupremacyPeerless.requirePerk(HumanSupremacySuperior)
+                    .requireLevel(66)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.internalHumanScore() >= 51 && player.racialScore(Races.HUMAN) > 17;
+                    }, "Fifty one human internal mutations & 18+ human score");
             GolemArmyMajor.requireLevel(66)
                     .requireInt(185)
                     .requireWis(185)

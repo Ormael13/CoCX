@@ -17,8 +17,7 @@ import classes.StatusEffects.VampireThirstEffect;
 	public class CombatFollowersActions extends BaseCombatContent
 	{
 		
-		public function CombatFollowersActions() {
-		}
+		public function CombatFollowersActions() {}
 		
 		public function increasedEfficiencyOfAttacks():Number {
 			var IEoA:Number = 0;

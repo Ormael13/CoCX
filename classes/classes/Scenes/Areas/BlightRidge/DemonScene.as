@@ -33,7 +33,8 @@ import classes.Scenes.SceneLib;
 			menu();
 			outputText("You smile in satisfaction as the mino incubus collapses, unable to continue fighting.");
 			if (monster.HP < 1) addButton (5, "Kill Him", killDemon);
-            LustyMaidensArmor.addTitfuckButton(7);
+            addButtonIfTrue(6, "Tame It", SceneLib.camp.campMake.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
+			LustyMaidensArmor.addTitfuckButton(7);
 			addButton (14, "Leave", cleanupAfterCombat);
 			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatMinoIncubus);
 		}
@@ -358,6 +359,7 @@ import classes.Scenes.SceneLib;
 			menu();
 			outputText("You smile in satisfaction as the cow succubus collapses, unable to continue fighting.");
 			if (monster.HP < 1) addButton (5, "Kill Her", killDemon);
+			addButtonIfTrue(6, "Tame It", SceneLib.camp.campMake.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
 			addButton (14, "Leave", cleanupAfterCombat);
 			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatCowSuccubus);
 		}

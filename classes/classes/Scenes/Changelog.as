@@ -325,10 +325,10 @@ public class Changelog extends BaseContent
 			outputText("-Remove Balls option in metamorph would remove trap/uniball effect too.\n");
 			outputText("-New necklace (by Liadri): Silver cross necklace - obtained radomly after any defeat as herm / female OR bought from Giacomo. Cost 400 gems. Effect: +50% to tease and magical damage when used by PC with soulless perk.\n");
 			outputText("-Adding in IMutations name-duplication check. (Jtecx)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New mutation perk: Human Digestive Tract (Evolved). Req. Human Digestive Tract (Primitive) and lvl 60+. Effects: Your digestive tract improved allowing to get better nurishment from all the ingested substances (+60%). Increase limit when PC gain weight from eating too much by 45. Can slowly remove harmfull substances (-1% of lust per turn)\n");
+			outputText("-New mutation perk: Human Metabolism (Evolved). Req. Human Metabolism (Primitive) and lvl 60+. Effects: Your metabolism changes allowing to slowly detoxification of poisons or slight faster fatigue recovery (30% chance to instantly remove some of toxic substance from body, -3% of lust / -1% of fatigue per turn, 2x shorter elemental dot effects duration)\n");
+			outputText("-New tier 11 misc lvl-up perk: Human Supremacy (Peerless). Req. Human Supremacy (Superior) perk and 51+ points in Internal Human Disposition score & 18+ points in Human score. Effect: Delay by 15 points appearing effect of negative HP regeneration. (+4 to human score)\n");
+			outputText("-New tier 4 wisdom lvl-up perk: Empowered Taming. Req. Fourth Tamer of the Apocalypse perk and 130+ wisdom. Effect: During taming monster it wisdom is treated as if it was 80% lower.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -362,7 +362,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");//New tier ? wisdom lvl-up perk: Apes Together Strong. Req. ??? perk and ???+ wisdom. Effect: allow exchange single monsters variants > group monsters variants
 			outputText("-\n");//New tier 2 wisdom lvl-up perk: They Fight, They Protect. Req. Three times a tame perk and 80+ wisdom. Effect: meat shield option ^^
 			outputText("-\n");//New tier 3 wisdom lvl-up perk: Stronger Tamed Mosters. Req. Fourth Tamer of the Apocalypse perk and 105+ wisdom. Effect: bigger meat shields, bigger claws, bigger muscles \o/ bigger everything???
-			outputText("-\n");//New tier 4 wisdom lvl-up perk: Empowered Taming. Req. ??? perk and 130+ wisdom. Effect: During taming monster it wisdom is treated as if it was 80% lower.
+			outputText("-\n");
 			outputText("-\n");//New tier 7 wisdom lvl-up perk: Kaiju No8. Req. Job: Tamer and 50+ wisdom. Effect: To your team of monsters joins 8th kaiju.
 			outputText("-\n");//New mutation perk: Human Parathyroid Glands (Final Form). Req. Human Parathyroid Glands (Evolved) and lvl 90+. Effects: Increases self healing by 40 * level HP in combat and twice more out of combat. 8 * level HP Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.
 			outputText("-\n");
@@ -1221,7 +1221,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 4 misc lvl-up perk: Bicycle. Req. Door Knob perk. Effect: +10% max lust, +5 to anal/vaginal capacity.\n");
 			outputText("-New tier 6 strength lvl-up perk: Titan's Grip. Req. Gigant's Grip (Ex) and Epic Strength perks, 200+ str. Effect: Gain an ability to wield massive weapons in one hand. (+25% melee physical attacks multiplier)\n");
 			outputText("-New tier 7 misc lvl-up perk: Meat Hole. Req. Bicycle perk. Effect: +10% max lust, +5 to anal/vaginal capacity.\n");
-			outputText("-New tier 9 misc lvl-up perk: Human Supremacy (Superior). Req. Human Supremacy (Advanced) perk and 36+ points in Internal Human Disposition score & 18+ points in Human score. Effect: Delay by 15 points appearing effect of negative HP regeneration. (+3 to human score)\n");
+			outputText("-New tier 9 misc lvl-up perk: Human Supremacy (Superior). Req. Human Supremacy (Advanced) perk and 36+ points in Internal Human Disposition score & 18+ points in Human score. Effect: Delay by 15 points appearing effect of negative HP regeneration. (+4 to human score)\n");
 			outputText("-New tier 12 misc lvl-up perk: Bed Warmer. Req. Meat Hole perk. Effect: +10% max lust, +5 to anal/vaginal capacity.\n");
 			outputText("-New tier 15 sensitivity lvl-up perk: Legendary Desensitization. Req. Epic Desensitization perk and 100+ sens. Effect: Negative effects of sensitivity are reduced by 20%.\n");
 			outputText("-New tier 17 misc lvl-up perk: Tension Tamer. Req. Bed Warmer perk. Effect: +10% max lust, +5 to anal/vaginal capacity.\n");

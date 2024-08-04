@@ -71,6 +71,7 @@ public class Combat extends BaseContent {
     public var teases:CombatTeases = new CombatTeases();
     public var soulskills:CombatSoulskills = new CombatSoulskills();
     public var comfoll:CombatFollowersActions = new CombatFollowersActions();
+    public var comtamed:CombatTamedMonstersActions = new CombatTamedMonstersActions();
     public var ui:CombatUI = new CombatUI();
 	public var meleeDamageNoLag:Number = 0;
     public var MDOCount:int = 0; // count of how many times damage was deal
@@ -787,6 +788,8 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.ImprovedGrapple)) flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] = 0;
 			if (player.armor == armors.BMARMOR) dynStats("lus", -(Math.round(player.maxLust() * 0.05)));
 			if (player.perkv1(IMutationsLib.HumanMetabolismIM) >= 1) dynStats("lus", -(Math.round(player.maxLust() * 0.01 * player.perkv1(IMutationsLib.HumanMetabolismIM))));
+			if (player.perkv1(IMutationsLib.HumanMetabolismIM) >= 3) EngineCore.changeFatigue( -(Math.round(player.maxFatigue() * 0.01)));
+			if (player.perkv1(IMutationsLib.HumanDigestiveTractIM) >= 3) dynStats("lus", -(Math.round(player.maxLust() * 0.01)));
 			if (player.hasStatusEffect(StatusEffects.TyrantState)) dynStats("lus", (Math.round(player.maxLust() * 0.05)));
 			if (player.hasStatusEffect(StatusEffects.VampThirstStacksHPMana)) player.removeStatusEffect(StatusEffects.VampThirstStacksHPMana);
 			if (player.hasStatusEffect(StatusEffects.TyrantState) && TyrantiaFollower.TyrantiaTrainingSessions >= 30) {
@@ -939,7 +942,7 @@ public class Combat extends BaseContent {
             bd = buttons.add("Elem.Asp", buttonFunc, "Use the once-per-battle elemental aspects of your basic elementals.", "Elemental Aspects");
         }
 		if (player.shieldName == "Ancient Conduit") bd = buttons.add("A.Conduit", AncientConduitMenu);
-		if (player.hasPerk(PerkLib.JobTamer)) bd = buttons.add("Tamed Monster(s)", SceneLib.campMakeWinions.tamedMonstersMenu);
+		if (player.hasPerk(PerkLib.JobTamer)) bd = buttons.add("Tamed Monster(s)", comtamed.tamedMonstersMenu);
 		if (player.hasPerk(PerkLib.PrestigeJobNecromancer) && player.perkv2(PerkLib.PrestigeJobNecromancer) > 0) {
 			bd = buttons.add("S.S. to F.", sendSkeletonToFight).hint("Send Skeleton to fight - Order your Skeletons to beat the crap out of your foe.");
 			if (monster.isFlying() && (!player.hasPerk(PerkLib.GreaterHarvest) || (player.perkv1(PerkLib.GreaterHarvest) == 0 && player.perkv2(PerkLib.GreaterHarvest) == 0))) {

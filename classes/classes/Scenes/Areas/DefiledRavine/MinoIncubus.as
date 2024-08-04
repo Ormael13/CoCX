@@ -105,6 +105,7 @@ use namespace CoC;
 			this.imageName = "minotaur";
 			this.long = "You are fighting a minotaur-like incubus.  Covered in shaggy brown fur, the beast is an imposing sight, wearing little but an obviously distended loincloth, with a pair of deadly battle axes, is easily eight feet tall.  As former minotaur he has hooves, a cow-like tail and face, prominent horns, and impressive musculature.  His huge equine cock is already dripping with precum in anticipation.";
 			// this.plural = false;
+			this.flyer = true;
 			this.createCock(rand(10) + 27,3 + rand(2),CockTypesEnum.HORSE);
 			this.balls = 2;
 			this.ballSize = 5 + rand(10);
