@@ -116,7 +116,7 @@ public class SandWormScene extends BaseContent
 		clearOutput();
 		outputText("Too "+(monster.HP <= monster.minHP() ? "wounded":"aroused") + " to keep on fighting, the sand worm digs underground, escaping the battleground. [if (silly)Geeze you hate it when low budget actors flee the battlefield before you rape them!][pg]");
 		menu();
-		addButtonIfTrue(3, "Tame It", SceneLib.camp.campMake.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
+		addButtonIfTrue(3, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
 		addButton(4, "Leave", cleanupAfterCombat);
 	}
 

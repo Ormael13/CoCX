@@ -45,7 +45,6 @@ public class Camp extends NPCAwareContent{
 	public var cabinProgress:CabinProgress = new CabinProgress();
 	public var campUpgrades:CampUpgrades = new CampUpgrades();
 	public var campScenes:CampScenes = new CampScenes();
-	public var campMake:CampMakeWinions = new CampMakeWinions();
 	public var campUniqueScenes:UniqueCampScenes = new UniqueCampScenes();
 	public var codex:Codex = new Codex();
 	public var questlog:Questlog = new Questlog();
@@ -2805,13 +2804,13 @@ public class Camp extends NPCAwareContent{
 		clearOutput();
 		outputText("On which group of minions you want to check on?");
 		menu();
-		if (player.hasPerk(PerkLib.JobGolemancer)) addButton(0, "Make", campMake.accessMakeWinionsMainMenu).hint("Check your options for making some golems.");
+		if (player.hasPerk(PerkLib.JobGolemancer)) addButton(0, "Make", SceneLib.campMakeWinions.accessMakeWinionsMainMenu).hint("Check your options for making some golems.");
 		else addButtonDisabled(0, "Make", "You need to learn Golemancer job to use this option.");player.hasPerk(PerkLib.JobElementalConjurer)
-		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > 0) addButton(1, "Summon", campMake.accessSummonElementalsMainMenu).hint("Check your options for managing your elemental summons.");
+		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > 0) addButton(1, "Summon", SceneLib.campMakeWinions.accessSummonElementalsMainMenu).hint("Check your options for managing your elemental summons.");
 		else addButtonDisabled(1, "Summon", "You should first build Arcane Circle. Without some tools from the carpenter's toolbox it would be near impossible to do this OR you not yet learned Elemental Conjurer job.");
-		if (player.hasPerk(PerkLib.JobTamer)) addButton(2, "Tame", campMake.accessTamedWinionsMainMenu).hint("Check your options for tamed minions.");
+		if (player.hasPerk(PerkLib.JobTamer)) addButton(2, "Tame", SceneLib.campMakeWinions.accessTamedWinionsMainMenu).hint("Check your options for tamed minions.");
 		else addButtonDisabled(2, "Tame", "You need to learn Tamer job to use this option.");
-		if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) addButton(5, "Skeletons", campMake.accessMakeSkeletonWinionsMainMenu).hint("Check your options for making some skeletons.");
+		if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) addButton(5, "Skeletons", SceneLib.campMakeWinions.accessMakeSkeletonWinionsMainMenu).hint("Check your options for making some skeletons.");
 		else addButtonDisabled(5, "Skeletons", "You need to learn Necromancer job to use this option.");
 		if (player.hasPerk(PerkLib.PrestigeJobDruid)) addButton(6, "Fusions", druidMenu);
 		else addButtonDisabled(6, "Fusions", "You need to learn Druid job to use this option.");

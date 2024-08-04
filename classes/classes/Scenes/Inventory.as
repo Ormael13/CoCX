@@ -880,8 +880,8 @@ use namespace CoC;
 				}
 			}
 			//Check for room in Guild quest bag and return the itemcount for it.
-			if (InCollection(itype, useables.GOLCORE) && nextAction != SceneLib.camp.campMake.accessMakeWinionsMainMenu) {
-				temp = (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < SceneLib.camp.campMake.maxReusableGolemCoresBagSize() ? flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]:-1);
+			if (InCollection(itype, useables.GOLCORE) && nextAction != SceneLib.campMakeWinions.accessMakeWinionsMainMenu) {
+				temp = (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < SceneLib.campMakeWinions.maxReusableGolemCoresBagSize() ? flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]:-1);
 				if (temp >= 0) {
 					flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]++;
 					outputText("You place " + itype.longName + " in your Golem Core bag, giving you "+ (temp+1) +" of them.");

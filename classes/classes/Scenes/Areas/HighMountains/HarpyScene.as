@@ -54,7 +54,7 @@ public class HarpyScene extends BaseContent
 			}
 			//Not horny?  Iz over
 			else outputText("You're not aroused enough to rape the poor birb.");
-			addButtonIfTrue(12, "Tame It", SceneLib.camp.campMake.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
+			addButtonIfTrue(12, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
 			addButton(14, "Leave", cleanupAfterCombat);
 		}
 

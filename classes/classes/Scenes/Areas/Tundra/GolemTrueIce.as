@@ -80,7 +80,7 @@ public class GolemTrueIce extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.camp.campMake.postFightGolemOptions1();
+			SceneLib.campMakeWinions.postFightGolemOptions1();
 		}
 		
 		public function GolemTrueIce() 

@@ -26,7 +26,7 @@ package classes.Scenes.Areas.GlacialRift
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstWinterWolf);
 			}
 			else outputText("You aren't aroused enough to fuck him.");
-			addButtonIfTrue(12, "Tame It", SceneLib.camp.campMake.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
+			addButtonIfTrue(12, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
 			addButton(14, "Leave", cleanupAfterCombat);
 		}
 		

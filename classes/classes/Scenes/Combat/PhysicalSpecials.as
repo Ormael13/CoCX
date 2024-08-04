@@ -2593,7 +2593,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			shatter = true;
 		}
 		if (!shatter) {
-			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < camp.campMake.maxReusableGolemCoresBagSize()) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]++;
+			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < SceneLib.campMakeWinions.maxReusableGolemCoresBagSize()) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]++;
 			else overloadedGolemCoresBag = true;
 		}
 		damage += ((player.inte + player.wis + 300 + rand(121)) * 20);
@@ -2639,12 +2639,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 			shatter = true;
 		}
 		if (!shatter) {
-			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] + 3 < camp.campMake.maxReusableGolemCoresBagSize()) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] += 3;
+			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] + 3 < SceneLib.campMakeWinions.maxReusableGolemCoresBagSize()) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] += 3;
 			else overloadedGolemCoresBag = true;
 		}
 		if (!shatter && !overloadedGolemCoresBag) {
-			if ((camp.campMake.maxReusableGolemCoresBagSize() - flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]) < 3) {
-				flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] = camp.campMake.maxReusableGolemCoresBagSize();
+			if ((SceneLib.campMakeWinions.maxReusableGolemCoresBagSize() - flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]) < 3) {
+				flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] = SceneLib.campMakeWinions.maxReusableGolemCoresBagSize();
 				partialyoverloadedGolemCoresBag = true;
 			}
 		}
@@ -2693,12 +2693,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 			shatter = true;
 		}
 		if (!shatter) {
-			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] + 5 < camp.campMake.maxReusableGolemCoresBagSize()) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] += 5;
+			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] + 5 < SceneLib.campMakeWinions.maxReusableGolemCoresBagSize()) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] += 5;
 			else overloadedGolemCoresBag = true;
 		}
 		if (!shatter && !overloadedGolemCoresBag) {
-			if ((camp.campMake.maxReusableGolemCoresBagSize() - flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]) < 5) {
-				flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] = camp.campMake.maxReusableGolemCoresBagSize();
+			if ((SceneLib.campMakeWinions.maxReusableGolemCoresBagSize() - flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]) < 5) {
+				flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] = SceneLib.campMakeWinions.maxReusableGolemCoresBagSize();
 				partialyoverloadedGolemCoresBag = true;
 			}
 		}
@@ -2728,8 +2728,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.ExpertGolemMaker)) damage += ((player.inte + player.wis) * 7);
 		if (player.hasPerk(PerkLib.MasterGolemMaker)) damage += ((player.inte + player.wis) * 8);
 		if (!overloadedGolemCoresBag) {
-			if ((camp.campMake.maxReusableGolemCoresBagSize() - flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]) < 4) {
-				flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] = camp.campMake.maxReusableGolemCoresBagSize();
+			if ((SceneLib.campMakeWinions.maxReusableGolemCoresBagSize() - flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]) < 4) {
+				flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] = SceneLib.campMakeWinions.maxReusableGolemCoresBagSize();
 				partialyoverloadedGolemCoresBag = true;
 			}
 		}
@@ -2758,8 +2758,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.ExpertGolemMaker)) damage += ((player.inte + player.wis) * 7);
 		if (player.hasPerk(PerkLib.MasterGolemMaker)) damage += ((player.inte + player.wis) * 8);
 		if (!overloadedGolemCoresBag) {
-			if ((camp.campMake.maxReusableGolemCoresBagSize() - flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]) < 10) {
-				flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] = camp.campMake.maxReusableGolemCoresBagSize();
+			if ((SceneLib.campMakeWinions.maxReusableGolemCoresBagSize() - flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]) < 10) {
+				flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] = SceneLib.campMakeWinions.maxReusableGolemCoresBagSize();
 				partialyoverloadedGolemCoresBag = true;
 			}
 		}
@@ -2788,8 +2788,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.ExpertGolemMaker)) damage += ((player.inte + player.wis) * 7);
 		if (player.hasPerk(PerkLib.MasterGolemMaker)) damage += ((player.inte + player.wis) * 8);
 		if (!overloadedGolemCoresBag) {
-			if ((camp.campMake.maxReusableGolemCoresBagSize() - flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]) < 20) {
-				flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] = camp.campMake.maxReusableGolemCoresBagSize();
+			if ((SceneLib.campMakeWinions.maxReusableGolemCoresBagSize() - flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]) < 20) {
+				flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] = SceneLib.campMakeWinions.maxReusableGolemCoresBagSize();
 				partialyoverloadedGolemCoresBag = true;
 			}
 		}
@@ -2819,11 +2819,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.ExpertGolemMaker)) damage += ((player.inte + player.wis) * 5);
 		if (player.hasPerk(PerkLib.MasterGolemMaker)) damage += ((player.inte + player.wis) * 5);
 		flags[kFLAGS.TEMPORAL_GOLEMS_BAG] = 0;
-		if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] + usedGolems < camp.campMake.maxReusableGolemCoresBagSize()) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] += usedGolems;
+		if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] + usedGolems < SceneLib.campMakeWinions.maxReusableGolemCoresBagSize()) flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] += usedGolems;
 		else overloadedGolemCoresBag = true;
 		if (!overloadedGolemCoresBag) {
-			if ((camp.campMake.maxReusableGolemCoresBagSize() - flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]) < usedGolems) {
-				flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] = camp.campMake.maxReusableGolemCoresBagSize();
+			if ((SceneLib.campMakeWinions.maxReusableGolemCoresBagSize() - flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]) < usedGolems) {
+				flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] = SceneLib.campMakeWinions.maxReusableGolemCoresBagSize();
 				partialyoverloadedGolemCoresBag = true;
 			}
 		}

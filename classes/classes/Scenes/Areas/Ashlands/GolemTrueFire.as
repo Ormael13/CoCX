@@ -80,7 +80,7 @@ package classes.Scenes.Areas.Ashlands
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.camp.campMake.postFightGolemOptions1();
+			SceneLib.campMakeWinions.postFightGolemOptions1();
 		}
 		
 		public function GolemTrueFire() 

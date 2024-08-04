@@ -109,7 +109,7 @@ public class HellHoundScene extends BaseContent
 				if (hpVictory) outputText("You're not aroused enough to rape your enemy.'.");
 				else outputText("You turn away, not really turned on enough to be interested in such an offer.");
 			}
-			addButtonIfTrue(11, "Tame It", SceneLib.camp.campMake.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
+			addButtonIfTrue(11, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
 			addButton(14, "Leave", cleanupAfterCombat);
 		}
 

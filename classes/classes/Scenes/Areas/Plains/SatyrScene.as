@@ -256,7 +256,7 @@ internal function defeatASatyr():void {
 		LustyMaidensArmor.addTitfuckButton(2);
 		SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatASatyr);
 	}
-	addButtonIfTrue(12, "Tame It", SceneLib.camp.campMake.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
+	addButtonIfTrue(12, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
 	addButton(14, "Leave", cleanupAfterCombat);
 }
 

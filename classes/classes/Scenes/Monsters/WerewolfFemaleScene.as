@@ -67,7 +67,7 @@ public class WerewolfFemaleScene extends BaseContent
 			else addButtonDisabled(0, "Dominate", "This scene requires you to have a cock.", "Dominate");
 			if (player.hasVagina()) addButton(1, "Femdom", femDom).hint("You're top girl here. It's time to show it!");
 			else addButtonDisabled(1, "Femdom", "This scene requires you to have a vagina.", "Femdom");
-			addButtonIfTrue(12, "Tame It", SceneLib.camp.campMake.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
+			addButtonIfTrue(12, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
 			addButton(14, "Leave", cleanupAfterCombat);
 			SceneLib.uniqueSexScene.pcUSSPreChecksV2(rapeMenu);
 		}

@@ -2798,7 +2798,7 @@ import classes.Scenes.Combat.CombatAbility;
 					if (player.ascensionPerkPoints < pCost * tier) {
 						addButtonDisabled(btn, "Gen. Memory", "You do not have enough point to acquire Genetic Memory.");
 					}
-					else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < tier){
+					else if (whichNewGameAreYouOn() < tier){
 						addButtonDisabled(btn, "Gen. Memory", "You have not ascended enough times yet.");
 					}
 					else if (tier > 10){

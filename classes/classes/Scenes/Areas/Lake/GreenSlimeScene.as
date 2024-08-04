@@ -60,7 +60,7 @@ public function defeatGS():void {
 		}
 		SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatGS);
 	}
-	addButtonIfTrue(10, "Tame It", SceneLib.camp.campMake.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
+	addButtonIfTrue(10, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
 	addButton(14, "Leave", cleanupAfterCombat);
 }
 

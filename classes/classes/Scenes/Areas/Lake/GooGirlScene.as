@@ -335,7 +335,7 @@ public class GooGirlScene extends AbstractLakeContent
 			if (player.gender == 0 || player.lust < 33) {
 				outputText("The goo-girl, while an unusual creature, seems unable to communicate and clearly has nothing of value.  Of no particular use in your quest, you shoo the dripping blob back to the shore. She seems disappointed at first, but bounces back quickly enough, spotting movement in the "+GooLocation+".  She splashes in and takes off at top speed, " + gooColor9() + " blur while you take your leave.");
 				menu();
-				addButtonIfTrue(12, "Tame It", SceneLib.camp.campMake.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
+				addButtonIfTrue(12, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
 				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else {
@@ -382,7 +382,7 @@ public class GooGirlScene extends AbstractLakeContent
 				}
 				else if (latexGoo_canThink && flags[kFLAGS.PC_KNOWS_ABOUT_BLACK_EGGS] <= 0 && player.cor >= 50)
 					sceneHunter.print("Have you ever seen rubber-black eggs? Try to figure out what they are... somehow. Maybe ask someone?");
-				addButtonIfTrue(12, "Tame It", SceneLib.camp.campMake.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
+				addButtonIfTrue(12, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
 				addButton(14, "Leave", cleanupAfterCombat);
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(beatUpGoo);
 			}

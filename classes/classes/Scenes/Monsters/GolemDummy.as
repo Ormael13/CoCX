@@ -45,7 +45,7 @@ package classes.Scenes.Monsters
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (player.hasStatusEffect(StatusEffects.SoulArena)) SceneLib.combat.finishCombat();
-			else SceneLib.camp.campMake.postFightGolemOptions1();
+			else SceneLib.campMakeWinions.postFightGolemOptions1();
 		}
 		
 		public function GolemDummy() 

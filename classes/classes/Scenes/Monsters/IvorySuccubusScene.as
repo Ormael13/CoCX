@@ -41,7 +41,7 @@ public class IvorySuccubusScene extends BaseContent
         clearOutput();
         outputText("The succubus falls to her knees, too badly " + (monster.HP <= 0 ? "beaten" : "aroused") + " to continue fighting.\n\n");
         menu();
-		addButtonIfTrue(3, "Tame It", SceneLib.camp.campMake.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
+		addButtonIfTrue(3, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
 		addButton(4, "Leave", cleanupAfterCombat);
 		if (player.hasCock() && player.lust >= 33) { //Cocks only at the moment.
             outputText("Sadly, your desires have not been met. Of course, you can always rape the poor thing. Do you?");

@@ -26,7 +26,7 @@ public class DryadScene extends BaseContent {
             addButtonIfTrue(1, "Make Lick", makeLick, "Req. a vagina.", player.hasVagina());
         }
 		else outputText("You're not aroused enough to rape her!");
-        addButtonIfTrue(3, "Tame It", SceneLib.camp.campMake.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
+        addButtonIfTrue(3, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
 		addButton(4, "Leave", cleanupAfterCombat);
     }
 

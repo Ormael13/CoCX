@@ -46,7 +46,7 @@ public class GolemsDummy extends AbstractGolem
 			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) SceneLib.hexindao.gaunletchallange1fight2();
 			else {
 				if (player.hasStatusEffect(StatusEffects.SoulArena)) SceneLib.combat.finishCombat();
-				else SceneLib.camp.campMake.postFightGolemOptions2();
+				else SceneLib.campMakeWinions.postFightGolemOptions2();
 			}
 		}
 		

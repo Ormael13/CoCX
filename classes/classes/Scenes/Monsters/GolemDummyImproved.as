@@ -54,7 +54,7 @@ package classes.Scenes.Monsters
 			}
 			else {
 				if (player.hasStatusEffect(StatusEffects.SoulArena)) SceneLib.combat.finishCombat();
-				else SceneLib.camp.campMake.postFightGolemOptions1();
+				else SceneLib.campMakeWinions.postFightGolemOptions1();
 			}
 		}
 		

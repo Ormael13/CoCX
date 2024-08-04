@@ -168,7 +168,7 @@ public function wonWithWereshark():void {
 	outputText("Seeing "+(wsG()?"his":"her")+" impending defeat your opponent smacks your face momentarily dazing you with "+(wsG()?"his":"her")+" tail and suddenly makes a turn to swim away at high speed vanishing into the dark water before you can regain your composure. ");
 	outputText("Guess you won’t be dining on that fish tonight. Somewhat frustrated you grab the loot your opponent left behind in "+(wsG()?"his":"her")+" quick retreat.\n\n");
 	menu();//outputText("\"<i></i>\"\n\n");
-	addButtonIfTrue(3, "Tame It", SceneLib.camp.campMake.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
+	addButtonIfTrue(3, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
 	addButton(4, "Leave", cleanupAfterCombat);
 }
 	}

@@ -123,7 +123,7 @@ private function startTentacleBeastCombat():void {
 		addButtonIfTrue(0, "Dick Rape", dickRape, "Req. a dick", player.hasCock());
 		addButtonIfTrue(1, "MilkTentacle", milkTent, "Req. a vagina", player.hasVagina());
 		addButtonIfTrue(2, "Brutal Fuck", brutalFuck, "Req. a vagina and high corruption", player.hasVagina() && player.cor >= 66 - player.corruptionTolerance);
-		addButtonIfTrue(3, "Tame It", SceneLib.camp.campMake.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
+		addButtonIfTrue(3, "Tame It", SceneLib.campMakeWinions.tamingAttempt, "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
 		addButton(4, "Leave", cleanupAfterCombat);
 	}
 
@@ -860,7 +860,7 @@ private function tentacularGenderGooTimes():void {
 public function choiceofaction():void {
 	menu();
 	addButton(0, "Kill It", killTentacleBeast);
-	addButtonIfTrue(3, "Tame It", SceneLib.camp.campMake.tamingAttempt , "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
+	addButtonIfTrue(3, "Tame It", SceneLib.campMakeWinions.tamingAttempt , "Req. to have Job: Tamer", player.hasPerk(PerkLib.JobTamer));
 	addButton(4, "Leave", cleanupAfterCombat);
 }
 private function killTentacleBeast():void {

@@ -2265,23 +2265,23 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.053;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.054) {
-				if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > camp.campMake.maxPermanentImprovedStoneGolemsBagSize()) {
-					var costback1:Number = (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] - camp.campMake.maxPermanentImprovedStoneGolemsBagSize());
+				if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > SceneLib.campMakeWinions.maxPermanentImprovedStoneGolemsBagSize()) {
+					var costback1:Number = (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] - SceneLib.campMakeWinions.maxPermanentImprovedStoneGolemsBagSize());
 					flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] -= costback1;
 					flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] += (costback1 * 3);
 					flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] += costback1;
 					flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += (costback1 * 50);
 				}
-				if (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > camp.campMake.maxPermanentSteelGolemsBagSize()) {
-					var costback2:Number = (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] - camp.campMake.maxPermanentSteelGolemsBagSize());
+				if (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > SceneLib.campMakeWinions.maxPermanentSteelGolemsBagSize()) {
+					var costback2:Number = (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] - SceneLib.campMakeWinions.maxPermanentSteelGolemsBagSize());
 					flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] -= costback2;
 					flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] += costback2;
 					flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] += (costback2 * 2);
 					flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += (costback2 * 10);
 					flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] += (costback2 * 4);
 				}
-				if (flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] > camp.campMake.maxPermanentImprovedSteelGolemsBagSize()) {
-					var costback3:Number = (flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] - camp.campMake.maxPermanentImprovedSteelGolemsBagSize());
+				if (flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] > SceneLib.campMakeWinions.maxPermanentImprovedSteelGolemsBagSize()) {
+					var costback3:Number = (flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] - SceneLib.campMakeWinions.maxPermanentImprovedSteelGolemsBagSize());
 					flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] -= costback3;
 					flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] += (costback3 * 3);
 					flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] += (costback3 * 6);
