@@ -6,6 +6,7 @@ import classes.GlobalFlags.*;
 import classes.Scenes.Places.Ingnam.*;
 import classes.Scenes.SceneLib;
 import classes.Scenes.Soulforce;
+import classes.IMutationPerkType;
 
 import coc.view.MainView;
 
@@ -43,6 +44,10 @@ public class Ingnam extends BaseContent
 				}
 			}
 			outputText(images.showImage("location-ingnam"));
+
+			//IMutations Same ID emergency reporting.
+			IMutationPerkType.runValidIMutates;
+
 			outputText("Ingnam is a rich and prosperous village despite its small size. There is already a well-established array of shops with a constant hum of tradesmen and merchants. The temple sits within view of the patrons sitting at tables at the tavern which serves as a hub for people near and far to drink and dance. On the road leading out of the plaza that sits before the temple is a trail that meanders its way to a large farm in the distance.");
 			outputText("\n\nLooming ominously in the distance is a mountain known by the locals as Mount Ilgast. Surrounding Ingnam is a vast expanse of wilderness.");
 			if (model.time.hours >= 21 || model.time.hours < 6) outputText("\n\nIt's dark outside. Stars dot the night sky and a moon casts the moonlight over the landscape, providing little light. Shops are closed at this time.");

@@ -85,16 +85,18 @@ public class IMutationPerkType extends PerkType
 		private var _slot:String;
 		private var _pBuffs:Object;
 		private var _trueVariant:Boolean;
-		//public var imvalid:Array;
+		private static var _IMvalid:Object = {};
+		private static var _IMNotvalid:Object = {};
+
 
 		public function IMutationPerkType(id:String, name:String, slot:String, maxLvl:int, trueVariant:Boolean = false) {
 			//GDI probably pre-initialization issue again
-//			if (imvalid.indexOf(id) < 0) {
-//				outputText(id + " is conflicting with an earlier applied version. Please report this, and ask the Devs to check the latest added IMutation.")
-//				id += "_errorIM"
-//			} else {
-//				imvalid.append(id)
-//			}
+			if (_IMvalid.hasOwnProperty(id)) {
+				name += "_errorIM"
+				_IMNotvalid[id] = name;
+			} else {
+				_IMvalid[id] = name;
+			}
 			super(id, name, name, name, false);
 			this._maxLvl = maxLvl;
 			this._slot = slot;
@@ -277,6 +279,16 @@ public class IMutationPerkType extends PerkType
 
 		public function get mName():String {
 			return "";
+		}
+
+
+		public static function get runValidIMutates():String {
+			if (_IMNotvalid != {}) {
+				for (var badIM:String in _IMNotvalid) {
+					outputText("<b><i>ERROR: IMutation " + badIM + " is invalid. Please report this to the devs, and ask them to check the latest IMutation released. \nMeanwhile, DO NOT PURCHASE/UPGRADE THE NEW, OR AFFECTED PERK.</i></b> \n\n");
+				}
+			}
+			return ""
 		}
 	}
 }
