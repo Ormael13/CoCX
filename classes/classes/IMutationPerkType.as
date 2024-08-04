@@ -285,7 +285,7 @@ public class IMutationPerkType extends PerkType
 		public static function get runValidIMutates():String {
 			if (_IMNotvalid != {}) {
 				for (var badIM:String in _IMNotvalid) {
-					outputText("<b><i>ERROR: IMutation " + badIM + " is invalid. Please report this to the devs, and ask them to check the latest IMutation released. \nMeanwhile, DO NOT PURCHASE/UPGRADE THE NEW, OR AFFECTED PERK.</i></b> \n\n");
+					outputText("[font-red]<b><i>ERROR: IMutation " + badIM + " is invalid. Please report this to the devs, and ask them to check the latest IMutation released. \nMeanwhile, DO NOT PURCHASE/UPGRADE THE NEW, OR AFFECTED PERK.</i></b> \n\n[/font]");
 				}
 			}
 			return ""
