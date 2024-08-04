@@ -26,7 +26,7 @@ public class HumanDigestiveTractMutation extends IMutationPerkType
 			}
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
-                descS += "Your digestive tract improved allowing to better murishment from all the ingested substances (+"+perChg1+"0%). Increase limit when PC gain weight from eating too much by "+perChg2+"";
+                descS += "Your digestive tract improved allowing to better nurishment from all the ingested substances (+"+perChg1+"0%). Increase limit when PC gain weight from eating too much by "+perChg2+"";
             }
             if (pTier == 3){
                 descS += "Your digestive tract improved allowing to slowly detoxification of poisons (2x shorter poison effect duration, -1% of lust per turn).";

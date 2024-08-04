@@ -1582,7 +1582,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				SceneLib.inventory.takeItem(player.unequipArmor(false, true), playerMenu);
 				needNext = true;
 			}
-			if (player.necklace == necklaces.SILCNEC && player.hasCock()) {
+			if (player.necklace == necklaces.SILCNEC && player.hasCock() && !player.hasVagina()) {
 				outputText("As the last vestige of your pussy disappears the silver necklace begins to heat up before turning to dust." + (player.hasStatusEffect(StatusEffects.MeetXuviel)?" It would seem you are free of Xuviel’s cursed necklace, which in itself is a good thing.":"") + "");
 				player.unequipNecklace(false, true);
 				needNext = true;

@@ -1407,4 +1407,3 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 	}
 }
-

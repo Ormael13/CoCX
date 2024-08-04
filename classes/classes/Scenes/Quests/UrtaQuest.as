@@ -2692,4 +2692,3 @@ private function finishQuest():void {
 }
 }
 }
-

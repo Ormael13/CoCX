@@ -1990,4 +1990,3 @@ use namespace CoC;
 		}
 	}
 }
-
