@@ -8712,6 +8712,7 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.SharedPower) && player.perkv1(PerkLib.SharedPower) > 0) damage *= (1+(0.1*player.perkv1(PerkLib.SharedPower)));
 		damage *= EyesOfTheHunterDamageBonus();
 		if (monster.hasPerk(PerkLib.EnemyGhostType) && !canLayerSwordIntentAura()) damage = 0;
+		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) damage *= 2;
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             doNext(endHpVictory);
@@ -8839,6 +8840,7 @@ public class Combat extends BaseContent {
 		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
+		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) damage *= 2;
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             doNext(endHpVictory);
@@ -8923,7 +8925,6 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.InfernalRage)) damage *= (1 + (player.wrath100 * 0.01));
         if (player.shieldName == "Nekonomicon") damage *= 2;
 		damage *= EyesOfTheHunterDamageBonus();
-        if (damage == 0) MSGControllForEvasion = true;
         if (player.hasMutation(IMutationsLib.HellhoundFireBallsIM)) {
             if(player.perkv1(IMutationsLib.HellhoundFireBallsIM) >= 3){
                 damage *= (0.1* player.cumQ());
@@ -8932,8 +8933,13 @@ public class Combat extends BaseContent {
                 damage *= (0.05* player.cumQ())
             }
         }
-        if (player.hasMutation(IMutationsLib.BlazingHeartIM)) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.BlazingHeartIM)));
+        if (player.hasMutation(IMutationsLib.BlazingHeartIM)) {
+			damage *= (1 + (0.25 * player.perkv1(IMutationsLib.BlazingHeartIM)));
+			if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) damage *= 2;
+			if (!monster.hasStatusEffect(StatusEffects.BurnDoT) && rand(5) == 0) monster.createStatusEffect(StatusEffects.BurnDoT,5,0.02,0,0);
+		}
         // if (player.hasMutation(IMutationsLib.HellhoundFireBallsIM) && player.perkv1(IMutationsLib.HellhoundFireBallsIM) >= 3) damage *= (0.05* player.cumQ());
+        if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             /* No monsters use this perk, so it's been removed for now
 		if(monster.hasPerk(PerkLib.LastStrike)) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
@@ -8993,6 +8999,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.IceQueenGown)) damage *= 2;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage / 100;
 		damage *= EyesOfTheHunterDamageBonus();
+		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) damage *= 2;
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             doNext(endHpVictory);
@@ -9046,6 +9053,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.IceQueenGown)) damage *= 2;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage / 100;
 		damage *= EyesOfTheHunterDamageBonus();
+		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) damage *= 2;
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             /* No monsters use this perk, so it's been removed for now
@@ -9096,6 +9104,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.IceQueenGown)) damage = damage / 100;
         if (player.shieldName == "Nekonomicon") damage *= 2;
 		damage *= EyesOfTheHunterDamageBonus();
+		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) damage *= 2;
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             doNext(endHpVictory);
@@ -9137,6 +9146,7 @@ public class Combat extends BaseContent {
         damage = poisonTypeDamageBonus(damage);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
+		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) damage *= 2;
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             /* No monsters use this perk, so it's been removed for now
@@ -9182,6 +9192,7 @@ public class Combat extends BaseContent {
         damage = windTypeDamageBonus(damage);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
+		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) damage *= 2;
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             doNext(endHpVictory);
@@ -9223,6 +9234,7 @@ public class Combat extends BaseContent {
         damage = waterTypeDamageBonus(damage);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
+		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) damage *= 2;
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             /* No monsters use this perk, so it's been removed for now
@@ -9268,6 +9280,7 @@ public class Combat extends BaseContent {
         damage = earthTypeDamageBonus(damage);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
+		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) damage *= 2;
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             doNext(endHpVictory);
@@ -9309,6 +9322,7 @@ public class Combat extends BaseContent {
         damage = acidTypeDamageBonus(damage);
 		if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
+		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) damage *= 2;
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             doNext(endHpVictory);

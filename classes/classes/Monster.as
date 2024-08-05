@@ -4048,7 +4048,8 @@ import classes.Scenes.Combat.CombatAbilities;
 				else {
 					var store15:Number = (player.str + player.tou) * 2.5;
 					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store15 *= 1.2;
-					if (player.racialScore(Races.ANT) <= 4) store15 *= 0.75
+					if (player.racialScore(Races.ANT) <= 4) store15 *= 0.75;
+					if (player.perkv1(IMutationsLib.HydraBloodIM) >= 2) store15 *= (1 + (0.25 * player.perkv1(IMutationsLib.HydraBloodIM)));
 					store15 = Math.round(store15 * SceneLib.combat.poisonDamageBoostedByDao());
 					store15 += maxHP() * statusEffectv2(StatusEffects.AntAcid);
 					store15 = SceneLib.combat.fixPercentDamage(store15);
@@ -4072,6 +4073,7 @@ import classes.Scenes.Combat.CombatAbilities;
 					outputText("Your lewd dissolving acid causes [themonster] to flush hotly with arousal.");
 					var store18:Number = (player.str + player.spe + player.tou) * 0.5;
 					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store18 *= 1.2;
+					if (player.perkv1(IMutationsLib.HydraBloodIM) >= 2) store18 *= (1 + (0.25 * player.perkv1(IMutationsLib.HydraBloodIM)));
 					store18 = SceneLib.combat.fixPercentDamage(store18);
 					store18 = SceneLib.combat.doAcidDamage(store18, true, true);
 					if (!lustVuln <= 0) teased(SceneLib.combat.teases.teaseBaseLustDamage()  * lustVuln);
@@ -4155,6 +4157,7 @@ import classes.Scenes.Combat.CombatAbilities;
 					else {
 						var store7:Number = (player.str + player.spe + player.tou) * 2.5;
 						if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store7 *= 1.2;
+						if (player.perkv1(IMutationsLib.HydraBloodIM) >= 2) store7 *= (1 + (0.25 * player.perkv1(IMutationsLib.HydraBloodIM)));
 						store7 += maxHP() * statusEffectv2(StatusEffects.AcidDoT);
 						store7 = SceneLib.combat.fixPercentDamage(store7);
 						if(plural) outputText("[Themonster] are hurt by lingering Acid after-effect. ");
@@ -4179,6 +4182,7 @@ import classes.Scenes.Combat.CombatAbilities;
 					else {
 						var store10:Number = (player.str + player.spe + player.tou) * 2.5;
 						if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store10 *= 1.2;
+						if (player.perkv1(IMutationsLib.HydraBloodIM) >= 2) store10 *= (1 + (0.25 * player.perkv1(IMutationsLib.HydraBloodIM)));
 						store10 += maxHP() * statusEffectv2(StatusEffects.PoisonDoT);
 						store10 = SceneLib.combat.fixPercentDamage(store10);
 						if(plural) outputText("[Themonster] are hurt by lingering Poison after-effect. ");
@@ -4225,6 +4229,7 @@ import classes.Scenes.Combat.CombatAbilities;
 					else {
 						var lustDmg1:Number = player.lib / 10;
 						if (game.player.hasPerk(PerkLib.KingOfTheJungle)) lustDmg1 *= 1.2;
+						//if (player.perkv1(IMutationsLib.HydraBloodIM) >= 2) lustDmg1 *= (1 + (0.25 * player.perkv1(IMutationsLib.HydraBloodIM)));
 						lustDmg1 += maxLust() * statusEffectv2(StatusEffects.LustDoT);
 						lustDmg1 = Math.round(lustDmg1);
 						if(plural) outputText("[Themonster] are aroused by lingering lust-induncing after-effect. ");

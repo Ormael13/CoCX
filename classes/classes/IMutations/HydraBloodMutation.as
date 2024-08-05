@@ -21,7 +21,8 @@ public class HydraBloodMutation extends IMutationPerkType
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
-            if (pTier >= 1) descS += "Improve existing Regeneration by "+pTier+"% negated by fire damage";
+            if (pTier >= 1) descS += "Improve existing Regeneration by " + pTier + "% negated by fire damage";
+			if (pTier >= 2) descS += "and increase acid and poison effect by "+(pTier*25)+"%";
             if (descS != "")descS += ".";
             return descS;
         }
@@ -58,7 +59,7 @@ public class HydraBloodMutation extends IMutationPerkType
 
         public function HydraBloodMutation() 
 		{
-			super(mName + " IM", mName, SLOT_BLOODSTREAM, 1);
+			super(mName + " IM", mName, SLOT_BLOODSTREAM, 2);
         }
         
     }
