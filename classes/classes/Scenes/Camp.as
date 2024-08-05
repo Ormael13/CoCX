@@ -163,11 +163,6 @@ public class Camp extends NPCAwareContent{
 	public function doCamp():void { //Only called by playerMenu
 		//Force autosave on HARDCORE MODE! And level-up.
 
-		if (player.slotName != "VOID" && mainView.getButtonText(0) != "Game Over" && flags[kFLAGS.HARDCORE_MODE] > 0) {
-			trace("Autosaving to slot: " + player.slotName);
-
-			CoC.instance.saves.saveGameToSharedObject(player.slotName);
-		}
 		if (Metamorph.TriggerUpdate) {
 			Metamorph.update();
 			return;

@@ -2996,8 +2996,8 @@ public static const USE_METRICS:int                                             
 public static const USE_OLD_FONT:int                                                = 2988; // Side bar font.
 public static const BACKGROUND_STYLE:int                                            = 2989; // Background theme.
 public static const GAME_DIFFICULTY:int                                             = 2990; // 0 is normal, 1 is hard, 2 is nightmare, 3 is extreme. Affects HP and damage.
-public static const HARDCORE_MODE:int                                               = 2991; // 0 is disabled, 1 is enabled. Forces save and causes deletion of save file on bad end.
-public static const HARDCORE_SLOT:int                                               = 2992; // The current slot for hardcore mode. Forced autosave will save over the selected slot.
+public static const HARDCORE_MODE:int                                               = 2991; // 0 is disabled, 1 is enabled.
+public static const UNKNOWN_FLAG_NUMBER_02992:int                                   = 2992;
 public static const HUNGER_ENABLED:int                                              = 2993; // Determines if hunger is enabled. 1 is enabled.
 public static const USE_12_HOURS:int                                                = 2994; // 0 for 24-hour format, 1 for 12-hour format.
 public static const CORRUPTION_TOLERANCE_MODE:int                                   = 2995; // 0 - default, enabled if possible; 1 - disabled, 2 - 100% (debug)

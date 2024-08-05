@@ -447,15 +447,15 @@ import classes.Scenes.Combat.CombatAbility;
 					kFLAGS.CUSTOM_FONT_SIZE,
                     kFLAGS.NEW_GAME_PLUS_LEVEL,
                     kFLAGS.HUNGER_ENABLED,
+                    kFLAGS.SECONDARY_STATS_SCALING,
+                    //
                     kFLAGS.HARDCORE_MODE,
-                    kFLAGS.HARDCORE_SLOT,
                     kFLAGS.GAME_DIFFICULTY,
                     kFLAGS.EASY_MODE_ENABLE_FLAG,
                     kFLAGS.WISDOM_SCALING,
                     kFLAGS.INTELLIGENCE_SCALING,
                     kFLAGS.STRENGTH_SCALING,
                     kFLAGS.SPEED_SCALING,
-                    kFLAGS.SECONDARY_STATS_SCALING,
                     kFLAGS.BOSS_CHAMPION_ELITE_SCALING,
                     kFLAGS.WATERSPORTS_ENABLED,
 				    kFLAGS.SILLY_MODE_ENABLE_FLAG,
@@ -1796,35 +1796,55 @@ import classes.Scenes.Combat.CombatAbility;
 		//-----------------
 		//-- GAME MODES
 		//-----------------
-		private function chooseModeNormal():void {
+		private function toggleForHungerOn():void {
 			clearOutput();
-			outputText("You have chosen Normal Mode. This is a classic gameplay mode. Accumulated wrath will not affect your ability to spellcast or use magical specials. Internal mutation negative effects will be triggered after accumulating 11 points in internal mutation score.\n\n<b>Difficulty can be adjusted at any time.</b>");
-			flags[kFLAGS.HARDCORE_MODE] = 0;
-			flags[kFLAGS.HUNGER_ENABLED] = 0;
-			flags[kFLAGS.GAME_DIFFICULTY] = 0;
-			doNext(startTheGame);
-		}
-
-		private function chooseModeSurvival():void {
-			clearOutput();
-			outputText("You have chosen Survival Mode. This is similar to the normal mode but with hunger enabled. Accumulated wrath will not affect your ability to spellcast or use magical specials. Internal mutation negative effects will be triggered after accumulating 11 points in internal mutation score.\n\n<b>Difficulty can be adjusted at any time.</b>");
-			flags[kFLAGS.HARDCORE_MODE] = 0;
-			flags[kFLAGS.HUNGER_ENABLED] = 0.5;
-			flags[kFLAGS.GAME_DIFFICULTY] = 0;
-			player.hunger = 100;
-			doNext(startTheGame);
-		}
-
-		private function chooseModeRealistic():void {
-			clearOutput();
-			outputText("You have chosen Realistic Mode. In this mode, hunger is enabled so you have to eat periodically. Accumulated wrath will not affect ability to spellcast or use magical specials. Internal mutation negative effects will be triggered after accumulating 11 points in internal mutation score. Also, your cum production is capped and having oversized parts will weigh you down.\n\n<b>Difficulty can be adjusted at any time.</b>");
-			flags[kFLAGS.HARDCORE_MODE] = 0;
+			outputText("You have choosen to have Hunger Modifier enabled.");
 			flags[kFLAGS.HUNGER_ENABLED] = 1;
-			flags[kFLAGS.GAME_DIFFICULTY] = 0;
-			player.hunger = 100;
-			doNext(startTheGame);
+			flags[kFLAGS.GAME_DIFFICULTY] += 1;
+			doNext(chooseGameModes);
 		}
-
+		private function toggleForHungerOff():void {
+			clearOutput();
+			outputText("You have choosen to have Hunger Modifier disabled.");
+			flags[kFLAGS.HUNGER_ENABLED] = 0;
+			flags[kFLAGS.GAME_DIFFICULTY] -= 1;
+			doNext(chooseGameModes);
+		}
+		private function toggleForHardcoreOn():void {
+			clearOutput();
+			outputText("You have chosen to have Hardcore Modifier enabled.");
+			flags[kFLAGS.HARDCORE_MODE] = 1;
+			flags[kFLAGS.GAME_DIFFICULTY] += 1;
+			doNext(chooseGameModes);
+		}
+		private function toggleForHardcoreOff():void {
+			clearOutput();
+			outputText("You have chosen to have Hardcore Modifier disabled.");
+			flags[kFLAGS.HARDCORE_MODE] = 0;
+			flags[kFLAGS.GAME_DIFFICULTY] -= 1;
+			doNext(chooseGameModes);
+		}
+		private function toggleForSecondaryStatsModifierOn():void {
+			clearOutput();
+			outputText("You have chosen to have Secondary Stats Modifier enabled.");
+			flags[kFLAGS.SECONDARY_STATS_SCALING] = 1;
+			flags[kFLAGS.GAME_DIFFICULTY] += 1;
+			doNext(chooseGameModes);
+		}
+		private function toggleForSecondaryStatsModifierOff():void {
+			clearOutput();
+			outputText("You have chosen to have Secondary Stats Modifier disabled.");
+			flags[kFLAGS.SECONDARY_STATS_SCALING] = 0;
+			flags[kFLAGS.GAME_DIFFICULTY] -= 1;
+			doNext(chooseGameModes);
+		}
+		private function toggleForBossesModifier(difficulty:int = 0):void {
+			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 0) flags[kFLAGS.GAME_DIFFICULTY] += 1;
+			flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] = difficulty;
+			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 0) flags[kFLAGS.GAME_DIFFICULTY] -= 1;
+			doNext(chooseGameModes);
+		}
+		
 		private function chooseModeHard():void {
 			clearOutput();
 			outputText("You have chosen Hard Mode. In this mode, hunger is enabled so you have to eat periodically. Accumulated wrath will not affect ability to spellcast or use magical specials. Internal mutation negative effects will be triggered after accumulating 6 points in internal mutation score.\n\n<b>Difficulty is locked to hard.</b>");
@@ -1853,9 +1873,6 @@ import classes.Scenes.Combat.CombatAbility;
 			flags[kFLAGS.GAME_DIFFICULTY] = 3;
 			player.hunger = 50;
 			menu();
-			for (var i:int = 0; i < 14; i++) {
-				addButton(i, "Slot " + (i + 1), chooseSlotHardcore, (i + 1));
-			}
 			addButton(14, "Back", chooseGameModes);
 		}
 
@@ -1867,37 +1884,47 @@ import classes.Scenes.Combat.CombatAbility;
 			flags[kFLAGS.GAME_DIFFICULTY] = 4;
 			player.hunger = 50;
 			menu();
-			for (var i:int = 0; i < 14; i++) {
-				addButton(i, "Slot " + (i + 1), chooseSlotHardcore, (i + 1));
-			}
 			addButton(14, "Back", chooseGameModes);
-		}
-
-		//Choose Hardcore slot.
-		private function chooseSlotHardcore(num:int):void {
-			flags[kFLAGS.HARDCORE_SLOT] = "CoC_" + num;
-			startTheGame();
 		}
 
 		//Choose the game mode when called!
 		private function chooseGameModes():void {
 			clearOutput();
-			outputText("Choose a game mode.\n\n");
-			outputText("<b>Normal mode:</b> Classic Corruption of Champions gameplay.\n");
+			outputText("Choose a game modifiers. Depending on picked amount final difficulty would be adjusted.\n\n");
+			outputText("<b>Hunger Modifier:</b> "+(flags[kFLAGS.HUNGER_ENABLED] == 1?"Enabled (PC must manage his own hunger lest you want see his death from starvation)":"Disabled")+"\n");
+			outputText("<b>Secondary Stats Modifier:</b> "+(flags[kFLAGS.SECONDARY_STATS_SCALING] == 1?"Enabled (Opponent would have more HP/Lust/Wrath/Fatigue/Mana/Soulforce)":"Disabled")+"\n");
+			outputText("<b>Hardcore Modifier:</b> "+(flags[kFLAGS.HARDCORE_MODE] == 1?"Enabled (No level limits for unlocking new areas)":"Disabled")+"\n");
+			outputText("<b>Elite/Champion/Boss Enemies Modifier:</b> "+(flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 0?"Disabled":"Enabled (Elite/Champion/Boss Enemies would have more Health)")+"\n");
+			outputText("\nFinal game difficulty: ");
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 0) outputText("Anal-easy that even every Fursona out there can play (Easy)");
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 1) outputText("Normaly it's should be Normal here so... it's N.O.R.M.A.L. (Normal)");
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) outputText("As in far far away galaxys they say: That where the fun begins (Half-Hard)");
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) outputText("They see Hard'in They Hatin (Hard)");
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 4) outputText("It's time to grace you with ancient blessing: GIT GUD (Inferno)");
+			outputText("\n\n");
+			/*outputText("<b>Normal mode:</b> You have chosen Normal Mode. This is a classic gameplay mode. Accumulated wrath will not affect your ability to spellcast or use magical specials. Internal mutation negative effects will be triggered after accumulating 11 points in internal mutation score.\n");
 			outputText("<b>Survival mode:</b> Like normal but with hunger enabled.\n");
 			outputText("<b>Realistic mode:</b> You get hungry from time to time and cum production is capped. In addition, it's a bad idea to have oversized parts. \n");
 			outputText("<b>Hard mode:</b> In addition to Realistic mode, the game forces save and if you get a Bad End, your save file is deleted. For not sunday (CoC) players.\n");
 			outputText("<b>Hardcore mode:</b> In addition to Realistic mode, the game forces save and if you get a Bad End, your save file is deleted. For the veteran CoC players only.\n");
 			outputText("<b>Extreme Hardcore mode:</b> The hardest game mode ever. Like hardcore mode, but the difficulty is locked to extreme! How long can you survive?\n");
-			outputText("<b>Xianxia MC mode:</b> The game mode for anyone that wants to feel like an Xianxia MC. Hunger is always waiting behind a corner and enemies are always stronger than you! How long will take to you to reach the top?\n");
+			outputText("<b>Xianxia MC mode:</b> The game mode for anyone that wants to feel like an Xianxia MC. Hunger is always waiting behind a corner and enemies are always stronger than you! How long will take to you to reach the top?\n");*/
 			menu();
-			addButton(0, "Normal", chooseModeNormal);
-			addButton(1, "Survival", chooseModeSurvival);
-			addButton(2, "Realistic", chooseModeRealistic);
-			addButton(3, "Hard", chooseModeHard);
-			addButton(4, "Nightmare", chooseModeNightmare);
-			addButton(5, "EXTREME", chooseModeExtreme);
-			addButton(6, "Xianxia MC", chooseModeXianxia);
+			if (flags[kFLAGS.HUNGER_ENABLED] != 1) addButton(0, "Hunger+", toggleForHungerOn);
+			if (flags[kFLAGS.HUNGER_ENABLED] != 0) addButton(1, "Hunger-", toggleForHungerOff);
+			if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 1) addButton(2, "Secondary Stats+", toggleForSecondaryStatsModifierOn);
+			if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 0) addButton(3, "Secondary Stats-", toggleForSecondaryStatsModifierOff);
+			if (flags[kFLAGS.HARDCORE_MODE] != 1) addButton(4, "Hardcore+", toggleForHardcoreOn);
+			//5+
+			//6-
+			//7+
+			//8-
+			if (flags[kFLAGS.HARDCORE_MODE] != 0) addButton(9, "Hardcore-", toggleForHardcoreOff);
+			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 0) addButton(10, "Normal", toggleForBossesModifier, 0);
+			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 1) addButton(11, "Fantasy", toggleForBossesModifier, 1);
+			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 2) addButton(12, "Infernium", toggleForBossesModifier, 2);
+			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 3) addButton(13, "Hell", toggleForBossesModifier, 3);
+			addButton(14, "Start", startTheGame);
 		}
 
 		private function chooseTimescale():void {
@@ -1925,11 +1952,8 @@ import classes.Scenes.Combat.CombatAbility;
 		}
 
 		private function startTheGame():void {
+			player.hunger = 100;
 			player.startingRace = player.race();
-			if (flags[kFLAGS.HARDCORE_MODE] > 0) {
-				trace("Hardcore save file " + flags[kFLAGS.HARDCORE_SLOT] + " created.");
-                CoC.instance.saves.saveGameToSharedObject(flags[kFLAGS.HARDCORE_SLOT])
-            }
 			CoC.instance.saves.loadPermObject();
 			flags[kFLAGS.MOD_SAVE_VERSION] = CoC.instance.modSaveVersion;
 			statScreenRefresh();

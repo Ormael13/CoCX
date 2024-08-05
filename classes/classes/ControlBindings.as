@@ -435,7 +435,7 @@ internal class ControlBindings {
                         }
                         else if (CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] == 4) {
                             if (keyCode == Keyboard.G) {
-                                if (CoC.instance.player && CoC.instance.player.str > 0 && CoC.instance.mainView.getButtonText(0).indexOf("Game Over") == -1 && (CoC.instance.debug && CoC.instance.flags[kFLAGS.HARDCORE_MODE] <= 0 || CoC_Settings.debugBuild) && !CoC.instance.lockCheats) {
+                                if (CoC.instance.player && CoC.instance.player.str > 0 && CoC.instance.mainView.getButtonText(0).indexOf("Game Over") == -1 && CoC_Settings.debugBuild && !CoC.instance.lockCheats) {
                                     SceneLib.debugMenu.accessDebugMenu();
                                 }
                             }

@@ -70,7 +70,6 @@ public class GameSettings extends BaseContent {
 
 		clearOutput();
 		displayHeader("Gameplay Settings");
-		if (flags[kFLAGS.HARDCORE_MODE] > 0) outputText("[font-red]Hardcore mode is enabled. Cheats are disabled.[/font]\n\n");
 		if (debug) outputText("Debug Mode: [font-green]<b>ON</b>[/font]\n Items will not be consumed by use, fleeing always succeeds, and bad-ends can be ignored.");
 		else outputText("Debug Mode: [font-dred]<b>OFF</b>[/font]\n Items consumption will occur as normal.");
 		outputText("\n\n");
@@ -556,19 +555,19 @@ public class GameSettings extends BaseContent {
 			outputText("Secondary Stats Modifier: [font-olive]<b>Normal</b>[/font]\n No opponent secondary stats modifiers.");
 		}
 		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) {
-			outputText("Secondary Stats Modifier: <b>[font-dred]Hard[/font]</b>\n Opponent has 10x (bosses) and 5x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
-		}
-		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) {
-			outputText("Secondary Stats Modifier: <b>[font-red]Nightmare[/font]</b>\n Opponent has 40x (bosses)" +
-					" and 10x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
-		}
-		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) {
-			outputText("Secondary Stats Modifier: <b>[font-lred]Extreme[/font]</b>\n Opponent has 200x (bosses)" +
-					" and 25x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
-		}
-		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] >= 4) {
-			outputText("Secondary Stats Modifier: <b>[font-pink]Xianxia[/font]</b>\n Opponent has 1600x (bosses)" +
-					" and 100x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) outputText("Secondary Stats Modifier: <b>[font-dred]Hard[/font]</b>\n Opponent has 10x (bosses) and 5x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) {
+				outputText("Secondary Stats Modifier: <b>[font-red]Nightmare[/font]</b>\n Opponent has 40x (bosses)" +
+						" and 10x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			}
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) {
+				outputText("Secondary Stats Modifier: <b>[font-lred]Extreme[/font]</b>\n Opponent has 200x (bosses)" +
+						" and 25x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			}
+			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) {
+				outputText("Secondary Stats Modifier: <b>[font-pink]Xianxia[/font]</b>\n Opponent has 1600x (bosses)" +
+						" and 100x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			}
 		}
 		outputText("\n\n");
 		if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 0) {
@@ -839,41 +838,43 @@ public class GameSettings extends BaseContent {
 	
 	public function difficultySelectionMenu2():void {
 		clearOutput();
-		outputText("You can choose a difficulty to set how hard battles will be.\n");
-		outputText("\n<b>Normal:</b> No stats changes.");
-		outputText("\n<b>Hard:</b> 2x multi for secondary stats for monsters.");
-		outputText("\n<b>Nightmare:</b> 5x multi for secondary stats for monsters.");
-		outputText("\n<b>Extreme:</b> 10x multi for secondary stats for monsters.");
-		outputText("\n<b>Xianxia:</b> 25x multi for secondary stats for monsters.");
+		outputText("You can enable / disable Secondary Stats Modifier.\n");
 		menu();
-		addButton(0, "Normal", chooseDifficulty2, 0);
-		addButton(1, "Hard", chooseDifficulty2, 1);
-		addButton(2, "Nightmare", chooseDifficulty2, 2);
-		addButton(3, "EXTREME", chooseDifficulty2, 3);
-		addButton(4, "XIANXIA", chooseDifficulty2, 4);
+		addButton(1, "Disable", chooseDifficulty2Off);
+		addButton(3, "Enable", chooseDifficulty2On);
 		addButton(14, "Back", settingsScreenGameSettings2);
 	}
 
-	public function chooseDifficulty2(difficulty:int = 0):void {
-		flags[kFLAGS.SECONDARY_STATS_SCALING] = difficulty;
+	public function chooseDifficulty2Off():void {
+		flags[kFLAGS.SECONDARY_STATS_SCALING] = 0;
+		flags[kFLAGS.GAME_DIFFICULTY] -= 1;
+		settingsScreenGameSettings2();
+	}
+	public function chooseDifficulty2On():void {
+		flags[kFLAGS.SECONDARY_STATS_SCALING] = 1;
+		flags[kFLAGS.GAME_DIFFICULTY] += 1;
 		settingsScreenGameSettings2();
 	}
 	
 	public function difficultySelectionMenu3():void {
 		clearOutput();
-		outputText("You can choose a difficulty to set how hard elite/champion/boss battles will be.\n");
+		outputText("You can choose how hard elite/champion/boss battles will be.\n");
 		outputText("\n<b>Normal:</b> No stats changes.");
-		outputText("\n<b>Fantasy:</b> 1.25x/2.5x/5x HP for elite/champion/boss monsters.");
-		outputText("\n<b>Infernium:</b> 2.5x/5x/10x HP for elite/champion/boss monsters.");
+		outputText("\n<b>Fantasy:</b> 1.25x/2.5x/5x HP for elite/champion/boss monsters. (+1 diff modifier)");
+		outputText("\n<b>Infernium:</b> 2.5x/5x/10x HP for elite/champion/boss monsters. (+1 diff modifier)");
+		outputText("\n<b>Hell:</b> 3.75x/7.5x/15x HP for elite/champion/boss monsters. (+1 diff modifier)");
 		menu();
 		addButton(0, "Normal", chooseDifficulty3, 0);
 		addButton(1, "Fantasy", chooseDifficulty3, 1);
 		addButton(2, "Infernium", chooseDifficulty3, 2);
+		addButton(3, "Hell", chooseDifficulty3, 3);
 		addButton(14, "Back", settingsScreenGameSettings2);
 	}
 
 	public function chooseDifficulty3(difficulty:int = 0):void {
+		if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 0) flags[kFLAGS.GAME_DIFFICULTY] += 1;
 		flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] = difficulty;
+		if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 0) flags[kFLAGS.GAME_DIFFICULTY] -= 1;
 		settingsScreenGameSettings2();
 	}
 

@@ -6534,7 +6534,7 @@ public class Combat extends BaseContent {
 
         var boolSwiftCast:Boolean = player.hasPerk(PerkLib.SwiftCasting) && flags[kFLAGS.ELEMENTAL_MELEE] > 0 && (player.isOneHandedWeapons() || player.weapon == weapons.ATWINSCY || (player.weapon.isSingleLarge() && player.hasPerk(PerkLib.GigantGrip)) || (player.weapon.isSingleMassive() && player.hasPerk(PerkLib.TitanGrip))) && player.isHavingFreeOffHand();
         var boolLifeLeech:Boolean = player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon();
-        var boolFistingIs300Bucks:Boolean = player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise();
+        var boolFistingIs300Bucks:Boolean = (player.isFistOrFistWeapon() && (player.shield.isNothing || (player.shield == shields.AETHERS && AetherTwinsFollowers.AetherTwinsShape != "Human-tier Dagger and Shield" && AetherTwinsFollowers.AetherTwinsShape != "Human-tier Dual Daggers")) || player.isFeralCombat());
 
         for(var i:int = 1; i <= flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]; i++){
             damage = 0;
@@ -8631,6 +8631,7 @@ public class Combat extends BaseContent {
 			if (player.sens >= maxSens) playerLevelAdjustment += (maxSens * 0.04);
 			else playerLevelAdjustment += Math.round((player.sens - 12) / 25);
 		}
+		if (flags[kFLAGS.HARDCORE_MODE] == 1) playerLevelAdjustment += 300;
         return playerLevelAdjustment;
     }
 

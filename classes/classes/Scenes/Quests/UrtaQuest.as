@@ -191,11 +191,8 @@ public function infertilityQuestions():void {
 	else outputText("she's a willing fuck, so no complaints there.  Now if she would just get on with it - if you wanted to flirt, you would've instigated it.");
 	outputText("\n\nThe prick-vixen catches herself wandering off topic and forcibly drags herself back to the discussion.  \"<i>Anyway, they couldn't do anything for me.  They don't know how to fix me, and that's that.  I'm an infertile, horse-cock endowed herm bitch.</i>\"  She smirks ruefully, \"<i>All of that has made me what I am today - A fierce brawler, a citizen, a captain, and the luckiest herm this side of Lake Marae.  After all, I have you for a lover.</i>\" The gray-furred vulpine girl taps her chin in thought, \"<i>I still wonder if the mages of the Covenant could find anything with their magic, though.  Still, they've enough to worry about with maintaining the wards to keep the demons out.</i>\"");
 	outputText("\n\nMaybe they could help.  Urta has to have some kind of connections she can lean on as guard captain, doesn't she?  You say as much.");
-
 	outputText("\n\n\"<i>I suppose it wouldn't hurt to try, huh?</i>\" Urta asks.  A mischievous grin spreads across her face, and she says, \"<i>You want me to be fertile that badly, don't you?  Are you wanting to suck down a load of spunk so virile you can smell it?  Or do you want my pussy so ready for babies that a single drop of cum will have my belly round and my tits leaking?</i>\"  She shudders.  \"<i>Damn, that's a nice thought...  Do you really think I should look into it?</i>\"");
 	outputText("\n\n(<b>Encouraging her to visit the Covenant will begin a segment where you play as Urta for a time, and saving will be disabled.  It is recommended you decline and save first if you have not saved in some time.</b>)");
-	//Hardcore mode warning!
-	if (flags[kFLAGS.HARDCORE_MODE] >= 1) outputText("\n\n<b>Because you're playing in Hardcore Mode, you have to be sure if you're prepared. If you fail the quest, Urta is gone for good and you won't be able to reload.</b>");
 	menu();
 	addButton(0,"Look Into It",startUrtaQuest);
 	addButton(1,"Maybe Later",camp.returnToCampUseOneHour);

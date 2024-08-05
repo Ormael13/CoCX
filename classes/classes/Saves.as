@@ -272,15 +272,6 @@ public function saveToSlotScreen():void
 	mainView.nameBox.visible = true;
 
 	// var test; // Disabling this variable because it seems to be unused.
-	if (flags[kFLAGS.HARDCORE_MODE] > 0)
-	{
-		saveGameToSharedObject(flags[kFLAGS.HARDCORE_SLOT]);
-		clearOutput();
-		outputText("You may not create copies of Hardcore save files! Your current progress has been saved.");
-		doNext(playerMenu);
-		return;
-	}
-
 	clearOutput();
 	if (player.slotName != "VOID")
 		outputText("<b>Last saved or loaded from: " + player.slotName + "</b>\r\r");

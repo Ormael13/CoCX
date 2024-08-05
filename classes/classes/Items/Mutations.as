@@ -3058,6 +3058,8 @@ public final class Mutations extends MutationsHelper {
         player.createPerk(PerkLib.TransformationImmunity2, 6, 0, 0, 0);
         if (player.hasPerk(PerkLib.RacialParagon)) flags[kFLAGS.APEX_SELECTED_RACE] = Races.IMP;
         IMutationsLib.BlackHeartIM.trueMutation = true;
+        IMutationsLib.FiendishMetabolismIM.trueMutation = true;
+        IMutationsLib.FiendishBallsIM.trueMutation = true;
         player.removeAllRacialMutation();
 		saveUpdater.bringBackEncoutersForSouless();
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;

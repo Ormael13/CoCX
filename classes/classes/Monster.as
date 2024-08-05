@@ -917,23 +917,29 @@ import classes.Scenes.Combat.CombatAbilities;
 			if (this.level >= 175) temp *= 8;
 			if (this.level >= 200) temp *= 9;
 			if (hasPerk(PerkLib.EnemyForBeginnersType)) {
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 1.5;
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 2;
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 3;
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp *= 5;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) {
+					if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp *= 1.5;
+					if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp *= 2;
+					if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp *= 3;
+					if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) temp *= 5;
+				}
 			}
 			else {
 				if (hasPerk(PerkLib.EnemyBossType)) {
-					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 10;
-					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 40;
-					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 200;
-					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp *= 1600;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) {
+						if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp *= 10;
+						if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp *= 40;
+						if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp *= 200;
+						if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) temp *= 1600;
+					}
 				}
 				else {
-					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 5;
-					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 10;
-					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 25;
-					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp *= 100;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) {
+						if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp *= 5;
+						if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp *= 10;
+						if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp *= 25;
+						if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) temp *= 100;
+					}
 					
 				}
 			}
@@ -3369,10 +3375,12 @@ import classes.Scenes.Combat.CombatAbilities;
 				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp3 += 0.15;
 				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp3 += 0.25;
 				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) temp3 += 0.55;
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp3 += 0.05;
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp3 += 0.12;
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp3 += 0.2;
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp3 += 0.3;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) {
+					if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp3 += 0.05;
+					if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp3 += 0.12;
+					if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp3 += 0.2;
+					if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) temp3 += 0.3;
+				}
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp3 += 0.1;
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp3 += 0.2;
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) temp3 += 0.3;
@@ -4230,7 +4238,7 @@ import classes.Scenes.Combat.CombatAbilities;
 					else {
 						var lustDmg1:Number = player.lib / 10;
 						if (game.player.hasPerk(PerkLib.KingOfTheJungle)) lustDmg1 *= 1.2;
-						//if (player.perkv1(IMutationsLib.HydraBloodIM) >= 2) lustDmg1 *= (1 + (0.25 * player.perkv1(IMutationsLib.HydraBloodIM)));
+						if (player.perkv1(IMutationsLib.HydraBloodIM) >= 2) lustDmg1 *= (1 + (0.25 * player.perkv1(IMutationsLib.HydraBloodIM)));
 						lustDmg1 += maxLust() * statusEffectv2(StatusEffects.LustDoT);
 						lustDmg1 = Math.round(lustDmg1);
 						if(plural) outputText("[Themonster] are aroused by lingering lust-induncing after-effect. ");
