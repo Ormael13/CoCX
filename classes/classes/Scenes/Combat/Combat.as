@@ -3282,6 +3282,10 @@ public class Combat extends BaseContent {
 						damage1B *= 2;
 						damage1Ba *= 2;
 					}
+					if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 1) {
+						damage1B *= 2;
+						damage1Ba *= 2;
+					}
                     if (player.armor == armors.ELFDRES && player.isElf()) damage1B *= 2;
                     if (player.armor == armors.FMDRESS && player.isWoodElf()) damage1B *= 2;
                     monster.teased(damage1B);
@@ -3291,6 +3295,17 @@ public class Combat extends BaseContent {
 					if (player.hasPerk(PerkLib.ToxineMaster)) monster.statStore.addBuffObject({tou:-5}, "Poison",{text:"Poison"});
                     player.tailVenom -= player.VenomWebCost();
 					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
+					if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 4) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln, false);
+					if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 1 && rand(100) < (player.perkv1(IMutationsLib.PoisonGlandIM)*25)) {
+						monster.teased(damage1B);
+						if (monster.hasStatusEffect(StatusEffects.BeeVenom)) {
+							monster.addStatusValue(StatusEffects.BeeVenom, 3, damage1Ba);
+						} else monster.createStatusEffect(StatusEffects.BeeVenom, 0, 0, damage1Ba, 0);
+						if (player.hasPerk(PerkLib.ToxineMaster)) monster.statStore.addBuffObject({tou:-5}, "Poison",{text:"Poison"});
+						player.tailVenom -= player.VenomWebCost();
+						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
+						if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 4) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln, false);
+					}
                 }
                 if (player.tailType == Tail.SCORPION || player.hasKeyItem("Sky Poison Pearl") >= 0) {
                     if (!MSGControll) outputText("  [monster he] seems to be effected by the poison, its movements slowing rapidly.");
@@ -5629,12 +5644,25 @@ public class Combat extends BaseContent {
                     ExtraNaturalWeaponAttack(TailDamageMultiplier);
 					outputText("Then you strike at blinding speed, impaling your opponent twice with your spike and injecting your venom in the process");
 					ExtraNaturalWeaponAttack(0.5);
-                    monster.statStore.addBuffObject({str: -4}, "Sandworm Sting", {text: "Sandworm Sting"});
+					var numm:Number = 4;
+					if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 1) numm *= 2;
+                    monster.statStore.addBuffObject({str: -numm}, "Sandworm Sting", {text: "Sandworm Sting"});
 					if (!monster.hasStatusEffect(StatusEffects.LustDoT))
 						monster.createStatusEffect(StatusEffects.LustDoT, 3, 0.01, 0, 0);
 					else {
 						monster.addStatusValue(StatusEffects.LustDoT, 1, 2);
 						monster.addStatusValue(StatusEffects.LustDoT, 2, 0.02);
+					}
+					if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 4) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln, false);
+					if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 1 && rand(100) < (player.perkv1(IMutationsLib.PoisonGlandIM) * 25)) {
+						monster.statStore.addBuffObject({str: -numm}, "Sandworm Sting", {text: "Sandworm Sting"});
+						if (!monster.hasStatusEffect(StatusEffects.LustDoT))
+							monster.createStatusEffect(StatusEffects.LustDoT, 3, 0.01, 0, 0);
+						else {
+							monster.addStatusValue(StatusEffects.LustDoT, 1, 2);
+							monster.addStatusValue(StatusEffects.LustDoT, 2, 0.02);
+						}
+						if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 4) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln, false);
 					}
                     outputText(".\n");
                     break;
@@ -5655,6 +5683,10 @@ public class Combat extends BaseContent {
                                 else lustdamage += 80;
                                 lustdamage *= 0.14;
                                 if (pLibImprovedVenomGlandSu) lustDmg2 *= 2;
+								if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 1) {
+									lustdamage *= 2;
+									lustDmg2 *= 2;
+								}
                                 lustdamage *= lustDmg2;
                                 if (player.armor == armors.ELFDRES && player.isElf()) lustdamage *= 2;
                                 if (player.armor == armors.FMDRESS && player.isWoodElf()) lustdamage *= 2;
@@ -5675,7 +5707,25 @@ public class Combat extends BaseContent {
                                 monster.statStore.addBuffObject({spe:-(dBd1c*10)}, "Poison",{text:"Poison"});
                                 if (monster.hasStatusEffect(StatusEffects.ManticoreVenom)) monster.addStatusValue(StatusEffects.ManticoreVenom,3,(dBd1c*5));
                                 else monster.createStatusEffect(StatusEffects.ManticoreVenom, 0, 0, (dBd1c*5), 0);
-                                player.tailVenom -= pVenomWebCost;
+                                if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 4) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln, false);
+								if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 1 && rand(100) < (player.perkv1(IMutationsLib.PoisonGlandIM) * 25)) {
+									monster.teased(Math.round(monster.lustVuln * lustdamage), false);
+									monster.statStore.addBuffObject({tou: -(lustDmg2 * 2)}, "Poison", {text:"Poison"});
+									player.tailVenom -= pVenomWebCost;
+									flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
+									if (player.tailVenom >= pVenomWebCost) {
+										monster.teased(Math.round(monster.lustVuln * lustdamage), false);
+										monster.statStore.addBuffObject({tou:-(lustDmg2*2)}, "Poison",{text:"Poison"});
+										player.tailVenom -= pVenomWebCost;
+										flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
+									}
+									monster.teased(Math.round(monster.lustVuln * lustdamage * dBd1c), false);
+									combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+									monster.statStore.addBuffObject({spe:-(dBd1c*10)}, "Poison",{text:"Poison"});
+									if (monster.hasStatusEffect(StatusEffects.ManticoreVenom)) monster.addStatusValue(StatusEffects.ManticoreVenom,3,(dBd1c*5));
+									else monster.createStatusEffect(StatusEffects.ManticoreVenom, 0, 0, (dBd1c*5), 0);
+									if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 4) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln, false);
+								}
                             }
                             outputText(".")
                             ExtraNaturalWeaponAttack(0.5);
@@ -5702,6 +5752,11 @@ public class Combat extends BaseContent {
                             else lustdamage2 += 80;
                             lustdamage2 *= 0.14;
                             if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg3 *= 2;
+							if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 1) {
+								dBd2c *= 2;
+								lustdamage2 *= 2;
+								lustDmg3 *= 2;
+							}
                             lustdamage2 *= lustDmg3;
                             if (player.armor == armors.ELFDRES && player.isElf()) lustdamage2 *= 2;
                             if (player.armor == armors.FMDRESS && player.isWoodElf()) lustdamage2 *= 2;
@@ -5710,6 +5765,15 @@ public class Combat extends BaseContent {
                             if (monster.hasStatusEffect(StatusEffects.BeeVenom)) monster.addStatusValue(StatusEffects.BeeVenom,3,(dBd2c*5));
                             else monster.createStatusEffect(StatusEffects.BeeVenom, 0, 0, (lustDmg3 * 5), 0);
                             if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln, false);
+							if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 4) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln, false);
+							if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 1 && rand(100) < (player.perkv1(IMutationsLib.PoisonGlandIM)*25)) {
+								monster.teased(Math.round(monster.lustVuln * lustdamage2), false);
+								combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+								if (monster.hasStatusEffect(StatusEffects.BeeVenom)) monster.addStatusValue(StatusEffects.BeeVenom,3,(dBd2c*5));
+								else monster.createStatusEffect(StatusEffects.BeeVenom, 0, 0, (lustDmg3 * 5), 0);
+								if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln, false);
+								if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 4) monster.teased(teases.teaseBaseLustDamage() * monster.lustVuln, false);
+							}
                             outputText("\n")
                             break;
                         case Tail.GARGOYLE:
@@ -6707,6 +6771,10 @@ public class Combat extends BaseContent {
                                 else damageB += 80;
                                 damageB *= 0.2;
                                 if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) damageBa *= 2;
+								if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 1) {
+									damageB *= 2;
+									damageBa *= 2;
+								}
                                 damageB *= damageBa;
                                 monster.teased(Math.round(monster.lustVuln * damageB));
                                 if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
@@ -6718,6 +6786,20 @@ public class Combat extends BaseContent {
                                 }
                                 player.tailVenom -= player.VenomWebCost();
                                 flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
+								if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 4) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln, false);
+								if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 1 && rand(100) < (player.perkv1(IMutationsLib.PoisonGlandIM)*25)) {
+									monster.teased(Math.round(monster.lustVuln * damageB));
+									if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
+										monster.addStatusValue(StatusEffects.NagaVenom, 3, damageBa);
+									} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damageBa, 0);
+									if (player.hasPerk(PerkLib.WoundPoison)){
+										if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
+										else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
+									}
+									player.tailVenom -= player.VenomWebCost();
+									flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
+									if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 4) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln, false);
+								}
                             }
                             if (player.tailType == Tail.SCORPION || player.hasKeyItem("Sky Poison Pearl") >= 0) {
                                 outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
@@ -6747,6 +6829,10 @@ public class Combat extends BaseContent {
                                 if (player.armor == armors.ELFDRES && player.isElf()) lustdamage *= 2;
                                 if (player.armor == armors.FMDRESS && player.isWoodElf()) lustdamage *= 2;
                                 lustdamage *= 0.14;
+								if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 1) {
+									lustdamage *= 2;
+									DBPaaa *= 2;
+								}
                                 lustdamage *= DBPaaa;
                                 monster.teased(Math.round(monster.lustVuln * lustdamage));
                                 monster.statStore.addBuffObject({tou:-(DBPaaa*2)}, "Poison",{text:"Poison"});
@@ -6755,6 +6841,17 @@ public class Combat extends BaseContent {
                                 } else monster.createStatusEffect(StatusEffects.ManticoreVenom, 0, 0, DBPaaa, 0);
                                 player.tailVenom -= player.VenomWebCost();
                                 flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
+								if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 4) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln, false);
+								if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 1 && rand(100) < (player.perkv1(IMutationsLib.PoisonGlandIM)*25)) {
+									monster.teased(Math.round(monster.lustVuln * lustdamage));
+									monster.statStore.addBuffObject({tou:-(DBPaaa*2)}, "Poison",{text:"Poison"});
+									if (monster.hasStatusEffect(StatusEffects.ManticoreVenom)) {
+										monster.addStatusValue(StatusEffects.ManticoreVenom, 3, DBPaaa);
+									} else monster.createStatusEffect(StatusEffects.ManticoreVenom, 0, 0, DBPaaa, 0);
+									player.tailVenom -= player.VenomWebCost();
+									flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
+									if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 4) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln, false);
+								}
                             }
                             if (player.faceType == Face.SNAKE_FANGS) {
                                 outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
@@ -8712,7 +8809,10 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.SharedPower) && player.perkv1(PerkLib.SharedPower) > 0) damage *= (1+(0.1*player.perkv1(PerkLib.SharedPower)));
 		damage *= EyesOfTheHunterDamageBonus();
 		if (monster.hasPerk(PerkLib.EnemyGhostType) && !canLayerSwordIntentAura()) damage = 0;
-		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) damage *= 2;
+		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
+			damage *= 2;
+			player.takeLustDamage(combat.teases.teaseBaseLustDamage(), true);
+		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             doNext(endHpVictory);
@@ -8840,7 +8940,10 @@ public class Combat extends BaseContent {
 		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
-		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) damage *= 2;
+		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
+			damage *= 2;
+			player.takeLustDamage(combat.teases.teaseBaseLustDamage(), true);
+		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             doNext(endHpVictory);
@@ -8935,7 +9038,10 @@ public class Combat extends BaseContent {
         }
         if (player.hasMutation(IMutationsLib.BlazingHeartIM)) {
 			damage *= (1 + (0.25 * player.perkv1(IMutationsLib.BlazingHeartIM)));
-			if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) damage *= 2;
+			if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
+				damage *= 2;
+				player.takeLustDamage(combat.teases.teaseBaseLustDamage(), true);
+			}
 			if (!monster.hasStatusEffect(StatusEffects.BurnDoT) && rand(5) == 0) monster.createStatusEffect(StatusEffects.BurnDoT,5,0.02,0,0);
 		}
         // if (player.hasMutation(IMutationsLib.HellhoundFireBallsIM) && player.perkv1(IMutationsLib.HellhoundFireBallsIM) >= 3) damage *= (0.05* player.cumQ());
@@ -8999,7 +9105,10 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.IceQueenGown)) damage *= 2;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage / 100;
 		damage *= EyesOfTheHunterDamageBonus();
-		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) damage *= 2;
+		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
+			damage *= 2;
+			player.takeLustDamage(combat.teases.teaseBaseLustDamage(), true);
+		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             doNext(endHpVictory);
@@ -9053,7 +9162,10 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.IceQueenGown)) damage *= 2;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage / 100;
 		damage *= EyesOfTheHunterDamageBonus();
-		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) damage *= 2;
+		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
+			damage *= 2;
+			player.takeLustDamage(combat.teases.teaseBaseLustDamage(), true);
+		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             /* No monsters use this perk, so it's been removed for now
@@ -9104,7 +9216,10 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.IceQueenGown)) damage = damage / 100;
         if (player.shieldName == "Nekonomicon") damage *= 2;
 		damage *= EyesOfTheHunterDamageBonus();
-		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) damage *= 2;
+		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
+			damage *= 2;
+			player.takeLustDamage(combat.teases.teaseBaseLustDamage(), true);
+		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             doNext(endHpVictory);
@@ -9146,7 +9261,10 @@ public class Combat extends BaseContent {
         damage = poisonTypeDamageBonus(damage);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
-		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) damage *= 2;
+		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
+			damage *= 2;
+			player.takeLustDamage(combat.teases.teaseBaseLustDamage(), true);
+		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             /* No monsters use this perk, so it's been removed for now
@@ -9192,7 +9310,10 @@ public class Combat extends BaseContent {
         damage = windTypeDamageBonus(damage);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
-		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) damage *= 2;
+		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
+			damage *= 2;
+			player.takeLustDamage(combat.teases.teaseBaseLustDamage(), true);
+		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             doNext(endHpVictory);
@@ -9234,7 +9355,10 @@ public class Combat extends BaseContent {
         damage = waterTypeDamageBonus(damage);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
-		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) damage *= 2;
+		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
+			damage *= 2;
+			player.takeLustDamage(combat.teases.teaseBaseLustDamage(), true);
+		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             /* No monsters use this perk, so it's been removed for now
@@ -9280,7 +9404,10 @@ public class Combat extends BaseContent {
         damage = earthTypeDamageBonus(damage);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
-		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) damage *= 2;
+		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
+			damage *= 2;
+			player.takeLustDamage(combat.teases.teaseBaseLustDamage(), true);
+		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             doNext(endHpVictory);
@@ -9322,7 +9449,10 @@ public class Combat extends BaseContent {
         damage = acidTypeDamageBonus(damage);
 		if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
-		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) damage *= 2;
+		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
+			damage *= 2;
+			player.takeLustDamage(combat.teases.teaseBaseLustDamage(), true);
+		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
             doNext(endHpVictory);

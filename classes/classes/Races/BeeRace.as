@@ -105,6 +105,7 @@ public class BeeRace extends Race {
 						}, +1);
 		
 		addMutation(IMutationsLib.TrachealSystemIM);
+		addMutation(IMutationsLib.PoisonGlandIM);
 		
 		buildTier(8, "Bee-Morph")
 				.buffs({

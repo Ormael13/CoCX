@@ -113,6 +113,7 @@ public class IMutationsLib
 		public static const OniMusculatureIM:IMutationPerkType = new OniMusculatureMutation();
 		public static const OrcAdrenalGlandsIM:IMutationPerkType = new OrcAdrenalGlandsMutation();
 		public static const PigBoarFatIM:IMutationPerkType = new PigBoarFatMutation();
+		public static const PoisonGlandIM:IMutationPerkType = new PoisonGlandMutation();
 		public static const RaijuCathodeIM:IMutationPerkType = new RaijuCathodeMutation();
 		public static const RatatoskrSmartsIM:IMutationPerkType = new RatatoskrSmartsMutation();
 		public static const SalamanderAdrenalGlandsIM:IMutationPerkType = new SalamanderAdrenalGlandsMutation();

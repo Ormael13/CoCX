@@ -4737,12 +4737,22 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//(Otherwise)
 			else outputText("You lunge at the foe, intending to bite [monster him] with your circular set of razor-sharp teeth. You manage to catch [themonster] off guard, your fangs, penetrating into [monster his] body. Your acidic spit coating [monster him] before [monster he] manages to react. ");
 			//The following is how the enemy reacts over time to acid. It is displayed after the description paragraph
-			monster.statStore.addBuffObject({tou:-2,spe:-2}, "Sandworm Spit",{text:"Sandworm Spit"});
+			var num1:Number = 2;
+			if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 1) num1 *= 2;
+			monster.statStore.addBuffObject({tou:-num1,spe:-num1}, "Sandworm Spit",{text:"Sandworm Spit"});
 			combat.ExtraNaturalWeaponPrep();
-			combat.ExtraNaturalWeaponAttack(10, "acid");
+			combat.ExtraNaturalWeaponAttack((num1*5), "acid");
 			if (!monster.hasStatusEffect(StatusEffects.SandWormAcid))
 				monster.createStatusEffect(StatusEffects.SandWormAcid, 2, 0, 0, 0);
 			monster.addStatusValue(StatusEffects.SandWormAcid, 2, 2);
+			if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 1 && rand(100) < (player.perkv1(IMutationsLib.PoisonGlandIM) * 25)) {
+				monster.statStore.addBuffObject({tou:-num1,spe:-num1}, "Sandworm Spit",{text:"Sandworm Spit"});
+				combat.ExtraNaturalWeaponPrep();
+				combat.ExtraNaturalWeaponAttack((num1*5), "acid");
+				if (!monster.hasStatusEffect(StatusEffects.SandWormAcid))
+					monster.createStatusEffect(StatusEffects.SandWormAcid, 2, 0, 0, 0);
+				monster.addStatusValue(StatusEffects.SandWormAcid, 2, 2);
+			}
 		}
 		else {
 			outputText("You lunge headfirst, maw agape and your ring of teeth glistening. Your attempt fails horrendously as [themonster] manages to leap out of the away, and you impact the ground with enough force to make your ears ring.");
@@ -5388,16 +5398,31 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 1) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.EquineMuscleIM)));
 			if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
         	if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
+			if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 1) damage *= 2;
 			damage *= dBd3c;
 			monster.teased(Math.round(monster.lustVuln * damage));
+			if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 1 && rand(100) < (player.perkv1(IMutationsLib.PoisonGlandIM) * 25)) {
+				monster.teased(Math.round(monster.lustVuln * damage));
+			}
 		}
 		if (player.isSandWorm()) {
-			monster.statStore.addBuffObject({str: -20}, "Sandworm Sting", {text: "Sandworm Sting"});
+			var num3:Number = 20;
+			if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 1) num3 *= 2;
+			monster.statStore.addBuffObject({str: -num3}, "Sandworm Sting", {text: "Sandworm Sting"});
 			if (!monster.hasStatusEffect(StatusEffects.LustDoT))
 				monster.createStatusEffect(StatusEffects.LustDoT, 3, 0.05, 0, 0);
 			else {
 				monster.addStatusValue(StatusEffects.LustDoT, 1, 2);
 				monster.addStatusValue(StatusEffects.LustDoT, 2, 0.1);
+			}
+			if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 1 && rand(100) < (player.perkv1(IMutationsLib.PoisonGlandIM) * 25)) {
+				monster.statStore.addBuffObject({str: -num3}, "Sandworm Sting", {text: "Sandworm Sting"});
+				if (!monster.hasStatusEffect(StatusEffects.LustDoT))
+					monster.createStatusEffect(StatusEffects.LustDoT, 3, 0.05, 0, 0);
+				else {
+					monster.addStatusValue(StatusEffects.LustDoT, 1, 2);
+					monster.addStatusValue(StatusEffects.LustDoT, 2, 0.1);
+				}
 			}
 		} else {
 			if (player.tailType == Tail.SCORPION) {

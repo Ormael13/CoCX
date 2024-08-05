@@ -61,6 +61,7 @@ public class ManticoreRace extends Race {
 		
 		addMutation(IMutationsLib.CatLikeNimblenessIM);
 		addMutation(IMutationsLib.ManticoreMetabolismIM);
+		addMutation(IMutationsLib.PoisonGlandIM);
 		
 		buildTier(15, "manticore")
 				.customNamingFunction(function(body:BodyData):String {

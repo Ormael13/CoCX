@@ -58,6 +58,7 @@ public class SandWormRace extends Race {
 
 		addMutation(IMutationsLib.TrachealSystemIM);
 		addMutation(IMutationsLib.TwinHeartIM, +2);
+		addMutation(IMutationsLib.PoisonGlandIM);
 
 		buildTier(23, "sand worm")
 				.requireLegType(LowerBody.SANDWORM)
