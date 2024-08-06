@@ -91,7 +91,7 @@ public class TestMenu extends BaseContent
 		bd.add("Testing", cheatTesting, "Buttons for testing some new stuff. May break your game if something is outdated.");
 		bd.add("Bags expansion", SceneLib.garden.justForTestBuildsAdjustingBagsCapacityCuzINotWannaWasteSaveUpdateForThat, "Expand the bags. (If you not own any of them will not have any effect)");
 		bd.add("DemonizeMe", AddJabbyShit1, "Add 1 Demonize Me.");
-		bd.add("MightyOrNot", MightyOrNot, "Replace Mighty Lower Half IM with Mighty Legs IM if needed.");
+		bd.add("X-Uni 2", MightyOrNot, "Adding status effect needed for gifts and yuri scene unlock in demon lair.");
 		submenu(bd, playerMenu, 0, false);
 	}
 
@@ -130,10 +130,7 @@ public class TestMenu extends BaseContent
 	}
 	
 	public function MightyOrNot():void {
-		if (player.hasMutation(IMutationsLib.MightyLowerHalfIM) && !player.hasMutation(IMutationsLib.MightyLegsIM)) {
-			player.createPerk(IMutationsLib.MightyLegsIM, player.perkv1(IMutationsLib.MightyLowerHalfIM), 0, 0, 0);
-			player.removePerk(IMutationsLib.MightyLowerHalfIM);
-		}
+		if (player.hasStatusEffect(StatusEffects.MeetXuviel) && !player.hasStatusEffect(StatusEffects.MeetXuviel2)) player.createStatusEffect(StatusEffects.MeetXuviel2, 0, 0, 0, 0);
 		doNext(SoulforceCheats);
 	}
 	

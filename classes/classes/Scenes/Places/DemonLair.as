@@ -24,7 +24,7 @@ public class DemonLair extends BaseContent
 				outputText("You feel the pull of Xuviel’s necklace again and head to him. Your pussy drooling knowingly in anticipation, despite your terror. You can’t help but think about what abuses the fiend will subject you to this time.\n\n");
 				outputText("You’re back in the throne room. Seems the demon lord didn’t feel like having you join him in his bedroom this time. Xuviel grins as he sees you enter the room, his harem chuckling at your approach.\n\n");
 				outputText("\"<i>It’s a pleasure to see you, [name]. The girls were actually talking about your latest performance, most impressive.</i>\"\n\n");
-				outputText("You ponder whether he's talking about how you handled marae and the factory or about what you did to his… actually, you’re very keen on forgetting that. Xuviel teases you further.\n\n");
+				outputText("You ponder whether he's talking about how you handled "+(SceneLib.dungeons.checkFactoryClear()?"marae and the factory":"your latest opponent")+" or about what you did to his… actually, you’re very keen on forgetting that. Xuviel teases you further.\n\n");
 				outputText("\"<i>Still too weak-willed to get rid of my necklace? I must say I’m amazed, [name], you really are the best. Both at cocksucking and heroing about.</i>\"\n\n");
 				questProgressScenes09();
 			}
@@ -294,6 +294,7 @@ public class DemonLair extends BaseContent
 			}
 			if (flags[kFLAGS.KIHA_FOLLOWER] > 0) flags[kFLAGS.KIHA_CORRUPTION_BITCH] == 1;
 			player.addStatusValue(StatusEffects.MeetXuviel, 1, 1);
+			player.createStatusEffect(StatusEffects.MeetXuviel2, 0, 0, 0, 0);
 			endEncounter();
 		}
 		
@@ -309,6 +310,9 @@ public class DemonLair extends BaseContent
 			outputText("\n\n\"<i>So… [name], what did you come home for? Got bored of your insipid slaves?</i>\"\n\n");
 			menu();
 			addButton(0, "Talk", demonLairTalkMainMenu);
+			addButton(1, "Sex", demonLairSexMainMenu);
+			//2 - Font of corruption
+			//3 - Private quarters
 			addButton(14, "Only visiting", demonLairOnlyVisiting);
 		}
 		
@@ -321,7 +325,7 @@ public class DemonLair extends BaseContent
 			addButton(1, "Harem", demonLairTalkHarem);
 			addButton(2, "His position", demonLairTalkHisPosition);
 			addButton(3, "Gifts", demonLairTalkGifts);
-			//addButton(4, "Other girls", demonLairTalkOtherGirls);
+			addButton(4, "Other girls", demonLairTalkOtherGirls).hint("Actually, you wanted to talk with the rest of the harem.");
 			addButton(14, "Back", demonLairMainMenu);
 		}
 		private function demonLairTalkHim():void {
@@ -359,7 +363,7 @@ public class DemonLair extends BaseContent
 			clearOutput();
 			menu();
 			outputText("You tell Xuviel you would like a gift. ");
-			if (player.hasStatusEffect(StatusEffects.MeetXuviel2)) {
+			if (player.statusEffectv1(StatusEffects.MeetXuviel2) > 0) {
 				outputText("Xuviel responds in the negative.\n\n");
 				outputText("\"<i>I’m sorry [name] but to avoid causing jealousy across my harem I only give one gift per month. Ask again in a while and we'll see.</i>\"\n\n");
 				addButtonDisabled(1, "Gift of wealth", "Gift of wealth");
@@ -382,7 +386,7 @@ public class DemonLair extends BaseContent
 			var giftofwealth:Number = 500 + rand(501);
 			outputText("<b>You " + (silly()?"pass go and ":"") + "collect " + giftofwealth + " gems!</b>\n\n");
 			player.gems += giftofwealth;
-			player.createStatusEffect(StatusEffects.MeetXuviel2, 567, 0, 0, 0);
+			player.addStatusValue(StatusEffects.MeetXuviel2, 1, 567);
 			statScreenRefresh();
 			doNext(demonLairTalkMainMenu);
 			advanceMinutes(10);
@@ -399,7 +403,7 @@ public class DemonLair extends BaseContent
 			player.trainStat("int",10,player.trainStatCap("int",100));
 			player.trainStat("wis",10,player.trainStatCap("wis",100));
 			player.trainStat("lib",10,player.trainStatCap("lib",100));
-			player.createStatusEffect(StatusEffects.MeetXuviel2, 567, 0, 0, 0);
+			player.addStatusValue(StatusEffects.MeetXuviel2, 1, 567);
 			statScreenRefresh();
 			doNext(demonLairTalkMainMenu);
 			advanceMinutes(10);
@@ -412,15 +416,141 @@ public class DemonLair extends BaseContent
 		}
 		private function demonLairTalkOtherGirls():void {
 			clearOutput();
-			outputText("\"<i></i>\"\n\n");
-			outputText("\"<i></i>\"\n\n");
-			outputText("\"<i></i>\"\n\n");
-			outputText("\"<i></i>\"\n\n");
+			outputText("Xuviel waves at you invitingly, telling you you are free to do as you please as you turn to the succubus sitting next to you, the one that first questioned your presence in Xuviel’s pleasure palace that is. Her tail is tracing circles in the air out of boredom.\n\n");
+			outputText("\"<i>Honestly, [name], I still can’t figure what master Xuviel saw in you, because back in Ingnam I saw nothing.</i>\"\n\n");
+			outputText("Wait what? She’s from Ingnam? Now that she mentions it, she indeed reminds you of one of the local farmer’s eldest girls, named Misha if you remember right. Why would such a strong, smart, and beautiful girl like her be selected as Ingnam’s yearly sacrificial cow if their aim is to get rid of people they don’t want?\n\n");
+			outputText("\"<i>Like you don’t know, [name]. I bet you just went with the elders' plan the moment they proclaimed you as the next champion. Fact is, I was selected because I knew too much. See, smarts don't pay off in Ingnam, and I was about to figure out what was going on, so the council decided to get rid of me. Bet they gave you the excuse I was in such a rush to protect the village that I ran straight to the portal ahead of my time?</i>\"\n\n");
+			outputText("So that’s why she disappeared early! Well, you can’t say she looks any worse for the wear considering she ended up in Xuviel’s hands instead of the factory.\n\n");
+			outputText("\"<i>Xuviel only ever picks up the girls he likes, he has a long story of dealings with Zetaz and the factory overseer to get his own pick out of the year’s champions should they strike his fancy, and does this right under Lethice’s nose. Did you know he offered that imp nothing short of two thousand gems for you? ");
+			outputText("Gems he likely won’t have to spend as Zetaz actually never managed to properly capture you. Heck, you even went and shut down the factory, so it’s likely he will have to go browse elsewhere. Nice job to whoever got that necklace on you, that person’s probably rich right now.</i>\"\n\n");
+			outputText("She regrets nothing of her old life?\n\n");
+			outputText("\"<i>Regrets? I’ve been with Xuviel long enough that I don't even care anymore. He fucks me when I want it, showers me with gifts and gives me anything I wish for. I don’t know how you still manage to go back out there and sleep out in the wild when he can provide you comfort and luxury fit for nothing short of the demonic noblesse.</i>\"\n\n");
+			outputText("Well, you’ve got your reasons. Starting with the fact you plan on overthrowing Lethice, and a base of operations at the center of Mareth is still the ideal location for exploration.\n\n");
+			outputText("\"<i>Lethice? Why do you even care? The sooner she has Mareth under her heel, the better.</i>\"\n\n");
+			outputText("Vengeance, pure and simple. Once you have access to all of Lethice’s resources you will also acquire her supply of lethicite for yourself, then you can go back home and have a nice chat with Ingnam’s elders. Sure you could wait until Lethice has full control of Mareth and decide to invade a different world, but you aren’t patient enough to wait for that, not to mention she might simply choose to invade one of the many other dimensions which connect with Mareth.\n\n");
+			outputText("\"<i>If that ever happens, count me in! I owe Nomur for knocking me unconscious and sending me through the portal in a bag.</i>\"\n\n");
+			outputText("Nomur, eh? You sure got special plans for that one.\n\n");
+			if (player.statusEffectv2(StatusEffects.MeetXuviel2) < 1) player.addStatusValue(StatusEffects.MeetXuviel2, 2, 1);
 			doNext(demonLairTalkMainMenu);
 			advanceMinutes(10);
 		}
 		
 		private function demonLairSexMainMenu():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+			menu();
+			if (player.biggestTitSize() <= 1) addButton(0, "Naizuri", demonLairSexPaizuriNaizuri);
+			else addButton(0, "Paizuri", demonLairSexPaizuriNaizuri);
+			addButton(1, "From behind", demonLairSexFromBehind);
+			addButtonIfTrue(2, "Tailjob + Vaginal", demonLairSexTailjobVaginal, "Lacking Demon Tail.", player.tailType == Tail.DEMONIC);
+			addButton(3, "Throne fuck", demonLairSexThroneFuck);
+			addButtonIfTrue(4, "Harem yuri time", demonLairSexHaremYuriTime, "Req. to see 'Other Girls' talk option.", player.statusEffectv2(StatusEffects.MeetXuviel2) > 0);
+			addButton(14, "Back", demonLairMainMenu);
+		}
+		private function demonLairSexPaizuriNaizuri():void {
+			clearOutput();
+			outputText("You kneel before Xuviel and let his hands slide on your skin, making you shiver in delight. You grab your breasts and squeeze his member between them, planning to give him the best titfuck in his harem. You gleefully take his tip in your mouth as you slide his delicious member between your [breasts]. Humans are so boring, they can’t truly feel the pleasure you get just from sucking him. ");
+			outputText("Thanks to your succubus enhanced body, each time you thrust his cock in your mouth you can feel it as if it were a second vagina, with your tongue as a second clit. Your oral nerves are set aflame with pleasure as you gleefully suck on Xuviel’s cock. The more you please him, the more you are pleasured, and before long you’re too lost in it to even grasp the notion of time as you methodically slide his cock up and down in your sensitive breast.\n\n");
+			outputText("\"<i>Mmmm, as expected from one of the best succubus on Mareth, bet you’re enjoying yourself as much as I do. Take your time to savor it.</i>\"\n\n");
+			outputText("Ah, you don’t say! Your pussy is drooling all over the ground as your clit-like tongue wraps around his member in an attempt to maximize your pleasure and his. That said, everything must come to an end and you can feel your lover’s incoming orgasm far before he voices it.\n\n");
+			outputText("\"<i>Ah, good girl… Here's your reward, try not to spill a drop.</i>\"\n\n");
+			outputText("Xuviel floods your mouth and throat with his cum and you gulp it eagerly. He pulls out and shoots two final threads on your face and right onto your breasts as you moan, reaching an oral orgasm which causes your pussy to pulse and gush. You can taste his cum with your every pore as your lustrous breasts absorb it all inside like a sponge, your skin gaining in healthiness as you feel your latent hunger being sated and your energy refilled.\n\n");
+			outputText("You clean your lips lasciviously and grabs one of your teats, licking whatever is left of your dinner that your body didn’t already take in. Living as a succubus is so different from what you were before. Cum, for instance, tastes better than any food you could get and of course of all cum from a powerful incubus like Xuviel suits you best. Satisfied, you stand to the side and lay down to rest, leaving the place for the next succubus.\n\n");
+			doNext(demonLairSexPaizuriNaizuri2);
+		}
+		private function demonLairSexPaizuriNaizuri2():void {
+			clearOutput();
+			outputText("You wake up with a cute yawn where you dozed off. Xuviel is busy reading a manuscript as one of his other wives attends to him. What are you in the mood for now?\n\n");
+			player.sexReward("no", "Dick");
+			doNext(demonLairMainMenu);
+			advanceMinutes(60);
+		}
+		private function demonLairSexFromBehind():void {
+			clearOutput();
+			outputText("You move in front of him then ask Xuviel if he would be in the mood to punish his most depraved succubus. After all, you have been a very bad demon. To punctuate this, you drop on all four and sway your [ass] from one side to another in a clear invitation"+(player.tailType == Tail.DEMONIC ? " your tail tip drawing circles in the air around your pucker":"")+".\n\n");
+			outputText("\"<i>Mmm I guess punishment is indeed in order for such an indecent display [name]... stay right where you are.</i>\"\n\n");
+			outputText("You smile as he moves to you and grabs your tits for handles, his unholy cock lubing itself on your vaginal lips, slathering it tauntingly with demonic pre before moving toward your inviting butt. He slowly slides between your generous ass cheeks before breaking through your pucker and you gasp in pleasure as he squeezes your boobs with his powerful grasp, thin beads of milk surging out. ");
+			outputText("Within further warning, Xuviel thrusts himself into your fine piece of ass, to which you can’t help but giggle at the sound of your voluptuous ass slapping against his body. Xuviel’s cock slowly works against your pucker with each thrust, pumping in and out, letting you feel every inch of his girthy dick. His tingling precum helps loosen and lubricate your passage in just the right way as you reflexively loosen up for more of him.\n\n");
+			outputText("You get a hint of your performance the moment he thrusts into you with an assertive grunt, filling you with more of his pre, leaving you salivating as your incubus lover feeds you his seed drop by drop. You squeeze his juicy cock between your ass cheek in an attempt to increase his delight, the many feelers in your holes tasting every inch of him inside you as he slaps your butt between ");
+			outputText("trust"+(player.tailType == Tail.DEMONIC ? ". He grows weary of your tail waving in his face as he grabs it firmly with his free hand, yanking it up, tugging it tauntingly in a painful mix of pleasure as his penis forces out delirious moans out of your mouth":"")+".\n\nFinishing up his appetizer Xuviel, decides it's time to finish you up. ");
+			outputText("You gasp in delight as your master grips you by the hips, thrusting into you with greater force as he gives a low growl, leaning into you as his abs press against your backside. With a final, assertive thrust, he hilts himself completely into you with every inch of his fat cock, finally shooting the long-awaited deluge of his warm, demonic seed deep into you. Savoring the taste of your master, you feel it fill you up to your stomach.\n\n");
+			outputText("Xuviel lets you drop back on the floor as you crawl on all fours back to your cushiony pillow, savoring your meal as a different succubus begs to be punished next. You doze off satisfied for the next hour.\n\n");
+			player.sexReward("cum","Anal");
+			doNext(demonLairMainMenu);
+			advanceMinutes(60);
+		}
+		private function demonLairSexTailjobVaginal():void {
+			clearOutput();
+			outputText("Well, how about getting a shot where it really matters now? Xuviel notices the offer right away.\n\n");
+			outputText("\"<i>I don’t think my audience room is suitable for such actions. Perhaps a strategic withdrawal to my inner sanctum is called for? I need a break from my paperwork anyway.</i>\"\n\n");
+			outputText("Oh, this is just perfect, you're going to have him all by yourself too. You smile as he opens the door before you walk in, your tail swishing with anticipation. Xuviel starts to slowly undress before he lies down on the bed, offering you a full view of his perfect body. You begin to crawl on the bed, wings open and tail waving like that of a cat on the prowl as you mouse over, pressing your [breasts] on his broad, manly chest. ");
+			outputText("It would be a shame to simply fuck the incubus so early, and so, your wrap your tail, just like a whip around his cock, your spaded tip teasing his gland ever slowly. Xuviel rewards your attention by grabbing your inviting breasts pressing into them with his expert hands.\n\n");
+			outputText("You moan in delight, your tail squeezing the base of his cock, but delaying the orgasm so as to properly ripen the treasure in his balls, you will definitely want everything of it. Your lips meet for a few instants, tongues dancing as your tail tip ever teases the entrance of his urethra. Had Xuviel been one of those cute human pets, he would have came already from the unnatural amount of pleasure you are giving him, ");
+			outputText("but his endurance as an incubus far surpasses that of any normal man. Xuviel, however, rewards your skill with a few drops of precum flowing out of his tool which you swiftly smear all over his length with the coil of your tail. He is about ready for you now. You give a quick glance behind, Xuviel’s hand still massaging your tender breast flesh and admire his cock.\n\n");
+			outputText("His proud tool is covered with black veins, pulsing as the member drools precum, indicating its readiness. You lick your lips as you slowly lower yourself on his tool and sit on his lap, lifting yourself from his chest with your two arms so he can get a full display of your drenched pussy molding his cock. You go on, whispering to him in invitation.\n\n");
+			outputText("\"<i>How about you make me your princess tonight, lord of darkness? Go on and fill my devoted pussy with your corruption.</i>\"\n\n");
+			outputText("Xuviel smiles and gropes your breasts as he holds you with himself, pleasure deliciously flowing from your chest as he accompanies the rhythmic movement of your backside with thrusts of his own. Devilish pleasure creeps to your mind but you hold on, increasing its length way beyond reasonable limits as you mold your vaginal walls in the ideal shape of his cock, every inch of your temptress pussy pleasuring him like only a succubus can. ");
+			outputText("You lift your head skyward for a set of delighted mewls as his unholy cock pulses with the telltale sign of a long-awaited orgasm. He thrusts deeper into you as you squeal, begging for his demonic warmth. Your pussy clenches instinctively to trap the cum inside as Xuviel rewards you with a generous stream of his cum. Ohhh such a meal. Highly satisfied, you lay down against him for a short rest awaiting his second wind.\n\n");
+			doNext(demonLairSexTailjobVaginal2);
+		}
+		private function demonLairSexTailjobVaginal2():void {
+			clearOutput();
+			outputText("After several hours of feeding, you finally reach complete satisfaction, heading back right after Xuviel to the audience room. You’re still hungry of course, you’re always hungry for more. You sit on your pillow and wrap your tail across your legs as the master of the house resumes his reading, the next succubus already taking advantage of his cock’s availability. What are you in the mood for now?\n\n");
+			player.sexReward("cum", "Vaginal");
+			player.sexReward("cum", "Vaginal");
+			player.sexReward("cum", "Vaginal");
+			player.sexReward("cum", "Vaginal");
+			player.sexReward("cum", "Vaginal");
+			doNext(demonLairMainMenu);
+			advanceMinutes(300);
+		}
+		private function demonLairSexThroneFuck():void {
+			clearOutput();
+			outputText("Well, now you think about it, this pillow you use isn't exactly the seat you want. Eyeing Xuviel, you ask him if he has some space on that throne of his. He opens his arms in invitation as you sashay to him and slowly sit on his lap, inserting his delicious member inch by inch into your voracious pussy.\n\n");
+			outputText("Of course, as his dick is shaped with the purpose to fuck the brains out of any female, he’s just the ideal size for you, and you moan in delight as you finally engulf the last of his rod inside, Xuviel pulls your head to his for a kiss. Your tongues dance with each other, playing hide and seek for a minute before your lips part ways, a small strand of saliva still linking them. Ready for the next step you whisper softly to him.\n\n");
+			outputText("\"<i>Do not worry I will handle everything. Just you relax my lord, and taste my caresses.</i>\"\n\n");
+			outputText("You mold your unholy labia around his cock, your organ-like walls caressing his flesh like only those of a succubus can, something your former pathetic human body couldn’t have done due to its many sensory and physical limitations. You pity those mortals really, unable to access such heights of carnal pleasure only available for those who like you became demons. The pleasure between your legs pulls you back out of your thoughts however ");
+			outputText("and you gasp as Xuviel himself reminds you of the situation by thrusting his cock up and high into your pleasure buzzer as if to tell you to get to it. You feel him quite well in there and you got enough control over your pussy to even guide him straight to your sweet spot on every thrust just as if holding his fiendish cock in your hand. You begin to slide on his dick, bouncing up and down, your jiggly breasts following the motion. ");
+			outputText("Xuviel responds by grabbing your chest from behind and imprinting the shape of his hands in your two perfect spheres. You cry out for your master in delight as his tongue slithers off and gives your areola a playful lick"+(player.tailType == Tail.DEMONIC ? ", your spaded tail waving behind you like that of a cat on the prowl":"")+". Ohhh you sure are enjoying this and the ripple of his perfect cock in your [vagina] is simply divine.\n\n");
+			outputText("You can taste his precum in your sinful pussy already and soon delicious cream is gonna flow out of these churning balls of his and sate your thirst. You maximize your efforts to ripen the mix, caressing his cock and teasing his balls with your fingers like only you can and eventually he gives in. He gives you an almost reprimanding thrust, causing you to bite your lip in response as his pulsating member digs deeper into you with each pump. Your mind goes as white, ");
+			outputText("desperately trying to clench around your demonic lover as the fluids that drench every millimeter of your vaginal walls as Xuviel finally feeds your thirsty demonic cunt with a full load of warm fresh corrupted cum, your womb drinking it in"+(player.isPregnant()?"":". Mmmmm you muse as you savor the cum in your womb that with some luck you might actually get pregnant with a litter of imps or two")+".\n\n");
+			outputText("Satisfied you unplug, a small strand of cum drooling out of your vagina before being pulled back in with a suction sound, why waste a single drop? you stand to the side and lay down to rest leaving the place to the next succubus.\n\n");
+			doNext(demonLairSexThroneFuck2);
+		}
+		private function demonLairSexThroneFuck2():void {
+			clearOutput();
+			outputText("You wake up with a cute yawn where you were dozing off. Xuviel is busy reading a manuscript as one of his other wives attends his unholy cock. What are you in the mood for now?\n\n");
+			player.sexReward("cum", "Vaginal");
+			doNext(demonLairMainMenu);
+			advanceMinutes(60);
+		}
+		private function demonLairSexHaremYuriTime():void {
+			clearOutput();
+			outputText("You feel like getting off but you are not in the mood to do it alone. Xuviel notices this and laughs, addressing the harem as a whole.\n\n");
+			outputText("\"<i>Girls, you need not restrain yourselves. If you all want to take me at the same time I will gladly take you all. But first, show me a display of your talents, the harder I get the better the fuck will be.</i>\"\n\n");
+			outputText("He snaps his fingers and you all smirk knowingly before plunging into the fray. Your eyes have already found and targeted Misha, you’re going to teach that slut some manners especially after mocking you on your first entrance. It's about time you get the freedom to properly punish her sinful cunt. Misha also takes note of your perverted gaze and realizing you’re going to make a drooling mess out of her, gets ready to retaliate.\n\n");
+			outputText("You jump on your rival with the speed and agility of a prowling panther, some of your fingers already probing the entrance of her pussy. She is about just as fast to latch her hand to your breast, her spaded tail tip flicking in your now drooling cunt and exciting your clitoris. While your rival got a better start than you, you refuse to admit defeat and viciously pinch her nipple using the momentum to take hold of her now gasping mouth into a forced kiss. ");
+			outputText("The two of you could catfight for minutes, but there’s nine of you in this fuckfest. Before you know it, one of the other girls has inserted her tail into your deliciously plowable ass and is in the process of giving you a good stretch while a second succubus is grabbing your breasts and kissing your areola. There isn’t a single one of your privates that’s not being thoroughly and masterfully toyed with, ");
+			outputText("and all of this happens under the watchful eyes of master Xuviel. Your eyes catch a glimpse of his hardening, vein pulsing cock and this turns you on even more…mmmmm if the master is watching you get off you will have a hard time holding back your desire to cum and hells under, a few seconds later, you achieve a messy orgasm that should provide all the lube your lover could ever need. You moan and dip some of your fingers in your fluids, ");
+			outputText("playfully pulling them back to your mouth before licking them clean. Xuviel, aroused by the show, roars in pleasure, his unholy dick dripping precum, no longer able to restrain its desire for all these offered pussies. It answers its owner’s needs by exploding into a set of nine long perverted writhing tentacle cocks, a show that leaves you wide-eyed and licking your lips in anticipation of what will come next.\n\n");
+			outputText("Before this spectacle, it is the only rational choice that the nine of you display your dripping pussies for the aroused incubus lord to fuck your brains out. One of Xuviel’s many dicks wrap around your arms, slides between your breast, wrap around your "+(player.isNaga()?"tail":"legs")+" and viciously rams itself into your pussy, lifting you in the air to make better use of gravity. You gasp in rapture as your succubus body is thoroughly violated by your demonic lover, ");
+			outputText("his tentacle pulling you just close enough for him to gently pat you on the head as your eyes cross from the influx of pleasure your depraved flesh is subjected to. The tentacles in you suddenly start to twitch and you can follow the travel of the cum influx all along its length. The nine of you screams your master’s name as your thirsty wombs are at long last flooded by his unholy cream progressively inflating to a near pregnant size. ");
+			outputText("This is the best bukkake ever and hell, even if you don’t become pregnant from this, your bellies will at least stay big and ballooney for a few hours before your cum starved bodies finish drinking it all. There’s no question left unanswered, this is why Xuviel is the king of this harem and one hell of a king he is. ");
+			outputText("He would not be satisfied with filling you alone however, that would be disappointing from a man such as him. You reach orgasm several times fold as his cock keeps pumping your hellish cunt all the way to the point your brain ceases to follow and you fall into unconsciousness.\n\n");
+			outputText("You wake up later feeling satiated, back on your cushion. Xuviel is busy reading a manuscript as one of his other wives attends his unholy cock, you almost feel guilty for not waking up first. That said, what are you in the mood to do now?\n\n");
+			player.sexReward("cum", "Vaginal");
+			doNext(demonLairMainMenu);
+			advanceMinutes(60);
+		}
+		
+		private function demonLairFontOfCorruption():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+			menu();
+			addButton(14, "Back", demonLairMainMenu);
+		}
+		
+		private function demonLairPrivateQuarters():void {
 			clearOutput();
 			outputText("\"<i></i>\"\n\n");
 			menu();
