@@ -843,7 +843,7 @@ public class GameSettings extends BaseContent {
 	}
 	public function disableHardcoreModifierForReal():void {
 		clearOutput();
-		outputText("Hardcore modifier is now enabled.");
+		outputText("Hardcore modifier is now disabled.");
 		flags[kFLAGS.HARDCORE_MODE] = 0;
 		flags[kFLAGS.GAME_DIFFICULTY] -= 1;
 		doNext(settingsScreenGameSettings);

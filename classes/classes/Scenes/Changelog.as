@@ -339,7 +339,7 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Poison Gland (Evolved). Req. Poison Gland (Primitive) and lvl 60+. Effects: Double the efficiency of poison damage, applied poisons now has a 75% chance of dealing its effect twice per turn. All poison becomes deadlier inflicting 2% toughness damage per round.\n");
 			outputText("-New mutation perk: Poison Gland (Final Form). Req. Poison Gland (Evolved) and lvl 90+. Effects: Double the efficiency of poison damage, applied poisons now has a 100% chance of dealing its effect twice per turn. All poison becomes deadlier inflicting 3% toughness damage per round. All poison now becomes lewder inflicting tease damage equal to your tease value per round on top of any other effect they would do.\n");
 			outputText("-Hardcore difficutly setting will no longer force delete save on bad end. Instead will be giving 20% penalty to core stats and take away all XP gathered. Also would remove limitations on level to find new areas or finding enemies in areas if they had their own level checks (and Lake will be no longersafe area until lvl 3).\n");
-			outputText("-\n");
+			outputText("-Due to general evaluation of difficulty changed it been reseted to Easy setting and to return to what it was before it require to adjust all the toggles in Settings > Gameplay (1) menu.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

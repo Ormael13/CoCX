@@ -610,7 +610,7 @@ public function loadPermObject():void {
             trace("Found internal permObjVersionID:", CoC.instance.permObjVersionID);
         }
 
-if (CoC.instance.permObjVersionID < 1039900) {
+		if (CoC.instance.permObjVersionID < 1039900) {
             // apply fix for issue #337 (Wrong IDs in kACHIEVEMENTS conflicting with other achievements)
 			achievements[kACHIEVEMENTS.ZONE_EXPLORER] = 0;
 			achievements[kACHIEVEMENTS.ZONE_SIGHTSEER] = 0;
@@ -620,6 +620,16 @@ if (CoC.instance.permObjVersionID < 1039900) {
             savePermObject(false);
             trace("PermObj internal versionID updated:", CoC.instance.permObjVersionID);
         }
+		if (CoC.instance.permObjVersionID < 1039910) {
+			// re-evaluation difficulty setting due to overhaul of difficulty calculations and changes to hardcore option
+			flags[kFLAGS.HUNGER_ENABLED] = 0;
+			flags[kFLAGS.HARDCORE_MODE] = 0;
+			flags[kFLAGS.SECONDARY_STATS_SCALING] = 0;
+			flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] = 0;
+			flags[kFLAGS.GAME_DIFFICULTY] = 0;
+            CoC.instance.permObjVersionID = 1039910;
+            savePermObject(false);
+		}
 	}
 }
 
