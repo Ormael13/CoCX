@@ -3413,7 +3413,7 @@ private function katPenetrate():void {
 	menu();
 	addButton(0, "Vagina", penetrateKatsVag);
 	addButton(1, "Ass", pcPenetratesKatAnally);
-	addButtonIfTrue(2, "Both", pcPenetratesKatAnally,
+	addButtonIfTrue(2, "Both", pcPenetratesKatDoubly,
 		"Req. a second cock fitting 70 area.", player.cockThatFits2(70) >= 0);
 	addButtonIfTrue(3, "SucknFuck", suckNFuck,
 		"Req. her to have a dick and not oversized knot.", hasCock() && knotSize <= 4);
