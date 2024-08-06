@@ -212,7 +212,7 @@ use namespace CoC;
 				kind  : 'npc',
 				unique: true,
 				when: function ():Boolean {
-					return (player.level >= 3 || flags[kFLAGS.HARDCORE_MODE] == 1) && flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0 && timesExplored() >= 10 && (flags[kFLAGS.IZMA_WORMS_SCARED] == 0 || !player.hasStatusEffect(StatusEffects.Infested)) && flags[kFLAGS.IZMA_FOLLOWER_STATUS] <= 0
+					return (player.level >= 3 || (flags[kFLAGS.HARDCORE_MODE] == 1 && model.time.days > 6)) && flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0 && timesExplored() >= 10 && (flags[kFLAGS.IZMA_WORMS_SCARED] == 0 || !player.hasStatusEffect(StatusEffects.Infested)) && flags[kFLAGS.IZMA_FOLLOWER_STATUS] <= 0
 				},
 				chance: lakeChance,
 				call: SceneLib.izmaScene.meetIzmaAtLake
@@ -285,11 +285,11 @@ use namespace CoC;
 					return flags[kFLAGS.FACTORY_SHUTDOWN] == 2 ? 0.1 : 0.04
 				},
 				when: function ():Boolean {
-					return (player.level >= 3 || flags[kFLAGS.HARDCORE_MODE] == 1)
+					return (player.level >= 3 || (flags[kFLAGS.HARDCORE_MODE] == 1 && model.time.days > 6))
 				},
 				call: gooGirlScene.spyOnGooAndOozeSex
 			}, SceneLib.exploration.commonEncounters.wrap(function ():Boolean {
-				return (player.level >= 3 || flags[kFLAGS.HARDCORE_MODE] == 1) && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0
+				return (player.level >= 3 || (flags[kFLAGS.HARDCORE_MODE] == 1 && model.time.days > 6)) && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0
 			}, [0.1]), {
 				//Helia monogamy fucks
 				name: "helcommon",
@@ -320,7 +320,7 @@ use namespace CoC;
 				unique: true,
 				night : false,
 				when: function():Boolean {
-					return (player.level >= 3 || flags[kFLAGS.HARDCORE_MODE] == 1) && flags[kFLAGS.NADIA_FOLLOWER] < 6 && !(flags[kFLAGS.NADIA_FOLLOWER] != 3 && flags[kFLAGS.NADIA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.NadiaOff);
+					return (player.level >= 3 || (flags[kFLAGS.HARDCORE_MODE] == 1 && model.time.days > 6)) && flags[kFLAGS.NADIA_FOLLOWER] < 6 && !(flags[kFLAGS.NADIA_FOLLOWER] != 3 && flags[kFLAGS.NADIA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.NadiaOff);
 				},
 				chance: lakeChance,
 				call: SceneLib.nadiaScene.repeatEnc

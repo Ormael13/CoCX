@@ -67,7 +67,7 @@ public class Boat extends AbstractLakeContent
 				kind: 'npc',
 				unique: true,
 				when: function():Boolean {
-					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2) && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && (player.level >= 20);
+					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2) && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && (player.level >= 20 || flags[kFLAGS.HARDCORE_MODE] == 1);
 				},
 				call: SceneLib.etnaScene.repeatYandereEnc
 			}, {
@@ -116,7 +116,7 @@ public class Boat extends AbstractLakeContent
 				kind: 'monster',
 				night: false,
 				when: function():Boolean {
-					return player.level > 2 && player.hasStatusEffect(StatusEffects.FetishOn)
+					return (player.level > 2 || flags[kFLAGS.HARDCORE_MODE] == 1) && player.hasStatusEffect(StatusEffects.FetishOn)
 				},
 				call: lake.fetishZealotScene.zealotBoat
 			}, {
@@ -134,7 +134,7 @@ public class Boat extends AbstractLakeContent
 				kind  : 'npc',
 				unique: true,
 				when: function():Boolean {
-					return player.level >= 5 && flags[kFLAGS.KAIJU_DISABLED] == 0 && !player.hasStatusEffect(StatusEffects.VenusOff);
+					return (player.level >= 5 || flags[kFLAGS.HARDCORE_MODE] == 1) && flags[kFLAGS.KAIJU_DISABLED] == 0 && !player.hasStatusEffect(StatusEffects.VenusOff);
 				},
 				call: kaiju.kaijuMeeting
 			})

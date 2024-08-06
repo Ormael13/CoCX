@@ -214,7 +214,7 @@ public class DemonLair extends BaseContent
 		}
 		public function questProgressScenes11():void {
 			outputText("You smirk at Xuviel, dash at him, grab him, and then pull him off his chair. You growl. For every minute he raped you, you’re going to punish him, for every shame he inflicted upon you, you’re going to shame him, an eye for an eye. You forcefully pull him to the ground, but the demon is still smirking. Gosh, you’re going to erase that awful smile right away. With rage, you yell at him what you think of his attitude!\n\n");
-			outputText("<i>You will not be controlled by this asshole. You will not be his bitch forever! You are nobody’s slave, let alone his! Now, you will show him what happens when one stoops so slow as to attempt to dominate their entire mind.</i>\n\n");
+			outputText("<i>You will not be controlled by this asshole. You will not be his bitch forever! You are nobody’s slave, let alone his! Now, you will show him what happens when one stoops so slow as to attempt to dominate your entire mind.</i>\n\n");
 			outputText("You fiercely grab his cock with your hand and shove it between your breasts. The thought of raping Xuviel back for all the shit he inflicted upon you has you in complete euphoria as you proceed to lick his dick with a vengeful smile. Damn it feels so good to finally be in control, but with that said, his cocky expression still hasn’t disappeared, which enrages you further. You proceed to suck on his delicious tool, wrapping your breasts around the base and pumping in an attempt to force a moan or a wince from him but the demon just keeps smirking. ");
 			outputText("Oh really? Now he thinks you will just sit there and lick him? Well you got other plans for him! While the taste of his precum and the sensory feeling in your mouth is delightful, it’s with your lower mouth that you want to devour him whole. You pull his demonic cock out of your devilish mouth and proceed to spread your vaginal lips open with two fingers, displaying your dripping pussy for him so he knows exactly what you’re going to do.\n\n");
 			outputText("<i>You’re going to wipe that disgusting fucking smile off his face!</i>\n\n");
@@ -309,7 +309,7 @@ public class DemonLair extends BaseContent
 			outputText("\n\n\"<i>So… [name], what did you come home for? Got bored of your insipid slaves?</i>\"\n\n");
 			menu();
 			addButton(0, "Talk", demonLairTalkMainMenu);
-			addButton(14, "Only visiting", explorer.done);
+			addButton(14, "Only visiting", demonLairOnlyVisiting);
 		}
 		
 		private function demonLairTalkMainMenu():void {
@@ -320,6 +320,8 @@ public class DemonLair extends BaseContent
 			addButton(0, "Him", demonLairTalkHim);
 			addButton(1, "Harem", demonLairTalkHarem);
 			addButton(2, "His position", demonLairTalkHisPosition);
+			addButton(3, "Gifts", demonLairTalkGifts);
+			//addButton(4, "Other girls", demonLairTalkOtherGirls);
 			addButton(14, "Back", demonLairMainMenu);
 		}
 		private function demonLairTalkHim():void {
@@ -353,12 +355,82 @@ public class DemonLair extends BaseContent
 			doNext(demonLairTalkMainMenu);
 			advanceMinutes(5);
 		}
+		private function demonLairTalkGifts():void {
+			clearOutput();
+			menu();
+			outputText("You tell Xuviel you would like a gift. ");
+			if (player.hasStatusEffect(StatusEffects.MeetXuviel2)) {
+				outputText("Xuviel responds in the negative.\n\n");
+				outputText("\"<i>I’m sorry [name] but to avoid causing jealousy across my harem I only give one gift per month. Ask again in a while and we'll see.</i>\"\n\n");
+				addButtonDisabled(1, "Gift of wealth", "Gift of wealth");
+				addButtonDisabled(2, "Gift of power", "Gift of power");
+				//addButtonDisabled(3, "Gift of authority", "Gift of authority");
+			}
+			else {
+				outputText("He nods, acknowledging your request.\n\n");
+				outputText("\"<i>Sure, my dear. Would you like wealth, power, or perhaps slaves to entertain you?</i>\"\n\n");
+				addButton(1, "Gift of wealth", demonLairTalkGiftOfWealth).hint("Gain gems.");
+				addButton(2, "Gift of power", demonLairTalkGiftOfPower).hint("Increases all trainable stats by 10 points. (up to cap)");
+				//addButton(3, "Gift of authority", demonLairTalkGiftOfAuthority).hint("");
+			}
+			addButton(14, "Back", demonLairTalkMainMenu);
+		}
+		private function demonLairTalkGiftOfWealth():void {
+			clearOutput();
+			outputText("You could use some spare money right now for your expenses and so you make it clear to him. Xuviel sighs and waves a finger at one of the succubi, making her fly to a different room and coming back with a chest packed full of gems.\n\n");
+			outputText("\"<i>Here’s your spare change. Try not to spend it all in a day…</i>\"\n\n");
+			var giftofwealth:Number = 500 + rand(501);
+			outputText("<b>You " + (silly()?"pass go and ":"") + "collect " + giftofwealth + " gems!</b>\n\n");
+			player.gems += giftofwealth;
+			player.createStatusEffect(StatusEffects.MeetXuviel2, 567, 0, 0, 0);
+			statScreenRefresh();
+			doNext(demonLairTalkMainMenu);
+			advanceMinutes(10);
+		}
+		private function demonLairTalkGiftOfPower():void {
+			clearOutput();
+			outputText("If he's that strong why doesn't he share some of that power to you.\n\n");
+			outputText("Xuviel sighs and brings you in for a kiss. You can feel the energy and raw corruption flow through your lips as you exchange saliva with him. How thoughtful of him.\n\n");
+			outputText("\"<i>Hope you are satisfied, because I’m not sharing again for a full month.</i>\"\n\n");
+			outputText("Your corrupted body indeed responds to his fluids, growing stronger.\n\n");
+			player.trainStat("str",10,player.trainStatCap("str",100));
+			player.trainStat("tou",10,player.trainStatCap("tou",100));
+			player.trainStat("spe",10,player.trainStatCap("spe",100));
+			player.trainStat("int",10,player.trainStatCap("int",100));
+			player.trainStat("wis",10,player.trainStatCap("wis",100));
+			player.trainStat("lib",10,player.trainStatCap("lib",100));
+			player.createStatusEffect(StatusEffects.MeetXuviel2, 567, 0, 0, 0);
+			statScreenRefresh();
+			doNext(demonLairTalkMainMenu);
+			advanceMinutes(10);
+		}
+		private function demonLairTalkGiftOfAuthority():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+			menu();
+			addButton(14, "Back", demonLairTalkMainMenu);
+		}
+		private function demonLairTalkOtherGirls():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+			outputText("\"<i></i>\"\n\n");
+			outputText("\"<i></i>\"\n\n");
+			outputText("\"<i></i>\"\n\n");
+			doNext(demonLairTalkMainMenu);
+			advanceMinutes(10);
+		}
 		
 		private function demonLairSexMainMenu():void {
 			clearOutput();
 			outputText("\"<i></i>\"\n\n");
 			menu();
 			addButton(14, "Back", demonLairMainMenu);
+		}
+		
+		private function demonLairOnlyVisiting():void {
+			clearOutput();
+			outputText("You are only here to say hi to your beloved, a short visit it may be. You tell Xuviel of your latest accomplishment, regaling him with your story before departing, you have more misdeeds to do yet.\n\n");
+			doNext(explorer.done);
 		}
 	}
 }
