@@ -2672,12 +2672,21 @@ public class SaveUpdater extends NPCAwareContent {
 					outputText("\n\nOnly today promotion for Wood Elfs. TWO perks in price of ONE!!!");
 					player.createPerk(PerkLib.CovenantOfTheSpirits, 0, 0, 0, 0);
 				}
-			}/*
+			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.54) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.54;
-			}
+				outputText("\n\nYou need to re-evaluate difficulty setting due to overhaul of difficulty calculations and changes to hardcore option.");
+				flags[kFLAGS.HUNGER_ENABLED] = 0;
+				flags[kFLAGS.HARDCORE_MODE] = 0;
+				flags[kFLAGS.SECONDARY_STATS_SCALING] = 0;
+				flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] = 0;
+				flags[kFLAGS.GAME_DIFFICULTY] == 0;
+			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.55) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.55;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.56) {
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.56;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.60) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.60;

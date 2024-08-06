@@ -114,7 +114,7 @@ use namespace CoC;
 					kind  : 'monster',
 					night : false,
 					when: function ():Boolean {
-						return player.level >= 3 && flags[kFLAGS.SAND_WITCH_LEAVE_ME_ALONE] == 0;
+						return (player.level >= 3 || flags[kFLAGS.HARDCORE_MODE] == 1) && flags[kFLAGS.SAND_WITCH_LEAVE_ME_ALONE] == 0;
 					},
 					call: sandWitchScene.encounter
 				}, {
@@ -150,7 +150,7 @@ use namespace CoC;
 					unique: true,
 					night : false,
 					when  : function ():Boolean {
-						return player.level >= 9 && flags[kFLAGS.ANT_WAIFU] == 0 && flags[kFLAGS.ANTS_PC_FAILED_PHYLLA] == 0 && flags[kFLAGS.ANT_COLONY_KEPT_HIDDEN] == 0;
+						return (player.level >= 9 || flags[kFLAGS.HARDCORE_MODE] == 1) && flags[kFLAGS.ANT_WAIFU] == 0 && flags[kFLAGS.ANTS_PC_FAILED_PHYLLA] == 0 && flags[kFLAGS.ANT_COLONY_KEPT_HIDDEN] == 0;
 					},
 					chance: phyllaAnthillChance,
 					call  : antsScene.antColonyEncounter
@@ -160,7 +160,7 @@ use namespace CoC;
 					kind  : 'place',
 					unique: true,
 					when: function ():Boolean {
-						return (player.level >= 4 || timesExploredOuter() > 45)
+						return (player.level >= 4 || flags[kFLAGS.HARDCORE_MODE] == 1 || timesExploredOuter() > 45)
 							   && flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] == 0;
 					},
 					call: SceneLib.dungeons.desertcave.enterDungeon
@@ -179,7 +179,7 @@ use namespace CoC;
 					kind  : 'item',
 					unique: true,
 					when: function ():Boolean {
-						return player.level >= 6 && player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) == 0 && player.hasKeyItem("Desert Eagle") < 0;
+						return (player.level >= 6 || flags[kFLAGS.HARDCORE_MODE] == 1) && player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) == 0 && player.hasKeyItem("Desert Eagle") < 0;
 					},
 					chance: 30,
 					call: partsofDesertEagle
@@ -241,7 +241,7 @@ use namespace CoC;
 					chance: desertChance,
 					when: function ():Boolean
 					{
-						return (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && (player.level >= 20));
+						return (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && (player.level >= 20 || flags[kFLAGS.HARDCORE_MODE] == 1));
 					},
 					call: SceneLib.etnaScene.repeatYandereEnc
 				}, {
@@ -325,7 +325,7 @@ use namespace CoC;
 					chance: desertChance,
 					when: function ():Boolean
 					{
-						return (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && (player.level >= 20));
+						return (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && (player.level >= 20 || flags[kFLAGS.HARDCORE_MODE] == 1));
 					},
 					call: SceneLib.etnaScene.repeatYandereEnc
 				}, {
@@ -345,7 +345,7 @@ use namespace CoC;
 					unique: true,
 					night : false,
 					when: function():Boolean {
-						return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && flags[kFLAGS.ELECTRA_AFFECTION] >= 2 && !player.hasStatusEffect(StatusEffects.ElectraOff) && (player.level >= 20);
+						return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && flags[kFLAGS.ELECTRA_AFFECTION] >= 2 && !player.hasStatusEffect(StatusEffects.ElectraOff) && (player.level >= 20 || flags[kFLAGS.HARDCORE_MODE] == 1);
 					},
 					chance: desertChance,
 					call: function ():void {

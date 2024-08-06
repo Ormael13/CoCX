@@ -108,7 +108,7 @@ public class Bog extends BaseContent
 					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
 							&& flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
 							&& !player.hasStatusEffect(StatusEffects.EtnaOff)
-							&& (player.level >= 20);
+							&& (player.level >= 20 || flags[kFLAGS.HARDCORE_MODE] == 1);
 				},
 				chance: bogChance,
 				call: SceneLib.etnaScene.repeatYandereEnc

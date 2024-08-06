@@ -2871,7 +2871,9 @@ use namespace CoC;
 			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) damageMultiplier *= 1.2;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) damageMultiplier *= 1.5;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) damageMultiplier *= 2;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) damageMultiplier *= 3.5;
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 4) damageMultiplier *= 3.5;
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 5) damageMultiplier *= 3.5;
+			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 6) damageMultiplier *= 3.5;
 			return damage * damageMultiplier;
 		}
 		public function takeDamage(damage:Number, damagetype:Number = 0, display:Boolean = false, hit:Number = 1):Number{

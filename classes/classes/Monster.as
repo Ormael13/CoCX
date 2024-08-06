@@ -1345,6 +1345,8 @@ import classes.Scenes.Combat.CombatAbilities;
 			if (flags[kFLAGS.GAME_DIFFICULTY] == 2) baseMonXP += this.level * 2.5;
 			if (flags[kFLAGS.GAME_DIFFICULTY] == 3) baseMonXP += this.level * 5;
 			if (flags[kFLAGS.GAME_DIFFICULTY] == 4) baseMonXP += this.level * 7.5;
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 5) baseMonXP += this.level * 7.5;
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 6) baseMonXP += this.level * 7.5;
 			if (this.level < 7) baseMonXP += (this.level * 5) + rand(this.level * 5);
 			else baseMonXP += rand(this.level * 5);
 			return baseMonXP;
@@ -3371,10 +3373,6 @@ import classes.Scenes.Combat.CombatAbilities;
 					healingPercent += 20;
 					if (perkv1(IMutationsLib.FerasBirthrightIM) >= 4) healingPercent += 10;
 				}
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp3 += 0.05;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp3 += 0.15;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp3 += 0.25;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) temp3 += 0.55;
 				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) {
 					if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp3 += 0.05;
 					if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp3 += 0.12;

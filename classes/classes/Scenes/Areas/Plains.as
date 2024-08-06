@@ -71,7 +71,7 @@ use namespace CoC;
 					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
 						   && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
 						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
-						   && (player.level >= 20);
+						   && (player.level >= 20 || flags[kFLAGS.HARDCORE_MODE] == 1);
 				},
 				chance: plainsChance,
 				call: SceneLib.etnaScene.repeatYandereEnc
@@ -82,7 +82,7 @@ use namespace CoC;
 				unique: true,
 				night : false,
 				when: function():Boolean {
-					return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && flags[kFLAGS.ELECTRA_AFFECTION] >= 2 && !player.hasStatusEffect(StatusEffects.ElectraOff) && (player.level >= 20);
+					return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && flags[kFLAGS.ELECTRA_AFFECTION] >= 2 && !player.hasStatusEffect(StatusEffects.ElectraOff) && (player.level >= 20 || flags[kFLAGS.HARDCORE_MODE] == 1);
 				},
 				chance: plainsChance,
 				call: function ():void {

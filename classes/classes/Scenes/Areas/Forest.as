@@ -401,7 +401,7 @@ use namespace CoC;
 						call  : SceneLib.woodElves.findElves,
 						chance: 0.5,
 						when  : function ():Boolean {
-							return WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_NOT_STARTED && player.level >= 10 && !player.blockingBodyTransformations()
+							return WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_NOT_STARTED && (player.level >= 10 || flags[kFLAGS.HARDCORE_MODE] == 1) && !player.blockingBodyTransformations()
 						}
 					}, {
 						name  : "WoodElfRematch",
@@ -412,7 +412,7 @@ use namespace CoC;
 						call  : SceneLib.woodElves.findElvesRematch,
 						chance: 0.75,
 						when  : function ():Boolean {
-							return WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_METELFSANDEVENBEATSTHEM && player.level >= 10 && !player.blockingBodyTransformations()
+							return WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_METELFSANDEVENBEATSTHEM && (player.level >= 10 || flags[kFLAGS.HARDCORE_MODE] == 1) && !player.blockingBodyTransformations()
 						}
 					}, {
 						name  : "chitin",
@@ -576,7 +576,7 @@ use namespace CoC;
 				kind  : 'npc',
 				unique: true,
 				when: function():Boolean {
-					return flags[kFLAGS.AYANE_FOLLOWER] < 2 && player.level >= 20 && !player.isRace(Races.KITSUNE) && !player.isRace(Races.KITSHOO);
+					return flags[kFLAGS.AYANE_FOLLOWER] < 2 && (player.level >= 20 || flags[kFLAGS.HARDCORE_MODE] == 1) && !player.isRace(Races.KITSUNE) && !player.isRace(Races.KITSHOO);
 				},
 				chance: forestChance,
 				call: SceneLib.ayaneFollower.randomEncounter
@@ -599,7 +599,7 @@ use namespace CoC;
 					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
 						   && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
 						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
-						   && (player.level >= 20);
+						   && (player.level >= 20 || flags[kFLAGS.HARDCORE_MODE] == 1);
 				},
 				call  : SceneLib.etnaScene.repeatYandereEnc
 			}, {
@@ -612,7 +612,7 @@ use namespace CoC;
 					return flags[kFLAGS.ELECTRA_FOLLOWER] < 2
 						   && flags[kFLAGS.ELECTRA_AFFECTION] >= 2
 						   && !player.hasStatusEffect(StatusEffects.ElectraOff)
-						   && (player.level >= 20);
+						   && (player.level >= 20 || flags[kFLAGS.HARDCORE_MODE] == 1);
 				},
 				chance: forestChance,
 				call  : function ():void {
@@ -777,7 +777,7 @@ use namespace CoC;
 				unique: true,
 				call: aikoScene.encounterAiko,
 				when: function ():Boolean {
-					return (player.level > 35
+					return ((player.level > 35 || flags[kFLAGS.HARDCORE_MODE] == 1)
 						&& flags[kFLAGS.AIKO_TIMES_MET] < 4
 						&& flags[kFLAGS.AIKO_BALL_RETURNED] != 2);
 				}

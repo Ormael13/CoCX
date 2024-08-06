@@ -89,7 +89,7 @@ import classes.Scenes.SceneLib;
 				},
 				chance: beachChance,
 				when  : function():Boolean {
-					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2) && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && (player.level >= 20);
+					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2) && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && (player.level >= 20 || flags[kFLAGS.HARDCORE_MODE] == 1);
 				}
 			}, {
 				// Ceani

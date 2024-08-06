@@ -969,7 +969,7 @@ public class Exploration extends BaseContent implements SaveableState
 						label: "Feral Imp",
 						kind: "monster",
 						when: function():Boolean {
-							return player.level >= 3 || player.statusEffectv2(StatusEffects.AdventureGuildQuests2) > 0
+							return player.level >= 3 || flags[kFLAGS.HARDCORE_MODE] == 1 || player.statusEffectv2(StatusEffects.AdventureGuildQuests2) > 0
 						},
 						call: feralImpEncounter,
 						mods: [impFactor, feralImpFactor]
@@ -1149,7 +1149,7 @@ public class Exploration extends BaseContent implements SaveableState
 						unique: true,
 						chance: 2,
 						when  : function ():Boolean {
-							return player.level > 0 && (
+							return (player.level > 0 || flags[kFLAGS.HARDCORE_MODE] == 1) && (
 									EvangelineFollower.EvangelineAffectionMeter < 1
 									|| (EvangelineFollower.EvangelineAffectionMeter == 1 || EvangelineFollower.EvangelineAffectionMeter == 2) && player.statusEffectv1(StatusEffects.TelAdre) >= 1 && flags[kFLAGS.HEXINDAO_UNLOCKED] >= 1)
 						},
@@ -1166,7 +1166,7 @@ public class Exploration extends BaseContent implements SaveableState
 						unique: true,
 						chance: 1,
 						when  : function ():Boolean {
-							return player.level > 2 && player.hasKeyItem("Sky Poison Pearl") < 0 && flags[kFLAGS.SKY_POISON_PEARL] < 1;
+							return (player.level > 2 || flags[kFLAGS.HARDCORE_MODE] == 1) && player.hasKeyItem("Sky Poison Pearl") < 0 && flags[kFLAGS.SKY_POISON_PEARL] < 1;
 						},
 						call  : pearldiscovery
 					}, {
@@ -1175,7 +1175,7 @@ public class Exploration extends BaseContent implements SaveableState
 						kind  : "place",
 						unique: true,
 						when  : function ():Boolean {
-							return player.level > 5 && flags[kFLAGS.HIDDEN_CAVE_FOUND] < 1
+							return (player.level > 5 || flags[kFLAGS.HARDCORE_MODE] == 1) && flags[kFLAGS.HIDDEN_CAVE_FOUND] < 1
 						},
 						call  : hiddencavediscovery
 					}, {
@@ -1193,7 +1193,7 @@ public class Exploration extends BaseContent implements SaveableState
 						kind  : "item",
 						unique: true,
 						when  : function ():Boolean {
-							return player.level >= 9 && player.hasKeyItem("Pocket Watch") < 0
+							return (player.level >= 9 || flags[kFLAGS.HARDCORE_MODE] == 1) && player.hasKeyItem("Pocket Watch") < 0
 									&& (!player.hasStatusEffect(StatusEffects.PocketWatch) || player.superPerkPoints > 0)
 						},
 						call  : pocketwatchdiscovery
@@ -1364,11 +1364,11 @@ public class Exploration extends BaseContent implements SaveableState
 			}
 			explorer.skillBasedReveal(1, SceneLib.exploration.counters.explore);
 			explorer.doExplore();
-/*			if (player.level > 5 && flags[kFLAGS.RYUBI_LVL_UP] < 1 && rand(4) == 0) {
+/*			if ((player.level > 5 || flags[kFLAGS.HARDCORE_MODE] == 1) && flags[kFLAGS.RYUBI_LVL_UP] < 1 && rand(4) == 0) {
 				ryubifirstenc();
 				return;
 			}
-			if (player.level > 5 && flags[kFLAGS.RYUBI_LVL_UP] >= 1 && rand(4) == 0) {
+			if ((player.level > 5 || flags[kFLAGS.HARDCORE_MODE] == 1) && flags[kFLAGS.RYUBI_LVL_UP] >= 1 && rand(4) == 0) {
 				ryubirepenc();
 				return;
 			}
@@ -1384,7 +1384,7 @@ public class Exploration extends BaseContent implements SaveableState
 					return;
 				}
 				//Discover Pit
-				if (flags[kFLAGS.] > 0 && flags[kFLAGS.] <= 0 && ((rand(3) == 0 && player.level >= 16) || player.level >= 21)) {
+				if (flags[kFLAGS.] > 0 && flags[kFLAGS.] <= 0 && ((rand(3) == 0 && player.level >= 16) || player.level >= 21 || flags[kFLAGS.HARDCORE_MODE] == 1)) {
 					flags[kFLAGS.] = 1;
 					clearOutput();
 					outputText("You walk \n\n");

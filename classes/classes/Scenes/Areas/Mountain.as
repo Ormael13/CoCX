@@ -123,7 +123,7 @@ public class Mountain extends BaseContent
 				when  : function():Boolean {
 					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
 						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
-						   && (player.level >= 20);
+						   && (player.level >= 20 || flags[kFLAGS.HARDCORE_MODE] == 1);
 				},
 				chance: mountainChance,
 				call  : function ():void {
@@ -139,7 +139,7 @@ public class Mountain extends BaseContent
 				when  : function():Boolean {
 					return (flags[kFLAGS.ETNA_FOLLOWER] >= 2 && EtnaFollower.EtnaInfidelity == 0)
 						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
-						   && (player.level >= 20);
+						   && (player.level >= 20 || flags[kFLAGS.HARDCORE_MODE] == 1);
 				},
 				chance: mountainChance,
 				call  : function ():void {
@@ -153,7 +153,7 @@ public class Mountain extends BaseContent
 				when  : function():Boolean {
 					return (flags[kFLAGS.ETNA_FOLLOWER] >= 2 && EtnaFollower.EtnaInfidelity == 1)
 						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
-						   && (player.level >= 20);
+						   && (player.level >= 20 || flags[kFLAGS.HARDCORE_MODE] == 1);
 				},
 				chance: 0.5,
 				call  : function ():void {
@@ -830,7 +830,7 @@ public class Mountain extends BaseContent
 					return;
 				}
 				//Rare Minotaur Lord
-				if (rand(5) == 0 && player.level >= 10) {
+				if (rand(5) == 0 && (player.level >= 10 || flags[kFLAGS.HARDCORE_MODE] == 1)) {
 					if (player.isRaceCached(Races.CERBERUS)) {
 						minotaurScene.minotaurEncounterAsCerberus(true);
 						return;

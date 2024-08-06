@@ -104,28 +104,83 @@ public class GameSettings extends BaseContent {
 
 		outputText("\n\n");
 		if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) {
-			outputText("Difficulty: [font-olive]<b>Normal</b>[/font]\n No opponent(s) stats modifiers. You can resume from bad-ends with penalties. No penatlies for too high wrath.");
+			outputText("Difficulty: [font-olive]<b>Easy</b>[/font]\n No opponent(s) stats modifiers. You can resume from bad-ends with penalties. No penatlies for too high wrath. Internal mutation negative effects will be triggered after accumulating 11 points in internal mutation score.");
 		}
 		else if (flags[kFLAGS.GAME_DIFFICULTY] == 1) {
-			outputText("Difficulty: <b>[font-dred]Hard[/font]</b>\n Opponent(s) take 2x less HP/Lust dmg, deal 20% more damage and gives ~20% more EXP. No penatlies for too high wrath. Bad-ends can ruin your game.");
+			outputText("Difficulty: <b>[font-dred]Normal[/font]</b>\n Opponent(s) take 2x less HP/Lust dmg, deal 20% more damage and gives ~20% more EXP. No penatlies for too high wrath. Bad-ends can ruin your game. Internal mutation negative effects will be triggered after accumulating 6 points in internal mutation score.");
 		}
 		else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) {
-			outputText("Difficulty: <b>[font-red]Nightmare[/font]</b>\n Opponent(s) take 5x less HP/Lust dmg, deal 50% more damage and gives ~50% more EXP.");
+			outputText("Difficulty: <b>[font-red]Hard[/font]</b>\n Opponent(s) take 5x less HP/Lust dmg, deal 50% more damage and gives ~50% more EXP." +
+					" If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately.");
 		}
 		else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) {
-			outputText("Difficulty: <b>[font-lred]Extreme[/font]</b>\n Opponent(s) take 10x less HP/Lust dmg," +
-					" deal more 100% damage and gives ~100% more EXP.");
+			outputText("Difficulty: <b>[font-lred]Nightmare[/font]</b>\n Opponent(s) take 10x less HP/Lust dmg, deal more 100% damage and gives ~100% more EXP." +
+					" If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately.");
 		}
-		else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) {
-			outputText("Difficulty: <b>[font-pink]Xianxia MC[/font]</b>\n Opponent(s) take 25x less HP/Lust dmg, deal" +
-					" more 250% damage and gives ~150% more EXP.");
+		else if (flags[kFLAGS.GAME_DIFFICULTY] == 4) {
+			outputText("Difficulty: <b>[font-pink]Extreme[/font]</b>\n Opponent(s) take 25x less HP/Lust dmg, deal more 250% damage and gives ~150% more EXP." +
+					" If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately.");
+		}
+		else if (flags[kFLAGS.GAME_DIFFICULTY] == 5) {
+			outputText("Difficulty: <b>[font-pink]Inferno[/font]</b>\n Opponent(s) take 25x less HP/Lust dmg, deal more 250% damage and gives ~150% more EXP." +
+					" If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately.");
+		}
+		else if (flags[kFLAGS.GAME_DIFFICULTY] >= 6) {
+			outputText("Difficulty: <b>[font-pink]Xianxia MC[/font]</b>\n Opponent(s) take 25x less HP/Lust dmg, deal more 250% damage and gives ~150% more EXP." +
+					" If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately.");
+		}
+		outputText("\n\n");
+		if (flags[kFLAGS.HUNGER_ENABLED] == 0) {
+			outputText("Hunger Modifier: <b>[font-olive]Disabled[/font]</b>");
+		}
+		else if (flags[kFLAGS.HUNGER_ENABLED] == 1) {
+			outputText("Hunger Modifier: <b>[font-red]Enabled[/font]</b> (PC must manage his own hunger lest you want see his death from starvation)");
+		}
+		outputText("\n\n");
+		if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 0) {
+			outputText("Secondary Stats Modifier: [font-olive]<b>Normal</b>[/font]\n No opponent secondary stats modifiers.");
+		}
+		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) {
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) outputText("Secondary Stats Modifier: <b>[font-dred]Hard[/font]</b>\n Opponent has 10x (bosses) and 5x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) {
+				outputText("Secondary Stats Modifier: <b>[font-red]Nightmare[/font]</b>\n Opponent has 40x (bosses)" +
+						" and 10x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			}
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) {
+				outputText("Secondary Stats Modifier: <b>[font-lred]Extreme[/font]</b>\n Opponent has 200x (bosses)" +
+						" and 25x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			}
+			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) {
+				outputText("Secondary Stats Modifier: <b>[font-pink]Xianxia[/font]</b>\n Opponent has 1600x (bosses)" +
+						" and 100x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			}
+		}
+		outputText("\n\n");
+		if (flags[kFLAGS.HARDCORE_MODE] == 0) {
+			outputText("Hardcore Modifier: <b>[font-olive]Disabled[/font]</b>");
+		}
+		else if (flags[kFLAGS.HARDCORE_MODE] == 1) {
+			outputText("Hardcore Modifier: <b>[font-red]Enabled[/font]</b> (No level limits for unlocking new areas)");
+		}
+		outputText("\n\n");
+		if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 0) {
+			outputText("Elite/Champion/Boss Modifier: [font-olive]<b>Normal</b>[/font]\n No HP modifiers");
+		}
+		else if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 1) {
+			outputText("Elite/Champion/Boss Modifier: <b>[font-dred]Fantasy[/font]</b>\n 1.25x / 2.5x / 5x HP modifiers");
+		}
+		else if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 2) {
+			outputText("Elite/Champion/Boss Modifier: <b>[font-red]Infernium[/font]</b>\n 2.5x / 5x / 10x HP modifier");
+		}
+		else if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] >= 3) {
+			outputText("Elite/Champion/Boss Modifier: <b>[font-lred]HELL[/font]</b>\n 3.75x / 7.5x / 15x HP modifier");
 		}
 		outputText("\n\n");
 		if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) {
-			outputText("Easy Mode: [font-green]<b>ON</b>[/font]\n Bad-ends can be ignored and combat is so super easy that even CoC Vanilla and CoC2 devs can breeze it with one hand ^^ (dmg monsters deal is 10x lower, no scaling of some of their combat stats and no penalty for level difference)");
+			outputText("Easier Mode: [font-green]<b>ON</b>[/font]\n Bad-ends can be ignored and combat is so super easy that even CoC Vanilla and CoC2 devs can breeze it with one hand ^^ (dmg monsters deal is 10x lower, no scaling of some of their combat stats and no penalty for level difference)");
 		}
 		else {
-			outputText("Easy Mode: [font-dred]<b>OFF</b>[/font]\n Bad-ends can ruin your game and combat is back to what it should be.");
+			outputText("Easier Mode: [font-dred]<b>OFF</b>[/font]\n Bad-ends can ruin your game and combat is back to what it should be.");
 		}
 		outputText("\n\n");
 		if (daysPerYear_temp == 0) {
@@ -150,36 +205,29 @@ public class GameSettings extends BaseContent {
 		addButton(3, "Hyper Happy", toggleFlag, kFLAGS.HYPER_HAPPY, settingsScreenGameSettings);
 		addButton(4, "Auto level", toggleFlag, kFLAGS.AUTO_LEVEL, settingsScreenGameSettings).hint("Toggles automatic leveling when you accumulate sufficient experience.");
 		if (player) {
-			addButton(5, "Difficulty", difficultySelectionMenu).hint("Adjust the game difficulty to make it easier or harder.");
-			if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) addButton(6, "Easy Mode", toggleFlag, kFLAGS.EASY_MODE_ENABLE_FLAG, settingsScreenGameSettings).hint("Toggles easy mode.  Enemy damage is 10% of normal and bad-ends can be ignored.");
-			else addButtonDisabled(6, "Easy Mode", "Diffulty setting is too high to allow toggle easy mode.");
-			addButton(7, "Enable Surv", enableSurvivalPrompt).hint("Enable Survival mode. This will enable hunger." +
-					" \n\n<b>[font-lred]Note: This is permanent and cannot be turned off![/font]</b>");
-			addButton(8, "Enable Real", enableRealisticPrompt).hint("Enable Realistic mode. This will make the game" +
-					" a bit realistic. \n\n<b>[font-lred]Note: This is permanent and cannot be turned off!" +
-					" Do not turn this on if you have hyper endowments.[/font]</b>");
-			addButton(9, "Fetishes", fetishSubMenu).hint("Toggle some of the weird fetishes such as watersports and worms.");
-			addButton(10, "Timescale", timescaleCycle).hint("Change the way how time and date work in the game.");
+			if (flags[kFLAGS.HUNGER_ENABLED] != 1) addButton(5, "Hunger+", enableHungerModifierForReal);
+			else addButton(5, "Hunger-", disableHungerModifierForReal);
+			addButton(6, "Sec.Mon.Stat", difficultySelectionMenu2).hint("Adjusts monsters secondary stats multiplier to make game easier or harder.");
+			if (flags[kFLAGS.HARDCORE_MODE] != 1) addButton(7, "Hardcore+", enableHardcoreModifierForReal);
+			else addButton(7, "Hardcore-", disableHardcoreModifierForReal);
+			addButton(8, "Fetishes", fetishSubMenu).hint("Toggle some of the weird fetishes such as watersports and worms.");
+			addButton(9, "Timescale", timescaleCycle).hint("Change the way how time and date work in the game.");
+			addButton(10, "E/Ch/B.Mon.Stat", difficultySelectionMenu3).hint("Adjusts elite/champion/boss monsters HP multiplier to make game easier or harder.");
+			//12
+			//13
+			if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) addButton(13, "Easier Mode", toggleFlag, kFLAGS.EASY_MODE_ENABLE_FLAG, settingsScreenGameSettings).hint("Toggles easier than easy mode. Enemy damage is 10% of normal and bad-ends can be ignored.");
+			else addButtonDisabled(13, "Easier Mode", "Diffulty setting is too high to allow toggle easy mode.");
 		}
 		else {
-			addButtonDisabled(5, "Difficulty", "Requires a loaded save.");
-			addButtonDisabled(6, "Easy Mode", "Requires a loaded save.");
-			addButtonDisabled(7, "Enable Surv", "Requires a loaded save.");
-			addButtonDisabled(8, "Enable Real", "Requires a loaded save.");
-			addButtonDisabled(9, "Fetishes", "Requires a loaded save.");
-			addButtonDisabled(10, "Timescale", "Requires a loaded save.");
-		}
-		if (flags[kFLAGS.HARDCORE_MODE] > 0) {
-			removeButton(0);
-			removeButton(2);
-			removeButton(3);
-			removeButton(5);
-		}
-		if (flags[kFLAGS.HUNGER_ENABLED] >= 0.5) {
-			removeButton(7);
-		}
-		if (flags[kFLAGS.HUNGER_ENABLED] >= 1) {
-			removeButton(8);
+			addButtonDisabled(5, "Hunger", "Requires a loaded save.");
+			addButtonDisabled(6, "Sec.Mon.Stat", "Requires a loaded save.");
+			addButtonDisabled(7, "Hardcore", "Requires a loaded save.");
+			addButtonDisabled(8, "Fetishes", "Requires a loaded save.");
+			addButtonDisabled(9, "Timescale", "Requires a loaded save.");
+			addButtonDisabled(10, "E/Ch/B.Mon.Stat", "Requires a loaded save.");
+			//addButtonDisabled(11, "", "Requires a loaded save.");
+			//addButtonDisabled(12, "", "Requires a loaded save.");
+			addButtonDisabled(13, "Easier Mode", "Requires a loaded save.");
 		}
 		addButton(14, "Back", settingsScreenMain);
 
@@ -551,35 +599,6 @@ public class GameSettings extends BaseContent {
 	public function settingsScreenGameSettings2():void {
 		clearOutput();
 		displayHeader("Gameplay Settings");
-		if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 0) {
-			outputText("Secondary Stats Modifier: [font-olive]<b>Normal</b>[/font]\n No opponent secondary stats modifiers.");
-		}
-		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) {
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) outputText("Secondary Stats Modifier: <b>[font-dred]Hard[/font]</b>\n Opponent has 10x (bosses) and 5x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) {
-				outputText("Secondary Stats Modifier: <b>[font-red]Nightmare[/font]</b>\n Opponent has 40x (bosses)" +
-						" and 10x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
-			}
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) {
-				outputText("Secondary Stats Modifier: <b>[font-lred]Extreme[/font]</b>\n Opponent has 200x (bosses)" +
-						" and 25x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
-			}
-			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) {
-				outputText("Secondary Stats Modifier: <b>[font-pink]Xianxia[/font]</b>\n Opponent has 1600x (bosses)" +
-						" and 100x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
-			}
-		}
-		outputText("\n\n");
-		if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 0) {
-			outputText("Elite/Champion/Boss HP bonus: [font-olive]<b>Normal</b>[/font]\n No HP modifiers.\n");
-		}
-		else if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 1) {
-			outputText("Elite/Champion/Boss HP bonus: <b>[font-dred]Fantasy[/font]</b>\n 1.25x / 2.5x / 5x HP modifiers.");
-		}
-		else if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] >= 2) {
-			outputText("Elite/Champion/Boss HP bonus: <b>[font-red]Infernium[/font]</b>\n 2.5x / 5x / 10x HP modifiers.");
-		}
-		outputText("\n\n");
 		if (flags[kFLAGS.STRENGTH_SCALING] >= 1) {
 			outputText("Strength Scaling: [font-green]<b>New</b>[/font]\n Values are less random and a bit higher on average than in old scaling.");
 		}
@@ -613,8 +632,6 @@ public class GameSettings extends BaseContent {
 		menu();
 
 		addButton(0, "Eternal Holiday", toggleFlag, kFLAGS.ITS_EVERY_DAY, settingsScreenGameSettings2).hint("Toggles eternal holiday mode. All holiday events like Eastern/X-mas and etc. can happen at any day of the year.");
-		addButton(1, "Sec.Mon.Stat", difficultySelectionMenu2).hint("Adjusts monsters secondary stats multiplier to make game easier or harder.");
-		addButton(2, "E/Ch/B.Mon.Stat", difficultySelectionMenu3).hint("Adjusts elite/champion/boss monsters HP multiplier to make game easier or harder.");
 		addButton(5, "Wis scaling", toggleFlag, kFLAGS.WISDOM_SCALING, settingsScreenGameSettings2).hint("Toggles Wisdom scaling for all attacks using it. If enabled, wisdom scaling would be less random with big generally a bit higher values on average.");
 		addButton(6, "Int scaling", toggleFlag, kFLAGS.INTELLIGENCE_SCALING, settingsScreenGameSettings2).hint("Toggles Intelligance scaling for all attacks using it. If enabled, intelligence scaling would be less random with values being a bit higher on average.");
 		addButton(7, "Str scaling", toggleFlag, kFLAGS.STRENGTH_SCALING, settingsScreenGameSettings2).hint("Toggles Strength scaling for all attacks using it. If enabled, strength scaling would be less random with values being a bit higher on average.");
@@ -732,60 +749,6 @@ public class GameSettings extends BaseContent {
 		settingsScreenGameSettings();
 	}
 
-	public function difficultySelectionMenu():void {
-		clearOutput();
-		outputText("You can choose a difficulty to set how hard battles will be.\n");
-		outputText("\n<b>Easy:</b> -50% damage, can ignore bad-ends.");
-		outputText("\n<b>Normal:</b> No stats changes.");
-		outputText("\n<b>Hard:</b> Opponent(s) take 2x less HP/Lust dmg, deal 20% more damage and gives ~20% more EXP.");
-		outputText("\n<b>Nightmare:</b> Opponent(s) take 5x less HP/Lust dmg, deal 50% more damage and gives ~50% more EXP.");
-		outputText("\n<b>Extreme:</b> Opponent(s) take 10x less HP/Lust dmg, deal more 100% damage and gives ~100% more EXP.");
-		outputText("\n<b>Xianxia:</b> Opponent(s) take 25x less HP/Lust dmg, deal more 250% damage and gives ~250% more EXP.");
-		menu();
-		addButton(0, "Normal", chooseDifficulty, 0);
-		addButton(1, "Hard", chooseDifficulty, 1);
-		addButton(2, "Nightmare", chooseDifficulty, 2);
-		addButton(3, "EXTREME", chooseDifficulty, 3);
-		addButton(4, "XIANXIA", chooseDifficulty, 4);
-		addButton(14, "Back", settingsScreenGameSettings);
-	}
-
-	public function chooseDifficulty(difficulty:int = 0):void {
-		flags[kFLAGS.GAME_DIFFICULTY] = difficulty;
-		settingsScreenGameSettings();
-	}
-
-//Survival Mode
-	public function enableSurvivalPrompt():void {
-		clearOutput();
-		outputText("Are you sure you want to enable Survival Mode?\n\n");
-		outputText("You will NOT be able to turn it off! (Unless you reload immediately.)");
-		doYesNo(enableSurvivalForReal, settingsScreenGameSettings);
-	}
-
-	public function enableSurvivalForReal():void {
-		clearOutput();
-		outputText("Survival mode is now enabled.");
-		player.hunger                = 80;
-		flags[kFLAGS.HUNGER_ENABLED] = 0.5;
-		doNext(settingsScreenGameSettings);
-	}
-
-//Realistic Mode
-	public function enableRealisticPrompt():void {
-		clearOutput();
-		outputText("Are you sure you want to enable Realistic Mode?\n\n");
-		outputText("You will NOT be able to turn it off! (Unless you reload immediately.)");
-		doYesNo(enableRealisticForReal, settingsScreenGameSettings);
-	}
-
-	public function enableRealisticForReal():void {
-		clearOutput();
-		outputText("Realistic mode is now enabled.");
-		flags[kFLAGS.HUNGER_ENABLED] = 1;
-		doNext(settingsScreenGameSettings);
-	}
-
 	public function fetishSubMenu():void {
 		menu();
 		addButton(0, "Watersports", toggleFlag, kFLAGS.WATERSPORTS_ENABLED, fetishSubMenu).hint("Toggles watersports scenes. (Scenes related to urine fetish)","Watersports "+(flags[kFLAGS.WATERSPORTS_ENABLED] < 1? "OFF" : "ON")); //Enables watersports.
@@ -835,25 +798,55 @@ public class GameSettings extends BaseContent {
 				Mindbreaker.MindBreakerQuest = Mindbreaker.QUEST_STAGE_MBOFF
 		fetishSubMenu();
 	}
+
+	public function enableHungerModifierForReal():void {
+		clearOutput();
+		outputText("Hunger modifier is now enabled.");
+		flags[kFLAGS.HUNGER_ENABLED] = 1;
+		flags[kFLAGS.GAME_DIFFICULTY] += 1;
+		doNext(settingsScreenGameSettings);
+	}
+	public function disableHungerModifierForReal():void {
+		clearOutput();
+		outputText("Hunger modifier is now enabled.");
+		flags[kFLAGS.HUNGER_ENABLED] = 0;
+		flags[kFLAGS.GAME_DIFFICULTY] -= 1;
+		doNext(settingsScreenGameSettings);
+	}
 	
 	public function difficultySelectionMenu2():void {
 		clearOutput();
 		outputText("You can enable / disable Secondary Stats Modifier.\n");
 		menu();
-		addButton(1, "Disable", chooseDifficulty2Off);
-		addButton(3, "Enable", chooseDifficulty2On);
-		addButton(14, "Back", settingsScreenGameSettings2);
+		if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 0) addButton(1, "Disable", chooseDifficulty2Off);
+		if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 1) addButton(3, "Enable", chooseDifficulty2On);
+		addButton(14, "Back", settingsScreenGameSettings);
 	}
 
 	public function chooseDifficulty2Off():void {
 		flags[kFLAGS.SECONDARY_STATS_SCALING] = 0;
 		flags[kFLAGS.GAME_DIFFICULTY] -= 1;
-		settingsScreenGameSettings2();
+		settingsScreenGameSettings();
 	}
 	public function chooseDifficulty2On():void {
 		flags[kFLAGS.SECONDARY_STATS_SCALING] = 1;
 		flags[kFLAGS.GAME_DIFFICULTY] += 1;
-		settingsScreenGameSettings2();
+		settingsScreenGameSettings();
+	}
+
+	public function enableHardcoreModifierForReal():void {
+		clearOutput();
+		outputText("Hardcore modifier is now enabled.");
+		flags[kFLAGS.HARDCORE_MODE] = 1;
+		flags[kFLAGS.GAME_DIFFICULTY] += 1;
+		doNext(settingsScreenGameSettings);
+	}
+	public function disableHardcoreModifierForReal():void {
+		clearOutput();
+		outputText("Hardcore modifier is now enabled.");
+		flags[kFLAGS.HARDCORE_MODE] = 0;
+		flags[kFLAGS.GAME_DIFFICULTY] -= 1;
+		doNext(settingsScreenGameSettings);
 	}
 	
 	public function difficultySelectionMenu3():void {
@@ -864,18 +857,18 @@ public class GameSettings extends BaseContent {
 		outputText("\n<b>Infernium:</b> 2.5x/5x/10x HP for elite/champion/boss monsters. (+1 diff modifier)");
 		outputText("\n<b>Hell:</b> 3.75x/7.5x/15x HP for elite/champion/boss monsters. (+1 diff modifier)");
 		menu();
-		addButton(0, "Normal", chooseDifficulty3, 0);
-		addButton(1, "Fantasy", chooseDifficulty3, 1);
-		addButton(2, "Infernium", chooseDifficulty3, 2);
-		addButton(3, "Hell", chooseDifficulty3, 3);
-		addButton(14, "Back", settingsScreenGameSettings2);
+		if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 0) addButton(0, "Normal", chooseDifficulty3, 0);
+		if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 1) addButton(1, "Fantasy", chooseDifficulty3, 1);
+		if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 2) addButton(2, "Infernium", chooseDifficulty3, 2);
+		if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 3) addButton(3, "Hell", chooseDifficulty3, 3);
+		addButton(14, "Back", settingsScreenGameSettings);
 	}
 
 	public function chooseDifficulty3(difficulty:int = 0):void {
 		if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 0) flags[kFLAGS.GAME_DIFFICULTY] += 1;
 		flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] = difficulty;
 		if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 0) flags[kFLAGS.GAME_DIFFICULTY] -= 1;
-		settingsScreenGameSettings2();
+		settingsScreenGameSettings();
 	}
 
 

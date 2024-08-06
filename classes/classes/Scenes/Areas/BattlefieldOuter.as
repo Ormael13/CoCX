@@ -64,7 +64,7 @@ public class BattlefieldOuter extends BaseContent
 			//Iridesian
 			name: "iridesian",
 			when: function ():Boolean {
-				return player.level >= 45
+				return (player.level >= 45 || flags[kFLAGS.HARDCORE_MODE] == 1)
 			},
 			call:SceneLib.iridesianFollower.firstMeetingIridesian
 		},*/ {
@@ -118,7 +118,7 @@ public class BattlefieldOuter extends BaseContent
 				return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
 						&& flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
 						&& !player.hasStatusEffect(StatusEffects.EtnaOff)
-						&& (player.level >= 20);
+						&& (player.level >= 20 || flags[kFLAGS.HARDCORE_MODE] == 1);
 			},
 			chance: battlefieldOuterChance,
 			call: SceneLib.etnaScene.repeatYandereEnc
