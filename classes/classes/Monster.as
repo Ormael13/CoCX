@@ -4299,19 +4299,24 @@ import classes.Scenes.Combat.CombatAbilities;
 			var damage1B:Number = 0;
 			//Snake Venom
         	if (hasStatusEffect(StatusEffects.NagaVenom)) {
-				statStore.addBuffObject({str:-statusEffectv1(StatusEffects.NagaVenom), spe:-statusEffectv1(StatusEffects.NagaVenom)}, "Poison",{text:"Poison"});
+				if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 2) touDmg += (tou * 0.01 * (player.perkv1(IMutationsLib.PoisonGlandIM) - 1));
+				statStore.addBuffObject({str:-statusEffectv1(StatusEffects.NagaVenom), spe:-statusEffectv1(StatusEffects.NagaVenom), tou:-touDmg}, "Poison",{text:"Poison"});
 				if (statusEffectv3(StatusEffects.NagaVenom) >= 1) venomLustDmg += statusEffectv3(StatusEffects.NagaVenom);
+				if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 4) teased(SceneLib.combat.teases.teaseBaseLustDamage() * lustVuln, false);
 			}
 			//Apophis Venom
         	if (hasStatusEffect(StatusEffects.ApophisVenom)) {
 				damage1B = SceneLib.combat.teases.teaseBaseLustDamage();
+				touDmg = statusEffectv1(StatusEffects.ApophisVenom) * 2;
+				if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 2) touDmg += (tou * 0.01 * (player.perkv1(IMutationsLib.PoisonGlandIM) - 1));
 				if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
 					damage1B *= 2;
 				}
 				venomLustDmg += damage1B;
 				SceneLib.combat.teaseXP(1 + SceneLib.combat.bonusExpAfterSuccesfullTease());
-				statStore.addBuffObject({str:-statusEffectv1(StatusEffects.ApophisVenom)*2, spe:-statusEffectv1(StatusEffects.ApophisVenom)*2, tou:-statusEffectv1(StatusEffects.ApophisVenom)*2}, "Poison",{text:"Poison"});
+				statStore.addBuffObject({str:-statusEffectv1(StatusEffects.ApophisVenom)*2, spe:-statusEffectv1(StatusEffects.ApophisVenom)*2, tou:-touDmg}, "Poison",{text:"Poison"});
 				if (statusEffectv3(StatusEffects.ApophisVenom) >= 1) venomLustDmg += statusEffectv3(StatusEffects.ApophisVenom);
+				if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 4) teased(SceneLib.combat.teases.teaseBaseLustDamage() * lustVuln, false);
 			}
 			//Bee Venom
         	if (hasStatusEffect(StatusEffects.BeeVenom)) {
@@ -4331,14 +4336,17 @@ import classes.Scenes.Combat.CombatAbilities;
 			//Jabberwocky Poison Breath
         	if (hasStatusEffect(StatusEffects.JabberwockyVenom)) {
 				damage1B = SceneLib.combat.teases.teaseBaseLustDamage();
+				touDmg = statusEffectv1(StatusEffects.JabberwockyVenom) * 2;
+				if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 2) touDmg += (tou * 0.01 * (player.perkv1(IMutationsLib.PoisonGlandIM) - 1));
 				if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
 					damage1B *= 2;
 				}
 				venomLustDmg += damage1B;
 				SceneLib.combat.teaseXP(1 + SceneLib.combat.bonusExpAfterSuccesfullTease());
 				if (lustVuln != 0) lustVuln += 0.05;
-				statStore.addBuffObject({tou:-statusEffectv1(StatusEffects.JabberwockyVenom)*2}, "Poison",{text:"Poison"});
+				statStore.addBuffObject({tou:-touDmg}, "Poison",{text:"Poison"});
 				if (statusEffectv3(StatusEffects.JabberwockyVenom) >= 1) venomLustDmg += statusEffectv3(StatusEffects.JabberwockyVenom);
+				if (player.perkv1(IMutationsLib.PoisonGlandIM) >= 4) teased(SceneLib.combat.teases.teaseBaseLustDamage() * lustVuln, false);
 			}
 			//Manticore Venom
        		if (hasStatusEffect(StatusEffects.ManticoreVenom)) {
