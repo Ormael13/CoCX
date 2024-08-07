@@ -927,6 +927,27 @@ public class Combat extends BaseContent {
 				bd.requireFatigue(10);
 			}
 		}
+		//Esper cool beans (start)
+		if (player.hasPerk(PerkLib.PsychicBarrier)) {
+			if (player.statStore.hasBuff("PsychoBarrier")) {
+				buttons.add("Psycho-Barrier/Off", deactivatePsychoBarrier).hint("Disperse Psycho-Barrier.");
+			} else {
+				bd = buttons.add("Psycho-Barrier/On", activatePsychoBarrier, "Cover yourself with Psycho-Barrier. (It would drain fatigue until dispersed)\n");
+				bd.requireFatigue(20);
+			}
+		}
+		if (player.hasPerk(PerkLib.PsychicBolt)) {
+			bd = buttons.add("Psychic Bolt", castPsychicBolt, "Attempt to attack the enemy with psychic bolt.  Damage done is determined by your sensitivity.\n");
+			bd.requireFatigue(10);
+		}
+		if (player.hasPerk(PerkLib.TelekineticGrapple) && !monster.hasStatusEffect(StatusEffects.TelekineticGrab)) {
+			bd = buttons.add("Telekinetic Grab", mspecials.TelekineticGrab, "Use telekinesis to hold your opponent. \n\nWould go into cooldown after use for: 6 rounds");
+			bd.requireMana(spellCost(50));
+			if (player.hasStatusEffect(StatusEffects.CooldownTelekineticGrab)) {
+				bd.disable("You need more time before you can use Telekinetic Grab again.\n\n");
+			} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+		}
+		//Esper cool beans (end)
 		if (player.hasStatusEffect(StatusEffects.CombatFollowerZenji) && (player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 1 || player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 3)) {
 			bd = buttons.add("Heal Zenji", HealZenji);
 		}
@@ -2655,7 +2676,8 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.AdvancedAerobatics)) accmod += 100;
         }
 		if (player.hasPerk(PerkLib.TrueSeeing)) accmod += 40;
-        if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport) && !player.hasPerk(PerkLib.TrueSeeing)) accmod -= monster.statusEffectv1(StatusEffects.EvasiveTeleport);
+        if (player.hasPerk(PerkLib.SixthSense)) accmod += 10;
+		if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport) && !player.hasPerk(PerkLib.TrueSeeing)) accmod -= monster.statusEffectv1(StatusEffects.EvasiveTeleport);
         if (player.jewelry1 == jewelries.RNGAMBI) accmod += 30;
         if (player.hasMutation(IMutationsLib.EyeOfTheTigerIM)) accmod += 5;
         if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.racialScore(Races.HUMAN) > 17) {
@@ -2783,6 +2805,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.AdvancedAerobatics)) baccmod += 100;
         }
 		if (player.hasPerk(PerkLib.TrueSeeing)) baccmod += 40;
+		if (player.hasPerk(PerkLib.SixthSense)) baccmod += 10;
         if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport) && !player.hasPerk(PerkLib.TrueSeeing)) baccmod -= player.statusEffectv1(StatusEffects.EvasiveTeleport);
         if (player.jewelry1 == jewelries.RINGDEA) baccmod += 40;
         if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.racialScore(Races.HUMAN) > 17) {
@@ -11199,6 +11222,16 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
             //		outputText("<b>As your soulforce is drained you can feel the Violet Pupil Transformation's regenerative power spreading in your body.</b>\n\n");
             //	}
         }
+        //Psycho-Barrier
+        if (player.statStore.hasBuff("PsychoBarrier")) {
+            if (player.fatigue + physicalCost(20) > player.maxOverFatigue()) {
+                player.statStore.removeBuffs("PsychoBarrier");
+                outputText("<b>You can't no longer sustain psycho-barrier, which disperse fully.</b>\n\n");
+            }
+            //	else {
+            //		outputText("<b>As your soulforce is drained you can feel the Violet Pupil Transformation's regenerative power spreading in your body.</b>\n\n");
+            //	}
+        }
         //Displacement
         if (player.hasStatusEffect(StatusEffects.Displacement)) {
             if (player.statusEffectv1(StatusEffects.Displacement) <= 0) {
@@ -15556,6 +15589,72 @@ public function deactivateSwordIntentAura():void {
 	enemyAI();
 }
 
+public function activatePsychoBarrier():void {
+	flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+	clearOutput();
+	fatigue(20, USEFATG_PHYSICAL);
+	outputText("You utter the words of power, summoning an invisible barrier around your body.  The psychic energies would protect you from even the fiercest blows.\n\n");
+	var temp1:Number = 0;
+	var temp2:Number = 0.01;
+	var tempTou:Number;
+	temp1 += player.touStat.core.value * temp2;
+	temp1 = Math.round(temp1);
+	var oldHPratio:Number = player.hp100/100;
+	tempTou = temp1;
+	mainView.statsView.showStatUp('tou');
+	player.buff("PsychoBarrier").addStats({tou:tempTou}).withText("Psycho-Barrier").combatPermanent();
+	player.HP = oldHPratio*player.maxHP();
+	statScreenRefresh();
+	enemyAI();
+}
+public function deactivatePsychoBarrier():void {
+	clearOutput();
+	outputText("You disperse invisible barrier wrapped around your body.");
+	player.buff("PsychoBarrier").remove();
+	enemyAI();
+}
+public function castPsychicBolt():void {
+	flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+	clearOutput();
+	fatigue(10, USEFATG_NORMAL);
+	outputText("You narrow your eyes, focusing your mind.  You point your hand toward [themonster] and shoot a psychic bolt!\n\n");
+	var damage:Number = scalingBonusSensitivity();// * spellMod() * 1.2
+	if (damage < 10) damage = 10;
+	/*//weapon bonus
+	if (player.hasPerk(PerkLib.StaffChanneling) && player.weapon.isStaffType()) {
+		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.04));
+		else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (3 + ((player.weaponAttack - 50) * 0.035));
+		else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (4.75 + ((player.weaponAttack - 100) * 0.03));
+		else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (6.25 + ((player.weaponAttack - 150) * 0.025));
+		else damage *= (7.5 + ((player.weaponAttack - 200) * 0.02));
+	}
+	if (player.hasPerk(PerkLib.ElementalBolt)) damage *= 1.25;
+	if (player.armorName == "FrancescaCloak") damage *= 2;*/
+	//Determine if critical hit!
+	var crit:Boolean = false;
+	var critChance:int = 5;
+	critChance += combatMagicalCritical();
+	if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+	if (rand(100) < critChance) {
+		crit = true;
+		damage *= 1.75;
+	}
+	damage = Math.round(damage);
+	outputText(monster.capitalA + monster.short + " takes ");
+	doMagicDamage(damage, true, true);
+	outputText(" damage.");
+	if (crit) outputText(" <b>*Critical Hit!*</b>");
+	outputText("\n\n");
+	checkAchievementDamage(damage);
+	//flags[kFLAGS.SPELLS_CAST]++;
+	//if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+	//spellPerkUnlock();
+	combat.heroBaneProc(damage);
+	statScreenRefresh();
+	if(monster.HP <= monster.minHP()) doNext(endHpVictory);
+	else enemyAI();
+}
+
 //Heal Zenji
 public function HealZenji():void {
     outputText("Noticing the injuries Zenji has sustained in efforts to protect you, you channel some magic to heal him.\n\n");
@@ -17170,6 +17269,10 @@ private function touSpeStrScale(stat:int):Number {
 
     public function scalingBonusLibido(randomize:Boolean = true):Number {
         return inteWisLibScale(player.lib, randomize);
+    }
+
+    public function scalingBonusSensitivity(randomize:Boolean = true):Number {
+        return inteWisLibScale(player.sens, randomize);
     }
 
     public function fixPercentDamage(damage:Number, ignoreDiff:Boolean = true):Number {

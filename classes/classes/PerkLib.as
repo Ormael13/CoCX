@@ -526,11 +526,20 @@ public class PerkLib
 				"Cooperating your tamed monsters would empower the one attacking. (+1x to dmg multi of attacking monster per tamed monster after 1st)",
 				"You've chosen the 'Working Together' perk. Cooperating your tamed monsters would empower the one attacking. (+1x to dmg multi of attacking monster per tamed monster after 1st)");
 		public static const SixthSense:PerkType = mk("Sixth Sense", "Sixth Sense",
-				"You are not affected by blind and other confusing effects.",
-				"You've chosen the 'Sixth Sense' perk. You are not affected by blind and other confusing effects.");
+				"You are not affected by blind and other confusing effects. Increase melee/range accuracy by 10%.",
+				"You've chosen the 'Sixth Sense' perk. You are not affected by blind and other confusing effects. Increase melee/range accuracy by 10%.");
 		public static const EmpoweredTaming:PerkType = mk("Empowered Taming", "Empowered Taming",
 				"During taming monster it wisdom is treated as if it was 80% lower.",
 				"You've chosen the 'Empowered Taming' perk. During taming monster it wisdom is treated as if it was 80% lower.");
+		public static const PsychicBarrier:PerkType = mk("Psychic Barrier", "Psychic Barrier",
+				"You learn to create an invisible barrier, using your psychokinesis that boost phys/magic resistance by 10% and giving very minor (1%) boost to toughness.",
+				"You've chosen the 'Psychic Barrier' perk. You learn to create an invisible barrier, using your psychokinesis that boost phys/magic resistance by 10% and giving very minor (1%) boost to toughness.");
+		public static const PsychicBolt:PerkType = mk("Psychic Bolt", "Psychic Bolt",
+				"Enable use of Psychic Bolt. (scaless off Sensitivity)",
+				"You've chosen the 'Psychic Bolt' perk. Enable use of Psychic Bolt. (scaless off Sensitivity)");
+		public static const TelekineticGrapple:PerkType = mk("Telekinetic Grapple", "Telekinetic Grapple",
+				"Enable use of Telekinetic Grab (with 2x shorter then normaly cooldown).",
+				"You've chosen the 'Telekinetic Grapple' perk. Enable use of Telekinetic Grab (with 2x shorter then normaly cooldown).");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -543,22 +552,31 @@ public class PerkLib
 				"You've chosen the 'Stronger Tamed Mosters' perk. .");
 		public static const :PerkType = mk("", "",
 				".",
-				"You've chosen the '' perk.");
+				"You've chosen the '' perk. .");
 		public static const :PerkType = mk("", "",
 				".",
-				"You've chosen the '' perk.");
+				"You've chosen the '' perk. .");
 		public static const :PerkType = mk("", "",
 				".",
-				"You've chosen the '' perk.");
+				"You've chosen the '' perk. .");
 		public static const :PerkType = mk("", "",
 				".",
-				"You've chosen the '' perk.");
+				"You've chosen the '' perk. .");
 		public static const :PerkType = mk("", "",
 				".",
-				"You've chosen the '' perk.");
+				"You've chosen the '' perk. .");
 		public static const :PerkType = mk("", "",
 				".",
-				"You've chosen the '' perk.");*/
+				"You've chosen the '' perk. .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk. .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk. .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk. .");*/
 		public static const Acclimation:PerkType = mk("Acclimation", "Acclimation",
 				"Reduces lust gain by 15%.",
 				"You've chosen the 'Acclimation' perk, making your body 15% more resistant to lust, up to a maximum of 75%.");
@@ -7260,14 +7278,23 @@ public class PerkLib
                     .requirePerk(EyesOfTheHunterNovice)
                     .requireLevel(6);
             //Tier 2 Sensitivity Perks
+            PsychicBarrier.requireSen(50)
+                    .requirePerk(SixthSense)
+                    .requireLevel(12);
             EyesOfTheHunterExpert.requireSen(75)
                     .requirePerk(EyesOfTheHunterAdept)
                     .requireLevel(12);
             //Tier 3 Sensitivity Perks
+            PsychicBolt.requireSen(75)
+                    .requirePerk(PsychicBarrier)
+                    .requireLevel(18);
             EyesOfTheHunterMaster.requireSen(100)
                     .requirePerk(EyesOfTheHunterExpert)
                     .requireLevel(18);
             //Tier 4 Sensitivity Perks
+            TelekineticGrapple.requireSen(100)
+                    .requirePerk(PsychicBolt)
+                    .requireLevel(24);
             EyesOfTheHunterGrandMaster.requireSen(125)
                     .requirePerk(EyesOfTheHunterMaster)
                     .requireLevel(24);

@@ -1070,8 +1070,8 @@ public class MagicSpecials extends BaseCombatContent {
 			else bd = buttons.add("Sing", SingInitiate).hint("Begin singing. While singing, you may add various powerful effects to your tune.\n.");
 		}
 		//Telekinetic Grab
-		if ((player.racialScore(Races.VAMPIRE) >= 20 || player.racialScore(Races.DRACULA) >= 22) && !monster.hasStatusEffect(StatusEffects.TelekineticGrab)) {
-			bd = buttons.add("Telekinetic Grab", TelekineticGrab, "Use telekinesis to hold your opponent. \n\nWould go into cooldown after use for: 6 rounds");
+		if ((player.racialScore(Races.VAMPIRE) >= 20 || player.racialScore(Races.DRACULA) >= 22 || player.hasPerk(PerkLib.TelekineticGrapple)) && !monster.hasStatusEffect(StatusEffects.TelekineticGrab)) {
+			bd = buttons.add("Telekinetic Grab", TelekineticGrab, "Use telekinesis to hold your opponent. \n\nWould go into cooldown after use for: 12 rounds");
 			bd.requireMana(spellCost(50));
 			if (player.hasStatusEffect(StatusEffects.CooldownTelekineticGrab)) {
 				bd.disable("You need more time before you can use Telekinetic Grab again.\n\n");
@@ -5193,7 +5193,8 @@ public class MagicSpecials extends BaseCombatContent {
 		useMana(50);
 		outputText("You weave your hand causing [themonster] body to levitate and fly to you as you use telekinesis to hold your opponent.\n\n");
 		monster.createStatusEffect(StatusEffects.TelekineticGrab, 4 + rand(2), 0, 0, 0);
-		player.createStatusEffect(StatusEffects.CooldownTelekineticGrab, 12, 0, 0, 0);
+		if (player.hasPerk(PerkLib.TelekineticGrapple)) player.createStatusEffect(StatusEffects.CooldownTelekineticGrab, 6, 0, 0, 0);
+		else player.createStatusEffect(StatusEffects.CooldownTelekineticGrab, 12, 0, 0, 0);
 		enemyAI();
 	}
 
