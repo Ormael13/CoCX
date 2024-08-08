@@ -255,10 +255,10 @@ public class Weapon extends Equipable
 			var hasShield:Boolean = !game.player.shield.isNothing;
 			var noShieldAllowed:Boolean = false;
 			
-			if (isDual()) {
+			if (isDual() && type != WT_FISTS && type != WT_GAUNTLET) {
 				// all dual req. DW
 				noShieldAllowed = true;
-				if (!game.player.hasPerk(PerkLib.DualWield) && type != WT_FISTS && type != WT_GAUNTLET) {
+				if (!game.player.hasPerk(PerkLib.DualWield)) {
 					if (doOutput) outputText(getItemText("dual_fail"));
 					return false;
 				}
@@ -268,7 +268,7 @@ public class Weapon extends Equipable
 				// dual large req. DW + GG
 				if (!game.player.hasPerk(PerkLib.GigantGrip)) {
 					noShieldAllowed = true;
-					if (isDual()) {
+					if (isDual() && type != WT_FISTS && type != WT_GAUNTLET) {
 						if (doOutput) outputText(getItemText("dual_fail"));
 						return false;
 					}
@@ -277,7 +277,7 @@ public class Weapon extends Equipable
 				// dual massive req. DW + (GGSu4a | AD4a | TG)
 				// massive + shield req. TG
 				// massive req. GG
-				if (isDual()) {
+				if (isDual() && type != WT_FISTS && type != WT_GAUNTLET) {
 					if (!game.player.hasPerk(PerkLib.TitanGrip)) {
 						if (game.player.hasPerk(PerkLib.GigantGripSu) || game.player.hasPerk(PerkLib.AntyDexterity)) {
 							if (!game.player.hasFourArms()) {

@@ -10389,7 +10389,6 @@ public class Combat extends BaseContent {
         }
         //Psychic Aura
         if (player.hasPerk(PerkLib.JobPsychic) && !flags[kFLAGS.DISABLE_AURAS]) {
-            outputText("The dominance and maleness radiating of your body causes [themonster] to slowly lose concentration and you can spy her taking quick glances at your erect [cock].  ");
             var damagePA:Number = scalingBonusSensitivity();
 			//Determine if critical hit!
 			var crit0:Boolean = false;

@@ -57,7 +57,7 @@ public class Shield extends Equipable
 				return false;
 			}
 			else if ((game.player.weapon.isSingleLarge() && !game.player.hasPerk(PerkLib.GigantGrip)) || (game.player.weapon.isSingleMassive() && !game.player.hasPerk(PerkLib.TitanGrip))
-					|| game.player.weapon.isDual() || game.player.weaponName == "Daisho") {
+					|| (game.player.weapon.isDual() && game.player.weapon != WeaponLib.FISTS && game.player.weapon.isGauntletType()) || game.player.weaponName == "Daisho") {
 				if (doOutput) outputText("Your current melee weapon requires two hands. Unequip your current melee weapon or switch to one-handed before equipping this shield. ");
 				return false;
 			}
@@ -77,7 +77,7 @@ public class Shield extends Equipable
 				if ((perk == "Massive" && game.player.weapon != WeaponLib.FISTS && !game.player.hasPerk(PerkLib.GigantGrip))
 						|| (game.player.weapon.isSingleLarge() && !game.player.hasPerk(PerkLib.GigantGrip))
 						|| (game.player.weapon.isSingleMassive() && !game.player.hasPerk(PerkLib.TitanGrip))
-						|| game.player.weapon.isDual()) {
+						|| (game.player.weapon.isDual() && game.player.weapon != WeaponLib.FISTS) && game.player.weapon.isGauntletType()) {
 					SceneLib.inventory.unequipWeapon();
 				}
 				if (game.player.weaponRangePerk == "Dual Firearms" || game.player.weaponRangePerk == "2H Firearm" || game.player.weaponRangePerk == "Dual 2H Firearms") SceneLib.inventory.unequipWeaponRange();

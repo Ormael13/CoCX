@@ -260,7 +260,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 3 sensitivity lvl-up perk: Psychic Bolt. Req. Psychic Barrier perk and 75+ sensitivity. Effect: Enable use of Psychic Bolt. (scaless off Sensitivity and deal psychic type of dmg)\n");
 			outputText("-New tier 4 sensitivity lvl-up perk: Telekinetic Grapple. Req. Psychic Bolt perk and 100+ sensitivity. Effect: Enable use of Telekinetic Grab (with 2x shorter then normaly cooldown).\n");
 			outputText("-New tier 2 sensitivity lvl-up perk: (Advanced) Job: Psychic. Req. Job: Esper perk, free advanced job slot and 50+ sensitivity. Effect: You've trained in using your mental powers offensively in combat. Perk effect include passive psionic energy aura (deal psychic dmg naturaly ^^).\n");
-			outputText("-New damage type: Psychic - some of PC abilities or perks will not affect them (like dmg increase from missing HP during berserk state or debuffs affectiong enemy body (necrotic root, adic dot))\n");
+			outputText("-New damage type: Psychic - some of PC abilities or perks will not affect them (like dmg increase from missing HP during berserk state or debuffs affectiong enemy body (necrotic root, adic dot)). Enemies like mindbreaker also had some of their attacks type changed to psychic.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
