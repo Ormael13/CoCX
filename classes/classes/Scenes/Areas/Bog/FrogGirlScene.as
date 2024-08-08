@@ -32,7 +32,7 @@ public function findTheFrogGirl():void {
 	flags[kFLAGS.TIMES_ENCOUNTERED_FROG]++;
 	outputText("\n\nDo you follow the music into the arms of the frog girl, or resist her melody?");
 	menu();
-	addButton(0,"Follow",followDatFrog);
+	addButtonIfTrue(0,"Follow",followDatFrog,"Can't have any current active butt pregnancies.", player.buttPregnancyIncubation == 0);
 	addButton(1,"Resist",resistDatFrog);
 }
 
@@ -96,13 +96,12 @@ private function resistDatFrog():void {
 	addButton(4,"Leave",leaveFrogBe);
 	
 }
-
-	private function ignoreForever():void{
-		clearOutput();
-		outputText("You turn around and walk away, leaving the frog-girl to lure another unwary victim to warm her eggs.");
-		flags[kFLAGS.TIMES_ENCOUNTERED_FROG] = -1;
-		endEncounter();
-	}
+private function ignoreForever():void{
+	clearOutput();
+	outputText("You turn around and walk away, leaving the frog-girl to lure another unwary victim to warm her eggs.");
+	flags[kFLAGS.TIMES_ENCOUNTERED_FROG] = -1;
+	endEncounter();
+}
 //Leave her be:
 private function leaveFrogBe():void {
 	clearOutput();

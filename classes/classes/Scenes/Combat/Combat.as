@@ -8903,6 +8903,69 @@ public class Combat extends BaseContent {
         if (monster.HP < monster.minHP()) monster.HP = monster.minHP();
         return damage;
     }
+	
+	public function doPsychicDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+		MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
+		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) damage *= doDamageAscensionModifer();
+        if (damage < 1) damage = 1;
+		if (monster.damageReductionBasedOnDifficulty() > 1) damage *= (1 / monster.damageReductionBasedOnDifficulty());
+        if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
+        if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
+        if (player.hasPerk(PerkLib.Sadist)) {
+            damage *= 1.2;
+            if (player.armor == armors.SCANSC) {
+                damage *= 1.2;
+                dynStats("lus", 3);
+            }
+            dynStats("lus", 3);
+        }
+		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
+			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
+			else damage *= 1 + (0.01 * (100 - player.cor));
+		}
+        if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
+        if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
+		if (player.hasPerk(PerkLib.KnowledgeIsPower)) {
+			if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) damage *= (1 + (Math.round(camp.codex.checkUnlocked() / 100) * 3));
+			else damage *= (1 + Math.round(camp.codex.checkUnlocked() / 100));
+		}
+		damage *= EyesOfTheHunterDamageBonus();
+        if (damage == 0) MSGControllForEvasion = true;
+        if (monster.HP - damage <= monster.minHP()) {
+            /* No monsters use this perk, so it's been removed for now
+		if(monster.hasPerk(PerkLib.LastStrike)) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
+		else doNext(endHpVictory);
+		*/
+            doNext(endHpVictory);
+        }
+        damage = Math.round(damage);
+        if (damage < 0) damage = 1;
+		if (apply) {
+            damage = monster.doPsychicDamageBefore(damage);
+            if(damage<=0){
+                return 0;
+            }
+            monster.HP -= damage;
+			var WrathGains:Number = 0;
+            var BonusWrathMult:Number = 1;
+            if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
+            if (monster.hasPerk(PerkLib.FuelForTheFire)) WrathGains += Math.round((damage / 5)*BonusWrathMult);
+            else WrathGains += Math.round((damage / 10) * BonusWrathMult);
+			if (monster.monsterIsBleeding() && player.hasPerk(PerkLib.YourPainMyPower)) {
+				player.HP += damage;
+				if (player.HP > (player.maxHP() + player.maxOverHP())) player.HP = player.maxHP() + player.maxOverHP();
+				if (flags[kFLAGS.YPMP_WRATH_GEN] == 0) EngineCore.WrathChange(WrathGains);
+			}
+			else monster.wrath += WrathGains;
+            if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
+        }
+        if (display) CommasForDigits(damage);
+        //Interrupt gigaflare if necessary.
+        if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
+        //Keep shit in bounds.
+        if (monster.HP < monster.minHP()) monster.HP = monster.minHP();
+        return damage;
+	}
 
     public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
@@ -10324,9 +10387,30 @@ public class Combat extends BaseContent {
             outputText("\n\n");
             if (player.hasPerk(PerkLib.EromancyMaster)) teaseXP(1 + bonusExpAfterSuccesfullTease());
         }
+        //Psychic Aura
+        if (player.hasPerk(PerkLib.JobPsychic) && !flags[kFLAGS.DISABLE_AURAS]) {
+            outputText("The dominance and maleness radiating of your body causes [themonster] to slowly lose concentration and you can spy her taking quick glances at your erect [cock].  ");
+            var damagePA:Number = scalingBonusSensitivity();
+			//Determine if critical hit!
+			var crit0:Boolean = false;
+			var critChance0:int = 5;
+			critChance0 += combatMagicalCritical();
+			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance0 = 0;
+			if (rand(100) < critChance0) {
+				crit0 = true;
+				damagePA *= 1.75;
+			}
+			damagePA = Math.round(damagePA);
+			damagePA = fixPercentDamage(damagePA);
+			outputText("Your sheer overwhelming psychic aura slowly affects [themonster] causing [monster him] ");
+			doPsychicDamage(damagePA, true, true);
+			outputText(" damage!");
+			if (crit0) outputText(" <b>*Critical Hit!*</b>");
+			outputText("\n\n");
+        }
         //Unicorn and Bicorn aura
         //Unicorn
-        if ((player.hasPerk(PerkLib.AuraOfPurity)|| Forgefather.purePearlEaten) && !flags[kFLAGS.DISABLE_AURAS]) {
+        if ((player.hasPerk(PerkLib.AuraOfPurity) || Forgefather.purePearlEaten) && !flags[kFLAGS.DISABLE_AURAS]) {
             if (monster.cor > 20) {
                 var damage:Number = scalingBonusIntelligence();
                 //Determine if critical hit!
@@ -15754,7 +15838,7 @@ public function castPsychicBolt():void {
 	}
 	damage = Math.round(damage);
 	outputText(monster.capitalA + monster.short + " takes ");
-	doMagicDamage(damage, true, true);
+	doPsychicDamage(damage, true, true);
 	outputText(" damage.");
 	if (crit) outputText(" <b>*Critical Hit!*</b>");
 	outputText("\n\n");

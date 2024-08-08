@@ -2922,6 +2922,21 @@ import classes.Scenes.Combat.CombatAbilities;
 		 *     <li>Default: original damage number</li>
 		 * </ul>
 		 */
+		public function doPsychicDamageBefore(damage:Number):Number{
+			return damage;
+		}
+
+		/**
+		 * <p>Combat.doAI() Override Series - Part 1 (Ongoing maybe)</p>
+		 * <ul>
+		 *     <li>Called right before monster HP getting deducted</li>
+		 *     <li>Used to handle status effect that cancel doAI()</li>
+		 *     <li>Currently handle OrcaPlay/Straddle/Provoke/OrcaHasWackedFinish</li>
+		 *     <li>PS: Please update line above if you add another custom disable doAI statusEffects for some reason</li>
+		 *     <li>return true to handle Status Effects (doAI() continue)</li>
+		 *     <li>Default: false (doAI() interrupted)</li>
+		 * </ul>
+		 */
 		public function doTrueDamageBefore(damage:Number):Number{
 			return damage;
 		}

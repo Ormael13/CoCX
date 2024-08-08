@@ -2884,6 +2884,8 @@ use namespace CoC;
 			// 4: magical, 5: fire, 6: ice
 			// 7: lightning, 8: darkness, 9: poison
 			// 10: wind, 11: water, 12: earth
+			// 13: acid, 14: psychic, 15: true
+			// 16: sound?
 			damage = difficultyDamageMultiplier(damage);
 			var physTeaseDmg:Boolean = false;
 			var remainingHit:Array = [];
@@ -3096,6 +3098,30 @@ use namespace CoC;
 								armorMod = 1 / damagePercentMRes();
 							}
 							// damage *= armorMod / 4 * 3
+							for(i =0; i < remainingHit.length; i++){
+								remainingHit[i] *= armorMod;
+								remainingHit[i] = reduceAcidDamage(remainingHit[i]);
+								damage += remainingHit[i];
+								if(display){
+									SceneLib.combat.CommasForDigits(remainingHit[i]);
+								}
+							}
+							break;
+						case 14: // psychic
+						//	if (damagePercentMRes() > 1){
+						//		armorMod = 1 / damagePercentMRes();
+						//	}
+							// damage *= armorMod / 4 * 3
+							for(i =0; i < remainingHit.length; i++){
+								remainingHit[i] *= armorMod;
+								remainingHit[i] = reduceAcidDamage(remainingHit[i]);
+								damage += remainingHit[i];
+								if(display){
+									SceneLib.combat.CommasForDigits(remainingHit[i]);
+								}
+							}
+							break;
+						case 15: // true
 							for(i =0; i < remainingHit.length; i++){
 								remainingHit[i] *= armorMod;
 								remainingHit[i] = reduceAcidDamage(remainingHit[i]);
@@ -3918,6 +3944,82 @@ use namespace CoC;
 			damage *= damageAcidPercent() / 100;
 			return damage;
 		}
+		
+		public override function damagePsychicPercent():Number {
+			var mult:Number = 100;//damageMagicalPercent()
+			//mult -= resEarthStat.value;
+			//Caps damage reduction at 100%
+			if (mult < 0) mult = 0;
+			return mult;
+		}
+		public override function takePsychicDamage(damage:Number, display:Boolean = false):Number {
+			return takeDamage(damage, 14, display);
+		}
+		public function reducePsychicDamage(damage:Number):Number {
+			//Opponents can critical too!
+			var critChanceMonster:int = 5;
+			if (CoC.instance.monster.hasPerk(PerkLib.MagiculesTheory) && CoC.instance.monster.wis >= 50) {
+				if (CoC.instance.monster.wis <= 100) critChanceMonster += (CoC.instance.monster.wis - 50) / 5;
+				if (CoC.instance.monster.wis > 100) critChanceMonster += 10;
+			}
+			if (rand(100) < critChanceMonster) {
+				damage *= 1.75;
+				flags[kFLAGS.ENEMY_CRITICAL] = 1;
+			}/*
+			if (hasStatusEffect(StatusEffects.Shielding)) {
+				damage -= 30;
+				if (damage < 1) damage = 1;
+			}
+			if (hasPerk(PerkLib.BouncyBody) && damage > (maxHP() * 0.5)) {
+				var dr:Number = damage * bouncybodyDR();
+				damage -= dr;
+				damage = Math.round(damage);
+			}
+			if (perkv1(IMutationsLib.SlimeMetabolismIM) >= 2) {
+				damage = Math.round(damage*0.5);
+			}*/
+			//Apply acid damage resistance percentage.
+			damage *= damagePsychicPercent() / 100;
+			return damage;
+		}
+		
+		public override function damageTruePercent():Number {
+			var mult:Number = 100;//damageMagicalPercent()
+			//mult -= resEarthStat.value;
+			//Caps damage reduction at 100%
+			if (mult < 0) mult = 0;
+			return mult;
+		}
+		public override function takeTrueDamage(damage:Number, display:Boolean = false):Number {
+			return takeDamage(damage, 15, display);
+		}
+		public function reduceTrueDamage(damage:Number):Number {
+			//Opponents can critical too!
+			var critChanceMonster:int = 5;
+			if (CoC.instance.monster.hasPerk(PerkLib.MagiculesTheory) && CoC.instance.monster.wis >= 50) {
+				if (CoC.instance.monster.wis <= 100) critChanceMonster += (CoC.instance.monster.wis - 50) / 5;
+				if (CoC.instance.monster.wis > 100) critChanceMonster += 10;
+			}
+			if (rand(100) < critChanceMonster) {
+				damage *= 1.75;
+				flags[kFLAGS.ENEMY_CRITICAL] = 1;
+			}/*
+			if (hasStatusEffect(StatusEffects.Shielding)) {
+				damage -= 30;
+				if (damage < 1) damage = 1;
+			}
+			if (hasPerk(PerkLib.BouncyBody) && damage > (maxHP() * 0.5)) {
+				var dr:Number = damage * bouncybodyDR();
+				damage -= dr;
+				damage = Math.round(damage);
+			}
+			if (perkv1(IMutationsLib.SlimeMetabolismIM) >= 2) {
+				damage = Math.round(damage*0.5);
+			}*/
+			//Apply acid damage resistance percentage.
+			damage *= damageTruePercent() / 100;
+			return damage;
+		}
 
 		/**
 		* Look into perks and special effects and @return summery extra chance to avoid attack granted by them.
@@ -4577,6 +4679,8 @@ use namespace CoC;
 		}
 		public function currentAdvancedJobs():Number {
 			var advancedJobs1:Number = 0;
+			if (hasPerk(PerkLib.JobArtificier))
+				advancedJobs1++;
 			if (hasPerk(PerkLib.JobBrawler))
 				advancedJobs1++;
 			if (hasPerk(PerkLib.JobBeastlord))
@@ -4604,6 +4708,8 @@ use namespace CoC;
 			if (hasPerk(PerkLib.JobKnight))
 				advancedJobs1++;
 			if (hasPerk(PerkLib.JobMonk))
+				advancedJobs1++;
+			if (hasPerk(PerkLib.JobPsychic))
 				advancedJobs1++;
 			if (hasPerk(PerkLib.JobSwordsman))
 				advancedJobs1++;
@@ -7773,10 +7879,16 @@ use namespace CoC;
 		 */
 		public function hasCombatAura():Boolean {
 			return isRaceCached(Races.APOPHIS)
+				|| isRaceCached(Races.DRACULA)
+				|| Forgefather.lethiciteEaten
+				|| Forgefather.purePearlEaten
 				|| hasPerk(PerkLib.ArousingAura)
 				|| hasPerk(PerkLib.AuraOfCorruption)
 				|| hasPerk(PerkLib.AuraOfPurity)
 				|| hasPerk(PerkLib.AlrauneNectar)
+				|| hasPerk(PerkLib.JobPsychic)
+				|| hasPerk(PerkLib.PheromoneCloud)
+				|| hasPerk(PerkLib.SagittariusAuraOfDominance)
 				|| (hasPerk(PerkLib.IceQueenGown) && isRaceCached(Races.YUKIONNA));
 		}
 

@@ -27,7 +27,7 @@ use namespace CoC;
 			var damage:Number = eBaseIntelligenceDamage() * 1.5;
 			damage += eBaseWisdomDamage() * 0.25;
 			damage = Math.round(damage);
-			damage = player.takeMagicDamage(damage, true);//zmienić na true damage
+			damage = player.takePsychicDamage(damage, true);
 		}
 
 		private function mindbreakerMindBreak():void {

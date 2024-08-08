@@ -4480,6 +4480,9 @@ public class PerkLib
 		public static const JobMonk:PerkType = mk("Job: Monk", "Job ( Advanced ): Monk",
 				"You've trained in unarmed combat.",
 				"You chose 'Job ( Advanced ): Monk' perk, training yourself to become a(n) Monk.").withBuffs({'wis.mult':0.15});
+		public static const JobPsychic:PerkType = mk("Job: Psychic", "Job ( Advanced ): Psychic",
+				"You've trained in using your mental powers offensively in combat.",
+				"You chose 'Job ( Advanced ): Psychic' perk, training yourself to become a(n) Psychic.").withBuffs({'int.mult':0.30,'wis.mult':0.30,'str.mult':-0.05,'tou.mult':-0.05,'spe.mult':-0.05,'sens':200});
 		public static const JobSwordsman:PerkType = mk("Job: Swordsman", "Job ( Advanced ): Swordsman",
 				"You've trained in using large weapons in fights.",
 				"You chose 'Job ( Advanced ): Swordsman' perk, training yourself to become a(n) Swordsman.").withBuffs({'str.mult':0.10,'maxwrath_base':+100});
@@ -4784,6 +4787,7 @@ public class PerkLib
 			JobHunter,
 			JobKnight,
 			JobMonk,
+			JobPsychic,
 			JobSwordsman,
 			JobWarlord
 		];
@@ -7283,6 +7287,10 @@ public class PerkLib
                     .requireLevel(12);
             EyesOfTheHunterExpert.requireSen(75)
                     .requirePerk(EyesOfTheHunterAdept)
+                    .requireLevel(12);
+            JobPsychic.requireSen(50)
+                    .requireAdvancedJobSlot()
+					.requirePerk(JobEsper)
                     .requireLevel(12);
             //Tier 3 Sensitivity Perks
             PsychicBolt.requireSen(75)

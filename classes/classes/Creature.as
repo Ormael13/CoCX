@@ -418,6 +418,8 @@ public class Creature extends Utils
 		public var resWaterStat: BuffableStat;
 		public var resEarthStat: BuffableStat;
 		public var resAcidStat: BuffableStat;
+		public var resPsychicStat: BuffableStat;
+		public var resTrueStat: BuffableStat;
 		public var resStat: BuffableStat;
 
 		private var _stats: StatStore;
@@ -1176,6 +1178,14 @@ public class Creature extends Utils
 			HP = boundFloat(0,HP-Math.round(damage),HP);
 			return (damage > 0 && damage < 1) ? 1 : damage;
 		}
+		public function takePsychicDamage(damage:Number, display:Boolean = false):Number {
+			HP = boundFloat(0,HP-Math.round(damage),HP);
+			return (damage > 0 && damage < 1) ? 1 : damage;
+		}
+		public function takeTrueDamage(damage:Number, display:Boolean = false):Number {
+			HP = boundFloat(0,HP-Math.round(damage),HP);
+			return (damage > 0 && damage < 1) ? 1 : damage;
+		}
 		public function takeLustDamage(lustDmg:Number, display:Boolean = false, applyRes:Boolean = true):Number{
 			if (applyRes) lustDmg *= lustPercent()/100; //the same as dynStats("lus", lustDmg, applyRes);
 			var ldi:int = int(lustDmg);
@@ -1632,6 +1642,8 @@ public class Creature extends Utils
 			resWaterStat = new BuffableStat(this, 'res_water', {base:0});
 			resEarthStat = new BuffableStat(this, 'res_earth', {base:0});
 			resAcidStat = new BuffableStat(this, 'res_acid', {base:0});
+			resPsychicStat = new BuffableStat(this, 'res_psychich', {base:0});
+			resTrueStat = new BuffableStat(this, 'res_true', {base:0});
 
 			_stats = new StatStore([
 				strStat,
@@ -1691,6 +1703,8 @@ public class Creature extends Utils
 				resWaterStat,
 				resEarthStat,
 				resAcidStat,
+				resPsychicStat,
+				resTrueStat,
 			]);
 			
 			for (var i:int = 0; i<BodyMaterial.Types.length; i++) {
@@ -4399,6 +4413,18 @@ public class Creature extends Utils
 		public function damageAcidPercent():Number {
 			var mult:Number = 100;
 			mult -= resAcidStat.value;
+			if (mult < 20) mult = 20;
+			return mult;
+		}
+		public function damagePsychicPercent():Number {
+			var mult:Number = 100;
+			mult -= resPsychicStat.value;
+			if (mult < 20) mult = 20;
+			return mult;
+		}
+		public function damageTruePercent():Number {
+			var mult:Number = 100;
+			mult -= resTrueStat.value;
 			if (mult < 20) mult = 20;
 			return mult;
 		}
