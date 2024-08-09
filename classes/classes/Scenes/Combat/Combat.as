@@ -948,6 +948,14 @@ public class Combat extends BaseContent {
 				bd.disable("You need more time before you can use Telekinetic Grab again.\n\n");
 			} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
+		if (player.hasPerk(PerkLib.Pyrokinesis)) {
+			bd = buttons.add("Pyrokinesis", usePyrokinesis, "Attempt to attack the enemy with fire ball.  Damage done is determined by your sensitivity.\n");
+			bd.requireFatigue(20);
+		}
+		if (player.hasPerk(PerkLib.Hydrokinesis)) {
+			bd = buttons.add("Hydrokinesis", useHydrokinesis, "Attempt to attack the enemy with water sphere.  Damage done is determined by your sensitivity.\n");
+			bd.requireFatigue(20);
+		}
 		//Esper cool beans (end)
 		if (player.hasStatusEffect(StatusEffects.CombatFollowerZenji) && (player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 1 || player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 3)) {
 			bd = buttons.add("Heal Zenji", HealZenji);
@@ -15854,7 +15862,7 @@ public function castPsychicBolt():void {
 public function usePyrokinesis():void {
 	flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 	clearOutput();
-	fatigue(10, USEFATG_NORMAL);
+	fatigue(20, USEFATG_NORMAL);
 	outputText("You concentrate, focusing on the power of your mind. A moment later, energy forming into a small ball of fire. You motion, sending the ball flying toward [themonster].  ");
 	var damage:Number = scalingBonusSensitivity() * 2;
 	if (damage < 10) damage = 10;
@@ -15889,7 +15897,7 @@ public function usePyrokinesis():void {
 public function useHydrokinesis():void {
 	flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 	clearOutput();
-	fatigue(10, USEFATG_NORMAL);
+	fatigue(20, USEFATG_NORMAL);
 	outputText("You concentrate, focusing on the power of your mind. A moment later, energy forming into a small sphere of water. You motion, sending the ball flying toward [themonster].  ");
 	var damage:Number = scalingBonusSensitivity() * 2;
 	if (damage < 10) damage = 10;

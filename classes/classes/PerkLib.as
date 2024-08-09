@@ -540,6 +540,12 @@ public class PerkLib
 		public static const TelekineticGrapple:PerkType = mk("Telekinetic Grapple", "Telekinetic Grapple",
 				"Enable use of Telekinetic Grab (with 2x shorter then normaly cooldown).",
 				"You've chosen the 'Telekinetic Grapple' perk. Enable use of Telekinetic Grab (with 2x shorter then normaly cooldown).");
+		public static const Pyrokinesis:PerkType = mk("Pyrokinesis", "Pyrokinesis",
+				"As psychic you have gained ability to manipulate or control fire.",
+				"You've chosen the 'Pyrokinesis' perk. As psychic you have gained ability to manipulate or control fire.");
+		public static const Hydrokinesis:PerkType = mk("Hydrokinesis", "Hydrokinesis",
+				"As psychic you have gained ability to manipulate or control water.",
+				"You've chosen the 'Hydrokinesis' perk. As psychic you have gained ability to manipulate or control water.");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -550,6 +556,27 @@ public class PerkLib
 		public static const StrongerTamedMosters:PerkType = mk("Stronger Tamed Mosters", "Stronger Tamed Mosters",
 				".",
 				"You've chosen the 'Stronger Tamed Mosters' perk. .");
+		public static const Cryokinesis:PerkType = mk("Cryokinesis", "Cryokinesis",
+				"As psychic you have gained ability to manipulate or control ice.",
+				"You've chosen the 'Cryokinesis' perk. As psychic you have gained ability to manipulate or control ice.");
+		public static const :PerkType = mk("", "",
+				"As psychic you have gained ability to manipulate or control earth.",
+				"You've chosen the '' perk. As psychic you have gained ability to manipulate or control earth.");
+		public static const Umbrakinesis:PerkType = mk("Umbrakinesis", "Umbrakinesis",
+				"As psychic you have gained ability to manipulate or control darkness.",
+				"You've chosen the 'Umbrakinesis' perk. As psychic you have gained ability to manipulate or control darkness.");
+		public static const :PerkType = mk("", "",
+				"As psychic you have gained ability to manipulate or control lightning.",
+				"You've chosen the '' perk. As psychic you have gained ability to manipulate or control lightning.");
+		public static const :PerkType = mk("", "",
+				"As psychic you have gained ability to manipulate or control air.",
+				"You've chosen the '' perk. As psychic you have gained ability to manipulate or control air.");
+		public static const :PerkType = mk("", "",
+				"As psychic you have gained ability to manipulate or control acid.",
+				"You've chosen the '' perk. As psychic you have gained ability to manipulate or control acid.");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk. .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk. .");
@@ -7291,6 +7318,12 @@ public class PerkLib
             JobPsychic.requireSen(50)
                     .requireAdvancedJobSlot()
 					.requirePerk(JobEsper)
+                    .requireLevel(12);
+            Pyrokinesis.requireSen(60)
+                    .requirePerk(JobPsychic)
+                    .requireLevel(12);
+            Hydrokinesis.requireSen(60)
+                    .requirePerk(JobPsychic)
                     .requireLevel(12);
             //Tier 3 Sensitivity Perks
             PsychicBolt.requireSen(75)
