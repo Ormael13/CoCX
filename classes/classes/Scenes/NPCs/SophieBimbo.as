@@ -154,7 +154,7 @@ private function acceptBimboSophie():void {
 	{
 		outputText("  Afterwards, she offers to suck Jojo's cock.  The corrupted slut-mouse nods and stiffens in delight, though he keeps glancing back your way.  Those two will probably spend a lot of time together...");
 	}
-	else if (player.hasStatusEffect(StatusEffects.PureCampJojo))
+	else if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3)
 	{
 		outputText("  Afterwards, she offers to suck Jojo's cock.  The chaste mouse's jaw drops, but when he picks it up, he answers, \"<i>Never.  My body is as pure as my soul!</i>\"");
 	}

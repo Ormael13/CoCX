@@ -567,7 +567,7 @@ public function ChiChiCampMainMenu():void {
 	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	if (rand(4) == 0 && !kihaInteractionHappened && SceneLib.kihaFollower.followerKiha() ) kihaInteraction();
-	else if (rand(4) == 0 && !jojoInteractionHappened && player.hasStatusEffect(StatusEffects.PureCampJojo)) jojoInteraction();
+	else if (rand(4) == 0 && !jojoInteractionHappened && player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) jojoInteraction();
 	else if (rand(4) == 0 && !joyInteractionHappened && flags[kFLAGS.JOJO_BIMBO_STATE] == 3) joyInteraction();
 	else if (rand(4) == 0 && !ayaneInteractionHappened && flags[kFLAGS.AYANE_FOLLOWER] >= 2) ayaneInteraction();
 	else if (rand(4) == 0 && !ceaniInteractionHappened && flags[kFLAGS.CEANI_FOLLOWER] > 0) {

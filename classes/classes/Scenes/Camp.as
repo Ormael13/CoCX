@@ -605,7 +605,7 @@ public class Camp extends NPCAwareContent{
 			return;
 		}
 		//Excellia + Jojo
-		if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 33 && player.hasStatusEffect(StatusEffects.PureCampJojo) && !player.hasStatusEffect(StatusEffects.ExcelliaJojo) && rand(5) == 0) {
+		if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 33 && player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3 && !player.hasStatusEffect(StatusEffects.ExcelliaJojo) && rand(5) == 0) {
 			SceneLib.excelliaFollower.ExcelliaAndJojoCampScene();
 			return;
 		}
@@ -700,9 +700,9 @@ public class Camp extends NPCAwareContent{
 			return;
 		}
 		//Amily and/or Jojo freakout about Vapula!!
-		if (vapulaSlave() && ((player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.KEPT_PURE_JOJO_OVER_VAPULA] <= 0) || (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt() && flags[kFLAGS.KEPT_PURE_AMILY_OVER_VAPULA] <= 0))) {
+		if (vapulaSlave() && ((player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3 && flags[kFLAGS.KEPT_PURE_JOJO_OVER_VAPULA] <= 0) || (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt() && flags[kFLAGS.KEPT_PURE_AMILY_OVER_VAPULA] <= 0))) {
 			//Jojo but not Amily (Must not be bimbo!)
-			if ((player.hasStatusEffect(StatusEffects.PureCampJojo)) && !(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) && flags[kFLAGS.KEPT_PURE_JOJO_OVER_VAPULA] == 0)
+			if ((player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) && !(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) && flags[kFLAGS.KEPT_PURE_JOJO_OVER_VAPULA] == 0)
 				vapula.mouseWaifuFreakout(false, true);
 			//Amily but not Jojo
 			else if ((amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) && !player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.KEPT_PURE_AMILY_OVER_VAPULA] == 0) {
@@ -747,7 +747,8 @@ public class Camp extends NPCAwareContent{
 			SceneLib.graydaScene.graydaMainBathingByForce();
 			return;
 		}
-		if (flags[kFLAGS.THE_TRENCH_ENTERED] > 14 && flags[kFLAGS.THE_TRENCH_ENTERED] < 16 && rand(5) == 0 && !player.hasStatusEffect(StatusEffects.GraydaRandomnCampEvents) && (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3 || player.hasStatusEffect(StatusEffects.CampRathazul) || player.hasStatusEffect(StatusEffects.PureCampJojo) || followerKiha())) {//(flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) ||
+		if (flags[kFLAGS.THE_TRENCH_ENTERED] > 14 && flags[kFLAGS.THE_TRENCH_ENTERED] < 16 && rand(5) == 0 && !player.hasStatusEffect(StatusEffects.GraydaRandomnCampEvents) && (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3 || player.hasStatusEffect(StatusEffects.CampRathazul)
+			|| (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) || followerKiha())) {//(flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) ||
 			player.createStatusEffect(StatusEffects.GraydaRandomnCampEvents, 0, 0, 0, 0);
 			SceneLib.graydaScene.graydaRandomnCampEvents();
 			return;
@@ -1443,7 +1444,7 @@ public class Camp extends NPCAwareContent{
 			}
 			//Chi Chi
 			if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) {
-				outputText("You can see Chi Chi " + (player.hasStatusEffect(StatusEffects.PureCampJojo) ?  "not so far from Jojo's place" : "near the center of your camp") + ". She’s busy practicing her many combos on a dummy. Said dummy will more than likely have to be replaced within the next twenty-four hours.\n\n");
+				outputText("You can see Chi Chi " + ((player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) ?  "not so far from Jojo's place" : "near the center of your camp") + ". She’s busy practicing her many combos on a dummy. Said dummy will more than likely have to be replaced within the next twenty-four hours.\n\n");
 				if (player.statusEffectv4(StatusEffects.CampLunaMishaps2) > 0) buttons.add("Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu2).disableIf(player.statusEffectv4(StatusEffects.CampLunaMishaps2) > 0, "Wet.");
 				else buttons.add("Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu2).disableIf(player.statusEffectv2(StatusEffects.CampSparingNpcsTimers2) > 0, "Training.");
 			}
@@ -1504,7 +1505,7 @@ public class Camp extends NPCAwareContent{
 					//Build array of choices for izzy to talk to
 					if (player.hasStatusEffect(StatusEffects.CampRathazul))
 						izzyCreeps[izzyCreeps.length] = 0;
-					if (player.hasStatusEffect(StatusEffects.PureCampJojo))
+					if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3)
 						izzyCreeps[izzyCreeps.length] = 1;
 					if (amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0)
 						izzyCreeps[izzyCreeps.length] = 2;

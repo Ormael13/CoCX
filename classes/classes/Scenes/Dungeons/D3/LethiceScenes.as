@@ -1010,7 +1010,7 @@ public class LethiceScenes extends BaseContent
 			//Kiha followered -15
             if (SceneLib.camp.followerKiha()) levelOfFuckedness -= 15;
             //Pure Jojo recruited -5
-			if (player.hasStatusEffect(StatusEffects.PureCampJojo)) levelOfFuckedness -= 5;
+			if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) levelOfFuckedness -= 5;
 
 			//Kath got a job with the watch -5
 			if (flags[kFLAGS.KATHERINE_UNLOCKED] == 4) levelOfFuckedness -= 5;

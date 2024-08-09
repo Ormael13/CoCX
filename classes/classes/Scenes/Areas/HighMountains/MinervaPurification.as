@@ -21,7 +21,7 @@ public class MinervaPurification extends BaseContent
 			return (player.hasStatusEffect(StatusEffects.CampRathazul) || player.statusEffectv2(StatusEffects.MetRathazul) >= 3);
 		}
 		public function checkJojo():Boolean {
-			return (player.hasStatusEffect(StatusEffects.PureCampJojo));
+			return (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3);
 		}
 		public function checkMarae():Boolean {
 			return (flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.MARAE_QUEST_COMPLETE] >= 1);

@@ -282,10 +282,10 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
-			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Lord Shadeogorath) (Furrin Gok) (khovel) (Chibizs) (Svalkash) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Edward Darksong)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New tier 4 wisdom lvl-up perk: ???. Req. Fourth Tamer of the Apocalypse perk and 125+ wisdom. Effect: 5th slot
 			outputText("-\n");//New tier ? wisdom lvl-up perk: Apes Together Strong. Req. ??? perk and ???+ wisdom. Effect: allow exchange single monsters variants > group monsters variants
@@ -294,10 +294,10 @@ public class Changelog extends BaseContent
 			outputText("-\n");//New tier 7 wisdom lvl-up perk: Kaiju No8. Req. Job: Tamer and 50+ wisdom. Effect: To your team of monsters joins 8th kaiju.
 			outputText("-\n");//New mutation perk: Human Parathyroid Glands (Final Form). Req. Human Parathyroid Glands (Evolved) and lvl 90+. Effects: Increases self healing by 40 * level HP in combat and twice more out of combat. 8 * level HP Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
+			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Lord Shadeogorath) (Furrin Gok) (khovel) (Chibizs) (Svalkash) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Edward Darksong)
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Dracula/lina PC unable to find get ghoul if they not learned this as normal Vampire, unable to buy manual for 1st atk: f. swords, Arigean Princess PC not been fully immune to TF-ing like other perm races, Weresharks not having their stats changing according to moon phase or boosted during use of Crinos Shape, Phoenix TF adding mutagen penatly instead of stat curse, ");
@@ -529,7 +529,7 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Mighty Legs (Primitive). Req. Mighty Legs and lvl 30+. Effects: Make Kick permanent no matter your leg type, Increase unarmed strike damage by 10 and grapple effect by 40%. Kick is 50% stronger.\n");
 			outputText("-New mutation perk: Mighty Lower Half (Primitive). Req. Mighty Lower Half and lvl 30+. Effects: Tentacle and tail attack deals 50% more damage. Increase unarmed strike damage by 10 and grapple effect by 40%. Grapple damage gains 50% more bonus from your strength.\n");
 			outputText("-New mutation perk: Poison Gland (Primitive). Req. Poison Gland and lvl 30+. Effects: Double the efficiency of poison damage, applied poisons now has a 50% chance of dealing its effect twice per turn. All poison becomes deadlier inflicting 1% toughness damage per round.\n");
-			outputText("-New mutation perk: Blazing Heart (Evolved). Req. Blazing Heart (Primitive) and lvl 60+. Effects: Gain permanent weakness to cold and fire resistance. Increase fire damage by 100%. Heat and Rut also grants you a bonus equal to 20% of the libido bonus to strength. Setting an enemy on fire emboldens and arouses you, increasing damage dealt to burn enemies by 100% but also making you take tease damage as a recoil.\n");
+			outputText("-New mutation perk: Blazing Heart (Evolved). Req. Blazing Heart (Primitive) and lvl 60+. Effects: Gain permanent weakness to cold and fire resistance. Increase fire damage by 100%. Heat and Rut also grants you a bonus equal to 20% of the libido bonus to strength. Setting an enemy on fire emboldens and arouses you, increasing damage dealt to burn enemies by 100% but also making you take lust damage as a recoil.\n");
 			outputText("-New mutation perk: Equine Muscle (Evolved). Req. Equine Muscle (Primitive) and lvl 60+. Effects: +75% to all Physical Ability damage. Gallop cost 30% less fatigue. Physical ability consumes 10% less fatigues. Physical ability that stuns do so for one extra round.\n");
 			outputText("-New mutation perk: Fiendish Balls (Evolved). Req. Fiendish Balls (Primitive) and lvl 60+. Effects: Increase Virility by 80%, Increase cum production by 75%, gain a bonus to tease against females based on your cum production up to 25%.\n");
 			outputText("-New mutation perk: Fiendish Metabolism (Evolved). Req. Fiendish Metabolism (Primitive) and lvl 60+. Effects: You may no longer gain nourishment from anything short of cum, milk and girl juice. If you have the demonic hunger perk, gain a stacking bonus of 10% to tease damage up to 150%. You may gain Fiendish metabolism bonus even without demonic hunger but gain half of the bonus. ");
@@ -540,7 +540,7 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Mighty Lower Half (Evolved). Req. Mighty Lower Half (Primitive) and lvl 60+. Effects: Tentacle and tail attack deals 75% more damage. Increase unarmed strike damage by 15 and grapple effect by 60%. Grapple damage gains 100% more bonus from your strength. Racial physical ability stun lasts 1 round longer.\n");
 			outputText("-New mutation perk: Poison Gland (Evolved). Req. Poison Gland (Primitive) and lvl 60+. Effects: Double the efficiency of poison damage, applied poisons now has a 75% chance of dealing its effect twice per turn. All poison becomes deadlier inflicting 2% toughness damage per round.\n");
 			outputText("-New mutation perk: Blazing Heart (Final Form). Req. Blazing Heart (Evolved) and lvl 90+. Effects: Gain permanent weakness to cold and fire resistance. Increase fire damage by 100%. Heat and Rut also grants you a bonus equal to 20% of the libido bonus to strength. ");
-			outputText("Setting an enemy on fire emboldens and arouses you, increasing damage dealt to burn enemies by 100% but also making you take tease damage as a recoil. Fire active and passive abilities have a 20% chance to apply the burning status effect if they do not already.\n");
+			outputText("Setting an enemy on fire emboldens and arouses you, increasing damage dealt to burn enemies by 100% but also making you take lust damage as a recoil. Fire active and passive abilities have a 20% chance to apply the burning status effect if they do not already.\n");
 			outputText("-New mutation perk: Equine Muscle (Final Form). Req. Equine Muscle (Evolved) and lvl 90+. Effects: +100% to all Physical Ability damage. Gallop cost 40% less fatigue. Physical ability consumes 15% less fatigues. Physical ability that stuns do so for one extra round. Galloping gains +10% evasion. Double the momentum bonus from Galloping.\n");
 			outputText("-New mutation perk: Fiendish Balls (Final Form). Req. Fiendish Balls (Evolved) and lvl 90+. Effects: Increase Virility by 100%, Increase cum production by 100%, gain a bonus to tease against females based on your cum production up to 50%. All attacks involving your penis are 300% stronger.\n");
 			outputText("-New mutation perk: Fiendish Metabolism (Final Form). Req. Fiendish Metabolism (Evolved) and lvl 90+. Effects: You may no longer gain nourishment from anything short of cum, milk and girl juice. If you have the demonic hunger perk, gain a stacking bonus of 10% to tease damage up to 200%. You may gain Fiendish metabolism bonus even without demonic hunger but gain half of the bonus. ");

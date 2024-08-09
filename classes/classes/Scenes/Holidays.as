@@ -2580,7 +2580,7 @@ public class Holidays extends BaseContent {
         //Jojo
         else if ((player.hasStatusEffect(StatusEffects.PureCampJojo) || SceneLib.jojoScene.campCorruptJojo()) && flags[kFLAGS.JACK_FROST_PROGRESS] <= 4) {
             //Pure
-            if (player.hasStatusEffect(StatusEffects.PureCampJojo)) {
+            if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) {
                 outputText("Jojo is sitting on his usual rock, one hand out to catch snowflakes with a beatific smile of awe on his face.  \"<i>Look, [name], snow!  I haven't seen snow since I was a very, very small boy.</i>\"  He tells you."
                     + "\n\nSo is he enjoying it?  You ask.  If so, then it was worth it getting someone to make it snow on your camp."
                     + "\n\n\"<i>Yes, I'm enjoying it - it's a wonderful reminder of purer times.</i>\"  The mouse says, still catching flakes and watching them melt in the palms of his hands."

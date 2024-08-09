@@ -53,7 +53,7 @@ public function firstMeetingMichiko():void {
 	outputText("\"<i>Great! And you don’t need to escort me, I know the way. When you return to camp and you ever want to chat, just call out for me when you’re near the forest. I’ll be there in a second.</i>\"\n\n");
 	outputText("Right. Having nothing else to talk about, you dig into your meal. You both finish around the same time, and you thank her once more for purchasing the food for you. \"<i>Really, it’s no trouble at all, [name]. For now, I’ll get started moving to camp. I’ll see you there.</i>\" You exit the tavern alongside her, waving goodbye as she walks down the road.\n\n");
 	outputText("Michiko moves into your camp, setting up a tent which she fills up with books and scrolls she picks up from her bag.\n\n");
-	if (player.hasStatusEffect(StatusEffects.PureCampJojo)) outputText("Intrigued, Jojo snoops up to check on your new scholarly guest.\n\n");
+	if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) outputText("Intrigued, Jojo snoops up to check on your new scholarly guest.\n\n");
 	if (player.hasStatusEffect(StatusEffects.CampRathazul)) outputText("Rathazul raises an eyebrow as the squirrel girl walks around and sets up her installations, though he swiftly goes back to his experiments.\n\n");
 	outputText("(<b>Michiko has been added to the Followers menu!</b>)\n\n");
 	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);

@@ -282,7 +282,7 @@ public class DemonLair extends BaseContent
 			outputText("After all, you want the demon to keep up on the game and never assume that he owns you completely so that you can get as many advantages from him as possible. Perhaps he could assist you in your quest? That’s without mentioning satisfying your urges, of course. Xuviel considers you for a moment, then laughs.\n\n");
 			outputText("\"<i>Ah, indeed, you make a fine succubus, [name], already looking for your own profit in this arrangement, however, you will swiftly go hungry without a man to feed from. Perhaps you should consider becoming my wife in full or at least make an alliance with me. I will offer you as much sex as your depraved heart desires, in exchange, I merely request you formally join my harem. I have many favors and gifts I’m willing to give you should you freely give yourself to me.</i>\"\n\n");
 			outputText("Now that’s an interesting deal. Hunting for food in the wild yields little interest to you, and indeed, having full access to Xuviel’s many resources and delicious dick could prove a profitable relationship.\n\n");
-			if (player.hasStatusEffect(StatusEffects.PureCampJojo)) {
+			if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) {
 				player.removeStatusEffect(StatusEffects.JojoNightWatch);
 				player.removeStatusEffect(StatusEffects.PureCampJojo);
 				JojoScene.monk = 1;

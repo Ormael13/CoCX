@@ -3466,7 +3466,7 @@ private function normalSheilaPregNotifREPEATEDEDHelpABitchOutTOCAMP():void {
 	//[(if PC has thorn canopy on)
 	if(player.hasStatusEffect(StatusEffects.DefenseCanopy)) outputText("\n\nYou shrug off her objections, pointing at the thorns already growing over your point of entry.  [sheilaname] seems duly impressed by the quasi-magical display.");
 	//(else if PC has Jojo and Jojo's n.watch is on)
-	else if(player.hasStatusEffect(StatusEffects.JojoNightWatch) || player.hasStatusEffect(StatusEffects.PureCampJojo)) {
+	else if(player.hasStatusEffect(StatusEffects.JojoNightWatch) || (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3)) {
 		outputText("\n\nYou wave Jojo over, introducing them and explaining that the monk watches the camp at night and you check it during the day.  The small white mouse bows politely to your guest, then seats himself nearby.  \"<i>Hello, [sheilaname],</i>\" he says.");
 	}
 	//(else if PC has Kid A and Kid's n.watch is on)
@@ -3482,7 +3482,7 @@ private function normalSheilaPregNotifREPEATEDEDHelpABitchOutTOCAMP():void {
 	else outputText("You slip an arm around her, and ask if she's okay.");
 	outputText("  She nods mutely and pulls the food out of the fire.");
 	//[(if Jojo present)
-	if(player.hasStatusEffect(StatusEffects.JojoNightWatch) || player.hasStatusEffect(StatusEffects.PureCampJojo)) outputText("  She extends one bird to you and another to Jojo.  He raises his hand and shakes his head, but politely.");
+	if(player.hasStatusEffect(StatusEffects.JojoNightWatch) || (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3)) outputText("  She extends one bird to you and another to Jojo.  He raises his hand and shakes his head, but politely.");
 	else if(flags[kFLAGS.ANEMONE_WATCH] > 0) outputText("  [sheilaname] offers you one of the birds, then extends another to your odd tenant.  The anemone's mouth tightens and she shakes her head vigorously, blushing a deep blue.");
 	outputText("  You eat in silence until the food is gone, and [sheilaname] clears her throat.");
 	

@@ -114,7 +114,7 @@ public function ElectraRecruiting():void {
 public function ElectraRecruitingSure():void {
     clearOutput();
 	outputText("You help up Electra to your camp. Ironically, or perhaps luckily, enemies stay clear from you during the travel, Electra acting as a natural repellent. You finally arrive at camp, the weasel insisting on wanting to see everything"+(camp.hasCompanions() ? " and meeting everyone" : "")+".\n\n");
-	if (player.hasStatusEffect(StatusEffects.PureCampJojo)) {
+	if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) {
 		outputText("Jojo notices her quite fast, waving a warm welcome.\n\n");
 		outputText("\"<i>Hello again...Electra, right? How did the meditation attempt go?</i>\"\n\n");
 		outputText("Electra sighs, embarrassed.\n\n");

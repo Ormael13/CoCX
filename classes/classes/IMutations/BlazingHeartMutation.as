@@ -25,7 +25,7 @@ public class BlazingHeartMutation extends IMutationPerkType
             if (pTier == 2 || pTier == 3) descS += "1";
 			if (pTier >= 4) descS += "2";
             if (pTier >= 2) descS += "0% of the libido bonus to strength";
-            if (pTier >= 3) descS += ". Setting an enemy on fire emboldens and arouses you, increasing damage dealt to burn enemies by 100% but also making you take tease damage as a recoil";
+            if (pTier >= 3) descS += ". Setting an enemy on fire emboldens and arouses you, increasing damage dealt to burn enemies by 100% but also making you take lust damage as a recoil";
             if (pTier >= 4) descS += ". Fire active and passive abilities have a 20% chance to apply the burning status effect if they do not already";
             if (descS != "")descS += ".";
             return descS;

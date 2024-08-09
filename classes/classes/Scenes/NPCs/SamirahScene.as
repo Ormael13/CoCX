@@ -154,7 +154,7 @@ public function samirahMainCampMenu():void {
 		outputText("\"<i>Well hello, [name], how are you today? Arian is such a good listener.</i>\"\n\n");
 		doNext(samirahMainCampMenu2);
 	}
-	else if (rand(2) == 0 && player.hasStatusEffect(StatusEffects.PureCampJojo)) {
+	else if (rand(2) == 0 && player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) {
 		outputText("You check on Samirah who to your surprise is watching Jojo do his daily set of trainings. She sighs as you come over.\n\n");
 		outputText("\"<i>I really don't get what’s so cool about monks. I couldn’t do the crane stance even if I wanted to, mostly because I have no legs.</i>\"\n\n");
 		outputText("What about the snake stance?\n\n");

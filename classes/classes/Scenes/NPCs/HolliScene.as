@@ -1066,7 +1066,7 @@ private function threatenHolli():void {
 	else outputText("Marae is likely beyond your power yet, but... you feel like she might not pressure you too hard if you can make a suitably credible threat.");
 	outputText("\n\n\"<i>Now, I hope you rest well in the knowledge that I'm going to stay firmly in my tree, no matter what.  Watching the vermin of this land walk over your bedroll while you try to sleep will be suitable recompense for your rudeness.</i>\"");
 	//[(kid a, thorn canopy, or other non-jojo watch is on)
-	if((player.gender > 0 && player.hasStatusEffect(StatusEffects.JojoNightWatch) && player.hasStatusEffect(StatusEffects.PureCampJojo)) || flags[kFLAGS.ANEMONE_WATCH] > 0 || flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] > 2) {
+	if((player.gender > 0 && player.hasStatusEffect(StatusEffects.JojoNightWatch) && player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) || flags[kFLAGS.ANEMONE_WATCH] > 0 || flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] > 2) {
 		outputText("\n\nYeah, whatever.  She'll be waiting a while for that; you've got your back covered.  With a dismissive, pointed gesture, you leave the smug arboreal demon behind.");
 	}
 	//{No option to beg for night watch till PC has been imp raped}

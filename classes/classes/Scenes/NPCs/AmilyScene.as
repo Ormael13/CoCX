@@ -2470,7 +2470,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				return;
 			}
 			//Jojo + Amily Spar
-			if(flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_MET_PURE_JOJO] == 1 && flags[kFLAGS.AMILY_SPAR_WITH_PURE_JOJO] == 0 && player.hasStatusEffect(StatusEffects.PureCampJojo)) {
+			if(flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_MET_PURE_JOJO] == 1 && flags[kFLAGS.AMILY_SPAR_WITH_PURE_JOJO] == 0 && player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) {
 				finter.pureJojoAndAmilySpar();
 				return;
 			}
@@ -8331,3 +8331,4 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 		}
 	}
 }
+

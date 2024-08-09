@@ -5095,7 +5095,8 @@ public class Combat extends BaseContent {
         var lustChange:Number;
         doNext(combatMenu);
         clearOutput();
-        var baseLustDmg:Number = teases.teaseBaseLustDamage();
+        var baseLustDmg:Number = Math.round(player.maxLust() * 0.05);
+		if (baseLustDmg < 40) baseLustDmg = 40;
         if (monster is FrostGiant && (player.hasStatusEffect(StatusEffects.GiantBoulder))) {
             lustChange = baseLustDmg + rand(player.lib / 4 + player.cor / 5);
             dynStats("lus", lustChange, "scale", false);
@@ -9011,7 +9012,7 @@ public class Combat extends BaseContent {
 		if (monster.hasPerk(PerkLib.EnemyGhostType) && !canLayerSwordIntentAura()) damage = 0;
 		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
 			damage *= 2;
-			player.takeLustDamage(Math.round(combat.teases.teaseBaseLustDamage() * 0.5), true);
+			player.takeLustDamage(Math.round(player.maxLust() * 0.05), true);
 		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9142,7 +9143,7 @@ public class Combat extends BaseContent {
 		damage *= EyesOfTheHunterDamageBonus();
 		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
 			damage *= 2;
-			player.takeLustDamage(Math.round(combat.teases.teaseBaseLustDamage() * 0.5), true);
+			player.takeLustDamage(Math.round(player.maxLust() * 0.05), true);
 		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9240,7 +9241,7 @@ public class Combat extends BaseContent {
 			damage *= (1 + (0.25 * player.perkv1(IMutationsLib.BlazingHeartIM)));
 			if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
 				damage *= 2;
-				player.takeLustDamage(Math.round(combat.teases.teaseBaseLustDamage() * 0.5), true);
+				player.takeLustDamage(Math.round(player.maxLust() * 0.05), true);
 			}
 			if (!monster.hasStatusEffect(StatusEffects.BurnDoT) && rand(5) == 0) monster.createStatusEffect(StatusEffects.BurnDoT,5,0.02,0,0);
 		}
@@ -9307,7 +9308,7 @@ public class Combat extends BaseContent {
 		damage *= EyesOfTheHunterDamageBonus();
 		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
 			damage *= 2;
-			player.takeLustDamage(Math.round(combat.teases.teaseBaseLustDamage() * 0.5), true);
+			player.takeLustDamage(Math.round(player.maxLust() * 0.05), true);
 		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9364,7 +9365,7 @@ public class Combat extends BaseContent {
 		damage *= EyesOfTheHunterDamageBonus();
 		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
 			damage *= 2;
-			player.takeLustDamage(Math.round(combat.teases.teaseBaseLustDamage() * 0.5), true);
+			player.takeLustDamage(Math.round(player.maxLust() * 0.05), true);
 		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9418,7 +9419,7 @@ public class Combat extends BaseContent {
 		damage *= EyesOfTheHunterDamageBonus();
 		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
 			damage *= 2;
-			player.takeLustDamage(Math.round(combat.teases.teaseBaseLustDamage() * 0.5), true);
+			player.takeLustDamage(Math.round(player.maxLust() * 0.05), true);
 		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9463,7 +9464,7 @@ public class Combat extends BaseContent {
 		damage *= EyesOfTheHunterDamageBonus();
 		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
 			damage *= 2;
-			player.takeLustDamage(Math.round(combat.teases.teaseBaseLustDamage() * 0.5), true);
+			player.takeLustDamage(Math.round(player.maxLust() * 0.05), true);
 		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9512,7 +9513,7 @@ public class Combat extends BaseContent {
 		damage *= EyesOfTheHunterDamageBonus();
 		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
 			damage *= 2;
-			player.takeLustDamage(Math.round(combat.teases.teaseBaseLustDamage() * 0.5), true);
+			player.takeLustDamage(Math.round(player.maxLust() * 0.05), true);
 		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9557,7 +9558,7 @@ public class Combat extends BaseContent {
 		damage *= EyesOfTheHunterDamageBonus();
 		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
 			damage *= 2;
-			player.takeLustDamage(Math.round(combat.teases.teaseBaseLustDamage() * 0.5), true);
+			player.takeLustDamage(Math.round(player.maxLust() * 0.05), true);
 		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9606,7 +9607,7 @@ public class Combat extends BaseContent {
 		damage *= EyesOfTheHunterDamageBonus();
 		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
 			damage *= 2;
-			player.takeLustDamage(Math.round(combat.teases.teaseBaseLustDamage() * 0.5), true);
+			player.takeLustDamage(Math.round(player.maxLust() * 0.05), true);
 		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9651,7 +9652,7 @@ public class Combat extends BaseContent {
 		damage *= EyesOfTheHunterDamageBonus();
 		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
 			damage *= 2;
-			player.takeLustDamage(Math.round(combat.teases.teaseBaseLustDamage() * 0.5), true);
+			player.takeLustDamage(Math.round(player.maxLust() * 0.05), true);
 		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -15838,6 +15839,76 @@ public function castPsychicBolt():void {
 	damage = Math.round(damage);
 	outputText(monster.capitalA + monster.short + " takes ");
 	doPsychicDamage(damage, true, true);
+	outputText(" damage.");
+	if (crit) outputText(" <b>*Critical Hit!*</b>");
+	outputText("\n\n");
+	checkAchievementDamage(damage);
+	//flags[kFLAGS.SPELLS_CAST]++;
+	//if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+	//spellPerkUnlock();
+	combat.heroBaneProc(damage);
+	statScreenRefresh();
+	if(monster.HP <= monster.minHP()) doNext(endHpVictory);
+	else enemyAI();
+}
+public function usePyrokinesis():void {
+	flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+	clearOutput();
+	fatigue(10, USEFATG_NORMAL);
+	outputText("You concentrate, focusing on the power of your mind. A moment later, energy forming into a small ball of fire. You motion, sending the ball flying toward [themonster].  ");
+	var damage:Number = scalingBonusSensitivity() * 2;
+	if (damage < 10) damage = 10;
+	//soulskill mod effect
+	//damage *= combat.soulskillMagicalMod();
+	//other bonuses
+	if (player.hasPerk(PerkLib.Heroism) && (monster && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType)))) damage *= 2;
+	damage = Math.round(damage);
+	var crit:Boolean = false;
+	var critChance:int = 5;
+	critChance += combatMagicalCritical();
+	if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+	if (rand(100) < critChance) {
+		crit = true;
+		damage *= 1.75;
+	}
+	outputText("The tossed projectile hits [themonster], dealing ");
+	damage = Math.round(damage*fireDamageBoostedByDao());
+	doFireDamage(damage, true, true);
+	outputText(" damage.");
+	if (crit) outputText(" <b>*Critical Hit!*</b>");
+	outputText("\n\n");
+	checkAchievementDamage(damage);
+	//flags[kFLAGS.SPELLS_CAST]++;
+	//if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+	//spellPerkUnlock();
+	combat.heroBaneProc(damage);
+	statScreenRefresh();
+	if(monster.HP <= monster.minHP()) doNext(endHpVictory);
+	else enemyAI();
+}
+public function useHydrokinesis():void {
+	flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+	clearOutput();
+	fatigue(10, USEFATG_NORMAL);
+	outputText("You concentrate, focusing on the power of your mind. A moment later, energy forming into a small sphere of water. You motion, sending the ball flying toward [themonster].  ");
+	var damage:Number = scalingBonusSensitivity() * 2;
+	if (damage < 10) damage = 10;
+	//soulskill mod effect
+	//damage *= combat.soulskillMagicalMod();
+	//other bonuses
+	if (player.hasPerk(PerkLib.Heroism) && (monster && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType)))) damage *= 2;
+	damage = Math.round(damage);
+	var crit:Boolean = false;
+	var critChance:int = 5;
+	critChance += combatMagicalCritical();
+	if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+	if (rand(100) < critChance) {
+		crit = true;
+		damage *= 1.75;
+	}
+	outputText("The tossed projectile hits [themonster], dealing ");
+	damage = Math.round(damage*waterDamageBoostedByDao());
+	doWaterDamage(damage, true, true);
 	outputText(" damage.");
 	if (crit) outputText(" <b>*Critical Hit!*</b>");
 	outputText("\n\n");

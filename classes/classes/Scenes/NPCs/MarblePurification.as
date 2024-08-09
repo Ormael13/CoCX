@@ -63,22 +63,19 @@ public class MarblePurification extends NPCAwareContent{
 		else outputText("bovine");
 	 	outputText(" head still in her hands, and sighs loudly. <i>\"I’m sorry, sweetie, I just... I’ve tried to ignore it, but I just don’t feel comfortable here.\"</i>");
 	 	outputText("\n\nYou ask her what’s wrong; doesn’t she like being with you?");
-		if(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt() || followerKiha() || flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1)
-		{
+		if(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt() || followerKiha() || flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) {
 		 	outputText("  ...Has she been fighting with ");
 			if(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) outputText("Amily");
 			else if(followerKiha()) outputText("Kiha");
 			else outputText("Izma");
 		 	outputText("?");
 		}
-
 	 	outputText("\n\n\"<i>No, no, it’s nothing like that. I do like being with you... and that’s the problem,</i>\" is the glum cowgirl’s response. At your obvious confusion, she begins to explain. \"<i>You remember that incident with my milk and its addictive side-effects?</i>\" she asks. At your nod, she goes on, <i>\"Well, I’ve tried to be strong since then, for your sake - I love you for being you and I don’t want you to be addicted to me; to depend on me for your daily survival... that’s not love - but it’s so hard. I’ve never felt so good as when you were drinking from me, sweetie; I <b>need</b> to give my milk, and having a living person drink it is so much more... well, satisfying than the milkers are.</i>\" She turns to look at the ground, obviously too ashamed to look at you. \"<i>When we make love, it’s so hard for me to resist taking my breast and forcing the nipple into your mouth, to make you drink the milk I make and truly feel like you love me...</i>\"");
 	 	outputText("\n\nYou tell her that you appreciate how strong she’s being, and ask if there’s any way you can help her to get over this problem of hers.");
 	 	outputText("\n\nMarble hesitantly looks up at you, brows furrowed in thought. \"<i>Well, it’s the corruption that makes my milk addictive in the first place, so we need to find a way to purify me.  The most corrupted part of me is my milk, so that’s where we should start,</i>\" she suggests, rubbing her chin in thought.");
 	 	outputText("\n\nYou contemplate the possibilities, and make some suggestions on things that could reduce her corruption.");
 		if(player.hasItem(consumables.PURHONY)) outputText("  You then recall that bottle of honey the bee-girl gave you, and ask if maybe it might work?");
-		if(player.hasStatusEffect(StatusEffects.PureCampJojo)) outputText("  You remember how Jojo helped you become pure, and suggest maybe his meditations could assist Marble?");
-
+		if(player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) outputText("  You remember how Jojo helped you become pure, and suggest maybe his meditations could assist Marble?");
 	 	outputText("\n\nMarble shakes her head before continuing, \"<i>No, I think we should focus on something linked to my race.  Maybe we can use the LaBova stuff that my mother taught me to drink if I was ever turned into something else.  It’s probably corrupted in its raw form, but maybe there is some way it could be purified to counter the corrupt effects? I think you’d need an alchemist to purify it, though...</i>\" she trails off, musing at the possibility.");
 	 	outputText("\n\nYou point out that LaBova is very rare, and ask how you’d go about getting enough of it to help Marble.");
 	 	outputText("\n\n\"<i>Don’t you worry about that, sweetie.</i>\" is the determined reply. \"<i>LaBova is made from chemically treated lacta bovine milk,</i>\" she jiggles her bountiful bosom for emphasis, \"<i>and I know someone who can make me as much of the stuff I need if I give them the milk and supplies... wait, are you saying you want to help me?</i>\" she asks you meekly.");

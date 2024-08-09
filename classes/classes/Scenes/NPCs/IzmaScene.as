@@ -3038,7 +3038,7 @@ private function analFuckRadarEnding():void {
 			var choices:Array = [];
 			choices.push(0);
 			if (player.hasStatusEffect(StatusEffects.CampRathazul)) choices.push(1);
-			if (player.hasStatusEffect(StatusEffects.PureCampJojo)) choices.push(2);
+			if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) choices.push(2);
 			if (SceneLib.marbleScene.marbleFollower()) choices.push(3);
 			if (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) choices.push(4);
 			if (amilyScene.amilyFollower() && amilyScene.amilyCorrupt()) choices.push(5);

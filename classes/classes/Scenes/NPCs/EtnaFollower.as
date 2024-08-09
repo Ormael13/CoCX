@@ -476,7 +476,7 @@ private function etnaCome2Camp():void
 	clearOutput();
 	outputText("As you enter the camp with the manticore your various friends notice her and jump out of their activities to go to the pair of you.\n\n");
 	if (player.hasStatusEffect(StatusEffects.CampRathazul)) outputText("Rathazul almost drops a vial of purple liquid on the ground as he notices the manticore. \"<i>Is this what I think it is? Manticore venom is extremely potent. I could use it in alchemical concoctions, nice find! Just make sure to keep her in check...</i>\"\n\n");
-	if (player.hasStatusEffect(StatusEffects.PureCampJojo)) {
+	if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) {
 		outputText("Jojo notices the manticore right away breaking into a defensive stance and reciting a few of his teacher’s mantra. \"<i>[name] that thing is a manticore! I seriously hope you know what you're doing. She reeks of serious demonic corruption, so make sure you meditate with me regularly.</i>\"\n\n");
 		outputText("You assure Jojo that you will and that Etna won't cause problems.\n\n");
 	}

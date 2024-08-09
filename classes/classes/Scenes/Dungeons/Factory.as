@@ -1675,7 +1675,7 @@ use namespace CoC;
 			if (player.hasVagina()) transformations.VaginaDemonic().applyEffect(false);
 			outputText("\n<b>Gained Perk: Soulless!</b> "+PerkLib.Soulless.desc());
 			player.createPerk(PerkLib.Soulless, 0, 0, 0, 0);
-			if (player.hasStatusEffect(StatusEffects.PureCampJojo)) {
+			if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) {
 				player.removeStatusEffect(StatusEffects.JojoNightWatch);
 				player.removeStatusEffect(StatusEffects.PureCampJojo);
 				JojoScene.monk = 1;

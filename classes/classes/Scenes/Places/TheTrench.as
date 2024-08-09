@@ -726,7 +726,7 @@ private function theTrenchGraydaQuestNPCMissionsCoronationFinalPart2():void {
 	outputText("The other princess seems to catch on to her companion's train of thought. \"<i>Don’t worry. We’ll assign another Countess to overlook those here. Now get going, we’ll handle the ordeals here, and new-blood! This is an opportunity to prove yourself.</i>\" Before you can protest their sudden orders, they are already gone.\n\n");
 	outputText("Grayda turns toward you before letting out a short sigh. \"<i>My apologies Princess, but it seems I’ll be staying with you for a while. Would you mind if I asked if you could help me pack?</i>\"\n\n");
 	outputText("One long walk later and a few stops has you successfully returned to camp with Grayda in tow. Mayhaps it would be a good idea to show her around, and introduce her to everyone?\n\n");
-	if (player.hasStatusEffect(StatusEffects.PureCampJojo)) {
+	if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) {
 		outputText("Before you can even continue with that thought, you feel something land and hit you square in the chest, effectively stealing the air from your very lungs.\n\n");
 		outputText("\"<i>[name]? I'm so sorry! Are you alright?</i>\" Jojo seems to have been your aggressor, but honestly, you're still in a bit of shock from the sudden attack.\n\n");
 		outputText("You gently tell him that you're alright and try to give him a smile, but he’s looking at you as if you just told him the grass was purple.\n\n");
