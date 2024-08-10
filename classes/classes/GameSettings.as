@@ -130,11 +130,18 @@ public class GameSettings extends BaseContent {
 					" If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately.");
 		}
 		outputText("\n\n");
-		if (flags[kFLAGS.HUNGER_ENABLED] == 0) {
+		if (flags[kFLAGS.HUNGER_ENABLED] != 1) {
 			outputText("Hunger Modifier: <b>[font-olive]Disabled[/font]</b>");
 		}
 		else if (flags[kFLAGS.HUNGER_ENABLED] == 1) {
 			outputText("Hunger Modifier: <b>[font-red]Enabled[/font]</b> (PC must manage his own hunger lest you want see his death from starvation)");
+		}
+		outputText("\n\n");
+		if (flags[kFLAGS.HARDCORE_MODE] == 0) {
+			outputText("Hardcore Modifier: <b>[font-olive]Disabled[/font]</b>");
+		}
+		else if (flags[kFLAGS.HARDCORE_MODE] == 1) {
+			outputText("Hardcore Modifier: <b>[font-red]Enabled[/font]</b> (No level limits for unlocking new areas)");
 		}
 		outputText("\n\n");
 		if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 0) {
@@ -154,13 +161,6 @@ public class GameSettings extends BaseContent {
 				outputText("Secondary Stats Modifier: <b>[font-pink]Xianxia[/font]</b>\n Opponent has 1600x (bosses)" +
 						" and 100x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
 			}
-		}
-		outputText("\n\n");
-		if (flags[kFLAGS.HARDCORE_MODE] == 0) {
-			outputText("Hardcore Modifier: <b>[font-olive]Disabled[/font]</b>");
-		}
-		else if (flags[kFLAGS.HARDCORE_MODE] == 1) {
-			outputText("Hardcore Modifier: <b>[font-red]Enabled[/font]</b> (No level limits for unlocking new areas)");
 		}
 		outputText("\n\n");
 		if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 0) {
@@ -803,17 +803,30 @@ public class GameSettings extends BaseContent {
 		clearOutput();
 		outputText("Hunger modifier is now enabled.");
 		flags[kFLAGS.HUNGER_ENABLED] = 1;
-		flags[kFLAGS.GAME_DIFFICULTY] += 1;
+		setTheFuckingDifficultyForFuckingGood();
 		doNext(settingsScreenGameSettings);
 	}
 	public function disableHungerModifierForReal():void {
 		clearOutput();
-		outputText("Hunger modifier is now enabled.");
+		outputText("Hunger modifier is now disabled.");
 		flags[kFLAGS.HUNGER_ENABLED] = 0;
-		flags[kFLAGS.GAME_DIFFICULTY] -= 1;
+		setTheFuckingDifficultyForFuckingGood();
 		doNext(settingsScreenGameSettings);
 	}
-	
+	public function enableHardcoreModifierForReal():void {
+		clearOutput();
+		outputText("Hardcore modifier is now enabled.");
+		flags[kFLAGS.HARDCORE_MODE] = 1;
+		setTheFuckingDifficultyForFuckingGood();
+		doNext(settingsScreenGameSettings);
+	}
+	public function disableHardcoreModifierForReal():void {
+		clearOutput();
+		outputText("Hardcore modifier is now disabled.");
+		flags[kFLAGS.HARDCORE_MODE] = 0;
+		setTheFuckingDifficultyForFuckingGood();
+		doNext(settingsScreenGameSettings);
+	}
 	public function difficultySelectionMenu2():void {
 		clearOutput();
 		outputText("You can enable / disable Secondary Stats Modifier.\n");
@@ -822,33 +835,16 @@ public class GameSettings extends BaseContent {
 		if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 1) addButton(3, "Enable", chooseDifficulty2On);
 		addButton(14, "Back", settingsScreenGameSettings);
 	}
-
 	public function chooseDifficulty2Off():void {
 		flags[kFLAGS.SECONDARY_STATS_SCALING] = 0;
-		flags[kFLAGS.GAME_DIFFICULTY] -= 1;
+		setTheFuckingDifficultyForFuckingGood();
 		settingsScreenGameSettings();
 	}
 	public function chooseDifficulty2On():void {
 		flags[kFLAGS.SECONDARY_STATS_SCALING] = 1;
-		flags[kFLAGS.GAME_DIFFICULTY] += 1;
+		setTheFuckingDifficultyForFuckingGood();
 		settingsScreenGameSettings();
 	}
-
-	public function enableHardcoreModifierForReal():void {
-		clearOutput();
-		outputText("Hardcore modifier is now enabled.");
-		flags[kFLAGS.HARDCORE_MODE] = 1;
-		flags[kFLAGS.GAME_DIFFICULTY] += 1;
-		doNext(settingsScreenGameSettings);
-	}
-	public function disableHardcoreModifierForReal():void {
-		clearOutput();
-		outputText("Hardcore modifier is now disabled.");
-		flags[kFLAGS.HARDCORE_MODE] = 0;
-		flags[kFLAGS.GAME_DIFFICULTY] -= 1;
-		doNext(settingsScreenGameSettings);
-	}
-	
 	public function difficultySelectionMenu3():void {
 		clearOutput();
 		outputText("You can choose how hard elite/champion/boss battles will be.\n");
@@ -863,14 +859,19 @@ public class GameSettings extends BaseContent {
 		if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 3) addButton(3, "Hell", chooseDifficulty3, 3);
 		addButton(14, "Back", settingsScreenGameSettings);
 	}
-
 	public function chooseDifficulty3(difficulty:int = 0):void {
-		if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 0) flags[kFLAGS.GAME_DIFFICULTY] += 1;
 		flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] = difficulty;
-		if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 0) flags[kFLAGS.GAME_DIFFICULTY] -= 1;
+		setTheFuckingDifficultyForFuckingGood();
 		settingsScreenGameSettings();
 	}
-
+	private function setTheFuckingDifficultyForFuckingGood():void {
+		var sTFDFFG:Number = 0;
+		if (flags[kFLAGS.HUNGER_ENABLED] > 0) sTFDFFG += 1;
+		if (flags[kFLAGS.HARDCORE_MODE] > 0) sTFDFFG += 1;
+		if (flags[kFLAGS.SECONDARY_STATS_SCALING] > 0) sTFDFFG += 1;
+		if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] > 0) sTFDFFG += 1;
+		flags[kFLAGS.GAME_DIFFICULTY] = sTFDFFG;
+	}
 
 	//------------
 	// INTERFACE

@@ -956,6 +956,10 @@ public class Combat extends BaseContent {
 			bd = buttons.add("Hydrokinesis", useHydrokinesis, "Attempt to attack the enemy with water sphere.  Damage done is determined by your sensitivity.\n");
 			bd.requireFatigue(20);
 		}
+		if (player.hasPerk(PerkLib.Cryokinesis)) {
+			bd = buttons.add("Cryokinesis", useCryokinesis, "Attempt to attack the enemy with icicle.  Damage done is determined by your sensitivity.\n");
+			bd.requireFatigue(20);
+		}
 		//Esper cool beans (end)
 		if (player.hasStatusEffect(StatusEffects.CombatFollowerZenji) && (player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 1 || player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 3)) {
 			bd = buttons.add("Heal Zenji", HealZenji);
@@ -15917,6 +15921,41 @@ public function useHydrokinesis():void {
 	outputText("The tossed projectile hits [themonster], dealing ");
 	damage = Math.round(damage*waterDamageBoostedByDao());
 	doWaterDamage(damage, true, true);
+	outputText(" damage.");
+	if (crit) outputText(" <b>*Critical Hit!*</b>");
+	outputText("\n\n");
+	checkAchievementDamage(damage);
+	//flags[kFLAGS.SPELLS_CAST]++;
+	//if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+	//spellPerkUnlock();
+	combat.heroBaneProc(damage);
+	statScreenRefresh();
+	if(monster.HP <= monster.minHP()) doNext(endHpVictory);
+	else enemyAI();
+}
+public function useCryokinesis():void {
+	flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+	clearOutput();
+	fatigue(20, USEFATG_NORMAL);
+	outputText("You concentrate, focusing on the power of your mind. A moment later, energy forming into a small icicle. You motion, sending the ball flying toward [themonster].  ");
+	var damage:Number = scalingBonusSensitivity() * 2;
+	if (damage < 10) damage = 10;
+	//soulskill mod effect
+	//damage *= combat.soulskillMagicalMod();
+	//other bonuses
+	if (player.hasPerk(PerkLib.Heroism) && (monster && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType)))) damage *= 2;
+	damage = Math.round(damage);
+	var crit:Boolean = false;
+	var critChance:int = 5;
+	critChance += combatMagicalCritical();
+	if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+	if (rand(100) < critChance) {
+		crit = true;
+		damage *= 1.75;
+	}
+	outputText("The tossed projectile hits [themonster], dealing ");
+	damage = Math.round(damage*iceDamageBoostedByDao());
+	doIceDamage(damage, true, true);
 	outputText(" damage.");
 	if (crit) outputText(" <b>*Critical Hit!*</b>");
 	outputText("\n\n");

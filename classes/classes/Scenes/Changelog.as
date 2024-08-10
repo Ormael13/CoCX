@@ -264,7 +264,7 @@ public class Changelog extends BaseContent
 			outputText("-Fantasize command was scaling too well from base tease damage so now it would be scaling off PC max lust bar (base lust taken will be now 5% of max lust bar). Would make loosing from lust by using that option less likely when using lust/tease focused build.\n");
 			outputText("-New tier 2 sensitivity lvl-up perk: Pyrokinesis. Req. Job: Psychic perk and 60+ sensitivity. Effect: As psychic you have gained ability to manipulate or control fire.\n");
 			outputText("-New tier 2 sensitivity lvl-up perk: Hydrokinesis. Req. Job: Psychic perk and 60+ sensitivity. Effect: As psychic you have gained ability to manipulate or control water.\n");
-			outputText("-\n");
+			outputText("-New tier 3 sensitivity lvl-up perk: Cryokinesis. Req. Job: Psychic perk and 85+ sensitivity. Effect: As psychic you have gained ability to manipulate or control ice.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -291,7 +291,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");//New tier ? wisdom lvl-up perk: Apes Together Strong. Req. ??? perk and ???+ wisdom. Effect: allow exchange single monsters variants > group monsters variants
 			outputText("-\n");//New tier 2 wisdom lvl-up perk: They Fight, They Protect. Req. Three times a tame perk and 80+ wisdom. Effect: meat shield option ^^
 			outputText("-\n");//New tier 3 wisdom lvl-up perk: Stronger Tamed Mosters. Req. Fourth Tamer of the Apocalypse perk and 105+ wisdom. Effect: bigger meat shields, bigger claws, bigger muscles \o/ bigger everything???
-			outputText("-\n");//New tier 7 wisdom lvl-up perk: Kaiju No8. Req. Job: Tamer and 50+ wisdom. Effect: To your team of monsters joins 8th kaiju.
+			outputText("-\n");//New tier 7 wisdom lvl-up perk: Kaiju No8. Req. Job: Tamer and 50+ wisdom. Effect: 8th kaiju joins your team of monsters.
 			outputText("-\n");//New mutation perk: Human Parathyroid Glands (Final Form). Req. Human Parathyroid Glands (Evolved) and lvl 90+. Effects: Increases self healing by 40 * level HP in combat and twice more out of combat. 8 * level HP Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.
 			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.

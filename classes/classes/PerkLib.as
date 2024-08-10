@@ -546,6 +546,9 @@ public class PerkLib
 		public static const Hydrokinesis:PerkType = mk("Hydrokinesis", "Hydrokinesis",
 				"As psychic you have gained ability to manipulate or control water.",
 				"You've chosen the 'Hydrokinesis' perk. As psychic you have gained ability to manipulate or control water.");
+		public static const Cryokinesis:PerkType = mk("Cryokinesis", "Cryokinesis",
+				"As psychic you have gained ability to manipulate or control ice.",
+				"You've chosen the 'Cryokinesis' perk. As psychic you have gained ability to manipulate or control ice.");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -556,9 +559,6 @@ public class PerkLib
 		public static const StrongerTamedMosters:PerkType = mk("Stronger Tamed Mosters", "Stronger Tamed Mosters",
 				".",
 				"You've chosen the 'Stronger Tamed Mosters' perk. .");
-		public static const Cryokinesis:PerkType = mk("Cryokinesis", "Cryokinesis",
-				"As psychic you have gained ability to manipulate or control ice.",
-				"You've chosen the 'Cryokinesis' perk. As psychic you have gained ability to manipulate or control ice.");
 		public static const :PerkType = mk("", "",
 				"As psychic you have gained ability to manipulate or control earth.",
 				"You've chosen the '' perk. As psychic you have gained ability to manipulate or control earth.");
@@ -7328,6 +7328,9 @@ public class PerkLib
             //Tier 3 Sensitivity Perks
             PsychicBolt.requireSen(75)
                     .requirePerk(PsychicBarrier)
+                    .requireLevel(18);
+            Cryokinesis.requireSen(85)
+                    .requirePerk(JobPsychic)
                     .requireLevel(18);
             EyesOfTheHunterMaster.requireSen(100)
                     .requirePerk(EyesOfTheHunterExpert)

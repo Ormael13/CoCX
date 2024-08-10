@@ -1800,61 +1800,63 @@ import classes.Scenes.Combat.CombatAbility;
 			clearOutput();
 			outputText("You have choosen to have Hunger Modifier enabled.");
 			flags[kFLAGS.HUNGER_ENABLED] = 1;
-			flags[kFLAGS.GAME_DIFFICULTY] += 1;
+			setTheFuckingDifficultyForFuckingGood();
 			doNext(chooseGameModes);
 		}
 		private function toggleForHungerOff():void {
 			clearOutput();
 			outputText("You have choosen to have Hunger Modifier disabled.");
 			flags[kFLAGS.HUNGER_ENABLED] = 0;
-			flags[kFLAGS.GAME_DIFFICULTY] -= 1;
+			setTheFuckingDifficultyForFuckingGood();
 			doNext(chooseGameModes);
 		}
 		private function toggleForHardcoreOn():void {
 			clearOutput();
 			outputText("You have chosen to have Hardcore Modifier enabled.");
 			flags[kFLAGS.HARDCORE_MODE] = 1;
-			flags[kFLAGS.GAME_DIFFICULTY] += 1;
+			setTheFuckingDifficultyForFuckingGood();
 			doNext(chooseGameModes);
 		}
 		private function toggleForHardcoreOff():void {
 			clearOutput();
 			outputText("You have chosen to have Hardcore Modifier disabled.");
 			flags[kFLAGS.HARDCORE_MODE] = 0;
-			flags[kFLAGS.GAME_DIFFICULTY] -= 1;
+			setTheFuckingDifficultyForFuckingGood();
 			doNext(chooseGameModes);
 		}
 		private function toggleForSecondaryStatsModifierOn():void {
 			clearOutput();
 			outputText("You have chosen to have Secondary Stats Modifier enabled.");
 			flags[kFLAGS.SECONDARY_STATS_SCALING] = 1;
-			flags[kFLAGS.GAME_DIFFICULTY] += 1;
+			setTheFuckingDifficultyForFuckingGood();
 			doNext(chooseGameModes);
 		}
 		private function toggleForSecondaryStatsModifierOff():void {
 			clearOutput();
 			outputText("You have chosen to have Secondary Stats Modifier disabled.");
 			flags[kFLAGS.SECONDARY_STATS_SCALING] = 0;
-			flags[kFLAGS.GAME_DIFFICULTY] -= 1;
+			setTheFuckingDifficultyForFuckingGood();
 			doNext(chooseGameModes);
 		}
 		private function toggleForBossesModifier(difficulty:int = 0):void {
-			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 0) flags[kFLAGS.GAME_DIFFICULTY] += 1;
 			flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] = difficulty;
-			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 0) flags[kFLAGS.GAME_DIFFICULTY] -= 1;
+			setTheFuckingDifficultyForFuckingGood();
 			doNext(chooseGameModes);
+		}
+		private function setTheFuckingDifficultyForFuckingGood():void {
+			var sTFDFFG:Number = 0;
+			if (flags[kFLAGS.HUNGER_ENABLED] > 0) sTFDFFG += 1;
+			if (flags[kFLAGS.HARDCORE_MODE] > 0) sTFDFFG += 1;
+			if (flags[kFLAGS.SECONDARY_STATS_SCALING] > 0) sTFDFFG += 1;
+			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] > 0) sTFDFFG += 1;
+			flags[kFLAGS.GAME_DIFFICULTY] = sTFDFFG;
 		}
 		
 		private function chooseModeHard():void {
 			clearOutput();
 			outputText("You have chosen Hard Mode. In this mode, hunger is enabled so you have to eat periodically. Accumulated wrath will not affect ability to spellcast or use magical specials. Internal mutation negative effects will be triggered after accumulating 6 points in internal mutation score.\n\n<b>Difficulty is locked to hard.</b>");
-			flags[kFLAGS.HARDCORE_MODE] = 0;
-			flags[kFLAGS.HUNGER_ENABLED] = 1;
-			flags[kFLAGS.GAME_DIFFICULTY] = 1;
-			player.hunger = 100;
 			doNext(startTheGame);
 		}
-
 		private function chooseModeNightmare():void {
 			clearOutput();
 			outputText("You have chosen Nightmare Mode. Hunger is constantly draining, so go get that food or perish from starvation. If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately. You have been warned: this difficulty is not meant for the weak of body and mind.\n\n<b>Difficulty is locked to <i>NIGHTMARE</i>.</b>");
@@ -1864,7 +1866,6 @@ import classes.Scenes.Combat.CombatAbility;
 			player.hunger = 50;
 			doNext(startTheGame);
 		}
-
 		private function chooseModeExtreme():void {
 			clearOutput();
 			outputText("You have chosen EXTREME Mode. And so... neither death from starving, accumulated wrath inhibiting spellcasting nor internal mutations will stop you? Now, let's take things to the next level. The game will constantly autosave, and Bad Ends will result in the <b><i>deletion of your file</i></b>.\n\nDebug Mode and Easy mode are disabled here as well.\n\nPlease choose a slot to save in. You cannot make multiple copies of this save.\n\n<b>Difficulty is locked to <i>EXTREME</i></b>");
@@ -1875,7 +1876,6 @@ import classes.Scenes.Combat.CombatAbility;
 			menu();
 			addButton(14, "Back", chooseGameModes);
 		}
-
 		private function chooseModeXianxia():void {
 			clearOutput();
 			outputText("You have chosen Xianxia MC Mode. Since all previous difficulty settings were seemingly deemed insufficient, this is the next option. It will be rough, tedious, strenuous... but you came here to suff- Feel like a true XIANXIA MC, correct?\n\n<b>Difficulty is locked to <i>XIANXIA</i>.</b>");
