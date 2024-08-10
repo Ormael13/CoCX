@@ -84,6 +84,12 @@ public class BaseCombatContent extends BaseContent {
 	protected function doPlasmaDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
 		return combat.doPlasmaDamage(damage, apply, display, ignoreDR);
 	}
+	protected function doBlackIceDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
+		return combat.doBlackIceDamage(damage, apply, display, ignoreDR);
+	}
+	protected function doPsychicDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+		return combat.doPsychicDamage(damage, apply, display);
+	}
 	protected function doTrueDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
 		return combat.doTrueDamage(damage, apply, display);
 	}

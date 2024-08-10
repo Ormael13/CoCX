@@ -980,6 +980,14 @@ public class Combat extends BaseContent {
 			bd = buttons.add("Acidokinesis", useAcidokinesis, "Attempt to attack the enemy with acid ball. Damage done is determined by your sensitivity.\n");
 			bd.requireFatigue(20);
 		}
+		if (player.hasPerk(PerkLib.Ionikinesis)) {
+			bd = buttons.add("Ionikinesis", useIonikinesis, "Attempt to attack the enemy with plasma ball. Damage done is determined by your sensitivity.\n");
+			bd.requireFatigue(20);
+		}
+		if (player.hasPerk(PerkLib.Cocytokinesis)) {
+			bd = buttons.add("Cocytokinesis", useCocytokinesis, "Attempt to attack the enemy with black icicle. Damage done is determined by your sensitivity.\n");
+			bd.requireFatigue(20);
+		}
 		//Esper cool beans (end)
 		if (player.hasStatusEffect(StatusEffects.CombatFollowerZenji) && (player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 1 || player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 3)) {
 			bd = buttons.add("Heal Zenji", HealZenji);
@@ -9727,6 +9735,15 @@ public class Combat extends BaseContent {
 		doLightningDamage(ldamage, apply, display, ignoreDR);
 		return split;
 	}
+	
+	public function doBlackIceDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
+		var split:Number = (damage * 0.5);
+		var idamage:Number = Math.round(split * iceDamageBoostedByDao());
+		var ddamage:Number = Math.round(split * darknessDamageBoostedByDao());
+		doIceDamage(idamage, apply, display, ignoreDR);
+		doDarknessDamage(ddamage, apply, display, ignoreDR);
+		return split;
+	}
 
     public static const USEMANA_NORMAL:int = 0;
     public static const USEMANA_MAGIC:int = 1;
@@ -16009,6 +16026,36 @@ public function useAcidokinesis():void {
 	damage += sharedKinesisMidpart(crit);
 	damage = Math.round(damage*acidDamageBoostedByDao());
 	doAcidDamage(damage, true, true);
+	sharedKinesisEnding(damage, crit);
+}
+public function useIonikinesis():void {
+	flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+	clearOutput();
+	fatigue(20, USEFATG_NORMAL);
+	outputText("You concentrate, focusing on the power of your mind. A moment later, energy forming into a small ball of plasma. You motion, sending the ball flying toward [themonster]. The tossed projectile hits [themonster], dealing ");
+	var damage:Number = 0;
+	var crit:Boolean = false;
+	var critChance:int = 5;
+	critChance += combatMagicalCritical();
+	if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+	if (rand(100) < critChance) crit = true;
+	damage += sharedKinesisMidpart(crit);
+	doPlasmaDamage(damage, true, true);
+	sharedKinesisEnding(damage, crit);
+}
+public function useCocytokinesis():void {
+	flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+	clearOutput();
+	fatigue(20, USEFATG_NORMAL);
+	outputText("You concentrate, focusing on the power of your mind. A moment later, energy forming into a small black icicle. You motion, sending the icicle flying toward [themonster]. The tossed projectile hits [themonster], dealing ");
+	var damage:Number = 0;
+	var crit:Boolean = false;
+	var critChance:int = 5;
+	critChance += combatMagicalCritical();
+	if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+	if (rand(100) < critChance) crit = true;
+	damage += sharedKinesisMidpart(crit);
+	doBlackIceDamage(damage, true, true);
 	sharedKinesisEnding(damage, crit);
 }
 public function sharedKinesisMidpart(crit:Boolean):Number {

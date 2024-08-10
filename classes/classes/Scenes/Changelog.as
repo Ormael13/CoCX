@@ -270,11 +270,11 @@ public class Changelog extends BaseContent
 			outputText("-New tier 5 sensitivity lvl-up perk: Umbrakinesis. Req. Job: Psychic perk and 135+ sensitivity. Effect: As psychic you have gained ability to manipulate or control darkness.\n");
 			outputText("-New tier 5 sensitivity lvl-up perk: Acidokinesis. Req. Job: Psychic perk and 135+ sensitivity. Effect: As psychic you have gained ability to manipulate or control acid.\n");
 			outputText("-Drider-Weave Sheer Robe was given Revealing tag. Chicke Harpy tooltip/hint was updated to point to correct mountains part.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New mutation perk: Hydra Blood (Evolved). Req. Hydra Blood (Primitive) and lvl 60+. Effects: Improve existing Regeneration by 3% negated by fire damage and increase acid and poison effects by 75%. Your blood is ruinous and inflicts your fang venom when damaged.\n");
+			outputText("-New mutation perk: Hydra Blood (Final Form). Req. Hydra Blood (Evolved) and lvl 90+. Effects: Improve existing Regeneration by 4% negated by fire damage and increase acid and poison effects by 100%. Your blood is ruinous and inflicts your fang venom when damaged. Bite attacks deals 50% more damage.\n");
+			outputText("-New tier 6 sensitivity lvl-up perk: Ionikinesis. Req. Pyrokinesis, Electrokinesis perks and 160+ sensitivity. Effect: As psychic you have gained ability to manipulate or control plasma.\n");
+			outputText("-New tier 6 sensitivity lvl-up perk: Cocytokinesis. Req. Cryokinesis, Umbrakinesis perks and 160+ sensitivity. Effect: As psychic you have gained ability to manipulate or control black ice.\n");
+			outputText("-New damage type: Black Ice - it's mix of ice and darkness dmg and would be displayed as dealing two types of dmg.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -297,6 +297,24 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Lord Shadeogorath) (Furrin Gok) (khovel) (Chibizs) (Svalkash) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Edward Darksong)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Dracula/lina PC unable to find get ghoul if they not learned this as normal Vampire, unable to buy manual for 1st atk: f. swords, Arigean Princess PC not been fully immune to TF-ing like other perm races, Weresharks not having their stats changing according to moon phase or boosted during use of Crinos Shape, Phoenix TF adding mutagen penatly instead of stat curse, ");
@@ -370,20 +388,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -416,12 +422,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

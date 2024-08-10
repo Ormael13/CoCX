@@ -4563,6 +4563,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalArsenal)) HBD *= 2;
 		if (player.hasPerk(PerkLib.LionHeart)) HBD *= 2;
 		if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 1) HBD *= (1 + (0.25 * player.perkv1(IMutationsLib.EquineMuscleIM)));
+		if (player.perkv1(IMutationsLib.HydraBloodIM) >= 4) HBD *= 1.5;
 		HBD *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		HBD = Math.round(HBD);
 		doDamage(HBD, true, true);
@@ -4648,6 +4649,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg2 *= 2;
 					if (player.armor == armors.ELFDRES && player.isElf()) lustDmg2 *= 2;
 					if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg2 *= 2;
+					if (player.perkv1(IMutationsLib.HydraBloodIM) >= 4) lustDmg2 *= 1.5;
 					lustDmg2 *= 0.2;
 					lustDmg2 *= d3Bdcc;
 					lustDmg2 *= 1+(poisonScaling/10);
@@ -4814,6 +4816,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					else damage *= 1.5;
 				}
 				if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 1) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.EquineMuscleIM)));
+				if (player.perkv1(IMutationsLib.HydraBloodIM) >= 4) damage *= 1.5;
 				damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 				damage = Math.round(damage);
 				doDamage(damage);
@@ -5752,6 +5755,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				else damage *= 1.5;
 			}
 			if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 1) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.EquineMuscleIM)));
+			if (player.perkv1(IMutationsLib.HydraBloodIM) >= 4) damage *= 1.5;
 			damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 			damage = Math.round(damage);
 			var totalDamage:Number;

@@ -23,6 +23,8 @@ public class HydraBloodMutation extends IMutationPerkType
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1) descS += "Improve existing Regeneration by " + pTier + "% negated by fire damage";
 			if (pTier >= 2) descS += "and increase acid and poison effect by "+(pTier*25)+"%";
+            if (pTier >= 3) descS += ". Your blood is ruinous and inflicts your fang venom when damaged";
+            if (pTier >= 4) descS += ". Bite attacks deals 50% more damage";
             if (descS != "")descS += ".";
             return descS;
         }
@@ -59,7 +61,7 @@ public class HydraBloodMutation extends IMutationPerkType
 
         public function HydraBloodMutation() 
 		{
-			super(mName + " IM", mName, SLOT_BLOODSTREAM, 2);
+			super(mName + " IM", mName, SLOT_BLOODSTREAM, 4);
         }
         
     }

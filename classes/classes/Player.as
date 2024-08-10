@@ -2865,6 +2865,16 @@ use namespace CoC;
 				return damage;
 			}
 		}
+		public function hydraBloodSplash():void {
+			var d1Bdcc:Number = 1;
+			if (hasPerk(PerkLib.ImprovedVenomGlandSu)) d1Bdcc *= 2;
+			CoC.instance.monster.statStore.addBuffObject({str:-d1Bdcc,spe:-d1Bdcc}, "Poison",{text:"Poison"});
+			if(CoC.instance.monster.hasStatusEffect(StatusEffects.NagaVenom)){
+				CoC.instance.monster.addStatusValue(StatusEffects.NagaVenom,2,2);
+				CoC.instance.monster.addStatusValue(StatusEffects.NagaVenom,1,d1Bdcc);
+			}
+			else CoC.instance.monster.createStatusEffect(StatusEffects.NagaVenom,d1Bdcc,2,0,0);
+		}
 		public function difficultyDamageMultiplier(damage:Number):Number{
 			var damageMultiplier:Number = 1;
 			//EZ MOAD 1/10th damage
@@ -2952,6 +2962,7 @@ use namespace CoC;
 								physTeaseDmg = true;
 								CoC.instance.monster.teased(SceneLib.combat.teases.teaseBaseLustDamage() * CoC.instance.monster.lustVuln);
 							}
+							if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
 							// Bookmark
 							if (damagePercentArmor() > 1){
 								armorMod = 1 / damagePercentArmor();
@@ -2967,6 +2978,7 @@ use namespace CoC;
 							}
 							break;
 						case 4: // magical
+							if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
 							if (damagePercentMRes() > 1){
 								armorMod = 1 / damagePercentMRes();
 							}
@@ -2981,6 +2993,7 @@ use namespace CoC;
 							}
 							break;
 						case 5: // fire
+							if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
 							if (damagePercentMRes() > 1){
 								armorMod = 1 / damagePercentMRes();
 								if (hasPerk(PerkLib.WalpurgisIzaliaRobe)) armorMod = armorMod/4*3;
@@ -2996,6 +3009,7 @@ use namespace CoC;
 							}
 							break;
 						case 6: // ice
+							if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
 							if (damagePercentMRes() > 1){
 								armorMod = 1 / damagePercentMRes();
 							}
@@ -3010,6 +3024,7 @@ use namespace CoC;
 							}
 							break;
 						case 7: // lightning
+							if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
 							if (damagePercentMRes() > 1){
 								armorMod = 1 / damagePercentMRes();
 							}
@@ -3024,6 +3039,7 @@ use namespace CoC;
 							}
 							break;
 						case 8: // darkness
+							if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
 							if (damagePercentMRes() > 1){
 								armorMod = 1 / damagePercentMRes();
 							}
@@ -3038,6 +3054,7 @@ use namespace CoC;
 							}
 							break;
 						case 9: // poison
+							if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
 							if (damagePercentMRes() > 1){
 								armorMod = 1 / damagePercentMRes();
 							}
@@ -3052,6 +3069,7 @@ use namespace CoC;
 							}
 							break;
 						case 10: // wind
+							if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
 							if (damagePercentMRes() > 1){
 								armorMod = 1 / damagePercentMRes();
 							}
@@ -3066,6 +3084,7 @@ use namespace CoC;
 							}
 							break;
 						case 11: // water
+							if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
 							if (damagePercentMRes() > 1){
 								armorMod = 1 / damagePercentMRes();
 							}
@@ -3080,6 +3099,7 @@ use namespace CoC;
 							}
 							break;
 						case 12: // earth
+							if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
 							if (damagePercentMRes() > 1){
 								armorMod = 1 / damagePercentMRes();
 							}
@@ -3094,6 +3114,7 @@ use namespace CoC;
 							}
 							break;
 						case 13: // acid
+							if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
 							if (damagePercentMRes() > 1){
 								armorMod = 1 / damagePercentMRes();
 							}
@@ -3108,6 +3129,7 @@ use namespace CoC;
 							}
 							break;
 						case 14: // psychic
+							if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
 						//	if (damagePercentMRes() > 1){
 						//		armorMod = 1 / damagePercentMRes();
 						//	}
@@ -3122,6 +3144,7 @@ use namespace CoC;
 							}
 							break;
 						case 15: // true
+							if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
 							for(i =0; i < remainingHit.length; i++){
 								remainingHit[i] *= armorMod;
 								remainingHit[i] = reduceAcidDamage(remainingHit[i]);
@@ -3132,6 +3155,7 @@ use namespace CoC;
 							}
 							break;
 						default:
+							if (perkv1(IMutationsLib.HydraBloodIM) >= 3) hydraBloodSplash();
 							if (damagePercentArmor() > 1){
 								armorMod = 1 / damagePercentArmor();
 							}

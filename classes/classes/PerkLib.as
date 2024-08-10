@@ -568,6 +568,12 @@ public class PerkLib
 		public static const Acidokinesis:PerkType = mk("Acidokinesis", "Acidokinesis",
 				"As psychic you have gained ability to manipulate or control acid.",
 				"You've chosen the 'Acidokinesis' perk. As psychic you have gained ability to manipulate or control acid.");
+		public static const Ionikinesis:PerkType = mk("Ionikinesis", "Ionikinesis",
+				"As psychic you have gained ability to manipulate or control plasma.",
+				"You've chosen the 'Ionikinesis' perk. As psychic you have gained ability to manipulate or control plasma.");
+		public static const Cocytokinesis:PerkType = mk("Cocytokinesis", "Cocytokinesis",
+				"As psychic you have gained ability to manipulate or control black ice.",
+				"You've chosen the 'Cocytokinesis' perk. As psychic you have gained ability to manipulate or control black ice.");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -578,6 +584,27 @@ public class PerkLib
 		public static const StrongerTamedMosters:PerkType = mk("Stronger Tamed Mosters", "Stronger Tamed Mosters",
 				".",
 				"You've chosen the 'Stronger Tamed Mosters' perk. .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk. .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk. .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk. .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk. .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk. .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk. .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk. .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk. .");
@@ -7366,6 +7393,12 @@ public class PerkLib
                     .requirePerk(Desensitization)
                     .requireLevel(30);
             //Tier 6 Sensitivity Perks
+            Ionikinesis.requireSen(160)
+                    .requirePerks(Pyrokinesis, Electrokinesis)
+                    .requireLevel(36);
+            Cocytokinesis.requireSen(160)
+                    .requirePerks(Cryokinesis, Umbrakinesis)
+                    .requireLevel(36);
 			EpicSensitivity.requireSen(10)
                     .requireLevel(36);
             //Tier 7 Sensitivity Perks
