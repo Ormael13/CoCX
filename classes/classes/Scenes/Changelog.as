@@ -122,17 +122,24 @@ public class Changelog extends BaseContent
 			outputText("-Quality affects weapon effects such as stun, bleed, and bonus tease damage. (aimozg)\n");
 			outputText("-Race tf added as item effect (can be added to non-random items now) (aimozg)\n");
 			outputText("-Cursed TF enchantment for races: Lizard, Wolf (aimozg)\n");
+			outputText("-Fix some item effects not working. (aimozg)\n");
+			outputText("-Fix: When crafting pills changing or picking the same residue cause currently added residue to vanish instead of been returned. (aimozg)\n");
+			outputText("-Fix zenji village, code var change for cocksock type, patches broken arms issue. (Jtecx)\n");
+			outputText("-Manacost for MM added as alt cost. (Jtecx) (Only for True Demon PC's)\n");
+			outputText("-Spelling fixes. (Jtecx)\n");
+			outputText("-Adding in IMutations name-duplication check. (Jtecx)\n");
 			outputText("-Bestial Blademaster armor has the revealing tag now, because reasons. (Lord Shadeogorath)\n");
 			outputText("-Implemented horse and kirin taur revamp sprites (by Liadri). (Lord Shadeogorath)\n");
 			outputText("-Demon face now changes based on corruption. (Lord Shadeogorath)\n");
 			outputText("-Fixed a bug causing the goo armor taur sprite to not show. (Lord Shadeogorath)\n");
+			outputText("-Horse face sprite (by Liadri) implementation. (Lord Shadeogorath)\n");
 			outputText("-Fix for small weapons giving wrong weapons mastery. (Imperfect Spell)\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-\n");
 			//outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment for odd one mist beings.\n");
 			//outputText("-New TF item (by Shigure): Moth's Dust. Buyable in Moga Hen shop. Using this item will turn PC into moth. Moth bonuses at 10 pts in racial score (scalable): -30% to Tou multi, +150% to Spe multi, +70% to Wis multi, +30% to Lib multi, +70 to sensitivity.\n");//Dropped by Corrupted Troll enemies.
-			//outputText("-New Special names: Solaria (salamander), Drake (hydra). Each of them will start with matching bloodline perk to match their ancestor race.\n");//, Veseshe (elf)
+			//outputText("-New Special names: Veseshe (elf), Veseshe (elf). Each of them will start with matching bloodline perk to match their ancestor race.\n");
 			outputText("-When exploring Deepwoods can find new dungeon - Twilight Grove. It's potentialy dangerous place for pure PC's but resort-like placefor alraunes and/or corrupt PC's.\n");
 			outputText("-Can explore and clear 5th floor of River Dungeon. It have monsters from lvl 58 to 70 and boss is lvl 73. Floor is divided into three subareas: first is normal, second is hot enough to have weaker effect found in Vulcanic Crag (constant fire dmg) and third is cold enough to have weaker effect found in Glacial Rift (constant ice damage). ");
 			outputText("There are also few rooms where two nearby subareas meets. In rooms where second and third area meets climate is much more harsh and player is affected by both constant fire and ice dmg that are much stronger then in second or third subarea.\n");
@@ -149,7 +156,6 @@ public class Changelog extends BaseContent
 			outputText("-Fix for Zenji post-halloween. (GatoGrande)\n");
 			outputText("-Bad End from overuse Cerulean Potion from Giacomo was changed into way to gain Souless perk and become true demon PC. It comes with few negative side effects but would they stop you a TRUE DEMON, RIGHT?\n");
 			outputText("-Added devil eyes to count for demon score (demon tf would be able to grant devil eyes too)\n");
-			outputText("-Fix zenji village, code var change for cocksock type, patches broken arms issue. (Jtecx)\n");
 			outputText("-True Demon type enemies would have now their base HP halved, their regeneration doubled (after adding all the regenerations sources), increased base m.res by 30 on top of current magic resistance values.\n");
 			outputText("-Souless perk will grant pc reduction of max HP base by half (like true demon enemies), add 1% innate HP regen and double final % regeneration part, magic resistance increased by 30 pts and add overmaxHP effect same as enemy demons benefits (1% overmax HP per each PC level)\n");
 			outputText("-Dynamically display the name of a racial requirement. (PhillipDaisySeventh)\n");
@@ -157,19 +163,16 @@ public class Changelog extends BaseContent
 			outputText("-Human Eyes (Final Form) would now additionaly grant Dark Vision like some of the eye types.\n");
 			outputText("-Etna venom effect and kitsune residue magic on increasing cum multiplier have been increase to reach 50% more then before (from cap of 10k to 15k). It would also show bolded part of scene text when the effect of venom trigger.\n");
 			outputText("-Soulforce resource is replaced by different one for PC that have Soulless perk: Demonic Energy. It caps at 50 + 10*level. Can be used for different bonuses. DE can be gained from eating lethicite type item. Lethicite item was renamed to Lesser Lethicite.\n");
-			outputText("-Horse face sprite (by Liadri) implementation. (Lord Shadeogorath)\n");
 			outputText("-Spending 200 demonic energy true demon PC can rise one of elemental dao mastery by 1 layer.\n");
 			outputText("-New event perk: Strengthen body. Gained / Upgraded by spending Demonic Energy (25 base rank and increase by 5 pts per each new rank). Effects: Consume the stored energy of souls to raise your strength, toughness and speed by 5% permanently. This change persists through time.\n");
 			outputText("-New event perk: Strengthen magic. Gained / Upgraded by spending Demonic Energy (25 base rank and increase by 5 pts per each new rank). Effects: Consume the stored energy of souls to raise your intelligence, wisdom and libido by 5% permanently. This change persists through time.\n");
 			outputText("-NPC's that can make legendary items have lower min. lvl req. to find them (25 > 20)\n");
 			outputText("-New consumable (by Liadri): average Lethicite. Drops from true demon enemies. Consuming it by PC with Soulless perk will give up to 100 demonic energy.\n");
-			outputText("-Manacost for MM added as alt cost. (Jtecx) (Only for True Demon PC's)\n");
 			outputText("-Added mockfights to Nadia. (Svalkash)\n");
 			outputText("-New Dark Ascension perk: Efficient Soul Consumption. Decrease the cost of upgrading yourself through demonic energy by 5% per rank. Max Rank: 19.\n");
 			outputText("-PC with Soulless perk no longer can use normal ascension instead using variant dark ascension. It have it own choice of perks to buy and some of the options that normal ascension have.\n");
 			outputText("-New consumable (by Liadri): Greater Lethicite. Drops from true demon enemies. Consuming it by PC with Soulless perk will give up to 250 demonic energy.\n");
 			outputText("-New Dark Ascension perk: The Dark Soul. You have acquired permanent power from the many souls you consumed in your previous timelines. Raise core stats cap by 10 per rank. Max Rank: 10.\n");
-			outputText("-Fix some item effects not working. (aimozg)\n");
 			outputText("-New event perk: Soul Drinker. Gained by becoming Dracula/lina. Effects: Those creatures you defeat and drink from have parts of their soul stolen with their blood increasing your overall stats by 1% for each victim drained.\n");
 			outputText("-When studing Combat Manual in cabin can choose which stat it would rise.\n");
 			outputText("-Metamoph would use eityher Mana (PC with Soulless  perk) or SF (all other PC's). (Jtecx/Svalkash)\n");
@@ -180,7 +183,6 @@ public class Changelog extends BaseContent
 			outputText("-New head jewelery (by Liadri): Golden horn ornament - buyable at Kaiba shop in Tel'Adre or dropped from true demon enemies. Cost 400 gems. +25% to tease/black magic damage while worn. (req. to have demon horns)\n");
 			outputText("-PC with demonic vagina could access new unique sex scene: Succubus Feast. If PC have soulless perk and enemy is not group having intact soul scene will have additional bonus of harvesting lethicite from that enemy.\n");
 			outputText("-New consumable (by Liadri): Grand Lethicite. Drops from true demon enemies of from unique sex scene for true demon (when defeating generic enemy with intact soul). Consuming it by PC with Soulless perk will give up to 750 demonic energy.\n");
-			outputText("-Fix: When crafting pills changing or picking the same residue cause currently added residue to vanish instead of been returned. (aimozg)\n");
 			outputText("-Fixing weirdness on feral combat ingoring all handless PC's (or was it maidenless ones...). Now even they can have rizz.\n");
 			outputText("-Misdirection, Rapier Training and Tech Overdrive perks can be permed on ascension/dark ascension.\n");
 			outputText("-Fixed: catalysts being consumed by inspection, fond issues in physical specials, typos. (Svalkash)\n");
@@ -198,7 +200,7 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perks: Drake Bones/Heart/Lungs - they have same amount of tiers and effects as Draconic Bones/Heart/Lungs. Req. to get them are the same too. In cases when internal mutation wasn't accesable to race without changing partialy into different dragon-like race checks was fixed.\n");
 			outputText("-When needed in race scores IM checks for Draconic IM's was replaced by checks for Drake IM checks.\n");
 			outputText("-Yggdrasil dragon breath changed from poison breath to poisonous sap breath (deal poison+water+earth) damage.\n");
-			outputText("-Added Descendant and Bloodline perks for Human (4 stages) race.\n");
+			outputText("-Added Descendant and Bloodline perks for Human (4 stages), Werefox races.\n");//, Werewolf, Wereshark
 			outputText("-Steel Storm would affect all dual gauntlet/claw type weapons too. Equipping gauntlet/claw type weapons will not req. Dual Wield perk.\n");
 			outputText("-Lethice Staff spellpower bonus doubled.\n");
 			outputText("-Finishing Alvina/Siegweird storyline (up to gain spell reward) would each grants 5 ascension perk points and will be under quest section of calculation.\n");
@@ -241,12 +243,10 @@ public class Changelog extends BaseContent
 			outputText("-New tier 1 wisdom lvl-up perk: Working Together. Req. Beast 02 perk and 55+ wisdom. Effect: Cooperating your tamed monsters would empower the one attacking. (+1x to dmg multi of attacking monster per tamed monster after 1st)\n");
 			outputText("-Rathazul would now be giving offer to recruit him to camp each day in case of rejecting on previous day.\n");
 			outputText("-'Go Demon' option in Factory changed to be no longer bad end. As the scene describe PC turns into True Dmeon. But we all know now that is not game over... right? So along other existing methods it will be ANOTHER way to go true demon PC mode. Naturaly if PC is already soulless when meeting succubus he can't take her 'Go Demon' offer.\n");
-			outputText("-Spelling fixes. (Jtecx)\n");
 			outputText("-New tier 1 sensitivity lvl-up perk: Sixth Sense. Req. Job: Esper perk and 25+ sensitivity. Effect: You are not affected by blind and other confusing effects. Increase melee/range accuracy by 10%.\n");
 			outputText("-Arigean arms and tails would count as natural weapons. Tails would do bite and slam attack(s).\n");
 			outputText("-Remove Balls option in metamorph would remove trap/uniball effect too.\n");
 			outputText("-New necklace (by Liadri): Silver cross necklace - obtained radomly after any defeat as herm / female OR bought from Giacomo. Cost 400 gems. Effect: +50% to tease and magical damage when used by PC with soulless perk.\n");
-			outputText("-Adding in IMutations name-duplication check. (Jtecx)\n");
 			outputText("-New mutation perk: Human Digestive Tract (Evolved). Req. Human Digestive Tract (Primitive) and lvl 60+. Effects: Your digestive tract improved allowing to get better nurishment from all the ingested substances (+60%). Increase limit when PC gain weight from eating too much by 45. Can slowly remove harmfull substances (-1% of lust per turn)\n");
 			outputText("-New mutation perk: Human Metabolism (Evolved). Req. Human Metabolism (Primitive) and lvl 60+. Effects: Your metabolism changes allowing to slowly detoxification of poisons or slight faster fatigue recovery (30% chance to instantly remove some of toxic substance from body, -3% of lust / -1% of fatigue per turn, 2x shorter elemental dot effects duration)\n");
 			outputText("-New tier 4 wisdom lvl-up perk: Empowered Taming. Req. Fourth Tamer of the Apocalypse perk and 130+ wisdom. Effect: During taming monster it wisdom is treated as if it was 80% lower.\n");
@@ -727,7 +727,7 @@ public class Changelog extends BaseContent
 			outputText("-Satyr race racial score and bonuses been reworked. Now it will be giving bonuses for 12/18 pts as satyr/faun and elder satyr/faun: +50%/+85% to str multi, +40%/+70% to tou multi, +150%/+175% to lib multi, +60 to sens\n");
 			outputText("-Red Panda race score req. increased from 8 to 10 and bonuses to stats slight changed: +20% to str multi, +80% to spe multi and +50% to wis multi. It can also use Grab & Slam specials like bear/panda race and Body Slam special that pig/boar can use.\n");
 			outputText("-Added Descendant and Bloodline perks for Melkie, Hydra, Salamander, Werewolf, Wereshark, Ratatoskr races.\n");
-			outputText("-New Special names: Solaria (salamander), Drake (hydra). Each of them will start with matching bloodline perk to match their ancestor race.\n");//, Veseshe (elf)
+			outputText("-New Special names: Solaria (salamander), Drake (hydra). Each of them will start with matching bloodline perk to match their ancestor race.\n");
 			outputText("-'Melkie Lung' internal mutation been renamed to 'Feyfolk Voice' and now can be additionaly picked by satyr race. It spell damage reduction been changed to be 5% * tier and increasing sing/perform power to be 25 * tier. Stat multi been changed form speed to toughness and bit lowered on 2nd and 3rd tier.\n");
 			outputText("-All human internal mutations desc have added part on need to keep high human score to have their effects all active (some effects could still happen when it's below req. score but mostly it's needed to have those 18+ pts)\n");
 			outputText("-Ayane when recruited to camp now could be combat henchman with support mage options like: healing, i-frame (expire after 1 round) and foxfire.\n");

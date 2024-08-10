@@ -63,6 +63,7 @@ public class WerefoxRace extends Race {
 				.hasPerk(PerkLib.VulpesthropyDormant, +1)
 				.hasPerk(PerkLib.Vulpesthropy, +2, -11);
 		
+		addBloodline(PerkLib.WerefoxsDescendant,PerkLib.BloodlineWerefox);
 		addMutation(IMutationsLib.WhiteFacedOneBirthrightIM);
 		
 		buildTier(12, "werefox cub")
