@@ -949,15 +949,35 @@ public class Combat extends BaseContent {
 			} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
 		if (player.hasPerk(PerkLib.Pyrokinesis)) {
-			bd = buttons.add("Pyrokinesis", usePyrokinesis, "Attempt to attack the enemy with fire ball.  Damage done is determined by your sensitivity.\n");
+			bd = buttons.add("Pyrokinesis", usePyrokinesis, "Attempt to attack the enemy with fire ball. Damage done is determined by your sensitivity.\n");
 			bd.requireFatigue(20);
 		}
 		if (player.hasPerk(PerkLib.Hydrokinesis)) {
-			bd = buttons.add("Hydrokinesis", useHydrokinesis, "Attempt to attack the enemy with water sphere.  Damage done is determined by your sensitivity.\n");
+			bd = buttons.add("Hydrokinesis", useHydrokinesis, "Attempt to attack the enemy with water sphere. Damage done is determined by your sensitivity.\n");
 			bd.requireFatigue(20);
 		}
 		if (player.hasPerk(PerkLib.Cryokinesis)) {
-			bd = buttons.add("Cryokinesis", useCryokinesis, "Attempt to attack the enemy with icicle.  Damage done is determined by your sensitivity.\n");
+			bd = buttons.add("Cryokinesis", useCryokinesis, "Attempt to attack the enemy with icicle. Damage done is determined by your sensitivity.\n");
+			bd.requireFatigue(20);
+		}
+		if (player.hasPerk(PerkLib.Geokinesis)) {
+			bd = buttons.add("Geokinesis", useGeokinesis, "Attempt to attack the enemy with rock. Damage done is determined by your sensitivity.\n");
+			bd.requireFatigue(20);
+		}
+		if (player.hasPerk(PerkLib.Electrokinesis)) {
+			bd = buttons.add("Electrokinesis", useElectrokinesis, "Attempt to attack the enemy with bolt of lightning. Damage done is determined by your sensitivity.\n");
+			bd.requireFatigue(20);
+		}
+		if (player.hasPerk(PerkLib.Aerokinesis)) {
+			bd = buttons.add("Aerokinesis", useAerokinesis, "Attempt to attack the enemy with wind sphere. Damage done is determined by your sensitivity.\n");
+			bd.requireFatigue(20);
+		}
+		if (player.hasPerk(PerkLib.Umbrakinesis)) {
+			bd = buttons.add("Umbrakinesis", useUmbrakinesis, "Attempt to attack the enemy with darkness sphere. Damage done is determined by your sensitivity.\n");
+			bd.requireFatigue(20);
+		}
+		if (player.hasPerk(PerkLib.Acidokinesis)) {
+			bd = buttons.add("Acidokinesis", useAcidokinesis, "Attempt to attack the enemy with acid ball. Damage done is determined by your sensitivity.\n");
 			bd.requireFatigue(20);
 		}
 		//Esper cool beans (end)
@@ -15867,95 +15887,141 @@ public function usePyrokinesis():void {
 	flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 	clearOutput();
 	fatigue(20, USEFATG_NORMAL);
-	outputText("You concentrate, focusing on the power of your mind. A moment later, energy forming into a small ball of fire. You motion, sending the ball flying toward [themonster].  ");
-	var damage:Number = scalingBonusSensitivity() * 2;
-	if (damage < 10) damage = 10;
-	//soulskill mod effect
-	//damage *= combat.soulskillMagicalMod();
-	//other bonuses
-	if (player.hasPerk(PerkLib.Heroism) && (monster && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType)))) damage *= 2;
-	damage = Math.round(damage);
+	outputText("You concentrate, focusing on the power of your mind. A moment later, energy forming into a small ball of fire. You motion, sending the ball flying toward [themonster]. The tossed projectile hits [themonster], dealing ");
+	var damage:Number = 0;
 	var crit:Boolean = false;
 	var critChance:int = 5;
 	critChance += combatMagicalCritical();
 	if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-	if (rand(100) < critChance) {
-		crit = true;
-		damage *= 1.75;
-	}
-	outputText("The tossed projectile hits [themonster], dealing ");
+	if (rand(100) < critChance) crit = true;
+	damage += sharedKinesisMidpart(crit);
 	damage = Math.round(damage*fireDamageBoostedByDao());
 	doFireDamage(damage, true, true);
-	outputText(" damage.");
-	if (crit) outputText(" <b>*Critical Hit!*</b>");
-	outputText("\n\n");
-	checkAchievementDamage(damage);
-	//flags[kFLAGS.SPELLS_CAST]++;
-	//if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-	//spellPerkUnlock();
-	combat.heroBaneProc(damage);
-	statScreenRefresh();
-	if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-	else enemyAI();
+	sharedKinesisEnding(damage, crit);
 }
 public function useHydrokinesis():void {
 	flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 	clearOutput();
 	fatigue(20, USEFATG_NORMAL);
-	outputText("You concentrate, focusing on the power of your mind. A moment later, energy forming into a small sphere of water. You motion, sending the ball flying toward [themonster].  ");
-	var damage:Number = scalingBonusSensitivity() * 2;
-	if (damage < 10) damage = 10;
-	//soulskill mod effect
-	//damage *= combat.soulskillMagicalMod();
-	//other bonuses
-	if (player.hasPerk(PerkLib.Heroism) && (monster && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType)))) damage *= 2;
-	damage = Math.round(damage);
+	outputText("You concentrate, focusing on the power of your mind. A moment later, energy forming into a small sphere of water. You motion, sending the sphere flying toward [themonster]. The tossed projectile hits [themonster], dealing ");
+	var damage:Number = 0;
 	var crit:Boolean = false;
 	var critChance:int = 5;
 	critChance += combatMagicalCritical();
 	if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-	if (rand(100) < critChance) {
-		crit = true;
-		damage *= 1.75;
-	}
-	outputText("The tossed projectile hits [themonster], dealing ");
+	if (rand(100) < critChance) crit = true;
+	damage += sharedKinesisMidpart(crit);
 	damage = Math.round(damage*waterDamageBoostedByDao());
 	doWaterDamage(damage, true, true);
-	outputText(" damage.");
-	if (crit) outputText(" <b>*Critical Hit!*</b>");
-	outputText("\n\n");
-	checkAchievementDamage(damage);
-	//flags[kFLAGS.SPELLS_CAST]++;
-	//if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-	//spellPerkUnlock();
-	combat.heroBaneProc(damage);
-	statScreenRefresh();
-	if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-	else enemyAI();
+	sharedKinesisEnding(damage, crit);
 }
 public function useCryokinesis():void {
 	flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 	clearOutput();
 	fatigue(20, USEFATG_NORMAL);
-	outputText("You concentrate, focusing on the power of your mind. A moment later, energy forming into a small icicle. You motion, sending the ball flying toward [themonster].  ");
+	outputText("You concentrate, focusing on the power of your mind. A moment later, energy forming into a small icicle. You motion, sending the icicle flying toward [themonster]. The tossed projectile hits [themonster], dealing ");
+	var damage:Number = 0;
+	var crit:Boolean = false;
+	var critChance:int = 5;
+	critChance += combatMagicalCritical();
+	if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+	if (rand(100) < critChance) crit = true;
+	damage += sharedKinesisMidpart(crit);
+	damage = Math.round(damage*iceDamageBoostedByDao());
+	doIceDamage(damage, true, true);
+	sharedKinesisEnding(damage, crit);
+}
+public function useGeokinesis():void {
+	flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+	clearOutput();
+	fatigue(20, USEFATG_NORMAL);
+	outputText("You concentrate, focusing on the power of your mind. A moment later, energy forming into a small rock. You motion, sending the rock flying toward [themonster]. The tossed projectile hits [themonster], dealing ");
+	var damage:Number = 0;
+	var crit:Boolean = false;
+	var critChance:int = 5;
+	critChance += combatMagicalCritical();
+	if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+	if (rand(100) < critChance) crit = true;
+	damage += sharedKinesisMidpart(crit);
+	damage = Math.round(damage*earthDamageBoostedByDao());
+	doEarthDamage(damage, true, true);
+	sharedKinesisEnding(damage, crit);
+}
+public function useElectrokinesis():void {
+	flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+	clearOutput();
+	fatigue(20, USEFATG_NORMAL);
+	outputText("You concentrate, focusing on the power of your mind. A moment later, energy forming into a small bolt of lightning. You motion, sending the bolt flying toward [themonster]. The tossed projectile hits [themonster], dealing ");
+	var damage:Number = 0;
+	var crit:Boolean = false;
+	var critChance:int = 5;
+	critChance += combatMagicalCritical();
+	if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+	if (rand(100) < critChance) crit = true;
+	damage += sharedKinesisMidpart(crit);
+	damage = Math.round(damage*lightningDamageBoostedByDao());
+	doLightningDamage(damage, true, true);
+	sharedKinesisEnding(damage, crit);
+}
+public function useAerokinesis():void {
+	flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+	clearOutput();
+	fatigue(20, USEFATG_NORMAL);
+	outputText("You concentrate, focusing on the power of your mind. A moment later, energy forming into a small sphere of wind. You motion, sending the sphere flying toward [themonster]. The tossed projectile hits [themonster], dealing ");
+	var damage:Number = 0;
+	var crit:Boolean = false;
+	var critChance:int = 5;
+	critChance += combatMagicalCritical();
+	if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+	if (rand(100) < critChance) crit = true;
+	damage += sharedKinesisMidpart(crit);
+	damage = Math.round(damage*windDamageBoostedByDao());
+	doWindDamage(damage, true, true);
+	sharedKinesisEnding(damage, crit);
+}
+public function useUmbrakinesis():void {
+	flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+	clearOutput();
+	fatigue(20, USEFATG_NORMAL);
+	outputText("You concentrate, focusing on the power of your mind. A moment later, energy forming into a small sphere made of darkness. You motion, sending the sphere flying toward [themonster]. The tossed projectile hits [themonster], dealing ");
+	var damage:Number = 0;
+	var crit:Boolean = false;
+	var critChance:int = 5;
+	critChance += combatMagicalCritical();
+	if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+	if (rand(100) < critChance) crit = true;
+	damage += sharedKinesisMidpart(crit);
+	damage = Math.round(damage*darknessDamageBoostedByDao());
+	doDarknessDamage(damage, true, true);
+	sharedKinesisEnding(damage, crit);
+}
+public function useAcidokinesis():void {
+	flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+	clearOutput();
+	fatigue(20, USEFATG_NORMAL);
+	outputText("You concentrate, focusing on the power of your mind. A moment later, energy forming into a small ball of acid. You motion, sending the ball flying toward [themonster]. The tossed projectile hits [themonster], dealing ");
+	var damage:Number = 0;
+	var crit:Boolean = false;
+	var critChance:int = 5;
+	critChance += combatMagicalCritical();
+	if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+	if (rand(100) < critChance) crit = true;
+	damage += sharedKinesisMidpart(crit);
+	damage = Math.round(damage*acidDamageBoostedByDao());
+	doAcidDamage(damage, true, true);
+	sharedKinesisEnding(damage, crit);
+}
+public function sharedKinesisMidpart(crit:Boolean):Number {
 	var damage:Number = scalingBonusSensitivity() * 2;
 	if (damage < 10) damage = 10;
 	//soulskill mod effect
 	//damage *= combat.soulskillMagicalMod();
 	//other bonuses
 	if (player.hasPerk(PerkLib.Heroism) && (monster && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType)))) damage *= 2;
-	damage = Math.round(damage);
-	var crit:Boolean = false;
-	var critChance:int = 5;
-	critChance += combatMagicalCritical();
-	if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-	if (rand(100) < critChance) {
-		crit = true;
-		damage *= 1.75;
-	}
-	outputText("The tossed projectile hits [themonster], dealing ");
-	damage = Math.round(damage*iceDamageBoostedByDao());
-	doIceDamage(damage, true, true);
+	if (crit) damage *= 1.75;
+	return damage;
+}
+public function sharedKinesisEnding(damage:Number, crit:Boolean):void {
 	outputText(" damage.");
 	if (crit) outputText(" <b>*Critical Hit!*</b>");
 	outputText("\n\n");

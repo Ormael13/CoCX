@@ -549,6 +549,21 @@ public class PerkLib
 		public static const Cryokinesis:PerkType = mk("Cryokinesis", "Cryokinesis",
 				"As psychic you have gained ability to manipulate or control ice.",
 				"You've chosen the 'Cryokinesis' perk. As psychic you have gained ability to manipulate or control ice.");
+		public static const Geokinesis:PerkType = mk("Geokinesis", "Geokinesis",
+				"As psychic you have gained ability to manipulate or control earth.",
+				"You've chosen the 'Geokinesis' perk. As psychic you have gained ability to manipulate or control earth.");
+		public static const Umbrakinesis:PerkType = mk("Umbrakinesis", "Umbrakinesis",
+				"As psychic you have gained ability to manipulate or control darkness.",
+				"You've chosen the 'Umbrakinesis' perk. As psychic you have gained ability to manipulate or control darkness.");
+		public static const Aerokinesis:PerkType = mk("Aerokinesis", "Aerokinesis",
+				"As psychic you have gained ability to manipulate or control air/wind.",
+				"You've chosen the 'Aerokinesis' perk. As psychic you have gained ability to manipulate or control air/wind.");
+		public static const Electrokinesis:PerkType = mk("Electrokinesis", "Electrokinesis",
+				"As psychic you have gained ability to manipulate or control lightning.",
+				"You've chosen the 'Electrokinesis' perk. As psychic you have gained ability to manipulate or control lightning.");
+		public static const Acidokinesis:PerkType = mk("Acidokinesis", "Acidokinesis",
+				"As psychic you have gained ability to manipulate or control acid.",
+				"You've chosen the 'Acidokinesis' perk. As psychic you have gained ability to manipulate or control acid.");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -559,24 +574,6 @@ public class PerkLib
 		public static const StrongerTamedMosters:PerkType = mk("Stronger Tamed Mosters", "Stronger Tamed Mosters",
 				".",
 				"You've chosen the 'Stronger Tamed Mosters' perk. .");
-		public static const :PerkType = mk("", "",
-				"As psychic you have gained ability to manipulate or control earth.",
-				"You've chosen the '' perk. As psychic you have gained ability to manipulate or control earth.");
-		public static const Umbrakinesis:PerkType = mk("Umbrakinesis", "Umbrakinesis",
-				"As psychic you have gained ability to manipulate or control darkness.",
-				"You've chosen the 'Umbrakinesis' perk. As psychic you have gained ability to manipulate or control darkness.");
-		public static const :PerkType = mk("", "",
-				"As psychic you have gained ability to manipulate or control lightning.",
-				"You've chosen the '' perk. As psychic you have gained ability to manipulate or control lightning.");
-		public static const :PerkType = mk("", "",
-				"As psychic you have gained ability to manipulate or control air.",
-				"You've chosen the '' perk. As psychic you have gained ability to manipulate or control air.");
-		public static const :PerkType = mk("", "",
-				"As psychic you have gained ability to manipulate or control acid.",
-				"You've chosen the '' perk. As psychic you have gained ability to manipulate or control acid.");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk. .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk. .");
@@ -7332,10 +7329,19 @@ public class PerkLib
             Cryokinesis.requireSen(85)
                     .requirePerk(JobPsychic)
                     .requireLevel(18);
+            Geokinesis.requireSen(85)
+                    .requirePerk(JobPsychic)
+                    .requireLevel(18);
             EyesOfTheHunterMaster.requireSen(100)
                     .requirePerk(EyesOfTheHunterExpert)
                     .requireLevel(18);
             //Tier 4 Sensitivity Perks
+            Electrokinesis.requireSen(110)
+                    .requirePerk(JobPsychic)
+                    .requireLevel(24);
+            Aerokinesis.requireSen(110)
+                    .requirePerk(JobPsychic)
+                    .requireLevel(24);
             TelekineticGrapple.requireSen(100)
                     .requirePerk(PsychicBolt)
                     .requireLevel(24);
@@ -7343,6 +7349,12 @@ public class PerkLib
                     .requirePerk(EyesOfTheHunterMaster)
                     .requireLevel(24);
             //Tier 5 Sensitivity Perks
+            Umbrakinesis.requireSen(135)
+                    .requirePerk(JobPsychic)
+                    .requireLevel(30);
+            Acidokinesis.requireSen(135)
+                    .requirePerk(JobPsychic)
+                    .requireLevel(30);
             EyesOfTheHunterEx.requireSen(25)
                     .requirePerk(EyesOfTheHunterNovice)
                     .requireLevel(30);

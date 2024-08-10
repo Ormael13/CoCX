@@ -249,7 +249,6 @@ public class Changelog extends BaseContent
 			outputText("-Adding in IMutations name-duplication check. (Jtecx)\n");
 			outputText("-New mutation perk: Human Digestive Tract (Evolved). Req. Human Digestive Tract (Primitive) and lvl 60+. Effects: Your digestive tract improved allowing to get better nurishment from all the ingested substances (+60%). Increase limit when PC gain weight from eating too much by 45. Can slowly remove harmfull substances (-1% of lust per turn)\n");
 			outputText("-New mutation perk: Human Metabolism (Evolved). Req. Human Metabolism (Primitive) and lvl 60+. Effects: Your metabolism changes allowing to slowly detoxification of poisons or slight faster fatigue recovery (30% chance to instantly remove some of toxic substance from body, -3% of lust / -1% of fatigue per turn, 2x shorter elemental dot effects duration)\n");
-			outputText("-New tier 11 misc lvl-up perk: Human Supremacy (Peerless). Req. Human Supremacy (Superior) perk and 51+ points in Internal Human Disposition score & 18+ points in Human score. Effect: Delay by 15 points appearing effect of negative HP regeneration. (+4 to human score)\n");
 			outputText("-New tier 4 wisdom lvl-up perk: Empowered Taming. Req. Fourth Tamer of the Apocalypse perk and 130+ wisdom. Effect: During taming monster it wisdom is treated as if it was 80% lower.\n");
 			outputText("-Increased save slot number to 36, new ExplorationEngine methods to edit the encounter map. (aimozg)\n");
 			outputText("-New mutation perk: Hydra Blood (Primitive). Req. Hydra Blood and lvl 30+. Effects: Improve existing Regeneration by 2% negated by fire damage and increase acid and poison effects by 50%.\n");
@@ -265,12 +264,12 @@ public class Changelog extends BaseContent
 			outputText("-New tier 2 sensitivity lvl-up perk: Pyrokinesis. Req. Job: Psychic perk and 60+ sensitivity. Effect: As psychic you have gained ability to manipulate or control fire.\n");
 			outputText("-New tier 2 sensitivity lvl-up perk: Hydrokinesis. Req. Job: Psychic perk and 60+ sensitivity. Effect: As psychic you have gained ability to manipulate or control water.\n");
 			outputText("-New tier 3 sensitivity lvl-up perk: Cryokinesis. Req. Job: Psychic perk and 85+ sensitivity. Effect: As psychic you have gained ability to manipulate or control ice.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New tier 3 sensitivity lvl-up perk: Geokinesis. Req. Job: Psychic perk and 85+ sensitivity. Effect: As psychic you have gained ability to manipulate or control earth.\n");
+			outputText("-New tier 4 sensitivity lvl-up perk: Electrokinesis. Req. Job: Psychic perk and 110+ sensitivity. Effect: As psychic you have gained ability to manipulate or control lightning.\n");
+			outputText("-New tier 4 sensitivity lvl-up perk: Aerokinesis. Req. Job: Psychic perk and 110+ sensitivity. Effect: As psychic you have gained ability to manipulate or control air/wind.\n");
+			outputText("-New tier 5 sensitivity lvl-up perk: Umbrakinesis. Req. Job: Psychic perk and 135+ sensitivity. Effect: As psychic you have gained ability to manipulate or control darkness.\n");
+			outputText("-New tier 5 sensitivity lvl-up perk: Acidokinesis. Req. Job: Psychic perk and 135+ sensitivity. Effect: As psychic you have gained ability to manipulate or control acid.\n");
+			outputText("-Drider-Weave Sheer Robe was given Revealing tag. Chicke Harpy tooltip/hint was updated to point to correct mountains part.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -481,6 +480,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 6 libido lvl-up perk: Corrupt the heart. Req. Corrupt the body perk. Effect: Lust vulnerability debuff can now stack beyond 0 up to -200%.\n");
 			outputText("-New tier 8 libido lvl-up perk: Greater Grapple. Req. Improved Grapple perk and 250+ lib. Effect: Attack three action per straddle or grappling turn. Increase straddle damage by another 20%.\n");
 			outputText("-New tier 10 libido lvl-up perk: Corrupt the mind. Req. Corrupt the heart perk. Effect: Lust vulnerability debuff can now stack beyond 0 up to -300%.\n");
+			outputText("-New tier 11 misc lvl-up perk: Human Supremacy (Peerless). Req. Human Supremacy (Superior) perk and 51+ points in Internal Human Disposition score & 18+ points in Human score. Effect: Delay by 15 points appearing effect of negative HP regeneration. (+4 to human score)\n");
 			outputText("-New tier 12 speed lvl-up perk: Arrow Storm. Req. Cupid perk. Effect: After striking a target each shot has a chance to pierce through and do a U-Turn to pierce the target again.\n");
 			outputText("-New tier 13 libido lvl-up perk: Corrupt the soul. Req. Corrupt the mind perk. Effect: Lust vulnerability debuff can now stack beyond 0 up to infinity. (well technicaly not infinity but only Spilly Stonewall PC maybe could reach that 'inifity')\n");
 			outputText("-New tier 13 speed lvl-up perk: Phantom Arrow. Req. Arrow Storm perk. Effect: By expending mana on each shot you create a copy of each of your arrows made of pure mana that replicate the trajectories of previous shots. Phantom arrows can trigger arrow storm.\n");

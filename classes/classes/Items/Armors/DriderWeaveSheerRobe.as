@@ -19,6 +19,7 @@ package classes.Items.Armors
 				'spellcost':-0.60,
 				'teasedmg':+50
 			});
+			withTag(A_REVEALING);
 		}
 		
 		override public function equipText():void {

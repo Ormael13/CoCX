@@ -4439,9 +4439,9 @@ public class Camp extends NPCAwareContent{
 				.hint("Visit the temple in the high mountains where Sapphire resides.")
 				.disableIf(!flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE], "Search the high mountains.", null, "???");
 		bd.add("Chicken Harpy", SceneLib.mountain.chickenHarpy)
-				.hint("Visit Chicken Harpy in the High Mountains.")
+				.hint("Visit Chicken Harpy in the Low Mountains.")
 				.disableIf(!player.hasItem(consumables.OVIELIX), "You need to have at least 1-2 ovi elixirs to have reason to look for her.")
-				.disableIf(flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] <= 1, "Search the high mountains with ovi elixir.", null, "???");
+				.disableIf(flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] <= 1, "Search the low mountains with ovi elixir.", null, "???");
 		bd.add("Oasis Tower", SceneLib.mountain.minervaScene.encounterMinerva)
 				.hint("Visit the ruined tower in the mountains where Minerva resides.")
 				.disableIf(flags[kFLAGS.MET_MINERVA] < 4, "Search the mountains.", null, "???");
