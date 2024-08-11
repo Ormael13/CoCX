@@ -78,6 +78,7 @@ public class CombatTeases extends BaseCombatContent {
 			if (power1 > powerC) power1 = powerC;
 			damagemultiplier += power1;
 		}
+		if (player.hasStatusEffect(StatusEffects.FontOfCorruption)) damagemultiplier *= 1.1;
 		tBLD *= damagemultiplier;
 
 		if (player.hasPerk(PerkLib.ChiReflowLust)) tBLD *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;

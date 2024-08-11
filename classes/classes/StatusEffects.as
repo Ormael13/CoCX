@@ -384,6 +384,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const FetishOn:StatusEffectType                       = mk("fetishON");
 		public static const FieryBand:StatusEffectType						= mk("Fiery Band");
 		public static const FletchingTable:StatusEffectType					= mk("Fletching Table");
+		public static const FontOfCorruption:StatusEffectType            	= mk("Font of corruption");
 		public static const FortressOfIntellect:StatusEffectType            = mk("Fortress of Intellect");
 		public static const FoundFactory:StatusEffectType                   = mk("Found Factory");
 		public static const FuckedMarble:StatusEffectType                   = mk("FuckedMarble");

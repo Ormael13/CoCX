@@ -13,6 +13,8 @@ import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
 import classes.display.SpriteDb;
 
+import coc.view.ButtonDataList;
+
 public class DemonLair extends BaseContent
 	{
 		
@@ -311,7 +313,7 @@ public class DemonLair extends BaseContent
 			menu();
 			addButton(0, "Talk", demonLairTalkMainMenu);
 			addButton(1, "Sex", demonLairSexMainMenu);
-			//2 - Font of corruption
+			addButton(2, "FoC", demonLairFontOfCorruption).hint("Font of corruption");
 			//3 - Private quarters
 			addButton(14, "Only visiting", demonLairOnlyVisiting);
 		}
@@ -375,7 +377,7 @@ public class DemonLair extends BaseContent
 				outputText("\"<i>Sure, my dear. Would you like wealth, power, or perhaps slaves to entertain you?</i>\"\n\n");
 				addButton(1, "Gift of wealth", demonLairTalkGiftOfWealth).hint("Gain gems.");
 				addButton(2, "Gift of power", demonLairTalkGiftOfPower).hint("Increases all trainable stats by 10 points. (up to cap)");
-				//addButton(3, "Gift of authority", demonLairTalkGiftOfAuthority).hint("");
+				//addButton(3, "Gift of authority", demonLairTalkGiftOfAuthority).hint("Gain a new slave for your personal harem.");
 			}
 			addButton(14, "Back", demonLairTalkMainMenu);
 		}
@@ -545,9 +547,78 @@ public class DemonLair extends BaseContent
 		
 		private function demonLairFontOfCorruption():void {
 			clearOutput();
-			outputText("\"<i></i>\"\n\n");
+			outputText("You let Xuviel know you would like to use the font to the side and he waves you to it. A font of purplish water indeed gushes constantly at the left corner of the room. It's ornament, the statue of a succubus achieving orgasm constantly gushing fluids through her polished stone pussy. You are pretty sure immerging items in such a font would enhance them with untold powers. Let alone what kind of powers you might gain by drinking directly from the fountain.\n\n");
 			menu();
+			addButton(1, "Defile item", demonLairFontOfCorruptionDefileItem);
+			addButton(3, "Drink from font", demonLairFontOfCorruptionDrinkFromFont);
 			addButton(14, "Back", demonLairMainMenu);
+		}
+		public function demonLairFontOfCorruptionDefileItem():void {
+			var improvableItems:Array = [
+				[weapons.BFSWORD, weapons.NPHBLDE, weapons.EBNYBLD],
+				[weapons.DBFSWO, weapons.T_HEART, weapons.DORSOUL],
+				[weapons.MASTGLO, weapons.KARMTOU, weapons.YAMARG],
+				[weapons.KATANA, weapons.MASAMUN, weapons.BLETTER],
+				[weapons.W_STAFF, weapons.U_STAFF, weapons.N_STAFF],
+				[weapons.DEMSCYT, weapons.LHSCYTH, weapons.HELRAIS],
+				[weapons.UGATANA, weapons.MOONLIT, weapons.C_BLADE],
+				[weapons.L__AXE, weapons.WG_GAXE, weapons.DE_GAXE],
+				[weapons.SPEAR, weapons.SESPEAR, weapons.DSSPEAR],
+				[weapons.JRAPIER, weapons.Q_GUARD, weapons.B_WIDOW],
+				[weapons.OTETSU, weapons.POCDEST, weapons.DOCDEST],
+				[weapons.BFTHSWORD, weapons.ARMAGED, weapons.CHAOSEA],
+				[weapons.A_WAND, weapons.OCCULUS, weapons.ECLIPSE],
+				[weapons.PFLUTTE, weapons.ELYSIUM, weapons.HELLCAL],
+				[weaponsrange.BOWLONG, weaponsrange.ARTEMIS, weaponsrange.WILDHUN],
+				[weaponsrange.SHUNHAR, weaponsrange.KSLHARP, weaponsrange.LEVHARP],
+				[weaponsrange.SIXSHOT, weaponsrange.GOODSAM, weaponsrange.BADOMEN],
+				[shields.SANCTYN, shields.SANCTYL, shields.SANCTYD],
+				[armors.LMARMOR, armors.BMARMOR, armors.S_ARMOR],
+				[armors.BLKIMONO, armors.IBKIMO, armors.TCKIMO],
+				[armors.BKIMONO, armors.IBKIMO, armors.TCKIMO],
+				[armors.PKIMONO, armors.IBKIMO, armors.TCKIMO],
+				[armors.RKIMONO, armors.IBKIMO, armors.TCKIMO],
+				[armors.WKIMONO, armors.IBKIMO, armors.TCKIMO],
+				[armors.SPKIMO, armors.OEKIMO, armors.OTKIMO],
+				[armors.CTPALAD, armors.CTHPALA, armors.CTBGUAR],
+				[armors.LTHRPNT, null, armors.CGUNSLI],
+				[armors.DEATHPO, null, armors.DEATHPGA]
+			];
+			clearOutput();
+			outputText("What item would you like to defile with the corruption of the font?");
+			outputText("\n\n<b>You currently have " + player.keyItemvX("Radiant shard", 1) + " radiant shards.</b>");
+			var selectfrom:int = 2;
+			var selectMenu:ButtonDataList = new ButtonDataList();
+			for (var i:int = 0; i < improvableItems.length; i++) {
+				if (improvableItems[i][selectfrom] == null) {/*do nothing*/
+				}
+				else {
+					var item:ItemType = improvableItems[i][selectfrom];
+					var from:ItemType = improvableItems[i][0];
+					selectMenu.add(item.id, curry(improveItem, item, from)).disableIf(!player.hasItem(from),"You need "+from.longName+" as a base to create this item")
+					.disableIf(player.keyItemvX("Radiant shard", 1) < 3,"You need at least three radiant shards in order to create this item.")
+					.disableIf(player.gems < 20000,"You need at least 20 000 gems in order to create this item");
+				}
+			}
+			submenu(selectMenu, demonLairFontOfCorruption);
+			
+			function improveItem(item:ItemType, from:ItemType):void {
+				clearOutput();
+				outputText("You immerse the item in the unholy fountain, smiling with glee as slimy darkness seems to creep in, attempting to remake it into something new and immensely powerful, gear worthy of a succubus. The item seems to resist the corruption for a moment but the material, like a cumming virgin, finally begin to soak and drink in the font’s liquid corruption darkening as something not unlike purple veins course across it. After a minute you pull the empowered item out of the font. You can’t wait to make use of it.\n\n");
+				if(player.keyItemvX("Radiant shard", 1) == 3) player.removeKeyItem("Radiant shard");
+				else player.addKeyValue("Radiant shard",1,-3);
+				player.gems -= 20000;
+				player.destroyItems(from, 1);
+				inventory.takeItem(item, explorer.done);
+			}
+		}
+		private function demonLairFontOfCorruptionDrinkFromFont():void {
+			clearOutput();
+			outputText("You drink a cup of the unholy waters, achieving spontaneous orgasm as pure corruption washes over you. You feel powerful and attractive, temptation made flesh. Your corrupted body demands to be looked at and touched and will likely prove the downfall of many mortals. You are well aware of how much, for a while, your seduction attempts will be enhanced by the unholy waters of the font.\n\n");
+			if (player.hasStatusEffect(StatusEffects.FontOfCorruption)) player.removeStatusEffect(StatusEffects.FontOfCorruption);
+			player.createStatusEffect(StatusEffects.FontOfCorruption, 7, 0, 0, 0);
+			doNext(demonLairFontOfCorruption);
+			advanceMinutes(5);
 		}
 		
 		private function demonLairPrivateQuarters():void {

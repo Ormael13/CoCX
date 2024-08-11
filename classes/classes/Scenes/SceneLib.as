@@ -283,6 +283,8 @@ public class SceneLib {
 
     public static var ghoulishVampireServant:GhoulishVampireServant = new GhoulishVampireServant();
 
+    public static var xuvielGiftSlave1:XuvielGiftSlaveFirst = new XuvielGiftSlaveFirst();
+
     public static var trollVillage:TrollVillage = new TrollVillage();
 
     public static var bazaar:Bazaar = new Bazaar();

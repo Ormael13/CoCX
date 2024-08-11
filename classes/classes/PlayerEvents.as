@@ -1385,6 +1385,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (player.statusEffectv1(StatusEffects.ZenjiArian) <= 0) player.removeStatusEffect(StatusEffects.ZenjiArian);
 					else player.addStatusValue(StatusEffects.ZenjiArian, 1, -1);
 				}
+				//Reset clone creation tracker
+				if (camp.gcc(true) && camp.gcc() == 0) player.removeStatusEffect(StatusEffects.PCClone);
 				//Equipment daily events
 				//Scandalous succubus armor and other corruption updates
 				if ((player.armor == armors.SCANSC || player.countMiscJewelry(miscjewelries.DMAGETO) > 0) && player.cor < 100) {
@@ -1407,8 +1409,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				if (player.hasStatusEffect(StatusEffects.MeetXuviel) && player.statusEffectv2(StatusEffects.MeetXuviel) > 0) player.addStatusValue(StatusEffects.MeetXuviel, 2, -1);
 				if (player.hasStatusEffect(StatusEffects.MeetXuviel2) && player.statusEffectv1(StatusEffects.MeetXuviel2) > 0) player.addStatusValue(StatusEffects.MeetXuviel2, 1, -1);
-				//Reset clone creation tracker
-				if (camp.gcc(true) && camp.gcc() == 0) player.removeStatusEffect(StatusEffects.PCClone);
+				if (player.hasStatusEffect(StatusEffects.FontOfCorruption) && player.statusEffectv1(StatusEffects.FontOfCorruption) > 0) {
+					if (player.statusEffectv1(StatusEffects.FontOfCorruption) <= 0) player.removeStatusEffect(StatusEffects.FontOfCorruption);
+					else player.addStatusValue(StatusEffects.FontOfCorruption, 1, -1);
+				}
 			}
 			//Process crops harvest moon
 			if (CoC.instance.model.time.hours == 24){

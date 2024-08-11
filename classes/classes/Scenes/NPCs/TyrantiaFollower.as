@@ -10,7 +10,6 @@ import classes.Scenes.Areas.BlightRidge.DemonPackBlightRidge;
 import classes.Scenes.SceneLib;
 import classes.internals.SaveableState;
 
-
 import coc.view.ButtonDataList;
 
 public class TyrantiaFollower extends NPCAwareContent implements SaveableState

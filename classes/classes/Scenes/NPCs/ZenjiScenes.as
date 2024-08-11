@@ -31,7 +31,6 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 		public static var ZenjiLoverDaysTracker:int;
 		public static var ZenjiTalkCount:int;
 
-
 		public function stateObjectName():String {
 			return "ZenjiScenes";
 		}
