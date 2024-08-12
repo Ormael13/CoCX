@@ -8331,4 +8331,3 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 		}
 	}
 }
-

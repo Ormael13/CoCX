@@ -506,7 +506,7 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 					"If you had some bimbo harpy, you could have some fun with her.", "???");
 			addButton(4, "Ceraph", vapulaCeraphThreesome)
 				.disableIf(!player.hasCock(), "You need a <b>REAL</b> cock for that.")
-				.disableIf(!ceraphFollowerScene.ceraphIsFollower(),
+				.disableIf((!ceraphFollowerScene.ceraphIsFollower() && !player.hasStatusEffect(StatusEffects.CeraphOff)),
 					"Sadly, you don't have any other demons in your submission.", "???");
 			addButton(14, "Back", callSlaveVapula);
 		}

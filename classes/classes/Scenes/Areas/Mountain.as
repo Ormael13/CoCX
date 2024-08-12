@@ -232,7 +232,7 @@ public class Mountain extends BaseContent
 				night : false,
 				chance: mountainChance,
 				when:function ():Boolean {
-					return !SceneLib.ceraphFollowerScene.ceraphIsFollower();
+					return !SceneLib.ceraphFollowerScene.ceraphIsFollower() && !player.hasStatusEffect(StatusEffects.CeraphOff);
 				},
 				call:ceraphFn,
 				mods:[fn.ifLevelMin(2)]

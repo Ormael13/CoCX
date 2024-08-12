@@ -148,7 +148,8 @@ use namespace CoC;
 						when  : function ():Boolean {
 							return flags[kFLAGS.TAMANI_TIME_OUT] == 0
 								   && player.gender > 0
-								   && (player.hasCock() || player.hasKeyItem("Deluxe Dildo") < 0);
+								   && (player.hasCock() || player.hasKeyItem("Deluxe Dildo") < 0)
+								   && !player.hasStatusEffect(StatusEffects.TamaniOff);
 						}
 					}, {
 						name  : "Tamani_Daughters",
@@ -341,7 +342,8 @@ use namespace CoC;
 						when  : function ():Boolean {
 							return flags[kFLAGS.TAMANI_TIME_OUT] == 0
 								   && player.gender > 0
-								   && (player.hasCock() || player.hasKeyItem("Deluxe Dildo") < 0);
+								   && (player.hasCock() || player.hasKeyItem("Deluxe Dildo") < 0)
+								   && !player.hasStatusEffect(StatusEffects.TamaniOff);
 						}
 					}, {
 						name  : "Tamani_Daughters",
@@ -662,7 +664,8 @@ use namespace CoC;
 				when  : function ():Boolean {
 					return flags[kFLAGS.TAMANI_TIME_OUT] == 0
 						   && player.gender > 0
-						   && (player.hasCock() || player.hasKeyItem("Deluxe Dildo") < 0);
+						   && (player.hasCock() || player.hasKeyItem("Deluxe Dildo") < 0)
+						   && !player.hasStatusEffect(StatusEffects.TamaniOff);
 				}
 			}, {
 				name  : "Tamani_Daughters",

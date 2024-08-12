@@ -37,7 +37,7 @@ import classes.display.SpriteDb;
 			if (SceneLib.izmaScene.izmaFollower()) count++;
 			if (SceneLib.sophieBimbo.bimboSophie()) count++;
 			if (SceneLib.vapula.vapulaSlave()) count++;
-			if (SceneLib.ceraphScene.ceraphIsFollower()) count++;
+			if (SceneLib.ceraphScene.ceraphIsFollower() && !player.hasStatusEffect(StatusEffects.CeraphOff)) count++;
 			if (flags[kFLAGS.FUCK_FLOWER_LEVEL] == 4) count++;
 			if (flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] == 1) count++;
 			if (SceneLib.milkWaifu.milkSlave()) count++;

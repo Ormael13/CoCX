@@ -1196,7 +1196,7 @@ public class Camp extends NPCAwareContent{
 		if (bimboSophie() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0 && !player.hasStatusEffect(StatusEffects.SophieOff)) counter++;//Bimbo sophie
 		if (flags[kFLAGS.GALIA_LVL_UP] >= 1) counter++;
 		if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= 5) counter++;
-		if (ceraphIsFollower()) counter++;
+		if (ceraphIsFollower() && !player.hasStatusEffect(StatusEffects.CeraphOff)) counter++;
 		if (milkSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) counter++;
 		if (player.hasStatusEffect(StatusEffects.Familiar) && player.statusEffectv3(StatusEffects.Familiar) > 0 && player.statusEffectv3(StatusEffects.Familiar) < 4 && player.hasPerk(PerkLib.Familiar)) counter++;
 		for each (var npc:XXCNPC in _campFollowers) {
@@ -1807,7 +1807,7 @@ public class Camp extends NPCAwareContent{
 				buttons.add(flags[kFLAGS.MILK_NAME], milkWaifu.milkyMenu);
 			}
 			//Ceraph
-			if (ceraphIsFollower()) {
+			if (ceraphIsFollower() && !player.hasStatusEffect(StatusEffects.CeraphOff)) {
 				buttons.add("Ceraph", ceraphFollowerScene.ceraphFollowerEncounter);
 			}
 			//Vapula
@@ -3409,7 +3409,9 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.KonstantinOff)) outputText("\nKonstantin: [font-dred]<b>Disabled</b>[/font]");
 		if (player.hasStatusEffect(StatusEffects.SpoodersOff)) outputText("\nSpooders: [font-dred]<b>Disabled</b>[/font]");
 		if (player.hasStatusEffect(StatusEffects.ShouldraOff)) outputText("\nShouldra: [font-dred]<b>Disabled</b>[/font]");
+		if (player.hasStatusEffect(StatusEffects.CeraphOff)) outputText("\nCeraph: [font-dred]<b>Disabled</b>[/font]");
 		if (player.hasStatusEffect(StatusEffects.CalluOff)) outputText("\nCallu (Otter girl): [font-dred]<b>Disabled</b>[/font]");
+		if (player.hasStatusEffect(StatusEffects.TamaniOff)) outputText("\nTamani (Goblin): [font-dred]<b>Disabled</b>[/font]");
 		if (player.hasStatusEffect(StatusEffects.VenusOff)) outputText("\nVenus (Gigantic Turtle): [font-dred]<b>Disabled</b>[/font]");
 	}
 	private function SparrableNPCsMenu():void {
@@ -3442,6 +3444,7 @@ public class Camp extends NPCAwareContent{
 		addButton(8, "Shouldra", toggleShouldra).hint("Enable or Disable Shouldra. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(9, "Sophie", toggleSophie).hint("Enable or Disable Sophie. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(10, "Spooders", toggleNPCStatus, StatusEffects.SpoodersOff).hint("Enable or Disable spooder followers. This will remove them ONLY from enc table.");
+		addButton(11, "Ceraph", toggleNPCStatus, StatusEffects.CeraphOff).hint("Enable or Disable Ceraph. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(14, "Back", SparrableNPCsMenu);
 	}
 	private function SparrableNPCsMenuOthers():void {
@@ -3450,6 +3453,7 @@ public class Camp extends NPCAwareContent{
 		menu();
 		addButton(0, "Callu", toggleNPCStatus, StatusEffects.CalluOff, SparrableNPCsMenuOthers).hint("Enable or Disable Callu (Otter girl). This will remove her from enc table.");
 		addButton(1, "Venus", toggleNPCStatus, StatusEffects.VenusOff, SparrableNPCsMenuOthers).hint("Enable or Disable Venus (Gigantic Turtle). This will remove her from enc table.");
+		addButton(2, "Tamani", toggleNPCStatus, StatusEffects.TamaniOff, SparrableNPCsMenuOthers).hint("Enable or Disable Tamani (Goblin). This will remove her from enc table.");
 		addButton(13, "DragonBoi", toggleNPCStatus, StatusEffects.TedOff, SparrableNPCsMenuOthers).hint("Enable or Disable Dragon Boi. This will remove him from enc table.");
 		addButton(14, "Back", SparrableNPCsMenu);
 	}
@@ -5131,6 +5135,7 @@ public function rebirthFromBadEnd():void {
 		if (player.hasStatusEffect(StatusEffects.LunaOff)) performancePointsPrediction++;
 		if (player.hasStatusEffect(StatusEffects.NadiaOff)) performancePointsPrediction++;
 		if (player.hasStatusEffect(StatusEffects.ShouldraOff)) performancePointsPrediction++;
+		if (player.hasStatusEffect(StatusEffects.CeraphOff)) performancePointsPrediction++;
 		if (player.hasStatusEffect(StatusEffects.HeliaOff)) performancePointsPrediction++;
 		//Dungeons
 		performancePointsPrediction += possibleToGainAscensionPointsDungeons();
@@ -5349,7 +5354,7 @@ public function rebirthFromBadEnd():void {
 		if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 0) pop--;
 		//------------
 		//Misc check!
-		if (ceraphIsFollower()) pop--; //Ceraph doesn't stay in your camp.
+		if (ceraphIsFollower() && !player.hasStatusEffect(StatusEffects.CeraphOff)) pop--; //Ceraph doesn't stay in your camp.
 		if (player.armor == armors.GOOARMR) pop++; //Include Valeria if you're wearing her.
 		if (player.weapon == weapons.AETHERD) pop++; //Include Aether D twin if you're wearing her.
 		if (player.shield == shields.AETHERS) pop++; //Include Aether S twin if you're wearing her.
