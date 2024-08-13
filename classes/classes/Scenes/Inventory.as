@@ -19,6 +19,7 @@ import classes.Items.Weapon;
 import classes.Items.WeaponRange;
 import classes.Scenes.Camp.Garden;
 import classes.Scenes.Camp.UniqueCampScenes;
+import classes.Scenes.Areas.Forest.TamaniScene;
 import classes.Scenes.NPCs.HolliPureScene;
 import classes.Scenes.NPCs.MagnoliaFollower;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
@@ -60,6 +61,7 @@ use namespace CoC;
 		public var HolliPure:HolliPureScene = new HolliPureScene();
 		public var Gardening:UniqueCampScenes = new UniqueCampScenes();
 		public var Magnolia:MagnoliaFollower = new MagnoliaFollower();
+		public var tamaniScene:TamaniScene = new TamaniScene();
 
 		public function Inventory(saveSystem:Saves) {
 			itemStorage = [];
@@ -275,7 +277,7 @@ use namespace CoC;
 			if (!inDungeon && !inRoomedDungeon && !flags[kFLAGS.IN_INGNAM]) {
 				var miscNieve:Boolean = Holidays.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5;
                 var miscHolli:Boolean = flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4 || flags[kFLAGS.FLOWER_LEVEL] >= 1 && flags[kFLAGS.FLOWER_LEVEL] < 4);
-				if (miscNieve || miscHolli || player.hasKeyItem("Dragon Egg") >= 0 || (player.hasKeyItem("Rathazul's Purity Elixir") >= 0 && player.perkv1(PerkLib.PurityElixir) < 5)
+				if (miscNieve || miscHolli || player.hasKeyItem("Dragon Egg") >= 0 || (player.hasKeyItem("Rathazul's Purity Elixir") >= 0 && player.perkv1(PerkLib.PurityElixir) < 5) || player.hasKeyItem("Tamani's Satchel") >= 0
 					|| flags[kFLAGS.ANEMONE_KID] > 0 || flags[kFLAGS.ALRAUNE_SEEDS] > 0 || (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 0 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 8)) {
 					if (miscNieve) {
 						if (flags[kFLAGS.NIEVE_STAGE] == 1)
@@ -285,6 +287,9 @@ use namespace CoC;
 					if (player.hasKeyItem("Dragon Egg") >= 0) {
                         SceneLib.emberScene.emberCampDesc();
 						addButton(3, "Egg", SceneLib.emberScene.emberEggInteraction);
+					}
+					if (player.hasKeyItem("Tamani's Satchel") >= 0) {
+						addButton(5, "Satchel", tamaniScene.openTamanisSatchel);
 					}
 					if (flags[kFLAGS.ANEMONE_KID] > 0) {
 						SceneLib.kidAScene.anemoneBarrelDescription();

@@ -107,19 +107,21 @@ public function tamaniDefeated(hpVictory:Boolean):void {
 			++flags[kFLAGS.TAMANI_LVL_UP];
 		}
 	}
+	menu();
 	if(player.lust >= 33) {
 		outputText("  You could fuck her, but if that's the case why did you bother fighting her?\n\nWhat do you do to her?");
-		menu();
 		addButton(0, "Fuck", tamaniSexWon);
 		addButtonIfTrue(1, "Buttfuck", tamaniAnalShits, "Req. cock with area smaller than " + monster.analCapacity(), player.hasCock() && player.cockThatFits(monster.analCapacity()) >= 0);
 		addButtonIfTrue(2, "Lay Eggs", tamaniBeaten, "Req. pregnant Tamani and spider ovipositor", pregnancy.isPregnant && player.canOvipositSpider());
-		addButton(4, "Leave", cleanupAfterCombat);
+		
 		SceneLib.uniqueSexScene.pcUSSPreChecksV2(curry(tamaniDefeated, hpVictory), 3);
 	}
-	else {
-		outputText("  You're not aroused enough to fuck her.");
-		cleanupAfterCombat();
+	else outputText("  You're not aroused enough to fuck her.");
+	if (flags[kFLAGS.TAMANI_LVL_UP] >= 2) {
+		outputText(" If you're tired of Tamani trying to force herself upon you, you could resolve to not see her again.");
+		addButton(3, "NO MORE!", killTamaniChoice);
 	}
+	addButton(4, "Leave", cleanupAfterCombat);
 }
 
 private function tamaniFirstDescription():void {
@@ -1050,6 +1052,87 @@ private function acceptTamaniFacesits():void {
 		endEncounter();
 	}
 	else doNext(recallWakeUp);
+}
+
+private function killTamaniChoice():void {
+	clearOutput();
+	outputText("Tamani has really gotten to your nerves and you tire of her forcing herself upon you. You kick Tamani once and she writhes in pain. \"<i>Guess you don't want me anymore?</i>\" Tamani sniffles.");
+	menu();
+	if (silly()) {
+		addButton(0, "FIGHT", killTamani);
+		addButton(1, "MERCY", spareTamani);
+	}
+	else {
+		addButton(0, "Kill Her", killTamani);
+		addButton(1, "Spare Her", spareTamani);
+	}
+}
+private function killTamani():void {
+	clearOutput();
+	outputText("You step over and grab her head. \"<i>NO!</i>\" Tamani cries out. You tell her that she shouldn't have forced herself upon you. You snap her neck and set her lifeless body on the ground.");
+	flags[kFLAGS.TAMANI_BAD_ENDED] = 1;
+	postTamaniRemoval();
+}
+private function spareTamani():void {
+	clearOutput();
+	outputText("You tell her that should she ever cross paths again, she's going to have a really bad time. \"<i>Yes...</i>\" Tamani sniffles, tears welling up in her face. She gets up and leaves her satchel on the ground before running into the foliage, never to be seen again.\n\n");
+	flags[kFLAGS.TAMANI_BAD_ENDED] = 0.5;
+	postTamaniRemoval();
+}
+private function postTamaniRemoval():void {
+	outputText("With Tamani no more, you take her satchel and return to your camp.");
+	monster.XP += 1000; //Gain more XP as Tamani's removed from the game.
+	player.createKeyItem("Tamani's Satchel", 1, 2, 2, 500);
+	if (pregnancy.isPregnant) pregnancy.knockUpForce(); //Clear pregnancy.
+	cleanupAfterCombat();
+}
+public function openTamanisSatchel():void {
+	clearOutput();
+	var isEmpty:Boolean = true;
+	outputText("You open the satchel taken from Tamani and take a look inside. ");
+	if (player.hasKeyItem("Deluxe Dildo") < 0) {
+		outputText("\n\n<b>(You find a well-crafted pink dildo inside! There are also other stuff you can take if you like.)</b>");
+		player.createKeyItem("Deluxe Dildo", 0, 0, 0, 0);
+	}
+	menu();
+	if (player.keyItemvX("Tamani's Satchel", 1) > 0) {
+		outputText("\nThere's a bottle of pink hair dye inside.");
+		addButton(1, consumables.PINKDYE.shortName, satchelTakeItem, consumables.PINKDYE, 1);
+		isEmpty = false;
+	}
+	if (player.keyItemvX("Tamani's Satchel", 2) > 0) {
+		outputText("\nThere " + (player.keyItemvX("Tamani's Satchel", 1) == 1 ? "is a container" : "are two containers") + " of pasty substance labelled as 'Reducto'.");
+		addButton(0, consumables.REDUCTO.shortName, satchelTakeItem, consumables.REDUCTO, 2);
+		isEmpty = false;
+	}
+	if (player.keyItemvX("Tamani's Satchel", 3) > 0) {
+		outputText("\nThere " + (player.keyItemvX("Tamani's Satchel", 3) == 1 ? "is a bottle" : "are two bottles") + " of pink fluid, labelled 'Lust Draft'.");
+		addButton(2, consumables.L_DRAFT.shortName, satchelTakeItem, consumables.L_DRAFT, 3);
+		isEmpty = false;
+	}
+	if (player.keyItemvX("Tamani's Satchel", 4) > 0) {
+		outputText("\nThere are 500 gems inside within the satchel. You can take them if you want.");
+		addButton(3, "Gems", satchelTakeGems);
+		isEmpty = false;
+	}
+	outputText("\n\n");
+	addButton(14, "Close", inventory.inventoryMenu);
+	if (isEmpty) {
+		clearOutput();
+		outputText("The satchel is devoid of its content. You discard the empty satchel.");
+		player.removeKeyItem("Tamani's Satchel");
+		doNext(inventory.inventoryMenu);
+	}
+}
+private function satchelTakeItem(item:ItemType, keyValue:int):void {
+	player.addKeyValue("Tamani's Satchel", keyValue, -1);
+	inventory.takeItem(item, openTamanisSatchel);
+}
+private function satchelTakeGems():void {
+	player.gems += 500;
+	player.addKeyValue("Tamani's Satchel", 4, -500);
+	statScreenRefresh();
+	openTamanisSatchel();
 }
 }
 }

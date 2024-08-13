@@ -65,6 +65,7 @@ public class SaveUpdater extends NPCAwareContent {
 			flags[kFLAGS.JOJO_DEAD_OR_GONE] == 2,
 			flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0,
 			flags[kFLAGS.FUCK_FLOWER_KILLED] > 0,
+			flags[kFLAGS.TAMANI_BAD_ENDED] > 0,
 			flags[kFLAGS.CHI_CHI_FOLLOWER] == 2 || flags[kFLAGS.CHI_CHI_FOLLOWER] == 5,
 			flags[kFLAGS.PATCHOULI_FOLLOWER] == 3,
 			flags[kFLAGS.D1_OMNIBUS_KILLED] > 0,
@@ -2380,7 +2381,7 @@ public class SaveUpdater extends NPCAwareContent {
 				SceneLib.exploration.counters.plains              = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0131];
 				SceneLib.exploration.counters.swamp               = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0272];
 				SceneLib.exploration.counters.bog                 = flags[kFLAGS.BOG_EXPLORED];
-				SceneLib.exploration.counters.blightRidge         = flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE];
+				SceneLib.exploration.counters.blightRidge         = flags[kFLAGS.TAMANI_BAD_ENDED];
 				SceneLib.exploration.counters.defiledRavine       = flags[kFLAGS.DISCOVERED_DEFILED_RAVINE];
 				SceneLib.exploration.counters.beach               = flags[kFLAGS.DISCOVERED_BEACH];
 				SceneLib.exploration.counters.ocean               = flags[kFLAGS.DISCOVERED_OCEAN];
