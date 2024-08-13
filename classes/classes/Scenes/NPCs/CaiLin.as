@@ -245,6 +245,7 @@ public class CaiLin extends Monster
 					add(consumables.GORGOIL,4);
 			this.faceType = Face.SNAKE_FANGS;
 			this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyDragonType, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

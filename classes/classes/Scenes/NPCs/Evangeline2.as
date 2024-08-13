@@ -438,6 +438,7 @@ public class Evangeline2 extends Monster
 			this.drop = NO_DROP;
 			this.buff("Wizard's Focus").addStat('spellpower', 0.5);
 			this.createPerk(PerkLib.EzekielBlessing, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyDragonType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
 			this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
 			this.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);

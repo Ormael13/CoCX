@@ -57,6 +57,7 @@ public class Lethice extends Monster
 			this.createPerk(PerkLib.Diehard, 0, 0, 0, 0);
 			this.createPerk(PerkLib.ImprovedDiehard, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyDragonType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);

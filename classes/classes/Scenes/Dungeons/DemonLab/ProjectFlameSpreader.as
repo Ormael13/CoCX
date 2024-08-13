@@ -125,6 +125,7 @@ public class ProjectFlameSpreader extends Monster {
         this.createStatusEffect(StatusEffects.Flying, 50, 0, 0, 0);
         this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
         this.createPerk(PerkLib.LegendarySpeed, 0, 0, 0, 0);
+		this.createPerk(PerkLib.EnemyDragonType, 0, 0, 0, 0);
         checkMonster();
     }
 }

@@ -353,6 +353,7 @@ public class Kiha extends Monster
 					{call: kihaFirePunch, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY,TAG_FIRE], condition: function():Boolean { return !EngineCore.silly() } },
 				]
 			);
+			this.createPerk(PerkLib.EnemyDragonType, 0, 0, 0, 0);
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 1) {
 				this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 				this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);

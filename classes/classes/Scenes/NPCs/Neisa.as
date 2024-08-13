@@ -109,6 +109,7 @@ import classes.Scenes.SceneLib;
 			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Ferocity, 0, 0, 0, 0);
 			this.createPerk(PerkLib.LizanRegeneration, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyDragonType, 0, 0, 0, 0);
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 2) {
 				this.createPerk(PerkLib.Diehard, 0, 0, 0, 0);
 				this.createPerk(PerkLib.TankI, 0, 0, 0, 0);

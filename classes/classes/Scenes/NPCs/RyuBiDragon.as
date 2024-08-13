@@ -220,6 +220,8 @@ public class RyuBiDragon extends Monster
 			this.wings.type = Wings.DRACONIC_HUGE;
 			this.lowerBody = LowerBody.DRAGON;
 			this.tailType = Tail.DRACONIC;
+			this.createPerk(PerkLib.EzekielBlessing, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyDragonType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGodType, 0, 0, 0, 0);
 			if (flags[kFLAGS.RYUBI_LVL_UP] < 2) this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);

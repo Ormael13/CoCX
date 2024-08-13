@@ -4695,6 +4695,7 @@ public class PerkLib
 		public static const EnemyChampionType:PerkType = mk("Champion-type enemy", "Champion-type enemy", "");
 		public static const EnemyColossalType:PerkType = mk("Colossal-sized type enemy", "Colossal-sized type enemy", "");//50+ ft. tall
 		public static const EnemyConstructType:PerkType = mk("Construct-type enemy", "Construct-type enemy", "");
+		public static const EnemyDragonType:PerkType = mk("Dragon-type enemy", "Dragon-type enemy", "");
 		public static const EnemyElementalType:PerkType = mk("Elemental-type enemy", "Elemental-type enemy", "");
 		public static const EnemyEliteType:PerkType = mk("Elite-type enemy", "Elite-type enemy", "");
 		public static const EnemyFeralType:PerkType = mk("Feral-type enemy", "Feral-type enemy", "");

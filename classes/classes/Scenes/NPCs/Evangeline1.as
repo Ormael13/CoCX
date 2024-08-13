@@ -418,6 +418,7 @@ public class Evangeline1 extends Monster
 			this.gems = 0;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EzekielBlessing, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyDragonType, 0, 0, 0, 0);
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 1) this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 2) {
 				this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);

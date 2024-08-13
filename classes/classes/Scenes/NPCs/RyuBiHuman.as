@@ -51,6 +51,8 @@ public class RyuBiHuman extends Monster
 					add(consumables.BAGOCA1, 1).
 					add(consumables.BAGOCA2, 0.7).
 					add(consumables.BAGOCA3, 0.4);
+			this.createPerk(PerkLib.EzekielBlessing, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyDragonType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGodType, 0, 0, 0, 0);
 			checkMonster();

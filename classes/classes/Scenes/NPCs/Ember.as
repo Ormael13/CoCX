@@ -356,6 +356,7 @@ public class Ember extends Monster
 			this.tailType = Tail.DRACONIC;
 			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.2);
 			this.noFetishDrop = true;
+			this.createPerk(PerkLib.EnemyDragonType, 0, 0, 0, 0);
 			if (flags[kFLAGS.EMBER_LVL_UP] >= 1) this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			if (flags[kFLAGS.EMBER_LVL_UP] >= 2) {
 				this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);

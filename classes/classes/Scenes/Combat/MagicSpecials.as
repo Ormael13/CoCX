@@ -2209,6 +2209,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+		if (player.headJewelry === headjewelries.DRABLOH) damage *= 1.5;
 		damage *= 4;
 		damage *= damult;
 		damage = Math.round(damage);
@@ -2302,6 +2303,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+		if (player.headJewelry === headjewelries.DRABLOH) damage *= 1.5;
 		damage *= 4;
 		damage *= damult;
 		damage = Math.round(damage * combat.iceDamageBoostedByDao());
@@ -2365,6 +2367,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+		if (player.headJewelry === headjewelries.DRABLOH) damage *= 1.5;
 		damage *= 4;
 		damage *= damult;
 		damage = Math.round(damage * combat.lightningDamageBoostedByDao());
@@ -2427,6 +2430,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+		if (player.headJewelry === headjewelries.DRABLOH) damage *= 1.5;
 		damage *= 4;
 		damage *= damult;
 		damage = Math.round(damage * combat.darknessDamageBoostedByDao());
@@ -2489,6 +2493,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+		if (player.headJewelry === headjewelries.DRABLOH) damage *= 1.5;
 		damage *= 4;
 		damage *= damult;
 		damage = Math.round(damage * combat.poisonDamageBoostedByDao());
@@ -2559,6 +2564,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+		if (player.headJewelry === headjewelries.DRABLOH) damage *= 1.5;
 		damage *= 4;
 		damage *= damult;
 		damage = Math.round(damage * combat.waterDamageBoostedByDao());
@@ -2621,9 +2627,10 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
-		damage *= 4;
+		if (player.headJewelry === headjewelries.DRABLOH) damage *= 1.5;
+		damage *= 6;
 		damage *= damult;
-		damage = Math.round(damage * combat.waterDamageBoostedByDao());
+		damage = Math.round(damage);
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
@@ -2729,6 +2736,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+		if (player.headJewelry === headjewelries.DRABLOH) damage *= 1.5;
 		damage *= 4;
 		damage *= damult;
 		damage = Math.round(damage * (combat.poisonDamageBoostedByDao() + combat.waterDamageBoostedByDao() + combat.earthDamageBoostedByDao() - 2));
@@ -2794,6 +2802,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+		if (player.headJewelry === headjewelries.DRABLOH) damage *= 1.5;
 		damage *= 4;
 		damage *= damult;
 		if (combat.checkConcentration()) return; //Amily concentration
@@ -2859,6 +2868,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+			if (player.headJewelry === headjewelries.DRABLOH) damage *= 1.5;
 			damage *= 4;
 			damage *= damult;
 			damage = Math.round(damage * (combat.fireDamageBoostedByDao() + combat.iceDamageBoostedByDao() + combat.lightningDamageBoostedByDao() + combat.darknessDamageBoostedByDao() - 3));
@@ -2946,6 +2956,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Apex)) poisonScaling += 0.5;
 			if (player.hasPerk(PerkLib.AlphaAndOmega)) poisonScaling += 0.5;
 			if (player.hasPerk(PerkLib.NaturalArsenal)) poisonScaling += 1;
+			if (player.headJewelry === headjewelries.DRABLOH) poisonScaling += 0.5;
 			lustDmg2 *= poisonScaling;
 			lustDmg2 *= d2Bdcc;
 			monster.teased(Math.round(monster.lustVuln * lustDmg2), true);

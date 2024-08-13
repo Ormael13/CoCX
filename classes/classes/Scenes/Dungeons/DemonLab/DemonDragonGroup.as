@@ -63,6 +63,7 @@ public class DemonDragonGroup extends Monster {
         this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
         this.createPerk(PerkLib.LegendaryStrength, 0, 0, 0, 0);
         this.createPerk(PerkLib.MonsterRegeneration, 2, 0, 0, 0);
+		this.createPerk(PerkLib.EnemyDragonType, 0, 0, 0, 0);
         if (inDungeon) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
         checkMonster();
     }
