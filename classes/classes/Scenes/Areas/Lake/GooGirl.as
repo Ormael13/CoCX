@@ -126,7 +126,7 @@ public class GooGirl extends Monster
 			}
 		}
 
-		override public function teased(lustDelta:Number, isNotSilent:Boolean = true, display:Boolean = true):void
+		override public function teased(lustDelta:Number, isNotSilent:Boolean = true, display:Boolean = true, aura:Boolean = false):void
 		{
 			if (lust <= maxLust() * 0.99) {
 				if (lustDelta <= 0) outputText("\nThe goo-girl looks confused by your actions, as if she's trying to understand what you're doing.");
@@ -134,7 +134,7 @@ public class GooGirl extends Monster
 				else outputText("\nThe girl begins to understand your intent. She opens and closes her mouth, as if panting, while she works slimy fingers between her thighs and across her jiggling nipples.");
 			}
 			else outputText("\nIt appears the goo-girl has gotten lost in her mimicry, squeezing her breasts and jilling her shiny " + bodyColor + " clit, her desire to investigate you forgotten.");
-			applyTease(lustDelta, display);
+			applyTease(lustDelta, display, aura);
 		}
 
 		public function GooGirl(noInit:Boolean = false)

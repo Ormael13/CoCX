@@ -135,7 +135,7 @@ public class Phouka extends Monster
 			}
 		}
 
-		override public function teased(lustDelta:Number, isNotSilent:Boolean = true, display:Boolean = true):void
+		override public function teased(lustDelta:Number, isNotSilent:Boolean = true, display:Boolean = true, aura:Boolean = false):void
 		{
 			if (lustDelta >= 10)
 				outputText("\n\nThe " + this.short + " breaks off its attack in the face of your teasing.  Its drooling member leaves a trail of precum along the ground and you get the feeling it needs to end this fight quickly.");
@@ -143,7 +143,7 @@ public class Phouka extends Monster
 				outputText("\n\nThe " + this.short + " stops its assault for a moment.  A glob of precum oozes from its cock before it shakes its head and gets ready to attack again.");
 			else if (lustDelta > 0)
 				outputText("\n\nThe " + this.short + " hesitates and slows down.  You see its cock twitch and then it readies for the next attack.");
-			applyTease(lustDelta, display);
+			applyTease(lustDelta, display, aura);
 		}
   
 		override public function defeated(hpVictory:Boolean):void

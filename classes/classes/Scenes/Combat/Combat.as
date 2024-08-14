@@ -10371,7 +10371,7 @@ public class Combat extends BaseContent {
         }
         //Apophis Unholy Aura
         if (player.isRaceCached(Races.APOPHIS) && monster.lustVuln > 0 && !player.enemiesImmuneToLustResistanceDebuff() && !flags[kFLAGS.DISABLE_AURAS]) {
-            outputText("Your unholy aura seeps into [themonster], slowly and insidiously eroding its resiliance to your unholy charms.\n\n");
+            outputText("Your unholy aura seeps into [themonster], slowly and insidiously eroding its resiliance to your charms.\n\n");
             monster.lustVuln += 0.1;
 			if (monster.lustVuln > monster.lustVulnCap()) monster.lustVuln = monster.lustVulnCap();
         }
@@ -10394,8 +10394,7 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.DamnationAura)) lustAADmg *= 2;
             lustAADmg = teases.teaseAuraLustDamageBonus(monster, lustAADmg);
             lustAADmg *= monster.lustVuln;
-			lustAADmg = combat.fixPercentLust(lustAADmg);
-            monster.teased(Math.round(lustAADmg), false);
+			monster.teased(Math.round(lustAADmg), false, true, true);
             outputText("\n\n");
 			if (monster.lustVuln > 0 && !player.enemiesImmuneToLustResistanceDebuff() && !player.enemiesThatAreMindless() && player.hasPerk(PerkLib.DevouringAura)) {
                 if (player.hasPerk(PerkLib.DamnationAura)) monster.lustVuln += 0.02;
@@ -10410,8 +10409,7 @@ public class Combat extends BaseContent {
             var lustSAoDDmg:Number = scalingBonusLibido();
             lustSAoDDmg = teases.teaseAuraLustDamageBonus(monster, lustSAoDDmg);
             lustSAoDDmg *= monster.lustVuln;
-            lustSAoDDmg = combat.fixPercentLust(lustSAoDDmg);
-            monster.teased(Math.round(lustSAoDDmg), false);
+            monster.teased(Math.round(lustSAoDDmg), false, true, true);
             outputText("\n\n");
             if (player.hasPerk(PerkLib.EromancyMaster)) teaseXP(1 + bonusExpAfterSuccesfullTease());
         }
@@ -10434,8 +10432,7 @@ public class Combat extends BaseContent {
             lustANDmg = teases.teaseAuraLustDamageBonus(monster, lustANDmg);
             if (player.hasPerk(PerkLib.RacialParagon)) lustANDmg *= RacialParagonAbilityBoost();
             lustANDmg *= monster.lustVuln;
-            lustANDmg = combat.fixPercentLust(lustANDmg);
-            monster.teased(Math.round(lustANDmg), false);
+            monster.teased(Math.round(lustANDmg), false, true, true);
             outputText("\n\n");
             if (player.hasPerk(PerkLib.EromancyMaster)) teaseXP(1 + bonusExpAfterSuccesfullTease());
         }
@@ -10535,8 +10532,7 @@ public class Combat extends BaseContent {
             outputText("[Themonster] slowly succumbs to [monster his] basest desires as your aura of corruption seeps through [monster him]. ");
             if (monster.cor < 100) outputText("Your victims purity is slowly becoming increasingly eroded by your seeping corruption. ");
             lustDmg *= monster.lustVuln;
-            lustDmg = combat.fixPercentLust(lustDmg);
-            monster.teased(Math.round(lustDmg), false);
+            monster.teased(Math.round(lustDmg), false, true, true);
             outputText("\n\n");
             if (player.hasPerk(PerkLib.EromancyMaster)) teaseXP(1 + bonusExpAfterSuccesfullTease());
         }
@@ -10569,8 +10565,7 @@ public class Combat extends BaseContent {
 				}
 			}
             lustDmgA *= monster.lustVuln;
-            lustDmgA = combat.fixPercentLust(lustDmgA);
-            monster.teased(Math.round(lustDmgA), false);
+            monster.teased(Math.round(lustDmgA), false, true, true);
             outputText("\n\n");
 			if (player.hasPerk(PerkLib.Nightshade) && monster.lustVuln > 0 && !player.enemiesImmuneToLustResistanceDebuff()) {
 				monster.lustVuln += 0.05;
@@ -10587,8 +10582,7 @@ public class Combat extends BaseContent {
 				lustDmgPC = teases.teaseAuraLustDamageBonus(monster, lustDmgPC);
 				if (player.hasPerk(PerkLib.RacialParagon)) lustDmgPC *= RacialParagonAbilityBoost();
 				lustDmgPC *= monster.lustVuln;
-				lustDmgPC = combat.fixPercentLust(lustDmg);
-				monster.teased(Math.round(lustDmgPC), false);
+				monster.teased(Math.round(lustDmgPC), false, true, true);
 				outputText("\n\n");
 				if (player.hasPerk(PerkLib.EromancyMaster)) teaseXP(1 + bonusExpAfterSuccesfullTease());
 			}
@@ -17749,29 +17743,6 @@ private function touSpeStrScale(stat:int):Number {
         return damage;
     }
 
-    public function fixPercentLust(damage:Number, ignoreDiff:Boolean = true):Number {
-        var plaLvl:Number = player.level + playerLevelAdjustment();
-        var monLvl:Number = monster.level + monsterLevelAdjustment();
-
-        /**
-         * If player is equal or lower level than monster, DoT is bound to 20%
-         * If player is higher level than monster, damage bound is increased up to 50%
-         * at 10 levels below, then unbounded past that
-         */
-        if (plaLvl <= monLvl) {
-            if (damage > (monster.maxLust() * 0.2)) damage = monster.maxLust() * 0.2; //Bound damage to 20% of health
-        } else {
-            var lvlDifference:int = plaLvl - monLvl;
-            if (lvlDifference < 10) {
-                var boundedDamage:Number = monster.maxLust() * (0.2 + (0.3 * (lvlDifference / 10)));
-                if (damage > boundedDamage) damage = boundedDamage;
-            }
-        }
-        
-        if (ignoreDiff) damage *= monster.damageReductionBasedOnDifficulty(); //DoT effects are not punished on higher difficulties
-        return damage;
-    }
-    
     public function isNearPlants():Boolean {
         return player.hasStatusEffect(StatusEffects.NearbyPlants) || explorer.areaTags.plants;
     }

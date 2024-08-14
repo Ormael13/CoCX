@@ -3083,7 +3083,7 @@ import classes.Scenes.Combat.CombatAbilities;
 		 * @param isNotSilent (Boolean) - Choose whether the default monster tease reaction text should be printed
 		 * @param display (Boolean) - Choose whether the tease damage number should be displayed
 		 */
-		public function teased(lustDelta:Number, isNotSilent:Boolean = true, display:Boolean = true):void
+		public function teased(lustDelta:Number, isNotSilent:Boolean = true, display:Boolean = true, aura:Boolean = false):void
 		{
 			if(isNotSilent)
 			{
@@ -3106,7 +3106,7 @@ import classes.Scenes.Combat.CombatAbilities;
 				if (player.perkv1(IMutationsLib.GoblinOvariesIM) >= 4) lustMDM += 0.25;
 				lustDelta *= lustMDM;
 			}
-			applyTease(lustDelta, display);
+			applyTease(lustDelta, display, aura);
 		}
 
 		protected function outputDefaultTeaseReaction(lustDelta:Number):void
@@ -3141,9 +3141,10 @@ import classes.Scenes.Combat.CombatAbilities;
 			}
 		}
 
-		protected function applyTease(lustDelta:Number, display:Boolean = true):void{
+		protected function applyTease(lustDelta:Number, display:Boolean = true, aura:Boolean = false):void{
 			if (damageReductionBasedOnDifficulty() > 1) lustDelta *= (1 / damageReductionBasedOnDifficulty());
 			lustDelta *= SceneLib.combat.doDamageReduction();
+			if (aura && (lustDelta > (maxLust() * 0.1))) maxLust() * 0.1;
 			lustDelta = Math.round(lustDelta);
 			lust += lustDelta;
 			if (display) SceneLib.combat.CommasForDigits(lustDelta, true);//outputText(" <b>([font-lust]" + Utils.formatNumber(lustDelta) + "[/font])</b>");
