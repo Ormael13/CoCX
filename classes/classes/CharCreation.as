@@ -1820,24 +1820,15 @@ import classes.Scenes.Combat.CombatAbility;
 			setTheFuckingDifficultyForFuckingGood();
 			doNext(chooseGameModes);
 		}
-		private function toggleForSecondaryStatsModifierOn():void {
-			clearOutput();
-			outputText("You have chosen to have Secondary Stats Modifier enabled.");
-			flags[kFLAGS.SECONDARY_STATS_SCALING] = 1;
+		private function toggleForSecondaryStatsModifier(difficulty:int = 0):void {
+			flags[kFLAGS.SECONDARY_STATS_SCALING] = difficulty;
 			setTheFuckingDifficultyForFuckingGood();
-			doNext(chooseGameModes);
-		}
-		private function toggleForSecondaryStatsModifierOff():void {
-			clearOutput();
-			outputText("You have chosen to have Secondary Stats Modifier disabled.");
-			flags[kFLAGS.SECONDARY_STATS_SCALING] = 0;
-			setTheFuckingDifficultyForFuckingGood();
-			doNext(chooseGameModes);
+			doNext(chooseGameModes2);
 		}
 		private function toggleForBossesModifier(difficulty:int = 0):void {
 			flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] = difficulty;
 			setTheFuckingDifficultyForFuckingGood();
-			doNext(chooseGameModes);
+			doNext(chooseGameModes2);
 		}
 		private function setTheFuckingDifficultyForFuckingGood():void {
 			var sTFDFFG:Number = 0;
@@ -1888,7 +1879,7 @@ import classes.Scenes.Combat.CombatAbility;
 			clearOutput();
 			outputText("Choose a game modifiers. Depending on picked amount final difficulty would be adjusted.\n\n");
 			outputText("<b>Hunger Modifier:</b> "+(flags[kFLAGS.HUNGER_ENABLED] == 1?"Enabled (PC must manage his own hunger lest you want see his death from starvation)":"Disabled")+"\n");
-			outputText("<b>Secondary Stats Modifier:</b> "+(flags[kFLAGS.SECONDARY_STATS_SCALING] == 1?"Enabled (Opponent would have more HP/Lust/Wrath/Fatigue/Mana/Soulforce)":"Disabled")+"\n");
+			outputText("<b>Secondary Stats Modifier:</b> "+(flags[kFLAGS.SECONDARY_STATS_SCALING] == 0?"Disabled":"Enabled (Opponent would have more HP/Lust/Wrath/Fatigue/Mana/Soulforce)")+"\n");
 			outputText("<b>Hardcore Modifier:</b> "+(flags[kFLAGS.HARDCORE_MODE] == 1?"Enabled (No level limits for unlocking new areas)":"Disabled")+"\n");
 			outputText("<b>Elite/Champion/Boss Enemies Modifier:</b> "+(flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 0?"Disabled":"Enabled (Elite/Champion/Boss Enemies would have more Health)")+"\n");
 			outputText("\nFinal game difficulty: ");
@@ -1898,30 +1889,47 @@ import classes.Scenes.Combat.CombatAbility;
 			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) outputText("They see Hard'in They Hatin (Nightmare)");
 			else if (flags[kFLAGS.GAME_DIFFICULTY] == 4) outputText("It's time to grace you with ancient blessing: GIT GUD (Extreme)");
 			else if (flags[kFLAGS.GAME_DIFFICULTY] == 5) outputText("It's time to grace you with ancient blessing: GIT GUD (Inferno)");
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 6) outputText("It's time to grace you with ancient blessing: GIT GUD (Xianxia MC)");
 			outputText("\n\n");
-			/*outputText("<b>Normal mode:</b> You have chosen Normal Mode. This is a classic gameplay mode. Accumulated wrath will not affect your ability to spellcast or use magical specials. Internal mutation negative effects will be triggered after accumulating 11 points in internal mutation score.\n");
-			outputText("<b>Survival mode:</b> Like normal but with hunger enabled.\n");
-			outputText("<b>Realistic mode:</b> You get hungry from time to time and cum production is capped. In addition, it's a bad idea to have oversized parts. \n");
-			outputText("<b>Hard mode:</b> In addition to Realistic mode, the game forces save and if you get a Bad End, your save file is deleted. For not sunday (CoC) players.\n");
-			outputText("<b>Hardcore mode:</b> In addition to Realistic mode, the game forces save and if you get a Bad End, your save file is deleted. For the veteran CoC players only.\n");
-			outputText("<b>Extreme Hardcore mode:</b> The hardest game mode ever. Like hardcore mode, but the difficulty is locked to extreme! How long can you survive?\n");
-			outputText("<b>Xianxia MC mode:</b> The game mode for anyone that wants to feel like an Xianxia MC. Hunger is always waiting behind a corner and enemies are always stronger than you! How long will take to you to reach the top?\n");*/
 			menu();
 			if (flags[kFLAGS.HUNGER_ENABLED] != 1) addButton(0, "Hunger+", toggleForHungerOn);
 			if (flags[kFLAGS.HUNGER_ENABLED] != 0) addButton(1, "Hunger-", toggleForHungerOff);
-			if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 1) addButton(2, "Secondary Stats+", toggleForSecondaryStatsModifierOn);
-			if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 0) addButton(3, "Secondary Stats-", toggleForSecondaryStatsModifierOff);
-			if (flags[kFLAGS.HARDCORE_MODE] != 1) addButton(4, "Hardcore+", toggleForHardcoreOn);
+			if (flags[kFLAGS.HARDCORE_MODE] != 1) addButton(2, "Hardcore+", toggleForHardcoreOn);
+			if (flags[kFLAGS.HARDCORE_MODE] != 0) addButton(3, "Hardcore-", toggleForHardcoreOff);
+			addButton(4, "-2-", chooseGameModes2);
 			//5+
 			//6-
 			//7+
 			//8-
-			if (flags[kFLAGS.HARDCORE_MODE] != 0) addButton(9, "Hardcore-", toggleForHardcoreOff);
-			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 0) addButton(10, "Normal", toggleForBossesModifier, 0);
-			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 1) addButton(11, "Fantasy", toggleForBossesModifier, 1);
-			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 2) addButton(12, "Infernium", toggleForBossesModifier, 2);
-			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 3) addButton(13, "Hell", toggleForBossesModifier, 3);
 			addButton(14, "Start", startTheGame);
+		}
+		private function chooseGameModes2():void {
+			clearOutput();
+			outputText("Choose a game modifiers. Depending on picked amount final difficulty would be adjusted.\n\n");
+			outputText("<b>Hunger Modifier:</b> "+(flags[kFLAGS.HUNGER_ENABLED] == 1?"Enabled (PC must manage his own hunger lest you want see his death from starvation)":"Disabled")+"\n");
+			outputText("<b>Secondary Stats Modifier:</b> "+(flags[kFLAGS.SECONDARY_STATS_SCALING] == 0?"Disabled":"Enabled (Opponent would have more HP/Lust/Wrath/Fatigue/Mana/Soulforce)")+"\n");
+			outputText("<b>Hardcore Modifier:</b> "+(flags[kFLAGS.HARDCORE_MODE] == 1?"Enabled (No level limits for unlocking new areas)":"Disabled")+"\n");
+			outputText("<b>Elite/Champion/Boss Enemies Modifier:</b> "+(flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 0?"Disabled":"Enabled (Elite/Champion/Boss Enemies would have more Health)")+"\n");
+			outputText("\nFinal game difficulty: ");
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 0) outputText("Anal-easy that even every Fursona out there can play (Easy)");
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 1) outputText("Normaly it's should be Normal here so... it's N.O.R.M.A.L. (Normal)");
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) outputText("As in far far away galaxys they say: That where the fun begins (Hard)");
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) outputText("They see Hard'in They Hatin (Nightmare)");
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 4) outputText("It's time to grace you with ancient blessing: GIT GUD (Extreme)");
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 5) outputText("It's time to grace you with ancient blessing: GIT GUD (Inferno)");
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 6) outputText("It's time to grace you with ancient blessing: GIT GUD (Xianxia MC)");
+			outputText("\n\n");
+			menu();
+			if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 0) addButton(0, "SecondaryStat(0)", toggleForSecondaryStatsModifier, 0);
+			if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 1) addButton(1, "SecondaryStat(1)", toggleForSecondaryStatsModifier, 1);
+			if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 1) addButton(2, "SecondaryStat(2)", toggleForSecondaryStatsModifier, 2);
+			if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 1) addButton(3, "SecondaryStat(3)", toggleForSecondaryStatsModifier, 3);
+			if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 1) addButton(4, "SecondaryStat(4)", toggleForSecondaryStatsModifier, 4);
+			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 0) addButton(5, "Normal", toggleForBossesModifier, 0);
+			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 1) addButton(6, "Fantasy", toggleForBossesModifier, 1);
+			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 2) addButton(7, "Infernium", toggleForBossesModifier, 2);
+			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 3) addButton(8, "Hell", toggleForBossesModifier, 3);
+			addButton(14, "Back", chooseGameModes);
 		}
 
 		private function chooseTimescale():void {

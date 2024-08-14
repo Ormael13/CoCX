@@ -52,7 +52,7 @@ public class WeresharkRace extends Race {
 				.tongueType(Tongue.HUMAN, +1)
 				.rearType(RearBody.SHARK_FIN, +1)
 				.armType(Arms.SHARK, +1)
-				.legType(LowerBody.WERESHARK, +3)
+				.legType(LowerBody.WERESHARK, +3, -1000)
 				.hairTypeAndColor1(Hair.NORMAL, "silver", +2)
 				.skinCoatType(ANY(Skin.SCALES, Skin.AQUA_SCALES, Skin.DRAGON_SCALES), +1)
 				.scaleColor1(ANY(WeresharkScaleColors), +1)

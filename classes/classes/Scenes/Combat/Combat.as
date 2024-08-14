@@ -9055,7 +9055,8 @@ public class Combat extends BaseContent {
 		if (monster.hasPerk(PerkLib.EnemyGhostType) && !canLayerSwordIntentAura()) damage = 0;
 		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
 			damage *= 2;
-			player.takeLustDamage(Math.round(player.maxLust() * 0.05), true);
+			player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
+			player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9187,7 +9188,8 @@ public class Combat extends BaseContent {
 		damage *= EyesOfTheHunterDamageBonus();
 		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
 			damage *= 2;
-			player.takeLustDamage(Math.round(player.maxLust() * 0.05), true);
+			player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
+			player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9286,7 +9288,8 @@ public class Combat extends BaseContent {
 			damage *= (1 + (0.25 * player.perkv1(IMutationsLib.BlazingHeartIM)));
 			if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
 				damage *= 2;
-				player.takeLustDamage(Math.round(player.maxLust() * 0.05), true);
+				player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
+				player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 			}
 			if (!monster.hasStatusEffect(StatusEffects.BurnDoT) && rand(5) == 0) monster.createStatusEffect(StatusEffects.BurnDoT,5,0.02,0,0);
 		}
@@ -9354,7 +9357,8 @@ public class Combat extends BaseContent {
 		damage *= EyesOfTheHunterDamageBonus();
 		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
 			damage *= 2;
-			player.takeLustDamage(Math.round(player.maxLust() * 0.05), true);
+			player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
+			player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9412,7 +9416,8 @@ public class Combat extends BaseContent {
 		damage *= EyesOfTheHunterDamageBonus();
 		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
 			damage *= 2;
-			player.takeLustDamage(Math.round(player.maxLust() * 0.05), true);
+			player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
+			player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9467,7 +9472,8 @@ public class Combat extends BaseContent {
 		damage *= EyesOfTheHunterDamageBonus();
 		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
 			damage *= 2;
-			player.takeLustDamage(Math.round(player.maxLust() * 0.05), true);
+			player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
+			player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9513,7 +9519,8 @@ public class Combat extends BaseContent {
 		damage *= EyesOfTheHunterDamageBonus();
 		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
 			damage *= 2;
-			player.takeLustDamage(Math.round(player.maxLust() * 0.05), true);
+			player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
+			player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9563,7 +9570,8 @@ public class Combat extends BaseContent {
 		damage *= EyesOfTheHunterDamageBonus();
 		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
 			damage *= 2;
-			player.takeLustDamage(Math.round(player.maxLust() * 0.05), true);
+			player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
+			player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9609,7 +9617,8 @@ public class Combat extends BaseContent {
 		damage *= EyesOfTheHunterDamageBonus();
 		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
 			damage *= 2;
-			player.takeLustDamage(Math.round(player.maxLust() * 0.05), true);
+			player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
+			player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9659,7 +9668,8 @@ public class Combat extends BaseContent {
 		damage *= EyesOfTheHunterDamageBonus();
 		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
 			damage *= 2;
-			player.takeLustDamage(Math.round(player.maxLust() * 0.05), true);
+			player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
+			player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9705,7 +9715,8 @@ public class Combat extends BaseContent {
 		damage *= EyesOfTheHunterDamageBonus();
 		if (player.perkv1(IMutationsLib.BlazingHeartIM) >= 3 && monster.monsterIsBurned()) {
 			damage *= 2;
-			player.takeLustDamage(Math.round(player.maxLust() * 0.05), true);
+			player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
+			player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 		}
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {

@@ -917,30 +917,23 @@ import classes.Scenes.Combat.CombatAbilities;
 			if (this.level >= 175) temp *= 8;
 			if (this.level >= 200) temp *= 9;
 			if (hasPerk(PerkLib.EnemyForBeginnersType)) {
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) {
-					if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp *= 1.5;
-					if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp *= 2;
-					if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp *= 3;
-					if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) temp *= 5;
-				}
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 1.5;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 2;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 3;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] >= 4) temp *= 5;
 			}
 			else {
 				if (hasPerk(PerkLib.EnemyBossType)) {
-					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) {
-						if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp *= 10;
-						if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp *= 40;
-						if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp *= 200;
-						if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) temp *= 1600;
-					}
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 10;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 40;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 200;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] >= 4) temp *= 1600;
 				}
 				else {
-					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) {
-						if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp *= 5;
-						if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp *= 10;
-						if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp *= 25;
-						if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) temp *= 100;
-					}
-					
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 5;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 10;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 25;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] >= 4) temp *= 100;
 				}
 			}
 			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) temp = 1;

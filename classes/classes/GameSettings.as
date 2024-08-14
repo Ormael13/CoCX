@@ -145,22 +145,19 @@ public class GameSettings extends BaseContent {
 		}
 		outputText("\n\n");
 		if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 0) {
-			outputText("Secondary Stats Modifier: [font-olive]<b>Normal</b>[/font]\n No opponent secondary stats modifiers.");
+			outputText("Secondary Stats Modifier: No opponent secondary stats modifiers.");
 		}
 		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) {
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) outputText("Secondary Stats Modifier: <b>[font-dred]Hard[/font]</b>\n Opponent has 10x (bosses) and 5x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) {
-				outputText("Secondary Stats Modifier: <b>[font-red]Nightmare[/font]</b>\n Opponent has 40x (bosses)" +
-						" and 10x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
-			}
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) {
-				outputText("Secondary Stats Modifier: <b>[font-lred]Extreme[/font]</b>\n Opponent has 200x (bosses)" +
-						" and 25x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
-			}
-			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) {
-				outputText("Secondary Stats Modifier: <b>[font-pink]Xianxia[/font]</b>\n Opponent has 1600x (bosses)" +
-						" and 100x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
-			}
+			outputText("Secondary Stats Modifier: Opponent has 10x (bosses) and 5x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+		}
+		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) {
+			outputText("Secondary Stats Modifier: Opponent has 40x (bosses) and 10x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+		}
+		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) {
+			outputText("Secondary Stats Modifier: Opponent has 200x (bosses) and 25x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+		}
+		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] >= 4) {
+			outputText("Secondary Stats Modifier: Opponent has 1600x (bosses) and 100x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
 		}
 		outputText("\n\n");
 		if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 0) {
@@ -829,19 +826,22 @@ public class GameSettings extends BaseContent {
 	}
 	public function difficultySelectionMenu2():void {
 		clearOutput();
-		outputText("You can enable / disable Secondary Stats Modifier.\n");
+		outputText("You can choose a difficulty to set how hard battles will be.\n");
+		if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 0) outputText("\n No stats changes.");
+		if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) outputText("\n 10x (bosses) and 5x (rest) multi for secondary stats for monsters. (+1 diff modifier)");
+		if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) outputText("\n 40x (bosses) and 10x (rest) multi for secondary stats for monsters. (+1 diff modifier)");
+		if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) outputText("\n 200x (bosses) and 25x (rest) multi for secondary stats for monsters. (+1 diff modifier)");
+		if (flags[kFLAGS.SECONDARY_STATS_SCALING] >= 4) outputText("\n 1000x (bosses) and 100x (rest) multi for secondary stats for monsters. (+1 diff modifier)");
 		menu();
-		if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 0) addButton(1, "Disable", chooseDifficulty2Off);
-		if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 1) addButton(3, "Enable", chooseDifficulty2On);
-		addButton(14, "Back", settingsScreenGameSettings);
+		addButton(0, "1x", chooseDifficulty2, 0);
+		addButton(1, "5x", chooseDifficulty2, 1);
+		addButton(2, "10x", chooseDifficulty2, 2);
+		addButton(3, "25x", chooseDifficulty2, 3);
+		addButton(4, "100x", chooseDifficulty2, 4);
+		addButton(14, "Back", settingsScreenGameSettings2);
 	}
-	public function chooseDifficulty2Off():void {
-		flags[kFLAGS.SECONDARY_STATS_SCALING] = 0;
-		setTheFuckingDifficultyForFuckingGood();
-		settingsScreenGameSettings();
-	}
-	public function chooseDifficulty2On():void {
-		flags[kFLAGS.SECONDARY_STATS_SCALING] = 1;
+	public function chooseDifficulty2(difficulty:int = 0):void {
+		flags[kFLAGS.SECONDARY_STATS_SCALING] = difficulty;
 		setTheFuckingDifficultyForFuckingGood();
 		settingsScreenGameSettings();
 	}

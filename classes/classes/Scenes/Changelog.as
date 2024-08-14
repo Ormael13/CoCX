@@ -278,8 +278,8 @@ public class Changelog extends BaseContent
 			outputText("-Added option to disable Ceraph and Tamani like few other npc's.\n");
 			outputText("-Ported from Revamp / UEE mod option to kill Tamani. Req. to beat her enough times she would level up once (this req. to have training option for npc's turned on). There was a few minot tweaks on what her satchel have inside or increased exp reward for killing/banishing her for good.\n");
 			outputText("-New perk for enemies: Dragon type enemy. Would be used when some pc attacks could be more or less effective when used on dragon type enemies.\n");
-			outputText("-New head jewelery/accesory/misc (by Liadri): Dragon Blood Helmet - buyable at Kaiba shop in Tel'Adre. Cost 400 gems. Reinforce all breath weapon Effect by 50%. Deals 20% more damage against dragons.\n");
-			outputText("-\n");
+			outputText("-New head jewelery (by Liadri): Dragon Blood Helmet - buyable at Kaiba shop in Tel'Adre. Cost 400 gems. Reinforce all breath weapon Effect by 50%. Deals 20% more damage against dragons.\n");
+			outputText("-Lower body for wereshark race been made mandatory for them (aka giving -1000 penatly if pc not have it).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
