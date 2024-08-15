@@ -170,11 +170,15 @@ import classes.Scenes.Combat.CombatAbilities;
 			_long = value;
 		}
 
-
-		//Is a creature a 'plural' encounter - mob, etc.
+		//Is a creature a specific type like 'plural' mob, etc.
 		public var plural:Boolean = false;
 		public var flyer:Boolean = false;
-		public var range:Boolean = false;
+		public var digger:Boolean = false;
+		public var aquatic:Boolean = false;
+		public var rangeuser:Boolean = false;
+		public var magicuser:Boolean = false;
+		public var soulforceuser:Boolean = false;
+		public var psychicuser:Boolean = false;
 		public var imageName:String = "";
 
 		//Lust vulnerability

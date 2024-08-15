@@ -171,7 +171,7 @@ public class Exploration extends BaseContent implements SaveableState
 		}
 		private function btnExploreLakeBoat():ButtonData {
 			return new ButtonData("Boat", SceneLib.boat.boatExplore)
-					.hint("Get on the boat and explore the lake. \n\nRecommended level: 12" +
+					.hint("Get on the boat and explore the lake. \n\nRecommended level: 15" +
 							"\n\nTimes explored: " + SceneLib.boat.timesExplored())
 					.disableIf(!SceneLib.boat.isDiscovered(), "Search the lake." +
 							" (Lvl "+SceneLib.boat.discoverLevel+"+)");

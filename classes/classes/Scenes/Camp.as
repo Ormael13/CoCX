@@ -4424,7 +4424,7 @@ public class Camp extends NPCAwareContent{
 				.hint("Visit Lumi's laboratory.")
 				.disableIf(flags[kFLAGS.LUMI_MET] <= 0, "Explore the realm.", null, "???");
 		bd.add("Town Ruins", SceneLib.amilyScene.exploreVillageRuin)
-				.hint("Visit the village ruins. \n\nRecommended level: 12")
+				.hint("Visit the village ruins. \n\nRecommended level: 17")
 				.disableIf(!flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE], "Search the lake.", null, "???");
 		bd.add("Farm", SceneLib.farm.farmExploreEncounter)
 				.hint("Visit Whitney's farm.")

@@ -151,20 +151,20 @@ public class FetishZealot extends Monster
 			if (flags[kFLAGS.FETISH_FOLLOWER_SUBTYPE] == 1) {
 				this.short = "fetish zealot";
 				this.long = "The zealot is clad in a bizarre set of religious robes.  They are similar to what you've seen on other religious leaders from home, but none that included the large slit at the front that lets his above average sized human dick stick out the front.";
-				initStrTouSpeInte(45, 55, 40, 1);
-				initWisLibSensCor(1, 75, 80, 90);
-				this.weaponAttack = 12;
-				this.armorDef = 10;
-				this.armorMDef = 5;
-				this.bonusLust = 163;
-				this.level = 8;
+				initStrTouSpeInte(87, 95, 70, 10);
+				initWisLibSensCor(10, 85, 100, 100);
+				this.weaponAttack = 15;
+				this.armorDef = 20;
+				this.armorMDef = 10;
+				this.bonusLust = 195;
+				this.level = 10;
 				this.gems = 10+rand(15);
 			}
 			if (flags[kFLAGS.FETISH_FOLLOWER_SUBTYPE] == 2) {
 				this.short = "fetish priest";
 				this.long = "The priest is clad in a bizarre set of religious robes.  They are similar to what you've seen on other religious leaders from home, but none that included the large slit at the front that lets his above average sized human dick stick out the front.";
-				initStrTouSpeInte(345, 355, 400, 1);
-				initWisLibSensCor(1, 400, 420, 90);
+				initStrTouSpeInte(345, 355, 400, 30);
+				initWisLibSensCor(30, 400, 420, 100);
 				this.weaponAttack = 48;
 				this.armorDef = 100;
 				this.armorMDef = 50;
@@ -177,8 +177,8 @@ public class FetishZealot extends Monster
 			if (flags[kFLAGS.FETISH_FOLLOWER_SUBTYPE] == 4) {
 				this.short = "fetish inquisitor";
 				this.long = "The inquisitor is clad in a bizarre set of religious robes.  They are similar to what you've seen on other religious leaders from home, but none that included the large slit at the front that lets his above average sized human dick stick out the front.";
-				initStrTouSpeInte(75, 105, 80, 1);
-				initWisLibSensCor(1, 105, 110, 90);
+				initStrTouSpeInte(75, 105, 80, 20);
+				initWisLibSensCor(20, 105, 110, 100);
 				this.weaponAttack = 24;
 				this.armorDef = 30;
 				this.armorMDef = 15;

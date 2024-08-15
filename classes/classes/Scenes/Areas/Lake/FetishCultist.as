@@ -147,19 +147,19 @@ public class FetishCultist extends Monster
 			this.a = "the ";
 			if (flags[kFLAGS.FETISH_FOLLOWER_SUBTYPE] == 0) {
 				this.short = "fetish cultist";
-				initStrTouSpeInte(40, 25, 30, 1);
-				initWisLibSensCor(1, 75, 80, 90);
-				this.armorDef = 1;
-				this.armorMDef = 1;
-				this.weaponAttack = 1;
-				this.bonusLust = 158;
-				this.level = 3;
+				initStrTouSpeInte(80, 50, 60, 10);
+				initWisLibSensCor(10, 80, 90, 100);
+				this.armorDef = 5;
+				this.armorMDef = 5;
+				this.weaponAttack = 5;
+				this.bonusLust = 175;
+				this.level = 5;
 				this.gems = 5+rand(10);
 			}
 			if (flags[kFLAGS.FETISH_FOLLOWER_SUBTYPE] == 3) {
 				this.short = "fetish evangelist";
-				initStrTouSpeInte(240, 250, 300, 1);
-				initWisLibSensCor(1, 255, 300, 90);
+				initStrTouSpeInte(240, 250, 300, 30);
+				initWisLibSensCor(30, 255, 300, 100);
 				this.armorDef = 65;
 				this.armorMDef = 20;
 				this.weaponAttack = 20;

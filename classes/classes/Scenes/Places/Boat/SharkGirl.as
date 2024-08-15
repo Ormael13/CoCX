@@ -60,19 +60,19 @@ public class SharkGirl extends Monster
 			this.bodyColor = "gray";
 			this.hairColor = "silver";
 			this.hairLength = 16;
-			initStrTouSpeInte(90, 90, 60, 42);
-			initWisLibSensCor(42, 75, 35, 40);
+			initStrTouSpeInte(210, 180, 120, 72);
+			initWisLibSensCor(72, 150, 69, 40);
 			this.weaponName = "shark teeth";
 			this.weaponVerb="bite";
-			this.weaponAttack = 20;
+			this.weaponAttack = 50;
 			this.armorName = "tough skin";
-			this.armorDef = 12;
-			this.armorMDef = 1;
-			this.bonusHP = 20;
-			this.bonusLust = 130;
+			this.armorDef = 48;
+			this.armorMDef = 4;
+			this.bonusHP = 200;
+			this.bonusLust = 249;
 			this.lust = 40;
 			this.lustVuln = .9;
-			this.level = 20;
+			this.level = 29;
 			this.gems = rand(30) + 25;
 			this.drop = new WeightedDrop().
 					add(consumables.L_DRAFT,3).

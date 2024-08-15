@@ -57,19 +57,19 @@ public class GreenSlime extends Monster
 			this.hips.type = Hips.RATING_AMPLE;
 			this.butt.type = Butt.RATING_LARGE;
 			this.lowerBody = LowerBody.GOO;
-			initStrTouSpeInte(25, 30, 10, 5);
-			initWisLibSensCor(5, 50, 60, 20);
+			initStrTouSpeInte(45, 60, 20, 5);
+			initWisLibSensCor(5, 50, 70, 20);
 			this.bodyColor = "green";
 			this.weaponName = "hands";
 			this.weaponVerb = "slap";
 			this.weaponAttack = 3;
 			this.armorName = "gelatinous skin";
-			this.armorDef = 3;
-			this.armorMDef = 9;
+			this.armorDef = 6;
+			this.armorMDef = 18;
 			this.bonusHP = 50;
-			this.bonusLust = 114;
+			this.bonusLust = 123;
 			this.lust = 30;
-			this.level = 4;
+			this.level = 3;
 			this.gems = rand(5) + 3;
 			this.drop = new ChainedDrop().add(weapons.PIPE, 1 / 10)
 					.add(consumables.WETCLTH, 1 / 2)

@@ -24,7 +24,7 @@ public class Boat extends AbstractLakeContent
 			onGameInit(init);
 		}
 
-		public const discoverLevel:int = 0;
+		public const discoverLevel:int = 10;
 		public const areaLevel:int = 1;
 		public function isDiscovered():Boolean {
 			return SceneLib.exploration.counters.boat > 0;

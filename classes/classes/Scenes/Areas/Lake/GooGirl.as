@@ -160,23 +160,24 @@ public class GooGirl extends Monster
 			this.skin.setBaseOnly({color:tone,type:Skin.GOO});
 			this.hairColor = tone;
 			this.hairLength = 12 + rand(10);
-			initStrTouSpeInte(32, 40, 20, 30);
-			initWisLibSensCor(30, 50, 40, 10);
+			initStrTouSpeInte(52, 70, 50, 30);
+			initWisLibSensCor(30, 55, 45, 10);
 			this.weaponName = "hands";
 			this.weaponVerb="slap";
 			this.weaponAttack = 7;
 			this.armorName = "gelatinous skin";
-			this.armorDef = 4;
-			this.armorMDef = 12;
+			this.armorDef = 8;
+			this.armorMDef = 24;
 			this.bonusHP = 40;
-			this.bonusLust = 96;
+			this.bonusLust = 107;
 			this.lust = 45;
 			this.lustVuln = .75;
-			this.level = 6;
+			this.level = 7;
 			this.gems = rand(6) + 4;
 			this.drop = new ChainedDrop().add(weapons.PIPE,1/10)
 					.add(consumables.WETCLTH,1/2)
 					.elseDrop(useables.GREENGL);
+			this.createPerk(PerkLib.EnemyForBeginnersType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGooType, 0, 0, 0, 0);
 			checkMonster();

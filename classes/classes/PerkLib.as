@@ -7565,9 +7565,6 @@ public class PerkLib
             JobLeader.requireInt(10)
 					.requireWis(10);
             Motivation.requirePerks(JobLeader, BasicLeadership);
-			CursedTag.requireRace(Races.JIANGSHI);
-			ImprovedCursedTag.requirePerk(CursedTag).requireRace(Races.JIANGSHI);
-			GreaterCursedTag.requirePerk(ImprovedCursedTag).requireRace(Races.JIANGSHI);
 			MeleeWeaponsMastery.requireStr(10)
 					.requireTou(10)
 					.requireSpe(10);
@@ -7728,6 +7725,8 @@ public class PerkLib
                     .requirePerk(JobLeader)
 					.requireInt(60)
 					.requireWis(60);
+			CursedTag.requireRace(Races.JIANGSHI)
+					.requireLevel(6);
 			FirearmsAttackMultiplier.requirePerks(RangeWeaponsAttackMultiplier, JobGunslinger)
 					.requireLevel(6)
 					.requireStr(30)
@@ -7858,6 +7857,9 @@ public class PerkLib
 					.requireSpe(40);
 			HighlyVenomousDiet.requirePerk(VenomousDiet);
 			AxillaryVenomGlands.requirePerk(VenomousAdiposeTissue);
+			ImprovedCursedTag.requireRace(Races.JIANGSHI)
+					.requirePerk(CursedTag)
+					.requireLevel(12);
 			SkilledFighterEx.requirePerk(MeleeWeaponsAttackMultiplier)
 					.requireLevel(12)
 					.requireStr(35)
@@ -7955,6 +7957,9 @@ public class PerkLib
 					.requireInt(80)
 					.requireLib(80)
 					.requireCor(50);
+			GreaterCursedTag.requireRace(Races.JIANGSHI)
+					.requirePerk(ImprovedCursedTag)
+					.requireLevel(18);
 			SkilledGunslingerEx.requirePerk(FirearmsAttackMultiplier)
 					.requireLevel(15)
 					.requireStr(40)
