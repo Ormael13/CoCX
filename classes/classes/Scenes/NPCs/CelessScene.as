@@ -396,7 +396,11 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			[CoC.instance.armors.SPKIMO, CoC.instance.armors.OEKIMO, CoC.instance.armors.OTKIMO],
 			[CoC.instance.armors.CTPALAD, CoC.instance.armors.CTHPALA, CoC.instance.armors.CTBGUAR],
 			[CoC.instance.armors.LTHRPNT, null, CoC.instance.armors.CGUNSLI],
-			[CoC.instance.armors.DEATHPO, null, CoC.instance.armors.DEATHPGA]
+			[CoC.instance.armors.DEATHPO, null, CoC.instance.armors.DEATHPGA],
+			[CoC.instance.armors.B_QIPAO, CoC.instance.armors.SFLAREQ, null],
+			[CoC.instance.armors.G_QIPAO, CoC.instance.armors.SFLAREQ, null],
+			[CoC.instance.armors.P_QIPAO, CoC.instance.armors.SFLAREQ, null],
+			[CoC.instance.armors.R_QIPAO, CoC.instance.armors.SFLAREQ, null]
 		];
 		var selectfrom:int = corrupt ? 2 : 1;
 		var selectMenu:ButtonDataList = new ButtonDataList();

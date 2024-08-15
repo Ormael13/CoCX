@@ -21,7 +21,9 @@ public class DrakeBloodMutation extends IMutationPerkType
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1) descS += "Dragon strong vitality grants mana, soulforce and health regeneration " + pTier + "%";
-			if (pTier >= 2) descS += ". You take 5% less damage from magical attack";
+			if (pTier >= 2) descS += ". You take " + (pTier - 1) * 5 + "% less damage from magical attack";
+            if (pTier >= 3) descS += ". Magic Effect from you are " + (pTier - 2) * 25 + "% more powerful";
+            if (pTier >= 4) descS += ". Magic Ability are 100% Stronguer";
             if (descS != "")descS += ".";
             return descS;
         }
@@ -57,7 +59,7 @@ public class DrakeBloodMutation extends IMutationPerkType
 
         public function DrakeBloodMutation() 
 		{
-			super(mName + " IM", mName, SLOT_BLOODSTREAM, 2);
+			super(mName + " IM", mName, SLOT_BLOODSTREAM, 4);
         }
         
     }

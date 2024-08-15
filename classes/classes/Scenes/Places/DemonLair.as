@@ -582,7 +582,11 @@ public class DemonLair extends BaseContent
 				[armors.SPKIMO, armors.OEKIMO, armors.OTKIMO],
 				[armors.CTPALAD, armors.CTHPALA, armors.CTBGUAR],
 				[armors.LTHRPNT, null, armors.CGUNSLI],
-				[armors.DEATHPO, null, armors.DEATHPGA]
+				[armors.DEATHPO, null, armors.DEATHPGA],
+				[armors.B_QIPAO, armors.SFLAREQ, null],
+				[armors.G_QIPAO, armors.SFLAREQ, null],
+				[armors.P_QIPAO, armors.SFLAREQ, null],
+				[armors.R_QIPAO, armors.SFLAREQ, null]
 			];
 			clearOutput();
 			outputText("What item would you like to defile with the corruption of the font?");

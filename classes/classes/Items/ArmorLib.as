@@ -21,7 +21,11 @@ public final class ArmorLib extends ItemConstants
 				IBKIMO,
 				IBKIMO,
 				OEKIMO,
-				CTHPALA
+				CTHPALA,
+				SFLAREQ,
+				SFLAREQ,
+				SFLAREQ,
+				SFLAREQ
 			];
 		}
 		public function LegendaryCorrupt():Array {
@@ -239,6 +243,7 @@ public final class ArmorLib extends ItemConstants
 		public const SCALEML:Armor = new Armor("ScaleMl","Scale Mail","scale-mail armor","a set of scale-mail armor",12,0,720,"This suit of scale-mail covers the entire body with layered steel scales, providing flexibility and protection.","Heavy");
 		public const SEDUCTA:SeductiveArmor = new SeductiveArmor();
 		public const SEDUCTU:SeductiveArmorUntrapped = new SeductiveArmorUntrapped();
+		public const SFLAREQ:SpiritFlareQipao = new SpiritFlareQipao();
 		public const SGRBIKNI:Armor = new Armor("SGrBikini","S Gr Bikini","Sexy Green Bikini","a Sexy Green Bikini",0,0,160,"This item helps female swimmers look sexy while not hindering movement. A perfect dress for a day at the beach.","Light", false, false)
 				.withBuffs({'teasedmg': 10}) as Armor;
 		public const SPIBIKNI:Armor = new Armor("SPiBikini","S Pi Bikini","Sexy Pink Bikini","a Sexy Pink Bikini",0,0,160,"This item helps female swimmers look sexy while not hindering movement. A perfect dress for a day at the beach.","Light", false, false)

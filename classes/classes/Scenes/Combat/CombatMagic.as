@@ -235,6 +235,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (mTPCur > mTPCap) mTPCur = mTPCap;
 			mod += (0.1 * mTPCur);
 		}
+		if (player.perkv1(IMutationsLib.DrakeBloodIM) >= 3) mod += (0.25 * (player.perkv1(IMutationsLib.DrakeBloodIM) - 2));
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
         if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
 		// hope it doesn't lag too much

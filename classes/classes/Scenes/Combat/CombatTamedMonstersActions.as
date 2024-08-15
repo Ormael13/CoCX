@@ -32,27 +32,27 @@ import classes.StatusEffects;
 		public function tamedMonstersMenu():void {
 			menu();
 			if (player.hasStatusEffect(StatusEffects.TamedMonster01)) {
-				if (monster.isFlying() || monster.flyer) addButtonIfTrue(0, "No1", curry(tamedMonsterAttack, 1), "Your tamed monster can't attack flying enemy.", !SceneLib.campMakeWinions.tameMonster01FlightCapable, "Use tamed monster No1.");
+				if (monster.isFlying() || monster.flyer) addButtonIfTrue(0, "No1", curry(tamedMonsterAttack, 1), "Your tamed monster can't attack flying enemy.", SceneLib.campMakeWinions.tameMonster01FlightCapable, "Use tamed monster No1.");
 				else addButton(0, "No1", curry(tamedMonsterAttack, 1)).hint("Use tamed monster No1.");
 			}
 			else addButtonDisabled(0, "No1", "You not have tamed monster No1.");
 			if (player.hasPerk(PerkLib.Beast02)) {
 				if (player.hasStatusEffect(StatusEffects.TamedMonster02)) {
-					if (monster.isFlying() || monster.flyer) addButtonIfTrue(1, "No2", curry(tamedMonsterAttack, 2), "Your tamed monster can't attack flying enemy.", !SceneLib.campMakeWinions.tameMonster02FlightCapable, "Use tamed monster No2.");
+					if (monster.isFlying() || monster.flyer) addButtonIfTrue(1, "No2", curry(tamedMonsterAttack, 2), "Your tamed monster can't attack flying enemy.", SceneLib.campMakeWinions.tameMonster02FlightCapable, "Use tamed monster No2.");
 					else addButton(1, "No2", curry(tamedMonsterAttack, 2)).hint("Use tamed monster No2.");
 				}
 				else addButtonDisabled(1, "No2", "You not have tamed monster No2.");
 			}
 			if (player.hasPerk(PerkLib.ThreeTimesATame)) {
 				if (player.hasStatusEffect(StatusEffects.TamedMonster03)) {
-					if (monster.isFlying() || monster.flyer) addButtonIfTrue(2, "No3", curry(tamedMonsterAttack, 3), "Your tamed monster can't attack flying enemy.", !SceneLib.campMakeWinions.tameMonster03FlightCapable, "Use tamed monster No3.");
+					if (monster.isFlying() || monster.flyer) addButtonIfTrue(2, "No3", curry(tamedMonsterAttack, 3), "Your tamed monster can't attack flying enemy.", SceneLib.campMakeWinions.tameMonster03FlightCapable, "Use tamed monster No3.");
 					else addButton(2, "No3", curry(tamedMonsterAttack, 3)).hint("Use tamed monster No3.");
 				}
 				else addButtonDisabled(2, "No3", "You not have tamed monster No3.");
 			}
 			if (player.hasPerk(PerkLib.FourthTamerOfTheApocalypse)) {
 				if (player.hasStatusEffect(StatusEffects.TamedMonster04)) {
-					if (monster.isFlying() || monster.flyer) addButtonIfTrue(3, "No4", curry(tamedMonsterAttack, 4), "Your tamed monster can't attack flying enemy.", !SceneLib.campMakeWinions.tameMonster04FlightCapable, "Use tamed monster No4.");
+					if (monster.isFlying() || monster.flyer) addButtonIfTrue(3, "No4", curry(tamedMonsterAttack, 4), "Your tamed monster can't attack flying enemy.", SceneLib.campMakeWinions.tameMonster04FlightCapable, "Use tamed monster No4.");
 					else addButton(3, "No4", curry(tamedMonsterAttack, 4)).hint("Use tamed monster No4.");
 				}
 				else addButtonDisabled(3, "No4", "You not have tamed monster No4.");

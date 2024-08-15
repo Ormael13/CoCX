@@ -1088,6 +1088,14 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.ImmolationSpell)) buttons.add("Immolation", immolationSpell);
 		if (player.hasStatusEffect(StatusEffects.IcePrisonSpell)) buttons.add("Ice Prison", iceprisonSpell);
 	}
+	
+	public function magicAbilitiesGoBrrr():Number {
+		var magabilgobrrr:Number = 1;
+		if (player.hasPerk(PerkLib.RacialParagon)) magabilgobrrr *= combat.RacialParagonAbilityBoost();
+		if (player.hasPerk(PerkLib.NaturalArsenal)) magabilgobrrr *= 2;
+		if (player.perkv1(IMutationsLib.DrakeBloodIM) >= 4) magabilgobrrr *= 2;
+		return magabilgobrrr;
+	}
 
 	//New Abilities and Items
 	//[Abilities]
@@ -1152,8 +1160,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage = calcGlacialMod(damage, true);
 		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 5;
 		if (combat.wearingWinterScarf()) damage *= 1.2;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		if (player.hasPerk(PerkLib.AscensionOneRaceToRuleThemAllX)) damage += (0.25 * player.perkv1(PerkLib.AscensionOneRaceToRuleThemAllX));
 		damage = Math.round(damage * combat.iceDamageBoostedByDao());
@@ -1235,8 +1242,7 @@ public class MagicSpecials extends BaseCombatContent {
 		else damage += ((player.tou * 5.5) + rand(player.tou * 6));
 		damage = calcGlacialMod(damage, true);
 		if (combat.wearingWinterScarf()) damage *= 1.2;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		if (player.perkv1(IMutationsLib.YetiFatIM) >= 1) damage *= 1.50;
 		damage = Math.round(damage * combat.iceDamageBoostedByDao());
@@ -1306,8 +1312,7 @@ public class MagicSpecials extends BaseCombatContent {
 			LustyLusty *= 1.5;
 		}
 		if (player.hasPerk(PerkLib.EromancyExpert)) LustyLusty *= 1.5;
-		if (player.hasPerk(PerkLib.RacialParagon)) LustyLusty *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) LustyLusty *= 2;
+		LustyLusty *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.PerformancePower)) LustyLusty *= (1 + player.perkv1(PerkLib.PerformancePower));
 		if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) LustyLusty *= (1 + (0.25 * player.perkv1(IMutationsLib.MelkieLungIM)));
 		if (player.armor == armors.ELFDRES && player.isElf()) LustyLusty *= 2;
@@ -1395,8 +1400,7 @@ public class MagicSpecials extends BaseCombatContent {
 		//High damage to goes.
 		damage = calcVoltageMod(damage, true);
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 		doLightningDamage(damage, true, true);
@@ -1451,8 +1455,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) lustDmgF *= 1.1;
 			if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 2) lustDmgF *= 1.2;
 			if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) lustDmgF *= 1.3;
-			if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= combat.RacialParagonAbilityBoost();
-			if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 2;
+			lustDmgF *= magicAbilitiesGoBrrr();
 			lustDmgF = Math.round(monster.lustVuln * lustDmgF);
 			monster.teased(lustDmgF);
 			if (crit) outputText(" <b>Critical!</b>");
@@ -1502,9 +1505,8 @@ public class MagicSpecials extends BaseCombatContent {
 		//High damage to goes.
 		damage = calcVoltageMod(damage, true);
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
+		damage *= magicAbilitiesGoBrrr();
 		if (player.perkv1(IMutationsLib.FloralOvariesIM) >= 1) damage *= 1.25;
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 		doLightningDamage(damage, true, true);
@@ -1531,8 +1533,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) damage *= 1.1;
 		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 2) damage *= 1.2;
 		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) damage *= 1.3;
-		if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 2;
+		lustDmgF *= magicAbilitiesGoBrrr();
 		lustDmgF = lustDmgF * monster.lustVuln;
 		lustDmgF = Math.round(lustDmgF);
 		monster.teased(lustDmgF);
@@ -1566,8 +1567,7 @@ public class MagicSpecials extends BaseCombatContent {
 		//High damage to goes.
 		damage = calcVoltageMod(damage, true);
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage = Math.round(damage);
 		dynStats("lus", (Math.round(player.maxLust() * 0.02)), "scale", false);
@@ -1591,8 +1591,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 2) lustDmgF *= 1.2;
 		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) lustDmgF *= 1.3;
 		lustDmgF = lustDmgF * monster.lustVuln;
-		if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 2;
+		lustDmgF *= magicAbilitiesGoBrrr();
 		lustDmgF = Math.round(lustDmgF);
 		outputText("You let electricity build up in your body before unleashing it into the ambient sky, the clouds roaring with thunder. Here comes the storm! ");
 		doLightningDamage(damage, true, true);
@@ -1631,8 +1630,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage += player.cumQ();
 			damage *= (player.lust100 * 0.01);
 			damage *= 1.2;
-			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+			damage *= magicAbilitiesGoBrrr();
 			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 			doPlasmaDamage(damage, true, true);
 			if (monster.lustVuln > 0) {
@@ -1653,8 +1651,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage += player.lactationQ();
 			damage *= (player.lust100 * 0.01);
 			damage *= 1.2;
-			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+			damage *= magicAbilitiesGoBrrr();
 			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 			doPlasmaDamage(damage, true, true);
 			if (monster.lustVuln > 0) {
@@ -1677,8 +1674,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage += player.cumQ();
 			damage *= 1.5;
 			damage *= (player.lust100 * 0.02);
-			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+			damage *= magicAbilitiesGoBrrr();
 			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 			doPlasmaDamage(damage, true, true);
 			if (monster.lustVuln > 0) {
@@ -1781,9 +1777,9 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += scalingBonusToughness() * 0.5;
 		damage += 50 + rand(20);
 		damage = calcInfernoMod(damage, true);
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+		if (player.armor == armors.SFLAREQ) damage *= 3;
 		damage = Math.round(damage);
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
@@ -1828,7 +1824,7 @@ public class MagicSpecials extends BaseCombatContent {
 		//Goos burn
 		else if(monster.short == "goo-girl") {
 			outputText(" Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy [monster color] skin has lost some of its shimmer. ");
-			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
+			if (!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid, 0, 0, 0, 0);
 			damage = Math.round(damage * 1.5 * combat.fireDamageBoostedByDao());
 			doFireDamage(damage, true, true);
 		}
@@ -1877,8 +1873,7 @@ public class MagicSpecials extends BaseCombatContent {
 		//High damage to goes.
 		damage = calcGlacialMod(damage, true);
 		if (combat.wearingWinterScarf()) damage *= 1.2;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage = Math.round(damage * combat.iceDamageBoostedByDao());
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
@@ -1939,8 +1934,7 @@ public class MagicSpecials extends BaseCombatContent {
 		//High damage to goes.
 		damage = calcGlacialMod(damage, true);
 		if (combat.wearingWinterScarf()) damage *= 1.2;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage = Math.round(damage * combat.iceDamageBoostedByDao());
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
@@ -2050,8 +2044,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += scalingBonusStrength() * scalingmulti;
 		damage += player.tou;
 		damage += scalingBonusToughness() * scalingmulti;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage *= damult;
 		damage = calcCorrosionMod(damage, true);
@@ -2109,9 +2102,9 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += player.tou;
 		damage += scalingBonusToughness() * scalingmulti;
 		damage = calcInfernoMod(damage, true);
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+		if (player.armor == armors.SFLAREQ) damage *= 3;
 		damage *= damult;
 		damage = Math.round(damage);
 		//Shell
@@ -2206,10 +2199,10 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) damult += 3;
 		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 6;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		if (player.headJewelry === headjewelries.DRABLOH) damage *= 1.5;
+		if (player.armor == armors.SFLAREQ) damage *= 3;
 		damage *= 4;
 		damage *= damult;
 		damage = Math.round(damage);
@@ -2300,8 +2293,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) damult += 3;
 		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 6;
 		if (combat.wearingWinterScarf()) damage *= 1.2;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		if (player.headJewelry === headjewelries.DRABLOH) damage *= 1.5;
 		damage *= 4;
@@ -2364,8 +2356,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) damult += 3;
 		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 6;
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		if (player.headJewelry === headjewelries.DRABLOH) damage *= 1.5;
 		damage *= 4;
@@ -2427,8 +2418,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) damult += 3;
 		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 6;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		if (player.headJewelry === headjewelries.DRABLOH) damage *= 1.5;
 		damage *= 4;
@@ -2490,8 +2480,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) damult += 3;
 		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 6;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		if (player.headJewelry === headjewelries.DRABLOH) damage *= 1.5;
 		damage *= 4;
@@ -2561,8 +2550,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) damult += 3;
 		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 6;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		if (player.headJewelry === headjewelries.DRABLOH) damage *= 1.5;
 		damage *= 4;
@@ -2624,8 +2612,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) damult += 3;
 		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 6;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		if (player.headJewelry === headjewelries.DRABLOH) damage *= 1.5;
 		damage *= 6;
@@ -2733,8 +2720,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) damult += 3;
 		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 6;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		if (player.headJewelry === headjewelries.DRABLOH) damage *= 1.5;
 		damage *= 4;
@@ -2799,8 +2785,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) damult += 3;
 		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 6;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		if (player.headJewelry === headjewelries.DRABLOH) damage *= 1.5;
 		damage *= 4;
@@ -2865,8 +2850,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.DarknessAffinity)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + ((player.lust100 * 0.01) * 0.25));
 			if (combat.wearingWinterScarf()) damage *= 1.05;
-			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+			damage *= magicAbilitiesGoBrrr();
 			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 			if (player.headJewelry === headjewelries.DRABLOH) damage *= 1.5;
 			damage *= 4;
@@ -2956,6 +2940,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Apex)) poisonScaling += 0.5;
 			if (player.hasPerk(PerkLib.AlphaAndOmega)) poisonScaling += 0.5;
 			if (player.hasPerk(PerkLib.NaturalArsenal)) poisonScaling += 1;
+			if (player.perkv1(IMutationsLib.DrakeBloodIM) >= 4) poisonScaling += 1;
 			if (player.headJewelry === headjewelries.DRABLOH) poisonScaling += 0.5;
 			lustDmg2 *= poisonScaling;
 			lustDmg2 *= d2Bdcc;
@@ -2999,6 +2984,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += scalingBonusWisdom() * 0.25;
 		damage = calcInfernoMod(damage, true);
 		damage *= 4;
+		if (player.armor == armors.SFLAREQ) damage *= 3;
 		damage = Math.round(damage);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
@@ -3098,6 +3084,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage *= combat.pcScalingBonusCorruption(player.cor);
 		damage *= spellModBlack();
 		lustDamage = combat.teases.teaseBaseLustDamage() * lustDamagePercent * monster.lustVuln;
+		if (player.armor == armors.SFLAREQ) fireDamage *= 3;
 		fireDamage = calcInfernoMod(damage * (1 - lustDamagePercent), true);
 		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue) {
@@ -3843,8 +3830,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		//High damage to goes.
 		if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage += player.gems;
 		if (player.perkv1(IMutationsLib.NukiNutsIM) >= 3) damage *= 2;
@@ -3981,10 +3967,10 @@ public class MagicSpecials extends BaseCombatContent {
 		damage = calcInfernoMod(damage, true);
 		if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
 		if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		if (player.countMiscJewelry(miscjewelries.DMAGETO) > 0) damage *= 1.25;
+		if (player.armor == armors.SFLAREQ) damage *= 3;
 		damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		outputText("for ");
 		doFireDamage(damage, true, true);
@@ -4081,10 +4067,10 @@ public class MagicSpecials extends BaseCombatContent {
 		damage = calcInfernoMod(damage, true);
 		if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
 		if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		if (player.countMiscJewelry(miscjewelries.DMAGETO) > 0) damage *= 1.25;
+		if (player.armor == armors.SFLAREQ) damage *= 3;
 		damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		outputText("for ");
 		doFireDamage(damage, true, true);
@@ -4271,8 +4257,7 @@ public class MagicSpecials extends BaseCombatContent {
 				damage *= 1.75;
 			}
 			//High damage to goes.
-			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+			damage *= magicAbilitiesGoBrrr();
 			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 			if (player.armor == armors.ANE_UNI) damage *= 1.2;
 			if (player.armor == armors.P_REGAL) damage *= 1.5;
@@ -4339,8 +4324,7 @@ public class MagicSpecials extends BaseCombatContent {
 				damage *= 1.75;
 			}
 			//High damage to goes.
-			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+			damage *= magicAbilitiesGoBrrr();
 			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 			if (player.armor == armors.ANE_UNI) damage *= 1.2;
 			if (player.armor == armors.P_REGAL) damage *= 1.5;
@@ -4392,8 +4376,7 @@ public class MagicSpecials extends BaseCombatContent {
 				damage *= 1.75;
 			}
 			//High damage to goes.
-			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+			damage *= magicAbilitiesGoBrrr();
 			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 			if (player.armor == armors.ANE_UNI) damage *= 1.2;
 			if (player.armor == armors.P_REGAL) damage *= 1.5;
@@ -4494,8 +4477,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += combat.unarmedAttack();
 		damage += player.tou;
 		damage += scalingBonusToughness();// * 0.5
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage = calcCorrosionMod(damage, incAcidCounter);
 		damage = Math.round(damage);
@@ -4550,9 +4532,9 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		damage *= 2;
 		if (player.hasPerk(PerkLib.Necromancy)) damage *= 1.5;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+		if (player.armor == armors.SFLAREQ) damage *= 3;
 		damage = Math.round(damage * (combat.fireDamageBoostedByDao() + combat.darknessDamageBoostedByDao() - 1));
 		if (monster.lustVuln == 0) {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
@@ -4572,8 +4554,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
 		lustDmg *= 0.1;
 		//ew. bonusy do lust dmg tutaj
-		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 2;
+		lustDmg *= magicAbilitiesGoBrrr();
 		if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
 		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 		lustDmg = Math.round(monster.lustVuln * lustDmg);
@@ -4669,16 +4650,15 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.headjewelryName == "fox hairpin") lustDmg *= 1.2;
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) lustDmg *= 2.5;
 		if (player.hasPerk(PerkLib.InariBlessedKimono)) lustDmg *= 1.5;
-		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 2;
+		lustDmg *= magicAbilitiesGoBrrr();
 		if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
 		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 		lustDmg = Math.round(monster.lustVuln * lustDmg);
 		monster.teased(lustDmg);
 		outputText(" ");
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+		if (player.armor == armors.SFLAREQ) damage *= 3;
 		damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		doFireDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
@@ -4772,16 +4752,15 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 2 && player.tailType == Tail.FOX && player.tailCount == 9) lustDmg *= 1.5;
 		if (player.shieldName == "spirit focus") lustDmg *= 1.2;
 		if (player.headjewelryName == "fox hairpin") lustDmg *= 1.2;
-		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 2;
+		lustDmg *= magicAbilitiesGoBrrr();
 		if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
 		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 		lustDmg = Math.round(monster.lustVuln * lustDmg);
 		monster.teased(lustDmg);
 		outputText(" ");
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+		if (player.armor == armors.SFLAREQ) damage *= 3;
 		damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		doFireDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
@@ -4874,16 +4853,15 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.headjewelryName == "fox hairpin") lustDmg *= 1.2;
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) lustDmg *= 2.5;
 		if (player.hasPerk(PerkLib.InariBlessedKimono)) lustDmg *= 1.5;
-		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 2;
+		lustDmg *= magicAbilitiesGoBrrr();
 		if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
 		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 		lustDmg = Math.round(monster.lustVuln * lustDmg);
 		monster.teased(lustDmg);
 		outputText(" ");
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+		if (player.armor == armors.SFLAREQ) damage *= 3;
 		damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		doFireDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
@@ -4977,16 +4955,15 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.headjewelryName == "fox hairpin") lustDmg *= 1.2;
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) lustDmg *= 2.5;
 		if (player.hasPerk(PerkLib.InariBlessedKimono)) lustDmg *= 1.5;
-		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 2;
+		lustDmg *= magicAbilitiesGoBrrr();
 		if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
 		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 		lustDmg = Math.round(monster.lustVuln * lustDmg);
 		monster.teased(lustDmg);
 		outputText(" ");
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+		if (player.armor == armors.SFLAREQ) damage *= 3;
 		damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		doFireDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
@@ -5066,8 +5043,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (monster.spe >= 21) speedDebuff += 20;
 			else speedDebuff += 20 - monster.spe;
 		}
-		if (player.hasPerk(PerkLib.RacialParagon)) speedDebuff *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) speedDebuff *= 2;
+		speedDebuff *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) speedDebuff *= 2;
 		monster.speStat.core.value -= speedDebuff;
 		monster.createStatusEffect(StatusEffects.Fear, 2+ItemMod, speedDebuff, 0, 0);
@@ -5140,9 +5116,8 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText(" eyes glaze over with desire for a moment.  ");
 		}
 		mosterTeaseText();
-		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
+		lustDmg *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
-		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 2;
 		if (player.hasPerk(PerkLib.InariBlessedKimono)) lustDmg *= 3;
 		if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
 		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
@@ -5267,8 +5242,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.ChiReflowLust)) lustDmgF *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
 		if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) lustDmgF *= 1.5;
 		lustDmgF = lustDmgF * monster.lustVuln;
-		if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 2;
+		lustDmgF *= magicAbilitiesGoBrrr();
 		lustDmgF = Math.round(monster.lustVuln * lustDmgF);
 		monster.teased(lustDmgF);
 		if (critL) outputText(" <b>Critical!</b>");
@@ -5339,8 +5313,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (rand(100) < critChance) {
 				damage *= 1.75;
 			}
-			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+			damage *= magicAbilitiesGoBrrr();
 			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 			damage = Math.round(damage);
 			doMagicDamage(damage, true, true);
@@ -5384,8 +5357,7 @@ public class MagicSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) damage *= 1.50;
 		damage = Math.round(damage);
@@ -5500,8 +5472,7 @@ public class MagicSpecials extends BaseCombatContent {
 
 		var damage:Number = (scalingBonusIntelligence() * spellMod());
 		
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) damage *= 1.5;
 		damage *= combat.lightningDamageBoostedByDao();
@@ -5705,8 +5676,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText(" eyes glaze over with desire for a moment.  ");
 		}
 		mosterTeaseText();
-		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 2;
+		lustDmg *= magicAbilitiesGoBrrr();
 		if(player.armorName == "Scandalous Succubus Clothing") lustDmg *= 1.25;
 		if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
 		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
@@ -5734,8 +5704,7 @@ public class MagicSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		if (player.hasPerk(PerkLib.MindbreakerBrain1toX)) damage*=1+(0.5*(1+player.perkv1(PerkLib.MindbreakerBrain1toX)));
 		damage = Math.round(damage);
@@ -5829,8 +5798,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			var damage:Number = Math.round(player.inte / 5) + rand(player.level) + player.level;
 			damage *= Math.round(1 + (0.1 * player.racialScore(Races.POLTERGEIST)));
-			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+			damage *= magicAbilitiesGoBrrr();
 			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 			if (player.hasPerk(PerkLib.EromancyExpert)) damage *= 1.5;
 			if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
@@ -5881,8 +5849,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("You let out a soul-chilling scream freezing your opponent" + (monster.plural ? "s":"") + " in [monster his] tracks from sheer terror. This also seems to have damaged [monster his] sanity. ");
 		var damage:Number = 0;
 		damage += scalingBonusIntelligence() * spellMod();
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage = Math.round(damage);
 		doMagicDamage(damage, true, true);
@@ -5913,12 +5880,12 @@ public class MagicSpecials extends BaseCombatContent {
 		var damage:Number = 0;
 		damage += unarmedAttack();
 		damage *= spellMod();
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage = Math.round(damage);
 		outputText("You growl as you unsheath your claws, enhancing them with a dash of fire magic. You leap forward and viciously rend your opponent for " + damage + " physical and ");
 		doDamage(damage);//phys dmg
+		if (player.armor == armors.SFLAREQ) damage *= 3;
 		damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		doFireDamage(damage, true, true);
 		outputText(" fire damage. Reeling in pain [themonster] begins to bleed and burn at the same time.");
@@ -5959,8 +5926,7 @@ public class MagicSpecials extends BaseCombatContent {
 		var damage:Number = 0;
 		damage += scalingBonusIntelligence()+scalingBonusToughness()+scalingBonusLibido();
 		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 5;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage = Math.round(damage);
 		monster.HP -= damage;
@@ -6011,8 +5977,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) damage *= 1.5;
 		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 2) damage *= 1.5;
 		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) damage *= 1.5;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage = calcGaleMod(damage, true);
 		damage = Math.round(damage * combat.windDamageBoostedByDao());
@@ -6097,8 +6062,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) damage *= 1.5;
 		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 2) damage *= 1.5;
 		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) damage *= 1.5;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
+		damage *= magicAbilitiesGoBrrr();
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage = calcGaleMod(damage, true);
 		damage = Math.round(damage * combat.windDamageBoostedByDao());
@@ -6207,6 +6171,7 @@ public class MagicSpecials extends BaseCombatContent {
 				break;
 			case 1:
 				outputText("[Themonster]  starts to burn as [monster his] body catches fire from the eyebeam! ");
+				if (player.armor == armors.SFLAREQ) damage *= 3;
 				damage = Math.round(damage * combat.fireDamageBoostedByDao());
 				doFireDamage(damage, true, true);
 				if (monster.hasStatusEffect(StatusEffects.Stunned)) monster.addStatusValue(StatusEffects.Stunned, 1, 1);
@@ -6268,6 +6233,7 @@ public class MagicSpecials extends BaseCombatContent {
 				break;
 			case 8:
 				outputText("[Themonster] takes heavy fire damage being seared by the ray shooting from one of your eyestalks! ");
+				if (player.armor == armors.SFLAREQ) damage *= 3;
 				damage = Math.round(damage * combat.fireDamageBoostedByDao());
 				doFireDamage((damage * 3), true, true);
 				break;
@@ -7117,6 +7083,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (type == 3) {
 			outputText("You gather energy in your mouth before spitting a pyroclastic mather at your opponent, searing their flesh and setting [themonster] on fire. ");
 			damage = calcInfernoMod(damage, true);
+			if (player.armor == armors.SFLAREQ) damage *= 3;
 			damage = Math.round(damage * combat.fireDamageBoostedByDao());
 			doFireDamage(damage, true, true);
 			if (player.isFistOrFistWeapon() && player.hasPerk(PerkLib.ElementalTouch)) {

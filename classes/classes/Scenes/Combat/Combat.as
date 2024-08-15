@@ -3678,6 +3678,7 @@ public class Combat extends BaseContent {
         }
         else if (isUnarmedCombatButDealFireDamage()) {
             if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) damage += Math.round(damage * 0.1);
+			if (player.armor == armors.SFLAREQ) damage *= 1.2;
 			damage = Math.round(damage * fireDamageBoostedByDao());
 			doFireDamage(damage, true, true);
 			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
@@ -3695,6 +3696,7 @@ public class Combat extends BaseContent {
         }
 		else if (isUnarmedCombatButDealIceDamage()) {
 			if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) damage += Math.round(damage * 0.1);
+			if (player.armor == armors.SFLAREQ) damage *= 1.2;
 			damage = Math.round(damage * iceDamageBoostedByDao());
             doIceDamage(damage, true, true);
 			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
@@ -3740,6 +3742,7 @@ public class Combat extends BaseContent {
         }
 		else if (player.isUnarmedCombat() || IsFeralCombat) {
 			if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) damage += Math.round(damage * 0.1);
+			if (player.armor == armors.SFLAREQ) damage *= 1.2;
 			doPhysicalDamage(damage, true, true);
 			if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
 			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
@@ -3759,6 +3762,7 @@ public class Combat extends BaseContent {
 			if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
 		}
 		else if (INeedOnlyOneFistOrKick == 1) {
+			if (player.armor == armors.SFLAREQ) damage *= 1.2;
 			doPhysicalDamage(damage, true, true);
 			if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
 			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
@@ -3776,6 +3780,7 @@ public class Combat extends BaseContent {
 			}
 		}
 		else if (INeedOnlyOneFistOrKick == 2) {
+			if (player.armor == armors.SFLAREQ) damage *= 1.2;
 			doMagicDamage(damage, true, true);
 			if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
 			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
@@ -3793,6 +3798,7 @@ public class Combat extends BaseContent {
 			}
 		}
 		else if (INeedOnlyOneFistOrKick == 3) {
+			if (player.armor == armors.SFLAREQ) damage *= 1.2;
 			if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) damage += Math.round(damage * 0.1);
 			damage = Math.round(damage * fireDamageBoostedByDao());
             doFireDamage(damage, true, true);
@@ -3813,6 +3819,7 @@ public class Combat extends BaseContent {
 			if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
 		}
 		else if (INeedOnlyOneFistOrKick == 4) {
+			if (player.armor == armors.SFLAREQ) damage *= 1.2;
 			damage = Math.round(damage * iceDamageBoostedByDao());
             doIceDamage(damage, true, true);
 			if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
@@ -12315,6 +12322,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 		if (flags[kFLAGS.HUNGER_ENABLED] <= 0 && !player.hasPerk(PerkLib.EndlessHunger) && player.hasPerk(PerkLib.AxillaryVenomGlands) && player.tailVenom < player.maxVenom()) maxPercentRegen -= 1;
 		//if (player.hasStatusEffect(StatusEffects.GnomeHomeBuff) && player.statusEffectv1(StatusEffects.GnomeHomeBuff) == 1) maxPercentRegen += 15;
         if (player.armor == armors.NURSECL) maxPercentRegen += 0.5;
+		if (player.armor == armors.SFLAREQ && player.hasPerk(PerkLib.FireAffinity)) maxPercentRegen += 3;
         if (player.armor == armors.BLIZZ_K) {
             if (!player.hasPerk(PerkLib.ColdAffinity)) maxPercentRegen -= 10;
             if (player.isRaceCached(Races.YUKIONNA)) maxPercentRegen += 5;
@@ -12404,7 +12412,14 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 
     public function maximumRegeneration():Number {
         var maxRegen:Number = 2;
-        if (player.hasPerk(PerkLib.LizanRegeneration)) maxRegen += 1.5;
+		if (player.armor == armors.NURSECL) maxRegen += 0.5;
+		if (player.armor == armors.SFLAREQ && player.hasPerk(PerkLib.FireAffinity)) maxRegen += 3;
+        if (player.armor == armors.BLIZZ_K && player.isRaceCached(Races.YUKIONNA)) maxRegen += 5;
+        if (player.weapon == weapons.BCLAWS && player.isRaceCached(Races.YUKIONNA)) maxRegen += 1;
+        if (player.weapon == weapons.SESPEAR) maxRegen += 2;
+		if ((player.necklace == necklaces.SKULLNE) && (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh))) maxRegen += 5;
+		if ((player.headJewelry == headjewelries.SKULLCR) && (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh))) maxRegen += 4;
+		if (player.hasPerk(PerkLib.LizanRegeneration)) maxRegen += 1.5;
         if (player.perkv1(IMutationsLib.LizanMarrowIM) >= 1) maxRegen += 0.5 * player.perkv1(IMutationsLib.LizanMarrowIM);
         if (player.perkv1(IMutationsLib.LizanMarrowIM) == 3 && player.HP < (player.maxHP() * 0.25)) maxRegen += 1.5;
 		if (player.perkv1(IMutationsLib.LizanMarrowIM) == 4) {
@@ -14122,7 +14137,7 @@ public function SingDevastatingAria():void {
         crit = true;
         damage *= 1.75;
     }
-    if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
+    if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
     if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 2;
 	if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 	if (player.hasPerk(PerkLib.PerformancePower)) damage *= (1 + player.perkv1(PerkLib.PerformancePower));

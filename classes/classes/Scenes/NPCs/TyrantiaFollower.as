@@ -1424,7 +1424,11 @@ public function itemImproveMenuCorrupt():void {
 		[armors.SPKIMO, armors.OEKIMO, armors.OTKIMO],
 		[armors.CTPALAD, armors.CTHPALA, armors.CTBGUAR],
 		[armors.LTHRPNT, null, armors.CGUNSLI],
-		[armors.DEATHPO, null, armors.DEATHPGA]
+		[armors.DEATHPO, null, armors.DEATHPGA],
+		[armors.B_QIPAO, armors.SFLAREQ, null],
+		[armors.G_QIPAO, armors.SFLAREQ, null],
+		[armors.P_QIPAO, armors.SFLAREQ, null],
+		[armors.R_QIPAO, armors.SFLAREQ, null]
 	];
 	clearOutput();
 	outputText("You ask your Drider lover if she’d be willing to upgrade a piece of your gear. She nods simply, bringing out a trough on wheels, filled with ebony liquid that bubbles, despite being under no heat.\n\n");// legendary
