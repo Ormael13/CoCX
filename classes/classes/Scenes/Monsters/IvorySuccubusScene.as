@@ -74,7 +74,6 @@ public class IvorySuccubusScene extends BaseContent
         dynStats("cor", 3);
         player.addCurse("lib", 2, 2);
         sceneHunter.selectGender(dickF, vagF);
-
         function dickF():void {
             outputText("She saunters toward you, swaying her hips the whole way. When she gets within your reach she kisses you instantly, shoving her tongue into your mouth as far as it can go. At the same time, she wraps a leg around you and hooks it behind you, grabbing your stiff cock and guiding it to her nethers.");
             outputText("\n\nHer insides and warm and wet already, squeezing around you and twisting eagerly. The succubus moans into your mouth as she caresses your body with her hands. She expertly lowers both of you from standing to the ground, with her staying on top of you. She switches to bouncing on your cock, taking it as far as she can. Her powerful legs bounce at a pace few human women could match. She coaxes you to shoot inside her quite easily, and the feeling of this ejaculation is so powerful you feel like you could die of pleasure right there. The succubus moans erotically as she accepts your seed inside her, and leans over to kiss you on the forehead as if to wish you good night.");

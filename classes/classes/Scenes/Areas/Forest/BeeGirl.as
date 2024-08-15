@@ -108,19 +108,19 @@ public class BeeGirl extends Monster {
 			this.bodyColor = "yellow";
 			this.hairColor = randomChoice("black","black and yellow");
 			this.hairLength = 6;
-			initStrTouSpeInte(30, 50, 30, 20);
-			initWisLibSensCor(20, 60, 55, 0);
+			initStrTouSpeInte(50, 73, 50, 30);
+			initWisLibSensCor(30, 85, 75, 0);
 			this.weaponName = "chitin-plated fist";
 			this.weaponVerb="armored punch";
-			this.weaponAttack = 4;
+			this.weaponAttack = 8;
 			this.armorName = "chitin";
-			this.armorDef = 12;
-			this.armorMDef = 2;
-			this.bonusHP = 40;
-			this.bonusLust = 121;
+			this.armorDef = 24;
+			this.armorMDef = 4;
+			this.bonusHP = 50;
+			this.bonusLust = 168;
 			this.lust = 20 + rand(40);
 			this.lustVuln = 0.9;
-			this.level = 6;
+			this.level = 8;
 			this.gems = rand(20) + 5;
 			this.drop = new ChainedDrop().add(consumables.OVIELIX, 1 / 6)
 					.add(consumables.W__BOOK, 1 / 4)

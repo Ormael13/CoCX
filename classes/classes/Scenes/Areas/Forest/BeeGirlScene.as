@@ -502,7 +502,7 @@ public class BeeGirlScene extends BaseContent
 			spriteSelect(SpriteDb.s_bee_girl);
             flags[kFLAGS.BEE_GIRL_RESET_COUNTER] = 0;
 			outputText("You clear your head and resolve to defeat the monstrous bee-girl");
-			if (player.level >= 3 && ((rand(4) == 0 && player.level < 12) || (rand(4) > 0 && player.level >= 12))) {
+			if (player.level >= 16 && rand(2) == 0) {
 				outputText(" huntress.");
 				startCombat(new BeeGirlHuntress());
 			}

@@ -55,14 +55,14 @@ import classes.Scenes.NPCs.*;
 		
 		public function WerewolfFemale()
 		{
-			initStrTouSpeInte(30 + 7, 100 + 20, 40 + 7, 50 + 2);
-			initWisLibSensCor(50 + 2, 80 + 10, 40+10, 75);
-			this.weaponAttack = 36 + 2;
-			this.armorDef = 200 + 10;
-			this.armorMDef = 5;
-			this.bonusHP = 800 + 50;
-			this.bonusLust = 129 + 26;
-			this.level = 9 + 6;
+			initStrTouSpeInte(51, 150, 77, 62);
+			initWisLibSensCor(62, 102, 70, 75);
+			this.weaponAttack = 76;
+			this.armorDef = 420;
+			this.armorMDef = 10;
+			this.bonusHP = 1000;
+			this.bonusLust = 188;
+			this.level = 16;
 			this.a = "the ";
 			this.short = "werewolf";
 			this.imageName = "luna";

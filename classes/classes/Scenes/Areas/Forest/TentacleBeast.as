@@ -132,14 +132,14 @@ public class TentacleBeast extends Monster
 			else {
 				this.short = "tentacle beast";
 				this.long = "You see the massive, shambling form of the tentacle beast before you.  Appearing as a large shrub, it shifts its bulbous mass and reveals a collection of thorny tendrils and cephalopodic limbs.";
-				initStrTouSpeInte(73, 90, 25, 45);
-				initWisLibSensCor(40, 90, 20, 100);
-				this.weaponAttack = 10;
-				this.armorDef = 18;
-				this.armorMDef = 2;
-				this.bonusHP = 400;
-				this.bonusLust = 122;
-				this.level = 11;
+				initStrTouSpeInte(133, 106, 45, 45);
+				initWisLibSensCor(40, 110, 20, 100);
+				this.weaponAttack = 20;
+				this.armorDef = 45;
+				this.armorMDef = 5;
+				this.bonusHP = 1000;
+				this.bonusLust = 150;
+				this.level = 20;
 			    this.gems = rand(25)+10;
 			}
 			this.a = "the ";

@@ -62,19 +62,19 @@ public class Dryad extends Monster {
         this.hairColor = "dark brown";
         this.hairLength = 4;
         initStrTouSpeInte(95, 75, 70, 100);
-        initWisLibSensCor(70, 55, 35, 75);
+        initWisLibSensCor(70, 155, 135, 95);
         this.weaponName = "claws";
         this.weaponVerb = "slash";
-        this.weaponAttack = 25;
+        this.weaponAttack = 75;
         this.armorName = "forest gown";
-        this.armorDef = 24;
-		this.armorMDef = 2;
+        this.armorDef = 180;
+		this.armorMDef = 15;
         this.fatigue = 0;
-        this.bonusHP = 425;
-		this.bonusLust = 110;
+        this.bonusHP = 850;
+		this.bonusLust = 317;
         this.lust = 35;
         this.lustVuln = 0.4;
-        this.level = 20;
+        this.level = 27;
         this.gems = rand(15) + 25;
         this.drop = new WeightedDrop()/*.
 						add(armors.FRSGOWN, 1)*/;

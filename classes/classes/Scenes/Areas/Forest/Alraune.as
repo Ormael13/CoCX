@@ -171,13 +171,13 @@ public class Alraune extends Monster
 				this.bodyColor = "light green";
 				this.hairColor = "dark green";
 			}
-			initStrTouSpeInte(10, 120, 10, 60);
-			initWisLibSensCor(60, 100, 50, 0);
-			this.armorDef = 45;
-			this.armorMDef = 5;
-			this.bonusHP = 100;
-			this.bonusLust = 174;
-			this.level = 28;
+			initStrTouSpeInte(30, 420, 30, 180);
+			initWisLibSensCor(180, 300, 150, 0);
+			this.armorDef = 300;
+			this.armorMDef = 60;
+			this.bonusHP = 1000;
+			this.bonusLust = 502;
+			this.level = 52;
 			this.drop = new WeightedDrop().
 			add(consumables.RAUNENECT,7).
 			addMany(1,consumables.MARAFRU,

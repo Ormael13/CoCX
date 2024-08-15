@@ -103,20 +103,20 @@ public class TentacleBeastRaging extends Monster
 			this.skinDesc = "bark";
 			this.hairColor = "green";
 			this.hairLength = 1;
-			initStrTouSpeInte(31, 25, 10, 20);
+			initStrTouSpeInte(171, 42, 12, 20);
 			initWisLibSensCor(15, 90, 20, 100);
 			this.weaponName = "whip-tendril";
 			this.weaponVerb="thorny tendril";
-			this.weaponAttack = 3;
+			this.weaponAttack = 53;
 			this.armorName = "rubbery skin";
-			this.armorDef = 5;
-			this.armorMDef = 0;
-			this.bonusHP = 40;
-			this.bonusWrath = 100;
-			this.bonusLust = 122;
+			this.armorDef = 25;
+			this.armorMDef = 5;
+			this.bonusHP = 50;
+			this.bonusWrath = 500;
+			this.bonusLust = 130;
 			this.lust = 10;
 			this.lustVuln = 0.8;
-			this.level = 11;
+			this.level = 20;
 			this.gems = rand(7)+3;
 			this.drop = new WeightedDrop().addMany(1,consumables.HEALHERB,
 					consumables.HEALHERB,

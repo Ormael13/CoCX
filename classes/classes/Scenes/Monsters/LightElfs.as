@@ -137,14 +137,14 @@ public class LightElfs extends Monster
 			if (flags[kFLAGS.DARK_OR_LIGHT_ELF_SUBTYPE] == 10) {
 				this.short = "light elf scout";
 				this.long = "This woman with light skin has long pointed ears. You suspect her to be a light elf, though why she’s here, you have no idea. Regardless, she’s dangerous and seems well equipped for kidnapping.";
-				initStrTouSpeInte(30, 30, 90, 40);
-				initWisLibSensCor(40, 50, 60, 80);
-				this.armorDef = 4;
-				this.armorMDef = 4;
-				this.weaponAttack = 5;
-				this.weaponRangeAttack = 18;
-				this.bonusLust = 124;
-				this.level = 14;
+				initStrTouSpeInte(100, 100, 310, 130);
+				initWisLibSensCor(130, 150, 180, 100);
+				this.armorDef = 80;
+				this.armorMDef = 80;
+				this.weaponAttack = 25;
+				this.weaponRangeAttack = 90;
+				this.bonusLust = 371;
+				this.level = 41;
 				this.gems = rand(10) + 10;
 			}
 			if (flags[kFLAGS.DARK_OR_LIGHT_ELF_SUBTYPE] == 11) {

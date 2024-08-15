@@ -229,48 +229,48 @@ public class Kitsune extends Monster
 				this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.MET_KITSUNES] < 2) {
-				initStrTouSpeInte(35, 55, 110, 105);
-				initWisLibSensCor(110, 60, 65, 45);
-				this.weaponAttack = 8;
-				this.armorDef = 5;
-				this.armorMDef = 30;
+				initStrTouSpeInte(130, 155, 325, 315);
+				initWisLibSensCor(325, 140, 150, 30);
+				this.weaponAttack = 16;
+				this.armorDef = 25;
+				this.armorMDef = 150;
 				this.tailCount = 4;
-				this.bonusHP = 120;
-				this.bonusLust = 144;
-				this.level = 19;
+				this.bonusHP = 250;
+				this.bonusLust = 327;
+				this.level = 37;
 			}
 			if (flags[kFLAGS.MET_KITSUNES] == 2) {
-				initStrTouSpeInte(50, 75, 140, 130);
-				initWisLibSensCor(135, 80, 75, 45);
-				this.weaponAttack = 9;
-				this.armorDef = 6;
-				this.armorMDef = 36;
+				initStrTouSpeInte(160, 195, 360, 350);
+				initWisLibSensCor(365, 170, 180, 30);
+				this.weaponAttack = 20;
+				this.armorDef = 30;
+				this.armorMDef = 180;
 				this.tailCount = 5;
-				this.bonusHP = 130;
-				this.bonusLust = 180;
-				this.level = 25;
+				this.bonusHP = 300;
+				this.bonusLust = 393;
+				this.level = 43;
 			}
 			if (flags[kFLAGS.MET_KITSUNES] == 3) {
-				initStrTouSpeInte(65, 95, 170, 155);
-				initWisLibSensCor(160, 100, 85, 45);
-				this.weaponAttack = 10;
-				this.armorDef = 7;
-				this.armorMDef = 42;
+				initStrTouSpeInte(190, 235, 395, 385);
+				initWisLibSensCor(405, 200, 210, 30);
+				this.weaponAttack = 24;
+				this.armorDef = 35;
+				this.armorMDef = 210;
 				this.tailCount = 5;
-				this.bonusHP = 140;
-				this.bonusLust = 216;
-				this.level = 31;
+				this.bonusHP = 350;
+				this.bonusLust = 459;
+				this.level = 49;
 			}
 			if (flags[kFLAGS.MET_KITSUNES] == 4) {
-				initStrTouSpeInte(80, 115, 200, 180);
-				initWisLibSensCor(185, 120, 95, 45);
-				this.weaponAttack = 11;
-				this.armorDef = 8;
-				this.armorMDef = 48;
+				initStrTouSpeInte(220, 275, 430, 420);
+				initWisLibSensCor(445, 230, 240, 30);
+				this.weaponAttack = 28;
+				this.armorDef = 40;
+				this.armorMDef = 240;
 				this.tailCount = 6;
-				this.bonusHP = 150;
-				this.bonusLust = 252;
-				this.level = 37;
+				this.bonusHP = 400;
+				this.bonusLust = 525;
+				this.level = 55;
 			}
 			this.createVagina(false, VaginaClass.WETNESS_SLICK, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 20, 0, 0, 0);
@@ -295,6 +295,10 @@ public class Kitsune extends Monster
 					add(armors.ARCBANG,1).
 					add(consumables.FOXJEWL,4);
 			this.tailType = Tail.FOX;
+			if (flags[kFLAGS.MET_KITSUNES] >= 2) this.createPerk(PerkLib.EpicWisdom, 0, 0, 0, 0);
+			if (flags[kFLAGS.MET_KITSUNES] >= 3) this.createPerk(PerkLib.EpicIntelligence, 0, 0, 0, 0);
+			if (flags[kFLAGS.MET_KITSUNES] >= 4) this.createPerk(PerkLib.LegendaryWisdom, 0, 0, 0, 0);
+			if (flags[kFLAGS.MET_KITSUNES] >= 5) this.createPerk(PerkLib.LegendaryIntelligence, 0, 0, 0, 0);
 			checkMonster();
 		}
 

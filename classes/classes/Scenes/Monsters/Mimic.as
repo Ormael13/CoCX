@@ -92,29 +92,42 @@ public class Mimic extends Monster {
         this.pronoun1 = "it";
         this.pronoun2 = "it";
         this.pronoun3 = "its";
-        initStrTouSpeInte(30, 95, 5, 5);
-        initWisLibSensCor(45, 45, 45, 100);
         this.weaponName = "mouth";
         this.weaponVerb = "bite";
-        this.weaponAttack = 20 + player.level;
         if (type == 3) {
+			initStrTouSpeInte(50, 115, 5, 10);
+			initWisLibSensCor(50, 35, 35, 100);
+			this.weaponAttack = 30 + player.level;
             this.armorName = "wooden surface";
-            this.armorDef = 30;
-			this.armorMDef = 30;
+            this.armorDef = 60;
+			this.armorMDef = 60;
+			this.bonusHP = 100;
+			this.bonusLust = 81;
+			this.level = 11;
         }
         if (type == 2 || type == 1) {
+            initStrTouSpeInte(30, 95, 5, 5);
+			initWisLibSensCor(45, 45, 45, 100);
+			this.weaponAttack = 20 + player.level;
             this.armorName = "flesh";
             this.armorDef = 0;
 			this.armorMDef = 0;
+			this.bonusHP = 50;
+			this.bonusLust = 96;
+			this.level = 6;
         } else {
+            initStrTouSpeInte(30, 95, 5, 5);
+			initWisLibSensCor(45, 45, 45, 100);
+			this.weaponAttack = 20 + player.level;
             this.armorName = "stone surface";
             this.armorDef = 75;
 			this.armorMDef = 75;
+			this.bonusHP = 50;
+			this.bonusLust = 96;
+			this.level = 6;
         }
         this.lust = 10;
         this.lustVuln = 0.01;
-		this.bonusLust = 96;
-        this.level = 6;
         this.gems = rand(20) + 21;
         this.drop = new WeightedDrop()
             .add(consumables.PPHILTR, 4)

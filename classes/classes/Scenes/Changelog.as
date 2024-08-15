@@ -281,7 +281,7 @@ public class Changelog extends BaseContent
 			outputText("-New head jewelery (by Liadri): Dragon Blood Helmet - buyable at Kaiba shop in Tel'Adre. Cost 400 gems. Reinforce all breath weapon Effect by 50%. Deals 20% more damage against dragons.\n");
 			outputText("-Lower body for wereshark race been made mandatory for them (aka giving -1000 penatly if pc not have it).\n");
 			outputText("-Cursed Tag, Improved Cursed Tag, Greater Cursed Tag perks hve not req. of min level making them respectively tier 1, 2 and 3 perks.\n");
-			outputText("-Areas and Places with enemies to fight have their general levels and stats increased. Areas/Places adjusted (new lvl range of enemies): Lake (3-10), Boat (15-29)\n");
+			outputText("-Areas and Places with enemies to fight have their general levels and stats increased. Areas/Places adjusted (new lvl range of enemies): Lake (3-10), Boat (15-29), Forest (O)(8-16), Forest (I)(19-27), Deepwoods (32-52)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

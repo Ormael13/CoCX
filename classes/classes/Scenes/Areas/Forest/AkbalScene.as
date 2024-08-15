@@ -24,7 +24,7 @@ public class AkbalScene extends BaseContent {
 				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] >= 1) flags[kFLAGS.AKBAL_DEFEATS_COUNTER]++;
 				else flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 1;
 				//level up
-				if (flags[kFLAGS.AKBAL_LVL_UP] < 13 && flags[kFLAGS.AKBAL_DEFEATS_COUNTER] >= flags[kFLAGS.AKBAL_LVL_UP] + 1) {
+				if (flags[kFLAGS.AKBAL_LVL_UP] < 11 && flags[kFLAGS.AKBAL_DEFEATS_COUNTER] >= flags[kFLAGS.AKBAL_LVL_UP]) {
 					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
 					++flags[kFLAGS.AKBAL_LVL_UP];
 				}

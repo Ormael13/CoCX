@@ -22,10 +22,10 @@ public class IvorySuccubus extends AbstractSuccubus {
             outputText("Despite your sprint, it closes the distance and leaps on you, tearing and scratching. ");
             if (rand((player.str / 3) + 10) < ((str / 3) + 10)) {
                 outputText("You try to shake her off, but she's too powerful and rains painful scratches and blows before pushing you onto the ground. You get up and get back to fighting. ");
-                damage = (10 + str);
+                damage = (30 + str + weaponAttack);
             } else {
                 outputText("You bring your strength to bear and throw her off with only minor injuries. ");
-                damage = Math.floor((5 + str) / 2);
+                damage = (Math.floor((15 + str) / 2) + weaponAttack);
             }
             player.takePhysDamage(damage, true);
         }
@@ -57,16 +57,17 @@ public class IvorySuccubus extends AbstractSuccubus {
         this.bodyColor = "ivory";
         this.hairColor = "black";
         this.hairLength = 4;
-        initStrTouSpeInte(25, 20, 35, 42);
-        initWisLibSensCor(75, 75, 45, 100);
+        initStrTouSpeInte(205, 220, 185, 92);
+        initWisLibSensCor(135, 175, 115, 100);
         this.weaponName = "fists";
         this.weaponVerb = "punch";
-        this.armorName = "skin";
-		this.armorDef = 12;
-		this.armorMDef = 2;
-		this.bonusLust = 123;
+        this.weaponAttack = 70;
+		this.armorName = "skin";
+		this.armorDef = 120;
+		this.armorMDef = 20;
+		this.bonusLust = 317;
         this.lust = 50;
-        this.level = 3;
+        this.level = 27;
         this.gems = rand(5) + 5;
         this.randomDropChance = 0.1;
         this.randomDropParams = {

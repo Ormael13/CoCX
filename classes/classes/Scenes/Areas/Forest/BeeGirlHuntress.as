@@ -34,14 +34,14 @@ import classes.Scenes.Areas.Forest.BeeGirl;
 			else {
 				this.short = "bee-girl huntress";
 				this.long = "A bee-girl huntress buzzes around you, filling the air with intoxicatingly sweet scents and a buzz that gets inside your head.  She has a humanoid face with small antennae, black chitin on her arms and legs that looks like shiny gloves and boots, sizable breasts, and a swollen abdomen tipped with a gleaming stinger.";
-				initStrTouSpeInte(50, 100, 50, 35);
-				initWisLibSensCor(35, 90, 75, 0);
-				this.weaponAttack = 10;
-				this.armorDef = 25;
-				this.armorMDef = 10;
-				this.bonusHP = 100;
-				this.bonusLust = 181;//lib+sens+lvl
-				this.level = 16;
+				initStrTouSpeInte(90, 170, 90, 50);
+				initWisLibSensCor(50, 140, 115, 0);
+				this.weaponAttack = 20;
+				this.armorDef = 50;
+				this.armorMDef = 20;
+				this.bonusHP = 200;
+				this.bonusLust = 274;//lib+sens+lvl
+				this.level = 19;
 				this.gems = rand(30) + 12;
 				this.drop = new ChainedDrop().add(consumables.OVIELIX, 1 / 4)
 						.add(consumables.W__BOOK, 1 / 3)

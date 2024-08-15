@@ -54,9 +54,11 @@ public class WoodElvesHuntingParty extends Monster
 			WoodElfSpearStab();
 			WoodElfSpearStab();
 			WoodElfSpearStab();
+			WoodElfSpearStab();
+			if (rand(100) < (95 + Acc)) WoodElfSpearStab();
 			if (rand(100) < (90 + Acc)) WoodElfSpearStab();
+			if (rand(100) < (85 + Acc)) WoodElfSpearStab();
 			if (rand(100) < (80 + Acc)) WoodElfSpearStab();
-			if (rand(100) < (70 + Acc)) WoodElfSpearStab();
 			outputText("\n\n");
 		}
 		
@@ -179,21 +181,21 @@ public class WoodElvesHuntingParty extends Monster
 			this.bodyColor = "light";
 			this.hairColor = "blonde";
 			this.hairLength = 13;
-			initStrTouSpeInte(30, 30, 80, 30);
-			initWisLibSensCor(30, 50, 60, 80);
+			initStrTouSpeInte(50, 50, 180, 40);
+			initWisLibSensCor(40, 130, 170, 100);
 			this.weaponName = "spear";
 			this.weaponVerb= "stab";
-			this.weaponAttack = 15;
+			this.weaponAttack = 45;
 			this.weaponRangeName = "elven bow";
 			this.weaponRangeVerb= "shoot";
-			this.weaponRangeAttack = 18;
+			this.weaponRangeAttack = 54;
 			this.armorName = "elven armor";
-			this.armorDef = 3;
-			this.armorMDef = 3;
-			this.bonusLust = 125;
+			this.armorDef = 12;
+			this.armorMDef = 12;
+			this.bonusLust = 323;
 			this.lustVuln = .7;
 			this.lust = 50;
-			this.level = 14;
+			this.level = 23;
 			this.gems = rand(10) + 10;
 			this.drop = new WeightedDrop().
 					add(weaponsrange.BOWLIGH,1).

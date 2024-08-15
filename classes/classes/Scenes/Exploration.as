@@ -141,17 +141,16 @@ public class Exploration extends BaseContent implements SaveableState
 		}
 		private function btnExploreForestOutskirts():ButtonData {
 			return new ButtonData("Forest (O)", SceneLib.forest.exploreForestOutskirts)
-					.hint("Visit the lush forest. "
+					.hint("Visit the lush forest (outer). "
 							+ "\n\nTimes explored: " + SceneLib.forest.timesExploredOuter())
-					.disableIf(!SceneLib.forest.isDiscoveredOuter(), "You need to 'Explore' Mareth more." +
+					.disableIf(!SceneLib.forest.isDiscoveredOuter(), "Discovered when using 'Explore' after finding Lake." +
 							" (Lvl "+SceneLib.forest.discoverLevelOuter+"+)")
 		}
 		private function btnExploreForestInner():ButtonData {
 			return new ButtonData("Forest (I)", SceneLib.forest.exploreInnerForest)
-					.hint("Visit the lush forest. "
-							+ (player.level < 12 ? "\n\nBeware of Tentacle Beasts!" : "")
+					.hint("Visit the lush forest (inner). "
 							+ "\n\nTimes explored: " + SceneLib.forest.timesExploredInner())
-					.disableIf(!SceneLib.forest.isDiscoveredInner(), "You need to be ready (lvl 3+) to reach this area." +
+					.disableIf(!SceneLib.forest.isDiscoveredInner(), "Discovered when exploring Forest (O)." +
 							" (Lvl "+SceneLib.forest.areaLevelInner+"+)");
 		}
 		private function btnExploreDeepwoods():ButtonData {
@@ -193,7 +192,6 @@ public class Exploration extends BaseContent implements SaveableState
 		private function btnExploreBattlefieldBoundary():ButtonData {
 			return new ButtonData("Battlefield (B)", SceneLib.battlefiledboundary.exploreBattlefieldBoundary)
 					.hint("Visit the battlefield boundary. "
-							+ (player.level < 16 ? "\n\nIt's still too dangerous place to visit lightly!" : "")
 							+ "\n\nTimes explored: " + SceneLib.battlefiledboundary.timesExplored())
 					.disableIf(!SceneLib.battlefiledboundary.isDiscovered(), "Discovered when using 'Explore' after finding Desert (Outer)." +
 							" (Lvl "+SceneLib.battlefiledboundary.discoverLevel+"+)")
@@ -201,7 +199,6 @@ public class Exploration extends BaseContent implements SaveableState
 		private function btnExploreBattlefieldOuter():ButtonData {
 			return new ButtonData("Battlefield (O)", SceneLib.battlefiledouter.exploreOuterBattlefield)
 					.hint("Visit the outer battlefield. "
-							+ (player.level < 18 ? "\n\nIt's still too dangerous place to visit lightly!" : "")
 							+ "\n\nTimes explored: " + SceneLib.battlefiledouter.timesExplored())
 					.disableIf(!SceneLib.battlefiledouter.isDiscovered(), "Discovered when exploring Battlefield (Boundary)." +
 							" (Lvl "+SceneLib.battlefiledouter.areaLevel+"+)")

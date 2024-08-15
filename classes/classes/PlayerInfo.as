@@ -1036,16 +1036,16 @@ public class PlayerInfo extends BaseContent {
 
 		// Begin Outside camp NPC's Stats
 		var outsideCampNpcsStats:String = "";
-		if (flags[kFLAGS.AKBAL_LVL_UP] == 13) outsideCampNpcsStats += "<b>Akbal lvl:</b> 98 (current max lvl he can reach)\n";
-		else if (flags[kFLAGS.AKBAL_LVL_UP] < 1) outsideCampNpcsStats += "<b>Akbal lvl:</b> 20\n";
+		if (flags[kFLAGS.AKBAL_LVL_UP] == 11) outsideCampNpcsStats += "<b>Akbal lvl:</b> 98 (current max lvl he can reach)\n";
+		else if (flags[kFLAGS.AKBAL_LVL_UP] < 1) outsideCampNpcsStats += "<b>Akbal lvl:</b> 32\n";
 		else outsideCampNpcsStats += getNPCLevel("Akbal", 20, 0, 13, 6, flags[kFLAGS.AKBAL_LVL_UP]);
 		if (flags[kFLAGS.IZUMI_LVL_UP] == 9) outsideCampNpcsStats += "<b>Izumi lvl:</b> 96 (current max lvl she can reach)\n";
 		else if (flags[kFLAGS.IZUMI_LVL_UP] < 1) outsideCampNpcsStats += "<b>Izumi lvl:</b> 42\n";
 		else outsideCampNpcsStats += getNPCLevel("Izumi", 42, 0, 9, 6, flags[kFLAGS.IZUMI_LVL_UP]);
-		if (flags[kFLAGS.MET_KITSUNES] == 4) outsideCampNpcsStats += "<b>Kitsune sisters lvl:</b> 37 (current max lvl they can reach)\n";
-		if (flags[kFLAGS.MET_KITSUNES] == 3) outsideCampNpcsStats += "<b>Kitsune sisters lvl:</b> 31\n";
-		if (flags[kFLAGS.MET_KITSUNES] == 2) outsideCampNpcsStats += "<b>Kitsune sisters lvl:</b> 25\n";
-		if (flags[kFLAGS.MET_KITSUNES] < 2) outsideCampNpcsStats += "<b>Kitsune sisters lvl:</b> 19\n";
+		if (flags[kFLAGS.MET_KITSUNES] == 4) outsideCampNpcsStats += "<b>Kitsune sisters lvl:</b> 55 (current max lvl they can reach)\n";
+		if (flags[kFLAGS.MET_KITSUNES] == 3) outsideCampNpcsStats += "<b>Kitsune sisters lvl:</b> 49\n";
+		if (flags[kFLAGS.MET_KITSUNES] == 2) outsideCampNpcsStats += "<b>Kitsune sisters lvl:</b> 43\n";
+		if (flags[kFLAGS.MET_KITSUNES] < 2) outsideCampNpcsStats += "<b>Kitsune sisters lvl:</b> 37\n";
 		if (flags[kFLAGS.MINERVA_LVL_UP] == 10) outsideCampNpcsStats += "<b>Minerva lvl:</b> 95 (current max lvl she can reach)\n";
 		else if (flags[kFLAGS.MINERVA_LVL_UP] < 1) outsideCampNpcsStats += "<b>Minerva lvl:</b> 35\n";
 		else outsideCampNpcsStats += getNPCLevel("Minerva", 35, 0, 10, 6, flags[kFLAGS.MINERVA_LVL_UP]);
