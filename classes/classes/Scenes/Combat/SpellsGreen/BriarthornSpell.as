@@ -40,7 +40,7 @@ public class BriarthornSpell extends AbstractGreenSpell {
 		var uc:String = super.usabilityCheck();
 		if (uc) return uc;
 		
-		if (!monster.hasStatusEffect(StatusEffects.Entangled)) {
+		if (!monster.hasStatusEffect(StatusEffects.EntangledBySpell)) {
 			return "Briarthorn require to have the enemy entangled by vines.";
 		}
 		

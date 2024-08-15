@@ -282,7 +282,7 @@ public class Changelog extends BaseContent
 			outputText("-Lower body for wereshark race been made mandatory for them (aka giving -1000 penatly if pc not have it).\n");
 			outputText("-Cursed Tag, Improved Cursed Tag, Greater Cursed Tag perks hve not req. of min level making them respectively tier 1, 2 and 3 perks.\n");
 			outputText("-Areas and Places with enemies to fight have their general levels and stats increased. Areas/Places adjusted (new lvl range of enemies): Lake (3-10), Boat (15-29), Forest (O)(8-16), Forest (I)(19-27), Deepwoods (32-52)\n");
-			outputText("-\n");
+			outputText("-Entangle green spell would now causing enemy to not act with 50% chance each turn it's active.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

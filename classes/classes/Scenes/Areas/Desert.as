@@ -98,7 +98,6 @@ use namespace CoC;
 					name: "naga",
 					label : "Naga",
 					kind  : 'monster',
-					when: fn.ifLevelMin(4),
 					chance: nagaChance,
 					call: nagaScene.nagaEncounter
 				}, {
@@ -106,7 +105,6 @@ use namespace CoC;
 					label : "Sand Trap",
 					kind  : 'monster',
 					chance: 0.5,
-					when  : fn.ifLevelMin(2),
 					call  : sandTrapScene.encounterASandTarp
 				}, {
 					name: "sandwitch",
@@ -114,7 +112,7 @@ use namespace CoC;
 					kind  : 'monster',
 					night : false,
 					when: function ():Boolean {
-						return (player.level >= 3 || flags[kFLAGS.HARDCORE_MODE] == 1) && flags[kFLAGS.SAND_WITCH_LEAVE_ME_ALONE] == 0;
+						return flags[kFLAGS.SAND_WITCH_LEAVE_ME_ALONE] == 0;
 					},
 					call: sandWitchScene.encounter
 				}, {
@@ -150,7 +148,7 @@ use namespace CoC;
 					unique: true,
 					night : false,
 					when  : function ():Boolean {
-						return (player.level >= 9 || flags[kFLAGS.HARDCORE_MODE] == 1) && flags[kFLAGS.ANT_WAIFU] == 0 && flags[kFLAGS.ANTS_PC_FAILED_PHYLLA] == 0 && flags[kFLAGS.ANT_COLONY_KEPT_HIDDEN] == 0;
+						return flags[kFLAGS.ANT_WAIFU] == 0 && flags[kFLAGS.ANTS_PC_FAILED_PHYLLA] == 0 && flags[kFLAGS.ANT_COLONY_KEPT_HIDDEN] == 0;
 					},
 					chance: phyllaAnthillChance,
 					call  : antsScene.antColonyEncounter
@@ -160,8 +158,7 @@ use namespace CoC;
 					kind  : 'place',
 					unique: true,
 					when: function ():Boolean {
-						return (player.level >= 4 || flags[kFLAGS.HARDCORE_MODE] == 1 || timesExploredOuter() > 45)
-							   && flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] == 0;
+						return timesExploredOuter() > 45 && flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] == 0;
 					},
 					call: SceneLib.dungeons.desertcave.enterDungeon
 				}, {

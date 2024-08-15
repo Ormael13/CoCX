@@ -28,10 +28,8 @@ public class PlantGrowthSpell extends AbstractGreenSpell {
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
-		if (display) 
-			outputText("You focus your energy on the world around you, causing vegetation to surge out of the ground at an accelerated rate into a verdant patch of vines and other tentacle greenery.\n");
+		if (display) outputText("You focus your energy on the world around you, causing vegetation to surge out of the ground at an accelerated rate into a verdant patch of vines and other tentacle greenery.\n");
 		player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
-			
 	}
 }
 }
