@@ -1805,7 +1805,7 @@ import classes.Scenes.Combat.CombatAbility;
 		private function toggleForBossesModifier(difficulty:int = 0):void {
 			flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] = difficulty;
 			setTheFuckingDifficultyForFuckingGood();
-			doNext(chooseGameModes);
+			doNext(chooseGameModes2);
 		}
 		private function toggleForHungerOn():void {
 			clearOutput();
@@ -1868,10 +1868,6 @@ import classes.Scenes.Combat.CombatAbility;
 			if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 2) addButton(7, "SecondaryStat(2)", toggleForSecondaryStatsModifier, 2);
 			if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 3) addButton(8, "SecondaryStat(3)", toggleForSecondaryStatsModifier, 3);
 			if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 4) addButton(9, "SecondaryStat(4)", toggleForSecondaryStatsModifier, 4);
-			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 0) addButton(10, "Normal", toggleForBossesModifier, 0);
-			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 1) addButton(11, "Fantasy", toggleForBossesModifier, 1);
-			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 2) addButton(12, "Infernium", toggleForBossesModifier, 2);
-			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 3) addButton(13, "Hell", toggleForBossesModifier, 3);
 			addButton(14, "-2-", chooseGameModes2);
 		}
 		private function chooseGameModes2():void {
@@ -1886,16 +1882,20 @@ import classes.Scenes.Combat.CombatAbility;
 			player.displayFinalGameDifficulty();
 			outputText("\n\n");
 			menu();
-			if (flags[kFLAGS.HUNGER_ENABLED] != 1) addButton(0, "Hunger+", toggleForHungerOn);
-			if (flags[kFLAGS.HUNGER_ENABLED] != 0) addButton(1, "Hunger-", toggleForHungerOff);
-			if (flags[kFLAGS.HARDCORE_MODE] != 1) addButton(2, "Hardcore+", toggleForHardcoreOn);
-			if (flags[kFLAGS.HARDCORE_MODE] != 0) addButton(3, "Hardcore-", toggleForHardcoreOff);
-			//5+
-			//6-
-			//7+
-			//8-
+			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 0) addButton(0, "Normal", toggleForBossesModifier, 0);
+			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 1) addButton(1, "Fantasy", toggleForBossesModifier, 1);
+			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 2) addButton(2, "Infernium", toggleForBossesModifier, 2);
+			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 3) addButton(3, "Hell", toggleForBossesModifier, 3);
+			if (flags[kFLAGS.HUNGER_ENABLED] != 1) addButton(4, "Hunger+", toggleForHungerOn);
+			if (flags[kFLAGS.HUNGER_ENABLED] != 0) addButton(5, "Hunger-", toggleForHungerOff);
+			if (flags[kFLAGS.HARDCORE_MODE] != 1) addButton(6, "Hardcore+", toggleForHardcoreOn);
+			if (flags[kFLAGS.HARDCORE_MODE] != 0) addButton(7, "Hardcore-", toggleForHardcoreOff);
+			//8+
+			//9-
+			//10+
+			//11-
 			addButton(13, "-1-", chooseGameModes);
-			addButton(14, "Back", chooseGameModes);
+			addButton(14, "Start", startTheGame);
 		}
 
 		private function chooseTimescale():void {
