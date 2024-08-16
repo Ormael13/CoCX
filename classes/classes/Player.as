@@ -7880,20 +7880,20 @@ use namespace CoC;
 		}
 		
 		public function displayFinalGameDifficulty():void {
-			outputText("Final game difficulty: ");
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 0) outputText("Anal-easy that even every Fursona out there can play (Easy)");
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 1) outputText("Normaly it's should be Normal here so... it's N.O.R.M.A.L. (Normal)");
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) outputText("As in far far away galaxys they say: That where the fun begins (Hard)");
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) outputText("They see Hard'in They Hatin (Nightmare)");
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 4) outputText("So now... neither death from starving, accumulated wrath inhibiting spellcasting nor internal mutations will stop you? Now, let's take things to the next level. (Extreme)");
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 5) outputText("It's time to grace you with ancient blessing: GIT GUD (Inferno)");
+			outputText("<b>Final game difficulty:</b>");
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 0) outputText("\n[font-olive]Anal-easy that even every Fursona out there can play (Easy)[/font]");
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 1) outputText("\n[font-olive]Normaly it's should be Normal here so... it's N.O.R.M.A.L. (Normal)[/font]");
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) outputText("\n[font-dred]As in far far away galaxys they say: That where the fun begins (Hard)[/font]");
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) outputText("\n[font-red]They see Hard'in They Hatin (Nightmare)[/font]");
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 4) outputText("\n[font-red]So now... neither death from starving, accumulated wrath inhibiting spellcasting nor internal mutations will stop you? Now, let's take things to the next level. (Extreme)[/font]");
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 5) outputText("\n[font-lred]It's time to grace you with ancient blessing: GIT GUD (Inferno)[/font]");
 			else if (flags[kFLAGS.GAME_DIFFICULTY] == 6) {
-				outputText("\nThoughts are in my head");
+				outputText("\n[font-lred]Thoughts are in my head");
 				outputText("\nFilling up with Dread");
 				outputText("\nNo, I'm not violent");
-				outputText("\nBut I've got some evil inside me, me (Metroid Dread)");
+				outputText("\nBut I've got some evil inside me, me (Metroid Dread)[/font]");
 			}
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 7) outputText("Are you 'Courting Death' since you 'Had eyes but not seen Mt. Tai?' Worry not there is enough 'Arrogant Young Masters' and Mistresses for everyone to get a piece of Champion. (Xianxia MC)");
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 7) outputText("\n[font-pink]Are you 'Courting Death' since you 'Had eyes but not seen Mt. Tai?' Worry not there is enough 'Arrogant Young Masters' and Mistresses for everyone to get a piece of Champion. (Xianxia MC)[/font]");
 		}
 		
 		public function raijuSuperchargedCheck():void{

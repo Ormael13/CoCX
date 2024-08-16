@@ -1795,45 +1795,52 @@ import classes.Scenes.Combat.CombatAbility;
 		private function toggleForPrimaryDiffultyModifier(difficulty:int = 0):void {
 			flags[kFLAGS.PRIMARY_DIFFICULTY] = difficulty;
 			setTheFuckingDifficultyForFuckingGood();
-			doNext(chooseGameModes);
+			doNext(chooseGameModes1);
 		}
 		private function toggleForSecondaryStatsModifier(difficulty:int = 0):void {
 			flags[kFLAGS.SECONDARY_STATS_SCALING] = difficulty;
 			setTheFuckingDifficultyForFuckingGood();
-			doNext(chooseGameModes);
+			doNext(chooseGameModes2);
 		}
 		private function toggleForBossesModifier(difficulty:int = 0):void {
 			flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] = difficulty;
 			setTheFuckingDifficultyForFuckingGood();
-			doNext(chooseGameModes2);
-		}
-		private function toggleForHungerOn():void {
-			clearOutput();
-			outputText("You have choosen to have Hunger Modifier enabled.");
-			flags[kFLAGS.HUNGER_ENABLED] = 1;
-			setTheFuckingDifficultyForFuckingGood();
-			doNext(chooseGameModes2);
-		}
-		private function toggleForHungerOff():void {
-			clearOutput();
-			outputText("You have choosen to have Hunger Modifier disabled.");
-			flags[kFLAGS.HUNGER_ENABLED] = 0;
-			setTheFuckingDifficultyForFuckingGood();
-			doNext(chooseGameModes2);
+			doNext(chooseGameModes3);
 		}
 		private function toggleForHardcoreOn():void {
 			clearOutput();
 			outputText("You have chosen to have Hardcore Modifier enabled.");
 			flags[kFLAGS.HARDCORE_MODE] = 1;
 			setTheFuckingDifficultyForFuckingGood();
-			doNext(chooseGameModes2);
+			doNext(chooseGameModes);
 		}
 		private function toggleForHardcoreOff():void {
 			clearOutput();
 			outputText("You have chosen to have Hardcore Modifier disabled.");
 			flags[kFLAGS.HARDCORE_MODE] = 0;
 			setTheFuckingDifficultyForFuckingGood();
-			doNext(chooseGameModes2);
+			doNext(chooseGameModes);
+		}
+		private function toggleForHungerOff():void {
+			clearOutput();
+			outputText("You have choosen to have Hunger & Realistic Modifier disabled.");
+			flags[kFLAGS.HUNGER_ENABLED] = 0;
+			setTheFuckingDifficultyForFuckingGood();
+			doNext(chooseGameModes);
+		}
+		private function toggleForHungerOn():void {
+			clearOutput();
+			outputText("You have choosen to have Hunger (but not Realistic) Modifier enabled.");
+			flags[kFLAGS.HUNGER_ENABLED] = 0.5;
+			setTheFuckingDifficultyForFuckingGood();
+			doNext(chooseGameModes);
+		}
+		private function toggleForRealisticOn():void {
+			clearOutput();
+			outputText("You have choosen to have Realistic Mod Modifier enabled.");
+			flags[kFLAGS.HUNGER_ENABLED] = 1;
+			setTheFuckingDifficultyForFuckingGood();
+			doNext(chooseGameModes);
 		}
 		private function setTheFuckingDifficultyForFuckingGood():void {
 			var sTFDFFG:Number = 0;
@@ -1844,58 +1851,71 @@ import classes.Scenes.Combat.CombatAbility;
 			if (flags[kFLAGS.HARDCORE_MODE] > 0) sTFDFFG += 1;
 			flags[kFLAGS.GAME_DIFFICULTY] = sTFDFFG;
 		}
-
-		//Choose the game mode when called!
-		private function chooseGameModes():void {
-			clearOutput();
+		private function chooseGameModesDesc():void {
 			outputText("Choose a game modifiers. Depending on picked amount final difficulty would be adjusted.\n\n");
 			outputText("<b>Primary Difficulty Modifier:</b> "+(flags[kFLAGS.PRIMARY_DIFFICULTY] == 0?"Disabled":"Enabled (Opponent(s) take less HP/Lust dmg, deal more damage and gives more EXP)")+"\n");
 			outputText("<b>Secondary Stats Modifier:</b> "+(flags[kFLAGS.SECONDARY_STATS_SCALING] == 0?"Disabled":"Enabled (Opponent(s) would have more HP/Lust/Wrath/Fatigue/Mana/Soulforce)")+"\n");
 			outputText("<b>Elite/Champion/Boss Enemies Modifier:</b> "+(flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 0?"Disabled":"Enabled (Elite/Champion/Boss Enemies would have more Health)")+"\n");
-			outputText("<b>Hunger Modifier:</b> "+(flags[kFLAGS.HUNGER_ENABLED] == 1?"Enabled (PC must manage his own hunger lest you want see his death from starvation)":"Disabled")+"\n");
 			outputText("<b>Hardcore Modifier:</b> "+(flags[kFLAGS.HARDCORE_MODE] == 1?"Enabled (No level limits for unlocking new areas)":"Disabled")+"\n");
+			outputText("<b>Hunger Modifier:</b> "+(flags[kFLAGS.HUNGER_ENABLED] > 0?"Enabled (PC must manage his own hunger lest you want see his death from starvation)":"Disabled")+"\n");
+			outputText("<b>Realistic Mode Modifier:</b> "+(flags[kFLAGS.HUNGER_ENABLED] > 0.5?"Enabled (PC must manage his own hunger lest you want see his death from starvation + your cum production is capped and having oversized parts will weigh you down)":"Disabled")+"\n");
 			outputText("\n");
 			player.displayFinalGameDifficulty();
 			outputText("\n\n");
+		}
+		//Choose the game mode when called!
+		private function chooseGameModes():void {
+			clearOutput();
+			chooseGameModesDesc();
+			menu();
+			addButton(0, "-1-", chooseGameModes1).hint("Primary Difficulty");
+			addButton(1, "-2-", chooseGameModes2).hint("Secondary Stat");
+			addButton(2, "-3-", chooseGameModes3).hint("Elite/Champion/Boss Enemies");
+			if (flags[kFLAGS.HARDCORE_MODE] != 1) addButton(3, "Hardcore (On)", toggleForHardcoreOn);
+			if (flags[kFLAGS.HARDCORE_MODE] != 0) addButton(4, "Hardcore (Off)", toggleForHardcoreOff);
+			if (flags[kFLAGS.HUNGER_ENABLED] != 0) addButton(5, "Hunger (Off)", toggleForHungerOff);
+			if (flags[kFLAGS.HUNGER_ENABLED] != 0.5) addButton(6, "Hunger (On)", toggleForHungerOn);
+			if (flags[kFLAGS.HUNGER_ENABLED] != 1) addButton(7, "Realistic (On)", toggleForRealisticOn);
+			//8+
+			//9-
+			//10+
+			//11-
+			addButton(14, "Start", startTheGame);
+		}
+		private function chooseGameModes1():void {
+			clearOutput();
+			chooseGameModesDesc();
 			menu();
 			if (flags[kFLAGS.PRIMARY_DIFFICULTY] != 0) addButton(0, "PrimaryDiff(0)", toggleForPrimaryDiffultyModifier, 0);
 			if (flags[kFLAGS.PRIMARY_DIFFICULTY] != 1) addButton(1, "PrimaryDiff(1)", toggleForPrimaryDiffultyModifier, 1);
 			if (flags[kFLAGS.PRIMARY_DIFFICULTY] != 2) addButton(2, "PrimaryDiff(2)", toggleForPrimaryDiffultyModifier, 2);
 			if (flags[kFLAGS.PRIMARY_DIFFICULTY] != 3) addButton(3, "PrimaryDiff(3)", toggleForPrimaryDiffultyModifier, 3);
 			if (flags[kFLAGS.PRIMARY_DIFFICULTY] != 4) addButton(4, "PrimaryDiff(4)", toggleForPrimaryDiffultyModifier, 4);
-			if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 0) addButton(5, "SecondaryStat(0)", toggleForSecondaryStatsModifier, 0);
-			if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 1) addButton(6, "SecondaryStat(1)", toggleForSecondaryStatsModifier, 1);
-			if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 2) addButton(7, "SecondaryStat(2)", toggleForSecondaryStatsModifier, 2);
-			if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 3) addButton(8, "SecondaryStat(3)", toggleForSecondaryStatsModifier, 3);
-			if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 4) addButton(9, "SecondaryStat(4)", toggleForSecondaryStatsModifier, 4);
-			addButton(14, "-2-", chooseGameModes2);
+			addButton(14, "Back", chooseGameModes);
 		}
 		private function chooseGameModes2():void {
 			clearOutput();
-			outputText("Choose a game modifiers. Depending on picked amount final difficulty would be adjusted.\n\n");
-			outputText("<b>Primary Difficulty Modifier:</b> "+(flags[kFLAGS.PRIMARY_DIFFICULTY] == 0?"Disabled":"Enabled (Opponent(s) take less HP/Lust dmg, deal more damage and gives more EXP)")+"\n");
-			outputText("<b>Secondary Stats Modifier:</b> "+(flags[kFLAGS.SECONDARY_STATS_SCALING] == 0?"Disabled":"Enabled (Opponent(s) would have more HP/Lust/Wrath/Fatigue/Mana/Soulforce)")+"\n");
-			outputText("<b>Elite/Champion/Boss Enemies Modifier:</b> "+(flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 0?"Disabled":"Enabled (Elite/Champion/Boss Enemies would have more Health)")+"\n");
-			outputText("<b>Hunger Modifier:</b> "+(flags[kFLAGS.HUNGER_ENABLED] == 1?"Enabled (PC must manage his own hunger lest you want see his death from starvation)":"Disabled")+"\n");
-			outputText("<b>Hardcore Modifier:</b> "+(flags[kFLAGS.HARDCORE_MODE] == 1?"Enabled (No level limits for unlocking new areas)":"Disabled")+"\n");
-			outputText("\n");
-			player.displayFinalGameDifficulty();
-			outputText("\n\n");
+			chooseGameModesDesc();
+			menu();
+			if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 0) addButton(0, "SecondaryStat(0)", toggleForSecondaryStatsModifier, 0);
+			if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 1) addButton(1, "SecondaryStat(1)", toggleForSecondaryStatsModifier, 1);
+			if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 2) addButton(2, "SecondaryStat(2)", toggleForSecondaryStatsModifier, 2);
+			if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 3) addButton(3, "SecondaryStat(3)", toggleForSecondaryStatsModifier, 3);
+			if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 4) addButton(4, "SecondaryStat(4)", toggleForSecondaryStatsModifier, 4);
+			if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 5) addButton(5, "SecondaryStat(5)", toggleForSecondaryStatsModifier, 5);
+			if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 6) addButton(6, "SecondaryStat(6)", toggleForSecondaryStatsModifier, 6);
+			addButton(14, "Back", chooseGameModes);
+		}
+		private function chooseGameModes3():void {
+			clearOutput();
+			chooseGameModesDesc();
 			menu();
 			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 0) addButton(0, "Normal", toggleForBossesModifier, 0);
 			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 1) addButton(1, "Fantasy", toggleForBossesModifier, 1);
-			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 2) addButton(2, "Infernium", toggleForBossesModifier, 2);
-			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 3) addButton(3, "Hell", toggleForBossesModifier, 3);
-			if (flags[kFLAGS.HUNGER_ENABLED] != 1) addButton(4, "Hunger+", toggleForHungerOn);
-			if (flags[kFLAGS.HUNGER_ENABLED] != 0) addButton(5, "Hunger-", toggleForHungerOff);
-			if (flags[kFLAGS.HARDCORE_MODE] != 1) addButton(6, "Hardcore+", toggleForHardcoreOn);
-			if (flags[kFLAGS.HARDCORE_MODE] != 0) addButton(7, "Hardcore-", toggleForHardcoreOff);
-			//8+
-			//9-
-			//10+
-			//11-
-			addButton(13, "-1-", chooseGameModes);
-			addButton(14, "Start", startTheGame);
+			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 2) addButton(2, "Torment", toggleForBossesModifier, 2);
+			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 3) addButton(3, "Infernium", toggleForBossesModifier, 3);
+			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 4) addButton(4, "Hell", toggleForBossesModifier, 4);
+			addButton(14, "Back", chooseGameModes);
 		}
 
 		private function chooseTimescale():void {

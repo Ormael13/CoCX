@@ -112,11 +112,14 @@ public class GameSettings extends BaseContent {
 					" If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately.");
 		}
 		outputText("\n\n");
-		if (flags[kFLAGS.HUNGER_ENABLED] != 1) {
-			outputText("Hunger Modifier: <b>[font-olive]Disabled[/font]</b>");
+		if (flags[kFLAGS.HUNGER_ENABLED] < 0.5) {
+			outputText("Hunger/Realistic Mode Modifier: <b>[font-olive]Disabled[/font]</b>");
+		}
+		else if (flags[kFLAGS.HUNGER_ENABLED] == 0.5) {
+			outputText("Hunger Modifier: <b>[font-red]Enabled[/font]</b> (PC must manage his own hunger lest you want see his death from starvation)");
 		}
 		else if (flags[kFLAGS.HUNGER_ENABLED] == 1) {
-			outputText("Hunger Modifier: <b>[font-red]Enabled[/font]</b> (PC must manage his own hunger lest you want see his death from starvation)");
+			outputText("Realistic Mode Modifier: <b>[font-red]Enabled[/font]</b> (PC must manage his own hunger lest you want see his death from starvation + your cum production is capped and having oversized parts will weigh you down)");
 		}
 		outputText("\n\n");
 		if (flags[kFLAGS.HARDCORE_MODE] == 0) {
@@ -133,13 +136,19 @@ public class GameSettings extends BaseContent {
 			outputText("Secondary Stats Modifier: Opponent has 10x (bosses) and 5x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
 		}
 		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) {
-			outputText("Secondary Stats Modifier: Opponent has 40x (bosses) and 10x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			outputText("Secondary Stats Modifier: Opponent has 30x (bosses) and 10x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
 		}
 		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) {
-			outputText("Secondary Stats Modifier: Opponent has 200x (bosses) and 25x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			outputText("Secondary Stats Modifier: Opponent has 100x (bosses) and 25x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
 		}
-		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] >= 4) {
-			outputText("Secondary Stats Modifier: Opponent has 1600x (bosses) and 100x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) {
+			outputText("Secondary Stats Modifier: Opponent has 500x (bosses) and 100x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+		}
+		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 5) {
+			outputText("Secondary Stats Modifier: Opponent has 1500x (bosses) and 500x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+		}
+		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] >= 6) {
+			outputText("Secondary Stats Modifier: Opponent has 21000x (bosses) and 3000x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
 		}
 		outputText("\n\n");
 		if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 0) {
@@ -149,10 +158,13 @@ public class GameSettings extends BaseContent {
 			outputText("Elite/Champion/Boss Modifier: <b>[font-dred]Fantasy[/font]</b>\n 1.25x / 2.5x / 5x HP modifiers");
 		}
 		else if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 2) {
-			outputText("Elite/Champion/Boss Modifier: <b>[font-red]Infernium[/font]</b>\n 2.5x / 5x / 10x HP modifier");
+			outputText("Elite/Champion/Boss Modifier: <b>[font-red]Torment[/font]</b>\n 2.5x / 5x / 10x HP modifier");
 		}
-		else if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] >= 3) {
-			outputText("Elite/Champion/Boss Modifier: <b>[font-lred]HELL[/font]</b>\n 3.75x / 7.5x / 15x HP modifier");
+		else if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 3) {
+			outputText("Elite/Champion/Boss Modifier: <b>[font-lred]Infernium[/font]</b>\n 3.75x / 7.5x / 15x HP modifier");
+		}
+		else if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] >= 4) {
+			outputText("Elite/Champion/Boss Modifier: <b>[font-pink]HELL[/font]</b>\n 5x / 10x / 20x HP modifier");
 		}
 		outputText("\n\n");
 		if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) {
@@ -183,10 +195,11 @@ public class GameSettings extends BaseContent {
 			addButton(0, "Prime Difficulty", difficultySelectionMenu1).hint("Adjust primary difficulty to make game easier or harder.");
 			addButton(1, "Sec.Mon.Stat", difficultySelectionMenu2).hint("Adjusts monsters secondary stats multiplier to make game easier or harder.");
 			addButton(2, "E/Ch/B.Mon.Stat", difficultySelectionMenu3).hint("Adjusts elite/champion/boss monsters HP multiplier to make game easier or harder.");
-			if (flags[kFLAGS.HUNGER_ENABLED] != 1) addButton(5, "Hunger+", enableHungerModifierForReal);
-			else addButton(5, "Hunger-", disableHungerModifierForReal);
-			if (flags[kFLAGS.HARDCORE_MODE] != 1) addButton(6, "Hardcore+", enableHardcoreModifierForReal);
-			else addButton(6, "Hardcore-", disableHardcoreModifierForReal);
+			if (flags[kFLAGS.HARDCORE_MODE] != 1) addButton(5, "Hardcore+", enableHardcoreModifierForReal);
+			else addButton(5, "Hardcore-", disableHardcoreModifierForReal);
+			if (flags[kFLAGS.HUNGER_ENABLED] != 0) addButton(6, "Hunger (Off)", disableHungerModifierForReal);
+			if (flags[kFLAGS.HUNGER_ENABLED] != 0.5) addButton(7, "Hunger (On)", enableHungerModifierForReal);
+			if (flags[kFLAGS.HUNGER_ENABLED] != 1) addButton(8, "Realistic (On)", enableRealisticModifierForReal);
 			if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) addButton(10, "Easier Mode", toggleFlag, kFLAGS.EASY_MODE_ENABLE_FLAG, settingsScreenGameSettings).hint("Toggles easier than easy mode. Enemy damage is 10% of normal and bad-ends can be ignored.");
 			else addButtonDisabled(10, "Easier Mode", "Diffulty setting is too high to allow toggle easy mode.");
 			addButton(11, "Fetishes", fetishSubMenu).hint("Toggle some of the weird fetishes such as watersports and worms.");
@@ -198,10 +211,10 @@ public class GameSettings extends BaseContent {
 			addButtonDisabled(2, "E/Ch/B.Mon.Stat", "Requires a loaded save.");
 			//addButtonDisabled(3, "", "Requires a loaded save.");
 			//addButtonDisabled(4, "", "Requires a loaded save.");
-			addButtonDisabled(5, "Hunger", "Requires a loaded save.");
-			addButtonDisabled(6, "Hardcore", "Requires a loaded save.");
-			//addButtonDisabled(7, "", "Requires a loaded save.");
-			//addButtonDisabled(8, "", "Requires a loaded save.");
+			addButtonDisabled(5, "Hardcore", "Requires a loaded save.");
+			addButtonDisabled(6, "Hunger (Off)", "Requires a loaded save.");
+			addButtonDisabled(7, "Hunger (On)", "Requires a loaded save.");
+			addButtonDisabled(8, "Realistic (On)", "Requires a loaded save.");
 			//addButtonDisabled(9, "", "Requires a loaded save.");
 			addButtonDisabled(10, "Easier Mode", "Requires a loaded save.");
 			addButtonDisabled(11, "Fetishes", "Requires a loaded save.");
@@ -802,20 +815,6 @@ public class GameSettings extends BaseContent {
 		fetishSubMenu();
 	}
 
-	public function enableHungerModifierForReal():void {
-		clearOutput();
-		outputText("Hunger modifier is now enabled.");
-		flags[kFLAGS.HUNGER_ENABLED] = 1;
-		setTheFuckingDifficultyForFuckingGood();
-		doNext(settingsScreenGameSettings);
-	}
-	public function disableHungerModifierForReal():void {
-		clearOutput();
-		outputText("Hunger modifier is now disabled.");
-		flags[kFLAGS.HUNGER_ENABLED] = 0;
-		setTheFuckingDifficultyForFuckingGood();
-		doNext(settingsScreenGameSettings);
-	}
 	public function enableHardcoreModifierForReal():void {
 		clearOutput();
 		outputText("Hardcore modifier is now enabled.");
@@ -827,6 +826,27 @@ public class GameSettings extends BaseContent {
 		clearOutput();
 		outputText("Hardcore modifier is now disabled.");
 		flags[kFLAGS.HARDCORE_MODE] = 0;
+		setTheFuckingDifficultyForFuckingGood();
+		doNext(settingsScreenGameSettings);
+	}
+	public function disableHungerModifierForReal():void {
+		clearOutput();
+		outputText("Hunger & Realistic modifier is now disabled.");
+		flags[kFLAGS.HUNGER_ENABLED] = 0;
+		setTheFuckingDifficultyForFuckingGood();
+		doNext(settingsScreenGameSettings);
+	}
+	public function enableHungerModifierForReal():void {
+		clearOutput();
+		outputText("Hunger modifier is now enabled.");
+		flags[kFLAGS.HUNGER_ENABLED] = 0.5;
+		setTheFuckingDifficultyForFuckingGood();
+		doNext(settingsScreenGameSettings);
+	}
+	public function enableRealisticModifierForReal():void {
+		clearOutput();
+		outputText("Realistic Mode modifier is now enabled.");
+		flags[kFLAGS.HUNGER_ENABLED] = 1;
 		setTheFuckingDifficultyForFuckingGood();
 		doNext(settingsScreenGameSettings);
 	}
@@ -856,15 +876,19 @@ public class GameSettings extends BaseContent {
 		outputText("You can choose a difficulty to set how hard battles will be.\n");
 		if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 0) outputText("\n No stats changes.");
 		if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) outputText("\n 10x (bosses) and 5x (rest) multi for secondary stats for monsters. (+1 diff modifier)");
-		if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) outputText("\n 40x (bosses) and 10x (rest) multi for secondary stats for monsters. (+1 diff modifier)");
-		if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) outputText("\n 200x (bosses) and 25x (rest) multi for secondary stats for monsters. (+1 diff modifier)");
-		if (flags[kFLAGS.SECONDARY_STATS_SCALING] >= 4) outputText("\n 1000x (bosses) and 100x (rest) multi for secondary stats for monsters. (+1 diff modifier)");
+		if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) outputText("\n 30x (bosses) and 10x (rest) multi for secondary stats for monsters. (+1 diff modifier)");
+		if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) outputText("\n 100x (bosses) and 25x (rest) multi for secondary stats for monsters. (+1 diff modifier)");
+		if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) outputText("\n 500x (bosses) and 100x (rest) multi for secondary stats for monsters. (+1 diff modifier)");
+		if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 5) outputText("\n 1500x (bosses) and 500x (rest) multi for secondary stats for monsters. (+1 diff modifier)");
+		if (flags[kFLAGS.SECONDARY_STATS_SCALING] >= 6) outputText("\n 21000x (bosses) and 3000x (rest) multi for secondary stats for monsters. (+1 diff modifier)");
 		menu();
 		if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 0) addButton(0, "1x", chooseDifficulty2, 0);
 		if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 1) addButton(1, "5x", chooseDifficulty2, 1);
 		if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 2) addButton(2, "10x", chooseDifficulty2, 2);
 		if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 3) addButton(3, "25x", chooseDifficulty2, 3);
 		if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 4) addButton(4, "100x", chooseDifficulty2, 4);
+		if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 5) addButton(5, "500x", chooseDifficulty2, 5);
+		if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 6) addButton(5, "3000x", chooseDifficulty2, 6);
 		addButton(14, "Back", settingsScreenGameSettings);
 	}
 	public function chooseDifficulty2(difficulty:int = 0):void {
@@ -877,13 +901,15 @@ public class GameSettings extends BaseContent {
 		outputText("You can choose how hard elite/champion/boss battles will be.\n");
 		outputText("\n<b>Normal:</b> No stats changes.");
 		outputText("\n<b>Fantasy:</b> 1.25x/2.5x/5x HP for elite/champion/boss monsters. (+1 diff modifier)");
-		outputText("\n<b>Infernium:</b> 2.5x/5x/10x HP for elite/champion/boss monsters. (+1 diff modifier)");
-		outputText("\n<b>Hell:</b> 3.75x/7.5x/15x HP for elite/champion/boss monsters. (+1 diff modifier)");
+		outputText("\n<b>Torment:</b> 2.5x/5x/10x HP for elite/champion/boss monsters. (+1 diff modifier)");
+		outputText("\n<b>Infernium:</b> 3.75x/7.5x/15x HP for elite/champion/boss monsters. (+1 diff modifier)");
+		outputText("\n<b>Hell:</b> 5x/10x/20x HP for elite/champion/boss monsters. (+1 diff modifier)");
 		menu();
 		if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 0) addButton(0, "Normal", chooseDifficulty3, 0);
 		if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 1) addButton(1, "Fantasy", chooseDifficulty3, 1);
-		if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 2) addButton(2, "Infernium", chooseDifficulty3, 2);
-		if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 3) addButton(3, "Hell", chooseDifficulty3, 3);
+		if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 2) addButton(2, "Torment", chooseDifficulty3, 2);
+		if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 3) addButton(3, "Infernium", chooseDifficulty3, 3);
+		if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] != 4) addButton(4, "Hell", chooseDifficulty3, 4);
 		addButton(14, "Back", settingsScreenGameSettings);
 	}
 	public function chooseDifficulty3(difficulty:int = 0):void {

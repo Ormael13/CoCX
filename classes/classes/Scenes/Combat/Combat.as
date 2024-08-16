@@ -9282,10 +9282,9 @@ public class Combat extends BaseContent {
 		if (player.headJewelry === headjewelries.DRABLOH && monster.hasPerk(PerkLib.EnemyDragonType)) damage *= 1.2;
 		damage *= EyesOfTheHunterDamageBonus();
         if (player.hasMutation(IMutationsLib.HellhoundFireBallsIM) && player.perkv1(IMutationsLib.HellhoundFireBallsIM) >= 2) {
-            var cumQM:Number = 0.05 * player.cumQ();
-			//var cumQML:Number = player.lust100;
+            var cumQM:Number = 0.01 * player.lust100;
 			if (player.perkv1(IMutationsLib.HellhoundFireBallsIM) >= 3) cumQM *= 2;
-			damage *= cumQM;
+			damage *= (1 + cumQM);
         }
         if (player.hasMutation(IMutationsLib.BlazingHeartIM)) {
 			damage *= (1 + (0.25 * player.perkv1(IMutationsLib.BlazingHeartIM)));

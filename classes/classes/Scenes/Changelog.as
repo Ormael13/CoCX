@@ -288,8 +288,8 @@ public class Changelog extends BaseContent
 			outputText("-Red Qipao armor been added to Victoria's Secre... ekhm Tailor Shop.\n");
 			outputText("-New legendary pure armor (Liadri): Spirit Flare Qipao - made from Blue/Green/Purple/Red Qipao. Increase fire damage from abilities by 200%. Increase unarmed strikes damage by 20%. When worn by a species with fire affinity stoke the inner fire granting 3% Regeneration. Misdirection.\n");
 			outputText("-Damage of all types when lvl diff between enemy and pc is 50+ changed form dropping right away form 2% at 49 lvl diff to 1 dmg at 50 lvl diff. Now it would drop to 1 point of dmg at 55+ lvl diff. For diff of 50-54 it would reduce dmg to 1%-0,0001%.\n");
-			outputText("-\n");//Hellhounds Balls bonus to fire damage 
-			outputText("-\n");
+			outputText("-Added 2 more options for boss/champion/elite enemeis hp bonus and secondary monster stats.\n");
+			outputText("-Hellhounds Balls bonus to fire damage changed from 0.5% of cum production to 1% per 1% of current lust for Primitive stage and doubled for Evolved.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

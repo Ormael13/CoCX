@@ -924,20 +924,26 @@ import classes.Scenes.Combat.CombatAbilities;
 				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 1.5;
 				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 2;
 				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 3;
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] >= 4) temp *= 5;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp *= 5;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 5) temp *= 7;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] >= 6) temp *= 10;
 			}
 			else {
 				if (hasPerk(PerkLib.EnemyBossType)) {
 					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 10;
-					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 40;
-					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 200;
-					if (flags[kFLAGS.SECONDARY_STATS_SCALING] >= 4) temp *= 1600;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 30;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 100;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp *= 500;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 5) temp *= 3000;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] >= 6) temp *= 21000;
 				}
 				else {
 					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 5;
 					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 10;
 					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 25;
-					if (flags[kFLAGS.SECONDARY_STATS_SCALING] >= 4) temp *= 100;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp *= 100;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 5) temp *= 500;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] >= 6) temp *= 3000;
 				}
 			}
 			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) temp = 1;
@@ -3389,7 +3395,9 @@ import classes.Scenes.Combat.CombatAbilities;
 				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp3 += 0.05;
 				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp3 += 0.12;
 				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp3 += 0.2;
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] >= 4) temp3 += 0.3;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp3 += 0.3;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 5) temp3 += 0.43;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] >= 6) temp3 += 0.6;
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp3 += 0.1;
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp3 += 0.2;
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) temp3 += 0.3;
