@@ -260,7 +260,7 @@ public class Lethice extends Monster
 		}
 		private function sizeCheck():void{
 			// Limit immunity down to 9, remove the first added immunity
-			if(dictOrder.length>(3+flags[kFLAGS.GAME_DIFFICULTY])){
+			if(dictOrder.length>(3+flags[kFLAGS.PRIMARY_DIFFICULTY])){
 				dictOrder.removeAt(0);
 				dictValue.removeAt(0);
 			}
@@ -268,7 +268,7 @@ public class Lethice extends Monster
 		private function wheelHandleDesc():String{
 			var numberWheel:String = "";
 
-			switch(3+flags[kFLAGS.GAME_DIFFICULTY]){
+			switch(3+flags[kFLAGS.PRIMARY_DIFFICULTY]){
 				case 3:
 					numberWheel = "three";
 					break;

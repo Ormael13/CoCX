@@ -353,10 +353,8 @@ private function alvinaDies(next:Function):void {
 	flags[kFLAGS.ALVINA_FOLLOWER] = 12;
 	AlvinaDied = true;
 	awardAchievement("The end and the beginning", kACHIEVEMENTS.GENERAL_THE_END_AND_THE_BEGINNING);
-	if (flags[kFLAGS.GAME_DIFFICULTY] >= 4)
-		awardAchievement("Beyond gods and mortals", kACHIEVEMENTS.GENERAL_BEYOND_GODS_AND_MORTALS);
-	if (flags[kFLAGS.GAME_DIFFICULTY] >= 2)
-		inventory.takeItem(weapons.ATWINSCY, next);
+	if (flags[kFLAGS.PRIMARY_DIFFICULTY] >= 4) awardAchievement("Beyond gods and mortals", kACHIEVEMENTS.GENERAL_BEYOND_GODS_AND_MORTALS);
+	if (flags[kFLAGS.PRIMARY_DIFFICULTY] >= 2) inventory.takeItem(weapons.ATWINSCY, next);
 	else doNext(next);
 }
 public function alvinaThirdEncounterYesNeverLost():void
@@ -746,9 +744,7 @@ public function alvinaThirdEncounterTakeHer():void
 		outputText("<b>Alvina has joined you as a follower.</b>\n\n");
 		flags[kFLAGS.ALVINA_FOLLOWER] = 12;
 		awardAchievement("Dawn chasing away the night", kACHIEVEMENTS.GENERAL_DAWN_CHASING_AWAY_THE_NIGHT);
-		if (flags[kFLAGS.GAME_DIFFICULTY] >= 4)
-			awardAchievement("Beyond gods and mortals", kACHIEVEMENTS.GENERAL_BEYOND_GODS_AND_MORTALS);
-
+		if (flags[kFLAGS.PRIMARY_DIFFICULTY] >= 4) awardAchievement("Beyond gods and mortals", kACHIEVEMENTS.GENERAL_BEYOND_GODS_AND_MORTALS);
 		alvinaMakeLovePure();
 	}
 	public function alvinaDestroyPhylactoryWatch():void {
@@ -1920,3 +1916,4 @@ public function postMarriageSleep():void {
 }
 
 }
+

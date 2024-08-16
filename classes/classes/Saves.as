@@ -116,16 +116,22 @@ public function loadSaveDisplay(saveFile:Object, slotName:String):String
 			holding += " | Difficulty - ";
 			if (saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] != undefined) { //Handles undefined
 				if (saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] == 0 || saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] == null) {
-					if (saveFile.data.flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) holding += "[font-green]Easy[/font]";
-					else holding += "[font-olive]Normal[/font]";
+					if (saveFile.data.flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) holding += "[font-green]Easier[/font]";
+					else holding += "[font-olive]Easy[/font]";
 				}
 				if (saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] == 1)
-					holding += "[font-dred]Hard[/font]";
+					holding += "[font-dred]Normal[/font]";
 				if (saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] == 2)
-					holding += "[font-red]Nightmare[/font]";
+					holding += "[font-red]Hard[/font]";
 				if (saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] == 3)
-					holding += "[font-lred]EXTREME[/font]";
-				if (saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] >= 4)
+					holding += "[font-lred]Nightmare[/font]";
+				if (saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] == 4)
+					holding += "[font-pink]EXTREME[/font]";
+				if (saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] == 5)
+					holding += "[font-pink]INFERNO[/font]";
+				if (saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] == 6)
+					holding += "[font-pink]METROID DREAD[/font]";
+				if (saveFile.data.flags[kFLAGS.GAME_DIFFICULTY] >= 7)
 					holding += "[font-pink]XIANXIA[/font]";
 			}
 			else {

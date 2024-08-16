@@ -200,7 +200,7 @@ public function infertilityQuestions():void {
 
 public function resetToPC():void {
 	if (player.hasStatusEffect(StatusEffects.UrtaQuestAdjusted)) {
-		if (player.statusEffectv1(StatusEffects.UrtaQuestAdjusted) > 0) flags[kFLAGS.GAME_DIFFICULTY] = player.statusEffectv1(StatusEffects.UrtaQuestAdjusted);
+		if (player.statusEffectv1(StatusEffects.UrtaQuestAdjusted) > 0) flags[kFLAGS.PRIMARY_DIFFICULTY] = player.statusEffectv1(StatusEffects.UrtaQuestAdjusted);
 		if (player.statusEffectv2(StatusEffects.UrtaQuestAdjusted) > 0) flags[kFLAGS.SECONDARY_STATS_SCALING] = player.statusEffectv2(StatusEffects.UrtaQuestAdjusted);
 		if (player.statusEffectv3(StatusEffects.UrtaQuestAdjusted) > 0) flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = player.statusEffectv3(StatusEffects.UrtaQuestAdjusted);
 		if (player.statusEffectv4(StatusEffects.UrtaQuestAdjusted) > 0) flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] = player.statusEffectv4(StatusEffects.UrtaQuestAdjusted);
@@ -424,11 +424,11 @@ public function startUrtaQuest():void {
 	player.intStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 20);
 	player.wisStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 18);
 	player.libStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 30);
-	if (flags[kFLAGS.GAME_DIFFICULTY] > 0 || flags[kFLAGS.SECONDARY_STATS_SCALING] > 0 || flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] > 0 || flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0) {
+	if (flags[kFLAGS.PRIMARY_DIFFICULTY] > 0 || flags[kFLAGS.SECONDARY_STATS_SCALING] > 0 || flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] > 0 || flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0) {
 		player.createStatusEffect(StatusEffects.UrtaQuestAdjusted, 0, 0, 0, 0);
-		if (flags[kFLAGS.GAME_DIFFICULTY] > 0) {
-			player.addStatusValue(StatusEffects.UrtaQuestAdjusted, 1, flags[kFLAGS.GAME_DIFFICULTY]);
-			flags[kFLAGS.GAME_DIFFICULTY] = 0;
+		if (flags[kFLAGS.PRIMARY_DIFFICULTY] > 0) {
+			player.addStatusValue(StatusEffects.UrtaQuestAdjusted, 1, flags[kFLAGS.PRIMARY_DIFFICULTY]);
+			flags[kFLAGS.PRIMARY_DIFFICULTY] = 0;
 		}
 		if (flags[kFLAGS.SECONDARY_STATS_SCALING] > 0) {
 			player.addStatusValue(StatusEffects.UrtaQuestAdjusted, 2, flags[kFLAGS.SECONDARY_STATS_SCALING]);
@@ -2688,4 +2688,4 @@ private function finishQuest():void {
 	} else doNext(recallWakeUp);
 }
 }
-}
+}

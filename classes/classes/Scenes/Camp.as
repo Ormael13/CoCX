@@ -4777,7 +4777,7 @@ public function wakeFromBadEnd():void {
 	statScreenRefresh();
 	//PENALTY!
 	var penaltyMultiplier:int = 1;
-	penaltyMultiplier += flags[kFLAGS.GAME_DIFFICULTY] * 0.5;
+	penaltyMultiplier += flags[kFLAGS.PRIMARY_DIFFICULTY] * 0.5;
 	//Deduct XP and gems.
 	if (flags[kFLAGS.HARDCORE_MODE] == 1) player.XP = 0;
 	else {

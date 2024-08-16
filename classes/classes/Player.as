@@ -2880,12 +2880,12 @@ use namespace CoC;
 			//EZ MOAD 1/10th damage
 			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) damageMultiplier *= 0.1;
 			//Difficulty modifier flags.
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) damageMultiplier *= 1.2;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) damageMultiplier *= 1.5;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) damageMultiplier *= 2;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 4) damageMultiplier *= 3.5;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 5) damageMultiplier *= 3.5;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 6) damageMultiplier *= 3.5;
+			if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 1) damageMultiplier *= 1.2;
+			else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 2) damageMultiplier *= 1.5;
+			else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 3) damageMultiplier *= 2;
+			else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 4) damageMultiplier *= 3.5;
+			else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 5) damageMultiplier *= 3.5;
+			else if (flags[kFLAGS.PRIMARY_DIFFICULTY] >= 6) damageMultiplier *= 3.5;
 			return damage * damageMultiplier;
 		}
 		public function takeDamage(damage:Number, damagetype:Number = 0, display:Boolean = false, hit:Number = 1):Number{
@@ -4537,8 +4537,8 @@ use namespace CoC;
 			if (jewelryName4 == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
 			if (headjewelryName == "Ezekiel's Crown") internalChimeraRatingCounter -= 4;
 			if (necklaceName == "Ezekiel's Necklace") internalChimeraRatingCounter -= 5;
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 0) internalChimeraRatingCounter -= 10;
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) internalChimeraRatingCounter -= 5;//tyle ile stopni perków rasowych
+			if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 0) internalChimeraRatingCounter -= 10;
+			if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 1) internalChimeraRatingCounter -= 5;//tyle ile stopni perków rasowych
 			if (internalChimeraRatingCounter < 0 || flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) internalChimeraRatingCounter = 0;
 			End("Player","racialScore");
 			return internalChimeraRatingCounter;
@@ -7879,6 +7879,22 @@ use namespace CoC;
 			return output;
 		}
 		
+		public function displayFinalGameDifficulty():void {
+			outputText("Final game difficulty: ");
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 0) outputText("Anal-easy that even every Fursona out there can play (Easy)");
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 1) outputText("Normaly it's should be Normal here so... it's N.O.R.M.A.L. (Normal)");
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) outputText("As in far far away galaxys they say: That where the fun begins (Hard)");
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) outputText("They see Hard'in They Hatin (Nightmare)");
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 4) outputText("So now... neither death from starving, accumulated wrath inhibiting spellcasting nor internal mutations will stop you? Now, let's take things to the next level. (Extreme)");
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 5) outputText("It's time to grace you with ancient blessing: GIT GUD (Inferno)");
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 6) {
+				outputText("\nThoughts are in my head");
+				outputText("\nFilling up with Dread");
+				outputText("\nNo, I'm not violent");
+				outputText("\nBut I've got some evil inside me, me (Metroid Dread)");
+			}
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 7) outputText("Are you 'Courting Death' since you 'Had eyes but not seen Mt. Tai?' Worry not there is enough 'Arrogant Young Masters' and Mistresses for everyone to get a piece of Champion. (Xianxia MC)");
+		}
 		
 		public function raijuSuperchargedCheck():void{
 			if ((isRace(Races.RAIJU) || isRace(Races.THUNDERBIRD) || isRace(Races.KIRIN)) && lust100>=75){

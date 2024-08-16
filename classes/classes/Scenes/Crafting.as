@@ -483,7 +483,7 @@ public class Crafting extends BaseContent implements SaveableState
 		}
 
 		public function isLuckyXianxiaMC():Boolean {
-			return xmcLuck < 10 && flags[kFLAGS.GAME_DIFFICULTY] == 4;
+			return xmcLuck < 10 && flags[kFLAGS.PRIMARY_DIFFICULTY] == 7;
 		}
 		public function useXianxiaMCLuck():void {
 			xmcLuck++;

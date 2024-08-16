@@ -348,7 +348,7 @@ import classes.Scenes.Combat.CombatAbilities;
 				else temp *= 0.6;
 			}
 			temp = Math.round(temp);
-			if (temp < (130 + 10 * this.level * (flags[kFLAGS.GAME_DIFFICULTY]+1) + (100 * newGamePlusMod()))) temp = (130 + 10 * this.level * (flags[kFLAGS.GAME_DIFFICULTY]+1) + (100 * newGamePlusMod()));
+			if (temp < (130 + 10 * this.level * (flags[kFLAGS.PRIMARY_DIFFICULTY]+1) + (100 * newGamePlusMod()))) temp = (130 + 10 * this.level * (flags[kFLAGS.PRIMARY_DIFFICULTY]+1) + (100 * newGamePlusMod()));
 			return temp;
 		}
 		private function maxHPmult():Number {
@@ -953,16 +953,16 @@ import classes.Scenes.Combat.CombatAbilities;
 		public function damageReductionBasedOnDifficulty():Number {
 			var dRBOD:Number = 1;
 			if (hasPerk(PerkLib.EnemyForBeginnersType)) {
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) dRBOD *= 1.1;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) dRBOD *= 1.25;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) dRBOD *= 1.5;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) dRBOD *= 2;
+				if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 1) dRBOD *= 1.1;
+				if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 2) dRBOD *= 1.25;
+				if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 3) dRBOD *= 1.5;
+				if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 4) dRBOD *= 2;
 			}
 			else {
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) dRBOD *= 2;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) dRBOD *= 5;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) dRBOD *= 10;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) dRBOD *= 25;
+				if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 1) dRBOD *= 2;
+				if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 2) dRBOD *= 5;
+				if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 3) dRBOD *= 10;
+				if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 4) dRBOD *= 25;
 			}
 			return dRBOD;
 		}
@@ -1338,12 +1338,12 @@ import classes.Scenes.Combat.CombatAbilities;
 		protected function baseXP():Number
 		{
 			var baseMonXP:Number = this.level * 5;
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) baseMonXP += this.level;
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 2) baseMonXP += this.level * 2.5;
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 3) baseMonXP += this.level * 5;
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 4) baseMonXP += this.level * 7.5;
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 5) baseMonXP += this.level * 7.5;
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 6) baseMonXP += this.level * 7.5;
+			if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 1) baseMonXP += this.level;
+			if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 2) baseMonXP += this.level * 2.5;
+			if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 3) baseMonXP += this.level * 5;
+			if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 4) baseMonXP += this.level * 7.5;
+			if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 5) baseMonXP += this.level * 7.5;
+			if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 6) baseMonXP += this.level * 7.5;
 			if (this.level < 7) baseMonXP += (this.level * 5) + rand(this.level * 5);
 			else baseMonXP += rand(this.level * 5);
 			return baseMonXP;
@@ -3386,12 +3386,10 @@ import classes.Scenes.Combat.CombatAbilities;
 					healingPercent += 20;
 					if (perkv1(IMutationsLib.FerasBirthrightIM) >= 4) healingPercent += 10;
 				}
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) {
-					if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp3 += 0.05;
-					if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp3 += 0.12;
-					if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp3 += 0.2;
-					if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) temp3 += 0.3;
-				}
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp3 += 0.05;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp3 += 0.12;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp3 += 0.2;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] >= 4) temp3 += 0.3;
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp3 += 0.1;
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp3 += 0.2;
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) temp3 += 0.3;

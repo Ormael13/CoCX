@@ -2997,7 +2997,7 @@ public static const USE_OLD_FONT:int                                            
 public static const BACKGROUND_STYLE:int                                            = 2989; // Background theme.
 public static const GAME_DIFFICULTY:int                                             = 2990; // 0 is normal, 1 is hard, 2 is nightmare, 3 is extreme. Affects HP and damage.
 public static const HARDCORE_MODE:int                                               = 2991; // 0 is disabled, 1 is enabled.
-public static const UNKNOWN_FLAG_NUMBER_02992:int                                   = 2992;
+public static const PRIMARY_DIFFICULTY:int                                   		= 2992;
 public static const HUNGER_ENABLED:int                                              = 2993; // Determines if hunger is enabled. 1 is enabled.
 public static const USE_12_HOURS:int                                                = 2994; // 0 for 24-hour format, 1 for 12-hour format.
 public static const CORRUPTION_TOLERANCE_MODE:int                                   = 2995; // 0 - default, enabled if possible; 1 - disabled, 2 - 100% (debug)
@@ -3014,7 +3014,7 @@ public static const GLOBAL_FLAGS_ARRAY:Array = [
 	WATERSPORTS_ENABLED, LVL_UP_FAST, MUTATIONS_SPOILERS, NEWPERKSDISPLAY, INVT_MGMT_TYPE, CHARVIEWER_ENABLED,
 	CHARVIEW_STYLE, CHARVIEW_ARMOR_HIDDEN, USE_OLD_FONT, BACKGROUND_STYLE, IMAGEPACK_OFF, SPRITE_STYLE, USE_12_HOURS,
 	WATERSPORTS_ENABLED, USE_METRICS, AUTO_LEVEL, STRENGTH_SCALING, SPEED_SCALING, WISDOM_SCALING, INTELLIGENCE_SCALING,
-	TOUGHNESS_SCALING, SECONDARY_STATS_SCALING, BOSS_CHAMPION_ELITE_SCALING, HARDCORE_MODE,// UNKNOWN_FLAG_NUMBER_02992,
+	TOUGHNESS_SCALING, SECONDARY_STATS_SCALING, BOSS_CHAMPION_ELITE_SCALING, HARDCORE_MODE, PRIMARY_DIFFICULTY,
 	USSDISPLAY_STYLE, IMDB_DETAILS, BUTTON_ICONS_DISABLED, STATBAR_ANIMATIONS
 ];
 	}

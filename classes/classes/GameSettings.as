@@ -46,7 +46,7 @@ public class GameSettings extends BaseContent {
 		displayHeader("Settings");
 		outputText("Here, you can adjust the gameplay and interface settings. Setting flags are saved in a special file so you don't have to re-adjust it each time you load a save file.");
 		menu();
-		addButton(0, "Gameplay(1)", settingsScreenGameSettings);
+		addButton(0, "Gameplay(1)", settingsScreenGameSettings).hint("Mainly setting that need to have loaded save.");
 		addButton(1, "Interface", settingsScreenInterfaceSettings);
 		addButton(2, "QoL", settingsScreenQoLSettings).hint("Quality of Life Settings.");
 		addButton(3, "Font Size", fontSettingsMenu);
@@ -70,63 +70,45 @@ public class GameSettings extends BaseContent {
 
 		clearOutput();
 		displayHeader("Gameplay Settings");
-		if (debug) outputText("Debug Mode: [font-green]<b>ON</b>[/font]\n Items will not be consumed by use, fleeing always succeeds, and bad-ends can be ignored.");
-		else outputText("Debug Mode: [font-dred]<b>OFF</b>[/font]\n Items consumption will occur as normal.");
-		outputText("\n\n");
-		if (flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
-			outputText("Silly Mode: [font-green]<b>ON</b>[/font]\n Crazy, nonsensical, and possibly hilarious things may occur.");
-		else
-			outputText("Silly Mode: [font-dred]<b>OFF</b>[/font]\n You're an incorrigable stick-in-the-mud with no sense of humor.");
-		outputText("\n\n");
-		if (flags[kFLAGS.LOW_STANDARDS_FOR_ALL]) {
-			outputText("Low standards Mode: [font-green]<b>ON</b>[/font]\n NPCs ignore body type preferences.");
-			outputText("\n (Not gender preferences though. You still need the right hole.)");
-		}
-		else
-			outputText("Low standards Mode: [font-dred]<b>OFF</b>[/font]\n NPCs have body-type preferences.");
-		outputText("\n\n");
-		if (flags[kFLAGS.HYPER_HAPPY]) {
-			outputText("Hyper Happy Mode: [font-green]<b>ON</b>[/font]\n Only reducto and humus shrink endowments.");
-			outputText("\n Incubus draft doesn't affect breasts, and succubi milk doesn't affect cocks.")
-		}
-		else
-			outputText("Hyper Happy Mode: [font-dred]<b>OFF</b>[/font]\n Male enhancement potions shrink female endowments, and vice versa.");
-		outputText("\n\n");
 		if (flags[kFLAGS.AUTO_LEVEL] >= 1) {
 			outputText("Automatic Leveling: [font-green]<b>ON</b>[/font]\n Leveling up is done automatically once you accumulate enough experience.");
 		}
 		else
 			outputText("Automatic Leveling: [font-dred]<b>OFF</b>[/font]\n Leveling up is done manually.");
 		outputText("\n\n");
-		
 		outputText("<b><u>SAVE-RELATED FLAGS</u></b>\n");
 		outputText("The following flags are applied to the save - you <b>must</b> be <i>in a game session</i> (e.g. load your save, hit \"Main Menu\", change them. If you load a save, they will be set to the saved values.");
-
 		outputText("\n\n");
-		if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) {
-			outputText("Difficulty: [font-olive]<b>Easy</b>[/font]\n No opponent(s) stats modifiers. You can resume from bad-ends with penalties. No penatlies for too high wrath. Internal mutation negative effects will be triggered after accumulating 11 points in internal mutation score.");
+		player.displayFinalGameDifficulty();
+		outputText("\n\n");
+		if (flags[kFLAGS.PRIMARY_DIFFICULTY] <= 0) {
+			outputText("Primary Difficulty: [font-olive]<b>Easy</b>[/font]\n No opponent(s) stats modifiers. You can resume from bad-ends with penalties. No penatlies for too high wrath. Internal mutation negative effects will be triggered after accumulating 11 points in internal mutation score.");
 		}
-		else if (flags[kFLAGS.GAME_DIFFICULTY] == 1) {
-			outputText("Difficulty: <b>[font-dred]Normal[/font]</b>\n Opponent(s) take 2x less HP/Lust dmg, deal 20% more damage and gives ~20% more EXP. No penatlies for too high wrath. Bad-ends can ruin your game. Internal mutation negative effects will be triggered after accumulating 6 points in internal mutation score.");
+		else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 1) {
+			outputText("Primary Difficulty: <b>[font-dred]Normal[/font]</b>\n Opponent(s) take 2x less HP/Lust dmg, deal 20% more damage and gives ~20% more EXP. No penatlies for too high wrath. Bad-ends can ruin your game. Internal mutation negative effects will be triggered after accumulating 6 points in internal mutation score.");
 		}
-		else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) {
-			outputText("Difficulty: <b>[font-red]Hard[/font]</b>\n Opponent(s) take 5x less HP/Lust dmg, deal 50% more damage and gives ~50% more EXP." +
+		else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 2) {
+			outputText("Primary Difficulty: <b>[font-red]Hard[/font]</b>\n Opponent(s) take 5x less HP/Lust dmg, deal 50% more damage and gives ~50% more EXP." +
 					" If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately.");
 		}
-		else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) {
-			outputText("Difficulty: <b>[font-lred]Nightmare[/font]</b>\n Opponent(s) take 10x less HP/Lust dmg, deal more 100% damage and gives ~100% more EXP." +
+		else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 3) {
+			outputText("Primary Difficulty: <b>[font-red]Nightmare[/font]</b>\n Opponent(s) take 10x less HP/Lust dmg, deal more 100% damage and gives ~100% more EXP." +
 					" If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately.");
 		}
-		else if (flags[kFLAGS.GAME_DIFFICULTY] == 4) {
-			outputText("Difficulty: <b>[font-pink]Extreme[/font]</b>\n Opponent(s) take 25x less HP/Lust dmg, deal more 250% damage and gives ~150% more EXP." +
+		else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 4) {
+			outputText("Primary Difficulty: <b>[font-lred]Extreme[/font]</b>\n Opponent(s) take 25x less HP/Lust dmg, deal more 250% damage and gives ~150% more EXP." +
 					" If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately.");
 		}
-		else if (flags[kFLAGS.GAME_DIFFICULTY] == 5) {
-			outputText("Difficulty: <b>[font-pink]Inferno[/font]</b>\n Opponent(s) take 25x less HP/Lust dmg, deal more 250% damage and gives ~150% more EXP." +
+		else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 5) {
+			outputText("Primary Difficulty: <b>[font-lred]Inferno[/font]</b>\n Opponent(s) take 25x less HP/Lust dmg, deal more 250% damage and gives ~150% more EXP." +
 					" If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately.");
 		}
-		else if (flags[kFLAGS.GAME_DIFFICULTY] >= 6) {
-			outputText("Difficulty: <b>[font-pink]Xianxia MC[/font]</b>\n Opponent(s) take 25x less HP/Lust dmg, deal more 250% damage and gives ~150% more EXP." +
+		else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 6) {
+			outputText("Primary Difficulty: <b>[font-pink]Metroid Dread[/font]</b>\n Opponent(s) take 25x less HP/Lust dmg, deal more 250% damage and gives ~150% more EXP." +
+					" If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately.");
+		}
+		else if (flags[kFLAGS.PRIMARY_DIFFICULTY] >= 7) {
+			outputText("Primary Difficulty: <b>[font-pink]Xianxia MC[/font]</b>\n Opponent(s) take 25x less HP/Lust dmg, deal more 250% damage and gives ~150% more EXP." +
 					" If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately.");
 		}
 		outputText("\n\n");
@@ -196,35 +178,34 @@ public class GameSettings extends BaseContent {
 			outputText("Watersports: [font-dred]<b>Disabled</b>[/font]\n Watersports scenes are disabled.");
 		outputText("\n\n");
 		menu();
-		addButton(0, "Toggle Debug", toggleDebug).hint("Turn on debug mode. Debug mode is intended for testing purposes but can be thought of as a cheat mode.  Items are infinite and combat is easy to escape from.  Weirdness and bugs are to be expected.");
-		addButton(1, "Silly Toggle", toggleFlag, kFLAGS.SILLY_MODE_ENABLE_FLAG, settingsScreenGameSettings).hint("Toggles silly mode. Funny, crazy and nonsensical scenes may occur if enabled.");
-		addButton(2, "Low Standards", toggleFlag, kFLAGS.LOW_STANDARDS_FOR_ALL, settingsScreenGameSettings);
-		addButton(3, "Hyper Happy", toggleFlag, kFLAGS.HYPER_HAPPY, settingsScreenGameSettings);
-		addButton(4, "Auto level", toggleFlag, kFLAGS.AUTO_LEVEL, settingsScreenGameSettings).hint("Toggles automatic leveling when you accumulate sufficient experience.");
+		addButton(13, "Auto level", toggleFlag, kFLAGS.AUTO_LEVEL, settingsScreenGameSettings).hint("Toggles automatic leveling when you accumulate sufficient experience.");
 		if (player) {
+			addButton(0, "Prime Difficulty", difficultySelectionMenu1).hint("Adjust primary difficulty to make game easier or harder.");
+			addButton(1, "Sec.Mon.Stat", difficultySelectionMenu2).hint("Adjusts monsters secondary stats multiplier to make game easier or harder.");
+			addButton(2, "E/Ch/B.Mon.Stat", difficultySelectionMenu3).hint("Adjusts elite/champion/boss monsters HP multiplier to make game easier or harder.");
 			if (flags[kFLAGS.HUNGER_ENABLED] != 1) addButton(5, "Hunger+", enableHungerModifierForReal);
 			else addButton(5, "Hunger-", disableHungerModifierForReal);
-			addButton(6, "Sec.Mon.Stat", difficultySelectionMenu2).hint("Adjusts monsters secondary stats multiplier to make game easier or harder.");
-			if (flags[kFLAGS.HARDCORE_MODE] != 1) addButton(7, "Hardcore+", enableHardcoreModifierForReal);
-			else addButton(7, "Hardcore-", disableHardcoreModifierForReal);
-			addButton(8, "Fetishes", fetishSubMenu).hint("Toggle some of the weird fetishes such as watersports and worms.");
-			addButton(9, "Timescale", timescaleCycle).hint("Change the way how time and date work in the game.");
-			addButton(10, "E/Ch/B.Mon.Stat", difficultySelectionMenu3).hint("Adjusts elite/champion/boss monsters HP multiplier to make game easier or harder.");
-			//12
-			//13
-			if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) addButton(13, "Easier Mode", toggleFlag, kFLAGS.EASY_MODE_ENABLE_FLAG, settingsScreenGameSettings).hint("Toggles easier than easy mode. Enemy damage is 10% of normal and bad-ends can be ignored.");
-			else addButtonDisabled(13, "Easier Mode", "Diffulty setting is too high to allow toggle easy mode.");
+			if (flags[kFLAGS.HARDCORE_MODE] != 1) addButton(6, "Hardcore+", enableHardcoreModifierForReal);
+			else addButton(6, "Hardcore-", disableHardcoreModifierForReal);
+			if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) addButton(10, "Easier Mode", toggleFlag, kFLAGS.EASY_MODE_ENABLE_FLAG, settingsScreenGameSettings).hint("Toggles easier than easy mode. Enemy damage is 10% of normal and bad-ends can be ignored.");
+			else addButtonDisabled(10, "Easier Mode", "Diffulty setting is too high to allow toggle easy mode.");
+			addButton(11, "Fetishes", fetishSubMenu).hint("Toggle some of the weird fetishes such as watersports and worms.");
+			addButton(12, "Timescale", timescaleCycle).hint("Change the way how time and date work in the game.");
 		}
 		else {
+			addButtonDisabled(0, "Prime Difficulty", "Requires a loaded save.");
+			addButtonDisabled(1, "Sec.Mon.Stat", "Requires a loaded save.");
+			addButtonDisabled(2, "E/Ch/B.Mon.Stat", "Requires a loaded save.");
+			//addButtonDisabled(3, "", "Requires a loaded save.");
+			//addButtonDisabled(4, "", "Requires a loaded save.");
 			addButtonDisabled(5, "Hunger", "Requires a loaded save.");
-			addButtonDisabled(6, "Sec.Mon.Stat", "Requires a loaded save.");
-			addButtonDisabled(7, "Hardcore", "Requires a loaded save.");
-			addButtonDisabled(8, "Fetishes", "Requires a loaded save.");
-			addButtonDisabled(9, "Timescale", "Requires a loaded save.");
-			addButtonDisabled(10, "E/Ch/B.Mon.Stat", "Requires a loaded save.");
-			//addButtonDisabled(11, "", "Requires a loaded save.");
-			//addButtonDisabled(12, "", "Requires a loaded save.");
-			addButtonDisabled(13, "Easier Mode", "Requires a loaded save.");
+			addButtonDisabled(6, "Hardcore", "Requires a loaded save.");
+			//addButtonDisabled(7, "", "Requires a loaded save.");
+			//addButtonDisabled(8, "", "Requires a loaded save.");
+			//addButtonDisabled(9, "", "Requires a loaded save.");
+			addButtonDisabled(10, "Easier Mode", "Requires a loaded save.");
+			addButtonDisabled(11, "Fetishes", "Requires a loaded save.");
+			addButtonDisabled(12, "Timescale", "Requires a loaded save.");
 		}
 		addButton(14, "Back", settingsScreenMain);
 
@@ -596,6 +577,34 @@ public class GameSettings extends BaseContent {
 	public function settingsScreenGameSettings2():void {
 		clearOutput();
 		displayHeader("Gameplay Settings");
+		if (debug) outputText("Debug Mode: [font-green]<b>ON</b>[/font]\n Items will not be consumed by use, fleeing always succeeds, and bad-ends can be ignored.");
+		else outputText("Debug Mode: [font-dred]<b>OFF</b>[/font]\n Items consumption will occur as normal.");
+		outputText("\n\n");
+		if (flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
+			outputText("Silly Mode: [font-green]<b>ON</b>[/font]\n Crazy, nonsensical, and possibly hilarious things may occur.");
+		else
+			outputText("Silly Mode: [font-dred]<b>OFF</b>[/font]\n You're an incorrigable stick-in-the-mud with no sense of humor.");
+		outputText("\n\n");
+		if (flags[kFLAGS.LOW_STANDARDS_FOR_ALL]) {
+			outputText("Low standards Mode: [font-green]<b>ON</b>[/font]\n NPCs ignore body type preferences.");
+			outputText("\n (Not gender preferences though. You still need the right hole.)");
+		}
+		else
+			outputText("Low standards Mode: [font-dred]<b>OFF</b>[/font]\n NPCs have body-type preferences.");
+		outputText("\n\n");
+		if (flags[kFLAGS.HYPER_HAPPY]) {
+			outputText("Hyper Happy Mode: [font-green]<b>ON</b>[/font]\n Only reducto and humus shrink endowments.");
+			outputText("\n Incubus draft doesn't affect breasts, and succubi milk doesn't affect cocks.")
+		}
+		else
+			outputText("Hyper Happy Mode: [font-dred]<b>OFF</b>[/font]\n Male enhancement potions shrink female endowments, and vice versa.");
+		outputText("\n\n");
+		if (flags[kFLAGS.ITS_EVERY_DAY]) {
+			outputText("Eternal Holiday Mode: [font-green]<b>ON</b>[/font]\n All holiday events like Eastern/X-mas and etc. can happen at any day of the year.");
+		}
+		else
+			outputText("Eternal Holiday Mode: [font-dred]<b>OFF</b>[/font]\n All holiday events happen only during their respective holiday times.");
+		outputText("\n\n");
 		if (flags[kFLAGS.STRENGTH_SCALING] >= 1) {
 			outputText("Strength Scaling: [font-green]<b>New</b>[/font]\n Values are less random and a bit higher on average than in old scaling.");
 		}
@@ -620,15 +629,12 @@ public class GameSettings extends BaseContent {
 		else
 			outputText("Intelligence Scaling: [font-dred]<b>Old</b>[/font]\n Values are more random and a bit lower on average than in new scaling.");
 		outputText("\n\n");
-		if (flags[kFLAGS.ITS_EVERY_DAY]) {
-			outputText("Eternal Holiday Mode: [font-green]<b>ON</b>[/font]\n All holiday events like Eastern/X-mas and etc. can happen at any day of the year.");
-		}
-		else
-			outputText("Eternal Holiday Mode: [font-dred]<b>OFF</b>[/font]\n All holiday events happen only during their respective holiday times.");
-		outputText("\n\n");
 		menu();
-
-		addButton(0, "Eternal Holiday", toggleFlag, kFLAGS.ITS_EVERY_DAY, settingsScreenGameSettings2).hint("Toggles eternal holiday mode. All holiday events like Eastern/X-mas and etc. can happen at any day of the year.");
+		addButton(0, "Toggle Debug", toggleDebug).hint("Turn on debug mode. Debug mode is intended for testing purposes but can be thought of as a cheat mode.  Items are infinite and combat is easy to escape from.  Weirdness and bugs are to be expected.");
+		addButton(1, "Silly Toggle", toggleFlag, kFLAGS.SILLY_MODE_ENABLE_FLAG, settingsScreenGameSettings2).hint("Toggles silly mode. Funny, crazy and nonsensical scenes may occur if enabled.");
+		addButton(2, "Low Standards", toggleFlag, kFLAGS.LOW_STANDARDS_FOR_ALL, settingsScreenGameSettings2);
+		addButton(3, "Hyper Happy", toggleFlag, kFLAGS.HYPER_HAPPY, settingsScreenGameSettings2);
+		addButton(4, "Eternal Holiday", toggleFlag, kFLAGS.ITS_EVERY_DAY, settingsScreenGameSettings2).hint("Toggles eternal holiday mode. All holiday events like Eastern/X-mas and etc. can happen at any day of the year.");
 		addButton(5, "Wis scaling", toggleFlag, kFLAGS.WISDOM_SCALING, settingsScreenGameSettings2).hint("Toggles Wisdom scaling for all attacks using it. If enabled, wisdom scaling would be less random with big generally a bit higher values on average.");
 		addButton(6, "Int scaling", toggleFlag, kFLAGS.INTELLIGENCE_SCALING, settingsScreenGameSettings2).hint("Toggles Intelligance scaling for all attacks using it. If enabled, intelligence scaling would be less random with values being a bit higher on average.");
 		addButton(7, "Str scaling", toggleFlag, kFLAGS.STRENGTH_SCALING, settingsScreenGameSettings2).hint("Toggles Strength scaling for all attacks using it. If enabled, strength scaling would be less random with values being a bit higher on average.");
@@ -743,7 +749,7 @@ public class GameSettings extends BaseContent {
 		//toggle debug
 		debug = !debug;
 		mainView.showMenuButton(MainView.MENU_DATA);
-		settingsScreenGameSettings();
+		settingsScreenGameSettings2();
 	}
 
 	public function fetishSubMenu():void {
@@ -752,7 +758,7 @@ public class GameSettings extends BaseContent {
 		if (player.hasStatusEffect(StatusEffects.WormsOn) || player.hasStatusEffect(StatusEffects.WormsOff)) addButton(1, "Worms", toggleWormsMenu).hint("Enable or disable worms. This will NOT cure infestation, if you have any.");
 		else addButtonDisabled(1, "Worms", "Find the sign depicting the worms in the mountains to unlock this.");
 		addButtonIfTrue(2, "Mindbreaker", toggleMindbreaker, "You are too late, you cannot turn back now!", Mindbreaker.MindBreakerQuest < Mindbreaker.QUEST_STAGE_ISMB,"Toggles Mindbreaker scenes.", "Mindbreaker "+(Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_MBOFF? "OFF":"ON"));
-		addButton(4, "Back", settingsScreenGameSettings);
+		addButton(4, "Back", settingsScreenGameSettings2);
 	}
 
 	private function toggleWormsMenu():void {
@@ -824,6 +830,22 @@ public class GameSettings extends BaseContent {
 		setTheFuckingDifficultyForFuckingGood();
 		doNext(settingsScreenGameSettings);
 	}
+	public function difficultySelectionMenu1():void {
+		clearOutput();
+		outputText("You can choose a prime difficulty to set how hard battles will be.\n");
+		menu();
+		addButton(0, "-0-", chooseDifficulty1, 0);
+		addButton(1, "-1-", chooseDifficulty1, 1);
+		addButton(2, "-2-", chooseDifficulty1, 2);
+		addButton(3, "-3-", chooseDifficulty1, 3);
+		addButton(4, "-4-", chooseDifficulty1, 4);
+		addButton(14, "Back", settingsScreenGameSettings);
+	}
+	public function chooseDifficulty1(difficulty:int = 0):void {
+		flags[kFLAGS.PRIMARY_DIFFICULTY] = difficulty;
+		setTheFuckingDifficultyForFuckingGood();
+		settingsScreenGameSettings();
+	}
 	public function difficultySelectionMenu2():void {
 		clearOutput();
 		outputText("You can choose a difficulty to set how hard battles will be.\n");
@@ -838,7 +860,7 @@ public class GameSettings extends BaseContent {
 		addButton(2, "10x", chooseDifficulty2, 2);
 		addButton(3, "25x", chooseDifficulty2, 3);
 		addButton(4, "100x", chooseDifficulty2, 4);
-		addButton(14, "Back", settingsScreenGameSettings2);
+		addButton(14, "Back", settingsScreenGameSettings);
 	}
 	public function chooseDifficulty2(difficulty:int = 0):void {
 		flags[kFLAGS.SECONDARY_STATS_SCALING] = difficulty;
@@ -866,10 +888,11 @@ public class GameSettings extends BaseContent {
 	}
 	private function setTheFuckingDifficultyForFuckingGood():void {
 		var sTFDFFG:Number = 0;
-		if (flags[kFLAGS.HUNGER_ENABLED] > 0) sTFDFFG += 1;
-		if (flags[kFLAGS.HARDCORE_MODE] > 0) sTFDFFG += 1;
+		if (flags[kFLAGS.PRIMARY_DIFFICULTY] > 0) sTFDFFG += 1;
 		if (flags[kFLAGS.SECONDARY_STATS_SCALING] > 0) sTFDFFG += 1;
 		if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] > 0) sTFDFFG += 1;
+		if (flags[kFLAGS.HUNGER_ENABLED] > 0) sTFDFFG += 1;
+		if (flags[kFLAGS.HARDCORE_MODE] > 0) sTFDFFG += 1;
 		flags[kFLAGS.GAME_DIFFICULTY] = sTFDFFG;
 	}
 
