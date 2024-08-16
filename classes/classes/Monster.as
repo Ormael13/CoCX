@@ -3147,8 +3147,8 @@ import classes.Scenes.Combat.CombatAbilities;
 
 		protected function applyTease(lustDelta:Number, display:Boolean = true, aura:Boolean = false):void{
 			if (damageReductionBasedOnDifficulty() > 1) lustDelta *= (1 / damageReductionBasedOnDifficulty());
+			if (aura && (lustDelta > (maxLust() * 0.1))) lustDelta = maxLust() * 0.1;
 			lustDelta *= SceneLib.combat.doDamageReduction();
-			if (aura && (lustDelta > (maxLust() * 0.1))) maxLust() * 0.1;
 			lustDelta = Math.round(lustDelta);
 			lust += lustDelta;
 			if (display) SceneLib.combat.CommasForDigits(lustDelta, true);//outputText(" <b>([font-lust]" + Utils.formatNumber(lustDelta) + "[/font])</b>");

@@ -8785,10 +8785,15 @@ public class Combat extends BaseContent {
         var monLvl:Number = monster.level + monsterLevelAdjustment();
         if (plaLvl > monLvl) {
             damagereduction += 0.02 * (plaLvl - monLvl);
-            if (damagereduction > 2) damagereduction = 2;//200% dmg przy różnicy 50+ lvl-i
+            if (damagereduction > 3) damagereduction = 3;//200% dmg przy różnicy 100+ lvl-i
         }
         if (plaLvl < monLvl) {
             if ((monLvl - plaLvl) < 50) damagereduction -= 0.02 * (monLvl - plaLvl);
+			else if ((monLvl - plaLvl) < 51) damagereduction = 0.01;
+			else if ((monLvl - plaLvl) < 52) damagereduction = 0.001;
+			else if ((monLvl - plaLvl) < 53) damagereduction = 0.0001;
+			else if ((monLvl - plaLvl) < 54) damagereduction = 0.00001;
+			else if ((monLvl - plaLvl) < 55) damagereduction = 0.000001;
             else damagereduction = 0;
         }
         return damagereduction;
@@ -8916,15 +8921,12 @@ public class Combat extends BaseContent {
 		}
 		if (player.headJewelry === headjewelries.DRABLOH && monster.hasPerk(PerkLib.EnemyDragonType)) damage *= 1.2;
 		damage *= EyesOfTheHunterDamageBonus();
+        damage *= doDamageReduction();
+		damage = Math.round(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
-            /* No monsters use this perk, so it's been removed for now
-		if(monster.hasPerk(PerkLib.LastStrike)) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
-		else doNext(endHpVictory);
-		*/
             doNext(endHpVictory);
         }
-        damage = Math.round(damage);
         if (damage < 0) damage = 1;
         if (apply) {
             damage = monster.doTrueDamageBefore(damage);
@@ -8980,15 +8982,12 @@ public class Combat extends BaseContent {
 		}
 		if (player.headJewelry === headjewelries.DRABLOH && monster.hasPerk(PerkLib.EnemyDragonType)) damage *= 1.2;
 		damage *= EyesOfTheHunterDamageBonus();
+        damage *= doDamageReduction();
+		damage = Math.round(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
-            /* No monsters use this perk, so it's been removed for now
-		if(monster.hasPerk(PerkLib.LastStrike)) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
-		else doNext(endHpVictory);
-		*/
             doNext(endHpVictory);
         }
-        damage = Math.round(damage);
         if (damage < 0) damage = 1;
 		if (apply) {
             damage = monster.doPsychicDamageBefore(damage);
@@ -9019,8 +9018,7 @@ public class Combat extends BaseContent {
 
     public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
-        damage *= doDamageReduction();
-		if (!ignoreDR) damage *= (monster.damagePercent() / 100);
+        if (!ignoreDR) damage *= (monster.damagePercent() / 100);
 		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) damage *= doDamageAscensionModifer();
 		if (damage < 1) damage = 1;
 		if (monster.damageReductionBasedOnDifficulty() > 1) damage *= (1 / monster.damageReductionBasedOnDifficulty());
@@ -9065,10 +9063,6 @@ public class Combat extends BaseContent {
 			player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
 			player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 		}
-        if (damage == 0) MSGControllForEvasion = true;
-        if (monster.HP - damage <= monster.minHP()) {
-            doNext(endHpVictory);
-        }
         // Uma's Massage Bonuses
         var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
         if (sac) {
@@ -9076,7 +9070,12 @@ public class Combat extends BaseContent {
                 damage *= sac.value2;
             }
         }
-        damage = Math.round(damage);
+        damage *= doDamageReduction();
+		damage = Math.round(damage);
+        if (damage == 0) MSGControllForEvasion = true;
+        if (monster.HP - damage <= monster.minHP()) {
+            doNext(endHpVictory);
+        }
         if (damage < 0) damage = 1;
         if (apply) {
             damage = monster.doDamageBefore(damage);
@@ -9156,8 +9155,7 @@ public class Combat extends BaseContent {
 
     public function doMagicDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
-        damage *= doDamageReduction();
-		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) damage *= doDamageAscensionModifer();
+        if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) damage *= doDamageAscensionModifer();
 		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
 		if (monster.damageReductionBasedOnDifficulty() > 1) damage *= (1 / monster.damageReductionBasedOnDifficulty());
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
@@ -9198,10 +9196,6 @@ public class Combat extends BaseContent {
 			player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
 			player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 		}
-        if (damage == 0) MSGControllForEvasion = true;
-        if (monster.HP - damage <= monster.minHP()) {
-            doNext(endHpVictory);
-        }
         // Uma's Massage Bonuses
         var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
         if (sac) {
@@ -9209,7 +9203,12 @@ public class Combat extends BaseContent {
                 damage *= sac.value2;
             }
         }
-        damage = Math.round(damage);
+        damage *= doDamageReduction();
+		damage = Math.round(damage);
+        if (damage == 0) MSGControllForEvasion = true;
+        if (monster.HP - damage <= monster.minHP()) {
+            doNext(endHpVictory);
+        }
         if (damage < 0) damage = 1;
         if (apply) {
             damage = monster.doMagicDamageBefore(damage);
@@ -9270,7 +9269,6 @@ public class Combat extends BaseContent {
 
     public function doFireDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
-        damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
 		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
         if (player.weapon === weapons.R_STAFF) damage *= 1.4;
@@ -9283,13 +9281,11 @@ public class Combat extends BaseContent {
         if (player.shieldName == "Nekonomicon") damage *= 2;
 		if (player.headJewelry === headjewelries.DRABLOH && monster.hasPerk(PerkLib.EnemyDragonType)) damage *= 1.2;
 		damage *= EyesOfTheHunterDamageBonus();
-        if (player.hasMutation(IMutationsLib.HellhoundFireBallsIM)) {
-            if(player.perkv1(IMutationsLib.HellhoundFireBallsIM) >= 3){
-                damage *= (0.1* player.cumQ());
-            }
-            else if(player.perkv1(IMutationsLib.HellhoundFireBallsIM) >= 2){
-                damage *= (0.05* player.cumQ())
-            }
+        if (player.hasMutation(IMutationsLib.HellhoundFireBallsIM) && player.perkv1(IMutationsLib.HellhoundFireBallsIM) >= 2) {
+            var cumQM:Number = 0.05 * player.cumQ();
+			//var cumQML:Number = player.lust100;
+			if (player.perkv1(IMutationsLib.HellhoundFireBallsIM) >= 3) cumQM *= 2;
+			damage *= cumQM;
         }
         if (player.hasMutation(IMutationsLib.BlazingHeartIM)) {
 			damage *= (1 + (0.25 * player.perkv1(IMutationsLib.BlazingHeartIM)));
@@ -9300,15 +9296,6 @@ public class Combat extends BaseContent {
 			}
 			if (!monster.hasStatusEffect(StatusEffects.BurnDoT) && rand(5) == 0) monster.createStatusEffect(StatusEffects.BurnDoT,5,0.02,0,0);
 		}
-        // if (player.hasMutation(IMutationsLib.HellhoundFireBallsIM) && player.perkv1(IMutationsLib.HellhoundFireBallsIM) >= 3) damage *= (0.05* player.cumQ());
-        if (damage == 0) MSGControllForEvasion = true;
-        if (monster.HP - damage <= monster.minHP()) {
-            /* No monsters use this perk, so it's been removed for now
-		if(monster.hasPerk(PerkLib.LastStrike)) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
-		else doNext(endHpVictory);
-		*/
-            doNext(endHpVictory);
-        }
         // Uma's Massage Bonuses
         var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
         if (sac) {
@@ -9316,7 +9303,12 @@ public class Combat extends BaseContent {
                 damage *= sac.value2;
             }
         }
+        damage *= doDamageReduction();
         damage = Math.round(damage);
+        if (damage == 0) MSGControllForEvasion = true;
+        if (monster.HP - damage <= monster.minHP()) {
+            doNext(endHpVictory);
+        }
         if (damage < 0) damage = 1;
         if (apply) {
             damage = monster.doFireDamageBefore(damage);
@@ -9349,7 +9341,6 @@ public class Combat extends BaseContent {
 
     public function doIceDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
-        damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
 		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
 		if (player.weapon == weapons.S_STAFF) damage *= 1.4;
@@ -9367,10 +9358,6 @@ public class Combat extends BaseContent {
 			player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
 			player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 		}
-        if (damage == 0) MSGControllForEvasion = true;
-        if (monster.HP - damage <= monster.minHP()) {
-            doNext(endHpVictory);
-        }
         // Uma's Massage Bonuses
         var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
         if (sac) {
@@ -9378,7 +9365,12 @@ public class Combat extends BaseContent {
                 damage *= sac.value2;
             }
         }
+        damage *= doDamageReduction();
         damage = Math.round(damage);
+        if (damage == 0) MSGControllForEvasion = true;
+        if (monster.HP - damage <= monster.minHP()) {
+            doNext(endHpVictory);
+        }
         if (damage < 0) damage = 1;
         if (apply) {
             damage = monster.doIceDamageBefore(damage);
@@ -9406,7 +9398,6 @@ public class Combat extends BaseContent {
 
     public function doLightningDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
-        damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
 		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
         if (player.weapon == weapons.T_STAFF) damage *= 1.4;
@@ -9426,14 +9417,6 @@ public class Combat extends BaseContent {
 			player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
 			player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 		}
-        if (damage == 0) MSGControllForEvasion = true;
-        if (monster.HP - damage <= monster.minHP()) {
-            /* No monsters use this perk, so it's been removed for now
-		if(monster.hasPerk(PerkLib.LastStrike)) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
-		else doNext(endHpVictory);
-		*/
-            doNext(endHpVictory);
-        }
         // Uma's Massage Bonuses
         var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
         if (sac) {
@@ -9441,7 +9424,12 @@ public class Combat extends BaseContent {
                 damage *= sac.value2;
             }
         }
+        damage *= doDamageReduction();
         damage = Math.round(damage);
+        if (damage == 0) MSGControllForEvasion = true;
+        if (monster.HP - damage <= monster.minHP()) {
+            doNext(endHpVictory);
+        }
         if (damage < 0) damage = 1;
         if (apply) {
             damage = monster.doLightningDamageBefore(damage);
@@ -9465,7 +9453,6 @@ public class Combat extends BaseContent {
 
     public function doDarknessDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
-        damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
 		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
         if (player.weapon == weapons.A_STAFF) damage *= 1.4;
@@ -9482,10 +9469,6 @@ public class Combat extends BaseContent {
 			player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
 			player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 		}
-        if (damage == 0) MSGControllForEvasion = true;
-        if (monster.HP - damage <= monster.minHP()) {
-            doNext(endHpVictory);
-        }
         // Uma's Massage Bonuses
         var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
         if (sac) {
@@ -9493,7 +9476,12 @@ public class Combat extends BaseContent {
                 damage *= sac.value2;
             }
         }
+        damage *= doDamageReduction();
         damage = Math.round(damage);
+        if (damage == 0) MSGControllForEvasion = true;
+        if (monster.HP - damage <= monster.minHP()) {
+            doNext(endHpVictory);
+        }
         if (damage < 0) damage = 1;
         if (apply) {
             damage = monster.doDarknessDamageBefore(damage);
@@ -9517,7 +9505,6 @@ public class Combat extends BaseContent {
 
     public function doPoisonDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
-        damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
 		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
         damage = poisonTypeDamageBonus(damage);
@@ -9529,14 +9516,6 @@ public class Combat extends BaseContent {
 			player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
 			player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 		}
-        if (damage == 0) MSGControllForEvasion = true;
-        if (monster.HP - damage <= monster.minHP()) {
-            /* No monsters use this perk, so it's been removed for now
-		if(monster.hasPerk(PerkLib.LastStrike)) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
-		else doNext(endHpVictory);
-		*/
-            doNext(endHpVictory);
-        }
         // Uma's Massage Bonuses
         var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
         if (sac) {
@@ -9544,7 +9523,12 @@ public class Combat extends BaseContent {
                 damage *= sac.value2;
             }
         }
+        damage *= doDamageReduction();
         damage = Math.round(damage);
+        if (damage == 0) MSGControllForEvasion = true;
+        if (monster.HP - damage <= monster.minHP()) {
+            doNext(endHpVictory);
+        }
         if (damage < 0) damage = 1;
         if (apply) {
             damage = monster.doPoisonDamageBefore(damage);
@@ -9568,7 +9552,6 @@ public class Combat extends BaseContent {
 
     public function doWindDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
-        damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
 		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
         damage = windTypeDamageBonus(damage);
@@ -9580,10 +9563,6 @@ public class Combat extends BaseContent {
 			player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
 			player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 		}
-        if (damage == 0) MSGControllForEvasion = true;
-        if (monster.HP - damage <= monster.minHP()) {
-            doNext(endHpVictory);
-        }
         // Uma's Massage Bonuses
         var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
         if (sac) {
@@ -9591,7 +9570,12 @@ public class Combat extends BaseContent {
                 damage *= sac.value2;
             }
         }
+        damage *= doDamageReduction();
         damage = Math.round(damage);
+        if (damage == 0) MSGControllForEvasion = true;
+        if (monster.HP - damage <= monster.minHP()) {
+            doNext(endHpVictory);
+        }
         if (damage < 0) damage = 1;
         if (apply) {
             damage = monster.doWindDamageBefore(damage);
@@ -9615,7 +9599,6 @@ public class Combat extends BaseContent {
 
     public function doWaterDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
-        damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
 		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
         damage = waterTypeDamageBonus(damage);
@@ -9627,14 +9610,6 @@ public class Combat extends BaseContent {
 			player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
 			player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 		}
-        if (damage == 0) MSGControllForEvasion = true;
-        if (monster.HP - damage <= monster.minHP()) {
-            /* No monsters use this perk, so it's been removed for now
-		if(monster.hasPerk(PerkLib.LastStrike)) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
-		else doNext(endHpVictory);
-		*/
-            doNext(endHpVictory);
-        }
         // Uma's Massage Bonuses
         var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
         if (sac) {
@@ -9642,7 +9617,12 @@ public class Combat extends BaseContent {
                 damage *= sac.value2;
             }
         }
+        damage *= doDamageReduction();
         damage = Math.round(damage);
+        if (damage == 0) MSGControllForEvasion = true;
+        if (monster.HP - damage <= monster.minHP()) {
+            doNext(endHpVictory);
+        }
         if (damage < 0) damage = 1;
         if (apply) {
             damage = monster.doWaterDamageBefore(damage);
@@ -9666,7 +9646,6 @@ public class Combat extends BaseContent {
 
     public function doEarthDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
-        damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
 		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
         damage = earthTypeDamageBonus(damage);
@@ -9678,10 +9657,6 @@ public class Combat extends BaseContent {
 			player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
 			player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 		}
-        if (damage == 0) MSGControllForEvasion = true;
-        if (monster.HP - damage <= monster.minHP()) {
-            doNext(endHpVictory);
-        }
         // Uma's Massage Bonuses
         var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
         if (sac) {
@@ -9689,7 +9664,12 @@ public class Combat extends BaseContent {
                 damage *= sac.value2;
             }
         }
+        damage *= doDamageReduction();
         damage = Math.round(damage);
+        if (damage == 0) MSGControllForEvasion = true;
+        if (monster.HP - damage <= monster.minHP()) {
+            doNext(endHpVictory);
+        }
         if (damage < 0) damage = 1;
         if (apply) {
             damage = monster.doEarthDamageBefore(damage);
@@ -9713,7 +9693,6 @@ public class Combat extends BaseContent {
 
     public function doAcidDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
-        damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
 		if (!ignoreDR) damage *= (monster.damageMagicalPercent() / 100);
         damage = acidTypeDamageBonus(damage);
@@ -9725,10 +9704,6 @@ public class Combat extends BaseContent {
 			player.takeLustDamage(Math.round(player.maxLust() * 0.005), true, false);
 			player.takeLustDamage((5 + int(player.effectiveSensitivity()) / 10), true);
 		}
-        if (damage == 0) MSGControllForEvasion = true;
-        if (monster.HP - damage <= monster.minHP()) {
-            doNext(endHpVictory);
-        }
         // Uma's Massage Bonuses
         var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
         if (sac) {
@@ -9736,6 +9711,11 @@ public class Combat extends BaseContent {
                 damage *= sac.value2;
             }
         }
+        if (damage == 0) MSGControllForEvasion = true;
+        if (monster.HP - damage <= monster.minHP()) {
+            doNext(endHpVictory);
+        }
+        damage *= doDamageReduction();
         damage = Math.round(damage);
         if (damage < 0) damage = 1;
         if (apply) {

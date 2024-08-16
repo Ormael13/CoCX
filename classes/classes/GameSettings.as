@@ -833,12 +833,17 @@ public class GameSettings extends BaseContent {
 	public function difficultySelectionMenu1():void {
 		clearOutput();
 		outputText("You can choose a prime difficulty to set how hard battles will be.\n");
+		if (flags[kFLAGS.PRIMARY_DIFFICULTY] <= 0) outputText("\n No opponent(s) stats modifiers. You can resume from bad-ends with penalties. No penatlies for too high wrath. Internal mutation negative effects will be triggered after accumulating 11 points in internal mutation score.");
+		else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 1) outputText("\n Opponent(s) take 2x less HP/Lust dmg, deal 20% more damage and gives ~20% more EXP. No penatlies for too high wrath. Bad-ends can ruin your game. Internal mutation negative effects will be triggered after accumulating 6 points in internal mutation score. (+1 diff modifier)");
+		else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 2) outputText("\n Opponent(s) take 5x less HP/Lust dmg, deal 50% more damage and gives ~50% more EXP. If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately. (+1 diff modifier)");
+		else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 3) outputText("\n Opponent(s) take 10x less HP/Lust dmg, deal more 100% damage and gives ~100% more EXP. If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately. (+1 diff modifier)");
+		else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 4) outputText("\n Opponent(s) take 25x less HP/Lust dmg, deal more 250% damage and gives ~150% more EXP. If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately. (+1 diff modifier)");
 		menu();
-		addButton(0, "-0-", chooseDifficulty1, 0);
-		addButton(1, "-1-", chooseDifficulty1, 1);
-		addButton(2, "-2-", chooseDifficulty1, 2);
-		addButton(3, "-3-", chooseDifficulty1, 3);
-		addButton(4, "-4-", chooseDifficulty1, 4);
+		if (flags[kFLAGS.PRIMARY_DIFFICULTY] != 0) addButton(0, "-0-", chooseDifficulty1, 0);
+		if (flags[kFLAGS.PRIMARY_DIFFICULTY] != 1) addButton(1, "-1-", chooseDifficulty1, 1);
+		if (flags[kFLAGS.PRIMARY_DIFFICULTY] != 2) addButton(2, "-2-", chooseDifficulty1, 2);
+		if (flags[kFLAGS.PRIMARY_DIFFICULTY] != 3) addButton(3, "-3-", chooseDifficulty1, 3);
+		if (flags[kFLAGS.PRIMARY_DIFFICULTY] != 4) addButton(4, "-4-", chooseDifficulty1, 4);
 		addButton(14, "Back", settingsScreenGameSettings);
 	}
 	public function chooseDifficulty1(difficulty:int = 0):void {
@@ -855,11 +860,11 @@ public class GameSettings extends BaseContent {
 		if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) outputText("\n 200x (bosses) and 25x (rest) multi for secondary stats for monsters. (+1 diff modifier)");
 		if (flags[kFLAGS.SECONDARY_STATS_SCALING] >= 4) outputText("\n 1000x (bosses) and 100x (rest) multi for secondary stats for monsters. (+1 diff modifier)");
 		menu();
-		addButton(0, "1x", chooseDifficulty2, 0);
-		addButton(1, "5x", chooseDifficulty2, 1);
-		addButton(2, "10x", chooseDifficulty2, 2);
-		addButton(3, "25x", chooseDifficulty2, 3);
-		addButton(4, "100x", chooseDifficulty2, 4);
+		if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 0) addButton(0, "1x", chooseDifficulty2, 0);
+		if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 1) addButton(1, "5x", chooseDifficulty2, 1);
+		if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 2) addButton(2, "10x", chooseDifficulty2, 2);
+		if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 3) addButton(3, "25x", chooseDifficulty2, 3);
+		if (flags[kFLAGS.SECONDARY_STATS_SCALING] != 4) addButton(4, "100x", chooseDifficulty2, 4);
 		addButton(14, "Back", settingsScreenGameSettings);
 	}
 	public function chooseDifficulty2(difficulty:int = 0):void {

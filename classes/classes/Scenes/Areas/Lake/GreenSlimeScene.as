@@ -147,7 +147,7 @@ private function serviceLowCorruptionHighLust():void {
 
 			//=====================================================
 			function smallF():void {
-				var x1:int = player.findCock(-1, -1, 30, "length");
+				var x1:int = player.findCock(-1, -1, 30, "length") + 1;
 				outputText("Eventually your own arousal becomes unbearable, and you reach down to work your own [cock "+x1+"] as well, massaging the monster's swollen, throbbing head with your other hand.  You gasp slightly as soon as you wrap your hand around your [cock "+x1+"], the creature's fluid making you exceptionally sensitive.  You moan in spite of yourself and start to thrust your hips a bit against your fist, feeling both yourself and the creature begin to throb harder and harder.  Before long you can hold out no longer, and feel your body racked by an orgasmic spasm, squeezing tightly with both hands as you blow your load onto the creature.  ");
 				//Herm orgasm text
 				if (player.vaginas.length > 0) {
@@ -157,7 +157,7 @@ private function serviceLowCorruptionHighLust():void {
 				sharedEnd();
 			}
 			function bigF():void {
-				var x1:int = player.findCock(1, 30, -1, "length");
+				var x1:int = player.findCock(1, 30, -1, "length") + 1;
 				outputText("Eventually your own arousal becomes unbearable, and you reach down to grope at yourself as well, working the monster's swollen, throbbing head with one of your hands.  Unable to grip it properly you moan a little and hold yourself down against the creature's skin, moving your hips back and forth to get off.  You begin to moan louder as the same greenish secretion that coats your hands begins to cover your [cock "+x1+"] as well, making it throb even harder than before.  Before long you gasp and double over as you orgasm, hips shaking as you come all over the creature.  ");
 				//Herm orgasm text
 				if (player.vaginas.length > 0) {
