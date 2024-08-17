@@ -30,7 +30,7 @@ use namespace CoC;
 		public var wanderer:Wanderer = new Wanderer();
 		//public var gorgonScene:GorgonScene = new GorgonScene();przenieść do deep desert potem
 		
-		public const discoverLevelOuter:int = 0;
+		public const discoverLevelOuter:int = 10;
 		public const areaLevelOuter:int = 1;
 		public function isDiscoveredOuter():Boolean {
 			return SceneLib.exploration.counters.desertOuter > 0;
@@ -54,7 +54,7 @@ use namespace CoC;
 		}
 		
 		
-		public const areaLevelInner:int = 10;
+		public const areaLevelInner:int = 22;
 		public function isDiscoveredInner():Boolean {
 			return SceneLib.exploration.counters.desertInner > 0;
 		}
@@ -252,13 +252,6 @@ use namespace CoC;
 					chance: desertChance,
 					when  : SceneLib.helScene.helSexualAmbushCondition
 				}, {
-					name: "mimic",
-					label : "Mimic",
-					kind : 'monster',
-					chance: 0.1,
-					when: fn.ifLevelMin(3),
-					call: curry(SceneLib.mimicScene.mimicTentacleStart, 1)
-				}, {
 					name  : "desertloot",
 					label : "Cake",
 					kind  : 'item',
@@ -282,11 +275,25 @@ use namespace CoC;
 				});
 			_desertInnerEncounter = Encounters.group("inner desert",
 				{
-					name: "gorgon",
-					label : "Gorgon",
+					name  : "werefoxFemale",
+					label : "Werefox (F)",
+					kind : 'monster',
+					day : false,
+					call  : SceneLib.werefoxScene.werefoxInnerDesertEncounter,
+					chance: 0.50
+				}, {
+					name: "mimic",
+					label : "Mimic",
+					kind : 'monster',
+					chance: 0.1,
+					when: fn.ifLevelMin(3),
+					call: curry(SceneLib.mimicScene.mimicTentacleStart, 1)
+				}, {
+					name: "anubis",
+					label : "Anubis",
 					kind  : 'monster',
-					when: fn.ifLevelMin(31),
-					call: gorgonScene.gorgonEncounter
+					night: false,
+					call: anubisScene.anubisEncounter
 				}, {
 					name  : "werefoxEFemale",
 					label : "E.Werefox (F)",
@@ -296,24 +303,17 @@ use namespace CoC;
 					call  : SceneLib.werefoxScene.werefoxOuterDeepDesertEncounter,
 					chance: 0.50
 				}, {
+					name: "gorgon",
+					label : "Gorgon",
+					kind  : 'monster',
+					when: fn.ifLevelMin(31),
+					call: gorgonScene.gorgonEncounter
+				}, {
 					name: "sandworm",
 					label : "Sandworm",
 					kind  : 'monster',
 					night: false,
 					call: sandWormScene.SandWormEncounter
-				}, {
-					name: "anubis",
-					label : "Anubis",
-					kind  : 'monster',
-					night: false,
-					call: anubisScene.anubisEncounter
-				}, {
-					name  : "werefoxFemale",
-					label : "Werefox (F)",
-					kind : 'monster',
-					day : false,
-					call  : SceneLib.werefoxScene.werefoxInnerDesertEncounter,
-					chance: 0.50
 				}, {
 					name: "etna",
 					label : "Etna",

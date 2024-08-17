@@ -59,7 +59,7 @@ import classes.internals.*;
 			}
 			addSoulforce(-cost());
 			outputText("The "+this.short+" infuse a bit of soulforce into a finger, light blue energy covering the tip. She draw a simple rune in the air, the energy from her finger dissipating into it. A moment later, the rune swells, energy forming into a small ball of "+type+". She motion, sending the ball flying toward you.");
-			var ElementDmg:Number = eBaseWisdomDamage();
+			var ElementDmg:Number = eBaseWisdomDamage() * 1.5;
 			ElementDmg *= SoulskillMod();
 			ElementDmg = Math.round(ElementDmg);
 			if (type == "fire") player.takeFireDamage(ElementDmg, true);
@@ -98,20 +98,20 @@ import classes.internals.*;
 			if (flags[kFLAGS.WEREFOX_EXTRAS] == 1) {
 				this.short = "werefox";
 				this.long = "Your opponent is a werefox. While halfway human in appearance its glowing green eyes, fennec ears, sharp fangs, three bushy tails and claw armed paws reminds you of its bestial nature.";
-				this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
+				this.createStatusEffect(StatusEffects.BonusVCapacity, 45, 0, 0, 0);
 				createBreastRow(Appearance.breastCupInverse("C"));
-				initStrTouSpeInte(55, 110, 91, 75);
-				initWisLibSensCor(125, 55, 72, 25);
+				initStrTouSpeInte(110, 230, 211, 175);
+				initWisLibSensCor(280, 155, 172, 25);
 				this.hips.type = Hips.RATING_CURVY;
 				this.butt.type = Butt.RATING_AVERAGE + 1;
-				this.weaponAttack = 10;
-				this.armorDef = 5;
-				this.armorMDef = 200;
+				this.weaponAttack = 40;
+				this.armorDef = 30;
+				this.armorMDef = 450;
 				this.tailCount = 3;
-				this.bonusHP = 1000;
-				this.bonusLust = 146;
-				this.bonusSoulforce = 1000;
-				this.level = 19;
+				this.bonusHP = 1500;
+				this.bonusLust = 360;
+				this.bonusSoulforce = 2000;
+				this.level = 33;
 				this.gems = rand(16) + 30;
 				this.drop = new WeightedDrop().
 						add(consumables.BAGOCA2,1).
@@ -121,20 +121,20 @@ import classes.internals.*;
 			if (flags[kFLAGS.WEREFOX_EXTRAS] == 2) {
 				this.short = "elder werefox";
 				this.long = "Your opponent is a elder werefox. While halfway human in appearance its glowing green eyes, fennec ears, sharp fangs, five bushy tails and claw armed paws reminds you of its bestial nature.";
-				this.createStatusEffect(StatusEffects.BonusVCapacity, 60, 0, 0, 0);
-				createBreastRow(Appearance.breastCupInverse("D"));
-				initStrTouSpeInte(75, 230, 191, 125);
-				initWisLibSensCor(250, 72, 172, 25);
-				this.hips.type = Hips.RATING_CURVY + 1;
-				this.butt.type = Butt.RATING_NOTICEABLE;
-				this.weaponAttack = 15;
-				this.armorDef = 10;
-				this.armorMDef = 400;
+				this.createStatusEffect(StatusEffects.BonusVCapacity, 75, 0, 0, 0);
+				createBreastRow(Appearance.breastCupInverse("E"));
+				initStrTouSpeInte(231, 455, 411, 315);
+				initWisLibSensCor(500, 232, 272, 25);
+				this.hips.type = Hips.RATING_CURVY + 2;
+				this.butt.type = Butt.RATING_NOTICEABLE + 1;
+				this.weaponAttack = 60;
+				this.armorDef = 50;
+				this.armorMDef = 750;
 				this.tailCount = 5;
-				this.bonusHP = 2500;
-				this.bonusLust = 287;
-				this.bonusSoulforce = 2500;
-				this.level = 43;
+				this.bonusHP = 3500;
+				this.bonusLust = 565;
+				this.bonusSoulforce = 5000;
+				this.level = 61;
 				this.gems = rand(24) + 45;
 				this.drop = new WeightedDrop().
 						add(consumables.BAGOCA3,1).

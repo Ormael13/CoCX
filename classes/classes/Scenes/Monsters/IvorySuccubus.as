@@ -80,7 +80,7 @@ public class IvorySuccubus extends AbstractSuccubus {
         this.special2 = seduceAttack;
         this.special3 = succubusBarrage;
 		this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
-		this.createPerk(PerkLib.OverMaxHP, 3, 0, 0, 0);
+		this.createPerk(PerkLib.OverMaxHP, 27, 0, 0, 0);
         checkMonster();
     }
 }

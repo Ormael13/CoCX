@@ -106,22 +106,22 @@ public class Mimic extends Monster {
 			this.level = 11;
         }
         if (type == 2 || type == 1) {
-            initStrTouSpeInte(30, 95, 5, 5);
-			initWisLibSensCor(45, 45, 45, 100);
-			this.weaponAttack = 20 + player.level;
+            initStrTouSpeInte(60, 200, 5, 20);
+			initWisLibSensCor(100, 95, 95, 100);
+			this.weaponAttack = 40 + player.level;
             this.armorName = "flesh";
-            this.armorDef = 0;
-			this.armorMDef = 0;
-			this.bonusHP = 50;
-			this.bonusLust = 96;
-			this.level = 6;
+            this.armorDef = 10;
+			this.armorMDef = 10;
+			this.bonusHP = 250;
+			this.bonusLust = 315;
+			this.level = 25;
         } else {
             initStrTouSpeInte(30, 95, 5, 5);
 			initWisLibSensCor(45, 45, 45, 100);
 			this.weaponAttack = 20 + player.level;
             this.armorName = "stone surface";
-            this.armorDef = 75;
-			this.armorMDef = 75;
+            this.armorDef = 180;
+			this.armorMDef = 180
 			this.bonusHP = 50;
 			this.bonusLust = 96;
 			this.level = 6;

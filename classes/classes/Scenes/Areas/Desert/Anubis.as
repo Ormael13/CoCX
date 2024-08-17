@@ -49,8 +49,9 @@ public class Anubis extends Monster
 		
 		public function anubisSoulDrain():void {
 			outputText("The anubis stretches h"+(this.hasVagina()?"er":"is")+" hand out and you feel your soul force being forcefully pulled out drop by drop!");
-			var dmgW1:Number = this.wis;
-			dmgW1 += wisdomscalingbonus() * 2;
+			var dmgW1:Number = this.wis + this.inte;
+			dmgW1 += wisdomscalingbonus();
+			dmgW1 += inteligencescalingbonus();
 			player.takeDarknessDamage(dmgW1);
 			this.HP += Math.round(this.maxHP() * 0.2);
 			if (this.HP > this.maxOverHP()) this.HP = this.maxOverHP();
@@ -65,7 +66,8 @@ public class Anubis extends Monster
 			outputText("The anubis stretches h"+(this.hasVagina()?"er":"is")+" hand out, delivering a red ray of death at you. Your body sustains substantial damage but you discover to your dismay that the ray also took away some of your hard-earned vitality and strength.");
 			createStatusEffect(StatusEffects.AbilityCooldown1, 6, 0, 0, 0);
 			var dmgW2:Number = this.weaponAttack * 3;
-			dmgW2 += wisdomscalingbonus() * 6;
+			dmgW2 += wisdomscalingbonus() * 3;
+			dmgW2 += inteligencescalingbonus() * 3;
 			player.takeDarknessDamage(dmgW2);
 			player.addCurse("str", 10,1);
 			player.addCurse("tou", 10,1);
@@ -105,21 +107,20 @@ public class Anubis extends Monster
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = 8*12+2;
-			//this.lowerBody = LowerBody.NAGA;
 			this.hairColor = "green";
 			this.hairLength = 16;
-			initStrTouSpeInte(21, 125, 50, 50);
-			initWisLibSensCor(125, 52, 43, 50);
+			initStrTouSpeInte(63, 260, 150, 264);
+			initWisLibSensCor(319, 152, 143, 70);
 			this.weaponName = "claws";
 			this.weaponVerb="claw-slash";
-			this.weaponAttack = 10;
+			this.weaponAttack = 40;
 			this.armorName = "skin";
-			this.armorDef = 5;
-			this.armorMDef = 60;
-			this.bonusHP = 1500;
-			this.bonusLust = 119;
+			this.armorDef = 40;
+			this.armorMDef = 280;
+			this.bonusHP = 2000;
+			this.bonusLust = 330;
 			this.lust = 30;
-			this.level = 24;
+			this.level = 39;
 			this.gems = rand(16) + 30;
 			this.drop = new WeightedDrop().
 					add(useables.BANDAGE,1).
@@ -127,7 +128,6 @@ public class Anubis extends Monster
 					add(weapons.JUDGE_S,2).
 					add(headjewelries.DEATHPR,2).
 					add(armors.DEATHPO,2);
-			//this.faceType = Face.SNAKE_FANGS;
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.LightningVulnerability, 0, 0, 0, 0);

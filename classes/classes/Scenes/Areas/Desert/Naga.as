@@ -135,17 +135,18 @@ public class Naga extends Monster
 			this.bodyColor = "mediterranean-toned";
 			this.hairColor = "brown";
 			this.hairLength = 16;
-			initStrTouSpeInte(38, 50, 55, 42);
-			initWisLibSensCor(50, 55, 55, 40);
+			initStrTouSpeInte(114, 150, 165, 90);
+			initWisLibSensCor(90, 85, 85, 30);
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
-			this.weaponAttack = 5;
+			this.weaponAttack = 35;
 			this.armorName = "scales";
-			this.armorDef = 10;
-			this.armorMDef = 5;
-			this.bonusLust = 119;
+			this.armorDef = 100;
+			this.armorMDef = 50;
+			this.bonusHP = 200;
+			this.bonusLust = 189;
 			this.lust = 30;
-			this.level = 9;
+			this.level = 19;
 			this.gems = rand(5) + 8;
 			this.abilities = [
 				{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[]},

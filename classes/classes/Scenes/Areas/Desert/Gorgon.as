@@ -148,18 +148,18 @@ public class Gorgon extends Monster
 			this.skin.growCoat(Skin.SCALES,{color:"green"});
 			this.hairColor = "green";
 			this.hairLength = 16;
-			initStrTouSpeInte(101, 145, 125, 85);
-			initWisLibSensCor(85, 82, 60, 40);
+			initStrTouSpeInte(311, 340, 319, 205);
+			initWisLibSensCor(205, 232, 210, 30);
 			this.weaponName = "claws";
 			this.weaponVerb="claw-slash";
-			this.weaponAttack = 41;
+			this.weaponAttack = 81;
 			this.armorName = "scales";
-			this.armorDef = 51;
-			this.armorMDef = 12;
-			this.bonusHP = 1000;
-			this.bonusLust = 173;
+			this.armorDef = 200;
+			this.armorMDef = 80;
+			this.bonusHP = 2000;
+			this.bonusLust = 486;
 			this.lust = 30;
-			this.level = 31;
+			this.level = 44;
 			this.gems = rand(26) + 40;
 			this.drop = new WeightedDrop().
 					add(null,1).

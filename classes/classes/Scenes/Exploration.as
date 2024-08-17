@@ -179,7 +179,7 @@ public class Exploration extends BaseContent implements SaveableState
 			return new ButtonData("Desert (O)", SceneLib.desert.exploreOuterDesert)
 					.hint("Visit the dry desert (outer part). "
 							+ "\n\nTimes explored: " + SceneLib.desert.timesExploredOuter())
-					.disableIf(!SceneLib.desert.isDiscoveredOuter(), "You need to 'Explore' Mareth more." +
+					.disableIf(!SceneLib.desert.isDiscoveredOuter(), "Discovered when using 'Explore' after finding Forest (O)." +
 							" (Lvl "+SceneLib.desert.discoverLevelOuter+"+)");
 		}
 		private function btnExploreDesertInner():ButtonData {

@@ -200,30 +200,23 @@ public class SandWorm extends Monster
 			this.hairColor = "pink";
 			this.hairLength = 15;
 			this.lowerBody = LowerBody.SANDWORM;
-			initStrTouSpeInte(120, 90, 30, 20);
-			initWisLibSensCor(30, 120, 45, 50);
+			initStrTouSpeInte(450, 420, 190, 190);
+			initWisLibSensCor(150, 450, 245, 50);
 			this.weaponName = "body";
 			this.weaponVerb="slam";
-			this.weaponAttack = 25;
+			this.weaponAttack = 300;
 			this.armorName = "chitin";
-			this.armorDef = 20;
-			this.armorMDef = 2;
-			this.bonusHP = 200;
-			this.bonusLust = 185;
+			this.armorDef = 1000;
+			this.armorMDef = 100;
+			this.bonusHP = 2000;
+			this.bonusLust = 752;
 			this.lust = 80;
-			this.lustVuln = .70;
-			this.level = 20;
+			this.lustVuln = .60;
+			this.level = 57;
 			this.gems = 5 + rand(5);
 			this.drop = new ChainedDrop(consumables.OVIELIX);
-			checkMonster();/*
-			initStrTouSpeInte(150, 120, 60, 40);
-			initWisLibSensCor(50, 200, 45, 50);
-			this.weaponAttack = 200;
-			this.bonusHP = 300;
-			this.bonusLust = 400;
-			this.lust = 285;
-			this.lustVuln = .60;
-			this.level = 40;*/
+			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			checkMonster();
 		}
 	}
 }

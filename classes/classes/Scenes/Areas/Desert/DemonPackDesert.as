@@ -105,18 +105,18 @@ public class DemonPackDesert extends Monster
 			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
-			initStrTouSpeInte(50, 30, 10, 5);
-			initWisLibSensCor(5, 50, 70, 100);
+			initStrTouSpeInte(110, 70, 20, 7);
+			initWisLibSensCor(7, 100, 120, 100);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 5;
+			this.weaponAttack = 50;
 			this.armorName = "demonic skin";
-			this.armorDef = 5;
-			this.armorMDef = 1;
+			this.armorDef = 50;
+			this.armorMDef = 10;
 			this.bonusHP = 20;
-			this.bonusLust = 129;
+			this.bonusLust = 236;
 			this.lust = 30;
-			this.level = 9;
+			this.level = 16;
 			this.gems = rand(30)+20;
 			this.randomDropChance = 0.1;
 			this.randomDropParams = {
@@ -137,7 +137,7 @@ public class DemonPackDesert extends Monster
 			this.horns.count = 2;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
-			this.createPerk(PerkLib.OverMaxHP, 9, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 16, 0, 0, 0);
 			checkMonster();
 		}
 
