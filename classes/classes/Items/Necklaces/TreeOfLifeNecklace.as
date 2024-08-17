@@ -13,7 +13,7 @@ package classes.Items.Necklaces
 		
 		public function TreeOfLifeNecklace() 
 		{
-			super("TreeLNe", "TreeLifeNecklace", "Tree of Life Necklace", "a Tree of Life Necklace", 0, 0, 500, "A necklace made of branches that symbolize tree of life with strong aura of life surrounding it. Rumored to be blessed by the god of life have amazing effect for any living being that would wear it. \n\nType: Jewelry (Necklace) \nBase value: 500 \nSpecial: +5%/-5% HP regeneration (others / undead)","Necklace");
+			super("TreeLNe", "TreeLifeNecklace", "Tree of Life Necklace", "a Tree of Life Necklace", 0, 0, 8000, "A necklace made of branches that symbolize tree of life with strong aura of life surrounding it. Rumored to be blessed by the god of life have amazing effect for any living being that would wear it. \n\nType: Jewelry (Necklace) \nBase value: 8,000 \nSpecial: +5%(+10%)/-5%(-10%) HP regeneration (below 0 HP)(others / undead), +5% diehard/overmax HP for living beings","Necklace");
 		}
 		
 		override public function afterEquip(doOutput:Boolean):void {

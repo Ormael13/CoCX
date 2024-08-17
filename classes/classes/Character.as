@@ -526,6 +526,30 @@ import classes.Scenes.NPCs.Forgefather;
 				min -= maxHP() * 0.05;
 				min -= (500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
+			if (headjewelryName == "Skulls Crown") {
+				min -= maxHP() * 0.04;
+				min -= (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			}
+			if (necklaceName == "Skull Necklace") {
+				min -= maxHP() * 0.05;
+				min -= (500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			}
+			if (hasStatusEffect(StatusEffects.BonusEffectsSkullSet)) {
+				min -= maxHP() * 0.01;
+				min -= (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			}
+			if (headjewelryName == "Tree of Life Crown") {
+				min -= maxHP() * 0.04;
+				min -= (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			}
+			if (necklaceName == "Tree of Life Necklace") {
+				min -= maxHP() * 0.05;
+				min -= (500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			}
+			if (hasStatusEffect(StatusEffects.BonusEffectsTreeOfLifeSet)) {
+				min -= maxHP() * 0.01;
+				min -= (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			}
 			if (hasPerk(PerkLib.SPSurvivalTrainingX)) {
 				var limit:Number = perkv1(PerkLib.SPSurvivalTrainingX) * 10;
 				var bonus:Number = Math.round((level - 1) / 3);

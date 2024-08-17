@@ -12315,37 +12315,49 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 			if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 5;
 			else maxPercentRegen -= 5;
 			if (player.HP < 1) {
-				
+				if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 5;
+				else maxPercentRegen -= 5;
 			}
 		}
         if (player.headJewelry == headjewelries.SKULLCR) {
 			if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 4;
 			else maxPercentRegen -= 4;
 			if (player.HP < 1) {
-				
+				if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 4;
+				else maxPercentRegen -= 4;
 			}
 		}
         if (player.hasStatusEffect(StatusEffects.BonusEffectsSkullSet)) {
 			if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 1;
 			else maxPercentRegen -= 1;
+			if (player.HP < 1) {
+				if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 1;
+				else maxPercentRegen -= 1;
+			}
 		}
         if (player.necklace == necklaces.TREELNE) {
 			if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen -= 5;
 			else maxPercentRegen += 5;
 			if (player.HP < 1) {
-				
+				if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen -= 5;
+				else maxPercentRegen += 5;
 			}
 		}
         if (player.headJewelry == headjewelries.TREELCR) {
 			if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen -= 4;
 			else maxPercentRegen += 4;
 			if (player.HP < 1) {
-				
+				if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen -= 4;
+				else maxPercentRegen += 4;
 			}
 		}
         if (player.hasStatusEffect(StatusEffects.BonusEffectsTreeOfLifeSet)) {
 			if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen -= 1;
 			else maxPercentRegen += 1;
+			if (player.HP < 1) {
+				if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen -= 1;
+				else maxPercentRegen += 1;
+			}
 		}
         if (player.hasPerk(PerkLib.LustyRegeneration)) maxPercentRegen += 0.5;
         if (player.hasPerk(PerkLib.LizanRegeneration)) maxPercentRegen += 1.5;
