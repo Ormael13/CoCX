@@ -23,11 +23,11 @@ public class HellHoundFireBallsMutation extends IMutationPerkType
             if (pTier >= 1){
                 descS = "Increase Hellfire damage and Cum production by 25%. +"+(5*pTier)+" Lib. ";
             }
-            if (pTier >= 2){
-                descS += "Increase fire damage by a percentage based on 0.5% of your cum production. ";
+            if (pTier == 2){
+                descS += "Increase fire damage by a percentage based on 1% of your current lust. ";
             }
             if (pTier >= 3){
-                descS += "Double the fire damage percentage bonus from cum production. ";
+                descS += "Increase fire damage by a percentage based on 2% of your current lust. ";
             }
             if (pTier >= 4){
                 descS += "Double your cum production. ";

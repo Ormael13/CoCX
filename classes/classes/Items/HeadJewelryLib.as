@@ -68,6 +68,7 @@ public final class HeadJewelryLib extends ItemConstants
 		public const EZEKIELC:HeadJewelry = new HeadJewelry("EzekielC", "EzekielCrown", "Ezekiel's Crown", "an Ezekiel's Crown", 0, 0, 400, "A crown rumored to be blessed by the Ezekiel himself. Is that real one or just another fake crown merchant sold you? (-4 to internal chimerical disposition)",HJT_CROWN);
 		public const JIANGCT:HeadJewelry = new HeadJewelry("JiangCT", "JiangshiCurseTag", "Jiangshi Curse Tag", "a Jiangshi Curse Tag", 0, 0, 400, "This item controls and alter your bodily function.", HJT_HELMET);
 		public const SKULLCR:HeadJewelry = new HeadJewelry("SkullsCr", "SkullsCrown", "Skulls Crown", "a Skull Crown", 0, 0, 400, "A crown made of skulls with strong aura of death surrounding it. Rumored to be blessed by the god of death have amazing effect for any undead being that would wear it. (+4%/-4% HP regeneration (undead / others))", HJT_CROWN);
+		public const TREELCR:HeadJewelry = new HeadJewelry("TreeLCr", "TreeLifeCrown", "Tree of Life Crown", "a Tree of Life Crown", 0, 0, 400, "A crown made of branches that symbolize tree of life with strong aura of life surrounding it. Rumored to be blessed by the god of life have amazing effect for any living being that would wear it. (+4%/-4% HP regeneration (others / undead))", HJT_CROWN);
 		public const GHORNAM:GoldenHornOrnament = new GoldenHornOrnament();
 		
 		public function HeadJewelryLib()

@@ -2688,4 +2688,4 @@ private function finishQuest():void {
 	} else doNext(recallWakeUp);
 }
 }
-}
+}

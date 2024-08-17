@@ -39,6 +39,7 @@ public final class WeaponLib extends ItemConstants
 				OCCULUS,
 				EXCALIB,
 				DEXCALI,
+				PARACEL,
 				ASTERIUS,
 				ELYSIUM
 			];
@@ -145,6 +146,7 @@ public final class WeaponLib extends ItemConstants
 				WT_EXOTIC, WSZ_SMALL)
 				.withEffect(IELib.Bleed, 45) as Weapon;
 		public const B_STAFF:Weapon = new BeautifulStaff();
+		public const PARACEL:Weapon = new Paracelsus();
 		public const B_SWORD:Weapon = new Weapon(
 				"B.Sword", "B.Sword", "beautiful sword", "a beautiful shining sword", "slash", 17, 560,
 				"This beautiful sword shines brilliantly in the light, showing the flawless craftsmanship of its blade.  The pommel and guard are heavily decorated in gold and brass.  Some craftsman clearly poured his heart and soul into this blade.",

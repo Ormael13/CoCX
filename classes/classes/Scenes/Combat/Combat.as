@@ -6918,11 +6918,11 @@ public class Combat extends BaseContent {
                     if ((player.weapon == weapons.HELRAIS || player.weapon == weapons.EBNYBLD) && player.cor < 90) dynStats("cor", 1);
                     //Selfpurifying and Lust lowering weapons
                     if ((player.weapon == weapons.LHSCYTH || player.weapon == weapons.NPHBLDE) && player.cor > 10) dynStats("cor", -1);
-                    if (player.weapon == weapons.EXCALIB || player.weapon == weapons.DEXCALI) {
+                    if (player.weapon == weapons.EXCALIB || player.weapon == weapons.DEXCALI || player.weapon == weapons.PARACEL) {
                         if (player.cor > 10) dynStats("cor", -0.3);
-                        var excaliburLustSelf:Number;
-                        excaliburLustSelf = (rand(2) == 0) ? 0 : 1;
-                        if (excaliburLustSelf > 0) dynStats("lus", -excaliburLustSelf);
+                        var legendaryBeautifulWeaponsLustSelf:Number;
+                        legendaryBeautifulWeaponsLustSelf = (rand(2) == 0) ? 0 : 1;
+                        if (legendaryBeautifulWeaponsLustSelf > 0) dynStats("lus", -legendaryBeautifulWeaponsLustSelf);
                     }
                     //Weapon Procs!
                     WeaponMeleeStatusProcs();
@@ -12319,6 +12319,14 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 			if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 4;
 			else maxPercentRegen -= 4;
 		}
+        if (player.necklace == necklaces.TREELNE) {
+			if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen -= 5;
+			else maxPercentRegen += 5;
+		}
+        if (player.headJewelry == headjewelries.TREELCR) {
+			if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen -= 4;
+			else maxPercentRegen += 4;
+		}
         if (player.hasPerk(PerkLib.LustyRegeneration)) maxPercentRegen += 0.5;
         if (player.hasPerk(PerkLib.LizanRegeneration)) maxPercentRegen += 1.5;
         if (player.perkv1(IMutationsLib.LizanMarrowIM) >= 1) maxPercentRegen += 0.5 * player.perkv1(IMutationsLib.LizanMarrowIM);
@@ -12453,6 +12461,8 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         if (player.weapon == weapons.BCLAWS && player.isRaceCached(Races.YUKIONNA)) maxRegen += 1;
         if (player.necklace == necklaces.SKULLNE && (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh))) maxRegen += 5;
 		if (player.headJewelry == headjewelries.SKULLCR && (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh))) maxRegen += 4;
+		if (player.necklace == necklaces.TREELNE && !player.hasPerk(PerkLib.Undeath) && !player.hasPerk(PerkLib.IcyFlesh)) maxRegen += 5;
+		if (player.headJewelry == headjewelries.TREELCR && !player.hasPerk(PerkLib.Undeath) && !player.hasPerk(PerkLib.IcyFlesh)) maxRegen += 4;
 		if (combat && player.headJewelry == headjewelries.CUNDKIN && player.HP < 1) maxRegen += 1;
         if (player.hasKeyItem("M.G.S. bracer") >= 0) maxRegen += 2;
 		if (player.hasPerk(PerkLib.Soulless)) {

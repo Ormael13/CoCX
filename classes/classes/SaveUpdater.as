@@ -2673,12 +2673,12 @@ public class SaveUpdater extends NPCAwareContent {
 					outputText("\n\nOnly today promotion for Wood Elfs. TWO perks in price of ONE!!!");
 					player.createPerk(PerkLib.CovenantOfTheSpirits, 0, 0, 0, 0);
 				}
-			}/*
+			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.54) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.54;
 				outputText("\n\n");
-				
-			}
+				if (!player.hasStatusEffect(StatusEffects.TempleOfTheDivineTracker2) && player.hasStatusEffect(StatusEffects.TempleOfTheDivineTracker)) player.createStatusEffect(StatusEffects.TempleOfTheDivineTracker2, 0, 0, 0, 0);
+			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.55) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.55;
 			}
