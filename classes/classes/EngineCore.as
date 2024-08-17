@@ -749,7 +749,7 @@ public class EngineCore {
     }
 
     /**
-     * Awards the achievement. Will display a blue text if achievement hasn't been earned.
+     * Awards the achievement. Will display a light blue text if achievement hasn't been earned.
      * @param    title The name of the achievement.
      * @param    achievement The achievement to be awarded.
      * @param    display Determines if achievement earned should be displayed.
@@ -761,7 +761,7 @@ public class EngineCore {
             if (CoC.instance.achievements[achievement] <= 0) {
                 CoC.instance.achievements[achievement] = 1;
                 if (nl && display) outputText("\n");
-                if (display) outputText("<b>[font-blue]Achievement unlocked: " + title + "[/font]</b>");
+                if (display) outputText("<b>[font-lblue]Achievement unlocked: " + title + "[/font]</b>");
                 if (nl2 && display) outputText("\n");
                 CoC.instance.saves.savePermObject(false); //Only save if the achievement hasn't been previously awarded.
             }

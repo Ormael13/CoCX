@@ -288,10 +288,10 @@ public class Changelog extends BaseContent
 			outputText("-Red Qipao armor been added to Victoria's Secre... ekhm Tailor Shop.\n");
 			outputText("-New legendary pure armor (Liadri): Spirit Flare Qipao - made from Blue/Green/Purple/Red Qipao. Increase fire damage from abilities by 200%. Increase unarmed strikes damage by 20%. When worn by a species with fire affinity stoke the inner fire granting 3% Regeneration. Misdirection.\n");
 			outputText("-Damage of all types when lvl diff between enemy and pc is 50+ changed form dropping right away form 2% at 49 lvl diff to 1 dmg at 50 lvl diff. Now it would drop to 1 point of dmg at 55+ lvl diff. For diff of 50-54 it would reduce dmg to 1%-0,0001%.\n");
-			outputText("-Added 2 more options for boss/champion/elite enemeis hp bonus and secondary monster stats.\n");
+			outputText("-Added 2 more options for boss/champion/elite enemies hp bonus and secondary monster stats.\n");
 			outputText("-Hellhounds Balls bonus to fire damage changed from 0.5% of cum production to 1% per 1% of current lust for Primitive stage and doubled for Evolved.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-When gaining new achievement text color been slight changed to be visible on white or black backgorund.\n");
+			outputText("-Training Dummy is so OP that can beat the same lvl PC on higher diff settings so his str was reduced to min possible values and for lvl 0 dummy it would have also begginer enemy tag. May the Xuviel no more sneak into pC camp to put his silver necklace on beaten by dummy PC ;)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -330,7 +330,8 @@ public class Changelog extends BaseContent
 			outputText("join any threesome scenes, Patchouli sex scenes will now know when she gained cock she could use, Pure JoJo anal sex sex scene cock parser going postal, trapped satyr sex scenes not giving sex XP or triger any related effects, Cum Cannon checking for cow not mino race, White-Faced One Birthright (Final Form) stat multi bonuses, Nadia recruitment endcounter bug msg, ");
 			outputText("one of Raphael scenes using variant for tentacle cocks that can go all way throu without having such cock(s), unable to gain plasma dmg from using fire buff on lightning weapon and vice versa, unable to use Blind during Draculina fight, rescue from bad end not clearing lingering status effects, Centaurium tf effect checking for wrong elf-like ears type, ");
 			outputText("Ascension: Transhumanism (Sen) perk not adding sensitivity, Selachimorphanthropy bonuses not changing with moon phases, inconsistencies for damage type dealt in melee/range base attacks and specials, flame blade bonus dmg from libido, combining fire and lightning damage on melee weapons, lust defeat text for non sentient constructs not using it own variant, ");
-			outputText("Abyssal Ink and Displacer Beast post fight scenes bypassing perm races transformation immunity, defeating pod plant by lust (which was before impossible) allowing to pick unlimited rapiers from it, Frog Girl 'forever ignore' option not disabling her encounters, aura not capping to 10% lust dmg per aura application in turn\n\n");
+			outputText("Abyssal Ink and Displacer Beast post fight scenes bypassing perm races transformation immunity, defeating pod plant by lust (which was before impossible) allowing to pick unlimited rapiers from it, Frog Girl 'forever ignore' option not disabling her encounters, aura not capping to 10% lust dmg per aura application in turn, Dark Slimes sex scenes does not count towards ");
+			outputText("recovering hunger with demonic hunger perk\n\n");
 			/*ostatni punkt changelogu
 			outputText("(Part 2/2) <b>Version 0.9a:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");

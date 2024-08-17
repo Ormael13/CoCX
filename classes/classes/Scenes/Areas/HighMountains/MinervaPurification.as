@@ -1467,8 +1467,7 @@ public class MinervaPurification extends BaseContent
 			outputText("\n\nDeciding to relax for a while after your sexual exertion, you curl up on the soft moss with Minerva, both of you just basking in the warmth that the spring gives off, and the softness of the moss, content with each other's presence. Unfortunately, you know you have to go; the call of your duty to this land is too great, and despite the comfort of this place, you must go. Pulling away from the siren you promise to return and visit her soon.");
 			//PC returns to camp.
 			player.sexReward("Default","Default",true,false);
-
-if (CoC.instance.inCombat) cleanupAfterCombat();
+			if (CoC.instance.inCombat) cleanupAfterCombat();
             else doNext(camp.returnToCampUseOneHour);
 		}
 		

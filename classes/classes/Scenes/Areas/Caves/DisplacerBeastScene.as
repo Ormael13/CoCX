@@ -70,7 +70,6 @@ public class DisplacerBeastScene extends BaseContent {
         }
         if (player.hasVagina()) outputText(" squirt");
         outputText(" in accordance with your breastgasm.\n\nThankfully the beast finally unplugs her tentacles from your tortured breasts, licking her lips in delight and done with her meal, teleports away from your view."+(player.blockingBodyTransformations()?"":" You lay there still lost in the feeling of your heaving chest as you lose consciousness.")+"\n\n");
-        
         player.sexReward("no", "Nipples");
         if (inDungeon) //EL check
             inDungeon = false;

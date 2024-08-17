@@ -14,7 +14,7 @@ package classes.Scenes.Camp
 		public function TrainingDummy(lvl:int = 0, lustImmune:Boolean = true, isGroup:Boolean = false) 
 		{
 			switch(lvl) {
-				case 4: initStrTouSpeInte(10, 300, 22, 10);
+				case 4: initStrTouSpeInte(5, 300, 22, 10);
 						initWisLibSensCor(10, 20, 5, 50);
 						this.bonusHP = 320000;
 						this.bonusLust = 177;
@@ -22,7 +22,7 @@ package classes.Scenes.Camp
 						this.armorMDef = 16000;
 						this.level = 150;
 						break;
-				case 3: initStrTouSpeInte(8, 200, 14, 10);
+				case 3: initStrTouSpeInte(4, 200, 14, 10);
 						initWisLibSensCor(10, 14, 5, 50);
 						this.bonusHP = 200000;
 						this.bonusLust = 109;
@@ -30,7 +30,7 @@ package classes.Scenes.Camp
 						this.armorMDef = 10000;
 						this.level = 90;
 						break;
-				case 2: initStrTouSpeInte(7, 150, 10, 10);
+				case 2: initStrTouSpeInte(3, 150, 10, 10);
 						initWisLibSensCor(10, 10, 5, 50);
 						this.bonusHP = 140000;
 						this.bonusLust = 75;
@@ -38,7 +38,7 @@ package classes.Scenes.Camp
 						this.armorMDef = 7000;
 						this.level = 60;
 						break;
-				case 1: initStrTouSpeInte(6, 100, 6, 10);
+				case 1: initStrTouSpeInte(2, 100, 6, 10);
 						initWisLibSensCor(10, 6, 5, 50);
 						this.bonusHP = 80000;
 						this.bonusLust = 41;
@@ -47,13 +47,14 @@ package classes.Scenes.Camp
 						this.level = 30;
 						break;
 				case 0:
-				default:initStrTouSpeInte(5, 50, 2, 10);
+				default:initStrTouSpeInte(1, 50, 2, 10);
 						initWisLibSensCor(10, 2, 5, 50);
 						this.bonusHP = 20000;
 						this.bonusLust = 7;
 						this.armorDef = 1000;
 						this.armorMDef = 1000;
 						this.level = 0;
+						this.createPerk(PerkLib.EnemyForBeginnersType, 0, 0, 0, 0);
 				break;
 			}
 			if (isGroup) {
