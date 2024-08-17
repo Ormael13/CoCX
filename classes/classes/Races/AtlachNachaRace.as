@@ -76,6 +76,7 @@ public class AtlachNachaRace extends Race{
 					"wis.mult": -0.10
 				})
 				.end()
+		
 		buildTier(20, "Half Atlach Nacha")
 				.buffs({
 					"str.mult": +1.40,

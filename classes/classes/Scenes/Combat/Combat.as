@@ -12314,18 +12314,38 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 		if (player.necklace == necklaces.SKULLNE) {
 			if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 5;
 			else maxPercentRegen -= 5;
+			if (player.HP < 1) {
+				
+			}
 		}
         if (player.headJewelry == headjewelries.SKULLCR) {
 			if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 4;
 			else maxPercentRegen -= 4;
+			if (player.HP < 1) {
+				
+			}
+		}
+        if (player.hasStatusEffect(StatusEffects.BonusEffectsSkullSet)) {
+			if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 1;
+			else maxPercentRegen -= 1;
 		}
         if (player.necklace == necklaces.TREELNE) {
 			if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen -= 5;
 			else maxPercentRegen += 5;
+			if (player.HP < 1) {
+				
+			}
 		}
         if (player.headJewelry == headjewelries.TREELCR) {
 			if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen -= 4;
 			else maxPercentRegen += 4;
+			if (player.HP < 1) {
+				
+			}
+		}
+        if (player.hasStatusEffect(StatusEffects.BonusEffectsTreeOfLifeSet)) {
+			if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen -= 1;
+			else maxPercentRegen += 1;
 		}
         if (player.hasPerk(PerkLib.LustyRegeneration)) maxPercentRegen += 0.5;
         if (player.hasPerk(PerkLib.LizanRegeneration)) maxPercentRegen += 1.5;
@@ -12404,8 +12424,32 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         if (player.armor == armors.BLIZZ_K && player.isRaceCached(Races.YUKIONNA)) maxRegen += 5;
         if (player.weapon == weapons.BCLAWS && player.isRaceCached(Races.YUKIONNA)) maxRegen += 1;
         if (player.weapon == weapons.SESPEAR) maxRegen += 2;
-		if ((player.necklace == necklaces.SKULLNE) && (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh))) maxRegen += 5;
-		if ((player.headJewelry == headjewelries.SKULLCR) && (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh))) maxRegen += 4;
+        if (player.necklace == necklaces.SKULLNE && (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh))) {
+			maxRegen += 5;
+			if (player.HP < 1) {
+				
+			}
+		}
+		if (player.headJewelry == headjewelries.SKULLCR && (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh))) {
+			maxRegen += 4;
+			if (player.HP < 1) {
+				
+			}
+		}
+        if (player.hasStatusEffect(StatusEffects.BonusEffectsSkullSet) && (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh))) maxRegen += 1;
+		if (player.necklace == necklaces.TREELNE && !player.hasPerk(PerkLib.Undeath) && !player.hasPerk(PerkLib.IcyFlesh)) {
+			maxRegen += 5;
+			if (player.HP < 1) {
+				
+			}
+		}
+		if (player.headJewelry == headjewelries.TREELCR && !player.hasPerk(PerkLib.Undeath) && !player.hasPerk(PerkLib.IcyFlesh)) {
+			maxRegen += 4;
+			if (player.HP < 1) {
+				
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.BonusEffectsTreeOfLifeSet) && !player.hasPerk(PerkLib.Undeath) && !player.hasPerk(PerkLib.IcyFlesh)) maxRegen += 1;
 		if (player.hasPerk(PerkLib.LizanRegeneration)) maxRegen += 1.5;
         if (player.perkv1(IMutationsLib.LizanMarrowIM) >= 1) maxRegen += 0.5 * player.perkv1(IMutationsLib.LizanMarrowIM);
         if (player.perkv1(IMutationsLib.LizanMarrowIM) == 3 && player.HP < (player.maxHP() * 0.25)) maxRegen += 1.5;
@@ -12459,10 +12503,6 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) maxRegen += 0.5;
         if (player.armor == armors.BLIZZ_K && player.isRaceCached(Races.YUKIONNA)) maxRegen += 5;
         if (player.weapon == weapons.BCLAWS && player.isRaceCached(Races.YUKIONNA)) maxRegen += 1;
-        if (player.necklace == necklaces.SKULLNE && (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh))) maxRegen += 5;
-		if (player.headJewelry == headjewelries.SKULLCR && (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh))) maxRegen += 4;
-		if (player.necklace == necklaces.TREELNE && !player.hasPerk(PerkLib.Undeath) && !player.hasPerk(PerkLib.IcyFlesh)) maxRegen += 5;
-		if (player.headJewelry == headjewelries.TREELCR && !player.hasPerk(PerkLib.Undeath) && !player.hasPerk(PerkLib.IcyFlesh)) maxRegen += 4;
 		if (combat && player.headJewelry == headjewelries.CUNDKIN && player.HP < 1) maxRegen += 1;
         if (player.hasKeyItem("M.G.S. bracer") >= 0) maxRegen += 2;
 		if (player.hasPerk(PerkLib.Soulless)) {

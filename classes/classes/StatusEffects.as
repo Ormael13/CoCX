@@ -278,6 +278,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const BlowjobOn:StatusEffectType                      = mk("BlowjobOn");
 		public static const BonusACapacity:StatusEffectType                 = mk("Bonus aCapacity");
 		public static const BonusEffectsNecroSet:StatusEffectType           = mk("Bonus Effects: Necro Set");
+		public static const BonusEffectsSkullSet:StatusEffectType           = mk("Bonus Effects: Skull Set");
+		public static const BonusEffectsTreeOfLifeSet:StatusEffectType      = mk("Bonus Effects: Tree of Life Set");
 		public static const BonusVCapacity:StatusEffectType                 = mk("Bonus vCapacity");
 		public static const BottledMilk:StatusEffectType                    = mk("Bottled Milk");
 		public static const BreastsMilked:StatusEffectType                  = mk("Breasts Milked");
@@ -1436,4 +1438,4 @@ import classes.StatusEffects.VampireThirstEffect;
 			return new StatusEffectType(id,CombatStatusEffect,1);
 		}
 	}
-}
+}

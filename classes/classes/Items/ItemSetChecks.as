@@ -83,5 +83,35 @@ public function unequipBestialBlademasterItemsSet():void {
 	if (count == 1) player.removePerk(PerkLib.BestialBlademaster);
 }
 
+public function equippedSkullSetItems():int {
+	var eSSI:int = 0;
+	if (player.necklace == necklaces.SKULLNE) eSSI++;
+	if (player.headJewelry == headjewelries.SKULLCR) eSSI++;
+	return eSSI;
+}
+public function equipSkullItemsSet():void {
+	var count:int = equippedSkullSetItems();
+	if (count == 2) player.createStatusEffect(StatusEffects.BonusEffectsSkullSet, 0, 0, 0, 0);
+}
+public function unequipSkullItemsSet():void {
+	var count:int = equippedSkullSetItems();
+	if (count == 1) player.removeStatusEffect(StatusEffects.BonusEffectsSkullSet);
+}
+
+public function equippedTreeOfLifeSetItems():int {
+	var eToLSI:int = 0;
+	if (player.necklace == necklaces.TREELNE) eToLSI++;
+	if (player.headJewelry == headjewelries.TREELCR) eToLSI++;
+	return eToLSI;
+}
+public function equipTreeOfLifeItemsSet():void {
+	var count:int = equippedTreeOfLifeSetItems();
+	if (count == 2) player.createStatusEffect(StatusEffects.BonusEffectsTreeOfLifeSet, 0, 0, 0, 0);
+}
+public function unequipTreeOfLifeItemsSet():void {
+	var count:int = equippedTreeOfLifeSetItems();
+	if (count == 1) player.removeStatusEffect(StatusEffects.BonusEffectsTreeOfLifeSet);
+}
+
 }
 }

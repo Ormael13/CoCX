@@ -295,7 +295,7 @@ public class Changelog extends BaseContent
 			outputText("-New necklace (by Ormael): Tree of Life Necklace - buyable at Felix in Journey to the East inn. Cost 50 spirit stones. +5%/-5% regeneration (others / undead)\n");
 			outputText("-New head jewelery/accesory/misc (by Ormael): Tree of Life Crown - buyable at Felix in Journey to the East inn. Cost 40 spirit stones. +4%/-4% regeneration (others / undead)\n");
 			outputText("-New pure legendary melee weapon (by Morgan): Paracelsus - obtainable by putting Beautiful Staff on restored Marae Altar and then taking it back.\n");
-			outputText("-\n");
+			outputText("-Skull and Tree of Life accesories now would give set bonus when applied both at the same time: +1% HP regeneration for undead/others and -1% HP regeneration for others / undead.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -329,6 +329,12 @@ public class Changelog extends BaseContent
 			outputText("-\n");//New tier 7 wisdom lvl-up perk: Kaiju No8. Req. Job: Tamer and 50+ wisdom. Effect: 8th kaiju joins your team of monsters.
 			outputText("-\n");//New mutation perk: Human Parathyroid Glands (Final Form). Req. Human Parathyroid Glands (Evolved) and lvl 90+. Effects: Increases self healing by 40 * level HP in combat and twice more out of combat. 8 * level HP Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Fixed bugs: Dracula/lina PC unable to find get ghoul if they not learned this as normal Vampire, unable to buy manual for 1st atk: f. swords, Arigean Princess PC not been fully immune to TF-ing like other perm races, Weresharks not having their stats changing according to moon phase or boosted during use of Crinos Shape, Phoenix TF adding mutagen penatly instead of stat curse, ");
 			outputText("Endless Rage draining 10x too much wrath per turn, Berzerker/Lustzerker still req. to be activated after they been activated as part of Asura Form activation, dormant state of wereraces 'blessings' increasing race score and not lowering it, Hinezumi Buring Blood IM accesable by Bunny race, returning from teleportation circle at 4th floor of river dungeon sending PC to ");
 			outputText("3rd floor teleportation circle room, perk allowing to always run away from enemy/ies been ignored in dungeons, unarmed/feral giving mastery gains for small weapons, 2 of 4 SF to Elemental Energy conversion options having wrong check for usable SF, using Fiery Band for calling Kiha to help fight... Kiha, Ceraph after update still not able to win using her super cool lust beam attack, ");
@@ -337,7 +343,7 @@ public class Changelog extends BaseContent
 			outputText("one of Raphael scenes using variant for tentacle cocks that can go all way throu without having such cock(s), unable to gain plasma dmg from using fire buff on lightning weapon and vice versa, unable to use Blind during Draculina fight, rescue from bad end not clearing lingering status effects, Centaurium tf effect checking for wrong elf-like ears type, ");
 			outputText("Ascension: Transhumanism (Sen) perk not adding sensitivity, Selachimorphanthropy bonuses not changing with moon phases, inconsistencies for damage type dealt in melee/range base attacks and specials, flame blade bonus dmg from libido, combining fire and lightning damage on melee weapons, lust defeat text for non sentient constructs not using it own variant, ");
 			outputText("Abyssal Ink and Displacer Beast post fight scenes bypassing perm races transformation immunity, defeating pod plant by lust (which was before impossible) allowing to pick unlimited rapiers from it, Frog Girl 'forever ignore' option not disabling her encounters, aura not capping to 10% lust dmg per aura application in turn, Dark Slimes sex scenes does not count towards ");
-			outputText("recovering hunger with demonic hunger perk\n\n");
+			outputText("recovering hunger with demonic hunger perk, Atlach Nacha locking corruption to 100 before PC get pernamently locked to this race\n\n");
 			/*ostatni punkt changelogu
 			outputText("(Part 2/2) <b>Version 0.9a:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -408,12 +414,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -453,8 +455,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
