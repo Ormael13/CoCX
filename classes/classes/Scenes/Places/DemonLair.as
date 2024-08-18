@@ -8,7 +8,6 @@ import classes.*;
 import classes.BodyParts.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Races.DemonRace;
-import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
 import classes.display.SpriteDb;
@@ -273,7 +272,10 @@ public class DemonLair extends BaseContent
                 player.ballSize = 1;
 			}
 			if (player.hasVagina()) transformations.VaginaDemonic().applyEffect(false);
-			if (!player.hasPerk(PerkLib.Soulless)) player.createPerk(PerkLib.Soulless, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.Soulless)) {
+				player.createPerk(PerkLib.Soulless, 0, 0, 0, 0);
+				player.npcsThatLeaveSoullessPC();
+			}
 			outputText("A breathtakingly beautiful woman with "+player.skinColor1+" skin stares back at you. She has a jaw-dropping face crowned by "+player.hairColor+" hair. She dons a pair of supple " + player.breastCup(0) + " sized breasts, which hypnotically seems to draw your stare down. Her body seems shaped in every way to tempt men yet what stands out is the horns, graceful bat-shaped wings and that long sinuous spaded tail of hers. Her eyes are slit like those of a fiend, staring back at you in troubled confusion. It takes you a full minute to realize this woman is actually you as you eye down what's drooling from your pussy.\n\n");
 			outputText("In a puddle of black fluids is a fairly sizeable purple gem that you proceed to pick up. A strange hunger takes hold of you and you swiftly gulp down the gem before a feeling of raw power courses through you. An understanding reaches your mind. You are [name], Champion of Ingnam, but you are also a succubus. Come to think of it… why are you even championing those idiots? They literally sent you through the portal to be enslaved and turned into a cum pump. The elders and the village should burn. ");
 			outputText("You realize that while your goals have diametrically changed, you are still you. You don’t exactly care for Ingnam anymore, what you care about now is to grow stronger, satisfy your deprived desire and own as many things as possible. Not to mention that you seem to have gained an insatiable desire for power that only the acquisition of more of those crystals can fulfill. You look back at Xuviel and ponder an important question.\n\n");
@@ -284,17 +286,6 @@ public class DemonLair extends BaseContent
 			outputText("After all, you want the demon to keep up on the game and never assume that he owns you completely so that you can get as many advantages from him as possible. Perhaps he could assist you in your quest? That’s without mentioning satisfying your urges, of course. Xuviel considers you for a moment, then laughs.\n\n");
 			outputText("\"<i>Ah, indeed, you make a fine succubus, [name], already looking for your own profit in this arrangement, however, you will swiftly go hungry without a man to feed from. Perhaps you should consider becoming my wife in full or at least make an alliance with me. I will offer you as much sex as your depraved heart desires, in exchange, I merely request you formally join my harem. I have many favors and gifts I’m willing to give you should you freely give yourself to me.</i>\"\n\n");
 			outputText("Now that’s an interesting deal. Hunting for food in the wild yields little interest to you, and indeed, having full access to Xuviel’s many resources and delicious dick could prove a profitable relationship.\n\n");
-			if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) {
-				player.removeStatusEffect(StatusEffects.JojoNightWatch);
-				player.removeStatusEffect(StatusEffects.PureCampJojo);
-				JojoScene.monk = 1;
-			}
-			if (flags[kFLAGS.AMILY_FOLLOWER] == 1) {
-				flags[kFLAGS.AMILY_FOLLOWER] = 0;
-				flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] = 1;
-				flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
-			}
-			if (flags[kFLAGS.KIHA_FOLLOWER] > 0) flags[kFLAGS.KIHA_CORRUPTION_BITCH] == 1;
 			player.addStatusValue(StatusEffects.MeetXuviel, 1, 1);
 			player.createStatusEffect(StatusEffects.MeetXuviel2, 0, 0, 0, 0);
 			endEncounter();

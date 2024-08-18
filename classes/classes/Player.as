@@ -45,6 +45,7 @@ import classes.Scenes.NPCs.AetherTwinsFollowers;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.Forgefather;
+import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.NPCs.LunaFollower;
 import classes.Scenes.NPCs.SophieFollowerScene;
 import classes.Scenes.NPCs.TyrantiaFollower;
@@ -7706,6 +7707,30 @@ use namespace CoC;
 			return pCFM;
 		}
 
+		public function npcsThatLeaveSoullessPC():void {
+			if (hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) {
+				removeStatusEffect(StatusEffects.JojoNightWatch);
+				removeStatusEffect(StatusEffects.PureCampJojo);
+				JojoScene.monk = 1;
+			}
+			if (flags[kFLAGS.AMILY_FOLLOWER] == 1) {
+				flags[kFLAGS.AMILY_FOLLOWER] = 0;
+				flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] = 1;
+				flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
+				if (hasStatusEffect(StatusEffects.CombatFollowerAmily)) removeStatusEffect(StatusEffects.CombatFollowerAmily);
+				if (flags[kFLAGS.PLAYER_COMPANION_1] == "Amily") flags[kFLAGS.PLAYER_COMPANION_1] = "";
+				if (flags[kFLAGS.PLAYER_COMPANION_2] == "Amily") flags[kFLAGS.PLAYER_COMPANION_2] = "";
+				if (flags[kFLAGS.PLAYER_COMPANION_3] == "Amily") flags[kFLAGS.PLAYER_COMPANION_3] = "";
+			}
+			if (flags[kFLAGS.KIHA_FOLLOWER] > 0) {
+				flags[kFLAGS.KIHA_CORRUPTION_BITCH] == 1;
+				if (hasStatusEffect(StatusEffects.CombatFollowerAmily)) removeStatusEffect(StatusEffects.CombatFollowerAmily);
+				if (flags[kFLAGS.PLAYER_COMPANION_1] == "Kiha") flags[kFLAGS.PLAYER_COMPANION_1] = "";
+				if (flags[kFLAGS.PLAYER_COMPANION_2] == "Kiha") flags[kFLAGS.PLAYER_COMPANION_2] = "";
+				if (flags[kFLAGS.PLAYER_COMPANION_3] == "Kiha") flags[kFLAGS.PLAYER_COMPANION_3] = "";
+			}
+		}
+
 		override public function modStats(dstr:Number, dtou:Number, dspe:Number, dinte:Number, dwis:Number, dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean):void {
 			//Easy mode cuts lust gains!
 			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 && dlust > 0 && scale) dlust /= 10;
@@ -7980,4 +8005,4 @@ use namespace CoC;
 		}
 		
 	}
-}
+}

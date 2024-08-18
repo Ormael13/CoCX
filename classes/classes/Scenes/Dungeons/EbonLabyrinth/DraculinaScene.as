@@ -204,6 +204,7 @@ public class DraculinaScene extends BaseContent {
 		player.createPerk(PerkLib.SoulDrinker, 0, 0, 0, 0);
         player.createPerk(PerkLib.TransformationImmunity2,8,0,0,0);
 		outputText("\n<b>Gained Perk: Transformation Immunity</b>\n\n");
+		player.npcsThatLeaveSoullessPC();
 		if (combat.inCombat) cleanupAfterCombatTFEvent();
 		else doNext(playerMenu);
     }

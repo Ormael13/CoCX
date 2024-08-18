@@ -175,7 +175,7 @@ public class Changelog extends BaseContent
 			outputText("-New Dark Ascension perk: The Dark Soul. You have acquired permanent power from the many souls you consumed in your previous timelines. Raise core stats cap by 10 per rank. Max Rank: 10.\n");
 			outputText("-New event perk: Soul Drinker. Gained by becoming Dracula/lina. Effects: Those creatures you defeat and drink from have parts of their soul stolen with their blood increasing your overall stats by 1% for each victim drained.\n");
 			outputText("-When studing Combat Manual in cabin can choose which stat it would rise.\n");
-			outputText("-Metamoph would use eityher Mana (PC with Soulless  perk) or SF (all other PC's). (Jtecx/Svalkash)\n");
+			outputText("-Metamoph would use either Mana (PC with Soulless  perk) or SF (all other PC's). (Jtecx/Svalkash)\n");
 			outputText("-New SH feature for preggo lovers - now you can speed up all game pregnancies without drinking tons of Ovi Elixirs! Event timer scaling included. (Svalkash)\n");
 			outputText("-Fixed repeating Exgartuan sleep-talking. Typos: 'mareth'->'Mareth'. Mimic made less annoying. SH: Ivory Succubus. (Svalkash)\n");
 			outputText("-PC with Soulless perk would loose access to Sky Poison Pearl and will soon enough make replacment storage item called Dimensional Pocket. Also some npc's like Pure Amily, Pure Jojo, Kiha would leave camp.\n");
@@ -295,8 +295,8 @@ public class Changelog extends BaseContent
 			outputText("-New necklace (by Ormael): Tree of Life Necklace - buyable at Felix in Journey to the East inn. Cost 800 spirit stones. +2%(+4%)/-2%(-4%) HP regeneration (below 0 HP)(others / undead), +5% diehard for living beings\n");
 			outputText("-New head jewelery/accesory/misc (by Ormael): Tree of Life Crown - buyable at Felix in Journey to the East inn. Cost 800 spirit stones. +2%(+4%)/-2%(-4%) HP regeneration (below 0 HP)(others / undead), +5% diehard for living beings\n");
 			outputText("-New pure legendary melee weapon (by Morgan): Paracelsus - obtainable by putting Beautiful Staff on restored Marae Altar and then taking it back.\n");
-			outputText("-Skull and Tree of Life accesories now would give set bonus when applied both at the same time: +1% HP (+2% below 0 HP) regeneration for undead/others and -2% HP (-4% below 0 HP) regeneration for others / undead, +2% diehard for others / undead.\n");
-			outputText("-\n");
+			outputText("-Skull and Tree of Life accesories now would give set bonus when applied both at the same time: +1% HP (+2% below 0 HP) regeneration for undead/others and -1% HP (-2% below 0 HP) regeneration for others / undead, +2% diehard for others / undead.\n");
+			outputText("-Because too much regeneration will kill you... wait mayb it was too much love? Anyway almost all item related effects that woudl increase maximum regeneration cap was removed.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

@@ -156,12 +156,12 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 			outputText("After that the other head stops looking around, baring its teeth at you. \"<i>If you not interested in buying anything, then get lost... we don't have all day.</i>\"\n\n");
 			menu();
 			addButton(3, necklaces.TREELNE.shortName, itemBuy, necklaces.TREELNE).hint("800 spirit stones");
-			addButton(4, headjewelries.TREELCR.shortName, itemBuy, headjewelries.TREELCR).hint("640 spirit stones");
+			addButton(4, headjewelries.TREELCR.shortName, itemBuy, headjewelries.TREELCR).hint("800 spirit stones");
 			addButton(5, necklaces.NECRONE.shortName, itemBuy, necklaces.NECRONE).hint("120 spirit stones");
 			addButton(6, weapons.NECROWA.shortName, itemBuy, weapons.NECROWA).hint("128 spirit stones");
 			addButton(7, shields.NECROSH.shortName, itemBuy, shields.NECROSH).hint("100 spirit stones");
 			addButton(8, necklaces.SKULLNE.shortName, itemBuy, necklaces.SKULLNE).hint("800 spirit stones");
-			addButton(9, headjewelries.SKULLCR.shortName, itemBuy, headjewelries.SKULLCR).hint("640 spirit stones");
+			addButton(9, headjewelries.SKULLCR.shortName, itemBuy, headjewelries.SKULLCR).hint("800 spirit stones");
 			addButton(10, necklaces.EZEKIELN.shortName, itemBuy, necklaces.EZEKIELN).hint("50 spirit stones");
 			addButton(11, headjewelries.EZEKIELC.shortName, itemBuy, headjewelries.EZEKIELC).hint("40 spirit stones");
 			addButton(12, jewelries.EZEKIELS.shortName, itemBuy, jewelries.EZEKIELS).hint("10 spirit stones");

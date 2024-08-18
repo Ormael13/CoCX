@@ -8326,7 +8326,6 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			if (!player.hasStatusEffect(StatusEffects.LunaWasCaugh)) player.createStatusEffect(StatusEffects.LunaWasCaugh, 1, 0, 0, 0);
 			else player.addStatusValue(StatusEffects.LunaWasCaugh, 1, 1);
 			if (player.statusEffectv1(StatusEffects.LunaWasCaugh) == 3) outputText("<b>That's it, you're sure of it now, it's all Luna's doing!</b>\n\n");
-
 			doNext(playerMenu);
 		}
 	}

@@ -12431,37 +12431,6 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 
     public function maximumRegeneration():Number {
         var maxRegen:Number = 2;
-		if (player.armor == armors.NURSECL) maxRegen += 0.5;
-		if (player.armor == armors.SFLAREQ && player.hasPerk(PerkLib.FireAffinity)) maxRegen += 3;
-        if (player.armor == armors.BLIZZ_K && player.isRaceCached(Races.YUKIONNA)) maxRegen += 5;
-        if (player.weapon == weapons.BCLAWS && player.isRaceCached(Races.YUKIONNA)) maxRegen += 1;
-        if (player.weapon == weapons.SESPEAR) maxRegen += 2;
-        if (player.necklace == necklaces.SKULLNE && (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh))) {
-			maxRegen += 5;
-			if (player.HP < 1) {
-				
-			}
-		}
-		if (player.headJewelry == headjewelries.SKULLCR && (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh))) {
-			maxRegen += 4;
-			if (player.HP < 1) {
-				
-			}
-		}
-        if (player.hasStatusEffect(StatusEffects.BonusEffectsSkullSet) && (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh))) maxRegen += 1;
-		if (player.necklace == necklaces.TREELNE && !player.hasPerk(PerkLib.Undeath) && !player.hasPerk(PerkLib.IcyFlesh)) {
-			maxRegen += 5;
-			if (player.HP < 1) {
-				
-			}
-		}
-		if (player.headJewelry == headjewelries.TREELCR && !player.hasPerk(PerkLib.Undeath) && !player.hasPerk(PerkLib.IcyFlesh)) {
-			maxRegen += 4;
-			if (player.HP < 1) {
-				
-			}
-		}
-		if (player.hasStatusEffect(StatusEffects.BonusEffectsTreeOfLifeSet) && !player.hasPerk(PerkLib.Undeath) && !player.hasPerk(PerkLib.IcyFlesh)) maxRegen += 1;
 		if (player.hasPerk(PerkLib.LizanRegeneration)) maxRegen += 1.5;
         if (player.perkv1(IMutationsLib.LizanMarrowIM) >= 1) maxRegen += 0.5 * player.perkv1(IMutationsLib.LizanMarrowIM);
         if (player.perkv1(IMutationsLib.LizanMarrowIM) == 3 && player.HP < (player.maxHP() * 0.25)) maxRegen += 1.5;
@@ -12493,14 +12462,12 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 			if (player.perkv1(IMutationsLib.HydraBloodIM) >= 1) maxRegen += 1 * player.perkv1(IMutationsLib.HydraBloodIM);
 		}
 		if (player.hasPerk(PerkLib.TrollRegeneration) && !player.hasStatusEffect(StatusEffects.TrollRegenerationDisabled)) maxRegen += 6;
-        if (isNearWater() && (player.hasPerk(PerkLib.AquaticAffinity) || player.hasPerk(PerkLib.AffinityUndine)) && player.necklaceName == "Magic coral and pearl necklace") maxRegen += 1;
         //if (player.hasStatusEffect(StatusEffects.GnomeHomeBuff) && player.statusEffectv1(StatusEffects.GnomeHomeBuff) == 1) maxRegen += 15;
 		if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator) && !player.hasStatusEffect(StatusEffects.WereraceRegenerationDisabled)) {
 			if (player.perkv1(IMutationsLib.FerasBirthrightIM) >= 3) maxRegen += 2;
 			maxRegen += 2;
 		}
-		if (player.hasPerk(PerkLib.NaturalRecovery) && player.shield.isNothing && player.weapon.isNothing && (player.isNaked() || player.armor.hasTag(ItemConstants.A_REVEALING))) maxRegen += 2;
-        if (player.hasStatusEffect(StatusEffects.SecondWindRegen)) maxRegen += 5;
+		if (player.hasStatusEffect(StatusEffects.SecondWindRegen)) maxRegen += 5;
         if (player.hasStatusEffect(StatusEffects.Cauterize)) {
             maxRegen += 1.5;
             if (player.perkv1(IMutationsLib.HinezumiBurningBloodIM) >= 1) maxRegen += 0.5;
@@ -12513,10 +12480,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) maxRegen += 0.5;
         if (player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) maxRegen += 0.5;
         if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) maxRegen += 0.5;
-        if (player.armor == armors.BLIZZ_K && player.isRaceCached(Races.YUKIONNA)) maxRegen += 5;
-        if (player.weapon == weapons.BCLAWS && player.isRaceCached(Races.YUKIONNA)) maxRegen += 1;
 		if (combat && player.headJewelry == headjewelries.CUNDKIN && player.HP < 1) maxRegen += 1;
-        if (player.hasKeyItem("M.G.S. bracer") >= 0) maxRegen += 2;
 		if (player.hasPerk(PerkLib.Soulless)) {
 			maxRegen += 1;
 			maxRegen *= 2;

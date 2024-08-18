@@ -8,7 +8,6 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
 import classes.Races.DemonRace;
 import classes.Scenes.Dungeons.Factory.*;
-import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Metamorph;
 import classes.display.SpriteDb;
 import classes.lists.Gender;
@@ -1675,17 +1674,7 @@ use namespace CoC;
 			if (player.hasVagina()) transformations.VaginaDemonic().applyEffect(false);
 			outputText("\n<b>Gained Perk: Soulless!</b> "+PerkLib.Soulless.desc());
 			player.createPerk(PerkLib.Soulless, 0, 0, 0, 0);
-			if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) {
-				player.removeStatusEffect(StatusEffects.JojoNightWatch);
-				player.removeStatusEffect(StatusEffects.PureCampJojo);
-				JojoScene.monk = 1;
-			}
-			if (flags[kFLAGS.AMILY_FOLLOWER] == 1) {
-				flags[kFLAGS.AMILY_FOLLOWER] = 0;
-				flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] = 1;
-				flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
-			}
-			if (flags[kFLAGS.KIHA_FOLLOWER] > 0) flags[kFLAGS.KIHA_CORRUPTION_BITCH] == 1;
+			player.npcsThatLeaveSoullessPC();
 			if (player.level < 25) inventory.takeItem(consumables.LETHITE, playerMenu);
 			else if (player.level < 50) inventory.takeItem(consumables.LETH1TE, playerMenu);
 			else if (player.level < 75) inventory.takeItem(consumables.LETH2TE, playerMenu);

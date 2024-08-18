@@ -29,7 +29,6 @@ import classes.BodyParts.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.MerchantMenu;
 import classes.Scenes.Camp.Garden;
-import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Crafting;
 import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
@@ -1370,17 +1369,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 					if (player.hasVagina()) transformations.VaginaDemonic().applyEffect(false);
 					outputText("\n<b>Gained Perk: Soulless!</b> "+PerkLib.Soulless.desc());
 					player.createPerk(PerkLib.Soulless, 0, 0, 0, 0);
-					if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) {
-						player.removeStatusEffect(StatusEffects.JojoNightWatch);
-						player.removeStatusEffect(StatusEffects.PureCampJojo);
-						JojoScene.monk = 1;
-					}
-					if (flags[kFLAGS.AMILY_FOLLOWER] == 1) {
-						flags[kFLAGS.AMILY_FOLLOWER] = 0;
-						flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] = 1;
-						flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
-					}
-					if (flags[kFLAGS.KIHA_FOLLOWER] > 0) flags[kFLAGS.KIHA_CORRUPTION_BITCH] == 1;
+					player.npcsThatLeaveSoullessPC();
 					sharedEnd();
 				}
 				else {
