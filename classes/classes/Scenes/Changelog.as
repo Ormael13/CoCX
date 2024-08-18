@@ -72,8 +72,8 @@ public class Changelog extends BaseContent
 			outputText("-New melee weapon (by Lord Shadeogorath): Volcanic Gravehammer - pulled from unnamed grave at ashlands. Base atk is 160. It's massive mace/hammer type low grade wrath weapon. Normaly it deal 80% of physical dmg and 20% fire dmg. When using charge weapon it will deal 100% fire damage and have 10% to apply Burn DoT after critical hit.\n");
 			outputText("-New melee weapon (by Liadri): Machine Spear - craftable at goblin workshop (3 metal pieces, 200 nails, 1 energy core, 2 mechanisms and BP). Cost 2720 gems, have 19 atk, have 100% armor penetration and increases critical damage by +25%\n");
 			outputText("-New range weapon (by Liadri): Sagittarius Baneful Great Bow - obtained by finding it at Plains. 260 atk, costing 13000 gems, no accuracy penalty, is low-grade wrath weapon, can't be unequiped normal way and would require visting NPC that can help uncurse items. Similary to Tome of Imps would gradualy change PC into male/herm centuar.\n");
-			outputText("-New necklace (by Ormael): Skull Necklace - buyable at Felix in Journey to the East inn. Cost 800 spirit stones. +5%(+10%)/-5%(-10%) HP regeneration (below 0 HP)(undead / others), +5% diehard/overmax HP for undead\n");
-			outputText("-New head jewelery/accesory/misc (by Ormael): Skull Crown - buyable at Felix in Journey to the East inn. Cost 640 spirit stones. +4%(+8%)/-4%(-8%) HP regeneration (below 0 HP)(undead / others), +4% diehard/overmax HP for undead\n");
+			outputText("-New necklace (by Ormael): Skull Necklace - buyable at Felix in Journey to the East inn. Cost 800 spirit stones. +2%(+4%)/-2%(-4%) HP regeneration (below 0 HP)(undead / others), +5% diehard for undead\n");
+			outputText("-New head jewelery/accesory/misc (by Ormael): Skull Crown - buyable at Felix in Journey to the East inn. Cost 800 spirit stones. +2%(+4%)/-2%(-4%) HP regeneration (below 0 HP)(undead / others), +5% diehard for undead\n");
 			outputText("-New flying sword: Moonlight Duo - combined from two Moonlight swords. Cost 160 spirit stones. Base atk is 16. It's classified as Small flying sword (set of 2). Increase chance of bleed effect by 15%. \n");
 			outputText("-New flying sword: Moonlight Quartet - combined from two Moonlight Duo sword sets. Cost 320 spirit stones. Base atk is 32. It's classified as Small flying sword (set of 4). Increase chance of bleed effect by 15%.\n");
 			outputText("-New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies. Using this item will turn PC into troll. Troll bonuses at 10 pts in racial score (scalable): +30% to Str multi, +30% to Tou multi, +20% to Spr multi, +20% to Int multi, +60% to Wis multi, +20 to max tone cap, +50 to max satiety.\n");
@@ -292,10 +292,10 @@ public class Changelog extends BaseContent
 			outputText("-Hellhounds Balls bonus to fire damage changed from 0.5% of cum production to 1% per 1% of current lust for Primitive stage and doubled for Evolved.\n");
 			outputText("-When gaining new achievement text color been slight changed to be visible on white or black backgorund.\n");
 			outputText("-Training Dummy is so OP that can beat the same lvl PC on higher diff settings so his str was reduced to min possible values and for lvl 0 dummy it would have also begginer enemy tag. May the Xuviel no more sneak into pC camp to put his silver necklace on beaten by dummy PC ;)\n");
-			outputText("-New necklace (by Ormael): Tree of Life Necklace - buyable at Felix in Journey to the East inn. Cost 800 spirit stones. +5%(+10%)/-5%(-10%) HP regeneration (below 0 HP)(others / undead), +5% diehard/overmax HP for living beings\n");
-			outputText("-New head jewelery/accesory/misc (by Ormael): Tree of Life Crown - buyable at Felix in Journey to the East inn. Cost 640 spirit stones. +4%(+8%)/-4%(-8%) HP regeneration (below 0 HP)(others / undead), +4% diehard/overmax HP for living beings\n");
+			outputText("-New necklace (by Ormael): Tree of Life Necklace - buyable at Felix in Journey to the East inn. Cost 800 spirit stones. +2%(+4%)/-2%(-4%) HP regeneration (below 0 HP)(others / undead), +5% diehard for living beings\n");
+			outputText("-New head jewelery/accesory/misc (by Ormael): Tree of Life Crown - buyable at Felix in Journey to the East inn. Cost 800 spirit stones. +2%(+4%)/-2%(-4%) HP regeneration (below 0 HP)(others / undead), +5% diehard for living beings\n");
 			outputText("-New pure legendary melee weapon (by Morgan): Paracelsus - obtainable by putting Beautiful Staff on restored Marae Altar and then taking it back.\n");
-			outputText("-Skull and Tree of Life accesories now would give set bonus when applied both at the same time: +1% HP (+2% below 0 HP) regeneration for undead/others and -1% HP (-2% below 0 HP) regeneration for others / undead, +1% diehard/overmax HP for others / undead.\n");
+			outputText("-Skull and Tree of Life accesories now would give set bonus when applied both at the same time: +1% HP (+2% below 0 HP) regeneration for undead/others and -2% HP (-4% below 0 HP) regeneration for others / undead, +2% diehard for others / undead.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -317,10 +317,10 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
-			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Lord Shadeogorath) (Furrin Gok) (khovel) (Chibizs) (Svalkash) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Edward Darksong)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New tier 4 wisdom lvl-up perk: ???. Req. Fourth Tamer of the Apocalypse perk and 125+ wisdom. Effect: 5th slot
 			outputText("-\n");//New tier ? wisdom lvl-up perk: Apes Together Strong. Req. ??? perk and ???+ wisdom. Effect: allow exchange single monsters variants > group monsters variants
@@ -329,11 +329,11 @@ public class Changelog extends BaseContent
 			outputText("-\n");//New tier 7 wisdom lvl-up perk: Kaiju No8. Req. Job: Tamer and 50+ wisdom. Effect: 8th kaiju joins your team of monsters.
 			outputText("-\n");//New mutation perk: Human Parathyroid Glands (Final Form). Req. Human Parathyroid Glands (Evolved) and lvl 90+. Effects: Increases self healing by 40 * level HP in combat and twice more out of combat. 8 * level HP Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
+			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Lord Shadeogorath) (Furrin Gok) (khovel) (Chibizs)
+			outputText("-\n");// (Svalkash) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Edward Darksong)
 			outputText("-\n");
 			outputText("-Fixed bugs: Dracula/lina PC unable to find get ghoul if they not learned this as normal Vampire, unable to buy manual for 1st atk: f. swords, Arigean Princess PC not been fully immune to TF-ing like other perm races, Weresharks not having their stats changing according to moon phase or boosted during use of Crinos Shape, Phoenix TF adding mutagen penatly instead of stat curse, ");
 			outputText("Endless Rage draining 10x too much wrath per turn, Berzerker/Lustzerker still req. to be activated after they been activated as part of Asura Form activation, dormant state of wereraces 'blessings' increasing race score and not lowering it, Hinezumi Buring Blood IM accesable by Bunny race, returning from teleportation circle at 4th floor of river dungeon sending PC to ");

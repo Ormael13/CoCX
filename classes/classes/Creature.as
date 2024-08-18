@@ -903,13 +903,7 @@ public class Creature extends Utils
 			if (perkv1(IMutationsLib.FerasBirthrightIM) >= 4) maxOver2 += 0.2;
 			if (perkv1(IMutationsLib.HumanBonesIM) >= 4) maxOver2 += 0.1;
 			if (hasPerk(PerkLib.Soulless)) maxOver2 += (0.01 * level);
-			if (headjewelryName == "Skulls Crown") maxOver2 += 0.04;
-			if (necklaceName == "Skull Necklace") maxOver2 += 0.05;
-			if (hasStatusEffect(StatusEffects.BonusEffectsSkullSet)) maxOver2 += 0.01;
-			if (headjewelryName == "Tree of Life Crown") maxOver2 += 0.04;
-			if (necklaceName == "Tree of Life Necklace") maxOver2 += 0.05;
-			if (hasStatusEffect(StatusEffects.BonusEffectsTreeOfLifeSet)) maxOver2 += 0.01;
-			maxOver *= maxOver2;//~280%
+			maxOver *= maxOver2;//~270%
 			maxOver = Math.round(maxOver);
 			return Math.min(54999999,maxOver);
 		}

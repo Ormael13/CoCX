@@ -12312,19 +12312,19 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         }
         if (player.weapon == weapons.SESPEAR) maxPercentRegen += 2;
 		if (player.necklace == necklaces.SKULLNE) {
-			if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 5;
-			else maxPercentRegen -= 5;
+			if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 2;
+			else maxPercentRegen -= 2;
 			if (player.HP < 1) {
-				if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 5;
-				else maxPercentRegen -= 5;
+				if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 2;
+				else maxPercentRegen -= 2;
 			}
 		}
         if (player.headJewelry == headjewelries.SKULLCR) {
-			if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 4;
-			else maxPercentRegen -= 4;
+			if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 2;
+			else maxPercentRegen -= 2;
 			if (player.HP < 1) {
-				if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 4;
-				else maxPercentRegen -= 4;
+				if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 2;
+				else maxPercentRegen -= 2;
 			}
 		}
         if (player.hasStatusEffect(StatusEffects.BonusEffectsSkullSet)) {
@@ -12336,19 +12336,19 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
 			}
 		}
         if (player.necklace == necklaces.TREELNE) {
-			if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen -= 5;
-			else maxPercentRegen += 5;
+			if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen -= 2;
+			else maxPercentRegen += 2;
 			if (player.HP < 1) {
-				if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen -= 5;
-				else maxPercentRegen += 5;
+				if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen -= 2;
+				else maxPercentRegen += 2;
 			}
 		}
         if (player.headJewelry == headjewelries.TREELCR) {
-			if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen -= 4;
-			else maxPercentRegen += 4;
+			if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen -= 2;
+			else maxPercentRegen += 2;
 			if (player.HP < 1) {
-				if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen -= 4;
-				else maxPercentRegen += 4;
+				if (player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen -= 2;
+				else maxPercentRegen += 2;
 			}
 		}
         if (player.hasStatusEffect(StatusEffects.BonusEffectsTreeOfLifeSet)) {
