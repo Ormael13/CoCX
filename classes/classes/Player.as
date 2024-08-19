@@ -6097,7 +6097,7 @@ use namespace CoC;
 				removeStatusEffect(StatusEffects.Minimise);
 			}
 			if(hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
-				dynStats("spe", -statusEffectv2(StatusEffects.UnderwaterCombatBoost), "scale", false);
+				statStore.removeBuffs("UnderwaterCombatBoost");
 				removeStatusEffect(StatusEffects.UnderwaterCombatBoost);
 			}
 			if(hasStatusEffect(StatusEffects.UnderwaterAndIgnis)) {

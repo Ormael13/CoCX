@@ -14766,6 +14766,13 @@ public function ScyllaSqueeze():void {
     outputText(", leaving [monster him] short of breath. You can feel it in your tentacles as [monster his] struggles intensify. \n\n[Themonster] takes ");
     doPhysicalDamage(damage, true, true);
     outputText(" damage.");
+	if (player.perkv1(IMutationsLib.ScyllaInkGlandsIM) >= 4 && player.isKraken()) {
+		if (monster.hasStatusEffect(StatusEffects.CombatWounds)) {
+			monster.addStatusValue(StatusEffects.CombatWounds, 1, 5);
+			if (monster.statusEffectv1(StatusEffects.CombatWounds) > 80) monster.changeStatusValue(StatusEffects.CombatWounds, 1, 80);
+		}
+		else monster.createStatusEffect(StatusEffects.CombatWounds, 5, 0, 0, 0);
+	}
     //Enemy faints -
     if (monster.HP <= monster.minHP()) {
         outputText("\n\nYou can feel [themonster]'s life signs beginning to fade, and before you crush all the life from [monster him], you let go, dropping [monster him] to the floor, unconscious but alive.  In no time, [monster his]'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ");

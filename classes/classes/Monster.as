@@ -397,6 +397,7 @@ import classes.Scenes.Combat.CombatAbilities;
 			if (perkv1(IMutationsLib.FerasBirthrightIM) >= 4) maxOver2 += 0.2;
 			maxOver *= maxOver2;//~290%
 			if (hasStatusEffect(StatusEffects.CorpseExplosion)) maxOver *= (1 - (0.2 * statusEffectv1(StatusEffects.CorpseExplosion)));
+			if (hasStatusEffect(StatusEffects.CombatWounds)) maxOver *= (1 - (0.01 * statusEffectv1(StatusEffects.CombatWounds)));
 			maxOver = Math.round(maxOver);
 			return maxOver;
 		}
@@ -2378,7 +2379,7 @@ import classes.Scenes.Combat.CombatAbilities;
 					if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
 					removeStatusEffect(StatusEffects.ConstrictedScylla);
 				}
-				addStatusValue(StatusEffects.ConstrictedScylla, 1, -1);
+				if (player.perkv1(IMutationsLib.ScyllaInkGlandsIM) < 4) addStatusValue(StatusEffects.ConstrictedScylla, 1, -1);
 				if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
 				return false;
 			}

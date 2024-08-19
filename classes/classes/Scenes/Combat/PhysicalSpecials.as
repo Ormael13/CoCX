@@ -2179,7 +2179,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("spraying your foe face in ink.  It start trashing its arm about attempting to remove the ink.\n");
 		outputText(" <b>[Themonster] is blinded!</b>");
 		var ispray:Number = 2;
-		if (player.perkv1(IMutationsLib.ScyllaInkGlandsIM) >= 2) ispray += 2;
+		if (player.perkv1(IMutationsLib.ScyllaInkGlandsIM) >= 2) ispray += (2 * (player.perkv1(IMutationsLib.ScyllaInkGlandsIM) - 1));
 		var stunDura:Number = ispray;
 		if (player.hasPerk(PerkLib.KrakenBlackDress)) {
 			monster.createStatusEffect(StatusEffects.InkBlind, (ispray * 1.5), 0, 0, 0);
@@ -2196,7 +2196,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (monster.lustVuln > 0) {
 			var lustDmg:Number = 2 + player.teaseLevel + rand(5);
-			if (player.perkv1(IMutationsLib.ScyllaInkGlandsIM) >= 2) lustDmg *= 2;
+			if (player.perkv1(IMutationsLib.ScyllaInkGlandsIM) >= 2) lustDmg *= (player.perkv1(IMutationsLib.ScyllaInkGlandsIM) - 1);
 			if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
 			if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 			monster.teased(Math.round(monster.lustVuln * lustDmg));
@@ -3826,7 +3826,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		fatigue(physicalSpecialsCost(10), USEFATG_PHYSICAL);
 		if (combat.checkConcentration()) return; //Amily concentration
 		//WRAP IT UPPP
-		if(40 + rand(player.spe) > monster.spe) {
+		if((40 + rand(player.spe) > monster.spe) || player.perkv1(IMutationsLib.ScyllaInkGlandsIM) >= 3) {
 			if(monster.plural) {
 				outputText("Thinking for a moment you proceed to rush for the mob grappling as many as you can in your eight powerfull tentacle as you prepare to squeeze them.");
 			}
@@ -7037,4 +7037,4 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function PhysicalSpecials() {
 	}
 }
-}
+}

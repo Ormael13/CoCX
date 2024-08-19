@@ -3160,8 +3160,9 @@ public class Creature extends Utils
 		//PC can swim underwater?
 		public function canSwimUnderwater():Boolean
 		{
-			if (gills.type != Gills.NONE || lowerBody == LowerBody.SCYLLA || lowerBody == LowerBody.KRAKEN || lowerBody == LowerBody.MELKIE || tailType == Tail.ARIGEAN_GREEN || tailType == Tail.ARIGEAN_RED || rearBody.type == RearBody.ORCA_BLOWHOLE || hasStatusEffect(StatusEffects.Airweed) ||
-				game.player.necklaceName == "Magic coral and pearl necklace" || game.player.headjewelryName == "Aqua breather" || (game.player.isInGoblinMech() && game.player.hasKeyItem("Safety bubble") >= 0) || game.player.hasPerk(PerkLib.AffinityUndine) || game.player.hasPerk(PerkLib.Undeath))
+			if (gills.type != Gills.NONE || lowerBody == LowerBody.SCYLLA || lowerBody == LowerBody.KRAKEN || lowerBody == LowerBody.MELKIE || tailType == Tail.ARIGEAN_GREEN || tailType == Tail.ARIGEAN_RED || tailType == Tail.ARIGEAN_YELLOW || tailType == Tail.ARIGEAN_PRINCESS ||
+				rearBody.type == RearBody.ORCA_BLOWHOLE || hasStatusEffect(StatusEffects.Airweed) || game.player.necklaceName == "Magic coral and pearl necklace" || game.player.headjewelryName == "Aqua breather" ||
+				(game.player.isInGoblinMech() && game.player.hasKeyItem("Safety bubble") >= 0) || game.player.hasPerk(PerkLib.AffinityUndine) || game.player.hasPerk(PerkLib.Undeath))
 				return true;	//efekt of itemów dające oddych. pod wodą
 			return false;
 		}
@@ -3175,12 +3176,20 @@ public class Creature extends Utils
 				bonusStr += 30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				bonusSpe += 30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			}
+			if (perkv1(IMutationsLib.ScyllaInkGlandsIM) >= 3) {
+				bonusStr *= (perkv1(IMutationsLib.ScyllaInkGlandsIM) - 1);
+				bonusSpe *= (perkv1(IMutationsLib.ScyllaInkGlandsIM) - 1);
+			}
 			if (game.player.hasPerk(PerkLib.AffinityUndine)) bonusSpe += 50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			if (game.player.armorName == "Sexy Aquamarine Bikini" || game.player.armorName == "Sexy Black Bikini" || game.player.armorName == "Sexy Blue Bikini" || game.player.armorName == "Sexy Green Bikini" || game.player.armorName == "Sexy Pink Bikini" || game.player.armorName == "Sexy Red Bikini" || game.player.armorName == "Sexy White Bikini" || game.player.armorName == "Sexy Yellow Bikini") {
 				bonusStr += 20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				bonusSpe += 20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			}
 			if (game.player.necklaceName == "Magic coral and pearl necklace") bonusSpe += 10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			if (perkv1(IMutationsLib.ScyllaInkGlandsIM) >= 4) {
+				bonusStr *= 2;
+				bonusSpe *= 2;
+			}
 			game.player.buff("UnderwaterCombatBoost").addStats({str:bonusStr,spe:bonusSpe}).withText("Fighting Underwater").combatPermanent();
 			HP = oldHPratio * maxHP();
 			if (game.player.hasPerk(PerkLib.AffinityIgnis)) createStatusEffect(StatusEffects.UnderwaterAndIgnis, 0, 0, 0, 0);

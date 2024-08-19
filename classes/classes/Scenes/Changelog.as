@@ -299,9 +299,12 @@ public class Changelog extends BaseContent
 			outputText("-Because too much regeneration will kill you... wait maybe it was too much love? Anyway almost all item related effects that would increase maximum regeneration cap was removed.\n");
 			outputText("-Supercharged state can be entered for Raiju when racial score would reach 2 tier (greater raiju).\n");
 			outputText("-1 new achievment. (1 shadow one)\n");//s
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New mutation perk: Scylla Ink Glands (Evolved). Req. Scylla Ink Glands (Primitive) and lvl 60+. Effects: Your Scylla Ink Glands increase rate at which your body produce ink, duration ink spray affect enemies and lust damage by ((current i. mutation tier - 1) * 100)%, boost to your natural strength, speed and toughness, ");
+			outputText("Scylla Squeeze damage during grapple as Kraken would be multiplied by current i.mutation tier, scylla grapple will always succeed, when in an aquatic battle boost from Aquatic Affinity is 2x larger.\n");
+			outputText("-New mutation perk: Scylla Ink Glands (Final Form). Req. Scylla Ink Glands (Evolved) and lvl 90+. Effects: Your Scylla Ink Glands increase rate at which your body produce ink, duration ink spray affect enemies and lust damage by ((current i. mutation tier - 1) * 100)%, boost to your natural strength, speed and toughness, ");
+			outputText("Scylla Squeeze damage during grapple as Kraken would be multiplied by current i.mutation tier, scylla grapple will always succeed, when in an aquatic battle boost from Aquatic Affinity is 3x larger, final boost from aquatic battle boost is 2x higher, ");
+			outputText("enemy can't escape from scylla grapple using only it own strength and using Scylla Squeeze as Kraken would give each time 4% combat wounds debuff on enemy (up to 80%).\n");
+			outputText("-Aquatic Affinity can be gained additional if pc lower body is that of scylla / kraken OR pc is having any arigean parasite.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -349,7 +352,7 @@ public class Changelog extends BaseContent
 			outputText("one of Raphael scenes using variant for tentacle cocks that can go all way throu without having such cock(s), unable to gain plasma dmg from using fire buff on lightning weapon and vice versa, unable to use Blind during Draculina fight, rescue from bad end not clearing lingering status effects, Centaurium tf effect checking for wrong elf-like ears type, ");
 			outputText("Ascension: Transhumanism (Sen) perk not adding sensitivity, Selachimorphanthropy bonuses not changing with moon phases, inconsistencies for damage type dealt in melee/range base attacks and specials, flame blade bonus dmg from libido, combining fire and lightning damage on melee weapons, lust defeat text for non sentient constructs not using it own variant, ");
 			outputText("Abyssal Ink and Displacer Beast post fight scenes bypassing perm races transformation immunity, defeating pod plant by lust (which was before impossible) allowing to pick unlimited rapiers from it, Frog Girl 'forever ignore' option not disabling her encounters, aura not capping to 10% lust dmg per aura application in turn, Dark Slimes sex scenes does not count towards ");
-			outputText("recovering hunger with demonic hunger perk, Atlach Nacha locking corruption to 100 before PC get pernamently locked to this race\n\n");
+			outputText("recovering hunger with demonic hunger perk, Atlach Nacha locking corruption to 100 before PC get pernamently locked to this race, post Drider Incubus fight sex scenes not reseting lust/giving sexp rewards/other effects of sex scene\n\n");
 			/*ostatni punkt changelogu
 			outputText("(Part 2/2) <b>Version 0.9a:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -1162,7 +1165,7 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: White-Faced One Birthright. Req. having free adaptation mutation slot, werefox race. Effects: Increases soulforce recovery 0.25-1% Soulforce regen per tail you posses (New moon / Half moon / Full moon)\n");
 			outputText("-New mutation perk: Anubi Heart (Primitive). Req. Anubi Heart and lvl 30+. Effects: Increase Soulskills power by 30%. Soul skills cost 50% more but are twice as effective when above 80% Soulforce.\n");
 			outputText("-New mutation perk: Fera's Birthright (Primitive). Req. Fera's Birthright and lvl 30+. Effects: Increases HP regeneration 1-4% based on moon phase. Double bonuses to unarmed/armor/wrath gains in crinos form & half the cost of maintaining it.\n");
-			outputText("-New mutation perk: Scylla Ink Glands (Primitive). Req. Scylla Ink Glands and lvl 30+. Effects: Your Scylla Ink Glands increase rate at which your body produce ink, duration ink spray affect enemies and lust damage by 100%, boost to your natural strength and toughness, Scylla Squeeze damage during grapple as Kraken would be multiplied by current i.mutation tier.\n");
+			outputText("-New mutation perk: Scylla Ink Glands (Primitive). Req. Scylla Ink Glands and lvl 30+. Effects: Your Scylla Ink Glands increase rate at which your body produce ink, duration ink spray affect enemies and lust damage by ((current i. mutation tier - 1) * 100)%, boost to your natural strength and toughness, Scylla Squeeze damage during grapple as Kraken would be multiplied by current i.mutation tier.\n");
 			outputText("-New mutation perk: White-Faced One Birthright (Primitive). Req. White-Faced One Birthright and lvl 30+. Effects: Increases soulforce recovery 0.5-2% Soulforce regen per tail you posses (New moon / Half moon / Full moon), +50% to magical soulskills power (doubled if you have 3+ tails)\n");
 			outputText("This effect can only happen once per round. While below half health, soul skill inflicts 50% more damage and leech twice as many hit points.\n");
 			outputText("-New mutation perk: Anubi Heart (Evolved). Req. Anubi Heart (Primitive) and lvl 60+. Effects: Increase Soulskills power by 40%. Soul skills cost 50% more but are twice as effective when above 70% Soulforce. Soul skills become vampiric in nature, healing the user for 10% of their hp on use. This effect can only happen once per round.\n");
