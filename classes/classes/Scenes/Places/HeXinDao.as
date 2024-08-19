@@ -975,7 +975,7 @@ public function soularena():void {
         statScreenRefresh();
 		menu();
         //addButton(0, "Goblin", );//Goblinka
-        addButton(5, "D.Golem", arenaSelection,GolemDummy).hint("Dummy Golem LVL 6");
+        addButton(5, "D.Golem", arenaSelection,GolemDummy,flags[kFLAGS.GOLEM_ENEMY_TYPE] = 0).hint("Dummy Golem LVL 6");
         addButton(6, "I.D.Golem", arenaSelection,GolemDummyImproved).hint("Improved Dummy Golem LVL 12");
         addButton(7, "A.D.Golem", arenaSelection,GolemDummyAdvanced).hint("Advanced Dummy Golem LVL 18");
         addButton(8, "S.D.Golem", arenaSelection,GolemDummySuperior).hint("Superior Dummy Golem LVL 24");
@@ -997,13 +997,13 @@ public function soularena():void {
         statScreenRefresh();
 		menu();
         //addButton(0, "Goblins", );//Córki goblinki z solo areny ^^
-        addButton(5, "D.Golems", arenaSelection,GolemsDummy).hint("Dummy Golems LVL 6");
-        addButton(6, "I.D.Golems", arenaSelection,GolemsDummyImproved).hint("Improved Dummy Golems LVL 12");
-        addButton(7, "A.D.Golems", arenaSelection,GolemsDummyAdvanced).hint("Advanced Dummy Golems LVL 18");
-        addButton(8, "S.D.Golems", arenaSelection,GolemsDummySuperior).hint("Superior Dummy Golems LVL 24");
-        addButton(10, "B.T.Golems", arenaSelection,GolemsTrueBasic).hint("Basic True Golems LVL 33");
-        addButton(11, "I.T.Golems", arenaSelection,GolemsTrueImproved).hint("Improved True Golems LVL 42");
-        addButton(12, "A.T.Golems", arenaSelection,GolemsTrueAdvanced).hint("Advanced True Golems LVL 51");
+        addButton(5, "D.Golems", arenaSelection,GolemsDummy,flags[kFLAGS.GOLEM_ENEMY_TYPE] = 1).hint("Dummy Golems LVL 15");
+        addButton(6, "I.D.Golems", arenaSelection,GolemsDummy,flags[kFLAGS.GOLEM_ENEMY_TYPE] = 3).hint("Improved Dummy Golems LVL 24");
+        addButton(7, "A.D.Golems", arenaSelection,GolemsDummy,flags[kFLAGS.GOLEM_ENEMY_TYPE] = 5).hint("Advanced Dummy Golems LVL 33");
+        addButton(8, "S.D.Golems", arenaSelection,GolemsDummy,flags[kFLAGS.GOLEM_ENEMY_TYPE] = 7).hint("Superior Dummy Golems LVL 42");
+        addButton(10, "B.T.Golems", arenaSelection,GolemsTrue,flags[kFLAGS.GOLEM_ENEMY_TYPE] = 9).hint("Basic True Golems LVL 51");
+        //addButton(11, "I.T.Golems", arenaSelection,GolemsTrue,flags[kFLAGS.GOLEM_ENEMY_TYPE] = 11).hint("Improved True Golems LVL 60");
+        //addButton(12, "A.T.Golems", arenaSelection,GolemsTrue,flags[kFLAGS.GOLEM_ENEMY_TYPE] = 13).hint("Advanced True Golems LVL 69");
         addButton(14, "Back", soularenaGroupBack);
     }
 	public function soularenaGroupBack():void {

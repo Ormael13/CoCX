@@ -18,7 +18,7 @@ package classes.Scenes.Monsters
 			clearOutput();
 			if (rand(2) == 0) {
 				outputText("You pass several bodies, strewn throughout your path. You look away, but as you turn, several crude-looking figures rise, hidden among the bodies. They look too crude to be permanent, probably left behind by a depraved golemmancer. You ready your [weapon] for a fight!");
-				startCombat(new GolemsDummyImproved());
+				startCombat(new GolemsDummy());
 			}
 			else {
 				
@@ -28,7 +28,7 @@ package classes.Scenes.Monsters
 			clearOutput();
 			if (rand(2) == 0) {
 				outputText("You pass several bodies, strewn throughout your path. You look away, but as you turn, several disgusting, fleshy figures rise, hidden among the bodies. They look rushed, probably left behind by a novice golemmancer. You ready your [weapon] for a fight!");
-				startCombat(new GolemsDummyImproved());
+				startCombat(new GolemsDummy());
 			}
 			else {
 				
@@ -38,7 +38,7 @@ package classes.Scenes.Monsters
 			clearOutput();
 			if (rand(2) == 0) {
 				outputText("You pass several bodies, strewn throughout your path. You look away, but as you turn, several fleshy figures rise, hidden among the bodies. These ones are more advanced, the work of a seasoned golemmancer. You ready your [weapon] for a fight!");
-				startCombat(new GolemsDummyImproved());
+				startCombat(new GolemsDummy());
 			}
 			else {
 				
@@ -48,7 +48,7 @@ package classes.Scenes.Monsters
 			clearOutput();
 			if (rand(2) == 0) {
 				outputText("You pass several bodies, strewn throughout your path. You look away, but as you turn, several lifelike figures rise, hidden among the bodies. They're reinforced with heavy bone and grafted muscle. Someone put effort into these monstrous creations. You ready your [weapon] for a fight!");
-				startCombat(new GolemsDummyImproved());
+				startCombat(new GolemsDummy());
 			}
 			else {
 				

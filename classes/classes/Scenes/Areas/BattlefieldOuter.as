@@ -150,7 +150,7 @@ public class BattlefieldOuter extends BaseContent
 			unique: true,
 			call: SceneLib.tedScene.introPostHiddenCave,
 			when: SceneLib.tedScene.canEncounterTed
-		}, SceneLib.exploration.commonEncounters.withChanceFactor(0.1), {
+		}, SceneLib.exploration.commonGroupEncounters.withChanceFactor(0.1), {
 			name: "vengefulAparitions",
 			label : "Vengeful Aparitions",
 			shortLabel: "V.Aparitions",

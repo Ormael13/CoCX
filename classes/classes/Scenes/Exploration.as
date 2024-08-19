@@ -619,66 +619,96 @@ public class Exploration extends BaseContent implements SaveableState
 			doExplore();
 		}
 		
+		private function golemEncountProto():void {
+			clearOutput();
+			outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered proto golem! You ready your [weapon] for a fight!");
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GOLEMS);
+			startCombat(new GolemProto());
+		}
 		private function golemEncountBasic():void {
 			clearOutput();
 			outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered dummy golem! You ready your [weapon] for a fight!");
 			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GOLEMS);
+			flags[kFLAGS.GOLEM_ENEMY_TYPE] = 0;
 			startCombat(new GolemDummy());
+		}
+		private function golemEncounterBasicGroup():void {
+			clearOutput();
+			outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered dummy golems! You ready your [weapon] for a fight!");
+			flags[kFLAGS.GOLEM_ENEMY_TYPE] = 1;
+			startCombat(new GolemsDummy());
 		}
 		private function golemEncounterImproved():void {
 			clearOutput();
 			outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered improved dummy golem! You ready your [weapon] for a fight!");
+			flags[kFLAGS.GOLEM_ENEMY_TYPE] = 2;
 			startCombat(new GolemDummyImproved());
+		}
+		private function golemEncounterImprovedGroup():void {
+			clearOutput();
+			outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered improved dummy golem! You ready your [weapon] for a fight!");
+			flags[kFLAGS.GOLEM_ENEMY_TYPE] = 3;
+			startCombat(new GolemsDummy());
 		}
 		private function golemEncounterAdvanced():void {
 			clearOutput();
 			outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered advanced dummy golem! You ready your [weapon] for a fight!");
+			flags[kFLAGS.GOLEM_ENEMY_TYPE] = 4;
 			startCombat(new GolemDummyAdvanced());
 		}
 		private function golemEncounterAdvancedGroup():void {
 			clearOutput();
 			outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered advanced dummy golems! You ready your [weapon] for a fight!");
-			startCombat(new GolemsDummyAdvanced());
+			flags[kFLAGS.GOLEM_ENEMY_TYPE] = 5;
+			startCombat(new GolemsDummy());
 		}
 		private function golemEncounterSuperior():void {
 			clearOutput();
 			outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered superior dummy golem! You ready your [weapon] for a fight!");
+			flags[kFLAGS.GOLEM_ENEMY_TYPE] = 6;
 			startCombat(new GolemDummySuperior());
 		}
 		private function golemEncounterSuperiorGroup():void {
 			clearOutput();
 			outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered superior dummy golems! You ready your [weapon] for a fight!");
-			startCombat(new GolemsDummySuperior());
+			flags[kFLAGS.GOLEM_ENEMY_TYPE] = 7;
+			startCombat(new GolemsDummy());
 		}
 		private function golemEncounterTrueBasic():void {
 			clearOutput();
 			outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered basic true golem! You ready your [weapon] for a fight!");
+			flags[kFLAGS.GOLEM_ENEMY_TYPE] = 8;
 			startCombat(new GolemTrueBasic());
 		}
 		private function golemEncounterTrueBasicGroup():void {
 			clearOutput();
 			outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered basic true golems! You ready your [weapon] for a fight!");
-			startCombat(new GolemsTrueBasic());
+			flags[kFLAGS.GOLEM_ENEMY_TYPE] = 9;
+			startCombat(new GolemsTrue());
 		}
 		private function golemEncounterTrueImproved():void {
 			clearOutput();
 			outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered improved true golem! You ready your [weapon] for a fight!");
+			flags[kFLAGS.GOLEM_ENEMY_TYPE] = 10;
 			startCombat(new GolemTrueImproved());
 		}
 		private function golemEncounterTrueImprovedGroup():void {
 			clearOutput();
 			outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered improved true golems! You ready your [weapon] for a fight!");
-			startCombat(new GolemsTrueImproved());
+			flags[kFLAGS.GOLEM_ENEMY_TYPE] = 11;
+			startCombat(new GolemsTrue());
 		}
 		private function golemEncounterTrueAdvanced():void {
 			clearOutput();
 			outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered advanced true golem! You ready your [weapon] for a fight!");
+			flags[kFLAGS.GOLEM_ENEMY_TYPE] = 12;
 			startCombat(new GolemTrueAdvanced());
 		}
 		private function golemEncounterTrueAdvancedGroup():void {
 			clearOutput();
 			outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered advanced true golems! You ready your [weapon] for a fight!");
-			startCombat(new GolemsTrueAdvanced());
+			flags[kFLAGS.GOLEM_ENEMY_TYPE] = 13;
+			startCombat(new GolemsTrue());
 		}
 		
 		private function feralImpEncounter():void {
@@ -695,16 +725,6 @@ public class Exploration extends BaseContent implements SaveableState
 			outputText("An imp wings out of the sky and attacks!");
 			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 			startCombat(new Imp());
-		}
-		public function genericGobImpAngEncounters(even:Boolean = false):void {
-			var gobImpAngChooser:int = rand(20);
-			if (gobImpAngChooser >= 8) SceneLib.goblinScene.goblinShamanEncounter();
-			//else if (gobImpAngChooser >= 16) angeloid
-			//else if (gobImpAngChooser >= 18) angeloid
-			else {
-				SceneLib.impScene.impOverlordEncounter();
-				spriteSelect(SpriteDb.s_impOverlord);
-			}
 		}
 		public function genericImpEncounters2(even:Boolean = false):void {
 			var sss:Number = 75;
@@ -748,79 +768,6 @@ public class Exploration extends BaseContent implements SaveableState
 			else {
 				SceneLib.defiledravine.demonScene.OmnibusEncounter();
 				return;
-			}
-		}
-		public function genericGolemsEncounters1(even:Boolean = false):void {
-			var sss:Number = 10;
-			if (player.level >= 12) sss += 10;
-			if (player.level >= 18) sss += 10;
-			if (player.level >= 24) sss += 10;
-			if (player.level >= 33) sss += 10;
-			var golemsChooser:int = rand(sss);
-			//Limit chooser range
-			clearOutput();
-			//Improved dummy golems
-			if (golemsChooser >= 10 && golemsChooser < 20) {
-				outputText("As you take a stroll, from behind of nearby combatants remains emerge group of golems. Looks like you have encountered improved dummy golems! You ready your [weapon] for a fight!");
-				startCombat(new GolemsDummyImproved());
-				return;
-			}
-			//Advanced dummy golems
-			if (golemsChooser >= 20 && golemsChooser < 30) {
-				outputText("As you take a stroll, from behind of nearby combatants remains emerge group of golems. Looks like you have encountered advanced dummy golems! You ready your [weapon] for a fight!");
-				startCombat(new GolemsDummyAdvanced());
-				return;
-			}
-			//Superior dummy golems
-			if (golemsChooser >= 30 && golemsChooser < 40) {
-				outputText("As you take a stroll, from behind of nearby combatants remains emerge group of golems. Looks like you have encountered superior dummy golems! You ready your [weapon] for a fight!");
-				startCombat(new GolemsDummySuperior());
-				return;
-			}
-			//Basic true golems
-			if (golemsChooser >= 40 && golemsChooser < 50) {
-				outputText("As you take a stroll, from behind of nearby combatants remains emerge group of golems. Looks like you have encountered basic true golems! You ready your [weapon] for a fight!");
-				startCombat(new GolemsTrueBasic());
-				return;
-			}
-			//Improved true golems
-			if (golemsChooser >= 50) {
-				outputText("As you take a stroll, from behind of nearby combatants remains emerge group of golems. Looks like you have encountered improved true golems! You ready your [weapon] for a fight!");
-				startCombat(new GolemsTrueImproved());
-				return;
-			}
-			//Dummy golems
-			else {
-				outputText("As you take a stroll, from behind of nearby combatants remains emerge group of golems. Looks like you have encountered dummy golems! You ready your [weapon] for a fight!");
-				camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GOLEMS);
-				startCombat(new GolemsDummy());
-				return;
-			}
-		}
-		public function genericGobImpEncounters1(even:Boolean = false):void {
-			var sss:Number = 20;
-			if (player.level >= 18) sss += 10;
-			if (player.level >= 30) sss += 10;
-			var gobimpChooser:int = rand(sss);
-			//Limit chooser range
-			clearOutput();
-			if (gobimpChooser >= 10 && gobimpChooser < 20) {
-				SceneLib.impScene.impPackEncounter2();
-			}
-			else if (gobimpChooser >= 20 && gobimpChooser < 30) {
-				if (rand(10) == 0 && flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 0) SceneLib.angelScene.angeloidGroupEncounter();
-				else SceneLib.impScene.impPackEncounter();
-			}
-			else if (gobimpChooser >= 30) {
-				if (flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_WARRIOR] >= 1) SceneLib.goblinScene.goblinWarriorsEncounter();
-				else {
-					if (rand(10) == 0 && flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 0) SceneLib.angelScene.angeloidGroupEncounter();
-					else SceneLib.impScene.impPackEncounter();
-				}
-			}
-			else {
-				if (flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_ASSASSIN] >= 1) SceneLib.goblinScene.goblinAdventurersEncounter();
-				else SceneLib.impScene.impPackEncounter2();
 			}
 		}
 		private function angeloidEncounterLow():void {
@@ -929,8 +876,10 @@ public class Exploration extends BaseContent implements SaveableState
 		
 		private var _explorationEncounters:GroupEncounter = null;
 		private var _commonEncounters:GroupEncounter = null;
+		private var _commonGroupEncounters:GroupEncounter = null;
 		private var _angelEncounters:GroupEncounter = null;
 		public function get commonEncounters():GroupEncounter { return _commonEncounters }
+		public function get commonGroupEncounters():GroupEncounter { return _commonGroupEncounters }
 		public function get angelEncounters():GroupEncounter { return _angelEncounters }
 		private function init():void {
 			const fn:FnHelpers = Encounters.fn;
@@ -954,6 +903,65 @@ public class Exploration extends BaseContent implements SaveableState
 						call: angeloidEncounterHigh
 					}
 			).withCondition(angelicFraction);
+			
+			_commonGroupEncounters = Encounters.group("common Grp",
+					{
+						name: "golem2group",
+						label: "Dummy Golem",
+						shortLabel: "Golem II+",
+						kind: "monster",
+						when:fn.ifLevelMin(6),
+						call: golemEncounterBasicGroup
+					}, {
+						name: "golem3group",
+						label: "Improved Golem Group",
+						shortLabel: "Golem III+",
+						kind: "monster",
+						when:fn.ifLevelMin(24),
+						chance: 0.25,
+						call: golemEncounterAdvancedGroup
+					}, {
+						name: "golem4group",
+						label: "Advanced Golem Group",
+						shortLabel: "Golem IV+",
+						kind: "monster",
+						when:fn.ifLevelMin(33),
+						chance: 0.25,
+						call: golemEncounterAdvancedGroup
+					}, {
+						name: "golem5group",
+						label: "Superior Golem Group",
+						shortLabel: "Golem V+",
+						kind: "monster",
+						when:fn.ifLevelMin(42),
+						chance: 0.25,
+						call: golemEncounterSuperiorGroup
+					}, {
+						name: "golem6group",
+						label: "Basic True Golem Group",
+						shortLabel: "Golem VI+",
+						kind: "monster",
+						when:fn.ifLevelMin(51),
+						chance: 0.25,
+						call: golemEncounterTrueBasicGroup
+					}, {
+						name: "golem7group",
+						label: "Improved True Golem Group",
+						shortLabel: "Golem VII+",
+						kind: "monster",
+						when:fn.ifLevelMin(60),
+						chance: 0.25,
+						call: golemEncounterTrueImprovedGroup
+					}, {
+						name: "golem8group",
+						label: "Advanced True Golem Group",
+						shortLabel: "Golem VIII+",
+						kind: "monster",
+						when:fn.ifLevelMin(69),
+						chance: 0.25,
+						call: golemEncounterTrueAdvancedGroup
+					}
+			);
 			
 			_commonEncounters = Encounters.group("common",
 					{
@@ -1053,87 +1061,110 @@ public class Exploration extends BaseContent implements SaveableState
 						label: "Dummy Golem",
 						shortLabel: "Golem I",
 						kind: "monster",
-						call: golemEncountBasic
+						when:fn.ifLevelMin(6),
+						call: golemEncountProto
 					}, {
 						name: "golem2",
-						label: "Improved Golem",
+						label: "Dummy Golem",
 						shortLabel: "Golem II",
 						kind: "monster",
-						when:fn.ifLevelMin(12),
-						call: golemEncounterImproved
+						when:fn.ifLevelMin(15),
+						call: golemEncountBasic
+					}, {
+						name: "golem2group",
+						label: "Dummy Golem",
+						shortLabel: "Golem II+",
+						kind: "monster",
+						when:fn.ifLevelMin(15),
+						call: golemEncounterBasicGroup
 					}, {
 						name: "golem3",
-						label: "Advanced Golem",
+						label: "Improved Golem",
 						shortLabel: "Golem III",
 						kind: "monster",
-						when:fn.ifLevelMin(18),
-						call: golemEncounterAdvanced
+						when:fn.ifLevelMin(24),
+						call: golemEncounterImproved
 					}, {
 						name: "golem3group",
-						label: "Advanced Golem Group",
+						label: "Improved Golem Group",
 						shortLabel: "Golem III+",
 						kind: "monster",
-						when:fn.ifLevelMin(18),
+						when:fn.ifLevelMin(24),
 						chance: 0.25,
 						call: golemEncounterAdvancedGroup
 					}, {
 						name: "golem4",
-						label: "Superior Golem",
+						label: "Advanced Golem",
 						shortLabel: "Golem IV",
 						kind: "monster",
-						when:fn.ifLevelMin(24),
-						call: golemEncounterSuperior
+						when:fn.ifLevelMin(33),
+						call: golemEncounterAdvanced
 					}, {
 						name: "golem4group",
-						label: "Superior Golem Group",
+						label: "Advanced Golem Group",
 						shortLabel: "Golem IV+",
 						kind: "monster",
-						when:fn.ifLevelMin(18),
+						when:fn.ifLevelMin(33),
+						chance: 0.25,
+						call: golemEncounterAdvancedGroup
+					}, {
+						name: "golem5",
+						label: "Superior Golem",
+						shortLabel: "Golem V",
+						kind: "monster",
+						when:fn.ifLevelMin(42),
+						call: golemEncounterSuperior
+					}, {
+						name: "golem5group",
+						label: "Superior Golem Group",
+						shortLabel: "Golem V+",
+						kind: "monster",
+						when:fn.ifLevelMin(42),
 						chance: 0.25,
 						call: golemEncounterSuperiorGroup
 					}, {
-						name: "golem5",
+						name: "golem6",
 						label: "Basic True Golem",
-						shortLabel: "Golem V",
+						shortLabel: "Golem VI",
 						kind: "monster",
-						when:fn.ifLevelMin(33),
+						when:fn.ifLevelMin(51),
 						call: golemEncounterTrueBasic
 					}, {
-						name: "golem5group",
+						name: "golem6group",
 						label: "Basic True Golem Group",
-						shortLabel: "Golem V+",
+						shortLabel: "Golem VI+",
 						kind: "monster",
-						when:fn.ifLevelMin(33),
+						when:fn.ifLevelMin(51),
 						chance: 0.25,
 						call: golemEncounterTrueBasicGroup
 					}, {
-						name: "golem6",
+						name: "golem7",
 						label: "Improved True Golem",
 						shortLabel: "Golem VI",
 						kind: "monster",
-						when:fn.ifLevelMin(42),
+						when:fn.ifLevelMin(60),
 						call: golemEncounterTrueImproved
 					}, {
-						name: "golem6group",
+						name: "golem7group",
 						label: "Improved True Golem Group",
-						shortLabel: "Golem VI+",
+						shortLabel: "Golem VII+",
 						kind: "monster",
-						when:fn.ifLevelMin(42),
+						when:fn.ifLevelMin(60),
 						chance: 0.25,
 						call: golemEncounterTrueImprovedGroup
 					}, {
-						name: "golem7",
+						name: "golem8",
 						label: "Advanced True Golem",
-						shortLabel: "Golem VII",
+						shortLabel: "Golem VIII",
 						kind: "monster",
-						when:fn.ifLevelMin(51),
+						when:fn.ifLevelMin(69),
 						call: golemEncounterTrueAdvanced
 					}, {
-						name: "golem5group",
-						label: "Basic True Golem Group",
-						shortLabel: "Golem V+",
+						name: "golem8group",
+						label: "Advanced True Golem Group",
+						shortLabel: "Golem VIII+",
 						kind: "monster",
-						when:fn.ifLevelMin(33),
+						when:fn.ifLevelMin(69),
 						chance: 0.25,
 						call: golemEncounterTrueAdvancedGroup
 					}
