@@ -222,7 +222,7 @@ public class Achievements extends BaseContent
 			addAchievement("Meng Hao", kACHIEVEMENTS.WEALTH_MENG_HAO, "Have 20,000,000 spirit stones.", "Have 20,000,000 spirit stones. You can now exchange tips on getting more spirit stones with Meng Hao himself.", true);
 			//addAchievement("Item Vault", kACHIEVEMENTS.WEALTH_ITEM_VAULT, "Fill up your inventory, chest, jewelry box, weapon and armor racks.");
 
-			titleAchievementSection("Combat"); //19 achievements
+			titleAchievementSection("Combat"); //20 achievements
 			addAchievement("Are you a Wizard?", kACHIEVEMENTS.COMBAT_ARE_YOU_A_WIZARD, "Cast your first spell.");
 			addAchievement("Gandalf", kACHIEVEMENTS.COMBAT_GANDALF, "Learn all white spells.");
 			addAchievement("Sauron", kACHIEVEMENTS.COMBAT_SAURON, "Learn all black spells.");
@@ -249,6 +249,7 @@ public class Achievements extends BaseContent
 			addAchievement("Uncanny Bloodletter", kACHIEVEMENTS.COMBAT_UNCANNY_BLOOD_LETTER, "Deal a total of 1,000,000 damage.", "", true);
 			addAchievement("Uncanny Reiterpallasch", kACHIEVEMENTS.COMBAT_UNCANNY_REITERPALLASCH, "Deal a total of 5,000,000 damage.", "", true);
 			addAchievement("Arrow to the Knee", kACHIEVEMENTS.COMBAT_ARROW_TO_THE_KNEE, "Use your bow/crossbow for a first time.");
+			addAchievement("My name is Bruce—Bruce Wood!", kACHIEVEMENTS.COMBAT_MY_NAME_IS_BRUCE_BRUCE_WOOD, "Even training dummy beaten you?!?", "", true);
 
 			titleAchievementSection("Holiday Events"); //11 achievements
 			addAchievement("Egg Hunter", kACHIEVEMENTS.HOLIDAY_EGG_HUNTER, "Find 10 eggs as random drops during Easter event.", "", true);

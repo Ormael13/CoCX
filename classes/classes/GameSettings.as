@@ -81,99 +81,6 @@ public class GameSettings extends BaseContent {
 		outputText("\n\n");
 		player.displayFinalGameDifficulty();
 		outputText("\n\n");
-		if (flags[kFLAGS.PRIMARY_DIFFICULTY] <= 0) {
-			outputText("Primary Difficulty: [font-olive]<b>Easy</b>[/font]\n No opponent(s) stats modifiers. You can resume from bad-ends with penalties. No penatlies for too high wrath. Internal mutation negative effects will be triggered after accumulating 11 points in internal mutation score.");
-		}
-		else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 1) {
-			outputText("Primary Difficulty: <b>[font-dred]Normal[/font]</b>\n Opponent(s) take 2x less HP/Lust dmg, deal 20% more damage and gives ~20% more EXP. No penatlies for too high wrath. Bad-ends can ruin your game. Internal mutation negative effects will be triggered after accumulating 6 points in internal mutation score.");
-		}
-		else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 2) {
-			outputText("Primary Difficulty: <b>[font-red]Hard[/font]</b>\n Opponent(s) take 5x less HP/Lust dmg, deal 50% more damage and gives ~50% more EXP." +
-					" If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately.");
-		}
-		else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 3) {
-			outputText("Primary Difficulty: <b>[font-red]Nightmare[/font]</b>\n Opponent(s) take 10x less HP/Lust dmg, deal more 100% damage and gives ~100% more EXP." +
-					" If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately.");
-		}
-		else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 4) {
-			outputText("Primary Difficulty: <b>[font-lred]Extreme[/font]</b>\n Opponent(s) take 25x less HP/Lust dmg, deal more 250% damage and gives ~150% more EXP." +
-					" If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately.");
-		}
-		else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 5) {
-			outputText("Primary Difficulty: <b>[font-lred]Inferno[/font]</b>\n Opponent(s) take 25x less HP/Lust dmg, deal more 250% damage and gives ~150% more EXP." +
-					" If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately.");
-		}
-		else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 6) {
-			outputText("Primary Difficulty: <b>[font-pink]Metroid Dread[/font]</b>\n Opponent(s) take 25x less HP/Lust dmg, deal more 250% damage and gives ~150% more EXP." +
-					" If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately.");
-		}
-		else if (flags[kFLAGS.PRIMARY_DIFFICULTY] >= 7) {
-			outputText("Primary Difficulty: <b>[font-pink]Xianxia MC[/font]</b>\n Opponent(s) take 25x less HP/Lust dmg, deal more 250% damage and gives ~150% more EXP." +
-					" If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately.");
-		}
-		outputText("\n\n");
-		if (flags[kFLAGS.HUNGER_ENABLED] < 0.5) {
-			outputText("Hunger/Realistic Mode Modifier: <b>[font-olive]Disabled[/font]</b>");
-		}
-		else if (flags[kFLAGS.HUNGER_ENABLED] == 0.5) {
-			outputText("Hunger Modifier: <b>[font-red]Enabled[/font]</b> (PC must manage his own hunger lest you want see his death from starvation)");
-		}
-		else if (flags[kFLAGS.HUNGER_ENABLED] == 1) {
-			outputText("Realistic Mode Modifier: <b>[font-red]Enabled[/font]</b> (PC must manage his own hunger lest you want see his death from starvation + your cum production is capped and having oversized parts will weigh you down)");
-		}
-		outputText("\n\n");
-		if (flags[kFLAGS.HARDCORE_MODE] == 0) {
-			outputText("Hardcore Modifier: <b>[font-olive]Disabled[/font]</b>");
-		}
-		else if (flags[kFLAGS.HARDCORE_MODE] == 1) {
-			outputText("Hardcore Modifier: <b>[font-red]Enabled[/font]</b> (No level limits for unlocking new areas)");
-		}
-		outputText("\n\n");
-		if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 0) {
-			outputText("Secondary Stats Modifier: No opponent secondary stats modifiers.");
-		}
-		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) {
-			outputText("Secondary Stats Modifier: Opponent has 10x (bosses) and 5x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
-		}
-		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) {
-			outputText("Secondary Stats Modifier: Opponent has 30x (bosses) and 10x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
-		}
-		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) {
-			outputText("Secondary Stats Modifier: Opponent has 100x (bosses) and 25x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
-		}
-		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) {
-			outputText("Secondary Stats Modifier: Opponent has 500x (bosses) and 100x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
-		}
-		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 5) {
-			outputText("Secondary Stats Modifier: Opponent has 1500x (bosses) and 500x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
-		}
-		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] >= 6) {
-			outputText("Secondary Stats Modifier: Opponent has 21000x (bosses) and 3000x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
-		}
-		outputText("\n\n");
-		if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 0) {
-			outputText("Elite/Champion/Boss Modifier: [font-olive]<b>Normal</b>[/font]\n No HP modifiers");
-		}
-		else if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 1) {
-			outputText("Elite/Champion/Boss Modifier: <b>[font-dred]Fantasy[/font]</b>\n 1.25x / 2.5x / 5x HP modifiers");
-		}
-		else if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 2) {
-			outputText("Elite/Champion/Boss Modifier: <b>[font-red]Torment[/font]</b>\n 2.5x / 5x / 10x HP modifier");
-		}
-		else if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 3) {
-			outputText("Elite/Champion/Boss Modifier: <b>[font-lred]Infernium[/font]</b>\n 3.75x / 7.5x / 15x HP modifier");
-		}
-		else if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] >= 4) {
-			outputText("Elite/Champion/Boss Modifier: <b>[font-pink]HELL[/font]</b>\n 5x / 10x / 20x HP modifier");
-		}
-		outputText("\n\n");
-		if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) {
-			outputText("Easier Mode: [font-green]<b>ON</b>[/font]\n Bad-ends can be ignored and combat is so super easy that even CoC Vanilla and CoC2 devs can breeze it with one hand ^^ (dmg monsters deal is 10x lower, no scaling of some of their combat stats and no penalty for level difference)");
-		}
-		else {
-			outputText("Easier Mode: [font-dred]<b>OFF</b>[/font]\n Bad-ends can ruin your game and combat is back to what it should be.");
-		}
-		outputText("\n\n");
 		if (daysPerYear_temp == 0) {
 			outputText("Timescale: [font-green]<b>REAL</b>[/font]\n In-game date (used for holiday events) uses real date from your computer.");
 			if (flags[kFLAGS.DAYS_PER_YEAR] > 0) outputText("\n[font-dred]<b>WARNING: your current in-game date will be erased after you exit this menu.</b>[/font]");
@@ -181,14 +88,108 @@ public class GameSettings extends BaseContent {
 			outputText("Timescale: [font-blue]<b>DAYS ("+daysPerYear_temp+" in-game days per year)</b>[/font]\n In-game date is calculated from the days spent in Mareth.");
 		}
 		outputText("\nDay of the month event requirements (e.g. exact days of Easter/Thanksgiving) <b>" + (daysPerYear_temp == 0 || daysPerYear_temp == 365 ? "ARE" : "are NOT") + "</b> taken into account with the selected option.");
-
 		outputText("\n\n");
-		if (flags[kFLAGS.WATERSPORTS_ENABLED] >= 1) {
-			outputText("Watersports: [font-green]<b>Enabled</b>[/font]\n Watersports scenes are enabled. (You kinky person)");
+		if (player) {
+			if (flags[kFLAGS.PRIMARY_DIFFICULTY] <= 0) {
+				outputText("Primary Difficulty: [font-olive]<b>Easy</b>[/font]\n No opponent(s) stats modifiers. You can resume from bad-ends with penalties. No penatlies for too high wrath. Internal mutation negative effects will be triggered after accumulating 11 points in internal mutation score.");
+			}
+			else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 1) {
+				outputText("Primary Difficulty: <b>[font-dred]Normal[/font]</b>\n Opponent(s) take 2x less HP/Lust dmg, deal 20% more damage and gives ~20% more EXP. No penatlies for too high wrath. Bad-ends can ruin your game. Internal mutation negative effects will be triggered after accumulating 6 points in internal mutation score.");
+			}
+			else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 2) {
+				outputText("Primary Difficulty: <b>[font-red]Hard[/font]</b>\n Opponent(s) take 5x less HP/Lust dmg, deal 50% more damage and gives ~50% more EXP." +
+						" If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately.");
+			}
+			else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 3) {
+				outputText("Primary Difficulty: <b>[font-red]Nightmare[/font]</b>\n Opponent(s) take 10x less HP/Lust dmg, deal more 100% damage and gives ~100% more EXP." +
+						" If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately.");
+			}
+			else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 4) {
+				outputText("Primary Difficulty: <b>[font-lred]Extreme[/font]</b>\n Opponent(s) take 25x less HP/Lust dmg, deal more 250% damage and gives ~150% more EXP." +
+						" If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately.");
+			}
+			else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 5) {
+				outputText("Primary Difficulty: <b>[font-lred]Inferno[/font]</b>\n Opponent(s) take 25x less HP/Lust dmg, deal more 250% damage and gives ~150% more EXP." +
+						" If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately.");
+			}
+			else if (flags[kFLAGS.PRIMARY_DIFFICULTY] == 6) {
+				outputText("Primary Difficulty: <b>[font-pink]Metroid Dread[/font]</b>\n Opponent(s) take 25x less HP/Lust dmg, deal more 250% damage and gives ~150% more EXP." +
+						" If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately.");
+			}
+			else if (flags[kFLAGS.PRIMARY_DIFFICULTY] >= 7) {
+				outputText("Primary Difficulty: <b>[font-pink]Xianxia MC[/font]</b>\n Opponent(s) take 25x less HP/Lust dmg, deal more 250% damage and gives ~150% more EXP." +
+						" If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately.");
+			}
+			outputText("\n\n");
+			if (flags[kFLAGS.HUNGER_ENABLED] < 0.5) {
+				outputText("Hunger/Realistic Mode Modifier: <b>[font-olive]Disabled[/font]</b>");
+			}
+			else if (flags[kFLAGS.HUNGER_ENABLED] == 0.5) {
+				outputText("Hunger Modifier: <b>[font-red]Enabled[/font]</b> (PC must manage his own hunger lest you want see his death from starvation)");
+			}
+			else if (flags[kFLAGS.HUNGER_ENABLED] == 1) {
+				outputText("Realistic Mode Modifier: <b>[font-red]Enabled[/font]</b> (PC must manage his own hunger lest you want see his death from starvation + your cum production is capped and having oversized parts will weigh you down)");
+			}
+			outputText("\n\n");
+			if (flags[kFLAGS.HARDCORE_MODE] == 0) {
+				outputText("Hardcore Modifier: <b>[font-olive]Disabled[/font]</b>");
+			}
+			else if (flags[kFLAGS.HARDCORE_MODE] == 1) {
+				outputText("Hardcore Modifier: <b>[font-red]Enabled[/font]</b> (No level limits for unlocking new areas)");
+			}
+			outputText("\n\n");
+			if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 0) {
+				outputText("Secondary Stats Modifier: No opponent secondary stats modifiers.");
+			}
+			else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) {
+				outputText("Secondary Stats Modifier: Opponent has 10x (bosses) and 5x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			}
+			else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) {
+				outputText("Secondary Stats Modifier: Opponent has 30x (bosses) and 10x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			}
+			else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) {
+				outputText("Secondary Stats Modifier: Opponent has 100x (bosses) and 25x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			}
+			else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) {
+				outputText("Secondary Stats Modifier: Opponent has 500x (bosses) and 100x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			}
+			else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 5) {
+				outputText("Secondary Stats Modifier: Opponent has 1500x (bosses) and 500x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			}
+			else if (flags[kFLAGS.SECONDARY_STATS_SCALING] >= 6) {
+				outputText("Secondary Stats Modifier: Opponent has 21000x (bosses) and 3000x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			}
+			outputText("\n\n");
+			if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 0) {
+				outputText("Elite/Champion/Boss Modifier: [font-olive]<b>Normal</b>[/font]\n No HP modifiers");
+			}
+			else if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 1) {
+				outputText("Elite/Champion/Boss Modifier: <b>[font-dred]Fantasy[/font]</b>\n 1.25x / 2.5x / 5x HP modifiers");
+			}
+			else if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 2) {
+				outputText("Elite/Champion/Boss Modifier: <b>[font-red]Torment[/font]</b>\n 2.5x / 5x / 10x HP modifier");
+			}
+			else if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 3) {
+				outputText("Elite/Champion/Boss Modifier: <b>[font-lred]Infernium[/font]</b>\n 3.75x / 7.5x / 15x HP modifier");
+			}
+			else if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] >= 4) {
+				outputText("Elite/Champion/Boss Modifier: <b>[font-pink]HELL[/font]</b>\n 5x / 10x / 20x HP modifier");
+			}
+			outputText("\n\n");
+			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) {
+				outputText("Easier Mode: [font-green]<b>ON</b>[/font]\n Bad-ends can be ignored and combat is so super easy that even CoC Vanilla and CoC2 devs can breeze it with one hand ^^ (dmg monsters deal is 10x lower, no scaling of some of their combat stats and no penalty for level difference)");
+			}
+			else {
+				outputText("Easier Mode: [font-dred]<b>OFF</b>[/font]\n Bad-ends can ruin your game and combat is back to what it should be.");
+			}
+			outputText("\n\n");
+			if (flags[kFLAGS.WATERSPORTS_ENABLED] >= 1) {
+				outputText("Watersports: [font-green]<b>Enabled</b>[/font]\n Watersports scenes are enabled. (You kinky person)");
+			}
+			else
+				outputText("Watersports: [font-dred]<b>Disabled</b>[/font]\n Watersports scenes are disabled.");
+			outputText("\n\n");
 		}
-		else
-			outputText("Watersports: [font-dred]<b>Disabled</b>[/font]\n Watersports scenes are disabled.");
-		outputText("\n\n");
 		menu();
 		addButton(13, "Auto level", toggleFlag, kFLAGS.AUTO_LEVEL, settingsScreenGameSettings).hint("Toggles automatic leveling when you accumulate sufficient experience.");
 		if (player) {
@@ -771,7 +772,7 @@ public class GameSettings extends BaseContent {
 		if (player.hasStatusEffect(StatusEffects.WormsOn) || player.hasStatusEffect(StatusEffects.WormsOff)) addButton(1, "Worms", toggleWormsMenu).hint("Enable or disable worms. This will NOT cure infestation, if you have any.");
 		else addButtonDisabled(1, "Worms", "Find the sign depicting the worms in the mountains to unlock this.");
 		addButtonIfTrue(2, "Mindbreaker", toggleMindbreaker, "You are too late, you cannot turn back now!", Mindbreaker.MindBreakerQuest < Mindbreaker.QUEST_STAGE_ISMB,"Toggles Mindbreaker scenes.", "Mindbreaker "+(Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_MBOFF? "OFF":"ON"));
-		addButton(4, "Back", settingsScreenGameSettings2);
+		addButton(4, "Back", settingsScreenGameSettings);
 	}
 
 	private function toggleWormsMenu():void {

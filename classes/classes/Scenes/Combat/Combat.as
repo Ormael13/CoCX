@@ -463,7 +463,10 @@ public class Combat extends BaseContent {
             player.HP = player.minHP() + 1;
             combatMenu(false);
         }
-        else monster.won_(true, false);
+        else {
+			if (monster is TrainingDummy) EngineCore.awardAchievement("My name is Bruce—Bruce Wood!", kACHIEVEMENTS.COMBAT_MY_NAME_IS_BRUCE_BRUCE_WOOD);
+			monster.won_(true, false);
+		}
     }
 
     public function endLustLoss():void {

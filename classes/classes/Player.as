@@ -7801,7 +7801,7 @@ use namespace CoC;
 			if (dlust != 0){
 				raijuSuperchargedCheck();
 			}
-			if (!isRace(Races.RAIJU) && !isRace(Races.THUNDERBIRD) && !isRace(Races.KIRIN) && statStore.hasBuff('Supercharged')) statStore.removeBuffs('Supercharged');
+			if (!isRace(Races.RAIJU, 2) && !isRace(Races.THUNDERBIRD) && !isRace(Races.KIRIN) && statStore.hasBuff('Supercharged')) statStore.removeBuffs('Supercharged');
 			EngineCore.showUpDown();
 			EngineCore.statScreenRefresh();
 		}
@@ -7922,7 +7922,7 @@ use namespace CoC;
 		}
 		
 		public function raijuSuperchargedCheck():void{
-			if ((isRace(Races.RAIJU) || isRace(Races.THUNDERBIRD) || isRace(Races.KIRIN)) && lust100>=75){
+			if ((isRace(Races.RAIJU, 2) || isRace(Races.THUNDERBIRD) || isRace(Races.KIRIN)) && lust100>=75){
 				if (!statStore.hasBuff("Supercharged")){
 					var buff:Number = 1;
 					if (perkv1(IMutationsLib.RaijuCathodeIM) >= 3) buff *= 2
