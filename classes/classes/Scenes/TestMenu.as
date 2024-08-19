@@ -90,7 +90,7 @@ public class TestMenu extends BaseContent
 		bd.add("Bugfixes", cheatBugfixes, "Buttons or fixing some rare old bugs that can't be fixd with save-updater.");
 		bd.add("Testing", cheatTesting, "Buttons for testing some new stuff. May break your game if something is outdated.");
 		bd.add("Bags expansion", SceneLib.garden.justForTestBuildsAdjustingBagsCapacityCuzINotWannaWasteSaveUpdateForThat, "Expand the bags. (If you not own any of them will not have any effect)");
-		bd.add("DemonizeMe", AddJabbyShit1, "Add 1 Demonize Me.");
+		bd.add("Amily Re:Fit", AddJabbyShit1, "Amily Re:Fit.").disableIf(player.hasPerk(PerkLib.Soulless));
 		bd.add("X-Uni 2", MightyOrNot, "Adding status effect needed for gifts and yuri scene unlock in demon lair.");
 		submenu(bd, playerMenu, 0, false);
 	}
@@ -135,8 +135,12 @@ public class TestMenu extends BaseContent
 	}
 	
 	public function AddJabbyShit1():void {
-		outputText("\n\n<b>(Gained 1 Demonize Me!)</b>\n\n");
-		inventory.takeItem(consumables.DEMONME, SoulforceCheats);
+		outputText("\n\n<b>Amilly have been Re:Fit'd.</b>\n\n");
+		flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] = 0;
+		flags[kFLAGS.AMILY_FOLLOWER] = 1;
+		flags[kFLAGS.AMILY_WARNING] = 0;
+		flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 1;
+		doNext(SoulforceCheats);
 	}
 
 	private function FaeDragTest2():void{

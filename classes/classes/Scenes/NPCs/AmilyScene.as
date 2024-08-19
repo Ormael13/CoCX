@@ -323,10 +323,8 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				if (flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] >= 5 && flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] == 0) {
 					if (flags[kFLAGS.AMILY_AFFECTION] < 40) thisIsAReallyShittyBadEnd();
 					else thisFunctionProbablySucksTooOhYeahAmilyFunction();
-
 					return;
 				}
-
 				//Man Meetinz!
 				if (player.gender == 1) {
 					//Desperate Plea

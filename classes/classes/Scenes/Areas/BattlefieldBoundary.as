@@ -132,8 +132,7 @@ use namespace CoC;
 				when: function ():Boolean {
 					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
 							&& flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
-							&& !player.hasStatusEffect(StatusEffects.EtnaOff)
-							&& (player.level >= 20 || flags[kFLAGS.HARDCORE_MODE] == 1);
+							&& !player.hasStatusEffect(StatusEffects.EtnaOff);
 				},
 				chance: battlefieldBoundaryChance,
 				call: SceneLib.etnaScene.repeatYandereEnc
@@ -185,7 +184,7 @@ use namespace CoC;
 			});
 		}
 		
-		public const discoverLevel:int = 5;
+		public const discoverLevel:int = 15;
 		public const areaLevel:int = 16;
 		public function isDiscovered():Boolean {
 			return SceneLib.exploration.counters.battlefieldBoundary > 0;

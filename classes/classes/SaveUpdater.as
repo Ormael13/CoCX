@@ -2682,26 +2682,28 @@ public class SaveUpdater extends NPCAwareContent {
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.55) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.55;
 				outputText("\n\nSmall housekeeping for Warfr... Soulless PC's.");
-				if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) {
-					player.removeStatusEffect(StatusEffects.JojoNightWatch);
-					player.removeStatusEffect(StatusEffects.PureCampJojo);
-					JojoScene.monk = 1;
-				}
-				if (flags[kFLAGS.AMILY_FOLLOWER] == 1) {
-					flags[kFLAGS.AMILY_FOLLOWER] = 0;
-					flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] = 1;
-					flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
-					if (player.hasStatusEffect(StatusEffects.CombatFollowerAmily)) player.removeStatusEffect(StatusEffects.CombatFollowerAmily);
-					if (flags[kFLAGS.PLAYER_COMPANION_1] == "Amily") flags[kFLAGS.PLAYER_COMPANION_1] = "";
-					if (flags[kFLAGS.PLAYER_COMPANION_2] == "Amily") flags[kFLAGS.PLAYER_COMPANION_2] = "";
-					if (flags[kFLAGS.PLAYER_COMPANION_3] == "Amily") flags[kFLAGS.PLAYER_COMPANION_3] = "";
-				}
-				if (flags[kFLAGS.KIHA_FOLLOWER] > 0) {
-					flags[kFLAGS.KIHA_CORRUPTION_BITCH] == 1;
-					if (player.hasStatusEffect(StatusEffects.CombatFollowerAmily)) player.removeStatusEffect(StatusEffects.CombatFollowerAmily);
-					if (flags[kFLAGS.PLAYER_COMPANION_1] == "Kiha") flags[kFLAGS.PLAYER_COMPANION_1] = "";
-					if (flags[kFLAGS.PLAYER_COMPANION_2] == "Kiha") flags[kFLAGS.PLAYER_COMPANION_2] = "";
-					if (flags[kFLAGS.PLAYER_COMPANION_3] == "Kiha") flags[kFLAGS.PLAYER_COMPANION_3] = "";
+				if (player.hasPerk(PerkLib.Soulless)) {
+					if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) {
+						player.removeStatusEffect(StatusEffects.JojoNightWatch);
+						player.removeStatusEffect(StatusEffects.PureCampJojo);
+						JojoScene.monk = 1;
+					}
+					if (flags[kFLAGS.AMILY_FOLLOWER] == 1) {
+						flags[kFLAGS.AMILY_FOLLOWER] = 0;
+						flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] = 1;
+						flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
+						if (player.hasStatusEffect(StatusEffects.CombatFollowerAmily)) player.removeStatusEffect(StatusEffects.CombatFollowerAmily);
+						if (flags[kFLAGS.PLAYER_COMPANION_1] == "Amily") flags[kFLAGS.PLAYER_COMPANION_1] = "";
+						if (flags[kFLAGS.PLAYER_COMPANION_2] == "Amily") flags[kFLAGS.PLAYER_COMPANION_2] = "";
+						if (flags[kFLAGS.PLAYER_COMPANION_3] == "Amily") flags[kFLAGS.PLAYER_COMPANION_3] = "";
+					}
+					if (flags[kFLAGS.KIHA_FOLLOWER] > 0) {
+						flags[kFLAGS.KIHA_CORRUPTION_BITCH] == 1;
+						if (player.hasStatusEffect(StatusEffects.CombatFollowerAmily)) player.removeStatusEffect(StatusEffects.CombatFollowerAmily);
+						if (flags[kFLAGS.PLAYER_COMPANION_1] == "Kiha") flags[kFLAGS.PLAYER_COMPANION_1] = "";
+						if (flags[kFLAGS.PLAYER_COMPANION_2] == "Kiha") flags[kFLAGS.PLAYER_COMPANION_2] = "";
+						if (flags[kFLAGS.PLAYER_COMPANION_3] == "Kiha") flags[kFLAGS.PLAYER_COMPANION_3] = "";
+					}
 				}
 			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.56) {
@@ -2738,4 +2740,4 @@ public class SaveUpdater extends NPCAwareContent {
 		}
 	}
 }
-}
+}

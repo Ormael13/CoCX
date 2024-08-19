@@ -90,25 +90,25 @@ import classes.internals.*;
 			this.weaponName = "fists";
 			this.weaponVerb="punches";
 			this.armorName = "translucent clothes";
-			this.armorDef = 1;
+			this.armorDef = 100;
 			this.lust = 10;
 			if (rand(2) == 0) {
-				initStrTouSpeInte(44, 55, 66, 140);
-				initWisLibSensCor(140, 1, 140, 50);
-				this.weaponAttack = 30;
-				this.armorMDef = 30;
-				this.bonusHP = 150;
-				this.bonusLust = 171;
-				this.level = 30;
+				initStrTouSpeInte(132, 165, 198, 420);
+				initWisLibSensCor(420, 1, 420, 50);
+				this.weaponAttack = 86;
+				this.armorMDef = 86;
+				this.bonusHP = 750;
+				this.bonusLust = 464;
+				this.level = 43;
 			}
 			else {
-				initStrTouSpeInte(42, 53, 63, 100);
-				initWisLibSensCor(100, 1, 100, 50);
-				this.weaponAttack = 24;
-				this.armorMDef = 24;
-				this.bonusHP = 120;
-				this.bonusLust = 131;
-				this.level = 24;
+				initStrTouSpeInte(126, 159, 189, 300);
+				initWisLibSensCor(300, 1, 300, 50);
+				this.weaponAttack = 72;
+				this.armorMDef = 72;
+				this.bonusHP = 500;
+				this.bonusLust = 337;
+				this.level = 36;
 			}
 			this.gems = 10 + rand(5);
 			this.drop = NO_DROP;

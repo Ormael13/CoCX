@@ -23,7 +23,7 @@ public class BattlefieldOuter extends BaseContent
 {
 	public var battlefieldEnemiesScene:BattlefieldEnemiesScenes = new BattlefieldEnemiesScenes();
 	
-	public const areaLevel:int = 19;
+	public const areaLevel:int = 33;
 	public function isDiscovered():Boolean {
 		return SceneLib.exploration.counters.battlefieldOuter > 0;
 	}
@@ -117,8 +117,7 @@ public class BattlefieldOuter extends BaseContent
 			when: function ():Boolean {
 				return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
 						&& flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
-						&& !player.hasStatusEffect(StatusEffects.EtnaOff)
-						&& (player.level >= 20 || flags[kFLAGS.HARDCORE_MODE] == 1);
+						&& !player.hasStatusEffect(StatusEffects.EtnaOff);
 			},
 			chance: battlefieldOuterChance,
 			call: SceneLib.etnaScene.repeatYandereEnc
