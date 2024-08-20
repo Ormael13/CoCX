@@ -12,14 +12,14 @@ public class WingedCockatrice extends Cockatrice
 		public function WingedCockatrice() 
 		{
 			super();
-			initStrTouSpeInte(235, 220, 255, 86);
-			initWisLibSensCor(76, 85, 50, 20);
-			this.weaponAttack = 80;
-			this.armorDef = 120;
-			this.armorMDef = 60;
-			this.bonusHP = 2500;
-			this.bonusLust = 219;
-			this.level = 84;
+			initStrTouSpeInte(635, 720, 755, 306);
+			initWisLibSensCor(276, 415, 380, 20);
+			this.weaponAttack = 480;
+			this.armorDef = 1200;
+			this.armorMDef = 600;
+			this.bonusHP = 10000;
+			this.bonusLust = 889;
+			this.level = 94;
 			this.gems = rand(20) + 230;
 			this.createStatusEffect(StatusEffects.Flying,50,0,0,0);
 			wings.type = Wings.FEATHERED_LARGE;

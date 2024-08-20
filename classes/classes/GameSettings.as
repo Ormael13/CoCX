@@ -79,17 +79,17 @@ public class GameSettings extends BaseContent {
 		outputText("<b><u>SAVE-RELATED FLAGS</u></b>\n");
 		outputText("The following flags are applied to the save - you <b>must</b> be <i>in a game session</i> (e.g. load your save, hit \"Main Menu\", change them. If you load a save, they will be set to the saved values.");
 		outputText("\n\n");
-		player.displayFinalGameDifficulty();
-		outputText("\n\n");
-		if (daysPerYear_temp == 0) {
-			outputText("Timescale: [font-green]<b>REAL</b>[/font]\n In-game date (used for holiday events) uses real date from your computer.");
-			if (flags[kFLAGS.DAYS_PER_YEAR] > 0) outputText("\n[font-dred]<b>WARNING: your current in-game date will be erased after you exit this menu.</b>[/font]");
-		} else {
-			outputText("Timescale: [font-blue]<b>DAYS ("+daysPerYear_temp+" in-game days per year)</b>[/font]\n In-game date is calculated from the days spent in Mareth.");
-		}
-		outputText("\nDay of the month event requirements (e.g. exact days of Easter/Thanksgiving) <b>" + (daysPerYear_temp == 0 || daysPerYear_temp == 365 ? "ARE" : "are NOT") + "</b> taken into account with the selected option.");
-		outputText("\n\n");
 		if (player) {
+			player.displayFinalGameDifficulty();
+			outputText("\n\n");
+			if (daysPerYear_temp == 0) {
+				outputText("Timescale: [font-green]<b>REAL</b>[/font]\n In-game date (used for holiday events) uses real date from your computer.");
+				if (flags[kFLAGS.DAYS_PER_YEAR] > 0) outputText("\n[font-dred]<b>WARNING: your current in-game date will be erased after you exit this menu.</b>[/font]");
+			} else {
+				outputText("Timescale: [font-blue]<b>DAYS ("+daysPerYear_temp+" in-game days per year)</b>[/font]\n In-game date is calculated from the days spent in Mareth.");
+			}
+			outputText("\nDay of the month event requirements (e.g. exact days of Easter/Thanksgiving) <b>" + (daysPerYear_temp == 0 || daysPerYear_temp == 365 ? "ARE" : "are NOT") + "</b> taken into account with the selected option.");
+			outputText("\n\n");
 			if (flags[kFLAGS.PRIMARY_DIFFICULTY] <= 0) {
 				outputText("Primary Difficulty: [font-olive]<b>Easy</b>[/font]\n No opponent(s) stats modifiers. You can resume from bad-ends with penalties. No penatlies for too high wrath. Internal mutation negative effects will be triggered after accumulating 11 points in internal mutation score.");
 			}

@@ -172,21 +172,21 @@ public class Cockatrice extends Monster {
         this.skinType = Skin.SCALES;
         this.hairColor = "blue";
         this.hairLength = 2;
-        initStrTouSpeInte(215, 200, 235, 80);
-        initWisLibSensCor(60, 75, 45, 20);
+        initStrTouSpeInte(615, 700, 735, 280);
+        initWisLibSensCor(260, 375, 345, 20);
         this.weaponName = "talons";
         this.weaponVerb = "claw";
-        this.weaponAttack = 50;
+        this.weaponAttack = 450;
         this.armorName = "scales and feathers";
-        this.armorDef = 100;
-		this.armorMDef = 50;
+        this.armorDef = 1000;
+		this.armorMDef = 500;
         this.armorPerk = "";
         this.armorValue = 70;
-        this.bonusHP = 2000;
-		this.bonusLust = 199;
+        this.bonusHP = 7000;
+		this.bonusLust = 811;
         this.lust = 30;
         this.lustVuln = .5;
-        this.level = 79;
+        this.level = 91;
         this.gems = rand(50) + 210;
         this.drop = new WeightedDrop()
             .add(consumables.REPTLUM, 35)
@@ -203,6 +203,7 @@ public class Cockatrice extends Monster {
         this.tail.type = Tail.COCKATRICE;
         */
         this.tail.recharge = 0;
+        this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 		this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
         this.createPerk(PerkLib.BasiliskResistance, 0, 0, 0, 0);
         checkMonster();

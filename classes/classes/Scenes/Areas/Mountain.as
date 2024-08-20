@@ -70,7 +70,7 @@ public class Mountain extends BaseContent
 			return SceneLib.exploration.counters.mountainsLow;
 		}
 		
-		public const areaLevelMid:int = 30;
+		public const areaLevelMid:int = 51;
 		public function isDiscoveredMid():Boolean {
 			return SceneLib.exploration.counters.mountainsMid > 0;
 		}
@@ -649,13 +649,6 @@ public class Mountain extends BaseContent
 				kind  : 'walk',
 				chance:0.2,
 				call:hike
-			}, {
-				name: "mimic",
-				label : "Mimic",
-				kind : 'monster',
-				chance:0.1,
-				when: fn.ifLevelMin(3),
-				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
 			}, {
 				name: "harpychicken",
 				label : "Harpy Chicken",

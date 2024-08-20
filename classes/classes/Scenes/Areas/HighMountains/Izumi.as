@@ -30,61 +30,38 @@ public class Izumi extends Monster
 				this.additionalXP = 250;
 			}
 			else if (flags[kFLAGS.IZUMI_LVL_UP] < 1) {
-				initStrTouSpeInte(280, 190, 140, 130);
-				initWisLibSensCor(130, 50, 35, 15);
-				this.weaponAttack = 60;
-				this.armorDef = 16;
-				this.armorMDef = 12;
-				this.bonusHP = 1200;
-				this.bonusLust = 127;
-				this.level = 42;
-				this.additionalXP = 200;
+				initStrTouSpeInte(810, 570, 420, 390);
+				initWisLibSensCor(390, 150, 105, 15);
+				this.weaponAttack = 240;
+				this.armorDef = 360;
+				this.armorMDef = 280;
+				this.bonusHP = 5000;
+				this.bonusLust = 328;
+				this.level = 73;
+				this.additionalXP = 300;
 			}
-			else if (flags[kFLAGS.IZUMI_LVL_UP] <= 3) {	//leave min and max levels to easily balance npc combat
-				initStrTouSpeInte(280 + 25*lvlMulti, 190 + 20*lvlMulti, 140 + 15*lvlMulti, 130 + 10*lvlMulti);
-				initWisLibSensCor(130 + 10*lvlMulti, 50 + 10*lvlMulti, 35 + 5*lvlMulti, 15);
-				this.weaponAttack = 60 + 5*lvlMulti;
-				this.armorDef = 16 + lvlMulti;
-				this.armorMDef = 12 + lvlMulti;
-				this.bonusHP = 1200 + 200*lvlMulti;
-				this.bonusLust = 127 + 21*lvlMulti;
-				this.level = 42 + 6*lvlMulti;
-				this.additionalXP = 200 + 25*lvlMulti;
-			}
-			else if (flags[kFLAGS.IZUMI_LVL_UP] <= 7) {
-				lvlMulti -= 6;
-				initStrTouSpeInte(385 + 30*lvlMulti, 275 + 25*lvlMulti, 205 + 20*lvlMulti, 110 + 10*lvlMulti);
-				initWisLibSensCor(110 + 10*lvlMulti, 30 + 10*lvlMulti, 25 + 5*lvlMulti, 15);
-				this.weaponAttack = 80 + 10*lvlMulti;
-				this.armorDef = 23 + lvlMulti;
-				this.armorMDef = 16 + lvlMulti;
-				this.bonusHP = 2000 + 200*lvlMulti;
-				this.bonusLust = 211 + 21*lvlMulti;
-				this.level = 66 + 6*lvlMulti;
+			else if (flags[kFLAGS.IZUMI_LVL_UP] <= 9) {	//leave min and max levels to easily balance npc combat
+				initStrTouSpeInte(810 + 55*lvlMulti, 570 + 50*lvlMulti, 420 + 45*lvlMulti, 390 + 30*lvlMulti);
+				initWisLibSensCor(390 + 30*lvlMulti, 150 + 30*lvlMulti, 105 + 15*lvlMulti, 15);
+				this.weaponAttack = 240 + 30*lvlMulti;
+				this.armorDef = 360 + 40*lvlMulti;
+				this.armorMDef = 280 + 20*lvlMulti;
+				this.bonusHP = 5000 + 1000*lvlMulti;
+				this.bonusLust = 328 + 51*lvlMulti;
+				this.level = 73 + 6*lvlMulti;
 				this.additionalXP = 300 + 50*lvlMulti;
 			}
-			else if (flags[kFLAGS.IZUMI_LVL_UP] == 8) {
-				initStrTouSpeInte(510, 405, 290, 220);
-				initWisLibSensCor(220, 140, 80, 15);
-				this.weaponAttack = 125;
-				this.armorDef = 30;
-				this.armorMDef = 20;
-				this.bonusHP = 3000;
-				this.bonusLust = 295;
-				this.level = 90;
-				this.additionalXP = 500;
-			}
 			else if (flags[kFLAGS.IZUMI_LVL_UP] == 9) {
-				initStrTouSpeInte(545, 460, 315, 240);
-				initWisLibSensCor(240, 160, 90, 15);
-				this.weaponAttack = 140;
-				this.armorDef = 32;
-				this.armorMDef = 21;
-				this.bonusHP = 3400;
-				this.bonusLust = 316;
-				this.level = 96;
-				this.additionalXP = 550;
-			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
+				initStrTouSpeInte(1305, 1020, 825, 660);
+				initWisLibSensCor(660, 420, 240, 15);
+				this.weaponAttack = 510;
+				this.armorDef = 720;
+				this.armorMDef = 460;
+				this.bonusHP = 14000;
+				this.bonusLust = 787;
+				this.level = 127;
+				this.additionalXP = 750;
+			}
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
 				this.a = "the ";
 				this.short = "mist Oni";

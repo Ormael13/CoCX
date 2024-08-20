@@ -170,7 +170,7 @@ public class WoodElvesHuntingParty extends Monster
 			this.long = "You are fighting a wood elf hunting party. The girls are all dressed up light and use bows or spears if they have a weapon at all. It'd be a good guess to think they intend to tease you into submission rather than beat you into it seeing as they hardly seem to take the battle all that seriously.";
 			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 30, 0, 0, 0);
-			createBreastRow(Appearance.breastCupInverse("F"));
+			createBreastRow(Appearance.breastCupInverse("II"));
 			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
 			this.ass.analWetness = AssClass.WETNESS_MOIST;
 			this.plural = true;

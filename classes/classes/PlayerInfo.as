@@ -1039,16 +1039,16 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.AKBAL_LVL_UP] == 11) outsideCampNpcsStats += "<b>Akbal lvl:</b> 98 (current max lvl he can reach)\n";
 		else if (flags[kFLAGS.AKBAL_LVL_UP] < 1) outsideCampNpcsStats += "<b>Akbal lvl:</b> 32\n";
 		else outsideCampNpcsStats += getNPCLevel("Akbal", 20, 0, 13, 6, flags[kFLAGS.AKBAL_LVL_UP]);
-		if (flags[kFLAGS.IZUMI_LVL_UP] == 9) outsideCampNpcsStats += "<b>Izumi lvl:</b> 96 (current max lvl she can reach)\n";
-		else if (flags[kFLAGS.IZUMI_LVL_UP] < 1) outsideCampNpcsStats += "<b>Izumi lvl:</b> 42\n";
-		else outsideCampNpcsStats += getNPCLevel("Izumi", 42, 0, 9, 6, flags[kFLAGS.IZUMI_LVL_UP]);
+		if (flags[kFLAGS.IZUMI_LVL_UP] == 9) outsideCampNpcsStats += "<b>Izumi lvl:</b> 127 (current max lvl she can reach)\n";
+		else if (flags[kFLAGS.IZUMI_LVL_UP] < 1) outsideCampNpcsStats += "<b>Izumi lvl:</b> 63\n";
+		else outsideCampNpcsStats += getNPCLevel("Izumi", 63, 0, 9, 6, flags[kFLAGS.IZUMI_LVL_UP]);
 		if (flags[kFLAGS.MET_KITSUNES] == 4) outsideCampNpcsStats += "<b>Kitsune sisters lvl:</b> 55 (current max lvl they can reach)\n";
 		if (flags[kFLAGS.MET_KITSUNES] == 3) outsideCampNpcsStats += "<b>Kitsune sisters lvl:</b> 49\n";
 		if (flags[kFLAGS.MET_KITSUNES] == 2) outsideCampNpcsStats += "<b>Kitsune sisters lvl:</b> 43\n";
 		if (flags[kFLAGS.MET_KITSUNES] < 2) outsideCampNpcsStats += "<b>Kitsune sisters lvl:</b> 37\n";
-		if (flags[kFLAGS.MINERVA_LVL_UP] == 10) outsideCampNpcsStats += "<b>Minerva lvl:</b> 95 (current max lvl she can reach)\n";
-		else if (flags[kFLAGS.MINERVA_LVL_UP] < 1) outsideCampNpcsStats += "<b>Minerva lvl:</b> 35\n";
-		else outsideCampNpcsStats += getNPCLevel("Minerva", 35, 0, 10, 6, flags[kFLAGS.MINERVA_LVL_UP]);
+		if (flags[kFLAGS.MINERVA_LVL_UP] == 10) outsideCampNpcsStats += "<b>Minerva lvl:</b> 123 (current max lvl she can reach)\n";
+		else if (flags[kFLAGS.MINERVA_LVL_UP] < 1) outsideCampNpcsStats += "<b>Minerva lvl:</b> 63\n";
+		else outsideCampNpcsStats += getNPCLevel("Minerva", 63, 0, 10, 6, flags[kFLAGS.MINERVA_LVL_UP]);
 		if (flags[kFLAGS.PRISCILLA_TALK_COUNTER] >= 1) {
 			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 11) outsideCampNpcsStats += "<b>Priscilla lvl:</b> 98 (current max lvl she can reach)\n";
 			else if (flags[kFLAGS.PRISCILLA_LVL_UP] < 1) outsideCampNpcsStats += "<b>Priscilla lvl:</b> 32\n";
@@ -1062,7 +1062,7 @@ public class PlayerInfo extends BaseContent {
 			if (flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] < 20) outsideCampNpcsStats += "<b>Minotaur Gang lvl:</b> ";
 			else outsideCampNpcsStats += "<b>Minotaur Tribe lvl:</b> ";
 			if (flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] >= 3) outsideCampNpcsStats += "" + Math.round(16 + flags[kFLAGS.MINO_SONS_LVL_UP] + flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3) + "\n";
-			else outsideCampNpcsStats += "16\n";
+			else outsideCampNpcsStats += "27\n";
 		}
 		if (outsideCampNpcsStats != "")
 			outputText("\n<b><u>Outside camp NPC's Stats</u></b>\n" + outsideCampNpcsStats);

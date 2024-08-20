@@ -110,19 +110,19 @@ public class Harpy extends Monster
 			this.skinDesc = "feathers";
 			this.hairColor = "blue";
 			this.hairLength = 16;
-			initStrTouSpeInte(130, 100, 170, 70);
-			initWisLibSensCor(80, 90, 40, 80);
+			initStrTouSpeInte(390, 300, 510, 210);
+			initWisLibSensCor(240, 270, 120, 80);
 			this.weaponName = "talons";
 			this.weaponVerb="slashing talons";
-			this.weaponAttack = 75;
+			this.weaponAttack = 225;
 			this.armorName = "feathers";
-			this.armorDef = 20;
-			this.armorMDef = 2;
-			this.bonusHP = 500;
-			this.bonusLust = 165;
+			this.armorDef = 500;
+			this.armorMDef = 100;
+			this.bonusHP = 2000;
+			this.bonusLust = 448;
 			this.lust = 10;
 			this.lustVuln = .6;
-			this.level = 35;
+			this.level = 58;
 			this.gems = 45 + rand(10);
 			this.drop = new ChainedDrop().add(armors.W_ROBES,1/10)
 					.add(consumables.SKYSEED,1/5)

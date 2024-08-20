@@ -163,14 +163,14 @@ public class FetishZealot extends Monster
 			if (flags[kFLAGS.FETISH_FOLLOWER_SUBTYPE] == 2) {
 				this.short = "fetish priest";
 				this.long = "The priest is clad in a bizarre set of religious robes.  They are similar to what you've seen on other religious leaders from home, but none that included the large slit at the front that lets his above average sized human dick stick out the front.";
-				initStrTouSpeInte(345, 355, 400, 30);
-				initWisLibSensCor(30, 400, 420, 100);
-				this.weaponAttack = 48;
-				this.armorDef = 100;
-				this.armorMDef = 50;
-				this.bonusHP = 2000;
-				this.bonusLust = 907;
-				this.level = 87;
+				initStrTouSpeInte(690, 710, 800, 100);
+				initWisLibSensCor(100, 800, 820, 100);
+				this.weaponAttack = 340;
+				this.armorDef = 1000;
+				this.armorMDef = 500;
+				this.bonusHP = 10000;
+				this.bonusLust = 1724;
+				this.level = 104;
 				this.gems = 110+rand(10);
 				this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			}

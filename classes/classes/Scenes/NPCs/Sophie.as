@@ -199,7 +199,6 @@ import classes.internals.*;
 		{
 			super(true);
 			trace("Sophie Constructor!");
-		
 			this.a = "";
 			this.short = "Sophie";
 			this.imageName = "sophie";
@@ -218,19 +217,19 @@ import classes.internals.*;
 			this.skinDesc = "feathers";
 			this.hairColor = "pink";
 			this.hairLength = 16;
-			initStrTouSpeInte(80, 70, 130, 80);
-			initWisLibSensCor(80, 60, 50, 60);
+			initStrTouSpeInte(240, 210, 420, 240);
+			initWisLibSensCor(240, 180, 150, 60);
 			this.weaponName = "talons";
 			this.weaponVerb="slashing talons";
-			this.weaponAttack = 40;
+			this.weaponAttack = 120;
 			this.armorName = "feathers";
-			this.armorDef = 10;
-			this.armorMDef = 0;
-			this.bonusHP = 300;
-			this.bonusLust = 132;
+			this.armorDef = 350;
+			this.armorMDef = 70;
+			this.bonusHP = 1000;
+			this.bonusLust = 384;
 			this.lust = 10;
 			this.lustVuln = .3;
-			this.level = 22;
+			this.level = 54;
 			this.gems = 40 + rand(45);
 			this.drop = new ChainedDrop().add(armors.W_ROBES,1/10)
 					.elseDrop(consumables.GLDSEED);

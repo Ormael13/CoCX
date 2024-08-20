@@ -281,7 +281,7 @@ public class Changelog extends BaseContent
 			outputText("-New head jewelery (by Liadri): Dragon Blood Helmet - buyable at Kaiba shop in Tel'Adre. Cost 400 gems. Reinforce all breath weapon Effect by 50%. Deals 20% more damage against dragons.\n");
 			outputText("-Lower body for wereshark race been made mandatory for them (aka giving -1000 penatly if pc not have it).\n");
 			outputText("-Cursed Tag, Improved Cursed Tag, Greater Cursed Tag perks hve not req. of min level making them respectively tier 1, 2 and 3 perks.\n");
-			outputText("-Areas and Places with enemies to fight have their general levels and stats increased. Areas/Places adjusted (new lvl range of enemies): Lake (3-10), Boat (15-29), Forest (O)(8-16), Forest (I)(19-27), Deepwoods (32-52), Desert (O)(13-20), Desert (I)(25-39), Battlefield (B)(18-41), Battlefield (O)(36-65), Hills (23-30), Low Mountains (35-49)\n");
+			outputText("-Areas and Places with enemies to fight have their general levels and stats increased. Areas/Places adjusted (new lvl range of enemies): Lake (3-10), Boat (15-29), Forest (O)(8-16), Forest (I)(19-27), Deepwoods (32-52), Desert (O)(13-20), Desert (I)(25-39), Battlefield (B)(18-41), Battlefield (O)(36-65), Hills (23-30), Low Mountains (35-49), Mountains (54-74), High Mountains (79-104)\n");
 			outputText("-Entangle green spell would now causing enemy to not act with 50% chance each turn it's active.\n");
 			outputText("-New mutation perk: Drake Blood (Evolved). Req. Drake Blood (Primitive) and lvl 60+. Effects: Dragon strong vitality grants mana soulforce and health regeneration 3%. You take 10% less damage from magical attack. Magic Effect from you are 25% more powerful.\n");
 			outputText("-New mutation perk: Drake Blood (Final Form). Req. Drake Blood (Evolved) and lvl 90+. Effects: Dragon strong vitality grants mana soulforce and health regeneration 4%. You take 15% less damage from magical attack. Magic Effect from you are 50% more powerful. Magic Ability are 100% Stronger.\n");
@@ -306,7 +306,7 @@ public class Changelog extends BaseContent
 			outputText("enemy can't escape from scylla grapple using only it own strength and using Scylla Squeeze as Kraken would give each time 5% combat wounds debuff on enemy (up to 80%).\n");
 			outputText("-Aquatic Affinity can be gained additional if pc lower body is that of scylla / kraken OR pc is having any arigean parasite.\n");
 			outputText("-New enemy: Proto Golem - lvl 6. Encounterable in general explore from lvl 6+.\n");
-			outputText("-\n");
+			outputText("-Minerva and Izumi base level was increased and accordly their max lvl they can gain by leveling increased too to each raching within 120-130 lvl range.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

@@ -219,51 +219,49 @@ public class Minerva extends Monster
 		public function Minerva()
 		{
 			if (flags[kFLAGS.MINERVA_LVL_UP] < 1) {
-				initStrTouSpeInte(98, 120, 150, 105);
-				initWisLibSensCor(100, 52, 45, 45);
-				this.weaponAttack = 70;
-				this.armorDef = 11;
-				this.armorMDef = 4;
-				this.bonusHP = 1410;
-				this.bonusLust = 132;
-				this.level = 35;//potem zrobic jak purification udane to dostaje nieco lvl up i stat up tez
-				this.additionalXP = 150;
+				initStrTouSpeInte(324, 400, 500, 315);
+				initWisLibSensCor(300, 286, 235, 45);
+				this.weaponAttack = 420;
+				this.armorDef = 660;
+				this.armorMDef = 240;
+				this.bonusHP = 3000;
+				this.bonusLust = 584;
+				this.level = 63;//potem zrobic jak purification udane to dostaje nieco lvl up i stat up tez
+				this.additionalXP = 250;
 			}
 			else if (flags[kFLAGS.MINERVA_LVL_UP] == 10) {
-				initStrTouSpeInte(268, 320, 350, 255);
-				initWisLibSensCor(250, 162, 145, 45);
-				this.weaponAttack = 170;
-				this.armorDef = 31;
-				this.armorMDef = 14;
-				this.bonusHP = 6110;
-				this.bonusLust = 402;
-				this.level = 95;
-				this.additionalXP = 650;
+				initStrTouSpeInte(784, 900, 1000, 715);
+				initWisLibSensCor(700, 616, 535, 45);
+				this.weaponAttack = 820;
+				this.armorDef = 1260;
+				this.armorMDef = 540;
+				this.bonusHP = 10000;
+				this.bonusLust = 1274;
+				this.level = 123;
+				this.additionalXP = 750;
 			}
 			else {	//leave min and max levels to easily balance npc combat
 				var lvlMulti:Number = flags[kFLAGS.MINERVA_LVL_UP];
-				initStrTouSpeInte(98 + 17*lvlMulti, 120 + 20*lvlMulti, 150 + 20*lvlMulti, 105 + 15*lvlMulti);
-				initWisLibSensCor(100 + 15*lvlMulti, 52 + 11*lvlMulti, 45 + 10*lvlMulti, 45);
-				this.weaponAttack = 70 + 10*lvlMulti;
-				this.armorDef = 11 + 2*lvlMulti;
-				this.armorMDef = 4 + lvlMulti;
-				this.bonusHP = 1410 + 470*lvlMulti;
-				this.bonusLust = 132 + 27*lvlMulti;
-				this.level = 35 + 6*lvlMulti;
-				this.additionalXP = 150 + 50*lvlMulti;
-			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
+				initStrTouSpeInte(324 + 46*lvlMulti, 400 + 50*lvlMulti, 500 + 50*lvlMulti, 315 + 40*lvlMulti);
+				initWisLibSensCor(300 + 40*lvlMulti, 286 + 33*lvlMulti, 235 + 30*lvlMulti, 45);
+				this.weaponAttack = 420 + 40*lvlMulti;
+				this.armorDef = 660 + 60*lvlMulti;
+				this.armorMDef = 240 + 30*lvlMulti;
+				this.bonusHP = 3000 + 700*lvlMulti;
+				this.bonusLust = 584 + 69*lvlMulti;
+				this.level = 63 + 6*lvlMulti;
+				this.additionalXP = 250 + 50*lvlMulti;
+			}
 			//corrupted minerva {
-			//TODO: - Increase Corrupt Minerva’s combat stats by 10%
-			//TODO: - Minerva bace lust up by 20
 			if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) {
-				initStrTouSpeInte(this.str * 1.1, this.tou * 1.1, this.spe * 1.1, this.inte * 1.1);
-				initWisLibSensCor(this.wis * 1.1, this.lib * 1.1, this.sens * 1.1, 80);
-				this.weaponAttack *= 1.1;
-				this.armorDef *= 1.1;
-				this.armorMDef *= 1.1;
-				this.bonusHP *= 1.1;
-				this.bonusLust *= 1.2;
-				this.additionalXP *= 1.1;
+				initStrTouSpeInte(this.str * 1.2, this.tou * 1.2, this.spe * 1.2, this.inte * 1.2);
+				initWisLibSensCor(this.wis * 1.2, this.lib * 1.2, this.sens * 1.2, 80);
+				this.weaponAttack *= 1.2;
+				this.armorDef *= 1.2;
+				this.armorMDef *= 1.2;
+				this.bonusHP *= 1.2;
+				this.bonusLust *= 1.4;
+				this.additionalXP *= 1.2;
 			}
 			this.a = "";
 			this.short = "Minerva";

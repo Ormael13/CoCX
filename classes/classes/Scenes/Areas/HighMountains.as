@@ -21,7 +21,7 @@ public class HighMountains extends BaseContent {
     public var cockatriceScene:CockatriceScene = new CockatriceScene();
     public var nekobakeInn:NekobakeInn = new NekobakeInn();
     
-    public const areaLevel:int = 55;
+    public const areaLevel:int = 76;
     public function isDiscovered():Boolean {
         return SceneLib.exploration.counters.highMountains > 0;
     }

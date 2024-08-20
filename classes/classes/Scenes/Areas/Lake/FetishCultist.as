@@ -158,14 +158,14 @@ public class FetishCultist extends Monster
 			}
 			if (flags[kFLAGS.FETISH_FOLLOWER_SUBTYPE] == 3) {
 				this.short = "fetish evangelist";
-				initStrTouSpeInte(240, 250, 300, 30);
-				initWisLibSensCor(30, 255, 300, 100);
-				this.armorDef = 65;
-				this.armorMDef = 20;
-				this.weaponAttack = 20;
-				this.bonusHP = 1000;
-				this.bonusLust = 620;
-				this.level = 65;
+				initStrTouSpeInte(590, 620, 700, 100);
+				initWisLibSensCor(100, 625, 700, 100);
+				this.armorDef = 650;
+				this.armorMDef = 200;
+				this.weaponAttack = 260;
+				this.bonusHP = 5000;
+				this.bonusLust = 1411;
+				this.level = 86;
 				this.gems = 105+rand(10);
 				this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			}

@@ -140,19 +140,19 @@ public class Phoenix extends Monster
 			this.skinColor = "light";
 			this.hairColor = "red";
 			this.hairLength = 16;
-			initStrTouSpeInte(195, 185, 190, 94);
-			initWisLibSensCor(90, 100, 40, 45);
+			initStrTouSpeInte(695, 664, 682, 484);
+			initWisLibSensCor(460, 600, 440, 45);
 			this.weaponName = "scimitar and shield";
 			this.weaponVerb="slash";
-			this.weaponAttack = 82;
+			this.weaponAttack = 820;
 			this.armorName = "chainmail and loincloth";
-			this.armorDef = 74;
-			this.armorMDef = 36;
-			this.bonusHP = 2000;
-			this.bonusLust = 202;
+			this.armorDef = 1060;
+			this.armorMDef = 540;
+			this.bonusHP = 8000;
+			this.bonusLust = 1123;
 			this.lust = 10;
 			this.lustVuln = .7;
-			this.level = 62;
+			this.level = 83;
 			this.gems = 160 + rand(40);
 			this.drop = new ChainedDrop().add(useables.EBONBLO,1/20)
 					.add(weapons.SCIMITR,1/20)

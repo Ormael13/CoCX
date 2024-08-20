@@ -137,7 +137,7 @@ public class LightElfs extends Monster
 			if (flags[kFLAGS.DARK_OR_LIGHT_ELF_SUBTYPE] == 10) {
 				this.short = "light elf scout";
 				this.long = "This woman with light skin has long pointed ears. You suspect her to be a light elf, though why she’s here, you have no idea. Regardless, she’s dangerous and seems well equipped for kidnapping.";
-				initStrTouSpeInte(100, 100, 310, 130);
+				initStrTouSpeInte(100, 100, 320, 130);
 				initWisLibSensCor(130, 150, 180, 100);
 				this.armorDef = 80;
 				this.armorMDef = 80;
@@ -150,50 +150,47 @@ public class LightElfs extends Monster
 			if (flags[kFLAGS.DARK_OR_LIGHT_ELF_SUBTYPE] == 11) {
 				this.short = "light elf slaver";
 				this.long = "This lightly armored woman is a Light elf. She's slender and elegant, with light skin and long pointed ears. The look in her eyes, a mixture of bloodlust and greed, give her intentions away...as does her equipment. Ropes, poisoned arrows, she's come to capture slaves. You can hear faint voices from somewhere nearby. Has she already captured people today?";
-				initStrTouSpeInte(60, 80, 140, 70);
-				initWisLibSensCor(70, 60, 70, 85);
-				this.armorDef = 8;
-				this.armorMDef = 8;
-				this.weaponAttack = 8;
-				this.weaponRangeAttack = 27;
-				this.bonusLust = 159;
-				this.level = 29;
+				initStrTouSpeInte(132, 177, 480, 170);
+				initWisLibSensCor(170, 180, 210, 100);
+				this.armorDef = 120;
+				this.armorMDef = 120;
+				this.weaponAttack = 31;
+				this.weaponRangeAttack = 190;
+				this.bonusLust = 450;
+				this.level = 60;
 				this.gems = rand(10) + 25;
 			}
 			if (flags[kFLAGS.DARK_OR_LIGHT_ELF_SUBTYPE] == 12) {
 				this.short = "light elf ranger";
 				this.long = "This woman is a Light elf. She's slender and elegant, with light skin and long pointed ears. The look in her eyes, a mixture of bloodlust and greed, give her intentions away...as does her equipment. Ropes, poisoned arrows, she's come to capture slaves.";
-				initStrTouSpeInte(90, 150, 195, 110);
-				initWisLibSensCor(110, 70, 80, 90);
-				this.armorDef = 16;
-				this.armorMDef = 16;
-				this.weaponAttack = 11;
-				this.weaponRangeAttack = 50;
-				this.bonusLust = 197;
-				this.level = 47;
-				this.gems = rand(15) + 50;
-				this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
+				initStrTouSpeInte(164, 254, 640, 210);
+				initWisLibSensCor(210, 210, 240, 100);
+				this.armorDef = 160;
+				this.armorMDef = 160;
+				this.weaponAttack = 37;
+				this.weaponRangeAttack = 290;
+				this.bonusLust = 529;
+				this.level = 79;
+				this.gems = rand(15) + 60;
 			}
 			if (flags[kFLAGS.DARK_OR_LIGHT_ELF_SUBTYPE] == 13) {
 				this.short = "light elf sniper";
 				this.long = "This woman with light skin has long pointed ears. You suspect her to be a light elf, though why she’s here, you have no idea. Regardless, she’s dangerous and seems well equipped for kidnapping.";
-				initStrTouSpeInte(120, 220, 295, 160);
-				initWisLibSensCor(160, 80, 90, 95);
-				this.armorDef = 16;
-				this.armorMDef = 16;
-				this.weaponAttack = 15;
-				this.weaponRangeAttack = 86;
-				this.bonusLust = 233;
-				this.level = 63;
+				initStrTouSpeInte(196, 331, 800, 250);
+				initWisLibSensCor(250, 240, 270, 100);
+				this.armorDef = 200;
+				this.armorMDef = 200;
+				this.weaponAttack = 43;
+				this.weaponRangeAttack = 390;
+				this.bonusLust = 608;
+				this.level = 98;
 				this.gems = rand(15) + 100;
-				this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
-				this.createPerk(PerkLib.EpicSpeed, 0, 0, 0, 0);
 			}
 			this.a = "the ";
 			this.imageName = "light elf";
 			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 5, 0, 0, 0);
-			createBreastRow(Appearance.breastCupInverse("GG"));
+			createBreastRow(Appearance.breastCupInverse("HH"));
 			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
 			this.ass.analWetness = AssClass.WETNESS_MOIST;
 			this.tallness = 72;
@@ -219,6 +216,10 @@ public class LightElfs extends Monster
 				{ call: AnkleShot, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_WEAPON], condition: function():Boolean{return!player.hasStatusEffect(StatusEffects.Sealed2)}},
 				{ call: WingClip, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_WEAPON], condition: function():Boolean{return player.isFlying()}, weight: Infinity}
 			];
+			this.createPerk(PerkLib.EpicSpeed, 0, 0, 0, 0);
+			if (flags[kFLAGS.DARK_OR_LIGHT_ELF_SUBTYPE] >= 11) this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
+			if (flags[kFLAGS.DARK_OR_LIGHT_ELF_SUBTYPE] >= 12) this.createPerk(PerkLib.LegendarySpeed, 0, 0, 0, 0);
+			if (flags[kFLAGS.DARK_OR_LIGHT_ELF_SUBTYPE] >= 13) this.createPerk(PerkLib.MythicalSpeed, 0, 0, 0, 0);
 			checkMonster();
 		}
 	}
