@@ -41,7 +41,7 @@ public class Mountain extends BaseContent
 		
 		
 		
-		public const areaLevelHills:int = 5;
+		public const areaLevelHills:int = 20;
 		public function isDiscoveredHills():Boolean {
 			return SceneLib.exploration.counters.hills > 0;
 		}
@@ -59,7 +59,7 @@ public class Mountain extends BaseContent
 		}
 		
 		
-		public const areaLevelLow:int = 15;
+		public const areaLevelLow:int = 32;
 		public function isDiscoveredLow():Boolean {
 			return SceneLib.exploration.counters.mountainsLow > 0;
 		}
@@ -85,9 +85,9 @@ public class Mountain extends BaseContent
 		{
 			onGameInit(init);
 		}
-		//Hills: lvl 10-15
-		//Low Mountains: lvl 20-30
-		//Mountains: lvl 35-55
+		//Hills: lvl 23-30
+		//Low Mountains: lvl 35-49
+		//Mountains: lvl 54-74
 		private var _hillsEncounter:GroupEncounter = null;
 		private var _lowmountainEncounter:GroupEncounter = null;
 		private var _midMountainEncounter:GroupEncounter = null;
@@ -122,8 +122,7 @@ public class Mountain extends BaseContent
 				unique: true,
 				when  : function():Boolean {
 					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
-						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
-						   && (player.level >= 20 || flags[kFLAGS.HARDCORE_MODE] == 1);
+						   && !player.hasStatusEffect(StatusEffects.EtnaOff);
 				},
 				chance: mountainChance,
 				call  : function ():void {
@@ -138,8 +137,7 @@ public class Mountain extends BaseContent
 				unique: true,
 				when  : function():Boolean {
 					return (flags[kFLAGS.ETNA_FOLLOWER] >= 2 && EtnaFollower.EtnaInfidelity == 0)
-						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
-						   && (player.level >= 20 || flags[kFLAGS.HARDCORE_MODE] == 1);
+						   && !player.hasStatusEffect(StatusEffects.EtnaOff);
 				},
 				chance: mountainChance,
 				call  : function ():void {
@@ -152,8 +150,7 @@ public class Mountain extends BaseContent
 				unique: true,
 				when  : function():Boolean {
 					return (flags[kFLAGS.ETNA_FOLLOWER] >= 2 && EtnaFollower.EtnaInfidelity == 1)
-						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
-						   && (player.level >= 20 || flags[kFLAGS.HARDCORE_MODE] == 1);
+						   && !player.hasStatusEffect(StatusEffects.EtnaOff);
 				},
 				chance: 0.5,
 				call  : function ():void {
@@ -236,11 +233,6 @@ public class Mountain extends BaseContent
 				},
 				call:ceraphFn,
 				mods:[fn.ifLevelMin(2)]
-			},{
-				name: "lightelf",
-				label : "Light Elf",
-				kind : 'monster',
-				call: lightelfScene.introLightELfScout
 			}, {
 				name: "lactoblasters",
 				label : "Gun Parts",
@@ -269,7 +261,6 @@ public class Mountain extends BaseContent
 				label : "Mimic",
 				kind : 'monster',
 				chance:0.1,
-				when: fn.ifLevelMin(3),
 				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
 			}, {
 				name: "demonProjects",
@@ -435,8 +426,8 @@ public class Mountain extends BaseContent
 			},{
 				name: "lightelf",
 				label : "Light Elf",
-				kind  : 'monster',
-				call: lightelfScene.introLightELfSlaver
+				kind : 'monster',
+				call: lightelfScene.introLightELfScout
 			},{
 				name: "derpnade launcher",
 				label : "Gun Parts",
@@ -633,11 +624,11 @@ public class Mountain extends BaseContent
 				},
 				chance: mountainChance,
 				call: SceneLib.sophieScene.sophieRouter
-			}, {
+			},{
 				name: "lightelf",
 				label : "Light Elf",
-				kind : 'monster',
-				call: lightelfScene.introLightELfRanger
+				kind  : 'monster',
+				call: lightelfScene.introLightELfSlaver
 			}, {/*
 				name: "lactoblasters",
 				when: function ():Boolean {

@@ -98,21 +98,21 @@ import classes.internals.*;
 			}
 			else {
 				this.short = "minotaur";
-				initStrTouSpeInte(hasAxe ? 100 : 75, 70, 35, 20);
-				initWisLibSensCor(20, 40 + this.ballSize * 2, 15 + this.ballSize * 2, 35);
+				initStrTouSpeInte(hasAxe ? 210 : 180, 170, 135, 40);
+				initWisLibSensCor(40, 140 + this.ballSize * 2, 115 + this.ballSize * 2, 50);
 				this.weaponName = hasAxe?"axe":"fist";
 				this.weaponVerb = hasAxe?"cleave":"punch";
-				this.weaponAttack = hasAxe?50:40;
+				this.weaponAttack = hasAxe?75:60;
 				this.armorName = "thick fur";
-				this.armorDef = 12;
-				this.armorMDef = 1;
-				this.bonusHP = 20 + rand(this.ballSize * 2);
-				this.level = hasAxe?15:12;
+				this.armorDef = 75;
+				this.armorMDef = 25;
+				this.bonusHP = 500 + rand(this.ballSize * 3);
+				this.level = hasAxe?26:23;
 				if (hasAxe) {
-					this.bonusLust = 70 + this.ballSize * 4 + rand(this.ballSize * 3);
+					this.bonusLust = 281 + this.ballSize * 4 + rand(this.ballSize * 4);
 					this.drop = new WeightedDrop(weapons.L__AXE, 1);
 				} else {
-					this.bonusLust = 68 + this.ballSize * 4 + rand(this.ballSize * 3);
+					this.bonusLust = 278 + this.ballSize * 4 + rand(this.ballSize * 4);
 					this.drop = new ChainedDrop().add(consumables.MINOCUM, 1 / 5)
 							.add(consumables.MINOBLO, 1 / 2)
 							.elseDrop(null);

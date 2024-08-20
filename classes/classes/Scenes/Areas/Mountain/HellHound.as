@@ -92,13 +92,13 @@ public class HellHound extends Monster
 				this.gems = 15+rand(12);
 			}
 			else {
-				initStrTouSpeInte(81, 81, 70, 1);
-				initWisLibSensCor(1, 97, 22, 100);
-				this.weaponAttack = 12;
-				this.armorDef = 11;
-				this.armorMDef = 2;
-				this.bonusLust = 129;
-				this.level = 20;
+				initStrTouSpeInte(281, 281, 270, 1);
+				initWisLibSensCor(1, 317, 77, 100);
+				this.weaponAttack = 60;
+				this.armorDef = 330;
+				this.armorMDef = 60;
+				this.bonusLust = 443;
+				this.level = 49;
 				this.gems = 25+rand(7);
 			}
 			if (noInit) return;

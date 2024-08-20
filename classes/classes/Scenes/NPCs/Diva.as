@@ -21,7 +21,7 @@ public class Diva extends Monster {
 
     public function Diva(ff:Boolean = false) {
         this.finalFight = ff;
-        var levelBonus:int = ff ? 50 : 20;
+        var levelBonus:int = ff ? 70 : 40;
         this.a = "";
         this.short = "Diva";
         this.long = "";
@@ -35,16 +35,16 @@ public class Diva extends Monster {
         this.bodyColor = "pale";
         this.hairColor = "blonde";
         this.hairLength = 16;
-        initWisLibSensCor(4.5 * levelBonus, 40, 50, 60);
-        initStrTouSpeInte(1.5 * levelBonus, 3 * levelBonus, 4 * levelBonus, 4.5 * levelBonus);
+        initStrTouSpeInte(4 * levelBonus, 5 * levelBonus, 6 * levelBonus, 7 * levelBonus);
+        initWisLibSensCor(7 * levelBonus, 5 * levelBonus, 6 * levelBonus, 60);
         this.weaponName = "dive";
         this.weaponVerb = "swoop";
         this.armorName = "dress";
-        this.armorDef = levelBonus;
-        this.armorMDef = levelBonus;
+        this.armorDef = levelBonus * 2;
+        this.armorMDef = levelBonus * 2;
         this.wings.type = Wings.BAT_LIKE_LARGE;
-        this.bonusHP = levelBonus * 500;
-        this.bonusLust = levelBonus * 8;
+        this.bonusHP = levelBonus * 1000;
+        this.bonusLust = levelBonus * 12;
         this.lustVuln = 1;
         this.level = levelBonus;
         this.drop = new ChainedDrop(consumables.VAMPBLD);

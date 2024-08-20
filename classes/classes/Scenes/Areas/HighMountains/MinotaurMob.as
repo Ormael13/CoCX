@@ -268,15 +268,15 @@ import classes.display.SpriteDb;
 				this.createPerk(PerkLib.Enemy300Type, 0, 0, 0, 0);
 			}
 			else {
-				initStrTouSpeInte(80 + mod0*20, 110 + mod0*15, 30 + mod0*10, 20 + mod0);
-				initWisLibSensCor(20 + mod0, 100 + mod0*50, 15 + mod0*10, 35);
+				initStrTouSpeInte(160 + mod0*20, 220 + mod0*15, 60 + mod0*10, 25 + mod0);
+				initWisLibSensCor(25 + mod0, 200 + mod0*50, 30 + mod0*10, 35);
 				this.weaponAttack = 36 + mod0*20;
-				this.armorDef = 30 + mod0*7;
-				this.armorMDef = 5 + mod0*2;
-				bonusHP += 50 * mod2;
+				this.armorDef = 60 + mod0*7;
+				this.armorMDef = 20 + mod0*2;
+				bonusHP += 100 * mod2;
 				lustVuln = .3;
-				this.bonusLust = 131 + (mod0*60) + mod2;
-				this.level = 16 + mod2;
+				this.bonusLust = 257 + (mod0*60) + mod2;
+				this.level = 27 + mod2;
 			}
 			this.bonusHP = bonusHP;
 			this.lust = 30;

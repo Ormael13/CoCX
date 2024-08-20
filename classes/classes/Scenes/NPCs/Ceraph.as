@@ -293,26 +293,26 @@ public class Ceraph extends Monster
 			this.bodyColor = "purple";
 			this.hairColor = "black";
 			this.hairLength = 20;
-			initStrTouSpeInte(75, 55, 90, 80);
-			initWisLibSensCor(80, 75, 15, 100);
+			initStrTouSpeInte(170, 150, 212, 173);
+			initWisLibSensCor(173, 185, 125, 100);
 			this.weaponName = "flaming whip";
 			this.weaponVerb="flame-whip";
-			this.weaponAttack = 20;
+			this.weaponAttack = 80;
 			this.armorName = "demon-skin";
-			this.armorDef = 10;
-			this.armorMDef = 10;
-			this.bonusHP = 200;
-			this.bonusLust = 104;
+			this.armorDef = 40;
+			this.armorMDef = 40;
+			this.bonusHP = 500;
+			this.bonusLust = 339;
 			this.lust = 30;
 			this.lustVuln = 0.75;
-			this.level = 14;
+			this.level = 29;
 			this.gems = rand(5) + 38;
 			this.drop = NO_DROP;
 			this.special1 = ceraphSpecial1;
 			this.special2 = ceraphSpecial2;
 			this.special3 = ceraphSpecial3;
 			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
-			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyTrueDemon, 29, 0, 0, 0);
 			checkMonster();
 		}
 

@@ -83,20 +83,20 @@ import classes.internals.*;
 			this.hairLength = 13;
 			this.horns.type = Horns.COW_MINOTAUR;
 			this.horns.count = 2;
-			initStrTouSpeInte(65, 80, 50, 60);
-			initWisLibSensCor(60, 150, 120, 35);
+			initStrTouSpeInte(115, 140, 90, 100);
+			initWisLibSensCor(100, 250, 220, 40);
 			this.weaponName = "fists";
 			this.weaponVerb = "punch";
-			this.weaponAttack = 26;
+			this.weaponAttack = 39;
 			this.armorName = "skin";
-			this.armorDef = 40;
-			this.armorMDef = 20;
-			this.bonusHP = 100;
-			this.bonusLust = 95;
+			this.armorDef = 60;
+			this.armorMDef = 30;
+			this.bonusHP = 200;
+			this.bonusLust = 496;
 			this.lust = 40;
 			this.lustVuln = .9;
 			this.gems = rand(15) + 15;
-			this.level = 15;
+			this.level = 26;
 			this.tailType = Tail.COW;
 			this.drop = new WeightedDrop().
 					add(necklaces.COWBELL, 12).

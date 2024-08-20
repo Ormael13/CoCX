@@ -125,13 +125,13 @@ public class Ayane extends Kitsune {
         }
         this.imageName = "ayane";
         this.long = "You are fighting [themonster]. She isn’t exactly playing fair as she attacks in a hit-and-run fashion by jumping out of nowhere before retreating back to safety behind the cover of stealth. That and her mischievous laughter only annoys you all the more. Last you checked she has tan skin and her fur is white like snow. She wears a white and purple kimono with a large red ribbon in her hair.  Aside from her magic she fights using a mage staff.";
-        initStrTouSpeInte(60, 70, 160, 220);
-        initWisLibSensCor(110, 60, 65, 45);
+        initStrTouSpeInte(100, 114, 210, 320);
+        initWisLibSensCor(210, 90, 115, 45);
         this.weaponAttack = 12;
-        this.armorDef = 10;
-        this.armorMDef = 50;
-        this.bonusHP = 150;
-        this.bonusLust = 165;
+        this.armorDef = 50;
+        this.armorMDef = 150;
+        this.bonusHP = 500;
+        this.bonusLust = 245;
         this.level = 40;
         this.bodyColor = "tan";
         this.hairColor = "white";

@@ -121,6 +121,11 @@ public class HighMountains extends BaseContent {
             },
             call: cockatriceScene.greeting
         }, {
+			name: "lightelf",
+			label : "Light Elf",
+			kind : 'monster',
+			call: lightelfScene.introLightELfRanger
+		}, {
             name: "lightelf",
 			label : "Light Elf",
 			kind  : 'monster',
