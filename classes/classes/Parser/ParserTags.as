@@ -70,6 +70,7 @@ public class ParserTags {
         "font-red"              : function ():* { return '<font color="'+"#b00000"+'">'; },
         "font-dred"             : function ():* { return '<font color="'+"#900000"+'">'; },
         "font-green"            : function ():* { return '<font color="'+"#00a000"+'">'; },
+        "font-dgreen"           : function ():* { return '<font color="'+"#006b00"+'">'; },
         "font-olive"            : function ():* { return '<font color="'+"#808000"+'">'; },
         "font-blue"             : function ():* { return '<font color="'+"#0000ff"+'">'; },
         "font-lblue"            : function ():* { return '<font color="'+"#00a0ff"+'">'; },

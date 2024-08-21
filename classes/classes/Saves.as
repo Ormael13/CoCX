@@ -352,9 +352,6 @@ public function saveLoad(e:MouseEvent = null):void
 		addButton(3, "AutoSave: " + autoSaveSuffix, autosaveToggle);
 		addButton(14, "Back", playerMenu);
 	}
-	if (flags[kFLAGS.HARDCORE_MODE] >= 1) {
-		removeButton(5); //Disable "Save to File" in Hardcore Mode.
-	}
 }
 
 private function onSaveToFileClick():void {
@@ -702,10 +699,6 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 	{
 		saveFile.data.notes = notes;
 		mainView.nameBox.visible = false;
-	}
-	if (flags[kFLAGS.HARDCORE_MODE] > 0)
-	{
-		saveFile.data.notes = "[font-red]HARDCORE MODE[/font]";
 	}
 	var processingError:Boolean = false;
 	var dataError:Error;

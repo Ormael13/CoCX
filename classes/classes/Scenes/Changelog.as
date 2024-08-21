@@ -306,7 +306,7 @@ public class Changelog extends BaseContent
 			outputText("enemy can't escape from scylla grapple using only it own strength and using Scylla Squeeze as Kraken would give each time 5% combat wounds debuff on enemy (up to 80%).\n");
 			outputText("-Aquatic Affinity can be gained additional if pc lower body is that of scylla / kraken OR pc is having any arigean parasite.\n");
 			outputText("-New enemy: Proto Golem - lvl 6. Encounterable in general explore from lvl 6+.\n");
-			outputText("-Minerva and Izumi base level was increased and accordly their max lvl they can gain by leveling increased too to each raching within 120-130 lvl range.\n");
+			outputText("-Minerva and Izumi base level was increased and accordly their max lvl they can gain by leveling increased too to each reaching within 120-130 lvl range.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
