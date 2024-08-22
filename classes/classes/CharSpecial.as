@@ -1259,7 +1259,7 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			outputText("You are a normal villager if not for that dragon cock and the ability to use an ice dragon's breath. That damn ancestor of yours had to go and fuck some dragoness, didn't he?");
 		}
 
-		private function customSora2():void {
+		private function customSora0():void {
 			//Character Creation	Female,virgin	A human with kitsune bloodline	Sora
 			player.createPerk(PerkLib.BloodlineKitsune,0,0,0,0);
 			if (player.hasVagina()) player.vaginas[0].virgin = true;
@@ -1268,7 +1268,7 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
 		}
 
-		private function customSora3():void {
+		private function customSora1():void {
 			//Character Creation	Female,virgin	A human with cow/minotaur bloodline	Sora
 			player.createPerk(PerkLib.BloodlineMinotaur,0,0,0,0);
 			if (player.hasVagina()) player.vaginas[0].virgin = true;
@@ -1330,7 +1330,7 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			outputText("You were a rather average villager. The thing that made you stand out was your pink hair and yellow eyes. Your ancestors couldn't keep it in their pants, apparently! At least they left some goodies behind for you.");
 		}
 
-		private function customSora6():void {
+		private function customSora2():void {
 			//Character Creation	Female,virgin	A human with raiju bloodline	Sora
 			player.createPerk(PerkLib.BloodlineRaiju,0,0,0,0);
 			if(player.hasVagina()) player.vaginas[0].virgin = true;
@@ -1338,7 +1338,7 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
 		}
 
-		private function customSora7():void {
+		private function customSora3():void {
 			//Character Creation	Female,virgin	A human with oni bloodline	Sora(tone at 100, fighter past story + second for fight too? oni beard necklace?)keeping titanic strength perk at any race score? start with this event perk?
 			player.createPerk(PerkLib.BloodlineOni,0,0,0,0);
 			if(player.hasVagina()) player.vaginas[0].virgin = true;
@@ -1346,7 +1346,7 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
 		}
 
-		private function customSora8():void {
+		private function customSora4():void {
 			//Character Creation	Female,virgin	A human with orc bloodline	Sora
 			player.createPerk(PerkLib.BloodlineOrc,0,0,0,0);
 			if(player.hasVagina()) player.vaginas[0].virgin = true;
@@ -1354,7 +1354,7 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
 		}
 
-		private function customSora9():void {
+		private function customSora5():void {
 			//Character Creation	Female,virgin	A human with vampire bloodline	Sora
 			player.createPerk(PerkLib.BloodlineVampire,0,0,0,0);
 			if(player.hasVagina()) player.vaginas[0].virgin = true;
@@ -1362,9 +1362,57 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
 		}
 
-		private function customSora10():void {
+		private function customSora6():void {
 			//Character Creation	Female,virgin	A human with melkie bloodline	Sora
 			player.createPerk(PerkLib.BloodlineMelkie,0,0,0,0);
+			if(player.hasVagina()) player.vaginas[0].virgin = true;
+			player.intStat.train.value = 30;
+			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
+		}
+
+		private function customSora7():void {
+			//Character Creation	Female,virgin	A human with werefox bloodline	Sora
+			player.createPerk(PerkLib.BloodlineKraken,0,0,0,0);
+			if(player.hasVagina()) player.vaginas[0].virgin = true;
+			player.intStat.train.value = 30;
+			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
+		}
+
+		private function customSora8():void {
+			//Character Creation	Female,virgin	A human with werewolf bloodline	Sora
+			player.createPerk(PerkLib.BloodlineKraken,0,0,0,0);
+			if(player.hasVagina()) player.vaginas[0].virgin = true;
+			player.intStat.train.value = 30;
+			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
+		}
+
+		private function customSora9():void {
+			//Character Creation	Female,virgin	A human with wereshark bloodline	Sora
+			player.createPerk(PerkLib.BloodlineKraken,0,0,0,0);
+			if(player.hasVagina()) player.vaginas[0].virgin = true;
+			player.intStat.train.value = 30;
+			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
+		}
+
+		private function customSora10():void {
+			//Character Creation	Female,virgin	A human with werespider bloodline	Sora
+			player.createPerk(PerkLib.BloodlineKraken,0,0,0,0);
+			if(player.hasVagina()) player.vaginas[0].virgin = true;
+			player.intStat.train.value = 30;
+			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
+		}
+
+		private function customSora11():void {
+			//Character Creation	Female,virgin	A human with ratatoskr bloodline	Sora
+			player.createPerk(PerkLib.BloodlineKraken,0,0,0,0);
+			if(player.hasVagina()) player.vaginas[0].virgin = true;
+			player.intStat.train.value = 30;
+			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
+		}
+
+		private function customSora12():void {
+			//Character Creation	Female,virgin	A human with kraken bloodline	Sora
+			player.createPerk(PerkLib.BloodlineKraken,0,0,0,0);
 			if(player.hasVagina()) player.vaginas[0].virgin = true;
 			player.intStat.train.value = 30;
 			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");

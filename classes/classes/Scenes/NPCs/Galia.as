@@ -148,10 +148,10 @@ import classes.internals.*;
 				
 			}
 			if (flags[kFLAGS.GALIA_LVL_UP] >= 5 && flags[kFLAGS.GALIA_LVL_UP] < 8) {
-				this.long = "Galia is now taller reaching 4 feet 4 inches. An unkempt mane of shaggy platinum blond hair hangs from her head, parted by two middle length curved horns. Her eyes are solid black, save for tiny red irises. Her skin is bright red unencumbered by clothing or armor, save for bandage-like loincloths wrapped around her foreamrs, forelegs and hips. The one wrapped around her more them ample chest seems to be frokm some elastic metalic material that barely doing it job. Her extremely well-muscled body is nowhere to be seen replaced by much soft one, her feet are covered by wooden sandals, and her hands tipped with sharp claws. A pair of small but functional wings occasionally flap from her back.";
+				this.long = "Galia is now taller reaching 4 feet 4 inches. An unkempt mane of shaggy platinum blond hair hangs from her head, parted by two short curved horns. Her eyes are solid black, save for tiny red irises. Her skin is bright red unencumbered by clothing or armor, save for bandage-like loincloths wrapped around her foreamrs, forelegs and hips. The one wrapped around her more them ample chest seems to be from some elastic metalic material that barely doing it job. Her extremely well-muscled body is nowhere to be seen replaced by much soft one, her feet are covered by wooden sandals, and her hands tipped with sharp claws. A pair of small but functional wings occasionally flap from her back.";
 				createBreastRow(Appearance.breastCupInverse("DD"));
 				this.hairLength = 62;
-				this.tallness = 52;
+				this.tallness = 52;//for later desc - two middle length curved horns
 			}
 			if (flags[kFLAGS.GALIA_LVL_UP] < 8) {
 				this.createVagina(true, VaginaClass.WETNESS_SLICK, VaginaClass.LOOSENESS_TIGHT);

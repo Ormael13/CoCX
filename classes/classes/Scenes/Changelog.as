@@ -307,7 +307,7 @@ public class Changelog extends BaseContent
 			outputText("-Aquatic Affinity can be gained additional if pc lower body is that of scylla / kraken OR pc is having any arigean parasite.\n");
 			outputText("-New enemy: Proto Golem - lvl 6. Encounterable in general explore from lvl 6+.\n");
 			outputText("-Minerva and Izumi base level was increased and accordly their max lvl they can gain by leveling increased too to each reaching within 120-130 lvl range.\n");
-			outputText("-\n");
+			outputText("-Added Descendant and Bloodline perks for Scylla/Kraken races.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -352,7 +352,7 @@ public class Changelog extends BaseContent
 			outputText("one of Raphael scenes using variant for tentacle cocks that can go all way throu without having such cock(s), unable to gain plasma dmg from using fire buff on lightning weapon and vice versa, unable to use Blind during Draculina fight, rescue from bad end not clearing lingering status effects, Centaurium tf effect checking for wrong elf-like ears type, ");
 			outputText("Ascension: Transhumanism (Sen) perk not adding sensitivity, Selachimorphanthropy bonuses not changing with moon phases, inconsistencies for damage type dealt in melee/range base attacks and specials, flame blade bonus dmg from libido, combining fire and lightning damage on melee weapons, lust defeat text for non sentient constructs not using it own variant, ");
 			outputText("Abyssal Ink and Displacer Beast post fight scenes bypassing perm races transformation immunity, defeating pod plant by lust (which was before impossible) allowing to pick unlimited rapiers from it, Frog Girl 'forever ignore' option not disabling her encounters, aura not capping to 10% lust dmg per aura application in turn, Dark Slimes sex scenes does not count towards ");
-			outputText("recovering hunger with demonic hunger perk, Atlach Nacha locking corruption to 100 before PC get pernamently locked to this race, post Drider Incubus fight sex scenes not reseting lust/giving sexp rewards/other effects of sex scene\n\n");
+			outputText("recovering hunger with demonic hunger perk, Atlach Nacha locking corruption to 100 before PC get pernamently locked to this race, post Drider Incubus fight sex scenes not reseting lust/giving sexp rewards/other effects of sex scene, during Urta scenes game mix up Urta and PC when checking for sex scenes selection\n\n");
 			/*ostatni punkt changelogu
 			outputText("(Part 2/2) <b>Version 0.9a:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");

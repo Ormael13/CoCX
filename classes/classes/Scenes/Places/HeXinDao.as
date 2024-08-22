@@ -975,13 +975,13 @@ public function soularena():void {
         statScreenRefresh();
 		menu();
         //addButton(0, "Goblin", );//Goblinka
-        addButton(5, "D.Golem", arenaSelection,GolemDummy,flags[kFLAGS.GOLEM_ENEMY_TYPE] = 0).hint("Dummy Golem LVL 6");
-        addButton(6, "I.D.Golem", arenaSelection,GolemDummyImproved).hint("Improved Dummy Golem LVL 12");
-        addButton(7, "A.D.Golem", arenaSelection,GolemDummyAdvanced).hint("Advanced Dummy Golem LVL 18");
-        addButton(8, "S.D.Golem", arenaSelection,GolemDummySuperior).hint("Superior Dummy Golem LVL 24");
-        addButton(10, "B.T.Golem", arenaSelection,GolemTrueBasic).hint("Basic True Golem LVL 33");
-        addButton(11, "I.T.Golem", arenaSelection,GolemTrueImproved).hint("Improved True Golem LVL 42");
-        addButton(12, "A.T.Golem", arenaSelection,GolemTrueAdvanced).hint("Advanced True Golem LVL 51");
+        addButton(5, "D.Golem", arenaSelection2,GolemDummy,0).hint("Dummy Golem LVL 6");
+        addButton(6, "I.D.Golem", arenaSelection1,GolemDummyImproved).hint("Improved Dummy Golem LVL 12");
+        addButton(7, "A.D.Golem", arenaSelection1,GolemDummyAdvanced).hint("Advanced Dummy Golem LVL 18");
+        addButton(8, "S.D.Golem", arenaSelection1,GolemDummySuperior).hint("Superior Dummy Golem LVL 24");
+        addButton(10, "B.T.Golem", arenaSelection1,GolemTrueBasic).hint("Basic True Golem LVL 33");
+        addButton(11, "I.T.Golem", arenaSelection1,GolemTrueImproved).hint("Improved True Golem LVL 42");
+        addButton(12, "A.T.Golem", arenaSelection1,GolemTrueAdvanced).hint("Advanced True Golem LVL 51");
         addButton(14, "Back", soularenaSoloBack);
     }
 	public function soularenaSoloBack():void {
@@ -997,13 +997,13 @@ public function soularena():void {
         statScreenRefresh();
 		menu();
         //addButton(0, "Goblins", );//Córki goblinki z solo areny ^^
-        addButton(5, "D.Golems", arenaSelection,GolemsDummy,flags[kFLAGS.GOLEM_ENEMY_TYPE] = 1).hint("Dummy Golems LVL 15");
-        addButton(6, "I.D.Golems", arenaSelection,GolemsDummy,flags[kFLAGS.GOLEM_ENEMY_TYPE] = 3).hint("Improved Dummy Golems LVL 24");
-        addButton(7, "A.D.Golems", arenaSelection,GolemsDummy,flags[kFLAGS.GOLEM_ENEMY_TYPE] = 5).hint("Advanced Dummy Golems LVL 33");
-        addButton(8, "S.D.Golems", arenaSelection,GolemsDummy,flags[kFLAGS.GOLEM_ENEMY_TYPE] = 7).hint("Superior Dummy Golems LVL 42");
-        addButton(10, "B.T.Golems", arenaSelection,GolemsTrue,flags[kFLAGS.GOLEM_ENEMY_TYPE] = 9).hint("Basic True Golems LVL 51");
-        //addButton(11, "I.T.Golems", arenaSelection,GolemsTrue,flags[kFLAGS.GOLEM_ENEMY_TYPE] = 11).hint("Improved True Golems LVL 60");
-        //addButton(12, "A.T.Golems", arenaSelection,GolemsTrue,flags[kFLAGS.GOLEM_ENEMY_TYPE] = 13).hint("Advanced True Golems LVL 69");
+        addButton(5, "D.Golems", arenaSelection2,GolemsDummy,1).hint("Dummy Golems LVL 15");
+        addButton(6, "I.D.Golems", arenaSelection2,GolemsDummy,3).hint("Improved Dummy Golems LVL 24");
+        addButton(7, "A.D.Golems", arenaSelection2,GolemsDummy,5).hint("Advanced Dummy Golems LVL 33");
+        addButton(8, "S.D.Golems", arenaSelection2,GolemsDummy,7).hint("Superior Dummy Golems LVL 42");
+        addButton(10, "B.T.Golems", arenaSelection2,GolemsTrue,9).hint("Basic True Golems LVL 51");
+        //addButton(11, "I.T.Golems", arenaSelection2,GolemsTrue,11).hint("Improved True Golems LVL 60");
+        //addButton(12, "A.T.Golems", arenaSelection2,GolemsTrue,13).hint("Advanced True Golems LVL 69");
         addButton(14, "Back", soularenaGroupBack);
     }
 	public function soularenaGroupBack():void {
@@ -1033,22 +1033,22 @@ public function soularena():void {
 			//addButton(3, "Gauntlet 4", gaunletchallange4).hint("Fight 6 diff enemies one after another.");
 			//addButton(4, "Gauntlet 5", gaunletchallange5).hint("Fight 7 diff enemies one after another.");
 			//addButton(5, "Gauntlet 6", gaunletchallange6).hint("Fight 8 diff enemies one after another.");
-			addButton(7, "LvL 24 Gargoyle (F)", arenaSelection,GargoyleFBasic).hint("Gargoyle (F) LVL 24 (axe-tail)");
-			addButton(8, "LvL 24 Gargoyle (M)", arenaSelection,GargoyleMBasic).hint("Gargoyle (M) LVL 24 (mace-tail)");
+			addButton(7, "LvL 24 Gargoyle (F)", arenaSelection1,GargoyleFBasic).hint("Gargoyle (F) LVL 24 (axe-tail)");
+			addButton(8, "LvL 24 Gargoyle (M)", arenaSelection1,GargoyleMBasic).hint("Gargoyle (M) LVL 24 (mace-tail)");
 			addButton(9, "-2-", soularenaChallengeSubpages, page + 1);
-			addButton(10, "LvL 33 Golems", arenaSelection,GolemsBasic).hint("Basic Golems LVL 33");
-			addButton(11, "LvL 42 Golems", arenaSelection,GolemsImproved).hint("Improved Golems LVL 42");
-			addButton(12, "LvL 51 Golems", arenaSelection, GolemsAdvanced).hint("Advanced Golems LVL 51");
+			addButton(10, "LvL 33 Golems", arenaSelection1,GolemsBasic).hint("Basic Golems LVL 33");
+			addButton(11, "LvL 42 Golems", arenaSelection1,GolemsImproved).hint("Improved Golems LVL 42");
+			addButton(12, "LvL 51 Golems", arenaSelection1, GolemsAdvanced).hint("Advanced Golems LVL 51");
 			addButton(14, "Back", soularenaChallengeBack);
 		}
 		if (page == 2) {
-			//addButton(0, "Kitty", arenaSelection, Veronika);
-			//addButton(1, "Golemancer", arenaSelection,Jeniffer).hint("Golemancer goblin.");
-			//addButton(2, "AyotechManiac", arenaSelection,Jinx).hint("Crazy gremlin girl wearing lots of belts... err Ayotech weapons.");
-			//addButton(5, "Macho Mander", arenaSelection,Syth).hint("He's Macho & Mander.");
-			//if () addButton(6, "Miss Mander", arenaSelection,Asuka).hint("Salamander woman.");
-			//else addButton(6, "Miss Mander", arenaSelection,Asuka).hint("Young salamander girl.");
-			//addButton(7, "Miss Oni", arenaSelection,Rangiku);
+			//addButton(0, "Kitty", arenaSelection1, Veronika);
+			//addButton(1, "Golemancer", arenaSelection1,Jeniffer).hint("Golemancer goblin.");
+			//addButton(2, "AyotechManiac", arenaSelection1,Jinx).hint("Crazy gremlin girl wearing lots of belts... err Ayotech weapons.");
+			//addButton(5, "Macho Mander", arenaSelection1,Syth).hint("He's Macho & Mander.");
+			//if () addButton(6, "Miss Mander", arenaSelection1,Asuka).hint("Salamander woman.");
+			//else addButton(6, "Miss Mander", arenaSelection1,Asuka).hint("Young salamander girl.");
+			//addButton(7, "Miss Oni", arenaSelection1,Rangiku);
 			addButton(9, "-1-", soularenaChallengeSubpages, page - 1);
 			if (flags[kFLAGS.ANGELIC_FRACTION_TOGGLE] == 0) {
 				if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButtonDisabled(10, "IntermedLeader", "Req. to have any henchman with you to start this fight.");
@@ -1057,8 +1057,16 @@ public function soularena():void {
 			addButton(14, "Back", soularenaChallengeBack);
 		}
 	}
-    private function arenaSelection(mon:Class):void{
+    private function arenaSelection1(mon:Class):void{
 		player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
+		if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
+        startCombatImmediate(new mon());
+		monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
+		monster.XP = monster.XP * 2;
+    }
+    private function arenaSelection2(mon:Class, numer:Number):void{
+		player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
+		flags[kFLAGS.GOLEM_ENEMY_TYPE] = numer;
 		if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
         startCombatImmediate(new mon());
 		monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
@@ -1343,7 +1351,8 @@ public function soularena():void {
         player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
         player.createStatusEffect(StatusEffects.SoulArenaGaunlet, 0, 0, 0, 0);
         if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
-        startCombat(new GolemsDummy());
+        flags[kFLAGS.GOLEM_ENEMY_TYPE] = 1;
+		startCombat(new GolemsDummy());
         monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
     }
     public function gaunletchallange1fight2():void {

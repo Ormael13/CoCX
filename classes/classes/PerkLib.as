@@ -245,6 +245,10 @@ public class PerkLib
 				"You are a descendant of your ancestor, who was the child of a human and a Ratatoskr. (+2 to Ratatoskr score)");
 		public static const BloodlineRatatoskr:PerkType = mk("Bloodline: Ratatoskr", "Bloodline: Ratatoskr",
 				"Your Ratatoskr bloodline appears strongly within you. (+2 to Ratatoskr score)", null, true);
+		public static const KrakensDescendant:PerkType = mk("Kraken's descendant", "Kraken's descendant",
+				"You are a descendant of your ancestor, who was the child of a human and a Kraken. (+2 to Scylla/Kraken score)");
+		public static const BloodlineKraken:PerkType = mk("Bloodline: Kraken", "Bloodline: Kraken",
+				"Your Kraken bloodline appears strongly within you. (+2 to Scylla/Kraken score)", null, true);
 		public static const CommonHumansDescendant:PerkType = mk("Common human's descendant", "Common human's descendant",
 				"You are a descendant of your ancestor, who was the child of a common human. (+2 to human score)");
 		public static const CommonHumanBloodline:PerkType = mk("Bloodline: Common human", "Bloodline: Common human",
@@ -8498,4 +8502,4 @@ public class PerkLib
         }
 	}
 }
-}
+}

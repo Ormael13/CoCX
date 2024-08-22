@@ -725,13 +725,12 @@ private function visitPCPreUrtaQuest(truth:Boolean):void {
 	addButton(0,"Cuddle",snuggleWithUrta, truth);
 	//Put Urta dick in girl PC's vag(C)*
 	addButton(1, "Fuck" + player2.mf("His","Her") + "Vag", putUrtasWangInPCsCunt, truth)
-		.disableIf(!player2.hasVagina(), "[name] would need a vagina for this!");
+		.disableIf(!player2.hasVagina(), "[name2] would need a vagina for this!");
 	//Put a PC dick in Urta's vag(C)*
 	addButton(2,"Ride Dick",putAPCDickInUrtaCoochies, truth)
-		.disableIf(player2.cockThatFits(urta.urtaCapacity()) < 0, "[name] would need a cock fitting "+urta.urtaCapacity()+" area for this!");
+		.disableIf(player2.cockThatFits(urta.urtaCapacity()) < 0, "[name2] would need a cock fitting "+urta.urtaCapacity()+" area for this!");
 	//Put Urta dick in the PC's asshole [Cocked PCs](C)*
-	addButton(3,"Fuck Ass",urtaPutsHerDickInPCsWithDicks, truth)
-		.disableIf(!player2.hasCock(), "[name] would need a cock for this!");
+	addButton(3,"Fuck Ass",urtaPutsHerDickInPCsWithDicks, truth);
 	//PC blows Urta(C)*
 	addButton(4,"Get BJ",pcBlowsUrtasDong, truth);
 }

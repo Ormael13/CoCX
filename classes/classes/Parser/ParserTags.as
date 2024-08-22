@@ -125,6 +125,7 @@ public class ParserTags {
         "multicock"             : function ():* { return CoC.instance.player.multiCockDescriptLight(); },
         "multicockdescriptlight": function ():* { return CoC.instance.player.multiCockDescriptLight(); },
         "name"                  : function ():* { return CoC.instance.player.short; },
+        "name2"                 : function ():* { return CoC.instance.player2.short; },
         "nipple"                : function ():* { return CoC.instance.player.nippleDescript(0); },
         "nipples"               : function ():* { return CoC.instance.player.nippleDescript(0) + "s"; },
         "onecock"               : function ():* { return CoC.instance.player.oMultiCockDesc(); },
