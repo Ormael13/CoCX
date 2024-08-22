@@ -308,9 +308,9 @@ public class Changelog extends BaseContent
 			outputText("-New enemy: Proto Golem - lvl 6. Encounterable in general explore from lvl 6+.\n");
 			outputText("-Minerva and Izumi base level was increased and accordly their max lvl they can gain by leveling increased too to each reaching within 120-130 lvl range.\n");
 			outputText("-Added Descendant and Bloodline perks for Scylla/Kraken races.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Fixed Benoit not feminizing and Possess not resetting crab grapple (Svalkash)\n");
+			outputText("-New event perk: Dracoforce. Gained by having 30+ in any more then half dragon race score. Effects: Increase your total Strength and Toughness by 50%. Would add +1 to race score for those races.\n");
+			outputText("-New tier for frostwyrm race score bonuses - Jormungandr (32+ pts): +230 str multi, +180 tou multi, +90 spe multi, -110 int multi, +90 lib multi, +150% max hp multi, +4 armor/m.res\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -352,7 +352,7 @@ public class Changelog extends BaseContent
 			outputText("one of Raphael scenes using variant for tentacle cocks that can go all way throu without having such cock(s), unable to gain plasma dmg from using fire buff on lightning weapon and vice versa, unable to use Blind during Draculina fight, rescue from bad end not clearing lingering status effects, Centaurium tf effect checking for wrong elf-like ears type, ");
 			outputText("Ascension: Transhumanism (Sen) perk not adding sensitivity, Selachimorphanthropy bonuses not changing with moon phases, inconsistencies for damage type dealt in melee/range base attacks and specials, flame blade bonus dmg from libido, combining fire and lightning damage on melee weapons, lust defeat text for non sentient constructs not using it own variant, ");
 			outputText("Abyssal Ink and Displacer Beast post fight scenes bypassing perm races transformation immunity, defeating pod plant by lust (which was before impossible) allowing to pick unlimited rapiers from it, Frog Girl 'forever ignore' option not disabling her encounters, aura not capping to 10% lust dmg per aura application in turn, Dark Slimes sex scenes does not count towards ");
-			outputText("recovering hunger with demonic hunger perk, Atlach Nacha locking corruption to 100 before PC get pernamently locked to this race, post Drider Incubus fight sex scenes not reseting lust/giving sexp rewards/other effects of sex scene, during Urta scenes game mix up Urta and PC when checking for sex scenes selection\n\n");
+			outputText("recovering hunger with demonic hunger perk, Atlach Nacha locking corruption to 100 before PC get pernamently locked to this race, post Drider Incubus fight sex scenes not reseting lust/giving sexp rewards/other effects of sex scene, during Urta scenes game mix up Urta and PC when checking for sex scenes selection, Cure spell not removing Blind\n\n");
 			/*ostatni punkt changelogu
 			outputText("(Part 2/2) <b>Version 0.9a:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");

@@ -13,7 +13,7 @@ package classes.Items.Armors
 	public class HBArmor extends Armor {
 		
 		public function HBArmor() {//160 * armor + mres
-			super("HBArmor","HBArmor","HB armor","a HB armor",100,80,28800,"This white suit of armor is more than just platemail - it was reverse engineered from almost intact armor of elf-like offworlder. It protective properties would increase as long user is capable to feed it on regular basis with soulforce.","Light Ayo");
+			super("HBArmor","HBArmor","HB armor","a HB armor",100,80,28800,"This white suit of armor is more than just platemail - it was reverse engineered from almost intact armor of elf-like offworlder. It protective properties would increase as long user is capable to feed it on regular basis with soulforce. (Req. to be 7+ feet tall)","Light Ayo");
 		}
 		
 		override public function get def():Number {

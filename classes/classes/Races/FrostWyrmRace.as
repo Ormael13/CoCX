@@ -66,7 +66,8 @@ public class FrostWyrmRace extends Race {
 						}, +1)
 				.hasPerk(PerkLib.DragonIceBreath, +1);
 		addScoresAfter(10)
-				.height(GREATER_THAN(120), +1);
+				.height(GREATER_THAN(120), +1)
+				.hasPerk(PerkLib.Dracoforce, +1);
 		
 		addBloodline(PerkLib.DragonsDescendant,PerkLib.BloodlineDragon);
 		addMutation(IMutationsLib.DrakeBloodIM);
@@ -98,6 +99,19 @@ public class FrostWyrmRace extends Race {
 					"lib.mult": +0.70,
 					"def": +2,
 					"mdef": +2
+				})
+				.end();
+		
+		buildTier(32, "jormungandr")
+				.buffs({
+					"maxhp_mult": +0.15,
+					"str.mult": +2.30,
+					"tou.mult": +1.80,
+					"spe.mult": +0.90,
+					"int.mult": -1.10,
+					"lib.mult": +0.90,
+					"def": +4,
+					"mdef": +4
 				})
 				.end();
 	}

@@ -52,7 +52,7 @@ package classes.Items
 					list.push([10, "Type: Jewelry (Hairpin)"]);
 					break;
 				case HJT_HELMET:
-					list.push([10, "Type: Helm)"]);
+					list.push([10, "Type: Armor (Helm)"]);
 					break;
 			}
 			// Effect

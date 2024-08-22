@@ -5874,6 +5874,13 @@ use namespace CoC;
 			if (!isRaceCached(Races.HARPY, 1) && !isRaceCached(Races.PHOENIX, 1) && !isRaceCached(Races.THUNDERBIRD, 1)) statStore.removeBuffs('Harpy Queen');
 			//if (hasPerk(PerkLib.TitanicStrength)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(tallness/2))}, 'Titanic Strength', { text: 'Titanic Strength' });
 			//if (!hasPerk(PerkLib.TitanicStrength) && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
+			if (hasPerk(PerkLib.Dracoforce)) {
+				if (statStore.hasBuff('Dracoforce')) statStore.removeBuffs('Dracoforce');
+				var strD:Number = Math.round(str / 2);
+				var touD:Number = Math.round(tou/2)
+				statStore.replaceBuffObject({'str.mult': strD, 'tou.mult': touD}, 'Dracoforce', { text: 'Dracoforce' });
+			}
+			if (!hasPerk(PerkLib.Dracoforce) && statStore.hasBuff('Dracoforce')) statStore.removeBuffs('Dracoforce');
 			if (hasPerk(PerkLib.Enigma)) statStore.replaceBuffObject({'str.mult':Math.round(((intStat.mult.value/2)+(wisStat.mult.value/2))),'tou.mult':Math.round(((intStat.mult.value/2)+(wisStat.mult.value/2)))}, 'Enigma', { text: 'Enigma' });
 			if (!hasPerk(PerkLib.Enigma) && statStore.hasBuff('Enigma')) statStore.removeBuffs('Enigma');
 			if (hasPerk(PerkLib.LionHeart)) statStore.replaceBuffObject({'str.mult':Math.round(speStat.mult.value/2)}, 'Lion Heart', { text: 'Lion Heart' });

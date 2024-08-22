@@ -46,6 +46,7 @@ public class CureSpell extends AbstractWhiteSpell{
 		StatusEffects.AcidDoT,
 		StatusEffects.FrostburnDoT,
 		StatusEffects.FrozenLung,
+		StatusEffects.Blind,
 	];
 	
 	public function CureSpell() {

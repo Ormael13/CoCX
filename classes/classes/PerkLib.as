@@ -3920,6 +3920,8 @@ public class PerkLib
 				"Pregnancies will not progress when fluid intake is scarce, and will progress much faster when it isn't.");
 		public static const DisplacerMilkAddict:PerkType = mk("Displacer Milk Addict", "Displacer Milk Addict",
 				"Causes you to crave milk frequently.");
+		public static const Dracoforce:PerkType = mk("Dracoforce", "Dracoforce",
+				"Increase your total Strength and Toughness by 50%.");
 		public static const DragonDarknessBreath:PerkType = mk("Dragon darkness breath", "Dragon darkness breath",
 				"Allows access to a dragon darkness breath attack.");
 		public static const DragonEarthBreath:PerkType = mk("Dragon earth breath", "Dragon earth breath",

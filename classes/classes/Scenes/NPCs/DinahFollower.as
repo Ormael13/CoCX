@@ -281,8 +281,8 @@ public class DinahFollower extends NPCAwareContent// implements TimeAwareInterfa
 			if (_roulette2 == 0) addButtonDisabled(2, "???", "Dud. Shame, shame.");
 			if (_roulette2 == 1) addButton(2, "FlameLizR", buyItem5, 45).hint("Flame Lizard ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Lustzerker.");
 			if (_roulette2 == 2) addButton(2, "InferMouseR", buyItem5, 46).hint("Infernal Mouse ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Blazing battle spirit.");
-			if (_roulette2 == 3) addButton(2, "BestBlaAr", buyItem5, 47).hint("Bestial Blademaster armor - .");
-			if (_roulette2 == 4) addButton(2, "BestBlaAc", buyItem5, 48).hint("Bestial Blademaster accoutrements - .");
+			if (_roulette2 == 3) addButton(2, "BestBlaAr", buyItem5, 47).hint("Bestial Blademaster armor - Increases fire damage based on percent of wrath bar fullness. (+1% per 1% of current wrath");
+			if (_roulette2 == 4) addButton(2, "BestBlaAc", buyItem5, 48).hint("Bestial Blademaster accoutrements - Increased chance (+10%) to block/parry/evade whilst in a berserker/lustzerker state. These actions would also grant 1% wrath when successful.");
 			if (_roulette3 == 0) addButtonDisabled(3, "???", "Dud. Shame, shame.");
 			if (_roulette3 == 1) addButton(3, "HBHelmet", buyItem5, 50).hint("HB helmet - Increase armor by 5 and magic resistance by 4.");
 			if (_roulette3 == 2) addButton(3, "HBArmor", buyItem5, 51).hint("HB armor - Increasing it armor/resistance when power up by soulforce.");
