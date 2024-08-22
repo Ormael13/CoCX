@@ -1163,14 +1163,14 @@ private function submitToLakeIzma():void {
 	else assF();
 
 	//Herms have their unique part
-	function nonHermShared():void {
-		outputText("\"<i>All right; time to hold up your end,</i>\" she notes.  The double entendre is lost on your fuddled mind.  Her tone is conversational, but her grin is wicked, and she is slipping out of her grass skirt as hastily as she can, given the care she needs to take it off without damaging it.  After all, skirts that can so easily conceal the iron-hard foot-and-a-quarter-long erection she is sporting require considerable skill to make, especially if they must also conceal two pairs of baseball-sized nuts, so swollen and heavy with cum that you think you can hear them slosh softly from where you have fallen.  \"<i>We agreed to do it shark style; you lost, so that means I'm in charge.  Get undressed and show me that cute little " + (player.hasVagina() ? "cunt" : "pucker") + " of yours!</i>\"  ");
+	function nonHermShared(vag:int):void {
+		outputText("\"<i>All right; time to hold up your end,</i>\" she notes.  The double entendre is lost on your fuddled mind.  Her tone is conversational, but her grin is wicked, and she is slipping out of her grass skirt as hastily as she can, given the care she needs to take it off without damaging it.  After all, skirts that can so easily conceal the iron-hard foot-and-a-quarter-long erection she is sporting require considerable skill to make, especially if they must also conceal two pairs of baseball-sized nuts, so swollen and heavy with cum that you think you can hear them slosh softly from where you have fallen.  \"<i>We agreed to do it shark style; you lost, so that means I'm in charge.  Get undressed and show me that cute little " + (vag ? "cunt" : "pucker") + " of yours!</i>\"  ");
 		//[(If Izmafight is -1 or -2)
 		if(flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON] >= -2) outputText("With some reluctance, but driven by your promise, you remove pieces of your [armor] until you stand naked before the hungrily ogling tigershark.");
 		else outputText("You are already undressed before Izma has finished speaking.  The tigershark is clearly surprised, and, to be honest, a part of you is surprised too... but it's drowned out by the need to give yourself over to Izma's lusts.");
 		outputText("\n\n");
 
-		outputText("Your 'cute little " + (player.hasVagina() ? "cunt" : "pucker") + " clenches tight in " + (player.HP < 1 ? "fear" : "anticipation") + " at the thought of something that huge forcing its way into it... but you did make a promise and you are " + (player.HP < 1 ? "too weak to resist" : "feeling very horny") + ", so you comply.  You remove the last bits of your [armor], and position yourself on the ground, your [butt] facing towards Izma.  You can hear her stalking across the sand toward you, but it still sends tingles up your spine when her hands - now free of her metal gauntlets - fall onto your [ass].\n\n");
+		outputText("Your 'cute little " + (vag ? "cunt" : "pucker") + " clenches tight in " + (player.HP < 1 ? "fear" : "anticipation") + " at the thought of something that huge forcing its way into it... but you did make a promise and you are " + (player.HP < 1 ? "too weak to resist" : "feeling very horny") + ", so you comply.  You remove the last bits of your [armor], and position yourself on the ground, your [butt] facing towards Izma.  You can hear her stalking across the sand toward you, but it still sends tingles up your spine when her hands - now free of her metal gauntlets - fall onto your [ass].\n\n");
 
 		outputText("\"<i>Ooh, looking good from this angle.  I'm going to enjoy taking you like this... after all, if you want to be on top, then you gotta fight for it.</i>\"\n\n");
 
@@ -1179,7 +1179,7 @@ private function submitToLakeIzma():void {
 
 	//(male/Unsexed)
 	function assF():void {
-		nonHermShared();
+		nonHermShared(0);
 		if(player.analCapacity() < 26) {
 			outputText("You can't help but yell in pain at the sudden sensation of something so huge forcing its way into your " + assholeDescript() + ".");
 			outputText("\n\n\"<i>Holy-!  Think I better take it easy on this...</i>\" you hear Izma proclaim.  \"<i>For my own safety moreso than anything else!</i>\"  Her efforts become more gentle.  She still forces her way into you, inch by painstaking inch, but she does so at a slower, steady pace, allowing your pucker time to adjust to the fierce stretching she is subjecting it to and using her hot pre-cum like lubricant.");
@@ -1236,7 +1236,7 @@ private function submitToLakeIzma():void {
 	}
 	//(female)
 	function vagF():void {
-		nonHermShared();
+		nonHermShared(1);
 		if(player.vaginalCapacity() < 26) {
 			outputText("You can't help but yell in pain at the sudden sensation of something so huge forcing its way into your " + vaginaDescript(0) + ".\n\n");
 
