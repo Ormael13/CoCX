@@ -5838,6 +5838,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.Titsmother)) player.removeStatusEffect(StatusEffects.Titsmother);
 		if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) player.removeStatusEffect(StatusEffects.GiantGrabbed);
 		if (player.hasStatusEffect(StatusEffects.Tentagrappled)) player.removeStatusEffect(StatusEffects.Tentagrappled);
+		if (player.hasStatusEffect(StatusEffects.CancerMonsterGrab)) player.removeStatusEffect(StatusEffects.CancerMonsterGrab);
 		possess();
 	}
 
