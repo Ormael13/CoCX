@@ -13,20 +13,21 @@ public class ItemConstants extends Utils {
 	///////////////////////////////
 	
 	// Item categories
-	public static const CATEGORY_WEAPON_MELEE:String  = "weapon";
-	public static const CATEGORY_WEAPON_RANGED:String = "weaponranged";
-	public static const CATEGORY_SHIELD:String        = "shield";
-	public static const CATEGORY_ARMOR:String         = "armor";
-	public static const CATEGORY_UNDERGARMENT:String  = "undergarment";
-	public static const CATEGORY_NECKLACE:String      = "necklace";
-	public static const CATEGORY_JEWELRY_HEAD:String  = "headjewelry";
-	public static const CATEGORY_JEWELRY_RING:String  = "jewelry";
-	public static const CATEGORY_JEWELRY_MISC:String  = "miscjewelry";
-	public static const CATEGORY_VEHICLE:String       = "vehicle";
-	public static const CATEGORY_FLYING_SWORD:String  = "flyingsword";
-	public static const CATEGORY_CONSUMABLE:String    = "consumable";
-	public static const CATEGORY_USABLE:String        = "useable";
-	public static const CATEGORY_OTHER:String         = "other";
+	public static const CATEGORY_WEAPON_MELEE:String  		= "weapon";
+	//public static const CATEGORY_WEAPON_MELEE_OFF:String	= "weaponoff";
+	public static const CATEGORY_WEAPON_RANGED:String 		= "weaponranged";
+	public static const CATEGORY_SHIELD:String        		= "shield";
+	public static const CATEGORY_ARMOR:String         		= "armor";
+	public static const CATEGORY_UNDERGARMENT:String  		= "undergarment";
+	public static const CATEGORY_NECKLACE:String      		= "necklace";
+	public static const CATEGORY_JEWELRY_HEAD:String  		= "headjewelry";
+	public static const CATEGORY_JEWELRY_RING:String  		= "jewelry";
+	public static const CATEGORY_JEWELRY_MISC:String  		= "miscjewelry";
+	public static const CATEGORY_VEHICLE:String       		= "vehicle";
+	public static const CATEGORY_FLYING_SWORD:String  		= "flyingsword";
+	public static const CATEGORY_CONSUMABLE:String    		= "consumable";
+	public static const CATEGORY_USABLE:String        		= "useable";
+	public static const CATEGORY_OTHER:String         		= "other";
 	
 	// Item tags
 	
@@ -180,6 +181,14 @@ public class ItemConstants extends Utils {
 			return VehiclesLib.NOTHING;
 		}
 	})
+	public static const SLOT_WEAPON_MELEE_OFF:int   = 16;
+	EnumValue.add(EquipmentSlots, SLOT_WEAPON_MELEE_OFF, "WEAPON_MELEE_OFF", {
+		name: "Weapon (Melee Offhand)",
+		category: CATEGORY_WEAPON_MELEE,
+		nothing: function():ItemType {
+			return WeaponLib.FISTS;
+		}
+	});
 	
 	public static var EquipmentSlotIds:/*int*/Array; // can't do = ... because of the init. order
 	EquipmentSlotIds = Utils.mapOneProp(EquipmentSlots, "value");

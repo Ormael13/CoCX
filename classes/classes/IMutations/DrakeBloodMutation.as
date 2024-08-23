@@ -36,7 +36,7 @@ public class DrakeBloodMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireBloodsteamMutationSlot()
-                    .requireAnyRace(Races.FROSTWYRM, Races.JABBERWOCKY, Races.SEA_DRAGON);
+                    .requireAnyRace(Races.DRAGON, Races.FROSTWYRM, Races.JABBERWOCKY, Races.SEA_DRAGON);
                 }
                 else{
                     var pLvl:int = pTier * 30;

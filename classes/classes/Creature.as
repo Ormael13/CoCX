@@ -108,6 +108,21 @@ public class Creature extends Utils
 		public function set weaponVerb(value:String):void { _weaponVerb = value; }
 		public function set weaponAttack(value:Number):void { _weaponAttack = value; }
 		public function set weaponValue(value:Number):void { _weaponValue = value; }
+		//Weapon melee (offhand)
+		private var _weaponOffhandName:String = "";
+		private var _weaponOffhandVerb:String = "";
+		private var _weaponOffhandAttack:Number = 0;
+		private var _weaponOffhandType:String = "";
+		private var _weaponOffhandValue:Number = 0;
+		public function get weaponOffhandName():String { return _weaponOffhandName; }
+		public function get weaponOffhandVerb():String { return _weaponOffhandVerb; }
+		public function get weaponOffhandAttack():Number { return _weaponOffhandAttack; }
+		public function get weaponOffhandType():String { return _weaponOffhandType; }
+		public function get weaponOffhandValue():Number { return _weaponOffhandValue; }
+		public function set weaponOffhandName(value:String):void { _weaponOffhandName = value; }
+		public function set weaponOffhandVerb(value:String):void { _weaponOffhandVerb = value; }
+		public function set weaponOffhandAttack(value:Number):void { _weaponOffhandAttack = value; }
+		public function set weaponOffhandValue(value:Number):void { _weaponOffhandValue = value; }
 		//Weapon range
 		private var _weaponRangeName:String = "";
 		private var _weaponRangeVerb:String = "";

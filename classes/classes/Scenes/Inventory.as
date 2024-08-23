@@ -128,7 +128,7 @@ use namespace CoC;
 			mainView.linkHandler = showItemTooltipLinkHandler;
 			EngineCore.displayHeader("Inventory");
 			outputText("<b><u>Equipment:</u></b>\n");
-			outputText("<b>Weapon (Melee):</b> "+mkLink(player.weapon.name, player.weapon.id)+" (Attack: " + player.weaponAttack + ")");
+			outputText("<b>Weapon (Melee main hand):</b> "+mkLink(player.weapon.name, player.weapon.id)+" (Attack: " + player.weaponAttack + ")");
 			if (player.isGauntletWeapon()) outputText(" (Gauntlet-type weapon)");
 			if (player.isSwordTypeWeapon()) outputText(" (Sword-type weapon)");
 			if (player.isAxeTypeWeapon()) outputText(" (Axe-type weapon)");
@@ -140,14 +140,27 @@ use namespace CoC;
 			if (player.isRibbonTypeWeapon()) outputText(" (Ribbon-type weapon)");
 			if (player.isExoticTypeWeapon()) outputText(" (Exotic-type weapon)");
 			outputText("\n");
-			outputText("<b>Weapon (Range):</b> " + mkLink(player.weaponRange.name, player.weaponRange.id) + " (Attack: " + player.weaponRangeAttack + ")");
-			if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow") outputText(" (Bow/Crosbow-type weapon)");
-			if (player.weaponRangePerk == "Throwing") outputText(" (Throwing weapon-type weapon)");
-			if (player.isFirearmTypeWeapon()) outputText(" (Firearms-type weapon)");
+			outputText("<b>I&h%31 {o*v3# O44 @4!?):</b> F13&s (4om>?}; i}");
+			/*outputText("<b>Weapon (Melee off hand):</b> "+mkLink(player.weaponOff.name, player.weaponOff.id)+" (Attack: " + player.weaponOffhandAttack + ")");
+			if (player.isGauntletWeapon()) outputText(" (Gauntlet-type weapon)");
+			if (player.isSwordTypeWeapon()) outputText(" (Sword-type weapon)");
+			if (player.isAxeTypeWeapon()) outputText(" (Axe-type weapon)");
+			if (player.isMaceHammerTypeWeapon()) outputText(" (Mace/Hammer-type weapon)");
+			if (player.isDuelingTypeWeapon()) outputText(" (Dueling Sword-type weapon)");
+			if (player.isSpearTypeWeapon()) outputText(" (Spear-type weapon)");
+			if (player.isDaggerTypeWeapon()) outputText(" (Dagger-type weapon)");
+			if (player.isWhipTypeWeapon()) outputText(" (Whip-type weapon)");
+			if (player.isRibbonTypeWeapon()) outputText(" (Ribbon-type weapon)");
+			if (player.isExoticTypeWeapon()) outputText(" (Exotic-type weapon)");*/
 			outputText("\n");
 			outputText("<b>Shield:</b> " + mkLink(player.shield.name, player.shield.id) + " (Block Rating: " + player.shieldBlock + ")");
 			if (player.shieldPerk == "Large") outputText(" (Large)");
 			if (player.shieldPerk == "Massive") outputText(" (Massive)");
+			outputText("\n");
+			outputText("<b>Weapon (Range):</b> " + mkLink(player.weaponRange.name, player.weaponRange.id) + " (Attack: " + player.weaponRangeAttack + ")");
+			if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow") outputText(" (Bow/Crosbow-type weapon)");
+			if (player.weaponRangePerk == "Throwing") outputText(" (Throwing weapon-type weapon)");
+			if (player.isFirearmTypeWeapon()) outputText(" (Firearms-type weapon)");
 			outputText("\n");
 			outputText("<b>Armour:</b> " + mkLink(player.armor.name, player.armor.id) + " (Physical / Magical Defense: " + player.armorDef + " / " + player.armorMDef + ")\n");
 			outputText("<b>Upper underwear:</b> " + mkLink(player.upperGarment.name, player.upperGarment.id) + "\n");
@@ -1264,18 +1277,19 @@ use namespace CoC;
 			outputText("Which would you like to unequip?\n\n");
 			menu();
 			if (page == 1) {
-				addButton(0, "Weapon (M)", unequipWeapon)
+				addButton(0, "Weapon (MH)", unequipWeapon)
 						.itemHints(player.weapon)
 						.disableIf(!player.weapon.canUnequip(false))
-						.disableIf(player.weapon.isNothing || player.hasPerk(PerkLib.Rigidity), "You don't have melee weapon equipped.");
-				addButton(1, "Weapon (R)", unequipWeaponRange)
+						.disableIf(player.weapon.isNothing || player.hasPerk(PerkLib.Rigidity), "You don't have melee main hand weapon equipped.");
+				addButtonDisabled(1, "3'UwU* /007/", "Minx was here!!!");
+				/*addButton(1, "Weapon (MO)", unequipWeaponOff)
+						.itemHints(player.weaponOff)
+						.disableIf(!player.weaponOff.canUnequip(false))
+						.disableIf(player.weaponOff.isNothing || player.hasPerk(PerkLib.Rigidity), "You don't have melee off hand weapon equipped.");*/
+				addButton(2, "Weapon (R)", unequipWeaponRange)
 						.itemHints(player.weaponRange)
 						.disableIf(!player.weaponRange.canUnequip(false))
 						.disableIf(player.weaponRange.isNothing || player.hasPerk(PerkLib.Rigidity), "You don't have range weapon equipped.");
-				addButton(2, "Shield", unequipShield)
-						.itemHints(player.shield)
-						.disableIf(!player.shield.canUnequip(false))
-						.disableIf(player.shield.isNothing || player.hasPerk(PerkLib.Rigidity), "You don't have shield equipped.");
 				addButton(3, "Flying Sword", unequipFlyingSwords)
 						.itemHints(player.weaponFlyingSwords)
 						.disableIf(!player.weaponFlyingSwords.canUnequip(false))
@@ -1286,19 +1300,23 @@ use namespace CoC;
 						.disableIf(!player.armor.canUnequip(false))
 						.disableIf(player.hasPerk(PerkLib.Rigidity), "Your body stiffness prevents you from unequipping this armor.")
 						.disableIf(player.armor.isNothing, "You don't have armor equipped.");
-				addButton(6, "Upperwear", unequipUpperwear)
+				//6? - lower body armor slot
+				addButton(6, "Shield", unequipShield)
+						.itemHints(player.shield)
+						.disableIf(!player.shield.canUnequip(false))
+						.disableIf(player.shield.isNothing || player.hasPerk(PerkLib.Rigidity), "You don't have shield equipped.");
+				addButton(10, "Upperwear", unequipUpperwear)
 						.itemHints(player.upperGarment)
 						.disableIf(!player.upperGarment.canUnequip(false))
 						.disableIf(player.upperGarment.isNothing || player.hasPerk(PerkLib.Rigidity), "You don't have upperwear equipped.");
-				addButton(7, "Lowerwear", unequipLowerwear)
+				addButton(11, "Lowerwear", unequipLowerwear)
 						.itemHints(player.lowerGarment)
 						.disableIf(!player.lowerGarment.canUnequip(false))
 						.disableIf(player.lowerGarment.isNothing || player.hasPerk(PerkLib.Rigidity), "You don't have lowerwear equipped.");
-				addButton(8, "Vehicle", unequipVehicle)
+				addButton(12, "Vehicle", unequipVehicle)
 						.itemHints(player.vehicles)
 						.disableIf(!player.vehicles.canUnequip(false))
 						.disableIf(player.vehicles == VehiclesLib.NOTHING || player.hasPerk(PerkLib.Rigidity), "You not using currently any vehicle.");
-				//10 - lower body armor slot
 				addButton(13, "-2-", manageEquipment, page + 1);
 			}
 			if (page == 2) {
@@ -1311,11 +1329,11 @@ use namespace CoC;
 						.itemHints(player.necklace)
 						.disableIf(!player.necklace.canUnequip(false))
 						.disableIf(player.necklace.isNothing, "You don't have equipped any necklace.");
-				addButton(2, "Acc 1", unequipMiscJewel1)
+				addButton(3, "Acc 1", unequipMiscJewel1)
 						.itemHints(player.miscJewelry1)
 						.disableIf(!player.miscJewelry1.canUnequip(false))
 						.disableIf(player.miscJewelry1.isNothing, "You don't have equipped any accessory.");
-				addButton(3, "Acc 2", unequipMiscJewel2)
+				addButton(8, "Acc 2", unequipMiscJewel2)
 						.itemHints(player.miscJewelry2)
 						.disableIf(!player.miscJewelry2.canUnequip(false))
 						.disableIf(player.miscJewelry2.isNothing, "You don't have equipped any accessory.");
@@ -1377,6 +1395,9 @@ use namespace CoC;
 		}
 		public function unequipWeapon():void {
 			unequipSlotToInventory(manageEquipment, ItemConstants.SLOT_WEAPON_MELEE);
+		}
+		public function unequipWeaponOff():void {
+			unequipSlotToInventory(manageEquipment, ItemConstants.SLOT_WEAPON_MELEE_OFF);
 		}
 		public function unequipWeaponRange():void {
 			unequipSlotToInventory(manageEquipment, ItemConstants.SLOT_WEAPON_RANGED);

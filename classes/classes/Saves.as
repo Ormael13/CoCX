@@ -720,6 +720,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		//CLOTHING/ARMOR
 		saveFile.data.armorId = player.armor.id;
 		saveFile.data.weaponId = player.weapon.id;
+		saveFile.data.weaponOffId = player.weaponOff.id;
 		saveFile.data.weaponRangeId = player.weaponRange.id;
 		saveFile.data.weaponFlyingSwordsId = player.weaponFlyingSwords.id;
 		saveFile.data.headJewelryId = player.headJewelry.id;
@@ -2126,6 +2127,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		var found:Boolean;
 		var itype:ItemType;
 		loadEquipment(ItemConstants.SLOT_WEAPON_MELEE, Weapon, saveFile.data.weaponId, saveFile.data.weaponName, WeaponLib.FISTS);
+		loadEquipment(ItemConstants.SLOT_WEAPON_MELEE_OFF, Weapon, saveFile.data.weaponOffId, saveFile.data.weaponOffhandName, WeaponLib.FISTS);
 		loadEquipment(ItemConstants.SLOT_WEAPON_RANGED, WeaponRange, saveFile.data.weaponRangeId, saveFile.data.weaponRangeName, WeaponRangeLib.NOTHING);
 		loadEquipment(ItemConstants.SLOT_FLYING_SWORD, FlyingSwords, saveFile.data.weaponFlyingSwordsId, saveFile.data.weaponFlyingSwordsName, FlyingSwordsLib.NOTHING);
 		loadEquipment(ItemConstants.SLOT_SHIELD, Shield, saveFile.data.shieldId,  saveFile.data.shieldName, ShieldLib.NOTHING);

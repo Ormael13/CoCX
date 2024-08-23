@@ -359,6 +359,27 @@ use namespace CoC;
 			CoC_Settings.error("ERROR: attempt to directly set player.weaponValue.");
 		}
 
+		//override public function set weapons offhand
+		override public function set weaponOffhandName(value:String):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.weaponOffhandName.");
+		}
+
+		override public function set weaponOffhandVerb(value:String):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.weaponOffhandVerb.");
+		}
+
+		override public function set weaponOffhandAttack(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.weaponOffhandAttack.");
+		}
+
+		override public function set weaponOffhandValue(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.weaponOffhandValue.");
+		}
+
 		//override public function set weapons range
 		override public function set weaponRangeName(value:String):void
 		{
@@ -1549,8 +1570,42 @@ use namespace CoC;
 			return weapon.verb;
 		}
 		override public function get weaponAttack():Number {
+			return calcWeaponAttack(weapon, false);
+		}
+		public function get weaponBaseAttack():Number {
+			return weapon.attack;
+		}
+		override public function get weaponType():String {
+			return weapon.type || "";
+		}
+		override public function get weaponValue():Number {
+			return weapon.value;
+		}
+		//override public function get weapons
+		override public function get weaponOffhandName():String {
+			return weaponOff.name;
+		}
+		override public function get weaponOffhandVerb():String {
+			return weaponOff.verb;
+		}
+		override public function get weaponOffhandAttack():Number {
+			return calcWeaponAttack(weapon, true);
+		}
+		public function get weaponOffhandBaseAttack():Number {
+			return weaponOff.attack;
+		}
+		override public function get weaponOffhandType():String {
+			return weaponOff.type || "";
+		}
+		override public function get weaponOffhandValue():Number {
+			return weaponOff.value;
+		}
+		//Calculation
+		public function calcWeaponAttack(weapon:Weapon, offhand:Boolean):Number {
 			var newGamePlusMod:int = this.newGamePlusMod()+1;
-			var attack:Number = weapon.attack;
+			var attack:Number = 0;
+			if (offhand) attack += weaponOff.attack;
+			else attack += weapon.attack;
 			if (hasPerk(PerkLib.JobSwordsman) && (weapon.isSingleLarge() || hasAetherTwinsTier2())) {
 				if (hasPerk(PerkLib.WeaponMastery) && str >= 100) {
 					if (hasPerk(PerkLib.WeaponGrandMastery) && str >= 140) attack *= 2;
@@ -1685,15 +1740,6 @@ use namespace CoC;
 			}
 			attack = Math.round(attack);
 			return attack;
-		}
-		public function get weaponBaseAttack():Number {
-			return weapon.attack;
-		}
-		override public function get weaponType():String {
-			return weapon.type || "";
-		}
-		override public function get weaponValue():Number {
-			return weapon.value;
 		}
 		//Is DualWield
 		public function isDualWieldMelee():Boolean
@@ -2221,6 +2267,28 @@ use namespace CoC;
 		 */
 		public function unequipWeapon(doOutput:Boolean=true, force:Boolean=false):Weapon {
 			return internalUnequipItem(ItemConstants.SLOT_WEAPON_MELEE, doOutput, force) as Weapon;
+		}
+		
+		public function get weaponOff():Weapon {
+			return _equipment[ItemConstants.SLOT_WEAPON_MELEE_OFF] as Weapon;
+		}
+		
+		/**
+		 * @param newItem new equipment
+		 * @param doOutput print texts
+		 * @param force ignore canEquip/canUnequip
+		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
+		 */
+		public function setWeaponOff(newItem:Weapon, doOutput:Boolean=true, force:Boolean=false):Weapon {
+			return internalEquipItem(ItemConstants.SLOT_WEAPON_MELEE_OFF, newItem, doOutput, force) as Weapon;
+		}
+		/**
+		 * @param doOutput print texts
+		 * @param force ignore canUnequip
+		 * @return null if failed to unequip, otherwise returned item (could be nothing)
+		 */
+		public function unequipWeaponOff(doOutput:Boolean=true, force:Boolean=false):Weapon {
+			return internalUnequipItem(ItemConstants.SLOT_WEAPON_MELEE_OFF, doOutput, force) as Weapon;
 		}
 		
 		public function get weaponRange():WeaponRange {
@@ -7925,7 +7993,8 @@ use namespace CoC;
 				outputText("\nNo, I'm not violent");
 				outputText("\nBut I've got some evil inside me, me (Metroid Dread)[/font]");
 			}
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 7) outputText("\n[font-pink]Are you 'Courting Death' since you 'Had eyes but not seen Mt. Tai?' Worry not there is enough 'Arrogant Young Masters' and Mistresses for everyone to get a piece of Champion. (Xianxia MC)[/font]");
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 7) outputText("\n[font-pink]Are you 'Courting Death' since you 'Had eyes but not seen Mt. Tai?' Worry not as there are enough 'Arrogant Young Masters' and Mistresses for everyone to get a piece of Champion. (Xianxia MC)[/font]");
+			outputText("<i>Each option that increase difficutly rating above when it's not completly turned off: Primary Difficulty, Secondary Stats Modifier, Elite/Champion/Boss Modifier, Hunger/Realistic Mode Modifier, Hardcore Modifier</i>");
 		}
 		
 		public function raijuSuperchargedCheck():void{

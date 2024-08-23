@@ -311,7 +311,7 @@ public class Changelog extends BaseContent
 			outputText("-Fixed Benoit not feminizing and Possess not resetting crab grapple (Svalkash)\n");
 			outputText("-New event perk: Dracoforce. Gained by having 30+ in any more then half dragon race score. Effects: Increase your total Strength and Toughness by 50%. Would add +1 to race score for those races.\n");
 			outputText("-New tier for frostwyrm race score bonuses - Jormungandr (32+ pts): +230 str multi, +180 tou multi, +90 spe multi, -110 int multi, +90 lib multi, +150% max hp multi, +4 armor/m.res\n");
-			outputText("-\n");
+			outputText("-Hidden equipment slot added (this text line will self-destruct in 5 sec)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -548,7 +548,7 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Vocal Tactician. Gained by having 15 Vocal Training sessions with Charybdis. Effects: Minion and Follower Damage increased by another 15%. Followers will act even more frequently.\n");
 			outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP / Lust effect of 10% magnitude.\n");
 			outputText("-New mutation perk: Blazing Heart. Req. having free heart mutation slot, Hinezumi, Salamander, Phoenix, Hellcat and Fire Snail race. Effects: Gain permanent weakness to cold and fire resistance. Increase fire damage by 25%.\n");
-			outputText("-New mutation perk: Drake Blood. Req. having free bloodstream mutation slot, Frost Wyrm, Sea Dragon and Jabberwocky race. Effects: Dragon strong vitality grants mana, soulforce and health regeneration 1%.\n");
+			outputText("-New mutation perk: Drake Blood. Req. having free bloodstream mutation slot; Dragon, Frost Wyrm, Sea Dragon and Jabberwocky race. Effects: Dragon strong vitality grants mana, soulforce and health regeneration 1%.\n");
 			outputText("-New mutation perk: Equine Muscle. Req. having free musculature mutation slot, one of races: horse-morph, centuar, unicorn, bicorn, alicorn, nightmare, laquine. Effects: +25% to all Physical Ability damage. Gallop cost 10% less fatigue.\n");
 			outputText("-New mutation perk: Fiendish Balls. Req. having free metabolism mutation slot, demon or imp race. Effects: Increase Virility by 40%.\n");
 			outputText("-New mutation perk: Fiendish Metabolism. Req. having free metabolism mutation slot, demon or imp race. Effects: You may no longer gain nourishment from anything short of cum, milk and girl juice. If you have the demonic hunger perk, gain a stacking bonus of 10% to tease damage up to 50%.\n");

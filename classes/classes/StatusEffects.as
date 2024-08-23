@@ -748,6 +748,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const MaraesLethicite:StatusEffectType         = mk("Marae's Lethicite"); //V1 - number of pieces remaining. DO NOT REMOVE THE EFFECT COMPLETELY!!!
 		public static const MaraesQuestStart:StatusEffectType        = mk("Marae's Quest Start");
 		public static const MetMarae:StatusEffectType                = mk("Met Marae");
+		public static const ILLYProtocol:StatusEffectType            = mk("ILLY Protocol");
 
 		public static const CalluOff:StatusEffectType            = mk("Callu Off");
 		public static const CeraphOff:StatusEffectType           = mk("Ceraph Off");

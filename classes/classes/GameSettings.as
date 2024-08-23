@@ -55,12 +55,6 @@ public class GameSettings extends BaseContent {
 		addButton(6, "SceneHunter", sceneHunter_inst.settingsPage);
 		if (debug) addButton(12, "gamedata.js", exportGameDataJs).hint("Export gamedata.js file for (new) save editor");
 		addButton(14, "Back", CoC.instance.mainMenu.mainMenu);
-        if (flags[kFLAGS.HARDCORE_MODE] > 0) {
-			debug                               = false;
-			flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
-			flags[kFLAGS.HYPER_HAPPY]           = 0;
-			flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = 0;
-		}
 	}
 
 	//------------
@@ -191,7 +185,6 @@ public class GameSettings extends BaseContent {
 			outputText("\n\n");
 		}
 		menu();
-		addButton(13, "Auto level", toggleFlag, kFLAGS.AUTO_LEVEL, settingsScreenGameSettings).hint("Toggles automatic leveling when you accumulate sufficient experience.");
 		if (player) {
 			addButton(0, "Prime Difficulty", difficultySelectionMenu1).hint("Adjust primary difficulty to make game easier or harder.");
 			addButton(1, "Sec.Mon.Stat", difficultySelectionMenu2).hint("Adjusts monsters secondary stats multiplier to make game easier or harder.");
@@ -221,6 +214,7 @@ public class GameSettings extends BaseContent {
 			addButtonDisabled(11, "Fetishes", "Requires a loaded save.");
 			addButtonDisabled(12, "Timescale", "Requires a loaded save.");
 		}
+		addButton(13, "Auto level", toggleFlag, kFLAGS.AUTO_LEVEL, settingsScreenGameSettings).hint("Toggles automatic leveling when you accumulate sufficient experience.");
 		addButton(14, "Back", settingsScreenMain);
 
 		//===========================
@@ -653,6 +647,15 @@ public class GameSettings extends BaseContent {
 		addButton(6, "Int scaling", toggleFlag, kFLAGS.INTELLIGENCE_SCALING, settingsScreenGameSettings2).hint("Toggles Intelligance scaling for all attacks using it. If enabled, intelligence scaling would be less random with values being a bit higher on average.");
 		addButton(7, "Str scaling", toggleFlag, kFLAGS.STRENGTH_SCALING, settingsScreenGameSettings2).hint("Toggles Strength scaling for all attacks using it. If enabled, strength scaling would be less random with values being a bit higher on average.");
 		addButton(8, "Spe scaling", toggleFlag, kFLAGS.SPEED_SCALING, settingsScreenGameSettings2).hint("Toggles Speed scaling for all attacks using it. If enabled, speed scaling would be less random with values being a bit higher on average.");
+		if (CoC_Settings.debugBuild) {
+			outputText("ILLY Protocol: "+(player.hasStatusEffect(StatusEffects.ILLYProtocol)?"Active (No Cheats menu for you)":"Not active (Cheat menu is all yours)")+"");
+			outputText("\n\n");
+			if (player) {
+				if (player.hasStatusEffect(StatusEffects.ILLYProtocol)) addButton(13, "ILLY Protocol Off", ILLYProtocolOff).hint("Show Cheats in test builds.");
+				else addButton(13, "ILLY Protocol On", ILLYProtocolOn).hint("Hide Cheats in test builds.");
+			}
+			else addButtonDisabled(13, "ILLY Protocol", "Requires a loaded save.");
+		}
 		addButton(14, "Back", settingsScreenMain);
 	}
 
@@ -660,22 +663,27 @@ public class GameSettings extends BaseContent {
 		flags[flagID] = !flags[flagID];
 		menuFun();
 	}
+	private function ILLYProtocolOn():void {
+		player.createStatusEffect(StatusEffects.ILLYProtocol, 0, 0, 0, 0);
+		settingsScreenGameSettings2();
+	}
+	private function ILLYProtocolOff():void {
+		player.removeStatusEffect(StatusEffects.ILLYProtocol);
+		settingsScreenGameSettings2();
+	}
 
 	public function settingsScreenQoLSettings():void{
 		clearOutput();
 		displayHeader("Quality of Life Settings");
 		outputText("This page contains settings that can affect the game's performance, appearance, and other tedious tasks.\n\n");
-
 		fastLvlSettings();
 		mutationsSpoilersSetting();
 		simpPerkSetting();
 		invMgmtSetting();
 		USSdisplayOpt();
 		IMDBdisplayStyle();
-
 		outputText("\n\n");
 		menu();
-
 		addButton(0, "Fast Lvl", flagUpdate, kFLAGS.LVL_UP_FAST, 2).hint("Immediately level to the highest possible from XP instead of spamming next.");
 		addButton(1, "Mutation Assist", flagUpdate, kFLAGS.MUTATIONS_SPOILERS, 1).hint("Mutation Tracker Spoiler Mode. For when you want to discover mutations by yourself, or with some help.");
 		addButton(2, "PerkView Simplfied", flagUpdate, kFLAGS.NEWPERKSDISPLAY, 1).hint("Simplified Perk Viewing. So duplicate entries/tiers don't show up.");
@@ -683,7 +691,6 @@ public class GameSettings extends BaseContent {
 		addButton(4,"USS Display Opt.", flagUpdate, kFLAGS.USSDISPLAY_STYLE,1).hint("Switches between USS Display options.");
 		addButton(5,"IMDB Details", flagUpdate, kFLAGS.IMDB_DETAILS,1).hint("Switches between Internal Mutation DB display styles.");
 		addButton(14, "Back", settingsScreenMain);
-
 		function fastLvlSettings():void{
 			if (flags[kFLAGS.LVL_UP_FAST] == 2) {
 				outputText("Instant Leveling: [font-green]<b>ON, Direct Jump</b>[/font]\nInstantly levels you up to the highest possible given your xp.");
