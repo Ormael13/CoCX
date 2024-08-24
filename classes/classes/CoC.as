@@ -97,7 +97,6 @@ public class CoC extends MovieClip
     public var consumables:ConsumableLib           = new ConsumableLib();
     public var useables:UseableLib                 = new UseableLib();
     public var weapons:WeaponLib                   = new WeaponLib();
-    public var weaponsOff:WeaponLib                = new WeaponLib();
     public var weaponsrange:WeaponRangeLib         = new WeaponRangeLib();
     public var weaponsflyingswords:FlyingSwordsLib = new FlyingSwordsLib();
     public var armors:ArmorLib                     = new ArmorLib();

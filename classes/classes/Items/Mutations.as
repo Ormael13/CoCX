@@ -27,7 +27,6 @@ public final class Mutations extends MutationsHelper {
     //const BIKINI_ARMOR_BONUS:int = 769;
 
     public var emberTFchanges:EmberTF = new EmberTF();
-    public var sagittariusBowTFchanges:Centaurinum = new Centaurinum();
 	public var saveUpdater:SaveUpdater = new SaveUpdater();
 
     public function DrunkenPowerEmpower():void {
@@ -3161,7 +3160,7 @@ public final class Mutations extends MutationsHelper {
 				player.MutagenBonus("lib", 1);
 			}
 		}
-		if (changes < changeLimit) sagittariusBowTFchanges.centaurTFEffects(true);
+		if (changes < changeLimit) consumables.CENTARI.centaurTFEffects(true);
 		if (!player.inRut) player.goIntoRut(true);
 	}
 
