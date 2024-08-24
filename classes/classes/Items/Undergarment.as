@@ -68,7 +68,7 @@ import classes.PerkLib;
 			return _sexiness;
 		}
 		
-		override public function canEquip(doOutput:Boolean):Boolean {
+		override public function canEquip(doOutput:Boolean, slot:int):Boolean {
 			if (!game.player.armor.supportsUndergarment) {
 				outputText("It would be awkward to put on undergarments when you're currently wearing your type of clothing. You should consider switching to different clothes. You put it back into your inventory.");
 				return false;
@@ -85,7 +85,7 @@ import classes.PerkLib;
 				outputText("You would very like to equip this item but your body stiffness prevents you from doing so.");
 				return false;
 			}
-			return super.canEquip(doOutput);
+			return super.canEquip(doOutput, slot);
 		}
 	}
 

@@ -15,8 +15,8 @@ package classes.Items.Armors
 			super("SP Kimo", "SakuraPetalKimono", "sakura petal kimono", "a sakura petal kimono", 0, 1, 160, "This kimono belonged to Izumi. One of the many dresses she brought from her homeland it is comfortable and fills you with a sense of contained primal strength.", "Light");
 		}
 		
-		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.tallness >= 80) return super.canEquip(doOutput);
+		override public function canEquip(doOutput:Boolean, slot:int):Boolean {
+			if (game.player.tallness >= 80) return super.canEquip(doOutput, slot);
 			if (doOutput) outputText("You aren't tall enough to wear this kimono!  ");
 			return false;
 		}

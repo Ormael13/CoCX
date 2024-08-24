@@ -16,7 +16,7 @@ import classes.Items.MiscJewelry;
 			withBuffs({'int':5});
 		}
 
-		override public function canEquip(doOutput:Boolean):Boolean{
+		override public function canEquip(doOutput:Boolean, slot:int):Boolean{
 			if (game.player.tailType == Tail.DEMONIC) return true;
 			if (doOutput) {
 				outputText(" Just where do you even plan to put this thing on? You do not have a demon tail");

@@ -66,9 +66,10 @@ import classes.PerkLib;
 				_buffs['psoulskillpower'] = newMult;
 				_buffs['msoulskillpower'] = newMult;
                 if (game.player.weapon == this) {
+	                var slot:int = game.player.slotOfEquippedItem(this);
                     //re-requip to update player's perk
-					afterUnequip(false);
-					afterEquip(false);
+					afterUnequip(false, slot);
+					afterEquip(false, slot);
                 }
                 lastCor = game.player.cor;
             }

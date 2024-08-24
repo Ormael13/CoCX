@@ -28,8 +28,8 @@ import classes.Items.Armor;
 			return 10 + mod;
 		}
 		
-		override public function canEquip(doOutput:Boolean):Boolean {
-			if (!super.canEquip(doOutput)) return false;
+		override public function canEquip(doOutput:Boolean, slot:int):Boolean {
+			if (!super.canEquip(doOutput, slot)) return false;
 			return LustyMaidensArmor.canUseStatic(doOutput);
 		}
 	}

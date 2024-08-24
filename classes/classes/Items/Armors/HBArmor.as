@@ -26,7 +26,7 @@ package classes.Items.Armors
 			else return 48;
 		}
 
-		override public function afterEquip(doOutput:Boolean):void {
+		override public function afterEquip(doOutput:Boolean, slot:int):void {
 			if (!game.isLoadingSave) {
 				var oldHPratio:Number = game.player.hp100/100;
 				game.flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = 0;
@@ -35,20 +35,20 @@ package classes.Items.Armors
 				game.player.HP = oldHPratio*game.player.maxHP();
 				EngineCore.statScreenRefresh();
 			}
-			super.afterEquip(doOutput);
+			super.afterEquip(doOutput, slot);
 		}
 		
-		override public function afterUnequip(doOutput:Boolean):void {
+		override public function afterUnequip(doOutput:Boolean, slot:int):void {
 			if (game.flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > 0) {
 				game.player.soulforce += game.flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR];
 				if (game.player.soulforce > game.player.maxOverSoulforce()) game.player.soulforce = game.player.maxOverSoulforce();
 				game.flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = 0;
 			}
-			super.afterUnequip(doOutput);
+			super.afterUnequip(doOutput, slot);
 		}
 		
-		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.str >= 60 && game.player.spe >= 60 && game.player.tallness >= 84) return super.canEquip(doOutput);
+		override public function canEquip(doOutput:Boolean, slot:int):Boolean {
+			if (game.player.str >= 60 && game.player.spe >= 60 && game.player.tallness >= 84) return super.canEquip(doOutput, slot);
 			if (doOutput) {
 				if (game.player.tallness < 84) outputText("You aren't tall enough to wear this armor!  ");
 				else outputText("You aren't strong and agile enough to wear this armor!  Unless you likes to move slower than snail and hit weaked than wet noddle!  ");

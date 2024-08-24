@@ -2172,7 +2172,7 @@ use namespace CoC;
 				return internalUnequipItem(slot, doOutput, force);
 			}
 			if (!force) {
-				if (!newItem.canEquip(doOutput)) return null;
+				if (!newItem.canEquip(doOutput, slot)) return null;
 			}
 			var oldItem:Equipable = _equipment[slot];
 			var returnItem:ItemType;
@@ -2185,10 +2185,10 @@ use namespace CoC;
 			saveHPRatio();
 			var actualItem:Equipable;
 			if (game.isLoadingSave) actualItem = newItem;
-			else actualItem = newItem.beforeEquip(doOutput);
+			else actualItem = newItem.beforeEquip(doOutput, slot);
 			if (actualItem && !actualItem.isNothing) {
 				_equipment[slot] = actualItem;
-				actualItem.afterEquip(doOutput);
+				actualItem.afterEquip(doOutput, slot);
 			}
 			restoreHPRatio();
 			return returnItem;
@@ -2214,13 +2214,13 @@ use namespace CoC;
 			if (!force) {
 				if (!oldItem.canUnequip(doOutput)) return null;
 			}
-			var returnItem:ItemType = oldItem.beforeUnequip(doOutput);
+			var returnItem:ItemType = oldItem.beforeUnequip(doOutput, slot);
 			if (returnItem == null) {
 				trace("[WARNING] beforeUnequip returned null from "+oldItem.id+", should return 'nothing' instead");
 				returnItem = ItemConstants.EquipmentSlots[slot].nothing();
 			}
 			_equipment[slot] = ItemConstants.EquipmentSlots[slot].nothing();
-			oldItem.afterUnequip(doOutput);
+			oldItem.afterUnequip(doOutput, slot);
 			restoreHPRatio();
 			return returnItem;
 		}

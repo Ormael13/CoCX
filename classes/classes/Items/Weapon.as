@@ -247,7 +247,7 @@ public class Weapon extends Equipable
 			return list;
 		}
 		
-		override public function canEquip(doOutput:Boolean):Boolean {
+		override public function canEquip(doOutput:Boolean, slot:int):Boolean {
 			//========================//
 			// Size/Dual/Shield check //
 			//========================//
@@ -314,10 +314,10 @@ public class Weapon extends Equipable
 				return false;
 			}
 			// All checks passed, check superclass //
-			return super.canEquip(doOutput);
+			return super.canEquip(doOutput, slot);
 		}
 		
-		override public function beforeEquip(doOutput:Boolean):Equipable {
+		override public function beforeEquip(doOutput:Boolean, slot:int):Equipable {
 			if (!game.player.shield.isNothing) {
 				if (isLarge() && !game.player.hasPerk(PerkLib.GigantGrip)
 					|| isMassive() && !game.player.hasPerk(PerkLib.TitanGrip)){
@@ -326,7 +326,7 @@ public class Weapon extends Equipable
 			}
 			if (game.flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && isSingleOrDualSmallToMassive()) game.flags[kFLAGS.FERAL_COMBAT_MODE] = 0;
 			
-			return super.beforeEquip(doOutput);
+			return super.beforeEquip(doOutput, slot);
 		}
 		
 		/**

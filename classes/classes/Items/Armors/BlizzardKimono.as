@@ -23,17 +23,17 @@ package classes.Items.Armors
 			else outputText("You equip " + longName + ".  ");
 		}
 		
-		override public function afterEquip(doOutput:Boolean):void {
+		override public function afterEquip(doOutput:Boolean, slot:int):void {
 			if (!game.isLoadingSave) {
 				game.player.removeStatusEffect(StatusEffects.YukiOnnaKimono);
 				game.player.createStatusEffect(StatusEffects.YukiOnnaKimono, 0, 0, 0, 0);
 			}
-			super.afterEquip(doOutput);
+			super.afterEquip(doOutput, slot);
 		}
 		
-		override public function afterUnequip(doOutput:Boolean):void {
+		override public function afterUnequip(doOutput:Boolean, slot:int):void {
 			game.player.removeStatusEffect(StatusEffects.YukiOnnaKimono);
-			super.afterUnequip(doOutput);
+			super.afterUnequip(doOutput, slot);
 		}
 		
 	}

@@ -42,12 +42,12 @@ package classes.Items
 			return desc;
 		}
 		
-		override public function canEquip(doOutput:Boolean):Boolean {
+		override public function canEquip(doOutput:Boolean, slot:int):Boolean {
 			if (game.player.hasPerk(PerkLib.Rigidity)) {
 				if (doOutput) outputText("You would very like to enter " + longName + " cockpit but your body stiffness prevents you from doing so.");
 				return false;
 			}
-			return super.canEquip(doOutput);
+			return super.canEquip(doOutput, slot);
 		}
 		
 		override public function equipText():void {

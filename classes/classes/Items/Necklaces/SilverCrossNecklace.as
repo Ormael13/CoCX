@@ -35,12 +35,12 @@ package classes.Items.Necklaces
 			outputText("A small chain with a silver cross or X attached. At first glance, it seems to be a very ordinary accessory."+((CoC.instance.player.hasPerk(PerkLib.Soulless) && CoC.instance.player.hasVagina())?" While originally this collar served to bind you to Xuviel’s will, something you no longer need, it now actually assists you instead of hindering you, granting your corrupted body amazing powers.":"")+"");
 		}
 		*/
-		override public function afterEquip(doOutput:Boolean):void {
+		override public function afterEquip(doOutput:Boolean, slot:int):void {
 			if (!game.isLoadingSave && !game.player.hasStatusEffect(StatusEffects.MeetXuviel)) game.player.createStatusEffect(StatusEffects.MeetXuviel, 0, 0, 0, 0);
-			super.afterEquip(doOutput);
+			super.afterEquip(doOutput, slot);
 		}
 		
-		override public function unequipText():void{
+		override public function unequipText(slot:int):void{
 			outputText("You "+(CoC.instance.player.hasStatusEffect(StatusEffects.MeetXuviel)?"untie master Xuviel’s necklace with nostalgic fondness":"untie necklace")+". You could keep it on but right now you want to try a different accessory. It comes off with no difficulty obviously, putting it back should also be child’s play.");
 		}
 		

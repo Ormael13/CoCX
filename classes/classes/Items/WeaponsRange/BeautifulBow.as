@@ -21,8 +21,8 @@ package classes.Items.WeaponsRange
 			return temp;
 		}
 		
-		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.cor < (33 + game.player.corruptionTolerance)) return super.canEquip(doOutput);
+		override public function canEquip(doOutput:Boolean, slot:int):Boolean {
+			if (game.player.cor < (33 + game.player.corruptionTolerance)) return super.canEquip(doOutput, slot);
 			if(doOutput) outputText("You grab hold of the handle of the bow only to have it grow burning hot.  You're forced to let it go lest you burn yourself.  Something within the bow must be displeased.  ");
 			return false;
 		}

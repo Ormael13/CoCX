@@ -19,8 +19,8 @@ public class GoblinMechAlpha extends Vehicles
 			super("GobMAlp", "GoblinMechAlpha", "Goblin Mech Alpha", "a Goblin Mech Alpha", 0, 0, 500, "A customisable goblin invention, this six-legged, large mech is equipped with a comfortable seat, fit for a goblin or a rather small person. \n\nType: Goblin Mech \nBase value: 500","Mech");
 		}
 		
-		override public function canEquip(doOutput:Boolean):Boolean {
-			if (!super.canEquip(doOutput)) {
+		override public function canEquip(doOutput:Boolean, slot:int):Boolean {
+			if (!super.canEquip(doOutput, slot)) {
 				return false;
 			}
 			if (game.player.isRace(Races.ELF) || game.player.isRace(Races.WOODELF)) { //Elf
@@ -34,7 +34,7 @@ public class GoblinMechAlpha extends Vehicles
 			return true;
 		}
 		
-		override public function afterEquip(doOutput:Boolean):void {
+		override public function afterEquip(doOutput:Boolean, slot:int):void {
 			if (!game.isLoadingSave) {
 				if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) game.player.HP = 1.2 * game.player.maxHP();
 				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) game.player.HP = 1.4 * game.player.maxHP();
@@ -44,10 +44,10 @@ public class GoblinMechAlpha extends Vehicles
 				if (game.player.hasKeyItem("Upgraded Armor plating 6.0") >= 0) game.player.HP = 2.2 * game.player.maxHP();
 				outputText("As you turn the mech on the welcoming voice of your AI booms in. \"<i>Welcome back aboard operator [name]. All functions are nominal.</i>\"");
 			}
-			super.afterEquip(doOutput);
+			super.afterEquip(doOutput, slot);
 		}
 		
-		override public function afterUnequip(doOutput:Boolean):void {
+		override public function afterUnequip(doOutput:Boolean, slot:int):void {
 			if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) game.player.HP /= 1.2;
 			if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) game.player.HP /= 1.4;
 			if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) game.player.HP /= 1.6;
@@ -55,7 +55,7 @@ public class GoblinMechAlpha extends Vehicles
 			if (game.player.hasKeyItem("Upgraded Armor plating 5.0") >= 0) game.player.HP /= 2;
 			if (game.player.hasKeyItem("Upgraded Armor plating 6.0") >= 0) game.player.HP /= 2.2;
 			game.player.HP = Math.round(game.player.HP);
-			super.afterUnequip(doOutput);
+			super.afterUnequip(doOutput, slot);
 		}
 	}
 }

@@ -23,14 +23,14 @@ import classes.Items.Weapon;
 		}
 		
 		
-		override public function afterEquip(doOutput:Boolean):void {
+		override public function afterEquip(doOutput:Boolean, slot:int):void {
 			game.player.createStatusEffect(StatusEffects.ThePhalluspear1,0,0,0,0);
-			super.afterEquip(doOutput);
+			super.afterEquip(doOutput, slot);
 		}
 		
-		override public function afterUnequip(doOutput:Boolean):void {
+		override public function afterUnequip(doOutput:Boolean, slot:int):void {
 			while (game.player.hasStatusEffect(StatusEffects.ThePhalluspear1)) game.player.removeStatusEffect(StatusEffects.ThePhalluspear1);
-			super.afterUnequip(doOutput);
+			super.afterUnequip(doOutput, slot);
 		}
 	}
 }

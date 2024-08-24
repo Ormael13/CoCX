@@ -14,7 +14,7 @@ import classes.Player;
 			super("c.under", "c.under", "comfortable underclothes", "comfortable underclothes", 0, 0, 1, "comfortable underclothes", "Light");
 		}
 		
-		override public function beforeUnequip(doOutput:Boolean):ItemType {
+		override public function beforeUnequip(doOutput:Boolean, slot:int):ItemType {
 			return ArmorLib.NOTHING; //Player never picks up their underclothes
 		}
 	}
