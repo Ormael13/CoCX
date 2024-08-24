@@ -312,7 +312,7 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Dracoforce. Gained by having 30+ in any more then half dragon race score. Effects: Increase your total Strength and Toughness by 50%. Would add +1 to race score for those races.\n");
 			outputText("-New tier for frostwyrm race score bonuses - Jormungandr (32+ pts): +230 str multi, +180 tou multi, +90 spe multi, -110 int multi, +90 lib multi, +150% max hp multi, +4 armor/m.res\n");
 			outputText("-Hidden equipment slot added (this text line will self-destruct in 5 sec)\n");
-			outputText("-\n");
+			outputText("-Dungeon enemies have their general levels and stats adjusted/increased. Dungeons adjusted (new lvl range of enemies): River Dungeon (floor 1-4) (only stats adjustments)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

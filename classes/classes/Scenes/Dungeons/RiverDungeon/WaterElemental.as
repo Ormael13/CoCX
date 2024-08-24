@@ -120,13 +120,13 @@ public class WaterElemental extends Monster
 				this.imageName = "water elemental";
 				this.long = "You're currently fighting water elemental. It's a four feet tall body of water shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 48;
-				initStrTouSpeInte(10, 25, 45, 45);
-				initWisLibSensCor(45, 10, 20, 50);
-				this.weaponAttack = 5;
-				this.armorDef = 5;
-				this.armorMDef = 30;
+				initStrTouSpeInte(20, 50, 90, 90);
+				initWisLibSensCor(90, 20, 40, 50);
+				this.weaponAttack = 10;
+				this.armorDef = 10;
+				this.armorMDef = 60;
 				this.level = 12;
-				this.bonusHP = 400;
+				this.bonusHP = 800;
 				this.additionalXP = 50;
 			}
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 1) {
@@ -134,13 +134,13 @@ public class WaterElemental extends Monster
 				this.imageName = "water elemental";
 				this.long = "You're currently fighting water elemental. It's a four foot, three inch tall body of water shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 51;
-				initStrTouSpeInte(12, 27, 47, 55);
-				initWisLibSensCor(55, 10, 25, 50);
-				this.weaponAttack = 6;
-				this.armorDef = 6;
-				this.armorMDef = 40;
+				initStrTouSpeInte(24, 54, 94, 110);
+				initWisLibSensCor(110, 20, 50, 50);
+				this.weaponAttack = 12;
+				this.armorDef = 12;
+				this.armorMDef = 80;
 				this.level = 14;
-				this.bonusHP = 440;
+				this.bonusHP = 880;
 				this.additionalXP = 75;
 			}
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 2) {
@@ -148,13 +148,13 @@ public class WaterElemental extends Monster
 				this.imageName = "water elemental";
 				this.long = "You're currently fighting water elemental. It's a four and half foot tall body of water shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 54;
-				initStrTouSpeInte(14, 29, 49, 65);
-				initWisLibSensCor(65, 10, 30, 50);
-				this.weaponAttack = 7;
-				this.armorDef = 7;
-				this.armorMDef = 50;
+				initStrTouSpeInte(28, 58, 98, 130);
+				initWisLibSensCor(130, 20, 60, 50);
+				this.weaponAttack = 14;
+				this.armorDef = 14;
+				this.armorMDef = 100;
 				this.level = 16;
-				this.bonusHP = 480;
+				this.bonusHP = 960;
 				this.additionalXP = 100;
 			}
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 3) {
@@ -162,13 +162,13 @@ public class WaterElemental extends Monster
 				this.imageName = "water elemental";
 				this.long = "You're currently fighting water elemental. It's four foot, nine inch tall body of water shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 57;
-				initStrTouSpeInte(16, 31, 51, 75);
-				initWisLibSensCor(75, 10, 35, 50);
-				this.weaponAttack = 8;
-				this.armorDef = 8;
-				this.armorMDef = 60;
+				initStrTouSpeInte(32, 62, 102, 150);
+				initWisLibSensCor(150, 20, 70, 50);
+				this.weaponAttack = 16;
+				this.armorDef = 16;
+				this.armorMDef = 120;
 				this.level = 18;
-				this.bonusHP = 520;
+				this.bonusHP = 1040;
 				this.additionalXP = 125;
 			}
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
@@ -176,13 +176,13 @@ public class WaterElemental extends Monster
 				this.imageName = "water undine";
 				this.long = "You're currently fighting 'male' undine. It's a nine foot tall body of water shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 108;
-				initStrTouSpeInte(24, 47, 77, 115);
-				initWisLibSensCor(115, 15, 55, 50);
-				this.weaponAttack = 12;
-				this.armorDef = 12;
-				this.armorMDef = 90;
+				initStrTouSpeInte(48, 94, 154, 230);
+				initWisLibSensCor(230, 30, 110, 50);
+				this.weaponAttack = 24;
+				this.armorDef = 24;
+				this.armorMDef = 180;
 				this.level = 21;
-				this.bonusHP = 780;
+				this.bonusHP = 1560;
 				this.additionalXP = 190;
 			}
 			this.a = "the ";
@@ -198,12 +198,13 @@ public class WaterElemental extends Monster
 			this.createPerk(PerkLib.MonsterRegeneration, 2, 0, 0, 0);
 			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
 				this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
-				this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EnemyChampionType, 0, 0, 0, 0);
 				this.drop = new WeightedDrop()
 					.add(useables.LELSHARD, 3)
 					.add(useables.ELCRYST, 1);
 			}
 			else {
+				this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
 				this.drop = new WeightedDrop()
 					.add(useables.ELSHARD, 3)
 					.add(useables.LELSHARD, 1);

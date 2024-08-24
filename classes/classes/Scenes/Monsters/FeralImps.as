@@ -244,21 +244,22 @@ public class FeralImps extends Monster
 				this.long = "An feral imp is short, only a few feet tall.  An unkempt mane of shaggy black hair hangs from his head, parted by two short curved horns.  His eyes are solid black, save for tiny red irises which glow with evil intent.  His skin is bright red, and unencumbered by clothing or armor, save for a small loincloth at his belt, and he's extremely well-muscled.  His feet are covered by tiny wooden sandals, and his hands tipped with sharp claws.  A pair of tiny but functional wings occasionally flap from his back.";
 				this.plural = false;
 				this.tallness = rand(24) + 25;
-				initStrTouSpeInte(50, 10, 15, 12);
-				initWisLibSensCor(12, 55, 35, 100);
+				initStrTouSpeInte(70, 12, 25, 12);
+				initWisLibSensCor(12, 55, 65, 100);
 				this.weaponName = "claws";
 				this.weaponVerb = "claw-slash";
-				this.weaponAttack = 5;
+				this.weaponAttack = 7;
 				this.armorName = "leathery skin";
 				this.armorDef = 4;
 				this.armorMDef = 1;
-				this.bonusHP = 100;
-				this.bonusWrath = 150;
-				this.bonusLust = 92;
+				this.bonusHP = 50;
+				this.bonusWrath = 250;
+				this.bonusLust = 122;
 				this.lust = 40;
 				this.level = 2;
 				this.gems = rand(5) + 5;
 				this.special1 = clawAttack;
+				this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
 				this.createPerk(PerkLib.OverMaxHP, 2, 0, 0, 0);
 			}
 			if (flags[kFLAGS.FERAL_EXTRAS] != 4) {

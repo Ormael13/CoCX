@@ -91,15 +91,16 @@ public class Yeti extends Monster
 		public function Yeti()
 		{
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
-				initStrTouSpeInte(185, 210, 105, 90);
-				initWisLibSensCor(80, 50, 30, 45);
-				this.weaponAttack = 100;
-				this.armorDef = 150;
-				this.armorMDef = 50;
-				this.bonusHP = 1500;
-				this.bonusLust = 117;
+				initStrTouSpeInte(247, 305, 157, 135);
+				initWisLibSensCor(120, 100, 60, 45);
+				this.weaponAttack = 200;
+				this.armorDef = 300;
+				this.armorMDef = 100;
+				this.bonusHP = 3000;
+				this.bonusLust = 197;
 				this.level = 32;
 				this.gems = 36 + rand(20);
+				this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
 			}
 			else {
 				initStrTouSpeInte(305, 360, 185, 90);

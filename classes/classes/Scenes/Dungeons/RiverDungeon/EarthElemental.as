@@ -114,13 +114,13 @@ public class EarthElemental extends Monster
 				this.imageName = "earth elemental";
 				this.long = "You're currently fighting earth elemental. It's a four foot tall creature of made of rocks, currently using its bare fists to fight.";
 				this.tallness = 48;
-				initStrTouSpeInte(10, 40, 40, 40);
-				initWisLibSensCor(40, 10, 20, 50);
-				this.weaponAttack = 5;
-				this.armorDef = 10;
-				this.armorMDef = 30;
+				initStrTouSpeInte(20, 80, 80, 80);
+				initWisLibSensCor(80, 20, 40, 50);
+				this.weaponAttack = 10;
+				this.armorDef = 20;
+				this.armorMDef = 60;
 				this.level = 12;
-				this.bonusHP = 500;
+				this.bonusHP = 1000;
 				this.additionalXP = 50;
 			}
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 1) {
@@ -128,13 +128,13 @@ public class EarthElemental extends Monster
 				this.imageName = "earth elemental";
 				this.long = "You're currently fighting earth elemental. It's a four foot, three inch tall creature of made of rocks, currently using its bare fists to fight.";
 				this.tallness = 51;
-				initStrTouSpeInte(12, 22, 42, 50);
-				initWisLibSensCor(50, 10, 25, 50);
-				this.weaponAttack = 7;
-				this.armorDef = 15;
-				this.armorMDef = 35;
+				initStrTouSpeInte(24, 84, 84, 100);
+				initWisLibSensCor(100, 20, 50, 50);
+				this.weaponAttack = 14;
+				this.armorDef = 30;
+				this.armorMDef = 70;
 				this.level = 14;
-				this.bonusHP = 600;
+				this.bonusHP = 1200;
 				this.additionalXP = 75;
 			}
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 2) {
@@ -142,13 +142,13 @@ public class EarthElemental extends Monster
 				this.imageName = "earth elemental";
 				this.long = "You're currently fighting earth elemental. It's a four and a half foot tall creature of made of rocks, currently using its bare fists to fight.";
 				this.tallness = 54;
-				initStrTouSpeInte(14, 44, 44, 60);
-				initWisLibSensCor(60, 10, 30, 50);
-				this.weaponAttack = 9;
-				this.armorDef = 20;
-				this.armorMDef = 40;
+				initStrTouSpeInte(28, 88, 88, 120);
+				initWisLibSensCor(120, 20, 60, 50);
+				this.weaponAttack = 18;
+				this.armorDef = 40;
+				this.armorMDef = 80;
 				this.level = 16;
-				this.bonusHP = 700;
+				this.bonusHP = 1400;
 				this.additionalXP = 100;
 			}
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 3) {
@@ -156,13 +156,13 @@ public class EarthElemental extends Monster
 				this.imageName = "earth elemental";
 				this.long = "You're currently fighting earth elemental. It's a four foot, nine inch tall creature of made of rocks, currently using its bare fists to fight.";
 				this.tallness = 57;
-				initStrTouSpeInte(16, 46, 46, 70);
-				initWisLibSensCor(70, 10, 35, 50);
-				this.weaponAttack = 11;
-				this.armorDef = 25;
-				this.armorMDef = 45;
+				initStrTouSpeInte(32, 92, 92, 140);
+				initWisLibSensCor(140, 20, 70, 50);
+				this.weaponAttack = 22;
+				this.armorDef = 50;
+				this.armorMDef = 90;
 				this.level = 18;
-				this.bonusHP = 800;
+				this.bonusHP = 1600;
 				this.additionalXP = 125;
 			}
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
@@ -170,13 +170,13 @@ public class EarthElemental extends Monster
 				this.imageName = "earth golem";
 				this.long = "You're currently fighting 'female' golem. It's a nine foot tall creature of made of rocks, currently using its bare fists to fight.";
 				this.tallness = 108;
-				initStrTouSpeInte(24, 69, 69, 105);
-				initWisLibSensCor(105, 15, 55, 50);
-				this.weaponAttack = 17;
-				this.armorDef = 40;
-				this.armorMDef = 70;
+				initStrTouSpeInte(48, 138, 138, 210);
+				initWisLibSensCor(210, 30, 110, 50);
+				this.weaponAttack = 34;
+				this.armorDef = 80;
+				this.armorMDef = 140;
 				this.level = 21;
-				this.bonusHP = 1200;
+				this.bonusHP = 2400;
 				this.additionalXP = 190;
 			}
 			this.a = "the ";
@@ -191,12 +191,13 @@ public class EarthElemental extends Monster
 			this.createPerk(PerkLib.EarthNature, 0, 0, 0, 0);
 			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
 				this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
-				this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EnemyChampionType, 0, 0, 0, 0);
 				this.drop = new WeightedDrop()
 					.add(useables.LELSHARD, 3)
 					.add(useables.ELCRYST, 1);
 			}
 			else {
+				this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
 				this.drop = new WeightedDrop()
 					.add(useables.ELSHARD, 3)
 					.add(useables.LELSHARD, 1);

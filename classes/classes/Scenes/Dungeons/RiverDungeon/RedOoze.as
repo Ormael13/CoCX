@@ -76,28 +76,28 @@ public class RedOoze extends Monster
 			if (flags[kFLAGS.RED_OOZE_SUBTYPE] == 1) {
 				this.short = "red mist ooze";
 				this.long = "The red mist ooze has a normally featureless face with pair of purple glowing eyes that sits on top of wide shoulders that sprout into thick, strong arms.  Its torso fades into an indistinct column that melds into the something looking like scylla lower body.  From it's back extend few gooey tendrils.  It unusual feature are glowing gently purple veins that covers it whole body.";
-				initStrTouSpeInte(110, 190, 140, 30);
-				initWisLibSensCor(50, 90, 88, 20);
-				this.weaponAttack = 20;
-				this.armorDef = 15;
-				this.armorMDef = 45;
-				this.bonusHP = 600;
-				this.bonusLust = 222;
-				this.bonusSoulforce = 1000;
+				initStrTouSpeInte(220, 380, 280, 60);
+				initWisLibSensCor(100, 180, 176, 20);
+				this.weaponAttack = 40;
+				this.armorDef = 30;
+				this.armorMDef = 90;
+				this.bonusHP = 1200;
+				this.bonusLust = 400;
+				this.bonusSoulforce = 2000;
 				this.level = 44;
 				this.gems = rand(5) + 3;
 			}
 			if (flags[kFLAGS.RED_OOZE_SUBTYPE] == 2) {
 				this.short = "red ooze";
 				this.long = "The red ooze has a normally featureless face that sits on top of wide shoulders that sprout into thick, strong arms.  Its torso fades into an indistinct column that melds into the something looking like scylla lower body.  From it's back extend few gooey tendrils.";
-				initStrTouSpeInte(30, 50, 40, 10);
-				initWisLibSensCor(10, 80, 60, 20);
-				this.weaponAttack = 4;
-				this.armorDef = 4;
-				this.armorMDef = 12;
-				this.bonusHP = 100;
-				this.bonusLust = 146;
-				this.bonusSoulforce = 100;
+				initStrTouSpeInte(60, 100, 80, 20);
+				initWisLibSensCor(20, 160, 120, 20);
+				this.weaponAttack = 6;
+				this.armorDef = 6;
+				this.armorMDef = 18;
+				this.bonusHP = 200;
+				this.bonusLust = 286;
+				this.bonusSoulforce = 200;
 				this.level = 4;
 				this.gems = rand(5) + 3;
 			}
@@ -136,6 +136,7 @@ public class RedOoze extends Monster
 			this.special3 = lustAttack;
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGooType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

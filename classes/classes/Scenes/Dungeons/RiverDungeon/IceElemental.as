@@ -98,13 +98,13 @@ public class IceElemental extends Monster
 				this.imageName = "ice elemental";
 				this.long = "You're currently fighting ice elemental. It's a four feet tall body of ice shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 48;
-				initStrTouSpeInte(22, 37, 57, 105);
-				initWisLibSensCor(105, 10, 55, 50);
-				this.weaponAttack = 12;
-				this.armorDef = 12;
-				this.armorMDef = 100;
+				initStrTouSpeInte(44, 74, 114, 210);
+				initWisLibSensCor(210, 20, 110, 50);
+				this.weaponAttack = 24;
+				this.armorDef = 24;
+				this.armorMDef = 200;
 				this.level = 26;
-				this.bonusHP = 680;
+				this.bonusHP = 1360;
 				this.additionalXP = 185;
 			}
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 1) {
@@ -112,13 +112,13 @@ public class IceElemental extends Monster
 				this.imageName = "ice elemental";
 				this.long = "You're currently fighting ice elemental. It's a four foot, three inch tall body of ice shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 51;
-				initStrTouSpeInte(25, 40, 60, 120);
-				initWisLibSensCor(120, 10, 65, 50);
-				this.weaponAttack = 14;
-				this.armorDef = 14;
-				this.armorMDef = 120;
+				initStrTouSpeInte(50, 80, 120, 240);
+				initWisLibSensCor(240, 20, 130, 50);
+				this.weaponAttack = 28;
+				this.armorDef = 28;
+				this.armorMDef = 240;
 				this.level = 28;
-				this.bonusHP = 760;
+				this.bonusHP = 1520;
 				this.additionalXP = 215;
 			}
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 2) {
@@ -126,13 +126,13 @@ public class IceElemental extends Monster
 				this.imageName = "ice elemental";
 				this.long = "You're currently fighting ice elemental. It's a four and half foot tall body of ice shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 54;
-				initStrTouSpeInte(28, 43, 63, 135);
-				initWisLibSensCor(135, 10, 75, 50);
-				this.weaponAttack = 16;
-				this.armorDef = 16;
-				this.armorMDef = 140;
+				initStrTouSpeInte(56, 86, 126, 270);
+				initWisLibSensCor(270, 20, 150, 50);
+				this.weaponAttack = 32;
+				this.armorDef = 32;
+				this.armorMDef = 280;
 				this.level = 30;
-				this.bonusHP = 840;
+				this.bonusHP = 1680;
 				this.additionalXP = 245;
 			}
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 3) {
@@ -140,13 +140,13 @@ public class IceElemental extends Monster
 				this.imageName = "ice elemental";
 				this.long = "You're currently fighting ice elemental. It's four foot, nine inch tall body of ice shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 57;
-				initStrTouSpeInte(31, 46, 66, 150);
-				initWisLibSensCor(150, 10, 85, 50);
-				this.weaponAttack = 18;
-				this.armorDef = 18;
-				this.armorMDef = 160;
+				initStrTouSpeInte(62, 92, 132, 300);
+				initWisLibSensCor(300, 20, 170, 50);
+				this.weaponAttack = 36;
+				this.armorDef = 36;
+				this.armorMDef = 320;
 				this.level = 32;
-				this.bonusHP = 920;
+				this.bonusHP = 1840;
 				this.additionalXP = 275;
 			}
 			this.a = "the ";
@@ -161,6 +161,7 @@ public class IceElemental extends Monster
 			this.weaponVerb = "smash";
 			this.armorName = "ice skin";
 			this.createPerk(PerkLib.EnemyElementalType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.IceNature, 0, 0, 0, 0);
 			this.createPerk(PerkLib.MonsterRegeneration, 1, 0, 0, 0);
 			checkMonster();

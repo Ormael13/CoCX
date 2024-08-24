@@ -322,14 +322,15 @@ public class Phouka extends Monster
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
 				this.short = "mist phouka";
 				this.long = "The mist phouka is flying around near you, waiting for an opening.  He has the general appearance of a faerie, though he is slightly larger and his skin and wings are coal black with delicate purple glowing veins covering his whole body.  A large cock stands erect between his legs.  His cat-like purple eyes, filled with lust, follow your every motion.";
-				initStrTouSpeInte(120, 90, 170, 60);
-				initWisLibSensCor(60, 110, 45, 100);
-				this.weaponAttack = 43;
-				this.armorDef = 180;
-				this.armorMDef = 180;
-				this.bonusHP = 500;
-				this.bonusLust = 201;
+				initStrTouSpeInte(240, 180, 340, 120);
+				initWisLibSensCor(120, 220, 90, 100);
+				this.weaponAttack = 86;
+				this.armorDef = 360;
+				this.armorMDef = 360;
+				this.bonusHP = 1000;
+				this.bonusLust = 356;
 				this.level = 46;
+				this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
 			}
 			else {
 				this.short = phoukaName;

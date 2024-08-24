@@ -199,8 +199,8 @@ public class AngelLR extends AbstractAngel
 			super(false);
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
 				this.short = "low-rank angel of mist";
-				initStrTouSpeInte(14, 170, 90, 40);
-				initWisLibSensCor(240, 4, 60, 0);
+				initStrTouSpeInte(24, 340, 180, 80);
+				initWisLibSensCor(480, 4, 120, 0);
 				this.randomDropChance = 0.2;
 				this.randomDropParams = {
 					rarity: DynamicItems.RARITY_CHANCES_MINOR_HIGH
@@ -209,15 +209,16 @@ public class AngelLR extends AbstractAngel
 						.add(useables.SRESIDUE, 0.5)
 						.add(useables.PCSHARD, 1);
 				this.level = 42;
-				this.bonusHP = 1500;
-				this.bonusLust = 106;
-				this.bonusWrath = 350;
-				this.bonusSoulforce = 700;
-				this.additionalXP = 210;
-				this.weaponAttack = 15;
-				this.armorDef = 45;
-				this.armorMDef = 45;
+				this.bonusHP = 3000;
+				this.bonusLust = 166;
+				this.bonusWrath = 700;
+				this.bonusSoulforce = 1400;
+				this.additionalXP = 420;
+				this.weaponAttack = 30;
+				this.armorDef = 90;
+				this.armorMDef = 90;
 				this.createStatusEffect(StatusEffects.ATranscendentSoulField, 28, 28, 0, 0);//X times less dmg, +X lvl diff bonus
+				this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
 				this.createPerk(PerkLib.DieHardHP, 28, 0, 0, 0);
 			}
 			else if (player.hasStatusEffect(StatusEffects.SoulArena)) {

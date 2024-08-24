@@ -72,12 +72,12 @@ package classes.Scenes.Monsters
 				this.short = "Aether Golem";
 				if (flags[kFLAGS.AETHER_SINISTER_EVO] == 0.5) this.long = "You're currently fighting guardian of the first floor - Aether Golem. It's around six feet tall without any sexual characteristics, it stone body covered in cracks, some of them are filled with goo-like substance and wearing gauntlet on it left arm that it use to smash enemies.";
 				else this.long = "You're currently fighting guardian of the first floor - Aether Golem. It's around six feet tall without any sexual characteristics, it stone body covered in cracks, some of them are filled with goo-like substance and wearing gauntlet on it right arm that it use to smash enemies.";
-				initStrTouSpeInte(50, 50, 50, 20);
-				initWisLibSensCor(20, 10, 10, 50);
+				initStrTouSpeInte(75, 75, 75, 30);
+				initWisLibSensCor(30, 10, 10, 50);
 				this.level = 9;
 				this.weaponAttack = 20;
-				this.armorDef = 30;
-				this.armorMDef = 9;
+				this.armorDef = 50;
+				this.armorMDef = 15;
 				this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			}
 			else {

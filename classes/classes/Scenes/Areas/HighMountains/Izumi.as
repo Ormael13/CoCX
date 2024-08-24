@@ -19,15 +19,16 @@ public class Izumi extends Monster
 		{
 			var lvlMulti:Number = flags[kFLAGS.IZUMI_LVL_UP];
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
-				initStrTouSpeInte(330, 230, 170, 150);
-				initWisLibSensCor(150, 70, 45, 15);
-				this.weaponAttack = 70;
-				this.armorDef = 18;
-				this.armorMDef = 14;
-				this.bonusHP = 1600;
-				this.bonusLust = 169;
+				initStrTouSpeInte(660, 460, 340, 300);
+				initWisLibSensCor(300, 140, 90, 15);
+				this.weaponAttack = 140;
+				this.armorDef = 180;
+				this.armorMDef = 140;
+				this.bonusHP = 3200;
+				this.bonusLust = 284;
 				this.level = 50;
 				this.additionalXP = 250;
+				this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
 			}
 			else if (flags[kFLAGS.IZUMI_LVL_UP] < 1) {
 				initStrTouSpeInte(810, 570, 420, 390);

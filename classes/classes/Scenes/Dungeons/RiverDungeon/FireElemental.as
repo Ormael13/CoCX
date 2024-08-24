@@ -130,13 +130,13 @@ public class FireElemental extends Monster
 				this.imageName = "fire elemental";
 				this.long = "You're currently fighting fire elemental. It's a four foot tall body of flame, currently using its bare fists to fight.";
 				this.tallness = 48;
-				initStrTouSpeInte(10, 20, 40, 50);
-				initWisLibSensCor(50, 10, 20, 50);
-				this.weaponAttack = 5;
-				this.armorDef = 5;
-				this.armorMDef = 30;
+				initStrTouSpeInte(20, 40, 80, 100);
+				initWisLibSensCor(100, 20, 40, 50);
+				this.weaponAttack = 10;
+				this.armorDef = 10;
+				this.armorMDef = 60;
 				this.level = 12;
-				this.bonusHP = 400;
+				this.bonusHP = 800;
 				this.additionalXP = 50;
 			}
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 1) {
@@ -144,13 +144,13 @@ public class FireElemental extends Monster
 				this.imageName = "fire elemental";
 				this.long = "You're currently fighting fire elemental. It's a four foot, three inch tall body of flame, currently using its bare fists to fight.";
 				this.tallness = 51;
-				initStrTouSpeInte(12, 22, 42, 60);
-				initWisLibSensCor(60, 10, 25, 50);
-				this.weaponAttack = 6;
-				this.armorDef = 6;
-				this.armorMDef = 35;
+				initStrTouSpeInte(24, 44, 84, 120);
+				initWisLibSensCor(120, 20, 50, 50);
+				this.weaponAttack = 12;
+				this.armorDef = 12;
+				this.armorMDef = 70;
 				this.level = 14;
-				this.bonusHP = 450;
+				this.bonusHP = 900;
 				this.additionalXP = 75;
 			}
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 2) {
@@ -158,13 +158,13 @@ public class FireElemental extends Monster
 				this.imageName = "fire elemental";
 				this.long = "You're currently fighting fire elemental. It's a four and a half foot tall body of flame, currently using its bare fists to fight";
 				this.tallness = 54;
-				initStrTouSpeInte(14, 24, 44, 70);
-				initWisLibSensCor(70, 10, 30, 50);
-				this.weaponAttack = 7;
-				this.armorDef = 7;
-				this.armorMDef = 40;
+				initStrTouSpeInte(28, 48, 88, 140);
+				initWisLibSensCor(140, 20, 60, 50);
+				this.weaponAttack = 14;
+				this.armorDef = 14;
+				this.armorMDef = 80;
 				this.level = 16;
-				this.bonusHP = 500;
+				this.bonusHP = 1000;
 				this.additionalXP = 100;
 			}
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 3) {
@@ -172,13 +172,13 @@ public class FireElemental extends Monster
 				this.imageName = "fire elemental";
 				this.long = "You're currently fighting fire elemental. It's a four foot, nine inch tall body of flame, currently using its bare fists to fight.";
 				this.tallness = 57;
-				initStrTouSpeInte(16, 26, 46, 80);
-				initWisLibSensCor(80, 10, 35, 50);
-				this.weaponAttack = 8;
-				this.armorDef = 8;
-				this.armorMDef = 45;
+				initStrTouSpeInte(32, 52, 92, 160);
+				initWisLibSensCor(160, 20, 70, 50);
+				this.weaponAttack = 16;
+				this.armorDef = 16;
+				this.armorMDef = 90;
 				this.level = 18;
-				this.bonusHP = 550;
+				this.bonusHP = 1100;
 				this.additionalXP = 125;
 			}
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
@@ -186,13 +186,13 @@ public class FireElemental extends Monster
 				this.imageName = "fire ifrit";
 				this.long = "You're currently fighting 'female' ifrit. It's a nine foot tall body of flame, currently using its bare fists to fight";
 				this.tallness = 108;
-				initStrTouSpeInte(24, 39, 69, 120);
-				initWisLibSensCor(120, 15, 55, 50);
-				this.weaponAttack = 10;
-				this.armorDef = 10;
-				this.armorMDef = 60;
+				initStrTouSpeInte(48, 78, 139, 240);
+				initWisLibSensCor(240, 30, 110, 50);
+				this.weaponAttack = 20;
+				this.armorDef = 20;
+				this.armorMDef = 120;
 				this.level = 21;
-				this.bonusHP = 875;
+				this.bonusHP = 1750;
 				this.additionalXP = 190;
 			}
 			this.a = "the ";
@@ -207,12 +207,13 @@ public class FireElemental extends Monster
 			this.createPerk(PerkLib.FireNature, 0, 0, 0, 0);
 			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
 				this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
-				this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EnemyChampionType, 0, 0, 0, 0);
 				this.drop = new WeightedDrop()
 					.add(useables.LELSHARD, 3)
 					.add(useables.ELCRYST, 1);
 			}
 			else {
+				this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
 				this.drop = new WeightedDrop()
 					.add(useables.ELSHARD, 3)
 					.add(useables.LELSHARD, 1);

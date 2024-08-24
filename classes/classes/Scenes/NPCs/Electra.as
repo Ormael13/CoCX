@@ -210,14 +210,15 @@ use namespace CoC;
 				this.long = "You are fighting a Raiju, a lightning imbued weasel morph. She is fiercely masturbating as she looks at you from a distance and you have issues figuring out whenever she is going to strike.";
 			}
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
-				initStrTouSpeInte(70, 170, 150, 160);
-				initWisLibSensCor(160, 280, 200, 80);
-				this.weaponAttack = 18;
-				this.armorDef = 30;
-				this.armorMDef = 40;
-				this.bonusHP = 200;
-				this.bonusLust = 520;
+				initStrTouSpeInte(140, 340, 300, 320);
+				initWisLibSensCor(320, 560, 400, 80);
+				this.weaponAttack = 36;
+				this.armorDef = 60;
+				this.armorMDef = 80;
+				this.bonusHP = 400;
+				this.bonusLust = 1000;
 				this.level = 34;
+				this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
 			}
 			else {
 				if (flags[kFLAGS.ELECTRA_LVL_UP] < 2) {

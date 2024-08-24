@@ -42,16 +42,17 @@ use namespace CoC;
 		{
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
 				this.short = "mist omnibus";
-				initStrTouSpeInte(220, 180, 165, 140);
-				initWisLibSensCor(140, 150, 75, 100);
-				this.weaponAttack = 39;
-				this.armorDef = 36;
-				this.armorMDef = 6;
-				this.bonusHP = 775;
-				this.bonusLust = 273;
+				initStrTouSpeInte(440, 360, 330, 280);
+				initWisLibSensCor(280, 300, 150, 100);
+				this.weaponAttack = 78;
+				this.armorDef = 72;
+				this.armorMDef = 12;
+				this.bonusHP = 1550;
+				this.bonusLust = 498;
 				this.level = 48;
 				this.additionalXP = 300;
 			    this.gems = rand(40) + 50;
+				this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
 				this.createPerk(PerkLib.OverMaxHP, 49, 0, 0, 0);
 			}
 			else if (inDungeon) { //EL check

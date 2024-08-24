@@ -120,15 +120,16 @@ public class Hel extends Monster
 				this.short = "mist salamander";
 				this.long = "You are fighting a (literally) smoking hot mist salamander – a seven foot tall woman with crimson scales covering her legs, back, and forearms, purple veins covering all unprotected by scales parts fo the body, with a tail swishing menacingly behind her, ablaze with a red-hot fire.  Her violet hair whips wildly around her slender shoulders, occasionally flitting over her hefty E-cup breasts, only just concealed within a scale-covered bikini top.  Bright purple eyes focus on you from an almost-human face as she circles you, ready to close in for the kill.  Her brutal, curved sword is raised to her side, feinting at you between genuine attacks.";
 				this.hairColor = "violet";
-				initStrTouSpeInte(240, 220, 205, 120);
-				initWisLibSensCor(120, 140, 75, 30);
-				this.weaponAttack = 26;
-				this.armorDef = 88;
-				this.armorMDef = 12;
-				this.bonusHP = 1200;
-				this.bonusLust = 274;
+				initStrTouSpeInte(480, 440, 410, 240);
+				initWisLibSensCor(240, 280, 150, 30);
+				this.weaponAttack = 52;
+				this.armorDef = 176;
+				this.armorMDef = 24;
+				this.bonusHP = 2400;
+				this.bonusLust = 489;
 				this.level = 54;
 				this.gems = 75 + rand(12);
+				this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
 				this.drop = new ChainedDrop().
 						add(weapons.SCIMITR, 0.3).
 						add(consumables.SALAMFW, 0.7).

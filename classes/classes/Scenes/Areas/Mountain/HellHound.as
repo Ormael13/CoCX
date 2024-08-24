@@ -82,14 +82,15 @@ public class HellHound extends Monster
 		public function HellHound(noInit:Boolean=false)
 		{
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
-				initStrTouSpeInte(64, 64, 50, 1);
+				initStrTouSpeInte(69, 69, 54, 1);
 				initWisLibSensCor(1, 95, 20, 100);
-				this.weaponAttack = 10;
-				this.armorDef = 7;
-				this.armorMDef = 1;
+				this.weaponAttack = 15;
+				this.armorDef = 14;
+				this.armorMDef = 2;
 				this.bonusLust = 125;
 				this.level = 6;
-				this.gems = 15+rand(12);
+				this.gems = 15 + rand(12);
+				this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
 			}
 			else {
 				initStrTouSpeInte(281, 281, 270, 1);
