@@ -209,6 +209,7 @@ public class CumWitch extends Monster
 					consumables.RMANUSC,
 					consumables.CRIMS_J,
 					null);
+			if (inDungeon) this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

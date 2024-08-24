@@ -7,6 +7,7 @@ package classes.Scenes.Areas.Forest
 import classes.*;
 import classes.GlobalFlags.*;
 import classes.internals.ChainedDrop;
+import classes.Scenes.SceneLib;
 import classes.Scenes.Areas.Forest.HornetGirl;
 import classes.Scenes.Combat.CombatAbilities;
 
@@ -89,21 +90,27 @@ import classes.Scenes.Combat.CombatAbilities;
 			if (choice >= 3) eAttack();
 		}
 		
+		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
+		{
+			SceneLib.dungeons.riverdungeon.defeatedByStingerWomen();
+		}
+		
 		public function HornetHuntress() 
 		{
 			super();
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
 				this.short = "mist hornet huntress";
 				this.long = "A mist hornet huntress buzzes around you, filling the air with intoxicatingly sweet scents and a buzz that gets inside your head.  She has a humanoid face with small antennae, thick black chitin on her arms and legs that looks like shiny gloves and boots, sizable breasts, and a swollen abdomen tipped with a gleaming stinger.  Her body covers nearly not visible network of faint purple vein-like lines.";
-				initStrTouSpeInte(170, 280, 190, 135);
-				initWisLibSensCor(135, 190, 150, 0);
-				this.weaponAttack = 50;
-				this.armorDef = 100;
-				this.armorMDef = 50;
-				this.bonusHP = 1000;
-				this.bonusLust = 404;//lib+sens+lvl
+				initStrTouSpeInte(340, 560, 380, 270);
+				initWisLibSensCor(270, 380, 300, 0);
+				this.weaponAttack = 100;
+				this.armorDef = 500;
+				this.armorMDef = 250;
+				this.bonusHP = 2000;
+				this.bonusLust = 744;
 				this.level = 64;
 				this.gems = rand(29) + 24;
+				this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
 				this.drop = new ChainedDrop().add(consumables.OVIELIX, 1 / 4)
 						.add(consumables.BEEHONY, 1 / 3)
 						.add(useables.PCSHARD, 1 / 2)

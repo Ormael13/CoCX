@@ -8,6 +8,7 @@ package classes.Scenes.Monsters
 	import classes.*;
 	import classes.BodyParts.Wings;
 	import classes.Items.DynamicItems;
+	import classes.Scenes.Dungeons.RiverDungeon;
 	import classes.Scenes.SceneLib;
 	import classes.internals.ChainedDrop;
 
@@ -15,6 +16,8 @@ import coc.view.CoCButton;
 
 public class AngelLR extends AbstractAngel
 	{
+		public var floor4:RiverDungeon = new RiverDungeon();
+		
 		private function angelReactsToLustiness():void {
 			outputText("Angel with it lil helpers stops their actions clearly overflowing with lust.");
 			outputText("\n\n\"<i>Tricky one opponent. Fighting like a demon.</i>\"");
@@ -176,6 +179,12 @@ public class AngelLR extends AbstractAngel
 			}
 		}
 		
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) floor4.defeatedByLowRankMistAngel();
+			else cleanupAfterCombat();
+		}
+		
 		override public function get long():String
 		{
 			var str:String = "You're currently fighting"+(player.hasStatusEffect(StatusEffects.SoulArena)?" "+this.short+" a":"")+" low-rank angel"+(player.hasStatusEffect(StatusEffects.RiverDungeonA)?" of mist":"")+". It's looks like example of perfect human with large pair of wings and around it hoover pair of winged eyeballs with small mouth full of jagged teeth and one eyes having two";
@@ -201,7 +210,7 @@ public class AngelLR extends AbstractAngel
 				this.short = "low-rank angel of mist";
 				initStrTouSpeInte(24, 340, 180, 80);
 				initWisLibSensCor(480, 4, 120, 0);
-				this.randomDropChance = 0.2;
+				this.randomDropChance = 0.5;
 				this.randomDropParams = {
 					rarity: DynamicItems.RARITY_CHANCES_MINOR_HIGH
 				};

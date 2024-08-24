@@ -7,9 +7,15 @@ package classes.Scenes.Areas.Forest
 import classes.*;
 import classes.GlobalFlags.*;
 import classes.internals.ChainedDrop;
+import classes.Scenes.SceneLib;
 import classes.Scenes.Areas.Forest.BeeGirl;
 
 	public class BeeGirlHuntress extends BeeGirl {
+		
+		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
+		{
+			SceneLib.dungeons.riverdungeon.defeatedByStingerWomen();
+		}
 		
 		public function BeeGirlHuntress() 
 		{
@@ -17,15 +23,16 @@ import classes.Scenes.Areas.Forest.BeeGirl;
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
 				this.short = "mist bee-girl huntress";
 				this.long = "A mist bee-girl huntress buzzes around you, filling the air with intoxicatingly sweet scents and a buzz that gets inside your head.  She has a humanoid face with small antennae, black chitin on her arms and legs that looks like shiny gloves and boots, sizable breasts, and a swollen abdomen tipped with a gleaming stinger.  Her body covers nearly not visible network of faint purple vein-like lines.";
-				initStrTouSpeInte(140, 240, 210, 130);
-				initWisLibSensCor(130, 210, 150, 0);
-				this.weaponAttack = 20;
-				this.armorDef = 75;
-				this.armorMDef = 30;
-				this.bonusHP = 500;
-				this.bonusLust = 420;//lib+sens+lvl
+				initStrTouSpeInte(280, 480, 420, 260);
+				initWisLibSensCor(260, 420, 300, 0);
+				this.weaponAttack = 40;
+				this.armorDef = 375;
+				this.armorMDef = 150;
+				this.bonusHP = 1000;
+				this.bonusLust = 780;
 				this.level = 60;
 				this.gems = rand(25) + 20;
+				this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
 				this.drop = new ChainedDrop().add(consumables.W__BOOK, 1 / 6)
 						.add(consumables.BEEHONY, 1 / 4)
 						.add(useables.PCSHARD, 1 / 2)

@@ -103,6 +103,11 @@ package classes.Scenes.Dungeons.RiverDungeon
 			else angelReactsToLustiness();
 		}
 		
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			SceneLib.dungeons.riverdungeon.defeatedByMidRankMistAngel();
+		}
+		
 		override public function get long():String
 		{
 			var str:String = "You're currently fighting "+this.short+". It's looks like example of perfect human with large pair of wings and around it hoover two pairs of winged eyeballs with small mouth full of jagged teeth and one eyes having two";
@@ -125,10 +130,10 @@ package classes.Scenes.Dungeons.RiverDungeon
 			this.short = "mid-rank angel of mist";
 			this.imageName = "angel";
 			this.long = "";
-			initStrTouSpeInte(18, 200, 110, 60);
-			initWisLibSensCor(270, 6, 90, 0);
+			initStrTouSpeInte(36, 400, 220, 120);
+			initWisLibSensCor(540, 6, 180, 0);
 			this.tallness = 30;
-			this.randomDropChance = 0.2;
+			this.randomDropChance = 0.5;
 			this.randomDropParams = {
 				rarity: DynamicItems.RARITY_CHANCES_MINOR_HIGH
 			};
@@ -136,20 +141,21 @@ package classes.Scenes.Dungeons.RiverDungeon
 					.add(useables.SRESIDUE, 0.5)
 					.add(useables.PCSHARD, 1);
 			this.level = 58;
-			this.bonusHP = 2000;
-			this.bonusLust = 154;
-			this.bonusWrath = 400;
-			this.bonusSoulforce = 1000;
-			this.additionalXP = 250;
-			this.weaponAttack = 18;
-			this.armorDef = 55;
-			this.armorMDef = 55;
+			this.bonusHP = 4000;
+			this.bonusLust = 234;
+			this.bonusWrath = 800;
+			this.bonusSoulforce = 2000;
+			this.additionalXP = 500;
+			this.weaponAttack = 36;
+			this.armorDef = 110;
+			this.armorMDef = 110;
 			this.weaponName = "energy blast";
 			this.weaponVerb = "shoot";
 			this.armorName = "skin";
 			this.wings.type = Wings.FEATHERED_AVIAN;
 			if (player.cor < 67) this.createPerk(PerkLib.AlwaysSuccesfullRunaway, 9, 0, 0, 0);
 			this.createStatusEffect(StatusEffects.ATranscendentSoulField, 39, 39, 0, 0);//X times less dmg, +X lvl diff bonus
+			this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DieHardHP, 39, 0, 0, 0);
 			this.createStatusEffect(StatusEffects.Flying, 50, 0, 0, 0);
 			this.createPerk(PerkLib.MonsterRegeneration, 1, 0, 0, 0);

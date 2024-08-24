@@ -22,7 +22,7 @@ public class SnowLily extends Alraune
 
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) cleanupAfterCombat();
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) SceneLib.dungeons.riverdungeon.defeatedByPlantWomen();
 			else SceneLib.forest.alrauneScene.alrauneDeepwoodsLost();
 		}
 		
@@ -49,13 +49,14 @@ public class SnowLily extends Alraune
 				this.hairColor = "white";
 			}
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA))  {
-				initStrTouSpeInte(19, 370, 19, 150);
-				initWisLibSensCor(150, 260, 110, 0);
-				this.armorDef = 125;
-				this.armorMDef = 27;
-				this.bonusHP = 900;
-				this.bonusLust = 340;
+				initStrTouSpeInte(38, 740, 38, 300);
+				initWisLibSensCor(300, 520, 220, 0);
+				this.armorDef = 625;
+				this.armorMDef = 135;
+				this.bonusHP = 1800;
+				this.bonusLust = 710;
 				this.level = 70;
+				this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
 				this.drop = new ChainedDrop().add(consumables.SNOWFLO, 1 / 6)
 						.add(consumables.MARAFRU, 1 / 4)
 						.add(useables.PCSHARD, 1 / 2);

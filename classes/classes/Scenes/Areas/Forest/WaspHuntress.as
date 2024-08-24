@@ -7,6 +7,7 @@ package classes.Scenes.Areas.Forest
 import classes.*;
 import classes.GlobalFlags.*;
 import classes.internals.ChainedDrop;
+import classes.Scenes.SceneLib;
 import classes.Scenes.Areas.Forest.WaspGirl;
 
 	public class WaspHuntress extends WaspGirl {
@@ -74,21 +75,27 @@ import classes.Scenes.Areas.Forest.WaspGirl;
 			if (choice >= 3) eAttack();
 		}
 		
+		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
+		{
+			SceneLib.dungeons.riverdungeon.defeatedByStingerWomen();
+		}
+		
 		public function WaspHuntress() 
 		{
 			super();
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
 				this.short = "mist wasp huntress";
 				this.long = "A mist wasp huntress buzzes around you, filling the air with intoxicatingly sweet scents and a buzz that gets inside your head.  She has a humanoid face with small antennae, black chitin on her slim quad arms and legs that looks like shiny gloves and boots, sizable breasts, and an abdomen tipped with a gleaming stinger.  Her body covers nearly not visible network of faint purple vein-like lines.";
-				initStrTouSpeInte(140, 190, 260, 150);
-				initWisLibSensCor(150, 190, 150, 0);
-				this.weaponAttack = 31;
-				this.armorDef = 55;
-				this.armorMDef = 25;
-				this.bonusHP = 300;
-				this.bonusLust = 402;//lib+sens+lvl
+				initStrTouSpeInte(280, 380, 520, 300);
+				initWisLibSensCor(300, 390, 300, 0);
+				this.weaponAttack = 62;
+				this.armorDef = 275;
+				this.armorMDef = 125;
+				this.bonusHP = 600;
+				this.bonusLust = 742;
 				this.level = 62;
 				this.gems = rand(27) + 22;
+				this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
 				this.drop = new ChainedDrop().add(consumables.OVIELIX, 1 / 4)
 						.add(consumables.BEEHONY, 1 / 3)
 						.add(useables.PCSHARD, 1 / 2)

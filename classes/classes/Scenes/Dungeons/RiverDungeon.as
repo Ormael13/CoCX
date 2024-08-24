@@ -495,7 +495,7 @@ public class RiverDungeon extends DungeonAbstractContent
 		}
 		public function defeatedByRaiju():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
+			outputText("As you fall on the ground you barely get a glimpse of the Yeti charging a lightning around her hand and dropping it on your head. When you wake up you are back at the entrance of the dungeon. Guess this could've gone worse but now you have to do the whole thing all over again.\n\n");
 			dungeonLoc = DUNGEON_RIVER_FLOOR_03_ROOM_01;
 			cleanupAfterCombat();
 		}
@@ -647,6 +647,12 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function defeatedByMistOni():void {
 			clearOutput();
 			outputText("Your opponent punches you a few more times, then carries you all the way back to the floor entrance. It drops your body there, turning back into the dungeon.\n\n");
+			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_07;
+			cleanupAfterCombat();
+		}
+		public function defeatedByLowRankMistAngel():void {
+			clearOutput();
+			outputText("Your opponent shoot you a few more times, then carries you all the way back to the floor entrance. It drops your body there, turning back into the dungeon.\n\n");
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_07;
 			cleanupAfterCombat();
 		}
@@ -841,6 +847,37 @@ public class RiverDungeon extends DungeonAbstractContent
 				//doNext(playerMenu);
 			}
 			else player.addStatusValue(StatusEffects.RiverDungeonA, 1, 10);
+		}
+		public function defeatPlantAngel():void {
+			clearOutput();
+			outputText("\n\n");
+			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
+			cleanupAfterCombat();
+			doNext(playerMenu);
+		}
+		public function defeatedByPlantWomen():void {
+			clearOutput();
+			outputText("Your opponent strangle you a few more times until you pass out. You regain consciousness few minutes later at the floor entrance. Also did your body just been smeared here and there with... honey?\n\n");
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_13;
+			cleanupAfterCombat();
+		}
+		public function defeatedByStingerWomen():void {
+			clearOutput();
+			outputText("Your opponent stabs you with her stinger a few more times until you pass out. You regain consciousness few minutes later at the floor entrance all smeared with honey.\n\n");
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_13;
+			cleanupAfterCombat();
+		}
+		public function defeatedByMidRankMistAngel():void {
+			clearOutput();
+			outputText("Your opponent shoot you a few more times, then carries you all the way back to the floor entrance. It drops your body there, turning back into the dungeon.\n\n");
+			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_13;
+			cleanupAfterCombat();
+		}
+		public function defeatedByPlantAngel():void {
+			clearOutput();
+			outputText("\n\n");
+			//[GAME OVER]
+			EventParser.gameOver();
 		}
 
 		//Rooms

@@ -19,7 +19,7 @@ public class AlrauneMaiden extends Alraune
 
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) cleanupAfterCombat();
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) SceneLib.dungeons.riverdungeon.defeatedByPlantWomen();
 			else SceneLib.forest.alrauneScene.alrauneDeepwoodsLost();
 		}
 		
@@ -48,13 +48,14 @@ public class AlrauneMaiden extends Alraune
 				this.hairColor = "dark green";
 			}
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
-				initStrTouSpeInte(17, 350, 17, 130);
-				initWisLibSensCor(130, 220, 90, 0);
-				this.armorDef = 115;
-				this.armorMDef = 23;
-				this.bonusHP = 700;
-				this.bonusLust = 376;
+				initStrTouSpeInte(34, 700, 34, 260);
+				initWisLibSensCor(260, 440, 180, 0);
+				this.armorDef = 575;
+				this.armorMDef = 115;
+				this.bonusHP = 1400;
+				this.bonusLust = 686;
 				this.level = 66;
+				this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
 				this.drop = new WeightedDrop().
 				add(useables.PCSHARD,10).
 				add(consumables.RAUNENECT,4).

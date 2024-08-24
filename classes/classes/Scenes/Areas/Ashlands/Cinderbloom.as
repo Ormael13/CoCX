@@ -22,7 +22,7 @@ public class Cinderbloom extends Alraune
 
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) cleanupAfterCombat();
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) SceneLib.dungeons.riverdungeon.defeatedByPlantWomen();
 			else SceneLib.forest.alrauneScene.alrauneDeepwoodsLost();
 		}
 		
@@ -49,13 +49,14 @@ public class Cinderbloom extends Alraune
 				this.hairColor = "blonde";
 			}
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
-				initStrTouSpeInte(18, 360, 18, 140);
-				initWisLibSensCor(140, 240, 100, 0);
-				this.armorDef = 120;
-				this.armorMDef = 25;
-				this.bonusHP = 800;
-				this.bonusLust = 408;
+				initStrTouSpeInte(36, 720, 36, 280);
+				initWisLibSensCor(280, 480, 200, 0);
+				this.armorDef = 600;
+				this.armorMDef = 125;
+				this.bonusHP = 1600;
+				this.bonusLust = 748;
 				this.level = 68;
+				this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
 				this.drop = new ChainedDrop().add(consumables.EMBER_F, 1 / 6)
 						.add(consumables.MARAFRU, 1 / 4)
 						.add(useables.PCSHARD, 1 / 2);

@@ -143,7 +143,7 @@ public class Changelog extends BaseContent
 			outputText("-When exploring Deepwoods can find new dungeon - Twilight Grove. It's potentialy dangerous place for pure PC's but resort-like placefor alraunes and/or corrupt PC's.\n");
 			outputText("-Can explore and clear 5th floor of River Dungeon. It have monsters from lvl 58 to 70 and boss is lvl 73. Floor is divided into three subareas: first is normal, second is hot enough to have weaker effect found in Vulcanic Crag (constant fire dmg) and third is cold enough to have weaker effect found in Glacial Rift (constant ice damage). ");
 			outputText("There are also few rooms where two nearby subareas meets. In rooms where second and third area meets climate is much more harsh and player is affected by both constant fire and ice dmg that are much stronger then in second or third subarea.\n");
-			outputText("-New enemies: Mid rank Angel of Mist - lvl 58, Mist Bee Huntress - lvl 60, Mist Wasp Huntress - lvl 62, Mist Hornet Huntress - lvl 64, Mist Alraune Maiden - lvl 66, Mist Cinderbloom - lvl 68, Mist Snow Lily - lvl 70. Encounterable on 5th floor of River Dungeon\n");
+			outputText("-New enemies: Mid rank Angel of Mist - lvl 58, Mist Bee Huntress - lvl 60, Mist Wasp Huntress - lvl 62, Mist Hornet Huntress - lvl 64, Mist Alraune Maiden - lvl 66, Mist Cinderbloom - lvl 68, Mist Snow Lily - lvl 70. Encounterable on 5th floor of River Dungeon. Proto Golem - lvl 6. Encounterable in general explore from lvl 6+.\n");
 			outputText("-New bodyparts: Troll Arms, Troll lower body, Troll Tusks, Troll Ears, Troll Tail (from Troll Fig); Glacial Troll Arms, Glacial Troll lower body, Glacial Troll Tusks, Glacial Troll Ears, Glacial Troll Tail (from Icy Fig)\n");
 			outputText("-Dinah upgrade options for HB mech now have 3 more tiers of Armor Plating, Leather Insulation & Dragon's Breath Flamer upgrades.\n");
 			//outputText("-New HB Mech upgrade options: Armor Plating (+armor), Leather Insulation (+magic resistance), Agility (+base melee atk dmg), Dragon's Breath Flamer (fire dmg special), Scatter Laser (lightning dmg special), Rapid Reload (+base ranged atk dmg), Internal Systems (increase mech SF capacity and lower it consumption during high activity)\n");
@@ -305,16 +305,16 @@ public class Changelog extends BaseContent
 			outputText("Scylla Squeeze damage during grapple as Kraken would be multiplied by current i.mutation tier, scylla grapple will always succeed, when in an aquatic battle boost from Aquatic Affinity is 3x larger, final boost from aquatic battle boost is 2x higher, ");
 			outputText("enemy can't escape from scylla grapple using only it own strength and using Scylla Squeeze as Kraken would give each time 5% combat wounds debuff on enemy (up to 80%).\n");
 			outputText("-Aquatic Affinity can be gained additional if pc lower body is that of scylla / kraken OR pc is having any arigean parasite.\n");
-			outputText("-New enemy: Proto Golem - lvl 6. Encounterable in general explore from lvl 6+.\n");
 			outputText("-Minerva and Izumi base level was increased and accordly their max lvl they can gain by leveling increased too to each reaching within 120-130 lvl range.\n");
 			outputText("-Added Descendant and Bloodline perks for Scylla/Kraken races.\n");
 			outputText("-Fixed Benoit not feminizing and Possess not resetting crab grapple (Svalkash)\n");
 			outputText("-New event perk: Dracoforce. Gained by having 30+ in any more then half dragon race score. Effects: Increase your total Strength and Toughness by 50%. Would add +1 to race score for those races.\n");
 			outputText("-New tier for frostwyrm race score bonuses - Jormungandr (32+ pts): +230 str multi, +180 tou multi, +90 spe multi, -110 int multi, +90 lib multi, +150% max hp multi, +4 armor/m.res\n");
 			outputText("-Hidden equipment slot added (this text line will self-destruct in 5 sec)\n");
-			outputText("-Dungeon enemies have their general levels and stats adjusted/increased. Dungeons adjusted (new lvl range of enemies): River Dungeon (floor 1-4) (only stats adjustments)\n");
+			outputText("-Dungeon enemies have their general levels and stats adjusted/increased. Dungeons adjusted (new lvl range of enemies): River Dungeon (floor 1-4) (only stats adjustments), Desert Cave (14-24)\n");
+			outputText("-Fixing Lusting Warrior buff not corelated to entering/leaving heat/rut state.\n");
 			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//Control freak effect activating during straddle too. Updated perk desc.
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
