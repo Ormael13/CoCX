@@ -19,6 +19,11 @@ import classes.Scenes.NPCs.AetherTwinsFollowers;
 			super("AetherD", "AetherD", "Aether (Dex)", "an Aether (Dex)", "punch", 0, 0, "Aether - dexter part of mysterious sentient weapons pair rumored to be forged by the god of blacksmiths.", WT_GAUNTLET, WSZ_MEDIUM);
 		}
 		
+		private static const SLOTS:Array = [SLOT_WEAPON_MELEE];
+		override public function slots():Array {
+			return SLOTS;
+		}
+		
 		override public function isDual():Boolean {
 			if (game.player.hasAetherTwinsTierS2()) return true;
 			return false;

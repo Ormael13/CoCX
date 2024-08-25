@@ -14219,17 +14219,15 @@ public function Straddle():void {
 }
 
 public function postStrandleExtraActionsCheck():void {
-	if (player.hasPerk(PerkLib.ImprovedGrapple) && flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] == 0) {
+	if (player.hasPerk(PerkLib.GreaterGrapple) && flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] == 1) {
+		flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] = 2;
+		combatMenu(false);
+	}
+	else if (player.hasPerk(PerkLib.ImprovedGrapple) && flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] == 0) {
 		flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] = 1;
 		combatMenu(false);
 	}
-	else {
-		if (player.hasPerk(PerkLib.GreaterGrapple) && flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] == 1) {
-			flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] = 2;
-			combatMenu(false);
-		}
-		else enemyAIImpl();
-	}
+	else enemyAIImpl();
 }
 
 //private var straddleDamage:Number

@@ -50,7 +50,7 @@ public class Weapon extends Equipable
 			return IconLib.pickIcon(ownIconId, "I_GenericWeapon_"+type, super.iconId);
 		}
 		
-		private static const SLOTS:Array = [SLOT_WEAPON_MELEE];//, SLOT_WEAPON_MELEE_OFF
+		private static const SLOTS:Array = [SLOT_WEAPON_MELEE, SLOT_WEAPON_MELEE_OFF];
 		override public function slots():Array {
 			return SLOTS; // don't recreate every time
 		}

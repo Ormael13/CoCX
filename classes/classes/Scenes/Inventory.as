@@ -140,9 +140,8 @@ use namespace CoC;
 			if (player.isRibbonTypeWeapon()) outputText(" (Ribbon-type weapon)");
 			if (player.isExoticTypeWeapon()) outputText(" (Exotic-type weapon)");
 			outputText("\n");
-			outputText("<b>I&h%31 {o*v3# O44 @4!?):</b> F13&s (4om>?}; i}");
-			/*outputText("<b>Weapon (Melee off hand):</b> "+mkLink(player.weaponOff.name, player.weaponOff.id)+" (Attack: " + player.weaponOffhandAttack + ")");
-			if (player.isGauntletWeapon()) outputText(" (Gauntlet-type weapon)");
+			outputText("<b>Weapon (Melee off hand):</b> "+mkLink(player.weaponOff.name, player.weaponOff.id)+" (Attack: " + player.weaponOffhandAttack + ")");
+			/*if (player.isGauntletWeapon()) outputText(" (Gauntlet-type weapon)");
 			if (player.isSwordTypeWeapon()) outputText(" (Sword-type weapon)");
 			if (player.isAxeTypeWeapon()) outputText(" (Axe-type weapon)");
 			if (player.isMaceHammerTypeWeapon()) outputText(" (Mace/Hammer-type weapon)");
@@ -1281,11 +1280,10 @@ use namespace CoC;
 						.itemHints(player.weapon)
 						.disableIf(!player.weapon.canUnequip(false))
 						.disableIf(player.weapon.isNothing || player.hasPerk(PerkLib.Rigidity), "You don't have melee main hand weapon equipped.");
-				addButtonDisabled(1, "3'UwU* /007/", "Minx was here!!!");
-				/*addButton(1, "Weapon (MO)", unequipWeaponOff)
+				addButton(1, "Weapon (MO)", unequipWeaponOff)
 						.itemHints(player.weaponOff)
 						.disableIf(!player.weaponOff.canUnequip(false))
-						.disableIf(player.weaponOff.isNothing || player.hasPerk(PerkLib.Rigidity), "You don't have melee off hand weapon equipped.");*/
+						.disableIf(player.weaponOff.isNothing || player.hasPerk(PerkLib.Rigidity), "You don't have melee off hand weapon equipped.");
 				addButton(2, "Weapon (R)", unequipWeaponRange)
 						.itemHints(player.weaponRange)
 						.disableIf(!player.weaponRange.canUnequip(false))

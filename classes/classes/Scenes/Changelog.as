@@ -313,8 +313,8 @@ public class Changelog extends BaseContent
 			outputText("-Hidden equipment slot added (this text line will self-destruct in 5 sec)\n");
 			outputText("-Dungeon enemies have their general levels and stats adjusted/increased. Dungeons adjusted (new lvl range of enemies): River Dungeon (floor 1-4) (only stats adjustments), Desert Cave (14-24)\n");
 			outputText("-Fixing Lusting Warrior buff not corelated to entering/leaving heat/rut state.\n");
-			outputText("-\n");
-			outputText("-\n");//Control freak effect activating during straddle too. Updated perk desc.
+			outputText("-Control freak effect activating during straddle too. Updated perk desc.\n");
+			outputText("-Fixed som text issues in hellcat tf scene.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

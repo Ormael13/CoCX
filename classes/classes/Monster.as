@@ -2093,6 +2093,7 @@ import classes.Scenes.Combat.CombatAbilities;
 				StatusEffects.TelekineticGrab,
 				StatusEffects.Entangled,
 				StatusEffects.Swallowed,
+				StatusEffects.Straddle,
 			]
 			for each (var effect:StatusEffectType in effects) if (hasStatusEffect(effect)) return true;
 			return false;
@@ -2431,7 +2432,8 @@ import classes.Scenes.Combat.CombatAbilities;
 				else EngineCore.outputText("[Themonster] struggle but you manage to maintain the grab.");
 				addStatusValue(StatusEffects.GrabBear, 1, -1);
 				return false;
-			} if (hasStatusEffect(StatusEffects.Swallowed)) {
+			}
+			else if (hasStatusEffect(StatusEffects.Swallowed)) {
 				if (statusEffectv1(StatusEffects.Swallowed) <= 0) {
 					EngineCore.outputText("Desperately punching around to get free from the fleshy tentacle hell that is your insides your opponent finally strikes a weak spot forcing you to spit [monster him] out as you contort yourself.");
 					if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
@@ -2443,7 +2445,12 @@ import classes.Scenes.Combat.CombatAbilities;
 				addStatusValue(StatusEffects.Swallowed, 1, -1);
 				if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
 				return false;
-			} else {
+			}
+			else if (hasStatusEffect(StatusEffects.Straddle)) {
+				if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
+				return false;
+			}
+			else {
 				EngineCore.outputText("Your prey pushes at your tail, twisting and writhing in an effort to escape from your tail's tight bonds.");
 				if (statusEffectv1(StatusEffects.Constricted) <= 0) {
 					EngineCore.outputText("  [Themonster] proves to be too much for your tail to handle, breaking free of your tightly bound coils.");
@@ -4634,4 +4641,4 @@ import classes.Scenes.Combat.CombatAbilities;
 			}
 		}
 	}
-}
+}

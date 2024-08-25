@@ -202,7 +202,7 @@ public function WitchesSabbathThirdVisitYes():void {
 	}
 	else outputText("\n\nYou still can't understand what she's saying, \"<i>Qui voluerit ex se intrare pactum et occulte ponit super altare...</i>\"\n\n");
 	outputText("Oh no! This is just like the last time, except this time around you have the questionable honor of front seats as the mistress of ceremony's unholy, barbed cock slides out of her sheath and hardens. ");
-	outputText("Too weak from the " + player.hasVagina ? "mind numbing pleasure the unholy dildo induce in your ass" : "drug" + ", you fail to mount any form of resistance. ");
+	outputText("Too weak from the " + (player.hasVagina() ? "mind numbing pleasure the unholy dildo induce in your ass" : "drug") + ", you fail to mount any form of resistance. ");
 	outputText("Before you get any chance to scream, she’s already pressing the tip of her cock against your " + (player.hasVagina() ? "entrance" : "backdoor") + ", the barbs tickling your " + (player.hasVagina() ? "lips" : "ring") + ". She grins wide as inch after inch of her feline dong slides into your " + (player.hasVagina() ? "folds" : "hole") + ". You can’t help but blank out as she fully bottoms in. ");
 	if (!player.hasVagina()) outputText ("With her unholy rod up your butt, you realize you can suddenly understand the chanting, the magic creating a translated echo within you. ")
 	outputText("If her going in was enough to leave your mind blank, you are terrified--and somewhat aroused--by the idea of what her pumping in you will leave you like. She does not leave you much time to think it over as she proceed to slide out, her barbs tingling your " + (player.hasVagina() ? "canal" : "hole") + " like no other cock could. ");
