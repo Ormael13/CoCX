@@ -21,7 +21,7 @@ import classes.TimeAwareInterface;
 		}
 		
         //Normal weapon stuff
-		public function Paracelsus() 
+		public function Paracelsus()
 		{
 			super("Paracel", "Paracelsus", "Paracelsus", "a Paracelsus", "bonk", 22, 600, "A legendary staff said to have been made by Marae for her champion. This weapon radiates divine power, purifying its wielder and protecting them from impurity.", WT_STAFF, WSZ_LARGE);
 			withBuff('spellpower', +1.0);
@@ -45,8 +45,9 @@ import classes.TimeAwareInterface;
 				_buffs['spellpower'] = calcWizardsMult();
                 if (game.player.weapon == this) {
                     //re-requip to update player's perk
-					afterUnequip(false);
-					afterEquip(false);
+	                var slot:int = game.player.slotOfEquippedItem(this);
+					afterUnequip(false, slot);
+					afterEquip(false, slot);
                 }
                 lastCor = game.player.cor;
             }

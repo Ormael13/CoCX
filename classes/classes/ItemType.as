@@ -288,7 +288,9 @@ public class ItemType extends ItemConstants
 				trace("new "+_id+" / "+dynamicItemCounter);
 			} else {
 				if (ITEM_LIBRARY[_id] != null) {
-					CoC_Settings.error("Duplicate itemid " + _id + ", old item is " + (ITEM_LIBRARY[_id] as ItemType).longName);
+					var msg:String = "Duplicate itemid " + _id + ", old item is " + (ITEM_LIBRARY[_id] as ItemType).longName;
+					CoC_Settings.error(msg);
+					throw new Error(msg);
 				}
 				if (ITEM_SHORT_LIBRARY[_shortName] != null) {
 					trace("WARNING: Item with duplicate shortname: '" + _id + "' and '" + (ITEM_SHORT_LIBRARY[this._shortName] as ItemType)._id + "' share " + this._shortName);

@@ -19,8 +19,8 @@ import classes.Player;
 			withTag(I_LEGENDARY);
 		}
 		
-		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.tallness >= 80) return super.canEquip(doOutput);
+		override public function canEquip(doOutput:Boolean, slot:int):Boolean {
+			if (game.player.tallness >= 80) return super.canEquip(doOutput, slot);
 			if (doOutput) outputText("You aren't tall enough to wear this kimono!  ");
 			return false;
 		}

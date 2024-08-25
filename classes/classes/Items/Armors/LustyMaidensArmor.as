@@ -32,18 +32,18 @@ public final class LustyMaidensArmor extends Armor {
 			return 10 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS];
 		}
 	
-	override public function canEquip(doOutput:Boolean):Boolean {
-			if (!super.canEquip(doOutput)) return false;
+	override public function canEquip(doOutput:Boolean, slot:int):Boolean {
+			if (!super.canEquip(doOutput, slot)) return false;
 			return canUseStatic(doOutput);
 		}
 	
-	override public function afterEquip(doOutput:Boolean):void {
+	override public function afterEquip(doOutput:Boolean, slot:int):void {
 		if (game.player.hasVirginVagina()) {
 			_buffs['teasedmg'] = 10 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS];
 		} else {
 			_buffs['teasedmg'] = 6 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS];
 		}
-		super.afterEquip(doOutput);
+		super.afterEquip(doOutput, slot);
 	}
 
 		public static function canUseStatic(doOutput:Boolean):Boolean {

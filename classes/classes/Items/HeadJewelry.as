@@ -108,12 +108,12 @@ package classes.Items
 			return list;
 		}
 		
-		override public function canEquip(doOutput:Boolean):Boolean {
+		override public function canEquip(doOutput:Boolean, slot:int):Boolean {
 			if (game.player.hasPerk(PerkLib.Rigidity)) {
 				outputText("You would very like to equip this item but your body stiffness prevents you from doing so.");
 				return false;
 			}
-			return super.canEquip(doOutput);
+			return super.canEquip(doOutput, slot);
 		}
 		
 	}

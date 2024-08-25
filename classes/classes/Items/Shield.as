@@ -47,7 +47,7 @@ public class Shield extends Equipable
 			return list;
 		}
 		
-		override public function canEquip(doOutput:Boolean):Boolean {
+		override public function canEquip(doOutput:Boolean, slot:int):Boolean {
 			if (game.player.weaponRangePerk == "Dual Firearms" || game.player.weaponRangePerk == "Dual 2H Firearms") {
 				if (doOutput) outputText("Your current range weapons requires two hands. Unequip your current range weapons or switch to one-handed before equipping this shield. ");
 				return false;
@@ -69,10 +69,10 @@ public class Shield extends Equipable
 				if (doOutput) outputText("This shield requires use of both hands. Unequip your current melee weapon before equipping it. ");
 				return false;
 			}
-			return super.canEquip(doOutput);
+			return super.canEquip(doOutput, slot);
 		}
 		
-		override public function afterEquip(doOutput:Boolean):void {
+		override public function afterEquip(doOutput:Boolean, slot:int):void {
 			if (!game.isLoadingSave) {
 				if ((perk == "Massive" && game.player.weapon != WeaponLib.FISTS && !game.player.hasPerk(PerkLib.GigantGrip))
 						|| (game.player.weapon.isSingleLarge() && !game.player.hasPerk(PerkLib.GigantGrip))
@@ -82,7 +82,7 @@ public class Shield extends Equipable
 				}
 				if (game.player.weaponRangePerk == "Dual Firearms" || game.player.weaponRangePerk == "2H Firearm" || game.player.weaponRangePerk == "Dual 2H Firearms") SceneLib.inventory.unequipWeaponRange();
 			}
-			super.afterEquip(doOutput);
+			super.afterEquip(doOutput, slot);
 		}
 		
 		override public function getItemText(textid:String):String {

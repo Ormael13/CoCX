@@ -13,7 +13,7 @@ package classes.Items.Weapons
 		
 		override public function useText():void {} //No text for equipping fists
 		
-		override public function canEquip(doOutput:Boolean):Boolean {
+		override public function canEquip(doOutput:Boolean, slot:int):Boolean {
 			return true;
 		}
 		

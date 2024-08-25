@@ -36,8 +36,8 @@ public final class SeductiveArmor extends Armor {
 			}
 		}
 	
-	override public function beforeEquip(doOutput:Boolean):Equipable {
-		super.beforeEquip(doOutput);
+	override public function beforeEquip(doOutput:Boolean, slot:int):Equipable {
+		super.beforeEquip(doOutput, slot);
 		return ArmorLib.COMFORTABLE_UNDERCLOTHES; //After seductive armor magic the player is left in their underclothes
 	}
 	}

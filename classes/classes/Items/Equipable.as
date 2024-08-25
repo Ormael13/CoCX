@@ -133,7 +133,7 @@ public class Equipable extends Useable {
 	}
 	
 	override public function canUse():Boolean {
-		return canEquip(true);
+		return canEquip(true, -1);
 	}
 	
 	/**
@@ -185,9 +185,10 @@ public class Equipable extends Useable {
 	 * Should NOT check empty target slot (but can check other slots).
 	 * (ex. equipping large weapon can check for no shield but shouldn't check for no weapon)
 	 * @param doOutput Player tries equipping the item, if fails, print why. And do any side effects related to failed equip attempt.
+	 * @param slot Slot to equip the item onto. -1 - any slot.
 	 * @return true if the player can wear the item
 	 */
-	public function canEquip(doOutput:Boolean):Boolean {
+	public function canEquip(doOutput:Boolean, slot:int):Boolean {
 		if (game.player.cor > effectPower(IELib.Require_CorBelow, 100) + game.player.corruptionTolerance) {
 			if (doOutput) outputText(getItemText("too_corrupt"))
 			return false
@@ -206,6 +207,7 @@ public class Equipable extends Useable {
 	/**
 	 * Test if player can unequip the item
 	 * @param doOutput Player tries unequiping the item, if fails, print why. And do any side effects related to failed unequip attempt.
+	 * @param slot Slot here to equip, -1 - any slot
 	 * @return true if player can unequip the item
 	 */
 	public function canUnequip(doOutput:Boolean):Boolean {
@@ -226,7 +228,7 @@ public class Equipable extends Useable {
 	 * @param doOutput
 	 * @return Actual item to be put into slot, or null
 	 */
-	public function beforeEquip(doOutput:Boolean):Equipable {
+	public function beforeEquip(doOutput:Boolean, slot:int):Equipable {
 		if (doOutput) equipText();
 		return this;
 	}
@@ -241,7 +243,7 @@ public class Equipable extends Useable {
 	 * Apply equipment effects here.
 	 * @param doOutput
 	 */
-	public function afterEquip(doOutput:Boolean):void {
+	public function afterEquip(doOutput:Boolean, slot:int):void {
 		for each (var ie:ItemEffect in effectsFlagged(IEF_ONEQUIP)) {
 			ie.onEquip(game.player, this);
 		}
@@ -269,12 +271,12 @@ public class Equipable extends Useable {
 	 * @param doOutput
 	 * @return Actual item to place into inventory (could be nothing)
 	 */
-	public function beforeUnequip(doOutput:Boolean):ItemType {
-		if (doOutput) unequipText();
+	public function beforeUnequip(doOutput:Boolean, slot:int):ItemType {
+		if (doOutput) unequipText(slot);
 		return this;
 	}
 	
-	public function unequipText():void {
+	public function unequipText(slot:int):void {
 		outputText(getItemText("onunequip"));
 	}
 	
@@ -283,7 +285,7 @@ public class Equipable extends Useable {
 	 * Undo effects here
 	 * @param doOutput
 	 */
-	public function afterUnequip(doOutput:Boolean):void {
+	public function afterUnequip(doOutput:Boolean, slot:int):void {
 		for each (var ie:ItemEffect in effectsFlagged(IEF_ONEQUIP)) {
 			ie.onEquip(game.player, this);
 		}

@@ -20,14 +20,14 @@ package classes.Items.Armors
 				withTag(A_REVEALING);
 		}
 		
-		override public function afterEquip(doOutput:Boolean):void {
+		override public function afterEquip(doOutput:Boolean, slot:int):void {
 			if (!game.isLoadingSave) game.player.createPerk(PerkLib.Misdirection, 0, 0, 1, 0);
-			super.afterEquip(doOutput);
+			super.afterEquip(doOutput, slot);
 		}
 		
-		override public function afterUnequip(doOutput:Boolean):void {
+		override public function afterUnequip(doOutput:Boolean, slot:int):void {
 			if (game.player.perkv4(PerkLib.Misdirection) == 0 && game.player.perkv3(PerkLib.Misdirection) > 0) game.player.removePerk(PerkLib.Misdirection);
-			super.afterUnequip(doOutput);
+			super.afterUnequip(doOutput, slot);
 		}
 	}
 }

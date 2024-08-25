@@ -34,23 +34,23 @@ public final class GooArmor extends Armor {
 		EngineCore.awardAchievement("Goo Armor", kACHIEVEMENTS.GENERAL_GOO_ARMOR);
 	}
 	
-	override public function unequipText():void {
+	override public function unequipText(slot:int):void {
 		outputText("Valeria picks herself up and huffs, \"<i>Maybe we can adventure some more later on?</i>\" before undulating off towards your camp.\n\n(<b>Valeria now available in the followers tab!</b>)");
 	}
 	
-	override public function afterEquip(doOutput:Boolean):void {
+	override public function afterEquip(doOutput:Boolean, slot:int):void {
 		game.flags[kFLAGS.VALERIA_AT_CAMP] = 0;
-		super.afterEquip(doOutput);
+		super.afterEquip(doOutput, slot);
 	}
 	
-	override public function beforeUnequip(doOutput:Boolean):ItemType {
-		super.beforeUnequip(doOutput);
+	override public function beforeUnequip(doOutput:Boolean, slot:int):ItemType {
+		super.beforeUnequip(doOutput, slot);
 		return ItemType.NOTHING;
 	}
 	
-	override public function afterUnequip(doOutput:Boolean):void {
+	override public function afterUnequip(doOutput:Boolean, slot:int):void {
 		game.flags[kFLAGS.VALERIA_AT_CAMP] = 1;
-		super.afterUnequip(doOutput);
+		super.afterUnequip(doOutput, slot);
 	}
 	
 	override public function get def():Number {

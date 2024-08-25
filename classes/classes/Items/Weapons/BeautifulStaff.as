@@ -48,8 +48,9 @@ import classes.TimeAwareInterface;
 				_buffs['spellpower'] = calcWizardsMult();
                 if (game.player.weapon == this) {
                     //re-requip to update player's perk
-					afterUnequip(false);
-					afterEquip(false);
+	                var slot:int = game.player.slotOfEquippedItem(this);
+					afterUnequip(false, slot);
+					afterEquip(false, slot);
                 }
                 lastCor = game.player.cor;
             }

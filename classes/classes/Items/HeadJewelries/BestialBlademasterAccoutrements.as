@@ -17,14 +17,14 @@ import classes.PerkLib;
 			withPerk(PerkLib.SereneMind, 0, 0, 0, 0);
 		}
 		
-		override public function afterEquip(doOutput:Boolean):void {
+		override public function afterEquip(doOutput:Boolean, slot:int):void {
 			SceneLib.setItemsChecks.equipBestialBlademasterItemsSet();
-			super.afterEquip(doOutput);
+			super.afterEquip(doOutput, slot);
 		}
 		
-		override public function afterUnequip(doOutput:Boolean):void {
+		override public function afterUnequip(doOutput:Boolean, slot:int):void {
 			SceneLib.setItemsChecks.unequipBestialBlademasterItemsSet();
-			super.afterUnequip(doOutput);
+			super.afterUnequip(doOutput, slot);
 		}
 	}
 }

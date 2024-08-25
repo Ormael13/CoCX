@@ -91,15 +91,15 @@ public class WeaponRange extends Equipable
 			return list;
 		}
 		
-		override public function canEquip(doOutput:Boolean):Boolean {
+		override public function canEquip(doOutput:Boolean, slot:int):Boolean {
 			if (game.player.hasPerk(PerkLib.Rigidity)) {
 				if (doOutput) outputText("You would very like to equip this item but your body stiffness prevents you from doing so.");
 				return false;
 			}
-			return super.canEquip(doOutput);
+			return super.canEquip(doOutput, slot);
 		}
 		
-		override public function beforeEquip(doOutput:Boolean):Equipable {
+		override public function beforeEquip(doOutput:Boolean, slot:int):Equipable {
 			if (perk == "2H Firearm") {
 				if (doOutput) outputText("Because this weapon requires the use of two hands, you have unequipped your shield. ");
 				SceneLib.inventory.unequipShield();
@@ -108,7 +108,7 @@ public class WeaponRange extends Equipable
 				if (doOutput) outputText("Because those weapons requires the use of two hands, you have unequipped your shield. ");
 				SceneLib.inventory.unequipShield();
 			}
-			return super.beforeEquip(doOutput);
+			return super.beforeEquip(doOutput, slot);
 		}
 		override public function getItemText(textid:String):String {
 			if (textid == "legendary_fail") {

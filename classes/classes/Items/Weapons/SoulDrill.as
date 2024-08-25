@@ -30,18 +30,18 @@ package classes.Items.Weapons
 			return game.player.statusEffectv1(StatusEffects.SoulDrill1) >= 1 ? "drill" : "pierce";
 		}
 		
-		override public function afterEquip(doOutput:Boolean):void {
+		override public function afterEquip(doOutput:Boolean, slot:int):void {
 			game.player.createStatusEffect(StatusEffects.SoulDrill1,0,0,0,0);
-			super.afterEquip(doOutput);
+			super.afterEquip(doOutput, slot);
 		}
 		
-		override public function afterUnequip(doOutput:Boolean):void {
+		override public function afterUnequip(doOutput:Boolean, slot:int):void {
 			while (game.player.hasStatusEffect(StatusEffects.SoulDrill1)) game.player.removeStatusEffect(StatusEffects.SoulDrill1);
-			super.afterUnequip(doOutput);
+			super.afterUnequip(doOutput, slot);
 		}
 		
-		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.hasPerk(PerkLib.GigantGrip)) return super.canEquip(doOutput);
+		override public function canEquip(doOutput:Boolean, slot:int):Boolean {
+			if (game.player.hasPerk(PerkLib.GigantGrip)) return super.canEquip(doOutput, slot);
 			if (doOutput) outputText("You aren't skilled in handling large weapons with one hand yet to effectively use this drill. Unless you want to hurt yourself instead enemies when trying to use it...  ");
 			return false;
 		}

@@ -12,7 +12,7 @@ package classes.Items.Jewelries
 			withBuffs({'res_fire':40,'res_physical':10,'res_magic':10}, true);
 		}
 
-		override public function afterEquip(doOutput:Boolean):void {
+		override public function afterEquip(doOutput:Boolean, slot:int):void {
 			if (!game.isLoadingSave) {
 				outputText("This Ring is clearly the work of a master jeweller and enchanter. Just wearing this band fills your body with comfortable warmth. ");
 				if (KihaFollower.ProposalStatus == 3) {
@@ -23,12 +23,12 @@ package classes.Items.Jewelries
 				while (game.player.hasStatusEffect(StatusEffects.FieryBand)) game.player.removeStatusEffect(StatusEffects.FieryBand);
 				game.player.createStatusEffect(StatusEffects.FieryBand, 0, 0, 0, 0);
 			}
-			super.afterEquip(doOutput);
+			super.afterEquip(doOutput, slot);
 		}
 
-		override public function afterUnequip(doOutput:Boolean):void {
+		override public function afterUnequip(doOutput:Boolean, slot:int):void {
 			while (game.player.hasStatusEffect(StatusEffects.FieryBand)) game.player.removeStatusEffect(StatusEffects.FieryBand);
-			super.afterUnequip(doOutput);
+			super.afterUnequip(doOutput, slot);
 		}
 	}
 }

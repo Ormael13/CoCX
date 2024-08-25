@@ -15,17 +15,17 @@ package classes.Items.Armors
 			withTag(I_LEGENDARY);
 		}
 		
-		override public function afterEquip(doOutput:Boolean):void {
+		override public function afterEquip(doOutput:Boolean, slot:int):void {
 			if (!game.isLoadingSave) {
 				while (game.player.hasStatusEffect(StatusEffects.DeathPrinceGA)) game.player.removeStatusEffect(StatusEffects.DeathPrinceGA);
 				game.player.createStatusEffect(StatusEffects.DeathPrinceGA, 0, 0, 0, 0);
 			}
-			super.afterEquip(doOutput);
+			super.afterEquip(doOutput, slot);
 		}
 		
-		override public function afterUnequip(doOutput:Boolean):void {
+		override public function afterUnequip(doOutput:Boolean, slot:int):void {
 			while (game.player.hasStatusEffect(StatusEffects.DeathPrinceGA)) game.player.removeStatusEffect(StatusEffects.DeathPrinceGA);
-			super.afterUnequip(doOutput);
+			super.afterUnequip(doOutput, slot);
 		}
 		
 		override public function get def():Number{

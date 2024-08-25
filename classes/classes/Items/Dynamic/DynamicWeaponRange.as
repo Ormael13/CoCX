@@ -159,21 +159,21 @@ public class DynamicWeaponRange extends WeaponRange implements IDynamicItem {
 		DynamicItems.equipText(this);
 	}
 
-	override public function beforeEquip(doOutput:Boolean):Equipable {
+	override public function beforeEquip(doOutput:Boolean, slot:int):Equipable {
 		if (!identified) {
-			return (identifiedCopy() as Equipable).beforeEquip(doOutput);
+			return (identifiedCopy() as Equipable).beforeEquip(doOutput, slot);
 		}
-		return super.beforeEquip(doOutput);
+		return super.beforeEquip(doOutput, slot);
 	}
 
-	override public function afterEquip(doOutput:Boolean):void {
-		super.afterEquip(doOutput);
+	override public function afterEquip(doOutput:Boolean, slot:int):void {
+		super.afterEquip(doOutput, slot);
 		for each (var e:Enchantment in effects) {
 			e.onEquip(game.player, this);
 		}
 	}
-	override public function afterUnequip(doOutput:Boolean):void {
-		super.afterUnequip(doOutput);
+	override public function afterUnequip(doOutput:Boolean, slot:int):void {
+		super.afterUnequip(doOutput, slot);
 		for each (var e:Enchantment in effects) {
 			e.onUnequip(game.player, this);
 		}

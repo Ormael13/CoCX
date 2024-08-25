@@ -61,7 +61,7 @@ package classes.Items
 			return list;
 		}
 		
-		override public function canEquip(doOutput:Boolean):Boolean {
+		override public function canEquip(doOutput:Boolean, slot:int):Boolean {
 			if (!game.player.hasPerk(PerkLib.FlyingSwordPath)) {
 				if (doOutput) outputText("You need first to learn fine control over flying swords to equip this one.");
 				return false;

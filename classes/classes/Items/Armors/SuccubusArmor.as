@@ -31,14 +31,14 @@ import classes.PerkLib;
 			return 10 + mod;
 		}
 		
-		override public function canEquip(doOutput:Boolean):Boolean {
-			if (!super.canEquip(doOutput)) return false;
+		override public function canEquip(doOutput:Boolean, slot:int):Boolean {
+			if (!super.canEquip(doOutput, slot)) return false;
 			return LustyMaidensArmor.canUseStatic(doOutput);
 		}
 		
-		override public function afterEquip(doOutput:Boolean):void {
+		override public function afterEquip(doOutput:Boolean, slot:int):void {
 			_buffs['teasedmg'] = (10 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS]) * 5;
-			super.afterEquip(doOutput);
+			super.afterEquip(doOutput, slot);
 		}
 	}
 }
