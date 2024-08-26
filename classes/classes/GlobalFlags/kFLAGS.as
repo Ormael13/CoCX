@@ -872,7 +872,7 @@ public static const ESSRAYLE_ESCAPED_DUNGEON:int                                
 public static const TOLD_MOTHER_TO_RELEASE_ESSY:int                                 =  864; //
 public static const ESSY_DUNGEON_FUCKED:int                                         =  865; //
 public static const ESSY_MET_IN_DUNGEON:int                                         =  866; //
-public static const MULTIATTACK_STYLE:int                                           =  867; // MULTIATTACK_STYLE" Description="prefered number of attacks is (X+1)
+public static const UNKNOWN_FLAG_NUMBER_00867:int                                   =  867; // No longer used
 public static const SPELLS_CAST:int                                                 =  868; //
 public static const MILK_NAME:int                                                   =  869; //
 public static const MILK_SIZE:int                                                   =  870; //
@@ -2467,9 +2467,9 @@ public static const ARROWS_ACCURACY:int            			                        = 
 public static const PRISON_STORAGE_WEAPON_RANGE:int                                 = 2459;
 public static const ELEMENTAL_ARROWS:int                                 		    = 2460;
 public static const IN_COMBAT_PLAYER_GOBLIN_MECH_AI_ATTACKED:int                  	= 2461;
-public static const SOUL_SENSE_TAMANI_DAUGHTERS:int                                 = 2462; // No longer used
-public static const SOUL_SENSE_KITSUNE_MANSION:int                                  = 2463; // No longer used
-public static const SOUL_SENSE_IZUMI:int                    		                = 2464; // No longer used
+public static const MULTIATTACK_STYLE_OFF:int                                 		= 2462; // MULTIATTACK_STYLE_OFF" Description="prefered number of attacks is (X+1)
+public static const MULTIPLE_ATTACKS_STYLE_MAIN_HAND:int                            = 2463;
+public static const MULTIPLE_ATTACKS_STYLE_OFF_HAND:int                    		    = 2464;
 public static const ARIAN_SCALES:int                            			        = 2465;
 public static const SEXUAL_FLUIDS_LEVEL:int                            		        = 2466;
 public static const HIDDEN_CAVE_FOUND:int          		                            = 2467;
@@ -2484,7 +2484,7 @@ public static const HIDDEN_CAVE_TAKEN_SOULPILLS:int                             
 public static const HIDDEN_CAVE_TAKEN_ITEMS_1:int                           	    = 2476;
 public static const CUPID_ARROWS:int              				                    = 2477;
 public static const ENVENOMED_BOLTS:int                			                    = 2478;
-public static const MULTIPLE_ATTACKS_STYLE:int                                      = 2479;
+public static const MULTIATTACK_STYLE_MAIN:int                                 		= 2479; // MULTIATTACK_STYLE_MAIN" Description="prefered number of attacks is (X+1)
 public static const ATTACKS_ACCURACY:int      		                                = 2480;
 public static const SPELLS_ACCURACY:int                        			            = 2481;
 public static const AUTO_CAST_CHARGE_WEAPON_DISABLED:int                            = 2482;

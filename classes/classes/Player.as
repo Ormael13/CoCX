@@ -1193,7 +1193,7 @@ use namespace CoC;
 		//Weapons for Whirlwind
 		public function isWeaponForWhirlwind():Boolean
 		{
-			return isSwordTypeWeapon() || isAxeTypeWeapon() || weapon.isWhirlwind();// || weapon == game.weapons.
+			return weapon.isSwordType() || weaponOff.isSwordType() || weapon.isAxeType() || weaponOff.isAxeType() || weapon.isWhirlwind();// || weapon == game.weapons.
 		}
 		//Weapons for Whipping
 		public function isWeaponsForWhipping():Boolean
@@ -1208,7 +1208,7 @@ use namespace CoC;
 		//Non Large/Massive weapons
 		public function isNoLargeNoStaffWeapon():Boolean
 		{
-			return (!weapon.isDualLarge() && !weapon.isSingleLarge() && !weapon.isDualMassive() && !weapon.isSingleMassive() && !isStaffTypeWeapon());
+			return (!weapon.isDualLarge() && !weapon.isSingleLarge() && !weapon.isDualMassive() && !weapon.isSingleMassive() && !weapon.isStaffType() && !weaponOff.isStaffType());
 		}
 		//Wrath Weapons
 		public function isLowGradeWrathWeapon():Boolean
@@ -1278,7 +1278,7 @@ use namespace CoC;
 		}
 		//Spear-type
 		public function isSpearTypeWeapon():Boolean {
-			return (weapon.isSpearType()) || weapon == game.weapons.SKYPIER;
+			return (weapon.isSpearType());
 		}
 		//Scythe-type
 		public function isScytheTypeWeapon():Boolean {
@@ -1286,15 +1286,11 @@ use namespace CoC;
 		}
 		//Dagger-type weapons
 		public function isDaggerTypeWeapon():Boolean {
-			return (weapon.isDaggerType()) || hasAetherTwinsTierWeapon() || hasAetherTwinsTierWeapon2();
+			return (weapon.isDaggerType());
 		}
-		//Staff <<SCECOMM(scepter not staff)>>
+		//Staff
 		public function isStaffTypeWeapon():Boolean {
-			return (weapon.isStaffType()) || weapon == game.weapons.ASCENSU || weapon == game.weapons.B_STAFF || weapon == game.weapons.DEPRAVA || weapon == game.weapons.PURITAS || weapon == game.weapons.WDSTAFF;
-		}
-		//Staff <<SCECOMM(scepter not staff)>>
-		public function isWandTypeWeapon():Boolean {
-			return (weapon.isWandType());
+			return (weapon.isStaffType());
 		}
 		//Whip-type weapons
 		public function isWhipTypeWeapon():Boolean {
@@ -1303,10 +1299,6 @@ use namespace CoC;
 		//Ribbon-type weapons
 		public function isRibbonTypeWeapon():Boolean {
 			return (weapon.isRibbonType());
-		}
-		//Exotic-type weapons
-		public function isExoticTypeWeapon():Boolean {
-			return (isRibbonTypeWeapon() || weapon.isExoticType() || weapon.isScytheType());
 		}
 		//Partial staff type weapons
 		public function isPartiallyStaffTypeWeapon():Boolean {
@@ -1330,7 +1322,7 @@ use namespace CoC;
 		//Cleave compatibile weapons
 		public function haveWeaponForCleave():Boolean
 		{
-			return isAxeTypeWeapon() || isSwordTypeWeapon() || isDuelingTypeWeapon();
+			return weapon.isAxeType() || weaponOff.isAxeType() || weapon.isSwordType() || weaponOff.isSwordType() || weapon.isDuelingType() || weaponOff.isDuelingType();
 		}
 		//No multishoot firearms
 		public function noMultishootFirearms():Boolean
@@ -1420,11 +1412,11 @@ use namespace CoC;
 		}
 		public function flameBladeActive():Boolean
 		{
-			return ((isDuelingTypeWeapon() || isSwordTypeWeapon() || isAxeTypeWeapon() || isDaggerTypeWeapon() || isScytheTypeWeapon()) && hasStatusEffect(StatusEffects.FlameBlade));
+			return ((weapon.isDuelingType() || weaponOff.isDuelingType() || weapon.isSwordType() || weaponOff.isSwordType() || weapon.isAxeType() || weaponOff.isAxeType() || weapon.isDaggerType() || weaponOff.isDaggerType() || weapon.isScytheType() || weaponOff.isScytheType()) && hasStatusEffect(StatusEffects.FlameBlade));
 		}
-		public function ElectrifyWeaponActive():Boolean
+		public function electrifyWeaponActive():Boolean
 		{
-			return ((isMaceHammerTypeWeapon() || isDuelingTypeWeapon() || isSwordTypeWeapon() || isAxeTypeWeapon() || isDaggerTypeWeapon() || isScytheTypeWeapon()) && hasStatusEffect(StatusEffects.ElectrifyWeapon));
+			return ((weapon.isMaceHammerType() || weaponOff.isMaceHammerType() || weapon.isDuelingType() || weaponOff.isDuelingType() || weapon.isSwordType() || weaponOff.isSwordType() || weapon.isAxeType() || weaponOff.isAxeType() || weapon.isDaggerType() || weaponOff.isDaggerType() || weapon.isScytheType() || weaponOff.isScytheType()) && hasStatusEffect(StatusEffects.ElectrifyWeapon));
 		}
 		public function mummyControlLimit():Number
 		{
@@ -1462,7 +1454,7 @@ use namespace CoC;
 			return progressBD;
 		}
 		public function compatibileSwordImmortalWeapons():Boolean {
-			if (isSwordTypeWeapon() || isDuelingTypeWeapon() || isDaggerTypeWeapon()) return true;
+			if (weapon.isSwordType() || weaponOff.isSwordType() || weapon.isDuelingType() || weaponOff.isDuelingType() || weapon.isDaggerType() || weaponOff.isDaggerType()) return true;
 			else return false;
 		}
 		public function pcHaveBleedAbility():Boolean
@@ -1744,7 +1736,7 @@ use namespace CoC;
 		//Is DualWield
 		public function isDualWieldMelee():Boolean
         {
-        	return weapon.isDual()
+        	return weapon.isDual();
         }
         public function isDualWieldRanged():Boolean
         {
@@ -1791,7 +1783,7 @@ use namespace CoC;
 		//Using Staff
 		public function isUsingStaff():Boolean
 		{
-			return isStaffTypeWeapon();
+			return (weapon.isStaffType() || weaponOff.isStaffType());
 		}
 		//Using Wand
 		public function isUsingWand():Boolean
@@ -2877,7 +2869,7 @@ use namespace CoC;
 			// if magical damage, double efficiency
 			if (magic) magicmult *= 0.2;
 			// defensive staff channeling
-			if (hasPerk(PerkLib.DefensiveStaffChanneling) && (isStaffTypeWeapon() || isPartiallyStaffTypeWeapon())) magicmult *= 0.5;
+			if (hasPerk(PerkLib.DefensiveStaffChanneling) && (weapon.isStaffType() || weaponOff.isStaffType() || weapon.isWandType() || weaponOff.isWandType() || isPartiallyStaffTypeWeapon())) magicmult *= 0.5;
 			// Begin of mana/damage absorb calculation
 			// Could restructure that have defend greysage intelligence perk just reduce damage to 0
 			// And put back mana to 0 if less than 0 at the end
@@ -3341,7 +3333,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.ShieldHarmony) && tou >= 100 && isShieldsForShieldBash() && shieldName != "nothing" && !hasStatusEffect(StatusEffects.Stunned)) {
 				mult -= 10;
 			}
-			if (hasPerk(PerkLib.KnightlySword) && isSwordTypeWeapon() && isShieldsForShieldBash()) {
+			if (hasPerk(PerkLib.KnightlySword) && weapon.isSwordType() && isShieldsForShieldBash()) {
 				mult -= 10;
 			}
 			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && armor.hasTag(ItemConstants.A_REVEALING)) {
@@ -6820,7 +6812,7 @@ use namespace CoC;
             if ((hasPerk(PerkLib.RangeWeaponsMasterySu) && !melee) || (hasPerk(PerkLib.MeleeWeaponsMasterySu) && melee)) WeaponMasterySUModifier = Math.round(1 + (masteryLevel *.5));
 			return (baseXPtoLevel + (WeaponMasteryModifier * WeaponMasteryEXModifier * WeaponMasterySUModifier));
 		}
-		public function gainCombatXP(index:int, exp:Number):void{
+		public function gainCombatXP(index:int, exp:Number, offHand:Boolean = false):void{
 			var masteryObj:Object = combatMastery[index];
 			var level:Number = masteryObj.level;
 			var levelUp:Boolean        = false;
@@ -6833,7 +6825,7 @@ use namespace CoC;
 			var oldProgress:Number = experience/xpToLevel;
 			// for tracking bonus attack masteries
 			var grantsBonusAttacks:Boolean = Combat.bonusAttackMasteries.indexOf(index) != -1;
-			var maxAttacksOld:int = melee? SceneLib.combat.maxCurrentAttacks(): SceneLib.combat.maxCurrentRangeAttacks();
+			var maxAttacksOld:int = melee? (offHand?SceneLib.combat.maxCurrentAttacksOff():SceneLib.combat.maxCurrentAttacksMain()): SceneLib.combat.maxCurrentRangeAttacks();
 			// This loop does weapon types ( dagger, sword, fist, claws, ... )
 			while (xpLoop > 0) {
 				experience += xpLoop;	// incremeent the XP of the weapon mastery
@@ -6870,7 +6862,7 @@ use namespace CoC;
 			}
 			// Can we get any new attacks?
 			if (grantsBonusAttacks && levelUp) {// if it grants bonus attacks
-				var maxAttacksNew:int = melee? SceneLib.combat.maxCurrentAttacks(): SceneLib.combat.maxCurrentRangeAttacks();
+				var maxAttacksNew:int = melee? (offHand?SceneLib.combat.maxCurrentAttacksOff():SceneLib.combat.maxCurrentAttacksMain()): SceneLib.combat.maxCurrentRangeAttacks();
 				// remember the last value
 				var masteryArrays:Array = melee? masteryBonusAttacksMelee: masteryBonusAttacksRanged;
 				for each (var masteryArr:Array in masteryArrays) {
@@ -6881,9 +6873,9 @@ use namespace CoC;
 							if (combatMastery[masteryArr[0]].level == masteryArr[2][bonusPos]) {
 								outputText("\n<b>Thanks to your training, your maximum bonus attack count has increased to " + maxAttacksNew + "!</b>\n");
 								// before THIS level (new attack), it was maxed (0 in flag = 1 attack, 1 = 2 attacks, etc.)
-								if (flags[kFLAGS.MULTIATTACK_STYLE] == maxAttacksOld - 1) {
+								if (flags[kFLAGS.MULTIATTACK_STYLE_MAIN] == maxAttacksOld - 1) {
 									// keep up with the new max
-									flags[kFLAGS.MULTIATTACK_STYLE] = maxAttacksNew - 1;
+									flags[kFLAGS.MULTIATTACK_STYLE_MAIN] = maxAttacksNew - 1;
 								}
 							}
 						}
@@ -6945,7 +6937,7 @@ use namespace CoC;
 			return rval;
 		}
 
-		public function calculateMultiAttacks(meleeOrRanged:Boolean = true):int {
+		public function calculateMultiAttacks(meleeOrRanged:Boolean = true, offHandCalc:Boolean = false):int {
 			var rval:Number = 1;
             var masteryArrays:Array = meleeOrRanged? masteryBonusAttacksMelee: masteryBonusAttacksRanged;
 			for each (var masteryArr:Array in masteryArrays) {

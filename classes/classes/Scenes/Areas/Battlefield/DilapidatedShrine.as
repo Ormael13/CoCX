@@ -222,28 +222,28 @@ public class DilapidatedShrine extends BaseContent
 							combat.gauntletXP(40);
 							break;
 						case ItemConstants.WT_SWORD:
-                            combat.swordXP(40);
+                            combat.swordXP(40, false);
 							break;
 						case ItemConstants.WT_AXE:
-                            combat.axeXP(40);
+                            combat.axeXP(40, false);
 							break;
 						case ItemConstants.WT_MACE_HAMMER:
-                            combat.macehammerXP(40);
+                            combat.macehammerXP(40, false);
 							break;
 						case ItemConstants.WT_DUELING:
-                            combat.duelingswordXP(40);
+                            combat.duelingswordXP(40, false);
 							break;
 						case ItemConstants.WT_POLEARM:
-                            combat.polearmXP(40);
+                            combat.polearmXP(40, false);
 							break;
 						case ItemConstants.WT_SPEAR:
-                            combat.spearXP(40);
+                            combat.spearXP(40, false);
 							break;
 						case ItemConstants.WT_DAGGER:
-                            combat.daggerXP(40);
+                            combat.daggerXP(40, false);
 							break;
 						case ItemConstants.WT_WHIP:
-                            combat.whipXP(40);
+                            combat.whipXP(40, false);
 							break;
 						case ItemConstants.WT_THROWING:
                             combat.throwingXP(40);
@@ -268,10 +268,10 @@ public class DilapidatedShrine extends BaseContent
                             combat.dualWieldFirearmsXP(40);
 							break;
 						case ItemConstants.WT_EXOTIC:
-                            combat.exoticXP(40);
+                            combat.exoticXP(40, false);
 							break;
 						case ItemConstants.WT_RIBBON:
-                            combat.exoticXP(40);
+                            combat.exoticXP(40, false);
 							break;
 						}
 					player.destroyItems(wType[0],1);

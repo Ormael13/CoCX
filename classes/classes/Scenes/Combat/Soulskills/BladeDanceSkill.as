@@ -28,7 +28,7 @@ public class BladeDanceSkill extends AbstractSoulSkill {
 	}
 
 	override public function sfCost():int {
-		var soulforcecost:Number = baseSFCost * soulskillCost() * (1 + flags[kFLAGS.MULTIATTACK_STYLE]);
+		var soulforcecost:Number = baseSFCost * soulskillCost() * (1 + flags[kFLAGS.MULTIATTACK_STYLE_MAIN]);
         return Math.round(soulforcecost);
 	}
 

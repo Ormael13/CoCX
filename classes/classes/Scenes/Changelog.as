@@ -315,7 +315,7 @@ public class Changelog extends BaseContent
 			outputText("-Fixing Lusting Warrior buff not corelated to entering/leaving heat/rut state.\n");
 			outputText("-Control freak effect activating during straddle too. Updated perk desc.\n");
 			outputText("-Fixed som text issues in hellcat tf scene.\n");
-			outputText("-\n");
+			outputText("-Defensive Staff Channeling perk would work with PC using wand weapons too.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

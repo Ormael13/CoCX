@@ -25,8 +25,8 @@ import classes.Scenes.NPCs.AetherTwinsFollowers;
 		}
 		
 		override public function isDual():Boolean {
-			if (game.player.hasAetherTwinsTierS2()) return true;
-			return false;
+			if (AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dagger and Shield") return false;
+			else return true;
 		}
 		
 		override public function get description():String {
@@ -44,7 +44,7 @@ import classes.Scenes.NPCs.AetherTwinsFollowers;
 		}
 		
 		override public function get verb():String {
-			if (game.player.hasAetherTwinsTierS1() || game.player.hasAetherTwinsTierS2()) return "stab";
+			if (AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dual Daggers" || AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dagger and Shield") return "stab";
 			else return "punch";
 		}
 		
@@ -54,9 +54,15 @@ import classes.Scenes.NPCs.AetherTwinsFollowers;
 			return (0 + boost);
 		}
 		
+		override public function get type():String {
+			if (AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dual Daggers" || AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dagger and Shield") return WT_DAGGER;
+			else return WT_GAUNTLET;
+		}
+		
 		override public function get size():int {
-			if (game.player.hasAetherTwinsTierS2()) return WSZ_SMALL;
-			return WSZ_MEDIUM;
+			if (AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dual Daggers" || AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dagger and Shield") return WSZ_SMALL;
+			else if (AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets") return WSZ_LARGE;
+			else return WSZ_MEDIUM;
 		}
 		
 		override public function useText():void {

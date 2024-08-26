@@ -41,7 +41,7 @@ public class AegisSpell extends AbstractDivineSpell {
 		else aegismagnitude += spellModWhite();
 		if (player.inte / 50 > 5) aegismagnitude += 5;
 		else aegismagnitude += player.inte / 25;
-		if (player.hasPerk(PerkLib.DefensiveStaffChanneling)) aegismagnitude *= 1.1;
+		if (player.hasPerk(PerkLib.DefensiveStaffChanneling) && (player.weapon.isStaffType() || player.weaponOff.isStaffType() || player.weapon.isWandType() || player.weaponOff.isWandType())) aegismagnitude *= 1.1;
 		if ((player.isUsingStaff() || player.isUsingWand()) && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) aegismagnitude *= 3;
 		return Math.round(aegismagnitude);
 	}

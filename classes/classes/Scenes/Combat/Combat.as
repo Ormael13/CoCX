@@ -410,8 +410,12 @@ public class Combat extends BaseContent {
         return (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4) && player.isElf());
     }
 
-    public function maxCurrentAttacks():int {
-        if (player.isStaffTypeWeapon() || player.isWandTypeWeapon()) return 1;
+    public function maxCurrentAttacksMain():int {
+        if (player.weapon.isStaffType() || player.weapon.isWandType()) return 1;
+        else return player.calculateMultiAttacks();
+    }
+    public function maxCurrentAttacksOff():int {
+        if (player.weaponOff.isStaffType() || player.weaponOff.isWandType()) return 1;
         else return player.calculateMultiAttacks();
     }
 
@@ -1560,33 +1564,57 @@ public class Combat extends BaseContent {
         }
         clearOutput();
         if (SceneLib.urtaQuest.isUrta()) {
-            flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+            flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] = 1;
+			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_OFF_HAND] = 1;
         }
         var dualWeapon:Boolean = false;
         if (player.weapon.isDual()){
             dualWeapon = true;
         }
-        if (flags[kFLAGS.MULTIATTACK_STYLE] >= 0) {
-            flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = Math.min(maxCurrentAttacks(), (flags[kFLAGS.MULTIATTACK_STYLE] || 0) + 1);
+        if (flags[kFLAGS.MULTIATTACK_STYLE_MAIN] >= 0) {
+            flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] = Math.min(maxCurrentAttacksMain(), (flags[kFLAGS.MULTIATTACK_STYLE_MAIN] || 0) + 1);
             if (player.statusEffectv1(StatusEffects.CounterAction) > 0)
-                flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += player.statusEffectv1(StatusEffects.CounterAction);
+                flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] += player.statusEffectv1(StatusEffects.CounterAction);
             if (player.weapon.isLarge() || player.weapon.isMassive()) {
                 if( player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking) ){
-                    if (player.hasPerk(PerkLib.FuelForTheFire)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 1;
+                    if (player.hasPerk(PerkLib.FuelForTheFire)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] += 1;
                     if (player.hasPerk(PerkLib.Anger) && (player.statusEffectv2(StatusEffects.Berzerking) >= 1 || player.statusEffectv2(StatusEffects.Lustzerking) >= 1)) {
-                        if (player.statusEffectv2(StatusEffects.Berzerking) >= 3 || player.statusEffectv2(StatusEffects.Lustzerking) >= 3) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 3;
-                        else if (player.statusEffectv2(StatusEffects.Berzerking) >= 2 || player.statusEffectv2(StatusEffects.Lustzerking) >= 2) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
-                        else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 1;
+                        if (player.statusEffectv2(StatusEffects.Berzerking) >= 3 || player.statusEffectv2(StatusEffects.Lustzerking) >= 3) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] += 3;
+                        else if (player.statusEffectv2(StatusEffects.Berzerking) >= 2 || player.statusEffectv2(StatusEffects.Lustzerking) >= 2) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] += 2;
+                        else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] += 1;
                     }
                 }
             }
-            if (player.hasStatusEffect(StatusEffects.BladeDance) || dualWeapon) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
-            if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1 && player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && (dualWeapon || player.weapon == weapons.DAISHO)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
+            if (player.hasStatusEffect(StatusEffects.BladeDance) || dualWeapon) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] *= 2;
+            if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] > 1 && player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && (dualWeapon || player.weapon == weapons.DAISHO)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] *= 2;
         }
         else {
-            flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+            flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] = 1;
         }
         attack();
+		if (!player.weaponOff.isNothing) {
+			if (flags[kFLAGS.MULTIATTACK_STYLE_OFF] >= 0) {
+				flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_OFF_HAND] = Math.min(maxCurrentAttacksOff(), (flags[kFLAGS.MULTIATTACK_STYLE_OFF] || 0) + 1);
+				if (player.statusEffectv1(StatusEffects.CounterAction) > 0)
+					flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_OFF_HAND] += player.statusEffectv1(StatusEffects.CounterAction);
+				if (player.weapon.isLarge() || player.weapon.isMassive()) {
+					if( player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking) ){
+						if (player.hasPerk(PerkLib.FuelForTheFire)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_OFF_HAND] += 1;
+						if (player.hasPerk(PerkLib.Anger) && (player.statusEffectv2(StatusEffects.Berzerking) >= 1 || player.statusEffectv2(StatusEffects.Lustzerking) >= 1)) {
+							if (player.statusEffectv2(StatusEffects.Berzerking) >= 3 || player.statusEffectv2(StatusEffects.Lustzerking) >= 3) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_OFF_HAND] += 3;
+							else if (player.statusEffectv2(StatusEffects.Berzerking) >= 2 || player.statusEffectv2(StatusEffects.Lustzerking) >= 2) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_OFF_HAND] += 2;
+							else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_OFF_HAND] += 1;
+						}
+					}
+				}
+				if (player.hasStatusEffect(StatusEffects.BladeDance) || dualWeapon) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] *= 2;
+				if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] > 1 && player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && (dualWeapon || player.weapon == weapons.DAISHO)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] *= 2;
+			}
+			else {
+				flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_OFF_HAND] = 1;
+			}
+			attack(true, true);
+		}
     }
 
     //Calls actions for wisp and henchmen, no 'Next' buttons or choices.
@@ -2100,9 +2128,8 @@ public class Combat extends BaseContent {
 		var weapon:String = "";
         if (player.isInGoblinMech()) {
             weapon = "saw blade";
-
             //Only Mech friendly twin weapons count whenusing an goblin mech
-            if (player.weapon == weapons.TRIPPER1 || player.weapon == weapons.TRIPPER2 || player.weapon == weapons.TMACGRSW) {
+            if ((player.weapon == weapons.RIPPER1 || player.weapon == weapons.RIPPER2 || player.weapon == weapons.MACGRSW) && (player.weaponOff == weapons.RIPPER1 || player.weaponOff == weapons.RIPPER2 || player.weaponOff == weapons.MACGRSW)) {
                 weapon = "saw blades";
             }
         }
@@ -2120,7 +2147,7 @@ public class Combat extends BaseContent {
 				damage += scalingBonusSpeed() * 0.10;
 			}
 		}
-        damage += meleeDamageNoLagSingle(false, damage);
+        damage += meleeDamageNoLagSingle(false, false, damage);
 		if (player.isInGoblinMech()) {
 			if (player.hasKeyItem("Hydraulics") >= 0 || player.hasKeyItem("Hydraulics MK2") >= 0 || player.hasKeyItem("Hydraulics MK3") >= 0 || player.hasKeyItem("Hydraulics MK4") >= 0 || player.hasKeyItem("Hydraulics MK5") >= 0 || player.hasKeyItem("Hydraulics MK6") >= 0) {
 				var hydraulicsMulti:Number = 0.25;
@@ -2222,7 +2249,7 @@ public class Combat extends BaseContent {
 
         //Gain weapon experience when using goblin weapons
         if (player.isUsingMechMeleeWeapons()) {
-            var hitCounter:int = player.vehicles == vehicles.HB_MECH? 2: 1;
+            var hitCounter:int = (player.vehicles == vehicles.HB_MECH || weapon == "saw blades")? 2: 1;
             var critCounter:int = crit? 1: 0;
             meleeMasteryGain(hitCounter, critCounter);
         }
@@ -2690,6 +2717,7 @@ public class Combat extends BaseContent {
 
     //unused for now function - maybe use later for some other attacks accuracy or maybe spells? xD
     //SH comment: THIS IS NOT FUCKING DND, HOW DO YOU MISS WITH A FIREBALL
+	//O Comment: Because he's officer asshole nephew of sgt. asshole 
     /*
     public function attacksAccuracy():Number {
         var atkmod:Number = 100;
@@ -2706,7 +2734,7 @@ public class Combat extends BaseContent {
     }
     */
 
-    public function meleeAccuracy():Number {
+    public function meleeAccuracy(offHand:Boolean = false):Number {
         var accmod:Number = 128;
 		if (player.level > 0) {
 			if (player.level > 5) accmod += 72;
@@ -2736,15 +2764,28 @@ public class Combat extends BaseContent {
 				else accmod += Math.round((masteryUnarmedCombatLevel() - 1) / 2);
 			}
 		}
-		if (player.isSwordTypeWeapon()) accmod += Math.round((masterySwordLevel() - 1) / 2);
-		if (player.isAxeTypeWeapon()) accmod += Math.round((masteryAxeLevel() - 1) / 2);
-		if (player.isMaceHammerTypeWeapon()) accmod += Math.round((masteryMaceHammerLevel() - 1) / 2);
-		if (player.isDuelingTypeWeapon()) accmod += Math.round((masteryDuelingSwordLevel() - 1) / 2);
-		if (player.isPolearmTypeWeapon()) accmod += Math.round((masteryPolearmLevel() - 1) / 2);
-		if (player.isSpearTypeWeapon()) accmod += Math.round((masterySpearLevel() - 1) / 2);
-		if (player.isDaggerTypeWeapon()) accmod += Math.round((masteryDaggerLevel() - 1) / 2);
-		if (player.isWhipTypeWeapon()) accmod += Math.round((masteryWhipLevel() - 1) / 2);
-		if (player.isExoticTypeWeapon()) accmod += Math.round((masteryExoticLevel() - 1) / 2);
+		if (offHand) {
+			if (player.weaponOff.isSwordType()) accmod += Math.round((masterySwordLevel() - 1) / 2);
+			if (player.weaponOff.isAxeType()) accmod += Math.round((masteryAxeLevel() - 1) / 2);
+			if (player.weaponOff.isMaceHammerType()) accmod += Math.round((masteryMaceHammerLevel() - 1) / 2);
+			if (player.weaponOff.isDuelingType()) accmod += Math.round((masteryDuelingSwordLevel() - 1) / 2);
+			if (player.weaponOff.isPolearmType()) accmod += Math.round((masteryPolearmLevel() - 1) / 2);
+			if (player.weaponOff.isSpearType()) accmod += Math.round((masterySpearLevel() - 1) / 2);
+			if (player.weaponOff.isDaggerType()) accmod += Math.round((masteryDaggerLevel() - 1) / 2);
+			if (player.weaponOff.isWhipType()) accmod += Math.round((masteryWhipLevel() - 1) / 2);
+			if (player.weaponOff.isExoticType() || player.weaponOff.isRibbonType() || player.weaponOff.isScytheType()) accmod += Math.round((masteryExoticLevel() - 1) / 2);
+		}
+		else {
+			if (player.weapon.isSwordType()) accmod += Math.round((masterySwordLevel() - 1) / 2);
+			if (player.weapon.isAxeType()) accmod += Math.round((masteryAxeLevel() - 1) / 2);
+			if (player.weapon.isMaceHammerType()) accmod += Math.round((masteryMaceHammerLevel() - 1) / 2);
+			if (player.weapon.isDuelingType()) accmod += Math.round((masteryDuelingSwordLevel() - 1) / 2);
+			if (player.weapon.isPolearmType()) accmod += Math.round((masteryPolearmLevel() - 1) / 2);
+			if (player.weapon.isSpearType()) accmod += Math.round((masterySpearLevel() - 1) / 2);
+			if (player.weapon.isDaggerType()) accmod += Math.round((masteryDaggerLevel() - 1) / 2);
+			if (player.weapon.isWhipType()) accmod += Math.round((masteryWhipLevel() - 1) / 2);
+			if (player.weapon.isExoticType() || player.weapon.isRibbonType() || player.weapon.isScytheType()) accmod += Math.round((masteryExoticLevel() - 1) / 2);
+		}
 		if (player.weapon.isDualSmall() || player.hasAetherTwinsTierS2()) accmod += Math.round((dualWSLevel() - 1) / 2);
 		if (player.weapon.isDualMedium()) accmod += Math.round((dualWNLevel() - 1) / 2);
 		if (player.weapon.isDualLarge()) accmod += Math.round((dualWLLevel() - 1) / 2);
@@ -4208,11 +4249,13 @@ public class Combat extends BaseContent {
 				doWindDamage(damage, true, true);
                 break;
         }
-		if (player.weapon == weapons.MGSWORD || player.weapon == weapons.MCLAWS || player.weapon is Tidarion) {
+		if (player.weapon == weapons.MGSWORD || player.weaponOff == weapons.MGSWORD || player.weapon == weapons.MCLAWS || player.weaponOff == weapons.MCLAWS || player.weapon is Tidarion || player.weaponOff is Tidarion) {
 			var critCounter:int = 0;
 			if (crit) critCounter++;
-			meleeMasteryGain(1,critCounter);
+			if (player.weaponOff == weapons.MGSWORD || player.weaponOff == weapons.MCLAWS || player.weaponOff is Tidarion) meleeMasteryGain(1,critCounter,true);
+			else meleeMasteryGain(1,critCounter);
             if (player.weapon is Tidarion) (player.weapon as Tidarion).afterStrike();
+            if (player.weaponOff is Tidarion) (player.weaponOff as Tidarion).afterStrike();
 		}
 		else {
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
@@ -5303,7 +5346,7 @@ public class Combat extends BaseContent {
      * 3. Do Feral additional attacks
      * 4. Go to melee accuracy check
      */
-    public function attack(followupAttacks:Boolean = true):void {
+    public function attack(followupAttacks:Boolean = true, offHandAttacks:Boolean = false):void {
         var IsFeralCombat:Boolean = false;
         flags[kFLAGS.LAST_ATTACK_TYPE] = LAST_ATTACK_PHYS;
 
@@ -5377,6 +5420,7 @@ public class Combat extends BaseContent {
                                 }
                                 // Do all other attacks
                                 meleeDamageAcc(IsFeralCombat);
+								if (offHandAttacks) meleeDamageAcc(IsFeralCombat, true);
                                 if (player.hasPerk(PerkLib.LightningClaw)){
                                     outputText(" The residual electricity leaves your foe's skin tingling with pleasure.");
                                 }
@@ -6191,7 +6235,7 @@ public class Combat extends BaseContent {
      * @param damage
      * @return damage calulation
      */
-	public function meleeDamageNoLagSingle(IsFeralCombat:Boolean = false, damage:Number = 0):Number {
+	public function meleeDamageNoLagSingle(IsFeralCombat:Boolean = false, offHand:Boolean = false, damage:Number = 0):Number {
 		if (IsFeralCombat && player.hasPerk(PerkLib.RampantMight)) {
             damage += player.tou;
 			damage += scalingBonusToughness() * 0.2;
@@ -6292,7 +6336,10 @@ public class Combat extends BaseContent {
 		if (monster.hasStatusEffect(StatusEffects.Stunned) && player.isMaceHammerTypeWeapon() && player.hasPerk(PerkLib.Backbreaker)) damage *= 1.5;
         // Mastery bonus damage
 		if (IsFeralCombat) damage *= MasteryBonusDamageMelee(true);
-		else damage *= MasteryBonusDamageMelee();
+		else {
+			if (offHand) damage *= MasteryBonusDamageMelee(false, true);
+			else damage *= MasteryBonusDamageMelee();
+		}
 		//Thunderous Strikes
 		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
@@ -6468,7 +6515,7 @@ public class Combat extends BaseContent {
 		return damage;
 	}
 	
-	public function MasteryBonusDamageMelee(IsFeralCombat:Boolean = false):Number {
+	public function MasteryBonusDamageMelee(IsFeralCombat:Boolean = false, offHand:Boolean = false):Number {
 		var Mastery_bonus_damage:Number = 1;
 		if (player.isFistOrFistWeapon()) {
 			if (IsFeralCombat) Mastery_bonus_damage += 0.01 * masteryFeralCombatLevel();
@@ -6477,15 +6524,28 @@ public class Combat extends BaseContent {
 				else Mastery_bonus_damage += 0.01 * masteryUnarmedCombatLevel();
 			}
 		}
-		if (player.isSwordTypeWeapon()) Mastery_bonus_damage += 0.01 * masterySwordLevel();
-		if (player.isAxeTypeWeapon()) Mastery_bonus_damage += 0.01 * masteryAxeLevel();
-		if (player.isMaceHammerTypeWeapon()) Mastery_bonus_damage += 0.01 * masteryMaceHammerLevel();
-		if (player.isDuelingTypeWeapon()) Mastery_bonus_damage += 0.01 * masteryDuelingSwordLevel();
-		if (player.isPolearmTypeWeapon()) Mastery_bonus_damage += 0.01 * masteryPolearmLevel();
-		if (player.isSpearTypeWeapon()) Mastery_bonus_damage += 0.01 * masterySpearLevel();
-		if (player.isDaggerTypeWeapon()) Mastery_bonus_damage += 0.01 * masteryDaggerLevel();
-		if (player.isWhipTypeWeapon()) Mastery_bonus_damage += 0.01 * masteryWhipLevel();
-		if (player.isExoticTypeWeapon()) Mastery_bonus_damage += 0.01 * masteryExoticLevel();
+		if (offHand) {
+			if (player.weaponOff.isSwordType()) Mastery_bonus_damage += 0.01 * masterySwordLevel();
+			if (player.weaponOff.isAxeType()) Mastery_bonus_damage += 0.01 * masteryAxeLevel();
+			if (player.weaponOff.isMaceHammerType()) Mastery_bonus_damage += 0.01 * masteryMaceHammerLevel();
+			if (player.weaponOff.isDuelingType()) Mastery_bonus_damage += 0.01 * masteryDuelingSwordLevel();
+			if (player.weaponOff.isPolearmType()) Mastery_bonus_damage += 0.01 * masteryPolearmLevel();
+			if (player.weaponOff.isSpearType()) Mastery_bonus_damage += 0.01 * masterySpearLevel();
+			if (player.weaponOff.isDaggerType()) Mastery_bonus_damage += 0.01 * masteryDaggerLevel();
+			if (player.weaponOff.isWhipType()) Mastery_bonus_damage += 0.01 * masteryWhipLevel();
+			if (player.weaponOff.isExoticType() || player.weaponOff.isRibbonType() || player.weaponOff.isScytheType()) Mastery_bonus_damage += 0.01 * masteryExoticLevel();
+		}
+		else {
+			if (player.weapon.isSwordType()) Mastery_bonus_damage += 0.01 * masterySwordLevel();
+			if (player.weapon.isAxeType()) Mastery_bonus_damage += 0.01 * masteryAxeLevel();
+			if (player.weapon.isMaceHammerType()) Mastery_bonus_damage += 0.01 * masteryMaceHammerLevel();
+			if (player.weapon.isDuelingType()) Mastery_bonus_damage += 0.01 * masteryDuelingSwordLevel();
+			if (player.weapon.isPolearmType()) Mastery_bonus_damage += 0.01 * masteryPolearmLevel();
+			if (player.weapon.isSpearType()) Mastery_bonus_damage += 0.01 * masterySpearLevel();
+			if (player.weapon.isDaggerType()) Mastery_bonus_damage += 0.01 * masteryDaggerLevel();
+			if (player.weapon.isWhipType()) Mastery_bonus_damage += 0.01 * masteryWhipLevel();
+			if (player.weapon.isExoticType() || player.weapon.isRibbonType() || player.weapon.isScytheType()) Mastery_bonus_damage += 0.01 * masteryExoticLevel();
+		}
 		if (player.weapon.isDualSmall()) Mastery_bonus_damage += 0.01 * dualWSLevel();
 		if (player.weapon.isDualMedium()) Mastery_bonus_damage += 0.01 * dualWNLevel();
 		if (player.weapon.isDualLarge()) Mastery_bonus_damage += 0.01 * dualWLLevel();
@@ -6530,7 +6590,7 @@ public class Combat extends BaseContent {
         critDamage += bonusCriticalDamageFromMissingHP();
         if ((player.weapon == weapons.WG_GAXE && monster.cor > 66) || (player.weapon == weapons.DE_GAXE && monster.cor < 33)) critDamage += 0.1;
         if (player.weapon == weapons.MACSPEA) critDamage += 0.25;
-        if (player.hasPerk(PerkLib.OrthodoxDuelist) && player.isDuelingTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) critDamage += 0.2;
+        if (player.hasPerk(PerkLib.OrthodoxDuelist) && player.weapon.isDuelingType() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) critDamage += 0.2;
 		if (player.hasStatusEffect(StatusEffects.AlterBindScroll4)) critDamage += 1;
 		if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) critDamage *= impaleMultiplier();
         if (player.hasPerk(PerkLib.SkilledFighterEx) && calculateCrit() > 100) {
@@ -6615,7 +6675,7 @@ public class Combat extends BaseContent {
         return damageMult;
     }
 
-    private function meleeMasteryGain(hit:int, crit:int):void{
+    private function meleeMasteryGain(hit:int, crit:int, offHand:Boolean = false):void{
         var baseMasteryXP:Number = 1;
         if (player.hasPerk(PerkLib.MeleeWeaponsMastery)) baseMasteryXP += 2;
         if (player.compatibileSwordImmortalWeapons() && player.hasPerk(PerkLib.HiddenJobSwordImmortal)) baseMasteryXP += 2;
@@ -6637,15 +6697,28 @@ public class Combat extends BaseContent {
 		if (player.hasMutation(IMutationsLib.HumanVersatilityIM) && player.perkv1(IMutationsLib.HumanVersatilityIM) == 3 && rand(5) == 0) meleeMasteryEXPgains *= 3;
 		if (player.hasMutation(IMutationsLib.HumanVersatilityIM) && player.perkv1(IMutationsLib.HumanVersatilityIM) == 4 && rand(5) < 2) meleeMasteryEXPgains *= 4;
         if (player.isGauntletWeapon()) gauntletXP(meleeMasteryEXPgains);
-        if (player.isSwordTypeWeapon()) swordXP(meleeMasteryEXPgains);
-        if (player.isAxeTypeWeapon()) axeXP(meleeMasteryEXPgains);
-        if (player.isMaceHammerTypeWeapon()) macehammerXP(meleeMasteryEXPgains);
-        if (player.isDuelingTypeWeapon()) duelingswordXP(meleeMasteryEXPgains);
-        if (player.isPolearmTypeWeapon()) polearmXP(meleeMasteryEXPgains);
-        if (player.isSpearTypeWeapon()) spearXP(meleeMasteryEXPgains);
-        if (player.isDaggerTypeWeapon()) daggerXP(meleeMasteryEXPgains);
-        if (player.isWhipTypeWeapon()) whipXP(meleeMasteryEXPgains);
-        if (player.isExoticTypeWeapon()) exoticXP(meleeMasteryEXPgains);
+		if (offHand) {
+			if (player.weaponOff.isSwordType()) swordXP(meleeMasteryEXPgains, true);
+			if (player.weaponOff.isAxeType()) axeXP(meleeMasteryEXPgains, true);
+			if (player.weaponOff.isMaceHammerType()) macehammerXP(meleeMasteryEXPgains, true);
+			if (player.weaponOff.isDuelingType()) duelingswordXP(meleeMasteryEXPgains, true);
+			if (player.weaponOff.isPolearmType()) polearmXP(meleeMasteryEXPgains, true);
+			if (player.weaponOff.isSpearType()) spearXP(meleeMasteryEXPgains, true);
+			if (player.weaponOff.isDaggerType()) daggerXP(meleeMasteryEXPgains, true);
+			if (player.weaponOff.isWhipType()) whipXP(meleeMasteryEXPgains, true);
+			if (player.weaponOff.isExoticType() || player.weaponOff.isRibbonType() || player.weaponOff.isScytheType()) exoticXP(meleeMasteryEXPgains, true);
+		}
+		else {
+			if (player.weapon.isSwordType()) swordXP(meleeMasteryEXPgains, false);
+			if (player.weapon.isAxeType()) axeXP(meleeMasteryEXPgains, false);
+			if (player.weapon.isMaceHammerType()) macehammerXP(meleeMasteryEXPgains, false);
+			if (player.weapon.isDuelingType()) duelingswordXP(meleeMasteryEXPgains, false);
+			if (player.weapon.isPolearmType()) polearmXP(meleeMasteryEXPgains, false);
+			if (player.weapon.isSpearType()) spearXP(meleeMasteryEXPgains, false);
+			if (player.weapon.isDaggerType()) daggerXP(meleeMasteryEXPgains, false);
+			if (player.weapon.isWhipType()) whipXP(meleeMasteryEXPgains, false);
+			if (player.weapon.isExoticType() || player.weapon.isRibbonType() || player.weapon.isScytheType()) exoticXP(meleeMasteryEXPgains, false);
+		}
         if (player.weapon.isDualSmall() || player.hasAetherTwinsTierS2()) dualWieldSmallXP(meleeMasteryEXPgains);
         if (player.weapon.isDualMedium()) dualWieldNormalXP(meleeMasteryEXPgains);
         if (player.weapon.isDualLarge()) dualWieldLargeXP(meleeMasteryEXPgains);
@@ -6695,11 +6768,12 @@ public class Combat extends BaseContent {
      * 7. repeat for multi-attack style
      * @param IsFeralCombat
      */
-    public function meleeDamageAcc(IsFeralCombat:Boolean = false):void {
-        //var timer:int = getTimer();
+    public function meleeDamageAcc(IsFeralCombat:Boolean = false, offHand:Boolean = false):void {
+        var howManyHits:Number = 0;
         var accMelee:Number = 0;
         var damage:Number = 0;
-        accMelee += (meleeAccuracy() / 2);
+        if (offHand) accMelee += (meleeAccuracy(true) / 2);
+		else accMelee += (meleeAccuracy() / 2);
         if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) accMelee -= flags[kFLAGS.ATTACKS_ACCURACY];
         if (player.weaponName == "Truestrike sword") accMelee = 100;
         //Determine if critical hit!
@@ -6710,18 +6784,19 @@ public class Combat extends BaseContent {
         var hitCounter:int = 0;
         if (player.weapon is Tidarion) meleeDamageNoLag = 0; //recalc damage for current mana.. okay, get it, multi-attackers-fuckers!
 
-
         var boolSwiftCast:Boolean = player.hasPerk(PerkLib.SwiftCasting) && flags[kFLAGS.ELEMENTAL_MELEE] > 0 && (player.isOneHandedWeapons() || player.weapon == weapons.ATWINSCY || (player.weapon.isSingleLarge() && player.hasPerk(PerkLib.GigantGrip)) || (player.weapon.isSingleMassive() && player.hasPerk(PerkLib.TitanGrip))) && player.isHavingFreeOffHand();
         var boolLifeLeech:Boolean = player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon();
         var boolFistingIs300Bucks:Boolean = (player.isFistOrFistWeapon() && (player.shield.isNothing || (player.shield == shields.AETHERS && AetherTwinsFollowers.AetherTwinsShape != "Human-tier Dagger and Shield" && AetherTwinsFollowers.AetherTwinsShape != "Human-tier Dual Daggers")) || player.isFeralCombat());
 
-        for(var i:int = 1; i <= flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]; i++){
+		if (offHand) howManyHits = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_OFF_HAND];
+		else howManyHits = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND];
+        for(var i:int = 1; i <= howManyHits; i++){
             damage = 0;
             if (rand(100) < accMelee) { // Attack hits... do stuff
                 //  get the raw damage value here
                 if (meleeDamageNoLag != 0) damage += meleeDamageNoLag;
                 else {
-                    var temp:Number = meleeDamageNoLagSingle(IsFeralCombat);
+                    var temp:Number = meleeDamageNoLagSingle(IsFeralCombat, offHand);
                     meleeDamageNoLag += temp;
                     damage += temp;
                 }
@@ -7131,7 +7206,8 @@ public class Combat extends BaseContent {
                 }
                 outputText(" ");
                 outputText("\n\n"); //Move to next attack line
-                if (MDOCount == maxCurrentAttacks()) outputText("\n");
+                if (MDOCount == maxCurrentAttacksMain() && !offHand) outputText("\n");
+                if (MDOCount == maxCurrentAttacksOff() && offHand) outputText("\n");
                 checkAchievementDamage(damage);
                 WrathGenerationPerHit1(5);
                 WrathWeaponsProc();
@@ -7251,27 +7327,38 @@ public class Combat extends BaseContent {
             }
             if (monster.HP <= monster.minHP()) {
                 doNext(endHpVictory);
-                meleeMasteryGain(hitCounter, critCounter);
+                meleeMasteryGain(hitCounter, critCounter, offHand);
                 return;
             }
             else if (monster.lust >= monster.maxOverLust()) {
                 doNext(endLustVictory);
-                meleeMasteryGain(hitCounter, critCounter);
+                meleeMasteryGain(hitCounter, critCounter, offHand);
                 return;
             }
-			if (i > 1 && flags[kFLAGS.MULTIATTACK_STYLE] > 0) {
+			if (i > 1 && flags[kFLAGS.MULTIATTACK_STYLE_MAIN] > 0) {
 				if (player.weapon.isLarge() || player.weapon.isMassive()) {
 					if (player.wrath - 5 >= 0) player.wrath -= 5;
-					else i = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] + 1;
+					else i = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] + 1;
 				}
 				else {
-					if (player.fatigue + 5 > player.maxOverFatigue()) i = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] + 1;
+					if (player.fatigue + 5 > player.maxOverFatigue()) i = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_MAIN_HAND] + 1;
+					else fatigue(5);
+				}
+			}
+			if (i > 1 && flags[kFLAGS.MULTIATTACK_STYLE_OFF] > 0) {
+				if (player.weapon.isLarge() || player.weapon.isMassive()) {
+					if (player.wrath - 5 >= 0) player.wrath -= 5;
+					else i = flags[kFLAGS.MULTIATTACK_STYLE_OFF] + 1;
+				}
+				else {
+					if (player.fatigue + 5 > player.maxOverFatigue()) i = flags[kFLAGS.MULTIATTACK_STYLE_OFF] + 1;
 					else fatigue(5);
 				}
 			}
         }
-        if (player.weapon is Tidarion) (player.weapon as Tidarion).afterStrike();
-        meleeMasteryGain(hitCounter, critCounter);
+        if (player.weapon is Tidarion && !offHand) (player.weapon as Tidarion).afterStrike();
+        if (player.weaponOff is Tidarion && offHand) (player.weaponOff as Tidarion).afterStrike();
+        meleeMasteryGain(hitCounter, critCounter, offHand);
         if (player.hasStatusEffect(StatusEffects.FirstAttack)) {
             attack(false);
             return;
@@ -8618,11 +8705,11 @@ public class Combat extends BaseContent {
             else parryChance2 += 10;
             if (player.hasPerk(PerkLib.BladeBarrier) && (player.weapon.isDual() && !player.weapon.isSmall())) parryChance2 += 25;
         }
-		if (player.hasPerk(PerkLib.OrthodoxDuelist) && player.isDuelingTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) {
+		if (player.hasPerk(PerkLib.OrthodoxDuelist) && player.weapon.isDuelingType() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) {
 			if (player.spe <= 100) parryChance2 += player.spe / 10;
             else parryChance2 += 10;
 		}
-		if (player.hasPerk(PerkLib.KnightlySword) && player.isSwordTypeWeapon() && player.isShieldsForShieldBash()) parryChance2 += 15;
+		if (player.hasPerk(PerkLib.KnightlySword) && player.weapon.isSwordType() && player.isShieldsForShieldBash()) parryChance2 += 15;
 		if (player.weapon.isSingleMassive()) parryChance2 += 5;
         if (player.weaponName == "Undefeated King's Destroyer") parryChance2 += 15;
         if (player.hasPerk(PerkLib.DexterousSwordsmanship)) parryChance2 += 10;
@@ -8647,8 +8734,8 @@ public class Combat extends BaseContent {
             if (player.inte > 300) critPChance += 25;
         }
         if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critPChance += 5;
-        if (player.hasPerk(PerkLib.Blademaster) && player.isNotHavingShieldCuzPerksNotWorkingOtherwise() && (player.isSwordTypeWeapon() || player.isDuelingTypeWeapon() || player.isAxeTypeWeapon() || player.isDaggerTypeWeapon() || player.isScytheTypeWeapon())) critPChance += 5;
-        if (player.hasPerk(PerkLib.GrandBlademaster) && player.isNotHavingShieldCuzPerksNotWorkingOtherwise() && (player.isSwordTypeWeapon() || player.isDuelingTypeWeapon() || player.isAxeTypeWeapon() || player.isDaggerTypeWeapon() || player.isScytheTypeWeapon())) critPChance += 15;
+        if (player.hasPerk(PerkLib.Blademaster) && player.isNotHavingShieldCuzPerksNotWorkingOtherwise() && (player.weapon.isSwordType() || player.weapon.isDuelingType() || player.weapon.isAxeType() || player.weapon.isDaggerType() || player.weapon.isScytheType())) critPChance += 5;
+        if (player.hasPerk(PerkLib.GrandBlademaster) && player.isNotHavingShieldCuzPerksNotWorkingOtherwise() && (player.weapon.isSwordType() || player.weapon.isDuelingType() || player.weapon.isAxeType() || player.weapon.isDaggerType() || player.weapon.isScytheType())) critPChance += 15;
         if (player.armor == armors.R_CHANG || player.armor == armors.R_QIPAO || player.armor == armors.G_CHANG || player.armor == armors.G_QIPAO || player.armor == armors.B_CHANG || player.armor == armors.B_QIPAO || player.armor == armors.P_CHANG || player.armor == armors.P_QIPAO) critPChance += 5;
         if (player.headJewelry == headjewelries.SCANGOG) critPChance += 5;
         if (player.headJewelry == headjewelries.SATGOG) critPChance += 10;
@@ -13552,31 +13639,31 @@ public static const bonusAttackMasteries:Array = [
     MASTERY_FIREARMS
 ];
 
-public function feralCombatXP(XP:Number = 0):void       {player.gainCombatXP(MASTERY_FERAL, XP * weaponmasteryXPMulti());}
-public function gauntletXP(XP:Number = 0):void          {player.gainCombatXP(MASTERY_GAUNTLET, XP * weaponmasteryXPMulti());}
-public function daggerXP(XP:Number = 0):void            {player.gainCombatXP(MASTERY_DAGGER, XP * weaponmasteryXPMulti());}
-public function swordXP(XP:Number = 0):void             {player.gainCombatXP(MASTERY_SWORD, XP * weaponmasteryXPMulti());}
-public function axeXP(XP:Number = 0):void               {player.gainCombatXP(MASTERY_AXE, XP * weaponmasteryXPMulti());}
-public function macehammerXP(XP:Number = 0):void        {player.gainCombatXP(MASTERY_MACEHAMMER, XP * weaponmasteryXPMulti());}
-public function duelingswordXP(XP:Number = 0):void      {player.gainCombatXP(MASTERY_DUELINGSWORD, XP * weaponmasteryXPMulti());}
-public function polearmXP(XP:Number = 0):void           {player.gainCombatXP(MASTERY_POLEARM, XP * weaponmasteryXPMulti());}
-public function spearXP(XP:Number = 0):void             {player.gainCombatXP(MASTERY_SPEAR, XP * weaponmasteryXPMulti());}
-public function whipXP(XP:Number = 0):void              {player.gainCombatXP(MASTERY_WHIP, XP * weaponmasteryXPMulti());}
-public function exoticXP(XP:Number = 0):void            {player.gainCombatXP(MASTERY_EXOTIC, XP * weaponmasteryXPMulti());}
-public function archeryXP(XP:Number = 0):void           {player.gainCombatXP(MASTERY_ARCHERY, XP * weaponmasteryXPMulti());}
-public function throwingXP(XP:Number = 0):void          {player.gainCombatXP(MASTERY_THROWING, XP * weaponmasteryXPMulti());}
-public function firearmsXP(XP:Number = 0):void          {player.gainCombatXP(MASTERY_FIREARMS, XP * weaponmasteryXPMulti());}
-public function dualWieldSmallXP(XP:Number = 0):void    {player.gainCombatXP(MASTERY_DUAL_SMALL, XP * weaponmasteryXPMulti());}
-public function dualWieldNormalXP(XP:Number = 0):void   {player.gainCombatXP(MASTERY_DUAL_NORMAL, XP * weaponmasteryXPMulti());}
-public function dualWieldLargeXP(XP:Number = 0):void    {player.gainCombatXP(MASTERY_DUAL_LARGE, XP * weaponmasteryXPMulti());}
-public function dualWieldMassiveXP(XP:Number = 0):void  {player.gainCombatXP(MASTERY_DUAL_MASSIVE, XP * weaponmasteryXPMulti());}
-public function dualWieldFirearmsXP(XP:Number = 0):void {player.gainCombatXP(MASTERY_DUAL_FIREARMS, XP * weaponmasteryXPMulti());}
-public function weaponSmallMastery(XP:Number = 0):void  {player.gainCombatXP(MASTERY_SMALL, XP * weaponmasteryXPMulti());}
-public function weaponNormalMastery(XP:Number = 0):void {player.gainCombatXP(MASTERY_NORMAL, XP * weaponmasteryXPMulti());}
-public function weaponLargeMastery(XP:Number = 0):void  {player.gainCombatXP(MASTERY_LARGE, XP * weaponmasteryXPMulti());}
-public function weaponMassiveMastery(XP:Number = 0):void  {player.gainCombatXP(MASTERY_MASSIVE, XP * weaponmasteryXPMulti());}
-//public function weaponRangeMastery(XP:Number = 0):void  {player.gainCombatXP(MASTERY_RANGED, XP * weaponmasteryXPMulti());}
-public function unarmedCombatXP(XP:Number = 0):void  	{player.gainCombatXP(MASTERY_UNARMED, XP * weaponmasteryXPMulti());}
+public function feralCombatXP(XP:Number):void					{player.gainCombatXP(MASTERY_FERAL, XP * weaponmasteryXPMulti());}
+public function gauntletXP(XP:Number):void						{player.gainCombatXP(MASTERY_GAUNTLET, XP * weaponmasteryXPMulti());}
+public function daggerXP(XP:Number, offHand:Boolean):void		{player.gainCombatXP(MASTERY_DAGGER, XP * weaponmasteryXPMulti(), offHand);}
+public function swordXP(XP:Number, offHand:Boolean):void		{player.gainCombatXP(MASTERY_SWORD, XP * weaponmasteryXPMulti(), offHand);}
+public function axeXP(XP:Number, offHand:Boolean):void			{player.gainCombatXP(MASTERY_AXE, XP * weaponmasteryXPMulti(), offHand);}
+public function macehammerXP(XP:Number, offHand:Boolean):void	{player.gainCombatXP(MASTERY_MACEHAMMER, XP * weaponmasteryXPMulti(), offHand);}
+public function duelingswordXP(XP:Number, offHand:Boolean):void	{player.gainCombatXP(MASTERY_DUELINGSWORD, XP * weaponmasteryXPMulti(), offHand);}
+public function polearmXP(XP:Number, offHand:Boolean):void		{player.gainCombatXP(MASTERY_POLEARM, XP * weaponmasteryXPMulti(), offHand);}
+public function spearXP(XP:Number, offHand:Boolean):void		{player.gainCombatXP(MASTERY_SPEAR, XP * weaponmasteryXPMulti(), offHand);}
+public function whipXP(XP:Number, offHand:Boolean):void			{player.gainCombatXP(MASTERY_WHIP, XP * weaponmasteryXPMulti(), offHand);}
+public function exoticXP(XP:Number, offHand:Boolean):void		{player.gainCombatXP(MASTERY_EXOTIC, XP * weaponmasteryXPMulti(), offHand);}
+public function archeryXP(XP:Number):void						{player.gainCombatXP(MASTERY_ARCHERY, XP * weaponmasteryXPMulti());}
+public function throwingXP(XP:Number):void						{player.gainCombatXP(MASTERY_THROWING, XP * weaponmasteryXPMulti());}
+public function firearmsXP(XP:Number):void						{player.gainCombatXP(MASTERY_FIREARMS, XP * weaponmasteryXPMulti());}
+public function dualWieldSmallXP(XP:Number):void				{player.gainCombatXP(MASTERY_DUAL_SMALL, XP * weaponmasteryXPMulti());}
+public function dualWieldNormalXP(XP:Number):void				{player.gainCombatXP(MASTERY_DUAL_NORMAL, XP * weaponmasteryXPMulti());}
+public function dualWieldLargeXP(XP:Number):void				{player.gainCombatXP(MASTERY_DUAL_LARGE, XP * weaponmasteryXPMulti());}
+public function dualWieldMassiveXP(XP:Number):void				{player.gainCombatXP(MASTERY_DUAL_MASSIVE, XP * weaponmasteryXPMulti());}
+public function dualWieldFirearmsXP(XP:Number):void				{player.gainCombatXP(MASTERY_DUAL_FIREARMS, XP * weaponmasteryXPMulti());}
+public function weaponSmallMastery(XP:Number):void				{player.gainCombatXP(MASTERY_SMALL, XP * weaponmasteryXPMulti());}
+public function weaponNormalMastery(XP:Number):void				{player.gainCombatXP(MASTERY_NORMAL, XP * weaponmasteryXPMulti());}
+public function weaponLargeMastery(XP:Number):void				{player.gainCombatXP(MASTERY_LARGE, XP * weaponmasteryXPMulti());}
+public function weaponMassiveMastery(XP:Number = 0):void		{player.gainCombatXP(MASTERY_MASSIVE, XP * weaponmasteryXPMulti());}
+//public function weaponRangeMastery(XP:Number = 0):void		{player.gainCombatXP(MASTERY_RANGED, XP * weaponmasteryXPMulti());}
+public function unarmedCombatXP(XP:Number):void					{player.gainCombatXP(MASTERY_UNARMED, XP * weaponmasteryXPMulti());}
 
 //VICTORY OR DEATH?
 // Called after the monster's action. Increments round counter. Setups doNext to win/loss/combat menu
@@ -13813,7 +13900,7 @@ public function OrcaSmash():void {
 
 public function OrcaImpale():void {
     clearOutput();
-    if (player.isSpearTypeWeapon() || player.isSwordTypeWeapon() || player.isDuelingTypeWeapon()) {
+    if (!player.weapon.isSpearType() && !player.weaponOff.isSpearType() && !player.weapon.isSwordType() && !player.weaponOff.isSwordType() && !player.weapon.isDuelingType() && !player.weaponOff.isDuelingType()) {
         outputText("You cannot impale your foe without a piercing weapon.");
         addButton(0, "Next", combatMenu, false);
     } else {
@@ -13826,7 +13913,8 @@ public function OrcaImpale():void {
         if (player.level >= 24) SAMulti += 1;
         if (player.level >= 30) SAMulti += 1;
         if (player.level >= 36) SAMulti += 1;
-        damage += meleeDamageNoLagSingle();
+		if (!player.weapon.isSpearType() && !player.weapon.isSwordType() && !player.weapon.isDuelingType()) damage += meleeDamageNoLagSingle(false, true);
+		else damage += meleeDamageNoLagSingle();
         if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
         if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) >= 1) {
             damage *= 1.50;

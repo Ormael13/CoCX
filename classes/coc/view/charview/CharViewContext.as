@@ -87,13 +87,13 @@ public class CharViewContext extends ExecContext {
 					showDickDrippies: player.lust >= 0.8 * player.maxLust() && (player.lowerGarment.isNothing || !showPanty()) && (player.armor.isNothing || !showLegClothing()),
 
 					//Detect Weapon Skins
-					PlayerHasAWeapon: player.isDaggerTypeWeapon() || player.isWandTypeWeapon() || player.isStaffTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isMaceHammerTypeWeapon() || player.isSpearTypeWeapon() || player.isDuelingTypeWeapon(),
+					PlayerHasAWeapon: player.weapon.isDaggerType() || player.weapon.isWandType() || player.weapon.isStaffType() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isMaceHammerTypeWeapon() || player.isSpearTypeWeapon() || player.isDuelingTypeWeapon(),
 
-					PlayerHasAStaff: player.isStaffTypeWeapon(),
+					PlayerHasAStaff: player.weapon.isStaffType(),
 					PlayerHasAStaffHoly: player.weapon == game.weapons.U_STAFF,
 					PlayerHasAStaffUnholy: player.weapon == game.weapons.N_STAFF,
 
-					PlayerHasAWand: player.isWandTypeWeapon(),
+					PlayerHasAWand: player.weapon.isWandType(),
 					PlayerHasAWandHoly: player.weapon == game.weapons.OCCULUS,
 					PlayerHasAWandUnholy: player.weapon == game.weapons.ECLIPSE,
 
@@ -140,7 +140,7 @@ public class CharViewContext extends ExecContext {
 					PlayerHasRapierHoly:player.weapon == game.weapons.Q_GUARD,
 					PlayerHasRapierUnholy:player.weapon == game.weapons.B_WIDOW,
 
-					PlayerHasDagger: player.isDaggerTypeWeapon() && player.weapon != game.weapons.AETHERD && player.shield != game.shields.AETHERS,
+					PlayerHasDagger: player.weapon.isDaggerType() && player.weapon != game.weapons.AETHERD && player.shield != game.shields.AETHERS,
 					//PlayerHasDaggerHoly:player.weapon == game.weapons.Q_GUARD,
 					//PlayerHasDaggerUnholy:player.weapon == game.weapons.B_WIDOW,
 

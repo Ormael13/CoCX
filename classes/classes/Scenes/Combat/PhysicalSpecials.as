@@ -77,7 +77,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd = buttons.add("SneakAttack (M)", sneakAttack).hint("Strike the vitals of a stunned, blinded or distracted opponent for heavy damage. (Melee variant)");
 					if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
-				if (!player.isStaffTypeWeapon()) {
+				if (!player.weapon.isStaffType() && !player.weaponOff.isStaffType()) {
 					bd = buttons.add("Charge", charging).hint("Charge at your opponent for massive damage. Deals more damage if using a spear or lance. Gains extra damage from the usage of a horn or a pair of horns.");
 					if (player.statStore.hasBuff("ScarletSpiritCharge")) {
 						if (player.HP <= (player.minHP() + (chargingcoooooost() * 2))) bd.disable("Your hp is too low to perform Charge.");
