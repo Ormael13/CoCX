@@ -47,7 +47,7 @@ public class BlizzardSpell extends AbstractWhiteSpell {
 		var blizzardmagnitude:Number = 0;
 		if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) blizzardmagnitude += 2 + player.inte / 10;
 		else blizzardmagnitude += 1 + player.inte / 25;
-		if (player.hasPerk(PerkLib.DefensiveStaffChanneling) && (player.weapon.isStaffType() || player.weaponOff.isStaffType() || player.weapon.isWandType() || player.weaponOff.isWandType())) blizzardmagnitude *= 1.1;
+		if (player.hasPerk(PerkLib.DefensiveStaffChanneling) && (player.weapon.isStaffType() || player.weaponOff.isStaffType() || player.weapon.isWandType() || player.weaponOff.isWandType())) blizzardmagnitude *= 1.2;
 		player.createStatusEffect(StatusEffects.Blizzard, Math.round(blizzardmagnitude), 0, 0, 0);
 	}
 }

@@ -315,9 +315,9 @@ public class Changelog extends BaseContent
 			outputText("-Fixing Lusting Warrior buff not corelated to entering/leaving heat/rut state.\n");
 			outputText("-Control freak effect activating during straddle too. Updated perk desc.\n");
 			outputText("-Fixed som text issues in hellcat tf scene.\n");
-			outputText("-Defensive Staff Channeling perk would work with PC using wand weapons too.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Defensive Staff Channeling perk would work with PC using wand weapons too and when extending duration would give 2x more duration extension.\n");
+			outputText("-Titanic Strength and Condensed Power/Small caster effects activate 2ft from max/min height instead of 1 ft.\n");
+			outputText("-Autosave option will no longer require PC to go to sleep (insert your favourite joke about: sleep been for a ...) and having at least saved once manualy. Instead will still need to save once manualy but then will always trigger with all other once a day events (which all happens between 11pm and 12 pm).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

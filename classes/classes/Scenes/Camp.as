@@ -3975,11 +3975,6 @@ public class Camp extends NPCAwareContent{
 			if (flags[kFLAGS.BENOIT_CLOCK_ALARM] > 0) {
 				CoC.instance.timeQ += (flags[kFLAGS.BENOIT_CLOCK_ALARM] - 6);
 			}
-			//Autosave stuff
-			if (player.slotName != "VOID" && player.autoSave && mainView.getButtonText(0) != "Game Over") {
-				trace("Autosaving to slot: " + player.slotName);
-				CoC.instance.saves.saveGameToSharedObject(player.slotName);
-			}
 			//Clear screen
 			if (clrScreen) clearOutput();
 			/******************************************************************/

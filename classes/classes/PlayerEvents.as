@@ -1015,6 +1015,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			if (CoC.instance.model.time.hours > 23) { //Once per day
+				//Autosave stuff
+				if (player.slotName != "VOID" && player.autoSave && mainView.getButtonText(0) != "Game Over") {
+					trace("Autosaving to slot: " + player.slotName);
+					CoC.instance.saves.saveGameToSharedObject(player.slotName);
+				}
 				if (player.statusEffectv3(StatusEffects.MetRathazul) > 0 && !player.hasStatusEffect(StatusEffects.CampRathazul)) player.changeStatusValue(StatusEffects.MetRathazul,3,-1);
 				flags[kFLAGS.BROOKE_MET_TODAY] = 0;
 				if (CoC.instance.model.time.days % 2 == 0 && flags[kFLAGS.KAIJU_BAD_END_COUNTER] > 0) {
