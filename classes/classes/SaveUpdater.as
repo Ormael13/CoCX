@@ -2377,19 +2377,19 @@ public class SaveUpdater extends NPCAwareContent {
 				// mountainsMid - handled by postLoadSaveObject()
 				SceneLib.exploration.counters.hills               = flags[kFLAGS.DISCOVERED_HILLS];
 				SceneLib.exploration.counters.mountainsLow        = flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN];
-				SceneLib.exploration.counters.highMountains       = flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN];
-				SceneLib.exploration.counters.plains              = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0131];
-				SceneLib.exploration.counters.swamp               = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0272];
-				SceneLib.exploration.counters.bog                 = flags[kFLAGS.BOG_EXPLORED];
+				SceneLib.exploration.counters.highMountains       = flags[kFLAGS.TAMED_01_NAME];
+				SceneLib.exploration.counters.plains              = flags[kFLAGS.TAMED_02_NAME];
+				SceneLib.exploration.counters.swamp               = flags[kFLAGS.TAMED_03_NAME];
+				SceneLib.exploration.counters.bog                 = flags[kFLAGS.TAMED_05_NAME];
 				SceneLib.exploration.counters.blightRidge         = flags[kFLAGS.TAMANI_BAD_ENDED];
-				SceneLib.exploration.counters.defiledRavine       = flags[kFLAGS.DISCOVERED_DEFILED_RAVINE];
-				SceneLib.exploration.counters.beach               = flags[kFLAGS.DISCOVERED_BEACH];
-				SceneLib.exploration.counters.ocean               = flags[kFLAGS.DISCOVERED_OCEAN];
+				SceneLib.exploration.counters.defiledRavine       = flags[kFLAGS.TAMED_08_NAME];
+				SceneLib.exploration.counters.beach               = flags[kFLAGS.TAMED_08_NAME];
+				SceneLib.exploration.counters.ocean               = flags[kFLAGS.TAMED_10_NAME];
 				SceneLib.exploration.counters.caves               = flags[kFLAGS.DISCOVERED_CAVES];
 				SceneLib.exploration.counters.tundra              = flags[kFLAGS.DISCOVERED_TUNDRA];
-				SceneLib.exploration.counters.glacialRiftOuter    = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2059];
+				SceneLib.exploration.counters.glacialRiftOuter    = flags[kFLAGS.TAMED_06_NAME];
 				SceneLib.exploration.counters.ashlands            = flags[kFLAGS.DISCOVERED_ASHLANDS];
-				SceneLib.exploration.counters.volcanicCragOuter   = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2060];
+				SceneLib.exploration.counters.volcanicCragOuter   = flags[kFLAGS.TAMED_07_NAME];
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.058;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.059) {
@@ -2446,10 +2446,10 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.070;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.080) {
-				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2059] != 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2059] = 0;
-				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2060] != 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2060] = 0;
-				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0131] != 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0131] = 0;
-				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0272] != 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0272] = 0;
+				if (flags[kFLAGS.TAMED_06_NAME] != 0) flags[kFLAGS.TAMED_06_NAME] = 0;
+				if (flags[kFLAGS.TAMED_07_NAME] != 0) flags[kFLAGS.TAMED_07_NAME] = 0;
+				if (flags[kFLAGS.TAMED_02_NAME] != 0) flags[kFLAGS.TAMED_02_NAME] = 0;
+				if (flags[kFLAGS.TAMED_03_NAME] != 0) flags[kFLAGS.TAMED_03_NAME] = 0;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.080;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.09) {

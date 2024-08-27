@@ -17663,10 +17663,10 @@ private function ghostRealStrengthCompanion():Number {
 
 private function ghostRealStrengthTamedMonster(no:Number):Number {
 	var ghostRealStrTamedMonster:Number = 0;
-	if (no == 1) ghostRealStrTamedMonster += player.statusEffectv2(StatusEffects.TamedMonster01);
-	if (no == 2) ghostRealStrTamedMonster += player.statusEffectv2(StatusEffects.TamedMonster02);
-	if (no == 3) ghostRealStrTamedMonster += player.statusEffectv2(StatusEffects.TamedMonster03);
-	if (no == 4) ghostRealStrTamedMonster += player.statusEffectv2(StatusEffects.TamedMonster04);
+	if (no == 1) ghostRealStrTamedMonster += player.statusEffectv1(StatusEffects.TamedMonster01a);
+	if (no == 2) ghostRealStrTamedMonster += player.statusEffectv1(StatusEffects.TamedMonster02a);
+	if (no == 3) ghostRealStrTamedMonster += player.statusEffectv1(StatusEffects.TamedMonster03a);
+	if (no == 4) ghostRealStrTamedMonster += player.statusEffectv1(StatusEffects.TamedMonster04a);
 	return ghostRealStrTamedMonster;
 }
 

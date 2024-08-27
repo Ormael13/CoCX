@@ -5929,7 +5929,11 @@ use namespace CoC;
 				statStore.replaceBuffObject({'str': strTS}, 'Titanic Strength', { text: 'Titanic Strength' });
 			}
 			if (effectiveTallness<108 && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
-			if (effectiveTallness<=72 && hasPerk(PerkLib.CondensedPower)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round((132 - basetallness)/2))}, 'Condensed Power', { text: 'Condensed Power' });
+			if (effectiveTallness <= 72 && hasPerk(PerkLib.CondensedPower)) {
+				if (statStore.hasBuff('Condensed Power')) statStore.removeBuffs('Condensed Power');
+				var strCP:Number = Math.round(0.01 * str * (132 - basetallness));
+				statStore.replaceBuffObject({'str':strCP}, 'Condensed Power', { text: 'Condensed Power' });
+			}
 			if (effectiveTallness<=72 && hasPerk(PerkLib.SmallCaster)) statStore.replaceBuffObject({'spellpower':(0.01 * (132 - basetallness))}, 'Small Caster', { text: 'Small Caster' });
 			if ((effectiveTallness>72 || !hasPerk(PerkLib.CondensedPower)) && statStore.hasBuff('Condensed Power')) statStore.removeBuffs('Condensed Power');
 			if ((effectiveTallness>72 || !hasPerk(PerkLib.SmallCaster)) && statStore.hasBuff('Small Caster')) statStore.removeBuffs('Small Caster');

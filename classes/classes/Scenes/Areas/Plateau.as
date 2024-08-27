@@ -37,7 +37,7 @@ use namespace CoC;
 
 		public function explorePlateau():void {
 			clearOutput();
-			//flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0131]++;
+			//flags[kFLAGS.TAMED_02_NAME]++;
 			doNext(camp.returnToCampUseOneHour);
 			plateauEncounter.execEncounter();
 			flushOutputTextToGUI();

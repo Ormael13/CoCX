@@ -531,8 +531,8 @@ public class PerkLib
 				"Now you can assemble 4 horsema... monsters team.",
 				"You've chosen the 'Fourth Tamer of the Apocalypse' perk. Now you can assemble 4 horsema... monsters team.");
 		public static const WorkingTogether:PerkType = mk("Working Together", "Working Together",
-				"Cooperating your tamed monsters would empower the one attacking. (+1x to dmg multi of attacking monster per tamed monster after 1st)",
-				"You've chosen the 'Working Together' perk. Cooperating your tamed monsters would empower the one attacking. (+1x to dmg multi of attacking monster per tamed monster after 1st)");
+				"Cooperating between all your tamed monsters would empower the one attacking. (+1x to dmg multi of attacking monster per tamed monster after 1st)",
+				"You've chosen the 'Working Together' perk. Cooperating between all your tamed monsters would empower the one attacking. (+1x to dmg multi of attacking monster per tamed monster after 1st)");
 		public static const SixthSense:PerkType = mk("Sixth Sense", "Sixth Sense",
 				"You are not affected by blind and other confusing effects. Increase melee/range accuracy by 10%.",
 				"You've chosen the 'Sixth Sense' perk. You are not affected by blind and other confusing effects. Increase melee/range accuracy by 10%.");
@@ -1232,8 +1232,11 @@ public class PerkLib
 				"You got promoted to a doctor, allowing you to cure a wider variety of ailments. This knowledge allows you to heal yourself better, increasing health regen.",
 				"You've chosen the 'Doctor' perk, increasing HP gains by 20%.");
 		public static const DualWield:PerkType = mk("Dual Wield", "Dual Wield",
-				"Allows you to wield two weapons.",
-				"You've chosen the 'Dual Wield' perk, training the skill of using two weapons.");
+				"Allows you to wield two weapons. One in main hand and one in off hand.",
+				"You've chosen the 'Dual Wield' perk, training the skill of using two weapons. One in main hand and one in off hand.");
+		public static const QuadWield:PerkType = mk("Quad Wield", "Quad Wield",
+				"Allows you to wield four weapons.",
+				"You've chosen the 'Dual Wield' perk, training the skill of using four weapons.");
 		public static const DualWieldFirearms:PerkType = mk("Dual Wield (Firearms)", "Dual Wield (Firearms)",
 				"Allows you to wield two firearms (non 2H ones) more effectively. (damage and accuracy penalties decreased by 20% and 10%)",
 				"You've chosen the 'Dual Wield (Firearms)' perk, training the skill of using two firearms (non 2H ones). (damage and accuracy penalties decreased by 20% and 10%)");
@@ -3895,7 +3898,7 @@ public class PerkLib
 		public static const ColdMastery:PerkType = mk("Cold Mastery", "Cold Mastery",
 				"You now have complete control over the ice element adding your own inner power to all cold based attacks.");
 		public static const CondensedPower:PerkType = mk("Condensed Power", "Condensed Power",
-				"While smaller than 6ft, add half of your inverted size modifier to your strength score.");
+				"While smaller than 6ft, gain a percentage bonus of your total strength score based on how small you are.");
 		public static const CorruptedKitsune:PerkType = mk("Corrupted Kitsune", "Corrupted Kitsune",
 				"The mystical energy of the kitsunes surges through you, filling you with phenomenal cosmic power!  Your boundless magic allows you to recover quickly after casting spells, but your method of attaining it has corrupted the transformation, preventing you from achieving true enlightenment.",null,true);
 		public static const CorruptedNinetails:PerkType = mk("Corrupted Nine-tails", "Corrupted Nine-tails",
