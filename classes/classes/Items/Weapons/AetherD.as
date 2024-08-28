@@ -24,7 +24,7 @@ import classes.Scenes.NPCs.AetherTwinsFollowers;
 			return SLOTS;
 		}
 		
-		override public function isDual():Boolean {
+		override public function isDualWielded():Boolean {
 			if (AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dagger and Shield") return false;
 			else return true;
 		}

@@ -310,7 +310,7 @@ public class Changelog extends BaseContent
 			outputText("-Fixed Benoit not feminizing and Possess not resetting crab grapple (Svalkash)\n");
 			outputText("-New event perk: Dracoforce. Gained by having 30+ in any more then half dragon race score. Effects: Increase your total Strength and Toughness by 50%. Would add +1 to race score for those races.\n");
 			outputText("-New tier for frostwyrm race score bonuses - Jormungandr (32+ pts): +230 str multi, +180 tou multi, +90 spe multi, -110 int multi, +90 lib multi, +150% max hp multi, +4 armor/m.res\n");
-			outputText("-Hidden equipment slot added (this text line will self-destruct in 5 sec)\n");
+			outputText("-Off hand Equipment slot added. It's mutal exclusive with shield slot and can't have item in both offhand and shield slots. Dual Wield perk desc changed to account for adding this slot.\n");
 			outputText("-Dungeon enemies have their general levels and stats adjusted/increased. Dungeons adjusted (new lvl range of enemies): River Dungeon (floor 1-4) (only stats adjustments), Desert Cave (14-24)\n");
 			outputText("-Fixing Lusting Warrior buff not corelated to entering/leaving heat/rut state.\n");
 			outputText("-Control freak effect activating during straddle too. Updated perk desc.\n");
@@ -335,8 +335,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Lord Shadeogorath) (Furrin Gok) (khovel) (Chibizs)
-			outputText("-\n");// (Svalkash) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Edward Darksong)
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New tier 4 wisdom lvl-up perk: ???. Req. Fourth Tamer of the Apocalypse perk and 125+ wisdom. Effect: 5th slot
 			outputText("-\n");//New tier ? wisdom lvl-up perk: Apes Together Strong. Req. ??? perk and ???+ wisdom. Effect: allow exchange single monsters variants > group monsters variants
@@ -348,8 +348,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Lord Shadeogorath) (Furrin Gok) (khovel) (Chibizs)
+			outputText("-\n");// (Svalkash) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Edward Darksong)
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

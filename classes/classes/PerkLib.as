@@ -5225,7 +5225,7 @@ public class PerkLib
             GigantGripSu.requireLevel(30)
                     .requireStr(140)
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.playerHasFourArms();
+                        return player.hasFourArms();
                     }, "Four arms")
                     .requirePerk(GigantGripEx);
             HalfStepToSuperiorTranquilness.requireStr(180)

@@ -182,7 +182,7 @@ public class CharViewContext extends ExecContext {
 					PlayerHasLactoBlaster:player.weaponRange == game.weaponsrange.LBLASTR,
 
 					PlayerHasADualWeapon: player.isDualWield(),
-					PlayerHasADualMeleeWeapon: player.isDualWieldMelee(),
+					PlayerHasADualMeleeWeapon: player.weapon.isDualWielded(),
 					PlayerHasADualRangedWeapon: player.isDualWieldRanged(),
 
 					WeaponDisplay: game.flags[kFLAGS.WEAPON_DISPLAY_FLAG],

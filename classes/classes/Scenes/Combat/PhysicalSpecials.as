@@ -996,7 +996,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else damage *= 1.75 + buffMultiplier;
 		}
 		combat.checkForElementalEnchantmentAndDoDamage(damage);
-		if (player.hasPerk(PerkLib.TwinThunder) && player.isDualWieldMelee()) combat.checkForElementalEnchantmentAndDoDamage(damage);
+		if (player.hasPerk(PerkLib.TwinThunder) && player.weapon.isDualWielded()) combat.checkForElementalEnchantmentAndDoDamage(damage);
 		outputText(" damage. ");
 		if (crit) {
 			outputText("<b>Critical! </b>");

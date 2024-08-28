@@ -665,6 +665,22 @@ public class SaveUpdater extends NPCAwareContent {
 		player.setHeadJewelry(headjewelries.JIANGCT, false, true);
 		player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2,'lib.mult':0.2,'sens':80}, 'Jiangshi Curse Tag', { text: 'Jiangshi Curse Tag' });
 	}
+	
+	public function toEquipIsToFirstDeequip():void {
+		if (!player.weapon.isNothing && flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] != 2) {
+			outputText("\n\n");
+			inventory.takeItem(player.unequipWeapon(false,true), toEquipIsToFirstDeequip);
+		}
+		if (!player.weaponOff.isNothing) {
+			outputText("\n\n");
+			inventory.takeItem(player.unequipWeaponOff(false,true), toEquipIsToFirstDeequip);
+		}
+		if (!player.shield.isNothing && flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] != 2) {
+			outputText("\n\n");
+			inventory.takeItem(player.unequipShield(false,true), toEquipIsToFirstDeequip);
+			return;
+		}
+	}
 
 	public function promptSaveUpdate():void {
 		clearOutput();
@@ -1338,11 +1354,11 @@ public class SaveUpdater extends NPCAwareContent {
 			if (player.hasPerk(PerkLib.Rigidity) && (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2 || flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2)) {
 				if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) {
 					flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
-					if (player.weapon == weapons.AETHERD) player.unequipWeapon(false,true)
+					if (player.weapon == weapons.AETHERD) player.unequipWeapon(false, true);
 				}
 				if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) {
 					flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
-					if (player.shield == shields.AETHERS) player.unequipShield(false,true)
+					if (player.shield == shields.AETHERS) player.unequipShield(false, true);
 				}
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] > 0) flags[kFLAGS.EVANGELINE_LVL_UP] = 0;
@@ -2705,10 +2721,12 @@ public class SaveUpdater extends NPCAwareContent {
 						if (flags[kFLAGS.PLAYER_COMPANION_3] == "Kiha") flags[kFLAGS.PLAYER_COMPANION_3] = "";
 					}
 				}
-			}/*
+			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.56) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.56;
-			}
+				outputText("\n\nTo equip is first to de-equip ^^");
+				toEquipIsToFirstDeequip();
+			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.57) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.57;
 			}

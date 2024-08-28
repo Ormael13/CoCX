@@ -1568,7 +1568,7 @@ public class Combat extends BaseContent {
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE_OFF_HAND] = 1;
         }
         var dualWeapon:Boolean = false;
-        if (player.weapon.isDual()){
+        if (player.weapon.isDualWielded()){
             dualWeapon = true;
         }
         if (flags[kFLAGS.MULTIATTACK_STYLE_MAIN] >= 0) {
@@ -2785,12 +2785,13 @@ public class Combat extends BaseContent {
 			if (player.weapon.isDaggerType()) accmod += Math.round((masteryDaggerLevel() - 1) / 2);
 			if (player.weapon.isWhipType()) accmod += Math.round((masteryWhipLevel() - 1) / 2);
 			if (player.weapon.isExoticType() || player.weapon.isRibbonType() || player.weapon.isScytheType()) accmod += Math.round((masteryExoticLevel() - 1) / 2);
+			if (player.weapon.isDualWieldedSmall()) accmod += Math.round((dualWSLevel() - 1) / 2);
+			if (player.weapon.isDualWieldedMedium()) accmod += Math.round((dualWNLevel() - 1) / 2);
+			if (player.weapon.isDualWieldedLarge()) accmod += Math.round((dualWLLevel() - 1) / 2);
+			if (player.weapon.isDualWieldedMassive()) accmod += Math.round((dualWMLevel() - 1) / 2);
 		}
-		if (player.weapon.isDualSmall() || player.hasAetherTwinsTierS2()) accmod += Math.round((dualWSLevel() - 1) / 2);
-		if (player.weapon.isDualMedium()) accmod += Math.round((dualWNLevel() - 1) / 2);
-		if (player.weapon.isDualLarge()) accmod += Math.round((dualWLLevel() - 1) / 2);
-		if (player.weapon.isDualMassive()) accmod += Math.round((dualWMLevel() - 1) / 2);
-		if (player.weapon.isDual()) accmod += meleeDualWieldAccuracyPenalty();
+		if (player.hasAetherTwinsTierS2()) accmod += Math.round((dualWSLevel() - 1) / 2);
+		if (player.weapon.isDualWielded()) accmod += meleeDualWieldAccuracyPenalty();
         var weaponSize:Number = 1;
         if (player.weapon.isSingleSmall() && !player.isFistOrFistWeapon()) weaponSize = 0;
         if (player.weapon.isSingleMedium()) weaponSize = 1;
@@ -2817,49 +2818,28 @@ public class Combat extends BaseContent {
 
 	public function meleeDualWieldAccuracyPenalty():Number {
 		var accmdwmodpenalty:Number = -25;
-        if (player.weapon.isDualMedium()) {
-			if (player.hasPerk(PerkLib.DualWieldNormal)) accmdwmodpenalty += 10;
-		}
-        if (player.weapon.isDualMassive()) {
-			if (player.hasPerk(PerkLib.DualWieldMassive)) accmdwmodpenalty += 10;
-		}
-        if (player.weapon.isDualLarge()) {
-			if (player.hasPerk(PerkLib.DualWieldLarge)) accmdwmodpenalty += 10;
-		}
-        if (player.weapon.isDualSmall()) {
-			if (player.hasPerk(PerkLib.DualWieldSmall)) accmdwmodpenalty += 10;
-		}
-        /*
-        if (player.weapon.isQuad()) {
+        if (player.weapon.isDualWieldedSmall() && player.hasPerk(PerkLib.DualWieldSmall)) accmdwmodpenalty += 10;
+		if (player.weapon.isDualWieldedMedium() && player.hasPerk(PerkLib.DualWieldNormal)) accmdwmodpenalty += 10;
+		if (player.weapon.isDualWieldedLarge() && player.hasPerk(PerkLib.DualWieldLarge)) accmdwmodpenalty += 10;
+		if (player.weapon.isDualWieldedMassive() && player.hasPerk(PerkLib.DualWieldMassive)) accmdwmodpenalty += 10;
+        /*if (player.weapon.isQuad()) {
 			accmdwmodpenalty -= 50;
-		}
-         */
+		}*/
         return accmdwmodpenalty;
 	}
 
 	public function meleeDualWieldDamagePenalty():Number {
 		var dmgmdwmodpenalty:Number = 1;
-        if (player.weapon.isDualMedium()) {
-			if (player.hasPerk(PerkLib.DualWieldNormal)) dmgmdwmodpenalty -= 0.3;
+		if (player.weapon.isDualWielded()) {
+			if (player.weapon.isDualWieldedSmall() && player.hasPerk(PerkLib.DualWieldSmall)) dmgmdwmodpenalty -= 0.3;
+			else if (player.weapon.isDualWieldedMedium() && player.hasPerk(PerkLib.DualWieldNormal)) dmgmdwmodpenalty -= 0.3;
+			else if (player.weapon.isDualWieldedLarge() && player.hasPerk(PerkLib.DualWieldLarge)) dmgmdwmodpenalty -= 0.3;
+			else if (player.weapon.isDualWieldedMassive() && player.hasPerk(PerkLib.DualWieldMassive)) dmgmdwmodpenalty -= 0.3;
 			else dmgmdwmodpenalty -= 0.5;
 		}
-        if (player.weapon.isDualMassive()) {
-			if (player.hasPerk(PerkLib.DualWieldMassive)) dmgmdwmodpenalty -= 0.3;
-			else dmgmdwmodpenalty -= 0.5;
-		}
-        if (player.weapon.isDualLarge()) {
-			if (player.hasPerk(PerkLib.DualWieldLarge)) dmgmdwmodpenalty -= 0.3;
-			else dmgmdwmodpenalty -= 0.5;
-		}
-        if (player.weapon.isDualSmall()) {
-			if (player.hasPerk(PerkLib.DualWieldSmall)) dmgmdwmodpenalty -= 0.3;
-			else dmgmdwmodpenalty -= 0.5;
-		}
-        /*
-        if (player.weapon.isQuad()) {
+		/*if (player.weapon.isQuad()) {
 			dmgmdwmodpenalty -= 0.9;
-		}
-         */
+		}*/
         return dmgmdwmodpenalty;
 	}
 
@@ -3730,7 +3710,7 @@ public class Combat extends BaseContent {
 			doFireDamage(damage, true, true);
 			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 			if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln);
-			if (player.playerHasFourArms()) {
+			if (player.hasFourArms()) {
 				doFireDamage(damage, true, true);
 				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 				doFireDamage(damage, true, true);
@@ -3748,7 +3728,7 @@ public class Combat extends BaseContent {
             doIceDamage(damage, true, true);
 			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 			if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln);
-			if (player.playerHasFourArms()) {
+			if (player.hasFourArms()) {
 				doIceDamage(damage, true, true);
 				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 				doIceDamage(damage, true, true);
@@ -3795,7 +3775,7 @@ public class Combat extends BaseContent {
 			if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
 			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 			if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln);
-			if (player.playerHasFourArms()) {
+			if (player.hasFourArms()) {
 				doPhysicalDamage(damage, true, true);
 				if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
 				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
@@ -6290,7 +6270,7 @@ public class Combat extends BaseContent {
 		}
 		if (player.gaindHoldWithBothHandBonus()) damage *= 1.5;
 		if (player.hasPerk(PerkLib.DivineArmament) && (player.isUsingStaff() || player.isUsingWand() || player.isPartiallyStaffTypeWeapon()) && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 3;
-		if (player.weapon.isDual()) damage *= meleeDualWieldDamagePenalty();
+		if (player.weapon.isDualWielded()) damage *= meleeDualWieldDamagePenalty();
         //Weapon addition!
         damage = weaponAttackModifier(damage);
 		damage *= calculateMeleeDamageMultiplier();
@@ -6356,7 +6336,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.AsuraStrength)) AFAAM += 1;
 			if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) AFAAM += 1;
 			if (player.hasPerk(PerkLib.ItsZerkingTime)) AFAAM += 1;
-			if (player.isUnarmedCombat() && player.playerHasFourArms()) AFAAM *= 0.5;
+			if (player.isUnarmedCombat() && player.hasFourArms()) AFAAM *= 0.5;
             damage *= AFAAM;
         }
 		if (SceneLib.urtaQuest.isUrta()) damage *= 2;
@@ -6546,10 +6526,10 @@ public class Combat extends BaseContent {
 			if (player.weapon.isWhipType()) Mastery_bonus_damage += 0.01 * masteryWhipLevel();
 			if (player.weapon.isExoticType() || player.weapon.isRibbonType() || player.weapon.isScytheType()) Mastery_bonus_damage += 0.01 * masteryExoticLevel();
 		}
-		if (player.weapon.isDualSmall()) Mastery_bonus_damage += 0.01 * dualWSLevel();
-		if (player.weapon.isDualMedium()) Mastery_bonus_damage += 0.01 * dualWNLevel();
-		if (player.weapon.isDualLarge()) Mastery_bonus_damage += 0.01 * dualWLLevel();
-		if (player.weapon.isDualMassive()) Mastery_bonus_damage += 0.01 * dualWMLevel();
+		if (player.weapon.isDualWieldedSmall()) Mastery_bonus_damage += 0.01 * dualWSLevel();
+		if (player.weapon.isDualWieldedMedium()) Mastery_bonus_damage += 0.01 * dualWNLevel();
+		if (player.weapon.isDualWieldedLarge()) Mastery_bonus_damage += 0.01 * dualWLLevel();
+		if (player.weapon.isDualWieldedMassive()) Mastery_bonus_damage += 0.01 * dualWMLevel();
         var weaponSize:Number = 1;
         if (player.weapon.isSmall() && !player.isFistOrFistWeapon()) weaponSize = 0;
         if (player.weapon.isMedium()) weaponSize = 1;
@@ -6719,10 +6699,10 @@ public class Combat extends BaseContent {
 			if (player.weapon.isWhipType()) whipXP(meleeMasteryEXPgains, false);
 			if (player.weapon.isExoticType() || player.weapon.isRibbonType() || player.weapon.isScytheType()) exoticXP(meleeMasteryEXPgains, false);
 		}
-        if (player.weapon.isDualSmall() || player.hasAetherTwinsTierS2()) dualWieldSmallXP(meleeMasteryEXPgains);
-        if (player.weapon.isDualMedium()) dualWieldNormalXP(meleeMasteryEXPgains);
-        if (player.weapon.isDualLarge()) dualWieldLargeXP(meleeMasteryEXPgains);
-        if (player.weapon.isDualMassive()) dualWieldMassiveXP(meleeMasteryEXPgains);
+        if (player.weapon.isDualWieldedSmall() || player.hasAetherTwinsTierS2()) dualWieldSmallXP(meleeMasteryEXPgains);
+        if (player.weapon.isDualWieldedMedium()) dualWieldNormalXP(meleeMasteryEXPgains);
+        if (player.weapon.isDualWieldedLarge()) dualWieldLargeXP(meleeMasteryEXPgains);
+        if (player.weapon.isDualWieldedMassive()) dualWieldMassiveXP(meleeMasteryEXPgains);
         if (player.isFeralCombat()) feralCombatXP(meleeMasteryEXPgains);
         else if (flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && player.weaponName == "fists") unarmedCombatXP(meleeMasteryEXPgains);
         else if ((player.weapon.isSmall() || player.hasAetherTwinsTierWeapon() || player.hasAetherTwinsTierWeapon2()) && !player.isFeralCombat() && (flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && player.weaponName != "fists")) weaponSmallMastery(meleeMasteryEXPgains);
@@ -8703,7 +8683,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.Parry) && player.spe >= 50 && player.str >= 50 && player.weapon != WeaponLib.FISTS) {
             if (player.spe <= 100) parryChance2 += (player.spe - 50) / 5;
             else parryChance2 += 10;
-            if (player.hasPerk(PerkLib.BladeBarrier) && (player.weapon.isDual() && !player.weapon.isSmall())) parryChance2 += 25;
+            if (player.hasPerk(PerkLib.BladeBarrier) && (player.weapon.isDualWielded() && !player.weapon.isSmall() && !player.weaponOff.isSmall())) parryChance2 += 25;
         }
 		if (player.hasPerk(PerkLib.OrthodoxDuelist) && player.weapon.isDuelingType() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) {
 			if (player.spe <= 100) parryChance2 += player.spe / 10;
@@ -13653,10 +13633,10 @@ public function exoticXP(XP:Number, offHand:Boolean):void		{player.gainCombatXP(
 public function archeryXP(XP:Number):void						{player.gainCombatXP(MASTERY_ARCHERY, XP * weaponmasteryXPMulti());}
 public function throwingXP(XP:Number):void						{player.gainCombatXP(MASTERY_THROWING, XP * weaponmasteryXPMulti());}
 public function firearmsXP(XP:Number):void						{player.gainCombatXP(MASTERY_FIREARMS, XP * weaponmasteryXPMulti());}
-public function dualWieldSmallXP(XP:Number):void				{player.gainCombatXP(MASTERY_DUAL_SMALL, XP * weaponmasteryXPMulti());}
-public function dualWieldNormalXP(XP:Number):void				{player.gainCombatXP(MASTERY_DUAL_NORMAL, XP * weaponmasteryXPMulti());}
-public function dualWieldLargeXP(XP:Number):void				{player.gainCombatXP(MASTERY_DUAL_LARGE, XP * weaponmasteryXPMulti());}
-public function dualWieldMassiveXP(XP:Number):void				{player.gainCombatXP(MASTERY_DUAL_MASSIVE, XP * weaponmasteryXPMulti());}
+public function dualWieldSmallXP(XP:Number):void				{player.gainCombatXP(MASTERY_DUAL_SMALL, XP * weaponmasteryXPMulti() * 2);}
+public function dualWieldNormalXP(XP:Number):void				{player.gainCombatXP(MASTERY_DUAL_NORMAL, XP * weaponmasteryXPMulti() * 2);}
+public function dualWieldLargeXP(XP:Number):void				{player.gainCombatXP(MASTERY_DUAL_LARGE, XP * weaponmasteryXPMulti() * 2);}
+public function dualWieldMassiveXP(XP:Number):void				{player.gainCombatXP(MASTERY_DUAL_MASSIVE, XP * weaponmasteryXPMulti() * 2);}
 public function dualWieldFirearmsXP(XP:Number):void				{player.gainCombatXP(MASTERY_DUAL_FIREARMS, XP * weaponmasteryXPMulti());}
 public function weaponSmallMastery(XP:Number):void				{player.gainCombatXP(MASTERY_SMALL, XP * weaponmasteryXPMulti());}
 public function weaponNormalMastery(XP:Number):void				{player.gainCombatXP(MASTERY_NORMAL, XP * weaponmasteryXPMulti());}
@@ -16899,7 +16879,7 @@ public function asuraformCost():Number {
 public function assumeAsuraForm():void {
     clearOutput();
     player.wrath -= asuraformCost();
-    outputText("As you starts to unleash your inner wrath two additional faces emerge from head"+(player.faceType == Face.CERBERUS?"s":"")+" on sides and " + (player.playerHasFourArms() ? "":"two ") + "additional pair" + (player.playerHasFourArms() ? "":"s") + " of arms grows under your " + (player.playerHasFourArms() ? "second":"first") + " pair" + (player.playerHasFourArms() ? "s":"") + " of arms. ");
+    outputText("As you starts to unleash your inner wrath two additional faces emerge from head"+(player.faceType == Face.CERBERUS?"s":"")+" on sides and " + (player.hasFourArms() ? "":"two ") + "additional pair" + (player.hasFourArms() ? "":"s") + " of arms grows under your " + (player.hasFourArms() ? "second":"first") + " pair" + (player.hasFourArms() ? "s":"") + " of arms. ");
     if (player.hasPerk(PerkLib.AsuraStrength)) {
         outputText("Additionaly from your back emerge ");
 		if (player.hasPerk(PerkLib.ItsZerkingTime)) outputText("three ");

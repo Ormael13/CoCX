@@ -191,7 +191,12 @@ public class Weapon extends Equipable
 		
 		public function get size():int { return _size; }
 		
-		public function isDual():Boolean { return _dual || (type == WT_FISTS || type == WT_GAUNTLET); }
+		public function isDual():Boolean { return _dual || type == WT_FISTS || type == WT_GAUNTLET; }
+		public function isDualWielded():Boolean { return !game.player.weapon.isNothing && !game.player.weaponOff.isNothing; }
+		public function isDualWieldedSmall():Boolean { return isDualWielded() && (game.player.weapon.size == WSZ_SMALL && game.player.weaponOff.size == WSZ_SMALL); }
+		public function isDualWieldedMedium():Boolean { return isDualWielded() && (game.player.weapon.size == WSZ_MEDIUM && game.player.weaponOff.size == WSZ_MEDIUM); }
+		public function isDualWieldedLarge():Boolean { return isDualWielded() && (game.player.weapon.size == WSZ_LARGE && game.player.weaponOff.size == WSZ_LARGE); }
+		public function isDualWieldedMassive():Boolean { return isDualWielded() && (game.player.weapon.size == WSZ_MASSIVE && game.player.weaponOff.size == WSZ_MASSIVE); }
 
 		public function isSmall():Boolean { return size == WSZ_SMALL; }
 		public function isMedium():Boolean { return size == WSZ_MEDIUM; }

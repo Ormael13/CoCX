@@ -55,21 +55,21 @@ public class ChargeWeaponSpell extends AbstractWhiteSpell {
 	}
 	
 	private function weaponSizeBoost():Number {
-		var ab12:Number = 1;
-		if (player.weapon.isHybrid()) ab12 *= 2.5;
-		else if (player.weapon.isMedium()) ab12 *= 2;
-		else if (player.weapon.isLarge()) ab12 *= 3;
-		else if (player.weapon.isMassive()) ab12 *= 4;
+		var ab12:Number = 2;
 		if (player.weapon == weapons.MGSWORD) ab12 *= 2;
 		return ab12;
 	}
 	
 	private function weaponSizeManaCost():Number {
-		var ba21:Number = 1;
-		if (player.weapon.isHybrid()) ba21 *= 3;
-		else if (player.weapon.isDualSmall() || player.weapon.isSingleMedium()) ba21 *= 2;
-		else if (player.weapon.isDualMedium() || player.weapon.isSingleLarge()) ba21 *= 4;
-		else if (player.weapon.isDualLarge() || player.weapon.isSingleMassive()) ba21 *= 8;
+		var ba21:Number = 0;
+		if (player.weapon.isHybrid()) ba21 += 3;
+		if (player.weapon.isSingleMedium()) ba21 += 2;
+		if (player.weaponOff.isSingleMedium()) ba21 += 2;
+		if (player.weapon.isSingleLarge()) ba21 += 4;
+		if (player.weaponOff.isSingleLarge()) ba21 += 4;
+		if (player.weapon.isSingleMassive()) ba21 += 8;
+		if (player.weaponOff.isSingleMassive()) ba21 += 8;
+		if (ba21 < 1) ba21 = 1;
 		return ba21;
 	}
 	
