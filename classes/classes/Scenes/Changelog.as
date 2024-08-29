@@ -318,7 +318,7 @@ public class Changelog extends BaseContent
 			outputText("-Defensive Staff Channeling perk would work with PC using wand weapons too and when extending duration would give 2x more duration extension.\n");
 			outputText("-Titanic Strength and Condensed Power/Small caster effects activate 2ft from max/min height instead of 1 ft.\n");
 			outputText("-Autosave option will no longer require PC to go to sleep (insert your favourite joke about: sleep is for the ...) and having at least saved once manualy. Instead will still need to save once manualy but then will always trigger with all other once a day events (which all happens between 11pm and 12 pm).\n");
-			outputText("-\n");
+			outputText("-One of req. for Gigant's Grip perks changed to Amateur Gunslinger. Also perk and it follow up perks would be accesable from both Swordsman and Gunslinger perk trees.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

@@ -5171,7 +5171,7 @@ public class PerkLib
                     .requireStr(60)
                     .requirePerk(FuriousStrikes);
             GigantGrip.requireLevel(18)
-                    .requireAnyPerk(WeaponMastery, JobGunslinger)
+                    .requireAnyPerk(WeaponMastery, AmateurGunslinger)
                     .requireStr(100);
             HiddenMomentum.requireLevel(18)
                     .requirePerk(JobSwordsman)

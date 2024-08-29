@@ -87,7 +87,7 @@ public class CharViewContext extends ExecContext {
 					showDickDrippies: player.lust >= 0.8 * player.maxLust() && (player.lowerGarment.isNothing || !showPanty()) && (player.armor.isNothing || !showLegClothing()),
 
 					//Detect Weapon Skins
-					PlayerHasAWeapon: player.weapon.isDaggerType() || player.weapon.isWandType() || player.weapon.isStaffType() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isMaceHammerTypeWeapon() || player.isSpearTypeWeapon() || player.isDuelingTypeWeapon(),
+					PlayerHasAWeapon: player.weapon.isDaggerType() || player.weapon.isWandType() || player.weapon.isStaffType() || player.weapon.isSwordType() || player.weapon.isAxeType() || player.weapon.isMaceHammerType() || player.weapon.isSpearType() || player.weapon.isDuelingType(),
 
 					PlayerHasAStaff: player.weapon.isStaffType(),
 					PlayerHasAStaffHoly: player.weapon == game.weapons.U_STAFF,
@@ -99,22 +99,22 @@ public class CharViewContext extends ExecContext {
 
 					PlayerHasAPanFlute: player.weapon == game.weapons.SFLUTTE || player.weapon == game.weapons.PFLUTTE || player.weapon == game.weapons.HELLCAL || player.weapon == game.weapons.ELYSIUM,
 
-					PlayerHasASword: player.isSwordTypeWeapon() && player.weapon.isMedium(),
+					PlayerHasASword: player.weapon.isSwordType() && player.weapon.isMedium(),
 					PlayerHasASwordHoly: player.weapon == game.weapons.EXCALIB,
 					PlayerHasASwordUnholy: player.weapon == game.weapons.SCARBLD,
 					PlayerHasASwordMoonGS: player.weapon == game.weapons.MGSWORD,
-					PlayerHasALargeSword: player.isSwordTypeWeapon() && player.weapon.isLarge(),
+					PlayerHasALargeSword: player.weapon.isSwordType() && player.weapon.isLarge(),
 					PlayerHasALargeSwordHoly: player.weapon == game.weapons.NPHBLDE || player.weapon == game.weapons.T_HEART,
 					PlayerHasALargeSwordUnholy: player.weapon == game.weapons.EBNYBLD || player.weapon == game.weapons.DORSOUL,
-					PlayerHasAMassiveSword: player.isSwordTypeWeapon() && player.weapon.isMassive(),
+					PlayerHasAMassiveSword: player.weapon.isSwordType() && player.weapon.isMassive(),
 					PlayerHasAMassiveSwordHoly: player.weapon == game.weapons.ARMAGED,
 					PlayerHasAMassiveSwordUnholy: player.weapon == game.weapons.CHAOSEA,
 
-					PlayerHasAnAxe: player.isAxeTypeWeapon(),
+					PlayerHasAnAxe: player.weapon.isAxeType(),
 					PlayerHasAnAxeHoly:player.weapon == game.weapons.WG_GAXE || player.weapon == game.weapons.GGRAVEA,
 					PlayerHasAnAxeUnholy:player.weapon == game.weapons.DE_GAXE || player.weapon == game.weapons.ASTERIUS,
 
-					PlayerHasAHammer: player.isMaceHammerTypeWeapon() && !player.isTetsubo() && player.weapon != game.weapons.SFLUTTE && player.weapon != game.weapons.PFLUTTE && player.weapon != game.weapons.HELLCAL && player.weapon != game.weapons.ELYSIUM,
+					PlayerHasAHammer: player.weapon.isMaceHammerType() && !player.weapon.isTetsubo() && player.weapon != game.weapons.SFLUTTE && player.weapon != game.weapons.PFLUTTE && player.weapon != game.weapons.HELLCAL && player.weapon != game.weapons.ELYSIUM,
 					//PlayerHasAHammerHoly:player.weapon == game.weapons.POCDEST,
 					PlayerHasAHammerUnholy:player.weapon == game.weapons.VGRAVEH,
 					PlayerHasATetsu: player.weapon == game.weapons.OTETSU || player.weapon == game.weapons.POCDEST || player.weapon == game.weapons.DOCDEST,
@@ -144,7 +144,7 @@ public class CharViewContext extends ExecContext {
 					//PlayerHasDaggerHoly:player.weapon == game.weapons.Q_GUARD,
 					//PlayerHasDaggerUnholy:player.weapon == game.weapons.B_WIDOW,
 
-					PlayerHasAScythe: player.isScytheTypeWeapon() || player.weapon == game.weapons.DEMSCYT || player.weapon == game.weapons.KAMA || player.weapon == game.weapons.KAMAWHIP || player.weapon == game.weapons.D_KAMA,
+					PlayerHasAScythe: player.weapon.isScytheType() || player.weapon == game.weapons.DEMSCYT || player.weapon == game.weapons.KAMA || player.weapon == game.weapons.KAMAWHIP || player.weapon == game.weapons.D_KAMA,
 					PlayerHasAScytheHoly:player.weapon == game.weapons.LHSCYTH,
 					PlayerHasAScytheUnholy: player.weapon == game.weapons.ATWINSCY || player.weapon == game.weapons.HELRAIS,
 

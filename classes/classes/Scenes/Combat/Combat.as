@@ -6313,7 +6313,7 @@ public class Combat extends BaseContent {
         }
         if (player.isSpearTypeWeapon() && player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5;
         if ((player.weapon == weapons.S_RULER || player.weapon == weapons.TSRULER) && (monster.hasPerk(PerkLib.EnemyHugeType) || monster.hasPerk(PerkLib.EnemyGigantType) || monster.hasPerk(PerkLib.EnemyColossalType))) damage *= 1.5;
-		if (monster.hasStatusEffect(StatusEffects.Stunned) && player.isMaceHammerTypeWeapon() && player.hasPerk(PerkLib.Backbreaker)) damage *= 1.5;
+		if (monster.hasStatusEffect(StatusEffects.Stunned) && (player.weapon.isMaceHammerType() || player.weaponOff.isMaceHammerType()) && player.hasPerk(PerkLib.Backbreaker)) damage *= 1.5;
         // Mastery bonus damage
 		if (IsFeralCombat) damage *= MasteryBonusDamageMelee(true);
 		else {
@@ -6551,12 +6551,12 @@ public class Combat extends BaseContent {
         if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
         else {
             critChance += combatPhysicalCritical();
-            if (player.isSwordTypeWeapon()) critChance += 10;
-            if (player.isDuelingTypeWeapon()) critChance += 20;
+            if (player.weapon.isSwordType() || player.weaponOff.isSwordType()) critChance += 10;
+            if (player.weapon.isDuelingType() || player.weaponOff.isDuelingType()) critChance += 20;
             if (player.hasPerk(PerkLib.JobDervish) && (!player.weapon.isLarge() || !player.weapon.isStaffType())) critChance += 10;
-            if (player.hasPerk(PerkLib.WeaponMastery) && player.weapon.isSingleLarge() && player.str >= 100) critChance += 10;
-            if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weapon.isDualLarge() && player.str >= 140) critChance += 10;
-            if (player.hasPerk(PerkLib.GigantGripEx) && (player.weapon.isMassive())) {
+            if (player.hasPerk(PerkLib.WeaponMastery) && (player.weapon.isSingleLarge() || player.weaponOff.isSingleLarge()) && player.str >= 100) critChance += 10;
+            if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weapon.isSingleLarge() && player.weaponOff.isSingleLarge() && player.str >= 140) critChance += 10;
+            if (player.hasPerk(PerkLib.GigantGripEx) && (player.weapon.isMassive() || player.weaponOff.isMassive())) {
                 if (player.hasPerk(PerkLib.WeaponMastery) && player.str >= 100) critChance += 10;
                 if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.str >= 140) critChance += 10;
             }
@@ -8324,8 +8324,8 @@ public class Combat extends BaseContent {
         var stunChance:int = 0;
         var bleed:Boolean = false;
         var bleedChance:int = 0;
-        if (player.isMaceHammerTypeWeapon()) stunChance += 10;
-        if (player.isAxeTypeWeapon()) bleedChance += 25;
+        if (player.weapon.isMaceHammerType() || player.weaponOff.isMaceHammerType()) stunChance += 10;
+        if (player.weapon.isAxeType() || player.weaponOff.isAxeType()) bleedChance += 25;
         // Item effects
         stunChance += player.weapon.effectPower(IELib.Stun);
         bleedChance += player.weapon.effectPower(IELib.Bleed);
@@ -8339,8 +8339,8 @@ public class Combat extends BaseContent {
         if (player.weapon == weapons.BFGAUNT && player.hasPerk(PerkLib.MightyFist)) stunChance += 40;
 		//50% Stun chance
 		if (player.hasAetherTwinsTier2() || (player.weapon == weapons.KARMTOU && player.hasPerk(PerkLib.MightyFist))) stunChance += 50;
-		if (player.isMaceHammerTypeWeapon() && player.hasPerk(PerkLib.BalanceBreaker)) stunChance *= 0.5;
-        if ((rand(100) < stunChance) && (!monster.hasPerk(PerkLib.Resolute) || (monster.hasPerk(PerkLib.Resolute) && player.isMaceHammerTypeWeapon() && player.hasPerk(PerkLib.BalanceBreaker)))) stun = true;
+		if ((player.weapon.isMaceHammerType() || player.weaponOff.isMaceHammerType()) && player.hasPerk(PerkLib.BalanceBreaker)) stunChance *= 0.5;
+        if ((rand(100) < stunChance) && (!monster.hasPerk(PerkLib.Resolute) || (monster.hasPerk(PerkLib.Resolute) && (player.weapon.isMaceHammerType() || player.weaponOff.isMaceHammerType()) && player.hasPerk(PerkLib.BalanceBreaker)))) stun = true;
         if (stun) {
             outputText("\n[Themonster] reels from the brutal blow, stunned.");
             if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
@@ -16793,8 +16793,8 @@ public function greatDive():void {
     critChance += combatPhysicalCritical();
     if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
     if (player.hasPerk(PerkLib.DeathPlunge)) {
-        if (player.hasPerk(PerkLib.WeaponMastery) && player.weapon.isSingleLarge() && player.str >= 100) critChance += 10;
-        if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weapon.isDualLarge() && player.str >= 140) critChance += 10;
+        if (player.hasPerk(PerkLib.WeaponMastery) && (player.weapon.isSingleLarge() || player.weaponOff.isSingleLarge()) && player.str >= 100) critChance += 10;
+        if (player.hasPerk(PerkLib.WeaponGrandMastery) && (player.weapon.isDualLarge() || player.weaponOff.isDualLarge()) && player.str >= 140) critChance += 10;
         if (player.hasPerk(PerkLib.GigantGripEx) && (player.weapon.isMassive())) {
             if (player.str >= 100) critChance += 10;
             if (player.str >= 140) critChance += 10;

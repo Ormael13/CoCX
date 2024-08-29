@@ -981,9 +981,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		critChance += combat.combatPhysicalCritical();
-		if (player.hasPerk(PerkLib.WeaponMastery) && player.weapon.isSingleLarge() && player.str >= 100) critChance += 10;
-		if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weapon.isDualLarge() && player.str >= 140) critChance += 10;
-		if (player.hasPerk(PerkLib.GigantGripEx) && player.weapon.isSingleMassive()) {
+		if (player.hasPerk(PerkLib.WeaponMastery) && (player.weapon.isSingleLarge() || player.weaponOff.isSingleLarge()) && player.str >= 100) critChance += 10;
+		if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weapon.isSingleLarge() && player.weaponOff.isSingleLarge() && player.str >= 140) critChance += 10;
+		if (player.hasPerk(PerkLib.GigantGripEx) && (player.weapon.isSingleMassive() || player.weaponOff.isSingleMassive())) {
 			if (player.str >= 100) critChance += 10;
 			if (player.str >= 140) critChance += 10;
 		}
@@ -1139,9 +1139,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		critChance += combat.combatPhysicalCritical();
-		if (player.hasPerk(PerkLib.WeaponMastery) && player.weapon.isSingleLarge() && player.str >= 100) critChance += 10;
-		if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weapon.isDualLarge() && player.str >= 140) critChance += 10;
-		if (player.hasPerk(PerkLib.GigantGripEx) && player.weapon.isSingleMassive()) {
+		if (player.hasPerk(PerkLib.WeaponMastery) && (player.weapon.isSingleLarge() || player.weaponOff.isSingleLarge()) && player.str >= 100) critChance += 10;
+		if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weapon.isSingleLarge() && player.weaponOff.isSingleLarge() && player.str >= 140) critChance += 10;
+		if (player.hasPerk(PerkLib.GigantGripEx) && (player.weapon.isSingleMassive() || player.weaponOff.isSingleMassive())) {
 			if (player.str >= 100) critChance += 10;
 			if (player.str >= 140) critChance += 10;
 		}
@@ -1700,11 +1700,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.isWeaponForWhirlwind()) damage *= 1.25;
 			else damage *= 0.75;
 		}
-		if (player.weapon.isDualMedium() || player.weapon.isDualLarge()) {
+		if (player.weapon.isDualLarge() || player.weaponOff.isDualLarge() || player.weapon.isDualMassive() || player.weaponOff.isDualMassive()) {
 			if (player.hasPerk(PerkLib.MakeItDouble)) damage *= 2;
 			else damage *= 1.25;
 		}
-		if (player.hasPerk(PerkLib.GiantsReach) && (player.weapon.isLarge() || (player.hasPerk(PerkLib.GigantGripEx) && player.weapon.isSingleMassive()) || (player.hasPerk(PerkLib.GigantGripSu) && player.weapon.isDualMassive()))) damage *= 1.25;
+		if (player.hasPerk(PerkLib.GiantsReach) && (player.weapon.isLarge() || (player.hasPerk(PerkLib.GigantGripEx) && (player.weapon.isSingleMassive() || player.weaponOff.isSingleMassive())) || (player.hasPerk(PerkLib.GigantGripSu) && player.weapon.isSingleMassive() && player.weaponOff.isSingleMassive()))) damage *= 1.25;
 		if (player.hasStatusEffect(StatusEffects.Gallop)) {
 			if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 4) damage *= 2;
 			else damage *= 1.5;
@@ -1714,8 +1714,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		critChance += combat.combatPhysicalCritical();
-		if (player.isSwordTypeWeapon()) critChance += 10;
-		if (player.isDuelingTypeWeapon()) critChance += 20;
+		if (player.weapon.isSwordType() || player.weaponOff.isSwordType()) critChance += 10;
+		if (player.weapon.isDuelingType() || player.weaponOff.isDuelingType()) critChance += 20;
 		if (player.hasPerk(PerkLib.CycloneStage1)) critChance += 10;
 		if (player.hasPerk(PerkLib.CycloneStage2)) critChance += 15;
 		if (player.hasPerk(PerkLib.CycloneStage3)) critChance += 20;
@@ -1781,7 +1781,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Whipping)) damage *= 1.2;
 		//other bonuses
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-		if (player.weapon.isDualMedium() || player.weapon.isDualLarge()) {
+		if (player.weapon.isDualSmall() || player.weaponOff.isDualSmall() || player.weapon.isDualMedium() || player.weaponOff.isDualMedium() || player.weapon.isDualLarge() || player.weaponOff.isDualLarge() || player.weapon.isDualMassive() || player.weaponOff.isDualMassive()) {
 			if (player.hasPerk(PerkLib.MakeItDouble)) damage *= 2;
 			else damage *= 1.25;
 		}

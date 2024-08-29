@@ -287,8 +287,8 @@ public class Weapon extends Equipable
 				else if (!game.player.hasPerk(PerkLib.GigantGrip)) {
 					if (slot == SLOT_WEAPON_MELEE_OFF) noMainHandAllowed = true;
 					else noShieldOffHandAllowed = true;
-					if (doOutput) outputText(getItemText("dual_fail"));
-					return false;
+					//if (doOutput) outputText(getItemText("dual_fail"));
+					//return false;
 				}
 			}
 			else if (isMassive()) {

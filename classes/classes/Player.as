@@ -1208,7 +1208,7 @@ use namespace CoC;
 		//Non Large/Massive weapons
 		public function isNoLargeNoStaffWeapon():Boolean
 		{
-			return (!weapon.isDualLarge() && !weapon.isSingleLarge() && !weapon.isDualMassive() && !weapon.isSingleMassive() && !weapon.isStaffType() && !weaponOff.isStaffType());
+			return (!weapon.isDualLarge() && !weapon.isSingleLarge() && !weaponOff.isDualLarge() && !weaponOff.isSingleLarge() && !weapon.isDualMassive() && !weapon.isSingleMassive() && !weaponOff.isDualMassive() && !weaponOff.isSingleMassive() && !weapon.isStaffType() && !weaponOff.isStaffType());
 		}
 		//Wrath Weapons
 		public function isLowGradeWrathWeapon():Boolean
@@ -1238,7 +1238,7 @@ use namespace CoC;
 		//Free off-hand for spellcasting and etc.
 		public function isHavingFreeOffHand():Boolean
 		{
-			return !isShieldsForShieldBash() && shield != game.shields.BATTNET && shield != game.shields.Y_U_PAN;
+			return !isShieldsForShieldBash() && shield != game.shields.BATTNET && shield != game.shields.Y_U_PAN && weaponOff.isNothing;
 		}
 		public function isNotHavingShieldCuzPerksNotWorkingOtherwise():Boolean
 		{
@@ -1253,25 +1253,6 @@ use namespace CoC;
 		public function isGauntletWeapon():Boolean {
 			return (weapon.isGauntletType()) || (hasAetherTwinsTier1() || hasAetherTwinsTier2()) || (weapon == game.weapons.CATGLOV && flags[kFLAGS.FERAL_COMBAT_MODE] != 1);
 		}
-		//Sword-type weapons
-		public function isSwordTypeWeapon():Boolean {
-			return (weapon.isSwordType());
-		}
-		//Axe-type weapons
-		public function isAxeTypeWeapon():Boolean {
-			return (weapon.isAxeType());
-		}
-		//Mace/Hammer-type weapons
-		public function isMaceHammerTypeWeapon():Boolean {
-			return (weapon.isMaceHammerType());
-		}
-		public function isTetsubo():Boolean {
-			return (weapon.isTetsubo());
-		}
-		//Dueling sword-type weapons (rapier & katana)
-		public function isDuelingTypeWeapon():Boolean {
-			return (weapon.isDuelingType());
-		}
 		//Polearm-type
 		public function isPolearmTypeWeapon():Boolean {
 			return (weapon.isPolearmType());
@@ -1279,10 +1260,6 @@ use namespace CoC;
 		//Spear-type
 		public function isSpearTypeWeapon():Boolean {
 			return (weapon.isSpearType());
-		}
-		//Scythe-type
-		public function isScytheTypeWeapon():Boolean {
-			return (weapon.isScytheType());
 		}
 		//Dagger-type weapons
 		public function isDaggerTypeWeapon():Boolean {
@@ -1295,10 +1272,6 @@ use namespace CoC;
 		//Whip-type weapons
 		public function isWhipTypeWeapon():Boolean {
 			return (weapon.isWhipType());
-		}
-		//Ribbon-type weapons
-		public function isRibbonTypeWeapon():Boolean {
-			return (weapon.isRibbonType());
 		}
 		//Partial staff type weapons
 		public function isPartiallyStaffTypeWeapon():Boolean {
@@ -1382,7 +1355,7 @@ use namespace CoC;
 		}
 		public function usingSingleFlyingSword():Boolean
 		{
-			return weaponFlyingSwords.count == 1;//weapon.isDualMassive() ||  ||
+			return weaponFlyingSwords.count == 1;
 		}
 		//Hold with Both Hands checks
 		public function gaindHoldWithBothHandBonus():Boolean

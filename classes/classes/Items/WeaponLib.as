@@ -146,7 +146,6 @@ public final class WeaponLib extends ItemConstants
 				WT_EXOTIC, WSZ_SMALL)
 				.withEffect(IELib.Bleed, 45) as Weapon;
 		public const B_STAFF:Weapon = new BeautifulStaff();
-		public const PARACEL:Weapon = new Paracelsus();
 		public const B_SWORD:Weapon = new Weapon(
 				"B.Sword", "B.Sword", "beautiful sword", "a beautiful shining sword", "slash", 17, 560,
 				"This beautiful sword shines brilliantly in the light, showing the flawless craftsmanship of its blade.  The pommel and guard are heavily decorated in gold and brass.  Some craftsman clearly poured his heart and soul into this blade.",
@@ -641,6 +640,7 @@ public final class WeaponLib extends ItemConstants
 				.withTags(W_TETSUBO, W_WHIRLWIND, W_LGWRATH)
 				.withEffect(IELib.Stun, 10)
 				.withEffect(IELib.ScaleAttack_Str, 180) as Weapon;
+		public const PARACEL:Weapon = new Paracelsus();
 		public const PHALLUS:Weapon = new ThePhalluspear();
 		public const PHALUSS:Weapon = new ThePhalluspears();
 		//public const RCHEEP:Weapon = new ReaperCheep(); TODO: finish!
