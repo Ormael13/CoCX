@@ -6764,7 +6764,7 @@ public class Combat extends BaseContent {
         var hitCounter:int = 0;
         if (player.weapon is Tidarion) meleeDamageNoLag = 0; //recalc damage for current mana.. okay, get it, multi-attackers-fuckers!
 
-        var boolSwiftCast:Boolean = player.hasPerk(PerkLib.SwiftCasting) && flags[kFLAGS.ELEMENTAL_MELEE] > 0 && (player.isOneHandedWeapons() || player.weapon == weapons.ATWINSCY || (player.weapon.isSingleLarge() && player.hasPerk(PerkLib.GigantGrip)) || (player.weapon.isSingleMassive() && player.hasPerk(PerkLib.TitanGrip))) && player.isHavingFreeOffHand();
+        var boolSwiftCast:Boolean = player.hasPerk(PerkLib.SwiftCasting) && flags[kFLAGS.ELEMENTAL_MELEE] > 0 && (player.isOneHandedWeapons() || player.weapon == weapons.ATWINSCY || player.weaponOff == weapons.ATWINSCY || (player.weapon.isSingleLarge() && player.hasPerk(PerkLib.GigantGrip)) || (player.weapon.isSingleMassive() && player.hasPerk(PerkLib.TitanGrip))) && player.isHavingFreeOffHand();
         var boolLifeLeech:Boolean = player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon();
         var boolFistingIs300Bucks:Boolean = (player.isFistOrFistWeapon() && (player.shield.isNothing || (player.shield == shields.AETHERS && AetherTwinsFollowers.AetherTwinsShape != "Human-tier Dagger and Shield" && AetherTwinsFollowers.AetherTwinsShape != "Human-tier Dual Daggers")) || player.isFeralCombat());
 
@@ -6983,7 +6983,7 @@ public class Combat extends BaseContent {
                         if (legendaryBeautifulWeaponsLustSelf > 0) dynStats("lus", -legendaryBeautifulWeaponsLustSelf);
                     }
                     //Weapon Procs!
-                    WeaponMeleeStatusProcs();
+                    WeaponMeleeStatusProcs(offHand);
                 }
                 if (flags[kFLAGS.ENVENOMED_MELEE_ATTACK] == 1 && (player.weapon.isSmall())) {
                     if (player.tailVenom >= player.VenomWebCost()) {
@@ -8319,32 +8319,41 @@ public class Combat extends BaseContent {
 		if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage() * monster.lustVuln, false);
     }
 
-    public function WeaponMeleeStatusProcs():void {
+    public function WeaponMeleeStatusProcs(offHand:Boolean = false):void {
         var stun:Boolean = false;
         var stunChance:int = 0;
         var bleed:Boolean = false;
         var bleedChance:int = 0;
-        if (player.weapon.isMaceHammerType() || player.weaponOff.isMaceHammerType()) stunChance += 10;
-        if (player.weapon.isAxeType() || player.weaponOff.isAxeType()) bleedChance += 25;
-        // Item effects
-        stunChance += player.weapon.effectPower(IELib.Stun);
-        bleedChance += player.weapon.effectPower(IELib.Bleed);
+		if (offHand) {
+			if (player.weaponOff.isMaceHammerType()) stunChance += 10;
+			if (player.weaponOff.isAxeType()) bleedChance += 25;
+			// Item effects
+			stunChance += player.weaponOff.effectPower(IELib.Stun);
+			bleedChance += player.weaponOff.effectPower(IELib.Bleed);
+		}
+		else {
+			if (player.weapon.isMaceHammerType()) stunChance += 10;
+			if (player.weapon.isAxeType()) bleedChance += 25;
+			// Item effects
+			stunChance += player.weapon.effectPower(IELib.Stun);
+			bleedChance += player.weapon.effectPower(IELib.Bleed);
+		}
         //10% Stun chance
         if (player.weapon == weapons.S_GAUNT && player.hasPerk(PerkLib.MightyFist) || player.hasAetherTwinsTier1()) stunChance += 10;
         //20% Stun chance
         if ((player.isFistOrFistWeapon() && player.weapon != weapons.KARMTOU && player.weapon != weapons.BFGAUNT && player.hasPerk(PerkLib.MightyFist))) stunChance += 20;
         //30% Stun chance
-        if (player.weapon == weapons.ZWNDER && !monster.hasStatusEffect(StatusEffects.Stunned)) stunChance += 30;
+        if ((player.weapon == weapons.ZWNDER || (player.weaponOff == weapons.ZWNDER && offHand)) && !monster.hasStatusEffect(StatusEffects.Stunned)) stunChance += 30;
         //40% Stun chance
         if (player.weapon == weapons.BFGAUNT && player.hasPerk(PerkLib.MightyFist)) stunChance += 40;
 		//50% Stun chance
 		if (player.hasAetherTwinsTier2() || (player.weapon == weapons.KARMTOU && player.hasPerk(PerkLib.MightyFist))) stunChance += 50;
-		if ((player.weapon.isMaceHammerType() || player.weaponOff.isMaceHammerType()) && player.hasPerk(PerkLib.BalanceBreaker)) stunChance *= 0.5;
-        if ((rand(100) < stunChance) && (!monster.hasPerk(PerkLib.Resolute) || (monster.hasPerk(PerkLib.Resolute) && (player.weapon.isMaceHammerType() || player.weaponOff.isMaceHammerType()) && player.hasPerk(PerkLib.BalanceBreaker)))) stun = true;
+		if ((player.weapon.isMaceHammerType() || (player.weaponOff.isMaceHammerType() && offHand)) && player.hasPerk(PerkLib.BalanceBreaker)) stunChance *= 0.5;
+        if ((rand(100) < stunChance) && (!monster.hasPerk(PerkLib.Resolute) || (monster.hasPerk(PerkLib.Resolute) && (player.weapon.isMaceHammerType() || (player.weaponOff.isMaceHammerType() && offHand)) && player.hasPerk(PerkLib.BalanceBreaker)))) stun = true;
         if (stun) {
             outputText("\n[Themonster] reels from the brutal blow, stunned.");
             if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
-                if (player.weapon == weapons.ZWNDER || player.weapon == weapons.UDKDEST) monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
+                if (player.weapon == weapons.ZWNDER || player.weapon == weapons.UDKDEST || ((player.weaponOff == weapons.ZWNDER || player.weaponOff == weapons.UDKDEST) && offHand)) monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
                 else monster.createStatusEffect(StatusEffects.Stunned, rand(2), 0, 0, 0);
             }
         }
@@ -8361,7 +8370,8 @@ public class Combat extends BaseContent {
                 if (monster is LivingStatue) outputText("Despite the rents you've torn in its stony exterior, the statue does not bleed.");
                 else outputText("Despite the gashes you've torn in its exterior, [themonster] does not bleed.");
             } else {
-                if (player.weapon == weapons.MACGRSW || player.weapon == weapons.TMACGRSW || player.weapon == weapons.RIPPER1 ||  player.weapon == weapons.TRIPPER1 || player.weapon == weapons.RIPPER2 || player.weapon == weapons.TRIPPER2) {
+                if ((player.weapon == weapons.MACGRSW || player.weapon == weapons.TMACGRSW || player.weapon == weapons.RIPPER1 ||  player.weapon == weapons.TRIPPER1 || player.weapon == weapons.RIPPER2 || player.weapon == weapons.TRIPPER2) ||
+					((player.weaponOff == weapons.MACGRSW || player.weaponOff == weapons.TMACGRSW || player.weaponOff == weapons.RIPPER1 ||  player.weaponOff == weapons.TRIPPER1 || player.weaponOff == weapons.RIPPER2 || player.weaponOff == weapons.TRIPPER2) && offHand)) {
 					if (monster.hasStatusEffect(StatusEffects.Hemorrhage))  monster.removeStatusEffect(StatusEffects.Hemorrhage);
                     if (player.weapon == weapons.MACGRSW || player.weapon == weapons.TMACGRSW) monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.02, 0, 0);
                     else monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.05, 0, 0);
@@ -8376,29 +8386,30 @@ public class Combat extends BaseContent {
             }
         }
         //Burn chances
-        if (player.weapon == weapons.RIPPER2 || player.weapon == weapons.TRIPPER2) {
+        if ((player.weapon == weapons.RIPPER2 || player.weapon == weapons.TRIPPER2) || ((player.weaponOff == weapons.RIPPER2 || player.weaponOff == weapons.TRIPPER2) && offHand)) {
             outputText("\nReeling in pain [themonster] begins to burn.");
             if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,1);
             else monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
         }
-        if (player.weapon == weapons.ATWINSCY) {
+        if (player.weapon == weapons.ATWINSCY || player.weapon == weapons.HATWINSCY || ((player.weaponOff == weapons.ATWINSCY || player.weaponOff == weapons.HATWINSCY) && offHand)) {
             outputText("\nReeling in pain [themonster] begins to burn.");
             if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,3);
             else monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
             if (monster.mana > 100)
-            outputText("\n\nYour scythes also strip away measure of the enemies mana");
+            outputText("\n\nYour scythes also strip away measure of the enemies mana.");
             monster.mana -= 100;
             if (monster.mana <0) monster.mana = 0;
         }
-        if ((player.hasPerk(PerkLib.VampiricBlade) || player.hasStatusEffect(StatusEffects.LifestealEnchantment) || player.weapon == weapons.T_HEART || player.weapon == weapons.DORSOUL || player.weapon == weapons.LHSCYTH || player.weapon == weapons.ARMAGED) && !monster.hasPerk(PerkLib.EnemyConstructType)) {
+        if ((player.hasPerk(PerkLib.VampiricBlade) || player.hasStatusEffect(StatusEffects.LifestealEnchantment) || player.weapon == weapons.T_HEART || (player.weaponOff == weapons.T_HEART && offHand) || player.weapon == weapons.DORSOUL || (player.weaponOff == weapons.DORSOUL && offHand) || 
+			player.weapon == weapons.LHSCYTH || (player.weaponOff == weapons.LHSCYTH && offHand) || player.weapon == weapons.ARMAGED || (player.weaponOff == weapons.ARMAGED && offHand)) && !monster.hasPerk(PerkLib.EnemyConstructType)) {
 			var restoreamount:Number = 0;
 			if (player.hasPerk(PerkLib.VampiricBlade)) restoreamount += 1;
 			if (player.hasStatusEffect(StatusEffects.LifestealEnchantment)) {
 				if (player.hasPerk(PerkLib.WayOfTheBlood)) restoreamount += (1 + (0.25 * player.progressBloodDemon()));
 				else restoreamount += 1;
 			}
-			if (player.weapon == weapons.LHSCYTH) restoreamount += 1;
-			if (player.weapon == weapons.T_HEART || player.weapon == weapons.DORSOUL || player.weapon == weapons.ARMAGED) restoreamount += 1;
+			if (player.weapon == weapons.LHSCYTH || (player.weaponOff == weapons.LHSCYTH && offHand)) restoreamount += 1;
+			if (player.weapon == weapons.T_HEART || (player.weaponOff == weapons.T_HEART && offHand) || player.weapon == weapons.DORSOUL || (player.weaponOff == weapons.DORSOUL && offHand) || player.weapon == weapons.ARMAGED || (player.weaponOff == weapons.ARMAGED && offHand)) restoreamount += 1;
             if (player.weapon.isSmall()) HPChange(Math.round(player.maxHP() * restoreamount * 0.005), false);
             else if (player.weapon.isLarge()) HPChange(Math.round(player.maxHP() * restoreamount * 0.02), false);
             else if (player.weapon.isMassive()) HPChange(Math.round(player.maxHP() * restoreamount * 0.04), false);
@@ -8419,7 +8430,7 @@ public class Combat extends BaseContent {
                 else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
             }
         }
-		if (player.weapon == weapons.CHAOSEA) {
+		if (player.weapon == weapons.CHAOSEA || (player.weaponOff == weapons.CHAOSEA && offHand)) {
 			var devouredWrath:Number = 0;
 			var transferedWrath:Number = 0;
 			var devouredMana:Number = 0;
