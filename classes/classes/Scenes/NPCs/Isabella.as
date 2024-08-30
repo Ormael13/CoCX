@@ -18,7 +18,6 @@ public class Isabella extends Monster
 		public function isabellaAttack():void {
 			//[Standard attack]
 			outputText("Isabella snorts and lowers a shield a moment before she begins to charge towards you. Her hooves tear huge divots out of the ground as she closes the distance with surprising speed!  ");
-
 			//Determine if dodged!
 			if(player.getEvasionRoll()) {
 				outputText("You duck aside at the last moment, relying entirely on your speed.\n");
@@ -27,17 +26,21 @@ public class Isabella extends Monster
 				var damage:Number;
 				if (flags[kFLAGS.ISABELLA_LVL_UP] >= 1) damage = Math.round(((weaponAttack + str + 20) * flags[kFLAGS.ISABELLA_LVL_UP]) - rand(player.tou+player.armorDef));
 				else damage = Math.round((weaponAttack + str + 20) - rand(player.tou + player.armorDef));
-				if (flags[kFLAGS.ISABELLA_LVL_UP] >= 8) damage *= 0.2;
+				if (flags[kFLAGS.ISABELLA_LVL_UP] >= 8) damage *= 0.25;
 				if (wrath >= 50) {
-					if (flags[kFLAGS.ISABELLA_LVL_UP] >= 12 && wrath >= 300) {
+					if (flags[kFLAGS.ISABELLA_LVL_UP] >= 14 && wrath >= 400) {
+						wrath -= 400;
+						damage *= 6;
+					}
+					else if (flags[kFLAGS.ISABELLA_LVL_UP] >= 10 && wrath >= 300) {
 						wrath -= 300;
 						damage *= 5;
 					}
-					else if (flags[kFLAGS.ISABELLA_LVL_UP] >= 8 && wrath >= 200) {
+					else if (flags[kFLAGS.ISABELLA_LVL_UP] >= 6 && wrath >= 200) {
 						wrath -= 200;
 						damage *= 4;
 					}
-					else if (flags[kFLAGS.ISABELLA_LVL_UP] >= 4 && wrath >= 100) {
+					else if (flags[kFLAGS.ISABELLA_LVL_UP] >= 2 && wrath >= 100) {
 						wrath -= 100;
 						damage *= 3;
 					}
@@ -60,7 +63,6 @@ public class Isabella extends Monster
 		public function isabellaStun():void {
 			//[Stunning Impact]
 			outputText("Isabella spins her shield back at you in a potent, steel-assisted backhand.  ");
-
 			if(player.getEvasionRoll()) {
 				outputText("You duck aside at the last moment, relying entirely on your speed.\n");
 			}
@@ -68,7 +70,7 @@ public class Isabella extends Monster
 				var damage:Number = 0;
 				if (flags[kFLAGS.ISABELLA_LVL_UP] >= 1) damage = Math.round(((weaponAttack + str) * (1 + (flags[kFLAGS.ISABELLA_LVL_UP] * 0.1))) - rand(player.tou+player.armorDef));
 				else damage = Math.round((weaponAttack + str) - rand(player.tou+player.armorDef));
-				if (flags[kFLAGS.ISABELLA_LVL_UP] >= 8) damage *= 0.2;
+				if (flags[kFLAGS.ISABELLA_LVL_UP] >= 8) damage *= 0.25;
 				if(damage < 0) {
 					outputText("You deflect her blow away, taking no damage.\n");
 					damage = 0;
@@ -88,7 +90,6 @@ public class Isabella extends Monster
 
 		public function isabellaThroatPunch():void {
 			outputText("Isabella punches out from behind her shield in a punch aimed right at your throat!  ");
-
 			//Determine if dodged!
 			if(player.getEvasionRoll()) {
 				outputText("You duck aside at the last moment, relying entirely on your speed.\n");
@@ -97,7 +98,7 @@ public class Isabella extends Monster
 				var damage:Number;
 				if (flags[kFLAGS.ISABELLA_LVL_UP] >= 1) damage = Math.round((str * (1 + (flags[kFLAGS.ISABELLA_LVL_UP] * 0.1))) - rand(player.tou+player.armorDef));
 				else damage = Math.round(str - rand(player.tou + player.armorDef));
-				if (flags[kFLAGS.ISABELLA_LVL_UP] >= 8) damage *= 0.2;
+				if (flags[kFLAGS.ISABELLA_LVL_UP] >= 8) damage *= 0.25;
 				if(damage <= 0) {
 					outputText("You manage to block her with your own fists.\n");
 				}
@@ -119,7 +120,7 @@ public class Isabella extends Monster
 			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 1) HP += 100 * flags[kFLAGS.ISABELLA_LVL_UP];
 			else HP += 100;
 			lust += 5;
-			player.takeLustDamage((10+player.lib/20), true);
+			player.takeLustDamage((20+player.lib/10), true);
 		}
 
 		override public function postPlayerAbility(ability:CombatAbility, display:Boolean = true):void {
@@ -178,146 +179,37 @@ public class Isabella extends Monster
 			this.bodyColor = "dusky";
 			this.hairColor = "red";
 			this.hairLength = 13;
+			var lvlMulti:Number = flags[kFLAGS.ISABELLA_LVL_UP];
 			if (flags[kFLAGS.ISABELLA_LVL_UP] < 1) {
-				initStrTouSpeInte(80, 108, 75, 64);
-				initWisLibSensCor(64, 64, 25, 40);
-				this.weaponAttack = 18;
-				this.armorDef = 16;
-				this.armorMDef = 4;
-				this.bonusHP = 600;
-				this.bonusLust = 109;
-				this.level = 20;
-			}
-			if (flags[kFLAGS.ISABELLA_LVL_UP] == 1) {
-				initStrTouSpeInte(100, 130, 85, 73);
-				initWisLibSensCor(73, 70, 30, 40);
-				this.weaponAttack = 21;
-				this.armorDef = 24;
-				this.armorMDef = 6;
-				this.bonusHP = 800;
-				this.bonusLust = 126;
-				this.level = 26;
-			}
-			if (flags[kFLAGS.ISABELLA_LVL_UP] == 2) {
-				initStrTouSpeInte(120, 155, 100, 82);
-				initWisLibSensCor(82, 80, 35, 40);
-				this.weaponAttack = 24;
-				this.armorDef = 32;
-				this.armorMDef = 8;
-				this.bonusHP = 1000;
-				this.bonusLust = 147;
+				initStrTouSpeInte(210, 265, 180, 128);
+				initWisLibSensCor(128, 128, 50, 40);
+				this.weaponAttack = 90;
+				this.armorDef = 160;
+				this.armorMDef = 40;
+				this.bonusHP = 1200;
+				this.bonusLust = 210;
 				this.level = 32;
 			}
-			if (flags[kFLAGS.ISABELLA_LVL_UP] == 3) {
-				initStrTouSpeInte(140, 180, 115, 91);
-				initWisLibSensCor(91, 90, 40, 40);
-				this.weaponAttack = 27;
-				this.armorDef = 40;
-				this.armorMDef = 10;
-				this.bonusHP = 1200;
-				this.bonusLust = 168;
-				this.level = 38;
+			else if (flags[kFLAGS.ISABELLA_LVL_UP] <= 15) {	//leave min and max levels to easily balance npc combat
+				initStrTouSpeInte(210 + 40*lvlMulti, 265 + 50*lvlMulti, 180 + 30*lvlMulti, 128 + 18*lvlMulti);
+				initWisLibSensCor(128 + 18*lvlMulti, 128 + 10*lvlMulti, 50 + 5*lvlMulti, 40);
+				this.weaponAttack = 90 + 15*lvlMulti;
+				this.armorDef = 160 + 80*lvlMulti;
+				this.armorMDef = 40 + 20*lvlMulti;
+				this.bonusHP = 1200 + 400*lvlMulti;
+				this.bonusLust = 210 + 21*lvlMulti;
+				this.level = 32 + 6*lvlMulti;
 			}
-			if (flags[kFLAGS.ISABELLA_LVL_UP] == 4) {
-				initStrTouSpeInte(160, 210, 130, 100);
-				initWisLibSensCor(100, 100, 45, 40);
-				this.weaponAttack = 30;
-				this.armorDef = 48;
-				this.armorMDef = 12;
-				this.bonusHP = 1400;
-				this.bonusLust = 189;
-				this.level = 44;
+			else if (flags[kFLAGS.ISABELLA_LVL_UP] == 16) {
+				initStrTouSpeInte(850, 1065, 660, 416);
+				initWisLibSensCor(416, 288, 130, 40);
+				this.weaponAttack = 330;
+				this.armorDef = 1420;
+				this.armorMDef = 360;
+				this.bonusHP = 7600;
+				this.bonusLust = 546;
+				this.level = 128;
 			}
-			if (flags[kFLAGS.ISABELLA_LVL_UP] == 5) {
-				initStrTouSpeInte(180, 240, 145, 110);
-				initWisLibSensCor(110, 110, 50, 40);
-				this.weaponAttack = 33;
-				this.armorDef = 54;
-				this.armorMDef = 14;
-				this.bonusHP = 1600;
-				this.bonusLust = 210;
-				this.level = 50;
-			}
-			if (flags[kFLAGS.ISABELLA_LVL_UP] == 6) {
-				initStrTouSpeInte(200, 270, 160, 120);
-				initWisLibSensCor(120, 120, 55, 40);
-				this.weaponAttack = 36;
-				this.armorDef = 62;
-				this.armorMDef = 16;
-				this.bonusHP = 1800;
-				this.bonusLust = 231;
-				this.level = 56;
-			}
-			if (flags[kFLAGS.ISABELLA_LVL_UP] == 7) {
-				initStrTouSpeInte(220, 300, 175, 130);
-				initWisLibSensCor(130, 130, 60, 40);
-				this.weaponAttack = 39;
-				this.armorDef = 70;
-				this.armorMDef = 18;
-				this.bonusHP = 2000;
-				this.bonusLust = 252;
-				this.level = 62;
-			}
-			if (flags[kFLAGS.ISABELLA_LVL_UP] == 8) {
-				initStrTouSpeInte(240, 330, 190, 140);
-				initWisLibSensCor(140, 140, 65, 40);
-				this.weaponAttack = 42;
-				this.armorDef = 78;
-				this.armorMDef = 20;
-				this.bonusHP = 2200;
-				this.bonusLust = 273;
-				this.level = 68;
-			}
-			if (flags[kFLAGS.ISABELLA_LVL_UP] == 9) {
-				initStrTouSpeInte(260, 360, 205, 150);
-				initWisLibSensCor(150, 150, 70, 40);
-				this.weaponAttack = 45;
-				this.armorDef = 86;
-				this.armorMDef = 22;
-				this.bonusHP = 2400;
-				this.bonusLust = 294;
-				this.level = 74;
-			}
-			if (flags[kFLAGS.ISABELLA_LVL_UP] == 10) {
-				initStrTouSpeInte(280, 390, 220, 160);
-				initWisLibSensCor(160, 160, 75, 40);
-				this.weaponAttack = 48;
-				this.armorDef = 94;
-				this.armorMDef = 24;
-				this.bonusHP = 2600;
-				this.bonusLust = 315;
-				this.level = 80;
-			}
-			if (flags[kFLAGS.ISABELLA_LVL_UP] == 11) {
-				initStrTouSpeInte(300, 420, 235, 170);
-				initWisLibSensCor(170, 170, 80, 40);
-				this.weaponAttack = 51;
-				this.armorDef = 102;
-				this.armorMDef = 26;
-				this.bonusHP = 2800;
-				this.bonusLust = 336;
-				this.level = 86;
-			}
-			if (flags[kFLAGS.ISABELLA_LVL_UP] == 12) {
-				initStrTouSpeInte(320, 450, 250, 180);
-				initWisLibSensCor(180, 180, 85, 40);
-				this.weaponAttack = 54;
-				this.armorDef = 110;
-				this.armorMDef = 28;
-				this.bonusHP = 3000;
-				this.bonusLust = 357;
-				this.level = 92;
-			}
-			if (flags[kFLAGS.ISABELLA_LVL_UP] == 13) {
-				initStrTouSpeInte(340, 480, 265, 190);
-				initWisLibSensCor(190, 190, 90, 40);
-				this.weaponAttack = 57;
-				this.armorDef = 118;
-				this.armorMDef = 30;
-				this.bonusHP = 3200;
-				this.bonusLust = 378;
-				this.level = 98;
-			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
 			this.weaponName = "giant shield";
 			this.weaponVerb="smash";
 			this.armorName = "giant shield";
@@ -333,37 +225,46 @@ public class Isabella extends Monster
 			this.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
 			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
-			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 1) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 1) this.createPerk(PerkLib.Lifeline, 0, 0, 0, 0);
 			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 2) {
-				this.createPerk(PerkLib.Lifeline, 0, 0, 0, 0);
 				this.createPerk(PerkLib.BasicTranquilness, 0, 0, 0, 0);
+				this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			}
-			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 3) this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
+			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 3) this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 4) {
-				this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 				this.createPerk(PerkLib.HalfStepToImprovedTranquilness, 0, 0, 0, 0);
+				this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			}
-			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 5) this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
+			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 5) this.createPerk(PerkLib.ImprovedLifeline, 0, 0, 0, 0);
 			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 6) {
-				this.createPerk(PerkLib.ImprovedLifeline, 0, 0, 0, 0);
 				this.createPerk(PerkLib.ImprovedTranquilness, 0, 0, 0, 0);
+				this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
 			}
-			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 7) this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
+			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 7) this.createPerk(PerkLib.GoliathI, 0, 0, 0, 0);
 			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 8) {
-				this.createPerk(PerkLib.GoliathI, 0, 0, 0, 0);
 				this.createPerk(PerkLib.HalfStepToAdvancedTranquilness, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EpicToughness, 0, 0, 0, 0);
 			}
-			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 9) this.createPerk(PerkLib.EpicToughness, 0, 0, 0, 0);
+			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 9) this.createPerk(PerkLib.GreaterLifeline, 0, 0, 0, 0);
 			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 10) {
-				this.createPerk(PerkLib.GreaterLifeline, 0, 0, 0, 0);
-				this.createPerk(PerkLib.AdvancedTranquilness, 0, 0, 0, 0)
+				this.createPerk(PerkLib.AdvancedTranquilness, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EpicStrength, 0, 0, 0, 0);
 			}
-			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 11) this.createPerk(PerkLib.EpicStrength, 0, 0, 0, 0);
+			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 11) this.createPerk(PerkLib.LegendaryToughness, 0, 0, 0, 0);
 			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 12) {
-				this.createPerk(PerkLib.EpicLifeline, 0, 0, 0, 0);
 				this.createPerk(PerkLib.HalfStepToSuperiorTranquilness, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);//lvl 104
 			}
-			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 13) this.createPerk(PerkLib.LegendaryToughness, 0, 0, 0, 0);
+			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 13) this.createPerk(PerkLib.EpicLifeline, 0, 0, 0, 0);
+			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 14) {
+				this.createPerk(PerkLib.SuperiorTranquilness, 0, 0, 0, 0);
+				this.createPerk(PerkLib.LegendaryStrength, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 15) this.createPerk(PerkLib.JobKnight, 0, 0, 0, 0);
+			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 16) {
+				this.createPerk(PerkLib.HalfStepToPeerlessTranquilness, 0, 0, 0, 0);
+				this.createPerk(PerkLib.JobBrawler, 0, 0, 0, 0);
+			}
 			checkMonster();
 		}
 		

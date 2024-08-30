@@ -825,9 +825,9 @@ public class PlayerInfo extends BaseContent {
                 interpersonStats += Math.round(flags[kFLAGS.ISABELLA_AFFECTION]) + "%\n";
 			else
 				interpersonStats += "100%\n";
-			if (flags[kFLAGS.ISABELLA_LVL_UP] == 13) interpersonStats += "<b>Isabella lvl:</b> 98 (current max lvl)\n";
-			else if (flags[kFLAGS.ISABELLA_LVL_UP] < 1) interpersonStats += "<b>Isabella lvl:</b> 20\n";
-			else interpersonStats += getNPCLevel("Isabella", 20, 0, 13, 6, flags[kFLAGS.ISABELLA_LVL_UP]);
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 16) interpersonStats += "<b>Isabella lvl:</b> 128 (current max lvl)\n";
+			else if (flags[kFLAGS.ISABELLA_LVL_UP] < 1) interpersonStats += "<b>Isabella lvl:</b> 32\n";
+			else interpersonStats += getNPCLevel("Isabella", 32, 0, 16, 6, flags[kFLAGS.ISABELLA_LVL_UP]);
 		}
 
 		if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3) {

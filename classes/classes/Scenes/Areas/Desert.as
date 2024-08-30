@@ -158,7 +158,7 @@ use namespace CoC;
 					kind  : 'place',
 					unique: true,
 					when: function ():Boolean {
-						return timesExploredOuter() > 45 && flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] == 0;
+						return timesExploredOuter() > 10 && flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] == 0;
 					},
 					call: SceneLib.dungeons.desertcave.enterDungeon
 				}, {

@@ -18,7 +18,7 @@ public class Sheila extends Monster
 			//Midget misfire (if PC < 3'6"):
 			if(player.tallness < 42 && rand(2) == 0) {
 				outputText("[sheilaname] bounces up to you and crouches low, curling her body like a watchspring.  She uncoils with her fist aimed at your jaw, but you easily perform a crouch of your own and duck under her lanky form, unbending yourself to push her legs up as she flies harmlessly overhead.  You can hear a partial shriek before she crashes face-first into the dirt behind you. ");
-				damage = 3 + rand(10);
+				damage = 6 + rand(20);
 				SceneLib.combat.doDamage(damage, true);
 			}
 			//Miss:
@@ -31,7 +31,7 @@ public class Sheila extends Monster
 				else outputText(".");
 				outputText("  Blushing pinkly, she crosses her arms over her chest as she resumes her distance.");
 				//(+med-small lib-based lust damage to PC)
-				player.takeLustDamage(10+rand(player.effectiveSensitivity()/10), true);
+				player.takeLustDamage(20+rand(player.effectiveSensitivity()/5), true);
 			}
 			//Hit:
 			else {
@@ -57,7 +57,7 @@ public class Sheila extends Monster
 			if(player.getEvasionRoll() || (hasStatusEffect(StatusEffects.Blind) && rand(3) == 0)) {
 				outputText("[sheilaname] squats down, then bounds explosively toward you!  She swings her leg out in front to kick, but you roll to the side and she slips past your shoulder.  You hear an \"<i>Oof!</i>\" as she lands on her butt behind you.  When you turn to look, she's already back to her feet, rubbing her smarting posterior and looking a bit embarrassed.");
 				//(small Sheila HP loss)
-				damage = 3 + rand(10);
+				damage = 6 + rand(20);
 				damage = SceneLib.combat.doDamage(damage);
 				outputText(" (" + damage + ")");
 			}
@@ -69,10 +69,10 @@ public class Sheila extends Monster
 					player.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
 					outputText("<b>You are stunned!</b>  ");
 				}
-				damage = int((str + 50 + weaponAttack) - rand(player.tou) - player.armorDef);
+				damage = int((str + 100 + weaponAttack) - rand(player.tou) - player.armorDef);
 				if(damage < 1) damage = 2;
 				player.takePhysDamage(damage, true);
-				EngineCore.fatigue(10+rand(6));
+				EngineCore.fatigue(20+rand(12));
 			}
 			speStat.core.value += 60;
 		}
@@ -96,9 +96,9 @@ public class Sheila extends Monster
 				//big (20+) int drop and big lib-based lust gain if successful, locks Infest command for the fight if successful, always misses if Sheila is blinded
 				if(!player.statStore.hasBuff("SheilaCorruption")) {
 					var counter:int = 40+rand(5);
-					player.buff("SheilaCorruption").addStat("int",-counter).combatPermanent()
+					player.buff("SheilaCorruption").addStat("int", -counter).combatPermanent();
 				}
-				player.takeLustDamage(30 + player.lib/10 + player.cor/10, true);
+				player.takeLustDamage(60 + player.lib/5 + player.cor/5, true);
 			}
 		}
 
@@ -112,7 +112,7 @@ public class Sheila extends Monster
 			else if(SceneLib.sheilaScene.sheilaCorruption() < 150) {
 				outputText("  As her hands run over the soft-looking mammaries, kneading and squeezing them, teasing the nipples relentlessly until she lets out a cute little moan, you feel the blood rush to your face.  \"<i>Enjoying this, are you?</i>\" she calls sweetly.  \"<i>Why don't you stop being contrary and come play with them too?</i>\"");
 				//med lib-based lust damage if 20 < sheila corruption < 150
-				player.takeLustDamage(25+player.lib/10, true);
+				player.takeLustDamage(50+player.lib/5, true);
 			}
 			//(else; 'miss')
 			else {
@@ -161,13 +161,13 @@ public class Sheila extends Monster
 			//[(int check passed)
 			if(player.inte / 15 + rand(20) + 1 > 16) {
 				outputText("\n\nBefore the fantasy can advance, you recoil and pull out of the demon's hands, shoving her away.");
-				player.takeLustDamage(15+player.effectiveSensitivity()/20 + player.lib/20, true);
+				player.takeLustDamage(30+player.effectiveSensitivity()/10 + player.lib/10, true);
 			}
 			//(int check failed)
 			else {
 				outputText("\n\nYour ego's urgent danger warnings are drowned in a sea of rising lust, and you find yourself transfixed.  The vision continues until [sheilaname] tires of fantasizing.");
 				//mild lib-based lust gain if PC resists; else big int drop and big lib-based lust gain plus Infest lock for remainder of fight
-				player.takeLustDamage(25+player.effectiveSensitivity()/20 + player.lib/20, true);
+				player.takeLustDamage(50+player.effectiveSensitivity()/10 + player.lib/10, true);
 				//harder to resist and bigger damage than normal Suspicious Glint
 			}
 		}
@@ -180,11 +180,11 @@ public class Sheila extends Monster
 			//[(sheila corruption < 100; hit, 'light damage')]
 			if(SceneLib.sheilaScene.sheilaCorruption() < 100) {
 				outputText("The silence is broken with a giggle as the demon catches you in an embrace, pressing her " + SceneLib.sheilaScene.sheilaCup() + " breasts into you.  You shiver as she drags the perky nipples over your " + player.skinFurScales() + ", but push her away.");
-				player.takeLustDamage(15+player.effectiveSensitivity()/20 + player.lib/20, true);
+				player.takeLustDamage(30+player.effectiveSensitivity()/10 + player.lib/10, true);
 			}
 			else if(SceneLib.sheilaScene.sheilaCorruption() < 300) {
 				outputText("A sigh ends the silence as your body is partially enfolded in the hot valley of an aroused [sheilaname]'s cleavage. As the demon grabs you and pushes her tits into you, the skin-on-" + player.skinFurScales() + " contact makes you shiver, and your attempts to get free meet with some resistance... or rather, a lack of resistance, as the soft, yielding breast flesh quivers and heats to your touch without moving the demon overmuch.  You accidentally brush her nipples several times before you can escape, unleashing horny moans from [sheilaname] that linger in your mind.");
-				player.takeLustDamage(25+player.effectiveSensitivity()/20 + player.lib/20, true);
+				player.takeLustDamage(50+player.effectiveSensitivity()/10 + player.lib/10, true);
 			}
 			else {//; miss)
 				outputText("You're a bit unnerved, but soon realize that you can tell where [sheilaname] is by listening for the telltale sounds of her colossal breasts scraping the ground as she draws closer to you.  With this in mind, you continue to face your opponent and back away as you wipe your eyes.");
@@ -244,16 +244,12 @@ public class Sheila extends Monster
 			this.a = "";
 			this.short = SceneLib.sheilaScene.sheilaName();
 			this.imageName = "sheila";
-			
-			if (sheilaDemon)
-			{
+			if (sheilaDemon) {
 				this.long = "[sheilaname] is a slim, somewhat athletic woman, over six feet in height.  Her smooth, dark skin is exposed from her head to her clawed feet, and she makes no effort to conceal anything your eyes might linger on.  The " + SceneLib.sheilaScene.sheilaCup() + " breasts on her chest" +(SceneLib.sheilaScene.sheilaCorruption() <= 40 ? " are firm, squeezable teardrops; she runs a hand absently over one from time to time." :	" jiggle as she moves, and she shoves them out to make sure you see just how lewd her body has become since your first meeting.") +"  Straight, jaw-length auburn hair frames her face along with two long, smooth ears that stick out sideways.  Her only nods to civilization are a dangling purple earring and the finger rings that she wears on her hands, and the wild woman stares openly at you, touching herself.";
 			}
-			else
-			{
+			else {
 				this.long = "[sheilaname] is a slim, somewhat athletic woman, over six feet in height.  Most of her lightly-tanned skin is hidden, either by her vest and shorts or by the fuzzy fur that covers her legs from the thighs down to her prominent nails.  Her " + SceneLib.sheilaScene.sheilaCup() + " breasts are briefly defined against the white of her shirt as she sways on her feet, " + (SceneLib.sheilaScene.sheilaCorruption() <= 40 ? "small, round things that match her slender frame." : "swollen, jiggling globes that stand in contrast to her slender body and tell a tale of all the corruption that has been pumped into her.") + "  Her straight, jaw-length auburn hair hangs unrestrained, falling around the fuzzy ears that stick out sideways from her head.  The hat she usually wears is hanging on her back by a string, pushed off to prevent its being lost in the chaos.  Something about slipping a rope around her own neck just to keep a hat tells you that [sheilaname]'s mind isn't really staying in the fight - though it could also be the desperate, faraway look in her eyes.";
 			}
-			
 			// this.plural = false;
 			this.createVagina(game.flags[kFLAGS.SHEILA_XP] <= 3 && !sheilaDemon, VaginaClass.WETNESS_SLICK, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 30, 0, 0, 0);
@@ -268,34 +264,34 @@ public class Sheila extends Monster
 			this.bodyColor = "tan";
 			this.hairColor = "auburn";
 			this.hairLength = 11;
-			initStrTouSpeInte(90, 45, 105, 50);
-			initWisLibSensCor(50, 30, 45, 25);
+			initStrTouSpeInte(270, 135, 315, 150);
+			initWisLibSensCor(150, 90, 135, 25);
 			var lust:Number = 30;
 			var lustVuln:Number = 0.4;
-			var bonusHP:Number = 200;
+			var bonusHP:Number = 500;
 			if (sheilaDemon) {
 				//-slightly slower, has much more stamina, intel, and HP now
-				this.speStat.core.value -= 15 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.touStat.core.value += 30 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.intStat.core.value += 30 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				bonusHP += 200;
-				bonusLust += 30;
+				this.speStat.core.value -= 55 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.touStat.core.value += 90 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.intStat.core.value += 90 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				bonusHP += 500;
+				bonusLust += 131;
 				lust= 50;
 				lustVuln= .15;
 				this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
-				this.createPerk(PerkLib.OverMaxHP, 19, 0, 0, 0);
+				this.createPerk(PerkLib.OverMaxHP, 37, 0, 0, 0);
 			}
 			this.weaponName = "foot";
 			this.weaponVerb="kick";
-			this.weaponAttack = 12;
+			this.weaponAttack = 120;
 			this.armorName = "clothes";
-			this.armorDef = 7;
-			this.armorMDef = 0;
+			this.armorDef = 140;
+			this.armorMDef = 50;
 			this.bonusHP = bonusHP;
-			this.bonusLust = 94;
+			this.bonusLust = 262;
 			this.lust = lust;
 			this.lustVuln = lustVuln;
-			this.level = 19;
+			this.level = 37;
 			this.gems = rand(7) + 7;
 			if (game.flags[kFLAGS.SHEILA_DEMON] == 0){
 				this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);

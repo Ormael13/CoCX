@@ -146,7 +146,7 @@ public class CharViewContext extends ExecContext {
 
 					PlayerHasAScythe: player.weapon.isScytheType() || player.weapon == game.weapons.DEMSCYT || player.weapon == game.weapons.KAMA || player.weapon == game.weapons.KAMAWHIP || player.weapon == game.weapons.D_KAMA,
 					PlayerHasAScytheHoly:player.weapon == game.weapons.LHSCYTH,
-					PlayerHasAScytheUnholy: player.weapon == game.weapons.ATWINSCY || player.weapon == game.weapons.HELRAIS,
+					PlayerHasAScytheUnholy: player.weapon == game.weapons.ATWINSCY || player.weaponOff == game.weapons.ATWINSCY || player.weapon == game.weapons.HATWINSCY || player.weaponOff == game.weapons.HATWINSCY || player.weapon == game.weapons.HELRAIS || player.weaponOff == game.weapons.HELRAIS,
 
 					PlayerHasADaggerTwin: player.hasAetherTwinsTierWeapon(),
 					PlayerHasAShieldTwin: player.hasAetherTwinsTierLeftShield(),

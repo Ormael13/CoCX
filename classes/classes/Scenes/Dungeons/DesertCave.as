@@ -2115,7 +2115,7 @@ public class DesertCave extends DungeonAbstractContent
 			addButton(2,"Cum Witches",discussCumWitches).hint("Ask the Sand Mother about the Cum Witches.", "Talk: Cum Witches");
 			addButton(3,"CovenStatus",currentStateOfInterwebs).hint("Ask the Sand Mother about the status of the coven.", "Talk: Coven Status");
 			addButton(4,"History",sandWitchHistory).hint("Ask the Sand Mother about the history of the Sand Witches.", "Talk: History");
-			if(flags[kFLAGS.SAND_WITCH_LOOT_TAKEN] < 10) {
+			if(flags[kFLAGS.SAND_WITCH_LOOT_TAKEN] < 20) {
 				addButton(5,"Get LaBova",getLaBova).hint(consumables.LABOVA_.description);
 				addButton(6,"Get Lactaid",getLactaidFromWitches).hint(consumables.LACTAID.description);
 			}

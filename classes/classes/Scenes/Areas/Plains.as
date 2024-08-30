@@ -22,7 +22,7 @@ use namespace CoC;
 		public var gnollSpearThrowerScene:GnollSpearThrowerScene = new GnollSpearThrowerScene();
 		public var satyrScene:SatyrScene = new SatyrScene();
 		
-		public const areaLevel:int = 9;
+		public const areaLevel:int = 25;
 		public function isDiscovered():Boolean {
 			return SceneLib.exploration.counters.plains > 0;
 		}
@@ -93,11 +93,11 @@ use namespace CoC;
 					else SceneLib.electraScene.repeatPlainsEnc();
 				}
 			}, {
-				name  : "werewolfFemale",
-				label : "Werewolf (F)",
+				name: "werewolf huntress",
+				label : "Werewolf Huntress",
 				kind : 'monster',
 				day : false,
-				call  : SceneLib.werewolfFemaleScene.introWerewolfFemale,
+				call  : SceneLib.werewolfFemaleScene.introWerewolfHuntress,
 				chance: 0.50
 			}, {
 				name: "sidonie",
@@ -188,7 +188,6 @@ use namespace CoC;
 				when  : function ():Boolean {
 					return flags[kFLAGS.OWCA_UNLOCKED] == 0;
 				},
-				mods  : [fn.ifLevelMin(24)],
 				call  : SceneLib.owca.gangbangVillageStuff
 			}, {
 				name  : "helXizzy",
