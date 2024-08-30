@@ -85,11 +85,12 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
     public function intro():void {
         if (player.cor <= 33 - player.corruptionTolerance) { //disgusted reaction
             //Get plant-cum dripped on you if not fast and unlucky!
+			outputText("Disgusted by this perversion of nature, you turn ");
             if (player.spe < 60 && rand(player.spe + 50) < 50) {
-                outputText("Disgusted by this perversion of nature, you turn to leave, catching a faceful of the white goop that's spurting down from the vines above!  It's slimy, gross, and difficult to clear from your eyes, nose, and mouth.  The musky smell and delicious salty flavor are undoubtedly a result of the plant's corruption.  You escape the tainted glade, but feel warmer and warmer as time passes...");
+                outputText("to leave, catching a faceful of the white goop that's spurting down from the vines above!  It's slimy, gross, and difficult to clear from your eyes, nose, and mouth.  The musky smell and delicious salty flavor are undoubtedly a result of the plant's corruption.  You escape the tainted glade, but feel warmer and warmer as time passes...");
                 dynStats("lus", 20 + player.lib / 5, "scale", false);
             } else {
-                outputText("  Disgusted by this perversion of nature, you turn away to leave, narrowly avoiding a sudden dripping of thick white fluid from the vines overhead.");
+                outputText("away to leave, narrowly avoiding a sudden dripping of thick white fluid from the vines overhead.");
                 dynStats("lus", 2, "scale", false);
             }
             outputText("\n\nOf course, you could resolve to destroy the corrupted glade if you want to.");

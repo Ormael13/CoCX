@@ -648,9 +648,9 @@ public class GameSettings extends BaseContent {
 		addButton(7, "Str scaling", toggleFlag, kFLAGS.STRENGTH_SCALING, settingsScreenGameSettings2).hint("Toggles Strength scaling for all attacks using it. If enabled, strength scaling would be less random with values being a bit higher on average.");
 		addButton(8, "Spe scaling", toggleFlag, kFLAGS.SPEED_SCALING, settingsScreenGameSettings2).hint("Toggles Speed scaling for all attacks using it. If enabled, speed scaling would be less random with values being a bit higher on average.");
 		if (CoC_Settings.debugBuild) {
-			outputText("ILLY Protocol: "+(player.hasStatusEffect(StatusEffects.ILLYProtocol)?"Active (No Cheats menu for you)":"Not active (Cheat menu is all yours)")+"");
-			outputText("\n\n");
 			if (player) {
+				outputText("ILLY Protocol: "+(player.hasStatusEffect(StatusEffects.ILLYProtocol)?"Active (No Cheats menu for you)":"Not active (Cheat menu is all yours)")+"");
+				outputText("\n\n");
 				if (player.hasStatusEffect(StatusEffects.ILLYProtocol)) addButton(13, "ILLY Protocol Off", ILLYProtocolOff).hint("Show Cheats in test builds.");
 				else addButton(13, "ILLY Protocol On", ILLYProtocolOn).hint("Hide Cheats in test builds.");
 			}

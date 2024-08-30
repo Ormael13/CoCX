@@ -1115,8 +1115,8 @@ import classes.Scenes.SceneLib;
 		//if (PotionsBagSlot08Cap > 0) outputText("Slot 8 - "+(PotionsBagSlot08Potion == "" ? "EMPTY":""+PotionsBagSlot08Potion+" "+PotionsBagSlot08+" / "+PotionsBagSlot08Cap+"")+"\n");
 		//if (PotionsBagSlot09Cap > 0) outputText("Slot 9 - "+(PotionsBagSlot09Potion == "" ? "EMPTY":""+PotionsBagSlot09Potion+" "+PotionsBagSlot09+" / "+PotionsBagSlot09Cap+"")+"\n");
 		//if (PotionsBagSlot10Cap > 0) outputText("Slot 10 - "+(PotionsBagSlot10Potion == "" ? "EMPTY":""+PotionsBagSlot10Potion+" "+PotionsBagSlot10+" / "+PotionsBagSlot10Cap+"")+"\n");
-		//Poultrice
-		addButton(0, "Poultice", HerbalismCraftItem, 1, "healing herb", "Poultrice").hint("Craft a Poultrice using healing herb.\n\nHealing herbs currently in Ingredient Bag "+IngrediantBagSlot01+"")
+		//Poultice
+		addButton(0, "Poultice", HerbalismCraftItem, 1, "healing herb", "Poultice").hint("Craft a Poultice using healing herb.\n\nHealing herbs currently in Ingredient Bag "+IngrediantBagSlot01+"")
 			.disableIf(IngrediantBagSlot01 == 0, "You lack the ingrediants to craft this item.\n\nHealing herbs currently in Ingredient Bag "+IngrediantBagSlot01+"");
 		//Energy drink
 		addButton(1, "Energy drink", HerbalismCraftItem, 2, "moon grass", "Energy drink").hint("Craft a Energy drink using moon grass.\n\nMoon grass currently in Ingredient Bag "+IngrediantBagSlot02+"");
@@ -1315,7 +1315,7 @@ import classes.Scenes.SceneLib;
 		var resultName:String = "";
 		switch (Item) {
 			case 1:
-				resultName = "Poultrice";
+				resultName = "Poultice";
 				break;
 			case 2:
 				resultName = "Energy drink";
@@ -1410,11 +1410,11 @@ import classes.Scenes.SceneLib;
 		if (PotionsBagSlot06Cap > 0) outputText("Slot 6 - "+(PotionsBagSlot06Potion == "" ? "EMPTY":""+PotionsBagSlot06Potion+" "+PotionsBagSlot06+" / "+PotionsBagSlot06Cap+"")+"\n");
 		outputText("\n\nPotion Effects:");
 		outputText("\nPoultice - Apply a healing salve to your wounds in order to recover health");
-		outputText("\nEnergy drink - Use an energy drink to recover your ressources");
+		outputText("\nEnergy drink - Use an energy drink to recover your resources");
 		outputText("\nCure - Negate status ailments");
 		outputText("\nPainkiller - Greatly reduce damage taken");
 		outputText("\nStimulant - Increase physical attack power");
-		outputText("\nPerfume - Empower teases throught scent components");
+		outputText("\nPerfume - Empower teases through scent components");
 		outputText("\n\nWhich item will you use?");
 		menu();
 		if (PotionsBagSlot01 > 0) addButton(0, ""+PotionsBagSlot01Potion+"", PotionMenuUse, PotionsBagSlot01Potion, 1);
@@ -1457,7 +1457,7 @@ import classes.Scenes.SceneLib;
 				break;
 		}
 		switch (potion) {
-			case "Poultrice":
+			case "Poultice":
 				SceneLib.combat.Poultice();
 				break;
 			case "Energy drink":

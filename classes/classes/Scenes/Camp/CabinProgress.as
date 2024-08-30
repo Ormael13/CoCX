@@ -158,17 +158,11 @@ import classes.Scenes.SceneLib;
 		//Silly Mode! Punch trees the Minecraft way!
 		private function punchTreeMinecraftStyle():void {
 			clearOutput();
-			if (player.str >= 90)
-			{
-				outputText("Who needs axes when you've got pure strength? Bracing yourself, you crack your knuckles and punch the tree with your mighty strength. Crack begins to form and you keep punching. As soon as the crack gets big enough, a block of wood breaks off. Strangely, the tree floats. ");
-			}
-			else
-			{
-				outputText("Who needs axes when you've got pure strength? Bracing yourself, you crack your knuckles and punch the tree with all your strength. It takes effort and while you're punching the tree, crack appears. It grows bigger as you keep punching. When the crack gets big enough, the log just broke off and the tree strangely floats. ");
-			}
+			if (player.str >= 90) outputText("Who needs axes when you've got pure strength? Bracing yourself, you crack your knuckles and punch the tree with your mighty strength. Crack begins to form and you keep punching. As soon as the crack gets big enough, a block of wood breaks off. Strangely, the tree floats. ");
+			else outputText("Who needs axes when you've got pure strength? Bracing yourself, you crack your knuckles and punch the tree with all your strength. It takes effort and while you're punching the tree, crack appears. It grows bigger as you keep punching. When the crack gets big enough, the log just broke off and the tree strangely floats. ");
 			outputText("You shrug and pick up the wood block when you hear crashing sound as the tree falls over and splits into many wooden blocks! Surprisingly, they clump together into one bunch. You pick the bunch of wood, noting how easy it is to carry. You return to your camp. \n\n");
-			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (10 + Math.floor(player.str / 8));
-			incrementWoodSupply(10 + Math.floor(player.str / 8));
+			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (10 + ((player.strStat.core.value + player.strStat.train.value) * 4));
+			incrementWoodSupply(10 + ((player.strStat.core.value + player.strStat.train.value) * 4));
 			awardAchievement("Getting Wood", kACHIEVEMENTS.GENERAL_GETTING_WOOD);
 			fatigue(gatherWoodsORquarrySiteMineCost(), USEFATG_PHYSICAL);
 			endEncounter();
@@ -180,7 +174,7 @@ import classes.Scenes.SceneLib;
 			else if (player.weapon == weapons.DL_AXE_) outputText("You ready your oversized axes. ");
 			else outputText("You ready your axe. ");
 			outputText("With your strength, you hack away at the tree, making wedge-shaped cuts. After ten strikes, you yell \"<i>TIMMMMMMMMBER!</i>\" as the tree falls and lands on the ground with a loud crash. You are quite the fine lumberjack! You then cut the felled tree into pieces and you haul the wood back to your camp.\n\n");
-			var cTT:Number = (10 + Math.floor(player.str / 8));
+			var cTT:Number = (10 + ((player.strStat.core.value + player.strStat.train.value) * 4));
 			if (player.weapon == weapons.DL_AXE_) cTT = Math.round(cTT*1.5);
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += cTT;
 			incrementWoodSupply(cTT);
@@ -205,12 +199,12 @@ import classes.Scenes.SceneLib;
 			else outputText("Grabbing a hold of the handle, you press ");
 			outputText("the blade into the trunk of the tree, watching it cut straight through as wood chips fly all over the place. Eventually you reach the other side of the trunk, and the tree falls over with a mighty thud. You then proceed to cut the trunk into smaller pieces and haul them back to your camp.\n\n");
 			if (player.isInGoblinMech()) {
-				flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (22 + Math.floor(player.str / 4));
-				incrementWoodSupply(22 + Math.floor(player.str / 4));
+				flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (22 + ((player.strStat.core.value + player.strStat.train.value) * 5));
+				incrementWoodSupply(22 + ((player.strStat.core.value + player.strStat.train.value) * 5));
 				endEncounter();
 			}
 			else {
-				var cTMT:Number = (13 + Math.floor(player.str / 7));
+				var cTMT:Number = (13 + ((player.strStat.core.value + player.strStat.train.value) * 4));
 				if (player.weapon == weapons.TMACGRSW || player.weapon == weapons.TRIPPER1 || player.weapon == weapons.TRIPPER2) cTMT = Math.round(cTMT*1.5);
 				flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += cTMT;
 				incrementWoodSupply(cTMT);
@@ -268,8 +262,7 @@ import classes.Scenes.SceneLib;
 				//later on add here chance to be ambushed by some enemy
 			}
 			outputText("\n\nYou begin slamming your pickaxe against the stone, spending the better part of the next two hours mining. This done, you bring back your prize to camp. ");
-			var minedStones:Number = 13 + Math.floor(player.str / 7);
-			minedStones = Math.round(minedStones);
+			var minedStones:Number = 13 + ((player.strStat.core.value + player.strStat.train.value) * 4);
 			fatigue(gatherWoodsORquarrySiteMineCost(), USEFATG_PHYSICAL);
 			if (minedStones > (40 + (2 * player.miningLevel) + (20 * player.newGamePlusMod()))) minedStones = (40 + (2 * player.miningLevel) + (20 * player.newGamePlusMod()));
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_YABBA_DABBA_DOO] += minedStones;
@@ -344,8 +337,8 @@ import classes.Scenes.SceneLib;
 			if (player.str >= 33 && player.str < 66) outputText("It's quite the chore. Though you can carry several pieces of wood at a time, Kiha is still superior to you when it comes to carrying wood.");
 			if (player.str >= 66) outputText("You easily tackle the task of carrying wood. You even manage to carry five pieces of wood at a time!");
 			outputText("\n\nIt takes some time but you eventually bring the last of wood back to your camp.\n\n");
-			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (20 + Math.floor(player.str / 5));
-			incrementWoodSupply(20 + Math.floor(player.str / 5));
+			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (20 + ((player.strStat.core.value + player.strStat.train.value) * 8));
+			incrementWoodSupply(20 + ((player.strStat.core.value + player.strStat.train.value) * 8));
 			fatigue(gatherWoodsORquarrySiteMineCost(), USEFATG_PHYSICAL);
 			endEncounter(120);
 		}
@@ -377,6 +370,12 @@ import classes.Scenes.SceneLib;
 				outputText(" Your stone capacity is full.")
 			}
 			outputText(")</b>");
+		}
+
+		private function noMoreSrt():Number {
+			var nMS:Number = player.str;
+			if (nMS > 10) nMS = 10;
+			return nMS;
 		}
 
 		//STAGE 6 - Work on cabin part 2. Planning your cabin.

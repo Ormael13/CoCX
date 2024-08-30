@@ -584,9 +584,9 @@ public class PlayerInfo extends BaseContent {
 					bowSkillGrade = "Advanced";
 				}
 			}
-			combatStats += "<b>Bow Skill:</b> " + currentBowSkill + " / " + maxBowSkillCap + " (" + bowSkillGrade + ")\n";
+			combatStats += "<b>Ranged Weapon Skill:</b> " + currentBowSkill + " / " + maxBowSkillCap + " (" + bowSkillGrade + ")\n";
 		}
-		else combatStats += "<b>Bow Skill:</b> 0 / 100\n";
+		else combatStats += "<b>Ranged Weapon Skill:</b> 0 / 100\n";
 		combatStats += "<b>Telekinesis Throw Cost (Fatigue): </b> " + combat.oneThrowTotalCost() + "\n";
 		combatStats += "<b>One Bullet Reload Cost (Fatigue): </b> " + combat.oneBulletReloadCost() + "\n";
 		

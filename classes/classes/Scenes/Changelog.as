@@ -311,7 +311,7 @@ public class Changelog extends BaseContent
 			outputText("-Dungeon enemies have their general levels and stats adjusted/increased. Dungeons adjusted (new lvl range of enemies): River Dungeon (floor 1-4) (only stats adjustments), Desert Cave (14-24)\n");
 			outputText("-Fixing Lusting Warrior buff not corelated to entering/leaving heat/rut state.\n");
 			outputText("-Control freak effect activating during straddle too. Updated perk desc.\n");
-			outputText("-Fixed som text issues in hellcat tf scene.\n");
+			outputText("-Fixed some text issues in hellcat tf scene.\n");
 			outputText("-Defensive Staff Channeling perk would work with PC using wand weapons too and when extending duration would give 2x more duration extension.\n");
 			outputText("-Titanic Strength and Condensed Power/Small caster effects activate 2ft from max/min height instead of 1 ft.\n");
 			outputText("-Autosave option will no longer require PC to go to sleep (insert your favourite joke about: sleep is for the ...) and having at least saved once manualy. Instead will still need to save once manualy but then will always trigger with all other once a day events (which all happens between 11pm and 12 pm).\n");
@@ -319,9 +319,9 @@ public class Changelog extends BaseContent
 			outputText("-New melee weapon (by Liadri): Half of Alvina Twin Scythe - obtained from seperating Alvina's Twin Scythes. Large, fire scythe type weapon with bleed, partstaff, whirlwing properties. Increasing spellpower by 90%, have base 20 atk (scalling based on coruption), costing 6,000 gems.\n");
 			outputText("-Due to new general levels and stats for enemies sparrable npc's in camp can reach new height of power (also any npc that go over lvl 100 will gain elite enemy tag, some that had before boss tag would loose it): Isabella (lvl 32-128)\n");
 			outputText("-Desert Cava free La Bova and Lactacid stash will be refilling 2x faster it will be 2x larger.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Text fixes. (Alot of small ones)\n");
+			outputText("-'Bow Skill' would instead be named 'Ranged Weapon Skill' to not confuse how does it affect thrown weapons or firearms too.\n");
+			outputText("-Wood or Mining would have calculate final result form sum of core and trained str instead of total str to avoid cases when having over 10,000,000,000,000 str will cause massive negative material gains.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

@@ -16,6 +16,7 @@ import classes.Races.GargoyleRace;
 import classes.Races.ImpRace;
 import classes.Scenes.*;
 import classes.Scenes.Camp.CampStatsAndResources;
+import classes.Scenes.Camp.Garden;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
@@ -2726,10 +2727,12 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.56;
 				outputText("\n\nTo equip is first to de-equip ^^");
 				toEquipIsToFirstDeequip();
-			}/*
+			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.57) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.57;
-			}
+				outputText("\n\nIt's PouLTice, not PoulTrice! ^^");
+				if (Garden.PotionsBagSlot01Potion == "Poultrice") Garden.PotionsBagSlot01Potion = "Poultice";
+			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.58) {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.58;
 			}
@@ -2758,4 +2761,4 @@ public class SaveUpdater extends NPCAwareContent {
 		}
 	}
 }
-}
+}
