@@ -296,7 +296,7 @@ public class Changelog extends BaseContent
 			outputText("-Skull and Tree of Life accesories now would give set bonus when applied both at the same time: +1% HP (+2% below 0 HP) regeneration for undead/others and -1% HP (-2% below 0 HP) regeneration for others / undead, +2% diehard for others / undead.\n");
 			outputText("-Because too much regeneration will kill you... wait maybe it was too much love? Anyway almost all item related effects that would increase maximum regeneration cap was removed.\n");
 			outputText("-Supercharged state can be entered for Raiju when racial score would reach 2 tier (greater raiju).\n");
-			outputText("-1 new achievment. (1 shadow one)\n");//s
+			outputText("-2 new achievments. (1 shadow one)\n");
 			outputText("-New mutation perk: Scylla Ink Glands (Evolved). Req. Scylla Ink Glands (Primitive) and lvl 60+. Effects: Your Scylla Ink Glands increase rate at which your body produce ink, duration ink spray affect enemies and lust damage by ((current i. mutation tier - 1) * 100)%, boost to your natural strength, speed and toughness, ");
 			outputText("Scylla Squeeze damage during grapple as Kraken would be multiplied by current i.mutation tier, scylla grapple will always succeed, when in an aquatic battle boost from Aquatic Affinity is 2x larger.\n");
 			outputText("-New mutation perk: Scylla Ink Glands (Final Form). Req. Scylla Ink Glands (Evolved) and lvl 90+. Effects: Your Scylla Ink Glands increase rate at which your body produce ink, duration ink spray affect enemies and lust damage by ((current i. mutation tier - 1) * 100)%, boost to your natural strength, speed and toughness, ");
@@ -335,11 +335,11 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");//New tier 4 wisdom lvl-up perk: ???. Req. Fourth Tamer of the Apocalypse perk and 125+ wisdom. Effect: 5th slot
-			outputText("-\n");//New tier ? wisdom lvl-up perk: Apes Together Strong. Req. ??? perk and ???+ wisdom. Effect: allow exchange single monsters variants > group monsters variants
-			outputText("-\n");//New tier 2 wisdom lvl-up perk: They Fight, They Protect. Req. Three times a tame perk and 80+ wisdom. Effect: meat shield option ^^
-			outputText("-\n");//New tier 3 wisdom lvl-up perk: Stronger Tamed Mosters. Req. Fourth Tamer of the Apocalypse perk and 105+ wisdom. Effect: bigger meat shields, bigger claws, bigger muscles \o/ bigger everything???
-			outputText("-\n");//New tier 7 wisdom lvl-up perk: Kaiju No8. Req. Job: Tamer and 50+ wisdom. Effect: 8th kaiju joins your team of monsters.
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//New mutation perk: Human Parathyroid Glands (Final Form). Req. Human Parathyroid Glands (Evolved) and lvl 90+. Effects: Increases self healing by 40 * level HP in combat and twice more out of combat. 8 * level HP Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.
 			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
@@ -348,11 +348,11 @@ public class Changelog extends BaseContent
 			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Lord Shadeogorath) (Furrin Gok) (khovel) (Chibizs) (Svalkash)
 			outputText("-\n");// (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (GatoGrande) (Imperfect Spell) (PhillipDaisySeventh) (Edward Darksong)
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//New tier 4 wisdom lvl-up perk: ???. Req. Fourth Tamer of the Apocalypse perk and 125+ wisdom. Effect: 5th slot
+			outputText("-\n");//New tier ? wisdom lvl-up perk: Apes Together Strong. Req. ??? perk and ???+ wisdom. Effect: allow exchange single monsters variants > group monsters variants
+			outputText("-\n");//New tier 2 wisdom lvl-up perk: They Fight, They Protect. Req. Three times a tame perk and 80+ wisdom. Effect: meat shield option ^^
+			outputText("-\n");//New tier 3 wisdom lvl-up perk: Stronger Tamed Mosters. Req. Fourth Tamer of the Apocalypse perk and 105+ wisdom. Effect: bigger meat shields, bigger claws, bigger muscles \o/ bigger everything???
+			outputText("-\n");//New tier 7 wisdom lvl-up perk: Kaiju No8. Req. Job: Tamer and 50+ wisdom. Effect: 8th kaiju joins your team of monsters.
 			outputText("-Fixed bugs: Dracula/lina PC unable to find get ghoul if they not learned this as normal Vampire, unable to buy manual for 1st atk: f. swords, Arigean Princess PC not been fully immune to TF-ing like other perm races, Weresharks not having their stats changing according to moon phase or boosted during use of Crinos Shape, Phoenix TF adding mutagen penatly instead of stat curse, ");
 			outputText("Endless Rage draining 10x too much wrath per turn, Berzerker/Lustzerker still req. to be activated after they been activated as part of Asura Form activation, dormant state of wereraces 'blessings' increasing race score and not lowering it, Hinezumi Buring Blood IM accesable by Bunny race, returning from teleportation circle at 4th floor of river dungeon sending PC to ");
 			outputText("3rd floor teleportation circle room, perk allowing to always run away from enemy/ies been ignored in dungeons, unarmed/feral giving mastery gains for small weapons, 2 of 4 SF to Elemental Energy conversion options having wrong check for usable SF, using Fiery Band for calling Kiha to help fight... Kiha, Ceraph after update still not able to win using her super cool lust beam attack, ");
@@ -426,8 +426,12 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -461,6 +465,8 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

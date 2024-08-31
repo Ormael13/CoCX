@@ -132,7 +132,7 @@ public class DemonLair extends BaseContent
 			dynStats("sens", 20);
 			player.addStatusValue(StatusEffects.MeetXuviel, 1, 1);
 			player.addStatusValue(StatusEffects.MeetXuviel, 2, 7);
-			endEncounter();
+			doNext(camp.returnToCampUseOneHour);
 		}
 		public function questProgressScenes04():void {
 			outputText("You will die or lose your sanity long before he gets you to do anything perverse.\n\n");
@@ -143,7 +143,7 @@ public class DemonLair extends BaseContent
 			dynStats("sens", 5);
 			player.addStatusValue(StatusEffects.MeetXuviel, 1, 1);
 			player.addStatusValue(StatusEffects.MeetXuviel, 2, 7);
-			endEncounter();
+			doNext(camp.returnToCampUseOneHour);
 		}
 		public function questProgressScenes05():void {
 			outputText("\"<i>Am I right to assume you are secretly enjoying this, [name]?</i>\"\n\n");
@@ -188,7 +188,7 @@ public class DemonLair extends BaseContent
 				player.addStatusValue(StatusEffects.MeetXuviel, 1, 1);
 				player.addStatusValue(StatusEffects.MeetXuviel, 2, 7);
 			}
-			endEncounter();
+			doNext(camp.returnToCampUseOneHour);
 		}
 		public function questProgressScenes08():void {
 			outputText("No, he’s wrong! You will keep defying him for as long as it takes until he sets you free!\n\n");
@@ -198,7 +198,7 @@ public class DemonLair extends BaseContent
 				player.addStatusValue(StatusEffects.MeetXuviel, 1, 1);
 				player.addStatusValue(StatusEffects.MeetXuviel, 2, 7);
 			}
-			endEncounter();
+			doNext(camp.returnToCampUseOneHour);
 		}
 		public function questProgressScenes09():void {
 			outputText("He lifts a glass of wine to you and this only angers you more. How dare he mock you, you’re going to make him pay for that! The moment the necklace's control weakens you’re going to give him nightmares for weeks. It’s only as your rage reaches its peak that you finally realize. The pull of the necklace is gone! Perhaps it’s time for revenge but then again if he defeats you he might fix your necklace and you may never get such a chance to strike back at him again. ");
@@ -211,7 +211,7 @@ public class DemonLair extends BaseContent
 			outputText("Striking him down in your current state of mind and body is downright foolishness. There's no telling how it might end! No, you ought to run while you can and get this necklace off by any means necessary!\n\n");
 			outputText("As you run for the exit, you hear Xuviel’s mocking voice behind you.\n\n");
 			outputText("\"<i>Run.. yes run however long you want [name], inevitably you will come back here of your own volition! You belong to me body and soul, you just don't know it yet.</i>\"\n\n");
-			endEncounter();
+			doNext(camp.returnToCampUseOneHour);
 		}
 		public function questProgressScenes11():void {
 			outputText("You smirk at Xuviel, dash at him, grab him, and then pull him off his chair. You growl. For every minute he raped you, you’re going to punish him, for every shame he inflicted upon you, you’re going to shame him, an eye for an eye. You forcefully pull him to the ground, but the demon is still smirking. Gosh, you’re going to erase that awful smile right away. With rage, you yell at him what you think of his attitude!\n\n");
@@ -288,7 +288,7 @@ public class DemonLair extends BaseContent
 			outputText("Now that’s an interesting deal. Hunting for food in the wild yields little interest to you, and indeed, having full access to Xuviel’s many resources and delicious dick could prove a profitable relationship.\n\n");
 			player.addStatusValue(StatusEffects.MeetXuviel, 1, 1);
 			player.createStatusEffect(StatusEffects.MeetXuviel2, 0, 0, 0, 0);
-			endEncounter();
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		public function demonLairMainMenu():void {
@@ -626,7 +626,7 @@ public class DemonLair extends BaseContent
 		private function demonLairOnlyVisiting():void {
 			clearOutput();
 			outputText("You are only here to say hi to your beloved, a short visit it may be. You tell Xuviel of your latest accomplishment, regaling him with your story before departing, you have more misdeeds to do yet.\n\n");
-			doNext(explorer.done);
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 }

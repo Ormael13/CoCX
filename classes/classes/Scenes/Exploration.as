@@ -332,10 +332,8 @@ public class Exploration extends BaseContent implements SaveableState
 			hideMenus();
 			menu();
 			if (player.hasStatusEffect(StatusEffects.MeetXuviel) && player.statusEffectv1(StatusEffects.MeetXuviel) < 4) {
-				if (player.statusEffectv1(StatusEffects.MeetXuviel) == 0) addButton(0, "X-Canndies", SceneLib.demonicLair.questProgressScenes).hint("Uncle X have candies for naughty girl like you.");
-				if (player.statusEffectv1(StatusEffects.MeetXuviel) == 1 && player.statusEffectv2(StatusEffects.MeetXuviel) == 0) addButton(0, "X-Eel", SceneLib.demonicLair.questProgressScenes).hint("Uncle X have eel for naughty girl like you.");
-				if (player.statusEffectv1(StatusEffects.MeetXuviel) == 2 && player.statusEffectv2(StatusEffects.MeetXuviel) == 0) addButton(0, "X-Cummies", SceneLib.demonicLair.questProgressScenes).hint("Uncle X have cummies for naughty girl like you.");
-				if (player.statusEffectv1(StatusEffects.MeetXuviel) == 3 && player.statusEffectv2(StatusEffects.MeetXuviel) == 0 && player.cor >= 100) addButton(0, "CumX", SceneLib.demonicLair.questProgressScenes).hint("Naughty girls like you not run away from Uncle X.");
+				if ((player.statusEffectv1(StatusEffects.MeetXuviel) == 0) || (player.statusEffectv1(StatusEffects.MeetXuviel) == 1 && player.statusEffectv2(StatusEffects.MeetXuviel) == 0) || (player.statusEffectv1(StatusEffects.MeetXuviel) == 2 && player.statusEffectv2(StatusEffects.MeetXuviel) == 0)) SceneLib.demonicLair.questProgressScenes();
+				if (player.statusEffectv1(StatusEffects.MeetXuviel) == 3 && player.statusEffectv2(StatusEffects.MeetXuviel) == 0 && player.cor >= 100) SceneLib.demonicLair.questProgressScenes();
 			}
 			else {
 				var bd:ButtonDataList = new ButtonDataList();
@@ -484,10 +482,8 @@ public class Exploration extends BaseContent implements SaveableState
 			hideMenus();
 			menu();
 			if (player.hasStatusEffect(StatusEffects.MeetXuviel) && player.statusEffectv1(StatusEffects.MeetXuviel) < 4) {
-				if (player.statusEffectv1(StatusEffects.MeetXuviel) == 0) addButton(0, "X-Canndies", SceneLib.demonicLair.questProgressScenes).hint("Uncle X have candies for naughty girl like you.");
-				if (player.statusEffectv1(StatusEffects.MeetXuviel) == 1 && player.statusEffectv2(StatusEffects.MeetXuviel) == 0) addButton(0, "X-Eel", SceneLib.demonicLair.questProgressScenes).hint("Uncle X have eel for naughty girl like you.");
-				if (player.statusEffectv1(StatusEffects.MeetXuviel) == 2 && player.statusEffectv2(StatusEffects.MeetXuviel) == 0) addButton(0, "X-Cummies", SceneLib.demonicLair.questProgressScenes).hint("Uncle X have cummies for naughty girl like you.");
-				if (player.statusEffectv1(StatusEffects.MeetXuviel) == 3 && player.statusEffectv2(StatusEffects.MeetXuviel) == 0 && player.cor >= 100) addButton(0, "CumX", SceneLib.demonicLair.questProgressScenes).hint("Naughty girls like you not run away from Uncle X.");
+				if ((player.statusEffectv1(StatusEffects.MeetXuviel) == 0) || (player.statusEffectv1(StatusEffects.MeetXuviel) == 1 && player.statusEffectv2(StatusEffects.MeetXuviel) == 0) || (player.statusEffectv1(StatusEffects.MeetXuviel) == 2 && player.statusEffectv2(StatusEffects.MeetXuviel) == 0)) SceneLib.demonicLair.questProgressScenes();
+				if (player.statusEffectv1(StatusEffects.MeetXuviel) == 3 && player.statusEffectv2(StatusEffects.MeetXuviel) == 0 && player.cor >= 100) SceneLib.demonicLair.questProgressScenes();
 			}
 			else {
 				addButton(0, "Explore", tryDiscover).hint("Explore to find new regions and visit any discovered regions.");

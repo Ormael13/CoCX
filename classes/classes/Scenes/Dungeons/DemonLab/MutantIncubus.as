@@ -17,7 +17,7 @@ import classes.internals.WeightedDrop;
 
 /**
  * ...
- * @author ...
+ * @author Canadian Snas
  */
 public class MutantIncubus extends Monster {
 
