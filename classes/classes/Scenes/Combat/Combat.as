@@ -2801,6 +2801,7 @@ public class Combat extends BaseContent {
         if (weaponSize == 1) accmod += Math.round((weaponSizeNormal() - 1) / 2);
         if (weaponSize == 2) accmod += Math.round((weaponSizeLarge() - 1) / 2);
         if (weaponSize == 3) accmod += Math.round((weaponSizeMassive() - 1) / 2);
+		if (monster.hasStatusEffect(StatusEffects.Swarmbringer)) accmod = Math.round(accmod * 0.5);
         return accmod;
     }
 
@@ -2885,6 +2886,7 @@ public class Combat extends BaseContent {
         var accmod:Number = 0;
 		accmod += baseRangeAccuracy();
 		accmod += Math.round((masteryArcheryLevel() - 1) / 2);
+		if (monster.hasStatusEffect(StatusEffects.Swarmbringer)) accmod = Math.round(accmod * 0.5);
         return accmod;
     }
 
@@ -2906,6 +2908,7 @@ public class Combat extends BaseContent {
 		taccmod += baseRangeAccuracy();
 		taccmod += Math.round((masteryThrowingLevel() - 1) / 2);
 		if (player.miscjewelryName == "Atlatl" || player.miscjewelryName2 == "Atlatl") taccmod += 50;
+		if (monster.hasStatusEffect(StatusEffects.Swarmbringer)) taccmod = Math.round(taccmod * 0.5);
         return taccmod;
     }
 
@@ -2920,6 +2923,7 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.AmateurGunslinger)) faccmod += 20;
 		if (player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Dual 2H Firearms") faccmod += Math.round((dualWFLevel() - 1) / 2);
 		if (player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Dual 2H Firearms") faccmod += firearmsDualWieldAccuracyPenalty();
+		if (monster.hasStatusEffect(StatusEffects.Swarmbringer)) faccmod = Math.round(faccmod * 0.5);
         return faccmod;
     }
 
@@ -9003,6 +9007,11 @@ public class Combat extends BaseContent {
 		if (player.headJewelry === headjewelries.DRABLOH && monster.hasPerk(PerkLib.EnemyDragonType)) damage *= 1.2;
 		damage *= EyesOfTheHunterDamageBonus();
         damage *= doDamageReduction();
+		if (monster.hasStatusEffect(StatusEffects.Swarmbringer) && CombatAbility.TAG_AOE) {
+			outputText("Your attack sweeps the area clear of the nasty swarm, leaving the nightmare angel clear to attack! ");
+			monster.removeStatusEffect(StatusEffects.Swarmbringer);
+			damage = 0;
+		}
 		damage = Math.round(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9064,6 +9073,11 @@ public class Combat extends BaseContent {
 		if (player.headJewelry === headjewelries.DRABLOH && monster.hasPerk(PerkLib.EnemyDragonType)) damage *= 1.2;
 		damage *= EyesOfTheHunterDamageBonus();
         damage *= doDamageReduction();
+		if (monster.hasStatusEffect(StatusEffects.Swarmbringer) && CombatAbility.TAG_AOE) {
+			outputText("Your attack sweeps the area clear of the nasty swarm, leaving the nightmare angel clear to attack! ");
+			monster.removeStatusEffect(StatusEffects.Swarmbringer);
+			damage = 0;
+		}
 		damage = Math.round(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9106,6 +9120,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
         if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
         if (monster.hasStatusEffect(StatusEffects.NecroticRot)) damage *= (1 + (0.25 * monster.statusEffectv1(StatusEffects.NecroticRot)));
+		if (monster.hasStatusEffect(StatusEffects.Swarmbringer)) damage *= 0.5;
         if (player.hasStatusEffect(StatusEffects.Minimise)) damage *= 0.01;
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
@@ -9152,6 +9167,11 @@ public class Combat extends BaseContent {
             }
         }
         damage *= doDamageReduction();
+		if (monster.hasStatusEffect(StatusEffects.Swarmbringer) && CombatAbility.TAG_AOE) {
+			outputText("Your attack sweeps the area clear of the nasty swarm, leaving the nightmare angel clear to attack! ");
+			monster.removeStatusEffect(StatusEffects.Swarmbringer);
+			damage = 0;
+		}
 		damage = Math.round(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9242,6 +9262,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
         if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
         if (monster.hasStatusEffect(StatusEffects.NecroticRot)) damage *= (1 + (0.25 * monster.statusEffectv1(StatusEffects.NecroticRot)));
+		if (monster.hasStatusEffect(StatusEffects.Swarmbringer)) damage *= 0.5;
 		if (damage < 1) damage = 1;
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
@@ -9285,6 +9306,11 @@ public class Combat extends BaseContent {
             }
         }
         damage *= doDamageReduction();
+		if (monster.hasStatusEffect(StatusEffects.Swarmbringer) && CombatAbility.TAG_AOE) {
+			outputText("Your attack sweeps the area clear of the nasty swarm, leaving the nightmare angel clear to attack! ");
+			monster.removeStatusEffect(StatusEffects.Swarmbringer);
+			damage = 0;
+		}
 		damage = Math.round(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9318,6 +9344,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
         if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
         if (monster.hasStatusEffect(StatusEffects.NecroticRot)) damage *= (1 + (0.25 * monster.statusEffectv1(StatusEffects.NecroticRot)));
+		if (monster.hasStatusEffect(StatusEffects.Swarmbringer)) damage *= 0.5;
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             dynStats("lus", 3);
@@ -9384,6 +9411,11 @@ public class Combat extends BaseContent {
             }
         }
         damage *= doDamageReduction();
+		if (monster.hasStatusEffect(StatusEffects.Swarmbringer) && CombatAbility.TAG_AOE) {
+			outputText("Your attack sweeps the area clear of the nasty swarm, leaving the nightmare angel clear to attack! ");
+			monster.removeStatusEffect(StatusEffects.Swarmbringer);
+			damage = 0;
+		}
         damage = Math.round(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9446,6 +9478,11 @@ public class Combat extends BaseContent {
             }
         }
         damage *= doDamageReduction();
+        if (monster.hasStatusEffect(StatusEffects.Swarmbringer) && CombatAbility.TAG_AOE) {
+			outputText("Your attack sweeps the area clear of the nasty swarm, leaving the nightmare angel clear to attack! ");
+			monster.removeStatusEffect(StatusEffects.Swarmbringer);
+			damage = 0;
+		}
         damage = Math.round(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9505,6 +9542,11 @@ public class Combat extends BaseContent {
             }
         }
         damage *= doDamageReduction();
+        if (monster.hasStatusEffect(StatusEffects.Swarmbringer) && CombatAbility.TAG_AOE) {
+			outputText("Your attack sweeps the area clear of the nasty swarm, leaving the nightmare angel clear to attack! ");
+			monster.removeStatusEffect(StatusEffects.Swarmbringer);
+			damage = 0;
+		}
         damage = Math.round(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9557,6 +9599,11 @@ public class Combat extends BaseContent {
             }
         }
         damage *= doDamageReduction();
+        if (monster.hasStatusEffect(StatusEffects.Swarmbringer) && CombatAbility.TAG_AOE) {
+			outputText("Your attack sweeps the area clear of the nasty swarm, leaving the nightmare angel clear to attack! ");
+			monster.removeStatusEffect(StatusEffects.Swarmbringer);
+			damage = 0;
+		}
         damage = Math.round(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9604,6 +9651,11 @@ public class Combat extends BaseContent {
             }
         }
         damage *= doDamageReduction();
+        if (monster.hasStatusEffect(StatusEffects.Swarmbringer) && CombatAbility.TAG_AOE) {
+			outputText("Your attack sweeps the area clear of the nasty swarm, leaving the nightmare angel clear to attack! ");
+			monster.removeStatusEffect(StatusEffects.Swarmbringer);
+			damage = 0;
+		}
         damage = Math.round(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9651,6 +9703,11 @@ public class Combat extends BaseContent {
             }
         }
         damage *= doDamageReduction();
+        if (monster.hasStatusEffect(StatusEffects.Swarmbringer) && CombatAbility.TAG_AOE) {
+			outputText("Your attack sweeps the area clear of the nasty swarm, leaving the nightmare angel clear to attack! ");
+			monster.removeStatusEffect(StatusEffects.Swarmbringer);
+			damage = 0;
+		}
         damage = Math.round(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9698,6 +9755,11 @@ public class Combat extends BaseContent {
             }
         }
         damage *= doDamageReduction();
+        if (monster.hasStatusEffect(StatusEffects.Swarmbringer) && CombatAbility.TAG_AOE) {
+			outputText("Your attack sweeps the area clear of the nasty swarm, leaving the nightmare angel clear to attack! ");
+			monster.removeStatusEffect(StatusEffects.Swarmbringer);
+			damage = 0;
+		}
         damage = Math.round(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9745,6 +9807,11 @@ public class Combat extends BaseContent {
             }
         }
         damage *= doDamageReduction();
+        if (monster.hasStatusEffect(StatusEffects.Swarmbringer) && CombatAbility.TAG_AOE) {
+			outputText("Your attack sweeps the area clear of the nasty swarm, leaving the nightmare angel clear to attack! ");
+			monster.removeStatusEffect(StatusEffects.Swarmbringer);
+			damage = 0;
+		}
         damage = Math.round(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -9796,6 +9863,11 @@ public class Combat extends BaseContent {
             doNext(endHpVictory);
         }
         damage *= doDamageReduction();
+        if (monster.hasStatusEffect(StatusEffects.Swarmbringer) && CombatAbility.TAG_AOE) {
+			outputText("Your attack sweeps the area clear of the nasty swarm, leaving the nightmare angel clear to attack! ");
+			monster.removeStatusEffect(StatusEffects.Swarmbringer);
+			damage = 0;
+		}
         damage = Math.round(damage);
         if (damage < 0) damage = 1;
         if (apply) {

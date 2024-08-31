@@ -46,6 +46,7 @@ public class SaveUpdater extends NPCAwareContent {
 			SceneLib.dungeons.checkRiverDungeon2ndFloorClear(),
 			SceneLib.dungeons.checkRiverDungeon3rdFloorClear(),
 			SceneLib.dungeons.checkRiverDungeon4thFloorClear(),
+			SceneLib.dungeons.checkRiverDungeon5thFloorClear(),
 			SceneLib.dungeons.checkDenOfDesireClear(),
 			SceneLib.dungeons.checkEbonLabyrinthClear(),
 		];
@@ -223,6 +224,7 @@ public class SaveUpdater extends NPCAwareContent {
 			["Dungeon Seeker (2nd layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_2ND_LAYER, SceneLib.dungeons.checkRiverDungeon2ndFloorClear()],
 			["Dungeon Seeker (3rd layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_3RD_LAYER, SceneLib.dungeons.checkRiverDungeon3rdFloorClear()],
 			["Dungeon Seeker (4th layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_4TH_LAYER, SceneLib.dungeons.checkRiverDungeon4thFloorClear()],
+			["Dungeon Seeker (5th layer)", kACHIEVEMENTS.DUNGEON_DUNGEON_SEEKER_5TH_LAYER, SceneLib.dungeons.checkRiverDungeon5thFloorClear()],
 			["Slain the Heroslayer", kACHIEVEMENTS.DUNGEON_SLAIN_THE_HEROSLAYER, SceneLib.dungeons.checkDenOfDesireClear()],
 			//bee hive clear
 			["Delver", kACHIEVEMENTS.DUNGEON_DELVER, dungeonsCleared >= 1],
@@ -2761,4 +2763,4 @@ public class SaveUpdater extends NPCAwareContent {
 		}
 	}
 }
-}
+}

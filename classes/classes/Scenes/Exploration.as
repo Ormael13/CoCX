@@ -331,130 +331,132 @@ public class Exploration extends BaseContent implements SaveableState
 			}
 			hideMenus();
 			menu();
-			var bd:ButtonDataList = new ButtonDataList();
-			// Row 1
-			bd.append(btnExploreLake());
-			bd.append(btnExploreLakeBoat());
-			bd.add("");//bd.add("Shore").hint("TBA"); //Discovered when exploring using Lake Boat.
-			bd.add("");
-			bd.add("");
-			// Row 2
-			bd.append(btnExploreForestOutskirts());
-			bd.append(btnExploreForestInner());
-			bd.append(btnExploreDeepwoods());
-			bd.add("");
-			bd.add("");
-			// Row 3
-			bd.append(btnExploreDesertOuter());
-			bd.append(btnExploreDesertInner());
-			bd.add("");
-			bd.add("");
-			bd.add("");
-			// Row 4
-			bd.append(btnExploreBattlefieldBoundary());
-			bd.append(btnExploreBattlefieldOuter());
-			bd.add("");
-			bd.add("");
-			bd.add("");
-			// Row 5
-			bd.append(btnExploreHills());
-			bd.append(btnExploreMountainsLow());
-			bd.append(btnExploreMountainsMid());
-			bd.append(btnExploreMountainsHigh());
-			bd.add("");
-			// Row 6
-			bd.append(btnExplorePlains());
-			bd.add(""); // plains inner part
-			bd.add("");
-			bd.add("");
-			bd.add("");
-			// Row 7
-			bd.append(btnExploreSwamp());
-			bd.append(btnExploreBog());
-			bd.add("");
-			bd.add("");
-			bd.add("");
-			// Row 8
-			bd.append(btnExploreBlightRidge());
-			bd.append(btnExploreDefiledRavine());
-			bd.add("");
-			bd.add("");
-			bd.add("");
-			// Row 9
-			bd.append(btnExploreBeach());
-			bd.append(btnExploreOcean());
-			bd.add(""); // Deep Sea
-			// if (flags[kFLAGS.DISCOVERED_DEEP_SEA] > 0 && player.canSwimUnderwater()) addButton(2, "Deep Sea", SceneLib.deepsea.exploreDeepSea).hint("Visit the 'almost virgin' deep sea. But beware of... krakens. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEEP_SEA] : ""));
-			bd.add("");
-			bd.add("");
-			// Row 10
-			bd.append(btnExploreCaves());
-			bd.add("");
-			bd.add("");
-			bd.add("");
-			bd.add("");
-			// Row 11
-			bd.add("");
-			bd.append(btnExploreTundra());
-			bd.append(btnExploreGlacialRiftOuter());
-			bd.add("");
-			bd.add("");
-			// Row 12
-			bd.add("");
-			bd.append(btnExploreAshlands());
-			bd.append(btnExploreVolcanicCragOuter());
-			bd.add("");
-			bd.add("");
-			// Row 13
-			//bd.add("");
-			//bd.append(btnExploreAshlands());//underdark entrance
-			//bd.append(btnExploreVolcanicCragOuter());
-			//bd.add("");
-			//bd.add("");
-			// Row 14
-			//bd.add("");
-			//bd.append(btnExploreAshlands());//cliffs
-			//bd.append(btnExploreVolcanicCragOuter());
-			//bd.add("");
-			//bd.add("");
-			
-			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(5, "",	//Wuxia related area - ?latająca wyspa?
-			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(9, "",	//Wuxia related area - ?latająca wyspa?
-			//if (flags[kFLAGS.DISCOVERED_PIT] > 0) addButton(10, "Pit", CoC.instance.abyss.explorePit).hint("Visit the pit. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_PIT] : ""));
-			//if (flags[kFLAGS.DISCOVERED_ABYSS] > 0) addButton(12, "Abyss", CoC.instance.abyss.exploreAbyss).hint("Visit the abyss. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_ABYSS] : ""));
-			
-			
-			bigButtonGrid(bd);
-			addButton(0, "Explore", tryDiscover)
-					.hint("Explore to find new regions and visit any discovered regions.");
-			addButton(4, "Menu Style", toggleMenuStyle)
-					.hint("Switch to old menu style");
-			addButton(5, "LL Explore", tryDiscoverLL)
-					.hint("Explore to find weakest new enemies.")
-					.disableIf(player.level < 31,"Req. lvl 31+");
-			addButton(6, "ML Explore", tryDiscoverML)
-					.hint("Explore to find weaker new enemies.")
-					.disableIf(player.level < 51,"Req. lvl 51+");
-			addButton(7, "HL Explore", tryDiscoverHL)
-					.hint("Explore to find below average new enemies.")
-					.disableIf(player.level < 70,"Req. lvl 70+");
-			addButton(8, "XHL Explore", tryDiscoverXHL)
-					.hint("Explore to find bit above average new enemies.")
-					.disableIf(player.level < 95,"Req. lvl 95+");
-			addButton(9, "XXHL Explore", tryDiscoverXXHL)
-					.hint("Explore to find strong new enemies.")
-					.disableIf(player.level < 125,"Req. lvl 125+");
 			if (player.hasStatusEffect(StatusEffects.MeetXuviel) && player.statusEffectv1(StatusEffects.MeetXuviel) < 4) {
-				if (player.statusEffectv1(StatusEffects.MeetXuviel) == 0) addButton(11, "X-Canndies", SceneLib.demonicLair.questProgressScenes).hint("Uncle X have candies for naughty girl like you.");
-				if (player.statusEffectv1(StatusEffects.MeetXuviel) == 1 && player.statusEffectv2(StatusEffects.MeetXuviel) == 0) addButton(11, "X-Eel", SceneLib.demonicLair.questProgressScenes).hint("Uncle X have eel for naughty girl like you.");
-				if (player.statusEffectv1(StatusEffects.MeetXuviel) == 2 && player.statusEffectv2(StatusEffects.MeetXuviel) == 0) addButton(11, "X-Cummies", SceneLib.demonicLair.questProgressScenes).hint("Uncle X have cummies for naughty girl like you.");
-				if (player.statusEffectv1(StatusEffects.MeetXuviel) == 3 && player.statusEffectv2(StatusEffects.MeetXuviel) == 0 && player.cor >= 100) addButton(11, "CumX", SceneLib.demonicLair.questProgressScenes).hint("Naughty girls like you not run away from Uncle X.");
+				if (player.statusEffectv1(StatusEffects.MeetXuviel) == 0) addButton(0, "X-Canndies", SceneLib.demonicLair.questProgressScenes).hint("Uncle X have candies for naughty girl like you.");
+				if (player.statusEffectv1(StatusEffects.MeetXuviel) == 1 && player.statusEffectv2(StatusEffects.MeetXuviel) == 0) addButton(0, "X-Eel", SceneLib.demonicLair.questProgressScenes).hint("Uncle X have eel for naughty girl like you.");
+				if (player.statusEffectv1(StatusEffects.MeetXuviel) == 2 && player.statusEffectv2(StatusEffects.MeetXuviel) == 0) addButton(0, "X-Cummies", SceneLib.demonicLair.questProgressScenes).hint("Uncle X have cummies for naughty girl like you.");
+				if (player.statusEffectv1(StatusEffects.MeetXuviel) == 3 && player.statusEffectv2(StatusEffects.MeetXuviel) == 0 && player.cor >= 100) addButton(0, "CumX", SceneLib.demonicLair.questProgressScenes).hint("Naughty girls like you not run away from Uncle X.");
 			}
-			addButton(12, "42", tryRNGod)
-					.hint("Explore to find the answer for your prayers. Or maybe you really not wanna find it, fearing answer will not be happy with you?")
-					.disableIf(!silly(), "Only in Silly Mode...", "???");
-			if (debug) addButton(13, "Debug", exploreDebug.doExploreDebug);
-			addButton(14, "Back", playerMenu);
+			else {
+				var bd:ButtonDataList = new ButtonDataList();
+				// Row 1
+				bd.append(btnExploreLake());
+				bd.append(btnExploreLakeBoat());
+				bd.add("");//bd.add("Shore").hint("TBA"); //Discovered when exploring using Lake Boat.
+				bd.add("");
+				bd.add("");
+				// Row 2
+				bd.append(btnExploreForestOutskirts());
+				bd.append(btnExploreForestInner());
+				bd.append(btnExploreDeepwoods());
+				bd.add("");
+				bd.add("");
+				// Row 3
+				bd.append(btnExploreDesertOuter());
+				bd.append(btnExploreDesertInner());
+				bd.add("");
+				bd.add("");
+				bd.add("");
+				// Row 4
+				bd.append(btnExploreBattlefieldBoundary());
+				bd.append(btnExploreBattlefieldOuter());
+				bd.add("");
+				bd.add("");
+				bd.add("");
+				// Row 5
+				bd.append(btnExploreHills());
+				bd.append(btnExploreMountainsLow());
+				bd.append(btnExploreMountainsMid());
+				bd.append(btnExploreMountainsHigh());
+				bd.add("");
+				// Row 6
+				bd.append(btnExplorePlains());
+				bd.add(""); // plains inner part
+				bd.add("");
+				bd.add("");
+				bd.add("");
+				// Row 7
+				bd.append(btnExploreSwamp());
+				bd.append(btnExploreBog());
+				bd.add("");
+				bd.add("");
+				bd.add("");
+				// Row 8
+				bd.append(btnExploreBlightRidge());
+				bd.append(btnExploreDefiledRavine());
+				bd.add("");
+				bd.add("");
+				bd.add("");
+				// Row 9
+				bd.append(btnExploreBeach());
+				bd.append(btnExploreOcean());
+				bd.add(""); // Deep Sea
+				// if (flags[kFLAGS.DISCOVERED_DEEP_SEA] > 0 && player.canSwimUnderwater()) addButton(2, "Deep Sea", SceneLib.deepsea.exploreDeepSea).hint("Visit the 'almost virgin' deep sea. But beware of... krakens. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEEP_SEA] : ""));
+				bd.add("");
+				bd.add("");
+				// Row 10
+				bd.append(btnExploreCaves());
+				bd.add("");
+				bd.add("");
+				bd.add("");
+				bd.add("");
+				// Row 11
+				bd.add("");
+				bd.append(btnExploreTundra());
+				bd.append(btnExploreGlacialRiftOuter());
+				bd.add("");
+				bd.add("");
+				// Row 12
+				bd.add("");
+				bd.append(btnExploreAshlands());
+				bd.append(btnExploreVolcanicCragOuter());
+				bd.add("");
+				bd.add("");
+				// Row 13
+				//bd.add("");
+				//bd.append(btnExploreAshlands());//underdark entrance
+				//bd.append(btnExploreVolcanicCragOuter());
+				//bd.add("");
+				//bd.add("");
+				// Row 14
+				//bd.add("");
+				//bd.append(btnExploreAshlands());//cliffs
+				//bd.append(btnExploreVolcanicCragOuter());
+				//bd.add("");
+				//bd.add("");
+				
+				//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(5, "",	//Wuxia related area - ?latająca wyspa?
+				//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(9, "",	//Wuxia related area - ?latająca wyspa?
+				//if (flags[kFLAGS.DISCOVERED_PIT] > 0) addButton(10, "Pit", CoC.instance.abyss.explorePit).hint("Visit the pit. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_PIT] : ""));
+				//if (flags[kFLAGS.DISCOVERED_ABYSS] > 0) addButton(12, "Abyss", CoC.instance.abyss.exploreAbyss).hint("Visit the abyss. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_ABYSS] : ""));
+				
+				
+				bigButtonGrid(bd);
+				addButton(0, "Explore", tryDiscover)
+						.hint("Explore to find new regions and visit any discovered regions.");
+				addButton(4, "Menu Style", toggleMenuStyle)
+						.hint("Switch to old menu style");
+				addButton(5, "LL Explore", tryDiscoverLL)
+						.hint("Explore to find weakest new enemies.")
+						.disableIf(player.level < 31,"Req. lvl 31+");
+				addButton(6, "ML Explore", tryDiscoverML)
+						.hint("Explore to find weaker new enemies.")
+						.disableIf(player.level < 51,"Req. lvl 51+");
+				addButton(7, "HL Explore", tryDiscoverHL)
+						.hint("Explore to find below average new enemies.")
+						.disableIf(player.level < 70,"Req. lvl 70+");
+				addButton(8, "XHL Explore", tryDiscoverXHL)
+						.hint("Explore to find bit above average new enemies.")
+						.disableIf(player.level < 95,"Req. lvl 95+");
+				addButton(9, "XXHL Explore", tryDiscoverXXHL)
+						.hint("Explore to find strong new enemies.")
+						.disableIf(player.level < 125,"Req. lvl 125+");
+				addButton(12, "42", tryRNGod)
+						.hint("Explore to find the answer for your prayers. Or maybe you really not wanna find it, fearing answer will not be happy with you?")
+						.disableIf(!silly(), "Only in Silly Mode...", "???");
+				if (debug) addButton(13, "Debug", exploreDebug.doExploreDebug);
+				addButton(14, "Back", playerMenu);
+			}
 		}
 		
 		private function toggleMenuStyle():void {
@@ -481,25 +483,33 @@ public class Exploration extends BaseContent implements SaveableState
 			}
 			hideMenus();
 			menu();
-			addButton(0, "Explore", tryDiscover).hint("Explore to find new regions and visit any discovered regions.");
-			btnExploreForestOutskirts().applyTo(button(1));
-			btnExploreLake().applyTo(button(2));
-			btnExploreDesertOuter().applyTo(button(3));
-			
-			btnExploreBattlefieldBoundary().applyTo(button(5));
-			btnExploreHills().applyTo(button(6));
-			btnExplorePlains().applyTo(button(7));
-			btnExploreSwamp().applyTo(button(8));
-			
-			btnExploreBlightRidge().applyTo(button(10));
-			btnExploreBeach().applyTo(button(11));
-			btnExploreCaves().applyTo(button(12));
-			
-			addButton(4, "Next", explorePageII);
-			addButton(9, "Menu Style", toggleMenuStyle).hint("Switch to new menu style");
-			if (debug) addButton(13, "Debug", exploreDebug.doExploreDebug);
-			
-			addButton(14, "Back", playerMenu);
+			if (player.hasStatusEffect(StatusEffects.MeetXuviel) && player.statusEffectv1(StatusEffects.MeetXuviel) < 4) {
+				if (player.statusEffectv1(StatusEffects.MeetXuviel) == 0) addButton(0, "X-Canndies", SceneLib.demonicLair.questProgressScenes).hint("Uncle X have candies for naughty girl like you.");
+				if (player.statusEffectv1(StatusEffects.MeetXuviel) == 1 && player.statusEffectv2(StatusEffects.MeetXuviel) == 0) addButton(0, "X-Eel", SceneLib.demonicLair.questProgressScenes).hint("Uncle X have eel for naughty girl like you.");
+				if (player.statusEffectv1(StatusEffects.MeetXuviel) == 2 && player.statusEffectv2(StatusEffects.MeetXuviel) == 0) addButton(0, "X-Cummies", SceneLib.demonicLair.questProgressScenes).hint("Uncle X have cummies for naughty girl like you.");
+				if (player.statusEffectv1(StatusEffects.MeetXuviel) == 3 && player.statusEffectv2(StatusEffects.MeetXuviel) == 0 && player.cor >= 100) addButton(0, "CumX", SceneLib.demonicLair.questProgressScenes).hint("Naughty girls like you not run away from Uncle X.");
+			}
+			else {
+				addButton(0, "Explore", tryDiscover).hint("Explore to find new regions and visit any discovered regions.");
+				btnExploreForestOutskirts().applyTo(button(1));
+				btnExploreLake().applyTo(button(2));
+				btnExploreDesertOuter().applyTo(button(3));
+				
+				btnExploreBattlefieldBoundary().applyTo(button(5));
+				btnExploreHills().applyTo(button(6));
+				btnExplorePlains().applyTo(button(7));
+				btnExploreSwamp().applyTo(button(8));
+				
+				btnExploreBlightRidge().applyTo(button(10));
+				btnExploreBeach().applyTo(button(11));
+				btnExploreCaves().applyTo(button(12));
+				
+				addButton(4, "Next", explorePageII);
+				addButton(9, "Menu Style", toggleMenuStyle).hint("Switch to new menu style");
+				if (debug) addButton(13, "Debug", exploreDebug.doExploreDebug);
+				
+				addButton(14, "Back", playerMenu);
+			}
 		}
 		
 		private function explorePageII():void {

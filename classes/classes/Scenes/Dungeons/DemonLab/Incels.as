@@ -1,7 +1,7 @@
 package classes.Scenes.Dungeons.DemonLab {
 /**
  * ...
- * @author CanadianSnas
+ * @author Canadian Snas
  */
 
 import classes.AssClass;

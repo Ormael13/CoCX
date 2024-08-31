@@ -244,9 +244,13 @@ public class DungeonEngine extends DungeonAbstractContent {
 			case DUNGEON_RIVER_FLOOR_05_ROOM_31: return riverdungeon.roomE31;
 			case DUNGEON_RIVER_FLOOR_05_ROOM_32: return riverdungeon.roomE32;
             //River Dungeon 6th floor
-			//case DUNGEON_RIVER_FLOOR_06_ROOM_01: return riverdungeon.roomF01;
-			//case DUNGEON_RIVER_FLOOR_06_ROOM_02: return riverdungeon.roomF02;
+			case DUNGEON_RIVER_FLOOR_06_ROOM_01: return riverdungeon.roomF01;
+			case DUNGEON_RIVER_FLOOR_06_ROOM_02: return riverdungeon.roomF02;
 			//case DUNGEON_RIVER_FLOOR_06_ROOM_03: return riverdungeon.roomF03;
+			//case DUNGEON_RIVER_FLOOR_06_ROOM_04: return riverdungeon.roomF04;
+			//case DUNGEON_RIVER_FLOOR_06_ROOM_05: return riverdungeon.roomF05;
+			//case DUNGEON_RIVER_FLOOR_06_ROOM_06: return riverdungeon.roomF06;
+			//case DUNGEON_RIVER_FLOOR_06_ROOM_07: return riverdungeon.roomF07;
             //Den of Desire
             case DUNGEON_DEN_OF_DESIRE_ENTRANCE:            return denofdesire.roomEntrance;
             case DUNGEON_DEN_OF_DESIRE_GREAT_HALL_AREA:     return denofdesire.roomGreatHallArea;
@@ -350,6 +354,9 @@ public class DungeonEngine extends DungeonAbstractContent {
     }
     public function checkRiverDungeon4thFloorClear():Boolean {
         return (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 10);//10 - otwarcie drzwi boss room-u, 11 - pokonanie bossa
+    }
+    public function checkRiverDungeon5thFloorClear():Boolean {
+        return (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 12);//12 - otwarcie schodów na poziom, 13 - pokonanie bossa
     }
 
     //returns the room required for clearing

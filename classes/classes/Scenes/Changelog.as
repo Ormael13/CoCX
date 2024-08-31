@@ -138,7 +138,11 @@ public class Changelog extends BaseContent
 			outputText("-Demon face now changes based on corruption. (Lord Shadeogorath)\n");
 			outputText("-Fixed a bug causing the goo armor taur sprite to not show. (Lord Shadeogorath)\n");
 			outputText("-Horse face sprite (by Liadri) implementation. (Lord Shadeogorath)\n");
+			outputText("-Color code updates. (GatoGrande) (making all the damage/heal/etc. numbers colors not use diff codes and for some cases making better fitting color choices for higher readability)\n");
+			outputText("-Fix for Zenji post-halloween. (GatoGrande)\n");
 			outputText("-Fix for small weapons giving wrong weapons mastery. (Imperfect Spell)\n");
+			outputText("-Dynamically display the name of a racial requirement. (PhillipDaisySeventh)\n");
+			outputText("-Adds a newer race menu UI using buttons in place of text links for all the races, along side a button to switch from new UI to old UI and back. Hovering over a race displays any bonuses you are currently getting from that race, if any. And clicking on a race will switch to another 'screen' displaying all the race's requirements, stats and stuff like in the old UI. (Edward Darksong)\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-\n");
@@ -157,13 +161,10 @@ public class Changelog extends BaseContent
 			outputText("-Tyrantia traiing cap now is increased (30 > 40).\n");
 			outputText("-Constant Buildup - If you are in Rut or Heat, halve the lust DoT you take from it, and deal an additional 20% physical damage while under the effects. (35 training sessions)\n");
 			outputText("-New event perk: Drill Sergeant. Gained by having 20 Vocal Training sessions with Charybdis. Effects: Your voice and bearing now commands respect, even among the surliest of recruits. Your followers will attack an additional time per round, and are guaranteed to attack.\n");
-			outputText("-Color code updates. (GatoGrande) (making all the damage/heal/etc. numbers colors not use diff codes and for some cases making better fitting color choices for higher readability)\n");
-			outputText("-Fix for Zenji post-halloween. (GatoGrande)\n");
 			outputText("-Bad End from overuse Cerulean Potion from Giacomo was changed into way to gain Souless perk and become true demon PC. It comes with few negative side effects but would they stop you a TRUE DEMON, RIGHT?\n");
 			outputText("-Added devil eyes to count for demon score (demon tf would be able to grant devil eyes too)\n");
 			outputText("-True Demon type enemies would have now their base HP halved, their regeneration doubled (after adding all the regenerations sources), increased base m.res by 30 on top of current magic resistance values.\n");
 			outputText("-Souless perk will grant pc reduction of max HP base by half (like true demon enemies), add 1% innate HP regen and double final % regeneration part, magic resistance increased by 30 pts and add overmaxHP effect same as enemy demons benefits (1% overmax HP per each PC level)\n");
-			outputText("-Dynamically display the name of a racial requirement. (PhillipDaisySeventh)\n");
 			outputText("-Monsters lust vulnerability debuff would now stops at reaching 100% (or 0% enemy lust resistance). To go beyond that would req. one of Corrupt the ... perkline.\n");
 			outputText("-Human Eyes (Final Form) would now additionaly grant Dark Vision like some of the eye types.\n");
 			outputText("-Etna venom effect and kitsune residue magic on increasing cum multiplier have been increase to reach 50% more then before (from cap of 10k to 15k). It would also show bolded part of scene text when the effect of venom trigger.\n");
@@ -224,7 +225,6 @@ public class Changelog extends BaseContent
 			outputText("-Default firearms dmg calculation from weapon atk increased (2x > 10x) and scaling off wis/int/spe (instead of core values to use scaling functions).\n");
 			outputText("-Changed order of discovered areas with Lake been first founded then Forest (O).\n");
 			outputText("-Fixed Hel loss scenes being broken. Fixed lizan rogue win corruption check being too low for rape. Fixed Electra not asking for recruitment when accessed from SoulSense menu. Minor typo/grammar fixes. (Svalkash)\n");
-			outputText("-Adds a newer race menu UI using buttons in place of text links for all the races, along side a button to switch from new UI to old UI and back. Hovering over a race displays any bonuses you are currently getting from that race, if any. And clicking on a race will switch to another 'screen' displaying all the race's requirements, stats and stuff like in the old UI. (Edward Darksong)\n");
 			outputText("-New mutation perk: Drake Blood (Primitive). Req. Drake Blood and lvl 30+. Effects: Dragon strong vitality grants mana soulforce and health regeneration 2%. You take 5% less damage from magical attack.\n");
 			outputText("-Bunny race get new racial bonuses tier - Greater Bunny (13+): -10% to tou multi, +100% to spe multi, +105% to lib multi\n");
 			outputText("-Eastern Bunny get new racial bonuses tier - Greater Easter Bunny (20+): -20% to str multi, -10% to tou multi, +130% to spe multi, +200% to lib multi\n");
@@ -318,13 +318,13 @@ public class Changelog extends BaseContent
 			outputText("-One of req. for Gigant's Grip perks changed to Amateur Gunslinger. Also perk and it follow up perks would be accesable from both Swordsman and Gunslinger perk trees.\n");
 			outputText("-New melee weapon (by Liadri): Half of Alvina Twin Scythe - obtained from seperating Alvina's Twin Scythes. Large, fire scythe type weapon with bleed, partstaff, whirlwing properties. Increasing spellpower by 90%, have base 20 atk (scalling based on coruption), costing 6,000 gems.\n");
 			outputText("-Due to new general levels and stats for enemies sparrable npc's in camp can reach new height of power (also any npc that go over lvl 100 will gain elite enemy tag, some that had before boss tag would loose it): Isabella (lvl 32-128)\n");
-			outputText("-Desert Cava free La Bova and Lactacid stash will be refilling 2x faster it will be 2x larger.\n");
+			outputText("-Desert Cave free La Bova and Lactacid stash will be refilling 2x faster it will be 2x larger.\n");
 			outputText("-Text fixes. (Alot of small ones)\n");
 			outputText("-'Bow Skill' would instead be named 'Ranged Weapon Skill' to not confuse how does it affect thrown weapons or firearms too.\n");
 			outputText("-Wood or Mining would have calculate final result form sum of core and trained str instead of total str to avoid cases when having over 10,000,000,000,000 str will cause massive negative material gains.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-After having equipped Silver Cross Necklace PC would be periodicaly visiting Demon Lair place (when req. to get new visit PC would travel there on next Exploration). Each visit brings PC closer to become true demon. To stop vistiing PC must remove somehow Silver Cross Necklace (which been cursed item for no true demon PC would be quite difficult).\n");
+			outputText("-New Place: Demon Lair - Xuviel home where true succubus PC can visit. There are few possible interactions there: Talk, Sex, Font of corruption. Last option have two uses: either drink directly to get week long buff or use it to turn items into corrupted legendary items (all other req. like radiant shards or cost still apply (no discounts even for Xuviel 9th wife ;))).\n");
+			outputText("-Req. min level to find Celess Senior was removed.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -345,8 +345,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Lord Shadeogorath) (Furrin Gok) (khovel) (Chibizs)
-			outputText("-\n");// (Svalkash) (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (Edward Darksong)
+			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Lord Shadeogorath) (Furrin Gok) (khovel) (Chibizs) (Svalkash)
+			outputText("-\n");// (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (GatoGrande) (Imperfect Spell) (PhillipDaisySeventh) (Edward Darksong)
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

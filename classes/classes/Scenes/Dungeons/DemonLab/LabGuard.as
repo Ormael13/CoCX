@@ -16,7 +16,7 @@ import classes.internals.WeightedDrop;
 
 /**
  * ...
- * @author ...CanadianSnas
+ * @author Canadian Snas
  */
 
 public class LabGuard extends Monster {

@@ -1096,6 +1096,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const OniRampage:StatusEffectType                = mkCombat("Oni Rampage");
 		public static const Overlimit:StatusEffectType                 = mkCombat("Overlimit");
 		public static const PerfectClarity:StatusEffectType            = mkCombat("Perfect Clarity");
+		public static const PastPresent:StatusEffectType               = mkCombat("Past Present");
 		public static const PhysicalDisabled:StatusEffectType          = mkCombat("Physical Disabled");
 		public static const PiercingBlow:StatusEffectType	           = mkCombat("Piercing Blow");
 		public static const PlantGrowth:StatusEffectType               = mkCombat("Plant Growth");
@@ -1115,6 +1116,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const RegenSurge:StatusEffectType                = mkCombat("Regen Surge");
 		public static const ResonanceVolley:StatusEffectType           = mkCombat("Resonance Volley");
 		public static const Rosethorn:StatusEffectType                 = mkCombat("Rosethorn Poison");
+		public static const RootOfTheIssue:StatusEffectType            = mkCombat("Root of the issue");
 		public static const Sandstorm:StatusEffectType                 = mkCombat("sandstorm");
 		public static const SandWormAcid:StatusEffectType              = mkCombat("Sand Worm Acid");
 		public static const ScarletSpiritCharge:StatusEffectType       = mkCombat("Scarlet Spirit Charge");
@@ -1138,6 +1140,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const StoneSkin:StatusEffectType                 = mkCombat("Stone Skin");
 		public static const Stunned:StatusEffectType                   = mkCombat("Stunned");
 		public static const StunnedTornado:StatusEffectType            = mkCombat("Stunned (Tornado)");
+		public static const Swarmbringer:StatusEffectType              = mkCombat("Swarmbringer");
 		public static const SubZeroConditions:StatusEffectType         = mkCombat("Sub zero conditions");
 		public static const TailWhip:StatusEffectType                  = mkCombat("Tail Whip");
 		public static const TearsOfDenial:StatusEffectType             = mkCombat("Tears of Denial");
@@ -1447,4 +1450,4 @@ import classes.StatusEffects.VampireThirstEffect;
 			return new StatusEffectType(id,CombatStatusEffect,1);
 		}
 	}
-}
+}

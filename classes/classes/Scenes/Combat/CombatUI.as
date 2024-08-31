@@ -124,8 +124,8 @@ public class CombatUI extends BaseCombatContent {
 			else if (player.hasStatusEffect(StatusEffects.Gallop)) btnMelee.disable("No way you could hit enemy with melee attacks while galloping. Unless you stop for a moment or two.");
 			else {
 				if (monster.isFlying()) {
-					if (player.isFlying() || player.haveThrowableMeleeWeapon() || player.weapon.isWhipType() || player.weaponOff.isWhipType() || player.weapon.isRibbonType() || player.weaponOff.isRibbonType() || ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.StaffChanneling) && flags[kFLAGS.STAFF_CHANNELING_MODE])) {
-						if (player.isFlying()) {
+					if (player.isFlying() || monster.hasStatusEffect(StatusEffects.RootOfTheIssue) || player.haveThrowableMeleeWeapon() || player.weapon.isWhipType() || player.weaponOff.isWhipType() || player.weapon.isRibbonType() || player.weaponOff.isRibbonType() || ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.StaffChanneling) && flags[kFLAGS.STAFF_CHANNELING_MODE])) {
+						if (player.isFlying() || monster.hasStatusEffect(StatusEffects.RootOfTheIssue)) {
 							if (player.hasPerk(PerkLib.AerialCombat) || player.haveThrowableMeleeWeapon() || player.weapon.isWhipType() || player.weaponOff.isWhipType() || player.weapon.isRibbonType() || player.weaponOff.isRibbonType()) {
 								if (!Wings.Types[player.wings.type].canFly && Arms.Types[player.arms.type].canFly) btnMelee.disable("No way you could use your melee weapon with those arms while flying.");
 								else btnMelee.show("Attack", combat.basemeleeattacks, "Attempt to attack the enemy with your " + player.weaponName+".  Damage done is determined by your strength and weapon.").icon("A_Melee");
@@ -780,7 +780,7 @@ public class CombatUI extends BaseCombatContent {
 	public function isCompanionTurn(num:int):Boolean {
 		var present:Boolean;
 		var acted:Boolean;
-		var occupied:Boolean = player.hasStatusEffect(StatusEffects.MinoKing) && player.statusEffectv1(StatusEffects.MinoKing) == num;
+		var occupied:Boolean = ((player.hasStatusEffect(StatusEffects.MinoKing) && player.statusEffectv1(StatusEffects.MinoKing) == num) || monster.hasStatusEffect(StatusEffects.PastPresent));
 		switch(num) {
 			case 0:
 				present = flags[kFLAGS.PLAYER_COMPANION_0] != "";
