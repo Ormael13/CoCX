@@ -4533,7 +4533,7 @@ public class Camp extends NPCAwareContent{
 				.disableIf(flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] <= 0, "???", null, "???");
 		bd.add("Twilight Grove", SceneLib.dungeons.twilightgrove.enterDungeon)
 				.hint("Visit the twilight grove you've found in the deepwoods."
-						+ (flags[kFLAGS.TWILIGHT_GROVE_PURIFICATION] > 1 ? "\n\nYou've defeated all corrupted alraunes." : "")
+						+ (flags[kFLAGS.TWILIGHT_GROVE_PURIFICATION] > 3 ? "\n\nYou've defeated all corrupted alraunes." : "")
 						+ (SceneLib.dungeons.checkTwilightGroveClear() ? "\n\nCLEARED!" : ""))
 				.disableIf(flags[kFLAGS.DISCOVERED_TWILIGHT_GROVE_DUNGEON] <= 0, "???", null, "???");
 		bd.add("EbonLabyrinth", SceneLib.dungeons.ebonlabyrinth.enterDungeon)

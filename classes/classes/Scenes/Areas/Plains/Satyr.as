@@ -173,7 +173,7 @@ public class Satyr extends Monster
 			this.drop = new ChainedDrop()
 					.add(consumables.INCUBID,1/2)
 					.add(weapons.SFLUTTE,1/4);
-			this.tailType = Tail.COW;
+			this.tailType = Tail.GOAT;
 			checkMonster();
 		}
 		

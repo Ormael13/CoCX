@@ -765,6 +765,7 @@ public class Combat extends BaseContent {
         else if (player.hasStatusEffect(StatusEffects.GooArmorSilence)) return false;
         else if (player.hasStatusEffect(StatusEffects.WhipSilence)) return false;
         else if (player.hasStatusEffect(StatusEffects.PiercingBlow)) return false;
+        else if (player.hasStatusEffect(StatusEffects.Strangulate)) return false;
 		else if (player.statStore.hasBuff("Supercharged")) return false;
 		else if (player.statStore.hasBuff("Atavism")) return false;
         return true;
@@ -10298,6 +10299,10 @@ public class Combat extends BaseContent {
 		if (player.hasStatusEffect(StatusEffects.PiercingBlow)) {
             player.addStatusValue(StatusEffects.PiercingBlow, 1, -1);
             if (player.statusEffectv1(StatusEffects.PiercingBlow) < 0) player.removeStatusEffect(StatusEffects.PiercingBlow);
+        }
+        if (player.hasStatusEffect(StatusEffects.Strangulate)) {
+            player.addStatusValue(StatusEffects.Strangulate, 1, -1);
+            if (player.statusEffectv1(StatusEffects.Strangulate) < 0) player.removeStatusEffect(StatusEffects.Strangulate);
         }
         if (player.hasStatusEffect(StatusEffects.LustStones)) {
             //[When witches activate the stones for goo bodies]

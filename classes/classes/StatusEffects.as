@@ -868,8 +868,9 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const MonsterVPT:StatusEffectType 			= mk("Monster Violet Pupil Transformation");
 		public static const MysticWeb:StatusEffectType  			= mk("MysticWeb");
 		public static const NoLoot:StatusEffectType             	= mk("No Loot");
-		public static const KitsuneTailTangle:StatusEffectType       	= mk("KitsuneTailTangle");
+		public static const KitsuneTailTangle:StatusEffectType      = mk("KitsuneTailTangle");
 		public static const PeachLootLoss:StatusEffectType      	= mk("Peach Loot Loss");
+		public static const MaddeningTune:StatusEffectType			= mk("Maddening tune");
 		// @aimozg i don't know and do not fucking care if these two should be merged
 		public static const PhyllaFight:StatusEffectType        	= mk("PhyllaFight");
 		public static const phyllafight:StatusEffectType        	= mk("phyllafight");
@@ -1138,6 +1139,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const SparingTyrantia:StatusEffectType           = mkCombat("SparingTyrantia");
 		public static const StoneLust:StatusEffectType                 = mkCombat("Stone Lust");
 		public static const StoneSkin:StatusEffectType                 = mkCombat("Stone Skin");
+		public static const Strangulate:StatusEffectType               = mkCombat("Strangulate");
 		public static const Stunned:StatusEffectType                   = mkCombat("Stunned");
 		public static const StunnedTornado:StatusEffectType            = mkCombat("Stunned (Tornado)");
 		public static const Swarmbringer:StatusEffectType              = mkCombat("Swarmbringer");

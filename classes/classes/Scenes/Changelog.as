@@ -14,9 +14,15 @@ public class Changelog extends BaseContent
 		{}
 		
 		public function accessChangelogMenu():void {
-			Changelog54();//new: lvl-up perk, rare asc perk, event perk, items perk, super perk, enemy perk, internal mutation, key item, item, consumable, usable, p.special, m.special, spell, soulskill, bodypart
+			Changelog55();//new: lvl-up perk, rare asc perk, event perk, items perk, super perk, enemy perk, internal mutation, key item, item, consumable, usable, p.special, m.special, spell, soulskill, bodypart
 		}
 		//zrobić do 2022 na świeta event z reniferami i nie odblokowywać go do ok. 20-24 grudnia 2021 xD
+		private function Changelog58():void {
+			clearOutput();
+			menu();
+			addButton(0, "Next", Changelog57);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
+		}
 		private function Changelog57():void {
 			clearOutput();
 			menu();
@@ -32,92 +38,7 @@ public class Changelog extends BaseContent
 		private function Changelog55():void {
 			clearOutput();
 			outputText("(Part 3/3) <b>Version 0.9a:</b>\n\n");
-			menu();
-			addButton(0, "Next", Changelog54);
-			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
-		}
-		private function Changelog54():void {
-			clearOutput();
-			outputText("(Part 2/3) <b>Version 0.9a:</b>\n\n");
-			outputText("-New key Item (by Liadri): Upgraded Armor plating 4.0 - req. Upgraded Armor plating 3.0 - +20 armor/magic resistance to the mech. +80% Health.\n");
-			outputText("-New key Item (by Liadri): Upgraded Armor plating 5.0 - req. Upgraded Armor plating 4.0 - +25 armor/magic resistance to the mech. +100% Health.\n");
-			outputText("-New key Item (by Liadri): Upgraded Armor plating 6.0 - req. Upgraded Armor plating 5.0 - +30 armor/magic resistance to the mech. +120% Health.\n");
-			outputText("-New key Item (by Liadri): Machine Gun MK4 - req. Machine Gun MK3 - Increase range attack by 125% if using a firearm. Change the firearm text to a goblin machine gun text.\n");
-			outputText("-New key Item (by Liadri): Machine Gun MK5 - req. Machine Gun MK4 - Increase range attack by 150% if using a firearm. Change the firearm text to a goblin machine gun text.\n");
-			outputText("-New key Item (by Liadri): Machine Gun MK6 - req. Machine Gun MK5 - Increase range attack by 200% if using a firearm. Change the firearm text to a goblin machine gun text.\n");
-			outputText("-New key Item (by Liadri): Artificial Intelligence - req. Toolbelt - Add an artificial intelligence to your mech which will greet you when you board. Aside from the friendliness of this new interface feature it cannot do much on its own yet.\n");
-			outputText("-New key Item (by Liadri): Improved Artificial Intelligence - req. Artificial Intelligence - The mech can now use an auto turret.\n");
-			outputText("-New key Item (by Liadri): Improved Artificial Intelligence MK2 - req. Improved Artificial Intelligence - The mech will randomly activate one of its weapon functions every round on its own at half power value.\n");
-			outputText("-New key Item (by Liadri): Improved Artificial Intelligence MK3 - req. Improved Artificial Intelligence MK2 - The mech will randomly activate one of its weapon functions every round on its own at full power.\n");
-			outputText("-New key Item (by Liadri): Improved Artificial Intelligence MK4 - req. Improved Artificial Intelligence MK3 - The mech will randomly activate two of its weapon functions every round on its own.\n");
-			outputText("-New key Item (by Liadri): Auto turret - req. Improved Artificial Intelligence - Add passive ranged attack per round to your AI routine no matter your action choice.\n");
-			outputText("-New key Item (by Liadri): Auto turret MK2 - req. Auto turret - Add two passive ranged attacks per round to your AI routine no matter your action choice.\n");
-			outputText("-New key Item (by Liadri): Auto turret MK3 - req. Auto turret MK2 - Add three passive ranged attacks per round to your AI routine no matter your action choice.\n");
-			outputText("-New key Item (by Liadri): Auto turret MK4 - req. Auto turret MK3 - Add four passive ranged attacks per round to your AI routine no matter your action choice.\n");
-			outputText("-New key Item (by Liadri): Auto turret MK5 - req. Auto turret MK4 - Add five passive ranged attacks per round to your AI routine no matter your action choice.\n");
-			outputText("-New key Item (by Liadri): Auto turret MK6 - req. Auto turret MK5 - Add six passive ranged attacks per round to your AI routine no matter your action choice.\n");
-			outputText("-New key Item (by Liadri): Hydraulics - req. Toolbelt - Mechs gain 25% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus.\n");
-			outputText("-New key Item (by Liadri): Hydraulics MK2 - req. Hydraulics - Mechs gain 50% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus.\n");
-			outputText("-New key Item (by Liadri): Hydraulics MK3 - req. Hydraulics MK2 - Mechs gain 75% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus\n");
-			outputText("-New key Item (by Liadri): Hydraulics MK4 - req. Hydraulics MK3 - Mechs gain 100% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus\n");
-			outputText("-New key Item (by Liadri): Hydraulics MK5 - req. Hydraulics MK4 - Mechs gain 125% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus\n");
-			outputText("-New key Item (by Liadri): Hydraulics MK6 - req. Hydraulics MK5 - Mechs gain 150% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus\n");
-			outputText("-New key Item (by Liadri): Improved Ammo Chemistry - req. Toolbelt - Add one extra attack to the mech ranged weapon.\n");
-			outputText("-New key Item (by Liadri): Improved Ammo Chemistry MK2 - req. Improved Ammo Chemistry - Add two extra attacks to the mech ranged weapon.\n");
-			outputText("-New key Item (by Liadri): Improved Ammo Chemistry MK3 - req. Improved Ammo Chemistry MK2 - Add three extra attacks to the mech ranged weapon. Ammo now has an incendiary property dealing doubled damage as fire.\n");
-			outputText("-New key Item (by Liadri): Improved Ammo Chemistry MK4 - req. Improved Ammo Chemistry MK3 - Add four extra attacks to the mech ranged weapon. Ammo now has an incendiary property dealing doubled damage as fire.\n");
-			outputText("-New key Item (by Liadri): Improved Ammo Chemistry MK5 - req. Improved Ammo Chemistry MK4 - Add five extra attacks to the mech ranged weapon. Ammo now has an incendiary property dealing doubled damage as fire. Ammo now has a caustic property dealing tripled damage as acid.\n");
-			outputText("-New key Item (by Liadri): Improved Ammo Chemistry MK6 - req. Improved Ammo Chemistry MK5 - Add six extra attacks to the mech ranged weapon. Ammo now has an incendiary property dealing doubled damage as fire. Ammo now has a caustic property dealing tripled damage as acid.\n");
-			outputText("-New melee weapon (by Lord Shadeogorath): Glacial Graveaxe - pulled from unnamed grave at tundra. Base atk is 160. It's massive axe type low grade wrath weapon. Normaly it deal 80% of physical dmg and 20% ice dmg. When using charge weapon it will deal 100% ice damage and have 10% to apply Frostburn DoT after critical hit.\n");
-			outputText("-New melee weapon (by Lord Shadeogorath): Volcanic Gravehammer - pulled from unnamed grave at ashlands. Base atk is 160. It's massive mace/hammer type low grade wrath weapon. Normaly it deal 80% of physical dmg and 20% fire dmg. When using charge weapon it will deal 100% fire damage and have 10% to apply Burn DoT after critical hit.\n");
-			outputText("-New melee weapon (by Liadri): Machine Spear - craftable at goblin workshop (3 metal pieces, 200 nails, 1 energy core, 2 mechanisms and BP). Cost 2720 gems, have 19 atk, have 100% armor penetration and increases critical damage by +25%\n");
-			outputText("-New pure legendary melee weapon (by Morgan): Paracelsus - obtainable by putting Beautiful Staff on restored Marae Altar and then taking it back.\n");
-			outputText("-New range weapon (by Liadri): Sagittarius Baneful Great Bow - obtained by finding it at Plains. 260 atk, costing 13000 gems, no accuracy penalty, is low-grade wrath weapon, can't be unequiped normal way and would require visting NPC that can help uncurse items. Similary to Tome of Imps would gradualy change PC into male/herm centuar.\n");
-			outputText("-New legendary pure armor (Liadri): Spirit Flare Qipao - made from Blue/Green/Purple/Red Qipao. Increase fire damage from abilities by 200%. Increase unarmed strikes damage by 20%. When worn by a species with fire affinity stoke the inner fire granting 3% Regeneration. Misdirection.\n");
-			outputText("-New necklace (by Ormael): Skull Necklace - buyable at Felix in Journey to the East inn. Cost 800 spirit stones. +2%(+4%)/-2%(-4%) HP regeneration (below 0 HP)(undead / others), +5% diehard for undead\n");
-			outputText("-New necklace (by Ormael): Tree of Life Necklace - buyable at Felix in Journey to the East inn. Cost 800 spirit stones. +2%(+4%)/-2%(-4%) HP regeneration (below 0 HP)(others / undead), +5% diehard for living beings\n");
-			outputText("-New head jewelery/accesory/misc (by Ormael): Skull Crown - buyable at Felix in Journey to the East inn. Cost 800 spirit stones. +2%(+4%)/-2%(-4%) HP regeneration (below 0 HP)(undead / others), +5% diehard for undead\n");
-			outputText("-New head jewelery/accesory/misc (by Ormael): Tree of Life Crown - buyable at Felix in Journey to the East inn. Cost 800 spirit stones. +2%(+4%)/-2%(-4%) HP regeneration (below 0 HP)(others / undead), +5% diehard for living beings\n");
-			outputText("-New flying sword: Moonlight Duo - combined from two Moonlight swords. Cost 160 spirit stones. Base atk is 16. It's classified as Small flying sword (set of 2). Increase chance of bleed effect by 15%. \n");
-			outputText("-New flying sword: Moonlight Quartet - combined from two Moonlight Duo sword sets. Cost 320 spirit stones. Base atk is 32. It's classified as Small flying sword (set of 4). Increase chance of bleed effect by 15%.\n");
-			outputText("-New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies. Using this item will turn PC into troll. Troll bonuses at 10 pts in racial score (scalable): +30% to Str multi, +30% to Tou multi, +20% to Spr multi, +20% to Int multi, +60% to Wis multi, +20 to max tone cap, +50 to max satiety.\n");
-			outputText("-New TF item (by Pyromania): Icy Fig. Dropped by Glacial Troll enemies. Using this item will turn PC into glacial troll. Glacial Troll bonuses at 10 pts in racial score (scalable): +30% to Str multi, +40% to Tou multi, +10% to Spe multi, +20% to Int multi, +60% to Wis multi, +20 to max tone cap, +75 to max satiety.\n");
-			outputText("-New consumable (by Liadri): Black Lily. Obtained from Rafflesia. Effects: When used by alraune/lilaraune would grant Nightshade perk and Darkness Affinity.\n");
-			outputText("-New consumable (by Liadri): Snow Flower. Obtained from Snow Lily or founded in tundra/glacial rift. Effects: When used by alraune/lilaraune would grant Snow Lily perk and Cold Affinity.\n");
-			outputText("-New consumable (by Liadri): Ember Flower. Obtained from Cinderbloom or founded in ashlands/vulcanic crag. Effects: When used by alraune/lilaraune would grant Cinderbloom perk and Fife Affinity.\n");
-			outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
-			outputText("-New P. Special: Feint Bash. Usable by Troll/Glacial Troll with Troll/Glacial Troll face. Cost 25 fatigue and can stun for 3 turns. Have 5 turns cooldown after use.\n");
-			outputText("-New P. Special: Savage Claws. Usable by Glacial Troll with Glacial Troll arms. Cost 100 fatigue.\n");
-			outputText("-New P. Special: Gallop. Can be only used when having legs ending in hooves (not cloven hooves). Effects: Run at high speed across the battlefield evading melee combat but not ranged attack, does not disable P.Special but prevents the use of the regular melee attack action. While galloping all P.Special abilities are 50% stronger due to momentum. Galloping costs fatigue every round.\n");
-			outputText("-New M. Special: Tech Overdrive. Usable by having Tech Overdrive perk. Cost 40 mana. Increase by 20(+20per ng tier) atk of melee or range tech wepaons, add 20% to mech onboard weapons dmg, lower physical def by 50%. It would last for 10 turns.\n");
-			outputText("-New M. Special: Malfunction. Usable by been gremlin-kin. Cost 40 mana and can stun for 6 turns. Have 10 turns cooldown after use. Overload a magitech or construction, causing damage and immobilizing it for a while. Does not work on living things or sentient constructs.\n");
-			outputText("-Centaur race score calculations was slight changed and can have now additionaly 3rd / 4th tier of race bonuses - Elder Centaur / True Centaur: +100 / +140 Strength +80 / +100 Toughness +175 / +185 Speed +80 / +100 Libido +75 Sens +350 / +500 Hp\n");
-			outputText("-New tier for Goblin race bonuses - Goblin Broodmother (20+ pts): -60% to str multi, +120% spe multi, +200% int multi, +80% lib multi, +40 sens).\n");
-			outputText("-New tiers for Demon race score bonuses - Elder Succubus/Incubus & Arch Succubus/Incubus (29+ pts / 38+ pts): +100/+200 spe multi, +110/+250 int multi, +275/+320 lib multi, +50/+200 sens, +150%/+180% max mana multi, -50%/-55% max wrath multi, +150%/+180% max lust multi\n");
-			outputText("-New tier for Frostwyrm race score bonuses - Jormungandr (32+ pts): +230 str multi, +180 tou multi, +90 spe multi, -110 int multi, +90 lib multi, +150% max hp multi, +4 armor/m.res\n");
-			outputText("-Natural Instincts & Tough Hide perks req. of Job: Beast Warrior changed to req. perk Job: Feral Champion. Natural arsenal effect increased from +50% to +100%. Feral Armor req. for tou stat lowered from 60 to 50.\n");
-			outputText("-Venomous Adipose Tissue & Venomous Diet perks have additional req. of having perk Job: Feral Champion.\n");
-			outputText("-Tamani daughters & Minotaur Sons can now level-up (their lvl depends on how many of them are and seperate lvl up counter so the max level isn't clearly defines but would be at least around 100/105 lvl). Like Tamani daughters now Minotaur sons would slowly die out when there is too many of them + added their count on children page right below Tamani daughters.\n");
-			outputText("-Tamani could level up (up to lvl 98). After first level up she would gain Elite type which would be upgraded to Champion type and then to Boss type.\n");
-			outputText("-Enabled camp building at night for night races. But would limit possible helpers to those that could be still active at night. Herbalism and Dummy camp options can also be used at night by night races.\n");
-			outputText("-Female mindbreaker been reeducated causing their corruption increase by 40 pts. Re: Convert option was moved to different button in super perks menu to avoid misclicks due to same position as Previous button.\n");
-			//6 of 11 pages
-			outputText("-Glacial trolls could gain Cold Affnity perk.\n");
-			outputText("-Zenji now have hp and lust variants for defeats pre-camp and for camp sparring, in case combat would change his perspective on PC wining by lust have only 50% chance to change that perspective. Also when fighting to the death would have full lust resistance and no effect to lower that resistance would work on him.\n");
-			outputText("-Phouka Drink scene when pc toughness is between 30 and 70 bug fixed. Also scene will now check for core toughness value not total.\n");
-			outputText("-Having sex when equipped with Sagittarius Baneful Great Bow proc the Sagittarius Focus bonus until next night. Effect: PC adds 50% of his libido to wisdom and intelligence until next night.\n");
-			outputText("-Pilgrim's Bounty perk effect changed from having cum volume calculated as been always at max lust to give 100% chance to make npc's pregnant after sex with pc. In some cases when npc only get fertile post some event/quest it will only trigger when the npc is fertile (no kids with urta, marble or hel right of the bat).\n");
-			outputText("-Job: Gunslinger perk would now add low stat scaling from wis, int, spe instead of doubling the damage. Church of the gun, Alchemical cartridge and Saint of Zariman perks stat scaling improved.\n");
-			outputText("-Amateur Gunslinger, Expert Gunslinger and Master Gunslinger perks effects changed from simply from granting extra firearm attack per turn to: Increase damage (+100%/+100%/+100%) base. (+5%/+10%/+15% firearms attacks multiplier bonus). Amateur Gunslinger would also increase accuracy of firearms attacks by 10%. ");
-			outputText("Expert Gunslinger decrease dmg penalty from using non 2H dual firearms by 30%, Master Gunslinger decrease dmg penalty from using 2H dual firearms by 50%.\n");
-			outputText("-All gunslinger perks was adjusted to req. wis, int and spe instead of ocassional req. tou instead one of those three stats. That is to match stats from which firearms dmg scaling.\n");
-			outputText("-Explosive cartridge perk increase dmg done to large enemies or group of enemies (+100% > +200%). Named Bullet deal much more dmg to bosses (+50% > +200%).\n");
-			outputText("-Golemancer in HXD could sell metal pieces/plates to PC golemancer that can buy energy cores from her. She even gives 3 options of how many metal pieces/plates to buy at once - 1x, 5x, 10x.\n");
-			outputText("-Elemental Fusion forms stats bonuses (+armor/m.res for some fusions) been doubled to more fit temporal perm tf state.\n");
-			outputText("-Costs of combine or seperate flying swords was adjusted to be more related to their cost.\n");
-			outputText("-Added option to remove cursed items to healer horse in JttE inn. She would charge pc for those services the same as Arian (500 gems).\n");
-			outputText("-Imps Tome gradual TF effect will trigger even at night but not longer each hour. Instead it will be at least 6 hours between each gradual tf scene triggered by tome.\n");
-			outputText("-When using sneak attack and having equipped any flying sword(s) for melee sneak attack and any of Moonlight flying sword(s) for range sneak attack they would be part of the attack too. Moonlight flying sword(s) would also increase dmg multiplier of sneak attack by 1.\n");
+			//0 of 11 pages
 			outputText("-Zenji + Arian scene when visting Arian proc chance lowered (15% > 10%) and won't trigger more then once each 4-5 days. Grayda related camp events can happen only once a day.\n");
 			outputText("-Ovaries and Testicles internal mutations would require to have either vagina or cock to give benefits.\n");
 			outputText("-Human Supremacy (Improved) and (Superior) perks increase human score by 1 more point.\n");
@@ -133,11 +54,17 @@ public class Changelog extends BaseContent
 			outputText("-Manacost for MM added as alt cost. (Jtecx) (Only for True Demon PC's)\n");
 			outputText("-Spelling fixes. (Jtecx)\n");
 			outputText("-Adding in IMutations name-duplication check. (Jtecx)\n");
+			outputText("-Katherine DP scene fix. (Jtecx)\n");
 			outputText("-Bestial Blademaster armor has the revealing tag now, because reasons. (Lord Shadeogorath)\n");
 			outputText("-Implemented horse and kirin taur revamp sprites (by Liadri). (Lord Shadeogorath)\n");
 			outputText("-Demon face now changes based on corruption. (Lord Shadeogorath)\n");
 			outputText("-Fixed a bug causing the goo armor taur sprite to not show. (Lord Shadeogorath)\n");
 			outputText("-Horse face sprite (by Liadri) implementation. (Lord Shadeogorath)\n");
+			outputText("-Added mockfights to Nadia. (Svalkash)\n");
+			outputText("-New SH feature for preggo lovers - now you can speed up all game pregnancies without drinking tons of Ovi Elixirs! Event timer scaling included. (Svalkash)\n");
+			outputText("-Fixed repeating Exgartuan sleep-talking. Typos: 'mareth'->'Mareth'. Mimic made less annoying. SH: Ivory Succubus. (Svalkash)\n");
+			outputText("-Fixed: catalysts being consumed by inspection, fond issues in physical specials, typos. (Svalkash)\n");
+			outputText("-Nerfed LaBova (NPC) milk blast scaling. (Svalkash)\n");
 			outputText("-Color code updates. (GatoGrande) (making all the damage/heal/etc. numbers colors not use diff codes and for some cases making better fitting color choices for higher readability)\n");
 			outputText("-Fix for Zenji post-halloween. (GatoGrande)\n");
 			outputText("-Fix for small weapons giving wrong weapons mastery. (Imperfect Spell)\n");
@@ -149,16 +76,16 @@ public class Changelog extends BaseContent
 			//outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment for odd one mist beings.\n");
 			//outputText("-New TF item (by Shigure): Moth's Dust. Buyable in Moga Hen shop. Using this item will turn PC into moth. Moth bonuses at 10 pts in racial score (scalable): -30% to Tou multi, +150% to Spe multi, +70% to Wis multi, +30% to Lib multi, +70 to sensitivity.\n");//Dropped by Corrupted Troll enemies.
 			//outputText("-New Special names: Veseshe (elf), Veseshe (elf). Each of them will start with matching bloodline perk to match their ancestor race.\n");
-			outputText("-When exploring Deepwoods can find new dungeon - Twilight Grove. It's potentialy dangerous place for pure PC's but resort-like placefor alraunes and/or corrupt PC's.\n");
+			outputText("-When exploring Deepwoods can find new dungeon - Twilight Grove. It's potentialy dangerous place for pure PC's but resort-like place for alraunes and/or corrupt PC's. When explored by pure PC it will be series of fights with enemeis between 35-39 lvl's and boss of lvl 42.\n");
 			outputText("-Can explore and clear 5th floor of River Dungeon. It have monsters from lvl 58 to 70 and boss is lvl 73. Floor is divided into three subareas: first is normal, second is hot enough to have weaker effect found in Vulcanic Crag (constant fire dmg) and third is cold enough to have weaker effect found in Glacial Rift (constant ice damage). ");
 			outputText("There are also few rooms where two nearby subareas meets. In rooms where second and third area meets climate is much more harsh and player is affected by both constant fire and ice dmg that are much stronger then in second or third subarea.\n");
-			outputText("-New enemies: Mid rank Angel of Mist - lvl 58, Mist Bee Huntress - lvl 60, Mist Wasp Huntress - lvl 62, Mist Hornet Huntress - lvl 64, Mist Alraune Maiden - lvl 66, Mist Cinderbloom - lvl 68, Mist Snow Lily - lvl 70. Encounterable on 5th floor of River Dungeon. Proto Golem - lvl 6. Encounterable in general explore from lvl 6+.\n");
+			outputText("-New enemies: Mid rank Angel of Mist - lvl 58, Mist Bee Huntress - lvl 60, Mist Wasp Huntress - lvl 62, Mist Hornet Huntress - lvl 64, Mist Alraune Maiden - lvl 66, Mist Cinderbloom - lvl 68, Mist Snow Lily - lvl 70. Encounterable on 5th strata of River Dungeon. Proto Golem - lvl 6. Encounterable in general explore from lvl 6+.\n");
 			outputText("-New bodyparts: Troll Arms, Troll lower body, Troll Tusks, Troll Ears, Troll Tail (from Troll Fig); Glacial Troll Arms, Glacial Troll lower body, Glacial Troll Tusks, Glacial Troll Ears, Glacial Troll Tail (from Icy Fig)\n");
 			outputText("-Dinah upgrade options for HB mech now have 3 more tiers of Armor Plating, Leather Insulation & Dragon's Breath Flamer upgrades.\n");
 			//outputText("-New HB Mech upgrade options: Armor Plating (+armor), Leather Insulation (+magic resistance), Agility (+base melee atk dmg), Dragon's Breath Flamer (fire dmg special), Scatter Laser (lightning dmg special), Rapid Reload (+base ranged atk dmg), Internal Systems (increase mech SF capacity and lower it consumption during high activity)\n");
 			//outputText(", Camouflage Mode (allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials), Invisibility Mode (the same as Camouflage Mode but can last until PC run out of SF to keep it active or deactivate it manualy / upgrade to decrease SF consumption)");
 			outputText("-After clearing Deep Cave (Zetaz dungeon) can meet at Beach are Charybris - male scylla. He have various interactions and could even train pc stats (str/spe/tou) up to their limits or give vocal trainings to give some perks that would help with commanding minions/henchmen. Can only bring demon skulls to him to get some gems for them.\n");
-			outputText("-Tyrantia traiing cap now is increased (30 > 40).\n");
+			outputText("-Tyrantia training cap now is increased (30 > 40).\n");
 			outputText("-Constant Buildup - If you are in Rut or Heat, halve the lust DoT you take from it, and deal an additional 20% physical damage while under the effects. (35 training sessions)\n");
 			outputText("-New event perk: Drill Sergeant. Gained by having 20 Vocal Training sessions with Charybdis. Effects: Your voice and bearing now commands respect, even among the surliest of recruits. Your followers will attack an additional time per round, and are guaranteed to attack.\n");
 			outputText("-Bad End from overuse Cerulean Potion from Giacomo was changed into way to gain Souless perk and become true demon PC. It comes with few negative side effects but would they stop you a TRUE DEMON, RIGHT?\n");
@@ -170,35 +97,21 @@ public class Changelog extends BaseContent
 			outputText("-Etna venom effect and kitsune residue magic on increasing cum multiplier have been increase to reach 50% more then before (from cap of 10k to 15k). It would also show bolded part of scene text when the effect of venom trigger.\n");
 			outputText("-Soulforce resource is replaced by different one for PC that have Soulless perk: Demonic Energy. It caps at 50 + 10*level. Can be used for different bonuses. DE can be gained from eating lethicite type item. Lethicite item was renamed to Lesser Lethicite.\n");
 			outputText("-Spending 200 demonic energy true demon PC can rise one of elemental dao mastery by 1 layer.\n");
-			outputText("-New event perk: Strengthen body. Gained / Upgraded by spending Demonic Energy (25 base rank and increase by 5 pts per each new rank). Effects: Consume the stored energy of souls to raise your strength, toughness and speed by 5% permanently. This change persists through time.\n");
-			outputText("-New event perk: Strengthen magic. Gained / Upgraded by spending Demonic Energy (25 base rank and increase by 5 pts per each new rank). Effects: Consume the stored energy of souls to raise your intelligence, wisdom and libido by 5% permanently. This change persists through time.\n");
 			outputText("-NPC's that can make legendary items have lower min. lvl req. to find them (25 > 20)\n");
-			outputText("-New consumable (by Liadri): average Lethicite. Drops from true demon enemies. Consuming it by PC with Soulless perk will give up to 100 demonic energy.\n");
-			outputText("-Added mockfights to Nadia. (Svalkash)\n");
 			outputText("-New Dark Ascension perk: Efficient Soul Consumption. Decrease the cost of upgrading yourself through demonic energy by 5% per rank. Max Rank: 19.\n");
 			outputText("-PC with Soulless perk no longer can use normal ascension instead using variant dark ascension. It have it own choice of perks to buy and some of the options that normal ascension have.\n");
-			outputText("-New consumable (by Liadri): Greater Lethicite. Drops from true demon enemies. Consuming it by PC with Soulless perk will give up to 250 demonic energy.\n");
-			outputText("-New Dark Ascension perk: The Dark Soul. You have acquired permanent power from the many souls you consumed in your previous timelines. Raise core stats cap by 10 per rank. Max Rank: 10.\n");
-			outputText("-New event perk: Soul Drinker. Gained by becoming Dracula/lina. Effects: Those creatures you defeat and drink from have parts of their soul stolen with their blood increasing your overall stats by 1% for each victim drained.\n");
 			outputText("-When studing Combat Manual in cabin can choose which stat it would rise.\n");
 			outputText("-Metamoph would use either Mana (PC with Soulless  perk) or SF (all other PC's). (Jtecx/Svalkash)\n");
-			outputText("-New SH feature for preggo lovers - now you can speed up all game pregnancies without drinking tons of Ovi Elixirs! Event timer scaling included. (Svalkash)\n");
-			outputText("-Fixed repeating Exgartuan sleep-talking. Typos: 'mareth'->'Mareth'. Mimic made less annoying. SH: Ivory Succubus. (Svalkash)\n");
 			outputText("-PC with Soulless perk would loose access to Sky Poison Pearl and will soon enough make replacment storage item called Dimensional Pocket. Also some npc's like Pure Amily, Pure Jojo, Kiha would leave camp.\n");
 			outputText("-One of Prestige Job: Necromancer req. was modified. Instead of req. Daoist: Apprentice Stage can also gain this job by having perks Soulless and Job: Sorcerer.\n");
-			outputText("-New head jewelery/accesory/misc (by Liadri): Golden horn ornament - buyable at Kaiba shop in Tel'Adre or dropped from true demon enemies. Cost 400 gems. +25% to tease/black magic damage while worn. (req. to have demon horns)\n");
 			outputText("-PC with demonic vagina could access new unique sex scene: Succubus Feast. If PC have soulless perk and enemy is not group having intact soul scene will have additional bonus of harvesting lethicite from that enemy.\n");
-			outputText("-New consumable (by Liadri): Grand Lethicite. Drops from true demon enemies of from unique sex scene for true demon (when defeating generic enemy with intact soul). Consuming it by PC with Soulless perk will give up to 750 demonic energy.\n");
 			outputText("-Fixing weirdness on feral combat ingoring all handless PC's (or was it maidenless ones...). Now even they can have rizz.\n");
 			outputText("-Misdirection, Rapier Training and Tech Overdrive perks can be permed on ascension/dark ascension.\n");
-			outputText("-Fixed: catalysts being consumed by inspection, fond issues in physical specials, typos. (Svalkash)\n");
-			outputText("-Nerfed LaBova (NPC) milk blast scaling. (Svalkash)\n");
 			outputText("-PC with demonic cock could access new unique sex scene (by MrDumbass): Incubus Feast. If PC have soulless perk and enemy is not group having intact soul scene will have additional bonus of harvesting lethicite from that enemy.\n");
 			outputText("-Gigant's Grip perk req. changed from req. only Weapon Mastery to req. either Weapon Mastery or Job: Gunslinger. Also added more info on this perk about it relation to dual wielding range weapons.\n");
 			outputText("-Sand Worm lower body allow to make tail slam + stinger stab during feral combat combo. Bugfixing sand worms not generating venom needed for their special.\n");
 			outputText("-Small changes to make sure Francesca's Black Cloak will not remove on unequip Misdirection from raphael training (whenever it was permed or not yet).\n");
 			outputText("-Gremlin race score calculations slight update and bonuses changes to all tiers. First one renamed to gremlin-kin, 2nd into gremlin and added 3rd arch gremlin. 2nd (24+) and 3rd (36+) tier req. now soulless perk and their bonuses are as follow: -50% to str multi, +100%/+160% to spe multi, +180%/+250% to int multi, +150%/+200% to lib multi, +30 min lust, +20 Sens\n");
-			outputText("-New event perk: Tech Overdrive. Gained by been gremlin-kin. Effects: Empower your technological equipment, causing it to deal increased damage but weaken your defenses as a result.\n");
 			outputText("-Lust immunity fix & preg fix. (Svalkash)\n");
 			outputText("-Lowered the chance of common (imp-gob-goleems) encountered in Forest, Mountain and Plains to 1/4 of the previous value. Averange typo fixed. (Svalkash)\n");
 			outputText("-Fixed: Kitsune tail tangle not working as intended, kits->kids, kid a goblin scene being hard to get. (Svalkash)\n");
@@ -210,11 +123,7 @@ public class Changelog extends BaseContent
 			outputText("-Steel Storm would affect all dual gauntlet/claw type weapons too. Equipping gauntlet/claw type weapons will not req. Dual Wield perk.\n");
 			outputText("-Lethice Staff spellpower bonus doubled.\n");
 			outputText("-Finishing Alvina/Siegweird storyline (up to gain spell reward) would each grants 5 ascension perk points and will be under quest section of calculation.\n");
-			outputText("-New consumable (by Ormael / all text written by Reverse Time Traveler): Demonize Me. Obtained from hidden compartment in Factory. Effects: Forcefully turn person using into true demon. (giving Soulless perk and Lethicite consumable)\n");
-			outputText("-New event perk: Covenant of the spirits. Gained by having naming ceremony at Wood Elfs village. Effects: Your shared soul with the sacred tree halves your soulforce but doubles your mana and fatigue. ");
-			outputText("This connection greatly weakens your ability to control fire but reinforces your mastery over earth, wind and water. Furthermore your natural attunement and improved magical circulation allows you to add half of your intelligence to your speed score.\n");
 			outputText("-Dao of Elements now count toward asc point gains. Stats have added new subsection of predictions fo ascension perk points labeled Masteries (weapon + elemental masteries) and subsection for only Elemental masteries.\n");
-			outputText("-New event perk: Harpy Queen. Gained by giving birth to 20+ harpies. Effects: As a harpy or harpy subtype increase toughness speed and libido based on the ammount of harpy children you gave birth to.\n");
 			outputText("-Minor fixes: Coal can randomly send you to heat OR rut, Low standard check for heckel, fixed helia corruption tolerance (Svalkash)\n");
 			outputText("-Each Dao of Element can now reach 12th layer. bonuses for reaching each of three new layers is 10% more resistance and 50% more damage.\n");
 			outputText("-Added option to back from boos room in Ebon Labyrinth if it contain Draculina boss. That choice will only appear if the PC does not meet all requirements to avoid an instant bad end and therefore not have any way to deal with her most annoying (by majority consensus) ability.\n");
@@ -230,7 +139,6 @@ public class Changelog extends BaseContent
 			outputText("-Eastern Bunny get new racial bonuses tier - Greater Easter Bunny (20+): -20% to str multi, -10% to tou multi, +130% to spe multi, +200% to lib multi\n");
 			outputText("-Ascension: Trancendental Genetic Memory perk can attain 2 more ranks for even more slots to perm metamorph options.\n");
 			outputText("-New TF item (by Liadri): Flared Carrot. Buyable in Tel'Adre Bakery. Using this item will turn PC into laquine. Laquine / Elder Laquine racial bonuses (12+/20+): +80/150% to str multi, -10/20% to tou multi, +80/120% to spe multi, -20/50% to wis multi, +100/200% to lib multi, +50/100 sens\n");
-			outputText("-New event perk: Laquine Might. Gained by been laquine. Effects: Add 75% of your libido to your strength stat.\n");
 			outputText("-Equine Strength perk can be gained by Laquine PC.\n");
 			outputText("-New tier 0 misc lvl-up perk: (Basic) Job: Tinker. Req. 10+ wisdom and 10+ intelligence. Effect: Increase damage of consumable items / technologic weapons by 5%.\n");
 			outputText("-New tier 2 wisdom lvl-up perk: (Advanced) Job: Artificier. Req. Job: Tinker perk, free advanced job slot and 75+ wisdom. Effect: Increase damage of consumable items / technologic weapons by 15%.\n");
@@ -251,15 +159,12 @@ public class Changelog extends BaseContent
 			outputText("-New tier 1 sensitivity lvl-up perk: Sixth Sense. Req. Job: Esper perk and 25+ sensitivity. Effect: You are not affected by blind and other confusing effects. Increase melee/range accuracy by 10%.\n");
 			outputText("-Arigean arms and tails would count as natural weapons. Tails would do bite and slam attack(s).\n");
 			outputText("-Remove Balls option in metamorph would remove trap/uniball effect too.\n");
-			outputText("-New necklace (by Liadri): Silver cross necklace - obtained radomly after any defeat as herm / female OR bought from Giacomo. Cost 400 gems. Effect: +50% to tease and magical damage when used by PC with soulless perk.\n");
 			outputText("-New mutation perk: Human Digestive Tract (Evolved). Req. Human Digestive Tract (Primitive) and lvl 60+. Effects: Your digestive tract improved allowing to get better nurishment from all the ingested substances (+60%). Increase limit when PC gain weight from eating too much by 45. Can slowly remove harmfull substances (-1% of lust per turn)\n");
 			outputText("-New mutation perk: Human Metabolism (Evolved). Req. Human Metabolism (Primitive) and lvl 60+. Effects: Your metabolism changes allowing to slowly detoxification of poisons or slight faster fatigue recovery (30% chance to instantly remove some of toxic substance from body, -3% of lust / -1% of fatigue per turn, 2x shorter elemental dot effects duration)\n");
 			outputText("-New tier 4 wisdom lvl-up perk: Empowered Taming. Req. Fourth Tamer of the Apocalypse perk and 130+ wisdom. Effect: During taming monster it wisdom is treated as if it was 80% lower.\n");
 			outputText("-Increased save slot number to 36, new ExplorationEngine methods to edit the encounter map. (aimozg)\n");
-			outputText("-New mutation perk: Hydra Blood (Primitive). Req. Hydra Blood and lvl 30+. Effects: Improve existing Regeneration by 2% negated by fire damage and increase acid and poison effects by 50%.\n");
 			outputText("-Hardcore difficutly setting will no longer force delete save on bad end. Instead will be giving 20% penalty to core stats and take away all XP gathered. Also would remove limitations on level to find new areas or finding enemies in areas if they had their own level checks (and Lake will be no longersafe area until lvl 3 after first 7 ingame days).\n");
 			outputText("-Due to general evaluation of difficulty changed it been reseted to Easy setting and to return to what it was before it require to adjust all the toggles in Settings > Gameplay (1) menu.\n");
-			outputText("-Katherine DP scene fix. (Jtecx)\n");
 			outputText("-New tier 2 sensitivity lvl-up perk: Psychic Barrier. Req. Sixth Sense perk and 50+ sensitivity. Effect: You learn to create an invisible barrier, using your psychokinesis that boost phys/magic resistance by 10% and giving very minor (1%) boost to toughness.\n");
 			outputText("-New tier 3 sensitivity lvl-up perk: Psychic Bolt. Req. Psychic Barrier perk and 75+ sensitivity. Effect: Enable use of Psychic Bolt. (scaless off Sensitivity and deal psychic type of dmg)\n");
 			outputText("-New tier 4 sensitivity lvl-up perk: Telekinetic Grapple. Req. Psychic Bolt perk and 100+ sensitivity. Effect: Enable use of Telekinetic Grab (with 2x shorter then normaly cooldown).\n");
@@ -297,11 +202,6 @@ public class Changelog extends BaseContent
 			outputText("-Because too much regeneration will kill you... wait maybe it was too much love? Anyway almost all item related effects that would increase maximum regeneration cap was removed.\n");
 			outputText("-Supercharged state can be entered for Raiju when racial score would reach 2 tier (greater raiju).\n");
 			outputText("-2 new achievments. (1 shadow one)\n");
-			outputText("-New mutation perk: Scylla Ink Glands (Evolved). Req. Scylla Ink Glands (Primitive) and lvl 60+. Effects: Your Scylla Ink Glands increase rate at which your body produce ink, duration ink spray affect enemies and lust damage by ((current i. mutation tier - 1) * 100)%, boost to your natural strength, speed and toughness, ");
-			outputText("Scylla Squeeze damage during grapple as Kraken would be multiplied by current i.mutation tier, scylla grapple will always succeed, when in an aquatic battle boost from Aquatic Affinity is 2x larger.\n");
-			outputText("-New mutation perk: Scylla Ink Glands (Final Form). Req. Scylla Ink Glands (Evolved) and lvl 90+. Effects: Your Scylla Ink Glands increase rate at which your body produce ink, duration ink spray affect enemies and lust damage by ((current i. mutation tier - 1) * 100)%, boost to your natural strength, speed and toughness, ");
-			outputText("Scylla Squeeze damage during grapple as Kraken would be multiplied by current i.mutation tier, scylla grapple will always succeed, when in an aquatic battle boost from Aquatic Affinity is 3x larger, final boost from aquatic battle boost is 2x higher, ");
-			outputText("enemy can't escape from scylla grapple using only it own strength and using Scylla Squeeze as Kraken would give each time 5% combat wounds debuff on enemy (up to 80%).\n");
 			outputText("-Aquatic Affinity can be gained additional if pc lower body is that of scylla / kraken OR pc is having any arigean parasite.\n");
 			outputText("-Minerva and Izumi base level was increased and accordly their max lvl they can gain by leveling increased too to each reaching within 120-130 lvl range.\n");
 			outputText("-Added Descendant and Bloodline perks for Scylla/Kraken races.\n");
@@ -342,11 +242,11 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");//New mutation perk: Human Parathyroid Glands (Final Form). Req. Human Parathyroid Glands (Evolved) and lvl 90+. Effects: Increases self healing by 40 * level HP in combat and twice more out of combat. 8 * level HP Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.
 			outputText("-\n");
-			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
-			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Lord Shadeogorath) (Furrin Gok) (khovel) (Chibizs) (Svalkash)
-			outputText("-\n");// (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (GatoGrande) (Imperfect Spell) (PhillipDaisySeventh) (Edward Darksong)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New tier 4 wisdom lvl-up perk: ???. Req. Fourth Tamer of the Apocalypse perk and 125+ wisdom. Effect: 5th slot
 			outputText("-\n");//New tier ? wisdom lvl-up perk: Apes Together Strong. Req. ??? perk and ???+ wisdom. Effect: allow exchange single monsters variants > group monsters variants
@@ -354,11 +254,11 @@ public class Changelog extends BaseContent
 			outputText("-\n");//New tier 3 wisdom lvl-up perk: Stronger Tamed Mosters. Req. Fourth Tamer of the Apocalypse perk and 105+ wisdom. Effect: bigger meat shields, bigger claws, bigger muscles \o/ bigger everything???
 			outputText("-\n");//New tier 7 wisdom lvl-up perk: Kaiju No8. Req. Job: Tamer and 50+ wisdom. Effect: 8th kaiju joins your team of monsters.
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
+			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Lord Shadeogorath) (Furrin Gok) (khovel) (Chibizs) (Svalkash)
+			outputText("-\n");// (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (GatoGrande) (Imperfect Spell) (PhillipDaisySeventh) (Edward Darksong)
 			outputText("-Fixed bugs: Dracula/lina PC unable to find get ghoul if they not learned this as normal Vampire, unable to buy manual for 1st atk: f. swords, Arigean Princess PC not been fully immune to TF-ing like other perm races, Weresharks not having their stats changing according to moon phase or boosted during use of Crinos Shape, Phoenix TF adding mutagen penatly instead of stat curse, ");
 			outputText("Endless Rage draining 10x too much wrath per turn, Berzerker/Lustzerker still req. to be activated after they been activated as part of Asura Form activation, dormant state of wereraces 'blessings' increasing race score and not lowering it, Hinezumi Buring Blood IM accesable by Bunny race, returning from teleportation circle at 4th floor of river dungeon sending PC to ");
 			outputText("3rd floor teleportation circle room, perk allowing to always run away from enemy/ies been ignored in dungeons, unarmed/feral giving mastery gains for small weapons, 2 of 4 SF to Elemental Energy conversion options having wrong check for usable SF, using Fiery Band for calling Kiha to help fight... Kiha, Ceraph after update still not able to win using her super cool lust beam attack, ");
@@ -504,6 +404,113 @@ public class Changelog extends BaseContent
 			outputText("-More camp build options (involving using stones and etc.)\n");
 			outputText("-Make use of Metamorph perk (ofc all TF would be powered by soulforce ^^)\n");
 			menu();
+			addButton(0, "Next", Changelog54);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
+		}
+		private function Changelog54():void {
+			clearOutput();
+			outputText("(Part 2/3) <b>Version 0.9a:</b>\n\n");
+			outputText("-New mutation perk: Fiendish Ovaries (Final Form). Req. Fiendish Ovaries (Evolved) and lvl 90+. Effects: ncrease Fertility by 100%, all born children from your womb will either be born as imps or greatly corrupted, while pregnant with imps tease is 50% stronger. May benefit from pregomania when pregnant with imps.\n");
+			outputText("-New mutation perk: Goblin Ovaries (Final Form). Req. Goblin Ovaries (Evolved) and lvl 90+. Effects: Increase fertility rating by 40, While pregnant increase total libido by 40%. Double the number of kids you birth. Increase physical damage done while pregnant by 50%. Lust damage against male opponents increased by 50%. Add your fertility score as a bonus to libido.\n");
+			outputText("-New mutation perk: Hydra Blood (Final Form). Req. Hydra Blood (Evolved) and lvl 90+. Effects: Improve existing Regeneration by 4% negated by fire damage and increase acid and poison effects by 100%. Your blood is ruinous and inflicts your fang venom when damaged. Bite attacks deals 50% more damage.\n");
+			outputText("-New mutation perk: Human Bloodstream (Final Form). Req. Human Bloodstream (Evolved) and lvl 90+. Effects: Increases maximum base/core Spe/Lib by 20, maximum trainable Spe/Lib by 30%. Increase fatigue recovery (+15), wrath generation (+6) and +2 to fatigue recovery/wrath gains multiplier. +5% to max overfatigue/overwrath.\n");
+			outputText("-New mutation perk: Human Bones (Final Form). Req. Human Bones (Evolved) and lvl 90+. Effects: Increases maximum base/core Str/Tou by 20, maximum trainable Str/Tou by 30%. Increase effects of body cultivation by 150%. Increase p.soulskill power by 100% and +10% to max overhp.\n");
+			outputText("-New mutation perk: Human Fat (Final Form). Req. Human Fat (Evolved) and lvl 90+. Effects: Your fat tissue increased again your natural toughness and thickness limit. Increases maximum base/core Tou by 10, +10% to max overfatigue, negate up to 3 points of internal chimera score. ");
+			outputText("Increased damage reduction against physical damage (+40% DR) & increase natural resistance to damage (+40 armor/m.res), increase max Hunger cap by 150 (if PC have Hunger bar active) (+90% of max core Tou as phantom Tou)\n");
+			outputText("-New mutation perk: Human Musculature (Final Form). Req. Human Musculature (Evolved) and lvl 90+. Effects: Your musculature increased again your natural strength and tone limit. Increases maximum base/core Str by 10, +10% to max overfatigue. Boost Warrior's Rage effect (+1 per 4 pts of core stat value) and duration by 5 turns. (+90%/+45% of max core Str/Spe as phantom Str/Spe)\n");
+			outputText("-New mutation perk: Human Smarts (Final Form). Req. Human Smarts (Evolved) and lvl 90+. Effects: Increases maximum base/core Int/Wis by 20, maximum trainable Int/Wis cap by 30%. Gain soulforce recovery equal to 2% of your total soulforce and mana recovery increased by 1% of max mana, +5% to max overmana/oversoulforce. Increase m.soulskill power by 100%. Allow to use options requiring to have technical knowledge.\n");
+			outputText("-New mutation perk: Human Versatility (Final Form). Req. Human Versatility (Evolved) and lvl 90+. Effects: Mastery gains increased by 4 points or in case of multiplier +4 to multiplier. Decrease needed exp to lvl up weapon/lifeskill masteries and have 40% chance to gain 4x more XP for Mastery. 50% chance to gain 2 levels instead of 1 when leveling weapon/lifeskill mastery.\n");
+			outputText("-New mutation perk: Mighty Legs (Final Form). Req. Mighty Legs (Evolved) and lvl 90+. Effects: Make Kick permanent no matter your leg type, Increase unarmed strike damage by 20 and grapple effect by 80%. Kick is 150% stronger. Kick stun lasts 1 round longer. Straddle and Grapples duration is extended by 1 additional round.\n");
+			outputText("-New mutation perk: Mighty Lower Half (Final Form). Req. Mighty Lower Half (Evolved) and lvl 90+. Effects: Tentacle and tail attack deals 100% more damage. Increase unarmed strike damage by 20 and grapple effect by 80%. Grapple damage gains 150% more bonus from your strength. Racial physical ability stun lasts 1 round longer. Straddle and Grapples duration is extended by 1 additional round.\n");
+			outputText("-New mutation perk: Poison Gland (Final Form). Req. Poison Gland (Evolved) and lvl 90+. Effects: Double the efficiency of poison damage, applied poisons now has a 100% chance of dealing its effect twice per turn. All poison becomes deadlier inflicting 3% toughness damage per round. All poison now becomes lewder inflicting tease damage equal to your tease value per round on top of any other effect they would do.\n");
+			outputText("-New mutation perk: Scylla Ink Glands (Final Form). Req. Scylla Ink Glands (Evolved) and lvl 90+. Effects: Your Scylla Ink Glands increase rate at which your body produce ink, duration ink spray affect enemies and lust damage by ((current i. mutation tier - 1) * 100)%, boost to your natural strength, speed and toughness, ");
+			outputText("Scylla Squeeze damage during grapple as Kraken would be multiplied by current i.mutation tier, scylla grapple will always succeed, when in an aquatic battle boost from Aquatic Affinity is 3x larger, final boost from aquatic battle boost is 2x higher, ");
+			outputText("enemy can't escape from scylla grapple using only it own strength and using Scylla Squeeze as Kraken would give each time 5% combat wounds debuff on enemy (up to 80%).\n");
+			outputText("-New key Item (by Liadri): Upgraded Armor plating 4.0 - req. Upgraded Armor plating 3.0 - +20 armor/magic resistance to the mech. +80% Health.\n");
+			outputText("-New key Item (by Liadri): Upgraded Armor plating 5.0 - req. Upgraded Armor plating 4.0 - +25 armor/magic resistance to the mech. +100% Health.\n");
+			outputText("-New key Item (by Liadri): Upgraded Armor plating 6.0 - req. Upgraded Armor plating 5.0 - +30 armor/magic resistance to the mech. +120% Health.\n");
+			outputText("-New key Item (by Liadri): Machine Gun MK4 - req. Machine Gun MK3 - Increase range attack by 125% if using a firearm. Change the firearm text to a goblin machine gun text.\n");
+			outputText("-New key Item (by Liadri): Machine Gun MK5 - req. Machine Gun MK4 - Increase range attack by 150% if using a firearm. Change the firearm text to a goblin machine gun text.\n");
+			outputText("-New key Item (by Liadri): Machine Gun MK6 - req. Machine Gun MK5 - Increase range attack by 200% if using a firearm. Change the firearm text to a goblin machine gun text.\n");
+			outputText("-New key Item (by Liadri): Artificial Intelligence - req. Toolbelt - Add an artificial intelligence to your mech which will greet you when you board. Aside from the friendliness of this new interface feature it cannot do much on its own yet.\n");
+			outputText("-New key Item (by Liadri): Improved Artificial Intelligence - req. Artificial Intelligence - The mech can now use an auto turret.\n");
+			outputText("-New key Item (by Liadri): Improved Artificial Intelligence MK2 - req. Improved Artificial Intelligence - The mech will randomly activate one of its weapon functions every round on its own at half power value.\n");
+			outputText("-New key Item (by Liadri): Improved Artificial Intelligence MK3 - req. Improved Artificial Intelligence MK2 - The mech will randomly activate one of its weapon functions every round on its own at full power.\n");
+			outputText("-New key Item (by Liadri): Improved Artificial Intelligence MK4 - req. Improved Artificial Intelligence MK3 - The mech will randomly activate two of its weapon functions every round on its own.\n");
+			outputText("-New key Item (by Liadri): Auto turret - req. Improved Artificial Intelligence - Add passive ranged attack per round to your AI routine no matter your action choice.\n");
+			outputText("-New key Item (by Liadri): Auto turret MK2 - req. Auto turret - Add two passive ranged attacks per round to your AI routine no matter your action choice.\n");
+			outputText("-New key Item (by Liadri): Auto turret MK3 - req. Auto turret MK2 - Add three passive ranged attacks per round to your AI routine no matter your action choice.\n");
+			outputText("-New key Item (by Liadri): Auto turret MK4 - req. Auto turret MK3 - Add four passive ranged attacks per round to your AI routine no matter your action choice.\n");
+			outputText("-New key Item (by Liadri): Auto turret MK5 - req. Auto turret MK4 - Add five passive ranged attacks per round to your AI routine no matter your action choice.\n");
+			outputText("-New key Item (by Liadri): Auto turret MK6 - req. Auto turret MK5 - Add six passive ranged attacks per round to your AI routine no matter your action choice.\n");
+			outputText("-New key Item (by Liadri): Hydraulics - req. Toolbelt - Mechs gain 25% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus.\n");
+			outputText("-New key Item (by Liadri): Hydraulics MK2 - req. Hydraulics - Mechs gain 50% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus.\n");
+			outputText("-New key Item (by Liadri): Hydraulics MK3 - req. Hydraulics MK2 - Mechs gain 75% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus\n");
+			outputText("-New key Item (by Liadri): Hydraulics MK4 - req. Hydraulics MK3 - Mechs gain 100% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus\n");
+			outputText("-New key Item (by Liadri): Hydraulics MK5 - req. Hydraulics MK4 - Mechs gain 125% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus\n");
+			outputText("-New key Item (by Liadri): Hydraulics MK6 - req. Hydraulics MK5 - Mechs gain 150% of your intelligence modifier as a melee bonus. If wearing heavy/ayo armor, melee weapons gain half of this bonus\n");
+			outputText("-New key Item (by Liadri): Improved Ammo Chemistry - req. Toolbelt - Add one extra attack to the mech ranged weapon.\n");
+			outputText("-New key Item (by Liadri): Improved Ammo Chemistry MK2 - req. Improved Ammo Chemistry - Add two extra attacks to the mech ranged weapon.\n");
+			outputText("-New key Item (by Liadri): Improved Ammo Chemistry MK3 - req. Improved Ammo Chemistry MK2 - Add three extra attacks to the mech ranged weapon. Ammo now has an incendiary property dealing doubled damage as fire.\n");
+			outputText("-New key Item (by Liadri): Improved Ammo Chemistry MK4 - req. Improved Ammo Chemistry MK3 - Add four extra attacks to the mech ranged weapon. Ammo now has an incendiary property dealing doubled damage as fire.\n");
+			outputText("-New key Item (by Liadri): Improved Ammo Chemistry MK5 - req. Improved Ammo Chemistry MK4 - Add five extra attacks to the mech ranged weapon. Ammo now has an incendiary property dealing doubled damage as fire. Ammo now has a caustic property dealing tripled damage as acid.\n");
+			outputText("-New key Item (by Liadri): Improved Ammo Chemistry MK6 - req. Improved Ammo Chemistry MK5 - Add six extra attacks to the mech ranged weapon. Ammo now has an incendiary property dealing doubled damage as fire. Ammo now has a caustic property dealing tripled damage as acid.\n");
+			outputText("-New melee weapon (by Lord Shadeogorath): Glacial Graveaxe - pulled from unnamed grave at tundra. Base atk is 160. It's massive axe type low grade wrath weapon. Normaly it deal 80% of physical dmg and 20% ice dmg. When using charge weapon it will deal 100% ice damage and have 10% to apply Frostburn DoT after critical hit.\n");
+			outputText("-New melee weapon (by Lord Shadeogorath): Volcanic Gravehammer - pulled from unnamed grave at ashlands. Base atk is 160. It's massive mace/hammer type low grade wrath weapon. Normaly it deal 80% of physical dmg and 20% fire dmg. When using charge weapon it will deal 100% fire damage and have 10% to apply Burn DoT after critical hit.\n");
+			outputText("-New melee weapon (by Liadri): Machine Spear - craftable at goblin workshop (3 metal pieces, 200 nails, 1 energy core, 2 mechanisms and BP). Cost 2720 gems, have 19 atk, have 100% armor penetration and increases critical damage by +25%\n");
+			outputText("-New pure legendary melee weapon (by Morgan): Paracelsus - obtainable by putting Beautiful Staff on restored Marae Altar and then taking it back.\n");
+			outputText("-New range weapon (by Liadri): Sagittarius Baneful Great Bow - obtained by finding it at Plains. 260 atk, costing 13000 gems, no accuracy penalty, is low-grade wrath weapon, can't be unequiped normal way and would require visting NPC that can help uncurse items. Similary to Tome of Imps would gradualy change PC into male/herm centuar.\n");
+			outputText("-New legendary pure armor (Liadri): Spirit Flare Qipao - made from Blue/Green/Purple/Red Qipao. Increase fire damage from abilities by 200%. Increase unarmed strikes damage by 20%. When worn by a species with fire affinity stoke the inner fire granting 3% Regeneration. Misdirection.\n");
+			outputText("-New necklace (by Ormael): Skull Necklace - buyable at Felix in Journey to the East inn. Cost 800 spirit stones. +2%(+4%)/-2%(-4%) HP regeneration (below 0 HP)(undead / others), +5% diehard for undead\n");
+			outputText("-New necklace (by Ormael): Tree of Life Necklace - buyable at Felix in Journey to the East inn. Cost 800 spirit stones. +2%(+4%)/-2%(-4%) HP regeneration (below 0 HP)(others / undead), +5% diehard for living beings\n");
+			outputText("-New necklace (by Liadri): Silver cross necklace - obtained radomly after any defeat as herm / female OR bought from Giacomo. Cost 400 gems. Effect: +50% to tease and magical damage when used by PC with soulless perk.\n");
+			outputText("-New head jewelery/accesory/misc (by Ormael): Skull Crown - buyable at Felix in Journey to the East inn. Cost 800 spirit stones. +2%(+4%)/-2%(-4%) HP regeneration (below 0 HP)(undead / others), +5% diehard for undead\n");
+			outputText("-New head jewelery/accesory/misc (by Ormael): Tree of Life Crown - buyable at Felix in Journey to the East inn. Cost 800 spirit stones. +2%(+4%)/-2%(-4%) HP regeneration (below 0 HP)(others / undead), +5% diehard for living beings\n");
+			outputText("-New head jewelery/accesory/misc (by Liadri): Golden horn ornament - buyable at Kaiba shop in Tel'Adre or dropped from true demon enemies. Cost 400 gems. +25% to tease/black magic damage while worn. (req. to have demon horns)\n");
+			outputText("-New flying sword: Moonlight Duo - combined from two Moonlight swords. Cost 160 spirit stones. Base atk is 16. It's classified as Small flying sword (set of 2). Increase chance of bleed effect by 15%. \n");
+			outputText("-New flying sword: Moonlight Quartet - combined from two Moonlight Duo sword sets. Cost 320 spirit stones. Base atk is 32. It's classified as Small flying sword (set of 4). Increase chance of bleed effect by 15%.\n");
+			outputText("-New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies. Using this item will turn PC into troll. Troll bonuses at 10 pts in racial score (scalable): +30% to Str multi, +30% to Tou multi, +20% to Spr multi, +20% to Int multi, +60% to Wis multi, +20 to max tone cap, +50 to max satiety.\n");
+			outputText("-New TF item (by Pyromania): Icy Fig. Dropped by Glacial Troll enemies. Using this item will turn PC into glacial troll. Glacial Troll bonuses at 10 pts in racial score (scalable): +30% to Str multi, +40% to Tou multi, +10% to Spe multi, +20% to Int multi, +60% to Wis multi, +20 to max tone cap, +75 to max satiety.\n");
+			outputText("-New consumable (by Liadri): Black Lily. Obtained from Rafflesia. Effects: When used by alraune/lilaraune would grant Nightshade perk and Darkness Affinity.\n");
+			outputText("-New consumable (by Liadri): Snow Flower. Obtained from Snow Lily or founded in tundra/glacial rift. Effects: When used by alraune/lilaraune would grant Snow Lily perk and Cold Affinity.\n");
+			outputText("-New consumable (by Liadri): Ember Flower. Obtained from Cinderbloom or founded in ashlands/vulcanic crag. Effects: When used by alraune/lilaraune would grant Cinderbloom perk and Fife Affinity.\n");
+			outputText("-New consumable (by Liadri): Average Lethicite. Drops from true demon enemies. Consuming it by PC with Soulless perk will give up to 100 demonic energy.\n");
+			outputText("-New consumable (by Liadri): Greater Lethicite. Drops from true demon enemies. Consuming it by PC with Soulless perk will give up to 250 demonic energy.\n");
+			outputText("-New consumable (by Liadri): Grand Lethicite. Drops from true demon enemies of from unique sex scene for true demon (when defeating generic enemy with intact soul). Consuming it by PC with Soulless perk will give up to 750 demonic energy.\n");
+			outputText("-New consumable (by Ormael / all text written by Reverse Time Traveler): Demonize Me. Obtained from hidden compartment in Factory. Effects: Forcefully turn person using into true demon. (giving Soulless perk and Lethicite consumable)\n");
+			outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
+			outputText("-New P. Special: Feint Bash. Usable by Troll/Glacial Troll with Troll/Glacial Troll face. Cost 25 fatigue and can stun for 3 turns. Have 5 turns cooldown after use.\n");
+			outputText("-New P. Special: Savage Claws. Usable by Glacial Troll with Glacial Troll arms. Cost 100 fatigue.\n");
+			outputText("-New P. Special: Gallop. Can be only used when having legs ending in hooves (not cloven hooves). Effects: Run at high speed across the battlefield evading melee combat but not ranged attack, does not disable P.Special but prevents the use of the regular melee attack action. While galloping all P.Special abilities are 50% stronger due to momentum. Galloping costs fatigue every round.\n");
+			outputText("-New M. Special: Tech Overdrive. Usable by having Tech Overdrive perk. Cost 40 mana. Increase by 20(+20per ng tier) atk of melee or range tech wepaons, add 20% to mech onboard weapons dmg, lower physical def by 50%. It would last for 10 turns.\n");
+			outputText("-New M. Special: Malfunction. Usable by been gremlin-kin. Cost 40 mana and can stun for 6 turns. Have 10 turns cooldown after use. Overload a magitech or construction, causing damage and immobilizing it for a while. Does not work on living things or sentient constructs.\n");
+			outputText("-Centaur race score calculations was slight changed and can have now additionaly 3rd / 4th tier of race bonuses - Elder Centaur / True Centaur: +100 / +140 Strength +80 / +100 Toughness +175 / +185 Speed +80 / +100 Libido +75 Sens +350 / +500 Hp\n");
+			outputText("-New tier for Goblin race bonuses - Goblin Broodmother (20+ pts): -60% to str multi, +120% spe multi, +200% int multi, +80% lib multi, +40 sens).\n");
+			outputText("-New tiers for Demon race score bonuses - Elder Succubus/Incubus & Arch Succubus/Incubus (29+ pts / 38+ pts): +100/+200 spe multi, +110/+250 int multi, +275/+320 lib multi, +50/+200 sens, +150%/+180% max mana multi, -50%/-55% max wrath multi, +150%/+180% max lust multi\n");
+			outputText("-New tier for Frostwyrm race score bonuses - Jormungandr (32+ pts): +230 str multi, +180 tou multi, +90 spe multi, -110 int multi, +90 lib multi, +150% max hp multi, +4 armor/m.res\n");
+			outputText("-Natural Instincts & Tough Hide perks req. of Job: Beast Warrior changed to req. perk Job: Feral Champion. Natural arsenal effect increased from +50% to +100%. Feral Armor req. for tou stat lowered from 60 to 50.\n");
+			outputText("-Venomous Adipose Tissue & Venomous Diet perks have additional req. of having perk Job: Feral Champion.\n");
+			outputText("-Tamani daughters & Minotaur Sons can now level-up (their lvl depends on how many of them are and seperate lvl up counter so the max level isn't clearly defines but would be at least around 100/105 lvl). Like Tamani daughters now Minotaur sons would slowly die out when there is too many of them + added their count on children page right below Tamani daughters.\n");
+			outputText("-Tamani could level up (up to lvl 98). After first level up she would gain Elite type which would be upgraded to Champion type and then to Boss type.\n");
+			outputText("-Enabled camp building at night for night races. But would limit possible helpers to those that could be still active at night. Herbalism and Dummy camp options can also be used at night by night races.\n");
+			outputText("-Female mindbreaker been reeducated causing their corruption increase by 40 pts. Re: Convert option was moved to different button in super perks menu to avoid misclicks due to same position as Previous button.\n");
+			outputText("-Glacial trolls could gain Cold Affnity perk.\n");
+			outputText("-Zenji now have hp and lust variants for defeats pre-camp and for camp sparring, in case combat would change his perspective on PC wining by lust have only 50% chance to change that perspective. Also when fighting to the death would have full lust resistance and no effect to lower that resistance would work on him.\n");
+			outputText("-Phouka Drink scene when pc toughness is between 30 and 70 bug fixed. Also scene will now check for core toughness value not total.\n");
+			outputText("-Having sex when equipped with Sagittarius Baneful Great Bow proc the Sagittarius Focus bonus until next night. Effect: PC adds 50% of his libido to wisdom and intelligence until next night.\n");
+			outputText("-Pilgrim's Bounty perk effect changed from having cum volume calculated as been always at max lust to give 100% chance to make npc's pregnant after sex with pc. In some cases when npc only get fertile post some event/quest it will only trigger when the npc is fertile (no kids with urta, marble or hel right of the bat).\n");
+			outputText("-Job: Gunslinger perk would now add low stat scaling from wis, int, spe instead of doubling the damage. Church of the gun, Alchemical cartridge and Saint of Zariman perks stat scaling improved.\n");
+			outputText("-Amateur Gunslinger, Expert Gunslinger and Master Gunslinger perks effects changed from simply from granting extra firearm attack per turn to: Increase damage (+100%/+100%/+100%) base. (+5%/+10%/+15% firearms attacks multiplier bonus). Amateur Gunslinger would also increase accuracy of firearms attacks by 10%. ");
+			outputText("Expert Gunslinger decrease dmg penalty from using non 2H dual firearms by 30%, Master Gunslinger decrease dmg penalty from using 2H dual firearms by 50%.\n");
+			outputText("-All gunslinger perks was adjusted to req. wis, int and spe instead of ocassional req. tou instead one of those three stats. That is to match stats from which firearms dmg scaling.\n");
+			outputText("-Explosive cartridge perk increase dmg done to large enemies or group of enemies (+100% > +200%). Named Bullet deal much more dmg to bosses (+50% > +200%).\n");
+			outputText("-Golemancer in HXD could sell metal pieces/plates to PC golemancer that can buy energy cores from her. She even gives 3 options of how many metal pieces/plates to buy at once - 1x, 5x, 10x.\n");
+			outputText("-Elemental Fusion forms stats bonuses (+armor/m.res for some fusions) been doubled to more fit temporal perm tf state.\n");
+			outputText("-Costs of combine or seperate flying swords was adjusted to be more related to their cost.\n");
+			outputText("-Added option to remove cursed items to healer horse in JttE inn. She would charge pc for those services the same as Arian (500 gems).\n");
+			outputText("-Imps Tome gradual TF effect will trigger even at night but not longer each hour. Instead it will be at least 6 hours between each gradual tf scene triggered by tome.\n");
+			outputText("-When using sneak attack and having equipped any flying sword(s) for melee sneak attack and any of Moonlight flying sword(s) for range sneak attack they would be part of the attack too. Moonlight flying sword(s) would also increase dmg multiplier of sneak attack by 1.\n");
+			menu();
 			addButton(0, "Next", Changelog53);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
@@ -531,6 +538,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 13 libido lvl-up perk: Corrupt the soul. Req. Corrupt the mind perk. Effect: Lust vulnerability debuff can now stack beyond 0 up to infinity. (well technicaly not infinity but only Spilly Stonewall PC maybe could reach that 'inifity')\n");
 			outputText("-New tier 13 speed lvl-up perk: Phantom Arrow. Req. Arrow Storm perk. Effect: By expending mana on each shot you create a copy of each of your arrows made of pure mana that replicate the trajectories of previous shots. Phantom arrows can trigger arrow storm.\n");
 			outputText("-New Dark Ascension perk: Bottomless hunger. Raise max demonic energy capacity by 5% per rank. Max Rank: 20.\n");
+			outputText("-New Dark Ascension perk: The Dark Soul. You have acquired permanent power from the many souls you consumed in your previous timelines. Raise core stats cap by 10 per rank. Max Rank: 10.\n");
 			outputText("-New event perk: Nightshade. Gained by using Black Lily. Effects: Raise min corruption by 20% permanently +50% tease damage. Pollen now erodes lust resistance by 5% per round. Your alraune abilities are now considered Dark Elements and your vine attack delivers extra dark damage.\n");
 			outputText("-New event perk: Snow Lily. Gained by using Snow Flower. Effects: Your alraune abilities are now considered to be Cold Elements effect and your vine attack delivers extra cold damage.\n");
 			outputText("-New event perk: Cinderbloom. Gained by using Ember Flower. Effects: Your alraune abilities are now considered to be Fire Elements effect and your vine attack delivers extra fire damage.\n");
@@ -549,6 +557,15 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Diaphragm control. Gained by having 10 Vocal Training sessions with Charybdis. Effects: Minion and Follower Damage increased by an additional 10%, and followers will act more often.\n");
 			outputText("-New event perk: Mental Bastion. Gained by having 40 training sessions with Tyrantia. Effects: The effects of Tyrant State are doubled: While active, you take 30% less damage from magic. You count as either pure or corrupt (whichever is better) for equipment. (Pure for the Beautiful weapons etc, corrupt for corrupt weapons)\n");
 			outputText("-New event perk: Vocal Tactician. Gained by having 15 Vocal Training sessions with Charybdis. Effects: Minion and Follower Damage increased by another 15%. Followers will act even more frequently.\n");
+			//Drill Sergeant
+			outputText("-New event perk: Strengthen body. Gained / Upgraded by spending Demonic Energy (25 base rank and increase by 5 pts per each new rank). Effects: Consume the stored energy of souls to raise your strength, toughness and speed by 5% permanently. This change persists through time.\n");
+			outputText("-New event perk: Strengthen magic. Gained / Upgraded by spending Demonic Energy (25 base rank and increase by 5 pts per each new rank). Effects: Consume the stored energy of souls to raise your intelligence, wisdom and libido by 5% permanently. This change persists through time.\n");
+			outputText("-New event perk: Soul Drinker. Gained by becoming Dracula/lina. Effects: Those creatures you defeat and drink from have parts of their soul stolen with their blood increasing your overall stats by 1% for each victim drained.\n");
+			outputText("-New event perk: Tech Overdrive. Gained by been gremlin-kin. Effects: Empower your technological equipment, causing it to deal increased damage but weaken your defenses as a result.\n");
+			outputText("-New event perk: Covenant of the spirits. Gained by having naming ceremony at Wood Elfs village. Effects: Your shared soul with the sacred tree halves your soulforce but doubles your mana and fatigue. ");
+			outputText("This connection greatly weakens your ability to control fire but reinforces your mastery over earth, wind and water. Furthermore your natural attunement and improved magical circulation allows you to add half of your intelligence to your speed score.\n");
+			outputText("-New event perk: Harpy Queen. Gained by giving birth to 20+ harpies. Effects: As a harpy or harpy subtype increase toughness speed and libido based on the ammount of harpy children you gave birth to.\n");
+			outputText("-New event perk: Laquine Might. Gained by been laquine. Effects: Add 75% of your libido to your strength stat.\n");
 			outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP / Lust effect of 10% magnitude.\n");
 			outputText("-New mutation perk: Blazing Heart. Req. having free heart mutation slot, Hinezumi, Salamander, Phoenix, Hellcat and Fire Snail race. Effects: Gain permanent weakness to cold and fire resistance. Increase fire damage by 25%.\n");
 			outputText("-New mutation perk: Drake Blood. Req. having free bloodstream mutation slot; Dragon, Frost Wyrm, Sea Dragon and Jabberwocky race. Effects: Dragon strong vitality grants mana, soulforce and health regeneration 1%.\n");
@@ -572,6 +589,7 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Goblin Ovaries (Primitive). Req. Goblin Ovaries and lvl 30+. Effects: Increase fertility rating by 20, While pregnant increase total libido by 20%. Double the number of kids you birth. Increase physical damage done while pregnant by 30%.\n");
 			outputText("-New mutation perk: Human Digestive Tract (Primitive). Req. Human Digestive Tract and lvl 30+. Effects: Your digestive tract improved allowing to get better nurishment from all the ingested substances (+30%). Increase limit when PC gain weight from eating too much by 25.\n");
 			outputText("-New mutation perk: Human Metabolism (Primitive). Req. Human Metabolism and lvl 30+. Effects: Your metabolism changes allowing to slowly detoxification of poisons (20% chance to instantly remove some of toxic substance from body, -2% of lust per turn, 2x shorter elemental dot effects duration)\n");
+			outputText("-New mutation perk: Hydra Blood (Primitive). Req. Hydra Blood and lvl 30+. Effects: Improve existing Regeneration by 2% negated by fire damage and increase acid and poison effects by 50%.\n");
 			outputText("-New mutation perk: Mighty Legs (Primitive). Req. Mighty Legs and lvl 30+. Effects: Make Kick permanent no matter your leg type, Increase unarmed strike damage by 10 and grapple effect by 40%. Kick is 50% stronger.\n");
 			outputText("-New mutation perk: Mighty Lower Half (Primitive). Req. Mighty Lower Half and lvl 30+. Effects: Tentacle and tail attack deals 50% more damage. Increase unarmed strike damage by 10 and grapple effect by 40%. Grapple damage gains 50% more bonus from your strength.\n");
 			outputText("-New mutation perk: Poison Gland (Primitive). Req. Poison Gland and lvl 30+. Effects: Double the efficiency of poison damage, applied poisons now has a 50% chance of dealing its effect twice per turn. All poison becomes deadlier inflicting 1% toughness damage per round.\n");
@@ -587,6 +605,8 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Mighty Legs (Evolved). Req. Mighty Legs (Primitive) and lvl 60+. Effects: Make Kick permanent no matter your leg type, Increase unarmed strike damage by 15 and grapple effect by 60%. Kick is 100% stronger. Kick stun lasts 1 round longer.\n");
 			outputText("-New mutation perk: Mighty Lower Half (Evolved). Req. Mighty Lower Half (Primitive) and lvl 60+. Effects: Tentacle and tail attack deals 75% more damage. Increase unarmed strike damage by 15 and grapple effect by 60%. Grapple damage gains 100% more bonus from your strength. Racial physical ability stun lasts 1 round longer.\n");
 			outputText("-New mutation perk: Poison Gland (Evolved). Req. Poison Gland (Primitive) and lvl 60+. Effects: Double the efficiency of poison damage, applied poisons now has a 75% chance of dealing its effect twice per turn. All poison becomes deadlier inflicting 2% toughness damage per round.\n");
+			outputText("-New mutation perk: Scylla Ink Glands (Evolved). Req. Scylla Ink Glands (Primitive) and lvl 60+. Effects: Your Scylla Ink Glands increase rate at which your body produce ink, duration ink spray affect enemies and lust damage by ((current i. mutation tier - 1) * 100)%, boost to your natural strength, speed and toughness, ");
+			outputText("Scylla Squeeze damage during grapple as Kraken would be multiplied by current i.mutation tier, scylla grapple will always succeed, when in an aquatic battle boost from Aquatic Affinity is 2x larger.\n");
 			outputText("-New mutation perk: Blazing Heart (Final Form). Req. Blazing Heart (Evolved) and lvl 90+. Effects: Gain permanent weakness to cold and fire resistance. Increase fire damage by 100%. Heat and Rut also grants you a bonus equal to 20% of the libido bonus to strength. ");
 			outputText("Setting an enemy on fire emboldens and arouses you, increasing damage dealt to burn enemies by 100% but also making you take lust damage as a recoil. Fire active and passive abilities have a 20% chance to apply the burning status effect if they do not already.\n");
 			outputText("-New mutation perk: Drake Blood (Final Form). Req. Drake Blood (Evolved) and lvl 90+. Effects: Dragon strong vitality grants mana soulforce and health regeneration 4%. You take 15% less damage from magical attack. Magic Effect from you are 50% more powerful. Magic Ability are 100% Stronger.\n");
@@ -594,19 +614,6 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Fiendish Balls (Final Form). Req. Fiendish Balls (Evolved) and lvl 90+. Effects: Increase Virility by 100%, Increase cum production by 100%, gain a bonus to tease against females based on your cum production up to 50%. All attacks involving your penis are 300% stronger.\n");
 			outputText("-New mutation perk: Fiendish Metabolism (Final Form). Req. Fiendish Metabolism (Evolved) and lvl 90+. Effects: You may no longer gain nourishment from anything short of cum, milk and girl juice. If you have the demonic hunger perk, gain a stacking bonus of 10% to tease damage up to 200%. You may gain Fiendish metabolism bonus even without demonic hunger but gain half of the bonus. ");
 			outputText("Gain immunity to all fluid negative effects and allow you to feed from sexual fluids. Satisfying your crave for sex also raises your spell power for an amount equivalent to the tease damage bonus granted by this mutation. Double all recovery from demonic hunger.\n");
-			outputText("-New mutation perk: Fiendish Ovaries (Final Form). Req. Fiendish Ovaries (Evolved) and lvl 90+. Effects: ncrease Fertility by 100%, all born children from your womb will either be born as imps or greatly corrupted, while pregnant with imps tease is 50% stronger. May benefit from pregomania when pregnant with imps.\n");
-			outputText("-New mutation perk: Goblin Ovaries (Final Form). Req. Goblin Ovaries (Evolved) and lvl 90+. Effects: Increase fertility rating by 40, While pregnant increase total libido by 40%. Double the number of kids you birth. Increase physical damage done while pregnant by 50%. Lust damage against male opponents increased by 50%. Add your fertility score as a bonus to libido.\n");
-			outputText("-New mutation perk: Hydra Blood (Final Form). Req. Hydra Blood (Evolved) and lvl 90+. Effects: Improve existing Regeneration by 4% negated by fire damage and increase acid and poison effects by 100%. Your blood is ruinous and inflicts your fang venom when damaged. Bite attacks deals 50% more damage.\n");
-			outputText("-New mutation perk: Human Bloodstream (Final Form). Req. Human Bloodstream (Evolved) and lvl 90+. Effects: Increases maximum base/core Spe/Lib by 20, maximum trainable Spe/Lib by 30%. Increase fatigue recovery (+15), wrath generation (+6) and +2 to fatigue recovery/wrath gains multiplier. +5% to max overfatigue/overwrath.\n");
-			outputText("-New mutation perk: Human Bones (Final Form). Req. Human Bones (Evolved) and lvl 90+. Effects: Increases maximum base/core Str/Tou by 20, maximum trainable Str/Tou by 30%. Increase effects of body cultivation by 150%. Increase p.soulskill power by 100% and +10% to max overhp.\n");
-			outputText("-New mutation perk: Human Fat (Final Form). Req. Human Fat (Evolved) and lvl 90+. Effects: Your fat tissue increased again your natural toughness and thickness limit. Increases maximum base/core Tou by 10, +10% to max overfatigue, negate up to 3 points of internal chimera score. ");
-			outputText("Increased damage reduction against physical damage (+40% DR) & increase natural resistance to damage (+40 armor/m.res), increase max Hunger cap by 150 (if PC have Hunger bar active) (+90% of max core Tou as phantom Tou)\n");
-			outputText("-New mutation perk: Human Musculature (Final Form). Req. Human Musculature (Evolved) and lvl 90+. Effects: Your musculature increased again your natural strength and tone limit. Increases maximum base/core Str by 10, +10% to max overfatigue. Boost Warrior's Rage effect (+1 per 4 pts of core stat value) and duration by 5 turns. (+90%/+45% of max core Str/Spe as phantom Str/Spe)\n");
-			outputText("-New mutation perk: Human Smarts (Final Form). Req. Human Smarts (Evolved) and lvl 90+. Effects: Increases maximum base/core Int/Wis by 20, maximum trainable Int/Wis cap by 30%. Gain soulforce recovery equal to 2% of your total soulforce and mana recovery increased by 1% of max mana, +5% to max overmana/oversoulforce. Increase m.soulskill power by 100%. Allow to use options requiring to have technical knowledge.\n");
-			outputText("-New mutation perk: Human Versatility (Final Form). Req. Human Versatility (Evolved) and lvl 90+. Effects: Mastery gains increased by 4 points or in case of multiplier +4 to multiplier. Decrease needed exp to lvl up weapon/lifeskill masteries and have 40% chance to gain 4x more XP for Mastery. 50% chance to gain 2 levels instead of 1 when leveling weapon/lifeskill mastery.\n");
-			outputText("-New mutation perk: Mighty Legs (Final Form). Req. Mighty Legs (Evolved) and lvl 90+. Effects: Make Kick permanent no matter your leg type, Increase unarmed strike damage by 20 and grapple effect by 80%. Kick is 150% stronger. Kick stun lasts 1 round longer. Straddle and Grapples duration is extended by 1 additional round.\n");
-			outputText("-New mutation perk: Mighty Lower Half (Final Form). Req. Mighty Lower Half (Evolved) and lvl 90+. Effects: Tentacle and tail attack deals 100% more damage. Increase unarmed strike damage by 20 and grapple effect by 80%. Grapple damage gains 150% more bonus from your strength. Racial physical ability stun lasts 1 round longer. Straddle and Grapples duration is extended by 1 additional round.\n");
-			outputText("-New mutation perk: Poison Gland (Final Form). Req. Poison Gland (Evolved) and lvl 90+. Effects: Double the efficiency of poison damage, applied poisons now has a 100% chance of dealing its effect twice per turn. All poison becomes deadlier inflicting 3% toughness damage per round. All poison now becomes lewder inflicting tease damage equal to your tease value per round on top of any other effect they would do.\n");
 			menu();
 			addButton(0, "Next", Changelog52);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);

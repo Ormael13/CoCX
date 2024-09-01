@@ -539,9 +539,9 @@ public class DungeonMaps extends DungeonAbstractContent
 				}
 			),
 			new DungeonMap("River Dungeon, 6th floor", [
-					//"[a]—[c]",
+					//"[b]—[c]",
 					//" |     ",
-					"[b]—   ",
+					"[a]—   ",
 				],
 				{
 					'a': DUNGEON_RIVER_FLOOR_06_ROOM_01,

@@ -2014,7 +2014,7 @@ public class RiverDungeon extends DungeonAbstractContent
 			outputText("The ground squelches softly beneath your body as you move. Bits of pollen float in the air while also giving a slightly sticky feel to the place.\n\n");
 			outputText("The sweet aroma is impossible to ignore, much like honey.\n\n");
 			dungeons.setDungeonButtonsRD(null, null, null, roomE02);
-			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 12) addButton(10, "Down", roomF02);
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 12) addButton(10, "Down", roomF01);
 			else addButtonDisabled(10, "Down", "Staircase is blocked by impenetrable thorn wall. Maybe go check floor boss first to do something about this wall?");
 		}
 		public function roomE02():void {
@@ -2359,19 +2359,19 @@ public class RiverDungeon extends DungeonAbstractContent
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			dungeons.setDungeonButtonsRD(null, null, null, null);
-		}
-		public function roomF02():void {
-			dungeonLoc = DUNGEON_RIVER_FLOOR_06_ROOM_02;
-			clearOutput();
-			//encountersRuletteF();
-			if (CoC.instance.inCombat) return;
-			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
-			dungeons.setDungeonButtonsRD(null, null, null, null);
 			addButton(0, "Teleport C.", teleportCircleFloor6);
 			addButton(12, "Up", roomE01);
 		}
 		/*
+		public function roomF02():void {
+			dungeonLoc = DUNGEON_RIVER_FLOOR_06_ROOM_02;
+			clearOutput();
+			encountersRuletteF();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
+			dungeons.setDungeonButtonsRD(null, null, null, null);
+		}
 		public function roomF03():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_06_ROOM_03;
 			clearOutput();
@@ -2727,8 +2727,8 @@ public class RiverDungeon extends DungeonAbstractContent
 		private function teleportToFloor6():void {
 			clearOutput();
 			outputText("A circle of energy slowly emerges, wrapping around your team. Magic surges as your vision blurs. In nearly an instant, you're transported to the sixth floor.\n\n");
-			dungeonLoc = DUNGEON_RIVER_FLOOR_06_ROOM_02;
+			dungeonLoc = DUNGEON_RIVER_FLOOR_06_ROOM_01;
 			playerMenu();
 		}
 	}
-}
+}

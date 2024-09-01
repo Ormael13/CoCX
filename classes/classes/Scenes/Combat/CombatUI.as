@@ -143,8 +143,8 @@ public class CombatUI extends BaseCombatContent {
 				else btnMelee.show("Attack", combat.basemeleeattacks, "Attempt to attack the enemy with your " + player.weaponName+".  Damage done is determined by your strength and weapon.").icon("A_Melee");
 			}
 		}
-		if (combat.isEnemyInvisible){
-			btnMelee.disable("You cannot use attack an opponent you cannot see or target.");
+		if (combat.isEnemyInvisible || monster.hasStatusEffect(StatusEffects.MaddeningTune)){
+			btnMelee.disable("You cannot use attack on opponent you cannot see or target.");
 		}
 		// Ranged
 		switch (player.weaponRangePerk) {
@@ -230,6 +230,9 @@ public class CombatUI extends BaseCombatContent {
 		if (physpButtons.length > 0) {
 			if (player.isInGoblinMech() || player.isInNonGoblinMech()) btnPSpecials.show("Mech", submenuPhySpecials, "Mech special attacks menu.", "Mech Specials");
 			else btnPSpecials.show("P. Specials", submenuPhySpecials, "Physical special attack menu.", "Physical Specials");
+		}
+		if (monster.hasStatusEffect(StatusEffects.MaddeningTune)) {
+			btnPSpecials.disable();
 		}
 		// Submenu - Magical Specials
 		combat.mspecials.buildMenu(magspButtons);
