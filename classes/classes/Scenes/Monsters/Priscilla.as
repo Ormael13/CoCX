@@ -219,6 +219,7 @@ public class Priscilla extends Goblin
 							consumables.ORANGDY,
 							consumables.GREEN_D,
 							consumables.PURPDYE);
+			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);

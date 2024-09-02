@@ -145,7 +145,7 @@ public class Yenza extends TrollVillageAbstractContent{
         }
         addButton(0, "Appearance", YenzaAppearance);
         addButton(1, "Titjob", YenzaTitjob);
-        if (player.cockThatFits(40)) addButton(2, "Cowgirl", YenzaCowgirl);
+        if (player.cockThatFits(40) >= 0) addButton(2, "Cowgirl", YenzaCowgirl);
         else addButtonDisabled(2,"Cowgirl","Your dick is too big for her.");
         if (TrollVillage.YenzaUnlocked >= 4) addButton(3, "Submit", YenzaSubmit);
         else addButtonDisabled(3, "???", "Req. to know her better.");

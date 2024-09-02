@@ -1604,6 +1604,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.unequipNecklace(false, true);
 				needNext = true;
 			}
+			if (player.necklace == necklaces.SILCNEC && player.blockingBodyTransformations()) {
+				outputText("The silver necklace suddenly begins to heat up before turning to dust." + (player.hasStatusEffect(StatusEffects.MeetXuviel)?" It would seem you are free of Xuviel’s cursed necklace, which in itself is a good thing.":"") + "");
+				player.unequipNecklace(false, true);
+				needNext = true;
+			}
 			player.updateRacialCache();
 			//Demonic hunger perk
 			needNext ||= player.gainOrLosePerk(PerkLib.DemonEnergyThirst, player.isAnyRaceCached(Races.DEMON, Races.IMP, Races.DEVIL, Races.DRACULA) || player.hasPerk(PerkLib.Phylactery) || player.fiendishMetabolismNFER(), "You begin fantasising about pussies and cocks, foaming at the idea of fucking or getting fucked. It would look like you aquired the demons hunger for sex and can now feed from the orgasms of your partners.", "Your mind clears up as becoming less of a demon you also lost the demonic hunger only sex could sate.");

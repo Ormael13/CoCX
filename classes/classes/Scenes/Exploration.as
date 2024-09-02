@@ -317,7 +317,7 @@ public class Exploration extends BaseContent implements SaveableState
 		}
 		
 		private function canMeetXuviel():Boolean {
-			if (player.necklace == necklaces.SILCNEC && player.gender != 1 && player.hasStatusEffect(StatusEffects.MeetXuviel) && player.statusEffectv1(StatusEffects.MeetXuviel) < 4 && player.statusEffectv2(StatusEffects.MeetXuviel) == 0 &&
+			if (player.necklace == necklaces.SILCNEC && player.gender != 1 && !player.blockingBodyTransformations() && player.hasStatusEffect(StatusEffects.MeetXuviel) && player.statusEffectv1(StatusEffects.MeetXuviel) < 4 && player.statusEffectv2(StatusEffects.MeetXuviel) == 0 &&
 				((player.statusEffectv1(StatusEffects.MeetXuviel) == 0) || (player.statusEffectv1(StatusEffects.MeetXuviel) == 1 && player.statusEffectv2(StatusEffects.MeetXuviel) == 0) || (player.statusEffectv1(StatusEffects.MeetXuviel) == 2 && player.statusEffectv2(StatusEffects.MeetXuviel) == 0) || (player.statusEffectv1(StatusEffects.MeetXuviel) == 3 && player.statusEffectv2(StatusEffects.MeetXuviel) == 0 && player.cor >= 100))) return true;
 			else return false;
 		}
