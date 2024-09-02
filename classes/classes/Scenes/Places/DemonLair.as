@@ -288,6 +288,7 @@ public class DemonLair extends BaseContent
 			outputText("Now that’s an interesting deal. Hunting for food in the wild yields little interest to you, and indeed, having full access to Xuviel’s many resources and delicious dick could prove a profitable relationship.\n\n");
 			player.addStatusValue(StatusEffects.MeetXuviel, 1, 1);
 			player.createStatusEffect(StatusEffects.MeetXuviel2, 0, 0, 0, 0);
+			player.demonicenergy += 50;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		

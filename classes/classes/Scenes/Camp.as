@@ -4463,7 +4463,7 @@ public class Camp extends NPCAwareContent{
 		// Row 5 - places/NPCs 16-20
 		bd.add("Anzu's Palace", SceneLib.dungeons.anzupalace.enterDungeon)
 				.hint("Visit the palace in the Glacial Rift where Anzu the avian deity resides.")
-				.disableIf(flags[kFLAGS.ANZU_PALACE_UNLOCKED] <= 0, "Definetly not Elza winter palace ;)", null, "???");
+				.disableIf(flags[kFLAGS.ANZU_PALACE_UNLOCKED] <= 0, "Definitely not Elza winter palace ;)", null, "???");
 		bd.add("Cathedral", SceneLib.gargoyle.gargoyleRouter)
 				.hint(flags[kFLAGS.GAR_NAME] == 0
 						? "Visit the ruined cathedral you've recently discovered."
@@ -4647,6 +4647,8 @@ public class Camp extends NPCAwareContent{
 			addButtonDisabled(0, "???", "Search the forest.");
 			addButtonDisabled(1, "???", "Search the mountains.");
 		}
+		if (player.hasStatusEffect(StatusEffects.MeetXuviel) && player.statusEffectv1(StatusEffects.MeetXuviel) >= 4) addButton(2, "Demon lair", SceneLib.demonicLair.demonLairMainMenu).hint("Visit the Xuviel’s lair.");
+		else addButtonDisabled(2, "???", "Only for Xuviel’s 9th Wife.");
 
 		addButton(9, "Previous", placesToPage2);
 		addButton(14, "Back", playerMenu);
