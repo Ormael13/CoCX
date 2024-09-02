@@ -368,70 +368,36 @@ public function deleteScreen():void
 	clearOutput();
 	outputText("Slot,  Race,  Sex,  Game Days Played\n");
 
-
-	var delFuncs:Array = [];
-
-
-	for (var i:int = 0; i < saveFileNames.length; i += 1)
-	{
+	outputText("\n<b>ONCE DELETED, YOUR SAVE IS GONE FOREVER.</b>");
+	var bdl:ButtonDataList = new ButtonDataList();
+	for (var i:int = 0; i < saveFileNames.length; i++) {
 		var test:Object = SharedObject.getLocal(saveFileNames[i], "/");
 		outputText(loadSaveDisplay(test, String(i + 1)));
-		if (test.data.exists)
-		{
-			//slots[i] = loadFuncs[i];
-
-			trace("Creating function with indice = ", i);
-			(function(i:int):void		// messy hack to work around closures. See: http://en.wikipedia.org/wiki/Immediately-invoked_function_expression
-			{
-				delFuncs[i] = function() : void 		// Anonymous functions FTW
-				{
-					flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION] = saveFileNames[i];
-					confirmDelete();
-				}
-			})(i);
+		if (test.data.exists) {
+			bdl.add("Slot "+(i+1), curry(confirmDeleteSlot, i));
+		} else {
+			bdl.add("Slot "+(i+1), null);
 		}
-		else
-			delFuncs[i] = null;	//disable buttons for empty slots
 	}
-
-	outputText("\n<b>ONCE DELETED, YOUR SAVE IS GONE FOREVER.</b>");
-	menu();
-	var s:int = 0;
-	while (s < 14) {
-		if (delFuncs[s] != null) addButton(s, "Slot " + (s+1), delFuncs[s]);
-		s++;
-	}
-	addButton(14, "Back", returnToSaveMenu);
-	/*
-	choices("Slot 1", delFuncs[0],
-			"Slot 2", delFuncs[1],
-			"Slot 3", delFuncs[2],
-			"Slot 4", delFuncs[3],
-			"Slot 5", delFuncs[4],
-			"Slot 6", delFuncs[5],
-			"Slot 7", delFuncs[6],
-			"Slot 8", delFuncs[7],
-			"Slot 9", delFuncs[8],
-			"Back", returnToSaveMenu);*/
+	submenu(bdl, returnToSaveMenu, 0, false);
 }
 
-public function confirmDelete():void
-{
+public function confirmDeleteSlot(slotNumber:int):void {
 	clearOutput();
-	outputText("You are about to delete the following save: <b>" + flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION] + "</b>\n\nAre you sure you want to delete it?");
-	simpleChoices("No", deleteScreen, "Yes", purgeTheMutant, "", null, "", null, "", null);
+	outputText("You are about to delete the following save: <b>" + saveFileNames[slotNumber] + "</b>\n\nAre you sure you want to delete it?");
+	simpleChoices("No", deleteScreen, "Yes", curry(purgeTheMutant, slotNumber), "", null, "", null, "", null);
 }
 
-public function purgeTheMutant():void
+public function purgeTheMutant(slotNumber:int):void
 {
-	var test:* = SharedObject.getLocal(flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION], "/");
-	trace("DELETING SLOT: " + flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION]);
+	var test:* = SharedObject.getLocal(saveFileNames[slotNumber], "/");
+	trace("DELETING SLOT: " + saveFileNames[slotNumber]);
 	var blah:Array = ["been virus bombed", "been purged", "been vaped", "been nuked from orbit", "taken an arrow to the knee", "fallen on its sword", "lost its reality matrix cohesion", "been cleansed", "suffered the following error: (404) Porn Not Found", "been deleted"];
 
 	trace(blah.length + " array slots");
 	var select:Number = rand(blah.length);
 	clearOutput();
-	outputText(flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION] + " has " + blah[select] + ".");
+	outputText(saveFileNames[slotNumber] + " has " + blah[select] + ".");
 	test.clear();
 	doNext(deleteScreen);
 }
