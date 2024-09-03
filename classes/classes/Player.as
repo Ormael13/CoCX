@@ -5898,10 +5898,10 @@ use namespace CoC;
 				var strTS:Number = Math.round(0.01 * str * Math.round(effectiveTallness / 6));
 				statStore.replaceBuffObject({'str': strTS}, 'Titanic Strength', { text: 'Titanic Strength' });
 			}
-			if (effectiveTallness<108 && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
+			if (effectiveTallness < 108 && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
 			if (effectiveTallness <= 72 && hasPerk(PerkLib.CondensedPower)) {
 				if (statStore.hasBuff('Condensed Power')) statStore.removeBuffs('Condensed Power');
-				var strCP:Number = Math.round(0.01 * str * (132 - basetallness));
+				var strCP:Number = Math.round(0.01 * str * (132 - effectiveTallness));
 				statStore.replaceBuffObject({'str':strCP}, 'Condensed Power', { text: 'Condensed Power' });
 			}
 			if (effectiveTallness<=72 && hasPerk(PerkLib.SmallCaster)) statStore.replaceBuffObject({'spellpower':(0.01 * (132 - basetallness))}, 'Small Caster', { text: 'Small Caster' });

@@ -48,21 +48,21 @@ public class MaleSpiderMorph extends AbstractSpiderMorph
 			this.bodyColor = "dusky";
 			this.hairColor = "red";
 			this.hairLength = 13;
-			initStrTouSpeInte(70, 60, 99, 99);
-			initWisLibSensCor(99, 45, 35, 20);
+			initStrTouSpeInte(200, 170, 289, 289);
+			initWisLibSensCor(289, 130, 100, 38);
 			this.weaponName = "dagger";
 			this.weaponVerb="stab";
-			this.weaponAttack = 24;
+			this.weaponAttack = 67;
 			this.armorName = "exoskeleton";
-			this.armorDef = 23;
-			this.armorMDef = 2;
+			this.armorDef = 230;
+			this.armorMDef = 20;
 			this.armorPerk = "";
 			this.armorValue = 70;
-			this.bonusHP = 200;
-			this.bonusLust = 98;
+			this.bonusHP = 500;
+			this.bonusLust = 263;
 			this.lust = 20;
 			this.lustVuln = .6;
-			this.level = 18;
+			this.level = 33;
 			this.gems = rand(15) + 15;
 			this.drop = new WeightedDrop().add(consumables.S_GOSSR,5)
 					.add(useables.T_SSILK,1)

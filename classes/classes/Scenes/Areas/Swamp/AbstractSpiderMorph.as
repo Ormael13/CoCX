@@ -68,7 +68,7 @@ public class AbstractSpiderMorph extends Monster
 				outputText("While " + mf("his", "her") + " venom pours into you, the spider-" + mf("boy", "girl") + " reaches into your gear to play with your [nipple], and you moan like a whore from the dual stimulation of " + mf("his", "her") + " venom and nipple-play.\n\n");
 				if (hasVagina()) outputText("The saucy dominatrix exhausts her supply of aphrodisiac toxin for the moment and finally steps back, admiring her work and giving you a lewd wink.  You ");
 				else outputText("The confident male exhausts his supply of aphrodisiac toxin for the moment and finally steps back, admiring his work and giving you a lewd wink.  You ");
-				player.dynStats("lus", 60);
+				player.dynStats("lus", 300);
 				if (player.lust >= player.maxOverLust()) outputText("wobble, utterly defeated and about to cave in to your lust.");
 				else outputText("struggle not to fall down and start masturbating on the spot.");
 				outputText("\n");
@@ -84,11 +84,11 @@ public class AbstractSpiderMorph extends Monster
 					outputText("You react far too slowly, and before you can even think to dodge, " + mf("he", "she") + "'s bitten deep into you, pumping large squirts of venom deep into your body.  Unnatural heat rolls through you, pooling in your groin until you're lewdly bucking your hips against the spider-morph's thigh.  " + mf("He", "She") + " pulls out and steps back, ");
 					if (hasVagina()) outputText("casually cupping her breasts while you watch with venom-dilated eyes, slowly touching yourself.  Once she stops, you shake your head and master yourself, remembering that you're supposed to be fighting this " + mf("boy", "girl") + "!\n");
 					else outputText("casually tugging on his relatively short, girthy dick as you watch with venom-dilated eyes, slowly touching yourself.  Once he stops, you shake your head and master yourself, remembering that you're supposed to be fighting this " + mf("boy", "girl") + "!\n");
-					player.dynStats("lus", 50);
+					player.dynStats("lus", 250);
 				}
 				else {
 					outputText("You react too slowly, and before you can dodge, " + mf("he", "she") + "'s bitten you, leaving behind a burning venom that warms your blood and stokes your lust.\n");
-					player.dynStats("lus", 30);
+					player.dynStats("lus", 150);
 				}
 			}
 		}
@@ -108,8 +108,7 @@ public class AbstractSpiderMorph extends Monster
 			}
 			else if (player.weaponName == "spiked gauntlet" || player.weaponName == "hooked gauntlets" || player.weapon == weapons.AETHERD) {
 				outputText("The webbing hits your ");
-				if (player.weaponName == "spiked gauntlet") outputText("gauntlet, but it's so effectively fastened to your hands that the attack fails to disarm you.\n");
-				else outputText("gauntlets, but they're so effectively fastened to your hands that the attack fails to disarm you.\n");
+				outputText("gauntlets, but they're so effectively fastened to your hands that the attack fails to disarm you.\n");
 			}
 			else {
 				outputText("You don't react fast enough and the sticky webbing pulls your [weapon] out of your grip, gluing it to a nearby tree.  There's no way to get it back right now, you'll have to fight bare-handed!");
