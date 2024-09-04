@@ -126,7 +126,7 @@ public class Changelog extends BaseContent
 			outputText("-Dao of Elements now count toward asc point gains. Stats have added new subsection of predictions fo ascension perk points labeled Masteries (weapon + elemental masteries) and subsection for only Elemental masteries.\n");
 			outputText("-Minor fixes: Coal can randomly send you to heat OR rut, Low standard check for heckel, fixed helia corruption tolerance (Svalkash)\n");
 			outputText("-Each Dao of Element can now reach 12th layer. bonuses for reaching each of three new layers is 10% more resistance and 50% more damage.\n");
-			outputText("-Added option to back from boos room in Ebon Labyrinth if it contain Draculina boss. That choice will only appear if the PC does not meet all requirements to avoid an instant bad end and therefore not have any way to deal with her most annoying (by majority consensus) ability.\n");
+			outputText("-Added option to back from boss room in Ebon Labyrinth if it contain Draculina boss. That choice will only appear if the PC does not meet all requirements to avoid an instant bad end and therefore not have any way to deal with her most annoying (by majority consensus) ability.\n");
 			outputText("-New magical soulskill: Sunrise. Req. buying manual from Qi shop for 100 spirit stones. Create miniature sun and throw it at enemy. Base cost: 400 soulforce.\n");
 			outputText("-During Draculina boss fight been able to use Sunrise soulskill or use foxflame pelt would help to counter her Darkness move (like spell Blind can do already).\n");
 			outputText("-Foxflame Pelt special effect minor change when having 9 cinder tails: cost of use or maintain is halved, speed boost is doubled, can fly (similar to using only SF and would cost SF and Mana per turn needed to sustain foxflame pelt).\n");
@@ -190,7 +190,7 @@ public class Changelog extends BaseContent
 			outputText("-Lower body for wereshark race been made mandatory for them (aka giving -1000 penatly if pc not have it).\n");
 			outputText("-Cursed Tag, Improved Cursed Tag, Greater Cursed Tag perks hve not req. of min level making them respectively tier 1, 2 and 3 perks.\n");
 			outputText("-Areas and Places with enemies to fight have their general levels and stats increased. Areas/Places adjusted (new lvl range of enemies): Lake (3-10), Boat (15-29), Forest (O)(8-16), Forest (I)(19-27), Deepwoods (32-52), Desert (O)(13-20), Desert (I)(25-39), Battlefield (B)(18-41), Battlefield (O)(36-65), Hills (23-30), Low Mountains (35-49), Mountains (54-74), High Mountains (79-104), ");
-			outputText("Plains (28-37), Swamp (33-43)\n");
+			outputText("Plains (28-37), Swamp (33-43), Bog (48-64)\n");
 			outputText("-Entangle green spell would now causing enemy to not act with 50% chance each turn it's active.\n");
 			outputText("-Red Qipao armor been added to Victoria's Secre... ekhm Tailor Shop.\n");
 			outputText("-Damage of all types when lvl diff between enemy and pc is 50+ changed from dropping right away from 2% at 49 lvl diff to 1 dmg at 50 lvl diff. Now it would drop to 1 point of dmg at 55+ lvl diff. For diff of 50-54 it would reduce dmg to 1%-0,0001%.\n");
@@ -254,11 +254,11 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
-			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Lord Shadeogorath) (Furrin Gok) (khovel) (Chibizs) (Svalkash)
-			outputText("-\n");// (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (GatoGrande) (Imperfect Spell) (PhillipDaisySeventh) (Edward Darksong)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New tier 4 wisdom lvl-up perk: ???. Req. Fourth Tamer of the Apocalypse perk and 125+ wisdom. Effect: 5th slot
 			outputText("-\n");//New tier ? wisdom lvl-up perk: Apes Together Strong. Req. ??? perk and ???+ wisdom. Effect: allow exchange single monsters variants > group monsters variants
@@ -266,11 +266,11 @@ public class Changelog extends BaseContent
 			outputText("-\n");//New tier 3 wisdom lvl-up perk: Stronger Tamed Mosters. Req. Fourth Tamer of the Apocalypse perk and 105+ wisdom. Effect: bigger meat shields, bigger claws, bigger muscles \o/ bigger everything???
 			outputText("-\n");//New tier 7 wisdom lvl-up perk: Kaiju No8. Req. Job: Tamer and 50+ wisdom. Effect: 8th kaiju joins your team of monsters.
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
+			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");// (Liadri) (aimozg) (Canadian Snas) (Jtecx) (Lord Shadeogorath) (Furrin Gok) (khovel) (Chibizs) (Svalkash)
+			outputText("-\n");// (jfmherokiller) (NUZ/Shirane) (EragonX) (Xetaxheb) (Demojay) (GatoGrande) (Imperfect Spell) (PhillipDaisySeventh) (Edward Darksong)
 			outputText("-Fixed bugs: Dracula/lina PC unable to find get ghoul if they not learned this as normal Vampire, unable to buy manual for 1st atk: f. swords, Arigean Princess PC not been fully immune to TF-ing like other perm races, Weresharks not having their stats changing according to moon phase or boosted during use of Crinos Shape, Phoenix TF adding mutagen penatly instead of stat curse, ");
 			outputText("Endless Rage draining 10x too much wrath per turn, Berzerker/Lustzerker still req. to be activated after they been activated as part of Asura Form activation, dormant state of wereraces 'blessings' increasing race score and not lowering it, Hinezumi Buring Blood IM accesable by Bunny race, returning from teleportation circle at 4th floor of river dungeon sending PC to ");
 			outputText("3rd floor teleportation circle room, perk allowing to always run away from enemy/ies been ignored in dungeons, unarmed/feral giving mastery gains for small weapons, 2 of 4 SF to Elemental Energy conversion options having wrong check for usable SF, using Fiery Band for calling Kiha to help fight... Kiha, Ceraph after update still not able to win using her super cool lust beam attack, ");
@@ -2807,7 +2807,7 @@ public class Changelog extends BaseContent
 			outputText("-Succubus Gardener get bit more beefy on HP section and her heal would lower lust resistance bit less and cost more of her stamina. And IF by chance PC make her heal up enough times to reach 0% lust resistance she still could use heal up few more times but they won't lower her resistance (cuz it's already 0% right?)\n");
 			outputText("-Marae got bit of attention too ^^ She got perk here or there and new moves added to both pure and corrupted versions. A hint for them: You all remember that Marae is the one to make PC int Alraune, right?\n");
 			outputText("-All ascension perks from tab named 'Perk Select(2)' have increased max rank by 5.\n");
-			outputText("-As some crazy dungeon delver PC's went as far as 1000th room in Ebon labyrinth there would be placed chest with EXP in each 10th room aside boos rooms till that 1000th room.\n");
+			outputText("-As some crazy dungeon delver PC's went as far as 1000th room in Ebon labyrinth there would be placed chest with EXP in each 10th room aside boss rooms till that 1000th room.\n");
 			outputText("-Buff spells been changed (again) and now would be not as OP especialy due to new stats system been implemented. Well time to get used to new way buffs works. For the balance ^^\n");
 			outputText("-Winter wolf full look easier to get without pain to get req. of specific stage of fur coverage (now just have fur and you golden ^^).\n");
 			outputText("-Kitsune racial bonuses been slight reorganized with adding 3 more higher tiers of bonuses: first for nine tails that before not have any diff in stats from other kitsunes, ninetail of balance and Inari.\n");
@@ -5023,7 +5023,7 @@ public class Changelog extends BaseContent
 			outputText("-New physical special: Strangulate Req. to be Alraune and using Entangle Effects: crushing enemy with vines.\n");
 			outputText("-Three new enemies: Alraune (lvl 20 enc in Deepwoods), Snow Lily (lvl 40 enc in Glcial Rift) and Cinderbloom (lvl 40 enc in Vulcanic Crag).\n");
 			outputText("-Finding reason within Kitteh decision I also locks out access to Prison content till it would be more complete than it's now.\n");
-			outputText("-Meditating at deepwoods or camp shrine now would be giving slight more lust reduction and aside int boos it will rise wis too.\n");
+			outputText("-Meditating at deepwoods or camp shrine now would be giving slight more lust reduction and aside int boost it will rise wis too.\n");
 			outputText("-New item: incense of Insight. Costs 15 gems and rise wisdom same way as Scholar Tea rise intellience. Buyable at Ayane shop or at golem merchant at He'Xin'Dao.\n");
 			outputText("-Fixed bugs: Throwing weapons not working with mutli range attacks, Usable Fox Fire to burn corupted glades when below 7 fox tails");
 			menu();

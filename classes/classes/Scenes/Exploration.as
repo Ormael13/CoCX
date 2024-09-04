@@ -247,7 +247,7 @@ public class Exploration extends BaseContent implements SaveableState
 		}
 		private function btnExploreBog():ButtonData {
 			return new ButtonData("Bog", SceneLib.bog.exploreBog)
-					.hint("Visit the dark bog. \n\nRecommended level: 28"
+					.hint("Visit the dark bog."
 							+ "\n\nTimes explored: " + SceneLib.bog.timesExplored())
 					.disableIf(!SceneLib.bog.isDiscovered(), "Discovered when exploring Swamp." +
 							" (Lvl "+SceneLib.bog.areaLevel+"+)");
@@ -261,7 +261,7 @@ public class Exploration extends BaseContent implements SaveableState
 		}
 		private function btnExploreDefiledRavine():ButtonData {
 			return new ButtonData("Defiled Ravine", SceneLib.defiledravine.exploreDefiledRavine)
-					.hint("Visit the defiled ravine. \n\nRecommended level: 41"
+					.hint("Visit the defiled ravine."
 							+ "\n\nTimes explored: " + SceneLib.defiledravine.timesExplored())
 					.disableIf(!SceneLib.defiledravine.isDiscovered(), "Discovered when exploring Blight Ridge." +
 							" (Lvl "+SceneLib.defiledravine.areaLevel+"+)");

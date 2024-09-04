@@ -10,17 +10,17 @@ public class LizanBlowpipeDebuff extends CombatBuff {
 		super(TYPE, 'str', 'tou', 'spe', 'sen');
 	}
 	public function debuffStrSpe():void {
-		var power:Number = 5;
+		var power:Number = 20;
 		// don't want to have corruptionTolerance in Creature in favour of future (?) corruptAtLeast/corruptAtMost
 		if (host.cor > 50 + (playerHost ? playerHost.corruptionTolerance : 0)) {
-			power = 10;
+			power = 40;
 		}
 		buffHost('str', -power, 'spe', -power);
 	}
 	public function debuffTouSens():void {
-		var power:Number = 5;
+		var power:Number = 20;
 		if (host.cor > 50 + (playerHost ? playerHost.corruptionTolerance : 0)) {
-			power = 10;
+			power = 40;
 		}
 		buffHost('tou', -power, 'sens', power);
 	}
