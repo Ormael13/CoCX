@@ -12,7 +12,7 @@ public class Ayane extends Kitsune {
         outputText("“<i>Try and dodge this!!</i>”\n"
             + "\n"
             + "Seven distinct blue fireballs appear from all directions floating toward you.");
-        var damage:int = (this.inte + this.wis) * 1.5 + rand(50);
+        var damage:int = (this.inte + this.wis) * 3 + rand(50);
         if (player.hasStatusEffect(StatusEffects.Blizzard)) {
             player.addStatusValue(StatusEffects.Blizzard, 1, -1);
             damage *= 0.2;
@@ -22,7 +22,7 @@ public class Ayane extends Kitsune {
             else {
                 outputText(" The foxfire sears your skin, but leaves you strangely aroused.");
                 player.takeFireDamage(damage, true);
-                player.takeLustDamage(15 + player.effectiveSensitivity() / 10, true);
+                player.takeLustDamage(30 + player.effectiveSensitivity() / 5, true);
             }
     }
 
@@ -31,6 +31,7 @@ public class Ayane extends Kitsune {
             + "\n"
             + "She waves her staff tracing a swift arcane glyph. To your dismay, all ongoing enchantments you've casted spontaneously end.");
         player.removeStatusEffect(StatusEffects.ChargeWeapon);
+        player.removeStatusEffect(StatusEffects.ChargeRWeapon);
         player.removeStatusEffect(StatusEffects.ChargeArmor);
         player.statStore.removeBuffs("Might");
         player.statStore.removeBuffs("Blink");
@@ -69,13 +70,13 @@ public class Ayane extends Kitsune {
     }
 
     private function illusion():void {
-        if (!player.hasPerk(PerkLib.TrueSeeing)) {
+        if (!player.hasPerk(PerkLib.TrueSeeing) && !player.hasPerk(PerkLib.SixthSense)) {
             outputText("The fox cast a spell and to your utter confusion the entire scenery changes. You are naked in a bedroom and a full harem of fox women are surrounding you, flaunting their assets. Before you can defend yourself they all pounce on you attacking you in all sensual ways possible. You break out of the insidious daydream just in time to see the real fox about to disarm and rape you. You shove her away still aroused by the vision.\n"
                 + "\n"
                 + "“<i>How prude! Many would kill to experience what you just saw.</i>”");
             createStatusEffect(StatusEffects.Illusion, 0, 0, 0, 0);
-            player.takeLustDamage(20 + player.effectiveSensitivity() / 8, true);
-            statStore.addBuff("spe", 20, "KitsuneIllusion", {rate: Buff.RATE_ROUNDS, ticks: 5});
+            player.takeLustDamage(40 + player.effectiveSensitivity() / 4, true);
+            statStore.addBuff("spe", 40, "KitsuneIllusion", {rate: Buff.RATE_ROUNDS, ticks: 5});
         } else {
             outputText("The fox casts a spell, but your magical sight easily pierces their forming illusion!");
         }
@@ -83,7 +84,7 @@ public class Ayane extends Kitsune {
 
     override protected function performCombatAction():void {
         //Ayane periodically appears and disappears around the player. At random at the start of the round Ayane may be hidden or visible. If she’s hidden all attack but tease will fail
-        if (rand(2) == 0 && !player.hasPerk(PerkLib.SixthSense)) {
+        if (rand(2) == 0 && !player.hasPerk(PerkLib.TrueSeeing) && !player.hasPerk(PerkLib.SixthSense)) {
             this.createStatusEffect(StatusEffects.MonsterInvisible, 0, 0, 0, 0);
             outputText("No matter how much you try you can’t see the kitsune in the direct vicinity. She doesn’t keep you waiting for long, however, and strikes you from stealth.\n\n");
         } else this.removeStatusEffect(StatusEffects.MonsterInvisible);

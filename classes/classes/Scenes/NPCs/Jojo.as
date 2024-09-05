@@ -30,32 +30,32 @@ public class Jojo extends Monster
 			switch (JojoScene.monk) {
 				case 2:
 					outputText("Jojo looks lost in thought for a moment, and fails to attack.  ");
-					lust += 4;
+					lust += Math.round(maxLust() * 0.04);
 					break;
 				case 3:
 					outputText("Jojo blushes as he fights you, distracted by a stray thought.  You think you see a bulge in the loose cloth of his pants.  ");
-					lust += 8;
+					lust += Math.round(maxLust() * 0.08);
 					break;
 				case 4:
 					outputText("Jojo stumbles, shakes his head, and pulls one of his hands away from the stiff tent in his pants.  ");
-					lust += 10;
+					lust += Math.round(maxLust() * 0.1);
 					break;
 				default:
 					outputText("Jojo frantically jerks his " + cockDescriptShort(0) + ", stroking the " + cockDescriptShort(0) + " as it leaks pre-cum at the sight of you.  ");
-					lust += 15;
+					lust += Math.round(maxLust() * 0.15);
 			}
 			
 			if (lust >= 100) {
 				doNext(SceneLib.combat.endLustVictory);
 				return;
 			}
-			else if (lust >= 85)
+			else if (lust >= Math.round(maxLust() * 0.85))
 				outputText("The mouse is panting and softly whining, each movement seeming to make his bulge more pronounced.  You don't think he can hold out much longer.  ");
-			else if (lust >= 70)
+			else if (lust >= Math.round(maxLust() * 0.7))
 				outputText("The mouse is having trouble moving due to the rigid protrusion from his groin.  ");
-			else if (lust >= 60)
+			else if (lust >= Math.round(maxLust() * 0.6))
 				outputText("The mouse's eyes constantly dart over your most sexual parts, betraying his lust.  ");
-			else if (lust > 50)
+			else if (lust > Math.round(maxLust() * 0.5))
 				outputText("The mouse's skin remains flushed with the beginnings of arousal.  ");
 			doNext(EventParser.playerMenu);
 		}
@@ -83,17 +83,17 @@ public class Jojo extends Monster
 			this.skinDesc = "fur";
 			this.hairColor = "white";
 			this.hairLength = 2;
-			initStrTouSpeInte(45, 50, 75, 64);
-			initWisLibSensCor(64, 15, 40, JojoScene.monk * 15);
+			initStrTouSpeInte(123, 139, 194, 160);
+			initWisLibSensCor(160, 35, 100, JojoScene.monk * 15);
 			this.weaponName = "paw";
 			this.weaponVerb="punch";
-			this.weaponAttack = 5;
+			this.weaponAttack = 25;
 			this.armorName = "robes";
-			this.armorDef = 1;
-			this.armorMDef = 10;
+			this.armorDef = 20;
+			this.armorMDef = 100;
 			this.lust = 15;
 			this.lustVuln = .9;
-			this.level = 10;
+			this.level = 24;
 			this.gems = rand(15) + 7;
 			this.special1 = selfCorruption;
 			//Create jojo sex attributes
@@ -102,25 +102,25 @@ public class Jojo extends Monster
 				this.lust += 70;
 				this.cocks[0].cockThickness += .2;
 				this.cocks[0].cockLength += 1.5;
-				this.bonusLust = 10;
+				this.bonusLust = 159;
 				if(player.gender == 1 || player.gender == 3) this.ass.analLooseness = 2;
 			}
 			if(JojoScene.monk == 4) {
 				this.lust += 85;
 				this.cocks[0].cockThickness += .5;
 				this.cocks[0].cockLength += 3.5;
-				this.bonusLust = 20;
+				this.bonusLust = 318;
 				if(player.gender == 1 || player.gender == 3) this.ass.analLooseness = 3;
 			}
 			if(JojoScene.monk == 5) {
 				this.lust += 100;
 				this.cocks[0].cockThickness += 1;
 				this.cocks[0].cockLength += 5.5;
-				this.strStat.core.value -= 20 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.touStat.core.value += 30 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.strStat.core.value -= 50 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.touStat.core.value += 75 + (15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.cor += 10;
-				this.HP += 60 + (60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.bonusLust = 30;
+				this.HP += 150 + (150 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusLust = 477;
 				if(player.gender == 1 || player.gender == 3) this.ass.analLooseness = 4;
 				this.long = "Jojo is an anthropomorphic mouse with immaculate white fur.  Though he stands only four feet tall, he is covered in lean muscle and moves with incredible speed.  He's naked, with a large tainted throbbing member bouncing at attention.  A fuzzy sack with painfully large looking balls dangles between his legs.";
 			}
