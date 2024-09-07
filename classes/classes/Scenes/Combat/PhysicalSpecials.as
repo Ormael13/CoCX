@@ -6110,6 +6110,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (chance > 10) chance = 10;
 		doDamage(damage);
 		outputText("Your [shield] slams against [themonster], dealing <b>[font-damage]" + damage + "[/font]</b> damage! ");
+		if (player.hasPerk(PerkLib.BrutalOpening)) {
+			if (!monster.hasStatusEffect(StatusEffects.TimesBashed)) monster.createStatusEffect(StatusEffects.TimesBashed, 0, 2, 0, 0);
+			if (player.hasPerk(PerkLib.LingeringOpening)) monster.addStatusValue(StatusEffects.TimesBashed, 2, 2);
+		}
 		if (!monster.hasStatusEffect(StatusEffects.Stunned) && rand(chance) == 0) {
 			outputText("<b>Your impact also manages to stun [themonster]!</b> ");
 			if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);

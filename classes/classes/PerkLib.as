@@ -581,6 +581,12 @@ public class PerkLib
 		public static const AbsoluteBash:PerkType = mk("Absolute Bash", "Absolute Bash",
 				"Shield bash diminishing return is reduced by 20%. By spending 10% of your fatigue you may reset Shield bash to full efficiency.",
 				"You've chosen the 'Absolute Bash' perk. Shield bash diminishing return is reduced by 20%. By spending 10% of your fatigue you may reset Shield bash to full efficiency.");
+		public static const BrutalOpening:PerkType = mk("Brutal Opening", "Brutal Opening",
+				"Triple all physical damage dealt for 1 turn following a shield bash.",
+				"You've chosen the 'Brutal Opening' perk. Triple all physical damage dealt for 1 turn following a shield bash.");
+		public static const LingeringOpening:PerkType = mk("Lingering Opening", "Lingering Opening",
+				"Brutal Opening last for an additional 2 rounds and quadruple physical damage instead of tripling.",
+				"You've chosen the 'Lingering Opening' perk. Brutal Opening last for an additional 2 rounds and quadruple physical damage instead of tripling.");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -591,12 +597,6 @@ public class PerkLib
 		public static const StrongerTamedMosters:PerkType = mk("Stronger Tamed Mosters", "Stronger Tamed Mosters",
 				".",
 				"You've chosen the 'Stronger Tamed Mosters' perk. .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk. .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk. .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk. .");
@@ -5330,7 +5330,7 @@ public class PerkLib
             Rage.requirePerk(FuelForTheFire)
                     .requireLevel(66);
             KingOfTheJungle.requirePerks(ToxineMaster, Medicine)
-                    .requireLevel(60);
+                    .requireLevel(66);
             WarCaster.requirePerk(SwiftCasting)
                     .requireLevel(66);
             HalfStepToEpicTranquilness.requireStr(360)
@@ -5657,11 +5657,15 @@ public class PerkLib
                     .requirePerk(HalfStepToEpicEndurance)
                     .requireLevel(72);
             //Tier 13 Toughness Perks
+            BrutalOpening.requirePerk(SecondWind)
+                    .requireLevel(78);
             HalfStepToLegendaryEndurance.requireTou(420)
                     .requireStr(280)
                     .requirePerk(EpicEndurance)
                     .requireLevel(78);
             //Tier 14 Toughness Perks
+            LingeringOpening.requirePerk(BrutalOpening)
+                    .requireLevel(84);
             LegendaryEndurance.requireTou(450)
                     .requireStr(300)
                     .requirePerk(HalfStepToLegendaryEndurance)
@@ -8273,11 +8277,11 @@ public class PerkLib
 					.requirePerks(HclassHeavenTribulationSurvivor, PrestigeJobDruid);
             FirstAttackSkeletons.requireLevel(54)
                     .requirePerks(FirstAttackGolems, PrestigeJobNecromancer);
-            AbsoluteBash.requireLevel(54)
-                    .requirePerks(ShieldSlam, PrestigeJobSentinel);
 			SubzeroLustfulFury.requireLevel(54)
 					.requirePerk(PrestigeJobBerserker)
                     .requireAnyPerk(ColderFury, ColderLust);
+            AbsoluteBash.requireLevel(54)
+                    .requirePerks(ShieldSlam, PrestigeJobSentinel);
             //Tier 10
             ChimericalBodySemiPeerlessStage.requirePerk(ChimericalBodySuperiorStage)
                     .requireLevel(60)

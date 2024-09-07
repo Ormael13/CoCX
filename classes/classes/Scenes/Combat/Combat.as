@@ -873,7 +873,7 @@ public class Combat extends BaseContent {
             buttons.add("CheatAbility", combat.debugCheatAbility).hint("Use any ability");
             buttons.add("CheatStats", combat.debugCheatStats).hint("Adjust your or enemy stats. May break things!");
         }
-        if (player.hasPerk(PerkLib.AbsoluteBash) && monster.hasStatusEffect(StatusEffects.TimesBashed) && (player.fatigue + Math.round(player.maxFatigue() * 0.1) < player.maxOverFatigue())) {
+        if (player.hasPerk(PerkLib.AbsoluteBash) && monster.hasStatusEffect(StatusEffects.TimesBashed) && monster.statusEffectv1(StatusEffects.TimesBashed) > 0 && (player.fatigue + Math.round(player.maxFatigue() * 0.1) < player.maxOverFatigue())) {
             buttons.add("Refresh Bash", refreshbash).hint("By spending 10% of your fatigue you may reset Shield bash to full efficiency.");
         }
         if (player.hasPerk(PerkLib.JobDefender)) {
@@ -5306,7 +5306,7 @@ public class Combat extends BaseContent {
         clearOutput();
         outputText("You focus your defences readying yourself to ram your shield again.\n\n");
         fatigue(Math.round(player.maxFatigue() * 0.1));
-        monster.removeStatusEffect(StatusEffects.TimesBashed);
+		monster.changeStatusValue(StatusEffects.TimesBashed, 1, 1);
         enemyAIImpl();
     }
 
@@ -9245,6 +9245,10 @@ public class Combat extends BaseContent {
             if (monster.statusEffectv3(StatusEffects.AcidDoT) > 0) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
             if (monster.statusEffectv4(StatusEffects.AcidDoT) > 0) damage *= (1 + (0.1 * monster.statusEffectv4(StatusEffects.AcidDoT)));
         }
+		if (player.hasPerk(PerkLib.BrutalOpening)) {
+			if (player.hasPerk(PerkLib.LingeringOpening)) damage *= 4;
+			else damage *= 3;
+		}
 		return doDamage(damage, apply, display, ignoreDR);
     }
 

@@ -4432,6 +4432,7 @@ import classes.Scenes.Combat.CombatAbilities;
 				}
 				else addStatusValue(StatusEffects.DefPDebuff,1,-1);
 			}
+			if (hasStatusEffect(StatusEffects.TimesBashed) && statusEffectv2(StatusEffects.TimesBashed) > 0) addStatusValue(StatusEffects.TimesBashed, 2, -1);
 		}
 
 		public function handleAwardItemText(itype:ItemType):ItemType
