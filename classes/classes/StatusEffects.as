@@ -852,6 +852,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const JojoPyre:StatusEffectType           	= mk("Jojo Pyre");
 		public static const Keen:StatusEffectType               	= mk("keen");
 		public static const KitsuneFight:StatusEffectType       	= mk("Kitsune Fight");
+		public static const LadyRafflesiaDevSer:StatusEffectType 	= mk("Lady Rafflesia Devour servants");
+		public static const LadyRafflesiaGrab:StatusEffectType  	= mk("Lady Rafflesia Grab");
 		public static const Level:StatusEffectType              	= mk("level");
 		public static const LingeringSlime:StatusEffectType     	= mk("Lingering Slime");
 		public static const LoliBatGolems:StatusEffectType          = mk("LoliBatGolems");

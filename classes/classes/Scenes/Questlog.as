@@ -73,6 +73,11 @@ public class Questlog extends BaseContent
 			else if (SceneLib.dungeons.checkBeeHiveClear()) outputText("Completed");
 			else if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] > 0 && flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] < 3) outputText("In Progress");
 			else outputText("Not Started");
+			outputText("\n<b>Weeding Out:</b> ");
+			if (flags[kFLAGS.TWILIGHT_GROVE_PURIFICATION] == 5) outputText("Completed (Reward taken)");
+			else if (SceneLib.dungeons.checkTwilightGroveClear()) outputText("Completed");
+			else if (flags[kFLAGS.DISCOVERED_TWILIGHT_GROVE_DUNGEON] > 0 && flags[kFLAGS.TWILIGHT_GROVE_PURIFICATION] < 3) outputText("In Progress");
+			else outputText("Not Started");
 			outputText("\n<b>Tiger stalking the Dragon:</b> ");
 			if (flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] == 6) outputText("Completed (Reward taken)");
 			else if (SceneLib.dungeons.checkHiddenCaveClear()) outputText("Completed");
@@ -147,8 +152,8 @@ public class Questlog extends BaseContent
 			if (questLib.MQ_Factory.factoryCleared && !questLib.MQ_Factory.perkRewardTaken) addButton(0, "Factory", takeRewardForFactory);
 			if (questLib.MQ_Zetaz.dungeonCleared && !questLib.MQ_Zetaz.perkRewardTaken) addButton(1, "Deep Cave", takeRewardForDeepCave);
 			if (SceneLib.dungeons.checkDemonLaboratoryClear() && flags[kFLAGS.DEMON_LABORATORY_DISCOVERED] < 2) addButton(2, "Demon Laboratory", takeRewardForDemonLaboratory);
-			//button 4 - ?Demon Mine?
-			if (SceneLib.dungeons.checkLethiceStrongholdClear() && flags[kFLAGS.LETHICE_DEFEATED] < 2) addButton(3, "Stronghold", takeRewardForStronghold);
+			//button 3 - ?Demon Mine?
+			if (SceneLib.dungeons.checkLethiceStrongholdClear() && flags[kFLAGS.LETHICE_DEFEATED] < 2) addButton(4, "Stronghold", takeRewardForStronghold);
 			if (SceneLib.dungeons.checkSandCaveClear() && flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] < 2) addButton(5, "Sand Cave", takeRewardForSandCave);
 			if (SceneLib.dungeons.checkPhoenixTowerClear() && flags[kFLAGS.CLEARED_HEL_TOWER] < 2) addButton(6, "Phoenix Tower", takeRewardForPhoenixTower);
 			if (SceneLib.dungeons.checkBeeHiveClear() && flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] < 3) addButton(7, "Bee Hive", takeRewardForBeeHive);
@@ -168,7 +173,7 @@ public class Questlog extends BaseContent
             if (SceneLib.dungeons.checkHiddenCaveClear() && flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 6) addButton(10, "Hidden Cave", takeRewardForHiddenCave);
 			if (SceneLib.dungeons.checkHiddenCaveHiddenStageClear() && flags[kFLAGS.HIDDEN_CAVE_BOSSES] < 3) addButton(10, "Hidden C.(HS)", takeRewardForHiddenCaveHiddenStage).hint("Hidden Cave (Hidden Stage bonus)");
 			if (SceneLib.dungeons.checkDenOfDesireClear() && flags[kFLAGS.DEN_OF_DESIRE_QUEST] < 2) addButton(11, "Den of Desire", takeRewardForDenOfDesire);
-			//button 12 - ???
+			if (SceneLib.dungeons.checkTwilightGroveClear() && flags[kFLAGS.TWILIGHT_GROVE_PURIFICATION] < 5) addButton(12, "Twilight Grove", takeRewardForTwilightGrove);
 			//button 13 - Lia undersea chtulu dungeon
 			addButton(14, "Back", playerMenu);
 		}
@@ -258,6 +263,10 @@ public class Questlog extends BaseContent
 		}
 		public function takeRewardForDenOfDesire():void {
 			flags[kFLAGS.DEN_OF_DESIRE_QUEST] = 2;
+            reward(3, 15);
+		}
+		public function takeRewardForTwilightGrove():void {
+			flags[kFLAGS.TWILIGHT_GROVE_PURIFICATION] = 5;
             reward(3, 15);
 		}
 	}

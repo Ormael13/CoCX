@@ -516,9 +516,7 @@ import classes.CoC;
 			meetTwilightGroveRandomnMob();
 			if (CoC.instance.inCombat) return;
 			outputText("This is a storage area filled with many boxes full of what looks to be transformatives and less savory items. There also is wine and other alcoholic beverages in here, but you don’t think getting inebriated in the middle of an enemy lair is a bright idea.");
-			//dungeons.setDungeonButtons(room6TG, room4TG, null, null);
-			dungeons.setDungeonButtons(null, room4TG, null, null);
-			addButtonDisabled(6, "North", "Another wall of thorn vines blocks you way. What could be Behind These Hazel Vines? B.O.S.S.?");
+			dungeons.setDungeonButtons(room6TG, room4TG, null, null);
 			if (player.statusEffectv1(StatusEffects.TGStorage) > 0) {
 				outputText("\n\nThere is an opened box with some item"+(player.statusEffectv1(StatusEffects.TGStorage) == 1 ? "":"s")+" inside.\n\n");
 				addButton(0, "Crate 1", takeGroPlus);
@@ -558,10 +556,16 @@ import classes.CoC;
 			clearOutput();
 			outputText("<b><u>Twilight Grove</u></b>\n");
 			if (flags[kFLAGS.TWILIGHT_GROVE_PURIFICATION] == 3) {
-				//outputText("\"<i></i>\"\n\n");
-				//outputText("\"<i></i>\"\n\n");
-				//outputText("\"<i></i>\"\n\n");
-				//outputText("\"<i></i>\"\n\n");
+				outputText("You walk towards what looks like a corrupted water pond with a small island at the center. On the island rests a black flower of massive size, towering above the entire grove and the sunbathing demons below, though right now you wonder if they are sunbathing or rather enjoying a good fuck from the weird tentacle vines pumping under their beach clothes. Strangely the demons seem to literally not give a single fuck about you standing there. A seductive and somewhat playful voice breaks the silence.\n\n");
+				outputText("\"<i>So you came all the way here and defeated all of my retainers, I am impressed by your skill.</i>\"\n\n");
+				outputText("The flower blossoms, revealing a dreamily beautiful woman with lavender skin, grass-like pink hair ornamented with real flowers and red eyes that clearly show her heavy corruption.\n\n");
+				outputText("\"<i>Since presentations are in order my name is Rafflesia, daughter of the goddess Marae. Wandering adventurer would you grace me with your name.</i>\"\n\n");
+				outputText("You proudly tell her your name and that you are a champion here to put an end to this garden of corruption.\n\n");
+				outputText("\"<i>Oh, courageous are you? I don’t mind adventurers every now and then, most of them end up eaten by the garden or fucked into becoming new residents, however, you sure made a mess out of my lovely paradise which is why… I desire you even more. You SHALL be mine.</i>\"\n\n");
+				outputText(""+(silly() ? "Well that's an obvious yandere flag whatever she has in line for you is going to be a thousand times worse then the classic fate of a harem protagonist. Wait, come to think of it, aren't you an harem protagonist? ":"")+"The plant woman starts laughing sinisterly and you back away ready to flee but all of the grove exits are suddenly shut, the area becoming covered with thick layers of impassable thorny vines blossoming with black orchids.\n\n");
+				if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) outputText("\"<i>I also heard how you helped show my mother Marae the path to carnal delight and endless pleasure. It has been so difficult for me to spread since she severed our ties. However, now that she is assisting me instead of being a nuisance, I can spread my roots and expand my power freely. I will gladly reward your dutiful help with an eternity at my service attending my garden.</i>\"\n\n");
+				outputText("A literal army of tentacle vines slowly snake toward you from the laughing plant woman. You will have to defeat her if only to hope escaping this place unchanged.\n\n");
+				startCombat(new LadyRafflesia(), true);
 			}
 			else outputText("Crystal clear water surrounds the small island where Lady Rafflesia used to grow. With its mistress gone, the grove seems to have recovered a semblance of dignity.");
 			if (CoC.instance.inCombat) return;
@@ -569,13 +573,28 @@ import classes.CoC;
 		}
 		public function defeatLadyRafflesia():void {
 			clearOutput();
-			outputText("\"<i></i>\"\n\n");
+			outputText("Rafflesia looks at you defeated and terrified as you prepare to end her.\n\n");
+			outputText("\"<i>Nooooo! Please, you don’t have to do this! All I ever wanted was to have children! Thousands of beautiful children that would cover the world with their seeds!</i>\"\n\n");
+			outputText("Sadly for her, you have seen enough of her insane pollination plan and decide to finish her off. With Rafflesia dead a semblance of redemption seems to befall this foul place as the waters of the pond slowly begin to filter out the corruption back to what likely was their former crystal clear outlook. As you prepare to leave, you find a stash of 5000 gems, likely the hoard of treasure this death trap amassed from defeated adventurers over the years.\n\n");
 			flags[kFLAGS.TWILIGHT_GROVE_PURIFICATION] = 4;
+			player.gems += 5000;
 			cleanupAfterCombat();
 		}
 		public function defeatedByLadyRafflesia():void {
 			clearOutput();
-			outputText("\"<i></i>\"\n\n");
+			outputText("You fall over defeated and look at your opponent, awaiting your end.\n\n");
+			outputText("\"<i>Aw... poor thing! You look all messy and hurt now, but don't worry, for I will take good care of you. Just like my mother would have. Now feel the power of my motherly love.</i>\"\n\nYou try to crawl away but her vines swiftly bind your arms, mouth, and legs. You are too weak to struggle as Rafflesia forcefully pulls you toward her pitcher at the center of the pond. ");
+			outputText("She lifts her undercarriage revealing what looks like a vagina fit for engulfing things of human size. You plead for mercy and struggle screaming. \"<i>NOOoo!!! Not there!</i>\" But she ignores you and ends your scream by shoving you inch by inch into her massive green hole until nothing is left of you. You eventually lose consciousness briefly from exhaustion.\n\nYou wake up in a fetal position resting in what seems to be a small alcove. You can breathe somehow thanks to air flowing in and out of your prison and a sweet relaxing scent fills the room. ");
+			outputText("There isn't much space to move however and so you are stuck in this position which isn’t altogether uncomfortable. Truth be told you feel warm and at ease. Some kind of weird tubular tentacle is gently feeding you a sweet delicious syrup you mindlessly lap on. Your memories are fuzzy...Why are you here? How did you end up here? As you try to figure out the answer to these questions a girl’s voice you can’t recognize echoes through the walls of your fleshy prison.\n\n");
+			outputText("\"<i>My womb feels comfortable, doesn’t it? Just let go of any worries you might have and go to sleep my dear [name].</i>\"\n\nYou indeed are tired, so tired. You barely register as a "+(player.gender == 3 ? "pair of":"second")+" ");
+			outputText("tendril"+(player.gender == 3 ? "s":"")+" slither"+(player.gender == 3 ? "s":"")+" out of the space under you and gently slither to your privates. "+(player.hasCock()?"Warm welcoming flesh gently wraps around your hardened [cock] suckling and caressing your skin delightfully. ":"")+(player.hasVagina()?"One of the tendrils, like a kind parent, slowly parts your legs and enters your pussy folds, making you gasp in pleasure as warm sap slowly floods the insides of your cunt, probably going all the way to your ovaries. ":"")+"");
+			outputText("Your "+(player.hasCock()?"[cock] tingles as it slowly spurts cum, shrinking in size and even retracting inside your body until none of it is left, leaving only a hole that is now your pussy":"")+(player.gender == 3 ? "[cock] tingles as it slowly spurts cum, shrinking in size and even retracting inside your body and into your pussy until none of it is left, it even goes so far as to merge with your clitoris giving you a short orgasm":"")+".  Your pussy suddenly begins to change "+(player.gender == 2 ? "":"as well ")+"your clitoris increasing in length as ");
+			outputText("if feeding on the fluid your pleased vagina is constantly filled with. It keeps lengthening to a ridiculous size and you can even see it a fair meter long, squirming inside the tendril like a possessed snake as your pussy keeps gushing fluids again and again. Eventually, the confined space is so flooded, you worry you will be unable to breathe but the feeder tubes somehow keeps you well nourished with oxygen. You close your eyes happily dozing off to the sound of your gushing pussy.\n\n");
+			outputText("You wake up as you are forcefully expelled from your alcove by some unseen forces. You see light ahead of you and forge on, eventually reaching the exit and sliding out with a huge sploosh of greenish fluids. You take a breath for the first time in several days, taking the time to look around you, admiring your lilac arms covered with sensible vines and your lovely E cup breast as you caress the orchid in your vegetal hair. ");
+			outputText("You made a small mess on the grass, but you don’t care as your gaze focuses on the object of your adoration. Your mother, Lady Rafflesia is giving you a warm smile as you continue exploring the confines of your vegetal body. Your clit changes again and you giggle as a stamen mounted vine surges out of your juicy pussy coiling around your left leg like a snake. Your mother praises you.\n\n");
+			outputText("\"<i>You are so beautiful, my sweet daughter, mother is really happy for you. How about you put this stamen to good use and sow seeds across the grove for me.</i>\"\n\n");
+			outputText("It is your greatest pride to say \"<i>Yes mother.</i>\" as you move on to the first stamen or pistil you can find, mating again and again so as to grant your beloved mother the granddaughters she so deserves. After a few months, the grove is fully repaired and the resort is running better than ever. As your mom’s favored daughter, it is your greatest pride to receive visitors or fuck their brains silly to the garden.\n\n");
+			outputText("Several months later a human woman pretending to be a champion makes it to the garden and you gleefully defeat her for your mother. Once you’ve suitably broken her you resolve to use her as your favorite seedbed. Like mother like daughter.\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
 		}

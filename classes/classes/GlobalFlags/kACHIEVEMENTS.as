@@ -452,7 +452,7 @@ package classes.GlobalFlags
 		public static const GENERAL_VIGILANTE_3_IM_BACK:int				= 405;
 		public static const FASHION_HAMMER_TIME:int						= 406;
 		public static const COMBAT_MY_NAME_IS_BRUCE_BRUCE_WOOD:int		= 407;
-		public static const UNKNOWN_ACHIEVEMENT_408:int					= 408;
+		public static const DUNGEON_WEEDING_OUT:int						= 408;
 		public static const UNKNOWN_ACHIEVEMENT_409:int					= 409;
 		public static const UNKNOWN_ACHIEVEMENT_410:int					= 410;
 		public static const UNKNOWN_ACHIEVEMENT_411:int					= 411;

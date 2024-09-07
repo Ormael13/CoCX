@@ -708,6 +708,7 @@ public class Combat extends BaseContent {
             StatusEffects.QueenBind,
             StatusEffects.KitsuneTailTangle,
             StatusEffects.MinotaurEntangled,
+            StatusEffects.LadyRafflesiaGrab,
         ];
         if (player.hasStatusEffect(StatusEffects.MinotaurEntangled)) outputText("\n<b>You're bound up in the minotaur lord's chains!  All you can do is try to struggle free!</b>");
         if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) outputText("\n<b>You're trapped in the giant's hand!  All you can do is try to struggle free!</b>");
