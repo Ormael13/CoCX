@@ -2,6 +2,8 @@
  * Coded by aimozg on 10.07.2017.
  */
 package coc.view {
+import classes.internals.Utils;
+
 import coc.view.charview.CharViewCompiler;
 import coc.view.charview.CharViewContext;
 import coc.view.charview.CharViewSprite;
@@ -13,6 +15,7 @@ import flash.display.BitmapData;
 import flash.display.Graphics;
 import flash.display.Sprite;
 import flash.events.Event;
+import flash.utils.getTimer;
 
 public class CharView extends Sprite {
 
@@ -33,12 +36,36 @@ public class CharView extends Sprite {
 	private var parts:Statement;
 	private var _palette:Palette;
 	public var bgFill:uint = 0;
+	private var time:int = 0;
 
 	public function get palette():Palette {
 		return _palette;
 	}
 	public function CharView() {
 		clearAll();
+		addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+		addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
+	}
+	private function onAddedToStage(e:Event):void {
+		addEventListener(Event.ENTER_FRAME, onEnterFrame);
+	}
+	private function onRemovedFromStage(e:Event):void {
+		removeEventListener(Event.ENTER_FRAME, onEnterFrame);
+	}
+	private function onEnterFrame(e:Event):void {
+		try {
+			var t2:int = getTimer();
+			var dt:int = Math.max(0, t2 - time);
+			if (composite) {
+				if (composite.advanceTime(dt, t2)) {
+					composeFrame();
+				}
+			}
+			time = t2;
+		} catch (e:Error) {
+			removeEventListener(Event.ENTER_FRAME, onEnterFrame);
+			throw e;
+		}
 	}
 	/**
 	 * @param location "external" or "internal"
@@ -64,6 +91,7 @@ public class CharView extends Sprite {
 		}
 	}
 	private function clearAll():void {
+		this.time          = getTimer();
 		this.sprites       = {};
 		this.composite     = null;
 		this.ss_total      = 0;
@@ -156,6 +184,18 @@ public class CharView extends Sprite {
 				}
 			}
 		}
+		for each (item in xml.animations..animation) {
+			var animation:LayerAnimation = new LayerAnimation(item.@name.toString());
+			for each (var frame:XML in item..frame) {
+				var t:int = parseInt(frame.@t.toString());
+				var dx:int = parseInt(frame.@dx.toString() || "0");
+				var dy:int = parseInt(frame.@dy.toString() || "0");
+				var i:String = frame.@i.toString() || "";
+				var layer:CompositeLayer = composite.getLayer(i);
+				animation.addFrame(t, dx, dy, layer);
+			}
+			composite.addAnimation(animation);
+		}
 		file_total = n;
 		if (pendingRedraw) redraw();
 	}
@@ -163,12 +203,15 @@ public class CharView extends Sprite {
 	public function setCharacter(value:Object):void {
 		_character = value;
 	}
+	public function isLoaded():Boolean {
+		return !loading && ss_loaded == ss_total && file_loaded == file_total && (ss_total + file_total) > 0;
+	}
 	public function redraw():void {
 		if (file_total == 0 && ss_total == 0 && !loading) {
 			reload();
 		}
 		pendingRedraw = true;
-		if (ss_loaded != ss_total || file_loaded != file_total || (ss_total + file_total) == 0) {
+		if (!isLoaded()) {
 			return;
 		}
 		pendingRedraw = false;
@@ -176,21 +219,28 @@ public class CharView extends Sprite {
 
 		// Mark visible layers
 		composite.hideAll();
+		composite.resetAnimations();
+		time = getTimer();
 		parts.execute(new CharViewContext(this,_character));
-
+		
+		composeFrame();
+		this.scaleX = scale;
+		this.scaleY = scale;
+	}
+	
+	protected function composeFrame():void {
 		var keyColors:Object = _palette.calcKeyColors(_character);
 		var bd:BitmapData    = composite.draw(keyColors);
 		var g:Graphics       = graphics;
 		g.clear();
-		g.beginFill(bgFill&0x00ffffff, ((bgFill>>24)&0xff)/256.0);
+		g.beginFill(bgFill & 0x00ffffff, ((bgFill >> 24) & 0xff) / 256.0);
 		g.drawRect(0, 0, _width, _height);
 		g.endFill();
 		g.beginBitmapFill(bd);
 		g.drawRect(0, 0, _width, _height);
 		g.endFill();
-		this.scaleX = scale;
-		this.scaleY = scale;
 	}
+	
 	private function loadSpritemap(xml:XML, sm:XML):void {
 		const filename:String = sm.@file;
 		var path:String       = xml.@dir + filename;
@@ -202,8 +252,13 @@ public class CharView extends Sprite {
 				if (pendingRedraw) redraw();
 				return;
 			}
+			var srects:Object = {};
+			var aliasCells:/*[srect:String, name:String, sdx:String, sdy:String]*/Array = [];
 			for each (var cell:XML in sm.cell) {
-				var rect:/*String*/Array = cell.@rect.toString().match(/^(\d+),(\d+),(\d+),(\d+)$/);
+				var srect:String         = cell.@rect.toString();
+				var sdx:String           = cell.@dx.toString();
+				var sdy:String           = cell.@dy.toString();
+				var rect:/*String*/Array = srect.match(/^(\d+),(\d+),(\d+),(\d+)$/);
 				var x:int                = rect ? int(rect[1]) : cell.@x;
 				var y:int                = rect ? int(rect[2]) : cell.@y;
 				var w:int                = rect ? int(rect[3]) : cell.@w;
@@ -211,10 +266,43 @@ public class CharView extends Sprite {
 				var f:String             = cell.@name;
 				var dx:int               = cell.@dx;
 				var dy:int               = cell.@dy;
-				try {
-					sprites[f] = new CharViewSprite(UIUtils.subsprite(result, x, y, w, h), dx, dy);
-				} catch (e:Error) {
-					throw new Error("Error in model.xml <cell name='"+f+"'>: "+e.message)
+				if (rect) {
+					if (srect in srects) {
+						trace("[INFO] Duplicate <cell rect>: "+f+", "+srects[srect]);
+					} else {
+						srects[srect] = f;
+					}
+					try {
+						sprites[f] = new CharViewSprite(UIUtils.subsprite(result, x, y, w, h), dx, dy);
+					} catch (e:Error) {
+						throw new Error("Error in model.xml <cell name='"+f+"'>: "+e.message)
+					}
+				} else {
+					aliasCells.push([srect,f,sdx,sdy]);
+				}
+			}
+			while (aliasCells.length > 0) {
+				var progressed:Boolean = false;
+				for (var i:int = aliasCells.length-1; i>=0; i--) {
+					srect = aliasCells[i][0];
+					f = aliasCells[i][1];
+					sdx = aliasCells[i][2];
+					sdy = aliasCells[i][3];
+					if (srect in sprites) {
+						progressed = true;
+						var ref:CharViewSprite = sprites[srect];
+						dx = sdx ? parseInt(sdx) : ref.dx;
+						dy = sdy ? parseInt(sdy) : ref.dy;
+						try {
+							sprites[f] = new CharViewSprite(ref.bmp, dx, dy);
+						} catch (e:Error) {
+							throw new Error("Error in model.xml <cell name='"+f+"'>: "+e.message)
+						}
+						aliasCells.splice(i, 1);
+					}
+				}
+				if (!progressed) {
+					throw new Error("Cannot resolve reference <cell name='"+aliasCells[0][1]+"' rect='"+aliasCells[0][0]+"'>");
 				}
 			}
 			ss_loaded++;
