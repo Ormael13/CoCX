@@ -1141,6 +1141,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (flags[kFLAGS.SAND_WITCH_LOOT_TAKEN] == 1) flags[kFLAGS.SAND_WITCH_LOOT_TAKEN] = 0;
 					else flags[kFLAGS.SAND_WITCH_LOOT_TAKEN] -= 2;
 				}
+				//Twilight Grove storage refill
+				if (player.statusEffectv1(StatusEffects.TGStorage) < 5 || player.statusEffectv2(StatusEffects.TGStorage) < 5 || player.statusEffectv3(StatusEffects.TGStorage) < 5 || player.statusEffectv4(StatusEffects.TGStorage) < 1) {
+					if (player.statusEffectv1(StatusEffects.TGStorage) < 5) player.changeStatusValue(StatusEffects.TGStorage, 1 , 5);
+					if (player.statusEffectv2(StatusEffects.TGStorage) < 5) player.changeStatusValue(StatusEffects.TGStorage, 2 , 5);
+					if (player.statusEffectv3(StatusEffects.TGStorage) < 5) player.changeStatusValue(StatusEffects.TGStorage, 3 , 5);
+					if (player.statusEffectv4(StatusEffects.TGStorage) < 1) player.changeStatusValue(StatusEffects.TGStorage, 4 , 1);
+				}
 				//Countdown to 5th floor boss rematch
 				if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 12 && flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] < 13) flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] -= 0.1;
 				//Clear sidewinder cooldown
@@ -3041,4 +3048,4 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		}
 		//End of Interface Implementation
 	}
-}
+}

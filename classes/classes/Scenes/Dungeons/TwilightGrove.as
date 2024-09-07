@@ -12,7 +12,11 @@ import classes.BodyParts.Hair;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Areas.Forest.TentacleBeast;
+import classes.Scenes.Areas.Plains.Satyr;
+import classes.Scenes.Areas.Swamp.CorruptedDrider;
 import classes.Scenes.Dungeons.TwilightGrove.*;
+import classes.StatusEffects;
 import classes.Races;
 import classes.CoC;
 
@@ -380,6 +384,30 @@ import classes.CoC;
 		
 		//Pure path
 		
+		public function meetTwilightGroveRandomnMob():void {
+			if ((rand(100) < player.statusEffectv1(StatusEffects.TGRandomnMob)) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
+				var reset:Number = 20;
+				reset -= player.statusEffectv1(StatusEffects.TGRandomnMob);
+				player.addStatusValue(StatusEffects.TGRandomnMob, 1, reset);
+				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
+				var choice:Number = rand(3);
+				if (choice == 0) {
+					outputText("\n\nTentacle Beast suddenly appears from nearby passage and attacks!");
+					startCombat(new TentacleBeast(), true);
+				}
+				if (choice == 1) {
+					outputText("\n\nSatyr suddenly appears from nearby passage and attacks!");
+					startCombat(new Satyr(), true);
+				}
+				if (choice == 2) {
+					outputText("\n\nCorrupted Drider suddenly appears from nearby passage and attacks!");
+					startCombat(new CorruptedDrider(), true);
+				}
+				//doNext(playerMenu);
+			}
+			else player.addStatusValue(StatusEffects.TGRandomnMob, 1, 20);
+		}
+		
 		private function room1TGPure():void {
 			clearOutput();
 			dungeonLoc = DUNGEON_TWILIGHT_GROVE_1;
@@ -405,6 +433,8 @@ import classes.CoC;
 		public function defeatVampithornBush():void {
 			clearOutput();
 			outputText("You manage to damage the angry plant enough to tear open a hole to slide through harmlessly. Beyond is what looks like an open grove.\n\n");
+			player.createStatusEffect(StatusEffects.TGRandomnMob, 20, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.TGStorage, 5, 5, 5, 1);
 			flags[kFLAGS.TWILIGHT_GROVE_PURIFICATION] = 2;
 			cleanupAfterCombat();
 		}
@@ -420,6 +450,7 @@ import classes.CoC;
 			clearOutput();
 			outputText("<b><u>Entrance</u></b>\n");
 			outputText("You stand at the entrance. The formerly sealed shut vegetal gate is breached and allows you to enter and leave at your leisure.");
+			player.createStatusEffect(StatusEffects.TGRandomnMob, 20, 0, 0, 0);
 			dungeons.setDungeonButtons(room2TG, null, null, null);
 			addButton(11, "Leave", exitDungeon);
 		}
@@ -428,6 +459,8 @@ import classes.CoC;
 			dungeonLoc = DUNGEON_TWILIGHT_GROVE_2;
 			clearOutput();
 			outputText("<b><u>Twilight Grove</u></b>\n");
+			meetTwilightGroveRandomnMob();
+			if (CoC.instance.inCombat) return;
 			outputText("Various corrupted plants cover this eerie part of the forest. You can spot an empty wine amphora which suggests the presence of satyrs.");
 			dungeons.setDungeonButtons(room3TG, room1TG, null, null);
 		}
@@ -469,17 +502,55 @@ import classes.CoC;
 			dungeonLoc = DUNGEON_TWILIGHT_GROVE_4;
 			clearOutput();
 			outputText("<b><u>Twilight Grove</u></b>\n");
+			meetTwilightGroveRandomnMob();
+			if (CoC.instance.inCombat) return;
 			outputText("You can spot some demons lazily taking what could be a sunbath if not for the many tentacles fucking them in the distance. There seems to be a storage area full of items on your left.");
-			//dungeons.setDungeonButtons(room5TG, room3TG, null, null);
-			dungeons.setDungeonButtons(null, room3TG, null, null);
+			dungeons.setDungeonButtons(room5TG, room3TG, null, null);
+			
 		}
 		
 		public function room5TG():void {
 			dungeonLoc = DUNGEON_TWILIGHT_GROVE_5;
 			clearOutput();
 			outputText("<b><u>Twilight Grove</u></b>\n");
+			meetTwilightGroveRandomnMob();
+			if (CoC.instance.inCombat) return;
 			outputText("This is a storage area filled with many boxes full of what looks to be transformatives and less savory items. There also is wine and other alcoholic beverages in here, but you don’t think getting inebriated in the middle of an enemy lair is a bright idea.");
-			dungeons.setDungeonButtons(room6TG, room4TG, null, null);
+			//dungeons.setDungeonButtons(room6TG, room4TG, null, null);
+			dungeons.setDungeonButtons(null, room4TG, null, null);
+			addButtonDisabled(6, "North", "Another wall of thorn vines blocks you way. What could be Behind These Hazel Vines? B.O.S.S.?");
+			if (player.statusEffectv1(StatusEffects.TGStorage) > 0) {
+				outputText("\n\nThere is an opened box with some item"+(player.statusEffectv1(StatusEffects.TGStorage) == 1 ? "":"s")+" inside.\n\n");
+				addButton(0, "Crate 1", takeGroPlus);
+			}
+			if (player.statusEffectv2(StatusEffects.TGStorage) > 0) {
+				outputText("\n\nThere is an opened box with some item"+(player.statusEffectv2(StatusEffects.TGStorage) == 1 ? "":"s")+" inside.\n\n");
+				addButton(1, "Crate 2", takeSuccubiMilk);
+			}
+			if (player.statusEffectv3(StatusEffects.TGStorage) > 0) {
+				outputText("\n\nThere is an opened box with some item"+(player.statusEffectv3(StatusEffects.TGStorage) == 1 ? "":"s")+" inside.\n\n");
+				addButton(2, "Crate 3", takeIncubiDraft);
+			}
+			if (player.statusEffectv4(StatusEffects.TGStorage) > 0) {
+				outputText("\n\nThere is an opened box with some item inside.\n\n");
+				addButton(3, "Crate 4", takeBroBrew);
+			}
+		}
+		private function takeGroPlus():void {
+			player.addStatusValue(StatusEffects.TGStorage, 1, -1);
+			inventory.takeItem(consumables.GROPLUS, room5TG);
+		}
+		private function takeSuccubiMilk():void {
+			player.addStatusValue(StatusEffects.TGStorage, 2, -1);
+			inventory.takeItem(consumables.SUCMILK, room5TG);
+		}
+		private function takeIncubiDraft():void {
+			player.addStatusValue(StatusEffects.TGStorage, 3, -1);
+			inventory.takeItem(consumables.INCUBID, room5TG);
+		}
+		private function takeBroBrew():void {
+			player.addStatusValue(StatusEffects.TGStorage, 4, -1);
+			inventory.takeItem(consumables.BROBREW, room5TG);
 		}
 		
 		public function room6TG():void {

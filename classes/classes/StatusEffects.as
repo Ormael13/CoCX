@@ -903,6 +903,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const TailSlamWhip:StatusEffectType       	= mk("Tail Slam Whip");
 		public static const TelekineticGrab:StatusEffectType  		= mk("TelekineticGrab");
 		public static const TentacleCoolDown:StatusEffectType   	= mk("TentacleCoolDown");
+		public static const TGRandomnMob:StatusEffectType          	= mk("TGRandomnMob");
+		public static const TGStorage:StatusEffectType   			= mk("TGStorage");
 		public static const Trench:StatusEffectType              	= mk("Trench");
 		public static const Timer:StatusEffectType              	= mk("Timer");
 		public static const TimesBashed:StatusEffectType        	= mk("TimesBashed");

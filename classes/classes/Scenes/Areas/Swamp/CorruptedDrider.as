@@ -166,6 +166,7 @@ import classes.internals.*;
 					.add(useables.T_SSILK,1)
 					.add(null, 4);
 			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.TGRandomnMob)) this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
 			checkMonster();
 		}
 

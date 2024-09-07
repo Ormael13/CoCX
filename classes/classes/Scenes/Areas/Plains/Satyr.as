@@ -174,6 +174,7 @@ public class Satyr extends Monster
 					.add(consumables.INCUBID,1/2)
 					.add(weapons.SFLUTTE,1/4);
 			this.tailType = Tail.GOAT;
+			if (player.hasStatusEffect(StatusEffects.TGRandomnMob)) this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
 			checkMonster();
 		}
 		
