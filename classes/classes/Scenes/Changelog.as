@@ -225,7 +225,7 @@ public class Changelog extends BaseContent
 			outputText("-After having equipped Silver Cross Necklace PC would be periodicaly visiting Demon Lair place (when req. to get new visit PC would travel there on next Exploration). Each visit brings PC closer to become true demon. To stop vistiing PC must remove somehow Silver Cross Necklace (which been cursed item for no true demon PC would be quite difficult).\n");
 			outputText("-New Place: Demon Lair - Xuviel home where true succubus PC can visit. There are few possible interactions there: Talk, Sex, Font of corruption. Last option have two uses: either drink directly to get week long buff or use it to turn items into corrupted legendary items (all other req. like radiant shards or cost still apply (no discounts even for Xuviel 9th wife ;))).\n");
 			outputText("-Req. min level to find Celess Senior was removed.\n");
-			outputText("-\n");
+			outputText("-New tier 9 misc lvl-up perk (by Liadri): Absolute Bash. Req. Prestige Job: Sentinel & Shield Slam perks. Effect: Shield bash diminishing return is reduced by 20%. By spending 10% of your fatigue you may reset Shield bash to full efficiency.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

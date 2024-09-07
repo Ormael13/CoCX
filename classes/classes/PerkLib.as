@@ -578,6 +578,9 @@ public class PerkLib
 		public static const Cocytokinesis:PerkType = mk("Cocytokinesis", "Cocytokinesis",
 				"As psychic you have gained ability to manipulate or control black ice.",
 				"You've chosen the 'Cocytokinesis' perk. As psychic you have gained ability to manipulate or control black ice.");
+		public static const AbsoluteBash:PerkType = mk("Absolute Bash", "Absolute Bash",
+				"Shield bash diminishing return is reduced by 20%. By spending 10% of your fatigue you may reset Shield bash to full efficiency.",
+				"You've chosen the 'Absolute Bash' perk. Shield bash diminishing return is reduced by 20%. By spending 10% of your fatigue you may reset Shield bash to full efficiency.");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -588,9 +591,6 @@ public class PerkLib
 		public static const StrongerTamedMosters:PerkType = mk("Stronger Tamed Mosters", "Stronger Tamed Mosters",
 				".",
 				"You've chosen the 'Stronger Tamed Mosters' perk. .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk. .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk. .");
@@ -8273,6 +8273,8 @@ public class PerkLib
 					.requirePerks(HclassHeavenTribulationSurvivor, PrestigeJobDruid);
             FirstAttackSkeletons.requireLevel(54)
                     .requirePerks(FirstAttackGolems, PrestigeJobNecromancer);
+            AbsoluteBash.requireLevel(54)
+                    .requirePerks(ShieldSlam, PrestigeJobSentinel);
 			SubzeroLustfulFury.requireLevel(54)
 					.requirePerk(PrestigeJobBerserker)
                     .requireAnyPerk(ColderFury, ColderLust);

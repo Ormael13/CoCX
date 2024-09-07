@@ -6114,8 +6114,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 			outputText("<b>Your impact also manages to stun [themonster]!</b> ");
 			if (player.perkv1(IMutationsLib.EquineMuscleIM) >= 3) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 			else monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
-			if (!monster.hasStatusEffect(StatusEffects.TimesBashed)) monster.createStatusEffect(StatusEffects.TimesBashed, player.hasPerk(PerkLib.ShieldSlam) ? 0.5 : 1, 0, 0, 0);
-			else monster.addStatusValue(StatusEffects.TimesBashed, 1, player.hasPerk(PerkLib.ShieldSlam) ? 0.5 : 1);
+			var dismishing:Number = 1;
+			if (player.hasPerk(PerkLib.ShieldSlam)) dismishing *= 0.5;
+			if (player.hasPerk(PerkLib.AbsoluteBash)) dismishing *= 0.8;
+			if (!monster.hasStatusEffect(StatusEffects.TimesBashed)) monster.createStatusEffect(StatusEffects.TimesBashed, dismishing, 0, 0, 0);
+			else monster.addStatusValue(StatusEffects.TimesBashed, 1, dismishing);
 		}
 		checkAchievementDamage(damage);
 		if ((player.shield == shields.SPIL_SH || player.shield == shields.SPIH_SH || player.shield == shields.SPIM_SH || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets")) && !monster.isImmuneToBleed()) {

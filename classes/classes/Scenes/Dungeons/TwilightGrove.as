@@ -25,7 +25,10 @@ import classes.CoC;
 		public function enterDungeon():void {
 			inDungeon = true;
 			if ((player.cor >= 51 || player.isRaceCached(Races.ALRAUNE)) && flags[kFLAGS.TWILIGHT_GROVE_PURIFICATION] < 1) room1TGCorrupt();
-			else room1TGPure();
+			else {
+				if (flags[kFLAGS.TWILIGHT_GROVE_PURIFICATION] > 1) room1TG();
+				else room1TGPure();
+			}
 		}
 		
 		public function exitDungeon():void {
@@ -442,6 +445,7 @@ import classes.CoC;
 				startCombat(new ThePansLabyrinthSatyr(), true);
 			}
 			else outputText("This is the place where you met the satyr musician. The satyr’s body is still on the ground, a testimony of your victory over his mind games.");
+			if (CoC.instance.inCombat) return;
 			dungeons.setDungeonButtons(room4TG, room2TG, null, null);
 		}
 		public function defeatThePansLabyrinthSatyr():void {
@@ -488,9 +492,8 @@ import classes.CoC;
 				//outputText("\"<i></i>\"\n\n");
 				//outputText("\"<i></i>\"\n\n");
 			}
-			else {
-				outputText("Crystal clear water surrounds the small island where Lady Rafflesia used to grow. With its mistress gone, the grove seems to have recovered a semblance of dignity.");
-			}
+			else outputText("Crystal clear water surrounds the small island where Lady Rafflesia used to grow. With its mistress gone, the grove seems to have recovered a semblance of dignity.");
+			if (CoC.instance.inCombat) return;
 			dungeons.setDungeonButtons(null, room5TG, null, null);
 		}
 		public function defeatLadyRafflesia():void {
