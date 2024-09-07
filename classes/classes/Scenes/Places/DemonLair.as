@@ -184,20 +184,16 @@ public class DemonLair extends BaseContent
 			outputText("He's so right about it. No matter how much you try to deny it, you desire his touch and the tormenting pleasures he offers. Even now, you can’t help but admire his perfect body, fantasizing him toying with you personally. Yet some fear of what might happen holds you from completely giving in and becoming fully his.\n\n");
 			dynStats("cor", 5);
 			questProgressScenes06();
-			if (player.cor >= 100) {
-				player.addStatusValue(StatusEffects.MeetXuviel, 1, 1);
-				player.addStatusValue(StatusEffects.MeetXuviel, 2, 7);
-			}
+			player.addStatusValue(StatusEffects.MeetXuviel, 2, 7);
+			if (player.cor >= 100) player.addStatusValue(StatusEffects.MeetXuviel, 1, 1);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function questProgressScenes08():void {
 			outputText("No, he’s wrong! You will keep defying him for as long as it takes until he sets you free!\n\n");
 			dynStats("cor", -5);
 			questProgressScenes06();
-			if (player.cor >= 100) {
-				player.addStatusValue(StatusEffects.MeetXuviel, 1, 1);
-				player.addStatusValue(StatusEffects.MeetXuviel, 2, 7);
-			}
+			player.addStatusValue(StatusEffects.MeetXuviel, 2, 7);
+			if (player.cor >= 100) player.addStatusValue(StatusEffects.MeetXuviel, 1, 1);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function questProgressScenes09():void {
