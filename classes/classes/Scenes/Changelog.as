@@ -229,7 +229,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 12 toughness lvl-up perk (by Liadri): Brutal Opening. Req. Second Wind perk. Effect: Triple all physical damage dealt for 1 turn following a shield bash.\n");
 			outputText("-New tier 13 toughness lvl-up perk (by Liadri): Lingering Opening. Req. Brutal Opening perk. Effect: Brutal Opening last for an additional 2 rounds and quadruple physical damage instead of tripling.\n");
 			outputText("-Big charviewer code update and model.xml cleanup. (aimozg)\n");
-			outputText("-\n");
+			outputText("-Golemancer npc in HXD will no longer req. PC to reach specific golemancer perks to unlock metal plates, energy cores or mechanisms sell options. Also metal plates can be now sold in even large amounts at once: x20 and x50\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

@@ -6,6 +6,7 @@ package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Camp.CampStatsAndResources;
 import classes.Scenes.SceneLib;
 	
 	public class JinxFollower extends NPCAwareContent
@@ -29,7 +30,40 @@ import classes.Scenes.SceneLib;
 				flags[kFLAGS.JINX_LVL_UP] = 0.4;
 			}
 			menu();
+			//addButton(3, "Energy Core", buyItemEnergyCore).hint("A power source for devices.");
+			addButton(5, "MetalPiecesx1", buyItemMetalPlates, 1).hint("A metal pieces for something really cool. (x1)");
+			addButton(6, "MetalPiecesx5", buyItemMetalPlates, 5).hint("A metal pieces for something really cool. (x5)");
+			addButton(7, "MetalPiecesx10", buyItemMetalPlates, 10).hint("A metal pieces for something really cool. (x10)");
+			addButton(8, "MetalPiecesx20", buyItemMetalPlates, 20).hint("A metal pieces for something really cool. (x20)");
 			addButton(14, "Back", SceneLib.bazaar.enterTheBazaarAndMenu);
+		}
+		private function buyItemMetalPlates(amt:Number):void {
+			clearOutput();
+			var cost:int = (60 * amt) / 4;
+			outputText("\"<i>That will be perhaps... " + cost + " spirit stones, yes definetly it's how value they are. Show me da stones baby.</i>\"\n\n");
+			menu();
+			if (flags[kFLAGS.SPIRIT_STONES] < cost) addButtonDisabled(1, "Buy", "You do not have enough spirit stones to buy this.");
+			else if (CampStatsAndResources.MetalPieces >= (201 - amt)) addButtonDisabled(1, "Buy", "You can't store any more of this type of items.");
+			else addButton(1, "Buy", curry(buyItemMetalPlatesYes, cost, amt));
+			addButton(3, "Don't Buy", bazaarEncounters);
+		}
+		private function buyItemMetalPlatesYes(cost:Number, amt:Number):void {
+			flags[kFLAGS.SPIRIT_STONES] -= cost;
+			statScreenRefresh();
+			outputText("She counts the stones and putting htem away before handing your purchase over.\n\n");
+			outputText("\"<i>Always happy to do business, anything else you want to buy [name]?</i>\"\n\n");
+			CampStatsAndResources.MetalPieces += amt;
+			doNext(bazaarEncounters);
+		}
+		public function campJinxMenuMain():void {
+			clearOutput();
+			outputText("Approaching the usual place where Minx resides, it would almost seem that there was some technological revolution happening here with all the sophisticated items put in seemingly specific ways… Or maybe they are all just thrown around randomly.\n\n");
+			outputText("After a moment, from the midst of all the trinkets, emerges a blue haired goblin. \"<i>Ahh [name]. Be quick, I’ve got a lot of work to return to. So, what’s it gonna be?</i>\"\n\n");
+		}
+		public function aaa1():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+			outputText("\"<i></i>\"\n\n");
 		}
 	}
 }
