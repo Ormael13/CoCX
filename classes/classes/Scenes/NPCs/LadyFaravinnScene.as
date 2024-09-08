@@ -12,7 +12,22 @@ package classes.Scenes.NPCs
 		
 		public function LadyFaravinnScene() 
 		{}
+		/*
+		public function aaa():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+		}
 		
+		public function aaa():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+		}
+		
+		public function aaa():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+		}
+		*/
 		//npc meet out of camp - never to become part of camp company ^^
 	}
 }
