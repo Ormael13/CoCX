@@ -264,6 +264,7 @@ public class CharViewContext extends ExecContext {
 				{
 					hydraTails: player.statusEffectv1(StatusEffects.HydraTailsPlayer),
 					cockSize: player.cocks.length > 0 ? player.cocks[0].cockLength : 0,
+					cockType: player.cocks.length > 0 ? player.cocks[0].cockType : 0,
 					breastRating: player.breastRows[0].breastRating,
 					
 					ElementalBodyType: player.perkv1(PerkLib.ElementalBody),
