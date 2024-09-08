@@ -1999,6 +1999,7 @@
 		SETUP LOCAL VARS
 		- - - - - - - - -->
 
+		<set var="HideCrotch" value="false"/>
 		<!-- $taur add '_taur' prefix for layers and parts -->
 		<if test="isTaur() and not isDrider()">
 			<set var="taur">_taur</set>
@@ -4948,7 +4949,6 @@
 			<set var="big" value="(cockSize gt 12) ? 'big' : ''"/>
 			<set var="bigHorse" value="(cockSize gt 25) ? 'big' : ''"/>
 			<switch value="cockType">
-				<case values="CockTypesEnum.NONE"></case>
 
 				<case values="CockTypesEnum.DOG,CockTypesEnum.WOLF,CockTypesEnum.FOX">
 					<show part="penis$taur/canine$big$taur"/>
@@ -4989,7 +4989,7 @@
 					<show part="penis$taur/caveWyrm$big$taur"/>
 				</case>
 
-				<case values="CockTypesEnum.MINDBREAKERMALE">
+				<case values="CockTypesEnum.MINDBREAKER">
 					<if test="big">
 						<show part="penis$taur/humanbig$taur"/>
 						<show part="penis/mindbreakerdrip"/>
@@ -7370,6 +7370,7 @@
 		<if test="breastTier gt 0">
 			<animate layer="breasts/*" name="breath"/>
 			<animate layer="breasts_pattern/*" name="breath"/>
+			<animate layer="armorNeck/*" name="breath2"/>
 			<animate layer="overbreast/*" name="breath"/>
 			<animate layer="fullbodyBreast/*" name="breath"/>
 			<animate layer="bra/*" name="breath"/>
@@ -7378,7 +7379,6 @@
 
 		<!-- arms moving with breathing - unsure, looks a bit off -->
 		<animate layer="armorLeftArm/*" name="breath2"/>
-		<animate layer="armorNeck/*" name="breath2"/>
 		<animate layer="armorRightArm/*" name="breath2"/>
 		<animate layer="arms/*" name="breath2"/>
 		<animate layer="arms_bg/*" name="breath2"/>
@@ -7403,7 +7403,7 @@
 		<animate layer="weapon_bg/*" name="breath2"/>
 
 		<!-- FULL BODY AREA -->
-		<if test="ballsz eq 'gigahuge'">
+		<if test="balls gt 0 and ballsz eq 'gigahuge'">
 			<set var="ballsz">sillyhuge</set><!-- Full body balls don't have gigahuge tier -->
 		</if>
 		<!-- Imp -->
