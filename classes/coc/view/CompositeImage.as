@@ -9,6 +9,8 @@ import flash.geom.Rectangle;
 
 public class CompositeImage {
 	private var list:/*coc.view.CompositeLayer*/Array;
+	private var layers:Object;
+	private var animations:Object;
 	private var visibility:Object;
 	private var bmp:BitmapData;
 	public function get width():int {
@@ -20,13 +22,32 @@ public class CompositeImage {
 
 	public function CompositeImage(width:uint, height:uint) {
 		list       = [];
+		layers     = {};
+		animations = {};
 		visibility = {};
 		bmp        = new BitmapData(width, height,true,0);
 	}
 	public function addLayer(name:String, src:BitmapData, dx:int,dy:int,visible:Boolean = true):void {
 		if (name in visibility) removeLayer(name);
-		list.unshift(new CompositeLayer(name, src,dx,dy));
+		var layer:CompositeLayer = new CompositeLayer(name, src,dx,dy);
+		layers[name] = layer;
+		list.unshift(layer);
 		visibility[name] = visible;
+	}
+	public function getLayer(name:String):CompositeLayer {
+		return layers[name];
+	}
+	public function addAnimation(animation:LayerAnimation):void {
+		this.animations[animation.name] = animation;
+	}
+	public function advanceTime(dt:int, t2:int):Boolean {
+		var dirty:Boolean = false;
+		for each (var layer:CompositeLayer in list) {
+			if (visibility[layer.name]) {
+				if (layer.advanceTime(dt, t2)) dirty = true;
+			}
+		}
+		return dirty;
 	}
 	public function removeLayer(name:String):void {
 		for (var i:int = 0; i < list.length; i++) {
@@ -36,6 +57,7 @@ public class CompositeImage {
 				break;
 			}
 		}
+		delete layers[name];
 	}
 	public function replaceLayer(name:String, src:BitmapData, dx: int, dy: int):void {
 		for (var i:int = 0; i < list.length; i++) {
@@ -50,11 +72,50 @@ public class CompositeImage {
 		}
 	}
 	public function setVisibility(name:String, visible:Boolean):void {
-		visibility[name] = visible;
+		if (name in visibility) {
+			visibility[name] = visible;
+		} else {
+			trace("[WARN] <" + (visible?"show":"hide") + "> called for non-existing layer "+name);
+		}
+	}
+	public function isVisible(name:String):Boolean {
+		return !!visibility[name];
+	}
+	public function setAnimation(layerName:String, animationName:String):void {
+		var layer:CompositeLayer = layers[layerName];
+		if (!layer) {
+			trace("[WARN] <animate> called for non-existing layer "+layerName);
+			return;
+		}
+		if (!visibility[layerName]) return;
+		var animation:LayerAnimation = animations[animationName];
+		if (animationName && !animation) {
+			trace("[WARN] <animate> called for non-existing animation "+animationName);
+			return;
+		}
+		layer.setAnimation(animation);
+	}
+	public function setMultiAnimation(prefix:String, animationName:String):void {
+		var animation:LayerAnimation = animations[animationName];
+		if (animationName && !animation) {
+			trace("[WARN] <animate> called for non-existing animation "+animationName);
+			return;
+		}
+		for (var key:String in visibility) {
+			if (key.indexOf(prefix)==0 && visibility[key]) {
+				layers[key].setAnimation(animation);
+			}
+		}
+	}
+	public function resetAnimations():void {
+		for each (var layer:CompositeLayer in list) {
+			layer.resetAnimation();
+		}
 	}
 	public function hideAll():void {
 		for each (var layer:CompositeLayer in list) {
 			visibility[layer.name] = false;
+			layer.setAnimation(null);
 		}
 	}
 	public function draw(keyColors:Object):BitmapData {

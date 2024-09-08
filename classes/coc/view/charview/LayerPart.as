@@ -16,11 +16,12 @@ public class LayerPart extends Statement {
 	public function LayerPart(image:CompositeImage,name:String,visible:Boolean) {
 		this.image = image;
 		this.visible = visible;
-		this.name = name;
 		var pp:Array = name.match(/([^\*]*)\*/);
 		if (pp) {
 			this._prefix = true;
 			this.name = pp[1];
+		} else {
+			this.name = name;
 		}
 		this._hasVars = name.indexOf('$')>=0;
 	}
@@ -28,9 +29,7 @@ public class LayerPart extends Statement {
 	override public function execute(context:ExecContext):void {
 		var name:String = this.name;
 		if (_hasVars) {
-			name = name.replace(/\$(\w+)/g,function():String{
-				return context.getValue(arguments[1]);
-			});
+			name = context.substituteVars(name);
 		}
 		context.debug(this,name);
 		if (_prefix) {

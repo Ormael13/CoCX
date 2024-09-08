@@ -28,6 +28,8 @@ public class CharViewCompiler extends Compiler{
 				return new LayerPart(charview.composite, attrs['part'], true);
 			case 'hide':
 				return new LayerPart(charview.composite, attrs['part'], false);
+			case 'animate':
+				return new AnimateStatement(attrs['layer'], attrs['name']);
 		}
 		return super.unknownTag(tag, x);
 	}
