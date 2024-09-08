@@ -918,7 +918,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				} else outputText("and it worked, to an extent, allowing your opponent to retreat away from the gas.");
 			}
 			outputText("\n\n");
-			if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
+			combat.monsterDefeatCheck();
 		}
 		if ((player.hasKeyItem("Missile launcher") >= 0 || player.hasKeyItem("Omni Missile") >= 0) && !alreadyUsedWeaponFunction) {
 			alreadyUsedWeaponFunction = true;
@@ -1394,11 +1394,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 							flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 						}
 					}
-					if (monster.lust >= monster.maxOverLust()) {
-						outputText("\n\n");
-						checkAchievementDamage(damage);
-						doNext(endLustVictory);
-					}
+					combat.monsterDefeatCheck();
 				}
 			}
 			else outputText("  You do not have enough venom to apply on [weapon]!");
@@ -2203,8 +2199,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		statScreenRefresh();
-		if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
-		else enemyAI();
+		if(!combat.monsterDefeatCheck())
+			enemyAI();
 	}
 
 	public function milkBlast():void {
@@ -5088,11 +5084,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		//Victory ORRRRR enemy turn.
-		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
-		else {
-			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
-		}
+		enemyAI();
 	}
 
 	//Gore Attack - uses 25 fatigue!
@@ -5228,11 +5220,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		//Victory ORRRRR enemy turn.
-		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
-		else {
-			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
-		}
+		enemyAI();
 	}
 	//Upheaval Attack
 	public function upheavalAttack():void {
@@ -5349,11 +5337,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		//Victory ORRRRR enemy turn.
-		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
-		else {
-			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
-		}
+		enemyAI();
 	}
 //Player sting attack
 	public function playerStinger():void {
@@ -5456,8 +5440,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		player.tailVenom -= player.VenomWebCost() * 5;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
 		//Kick back to main if no damage occured!
-		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
-		else doNext(endLustVictory);
+		enemyAI();
 	}
 //Player tail spike attack
 
@@ -5542,8 +5525,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("You drop on all fours, flinging your tail forward and shooting an envenomed spike at [themonster].");
 		tailspikedamage();
 		outputText("\n\n");
-		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
-		else doNext(endLustVictory);
+		enemyAI();
 	}
 
 	//Player Omni tail spike attack
@@ -5583,8 +5565,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.WeaponClawsSavageRend) && player.tailVenom >= player.VenomWebCost() * 5) tailspikedamage();
 		if ((player.hasPerk(PerkLib.HistoryFeral) || player.hasPerk(PerkLib.PastLifeFeral)) && player.tailVenom >= player.VenomWebCost() * 5) tailspikedamage();
 		outputText("\n\n");
-		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
-		else doNext(endLustVictory);
+		enemyAI();
 	}
 
 
@@ -5810,8 +5791,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else enemyAI();
 		}
 		else {
-			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-			else doNext(endLustVictory);
+			combat.monsterDefeatCheck();
 		}
 	}
 
@@ -6278,12 +6258,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 			enemyAI();
 		}
-		if (monster.HP <= monster.minHP()) {
-			doNext(endHpVictory);
-			return;
-		}
-		if (monster.lust >= monster.maxOverLust()) {
-			doNext(endLustVictory);
+		if (combat.monsterDefeatCheck()) {
 			return;
 		}
 		player.createStatusEffect(StatusEffects.CooldownPinDown,8,0,0,0);
@@ -6490,10 +6465,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 				}
 			}
-			if (monster.lust >= monster.maxOverLust()) {
+			if (combat.monsterDefeatCheck()) {
 				outputText("\n\n");
 				flags[kFLAGS.ARROWS_SHOT]++;
-				doNext(endLustVictory);
 			}
 			outputText("\n");
 		}
