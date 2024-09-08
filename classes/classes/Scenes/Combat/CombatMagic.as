@@ -953,17 +953,22 @@ public class CombatMagic extends BaseCombatContent {
 		combat.darkRitualCheckDamage();
 		if (handleShell()) return;
 		outputText("You narrow your eyes, focusing your mind with deadly intent.  ");
-		if (player.hasPerk(PerkLib.StaffChanneling) && player.weapon.isStaffType()) outputText("You point your staff and shoot a magic bolt toward [themonster]!\n\n");
+		if (player.hasPerk(PerkLib.StaffChanneling) && (player.weapon.isStaffType() || player.weaponOff.isStaffType() || player.weapon.isWandType() || player.weaponOff.isWandType())) {
+			if (player.weapon.isWandType() || player.weaponOff.isWandType()) outputText("You point your wand and shoot a magic bolt toward [themonster]!\n\n");
+			else outputText("You point your staff and shoot a magic bolt toward [themonster]!\n\n");
+		}
 		else outputText("You point your hand toward [themonster] and shoot a magic bolt!\n\n");
 		var damage:Number = scalingBonusIntelligence() * spellMod() * 1.2;
 		if (damage < 10) damage = 10;
 		//weapon bonus
-		if (player.hasPerk(PerkLib.StaffChanneling) && player.weapon.isStaffType()) {
-			if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.04));
-			else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (3 + ((player.weaponAttack - 50) * 0.035));
-			else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (4.75 + ((player.weaponAttack - 100) * 0.03));
-			else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (6.25 + ((player.weaponAttack - 150) * 0.025));
-			else damage *= (7.5 + ((player.weaponAttack - 200) * 0.02));
+		if (player.hasPerk(PerkLib.StaffChanneling) && (player.weapon.isStaffType() || player.weaponOff.isStaffType() || player.weapon.isWandType() || player.weaponOff.isWandType())) {
+			var weaponAtk:Number = player.weaponAttack;
+			if (player.weapon.isWandType() || player.weaponOff.isWandType()) weaponAtk = Math.round(weaponAtk * 0.75);
+			if (weaponAtk < 51) damage *= (1 + (weaponAtk * 0.04));
+			else if (weaponAtk >= 51 && weaponAtk < 101) damage *= (3 + ((weaponAtk - 50) * 0.035));
+			else if (weaponAtk >= 101 && weaponAtk < 151) damage *= (4.75 + ((weaponAtk - 100) * 0.03));
+			else if (weaponAtk >= 151 && weaponAtk < 201) damage *= (6.25 + ((weaponAtk - 150) * 0.025));
+			else damage *= (7.5 + ((weaponAtk - 200) * 0.02));
 		}
 		if (player.hasPerk(PerkLib.ElementalBolt)) damage *= 1.25;
 		if (player.armorName == "FrancescaCloak") damage *= 2;

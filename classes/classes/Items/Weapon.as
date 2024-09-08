@@ -56,7 +56,7 @@ public class Weapon extends Equipable
 		}
 		
 		public function get verb():String {
-			if (type == WT_STAFF && game.player.hasPerk(PerkLib.StaffChanneling)) return 'shot';
+			if ((type == WT_STAFF || type == WT_WAND) && game.player.hasPerk(PerkLib.StaffChanneling)) return 'shot';
 			return _verb;
 		}
 		

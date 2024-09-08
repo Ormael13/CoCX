@@ -144,15 +144,29 @@ import classes.Scenes.SceneLib;
 			outputText("Approaching the usual place where Minx resides, it would almost seem that there was some technological revolution happening here with all the sophisticated items put in seemingly specific ways… Or maybe they are all just thrown around randomly.\n\n");
 			outputText("After a moment, from the midst of all the trinkets, emerges a blue haired goblin. \"<i>Ahh [name]. Be quick, I’ve got a lot of work to return to. So, what’s it gonna be?</i>\"\n\n");
 			menu();
+			addButton(0, "Shop", campJinxMenuMainShop);
+			//x - Talk
+			//x - fletcher table for guns
 			addButton(14, "Back", camp.campFollowers);
 		}
 		
-		public function aaa9():void {
+		public function campJinxMenuMainShop():void {
 			clearOutput();
-			outputText("\"<i></i>\"\n\n");
+			menu();
+			addButton(0, "MetalPiecesx1", buyItemMetalPlates, 1).hint("A metal pieces for something really cool. (x1)");
+			addButton(1, "MetalPiecesx5", buyItemMetalPlates, 5).hint("A metal pieces for something really cool. (x5)");
+			addButton(2, "MetalPiecesx10", buyItemMetalPlates, 10).hint("A metal pieces for something really cool. (x10)");
+			addButton(3, "MetalPiecesx20", buyItemMetalPlates, 20).hint("A metal pieces for something really cool. (x20)");
+			addButton(4, "MetalPiecesx50", buyItemMetalPlates, 50).hint("A metal pieces for something really cool. (x50)");
+			addButton(5, "Golem Core", buyItemGolemCore).hint("Is this even functional golem core?");
+			addButton(6, "Energy Core", buyItemEnergyCore).hint("A power source for devices.");
+			addButtonDisabled(7, "MinoBomber", "MinoBomber");
+			addButtonDisabled(10, "??? Core", "??? Core");
+			addButton(14, "Back", campJinxMenuMain);
 		}
 		public function aaa8():void {
 			clearOutput();
+			outputText("\"<i></i>\"\n\n");
 			outputText("\"<i></i>\"\n\n");
 		}
 		public function aaa7():void {
@@ -184,4 +198,4 @@ import classes.Scenes.SceneLib;
 			outputText("\"<i></i>\"\n\n");
 		}
 	}
-}//
+}

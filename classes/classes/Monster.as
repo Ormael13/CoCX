@@ -989,7 +989,7 @@ import classes.Scenes.Combat.CombatAbilities;
 			var armorMod:Number = armorDef;
 			//--BASE--
 			//Modify armor rating based on melee weapons
-			if ((game.player.weaponName.indexOf("staff") != -1 && game.player.hasPerk(PerkLib.StaffChanneling) )) {
+			if ((game.player.weapon.isWandType() || game.player.weaponOff.isWandType() || game.player.weapon.isStaffType() || game.player.weaponOff.isStaffType()) && game.player.hasPerk(PerkLib.StaffChanneling)) {
 				armorMod = 0;
 			} else {
 				var ar:int = game.player.weapon.effectPower(IELib.ArmorReduction);

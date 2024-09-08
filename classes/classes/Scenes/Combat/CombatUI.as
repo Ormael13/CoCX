@@ -113,7 +113,7 @@ public class CombatUI extends BaseCombatContent {
 				else btnMelee.show("Attack", combat.basemechmeleeattacks, "Attempt to attack the enemy with your mech "+weapon+".  Damage done is determined by your strength and weapon.").icon("A_Melee");
 				if (combat.isEnemyInvisible) btnMelee.disable("You cannot use attack an opponent you cannot see or target.");
 			}
-			else if ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon() && player.weapon != weapons.TIDAR) && player.hasPerk(PerkLib.StaffChanneling) && flags[kFLAGS.STAFF_CHANNELING_MODE]) {
+			else if ((player.isStaffTypeWeapon() || player.weapon.isWandType() || player.weaponOff.isWandType() || player.isPartiallyStaffTypeWeapon()) && player.weapon != weapons.TIDAR && player.weaponOff != weapons.TIDAR && player.hasPerk(PerkLib.StaffChanneling) && flags[kFLAGS.STAFF_CHANNELING_MODE]) {
 				//No shooting fuckbolts from Tidarion!!!
 				if (!Wings.Types[player.wings.type].canFly && Arms.Types[player.arms.type].canFly && player.isFlying && player.statusEffectv2(StatusEffects.Flying) == 0) btnMelee.disable("No way you could use your melee weapon with those arms while flying.");
 				else {
@@ -124,7 +124,8 @@ public class CombatUI extends BaseCombatContent {
 			else if (player.hasStatusEffect(StatusEffects.Gallop)) btnMelee.disable("No way you could hit enemy with melee attacks while galloping. Unless you stop for a moment or two.");
 			else {
 				if (monster.isFlying()) {
-					if (player.isFlying() || monster.hasStatusEffect(StatusEffects.RootOfTheIssue) || player.haveThrowableMeleeWeapon() || player.weapon.isWhipType() || player.weaponOff.isWhipType() || player.weapon.isRibbonType() || player.weaponOff.isRibbonType() || ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.StaffChanneling) && flags[kFLAGS.STAFF_CHANNELING_MODE])) {
+					if (player.isFlying() || monster.hasStatusEffect(StatusEffects.RootOfTheIssue) || player.haveThrowableMeleeWeapon() || player.weapon.isWhipType() || player.weaponOff.isWhipType() || player.weapon.isRibbonType() || player.weaponOff.isRibbonType() ||
+						((player.isStaffTypeWeapon() || player.weapon.isWandType() || player.weaponOff.isWandType() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.StaffChanneling) && flags[kFLAGS.STAFF_CHANNELING_MODE])) {
 						if (player.isFlying() || monster.hasStatusEffect(StatusEffects.RootOfTheIssue)) {
 							if (player.hasPerk(PerkLib.AerialCombat) || player.haveThrowableMeleeWeapon() || player.weapon.isWhipType() || player.weaponOff.isWhipType() || player.weapon.isRibbonType() || player.weaponOff.isRibbonType()) {
 								if (!Wings.Types[player.wings.type].canFly && Arms.Types[player.arms.type].canFly) btnMelee.disable("No way you could use your melee weapon with those arms while flying.");
@@ -132,7 +133,7 @@ public class CombatUI extends BaseCombatContent {
 							}
 							else btnMelee.disable("No way you could hit enemy with melee attacks while flying. Req. Aerial Combat perk or having melee weapon that could be used for range attack too.");
 						}
-						else if ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.StaffChanneling) && flags[kFLAGS.STAFF_CHANNELING_MODE]) {
+						else if ((player.isStaffTypeWeapon() || player.weapon.isWandType() || player.weaponOff.isWandType() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.StaffChanneling) && flags[kFLAGS.STAFF_CHANNELING_MODE]) {
 							if (player.hasPerk(PerkLib.ElementalBolt)) btnMelee.show("E.Bolt", combat.magic.spellElementalBolt, "Attempt to attack the enemy with elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.").icon("A_Melee");
 							else btnMelee.show("M.Bolt", combat.magic.spellMagicBolt, "Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.").icon("A_Melee");
 						}
@@ -849,7 +850,7 @@ public class CombatUI extends BaseCombatContent {
 		//Most basic spell ever ^^
 		if (player.hasPerk(PerkLib.JobSorcerer)) {
 			bd = buttons.add("M.Bolt", combat.magic.spellMagicBolt);
-			if (player.hasPerk(PerkLib.StaffChanneling) && player.weapon.isStaffType()) bd.hint("Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Magic Bolt");
+			if (player.hasPerk(PerkLib.StaffChanneling) && (player.weapon.isWandType() || player.weaponOff.isWandType() || player.weapon.isStaffType() || player.weaponOff.isStaffType())) bd.hint("Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Magic Bolt");
 			else bd.hint("Attempt to attack the enemy with magic bolt.  Damage done is determined by your intelligence.", "Magic Bolt");
 			if (player.mana < spellCost(40)) {
 				bd.disable("Your mana is too low to cast this spell.");
@@ -860,7 +861,7 @@ public class CombatUI extends BaseCombatContent {
 			}
 			if (player.hasPerk(PerkLib.MagesWrath)) {
 				bd = buttons.add("M.Bolt(Ex)", combat.magic.spellEdgyMagicBolt);
-				if (player.hasPerk(PerkLib.StaffChanneling) && player.weapon.isStaffType()) bd.hint("Attempt to attack the enemy with wrath-empowered magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Wrath-Empowered Magic Bolt");
+				if (player.hasPerk(PerkLib.StaffChanneling) && (player.weapon.isWandType() || player.weaponOff.isWandType() || player.weapon.isStaffType() || player.weaponOff.isStaffType())) bd.hint("Attempt to attack the enemy with wrath-empowered magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Wrath-Empowered Magic Bolt");
 				else bd.hint("Attempt to attack the enemy with wrath-empowered magic bolt.  Damage done is determined by your intelligence.", "Wrath-Empowered Magic Bolt");
 				if (player.mana < spellCost(40)) {
 					bd.disable("Your mana is too low to cast this spell.");
@@ -875,7 +876,7 @@ public class CombatUI extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.ElementalBolt)) {
 			bd = buttons.add("E.Bolt", combat.magic.spellElementalBolt);
-			if (player.hasPerk(PerkLib.StaffChanneling) && player.weapon.isStaffType()) bd.hint("Attempt to attack the enemy with elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Elemental Bolt");
+			if (player.hasPerk(PerkLib.StaffChanneling) && (player.weapon.isWandType() || player.weaponOff.isWandType() || player.weapon.isStaffType() || player.weaponOff.isStaffType())) bd.hint("Attempt to attack the enemy with elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Elemental Bolt");
 			else bd.hint("Attempt to attack the enemy with elemental bolt.  Damage done is determined by your intelligence.", "Elemental Bolt");
 			if (player.mana < spellCost(80)) {
 				bd.disable("Your mana is too low to cast this spell.");
@@ -886,7 +887,7 @@ public class CombatUI extends BaseCombatContent {
 			}
 			if (player.hasPerk(PerkLib.MagesWrath)) {
 				bd = buttons.add("E.Bolt(Ex)", combat.magic.spellEdgyElementalBolt);
-				if (player.hasPerk(PerkLib.StaffChanneling) && player.weapon.isStaffType()) bd.hint("Attempt to attack the enemy with wrath-empowered elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Wrath-Empowered Elemental Bolt");
+				if (player.hasPerk(PerkLib.StaffChanneling) && (player.weapon.isWandType() || player.weaponOff.isWandType() || player.weapon.isStaffType() || player.weaponOff.isStaffType())) bd.hint("Attempt to attack the enemy with wrath-empowered elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Wrath-Empowered Elemental Bolt");
 				else bd.hint("Attempt to attack the enemy with wrath-empowered elemental bolt.  Damage done is determined by your intelligence.", "Wrath-Empowered Elemental Bolt");
 				if (player.mana < spellCost(80)) {
 					bd.disable("Your mana is too low to cast this spell.");
