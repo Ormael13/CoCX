@@ -1547,8 +1547,7 @@ public class MagicSpecials extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
-		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-		if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
+		combat.monsterDefeatCheck();
 		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3 && rand(100) < 10 && !monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
 		enemyAI();
 	}
@@ -1612,9 +1611,8 @@ public class MagicSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		player.createStatusEffect(StatusEffects.lustStorm,0,0,0,0);
-		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-		if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
-		else enemyAI();
+		if (!combat.monsterDefeatCheck())
+			enemyAI();
 	}
 
 	public function PlasmaBlast():void {
@@ -1993,9 +1991,8 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		doNext(playerMenu);
-		if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
-		else if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-		else enemyAI();
+		if (!combat.monsterDefeatCheck())
+			enemyAI();
 	}
 
 	private function mosterTeaseText():void {
@@ -3105,13 +3102,9 @@ public class MagicSpecials extends BaseCombatContent {
 			damage *= 1.75;
 			outputText(" (" + damage + ")");
 			monster.HP -= damage;*/
-			if(monster.HP <= monster.minHP()) {
-				doNext(endHpVictory);
-			}
-			else if(monster.lust >= monster.maxOverLust()) {
-				doNext(endLustVictory);
-			}
-			else enemyAI();
+			if(!combat.monsterDefeatCheck())
+				enemyAI();
+
 			return;
 		}
 		else if(monster.short == "Isabella" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
@@ -3179,13 +3172,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("\n");
 		combat.heroBaneProc(fireDamage);
 		if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
-		if(monster.HP <= monster.minHP()) {
-			doNext(endHpVictory);
-		}
-		else if(monster.lust >= monster.maxOverLust()) {
-			doNext(endLustVictory);
-		}
-		else
+		if(!combat.monsterDefeatCheck())
 		{
 			if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 			{
@@ -4574,8 +4561,7 @@ public class MagicSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else {
-			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
+			combat.monsterDefeatCheck();
 		}
 	}
 	//(Basic Fox Fire)
@@ -4673,8 +4659,7 @@ public class MagicSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else {
-			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
+			combat.monsterDefeatCheck();
 		}
 	}
 	//Corrupted Fox Fire
@@ -4775,8 +4760,7 @@ public class MagicSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else {
-			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
+			combat.monsterDefeatCheck();
 		}
 	}
 	//Fused Fox Fire
@@ -4876,8 +4860,7 @@ public class MagicSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else {
-			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
+			combat.monsterDefeatCheck();
 		}
 	}
 	//Pure Fox Fire
@@ -4978,8 +4961,7 @@ public class MagicSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else {
-			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
+			combat.monsterDefeatCheck();
 		}
 	}
 
@@ -5130,7 +5112,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		if(monster.lust < monster.maxOverLust()) enemyAI();
 		else {
-			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
+			combat.monsterDefeatCheck();
 		}
 	}
 
@@ -5584,8 +5566,8 @@ public class MagicSpecials extends BaseCombatContent {
 		monster.lust += lusttransfered;
 		outputText("\n\n");
 		doNext(playerMenu);
-		if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
-		else enemyAI();
+		if(!combat.monsterDefeatCheck())
+			enemyAI();
 	}
 
 //Fascinate
@@ -5687,8 +5669,8 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		doNext(playerMenu);
-		if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
-		else enemyAI();
+		if(!combat.monsterDefeatCheck())
+			enemyAI();
 	}
 
 	public function mindThrust():void {

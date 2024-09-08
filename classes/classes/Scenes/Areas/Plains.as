@@ -21,6 +21,7 @@ use namespace CoC;
 		public var gnollScene:GnollScene = new GnollScene();
 		public var gnollSpearThrowerScene:GnollSpearThrowerScene = new GnollSpearThrowerScene();
 		public var satyrScene:SatyrScene = new SatyrScene();
+		public var kirinScene:KirinScene = new KirinScene();
 		
 		public const areaLevel:int = 25;
 		public function isDiscovered():Boolean {
@@ -92,6 +93,22 @@ use namespace CoC;
 					}
 					else SceneLib.electraScene.repeatPlainsEnc();
 				}
+			},{
+				name: "kirin",
+				label : "Kirin",
+				kind : 'monster',
+				chance: (flags[kFLAGS.ELECTRA_AFFECTION] < 100 ? 0.45: 0.5),
+				when: fn.ifLevelMin(20),
+				call: SceneLib.plains.kirinScene.kirinEncounter
+			},{
+				name: "kirin_electra",
+				label : "Kirin",
+				kind : 'monster',
+				chance: 0.05,
+				when: function():Boolean {
+					return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && flags[kFLAGS.ELECTRA_AFFECTION] < 100 && !player.hasStatusEffect(StatusEffects.ElectraOff) && (player.level >= 20 || flags[kFLAGS.HARDCORE_MODE] == 1);
+				},
+				call: SceneLib.plains.kirinScene.kirinElectraEncounter
 			}, {
 				name: "werewolf huntress",
 				label : "Werewolf Huntress",

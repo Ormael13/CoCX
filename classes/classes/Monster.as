@@ -1909,6 +1909,19 @@ import classes.Scenes.Combat.CombatAbilities;
 		}
 
 		/**
+		 * Series of monster immunity
+		 * Default return true (Defeatable)
+		 */
+
+		public function isHPDefeatable():Boolean{
+			return true;
+		}
+
+		public function isLustDefeatable():Boolean{
+			return true;
+		}
+
+		/**
 		 * Series of checks when player received attacks (PreDodge,Evade,Parry,Block)
 		 * If you want to override any of these function to add special effects, please call super method at some point to start evade check and shit
 		 * Aiko overriding playerParry and playerBlock function is one of the example

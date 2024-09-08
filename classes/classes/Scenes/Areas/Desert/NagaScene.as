@@ -1114,10 +1114,6 @@ public function nagaTease():void {
         outputText("\n[Themonster] seems unimpressed.");
     }
     outputText("\n\n");
-    if (monster.lust >= monster.maxOverLust()) {
-        doNext(SceneLib.combat.endLustVictory);
-        return;
-    }
     SceneLib.combat.postStrandleExtraActionsCheck();
 }
 

@@ -129,15 +129,31 @@ public class Combat extends BaseContent {
     }
     public function callbackAfterAbility(ability:CombatAbility):void {
         statScreenRefresh();
-        if (monster.HP <= monster.minHP()) {
-            doNext(endHpVictory);
-        } else if (monster.lust >= monster.maxOverLust()) {
-            doNext(endLustVictory);
-        } else if(player.lust >= player.maxOverLust() && !player.statStore.hasBuff("Supercharged") && !tyrantiaTrainingExtension()) {
+        if(!monsterDefeatCheck() && player.lust >= player.maxOverLust() && !player.statStore.hasBuff("Supercharged") && !tyrantiaTrainingExtension()) {
             doNext(endLustLoss);
         } else {
             enemyAI();
         }
+    }
+
+    /**
+     * For checking monster defeat during combat<br>
+     * Will execute endHpVictory or endLustVictory if monster defeated
+     * Usage: button.add(function).and(monsterDefeatCheck)<br>
+     * @return True if monster defeated (Combat end)
+     */
+    public function monsterDefeatCheck():Boolean{
+        var combatEnd:Boolean = false;
+
+        if (monster.isHPDefeatable() && monster.HP <= monster.minHP()) {
+            doNext(endHpVictory);
+            combatEnd = true;
+        } else if (monster.isLustDefeatable() && monster.lust >= monster.maxOverLust()) {
+            doNext(endLustVictory);
+            combatEnd = true;
+        }
+
+        return combatEnd;
     }
 
     public function masteryFeralCombatLevel():Number {return player.combatMastery[0].level;}
@@ -2001,8 +2017,7 @@ public class Combat extends BaseContent {
             //If monster is dead, prevent further elemental attack calls
             flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 1;
             flags[kFLAGS.IN_COMBAT_PLAYER_EPIC_ELEMENTAL_ATTACKED] = 1;
-            if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-            else doNext(endLustVictory);
+            monsterDefeatCheck();
         }
     }
 
@@ -2263,14 +2278,7 @@ public class Combat extends BaseContent {
 		WrathGenerationPerHit2(5);
         heroBaneProc(damage);
         EruptingRiposte();
-        if (monster.HP <= monster.minHP()) {
-            doNext(endHpVictory);
-            return;
-        }
-        if (monster.lust >= monster.maxOverLust()) {
-            doNext(endLustVictory);
-            return;
-        }
+        monsterDefeatCheck();
         outputText("\n\n");
         enemyAIImpl();
     }
@@ -3608,11 +3616,10 @@ public class Combat extends BaseContent {
 						}
                     }
                 }
-                if (monster.lust >= monster.maxOverLust()) {
+                if (monsterDefeatCheck()) {
                     outputText("\n\n");
                     checkAchievementDamage(damage);
                     flags[kFLAGS.ARROWS_SHOT]++;
-                    doNext(endLustVictory);
                 }
                 if (!MSGControll) outputText("\n");
             }
@@ -3645,12 +3652,7 @@ public class Combat extends BaseContent {
             if (MSGControll) outputText("\n\n");
             enemyAIImpl();
         }
-        if (monster.HP <= monster.minHP()) {
-            doNext(endHpVictory);
-            return;
-        }
-        if (monster.lust >= monster.maxOverLust()) {
-            doNext(endLustVictory);
+        if (monsterDefeatCheck()) {
             return;
         }
         MSGControll = true;
@@ -4035,7 +4037,7 @@ public class Combat extends BaseContent {
                 lustArrowDmg *= 0.25;
                 lustArrowDmg = Math.round(lustArrowDmg);
                 monster.teased(lustArrowDmg, false, true);
-                if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
+                monsterDefeatCheck();
             }
         }
     }
@@ -4260,12 +4262,6 @@ public class Combat extends BaseContent {
             if (monster.plural) outputText(" [monster He] stagger, collapsing onto each other from the wounds you've inflicted on [monster him].");
             else outputText(" [monster He] staggers, collapsing from the wounds you've inflicted on [monster him].");
             outputText("\n\n");
-            doNext(endHpVictory);
-            return;
-        }
-        if (monster.lust >= monster.maxOverLust()) {
-            doNext(endLustVictory);
-            return;
         }
 		outputText(" It's clearly very painful.\n\n");
         enemyAIImpl();
@@ -4354,13 +4350,7 @@ public class Combat extends BaseContent {
             if (player.ammo == 0) outputText("\n\n<b>You're out of weapons to throw in this fight!</b>\n\n");
             enemyAIImpl();
         }
-        if (monster.HP <= monster.minHP()) {
-            doNext(endHpVictory);
-            return;
-        }
-        if (monster.lust >= monster.maxOverLust()) {
-            doNext(endLustVictory);
-        }
+        monsterDefeatCheck();
     }
 
     /**
@@ -4482,13 +4472,7 @@ public class Combat extends BaseContent {
             if (player.ammo == 0) outputText("\n\n<b>You're out of weapons to throw in this fight!</b>\n\n");
             enemyAIImpl();
         }
-        if (monster.HP <= monster.minHP()) {
-            doNext(endHpVictory);
-            return;
-        }
-        if (monster.lust >= monster.maxOverLust()) {
-            doNext(endLustVictory);
-        } else if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) {
+        if (!monsterDefeatCheck() && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) {
             flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
             flags[kFLAGS.ARROWS_ACCURACY] += 15;
             throwWeapon();
@@ -4875,15 +4859,7 @@ public class Combat extends BaseContent {
         } else {
             outputText("The " + ammoWord + " goes wide, disappearing behind your foe" + (monster.plural ? "s" : "") + ".\n\n");
         }
-        if (monster.HP <= monster.minHP()) {
-            doNext(endHpVictory);
-            return;
-        }
-        if (monster.lust >= monster.maxOverLust()) {
-            doNext(endLustVictory);
-            return;
-        }
-        if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) {
+        if (!monsterDefeatCheck() && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) {
             if (player.ammo > 0) {
                 flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
                 flags[kFLAGS.ARROWS_ACCURACY] += firearmsAccuracyPenalty();
@@ -5278,7 +5254,6 @@ public class Combat extends BaseContent {
             } else outputText("and it worked, to an extent, allowing your opponent to retreat away from the gas.");
         }
         outputText("\n\n")
-        if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
         enemyAIImpl();
     }
 
@@ -7175,10 +7150,9 @@ public class Combat extends BaseContent {
                                     flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                                 }
                             }
-                            if (monster.lust >= monster.maxOverLust()) {
+                            if(monsterDefeatCheck()){
                                 outputText("\n\n");
                                 checkAchievementDamage(damage);
-                                doNext(endLustVictory);
                             }
                         }
                         outputText("\n");
@@ -7322,13 +7296,7 @@ public class Combat extends BaseContent {
                 // Migrate DisplacerBeast custom evade text and default evade text
                 monster.preMeleeMissed();
             }
-            if (monster.HP <= monster.minHP()) {
-                doNext(endHpVictory);
-                meleeMasteryGain(hitCounter, critCounter, offHand);
-                return;
-            }
-            else if (monster.lust >= monster.maxOverLust()) {
-                doNext(endLustVictory);
+            if (monsterDefeatCheck()) {
                 meleeMasteryGain(hitCounter, critCounter, offHand);
                 return;
             }
@@ -10031,12 +9999,7 @@ public class Combat extends BaseContent {
 
     //ENEMYAI!
     public function enemyAIImpl():void {
-        if (monster.HP <= monster.minHP()) {
-            doNext(endHpVictory);
-            return;
-        }
-        if (monster.lust >= monster.maxOverLust()) {
-            doNext(endLustVictory);
+        if(monsterDefeatCheck()){
             return;
         }
         monster.doAI();
@@ -10798,8 +10761,7 @@ public class Combat extends BaseContent {
             }
             checkAchievementDamage(damage0);
             statScreenRefresh();
-            if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-            if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
+            monsterDefeatCheck();
         }
         //Sing
         if (player.hasStatusEffect(StatusEffects.Sing) && monster.lustVuln > 0) {
@@ -12350,8 +12312,7 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
         regeneration1(true);
         if (player.lust >= player.maxOverLust() && !player.statStore.hasBuff("Supercharged") && !tyrantiaTrainingExtension()) doNext(endLustLoss);
         if (player.HP <= player.minHP()) doNext(endHpLoss);
-		if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
-		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+        monsterDefeatCheck();
     }
 	
 	private function purgeFromBody():Number {
@@ -13784,12 +13745,7 @@ public function combatRoundOver():void {
  * */
 public function combatIsOver(goToPlayerMenu:Boolean = true):Boolean {
     if (!inCombat) return false;
-    if (monster.HP <= monster.minHP()) {
-        doNext(endHpVictory);
-        return true;
-    }
-    if (monster.lust >= monster.maxOverLust()) {
-        doNext(endLustVictory);
+    if (monsterDefeatCheck()) {
         return true;
     }
     if (monster.hasStatusEffect(StatusEffects.Level)) {
@@ -14390,16 +14346,16 @@ public function Straddle():void {
         enemyAIImpl();
 }
 
-public function postStrandleExtraActionsCheck():void {
-	if (player.hasPerk(PerkLib.GreaterGrapple) && flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] == 1) {
-		flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] = 2;
-		combatMenu(false);
-	}
-	else if (player.hasPerk(PerkLib.ImprovedGrapple) && flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] == 0) {
-		flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] = 1;
-		combatMenu(false);
-	}
-	else enemyAIImpl();
+    public function postStrandleExtraActionsCheck():void {
+        if (player.hasPerk(PerkLib.GreaterGrapple) && flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] == 1) {
+            flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] = 2;
+            combatMenu(false);
+        }
+        else if (player.hasPerk(PerkLib.ImprovedGrapple) && flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] == 0) {
+            flags[kFLAGS.IN_COMBAT_BETTER_GRAPPLE] = 1;
+            combatMenu(false);
+        }
+        else enemyAIImpl();
 }
 
 //private var straddleDamage:Number
@@ -15051,10 +15007,7 @@ public function ScyllaTease():void {
         }
         outputText("\n\n");
         combat.teases.fueledByDesireHeal();
-        if (monster.lust >= monster.maxOverLust()) {
-            doNext(endLustVictory);
-            return;
-        }
+        monsterDefeatCheck();
     }
     postStrandleExtraActionsCheck();
 }
@@ -15210,10 +15163,7 @@ public function SwallowTease():void {
         }
         outputText("\n\n");
         combat.teases.fueledByDesireHeal();
-        if (monster.lust >= monster.maxOverLust()) {
-            doNext(endLustVictory);
-            return;
-        }
+        monsterDefeatCheck();
     }
     enemyAIImpl();
 }
@@ -15362,10 +15312,7 @@ public function WebTease():void {
         }
         outputText("\n\n");
         combat.teases.fueledByDesireHeal();
-        if (monster.lust >= monster.maxOverLust()) {
-            doNext(endLustVictory);
-            return;
-        }
+        monsterDefeatCheck();
     }
     postStrandleExtraActionsCheck();
 }
@@ -15471,10 +15418,7 @@ public function GooTease():void {
         }
         outputText("\n\n");
         combat.teases.fueledByDesireHeal();
-        if (monster.lust >= monster.maxOverLust()) {
-            doNext(endLustVictory);
-            return;
-        }
+        monsterDefeatCheck();
     }
     postStrandleExtraActionsCheck();
 }
@@ -15594,10 +15538,7 @@ public function ManticoreFeed():void {
     }
     //Nuttin honey
     outputText("\n\n");
-    if (monster.lust >= monster.maxOverLust()) {
-        doNext(endLustVictory);
-        return;
-    }
+    monsterDefeatCheck();
     postStrandleExtraActionsCheck();
 }
 
@@ -15662,10 +15603,7 @@ public function displacerFeedContinue():void {
     }
     //Nuttin honey
     outputText("\n\n");
-    if (monster.lust >= monster.maxOverLust()) {
-        doNext(endLustVictory);
-        return;
-    }
+    monsterDefeatCheck();
     postStrandleExtraActionsCheck();
 }
 
@@ -15730,10 +15668,7 @@ public function SlimeRapeFeed():void {
     }
     //Nuttin honey
     outputText("\n\n");
-    if (monster.lust >= monster.maxOverLust()) {
-        doNext(endLustVictory);
-        return;
-    }
+    monsterDefeatCheck();
     enemyAI();
 }
 
