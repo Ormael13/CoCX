@@ -62,6 +62,38 @@ package classes.Scenes.NPCs
 	public function aaaa():void {
 		clearOutput();
 		outputText("\"<i></i>\"\n\n");
+	}
+	public function aaaaa():void {
+		clearOutput();
+		outputText("\"<i></i>\"\n\n");
+	}
+	public function aaaa():void {
+		clearOutput();
+		outputText("\"<i></i>\"\n\n");
+	}
+	public function aaaaa():void {
+		clearOutput();
+		outputText("\"<i></i>\"\n\n");
+	}
+	public function aaaa():void {
+		clearOutput();
+		outputText("\"<i></i>\"\n\n");
+	}
+	public function aaaaa():void {
+		clearOutput();
+		outputText("\"<i></i>\"\n\n");
+	}
+	public function aaaa():void {
+		clearOutput();
+		outputText("\"<i></i>\"\n\n");
+	}
+	public function aaaaa():void {
+		clearOutput();
+		outputText("\"<i></i>\"\n\n");
+	}
+	public function aaaa():void {
+		clearOutput();
+		outputText("\"<i></i>\"\n\n");
 	}*/
 }
 }

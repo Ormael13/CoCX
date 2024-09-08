@@ -1,3 +1,7 @@
+/**
+ * ...
+ * @author Liadri
+ */
 package classes.Scenes.Areas.Plains
 {
 import classes.*;
@@ -10,10 +14,6 @@ import classes.BodyParts.Tail;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
-/**
-	 * ...
-	 * @author ...
-	 */
 	public class Kirin extends Monster
 	{
 		private var superCharged:Boolean = false;
@@ -235,22 +235,21 @@ import classes.internals.*;
 			this.long = kirinBaseDesc;
 			// this.plural = false;
 			this.createCock(30,3,CockTypesEnum.KIRIN)
-			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_LOOSE);
 			createBreastRow(Appearance.breastCupInverse("G"));
 			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity, 25, 0, 0, 0);
-			initStrTouSpeInte(90, 200, 180, 200);
-			initWisLibSensCor(200, 350, 250, 80);
+			initStrTouSpeInte(99, 230, 198, 221);
+			initWisLibSensCor(221, 400, 269, 80);
 			this.weaponAttack = 20;
 			this.armorDef = 20;
 			this.armorMDef = 18;
 			this.bonusHP = 150;
-			this.bonusLust = 700;
+			this.bonusLust = 719;
 			this.level = 50;
+			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_LOOSE);
 			createVagina(true,VaginaClass.WETNESS_SLICK,VaginaClass.LOOSENESS_TIGHT);
 			this.createStatusEffect(StatusEffects.BonusVCapacity,100,0,0,0);
-			createBreastRow(Appearance.breastCupInverse("G"));
 			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,100,0,0,0);

@@ -94,19 +94,18 @@ use namespace CoC;
 					else SceneLib.electraScene.repeatPlainsEnc();
 				}
 			},{
-				name: "kirin",
+				name: "kirin",//move to inner plains later on
 				label : "Kirin",
 				kind : 'monster',
 				chance: (flags[kFLAGS.ELECTRA_AFFECTION] < 100 ? 0.45: 0.5),
-				when: fn.ifLevelMin(20),
 				call: SceneLib.plains.kirinScene.kirinEncounter
 			},{
-				name: "kirin_electra",
+				name: "kirin_electra",//move to inner plains later on
 				label : "Kirin",
 				kind : 'monster',
 				chance: 0.05,
 				when: function():Boolean {
-					return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && flags[kFLAGS.ELECTRA_AFFECTION] < 100 && !player.hasStatusEffect(StatusEffects.ElectraOff) && (player.level >= 20 || flags[kFLAGS.HARDCORE_MODE] == 1);
+					return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && flags[kFLAGS.ELECTRA_AFFECTION] < 100 && !player.hasStatusEffect(StatusEffects.ElectraOff);
 				},
 				call: SceneLib.plains.kirinScene.kirinElectraEncounter
 			}, {
