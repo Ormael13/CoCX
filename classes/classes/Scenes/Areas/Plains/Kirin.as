@@ -192,24 +192,19 @@ import classes.internals.*;
 		{
 			super.combatRoundUpdate();
 			this.lust += 500 * maxLust()/100
-
 			if(runAway) {
 				var kirinRunDesc:String = "Kirin don't seems too keen on getting close to you as she gallops in circle around you. <b>Looks like she is preparing for something big!</b>\n\n";
 				outputText(kirinRunDesc);
 			}
-
 			// supercharge shit
 			if (!superCharged && lust100 > 75) {
 				var string:String = "";
-
 				superCharged = true
 				statStore.replaceBuffObject({'spe.mult':Math.round(speStat.mult.value)}, 'Supercharged', { text: 'Supercharged!' });
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 				CoC.instance.mainView.statsView.showStatUp('spe');
-
 				// More penis description heh
 				string += "The Kirin suddenly grips her massive tits in pleasure as her body overloads. It would seem the zappy pony has entered a state of supercharge, which may or may not be a <b>VERY</b> bad thing for you. Not to mention her now flared cock positively glowing with electrified desire, hosing pint after pints of neon blue pre-ejaculate with each angry throbb.\n\n"
-
 				outputText(string);
 				var kirinSuperChargedDesc:String = "You are fighting a Kirin. She looks now even more on edge as she pants constantly with her lust-crazed expression, her cock transformed into a battering ram as its flare practically doubling its size, spewing neon blue fluid like a broken faucet. Electricity enshrouding her further intensified, bombarding you with ear-splitting crack and just when you thought it couldn't get any worse, she is now practically a blur with every movement, forcing you to be on the guard constantly.";
 				this.long = kirinSuperChargedDesc;
@@ -241,10 +236,10 @@ import classes.internals.*;
 			this.createStatusEffect(StatusEffects.BonusACapacity, 25, 0, 0, 0);
 			initStrTouSpeInte(99, 230, 198, 221);
 			initWisLibSensCor(221, 400, 269, 80);
-			this.weaponAttack = 20;
-			this.armorDef = 20;
-			this.armorMDef = 18;
-			this.bonusHP = 150;
+			this.weaponAttack = 50;
+			this.armorDef = 80;
+			this.armorMDef = 45;
+			this.bonusHP = 1500;
 			this.bonusLust = 719;
 			this.level = 50;
 			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_LOOSE);
