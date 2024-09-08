@@ -30,7 +30,7 @@ import classes.Scenes.SceneLib;
 				flags[kFLAGS.JINX_LVL_UP] = 0.4;
 			}
 			menu();
-			addButtonDisabled(0, "MinoBomber", "MinoBomber");
+			addButton(0, "MinoBomber", buyItemMinoBomber).hint("Both a sex toy and a weapon, the MinoBomber uses one rather unconventional ammunition: cum. Invented to take advantage of minotaur near endless supply of cum, this setup consists of a machine gun linked to a massive tank to be strapped on the users back and a harness with cockpump.");
 			addButtonDisabled(1, "??? Core", "??? Core");
 			addButton(2, "Energy Core", buyItemEnergyCore).hint("A power source for devices.");
 			addButton(3, "Golem Core", buyItemGolemCore).hint("Is this even functional golem core?");
@@ -46,7 +46,18 @@ import classes.Scenes.SceneLib;
 		
 		private function buyItemMinoBomber():void {
 			clearOutput();
-			inventory.takeItem(weaponsrange.TRFATBI, bazaarEncounters);
+			outputText("\"<i>That will be... perhaps... 250 spirit stones, yes definitely! It's how valuable they are. Show me da stones, baby!</i>\"\n\n");
+			menu();
+			if (flags[kFLAGS.SPIRIT_STONES] < 250) addButtonDisabled(1, "Buy", "You do not have enough spirit stones to buy this.");
+			else addButton(1, "Buy", buyItemMinoBomberYes);
+			addButton(3, "Don't Buy", bazaarEncounters);
+		}
+		private function buyItemMinoBomberYes():void {
+			flags[kFLAGS.SPIRIT_STONES] -= 250;
+			statScreenRefresh();
+			outputText("She counts the stones carefully, putting them away before handing your purchase over.\n\n");
+			outputText("\"<i>Always happy to do business! Anything else you want to buy, [name]?</i>\"\n\n");
+			inventory.takeItem(weaponsrange.MBOMBER, bazaarEncounters);
 		}
 		private function buyItemUnknownCore():void {
 			clearOutput();
@@ -198,4 +209,4 @@ import classes.Scenes.SceneLib;
 			outputText("\"<i></i>\"\n\n");
 		}
 	}
-}
+}//

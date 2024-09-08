@@ -231,9 +231,9 @@ public class Changelog extends BaseContent
 			outputText("-Big charviewer code update and model.xml cleanup. (aimozg)\n");
 			outputText("-Golemancer npc in HXD will no longer req. PC to reach specific golemancer perks to unlock metal plates, energy cores or mechanisms sell options. Also metal plates can be now sold in even large amounts at once: x20 and x50\n");
 			outputText("-Refactor the monster defeat check and Kirin enemy addition. (NUZ/Shirane)\n");
-			outputText("-In one of Bazaar alleys PC can meet a bit crazy goblin and her golem servants. She can sell various items even some not founded anywhere else in Mareth.\n");
+			outputText("-In one of Bazaar alleys PC can meet a bit crazy goblin Minx and her golem servants. She can sell various items even some not founded anywhere else in Mareth.\n");
 			outputText("-Staff Channeling and Offensive Staff Channeling perks would work with wands too in addition to staffs but at lower effectivness.\n");
-			outputText("-\n");
+			outputText("-New range weapon (by Ormael): MinoBomber - buyable at Minx shop. Cost 250 spirit stones. Base atk is 1 and ammo clip size 20.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

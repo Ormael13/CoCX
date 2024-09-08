@@ -4831,7 +4831,7 @@ public class Combat extends BaseContent {
                 //Lust raising weapon bonuses
                 if (monster.lustVuln > 0) {
                     var rangeweaponLustDmg:Number = 0;
-                    if (player.weaponRange == weaponsrange.TDPISTO || player.weaponRange == weaponsrange.DPISTOL || player.weaponRange == weaponsrange.LBLASTR) {
+                    if (player.weaponRange == weaponsrange.TDPISTO || player.weaponRange == weaponsrange.DPISTOL || player.weaponRange == weaponsrange.LBLASTR || player.weaponRange == weaponsrange.MBOMBER) {
                         rangeweaponLustDmg = (20 + player.cor / 15); // 20-26.7
                         if (player.armor == armors.ELFDRES && player.isElf()) rangeweaponLustDmg *= 2;
                         if (player.armor == armors.FMDRESS && player.isWoodElf()) rangeweaponLustDmg *= 2;
@@ -4841,6 +4841,10 @@ public class Combat extends BaseContent {
                                 if (rand(2) == 0) outputText("\n[Themonster] shiver" + s + " and get" + s + " turned on as he is splashed with your milk.");
                                 else outputText("\n[Themonster] shiver" + s + " and moan" + s + " involuntarily highly turned on by your moo moo milk.");
                             }
+							else if (player.weaponRange == weaponsrange.MBOMBER) {
+								if (rand(2) == 0) outputText("\n[Themonster] shiver" + s + " and get" + s + " turned on as he is splashed with your cum.");
+                                else outputText("\n[Themonster] shiver" + s + " and moan" + s + " involuntarily highly turned on by your mino mino cum.");
+							}
                             else{
                                 if (rand(2) == 0) outputText("\n[Themonster] shiver" + s + " and get" + s + " turned on from the injected chemicals.");
                                 else outputText("\n[Themonster] shiver" + s + " and moan" + s + " involuntarily from the injected chemicals effects.");
@@ -4866,12 +4870,14 @@ public class Combat extends BaseContent {
                 shootWeapon();
             } else {
                 if (player.weaponRange == weaponsrange.LBLASTR) outputText("<b>Your milk tank is empty.</b>\n\n");
+				else if (player.weaponRange == weaponsrange.MBOMBER) outputText("<b>Your cum tank is empty.</b>\n\n");
                 else outputText("<b>Your firearm clip is empty.</b>\n\n");
                 reloadWeapon2();
             }
         } else {
             if (player.ammo <= 0) {
                 if (player.weaponRange == weaponsrange.LBLASTR) outputText("<b>Your milk tank is empty.</b>\n\n");
+				else if (player.weaponRange == weaponsrange.MBOMBER) outputText("<b>Your cum tank is empty.</b>\n\n");
                 else outputText("<b>Your firearm clip is empty.</b>\n\n");
                 reloadWeapon2();
             } else enemyAIImpl();
@@ -5014,6 +5020,11 @@ public class Combat extends BaseContent {
             if (milkAmmo > 20) milkAmmo = 20;
             player.ammo = milkAmmo;
         }
+		if (player.weaponRange == weaponsrange.MBOMBER) {
+			var cumAmmo:Number = player.cumQ() / 100;
+			if (cumAmmo > 20) cumAmmo = 20;
+            player.ammo = cumAmmo;
+		}
         if (player.weaponRange == weaponsrange.TWINGRA) player.ammo = 12;
         if (player.weaponRange == weaponsrange.IVIARG_) player.ammo = 12;
         if (player.weaponRange == weaponsrange.TWINSIXS) player.ammo = 12;
@@ -5043,11 +5054,13 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.HARKON1) player.ammo = 1;
 		if (player.hasPerk(PerkLib.TaintedMagazine)) player.ammo *= 2;
 		if (player.hasPerk(PerkLib.PrimedClipWarp)) player.ammo *= 3;
-        if (player.weaponRange == weaponsrange.LBLASTR) {
-            outputText("You moo in pleasures as milk flows from your udders, pumped by the suction cup all the way to the tank on your back. Almost immediately fresh cream fills your blasters, you're ready to resume shooting!");
+        if (player.weaponRange == weaponsrange.LBLASTR || player.weaponRange == weaponsrange.MBOMBER) {
+			if (player.weaponRange == weaponsrange.MBOMBER) outputText("You moo in pleasures as cum flows from your balls, pumped by the cockpump all the way to the tank on your back. Almost immediately fresh cum fills your bomber, you're ready to resume shooting!");
+            else outputText("You moo in pleasures as milk flows from your udders, pumped by the suction cup all the way to the tank on your back. Almost immediately fresh cream fills your blasters, you're ready to resume shooting!");
             var lustDmg:int = rand(player.lib / 10) + 20;
             player.takeLustDamage(lustDmg, true);
-        } else outputText("You open the magazine of your " + player.weaponRangeName + " to reload the ammunition.");
+        }
+		else outputText("You open the magazine of your " + player.weaponRangeName + " to reload the ammunition.");
     }
 
     public function reloadWeapon1():void {
@@ -13168,6 +13181,11 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
             if (milkAmmo > 20) milkAmmo = 20;
             player.ammo = milkAmmo;
         }
+		if (player.weaponRange == weaponsrange.MBOMBER) {
+			var cumAmmo:Number = player.cumQ() / 100;
+			if (cumAmmo > 20) cumAmmo = 20;
+            player.ammo = cumAmmo;
+		}
         if (player.weaponRange == weaponsrange.TWINGRA) player.ammo = 12;
         if (player.weaponRange == weaponsrange.IVIARG_) player.ammo = 12;
         if (player.weaponRange == weaponsrange.TWINSIXS) player.ammo = 12;

@@ -3,7 +3,6 @@
  * @author Liadri
  */
 package classes.Items.WeaponsRange
-
 {
 	import classes.Items.WeaponRange;
 	import classes.PerkLib;
