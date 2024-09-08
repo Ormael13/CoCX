@@ -28,6 +28,11 @@ public class ExecContext {
 		}
 		_scopes[0][varname] = value;
 	}
+	public function substituteVars(expr:String):String {
+		return expr.replace(/\$(\w+)|\$\{(\w+)\}/g,function():String{
+			return getValue(arguments[1] || arguments[2]);
+		});
+	}
 	public function hasValue(varname:String):Boolean {
 		for each (var s:* in _scopes) if (varname in s) return true;
 		return false;

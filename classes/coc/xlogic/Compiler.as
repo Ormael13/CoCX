@@ -60,17 +60,23 @@ public class Compiler {
 		var iff:IfStmt = new IfStmt(attrs['test']);
 		if ('then' in attrs) iff.thenBlock.push(compileText(x.@then[0]));
 		if ('else' in attrs) iff.elseBlock = compileText(x.attribute('else')[0]);
+		//noinspection JSMismatchedCollectionQueryUpdate
+		var currentBlock:/*Statement*/Array = iff.thenBlock;
+		var currentIff:IfStmt = iff;
 		for each(item in x.children()) {
 			switch (item.localName()) {
 				case 'else':
 					iff.elseBlock = compileChildren(item);
+					currentBlock = (iff.elseBlock as StmtList).stmts;
 					break;
 				case 'elseif':
-					iff.elseBlock = compileIf(item);
+					currentIff = compileIf(item);
+					iff.elseBlock = currentIff;
+					currentBlock = currentIff.thenBlock;
 					break;
 				default:
 					var e:Statement = compile(item);
-					if (e) iff.thenBlock.push(e);
+					if (e) currentBlock.push(e);
 			}
 		}
 		return iff;
