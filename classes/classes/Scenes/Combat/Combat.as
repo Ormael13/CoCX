@@ -523,7 +523,7 @@ public class Combat extends BaseContent {
             //Clear itemswapping in case it hung somehow
 //No longer used:		itemSwapping = false;
             //Player won
-            if (monster.HP <= monster.minHP() || monster.lust >= monster.maxOverLust()) {
+            if (monsterDefeatCheck()) {
                 awardPlayer(nextFunc);
             }
             //Player lost

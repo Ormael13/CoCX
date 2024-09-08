@@ -19,6 +19,7 @@ import classes.internals.*;
 		private var superCharged:Boolean = false;
 		private var runAway:Boolean = false;
 		private var round:int = 0;
+
 		// https://docs.google.com/document/d/1AuhfqxKJFdl3S8WS2Op59YFMXGYbDpWKrzS-Ag9Ub7Q/edit
 		private function kirinThunderGore():void{
 			var string:String = "";
@@ -190,23 +191,31 @@ import classes.internals.*;
 		override public function combatRoundUpdate():void 
 		{
 			super.combatRoundUpdate();
-			this.lust += 5 * maxLust()/100
+			this.lust += 500 * maxLust()/100
+
+			if(runAway) {
+				var kirinRunDesc:String = "Kirin don't seems too keen on getting close to you as she gallops in circle around you. <b>Looks like she is preparing for something big!</b>\n\n";
+				outputText(kirinRunDesc);
+			}
+
 			// supercharge shit
-			if (!superCharged && lust100 > 75){
+			if (!superCharged && lust100 > 75) {
 				var string:String = "";
-				
+
 				superCharged = true
 				statStore.replaceBuffObject({'spe.mult':Math.round(speStat.mult.value)}, 'Supercharged', { text: 'Supercharged!' });
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 				CoC.instance.mainView.statsView.showStatUp('spe');
-				
+
 				// More penis description heh
-				string += "\n\nThe Kirin suddenly grips her massive tits in pleasure as her body overloads. It would seem the zappy pony has entered a state of supercharge, which may or may not be a <b>VERY</b> bad thing for you. Not to mention her now flared cock positively glowing with electrified desire, hosing pint after pints of neon blue pre-ejaculate with each angry throbb."
-				
+				string += "The Kirin suddenly grips her massive tits in pleasure as her body overloads. It would seem the zappy pony has entered a state of supercharge, which may or may not be a <b>VERY</b> bad thing for you. Not to mention her now flared cock positively glowing with electrified desire, hosing pint after pints of neon blue pre-ejaculate with each angry throbb.\n\n"
+
 				outputText(string);
+				var kirinSuperChargedDesc:String = "You are fighting a Kirin. She looks now even more on edge as she pants constantly with her lust-crazed expression, her cock transformed into a battering ram as its flare practically doubling its size, spewing neon blue fluid like a broken faucet. Electricity enshrouding her further intensified, bombarding you with ear-splitting crack and just when you thought it couldn't get any worse, she is now practically a blur with every movement, forcing you to be on the guard constantly.";
+				this.long = kirinSuperChargedDesc;
 			}
 		}
-		
+
 		override public function defeated(hpVictory:Boolean):void
 		{
 			SceneLib.plains.kirinScene.kirinLost();
@@ -218,13 +227,14 @@ import classes.internals.*;
 			SceneLib.plains.kirinScene.kirinWon();
 		}
 
-		public function Kirin()
-		{
+		public function Kirin() {
 			this.a = "a ";
 			this.short = "kirin";
 			this.imageName = "kirin";
-			this.long = "You are fighting a Kirin. Your lust addled opponent is clearly looking for a chance to knock you down and rape you, for the battle barely interests her. Running from her would be easier said than done seeing as she's a centaur with enough speed to catch on to most prey. You're somewhat wary of the electricity her body produces, there's no telling when she'll lash out and lightning might prove very hard to evade.";
+			var kirinBaseDesc:String = "You are fighting a Kirin. Your lust addled opponent is clearly looking for a chance to knock you down and rape you, for the battle barely interests her. Running from her would be easier said than done seeing as she's a centaur with enough speed to catch on to most prey. You're somewhat wary of the electricity her body produces, there's no telling when she'll lash out and lightning might prove very hard to evade.";
+			this.long = kirinBaseDesc;
 			// this.plural = false;
+			this.createCock(30,3,CockTypesEnum.KIRIN)
 			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_LOOSE);
 			createBreastRow(Appearance.breastCupInverse("G"));
 			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
@@ -257,8 +267,8 @@ import classes.internals.*;
 			this.lustVuln = .8;
 			this.gems = 500;
 			this.drop = new ChainedDrop().
-					add(consumables.EQUINUM,0.3).
-					add(consumables.ASKIRIN,0.7);
+			add(consumables.EQUINUM,0.3).
+			add(consumables.ASKIRIN,0.7);
 			this.rearBody.type = RearBody.RAIJU_MANE
 			this.arms.type = Arms.LIZARD;
 			this.lowerBody = LowerBody.KIRIN;
@@ -269,10 +279,10 @@ import classes.internals.*;
 			this.createPerk(PerkLib.LightningNature, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			checkMonster();
-			
+
 			this.lust = 35 * maxLust()/100
 		}
-		
+
 	}
 
 }
