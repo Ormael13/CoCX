@@ -11,9 +11,27 @@ package classes.Scenes.NPCs
 		
 		public function VeronikaFollower() 
 		{}
+		/*
+		public function aaa():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+		}
 		
+		public function aaa():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+		}
 		
+		public function aaa():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+		}
 		
+		public function aaa():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+		}
+		*/
 		//female nekomata kept as slave in HXD arena and possible to win in one of gaunlets - potential candidate to be new war god herald
 	}
 }

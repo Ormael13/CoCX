@@ -1664,23 +1664,16 @@ public function soularena():void {
 	}
 	private function golemancershop1():void {
 		menu();
-		if (player.hasPerk(PerkLib.AdvancedGolemancyTheory) || player.hasPerk(PerkLib.EpicGolemMaker)) {
-			addButton(0, "MetalPiecesx1", buyItemMetalPlates, 1).hint("A metal pieces for making better golems. (x1)");
-			addButton(1, "MetalPiecesx5", buyItemMetalPlates, 5).hint("A metal pieces for making better golems. (x5)");
-			addButton(2, "MetalPiecesx10", buyItemMetalPlates, 10).hint("A metal pieces for making better golems. (x10)");
-			addButton(3, "Energy Core", buyItemEnergyCore).hint("A power source for devices.");
-		}
-		else {
-			addButtonDisabled(0, "???", "Items only for Epic Golemancer users or possesing Advanced Golemancy Theory knowledge.");
-			addButtonDisabled(1, "???", "Items only for Epic Golemancer users or possesing Advanced Golemancy Theory knowledge.");
-			addButtonDisabled(2, "???", "Items only for Epic Golemancer users or possesing Advanced Golemancy Theory knowledge.");
-			addButtonDisabled(3, "???", "Items only for Epic Golemancer users or possesing Advanced Golemancy Theory knowledge.");
-		}
-		if (player.hasPerk(PerkLib.EpicGolemMaker)) addButton(4, "Mechanism", buyItemMechanism).hint("A complex set of gears and gyros.");
-		else addButtonDisabled(4, "???", "Items only for Epic Golemancer users.");
-		addButton(5, "G.Rod", buyItem, weapons.G_ROD).hint("Golemancer Rod");
-		addButton(6, "G.E.Man", buyItem, weaponsrange.G_E_MAN).hint("Golemancy Evocation Manuscript");
-		addButton(7, "Y.U.Panel", buyItem, shields.Y_U_PAN).hint("Yogi Uh Panel");
+		addButton(0, "MetalPiecesx1", buyItemMetalPlates, 1).hint("A metal pieces for making better golems. (x1)");
+		addButton(1, "MetalPiecesx5", buyItemMetalPlates, 5).hint("A metal pieces for making better golems. (x5)");
+		addButton(2, "MetalPiecesx10", buyItemMetalPlates, 10).hint("A metal pieces for making better golems. (x10)");
+		addButton(3, "MetalPiecesx20", buyItemMetalPlates, 20).hint("A metal pieces for making better golems. (x20)");
+		addButton(4, "MetalPiecesx50", buyItemMetalPlates, 50).hint("A metal pieces for making better golems. (x50)");
+		addButton(5, "Energy Core", buyItemEnergyCore).hint("A power source for devices.");
+		addButton(6, "Mechanism", buyItemMechanism).hint("A complex set of gears and gyros.");
+		addButton(7, "G.Rod", buyItem, weapons.G_ROD).hint("Golemancer Rod");
+		addButton(8, "G.E.Man", buyItem, weaponsrange.G_E_MAN).hint("Golemancy Evocation Manuscript");
+		addButton(9, "Y.U.Panel", buyItem, shields.Y_U_PAN).hint("Yogi Uh Panel");
 		if (player.hasPerk(PerkLib.MasterGolemMaker)) {
 			if (player.hasKeyItem("Golems, Animations and You") >= 0) addButtonDisabled(12, "G,A&Y Man.", "You already bought 'Golems, Animation and You' manual.");
 			else addButton(12, "G,A&Y Man.", golemancershopPermGolemsUpgradesGuide).hint("Buy 'Golems, Animation and You' manual to make golems great again.");
@@ -1882,4 +1875,4 @@ public function soularena():void {
         doNext(camp.returnToCampUseOneHour);
     }
 }
-}
+}

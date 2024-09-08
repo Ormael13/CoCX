@@ -185,6 +185,8 @@ public class SceneLib {
 
     public static var izmaScene:IzmaScene = new IzmaScene();
 
+    public static var jinxFollower:JinxFollower = new JinxFollower();
+
     public static var jojoScene:JojoScene = new JojoScene();
 
     public static var joyScene:JoyScene = new JoyScene();
