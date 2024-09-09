@@ -3870,6 +3870,7 @@ public class Combat extends BaseContent {
 				else if (player.mana100 < 70) bonus += 0.8;
 				else if (player.mana100 < 40) bonus += 1.2;
 				else bonus += 1.6;
+				damage *= bonus;
 			}
             doPhysicalDamage(damage, true, true);
 			if (player.weapon == weapons.VGRAVEH) doFireDamage(Math.round(damage * fireDamageBoostedByDao() * 0.25), true, true);
@@ -3885,11 +3886,16 @@ public class Combat extends BaseContent {
 			doLightningDamage(Math.round(damage * 0.3), true, true);
 			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 		}
-		if (player.weapon == weapons.PRURUMI && player.spe >= 150) {
+		if (player.weapon == weapons.PRURUMI) {
 			if (canLayerSwordIntentAura()) damage += layerSwordIntentAuraOnThis(damage);
 			doPhysicalDamage(damage, true, true);
 			if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightningDamage(Math.round(damage * 0.3), true, true);
 			if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			if (player.spe >= 150) {
+				doPhysicalDamage(damage, true, true);
+				if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightningDamage(Math.round(damage * 0.3), true, true);
+				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+			}
 			if (player.spe >= 225) {
 				doPhysicalDamage(damage, true, true);
 				if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightningDamage(Math.round(damage * 0.3), true, true);
@@ -3912,13 +3918,7 @@ public class Combat extends BaseContent {
 				if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage * 0.1);
 			}
 		}
-		if (player.weapon == weapons.PRURUMI && player.spe >= 150) {
-			if (player.spe >= 300) damage *= 4;
-			else if (player.spe >= 225) damage *= 3;
-			else damage *= 2;
-		}
         JabbingStyleIncrement();
-        if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) damage += Math.round(damage * 0.3);
 	}
 
     public function archerySkillDamageMod(damage:Number):Number {
@@ -5207,57 +5207,6 @@ public class Combat extends BaseContent {
                 return;
             }
         }
-        enemyAIImpl();
-    }
-
-    public function goboLustnadeLauncher():void {
-        clearOutput();
-        var damage:Number = 6 + rand(3);
-        damage += scalingBonusIntelligence() + scalingBonusLibido() * 0.1;
-        if (player.hasKeyItem("Lustnade Launcher") >= 0) {
-            if (player.hasPerk(PerkLib.SensualLover)) damage += 2;
-            if (player.hasPerk(PerkLib.Seduction)) damage += 5;
-            damage += player.teaseDmgStat.value;
-            if (player.hasPerk(PerkLib.JobSeducer)) damage += player.teaseLevel * 3;
-            else damage += player.teaseLevel * 2;
-            if (player.hasPerk(PerkLib.JobCourtesan) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 1.2;
-            //partial skins bonuses
-            switch (player.coatType()) {
-                case Skin.FUR:
-                    damage += (1 + player.newGamePlusMod());
-                    break;
-                case Skin.AQUA_SCALES:
-                case Skin.DRAGON_SCALES:
-                case Skin.SCALES:
-                    damage += (2 * (1 + player.newGamePlusMod()));
-                    break;
-                case Skin.CHITIN:
-                    damage += (3 * (1 + player.newGamePlusMod()));
-                    break;
-                case Skin.BARK:
-                    damage += (4 * (1 + player.newGamePlusMod()));
-                    break;
-            }
-            damage *= 2;
-        }
-        if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 5;
-        damage = tinkerDamageBonus(damage);
-		damage = goblinDamageBonus(damage);
-        if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
-        if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
-        damage = damage * monster.lustVuln;
-        damage = Math.round(damage);
-        if (player.hasKeyItem("Lustnade Launcher") >= 0) {
-            outputText("You ready the Lustnade launcher and shoot. The exploding container covers the entire area in pink mist, massively arousing everyone in the vicinity for " + Math.round(damage) + " lust damage.");
-            monster.teased(Math.round(damage));
-        } else {
-            outputText("You spray a cloud of aphrodisiac with your gas gun. [themonster] tries to pinch [monster his] nose and hold [monster his] breath ");
-            if (rand(100) > 25) {
-                outputText("but it’s too late and you can see arousal flushing [themonster] skin.\n");
-                monster.teased(Math.round(damage));
-            } else outputText("and it worked, to an extent, allowing your opponent to retreat away from the gas.");
-        }
-        outputText("\n\n")
         enemyAIImpl();
     }
 
@@ -6711,24 +6660,6 @@ public class Combat extends BaseContent {
         else if (player.weapon.isMassive()) weaponMassiveMastery(meleeMasteryEXPgains);
         else weaponNormalMastery(meleeMasteryEXPgains);
     }
-	public function meleeUnarmedMasteryGain(hit:int, crit:int):void{
-		var baseMasteryXP:Number = 1;
-		if (monster is TrainingDummy && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) {
-            var bMXPMulti:Number = 1;
-            if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 2) bMXPMulti += 1.5;
-            if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 3) bMXPMulti += 2;
-            if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 4) bMXPMulti += 2.5;
-            if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 5) bMXPMulti += 3;
-            if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 6) bMXPMulti += 5;
-			baseMasteryXP *= bMXPMulti;
-        }
-		var masteryXPCrit:Number = baseMasteryXP * crit * 2;
-        var masteryXPNatural:Number = baseMasteryXP * (hit - crit);
-        var meleeMasteryEXPgains:Number = masteryXPCrit + masteryXPNatural;
-		if (player.hasMutation(IMutationsLib.HumanVersatilityIM) && player.perkv1(IMutationsLib.HumanVersatilityIM) == 3 && rand(5) == 0) meleeMasteryEXPgains *= 3;
-		if (player.hasMutation(IMutationsLib.HumanVersatilityIM) && player.perkv1(IMutationsLib.HumanVersatilityIM) == 4 && rand(5) < 2) meleeMasteryEXPgains *= 4;
-		unarmedCombatXP(meleeMasteryEXPgains);
-	}
 
     /**
      * Do melee attack
@@ -7890,43 +7821,6 @@ public class Combat extends BaseContent {
         if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet))) damage *= 2;
         return damage;
     }
-
-    public function CalcBaseDamageArmed(damage:Number = 0):Number{
-        //BASIC DAMAGE STUFF
-        if (player.hasPerk(PerkLib.RampantMight)) {
-            damage += player.tou;
-			damage += scalingBonusToughness() * 0.25;
-            damage += player.str;
-			damage += scalingBonusStrength() * 0.25;
-        }
-        else if (player.hasPerk(PerkLib.VerdantMight)){
-            damage += player.tou;
-            damage += scalingBonusToughness() * 0.25;
-        }
-        else{
-            damage += player.str;
-            damage += scalingBonusStrength() * 0.25;
-        }
-        if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
-            damage += player.spe;
-            damage += scalingBonusSpeed() * 0.20;
-        }
-        damage = weaponAttackModifier(damage);
-        damage = harpyDamageBonus(damage);
-        damage = itemsBonusDamageDamage(damage);
-        damage = statusEffectBonusDamage(damage);
-        //PERKS
-        if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
-        if (player.hasPerk(PerkLib.ChiReflowMagic)) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
-        if (player.hasPerk(PerkLib.ChiReflowAttack)) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
-        if (player.hasPerk(PerkLib.GoblinoidBlood)) {
-            if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
-            if (player.hasKeyItem("Powboy") >= 0) damage *= 1.15;
-            if (player.hasKeyItem("M.G.S. bracer") >= 0) damage *= 1.2;
-        }
-        if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()) damage *= 2;
-        return damage;
-    }
     /**
      * Call to initialize variables for feral attacks before calling them
      */
@@ -8235,17 +8129,10 @@ public class Combat extends BaseContent {
         dynStats("lus", (Math.round(player.maxLust() * 0.02)), "scale", false);
         var lustDmgF:Number = 20 + rand(6);
         var lustBoostToLustDmg:Number = 0;
-        var bimbo:Boolean   = false;
-        var bro:Boolean     = false;
-        var futa:Boolean    = false;
-        if (player.hasPerk(PerkLib.SensualLover)) {
-            lustDmgF += 2;
-        }
+        if (player.hasPerk(PerkLib.SensualLover)) lustDmgF += 2;
         if (player.hasPerk(PerkLib.Seduction)) lustDmgF += 5;
         lustDmgF += player.teaseDmgStat.value;
-        if (bimbo || bro || futa) {
-            lustDmgF += 5;
-        }
+        if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) lustDmgF += 5;
         if (player.hasPerk(PerkLib.FlawlessBody)) lustDmgF += 10;
         lustDmgF += scalingBonusLibido() * 0.1;
         if (player.hasPerk(PerkLib.EromancyExpert)) lustDmgF *= 1.5;
@@ -13408,7 +13295,6 @@ if (player.hasStatusEffect(StatusEffects.MonsterSummonedRodentsReborn)) {
     }
 
     public function showMonsterLust():void {
-        var damage1B:Number;
         //Entrapped
         if (monster.hasStatusEffect(StatusEffects.Constricted)) {
             outputText("[Themonster] is currently wrapped up in your tail-coils!  ");
@@ -15261,9 +15147,6 @@ public function WebTease():void {
     else {
         var damage:Number;
         var chance:Number;
-        var bimbo:Boolean = false;
-        var bro:Boolean = false;
-        var futa:Boolean = false;
         //If auto = true, set up bonuses using above flags
         //==============================
         //Determine basic success chance.
@@ -15276,18 +15159,7 @@ public function WebTease():void {
         //10% for sexy armor types
         if (player.teaseDmgStat.value > 0) chance += 10;
         //10% for bimbo shits
-        if (player.hasPerk(PerkLib.BimboBody)) {
-            chance += 10;
-            bimbo = true;
-        }
-        if (player.hasPerk(PerkLib.BroBody)) {
-            chance += 10;
-            bro = true;
-        }
-        if (player.hasPerk(PerkLib.FutaForm)) {
-            chance += 10;
-            futa = true;
-        }
+        if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) chance += 10;
         //2 & 2 for seductive valentines!
         if (player.hasPerk(PerkLib.SensualLover)) {
             chance += 2;
@@ -15355,9 +15227,6 @@ public function GooTease():void {
     else {
         var damage:Number;
         var chance:Number;
-        var bimbo:Boolean = false;
-        var bro:Boolean = false;
-        var futa:Boolean = false;
         //If auto = true, set up bonuses using above flags
         //==============================
         //Determine basic success chance.
@@ -15370,18 +15239,7 @@ public function GooTease():void {
         //10% for sexy armor types
         if (player.teaseDmgStat.value > 0) chance += 10;
         //10% for bimbo shits
-        if (player.hasPerk(PerkLib.BimboBody)) {
-            chance += 10;
-            bimbo = true;
-        }
-        if (player.hasPerk(PerkLib.BroBody)) {
-            chance += 10;
-            bro = true;
-        }
-        if (player.hasPerk(PerkLib.FutaForm)) {
-            chance += 10;
-            futa = true;
-        }
+        if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) chance += 10;
         //2 & 2 for seductive valentines!
         if (player.hasPerk(PerkLib.SensualLover)) {
             chance += 2;
@@ -15508,16 +15366,6 @@ public function ManticoreFeed():void {
     //(Otherwise)
     else {
         var damage:Number;
-        var bimbo:Boolean = false;
-        var bro:Boolean = false;
-        var futa:Boolean = false;
-        //==============================
-        //Determine basic success chance.
-        //==============================
-        //10% for seduction perk
-        if (player.hasPerk(PerkLib.BimboBody)) bimbo = true;
-        if (player.hasPerk(PerkLib.BroBody)) bro = true;
-        if (player.hasPerk(PerkLib.FutaForm)) futa = true;
         //==============================
         //Determine basic damage.
         //==============================
@@ -15573,16 +15421,6 @@ public function displacerFeedContinue():void {
     //(Otherwise)
     else {
         var damage:Number;
-        var bimbo:Boolean = false;
-        var bro:Boolean = false;
-        var futa:Boolean = false;
-        //==============================
-        //Determine basic success chance.
-        //==============================
-        //10% for seduction perk
-        if (player.hasPerk(PerkLib.BimboBody)) bimbo = true;
-        if (player.hasPerk(PerkLib.BroBody)) bro = true;
-        if (player.hasPerk(PerkLib.FutaForm)) futa = true;
         //==============================
         //Determine basic damage.
         //==============================
@@ -15638,16 +15476,6 @@ public function SlimeRapeFeed():void {
     //(Otherwise)
     else {
         var damage:Number;
-        var bimbo:Boolean = false;
-        var bro:Boolean = false;
-        var futa:Boolean = false;
-        //==============================
-        //Determine basic success chance.
-        //==============================
-        //10% for seduction perk
-        if (player.hasPerk(PerkLib.BimboBody)) bimbo = true;
-        if (player.hasPerk(PerkLib.BroBody)) bro = true;
-        if (player.hasPerk(PerkLib.FutaForm)) futa = true;
         //==============================
         //Determine basic damage.
         //==============================
@@ -17553,8 +17381,7 @@ public function flyingWithSoulforceCost():Number {
 }
 
 public function flyingSwordForRangeSneakAttack():Boolean {
-	if (player.weaponFlyingSwords == weaponsflyingswords.MOONLGT || player.weaponFlyingSwords == weaponsflyingswords.MOONLGT2 || player.weaponFlyingSwords == weaponsflyingswords.MOONLGT3) return true;
-	else return false;
+	return player.weaponFlyingSwords == weaponsflyingswords.MOONLGT || player.weaponFlyingSwords == weaponsflyingswords.MOONLGT2 || player.weaponFlyingSwords == weaponsflyingswords.MOONLGT3;
 }
 
 public function rangeMasteryEXPgained(crit:Boolean = false):Number {
